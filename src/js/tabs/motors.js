@@ -1,7 +1,6 @@
 'use strict';
 
 TABS.motors = {
-        feature3DEnabled: false,
         escProtocolIsDshot: false,
         sensor: "gyro",
         sensorGyroRate: 20,
@@ -30,8 +29,7 @@ TABS.motors = {
         },
         // These are translated into proper Dshot values on the flight controller
         DSHOT_DISARMED_VALUE: 1000,
-        DSHOT_MAX_VALUE: 2000,
-        DSHOT_3D_NEUTRAL: 1500
+        DSHOT_MAX_VALUE: 2000
 };
 
 TABS.motors.initialize = function (callback) {
@@ -50,10 +48,6 @@ TABS.motors.initialize = function (callback) {
 
     function load_feature_config() {
         MSP.send_message(MSPCodes.MSP_FEATURE_CONFIG, false, false, load_motor_3d_config);
-    }
-
-    function load_motor_3d_config() {
-        MSP.send_message(MSPCodes.MSP_MOTOR_3D_CONFIG, false, false, load_esc_protocol);
     }
 
     function load_esc_protocol() {
@@ -228,8 +222,6 @@ TABS.motors.initialize = function (callback) {
         i18n.localizePage();
 
         update_arm_status();
-
-        self.feature3DEnabled = FC.FEATURE_CONFIG.features.isEnabled('3D');
 
         if (FC.PID_ADVANCED_CONFIG.fast_pwm_protocol >= TABS.configuration.DSHOT_PROTOCOL_MIN_VALUE) {
             self.escProtocolIsDshot = true;
@@ -459,13 +451,9 @@ TABS.motors.initialize = function (callback) {
         if (self.escProtocolIsDshot) {
             rangeMin = self.DSHOT_DISARMED_VALUE;
             rangeMax = self.DSHOT_MAX_VALUE;
-            neutral3d = self.DSHOT_3D_NEUTRAL;
         } else {
             rangeMin = FC.MOTOR_CONFIG.mincommand;
             rangeMax = FC.MOTOR_CONFIG.maxthrottle;
-            //Arbitrary sanity checks
-            //Note: values may need to be revisited
-            neutral3d = (FC.MOTOR_3D_CONFIG.neutral > 1575 || FC.MOTOR_3D_CONFIG.neutral < 1425) ? 1500 : FC.MOTOR_3D_CONFIG.neutral;
         }
 
         const motorsWrapper = $('.motors .bar-wrapper'),
@@ -506,11 +494,7 @@ TABS.motors.initialize = function (callback) {
         // UI hooks
         function setSlidersDefault() {
             // change all values to default
-            if (self.feature3DEnabled) {
-                $('div.sliders input').val(neutral3d);
-            } else {
-                $('div.sliders input').val(rangeMin);
-            }
+            $('div.sliders input').val(rangeMin);
         }
 
         function setSlidersEnabled(isEnabled) {
@@ -580,14 +564,8 @@ TABS.motors.initialize = function (callback) {
         let motorsRunning = false;
 
         for (let i = 0; i < numberOfValidOutputs; i++) {
-            if (!self.feature3DEnabled) {
-                if (FC.MOTOR_DATA[i] > rangeMin) {
-                    motorsRunning = true;
-                }
-            } else {
-                if ((FC.MOTOR_DATA[i] < FC.MOTOR_3D_CONFIG.deadband3d_low) || (FC.MOTOR_DATA[i] > FC.MOTOR_3D_CONFIG.deadband3d_high)) {
-                    motorsRunning = true;
-                }
+            if (FC.MOTOR_DATA[i] > rangeMin) {
+                motorsRunning = true;
             }
         }
 

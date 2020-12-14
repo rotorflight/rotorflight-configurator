@@ -87,18 +87,9 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
     }
 
     function load_arming_config() {
-        const nextCallBack = load_3d;
+        const nextCallBack = load_rc_deadband;
         if (semver.gte(FC.CONFIG.apiVersion, "1.8.0")) {
             MSP.send_message(MSPCodes.MSP_ARMING_CONFIG, false, false, nextCallBack);
-        } else {
-            nextCallBack();
-        }
-    }
-
-    function load_3d() {
-        const nextCallBack = load_rc_deadband;
-        if (semver.gte(FC.CONFIG.apiVersion, "1.14.0")) {
-            MSP.send_message(MSPCodes.MSP_MOTOR_3D_CONFIG, false, false, nextCallBack);
         } else {
             nextCallBack();
         }
@@ -1015,15 +1006,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             }
         }
 
-        //fill 3D
-        if (semver.lt(FC.CONFIG.apiVersion, "1.14.0")) {
-            $('.tab-configuration ._3d').hide();
-        } else {
-            $('input[name="3ddeadbandlow"]').val(FC.MOTOR_3D_CONFIG.deadband3d_low);
-            $('input[name="3ddeadbandhigh"]').val(FC.MOTOR_3D_CONFIG.deadband3d_high);
-            $('input[name="3dneutral"]').val(FC.MOTOR_3D_CONFIG.neutral);
-        }
-
         // UI hooks
         function checkShowDisarmDelay() {
             if (FC.FEATURE_CONFIG.features.isEnabled('MOTOR_STOP')) {
@@ -1057,14 +1039,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             }
         }
 
-        function checkUpdate3dControls() {
-            if (FC.FEATURE_CONFIG.features.isEnabled('3D')) {
-                $('._3dSettings').show();
-            } else {
-                $('._3dSettings').hide();
-            }
-        }
-
         $('input.feature', features_e).change(function () {
             const element = $(this);
 
@@ -1089,10 +1063,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                     break;
                 case 'GPS':
                     checkUpdateGpsControls();
-                    break;
-
-                case '3D':
-                    checkUpdate3dControls();
                     break;
 
                 default:
@@ -1128,7 +1098,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
         checkShowSerialRxBox();
         checkShowSpiRxBox();
         checkUpdateGpsControls();
-        checkUpdate3dControls();
 
         if (self.SHOW_OLD_BATTERY_CONFIG) {
             checkUpdateVbatControls();
@@ -1169,12 +1138,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                 FC.BF_CONFIG.currentscale = parseInt($('input[name="currentscale"]').val());
                 FC.BF_CONFIG.currentoffset = parseInt($('input[name="currentoffset"]').val());
                 FC.MISC.multiwiicurrentoutput = $('input[name="multiwiicurrentoutput"]').is(':checked') ? 1 : 0;
-            }
-
-            if(semver.gte(FC.CONFIG.apiVersion, "1.14.0")) {
-                FC.MOTOR_3D_CONFIG.deadband3d_low = parseInt($('input[name="3ddeadbandlow"]').val());
-                FC.MOTOR_3D_CONFIG.deadband3d_high = parseInt($('input[name="3ddeadbandhigh"]').val());
-                FC.MOTOR_3D_CONFIG.neutral = parseInt($('input[name="3dneutral"]').val());
             }
 
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
@@ -1257,17 +1220,12 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                     FC.GPS_CONFIG.auto_config = $('input[name="gps_auto_config"]').is(':checked') ? 1 : 0;
                 }
 
-                const nextCallBack = save_motor_3d_config;
+                const nextCallBack = save_rc_deadband;
                 if(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_33)) {
                     MSP.send_message(MSPCodes.MSP_SET_GPS_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_GPS_CONFIG), false, nextCallBack);
                 } else {
                     nextCallBack();
                 }
-            }
-
-            function save_motor_3d_config() {
-                const nextCallBack = save_rc_deadband;
-                MSP.send_message(MSPCodes.MSP_SET_MOTOR_3D_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_3D_CONFIG), false, nextCallBack);
             }
 
             function save_rc_deadband() {
