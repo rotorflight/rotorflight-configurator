@@ -295,12 +295,6 @@
     font-weight: bold;
 }
 
-.tab-configuration ._smallAngle {
-    margin-top: 10px;
-    float: left;
-    width: 100%;
-}
-
 .tab-configuration .gpsSettings .note {
     margin-top: 10px;
 }

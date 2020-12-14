@@ -386,9 +386,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.ARMING_CONFIG.auto_disarm_delay = data.readU8();
                     FC.ARMING_CONFIG.disarm_kill_switch = data.readU8();
                 }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-                    FC.ARMING_CONFIG.small_angle = data.readU8();
-                }
                 break;
             case MSPCodes.MSP_LOOP_TIME:
                 if (semver.gte(FC.CONFIG.apiVersion, "1.8.0")) {
@@ -1737,9 +1734,6 @@ MspHelper.prototype.crunch = function(code) {
         case MSPCodes.MSP_SET_ARMING_CONFIG:
             buffer.push8(FC.ARMING_CONFIG.auto_disarm_delay)
                 .push8(FC.ARMING_CONFIG.disarm_kill_switch);
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-                buffer.push8(FC.ARMING_CONFIG.small_angle);
-            }
             break;
         case MSPCodes.MSP_SET_LOOP_TIME:
             buffer.push16(FC.FC_CONFIG.loopTime);
