@@ -498,11 +498,6 @@ TABS.configuration.initialize = function (callback) {
         $('input[name="roll"]').val(FC.CONFIG.accelerometerTrims[1]);
         $('input[name="pitch"]').val(FC.CONFIG.accelerometerTrims[0]);
 
-        $('._smallAngle').toggle(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37));
-        if(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-            $('input[id="configurationSmallAngle"]').val(FC.ARMING_CONFIG.small_angle);
-        }
-
         // UI hooks
 
         function checkUpdateGpsControls() {
@@ -553,11 +548,6 @@ TABS.configuration.initialize = function (callback) {
 
             FC.CONFIG.accelerometerTrims[1] = parseInt($('input[name="roll"]').val());
             FC.CONFIG.accelerometerTrims[0] = parseInt($('input[name="pitch"]').val());
-
-            // small angle configuration
-            if(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-                FC.ARMING_CONFIG.small_angle = parseInt($('input[id="configurationSmallAngle"]').val());
-            }
 
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
                 FC.SENSOR_ALIGNMENT.gyro_to_use = parseInt(orientation_gyro_to_use_e.val());
