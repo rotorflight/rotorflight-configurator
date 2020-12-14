@@ -457,14 +457,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_RSSI_CONFIG:
                 FC.RSSI_CONFIG.channel = data.readU8();
                 break;
-            case MSPCodes.MSP_MOTOR_3D_CONFIG:
-                FC.MOTOR_3D_CONFIG.deadband3d_low = data.readU16();
-                FC.MOTOR_3D_CONFIG.deadband3d_high = data.readU16();
-                FC.MOTOR_3D_CONFIG.neutral = data.readU16();
-                if (semver.lt(FC.CONFIG.apiVersion, "1.17.0")) {
-                    FC.RC_DEADBAND_CONFIG.deadband3d_throttle = data.readU16();
-                }
-                break;
             case MSPCodes.MSP_BOXNAMES:
                 FC.AUX_CONFIG = []; // empty the array as new data is coming in
 
@@ -1520,9 +1512,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_SET_RESET_CURR_PID:
                 console.log('Current PID profile reset');
                 break;
-            case MSPCodes.MSP_SET_MOTOR_3D_CONFIG:
-                console.log('3D settings saved');
-                break;
             case MSPCodes.MSP_SET_MIXER_CONFIG:
                 console.log('Mixer config saved');
                 break;
@@ -1952,15 +1941,6 @@ MspHelper.prototype.crunch = function(code) {
                     .push8(self.BAUD_RATES.indexOf(serialPort.gps_baudrate))
                     .push8(self.BAUD_RATES.indexOf(serialPort.telemetry_baudrate))
                     .push8(self.BAUD_RATES.indexOf(serialPort.blackbox_baudrate));
-            }
-            break;
-
-        case MSPCodes.MSP_SET_MOTOR_3D_CONFIG:
-            buffer.push16(FC.MOTOR_3D_CONFIG.deadband3d_low)
-                .push16(FC.MOTOR_3D_CONFIG.deadband3d_high)
-                .push16(FC.MOTOR_3D_CONFIG.neutral);
-            if (semver.lt(FC.CONFIG.apiVersion, "1.17.0")) {
-                buffer.push16(FC.RC_DEADBAND_CONFIG.deadband3d_throttle);
             }
             break;
 
