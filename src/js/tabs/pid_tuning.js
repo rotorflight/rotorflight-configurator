@@ -107,9 +107,6 @@ TABS.pid_tuning.initialize = function (callback) {
         $('.throttle input[name="mid"]').val(FC.RC_TUNING.throttle_MID.toFixed(2));
         $('.throttle input[name="expo"]').val(FC.RC_TUNING.throttle_EXPO.toFixed(2));
 
-        $('.tpa input[name="tpa"]').val(FC.RC_TUNING.dynamic_THR_PID.toFixed(2));
-        $('.tpa input[name="tpa-breakpoint"]').val(FC.RC_TUNING.dynamic_THR_breakpoint);
-
         if (semver.lt(FC.CONFIG.apiVersion, "1.10.0")) {
             $('.pid_tuning input[name="rc_yaw_expo"]').hide();
             $('.pid_tuning input[name="rc_expo"]').attr("rowspan", "3");
@@ -702,8 +699,6 @@ TABS.pid_tuning.initialize = function (callback) {
         FC.RC_TUNING.throttle_MID = parseFloat($('.throttle input[name="mid"]').val());
         FC.RC_TUNING.throttle_EXPO = parseFloat($('.throttle input[name="expo"]').val());
 
-        FC.RC_TUNING.dynamic_THR_PID = parseFloat($('.tpa input[name="tpa"]').val());
-        FC.RC_TUNING.dynamic_THR_breakpoint = parseInt($('.tpa input[name="tpa-breakpoint"]').val());
         FC.FILTER_CONFIG.gyro_lowpass_hz = parseInt($('.pid_filter input[name="gyroLowpassFrequency"]').val());
         FC.FILTER_CONFIG.dterm_lowpass_hz = parseInt($('.pid_filter input[name="dtermLowpassFrequency"]').val());
         FC.FILTER_CONFIG.yaw_lowpass_hz = parseInt($('.pid_filter input[name="yawLowpassFrequency"]').val());
@@ -1324,8 +1319,6 @@ TABS.pid_tuning.initialize = function (callback) {
         }
 
         if (semver.lt(FC.CONFIG.apiVersion, "1.7.0")) {
-            $('.tpa .tpa-breakpoint').hide();
-
             $('.pid_tuning .roll_rate').hide();
             $('.pid_tuning .pitch_rate').hide();
         } else {
