@@ -75,7 +75,6 @@ TABS.receiver.initialize = function (callback) {
         } else {
             $('.deadband input[name="yaw_deadband"]').val(FC.RC_DEADBAND_CONFIG.yaw_deadband);
             $('.deadband input[name="deadband"]').val(FC.RC_DEADBAND_CONFIG.deadband);
-            $('.deadband input[name="3ddeadbandthrottle"]').val(FC.RC_DEADBAND_CONFIG.deadband3d_throttle);
 
             $('.deadband input[name="deadband"]').change(function () {
                 tab.deadband = parseInt($(this).val());
@@ -396,7 +395,6 @@ TABS.receiver.initialize = function (callback) {
                 FC.RX_CONFIG.stick_min = parseInt($('.sticks input[name="stick_min"]').val());
                 FC.RC_DEADBAND_CONFIG.yaw_deadband = parseInt($('.deadband input[name="yaw_deadband"]').val());
                 FC.RC_DEADBAND_CONFIG.deadband = parseInt($('.deadband input[name="deadband"]').val());
-                FC.RC_DEADBAND_CONFIG.deadband3d_throttle = ($('.deadband input[name="3ddeadbandthrottle"]').val());
             }
 
             // catch rc map
