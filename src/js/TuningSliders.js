@@ -183,10 +183,6 @@ TuningSliders.updatePidSlidersDisplay = function() {
         });
     });
 
-    if ($('input[id="useIntegratedYaw"]').is(':checked')) {
-        this.pidSlidersUnavailable = true;
-    }
-
     if (this.pidSlidersUnavailable) {
         TABS.pid_tuning.updatePIDColors(true);
     } else {

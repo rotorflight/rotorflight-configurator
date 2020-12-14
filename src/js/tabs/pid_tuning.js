@@ -280,16 +280,12 @@ TABS.pid_tuning.initialize = function (callback) {
                 $('.pid_filter input[name="dtermLowpassDynExpo"]').val(FC.FILTER_CONFIG.dyn_lpf_curve_expo);
             }
 
-            $('input[id="useIntegratedYaw"]').prop('checked', FC.ADVANCED_TUNING.useIntegratedYaw !== 0);
-
         } else {
             $('.throttle_limit').hide();
 
             $('.gyroLowpassDyn').hide();
             $('.dtermLowpassDyn').hide();
             $('.dtermLowpass2TypeGroup').hide();
-
-            $('.integratedYaw').hide();
         }
 
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
@@ -430,11 +426,6 @@ TABS.pid_tuning.initialize = function (callback) {
             $('.vbatSagCompensation').hide();
             $('.thrustLinearization').hide();
         }
-
-        $('input[id="useIntegratedYaw"]').change(function() {
-            const checked = $(this).is(':checked');
-            $('#pidTuningIntegratedYawCaution').toggle(checked);
-        }).change();
 
         $('input[id="gyroNotch1Enabled"]').change(function() {
             const checked = $(this).is(':checked');
@@ -780,8 +771,6 @@ TABS.pid_tuning.initialize = function (callback) {
             if (FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz > 0 && FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz < FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz ) {
                 FC.FILTER_CONFIG.dterm_lowpass_type = $('.pid_filter select[name="dtermLowpassDynType"]').val();
             }
-
-            FC.ADVANCED_TUNING.useIntegratedYaw = $('input[id="useIntegratedYaw"]').is(':checked') ? 1 : 0;
         }
 
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
@@ -1625,9 +1614,6 @@ TABS.pid_tuning.initialize = function (callback) {
                 }
             });
 
-            // integrated yaw doesn't work with sliders therefore sliders are disabled
-            $('input[id="useIntegratedYaw"]').change(() => TuningSliders.updatePidSlidersDisplay());
-
             // pid sliders inputs
             $('#tuningMasterSlider, #tuningPDRatioSlider, #tuningPDGainSlider, #tuningResponseSlider').on('input', function() {
                 const slider = $(this);
@@ -1692,10 +1678,6 @@ TABS.pid_tuning.initialize = function (callback) {
             $('a.buttonPidTuningSliders').click(function() {
                 // if values were previously changed manually and then sliders are reactivated, reset pids to previous valid values if available, else default
                 TuningSliders.resetPidSliders();
-                // disable integrated yaw when enabling sliders
-                if ($('input[id="useIntegratedYaw"]').is(':checked')) {
-                    $('input[id="useIntegratedYaw"]').prop('checked', true).click();
-                }
                 self.analyticsChanges['PidTuningSliders'] = "On";
             });
 
