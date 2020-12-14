@@ -2,7 +2,7 @@
 
 TABS.firmware_flasher = {
     releases: null,
-    releaseChecker: new ReleaseChecker('firmware', 'https://api.github.com/repos/betaflight/betaflight/releases'),
+    releaseChecker: new ReleaseChecker('firmware', 'https://api.github.com/repos/rotorflight/rotorflight/releases'),
     jenkinsLoader: new JenkinsLoader('https://ci.betaflight.tech'),
     gitHubApi: new GitHubApi(),
     localFirmwareLoaded: false,
@@ -27,7 +27,7 @@ TABS.firmware_flasher.initialize = function (callback) {
     self.intel_hex = undefined;
     self.parsed_hex = undefined;
 
-    var unifiedSource = 'https://api.github.com/repos/betaflight/unified-targets/contents/configs/default';
+    var unifiedSource = 'https://api.github.com/repos/rotorflight/unified-targets/contents/configs/default';
 
     function onFirmwareCacheUpdate(release) {
         $('select[name="firmware_version"] option').each(function () {
@@ -82,7 +82,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                 $('div.release_info #unifiedTargetInfo').hide();
             }
 
-            var formattedNotes = summary.notes.replace(/#(\d+)/g, '[#$1](https://github.com/betaflight/betaflight/pull/$1)');
+            var formattedNotes = summary.notes.replace(/#(\d+)/g, '[#$1](https://github.com/rotorflight/rotorflight/pull/$1)');
             formattedNotes = marked(formattedNotes);
             $('div.release_info .notes').html(formattedNotes);
             $('div.release_info .notes').find('a').each(function() {
@@ -174,7 +174,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             var unsortedTargets = [];
             releaseData.forEach(function(release) {
                 release.assets.forEach(function(asset) {
-                    var targetFromFilenameExpression = /betaflight_([\d.]+)?_?(\w+)(\-.*)?\.(.*)/;
+                    var targetFromFilenameExpression = /rotorflight_([\d.]+)?_?(\w+)(\-.*)?\.(.*)/;
                     var match = targetFromFilenameExpression.exec(asset.name);
                     if ((!showDevReleases && release.prerelease) || !match) {
                         return;
@@ -194,7 +194,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                 var matchVersionFromTag = versionFromTagExpression.exec(release.tag_name);
                 var version = matchVersionFromTag[1];
                 release.assets.forEach(function(asset) {
-                    var targetFromFilenameExpression = /betaflight_([\d.]+)?_?(\w+)(\-.*)?\.(.*)/;
+                    var targetFromFilenameExpression = /rotorflight_([\d.]+)?_?(\w+)(\-.*)?\.(.*)/;
                     var match = targetFromFilenameExpression.exec(asset.name);
                     if ((!showDevReleases && release.prerelease) || !match) {
                         return;
@@ -637,7 +637,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                                             const bareBoard = grabBuildNameFromConfig(config);
                                             TABS.firmware_flasher.bareBoard = bareBoard;
 
-                                            self.gitHubApi.getFileLastCommitInfo('betaflight/unified-targets', 'master', unifiedConfig.path, function (commitInfo) {
+                                            self.gitHubApi.getFileLastCommitInfo('rotorflight/unified-targets', 'master', unifiedConfig.path, function (commitInfo) {
                                                 config = self.injectTargetInfo(config, target, manufacturerId, commitInfo);
 
                                                 setUnifiedConfig(target, bareBoard, config, manufacturerId, unifiedConfig.name, unifiedConfig.download_url, commitInfo.date);

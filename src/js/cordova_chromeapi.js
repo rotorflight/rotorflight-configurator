@@ -302,7 +302,7 @@ const chromeapiFilesystem = {
             options.suggestedName = 'newfile';
         }
         const extension = self.getFileExtension(options.suggestedName);
-        const folder = 'Betaflight configurator';
+        const folder = 'Rotorflight configurator';
         navigator.notification.prompt(i18n.getMessage('dialogFileNameDescription', {
             folder: folder,
         }), function(res) {

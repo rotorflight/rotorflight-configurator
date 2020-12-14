@@ -15,11 +15,11 @@ if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
 function MspHelper() {
     const self = this;
 
-    // 0 based index, must be identical to 'baudRates' in 'src/main/io/serial.c' in betaflight
+    // 0 based index, must be identical to 'baudRates' in 'src/main/io/serial.c' in rotorflight
     self.BAUD_RATES = ['AUTO', '9600', '19200', '38400', '57600', '115200',
     '230400', '250000', '400000', '460800', '500000', '921600', '1000000',
     '1500000', '2000000', '2470000'];
-    // needs to be identical to 'serialPortFunction_e' in 'src/main/io/serial.h' in betaflight
+    // needs to be identical to 'serialPortFunction_e' in 'src/main/io/serial.h' in rotorflight
     self.SERIAL_PORT_FUNCTIONS = {
     'MSP': 0,
     'GPS': 1,
@@ -1212,7 +1212,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     ledCount = data.byteLength / 4;
                 }
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                    // According to betaflight/src/main/msp/msp.c
+                    // According to rotorflight/src/main/msp/msp.c
                     // API 1.41 - add indicator for advanced profile support and the current profile selection
                     // 0 = basic ledstrip available
                     // 1 = advanced ledstrip available

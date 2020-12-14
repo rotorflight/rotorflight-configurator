@@ -30,5 +30,5 @@ var CONFIGURATOR = {
     gitChangesetId: 'unknown',
     version: '0.0.1',
     latestVersion: '0.0.1',
-    latestVersionReleaseUrl: 'https://github.com/betaflight/betaflight-configurator/releases',
+    latestVersionReleaseUrl: 'https://github.com/rotorflight/rotorflight-configurator/releases',
 };
