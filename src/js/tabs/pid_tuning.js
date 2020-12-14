@@ -244,10 +244,6 @@ TABS.pid_tuning.initialize = function (callback) {
             const absoluteControlGainNumberElement = $('input[name="absoluteControlGain-number"]');
             absoluteControlGainNumberElement.val(FC.ADVANCED_TUNING.absoluteControlGain).trigger('input');
 
-            // Throttle Boost
-            const throttleBoostNumberElement = $('input[name="throttleBoost-number"]');
-            throttleBoostNumberElement.val(FC.ADVANCED_TUNING.throttleBoost).trigger('input');
-
             // Acro Trainer
             const acroTrainerAngleLimitNumberElement = $('input[name="acroTrainerAngleLimit-number"]');
             acroTrainerAngleLimitNumberElement.val(FC.ADVANCED_TUNING.acroTrainerAngleLimit).trigger('input');
@@ -269,7 +265,6 @@ TABS.pid_tuning.initialize = function (callback) {
             $('.smartfeedforward').hide();
             $('.itermrelax').hide();
             $('.absoluteControlGain').hide();
-            $('.throttleBoost').hide();
             $('.acroTrainerAngleLimit').hide();
 
             $('.pid_tuning .YAW input[name="d"]').hide();
@@ -864,8 +859,6 @@ TABS.pid_tuning.initialize = function (callback) {
             FC.ADVANCED_TUNING.itermRelaxCutoff = parseInt($('input[name="itermRelaxCutoff"]').val());
 
             FC.ADVANCED_TUNING.absoluteControlGain = $('input[name="absoluteControlGain-number"]').val();
-
-            FC.ADVANCED_TUNING.throttleBoost = $('input[name="throttleBoost-number"]').val();
 
             FC.ADVANCED_TUNING.acroTrainerAngleLimit = $('input[name="acroTrainerAngleLimit-number"]').val();
 
