@@ -999,15 +999,6 @@ OSD.loadDisplayFields = function() {
                 return `C${OSD.generateTemperaturePreview(osdData, 33)}`;
             },
         },
-        ANTI_GRAVITY: {
-            name: 'ANTI_GRAVITY',
-            text: 'osdTextAntiGravity',
-            desc: 'osdDescAntiGravity',
-            defaultPosition: -1,
-            draw_order: 320,
-            positionable: true,
-            preview: 'AG',
-        },
         G_FORCE: {
             name: 'G_FORCE',
             text: 'osdTextGForce',
