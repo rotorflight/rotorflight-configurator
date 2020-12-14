@@ -48,11 +48,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
     }
 
     function load_rc_map() {
-        MSP.send_message(MSPCodes.MSP_RX_MAP, false, false, load_mixer_config);
-    }
-
-    function load_mixer_config() {
-        MSP.send_message(MSPCodes.MSP_MIXER_CONFIG, false, false, load_rssi_config);
+        MSP.send_message(MSPCodes.MSP_RX_MAP, false, false, load_rssi_config);
     }
 
     function load_rssi_config() {
@@ -203,51 +199,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
     function process_html() {
         self.analyticsChanges = {};
 
-        const mixer_list_e = $('select.mixerList');
-        for (let selectIndex = 0; selectIndex < mixerList.length; selectIndex++) {
-            mixerList.forEach(function (mixerEntry, mixerIndex) {
-                if (mixerEntry.pos === selectIndex) {
-                    mixer_list_e.append('<option value="' + (mixerIndex + 1) + '">' + mixerEntry.name + '</option>');
-                }
-            });
-        }
-
-        function refreshMixerPreview() {
-            const mixer = FC.MIXER_CONFIG.mixer
-            let reverse = "";
-
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                reverse = FC.MIXER_CONFIG.reverseMotorDir ? "_reversed" : "";
-            }
-
-            $('.mixerPreview img').attr('src', './resources/motor_order/' + mixerList[mixer - 1].image + reverse + '.svg');
-        }
-
-        const reverseMotorSwitch_e = $('#reverseMotorSwitch');
-        const reverseMotor_e = $('.reverseMotor');
-
-        reverseMotorSwitch_e.change(function() {
-            FC.MIXER_CONFIG.reverseMotorDir = $(this).prop('checked') ? 1 : 0;
-            refreshMixerPreview();
-        });
-        reverseMotorSwitch_e.prop('checked', FC.MIXER_CONFIG.reverseMotorDir != 0).change();
-
-        mixer_list_e.change(function () {
-            const mixerValue = parseInt($(this).val());
-
-            let newValue;
-            if (mixerValue !== FC.MIXER_CONFIG.mixer) {
-                newValue = $(this).find('option:selected').text();
-            }
-            self.analyticsChanges['Mixer'] = newValue;
-
-            FC.MIXER_CONFIG.mixer = mixerValue;
-            refreshMixerPreview();
-        });
-
-        // select current mixer configuration
-        mixer_list_e.val(FC.MIXER_CONFIG.mixer).change();
-
         const features_e = $('.tab-configuration .features');
 
         FC.FEATURE_CONFIG.features.generateElements(features_e);
@@ -310,7 +261,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             FC.BEEPER_CONFIG.beepers.generateElements(template, destination);
         } else {
             beeper_e.hide();
-            reverseMotor_e.hide();
         }
 
         // translate to user-selected language
@@ -1281,17 +1231,12 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             }
 
             function save_misc() {
-                const nextCallBack = save_mixer_config;
+                const nextCallBack = save_board_alignment_config;
                 if(semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_33)) {
                     MSP.send_message(MSPCodes.MSP_SET_MISC, mspHelper.crunch(MSPCodes.MSP_SET_MISC), false, nextCallBack);
                 } else {
                     nextCallBack();
                 }
-            }
-
-            function save_mixer_config() {
-                const nextCallBack = save_board_alignment_config;
-                MSP.send_message(MSPCodes.MSP_SET_MIXER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG), false, nextCallBack);
             }
 
             function save_board_alignment_config() {

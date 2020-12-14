@@ -186,7 +186,6 @@ const FC = {
 
         this.MIXER_CONFIG = {
             mixer:                      0,
-            reverseMotorDir:            0,
         };
 
         this.BOARD_ALIGNMENT_CONFIG = {

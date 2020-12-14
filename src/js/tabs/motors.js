@@ -220,20 +220,7 @@ TABS.motors.initialize = function (callback) {
     }
 
     function update_model(mixer) {
-        let reverse = "";
 
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-            reverse = FC.MIXER_CONFIG.reverseMotorDir ? "_reversed" : "";
-        }
-
-        $('.mixerPreview img').attr('src', './resources/motor_order/' + mixerList[mixer - 1].image + reverse + '.svg');
-
-        const motorOutputReorderConfig = new MotorOutputReorderConfig(100);
-        const domMotorOutputReorderDialogOpen = $('#motorOutputReorderDialogOpen');
-
-        const isMotorReorderingAvailable = (mixerList[mixer - 1].name in motorOutputReorderConfig)
-            && (FC.MOTOR_OUTPUT_ORDER) && (FC.MOTOR_OUTPUT_ORDER.length > 0);
-        domMotorOutputReorderDialogOpen.toggle(isMotorReorderingAvailable);
     }
 
     function process_html() {
