@@ -89,12 +89,12 @@ TABS.failsafe.initialize = function (callback, scrollPosition) {
 
         let element;
 
-        for (let channelIndex = 0; channelIndex < FC.RC.active_channels - 4; channelIndex++) {
+        for (let channelIndex = 5; channelIndex < FC.RC.active_channels ; channelIndex++) {
             auxAssignment.push("");
         }
 
         if (typeof FC.RSSI_CONFIG.channel !== 'undefined')  {
-            auxAssignment[FC.RSSI_CONFIG.channel - 5] += "<span class=\"modename\">" + "RSSI" + "</span>";         // Aux channels start at 5 in backend so we have to substract 5
+            auxAssignment[FC.RSSI_CONFIG.channel - 6] += "<span class=\"modename\">" + "RSSI" + "</span>";         // Aux channels start at 6 in backend so we have to substract 6
         }
 
         for (let modeIndex = 0; modeIndex < FC.AUX_CONFIG.length; modeIndex++) {
@@ -127,7 +127,8 @@ TABS.failsafe.initialize = function (callback, scrollPosition) {
                 i18n.getMessage('controlAxisRoll'),
                 i18n.getMessage('controlAxisPitch'),
                 i18n.getMessage('controlAxisYaw'),
-                i18n.getMessage('controlAxisThrottle')
+                i18n.getMessage('controlAxisThrottle'),
+                i18n.getMessage('controlAxisCollective'),
             ],
             fullChannels_e = $('div.activechannellist');
         let aux_index = 1,
