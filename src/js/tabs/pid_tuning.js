@@ -354,12 +354,6 @@ TABS.pid_tuning.initialize = function (callback) {
         }
 
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-            $('.pid_tuning input[name="motorLimit"]').val(FC.ADVANCED_TUNING.motorOutputLimit);
-        } else {
-            $('.motorOutputLimit').hide();
-        }
-
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
             const ratesTypeListElement = $('select[id="ratesType"]'); // generates list
             const ratesList = [
                 {name: "Betaflight"},
@@ -774,7 +768,6 @@ TABS.pid_tuning.initialize = function (callback) {
 
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
             FC.FILTER_CONFIG.dyn_notch_max_hz = parseInt($('.pid_filter input[name="dynamicNotchMaxHz"]').val());
-            FC.ADVANCED_TUNING.motorOutputLimit = parseInt($('.pid_tuning input[name="motorLimit"]').val());
 
             const selectedRatesType = $('select[id="ratesType"]').val(); // send analytics for rates type
             let selectedRatesTypeName = undefined;
