@@ -7,95 +7,22 @@ const Features = function (config) {
         {bit: 0, group: 'rxMode', mode: 'select', name: 'RX_PPM'},
         {bit: 2, group: 'other', name: 'INFLIGHT_ACC_CAL'},
         {bit: 3, group: 'rxMode', mode: 'select', name: 'RX_SERIAL'},
-        {bit: 4, group: 'escMotorStop', name: 'MOTOR_STOP'},
-        {bit: 5, group: 'other', name: 'SERVO_TILT', haveTip: true},
         {bit: 6, group: 'other', name: 'SOFTSERIAL', haveTip: true},
         {bit: 7, group: 'gps', name: 'GPS', haveTip: true},
         {bit: 9, group: 'other', name: 'SONAR'},
         {bit: 10, group: 'other', name: 'TELEMETRY'},
-        {bit: 12, group: '3D', name: '3D'},
         {bit: 13, group: 'rxMode', mode: 'select', name: 'RX_PARALLEL_PWM'},
         {bit: 14, group: 'rxMode', mode: 'select', name: 'RX_MSP'},
         {bit: 15, group: 'rssi', name: 'RSSI_ADC'},
         {bit: 16, group: 'other', name: 'LED_STRIP'},
-        {bit: 17, group: 'other', name: 'DISPLAY', haveTip: true}
+        {bit: 17, group: 'other', name: 'DISPLAY', haveTip: true},
+        {bit: 18, group: 'other', name: 'OSD'},
+        {bit: 25, group: 'rxMode', mode: 'select', name: 'RX_SPI'},
+        {bit: 26, group: 'other', name: 'GOVERNOR'},
+        {bit: 27, group: 'escSensor', name: 'ESC_SENSOR'},
+        {bit: 28, group: 'other', name: 'FREQ_SENSOR'},
+        {bit: 30, group: 'other', name: 'RPM_FILTER'}
     ];
-
-    if (!semver.gte(config.apiVersion, API_VERSION_1_33)) {
-        features.push(
-            {bit: 19, group: 'other', name: 'BLACKBOX', haveTip: true}
-        );
-    }
-
-    if (semver.gte(config.apiVersion, "1.12.0")) {
-        features.push(
-            {bit: 20, group: 'other', name: 'CHANNEL_FORWARDING'}
-        );
-    }
-
-    if (semver.gte(FC.CONFIG.apiVersion, "1.15.0") && !semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-        features.push(
-            {bit: 8, group: 'rxFailsafe', name: 'FAILSAFE', haveTip: true}
-        );
-    }
-
-    if (semver.gte(FC.CONFIG.apiVersion, "1.16.0")) {
-        features.push(
-            {bit: 21, group: 'other', name: 'TRANSPONDER', haveTip: true}
-        );
-    }
-
-    if (config.flightControllerVersion !== '') {
-        if (semver.gte(FC.CONFIG.apiVersion, "1.16.0")) {
-            features.push(
-                {bit: 22, group: 'other', name: 'AIRMODE'}
-            );
-        }
-
-        if (semver.gte(FC.CONFIG.apiVersion, "1.16.0")) {
-            if (semver.lt(FC.CONFIG.apiVersion, "1.20.0")) {
-                features.push(
-                    {bit: 23, group: 'superexpoRates', name: 'SUPEREXPO_RATES'}
-                );
-            } else if (!semver.gte(config.apiVersion, API_VERSION_1_33)) {
-                features.push(
-                    {bit: 23, group: 'other', name: 'SDCARD'}
-                );
-            }
-        }
-
-        if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
-            features.push(
-                {bit: 18, group: 'other', name: 'OSD'}
-            );
-            if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_35)) {
-                features.push(
-                    {bit: 24, group: 'other', name: 'VTX'}
-                );
-            }
-        }
-
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_31)) {
-            features.push(
-                {bit: 25, group: 'rxMode', mode: 'select', name: 'RX_SPI'},
-                {bit: 27, group: 'escSensor', name: 'ESC_SENSOR'}
-            );
-        }
-
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-            features.push(
-                {bit: 28, group: 'antiGravity', name: 'ANTI_GRAVITY', haveTip: true, hideName: true},
-                {bit: 29, group: 'other', name: 'DYNAMIC_FILTER'}
-            );
-        }
-
-        if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-            features.push(
-                {bit: 1, group: 'batteryVoltage', name: 'VBAT'},
-                {bit: 11, group: 'batteryCurrent', name: 'CURRENT_METER'}
-            );
-        }
-    }
 
     self._features = features;
     self._featureMask = 0;

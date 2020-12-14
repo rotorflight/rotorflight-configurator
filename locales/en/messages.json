@@ -1034,7 +1034,7 @@
         "message": "In-flight level calibration"
     },
     "featureRX_SERIAL": {
-        "message": "Serial-based receiver (SPEKSAT, SBUS, SUMD)"
+        "message": "SERIAL RX input (SBUS, CRSF, F.Port)"
     },
     "featureMOTOR_STOP": {
         "message": "Don't spin the motors when armed"
@@ -1102,8 +1102,14 @@
     "featureRX_SPI": {
         "message": "SPI RX support"
     },
+    "featureGOVERNOR": {
+        "message": "Helicopter headspeed governor"
+    },
     "featureESC_SENSOR": {
-        "message": "Use KISS/BLHeli_32 ESC telemetry <b>over a separate wire</b>"
+        "message": "Use KISS ESC telemetry"
+    },
+    "featureFREQ_SENSOR": {
+        "message": "Use frequency input for RPM detection</b>"
     },
     "featureCHANNEL_FORWARDING": {
         "message": "Forward aux channels to servo outputs"
@@ -1137,6 +1143,9 @@
     },
     "featureDYNAMIC_FILTER": {
         "message": "Dynamic gyro notch filtering"
+    },
+    "featureRPM_FILTER": {
+        "message": "Motor RPM controlled notch filtering"
     },
     "featureFAILSAFE": {
         "message": "Enable Failsafe Stage 2"
