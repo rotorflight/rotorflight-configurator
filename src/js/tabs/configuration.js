@@ -894,11 +894,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             $('div.disarm').hide();
         }
 
-        $('._smallAngle').toggle(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37));
-        if(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-            $('input[id="configurationSmallAngle"]').val(FC.ARMING_CONFIG.small_angle);
-        }
-
         // fill throttle
         $('input[name="minthrottle"]').val(FC.MOTOR_CONFIG.minthrottle);
         $('input[name="maxthrottle"]').val(FC.MOTOR_CONFIG.maxthrottle);
@@ -1117,9 +1112,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             if(semver.gte(FC.CONFIG.apiVersion, "1.8.0")) {
                 FC.ARMING_CONFIG.auto_disarm_delay = parseInt($('input[name="autodisarmdelay"]').val());
                 FC.ARMING_CONFIG.disarm_kill_switch = $('input[id="disarmkillswitch"]').is(':checked') ? 1 : 0;
-            }
-            if(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-                FC.ARMING_CONFIG.small_angle = parseInt($('input[id="configurationSmallAngle"]').val());
             }
 
             FC.MOTOR_CONFIG.minthrottle = parseInt($('input[name="minthrottle"]').val());
