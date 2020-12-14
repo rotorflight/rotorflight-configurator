@@ -104,9 +104,6 @@ function configuration_backup(callback) {
             uniqueData.push(MSPCodes.MSP_LOOP_TIME);
             uniqueData.push(MSPCodes.MSP_ARMING_CONFIG);
         }
-        if (semver.gte(FC.CONFIG.apiVersion, "1.14.0")) {
-            uniqueData.push(MSPCodes.MSP_MOTOR_3D_CONFIG);
-        }
         if (semver.gte(FC.CONFIG.apiVersion, "1.15.0")) {
             uniqueData.push(MSPCodes.MSP_SENSOR_ALIGNMENT);
             uniqueData.push(MSPCodes.MSP_RX_CONFIG);
@@ -156,9 +153,6 @@ function configuration_backup(callback) {
                 if (semver.gte(FC.CONFIG.apiVersion, "1.8.0")) {
                     configuration.FC_CONFIG = jQuery.extend(true, {}, FC.FC_CONFIG);
                     configuration.ARMING_CONFIG = jQuery.extend(true, {}, FC.ARMING_CONFIG);
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, "1.14.0")) {
-                    configuration.MOTOR_3D_CONFIG = jQuery.extend(true, {}, FC.MOTOR_3D_CONFIG);
                 }
                 if (semver.gte(FC.CONFIG.apiVersion, "1.15.0")) {
                     configuration.SENSOR_ALIGNMENT = jQuery.extend(true, {}, FC.SENSOR_ALIGNMENT);
@@ -569,24 +563,6 @@ function configuration_restore(callback) {
             appliedMigrationsCount++;
         }
 
-
-        if (compareVersions(migratedVersion, '0.66.0') && !compareVersions(configuration.apiVersion, '1.14.0')) {
-            // api 1.14 exposes 3D configuration
-
-            if (configuration.MOTOR_3D_CONFIG == undefined) {
-                configuration.MOTOR_3D_CONFIG = {
-                    deadband3d_low:         1406,
-                    deadband3d_high:        1514,
-                    neutral:                1460,
-                    deadband3d_throttle:    50
-                };
-            }
-
-            GUI.log(i18n.getMessage('configMigratedTo', [migratedVersion]));
-            appliedMigrationsCount++;
-        }
-
-
         if (compareVersions(migratedVersion, '0.66.0') && !compareVersions(configuration.apiVersion, '1.15.0')) {
             // api 1.15 exposes RCdeadband and sensor alignment
 
@@ -812,9 +788,6 @@ function configuration_restore(callback) {
                         uniqueData.push(MSPCodes.MSP_SET_LOOP_TIME);
                         uniqueData.push(MSPCodes.MSP_SET_ARMING_CONFIG);
                     }
-                    if (semver.gte(FC.CONFIG.apiVersion, "1.14.0")) {
-                        uniqueData.push(MSPCodes.MSP_SET_MOTOR_3D_CONFIG);
-                    }
                     if (semver.gte(FC.CONFIG.apiVersion, "1.15.0")) {
                         uniqueData.push(MSPCodes.MSP_SET_SENSOR_ALIGNMENT);
                         uniqueData.push(MSPCodes.MSP_SET_RX_CONFIG);
@@ -837,7 +810,6 @@ function configuration_restore(callback) {
                     FC.LED_MODE_COLORS = configuration.LED_MODE_COLORS;
                     FC.ARMING_CONFIG = configuration.ARMING_CONFIG;
                     FC.FC_CONFIG = configuration.FC_CONFIG;
-                    FC.MOTOR_3D_CONFIG = configuration.MOTOR_3D_CONFIG;
                     FC.SENSOR_ALIGNMENT = configuration.SENSOR_ALIGNMENT;
                     FC.RX_CONFIG = configuration.RX_CONFIG;
                     FC.FAILSAFE_CONFIG = configuration.FAILSAFE_CONFIG;

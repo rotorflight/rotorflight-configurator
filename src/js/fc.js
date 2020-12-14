@@ -121,7 +121,6 @@ const FC = {
     MIXER_CONFIG: null,
     MODE_RANGES: null,
     MODE_RANGES_EXTRA: null,
-    MOTOR_3D_CONFIG: null,
     MOTOR_CONFIG: null,
     MOTOR_DATA: null,
     MOTOR_OUTPUT_ORDER: null,
@@ -360,12 +359,6 @@ const FC = {
 
         this.RSSI_CONFIG = {
             channel:                    0,
-        };
-
-        this.MOTOR_3D_CONFIG = {
-            deadband3d_low:             0,
-            deadband3d_high:            0,
-            neutral:                    0,
         };
 
         this.DATAFLASH = {

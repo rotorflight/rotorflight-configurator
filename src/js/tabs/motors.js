@@ -6,7 +6,6 @@ TABS.motors = {
     previousFilterDynWidth: null,
     analyticsChanges: {},
     isDirty: false,
-    feature3DEnabled: false,
     sensor: "gyro",
     sensorGyroRate: 20,
     sensorGyroScale: 2000,
@@ -40,7 +39,6 @@ TABS.motors = {
     DSHOT_PROTOCOL_MIN_VALUE: 0,
     DSHOT_DISARMED_VALUE: 1000,
     DSHOT_MAX_VALUE: 2000,
-    DSHOT_3D_NEUTRAL: 1500,
 };
 
 TABS.motors.initialize = function (callback) {
@@ -62,7 +60,6 @@ TABS.motors.initialize = function (callback) {
     .then(() => { return MSP.promise(MSPCodes.MSP_FEATURE_CONFIG); })
     .then(() => { return (FC.MOTOR_CONFIG.use_dshot_telemetry || FC.MOTOR_CONFIG.use_esc_sensor) ? MSP.promise(MSPCodes.MSP_MOTOR_TELEMETRY) : true; })
     .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_CONFIG); })
-    .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_3D_CONFIG); })
     .then(() => { return MSP.promise(MSPCodes.MSP2_MOTOR_OUTPUT_REORDERING); })
     .then(() => { return MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG); })
     .then(() => { return MSP.promise(MSPCodes.MSP_ARMING_CONFIG); })
@@ -217,7 +214,6 @@ TABS.motors.initialize = function (callback) {
 
         update_arm_status();
 
-        self.feature3DEnabled = FC.FEATURE_CONFIG.features.isEnabled('3D');
         const motorsEnableTestModeElement = $('#motorsEnableTestMode');
         self.analyticsChanges = {};
 
@@ -465,17 +461,12 @@ TABS.motors.initialize = function (callback) {
         self.numberOfValidOutputs = (FC.MOTOR_DATA.indexOf(0) > -1) ? FC.MOTOR_DATA.indexOf(0) : 8;
         let rangeMin;
         let rangeMax;
-        let neutral3d;
         if (self.escProtocolIsDshot) {
             rangeMin = self.DSHOT_DISARMED_VALUE;
             rangeMax = self.DSHOT_MAX_VALUE;
-            neutral3d = self.DSHOT_3D_NEUTRAL;
         } else {
             rangeMin = FC.MOTOR_CONFIG.mincommand;
             rangeMax = FC.MOTOR_CONFIG.maxthrottle;
-            //Arbitrary sanity checks
-            //Note: values may need to be revisited
-            neutral3d = (FC.MOTOR_3D_CONFIG.neutral > 1575 || FC.MOTOR_3D_CONFIG.neutral < 1425) ? 1500 : FC.MOTOR_3D_CONFIG.neutral;
         }
 
         const motorsWrapper = $('.motors .bar-wrapper');
@@ -625,23 +616,9 @@ TABS.motors.initialize = function (callback) {
         $('input[name="maxthrottle"]').val(FC.MOTOR_CONFIG.maxthrottle);
         $('input[name="mincommand"]').val(FC.MOTOR_CONFIG.mincommand);
 
-        //fill 3D
-        $('.tab-motors ._3d').show();
-        $('input[name="3ddeadbandlow"]').val(FC.MOTOR_3D_CONFIG.deadband3d_low);
-        $('input[name="3ddeadbandhigh"]').val(FC.MOTOR_3D_CONFIG.deadband3d_high);
-        $('input[name="3dneutral"]').val(FC.MOTOR_3D_CONFIG.neutral);
-
         /*
         * UI hooks
         */
-
-       function checkUpdate3dControls() {
-            if (FC.FEATURE_CONFIG.features.isEnabled('3D')) {
-                $('._3dSettings').show();
-            } else {
-                $('._3dSettings').hide();
-            }
-        }
 
         $('input.feature', featuresElement).on("change", function () {
             const element = $(this);
@@ -651,10 +628,6 @@ TABS.motors.initialize = function (callback) {
 
             switch (element.attr('name')) {
                 case 'MOTOR_STOP':
-                    break;
-
-                case '3D':
-                    checkUpdate3dControls();
                     break;
 
                 default:
@@ -670,19 +643,12 @@ TABS.motors.initialize = function (callback) {
 
         });
 
-        checkUpdate3dControls();
-
         /*
         * MOTOR TESTING
         */
 
         function setSlidersDefault() {
-            // change all values to default
-            if (self.feature3DEnabled) {
-                $('div.sliders input').val(neutral3d);
-            } else {
-                $('div.sliders input').val(rangeMin);
-            }
+            $('div.sliders input').val(rangeMin);
         }
 
         function setSlidersEnabled(isEnabled) {
@@ -770,14 +736,8 @@ TABS.motors.initialize = function (callback) {
         let motorsRunning = false;
 
         for (let i = 0; i < self.numberOfValidOutputs; i++) {
-            if (!self.feature3DEnabled) {
-                if (FC.MOTOR_DATA[i] > rangeMin) {
-                    motorsRunning = true;
-                }
-            } else {
-                if ((FC.MOTOR_DATA[i] < FC.MOTOR_3D_CONFIG.deadband3d_low) || (FC.MOTOR_DATA[i] > FC.MOTOR_3D_CONFIG.deadband3d_high)) {
-                    motorsRunning = true;
-                }
+            if (FC.MOTOR_DATA[i] > rangeMin) {
+                motorsRunning = true;
             }
         }
 
@@ -907,10 +867,6 @@ TABS.motors.initialize = function (callback) {
                 FC.MOTOR_CONFIG.motor_poles = parseInt($('input[name="motorPoles"]').val());
             }
 
-            FC.MOTOR_3D_CONFIG.deadband3d_low = parseInt($('input[name="3ddeadbandlow"]').val());
-            FC.MOTOR_3D_CONFIG.deadband3d_high = parseInt($('input[name="3ddeadbandhigh"]').val());
-            FC.MOTOR_3D_CONFIG.neutral = parseInt($('input[name="3dneutral"]').val());
-
             FC.PID_ADVANCED_CONFIG.fast_pwm_protocol = parseInt(escProtocolElement.val() - 1);
             FC.PID_ADVANCED_CONFIG.use_unsyncedPwm = unsyncedPWMSwitchElement.is(':checked') ? 1 : 0;
             FC.PID_ADVANCED_CONFIG.motor_pwm_rate = parseInt($('input[name="unsyncedpwmfreq"]').val());
@@ -924,7 +880,6 @@ TABS.motors.initialize = function (callback) {
             .resolve(true)
             .then(() => { return MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG)); })
             .then(() => { return MSP.promise(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG)); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_SET_MOTOR_3D_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_3D_CONFIG)); })
             .then(() => { return MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)); })
             .then(() => { return MSP.promise(MSPCodes.MSP_SET_ARMING_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ARMING_CONFIG)); })
             .then(() => { return (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) ? MSP.promise(MSPCodes.MSP_SET_FILTER_CONFIG,
@@ -945,10 +900,6 @@ TABS.motors.initialize = function (callback) {
         GUI.interval_add('motor_and_status_pull', get_status, 50, true);
 
         let zeroThrottleValue = rangeMin;
-
-        if (self.feature3DEnabled) {
-            zeroThrottleValue = neutral3d;
-        }
 
         setup_motor_output_reordering_dialog(SetupEscDshotDirectionDialogCallback, zeroThrottleValue);
 
