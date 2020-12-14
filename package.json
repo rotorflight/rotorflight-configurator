@@ -1,7 +1,7 @@
 {
-  "name": "betaflight-configurator",
-  "productName": "Betaflight Configurator",
-  "description": "Crossplatform configuration tool for Betaflight flight control system.",
+  "name": "rotorflight-configurator",
+  "productName": "Rotorflight Configurator",
+  "description": "Crossplatform configuration tool for Rotorflight flight control system.",
   "version": "10.8.0",
   "main": "main.html",
   "chromium-args": "--disable-features=nw2",
@@ -23,11 +23,11 @@
     "id": "main-window",
     "min_width": 1024,
     "min_height": 550,
-    "title": "Betaflight Configurator"
+    "title": "Rotorflight Configurator"
   },
   "repository": {
     "type": "git",
-    "url": "github.com/betaflight/betaflight-configurator"
+    "url": "github.com/rotorflight/rotorflight-configurator"
   },
   "webview": {
     "partitions": [
@@ -44,7 +44,7 @@
       }
     ]
   },
-  "author": "The Betaflight open source project.",
+  "author": "The Rotorflight open source project.",
   "license": "GPL-3.0",
   "engines": {
     "node": "10.x"

@@ -43,7 +43,7 @@ const RELEASE_DIR = './release/';
 const CORDOVA_DIR = './cordova/';
 const CORDOVA_DIST_DIR = './dist_cordova/';
 
-const LINUX_INSTALL_DIR = '/opt/betaflight';
+const LINUX_INSTALL_DIR = '/opt/rotorflight';
 
 const NODE_ENV = process.env.NODE_ENV || 'production';
 
@@ -54,7 +54,7 @@ const nwBuilderOptions = {
     version: '0.50.2',
     files: `${DIST_DIR}**/*`,
     macIcns: './src/images/bf_icon.icns',
-    macPlist: { 'CFBundleDisplayName': 'Betaflight Configurator'},
+    macPlist: { 'CFBundleDisplayName': 'Rotorflight Configurator'},
     winIco: './src/images/bf_icon.ico',
     zip: false,
 };
@@ -619,7 +619,7 @@ function release_zip(arch, appDirectory) {
     const output = getReleaseFilename(arch, 'zip');
     const base = path.join(appDirectory, pkg.name, arch);
 
-    return compressFiles(src, base, output, 'Betaflight Configurator');
+    return compressFiles(src, base, output, 'Rotorflight Configurator');
 }
 
 // Compress files from srcPath, using basePath, to outputFile in the RELEASE_DIR
@@ -744,10 +744,10 @@ function release_osx64(appDirectory) {
             target: path.join(RELEASE_DIR, getReleaseFilename('macOS', 'dmg')),
             basepath: path.join(appDirectory, pkg.name, 'osx64'),
             specification: {
-                title: 'Betaflight Configurator',
+                title: 'Rotorflight Configurator',
                 contents: [
                     { 'x': 448, 'y': 342, 'type': 'link', 'path': '/Applications' },
-                    { 'x': 192, 'y': 344, 'type': 'file', 'path': `${pkg.name}.app`, 'name': 'Betaflight Configurator.app' },
+                    { 'x': 192, 'y': 344, 'type': 'file', 'path': `${pkg.name}.app`, 'name': 'Rotorflight Configurator.app' },
                 ],
                 background: path.join(__dirname, 'assets/osx/dmg-background.png'),
                 format: 'UDZO',
