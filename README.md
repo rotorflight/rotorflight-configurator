@@ -1,30 +1,16 @@
-# Betaflight Configurator
+# Rotorflight Configurator
 
-![Betaflight](http://static.rcgroups.net/forums/attachments/6/1/0/3/7/6/a9088900-228-bf_logo.jpg)
+Rotorflight Configurator is a crossplatform configuration tool for the Rotorflight flight control system.
 
-[![Latest version](https://img.shields.io/github/v/release/betaflight/betaflight-configurator)](https://github.com/betaflight/betaflight-configurator/releases) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/betaflight-configurator/localized.svg)](https://crowdin.com/project/betaflight-configurator) [![Build Status](https://travis-ci.com/betaflight/betaflight-configurator.svg?branch=master)](https://travis-ci.com/betaflight/betaflight-configurator) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=betaflight_betaflight-configurator&metric=alert_status)](https://sonarcloud.io/dashboard?id=betaflight_betaflight-configurator) [![Build Status](https://dev.azure.com/Betaflight/Betaflight%20Nightlies/_apis/build/status/betaflight.betaflight-configurator?branchName=master)](https://dev.azure.com/Betaflight/Betaflight%20Nightlies/_build/latest?definitionId=1&branchName=master) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
-Betaflight Configurator is a crossplatform configuration tool for the Betaflight flight control system.
-
-It runs as an application under different operating systems and allows you to configure the Betaflight software running on any supported Betaflight target. [Downloads are available in Releases.](https://github.com/betaflight/betaflight-configurator/releases)
-
-Various types of aircraft are supported by the tool and by Betaflight, e.g. quadcopters, hexacopters, octocopters and fixed-wing aircraft.
-
-## Authors
-
-Betaflight Configurator is a [fork](#credits) of the Cleanflight Configurator with support for Betaflight instead of Cleanflight.
-
-This configurator is the only configurator with support for Betaflight specific features. It will likely require that you run the latest firmware on the flight controller.
-
-If you are experiencing any problems please make sure you are running the [latest firmware version](https://github.com/betaflight/betaflight/releases/).
+Rotorflight Configurator is forked from Betaflight Configurator.
 
 ## Installation
 
 ### Standalone
 
-We provide a standalone program for Windows, Linux, Mac and Android.
+**This is the default installation method, and at some point in the future this will become the only way available for most platforms. Please use this method whenever possible.**
 
-Download the installer from [Releases.](https://github.com/betaflight/betaflight-configurator/releases)
+Download the installer from [Releases.](https://github.com/rotorflight/rotorflight-configurator/releases)
 
 ### Notes
 
@@ -34,7 +20,7 @@ The minimum required version of windows is Windows 8.
 
 #### MacOS X users
 
-Changes to the security model used in the latest versions of MacOS X 10.14 (Mojave) and 10.15 (Catalina) mean that the operating system will show an error message ('"Betaflight Configurator.app" is damaged and can’t be opened. You should move it to the Trash.') when trying to install the application. To work around this, run the following command in a terminal after installing: `sudo xattr -rd com.apple.quarantine /Applications/Betaflight\ Configurator.app`.
+Changes to the security model used in the latest versions of MacOS X 10.14 (Mojave) and 10.15 (Catalina) mean that the operating system will show an error message ('"Rotorflight Configurator.app" is damaged and can’t be opened. You should move it to the Trash.') when trying to install the application. To work around this, run the following command in a terminal after installing: `sudo xattr -rd com.apple.quarantine /Applications/Rotorflight\ Configurator.app`.
 
 #### Linux users
 
@@ -46,23 +32,8 @@ sudo usermod -aG dialout ${USER}
 
 #### Graphics Issues
 
-If you experience graphics display problems or smudged/dithered fonts display issues in Betaflight Configurator, try invoking the `betaflight-configurator` executable file with the `--disable-gpu` command line switch. This will switch off hardware graphics acceleration. Likewise, setting your graphics card antialiasing option to OFF (e.g. FXAA parameter on NVidia graphics cards) might be a remedy as well.
+If you experience graphics display problems or smudged/dithered fonts display issues in Rotorflight Configurator, try invoking the `rotorflight-configurator` executable file with the `--disable-gpu` command line switch. This will switch off hardware graphics acceleration. Likewise, setting your graphics card antialiasing option to OFF (e.g. FXAA parameter on NVidia graphics cards) might be a remedy as well.
 
-### Unstable Testing Versions
-
-Unstable testing versions of the lates builds of the configurator for most platforms can be downloaded from [here](https://github.com/betaflight/betaflight-configurator-nightlies/releases/).
-
-**Be aware that these versions are intended for testing / feedback only, and may be buggy or broken, and can cause flight controller settings to be corrupted. Caution is advised when using these versions.**
-
-## Languages
-
-**Please do not submit pull requests for translation changes, but read and follow the instructions below!**
-
-Betaflight Configurator has been translated into several languages. The application will try to detect and use your system language if a translation into this language is available. You can help [translating the application into your language](https://github.com/betaflight/betaflight/tree/master/README.md#translators);
-
-If you prefer to have the application in English or any other language, you can select your desired language in the first screen of the application.
-
-## App build via NW.js (windows/linux/macos) or Cordova (android)
 
 ### Development
 
@@ -94,6 +65,7 @@ List of possible values of `<task-name>`:
 [3] For Android platform, you need to configure an emulator or to plug an Android device with USB debugging enabled
 
 #### Build or release app for one specific platform
+
 To build or release only for one specific platform you can append the plaform after the `task-name`.
 If no platform is provided, the build for the host platform is run.
 
@@ -106,19 +78,15 @@ If no platform is provided, the build for the host platform is run.
 
 You can also use multiple platforms e.g. `yarn gulp <taskname> --osx64 --linux64`. Other platforms like `--win64`, `--linux32` and `--armv7` can be used too, but they are not officially supported, so use them at your own risk.
 
-## Support
-
-If you need help please reach out on the [betaflightgroup](https://betaflightgroup.slack.com) slack channel before raising issues on github. Register and [request slack access here](https://slack.betaflight.com).
-
 ### Issue trackers
 
-For Betaflight configurator issues raise them here
+For Rotorflight configurator issues raise them here
 
-https://github.com/betaflight/betaflight-configurator/issues
+https://github.com/rotorflight/rotorflight-configurator/issues
 
-For Betaflight firmware issues raise them here
+For Rotorflight firmware issues raise them here
 
-https://github.com/betaflight/betaflight/issues
+https://github.com/rotorflight/rotorflight-firmware/issues
 
 ## Technical details
 
@@ -126,10 +94,16 @@ The configurator is based on chrome.serial API running on Google Chrome/Chromium
 
 ## Developers
 
-We accept clean and reasonable patches, submit them!
+Please see the Rotorflight [Wiki](https://github.com/rotorflight/rotorflight/wiki)
 
 ## Credits
 
+Dr.Rudder - author and maintainer of the Rotorflight fork.
+
+James-T1 - author of Heliflight3D, another Betaflight fork for helicopters.
+
+Westie - Logo for Rotorflight and Heliflight3D
+
 ctn - primary author and maintainer of Baseflight Configurator from which Cleanflight Configurator project was forked.
 
-Hydra -  author and maintainer of Cleanflight Configurator from which this project was forked.
+Hydra -  author and maintainer of Cleanflight Configurator from which the Betaflight project was forked.
