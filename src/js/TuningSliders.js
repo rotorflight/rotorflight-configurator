@@ -245,10 +245,6 @@ TuningSliders.updatePidSlidersDisplay = function() {
         });
     });
 
-    if ($('input[id="useIntegratedYaw"]').is(':checked')) {
-        this.pidSlidersUnavailable = true;
-    }
-
     if (!this.pidSlidersUnavailable && !semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
         this.cachedPidSliderValues = true;
     }

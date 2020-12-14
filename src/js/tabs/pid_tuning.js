@@ -286,15 +286,12 @@ TABS.pid_tuning.initialize = function (callback) {
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
                 $('.pid_filter input[name="dtermLowpassDynExpo"]').val(FC.FILTER_CONFIG.dyn_lpf_curve_expo);
             }
-
-            $('input[id="useIntegratedYaw"]').prop('checked', FC.ADVANCED_TUNING.useIntegratedYaw !== 0);
         } else {
             $('.throttle_limit').hide();
 
             $('.gyroLowpassDyn').hide();
             $('.dtermLowpassDyn').hide();
             $('.dtermLowpass2TypeGroup').hide();
-            $('.integratedYaw').hide();
         }
 
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
@@ -435,11 +432,6 @@ TABS.pid_tuning.initialize = function (callback) {
             $('.vbatSagCompensation').hide();
             $('.thrustLinearization').hide();
         }
-
-        $('input[id="useIntegratedYaw"]').change(function() {
-            const checked = $(this).is(':checked');
-            $('#pidTuningIntegratedYawCaution').toggle(checked);
-        }).change();
 
         $('input[id="gyroNotch1Enabled"]').change(function() {
             const checked = $(this).is(':checked');
@@ -785,8 +777,6 @@ TABS.pid_tuning.initialize = function (callback) {
             if (FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz > 0 && FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz < FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz ) {
                 FC.FILTER_CONFIG.dterm_lowpass_type = $('.pid_filter select[name="dtermLowpassDynType"]').val();
             }
-
-            FC.ADVANCED_TUNING.useIntegratedYaw = $('input[id="useIntegratedYaw"]').is(':checked') ? 1 : 0;
         }
 
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
@@ -1643,9 +1633,6 @@ TABS.pid_tuning.initialize = function (callback) {
 
             $('#sliderPidsModeSelect').val(FC.TUNING_SLIDERS.slider_pids_mode);
 
-            // disable slides if Integrated Yaw is enabled or Slider PID mode is set to OFF
-            $('input[id="useIntegratedYaw"]').change(() => TuningSliders.updatePidSlidersDisplay());
-
             // trigger Slider Display update when PID mode is changed
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
                 $('select[id="sliderPidsModeSelect"]').change(function () {
@@ -1729,10 +1716,6 @@ TABS.pid_tuning.initialize = function (callback) {
                 }
                 // if values were previously changed manually and then sliders are reactivated, reset pids to previous valid values if available, else default
                 TuningSliders.resetPidSliders();
-                // disable integrated yaw when enabling sliders
-                if ($('input[id="useIntegratedYaw"]').is(':checked')) {
-                    $('input[id="useIntegratedYaw"]').prop('checked', true).click();
-                }
                 self.analyticsChanges['PidTuningSliders'] = "On";
             });
 
