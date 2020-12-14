@@ -1,5 +1,5 @@
 ; ------------------------------------------
-; Installer for Betaflight Configurator
+; Installer for Rotorflight Configurator
 ; ------------------------------------------
 ; It receives from the command line with /D the parameters: 
 ; version
@@ -9,18 +9,18 @@
 ; sourceFolder
 ; targetFolder
 
-#define ApplicationName "Betaflight Configurator"
-#define CompanyName "The Betaflight open source project"
-#define CompanyUrl "https://betaflight.com/"
-#define ExecutableFileName "betaflight-configurator.exe"
-#define GroupName "Betaflight"
-#define InstallerFileName "betaflight-configurator-installer_" + version + "_" + archName
-#define SourcePath "..\..\" + sourceFolder + "\betaflight-configurator\" + archName
-#define TargetFolderName "Betaflight-Configurator"
-#define UpdatesUrl "https://github.com/betaflight/betaflight-configurator/releases"
+#define ApplicationName "Rotorflight Configurator"
+#define CompanyName "The Rotorflight open source project"
+#define CompanyUrl "https://rotorflight.com/"
+#define ExecutableFileName "rotorflight-configurator.exe"
+#define GroupName "Rotorflight"
+#define InstallerFileName "rotorflight-configurator-installer_" + version + "_" + archName
+#define SourcePath "..\..\" + sourceFolder + "\rotorflight-configurator\" + archName
+#define TargetFolderName "Rotorflight-Configurator"
+#define UpdatesUrl "https://github.com/rotorflight/rotorflight-configurator/releases"
 
 [CustomMessages]
-AppName=betaflight-configurator
+AppName=rotorflight-configurator
 LaunchProgram=Start {#ApplicationName}
 
 [Files]
@@ -99,11 +99,11 @@ var
 begin
     Result := '';
     // Look into the different registry entries: win32, win64 and without user rights
-    if not RegQueryStringValue(HKLM, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Betaflight Configurator', 'UninstallString', Result) then
+    if not RegQueryStringValue(HKLM, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Rotorflight Configurator', 'UninstallString', Result) then
     begin
-        if not RegQueryStringValue(HKLM, 'SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Betaflight Configurator', 'UninstallString', Result) then
+        if not RegQueryStringValue(HKLM, 'SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Rotorflight Configurator', 'UninstallString', Result) then
         begin
-            RegQueryStringValue(HKCU, 'SOFTWARE\Betaflight\Betaflight Configurator', 'UninstallString', Result)
+            RegQueryStringValue(HKCU, 'SOFTWARE\Rotorflight\Rotorflight Configurator', 'UninstallString', Result)
         end;
     end;
 end;

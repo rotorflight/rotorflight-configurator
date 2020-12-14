@@ -1,9 +1,9 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Betaflight Configurator
-Source: https://github.com/betaflight/betaflight-configurator
+Upstream-Name: Rotorflight Configurator
+Source: https://github.com/rotorflight/rotorflight-configurator
 
 Files: *
-Copyright: Copyright 2018 The Betaflight open source project
+Copyright: Copyright 2018 The Rotorflight open source project
 License: GPL-3
 
 License: GPL-3
