@@ -290,27 +290,13 @@ TABS.pid_tuning.initialize = function (callback) {
                 $('.pid_filter input[name="dtermLowpassDynExpo"]').val(FC.FILTER_CONFIG.dyn_lpf_curve_expo);
             }
 
-            $('.pid_tuning input[name="dMinRoll"]').val(FC.ADVANCED_TUNING.dMinRoll);
-            $('.pid_tuning input[name="dMinPitch"]').val(FC.ADVANCED_TUNING.dMinPitch);
-            $('.pid_tuning input[name="dMinYaw"]').val(FC.ADVANCED_TUNING.dMinYaw);
-            $('.dminGroup input[name="dMinGain"]').val(FC.ADVANCED_TUNING.dMinGain);
-            $('.dminGroup input[name="dMinAdvance"]').val(FC.ADVANCED_TUNING.dMinAdvance);
-
             $('input[id="useIntegratedYaw"]').prop('checked', FC.ADVANCED_TUNING.useIntegratedYaw !== 0);
-            //dmin column
-            $('#pid_main .pid_titlebar2 th').attr('colspan', 6);
         } else {
             $('.throttle_limit').hide();
 
             $('.gyroLowpassDyn').hide();
             $('.dtermLowpassDyn').hide();
             $('.dtermLowpass2TypeGroup').hide();
-
-            $('.dminGroup').hide();
-            $('.dMinDisabledNote').hide();
-            //dmin column
-            $('#pid_main tr :nth-child(5)').hide();
-
             $('.integratedYaw').hide();
         }
 
@@ -457,85 +443,6 @@ TABS.pid_tuning.initialize = function (callback) {
             const checked = $(this).is(':checked');
             $('#pidTuningIntegratedYawCaution').toggle(checked);
         }).change();
-
-        function adjustDMin(dElement, dMinElement) {
-            const dValue = parseInt(dElement.val());
-            const dMinValue = parseInt(dMinElement.val());
-
-            const dMinLimit = Math.min(Math.max(dValue - 1, 0), 100);
-            if (dMinValue > dMinLimit) {
-                dMinElement.val(dMinLimit);
-            }
-
-            dMinElement.attr("max", dMinLimit);
-        }
-
-        $('.pid_tuning .ROLL input[name="d"]').change(function() {
-            const dMinElement= $('.pid_tuning input[name="dMinRoll"]');
-            adjustDMin($(this), dMinElement);
-        }).change();
-
-        $('.pid_tuning .PITCH input[name="d"]').change(function() {
-            const dMinElement= $('.pid_tuning input[name="dMinPitch"]');
-            adjustDMin($(this), dMinElement);
-        }).change();
-
-        $('.pid_tuning .YAW input[name="d"]').change(function() {
-            const dMinElement= $('.pid_tuning input[name="dMinYaw"]');
-            adjustDMin($(this), dMinElement);
-        }).change();
-
-        //dMinSwitch toggle
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-            const dMinSwitch = $('#dMinSwitch');
-            dMinSwitch.prop('checked', FC.ADVANCED_TUNING.dMinRoll > 0 || FC.ADVANCED_TUNING.dMinPitch > 0 || FC.ADVANCED_TUNING.dMinYaw > 0);
-            dMinSwitch.change(function() {
-                const checked = $(this).is(':checked');
-                if (checked) {
-                    if (FC.TUNING_SLIDERS.slider_pids_mode !== 0 && semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
-                        TuningSliders.sliderDMinRatio = 1;
-                        $('output[name="sliderDMinRatio-number"]').val(1);
-                        $('#sliderDMinRatio').val(1);
-                    }
-                    if ($('.pid_tuning input[name="dMinRoll"]').val() == 0 && $('.pid_tuning input[name="dMinPitch"]').val() == 0 && $('.pid_tuning input[name="dMinYaw"]').val() == 0) {
-                        // when enabling dmin set its value based on 0.57x of actual dmax, dmin is limited to 100
-                        $('.pid_tuning input[name="dMinRoll"]').val(Math.min(Math.round($('.pid_tuning .ROLL input[name="d"]').val() * 0.57), 100));
-                        $('.pid_tuning input[name="dMinPitch"]').val(Math.min(Math.round($('.pid_tuning .PITCH input[name="d"]').val() * 0.57), 100));
-                        $('.pid_tuning input[name="dMinYaw"]').val(Math.min(Math.round($('.pid_tuning .YAW input[name="d"]').val() * 0.57), 100));
-                        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-                            $('.pid_tuning input[name="dMinRoll"]').val(Math.min(Math.round($('.pid_tuning .ROLL input[name="d"]').val() * 0.65), 100));
-                            $('.pid_tuning input[name="dMinPitch"]').val(Math.min(Math.round($('.pid_tuning .PITCH input[name="d"]').val() * 0.65), 100));
-                            $('.pid_tuning input[name="dMinYaw"]').val(Math.min(Math.round($('.pid_tuning .YAW input[name="d"]').val() * 0.65), 100));
-                        }
-                    } else {
-                        $('.pid_tuning input[name="dMinRoll"]').val(FC.ADVANCED_TUNING.dMinRoll);
-                        $('.pid_tuning input[name="dMinPitch"]').val(FC.ADVANCED_TUNING.dMinPitch);
-                        $('.pid_tuning input[name="dMinYaw"]').val(FC.ADVANCED_TUNING.dMinYaw);
-                    }
-                    $('.dMinDisabledNote').hide();
-                    $('.dminGroup .suboption').show();
-                    $('#pid_main tr :nth-child(5)').show();
-                    $('#pid_main .pid_titlebar2 th').attr('colspan', 6);
-                    $('.derivativeText').text(i18n.getMessage("pidTuningDMax"));
-                } else {
-                    if (FC.TUNING_SLIDERS.slider_pids_mode !== 0 && semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
-                        TuningSliders.sliderDMinRatio = 2;
-                    }
-                    $('.pid_tuning input[name="dMinRoll"]').val(0);
-                    $('.pid_tuning input[name="dMinPitch"]').val(0);
-                    $('.pid_tuning input[name="dMinYaw"]').val(0);
-                    $('.dMinDisabledNote').show();
-                    $('.dminGroup .suboption').hide();
-                    $('#pid_main tr :nth-child(5)').hide();
-                    $('#pid_main .pid_titlebar2 th').attr('colspan', 5);
-                    $('.derivativeText').text(i18n.getMessage("pidTuningDerivative"));
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
-                    TuningSliders.updatePidSlidersDisplay();
-                }
-            });
-            dMinSwitch.change();
-        }
 
         $('input[id="gyroNotch1Enabled"]').change(function() {
             const checked = $(this).is(':checked');
@@ -884,12 +791,6 @@ TABS.pid_tuning.initialize = function (callback) {
                 FC.FILTER_CONFIG.dterm_lowpass_type = $('.pid_filter select[name="dtermLowpassDynType"]').val();
             }
 
-            FC.ADVANCED_TUNING.dMinRoll = parseInt($('.pid_tuning input[name="dMinRoll"]').val());
-            FC.ADVANCED_TUNING.dMinPitch = parseInt($('.pid_tuning input[name="dMinPitch"]').val());
-            FC.ADVANCED_TUNING.dMinYaw = parseInt($('.pid_tuning input[name="dMinYaw"]').val());
-            FC.ADVANCED_TUNING.dMinGain = parseInt($('.dminGroup input[name="dMinGain"]').val());
-            FC.ADVANCED_TUNING.dMinAdvance = parseInt($('.dminGroup input[name="dMinAdvance"]').val());
-
             FC.ADVANCED_TUNING.useIntegratedYaw = $('input[id="useIntegratedYaw"]').is(':checked') ? 1 : 0;
         }
 
@@ -935,7 +836,6 @@ TABS.pid_tuning.initialize = function (callback) {
             FC.TUNING_SLIDERS.slider_i_gain = TuningSliders.sliderIGain * 100;
             FC.TUNING_SLIDERS.slider_pd_ratio = TuningSliders.sliderPDRatio * 100;
             FC.TUNING_SLIDERS.slider_pd_gain = TuningSliders.sliderPDGain * 100;
-            FC.TUNING_SLIDERS.slider_dmin_ratio = TuningSliders.sliderDMinRatio * 100;
             FC.TUNING_SLIDERS.slider_ff_gain = TuningSliders.sliderFFGain * 100;
 
             FC.TUNING_SLIDERS.slider_dterm_filter = TuningSliders.sliderDTermFilter ? 1 : 0;
@@ -1750,25 +1650,6 @@ TABS.pid_tuning.initialize = function (callback) {
 
             $('#sliderPidsModeSelect').val(FC.TUNING_SLIDERS.slider_pids_mode);
 
-            if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
-                $('#dMinSwitch').change(function() {
-                    TuningSliders.setDMinFeatureEnabled($(this).is(':checked'));
-                    // switch dmin and dmax values on dmin on/off if sliders available
-                    if (!TuningSliders.pidSlidersUnavailable) {
-                        if (TuningSliders.dMinFeatureEnabled) {
-                            FC.ADVANCED_TUNING.dMinRoll = FC.PIDS[0][2];
-                            FC.ADVANCED_TUNING.dMinPitch = FC.PIDS[1][2];
-                            FC.ADVANCED_TUNING.dMinYaw = FC.PIDS[2][2];
-                        } else {
-                            FC.PIDS[0][2] = FC.ADVANCED_TUNING.dMinRoll;
-                            FC.PIDS[1][2] = FC.ADVANCED_TUNING.dMinPitch;
-                            FC.PIDS[2][2] = FC.ADVANCED_TUNING.dMinYaw;
-                        }
-                        TuningSliders.calculateNewPids();
-                    }
-                });
-            }
-
             // disable slides if Integrated Yaw is enabled or Slider PID mode is set to OFF
             $('input[id="useIntegratedYaw"]').change(() => TuningSliders.updatePidSlidersDisplay());
 
@@ -1786,7 +1667,7 @@ TABS.pid_tuning.initialize = function (callback) {
                 $('.tab-pid_tuning .advancedSlider').hide();
                 $('.tab-pid_tuning .sliderMode').hide();
             } else {
-                allPidTuningSliders = $('#sliderMasterMultiplier, #sliderRollPitchRatio, #sliderIGain, #sliderPDRatio, #sliderPDGain, #sliderDMinRatio, #sliderFFGain');
+                allPidTuningSliders = $('#sliderMasterMultiplier, #sliderRollPitchRatio, #sliderIGain, #sliderPDRatio, #sliderPDGain, #sliderFFGain');
                 $('.tab-pid-tuning .baseSlider').show();
                 $('.tab-pid-tuning .MasterSlider').show();
             }
@@ -1817,8 +1698,6 @@ TABS.pid_tuning.initialize = function (callback) {
                     TuningSliders.sliderPDRatio = scaledValue;
                 } else if (slider.is('#sliderPDGain')) {
                     TuningSliders.sliderPDGain = scaledValue;
-                } else if (slider.is('#sliderDMinRatio')) {
-                    TuningSliders.sliderDMinRatio = scaledValue;
                 } else if (slider.is('#sliderFFGain')) {
                     TuningSliders.sliderFFGain = scaledValue;
                 }
@@ -1826,10 +1705,6 @@ TABS.pid_tuning.initialize = function (callback) {
                 self.analyticsChanges['PidTuningSliders'] = "On";
             });
             allPidTuningSliders.mouseup(function() {
-                // readjust dmin maximums
-                $('.pid_tuning .ROLL input[name="d"]').change();
-                $('.pid_tuning .PITCH input[name="d"]').change();
-                $('.pid_tuning .YAW input[name="d"]').change();
                 TuningSliders.updatePidSlidersDisplay();
             });
             // reset to middle with double click
@@ -1846,8 +1721,6 @@ TABS.pid_tuning.initialize = function (callback) {
                     TuningSliders.sliderPDRatio = 1;
                 } else if (slider.is('#sliderPDGain')) {
                     TuningSliders.sliderPDGain = 1;
-                } else if (slider.is('#sliderDMinRatio')) {
-                    TuningSliders.sliderDMinRatio = 1;
                 } else if (slider.is('#sliderFFGain')) {
                     TuningSliders.sliderFFGain = 1;
                 }
@@ -2476,9 +2349,6 @@ TABS.pid_tuning.updatePIDColors = function(clear = false) {
         });
     });
 
-    setTuningElementColor($('.pid_tuning input[name="dMinRoll"]'), FC.ADVANCED_TUNING_ACTIVE.dMinRoll, FC.ADVANCED_TUNING.dMinRoll);
-    setTuningElementColor($('.pid_tuning input[name="dMinPitch"]'), FC.ADVANCED_TUNING_ACTIVE.dMinPitch, FC.ADVANCED_TUNING.dMinPitch);
-    setTuningElementColor($('.pid_tuning input[name="dMinYaw"]'), FC.ADVANCED_TUNING_ACTIVE.dMinYaw, FC.ADVANCED_TUNING.dMinYaw);
     setTuningElementColor($('.pid_tuning .ROLL input[name="f"]'), FC.ADVANCED_TUNING_ACTIVE.feedforwardRoll, FC.ADVANCED_TUNING.feedforwardRoll);
     setTuningElementColor($('.pid_tuning .PITCH input[name="f"]'), FC.ADVANCED_TUNING_ACTIVE.feedforwardPitch, FC.ADVANCED_TUNING.feedforwardPitch);
     setTuningElementColor($('.pid_tuning .YAW input[name="f"]'), FC.ADVANCED_TUNING_ACTIVE.feedforwardYaw, FC.ADVANCED_TUNING.feedforwardYaw);
