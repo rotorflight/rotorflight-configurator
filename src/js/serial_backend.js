@@ -257,7 +257,7 @@ function onOpen(openInfo) {
 
                 MSP.send_message(MSPCodes.MSP_FC_VARIANT, false, false, function () {
                     analytics.setFlightControllerData(analytics.DATA.FIRMWARE_TYPE, FC.CONFIG.flightControllerIdentifier);
-                    if (FC.CONFIG.flightControllerIdentifier === 'BTFL') {
+                    if (FC.CONFIG.flightControllerIdentifier === 'RTFL') {
                         MSP.send_message(MSPCodes.MSP_FC_VERSION, false, false, function () {
                             analytics.setFlightControllerData(analytics.DATA.FIRMWARE_VERSION, FC.CONFIG.flightControllerVersion);
 
