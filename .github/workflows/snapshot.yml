@@ -1,0 +1,106 @@
+name: Snapshot
+
+on:
+  push:
+    tags:
+      - 'snapshot/*'
+
+jobs:
+
+  linux:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.16.3
+
+    - name: Set build variables
+      run: echo "release=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
+
+    - name: Initialise build environment
+      run: yarn install
+
+    - name: Build release for linux64
+      run: yarn gulp release --linux64
+
+    - name: Move artifacts
+      run: mv release/rotorflight-configurator* .
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: rotorflight-configurator-snapshot-linux-${{ env.release }}
+        path: rotorflight-configurator*
+
+
+  macos:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.16.3
+
+    - name: Set build variables
+      run: echo "release=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
+
+    - name: Initialise build environment
+      run: yarn install
+
+    - name: Build release for MacOS
+      run: yarn gulp release --osx64
+
+    - name: Move artifacts
+      run: mv release/rotorflight-configurator* .
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: rotorflight-configurator-snapshot-macos-${{ env.release }}
+        path: rotorflight-configurator*
+
+
+  windows:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.16.3
+
+    - name: Set build variables
+      run: |
+        $snapshot = $env:GITHUB_REF -replace '.*/',''
+        echo "release=$snapshot" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+    - name: Initialise build environment
+      run: yarn install
+
+    - name: Build release for windows
+      run: yarn gulp release --win32
+
+    - name: Move artifacts
+      run: move release/rotorflight-configurator* .
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: rotorflight-configurator-snapshot-windows-${{ env.release }}
+        path: rotorflight-configurator*
+
