@@ -71,8 +71,6 @@ TABS.pid_tuning.initialize = function (callback) {
         $('#content').load("./tabs/pid_tuning.html", process_html);
     }
 
-    const vbatpidcompensationIsUsed = semver.gte(FC.CONFIG.apiVersion, "1.16.0") && semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_44);
-
     function pid_and_rc_to_form() {
         self.setProfile();
         if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
@@ -111,9 +109,6 @@ TABS.pid_tuning.initialize = function (callback) {
             $('.pid_tuning input[name="rc_yaw_expo"]').hide();
             $('.pid_tuning input[name="rc_expo"]').attr("rowspan", "3");
         }
-
-        $('.vbatpidcompensation').toggle(vbatpidcompensationIsUsed);
-        $('input[id="vbatpidcompensation"]').prop('checked', FC.ADVANCED_TUNING.vbatPidCompensation !== 0);
 
         if (semver.gte(FC.CONFIG.apiVersion, "1.16.0")) {
             $('#pid-tuning .delta select').val(FC.ADVANCED_TUNING.deltaMethod);
@@ -694,18 +689,6 @@ TABS.pid_tuning.initialize = function (callback) {
         FC.FILTER_CONFIG.gyro_lowpass_hz = parseInt($('.pid_filter input[name="gyroLowpassFrequency"]').val());
         FC.FILTER_CONFIG.dterm_lowpass_hz = parseInt($('.pid_filter input[name="dtermLowpassFrequency"]').val());
         FC.FILTER_CONFIG.yaw_lowpass_hz = parseInt($('.pid_filter input[name="yawLowpassFrequency"]').val());
-
-        if (vbatpidcompensationIsUsed) {
-            const element = $('input[id="vbatpidcompensation"]');
-            const value = element.is(':checked') ? 1 : 0;
-            let analyticsValue = undefined;
-            if (value !== FC.ADVANCED_TUNING.vbatPidCompensation) {
-                analyticsValue = element.is(':checked');
-            }
-            self.analyticsChanges['VbatPidCompensation'] = analyticsValue;
-
-            FC.ADVANCED_TUNING.vbatPidCompensation = value;
-        }
 
         if (semver.gte(FC.CONFIG.apiVersion, "1.16.0")) {
             FC.ADVANCED_TUNING.deltaMethod = $('#pid-tuning .delta select').val();
