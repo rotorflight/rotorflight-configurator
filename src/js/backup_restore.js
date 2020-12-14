@@ -414,11 +414,6 @@ function configuration_restore(callback) {
 
             for (let profileIndex = 0; profileIndex < 3; profileIndex++) {
                 const RC = configuration.profiles[profileIndex].RC;
-                // TPA breakpoint was added
-                if (!RC.dynamic_THR_breakpoint) {
-                    RC.dynamic_THR_breakpoint = 1500; // firmware default
-                }
-
                 // Roll and pitch rates were split
                 RC.roll_rate = RC.roll_pitch_rate;
                 RC.pitch_rate = RC.roll_pitch_rate;
