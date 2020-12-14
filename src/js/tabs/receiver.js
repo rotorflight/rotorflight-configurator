@@ -108,7 +108,8 @@ TABS.receiver.initialize = function (callback) {
             i18n.getMessage('controlAxisRoll'),
             i18n.getMessage('controlAxisPitch'),
             i18n.getMessage('controlAxisYaw'),
-            i18n.getMessage('controlAxisThrottle')
+            i18n.getMessage('controlAxisThrottle'),
+            i18n.getMessage('controlAxisCollective')
         ];
 
         const barContainer = $('.tab-receiver .bars');
@@ -169,7 +170,7 @@ TABS.receiver.initialize = function (callback) {
         $(window).on('resize', tab.resize).resize(); // trigger so labels get correctly aligned on creation
 
         // handle rcmap & rssi aux channel
-        let rcMapLetters = ['A', 'E', 'R', 'T', '1', '2', '3', '4'];
+        let rcMapLetters = ['A', 'E', 'R', 'T', 'C', '1', '2', '3'];
 
         let strBuffer = [];
         for (let i = 0; i < FC.RC_MAP.length; i++) {
@@ -230,9 +231,9 @@ TABS.receiver.initialize = function (callback) {
         // rssi
         const rssi_channel_e = $('select[name="rssi_channel"]');
         rssi_channel_e.append(`<option value="0">${i18n.getMessage("receiverRssiChannelDisabledOption")}</option>`);
-        //1-4 reserved for Roll Pitch Yaw & Throttle, starting at 5
-        for (let i = 5; i < FC.RC.active_channels + 1; i++) {
-            rssi_channel_e.append(`<option value="${i}">${i18n.getMessage("controlAxisAux" + (i-4))}</option>`);
+        //1-5 reserved for Roll Pitch Yaw Throttle Collective, starting at 6
+        for (let i = 6; i < FC.RC.active_channels + 1; i++) {
+            rssi_channel_e.append(`<option value="${i}">${i18n.getMessage("controlAxisAux" + (i-5))}</option>`);
         }
 
         $('select[name="rssi_channel"]').val(FC.RSSI_CONFIG.channel);
@@ -398,7 +399,7 @@ TABS.receiver.initialize = function (callback) {
             }
 
             // catch rc map
-            rcMapLetters = ['A', 'E', 'R', 'T', '1', '2', '3', '4'];
+            rcMapLetters = ['A', 'E', 'R', 'T', 'C', '1', '2', '3'];
             strBuffer = $('input[name="rcmap"]').val().split('');
 
             for (let i = 0; i < FC.RC_MAP.length; i++) {

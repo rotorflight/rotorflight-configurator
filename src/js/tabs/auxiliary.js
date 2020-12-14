@@ -249,7 +249,7 @@ TABS.auxiliary.initialize = function (callback) {
     }
 
     function process_html() {
-        let auxChannelCount = FC.RC.active_channels - 4;
+        let auxChannelCount = FC.RC.active_channels - 5;
 
         configureRangeTemplate(auxChannelCount);
         configureLinkTemplate();
@@ -488,10 +488,10 @@ TABS.auxiliary.initialize = function (callback) {
 
             auto_select_channel(FC.RC.channels, FC.RC.active_channels, FC.RSSI_CONFIG.channel);
 
-            auxChannelCount = FC.RC.active_channels - 4;
+            auxChannelCount = FC.RC.active_channels - 5;
 
             for (let i = 0; i < (auxChannelCount); i++) {
-                update_marker(i, limit_channel(FC.RC.channels[i + 4]));
+                update_marker(i, limit_channel(FC.RC.channels[i + 5]));
             }
 
         }
@@ -529,8 +529,8 @@ TABS.auxiliary.initialize = function (callback) {
             if (largest < 100) return fillPrevChannelsValues();
 
             const indexOfMaxValue = diff_array.indexOf(largest);
-            if (indexOfMaxValue >= 4 && indexOfMaxValue != RSSI_channel - 1){ //set channel
-                auto_option.parent().val(indexOfMaxValue - 4);
+            if (indexOfMaxValue >= 5 && indexOfMaxValue != RSSI_channel - 1){ //set channel
+                auto_option.parent().val(indexOfMaxValue - 5);
             }
 
             return fillPrevChannelsValues();
