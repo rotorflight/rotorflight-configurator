@@ -2,12 +2,6 @@
     font-weight: normal;
 }
 
-.tab-receiver .graphAndLabel {
-    float: left;
-    width: 100%;
-    margin-bottom: 0;
-}
-
 .tab-receiver .spacer {
     padding-left: 10px;
     padding-right: 10px;
@@ -36,12 +30,12 @@
 
 .tab-receiver .bars .name {
     padding: 0 10px 0 0;
-    width: 60px;
+    width: 80px;
     text-align: right;
 }
 
 .tab-receiver .bars .meter {
-    width: calc(100% - 70px);
+    width: calc(100% - 90px);
 }
 
 .tab-receiver .bars .meter-bar {
@@ -309,12 +303,16 @@
     width: 100%;
 }
 
-.tab-receiver .rc-smoothing-channels {
+.tab-receiver .rc-smoothing-channels td {
     margin-bottom: 5px;
-    clear: left;
     padding-bottom: 5px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: none;
     width: 100%;
+    clear: left;
+}
+
+.tab-receiver .rc-smoothing-channels-last td {
+    border-bottom: 1px solid var(--subtleAccent);
 }
 
 .tab-receiver .rcSmoothing table td {
@@ -343,159 +341,17 @@
     -webkit-appearance: slider-horizontal;
 }
 
-/*Plot Control*/
-
-.tab-receiver .plot_control {
-    float: right;
-    width: 181px;
-    height: 203px;
-    margin: 0;
-    background-color: #ECECEC;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+.tab-receiver .rc-smoothing-roll,
+.tab-receiver .rc-smoothing-pitch,
+.tab-receiver .rc-smoothing-yaw,
+.tab-receiver .rc-smoothing-throttle,
+.tab-receiver .rc-smoothing-collective {
+    padding-bottom: 5px;
+    padding-left: 8px;
 }
 
-.tab-receiver .plot_control .table {
-    display:table;
-    width: 100%;
-    table-layout:fixed;
-    border-collapse:separate;
-    border-spacing:5px;
-    box-sizing: border-box;
-    padding: 5px 5px 5px 3px;
-}
-
-.tab-receiver .plot_control .row-container {
-    display: table-row-group;
-}
-
-.tab-receiver .plot_control .receiver-button a {
-    background-color: var(--accent);
-    border-radius: 3px;
-    border: 1px solid #e8b423;
-    color: #000;
-    font-size: 10px;
-    line-height: 17px;
-    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    display: block;
-    text-align: center;
-  }
-  
-  .tab-receiver .plot_control .row {
-    display: table-row;
-  }
-  
-  .tab-receiver .plot_control .left-cell {
-    display: table-cell;
-    vertical-align: middle;
-    font-weight: bold;
-  }
-
-  .tab-receiver .plot_control .right-cell {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: right;
-    width: 87px;
-    font-size: smaller;
-  }
-  
-  .tab-receiver .plot_control select {
-    width: 100%;
-    border: 1px solid var(--subtleAccent);
-    border-radius: 3px;
-  }
-  
-  .tab-receiver .plot_control .value {
-    padding: 4px;
-    color: #fff;
-    border-radius: 3px;
-  }
-  
-  .tab-receiver .plot_control .ch1 {
-      background-color: #F1453D;
-  }
-  
-  .tab-receiver .plot_control .ch2 {
-      background-color: #673FB4;
-  }
-  
-  .tab-receiver .plot_control .ch3 {
-      background-color: #2B98F0;
-  }
-  
-  .tab-receiver .plot_control .ch4 {
-      background-color: #1FBCD2;
-  }
-
-.tab-receiver #RX_plot {
-    width: calc(100% - 201px);
-    height: 200px;
-}
-
-.tab-receiver #RX_plot .line:nth-child(1) {
-    stroke: #f1453d;
-}
-
-.tab-receiver #RX_plot .line:nth-child(2) {
-    stroke: #673fb4;
-}
-
-.tab-receiver #RX_plot .line:nth-child(3) {
-    stroke: #2b98f0;
-}
-
-.tab-receiver #RX_plot .line:nth-child(4) {
-    stroke: #1fbcd2;
-}
-
-.tab-receiver #RX_plot .line:nth-child(5) {
-    stroke: #159588;
-}
-
-.tab-receiver #RX_plot .line:nth-child(6) {
-    stroke: #50ae55;
-}
-
-.tab-receiver #RX_plot .line:nth-child(7) {
-    stroke: #cdda49;
-}
-
-.tab-receiver #RX_plot .line:nth-child(8) {
-    stroke: #fdc02f;
-}
-
-.tab-receiver #RX_plot .line:nth-child(9) {
-    stroke: #fc5830;
-}
-
-.tab-receiver #RX_plot .line:nth-child(10) {
-    stroke: #785549;
-}
-
-.tab-receiver #RX_plot .line:nth-child(11) {
-    stroke: #9e9e9e;
-}
-
-.tab-receiver #RX_plot .line:nth-child(12) {
-    stroke: #7a6614;
-}
-
-.tab-receiver #RX_plot .line:nth-child(13) {
-    stroke: #cf267d;
-}
-
-.tab-receiver #RX_plot .line:nth-child(14) {
-    stroke: #7a1464;
-}
-
-.tab-receiver #RX_plot .line:nth-child(15) {
-    stroke: #3a7a14;
-}
-
-.tab-receiver #RX_plot .line:nth-child(16) {
-    stroke: #14407a;
+.tab-receiver .rc-smoothing-roll {
+    padding-top: 8px;
 }
 
 .tab-receiver .buttons {
@@ -540,7 +396,7 @@
 .tab-receiver .model_preview_cell {
     position: relative;
     width: 100%;
-    height: 180px;
+    height: 360px;
 }
 
 .tab-receiver .model_preview {
@@ -554,6 +410,10 @@
     border-bottom-right-radius: 5px;
 }
 
+.tab-receiver .full_height {
+    height: calc(100% - 10px);
+}
+
 @media all and (max-width: 575px) {
     .tab-receiver .bars {
         margin-bottom: 10px;
@@ -563,18 +423,6 @@
         padding-left: 0px;
         padding-right: 0px;
         width: 100%;
-    }
-
-    .tab-receiver #RX_plot {
-        width: calc(100% - 120px);
-    }
-
-    .tab-receiver .plot_control {
-        width: 112px;
-    }
-
-    .tab-receiver .plot_control .row {
-        display: inherit;
     }
 }
 
