@@ -671,32 +671,13 @@ const FC = {
             'SUMH',
             'XBUS_MODE_B',
             'XBUS_MODE_B_RJ01',
+            'IBUS',
+            'JETIEXBUS',
+            'CRSF',
+            'SPEKTRUM2048/SRXL',
+            'TARGET_CUSTOM',
+            'FPORT',
         ];
-
-        if (semver.gte(apiVersion, "1.15.0")) {
-            serialRxTypes.push('IBUS');
-        }
-
-        if ((flightControllerIdentifier === 'BTFL' && semver.gte(flightControllerVersion, "2.6.0")) ||
-            (flightControllerIdentifier === 'CLFL' && semver.gte(apiVersion, API_VERSION_1_31))) {
-                serialRxTypes.push('JETIEXBUS');
-        }
-
-        if (semver.gte(apiVersion, API_VERSION_1_31)) {
-            serialRxTypes.push('CRSF');
-        }
-
-        if (semver.gte(apiVersion, "1.24.0")) {
-            serialRxTypes.push('SPEKTRUM2048/SRXL');
-        }
-
-        if (semver.gte(apiVersion, API_VERSION_1_35)) {
-            serialRxTypes.push('TARGET_CUSTOM');
-        }
-
-        if (semver.gte(apiVersion, API_VERSION_1_37)) {
-            serialRxTypes.push('FrSky FPort');
-        }
 
         if (semver.gte(apiVersion, API_VERSION_1_42)) {
             serialRxTypes.push('SPEKTRUM SRXL2');
