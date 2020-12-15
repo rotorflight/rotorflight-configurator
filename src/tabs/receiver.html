@@ -7,13 +7,13 @@
         <div class="note">
             <p i18n="receiverHelp"></p>
         </div>
+
         <div class="grid-row">
-            <div class="grid-col col6 bars"></div>
             <div class="grid-col col6">
 
                 <!-- RECEIVER -->
                 <div class="receiver">
-                    <div class="gui_box receiver grey">
+                    <div class="gui_box grey">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="configurationReceiver"></div>
                         </div>
@@ -69,7 +69,6 @@
                 </div>
 
                 <!-- RSSI CHANNEL-->
-
                 <div class="rssi_channel_wrapper grey">
                     <div class="head" i18n="receiverRssiChannel"></div>
                     <select name="rssi_channel">
@@ -82,8 +81,7 @@
                     </div>
                     <div class="hybrid_element">
                         <input type="text" name="rcmap" spellcheck="false" />
-                        <select class="hybrid_helper"
-                                name="rcmap_helper">
+                        <select class="hybrid_helper" name="rcmap_helper">
                             <option i18n="receiverChannelDefaultOption" value="AETRC123"></option>
                             <option value="AETRC123">FrSky</option>
                             <option value="AETR1C23">Futaba / Hitec</option>
@@ -92,6 +90,8 @@
                         </select>
                     </div>
                 </div>
+
+                <!-- MINMAX -->
                 <div class="gui_box tunings grey">
                     <table class="sticks">
                         <tr>
@@ -121,6 +121,8 @@
                         </tr>
                     </table>
                 </div>
+
+                <!-- DEADBAND -->
                 <div class="gui_box tunings grey">
                     <table class="deadband">
                         <tr>
@@ -143,10 +145,82 @@
                         </tr>
                     </table>
                 </div>
+
+                <!-- SMOOTHING -->
                 <div class="gui_box grey tunings topspacer rcSmoothing">
-                    <table class="rcSmoothing-table">
+                    <table class="rc_smoothing">
                         <tr>
                             <th colspan="3" i18n="receiverRcSmoothing"></th>
+                        </tr>
+                        <tr class="rc-smoothing-channels">
+                            <td>
+                                <div class="rc-smoothing-roll">
+                                    <input type="checkbox" class="toggle" name="rcSmoothingRoll" id="rcSmoothingRoll"/>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <div>
+                                    <label>
+                                        <span i18n="receiverRcSmoothingRoll"></span>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="rc-smoothing-channels">
+                            <td>
+                                <div class="rc-smoothing-pitch">
+                                    <input type="checkbox" class="toggle" name="rcSmoothingPitch" id="rcSmoothingPitch"/>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <div>
+                                    <label>
+                                        <span i18n="receiverRcSmoothingPitch"></span>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="rc-smoothing-channels">
+                            <td>
+                                <div class="rc-smoothing-yaw">
+                                    <input type="checkbox" class="toggle" name="rcSmoothingYaw" id="rcSmoothingYaw"/>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <div>
+                                    <label>
+                                        <span i18n="receiverRcSmoothingYaw"></span>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="rc-smoothing-channels">
+                            <td>
+                                <div class="rc-smoothing-throttle">
+                                    <input type="checkbox" class="toggle" name="rcSmoothingThrottle" id="rcSmoothingThrottle"/>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <div>
+                                    <label>
+                                        <span i18n="receiverRcSmoothingThrottle"></span>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="rc-smoothing-channels rc-smoothing-channels-last">
+                            <td>
+                                <div class="rc-smoothing-throttle">
+                                    <input type="checkbox" class="toggle" name="rcSmoothingCollective" id="rcSmoothingCollective"/>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <div>
+                                    <label>
+                                        <span i18n="receiverRcSmoothingCollective"></span>
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         <tr class="rc-smoothing-type">
                             <td>
@@ -159,51 +233,6 @@
                                 <div>
                                     <label>
                                         <span i18n="receiverRcSmoothingType"></span>
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="rc-smoothing-channels">
-                            <td>
-                                <select name="rcSmoothingChannels-select">
-                                    <option value="0">-</option>
-                                    <option value="1">R</option>
-                                    <option value="2">P</option>
-                                    <option value="3">RP</option>
-                                    <option value="4">Y</option>
-                                    <option value="5">RY</option>
-                                    <option value="6">PY</option>
-                                    <option value="7">RPY</option>
-                                    <option value="8">T</option>
-                                    <option value="9">RT</option>
-                                    <option value="10">PT</option>
-                                    <option value="11">RPT</option>
-                                    <option value="12">YT</option>
-                                    <option value="13">RYT</option>
-                                    <option value="14">PYT</option>
-                                    <option value="15">RPYT</option>
-                                    <option value="16">C</option>
-                                    <option value="17">RC</option>
-                                    <option value="18">PC</option>
-                                    <option value="19">RPC</option>
-                                    <option value="20">YC</option>
-                                    <option value="21">RYC</option>
-                                    <option value="22">PYC</option>
-                                    <option value="23">RPYC</option>
-                                    <option value="24">TC</option>
-                                    <option value="25">RTC</option>
-                                    <option value="26">PTC</option>
-                                    <option value="27">RPTC</option>
-                                    <option value="28">YTC</option>
-                                    <option value="29">RYTC</option>
-                                    <option value="30">PYTC</option>
-                                    <option value="31">RPYTC</option>
-                                </select>
-                            </td>
-                            <td colspan="2">
-                                <div>
-                                    <label>
-                                        <span i18n="receiverRcSmoothingChannel"></span>
                                     </label>
                                 </div>
                             </td>
@@ -349,6 +378,21 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+
+            <div class="grid-col col6">
+
+                <!-- RECEIVER BARS -->
+                <div class="gui_box grey margin-bottom">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="receiverBars"></div>
+                    </div>
+                    <div class="spacer_box">
+                        <div class="bars"></div>
+                    </div>
+                </div>
+
+                <!-- MODEL PREVIEW -->
                 <div class="gui_box grey tunings topspacer">
                     <table class="pid_titlebar">
                         <thead>
@@ -368,79 +412,12 @@
                     </table>
                 </div>
             </div>
+
         </div>
-        <div class="gui_box grey">
-            <div class="spacer">
-                <div class="wrapper graphAndLabel">
-                     <svg id="RX_plot">
-                        <g class="grid x" transform="translate(40, 180)"></g>
-                        <g class="grid y" transform="translate(40, 10)"></g>
-                        <g class="data" transform="translate(41, 1)"></g>
-                        <g class="axis x" transform="translate(40, 180)"></g>
-                        <g class="axis y" transform="translate(40, 10)"></g>
-                    </svg>
-     
-                    <div class="plot_control">
-                        <div class="table">
-                            <div class="sensor row">
-                                <div class="left-cell receiver-button">
-                                    <a class="reset_rate" href="#" i18n="receiverResetRefreshRate" i18n_title="receiverResetRefreshRateTitle"></a>
-                                </div>
-                                <div class="right-cell">
-                                    <select name="rx_refresh_rate" i18n_title="receiverRefreshRateTitle">
-                                        <option value="10">10 ms</option>
-                                        <option value="20">20 ms</option>
-                                        <option value="30">30 ms</option>
-                                        <option value="40">40 ms</option>
-                                        <option value="50" selected="selected">50 ms</option>
-                                        <option value="100">100 ms</option>
-                                        <option value="250">250 ms</option>
-                                        <option value="500">500 ms</option>
-                                        <option value="1000">1000 ms</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row-container">
-                                <div class="row">
-                                    <div class="left-cell">
-                                        Roll [A]:
-                                    </div>
-                                    <div class="ch1 value right-cell">
-                                        0
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="left-cell">
-                                        Pitch [E]:
-                                    </div>
-                                    <div class="ch2 value right-cell">
-                                        0
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="left-cell">
-                                        Yaw [R]:
-                                    </div>
-                                    <div class="ch3 value right-cell">
-                                        0
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="left-cell">
-                                        Throttle [T]:
-                                    </div>
-                                    <div class="ch4 value right-cell">
-                                        0
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="clear-both"></div>
     </div>
+
     <div class="content_toolbar">
         <div class="btn sticks_btn">
             <a class="sticks" href="#" i18n="receiverButtonSticks"></a>

@@ -1889,8 +1889,26 @@
     "pidTuningPidSettings": {
         "message": "PID Controller Settings"
     },
+    "receiverBars": {
+        "message": "Receiver Channels"
+    },
     "receiverRcSmoothing": {
         "message": "RC Smoothing"
+    },
+    "receiverRcSmoothingRoll": {
+        "message": "Roll Channel Smoothing"
+    },
+    "receiverRcSmoothingPitch": {
+        "message": "Pitch Channel Smoothing"
+    },
+    "receiverRcSmoothingYaw": {
+        "message": "Yaw Channel Smoothing"
+    },
+    "receiverRcSmoothingThrottle": {
+        "message": "Throttle Channel Smoothing"
+    },
+    "receiverRcSmoothingCollective": {
+        "message": "Collective Channel Smoothing"
     },
     "receiverRcSmoothingAuto": {
         "message": "Auto"

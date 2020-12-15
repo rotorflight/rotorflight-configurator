@@ -5,7 +5,6 @@ TABS.receiver = {
     useSuperExpo: false,
     deadband: 0,
     yawDeadband: 0,
-    analyticsChanges: {},
     needReboot: false,
 };
 
@@ -42,16 +41,12 @@ TABS.receiver.initialize = function (callback) {
     }
 
     function load_rx_config() {
-        const nextCallback = load_mixer_config;
+        const nextCallback = load_html;
         if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
             MSP.send_message(MSPCodes.MSP_RX_CONFIG, false, false, nextCallback);
         } else {
             nextCallback();
         }
-    }
-
-    function load_mixer_config() {
-        MSP.send_message(MSPCodes.MSP_MIXER_CONFIG, false, false, load_html);
     }
 
     function load_html() {
@@ -61,7 +56,6 @@ TABS.receiver.initialize = function (callback) {
     MSP.send_message(MSPCodes.MSP_FEATURE_CONFIG, false, false, get_rc_data);
 
     function process_html() {
-        self.analyticsChanges = {};
 
         const featuresElement = $('.tab-receiver .features');
 
@@ -112,17 +106,15 @@ TABS.receiver.initialize = function (callback) {
             i18n.getMessage('controlAxisCollective')
         ];
 
-        const barContainer = $('.tab-receiver .bars');
-        let auxIndex = 1;
-
         const numBars = (FC.RC.active_channels > 0) ? FC.RC.active_channels : 8;
+        const barContainer = $('.tab-receiver .bars');
 
-        for (let i = 0; i < numBars; i++) {
+        for (let i = 0, aux = 1; i < numBars; i++) {
             let name;
             if (i < bar_names.length) {
                 name = bar_names[i];
             } else {
-                name = i18n.getMessage("controlAxisAux" + (auxIndex++));
+                name = i18n.getMessage("controlAxisAux" + (aux++));
             }
 
             barContainer.append('\
@@ -168,6 +160,15 @@ TABS.receiver.initialize = function (callback) {
         };
 
         $(window).on('resize', tab.resize).resize(); // trigger so labels get correctly aligned on creation
+
+        function getReceiverData() {
+            MSP.send_message(MSPCodes.MSP_RC, false, false, function () {
+                for (let i = 0; i < FC.RC.active_channels; i++) {
+                    meterFillArray[i].css('width', ((FC.RC.channels[i] - meterScale.min) / (meterScale.max - meterScale.min) * 100).clamp(0, 100) + '%');
+                    meterLabelArray[i].text(FC.RC.channels[i]);
+                }
+            })
+        }
 
         // handle rcmap & rssi aux channel
         let rcMapLetters = ['A', 'E', 'R', 'T', 'C', '1', '2', '3'];
@@ -251,7 +252,6 @@ TABS.receiver.initialize = function (callback) {
                 newValue = $(this).find('option:selected').text();
                 updateSaveButton(true);
             }
-            tab.analyticsChanges['SerialRx'] = newValue;
 
             FC.RX_CONFIG.serialrx_provider = serialRxValue;
         });
@@ -315,7 +315,6 @@ TABS.receiver.initialize = function (callback) {
                     newValue = $(this).find('option:selected').text();
                     updateSaveButton(true);
                 }
-                tab.analyticsChanges['SPIRXProtocol'] = newValue;
 
                 FC.RX_CONFIG.rxSpiProtocol = value;
             });
@@ -406,6 +405,14 @@ TABS.receiver.initialize = function (callback) {
                 FC.RC_MAP[i] = strBuffer.indexOf(rcMapLetters[i]);
             }
 
+            // catch smoothing channels
+            const rcSmoothingChannels =
+                  $('#rcSmoothingRoll').is(':checked')       ?  1 : 0 +
+                  $('#rcSmoothingPitch').is(':checked')      ?  2 : 0 +
+                  $('#rcSmoothingYaw').is(':checked')        ?  4 : 0 +
+                  $('#rcSmoothingThrottle').is(':checked')   ?  8 : 0 +
+                  $('#rcSmoothingCollective').is(':checked') ? 16 : 0;
+
             // catch rssi aux
             FC.RSSI_CONFIG.channel = parseInt($('select[name="rssi_channel"]').val());
 
@@ -419,8 +426,8 @@ TABS.receiver.initialize = function (callback) {
                 FC.RX_CONFIG.rcSmoothingInputCutoff = parseInt($('input[name="rcSmoothingInputHz-number"]').val());
                 FC.RX_CONFIG.rcSmoothingDerivativeCutoff = parseInt($('input[name="rcSmoothingDerivativeCutoff-number"]').val());
                 FC.RX_CONFIG.rcSmoothingDerivativeType = parseInt($('select[name="rcSmoothingDerivativeType-select"]').val());
-                FC.RX_CONFIG.rcInterpolationChannels = parseInt($('select[name="rcSmoothingChannels-select"]').val());
                 FC.RX_CONFIG.rcSmoothingInputType = parseInt($('select[name="rcSmoothingInputType-select"]').val());
+                FC.RX_CONFIG.rcInterpolationChannels = rcSmoothingChannels;
             }
 
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
@@ -466,9 +473,6 @@ TABS.receiver.initialize = function (callback) {
                     });
                 }
             }
-
-            analytics.sendChangeEvents(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, tab.analyticsChanges);
-            tab.analyticsChanges = {};
 
             MSP.send_message(MSPCodes.MSP_SET_RX_MAP, mspHelper.crunch(MSPCodes.MSP_SET_RX_MAP), false, save_rssi_config);
         }
@@ -571,14 +575,18 @@ TABS.receiver.initialize = function (callback) {
                 }
             }).change();
 
+            $('#rcSmoothingRoll').prop('checked', (FC.RX_CONFIG.rcInterpolationChannels & 1));
+            $('#rcSmoothingPitch').prop('checked', (FC.RX_CONFIG.rcInterpolationChannels & 2));
+            $('#rcSmoothingYaw').prop('checked', (FC.RX_CONFIG.rcInterpolationChannels & 4));
+            $('#rcSmoothingThrottle').prop('checked', (FC.RX_CONFIG.rcInterpolationChannels & 8));
+            $('#rcSmoothingCollective').prop('checked', (FC.RX_CONFIG.rcInterpolationChannels & 16));
+
             const rcSmoothingDerivativeType = $('select[name="rcSmoothingDerivativeType-select"]');
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
                 rcSmoothingDerivativeType.append($(`<option value="3">${i18n.getMessage("receiverRcSmoothingDerivativeTypeAuto")}</option>`));
             }
-
             rcSmoothingDerivativeType.val(FC.RX_CONFIG.rcSmoothingDerivativeType);
-            const rcSmoothingChannels = $('select[name="rcSmoothingChannels-select"]');
-            rcSmoothingChannels.val(FC.RX_CONFIG.rcInterpolationChannels);
+
             const rcSmoothingInputType = $('select[name="rcSmoothingInputType-select"]');
             rcSmoothingInputType.val(FC.RX_CONFIG.rcSmoothingInputType);
 
@@ -614,162 +622,12 @@ TABS.receiver.initialize = function (callback) {
         // Only show the MSP control sticks if the MSP Rx feature is enabled
         $(".sticks_btn").toggle(FC.FEATURE_CONFIG.features.isEnabled('RX_MSP'));
 
-        const labelsChannelData = {
-            ch1: [],
-            ch2: [],
-            ch3: [],
-            ch4: [],
-        };
-
-        $(`.plot_control .ch1, .plot_control .ch2, .plot_control .ch3, .plot_control .ch4`).each(function (){
-            const element = $(this);
-            if (element.hasClass('ch1')){
-                labelsChannelData.ch1.push(element);
-            } else if (element.hasClass('ch2')){
-                labelsChannelData.ch2.push(element);
-            } else if (element.hasClass('ch3')){
-                labelsChannelData.ch3.push(element);
-            } else if (element.hasClass('ch4')){
-                labelsChannelData.ch4.push(element);
-            }
-        });
-
-        let plotUpdateRate;
-        const rxRefreshRate = $('select[name="rx_refresh_rate"]');
-
-        $('a.reset_rate').click(function () {
-            plotUpdateRate = 50;
-            rxRefreshRate.val(plotUpdateRate).change();
-        });
-
-        rxRefreshRate.change(function () {
-            plotUpdateRate = parseInt($(this).val(), 10);
-
-            // save update rate
-            ConfigStorage.set({'rx_refresh_rate': plotUpdateRate});
-
-            function get_rc_refresh_data() {
-                MSP.send_message(MSPCodes.MSP_RC, false, false, update_ui);
-            }
-
-            // setup plot
-            const rxPlotData = new Array(FC.RC.active_channels);
-            for (let i = 0; i < rxPlotData.length; i++) {
-                rxPlotData[i] = [];
-            }
-
-            let samples = 0;
-            const svg = d3.select("svg");
-            const RX_plot_e = $('#RX_plot');
-            const margin = {top: 20, right: 0, bottom: 10, left: 40};
-            let width, height, widthScale, heightScale;
-
-            function update_receiver_plot_size() {
-                width = RX_plot_e.width() - margin.left - margin.right;
-                height = RX_plot_e.height() - margin.top - margin.bottom;
-
-                widthScale.range([0, width]);
-                heightScale.range([height, 0]);
-            }
-
-            function update_ui() {
-
-                if (FC.RC.active_channels > 0) {
-
-                    // update bars with latest data
-                    for (let i = 0; i < FC.RC.active_channels; i++) {
-                        meterFillArray[i].css('width', ((FC.RC.channels[i] - meterScale.min) / (meterScale.max - meterScale.min) * 100).clamp(0, 100) + '%');
-                        meterLabelArray[i].text(FC.RC.channels[i]);
-                    }
-
-                    labelsChannelData.ch1[0].text(FC.RC.channels[0]);
-                    labelsChannelData.ch2[0].text(FC.RC.channels[1]);
-                    labelsChannelData.ch3[0].text(FC.RC.channels[2]);
-                    labelsChannelData.ch4[0].text(FC.RC.channels[3]);
-
-                    // push latest data to the main array
-                    for (let i = 0; i < FC.RC.active_channels; i++) {
-                        rxPlotData[i].push([samples, FC.RC.channels[i]]);
-                    }
-
-                    // Remove old data from array
-                    while (rxPlotData[0].length > 300) {
-                        for (let i = 0; i < rxPlotData.length; i++) {
-                            rxPlotData[i].shift();
-                        }
-                    }
-
-                }
-
-                // update required parts of the plot
-                widthScale = d3.scale.linear().
-                    domain([(samples - 299), samples]);
-
-                heightScale = d3.scale.linear().
-                    domain([800, 2200]);
-
-                update_receiver_plot_size();
-
-                const xGrid = d3.svg.axis().
-                    scale(widthScale).
-                    orient("bottom").
-                    tickSize(-height, 0, 0).
-                    tickFormat("");
-
-                const yGrid = d3.svg.axis().
-                    scale(heightScale).
-                    orient("left").
-                    tickSize(-width, 0, 0).
-                    tickFormat("");
-
-                const xAxis = d3.svg.axis().
-                    scale(widthScale).
-                    orient("bottom").
-                    tickFormat(function (d) {return d;});
-
-                const yAxis = d3.svg.axis().
-                    scale(heightScale).
-                    orient("left").
-                    tickFormat(function (d) {return d;});
-
-                const line = d3.svg.line().
-                    x(function (d) {return widthScale(d[0]);}).
-                    y(function (d) {return heightScale(d[1]);});
-
-                svg.select(".x.grid").call(xGrid);
-                svg.select(".y.grid").call(yGrid);
-                svg.select(".x.axis").call(xAxis);
-                svg.select(".y.axis").call(yAxis);
-
-                const data = svg.select("g.data");
-                const lines = data.selectAll("path").data(rxPlotData, function (d, i) {return i;});
-                lines.enter().append("path").attr("class", "line");
-                lines.attr('d', line);
-
-                samples++;
-            }
-
-            // timer initialization
-            GUI.interval_remove('receiver_pull');
-
-            // enable RC data pulling
-            GUI.interval_add('receiver_pull', get_rc_refresh_data, plotUpdateRate, true);
-        });
-
-        ConfigStorage.get('rx_refresh_rate', function (result) {
-            if (result.rxRefreshRate) {
-                rxRefreshRate.val(result.rxRefreshRate).change();
-            } else {
-                rxRefreshRate.change(); // start with default value
-            }
-        });
-
         // Setup model for preview
         tab.initModelPreview();
         tab.renderModel();
 
         // TODO: Combine two polls together
-        GUI.interval_add('receiver_pull_for_model_preview', tab.getReceiverData, 33, false);
+        GUI.interval_add('receiver_pull_for_model_preview', getReceiverData, 33, false);
 
         // status data pulled via separate timer with static speed
         GUI.interval_add('status_pull', function status_pull() {
@@ -778,10 +636,6 @@ TABS.receiver.initialize = function (callback) {
 
         GUI.content_ready(callback);
     }
-};
-
-TABS.receiver.getReceiverData = function () {
-    MSP.send_message(MSPCodes.MSP_RC, false, false);
 };
 
 TABS.receiver.initModelPreview = function () {
