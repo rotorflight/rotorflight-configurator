@@ -27,16 +27,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
     }
 
     function load_config() {
-        MSP.send_message(MSPCodes.MSP_FEATURE_CONFIG, false, false, load_beeper_config);
-    }
-
-    function load_beeper_config() {
-        const nextCallBack = load_serial_config;
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-            MSP.send_message(MSPCodes.MSP_BEEPER_CONFIG, false, false, nextCallBack);
-        } else {
-            nextCallBack();
-        }
+        MSP.send_message(MSPCodes.MSP_FEATURE_CONFIG, false, false, load_serial_config);
     }
 
     function load_serial_config() {
@@ -193,66 +184,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
         const features_e = $('.tab-configuration .features');
 
         FC.FEATURE_CONFIG.features.generateElements(features_e);
-
-        // Dshot Beeper
-        const dshotBeeper_e = $('.tab-configuration .dshotbeeper');
-        const dshotBeacon_e = $('.tab-configuration .dshotbeacon');
-        const dshotBeeperSwitch = $('#dshotBeeperSwitch');
-        const dshotBeeperBeaconTone = $('select.dshotBeeperBeaconTone');
-        const dshotBeaconCondition_e = $('tbody.dshotBeaconConditions');
-        const dshotBeaconSwitch_e = $('tr.dshotBeaconSwitch');
-
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-            for (let i = 1; i <= 5; i++) {
-                dshotBeeperBeaconTone.append('<option value="' + (i) + '">'+ (i) + '</option>');
-            }
-            dshotBeeper_e.show();
-        } else {
-            dshotBeeper_e.hide();
-        }
-
-        dshotBeeperBeaconTone.change(function() {
-            FC.BEEPER_CONFIG.dshotBeaconTone = dshotBeeperBeaconTone.val();
-        });
-
-        dshotBeeperBeaconTone.val(FC.BEEPER_CONFIG.dshotBeaconTone);
-
-        const template = $('.beepers .beeper-template');
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_39)) {
-            dshotBeaconSwitch_e.hide();
-            FC.BEEPER_CONFIG.dshotBeaconConditions.generateElements(template, dshotBeaconCondition_e);
-
-            $('input.condition', dshotBeaconCondition_e).change(function () {
-                const element = $(this);
-                FC.BEEPER_CONFIG.dshotBeaconConditions.updateData(element);
-            });
-        } else {
-            dshotBeaconCondition_e.hide();
-
-            dshotBeeperSwitch.change(function() {
-                if ($(this).is(':checked')) {
-                    dshotBeacon_e.show();
-                    if (dshotBeeperBeaconTone.val() == 0) {
-                        dshotBeeperBeaconTone.val(1).change();
-                    }
-                } else {
-                    dshotBeeperBeaconTone.val(0).change();
-                    dshotBeacon_e.hide();
-                }
-            });
-
-            dshotBeeperSwitch.prop('checked', FC.BEEPER_CONFIG.dshotBeaconTone !== 0).change();
-        }
-
-        // Analog Beeper
-        const destination = $('.beepers .beeper-configuration');
-        const beeper_e = $('.tab-configuration .beepers');
-
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-            FC.BEEPER_CONFIG.beepers.generateElements(template, destination);
-        } else {
-            beeper_e.hide();
-        }
 
         // translate to user-selected language
         i18n.localizePage();
@@ -977,11 +908,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             updateTabList(FC.FEATURE_CONFIG.features);
         });
 
-        $('input.condition', beeper_e).change(function () {
-            const element = $(this);
-            FC.BEEPER_CONFIG.beepers.updateData(element);
-        });
-
         checkShowDisarmDelay();
         checkUpdateGpsControls();
 
@@ -1060,17 +986,8 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             }
 
             function save_feature_config() {
-                const nextCallBack = save_beeper_config;
-                MSP.send_message(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG), false, nextCallBack);
-            }
-
-            function save_beeper_config() {
                 const nextCallBack = save_misc;
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                    MSP.send_message(MSPCodes.MSP_SET_BEEPER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_BEEPER_CONFIG), false, nextCallBack);
-                } else {
-                    nextCallBack();
-                }
+                MSP.send_message(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG), false, nextCallBack);
             }
 
             function save_misc() {

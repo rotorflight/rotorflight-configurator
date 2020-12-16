@@ -1,0 +1,89 @@
+
+.tab-beepers input,
+.tab-beepers select {
+    border: 1px solid var(--subtleAccent);
+    width: 60px;
+    height: 20px;
+    float: left;
+    margin-right: 15px;
+    border-radius: 3px;
+}
+
+.tab-beepers span {
+    margin: 0;
+}
+
+.tab-beepers table {
+    margin-bottom: 0;
+    width: 100%;
+    float: left;
+}
+
+.tab-beepers table,
+.tab-beepers table th,
+.tab-beepers table td {
+    padding: 0;
+    text-align: left;
+}
+
+.tab-beepers table th {
+    padding: 3px;
+    border-bottom: 1px solid var(--subtleAccent);
+}
+
+.tab-beepers table td {
+    padding: 5px 3px;
+    border-bottom: 1px solid var(--subtleAccent);
+}
+
+.tab-beepers table tr td:first-child {
+    text-align: left;
+    width: 55px;
+}
+
+.tab-beepers table thead tr:first-child {
+    background-color: #ececec;
+}
+
+.tab-beepers .select
+{
+    border-bottom: 1px solid var(--subtleAccent);
+    margin-bottom: 5px;
+    margin-right: 10px;
+    padding-bottom: 10px;
+    height: 20px;
+    width: 100%;
+    float: left;
+    clear: left;
+}
+
+.tab-beepers .spacer_box {
+    padding-bottom: 10px;
+    float: left;
+    width: calc(100% - 20px);
+}
+
+.tab-beepers .beeper-configuration tr:last-child td,
+.tab-beepers .dshot-beeper-configuration tr:last-child td,
+.tab-beepers .dshotBeaconConditions tr:last-child td,
+.tab-beepers .other tr:last-child td {
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.tab-beepers .gui_box {
+    margin-bottom: 10px;
+    float: left;
+    font-weight: bold;
+    min-height: auto;
+}
+
+.tab-beepers .gui_box span {
+    font-size: 11px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 19px;
+    color: #4f4f4f;
+}
+
