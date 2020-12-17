@@ -12,62 +12,6 @@
 
                 <div class="grid-col col6">
 
-                    <!-- SYSTEM CONFIGURATION -->
-                    <div class="systemconfig">
-                        <div class="gui_box grey">
-                            <div class="gui_box_titlebar">
-                                <div class="spacer_box_title" i18n="configurationSystem"></div>
-                            </div>
-                            <div class="spacer_box">
-                                <div class="note">
-                                    <p class="systemconfigNote" i18n="configurationLoopTimeHelp"></p>
-                                </div>
-                                <div class="select gyroUse32kHz">
-                                    <div style="float: left; height: 20px; margin-right: 15px; margin-left: 3px;">
-                                        <input type="checkbox" id="gyroUse32kHz" class="toggle" />
-                                    </div>
-                                    <span class="freelabel" i18n="configurationGyroUse32kHz"></span>
-                                    <div class="helpicon cf_tip" i18n_title="configurationGyroUse32kHzHelp"></div>
-                                </div>
-                                <div class="select">
-                                    <input type="text" class="gyroFrequency" readonly />
-                                    <select class="gyroSyncDenom">
-                                        <!-- list generated here -->
-                                    </select>
-                                    <span i18n="configurationGyroSyncDenom"></span>
-                                </div>
-                                <div class="select">
-                                    <select class="pidProcessDenom">
-                                        <!-- list generated here -->
-                                    </select>
-                                    <span i18n="configurationPidProcessDenom"></span>
-                                    <div class="helpicon cf_tip" i18n_title="configurationPidProcessDenomHelp"></div>
-                                </div>
-                                <div class="hardwareSelection">
-                                    <div class="select">
-                                        <div style="float: left; height: 20px; margin-right: 15px; margin-left: 3px;">
-                                            <input type="checkbox" id="accHardwareSwitch" class="toggle" />
-                                        </div>
-                                        <span class="freelabel" i18n="configurationAccHardware"></span>
-                                    </div>
-                                    <div class="select">
-                                        <div style="float: left; height: 20px; margin-right: 15px; margin-left: 3px;">
-                                            <input type="checkbox" id="baroHardwareSwitch" class="toggle" />
-                                        </div>
-                                        <span class="freelabel" i18n="configurationBaroHardware"></span>
-                                    </div>
-                                    <div class="select">
-                                        <div style="float: left; height: 20px; margin-right: 15px; margin-left: 3px;">
-                                            <input type="checkbox" id="magHardwareSwitch" class="toggle" />
-                                        </div>
-                                        <span class="freelabel" i18n="configurationMagHardware"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END SYSTEM CONFIGURATION-->
-
                     <!-- PERSONALIZATION-->
                     <div class="gui_box grey miscSettings">
                         <div class="gui_box_titlebar">
@@ -75,8 +19,9 @@
                         </div>
                         <div class="spacer_box">
                             <div class="number">
-                                <label> <input type="text" name="craftName" maxlength="32" style="width:100px;"/> <span
-                                    i18n="craftName"></span>
+                                <label>
+                                    <input type="text" name="craftName" maxlength="32" style="width:100px;"/>
+                                    <span i18n="craftName"></span>
                                 </label>
                             </div>
                         </div>
@@ -184,9 +129,66 @@
                         </div>
                     </div>
                     <!-- END GPS-->
+
                 </div> <!-- END grid-col col6 -->
 
                 <div class="grid-col col6">
+
+                    <!-- SYSTEM CONFIGURATION -->
+                    <div class="systemconfig">
+                        <div class="gui_box grey">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="configurationSystem"></div>
+                            </div>
+                            <div class="spacer_box">
+                                <div class="note">
+                                    <p class="systemconfigNote" i18n="configurationLoopTimeHelp"></p>
+                                </div>
+                                <div class="select gyroUse32kHz">
+                                    <div style="float: left; height: 20px; margin-right: 15px; margin-left: 3px;">
+                                        <input type="checkbox" id="gyroUse32kHz" class="toggle" />
+                                    </div>
+                                    <span class="freelabel" i18n="configurationGyroUse32kHz"></span>
+                                    <div class="helpicon cf_tip" i18n_title="configurationGyroUse32kHzHelp"></div>
+                                </div>
+                                <div class="select">
+                                    <input type="text" class="gyroFrequency" readonly />
+                                    <select class="gyroSyncDenom">
+                                        <!-- list generated here -->
+                                    </select>
+                                    <span i18n="configurationGyroSyncDenom"></span>
+                                </div>
+                                <div class="select">
+                                    <select class="pidProcessDenom">
+                                        <!-- list generated here -->
+                                    </select>
+                                    <span i18n="configurationPidProcessDenom"></span>
+                                    <div class="helpicon cf_tip" i18n_title="configurationPidProcessDenomHelp"></div>
+                                </div>
+                                <div class="hardwareSelection">
+                                    <div class="select">
+                                        <div style="float: left; height: 20px; margin-right: 15px; margin-left: 3px;">
+                                            <input type="checkbox" id="accHardwareSwitch" class="toggle" />
+                                        </div>
+                                        <span class="freelabel" i18n="configurationAccHardware"></span>
+                                    </div>
+                                    <div class="select">
+                                        <div style="float: left; height: 20px; margin-right: 15px; margin-left: 3px;">
+                                            <input type="checkbox" id="baroHardwareSwitch" class="toggle" />
+                                        </div>
+                                        <span class="freelabel" i18n="configurationBaroHardware"></span>
+                                    </div>
+                                    <div class="select">
+                                        <div style="float: left; height: 20px; margin-right: 15px; margin-left: 3px;">
+                                            <input type="checkbox" id="magHardwareSwitch" class="toggle" />
+                                        </div>
+                                        <span class="freelabel" i18n="configurationMagHardware"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SYSTEM CONFIGURATION-->
 
                     <!-- BOARD ORIENTATION -->
                     <div class="board acc">
