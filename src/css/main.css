@@ -1166,6 +1166,18 @@ li.active .ic_led {
     background-image: url(../images/icons/cf_icon_led_white.svg);
 }
 
+.ic_status {
+    background-image: url(../images/icons/cf_icon_sensors_grey.svg);
+}
+
+.ic_status:hover {
+    background-image: url(../images/icons/cf_icon_sensors_white.svg);
+}
+
+li.active .ic_status {
+    background-image: url(../images/icons/cf_icon_sensors_white.svg);
+}
+
 .ic_sensors {
     background-image: url(../images/icons/cf_icon_sensors_grey.svg);
 }

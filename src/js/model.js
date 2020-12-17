@@ -27,7 +27,7 @@ var Model = function (wrapper, canvas) {
     this.camera = new THREE.PerspectiveCamera(10, this.wrapper.width() / this.wrapper.height(), 1, 10000);
 
     // move camera away from the model
-    this.camera.position.z = 500;
+    this.camera.position.z = 600;
 
     // some light
     var light = new THREE.AmbientLight(0x404040);

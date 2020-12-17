@@ -29,6 +29,7 @@ const GuiControl = function () {
         'help',
     ];
     this.defaultAllowedFCTabsWhenConnected = [
+        'status',
         'setup',
         'failsafe',
         'transponder',
