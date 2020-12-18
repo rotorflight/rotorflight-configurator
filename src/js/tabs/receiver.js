@@ -1,7 +1,6 @@
 'use strict';
 
 TABS.receiver = {
-    rateChartHeight: 117,
     useSuperExpo: false,
     deadband: 0,
     yawDeadband: 0
@@ -14,53 +13,132 @@ TABS.receiver.initialize = function (callback) {
         GUI.active_tab = 'receiver';
     }
 
-    function get_rc_data() {
-        MSP.send_message(MSPCodes.MSP_RC, false, false, get_rssi_config);
-    }
-
-    function get_rssi_config() {
-        MSP.send_message(MSPCodes.MSP_RSSI_CONFIG, false, false, get_rc_tuning);
-    }
-
-    function get_rc_tuning() {
-        MSP.send_message(MSPCodes.MSP_RC_TUNING, false, false, get_rc_map);
-    }
-
-    function get_rc_map() {
-        MSP.send_message(MSPCodes.MSP_RX_MAP, false, false, load_rc_configs);
-    }
-
-    function load_rc_configs() {
-        const nextCallback = load_rx_config;
-        if (semver.gte(FC.CONFIG.apiVersion, "1.15.0")) {
-            MSP.send_message(MSPCodes.MSP_RC_DEADBAND, false, false, nextCallback);
-        } else {
-            nextCallback();
-        }
+    function load_feature_config() {
+        MSP.send_message(MSPCodes.MSP_FEATURE_CONFIG, false, false, load_rx_config);
     }
 
     function load_rx_config() {
-        const nextCallback = load_mixer_config;
-        if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
-            MSP.send_message(MSPCodes.MSP_RX_CONFIG, false, false, nextCallback);
-        } else {
-            nextCallback();
-        }
+        MSP.send_message(MSPCodes.MSP_RX_CONFIG, false, false, load_rc_map);
     }
 
-    function load_mixer_config() {
-        MSP.send_message(MSPCodes.MSP_MIXER_CONFIG, false, false, load_html);
+    function load_rc_map() {
+        MSP.send_message(MSPCodes.MSP_RX_MAP, false, false, load_rc_deadband);
+    }
+
+    function load_rc_deadband() {
+        MSP.send_message(MSPCodes.MSP_RC_DEADBAND, false, false, load_rc_tuning);
+    }
+
+    function load_rc_tuning() {
+        MSP.send_message(MSPCodes.MSP_RC_TUNING, false, false, load_rssi_config);
+    }
+
+    function load_rssi_config() {
+        MSP.send_message(MSPCodes.MSP_RSSI_CONFIG, false, false, load_rc_data);
+    }
+
+    function load_rc_data() {
+        MSP.send_message(MSPCodes.MSP_RC, false, false, load_html);
     }
 
     function load_html() {
         $('#content').load("./tabs/receiver.html", process_html);
     }
 
-    MSP.send_message(MSPCodes.MSP_FEATURE_CONFIG, false, false, get_rc_data);
+    load_feature_config();
 
     function process_html() {
+
+        const features_e = $('.tab-receiver .features');
+        FC.FEATURE_CONFIG.features.generateElements(features_e);
+
         // translate to user-selected language
         i18n.localizePage();
+
+        function checkShowRxBoxes() {
+            if (FC.FEATURE_CONFIG.features.isEnabled('RX_SERIAL')) {
+                $('div.serialRXBox').show();
+            } else {
+                $('div.serialRXBox').hide();
+            }
+            if (FC.FEATURE_CONFIG.features.isEnabled('RX_SPI')) {
+                $('div.spiRxBox').show();
+            } else {
+                $('div.spiRxBox').hide();
+            }
+        }
+
+        features_e.change(function () {
+            const element = $(this);
+            FC.FEATURE_CONFIG.features.updateData(element);
+            checkShowRxBoxes();
+        });
+
+        checkShowRxBoxes();
+
+        const serialRXSelectEl = $('select.serialRX');
+        FC.getSerialRxTypes().forEach((serialRxType, index) => {
+            serialRXSelectEl.append(`<option value="${index}">${serialRxType}</option>`);
+        });
+
+        serialRXSelectEl.change(function () {
+            const serialRxValue = parseInt($(this).val());
+            FC.RX_CONFIG.serialrx_provider = serialRxValue;
+        });
+
+        // select current serial RX type
+        serialRXSelectEl.val(FC.RX_CONFIG.serialrx_provider);
+
+        // SPI Rx available at 1.40
+        const spiRxTypes = [
+            'NRF24_V202_250K',
+            'NRF24_V202_1M',
+            'NRF24_SYMA_X',
+            'NRF24_SYMA_X5C',
+            'NRF24_CX10',
+            'CX10A',
+            'NRF24_H8_3D',
+            'NRF24_INAV',
+            'FRSKY_D',
+            'FRSKY_X',
+            'A7105_FLYSKY',
+            'A7105_FLYSKY_2A',
+            'NRF24_KN',
+        ];
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
+            spiRxTypes.push(
+                'SFHSS',
+                'SPEKTRUM',
+                'FRSKY_X_LBT',
+            );
+        }
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
+            spiRxTypes.push(
+                'REDPINE',
+            );
+        }
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
+            spiRxTypes.push(
+                'FRSKY_X_V2',
+                'FRSKY_X_LBT_V2',
+            );
+        }
+
+        const spiRx_e = $('select.spiRx');
+        for (let i = 0; i < spiRxTypes.length; i++) {
+            spiRx_e.append('<option value="' + i + '">' + spiRxTypes[i] + '</option>');
+        }
+
+        spiRx_e.change(function () {
+            const value = parseInt($(this).val());
+            FC.RX_CONFIG.rxSpiProtocol = value;
+        });
+
+        // select current serial RX type
+        spiRx_e.val(FC.RX_CONFIG.rxSpiProtocol);
 
         if (semver.lt(FC.CONFIG.apiVersion, "1.15.0")) {
             $('.deadband').hide();
@@ -92,7 +170,7 @@ TABS.receiver.initialize = function (callback) {
                 tab.updateRcInterpolationParameters();
             }).change();
         } else {
-            $('.tab-receiver div.rcInterpolation').hide();
+            $('div.rcInterpolation').hide();
         }
 
         // generate bars
@@ -223,7 +301,8 @@ TABS.receiver.initialize = function (callback) {
         // rssi
         const rssi_channel_e = $('select[name="rssi_channel"]');
         rssi_channel_e.append(`<option value="0">${i18n.getMessage("receiverRssiChannelDisabledOption")}</option>`);
-        //1-5 reserved for Roll Pitch Yaw Throttle Collective, starting at 6
+        //rssi_channel_e.append(`<option value="42">${i18n.getMessage("receiverRssiChannelAnalogOption")}</option>`);
+        // 1-5 reserved for Roll Pitch Yaw Throttle Collective, starting at 6
         for (let i = 6; i < FC.RC.active_channels + 1; i++) {
             rssi_channel_e.append(`<option value="${i}">${i18n.getMessage("controlAxisAux" + (i-5))}</option>`);
         }
@@ -348,7 +427,7 @@ TABS.receiver.initialize = function (callback) {
 
         // RC Smoothing
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_40)) {
-            $('.tab-receiver .rcSmoothing').show();
+            $('.rcSmoothing').show();
 
             const rc_smoothing_protocol_e = $('select[name="rcSmoothing-select"]');
             rc_smoothing_protocol_e.change(function () {
@@ -361,36 +440,36 @@ TABS.receiver.initialize = function (callback) {
             const rcSmoothingDerivativeNumberElement = $('input[name="rcSmoothingDerivativeCutoff-number"]');
             rcSmoothingNumberElement.val(FC.RX_CONFIG.rcSmoothingInputCutoff);
             rcSmoothingDerivativeNumberElement.val(FC.RX_CONFIG.rcSmoothingDerivativeCutoff);
-            $('.tab-receiver .rcSmoothing-input-cutoff').show();
+            $('.rcSmoothing-input-cutoff').show();
             $('select[name="rcSmoothing-input-manual-select"]').val("1");
             if (FC.RX_CONFIG.rcSmoothingInputCutoff == 0) {
-                $('.tab-receiver .rcSmoothing-input-cutoff').hide();
+                $('.rcSmoothing-input-cutoff').hide();
                 $('select[name="rcSmoothing-input-manual-select"]').val("0");
             }
             $('select[name="rcSmoothing-input-manual-select"]').change(function () {
                 if ($(this).val() == 0) {
                     rcSmoothingNumberElement.val(0);
-                    $('.tab-receiver .rcSmoothing-input-cutoff').hide();
+                    $('.rcSmoothing-input-cutoff').hide();
                 }
                 if ($(this).val() == 1) {
                     rcSmoothingNumberElement.val(FC.RX_CONFIG.rcSmoothingInputCutoff);
-                    $('.tab-receiver .rcSmoothing-input-cutoff').show();
+                    $('.rcSmoothing-input-cutoff').show();
                 }
             }).change();
 
-            $('.tab-receiver .rcSmoothing-derivative-cutoff').show();
+            $('.rcSmoothing-derivative-cutoff').show();
             $('select[name="rcSmoothing-input-derivative-select"]').val("1");
             if (FC.RX_CONFIG.rcSmoothingDerivativeCutoff == 0) {
                 $('select[name="rcSmoothing-input-derivative-select"]').val("0");
-                $('.tab-receiver .rcSmoothing-derivative-cutoff').hide();
+                $('.rcSmoothing-derivative-cutoff').hide();
             }
             $('select[name="rcSmoothing-input-derivative-select"]').change(function () {
                 if ($(this).val() == 0) {
-                    $('.tab-receiver .rcSmoothing-derivative-cutoff').hide();
+                    $('.rcSmoothing-derivative-cutoff').hide();
                     rcSmoothingDerivativeNumberElement.val(0);
                 }
                 if ($(this).val() == 1) {
-                    $('.tab-receiver .rcSmoothing-derivative-cutoff').show();
+                    $('.rcSmoothing-derivative-cutoff').show();
                     rcSmoothingDerivativeNumberElement.val(FC.RX_CONFIG.rcSmoothingDerivativeCutoff);
                 }
             }).change();
@@ -409,9 +488,9 @@ TABS.receiver.initialize = function (callback) {
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
                 $('select[name="rcSmoothing-input-manual-select"], select[name="rcSmoothing-input-derivative-select"]').change(function() {
                     if ($('select[name="rcSmoothing-input-manual-select"]').val() == 0 || $('select[name="rcSmoothing-input-derivative-select"]').val() == 0) {
-                        $('.tab-receiver .rcSmoothing-auto-smoothness').show();
+                        $('.rcSmoothing-auto-smoothness').show();
                     } else {
-                        $('.tab-receiver .rcSmoothing-auto-smoothness').hide();
+                        $('.rcSmoothing-auto-smoothness').hide();
                     }
                 });
                 $('select[name="rcSmoothing-input-manual-select"]').change();
@@ -419,20 +498,20 @@ TABS.receiver.initialize = function (callback) {
                 const rcSmoothingAutoSmoothness = $('input[name="rcSmoothingAutoSmoothness-number"]');
                 rcSmoothingAutoSmoothness.val(FC.RX_CONFIG.rcSmoothingAutoSmoothness);
             } else {
-                $('.tab-receiver .rcSmoothing-auto-smoothness').hide();
+                $('.rcSmoothing-auto-smoothness').hide();
             }
 
             updateInterpolationView();
         } else {
-            $('.tab-receiver .rcInterpolation').show();
-            $('.tab-receiver .rcSmoothing-derivative-cutoff').hide();
-            $('.tab-receiver .rcSmoothing-input-cutoff').hide();
-            $('.tab-receiver .rcSmoothing-derivative-type').hide();
-            $('.tab-receiver .rcSmoothing-input-type').hide();
-            $('.tab-receiver .rcSmoothing-derivative-manual').hide();
-            $('.tab-receiver .rcSmoothing-input-manual').hide();
-            $('.tab-receiver .rc-smoothing-type').hide();
-            $('.tab-receiver .rcSmoothing-auto-smoothness').hide();
+            $('.rcInterpolation').show();
+            $('.rcSmoothing-derivative-cutoff').hide();
+            $('.rcSmoothing-input-cutoff').hide();
+            $('.rcSmoothing-derivative-type').hide();
+            $('.rcSmoothing-input-type').hide();
+            $('.rcSmoothing-derivative-manual').hide();
+            $('.rcSmoothing-input-manual').hide();
+            $('.rc-smoothing-type').hide();
+            $('.rcSmoothing-auto-smoothness').hide();
         }
 
         // Only show the MSP control sticks if the MSP Rx feature is enabled
@@ -457,7 +536,7 @@ TABS.receiver.initialize = function (callback) {
                 labelsChannelData.ch4.push(element);
             }
         });
-        
+
         let plotUpdateRate;
         const rxRefreshRate = $('select[name="rx_refresh_rate"]');
 
@@ -510,7 +589,7 @@ TABS.receiver.initialize = function (callback) {
                     labelsChannelData.ch2[0].text(FC.RC.channels[1]);
                     labelsChannelData.ch3[0].text(FC.RC.channels[2]);
                     labelsChannelData.ch4[0].text(FC.RC.channels[3]);
-    
+
                     // push latest data to the main array
                     for (let i = 0; i < FC.RC.active_channels; i++) {
                         rxPlotData[i].push([samples, FC.RC.channels[i]]);
@@ -674,41 +753,41 @@ TABS.receiver.refresh = function (callback) {
 TABS.receiver.updateRcInterpolationParameters = function () {
     if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
         if ($('select[name="rcInterpolation-select"]').val() === '3') {
-            $('.tab-receiver .rc-interpolation-manual').show();
+            $('.rc-interpolation-manual').show();
         } else {
-            $('.tab-receiver .rc-interpolation-manual').hide();
+            $('.rc-interpolation-manual').hide();
         }
     }
 };
 
 function updateInterpolationView() {
-    $('.tab-receiver .rcInterpolation').hide();
-    $('.tab-receiver .rcSmoothing-derivative-cutoff').show();
-    $('.tab-receiver .rcSmoothing-input-cutoff').show();
-    $('.tab-receiver .rcSmoothing-derivative-type').show();
-    $('.tab-receiver .rcSmoothing-input-type').show();
-    $('.tab-receiver .rcSmoothing-derivative-manual').show();
-    $('.tab-receiver .rcSmoothing-input-manual').show();
+    $('.rcInterpolation').hide();
+    $('.rcSmoothing-derivative-cutoff').show();
+    $('.rcSmoothing-input-cutoff').show();
+    $('.rcSmoothing-derivative-type').show();
+    $('.rcSmoothing-input-type').show();
+    $('.rcSmoothing-derivative-manual').show();
+    $('.rcSmoothing-input-manual').show();
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
         if (FC.RX_CONFIG.rcSmoothingDerivativeCutoff == 0 || FC.RX_CONFIG.rcSmoothingInputCutoff == 0) {
-            $('.tab-receiver .rcSmoothing-auto-smoothness').show();
+            $('.rcSmoothing-auto-smoothness').show();
         }
     }
 
     if (FC.RX_CONFIG.rcSmoothingType == 0) {
-        $('.tab-receiver .rcInterpolation').show();
-        $('.tab-receiver .rcSmoothing-derivative-cutoff').hide();
-        $('.tab-receiver .rcSmoothing-input-cutoff').hide();
-        $('.tab-receiver .rcSmoothing-derivative-type').hide();
-        $('.tab-receiver .rcSmoothing-input-type').hide();
-        $('.tab-receiver .rcSmoothing-derivative-manual').hide();
-        $('.tab-receiver .rcSmoothing-input-manual').hide();
-        $('.tab-receiver .rcSmoothing-auto-smoothness').hide();
+        $('.rcInterpolation').show();
+        $('.rcSmoothing-derivative-cutoff').hide();
+        $('.rcSmoothing-input-cutoff').hide();
+        $('.rcSmoothing-derivative-type').hide();
+        $('.rcSmoothing-input-type').hide();
+        $('.rcSmoothing-derivative-manual').hide();
+        $('.rcSmoothing-input-manual').hide();
+        $('.rcSmoothing-auto-smoothness').hide();
     }
     if (FC.RX_CONFIG.rcSmoothingDerivativeCutoff == 0) {
-        $('.tab-receiver .rcSmoothing-derivative-cutoff').hide();
+        $('.rcSmoothing-derivative-cutoff').hide();
     }
     if (FC.RX_CONFIG.rcSmoothingInputCutoff == 0) {
-        $('.tab-receiver .rcSmoothing-input-cutoff').hide();
+        $('.rcSmoothing-input-cutoff').hide();
     }
 }

@@ -4,26 +4,52 @@
         <div class="cf_doc_version_bt">
             <a id="button-documentation" href="https://github.com/rotorflight/rotorflight/releases" target="_blank" rel="noopener noreferrer"></a>
         </div>
-        <div class="note">
-            <p i18n="receiverHelp"></p>
-        </div>
         <div class="grid-row">
-            <div class="grid-col col6 bars"></div>
             <div class="grid-col col6">
+                <div class="gui_box grey" "receiver">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="receiverSelect"></div>
+                    </div>
+                    <div class="spacer_box">
+                        <select class="features rxMode" name="rxMode">
+                            <!-- list generated here -->
+                        </select>
+                        <span i18n="receiverMode"></span>
+                    </div>
+                    <div class="serialRXBox spacer_box">
+                        <div class="note">
+                            <p i18n="receiverSerialRXHelp"></p>
+                        </div>
+                        <select class="serialRX">
+                            <!-- list generated here -->
+                        </select>
+                        <span i18n="receiverSerialRX"></span>
+                    </div>
+                    <div class="spiRxBox spacer_box">
+                        <div class="note">
+                            <p i18n="receiverSpiRxHelp"></p>
+                        </div>
+                        <select class="spiRx">
+                            <!-- list generated here -->
+                        </select>
+                        <span i18n="receiverSpiRX"></span>
+                    </div>
+                </div>
+
                 <div class="rssi_channel_wrapper grey">
-                    <div class="head" i18n="receiverRssiChannel"></div>
+                    <div class="head" i18n="receiverRssiInput"></div>
                     <select name="rssi_channel">
                         <!-- list generated here -->
                     </select>
                 </div>
+                
                 <div class="rcmap_wrapper grey">
                     <div class="head">
                         <span i18n="receiverChannelMap" i18n_title="receiverChannelMapTitle"></span>
                     </div>
                     <div class="hybrid_element">
                         <input type="text" name="rcmap" spellcheck="false" />
-                        <select class="hybrid_helper"
-                                name="rcmap_helper">
+                        <select class="hybrid_helper" name="rcmap_helper">
                             <option i18n="receiverChannelDefaultOption" value="AETRC123"></option>
                             <option value="AETRC123">FrSky</option>
                             <option value="AETR1C23">Futaba / Hitec</option>
@@ -32,6 +58,7 @@
                         </select>
                     </div>
                 </div>
+                
                 <div class="gui_box tunings grey">
                     <table class="sticks">
                         <tr>
@@ -61,6 +88,7 @@
                         </tr>
                     </table>
                 </div>
+                
                 <div class="gui_box tunings grey">
                     <table class="deadband">
                         <tr>
@@ -289,29 +317,37 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+
+            <div class="grid-col col6">
+                <div class="gui_box grey margin-bottom">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="receiverBars"></div>
+                    </div>
+                    <div class="spacer_box">
+                        <div class="bars"></div>
+                    </div>
+                </div>
+                
                 <div class="gui_box grey tunings topspacer">
-                    <table class="pid_titlebar">
-                        <thead>
-                        <tr>
-                            <th i18n="receiverModelPreview"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="model_preview_cell">
-                                <div class="model_preview background_paper">
-                                    <canvas id="canvas"></canvas>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="receiverModelPreview"></div>
+                    </div>
+                    <div class="spacer_box">
+                        <div class="model_preview_spacer">
+                            <div class="model_preview">
+                                <canvas id="canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
         </div>
+        
         <div class="gui_box grey">
-            <div class="spacer">
-                <div class="wrapper graphAndLabel">
+            <div class="plot_spacer">
+                <div class="wrapper plot_graph_and_label">
                      <svg id="RX_plot">
                         <g class="grid x" transform="translate(40, 180)"></g>
                         <g class="grid y" transform="translate(40, 10)"></g>

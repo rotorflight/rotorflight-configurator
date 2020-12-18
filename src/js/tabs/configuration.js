@@ -780,90 +780,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             gpsBaudrateElement.parent().hide();
         }
 
-        const serialRXSelectEl = $('select.serialRX');
-        FC.getSerialRxTypes().forEach((serialRxType, index) => {
-            serialRXSelectEl.append(`<option value="${index}">${serialRxType}</option>`);
-        });
-
-        serialRXSelectEl.change(function () {
-            const serialRxValue = parseInt($(this).val());
-
-            let newValue;
-            if (serialRxValue !== FC.RX_CONFIG.serialrx_provider) {
-                newValue = $(this).find('option:selected').text();
-            }
-            self.analyticsChanges['SerialRx'] = newValue;
-
-            FC.RX_CONFIG.serialrx_provider = serialRxValue;
-        });
-
-        // select current serial RX type
-        serialRXSelectEl.val(FC.RX_CONFIG.serialrx_provider);
-
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_31)) {
-            const spiRxTypes = [
-                'NRF24_V202_250K',
-                'NRF24_V202_1M',
-                'NRF24_SYMA_X',
-                'NRF24_SYMA_X5C',
-                'NRF24_CX10',
-                'CX10A',
-                'NRF24_H8_3D',
-                'NRF24_INAV',
-                'FRSKY_D',
-            ];
-
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-                spiRxTypes.push(
-                    'FRSKY_X',
-                    'A7105_FLYSKY',
-                    'A7105_FLYSKY_2A',
-                    'NRF24_KN',
-                );
-            }
-
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                spiRxTypes.push(
-                    'SFHSS',
-                    'SPEKTRUM',
-                    'FRSKY_X_LBT',
-                );
-            }
-
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-                spiRxTypes.push(
-                    'REDPINE',
-                );
-            }
-
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
-                spiRxTypes.push(
-                    'FRSKY_X_V2',
-                    'FRSKY_X_LBT_V2',
-                );
-            }
-
-            const spiRx_e = $('select.spiRx');
-            for (let i = 0; i < spiRxTypes.length; i++) {
-                spiRx_e.append('<option value="' + i + '">' + spiRxTypes[i] + '</option>');
-            }
-
-            spiRx_e.change(function () {
-                const value = parseInt($(this).val());
-
-                let newValue = undefined;
-                if (value !== FC.RX_CONFIG.rxSpiProtocol) {
-                    newValue = $(this).find('option:selected').text();
-                }
-                self.analyticsChanges['SPIRXProtocol'] = newValue;
-
-                FC.RX_CONFIG.rxSpiProtocol = value;
-            });
-
-            // select current serial RX type
-            spiRx_e.val(FC.RX_CONFIG.rxSpiProtocol);
-            }
-
         // for some odd reason chrome 38+ changes scroll according to the touched select element
         // i am guessing this is a bug, since this wasn't happening on 37
         // code below is a temporary fix, which we will be able to remove in the future (hopefully)
@@ -1008,22 +924,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             }
         }
 
-        function checkShowSerialRxBox() {
-            if (FC.FEATURE_CONFIG.features.isEnabled('RX_SERIAL')) {
-                $('div.serialRXBox').show();
-            } else {
-                $('div.serialRXBox').hide();
-            }
-        }
-
-        function checkShowSpiRxBox() {
-            if (FC.FEATURE_CONFIG.features.isEnabled('RX_SPI')) {
-                $('div.spiRxBox').show();
-            } else {
-                $('div.spiRxBox').hide();
-            }
-        }
-
         function checkUpdateGpsControls() {
             if (FC.FEATURE_CONFIG.features.isEnabled('GPS')) {
                 $('.gpsSettings').show();
@@ -1075,11 +975,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
 
             FC.FEATURE_CONFIG.features.updateData(element);
             updateTabList(FC.FEATURE_CONFIG.features);
-
-            if (element.attr('name') === 'rxMode') {
-                    checkShowSerialRxBox();
-                    checkShowSpiRxBox();
-            }
         });
 
         $('input.condition', beeper_e).change(function () {
@@ -1088,8 +983,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
         });
 
         checkShowDisarmDelay();
-        checkShowSerialRxBox();
-        checkShowSpiRxBox();
         checkUpdateGpsControls();
 
         if (self.SHOW_OLD_BATTERY_CONFIG) {

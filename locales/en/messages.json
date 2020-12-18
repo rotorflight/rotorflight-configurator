@@ -1027,7 +1027,7 @@
         "message": "In-flight level calibration"
     },
     "featureRX_SERIAL": {
-        "message": "Serial-based receiver (SPEKSAT, SBUS, SUMD)"
+        "message": "SERIAL RX input (SBUS, CRSF, F.Port)"
     },
     "featureMOTOR_STOP": {
         "message": "Don't spin the motors when armed"
@@ -1656,6 +1656,42 @@
     "pidTuningPidSettings": {
         "message": "PID Controller Settings"
     },
+    "receiverFeatures": {
+        "message": "Features"
+    },
+    "receiverFeatureName": {
+        "message": "Feature"
+    },
+    "receiverFeatureEnabled": {
+        "message": "Enabled"
+    },
+    "receiverFeatureDescription": {
+        "message": "Description"
+    },
+    "receiverSelect": {
+        "message": "Receiver"
+    },
+    "receiverMode": {
+        "message": "Receiver Mode"
+    },
+    "receiverRSSI": {
+        "message": "RSSI"
+    },
+    "receiverSerialRX": {
+        "message": "Serial Receiver Provider"
+    },
+    "receiverSpiRX": {
+        "message": "SPI Bus Receiver Provider"
+    },
+    "receiverRSSIHelp": {
+        "message": "Receiver Signal Strength Inidicator (RSSI) is a measurement of signal strength and is very handy so you know when your aircraft is going out of range or if it is suffering RF interference."
+    },
+    "receiverSerialRXHelp": {
+        "message": "<strong>Note:</strong> Remember to configure a Serial Port (via Ports tab) and choose a Serial Receiver Provider when using RX_SERIAL feature."
+    },
+    "receiverSpiRxHelp": {
+        "message": "<strong>Note:</strong> The SPI RX provider will only work if the required hardware is on board or connected to an SPI bus."
+    },
     "receiverRcSmoothing": {
         "message": "RC Smoothing"
     },
@@ -2030,6 +2066,9 @@
     "receiverRssiChannel": {
         "message": "RSSI Channel"
     },
+    "receiverRssiInput": {
+        "message": "RSSI Input"
+    },
     "receiverRssiChannelDisabledOption": {
         "message": "Disabled"
     },
@@ -2063,8 +2102,11 @@
     "receiverEepromSaved": {
         "message": "EEPROM <span class=\"message-positive\">saved</span>"
     },
+    "receiverBars": {
+        "message": "Channels"
+    },
     "receiverModelPreview": {
-        "message": "Preview"
+        "message": "Orientation"
     },
 
     "receiverMspWarningText": {

@@ -1,25 +1,39 @@
+
 .tab-receiver {
     font-weight: normal;
 }
 
-.tab-receiver .graphAndLabel {
-    float: left;
-    width: 100%;
-    margin-bottom: 0;
-}
-
-.tab-receiver .spacer {
-    padding-left: 10px;
-    padding-right: 10px;
-    width: calc(100% - 10px);
+.tab-receiver thead {
+    display: none;
 }
 
 .tab-receiver input[type="number"]::-webkit-inner-spin-button {
     border: 0;
 }
 
+.tab-receiver .featuresMultiple {
+    border-collapse: collapse;
+    margin-bottom: 5px;
+    margin-top: -5px;
+    padding: 0;
+}
+
+.tab-receiver .rssi td:nth-child(2) {
+    width: 30px;
+}
+
+.tab-receiver .rxFailsafe td:nth-child(2) {
+    width: 30px;
+}
+
+.tab-receiver .serialRXBox, .spiRxBox {
+    padding-top: 0;
+}
+
 .tab-receiver .bars {
     font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 .tab-receiver .bars ul {
@@ -225,18 +239,6 @@
     width: 33%;
 }
 
-.tab-receiver .rssi_channel_wrapper {
-    float: right;
-    margin: 0 0 10px 0;
-    border-left: 0;
-    width: 30%;
-    box-sizing: border-box;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-right: 1px solid var(--subtleAccent);
-    border-bottom: 1px solid var(--subtleAccent);
-}
-
 .tab-receiver .rcmap_wrapper {
     float: right;
     position: relative;
@@ -246,6 +248,18 @@
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-left: 1px solid var(--subtleAccent);
+    border-bottom: 1px solid var(--subtleAccent);
+}
+
+.tab-receiver .rssi_channel_wrapper {
+    float: right;
+    margin: 0 0 10px 0;
+    border-left: 0;
+    width: 30%;
+    box-sizing: border-box;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-right: 1px solid var(--subtleAccent);
     border-bottom: 1px solid var(--subtleAccent);
 }
 
@@ -264,6 +278,7 @@
     border-top-left-radius: 3px;
     padding-left: 6px;
 }
+
 .tab-receiver .rssi_channel_wrapper .head {
     border-top-right-radius: 3px;
 }
@@ -343,7 +358,20 @@
     -webkit-appearance: slider-horizontal;
 }
 
-/*Plot Control*/
+
+/* Plot Control */
+
+.tab-receiver .plot_graph_and_label {
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.tab-receiver .plot_spacer {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: calc(100% - 10px);
+}
 
 .tab-receiver .plot_control {
     float: right;
@@ -533,25 +561,20 @@
     font-size: 10px;
 }
 
-.tab-receiver .pid_titlebar {
-    border-radius: 3px;
-}
-
-.tab-receiver .model_preview_cell {
+.tab-receiver .model_preview_spacer {
     position: relative;
+    height: 300px;
     width: 100%;
-    height: 180px;
 }
 
 .tab-receiver .model_preview {
     position: absolute;
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    margin-top: -1px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
 }
 
 @media all and (max-width: 575px) {
