@@ -995,6 +995,12 @@
     "initialSetupRebootBootloaderText": {
         "message": "Reboot into <strong>boot loader / DFU</strong> mode."
     },
+    "initialSetupButtonMassStorage": {
+        "message": "Mass Storage Mode"
+    },
+    "initialSetupButtonMassStorageText": {
+        "message": "Reboot into <strong>Mass Storage</strong> mode (MSC)."
+    },
     "initialSetupBackupSuccess": {
         "message": "Backup saved <span class=\"message-positive\">successfully</span>"
     },
