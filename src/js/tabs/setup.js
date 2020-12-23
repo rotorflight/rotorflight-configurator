@@ -320,6 +320,19 @@ TABS.setup.initialize = function (callback) {
         GUI.interval_add('setup_data_pull_fast', get_fast_data, 33, true); // 30 fps
         GUI.interval_add('setup_data_pull_slow', get_slow_data, 250, true); // 4 fps
 
+        $('a.rebootMsc').click(function () {
+            const buffer = [];
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41) &&
+                GUI.operating_system === "Linux") {
+                   // Reboot into MSC using UTC time offset instead of user timezone
+                   // Linux seems to expect that the FAT file system timestamps are UTC based
+                buffer.push(mspHelper.REBOOT_TYPES.MSC_UTC);
+            } else {
+                buffer.push(mspHelper.REBOOT_TYPES.MSC);
+            }
+            MSP.send_message(MSPCodes.MSP_SET_REBOOT, buffer, false);
+        });
+
         GUI.content_ready(callback);
     }
 };
