@@ -97,13 +97,14 @@ function microtime() {
     return new Date().getTime() / 1000;
 }
 
+const TIME_LABEL = 'HEX_PARSER - File parsed in';
+
 onmessage = function(event) {
-    const timeParsingStart = microtime(); // track time
+    console.time(TIME_LABEL)
 
     read_hex_file(event.data);
 
-    console.log(`HEX_PARSER - File parsed in: ${(microtime() - timeParsingStart).toFixed(4)} seconds`);
-
     // terminate worker
+    console.timeEnd(TIME_LABEL);
     close();
 };
