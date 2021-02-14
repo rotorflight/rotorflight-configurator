@@ -100,7 +100,7 @@ function microtime() {
 const TIME_LABEL = 'HEX_PARSER - File parsed in';
 
 onmessage = function(event) {
-    console.time(TIME_LABEL)
+    console.time(TIME_LABEL);
 
     read_hex_file(event.data);
 

@@ -90,8 +90,10 @@ function microtime() {
     return new Date().getTime() / 1000;
 }
 
+const CONFIG_LABEL = `Custom defaults inserted in`;
+
 ConfigInserter.prototype.insertConfig = function (firmware, input) {
-    const timeParsingStart = microtime(); // track time
+    console.time(CONFIG_LABEL);
 
     const customDefaultsArea = getCustomDefaultsArea(firmware);
 
@@ -103,7 +105,7 @@ ConfigInserter.prototype.insertConfig = function (firmware, input) {
 
     generateData(firmware, input, customDefaultsArea.startAddress);
 
-    console.log(`Custom defaults inserted in: ${microtime() - timeParsingStart.toFixed(4)} seconds.`);
+    console.timeEnd(CONFIG_LABEL);
 
     return true;
 }
