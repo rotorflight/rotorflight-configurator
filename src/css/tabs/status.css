@@ -5,9 +5,9 @@
 
 .tab-status .model-and-info {
     position: relative;
-    height: 400px;
+    height: 500px;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: -2px;
 }
 
 .tab-status #interactive_block {
