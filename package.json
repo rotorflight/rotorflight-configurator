@@ -118,7 +118,7 @@
     "temp": "^0.9.1",
     "vinyl-source-stream": "^2.0.0",
     "vue-template-compiler": "^2.6.12",
-    "yarn": "^1.22.0"
+    "yarn": "^1.22.10"
   },
   "optionalDependencies": {
     "gulp-appdmg": "^1.0.3"
