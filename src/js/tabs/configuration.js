@@ -448,7 +448,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
 
         $('input[id="unsyncedPWMSwitch"]').prop('checked', FC.PID_ADVANCED_CONFIG.use_unsyncedPwm !== 0).change();
         $('input[name="unsyncedpwmfreq"]').val(FC.PID_ADVANCED_CONFIG.motor_pwm_rate);
-        $('input[name="digitalIdlePercent"]').val(FC.PID_ADVANCED_CONFIG.digitalIdlePercent);
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
             let dshotBidirectional_e = $('input[id="dshotBidir"]');
             dshotBidirectional_e.prop('checked', FC.MOTOR_CONFIG.use_dshot_telemetry).change();
@@ -519,7 +518,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             $('div.checkboxPwm').toggle(protocolConfigured && !digitalProtocol);
             $('div.unsyncedpwmfreq').toggle(protocolConfigured && !digitalProtocol);
 
-            $('div.digitalIdlePercent').toggle(protocolConfigured && digitalProtocol);
             $('.escSensor').toggle(protocolConfigured && digitalProtocol);
 
             $('div.checkboxDshotBidir').toggle(protocolConfigured && semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42) && digitalProtocol);
@@ -1152,7 +1150,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
 
             FC.PID_ADVANCED_CONFIG.pid_process_denom = value;
 
-            FC.PID_ADVANCED_CONFIG.digitalIdlePercent = parseFloat($('input[name="digitalIdlePercent"]').val());
             if (semver.gte(FC.CONFIG.apiVersion, "1.25.0") && semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
                 FC.PID_ADVANCED_CONFIG.gyroUse32kHz = $('input[id="gyroUse32kHz"]').is(':checked') ? 1 : 0;
             }
