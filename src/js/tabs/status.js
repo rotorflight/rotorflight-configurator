@@ -44,7 +44,11 @@ TABS.status.initialize = function (callback) {
         // set heading in interactive block
         $('span.heading').text(i18n.getMessage('statusAttitude', [0]));
 
-        self.initializeInstruments();
+        // Flight instruments
+        var options = { size:90, showBox : false, img_directory: 'images/flightindicators/' };
+        var attitude = $.flightIndicator('#attitude', 'attitude', options);
+        var heading  = $.flightIndicator('#heading', 'heading', options);
+        var altitude = $.flightIndicator('#altitude', 'altimeter', options);
 
         $('#arming-disable-flag').attr('title', i18n.getMessage('statusArmingDisableFlagsTooltip'));
 
@@ -223,7 +227,15 @@ TABS.status.initialize = function (callback) {
                 heading_e.text(i18n.getMessage('statusAttitude', [FC.SENSOR_DATA.kinematics[2]]));
 
                 self.renderModel();
-                self.updateInstruments();
+
+                attitude.setRoll(FC.SENSOR_DATA.kinematics[0]);
+                attitude.setPitch(FC.SENSOR_DATA.kinematics[1]);
+                heading.setHeading(FC.SENSOR_DATA.kinematics[2]);
+            });
+
+            MSP.send_message(MSPCodes.MSP_ALTITUDE, false, false, function () {
+                // Usually altimeter indicates feet. We show centimeters, as it is more useful here.
+                altitude.setAltitude(FC.SENSOR_DATA.altitude * 100);
             });
         }
 
@@ -235,18 +247,6 @@ TABS.status.initialize = function (callback) {
     }
 };
 
-
-TABS.status.initializeInstruments = function() {
-    var options = {size:90, showBox : false, img_directory: 'images/flightindicators/'};
-    var attitude = $.flightIndicator('#attitude', 'attitude', options);
-    var heading = $.flightIndicator('#heading', 'heading', options);
-
-    this.updateInstruments = function() {
-        attitude.setRoll(FC.SENSOR_DATA.kinematics[0]);
-        attitude.setPitch(FC.SENSOR_DATA.kinematics[1]);
-        heading.setHeading(FC.SENSOR_DATA.kinematics[2]);
-    };
-};
 
 TABS.status.initModel = function () {
     this.model = new Model($('.model-and-info #canvas_wrapper'), $('.model-and-info #canvas'));
