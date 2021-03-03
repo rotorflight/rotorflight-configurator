@@ -18,9 +18,9 @@ var Features = function (config) {
         {bit: 17, group: 'other', name: 'DISPLAY', haveTip: true},
         {bit: 18, group: 'other', name: 'OSD'},
         {bit: 25, group: 'rxMode', mode: 'select', name: 'RX_SPI'},
-        {bit: 27, group: 'escSensor', name: 'ESC_SENSOR'},
+        {bit: 27, group: 'other', name: 'ESC_SENSOR'},
         {bit: 28, group: 'other', name: 'FREQ_SENSOR'},
-        {bit: 29, group: 'other', name: 'DYNAMIC_FILTER'},
+        //{bit: 29, group: 'other', name: 'DYNAMIC_FILTER'},
         {bit: 30, group: 'other', name: 'RPM_FILTER'}
     ];
 

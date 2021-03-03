@@ -76,8 +76,36 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- OTHER FEATURES -->
+                <div class="featuresOther">
+                    <div class="gui_box grey">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="configurationFeatures"></div>
+                        </div>
+                        <div class="spacer_box">
+                            <div class="note">
+                                <p i18n="configurationOtherFeaturesHelp"></p>
+                            </div>
+                            <table class="featuresMultiple">
+                                <thead>
+                                <tr>
+                                    <th i18n="configurationFeatureEnabled"></th>
+                                    <th i18n="configurationFeatureDescription"></th>
+                                    <th i18n="configurationFeatureName"></th>
+                                </tr>
+                                </thead>
+                                <tbody class="features other" id="noline">
+                                <!-- table generated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="grid-col col6">
+
                 <!-- MOTOR STOP -->
                 <div class="motorstop">
                     <div class="gui_box grey">
@@ -129,12 +157,6 @@
                                     </label>
                                 </div>
                             </div>
-                            <table class="featuresMultiple">
-                                <tbody class="features escSensor">
-                                <!-- table generated here -->
-                                </tbody>
-                            </table>
-                            <!--   -->
                             <div class="number checkboxDshotBidir">
                                 <div style="float: left; height: 20px; margin-right: 14px; margin-left: 3px;">
                                     <input type="checkbox" id="dshotBidir" class="toggle" />
@@ -296,37 +318,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="grid-row">
-            <div class="grid-col col6">
-                <!-- OTHER FEATURES -->
-                <div class="featuresOther">
-                    <div class="gui_box grey">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="configurationFeatures"></div>
-                        </div>
-                        <div class="spacer_box">
-                            <div class="note">
-                                <p i18n="configurationOtherFeaturesHelp"></p>
-                            </div>
-                            <table class="featuresMultiple">
-                                <thead>
-                                <tr>
-                                    <th i18n="configurationFeatureEnabled"></th>
-                                    <th i18n="configurationFeatureDescription"></th>
-                                    <th i18n="configurationFeatureName"></th>
-                                </tr>
-                                </thead>
-                                <tbody class="features other" id="noline">
-                                <!-- table generated here -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-col col6">
+
                 <!-- CAMERA -->
                 <div class="gui_box grey miscSettings">
                     <div class="gui_box_titlebar">
@@ -417,6 +409,7 @@
                 </div>
             </div>
         </div>
+
         <div class="grid-row oldBatteryConfig">
             <div class="grid-col col6">
                 <!-- BATTERY CONFIG FOR PRE BF 3.2 -->
