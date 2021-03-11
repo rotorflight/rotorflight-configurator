@@ -226,6 +226,15 @@ TABS.receiver.initialize = function (callback) {
             meterLabelArray.push($('.label' , this));
         });
 
+        tab.getReceiverData = function() {
+            MSP.send_message(MSPCodes.MSP_RC, false, false, function() {
+                for (let i = 0; i < FC.RC.active_channels; i++) {
+                    meterFillArray[i].css('width', ((FC.RC.channels[i] - meterScale.min) / (meterScale.max - meterScale.min) * 100).clamp(0, 100) + '%');
+                    meterLabelArray[i].text(FC.RC.channels[i]);
+                }
+            });
+        };
+
         // correct inner label margin on window resize (i don't know how we could do this in css)
         tab.resize = function () {
             const containerWidth = $('.meter:first', barContainer).width(),
@@ -531,10 +540,6 @@ TABS.receiver.initialize = function (callback) {
 
         GUI.content_ready(callback);
     }
-};
-
-TABS.receiver.getReceiverData = function () {
-    MSP.send_message(MSPCodes.MSP_RC, false, false);
 };
 
 TABS.receiver.initModelPreview = function () {
