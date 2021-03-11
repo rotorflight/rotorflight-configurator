@@ -1190,6 +1190,18 @@ li.active .ic_sensors {
     background-image: url(../images/icons/cf_icon_sensors_white.svg);
 }
 
+.ic_beepers {
+    background-image: url(../images/icons/cf_icon_sensors_grey.svg);
+}
+
+.ic_beepers:hover {
+    background-image: url(../images/icons/cf_icon_sensors_white.svg);
+}
+
+li.active .ic_beepers {
+    background-image: url(../images/icons/cf_icon_sensors_white.svg);
+}
+
 .ic_log {
     background-image: url(../images/icons/cf_icon_log_grey.svg);
 }
