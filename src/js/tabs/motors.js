@@ -47,15 +47,11 @@ TABS.motors.initialize = function (callback) {
     }
 
     function load_feature_config() {
-        MSP.send_message(MSPCodes.MSP_FEATURE_CONFIG, false, false, load_motor_3d_config);
+        MSP.send_message(MSPCodes.MSP_FEATURE_CONFIG, false, false, load_esc_protocol);
     }
 
     function load_esc_protocol() {
-        MSP.send_message(MSPCodes.MSP_ADVANCED_CONFIG, false, false, load_motor_output_reordering);
-    }
-
-    function load_motor_output_reordering() {
-        MSP.send_message(MSPCodes.MSP2_MOTOR_OUTPUT_REORDERING, false, false, load_motor_data);
+        MSP.send_message(MSPCodes.MSP_ADVANCED_CONFIG, false, false, load_motor_data);
     }
 
     function load_motor_data() {
@@ -64,14 +60,10 @@ TABS.motors.initialize = function (callback) {
 
     function load_motor_telemetry_data() {
         if (FC.MOTOR_CONFIG.use_dshot_telemetry || FC.MOTOR_CONFIG.use_esc_sensor) {
-            MSP.send_message(MSPCodes.MSP_MOTOR_TELEMETRY, false, false, load_mixer_config);
+            MSP.send_message(MSPCodes.MSP_MOTOR_TELEMETRY, false, false, load_html);
         } else {
-            load_mixer_config();
+            load_html();
         }
-    }
-
-    function load_mixer_config() {
-        MSP.send_message(MSPCodes.MSP_MIXER_CONFIG, false, false, load_html);
     }
 
     function load_html() {
@@ -213,10 +205,6 @@ TABS.motors.initialize = function (callback) {
         lines.attr('d', graphHelpers.line);
     }
 
-    function update_model(mixer) {
-
-    }
-
     function process_html() {
         // translate to user-selected language
         i18n.localizePage();
@@ -239,8 +227,6 @@ TABS.motors.initialize = function (callback) {
                 $(".motor_testing .telemetry .motor-" + i).hide();
             }
         }
-
-        update_model(FC.MIXER_CONFIG.mixer);
 
         // Always start with default/empty sensor data array, clean slate all
         initSensorData();
@@ -716,44 +702,11 @@ TABS.motors.initialize = function (callback) {
             zeroThrottleValue = neutral3d;
         }
 
-        setup_motor_output_reordering_dialog(content_ready, zeroThrottleValue);
-
         function content_ready() {
             GUI.content_ready(callback);
         }
 
        GUI.content_ready(callback);
-    }
-
-    function setup_motor_output_reordering_dialog(callbackFunction, zeroThrottleValue)
-    {
-        const domDialogMotorOutputReorder = $('#dialogMotorOutputReorder');
-
-        const motorOutputReorderComponent = new MotorOutputReorderComponent($('#dialogMotorOutputReorderContent'),
-            callbackFunction, mixerList[FC.MIXER_CONFIG.mixer - 1].name,
-            zeroThrottleValue, zeroThrottleValue + 200);
-
-        $('#dialogMotorOutputReorder-closebtn').click(closeDialog);
-
-        function closeDialog()
-        {
-            domDialogMotorOutputReorder[0].close();
-            motorOutputReorderComponent.close();
-            $(document).off("keydown", onDocumentKeyPress);
-        }
-
-        function onDocumentKeyPress(event)
-        {
-            if (27 === event.which) {
-                closeDialog();
-            }
-        }
-
-        $('#motorOutputReorderDialogOpen').click(function()
-        {
-            $(document).on("keydown", onDocumentKeyPress);
-            domDialogMotorOutputReorder[0].showModal();
-        });
     }
 };
 
