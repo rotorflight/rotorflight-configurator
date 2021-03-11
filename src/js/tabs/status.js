@@ -20,7 +20,7 @@ TABS.status.initialize = function (callback) {
     }
 
     function load_status() {
-        MSP.send_message(MSPCodes.MSP_STATUS, false, false, load_html);
+        MSP.send_message(MSPCodes.MSP_STATUS_EX, false, false, load_html);
     }
 
     function load_html() {
@@ -77,7 +77,6 @@ TABS.status.initialize = function (callback) {
             heading_e = $('dd.heading');
 
         // DISARM FLAGS
-        // We add all the arming/disarming flags available, and show/hide them if needed.
         var prepareDisarmFlags = function() {
 
             var disarmFlagElements = ['NO_GYRO',
@@ -188,7 +187,7 @@ TABS.status.initialize = function (callback) {
 
         function get_slow_data() {
 
-            MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
+            MSP.send_message(MSPCodes.MSP_STATUS_EX, false, false, function() {
                 $('#statusArmingAllowed').toggle(FC.CONFIG.armingDisableFlags == 0);
                 for (var i = 0; i < FC.CONFIG.armingDisableCount; i++) {
                     $('#statusArmingDisableFlags'+i).css('display',(FC.CONFIG.armingDisableFlags & (1 << i)) == 0 ? 'none':'inline-block');
