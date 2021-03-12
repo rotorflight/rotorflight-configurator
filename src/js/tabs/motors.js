@@ -60,7 +60,6 @@ TABS.motors.initialize = function (callback) {
     .resolve(true)
     .then(() => { return MSP.promise(MSPCodes.MSP_STATUS); })
     .then(() => { return MSP.promise(MSPCodes.MSP_FEATURE_CONFIG); })
-    .then(() => { return MSP.promise(MSPCodes.MSP_MIXER_CONFIG); })
     .then(() => { return (FC.MOTOR_CONFIG.use_dshot_telemetry || FC.MOTOR_CONFIG.use_esc_sensor) ? MSP.promise(MSPCodes.MSP_MOTOR_TELEMETRY) : true; })
     .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_CONFIG); })
     .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_3D_CONFIG); })
@@ -68,7 +67,6 @@ TABS.motors.initialize = function (callback) {
     .then(() => { return MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG); })
     .then(() => { return MSP.promise(MSPCodes.MSP_ARMING_CONFIG); })
     .then(() => { return (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) ? MSP.promise(MSPCodes.MSP_FILTER_CONFIG) : true; })
-    .then(() => { return MSP.promise(MSPCodes.MSP_MIXER_CONFIG); })
     .then(() => { return (semver.gte(FC.CONFIG.apiVersion, "1.8.0")) ? MSP.promise(MSPCodes.MSP_ARMING_CONFIG) : true; })
     .then(() => { load_html(); });
 
@@ -202,10 +200,7 @@ TABS.motors.initialize = function (callback) {
         lines.attr('d', graphHelpers.line);
     }
 
-    function update_model(mixer) {
-        const imgSrc = getMixerImageSrc(mixer, FC.MIXER_CONFIG.reverseMotorDir, FC.CONFIG.apiVersion);
-        $('.mixerPreview img').attr('src', imgSrc);
-
+    function update_model() {
         const motorOutputReorderConfig = new MotorOutputReorderConfig(100);
         const domMotorOutputReorderDialogOpen = $('#motorOutputReorderDialogOpen');
 
@@ -266,52 +261,7 @@ TABS.motors.initialize = function (callback) {
         // Add EventListener for configuration changes
         document.querySelectorAll('.configuration').forEach(elem => elem.addEventListener('change', disableHandler));
 
-        /*
-        *  MIXER
-        */
-
-        const mixerListElement = $('select.mixerList');
-        for (let selectIndex = 0; selectIndex < mixerList.length; selectIndex++) {
-            mixerList.forEach(function (mixerEntry, mixerIndex) {
-                if (mixerEntry.pos === selectIndex) {
-                    mixerListElement.append(`<option value="${(mixerIndex + 1)}">${mixerEntry.name}</option>`);
-                }
-            });
-        }
-
-        function refreshMixerPreview() {
-            const mixer = FC.MIXER_CONFIG.mixer;
-            const reverse = FC.MIXER_CONFIG.reverseMotorDir ? "_reversed" : "";
-
-            $('.mixerPreview img').attr('src', `./resources/motor_order/${mixerList[mixer - 1].image}${reverse}.svg`);
-        }
-
-        const reverseMotorSwitchElement = $('#reverseMotorSwitch');
-
-        reverseMotorSwitchElement.change(function() {
-            FC.MIXER_CONFIG.reverseMotorDir = $(this).prop('checked') ? 1 : 0;
-            refreshMixerPreview();
-        });
-
-        reverseMotorSwitchElement.prop('checked', FC.MIXER_CONFIG.reverseMotorDir !== 0).change();
-
-        mixerListElement.change(function () {
-            const mixerValue = parseInt($(this).val());
-
-            let newValue;
-            if (mixerValue !== FC.MIXER_CONFIG.mixer) {
-                newValue = $(this).find('option:selected').text();
-            }
-            self.analyticsChanges['Mixer'] = newValue;
-
-            FC.MIXER_CONFIG.mixer = mixerValue;
-            refreshMixerPreview();
-        });
-
-        // select current mixer configuration
-        mixerListElement.val(FC.MIXER_CONFIG.mixer).change();
-
-        update_model(FC.MIXER_CONFIG.mixer);
+        update_model();
 
         // Always start with default/empty sensor data array, clean slate all
         initSensorData();
@@ -975,7 +925,6 @@ TABS.motors.initialize = function (callback) {
             Promise
             .resolve(true)
             .then(() => { return MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG)); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_SET_MIXER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG)); })
             .then(() => { return MSP.promise(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG)); })
             .then(() => { return MSP.promise(MSPCodes.MSP_SET_MOTOR_3D_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_3D_CONFIG)); })
             .then(() => { return MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)); })
