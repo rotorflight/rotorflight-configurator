@@ -686,9 +686,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_MIXER_CONFIG:
                 FC.MIXER_CONFIG.mixer = data.readU8();
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                    FC.MIXER_CONFIG.reverseMotorDir = data.readU8();
-                }
                 break;
 
             case MSPCodes.MSP_FEATURE_CONFIG:
@@ -1684,9 +1681,6 @@ MspHelper.prototype.crunch = function(code) {
             break;
         case MSPCodes.MSP_SET_MIXER_CONFIG:
             buffer.push8(FC.MIXER_CONFIG.mixer);
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                buffer.push8(FC.MIXER_CONFIG.reverseMotorDir);
-            }
             break;
         case MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG:
             buffer.push16(FC.BOARD_ALIGNMENT_CONFIG.roll)
