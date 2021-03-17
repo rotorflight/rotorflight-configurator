@@ -519,7 +519,6 @@ TABS.motors.initialize = function (callback) {
 
         unsyncedPWMSwitchElement.prop('checked', FC.PID_ADVANCED_CONFIG.use_unsyncedPwm !== 0).trigger("change");
         $('input[name="unsyncedpwmfreq"]').val(FC.PID_ADVANCED_CONFIG.motor_pwm_rate);
-        $('input[name="digitalIdlePercent"]').val(FC.PID_ADVANCED_CONFIG.digitalIdlePercent);
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
             dshotBidirElement.prop('checked', FC.MOTOR_CONFIG.use_dshot_telemetry).trigger("change");
 
@@ -582,7 +581,6 @@ TABS.motors.initialize = function (callback) {
             $('div.checkboxPwm').toggle(protocolConfigured && !digitalProtocol);
             divUnsyncedPWMFreq.toggle(protocolConfigured && !digitalProtocol);
 
-            $('div.digitalIdlePercent').toggle(protocolConfigured && digitalProtocol);
             $('.escSensor').toggle(protocolConfigured && digitalProtocol);
 
             $('div.checkboxDshotBidir').toggle(protocolConfigured && semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42) && digitalProtocol);
@@ -870,7 +868,6 @@ TABS.motors.initialize = function (callback) {
             FC.PID_ADVANCED_CONFIG.fast_pwm_protocol = parseInt(escProtocolElement.val() - 1);
             FC.PID_ADVANCED_CONFIG.use_unsyncedPwm = unsyncedPWMSwitchElement.is(':checked') ? 1 : 0;
             FC.PID_ADVANCED_CONFIG.motor_pwm_rate = parseInt($('input[name="unsyncedpwmfreq"]').val());
-            FC.PID_ADVANCED_CONFIG.digitalIdlePercent = parseFloat($('input[name="digitalIdlePercent"]').val());
 
             if (semver.gte(FC.CONFIG.apiVersion, "1.25.0") && semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
                 FC.PID_ADVANCED_CONFIG.gyroUse32kHz = $('input[id="gyroUse32kHz"]').is(':checked') ? 1 : 0;
@@ -962,7 +959,7 @@ TABS.motors.initialize = function (callback) {
     {
         const domEscDshotDirectionDialog = $('#escDshotDirectionDialog');
 
-        const idleThrottleValue = zeroThrottleValue + FC.PID_ADVANCED_CONFIG.digitalIdlePercent * 1000 / 100;
+        const idleThrottleValue = zeroThrottleValue;
 
         const motorConfig = {
             numberOfMotors: self.numberOfValidOutputs,
