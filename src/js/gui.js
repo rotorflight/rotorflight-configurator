@@ -29,6 +29,7 @@ const GuiControl = function () {
         'help',
     ];
     this.defaultAllowedFCTabsWhenConnected = [
+        'status',
         'setup',
         'failsafe',
         'transponder',
@@ -391,7 +392,7 @@ GuiControl.prototype.selectDefaultTabWhenConnected = function() {
         if (result.rememberLastTab && result.lastTab) {
             $(`#tabs ul.mode-connected .${result.lastTab} a`).click();
         } else {
-            $('#tabs ul.mode-connected .tab_setup a').click();
+            $('#tabs ul.mode-connected .tab_status a').click();
         }
     });
 };

@@ -309,6 +309,9 @@
         "message": "Options"
     },
 
+    "tabStatus": {
+        "message": "Status"
+    },
     "tabSetup": {
         "message": "Setup"
     },
@@ -749,6 +752,205 @@
     },
     "defaultSupport5": {
         "message": "<a href=\"https://slack.betaflight.com\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight devs on slack</a>"
+    },
+
+    "statusButtonResetZaxis": {
+        "message": "Reset Z axis, offset: 0 deg"
+    },
+    "statusButtonResetZaxisValue": {
+        "message": "Reset Z axis, offset: $1 deg"
+    },
+    "statusFailsafe": {
+        "message": "Failsafe:"
+    },
+    "statusBatteryHead": {
+        "message": "Battery"
+    },
+    "statusMinCellV": {
+        "message": "Min Cell Voltage:"
+    },
+    "statusMaxCellV": {
+        "message": "Max Cell Voltage:"
+    },
+    "statusVoltageScale": {
+        "message": "Voltage Scale:"
+    },
+    "statusAccelTrimsHead": {
+        "message": "Accelerometer trims"
+    },
+    "statusPitch": {
+        "message": "Pitch:"
+    },
+    "statusRoll": {
+        "message": "Roll:"
+    },
+    "statusMagHead": {
+        "message": "Magnetometer"
+    },
+    "statusInfoHead": {
+        "message": "Info"
+    },
+    "statusReceiverHead": {
+        "message": "Receiver"
+    },
+    "statusBatteryHead": {
+        "message": "Battery"
+    },
+    "statusBattery": {
+        "message": "Voltage:"
+    },
+    "statusBatteryValue": {
+        "message": "$1 V"
+    },
+    "statusDrawn": {
+        "message": "Capacity:"
+    },
+    "statusDrawing": {
+        "message": "Current:"
+    },
+    "statusBatteryMahValue": {
+        "message": "$1 mAh"
+    },
+    "statusBatteryAValue": {
+        "message": "$1 A"
+    },
+    "statusCraftName": {
+        "message": "CraftName:"
+    },
+    "statusRSSI": {
+        "message": "RSSI:"
+    },
+    "statusRSSIValue": {
+        "message": "$1 %"
+    },
+    "statusArmingDisableFlags": {
+        "message": "Arming Disable Flags:"
+    },
+    "statusArmingAllowed": {
+        "message": "Arming Allowed"
+    },
+    "statusArmingDisableFlagsTooltip": {
+        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Wiki ('Arming Sequence & Safety' page) for more info."
+    },
+    "statusArmingDisableFlagsTooltipNO_GYRO": {
+        "message": "A gyro was not detected",
+        "description": "Message that pops up to describe the NO_GYRO arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipFAILSAFE": {
+        "message": "Failsafe is active",
+        "description": "Message that pops up to describe the FAILSAFE arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipRX_FAILSAFE": {
+        "message": "No valid receiver signal is detected",
+        "description": "Message that pops up to describe the RX_FAILSAFE arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipBAD_RX_RECOVERY": {
+        "message": "Your receiver has just recovered from receiver failsafe but the arm switch is on",
+        "description": "Message that pops up to describe the BAD_RX_RECOVERY arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipBOXFAILSAFE": {
+        "message": "The 'FAILSAFE' switch was activated",
+        "description": "Message that pops up to describe the BOXFAILSAFE arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipRUNAWAY_TAKEOFF": {
+        "message": "Runway Takeoff Prevention has been triggered",
+        "description": "Message that pops up to describe the RUNAWAY_TAKEOFF arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipCRASH": {
+        "message": "Disarmed via crash detection",
+        "description": "Message that pops up to describe the CRASH arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipTHROTTLE": {
+        "message": "Throttle channel is too high",
+        "description": "Message that pops up to describe the THROTTLE arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipANGLE": {
+        "message": "Craft is not level (enough)",
+        "description": "Message that pops up to describe the ANGLE arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipBOOT_GRACE_TIME": {
+        "message": "Arming too soon after power on",
+        "description": "Message that pops up to describe the BOOT_GRACE_TIME arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipNOPREARM": {
+        "message": "Prearm switch is not activated or prearm has not been toggled after disarm",
+        "description": "Message that pops up to describe the NOPREARM arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipLOAD": {
+        "message": "System load is too high for safe flight",
+        "description": "Message that pops up to describe the LOAD arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipCALIBRATING": {
+        "message": "Sensor calibration is still ongoing",
+        "description": "Message that pops up to describe the CALIBRATING arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipCLI": {
+        "message": "CLI is active",
+        "description": "Message that pops up to describe the CLI arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipCMS_MENU": {
+        "message": "CMS (config menu) is Active - over OSD or other display -",
+        "description": "Message that pops up to describe the CMS_MENU arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipOSD_MENU": {
+        "message": "OSD menu is active",
+        "description": "Message that pops up to describe the OSD_MENU arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipBST": {
+        "message": "A Black Sheep Telemetry device (TBS Core Pro for example) disarmed and is preventing arming",
+        "description": "Message that pops up to describe the BST arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipMSP": {
+        "message": "MSP connection is active, probably with this Rotorflight Configurator",
+        "description": "Message that pops up to describe the MSP arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipPARALYZE": {
+        "message": "Paralyze mode has been activated",
+        "description": "Message that pops up to describe the PARALYZE arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipGPS": {
+        "message": "GPS rescue mode is configured but required number of satellites has not been fixed",
+        "description": "Message that pops up to describe the GPS arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipRESC": {
+        "message": "The 'GPS Rescue' switch was activated",
+        "description": "Message that pops up to describe the RESC arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipRPMFILTER": {
+        "message": "RPM-based filtering is enabled but one or more ESC's are not supplying valid DSHOT telemetry. Check that the ESC's are capable of and have the required firmware installed to support bidirectional DSHOT telemetry.",
+        "description": "Message that pops up to describe the RPMFILTER arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipREBOOT_REQD": {
+        "message": "A configuration change requires a reboot",
+        "description": "Message that pops up to describe the REBOOT_REQD arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipDSHOT_BBANG": {
+        "message": "Bitbanged DSHOT is not working properly and the motors can't be controlled. Likely caused by a timer conflict with other features enabled on the flight controller.",
+        "description": "Message that pops up to describe the DSHOT_BBANG arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipNO_ACC_CAL": {
+        "message": "The accelerometer has not been calibrated and features are enabled that rely on it. Calibrate the accelerometer.",
+        "description": "Message that pops up to describe the NO_ACC_CAL arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipMOTOR_PROTO": {
+        "message": "There is no motor output protocol selected",
+        "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipARM_SWITCH": {
+        "message": "One of the others disarm flags is active when arming",
+        "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
+    },
+    "statusGPSHead": {
+        "message": "GPS"
+    },
+    "statusInstrumentsHead": {
+        "message": "Instruments"
+    },
+    "statusModel": {
+        "message": "Model: $1"
+    },
+    "statusAttitude": {
+        "message": "$1 deg"
     },
 
     "initialSetupBackupAndRestoreApiVersion": {
