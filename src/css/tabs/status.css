@@ -1,0 +1,337 @@
+
+.tab-status .content_wrapper {
+    position: initial;
+}
+
+.tab-status .model-and-info {
+    position: relative;
+    height: 500px;
+    width: 100%;
+    margin-bottom: -2px;
+}
+
+.tab-status #interactive_block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #e4e4e4;
+}
+.tab-status #interactive_block a.reset {
+    position: absolute;
+    display: block;
+    top: 10px;
+    right: 10px;
+    border-radius: 3px;
+    bottom: 10px;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 15px 0 15px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid var(--subtleAccent);
+    background-color: #ececec;
+    z-index: 100;
+}
+.tab-status #interactive_block a.reset:hover {
+    background-color: #dedcdc;
+}
+
+.tab-status #canvas_wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+}
+
+.tab_status #canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.attitude_info {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 120px;
+    margin: 0 0 0 0;
+    font-weight: normal;
+    color: var(--mutedText);
+}
+.attitude_info dl {
+    width: 100%;
+}
+.attitude_info dt {
+    width: 50%;
+    float: left;
+}
+.attitude_info dd {
+    width: 50%;
+    float: left;
+}
+.instrumentsbox {
+    margin-bottom: 0;
+}
+
+.full_height {
+    height: 100%;
+}
+
+@media all and (max-width: 575px) {
+    .tab-status .default_btn {
+        margin-bottom: 5px;
+    }
+    .tab-status .model-and-info {
+        height: 200px;
+    }
+}
+
+.block.info .fields {
+    padding: 5px 5px 3px 5px;
+}
+
+.block.info dt {
+    float: left;
+    width: 99px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.block.info dd {
+    width: 76px;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 99px;
+}
+
+.block.gps {
+    width: 185px;
+    margin-bottom: 10px;
+}
+
+.block.gps .fields {
+    padding: 5px 5px 3px 5px;
+}
+
+.block.gps dt {
+    float: left;
+    width: 85px;
+    height: 20px;
+    margin-bottom: 2px;
+    line-height: 20px;
+}
+
+.block.instruments {
+    width: 285px;
+    align-content: center;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1055px) , only screen and (max-device-width: 1055px) {
+    .block.instrument .attitude {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    .block.instrument .heading {
+        width: 50px;
+        height: 50px;
+    }
+    .block.instrument .altitude {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.tab-status .regular-button {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 10px;
+    background-color: #ffbb00;
+    border-radius: 3px;
+    border: 1px solid #dba718;
+    color: #000;
+    font-size: 12px;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+    display: inline-block;
+    cursor: pointer;
+    transition: all ease 0.2s;
+    padding: 0 9px;
+    line-height: 28px;
+}
+.tab-status .regular-button:hover {
+    background-color: #ffcc3e;
+    transition: all ease 0.2s;
+}
+.tab-status .regular-button:active {
+    background-color: #ffcc3e;
+    transition: all ease 0.0s;
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.35);
+}
+.tab-status .regular-button.disabled {
+    cursor: default;
+    color: #fff;
+    background-color: #AFAFAF;
+    border: 1px solid #AFAFAF;
+    pointer-events: none;
+    text-shadow: none;
+    opacity: 0.5;
+}
+
+.tab-status .disarm-flag {
+    padding-left: 5px;
+}
+
+.tab-status .checkboxes {
+    margin-bottom: 4px;
+    margin-top: 24px;
+    margin-left: 10px;
+}
+
+.tab-status .checkboxes input {
+    vertical-align: middle;
+    margin: 0 5px 0 15px;
+}
+
+.tab-status .checkboxes .first {
+    margin: 0 5px 0 0;
+}
+
+.tab-status .checkboxes select {
+    float: right;
+    width: 80px;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+}
+
+.tab-status .bars {
+    font-weight: bold;
+}
+
+.tab-status .bars ul {
+    margin-bottom: 5px;
+    clear: left;
+}
+
+.tab-status .bars li {
+    float: left;
+    height: 22px;
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+.tab-status .bars .name {
+    padding: 0 10px 0 0;
+    width: 80px;
+    text-align: right;
+}
+
+.tab-status .bars .meter {
+    width: calc(100% - 90px);
+}
+
+.tab-status .bars .meter-bar {
+    position: relative;
+    margin-top: 2px;
+    width: calc(100% - 2px);
+    height: 15px;
+    border: 1px solid var(--subtleAccent);
+    background-color: #f4f4f4;
+    border-radius: 3px;
+}
+
+.tab-status .bars .meter-bar .label {
+    position: absolute;
+    width: 50px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    color: #474747;
+}
+
+.tab-status .bars .meter-bar .fill {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+    width: 50%;
+    height: 15px;
+    background-color: green;
+}
+
+.tab-status .bars .meter-bar .fill .label {
+    color: white;
+}
+
+.tab-status .bars ul:nth-of-type(1) .fill {
+    background-color: #f1453d;
+}
+
+.tab-status .bars ul:nth-of-type(2) .fill {
+    background-color: #673fb4;
+}
+
+.tab-status .bars ul:nth-of-type(3) .fill {
+    background-color: #2b98f0;
+}
+
+.tab-status .bars ul:nth-of-type(4) .fill {
+    background-color: #1fbcd2;
+}
+
+.tab-status .bars ul:nth-of-type(5) .fill {
+    background-color: #159588;
+}
+
+.tab-status .bars ul:nth-of-type(6) .fill {
+    background-color: #50ae55;
+}
+
+.tab-status .bars ul:nth-of-type(7) .fill {
+    background-color: #cdda49;
+}
+
+.tab-status .bars ul:nth-of-type(8) .fill {
+    background-color: #fdc02f;
+}
+
+.tab-status .bars ul:nth-of-type(9) .fill {
+    background-color: #fc5830;
+}
+
+.tab-status .bars ul:nth-of-type(10) .fill {
+    background-color: #785549;
+}
+
+.tab-status .bars ul:nth-of-type(11) .fill {
+    background-color: #9e9e9e;
+}
+
+.tab-status .bars ul:nth-of-type(12) .fill {
+    background-color: #617d8a;
+}
+
+.tab-status .bars ul:nth-of-type(13) .fill {
+    background-color: #cf267d;
+}
+
+.tab-status .bars ul:nth-of-type(14) .fill {
+    background-color: #7a1464;
+}
+
+.tab-status .bars ul:nth-of-type(15) .fill {
+    background-color: #3a7a14;
+}
+
+.tab-status .bars ul:nth-of-type(16) .fill {
+    background-color: #14407a;
+}
+
