@@ -20,7 +20,6 @@ TABS.configuration.initialize = function (callback) {
         Promise
         .resolve(true)
         .then(() => { return MSP.promise(MSPCodes.MSP_FEATURE_CONFIG); })
-        .then(() => { return semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36) ? MSP.promise(MSPCodes.MSP_BEEPER_CONFIG) : true; })
         .then(() => { return MSP.promise(MSPCodes.MSP_BOARD_ALIGNMENT_CONFIG); })
         .then(() => { return semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_33) ? MSP.promise(MSPCodes.MSP_GPS_CONFIG) : true; })
         .then(() => { return MSP.promise(MSPCodes.MSP_ACC_TRIM); })
@@ -47,66 +46,6 @@ TABS.configuration.initialize = function (callback) {
         const features_e = $('.tab-configuration .features');
 
         FC.FEATURE_CONFIG.features.generateElements(features_e);
-
-        // Dshot Beeper
-        const dshotBeeper_e = $('.tab-configuration .dshotbeeper');
-        const dshotBeacon_e = $('.tab-configuration .dshotbeacon');
-        const dshotBeeperSwitch = $('#dshotBeeperSwitch');
-        const dshotBeeperBeaconTone = $('select.dshotBeeperBeaconTone');
-        const dshotBeaconCondition_e = $('tbody.dshotBeaconConditions');
-        const dshotBeaconSwitch_e = $('tr.dshotBeaconSwitch');
-
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-            for (let i = 1; i <= 5; i++) {
-                dshotBeeperBeaconTone.append(`<option value="${(i)}">${(i)}</option>`);
-            }
-            dshotBeeper_e.show();
-        } else {
-            dshotBeeper_e.hide();
-        }
-
-        dshotBeeperBeaconTone.change(function() {
-            FC.BEEPER_CONFIG.dshotBeaconTone = dshotBeeperBeaconTone.val();
-        });
-
-        dshotBeeperBeaconTone.val(FC.BEEPER_CONFIG.dshotBeaconTone);
-
-        const template = $('.beepers .beeper-template');
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_39)) {
-            dshotBeaconSwitch_e.hide();
-            FC.BEEPER_CONFIG.dshotBeaconConditions.generateElements(template, dshotBeaconCondition_e);
-
-            $('input.condition', dshotBeaconCondition_e).change(function () {
-                const element = $(this);
-                FC.BEEPER_CONFIG.dshotBeaconConditions.updateData(element);
-            });
-        } else {
-            dshotBeaconCondition_e.hide();
-
-            dshotBeeperSwitch.change(function() {
-                if ($(this).is(':checked')) {
-                    dshotBeacon_e.show();
-                    if (dshotBeeperBeaconTone.val() == 0) {
-                        dshotBeeperBeaconTone.val(1).change();
-                    }
-                } else {
-                    dshotBeeperBeaconTone.val(0).change();
-                    dshotBeacon_e.hide();
-                }
-            });
-
-            dshotBeeperSwitch.prop('checked', FC.BEEPER_CONFIG.dshotBeaconTone !== 0).change();
-        }
-
-        // Analog Beeper
-        const destination = $('.beepers .beeper-configuration');
-        const beeper_e = $('.tab-configuration .beepers');
-
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-            FC.BEEPER_CONFIG.beepers.generateElements(template, destination);
-        } else {
-            beeper_e.hide();
-        }
 
         // translate to user-selected language
         i18n.localizePage();
@@ -524,11 +463,6 @@ TABS.configuration.initialize = function (callback) {
             updateTabList(FC.FEATURE_CONFIG.features);
         });
 
-        $('input.condition', beeper_e).change(function () {
-            const element = $(this);
-            FC.BEEPER_CONFIG.beepers.updateData(element);
-        });
-
         checkUpdateGpsControls();
 
         $('a.save').on('click', function() {
@@ -582,8 +516,6 @@ TABS.configuration.initialize = function (callback) {
                 Promise
                 .resolve(true)
                 .then(() => { return MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG)); })
-                .then(() => { return (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) ?
-                    MSP.promise(MSPCodes.MSP_SET_BEEPER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_BEEPER_CONFIG)) : true; })
                 .then(() => { return (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_33)) ?
                     MSP.promise(MSPCodes.MSP_SET_MISC, mspHelper.crunch(MSPCodes.MSP_SET_MISC)) : true; })
                 .then(() => { return MSP.promise(MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG)); })
