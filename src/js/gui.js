@@ -39,6 +39,7 @@ const GuiControl = function () {
         'auxiliary',
         'cli',
         'configuration',
+        'beepers',
         'gps',
         'led_strip',
         'logging',
