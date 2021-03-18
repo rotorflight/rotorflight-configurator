@@ -369,15 +369,6 @@ TABS.configuration.initialize = function (callback) {
 
         $('input[name="craftName"]').val(FC.CONFIG.name);
 
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_31)) {
-            $('input[name="fpvCamAngleDegrees"]').val(FC.RX_CONFIG.fpvCamAngleDegrees);
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                $('input[name="fpvCamAngleDegrees"]').attr("max", 90);
-            }
-        } else {
-            $('div.fpvCamAngleDegrees').hide();
-        }
-
         if (semver.lt(FC.CONFIG.apiVersion, "1.20.0")) {
             $('.miscSettings').hide();
         }
@@ -568,8 +559,6 @@ TABS.configuration.initialize = function (callback) {
             if (semver.gte(FC.CONFIG.apiVersion, "1.25.0") && semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
                 FC.PID_ADVANCED_CONFIG.gyroUse32kHz = $('input[id="gyroUse32kHz"]').is(':checked') ? 1 : 0;
             }
-
-            FC.RX_CONFIG.fpvCamAngleDegrees = parseInt($('input[name="fpvCamAngleDegrees"]').val());
 
             analytics.sendChangeEvents(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, self.analyticsChanges);
             self.analyticsChanges = {};
