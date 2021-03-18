@@ -1,0 +1,150 @@
+
+.tab-beepers input,
+.tab-beepers select {
+    border: 1px solid var(--subtleAccent);
+    width: 230px;
+    height: 20px;
+    float: left;
+    margin-right: 15px;
+    border-radius: 3px;
+}
+
+.tab-beepers table {
+    margin-bottom: 0;
+    width: 100%;
+    float: left;
+}
+
+.tab-beepers table,
+.tab-beepers table th,
+.tab-beepers table td {
+    padding: 0;
+    text-align: left;
+}
+
+.tab-beepers table th {
+    padding: 3px;
+    border-bottom: 1px solid var(--subtleAccent);
+}
+
+.tab-beepers table td {
+    padding: 5px 3px;
+    border-bottom: 1px solid var(--subtleAccent);
+}
+
+.tab-beepers table tr td:first-child {
+    text-align: left;
+    width: 55px;
+}
+
+.tab-beepers table thead tr:first-child {
+    background-color: #ececec;
+}
+
+.tab-beepers {
+    position: relative;
+}
+
+.tab-beepers .number input {
+    width: 55px;
+    padding-left: 3px;
+    height: 20px;
+    line-height: 20px;
+    text-align: left;
+    border-radius: 3px;
+    margin-right: 11px;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.tab-beepers .number .disabled {
+    width: 48px;
+    padding: 0 5px;
+    background-color: #ececec;
+}
+
+.tab-beepers input {
+    float: left;
+}
+
+.tab-beepers .number span {
+    margin-left: 0;
+}
+
+.tab-beepers .spacer_box {
+    padding-bottom: 10px;
+    float: left;
+    width: calc(100% - 20px);
+}
+
+.tab-beepers .number,
+.tab-beepers .select
+{
+    margin-bottom: 5px;
+    clear: left;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--subtleAccent);
+    width: 100%;
+    float: left;
+}
+
+.tab-beepers .number:last-child,
+.tab-beepers .select:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.tab-beepers .gui_box_titlebar {
+    margin-bottom: 0;
+}
+
+
+.tab-beepers .beeper-configuration tr:last-child td,
+.tab-beepers .dshot-beeper-configuration tr:last-child td,
+.tab-beepers .dshotBeaconConditions tr:last-child td,
+.tab-beepers .other tr:last-child td {
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.tab-beepers .gui_box {
+    font-weight: bold;
+}
+
+.tab-beepers .gui_box span {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 19px;
+    color: #4f4f4f;
+    font-size: 11px;
+}
+
+.tab-beepers .gui_box_titlebar {
+    margin-bottom: 0;
+}
+
+.tab-beepers .alignicon {
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin: 3px;
+}
+
+@media only screen and (max-width: 1055px) , only screen and (max-device-width: 1055px) {
+    .tab-beepers .gui_box span {
+        line-height: 17px;
+    }
+    .tab-beepers .system .gui_box {
+        float: left;
+    }
+}
+@media all and (max-width: 575px) {
+    .tab-beepers .system .gui_box {
+        min-height: auto;
+    }
+    .dshotbeacon > td > div.select > div, .dshotbeacon select.dshotBeeperBeaconTone {
+        width: 100%;
+    }
+}

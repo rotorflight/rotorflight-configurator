@@ -351,6 +351,9 @@ function startProcess() {
                     case 'status':
                         TABS.status.initialize(content_ready);
                         break;
+                    case 'beepers':
+                        TABS.beepers.initialize(content_ready);
+                        break;
                     case 'configuration':
                         TABS.configuration.initialize(content_ready);
                         break;
