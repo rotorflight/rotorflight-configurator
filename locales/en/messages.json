@@ -313,7 +313,7 @@
         "message": "Status"
     },
     "tabSetup": {
-        "message": "Setup"
+        "message": "System"
     },
     "tabSetupOSD": {
         "message": "OSD Setup"
@@ -322,13 +322,13 @@
         "message": "Configuration"
     },
     "tabPorts": {
-        "message": "Ports"
+        "message": "Serial Ports"
     },
     "tabBeepers": {
         "message": "Beepers"
     },
     "tabPidTuning": {
-        "message": "PID Tuning"
+        "message": "Tuning"
     },
     "tabReceiver": {
         "message": "Receiver"
@@ -343,16 +343,16 @@
         "message": "Failsafe"
     },
     "tabTransponder": {
-        "message": "Race Transponder"
+        "message": "Transponder"
     },
     "tabOsd": {
         "message": "OSD"
     },
     "tabVtx": {
-        "message": "Video Transmitter"
+        "message": "Video Tx"
     },
     "tabPower": {
-        "message": "Power & Battery"
+        "message": "Power"
     },
     "tabGPS": {
         "message": "GPS"
@@ -370,7 +370,7 @@
         "message": "CLI"
     },
     "tabLogging": {
-        "message": "Tethered Logging"
+        "message": "Logging"
     },
     "tabOnboardLogging": {
         "message": "Blackbox"
