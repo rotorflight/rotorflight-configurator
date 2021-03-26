@@ -261,9 +261,7 @@ TABS.power.initialize = function (callback) {
         ];
 
         if (haveFc) {
-            currentMeterTypes.push(i18n.getMessage('powerBatteryCurrentMeterTypeVirtual'));
             currentMeterTypes.push(i18n.getMessage('powerBatteryCurrentMeterTypeEsc'));
-
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
                 currentMeterTypes.push(i18n.getMessage('powerBatteryCurrentMeterTypeMsp'));
             }
