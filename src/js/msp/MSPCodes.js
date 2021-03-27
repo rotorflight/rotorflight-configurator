@@ -117,13 +117,22 @@ const MSPCodes = {
 
     MSP_MOTOR_TELEMETRY:            139,
 
-    MSP_TUNING_SLIDERS:             140,
-    MSP_SET_TUNING_SLIDERS:         141,
+    MSP_HELI_CONFIG:                140,
+    MSP_SET_HELI_CONFIG:            141,
+    MSP_GOVERNOR:                   142,
+    MSP_SET_GOVERNOR:               143,
+    MSP_RPM_FILTER:                 144,
+    MSP_SET_RPM_FILTER:             145,
 
     MSP_STATUS_EX:                  150,
 
     MSP_UID:                        160,
     MSP_GPS_SV_INFO:                164,
+
+    MSP_MIXER_INPUTS:               170,
+    MSP_SET_MIXER_INPUTS:           171,
+    MSP_MIXER_RULES:                172,
+    MSP_SET_MIXER_RULES:            173,
 
     MSP_DISPLAYPORT:                182,
 
@@ -131,6 +140,11 @@ const MSPCodes = {
 
     MSP_BEEPER_CONFIG:              184,
     MSP_SET_BEEPER_CONFIG:          185,
+
+    MSP_MIXER_OVERRIDE:             190,
+    MSP_SET_MIXER_OVERRIDE:         191,
+    MSP_SERVO_OVERRIDE:             192,
+    MSP_SET_SERVO_OVERRIDE:         193,
 
     MSP_SET_RAW_RC:                 200,
     MSP_SET_RAW_GPS:                201, // Not used
