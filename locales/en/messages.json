@@ -2586,44 +2586,45 @@
         "message": "EEPROM <span class=\"message-positive\">saved</span>"
     },
 
-    "servosFirmwareUpgradeRequired": {
-        "message": "Servos requires firmware &gt;= 1.10.0. and target support."
+    "servoNumber": {
+        "message": "Servo"
     },
-    "servosChangeDirection": {
-        "message": "Change Direction in TX To Match"
+    "servoMid": {
+        "message": "Mid"
     },
-    "servosName": {
-        "message": "Name"
+    "servoMin": {
+        "message": "Min"
     },
-    "servosMid": {
-        "message": "MID"
+    "servoMax": {
+        "message": "Max"
     },
-    "servosMin": {
-        "message": "MIN"
+    "servoRate": {
+        "message": "Rate"
     },
-    "servosMax": {
-        "message": "MAX"
+    "servoTrim": {
+        "message": "Trim"
     },
-    "servosAngleAtMin": {
-        "message": "Angle at min"
+    "servoSpeed": {
+        "message": "Speed [ms]"
     },
-    "servosAngleAtMax": {
-        "message": "Angle at max"
+    "servoReverse": {
+        "message": "Reverse"
     },
-    "servosDirectionAndRate": {
-        "message": "Direction and rate"
+    "servoPosition": {
+        "message": "Position"
     },
-    "servosLiveMode": {
-        "message": "Enable Live mode"
+
+    "servosConfiguration":{
+        "message": "Configuration"
+    },
+    "servosText":{
+        "message": "Servos"
     },
     "servosButtonSave": {
         "message": "Save"
     },
-    "servosNormal": {
-        "message": "Normal"
-    },
-    "servosReverse": {
-        "message": "Reverse"
+    "servosButtonCancel": {
+        "message": "Cancel"
     },
     "servosEepromSave": {
         "message": "EEPROM <span class=\"message-positive\">saved</span>"
@@ -2725,34 +2726,6 @@
     },
     "motorNumber8":{
         "message": "Motor - 8"
-    },
-
-    "servosText":{
-        "message": "Servos"
-    },
-    "servoNumber1":{
-        "message": "Servo - 1"
-    },
-    "servoNumber2":{
-        "message": "Servo - 2"
-    },
-    "servoNumber3":{
-        "message": "Servo - 3"
-    },
-    "servoNumber4":{
-        "message": "Servo - 4"
-    },
-    "servoNumber5":{
-        "message": "Servo - 5"
-    },
-    "servoNumber6":{
-        "message": "Servo - 6"
-    },
-    "servoNumber7":{
-        "message": "Servo - 7"
-    },
-    "servoNumber8":{
-        "message": "Servo - 8"
     },
 
     "motorsResetMaximumButton":{

@@ -1,3 +1,4 @@
+
 .tab-servos .title {
     margin-top: 0;
     line-height: 30px;
@@ -27,17 +28,12 @@
     border: 0;
 }
 
-.tab-servos .directions .direction select {
-    height: 19px;
-    line-height: 19px;
-}
-
 .tab-servos table th {
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     text-align: center;
     border: 1px solid var(--subtleAccent);
-    line-height: 14px;
+    line-height: 16px;
 }
 
 .tab-servos table td {
@@ -51,31 +47,10 @@
     background-color: #f9f9f9;
 }
 
-.tab-servos table td:nth-child(2) {
-    width: 140px;
-}
-
-.tab-servos table td:nth-child(3) {
-    width: 140px;
-}
-
-.tab-servos table td:nth-child(4) {
-    width: 140px;
-}
-
-.tab-servos table td:nth-child(19) {
-    width: 110px;
-}
-
-.tab-servos table .main {
+.tab-servos table .header {
     font-weight: bold;
     text-align: center;
     background-color: #ececec;
-}
-
-.tab-servos table .channel {
-    width: 40px;
-    text-align: center;
 }
 
 .tab-servos table input {
@@ -88,10 +63,6 @@
     border-radius: 3px;
 }
 
-.tab-servos table .channel input {
-    vertical-align: middle;
-}
-
 .tab-servos table input[type="number"] {
     display: block;
     width: 100%;
@@ -100,72 +71,40 @@
     text-align: right;
 }
 
-.tab-servos .direction .name {
-    float: left;
-    display: block;
-    width: 60px;
-}
-
-.tab-servos .direction .alternate {
-    float: left;
-    display: block;
-    width: 60px;
-}
-
-.tab-servos .direction .first {
-    float: left;
-    margin: 2px 10px 0 20px;
-}
-
-.tab-servos .direction .second {
-    float: left;
-    margin: 2px 10px 0 0;
-}
-
-.tab-servos .direction .rate {
-    width: 110px;
-    height: 22px;
+.tab-servos table input[type="checkbox"] {
+    width: 100%;
+    line-height: 20px;
     text-align: center;
 }
 
-.tab-servos .live {
-    float: left;
-    margin-top: 0;
+.tab-servos table td:nth-child(1) {
+    width: 50px;
+    text-align: center;
+    font-weight: bold;
 }
 
-.tab-servos .live span {
-    float: left;
+.tab-servos table td:nth-child(2) {
+    width: 80px;
 }
 
-.tab-servos .live input {
-    float: left;
-    margin: 0 0 0 5px;
+.tab-servos table td:nth-child(3) {
+    width: 80px;
 }
 
-.tab-servos .buttons {
-    width: calc(100% - 20px);
-    position: absolute;
-    bottom: 10px;
+.tab-servos table td:nth-child(4) {
+    width: 80px;
 }
 
-.tab-servos .require-support {
-    display: none;
+.tab-servos table td:nth-child(5) {
+    width: 80px;
 }
 
-.tab-servos.supported .require-support {
-    display: block;
+.tab-servos table td:nth-child(6) {
+    width: 80px;
 }
 
-.tab-servos .require-upgrade {
-    display: block;
-}
-
-.tab-servos.supported .require-upgrade {
-    display: none;
-}
-
-.tab-servos .live span {
-    margin-right: 10px;
+.tab-servos table td:nth-child(7) {
+    width: 100px;
 }
 
 .tab-servos .wide {
@@ -184,21 +123,15 @@
     .tab-servos table th {
         min-width: 30px;
     }
-    .tab-servos .min, .tab-servos .max, .tab-servos .middle {
+    .tab-servos .min, .tab-servos .max, .tab-servos .mid {
         min-width: 60px;
     }
-}
-
-/* servos testing bars */
-
-.tab-servos table tr td:first-child {
-    text-align: left;
-    width: 55px;
 }
 
 .tab-servos {
     position: relative;
 }
+
 .tab-servos .spacer_box {
     padding-bottom: 10px;
     float: left;
@@ -223,142 +156,43 @@
     font-size: 11px;
 }
 
-.tab-servos .spacer {
-    width: calc(100% - 34px);
-    margin: 10px;
-}
 
-.tab-servos .servoblock {
-    margin-bottom: 0;
-    background-color: #ECECEC;
-}
-
-.tab-servos .right.servos {
-    float: left;
-    width: 80%;
-}
-
-.tab-servos .title2 {
-    padding-bottom: 2px;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 300;
-}
-
-.tab-servos .titles {
-    height: 20px;
-}
-
-.tab-servos .titles li {
-    float: left;
-    width: calc((100% / 9) - 10px);
-    margin-right: 10px;
-    text-align: center;
-}
-
-.tab-servos .servos .titles li {
-    float: right;
-    width: calc((100% / 8) - 10px);
-    margin: 0 0 0 10px;
-}
-
-.tab-servos .titles .active {
-    color: green;
-}
-
-.tab-servos .m-block {
-    float: left;
-    width: calc((100% / 9) - 10px);
-    height: 100px;
-    margin-right: 10px;
-    text-align: center;
-    background-color: #f4f4f4;
-    border-radius: 3px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.tab-servos .m-block .meter-bar {
+.tab-servos .meter-bar {
     position: relative;
-    width: 100%;
-    height: 100px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    height: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
     background-color: #E0E0E0;
     border-radius: 3px;
     border: 1px solid #F5F5F5;
 }
 
-.tab-servos .m-block .label {
+.tab-servos .meter-label {
     position: absolute;
-    width: 100%;
-    bottom: 45px;
+    top: 2px;
+    left: 110px;
     text-align: center;
     font-weight: bold;
     font-size: 10px;
     color: #474747;
 }
 
-.tab-servos .m-block .label.rpm_info {
-    bottom: 28px;
-}
-
-.tab-servos .m-block .indicator .label {
-    color: white;
-}
-
-.tab-servos .servos .m-block {
-    float: right;
-    width: calc((100% / 8) - 10px);
-    margin: 0 0 0 10px;
-    border-radius: 3px;
-}
-
-.tab-servos .indicator {
+.tab-servos .meter-fill {
     position: absolute;
     overflow: hidden;
-    width: 100%;
+    height: 100%;
     text-align: center;
-    border-radius: 2px;
+    border-radius: 3px;
+    background-color: #FFB010;
 }
+
 
 @media all and (max-width: 575px) {
 
     .tab-servos .gui_box {
         min-height: auto;
     }
-
-    .tab-servos .servoblock {
-        margin-bottom: 15px;
-    }
-    .tab-servos .servoblock > .spacer {
-        display: flex;
-        flex-wrap: wrap;
-    }
-    .tab-servos .left.motors {
-        width: 100%;
-        order: 1;
-    }
-    .tab-servos .right.servos {
-        width: 100%;
-        order: 3;
-        margin-top: 15px;
-    }
-    .tab-servos .titles li, .tab-servos .m-block {
-        width: calc((100% - 80px) / 9);
-    }
-    .tab-servos .titles li:last-child, .tab-servos .m-block:last-child {
-        margin-right: 0;
-    }
-    .tab-servos .servos .m-block, .tab-servos .servos .titles li {
-        width: calc((100% - 70px) / 8);
-    }
-    .tab-servos .servos .m-block:last-child, .tab-servos .servos .titles li:last-child {
-        margin-left: 0;
-    }
-
-    .tab-servos .servo_testing .values li:last-child {
-        margin-left: 4px;
-    }
-
 }
 
 @media only screen and (max-width: 1055px) , only screen and (max-device-width: 1055px) {
