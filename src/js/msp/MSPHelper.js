@@ -493,65 +493,20 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.AUX_CONFIG_IDS.push(data.readU8());
                 }
                 break;
-            case MSPCodes.MSP_SERVO_MIX_RULES:
-                break;
-
             case MSPCodes.MSP_SERVO_CONFIGURATIONS:
                 FC.SERVO_CONFIG = []; // empty the array as new data is coming in
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_33)) {
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
                     if (data.byteLength % 12 == 0) {
                         for (let i = 0; i < data.byteLength; i += 12) {
                             const arr = {
-                                'min':                      data.readU16(),
-                                'max':                      data.readU16(),
-                                'middle':                   data.readU16(),
-                                'rate':                     data.read8(),
-                                'indexOfChannelToForward':  data.readU8(),
-                                'reversedInputSources':     data.readU32(),
+                                'min':       data.readU16(),
+                                'max':       data.readU16(),
+                                'mid':       data.readU16(),
+                                'trim':      data.read16(),
+                                'rate':      data.read16(),
+                                'speed':     data.readU16()
                             };
-
                             FC.SERVO_CONFIG.push(arr);
-                        }
-                    }
-                } else if (semver.gte(FC.CONFIG.apiVersion, "1.12.0")) {
-                    if (data.byteLength % 14 == 0) {
-                        for (let i = 0; i < data.byteLength; i += 14) {
-                            const arr = {
-                                'min':                      data.readU16(),
-                                'max':                      data.readU16(),
-                                'middle':                   data.readU16(),
-                                'rate':                     data.read8(),
-                                'angleAtMin':               data.readU8(),
-                                'angleAtMax':               data.readU8(),
-                                'indexOfChannelToForward':  data.readU8(),
-                                'reversedInputSources':     data.readU32(),
-                            };
-
-                            FC.SERVO_CONFIG.push(arr);
-                        }
-                    }
-                } else {
-                    if (data.byteLength % 7 == 0) {
-                        for (let i = 0; i < data.byteLength; i += 7) {
-                            const arr = {
-                                'min':                      data.readU16(),
-                                'max':                      data.readU16(),
-                                'middle':                   data.readU16(),
-                                'rate':                     data.read8(),
-                                'angleAtMin':               45,
-                                'angleAtMax':               45,
-                                'indexOfChannelToForward':  undefined,
-                                'reversedInputSources':     0,
-                            };
-
-                            FC.SERVO_CONFIG.push(arr);
-                        }
-                    }
-
-                    if (semver.eq(FC.CONFIG.apiVersion, '1.10.0')) {
-                        // drop two unused servo configurations due to MSP rx buffer to small)
-                        while (FC.SERVO_CONFIG.length > 8) {
-                            FC.SERVO_CONFIG.pop();
                         }
                     }
                 }
@@ -1887,14 +1842,8 @@ MspHelper.prototype.crunch = function(code) {
             break;
 
         case MSPCodes.MSP_SET_CHANNEL_FORWARDING:
-            for (let i = 0; i < FC.SERVO_CONFIG.length; i++) {
-                let out = FC.SERVO_CONFIG[i].indexOfChannelToForward;
-                if (out == undefined) {
-                    out = 255; // Cleanflight defines "CHANNEL_FORWARDING_DISABLED" as "(uint8_t)0xFF"
-                }
-                buffer.push8(out);
-            }
             break;
+
         case MSPCodes.MSP_SET_CF_SERIAL_CONFIG:
             if (semver.lt(FC.CONFIG.apiVersion, "1.6.0")) {
 
@@ -2359,7 +2308,24 @@ MspHelper.prototype.dataflashRead = function(address, blockSize, onDataCallback)
     }, true);
 };
 
+MspHelper.prototype.sendServoConfig = function(servoIndex, onCompleteCallback) {
+
+    const CONFIG = FC.SERVO_CONFIG[servoIndex];
+    const buffer = [];
+
+    buffer.push8(servoIndex)
+          .push16(CONFIG.min)
+          .push16(CONFIG.max)
+          .push16(CONFIG.mid)
+          .push16(CONFIG.trim)
+          .push16(CONFIG.rate)
+          .push16(CONFIG.speed);
+
+    MSP.send_message(MSPCodes.MSP_SET_SERVO_CONFIGURATION, buffer, false, onCompleteCallback);
+};
+
 MspHelper.prototype.sendServoConfigurations = function(onCompleteCallback) {
+
     let nextFunction = send_next_servo_configuration;
 
     let servoIndex = 0;
@@ -2370,67 +2336,26 @@ MspHelper.prototype.sendServoConfigurations = function(onCompleteCallback) {
         nextFunction();
     }
 
-
     function send_next_servo_configuration() {
 
+        const CONFIG = FC.SERVO_CONFIG[servoIndex];
         const buffer = [];
 
-        if (semver.lt(FC.CONFIG.apiVersion, "1.12.0")) {
-            // send all in one go
-            // 1.9.0 had a bug where the MSP input buffer was too small, limit to 8.
-            for (let i = 0; i < FC.SERVO_CONFIG.length && i < 8; i++) {
-                buffer.push16(FC.SERVO_CONFIG[i].min)
-                    .push16(FC.SERVO_CONFIG[i].max)
-                    .push16(FC.SERVO_CONFIG[i].middle)
-                    .push8(FC.SERVO_CONFIG[i].rate);
-            }
-            nextFunction = send_channel_forwarding;
-        } else {
-            // send one at a time, with index
+        buffer.push8(servoIndex)
+              .push16(CONFIG.min)
+              .push16(CONFIG.max)
+              .push16(CONFIG.mid)
+              .push16(CONFIG.trim)
+              .push16(CONFIG.rate)
+              .push16(CONFIG.speed);
 
-            const servoConfiguration = FC.SERVO_CONFIG[servoIndex];
-
-            buffer.push8(servoIndex)
-                .push16(servoConfiguration.min)
-                .push16(servoConfiguration.max)
-                .push16(servoConfiguration.middle)
-                .push8(servoConfiguration.rate);
-
-            if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_33)) {
-                buffer.push8(servoConfiguration.angleAtMin)
-                    .push8(servoConfiguration.angleAtMax);
-            }
-
-            let out = servoConfiguration.indexOfChannelToForward;
-            if (out == undefined) {
-                out = 255; // Cleanflight defines "CHANNEL_FORWARDING_DISABLED" as "(uint8_t)0xFF"
-            }
-            buffer.push8(out)
-                .push32(servoConfiguration.reversedInputSources);
-
-            // prepare for next iteration
-            servoIndex++;
-            if (servoIndex == FC.SERVO_CONFIG.length) {
-                nextFunction = onCompleteCallback;
-            }
+        // prepare for next iteration
+        servoIndex++;
+        if (servoIndex == FC.SERVO_CONFIG.length) {
+            nextFunction = onCompleteCallback;
         }
+
         MSP.send_message(MSPCodes.MSP_SET_SERVO_CONFIGURATION, buffer, false, nextFunction);
-    }
-
-    function send_channel_forwarding() {
-        const buffer = [];
-
-        for (let i = 0; i < FC.SERVO_CONFIG.length; i++) {
-            let out = FC.SERVO_CONFIG[i].indexOfChannelToForward;
-            if (out == undefined) {
-                out = 255; // Cleanflight defines "CHANNEL_FORWARDING_DISABLED" as "(uint8_t)0xFF"
-            }
-            buffer.push8(out);
-        }
-
-        nextFunction = onCompleteCallback;
-
-        MSP.send_message(MSPCodes.MSP_SET_CHANNEL_FORWARDING, buffer, false, nextFunction);
     }
 };
 
