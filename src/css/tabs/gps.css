@@ -1,9 +1,7 @@
-.tab-gps progress {
-    width: 100%;
-    border-radius: 3px;
-}
 
-.tab-gps .GPS_info .head, .tab-gps .GPS_signal_strength .head {
+.tab-gps .GPS_info .head,
+.tag-gps .GPS_settings .head,
+.tab-gps .GPS_signal_strength .head {
     display: block;
     text-align: center;
     line-height: 20px;
@@ -12,13 +10,73 @@
     background-color: #ececec;
 }
 
-.tab-gps .gps_map {
-    height: 460px;
+.tab-gps input,
+.tab-gps select {
+    border: 1px solid var(--subtleAccent);
+    width: 230px;
+    height: 20px;
+    float: left;
+    margin-right: 15px;
+    border-radius: 3px;
 }
 
+.tab-gps .GPS_settings select {
+    float: left;
+    width: 100px;
+    height: 20px;
+    margin: 0 10px 5px 0;
+    border: 1px solid var(--subtleAccent);
+}
+
+.tab-gps .GPS_settings span {
+    line-height: 20px;
+}
+
+.tab-gps .GPS_settings .select
+{
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--subtleAccent);
+    width: 100%;
+    float: left;
+    clear: left;
+}
+
+.tab-gps .GPS_settings .select > div:first-child {
+    float: left;
+    height: 20px;
+    margin-right: 15px;
+    margin-left: 3px;
+}
+
+.tab-gps .GPS_info td {
+    font-size: 12px;
+}
+
+.tab-gps .freelabel {
+    margin-left: 10px;
+    position: relative;
+}
+
+.tab-gps .full-height {
+    height: 100%;
+}
+
+.tab-gps .full-width {
+    width: 100%;
+}
+
+.tab-gps progress {
+    width: 100%;
+    border-radius: 3px;
+}
+
+.tab-gps .gps_map {
+    height: 640px;
+}
 
 .tab-gps #connect {
-   display:none; 
+   display:none;
    text-align:center;
    padding-top:40%;
 }
@@ -29,9 +87,8 @@
     text-align: center;
     padding-top: 0px;
     background-image: url(../../images/loading-bars.svg);
-    background-position: center 40%;
-    background-size: 15%;
-    height: 100%;
+    background-position: center 50%;
+    background-size: 10%;
     background-repeat: no-repeat;
     float: left;
     width: 100%;
@@ -42,7 +99,7 @@
 }
 
 .tab-gps #loadmap {
-    margin-top:0px; 
+    margin-top:0px;
     display:none;
 }
 
@@ -50,7 +107,6 @@
     font-weight: bold;
     margin-top:10px;
 }
-
 
 .tab-gps #loadmap {
     height: 100%;
@@ -60,8 +116,8 @@
 
 .tab-gps #loadmap .map {
     width: 100%;
+    height: 100%;
     float: left;
-    height: 400px;
 }
 
 .tab-gps #loadmap .controls {
@@ -108,12 +164,6 @@
     border-top-right-radius: 0px;
 }
 
-.tab-gps iframe {
-    height: 400px;
-    width: 100%;
-    float: left;
-}
-
 
 progress[value]::-webkit-progress-bar {
     background-color: #d2d2d2;
@@ -129,21 +179,3 @@ progress[value]::-webkit-progress-value {
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25) inset;
 }
 
-
-@media only screen and (max-width: 1055px) , only screen and (max-device-width: 1055px) {
-
-.tab-gps iframe {
-    height: 347px;
-    width: 100%;
-    float: left;
-}
-
-.tab-gps .gps_map {
-    height: 403px;
-}
-
-.tabs-gps #loadmap .map {
-    height: 343px;
-}
-
-}

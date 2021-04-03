@@ -8,7 +8,7 @@ const Features = function (config) {
         // {bit: 2, group: 'other', name: 'INFLIGHT_ACC_CAL'},
         {bit: 3, group: 'rxMode', mode: 'select', name: 'RX_SERIAL'},
         // {bit: 6, group: 'other', name: 'SOFTSERIAL', haveTip: true},
-        {bit: 7, group: 'gps', name: 'GPS', haveTip: true},
+        {bit: 7, group: 'other', name: 'GPS'},
         {bit: 9, group: 'other', name: 'SONAR'},
         {bit: 10, group: 'other', name: 'TELEMETRY'},
         {bit: 13, group: 'rxMode', mode: 'select', name: 'RX_PARALLEL_PWM'},
@@ -19,7 +19,7 @@ const Features = function (config) {
         // {bit: 18, group: 'other', name: 'OSD'},
         {bit: 25, group: 'rxMode', mode: 'select', name: 'RX_SPI'},
         {bit: 26, group: 'other', name: 'GOVERNOR'},
-        {bit: 27, group: 'escSensor', name: 'ESC_SENSOR'},
+        {bit: 27, group: 'other', name: 'ESC_SENSOR'},
         {bit: 28, group: 'other', name: 'FREQ_SENSOR'},
         {bit: 30, group: 'other', name: 'RPM_FILTER'}
     ];
