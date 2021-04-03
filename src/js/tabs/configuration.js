@@ -21,7 +21,6 @@ TABS.configuration.initialize = function (callback) {
         .resolve(true)
         .then(() => { return MSP.promise(MSPCodes.MSP_FEATURE_CONFIG); })
         .then(() => { return MSP.promise(MSPCodes.MSP_BOARD_ALIGNMENT_CONFIG); })
-        .then(() => { return semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_33) ? MSP.promise(MSPCodes.MSP_GPS_CONFIG) : true; })
         .then(() => { return MSP.promise(MSPCodes.MSP_ACC_TRIM); })
         .then(() => { return semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_33) ? MSP.promise(MSPCodes.MSP_MISC) : true; })
         .then(() => { return semver.gte(FC.CONFIG.apiVersion, "1.8.0") ? MSP.promise(MSPCodes.MSP_ARMING_CONFIG) : true; })
@@ -312,113 +311,6 @@ TABS.configuration.initialize = function (callback) {
             $('.miscSettings').hide();
         }
 
-        // generate GPS
-        const gpsProtocols = [
-            'NMEA',
-            'UBLOX',
-        ];
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-            gpsProtocols.push('MSP');
-        }
-
-        const gpsBaudRates = [
-            '115200',
-            '57600',
-            '38400',
-            '19200',
-            '9600',
-        ];
-
-        const gpsSbas = [
-            i18n.getMessage('gpsSbasAutoDetect'),
-            i18n.getMessage('gpsSbasEuropeanEGNOS'),
-            i18n.getMessage('gpsSbasNorthAmericanWAAS'),
-            i18n.getMessage('gpsSbasJapaneseMSAS'),
-            i18n.getMessage('gpsSbasIndianGAGAN'),
-        ];
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-            gpsSbas.push(i18n.getMessage('gpsSbasNone'));
-        }
-
-        const gpsProtocolElement = $('select.gps_protocol');
-        const gpsAutoBaudElement = $('input[name="gps_auto_baud"]');
-        const gpsAutoBaudGroup = $('.gps_auto_baud');
-        const gpsAutoConfigElement = $('input[name="gps_auto_config"]');
-        const gpsAutoConfigGroup = $('.gps_auto_config');
-        const gpsUbloxGalileoElement = $('input[name="gps_ublox_galileo"]');
-        const gpsUbloxGalileoGroup = $('.gps_ublox_galileo');
-        const gpsUbloxSbasElement = $('select.gps_ubx_sbas');
-        const gpsUbloxSbasGroup = $('.gps_ubx_sbas');
-        const gpsHomeOnceElement = $('input[name="gps_home_once"]');
-        const gpsBaudrateElement = $('select.gps_baudrate');
-
-
-        for (let protocolIndex = 0; protocolIndex < gpsProtocols.length; protocolIndex++) {
-            gpsProtocolElement.append(`<option value="${protocolIndex}">${gpsProtocols[protocolIndex]}</option>`);
-        }
-
-        gpsProtocolElement.change(function () {
-            FC.GPS_CONFIG.provider = parseInt($(this).val());
-
-            // Call this to enable or disable auto config elements depending on the protocol
-            gpsAutoConfigElement.change();
-
-        }).val(FC.GPS_CONFIG.provider).change();
-
-        gpsAutoBaudElement.prop('checked', FC.GPS_CONFIG.auto_baud === 1);
-
-        gpsAutoConfigElement.change(function () {
-            const checked = $(this).is(":checked");
-
-            const ubloxSelected = FC.GPS_CONFIG.provider === gpsProtocols.indexOf('UBLOX');
-
-            const enableGalileoVisible = checked && ubloxSelected && semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43);
-            gpsUbloxGalileoGroup.toggle(enableGalileoVisible);
-
-            const enableSbasVisible = checked && ubloxSelected;
-            gpsUbloxSbasGroup.toggle(enableSbasVisible);
-
-        }).prop('checked', FC.GPS_CONFIG.auto_config === 1).change();
-
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_34)) {
-            gpsAutoBaudGroup.show();
-            gpsAutoConfigGroup.show();
-        } else {
-            gpsAutoBaudGroup.hide();
-            gpsAutoConfigGroup.hide();
-        }
-
-        gpsUbloxGalileoElement.change(function() {
-            FC.GPS_CONFIG.ublox_use_galileo = $(this).is(':checked') ? 1 : 0;
-        }).prop('checked', FC.GPS_CONFIG.ublox_use_galileo > 0).change();
-
-        for (let sbasIndex = 0; sbasIndex < gpsSbas.length; sbasIndex++) {
-            gpsUbloxSbasElement.append(`<option value="${sbasIndex}">${gpsSbas[sbasIndex]}</option>`);
-        }
-
-        gpsUbloxSbasElement.change(function () {
-            FC.GPS_CONFIG.ublox_sbas = parseInt($(this).val());
-        }).val(FC.GPS_CONFIG.ublox_sbas);
-
-        $('.gps_home_once').toggle(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43));
-        gpsHomeOnceElement.change(function() {
-            FC.GPS_CONFIG.home_point_once = $(this).is(':checked') ? 1 : 0;
-        }).prop('checked', FC.GPS_CONFIG.home_point_once > 0).change();
-
-        for (let baudRateIndex = 0; baudRateIndex < gpsBaudRates.length; baudRateIndex++) {
-            gpsBaudrateElement.append(`<option value="${gpsBaudRates[baudRateIndex]}">${gpsBaudRates[baudRateIndex]}</option>`);
-        }
-
-        if (semver.lt(FC.CONFIG.apiVersion, "1.6.0")) {
-            gpsBaudrateElement.change(function () {
-                FC.SERIAL_CONFIG.gpsBaudRate = parseInt($(this).val());
-            });
-            gpsBaudrateElement.val(FC.SERIAL_CONFIG.gpsBaudRate);
-        } else {
-            gpsBaudrateElement.prop("disabled", true);
-            gpsBaudrateElement.parent().hide();
-        }
-
         // fill board alignment
         $('input[name="board_align_roll"]').val(FC.BOARD_ALIGNMENT_CONFIG.roll);
         $('input[name="board_align_pitch"]').val(FC.BOARD_ALIGNMENT_CONFIG.pitch);
@@ -430,23 +322,10 @@ TABS.configuration.initialize = function (callback) {
 
         // UI hooks
 
-        function checkUpdateGpsControls() {
-            if (FC.FEATURE_CONFIG.features.isEnabled('GPS')) {
-                $('.gpsSettings').show();
-            } else {
-                $('.gpsSettings').hide();
-            }
-        }
-
         $('input.feature', features_e).change(function () {
             const element = $(this);
-
             FC.FEATURE_CONFIG.features.updateData(element);
             updateTabList(FC.FEATURE_CONFIG.features);
-
-            if (element.attr('name') === 'GPS') {
-                checkUpdateGpsControls();
-            }
         });
 
         $('input[id="accHardwareSwitch"]').change(function() {
@@ -463,7 +342,6 @@ TABS.configuration.initialize = function (callback) {
             updateTabList(FC.FEATURE_CONFIG.features);
         });
 
-        checkUpdateGpsControls();
 
         $('a.save').on('click', function() {
             // gather data that doesn't have automatic change event bound
