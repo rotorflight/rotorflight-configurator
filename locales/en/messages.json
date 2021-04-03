@@ -1656,7 +1656,7 @@
         "message": "<strong>Note:</strong> Make sure your FC is able to operate at these speeds! Check CPU and cycletime stability. Changing this may require PID re-tuning. TIP: Disable Accelerometer and other sensors to gain more performance."
     },
     "configurationGPS": {
-        "message": "GPS"
+        "message": "Settings"
     },
     "configurationGPSProtocol": {
         "message": "Protocol"
@@ -2630,7 +2630,7 @@
         "message": "EEPROM <span class=\"message-positive\">saved</span>"
     },
     "gpsHead": {
-        "message": "GPS"
+        "message": "Status"
     },
     "gpsMapHead": {
         "message": "Current GPS location"
@@ -2669,7 +2669,7 @@
         "message": "Dist to Home:"
     },
     "gpsSignalStrHead": {
-        "message": "GPS Signal Strength"
+        "message": "Signal Strength"
     },
     "gpsSignalStr": {
         "message": "Signal Strength"
