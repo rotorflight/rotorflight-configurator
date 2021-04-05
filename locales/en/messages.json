@@ -1001,6 +1001,12 @@
     "initialSetupButtonMassStorageText": {
         "message": "Reboot into <strong>Mass Storage</strong> mode (MSC)."
     },
+    "initialSetupButtonReboot": {
+        "message": "System Reboot"
+    },
+    "initialSetupButtonRebootText": {
+        "message": "Reboot and reinitialize the system."
+    },
     "initialSetupBackupSuccess": {
         "message": "Backup saved <span class=\"message-positive\">successfully</span>"
     },
