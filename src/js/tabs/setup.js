@@ -22,10 +22,11 @@ TABS.setup.initialize = function (callback) {
     load_status();
 
     function process_html() {
+
         // translate to user-selected language
         i18n.localizePage();
 
-        const backupButton = $('#content .backup');
+        const backupButton = $('a.backupSettings');
 
         if (semver.lt(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MIN_SUPPORTED_BACKUP_RESTORE)) {
             backupButton.addClass('disabled');
@@ -135,7 +136,7 @@ TABS.setup.initialize = function (callback) {
             });
         });
 
-        backupButton.click(function () {
+        $('a.backupSettings').click(function () {
             if ($(this).hasClass('disabled')) {
                 return;
             }
@@ -145,15 +146,13 @@ TABS.setup.initialize = function (callback) {
             });
         });
 
-        $('#content .restore').click(function () {
+        $('a.restoreSettings').click(function () {
             if ($(this).hasClass('disabled')) {
                 return;
             }
 
             configuration_restore(function () {
-                // get latest settings
                 TABS.setup.initialize();
-
                 GUI.log(i18n.getMessage('initialSetupRestoreSuccess'));
             });
         });
@@ -168,6 +167,12 @@ TABS.setup.initialize = function (callback) {
             } else {
                 buffer.push(mspHelper.REBOOT_TYPES.MSC);
             }
+            MSP.send_message(MSPCodes.MSP_SET_REBOOT, buffer, false);
+        });
+
+        $('a.rebootFirmware').click(function () {
+            const buffer = [];
+            buffer.push(mspHelper.REBOOT_TYPES.FIRMWARE);
             MSP.send_message(MSPCodes.MSP_SET_REBOOT, buffer, false);
         });
 
