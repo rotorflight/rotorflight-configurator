@@ -201,8 +201,8 @@ TABS.motors.initialize = function (callback) {
         const motorOutputReorderConfig = new MotorOutputReorderConfig(100);
         const domMotorOutputReorderDialogOpen = $('#motorOutputReorderDialogOpen');
 
-        const isMotorReorderingAvailable = (mixerList[mixer - 1].name in motorOutputReorderConfig)
-            && (FC.MOTOR_OUTPUT_ORDER) && (FC.MOTOR_OUTPUT_ORDER.length > 0);
+        const isMotorReorderingAvailable = false;
+
         domMotorOutputReorderDialogOpen.toggle(isMotorReorderingAvailable);
 
         self.escProtocolIsDshot = EscProtocols.IsProtocolDshot(FC.CONFIG.apiVersion, FC.PID_ADVANCED_CONFIG.fast_pwm_protocol);
@@ -929,7 +929,7 @@ TABS.motors.initialize = function (callback) {
         const domDialogMotorOutputReorder = $('#dialogMotorOutputReorder');
 
         const motorOutputReorderComponent = new MotorOutputReorderComponent($('#dialogMotorOutputReorderContent'),
-            callbackFunction, mixerList[FC.MIXER_CONFIG.mixer - 1].name,
+            callbackFunction, 'rotorflight',
             zeroThrottleValue, zeroThrottleValue + 200);
 
         $('#dialogMotorOutputReorder-closebtn').click(closeDialogMotorOutputReorder);
