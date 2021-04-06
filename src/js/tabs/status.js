@@ -238,7 +238,7 @@ TABS.status.initialize = function (callback) {
 
             if (have_sensor(FC.CONFIG.activeSensors, 'gps')) {
                 MSP.send_message(MSPCodes.MSP_RAW_GPS, false, false, function () {
-                    gpsFix_e.html((FC.GPS_DATA.fix) ? i18n.getMessage('gpsFixTrue') : i18n.getMessage('gpsFixFalse'));
+                    gpsFix_e.html((FC.GPS_DATA.fix) ? i18n.getMessage('gpsFixYes') : i18n.getMessage('gpsFixNo'));
                     gpsSats_e.text(FC.GPS_DATA.numSat);
                     gpsAlt_e.text(FC.GPS_DATA.alt + ' m');
                     gpsLat_e.text((FC.GPS_DATA.lat / 10000000).toFixed(4) + ' deg');
