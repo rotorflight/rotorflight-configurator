@@ -2656,6 +2656,12 @@
     "gps3dFix": {
         "message": "3D Fix:"
     },
+    "gpsFixYes": {
+        "message": "<span class=\"fixtrue\">Fix</span>"
+    },
+    "gpsFixNo": {
+        "message": "<span class=\"fixfalse\">No Fix</span>"
+    },
     "gpsFixTrue": {
         "message": "<span class=\"fixtrue\">True</span>"
     },
