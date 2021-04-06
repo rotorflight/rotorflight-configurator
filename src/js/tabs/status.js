@@ -160,13 +160,8 @@ TABS.status.initialize = function (callback) {
         const barContainer = $('.tab-status .bars');
 
         for (let i = 0, aux = 1; i < numBars; i++) {
-            let name;
-            if (i < bar_names.length) {
-                name = bar_names[i];
-            } else {
-                name = i18n.getMessage("controlAxisAux" + (aux++));
-            }
-
+            const name = (i < bar_names.length) ?
+                  bar_names[i] : i18n.getMessage("controlAxisAux" + (aux++));
             barContainer.append('\
                 <ul>\
                     <li class="name">' + name + '</li>\
@@ -182,9 +177,30 @@ TABS.status.initialize = function (callback) {
             ');
         }
 
+        barContainer.append('\
+            <ul><li></li></ul>\
+            <ul>\
+                <li class="name">RSSI</li>\
+                <li class="meter">\
+                    <div class="meter-bar">\
+                        <div class="label"></div>\
+                        <div class="fill">\
+                            <div class="label"></div>\
+                        </div>\
+                    </div>\
+                </li>\
+            </ul>\
+        ');
+
+        function update_rc_rssi() {
+            const rssi = ((FC.ANALOG.rssi / 1023) * 100).toFixed(0) + '%';
+            meterFillArray[numBars].css('width', rssi);
+            meterLabelArray[numBars].text(rssi);
+        }
+
         const meterScale = {
-            'min': 800,
-            'max': 2200
+            'min': 750,
+            'max': 2250
         };
 
         const meterFillArray = [];
@@ -196,6 +212,13 @@ TABS.status.initialize = function (callback) {
         $('.meter', barContainer).each(function () {
             meterLabelArray.push($('.label', this));
         });
+
+        function update_rc_channels() {
+            for (let i = 0; i < FC.RC.active_channels; i++) {
+                meterFillArray[i].css('width', ((FC.RC.channels[i] - meterScale.min) / (meterScale.max - meterScale.min) * 100).clamp(0, 100) + '%');
+                meterLabelArray[i].text(FC.RC.channels[i]);
+            }
+        }
 
         function get_slow_data() {
 
@@ -210,7 +233,7 @@ TABS.status.initialize = function (callback) {
                 bat_voltage_e.text(i18n.getMessage('statusBatteryValue', [FC.ANALOG.voltage]));
                 bat_mah_drawn_e.text(i18n.getMessage('statusBatteryMahValue', [FC.ANALOG.mAhdrawn]));
                 bat_mah_drawing_e.text(i18n.getMessage('statusBatteryAValue', [FC.ANALOG.amperage.toFixed(2)]));
-                rssi_e.text(i18n.getMessage('statusRSSIValue', [((FC.ANALOG.rssi / 1023) * 100).toFixed(0)]));
+                update_rc_rssi();
             });
 
             if (have_sensor(FC.CONFIG.activeSensors, 'gps')) {
@@ -226,12 +249,7 @@ TABS.status.initialize = function (callback) {
 
         function get_fast_data() {
 
-            MSP.send_message(MSPCodes.MSP_RC, false, false, function () {
-                for (let i = 0; i < FC.RC.active_channels; i++) {
-                    meterFillArray[i].css('width', ((FC.RC.channels[i] - meterScale.min) / (meterScale.max - meterScale.min) * 100).clamp(0, 100) + '%');
-                    meterLabelArray[i].text(FC.RC.channels[i]);
-                }
-            });
+            MSP.send_message(MSPCodes.MSP_RC, false, false, update_rc_channels);
 
             MSP.send_message(MSPCodes.MSP_ATTITUDE, false, false, function () {
                 roll_e.text(i18n.getMessage('statusAttitude', [FC.SENSOR_DATA.kinematics[0]]));
