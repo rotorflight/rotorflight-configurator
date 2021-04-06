@@ -81,6 +81,7 @@ TABS.status.initialize = function (callback) {
             arming_disable_flags_e = $('.arming-disable-flags'),
             gpsFix_e = $('.gpsFix'),
             gpsSats_e = $('.gpsSats'),
+            gpsAlt_e = $('.gpsAlt'),
             gpsLat_e = $('.gpsLat'),
             gpsLon_e = $('.gpsLon'),
             roll_e = $('dd.roll'),
@@ -216,6 +217,7 @@ TABS.status.initialize = function (callback) {
                 MSP.send_message(MSPCodes.MSP_RAW_GPS, false, false, function () {
                     gpsFix_e.html((FC.GPS_DATA.fix) ? i18n.getMessage('gpsFixTrue') : i18n.getMessage('gpsFixFalse'));
                     gpsSats_e.text(FC.GPS_DATA.numSat);
+                    gpsAlt_e.text(FC.GPS_DATA.alt + ' m');
                     gpsLat_e.text((FC.GPS_DATA.lat / 10000000).toFixed(4) + ' deg');
                     gpsLon_e.text((FC.GPS_DATA.lon / 10000000).toFixed(4) + ' deg');
                 });
