@@ -44,6 +44,10 @@ TABS.status.initialize = function (callback) {
         // Craft name
         $('.craft-name').text(FC.CONFIG.name);
 
+        // Target and board names
+        $('.target-name').text(FC.CONFIG.targetName);
+        $('.board-name').text(FC.CONFIG.boardName);
+
         // set roll in interactive block
         $('span.roll').text(i18n.getMessage('statusAttitude', [0]));
         // set pitch in interactive block

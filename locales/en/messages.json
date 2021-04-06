@@ -818,7 +818,13 @@
         "message": "$1 A"
     },
     "statusCraftName": {
-        "message": "CraftName:"
+        "message": "Craft Name:"
+    },
+    "statusBoardName": {
+        "message": "Board:"
+    },
+    "statusTargetName": {
+        "message": "Firmware:"
     },
     "statusRSSI": {
         "message": "RSSI:"
