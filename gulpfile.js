@@ -53,9 +53,9 @@ let gitChangeSetId;
 const nwBuilderOptions = {
     version: '0.50.2',
     files: `${DIST_DIR}**/*`,
-    macIcns: './src/images/bf_icon.icns',
+    macIcns: './src/images/rf_icon.icns',
     macPlist: { 'CFBundleDisplayName': 'Rotorflight Configurator'},
-    winIco: './src/images/bf_icon.ico',
+    winIco: './src/images/rf_icon.ico',
     zip: false,
 };
 
