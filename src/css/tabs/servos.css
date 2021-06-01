@@ -184,7 +184,7 @@
     height: 100%;
     text-align: center;
     border-radius: 3px;
-    background-color: #FFB010;
+    background-color: var(--accent);
 }
 
 
