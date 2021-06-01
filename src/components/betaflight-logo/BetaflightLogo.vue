@@ -5,7 +5,7 @@
   background-image: url(./images/light-wide-2.svg);
   background-repeat: no-repeat;
   background-position: left center;
-  background-size: contain;
+  background-size: 80%;
   position: relative;
   margin-top: -25px;
 }

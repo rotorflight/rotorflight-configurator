@@ -1,13 +1,15 @@
 :root {
-    --accent: #ffbb00;
-    --error: red;
+    --accent: #4da8da;
+    --darkAccent: #007cc7;
     --subtleAccent: silver;
+    --superSubtleAccent: #cccccc;
     --quietText: #ffffff;
     --quietHeader: #828885;
     --defaultText: #000000;
     --subtleText: #c0c0c0;
     --mutedText: #616161;
-    --linkText: #2e2ebb;
+    --linkText: #203647;
+    --error: red;
     --boxBackground: #ffffff;
     --alternativeBackground: #f9f9f9;
     --sideBackground: #ffffff;
@@ -16,10 +18,13 @@
     --gimbalBackground: #eee;
     --gimbalCrosshair: var(--subtleAccent);
     --switcherysecond: #c4c4c4;
-    --pushedButton-background:  #c4c4c4;
-    --pushedButton-fontColor:  #000000;
-    --hoverButton-background: #ffcc3e;
-    --superSubtleAccent: #CCCCCC;
+    --button-border: #4da8da;
+    --button-background: #4da8da;
+    --hoverButton-border: #0e0e0e;
+    --hoverButton-background: #4da8da;
+    --pushedButton-fontColor: #000000;
+    --pushedButton-border: #000000;
+    --pushedButton-background: #4da8da;
 }
 
 * {
@@ -95,9 +100,9 @@ a.disabled {
 .cf_doc_version_bt a {
     padding: 1px 9px 1px 9px;
     margin-top: -45px;
-    background-color: var(--accent);
+    background-color: var(--button-background);
     border-radius: 3px;
-    border: 1px solid #e8b423;
+    border: 1px solid var(--button-border);
     color: #000;
     float: right;
     font-weight: bold;
@@ -110,7 +115,15 @@ a.disabled {
 }
 
 .cf_doc_version_bt a:hover {
-    background-color: #fecb3f;
+    background-color: var(--hoverButton-background);
+    border-color: var(--hoverButton-border);
+    transition: all ease 0.2s;
+}
+
+.cf_doc_version_bt a:active {
+    background-color: var(--pushedButton-background);
+    border-color: var(--pushedButton-border);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
     transition: all ease 0.2s;
 }
 
@@ -316,8 +329,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .firmware_b a.flash, .connect_b a.connect {
-    background-color: var(--accent);
-    border: 1px solid #dba718;
+    background-color: var(--darkAccent);
+    border: 1px solid var(--superSubtleAccent);
     background-repeat: no-repeat;
     height: 50px;
     width: 50px;
@@ -346,13 +359,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .firmware_b a.flash:hover, .connect_b a.connect:hover {
-    background-color: #ffcc3f;
-}
-
-.firmware_b a.flash.active, .connect_b a.connect.active {
-    background-color: #e60000;
-    border: 1px solid #fe0000;
-    transition: none;
+    background-color: var(--accent);
 }
 
 .firmware_b a.flash.active {
@@ -361,10 +368,6 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .connect_b a.connect.active {
     background-image: url(../images/icons/cf_icon_usb1_white.svg);
-}
-
-.firmware_b a.flash.active:hover, .connect_b a.connect.active:hover {
-    background-color: #f21212;
 }
 
 .flash_state, .connect_state {
@@ -1518,9 +1521,9 @@ dialog .dialog_toolbar .btn a {
     margin-top: 0;
     margin-bottom: 0;
     margin-right: 20px;
-    background-color: var(--accent);
+    background-color: var(--button-background);
     border-radius: 3px;
-    border: 1px solid #dba718;
+    border: 1px solid var(--button-border);
     color: #000;
     float: left;
     font-weight: bold;
@@ -1535,13 +1538,15 @@ dialog .dialog_toolbar .btn a {
 
 dialog .dialog_toolbar .btn a:hover {
     background-color: var(--hoverButton-background);
+    border-color: var(--hoverButton-border);
     transition: all ease 0.2s;
 }
 
 dialog .dialog_toolbar .btn a:active {
-    background-color: var(--accent);
-    transition: all ease 0.0s;
-    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.35);
+    background-color: var(--pushedButton-background);
+    border-color: var(--pushedButton-border);
+    transition: all ease 0.1s;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 dialog .dialog_toolbar .btn a.disabled {
@@ -1615,9 +1620,9 @@ dialog .dialog_toolbar .btn a.disabled {
     margin-top: 0;
     margin-bottom: 0;
     margin-right: 20px;
-    background-color: var(--accent);
+    background-color: var(--button-background);
     border-radius: 3px;
-    border: 1px solid #dba718;
+    border: 1px solid var(--button-border);
     color: #000;
     float: right;
     font-weight: bold;
@@ -1633,13 +1638,15 @@ dialog .dialog_toolbar .btn a.disabled {
 
 .content_toolbar .btn a:hover {
     background-color: var(--hoverButton-background);
+    border-color: var(--hoverButton-border);
     transition: all ease 0.2s;
 }
 
 .content_toolbar .btn a:active {
-    background-color: var(--accent);
-    transition: all ease 0.0s;
-    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.35);
+    background-color: var(--pushedButton-background);
+    border-color: var(--pushedButton-border);
+    transition: all ease 0.2s;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 .content_toolbar .btn a.disabled {
@@ -1904,9 +1911,9 @@ dialog .dialog_toolbar .btn a.disabled {
     margin-top: 9px;
     margin-bottom: 0;
     margin-right: 20px;
-    background-color: var(--accent);
+    background-color: var(--button-background);
     border-radius: 3px;
-    border: 1px solid #dba718;
+    border: 1px solid var(--button-border);
     color: #000;
     float: right;
     font-weight: bold;
@@ -1921,7 +1928,15 @@ dialog .dialog_toolbar .btn a.disabled {
 
 .fixed_band .save_btn a:hover {
     background-color: var(--hoverButton-background);
+    border-color: var(--hoverButton-border);
     transition: all ease 0.2s;
+}
+
+.fixed_band .save_btn a:active {
+    background-color: var(--pushedbutton-background);
+    border-color: var(--pushedButton-border);
+    transition: all ease 0.2s;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 /* DIfferent buttons */
@@ -1936,9 +1951,9 @@ dialog .dialog_toolbar .btn a.disabled {
 .default_btn a {
     padding: 5px 0 5px 0;
     text-align: center;
-    background-color: var(--accent);
+    background-color: var(--button-background);
     border-radius: 4px;
-    border: 1px solid #dba718;
+    border: 1px solid var(--button-border);
     color: #000;
     font-weight: 600;
     font-size: 12px;
@@ -1957,17 +1972,18 @@ dialog .dialog_toolbar .btn a.disabled {
 
 .default_btn a:hover {
     background-color: var(--hoverButton-background);
+    border-color: var(--hoverButton-border);
     color: #000;
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     transition: all ease 0.2s;
     text-decoration:none;
-
 }
 
 .default_btn a:active {
-    background-color: var(--hoverButton-background);
-    transition: all ease 0.0s;
-    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.35);
+    background-color: var(--pushedButton-background);
+    border-color: var(--pushedButton-border);
+    transition: all ease 0.2s;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 .margin-top5 {
@@ -1979,9 +1995,9 @@ dialog .dialog_toolbar .btn a.disabled {
     margin-top: 8px;
     margin-bottom: 8px;
     margin-right: 10px;
-    background-color: var(--accent);
+    background-color: var(--button-background);
     border-radius: 3px;
-    border: 1px solid #dba718;
+    border: 1px solid var(--button-border);
     color: #000;
     font-weight: bold;
     font-size: 12px;
@@ -1996,12 +2012,23 @@ dialog .dialog_toolbar .btn a.disabled {
 
 .regular-button:hover {
     background-color: var(--hoverButton-background);
+    border-color: var(--hoverButton-border);
 }
 
 .regular-button.pushed {
     background-color: var(--pushedButton-background);
+    border-color: var(--pushedButton-border);
     color: var(--pushedButton-fontColor);
-    border-radius: 3px;
+}
+
+.regular-button.disabled {
+    cursor: default;
+    color: #fff;
+    background-color: #AFAFAF;
+    border-color: #AFAFAF;
+    pointer-events: none;
+    text-shadow: none;
+    opacity: 0.5;
 }
 
 .small {
@@ -2039,20 +2066,20 @@ dialog .dialog_toolbar .btn a.disabled {
 .small a:active {
     background-color: #878787;
     transition: all ease 0.0s;
-    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.35);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 .green a {
     background-color: var(--accent);
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     color: #000;
-    border: 1px solid #dba718;
+    border: 1px solid var(--button-border);
     transition: all ease 0.2s;
 }
 
 .green a:hover {
     background-color: #ffcc3f;
-    border: 1px solid #dba718;
+    border: 1px solid var(--button-border);
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     color: #000;
     transition: all ease 0.2s;
@@ -2172,8 +2199,8 @@ button {
 }
 
 button.active {
-    background-color: var(--accent);
-    border: 1px solid #dba718;
+    background-color: var(--button-background);
+    border: 1px solid var(--button-border);
     color: #000;
 }
 
