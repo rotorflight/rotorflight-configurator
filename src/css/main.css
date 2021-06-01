@@ -18,13 +18,13 @@
     --gimbalBackground: #eee;
     --gimbalCrosshair: var(--subtleAccent);
     --switcherysecond: #c4c4c4;
-    --button-border: #4da8da;
-    --button-background: #4da8da;
-    --hoverButton-border: #0e0e0e;
-    --hoverButton-background: #4da8da;
+    --button-border: #c4c4c4;
+    --button-background: #c4c4c4;
+    --hoverButton-border: #7c7c7c;
+    --hoverButton-background: #c4c4c4;
     --pushedButton-fontColor: #000000;
-    --pushedButton-border: #000000;
-    --pushedButton-background: #4da8da;
+    --pushedButton-border: #7c7c7c;
+    --pushedButton-background: #7c7c7c;
 }
 
 * {
@@ -101,7 +101,7 @@ a.disabled {
     padding: 1px 9px 1px 9px;
     margin-top: -45px;
     background-color: var(--button-background);
-    border-radius: 3px;
+    border-radius: 1px;
     border: 1px solid var(--button-border);
     color: #000;
     float: right;
@@ -111,20 +111,18 @@ a.disabled {
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     text-transform: uppercase;
     letter-spacing: 0.03em;
+    transition: all ease 0.1s;
     display: block;
 }
 
 .cf_doc_version_bt a:hover {
     background-color: var(--hoverButton-background);
     border-color: var(--hoverButton-border);
-    transition: all ease 0.2s;
 }
 
 .cf_doc_version_bt a:active {
     background-color: var(--pushedButton-background);
     border-color: var(--pushedButton-border);
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
-    transition: all ease 0.2s;
 }
 
 /* documentation button end  */
@@ -335,7 +333,6 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 50px;
     width: 50px;
     border-radius: 100px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
     float: left;
     transition: none;
 }
@@ -1522,7 +1519,7 @@ dialog .dialog_toolbar .btn a {
     margin-bottom: 0;
     margin-right: 20px;
     background-color: var(--button-background);
-    border-radius: 3px;
+    border-radius: 1px;
     border: 1px solid var(--button-border);
     color: #000;
     float: left;
@@ -1531,7 +1528,7 @@ dialog .dialog_toolbar .btn a {
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     display: block;
     cursor: pointer;
-    transition: all ease 0.2s;
+    transition: all ease 0.1s;
     padding: 0 9px;
     line-height: 28px;
 }
@@ -1539,14 +1536,11 @@ dialog .dialog_toolbar .btn a {
 dialog .dialog_toolbar .btn a:hover {
     background-color: var(--hoverButton-background);
     border-color: var(--hoverButton-border);
-    transition: all ease 0.2s;
 }
 
 dialog .dialog_toolbar .btn a:active {
     background-color: var(--pushedButton-background);
     border-color: var(--pushedButton-border);
-    transition: all ease 0.1s;
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 dialog .dialog_toolbar .btn a.disabled {
@@ -1621,7 +1615,7 @@ dialog .dialog_toolbar .btn a.disabled {
     margin-bottom: 0;
     margin-right: 20px;
     background-color: var(--button-background);
-    border-radius: 3px;
+    border-radius: 1px;
     border: 1px solid var(--button-border);
     color: #000;
     float: right;
@@ -1630,7 +1624,7 @@ dialog .dialog_toolbar .btn a.disabled {
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     display: block;
     cursor: pointer;
-    transition: all ease 0.2s;
+    transition: all ease 0.1s;
     padding: 0 9px;
     line-height: 28px;
     user-select: none;
@@ -1639,14 +1633,11 @@ dialog .dialog_toolbar .btn a.disabled {
 .content_toolbar .btn a:hover {
     background-color: var(--hoverButton-background);
     border-color: var(--hoverButton-border);
-    transition: all ease 0.2s;
 }
 
 .content_toolbar .btn a:active {
     background-color: var(--pushedButton-background);
     border-color: var(--pushedButton-border);
-    transition: all ease 0.2s;
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 .content_toolbar .btn a.disabled {
@@ -1912,7 +1903,7 @@ dialog .dialog_toolbar .btn a.disabled {
     margin-bottom: 0;
     margin-right: 20px;
     background-color: var(--button-background);
-    border-radius: 3px;
+    border-radius: 1px;
     border: 1px solid var(--button-border);
     color: #000;
     float: right;
@@ -1921,7 +1912,7 @@ dialog .dialog_toolbar .btn a.disabled {
     text-shadow: 0 1px rgba(0, 0, 0, 0.25);
     display: block;
     cursor: pointer;
-    transition: all ease 0.2s;
+    transition: all ease 0.1s;
     padding: 0 9px;
     line-height: 28px;
 }
@@ -1929,17 +1920,14 @@ dialog .dialog_toolbar .btn a.disabled {
 .fixed_band .save_btn a:hover {
     background-color: var(--hoverButton-background);
     border-color: var(--hoverButton-border);
-    transition: all ease 0.2s;
 }
 
 .fixed_band .save_btn a:active {
     background-color: var(--pushedbutton-background);
     border-color: var(--pushedButton-border);
-    transition: all ease 0.2s;
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
-/* DIfferent buttons */
+/* Different buttons */
 .default_btn {
     width: 100%;
     position: relative;
@@ -1952,14 +1940,14 @@ dialog .dialog_toolbar .btn a.disabled {
     padding: 5px 0 5px 0;
     text-align: center;
     background-color: var(--button-background);
-    border-radius: 4px;
+    border-radius: 1px;
     border: 1px solid var(--button-border);
     color: #000;
     font-weight: 600;
     font-size: 12px;
     line-height: 13px;
     display: block;
-    transition: all ease 0.2s;
+    transition: all ease 0.1s;
     text-decoration:none;
     cursor: pointer;
 }
@@ -1975,15 +1963,12 @@ dialog .dialog_toolbar .btn a.disabled {
     border-color: var(--hoverButton-border);
     color: #000;
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
-    transition: all ease 0.2s;
     text-decoration:none;
 }
 
 .default_btn a:active {
     background-color: var(--pushedButton-background);
     border-color: var(--pushedButton-border);
-    transition: all ease 0.2s;
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 .margin-top5 {
@@ -1996,7 +1981,7 @@ dialog .dialog_toolbar .btn a.disabled {
     margin-bottom: 8px;
     margin-right: 10px;
     background-color: var(--button-background);
-    border-radius: 3px;
+    border-radius: 1px;
     border: 1px solid var(--button-border);
     color: #000;
     font-weight: bold;
@@ -2004,7 +1989,7 @@ dialog .dialog_toolbar .btn a.disabled {
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     display: inline-block;
     cursor: pointer;
-    transition: all ease 0.2s;
+    transition: all ease 0.1s;
     padding: 0 9px;
     line-height: 28px;
     user-select: none;
@@ -2015,7 +2000,7 @@ dialog .dialog_toolbar .btn a.disabled {
     border-color: var(--hoverButton-border);
 }
 
-.regular-button.pushed {
+.regular-button:active {
     background-color: var(--pushedButton-background);
     border-color: var(--pushedButton-border);
     color: var(--pushedButton-fontColor);
@@ -2052,7 +2037,7 @@ dialog .dialog_toolbar .btn a.disabled {
     font-size: 11px;
     line-height: 11px;
     display: block;
-    transition: all ease 0.2s;
+    transition: all ease 0.1s;
 }
 
 .small a:hover {
@@ -2060,13 +2045,10 @@ dialog .dialog_toolbar .btn a.disabled {
     color: #000;
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     border: 1px solid var(--accent);
-    transition: all ease 0.2s;
 }
 
 .small a:active {
     background-color: #878787;
-    transition: all ease 0.0s;
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 .green a {
@@ -2074,7 +2056,7 @@ dialog .dialog_toolbar .btn a.disabled {
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     color: #000;
     border: 1px solid var(--button-border);
-    transition: all ease 0.2s;
+    transition: all ease 0.1s;
 }
 
 .green a:hover {
@@ -2082,7 +2064,6 @@ dialog .dialog_toolbar .btn a.disabled {
     border: 1px solid var(--button-border);
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     color: #000;
-    transition: all ease 0.2s;
 }
 
 /* Table styling */
