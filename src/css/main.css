@@ -303,6 +303,10 @@ input[type="number"]::-webkit-inner-spin-button {
     align-items: center;
 }
 
+.open_firmware_flasher {
+    margin-left: 20px;
+}
+
 .open_firmware_flasher, .connect_controls {
     position: relative;
     width: 80px;
@@ -312,8 +316,8 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .firmware_b, .connect_b {
     width: 52px;
-    margin: 0 14px;
     height: 52px;
+    margin: 0 14px;
 }
 
 @media all and (min-width: 1125px) {
@@ -327,14 +331,14 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .firmware_b a.flash, .connect_b a.connect {
-    background-color: var(--darkAccent);
-    border: 1px solid var(--superSubtleAccent);
+    background-color: rgba(0,0,0,0);
+    border: 2px solid #808080;
     background-repeat: no-repeat;
     height: 50px;
     width: 50px;
     border-radius: 100px;
     float: left;
-    transition: none;
+    transition: all ease 0.1s;
 }
 
 .firmware_b a.flash {
@@ -350,13 +354,19 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .firmware_b a.flash.disabled, .connect_b a.connect.disabled {
-    background-color: #808080;
-    pointer-events: none;
+    border: none;
     cursor: default;
+    pointer-events: none;
 }
 
 .firmware_b a.flash:hover, .connect_b a.connect:hover {
+    background-color: var(--darkAccent);
+    border-color: #e0e0e0;
+}
+
+.firmware_b a.flash:active, .connect_b a.connect:active {
     background-color: var(--accent);
+    border-color: #ffffff;
 }
 
 .firmware_b a.flash.active {
