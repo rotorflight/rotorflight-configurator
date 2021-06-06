@@ -407,11 +407,11 @@ TABS.receiver.initialize = function (callback) {
 
             // catch smoothing channels
             const rcSmoothingChannels =
-                  $('#rcSmoothingRoll').is(':checked')       ?  1 : 0 +
-                  $('#rcSmoothingPitch').is(':checked')      ?  2 : 0 +
-                  $('#rcSmoothingYaw').is(':checked')        ?  4 : 0 +
-                  $('#rcSmoothingThrottle').is(':checked')   ?  8 : 0 +
-                  $('#rcSmoothingCollective').is(':checked') ? 16 : 0;
+                  ( $('#rcSmoothingRoll').is(':checked')       ?  1 : 0 ) +
+                  ( $('#rcSmoothingPitch').is(':checked')      ?  2 : 0 ) +
+                  ( $('#rcSmoothingYaw').is(':checked')        ?  4 : 0 ) +
+                  ( $('#rcSmoothingThrottle').is(':checked')   ?  8 : 0 ) +
+                  ( $('#rcSmoothingCollective').is(':checked') ? 16 : 0 );
 
             // catch rssi aux
             FC.RSSI_CONFIG.channel = parseInt($('select[name="rssi_channel"]').val());
