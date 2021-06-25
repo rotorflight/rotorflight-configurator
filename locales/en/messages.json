@@ -333,6 +333,9 @@
     "tabProfiles": {
         "message": "Profiles"
     },
+    "tabRates": {
+        "message": "Rates"
+    },
     "tabReceiver": {
         "message": "Receiver"
     },
@@ -2298,7 +2301,7 @@
     "profilesButtonRefresh": {
         "message": "Refresh"
     },
-    
+
     "receiverHelp": {
         "message": "Please read receiver chapter of the documentation.  Configure serial port (if required), receiver mode (serial/ppm/pwm), provider (for serial receivers), bind receiver, set channel map, configure channel endpoints/range on TX so that all channels go from ~1000 to ~2000.  Set midpoint (default 1500), trim channels to 1500, configure stick deadband, verify behaviour when TX is off or out of range.<br /><span class=\"message-negative\">IMPORTANT:</span> Before flying read failsafe chapter of documentation and configure failsafe."
     },
@@ -4299,6 +4302,128 @@
         "message": "Adds a new angle limiting mode for pilots who are learning to fly in acro mode. The range valid is 10-80 and must be activated with a switch in the $t(tabAuxiliary.message) tab."
     },
 
+    "rateSetupButtonSave": {
+        "message": "Save"
+    },
+    "rateSetupButtonRefresh": {
+        "message": "Refresh"
+    },
+    "rateSetupCopyRateProfile": {
+        "message": "Copy rateprofile"
+    },
+    "rateSetupResetProfile": {
+        "message": "Reset rateprofile"
+    },
+    "rateSetupProfileReset": {
+        "message": "Loaded default rateprofile"
+    },
+    "rateSetupReceivedRateProfile": {
+        "message": "Flight controller set Rate Profile: <strong class=\"message-positive\">$1</strong>"
+    },
+    "rateSetupLoadedRateProfile": {
+        "message": "Loaded Rate Profile: <strong class=\"message-positive\">$1</strong>"
+    },
+    "rateSetupActivateProfile": {
+        "message": "Loaded Rate Profile: <strong class=\"message-positive\">$1</strong>"
+    },
+    "rateSetupDataRefreshed": {
+        "message": "Rate Profile data <strong>refreshed</strong>"
+    },
+    "rateSetupEepromSaved": {
+        "message": "EEPROM <span class=\"message-positive\">saved</span>"
+    },
+    "rateSetupSubTab": {
+        "message": "Rate Profile #$1"
+    },
+    "rateSetupSubTab1": {
+        "message": "Rate Profile #1"
+    },
+    "rateSetupSubTab2": {
+        "message": "Rate Profile #2"
+    },
+    "rateSetupSubTab3": {
+        "message": "Rate Profile #3"
+    },
+    "rateSetupSubTab4": {
+        "message": "Rate Profile #4"
+    },
+    "rateSetupSubTab5": {
+        "message": "Rate Profile #5"
+    },
+    "rateSetupSubTab6": {
+        "message": "Rate Profile #6"
+    },
+    "rateSetupAtivateProfile": {
+        "message": "Loaded Profile: <strong class=\"message-positive\">$1</strong>"
+    },
+    "rateSetupRates": {
+        "message": "Rates"
+    },
+    "rateSetupHelp": {
+        "message": "Adjust these values to set your rates. Use RC Rate to increase maximum rate overall, use Super Rate to have higher rates at the end of the stick travel, use RC Expo to make the middle stick feel smooth.",
+        "description": "Rate table helpicon message"
+    },
+    "rateSetupTuningHelp": {
+        "message": "<b>Rates and Expo</b>: Determine your stick feel based on these parameters. Use the graph and live 3D model to find your favourite rate setting."
+    },
+    "rateSetupRcExpoPower": {
+        "message": "RC Expo Power"
+    },
+    "rateSetupRcExpoPowerHelp": {
+        "message": "The exponent that is used when calculating RC Expo. In Betaflight versions prior to 3.0, value is fixed at 3."
+    },
+    "rateSetupLevel": {
+        "message": "Angle/Horizon"
+    },
+    "rateSetupRatesType": {
+        "message": "Rates Type"
+    },
+    "rateSetupRatesTypeTip": {
+        "message": "Changing rates type will change the rates curve and the way you can set it"
+    },
+    "rateSetupRate": {
+        "message": "Rate"
+    },
+    "rateSetupRcRate": {
+        "message": "RC Rate"
+    },
+    "rateSetupRcExpo": {
+        "message": "RC Expo"
+    },
+    "rateSetupRcRateRaceflight": {
+        "message": "Rate"
+    },
+    "rateSetupRcExpoRaceflight": {
+        "message": "Expo"
+    },
+    "rateSetupRateRaceflight": {
+        "message": "Acro+"
+    },
+    "rateSetupRcExpoKISS": {
+        "message": "RC Curve"
+    },
+    "rateSetupRateQuickRates": {
+        "message": "Max Rate"
+    },
+    "rateSetupRcRateActual": {
+        "message": "Center Sensitivity"
+    },
+    "rateSetupMaxVel": {
+        "message": "Max Vel [deg/s]"
+    },
+    "rateSetupRatesCurve": {
+        "message": "Rates Preview"
+    },
+    "rateSetupRatesCurveTip": {
+        "message": "Play with the rates and see how those affect the stick curve"
+    },
+    "rateSetupRatesPreview": {
+        "message": "Rates Preview"
+    },
+    "rateSetupThrottleCurvePreview": {
+        "message": "Throttle Curve Preview"
+    },
+
     "configHelp2": {
         "message": "Arbitrary board rotation in degrees, to allow mounting it sideways / upside down / rotated etc. When running external sensors, use the sensor alignments (Gyro, Acc, Mag) to define sensor position independent from board orientation. "
     },
@@ -6185,7 +6310,7 @@
         "message": "Rateprofile"
     },
     "pidTuningRateProfileTip": {
-        "message": "Up to 3 different rateprofiles per profile can be stored on the flight controller. The rateprofiles include the settings for 'RC Rate', 'Rate', 'RC Expo', 'Throttle', and 'TPA'. Switching between rateprofiles is possible in-flight, by setting up a 3 position switch for 'Rate Profile Selection' on the 'Adjustments' tab."
+        "message": "Up to 3 different rateprofiles per profile can be stored on the flight controller. The rateprofiles include the settings for 'RC Rate', 'Rate', 'RC Expo', 'Throttle', and 'TPA'. Switching between rateprofiles is possible in-flight, by setting up a 3 position switch for 'Rateprofile Selection' on the 'Adjustments' tab."
     },
     "pidTuningRateSetup": {
         "message": "Basic/Acro Rates"
