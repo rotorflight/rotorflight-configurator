@@ -1,0 +1,1026 @@
+'use strict';
+
+TABS.rates = {
+    dirty: false,
+    updating: true,
+    activeSubtab: null,
+    currentRateProfile: null,
+    currentRatesType: null,
+    previousRatesType: null,
+    RATES_TYPE: {
+        BETAFLIGHT:  0,
+        RACEFLIGHT:  1,
+        KISS:        2,
+        ACTUAL:      3,
+        QUICKRATES:  4,
+    },
+    RATES_TYPE_NAMES: [
+        'Betaflight',
+        'Raceflight',
+        'KISS',
+        'Actual',
+        'QuickRates',
+    ],
+    RATES_TYPE_IMAGES: [
+        'betaflight.svg',
+        'raceflight.svg',
+        'kiss.svg',
+        'actual.svg',
+        'quickrates.svg',
+    ],
+    TAB_NAMES: [
+        'rateProfile1',
+        'rateProfile2',
+        'rateProfile3',
+        'rateProfile4',
+        'rateProfile5',
+        'rateProfile6',
+    ],
+    RATE_PROFILE_MASK: 128,
+};
+
+TABS.rates.initialize = function (callback) {
+
+    const self = this;
+
+    if (GUI.active_tab !== 'rates') {
+        GUI.active_tab = 'rates';
+    }
+
+    MSP.promise(MSPCodes.MSP_STATUS).then(function() {
+        return MSP.promise(MSPCodes.MSP_PID_ADVANCED);
+    }).then(function() {
+        return MSP.promise(MSPCodes.MSP_RC_TUNING);
+    }).then(function() {
+        return MSP.promise(MSPCodes.MSP_RC_DEADBAND);
+    }).then(function() {
+        load_html();
+    });
+
+    function load_html() {
+        $('#content').load("./tabs/rates.html", process_html);
+    }
+
+    function data_to_form() {
+
+        self.currentRatesType = FC.RC_TUNING.rates_type;
+        self.previousRatesType = FC.RC_TUNING.rates_type;
+
+        self.currentRateProfile = FC.CONFIG.rateProfile;
+
+        self.activeSubtab = self.TAB_NAMES[self.currentRateProfile];
+
+        $('.tab-rates .tab-container .tab').removeClass('active');
+        $('.tab-rates .tab-container .' + self.activeSubtab).addClass('active');
+
+        $('.throttle input[name="mid"]').val(FC.RC_TUNING.throttle_MID.toFixed(2));
+        $('.throttle input[name="expo"]').val(FC.RC_TUNING.throttle_EXPO.toFixed(2));
+
+        const ratesTypeListElement = $('.rates_type select[id="ratesType"]');
+        self.RATES_TYPE_NAMES.forEach(function(element, index) {
+            ratesTypeListElement.append(`<option value="${index}">${element}</option>`);
+        });
+        ratesTypeListElement.val(self.currentRatesType);
+
+        self.changeRatesLogo();
+        self.initRatesSystem();
+    }
+
+    function form_to_data() {
+
+        // Rates type
+        FC.RC_TUNING.rates_type = $('.rates_type select[id="ratesType"]').val();
+
+        // catch RC_tuning changes
+        const roll_pitch_rate_e = $('.rates_setup input[name="roll_pitch_rate"]');
+        const pitch_rate_e = $('.rates_setup input[name="pitch_rate"]');
+        const roll_rate_e = $('.rates_setup input[name="roll_rate"]');
+        const yaw_rate_e = $('.rates_setup input[name="yaw_rate"]');
+        const rc_rate_pitch_e = $('.rates_setup input[name="rc_rate_pitch"]');
+        const rc_rate_e = $('.rates_setup input[name="rc_rate"]');
+        const rc_rate_yaw_e = $('.rates_setup input[name="rc_rate_yaw"]');
+        const rc_pitch_expo_e = $('.rates_setup input[name="rc_pitch_expo"]');
+        const rc_expo_e = $('.rates_setup input[name="rc_expo"]');
+        const rc_yaw_expo_e = $('.rates_setup input[name="rc_yaw_expo"]');
+
+        FC.RC_TUNING.roll_pitch_rate = parseFloat(roll_pitch_rate_e.val());
+        FC.RC_TUNING.RC_RATE = parseFloat(rc_rate_e.val());
+        FC.RC_TUNING.roll_rate = parseFloat(roll_rate_e.val());
+        FC.RC_TUNING.pitch_rate = parseFloat(pitch_rate_e.val());
+        FC.RC_TUNING.yaw_rate = parseFloat(yaw_rate_e.val());
+        FC.RC_TUNING.RC_EXPO = parseFloat(rc_expo_e.val());
+        FC.RC_TUNING.RC_YAW_EXPO = parseFloat(rc_yaw_expo_e.val());
+        FC.RC_TUNING.rcYawRate = parseFloat(rc_rate_yaw_e.val());
+        FC.RC_TUNING.rcPitchRate = parseFloat(rc_rate_pitch_e.val());
+        FC.RC_TUNING.RC_PITCH_EXPO = parseFloat(rc_pitch_expo_e.val());
+
+        switch (self.currentRatesType) {
+            case self.RATES_TYPE.RACEFLIGHT:
+                FC.RC_TUNING.pitch_rate    /= 100;
+                FC.RC_TUNING.roll_rate     /= 100;
+                FC.RC_TUNING.yaw_rate      /= 100;
+                FC.RC_TUNING.rcPitchRate   /= 1000;
+                FC.RC_TUNING.RC_RATE       /= 1000;
+                FC.RC_TUNING.rcYawRate     /= 1000;
+                FC.RC_TUNING.RC_PITCH_EXPO /= 100;
+                FC.RC_TUNING.RC_EXPO       /= 100;
+                FC.RC_TUNING.RC_YAW_EXPO   /= 100;
+                break;
+
+            case self.RATES_TYPE.ACTUAL:
+                FC.RC_TUNING.pitch_rate    /= 1000;
+                FC.RC_TUNING.roll_rate     /= 1000;
+                FC.RC_TUNING.yaw_rate      /= 1000;
+                FC.RC_TUNING.rcPitchRate   /= 1000;
+                FC.RC_TUNING.RC_RATE       /= 1000;
+                FC.RC_TUNING.rcYawRate     /= 1000;
+                break;
+
+            case self.RATES_TYPE.QUICKRATES:
+                FC.RC_TUNING.pitch_rate    /= 1000;
+                FC.RC_TUNING.roll_rate     /= 1000;
+                FC.RC_TUNING.yaw_rate      /= 1000;
+                break;
+
+            default: // BetaFlight
+                break;
+        }
+
+        FC.RC_TUNING.throttle_MID = parseFloat($('.throttle input[name="mid"]').val());
+        FC.RC_TUNING.throttle_EXPO = parseFloat($('.throttle input[name="expo"]').val());
+    }
+
+    function drawAxes(curveContext, width, height) {
+        curveContext.strokeStyle = '#000000';
+        curveContext.lineWidth = 4;
+
+        // Horizontal
+        curveContext.beginPath();
+        curveContext.moveTo(0, height / 2);
+        curveContext.lineTo(width, height / 2);
+        curveContext.stroke();
+
+        // Vertical
+        curveContext.beginPath();
+        curveContext.moveTo(width / 2, 0);
+        curveContext.lineTo(width / 2, height);
+        curveContext.stroke();
+    }
+
+    self.rateCurve = new RateCurve2();
+
+    function printMaxAngularVel(rate, rcRate, rcExpo, useSuperExpo, deadband, limit, maxAngularVelElement) {
+        const maxAngularVel = self.rateCurve.getMaxAngularVel(self.currentRatesType, rate, rcRate, rcExpo, useSuperExpo, deadband, limit).toFixed(0);
+        maxAngularVelElement.text(maxAngularVel);
+        return maxAngularVel;
+    }
+
+    function drawCurve(rate, rcRate, rcExpo, useSuperExpo, deadband, limit, maxAngularVel, colour, yOffset, context) {
+        context.save();
+        context.strokeStyle = colour;
+        context.translate(0, yOffset);
+        self.rateCurve.draw(self.currentRatesType, rate, rcRate, rcExpo, useSuperExpo, deadband, limit, maxAngularVel, context);
+        context.restore();
+    }
+
+    function process_html() {
+
+        // translate to user-selected language
+        i18n.localizePage();
+
+        data_to_form();
+
+        function activateRateProfile(profile) {
+            FC.CONFIG.rateProfile = profile;
+            self.updating = true;
+            MSP.promise(MSPCodes.MSP_SELECT_SETTING, [profile + self.RATE_PROFILE_MASK]).then(function () {
+                self.refresh(function () {
+                    self.updating = false;
+                    GUI.log(i18n.getMessage('rateSetupActivateProfile', [profile + 1]));
+                });
+            });
+        }
+
+
+        // UI Hooks
+
+        self.TAB_NAMES.forEach(function(element, index) {
+            $('.tab-rates .tab-container .' + element).on('click', () => activateRateProfile(index));
+        });
+
+        redrawThrottleCurve(true);
+
+        // Getting the DOM elements for curve display
+        const rcCurveElement = $('.rate_curve canvas#rate_curve_layer0').get(0);
+        const curveContext = rcCurveElement.getContext("2d");
+        let updateNeeded = true;
+        let maxAngularVel;
+
+        // make these variables global scope so that they can be accessed by the updateRates function.
+        self.maxAngularVelRollElement    = $('.rates_setup .maxAngularVelRoll');
+        self.maxAngularVelPitchElement   = $('.rates_setup .maxAngularVelPitch');
+        self.maxAngularVelYawElement     = $('.rates_setup .maxAngularVelYaw');
+
+        rcCurveElement.width = 1000;
+        rcCurveElement.height = 1000;
+
+        function updateRates (event) {
+
+            function checkInput(element) {
+                let value = parseFloat(element.val());
+                if (value < parseFloat(element.prop('min')) || value > parseFloat(element.prop('max'))) {
+                    value = undefined;
+                }
+                return value;
+            }
+
+            setTimeout(function () { // let global validation trigger and adjust the values first
+                if (event) {
+                    const targetElement = $(event.target);
+                    let targetValue = checkInput(targetElement);
+
+                    if (self.currentRates.hasOwnProperty(targetElement.attr('name')) && targetValue !== undefined) {
+                        const stepValue = parseFloat(targetElement.prop('step'));
+                        if (stepValue != null) {
+                            targetValue = Math.round(targetValue / stepValue) * stepValue;
+                        }
+                        self.currentRates[targetElement.attr('name')] = targetValue;
+                        updateNeeded = true;
+                    }
+
+                    if (targetElement.attr('id') === 'ratesType') {
+                        self.changeRatesType(targetValue);
+                        updateNeeded = true;
+                    }
+
+                } else {
+                    updateNeeded = true;
+                }
+
+                if (updateNeeded) {
+                    const curveHeight = rcCurveElement.height;
+                    const curveWidth = rcCurveElement.width;
+                    const lineScale = curveContext.canvas.width / curveContext.canvas.clientWidth;
+
+                    curveContext.clearRect(0, 0, curveWidth, curveHeight);
+
+                    maxAngularVel = Math.max(
+                        printMaxAngularVel(self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, self.maxAngularVelRollElement),
+                        printMaxAngularVel(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, self.maxAngularVelPitchElement),
+                        printMaxAngularVel(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, self.maxAngularVelYawElement));
+
+                    // make maxAngularVel multiple of 200deg/s so that the auto-scale doesn't keep changing for small changes of the maximum curve
+                    maxAngularVel = self.rateCurve.setMaxAngularVel(maxAngularVel);
+
+                    drawAxes(curveContext, curveWidth, curveHeight);
+
+                    curveContext.lineWidth = 2 * lineScale;
+                    drawCurve(self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, '#ff0000', 0, curveContext);
+                    drawCurve(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -4, curveContext);
+                    drawCurve(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 4, curveContext);
+
+                    self.updateRatesLabels();
+
+                    updateNeeded = false;
+                }
+            }, 0);
+        }
+
+        $('.rates_change').on('input change', updateRates).trigger('input');
+
+        function redrawThrottleCurve(forced) {
+            if (!forced && !TABS.rates.checkThrottle()) return;
+
+            /*
+            Quadratic curve formula taken from:
+                https://stackoverflow.com/a/9195706/176210
+            */
+
+            function getQBezierValue(t, p1, p2, p3) {
+                const iT = 1 - t;
+                return iT * iT * p1 + 2 * iT * t * p2 + t * t * p3;
+            }
+
+            function getQuadraticCurvePoint(startX, startY, cpX, cpY, endX, endY, position) {
+                return {
+                    x:  getQBezierValue(position, startX, cpX, endX),
+                    y:  getQBezierValue(position, startY, cpY, endY),
+                };
+            }
+
+            /* --- */
+
+            // let global validation trigger and adjust the values first
+            const throttleMidE = $('.throttle input[name="mid"]');
+            const throttleExpoE = $('.throttle input[name="expo"]');
+            const mid = parseFloat(throttleMidE.val());
+            const expo = parseFloat(throttleExpoE.val());
+            const throttleCurve = $('.throttle .throttle_curve canvas').get(0);
+            const context = throttleCurve.getContext("2d");
+
+            // local validation to deal with input event
+            if (mid >= parseFloat(throttleMidE.prop('min')) &&
+                mid <= parseFloat(throttleMidE.prop('max')) &&
+                expo >= parseFloat(throttleExpoE.prop('min')) &&
+                expo <= parseFloat(throttleExpoE.prop('max'))) {
+                // continue
+            } else {
+                return;
+            }
+
+            throttleCurve.width = throttleCurve.height *
+                (throttleCurve.clientWidth / throttleCurve.clientHeight);
+
+            const canvasHeight = throttleCurve.height;
+            const canvasWidth = throttleCurve.width;
+
+            // math magic by englishman
+            const midx = canvasWidth * mid;
+            const midxl = midx * 0.5;
+            const midxr = (((canvasWidth - midx) * 0.5) + midx);
+            const midy = canvasHeight - (midx * (canvasHeight / canvasWidth));
+            const midyl = canvasHeight - ((canvasHeight - midy) * 0.5 *(expo + 1));
+            const midyr = (midy / 2) * (expo + 1);
+
+            let thrPercent = (FC.RC.channels[3] - 1000) / 1000,
+                thrpos = thrPercent <= mid
+                    ? getQuadraticCurvePoint(0, canvasHeight, midxl, midyl, midx, midy, thrPercent * (1.0 / mid))
+                    : getQuadraticCurvePoint(midx, midy, midxr, midyr, canvasWidth, 0, (thrPercent - mid) * (1.0 / (1.0 - mid)));
+
+            // draw
+            context.clearRect(0, 0, canvasWidth, canvasHeight);
+            context.beginPath();
+            context.moveTo(0, canvasHeight);
+            context.quadraticCurveTo(midxl, midyl, midx, midy);
+            context.moveTo(midx, midy);
+            context.quadraticCurveTo(midxr, midyr, canvasWidth, 0);
+            context.lineWidth = 2;
+            context.strokeStyle = '#ffbb00';
+            context.stroke();
+            context.beginPath();
+            context.arc(thrpos.x, thrpos.y, 4, 0, 2 * Math.PI);
+            context.fillStyle = context.strokeStyle;
+            context.fill();
+            context.save();
+            let fontSize = 10;
+            context.font = fontSize + "pt Verdana, Arial, sans-serif";
+            let realthr = thrPercent * 100.0,
+                expothr = 100 - (thrpos.y / canvasHeight) * 100.0,
+                thrlabel = Math.round(thrPercent <= 0 ? 0 : realthr) + "%" +
+                    " = " + Math.round(thrPercent <= 0 ? 0 : expothr) + "%",
+                textWidth = context.measureText(thrlabel);
+            context.fillStyle = '#000';
+            context.scale(textWidth / throttleCurve.clientWidth, 1);
+            context.fillText(thrlabel, 5, 5 + fontSize);
+            context.restore();
+        }
+
+        $('.throttle input').on('input change', () => setTimeout(() => redrawThrottleCurve(true), 0));
+
+        TABS.rates.throttleDrawInterval = setInterval(redrawThrottleCurve, 100);
+
+        const dialogCopyProfile = $('.dialogCopyProfile')[0];
+        const selectRateProfile = $('.selectRateProfile');
+
+        $.each(self.TAB_NAMES, function(key, value) {
+            if (key != self.currentRateProfile)
+                selectRateProfile.append(new Option(i18n.getMessage('rateSetupSubTab', [ key + 1 ]), key));
+        });
+
+        $('.copyrateprofilebtn').click(function() {
+            $('.dialogCopyProfile').find('.contentRateProfile').show();
+            dialogCopyProfile.showModal();
+        });
+
+        $('.dialogCopyProfile-cancelbtn').click(function() {
+            dialogCopyProfile.close();
+        });
+
+        $('.dialogCopyProfile-confirmbtn').click(function() {
+            FC.COPY_PROFILE.type = 1;
+            FC.COPY_PROFILE.dstProfile = parseInt(selectRateProfile.val());
+            FC.COPY_PROFILE.srcProfile = FC.CONFIG.rateProfile;
+
+            MSP.send_message(MSPCodes.MSP_COPY_PROFILE, mspHelper.crunch(MSPCodes.MSP_COPY_PROFILE), false, function () {
+                dialogCopyProfile.close();
+            });
+        });
+
+        $('a.refresh').click(function () {
+            self.refresh(function () {
+                GUI.log(i18n.getMessage('rateSetupDataRefreshed'));
+            });
+        });
+
+        // update == save.
+        $('a.update').click(function () {
+            form_to_data();
+            self.updating = true;
+            Promise.resolve(true).then(function () {
+                return MSP.promise(MSPCodes.MSP_SET_PID_ADVANCED, mspHelper.crunch(MSPCodes.MSP_SET_PID_ADVANCED));
+            }).then(function () {
+                return MSP.promise(MSPCodes.MSP_SET_RC_TUNING, mspHelper.crunch(MSPCodes.MSP_SET_RC_TUNING));
+            }).then(function () {
+                return MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
+            }).then(function () {
+                self.updating = false;
+                self.setDirty(false);
+                GUI.log(i18n.getMessage('rateSetupEepromSaved'));
+                self.refresh();
+            });
+        });
+
+        // Setup model for rates preview
+        self.initRatesPreview();
+        self.renderModel();
+
+        self.updating = false;
+
+        // enable RC data pulling for rates preview
+        GUI.interval_add('receiver_pull', self.getReceiverData, true);
+
+        // status data pulled via separate timer with static speed
+        GUI.interval_add('status_pull', self.getStatusData, 250, true);
+
+        GUI.content_ready(callback);
+    }
+};
+
+TABS.rates.getStatusData = function () {
+    MSP.send_message(MSPCodes.MSP_STATUS, false, false);
+};
+
+TABS.rates.getReceiverData = function () {
+    MSP.send_message(MSPCodes.MSP_RC, false, false);
+};
+
+TABS.rates.initRatesPreview = function () {
+    this.keepRendering = true;
+
+    this.model = new Model($('.rates_preview'), $('.rates_preview canvas'));
+
+    $('.tab-rates .tab-container .tab').on('click', $.proxy(this.model.resize, this.model));
+    $('.tab-rates .tab-container .tab').on('click', $.proxy(this.updateRatesLabels, this));
+
+    $(window).on('resize', $.proxy(this.model.resize, this.model));
+    $(window).on('resize', $.proxy(this.updateRatesLabels, this));
+};
+
+TABS.rates.renderModel = function () {
+    if (this.keepRendering) {
+        requestAnimationFrame(this.renderModel.bind(this));
+    }
+    if (!this.clock) {
+        this.clock = new THREE.Clock();
+    }
+
+    if (FC.RC.channels[0] && FC.RC.channels[1] && FC.RC.channels[2]) {
+        const delta = this.clock.getDelta();
+
+        const roll = delta * this.rateCurve.rcCommandRawToDegreesPerSecond(
+            FC.RC.channels[0],
+            this.currentRatesType,
+            this.currentRates.roll_rate,
+            this.currentRates.rc_rate,
+            this.currentRates.rc_expo,
+            this.currentRates.superexpo,
+            this.currentRates.deadband,
+            this.currentRates.roll_rate_limit
+        );
+        const pitch = delta * this.rateCurve.rcCommandRawToDegreesPerSecond(
+            FC.RC.channels[1],
+            this.currentRatesType,
+            this.currentRates.pitch_rate,
+            this.currentRates.rc_rate_pitch,
+            this.currentRates.rc_pitch_expo,
+            this.currentRates.superexpo,
+            this.currentRates.deadband,
+            this.currentRates.pitch_rate_limit
+        );
+        const yaw = delta * this.rateCurve.rcCommandRawToDegreesPerSecond(
+            FC.RC.channels[2],
+            this.currentRatesType,
+            this.currentRates.yaw_rate,
+            this.currentRates.rc_rate_yaw,
+            this.currentRates.rc_yaw_expo,
+            this.currentRates.superexpo,
+            this.currentRates.yawDeadband,
+            this.currentRates.yaw_rate_limit
+        );
+
+        this.model.rotateBy(-degToRad(pitch), -degToRad(yaw), -degToRad(roll));
+
+        if (this.checkRC()) {
+            this.updateRatesLabels();
+        }
+    }
+};
+
+TABS.rates.cleanup = function (callback) {
+    const self = this;
+
+    if (self.model) {
+        $(window).off('resize', $.proxy(self.model.resize, self.model));
+        self.model.dispose();
+    }
+
+    $(window).off('resize', $.proxy(this.updateRatesLabels, this));
+
+    self.keepRendering = false;
+    clearInterval(TABS.rates.throttleDrawInterval);
+
+    if (callback) callback();
+};
+
+TABS.rates.refresh = function (callback) {
+    const self = this;
+
+    GUI.tab_switch_cleanup(function () {
+        self.initialize();
+        self.setDirty(false);
+        if (callback) callback();
+    });
+};
+
+TABS.rates.setDirty = function (isDirty) {
+    const self = this;
+    self.dirty = isDirty;
+};
+
+TABS.rates.checkUpdateProfile = function (updateRateProfile) {
+    const self = this;
+
+    if (GUI.active_tab === 'rates') {
+        if (!self.updating && !self.dirty) {
+            if (updateRateProfile && self.currentRateProfile !== FC.CONFIG.rateProfile) {
+                self.refresh();
+            }
+        }
+    }
+};
+
+TABS.rates.checkRC = function() {
+    // Function monitors for change in the primary axes rc received data and returns true if a change is detected.
+
+    if (!this.oldRC) {
+        this.oldRC = [ FC.RC.channels[0], FC.RC.channels[1], FC.RC.channels[2] ];
+    }
+
+    // Monitor FC.RC.channels and detect change of value;
+    let rateCurveUpdateRequired = false;
+    for (let i = 0; i < this.oldRC.length; i++) { // has the value changed ?
+        if (this.oldRC[i] !== FC.RC.channels[i]) {
+            this.oldRC[i] = FC.RC.channels[i];
+            rateCurveUpdateRequired = true;     // yes, then an update of the values displayed on the rate curve graph is required
+        }
+    }
+    return rateCurveUpdateRequired;
+};
+
+TABS.rates.checkThrottle = function() {
+    // Function monitors for change in the received rc throttle data and returns true if a change is detected.
+    if (!this.oldThrottle) {
+        this.oldThrottle = FC.RC.channels[3];
+        return true;
+    }
+    const updateRequired = this.oldThrottle !== FC.RC.channels[3];
+    this.oldThrottle = FC.RC.channels[3];
+    return updateRequired;
+};
+
+TABS.rates.updateRatesLabels = function() {
+    const self = this;
+
+    if (self.rateCurve.maxAngularVel) {
+
+        const drawAxisLabel = function(context, axisLabel, x, y, align, color) {
+            context.fillStyle = color || '#000000' ;
+            context.textAlign = align || 'center';
+            context.fillText(axisLabel, x, y);
+        };
+
+        const drawBalloonLabel = function(context, axisLabel, x, y, align, colors, dirty) {
+
+            /**
+             * curveContext is the canvas to draw on
+             * axisLabel is the string to display in the center of the balloon
+             * x, y are the coordinates of the point of the balloon
+             * align is whether the balloon appears to the left (align 'right') or right (align left) of the x,y coordinates
+             * colors is an object defining color, border and text are the fill color, border color and text color of the balloon
+             */
+
+            const DEFAULT_OFFSET        = 125; // in canvas scale; this is the horizontal length of the pointer
+            const DEFAULT_RADIUS        = 10; // in canvas scale, this is the radius around the balloon
+            const DEFAULT_MARGIN        = 5;  // in canvas scale, this is the margin around the balloon when it overlaps
+
+            const fontSize = parseInt(context.font);
+
+            // calculate the width and height required for the balloon
+            const width = (context.measureText(axisLabel).width * 1.2);
+            const height = fontSize * 1.5; // the balloon is bigger than the text height
+            const pointerY = y; // always point to the required Y
+            // coordinate, even if we move the balloon itself to keep it on the canvas
+
+            // setup balloon background
+            context.fillStyle   = colors.color   || '#ffffff' ;
+            context.strokeStyle = colors.border  || '#000000' ;
+
+            // correct x position to account for window scaling
+            x *= context.canvas.clientWidth/context.canvas.clientHeight;
+
+            // adjust the coordinates for determine where the balloon background should be drawn
+            x += ((align=='right') ? -(width + DEFAULT_OFFSET) : 0) + ((align=='left') ? DEFAULT_OFFSET : 0);
+            y -= (height / 2); if (y < 0) y = 0; else if (y > context.height) y = context.height; // prevent balloon from going out of canvas
+
+            // check that the balloon does not already overlap
+            for (let i = 0; i < dirty.length; i++) {
+                if ((x >= dirty[i].left && x <= dirty[i].right) || (x + width >= dirty[i].left && x + width <= dirty[i].right)) { // does it overlap horizontally
+                    if ((y >= dirty[i].top && y<= dirty[i].bottom) || (y + height >= dirty[i].top && y + height <= dirty[i].bottom )) { // this overlaps another balloon
+                        // snap above or snap below
+                        if (y <= (dirty[i].bottom - dirty[i].top) / 2 && (dirty[i].top - height) > 0) {
+                            y = dirty[i].top - height;
+                        } else { // snap down
+                            y = dirty[i].bottom;
+                        }
+                    }
+                }
+            }
+
+            // Add the draw area to the dirty array
+            dirty.push({left:x, right:x+width, top:y-DEFAULT_MARGIN, bottom:y+height+DEFAULT_MARGIN});
+
+            const pointerLength =  (height - 2 * DEFAULT_RADIUS ) / 6;
+
+            context.beginPath();
+            context.moveTo(x + DEFAULT_RADIUS, y);
+            context.lineTo(x + width - DEFAULT_RADIUS, y);
+            context.quadraticCurveTo(x + width, y, x + width, y + DEFAULT_RADIUS);
+
+            if (align === 'right') { // point is to the right
+                context.lineTo(x + width, y + DEFAULT_RADIUS + pointerLength);
+                context.lineTo(x + width + DEFAULT_OFFSET, pointerY);  // point
+                context.lineTo(x + width, y + height - DEFAULT_RADIUS - pointerLength);
+            }
+            context.lineTo(x + width, y + height - DEFAULT_RADIUS);
+
+            context.quadraticCurveTo(x + width, y + height, x + width - DEFAULT_RADIUS, y + height);
+            context.lineTo(x + DEFAULT_RADIUS, y + height);
+            context.quadraticCurveTo(x, y + height, x, y + height - DEFAULT_RADIUS);
+
+            if (align === 'left') { // point is to the left
+                context.lineTo(x, y + height - DEFAULT_RADIUS - pointerLength);
+                context.lineTo(x - DEFAULT_OFFSET, pointerY); // point
+                context.lineTo(x, y + DEFAULT_RADIUS - pointerLength);
+            }
+            context.lineTo(x, y + DEFAULT_RADIUS);
+
+            context.quadraticCurveTo(x, y, x + DEFAULT_RADIUS, y);
+            context.closePath();
+
+            context.fill();
+            context.stroke();
+
+            drawAxisLabel(context, axisLabel, x + (width/2), y + (height + fontSize)/2 - 4, 'center', colors.text);
+        };
+
+        const BALLOON_COLORS = {
+            roll    : {color: 'rgba(255,128,128,0.4)', border: 'rgba(255,128,128,0.6)', text: '#000000'},
+            pitch   : {color: 'rgba(128,255,128,0.4)', border: 'rgba(128,255,128,0.6)', text: '#000000'},
+            yaw     : {color: 'rgba(128,128,255,0.4)', border: 'rgba(128,128,255,0.6)', text: '#000000'}
+        };
+
+        const rcStickElement = $('.rate_curve canvas#rate_curve_layer1').get(0);
+        if (rcStickElement) {
+            rcStickElement.width = 1000;
+            rcStickElement.height = 1000;
+
+            const stickContext = rcStickElement.getContext("2d");
+
+            stickContext.save();
+
+            const maxAngularVelRoll   = self.maxAngularVelRollElement.text()  + ' deg/s';
+            const maxAngularVelPitch  = self.maxAngularVelPitchElement.text() + ' deg/s';
+            const maxAngularVelYaw    = self.maxAngularVelYawElement.text()   + ' deg/s';
+            const curveHeight         = rcStickElement.height;
+            const curveWidth          = rcStickElement.width;
+            const maxAngularVel       = self.rateCurve.maxAngularVel;
+            const windowScale         = (400 / stickContext.canvas.clientHeight);
+            const rateScale           = (curveHeight / 2) / maxAngularVel;
+            const lineScale           = stickContext.canvas.width / stickContext.canvas.clientWidth;
+            const textScale           = stickContext.canvas.clientHeight / stickContext.canvas.clientWidth;
+
+            let currentValues         = [];
+            let balloonsDirty         = [];
+
+            stickContext.clearRect(0, 0, curveWidth, curveHeight);
+
+            // calculate the fontSize based upon window scaling
+            if (windowScale <= 1) {
+                stickContext.font = "24pt Verdana, Arial, sans-serif";
+            } else {
+                stickContext.font = (24 * windowScale) + "pt Verdana, Arial, sans-serif";
+            }
+
+            if (FC.RC.channels[0] && FC.RC.channels[1] && FC.RC.channels[2]) {
+                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[0], self.currentRatesType, self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, stickContext, '#FF8080') + ' deg/s');
+                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[1], self.currentRatesType, self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, stickContext, '#80FF80') + ' deg/s');
+                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[2], self.currentRatesType, self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, stickContext, '#8080FF') + ' deg/s');
+            } else {
+                currentValues = [];
+            }
+
+            stickContext.lineWidth = lineScale;
+
+            // use a custom scale so that the text does not appear stretched
+            stickContext.scale(textScale, 1);
+
+            // add the maximum range label
+            drawAxisLabel(stickContext, maxAngularVel.toFixed(0) + ' deg/s', ((curveWidth / 2) - 10) / textScale, parseInt(stickContext.font)*1.2, 'right');
+
+            // and then the balloon labels.
+            balloonsDirty = []; // reset the dirty balloon draw area (for overlap detection)
+            // create an array of balloons to draw
+            const balloons = [
+                {value: parseInt(maxAngularVelRoll), balloon: function() {drawBalloonLabel(stickContext, maxAngularVelRoll,  curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelRoll)),  'right', BALLOON_COLORS.roll, balloonsDirty);}},
+                {value: parseInt(maxAngularVelPitch), balloon: function() {drawBalloonLabel(stickContext, maxAngularVelPitch, curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelPitch)), 'right', BALLOON_COLORS.pitch, balloonsDirty);}},
+                {value: parseInt(maxAngularVelYaw), balloon: function() {drawBalloonLabel(stickContext, maxAngularVelYaw,   curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelYaw)),   'right', BALLOON_COLORS.yaw, balloonsDirty);}}
+            ];
+
+            // and sort them in descending order so the largest value is at the top always
+            balloons.sort(function(a,b) {return (b.value - a.value);});
+
+            // add the current rc values
+            if (currentValues[0] && currentValues[1] && currentValues[2]) {
+                balloons.push(
+                    {value: parseInt(currentValues[0]), balloon: function() {drawBalloonLabel(stickContext, currentValues[0], 10, 150, 'none', BALLOON_COLORS.roll, balloonsDirty);}},
+                    {value: parseInt(currentValues[1]), balloon: function() {drawBalloonLabel(stickContext, currentValues[1], 10, 250, 'none', BALLOON_COLORS.pitch, balloonsDirty);}},
+                    {value: parseInt(currentValues[2]), balloon: function() {drawBalloonLabel(stickContext, currentValues[2], 10, 350,  'none', BALLOON_COLORS.yaw, balloonsDirty);}}
+                );
+            }
+            // then display them on the chart
+            for (const balloon of balloons) {
+                balloon.balloon();
+            }
+
+            stickContext.restore();
+        }
+    }
+};
+
+TABS.rates.changeRatesType = function(rateTypeID) {
+    const self = this;
+
+    const dialogRatesType = $('.dialogRatesType')[0];
+
+    if (!dialogRatesType.hasAttribute('open')) {
+
+        dialogRatesType.showModal();
+
+        $('.dialogRatesType-cancelbtn').click(function() {
+            $('.rates_type select[id="ratesType"]').val(self.currentRatesType);
+            self.previousRatesType = self.currentRatesType;
+            dialogRatesType.close();
+        });
+
+        $('.dialogRatesType-confirmbtn').click(function() {
+            self.currentRatesType = rateTypeID;
+            self.changeRatesLogo();
+            self.initRatesSystem();
+            dialogRatesType.close();
+        });
+    }
+};
+
+TABS.rates.initRatesSystem = function() {
+    const self = this;
+
+    let rcRateDef, rcRateMax, rcRateMin, rcRateStep, rcRateDec;
+    let rateDef, rateMax, rateStep, rateDec;
+    let expoDef, expoMax, expoStep, expoDec;
+
+    let rcRateLabel, rateLabel, rcExpoLabel;
+
+    const rateMin = 0;
+    const expoMin = 0;
+
+    switch (self.currentRatesType) {
+
+        case self.RATES_TYPE.RACEFLIGHT:
+            rcRateLabel = "rateSetupRcRateRaceflight";
+            rateLabel   = "rateSetupRateRaceflight";
+            rcExpoLabel = "rateSetupRcExpoRaceflight";
+
+            rcRateDec   = 0;
+            rcRateDef   = 370;
+            rcRateMax   = 2000;
+            rcRateMin   = 10;
+            rcRateStep  = 10;
+            rateDec     = 0;
+            rateDef     = 80;
+            rateMax     = 255;
+            rateStep    = 1;
+            expoDec     = 0;
+            expoDef     = 50;
+            expoMax     = 100;
+            expoStep    = 1;
+
+            break;
+
+        case self.RATES_TYPE.KISS:
+            rcRateLabel = "rateSetupRcRate";
+            rateLabel   = "rateSetupRcRateRaceflight";
+            rcExpoLabel = "rateSetupRcExpoKISS";
+
+            rcRateDec   = 2;
+            rcRateDef   = 1.00;
+            rcRateMax   = 2.55;
+            rcRateMin   = 0.01;
+            rcRateStep  = 0.01;
+            rateDec     = 2;
+            rateDef     = 0.70;
+            rateMax     = 0.99;
+            rateStep    = 0.01;
+            expoDec     = 2;
+            expoDef     = 0.00;
+            expoMax     = 1.0;
+            expoStep    = 0.01;
+
+            break;
+
+        case self.RATES_TYPE.ACTUAL:
+            rcRateLabel = "rateSetupRcRateActual";
+            rateLabel   = "rateSetupRateQuickRates";
+            rcExpoLabel = "rateSetupRcExpoRaceflight";
+
+            rcRateDec   = 0;
+            rcRateDef   = 200;
+            rcRateMax   = 2000;
+            rcRateMin   = 10;
+            rcRateStep  = 10;
+            rateDec     = 0;
+            rateDef     = 670;
+            rateMax     = 2000;
+            rateStep    = 10;
+            expoDec     = 2;
+            expoDef     = 0.54;
+            expoMax     = 1.0;
+            expoStep    = 0.01;
+
+            break;
+
+        case self.RATES_TYPE.QUICKRATES:
+            rcRateLabel = "rateSetupRcRate";
+            rateLabel   = "rateSetupRateQuickRates";
+            rcExpoLabel = "rateSetupRcExpoRaceflight";
+
+            rcRateDec   = 2;
+            rcRateDef   = 1.00;
+            rcRateMax   = 2.55;
+            rcRateMin   = 0.01;
+            rcRateStep  = 0.01;
+            rateDec     = 0;
+            rateDef     = 670;
+            rateMax     = 2000;
+            rateStep    = 10;
+            expoDec     = 2;
+            expoDef     = 0.0;
+            expoMax     = 1.0;
+            expoStep    = 0.01;
+
+            break;
+
+        default: // BetaFlight
+            rcRateLabel = "rateSetupRcRate";
+            rateLabel   = "rateSetupRate";
+            rcExpoLabel = "rateSetupRcExpo";
+
+            rcRateDec   = 2;
+            rcRateDef   = 1.00;
+            rcRateMax   = 2.55;
+            rcRateMin   = 0.01;
+            rcRateStep  = 0.01;
+            rateDec     = 2;
+            rateDef     = 0.70;
+            rateMax     = 0.99;
+            rateStep    = 0.01;
+            expoDec     = 2;
+            expoDef     = 0.00;
+            expoMax     = 1.0;
+            expoStep    = 0.01;
+
+            break;
+    }
+
+    self.currentRates = {
+        roll_rate:         FC.RC_TUNING.roll_rate,
+        pitch_rate:        FC.RC_TUNING.pitch_rate,
+        yaw_rate:          FC.RC_TUNING.yaw_rate,
+        rc_rate:           FC.RC_TUNING.RC_RATE,
+        rc_rate_yaw:       FC.RC_TUNING.rcYawRate,
+        rc_expo:           FC.RC_TUNING.RC_EXPO,
+        rc_yaw_expo:       FC.RC_TUNING.RC_YAW_EXPO,
+        rc_rate_pitch:     FC.RC_TUNING.rcPitchRate,
+        rc_pitch_expo:     FC.RC_TUNING.RC_PITCH_EXPO,
+        roll_rate_limit:   FC.RC_TUNING.roll_rate_limit,
+        pitch_rate_limit:  FC.RC_TUNING.pitch_rate_limit,
+        yaw_rate_limit:    FC.RC_TUNING.yaw_rate_limit,
+        deadband:          FC.RC_DEADBAND_CONFIG.deadband,
+        yawDeadband:       FC.RC_DEADBAND_CONFIG.yaw_deadband,
+        superexpo:         true
+    };
+
+    switch (self.currentRatesType) {
+
+        case self.RATES_TYPE.RACEFLIGHT:
+            self.currentRates.roll_rate     *= 100;
+            self.currentRates.pitch_rate    *= 100;
+            self.currentRates.yaw_rate      *= 100;
+            self.currentRates.rc_rate       *= 1000;
+            self.currentRates.rc_rate_yaw   *= 1000;
+            self.currentRates.rc_rate_pitch *= 1000;
+            self.currentRates.rc_expo       *= 100;
+            self.currentRates.rc_yaw_expo   *= 100;
+            self.currentRates.rc_pitch_expo *= 100;
+            break;
+
+        case self.RATES_TYPE.ACTUAL:
+            self.currentRates.roll_rate     *= 1000;
+            self.currentRates.pitch_rate    *= 1000;
+            self.currentRates.yaw_rate      *= 1000;
+            self.currentRates.rc_rate       *= 1000;
+            self.currentRates.rc_rate_yaw   *= 1000;
+            self.currentRates.rc_rate_pitch *= 1000;
+            break;
+
+        case self.RATES_TYPE.QUICKRATES:
+            self.currentRates.roll_rate     *= 1000;
+            self.currentRates.pitch_rate    *= 1000;
+            self.currentRates.yaw_rate      *= 1000;
+            break;
+
+        default:
+            break;
+    }
+
+    // Set defaults if type changed
+    if (self.currentRatesType !== self.previousRatesType) {
+        self.currentRates.roll_rate     = rateDef;
+        self.currentRates.pitch_rate    = rateDef;
+        self.currentRates.yaw_rate      = rateDef;
+        self.currentRates.rc_rate       = rcRateDef;
+        self.currentRates.rc_rate_yaw   = rcRateDef;
+        self.currentRates.rc_rate_pitch = rcRateDef;
+        self.currentRates.rc_expo       = expoDef;
+        self.currentRates.rc_yaw_expo   = expoDef;
+        self.currentRates.rc_pitch_expo = expoDef;
+    }
+
+    const rcRateLabel_e = $('.rates_setup .rates_titlebar .rc_rate');
+    const rateLabel_e = $('.rates_setup .rates_titlebar .rate');
+    const rcExpoLabel_e = $('.rates_setup .rates_titlebar .rc_expo');
+
+    rcRateLabel_e.text(i18n.getMessage(rcRateLabel));
+    rateLabel_e.text(i18n.getMessage(rateLabel));
+    rcExpoLabel_e.text(i18n.getMessage(rcExpoLabel));
+
+    const pitch_rate_e = $('.rates_setup input[name="pitch_rate"]');
+    const roll_rate_e = $('.rates_setup input[name="roll_rate"]');
+    const yaw_rate_e = $('.rates_setup input[name="yaw_rate"]');
+    const rc_rate_pitch_e = $('.rates_setup input[name="rc_rate_pitch"]');
+    const rc_rate_e = $('.rates_setup input[name="rc_rate"]');
+    const rc_rate_yaw_e = $('.rates_setup input[name="rc_rate_yaw"]');
+    const rc_expo_e = $('.rates_setup input[name="rc_expo"]');
+    const rc_pitch_expo_e = $('.rates_setup input[name="rc_pitch_expo"]');
+    const rc_yaw_expo_e = $('.rates_setup input[name="rc_yaw_expo"]');
+
+    pitch_rate_e.val(self.currentRates.pitch_rate.toFixed(rateDec));
+    roll_rate_e.val(self.currentRates.roll_rate.toFixed(rateDec));
+    yaw_rate_e.val(self.currentRates.yaw_rate.toFixed(rateDec));
+    rc_rate_pitch_e.val(self.currentRates.rc_rate_pitch.toFixed(rcRateDec));
+    rc_rate_e.val(self.currentRates.rc_rate.toFixed(rcRateDec));
+    rc_rate_yaw_e.val(self.currentRates.rc_rate_yaw.toFixed(rcRateDec));
+    rc_pitch_expo_e.val(self.currentRates.rc_pitch_expo.toFixed(expoDec));
+    rc_expo_e.val(self.currentRates.rc_expo.toFixed(expoDec));
+    rc_yaw_expo_e.val(self.currentRates.rc_yaw_expo.toFixed(expoDec));
+
+    const rc_rate_input_c = $('.rates_setup input[class="rc_rate_input"]');
+    const rate_input_c = $('.rates_setup input[class="rate_input"]');
+    const expo_input_c = $('.rates_setup input[class="expo_input"]');
+
+    rc_rate_input_c.attr({"max":rcRateMax, "min":rcRateMin, "step":rcRateStep}).change();
+    rate_input_c.attr({"max":rateMax, "min":rateMin, "step":rateStep}).change();
+    expo_input_c.attr({"max":expoMax, "min":expoMin, "step":expoStep}).change();
+
+    if (self.previousRatesType === self.currentRatesType)
+        self.setDirty(false);
+
+    self.previousRatesType = self.currentRatesType;
+};
+
+TABS.rates.changeRatesLogo = function() {
+    const self = this;
+
+    const image = self.RATES_TYPE_IMAGES[self.currentRatesType];
+    $('.rates_type img[id="ratesLogo"]').attr("src", "./images/rate_logos/" + image);
+};
+

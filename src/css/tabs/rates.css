@@ -1,0 +1,622 @@
+
+.tab-rates .cf tr {
+    background-color: #DEDEDE;
+}
+
+.tab-rates .cf th {
+    border-right: solid 1px var(--subtleAccent);
+    height: 19px;
+    font-weight: normal;
+    padding: 4px;
+    color:white;
+    text-align: left;
+    background: var(--quietHeader);
+}
+
+.tab-rates .cf th:first-child {
+    border-top-left-radius: 3px;
+}
+
+.tab-rates .cf th:last-child {
+    border-right: 0;
+    border-top-right-radius: 3px;
+}
+
+.tab-rates .cf td:first-child {
+    border-bottom-left-radius: 3px;
+}
+
+.tab-rates .cf td:last-child {
+    border-bottom-right-radius: 3px;
+    border-right: 0;
+    padding-bottom: 0;
+}
+
+.tab-rates .cf input {
+    margin: 4px;
+    width: calc(100% - 10px);
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+}
+
+.tab-rates .cf select {
+    margin: 4px;
+    width: calc(100% - 10px);
+    border: 1px solid var(--subtleAccent);
+}
+
+.tab-rates .throttle_curve {
+    float: right;
+    width: 100%;
+    height: 100%;
+    background-size: 200%;
+}
+
+.tab-rates .curves {
+    float: left;
+    margin-right: 10px;
+}
+
+.tab-rates .rate_curve {
+    height: 100%;
+    min-height: 234px;
+    min-width: 200px;
+    background-size: 200%;
+}
+
+.tab-rates input[type="number"]::-webkit-inner-spin-button {
+    border: 0;
+}
+
+.tab-rates table {
+    float: left;
+    margin: 0;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tab-rates .gui_box {
+    margin-bottom: 5px;
+    display: table;
+}
+
+.tab-rates table, .tab-rates table td {
+    padding: 1px;
+    border-bottom: 0 solid var(--subtleAccent);
+}
+
+.tab-rates table th {
+    padding: 0;
+    border: 0;
+    height: 10px;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.tab-rates .rates_titlebar th {
+    padding: 5px;
+    text-align: left;
+    border-right: 1px solid var(--subtleAccent);
+}
+
+.tab-rates .rates_titlebar th:first-child {
+    text-align: left;
+    border-top-left-radius: 3px;
+}
+
+.tab-rates .rates_titlebar th:last-child {
+    border-right: none;
+    border-top-right-radius: 3px;
+}
+
+.tab-rates table tr td:first-child {
+    text-align: left;
+    padding-left: 5px;
+}
+
+.tab-rates table tr td:last-child {
+    border-right: 0 solid var(--subtleAccent);
+}
+
+.tab-rates table td {
+    padding: 1px 1px 1px 5px;
+    border-right: 1px solid var(--subtleAccent);
+}
+
+.tab-rates table tr td {
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.tab-rates table input {
+    display: block;
+    width: calc(100% - 0px);
+    height: 20px;
+    line-height: 20px;
+    text-align: right;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+    background-color: white;
+}
+
+.tab-rates table select {
+    height: 20px;
+    text-align-last: right;
+    border-radius: 3px;
+    border: 1px solid var(--subtleAccent);
+    background-color: white;
+}
+
+.tab-rates .rates_type table select {
+    height: 22px;
+    text-align-last: left;
+}
+
+.tab-rates .tab-container {
+    border-bottom: 3px solid var(--accent);
+    border-right-width: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: start;
+    width: 100%;
+}
+
+.tab-rates .tab-container > div {
+    background-color: #2e2e2e;
+    padding: 6px 12px;
+    border-right: 1px solid white;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.tab-rates .tab-container > div:first-child {
+    border-top-left-radius: 4px;
+}
+
+.tab-rates .tab-container > div:last-child {
+    border-top-right-radius: 4px;
+}
+
+.tab-rates .tab-container > div a {
+    display: block;
+    color: #999999;
+}
+
+.tab-rates .tab-container > div.active,
+.tab-rates .tab-container > div.active a {
+    background-color: var(--accent);
+    color: #000;
+    transition: none;
+}
+
+.tab-rates .single-field {
+    display: inline-table;
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+
+.tab-rates .single-field .head {
+    text-align: left;
+    border-bottom: 1px solid var(--subtleAccent);
+    background-color: var(--quietHeader);
+    color: var(--quietText);
+    height: 19px;
+    font-weight: normal;
+    padding: 2px 2px 2px 6px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.tab-rates .new_rates {
+    text-align: center;
+}
+
+.tab-rates .top-buttons {
+    float: right;
+}
+
+.tab-rates .fixed_band {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.fancy.header {
+  background-color: #D6D6D6;
+  padding-top: 8px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--subtleAccent);
+  color: #828282;
+  background-image: linear-gradient(315deg, rgba(255, 255, 255, .2) 10%, transparent 10%, transparent 20%, rgba(255, 255, 255, .2) 20%, rgba(255, 255, 255, .2) 30%, transparent 30%, transparent 40%, rgba(255, 255, 255, .2) 40%, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent 60%, rgba(255, 255, 255, .2) 60%, rgba(255, 255, 255, .2) 70%, transparent 70%, transparent 80%, rgba(255, 255, 255, .2) 80%, rgba(255, 255, 255, .2) 90%, transparent 90%, transparent 100%, rgba(255, 255, 255, .2) 100%, transparent);
+}
+
+.fancy.header th {
+    padding-bottom: 4px;
+    padding-top: 4px;
+    padding-left: 5px;
+}
+
+.rates_mode {
+    width: calc(100% - 5px);
+    height: 18px;
+    background-color: #D6D6D6;
+    float: left;
+    margin: 0;
+    text-align: left;
+    line-height: 13px;
+    padding: 5px 0 0 5px;
+    font-size: 12px;
+    border-bottom: 1px solid var(--subtleAccent);
+    color: #828282;
+    font-weight: normal;
+    background-image: linear-gradient(315deg, rgba(255, 255, 255, .2) 10%, transparent 10%, transparent 20%,
+        rgba(255, 255, 255, .2) 20%, rgba(255, 255, 255, .2) 30%, transparent 30%, transparent 40%,
+        rgba(255, 255, 255, .2) 40%, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent 60%,
+        rgba(255, 255, 255, .2) 60%, rgba(255, 255, 255, .2) 70%, transparent 70%, transparent 80%,
+        rgba(255, 255, 255, .2) 80%, rgba(255, 255, 255, .2) 90%, transparent 90%, transparent 100%,
+        rgba(255, 255, 255, .2) 100%, transparent);
+}
+
+.rates_mode > div:first-child {
+    float: left;
+}
+
+.tab-rates .rates_mode .helpicon {
+    margin-top: 0;
+}
+
+.tab-rates .rates_titlebar {
+    color: #fff;
+    background-color: var(--quietHeader);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    height: 20px;
+}
+
+.tab-rates .rates_titlebar.rates_titlebar_extended {
+    border-radius: 0;
+}
+
+.tab-rates .cf .throttleCurvePreview {
+    padding: 0;
+}
+
+.rates_roll {
+    background-color: #FF8080;
+}
+
+.rates_pitch {
+    background-color: #80FF80;
+}
+
+.rates_yaw {
+    background-color: #8080FF;
+}
+
+
+.tab-rates .rates_titlebar td:first-child {
+    text-align: left;
+}
+
+.show {
+    width:130px;
+    margin-right:3px;
+}
+
+.tab-rates .helpicon {
+    margin-top: 1px;
+}
+
+.tab-rates .number .helpicon {
+    margin-top: 3px;
+    margin-right: 0;
+}
+
+.tab-rates .gui_box_titlebar .helpicon {
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.tab-rates .spacer_left {
+    padding-left: 0;
+    float: right;
+    width: calc(100% - 20px)
+}
+
+.tab-rates .numberspacer {
+    float: left;
+    width: 65px;
+    height: 21px;
+}
+
+.tab-rates .number {
+    margin-bottom: 5px;
+    clear: left;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--subtleAccent);
+    width: 100%;
+    float: left;
+}
+
+.tab-rates .number:last-child {
+    padding-bottom: 5px;
+    border-bottom: 0;
+}
+
+.tab-rates .number input {
+    width: 50px;
+    padding-left: 3px;
+    height: 20px;
+    line-height: 20px;
+    text-align: left;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+    margin-right: 11px;
+    font-weight: normal;
+}
+
+.tab-rates .gui_box span {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 19px;
+    color: #7d7d7d;
+    font-size: 11px;
+}
+
+.tab-rates .resetbt {
+    width: 140px;
+    margin-right: 10px;
+}
+
+.tab-rates .copyrateprofilebtn {
+    width: 150px;
+    margin-right:10px;
+}
+
+.tab-rates .right {
+    float: right;
+}
+
+.tab-rates .leftzero {
+    padding-left: 0;
+}
+
+.tab-rates .roll {
+    border-bottom-left-radius: 3px;
+}
+
+.tab-rates .borderleft {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.tab-rates .textleft {
+    width: 25%;
+    float: left;
+    text-align: left;
+}
+
+.tab-rates .topspacer {
+    margin-top: 5px;
+}
+
+.tab-rates .bottomarea {
+    float: left;
+    width: calc(100% - 2px);
+    border-bottom: 1px solid var(--subtleAccent);
+    border-left: 1px solid var(--subtleAccent);
+    border-right: 1px solid var(--subtleAccent);
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #f9f9f9;
+    height: 20px;
+}
+
+.tab-rates .rate_profile {
+    min-width: 130px;
+}
+
+.tab-rates .rate_profile select {
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: calc(100% - 10px);
+}
+
+
+.tab-rates .bracket {
+    background-image: url(../../images/icons/icon_bracket.svg);
+    background-repeat: no-repeat;
+    height: 35px;
+    width: 14px;
+    margin-top: -23px;
+    margin-left: 8px;
+}
+
+.tab-rates .rates_preview_cell {
+    position: relative;
+    width: 100%;
+    height: 362px;
+}
+
+.tab-rates .rates_preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: 100%;
+}
+
+.tab-rates .new_rates td:first-child {
+    border-bottom-left-radius: 0;
+    padding-left: 10px;
+}
+
+.tab-rates .new_rates td:last-child {
+    border-bottom-right-radius: 0;
+}
+
+.tab-rates .rc_curve .cf tr td {
+    padding: 0;
+}
+
+.tab-rates .rc_curve_bg {
+    float: left;
+}
+
+.tab-rates .new_rates_last-child {
+    border-bottom: none;
+}
+
+.tabarea {
+    width: calc(100% - 22px);
+    position: relative;
+    padding: 10px;
+    border: 1px solid var(--subtleAccent);
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top: 0 solid var(--subtleAccent);
+    background: #f9f9f9;
+}
+
+.tab-rates dialog {
+    width: 40em;
+    border-radius: 5px;
+}
+
+.tab-rates dialog .buttons {
+    position: static;
+    margin-top: 2em;
+}
+
+.tab-rates dialog h3 {
+    margin-bottom: 0.5em;
+}
+
+.tab-rates dialog select {
+    border: 1px solid var(--subtleAccent);
+    margin-left: 5px;
+    width: 120px;
+}
+
+@media all and (max-width: 575px) {
+    .tab-rates dialog {
+        width: calc(100% - 2em);
+        border-radius: unset;
+    }
+}
+
+.tab-rates .subtab-rates {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.tab-rates .subtab-rates .cf_column {
+    min-width: 380px;
+    flex: 1;
+}
+
+
+@media only screen and (max-width: 1405px) {
+
+.tab-rates .subtab-rates .ratePreview.spacer_left {
+    width: 100%;
+}
+}
+
+.tab-rates .rates_titlebar .name-helpicon-flex {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.tab-rates .rates_titlebar .name-helpicon-flex .helpicon {
+    margin-right: 0;
+}
+
+.tab-rates .cf .rates_logo_bg {
+    background-color: #ebeced;
+}
+
+.tab-rates .rates_logo_div {
+    margin-top: -10%;
+    text-align: center;
+}
+
+.tab-rates .rates_logo {
+    width: 80%;
+    height: 80%;
+}
+
+.tab-rates .rates-tab-warning {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.tab-rates .float-left {
+    float: left;
+}
+
+.tab-rates .content_wrapper_header {
+    display: flex;
+}
+
+.tab-rates .content_wrapper_header_btns {
+    margin-left: auto;
+}
+
+@media all and (max-width: 575px) {
+    .tab-rates .content_wrapper_header {
+        flex-wrap: wrap;
+    }
+
+    .tab-rates .copyrateprofilebtn,
+    .tab-rates .resetbt,
+    .tab-rates .show {
+        width: calc(50% - 5px);
+    }
+
+    .tab-rates .rate_profile {
+        margin-left: 5px;
+    }
+
+    .tab-rates .rate_profile,
+    .tab-rates .copyrateprofilebtn,
+    .tab-rates .show {
+        margin-right: 0;
+    }
+
+    .tab-rates .controller {
+        width: 100%;
+    }
+
+    .tab-rates .content_wrapper_header_btns {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .tab-rates .tab-container > div {
+        width: calc(100% / 3);
+    }
+
+    .tab-rates .subtab-rates .cf_column {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    .tab-rates .spacer_left {
+        width: 100%;
+    }
+
+}
+
