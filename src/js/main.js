@@ -363,6 +363,9 @@ function startProcess() {
                     case 'profiles':
                         TABS.profiles.initialize(content_ready);
                         break;
+                    case 'rates':
+                        TABS.rates.initialize(content_ready);
+                        break;
                     case 'receiver':
                         TABS.receiver.initialize(content_ready);
                         break;

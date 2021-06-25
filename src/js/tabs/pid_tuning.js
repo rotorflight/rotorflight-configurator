@@ -890,7 +890,6 @@ TABS.pid_tuning.initialize = function (callback) {
     function printMaxAngularVel(rate, rcRate, rcExpo, useSuperExpo, deadband, limit, maxAngularVelElement) {
         const maxAngularVel = self.rateCurve.getMaxAngularVel(rate, rcRate, rcExpo, useSuperExpo, deadband, limit).toFixed(0);
         maxAngularVelElement.text(maxAngularVel);
-
         return maxAngularVel;
     }
 
