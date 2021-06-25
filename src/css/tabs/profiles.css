@@ -1,0 +1,467 @@
+
+.tab-profiles input[type="number"]::-webkit-inner-spin-button {
+    border: 0;
+}
+
+.tab-profiles table {
+    float: left;
+    margin: 0;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tab-profiles .gui_box {
+    margin-bottom: 5px;
+    display: table;
+}
+
+.tab-profiles table .inputBackground {
+    background: white;
+}
+
+.tab-profiles table, .tab-profiles table td {
+    padding: 1px;
+    border-bottom: 0 solid var(--subtleAccent);
+}
+
+.tab-profiles table th {
+    padding: 0;
+    border: 0;
+    height: 10px;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.tab-profiles .pid_titlebar th {
+    padding: 5px;
+    text-align: left;
+    border-right: 1px solid var(--subtleAccent);
+}
+
+.tab-profiles .pid_titlebar th:first-child {
+    text-align: left;
+    border-top-left-radius: 3px;
+}
+
+.tab-profiles .pid_titlebar th:last-child {
+    border-right: none;
+    border-top-right-radius: 3px;
+}
+
+.tab-profiles table tr td:first-child {
+    text-align: left;
+    padding-left: 5px;
+}
+
+.tab-profiles table tr td:last-child {
+    border-right: 0 solid var(--subtleAccent);
+}
+
+.tab-profiles table.compensation tr {
+    height: 30px;
+    border-bottom: 1px solid var(--subtleAccent);
+}
+
+.tab-profiles table.compensation tr:last-child {
+    border-bottom: none;
+}
+
+.tab-profiles table.compensation td {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.tab-profiles table.compensation td:first-child {
+    width: 65px;
+    text-align: center;
+    vertical-align: top;
+    padding-top: 4px;
+}
+
+.tab-profiles table.compensation td:last-child {
+    width: 100%;
+}
+
+.tab-profiles table.compensation .helpicon {
+    margin-top: 3px
+}
+
+.tab-profiles table.compensation .suboption {
+    margin-left: 2%;
+    display: flex;
+    flex-flow: row wrap-reverse;
+    align-items: center;
+    padding-bottom: 2px;
+}
+
+.tab-profiles table.compensation .suboption select {
+    width: 80px;
+    height: 20px;
+    text-align: right;
+    font-size: 1.1em;
+    box-sizing: border-box;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+    background-color: white;
+}
+
+.tab-profiles table.compensation .suboption input {
+    width: 80px;
+    height: 20px;
+    box-sizing: border-box;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+    background-color: white;
+}
+
+.tab-profiles table.compensation .suboption label {
+    margin-left: 5px;
+}
+
+.tab-profiles table td {
+    padding: 1px 1px 1px 5px;
+    border-right: 1px solid var(--subtleAccent);
+}
+
+.tab-profiles table tr td {
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.tab-profiles table input {
+    display: block;
+    width: calc(100% - 0px);
+    height: 20px;
+    line-height: 20px;
+    text-align: right;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+}
+
+.tab-profiles table select {
+    text-align-last: right;
+    border-radius: 3px;
+    border: 1px solid var(--subtleAccent);
+}
+
+.tab-profiles .tab-container {
+    border-bottom: 3px solid var(--accent);
+    border-right-width: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: start;
+    width: 100%;
+}
+
+.tab-profiles .tab-container > div {
+    background-color: #2e2e2e;
+    padding: 6px 12px;
+    border-right: 1px solid white;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.tab-profiles .tab-container > div:first-child {
+    border-top-left-radius: 4px;
+}
+
+.tab-profiles .tab-container > div:last-child {
+    border-top-right-radius: 4px;
+}
+
+.tab-profiles .tab-container > div a {
+    display: block;
+    color: #999999;
+}
+
+.tab-profiles .tab-container > div.active,
+.tab-profiles .tab-container > div.active a {
+    background-color: var(--accent);
+    color: #000;
+    transition: none;
+}
+
+.tab-profiles .pid_titlebar {
+    color: #fff;
+    background-color: var(--quietHeader);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    height: 20px;
+}
+
+.tab-profiles .pid_titlebar.pid_titlebar_extended {
+    border-radius: 0;
+}
+
+.pid_roll {
+    background-color: #FF8080;
+}
+
+.pid_pitch {
+    background-color: #80FF80;
+}
+
+.pid_yaw {
+    background-color: #8080FF;
+}
+
+
+.tab-profiles .pid_titlebar td:first-child {
+    text-align: left;
+}
+
+.show {
+    width:130px;
+    margin-right:3px;
+}
+
+.tab-profiles .helpicon {
+    margin-top: 1px;
+}
+
+.tab-profiles .number .helpicon {
+    margin-top: 3px;
+    margin-right: 0;
+}
+
+.tab-profiles .gui_box_titlebar .helpicon {
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.tab-profiles .spacer_left {
+    padding-left: 0;
+    float: right;
+    width: calc(100% - 20px)
+}
+
+.tab-profiles .numberspacer {
+    float: left;
+    width: 65px;
+    height: 21px;
+}
+
+.tab-profiles .number {
+    margin-bottom: 5px;
+    clear: left;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--subtleAccent);
+    width: 100%;
+    float: left;
+}
+
+.tab-profiles .number:last-child {
+    padding-bottom: 5px;
+    border-bottom: 0;
+}
+
+.tab-profiles .number input {
+    width: 50px;
+    padding-left: 3px;
+    height: 20px;
+    line-height: 20px;
+    text-align: left;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+    margin-right: 11px;
+    font-weight: normal;
+}
+
+.tab-profiles .gui_box span {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 19px;
+    color: #7d7d7d;
+    font-size: 11px;
+}
+
+.tab-profiles .resetbt {
+    width: 140px;
+    margin-right: 10px;
+}
+
+.tab-profiles .copyprofilebtn {
+    width: 150px;
+    margin-right:10px;
+}
+
+.tab-profiles .right {
+    float: right;
+}
+
+.tab-profiles .pids {
+    float: left;
+    width: 25%;
+}
+
+.tab-profiles .borderleft {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.tab-profiles .topspacer {
+    margin-top: 5px;
+}
+
+.tab-profiles .bottomarea {
+    float: left;
+    width: calc(100% - 2px);
+    border-bottom: 1px solid var(--subtleAccent);
+    border-left: 1px solid var(--subtleAccent);
+    border-right: 1px solid var(--subtleAccent);
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #f9f9f9;
+    height: 20px;
+}
+
+.tab-profiles .profile {
+    min-width: 130px;
+}
+
+.tab-profiles .profile select {
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: calc(100% - 10px);
+}
+
+
+.tabarea {
+    width: calc(100% - 22px);
+    position: relative;
+    padding: 10px;
+    border: 1px solid var(--subtleAccent);
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top: 0 solid var(--subtleAccent);
+    background: #f9f9f9;
+}
+
+.tab-profiles dialog {
+    width: 40em;
+    border-radius: 5px;
+}
+
+.tab-profiles dialog .buttons {
+    position: static;
+    margin-top: 2em;
+}
+
+.tab-profiles dialog h3 {
+    margin-bottom: 0.5em;
+}
+
+.tab-profiles dialog select {
+    border: 1px solid var(--subtleAccent);
+    margin-left: 5px;
+    width: 120px;
+}
+
+@media all and (max-width: 575px) {
+    .tab-profiles dialog {
+        width: calc(100% - 2em);
+        border-radius: unset;
+    }
+}
+
+.tab-profiles .subtab-pid {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.tab-profiles .subtab-pid .cf_column {
+    min-width: 472px;
+    flex: 1;
+}
+
+.tab-profiles .subtab-pid .note {
+    flex: 0 0 100%;
+}
+
+
+@media only screen and (max-width: 1205px) {
+
+.tab-profiles .subtab-pid .spacer_left {
+    width: 100%;
+}
+}
+
+.tab-profiles .pid_titlebar .name-helpicon-flex {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.tab-profiles .pid_titlebar .name-helpicon-flex .helpicon {
+    margin-right: 0;
+}
+
+.tab-profiles .float-left {
+    float: left;
+}
+
+.tab-profiles .content_wrapper_header {
+    display: flex;
+}
+
+.tab-profiles .content_wrapper_header_btns {
+    margin-left: auto;
+}
+
+@media all and (max-width: 575px) {
+    .tab-profiles .content_wrapper_header {
+        flex-wrap: wrap;
+    }
+
+    .tab-profiles .profile,
+    .tab-profiles .copyprofilebtn,
+    .tab-profiles .resetbt,
+    .tab-profiles .show {
+        width: calc(50% - 5px);
+    }
+
+    .tab-profiles .show {
+        margin-right: 0;
+    }
+
+    .tab-profiles .content_wrapper_header_btns {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .tab-profiles .tab-container > div {
+        width: calc(100% / 3);
+    }
+
+    .tab-profiles .subtab-pid .cf_column {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    .tab-profiles .spacer_left {
+        width: 100%;
+    }
+
+    .subtab-filter .two_columns {
+        flex-wrap: wrap;
+    }
+
+    .subtab-filter .two_columns .two_columns_first {
+        margin-right: 0;
+    }
+
+    .subtab-filter .two_columns .two_columns_second {
+        margin-left: 0;
+    }
+
+}
