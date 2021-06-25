@@ -330,6 +330,9 @@
     "tabPidTuning": {
         "message": "Tuning"
     },
+    "tabProfiles": {
+        "message": "Profiles"
+    },
     "tabReceiver": {
         "message": "Receiver"
     },
@@ -1901,6 +1904,7 @@
     "pidTuningPidSettings": {
         "message": "PID Controller Settings"
     },
+
     "receiverBars": {
         "message": "Receiver Channels"
     },
@@ -2226,6 +2230,75 @@
         "message": "EEPROM <span class=\"message-positive\">saved</span>"
     },
 
+    "profilesSubTab1": {
+        "message": "PID Profile #1"
+    },
+    "profilesSubTab2": {
+        "message": "PID Profile #2"
+    },
+    "profilesSubTab3": {
+        "message": "PID Profile #3"
+    },
+
+    "profilesPIDGains": {
+        "message": "Gains"
+    },
+    "profilesProportional": {
+        "message": "Proportional"
+    },
+    "profilesProportionalHelp": {
+        "message": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint).<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the Derivative (D-term).  Think of the P-term as the spring on a car.",
+        "description": "Proportional Term helpicon message on PID table titlebar"
+    },
+    "profilesIntegral": {
+        "message": "Integral"
+    },
+    "profilesIntegralHelp": {
+        "message": "Controls the strength of how tightly the machine holds the overall position of the Setpoint.<br>Similar to Proportional, but for longer biases on the craft such as an offset center of gravity (CoG) or persistent outside influence (steady wind).<br /><br />Higher gains provide tighter tracking (e.g.: in sweeping turns), but can make the craft feel stiff for commanded stick inputs.<br>If extremely high in proportion to the D-term, can cause slow oscillations.",
+        "description": "Integral Term helpicon message on PID table titlebar"
+    },
+    "profilesDerivative": {
+        "message": "Derivative"
+    },
+    "profilesDerivativeHelp": {
+        "message": "Controls the strength of dampening to ANY motion on the craft.  For stick moves, the D-term dampens the command. For an outside influence (prop-wash OR wind gust) the D-term dampens the influence.<br /><br />Higher gains provide more dampening and reduce overshoot by P-term and FF.<br>However, the D-term is VERY sensitive to gyro high frequency vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise can cause motor heat and burn out motors if D-gains are too high or the gyro noise is not filtered well (see Filters tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the negative inherent property of magnifying high frequency gyro noise.",
+        "description": "Derivative Term helpicon message on PID table titlebar"
+    },
+    "profilesFeedforward": {
+        "message": "Feedforward"
+    },
+    "profilesFeedforwardHelp": {
+        "message": "Is an additional pushing term (spring) based on stick input. FF helps the P-term push the craft for commanded stick moves.<br /><br />The P-term pushes based on the difference between the commanded Setpoint (deg/sec) and the gyro reading of current rotational rate (deg/sec). FF pushes based on the commanded change of the sticks alone.<br /><br />Higher values (gains) will result in a more sharp machine response to stick input.<br>Too high of values may result in some overshoot, increased motor heat, and motor saturation (where motors can not keep up with the desired rate of change).<br>Lower or zero (0) values will result in a slower and smoother response to stick inputs.",
+        "description": "Feedforward Term helpicon message on PID table titlebar"
+    },
+    "profilesCopyProfile": {
+        "message": "Copy profile values"
+    },
+    "profilesResetProfile": {
+        "message": "Reset all profile values"
+    },
+    "profilesProfileReset": {
+        "message": "Loaded default profile values."
+    },
+    "profilesReceivedProfile": {
+        "message": "Flight controller set Profile: <strong class=\"message-positive\">$1</strong>"
+    },
+    "profilesActivateProfile": {
+        "message": "Loaded Profile: <strong class=\"message-positive\">$1</strong>"
+    },
+    "profilesDataRefreshed": {
+        "message": "PID data <strong>refreshed</strong>"
+    },
+    "profilesEepromSaved": {
+        "message": "EEPROM <span class=\"message-positive\">saved</span>"
+    },
+    "profilesButtonSave": {
+        "message": "Save"
+    },
+    "profilesButtonRefresh": {
+        "message": "Refresh"
+    },
+    
     "receiverHelp": {
         "message": "Please read receiver chapter of the documentation.  Configure serial port (if required), receiver mode (serial/ppm/pwm), provider (for serial receivers), bind receiver, set channel map, configure channel endpoints/range on TX so that all channels go from ~1000 to ~2000.  Set midpoint (default 1500), trim channels to 1500, configure stick deadband, verify behaviour when TX is off or out of range.<br /><span class=\"message-negative\">IMPORTANT:</span> Before flying read failsafe chapter of documentation and configure failsafe."
     },
@@ -4147,6 +4220,83 @@
     },
     "pidTuningIntegratedYawHelp": {
         "message": "Integrated Yaw is a feature which corrects a fundamental issue with quad control: while the pitch and roll axis are controlled by the thrust differentials the props generate yaw is different. Integrated Yaw fixes this by integrating the output of the yaw pid before applying them to the mixer. This normalizes the way the pids work. You can now tune as any other axis. It requires use of absolute control since no I is needed with Integrated Yaw."
+    },
+
+
+    "profilesPidSettings": {
+        "message": "PID Controller Settings"
+    },
+    "profilesLevel": {
+        "message": "Angle/Horizon"
+    },
+    "profilesAngle": {
+        "message": "Angle"
+    },
+    "profilesLevelAngleLimit": {
+        "message": "Angle Limit"
+    },
+    "profilesLevelSensitivity": {
+        "message": "Sensitivity"
+    },
+    "profilesLevelHelp": {
+        "message": "The values below change the behaviour of the ANGLE and HORIZON flight modes. Different PID controllers handle the values differently. Please check the documentation."
+    },
+    "profilesItermRotation": {
+        "message": "I Term Rotation"
+    },
+    "profilesItermRotationHelp": {
+        "message": "Rotates the current I Term vector properly to other axes as the quad rotates when yawing continuously during rolls and when performing funnels and other tricks. Very appreciated by LOS acro pilots."
+    },
+    "profilesItermRelax": {
+        "message": "I Term Relax"
+    },
+    "profilesItermRelaxHelp": {
+        "message": "Limits the accumulation of I Term when fast movements happen. This helps specially to reduce the bounceback at the end of rolls and other fast movements. You can choose the axes in which this is active, and if the fast movement is detectd using the Gyro or the Setpoint (stick)."
+    },
+    "profilesItermRelaxAxes": {
+        "message": "Axes",
+        "description": "Iterm Relax Axes selection"
+    },
+    "profilesItermRelaxAxesOptionRP": {
+        "message": "RP"
+    },
+    "profilesItermRelaxAxesOptionRPY": {
+        "message": "RPY"
+    },
+    "profilesItermRelaxAxesOptionRPInc": {
+        "message": "RP (increment only)"
+    },
+    "profilesItermRelaxAxesOptionRPYInc": {
+        "message": "RPY (increment only)"
+    },
+    "profilesItermRelaxType": {
+        "message": "Type",
+        "description": "Iterm Relax Type selection"
+    },
+    "profilesItermRelaxTypeOptionGyro": {
+        "message": "Gyro"
+    },
+    "profilesItermRelaxTypeOptionSetpoint": {
+        "message": "Setpoint"
+    },
+    "profilesItermRelaxCutoff": {
+        "message": "Cutoff",
+        "description": "Cutoff value of the I Term Relax"
+    },
+    "profilesItermRelaxCutoffHelp": {
+        "message": "Lower values suppress bounce-back after flips in low authority quads, high values increase high-rate turn precision for racing.<br>Set to 30-40 for racing, 15 for responsive freestyle builds, 10 for heavier freestyle quads, 3-5 for X-class."
+    },
+    "profilesAbsoluteControlGain": {
+        "message": "Absolute Control"
+    },
+    "profilesAbsoluteControlGainHelp": {
+        "message": "This feature solves some underlying problems of $t(pidTuningItermRotation.message) and should hopefully replace it at some point. This feature accumulates the absolute gyro error in quad coordinates and mixes a proportional correction into the setpoint. For it to work you need to enable AirMode and $t(pidTuningItermRelax.message) (for $t(pidTuningItermRelaxAxesOptionRP.message)). If you combine this feature with $t(pidTuningIntegratedYaw.message), you can set $t(pidTuningItermRelax.message) enabled for $t(pidTuningItermRelaxAxesOptionRPY.message)."
+    },
+    "profilesAcroTrainerAngleLimit": {
+        "message": "Acro Trainer Angle Limit"
+    },
+    "profilesAcroTrainerAngleLimitHelp": {
+        "message": "Adds a new angle limiting mode for pilots who are learning to fly in acro mode. The range valid is 10-80 and must be activated with a switch in the $t(tabAuxiliary.message) tab."
     },
 
     "configHelp2": {

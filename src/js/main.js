@@ -360,6 +360,9 @@ function startProcess() {
                     case 'pid_tuning':
                         TABS.pid_tuning.initialize(content_ready);
                         break;
+                    case 'profiles':
+                        TABS.profiles.initialize(content_ready);
+                        break;
                     case 'receiver':
                         TABS.receiver.initialize(content_ready);
                         break;
