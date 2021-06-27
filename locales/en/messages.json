@@ -336,6 +336,9 @@
     "tabRates": {
         "message": "Rates"
     },
+    "tabGyro": {
+        "message": "Gyro"
+    },
     "tabReceiver": {
         "message": "Receiver"
     },
@@ -4422,6 +4425,166 @@
     },
     "rateSetupThrottleCurvePreview": {
         "message": "Throttle Curve Preview"
+    },
+
+    "gyroFilterSettings": {
+        "message": "Gyro Filter Settings"
+    },
+    "gyroDTermFilterSettings": {
+        "message": "Gyro D-term Filter Settings"
+    },
+    "gyroLowpassFiltersGroup": {
+        "message": "Gyro Lowpass Filters"
+    },
+    "gyroLowpassFrequency": {
+        "message": "Gyro Lowpass 1 Cutoff Frequency [Hz]"
+    },
+    "gyroLowpassType": {
+        "message": "Gyro Lowpass 1 Filter Type"
+    },
+    "gyroLowpassDynMinFrequency": {
+        "message": "Gyro Lowpass 1 Dynamic Min Cutoff Frequency [Hz]"
+    },
+    "gyroLowpassDynMaxFrequency": {
+        "message": "Gyro Lowpass 1 Dynamic Max Cutoff Frequency [Hz]"
+    },
+    "gyroLowpassDynType": {
+        "message": "Gyro Lowpass 1 Dynamic Filter Type"
+    },
+    "gyroLowpass2Frequency": {
+        "message": "Gyro Lowpass 2 Cutoff Frequency [Hz]"
+    },
+    "gyroLowpass2Type": {
+        "message": "Gyro Lowpass 2 Filter Type"
+    },
+    "gyroLowpassFilterHelp": {
+        "message": "The Lowpass Filters can have two variants: static and dynamic. For a determined lowpass filter number only one (static or dynamic) can be enabled at the same time. The static only has a Cutoff that is a value that defines in some way where the filter starts. The dynamic defines a min and max values, that is the range where the Cutoff is placed. This Cutoff moves from min to max at the same time than you move the throttle stick."
+    },
+    "gyroNotchFiltersGroup": {
+        "message": "Gyro Notch Filters"
+    },
+    "gyroNotch1Frequency": {
+        "message": "Gyro Notch Filter 1 Center Frequency [Hz]"
+    },
+    "gyroNotch2Frequency": {
+        "message": "Gyro Notch Filter 2 Center Frequency [Hz]"
+    },
+    "gyroNotch1Cutoff": {
+        "message": "Gyro Notch Filter 1 Cutoff Frequency [Hz]"
+    },
+    "gyroNotch2Cutoff": {
+        "message": "Gyro Notch Filter 2 Cutoff Frequency [Hz]"
+    },
+    "gyroNotchFilterHelp": {
+        "message": "The Notch Filter has a Center and a Cutoff. The filter is symmetrical. The Center Frequency is the center of the filter and the Cutoff Frequency is where Notch filter starts. For example with Notch Cutoff of 160 and Notch Center of 260 it means the range is 160-360Hz with most attenuation around center"
+    },
+    "gyroDynamicNotchFilterGroup": {
+        "message": "Dynamic Notch Filter"
+    },
+    "gyroDynamicNotchFilterHelp": {
+        "message": "Dynamic Notch Filter tracks peak motors noise frequency and places one or two notch filters with their center at that frequency."
+    },
+    "gyroDynamicNotchFilterDisabledWarning": {
+        "message": "<strong>Notice:</strong> The dynamic notch filter is disabled. In order to configure and use it, please enable the 'DYNAMIC_FILTER' feature in the '$t(configurationFeatures.message)' section of the '$t(tabConfiguration.message)' tab."
+    },
+    "gyroDynamicNotchRange": {
+        "message": "Dynamic Notch Filter Range"
+    },
+    "gyroDynamicNotchWidthPercent": {
+        "message": "Dynamic Notch Width Percent"
+    },
+    "gyroDynamicNotchQ": {
+        "message": "Dynamic Notch Q"
+    },
+    "gyroDynamicNotchMinHz": {
+        "message": "Dynamic Notch Min Hz"
+    },
+    "gyroDynamicNotchMaxHz": {
+        "message": "Dynamic Notch Max Hz"
+    },
+    "gyroDynamicNotchRangeHelp": {
+        "message": "The dynamic notch has three frequency ranges in which it can operate: LOW(80-330hz) for lower revving quads like 6+ inches, MEDIUM(140-550hz) for a normal 5 inch quad, HIGH(230-800hz) for very high revving 2.5-3 inch quads. AUTO option selects the range depending on the value of the Gyro Dynamic Lowpass 1 Filter's max cutoff frequency."
+    },
+    "gyroDynamicNotchWidthPercentHelp": {
+        "message": "This sets the width between two dynamic notch filters. Setting it at 0 will disable the second dynamic notch filter and will reduce filter delay, however it may make motor temperatures higher."
+    },
+    "gyroDynamicNotchQHelp": {
+        "message": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Having a really low value will greatly increase filter delay."
+    },
+    "gyroDynamicNotchMinHzHelp": {
+        "message": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch."
+    },
+    "gyroDynamicNotchMaxHzHelp": {
+        "message": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch."
+    },
+    "gyroRpmFilterGroup": {
+        "message": "Gyro RPM Filter",
+        "description": "Header text for the RPM Filter group"
+    },
+    "gyroRpmFilterHelp": {
+        "message": "RPM filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove motor noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotorTesting.message) tab must be correct for this filter to work.</b>",
+        "description": "Header text for the RPM Filter group"
+    },
+    "gyroRpmHarmonics": {
+        "message": "Gyro RPM Filter Harmonics Number",
+        "description": "Text for one of the parameters of the RPM Filter"
+    },
+    "gyroRpmHarmonicsHelp": {
+        "message": "Number of harmonics per motor. A value of 3 (recommended for most quads) will generate 3 notch filters, per motor for each axis, totaling 36 notches. One at the base motor frequency and two harmonics at multiples of that base frequency.",
+        "description": "Help text for one of the parameters of the RPM Filter"
+    },
+    "gyroRpmMinHz": {
+        "message": "Gyro RPM Filter Min Frequency [Hz]",
+        "description": "Text for one of the parameters of the RPM Filter"
+    },
+    "gyroRpmMinHzHelp": {
+        "message": "Minimum frequency that will be used by the RPM Filter.",
+        "description": "Help text for one of the parameters of the RPM Filter"
+    },
+    "gyroDTermLowpassFiltersGroup": {
+        "message": "D Term Lowpass Filters"
+    },
+    "gyroDTermLowpassType": {
+        "message": "D Term Lowpass 1 Filter Type"
+    },
+    "gyroDTermLowpassFrequency": {
+        "message": "D Term Lowpass 1 Cutoff Frequency [Hz]"
+    },
+    "gyroDTermLowpass2Frequency": {
+        "message": "D Term Lowpass 2 Cutoff Frequency [Hz]"
+    },
+    "gyroDTermLowpass2Type": {
+        "message": "D Term Lowpass 2 Filter Type"
+    },
+    "gyroDTermLowpassDynMinFrequency": {
+        "message": "D Term Lowpass 1 Dynamic Min Cutoff Frequency [Hz]"
+    },
+    "gyroDTermLowpassDynMaxFrequency": {
+        "message": "D Term Lowpass 1 Dynamic Max Cutoff Frequency [Hz]"
+    },
+    "gyroDTermLowpassDynType": {
+        "message": "D Term Lowpass 1 Dynamic Filter Type"
+    },
+    "gyroDTermLowpassDynExpo": {
+        "message": "D Term Lowpass 1 Dynamic Curve Expo"
+    },
+    "gyroDTermNotchFiltersGroup": {
+        "message": "D Term Notch Filters"
+    },
+    "gyroDTermNotchFrequency": {
+        "message": "D Term Notch Filter Center Frequency [Hz]"
+    },
+    "gyroDTermNotchCutoff": {
+        "message": "D Term Notch Filter Cutoff Frequency [Hz]"
+    },
+    "gyroButtonSave": {
+        "message": "Save"
+    },
+    "gyroButtonRefresh": {
+        "message": "Refresh"
+    },
+    "gyroEepromSaved": {
+        "message": "EEPROM <span class=\"message-positive\">saved</span>"
     },
 
     "configHelp2": {

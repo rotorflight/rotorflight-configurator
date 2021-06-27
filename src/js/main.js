@@ -366,6 +366,9 @@ function startProcess() {
                     case 'rates':
                         TABS.rates.initialize(content_ready);
                         break;
+                    case 'gyro':
+                        TABS.gyro.initialize(content_ready);
+                        break;
                     case 'receiver':
                         TABS.receiver.initialize(content_ready);
                         break;
