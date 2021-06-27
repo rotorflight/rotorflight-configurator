@@ -1,0 +1,118 @@
+
+.tab-gyro .gui_box {
+    margin-bottom: 5px;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    display: table;
+}
+
+.tab-gyro .gui_box span {
+    font-size: 11px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 19px;
+    color: #626262;
+}
+
+.tab-gyro input[type="number"]::-webkit-inner-spin-button {
+    border: 0;
+}
+
+.tab-gyro table {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 1px;
+    border: 0;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.tab-gyro table th {
+    height: 10px;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border: 0;
+    padding: 5px 0 2px 0;
+}
+
+.tab-gyro table td {
+    padding: 5px 5px 2px 5px;
+}
+
+.tab-gyro table tr td {
+    text-align: left;
+}
+
+.tab-gyro table tr td:first-child {
+    width: 150px;
+    text-align: left;
+    padding-right: 10px;
+    border-right: 1px solid var(--subtleAccent);
+}
+
+.tab-gyro table tr td.border {
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--subtleAccent);
+}
+
+.tab-gyro table input {
+    display: block;
+    width: calc(100% - 0px);
+    height: 20px;
+    line-height: 20px;
+    text-align: right;
+    border-radius: 3px;
+    border: 1px solid var(--subtleAccent);
+}
+
+.tab-gyro table input,
+.tab-gyro table select {
+    width: 80px;
+    float: right;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.tab-gyro table select {
+    text-align-last: right;
+    border-radius: 3px;
+    border: 1px solid var(--subtleAccent);
+}
+
+.tab-gyro .gui_box_titlebar .helpicon {
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.tab-gyro .subtitle {
+    width: calc(100% - 5px);
+    height: 18px;
+    color: #626262;
+    background-color: #D6D6D6;
+    line-height: 13px;
+    font-size: 12px;
+    font-weight: normal;
+    float: left;
+    text-align: left;
+    padding: 5px 0 0 5px;
+    margin: 0;
+    margin-bottom: 3px;
+    border-bottom: 1px solid var(--subtleAccent);
+    background-image: linear-gradient(315deg, rgba(255, 255, 255, .2) 10%, transparent 10%, transparent 20%,
+        rgba(255, 255, 255, .2) 20%, rgba(255, 255, 255, .2) 30%, transparent 30%, transparent 40%,
+        rgba(255, 255, 255, .2) 40%, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent 60%,
+        rgba(255, 255, 255, .2) 60%, rgba(255, 255, 255, .2) 70%, transparent 70%, transparent 80%,
+        rgba(255, 255, 255, .2) 80%, rgba(255, 255, 255, .2) 90%, transparent 90%, transparent 100%,
+        rgba(255, 255, 255, .2) 100%, transparent);
+}
+
+.tab-gyro .subtitle > div:first-child {
+    float: left;
+}
+
+.tab-gyro .subtitle .helpicon {
+    margin-top: 0;
+}
+

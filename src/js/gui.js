@@ -49,6 +49,7 @@ const GuiControl = function () {
         'pid_tuning',
         'profiles',
         'rates',
+        'gyro',
         'ports',
         'receiver',
         'sensors',
