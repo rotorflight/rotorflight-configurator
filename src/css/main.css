@@ -1143,6 +1143,30 @@ li.active .ic_pid {
     background-image: url(../images/icons/cf_icon_pid_white.svg);
 }
 
+.ic_rates {
+    background-image: url(../images/icons/cf_icon_advanced_grey.svg);
+}
+
+.ic_rates:hover {
+    background-image: url(../images/icons/cf_icon_advanced_white.svg);
+}
+
+li.active .ic_rates {
+    background-image: url(../images/icons/cf_icon_advanced_white.svg);
+}
+
+.ic_gyro {
+    background-image: url(../images/icons/cf_icon_sensors_grey.svg);
+}
+
+.ic_gyro:hover {
+    background-image: url(../images/icons/cf_icon_sensors_white.svg);
+}
+
+li.active .ic_gyro {
+    background-image: url(../images/icons/cf_icon_sensors_white.svg);
+}
+
 .ic_rx {
     background-image: url(../images/icons/cf_icon_rx_grey.svg);
 }
@@ -1240,15 +1264,15 @@ li.active .ic_sensors {
 }
 
 .ic_beepers {
-    background-image: url(../images/icons/cf_icon_sensors_grey.svg);
+    background-image: url(../images/icons/cf_icon_transponder_grey.svg);
 }
 
 .ic_beepers:hover {
-    background-image: url(../images/icons/cf_icon_sensors_white.svg);
+    background-image: url(../images/icons/cf_icon_transponder_white.svg);
 }
 
 li.active .ic_beepers {
-    background-image: url(../images/icons/cf_icon_sensors_white.svg);
+    background-image: url(../images/icons/cf_icon_transponder_white.svg);
 }
 
 .ic_log {
@@ -2128,7 +2152,7 @@ dialog .dialog_toolbar .btn a.disabled {
 /* fixing padding for all Tabs*/
 .tab-status, .tab-setup, .tab-landing, .tab-adjustments, .tab-auxiliary, .tab-cli, .tab-configuration, .tab-failsafe, .tab-firmware_flasher,
     .tab-gps, .tab-help, .tab-led-strip, .tab-logging, .tab-modes, .tab-motors, .tab-pid_tuning, .tab-ports, .tab-receiver,
-    .tab-sensors, .tab-servos, .tab-osd, .tab-power, .tab-beepers {
+    .tab-sensors, .tab-servos, .tab-osd, .tab-power, .tab-beepers, .tab-profiles, .tab-rates, .tab-gyro {
     height: 100%;
     position: relative;
 }
