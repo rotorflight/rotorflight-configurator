@@ -46,7 +46,6 @@ const GuiControl = function () {
         'onboard_logging',
         'modes',
         'motors',
-        'pid_tuning',
         'profiles',
         'rates',
         'gyro',
