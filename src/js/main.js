@@ -357,9 +357,6 @@ function startProcess() {
                     case 'configuration':
                         TABS.configuration.initialize(content_ready);
                         break;
-                    case 'pid_tuning':
-                        TABS.pid_tuning.initialize(content_ready);
-                        break;
                     case 'profiles':
                         TABS.profiles.initialize(content_ready);
                         break;
