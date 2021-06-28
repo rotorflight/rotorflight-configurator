@@ -929,17 +929,17 @@
         "message": "RPM-based filtering is enabled but one or more ESC's are not supplying valid DSHOT telemetry. Check that the ESC's are capable of and have the required firmware installed to support bidirectional DSHOT telemetry.",
         "description": "Message that pops up to describe the RPMFILTER arming disable flag"
     },
-    "statusArmingDisableFlagsTooltipREBOOT_REQD": {
+    "statusArmingDisableFlagsTooltipREBOOT_REQ": {
         "message": "A configuration change requires a reboot",
-        "description": "Message that pops up to describe the REBOOT_REQD arming disable flag"
+        "description": "Message that pops up to describe the REBOOT_REQ arming disable flag"
     },
-    "statusArmingDisableFlagsTooltipDSHOT_BBANG": {
+    "statusArmingDisableFlagsTooltipDSHOT_BITBANG": {
         "message": "Bitbanged DSHOT is not working properly and the motors can't be controlled. Likely caused by a timer conflict with other features enabled on the flight controller.",
-        "description": "Message that pops up to describe the DSHOT_BBANG arming disable flag"
+        "description": "Message that pops up to describe the DSHOT_BITBANG arming disable flag"
     },
-    "statusArmingDisableFlagsTooltipNO_ACC_CAL": {
+    "statusArmingDisableFlagsTooltipACC_CALIB": {
         "message": "The accelerometer has not been calibrated and features are enabled that rely on it. Calibrate the accelerometer.",
-        "description": "Message that pops up to describe the NO_ACC_CAL arming disable flag"
+        "description": "Message that pops up to describe the ACC_CALIB arming disable flag"
     },
     "statusArmingDisableFlagsTooltipMOTOR_PROTO": {
         "message": "There is no motor output protocol selected",
