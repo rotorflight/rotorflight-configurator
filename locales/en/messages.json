@@ -2245,6 +2245,15 @@
     "profilesSubTab3": {
         "message": "PID Profile #3"
     },
+    "profilesSubTab4": {
+        "message": "PID Profile #4"
+    },
+    "profilesSubTab5": {
+        "message": "PID Profile #5"
+    },
+    "profilesSubTab6": {
+        "message": "PID Profile #6"
+    },
 
     "profilesPIDGains": {
         "message": "Gains"
