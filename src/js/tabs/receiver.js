@@ -99,11 +99,11 @@ TABS.receiver.initialize = function (callback) {
 
         // generate bars
         const bar_names = [
-            i18n.getMessage('controlAxisRoll'),
-            i18n.getMessage('controlAxisPitch'),
-            i18n.getMessage('controlAxisYaw'),
-            i18n.getMessage('controlAxisThrottle'),
-            i18n.getMessage('controlAxisCollective')
+            'controlAxisRoll',
+            'controlAxisPitch',
+            'controlAxisYaw',
+            'controlAxisThrottle',
+            'controlAxisCollective',
         ];
 
         const numBars = (FC.RC.active_channels > 0) ? FC.RC.active_channels : 8;
@@ -112,7 +112,7 @@ TABS.receiver.initialize = function (callback) {
         for (let i = 0, aux = 1; i < numBars; i++) {
             let name;
             if (i < bar_names.length) {
-                name = bar_names[i];
+                name = i18n.getMessage(bar_names[i]);
             } else {
                 name = i18n.getMessage("controlAxisAux" + (aux++));
             }
@@ -121,7 +121,7 @@ TABS.receiver.initialize = function (callback) {
                 <ul>\
                     <li class="name">' + name + '</li>\
                     <li class="meter">\
-                        <div class="meter-bar">\
+                        <div class="bar">\
                             <div class="label"></div>\
                             <div class="fill' + (FC.RC.active_channels == 0 ? 'disabled' : '') + '">\
                                 <div class="label"></div>\
@@ -132,11 +132,23 @@ TABS.receiver.initialize = function (callback) {
             ');
         }
 
-        // we could probably use min and max throttle for the range, will see
-        const meterScale = {
-            'min': 800,
-            'max': 2200
-        };
+        barContainer.append('\
+            <ul><li></li></ul>\
+            <ul>\
+                <li class="name">RSSI</li>\
+                <li class="meter">\
+                    <div class="bar">\
+                        <div class="label"></div>\
+                        <div class="fill">\
+                            <div class="label"></div>\
+                        </div>\
+                    </div>\
+                </li>\
+            </ul>\
+        ');
+
+        const meterScaleMin = 750;
+        const meterScaleMax = 2250;
 
         const meterFillArray = [];
         $('.meter .fill', barContainer).each(function () {
@@ -145,7 +157,7 @@ TABS.receiver.initialize = function (callback) {
 
         const meterLabelArray = [];
         $('.meter', barContainer).each(function () {
-            meterLabelArray.push($('.label' , this));
+            meterLabelArray.push($('.label', this));
         });
 
         // correct inner label margin on window resize (i don't know how we could do this in css)
@@ -161,13 +173,18 @@ TABS.receiver.initialize = function (callback) {
 
         $(window).on('resize', tab.resize).resize(); // trigger so labels get correctly aligned on creation
 
-        function getReceiverData() {
-            MSP.send_message(MSPCodes.MSP_RC, false, false, function () {
-                for (let i = 0; i < FC.RC.active_channels; i++) {
-                    meterFillArray[i].css('width', ((FC.RC.channels[i] - meterScale.min) / (meterScale.max - meterScale.min) * 100).clamp(0, 100) + '%');
-                    meterLabelArray[i].text(FC.RC.channels[i]);
-                }
-            })
+        function updateRSSI() {
+            const rssi = ((FC.ANALOG.rssi / 1023) * 100).toFixed(0) + '%';
+            meterFillArray[numBars].css('width', rssi);
+            meterLabelArray[numBars].text(rssi);
+        }
+
+        function updateBars() {
+            for (let i = 0; i < FC.RC.active_channels; i++) {
+                meterFillArray[i].css('width', ((FC.RC.channels[i] - meterScaleMin) / (meterScaleMax - meterScaleMin) * 100).clamp(0, 100) + '%');
+                meterLabelArray[i].text(FC.RC.channels[i]);
+            }
+            MSP.send_message(MSPCodes.MSP_ANALOG, false, false, updateRSSI);
         }
 
         // handle rcmap & rssi aux channel
@@ -626,11 +643,13 @@ TABS.receiver.initialize = function (callback) {
         tab.initModelPreview();
         tab.renderModel();
 
-        // TODO: Combine two polls together
-        GUI.interval_add('receiver_pull_for_model_preview', getReceiverData, 33, false);
+        // receiver data pulled
+        GUI.interval_add('receiver_pull', function () {
+            MSP.send_message(MSPCodes.MSP_RC, false, false, updateBars);
+        }, 33, false);
 
         // status data pulled via separate timer with static speed
-        GUI.interval_add('status_pull', function status_pull() {
+        GUI.interval_add('status_pull', function () {
             MSP.send_message(MSPCodes.MSP_STATUS);
         }, 250, true);
 
