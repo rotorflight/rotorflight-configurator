@@ -4,7 +4,7 @@ TABS.profiles = {
     updating: true,
     currentProfile: null,
     activeSubtab: null,
-    tabNames: [ 'profile1', 'profile2', 'profile3' ],
+    tabNames: [ 'profile1', 'profile2', 'profile3', 'profile4', 'profile5', 'profile6' ],
     pidNames: [ 'PITCH', 'ROLL', 'YAW' ],
 };
 
@@ -148,6 +148,10 @@ TABS.profiles.initialize = function (callback) {
 
         self.tabNames.forEach(function(element, index) {
             $('.tab-profiles .tab-container .' + element).on('click', () => activateProfile(index));
+            if (index < FC.CONFIG.numProfiles)
+                $('.tab-profiles .tab-container .' + element).show();
+            else
+                $('.tab-profiles .tab-container .' + element).hide();
         });
 
         $('#resetProfile').on('click', resetProfile);
