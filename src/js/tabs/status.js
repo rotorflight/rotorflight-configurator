@@ -198,10 +198,8 @@ TABS.status.initialize = function (callback) {
             meterLabelArray[numBars].text(rssi);
         }
 
-        const meterScale = {
-            'min': 750,
-            'max': 2250
-        };
+        const meterScaleMin = 750;
+        const meterScaleMax = 2250;
 
         const meterFillArray = [];
         $('.meter .fill', barContainer).each(function () {
@@ -215,7 +213,7 @@ TABS.status.initialize = function (callback) {
 
         function update_rc_channels() {
             for (let i = 0; i < FC.RC.active_channels; i++) {
-                meterFillArray[i].css('width', ((FC.RC.channels[i] - meterScale.min) / (meterScale.max - meterScale.min) * 100).clamp(0, 100) + '%');
+                meterFillArray[i].css('width', ((FC.RC.channels[i] - meterScaleMin) / (meterScaleMax - meterScaleMin) * 100).clamp(0, 100) + '%');
                 meterLabelArray[i].text(FC.RC.channels[i]);
             }
         }
