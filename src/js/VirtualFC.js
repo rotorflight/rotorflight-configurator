@@ -38,12 +38,12 @@ const VirtualFC = {
 
         for (let i = 0; i < virtualFC.SERVO_CONFIG.length; i++) {
             virtualFC.SERVO_CONFIG[i] = {
-                middle: 1500,
-                min: 1000,
-                max: 2000,
-                indexOfChannelToForward: 255,
-                rate: 100,
-                reversedInputSources: 0,
+                mid: 1500,
+                min: -500,
+                max:  500,
+                rate: 500,
+                trim: 0,
+                speed: 0,
             };
         }
 

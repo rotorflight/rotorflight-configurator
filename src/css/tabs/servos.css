@@ -104,7 +104,12 @@
 }
 
 .tab-servos table td:nth-child(7) {
-    width: 100px;
+    width: 80px;
+}
+
+.tab-servos table td:nth-child(8) {
+    width: 60px;
+    text-align: center;
 }
 
 .tab-servos .wide {
