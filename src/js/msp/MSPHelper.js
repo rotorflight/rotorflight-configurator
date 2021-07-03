@@ -495,11 +495,11 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     if (data.byteLength % 12 == 0) {
                         for (let i = 0; i < data.byteLength; i += 12) {
                             const arr = {
-                                'min':       data.readU16(),
-                                'max':       data.readU16(),
                                 'mid':       data.readU16(),
-                                'trim':      data.read16(),
+                                'min':       data.read16(),
+                                'max':       data.read16(),
                                 'rate':      data.read16(),
+                                'trim':      data.read16(),
                                 'speed':     data.readU16()
                             };
                             FC.SERVO_CONFIG.push(arr);
@@ -2310,11 +2310,11 @@ MspHelper.prototype.sendServoConfig = function(servoIndex, onCompleteCallback) {
     const buffer = [];
 
     buffer.push8(servoIndex)
+          .push16(CONFIG.mid)
           .push16(CONFIG.min)
           .push16(CONFIG.max)
-          .push16(CONFIG.mid)
-          .push16(CONFIG.trim)
           .push16(CONFIG.rate)
+          .push16(CONFIG.trim)
           .push16(CONFIG.speed);
 
     MSP.send_message(MSPCodes.MSP_SET_SERVO_CONFIGURATION, buffer, false, onCompleteCallback);
@@ -2338,11 +2338,11 @@ MspHelper.prototype.sendServoConfigurations = function(onCompleteCallback) {
         const buffer = [];
 
         buffer.push8(servoIndex)
+              .push16(CONFIG.mid)
               .push16(CONFIG.min)
               .push16(CONFIG.max)
-              .push16(CONFIG.mid)
-              .push16(CONFIG.trim)
               .push16(CONFIG.rate)
+              .push16(CONFIG.trim)
               .push16(CONFIG.speed);
 
         // prepare for next iteration
