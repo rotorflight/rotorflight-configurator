@@ -11,7 +11,7 @@
 
 #define ApplicationName "Rotorflight Configurator"
 #define CompanyName "The Rotorflight open source project"
-#define CompanyUrl "https://rotorflight.com/"
+#define CompanyUrl "https://github.com/rotorflight/"
 #define ExecutableFileName "rotorflight-configurator.exe"
 #define GroupName "Rotorflight"
 #define InstallerFileName "rotorflight-configurator-installer_" + version + "_" + archName
@@ -83,13 +83,13 @@ MinVersion=6.2
 OutputBaseFilename={#InstallerFileName}
 OutputDir=..\..\{#targetFolder}\
 PrivilegesRequiredOverridesAllowed=commandline dialog
-SetupIconFile=bf_installer_icon.ico
+SetupIconFile=rf_installer_icon.ico
 ShowLanguageDialog=yes
 SolidCompression=yes
 UninstallDisplayIcon={app}\{#ExecutableFileName}
 UninstallDisplayName={#ApplicationName}
-WizardImageFile=bf_installer.bmp
-WizardSmallImageFile=bf_installer_small.bmp
+WizardImageFile=rf_installer.bmp
+WizardSmallImageFile=rf_installer_small.bmp
 WizardStyle=modern
 
 [Code]
