@@ -222,6 +222,8 @@ TABS.onboard_logging.initialize = function (callback) {
         } else if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
             loggingRates = [
                 {text: "Disabled", hz: 0,     p_denom: 0},
+                {text: "125 Hz",   hz: 125,   p_denom: 4},
+                {text: "250 Hz",   hz: 250,   p_denom: 8},
                 {text: "500 Hz",   hz: 500,   p_denom: 16},
                 {text: "1 kHz",    hz: 1000,  p_denom: 32},
                 {text: "1.5 kHz",  hz: 1500,  p_denom: 48},
