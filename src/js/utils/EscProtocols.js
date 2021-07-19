@@ -37,6 +37,12 @@ class EscProtocols
         return EscProtocols.DSHOT_PROTOCOLS_SET.includes(protocolName);
     }
 
+    static IsProtocolDisabled(apiVersion, protocolIndex)
+    {
+        const protocolName = EscProtocols.GetProtocolName(apiVersion, protocolIndex);
+        return (protocolName === EscProtocols.PROTOCOL_DISABLED);
+    }
+
     static GetAvailableProtocols(apiVersion)
     {
         const escProtocols = [
