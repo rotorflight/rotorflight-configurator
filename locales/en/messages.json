@@ -366,7 +366,7 @@
     "tabGPS": {
         "message": "GPS"
     },
-    "tabMotorTesting": {
+    "tabMotors": {
         "message": "Motors"
     },
     "tabLedStrip": {
@@ -548,7 +548,7 @@
         "message": "<strong>the version of configurator that you are using ($3) is older than the firmware you are using ($4)</strong>.<br>$t(configuratorUpdateHelp.message)"
     },
     "reportProblemsDialogMOTOR_PROTOCOL_DISABLED": {
-        "message": "<strong>there is no motor output protocol selected</strong>.<br>Please select a motor output protocol appropriate for your ESCs in '$t(configurationEscFeatures.message)' on the '$t(tabMotorTesting.message)' tab.<br>$t(escProtocolDisabledMessage.message)"
+        "message": "<strong>there is no motor output protocol selected</strong>.<br>Please select a motor output protocol appropriate for your ESCs in '$t(configurationEscFeatures.message)' on the '$t(tabMotors.message)' tab.<br>$t(escProtocolDisabledMessage.message)"
     },
     "reportProblemsDialogACC_NEEDS_CALIBRATION": {
         "message": "<strong>the accelerometer is enabled but it is not calibrated</strong>.<br>If you plan to use the accelerometer, please follow the instructions for '$t(initialSetupButtonCalibrateAccel.message)' on the '$t(tabSetup.message)' tab. If any function that requires the accelerometer (auto level modes, GPS rescue, ...) is enabled, arming of the craft will be disabled until the accelerometer has been calibrated.<br>If you are not planning on using the accelerometer it is recommended that you disable it in '$t(configurationSystem.message)' on the '$t(tabConfiguration.message)' tab."
@@ -1513,36 +1513,6 @@
     },
     "configurationDigitalIdlePercentHelp": {
         "message": "The 'DShot idle' value is the percent of maximum throttle that is sent to the ESCs when the throttle at minimum stick position and the craft is armed. Increase it to gain more idle speed and avoid desyncs.  Too high and the craft feels floaty."
-    },
-    "configurationMotorPoles": {
-        "message": "Motor poles",
-        "description": "One of the fields of the ESC/Motor configuration"
-    },
-    "configurationMotorPolesLong": {
-        "message": "$t(configurationMotorPoles.message) (number of magnets on the motor bell)",
-        "description": "One of the fields of the ESC/Motor configuration"
-    },
-    "configurationMotorPolesHelp": {
-        "message": "The pole count is the number of magnets on the bell of the motor. Do NOT count the stators where the windings are located. 5\" motors usually have 14 magnets, 3\" or smaller often have 12 magnets.",
-        "description": "Help text for the Motor poles field of the ESC/Motor configuration"
-    },
-    "configurationThrottleMinimum": {
-        "message": "Minimum Throttle (Lowest ESC value when armed)"
-    },
-    "configurationThrottleMinimumHelp": {
-        "message": "This is the 'idle' value that is sent to the ESCs when the craft is armed and the trottle stick is at minimum position. Increase the value to gain more idle speed. Also raise the value in case of desyncs!"
-    },
-    "configurationThrottleMaximum": {
-        "message": "Maximum Throttle (Highest ESC value when armed)"
-    },
-    "configurationThrottleMinimumCommand": {
-        "message": "Minimum Command (ESC value when disarmed)"
-    },
-    "configurationThrottleMinimumCommandHelp": {
-        "message": "This is the value that is sent to the ESCs when the craft is disarmed. Set this to a value that has the motors stopped (1000 for most ESCs)."
-    },
-    "configurationEscProtocolDisabled": {
-        "message": "Please select a motor output protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)"
     },
     "escProtocolDisabledMessage": {
         "message": "<strong>Caution:</strong> Selecting a motor output protocol that is not supported by your ESCs can lead to the <strong>ESCs spinning up as soon as a battery is connected</strong>. For this reason, <strong>always make sure to remove the props before connecting a battery for the first time after changing the motor output protocol</strong>."
@@ -2787,6 +2757,64 @@
         "message": "Qty"
     },
 
+    "motorsEscProtocol": {
+        "message": "ESC/Motor protocol"
+    },
+    "motorsEscProtocolHelp": {
+        "message": "Select your motor protocol. <br>Make sure to verify the protocol is supported by your ESC, this information should be on the makers website.</b>"
+    },
+    "motorsEscProtocolDisabled": {
+        "message": "Please select a motor output protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)"
+    },
+    "motorsUnsyndePwm": {
+        "message": "Motor PWM speed Separated from PID speed"
+    },
+    "motorsUnsyncedPWMFreq": {
+        "message": "Motor PWM frequency"
+    },
+    "motorsDshotBidir": {
+        "message": "Bidirectional DShot (requires supported ESC firmware)",
+        "description": "Feature for the ESC/Motor"
+    },
+    "motorsDshotBidirHelp": {
+        "message": "Sends ESC data to the FC via DShot telemetry.  Required by RPM Filtering and dynamic idle. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg JESC, Jazzmac, BLHeli-32.",
+        "description": "Description of the Bidirectional DShot feature of the ESC/Motor"
+    },
+    "motorsMotorPoles": {
+        "message": "Motor pole count",
+        "description": "One of the fields of the ESC/Motor configuration"
+    },
+    "motorsMotorPolesLong": {
+        "message": "$t(motorsMotorPoles.message) (number of magnets on the motor bell)",
+        "description": "One of the fields of the ESC/Motor configuration"
+    },
+    "motorsMotor1PolesLong": {
+        "message": "$t(motorsMotorPoles.message) for motor #1",
+        "description": "One of the fields of the ESC/Motor configuration"
+    },
+    "motorsMotor2PolesLong": {
+        "message": "$t(motorsMotorPoles.message) for motor #2",
+        "description": "One of the fields of the ESC/Motor configuration"
+    },
+   "motorsMotorPolesHelp": {
+        "message": "The pole count is the number of magnets on the bell of the motor. Do NOT count the stators where the windings are located. Large motors usually have 8 magnets, smaller often have 6 magnets.",
+        "description": "Help text for the Motor poles field of the ESC/Motor configuration"
+    },
+    "motorsThrottleMinimum": {
+        "message": "Minimum Throttle (Lowest ESC value when armed)"
+    },
+    "motorsThrottleMinimumHelp": {
+        "message": "This is the 'idle' value that is sent to the ESCs when the craft is armed and the trottle stick is at minimum position. Increase the value to gain more idle speed. Also raise the value in case of desyncs!"
+    },
+    "motorsThrottleMaximum": {
+        "message": "Maximum Throttle (Highest ESC value when armed)"
+    },
+    "motorsThrottleMinimumCommand": {
+        "message": "Minimum Command (ESC value when disarmed)"
+    },
+    "motorsThrottleMinimumCommandHelp": {
+        "message": "This is the value that is sent to the ESCs when the craft is disarmed. Set this to a value that has the motors stopped (1000 for most ESCs)."
+    },
     "motorsVoltage": {
         "message": "Voltage:"
     },
@@ -2805,7 +2833,6 @@
     "motorsmAhDrawnValue": {
         "message": "$1 mAh"
     },
-
     "motorsText":{
         "message": "Motors"
     },
@@ -2833,7 +2860,6 @@
     "motorNumber8":{
         "message": "Motor - 8"
     },
-
     "motorsResetMaximumButton":{
         "message": "Reset"
     },
@@ -2928,7 +2954,7 @@
         "message": "<strong>I understand the risks</strong>,<br />all propellers are removed."
     },
     "escDshotDirectionDialog-InformationNotice": {
-        "message": "<strong>Information notice</strong><br />To change the motor directions, the battery must be plugged in and the correct ESC protocol must be set up in the $t(tabMotorTesting.message) tab. Note that not all Dshot ESCs will work with this dialog. Check your ESC firmware."
+        "message": "<strong>Information notice</strong><br />To change the motor directions, the battery must be plugged in and the correct ESC protocol must be set up in the $t(tabMotors.message) tab. Note that not all Dshot ESCs will work with this dialog. Check your ESC firmware."
     },
     "escDshotDirectionDialog-NormalInformationNotice": {
         "message": "Set motor spin direction by selecting and spinning each motor individually."
@@ -2967,10 +2993,10 @@
         "message": "Motors will spin when setting the direction!"
     },
     "escDshotDirectionDialog-WrongProtocolText": {
-        "message": "Feature works with DSHOT ESCs only.<br />Verify that your ESC (electric speed controller) supports DSHOT protocol and change it on $t(tabMotorTesting.message) tab."
+        "message": "Feature works with DSHOT ESCs only.<br />Verify that your ESC (electric speed controller) supports DSHOT protocol and change it on $t(tabMotors.message) tab."
     },
     "escDshotDirectionDialog-WrongMixerText": {
-        "message": "Number of motors is 0.<br />Verify the current Mixer on $t(tabMotorTesting.message) tab or setup a custom one through CLI. Refer to this <a href=\"https://github.com/betaflight/betaflight/blob/master/docs/Mixer.md\" target=\"_blank\" rel=\"noopener noreferrer\">Wiki page</a>."
+        "message": "Number of motors is 0.<br />Verify the current Mixer on $t(tabMotors.message) tab or setup a custom one through CLI. Refer to this <a href=\"https://github.com/betaflight/betaflight/blob/master/docs/Mixer.md\" target=\"_blank\" rel=\"noopener noreferrer\">Wiki page</a>."
     },
     "escDshotDirectionDialog-WrongFirmwareText": {
         "message": "Update the firmware.<br /> Make sure you are using the latest firmware: Betaflight 4.3 or newer."
@@ -4064,7 +4090,7 @@
         "description": "Header text for the RPM Filter group"
     },
     "pidTuningRpmFilterHelp": {
-        "message": "RPM filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove motor noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotorTesting.message) tab must be correct for this filter to work.</b>",
+        "message": "RPM filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove motor noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
         "description": "Header text for the RPM Filter group"
     },
     "pidTuningRpmHarmonics": {
@@ -4219,7 +4245,7 @@
         "message": "Dynamic Idle Value [* 100 RPM]"
     },
     "pidTuningIdleMinRpmHelp": {
-        "message": "Dynamic Idle improves control at low rpm and reduces risk of motor desyncs. It corrects problems caused by airflow speeding up or slowing down the props, improving PID authority, stability, motor braking and responsiveness. The Dynamic Idle rpm should be set to be about 20% below the rpm of your Dshot Idle value (see the $t(tabMotorTesting.message) tab). Usually there is no need to change your DShot idle value from defaults. For longer inverted hang time, DShot idle value and Minimum rpm should be lowered together.<br /><br />Visit <a href=\"https://github.com/betaflight/betaflight/wiki/Tuning-Dynamic-Idle\"target=\"_blank\" rel=\"noopener noreferrer\">this wiki entry</a> for more info."
+        "message": "Dynamic Idle improves control at low rpm and reduces risk of motor desyncs. It corrects problems caused by airflow speeding up or slowing down the props, improving PID authority, stability, motor braking and responsiveness. The Dynamic Idle rpm should be set to be about 20% below the rpm of your Dshot Idle value (see the $t(tabMotors.message) tab). Usually there is no need to change your DShot idle value from defaults. For longer inverted hang time, DShot idle value and Minimum rpm should be lowered together.<br /><br />Visit <a href=\"https://github.com/betaflight/betaflight/wiki/Tuning-Dynamic-Idle\"target=\"_blank\" rel=\"noopener noreferrer\">this wiki entry</a> for more info."
     },
     "pidTuningAcroTrainerAngleLimit": {
         "message": "Acro Trainer Angle Limit"
@@ -4531,7 +4557,7 @@
         "description": "Header text for the RPM Filter group"
     },
     "gyroRpmFilterHelp": {
-        "message": "RPM filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove motor noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotorTesting.message) tab must be correct for this filter to work.</b>",
+        "message": "RPM filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove motor noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
         "description": "Header text for the RPM Filter group"
     },
     "gyroRpmHarmonics": {
@@ -6382,29 +6408,6 @@
     },
     "mainHelpLink": {
         "message": "Serial Link Status"
-    },
-    "configurationEscProtocol": {
-        "message": "ESC/Motor protocol"
-    },
-    "configurationEscProtocolHelp": {
-        "message": "Select your motor protocol. <br>Make sure to verify the protocol is supported by your ESC, this information should be on the makers website. <br> <b>Be carefull using DSHOT900 and DSHOT1200 as not many ESC's support it!</b>"
-    },
-    "configurationEscProtocolHelpNoDSHOT1200": {
-        "message": "Select your motor protocol. <br>Make sure to verify the protocol is supported by your ESC, this information should be on the makers website."
-    },
-    "configurationunsyndePwm": {
-        "message": "Motor PWM speed Separated from PID speed"
-    },
-    "configurationUnsyncedPWMFreq": {
-        "message": "Motor PWM frequency"
-    },
-    "configurationDshotBidir": {
-        "message": "Bidirectional DShot (requires supported ESC firmware)",
-        "description": "Feature for the ESC/Motor"
-    },
-    "configurationDshotBidirHelp": {
-        "message": "Sends ESC data to the FC via DShot telemetry.  Required by RPM Filtering and dynamic idle. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg JESC, Jazzmac, BLHeli-32.",
-        "description": "Description of the Bidirectional DShot feature of the ESC/Motor"
     },
     "configurationGyroSyncDenom": {
         "message": "Gyro update frequency"
