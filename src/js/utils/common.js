@@ -85,3 +85,12 @@ function getMixerImageSrc(mixerIndex, reverseMotorDir, apiVersion)
     return `./resources/motor_order/${mixerList[mixerIndex - 1].image}${reverse}.svg`;
 }
 
+function getTextWidth(text) {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+
+    context.font = getComputedStyle(document.body).font;
+
+    return Math.ceil(context.measureText(text).width);
+}
+
