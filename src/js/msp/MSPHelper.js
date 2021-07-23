@@ -1121,6 +1121,31 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 }
                 FC.ADVANCED_TUNING_ACTIVE = { ...FC.ADVANCED_TUNING };
                 break;
+
+
+            case MSPCodes.MSP_GOVERNOR:
+                FC.GOVERNOR.gov_mode                         = data.readU8();
+                FC.GOVERNOR.gov_max_headspeed                = data.readU16();
+                FC.GOVERNOR.gov_spoolup_time                 = data.readU16();
+                FC.GOVERNOR.gov_tracking_time                = data.readU16();
+                FC.GOVERNOR.gov_recovery_time                = data.readU16();
+                FC.GOVERNOR.gov_autorotation_timeout         = data.readU16();
+                FC.GOVERNOR.gov_autorotation_bailout_time    = data.readU16();
+                FC.GOVERNOR.gov_autorotation_min_entry_time  = data.readU16();
+                FC.GOVERNOR.gov_lost_throttle_timeout        = data.readU16();
+                FC.GOVERNOR.gov_lost_headspeed_timeout       = data.readU16();
+                FC.GOVERNOR.gov_gear_ratio                   = data.readU16();
+                FC.GOVERNOR.gov_pwr_filter                   = data.readU16();
+                FC.GOVERNOR.gov_rpm_filter                   = data.readU16();
+                FC.GOVERNOR.gov_gain                         = data.readU16();
+                FC.GOVERNOR.gov_p_gain                       = data.readU16();
+                FC.GOVERNOR.gov_i_gain                       = data.readU16();
+                FC.GOVERNOR.gov_d_gain                       = data.readU16();
+                FC.GOVERNOR.gov_f_gain                       = data.readU16();
+                FC.GOVERNOR.gov_cyclic_ff_weight             = data.readU16();
+                FC.GOVERNOR.gov_collective_ff_weight         = data.readU16();
+                break;
+
             case MSPCodes.MSP_SENSOR_CONFIG:
                 FC.SENSOR_CONFIG.acc_hardware = data.readU8();
                 FC.SENSOR_CONFIG.baro_hardware = data.readU8();
@@ -2061,6 +2086,30 @@ MspHelper.prototype.crunch = function(code) {
                 }
             }
             break;
+
+        case MSPCodes.MSP_SET_GOVERNOR:
+            buffer.push8(FC.GOVERNOR.gov_mode)
+                .push16(FC.GOVERNOR.gov_max_headspeed)
+                .push16(FC.GOVERNOR.gov_spoolup_time)
+                .push16(FC.GOVERNOR.gov_tracking_time)
+                .push16(FC.GOVERNOR.gov_recovery_time)
+                .push16(FC.GOVERNOR.gov_autorotation_timeout)
+                .push16(FC.GOVERNOR.gov_autorotation_bailout_time)
+                .push16(FC.GOVERNOR.gov_autorotation_min_entry_time)
+                .push16(FC.GOVERNOR.gov_lost_throttle_timeout)
+                .push16(FC.GOVERNOR.gov_lost_headspeed_timeout)
+                .push16(FC.GOVERNOR.gov_gear_ratio)
+                .push16(FC.GOVERNOR.gov_pwr_filter)
+                .push16(FC.GOVERNOR.gov_rpm_filter)
+                .push16(FC.GOVERNOR.gov_gain)
+                .push16(FC.GOVERNOR.gov_p_gain)
+                .push16(FC.GOVERNOR.gov_i_gain)
+                .push16(FC.GOVERNOR.gov_d_gain)
+                .push16(FC.GOVERNOR.gov_f_gain)
+                .push16(FC.GOVERNOR.gov_cyclic_ff_weight)
+                .push16(FC.GOVERNOR.gov_collective_ff_weight);
+            break;
+
         case MSPCodes.MSP_SET_SENSOR_CONFIG:
             buffer.push8(FC.SENSOR_CONFIG.acc_hardware)
                 .push8(FC.SENSOR_CONFIG.baro_hardware)

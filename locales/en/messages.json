@@ -2815,6 +2815,75 @@
     "motorsThrottleMinimumCommandHelp": {
         "message": "This is the value that is sent to the ESCs when the craft is disarmed. Set this to a value that has the motors stopped (1000 for most ESCs)."
     },
+    "motorsGovFeatures": {
+        "message": "Governor Features"
+    },
+    "motorsGovMode": {
+        "message": "Governor mode"
+    },
+    "motorsGovModeHelp": {
+        "message": "The governor maintains the main rotor speed constant. The algorithm used in the control loop is selected with this setting."
+    },
+    "motorsGovMaxHeadspeed": {
+        "message": "Maximum headspeed"
+    },
+    "motorsGovMaxHeadspeedHelp": {
+        "message": "The governor target headspeed is calculated by multiplying the maximum headspeed with the throttle input. Thus, at 100% throttle the governor will try to maintain the maximum headspeed."
+    },
+    "motorsGovGearRatio": {
+        "message": "Main rotor gear ratio (x1000)"
+    },
+    "motorsGovGearRatioHelp": {
+        "message": "Gearing ratio between the motor and the main rotor (x1000)"
+    },
+    "motorsGovSpoolupTime": {
+        "message": "Spoolup time (x0.1s)"
+    },
+    "motorsGovSpoolupTimeHelp": {
+        "message": "Time constant for slow spoolup. Unit is 0.1s, measuring the time from zero to max headspeed."
+    },
+    "motorsGovTrackingTime": {
+        "message": "Tracking time (x0.1s)"
+    },
+    "motorsGovTrackingTimeHelp": {
+        "message": "Time constant for headspeed changes. Unit is 0.1s, measuring the time from zero to max headspeed."
+    },
+    "motorsGovRecoveryTime": {
+        "message": "Recovery time (x0.1s)"
+    },
+    "motorsGovRecoveryTimeHelp": {
+        "message": "Time constant for recovery spoolup. Unit is 0.1s, measuring the time from zero to max headspeed."
+    },
+    "motorsGovAutoBailoutTime": {
+        "message": "Autorotation bailout time (x0.1s)"
+    },
+    "motorsGovAutoBailoutTimeHelp": {
+        "message": "Time constant for autorotation bailout spoolup. Unit is 0.1s, measuring the time from zero to max headspeed."
+    },
+    "motorsGovAutoTimeout": {
+        "message": "Autorotation timeout (s)"
+    },
+    "motorsGovAutoTimeoutHelp": {
+        "message": "Timeout for ending autorotation and moving to normal IDLE."
+    },
+    "motorsGovMasterGain": {
+        "message": "Governor PID gain"
+    },
+    "motorsGovMasterGainHelp": {
+        "message": "Governor master PID loop gain. Usually 20..150."
+    },
+    "motorsGovCyclicPrecomp": {
+        "message": "Cyclic precompensation"
+    },
+    "motorsGovCyclicPrecompHelp": {
+        "message": "Cyclic precompensation weight. Determines how much cyclic is mixed into the throttle output. This helps the governor to maintain the headspeed proactively. Usually 20..100"
+    },
+    "motorsGovCollectivePrecomp": {
+        "message": "Collective precompensation"
+    },
+    "motorsGovCollectivePrecompHelp": {
+        "message": "Collective precompensation weight. Determines how much collective is mixed into the throttle output. This helps the governor to maintain the headspeed proactively. Usually 30..100"
+    },
     "motorsVoltage": {
         "message": "Voltage:"
     },
