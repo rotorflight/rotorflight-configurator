@@ -5,10 +5,10 @@
             <a id="button-documentation" href="https://github.com/rotorflight/rotorflight/wiki" target="_blank" rel="noopener noreferrer"></a>
         </div>
 
-        <div class="grid-row">
-            <div class="grid-col col6">
+        <div class="configuration">
 
-                <div class="configuration">
+            <div class="grid-row">
+                <div class="grid-col col6">
 
                     <!-- MOTOR FEATURES -->
                     <div class="motor_features">
@@ -101,12 +101,124 @@
                     </div>
                     <!-- END MOTOR_FEATURES -->
 
-                </div>
-                <!-- END CONFIGURATION -->
+                    <!-- GOVERNOR FEATURES -->
+                    <div class="governor_features">
+                        <div class="gui_box grey">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="motorsGovFeatures"></div>
+                            </div>
+                            <div class="spacer_box">
+                                <div class="selectGovMode">
+                                    <label>
+                                        <select class="govMode">
+                                            <!-- list generated here -->
+                                        </select>
+                                        <span i18n="motorsGovMode"></span>
+                                        <div class="helpicon cf_tip" i18n_title="motorsGovModeHelp"></div>
+                                    </label>
+                                </div>
+                                <div class="govConfig">
+                                    <div class="number" style="margin-top: 5px; padding-bottom: 10px;">
+                                        <label>
+                                            <div class="numberspacer">
+                                                <input type="number" id="govMaxHeadspeed" min="100" max="60000" step="10"/>
+                                            </div>
+                                            <span i18n="motorsGovMaxHeadspeed"></span>
+                                            <div class="helpicon cf_tip" i18n_title="motorsGovMaxHeadspeedHelp"></div>
+                                        </label>
+                                    </div>
+                                    <div class="number">
+                                        <label>
+                                            <div class="numberspacer">
+                                                <input type="number" id="govGearRatio" min="0" max="50000" />
+                                            </div>
+                                            <span i18n="motorsGovGearRatio"></span>
+                                            <div class="helpicon cf_tip" i18n_title="motorsGovGearRatioHelp"></div>
+                                        </label>
+                                    </div>
+                                    <div class="number">
+                                        <label>
+                                            <div class="numberspacer">
+                                                <input type="number" id="govSpoolupTime" min="0" max="1000" />
+                                            </div>
+                                            <span i18n="motorsGovSpoolupTime"></span>
+                                            <div class="helpicon cf_tip" i18n_title="motorsGovSpoolupTimeHelp"></div>
+                                        </label>
+                                    </div>
+                                    <div class="number">
+                                        <label>
+                                            <div class="numberspacer">
+                                                <input type="number" id="govTrackingTime" min="0" max="1000" />
+                                            </div>
+                                            <span i18n="motorsGovTrackingTime"></span>
+                                            <div class="helpicon cf_tip" i18n_title="motorsGovTrackingTimeHelp"></div>
+                                        </label>
+                                    </div>
+                                    <div class="number">
+                                        <label>
+                                            <div class="numberspacer">
+                                                <input type="number" id="govRecoveryTime" min="0" max="1000" />
+                                            </div>
+                                            <span i18n="motorsGovRecoveryTime"></span>
+                                            <div class="helpicon cf_tip" i18n_title="motorsGovRecoveryTimeHelp"></div>
+                                        </label>
+                                    </div>
+                                    <div class="number">
+                                        <label>
+                                            <div class="numberspacer">
+                                                <input type="number" id="govAutoBailoutTime" min="0" max="1000" />
+                                            </div>
+                                            <span i18n="motorsGovAutoBailoutTime"></span>
+                                            <div class="helpicon cf_tip" i18n_title="motorsGovAutoBailoutTimeHelp"></div>
+                                        </label>
+                                    </div>
+                                    <div class="number">
+                                        <label>
+                                            <div class="numberspacer">
+                                                <input type="number" id="govAutoTimeout" min="0" max="1000" />
+                                            </div>
+                                            <span i18n="motorsGovAutoTimeout"></span>
+                                            <div class="helpicon cf_tip" i18n_title="motorsGovAutoTimeoutHelp"></div>
+                                        </label>
+                                    </div>
+                                    <div class="number">
+                                        <label>
+                                            <div class="numberspacer">
+                                                <input type="number" id="govMasterGain" min="0" max="200" />
+                                            </div>
+                                            <span i18n="motorsGovMasterGain"></span>
+                                            <div class="helpicon cf_tip" i18n_title="motorsGovMasterGainHelp"></div>
+                                        </label>
+                                    </div>
+                                    <div class="number">
+                                        <label>
+                                            <div class="numberspacer">
+                                                <input type="number" id="govCyclicPrecomp" min="0" max="200" />
+                                            </div>
+                                            <span i18n="motorsGovCyclicPrecomp"></span>
+                                            <div class="helpicon cf_tip" i18n_title="motorsGovCyclicPrecompHelp"></div>
+                                        </label>
+                                    </div>
+                                    <div class="number">
+                                        <label>
+                                            <div class="numberspacer">
+                                                <input type="number" id="govCollectivePrecomp" min="0" max="200" />
+                                            </div>
+                                            <span i18n="motorsGovCollectivePrecomp"></span>
+                                            <div class="helpicon cf_tip" i18n_title="motorsGovCollectivePrecompHelp"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END GOVERNOR_FEATURES -->
 
+                </div>
             </div>
 
         </div>
+        <!-- END CONFIGURATION -->
 
         <div class="clear-both"></div>
 

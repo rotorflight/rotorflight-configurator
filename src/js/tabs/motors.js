@@ -2,6 +2,7 @@
 
 TABS.motors = {
     isProtoEnabled: false,
+    isGovEnabled: false,
     isDshot: false,
     isDirty: false,
 };
@@ -13,12 +14,13 @@ TABS.motors.initialize = function (callback) {
         GUI.active_tab = 'motors';
     }
 
-    Promise
-        .resolve(true)
+    Promise.resolve(true)
         .then(() => { return MSP.promise(MSPCodes.MSP_STATUS); })
-        .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_CONFIG); })
         .then(() => { return MSP.promise(MSPCodes.MSP_ARMING_CONFIG); })
+        .then(() => { return MSP.promise(MSPCodes.MSP_FEATURE_CONFIG); })
         .then(() => { return MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG); })
+        .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_CONFIG); })
+        .then(() => { return MSP.promise(MSPCodes.MSP_GOVERNOR); })
         .then(() => { load_html(); });
 
     function load_html() {
@@ -75,8 +77,41 @@ TABS.motors.initialize = function (callback) {
         const dshotBidirSwitch = $('input[id="dshotBidir"]');
         dshotBidirSwitch.prop('checked', FC.MOTOR_CONFIG.use_dshot_telemetry);
 
+        $('input[id="minthrottle"]').val(FC.MOTOR_CONFIG.minthrottle);
+        $('input[id="maxthrottle"]').val(FC.MOTOR_CONFIG.maxthrottle);
+        $('input[id="mincommand"]').val(FC.MOTOR_CONFIG.mincommand);
+
         $('input[id="motorPoles"]').val(FC.MOTOR_CONFIG.motor_poles);
         //$('input[id="motor2Poles"]').val(FC.MOTOR_CONFIG.motor2_poles);
+
+        self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR');
+
+        const govModes = [
+            "OFF",
+            "PASSTHROUGH",
+            "STANDARD",
+            "MODE1",
+            "MODE2",
+        ];
+        const govModeSelect = $('select.govMode');
+
+        for (let j = 0; j < govModes.length; j++) {
+            govModeSelect.append(`<option value="${j}">${govModes[j]}</option>`);
+        }
+
+        govModeSelect.val(FC.GOVERNOR.gov_mode);
+
+        $('input[id="govMaxHeadspeed"]').val(FC.GOVERNOR.gov_max_headspeed);
+        $('input[id="govGearRatio"]').val(FC.GOVERNOR.gov_gear_ratio);
+        $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time);
+        $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time);
+        $('input[id="govRecoveryTime"]').val(FC.GOVERNOR.gov_recovery_time);
+        $('input[id="govAutoBailoutTime"]').val(FC.GOVERNOR.gov_autorotation_bailout_time);
+        $('input[id="govAutoTimeout"]').val(FC.GOVERNOR.gov_autorotation_timeout);
+        $('input[id="govMasterGain"]').val(FC.GOVERNOR.gov_gain);
+        $('input[id="govCyclicPrecomp"]').val(FC.GOVERNOR.gov_cyclic_ff_weight);
+        $('input[id="govCollectivePrecomp"]').val(FC.GOVERNOR.gov_collective_ff_weight);
+
 
         function updateVisibility() {
 
@@ -97,6 +132,8 @@ TABS.motors.initialize = function (callback) {
 
             $('#escProtocolDisabled').toggle(!self.isProtoEnabled);
 
+            $('.governor_features').toggle(self.isGovEnabled && self.isProtoEnabled);
+
             pwmFreqSwitch.trigger("change");
         }
 
@@ -105,12 +142,9 @@ TABS.motors.initialize = function (callback) {
         escProtocolSelect.change(updateVisibility);
         dshotBidirSwitch.change(updateVisibility);
 
-        $('input[id="minthrottle"]').val(FC.MOTOR_CONFIG.minthrottle);
-        $('input[id="maxthrottle"]').val(FC.MOTOR_CONFIG.maxthrottle);
-        $('input[id="mincommand"]').val(FC.MOTOR_CONFIG.mincommand);
-
         updateVisibility();
 
+        // Motor telemetry
         const motorVoltage = $('.motors-bat-voltage');
         const motorMahDrawingElement = $('.motors-bat-mah-drawing');
         const motorMahDrawnElement = $('.motors-bat-mah-drawn');
@@ -145,11 +179,24 @@ TABS.motors.initialize = function (callback) {
             FC.PID_ADVANCED_CONFIG.use_unsyncedPwm = pwmFreqSwitch.is(':checked') ? 1 : 0;
             FC.PID_ADVANCED_CONFIG.motor_pwm_rate = parseInt($('input[id="pwmFreq"]').val());
 
-            Promise
-                .resolve(true)
+            if (self.isGovEnabled) {
+                FC.GOVERNOR.gov_mode = govModeSelect.val();
+                FC.GOVERNOR.gov_max_headspeed = parseInt($('input[id="govMaxHeadspeed"]').val());
+                FC.GOVERNOR.gov_gear_ratio = parseInt($('input[id="govGearRatio"]').val());
+                FC.GOVERNOR.gov_spoolup_time = parseInt($('input[id="govSpoolupTime"]').val());
+                FC.GOVERNOR.gov_tracking_time = parseInt($('input[id="govTrackingTime"]').val());
+                FC.GOVERNOR.gov_recovery_time = parseInt($('input[id="govRecoveryTime"]').val());
+                FC.GOVERNOR.gov_autorotation_bailout_time = parseInt($('input[id="govAutoBailoutTime"]').val());
+                FC.GOVERNOR.gov_autorotation_timeout = parseInt($('input[id="govAutoTimeout"]').val());
+                FC.GOVERNOR.gov_gain = parseInt($('input[id="govMasterGain"]').val());
+                FC.GOVERNOR.gov_cyclic_ff_weight = parseInt($('input[id="govCyclicPrecomp"]').val());
+                FC.GOVERNOR.gov_collective_ff_weight = parseInt($('input[id="govCollectivePrecomp"]').val());
+            }
+
+            Promise.resolve(true)
+                .then(() => { return MSP.promise(MSPCodes.MSP_SET_GOVERNOR, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR)); })
                 .then(() => { return MSP.promise(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG)); })
                 .then(() => { return MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)); })
-                .then(() => { return MSP.promise(MSPCodes.MSP_SET_ARMING_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ARMING_CONFIG)); })
                 .then(() => { return MSP.promise(MSPCodes.MSP_EEPROM_WRITE); })
                 .then(() => {
                     GUI.log(i18n.getMessage('configurationEepromSaved'));
