@@ -92,7 +92,8 @@
     clear: left;
 }
 
-.tab-motors .selectEscProtocol {
+.tab-motors .selectEscProtocol,
+.tab-motors .selectGovMode {
     margin-bottom: 5px;
     padding-bottom: 5px;
     border-bottom: 1px solid var(--subtleAccent);
