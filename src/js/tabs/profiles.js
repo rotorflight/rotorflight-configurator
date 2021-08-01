@@ -16,13 +16,11 @@ TABS.profiles.initialize = function (callback) {
         GUI.active_tab = 'profiles';
     }
 
-    MSP.promise(MSPCodes.MSP_STATUS).then(function() {
-        return MSP.promise(MSPCodes.MSP_PID);
-    }).then(function() {
-        return MSP.promise(MSPCodes.MSP_PID_ADVANCED);
-    }).then(function() {
-        load_html();
-    });
+    Promise.resolve(true)
+        .then(() => { return MSP.promise(MSPCodes.MSP_STATUS); } )
+        .then(() => { return MSP.promise(MSPCodes.MSP_PID); } )
+        .then(() => { return MSP.promise(MSPCodes.MSP_PID_ADVANCED); } )
+        .then(() => { load_html() } );
 
     function load_html() {
         $('#content').load("./tabs/profiles.html", process_html);
@@ -148,10 +146,7 @@ TABS.profiles.initialize = function (callback) {
 
         self.tabNames.forEach(function(element, index) {
             $('.tab-profiles .tab-container .' + element).on('click', () => activateProfile(index));
-            if (index < FC.CONFIG.numProfiles)
-                $('.tab-profiles .tab-container .' + element).show();
-            else
-                $('.tab-profiles .tab-container .' + element).hide();
+            $('.tab-profiles .tab-container .' + element).toggle(index < FC.CONFIG.numProfiles);
         });
 
         $('#resetProfile').on('click', resetProfile);
@@ -194,20 +189,14 @@ TABS.profiles.initialize = function (callback) {
             form_to_data();
             self.updating = true;
             Promise.resolve(true)
-            .then(function () {
-                return MSP.promise(MSPCodes.MSP_SET_PID, mspHelper.crunch(MSPCodes.MSP_SET_PID));
-            }).then(function () {
-              return MSP.promise(MSPCodes.MSP_SET_PID_ADVANCED, mspHelper.crunch(MSPCodes.MSP_SET_PID_ADVANCED));
-            }).then(function () {
-                return MSP.promise(MSPCodes.MSP_SET_RC_TUNING, mspHelper.crunch(MSPCodes.MSP_SET_RC_TUNING));
-            }).then(function () {
-                return MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
-            }).then(function () {
-                self.updating = false;
-                self.refresh(function () {
-                    GUI.log(i18n.getMessage('profilesEepromSaved'));
+                .then(() => { return MSP.promise(MSPCodes.MSP_SET_PID, mspHelper.crunch(MSPCodes.MSP_SET_PID)); })
+                .then(() => { return MSP.promise(MSPCodes.MSP_SET_PID_ADVANCED, mspHelper.crunch(MSPCodes.MSP_SET_PID_ADVANCED)); })
+                .then(() => { return MSP.promise(MSPCodes.MSP_SET_RC_TUNING, mspHelper.crunch(MSPCodes.MSP_SET_RC_TUNING)); })
+                .then(() => { return MSP.promise(MSPCodes.MSP_EEPROM_WRITE); })
+                .then(() => {
+                    self.updating = false;
+                    self.refresh(() => { GUI.log(i18n.getMessage('profilesEepromSaved')); });
                 });
-            });
         });
 
         self.updating = false;
@@ -228,10 +217,7 @@ TABS.profiles.refresh = function (callback) {
 
     GUI.tab_switch_cleanup(function () {
         self.initialize();
-
-        if (callback) {
-            callback();
-        }
+        if (callback) callback();
     });
 };
 
