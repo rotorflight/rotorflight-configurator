@@ -1,29 +1,59 @@
 'use strict';
 
-TABS.adjustments = {};
+TABS.adjustments = {
+    FUNCTIONS_1_43: [
+        'None',
+        'RcRate',
+        'RcExpo',
+        'PitchRollRate',
+        'YawRate',
+        'PitchRollP',
+        'PitchRollI',
+        'PitchRollD',
+        'YawP',
+        'YawI',
+        'YawD',
+        'RateProfile',
+        'PitchRate',
+        'RollRate',
+        'PitchP',
+        'PitchI',
+        'PitchD',
+        'RollP',
+        'RollI',
+        'RollD',
+        'RcRateYaw',
+        'PitchRollF',
+        'HorizonStrength',
+        'RollRcRate',
+        'PitchRcRate',
+        'RollRcExpo',
+        'PitchRcExpo',
+        'PidAudio',
+        'PitchF',
+        'RollF',
+        'YawF',
+        'OSDProfile',
+        'LEDProfile',
+    ],
+};
 
 TABS.adjustments.initialize = function (callback) {
     const self = this;
-    GUI.active_tab_ref = this;
-    GUI.active_tab = 'adjustments';
 
-    function get_adjustment_ranges() {
-        MSP.send_message(MSPCodes.MSP_ADJUSTMENT_RANGES, false, false, get_box_ids);
+    if (GUI.active_tab != 'adjustments') {
+        GUI.active_tab = 'adjustments';
     }
 
-    function get_box_ids() {
-        MSP.send_message(MSPCodes.MSP_BOXIDS, false, false, getRcData);
-    }
-
-    function getRcData() {
-        MSP.send_message(MSPCodes.MSP_RC, false, false, load_html);
-    }
+    Promise.resolve(true)
+        .then(() => { return MSP.promise(MSPCodes.MSP_ADJUSTMENT_RANGES); } )
+        .then(() => { return MSP.promise(MSPCodes.MSP_BOXNAMES); } )
+        .then(() => { return MSP.promise(MSPCodes.MSP_BOXIDS); } )
+        .then(() => { load_html(); } );
 
     function load_html() {
         $('#content').load("./tabs/adjustments.html", process_html);
     }
-
-    MSP.send_message(MSPCodes.MSP_BOXNAMES, false, false, get_adjustment_ranges);
 
     function addAdjustment(adjustmentIndex, adjustmentRange, auxChannelCount) {
 
@@ -154,16 +184,23 @@ TABS.adjustments.initialize = function (callback) {
 
     function process_html() {
 
-        self.adjust_template();
+        const selectFunction = $('#functionSelectionSelect');
+        let functions = [];
 
-        let auxChannelCount = FC.RC.active_channels - 4;
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
+            functions = self.FUNCTIONS_1_43;
+        }
+        functions.forEach(function(value, key) {
+            selectFunction.append(new Option(i18n.getMessage('adjustmentsFunction' + value), key));
+        });
+
+        let auxChannelCount = FC.RC.active_channels - 5;
 
         const modeTableBodyElement = $('.tab-adjustments .adjustments tbody');
         for (let adjustmentIndex = 0; adjustmentIndex < FC.ADJUSTMENT_RANGES.length; adjustmentIndex++) {
             const newAdjustment = addAdjustment(adjustmentIndex, FC.ADJUSTMENT_RANGES[adjustmentIndex], auxChannelCount);
             modeTableBodyElement.append(newAdjustment);
         }
-
 
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
             $('.tab-adjustments .adjustmentSlotsHelp').hide();
@@ -249,29 +286,22 @@ TABS.adjustments.initialize = function (callback) {
                 if (auxChannelCandidateIndex != auxChannelIndex) {
                     return;
                 }
-
                 $(this).find('.range .marker').css('left', percentage + '%');
             });
         }
 
-        // data pulling functions used inside interval timer
-        function get_rc_data() {
-            MSP.send_message(MSPCodes.MSP_RC, false, false, update_ui);
-        }
-
         function update_ui() {
-            auxChannelCount = FC.RC.active_channels - 4;
+            auxChannelCount = FC.RC.active_channels - 5;
 
             for (let auxChannelIndex = 0; auxChannelIndex < auxChannelCount; auxChannelIndex++) {
-                update_marker(auxChannelIndex, FC.RC.channels[auxChannelIndex + 4]);
+                update_marker(auxChannelIndex, FC.RC.channels[auxChannelIndex + 5]);
             }
         }
 
-        // update ui instantly on first load
-        update_ui();
-
         // enable data pulling
-        GUI.interval_add('aux_data_pull', get_rc_data, 50);
+        GUI.interval_add('rc_pull', function () {
+            MSP.send_message(MSPCodes.MSP_RC, false, false, update_ui);
+        }, 100, true);
 
         // status data pulled via separate timer with static speed
         GUI.interval_add('status_pull', function () {
@@ -286,39 +316,3 @@ TABS.adjustments.cleanup = function (callback) {
     if (callback) callback();
 };
 
-TABS.adjustments.adjust_template = function () {
-
-    const selectFunction = $('#functionSelectionSelect');
-    let elementsNumber;
-
-    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-        elementsNumber = 31; // OSD Profile Select & LED Profile Select
-    } else if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_40)) {
-        elementsNumber = 29; // PID Audio
-    } else if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_39)) {
-        elementsNumber = 26; // PID Audio
-    } else if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-        elementsNumber = 25; // Horizon Strength
-    } else {
-        elementsNumber = 24; // Setpoint transition
-    }
-
-    for (let i = 0; i < elementsNumber; i++) {
-        selectFunction.append(new Option(i18n.getMessage('adjustmentsFunction' + i), i));
-    }
-
-    // For 1.40, the D Setpoint has been replaced, so we replace it with the correct values
-    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_40)) {
-
-        const element22 = selectFunction.find("option[value='22']");
-        const element23 = selectFunction.find("option[value='23']");
-
-        // Change the "text"
-        element22.text(i18n.getMessage('adjustmentsFunction22_2'));
-        element23.text(i18n.getMessage('adjustmentsFunction23_2'));
-
-        // Reorder, we insert it with the other FF elements to be coherent...
-        element22.insertAfter(selectFunction.find("option[value='25']"));
-        element23.insertAfter(selectFunction.find("option[value='28']"));
-    }
-};

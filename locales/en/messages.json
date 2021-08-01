@@ -2483,103 +2483,115 @@
     "adjustmentsMax": {
         "message": "Max"
     },
-    "adjustmentsFunction0": {
+    "adjustmentsFunctionNone": {
         "message": "No changes"
     },
-    "adjustmentsFunction1": {
+    "adjustmentsFunctionRcRate": {
         "message": "RC Rate Adjustment"
     },
-    "adjustmentsFunction2": {
+    "adjustmentsFunctionRcExpo": {
         "message": "RC Expo Adjustment"
     },
-    "adjustmentsFunction3": {
+    "adjustmentsFunctionThrottleExpo": {
         "message": "Throttle Expo Adjustment"
     },
-    "adjustmentsFunction4": {
+    "adjustmentsFunctionPitchRollRate": {
         "message": "Pitch & Roll Rate Adjustment"
     },
-    "adjustmentsFunction5": {
+    "adjustmentsFunctionYawRate": {
         "message": "Yaw Rate Adjustment"
     },
-    "adjustmentsFunction6": {
+    "adjustmentsFunctionPitchRollP": {
         "message": "Pitch & Roll P Adjustment"
     },
-    "adjustmentsFunction7": {
+    "adjustmentsFunctionPitchRollI": {
         "message": "Pitch & Roll I Adjustment"
     },
-    "adjustmentsFunction8": {
+    "adjustmentsFunctionPitchRollD": {
         "message": "Pitch & Roll D Adjustment"
     },
-    "adjustmentsFunction9": {
+    "adjustmentsFunctionYawP": {
         "message": "Yaw P Adjustment"
     },
-    "adjustmentsFunction10": {
+    "adjustmentsFunctionYawI": {
         "message": "Yaw I Adjustment"
     },
-    "adjustmentsFunction11": {
+    "adjustmentsFunctionYawD": {
         "message": "Yaw D Adjustment"
     },
-    "adjustmentsFunction12": {
+    "adjustmentsFunctionRateProfile": {
         "message": "Rate Profile Selection"
     },
-    "adjustmentsFunction13": {
+    "adjustmentsFunctionPitchRate": {
         "message": "Pitch Rate"
     },
-    "adjustmentsFunction14": {
+    "adjustmentsFunctionRollRate": {
         "message": "Roll Rate"
     },
-    "adjustmentsFunction15": {
+    "adjustmentsFunctionPitchP": {
         "message": "Pitch P Adjustment"
     },
-    "adjustmentsFunction16": {
+    "adjustmentsFunctionPitchI": {
         "message": "Pitch I Adjustment"
     },
-    "adjustmentsFunction17": {
+    "adjustmentsFunctionPitchD": {
         "message": "Pitch D Adjustment"
     },
-    "adjustmentsFunction18": {
+    "adjustmentsFunctionRollP": {
         "message": "Roll P Adjustment"
     },
-    "adjustmentsFunction19": {
+    "adjustmentsFunctionRollI": {
         "message": "Roll I Adjustment"
     },
-    "adjustmentsFunction20": {
+    "adjustmentsFunctionRollD": {
         "message": "Roll D Adjustment"
     },
-    "adjustmentsFunction21": {
-        "message": "RC Rate Yaw"
+    "adjustmentsFunctionRcRateYaw": {
+        "message": "Yaw RC Rate"
     },
-    "adjustmentsFunction22": {
+    "adjustmentsFunctionSetpointD": {
         "message": "D Setpoint"
     },
-    "adjustmentsFunction22_2": {
+    "adjustmentsFunctionPitchRollF": {
         "message": "Pitch & Roll F Adjustment"
     },
-    "adjustmentsFunction23": {
+    "adjustmentsFunctionSetpointDTransition": {
         "message": "D Setpoint Transition"
     },
-    "adjustmentsFunction23_2": {
+    "adjustmentsFunctionFeedforwardTransition": {
         "message": "Feedforward Transition"
     },
-    "adjustmentsFunction24": {
+    "adjustmentsFunctionHorizonStrength": {
         "message": "Horizon Strength Adjustment"
     },
-    "adjustmentsFunction25": {
+    "adjustmentsFunctionPidAudio": {
         "message": "PID-Audio Selection"
     },
-    "adjustmentsFunction26": {
+    "adjustmentsFunctionRollRcRate": {
+        "message": "Roll RC Rate Adjustment"
+    },
+    "adjustmentsFunctionPitchRcRate": {
+        "message": "Pitch RC Rate Adjustment"
+    },
+    "adjustmentsFunctionRollRcExpo": {
+        "message": "Roll RC Expo Adjustment"
+    },
+    "adjustmentsFunctionPitchRcExpo": {
+        "message": "Pitch RC Expo Adjustment"
+    },
+    "adjustmentsFunctionPitchF": {
         "message": "Pitch F Adjustment"
     },
-    "adjustmentsFunction27": {
+    "adjustmentsFunctionRollF": {
         "message": "Roll F Adjustment"
     },
-    "adjustmentsFunction28": {
+    "adjustmentsFunctionYawF": {
         "message": "Yaw F Adjustment"
     },
-    "adjustmentsFunction29": {
+    "adjustmentsFunctionOSDProfile": {
         "message": "OSD Profile Selection"
     },
-    "adjustmentsFunction30": {
+    "adjustmentsFunctionLEDProfile": {
         "message": "LED Profile Selection"
     },
     "adjustmentsSave": {
