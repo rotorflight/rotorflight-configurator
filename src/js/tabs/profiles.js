@@ -5,7 +5,7 @@ TABS.profiles = {
     currentProfile: null,
     activeSubtab: null,
     tabNames: [ 'profile1', 'profile2', 'profile3', 'profile4', 'profile5', 'profile6' ],
-    pidNames: [ 'PITCH', 'ROLL', 'YAW' ],
+    pidNames: [ 'ROLL', 'PITCH', 'YAW' ],
 };
 
 TABS.profiles.initialize = function (callback) {
