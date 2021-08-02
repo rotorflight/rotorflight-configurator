@@ -347,7 +347,7 @@ const MSP = {
                 console.log(`MSP data request timed-out: ${code} direction: ${MSP.message_direction} tab: ${GUI.active_tab}`);
 
                 serial.send(bufferOut, false);
-            }, 1000); // we should be able to define timeout in the future
+            }, 2500); // we should be able to define timeout in the future
         }
 
         MSP.callbacks.push(obj);
