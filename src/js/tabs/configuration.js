@@ -17,8 +17,8 @@ TABS.configuration.initialize = function (callback) {
     }
 
     function load_config() {
-        Promise
-        .resolve(true)
+        MSP.promise(MSPCodes.MSP_STATUS)
+        .then(() => { return MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG); })
         .then(() => { return MSP.promise(MSPCodes.MSP_FEATURE_CONFIG); })
         .then(() => { return MSP.promise(MSPCodes.MSP_BOARD_ALIGNMENT_CONFIG); })
         .then(() => { return MSP.promise(MSPCodes.MSP_ACC_TRIM); })
@@ -29,7 +29,6 @@ TABS.configuration.initialize = function (callback) {
         .then(() => { return semver.gte(FC.CONFIG.apiVersion, "1.15.0") ? MSP.promise(MSPCodes.MSP_SENSOR_ALIGNMENT) : true; })
         .then(() => { return semver.gte(FC.CONFIG.apiVersion, "1.20.0") ? MSP.promise(MSPCodes.MSP_NAME) : true; })
         .then(() => { return semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_31) ? MSP.promise(MSPCodes.MSP_RX_CONFIG) : true; })
-        .then(() => { return MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG); })
         .then(() => { load_html(); });
     }
 
