@@ -47,15 +47,11 @@ TABS.rates.initialize = function (callback) {
         GUI.active_tab = 'rates';
     }
 
-    MSP.promise(MSPCodes.MSP_STATUS).then(function() {
-        return MSP.promise(MSPCodes.MSP_PID_ADVANCED);
-    }).then(function() {
-        return MSP.promise(MSPCodes.MSP_RC_TUNING);
-    }).then(function() {
-        return MSP.promise(MSPCodes.MSP_RC_DEADBAND);
-    }).then(function() {
-        load_html();
-    });
+    MSP.promise(MSPCodes.MSP_STATUS)
+        .then(() => MSP.promise(MSPCodes.MSP_PID_ADVANCED))
+        .then(() => MSP.promise(MSPCodes.MSP_RC_TUNING))
+        .then(() => MSP.promise(MSPCodes.MSP_RC_DEADBAND))
+        .then(() => load_html());
 
     function load_html() {
         $('#content').load("./tabs/rates.html", process_html);

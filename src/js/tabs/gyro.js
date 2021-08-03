@@ -23,13 +23,10 @@ TABS.gyro.initialize = function (callback) {
     // Update filtering defaults based on API version
     const FILTER_DEFAULT = FC.getFilterDefaults();
 
-    MSP.promise(MSPCodes.MSP_STATUS).then(function() {
-        return MSP.promise(MSPCodes.MSP_FEATURE_CONFIG);
-    }).then(function() {
-        return MSP.promise(MSPCodes.MSP_FILTER_CONFIG);
-    }).then(function() {
-        load_html();
-    });
+    MSP.promise(MSPCodes.MSP_STATUS)
+        .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
+        .then(() => MSP.promise(MSPCodes.MSP_FILTER_CONFIG))
+        .then(() => load_html());
 
     function load_html() {
         $('#content').load("./tabs/gyro.html", process_html);

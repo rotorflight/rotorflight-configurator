@@ -45,11 +45,11 @@ TABS.adjustments.initialize = function (callback) {
         GUI.active_tab = 'adjustments';
     }
 
-    Promise.resolve(true)
-        .then(() => { return MSP.promise(MSPCodes.MSP_ADJUSTMENT_RANGES); } )
-        .then(() => { return MSP.promise(MSPCodes.MSP_BOXNAMES); } )
-        .then(() => { return MSP.promise(MSPCodes.MSP_BOXIDS); } )
-        .then(() => { load_html(); } );
+    MSP.promise(MSPCodes.MSP_STATUS)
+        .then(() => MSP.promise(MSPCodes.MSP_ADJUSTMENT_RANGES))
+        .then(() => MSP.promise(MSPCodes.MSP_BOXNAMES))
+        .then(() => MSP.promise(MSPCodes.MSP_BOXIDS))
+        .then(() => load_html());
 
     function load_html() {
         $('#content').load("./tabs/adjustments.html", process_html);

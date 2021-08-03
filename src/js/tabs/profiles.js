@@ -16,11 +16,10 @@ TABS.profiles.initialize = function (callback) {
         GUI.active_tab = 'profiles';
     }
 
-    Promise.resolve(true)
-        .then(() => { return MSP.promise(MSPCodes.MSP_STATUS); } )
-        .then(() => { return MSP.promise(MSPCodes.MSP_PID); } )
-        .then(() => { return MSP.promise(MSPCodes.MSP_PID_ADVANCED); } )
-        .then(() => { load_html() } );
+    MSP.promise(MSPCodes.MSP_STATUS)
+        .then(() => MSP.promise(MSPCodes.MSP_PID))
+        .then(() => MSP.promise(MSPCodes.MSP_PID_ADVANCED))
+        .then(() => load_html());
 
     function load_html() {
         $('#content').load("./tabs/profiles.html", process_html);
