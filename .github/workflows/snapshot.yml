@@ -93,7 +93,7 @@ jobs:
       run: yarn install
 
     - name: Build release for windows
-      run: yarn gulp release --win32
+      run: yarn gulp release --win64
 
     - name: Move artifacts
       run: move release/rotorflight-configurator* .
