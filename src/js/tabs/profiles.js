@@ -16,7 +16,7 @@ TABS.profiles.initialize = function (callback) {
         GUI.active_tab = 'profiles';
     }
 
-    MSP.promise(MSPCodes.MSP_STATUS)
+    MSP.promise(MSPCodes.MSP_STATUS_EX)
         .then(() => MSP.promise(MSPCodes.MSP_PID))
         .then(() => MSP.promise(MSPCodes.MSP_PID_ADVANCED))
         .then(() => load_html());
@@ -188,10 +188,9 @@ TABS.profiles.initialize = function (callback) {
             form_to_data();
             self.updating = true;
             Promise.resolve(true)
-                .then(() => { return MSP.promise(MSPCodes.MSP_SET_PID, mspHelper.crunch(MSPCodes.MSP_SET_PID)); })
-                .then(() => { return MSP.promise(MSPCodes.MSP_SET_PID_ADVANCED, mspHelper.crunch(MSPCodes.MSP_SET_PID_ADVANCED)); })
-                .then(() => { return MSP.promise(MSPCodes.MSP_SET_RC_TUNING, mspHelper.crunch(MSPCodes.MSP_SET_RC_TUNING)); })
-                .then(() => { return MSP.promise(MSPCodes.MSP_EEPROM_WRITE); })
+                .then(() => MSP.promise(MSPCodes.MSP_SET_PID, mspHelper.crunch(MSPCodes.MSP_SET_PID)))
+                .then(() => MSP.promise(MSPCodes.MSP_SET_PID_ADVANCED, mspHelper.crunch(MSPCodes.MSP_SET_PID_ADVANCED)))
+                .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
                 .then(() => {
                     self.updating = false;
                     self.refresh(() => { GUI.log(i18n.getMessage('profilesEepromSaved')); });
