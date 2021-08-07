@@ -48,18 +48,21 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles .PITCH .pid_data input[name="f"]').val(FC.ADVANCED_TUNING.feedforwardPitch);
         $('.tab-profiles .YAW .pid_data input[name="f"]').val(FC.ADVANCED_TUNING.feedforwardYaw);
 
+        // Acro Trainer
+        $('input[id="acroTrainerAngleLimit"]').val(FC.ADVANCED_TUNING.acroTrainerAngleLimit).trigger('input');
+
         // Angle mode
-        $('.tab-profiles input[name="angleLimit"]').val(FC.ADVANCED_TUNING.levelAngleLimit);
+        $('.tab-profiles input[id="levelAngleLimit"]').val(FC.ADVANCED_TUNING.levelAngleLimit);
 
         // I-term rotation
-        $('input[id="itermrotation"]').prop('checked', FC.ADVANCED_TUNING.itermRotation !== 0);
+        $('input[id="itermRotation"]').prop('checked', FC.ADVANCED_TUNING.itermRotation !== 0);
 
         // I-term relax
-        $('select[id="itermrelaxAxes"]').val(FC.ADVANCED_TUNING.itermRelax > 0 ? FC.ADVANCED_TUNING.itermRelax : 1);
-        $('select[id="itermrelaxType"]').val(FC.ADVANCED_TUNING.itermRelaxType);
-        $('.itermrelax input[name="itermRelaxCutoff"]').val(FC.ADVANCED_TUNING.itermRelaxCutoff);
+        $('select[id="itermRelaxAxes"]').val(FC.ADVANCED_TUNING.itermRelax > 0 ? FC.ADVANCED_TUNING.itermRelax : 1);
+        $('select[id="itermRelaxType"]').val(FC.ADVANCED_TUNING.itermRelaxType);
+        $('input[id="itermRelaxCutoff"]').val(FC.ADVANCED_TUNING.itermRelaxCutoff);
 
-        const itermRelaxCheck = $('input[id="itermrelax"]');
+        const itermRelaxCheck = $('input[id="itermRelax"]');
 
         itermRelaxCheck.prop('checked', FC.ADVANCED_TUNING.itermRelax !== 0);
 
@@ -67,21 +70,13 @@ TABS.profiles.initialize = function (callback) {
             const checked = $(this).is(':checked');
             if (checked) {
                 $('.itermrelax .suboption').show();
-                $('.itermRelaxCutoff').show();
+                $('.itermrelaxcutoff').show();
             } else {
                 $('.itermrelax .suboption').hide();
             }
         });
 
         itermRelaxCheck.change();
-
-        // Absolute Control
-        const absoluteControlGainNumberElement = $('input[name="absoluteControlGain-number"]');
-        absoluteControlGainNumberElement.val(FC.ADVANCED_TUNING.absoluteControlGain).trigger('input');
-
-        // Acro Trainer
-        const acroTrainerAngleLimitNumberElement = $('input[name="acroTrainerAngleLimit-number"]');
-        acroTrainerAngleLimitNumberElement.val(FC.ADVANCED_TUNING.acroTrainerAngleLimit).trigger('input');
 
     }
 
@@ -96,16 +91,14 @@ TABS.profiles.initialize = function (callback) {
             });
         });
 
-        FC.ADVANCED_TUNING.levelAngleLimit = parseInt($('.tab-profiles input[name="angleLimit"]').val());
+        FC.ADVANCED_TUNING.acroTrainerAngleLimit = $('input[id="acroTrainerAngleLimit"]').val();
 
-        FC.ADVANCED_TUNING.itermRotation = $('input[id="itermrotation"]').is(':checked') ? 1 : 0;
-        FC.ADVANCED_TUNING.itermRelax = $('input[id="itermrelax"]').is(':checked') ? $('select[id="itermrelaxAxes"]').val() : 0;
-        FC.ADVANCED_TUNING.itermRelaxType = $('select[id="itermrelaxType"]').val();
-        FC.ADVANCED_TUNING.itermRelaxCutoff = parseInt($('input[name="itermRelaxCutoff"]').val());
+        FC.ADVANCED_TUNING.levelAngleLimit = parseInt($('.tab-profiles input[id="levelAngleLimit"]').val());
 
-        FC.ADVANCED_TUNING.absoluteControlGain = $('input[name="absoluteControlGain-number"]').val();
-
-        FC.ADVANCED_TUNING.acroTrainerAngleLimit = $('input[name="acroTrainerAngleLimit-number"]').val();
+        FC.ADVANCED_TUNING.itermRotation = $('input[id="itermRotation"]').is(':checked') ? 1 : 0;
+        FC.ADVANCED_TUNING.itermRelax = $('input[id="itermRelax"]').is(':checked') ? $('select[id="itermRelaxAxes"]').val() : 0;
+        FC.ADVANCED_TUNING.itermRelaxType = $('select[id="itermRelaxType"]').val();
+        FC.ADVANCED_TUNING.itermRelaxCutoff = parseInt($('input[id="itermRelaxCutoff"]').val());
 
         FC.ADVANCED_TUNING.feedforwardRoll  = parseInt($('.tab-profiles .ROLL .pid_data input[name="f"]').val());
         FC.ADVANCED_TUNING.feedforwardPitch = parseInt($('.tab-profiles .PITCH .pid_data input[name="f"]').val());

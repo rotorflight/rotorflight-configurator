@@ -100,7 +100,6 @@
                             </tr>
                         </table>
                     </div>
-
                 </div>
 
                 <div class="cf_column">
@@ -113,31 +112,29 @@
                         <table class="compensation">
 
                             <tr class="acroTrainerAngleLimit">
-                                <td><input type="number" name="acroTrainerAngleLimit-number" step="1" min="10" max="80"/></td>
-                                <td colspan="1">
+                                <td><input type="number" id="acroTrainerAngleLimit" step="1" min="10" max="80"/></td>
+                                <td colspan="2">
                                     <div>
                                         <label>
                                             <span i18n="profilesAcroTrainerAngleLimit"></span>
                                         </label>
-                                        <div class="helpicon cf_tip" i18n_title="profilesAcroTrainerAngleLimitHelp"></div>
                                     </div>
                                 </td>
                             </tr>
 
-                            <tr class="absoluteControlGain">
-                                <td><input type="number" name="absoluteControlGain-number" step="1" min="0" max="20"/></td>
-                                <td colspan="1">
+                            <tr class="levelAngleLimit">
+                                <td><input type="number" id="levelAngleLimit" step="1" min="10" max="80"/></td>
+                                <td colspan="2">
                                     <div>
                                         <label>
-                                            <span i18n="profilesAbsoluteControlGain"></span>
+                                            <span i18n="profilesLevelAngleLimit"></span>
                                         </label>
-                                        <div class="helpicon cf_tip" i18n_title="profilesAbsoluteControlGainHelp"></div>
                                     </div>
                                 </td>
                             </tr>
 
                             <tr class="itermrotation">
-                                <td><input type="checkbox" id="itermrotation" class="toggle" /></td>
+                                <td><input type="checkbox" id="itermRotation" class="toggle" /></td>
                                 <td colspan="2">
                                     <span i18n="profilesItermRotation"></span>
                                     <div class="helpicon cf_tip" i18n_title="profilesItermRotationHelp"></div>
@@ -145,36 +142,36 @@
                             </tr>
 
                             <tr class="itermrelax">
-                                <td><input type="checkbox" id="itermrelax" class="toggle" /></td>
+                                <td><input type="checkbox" id="itermRelax" class="toggle" /></td>
                                 <td colspan="2">
                                     <div class="helpicon cf_tip" i18n_title="profilesItermRelaxHelp"></div>
                                     <span i18n="profilesItermRelax"></span>
 
                                     <span class="suboption">
-                                        <select id="itermrelaxAxes">
+                                        <select id="itermRelaxAxes">
                                             <option i18n="profilesItermRelaxAxesOptionRP"     value="1">
                                             <option i18n="profilesItermRelaxAxesOptionRPY"    value="2"/>
                                             <option i18n="profilesItermRelaxAxesOptionRPInc"  value="3"/>
                                             <option i18n="profilesItermRelaxAxesOptionRPYInc" value="4"/>
                                         </select>
-                                        <label for="itermrelaxAxes">
+                                        <label for="itermRelaxAxes">
                                             <span i18n="profilesItermRelaxAxes"></span>
                                         </label>
                                     </span>
 
                                     <span class="suboption">
-                                        <select id="itermrelaxType">
+                                        <select id="itermRelaxType">
                                             <option i18n="profilesItermRelaxTypeOptionGyro"     value="0"/>
                                             <option i18n="profilesItermRelaxTypeOptionSetpoint" value="1"/>
                                         </select>
-                                        <label for="itermrelaxType">
+                                        <label for="itermRelaxType">
                                             <span i18n="profilesItermRelaxType"></span>
                                         </label>
                                     </span>
 
                                     <div class="helpicon cf_tip" i18n_title="profilesItermRelaxCutoffHelp"></div>
-                                    <span class="itermRelaxCutoff suboption">
-                                        <input type="number" name="itermRelaxCutoff" step="1" min="1" max="50" />
+                                    <span class="itermrelaxcutoff suboption">
+                                        <input type="number" id="itermRelaxCutoff" step="1" min="1" max="50" />
                                         <label for="itermRelaxCutoff">
                                             <span i18n="profilesItermRelaxCutoff"></span>
                                         </label>
