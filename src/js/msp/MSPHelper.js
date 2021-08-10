@@ -873,18 +873,20 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_ADJUSTMENT_RANGES:
                 FC.ADJUSTMENT_RANGES = []; // empty the array as new data is coming in
 
-                const adjustmentRangeCount = data.byteLength / 6; // 6 bytes per item.
+                const adjustmentRangeCount = data.byteLength / 10; // 10 bytes per item.
 
                 for (let i = 0; i < adjustmentRangeCount; i++) {
                     const adjustmentRange = {
-                        slotIndex: data.readU8(),
-                        auxChannelIndex: data.readU8(),
-                        range: {
+                        enaChannel: data.readU8(),
+                        enaRange: {
                             start: 900 + (data.readU8() * 25),
                             end: 900 + (data.readU8() * 25),
                         },
-                        adjustmentFunction: data.readU8(),
-                        auxSwitchChannelIndex: data.readU8(),
+                        adjFunction: data.readU8(),
+                        adjChannel: data.readU8(),
+                        adjStep: data.readU8(),
+                        adjMin: data.readU16(),
+                        adjMax: data.readU16(),
                     };
                     FC.ADJUSTMENT_RANGES.push(adjustmentRange);
                 }
@@ -2460,12 +2462,14 @@ MspHelper.prototype.sendAdjustmentRanges = function(onCompleteCallback) {
         const buffer = [];
 
         buffer.push8(adjustmentRangeIndex)
-            .push8(adjustmentRange.slotIndex)
-            .push8(adjustmentRange.auxChannelIndex)
-            .push8((adjustmentRange.range.start - 900) / 25)
-            .push8((adjustmentRange.range.end - 900) / 25)
-            .push8(adjustmentRange.adjustmentFunction)
-            .push8(adjustmentRange.auxSwitchChannelIndex);
+            .push8(adjustmentRange.enaChannel)
+            .push8((adjustmentRange.enaRange.start - 900) / 25)
+            .push8((adjustmentRange.enaRange.end - 900) / 25)
+            .push8(adjustmentRange.adjFunction)
+            .push8(adjustmentRange.adjChannel)
+            .push8(adjustmentRange.adjStep)
+            .push16(adjustmentRange.adjMin)
+            .push16(adjustmentRange.adjMax);
 
         // prepare for next iteration
         adjustmentRangeIndex++;
