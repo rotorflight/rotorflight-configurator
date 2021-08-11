@@ -4,7 +4,7 @@
         <div class="cf_doc_version_bt">
             <a id="button-documentation" href="https://github.com/rotorflight/rotorflight/wiki" target="_blank" rel="noopener noreferrer"></a>
         </div>
-        <div class="note">
+        <!--div class="note">
             <p i18n="adjustmentsHelp"></p>
             <p class="adjustmentSlotsHelp" i18n="adjustmentSlotsHelp"></p>
             <b><p i18n="adjustmentsExamples"></p></b>
@@ -12,7 +12,7 @@
                 <li i18n="adjustmentsExample1"></li>
                 <li i18n="adjustmentsExample2"></li>
             </ul>
-        </div>
+        </div-->
 
         <div class="overflow">
             <table class="adjustments">
@@ -22,8 +22,6 @@
                     <td i18n="adjustmentsColumnWhenChannel"></td>
                     <td i18n="adjustmentsColumnIsInRange" class="range"></td>
                     <td i18n="adjustmentsColumnThenApplyFunction"></td>
-                    <td class="adjustmentSlotHeader" i18n="adjustmentsColumnUsingSlot"></td>
-                    <td i18n="adjustmentsColumnViaChannel"></td>
                 </tr>
                 </thead>
                 <tbody>
@@ -67,20 +65,33 @@
                         <div class="marker"></div>
                     </div>
                 </td>
-                <td class="functionSelection">
-                    <select id="functionSelectionSelect" class="function">
-                        <!--  Generated values go here -->
-                    </select>
+                <td class="function">
+                    <table>
+                        <tr>
+                            <td class="functionSelection" colspan="2">
+                                <select id="functionSelectionSelect" class="function">
+                                    <!--  Generated values go here -->
+                                </select>
+                            </td>
+                            <td class="functionChannel">
+                                <select class="channel">
+                                    <option value=""></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="functionMinValue">
+                                <input type="number" name="functionMinValue"/>
+                            </td>
+                            <td class="functionMaxValue">
+                                <input type="number" name="functionMaxValue"/>
+                            </td>
+                            <td class="functionStepSize">
+                                <input type="number" name="functionStepSize" min="0" />
+                            </td>
+                        </tr>
+                    </table>
                 </td>
-                <td class="adjustmentSlot"><select class="slot">
-                    <option value="0" i18n="adjustmentsSlot0"></option>
-                    <option value="1" i18n="adjustmentsSlot1"></option>
-                    <option value="2" i18n="adjustmentsSlot2"></option>
-                    <option value="3" i18n="adjustmentsSlot3"></option>
-                </select></td>
-                <td class="functionSwitchChannel"><select class="channel">
-                        <option value=""></option>
-                </select></td>
             </tr>
         </tbody>
     </table>

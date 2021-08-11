@@ -2464,22 +2464,19 @@
         "message": "is in range"
     },
     "adjustmentsColumnThenApplyFunction": {
-        "message": "then apply"
+        "message": "then apply value from channel,<br>limited between minimum and maximum, with step size"
     },
     "adjustmentsColumnViaChannel": {
-        "message": "via channel"
+        "message": "from channel"
     },
-    "adjustmentsSlot0": {
-        "message": "Slot 1"
+    "adjustmentsColumnStepSize": {
+        "message": "step size"
     },
-    "adjustmentsSlot1": {
-        "message": "Slot 2"
+    "adjustmentsColumnMinValue": {
+        "message": "minimum"
     },
-    "adjustmentsSlot2": {
-        "message": "Slot 3"
-    },
-    "adjustmentsSlot3": {
-        "message": "Slot 4"
+    "adjustmentsColumnMaxValue": {
+        "message": "maximum"
     },
     "adjustmentsMin": {
         "message": "Min"
@@ -2490,107 +2487,119 @@
     "adjustmentsFunctionNone": {
         "message": "No changes"
     },
-    "adjustmentsFunctionRcRate": {
-        "message": "RC Rate Adjustment"
-    },
-    "adjustmentsFunctionRcExpo": {
-        "message": "RC Expo Adjustment"
-    },
-    "adjustmentsFunctionThrottleExpo": {
-        "message": "Throttle Expo Adjustment"
-    },
-    "adjustmentsFunctionPitchRollRate": {
-        "message": "Pitch & Roll Rate Adjustment"
-    },
-    "adjustmentsFunctionYawRate": {
-        "message": "Yaw Rate Adjustment"
-    },
-    "adjustmentsFunctionPitchRollP": {
-        "message": "Pitch & Roll P Adjustment"
-    },
-    "adjustmentsFunctionPitchRollI": {
-        "message": "Pitch & Roll I Adjustment"
-    },
-    "adjustmentsFunctionPitchRollD": {
-        "message": "Pitch & Roll D Adjustment"
-    },
-    "adjustmentsFunctionYawP": {
-        "message": "Yaw P Adjustment"
-    },
-    "adjustmentsFunctionYawI": {
-        "message": "Yaw I Adjustment"
-    },
-    "adjustmentsFunctionYawD": {
-        "message": "Yaw D Adjustment"
-    },
-    "adjustmentsFunctionRateProfile": {
-        "message": "Rate Profile Selection"
-    },
     "adjustmentsFunctionPitchRate": {
         "message": "Pitch Rate"
     },
     "adjustmentsFunctionRollRate": {
         "message": "Roll Rate"
     },
-    "adjustmentsFunctionPitchP": {
-        "message": "Pitch P Adjustment"
+    "adjustmentsFunctionYawRate": {
+        "message": "Yaw Rate"
     },
-    "adjustmentsFunctionPitchI": {
-        "message": "Pitch I Adjustment"
+    "adjustmentsFunctionPitchRCRate": {
+        "message": "Pitch RC Rate"
     },
-    "adjustmentsFunctionPitchD": {
-        "message": "Pitch D Adjustment"
+    "adjustmentsFunctionRollRCRate": {
+        "message": "Roll RC Rate"
     },
-    "adjustmentsFunctionRollP": {
-        "message": "Roll P Adjustment"
-    },
-    "adjustmentsFunctionRollI": {
-        "message": "Roll I Adjustment"
-    },
-    "adjustmentsFunctionRollD": {
-        "message": "Roll D Adjustment"
-    },
-    "adjustmentsFunctionRcRateYaw": {
+    "adjustmentsFunctionYawRCRate": {
         "message": "Yaw RC Rate"
     },
-    "adjustmentsFunctionSetpointD": {
-        "message": "D Setpoint"
+    "adjustmentsFunctionPitchRCExpo": {
+        "message": "Pitch RC Expo"
     },
-    "adjustmentsFunctionPitchRollF": {
-        "message": "Pitch & Roll F Adjustment"
+    "adjustmentsFunctionRollRCExpo": {
+        "message": "Roll RC Expo"
     },
-    "adjustmentsFunctionSetpointDTransition": {
-        "message": "D Setpoint Transition"
+    "adjustmentsFunctionYawRCExpo": {
+        "message": "Yaw RC Expo"
     },
-    "adjustmentsFunctionFeedforwardTransition": {
-        "message": "Feedforward Transition"
+    "adjustmentsFunctionPitchP": {
+        "message": "Pitch P-gain"
     },
-    "adjustmentsFunctionHorizonStrength": {
-        "message": "Horizon Strength Adjustment"
+    "adjustmentsFunctionPitchI": {
+        "message": "Pitch I-gain"
     },
-    "adjustmentsFunctionPidAudio": {
-        "message": "PID-Audio Selection"
-    },
-    "adjustmentsFunctionRollRcRate": {
-        "message": "Roll RC Rate Adjustment"
-    },
-    "adjustmentsFunctionPitchRcRate": {
-        "message": "Pitch RC Rate Adjustment"
-    },
-    "adjustmentsFunctionRollRcExpo": {
-        "message": "Roll RC Expo Adjustment"
-    },
-    "adjustmentsFunctionPitchRcExpo": {
-        "message": "Pitch RC Expo Adjustment"
+    "adjustmentsFunctionPitchD": {
+        "message": "Pitch D-gain"
     },
     "adjustmentsFunctionPitchF": {
-        "message": "Pitch F Adjustment"
+        "message": "Pitch F-gain"
+    },
+    "adjustmentsFunctionRollP": {
+        "message": "Roll P-gain"
+    },
+    "adjustmentsFunctionRollI": {
+        "message": "Roll I-gain"
+    },
+    "adjustmentsFunctionRollD": {
+        "message": "Roll D-gain"
     },
     "adjustmentsFunctionRollF": {
-        "message": "Roll F Adjustment"
+        "message": "Roll F-gain"
+    },
+    "adjustmentsFunctionYawP": {
+        "message": "Yaw P-gain"
+    },
+    "adjustmentsFunctionYawI": {
+        "message": "Yaw I-gain"
+    },
+    "adjustmentsFunctionYawD": {
+        "message": "Yaw D-gain"
     },
     "adjustmentsFunctionYawF": {
-        "message": "Yaw F Adjustment"
+        "message": "Yaw F-gain"
+    },
+    "adjustmentsFunctionYawCenter": {
+        "message": "Yaw Center Offset"
+    },
+    "adjustmentsFunctionYawCyclicFF": {
+        "message": "Yaw Cyclic Precomp"
+    },
+    "adjustmentsFunctionYawCollectiveFF": {
+        "message": "Yaw Collective Precomp"
+    },
+    "adjustmentsFunctionYawImpulseFF": {
+        "message": "Yaw Collective Impulse Precomp"
+    },
+    "adjustmentsFunctionRescueCollective": {
+        "message": "Rescue Collective"
+    },
+    "adjustmentsFunctionAngleLevelStrength": {
+        "message": "Angle mode leveling strength"
+    },
+    "adjustmentsFunctionHorizonLevelStrength": {
+        "message": "Horizon mode leveling strength"
+    },
+    "adjustmentsFunctionAcroTrainerGain": {
+        "message": "Acro Trainer leveling strength"
+    },
+    "adjustmentsFunctionGovernorGain": {
+        "message": "Governor PID-gain"
+    },
+    "adjustmentsFunctionGovernorP": {
+        "message": "Governor P-gain"
+    },
+    "adjustmentsFunctionGovernorI": {
+        "message": "Governor I-gain"
+    },
+    "adjustmentsFunctionGovernorD": {
+        "message": "Governor D-gain"
+    },
+    "adjustmentsFunctionGovernorF": {
+        "message": "Governor F-gain"
+    },
+    "adjustmentsFunctionGovernorCyclicFF": {
+        "message": "Governor Cyclic Precomp"
+    },
+    "adjustmentsFunctionGovernorCollectiveFF": {
+        "message": "Governor Collective Precomp"
+    },
+    "adjustmentsFunctionRateProfile": {
+        "message": "Rate Profile Selection"
+    },
+    "adjustmentsFunctionPIDProfile": {
+        "message": "PID Profile Selection"
     },
     "adjustmentsFunctionOSDProfile": {
         "message": "OSD Profile Selection"
