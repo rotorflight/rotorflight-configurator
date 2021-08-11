@@ -1,38 +1,47 @@
 'use strict';
 
 TABS.adjustments = {
+    PRIMARY_CHANNEL_COUNT: 5,
     FUNCTIONS_1_43: [
         'None',
-        'RcRate',
-        'RcExpo',
-        'PitchRollRate',
-        'YawRate',
-        'PitchRollP',
-        'PitchRollI',
-        'PitchRollD',
-        'YawP',
-        'YawI',
-        'YawD',
-        'RateProfile',
         'PitchRate',
         'RollRate',
+        'YawRate',
+        'PitchRCRate',
+        'RollRCRate',
+        'YawRCRate',
+        'PitchRCExpo',
+        'RollRCExpo',
+        'YawRCExpo',
         'PitchP',
         'PitchI',
         'PitchD',
+        'PitchF',
         'RollP',
         'RollI',
         'RollD',
-        'RcRateYaw',
-        'PitchRollF',
-        'HorizonStrength',
-        'RollRcRate',
-        'PitchRcRate',
-        'RollRcExpo',
-        'PitchRcExpo',
-        'PidAudio',
-        'PitchF',
         'RollF',
+        'YawP',
+        'YawI',
+        'YawD',
         'YawF',
+        'YawCenter',
+        'YawCyclicFF',
+        'YawCollectiveFF',
+        'YawImpulseFF',
+        'RescueCollective',
+        'AngleLevelStrength',
+        'HorizonLevelStrength',
+        'AcroTrainerGain',
+        'GovernorGain',
+        'GovernorP',
+        'GovernorI',
+        'GovernorD',
+        'GovernorF',
+        'GovernorCyclicFF',
+        'GovernorCollectiveFF',
+        'RateProfile',
+        'PIDProfile',
         'OSDProfile',
         'LEDProfile',
     ],
@@ -49,6 +58,7 @@ TABS.adjustments.initialize = function (callback) {
         .then(() => MSP.promise(MSPCodes.MSP_ADJUSTMENT_RANGES))
         .then(() => MSP.promise(MSPCodes.MSP_BOXNAMES))
         .then(() => MSP.promise(MSPCodes.MSP_BOXIDS))
+        .then(() => MSP.promise(MSPCodes.MSP_RC))
         .then(() => load_html());
 
     function load_html() {
@@ -57,73 +67,77 @@ TABS.adjustments.initialize = function (callback) {
 
     function addAdjustment(adjustmentIndex, adjustmentRange, auxChannelCount) {
 
-        const template = $('#tab-adjustments-templates .adjustments .adjustment');
-        const newAdjustment = template.clone();
+        const newAdjustment = $('#tab-adjustments-templates .adjustments .adjustment').clone();
 
         $(newAdjustment).attr('id', 'adjustment-' + adjustmentIndex);
         $(newAdjustment).data('index', adjustmentIndex);
 
         //
-        // update selected slot
+        // populate enable channel select box
         //
-
-        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-            const adjustmentList = $(newAdjustment).find('.adjustmentSlot .slot');
-            adjustmentList.val(adjustmentRange.slotIndex);
-        }
-
-        //
-        // populate source channel select box
-        //
-
         const channelList = $(newAdjustment).find('.channelInfo .channel');
         const channelOptionTemplate = $(channelList).find('option');
         channelOptionTemplate.remove();
-        for (let channelIndex = 0; channelIndex < auxChannelCount; channelIndex++) {
+
+        let autoOption = channelOptionTemplate.clone();
+        autoOption.text(i18n.getMessage('auxiliaryAutoChannelSelect'));
+        autoOption.val(-1);
+        channelList.append(autoOption);
+
+        for (let index = 0; index < auxChannelCount; index++) {
             const channelOption = channelOptionTemplate.clone();
-            channelOption.text('AUX ' + (channelIndex + 1));
-            channelOption.val(channelIndex);
+            channelOption.text('AUX ' + (index + 1));
+            channelOption.val(index);
             channelList.append(channelOption);
         }
-        channelList.val(adjustmentRange.auxChannelIndex);
+        channelList.val(adjustmentRange.enaChannel);
 
         //
         // update selected function
         //
-
-        const functionList = $(newAdjustment).find('.functionSelection .function');
+        const functionList = $(newAdjustment).find('.functionSelection select');
         // update list of selected functions
 
-        functionList.val(adjustmentRange.adjustmentFunction);
+        functionList.val(adjustmentRange.adjFunction);
 
         //
-        // populate function channel select box
+        // populate source channel select box
         //
+        const srcChannelList = $(newAdjustment).find('.functionChannel select');
+        const srcChannelOptionTemplate = $(srcChannelList).find('option');
+        srcChannelOptionTemplate.remove();
 
-        const switchList = $(newAdjustment).find('.functionSwitchChannel .channel');
-        const switchOptionTemplate = $(switchList).find('option');
-        switchOptionTemplate.remove();
-        let switchOption;
-        for (let switchIndex = 0; switchIndex < auxChannelCount; switchIndex++) {
-            switchOption = switchOptionTemplate.clone();
-            switchOption.text('AUX ' + (switchIndex + 1));
-            switchOption.val(switchIndex);
-            switchList.append(switchOption);
+        let srcAutoOption = channelOptionTemplate.clone();
+        srcAutoOption.text(i18n.getMessage('auxiliaryAutoChannelSelect'));
+        srcAutoOption.val(-1);
+        srcChannelList.append(srcAutoOption);
+
+        for (let index = 0; index < auxChannelCount; index++) {
+            let srcChannelOption = srcChannelOptionTemplate.clone();
+            srcChannelOption.text('AUX ' + (index + 1));
+            srcChannelOption.val(index);
+            srcChannelList.append(srcChannelOption);
         }
-        switchList.val(adjustmentRange.auxSwitchChannelIndex);
+        srcChannelList.val(adjustmentRange.adjChannel);
+
+        //
+        // populate step,min,max
+        //
+        $(newAdjustment).find('.functionStepSize input').val(adjustmentRange.adjStep);
+        $(newAdjustment).find('.functionMinValue input').val(adjustmentRange.adjMin);
+        $(newAdjustment).find('.functionMaxValue input').val(adjustmentRange.adjMax);
 
         //
         // configure range
         //
-
         const channel_range = {
                 'min': [  900 ],
                 'max': [ 2100 ]
             };
 
         let rangeValues = [1300, 1700];
-        if (adjustmentRange.range != undefined) {
-            rangeValues = [adjustmentRange.range.start, adjustmentRange.range.end];
+        if (adjustmentRange.enaRange != undefined) {
+            rangeValues = [adjustmentRange.enaRange.start, adjustmentRange.enaRange.end];
         }
 
         let rangeElement = $(newAdjustment).find('.range');
@@ -153,7 +167,6 @@ TABS.adjustments.initialize = function (callback) {
         //
         // add the enable/disable behavior
         //
-
         const enableElement = $(newAdjustment).find('.enable');
         $(enableElement).data('adjustmentElement', newAdjustment);
         $(enableElement).change(function() {
@@ -176,7 +189,7 @@ TABS.adjustments.initialize = function (callback) {
             $(this).prop("disabled", false);
         });
 
-        const isEnabled = (adjustmentRange?.range?.start !== adjustmentRange?.range?.end);
+        const isEnabled = (adjustmentRange?.enaRange?.start !== adjustmentRange?.enaRange?.end);
         $(enableElement).prop("checked", isEnabled).change();
 
         return newAdjustment;
@@ -194,18 +207,11 @@ TABS.adjustments.initialize = function (callback) {
             selectFunction.append(new Option(i18n.getMessage('adjustmentsFunction' + value), key));
         });
 
-        let auxChannelCount = FC.RC.active_channels - 5;
-
+        let auxChannelCount = FC.RC.active_channels - self.PRIMARY_CHANNEL_COUNT;
         const modeTableBodyElement = $('.tab-adjustments .adjustments tbody');
-        for (let adjustmentIndex = 0; adjustmentIndex < FC.ADJUSTMENT_RANGES.length; adjustmentIndex++) {
-            const newAdjustment = addAdjustment(adjustmentIndex, FC.ADJUSTMENT_RANGES[adjustmentIndex], auxChannelCount);
+        for (let index = 0; index < FC.ADJUSTMENT_RANGES.length; index++) {
+            const newAdjustment = addAdjustment(index, FC.ADJUSTMENT_RANGES[index], auxChannelCount);
             modeTableBodyElement.append(newAdjustment);
-        }
-
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-            $('.tab-adjustments .adjustmentSlotsHelp').hide();
-            $('.tab-adjustments .adjustmentSlotHeader').hide();
-            $('.tab-adjustments .adjustmentSlot').hide();
         }
 
         // translate to user-selected language
@@ -215,19 +221,21 @@ TABS.adjustments.initialize = function (callback) {
         $('a.save').click(function () {
 
             // update internal data structures based on current UI elements
-            const requiredAdjustmentRangeCount = FC.ADJUSTMENT_RANGES.length;
+            const totalAdjustmentRangeCount = FC.ADJUSTMENT_RANGES.length;
 
             FC.ADJUSTMENT_RANGES = [];
 
             const defaultAdjustmentRange = {
-                slotIndex: 0,
-                auxChannelIndex: 0,
-                range: {
+                enaChannel: 0,
+                enaRange: {
                     start: 900,
-                    end: 900
+                    end: 900,
                 },
-                adjustmentFunction: 0,
-                auxSwitchChannelIndex: 0
+                adjFunction: 0,
+                adjChannel: 0,
+                adjStep: 0,
+                adjMin: 0,
+                adjMax: 0,
             };
 
             $('.tab-adjustments .adjustments .adjustment').each(function () {
@@ -235,20 +243,17 @@ TABS.adjustments.initialize = function (callback) {
 
                 if ($(adjustmentElement).find('.enable').prop("checked")) {
                     const rangeValues = $(this).find('.range .channel-slider').val();
-                    let slotIndex = 0;
-                    if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                        slotIndex = parseInt($(this).find('.adjustmentSlot .slot').val());
-                    }
-
                     const adjustmentRange = {
-                        slotIndex: slotIndex,
-                        auxChannelIndex: parseInt($(this).find('.channelInfo .channel').val()),
-                        range: {
+                        enaChannel: parseInt($(this).find('.channelInfo .channel').val()),
+                        enaRange: {
                             start: rangeValues[0],
-                            end: rangeValues[1]
+                            end: rangeValues[1],
                         },
-                        adjustmentFunction: parseInt($(this).find('.functionSelection .function').val()),
-                        auxSwitchChannelIndex: parseInt($(this).find('.functionSwitchChannel .channel').val())
+                        adjFunction: parseInt($(this).find('.functionSelection select').val()),
+                        adjChannel: parseInt($(this).find('.functionChannel select').val()),
+                        adjStep: parseInt($(this).find('.functionStepSize input').val()),
+                        adjMin: parseInt($(this).find('.functionMinValue input').val()),
+                        adjMax: parseInt($(this).find('.functionMaxValue input').val()),
                     };
                     FC.ADJUSTMENT_RANGES.push(adjustmentRange);
                 } else {
@@ -256,7 +261,7 @@ TABS.adjustments.initialize = function (callback) {
                 }
             });
 
-            for (let adjustmentRangeIndex = FC.ADJUSTMENT_RANGES.length; adjustmentRangeIndex < requiredAdjustmentRangeCount; adjustmentRangeIndex++) {
+            for (let index = FC.ADJUSTMENT_RANGES.length; index < totalAdjustmentRangeCount; index++) {
                 FC.ADJUSTMENT_RANGES.push(defaultAdjustmentRange);
             }
 
@@ -291,22 +296,53 @@ TABS.adjustments.initialize = function (callback) {
         }
 
         function update_ui() {
-            auxChannelCount = FC.RC.active_channels - 5;
 
-            for (let auxChannelIndex = 0; auxChannelIndex < auxChannelCount; auxChannelIndex++) {
-                update_marker(auxChannelIndex, FC.RC.channels[auxChannelIndex + 5]);
+            auto_select_channel();
+
+            let auxChannelCount = FC.RC.active_channels - self.PRIMARY_CHANNEL_COUNT;
+
+            for (let index = 0; index < auxChannelCount; index++) {
+                update_marker(index, FC.RC.channels[index + self.PRIMARY_CHANNEL_COUNT]);
+            }
+        }
+
+        function auto_select_channel() {
+
+            const auto_option = $('.tab-adjustments select.channel option[value="-1"]:selected');
+
+            if (auto_option.length > 0) {
+                const RCchannels = FC.RC.channels.slice(self.PRIMARY_CHANNEL_COUNT, FC.RC.active_channels);
+                if (self.RCchannels) {
+                    let channel = -1;
+                    let chDelta = 100;
+                    for (let index = 0; index < RCchannels.length; index++) {
+                        let delta = Math.abs(RCchannels[index] - self.RCchannels[index]);
+                        if (delta > chDelta) {
+                            channel = index;
+                            chDelta = delta;
+                        }
+                    }
+                    if (channel != -1) {
+                        auto_option.parent().val(channel);
+                        self.RCchannels = null;
+                    }
+                } else {
+                    self.RCchannels = RCchannels;
+                }
+            } else {
+                self.RCchannels = null;
             }
         }
 
         // enable data pulling
         GUI.interval_add('rc_pull', function () {
             MSP.send_message(MSPCodes.MSP_RC, false, false, update_ui);
-        }, 100, true);
+        }, 250, true);
 
         // status data pulled via separate timer with static speed
         GUI.interval_add('status_pull', function () {
             MSP.send_message(MSPCodes.MSP_STATUS);
-        }, 250, true);
+        }, 500, true);
 
         GUI.content_ready(callback);
     }

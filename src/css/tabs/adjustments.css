@@ -53,6 +53,14 @@
     /* outline: 1px solid silver; */
     border-radius: 3px;
     border: 1px solid var(--subtleAccent);
+    padding: 1px 0;
+}
+
+.tab-adjustments .adjustment input {
+    width: calc(100% - 10px);
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+    text-align: right;
 }
 
 .tab-adjustments .adjustment td {
@@ -70,7 +78,7 @@
 
 .tab-adjustments .adjustment .channelInfo {
     width: 5%;
-    padding: 0px 10px;
+    padding: 10px 10px 5px 10px;
 }
 
 .tab-adjustments .adjustment .channelInfo .limits {
@@ -97,17 +105,27 @@
     z-index: 1000;
 }
 
-.tab-adjustments .adjustment .functionSelection {
-    width: 5%;
+.tab-adjustments .adjustment td.function {
+    padding: 10px 10px 5px 10px;
 }
 
-.tab-adjustments .adjustment .adjustmentSlot {
-    width: 5%;
+.tab-adjustments .adjustment .function td {
+    border: 0px;
+    padding: 0px 10px 10px 0px;
+    text-align: left;
 }
 
-.tab-adjustments .adjustment .functionSwitchChannel {
-    width: 5%;
+.tab-adjustments .adjustment .function input,
+.tab-adjustments .adjustment .function select {
+    width: 100%;
+    padding: 1px 0;
 }
+
+.tab-adjustments .adjustment .function .functionStepSize,
+.tab-adjustments .adjustment .function .functionChannel {
+    text-align: right;
+}
+
 
 @media all and (max-width: 575px) {
     .tab-adjustments .overflow {
