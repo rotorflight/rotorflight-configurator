@@ -2,7 +2,7 @@
     display: none;
 }
 
-.tab-adjustments .range .marker, .tab-adjustments .channel-slider .noUi-connect {
+.tab-adjustments .channel-slider .noUi-connect {
     background: var(--accent);
 }
 
@@ -97,12 +97,20 @@
 .tab-adjustments .adjustment .range .marker {
     position: absolute;
     left: 50%;
-    top: 27px;
-    height: 13px;
-    width: 6px;
+    top: 26px;
+    height: 10px;
+    width: 5px;
     margin-left: -3px;
     border-radius: 3px;
     z-index: 1000;
+}
+
+.tab-adjustments .adjustment .range .enaMarker {
+    background: rgba(255, 0, 0, 0.6);
+}
+
+.tab-adjustments .adjustment .range .adjMarker {
+    background: rgba(0, 255, 0, 0.6);
 }
 
 .tab-adjustments .adjustment td.function {
