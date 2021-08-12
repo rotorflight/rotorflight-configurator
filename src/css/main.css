@@ -2395,15 +2395,27 @@ input {
     box-shadow: none;
 }
 
-.noUi-handle {
+.noUi-horizontal .noUi-handle {
     background: var(--sideBackground);
     border-color: var(--subtleAccent);
+    border-radius: 15px;
     box-shadow: none;
+    width: 28px;
+    height: 28px;
+    left: -14px;
+    top: -6px;
 }
 
 .noUi-handle:before,
 .noUi-handle:after {
+    border-color: var(--subtleAccent);
     background-color: var(--subtleAccent);
+    height: 10px;
+    width: 4px;
+    top: 17px;
+    left: 11px;
+    border: 1px;
+    border-radius: 2px;
 }
 
 .noUi-background {
