@@ -287,11 +287,14 @@ TABS.adjustments.initialize = function (callback) {
             const percentage = (channelPosition - 900) / (2100-900) * 100;
 
             $('.adjustments .adjustment').each( function () {
-                const auxChannelCandidateIndex = $(this).find('.channel').val();
-                if (auxChannelCandidateIndex != auxChannelIndex) {
-                    return;
+                const enaChannelIndex = $(this).find('.enaChannel').val();
+                if (enaChannelIndex == auxChannelIndex) {
+                    $(this).find('.range .enaMarker').css('left', percentage + '%');
                 }
-                $(this).find('.range .marker').css('left', percentage + '%');
+                const adjChannelIndex = $(this).find('.adjChannel').val();
+                if (adjChannelIndex == auxChannelIndex) {
+                    $(this).find('.range .adjMarker').css('left', percentage + '%');
+                }
             });
         }
 
@@ -300,7 +303,6 @@ TABS.adjustments.initialize = function (callback) {
             auto_select_channel();
 
             let auxChannelCount = FC.RC.active_channels - self.PRIMARY_CHANNEL_COUNT;
-
             for (let index = 0; index < auxChannelCount; index++) {
                 update_marker(index, FC.RC.channels[index + self.PRIMARY_CHANNEL_COUNT]);
             }
