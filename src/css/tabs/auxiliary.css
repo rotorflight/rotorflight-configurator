@@ -15,7 +15,7 @@
     padding: 10px 5px;
 }
 
-.tab-auxiliary .range .marker, .tab-auxiliary .channel-slider .noUi-connect {
+.tab-auxiliary .channel-slider .noUi-connect {
     background: var(--accent);
     border-radius: 3px;
 }
@@ -175,10 +175,12 @@
 .tab-auxiliary .range .marker {
     position: absolute;
     left: 50%;
-    top: 27px;
-    height: 13px;
-    width: 6px;
+    top: 26px;
+    height: 10px;
+    width: 5px;
     margin-left: -3px;
+    border-radius: 3px;
+    background: rgba(255, 0, 0, 0.6);
     z-index: 1000;
 }
 
