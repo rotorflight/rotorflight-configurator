@@ -1,42 +1,28 @@
 'use strict';
 
-TABS.auxiliary = {};
+TABS.auxiliary = {
+    PRIMARY_CHANNEL_COUNT: 5,
+};
 
 TABS.auxiliary.initialize = function (callback) {
-    GUI.active_tab_ref = this;
-    GUI.active_tab = 'auxiliary';
-    let prevChannelsValues = null;
+    const self = this;
 
-    function get_mode_ranges() {
-        MSP.send_message(MSPCodes.MSP_MODE_RANGES, false, false,
-            semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41) ? get_mode_ranges_extra : get_box_ids);
+    if (GUI.active_tab != 'auxiliary') {
+        GUI.active_tab = 'auxiliary';
     }
 
-    function get_mode_ranges_extra() {
-        MSP.send_message(MSPCodes.MSP_MODE_RANGES_EXTRA, false, false, get_box_ids);
-    }
-
-    function get_box_ids() {
-        MSP.send_message(MSPCodes.MSP_BOXIDS, false, false, get_rssi_config);
-    }
-
-    function get_rssi_config() {
-        MSP.send_message(MSPCodes.MSP_RSSI_CONFIG, false, false, getRcData);
-    }
-
-    function getRcData() {
-        MSP.send_message(MSPCodes.MSP_RC, false, false, get_serial_config);
-    }
-
-    function get_serial_config() {
-        mspHelper.loadSerialConfig(load_html);
-    }
+    MSP.promise(MSPCodes.MSP_STATUS)
+        .then(() => MSP.promise(MSPCodes.MSP_MODE_RANGES))
+        .then(() => MSP.promise(MSPCodes.MSP_MODE_RANGES_EXTRA))
+        .then(() => MSP.promise(MSPCodes.MSP_BOXNAMES))
+        .then(() => MSP.promise(MSPCodes.MSP_BOXIDS))
+        .then(() => MSP.promise(MSPCodes.MSP_RSSI_CONFIG))
+        .then(() => MSP.promise(MSPCodes.MSP_RC))
+        .then(() => mspHelper.loadSerialConfig(load_html));
 
     function load_html() {
         $('#content').load("./tabs/auxiliary.html", process_html);
     }
-
-    MSP.send_message(MSPCodes.MSP_BOXNAMES, false, false, get_mode_ranges);
 
     function createMode(modeIndex, modeId) {
         const modeTemplate = $('#tab-auxiliary-templates .mode');
@@ -249,7 +235,7 @@ TABS.auxiliary.initialize = function (callback) {
     }
 
     function process_html() {
-        let auxChannelCount = FC.RC.active_channels - 5;
+        let auxChannelCount = FC.RC.active_channels - self.PRIMARY_CHANNEL_COUNT;
 
         configureRangeTemplate(auxChannelCount);
         configureLinkTemplate();
@@ -426,11 +412,6 @@ TABS.auxiliary.initialize = function (callback) {
             });
         }
 
-        // data pulling functions used inside interval timer
-        function get_rc_data() {
-            MSP.send_message(MSPCodes.MSP_RC, false, false, update_ui);
-        }
-
         function update_ui() {
             let hasUsedMode = false;
             for (let i = 0; i < FC.AUX_CONFIG.length; i++) {
@@ -489,54 +470,41 @@ TABS.auxiliary.initialize = function (callback) {
                 }
             }
 
-            auto_select_channel(FC.RC.channels, FC.RC.active_channels, FC.RSSI_CONFIG.channel);
+            auto_select_channel();
 
-            auxChannelCount = FC.RC.active_channels - 5;
-
-            for (let i = 0; i < (auxChannelCount); i++) {
-                update_marker(i, limit_channel(FC.RC.channels[i + 5]));
+            auxChannelCount = FC.RC.active_channels - self.PRIMARY_CHANNEL_COUNT;
+            for (let i = 0; i < auxChannelCount; i++) {
+                update_marker(i, limit_channel(FC.RC.channels[i + self.PRIMARY_CHANNEL_COUNT]));
             }
 
         }
 
-        /**
-         * Autodetect channel based on maximum deference with previous value
-         * minimum value to autodetect is 100
-         * @param RC_channels
-         * @param RC_channels
-         */
-        function auto_select_channel(RC_channels, activeChannels, RSSI_channel) {
+        function auto_select_channel() {
+
             const auto_option = $('.tab-auxiliary select.channel option[value="-1"]:selected');
-            if (auto_option.length === 0) {
-                prevChannelsValues = null;
-                return;
+
+            if (auto_option.length > 0) {
+                const RCchannels = FC.RC.channels.slice(self.PRIMARY_CHANNEL_COUNT, FC.RC.active_channels);
+                if (self.RCchannels) {
+                    let channel = -1;
+                    let chDelta = 100;
+                    for (let index = 0; index < RCchannels.length; index++) {
+                        let delta = Math.abs(RCchannels[index] - self.RCchannels[index]);
+                        if (delta > chDelta) {
+                            channel = index;
+                            chDelta = delta;
+                        }
+                    }
+                    if (channel != -1) {
+                        auto_option.parent().val(channel);
+                        self.RCchannels = null;
+                    }
+                } else {
+                    self.RCchannels = RCchannels;
+                }
+            } else {
+                self.RCchannels = null;
             }
-
-            const fillPrevChannelsValues = function () {
-                prevChannelsValues = RC_channels.slice(0); //clone array
-            };
-
-            if (!prevChannelsValues || RC_channels.length === 0) return fillPrevChannelsValues();
-
-            let diff_array = RC_channels.map(function(currentValue, index) {
-                return Math.abs(prevChannelsValues[index] - currentValue);
-            });
-
-            diff_array = diff_array.slice(0, activeChannels);
-
-            const largest = diff_array.reduce(function(x,y){
-                return (x > y) ? x : y;
-            }, 0);
-
-            //minimum change to autoselect is 100
-            if (largest < 100) return fillPrevChannelsValues();
-
-            const indexOfMaxValue = diff_array.indexOf(largest);
-            if (indexOfMaxValue >= 5 && indexOfMaxValue != RSSI_channel - 1){ //set channel
-                auto_option.parent().val(indexOfMaxValue - 5);
-            }
-
-            return fillPrevChannelsValues();
         }
 
         let hideUnusedModes = false;
@@ -555,12 +523,14 @@ TABS.auxiliary.initialize = function (callback) {
         update_ui();
 
         // enable data pulling
-        GUI.interval_add('aux_data_pull', get_rc_data, 50);
+        GUI.interval_add('aux_data_pull', function () {
+            MSP.send_message(MSPCodes.MSP_RC, false, false, update_ui);
+        }, 200, false);
 
         // status data pulled via separate timer with static speed
         GUI.interval_add('status_pull', function () {
             MSP.send_message(MSPCodes.MSP_STATUS);
-        }, 250, true);
+        }, 500, true);
 
         GUI.content_ready(callback);
     }
