@@ -1,7 +1,6 @@
 'use strict';
 
 TABS.setup = {
-    yaw_fix: 0.0
 };
 
 TABS.setup.initialize = function (callback) {
@@ -11,33 +10,25 @@ TABS.setup.initialize = function (callback) {
         GUI.active_tab = 'setup';
     }
 
-    function load_status() {
-        MSP.send_message(MSPCodes.MSP_STATUS, false, false, load_html);
-    }
+    Promise.resolve(true)
+        .then(() => { return MSP.promise(MSPCodes.MSP_STATUS); })
+        .then(() => { return MSP.promise(MSPCodes.MSP_ARMING_CONFIG); })
+        .then(() => { return MSP.promise(MSPCodes.MSP_FEATURE_CONFIG); })
+        .then(() => { return MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG); })
+        .then(() => { load_html(); });
 
     function load_html() {
         $('#content').load("./tabs/setup.html", process_html);
     }
-
-    load_status();
 
     function process_html() {
 
         // translate to user-selected language
         i18n.localizePage();
 
-        const backupButton = $('a.backupSettings');
-
-        if (semver.lt(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MIN_SUPPORTED_BACKUP_RESTORE)) {
-            backupButton.addClass('disabled');
-            $('#content .restore').addClass('disabled');
-
-            GUI.log(i18n.getMessage('initialSetupBackupAndRestoreApiVersion', [FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MIN_SUPPORTED_BACKUP_RESTORE]));
-        }
-
         // saving and uploading an imaginary config to hardware is a bad idea
         if (CONFIGURATOR.virtualMode) {
-            backupButton.addClass('disabled');
+            $('a.backupSettings').addClass('disabled');
         }
 
         // check if we have accelerometer and magnetometer
@@ -51,21 +42,11 @@ TABS.setup.initialize = function (callback) {
             $('default_btn').addClass('disabled');
         }
 
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_40)) {
-            if (isExpertModeEnabled()) {
-                $('.initialSetupRebootBootloader').show();
-            } else {
-                $('.initialSetupRebootBootloader').hide();
-            }
-
-            $('a.rebootBootloader').click(function () {
-                const buffer = [];
-                buffer.push(mspHelper.REBOOT_TYPES.BOOTLOADER);
-                MSP.send_message(MSPCodes.MSP_SET_REBOOT, buffer, false);
-            });
-        } else {
-            $('.initialSetupRebootBootloader').hide();
-        }
+        $('a.rebootBootloader').click(function () {
+            const buffer = [];
+            buffer.push(mspHelper.REBOOT_TYPES.BOOTLOADER);
+            MSP.send_message(MSPCodes.MSP_SET_REBOOT, buffer, false);
+        });
 
         // UI Hooks
         $('a.calibrateAccel').click(function () {
@@ -85,7 +66,6 @@ TABS.setup.initialize = function (callback) {
 
                 GUI.timeout_add('button_reset', function () {
                     GUI.interval_resume('setup_data_pull');
-
                     GUI.log(i18n.getMessage('initialSetupAccelCalibEnded'));
                     _self.removeClass('calibrating');
                     $('#accel_calib_running').hide();
@@ -134,6 +114,38 @@ TABS.setup.initialize = function (callback) {
                     TABS.setup.initialize();
                 });
             });
+        });
+
+        const dialogConfirmArming = $('.dialogConfirmArming')[0];
+        const enableArmingSwitch = $('input[id="initialSetupEnableArming"]');
+
+        enableArmingSwitch.prop('checked', !FC.CONFIG.armingDisabled);
+
+        enableArmingSwitch.change(function () {
+            if (enableArmingSwitch.prop('checked')) {
+                dialogConfirmArming.showModal();
+            }
+            else {
+                mspHelper.setArmingEnabled(false);
+            }
+        });
+
+        $('.dialogConfirmArming-cancelbtn').click(function() {
+            dialogConfirmArming.close();
+            enableArmingSwitch.prop('checked', false).change();
+        });
+
+        $('.dialogConfirmArming-confirmbtn').click(function() {
+            dialogConfirmArming.close();
+            mspHelper.setArmingEnabled(true);
+        });
+
+        const enableMotorOverrideSwitch = $('input[id="initialSetupEnableMotorOverride"]');
+
+        enableMotorOverrideSwitch.prop('checked', !FC.CONFIG.motorOverrideDisabled);
+
+        enableMotorOverrideSwitch.change(function () {
+            FC.CONFIG.motorOverrideDisabled = !enableMotorOverrideSwitch.prop('checked');
         });
 
         $('a.backupSettings').click(function () {
