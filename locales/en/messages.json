@@ -1257,6 +1257,24 @@
     "initialSetupEepromSaved": {
         "message": "EEPROM <span class=\"message-positive\">saved</span>"
     },
+    "initialSetupDangerText": {
+        "message": "<strong>Note:</strong> In order to prevent injury <strong>remove ALL rotor blades</strong> before enabling any arming features.<strong class=\"message-negative\"><strong class=\"message-negative\"><br/>NEVER FLY YOUR CRAFT WITH THE CONFIGURATOR CONNECTED!</strong>"
+    },
+    "initialSetupDangerTitle": {
+        "message": "Arming and Motor Control"
+    },
+    "initialSetupEnableArming": {
+        "message": "<strong>Enable Arming</strong>"
+    },
+    "initialSetupEnableArmingText": {
+        "message": "Enable arming the craft with the transmitter while the Configurator is connected. Arming your craft will allow the motors to spool up."
+    },
+    "initialSetupEnableMotorOverride": {
+        "message": "<strong>Enable Motor Override</strong>"
+    },
+    "initialSetupEnableMotorOverrideText": {
+        "message": "Enable the motor override feature in the Motors tab. Setting motor override will make the motors to spool up."
+    },
     "featureNone": {
         "message": "&lt;Select One&gt;"
     },
@@ -6663,6 +6681,18 @@
         "message": "Reset"
     },
     "dialogConfirmResetClose": {
+        "message": "Cancel"
+    },
+    "dialogConfirmArmingTitle": {
+        "message": "Confirm Arming"
+    },
+    "dialogConfirmArmingNote": {
+        "message": "WARNING: Are you sure you want to <strong>enable arming</strong> while Configurator is connected?"
+    },
+    "dialogConfirmArmingConfirm": {
+        "message": "Enable"
+    },
+    "dialogConfirmArmingClose": {
         "message": "Cancel"
     },
     "modeCameraWifi": {
