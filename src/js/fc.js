@@ -25,7 +25,6 @@ const INITIAL_CONFIG = {
     armingDisableCount:               0,
     armingDisableFlags:               0,
     armingDisabled:                   false,
-    runawayTakeoffPreventionDisabled: false,
     boardIdentifier:                  "",
     boardVersion:                     0,
     targetCapabilities:               0,
