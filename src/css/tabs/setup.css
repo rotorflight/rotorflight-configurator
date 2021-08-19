@@ -1,17 +1,26 @@
-.tab-setup .ui-grid-col {
-    margin-bottom: 0;
-}
+
 .tab-setup .content_wrapper {
     position: initial;
+}
+
+.tab-setup .full-width {
+    width: 100%;
 }
 .tab-setup .default_btn {
     margin-bottom: 10px;
 }
+
 .tab-setup .cell_setup {
     border-bottom: solid 1px var(--subtleAccent);
     padding-bottom: 8px;
     padding-top: 7px;
 }
+
+.tab-setup .data-loading-setup {
+    width: 100%;
+    height: 100%;
+}
+
 #accel_calib_running, #mag_calib_running {
     display: none;
     width: 99%;
@@ -30,10 +39,68 @@
     transition: all ease 0.2s;
     text-decoration:none;
 }
-.tab-setup  .data-loading-setup {
-    width: 100%;
-    height: 100%;
+
+.tab-setup .danger-note {
+    line-height: 22px;
+    font-size: 14px;
+    padding: 10px 10px 10px 10px;
 }
+
+.tab-setup .gui_warning {
+    background: #f1f1f1;
+}
+
+.tab-setup .danger {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 1px;
+    border: 0;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.tab-setup .danger th {
+    height: 10px;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border: 0;
+    padding: 5px 0 2px 0;
+}
+
+.tab-setup .danger td {
+    padding: 8px 5px 2px 5px;
+    text-align: left;
+}
+
+.tab-setup .danger tr .td1 {
+    width: 50px;
+    padding-right: 14px;
+}
+
+.tab-setup .danger tr td.td2 {
+    padding-right: 14px;
+}
+
+.tab-setup .danger tr td.td3 {
+    width: 75%;
+}
+
+.tab-setup .danger tr:last-child td {
+    padding-bottom: 15px;
+}
+
+.tab-setup .danger tr td.border {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--subtleAccent);
+}
+
+.tab-setup .gui_box_titlebar .helpicon {
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
 
 @media all and (max-width: 575px) {
     .tab-setup .cell_setup {
@@ -43,9 +110,6 @@
     }
     .tab-setup .default_btn {
         margin-bottom: 5px;
-    }
-    .tab-setup .model-and-info {
-        height: 200px;
     }
 }
 
