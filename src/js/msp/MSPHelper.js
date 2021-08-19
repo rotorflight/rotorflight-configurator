@@ -2143,21 +2143,8 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.COPY_PROFILE.srcProfile);
             break;
         case MSPCodes.MSP_ARMING_DISABLE:
-            let value;
-            if (FC.CONFIG.armingDisabled) {
-                value = 1;
-            } else {
-                value = 0;
-            }
-            buffer.push8(value);
-
-            if (FC.CONFIG.runawayTakeoffPreventionDisabled) {
-                value = 1;
-            } else {
-                value = 0;
-            }
-            // This will be ignored if `armingDisabled` is true
-            buffer.push8(value);
+            buffer.push8(FC.CONFIG.armingDisabled ? 1 : 0);
+            buffer.push8(0); // was FC.CONFIG.runawayTakeoffPreventionDisabled
 
             break;
         case MSPCodes.MSP_SET_RTC:
@@ -2736,33 +2723,20 @@ MspHelper.prototype.sendRxFailConfig = function(onCompleteCallback) {
     }
 };
 
-MspHelper.prototype.setArmingEnabled = function(doEnable, disableRunawayTakeoffPrevention, onCompleteCallback) {
-    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)
-        && (FC.CONFIG.armingDisabled === doEnable || FC.CONFIG.runawayTakeoffPreventionDisabled !== disableRunawayTakeoffPrevention)) {
+MspHelper.prototype.setArmingEnabled = function(doEnable, onCompleteCallback) {
+    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37) &&
+        (FC.CONFIG.armingDisabled === doEnable)) {
 
         FC.CONFIG.armingDisabled = !doEnable;
-        FC.CONFIG.runawayTakeoffPreventionDisabled = disableRunawayTakeoffPrevention;
 
         MSP.send_message(MSPCodes.MSP_ARMING_DISABLE, mspHelper.crunch(MSPCodes.MSP_ARMING_DISABLE), false, function () {
-            if (doEnable) {
-                GUI.log(i18n.getMessage('armingEnabled'));
-                if (disableRunawayTakeoffPrevention) {
-                    GUI.log(i18n.getMessage('runawayTakeoffPreventionDisabled'));
-                } else {
-                    GUI.log(i18n.getMessage('runawayTakeoffPreventionEnabled'));
-                }
-            } else {
-                GUI.log(i18n.getMessage('armingDisabled'));
-            }
-
-            if (onCompleteCallback) {
+            GUI.log(i18n.getMessage(doEnable ? 'armingEnabled' : 'armingDisabled'));
+            if (onCompleteCallback)
                 onCompleteCallback();
-            }
         });
     } else {
-        if (onCompleteCallback) {
+        if (onCompleteCallback)
             onCompleteCallback();
-        }
     }
 };
 
