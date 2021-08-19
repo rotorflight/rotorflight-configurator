@@ -397,7 +397,6 @@ const serial = {
 
         self.connected = false;
         FC.CONFIG.armingDisabled = false;
-        FC.CONFIG.runawayTakeoffPreventionDisabled = false;
 
         let message = 'error: UNDEFINED';
         if (self.connectionType === 'tcp') {

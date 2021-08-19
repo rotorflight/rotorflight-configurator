@@ -97,7 +97,7 @@ function initializeSerialBackend() {
                         finishClose(toggleStatus);
                     }
 
-                    mspHelper.setArmingEnabled(true, false, onFinishCallback);
+                    mspHelper.setArmingEnabled(true, onFinishCallback);
                 }
             }
        }
@@ -458,7 +458,7 @@ function processName() {
         GUI.log(i18n.getMessage('craftNameReceived', [FC.CONFIG.name]));
 
         FC.CONFIG.armingDisabled = false;
-        mspHelper.setArmingEnabled(false, false, setRtc);
+        mspHelper.setArmingEnabled(false, setRtc);
     });
 }
 
