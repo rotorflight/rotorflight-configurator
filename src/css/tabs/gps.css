@@ -58,14 +58,6 @@
     position: relative;
 }
 
-.tab-gps .full-height {
-    height: 100%;
-}
-
-.tab-gps .full-width {
-    width: 100%;
-}
-
 .tab-gps progress {
     width: 100%;
     border-radius: 3px;
