@@ -6,21 +6,65 @@
         </div>
 
         <div class="grid-row">
-            <div class="table_overflow">
-                <table class="fields">
-                    <tr class="header">
-                        <th i18n="servoNumber"></th>
-                        <th i18n="servoMid"></th>
-                        <th i18n="servoMin"></th>
-                        <th i18n="servoMax"></th>
-                        <th i18n="servoRate"></th>
-                        <th i18n="servoTrim"></th>
-                        <th i18n="servoSpeed"></th>
-                        <th i18n="servoReverse"></th>
-                        <th i18n="servoPosition"></th>
-                    </tr>
-                </table>
-                <div class="clear-both"></div>
+            <div class="grid-col full-width">
+                <div class="gui_box">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="servoConfiguration"></div>
+                    </div>
+                    <div>
+                        <table class="servoConfig">
+                            <thead>
+                                <tr class="trhead">
+                                    <th i18n="servoNumber"></th>
+                                    <th i18n="servoMid"></th>
+                                    <th i18n="servoMin"></th>
+                                    <th i18n="servoMax"></th>
+                                    <th i18n="servoRate"></th>
+                                    <th i18n="servoTrim"></th>
+                                    <th i18n="servoSpeed"></th>
+                                    <th i18n="servoReverse"></th>
+                                    <th i18n="servoSignal"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- ROWS GENERATED HERE -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-row margin-top">
+            <div class="grid-col full-width">
+                <div class="note servoOverrideNote">
+                    <p i18n="servoOverrideNote"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="grid-col full-width">
+                <div class="gui_box">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="servoOverride"></div>
+                    </div>
+                    <div>
+                        <table class="servoOverride">
+                            <thead>
+                                <tr class="trhead">
+                                    <th i18n="servoNumber"></th>
+                                    <th i18n="servoOverrideEnable"></th>
+                                    <th i18n="servoOverrideAngle"></th>
+                                    <th i18n="servoOverrideSlider"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- ROWS GENERATED HERE -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -33,3 +77,53 @@
     </div>
 
 </div>
+
+<div id="tab-servos-templates">
+
+    <table class="servoConfigTemplate">
+        <tbody>
+            <tr>
+                <td><span id="index"></span></td>
+                <td><input id="mid" type="number" min="375" max="2250" /></td>
+                <td><input id="min" type="number" min="-1000" max="1000" /></td>
+                <td><input id="max" type="number" min="-1000" max="1000" /></td>
+                <td><input id="rate" type="number" min="0" max="2500" /></td>
+                <td><input id="trim" type="number" min="-250" max="250" /></td>
+                <td><input id="speed" type="number" min="0" max="10000" /></td>
+                <td><input id="reversed" type="checkbox" class="toggle" /></td>
+                <td><div class="meter">
+                        <div class="meter-bar">
+                            <div class="meter-label"></div>
+                            <div class="meter-fill">
+                                <div class="meter-label"></div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="servoOverrideTemplate">
+        <tbody>
+            <tr>
+                <td><span class="servoOverrideIndex"></span></td>
+                <td>
+                    <div class="servoOverrideEnable">
+                        <input type="checkbox" class="toggle"/>
+                    </div>
+                </td>
+                <td>
+                    <div class="servoOverrideInput">
+                        <input type="number" min="-90" max="90" step="1" value="0"/>
+                    </div>
+                </td>
+                <td>
+                    <div class="servoOverrideSlider pips-range"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
