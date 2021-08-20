@@ -1,136 +1,6 @@
 
-.tab-servos .title {
-    margin-top: 0;
-    line-height: 30px;
-    text-align: center;
-    font-weight: bold;
-    border: 1px solid var(--subtleAccent);
-    border-bottom: 0;
-    background-color: var(--quietHeader);
-    color: var(--quietText);
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-}
-
-.tab-servos table {
-    margin-bottom: 10px;
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.tab-servos table, .tab-servos table th, .tab-servos table td {
-    border-left: 0;
-    border-right: 0;
-    border-top: 0;
-}
-
-.tab-servos input[type="number"]::-webkit-inner-spin-button {
-    border: 0;
-}
-
-.tab-servos table th {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    text-align: center;
-    border: 1px solid var(--subtleAccent);
-    line-height: 16px;
-}
-
-.tab-servos table td {
-    border-bottom: 1px solid var(--subtleAccent);
-    padding: 6px 5px 7px 5px;
-    border-left: 1px solid var(--subtleAccent);
-    border-right: 1px solid var(--subtleAccent);
-}
-
-.tab-servos table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.tab-servos table .header {
-    font-weight: bold;
-    text-align: center;
-    background-color: #ececec;
-}
-
-.tab-servos table input {
-    border: 1px solid var(--subtleAccent);
-    border-radius: 3px;
-}
-
-.tab-servos table select {
-    border: 1px solid var(--subtleAccent);
-    border-radius: 3px;
-}
-
-.tab-servos table input[type="number"] {
-    display: block;
-    width: 100%;
-    height: 20px;
-    line-height: 20px;
-    text-align: right;
-}
-
-.tab-servos table input[type="checkbox"] {
-    width: 100%;
-    line-height: 20px;
-    text-align: center;
-}
-
-.tab-servos table td:nth-child(1) {
-    width: 50px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.tab-servos table td:nth-child(2) {
-    width: 80px;
-}
-
-.tab-servos table td:nth-child(3) {
-    width: 80px;
-}
-
-.tab-servos table td:nth-child(4) {
-    width: 80px;
-}
-
-.tab-servos table td:nth-child(5) {
-    width: 80px;
-}
-
-.tab-servos table td:nth-child(6) {
-    width: 80px;
-}
-
-.tab-servos table td:nth-child(7) {
-    width: 80px;
-}
-
-.tab-servos table td:nth-child(8) {
-    width: 60px;
-    text-align: center;
-}
-
-.tab-servos .wide {
-    width: 120px;
-} 
-
-.tab-servos .short {
-    width: 40px;
-} 
-
-.tab-servos .table_overflow {
-    overflow: auto;
-}
-
-@media all and (max-width: 575px) {
-    .tab-servos table th {
-        min-width: 30px;
-    }
-    .tab-servos .min, .tab-servos .max, .tab-servos .mid {
-        min-width: 60px;
-    }
+#tab-servos-templates {
+    display: none;
 }
 
 .tab-servos {
@@ -156,11 +26,115 @@
 .tab-servos .gui_box span {
     font-style: normal;
     font-weight: normal;
-    line-height: 19px;
-    color: #4f4f4f;
-    font-size: 11px;
+    line-height: 20px;
+    color: black;
+    font-size: 12px;
 }
 
+.tab-servos input {
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+}
+
+.tab-servos select {
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+}
+
+.tab-servos input[type="number"] {
+    display: block;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: right;
+}
+
+.tab-servos input[type="number"]::-webkit-inner-spin-button {
+    border: 0;
+}
+
+.tab-servos input[type="checkbox"] {
+    width: 100%;
+    line-height: 20px;
+    text-align: center;
+}
+
+.tab-servos .servoConfig {
+    width: 100%;
+    border: 0;
+    border-collapse: collapse;
+    margin-top: 2px;
+}
+
+.tab-servos .servoConfig .trhead {
+    color: var(--quietText);
+    background-color: var(--button-background);
+    text-align: center;
+    font-size: 11px;
+    line-height: 16px;
+    height: 22px;
+    border-top: 1px solid var(--boxBackground);
+}
+
+@media all and (max-width: 575px) {
+    .tab-servos .servoConfig th {
+        min-width: 30px;
+    }
+}
+
+.tab-servos .servoConfig td {
+    padding: 6px 5px 7px 5px;
+    border: 1px solid var(--subtleAccent);
+}
+
+.tab-servos .servoConfig tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+.tab-servos .servoConfig tr:last-child td {
+    border-bottom: 0;
+}
+
+.tab-servos .servoConfig td:nth-child(1) {
+    width: 50px;
+    height: 28px;
+    text-align: center;
+    font-weight: bold;
+    border-left: 0;
+}
+
+.tab-servos .servoConfig td:nth-child(2) {
+    width: 80px;
+}
+
+.tab-servos .servoConfig td:nth-child(3) {
+    width: 80px;
+}
+
+.tab-servos .servoConfig td:nth-child(4) {
+    width: 80px;
+}
+
+.tab-servos .servoConfig td:nth-child(5) {
+    width: 80px;
+}
+
+.tab-servos .servoConfig td:nth-child(6) {
+    width: 80px;
+}
+
+.tab-servos .servoConfig td:nth-child(7) {
+    width: 80px;
+}
+
+.tab-servos .servoConfig td:nth-child(8) {
+    width: 60px;
+    text-align: center;
+}
+
+.tab-servos .servoConfig td:last-child {
+    border-right: 0;
+}
 
 .tab-servos .meter-bar {
     position: relative;
@@ -193,8 +167,78 @@
 }
 
 
-@media all and (max-width: 575px) {
+.tab-servos .servoOverrideNote {
+    padding: 10px 10px;
+}
 
+.tab-servos .servoOverride {
+    width: 100%;
+    border: 0;
+    border-collapse: collapse;
+    margin-top: 2px;
+}
+
+.tab-servos .servoOverride .trhead {
+    color: var(--quietText);
+    background-color: var(--button-background);
+    text-align: center;
+    font-size: 11px;
+    line-height: 16px;
+    height: 22px;
+    border-top: 1px solid var(--boxBackground);
+}
+
+.tab-servos .servoOverride td {
+    padding: 6px 5px 7px 5px;
+    border: 1px solid var(--subtleAccent);
+}
+
+.tab-servos .servoOverride td:nth-child(1) {
+    width: 50px;
+    font-weight: bold;
+    text-align: center;
+    border-left: 0;
+}
+
+.tab-servos .servoOverride td:nth-child(2) {
+    width: 80px;
+    text-align: center;
+}
+
+.tab-servos .servoOverride td:nth-child(3) {
+    width: 80px;
+    text-align: left;
+}
+
+.tab-servos .servoOverride td:nth-child(4) {
+    height: 75px;
+    padding: 2px 20px 2px 20px;
+    text-align: left;
+    border-right: 0;
+}
+
+.tab-servos .servoOverride tr:last-child td {
+    border-bottom: 0;
+}
+
+.tab-servos .servoOverrideSlider {
+    margin-top: -20px;
+}
+
+.tab-servos .servoOverrideSlider .noUi-pips {
+    padding: 5px 0 0 0;
+}
+
+.tab-servos .servoOverrideSlider .noUi-pips .noUi-marker-large {
+    height: 10px;
+}
+
+.tab-servos .servoOverrideSlider .noUi-pips .noUi-value-large {
+    padding-top: 15px;
+}
+
+
+@media all and (max-width: 575px) {
     .tab-servos .gui_box {
         min-height: auto;
     }

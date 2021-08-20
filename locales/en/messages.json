@@ -2698,7 +2698,9 @@
     "transponderEepromSaved": {
         "message": "EEPROM <span class=\"message-positive\">saved</span>"
     },
-
+    "servoConfiguration":{
+        "message": "Servo Configuration"
+    },
     "servoNumber": {
         "message": "Servo"
     },
@@ -2723,10 +2725,24 @@
     "servoReverse": {
         "message": "Reverse"
     },
-    "servoPosition": {
-        "message": "Position"
+    "servoSignal": {
+        "message": "PWM Signal"
     },
-
+    "servoOverrideNote":{
+        "message": "<strong>Note.</strong> Servo Override forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset in reboot."
+    },
+    "servoOverride":{
+        "message": "Servo Override"
+    },
+    "servoOverrideEnable":{
+        "message": "Enable"
+    },
+    "servoOverrideAngle":{
+        "message": "Angle"
+    },
+    "servoOverrideSlider":{
+        "message": ""
+    },
     "servosConfiguration":{
         "message": "Configuration"
     },
