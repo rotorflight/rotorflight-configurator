@@ -158,8 +158,6 @@ TABS.servos.initialize = function (callback) {
 
         function update_servo_bars() {
 
-            const fullLength = 250;
-
             let rangeMin, rangeMax, length, margin;
 
             for (let i = 0; i < FC.SERVO_DATA.length; i++) {
@@ -175,15 +173,13 @@ TABS.servos.initialize = function (callback) {
                 }
 
                 const range  = rangeMax - rangeMin;
-                const length = fullLength * (servoValue - rangeMin) / range;
-                const margin = fullLength - length;
+                const percnt = 100 * (servoValue - rangeMin) / range;
+                const length = Math.max(Math.min(percnt, 100), 0);
+                const margin = 100 - length;
 
-                $('.meter-bar', servoMeter).css({
-                    'width' : `${fullLength}`,
-                });
                 $('.meter-fill', servoMeter).css({
-                    'width' : `${length}px`,
-                    'margin-right' : `${margin}px`,
+                    'width'        : `${length}%`,
+                    'margin-right' : `${margin}%`,
                 });
                 $('.meter-label', servoMeter).text(servoValue);
             }
