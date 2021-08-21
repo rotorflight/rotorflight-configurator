@@ -147,6 +147,7 @@ const FC = {
     SERVO_CONFIG: null,
     SERVO_DATA: null,
     SERVO_RULES: null,
+    SERVO_OVERRIDE: null,
     TRANSPONDER: null,
     TUNING_SLIDERS: null,
     VOLTAGE_METERS: null,
@@ -273,6 +274,7 @@ const FC = {
 
         this.MOTOR_DATA =               Array.from({length: 8});
         this.SERVO_DATA =               Array.from({length: 8});
+        this.SERVO_OVERRIDE =           Array.from({length: 8});
 
         this.MOTOR_TELEMETRY_DATA = {
             rpm:                        [0, 0, 0, 0, 0, 0, 0, 0],
