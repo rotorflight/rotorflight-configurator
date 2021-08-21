@@ -122,6 +122,12 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.SERVO_DATA[i] = data.readU16();
                 }
                 break;
+            case MSPCodes.MSP_SERVO_OVERRIDE:
+                const overrideCount = data.byteLength / 2;
+                for (let i = 0; i < overrideCount; i++) {
+                    FC.SERVO_OVERRIDE[i] = data.read16();
+                }
+                break;
             case MSPCodes.MSP_MOTOR:
                 const motorCount = data.byteLength / 2;
                 for (let i = 0; i < motorCount; i++) {
@@ -571,6 +577,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             case MSPCodes.MSP_SET_SERVO_CONFIGURATION:
                 console.log('Servo Configuration saved');
+                break;
+            case MSPCodes.MSP_SET_SERVO_OVERRIDE:
+                console.log('Servo Override set');
                 break;
             case MSPCodes.MSP_EEPROM_WRITE:
                 console.log('Settings Saved in EEPROM');
@@ -2340,6 +2349,17 @@ MspHelper.prototype.dataflashRead = function(address, blockSize, onDataCallback)
             onDataCallback(address, null);  // returning null to the callback forces a retry
         }
     }, true);
+};
+
+MspHelper.prototype.sendServoOverride = function(servoIndex, onCompleteCallback) {
+
+    const value = FC.SERVO_OVERRIDE[servoIndex];
+    const buffer = [];
+
+    buffer.push8(servoIndex)
+          .push16(value);
+
+    MSP.send_message(MSPCodes.MSP_SET_SERVO_OVERRIDE, buffer, false, onCompleteCallback);
 };
 
 MspHelper.prototype.sendServoConfig = function(servoIndex, onCompleteCallback) {
