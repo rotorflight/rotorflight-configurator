@@ -138,23 +138,14 @@
 
 .tab-servos .meter-bar {
     position: relative;
-    height: 16px;
+    height: 18px;
+    width: calc(100% - 20px);
     margin-left: 10px;
     margin-right: 10px;
     box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
     background-color: #E0E0E0;
     border-radius: 3px;
     border: 1px solid #F5F5F5;
-}
-
-.tab-servos .meter-label {
-    position: absolute;
-    top: 2px;
-    left: 110px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 10px;
-    color: #474747;
 }
 
 .tab-servos .meter-fill {
@@ -164,6 +155,20 @@
     text-align: center;
     border-radius: 3px;
     background-color: var(--accent);
+}
+
+.tab-servos .meter-label {
+    position: absolute;
+    top: 2px;
+    left: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    color: #474747;
+}
+
+.tab-servos .meter-fill-label {
+    color: #ffffff;
 }
 
 
