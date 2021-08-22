@@ -69,9 +69,6 @@ TABS.rates.initialize = function (callback) {
         $('.tab-rates .tab-container .tab').removeClass('active');
         $('.tab-rates .tab-container .' + self.activeSubtab).addClass('active');
 
-        $('.throttle input[name="mid"]').val(FC.RC_TUNING.throttle_MID.toFixed(2));
-        $('.throttle input[name="expo"]').val(FC.RC_TUNING.throttle_EXPO.toFixed(2));
-
         const ratesTypeListElement = $('.rates_type select[id="ratesType"]');
         self.RATES_TYPE_NAMES.forEach(function(element, index) {
             ratesTypeListElement.append(`<option value="${index}">${element}</option>`);
@@ -141,9 +138,6 @@ TABS.rates.initialize = function (callback) {
             default: // BetaFlight
                 break;
         }
-
-        FC.RC_TUNING.throttle_MID = parseFloat($('.throttle input[name="mid"]').val());
-        FC.RC_TUNING.throttle_EXPO = parseFloat($('.throttle input[name="expo"]').val());
     }
 
     function drawAxes(curveContext, width, height) {
@@ -203,8 +197,6 @@ TABS.rates.initialize = function (callback) {
         self.TAB_NAMES.forEach(function(element, index) {
             $('.tab-rates .tab-container .' + element).on('click', () => activateRateProfile(index));
         });
-
-        redrawThrottleCurve(true);
 
         // Getting the DOM elements for curve display
         const rcCurveElement = $('.rate_curve canvas#rate_curve_layer0').get(0);
@@ -283,97 +275,6 @@ TABS.rates.initialize = function (callback) {
         }
 
         $('.rates_change').on('input change', updateRates).trigger('input');
-
-        function redrawThrottleCurve(forced) {
-            if (!forced && !TABS.rates.checkThrottle()) return;
-
-            /*
-            Quadratic curve formula taken from:
-                https://stackoverflow.com/a/9195706/176210
-            */
-
-            function getQBezierValue(t, p1, p2, p3) {
-                const iT = 1 - t;
-                return iT * iT * p1 + 2 * iT * t * p2 + t * t * p3;
-            }
-
-            function getQuadraticCurvePoint(startX, startY, cpX, cpY, endX, endY, position) {
-                return {
-                    x:  getQBezierValue(position, startX, cpX, endX),
-                    y:  getQBezierValue(position, startY, cpY, endY),
-                };
-            }
-
-            /* --- */
-
-            // let global validation trigger and adjust the values first
-            const throttleMidE = $('.throttle input[name="mid"]');
-            const throttleExpoE = $('.throttle input[name="expo"]');
-            const mid = parseFloat(throttleMidE.val());
-            const expo = parseFloat(throttleExpoE.val());
-            const throttleCurve = $('.throttle .throttle_curve canvas').get(0);
-            const context = throttleCurve.getContext("2d");
-
-            // local validation to deal with input event
-            if (mid >= parseFloat(throttleMidE.prop('min')) &&
-                mid <= parseFloat(throttleMidE.prop('max')) &&
-                expo >= parseFloat(throttleExpoE.prop('min')) &&
-                expo <= parseFloat(throttleExpoE.prop('max'))) {
-                // continue
-            } else {
-                return;
-            }
-
-            throttleCurve.width = throttleCurve.height *
-                (throttleCurve.clientWidth / throttleCurve.clientHeight);
-
-            const canvasHeight = throttleCurve.height;
-            const canvasWidth = throttleCurve.width;
-
-            // math magic by englishman
-            const midx = canvasWidth * mid;
-            const midxl = midx * 0.5;
-            const midxr = (((canvasWidth - midx) * 0.5) + midx);
-            const midy = canvasHeight - (midx * (canvasHeight / canvasWidth));
-            const midyl = canvasHeight - ((canvasHeight - midy) * 0.5 *(expo + 1));
-            const midyr = (midy / 2) * (expo + 1);
-
-            let thrPercent = (FC.RC.channels[3] - 1000) / 1000,
-                thrpos = thrPercent <= mid
-                    ? getQuadraticCurvePoint(0, canvasHeight, midxl, midyl, midx, midy, thrPercent * (1.0 / mid))
-                    : getQuadraticCurvePoint(midx, midy, midxr, midyr, canvasWidth, 0, (thrPercent - mid) * (1.0 / (1.0 - mid)));
-
-            // draw
-            context.clearRect(0, 0, canvasWidth, canvasHeight);
-            context.beginPath();
-            context.moveTo(0, canvasHeight);
-            context.quadraticCurveTo(midxl, midyl, midx, midy);
-            context.moveTo(midx, midy);
-            context.quadraticCurveTo(midxr, midyr, canvasWidth, 0);
-            context.lineWidth = 2;
-            context.strokeStyle = '#ffbb00';
-            context.stroke();
-            context.beginPath();
-            context.arc(thrpos.x, thrpos.y, 4, 0, 2 * Math.PI);
-            context.fillStyle = context.strokeStyle;
-            context.fill();
-            context.save();
-            let fontSize = 10;
-            context.font = fontSize + "pt Verdana, Arial, sans-serif";
-            let realthr = thrPercent * 100.0,
-                expothr = 100 - (thrpos.y / canvasHeight) * 100.0,
-                thrlabel = Math.round(thrPercent <= 0 ? 0 : realthr) + "%" +
-                    " = " + Math.round(thrPercent <= 0 ? 0 : expothr) + "%",
-                textWidth = context.measureText(thrlabel);
-            context.fillStyle = '#000';
-            context.scale(textWidth / throttleCurve.clientWidth, 1);
-            context.fillText(thrlabel, 5, 5 + fontSize);
-            context.restore();
-        }
-
-        $('.throttle input').on('input change', () => setTimeout(() => redrawThrottleCurve(true), 0));
-
-        TABS.rates.throttleDrawInterval = setInterval(redrawThrottleCurve, 100);
 
         const dialogCopyProfile = $('.dialogCopyProfile')[0];
         const selectRateProfile = $('.selectRateProfile');
@@ -523,7 +424,6 @@ TABS.rates.cleanup = function (callback) {
     $(window).off('resize', $.proxy(this.updateRatesLabels, this));
 
     self.keepRendering = false;
-    clearInterval(TABS.rates.throttleDrawInterval);
 
     if (callback) callback();
 };
@@ -571,17 +471,6 @@ TABS.rates.checkRC = function() {
         }
     }
     return rateCurveUpdateRequired;
-};
-
-TABS.rates.checkThrottle = function() {
-    // Function monitors for change in the received rc throttle data and returns true if a change is detected.
-    if (!this.oldThrottle) {
-        this.oldThrottle = FC.RC.channels[3];
-        return true;
-    }
-    const updateRequired = this.oldThrottle !== FC.RC.channels[3];
-    this.oldThrottle = FC.RC.channels[3];
-    return updateRequired;
 };
 
 TABS.rates.updateRatesLabels = function() {
