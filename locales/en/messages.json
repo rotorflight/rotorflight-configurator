@@ -4535,7 +4535,7 @@
         "message": "Max Vel [deg/s]"
     },
     "rateSetupRatesCurve": {
-        "message": "Rates Preview"
+        "message": "Rates Curves"
     },
     "rateSetupRatesCurveTip": {
         "message": "Play with the rates and see how those affect the stick curve"
@@ -4543,10 +4543,6 @@
     "rateSetupRatesPreview": {
         "message": "Rates Preview"
     },
-    "rateSetupThrottleCurvePreview": {
-        "message": "Throttle Curve Preview"
-    },
-
     "gyroFilterSettings": {
         "message": "Gyro Filter Settings"
     },
