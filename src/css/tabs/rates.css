@@ -45,13 +45,6 @@
     border: 1px solid var(--subtleAccent);
 }
 
-.tab-rates .throttle_curve {
-    float: right;
-    width: 100%;
-    height: 100%;
-    background-size: 200%;
-}
-
 .tab-rates .curves {
     float: left;
     margin-right: 10px;
@@ -59,7 +52,7 @@
 
 .tab-rates .rate_curve {
     height: 100%;
-    min-height: 234px;
+    min-height: 288px;
     min-width: 200px;
     background-size: 200%;
 }
@@ -118,6 +111,7 @@
 
 .tab-rates table tr td:last-child {
     border-right: 0 solid var(--subtleAccent);
+    text-align: right;
 }
 
 .tab-rates table td {
@@ -281,10 +275,6 @@
     border-radius: 0;
 }
 
-.tab-rates .cf .throttleCurvePreview {
-    padding: 0;
-}
-
 .rates_roll {
     background-color: #FF8080;
 }
@@ -322,9 +312,9 @@
 }
 
 .tab-rates .spacer_left {
-    padding-left: 0;
     float: right;
-    width: calc(100% - 20px)
+    padding-left: 0;
+    width: calc(100% - 12px);
 }
 
 .tab-rates .numberspacer {
@@ -364,7 +354,7 @@
     font-weight: normal;
     line-height: 19px;
     color: #7d7d7d;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .tab-rates .resetbt {
@@ -443,7 +433,7 @@
 .tab-rates .rates_preview_cell {
     position: relative;
     width: 100%;
-    height: 362px;
+    height: 454px;
 }
 
 .tab-rates .rates_preview {
@@ -528,10 +518,9 @@
 
 
 @media only screen and (max-width: 1405px) {
-
-.tab-rates .subtab-rates .ratePreview.spacer_left {
-    width: 100%;
-}
+    .tab-rates .subtab-rates .ratePreview.spacer_left {
+        width: calc(100% - 10px);
+    }
 }
 
 .tab-rates .rates_titlebar .name-helpicon-flex {
