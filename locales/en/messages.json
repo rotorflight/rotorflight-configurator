@@ -2943,87 +2943,32 @@
     "motorsGovCollectivePrecompHelp": {
         "message": "Collective precompensation weight. Determines how much collective is mixed into the throttle output. This helps the governor to maintain the headspeed proactively. Usually 30..100"
     },
-    "motorsVoltage": {
-        "message": "Voltage:"
-    },
-    "motorsADrawing": {
-        "message": "Amperage:"
-    },
-    "motorsmAhDrawn": {
-        "message": "Amp. drawn:"
-    },
-    "motorsVoltageValue": {
-        "message": "$1 V"
-    },
-    "motorsADrawingValue": {
-        "message": "$1 A"
-    },
-    "motorsmAhDrawnValue": {
-        "message": "$1 mAh"
-    },
     "motorsText":{
         "message": "Motors"
     },
-    "motorNumber1":{
-        "message": "Motor - 1"
+    "motorInfo":{
+        "message": "Motor #$1"
     },
-    "motorNumber2":{
-        "message": "Motor - 2"
+    "motorThrottle": {
+        "message": "Throttle:"
     },
-    "motorNumber3":{
-        "message": "Motor - 3"
+    "motorRPM": {
+        "message": "RPM:"
     },
-    "motorNumber4":{
-        "message": "Motor - 4"
+    "motorVoltage": {
+        "message": "Voltage:"
     },
-    "motorNumber5":{
-        "message": "Motor - 5"
+    "motorCurrent": {
+        "message": "Current:"
     },
-    "motorNumber6":{
-        "message": "Motor - 6"
+    "motorCapacityUsed": {
+        "message": "Capacity:"
     },
-    "motorNumber7":{
-        "message": "Motor - 7"
+    "motorTemperature": {
+        "message": "Temp:"
     },
-    "motorNumber8":{
-        "message": "Motor - 8"
-    },
-    "motorsResetMaximumButton":{
-        "message": "Reset"
-    },
-    "motorsResetMaximum":{
-        "message": "Reset overtime maximum"
-    },
-    "motorsSensorGyroSelect":{
-        "message": "gyro"
-    },
-    "motorsSensorAccelSelect":{
-        "message": "accel"
-    },
-    "motorsTelemetryHelp": {
-        "message": "This numbers show the telemetry info received from the ESCs if available. It can show the actual speed of motors (in RPM), the error rate of the telemetry link and the temperature of the ESCs.",
-        "description": "Help text for the telemetry values in the motors tab."
-    },
-    "motorsRPM": {
-        "message": "R: {{motorsRpmValue}}",
-        "description": "To put under the motors in the motors tab. KEEP IT SHORT or not translate. Keep the letters as prefix. Shows the RPM of the motor if telemetry is available."
-    },
-    "motorsRPMError": {
-        "message": "E: {{motorsErrorValue}}%",
-        "description": "To put under the motors in the motors tab. KEEP IT SHORT or not translate. Shows the error of motor telemetry if available."
-    },
-    "motorsESCTemperature": {
-        "message": "T: {{motorsESCTempValue}}&deg;C",
-        "description": "To put under the motors in the motors tab. KEEP IT SHORT or not translate. Shows the ESC temperature if available."
-    },
-    "motorsMaster": {
-        "message": "Master"
-    },
-    "motorsNotice": {
-        "message": "<strong>Motor Test Mode / Arming Notice:</strong><br />Moving the sliders or arming your craft with the transmitter will cause the motors to <strong>spin up</strong>.<br />In order to prevent injury <strong class=\"message-negative\">remove ALL propellers</strong> before using this feature.<br />Enabling motor test mode will also temporarily disable Runaway Takeoff Prevention, to stop it from disarming the craft when bench testing without propellers.<br />"
-    },
-    "motorsEnableControl": {
-        "message": "<strong>I understand the risks</strong>, the propellers are removed - enable motor control and arming, and disable Runaway Takeoff Prevention."
+    "motorDshotError": {
+        "message": "Errors:"
     },
     "motorsDialogSettingsChanged": {
         "message": "Configuration changes have been detected.<br /><br /><strong class=\"message-negative-italic\">Motor Test Mode is disabled until the settings have seen saved.</strong>"

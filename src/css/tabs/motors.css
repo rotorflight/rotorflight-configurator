@@ -1,6 +1,14 @@
 
-.tab-motors .ui-grid-col {
-    margin-bottom: 0;
+#tab-motors-templates {
+    display: none;
+}
+
+.tab-motors {
+    position: relative;
+}
+
+.tab-motors span {
+    margin: 0;
 }
 
 .tab-motors select {
@@ -12,20 +20,16 @@
     border-radius: 3px;
 }
 
-.tab-motors {
-    position: relative;
-}
-
 .tab-motors .number input {
     width: 60px;
-    padding-left: 3px;
     height: 20px;
     line-height: 20px;
     text-align: left;
-    border-radius: 3px;
-    margin-right: 11px;
     font-size: 12px;
     font-weight: normal;
+    margin-right: 11px;
+    padding-left: 3px;
+    border-radius: 3px;
 }
 
 .tab-motors .number .disabled {
@@ -38,42 +42,9 @@
     margin-left: 0;
 }
 
-.tab-motors .disarm .checkboxPwm {
-    margin-top: 2px;
-    margin-right: 5px;
-}
-
-.tab-motors .disarm .checkbox div {
-    margin-bottom: 0;
-    margin-top: 0;
-}
-
-.tab-motors .disarm .checkbox div input {
-    margin: 0;
-    float: left;
-}
-
-.tab-motors .disarm .checkbox span {
-    margin-left: 0;
-}
-
 .tab-motors .freelabel {
     margin-left: 10px;
     position: relative;
-}
-
-.tab-motors span {
-    margin: 0;
-}
-
-.tab-motors .disarm .checkbox {
-    float: left;
-    padding-left: 0;
-    margin-top: -5px;
-    margin-right: 5px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid var(--subtleAccent);
-    width: 100%;
 }
 
 .tab-motors .spacer_box {
@@ -119,10 +90,6 @@
     height: 22px;
 }
 
-.tab-motors thead {
-    display: none;
-}
-
 .tab-motors .gui_box {
     margin-bottom: 10px;
     float: left;
@@ -131,9 +98,8 @@
 .tab-motors .gui_box span {
     font-style: normal;
     font-weight: normal;
-    line-height: 19px;
-    color: #4f4f4f;
-    font-size: 11px;
+    line-height: 20px;
+    font-size: 12px;
 }
 
 .tab-motors .alignicon {
@@ -147,6 +113,92 @@
     width: calc(100% - 34px);
     margin: 10px;
 }
+
+.tab-motors .motorInfo tr td:nth-child(1) {
+    padding-right: 25px;
+    padding-top: 10px;
+}
+
+.tab-motors .motorInfo tr td:nth-child(2) {
+    width: 100%;
+    height: 40px;
+}
+
+.tab-motors .motorInfo .fieldName {
+    line-height: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.tab-motors .meter-range .meter-left {
+    float: left;
+    font-size: 8px;
+    line-height: 10px;
+}
+
+.tab-motors .meter-range .meter-right {
+    float: right;
+    font-size: 8px;
+    line-height: 10px;
+}
+
+.tab-motors .meter-bar {
+    position: relative;
+    height: 18px;
+    width: 100%
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+    background-color: #E0E0E0;
+    border-radius: 3px;
+    border: 1px solid #F5F5F5;
+}
+
+.tab-motors .meter-fill {
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+    text-align: center;
+    border-radius: 3px;
+    background-color: var(--accent);
+}
+
+.tab-motors .meter-label {
+    position: absolute;
+    top: 2px;
+    left: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    color: #474747;
+}
+
+.tab-motors .meter-fill-label {
+    color: #ffffff;
+}
+
+.tab-motors .Throttle .meter-fill {
+    background-color: var(--accent);
+}
+
+.tab-motors .RPM .meter-fill {
+    background-color: var(--accent);
+}
+
+.tab-motors .Volt .meter-fill {
+    background-color: var(--accent);
+}
+
+.tab-motors .Curr .meter-fill {
+    background-color: var(--accent);
+}
+
+.tab-motors .Temp .meter-fill {
+    background-color: var(--accent);
+}
+
+.tab-motors .Errors .meter-fill {
+    background-color: #f1453d;
+}
+
 
 .tab-motors dialog {
     width: 400px;
@@ -201,44 +253,6 @@
 .tab-motors .tool-buttons {
     float: right;
     margin-bottom: -3%;
-}
-
-
-.tab-motors .title {
-    padding-bottom: 2px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.tab-motors .title2 {
-    padding-bottom: 2px;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 300;
-}
-
-.tab-motors .titles {
-    height: 20px;
-}
-
-.tab-motors .titles li {
-    float: left;
-    width: calc((100% / 9) - 10px);
-    margin-right: 10px;
-    text-align: center;
-}
-
-.tab-motors .titles .active {
-    color: green;
-}
-
-.tab-motors .motor_testing {
-    margin-top: 5px;
-    margin-bottom: 0;
-    padding: 0;
-    border: 0;
-    list-style: none;
-    outline: none;
 }
 
 .tab-motors .motorDialogButtons {
