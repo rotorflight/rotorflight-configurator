@@ -2970,6 +2970,24 @@
     "motorDshotError": {
         "message": "Errors:"
     },
+    "motorOverrideNote":{
+        "message": "<strong>Note.</strong> Motor Override forces the output throttle to a fixed value for setup purposes. The override values are not saved, and will be reset in reboot.<br/><br/><strong class=\"message-negative\">MOTOR OVERRIDE WILL MAKE THE MOTORS TO SPOOL UP!</strong>"
+    },
+    "motorNumber":{
+        "message": "Motor"
+    },
+    "motorOverride":{
+        "message": "Motor Override"
+    },
+    "motorOverrideEnable":{
+        "message": "Enable"
+    },
+    "motorOverrideThrottle":{
+        "message": "Throttle"
+    },
+    "motorOverrideSlider":{
+        "message": ""
+    },
     "motorsDialogSettingsChanged": {
         "message": "Configuration changes have been detected.<br /><br /><strong class=\"message-negative-italic\">Motor Test Mode is disabled until the settings have seen saved.</strong>"
     },

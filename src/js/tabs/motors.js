@@ -21,6 +21,7 @@ TABS.motors.initialize = function (callback) {
         .then(() => { return MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG); })
         .then(() => { return MSP.promise(MSPCodes.MSP_BATTERY_CONFIG); })
         .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_CONFIG); })
+        .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_OVERRIDE); })
         .then(() => { return MSP.promise(MSPCodes.MSP_GOVERNOR); })
         .then(() => { load_html(); });
 
@@ -137,6 +138,8 @@ TABS.motors.initialize = function (callback) {
             $('.governor_features').toggle(self.isGovEnabled && self.isProtoEnabled);
 
             pwmFreqSwitch.trigger("change");
+
+            $('.tab-motors .override').toggle(!FC.CONFIG.motorOverrideDisabled);
         }
 
         escProtocolSelect.val(FC.PID_ADVANCED_CONFIG.fast_pwm_protocol);
@@ -248,8 +251,80 @@ TABS.motors.initialize = function (callback) {
             infoUpdateList.push(updateInfo);
         }
 
-        for (let index = 0; index < 4; index++) {
+        function process_override(motorIndex) {
+
+            const motorOverride = $('#tab-motors-templates .motorOverrideTemplate tr').clone();
+            const motorSlider = motorOverride.find('.motorOverrideSlider');
+            const motorEnable = motorOverride.find('.motorOverrideEnable input');
+            const motorThrottle  = motorOverride.find('.motorOverrideThrottle input');
+
+            motorOverride.attr('class', `motorOverride${motorIndex}`);
+            motorOverride.find('.motorOverrideIndex').text(`#${motorIndex+1}`);
+
+            motorSlider.noUiSlider({
+                range: {
+                    'min': 0,
+                    'max': 100,
+                },
+                start: 0,
+                step: 1,
+                behaviour: 'none',
+            });
+
+            motorOverride.find('.pips-range').noUiSlider_pips({
+                mode: 'values',
+                values: [ 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, ],
+                density: 1,
+                stepped: true,
+                format: wNumb({
+                    decimals: 0,
+                }),
+            });
+
+            motorSlider.on('slide', function () {
+                motorThrottle.val(parseInt($(this).val()));
+            });
+
+            motorSlider.on('change', function () {
+                motorThrottle.change();
+            });
+
+            motorThrottle.change(function () {
+                const value = $(this).val();
+                motorSlider.val(value);
+                FC.MOTOR_OVERRIDE[motorIndex] = Math.round(value * 10);
+                mspHelper.sendMotorOverride(motorIndex);
+            });
+
+            motorEnable.change(function () {
+                const check = $(this).prop('checked');
+
+                motorThrottle.val(0);
+                motorSlider.val(0);
+                motorThrottle.prop('disabled', !check);
+                motorSlider.attr('disabled', !check);
+
+                FC.MOTOR_OVERRIDE[motorIndex] = 0;
+                mspHelper.sendMotorOverride(motorIndex);
+            });
+
+            const value = FC.MOTOR_OVERRIDE[motorIndex];
+            const check = (value != 0);
+            const angle = Math.round(value / 10);
+
+            motorThrottle.val(angle);
+            motorSlider.val(angle);
+
+            motorThrottle.prop('disabled', !check);
+            motorSlider.attr('disabled', !check);
+            motorEnable.prop('checked', check);
+
+            $('.motorOverride tbody').append(motorOverride);
+        }
+
+        for (let index = 0; index < FC.MOTOR_CONFIG.motor_count; index++) {
             process_motor_info(index);
+            process_override(index);
         }
 
         function get_motor_info() {

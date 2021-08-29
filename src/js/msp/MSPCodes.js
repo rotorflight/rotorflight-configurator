@@ -145,6 +145,8 @@ const MSPCodes = {
     MSP_SET_MIXER_OVERRIDE:         191,
     MSP_SERVO_OVERRIDE:             192,
     MSP_SET_SERVO_OVERRIDE:         193,
+    MSP_MOTOR_OVERRIDE:             194,
+    MSP_SET_MOTOR_OVERRIDE:         195,
 
     MSP_SET_RAW_RC:                 200,
     MSP_SET_RAW_GPS:                201, // Not used

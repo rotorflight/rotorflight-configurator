@@ -200,6 +200,77 @@
 }
 
 
+.tab-motors .motorOverrideNote {
+    padding: 15px 15px;
+}
+
+.tab-motors .motorOverride {
+    width: 100%;
+    border: 0;
+    border-collapse: collapse;
+    margin-top: 2px;
+}
+
+.tab-motors .motorOverride .trhead {
+    color: var(--quietText);
+    background-color: var(--button-background);
+    text-align: center;
+    font-size: 11px;
+    line-height: 16px;
+    height: 22px;
+    border-top: 1px solid var(--boxBackground);
+}
+
+.tab-motors .motorOverride td {
+    padding: 6px 5px 7px 5px;
+    border: 1px solid var(--subtleAccent);
+}
+
+.tab-motors .motorOverride td:nth-child(1) {
+    width: 50px;
+    font-weight: bold;
+    text-align: center;
+    border-left: 0;
+}
+
+.tab-motors .motorOverride td:nth-child(2) {
+    width: 80px;
+    text-align: center;
+}
+
+.tab-motors .motorOverride td:nth-child(3) {
+    width: 80px;
+    text-align: center;
+}
+
+.tab-motors .motorOverride td:nth-child(4) {
+    height: 75px;
+    padding: 2px 20px 2px 20px;
+    text-align: left;
+    border-right: 0;
+}
+
+.tab-motors .motorOverride tr:last-child td {
+    border-bottom: 0;
+}
+
+.tab-motors .motorOverrideSlider {
+    margin-top: -20px;
+}
+
+.tab-motors .motorOverrideSlider .noUi-pips {
+    padding: 5px 0 0 0;
+}
+
+.tab-motors .motorOverrideSlider .noUi-pips .noUi-marker-large {
+    height: 10px;
+}
+
+.tab-motors .motorOverrideSlider .noUi-pips .noUi-value-large {
+    padding-top: 15px;
+}
+
+
 .tab-motors dialog {
     width: 400px;
     height: 440px;
