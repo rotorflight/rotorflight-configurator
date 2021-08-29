@@ -124,6 +124,7 @@ const FC = {
     MODE_RANGES_EXTRA: null,
     MOTOR_CONFIG: null,
     MOTOR_DATA: null,
+    MOTOR_OVERRIDE: null,
     MOTOR_OUTPUT_ORDER: null,
     MOTOR_TELEMETRY_DATA: null,
     MULTIPLE_MSP: null,
@@ -273,6 +274,7 @@ const FC = {
         };
 
         this.MOTOR_DATA =               Array.from({length: 8});
+        this.MOTOR_OVERRIDE =           Array.from({length: 8});
         this.SERVO_DATA =               Array.from({length: 8});
         this.SERVO_OVERRIDE =           Array.from({length: 8});
 
