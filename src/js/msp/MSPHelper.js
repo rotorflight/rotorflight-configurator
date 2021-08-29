@@ -134,6 +134,12 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.MOTOR_DATA[i] = data.readU16();
                 }
                 break;
+            case MSPCodes.MSP_MOTOR_OVERRIDE:
+                const motorOverrideCount = data.byteLength / 2;
+                for (let i = 0; i < motorOverrideCount; i++) {
+                    FC.MOTOR_OVERRIDE[i] = data.read16();
+                }
+                break;
             case MSPCodes.MSP2_MOTOR_OUTPUT_REORDERING:
                 FC.MOTOR_OUTPUT_ORDER = [];
                 const arraySize = data.read8();
@@ -594,8 +600,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 for (let i = 0; i < 4; i++)
                     FC.SENSOR_DATA.debug[i] = data.read16();
                 break;
-            case MSPCodes.MSP_SET_MOTOR:
-                console.log('Motor Speeds Updated');
+            case MSPCodes.MSP_SET_MOTOR_OVERRIDE:
+                console.log('Motor Override set');
                 break;
             case MSPCodes.MSP_UID:
                 FC.CONFIG.uid[0] = data.readU32();
@@ -2349,6 +2355,17 @@ MspHelper.prototype.dataflashRead = function(address, blockSize, onDataCallback)
             onDataCallback(address, null);  // returning null to the callback forces a retry
         }
     }, true);
+};
+
+MspHelper.prototype.sendMotorOverride = function(motorIndex, onCompleteCallback) {
+
+    const value = FC.MOTOR_OVERRIDE[motorIndex];
+    const buffer = [];
+
+    buffer.push8(motorIndex)
+          .push16(value);
+
+    MSP.send_message(MSPCodes.MSP_SET_MOTOR_OVERRIDE, buffer, false, onCompleteCallback);
 };
 
 MspHelper.prototype.sendServoOverride = function(servoIndex, onCompleteCallback) {

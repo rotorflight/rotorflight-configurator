@@ -230,6 +230,43 @@
         </div>
         <!-- END CONFIGURATION -->
 
+        <!-- OVERRIDE -->
+        <div class="override">
+            <div class="grid-row margin-top">
+                <div class="grid-col full-width">
+                    <div class="note motorOverrideNote">
+                        <p i18n="motorOverrideNote"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <div class="grid-col full-width">
+                    <div class="gui_box">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="motorOverride"></div>
+                        </div>
+                        <div>
+                            <table class="motorOverride">
+                                <thead>
+                                    <tr class="trhead">
+                                        <th i18n="motorNumber"></th>
+                                        <th i18n="motorOverrideEnable"></th>
+                                        <th i18n="motorOverrideThrottle"></th>
+                                        <th i18n="motorOverrideSlider"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- ROWS GENERATED HERE -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OVERRIDE -->
+
         <div class="clear-both"></div>
 
         <div class="content_toolbar">
@@ -377,7 +414,7 @@
                     </div>
                 </td>
                 <td>
-                    <div class="motorOverrideOutput">
+                    <div class="motorOverrideThrottle">
                         <input type="number" min="0" max="100" step="1" value="0"/>
                     </div>
                 </td>
