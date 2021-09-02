@@ -2607,6 +2607,9 @@
     "adjustmentsFunctionGovernorF": {
         "message": "Governor F-gain"
     },
+    "adjustmentsFunctionGovernorTTA": {
+        "message": "Governor TTA-gain"
+    },
     "adjustmentsFunctionGovernorCyclicFF": {
         "message": "Governor Cyclic Precomp"
     },

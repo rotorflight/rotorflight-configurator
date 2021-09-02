@@ -38,6 +38,7 @@ TABS.adjustments = {
         'GovernorI',
         'GovernorD',
         'GovernorF',
+        'GovernorTTA',
         'GovernorCyclicFF',
         'GovernorCollectiveFF',
         'RateProfile',
