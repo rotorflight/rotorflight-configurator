@@ -12,12 +12,18 @@
 }
 
 .tab-motors select {
-    border: 1px solid var(--subtleAccent);
     width: 150px;
     height: 20px;
     float: left;
     margin-right: 15px;
+    border: 1px solid var(--subtleAccent);
     border-radius: 3px;
+}
+
+.tab-motors .numberspacer {
+    float: left;
+    width: 100px;
+    height: 22px;
 }
 
 .tab-motors .number input {
@@ -29,6 +35,7 @@
     font-weight: normal;
     margin-right: 11px;
     padding-left: 3px;
+    border: 1px solid var(--subtleAccent);
     border-radius: 3px;
 }
 
@@ -82,12 +89,6 @@
 
 .tab-motors .gui_box_titlebar {
     margin-bottom: 0;
-}
-
-.tab-motors .numberspacer {
-    float: left;
-    width: 80px;
-    height: 22px;
 }
 
 .tab-motors .gui_box {
