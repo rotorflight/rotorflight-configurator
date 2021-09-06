@@ -21,7 +21,7 @@ jobs:
         node-version: 10.16.3
 
     - name: Set build variables
-      run: echo "release=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
+      run: echo "revision=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
 
     - name: Initialise build environment
       run: yarn install
@@ -29,14 +29,11 @@ jobs:
     - name: Build release for linux64
       run: yarn gulp release --linux64
 
-    - name: Move artifacts
-      run: mv release/rotorflight-configurator* .
-
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: rotorflight-configurator-snapshot-linux-${{ env.release }}
-        path: rotorflight-configurator*
+        name: rotorflight-configurator-linux-snapshot-${{ env.revision }}
+        path: release/rotorflight-configurator*
 
 
   macos:
@@ -53,7 +50,7 @@ jobs:
         node-version: 10.16.3
 
     - name: Set build variables
-      run: echo "release=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
+      run: echo "revision=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
 
     - name: Initialise build environment
       run: yarn install
@@ -61,14 +58,11 @@ jobs:
     - name: Build release for MacOS
       run: yarn gulp release --osx64
 
-    - name: Move artifacts
-      run: mv release/rotorflight-configurator* .
-
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: rotorflight-configurator-snapshot-macos-${{ env.release }}
-        path: rotorflight-configurator*
+        name: rotorflight-configurator-macos-snapshot-${{ env.revision }}
+        path: release/rotorflight-configurator*
 
 
   windows:
@@ -86,8 +80,8 @@ jobs:
 
     - name: Set build variables
       run: |
-        $snapshot = $env:GITHUB_REF -replace '.*/',''
-        echo "release=$snapshot" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        $release = $env:GITHUB_REF -replace '.*/',''
+        echo "revision=$release" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
     - name: Initialise build environment
       run: yarn install
@@ -95,12 +89,44 @@ jobs:
     - name: Build release for windows
       run: yarn gulp release --win64
 
-    - name: Move artifacts
-      run: move release/rotorflight-configurator* .
-
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: rotorflight-configurator-snapshot-windows-${{ env.release }}
-        path: rotorflight-configurator*
+        name: rotorflight-configurator-windows-snapshot-${{ env.revision }}
+        path: release/rotorflight-configurator*
+
+
+  snapshot:
+
+    runs-on: ubuntu-latest
+
+    needs: [linux, windows, macos]
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set build variables
+      run: echo "revision=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
+
+    - name: Download Linux Artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: rotorflight-configurator-linux-snapshot-${{ env.revision }}
+
+    - name: Download MacOS Artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: rotorflight-configurator-macos-snapshot-${{ env.revision }}
+
+    - name: Download Windows Artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: rotorflight-configurator-windows-snapshot-${{ env.revision }}
+
+    - name: Create Snapshot
+      run: |
+        gh release create ${GITHUB_REF##refs/tags/} --prerelease --notes-file "Snapshot.md" --title "Rotorflight Configurator Snapshot ${GITHUB_REF##*/}" rotorflight-configurator*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
