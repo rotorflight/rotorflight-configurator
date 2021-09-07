@@ -6,11 +6,17 @@ Rotorflight Configurator is forked from Betaflight Configurator.
 
 ## Installation
 
-### Standalone
+### Installation for End Users:
 
-**This is the default installation method, and at some point in the future this will become the only way available for most platforms. Please use this method whenever possible.**
+Please see the [Releases](https://github.com/rotorflight/rotorflight-configurator/releases) page on this Github repo to download the _latest official release_ for your operating system.
 
-Download the installer from [Releases.](https://github.com/rotorflight/rotorflight-configurator/releases)
+Please ignore any snapshots on this page (github is showing them automatically).
+
+### Installation for Beta-testers:
+
+Please see the [Releases](https://github.com/rotorflight/rotorflight-configurator/releases) page on this Github repo to download the latest _snapshot_ for your operating system.
+
+Please note that snapshots are available for beta-testing, and are otherwise _not_ supported.
 
 ### Notes
 
