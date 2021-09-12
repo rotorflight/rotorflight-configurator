@@ -900,8 +900,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                         adjFunction: data.readU8(),
                         adjChannel: data.readU8(),
                         adjStep: data.readU8(),
-                        adjMin: data.readU16(),
-                        adjMax: data.readU16(),
+                        adjMin: data.read16(),
+                        adjMax: data.read16(),
                     };
                     FC.ADJUSTMENT_RANGES.push(adjustmentRange);
                 }
