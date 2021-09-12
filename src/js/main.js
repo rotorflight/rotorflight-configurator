@@ -627,12 +627,12 @@ function updateTabList(features) {
         $('#tabs ul.mode-connected li.tab_adjustments').show();
         $('#tabs ul.mode-connected li.tab_sensors').show();
         $('#tabs ul.mode-connected li.tab_logging').show();
-        $('#tabs ul.mode-connected li.tab_cli').show();
+        //$('#tabs ul.mode-connected li.tab_cli').show();
     } else {
         $('#tabs ul.mode-connected li.tab_adjustments').hide();
         $('#tabs ul.mode-connected li.tab_sensors').hide();
         $('#tabs ul.mode-connected li.tab_logging').hide();
-        $('#tabs ul.mode-connected li.tab_cli').hide();
+        //$('#tabs ul.mode-connected li.tab_cli').hide();
     }
 
     if (features.isEnabled('GPS')) {
