@@ -166,6 +166,10 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-bottom: 20px;
 }
 
+.margin-top5 {
+    margin-top: 5px;
+}
+
 .message-positive {
     color: var(--accent) !important;
 }
@@ -375,12 +379,12 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .firmware_b a.flash:hover, .connect_b a.connect:hover {
-    background-color: var(--darkAccent);
+    background-color: #007cc7;
     border-color: #e0e0e0;
 }
 
 .firmware_b a.flash:active, .connect_b a.connect:active {
-    background-color: var(--accent);
+    background-color: #4da8da;
     border-color: #ffffff;
 }
 
@@ -1868,7 +1872,7 @@ dialog .dialog_toolbar .btn a.disabled {
 }
 
 .gui_warning {
-    background: #ffdddd;
+    background: #f1f1f1;
 }
 
 .gui_note {
@@ -1993,16 +1997,16 @@ dialog .dialog_toolbar .btn a.disabled {
     padding: 5px 0 5px 0;
     text-align: center;
     background-color: var(--button-background);
-    border-radius: 1px;
     border: 1px solid var(--button-border);
+    border-radius: 1px;
     color: #000;
     font-weight: 600;
     font-size: 12px;
     line-height: 13px;
-    display: block;
-    transition: all ease 0.1s;
+    transition: all ease 0.2s;
     text-decoration:none;
     cursor: pointer;
+    display: block;
 }
 
 .default_btn a.disabled {
@@ -2024,8 +2028,11 @@ dialog .dialog_toolbar .btn a.disabled {
     border-color: var(--pushedButton-border);
 }
 
-.margin-top5 {
-    margin-top: 5px;
+.default_btn_pushed a,
+.default_btn_pushed a:hover,
+.default_btn_pushed a:active {
+    background-color: var(--pushedButton-background);
+    border: 1px solid var(--pushedButton-border);
 }
 
 .regular-button {

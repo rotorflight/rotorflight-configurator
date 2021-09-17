@@ -133,6 +133,19 @@
     background-color: #14407a;
 }
 
+.tab-receiver .bars ul:nth-of-type(17) .fill {
+    background-color: #eb34e1;
+}
+
+.tab-receiver .bars ul:nth-of-type(18) .fill {
+    background-color: #baeb34;
+}
+
+.tab-receiver .bars ul:nth-of-type(19) .fill {
+    background-color: #34d8eb;
+}
+
+
 .tab-receiver .tunings {
     float: right;
     position: relative;

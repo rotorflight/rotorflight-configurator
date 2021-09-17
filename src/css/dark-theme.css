@@ -1,23 +1,28 @@
 :root {
-    --accent: #ffbb00;
-    --subtleAccent: #9c9c9c;
-    --quietHeader: #bf8606;
+    --accent: #0375b4;
+    --darkAccent: #203647;
+    --subtleAccent: #c0c0c0;
+    --superSubtleAccent: #595959;
+    --quietHeader: #939682;
     --defaultText: #ffffff;
     --subtleText: #c0c0c0;
     --mutedText: #d6d6d6;
-    --linkText: #ffc549;
+    --linkText: #4da8da;
     --boxBackground: #3a3a3a;
-    --alternativeBackground: #4e4e4e;
+    --alternativeBackground: #414443;
     --sideBackground: #404040;
     --ledAccent: #6e6e6e;
     --ledBackground: #424242;
     --gimbalBackground: var(--subtleAccent);
     --gimbalCrosshair: var(--mutedText);
     --switcherysecond: #858585;
-    --pushedButton-background:  #616161;
-    --pushedButton-fontColor:  #ffffff;
-    --hoverButton-background: #ffcc3e;
-    --superSubtleAccent: #595959;
+    --button-border: #c4c4c4;
+    --button-background: #c4c4c4;
+    --hoverButton-border: #ffbb00;
+    --hoverButton-background: #d6d6d6;
+    --pushedButton-fontColor: #000000;
+    --pushedButton-border: #ffbb00;
+    --pushedButton-background: #595959;
 }
 
 .background_paper {
@@ -59,22 +64,14 @@ dialog {
     border: 1px solid #ffbb2a;
 }
 
-/* Note */
 .note {
     background-color: #4e4e4e;
+    border: 1px solid #df8c27;
     color: white;
 }
 
 .content_toolbar {
     background-color: #555857;
-}
-
-.content_toolbar .btn a {
-    border: 1px solid #ffbb2a;
-}
-
-.content_toolbar .btn a.disabled {
-    border: 1px solid #ffbb2a;
 }
 
 .gui_box {
@@ -83,7 +80,7 @@ dialog {
 }
 
 .gui_warning {
-    background: #393b3a;
+    background: #414443;
 }
 
 .gui_note {
@@ -102,11 +99,6 @@ dialog {
     background-color: #393b3a;
 }
 
-.default_btn a.disabled {
-    background-color: #393b3a;
-    border: 1px solid #ffbb2a;
-}
-
 .small a {
     border: 1px solid #ffbb2a;
 }
@@ -118,6 +110,12 @@ dialog {
 button {
     border: 1px solid #ffbb2a;
     background-color: #ffbb2a;
+    color: black;
+}
+
+.default_btn a.disabled {
+    background-color: #595959;
+    border-color: #595959;
     color: black;
 }
 
@@ -168,6 +166,13 @@ button {
 }
 
 
+/* TABS */
+
+#tabs li.active a {
+    color: #fff;
+}
+
+
 /* ADJUSTMENTS TAB */
 
 .tab-adjustments .adjustment:nth-child(odd) {
@@ -188,6 +193,10 @@ button {
     color: white;
 }
 
+.tab-adjustments .adjustment input {
+    background-color: #3a3a3a;
+    color: white;
+}
 
 /* AUXILIARY TAB */
 
@@ -200,12 +209,13 @@ button {
 }
 
 .tab-auxiliary .mode .info {
+    border-bottom: 5px solid #393b3a;
     background-color: #9e9e9e;
     color: white;
 }
 
 .tab-auxiliary .ranges {
-    border-bottom: 5px solid #8a8a8a;
+    border-bottom: 5px solid #393b3a;
     background-color: #676767;
 }
 
@@ -229,6 +239,19 @@ button {
 
 .tab-auxiliary .buttons a:hover {
     background-color: var(--hoverButton-background);
+}
+
+
+/* BEEPERS TAB */
+
+.tab-beepers .gui_box span {
+    color: white;
+}
+
+.tab-beepers input,
+.tab-beepers select {
+    background-color: #3a3a3a;
+    color: white;
 }
 
 
@@ -347,6 +370,7 @@ button {
     border-bottom: solid 1px #4f4f4f;
 }
 
+
 /* GPS TAB */
 
 .tab-gps .GPS_info .head, .tab-gps .GPS_signal_strength .head {
@@ -373,6 +397,41 @@ progress[value]::-webkit-progress-bar {
     background-color: #393b3a;
 }
 
+/* GYRO TAB */
+
+.tab-gyro .gui_box span {
+    color: white;
+}
+
+.tab-gyro .subtitle {
+    color: #3a3a3a;
+    background-color: #a0a0a0;
+}
+
+.tab-gyro input:disabled,
+.tab-gyro select:disabled {
+    color: #595959;
+}
+
+.tab-gyro table input {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.tab-gyro table select {
+    text-align-last: right;
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.tab-gyro table tr td.border,
+.tab-gyro table tr td:first-child {
+    border-color: #595959;
+}
+
+.tab-gyro .bottomarea {
+    background-color: #393b3a;
+}
 
 /* LANDING */
 
@@ -385,7 +444,7 @@ progress[value]::-webkit-progress-bar {
 }
 
 .tab-landing .logowrapper img {
-    content:url(../images/cf_logo_black.svg);
+    content:url(../images/cf_logo_white.svg);
 }
 
 .tab-landing .content_mid .text3 .wrap2 {
@@ -439,37 +498,16 @@ progress[value]::-webkit-progress-bar {
     color: white;
 }
 
-.tab-motors .plot_control {
-    background-color: #393b3a;
-}
-
-.tab-motors .plot_control select {
-  background-color: #3a3a3a;
-  color: white;
-}
-
-.tab-motors .motorblock {
-    background-color: #393b3a;
-}
-
-.tab-motors .m-block {
-    background-color: #393b3a;
-}
-
-.tab-motors .m-block .label {
-    color: white;
-}
-
-.tab-motors .m-block .meter-bar {
-    background-color: #393b3a;
-}
-
-.tab-motors .motor_testing .notice {
-    background-color: #4e4e4e;
-}
-
 .tab-motors text {
     fill: white;
+}
+
+.tab-motors .meter-bar {
+    background-color: #3a3a3a;
+}
+
+.tab-motors .meter-label {
+    color: white;
 }
 
 
@@ -540,155 +578,152 @@ progress[value]::-webkit-progress-bar {
     border: 1px solid #404040;
 }
 
+/* PROFILES TAB */
 
-/* PID TUNING TAB */
-
-.tab-pid_tuning .profile .helpicon,
-.tab-pid_tuning .rate_profile .helpicon,
-.tab-pid_tuning .pid_titlebar .helpicon {
-    background-image: url(../images/icons/cf_icon_info_grey.svg);
-    opacity: 0.4;
-}
-.tab-pid_tuning .profile .helpicon:hover,
-.tab-pid_tuning .rate_profile .helpicon:hover,
-.tab-pid_tuning .pid_titlebar .helpicon:hover {
-    opacity: 1;
+.tab-profiles .tabarea {
+    background: #393b3a;
 }
 
-.tab-pid_tuning .throttle_limit th {
-    background-color: #393b3a;
-    border-bottom: 1px solid #5e5e5e;
+.tab-profiles .tab-container > div {
+    background-color: #535655;
+    border-right: 1px solid #393b3a;
 }
 
-.tab-pid_tuning .cf tr {
-    background-color: #414443;
+.tab-profiles input:disabled,
+.tab-profiles select:disabled {
+    color: #595959;
 }
 
-.tab-pid_tuning .cf th {
-    background-color: var(--quietHeader);
-    color: white;
-}
-
-.tab-pid_tuning .cf input {
+.tab-profiles table input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-pid_tuning .cf select {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-/* These values should have been inherited from the regular style, but are not */
-.tab-pid_tuning .pid_titlebar .wide_header {
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-}
-
-.tab-pid_tuning table.compensation .suboption select{
-    background-color: #3a3a3a;
-    color: white;
-}
-
-.tab-pid_tuning table input,.inputBackground {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-.tab-pid_tuning table select {
+.tab-profiles table select {
     text-align-last: right;
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-pid_tuning .tab-container > div {
+.tab-profiles table.compensation .suboption select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.tab-profiles table.compensation .suboption input {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.tab-profiles table.compensation tr {
+    border-bottom: 1px solid #6b6b6b;
+}
+
+.tab-profiles .pid_roll {
+    background-color: #A00000;
+}
+
+.tab-profiles .pid_pitch {
+    background-color: #00A000;
+}
+
+.tab-profiles .pid_yaw {
+    background-color: #0000A0;
+}
+
+.tab-profiles .gui_box span {
+    color: white;
+}
+
+.tab-profiles .bottomarea {
+    background-color: #393b3a;
+}
+
+.tab-profiles .profile select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.tab-profiles .regular-button.disabled {
+    background-color: #393b3a;
+}
+
+
+/* RATES TAB */
+
+.tab-rates .tabarea {
+    background: #393b3a;
+}
+
+.tab-rates .tab-container > div {
     background-color: #535655;
     border-right: 1px solid #393b3a;
 }
 
-.fancy.header {
-  background-color: #393b3a;
-}
-
-.pid_roll {
-    background-color: #A00000;
-}
-
-.pid_pitch {
-    background-color: #00A000;
-}
-
-.pid_yaw {
-    background-color: #0000A0;
-}
-
-.pid_mode {
-    background-color: #3c3c3c;
-    border-bottom: 1px solid #3c3c3c;
-    color: white;
-}
-
-.pid_titlebar {
-    background-color: #393b3a;
-}
-
-.tab-pid_tuning .number input {
+.tab-rates select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-pid_tuning .gui_box span {
-    color: white;
-}
-
-.tab-pid_tuning .bottomarea {
-    background-color: #393b3a;
-}
-
-.tab-pid_tuning .profile select {
+.tab-rates table input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-pid_tuning .rate_profile select {
+.tab-rates table select {
+    text-align-last: right;
     background-color: #3a3a3a;
     color: white;
 }
 
-.tabarea {
-    background: #393b3a;
+.tab-rates .cf tr {
+    background-color: #414443;
 }
 
-.tab-pid_tuning .regular-button.disabled {
-    background-color: #393b3a;
-}
-
-.tab-pid_tuning .sliderLabels th {
-    background: #414443;
+.tab-rates .cf th {
+    background-color: var(--quietHeader);
     color: white;
 }
 
-.tab-pid_tuning input:disabled,
-.tab-pid_tuning .cf input:disabled,
-.tab-pid_tuning select:disabled,
-.tab-pid_tuning .cf select:disabled {
-    color: rgb(105, 105, 105);
-    background-color: #2d2d2d;
+.tab-rates .cf input {
+    background-color: #3a3a3a;
+    color: white;
 }
 
-.tab-pid_tuning table.compensation tr {
-    border-bottom: 1px solid #6b6b6b;
+.tab-rates .cf select {
+    background-color: #3a3a3a;
+    color: white;
 }
 
-.tab-pid_tuning .slidersWarning {
-    background: #542415;
-}
-
-.tab-pid_tuning .cf .rates_logo_bg {
+.tab-rates .cf .rates_logo_bg {
     background-color: #ffffff33;
 }
 
+.tab-rates .rates_roll {
+    background-color: #A00000;
+}
+
+.tab-rates .rates_pitch {
+    background-color: #00A000;
+}
+
+.tab-rates .rates_yaw {
+    background-color: #0000A0;
+}
+
+.tab-rates .gui_box span {
+    color: white;
+}
+
+
+
 /* PORTS TAB */
+
+.tab-ports input,
+.tab-ports select {
+    background-color: #3a3a3a;
+    color: white;
+}
 
 .tab-ports table td:first-child {
     border-left: none;
@@ -734,11 +769,11 @@ progress[value]::-webkit-progress-bar {
     color: white;
 }
 
-.tab-receiver .bars .meter-bar {
+.tab-receiver .bars .bar {
     background-color: #393b3a;
 }
 
-.tab-receiver .bars .meter-bar .label {
+.tab-receiver .bars .label {
     color: white;
 }
 
@@ -808,59 +843,67 @@ progress[value]::-webkit-progress-bar {
 
 /* SERVOS TAB */
 
-.tab-servos table th {
-    background: #828885;
+.tab-servos .gui_box span {
+    color: white;
 }
 
-.tab-servos table tr:nth-child(even) {
-    background-color: #2f2f2f;
-}
-
-.tab-servos table .main {
+.tab-servos .servoConfig {
     background-color: #393b3a;
+    color: white;
 }
 
-.tab-servos table input[type="number"] {
+.tab-servos .servoConfig td {
+    border-color: #575757;
+}
+
+.tab-servos .servoConfig tbody tr {
+    background-color: #414443;
+}
+
+.tab-servos .servoConfig tbody tr:nth-child(even) {
+    background-color: #3f3f3f;
+}
+
+.tab-servos input[type="number"] {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-servos .direction .rate {
+.tab-servos .meter-bar {
     background-color: #3a3a3a;
+}
+
+.tab-servos .meter-label {
     color: white;
 }
 
-.tab-servos .servoblock {
-    background-color: #393b3a;
-    color: white;
-}
 
-.tab-servos .m-block .label {
-    color: white;
-}
+/* STATUS TAB */
 
-.tab-servos .m-block .meter-bar {
+.tab-status #interactive_block {
     background-color: #393b3a;
 }
 
-
-/* SETUP TAB */
-
-.tab-setup #interactive_block {
-    background-color: #393b3a;
-}
-
-.tab-setup .attitude_info {
+.tab-status .attitude_info {
     color: white;
 }
 
-.tab-setup #interactive_block a.reset {
+.tab-status #interactive_block a.reset {
     color: white;
     background-color: #575757;
 }
 
-.tab-setup #interactive_block a.reset:hover {
+.tab-status #interactive_block a.reset:hover {
     background-color: #393b3a;
+}
+
+.tab-status .bars .meter-bar {
+    background-color: #393b3a;
+    border: 1px solid #c0c0c0;
+}
+
+.tab-status .bars .meter-bar .label {
+    color: white;
 }
 
 
