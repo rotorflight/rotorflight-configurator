@@ -29,8 +29,7 @@
     border-right: 1px solid var(--subtleAccent);
 }
 
-.tab-ports table thead tr:first-child, .tab-ports table tr:nth-child(even) select,
-.tab-ports table thead tr:first-child, .tab-ports table tr:nth-child(even) {
+.tab-ports table tr:nth-child(even) {
     background-color: var(--alternativeBackground);
 }
 
