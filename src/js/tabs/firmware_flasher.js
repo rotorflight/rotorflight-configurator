@@ -3,7 +3,6 @@
 TABS.firmware_flasher = {
     releases: null,
     releaseChecker: new ReleaseChecker('firmware', 'https://api.github.com/repos/betaflight/betaflight/releases'),
-    jenkinsLoader: new JenkinsLoader('https://ci.betaflight.tech'),
     gitHubApi: new GitHubApi(),
     localFirmwareLoaded: false,
     selectedBoard: undefined,
@@ -334,18 +333,6 @@ TABS.firmware_flasher.initialize = function (callback) {
             }
         ];
 
-        var ciBuildsTypes = self.jenkinsLoader._jobs.map(job => {
-            if (job.title === "Development") {
-                return {
-                    tag: "firmwareFlasherOptionLabelBuildTypeDevelopment",
-                    loader: () => self.jenkinsLoader.loadBuilds(job.name, loadUnifiedBuilds)
-                };
-            }
-            return {
-                title: job.title,
-                loader: () => self.jenkinsLoader.loadBuilds(job.name, loadUnifiedBuilds)
-            };
-        });
         var buildTypesToShow;
 
         var buildType_e = $('select[name="build_type"]');
@@ -382,7 +369,7 @@ TABS.firmware_flasher.initialize = function (callback) {
 
             globalExpertMode_e.prop('checked', expertModeChecked).trigger('change');
             if (expertModeChecked) {
-                buildTypesToShow = buildTypes.concat(ciBuildsTypes);
+                buildTypesToShow = buildTypes;
                 buildBuildTypeOptionsList();
             } else {
                 buildTypesToShow = buildTypes;
@@ -1219,9 +1206,7 @@ TABS.firmware_flasher.initialize = function (callback) {
         GUI.content_ready(callback);
     }
 
-    self.jenkinsLoader.loadJobs('Firmware', () => {
-       $('#content').load("./tabs/firmware_flasher.html", onDocumentLoad);
-    });
+    $('#content').load("./tabs/firmware_flasher.html", onDocumentLoad);
 };
 
 TABS.firmware_flasher.cleanup = function (callback) {
