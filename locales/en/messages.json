@@ -2583,6 +2583,9 @@
     "adjustmentsFunctionRescueCollective": {
         "message": "Rescue Collective"
     },
+    "adjustmentsFunctionRescueCollectiveBoost": {
+        "message": "Rescue Collective Boost"
+    },
     "adjustmentsFunctionAngleLevelStrength": {
         "message": "Angle mode leveling strength"
     },
