@@ -30,6 +30,7 @@ TABS.adjustments = {
         'YawCollectiveFF',
         'YawImpulseFF',
         'RescueCollective',
+        'RescueCollectiveBoost',
         'AngleLevelStrength',
         'HorizonLevelStrength',
         'AcroTrainerGain',
