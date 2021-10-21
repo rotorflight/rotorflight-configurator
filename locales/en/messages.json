@@ -2229,22 +2229,22 @@
     },
 
     "profilesSubTab1": {
-        "message": "PID Profile #1"
+        "message": "Profile #1"
     },
     "profilesSubTab2": {
-        "message": "PID Profile #2"
+        "message": "Profile #2"
     },
     "profilesSubTab3": {
-        "message": "PID Profile #3"
+        "message": "Profile #3"
     },
     "profilesSubTab4": {
-        "message": "PID Profile #4"
+        "message": "Profile #4"
     },
     "profilesSubTab5": {
-        "message": "PID Profile #5"
+        "message": "Profile #5"
     },
     "profilesSubTab6": {
-        "message": "PID Profile #6"
+        "message": "Profile #6"
     },
 
     "profilesPIDGains": {
@@ -2620,7 +2620,7 @@
         "message": "Rate Profile Selection"
     },
     "adjustmentsFunctionPIDProfile": {
-        "message": "PID Profile Selection"
+        "message": "Profile Selection"
     },
     "adjustmentsFunctionOSDProfile": {
         "message": "OSD Profile Selection"
