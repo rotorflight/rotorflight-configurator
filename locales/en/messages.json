@@ -2898,11 +2898,11 @@
     "motorsGovModeHelp": {
         "message": "The governor maintains the main rotor speed constant. The algorithm used in the control loop is selected with this setting."
     },
-    "motorsGovMaxHeadspeed": {
-        "message": "Maximum headspeed"
+    "motorsGovHeadspeed": {
+        "message": "Full headspeed"
     },
-    "motorsGovMaxHeadspeedHelp": {
-        "message": "The governor target headspeed is calculated by multiplying the maximum headspeed with the throttle input. Thus, at 100% throttle the governor will try to maintain the maximum headspeed."
+    "motorsGovHeadspeedHelp": {
+        "message": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input. For example, at 75% throttle the governor will try to maintain 75% of the full headspeed."
     },
     "motorsGovGearRatio": {
         "message": "Main rotor gear ratio (x1000)"

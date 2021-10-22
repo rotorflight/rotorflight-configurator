@@ -514,7 +514,6 @@ const FC = {
 
         this.GOVERNOR = {
             gov_mode:                       0,
-            gov_max_headspeed:              0,
             gov_spoolup_time:               0,
             gov_tracking_time:              0,
             gov_recovery_time:              0,
@@ -526,11 +525,14 @@ const FC = {
             gov_gear_ratio:                 0,
             gov_pwr_filter:                 0,
             gov_rpm_filter:                 0,
+            gov_headspeed:                  0,
             gov_gain:                       0,
             gov_p_gain:                     0,
             gov_i_gain:                     0,
             gov_d_gain:                     0,
             gov_f_gain:                     0,
+            gov_tta_gain:                   0,
+            gov_tta_limit:                  0,
             gov_cyclic_ff_weight:           0,
             gov_collective_ff_weight:       0,
         };
