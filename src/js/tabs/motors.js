@@ -104,7 +104,7 @@ TABS.motors.initialize = function (callback) {
 
         govModeSelect.val(FC.GOVERNOR.gov_mode);
 
-        $('input[id="govMaxHeadspeed"]').val(FC.GOVERNOR.gov_max_headspeed);
+        $('input[id="govHeadspeed"]').val(FC.GOVERNOR.gov_headspeed);
         $('input[id="govGearRatio"]').val(FC.GOVERNOR.gov_gear_ratio);
         $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time);
         $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time);
@@ -359,7 +359,7 @@ TABS.motors.initialize = function (callback) {
 
             if (self.isGovEnabled) {
                 FC.GOVERNOR.gov_mode = govModeSelect.val();
-                FC.GOVERNOR.gov_max_headspeed = parseInt($('input[id="govMaxHeadspeed"]').val());
+                FC.GOVERNOR.gov_headspeed = parseInt($('input[id="govHeadspeed"]').val());
                 FC.GOVERNOR.gov_gear_ratio = parseInt($('input[id="govGearRatio"]').val());
                 FC.GOVERNOR.gov_spoolup_time = parseInt($('input[id="govSpoolupTime"]').val());
                 FC.GOVERNOR.gov_tracking_time = parseInt($('input[id="govTrackingTime"]').val());
