@@ -59,10 +59,50 @@
     height: 100% !important;
 }
 
-.tab-status #gpsFix {
+.tab-status .configState {
     float: right;
-    margin-top: 4px;
+    margin-top: 3px;
     margin-right: 5px;
+}
+
+.tab-status .configState span {
+    font-size: 10px;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.configBare {
+    background-color: #e60000;
+}
+
+.configDefaults {
+    background-color: #56ac1d;
+}
+
+.configConfigured {
+    background-color: #00e600;
+}
+
+.tab-status .gpsFix {
+    float: right;
+    margin-top: 3px;
+    margin-right: 5px;
+}
+
+.tab-status .gpsFix span {
+    font-size: 10px;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.gpsFixTrue {
+    background-color: #56ac1d;
+}
+
+.gpsFixFalse {
+    background-color: #e60000;
 }
 
 .attitude_info {

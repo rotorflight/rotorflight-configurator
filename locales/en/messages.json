@@ -974,6 +974,15 @@
     "statusAttitude": {
         "message": "$1 deg"
     },
+    "statusConfigBare": {
+        "message": "<span class=\"configBare\">BARE</span>"
+    },
+    "statusConfigDefaults": {
+        "message": "<span class=\"configDefaults\">DEFAULTS</span>"
+    },
+    "statusConfigConfigured": {
+        "message": "<span class=\"configConfigured\">CONFIGURED</span>"
+    },
 
     "initialSetupBackupAndRestoreApiVersion": {
         "message": "<span class=\"message-negative\">Backup and restore functionality disabled.</span> You have firmware with API version <span class=\"message-negative\">$1</span>, backup and restore requires <span class=\"message-positive\">$2</span>.  Please backup your settings via the CLI, see Rotorflight documentation for procedure."
@@ -2780,16 +2789,16 @@
         "message": "3D Fix:"
     },
     "gpsFixYes": {
-        "message": "<span class=\"fixtrue\">Fix</span>"
+        "message": "<span class=\"gpsFixTrue\">Fix</span>"
     },
     "gpsFixNo": {
-        "message": "<span class=\"fixfalse\">No Fix</span>"
+        "message": "<span class=\"gpsFixFalse\">No Fix</span>"
     },
     "gpsFixTrue": {
-        "message": "<span class=\"fixtrue\">True</span>"
+        "message": "<span class=\"gpsFixTrue\">True</span>"
     },
     "gpsFixFalse": {
-        "message": "<span class=\"fixfalse\">False</span>"
+        "message": "<span class=\"gpsFixFalse\">False</span>"
     },
     "gpsAltitude": {
         "message": "Altitude:"

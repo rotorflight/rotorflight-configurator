@@ -11,27 +11,17 @@ TABS.status.initialize = function (callback) {
         GUI.active_tab = 'status';
     }
 
-    function load_rc_data() {
-        MSP.send_message(MSPCodes.MSP_RC, false, false, load_acc_trim);
-    }
-
-    function load_acc_trim() {
-        MSP.send_message(MSPCodes.MSP_ACC_TRIM, false, false, load_status);
-    }
-
-    function load_status() {
-        MSP.send_message(MSPCodes.MSP_STATUS_EX, false, false, load_name);
-    }
-
-    function load_name() {
-        MSP.send_message(MSPCodes.MSP_NAME, false, false, load_html);
-    }
+    MSP.promise(MSPCodes.MSP_STATUS)
+        .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
+        .then(() => MSP.promise(MSPCodes.MSP_STATUS_EX))
+        .then(() => MSP.promise(MSPCodes.MSP_ACC_TRIM))
+        .then(() => MSP.promise(MSPCodes.MSP_NAME))
+        .then(() => MSP.promise(MSPCodes.MSP_RC))
+        .then(() => load_html());
 
     function load_html() {
         $('#content').load("./tabs/status.html", process_html);
     }
-
-    load_rc_data();
 
     function process_html() {
 
@@ -74,11 +64,12 @@ TABS.status.initialize = function (callback) {
         });
 
         // cached elements
-        var bat_voltage_e = $('.bat-voltage'),
+        var arming_disable_flags_e = $('.arming-disable-flags'),
+            configState_e = $('.configState'),
+            bat_voltage_e = $('.bat-voltage'),
             bat_mah_drawn_e = $('.bat-mah-drawn'),
             bat_mah_drawing_e = $('.bat-mah-drawing'),
             rssi_e = $('.rssi-value'),
-            arming_disable_flags_e = $('.arming-disable-flags'),
             gpsFix_e = $('.gpsFix'),
             gpsSats_e = $('.gpsSats'),
             gpsAlt_e = $('.gpsAlt'),
@@ -87,6 +78,19 @@ TABS.status.initialize = function (callback) {
             roll_e = $('dd.roll'),
             pitch_e = $('dd.pitch'),
             heading_e = $('dd.heading');
+
+        // Configuration status
+        switch (FC.CONFIG.configurationState) {
+        case FC.CONFIGURATION_STATES.CONFIGURED:
+            configState_e.html(i18n.getMessage('statusConfigConfigured'));
+            break;
+        case FC.CONFIGURATION_STATES.DEFAULTS_CUSTOM:
+            configState_e.html(i18n.getMessage('statusConfigDefaults'));
+            break;
+        case FC.CONFIGURATION_STATES.DEFAULTS_BARE:
+            configState_e.html(i18n.getMessage('statusConfigBare'));
+            break;
+        }
 
         // DISARM FLAGS
         var prepareDisarmFlags = function() {
