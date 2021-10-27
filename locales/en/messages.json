@@ -701,13 +701,13 @@
         "message": "Hardware"
     },
     "defaultWelcomeText": {
-        "message": "The application supports all hardware that can run Rotorflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight/wiki/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br />The firmware source code can be downloaded from <a href=\"https://github.com/rotorflight\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />For legacy hardware using a CP210x USB to serial chip:<br />The latest <b>CP210x Drivers</b> can be downloaded from <a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />The latest <b>Zadig</b> for Windows USB driver installation can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />"
+        "message": "The application supports all hardware that can run Rotorflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts</a><br /><br />The source code can be downloaded from <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />The latest <b>Zadig</b> for Windows USB driver installer can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />"
     },
     "defaultContributingHead": {
         "message": "Contributing"
     },
     "defaultContributingText": {
-        "message": "If you would like to help make Rotorflight even better you can help in many ways, including:<br /><ul><li>using your knowledge of Rotorflight to create or update content on <a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">our Wiki</a>, or answering other users' questions in online forums;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">contributing code</a> to the firmware and Configurator - new features, fixes, improvements;</li><li>testing <a href=\"https://github.com/rotorflight/rotorflight/pulls\" target=\"_blank\" rel=\"noopener noreferrer\">new features and fixes</a> and providing feedback;</li><li>helping other users solve the problems they report in <a href=\"https://github.com/rotorflight/rotorflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">our issue tracker</a>, and participating in discussions on feature requests;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/translatation\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain the existing translations.</li></ul>"
+        "message": "If you would like to help make Rotorflight even better you can help in many ways, including:<br /><ul><li>using your knowledge of Rotorflight to create or update content on <a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">our Wiki</a>, or answering other users' questions in online forums;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the firmware and the configurator - new features, fixes, improvements;</li><li>testing <a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">new features and fixes</a> and providing feedback;</li><li>helping other users solve the problems they report in <a href=\"https://github.com/rotorflight/rotorflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">our issue tracker</a>, and participating in discussions on feature requests;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain the existing translations.</li></ul>"
     },
     "defaultChangelogHead": {
         "message": "Configurator - Changelog"
@@ -744,7 +744,10 @@
         "message": "The Rotorflight wiki is a great resource for information, it can be found <a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultDocumentation2": {
-        "message": "The release notes for the firmware can be read at GitHub releases page, <a href=\"https://github.com/rotorflight/rotorflight/wiki/releases\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        "message": "The latest news can be read at the Wiki News page, <a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+    },
+    "defaultDocumentation3": {
+        "message": "The release notes for the firmware can be read at GitHub releases page, <a href=\"https://github.com/rotorflight/rotorflight-firmware/releases\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultSupportHead": {
         "message": "Support"
@@ -762,7 +765,7 @@
         "message": "<a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Wiki</a>"
     },
     "defaultSupport2": {
-        "message": "<a href=\"http://www.rcgroups.com/forums/showthread.php?t=123456\" target=\"_blank\" rel=\"noopener noreferrer\">RC Groups Rotorflight thread (TBD)</a>"
+        "message": "<a href=\"http://www.rcgroups.com/forums/showthread.php?t=4000345\" target=\"_blank\" rel=\"noopener noreferrer\">RC Groups Rotorflight thread</a>"
     },
     "defaultSupport3": {
         "message": "<a href=\"https://discord.com/invite/FyfMF4RwSA\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight discussion on Discord</a>"
