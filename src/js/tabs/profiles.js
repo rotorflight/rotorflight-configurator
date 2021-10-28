@@ -4,6 +4,7 @@ TABS.profiles = {
     updating: true,
     currentProfile: null,
     activeSubtab: null,
+    isGovEnabled: false,
     tabNames: [ 'profile1', 'profile2', 'profile3', 'profile4', 'profile5', 'profile6' ],
     pidNames: [ 'ROLL', 'PITCH', 'YAW' ],
 };
@@ -17,8 +18,10 @@ TABS.profiles.initialize = function (callback) {
     }
 
     MSP.promise(MSPCodes.MSP_STATUS_EX)
+        .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
         .then(() => MSP.promise(MSPCodes.MSP_PID))
         .then(() => MSP.promise(MSPCodes.MSP_PID_ADVANCED))
+        .then(() => MSP.promise(MSPCodes.MSP_GOVERNOR))
         .then(() => load_html());
 
     function load_html() {
@@ -55,28 +58,48 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="levelAngleLimit"]').val(FC.ADVANCED_TUNING.levelAngleLimit);
 
         // I-term rotation
-        $('input[id="itermRotation"]').prop('checked', FC.ADVANCED_TUNING.itermRotation !== 0);
+        $('.tab-profiles input[id="itermRotation"]').prop('checked', FC.ADVANCED_TUNING.itermRotation !== 0);
 
         // I-term relax
-        $('select[id="itermRelaxAxes"]').val(FC.ADVANCED_TUNING.itermRelax > 0 ? FC.ADVANCED_TUNING.itermRelax : 1);
-        $('select[id="itermRelaxType"]').val(FC.ADVANCED_TUNING.itermRelaxType);
-        $('input[id="itermRelaxCutoff"]').val(FC.ADVANCED_TUNING.itermRelaxCutoff);
+        $('.tab-profiles select[id="itermRelaxAxes"]').val(FC.ADVANCED_TUNING.itermRelax > 0 ? FC.ADVANCED_TUNING.itermRelax : 1);
+        $('.tab-profiles select[id="itermRelaxType"]').val(FC.ADVANCED_TUNING.itermRelaxType);
+        $('.tab-profiles input[id="itermRelaxCutoff"]').val(FC.ADVANCED_TUNING.itermRelaxCutoff);
 
-        const itermRelaxCheck = $('input[id="itermRelax"]');
+        const itermRelaxCheck = $('.tab-profiles input[id="itermRelax"]');
 
         itermRelaxCheck.prop('checked', FC.ADVANCED_TUNING.itermRelax !== 0);
 
         itermRelaxCheck.change(function() {
             const checked = $(this).is(':checked');
             if (checked) {
-                $('.itermrelax .suboption').show();
-                $('.itermrelaxcutoff').show();
+                $('.tab-profiles .itermrelax .suboption').show();
+                $('.tab-profiles .itermrelaxcutoff').show();
             } else {
-                $('.itermrelax .suboption').hide();
+                $('.tab-profiles .itermrelax .suboption').hide();
             }
         });
 
         itermRelaxCheck.change();
+
+        self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR') && (FC.GOVERNOR.gov_mode > 1);
+
+        if (self.isGovEnabled) {
+            $('.tab-profiles input[id="govHeadspeed"]').val(FC.GOVERNOR.gov_headspeed);
+            $('.tab-profiles input[id="govMasterGain"]').val(FC.GOVERNOR.gov_gain);
+            $('.tab-profiles input[id="govPGain"]').val(FC.GOVERNOR.gov_p_gain);
+            $('.tab-profiles input[id="govIGain"]').val(FC.GOVERNOR.gov_i_gain);
+            $('.tab-profiles input[id="govDGain"]').val(FC.GOVERNOR.gov_d_gain);
+            $('.tab-profiles input[id="govFGain"]').val(FC.GOVERNOR.gov_f_gain);
+            $('.tab-profiles input[id="govTTAGain"]').val(FC.GOVERNOR.gov_tta_gain);
+            $('.tab-profiles input[id="govTTALimit"]').val(FC.GOVERNOR.gov_tta_limit);
+            $('.tab-profiles input[id="govCyclicPrecomp"]').val(FC.GOVERNOR.gov_cyclic_ff_weight);
+            $('.tab-profiles input[id="govCollectivePrecomp"]').val(FC.GOVERNOR.gov_collective_ff_weight);
+
+            $('.tab-profiles .gov_config').show();
+        }
+        else {
+            $('.tab-profiles .gov_config').hide();
+        }
 
     }
 
@@ -91,18 +114,31 @@ TABS.profiles.initialize = function (callback) {
             });
         });
 
-        FC.ADVANCED_TUNING.acroTrainerAngleLimit = $('input[id="acroTrainerAngleLimit"]').val();
+        FC.ADVANCED_TUNING.acroTrainerAngleLimit = $('.tab-profiles input[id="acroTrainerAngleLimit"]').val();
 
         FC.ADVANCED_TUNING.levelAngleLimit = parseInt($('.tab-profiles input[id="levelAngleLimit"]').val());
 
-        FC.ADVANCED_TUNING.itermRotation = $('input[id="itermRotation"]').is(':checked') ? 1 : 0;
-        FC.ADVANCED_TUNING.itermRelax = $('input[id="itermRelax"]').is(':checked') ? $('select[id="itermRelaxAxes"]').val() : 0;
-        FC.ADVANCED_TUNING.itermRelaxType = $('select[id="itermRelaxType"]').val();
-        FC.ADVANCED_TUNING.itermRelaxCutoff = parseInt($('input[id="itermRelaxCutoff"]').val());
+        FC.ADVANCED_TUNING.itermRotation = $('.tab-profiles input[id="itermRotation"]').is(':checked') ? 1 : 0;
+        FC.ADVANCED_TUNING.itermRelax = $('.tab-profiles input[id="itermRelax"]').is(':checked') ? $('.tab-profiles select[id="itermRelaxAxes"]').val() : 0;
+        FC.ADVANCED_TUNING.itermRelaxType = $('.tab-profiles select[id="itermRelaxType"]').val();
+        FC.ADVANCED_TUNING.itermRelaxCutoff = parseInt($('.tab-profiles input[id="itermRelaxCutoff"]').val());
 
         FC.ADVANCED_TUNING.feedforwardRoll  = parseInt($('.tab-profiles .ROLL .pid_data input[name="f"]').val());
         FC.ADVANCED_TUNING.feedforwardPitch = parseInt($('.tab-profiles .PITCH .pid_data input[name="f"]').val());
         FC.ADVANCED_TUNING.feedforwardYaw   = parseInt($('.tab-profiles .YAW .pid_data input[name="f"]').val());
+
+        if (self.isGovEnabled) {
+            FC.GOVERNOR.gov_headspeed = parseInt($('.tab-profiles input[id="govHeadspeed"]').val());
+            FC.GOVERNOR.gov_gain = parseInt($('.tab-profiles input[id="govMasterGain"]').val());
+            FC.GOVERNOR.gov_p_gain = parseInt($('.tab-profiles input[id="govPGain"]').val());
+            FC.GOVERNOR.gov_i_gain = parseInt($('.tab-profiles input[id="govIGain"]').val());
+            FC.GOVERNOR.gov_d_gain = parseInt($('.tab-profiles input[id="govDGain"]').val());
+            FC.GOVERNOR.gov_f_gain = parseInt($('.tab-profiles input[id="govFGain"]').val());
+            FC.GOVERNOR.gov_tta_gain = parseInt($('.tab-profiles input[id="govTTAGain"]').val());
+            FC.GOVERNOR.gov_tta_limit = parseInt($('.tab-profiles input[id="govTTALimit"]').val());
+            FC.GOVERNOR.gov_cyclic_ff_weight = parseInt($('.tab-profiles input[id="govCyclicPrecomp"]').val());
+            FC.GOVERNOR.gov_collective_ff_weight = parseInt($('.tab-profiles \input[id="govCollectivePrecomp"]').val());
+        }
     }
 
     function process_html() {
@@ -183,6 +219,7 @@ TABS.profiles.initialize = function (callback) {
             Promise.resolve(true)
                 .then(() => MSP.promise(MSPCodes.MSP_SET_PID, mspHelper.crunch(MSPCodes.MSP_SET_PID)))
                 .then(() => MSP.promise(MSPCodes.MSP_SET_PID_ADVANCED, mspHelper.crunch(MSPCodes.MSP_SET_PID_ADVANCED)))
+                .then(() => MSP.promise(MSPCodes.MSP_SET_GOVERNOR, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR)))
                 .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
                 .then(() => {
                     self.updating = false;

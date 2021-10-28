@@ -34,12 +34,16 @@
                 <a href="#" i18n="profilesSubTab6"></a>
             </div>
         </div>
-        <div class="tabarea">
+        <div class="tab-area">
         <form name="profile" id="profile">
             <div class="subtab-pid">
                 <div class="clear-both"></div>
+                
                 <div class="cf_column">
-                    <div class="gui_box grey">
+                    <div class="gui_box grey pid_gains">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="profilesPidGains"></div>
+                        </div>
                         <table id="pid_main" class="profile">
                             <tr class="pid_titlebar">
                                 <th class="name">
@@ -100,16 +104,12 @@
                             </tr>
                         </table>
                     </div>
-                </div>
-
-                <div class="cf_column">
-                    <div class="gui_box grey pidControllerAdvancedSettings spacer_left">
-                        <table class="pid_titlebar">
-                            <tr>
-                                <th i18n="profilesPidSettings"></th>
-                            </tr>
-                        </table>
-                        <table class="compensation">
+                    
+                    <div class="gui_box grey pid_settings">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="profilesPidSettings"></div>
+                        </div>
+                        <table class="pidSettings">
 
                             <tr class="acroTrainerAngleLimit">
                                 <td><input type="number" id="acroTrainerAngleLimit" step="1" min="10" max="80"/></td>
@@ -181,11 +181,113 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="cf_column">
+                    <div class="gui_box grey spacer_left gov_config">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="govProfile"></div>
+                        </div>
+                        <div class="spacer_box">
+                            <div class="number">
+                                <label>
+                                    <div class="numberspacer">
+                                        <input type="number" id="govHeadspeed" min="100" max="60000" step="10"/>
+                                    </div>
+                                    <span i18n="govHeadspeed"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govHeadspeedHelp"></div>
+                                </label>
+                            </div>
+                            <div class="number">
+                                <label>
+                                    <div class="numberspacer">
+                                        <input type="number" id="govMasterGain" min="0" max="200" />
+                                    </div>
+                                    <span i18n="govMasterGain"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govMasterGainHelp"></div>
+                                </label>
+                            </div>
+                            <div class="number">
+                                <label>
+                                    <div class="numberspacer">
+                                        <input type="number" id="govPGain" min="0" max="200" />
+                                    </div>
+                                    <span i18n="govPGain"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govPGainHelp"></div>
+                                </label>
+                            </div>
+                            <div class="number">
+                                <label>
+                                    <div class="numberspacer">
+                                        <input type="number" id="govIGain" min="0" max="200" />
+                                    </div>
+                                    <span i18n="govIGain"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govIGainHelp"></div>
+                                </label>
+                            </div>
+                            <div class="number">
+                                <label>
+                                    <div class="numberspacer">
+                                        <input type="number" id="govDGain" min="0" max="200" />
+                                    </div>
+                                    <span i18n="govDGain"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govDGainHelp"></div>
+                                </label>
+                            </div>
+                            <div class="number">
+                                <label>
+                                    <div class="numberspacer">
+                                        <input type="number" id="govFGain" min="0" max="200" />
+                                    </div>
+                                    <span i18n="govFGain"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govFGainHelp"></div>
+                                </label>
+                            </div>
+                            <div class="number">
+                                <label>
+                                    <div class="numberspacer">
+                                        <input type="number" id="govCyclicPrecomp" min="0" max="200" />
+                                    </div>
+                                    <span i18n="govCyclicPrecomp"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govCyclicPrecompHelp"></div>
+                                </label>
+                            </div>
+                            <div class="number">
+                                <label>
+                                    <div class="numberspacer">
+                                        <input type="number" id="govCollectivePrecomp" min="0" max="200" />
+                                    </div>
+                                    <span i18n="govCollectivePrecomp"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govCollectivePrecompHelp"></div>
+                                </label>
+                            </div>
+                            <div class="number">
+                                <label>
+                                    <div class="numberspacer">
+                                        <input type="number" id="govTTAGain" min="0" max="200" />
+                                    </div>
+                                    <span i18n="govTTAGain"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govTTAGainHelp"></div>
+                                </label>
+                            </div>
+                            <div class="number">
+                                <label>
+                                    <div class="numberspacer">
+                                        <input type="number" id="govTTALimit" min="0" max="200" />
+                                    </div>
+                                    <span i18n="govTTALimit"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govTTALimitHelp"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </form>
         </div>
         <div class="clear-both"></div>
     </div>
+    
     <div class="content_toolbar">
         <div class="btn refresh_btn">
             <a class="refresh" href="#" i18n="profilesButtonRefresh"></a>
