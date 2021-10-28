@@ -2260,7 +2260,7 @@
     },
 
     "profilesPIDGains": {
-        "message": "Gains"
+        "message": "Axis"
     },
     "profilesProportional": {
         "message": "Proportional"
@@ -2858,24 +2858,25 @@
         "description": "Description of the Bidirectional DShot feature of the ESC/Motor"
     },
     "motorsMotorPoles": {
-        "message": "Motor pole count",
-        "description": "One of the fields of the ESC/Motor configuration"
+        "message": "Pole count"
     },
     "motorsMotorPolesLong": {
-        "message": "$t(motorsMotorPoles.message) (number of magnets on the motor bell)",
-        "description": "One of the fields of the ESC/Motor configuration"
+        "message": "$t(motorsMotorPoles.message) (number of magnets on the motor bell)"
     },
-    "motorsMotor1PolesLong": {
-        "message": "$t(motorsMotorPoles.message) for motor #1",
-        "description": "One of the fields of the ESC/Motor configuration"
+    "motorsMotorPoles1Long": {
+        "message": "$t(motorsMotorPoles.message) for motor #1"
     },
-    "motorsMotor2PolesLong": {
-        "message": "$t(motorsMotorPoles.message) for motor #2",
-        "description": "One of the fields of the ESC/Motor configuration"
+    "motorsMotorPoles2Long": {
+        "message": "$t(motorsMotorPoles.message) for motor #2"
+    },
+    "motorsMotorPoles3Long": {
+        "message": "$t(motorsMotorPoles.message) for motor #3"
+    },
+    "motorsMotorPoles4Long": {
+        "message": "$t(motorsMotorPoles.message) for motor #4"
     },
    "motorsMotorPolesHelp": {
-        "message": "The pole count is the number of magnets on the bell of the motor. Do NOT count the stators where the windings are located. Large motors usually have 8 magnets, smaller often have 6 magnets.",
-        "description": "Help text for the Motor poles field of the ESC/Motor configuration"
+        "message": "The pole count is the number of magnets on the bell of the motor. Do NOT count the stators where the windings are located. Large motors usually have 8 magnets, smaller often have 6 magnets."
     },
     "motorsThrottleMinimum": {
         "message": "Minimum Throttle (Lowest ESC value when armed)"
@@ -2892,75 +2893,7 @@
     "motorsThrottleMinimumCommandHelp": {
         "message": "This is the value that is sent to the ESCs when the craft is disarmed. Set this to a value that has the motors stopped (1000 for most ESCs)."
     },
-    "motorsGovFeatures": {
-        "message": "Governor Features"
-    },
-    "motorsGovMode": {
-        "message": "Governor mode"
-    },
-    "motorsGovModeHelp": {
-        "message": "The governor maintains the main rotor speed constant. The algorithm used in the control loop is selected with this setting."
-    },
-    "motorsGovHeadspeed": {
-        "message": "Full headspeed"
-    },
-    "motorsGovHeadspeedHelp": {
-        "message": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input. For example, at 75% throttle the governor will try to maintain 75% of the full headspeed."
-    },
-    "motorsGovGearRatio": {
-        "message": "Main rotor gear ratio (x1000)"
-    },
-    "motorsGovGearRatioHelp": {
-        "message": "Gearing ratio between the motor and the main rotor (x1000)"
-    },
-    "motorsGovSpoolupTime": {
-        "message": "Spoolup time (x0.1s)"
-    },
-    "motorsGovSpoolupTimeHelp": {
-        "message": "Time constant for slow spoolup. Unit is 0.1s, measuring the time from zero to max headspeed."
-    },
-    "motorsGovTrackingTime": {
-        "message": "Tracking time (x0.1s)"
-    },
-    "motorsGovTrackingTimeHelp": {
-        "message": "Time constant for headspeed changes. Unit is 0.1s, measuring the time from zero to max headspeed."
-    },
-    "motorsGovRecoveryTime": {
-        "message": "Recovery time (x0.1s)"
-    },
-    "motorsGovRecoveryTimeHelp": {
-        "message": "Time constant for recovery spoolup. Unit is 0.1s, measuring the time from zero to max headspeed."
-    },
-    "motorsGovAutoBailoutTime": {
-        "message": "Autorotation bailout time (x0.1s)"
-    },
-    "motorsGovAutoBailoutTimeHelp": {
-        "message": "Time constant for autorotation bailout spoolup. Unit is 0.1s, measuring the time from zero to max headspeed."
-    },
-    "motorsGovAutoTimeout": {
-        "message": "Autorotation timeout (s)"
-    },
-    "motorsGovAutoTimeoutHelp": {
-        "message": "Timeout for ending autorotation and moving to normal IDLE."
-    },
-    "motorsGovMasterGain": {
-        "message": "Governor PID gain"
-    },
-    "motorsGovMasterGainHelp": {
-        "message": "Governor master PID loop gain. Usually 20..150."
-    },
-    "motorsGovCyclicPrecomp": {
-        "message": "Cyclic precompensation"
-    },
-    "motorsGovCyclicPrecompHelp": {
-        "message": "Cyclic precompensation weight. Determines how much cyclic is mixed into the throttle output. This helps the governor to maintain the headspeed proactively. Usually 20..100"
-    },
-    "motorsGovCollectivePrecomp": {
-        "message": "Collective precompensation"
-    },
-    "motorsGovCollectivePrecompHelp": {
-        "message": "Collective precompensation weight. Determines how much collective is mixed into the throttle output. This helps the governor to maintain the headspeed proactively. Usually 30..100"
-    },
+    
     "motorsText":{
         "message": "Motors"
     },
@@ -3123,6 +3056,118 @@
         "message": "Stop motors"
     },
 
+    "govFeatures": {
+        "message": "Governor Features"
+    },
+    "govProfile": {
+        "message": "Governor Settings"
+    },
+    "govConfigurationNote": {
+        "message": "<strong>Note:</strong> Governor has both global and profile parameters. Please see the Profiles tab for profile specific parameters."
+    },
+    "govMode": {
+        "message": "Governor mode"
+    },
+    "govModeHelp": {
+        "message": "The governor maintains the main rotor speed constant. The algorithm used in the control loop is selected with this setting."
+    },
+    "govGearRatio": {
+        "message": "Main rotor gear ratio (x1000)"
+    },
+    "govGearRatioHelp": {
+        "message": "Gearing ratio between the motor and the main rotor (x1000)"
+    },
+    "govSpoolupTime": {
+        "message": "Spoolup time (x0.1s)"
+    },
+    "govSpoolupTimeHelp": {
+        "message": "Time constant for slow spoolup. Unit is 0.1s, measuring the time from zero to max headspeed."
+    },
+    "govTrackingTime": {
+        "message": "Tracking time (x0.1s)"
+    },
+    "govTrackingTimeHelp": {
+        "message": "Time constant for headspeed changes. Unit is 0.1s, measuring the time from zero to max headspeed."
+    },
+    "govRecoveryTime": {
+        "message": "Recovery time (x0.1s)"
+    },
+    "govRecoveryTimeHelp": {
+        "message": "Time constant for recovery spoolup. Unit is 0.1s, measuring the time from zero to max headspeed."
+    },
+    "govAutoBailoutTime": {
+        "message": "Autorotation bailout time (x0.1s)"
+    },
+    "govAutoBailoutTimeHelp": {
+        "message": "Time constant for autorotation bailout spoolup. Unit is 0.1s, measuring the time from zero to max headspeed."
+    },
+    "govAutoTimeout": {
+        "message": "Autorotation timeout (s)"
+    },
+    "govAutoTimeoutHelp": {
+        "message": "Timeout for ending autorotation and moving to normal IDLE."
+    },
+    "govHeadspeed": {
+        "message": "Full headspeed"
+    },
+    "govHeadspeedHelp": {
+        "message": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input."
+    },
+    "govMasterGain": {
+        "message": "PID master gain"
+    },
+    "govMasterGainHelp": {
+        "message": "Master PID loop gain. Usually 10..100"
+    },
+    "govPGain": {
+        "message": "P-gain"
+    },
+    "govPGainHelp": {
+        "message": "PID loop P-term gain. Usually 10..100"
+    },
+    "govIGain": {
+        "message": "I-gain"
+    },
+    "govIGainHelp": {
+        "message": "PID loop I-term gain. Usually 10..100"
+    },
+    "govDGain": {
+        "message": "D-gain"
+    },
+    "govDGainHelp": {
+        "message": "PID loop D-term gain. Usually 0..100"
+    },
+    "govFGain": {
+        "message": "Feedforward gain"
+    },
+    "govFGainHelp": {
+        "message": "Collective/Cyclic feedforward gain. Usually 0..100"
+    },
+    "govTTAGain": {
+        "message": "Tail Torque Assist (TTA) gain"
+    },
+    "govTTAGainHelp": {
+        "message": "Tail Torque Assist gain. Usually 0..100"
+    },
+    "govTTALimit": {
+        "message": "Tail Torque Assist (TTA) limit"
+    },
+    "govTTALimitHelp": {
+        "message": "Tail Torque Assist maximum. Usually 0..50"
+    },
+    "govCyclicPrecomp": {
+        "message": "Cyclic precompensation"
+    },
+    "govCyclicPrecompHelp": {
+        "message": "Cyclic precompensation weight. Determines how much cyclic is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
+    },
+    "govCollectivePrecomp": {
+        "message": "Collective precompensation"
+    },
+    "govCollectivePrecompHelp": {
+        "message": "Collective precompensation weight. Determines how much collective is mixed into the feedfoward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
+    },
+    
     "sensorsInfo": {
         "message": "Keep in mind that using fast update periods and rendering multiple graphs at the same time is resource heavy and will burn your battery quicker if you use a laptop.<br />We recommend to only render graphs for sensors you are interested in while using reasonable update periods."
     },
@@ -4373,6 +4418,9 @@
     },
 
 
+    "profilesPidGains": {
+        "message": "PID Controller Gains"
+    },
     "profilesPidSettings": {
         "message": "PID Controller Settings"
     },
