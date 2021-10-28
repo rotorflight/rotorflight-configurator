@@ -77,26 +77,53 @@
                                         <div class="helpicon cf_tip" i18n_title="motorsThrottleMinimumCommandHelp"></div>
                                     </label>
                                 </div>
-                                <div class="number motorPoles">
+                                <div class="number motorPoles1">
                                     <label>
                                         <div class="numberspacer">
                                             <input type="number" id="motorPoles" min="2" max="255" step="2"/>
                                         </div>
-                                        <span i18n="motorsMotor1PolesLong"></span>
+                                        <span i18n="motorsMotorPoles1Long"></span>
                                     </label>
                                     <div class="helpicon cf_tip" i18n_title="motorsMotorPolesHelp"></div>
                                 </div>
                                 <!--
-                                <div class="number motor2Poles">
+                                <div class="number motorPoles2">
                                     <label>
                                         <div class="numberspacer">
-                                            <input type="number" id="motor2Poles" min="2" max="255" step="2"/>
+                                            <input type="number" id="motorPoles2" min="2" max="255" step="2"/>
                                         </div>
-                                        <span i18n="motorsMotor2PolesLong"></span>
+                                        <span i18n="motorsMotorPoles2Long"></span>
+                                    </label>
+                                    <div class="helpicon cf_tip" i18n_title="motorsMotorPolesHelp"></div>
+                                </div>
+                                <div class="number motorPoles3">
+                                    <label>
+                                        <div class="numberspacer">
+                                            <input type="number" id="motorPoles3" min="2" max="255" step="2"/>
+                                        </div>
+                                        <span i18n="motorsMotorPoles3Long"></span>
+                                    </label>
+                                    <div class="helpicon cf_tip" i18n_title="motorsMotorPolesHelp"></div>
+                                </div>
+                                <div class="number motorPoles4">
+                                    <label>
+                                        <div class="numberspacer">
+                                            <input type="number" id="motorPoles4" min="2" max="255" step="2"/>
+                                        </div>
+                                        <span i18n="motorsMotorPoles4Long"></span>
                                     </label>
                                     <div class="helpicon cf_tip" i18n_title="motorsMotorPolesHelp"></div>
                                 </div>
                                 -->
+                                <div class="number mainGearRatio">
+                                    <label>
+                                        <div class="numberspacer">
+                                            <input type="number" id="govGearRatio" min="0" max="50000" />
+                                        </div>
+                                        <span i18n="govGearRatio"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govGearRatioHelp"></div>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -106,44 +133,29 @@
                     <div class="governor_features">
                         <div class="gui_box grey">
                             <div class="gui_box_titlebar">
-                                <div class="spacer_box_title" i18n="motorsGovFeatures"></div>
+                                <div class="spacer_box_title" i18n="govFeatures"></div>
                             </div>
                             <div class="spacer_box">
+                                <div class="note">
+                                    <p i18n="govConfigurationNote"></p>
+                                </div>
                                 <div class="selectGovMode">
                                     <label>
                                         <select class="govMode">
                                             <!-- list generated here -->
                                         </select>
-                                        <span i18n="motorsGovMode"></span>
-                                        <div class="helpicon cf_tip" i18n_title="motorsGovModeHelp"></div>
+                                        <span i18n="govMode"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govModeHelp"></div>
                                     </label>
                                 </div>
                                 <div class="govConfig">
                                     <div class="number">
                                         <label>
                                             <div class="numberspacer">
-                                                <input type="number" id="govHeadspeed" min="100" max="60000" step="10"/>
-                                            </div>
-                                            <span i18n="motorsGovHeadspeed"></span>
-                                            <div class="helpicon cf_tip" i18n_title="motorsGovHeadspeedHelp"></div>
-                                        </label>
-                                    </div>
-                                    <div class="number">
-                                        <label>
-                                            <div class="numberspacer">
-                                                <input type="number" id="govGearRatio" min="0" max="50000" />
-                                            </div>
-                                            <span i18n="motorsGovGearRatio"></span>
-                                            <div class="helpicon cf_tip" i18n_title="motorsGovGearRatioHelp"></div>
-                                        </label>
-                                    </div>
-                                    <div class="number">
-                                        <label>
-                                            <div class="numberspacer">
                                                 <input type="number" id="govSpoolupTime" min="0" max="1000" />
                                             </div>
-                                            <span i18n="motorsGovSpoolupTime"></span>
-                                            <div class="helpicon cf_tip" i18n_title="motorsGovSpoolupTimeHelp"></div>
+                                            <span i18n="govSpoolupTime"></span>
+                                            <div class="helpicon cf_tip" i18n_title="govSpoolupTimeHelp"></div>
                                         </label>
                                     </div>
                                     <div class="number">
@@ -151,8 +163,8 @@
                                             <div class="numberspacer">
                                                 <input type="number" id="govTrackingTime" min="0" max="1000" />
                                             </div>
-                                            <span i18n="motorsGovTrackingTime"></span>
-                                            <div class="helpicon cf_tip" i18n_title="motorsGovTrackingTimeHelp"></div>
+                                            <span i18n="govTrackingTime"></span>
+                                            <div class="helpicon cf_tip" i18n_title="govTrackingTimeHelp"></div>
                                         </label>
                                     </div>
                                     <div class="number">
@@ -160,8 +172,8 @@
                                             <div class="numberspacer">
                                                 <input type="number" id="govRecoveryTime" min="0" max="1000" />
                                             </div>
-                                            <span i18n="motorsGovRecoveryTime"></span>
-                                            <div class="helpicon cf_tip" i18n_title="motorsGovRecoveryTimeHelp"></div>
+                                            <span i18n="govRecoveryTime"></span>
+                                            <div class="helpicon cf_tip" i18n_title="govRecoveryTimeHelp"></div>
                                         </label>
                                     </div>
                                     <div class="number">
@@ -169,8 +181,8 @@
                                             <div class="numberspacer">
                                                 <input type="number" id="govAutoBailoutTime" min="0" max="1000" />
                                             </div>
-                                            <span i18n="motorsGovAutoBailoutTime"></span>
-                                            <div class="helpicon cf_tip" i18n_title="motorsGovAutoBailoutTimeHelp"></div>
+                                            <span i18n="govAutoBailoutTime"></span>
+                                            <div class="helpicon cf_tip" i18n_title="govAutoBailoutTimeHelp"></div>
                                         </label>
                                     </div>
                                     <div class="number">
@@ -178,35 +190,8 @@
                                             <div class="numberspacer">
                                                 <input type="number" id="govAutoTimeout" min="0" max="1000" />
                                             </div>
-                                            <span i18n="motorsGovAutoTimeout"></span>
-                                            <div class="helpicon cf_tip" i18n_title="motorsGovAutoTimeoutHelp"></div>
-                                        </label>
-                                    </div>
-                                    <div class="number">
-                                        <label>
-                                            <div class="numberspacer">
-                                                <input type="number" id="govMasterGain" min="0" max="200" />
-                                            </div>
-                                            <span i18n="motorsGovMasterGain"></span>
-                                            <div class="helpicon cf_tip" i18n_title="motorsGovMasterGainHelp"></div>
-                                        </label>
-                                    </div>
-                                    <div class="number">
-                                        <label>
-                                            <div class="numberspacer">
-                                                <input type="number" id="govCyclicPrecomp" min="0" max="200" />
-                                            </div>
-                                            <span i18n="motorsGovCyclicPrecomp"></span>
-                                            <div class="helpicon cf_tip" i18n_title="motorsGovCyclicPrecompHelp"></div>
-                                        </label>
-                                    </div>
-                                    <div class="number">
-                                        <label>
-                                            <div class="numberspacer">
-                                                <input type="number" id="govCollectivePrecomp" min="0" max="200" />
-                                            </div>
-                                            <span i18n="motorsGovCollectivePrecomp"></span>
-                                            <div class="helpicon cf_tip" i18n_title="motorsGovCollectivePrecompHelp"></div>
+                                            <span i18n="govAutoTimeout"></span>
+                                            <div class="helpicon cf_tip" i18n_title="govAutoTimeoutHelp"></div>
                                         </label>
                                     </div>
                                 </div>

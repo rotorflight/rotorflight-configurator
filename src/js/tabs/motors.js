@@ -104,17 +104,19 @@ TABS.motors.initialize = function (callback) {
 
         govModeSelect.val(FC.GOVERNOR.gov_mode);
 
-        $('input[id="govHeadspeed"]').val(FC.GOVERNOR.gov_headspeed);
-        $('input[id="govGearRatio"]').val(FC.GOVERNOR.gov_gear_ratio);
-        $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time);
-        $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time);
-        $('input[id="govRecoveryTime"]').val(FC.GOVERNOR.gov_recovery_time);
-        $('input[id="govAutoBailoutTime"]').val(FC.GOVERNOR.gov_autorotation_bailout_time);
-        $('input[id="govAutoTimeout"]').val(FC.GOVERNOR.gov_autorotation_timeout);
-        $('input[id="govMasterGain"]').val(FC.GOVERNOR.gov_gain);
-        $('input[id="govCyclicPrecomp"]').val(FC.GOVERNOR.gov_cyclic_ff_weight);
-        $('input[id="govCollectivePrecomp"]').val(FC.GOVERNOR.gov_collective_ff_weight);
+        if (FC.GOVERNOR.gov_mode > 0) {
+            $('input[id="govGearRatio"]').val(FC.GOVERNOR.gov_gear_ratio);
+            $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time);
+            $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time);
+            $('input[id="govRecoveryTime"]').val(FC.GOVERNOR.gov_recovery_time);
+            $('input[id="govAutoBailoutTime"]').val(FC.GOVERNOR.gov_autorotation_bailout_time);
+            $('input[id="govAutoTimeout"]').val(FC.GOVERNOR.gov_autorotation_timeout);
 
+            $('.govConfig').show();
+        }
+        else {
+            $('.govConfig').hide();
+        }
 
         function updateVisibility() {
 
@@ -140,12 +142,15 @@ TABS.motors.initialize = function (callback) {
             pwmFreqSwitch.trigger("change");
 
             $('.tab-motors .override').toggle(!FC.CONFIG.motorOverrideDisabled);
+
+            $('.govConfig').toggle(govModeSelect.val() > 0);
         }
 
         escProtocolSelect.val(FC.PID_ADVANCED_CONFIG.fast_pwm_protocol);
 
         escProtocolSelect.change(updateVisibility);
         dshotBidirSwitch.change(updateVisibility);
+        govModeSelect.change(updateVisibility);
 
         updateVisibility();
 
@@ -359,16 +364,14 @@ TABS.motors.initialize = function (callback) {
 
             if (self.isGovEnabled) {
                 FC.GOVERNOR.gov_mode = govModeSelect.val();
-                FC.GOVERNOR.gov_headspeed = parseInt($('input[id="govHeadspeed"]').val());
-                FC.GOVERNOR.gov_gear_ratio = parseInt($('input[id="govGearRatio"]').val());
-                FC.GOVERNOR.gov_spoolup_time = parseInt($('input[id="govSpoolupTime"]').val());
-                FC.GOVERNOR.gov_tracking_time = parseInt($('input[id="govTrackingTime"]').val());
-                FC.GOVERNOR.gov_recovery_time = parseInt($('input[id="govRecoveryTime"]').val());
-                FC.GOVERNOR.gov_autorotation_bailout_time = parseInt($('input[id="govAutoBailoutTime"]').val());
-                FC.GOVERNOR.gov_autorotation_timeout = parseInt($('input[id="govAutoTimeout"]').val());
-                FC.GOVERNOR.gov_gain = parseInt($('input[id="govMasterGain"]').val());
-                FC.GOVERNOR.gov_cyclic_ff_weight = parseInt($('input[id="govCyclicPrecomp"]').val());
-                FC.GOVERNOR.gov_collective_ff_weight = parseInt($('input[id="govCollectivePrecomp"]').val());
+                if (FC.GOVERNOR.gov_mode > 0) {
+                    FC.GOVERNOR.gov_gear_ratio = parseInt($('input[id="govGearRatio"]').val());
+                    FC.GOVERNOR.gov_spoolup_time = parseInt($('input[id="govSpoolupTime"]').val());
+                    FC.GOVERNOR.gov_tracking_time = parseInt($('input[id="govTrackingTime"]').val());
+                    FC.GOVERNOR.gov_recovery_time = parseInt($('input[id="govRecoveryTime"]').val());
+                    FC.GOVERNOR.gov_autorotation_bailout_time = parseInt($('input[id="govAutoBailoutTime"]').val());
+                    FC.GOVERNOR.gov_autorotation_timeout = parseInt($('input[id="govAutoTimeout"]').val());
+                }
             }
 
             Promise.resolve(true)
