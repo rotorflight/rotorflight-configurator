@@ -3,17 +3,26 @@
     border: 0;
 }
 
+.tab-profiles .gui_box {
+    margin-bottom: 5px;
+    display: table;
+}
+
+.tab-profiles .gui_box_titlebar {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.tab-profiles .pid_gains .gui_box_titlebar {
+    margin-bottom: 0;
+}
+
 .tab-profiles table {
     float: left;
     margin: 0;
     border-collapse: collapse;
     width: 100%;
     table-layout: fixed;
-}
-
-.tab-profiles .gui_box {
-    margin-bottom: 5px;
-    display: table;
 }
 
 .tab-profiles table .inputBackground {
@@ -25,29 +34,15 @@
     border-bottom: 0 solid var(--subtleAccent);
 }
 
-.tab-profiles table th {
-    padding: 0;
-    border: 0;
-    height: 10px;
-    font-weight: normal;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
 .tab-profiles .pid_titlebar th {
-    padding: 5px;
+    color: var(--quietText);
+    background-color: var(--button-background);
     text-align: left;
-    border-right: 1px solid var(--subtleAccent);
-}
-
-.tab-profiles .pid_titlebar th:first-child {
-    text-align: left;
-    border-top-left-radius: 3px;
-}
-
-.tab-profiles .pid_titlebar th:last-child {
-    border-right: none;
-    border-top-right-radius: 3px;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 16px;
+    height: 22px;
+    border-top: 1px solid var(--boxBackground);
 }
 
 .tab-profiles table tr td:first-child {
@@ -59,36 +54,36 @@
     border-right: 0 solid var(--subtleAccent);
 }
 
-.tab-profiles table.compensation tr {
+.tab-profiles table.pidSettings tr {
     height: 30px;
     border-bottom: 1px solid var(--subtleAccent);
 }
 
-.tab-profiles table.compensation tr:last-child {
+.tab-profiles table.pidSettings tr:last-child {
     border-bottom: none;
 }
 
-.tab-profiles table.compensation td {
+.tab-profiles table.pidSettings td {
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.tab-profiles table.compensation td:first-child {
+.tab-profiles table.pidSettings td:first-child {
     width: 65px;
     text-align: center;
     vertical-align: top;
     padding-top: 4px;
 }
 
-.tab-profiles table.compensation td:last-child {
+.tab-profiles table.pidSettings td:last-child {
     width: 100%;
 }
 
-.tab-profiles table.compensation .helpicon {
+.tab-profiles table.pidSettings .helpicon {
     margin-top: 3px
 }
 
-.tab-profiles table.compensation .suboption {
+.tab-profiles table.pidSettings .suboption {
     margin-left: 2%;
     display: flex;
     flex-flow: row wrap-reverse;
@@ -96,7 +91,7 @@
     padding-bottom: 2px;
 }
 
-.tab-profiles table.compensation .suboption select {
+.tab-profiles table.pidSettings .suboption select {
     width: 80px;
     height: 20px;
     text-align: right;
@@ -107,7 +102,7 @@
     background-color: white;
 }
 
-.tab-profiles table.compensation .suboption input {
+.tab-profiles table.pidSettings .suboption input {
     width: 80px;
     height: 20px;
     box-sizing: border-box;
@@ -116,7 +111,7 @@
     background-color: white;
 }
 
-.tab-profiles table.compensation .suboption label {
+.tab-profiles table.pidSettings .suboption label {
     margin-left: 5px;
 }
 
@@ -145,6 +140,31 @@
     text-align-last: right;
     border-radius: 3px;
     border: 1px solid var(--subtleAccent);
+}
+
+.tab-profiles .numberspacer {
+    float: left;
+    width: 80px;
+    height: 22px;
+}
+
+.tab-profiles .number input {
+    width: 60px;
+    height: 20px;
+    line-height: 20px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: normal;
+    margin-right: 11px;
+    padding-left: 3px;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+}
+
+.tab-profiles .number .disabled {
+    width: 48px;
+    padding: 0 5px;
+    background-color: #ececec;
 }
 
 .tab-profiles .tab-container {
@@ -183,18 +203,6 @@
     background-color: var(--accent);
     color: #000;
     transition: none;
-}
-
-.tab-profiles .pid_titlebar {
-    color: #fff;
-    background-color: var(--quietHeader);
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    height: 20px;
-}
-
-.tab-profiles .pid_titlebar.pid_titlebar_extended {
-    border-radius: 0;
 }
 
 .pid_roll {
@@ -241,7 +249,7 @@
 
 .tab-profiles .numberspacer {
     float: left;
-    width: 65px;
+    width: 100px;
     height: 21px;
 }
 
@@ -257,18 +265,6 @@
 .tab-profiles .number:last-child {
     padding-bottom: 5px;
     border-bottom: 0;
-}
-
-.tab-profiles .number input {
-    width: 50px;
-    padding-left: 3px;
-    height: 20px;
-    line-height: 20px;
-    text-align: left;
-    border: 1px solid var(--subtleAccent);
-    border-radius: 3px;
-    margin-right: 11px;
-    font-weight: normal;
 }
 
 .tab-profiles .gui_box span {
@@ -334,7 +330,7 @@
 }
 
 
-.tabarea {
+.tab-profiles .tab-area {
     width: calc(100% - 22px);
     position: relative;
     padding: 10px;

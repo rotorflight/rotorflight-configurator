@@ -580,7 +580,7 @@ progress[value]::-webkit-progress-bar {
 
 /* PROFILES TAB */
 
-.tab-profiles .tabarea {
+.tab-profiles .tab-area {
     background: #393b3a;
 }
 
@@ -605,17 +605,17 @@ progress[value]::-webkit-progress-bar {
     color: white;
 }
 
-.tab-profiles table.compensation .suboption select {
+.tab-profiles table.pidSettings .suboption select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-profiles table.compensation .suboption input {
+.tab-profiles table.pidSettings .suboption input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-profiles table.compensation tr {
+.tab-profiles table.pidSettings tr {
     border-bottom: 1px solid #6b6b6b;
 }
 
@@ -632,6 +632,11 @@ progress[value]::-webkit-progress-bar {
 }
 
 .tab-profiles .gui_box span {
+    color: white;
+}
+
+.tab-profiles .number input {
+    background-color: #3a3a3a;
     color: white;
 }
 
