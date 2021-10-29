@@ -48,8 +48,9 @@
 }
 
 .tab-setup .danger td {
-    padding: 8px 5px 2px 5px;
+    padding: 8px 5px 8px 5px;
     text-align: left;
+    border-bottom: 1px solid var(--subtleAccent);
 }
 
 .tab-setup .danger tr .td1 {
@@ -57,21 +58,17 @@
     padding-right: 14px;
 }
 
-.tab-setup .danger tr td.td2 {
+.tab-setup .danger tr .td2 {
     padding-right: 14px;
 }
 
-.tab-setup .danger tr td.td3 {
+.tab-setup .danger tr .td3 {
     width: 75%;
 }
 
 .tab-setup .danger tr:last-child td {
     padding-bottom: 15px;
-}
-
-.tab-setup .danger tr td.border {
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 0;
 }
 
 .tab-setup .gui_box_titlebar .helpicon {
