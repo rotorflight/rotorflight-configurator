@@ -148,6 +148,14 @@ TABS.setup.initialize = function (callback) {
             FC.CONFIG.motorOverrideDisabled = !enableMotorOverrideSwitch.prop('checked');
         });
 
+        const enableServoOverrideSwitch = $('input[id="initialSetupEnableServoOverride"]');
+
+        enableServoOverrideSwitch.prop('checked', !FC.CONFIG.servoOverrideDisabled);
+
+        enableServoOverrideSwitch.change(function () {
+            FC.CONFIG.servoOverrideDisabled = !enableServoOverrideSwitch.prop('checked');
+        });
+
         $('a.backupSettings').click(function () {
             if ($(this).hasClass('disabled')) {
                 return;
