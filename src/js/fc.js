@@ -26,6 +26,7 @@ const INITIAL_CONFIG = {
     armingDisableFlags:               0,
     armingDisabled:                   false,
     motorOverrideDisabled:            true,
+    servoOverrideDisabled:            true,
     boardIdentifier:                  "",
     boardVersion:                     0,
     targetCapabilities:               0,

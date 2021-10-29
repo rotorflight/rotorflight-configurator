@@ -199,10 +199,13 @@ TABS.servos.initialize = function (callback) {
         });
 
 
+        $('.tab-servos .override').toggle(!FC.CONFIG.servoOverrideDisabled);
+
         // Initialize servos
         for (let index = 0; index < self.MAX_SERVOS; index++) {
             process_config(index);
-            process_override(index);
+            if (!FC.CONFIG.servoOverrideDisabled)
+                process_override(index);
         }
 
         // translate to user-selected language
