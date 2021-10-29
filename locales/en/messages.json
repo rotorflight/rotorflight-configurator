@@ -1270,7 +1270,7 @@
         "message": "<strong>Note:</strong> In order to prevent injury <strong>remove ALL rotor blades</strong> before enabling any arming features.<strong class=\"message-negative\"><strong class=\"message-negative\"><br/>NEVER FLY YOUR CRAFT WITH THE CONFIGURATOR CONNECTED!</strong>"
     },
     "initialSetupDangerTitle": {
-        "message": "Arming and Motor Control"
+        "message": "Arming and Override"
     },
     "initialSetupEnableArming": {
         "message": "<strong>Enable Arming</strong>"
@@ -1282,7 +1282,13 @@
         "message": "<strong>Enable Motor Override</strong>"
     },
     "initialSetupEnableMotorOverrideText": {
-        "message": "Enable the motor override feature in the Motors tab. Setting motor override will make the motors to spool up."
+        "message": "Enable the motor override feature in the Motors tab. Setting motor override WILL make the motors to spool up."
+    },
+    "initialSetupEnableServoOverride": {
+        "message": "<strong>Enable Servo Override</strong>"
+    },
+    "initialSetupEnableServoOverrideText": {
+        "message": "Enable the servo override feature in the Servos tab. Setting servo override WILL move the servos to arbitrary positions."
     },
     "featureNone": {
         "message": "&lt;Select One&gt;"
