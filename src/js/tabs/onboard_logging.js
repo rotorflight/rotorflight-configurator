@@ -344,10 +344,11 @@ TABS.onboard_logging.initialize = function (callback) {
                 {text: "BLACKBOX_OUTPUT"},
                 {text: "GYRO_SAMPLE"},
                 {text: "RX_TIMING"},
-                {text: "USER1"},
-                {text: "USER2"},
-                {text: "USER3"},
-                {text: "USER4"},
+                {text: "YAW_PRECOMP"},
+                {text: "UNKNOWN1"},
+                {text: "UNKNOWN2"},
+                {text: "UNKNOWN3"},
+                {text: "UNKNOWN4"},
             ];
 
             for (let i = 0; i < FC.PID_ADVANCED_CONFIG.debugModeCount; i++) {
