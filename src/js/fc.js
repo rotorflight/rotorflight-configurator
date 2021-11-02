@@ -64,7 +64,6 @@ const FC = {
     // the default state must be defined inside the resetState() method
     ADJUSTMENT_RANGES: null,
     ADVANCED_TUNING: null,
-    ADVANCED_TUNING_ACTIVE: null,
     ANALOG: {...INITIAL_CONFIG},
     ARMING_CONFIG: null,
     AUX_CONFIG: null,
@@ -510,7 +509,6 @@ const FC = {
             vbat_sag_compensation:      0,
             thrustLinearization:        0,
         };
-        this.ADVANCED_TUNING_ACTIVE = { ...this.ADVANCED_TUNING };
 
         this.GOVERNOR = {
             gov_mode:                       0,
