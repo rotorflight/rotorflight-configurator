@@ -45,22 +45,22 @@ TABS.profiles.initialize = function (callback) {
         });
 
         // Acro Trainer
-        $('input[id="acroTrainerAngleLimit"]').val(FC.ADVANCED_TUNING.acroTrainerAngleLimit).trigger('input');
+        $('input[id="acroTrainerAngleLimit"]').val(FC.PID_PROFILE.acroTrainerAngleLimit).trigger('input');
 
         // Angle mode
-        $('.tab-profiles input[id="levelAngleLimit"]').val(FC.ADVANCED_TUNING.levelAngleLimit);
+        $('.tab-profiles input[id="levelAngleLimit"]').val(FC.PID_PROFILE.levelAngleLimit);
 
         // I-term rotation
-        $('.tab-profiles input[id="itermRotation"]').prop('checked', FC.ADVANCED_TUNING.itermRotation !== 0);
+        $('.tab-profiles input[id="itermRotation"]').prop('checked', FC.PID_PROFILE.itermRotation !== 0);
 
         // I-term relax
-        $('.tab-profiles select[id="itermRelaxAxes"]').val(FC.ADVANCED_TUNING.itermRelax > 0 ? FC.ADVANCED_TUNING.itermRelax : 1);
-        $('.tab-profiles select[id="itermRelaxType"]').val(FC.ADVANCED_TUNING.itermRelaxType);
-        $('.tab-profiles input[id="itermRelaxCutoff"]').val(FC.ADVANCED_TUNING.itermRelaxCutoff);
+        $('.tab-profiles select[id="itermRelaxAxes"]').val(FC.PID_PROFILE.itermRelax > 0 ? FC.PID_PROFILE.itermRelax : 1);
+        $('.tab-profiles select[id="itermRelaxType"]').val(FC.PID_PROFILE.itermRelaxType);
+        $('.tab-profiles input[id="itermRelaxCutoff"]').val(FC.PID_PROFILE.itermRelaxCutoff);
 
         const itermRelaxCheck = $('.tab-profiles input[id="itermRelax"]');
 
-        itermRelaxCheck.prop('checked', FC.ADVANCED_TUNING.itermRelax !== 0);
+        itermRelaxCheck.prop('checked', FC.PID_PROFILE.itermRelax !== 0);
 
         itermRelaxCheck.change(function() {
             const checked = $(this).is(':checked');
@@ -107,14 +107,14 @@ TABS.profiles.initialize = function (callback) {
             });
         });
 
-        FC.ADVANCED_TUNING.acroTrainerAngleLimit = $('.tab-profiles input[id="acroTrainerAngleLimit"]').val();
+        FC.PID_PROFILE.acroTrainerAngleLimit = $('.tab-profiles input[id="acroTrainerAngleLimit"]').val();
 
-        FC.ADVANCED_TUNING.levelAngleLimit = parseInt($('.tab-profiles input[id="levelAngleLimit"]').val());
+        FC.PID_PROFILE.levelAngleLimit = parseInt($('.tab-profiles input[id="levelAngleLimit"]').val());
 
-        FC.ADVANCED_TUNING.itermRotation = $('.tab-profiles input[id="itermRotation"]').is(':checked') ? 1 : 0;
-        FC.ADVANCED_TUNING.itermRelax = $('.tab-profiles input[id="itermRelax"]').is(':checked') ? $('.tab-profiles select[id="itermRelaxAxes"]').val() : 0;
-        FC.ADVANCED_TUNING.itermRelaxType = $('.tab-profiles select[id="itermRelaxType"]').val();
-        FC.ADVANCED_TUNING.itermRelaxCutoff = parseInt($('.tab-profiles input[id="itermRelaxCutoff"]').val());
+        FC.PID_PROFILE.itermRotation = $('.tab-profiles input[id="itermRotation"]').is(':checked') ? 1 : 0;
+        FC.PID_PROFILE.itermRelax = $('.tab-profiles input[id="itermRelax"]').is(':checked') ? $('.tab-profiles select[id="itermRelaxAxes"]').val() : 0;
+        FC.PID_PROFILE.itermRelaxType = $('.tab-profiles select[id="itermRelaxType"]').val();
+        FC.PID_PROFILE.itermRelaxCutoff = parseInt($('.tab-profiles input[id="itermRelaxCutoff"]').val());
 
         if (self.isGovEnabled) {
             FC.GOVERNOR.gov_headspeed = parseInt($('.tab-profiles input[id="govHeadspeed"]').val());
