@@ -417,15 +417,19 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MISC.vbatwarningcellvoltage = data.readU8() / 10; // 10-50
                 break;
             case MSPCodes.MSP_MOTOR_CONFIG:
-                FC.MOTOR_CONFIG.minthrottle = data.readU16(); // 0-2000
-                FC.MOTOR_CONFIG.maxthrottle = data.readU16(); // 0-2000
-                FC.MOTOR_CONFIG.mincommand = data.readU16(); // 0-2000
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                    FC.MOTOR_CONFIG.motor_count = data.readU8();
-                    FC.MOTOR_CONFIG.motor_poles = data.readU8();
-                    FC.MOTOR_CONFIG.use_dshot_telemetry = data.readU8() != 0;
-                    FC.MOTOR_CONFIG.use_esc_sensor = data.readU8() != 0;
-                }
+                FC.MOTOR_CONFIG.motor_count = data.readU8();
+                FC.MOTOR_CONFIG.mincommand = data.readU16();
+                FC.MOTOR_CONFIG.minthrottle = data.readU16();
+                FC.MOTOR_CONFIG.maxthrottle = data.readU16();
+                FC.MOTOR_CONFIG.motor_pwm_protocol = data.readU8();
+                FC.MOTOR_CONFIG.motor_pwm_rate = data.readU16();
+                FC.MOTOR_CONFIG.use_pwm_inversion = (data.readU8() != 0);
+                FC.MOTOR_CONFIG.use_unsynced_pwd = (data.readU8() != 0);
+                FC.MOTOR_CONFIG.use_dshot_telemetry = (data.readU8() != 0);
+                FC.MOTOR_CONFIG.motor_poles[0] = data.readU8();
+                FC.MOTOR_CONFIG.motor_poles[1] = data.readU8();
+                FC.MOTOR_CONFIG.motor_poles[2] = data.readU8();
+                FC.MOTOR_CONFIG.motor_poles[3] = data.readU8();
                 break;
             case MSPCodes.MSP_GPS_CONFIG:
                 FC.GPS_CONFIG.provider = data.readU8();
@@ -963,32 +967,15 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_ADVANCED_CONFIG:
-                FC.PID_ADVANCED_CONFIG.gyro_sync_denom = data.readU8();
                 FC.PID_ADVANCED_CONFIG.pid_process_denom = data.readU8();
-                FC.PID_ADVANCED_CONFIG.use_unsyncedPwm = data.readU8();
-                FC.PID_ADVANCED_CONFIG.fast_pwm_protocol = EscProtocols.ReorderPwmProtocols(FC.CONFIG.apiVersion, data.readU8());
-                FC.PID_ADVANCED_CONFIG.motor_pwm_rate = data.readU16();
-                if (semver.gte(FC.CONFIG.apiVersion, "1.24.0")) {
-                    FC.PID_ADVANCED_CONFIG.digitalIdlePercent = data.readU16() / 100;
-
-                    if (semver.gte(FC.CONFIG.apiVersion, "1.25.0")) {
-                        let gyroUse32kHz = data.readU8();
-                        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                            FC.PID_ADVANCED_CONFIG.gyroUse32kHz = gyroUse32kHz;
-                        }
-                        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                            FC.PID_ADVANCED_CONFIG.motorPwmInversion = data.readU8();
-                            FC.SENSOR_ALIGNMENT.gyro_to_use = data.readU8(); // We don't want to double up on storing this state
-                            FC.PID_ADVANCED_CONFIG.gyroHighFsr = data.readU8();
-                            FC.PID_ADVANCED_CONFIG.gyroMovementCalibThreshold = data.readU8();
-                            FC.PID_ADVANCED_CONFIG.gyroCalibDuration = data.readU16();
-                            FC.PID_ADVANCED_CONFIG.gyroOffsetYaw = data.readU16();
-                            FC.PID_ADVANCED_CONFIG.gyroCheckOverflow = data.readU8();
-                            FC.PID_ADVANCED_CONFIG.debugMode = data.readU8();
-                            FC.PID_ADVANCED_CONFIG.debugModeCount = data.readU8();
-                        }
-                    }
-                }
+                FC.SENSOR_ALIGNMENT.gyro_to_use = data.readU8();
+                FC.PID_ADVANCED_CONFIG.gyroHighFsr = data.readU8();
+                FC.PID_ADVANCED_CONFIG.gyroMovementCalibThreshold = data.readU8();
+                FC.PID_ADVANCED_CONFIG.gyroCalibDuration = data.readU16();
+                FC.PID_ADVANCED_CONFIG.gyroOffsetYaw = data.readU16();
+                FC.PID_ADVANCED_CONFIG.gyroCheckOverflow = data.readU8();
+                FC.PID_ADVANCED_CONFIG.debugMode = data.readU8();
+                FC.PID_ADVANCED_CONFIG.debugModeCount = data.readU8();
                 break;
 
             case MSPCodes.MSP_FILTER_CONFIG:
@@ -1662,13 +1649,18 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(Math.round(FC.MISC.vbatwarningcellvoltage * 10));
             break;
         case MSPCodes.MSP_SET_MOTOR_CONFIG:
-            buffer.push16(FC.MOTOR_CONFIG.minthrottle)
+            buffer.push16(FC.MOTOR_CONFIG.mincommand)
+                .push16(FC.MOTOR_CONFIG.minthrottle)
                 .push16(FC.MOTOR_CONFIG.maxthrottle)
-                .push16(FC.MOTOR_CONFIG.mincommand);
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                buffer.push8(FC.MOTOR_CONFIG.motor_poles);
-                buffer.push8(FC.MOTOR_CONFIG.use_dshot_telemetry ? 1 : 0);
-            }
+                .push8(FC.MOTOR_CONFIG.motor_pwm_protocol)
+                .push16(FC.MOTOR_CONFIG.motor_pwm_rate)
+                .push8(FC.MOTOR_CONFIG.use_unsynced_pwm ? 1 : 0)
+                .push8(FC.MOTOR_CONFIG.use_pwm_inversion ? 1 : 0)
+                .push8(FC.MOTOR_CONFIG.use_dshot_telemetry ? 1 : 0)
+                .push8(FC.MOTOR_CONFIG.motor_poles[0])
+                .push8(FC.MOTOR_CONFIG.motor_poles[1])
+                .push8(FC.MOTOR_CONFIG.motor_poles[2])
+                .push8(FC.MOTOR_CONFIG.motor_poles[3]);
             break;
         case MSPCodes.MSP_SET_GPS_CONFIG:
             buffer.push8(FC.GPS_CONFIG.provider)
@@ -1856,33 +1848,16 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.SENSOR_ALIGNMENT.gyro_2_align);
             }
             break;
-        case MSPCodes.MSP_SET_ADVANCED_CONFIG:
-            buffer.push8(FC.PID_ADVANCED_CONFIG.gyro_sync_denom)
-                .push8(FC.PID_ADVANCED_CONFIG.pid_process_denom)
-                .push8(FC.PID_ADVANCED_CONFIG.use_unsyncedPwm)
-                .push8(EscProtocols.ReorderPwmProtocols(FC.CONFIG.apiVersion, FC.PID_ADVANCED_CONFIG.fast_pwm_protocol))
-                .push16(FC.PID_ADVANCED_CONFIG.motor_pwm_rate);
-            if (semver.gte(FC.CONFIG.apiVersion, "1.24.0")) {
-                buffer.push16(FC.PID_ADVANCED_CONFIG.digitalIdlePercent * 100);
 
-                if (semver.gte(FC.CONFIG.apiVersion, "1.25.0")) {
-                    let gyroUse32kHz = 0;
-                    if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                        gyroUse32kHz = FC.PID_ADVANCED_CONFIG.gyroUse32kHz;
-                    }
-                    buffer.push8(gyroUse32kHz);
-                    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                        buffer.push8(FC.PID_ADVANCED_CONFIG.motorPwmInversion)
-                              .push8(FC.SENSOR_ALIGNMENT.gyro_to_use) // We don't want to double up on storing this state
-                              .push8(FC.PID_ADVANCED_CONFIG.gyroHighFsr)
-                              .push8(FC.PID_ADVANCED_CONFIG.gyroMovementCalibThreshold)
-                              .push16(FC.PID_ADVANCED_CONFIG.gyroCalibDuration)
-                              .push16(FC.PID_ADVANCED_CONFIG.gyroOffsetYaw)
-                              .push8(FC.PID_ADVANCED_CONFIG.gyroCheckOverflow)
-                              .push8(FC.PID_ADVANCED_CONFIG.debugMode);
-                    }
-                }
-            }
+    case MSPCodes.MSP_SET_ADVANCED_CONFIG:
+            buffer.push8(FC.PID_ADVANCED_CONFIG.pid_process_denom)
+                .push8(FC.SENSOR_ALIGNMENT.gyro_to_use)
+                .push8(FC.PID_ADVANCED_CONFIG.gyroHighFsr)
+                .push8(FC.PID_ADVANCED_CONFIG.gyroMovementCalibThreshold)
+                .push16(FC.PID_ADVANCED_CONFIG.gyroCalibDuration)
+                .push16(FC.PID_ADVANCED_CONFIG.gyroOffsetYaw)
+                .push8(FC.PID_ADVANCED_CONFIG.gyroCheckOverflow)
+                .push8(FC.PID_ADVANCED_CONFIG.debugMode);
             break;
 
         case MSPCodes.MSP_SET_FILTER_CONFIG:
