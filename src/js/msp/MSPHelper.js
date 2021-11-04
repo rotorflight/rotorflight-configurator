@@ -990,58 +990,30 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     }
                 }
                 break;
+
             case MSPCodes.MSP_FILTER_CONFIG:
-                FC.FILTER_CONFIG.gyro_lowpass_hz = data.readU8();
+                FC.FILTER_CONFIG.gyro_hardware_lpf = data.readU8();
+                FC.FILTER_CONFIG.gyro_lowpass_type = data.readU8();
+                FC.FILTER_CONFIG.gyro_lowpass_hz = data.readU16();
+                FC.FILTER_CONFIG.gyro_lowpass2_type = data.readU8();
+                FC.FILTER_CONFIG.gyro_lowpass2_hz = data.readU16();
+                FC.FILTER_CONFIG.gyro_notch_hz = data.readU16();
+                FC.FILTER_CONFIG.gyro_notch_cutoff = data.readU16();
+                FC.FILTER_CONFIG.gyro_notch2_hz = data.readU16();
+                FC.FILTER_CONFIG.gyro_notch2_cutoff = data.readU16();
+                FC.FILTER_CONFIG.dterm_lowpass_type = data.readU8();
                 FC.FILTER_CONFIG.dterm_lowpass_hz = data.readU16();
-                FC.FILTER_CONFIG.yaw_lowpass_hz = data.readU16();
-                if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
-                    FC.FILTER_CONFIG.gyro_notch_hz = data.readU16();
-                    FC.FILTER_CONFIG.gyro_notch_cutoff = data.readU16();
-                    FC.FILTER_CONFIG.dterm_notch_hz = data.readU16();
-                    FC.FILTER_CONFIG.dterm_notch_cutoff = data.readU16();
-                    if (semver.gte(FC.CONFIG.apiVersion, "1.21.0")) {
-                        FC.FILTER_CONFIG.gyro_notch2_hz = data.readU16();
-                        FC.FILTER_CONFIG.gyro_notch2_cutoff = data.readU16();
-                    }
-                    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                        FC.FILTER_CONFIG.dterm_lowpass_type = data.readU8();
-                    }
-                    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_39)) {
-                        FC.FILTER_CONFIG.gyro_hardware_lpf = data.readU8();
-                        let gyro_32khz_hardware_lpf = data.readU8();
-                        FC.FILTER_CONFIG.gyro_lowpass_hz = data.readU16();
-                        FC.FILTER_CONFIG.gyro_lowpass2_hz = data.readU16();
-                        FC.FILTER_CONFIG.gyro_lowpass_type = data.readU8();
-                        FC.FILTER_CONFIG.gyro_lowpass2_type = data.readU8();
-                        FC.FILTER_CONFIG.dterm_lowpass2_hz = data.readU16();
-                        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                            FC.FILTER_CONFIG.gyro_32khz_hardware_lpf = gyro_32khz_hardware_lpf;
-                        } else {
-                            FC.FILTER_CONFIG.gyro_32khz_hardware_lpf = 0;
-
-                            FC.FILTER_CONFIG.dterm_lowpass2_type = data.readU8();
-                            FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz = data.readU16();
-                            FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz = data.readU16();
-                            FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz = data.readU16();
-                            FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz = data.readU16();
-                            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                                FC.FILTER_CONFIG.dyn_notch_range = data.readU8();
-                                FC.FILTER_CONFIG.dyn_notch_width_percent = data.readU8();
-                                FC.FILTER_CONFIG.dyn_notch_q = data.readU16();
-                                FC.FILTER_CONFIG.dyn_notch_min_hz = data.readU16();
-
-                                FC.FILTER_CONFIG.gyro_rpm_notch_harmonics = data.readU8();
-                                FC.FILTER_CONFIG.gyro_rpm_notch_min_hz = data.readU8();
-                            }
-                            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-                                FC.FILTER_CONFIG.dyn_notch_max_hz = data.readU16();
-                            }
-                            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
-                                FC.FILTER_CONFIG.dyn_lpf_curve_expo = data.readU8();
-                            }
-                        }
-                    }
-                }
+                FC.FILTER_CONFIG.dterm_lowpass2_type = data.readU8();
+                FC.FILTER_CONFIG.dterm_lowpass2_hz = data.readU16();
+                FC.FILTER_CONFIG.dterm_notch_hz = data.readU16();
+                FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz = data.readU16();
+                FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz = data.readU16();
+                FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz = data.readU16();
+                FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz = data.readU16();
+                FC.FILTER_CONFIG.dyn_notch_width_percent = data.readU8();
+                FC.FILTER_CONFIG.dyn_notch_q = data.readU16();
+                FC.FILTER_CONFIG.dyn_notch_min_hz = data.readU16();
+                FC.FILTER_CONFIG.dyn_notch_max_hz = data.readU16();
                 break;
 
             case MSPCodes.MSP_SET_PID_ADVANCED:
@@ -1912,57 +1884,31 @@ MspHelper.prototype.crunch = function(code) {
                 }
             }
             break;
+
         case MSPCodes.MSP_SET_FILTER_CONFIG:
-            buffer.push8(FC.FILTER_CONFIG.gyro_lowpass_hz)
+            buffer.push8(FC.FILTER_CONFIG.gyro_hardware_lpf)
+                .push8(FC.FILTER_CONFIG.gyro_lowpass_type)
+                .push16(FC.FILTER_CONFIG.gyro_lowpass_hz)
+                .push8(FC.FILTER_CONFIG.gyro_lowpass2_type)
+                .push16(FC.FILTER_CONFIG.gyro_lowpass2_hz)
+                .push16(FC.FILTER_CONFIG.gyro_notch_hz)
+                .push16(FC.FILTER_CONFIG.gyro_notch_cutoff)
+                .push16(FC.FILTER_CONFIG.gyro_notch2_hz)
+                .push16(FC.FILTER_CONFIG.gyro_notch2_cutoff)
+                .push8(FC.FILTER_CONFIG.dterm_lowpass_type)
                 .push16(FC.FILTER_CONFIG.dterm_lowpass_hz)
-                .push16(FC.FILTER_CONFIG.yaw_lowpass_hz);
-            if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
-                buffer.push16(FC.FILTER_CONFIG.gyro_notch_hz)
-                    .push16(FC.FILTER_CONFIG.gyro_notch_cutoff)
-                    .push16(FC.FILTER_CONFIG.dterm_notch_hz)
-                    .push16(FC.FILTER_CONFIG.dterm_notch_cutoff);
-                if (semver.gte(FC.CONFIG.apiVersion, "1.21.0")) {
-                    buffer.push16(FC.FILTER_CONFIG.gyro_notch2_hz)
-                        .push16(FC.FILTER_CONFIG.gyro_notch2_cutoff);
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                    buffer.push8(FC.FILTER_CONFIG.dterm_lowpass_type);
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_39)) {
-                    let gyro_32khz_hardware_lpf = 0;
-                    if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                        gyro_32khz_hardware_lpf = FC.FILTER_CONFIG.gyro_32khz_hardware_lpf;
-                    }
-                    buffer.push8(FC.FILTER_CONFIG.gyro_hardware_lpf)
-                          .push8(gyro_32khz_hardware_lpf)
-                          .push16(FC.FILTER_CONFIG.gyro_lowpass_hz)
-                          .push16(FC.FILTER_CONFIG.gyro_lowpass2_hz)
-                          .push8(FC.FILTER_CONFIG.gyro_lowpass_type)
-                          .push8(FC.FILTER_CONFIG.gyro_lowpass2_type)
-                          .push16(FC.FILTER_CONFIG.dterm_lowpass2_hz);
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                    buffer.push8(FC.FILTER_CONFIG.dterm_lowpass2_type)
-                          .push16(FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz)
-                          .push16(FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz)
-                          .push16(FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz)
-                          .push16(FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz);
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                    buffer.push8(FC.FILTER_CONFIG.dyn_notch_range)
-                          .push8(FC.FILTER_CONFIG.dyn_notch_width_percent)
-                          .push16(FC.FILTER_CONFIG.dyn_notch_q)
-                          .push16(FC.FILTER_CONFIG.dyn_notch_min_hz)
-                          .push8(FC.FILTER_CONFIG.gyro_rpm_notch_harmonics)
-                          .push8(FC.FILTER_CONFIG.gyro_rpm_notch_min_hz);
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-                    buffer.push16(FC.FILTER_CONFIG.dyn_notch_max_hz);
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
-                    buffer.push8(FC.FILTER_CONFIG.dyn_lpf_curve_expo);
-                }
-            }
+                .push8(FC.FILTER_CONFIG.dterm_lowpass2_type)
+                .push16(FC.FILTER_CONFIG.dterm_lowpass2_hz)
+                .push16(FC.FILTER_CONFIG.dterm_notch_hz)
+                .push16(FC.FILTER_CONFIG.dterm_notch_cutoff)
+                .push16(FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz)
+                .push16(FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz)
+                .push16(FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz)
+                .push16(FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz)
+                .push8(FC.FILTER_CONFIG.dyn_notch_width_percent)
+                .push16(FC.FILTER_CONFIG.dyn_notch_q)
+                .push16(FC.FILTER_CONFIG.dyn_notch_min_hz)
+                .push16(FC.FILTER_CONFIG.dyn_notch_max_hz);
             break;
 
         case MSPCodes.MSP_SET_PID_ADVANCED:
