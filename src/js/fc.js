@@ -342,12 +342,16 @@ const FC = {
             batterymetertype:           1, // 1=ADC, 2=ESC
         };
         this.MOTOR_CONFIG = {
+            motor_count:                0,
+            mincommand:                 0,
             minthrottle:                0,
             maxthrottle:                0,
-            mincommand:                 0,
-            motor_count:                0,
-            motor_poles:                0,
+            motor_pwm_protocol:         0,
+            motor_pwm_rate:             0,
+            motor_poles:                [ 0, 0, 0, 0 ],
             use_dshot_telemetry:        false,
+            use_pwm_inversion:          false,
+            use_unsynced_pwm:           false,
             use_esc_sensor:             false,
         };
 
@@ -416,12 +420,7 @@ const FC = {
         this.PID_ADVANCED_CONFIG = {
             gyro_sync_denom:            0,
             pid_process_denom:          0,
-            use_unsyncedPwm:            0,
-            fast_pwm_protocol:          0,
-            motor_pwm_rate:             0,
-            digitalIdlePercent:         0,
             gyroUse32kHz:               0,
-            motorPwmInversion:          0,
             gyroHighFsr:                0,
             gyroMovementCalibThreshold: 0,
             gyroCalibDuration:          0,
