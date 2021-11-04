@@ -328,55 +328,19 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 console.log('Battery configuration saved');
                 break;
             case MSPCodes.MSP_RC_TUNING:
+                FC.RC_TUNING.rates_type = data.readU8();
                 FC.RC_TUNING.RC_RATE = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.RC_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
-                if (semver.lt(FC.CONFIG.apiVersion, "1.7.0")) {
-                    FC.RC_TUNING.roll_pitch_rate = parseFloat((data.readU8() / 100).toFixed(2));
-                    FC.RC_TUNING.pitch_rate = 0;
-                    FC.RC_TUNING.roll_rate = 0;
-                } else {
-                    FC.RC_TUNING.roll_pitch_rate = 0;
-                    FC.RC_TUNING.roll_rate = parseFloat((data.readU8() / 100).toFixed(2));
-                    FC.RC_TUNING.pitch_rate = parseFloat((data.readU8() / 100).toFixed(2));
-                }
+                FC.RC_TUNING.roll_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.roll_rate_limit = data.readU16();
+                FC.RC_TUNING.rcPitchRate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.RC_PITCH_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.pitch_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.pitch_rate_limit = data.readU16();
+                FC.RC_TUNING.rcYawRate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.RC_YAW_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.yaw_rate = parseFloat((data.readU8() / 100).toFixed(2));
-                FC.RC_TUNING.dynamic_THR_PID = parseFloat((data.readU8() / 100).toFixed(2));
-                FC.RC_TUNING.throttle_MID = parseFloat((data.readU8() / 100).toFixed(2));
-                FC.RC_TUNING.throttle_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
-                if (semver.gte(FC.CONFIG.apiVersion, "1.7.0")) {
-                    FC.RC_TUNING.dynamic_THR_breakpoint = data.readU16();
-                } else {
-                    FC.RC_TUNING.dynamic_THR_breakpoint = 0;
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, "1.10.0")) {
-                    FC.RC_TUNING.RC_YAW_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
-                    if (semver.gte(FC.CONFIG.apiVersion, "1.16.0")) {
-                        FC.RC_TUNING.rcYawRate = parseFloat((data.readU8() / 100).toFixed(2));
-                    } else {
-                        FC.RC_TUNING.rcYawRate = 0;
-                    }
-                } else {
-                    FC.RC_TUNING.RC_YAW_EXPO = 0;
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-                    FC.RC_TUNING.rcPitchRate = parseFloat((data.readU8() / 100).toFixed(2));
-                    FC.RC_TUNING.RC_PITCH_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
-                } else {
-                    FC.RC_TUNING.rcPitchRate = 0;
-                    FC.RC_TUNING.RC_PITCH_EXPO = 0;
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                    FC.RC_TUNING.throttleLimitType = data.readU8();
-                    FC.RC_TUNING.throttleLimitPercent = data.readU8();
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                    FC.RC_TUNING.roll_rate_limit = data.readU16();
-                    FC.RC_TUNING.pitch_rate_limit = data.readU16();
-                    FC.RC_TUNING.yaw_rate_limit = data.readU16();
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-                    FC.RC_TUNING.rates_type = data.readU8();
-                }
+                FC.RC_TUNING.yaw_rate_limit = data.readU16();
                 break;
             case MSPCodes.MSP_PID:
                 for (let i = 0; i < 3; i++) { // RPY
@@ -1559,43 +1523,19 @@ MspHelper.prototype.crunch = function(code) {
             }
             break;
         case MSPCodes.MSP_SET_RC_TUNING:
+            buffer.push8(FC.RC_TUNING.rates_type);
             buffer.push8(Math.round(FC.RC_TUNING.RC_RATE * 100))
-                .push8(Math.round(FC.RC_TUNING.RC_EXPO * 100));
-            if (semver.lt(FC.CONFIG.apiVersion, "1.7.0")) {
-                buffer.push8(Math.round(FC.RC_TUNING.roll_pitch_rate * 100));
-            } else {
-                buffer.push8(Math.round(FC.RC_TUNING.roll_rate * 100))
-                    .push8(Math.round(FC.RC_TUNING.pitch_rate * 100));
-            }
-            buffer.push8(Math.round(FC.RC_TUNING.yaw_rate * 100))
-                .push8(Math.round(FC.RC_TUNING.dynamic_THR_PID * 100))
-                .push8(Math.round(FC.RC_TUNING.throttle_MID * 100))
-                .push8(Math.round(FC.RC_TUNING.throttle_EXPO * 100));
-            if (semver.gte(FC.CONFIG.apiVersion, "1.7.0")) {
-                buffer.push16(FC.RC_TUNING.dynamic_THR_breakpoint);
-            }
-            if (semver.gte(FC.CONFIG.apiVersion, "1.10.0")) {
-                buffer.push8(Math.round(FC.RC_TUNING.RC_YAW_EXPO * 100));
-                if (semver.gte(FC.CONFIG.apiVersion, "1.16.0")) {
-                    buffer.push8(Math.round(FC.RC_TUNING.rcYawRate * 100));
-                }
-            }
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-                buffer.push8(Math.round(FC.RC_TUNING.rcPitchRate * 100));
-                buffer.push8(Math.round(FC.RC_TUNING.RC_PITCH_EXPO * 100));
-            }
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                buffer.push8(FC.RC_TUNING.throttleLimitType);
-                buffer.push8(FC.RC_TUNING.throttleLimitPercent);
-            }
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                buffer.push16(FC.RC_TUNING.roll_rate_limit);
-                buffer.push16(FC.RC_TUNING.pitch_rate_limit);
-                buffer.push16(FC.RC_TUNING.yaw_rate_limit);
-            }
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-                buffer.push8(FC.RC_TUNING.rates_type);
-            }
+                  .push8(Math.round(FC.RC_TUNING.RC_EXPO * 100))
+                  .push8(Math.round(FC.RC_TUNING.roll_rate * 100))
+                  .push16(FC.RC_TUNING.roll_rate_limit);
+            buffer.push8(Math.round(FC.RC_TUNING.rcPitchRate * 100))
+                  .push8(Math.round(FC.RC_TUNING.RC_PITCH_EXPO * 100))
+                  .push8(Math.round(FC.RC_TUNING.pitch_rate * 100))
+                  .push16(FC.RC_TUNING.pitch_rate_limit);
+            buffer.push8(Math.round(FC.RC_TUNING.rcYawRate * 100))
+                  .push8(Math.round(FC.RC_TUNING.yaw_rate * 100))
+                  .push8(Math.round(FC.RC_TUNING.RC_YAW_EXPO * 100))
+                  .push16(FC.RC_TUNING.yaw_rate_limit);
             break;
         case MSPCodes.MSP_SET_RX_MAP:
             for (let i = 0; i < FC.RC_MAP.length; i++) {
