@@ -241,7 +241,7 @@ TABS.configuration.initialize = function (callback) {
          };
 
          if (semver.gte(FC.CONFIG.apiVersion, "1.25.0") && semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-             gyroUse32kHzElement.prop('checked', FC.PID_ADVANCED_CONFIG.gyroUse32kHz !== 0);
+             gyroUse32kHzElement.prop('checked', FC.ADVANCED_CONFIG.gyroUse32kHz !== 0);
 
              gyroUse32kHzElement.change(function () {
                  const gyroBaseFreq = ($(this).is(':checked'))? 32 : 8;
@@ -260,7 +260,7 @@ TABS.configuration.initialize = function (callback) {
              }
         }
 
-        gyroSelectElement.val(FC.PID_ADVANCED_CONFIG.gyro_sync_denom);
+        gyroSelectElement.val(FC.ADVANCED_CONFIG.gyro_sync_denom);
 
         $('.systemconfigNote').html(i18n.getMessage('configurationLoopTimeHelp'));
 
@@ -289,7 +289,7 @@ TABS.configuration.initialize = function (callback) {
             pidSelectElement.val(originalPidDenom);
         }).change();
 
-        pidSelectElement.val(FC.PID_ADVANCED_CONFIG.pid_process_denom);
+        pidSelectElement.val(FC.ADVANCED_CONFIG.pid_process_denom);
 
         $('input[id="accHardwareSwitch"]').prop('checked', FC.SENSOR_CONFIG.acc_hardware !== 1);
         $('input[id="baroHardwareSwitch"]').prop('checked', FC.SENSOR_CONFIG.baro_hardware !== 1);
@@ -355,20 +355,20 @@ TABS.configuration.initialize = function (callback) {
                 FC.SENSOR_ALIGNMENT.gyro_to_use = parseInt(orientation_gyro_to_use_e.val());
             }
 
-            FC.PID_ADVANCED_CONFIG.gyro_sync_denom = parseInt(gyroSelectElement.val());
+            FC.ADVANCED_CONFIG.gyro_sync_denom = parseInt(gyroSelectElement.val());
 
             const value = parseInt(pidSelectElement.val());
 
-            if (value !== FC.PID_ADVANCED_CONFIG.pid_process_denom) {
+            if (value !== FC.ADVANCED_CONFIG.pid_process_denom) {
                 const newFrequency = pidSelectElement.find('option:selected').text();
                 self.analyticsChanges['PIDLoopSettings'] = `denominator: ${value} | frequency: ${newFrequency}`;
             } else {
                 self.analyticsChanges['PIDLoopSettings'] = undefined;
             }
 
-            FC.PID_ADVANCED_CONFIG.pid_process_denom = value;
+            FC.ADVANCED_CONFIG.pid_process_denom = value;
             if (semver.gte(FC.CONFIG.apiVersion, "1.25.0") && semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                FC.PID_ADVANCED_CONFIG.gyroUse32kHz = $('input[id="gyroUse32kHz"]').is(':checked') ? 1 : 0;
+                FC.ADVANCED_CONFIG.gyroUse32kHz = $('input[id="gyroUse32kHz"]').is(':checked') ? 1 : 0;
             }
 
             analytics.sendChangeEvents(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, self.analyticsChanges);
