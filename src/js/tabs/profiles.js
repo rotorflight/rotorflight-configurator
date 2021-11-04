@@ -40,16 +40,9 @@ TABS.profiles.initialize = function (callback) {
         self.pidNames.forEach(function(elementPid, indexPid) {
             const searchRow = $('.tab-profiles .' + elementPid + ' .pid_data input');
             searchRow.each(function (indexInput) {
-                if (FC.PIDS[indexPid][indexInput] !== undefined) {
-                    $(this).val(FC.PIDS[indexPid][indexInput]);
-                }
+                $(this).val(FC.PIDS[indexPid][indexInput]);
             });
         });
-
-        // Feedforward
-        $('.tab-profiles .ROLL .pid_data input[name="f"]').val(FC.ADVANCED_TUNING.feedforwardRoll);
-        $('.tab-profiles .PITCH .pid_data input[name="f"]').val(FC.ADVANCED_TUNING.feedforwardPitch);
-        $('.tab-profiles .YAW .pid_data input[name="f"]').val(FC.ADVANCED_TUNING.feedforwardYaw);
 
         // Acro Trainer
         $('input[id="acroTrainerAngleLimit"]').val(FC.ADVANCED_TUNING.acroTrainerAngleLimit).trigger('input');
@@ -122,10 +115,6 @@ TABS.profiles.initialize = function (callback) {
         FC.ADVANCED_TUNING.itermRelax = $('.tab-profiles input[id="itermRelax"]').is(':checked') ? $('.tab-profiles select[id="itermRelaxAxes"]').val() : 0;
         FC.ADVANCED_TUNING.itermRelaxType = $('.tab-profiles select[id="itermRelaxType"]').val();
         FC.ADVANCED_TUNING.itermRelaxCutoff = parseInt($('.tab-profiles input[id="itermRelaxCutoff"]').val());
-
-        FC.ADVANCED_TUNING.feedforwardRoll  = parseInt($('.tab-profiles .ROLL .pid_data input[name="f"]').val());
-        FC.ADVANCED_TUNING.feedforwardPitch = parseInt($('.tab-profiles .PITCH .pid_data input[name="f"]').val());
-        FC.ADVANCED_TUNING.feedforwardYaw   = parseInt($('.tab-profiles .YAW .pid_data input[name="f"]').val());
 
         if (self.isGovEnabled) {
             FC.GOVERNOR.gov_headspeed = parseInt($('.tab-profiles input[id="govHeadspeed"]').val());
