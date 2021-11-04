@@ -107,7 +107,7 @@ const VirtualFC = {
         };
 
         virtualFC.CONFIG.sampleRateHz  = 12000;
-        virtualFC.PID_ADVANCED_CONFIG.pid_process_denom = 2;
+        virtualFC.ADVANCED_CONFIG.pid_process_denom = 2;
 
         virtualFC.BLACKBOX.supported = true;
 

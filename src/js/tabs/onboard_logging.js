@@ -197,16 +197,16 @@ TABS.onboard_logging.initialize = function (callback) {
 
         let pidRate;
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-            pidRate = FC.CONFIG.sampleRateHz / FC.PID_ADVANCED_CONFIG.pid_process_denom;
+            pidRate = FC.CONFIG.sampleRateHz / FC.ADVANCED_CONFIG.pid_process_denom;
 
         } else {
 
             let pidRateBase = 8000;
 
-            if (semver.gte(FC.CONFIG.apiVersion, "1.25.0") && semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41) && FC.PID_ADVANCED_CONFIG.gyroUse32kHz !== 0) {
+            if (semver.gte(FC.CONFIG.apiVersion, "1.25.0") && semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41) && FC.ADVANCED_CONFIG.gyroUse32kHz !== 0) {
                 pidRateBase = 32000;
             }
-            pidRate = pidRateBase / FC.PID_ADVANCED_CONFIG.gyro_sync_denom / FC.PID_ADVANCED_CONFIG.pid_process_denom;
+            pidRate = pidRateBase / FC.ADVANCED_CONFIG.gyro_sync_denom / FC.ADVANCED_CONFIG.pid_process_denom;
         }
 
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {

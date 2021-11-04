@@ -135,7 +135,7 @@ const FC = {
     MULTIPLE_MSP: null,
     PID: null,
     PIDS_ACTIVE: null,
-    PID_ADVANCED_CONFIG: null,
+    ADVANCED_CONFIG: null,
     PID_NAMES: null,
     PIDS: null,
     RC: null,
@@ -431,7 +431,7 @@ const FC = {
             gyro_2_align:               0,
         };
 
-        this.PID_ADVANCED_CONFIG = {
+        this.ADVANCED_CONFIG = {
             gyro_sync_denom:            0,
             pid_process_denom:          0,
             gyroUse32kHz:               0,
