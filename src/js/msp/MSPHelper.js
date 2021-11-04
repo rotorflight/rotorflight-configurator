@@ -379,10 +379,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 }
                 break;
             case MSPCodes.MSP_PID:
-                // PID data arrived, we need to scale it and save to appropriate bank / array
-                for (let i = 0, needle = 0; i < (data.byteLength / 3); i++, needle += 3) {
-                    // main for loop selecting the pid section
-                    for (let j = 0; j < 3; j++) {
+                for (let i = 0; i < 3; i++) { // RPY
+                    for (let j = 0; j < 4; j++) { // PIDF
                         FC.PIDS_ACTIVE[i][j] = data.readU8();
                         FC.PIDS[i][j] = FC.PIDS_ACTIVE[i][j];
                     }
@@ -479,19 +477,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 }
                 break;
             case MSPCodes.MSP_PIDNAMES:
-                FC.PID_NAMES = []; // empty the array as new data is coming in
-
-                buff = [];
                 for (let i = 0; i < data.byteLength; i++) {
                     char = data.readU8();
-                    if (char == 0x3B) { // ; (delimeter char)
-                        FC.PID_NAMES.push(String.fromCharCode.apply(null, buff)); // convert bytes into ASCII and save as strings
-
-                        // empty buffer
-                        buff = [];
-                    } else {
-                        buff.push(char);
-                    }
                 }
                 break;
             case MSPCodes.MSP_BOXIDS:
@@ -1672,8 +1659,8 @@ MspHelper.prototype.crunch = function(code) {
             buffer.push8(FC.PID.controller);
             break;
         case MSPCodes.MSP_SET_PID:
-            for (let i = 0; i < FC.PIDS.length; i++) {
-                for (let j = 0; j < 3; j++) {
+            for (let i = 0; i < 3; i++) { // RPY
+                for (let j = 0; j < 4; j++) { // PIDF
                     buffer.push8(parseInt(FC.PIDS[i][j]));
                 }
             }
