@@ -68,7 +68,7 @@ const FC = {
     // define all the global variables that are uses to hold FC state
     // the default state must be defined inside the resetState() method
     ADJUSTMENT_RANGES: null,
-    ADVANCED_TUNING: null,
+    PID_PROFILE: null,
     ANALOG: {...INITIAL_CONFIG},
     DEBUG_CONFIG: null,
     ARMING_CONFIG: null,
@@ -471,7 +471,7 @@ const FC = {
             dyn_notch_max_hz:           0,
         };
 
-        this.ADVANCED_TUNING = {
+        this.PID_PROFILE = {
             rollPitchItermIgnoreRate:   0,
             yawItermIgnoreRate:         0,
             yaw_p_limit:                0,

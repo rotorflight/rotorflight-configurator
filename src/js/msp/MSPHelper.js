@@ -934,33 +934,33 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_PID_ADVANCED:
-                FC.ADVANCED_TUNING.itermLimitRoll = data.readU16();
-                FC.ADVANCED_TUNING.itermLimitPitch = data.readU16();
-                FC.ADVANCED_TUNING.itermLimitYaw = data.readU16();
-                FC.ADVANCED_TUNING.itermDecay = data.readU8();
-                FC.ADVANCED_TUNING.itermRotation = data.readU8();
-                FC.ADVANCED_TUNING.itermRelax = data.readU8();
-                FC.ADVANCED_TUNING.itermRelaxType = data.readU8();
-                FC.ADVANCED_TUNING.itermRelaxCutoffRoll = data.readU8();
-                FC.ADVANCED_TUNING.itermRelaxCutoffPitch = data.readU8();
-                FC.ADVANCED_TUNING.itermRelaxCutoffYaw = data.readU8();
-                FC.ADVANCED_TUNING.levelAngleStrength = data.readU8();
-                FC.ADVANCED_TUNING.levelAngleLimit = data.readU8();
-                FC.ADVANCED_TUNING.horizonLevelStrength = data.readU8();
-                FC.ADVANCED_TUNING.acroTrainerGain = data.readU8();
-                FC.ADVANCED_TUNING.acroTrainerLimit = data.readU8();
-                FC.ADVANCED_TUNING.yawCenterOffset = data.readU16();
-                FC.ADVANCED_TUNING.yawStopGainCW = data.readU8();
-                FC.ADVANCED_TUNING.yawStopGainCCW = data.readU8();
-                FC.ADVANCED_TUNING.yawFFCyclicGain = data.readU8();
-                FC.ADVANCED_TUNING.yawFFCollectiveGain = data.readU8();
-                FC.ADVANCED_TUNING.yawFFImpulseGain = data.readU8();
-                FC.ADVANCED_TUNING.yawFFImpulseFreq = data.readU8();
-                FC.ADVANCED_TUNING.cyclicNormalization = data.readU8();
-                FC.ADVANCED_TUNING.collectiveNormalization = data.readU8();
-                FC.ADVANCED_TUNING.rescueCollective = data.readU16();
-                FC.ADVANCED_TUNING.rescueBoost = data.readU16();
-                FC.ADVANCED_TUNING.rescueDelay = data.readU8();
+                FC.PID_PROFILE.itermLimitRoll = data.readU16();
+                FC.PID_PROFILE.itermLimitPitch = data.readU16();
+                FC.PID_PROFILE.itermLimitYaw = data.readU16();
+                FC.PID_PROFILE.itermDecay = data.readU8();
+                FC.PID_PROFILE.itermRotation = data.readU8();
+                FC.PID_PROFILE.itermRelax = data.readU8();
+                FC.PID_PROFILE.itermRelaxType = data.readU8();
+                FC.PID_PROFILE.itermRelaxCutoffRoll = data.readU8();
+                FC.PID_PROFILE.itermRelaxCutoffPitch = data.readU8();
+                FC.PID_PROFILE.itermRelaxCutoffYaw = data.readU8();
+                FC.PID_PROFILE.levelAngleStrength = data.readU8();
+                FC.PID_PROFILE.levelAngleLimit = data.readU8();
+                FC.PID_PROFILE.horizonLevelStrength = data.readU8();
+                FC.PID_PROFILE.acroTrainerGain = data.readU8();
+                FC.PID_PROFILE.acroTrainerLimit = data.readU8();
+                FC.PID_PROFILE.yawCenterOffset = data.readU16();
+                FC.PID_PROFILE.yawStopGainCW = data.readU8();
+                FC.PID_PROFILE.yawStopGainCCW = data.readU8();
+                FC.PID_PROFILE.yawFFCyclicGain = data.readU8();
+                FC.PID_PROFILE.yawFFCollectiveGain = data.readU8();
+                FC.PID_PROFILE.yawFFImpulseGain = data.readU8();
+                FC.PID_PROFILE.yawFFImpulseFreq = data.readU8();
+                FC.PID_PROFILE.cyclicNormalization = data.readU8();
+                FC.PID_PROFILE.collectiveNormalization = data.readU8();
+                FC.PID_PROFILE.rescueCollective = data.readU16();
+                FC.PID_PROFILE.rescueBoost = data.readU16();
+                FC.PID_PROFILE.rescueDelay = data.readU8();
                 FC.GOVERNOR.gov_headspeed = data.readU16();
                 FC.GOVERNOR.gov_gain = data.readU8();
                 FC.GOVERNOR.gov_p_gain = data.readU8();
@@ -1783,33 +1783,33 @@ MspHelper.prototype.crunch = function(code) {
             break;
 
         case MSPCodes.MSP_SET_PID_ADVANCED:
-            buffer.push16(FC.ADVANCED_TUNING.itermLimitRoll)
-                .push16(FC.ADVANCED_TUNING.itermLimitPitch)
-                .push16(FC.ADVANCED_TUNING.itermLimitYaw)
-                .push8(FC.ADVANCED_TUNING.itermDecay)
-                .push8(FC.ADVANCED_TUNING.itermRotation)
-                .push8(FC.ADVANCED_TUNING.itermRelax)
-                .push8(FC.ADVANCED_TUNING.itermRelaxType)
-                .push8(FC.ADVANCED_TUNING.itermRelaxCutoffRoll)
-                .push8(FC.ADVANCED_TUNING.itermRelaxCutoffPitch)
-                .push8(FC.ADVANCED_TUNING.itermRelaxCutoffYaw)
-                .push8(FC.ADVANCED_TUNING.levelAngleStrength)
-                .push8(FC.ADVANCED_TUNING.levelAngleLimit)
-                .push8(FC.ADVANCED_TUNING.horizonLevelStrength)
-                .push8(FC.ADVANCED_TUNING.acroTrainerGain)
-                .push8(FC.ADVANCED_TUNING.acroTrainerLimit)
-                .push16(FC.ADVANCED_TUNING.yawCenterOffset)
-                .push8(FC.ADVANCED_TUNING.yawStopGainCW)
-                .push8(FC.ADVANCED_TUNING.yawStopGainCCW)
-                .push8(FC.ADVANCED_TUNING.yawFFCyclicGain)
-                .push8(FC.ADVANCED_TUNING.yawFFCollectiveGain)
-                .push8(FC.ADVANCED_TUNING.yawFFImpulseGain)
-                .push8(FC.ADVANCED_TUNING.yawFFImpulseFreq)
-                .push8(FC.ADVANCED_TUNING.cyclicNormalization)
-                .push8(FC.ADVANCED_TUNING.collectiveNormalization)
-                .push16(FC.ADVANCED_TUNING.rescueCollective)
-                .push16(FC.ADVANCED_TUNING.rescueBoost)
-                .push8(FC.ADVANCED_TUNING.rescueDelay)
+            buffer.push16(FC.PID_PROFILE.itermLimitRoll)
+                .push16(FC.PID_PROFILE.itermLimitPitch)
+                .push16(FC.PID_PROFILE.itermLimitYaw)
+                .push8(FC.PID_PROFILE.itermDecay)
+                .push8(FC.PID_PROFILE.itermRotation)
+                .push8(FC.PID_PROFILE.itermRelax)
+                .push8(FC.PID_PROFILE.itermRelaxType)
+                .push8(FC.PID_PROFILE.itermRelaxCutoffRoll)
+                .push8(FC.PID_PROFILE.itermRelaxCutoffPitch)
+                .push8(FC.PID_PROFILE.itermRelaxCutoffYaw)
+                .push8(FC.PID_PROFILE.levelAngleStrength)
+                .push8(FC.PID_PROFILE.levelAngleLimit)
+                .push8(FC.PID_PROFILE.horizonLevelStrength)
+                .push8(FC.PID_PROFILE.acroTrainerGain)
+                .push8(FC.PID_PROFILE.acroTrainerLimit)
+                .push16(FC.PID_PROFILE.yawCenterOffset)
+                .push8(FC.PID_PROFILE.yawStopGainCW)
+                .push8(FC.PID_PROFILE.yawStopGainCCW)
+                .push8(FC.PID_PROFILE.yawFFCyclicGain)
+                .push8(FC.PID_PROFILE.yawFFCollectiveGain)
+                .push8(FC.PID_PROFILE.yawFFImpulseGain)
+                .push8(FC.PID_PROFILE.yawFFImpulseFreq)
+                .push8(FC.PID_PROFILE.cyclicNormalization)
+                .push8(FC.PID_PROFILE.collectiveNormalization)
+                .push16(FC.PID_PROFILE.rescueCollective)
+                .push16(FC.PID_PROFILE.rescueBoost)
+                .push8(FC.PID_PROFILE.rescueDelay)
                 .push16(FC.GOVERNOR.gov_headspeed)
                 .push8(FC.GOVERNOR.gov_gain)
                 .push8(FC.GOVERNOR.gov_p_gain)
