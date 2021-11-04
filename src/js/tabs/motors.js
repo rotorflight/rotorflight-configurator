@@ -67,14 +67,14 @@ TABS.motors.initialize = function (callback) {
         const pwmFreqInput = $("input[id='pwmFreq']");
         const pwmFreqElem = $('.inputPwmFreq');
 
-        const pwmFreq = (FC.PID_ADVANCED_CONFIG.motor_pwm_rate > 0) ?
-              FC.PID_ADVANCED_CONFIG.motor_pwm_rate : 250;
+        const pwmFreq = (FC.MOTOR_CONFIG.motor_pwm_rate > 0) ?
+              FC.MOTOR_CONFIG.motor_pwm_rate : 250;
 
         pwmFreqSwitch.on("change", function () {
             pwmFreqElem.toggle($(this).is(':checked') && !self.isDshot && self.isProtoEnabled);
         });
 
-        pwmFreqSwitch.prop('checked', (FC.PID_ADVANCED_CONFIG.use_unsyncedPwm !== 0));
+        pwmFreqSwitch.prop('checked', FC.MOTOR_CONFIG.use_unsynced_pwm);
         pwmFreqInput.val(pwmFreq);
 
         const dshotBidirSwitch = $('input[id="dshotBidir"]');
@@ -146,7 +146,7 @@ TABS.motors.initialize = function (callback) {
             $('.govConfig').toggle(govModeSelect.val() > 0);
         }
 
-        escProtocolSelect.val(FC.PID_ADVANCED_CONFIG.fast_pwm_protocol);
+        escProtocolSelect.val(FC.MOTOR_CONFIG.motor_pwm_protocol);
 
         escProtocolSelect.change(updateVisibility);
         dshotBidirSwitch.change(updateVisibility);
@@ -358,9 +358,9 @@ TABS.motors.initialize = function (callback) {
             FC.MOTOR_CONFIG.motor_poles = parseInt($('input[id="motorPoles"]').val());
             FC.MOTOR_CONFIG.use_dshot_telemetry = dshotBidirSwitch.is(':checked') ? 1 : 0;
 
-            FC.PID_ADVANCED_CONFIG.fast_pwm_protocol = parseInt(escProtocolSelect.val());
-            FC.PID_ADVANCED_CONFIG.use_unsyncedPwm = pwmFreqSwitch.is(':checked') ? 1 : 0;
-            FC.PID_ADVANCED_CONFIG.motor_pwm_rate = parseInt($('input[id="pwmFreq"]').val());
+            FC.MOTOR_CONFIG.motor_pwm_protocol = parseInt(escProtocolSelect.val());
+            FC.MOTOR_CONFIG.use_unsynced_pwm = pwmFreqSwitch.is(':checked');
+            FC.MOTOR_CONFIG.motor_pwm_rate = parseInt($('input[id="pwmFreq"]').val());
 
             if (self.isGovEnabled) {
                 FC.GOVERNOR.gov_mode = govModeSelect.val();
