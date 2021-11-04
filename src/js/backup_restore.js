@@ -145,7 +145,7 @@ function configuration_backup(callback) {
                 configuration.DISPLAY_NAME = FC.CONFIG.displayName;
                 configuration.MIXER_CONFIG = jQuery.extend(true, {}, FC.MIXER_CONFIG);
                 configuration.SENSOR_CONFIG = jQuery.extend(true, {}, FC.SENSOR_CONFIG);
-                configuration.PID_ADVANCED_CONFIG = jQuery.extend(true, {}, FC.PID_ADVANCED_CONFIG);
+                configuration.ADVANCED_CONFIG = jQuery.extend(true, {}, FC.ADVANCED_CONFIG);
 
                 if (semver.gte(FC.CONFIG.apiVersion, "1.19.0")) {
                     configuration.LED_MODE_COLORS = jQuery.extend(true, [], FC.LED_MODE_COLORS);
@@ -818,7 +818,7 @@ function configuration_restore(callback) {
                     FC.CONFIG.displayName = configuration.DISPLAY_NAME;
                     FC.MIXER_CONFIG = configuration.MIXER_CONFIG;
                     FC.SENSOR_CONFIG = configuration.SENSOR_CONFIG;
-                    FC.PID_ADVANCED_CONFIG = configuration.PID_ADVANCED_CONFIG;
+                    FC.ADVANCED_CONFIG = configuration.ADVANCED_CONFIG;
 
                     FC.BEEPER_CONFIG.beepers = new Beepers(FC.CONFIG);
                     FC.BEEPER_CONFIG.beepers.setDisabledMask(configuration.BEEPER_CONFIG.beepers._beeperDisabledMask);
