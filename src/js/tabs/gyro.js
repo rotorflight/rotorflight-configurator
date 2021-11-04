@@ -230,12 +230,12 @@ TABS.gyro.initialize = function (callback) {
             let freq = 0, cutf = 0;
 
             if (checked) {
-                if (FC.FILTER_CONFIG.dterm_notch_hz > 0 && FC.FILTER_CONFIG.dterm_cutoff_hz > 0) {
+                if (FC.FILTER_CONFIG.dterm_notch_hz > 0 && FC.FILTER_CONFIG.dterm_notch_cutoff > 0) {
                     freq = FC.FILTER_CONFIG.dterm_notch_hz;
-                    cutf = FC.FILTER_CONFIG.dterm_cutoff_hz;
+                    cutf = FC.FILTER_CONFIG.dterm_notch_cutoff;
                 } else {
                     freq = FILTER_DEFAULT.dterm_notch_hz;
-                    cutf = FILTER_DEFAULT.dterm_cutoff_hz;
+                    cutf = FILTER_DEFAULT.dterm_notch_cutoff;
                 }
             }
 
