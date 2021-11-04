@@ -107,7 +107,6 @@ const FC = {
     CURRENT_METER_CONFIGS: null,
     DATAFLASH: null,
     DEFAULT: null,
-    DEFAULT_PIDS: null,
     FAILSAFE_CONFIG: null,
     FC_CONFIG: null,
     FEATURE_CONFIG: null,
@@ -211,8 +210,8 @@ const FC = {
         this.PIDS_ACTIVE = Array.from({length: 10});
         this.PIDS = Array.from({length: 10});
         for (let i = 0; i < 10; i++) {
-            this.PIDS_ACTIVE[i] = Array.from({length: 3});
-            this.PIDS[i] = Array.from({length: 3});
+            this.PIDS_ACTIVE[i] = Array.from({length: 5});
+            this.PIDS[i] = Array.from({length: 5});
         }
 
         this.RC_MAP = [];
@@ -665,12 +664,6 @@ const FC = {
             dyn_notch_max_hz:               600,
         };
 
-        this.DEFAULT_PIDS = [
-            42, 85, 35, 20, 90,
-            46, 90, 38, 22, 95,
-            30, 90,  0,  0, 90,
-        ];
-
         this.VTX_DEVICE_STATUS = null;
 
         this.TUNING_SLIDERS = {
@@ -830,15 +823,10 @@ const FC = {
     },
 
     getPidDefaults() {
-        let versionPidDefaults = this.DEFAULT_PIDS;
-        // if defaults change they should go here
-        if (semver.gte(this.CONFIG.apiVersion, API_VERSION_1_43)) {
-            versionPidDefaults = [
-                42, 85, 35, 23, 90,
-                46, 90, 38, 25, 95,
-                45, 90,  0,  0, 90,
-            ];
-        }
-        return versionPidDefaults;
+        return [
+            10, 50,  0, 50,
+            10, 50,  0, 50,
+            50, 50,  0,  0,
+        ];
     },
 };
