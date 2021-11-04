@@ -438,15 +438,11 @@ OSD.drawCameraFramePreview = function() {
 
 OSD.formatPidsPreview = function(axis) {
     const pidDefaults = FC.getPidDefaults();
-    const p = pidDefaults[axis * 5].toString().padStart(3);
-    const i = pidDefaults[axis * 5 + 1].toString().padStart(3);
-    const d = pidDefaults[axis * 5 + 2].toString().padStart(3);
-    const f = pidDefaults[axis * 5 + 4].toString().padStart(3);
-    if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
-        return `${p} ${i} ${d}`;
-    } else {
-        return `${p} ${i} ${d} ${f}`;
-    }
+    const p = pidDefaults[axis * 4 + 0].toString().padStart(3);
+    const i = pidDefaults[axis * 4 + 1].toString().padStart(3);
+    const d = pidDefaults[axis * 4 + 2].toString().padStart(3);
+    const f = pidDefaults[axis * 4 + 3].toString().padStart(3);
+    return `${p} ${i} ${d} ${f}`;
 };
 
 OSD.loadDisplayFields = function() {
