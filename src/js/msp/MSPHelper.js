@@ -912,13 +912,13 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_ADVANCED_CONFIG:
-                FC.PID_ADVANCED_CONFIG.pid_process_denom = data.readU8();
+                FC.ADVANCED_CONFIG.pid_process_denom = data.readU8();
                 FC.SENSOR_ALIGNMENT.gyro_to_use = data.readU8();
-                FC.PID_ADVANCED_CONFIG.gyroHighFsr = data.readU8();
-                FC.PID_ADVANCED_CONFIG.gyroMovementCalibThreshold = data.readU8();
-                FC.PID_ADVANCED_CONFIG.gyroCalibDuration = data.readU16();
-                FC.PID_ADVANCED_CONFIG.gyroOffsetYaw = data.readU16();
-                FC.PID_ADVANCED_CONFIG.gyroCheckOverflow = data.readU8();
+                FC.ADVANCED_CONFIG.gyroHighFsr = data.readU8();
+                FC.ADVANCED_CONFIG.gyroMovementCalibThreshold = data.readU8();
+                FC.ADVANCED_CONFIG.gyroCalibDuration = data.readU16();
+                FC.ADVANCED_CONFIG.gyroOffsetYaw = data.readU16();
+                FC.ADVANCED_CONFIG.gyroCheckOverflow = data.readU8();
                 break;
 
             case MSPCodes.MSP_FILTER_CONFIG:
@@ -1772,13 +1772,13 @@ MspHelper.prototype.crunch = function(code) {
             break;
 
     case MSPCodes.MSP_SET_ADVANCED_CONFIG:
-            buffer.push8(FC.PID_ADVANCED_CONFIG.pid_process_denom)
+            buffer.push8(FC.ADVANCED_CONFIG.pid_process_denom)
                 .push8(FC.SENSOR_ALIGNMENT.gyro_to_use)
-                .push8(FC.PID_ADVANCED_CONFIG.gyroHighFsr)
-                .push8(FC.PID_ADVANCED_CONFIG.gyroMovementCalibThreshold)
-                .push16(FC.PID_ADVANCED_CONFIG.gyroCalibDuration)
-                .push16(FC.PID_ADVANCED_CONFIG.gyroOffsetYaw)
-                .push8(FC.PID_ADVANCED_CONFIG.gyroCheckOverflow);
+                .push8(FC.ADVANCED_CONFIG.gyroHighFsr)
+                .push8(FC.ADVANCED_CONFIG.gyroMovementCalibThreshold)
+                .push16(FC.ADVANCED_CONFIG.gyroCalibDuration)
+                .push16(FC.ADVANCED_CONFIG.gyroOffsetYaw)
+                .push8(FC.ADVANCED_CONFIG.gyroCheckOverflow);
             break;
 
         case MSPCodes.MSP_SET_FILTER_CONFIG:
