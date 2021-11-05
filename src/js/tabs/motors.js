@@ -2,6 +2,7 @@
 
 TABS.motors = {
     isProtoEnabled: false,
+    isEscSensorEnabled: false,
     isGovEnabled: false,
     isDshot: false,
     isDirty: false,
@@ -88,6 +89,7 @@ TABS.motors.initialize = function (callback) {
         //$('input[id="motor2Poles"]').val(FC.MOTOR_CONFIG.motor2_poles);
 
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR');
+        self.isEscSensorEnabled = FC.FEATURE_CONFIG.features.isEnabled('ESC_SENSOR');
 
         const govModes = [
             "OFF",
@@ -178,10 +180,10 @@ TABS.motors.initialize = function (callback) {
 
             motorInfo.find('.spacer_box_title').html(i18n.getMessage('motorInfo', [motorIndex+1]));
 
-            rpmBar.toggle(FC.MOTOR_CONFIG.use_esc_sensor || FC.MOTOR_CONFIG.use_dshot_telemetry);
-            voltBar.toggle(FC.MOTOR_CONFIG.use_esc_sensor);
-            currBar.toggle(FC.MOTOR_CONFIG.use_esc_sensor);
-            tempBar.toggle(FC.MOTOR_CONFIG.use_esc_sensor);
+            rpmBar.toggle(self.isEscSensorEnabled || FC.MOTOR_CONFIG.use_dshot_telemetry);
+            voltBar.toggle(self.isEscSensorEnabled);
+            currBar.toggle(self.isEscSensorEnabled);
+            tempBar.toggle(self.isEscSensorEnabled);
             errorBar.toggle(FC.MOTOR_CONFIG.use_dshot_telemetry);
 
             meterLabel(thrBar, '0%', '100%');
