@@ -81,12 +81,12 @@ TABS.motors.initialize = function (callback) {
         const dshotBidirSwitch = $('input[id="dshotBidir"]');
         dshotBidirSwitch.prop('checked', FC.MOTOR_CONFIG.use_dshot_telemetry);
 
+        $('input[id="mincommand"]').val(FC.MOTOR_CONFIG.mincommand);
         $('input[id="minthrottle"]').val(FC.MOTOR_CONFIG.minthrottle);
         $('input[id="maxthrottle"]').val(FC.MOTOR_CONFIG.maxthrottle);
-        $('input[id="mincommand"]').val(FC.MOTOR_CONFIG.mincommand);
 
-        $('input[id="motorPoles"]').val(FC.MOTOR_CONFIG.motor_poles);
-        //$('input[id="motor2Poles"]').val(FC.MOTOR_CONFIG.motor2_poles);
+        for (let i = 0; i < FC.MOTOR_CONFIG.motor_count; i++)
+            $(`input[id="motorPoles${i+1}"]`).val(FC.MOTOR_CONFIG.motor_poles[i]);
 
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR');
         self.isEscSensorEnabled = FC.FEATURE_CONFIG.features.isEnabled('ESC_SENSOR');
@@ -124,18 +124,22 @@ TABS.motors.initialize = function (callback) {
 
             const protocolNum = parseInt(escProtocolSelect.val());
 
-            self.isProtoEnabled = !EscProtocols.IsProtocolDisabled(FC.CONFIG.apiVersion, protocolNum);
+            self.isProtoEnabled = !EscProtocols.IsProtocolDisabled(FC.CONFIG.apiVersion, protocolNum) && (FC.MOTOR_CONFIG.motor_count > 0);
             self.isDshot = EscProtocols.IsProtocolDshot(FC.CONFIG.apiVersion, protocolNum);
 
+            $('.mincommand').toggle(self.isProtoEnabled && !self.isDshot);
             $('.minthrottle').toggle(self.isProtoEnabled && !self.isDshot);
             $('.maxthrottle').toggle(self.isProtoEnabled && !self.isDshot);
-            $('.mincommand').toggle(self.isProtoEnabled && !self.isDshot);
             $('.checkboxPwm').toggle(self.isProtoEnabled && !self.isDshot);
             $('.inputPwmFreq').toggle(self.isProtoEnabled && !self.isDshot);
             $('.checkboxDshotBidir').toggle(self.isProtoEnabled && self.isDshot);
 
-            $('.motorPoles').toggle(self.isProtoEnabled);
-            //$('.motor2Poles').toggle(self.isProtoEnabled);
+            for (let i = 0; i < 4; i++) {
+                $(`.motorPoles${i+1}`).toggle(self.isProtoEnabled && FC.MOTOR_CONFIG.motor_count > i);
+                $(`.motorInfo${i}`).toggle(self.isProtoEnabled && FC.MOTOR_CONFIG.motor_count > i);
+            }
+
+            $('.mainGearRatio').toggle(self.isProtoEnabled);
 
             $('#escProtocolDisabled').toggle(!self.isProtoEnabled);
 
@@ -354,11 +358,13 @@ TABS.motors.initialize = function (callback) {
 
         $('a.save').on('click', function() {
 
+            FC.MOTOR_CONFIG.mincommand = parseInt($('input[id="mincommand"]').val());
             FC.MOTOR_CONFIG.minthrottle = parseInt($('input[id="minthrottle"]').val());
             FC.MOTOR_CONFIG.maxthrottle = parseInt($('input[id="maxthrottle"]').val());
-            FC.MOTOR_CONFIG.mincommand = parseInt($('input[id="mincommand"]').val());
-            FC.MOTOR_CONFIG.motor_poles = parseInt($('input[id="motorPoles"]').val());
             FC.MOTOR_CONFIG.use_dshot_telemetry = dshotBidirSwitch.is(':checked') ? 1 : 0;
+
+            for (let i = 0; i < FC.MOTOR_CONFIG.motor_count; i++)
+                FC.MOTOR_CONFIG.motor_poles[i] = parseInt($(`input[id="motorPoles${i+1}"]`).val());
 
             FC.MOTOR_CONFIG.motor_pwm_protocol = parseInt(escProtocolSelect.val());
             FC.MOTOR_CONFIG.use_unsynced_pwm = pwmFreqSwitch.is(':checked');
