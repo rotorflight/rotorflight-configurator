@@ -2860,30 +2860,25 @@
         "message": "Motor PWM frequency"
     },
     "motorsDshotBidir": {
-        "message": "Bidirectional DShot (requires supported ESC firmware)",
-        "description": "Feature for the ESC/Motor"
+        "message": "Bidirectional DShot"
     },
     "motorsDshotBidirHelp": {
-        "message": "Sends ESC data to the FC via DShot telemetry.  Required by RPM Filtering and dynamic idle. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg JESC, Jazzmac, BLHeli-32.",
-        "description": "Description of the Bidirectional DShot feature of the ESC/Motor"
-    },
-    "motorsMotorPoles": {
-        "message": "Pole count"
+        "message": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. JESC, Jazzmac, BLHeli32."
     },
     "motorsMotorPolesLong": {
-        "message": "$t(motorsMotorPoles.message) (number of magnets on the motor bell)"
+        "message": "Pole count (number of magnets on the motor bell)"
     },
     "motorsMotorPoles1Long": {
-        "message": "$t(motorsMotorPoles.message) for motor #1"
+        "message": "Motor #1 pole count"
     },
     "motorsMotorPoles2Long": {
-        "message": "$t(motorsMotorPoles.message) for motor #2"
+        "message": "Motor #2 pole count"
     },
     "motorsMotorPoles3Long": {
-        "message": "$t(motorsMotorPoles.message) for motor #3"
+        "message": "Motor #3 pole count"
     },
     "motorsMotorPoles4Long": {
-        "message": "$t(motorsMotorPoles.message) for motor #4"
+        "message": "Motor #4 pole count"
     },
    "motorsMotorPolesHelp": {
         "message": "The pole count is the number of magnets on the bell of the motor. Do NOT count the stators where the windings are located. Large motors usually have 8 magnets, smaller often have 6 magnets."
