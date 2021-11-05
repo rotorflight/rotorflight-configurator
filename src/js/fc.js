@@ -366,7 +366,6 @@ const FC = {
             use_dshot_telemetry:        false,
             use_pwm_inversion:          false,
             use_unsynced_pwm:           false,
-            use_esc_sensor:             false,
         };
 
         this.GPS_CONFIG = {
