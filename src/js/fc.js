@@ -65,6 +65,7 @@ const FC = {
     ADJUSTMENT_RANGES: null,
     ADVANCED_TUNING: null,
     ANALOG: {...INITIAL_CONFIG},
+    DEBUG_CONFIG: null,
     ARMING_CONFIG: null,
     AUX_CONFIG: null,
     AUX_CONFIG_IDS: null,
@@ -323,6 +324,11 @@ const FC = {
             currentMeterSource:         0,
         };
 
+        this.DEBUG_CONFIG = {
+            debugMode:                  0,
+            debugModeCount:             0,
+        };
+
         this.ARMING_CONFIG = {
             auto_disarm_delay:          0,
             disarm_kill_switch:         0,
@@ -432,8 +438,6 @@ const FC = {
             gyroCalibDuration:          0,
             gyroOffsetYaw:              0,
             gyroCheckOverflow:          0,
-            debugMode:                  0,
-            debugModeCount:             0,
         };
 
         this.FILTER_CONFIG = {
