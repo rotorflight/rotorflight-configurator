@@ -923,8 +923,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.PID_ADVANCED_CONFIG.gyroCalibDuration = data.readU16();
                 FC.PID_ADVANCED_CONFIG.gyroOffsetYaw = data.readU16();
                 FC.PID_ADVANCED_CONFIG.gyroCheckOverflow = data.readU8();
-                FC.PID_ADVANCED_CONFIG.debugMode = data.readU8();
-                FC.PID_ADVANCED_CONFIG.debugModeCount = data.readU8();
                 break;
 
             case MSPCodes.MSP_FILTER_CONFIG:
@@ -1336,11 +1334,12 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG:
                 console.log('Board alignment saved');
                 break;
-            case MSPCodes.MSP_PID_CONTROLLER:
-                FC.PID.controller = data.readU8();
+            case MSPCodes.MSP_DEBUG_CONFIG:
+                FC.DEBUG_CONFIG.debugModeCount = data.readU8();
+                FC.DEBUG_CONFIG.debugMode = data.readU8();
                 break;
-            case MSPCodes.MSP_SET_PID_CONTROLLER:
-                console.log('PID controller changed');
+            case MSPCodes.MSP_SET_DEBUG_CONFIG:
+                console.log('Debug flags changed');
                 break;
             case MSPCodes.MSP_SET_LOOP_TIME:
                 console.log('Looptime saved');
@@ -1518,9 +1517,6 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.BOARD_ALIGNMENT_CONFIG.pitch)
                 .push16(FC.BOARD_ALIGNMENT_CONFIG.yaw);
             break;
-        case MSPCodes.MSP_SET_PID_CONTROLLER:
-            buffer.push8(FC.PID.controller);
-            break;
         case MSPCodes.MSP_SET_PID:
             for (let i = 0; i < 3; i++) { // RPY
                 for (let j = 0; j < 4; j++) { // PIDF
@@ -1551,6 +1547,9 @@ MspHelper.prototype.crunch = function(code) {
         case MSPCodes.MSP_SET_ACC_TRIM:
             buffer.push16(FC.CONFIG.accelerometerTrims[0])
                 .push16(FC.CONFIG.accelerometerTrims[1]);
+            break;
+        case MSPCodes.MSP_SET_DEBUG_CONFIG:
+            buffer.push8(FC.DEBUG_CONFIG.debugMode);
             break;
         case MSPCodes.MSP_SET_ARMING_CONFIG:
             buffer.push8(FC.ARMING_CONFIG.auto_disarm_delay)
@@ -1777,8 +1776,7 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.PID_ADVANCED_CONFIG.gyroMovementCalibThreshold)
                 .push16(FC.PID_ADVANCED_CONFIG.gyroCalibDuration)
                 .push16(FC.PID_ADVANCED_CONFIG.gyroOffsetYaw)
-                .push8(FC.PID_ADVANCED_CONFIG.gyroCheckOverflow)
-                .push8(FC.PID_ADVANCED_CONFIG.debugMode);
+                .push8(FC.PID_ADVANCED_CONFIG.gyroCheckOverflow);
             break;
 
         case MSPCodes.MSP_SET_FILTER_CONFIG:
