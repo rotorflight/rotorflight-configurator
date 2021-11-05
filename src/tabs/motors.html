@@ -51,6 +51,15 @@
                                     <span class="freelabel" i18n="motorsDshotBidir"></span>
                                     <div class="helpicon cf_tip" i18n_title="motorsDshotBidirHelp"></div>
                                 </div>
+                                <div class="number mincommand">
+                                    <label>
+                                        <div class="numberspacer">
+                                            <input type="number" id="mincommand" min="0" max="2000" />
+                                        </div>
+                                        <span i18n="motorsThrottleMinimumCommand"></span>
+                                        <div class="helpicon cf_tip" i18n_title="motorsThrottleMinimumCommandHelp"></div>
+                                    </label>
+                                </div>
                                 <div class="number minthrottle">
                                     <label>
                                         <div class="numberspacer">
@@ -68,25 +77,15 @@
                                         <span i18n="motorsThrottleMaximum"></span>
                                     </label>
                                 </div>
-                                <div class="number mincommand">
-                                    <label>
-                                        <div class="numberspacer">
-                                            <input type="number" id="mincommand" min="0" max="2000" />
-                                        </div>
-                                        <span i18n="motorsThrottleMinimumCommand"></span>
-                                        <div class="helpicon cf_tip" i18n_title="motorsThrottleMinimumCommandHelp"></div>
-                                    </label>
-                                </div>
                                 <div class="number motorPoles1">
                                     <label>
                                         <div class="numberspacer">
-                                            <input type="number" id="motorPoles" min="2" max="255" step="2"/>
+                                            <input type="number" id="motorPoles1" min="2" max="255" step="2"/>
                                         </div>
                                         <span i18n="motorsMotorPoles1Long"></span>
                                     </label>
                                     <div class="helpicon cf_tip" i18n_title="motorsMotorPolesHelp"></div>
                                 </div>
-                                <!--
                                 <div class="number motorPoles2">
                                     <label>
                                         <div class="numberspacer">
@@ -114,7 +113,6 @@
                                     </label>
                                     <div class="helpicon cf_tip" i18n_title="motorsMotorPolesHelp"></div>
                                 </div>
-                                -->
                                 <div class="number mainGearRatio">
                                     <label>
                                         <div class="numberspacer">
