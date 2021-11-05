@@ -24,8 +24,10 @@ TABS.onboard_logging.initialize = function (callback) {
             MSP.send_message(MSPCodes.MSP_DATAFLASH_SUMMARY, false, false, function() {
                 MSP.send_message(MSPCodes.MSP_SDCARD_SUMMARY, false, false, function() {
                     MSP.send_message(MSPCodes.MSP_BLACKBOX_CONFIG, false, false, function() {
-                        MSP.send_message(MSPCodes.MSP_ADVANCED_CONFIG, false, false, function() {
-                            MSP.send_message(MSPCodes.MSP_NAME, false, false, load_html);
+                        MSP.send_message(MSPCodes.MSP_DEBUG_CONFIG, false, false, function() {
+                            MSP.send_message(MSPCodes.MSP_ADVANCED_CONFIG, false, false, function() {
+                                MSP.send_message(MSPCodes.MSP_NAME, false, false, load_html);
+                            });
                         });
                     });
                 });
@@ -112,8 +114,8 @@ TABS.onboard_logging.initialize = function (callback) {
                     }
                     FC.BLACKBOX.blackboxDevice = parseInt(deviceSelect.val(), 10);
                     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                        FC.PID_ADVANCED_CONFIG.debugMode = parseInt(debugModeSelect.val());
-                        MSP.send_message(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG), false, save_to_eeprom);
+                        FC.DEBUG_CONFIG.debugMode = parseInt(debugModeSelect.val());
+                        MSP.send_message(MSPCodes.MSP_SET_DEBUG_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_DEBUG_CONFIG), false, save_to_eeprom);
                     }
                     MSP.send_message(MSPCodes.MSP_SET_BLACKBOX_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_BLACKBOX_CONFIG), false, save_to_eeprom);
                 });
@@ -351,7 +353,7 @@ TABS.onboard_logging.initialize = function (callback) {
                 {text: "UNKNOWN4"},
             ];
 
-            for (let i = 0; i < FC.PID_ADVANCED_CONFIG.debugModeCount; i++) {
+            for (let i = 0; i < FC.DEBUG_CONFIG.debugModeCount; i++) {
                 if (i < debugModes.length) {
                     debugModeSelect.append(new Option(debugModes[i].text, i));
                 } else {
@@ -359,7 +361,7 @@ TABS.onboard_logging.initialize = function (callback) {
                 }
             }
 
-            debugModeSelect.val(FC.PID_ADVANCED_CONFIG.debugMode);
+            debugModeSelect.val(FC.DEBUG_CONFIG.debugMode);
 
             // Convert to select2 and order alphabetic
             debugModeSelect.select2({
