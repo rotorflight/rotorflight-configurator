@@ -350,12 +350,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     }
                 }
                 break;
-
             case MSPCodes.MSP_ARMING_CONFIG:
-                if (semver.gte(FC.CONFIG.apiVersion, "1.8.0")) {
-                    FC.ARMING_CONFIG.auto_disarm_delay = data.readU8();
-                    FC.ARMING_CONFIG.disarm_kill_switch = data.readU8();
-                }
+                FC.ARMING_CONFIG.auto_disarm_delay = data.readU8();
                 break;
             case MSPCodes.MSP_LOOP_TIME:
                 if (semver.gte(FC.CONFIG.apiVersion, "1.8.0")) {
@@ -1552,8 +1548,7 @@ MspHelper.prototype.crunch = function(code) {
             buffer.push8(FC.DEBUG_CONFIG.debugMode);
             break;
         case MSPCodes.MSP_SET_ARMING_CONFIG:
-            buffer.push8(FC.ARMING_CONFIG.auto_disarm_delay)
-                .push8(FC.ARMING_CONFIG.disarm_kill_switch);
+            buffer.push8(FC.ARMING_CONFIG.auto_disarm_delay);
             break;
         case MSPCodes.MSP_SET_LOOP_TIME:
             buffer.push16(FC.FC_CONFIG.loopTime);
@@ -1890,11 +1885,11 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.COPY_PROFILE.dstProfile)
                 .push8(FC.COPY_PROFILE.srcProfile);
             break;
+
         case MSPCodes.MSP_ARMING_DISABLE:
             buffer.push8(FC.CONFIG.armingDisabled ? 1 : 0);
-            buffer.push8(0); // was FC.CONFIG.runawayTakeoffPreventionDisabled
-
             break;
+
         case MSPCodes.MSP_SET_RTC:
             const now = new Date();
 
