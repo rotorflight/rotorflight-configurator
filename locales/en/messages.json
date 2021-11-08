@@ -659,13 +659,17 @@
         "message": "Packet error:",
         "description": "Packet error text shown in the status bar"
     },
-    "statusbar_i2c_error": {
-        "message": "I2C error:",
-        "description": "CPU load text shown in the status bar"
+    "statusbar_pid_cycle_time": {
+        "message": "PID Cycle Time:",
+        "description": "PID cycle time text shown in the status bar"
     },
-    "statusbar_cycle_time": {
-        "message": "Cycle Time:",
-        "description": "Cycle time text shown in the status bar"
+    "statusbar_gyro_cycle_time": {
+        "message": "Gyro Cycle Time:",
+        "description": "Gyro cycle time text shown in the status bar"
+    },
+    "statusbar_sys_load": {
+        "message": "System Load:",
+        "description": "System load text shown in the status bar"
     },
     "statusbar_cpu_load": {
         "message": "CPU Load:",
