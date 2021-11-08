@@ -145,7 +145,7 @@ TABS.servos.initialize = function (callback) {
 
         function save_servo_configuration() {
 
-            for (let index = 0; index < self.MAX_SERVOS; index++) {
+            for (let index = 0; index < FC.STATUS.servoCount; index++) {
                 update_servo_config(index);
             }
 
@@ -202,7 +202,7 @@ TABS.servos.initialize = function (callback) {
         $('.tab-servos .override').toggle(!FC.CONFIG.servoOverrideDisabled);
 
         // Initialize servos
-        for (let index = 0; index < self.MAX_SERVOS; index++) {
+        for (let index = 0; index < FC.CONFIG.servoCount; index++) {
             process_config(index);
             if (!FC.CONFIG.servoOverrideDisabled)
                 process_override(index);
