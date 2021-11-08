@@ -64,41 +64,23 @@ MspHelper.prototype.process_data = function(dataHandler) {
     if (!crcError) {
         if (!dataHandler.unsupported) switch (code) {
             case MSPCodes.MSP_STATUS:
-                FC.CONFIG.cycleTime = data.readU16();
-                FC.CONFIG.i2cError = data.readU16();
                 FC.CONFIG.activeSensors = data.readU16();
                 FC.CONFIG.mode = data.readU32();
+                FC.CONFIG.armingDisableCount = data.readU8();
+                FC.CONFIG.armingDisableFlags = data.readU32();
+                FC.CONFIG.extraFlags = data.readU8();
+                FC.CONFIG.motorCount = data.readU8();
+                FC.CONFIG.servoCount = data.readU8();
+                FC.CONFIG.numProfiles = data.readU8();
                 FC.CONFIG.profile = data.readU8();
-
+                FC.CONFIG.numRateProfiles = data.readU8();
+                FC.CONFIG.rateProfile = data.readU8();
+                FC.CONFIG.pidCycleTime = data.readU16();
+                FC.CONFIG.gyroCycleTime = data.readU16();
+                FC.CONFIG.sysLoad = data.readU8();
+                FC.CONFIG.cpuLoad = data.readU8();
                 sensor_status(FC.CONFIG.activeSensors);
                 break;
-            case MSPCodes.MSP_STATUS_EX:
-                FC.CONFIG.cycleTime = data.readU16();
-                FC.CONFIG.i2cError = data.readU16();
-                FC.CONFIG.activeSensors = data.readU16();
-                FC.CONFIG.mode = data.readU32();
-                FC.CONFIG.profile = data.readU8();
-                FC.CONFIG.cpuload = data.readU16();
-                if (semver.gte(FC.CONFIG.apiVersion, "1.16.0")) {
-                    FC.CONFIG.numProfiles = data.readU8();
-                    FC.CONFIG.rateProfile = data.readU8();
-
-                    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                      // Read flight mode flags
-                      const byteCount = data.readU8();
-                      for (let i = 0; i < byteCount; i++) {
-                        data.readU8();
-                      }
-
-                      // Read arming disable flags
-                      FC.CONFIG.armingDisableCount = data.readU8(); // Flag count
-                      FC.CONFIG.armingDisableFlags = data.readU32();
-                    }
-                }
-
-                sensor_status(FC.CONFIG.activeSensors);
-                break;
-
             case MSPCodes.MSP_RAW_IMU:
                 // 512 for mpu6050, 256 for mma
                 // currently we are unable to differentiate between the sensor types, so we are goign with 512

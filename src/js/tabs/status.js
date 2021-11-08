@@ -13,7 +13,6 @@ TABS.status.initialize = function (callback) {
 
     MSP.promise(MSPCodes.MSP_STATUS)
         .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
-        .then(() => MSP.promise(MSPCodes.MSP_STATUS_EX))
         .then(() => MSP.promise(MSPCodes.MSP_ACC_TRIM))
         .then(() => MSP.promise(MSPCodes.MSP_NAME))
         .then(() => MSP.promise(MSPCodes.MSP_RC))
@@ -224,7 +223,7 @@ TABS.status.initialize = function (callback) {
 
         function get_slow_data() {
 
-            MSP.send_message(MSPCodes.MSP_STATUS_EX, false, false, function() {
+            MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
                 $('#statusArmingAllowed').toggle(FC.CONFIG.armingDisableFlags == 0);
                 for (var i = 0; i < FC.CONFIG.armingDisableCount; i++) {
                     $('#statusArmingDisableFlags'+i).css('display',(FC.CONFIG.armingDisableFlags & (1 << i)) == 0 ? 'none':'inline-block');
