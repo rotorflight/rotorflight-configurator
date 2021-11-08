@@ -17,7 +17,7 @@ TABS.profiles.initialize = function (callback) {
         GUI.active_tab = 'profiles';
     }
 
-    MSP.promise(MSPCodes.MSP_STATUS_EX)
+    MSP.promise(MSPCodes.MSP_STATUS)
         .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
         .then(() => MSP.promise(MSPCodes.MSP_PID))
         .then(() => MSP.promise(MSPCodes.MSP_PID_ADVANCED))

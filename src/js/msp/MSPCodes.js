@@ -124,8 +124,6 @@ const MSPCodes = {
     MSP_RPM_FILTER:                 144,
     MSP_SET_RPM_FILTER:             145,
 
-    MSP_STATUS_EX:                  150,
-
     MSP_UID:                        160,
     MSP_GPS_SV_INFO:                164,
 

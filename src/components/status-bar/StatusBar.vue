@@ -9,12 +9,17 @@
       :value="packetError"
     />
     <ReadingStat
-      message="statusbar_i2c_error"
-      :value="i2cError"
+      message="statusbar_pid_cycle_time"
+      :value="pidCycleTime"
     />
     <ReadingStat
-      message="statusbar_cycle_time"
-      :value="cycleTime"
+      message="statusbar_gyro_cycle_time"
+      :value="gyroCycleTime"
+    />
+    <ReadingStat
+      message="statusbar_sys_load"
+      :value="sysLoad"
+      unit="%"
     />
     <ReadingStat
       message="statusbar_cpu_load"
@@ -51,16 +56,18 @@ export default {
     packetError: {
       type: Number,
     },
-    i2cError: {
+    pidCycleTime: {
       type: Number,
     },
-    cycleTime: {
+    gyroCycleTime: {
+      type: Number,
+    },
+    sysLoad: {
       type: Number,
     },
     cpuLoad: {
       type: Number,
     },
-
     configuratorVersion: {
       type: String,
     },
