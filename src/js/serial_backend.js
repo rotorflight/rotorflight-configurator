@@ -538,7 +538,7 @@ function onConnect() {
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_33)) {
             MSP.send_message(MSPCodes.MSP_BATTERY_CONFIG, false, false);
         }
-        MSP.send_message(MSPCodes.MSP_STATUS_EX, false, false);
+        MSP.send_message(MSPCodes.MSP_STATUS, false, false);
         MSP.send_message(MSPCodes.MSP_DATAFLASH_SUMMARY, false, false);
 
         if (FC.CONFIG.boardType == 0 || FC.CONFIG.boardType == 2) {
@@ -697,11 +697,7 @@ function update_live_status() {
 
     if (GUI.active_tab != 'cli') {
         MSP.send_message(MSPCodes.MSP_BOXNAMES, false, false);
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_32)) {
-            MSP.send_message(MSPCodes.MSP_STATUS_EX, false, false);
-        } else {
-            MSP.send_message(MSPCodes.MSP_STATUS, false, false);
-        }
+        MSP.send_message(MSPCodes.MSP_STATUS, false, false);
         MSP.send_message(MSPCodes.MSP_ANALOG, false, false);
     }
 
