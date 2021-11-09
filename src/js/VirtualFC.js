@@ -28,7 +28,6 @@ const VirtualFC = {
             minthrottle: 1070,
             maxthrottle: 2000,
             mincommand: 1000,
-            motor_count: 4,
             motor_poles: [ 8, 8, 8, 8 ],
             use_dshot_telemetry: true,
             use_esc_sensor: false,

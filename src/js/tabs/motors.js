@@ -85,7 +85,7 @@ TABS.motors.initialize = function (callback) {
         $('input[id="minthrottle"]').val(FC.MOTOR_CONFIG.minthrottle);
         $('input[id="maxthrottle"]').val(FC.MOTOR_CONFIG.maxthrottle);
 
-        for (let i = 0; i < FC.MOTOR_CONFIG.motor_count; i++)
+        for (let i = 0; i < FC.CONFIG.motorCount; i++)
             $(`input[id="motorPoles${i+1}"]`).val(FC.MOTOR_CONFIG.motor_poles[i]);
 
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR');
@@ -124,7 +124,7 @@ TABS.motors.initialize = function (callback) {
 
             const protocolNum = parseInt(escProtocolSelect.val());
 
-            self.isProtoEnabled = !EscProtocols.IsProtocolDisabled(FC.CONFIG.apiVersion, protocolNum) && (FC.MOTOR_CONFIG.motor_count > 0);
+            self.isProtoEnabled = !EscProtocols.IsProtocolDisabled(FC.CONFIG.apiVersion, protocolNum) && (FC.CONFIG.motorCount > 0);
             self.isDshot = EscProtocols.IsProtocolDshot(FC.CONFIG.apiVersion, protocolNum);
 
             $('.mincommand').toggle(self.isProtoEnabled && !self.isDshot);
@@ -135,8 +135,8 @@ TABS.motors.initialize = function (callback) {
             $('.checkboxDshotBidir').toggle(self.isProtoEnabled && self.isDshot);
 
             for (let i = 0; i < 4; i++) {
-                $(`.motorPoles${i+1}`).toggle(self.isProtoEnabled && FC.MOTOR_CONFIG.motor_count > i);
-                $(`.motorInfo${i}`).toggle(self.isProtoEnabled && FC.MOTOR_CONFIG.motor_count > i);
+                $(`.motorPoles${i+1}`).toggle(self.isProtoEnabled && FC.CONFIG.motorCount > i);
+                $(`.motorInfo${i}`).toggle(self.isProtoEnabled && FC.CONFIG.motorCount > i);
             }
 
             $('.mainGearRatio').toggle(self.isProtoEnabled);
@@ -333,7 +333,7 @@ TABS.motors.initialize = function (callback) {
             $('.motorOverride tbody').append(motorOverride);
         }
 
-        for (let index = 0; index < FC.MOTOR_CONFIG.motor_count; index++) {
+        for (let index = 0; index < FC.CONFIG.motorCount; index++) {
             process_motor_info(index);
             process_override(index);
         }
@@ -363,7 +363,7 @@ TABS.motors.initialize = function (callback) {
             FC.MOTOR_CONFIG.maxthrottle = parseInt($('input[id="maxthrottle"]').val());
             FC.MOTOR_CONFIG.use_dshot_telemetry = dshotBidirSwitch.is(':checked') ? 1 : 0;
 
-            for (let i = 0; i < FC.MOTOR_CONFIG.motor_count; i++)
+            for (let i = 0; i < FC.CONFIG.motorCount; i++)
                 FC.MOTOR_CONFIG.motor_poles[i] = parseInt($(`input[id="motorPoles${i+1}"]`).val());
 
             FC.MOTOR_CONFIG.motor_pwm_protocol = parseInt(escProtocolSelect.val());
