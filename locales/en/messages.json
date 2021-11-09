@@ -4429,26 +4429,23 @@
     "profilesPidSettings": {
         "message": "PID Controller Settings"
     },
-    "profilesLevel": {
-        "message": "Angle/Horizon"
+    "profilesItermDecay": {
+        "message": "I Term Decay"
     },
-    "profilesAngle": {
-        "message": "Angle"
+    "profilesItermDecayHelp": {
+        "message": "Bleeds off the current I Term vector when the craft is not fully spooled up. This helps preventing the craft from tipping over on the ground."
     },
-    "profilesLevelAngleLimit": {
-        "message": "Leveling Angle Limit"
+    "profilesItermDecayTime": {
+        "message": "Decay Time"
     },
-    "profilesLevelSensitivity": {
-        "message": "Sensitivity"
-    },
-    "profilesLevelHelp": {
-        "message": "The values below change the behaviour of the ANGLE and HORIZON flight modes. Different PID controllers handle the values differently. Please check the documentation."
+    "profilesItermDecayTimeHelp": {
+        "message": "Decay time in 1/10s steps."
     },
     "profilesItermRotation": {
         "message": "I Term Rotation"
     },
     "profilesItermRotationHelp": {
-        "message": "Rotates the current I Term vector properly to other axes as the quad rotates when yawing continuously during rolls and when performing funnels and other tricks. Very appreciated by LOS acro pilots."
+        "message": "Rotates the current Roll and Pitch I Term vectors around Yaw when the carft rotates. This is sometimes called Piro Compensation."
     },
     "profilesItermRelax": {
         "message": "I Term Relax"
@@ -4467,10 +4464,10 @@
         "message": "RPY"
     },
     "profilesItermRelaxAxesOptionRPInc": {
-        "message": "RP (increment only)"
+        "message": "RP (Increment ONLY)"
     },
     "profilesItermRelaxAxesOptionRPYInc": {
-        "message": "RPY (increment only)"
+        "message": "RPY (Increment ONLY)"
     },
     "profilesItermRelaxType": {
         "message": "Type",
@@ -4482,24 +4479,131 @@
     "profilesItermRelaxTypeOptionSetpoint": {
         "message": "Setpoint"
     },
-    "profilesItermRelaxCutoff": {
-        "message": "Cutoff",
-        "description": "Cutoff value of the I Term Relax"
+    "profilesItermRelaxCutoffRoll": {
+        "message": "Cutoff Point for Roll"
+    },
+    "profilesItermRelaxCutoffPitch": {
+        "message": "Cutoff Point for Pitch"
+    },
+    "profilesItermRelaxCutoffYaw": {
+        "message": "Cutoff Point for Yaw"
     },
     "profilesItermRelaxCutoffHelp": {
-        "message": "Lower values suppress bounce-back after flips in low authority quads, high values increase high-rate turn precision for racing.<br>Set to 30-40 for racing, 15 for responsive freestyle builds, 10 for heavier freestyle quads, 3-5 for X-class."
+        "message": "Lower values suppress bounce-back after movements, high values increase high-rate turn precision.<br>Set to 15-30 for small helis, 10-15 for mid-size, and less than 10 for large."
     },
-    "profilesAbsoluteControlGain": {
-        "message": "Absolute Control"
+    "profilesCyclicNormalization": {
+        "message": "Rate normalization mode for cyclic"
     },
-    "profilesAbsoluteControlGainHelp": {
-        "message": "This feature solves some underlying problems of $t(pidTuningItermRotation.message) and should hopefully replace it at some point. This feature accumulates the absolute gyro error in quad coordinates and mixes a proportional correction into the setpoint. For it to work you need to enable AirMode and $t(pidTuningItermRelax.message) (for $t(pidTuningItermRelaxAxesOptionRP.message)). If you combine this feature with $t(pidTuningIntegratedYaw.message), you can set $t(pidTuningItermRelax.message) enabled for $t(pidTuningItermRelaxAxesOptionRPY.message)."
+    "profilesCyclicNormalizationHelp": {
+        "message": "Rate normalization mode for cyclic"
     },
-    "profilesAcroTrainerAngleLimit": {
-        "message": "Acro Trainer Angle Limit"
+    "profilesCollectiveNormalization": {
+        "message": "Rate normalization mode for collective"
     },
-    "profilesAcroTrainerAngleLimitHelp": {
-        "message": "Adds a new angle limiting mode for pilots who are learning to fly in acro mode. The range valid is 10-80 and must be activated with a switch in the $t(tabAuxiliary.message) tab."
+    "profilesCollectiveNormalizationHelp": {
+        "message": "Rate normalization mode for collective"
+    },
+    "profilesRateNormalizationNatural": {
+        "message": "Natural"
+    },
+    "profilesRateNormalizationLinear": {
+        "message": "Linear"
+    },
+    "profilesRateNormalizationAbsolute": {
+        "message": "Absolute"
+    },
+    "profilesLevelingSettings": {
+        "message": "Auto-leveling Settings"
+    },
+    "profilesAcroTrainerGain": {
+        "message": "Acro Trainer gain"
+    },
+    "profilesAcroTrainerGainHelp": {
+        "message": "Acro Trainer gain"
+    },
+    "profilesAcroTrainerLimit": {
+        "message": "Acro Trainer angle limit"
+    },
+    "profilesAcroTrainerLimitHelp": {
+        "message": "Acro Trainer angle limit"
+    },
+    "profilesAngleModeGain": {
+        "message": "Angle Mode leveling gain"
+    },
+    "profilesAngleModeGainHelp": {
+        "message": "Angle Mode leveling gain"
+    },
+    "profilesAngleModeLimit": {
+        "message": "Angle Mode maximum angle"
+    },
+    "profilesAngleModeLimitHelp": {
+        "message": "Angle Mode maximum angle"
+    },
+    "profilesHorizonModeGain": {
+        "message": "Horizon Mode leveling gain"
+    },
+    "profilesHorizonModeGainHelp": {
+        "message": "Horizon Mode leveling gain"
+    },
+    "profilesYawSettings": {
+        "message": "Yaw Settings"
+    },
+    "profilesYawCenterOffset": {
+        "message": "Center Offset"
+    },
+    "profilesYawCenterOffsetHelp": {
+        "message": "Center Offset for tail motor or servo"
+    },
+    "profilesYawStopGainCW": {
+        "message": "CW Stop Gain"
+    },
+    "profilesYawStopGainCWHelp": {
+        "message": "Stop gain (PD) for clock-wise rotation. Typical range 50..200."
+    },
+    "profilesYawStopGainCCW": {
+        "message": "CCW Stop Gain"
+    },
+    "profilesYawStopGainCCWHelp": {
+        "message": "Stop gain (PD) for counter clock-wise rotation. Typical range 50..200."
+    },
+    "profilesYawFFCyclicGain": {
+        "message": "Cyclic Feedforward Gain"
+    },
+    "profilesYawFFCyclicGainHelp": {
+        "message": "Gain value for cyclic feedforward mixed into yaw"
+    },
+    "profilesYawFFCollectiveGain": {
+        "message": "Collective Feedforward Gain"
+    },
+    "profilesYawFFCollectiveGainHelp": {
+        "message": "Gain value for collective feedforward mixed into yaw"
+    },
+    "profilesYawFFImpulseGain": {
+        "message": "Collective Impulse Feedforward Gain"
+    },
+    "profilesYawFFImpulseGainHelp": {
+        "message": "Gain value for collective impulse feedforward mixed into yaw"
+    },
+    "profilesRescueSettings": {
+        "message": "Rescue Settings"
+    },
+    "profilesRescueCollective": {
+        "message": "Rescue Climb Collective"
+    },
+    "profilesRescueCollectiveHelp": {
+        "message": "Collective value for rescue climb"
+    },
+    "profilesRescueBoost": {
+        "message": "Initial Climb Collective Boost"
+    },
+    "profilesRescueBoostHelp": {
+        "message": "Extra collective boost for initial climb"
+    },
+    "profilesRescueDelay": {
+        "message": "Initial Climb duration"
+    },
+    "profilesRescueDelayHelp": {
+        "message": "Duration of the initial climb before rolling upright"
     },
 
     "rateSetupButtonSave": {

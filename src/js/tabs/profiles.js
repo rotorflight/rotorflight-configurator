@@ -44,19 +44,30 @@ TABS.profiles.initialize = function (callback) {
             });
         });
 
-        // Acro Trainer
-        $('input[id="acroTrainerAngleLimit"]').val(FC.PID_PROFILE.acroTrainerAngleLimit).trigger('input');
-
-        // Angle mode
-        $('.tab-profiles input[id="levelAngleLimit"]').val(FC.PID_PROFILE.levelAngleLimit);
-
         // I-term rotation
         $('.tab-profiles input[id="itermRotation"]').prop('checked', FC.PID_PROFILE.itermRotation !== 0);
+
+        // I-term decay
+        $('.tab-profiles input[id="itermDecayTime"]').val(FC.PID_PROFILE.itermDecay);
+
+        const itermDecayCheck = $('.tab-profiles input[id="itermDecay"]');
+
+        itermDecayCheck.prop('checked', FC.PID_PROFILE.itermDecay !== 0);
+
+        itermDecayCheck.change(function() {
+            const checked = $(this).is(':checked');
+            $('.tab-profiles .itermdecay .suboption').toggle(checked);
+            $('.tab-profiles .itermdecay .subhelp').toggle(checked);
+        });
+
+        itermDecayCheck.change();
 
         // I-term relax
         $('.tab-profiles select[id="itermRelaxAxes"]').val(FC.PID_PROFILE.itermRelax > 0 ? FC.PID_PROFILE.itermRelax : 1);
         $('.tab-profiles select[id="itermRelaxType"]').val(FC.PID_PROFILE.itermRelaxType);
-        $('.tab-profiles input[id="itermRelaxCutoff"]').val(FC.PID_PROFILE.itermRelaxCutoff);
+        $('.tab-profiles input[id="itermRelaxCutoffRoll"]').val(FC.PID_PROFILE.itermRelaxCutoffRoll);
+        $('.tab-profiles input[id="itermRelaxCutoffPitch"]').val(FC.PID_PROFILE.itermRelaxCutoffPitch);
+        $('.tab-profiles input[id="itermRelaxCutoffYaw"]').val(FC.PID_PROFILE.itermRelaxCutoffYaw);
 
         const itermRelaxCheck = $('.tab-profiles input[id="itermRelax"]');
 
@@ -64,15 +75,39 @@ TABS.profiles.initialize = function (callback) {
 
         itermRelaxCheck.change(function() {
             const checked = $(this).is(':checked');
-            if (checked) {
-                $('.tab-profiles .itermrelax .suboption').show();
-                $('.tab-profiles .itermrelaxcutoff').show();
-            } else {
-                $('.tab-profiles .itermrelax .suboption').hide();
-            }
+            $('.tab-profiles .itermrelax .suboption').toggle(checked);
+            $('.tab-profiles .itermrelax .subhelp').toggle(checked);
         });
 
         itermRelaxCheck.change();
+
+        // Normalization
+        $('.tab-profiles select[id="cyclicNormalization"]').val(FC.PID_PROFILE.cyclicNormalization);
+        $('.tab-profiles select[id="collectiveNormalization"]').val(FC.PID_PROFILE.collectiveNormalization);
+
+        // Yaw settings
+        $('.tab-profiles input[id="yawCenterOffset"]').val(FC.PID_PROFILE.yawCenterOffset);
+        $('.tab-profiles input[id="yawStopGainCW"]').val(FC.PID_PROFILE.yawStopGainCW);
+        $('.tab-profiles input[id="yawStopGainCCW"]').val(FC.PID_PROFILE.yawStopGainCCW);
+        $('.tab-profiles input[id="yawFFCyclicGain"]').val(FC.PID_PROFILE.yawFFCyclicGain);
+        $('.tab-profiles input[id="yawFFCollectiveGain"]').val(FC.PID_PROFILE.yawFFCollectiveGain);
+        $('.tab-profiles input[id="yawFFImpulseGain"]').val(FC.PID_PROFILE.yawFFImpulseGain);
+
+        // Acro Trainer
+        $('.tab-profiles input[id="acroTrainerGain"]').val(FC.PID_PROFILE.acroTrainerGain).trigger('input');
+        $('.tab-profiles input[id="acroTrainerLimit"]').val(FC.PID_PROFILE.acroTrainerLimit).trigger('input');
+
+        // Angle mode
+        $('.tab-profiles input[id="angleModeGain"]').val(FC.PID_PROFILE.levelAngleStrength);
+        $('.tab-profiles input[id="angleModeLimit"]').val(FC.PID_PROFILE.levelAngleLimit);
+
+        // Horizon mode
+        $('.tab-profiles input[id="horizonModeGain"]').val(FC.PID_PROFILE.horizonLevelStrength);
+
+        // Rescue settings
+        $('.tab-profiles input[id="rescueCollective"]').val(FC.PID_PROFILE.rescueCollective);
+        $('.tab-profiles input[id="rescueBoost"]').val(FC.PID_PROFILE.rescueBoost);
+        $('.tab-profiles input[id="rescueDelay"]').val(FC.PID_PROFILE.rescueDelay);
 
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR') && (FC.GOVERNOR.gov_mode > 1);
 
@@ -107,14 +142,35 @@ TABS.profiles.initialize = function (callback) {
             });
         });
 
-        FC.PID_PROFILE.acroTrainerAngleLimit = $('.tab-profiles input[id="acroTrainerAngleLimit"]').val();
-
-        FC.PID_PROFILE.levelAngleLimit = parseInt($('.tab-profiles input[id="levelAngleLimit"]').val());
-
         FC.PID_PROFILE.itermRotation = $('.tab-profiles input[id="itermRotation"]').is(':checked') ? 1 : 0;
+        FC.PID_PROFILE.itermDecay = $('.tab-profiles input[id="itermDecay"]').is(':checked') ? $('.tab-profiles input[id="itermDecayTime"]').val() : 0;
         FC.PID_PROFILE.itermRelax = $('.tab-profiles input[id="itermRelax"]').is(':checked') ? $('.tab-profiles select[id="itermRelaxAxes"]').val() : 0;
         FC.PID_PROFILE.itermRelaxType = $('.tab-profiles select[id="itermRelaxType"]').val();
-        FC.PID_PROFILE.itermRelaxCutoff = parseInt($('.tab-profiles input[id="itermRelaxCutoff"]').val());
+        FC.PID_PROFILE.itermRelaxCutoffRoll = parseInt($('.tab-profiles input[id="itermRelaxCutoffRoll"]').val());
+        FC.PID_PROFILE.itermRelaxCutoffPitch = parseInt($('.tab-profiles input[id="itermRelaxCutoffPitch"]').val());
+        FC.PID_PROFILE.itermRelaxCutoffYaw = parseInt($('.tab-profiles input[id="itermRelaxCutoffYaw"]').val());
+
+        FC.PID_PROFILE.cyclicNormalization = $('.tab-profiles select[id="cyclicNormalization"]').val();
+        FC.PID_PROFILE.collectiveNormalization = $('.tab-profiles select[id="collectiveNormalization"]').val();
+
+        FC.PID_PROFILE.acroTrainerGain = $('.tab-profiles input[id="acroTrainerGain"]').val();
+        FC.PID_PROFILE.acroTrainerLimit = $('.tab-profiles input[id="acroTrainerLimit"]').val();
+
+        FC.PID_PROFILE.levelAngleStrength = parseInt($('.tab-profiles input[id="angleModeGain"]').val());
+        FC.PID_PROFILE.levelAngleLimit = parseInt($('.tab-profiles input[id="angleModeLimit"]').val());
+
+        FC.PID_PROFILE.horizonLevelStrength = parseInt($('.tab-profiles input[id="horizonModeGain"]').val());
+
+        FC.PID_PROFILE.rescueCollective = $('.tab-profiles input[id="rescueCollective"]').val();
+        FC.PID_PROFILE.rescueBoost = $('.tab-profiles input[id="rescueBoost"]').val();
+        FC.PID_PROFILE.rescueDelay = $('.tab-profiles input[id="rescueDelay"]').val();
+
+        FC.PID_PROFILE.yawCenterOffset = $('.tab-profiles input[id="yawCenterOffset"]').val();
+        FC.PID_PROFILE.yawStopGainCW = $('.tab-profiles input[id="yawStopGainCW"]').val();
+        FC.PID_PROFILE.yawStopGainCCW = $('.tab-profiles input[id="yawStopGainCCW"]').val();
+        FC.PID_PROFILE.yawFFCyclicGain = $('.tab-profiles input[id="yawFFCyclicGain"]').val();
+        FC.PID_PROFILE.yawFFCollectiveGain = $('.tab-profiles input[id="yawFFCollectiveGain"]').val();
+        FC.PID_PROFILE.yawFFImpulseGain = $('.tab-profiles input[id="yawFFImpulseGain"]').val();
 
         if (self.isGovEnabled) {
             FC.GOVERNOR.gov_headspeed = parseInt($('.tab-profiles input[id="govHeadspeed"]').val());
