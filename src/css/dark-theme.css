@@ -605,17 +605,17 @@ progress[value]::-webkit-progress-bar {
     color: white;
 }
 
-.tab-profiles table.pidSettings .suboption select {
+.tab-profiles .settings_table .suboption select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-profiles table.pidSettings .suboption input {
+.tab-profiles .settings_table .suboption input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-profiles table.pidSettings tr {
+.tab-profiles .settings_table tr {
     border-bottom: 1px solid #6b6b6b;
 }
 
@@ -644,7 +644,7 @@ progress[value]::-webkit-progress-bar {
     background-color: #393b3a;
 }
 
-.tab-profiles .profile select {
+.xxxtab-profiles .profile select {
     background-color: #3a3a3a;
     color: white;
 }
