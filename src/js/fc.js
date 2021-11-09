@@ -356,7 +356,6 @@ const FC = {
             batterymetertype:           1, // 1=ADC, 2=ESC
         };
         this.MOTOR_CONFIG = {
-            motor_count:                0,
             mincommand:                 0,
             minthrottle:                0,
             maxthrottle:                0,

@@ -359,7 +359,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MISC.vbatwarningcellvoltage = data.readU8() / 10; // 10-50
                 break;
             case MSPCodes.MSP_MOTOR_CONFIG:
-                FC.MOTOR_CONFIG.motor_count = data.readU8();
                 FC.MOTOR_CONFIG.mincommand = data.readU16();
                 FC.MOTOR_CONFIG.minthrottle = data.readU16();
                 FC.MOTOR_CONFIG.maxthrottle = data.readU16();
