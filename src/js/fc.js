@@ -188,7 +188,10 @@ const FC = {
         };
 
         this.MIXER_CONFIG = {
-            mixer:                      0,
+            main_rotor_dir:             0,
+            tail_rotor_mode:            0,
+            tail_motor_idle:            0,
+            swash_ring:                 0,
         };
 
         this.BOARD_ALIGNMENT_CONFIG = {
