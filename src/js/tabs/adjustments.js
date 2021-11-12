@@ -26,6 +26,8 @@ TABS.adjustments = {
         'YawD',
         'YawF',
         'YawCenter',
+        'YawCWStopGain',
+        'YawCCWStopGain',
         'YawCyclicFF',
         'YawCollectiveFF',
         'YawImpulseFF',
