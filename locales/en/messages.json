@@ -2590,6 +2590,12 @@
     "adjustmentsFunctionYawCenter": {
         "message": "Yaw Center Offset"
     },
+    "adjustmentsFunctionYawCWStopGain": {
+        "message": "Yaw CW Stop Gain"
+    },
+    "adjustmentsFunctionYawCCWStopGain": {
+        "message": "Yaw CCW Stop Gain"
+    },
     "adjustmentsFunctionYawCyclicFF": {
         "message": "Yaw Cyclic Precomp"
     },
