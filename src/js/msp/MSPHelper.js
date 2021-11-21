@@ -935,6 +935,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.FILTER_CONFIG.dterm_lowpass2_type = data.readU8();
                 FC.FILTER_CONFIG.dterm_lowpass2_hz = data.readU16();
                 FC.FILTER_CONFIG.dterm_notch_hz = data.readU16();
+                FC.FILTER_CONFIG.dterm_notch_cutoff = data.readU16();
                 FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz = data.readU16();
                 FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz = data.readU16();
                 FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz = data.readU16();
