@@ -5,23 +5,23 @@ const Analytics = function (trackingId, userId, appName, appVersion, changesetId
 
     this.setOptOut(optOut);
 
-    this._googleAnalytics = googleAnalytics;
+    //this._googleAnalytics = googleAnalytics;
 
-    this._googleAnalytics.initialize(this._trackingId, {
-        storage: 'none',
-        clientId: userId,
-        debug: !!debugMode
-    });
+    //this._googleAnalytics.initialize(this._trackingId, {
+    //    storage: 'none',
+    //    clientId: userId,
+    //    debug: !!debugMode
+    //});
 
     // Make it work for the Chrome App:
-    this._googleAnalytics.set('forceSSL', true);
-    this._googleAnalytics.set('transport', 'xhr');
+    //this._googleAnalytics.set('forceSSL', true);
+    //this._googleAnalytics.set('transport', 'xhr');
 
     // Make it work for NW.js:
-    this._googleAnalytics.set('checkProtocolTask', null);
+    //this._googleAnalytics.set('checkProtocolTask', null);
 
-    this._googleAnalytics.set('appName', appName);
-    this._googleAnalytics.set('appVersion', debugMode ? appVersion + '-debug' : appVersion);
+    //this._googleAnalytics.set('appName', appName);
+    //this._googleAnalytics.set('appVersion', debugMode ? appVersion + '-debug' : appVersion);
 
     this.EVENT_CATEGORIES = {
         APPLICATION: 'Application',
@@ -86,16 +86,16 @@ const Analytics = function (trackingId, userId, appName, appVersion, changesetId
 
 Analytics.prototype.setDimension = function (dimension, value) {
     const dimensionName = `dimension${dimension}`;
-    this._googleAnalytics.custom(dimensionName, value);
+    //this._googleAnalytics.custom(dimensionName, value);
 };
 
 Analytics.prototype.setMetric = function (metric, value) {
     const metricName = `metric${metric}`;
-    this._googleAnalytics.custom(metricName, value);
+    //this._googleAnalytics.custom(metricName, value);
 };
 
 Analytics.prototype.sendEvent = function (category, action, options) {
-    this._googleAnalytics.event(category, action, options);
+    //this._googleAnalytics.event(category, action, options);
 };
 
 Analytics.prototype.sendChangeEvents = function (category, changeList) {
@@ -110,15 +110,15 @@ Analytics.prototype.sendChangeEvents = function (category, changeList) {
 };
 
 Analytics.prototype.sendAppView = function (viewName) {
-    this._googleAnalytics.screenview(viewName);
+    //this._googleAnalytics.screenview(viewName);
 };
 
 Analytics.prototype.sendTiming = function (category, timing, value) {
-    this._googleAnalytics.timing(category, timing, value);
+    //this._googleAnalytics.timing(category, timing, value);
 };
 
 Analytics.prototype.sendException = function (message) {
-    this._googleAnalytics.exception(message);
+    //this._googleAnalytics.exception(message);
 };
 
 Analytics.prototype.setOptOut = function (optOut) {
