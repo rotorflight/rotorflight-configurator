@@ -1,6 +1,6 @@
 'use strict';
 
-window.googleAnalytics = analytics;
+//window.googleAnalytics = analytics;
 window.analytics = null;
 
 $(document).ready(function () {
