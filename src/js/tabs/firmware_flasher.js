@@ -2,7 +2,7 @@
 
 TABS.firmware_flasher = {
     releases: null,
-    releaseChecker: new ReleaseChecker('firmware', 'https://api.github.com/repos/betaflight/betaflight/releases'),
+    releaseChecker: new ReleaseChecker('firmware', 'https://api.github.com/repos/rotorflight/rotorflight-firmware/releases'),
     gitHubApi: new GitHubApi(),
     localFirmwareLoaded: false,
     selectedBoard: undefined,
@@ -10,7 +10,7 @@ TABS.firmware_flasher = {
     parsed_hex: undefined, // parsed raw hex in array format
     unifiedTarget: {}, // the Unified Target configuration to be spliced into the configuration
     isConfigLocal: false, // Set to true if the user loads one locally
-    developmentFirmwareLoaded: false, // Is the firmware to be flashed from the development branch?
+    compatibleFrom: '4.2.12-20211201',
 };
 
 TABS.firmware_flasher.initialize = function (callback) {
@@ -57,8 +57,7 @@ TABS.firmware_flasher.initialize = function (callback) {
         }
 
         function show_loaded_hex(summary) {
-            self.flashingMessage('<a class="save_firmware" href="#" title="Save Firmware">' + i18n.getMessage('firmwareFlasherFirmwareOnlineLoaded', self.parsed_hex.bytes_total) + '</a>',
-                     self.FLASH_MESSAGE_TYPES.NEUTRAL);
+            self.flashingMessage('<a class="save_firmware" href="#" title="Save Firmware">' + i18n.getMessage('firmwareFlasherFirmwareOnlineLoaded', self.parsed_hex.bytes_total) + '</a>', self.FLASH_MESSAGE_TYPES.NEUTRAL);
 
             self.enableFlashing(true);
 
@@ -81,7 +80,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                 $('div.release_info #unifiedTargetInfo').hide();
             }
 
-            var formattedNotes = summary.notes.replace(/#(\d+)/g, '[#$1](https://github.com/betaflight/betaflight/pull/$1)');
+            var formattedNotes = summary.notes; //.replace(/#(\d+)/g, '[#$1](https://github.com/rotorflight/rotorflight-firmware/pull/$1)');
             formattedNotes = marked(formattedNotes);
             $('div.release_info .notes').html(formattedNotes);
             $('div.release_info .notes').find('a').each(function() {
@@ -167,45 +166,25 @@ TABS.firmware_flasher.initialize = function (callback) {
             });
         }
 
-        function processBoardOptions(releaseData, showDevReleases) {
+        function processBoardOptions(releaseData, buildLevel) {
             var releases = {};
-            var sortedTargets = [];
-            var unsortedTargets = [];
+            const filenameExpression = /^rotorflight_([\d]+[.][\d]+[.][\d]+((-[A-Za-z][\w]*)|(-[\d]+))?)_([A-Za-z][\w]*)[.]hex$/;
             releaseData.forEach(function(release) {
+                if (release.prerelease && buildLevel < 2)
+                    return;
                 release.assets.forEach(function(asset) {
-                    var targetFromFilenameExpression = /betaflight_([\d.]+)?_?(\w+)(\-.*)?\.(.*)/;
-                    var match = targetFromFilenameExpression.exec(asset.name);
-                    if ((!showDevReleases && release.prerelease) || !match) {
+                    var match = filenameExpression.exec(asset.name);
+                    if (!match)
                         return;
-                    }
-                    var target = match[2];
-                    if($.inArray(target, unsortedTargets) == -1) {
-                        unsortedTargets.push(target);
-                    }
-                });
-                sortedTargets = unsortedTargets.sort();
-            });
-            sortedTargets.forEach(function(release) {
-                releases[release] = [];
-            });
-            releaseData.forEach(function(release) {
-                var versionFromTagExpression = /v?(.*)/;
-                var matchVersionFromTag = versionFromTagExpression.exec(release.tag_name);
-                var version = matchVersionFromTag[1];
-                release.assets.forEach(function(asset) {
-                    var targetFromFilenameExpression = /betaflight_([\d.]+)?_?(\w+)(\-.*)?\.(.*)/;
-                    var match = targetFromFilenameExpression.exec(asset.name);
-                    if ((!showDevReleases && release.prerelease) || !match) {
+                    if (match[2] && buildLevel < 1)
                         return;
-                    }
-                    var target = match[2];
-                    var format = match[4];
-                    if (format != 'hex') {
+                    if (semver.lt(match[1], self.compatibleFrom))
                         return;
-                    }
-                    var date = new Date(release.published_at);
-                    var formattedDate = ("0" + date.getDate()).slice(-2) + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear() + " " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
-                    var descriptor = {
+                    const version = match[1];
+                    const target = match[5];
+                    const date = new Date(release.published_at);
+                    const formattedDate = ("0" + date.getDate()).slice(-2) + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear() + " " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
+                    const descriptor = {
                         "releaseUrl": release.html_url,
                         "name"      : version,
                         "version"   : version,
@@ -215,6 +194,8 @@ TABS.firmware_flasher.initialize = function (callback) {
                         "date"      : formattedDate,
                         "notes"     : release.body
                     };
+                    if (releases[target] === undefined)
+                        releases[target] = [];
                     releases[target].push(descriptor);
                 });
             });
@@ -222,11 +203,10 @@ TABS.firmware_flasher.initialize = function (callback) {
         };
 
         function supportsUnifiedTargets(version) {
-            return semver.gte(version.split(' ')[0], '4.1.0-RC1');
+            return semver.gte(version, '4.2.0');
         }
 
         function hasUnifiedTargetBuild(builds) {
-            // Find a build that is newer than 4.1.0, return true if found
             return Object.keys(builds).some(function (key) {
                 return builds[key].some(function(target) {
                     return supportsUnifiedTargets(target.version);
@@ -325,63 +305,32 @@ TABS.firmware_flasher.initialize = function (callback) {
         var buildTypes = [
             {
                 tag: 'firmwareFlasherOptionLabelBuildTypeRelease',
-                loader: () => self.releaseChecker.loadReleaseData(releaseData => processBoardOptions(releaseData, false))
+                loader: () => self.releaseChecker.loadReleaseData(releaseData => processBoardOptions(releaseData, 0))
             },
             {
-                tag: 'firmwareFlasherOptionLabelBuildTypeReleaseCandidate',
-                loader: () => self.releaseChecker.loadReleaseData(releaseData => processBoardOptions(releaseData, true))
-            }
+                tag: 'firmwareFlasherOptionLabelBuildTypePreRelease',
+                loader: () => self.releaseChecker.loadReleaseData(releaseData => processBoardOptions(releaseData, 1))
+            },
+            {
+                tag: 'firmwareFlasherOptionLabelBuildTypeDevelopment',
+                loader: () => self.releaseChecker.loadReleaseData(releaseData => processBoardOptions(releaseData, 2))
+            },
         ];
 
-        var buildTypesToShow;
-
         var buildType_e = $('select[name="build_type"]');
+
         function buildBuildTypeOptionsList() {
             buildType_e.empty();
-            buildTypesToShow.forEach(({ tag, title }, index) => {
+            buildTypes.forEach(({tag,title}, index) => {
                 buildType_e.append(
-                    $(
-                        `<option value='${index}'>${
-                            tag ? i18n.getMessage(tag) : title
-                        }</option>`
-                    )
+                    $(`<option value='${index}'>${tag ? i18n.getMessage(tag) : title}</option>`)
                 );
             });
             buildType_e.val($('select[name="build_type"] option:first').val());
         }
 
-        function showOrHideBuildTypes() {
-            var showExtraReleases = $(this).is(':checked');
+        buildBuildTypeOptionsList();
 
-            if (showExtraReleases) {
-                $('tr.build_type').show();
-                $('tr.expert_mode').show();
-            } else {
-                $('tr.build_type').hide();
-                $('tr.expert_mode').hide();
-                buildType_e.val(0).trigger('change');
-            }
-        }
-
-        var globalExpertMode_e = $('input[name="expertModeCheckbox"]');
-        function showOrHideBuildTypeSelect() {
-            var expertModeChecked = $(this).is(':checked');
-
-            globalExpertMode_e.prop('checked', expertModeChecked).trigger('change');
-            if (expertModeChecked) {
-                buildTypesToShow = buildTypes;
-                buildBuildTypeOptionsList();
-            } else {
-                buildTypesToShow = buildTypes;
-                buildBuildTypeOptionsList();
-                buildType_e.val(0).trigger('change');
-            }
-        }
-
-        var expertMode_e = $('.tab-firmware_flasher input.expert_mode');
-        expertMode_e.prop('checked', globalExpertMode_e.is(':checked'));
-        $('input.show_development_releases').change(showOrHideBuildTypes).change();
-        expertMode_e.change(showOrHideBuildTypeSelect).change();
 
         // translate to user-selected language
         i18n.localizePage();
@@ -400,7 +349,7 @@ TABS.firmware_flasher.initialize = function (callback) {
 
             if (!GUI.connect_lock) {
                 TABS.firmware_flasher.unifiedConfigs = {};
-                buildTypesToShow[build_type].loader();
+                buildTypes[build_type].loader();
             }
 
             chrome.storage.local.set({'selected_build_type': build_type});
@@ -409,25 +358,16 @@ TABS.firmware_flasher.initialize = function (callback) {
         function populateBuilds(builds, target, manufacturerId, duplicateName, targetVersions, callback) {
             if (targetVersions) {
                 targetVersions.forEach(function(descriptor) {
-                    const versionRegex = /^(\d.\d.\d(?:-\w+)?)(?: #(\d+))?$/;
-                    const versionParts = descriptor.version.match(versionRegex);
-                    if (!versionParts) {
-                        return;
-                    }
-                    let version = versionParts[1];
-                    const buildNumber = versionParts[2] ? `${versionParts[2]}` : '';
-
+                    let version = descriptor.version;
                     const build = { descriptor };
                     if (manufacturerId) {
                         if (!supportsUnifiedTargets(descriptor.version)) {
                             return;
                         }
-
-                        version = `${version}+${buildNumber}${manufacturerId}`;
                         build.manufacturerId = manufacturerId;
                         build.duplicateName = duplicateName;
                     } else {
-                        version = `${version}+${buildNumber}-legacy`;
+                        version = `${version}-legacy`;
                         build.isLegacy = true;
                     }
                     builds[version] = build;
@@ -577,7 +517,6 @@ TABS.firmware_flasher.initialize = function (callback) {
                         )
                     );
 
-                    let selecteBuild = buildTypesToShow[$('select[name="build_type"]').val()];
                     const builds = [];
 
                     const finishPopulatingBuilds = function () {
@@ -773,15 +712,6 @@ TABS.firmware_flasher.initialize = function (callback) {
             }).change();
         });
 
-        chrome.storage.local.get('show_development_releases', function (result) {
-            $('input.show_development_releases')
-            .prop('checked', result.show_development_releases)
-            .change(function () {
-                chrome.storage.local.set({'show_development_releases': $(this).is(':checked')});
-            }).change();
-
-        });
-
         chrome.storage.local.get('selected_build_type', function (result) {
             // ensure default build type is selected
             buildType_e.val(result.selected_build_type || 0).trigger('change');
@@ -843,7 +773,6 @@ TABS.firmware_flasher.initialize = function (callback) {
         // UI Hooks
         $('a.load_file').click(function () {
             self.enableFlashing(false);
-            self.developmentFirmwareLoaded = false;
 
             analytics.setFirmwareData(analytics.DATA.FIRMWARE_CHANNEL, undefined);
             analytics.setFirmwareData(analytics.DATA.FIRMWARE_SOURCE, 'file');
@@ -938,8 +867,6 @@ TABS.firmware_flasher.initialize = function (callback) {
                         analytics.setFirmwareData(analytics.DATA.FIRMWARE_NAME, release.file);
                         console.info("Release found in cache: " + release.file);
 
-                        self.developmentFirmwareLoaded = buildTypesToShow[$('select[name="build_type"]').val()].tag === 'firmwareFlasherOptionLabelBuildTypeDevelopment';
-
                         onLoadSuccess(cached.hexdata, release);
                     });
                 }
@@ -953,7 +880,6 @@ TABS.firmware_flasher.initialize = function (callback) {
         $('a.load_remote_file').click(function (evt) {
             self.enableFlashing(false);
             self.localFirmwareLoaded = false;
-            self.developmentFirmwareLoaded = buildTypesToShow[$('select[name="build_type"]').val()].tag === 'firmwareFlasherOptionLabelBuildTypeDevelopment';
 
             analytics.setFirmwareData(analytics.DATA.FIRMWARE_SOURCE, 'http');
 
@@ -1019,69 +945,9 @@ TABS.firmware_flasher.initialize = function (callback) {
 
         $('a.flash_firmware').click(function () {
             if (!$(this).hasClass('disabled')) {
-                if (self.developmentFirmwareLoaded) {
-                    checkShowAcknowledgementDialog();
-                } else {
-                    startFlashing();
-                }
+                startFlashing();
             }
         });
-
-        function checkShowAcknowledgementDialog() {
-            const DAY_MS = 86400 * 1000;
-            const storageTag = 'lastDevelopmentWarningTimestamp';
-
-            function setAcknowledgementTimestamp() {
-                const storageObj = {};
-                storageObj[storageTag] = Date.now();
-                chrome.storage.local.set(storageObj);
-            }
-
-            chrome.storage.local.get(storageTag, function (result) {
-                if (!result[storageTag] || Date.now() - result[storageTag] > DAY_MS) {
-
-                    showAcknowledgementDialog(setAcknowledgementTimestamp);
-                } else {
-                    startFlashing();
-                }
-            });
-        }
-
-        function showAcknowledgementDialog(acknowledgementCallback) {
-            const dialog = $('#dialogUnstableFirmwareAcknoledgement')[0];
-            const flashButtonElement = $('#dialogUnstableFirmwareAcknoledgement-flashbtn');
-            const acknowledgeCheckboxElement = $('input[name="dialogUnstableFirmwareAcknoledgement-acknowledge"]');
-
-            acknowledgeCheckboxElement.change(function () {
-                if ($(this).is(':checked')) {
-                    flashButtonElement.removeClass('disabled');
-                } else {
-                    flashButtonElement.addClass('disabled');
-                }
-            });
-
-            flashButtonElement.click(function() {
-                dialog.close();
-
-                if (acknowledgeCheckboxElement.is(':checked')) {
-                    if (acknowledgementCallback) {
-                        acknowledgementCallback();
-                    }
-
-                    startFlashing();
-                }
-            });
-
-            $('#dialogUnstableFirmwareAcknoledgement-cancelbtn').click(function() {
-                dialog.close();
-            });
-
-            dialog.addEventListener('close', function () {
-                acknowledgeCheckboxElement.prop('checked', false).change();
-            });
-
-            dialog.showModal();
-        }
 
         function startFlashing() {
             exitDfuElement.addClass('disabled');
