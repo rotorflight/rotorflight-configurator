@@ -575,7 +575,11 @@ function notifyOutdatedVersion(releaseData) {
             showUnstableReleases = true;
         }
         const versions = releaseData.filter(function (version) {
-            const semVerVersion = semver.parse(version.tag_name);
+            var versionFromTagExpression = /release\/(.*)/;
+            var match = versionFromTagExpression.exec(version.tag_name);
+            if (!match)
+                return null;
+            const semVerVersion = semver.parse(match[1]);
             if (semVerVersion && (showUnstableReleases || semVerVersion.prerelease.length === 0)) {
                 return version;
             } else {
