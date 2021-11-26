@@ -22,7 +22,9 @@ jobs:
         node-version: 10.16.3
 
     - name: Set build variables
-      run: echo "revision=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
+      run: |
+        echo "GIT_VER=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
+        cat ${GITHUB_ENV}
 
     - name: Initialise build environment
       run: yarn install
@@ -36,7 +38,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: rotorflight-configurator-linux-testing-${{ env.revision }}
+        name: rotorflight-configurator-linux-testing-${{ env.GIT_VER }}
         path: rotorflight-configurator*
 
 
@@ -54,7 +56,9 @@ jobs:
         node-version: 10.16.3
 
     - name: Set build variables
-      run: echo "revision=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
+      run: |
+        echo "GIT_VER=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
+        cat ${GITHUB_ENV}
 
     - name: Initialise build environment
       run: yarn install
@@ -68,7 +72,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: rotorflight-configurator-macos-testing-${{ env.revision }}
+        name: rotorflight-configurator-macos-testing-${{ env.GIT_VER }}
         path: rotorflight-configurator*
 
 
@@ -87,8 +91,8 @@ jobs:
 
     - name: Set build variables
       run: |
-        $snapshot = $env:GITHUB_REF -replace '.*/',''
-        echo "revision=$snapshot" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        $GIT_VER = $env:GITHUB_REF -replace '.*/',''
+        echo "GIT_VER=$GIT_VER" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
     - name: Initialise build environment
       run: yarn install
@@ -102,7 +106,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: rotorflight-configurator-windows-testing-${{ env.revision }}
+        name: rotorflight-configurator-windows-testing-${{ env.GIT_VER }}
         path: rotorflight-configurator*
 
   cleanup:
