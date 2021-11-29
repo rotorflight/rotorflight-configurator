@@ -5,10 +5,6 @@
       , {{ $t("versionLabelFirmware") }}: {{ firmwareVersion }}
       {{ firmwareId }}
     </span>
-    <span v-if="hardwareId">
-      , {{ $t("versionLabelTarget") }}: {{ hardwareId }}
-    </span>
-    ({{ gitChangesetId }})
   </div>
 </template>
 
