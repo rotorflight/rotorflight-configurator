@@ -635,28 +635,58 @@ TABS.firmware_flasher.initialize = function (callback) {
             }
         }
 
+        const ignoreRegExp = [
+            /^feature [-]?AIRMODE/i,
+            /^feature [-]?ANTI/i,
+            /^feature [-]?DISPLAY/i,
+            /^feature [-]?DYNAMIC/i,
+            /^feature [-]?ESC_SENSOR/i,
+            /^feature [-]?GPS/i,
+            /^feature [-]?LED_STRIP/i,
+            /^feature [-]?MOTOR_STOP/i,
+            /^feature [-]?OSD/i,
+            /^feature [-]?RSSI/i,
+            /^feature [-]?RX_PARALLEL/i,
+            /^feature [-]?RX_SERIAL/i,
+            /^feature [-]?SOFTSERIAL/i,
+            /^feature [-]?TELEMETRY/i,
+            /^resource PWM/i,
+            /^resource OSD/i,
+            /^resource CAMERA/i,
+            /^resource MOTOR [5-8]/i,
+            /^serial [0-9]/i,
+            /^set name/i,
+            /^set osd/i,
+            /^set vcd/i,
+            /^set vtx/i,
+            /^set max7456/i,
+            /^set dashboard/i,
+            /^set displayport/i,
+            /^set ledstrip/i,
+            /^set small_angle/i,
+            /^set serialrx/i,
+        ];
+
         function cleanUnifiedConfigFile(input) {
-            let output = [];
-            let inComment = false;
-            for (let i=0; i < input.length; i++) {
-                if (input.charAt(i) == "\n" || input.charAt(i) == "\r") {
-                    inComment = false;
+            let output = '';
+            console.log('cleanUnifiedConfigFile:');
+            input.split(/[\n\r]+/).forEach(function(line,index) {
+                if (index > 0 || !line.match(/^# (Beta)|(Rotor)flight/)) {
+                    line = line.replace(/#.*$/, '')
+                               .replace(/[ \t]+$/, '')
+                               .replace(/[ \t]+/, ' ')
+                               .replace(/^[ ]*$/, '');
+                    if (line.length == 0)
+                        return;
+                    if (ignoreRegExp.some( (regexp) => line.match(regexp) )) {
+                        console.log(' ---' + line);
+                        return;
+                    }
                 }
-                if (input.charAt(i) == "#") {
-                    inComment = true;
-                }
-                if (!inComment && input.charCodeAt(i) > 255) {
-                    self.flashingMessage(i18n.getMessage('firmwareFlasherConfigCorrupted'), self.FLASH_MESSAGE_TYPES.INVALID);
-                    GUI.log(i18n.getMessage('firmwareFlasherConfigCorruptedLogMessage'));
-                    return null;
-                }
-                if (input.charCodeAt(i) > 255) {
-                    output.push('_');
-                } else {
-                    output.push(input.charAt(i));
-                }
-            }
-            return output.join('');
+                output += line + '\n';
+            });
+            console.log('Unified Config:\n' + output);
+            return output;
         }
 
         const portPickerElement = $('div#port-picker #port');
