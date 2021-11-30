@@ -364,6 +364,9 @@ const FC = {
 
         this.RSSI_CONFIG = {
             channel:                    0,
+            scale:                      0,
+            invert:                     0,
+            offset:                     0,
         };
 
         this.DATAFLASH = {
@@ -546,27 +549,25 @@ const FC = {
 
         this.RX_CONFIG = {
             serialrx_provider:            0,
+            serialrx_inverted:            0,
+            serialrx_halfduplex:          0,
             stick_max:                    0,
             stick_center:                 0,
             stick_min:                    0,
-            spektrum_sat_bind:            0,
             rx_min_usec:                  0,
             rx_max_usec:                  0,
             rcInterpolation:              0,
             rcInterpolationInterval:      0,
             rcInterpolationChannels:      0,
-            airModeActivateThreshold:     0,
+            rcSmoothingType:              0,
+            rcSmoothingInputType:         0,
+            rcSmoothingInputCutoff:       0,
+            rcSmoothingDerivativeType:    0,
+            rcSmoothingDerivativeCutoff:  0,
+            rcSmoothingAutoSmoothness:    0,
             rxSpiProtocol:                0,
             rxSpiId:                      0,
             rxSpiRfChannelCount:          0,
-            fpvCamAngleDegrees:           0,
-            rcSmoothingType:              0,
-            rcSmoothingInputCutoff:       0,
-            rcSmoothingDerivativeCutoff:  0,
-            rcSmoothingInputType:         0,
-            rcSmoothingDerivativeType:    0,
-            rcSmoothingAutoSmoothness:    0,
-            usbCdcHidType:                0,
         };
 
         this.FAILSAFE_CONFIG = {
