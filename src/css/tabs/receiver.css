@@ -451,6 +451,14 @@
     border-radius: 3px;
 }
 
+.tab-receiver .serial-rx-inverted,
+.tab-receiver .serial-rx-halfduplex {
+    width: 230px;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+ }
+
 .tab-receiver table {
     margin-bottom: 0;
     width: 100%;
@@ -551,8 +559,10 @@
     width: 20px;
 }
 
-.tab-receiver .serialRXBox, .spiRxBox {
+.tab-receiver .serialRXBox,
+.tab-receiver .spiRxBox {
     padding-top: 0;
+    padding-bottom: 3px;
 }
 
 .tab-receiver .gui_box span {
