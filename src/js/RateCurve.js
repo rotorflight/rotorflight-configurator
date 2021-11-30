@@ -165,31 +165,24 @@ RateCurve.prototype.rcCommandRawToDegreesPerSecond = function (rcData, rate, rcR
 
         const rcCommandfAbs = Math.abs(rcCommandf);
 
-        switch(TABS.pid_tuning.currentRatesType) {
-            case TABS.pid_tuning.RATES_TYPE.RACEFLIGHT:
-                angleRate=this.getRaceflightRates(rcCommandf, rate, rcRate, rcExpo);
-
+        switch(TABS.rates.currentRatesType) {
+            case 0: // BETAFLIGHT
+                angleRate = this.getBetaflightRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo, superExpoActive, limit);
                 break;
-
-            case TABS.pid_tuning.RATES_TYPE.KISS:
-                angleRate=this.getKISSRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo);
-
+            case 1: // RACEFLIGHT
+                angleRate = this.getRaceflightRates(rcCommandf, rate, rcRate, rcExpo);
                 break;
-
-            case TABS.pid_tuning.RATES_TYPE.ACTUAL:
-                angleRate=this.getActualRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo);
-
+            case 2: // KISS
+                angleRate = this.getKISSRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo);
                 break;
-
-            case TABS.pid_tuning.RATES_TYPE.QUICKRATES:
-                angleRate=this.getQuickRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo);
-
+            case 3: // ACTUAL
+                angleRate = this.getActualRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo);
                 break;
-
-            // add future rates types here
-            default: // BetaFlight
-                angleRate=this.getBetaflightRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo, superExpoActive, limit);
-
+            case 4: // QUICKRATES
+                angleRate = this.getQuickRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo);
+                break;
+            default:
+                angleRate = 0;
                 break;
         }
     }
