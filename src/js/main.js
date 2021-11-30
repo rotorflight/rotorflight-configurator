@@ -520,7 +520,6 @@ function startProcess() {
                 updateTabList(FC.FEATURE_CONFIG.features);
             }
 
-            TuningSliders.setExpertMode(checked);
         }).change();
     });
 
