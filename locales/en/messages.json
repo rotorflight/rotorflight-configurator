@@ -1725,7 +1725,13 @@
         "message": "<strong>Note:</strong> Remember to configure a Serial Port (via Ports tab) when using GPS feature."
     },
     "configurationSerialRX": {
-        "message": "Serial Receiver Provider"
+        "message": "Serial Receiver Protocol"
+    },
+    "configurationSerialRXInverted": {
+        "message": "Inverted Serial Line"
+    },
+    "configurationSerialRXHalfDuplex": {
+        "message": "Half-Duplex Communication"
     },
     "configurationSpiRX": {
         "message": "SPI Bus Receiver Provider"

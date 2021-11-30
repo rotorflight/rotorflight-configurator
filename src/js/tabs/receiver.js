@@ -276,6 +276,28 @@ TABS.receiver.initialize = function (callback) {
         // select current serial RX type
         serialRxSelectElement.val(FC.RX_CONFIG.serialrx_provider);
 
+        const serialRxInvertedElement = $('input[name="serialRXInverted"]');
+        serialRxInvertedElement.change(function () {
+            const inverted = $(this).is(':checked') ? 1 : 0;
+            if (FC.RX_CONFIG.serialrx_inverted !== inverted) {
+                updateSaveButton(true);
+            }
+            FC.RX_CONFIG.serialrx_inverted = inverted;
+        });
+
+        serialRxInvertedElement.prop('checked', FC.RX_CONFIG.serialrx_inverted !== 0);
+
+        const serialRxHalfDuplexElement = $('input[name="serialRXHalfDuplex"]');
+        serialRxHalfDuplexElement.change(function () {
+            const halfduplex = $(this).is(':checked') ? 1 : 0;
+            if (FC.RX_CONFIG.serialrx_halfduplex !== halfduplex) {
+                updateSaveButton(true);
+            }
+            FC.RX_CONFIG.serialrx_halfduplex = halfduplex;
+        });
+
+        serialRxHalfDuplexElement.prop('checked', FC.RX_CONFIG.serialrx_halfduplex !== 0);
+
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_31)) {
             const spiRxTypes = [
                 'NRF24_V202_250K',
