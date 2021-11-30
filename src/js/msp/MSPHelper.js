@@ -461,6 +461,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             case MSPCodes.MSP_RSSI_CONFIG:
                 FC.RSSI_CONFIG.channel = data.readU8();
+                FC.RSSI_CONFIG.scale   = data.readU8();
+                FC.RSSI_CONFIG.invert  = data.readU8();
+                FC.RSSI_CONFIG.offset  = data.readU8();
                 break;
             case MSPCodes.MSP_BOXNAMES:
                 FC.AUX_CONFIG = []; // empty the array as new data is coming in
@@ -909,46 +912,25 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_RX_CONFIG:
                 FC.RX_CONFIG.serialrx_provider = data.readU8();
+                FC.RX_CONFIG.serialrx_inverted = data.readU8();
+                FC.RX_CONFIG.serialrx_halfduplex = data.readU8();
                 FC.RX_CONFIG.stick_max = data.readU16();
                 FC.RX_CONFIG.stick_center = data.readU16();
                 FC.RX_CONFIG.stick_min = data.readU16();
-                FC.RX_CONFIG.spektrum_sat_bind = data.readU8();
                 FC.RX_CONFIG.rx_min_usec = data.readU16();
                 FC.RX_CONFIG.rx_max_usec = data.readU16();
-                if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
-                    FC.RX_CONFIG.rcInterpolation = data.readU8();
-                    FC.RX_CONFIG.rcInterpolationInterval = data.readU8();
-                    FC.RX_CONFIG.airModeActivateThreshold = data.readU16();
-                    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_31)) {
-                        FC.RX_CONFIG.rxSpiProtocol = data.readU8();
-                        FC.RX_CONFIG.rxSpiId = data.readU32();
-                        FC.RX_CONFIG.rxSpiRfChannelCount = data.readU8();
-                        FC.RX_CONFIG.fpvCamAngleDegrees = data.readU8();
-                        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_40)) {
-                            FC.RX_CONFIG.rcInterpolationChannels = data.readU8();
-                            FC.RX_CONFIG.rcSmoothingType = data.readU8();
-                            FC.RX_CONFIG.rcSmoothingInputCutoff = data.readU8();
-                            FC.RX_CONFIG.rcSmoothingDerivativeCutoff = data.readU8();
-                            FC.RX_CONFIG.rcSmoothingInputType = data.readU8();
-                            FC.RX_CONFIG.rcSmoothingDerivativeType = data.readU8();
-                            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                                FC.RX_CONFIG.usbCdcHidType = data.readU8();
-                                FC.RX_CONFIG.rcSmoothingAutoSmoothness = data.readU8();
-                            }
-                        }
-                    } else {
-                        FC.RX_CONFIG.rxSpiProtocol = 0;
-                        FC.RX_CONFIG.rxSpiId = 0;
-                        FC.RX_CONFIG.rxSpiRfChannelCount = 0;
-                        FC.RX_CONFIG.fpvCamAngleDegrees = 0;
-                    }
-                } else {
-                    FC.RX_CONFIG.rcInterpolation = 0;
-                    FC.RX_CONFIG.rcInterpolationInterval = 0;
-                    FC.RX_CONFIG.airModeActivateThreshold = 0;
-                }
-
-
+                FC.RX_CONFIG.rcInterpolation = data.readU8();
+                FC.RX_CONFIG.rcInterpolationInterval = data.readU8();
+                FC.RX_CONFIG.rcInterpolationChannels = data.readU8();
+                FC.RX_CONFIG.rcSmoothingType = data.readU8();
+                FC.RX_CONFIG.rcSmoothingInputType = data.readU8();
+                FC.RX_CONFIG.rcSmoothingInputCutoff = data.readU8();
+                FC.RX_CONFIG.rcSmoothingDerivativeType = data.readU8();
+                FC.RX_CONFIG.rcSmoothingDerivativeCutoff = data.readU8();
+                FC.RX_CONFIG.rcSmoothingAutoSmoothness = data.readU8();
+                FC.RX_CONFIG.rxSpiProtocol = data.readU8();
+                FC.RX_CONFIG.rxSpiId = data.readU32();
+                FC.RX_CONFIG.rxSpiRfChannelCount = data.readU8();
                 break;
 
             case MSPCodes.MSP_FAILSAFE_CONFIG:
@@ -1792,7 +1774,10 @@ MspHelper.prototype.crunch = function(code) {
                 }
             break;
         case MSPCodes.MSP_SET_RSSI_CONFIG:
-            buffer.push8(FC.RSSI_CONFIG.channel);
+            buffer.push8(FC.RSSI_CONFIG.channel)
+                  .push8(FC.RSSI_CONFIG.scale)
+                  .push8(FC.RSSI_CONFIG.invert)
+                  .push8(FC.RSSI_CONFIG.offset);
             break;
         case MSPCodes.MSP_SET_BATTERY_CONFIG:
             buffer.push8(Math.round(FC.BATTERY_CONFIG.vbatmincellvoltage * 10))
@@ -1829,36 +1814,25 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_RX_CONFIG:
             buffer.push8(FC.RX_CONFIG.serialrx_provider)
-                .push16(FC.RX_CONFIG.stick_max)
-                .push16(FC.RX_CONFIG.stick_center)
-                .push16(FC.RX_CONFIG.stick_min)
-                .push8(FC.RX_CONFIG.spektrum_sat_bind)
-                .push16(FC.RX_CONFIG.rx_min_usec)
-                .push16(FC.RX_CONFIG.rx_max_usec);
-            if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
-                buffer.push8(FC.RX_CONFIG.rcInterpolation)
-                    .push8(FC.RX_CONFIG.rcInterpolationInterval)
-                    .push16(FC.RX_CONFIG.airModeActivateThreshold);
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_31)) {
-                    buffer.push8(FC.RX_CONFIG.rxSpiProtocol)
-                        .push32(FC.RX_CONFIG.rxSpiId)
-                        .push8(FC.RX_CONFIG.rxSpiRfChannelCount)
-                        .push8(FC.RX_CONFIG.fpvCamAngleDegrees);
-                    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_40)) {
-                        buffer.push8(FC.RX_CONFIG.rcInterpolationChannels)
-                            .push8(FC.RX_CONFIG.rcSmoothingType)
-                            .push8(FC.RX_CONFIG.rcSmoothingInputCutoff)
-                            .push8(FC.RX_CONFIG.rcSmoothingDerivativeCutoff)
-                            .push8(FC.RX_CONFIG.rcSmoothingInputType)
-                            .push8(FC.RX_CONFIG.rcSmoothingDerivativeType);
-                        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                            buffer.push8(FC.RX_CONFIG.usbCdcHidType)
-                                  .push8(FC.RX_CONFIG.rcSmoothingAutoSmoothness);
-                        }
-                    }
-                }
-            }
-
+                  .push8(FC.RX_CONFIG.serialrx_inverted)
+                  .push8(FC.RX_CONFIG.serialrx_halfduplex)
+                  .push16(FC.RX_CONFIG.stick_max)
+                  .push16(FC.RX_CONFIG.stick_center)
+                  .push16(FC.RX_CONFIG.stick_min)
+                  .push16(FC.RX_CONFIG.rx_min_usec)
+                  .push16(FC.RX_CONFIG.rx_max_usec)
+                  .push8(FC.RX_CONFIG.rcInterpolation)
+                  .push8(FC.RX_CONFIG.rcInterpolationInterval)
+                  .push8(FC.RX_CONFIG.rcInterpolationChannels)
+                  .push8(FC.RX_CONFIG.rcSmoothingType)
+                  .push8(FC.RX_CONFIG.rcSmoothingInputType)
+                  .push8(FC.RX_CONFIG.rcSmoothingInputCutoff)
+                  .push8(FC.RX_CONFIG.rcSmoothingDerivativeType)
+                  .push8(FC.RX_CONFIG.rcSmoothingDerivativeCutoff)
+                  .push8(FC.RX_CONFIG.rcSmoothingAutoSmoothness)
+                  .push8(FC.RX_CONFIG.rxSpiProtocol)
+                  .push32(FC.RX_CONFIG.rxSpiId)
+                  .push8(FC.RX_CONFIG.rxSpiRfChannelCount);
             break;
 
         case MSPCodes.MSP_SET_FAILSAFE_CONFIG:
