@@ -49,9 +49,18 @@
     border-radius: 5px;
 }
 
-.tab_status #canvas {
+.tab-status #canvas {
     width: 100% !important;
     height: 100% !important;
+}
+
+.tab-status #storm {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 50;
 }
 
 #canvas {

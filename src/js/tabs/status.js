@@ -30,6 +30,13 @@ TABS.status.initialize = function (callback) {
         // initialize 3D Model
         self.initModel();
 
+        // initialize snow storm
+        const now = new Date();
+        if ((now.getMonth() == 11 && now.getDate() > 15) ||
+            (now.getMonth() == 0  && now.getDate() < 15)) {
+            self.initSnow(250);
+        }
+
         // Craft name
         $('.craft-name').text(FC.CONFIG.name);
 
@@ -278,6 +285,86 @@ TABS.status.initialize = function (callback) {
     }
 };
 
+
+TABS.status.initSnow = function(count)
+{
+    var canvas = document.getElementById("canvas");
+	var storm = document.getElementById("storm");
+	var ctx = storm.getContext("2d");
+
+	var W = canvas.width;
+	var H = canvas.height;
+
+    storm.width = W;
+    storm.height = H;
+
+    var angle = 0;
+	var particles = [];
+
+	for (let i = 0; i < count; i++)
+    {
+		particles.push({
+			x: Math.random()*W,
+			y: Math.random()*H,
+			r: Math.random()*3+1,
+			d: Math.random()*count
+		});
+	}
+
+    setInterval(draw, 33);
+
+    function draw()
+    {
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+
+        ctx.beginPath();
+        for(let i = 0; i < count; i++)
+        {
+            let p = particles[i];
+            ctx.moveTo(p.x, p.y);
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2, true);
+        }
+        ctx.fill();
+
+        update();
+    }
+
+    function update()
+    {
+        angle += 0.01;
+
+        for (let i = 0; i < count; i++)
+        {
+            let p = particles[i];
+
+            p.y += Math.cos(angle+p.d) + 1 + p.r/2;
+            p.x += Math.sin(angle) * 2;
+
+            if (p.x > W+5 || p.x < -5 || p.y > H)
+            {
+                if (i%3 > 0) //66.67% of the flakes
+                {
+                    particles[i] = {x: Math.random()*W, y: -10, r: p.r, d: p.d};
+                }
+                else
+                {
+                    // If the flake is exitting from the right
+                    if(Math.sin(angle) > 0)
+                    {
+                        // Enter from the left
+                        particles[i] = {x: -5, y: Math.random()*H, r: p.r, d: p.d};
+                    }
+                    else
+                    {
+                        // Enter from the right
+                        particles[i] = {x: W+5, y: Math.random()*H, r: p.r, d: p.d};
+                    }
+                }
+            }
+        }
+    }
+}
 
 TABS.status.initModel = function () {
     this.model = new Model($('.model-and-info #canvas_wrapper'), $('.model-and-info #canvas'));
