@@ -12,20 +12,6 @@
             <div class="grid-col col6">
                 <div class="gui_box grey">
                     <div class="gui_box_titlebar">
-                        <div class="spacer_box_title" i18n="powerBatteryHead"></div>
-                    </div>
-                    <div class="spacer_box battery">
-                        <table border="0" cellpadding="0" cellspacing="0" class="cf_table">
-                            <tbody class="battery-config">
-                            <td class="configuration" rowspan="4"></td>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-col col6">
-                <div class="gui_box grey">
-                    <div class="gui_box_titlebar">
                         <div class="spacer_box_title" i18n="powerStateHead"></div>
                     </div>
                     <div class="spacer_box battery">
@@ -35,10 +21,20 @@
                         </table>
                     </div>
                 </div>
+                <div class="gui_box grey">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="powerBatteryHead"></div>
+                    </div>
+                    <div class="spacer_box battery">
+                        <table border="0" cellpadding="0" cellspacing="0" class="cf_table">
+                            <tbody class="battery-config">
+                                <td class="configuration" rowspan="4"></td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="grid-row">
             <div class="grid-col col6">
                 <div class="gui_box grey boxVoltageConfiguration">
                     <div class="gui_box_titlebar">
@@ -47,7 +43,6 @@
                     <div class="note">
                         <div i18n="powerVoltageWarning"></div>
                     </div>
-
                     <div class="spacer_box">
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cf_table">
                             <tbody class="voltage-meters">
@@ -55,11 +50,6 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="grid-row">
-            <div class="grid-col col6">
                 <div class="gui_box grey boxAmperageConfiguration">
                     <div class="gui_box_titlebar">
                         <div class="spacer_box_title" i18n="powerAmperageHead"></div>
@@ -67,7 +57,6 @@
                     <div class="note">
                         <div i18n="powerAmperageWarning"></div>
                     </div>
-
                     <div class="spacer_box">
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cf_table">
                             <tbody class="amperage-meters">
@@ -263,4 +252,4 @@
     <div class="default_btn">
         <a class="discardcalibration" id="discardcalibration" href="#" i18n="powerCalibrationDiscard"></a>
     </div>
-</div> 
+</div>
