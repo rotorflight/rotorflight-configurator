@@ -126,6 +126,9 @@ const FC = {
     LED_STRIP: null,
     MISC: null, // DEPRECATED
     MIXER_CONFIG: null,
+    MIXER_INPUTS: null,
+    MIXER_RULES: null,
+    MIXER_OVERRIDE: null,
     MODE_RANGES: null,
     MODE_RANGES_EXTRA: null,
     MOTOR_CONFIG: null,
@@ -200,6 +203,10 @@ const FC = {
             tail_motor_idle:            0,
             swash_ring:                 0,
         };
+
+        this.MIXER_INPUTS =             [];
+        this.MIXER_RULES =              [];
+        this.MIXER_OVERRIDE =           Array.from({length: 30});
 
         this.BOARD_ALIGNMENT_CONFIG = {
             roll:                       0,
