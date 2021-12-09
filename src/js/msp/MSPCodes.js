@@ -128,9 +128,9 @@ const MSPCodes = {
     MSP_GPS_SV_INFO:                164,
 
     MSP_MIXER_INPUTS:               170,
-    MSP_SET_MIXER_INPUTS:           171,
+    MSP_SET_MIXER_INPUT:            171,
     MSP_MIXER_RULES:                172,
-    MSP_SET_MIXER_RULES:            173,
+    MSP_SET_MIXER_RULE:             173,
 
     MSP_DISPLAYPORT:                182,
 

@@ -1003,6 +1003,33 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.GOVERNOR.gov_rpm_filter                   = data.readU16();
                 break;
 
+            case MSPCodes.MSP_MIXER_INPUTS:
+                FC.MIXER_INPUTS = [];
+                const inputCount = data.byteLength / 6;
+                for (let i = 0; i < inputCount; i++) {
+                    FC.MIXER_INPUTS.push({
+                        rate: data.read16(),
+                        min:  data.read16(),
+                        max:  data.read16(),
+                    });
+                }
+                break;
+
+            case MSPCodes.MSP_MIXER_RULES:
+                FC.MIXER_RULES = [];
+                const ruleCount = data.byteLength / 11;
+                for (let i = 0; i < ruleCount; i++) {
+                    FC.MIXER_RULES.push({
+                        modes:  data.readU32(),
+                        oper:   data.readU8(),
+                        src:    data.readU8(),
+                        dst:    data.readU8(),
+                        offset: data.read16(),
+                        weight: data.read16(),
+                    });
+                }
+                break;
+
             case MSPCodes.MSP_SENSOR_CONFIG:
                 FC.SENSOR_CONFIG.acc_hardware = data.readU8();
                 FC.SENSOR_CONFIG.baro_hardware = data.readU8();
@@ -1317,7 +1344,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_SET_VTXTABLE_POWERLEVEL:
                 console.log("VTX powerlevel sent");
                 break;
-
             case MSPCodes.MSP_SET_MODE_RANGE:
                 console.log('Mode range saved');
                 break;
@@ -1344,7 +1370,13 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 console.log('Current PID profile reset');
                 break;
             case MSPCodes.MSP_SET_MIXER_CONFIG:
-                console.log('Mixer config saved');
+                console.log('Mixer config changed');
+                break;
+            case MSPCodes.MSP_SET_MIXER_INPUT:
+                console.log('Mixer input changed');
+                break;
+            case MSPCodes.MSP_SET_MIXER_RULE:
+                console.log('Mixer rule changed');
                 break;
             case MSPCodes.MSP_SET_RC_DEADBAND:
                 console.log('Rc controls settings saved');
@@ -1445,6 +1477,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             default:
                 console.log('Unknown code detected: ' + code);
+
         } else {
             console.log('FC reports unsupported message error: ' + code);
 
@@ -2160,6 +2193,65 @@ MspHelper.prototype.sendServoConfigurations = function(onCompleteCallback)
             self.sendServoConfig(index++, send_next);
         else
             if (onCompleteCallback) onCompleteCallback();
+    }
+
+    send_next();
+};
+
+MspHelper.prototype.sendMixerInput = function(inputIndex, onCompleteCallback)
+{
+    const input = FC.MIXER_INPUTS[inputIndex];
+    const buffer = [];
+
+    buffer.push8(inputIndex)
+          .push16(input.rate)
+          .push16(input.min)
+          .push16(input.max);
+
+    MSP.send_message(MSPCodes.MSP_SET_MIXER_INPUT, buffer, false, onCompleteCallback);
+};
+
+MspHelper.prototype.sendMixerInputs = function(onCompleteCallback)
+{
+    const self = this;
+    var index = 0;
+
+    function send_next() {
+        if (index < FC.MIXER_INPUTS.length)
+            self.sendMixerInput(index++, send_next);
+        else
+            onCompleteCallback();
+    }
+
+    send_next();
+};
+
+MspHelper.prototype.sendMixerRule = function(ruleIndex, onCompleteCallback)
+{
+    const rule = FC.MIXER_RULES[ruleIndex];
+    const buffer = [];
+
+    buffer.push8(ruleIndex)
+          .push32(rule.modes)
+          .push8(rule.oper)
+          .push8(rule.src)
+          .push8(rule.dst)
+          .push16(rule.offset)
+          .push16(rule.weight);
+
+    MSP.send_message(MSPCodes.MSP_SET_MIXER_RULE, buffer, false, onCompleteCallback);
+};
+
+MspHelper.prototype.sendMixerRules = function(onCompleteCallback)
+{
+    const self = this;
+    var index = 0;
+
+    function send_next() {
+        if (index < FC.MIXER_RULES.length)
+            self.sendMixerRule(index++, send_next);
+        else
+            onCompleteCallback();
     }
 
     send_next();
