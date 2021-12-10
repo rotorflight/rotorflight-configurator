@@ -1,0 +1,143 @@
+
+#tab-mixer-templates {
+    display: none;
+}
+
+.tab-mixer .gui_box {
+    margin-bottom: 5px;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    display: table;
+}
+
+.tab-mixer .gui_box span {
+    font-size: 11px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 19px;
+    color: #626262;
+}
+
+.tab-mixer .no-bottom-margin {
+    margin-bottom: 0;
+}
+
+
+.tab-mixer input[type="number"]::-webkit-inner-spin-button {
+    border: 0;
+}
+
+.tab-mixer input,
+.tab-mixer select {
+    display: block;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: right;
+    box-sizing: border-box;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+}
+
+.tab-mixer .configs {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 1px;
+    table-layout: auto;
+    border: 0;
+    border-collapse: collapse;
+}
+
+.tab-mixer .configs th {
+    height: 10px;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border: 0;
+    padding: 5px 0 2px 0;
+}
+
+.tab-mixer .configs td {
+    padding: 5px 5px 2px 5px;
+}
+
+.tab-mixer .configs tr td {
+    text-align: left;
+}
+
+.tab-mixer .configs tr td:first-child {
+    width: 140px;
+    padding-right: 10px;
+}
+
+.tab-mixer .configs tr td.border {
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--subtleAccent);
+}
+
+.tab-mixer .mixerControls {
+    width: 100%;
+    border: 0;
+    border-collapse: collapse;
+    margin-top: 2px;
+}
+
+.tab-mixer .mixerControls .trhead {
+    color: var(--quietText);
+    background-color: var(--button-background);
+    text-align: center;
+    font-size: 11px;
+    line-height: 16px;
+    height: 22px;
+    border-top: 1px solid var(--boxBackground);
+}
+
+.tab-mixer .mixerControls td {
+    padding: 6px 5px 2px 5px;
+    text-align: center;
+}
+
+.tab-mixer .mixerControls td:nth-child(1) {
+    padding-left: 12px;
+    text-align: left;
+}
+
+.tab-mixer .mixerControls td:nth-child(2) {
+    text-align: center;
+}
+
+.tab-mixer .mixerControls td:nth-child(3) {
+    text-align: center;
+}
+
+.tab-mixer .mixerControls td:nth-child(4) {
+    text-align: center;
+    padding-right: 12px;
+}
+
+.tab-mixer .gui_box_titlebar .helpicon {
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.tab-mixer dialog {
+    width: 40em;
+    border-radius: 5px;
+}
+
+.tab-mixer dialog .buttons {
+    position: static;
+    margin-top: 2em;
+}
+
+.tab-mixer dialog h3 {
+    margin-bottom: 0.5em;
+}
+
+@media all and (max-width: 575px) {
+    .tab-mixer dialog {
+        width: calc(100% - 2em);
+        border-radius: unset;
+    }
+}

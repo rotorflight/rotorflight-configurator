@@ -486,6 +486,36 @@ progress[value]::-webkit-progress-bar {
 }
 
 
+/* MIXER TAB */
+
+.tab-mixer .gui_box span {
+    color: white;
+}
+
+.tab-mixer .subtitle {
+    color: #3a3a3a;
+    background-color: #a0a0a0;
+}
+
+.tab-mixer input:disabled,
+.tab-mixer select:disabled {
+    color: #595959;
+}
+
+.tab-mixer table input {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.tab-mixer table select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.tab-mixer .bottomarea {
+    background-color: #393b3a;
+}
+
 /* MOTORS TAB */
 
 .tab-motors .gui_box span {
