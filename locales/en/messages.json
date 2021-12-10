@@ -370,6 +370,9 @@
     "tabMotors": {
         "message": "Motors"
     },
+    "tabMixer": {
+        "message": "Mixer"
+    },
     "tabLedStrip": {
         "message": "LED Strip"
     },
@@ -1293,6 +1296,12 @@
     },
     "initialSetupEnableServoOverrideText": {
         "message": "Enable the servo override feature in the Servos tab. Setting servo override WILL move the servos to arbitrary positions."
+    },
+    "initialSetupEnableMixerOverride": {
+        "message": "<strong>Enable Mixer Override</strong>"
+    },
+    "initialSetupEnableMixerOverrideText": {
+        "message": "Enable the mixer input override feature in the Mixers tab. Setting mixer override WILL force the flight controls to arbitrary positions."
     },
     "featureNone": {
         "message": "&lt;Select One&gt;"
@@ -2526,6 +2535,239 @@
     "servosEepromSave": {
         "message": "EEPROM <span class=\"message-positive\">saved</span>"
     },
+
+    "mixerMainRotorSettings": {
+        "message": "Main Rotor Settings"
+    },
+    "mixerMainRotorDirection": {
+        "message": "Main rotor direction"
+    },
+    "mixerClockwise": {
+        "message": "Clockwise"
+    },
+    "mixerCounterClockwise": {
+        "message": "Counter-Clockwise"
+    },
+    "mixerSwashType": {
+        "message": "Swashplate type"
+    },
+    "mixerSwashType1": {
+        "message": "120&deg Front Elevator"
+    },
+    "mixerSwashType2": {
+        "message": "120&deg Rear Elevator"
+    },
+    "mixerSwashType3": {
+        "message": "140&deg Front Elevator"
+    },
+    "mixerSwashType4": {
+        "message": "140&deg Rear Elevator"
+    },
+    "mixerSwashType5": {
+        "message": "135&deg Front Elevator"
+    },
+    "mixerSwashType6": {
+        "message": "135&deg Rear Elevator"
+    },
+    "mixerSwashTypeCustom": {
+        "message": "Custom mixing"
+    },
+    "mixerSwashRing": {
+        "message": "Swashring"
+    },
+    "mixerTailRotorSettings": {
+        "message": "Tail Rotor Settings"
+    },
+    "mixerTailRotorMode": {
+        "message": "Tail Rotor Type"
+    },
+    "mixerTailVariablePitch": {
+        "message": "Variable pitch"
+    },
+    "mixerTailMotorized": {
+        "message": "Motorised"
+    },
+    "mixerTailMotorIdle": {
+        "message": "Motor idle throttle"
+    },
+    "mixerInputChannels": {
+        "message": "Mixer Control Inputs"
+    },
+    "mixerOverrideNote":{
+        "message": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
+    },
+    "mixerOverride":{
+        "message": "Mixer Override"
+    },
+    "mixerOverrideEnable":{
+        "message": "Enable"
+    },
+    "mixerOverrideValue":{
+        "message": "Value"
+    },
+    "mixerOverrideSlider":{
+        "message": ""
+    },
+    "mixerRuleNOP": {
+        "message": "-"
+    },
+    "mixerRuleSet": {
+        "message": "Set"
+    },
+    "mixerRuleAdd": {
+        "message": "Add"
+    },
+    "mixerRuleMul": {
+        "message": "Mul"
+    },
+    "mixerInputName": {
+        "message": "Control"
+    },
+    "mixerInputRate": {
+        "message": "Scaling"
+    },
+    "mixerInputMin": {
+        "message": "Minimum"
+    },
+    "mixerInputMax": {
+        "message": "Maximum"
+    },
+    "mixerInputNone": {
+        "message": "-"
+    },
+    "mixerInputStabilizedRoll": {
+        "message": "Stabilized Roll"
+    },
+    "mixerInputStabilizedPitch": {
+        "message": "Stabilized Pitch"
+    },
+    "mixerInputStabilizedYaw": {
+        "message": "Stabilized Yaw"
+    },
+    "mixerInputStabilizedCollective": {
+        "message": "Stabilized Collective"
+    },
+    "mixerInputStabilizedThrottle": {
+        "message": "Stabilized Throttle"
+    },
+    "mixerInputRCCommandRoll": {
+        "message": "Commanded Roll"
+    },
+    "mixerInputRCCommandPitch": {
+        "message": "Commanded Pitch"
+    },
+    "mixerInputRCCommandYaw": {
+        "message": "Commanded Yaw"
+    },
+    "mixerInputRCCommandCollective": {
+        "message": "Commanded Collective"
+    },
+    "mixerInputRCCommandThrottle": {
+        "message": "Commanded Throttle"
+    },
+    "mixerInputRCChannelRoll": {
+        "message": "RC Channel Roll"
+    },
+    "mixerInputRCChannelPitch": {
+        "message": "RC Channel Pitch"
+    },
+    "mixerInputRCChannelYaw": {
+        "message": "RC Channel Yaw"
+    },
+    "mixerInputRCChannelCollective": {
+        "message": "RC Channel Collective"
+    },
+    "mixerInputRCChannelThrottle": {
+        "message": "RC Channel Throttle"
+    },
+    "mixerInputRCChannelAux1": {
+        "message": "RC Channel AUX1"
+    },
+    "mixerInputRCChannelAux2": {
+        "message": "RC Channel AUX2"
+    },
+    "mixerInputRCChannelAux3": {
+        "message": "RC Channel AUX3"
+    },
+    "mixerInputRCChannel9": {
+        "message": "RC Channel #9"
+    },
+    "mixerInputRCChannel10": {
+        "message": "RC Channel #10"
+    },
+    "mixerInputRCChannel11": {
+        "message": "RC Channel #11"
+    },
+    "mixerInputRCChannel12": {
+        "message": "RC Channel #12"
+    },
+    "mixerInputRCChannel13": {
+        "message": "RC Channel #13"
+    },
+    "mixerInputRCChannel14": {
+        "message": "RC Channel #14"
+    },
+    "mixerInputRCChannel15": {
+        "message": "RC Channel #15"
+    },
+    "mixerInputRCChannel16": {
+        "message": "RC Channel #16"
+    },
+    "mixerInputRCChannel17": {
+        "message": "RC Channel #17"
+    },
+    "mixerInputRCChannel18": {
+        "message": "RC Channel #18"
+    },
+    "mixerOutputNone": {
+        "message": "-"
+    },
+    "mixerOutputServo1": {
+        "message": "Servo #1"
+    },
+    "mixerOutputServo2": {
+        "message": "Servo #2"
+    },
+    "mixerOutputServo3": {
+        "message": "Servo #3"
+    },
+    "mixerOutputServo4": {
+        "message": "Servo #4"
+    },
+    "mixerOutputServo5": {
+        "message": "Servo #5"
+    },
+    "mixerOutputServo6": {
+        "message": "Servo #6"
+    },
+    "mixerOutputServo7": {
+        "message": "Servo #7"
+    },
+    "mixerOutputServo8": {
+        "message": "Servo #8"
+    },
+    "mixerOutputMotor1": {
+        "message": "Motor #1"
+    },
+    "mixerOutputMotor2": {
+        "message": "Motor #2"
+    },
+    "mixerOutputMotor3": {
+        "message": "Motor #3"
+    },
+    "mixerOutputMotor4": {
+        "message": "Motor #4"
+    },
+    "dialogCustomMixerTitle": {
+        "message": "Custom Mixer"
+    },
+    "dialogCustomMixerNote": {
+        "message": "Custom mixer rules can be only set via the CLI."
+    },
+    "dialogCustomMixerClose": {
+        "message": "Close"
+    },
+
     "gpsHead": {
         "message": "Status"
     },
@@ -2638,7 +2880,7 @@
     "motorsThrottleMinimumCommandHelp": {
         "message": "This is the value that is sent to the ESCs when the craft is disarmed. Set this to a value that has the motors stopped (1000 for most ESCs)."
     },
-    
+
     "motorsText":{
         "message": "Motors"
     },
@@ -2912,7 +3154,7 @@
     "govCollectivePrecompHelp": {
         "message": "Collective precompensation weight. Determines how much collective is mixed into the feedfoward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
-    
+
     "sensorsInfo": {
         "message": "Keep in mind that using fast update periods and rendering multiple graphs at the same time is resource heavy and will burn your battery quicker if you use a laptop.<br />We recommend to only render graphs for sensors you are interested in while using reasonable update periods."
     },
@@ -4276,26 +4518,26 @@
     },
     "failsafeGpsRescueItemDescendRate": {
         "message": "Descend rate (meters/second)"
-    },    
+    },
     "failsafeGpsRescueItemMinSats": {
         "message": "Minimum satellites"
     },
     "failsafeGpsRescueItemAllowArmingWithoutFix": {
         "message": "Allow arming without fix - <span class=\"message-negative\">WARNING: the GPS Rescue will not be available</span>"
     },
-    "failsafeGpsRescueItemAltitudeMode": { 
+    "failsafeGpsRescueItemAltitudeMode": {
         "message": "Altitude mode"
     },
-    "failsafeGpsRescueItemAltitudeModeMaxAlt": { 
+    "failsafeGpsRescueItemAltitudeModeMaxAlt": {
         "message": "Maximum altitude"
     },
-    "failsafeGpsRescueItemAltitudeModeFixedAlt": { 
+    "failsafeGpsRescueItemAltitudeModeFixedAlt": {
         "message": "Fixed altitude"
     },
-    "failsafeGpsRescueItemAltitudeModeCurrentAlt": { 
+    "failsafeGpsRescueItemAltitudeModeCurrentAlt": {
         "message": "Current altitude"
     },
-    "failsafeGpsRescueItemSanityChecks": { 
+    "failsafeGpsRescueItemSanityChecks": {
         "message": "Sanity checks"
     },
     "failsafeGpsRescueItemSanityChecksOff": {
@@ -5236,14 +5478,14 @@
     },
     "osdDescElementRcChannels": {
         "message": "Display at most 4 channels values. The channels must be specified with the CLI variable 'osd_rcchannels'"
-    },    
+    },
     "osdTextElementCameraFrame": {
         "message": "Camera frame",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCameraFrame": {
         "message": "Adds an adjustable outline element designed to represent the field of view of the pilot's HD camera for visual framing.<br /><br />You can adjust the width and height in CLI with 'osd_camera_frame_width' and 'osd_camera_frame_height'"
-    },    
+    },
     "osdTextElementEfficiency": {
         "message": "Battery efficiency",
         "description": "One of the elements of the OSD"

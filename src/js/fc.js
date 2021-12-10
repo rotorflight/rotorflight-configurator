@@ -32,6 +32,7 @@ const INITIAL_CONFIG = {
     armingDisabled:                   false,
     motorOverrideDisabled:            true,
     servoOverrideDisabled:            true,
+    mixerOverrideDisabled:            true,
     boardIdentifier:                  "",
     boardVersion:                     0,
     targetCapabilities:               0,

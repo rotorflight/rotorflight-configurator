@@ -486,6 +486,45 @@ progress[value]::-webkit-progress-bar {
 }
 
 
+/* MIXER TAB */
+
+.tab-mixer .gui_box span {
+    color: white;
+}
+
+.tab-mixer .subtitle {
+    color: #3a3a3a;
+    background-color: #a0a0a0;
+}
+
+.tab-mixer input:disabled,
+.tab-mixer select:disabled {
+    color: #595959;
+}
+
+.tab-mixer table input {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.tab-mixer table select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.tab-mixer .bottomarea {
+    background-color: #393b3a;
+}
+
+.tab-mixer .mixerOverride tbody tr:nth-child(even) {
+    background-color: #3f3f3f;
+}
+
+.tab-mixer .mixerOverride tbody tr:nth-child(odd) {
+    background-color: #393939;
+}
+
+
 /* MOTORS TAB */
 
 .tab-motors .gui_box span {

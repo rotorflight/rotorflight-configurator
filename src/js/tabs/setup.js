@@ -156,6 +156,14 @@ TABS.setup.initialize = function (callback) {
             FC.CONFIG.servoOverrideDisabled = !enableServoOverrideSwitch.prop('checked');
         });
 
+        const enableMixerOverrideSwitch = $('input[id="initialSetupEnableMixerOverride"]');
+
+        enableMixerOverrideSwitch.prop('checked', !FC.CONFIG.mixerOverrideDisabled);
+
+        enableMixerOverrideSwitch.change(function () {
+            FC.CONFIG.mixerOverrideDisabled = !enableMixerOverrideSwitch.prop('checked');
+        });
+
         $('a.backupSettings').click(function () {
             if ($(this).hasClass('disabled')) {
                 return;

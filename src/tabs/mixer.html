@@ -1,0 +1,272 @@
+<div class="tab-mixer toolbar_fixed_bottom">
+    <div class="content_wrapper">
+        <div class="tab_title" i18n="tabMixer"></div>
+        <div class="cf_doc_version_bt">
+            <a id="button-documentation" href="https://github.com/rotorflight/rotorflight/wiki" target="_blank" rel="noopener noreferrer"></a>
+        </div>
+
+        <!-- CONFIGURATION -->
+        <div class="configuration">
+            <div class="grid-row">
+                <div class="grid-col col6">
+                    <div class="gui_box grey">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="mixerMainRotorSettings"></div>
+                        </div>
+                        <div class="spacer_box">
+                            <table class="mixerConfigs">
+                                <tr>
+                                    <td>
+                                        <div class="configCol1">
+                                            <select id="mixerMainRotorDirection">
+                                                <option value="0" i18n="mixerClockwise"></option>
+                                                <option value="1" i18n="mixerCounterClockwise"></option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerMainRotorDirection"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="configCol1">
+                                            <select id="mixerSwashType">
+                                                <!-- LIST GENERATED HERE -->
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerSwashType"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="configCol1">
+                                            <input type="number" id="mixerSwashRing" min="0" max="100" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerSwashRing"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="gui_box grey">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="mixerTailRotorSettings"></div>
+                        </div>
+                        <div class="spacer_box">
+                            <table class="mixerConfigs">
+                                <tr>
+                                    <td>
+                                        <div class="configCol1">
+                                            <select id="mixerTailRotorMode">
+                                                <option value="0" i18n="mixerTailVariablePitch"></option>
+                                                <option value="1" i18n="mixerTailMotorized"></option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerTailRotorMode"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="tailRotorMotorized">
+                                    <td>
+                                        <div class="configCol1">
+                                            <input type="number" id="mixerTailMotorIdle" min="0" max="250" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerTailMotorIdle"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-col col6">
+                    <div class="gui_box grey">
+                        <div class="gui_box_titlebar no-bottom-margin">
+                            <div class="spacer_box_title" i18n="mixerInputChannels"></div>
+                        </div>
+                        <table class="mixerInputs">
+                            <thead>
+                                <tr class="trhead">
+                                    <th i18n="mixerInputName" />
+                                    <th i18n="mixerInputMin" />
+                                    <th i18n="mixerInputMax" />
+                                    <th i18n="mixerInputRate" />
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- INPUTS GENERATED HERE -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OVERRIDE -->
+        <div class="override">
+            <div class="grid-row margin-top">
+                <div class="grid-col full-width">
+                    <div class="note mixerOverrideNote">
+                        <p i18n="mixerOverrideNote"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <div class="grid-col full-width">
+                    <div class="gui_box">
+                        <div class="gui_box_titlebar no-bottom-margin">
+                            <div class="spacer_box_title" i18n="mixerOverride"></div>
+                        </div>
+                        <div>
+                            <table class="mixerOverride">
+                                <thead>
+                                    <tr class="trhead">
+                                        <th i18n="mixerInputName"></th>
+                                        <th i18n="mixerOverrideEnable"></th>
+                                        <th i18n="mixerOverrideValue"></th>
+                                        <th i18n="mixerOverrideSlider"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- ROWS GENERATED HERE -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="content_toolbar">
+        <div class="btn revert_btn">
+            <a class="revert" href="#" i18n="buttonRevert"></a>
+        </div>
+        <div class="btn save_btn">
+            <a class="save" href="#" i18n="buttonSave"></a>
+        </div>
+    </div>
+
+    <dialog class="dialogCustomMixer">
+        <h3 i18n="dialogCustomMixerTitle"></h3>
+        <div class="content">
+            <div i18n="dialogCustomMixerNote" style="margin-top: 10px"></div>
+        </div>
+        <div class="buttons">
+            <a href="#" class="dialogCustomMixer-closebtn regular-button" i18n="dialogCustomMixerClose"></a>
+        </div>
+    </dialog>
+
+</div>
+
+<div id="tab-mixer-templates">
+
+    <table class="mixerInputTemplate">
+        <tbody>
+            <tr class="mixerInput">
+                <td>
+                    <div>
+                        <span id="name" />
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input id="min" type="number" min="-2000" max="2000" step="10" />
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input id="max" type="number" min="-2000" max="2000" step="10" />
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input id="rate" type="number" min="-2000" max="2000" step="10" />
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="mixerRuleTemplate">
+        <tbody>
+            <tr class="mixerRule">
+                <td><span id="index"></span></td>
+                <td>
+                    <div>
+                        <select id="oper">
+                            <!-- LIST GENERATED HERE -->
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <select id="input">
+                            <!-- LIST GENERATED HERE -->
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <select id="output">
+                            <!-- LIST GENERATED HERE -->
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input id="offset" type="number" min="-1000" max="1000" step="10" />
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input id="weight" type="number" min="-5000" max="5000" step="10" />
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="mixerOverrideTemplate">
+        <tbody>
+            <tr>
+                <td><span class="mixerOverrideName"></span></td>
+                <td>
+                    <div class="mixerOverrideEnable">
+                        <input type="checkbox" class="toggle"/>
+                    </div>
+                </td>
+                <td>
+                    <div class="mixerOverrideInput">
+                        <input type="number" value="0"/>
+                    </div>
+                </td>
+                <td>
+                    <div class="mixerOverrideSlider pips-range"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
