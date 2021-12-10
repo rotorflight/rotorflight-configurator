@@ -384,6 +384,9 @@ function startProcess() {
                     case 'motors':
                         TABS.motors.initialize(content_ready);
                         break;
+                    case 'mixer':
+                        TABS.mixer.initialize(content_ready);
+                        break;
                     case 'sensors':
                         TABS.sensors.initialize(content_ready);
                         break;

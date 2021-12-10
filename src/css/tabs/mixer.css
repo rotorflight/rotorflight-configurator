@@ -1,0 +1,230 @@
+
+#tab-mixer-templates {
+    display: none;
+}
+
+.tab-mixer .gui_box {
+    margin-bottom: 5px;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    display: table;
+}
+
+.tab-mixer .gui_box span {
+    font-size: 11px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 19px;
+    color: #626262;
+}
+
+.tab-mixer .no-bottom-margin {
+    margin-bottom: 0;
+}
+
+
+.tab-mixer input[type="number"]::-webkit-inner-spin-button {
+    border: 0;
+}
+
+.tab-mixer input,
+.tab-mixer select {
+    display: block;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: right;
+    box-sizing: border-box;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+}
+
+.tab-mixer .mixerConfigs {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 1px;
+    table-layout: auto;
+    border: 0;
+    border-collapse: collapse;
+}
+
+.tab-mixer .mixerConfigs th {
+    height: 10px;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border: 0;
+    padding: 5px 0 2px 0;
+}
+
+.tab-mixer .mixerConfigs td {
+    padding: 5px 5px 2px 5px;
+}
+
+.tab-mixer .mixerConfigs tr td {
+    text-align: left;
+}
+
+.tab-mixer .mixerConfigs tr td:first-child {
+    width: 140px;
+    padding-right: 10px;
+}
+
+.tab-mixer .mixerConfigs tr td.border {
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--subtleAccent);
+}
+
+.tab-mixer .mixerInputs {
+    width: 100%;
+    border: 0;
+    border-collapse: collapse;
+    margin-top: 2px;
+}
+
+.tab-mixer .mixerInputs .trhead {
+    color: var(--quietText);
+    background-color: var(--button-background);
+    text-align: center;
+    font-size: 11px;
+    line-height: 16px;
+    height: 22px;
+    border-top: 1px solid var(--boxBackground);
+}
+
+.tab-mixer .mixerInputs td {
+    padding: 6px 5px 2px 5px;
+    text-align: center;
+}
+
+.tab-mixer .mixerInputs td:nth-child(1) {
+    padding-left: 12px;
+    text-align: left;
+}
+
+.tab-mixer .mixerInputs td:nth-child(2) {
+    text-align: center;
+}
+
+.tab-mixer .mixerInputs td:nth-child(3) {
+    text-align: center;
+}
+
+.tab-mixer .mixerInputs td:nth-child(4) {
+    text-align: center;
+    padding-right: 12px;
+}
+
+.tab-mixer .gui_box_titlebar .helpicon {
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.tab-mixer .override .gui_box {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.tab-mixer .mixerOverrideNote {
+    padding: 10px 10px;
+}
+
+.tab-mixer .mixerOverride {
+    width: 100%;
+    border: 0;
+    border-collapse: collapse;
+    margin-top: 2px;
+}
+
+.tab-mixer .mixerOverride .trhead {
+    color: var(--quietText);
+    background-color: var(--button-background);
+    text-align: center;
+    font-size: 11px;
+    line-height: 16px;
+    height: 22px;
+    border-top: 1px solid var(--boxBackground);
+}
+
+.tab-mixer .mixerOverride td {
+    padding: 6px 5px 7px 5px;
+    border: 1px solid var(--subtleAccent);
+}
+
+.tab-mixer .mixerOverride td:nth-child(1) {
+    width: 120px;
+    text-align: left;
+    border-left: 0;
+}
+
+.tab-mixer .mixerOverride td:nth-child(1) span {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.tab-mixer .mixerOverride td:nth-child(2) {
+    width: 80px;
+    text-align: center;
+}
+
+.tab-mixer .mixerOverride td:nth-child(3) {
+    width: 80px;
+    text-align: left;
+}
+
+.tab-mixer .mixerOverride td:nth-child(4) {
+    height: 75px;
+    padding: 2px 20px 2px 20px;
+    text-align: left;
+    border-right: 0;
+}
+
+.tab-mixer .mixerOverride tr:last-child td {
+    border-bottom: 0;
+}
+
+.tab-mixer .mixerOverride tbody tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+.tab-mixer .mixerOverride tbody tr:nth-child(odd) {
+    background-color: #e9e9e9;
+}
+
+.tab-mixer .mixerOverrideSlider {
+    margin-top: -20px;
+}
+
+.tab-mixer .mixerOverrideSlider .noUi-pips {
+    padding: 5px 0 0 0;
+}
+
+.tab-mixer .mixerOverrideSlider .noUi-pips .noUi-marker-large {
+    height: 10px;
+}
+
+.tab-mixer .mixerOverrideSlider .noUi-pips .noUi-value-large {
+    padding-top: 15px;
+}
+
+.tab-mixer dialog {
+    width: 40em;
+    border-radius: 5px;
+}
+
+.tab-mixer dialog .buttons {
+    position: static;
+    margin-top: 2em;
+}
+
+.tab-mixer dialog h3 {
+    margin-bottom: 0.5em;
+}
+
+@media all and (max-width: 575px) {
+    .tab-mixer dialog {
+        width: calc(100% - 2em);
+        border-radius: unset;
+    }
+}
