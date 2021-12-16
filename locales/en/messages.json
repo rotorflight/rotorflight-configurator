@@ -71,6 +71,24 @@
     "cancel": {
         "message": "Cancel"
     },
+    "buttonSave": {
+        "message": "Save"
+    },
+    "buttonSaveReboot": {
+        "message": "Save and Reboot"
+    },
+    "buttonCancel": {
+        "message": "Cancel"
+    },
+    "buttonRefresh": {
+        "message": "Refresh"
+    },
+    "buttonRevert": {
+        "message": "Revert"
+    },
+    "eepromSaved": {
+        "message": "EEPROM <span class=\"message-positive\">saved</span>"
+    },
     "autoConnectEnabled": {
         "message": "Auto-Connect: Enabled - Configurator automatically tries to connect when new port is detected"
     },
