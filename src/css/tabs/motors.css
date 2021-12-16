@@ -146,7 +146,7 @@
 .tab-motors .meter-bar {
     position: relative;
     height: 18px;
-    width: 100%
+    width: 100%;
     box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
     background-color: #E0E0E0;
     border-radius: 3px;
@@ -269,66 +269,6 @@
 
 .tab-motors .motorOverrideSlider .noUi-pips .noUi-value-large {
     padding-top: 15px;
-}
-
-
-.tab-motors dialog {
-    width: 400px;
-    height: 440px;
-}
-
-.tab-motors #escDshotDirectionDialog-closebtn {
-    margin-right: 0px;
-    margin-bottom: 0px;
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-}
-
-.tab-motors #escDshotDirectionDialog-ContentWrapper {
-    display: flex;
-    flex-flow: column;
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.tab-motors #escDshotDirectionDialog-Content {
-    flex-grow: 1;
-}
-
-.tab-motors #dialog-settings-changed {
-    width: 400px;
-    height: 100px;
-}
-
-.tab-motors #dialog-settings-changed-confirmbtn {
-    margin-right: 0px;
-    margin-bottom: 0px;
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-}
-
-.tab-motors #dialog-settings-changed-content-wrapper {
-    display: flex;
-    flex-flow: column;
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.tab-motors #dialog-settings-changed-content {
-    flex-grow: 1;
-}
-
-.tab-motors .tool-buttons {
-    float: right;
-    margin-bottom: -3%;
-}
-
-.tab-motors .motorDialogButtons {
-    float: right;
 }
 
 @media all and (max-width: 575px) {
