@@ -2556,15 +2556,6 @@
     "servosText":{
         "message": "Servos"
     },
-    "servosButtonSave": {
-        "message": "Save"
-    },
-    "servosButtonCancel": {
-        "message": "Cancel"
-    },
-    "servosEepromSave": {
-        "message": "EEPROM <span class=\"message-positive\">saved</span>"
-    },
 
     "mixerMainRotorSettings": {
         "message": "Main Rotor Settings"
