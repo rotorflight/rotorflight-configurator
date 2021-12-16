@@ -4153,12 +4153,6 @@
         "message": "Duration of the initial climb before rolling upright"
     },
 
-    "rateSetupButtonSave": {
-        "message": "Save"
-    },
-    "rateSetupButtonRefresh": {
-        "message": "Refresh"
-    },
     "rateSetupCopyRateProfile": {
         "message": "Copy rateprofile"
     },
@@ -4179,9 +4173,6 @@
     },
     "rateSetupDataRefreshed": {
         "message": "Rate Profile data <strong>refreshed</strong>"
-    },
-    "rateSetupEepromSaved": {
-        "message": "EEPROM <span class=\"message-positive\">saved</span>"
     },
     "rateSetupSubTab": {
         "message": "Rate Profile #$1"
