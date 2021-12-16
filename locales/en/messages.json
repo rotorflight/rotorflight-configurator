@@ -2094,15 +2094,6 @@
     "profilesDataRefreshed": {
         "message": "PID data <strong>refreshed</strong>"
     },
-    "profilesEepromSaved": {
-        "message": "EEPROM <span class=\"message-positive\">saved</span>"
-    },
-    "profilesButtonSave": {
-        "message": "Save"
-    },
-    "profilesButtonRefresh": {
-        "message": "Refresh"
-    },
 
     "receiverHelp": {
         "message": "Please read receiver chapter of the documentation.  Configure serial port (if required), receiver mode (serial/ppm/pwm), provider (for serial receivers), bind receiver, set channel map, configure channel endpoints/range on TX so that all channels go from ~1000 to ~2000.  Set midpoint (default 1500), trim channels to 1500, configure stick deadband, verify behaviour when TX is off or out of range.<br /><span class=\"message-negative\">IMPORTANT:</span> Before flying read failsafe chapter of documentation and configure failsafe."
