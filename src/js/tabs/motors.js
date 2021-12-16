@@ -1,30 +1,56 @@
 'use strict';
 
 TABS.motors = {
+    isDirty: false,
     isProtoEnabled: false,
     isEscSensorEnabled: false,
     isGovEnabled: false,
     isDshot: false,
-    isDirty: false,
-};
+    govModes: [
+        "OFF",
+        "PASSTHROUGH",
+        "STANDARD",
+        "MODE1",
+        "MODE2",
+    ],
+ };
 
 TABS.motors.initialize = function (callback) {
+
     const self = this;
 
-    if (GUI.active_tab != 'motors') {
+    if (GUI.active_tab !== 'motors') {
         GUI.active_tab = 'motors';
     }
 
-    Promise.resolve(true)
-        .then(() => { return MSP.promise(MSPCodes.MSP_STATUS); })
-        .then(() => { return MSP.promise(MSPCodes.MSP_ARMING_CONFIG); })
-        .then(() => { return MSP.promise(MSPCodes.MSP_FEATURE_CONFIG); })
-        .then(() => { return MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG); })
-        .then(() => { return MSP.promise(MSPCodes.MSP_BATTERY_CONFIG); })
-        .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_CONFIG); })
-        .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_OVERRIDE); })
-        .then(() => { return MSP.promise(MSPCodes.MSP_GOVERNOR); })
-        .then(() => { load_html(); });
+    load_data(load_html);
+
+    function load_data(callback) {
+        Promise.resolve(true)
+            .then(() => { return MSP.promise(MSPCodes.MSP_STATUS); })
+            .then(() => { return MSP.promise(MSPCodes.MSP_ARMING_CONFIG); })
+            .then(() => { return MSP.promise(MSPCodes.MSP_FEATURE_CONFIG); })
+            .then(() => { return MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG); })
+            .then(() => { return MSP.promise(MSPCodes.MSP_BATTERY_CONFIG); })
+            .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_CONFIG); })
+            .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_OVERRIDE); })
+            .then(() => { return MSP.promise(MSPCodes.MSP_GOVERNOR); })
+            .then(callback);
+    }
+
+    function save_data(callback) {
+        Promise.resolve(true)
+            .then(() => { return MSP.promise(MSPCodes.MSP_SET_GOVERNOR, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR)); })
+            .then(() => { return MSP.promise(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG)); })
+            .then(() => { return MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)); })
+            .then(() => { return MSP.promise(MSPCodes.MSP_EEPROM_WRITE); })
+            .then(() => {
+                GUI.log(i18n.getMessage('eepromSaved'));
+                MSP.send_message(MSPCodes.MSP_SET_REBOOT);
+                GUI.log(i18n.getMessage('deviceRebooting'));
+                reinitialiseConnection(callback);
+            });
+    }
 
     function load_html() {
         $('#content').load("./tabs/motors.html", process_html);
@@ -35,27 +61,19 @@ TABS.motors.initialize = function (callback) {
         // translate to user-selected language
         i18n.localizePage();
 
-        function setContentToolbarButtons() {
-            if (self.isDirty) {
-                $('.tool-buttons').hide();
-                $('.save_btn').show();
-            } else {
-                $('.save_btn').hide();
-            }
-        }
+        // UI Hooks
 
-        setContentToolbarButtons();
+        // Hide the buttons toolbar
+        $('.tab-motors').addClass('toolbar_hidden');
 
-        function disableHandler(event) {
-            if (event.target !== event.currentTarget) {
+        self.isDirty = false;
+
+        function setDirty() {
+            if (!self.isDirty) {
                 self.isDirty = true;
-                setContentToolbarButtons();
+                $('.tab-motors').removeClass('toolbar_hidden');
             }
-            event.stopPropagation();
         }
-
-        // Add EventListener for configuration changes
-        document.querySelectorAll('.configuration').forEach(elem => elem.addEventListener('change', disableHandler));
 
         const escProtocols = EscProtocols.GetAvailableProtocols(FC.CONFIG.apiVersion);
         const escProtocolSelect = $('select.escProtocol');
@@ -91,17 +109,10 @@ TABS.motors.initialize = function (callback) {
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR');
         self.isEscSensorEnabled = FC.FEATURE_CONFIG.features.isEnabled('ESC_SENSOR');
 
-        const govModes = [
-            "OFF",
-            "PASSTHROUGH",
-            "STANDARD",
-            "MODE1",
-            "MODE2",
-        ];
         const govModeSelect = $('select.govMode');
 
-        for (let j = 0; j < govModes.length; j++) {
-            govModeSelect.append(`<option value="${j}">${govModes[j]}</option>`);
+        for (let j = 0; j < self.govModes.length; j++) {
+            govModeSelect.append(`<option value="${j}">${self.govModes[j]}</option>`);
         }
 
         govModeSelect.val(FC.GOVERNOR.gov_mode);
@@ -338,26 +349,7 @@ TABS.motors.initialize = function (callback) {
             process_override(index);
         }
 
-        function get_motor_info() {
-            Promise.resolve(true)
-                .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR); })
-                .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_TELEMETRY); })
-                .then(() => { infoUpdateList.forEach(func => func()) });
-        }
-
-        GUI.interval_add('motor_info_pull', get_motor_info, 100, true);
-
-        function get_battery_info() {
-            Promise.resolve(true)
-                .then(() => { return MSP.promise(MSPCodes.MSP_BATTERY_STATE); })
-                .then(() => { infoUpdateList.forEach(func => func()) });
-        }
-
-        GUI.interval_add('battery_info_pull', get_battery_info, 1000, true);
-
-
-        $('a.save').on('click', function() {
-
+        function update_data() {
             FC.MOTOR_CONFIG.mincommand = parseInt($('input[id="mincommand"]').val());
             FC.MOTOR_CONFIG.minthrottle = parseInt($('input[id="minthrottle"]').val());
             FC.MOTOR_CONFIG.maxthrottle = parseInt($('input[id="maxthrottle"]').val());
@@ -381,25 +373,51 @@ TABS.motors.initialize = function (callback) {
                     FC.GOVERNOR.gov_autorotation_timeout = parseInt($('input[id="govAutoTimeout"]').val());
                 }
             }
+        }
 
+        function get_motor_info() {
             Promise.resolve(true)
-                .then(() => { return MSP.promise(MSPCodes.MSP_SET_GOVERNOR, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR)); })
-                .then(() => { return MSP.promise(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG)); })
-                .then(() => { return MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)); })
-                .then(() => { return MSP.promise(MSPCodes.MSP_EEPROM_WRITE); })
-                .then(() => {
-                    GUI.log(i18n.getMessage('configurationEepromSaved'));
-                    MSP.send_message(MSPCodes.MSP_SET_REBOOT, false, false);
-                    reinitialiseConnection(self);
-                });
+                .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR); })
+                .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_TELEMETRY); })
+                .then(() => { infoUpdateList.forEach(func => func()); });
+        }
 
-            self.isDirty = false;
+        function get_battery_info() {
+            Promise.resolve(true)
+                .then(() => { return MSP.promise(MSPCodes.MSP_BATTERY_STATE); })
+                .then(() => { infoUpdateList.forEach(func => func()); });
+        }
+
+        self.save = function(callback) {
+            update_data();
+            save_data(callback);
+        };
+
+        self.revert = function (callback) {
+            callback();
+        };
+
+        $('a.save').click(function () {
+            self.save(() => GUI.tab_switch_reload());
         });
+
+        $('a.revert').click(function () {
+            self.revert(() => GUI.tab_switch_reload());
+        });
+
+        $('.configuration').change(function () {
+            setDirty();
+        });
+
+        GUI.interval_add('motor_info_pull', get_motor_info, 100, true);
+        GUI.interval_add('battery_info_pull', get_battery_info, 1000, true);
 
         GUI.content_ready(callback);
     }
 };
 
 TABS.motors.cleanup = function (callback) {
+    this.isDirty = false;
+
     if (callback) callback();
 };
