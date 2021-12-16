@@ -4439,15 +4439,6 @@
     "gyroDTermNotchCutoff": {
         "message": "D Term Notch Filter Cutoff Frequency [Hz]"
     },
-    "gyroButtonSave": {
-        "message": "Save"
-    },
-    "gyroButtonRefresh": {
-        "message": "Refresh"
-    },
-    "gyroEepromSaved": {
-        "message": "EEPROM <span class=\"message-positive\">saved</span>"
-    },
 
     "configHelp2": {
         "message": "Arbitrary board rotation in degrees, to allow mounting it sideways / upside down / rotated etc. When running external sensors, use the sensor alignments (Gyro, Acc, Mag) to define sensor position independent from board orientation. "
