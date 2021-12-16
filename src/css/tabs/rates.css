@@ -466,7 +466,7 @@
     border-bottom: none;
 }
 
-.tabarea {
+.tab-rates .tab-area {
     width: calc(100% - 22px);
     position: relative;
     padding: 10px;
