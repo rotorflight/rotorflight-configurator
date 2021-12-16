@@ -145,7 +145,7 @@ TABS.servos.initialize = function (callback) {
 
         function save_servo_configuration() {
 
-            for (let index = 0; index < FC.STATUS.servoCount; index++) {
+            for (let index = 0; index < FC.CONFIG.servoCount; index++) {
                 update_servo_config(index);
             }
 
