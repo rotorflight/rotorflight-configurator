@@ -1,12 +1,23 @@
 'use strict';
 
 TABS.profiles = {
-    updating: true,
-    currentProfile: null,
+    isDirty: false,
     activeSubtab: null,
+    currentProfile: null,
     isGovEnabled: false,
-    tabNames: [ 'profile1', 'profile2', 'profile3', 'profile4', 'profile5', 'profile6' ],
-    pidNames: [ 'ROLL', 'PITCH', 'YAW' ],
+    tabNames: [
+        'profile1',
+        'profile2',
+        'profile3',
+        'profile4',
+        'profile5',
+        'profile6',
+    ],
+    pidNames: [
+        'ROLL',
+        'PITCH',
+        'YAW',
+    ],
 };
 
 TABS.profiles.initialize = function (callback) {
@@ -17,15 +28,32 @@ TABS.profiles.initialize = function (callback) {
         GUI.active_tab = 'profiles';
     }
 
-    MSP.promise(MSPCodes.MSP_STATUS)
-        .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
-        .then(() => MSP.promise(MSPCodes.MSP_PID))
-        .then(() => MSP.promise(MSPCodes.MSP_PID_ADVANCED))
-        .then(() => MSP.promise(MSPCodes.MSP_GOVERNOR))
-        .then(() => load_html());
+    load_data(load_html);
 
     function load_html() {
         $('#content').load("./tabs/profiles.html", process_html);
+    }
+
+    function load_data(callback) {
+        Promise.resolve(true)
+            .then(() => MSP.promise(MSPCodes.MSP_STATUS))
+            .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_PID))
+            .then(() => MSP.promise(MSPCodes.MSP_PID_ADVANCED))
+            .then(() => MSP.promise(MSPCodes.MSP_GOVERNOR))
+            .then(callback);
+    }
+
+    function save_data(callback) {
+        Promise.resolve(true)
+            .then(() => MSP.promise(MSPCodes.MSP_SET_PID, mspHelper.crunch(MSPCodes.MSP_SET_PID)))
+            .then(() => MSP.promise(MSPCodes.MSP_SET_PID_ADVANCED, mspHelper.crunch(MSPCodes.MSP_SET_PID_ADVANCED)))
+            .then(() => MSP.promise(MSPCodes.MSP_SET_GOVERNOR, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR)))
+            .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
+            .then(() => {
+                GUI.log(i18n.getMessage('eepromSaved'));
+                if (callback) callback();
+            });
     }
 
     function data_to_form() {
@@ -128,7 +156,6 @@ TABS.profiles.initialize = function (callback) {
         else {
             $('.tab-profiles .gov_config').hide();
         }
-
     }
 
     function form_to_data() {
@@ -191,34 +218,40 @@ TABS.profiles.initialize = function (callback) {
         // translate to user-selected language
         i18n.localizePage();
 
+        // UI Hooks
         data_to_form();
+
+        // Hide the buttons toolbar
+        $('.tab-profiles').addClass('toolbar_hidden');
+
+        self.isDirty = false;
+
+        function setDirty() {
+            if (!self.isDirty) {
+                self.isDirty = true;
+                $('.tab-profiles').removeClass('toolbar_hidden');
+            }
+        }
 
         function activateProfile(profile) {
             FC.CONFIG.profile = profile;
-            self.updating = true;
-            MSP.promise(MSPCodes.MSP_SELECT_SETTING, [profile]).then(function () {
-                self.refresh(function () {
-                    self.updating = false;
+            MSP.promise(MSPCodes.MSP_SELECT_SETTING, [profile])
+                .then(function () {
                     GUI.log(i18n.getMessage('profilesActivateProfile', [profile + 1]));
+                    GUI.tab_switch_reload();
                 });
-            });
         }
 
         function resetProfile() {
-            self.updating = true;
-            MSP.promise(MSPCodes.MSP_SET_RESET_CURR_PID).then(function () {
-                self.refresh(function () {
-                    self.updating = false;
+            MSP.promise(MSPCodes.MSP_SET_RESET_CURR_PID)
+                .then(function () {
                     GUI.log(i18n.getMessage('profilesResetProfile'));
+                    GUI.tab_switch_reload();
                 });
-            });
         }
 
-
-        // UI Hooks
-
         self.tabNames.forEach(function(element, index) {
-            $('.tab-profiles .tab-container .' + element).on('click', () => activateProfile(index));
+            $('.tab-profiles .tab-container .' + element).on('click', () => GUI.tab_switch_allowed(() => activateProfile(index)));
             $('.tab-profiles .tab-container .' + element).toggle(index < FC.CONFIG.numProfiles);
         });
 
@@ -251,28 +284,26 @@ TABS.profiles.initialize = function (callback) {
             });
         });
 
-        $('a.refresh').click(function () {
-            self.refresh(function () {
-                GUI.log(i18n.getMessage('profilesDataRefreshed'));
-            });
-        });
-
-        // update == save.
-        $('a.update').click(function () {
+        self.save = function (callback) {
             form_to_data();
-            self.updating = true;
-            Promise.resolve(true)
-                .then(() => MSP.promise(MSPCodes.MSP_SET_PID, mspHelper.crunch(MSPCodes.MSP_SET_PID)))
-                .then(() => MSP.promise(MSPCodes.MSP_SET_PID_ADVANCED, mspHelper.crunch(MSPCodes.MSP_SET_PID_ADVANCED)))
-                .then(() => MSP.promise(MSPCodes.MSP_SET_GOVERNOR, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR)))
-                .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
-                .then(() => {
-                    self.updating = false;
-                    self.refresh(() => { GUI.log(i18n.getMessage('profilesEepromSaved')); });
-                });
+            save_data(callback);
+        };
+
+        self.revert = function (callback) {
+            callback();
+        };
+
+        $('a.save').click(function () {
+            self.save(() => GUI.tab_switch_reload());
         });
 
-        self.updating = false;
+        $('a.revert').click(function () {
+            self.revert(() => GUI.tab_switch_reload());
+        });
+
+        $('.tab-area').change(function () {
+            setDirty();
+        });
 
         GUI.content_ready(callback);
     }
@@ -280,17 +311,7 @@ TABS.profiles.initialize = function (callback) {
 
 
 TABS.profiles.cleanup = function (callback) {
-    const self = this;
+    this.isDirty = false;
 
     if (callback) callback();
 };
-
-TABS.profiles.refresh = function (callback) {
-    const self = this;
-
-    GUI.tab_switch_cleanup(function () {
-        self.initialize();
-        if (callback) callback();
-    });
-};
-
