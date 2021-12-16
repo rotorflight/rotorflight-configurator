@@ -182,7 +182,7 @@ TABS.profiles.initialize = function (callback) {
             FC.GOVERNOR.gov_tta_gain = parseInt($('.tab-profiles input[id="govTTAGain"]').val());
             FC.GOVERNOR.gov_tta_limit = parseInt($('.tab-profiles input[id="govTTALimit"]').val());
             FC.GOVERNOR.gov_cyclic_ff_weight = parseInt($('.tab-profiles input[id="govCyclicPrecomp"]').val());
-            FC.GOVERNOR.gov_collective_ff_weight = parseInt($('.tab-profiles \input[id="govCollectivePrecomp"]').val());
+            FC.GOVERNOR.gov_collective_ff_weight = parseInt($('.tab-profiles input[id="govCollectivePrecomp"]').val());
         }
     }
 
