@@ -1,12 +1,13 @@
 'use strict';
 
 TABS.mixer = {
-
-    MIXER_OVERRIDE_OFF: 2501,
+    isDirty: false,
 
     MIXER_CONFIG_dirty: false,
     MIXER_INPUTS_dirty: false,
     MIXER_RULES_dirty: false,
+
+    MIXER_OVERRIDE_OFF: 2501,
 
     swashType: 0,
     tailMode: 0,
@@ -16,7 +17,6 @@ TABS.mixer = {
 
     showInputs: [ 1,2,3,4,5 ],
     showOverrides: [ 1,2,3,4, ],
-
 };
 
 TABS.mixer.initialize = function (callback) {
@@ -27,15 +27,83 @@ TABS.mixer.initialize = function (callback) {
         GUI.active_tab = 'mixer';
     }
 
-    MSP.promise(MSPCodes.MSP_STATUS)
-        .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
-        .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
-        .then(() => MSP.promise(MSPCodes.MSP_MIXER_INPUTS))
-        .then(() => MSP.promise(MSPCodes.MSP_MIXER_RULES))
-        .then(() => load_html());
+    load_data(load_html);
 
     function load_html() {
         $('#content').load("./tabs/mixer.html", process_html);
+    }
+
+    function load_data(callback) {
+        MSP.promise(MSPCodes.MSP_STATUS)
+            .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_MIXER_INPUTS))
+            .then(() => MSP.promise(MSPCodes.MSP_MIXER_RULES))
+            .then(callback);
+    }
+
+    function save_data(callback) {
+        function send_mixer_config() {
+            if (self.MIXER_CONFIG_dirty)
+                MSP.send_message(MSPCodes.MSP_SET_MIXER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG), false, send_mixer_inputs);
+            else
+                send_mixer_inputs();
+        }
+        function send_mixer_inputs() {
+            if (self.MIXER_INPUTS_dirty)
+                mspHelper.sendMixerInputs(send_mixer_rules);
+            else
+                send_mixer_rules();
+        }
+        function send_mixer_rules() {
+            if (self.MIXER_RULES_dirty)
+                mspHelper.sendMixerRules(save_eeprom);
+            else
+                save_eeprom();
+        }
+        function save_eeprom() {
+            if (self.MIXER_CONFIG_dirty || self.MIXER_INPUTS_dirty || self.MIXER_RULES_dirty)
+                MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, eeprom_saved);
+            else
+                save_done();
+        }
+        function eeprom_saved() {
+            GUI.log(i18n.getMessage('eepromSaved'));
+            save_done();
+        }
+        function save_done() {
+            self.MIXER_CONFIG_dirty = false;
+            self.MIXER_INPUTS_dirty = false;
+            self.MIXER_RULES_dirty = false;
+            self.isDirty = false;
+
+            if (callback) callback();
+        }
+
+        send_mixer_config();
+    }
+
+    function revert_data(callback) {
+        function send_mixer_inputs() {
+            if (self.MIXER_INPUTS_dirty)
+                mspHelper.sendMixerInputs(send_mixer_rules);
+            else
+                send_mixer_rules();
+        }
+        function send_mixer_rules() {
+            if (self.MIXER_RULES_dirty)
+                mspHelper.sendMixerRules(revert_done);
+            else
+                revert_done();
+        }
+        function revert_done() {
+            self.MIXER_INPUTS_dirty = false;
+            self.MIXER_RULES_dirty = false;
+
+            if (callback) callback();
+        }
+
+        send_mixer_inputs();
     }
 
     function add_input(inputIndex) {
@@ -265,6 +333,10 @@ TABS.mixer.initialize = function (callback) {
             }
         });
 
+        $('.dialogCustomMixer-closebtn').click(function() {
+            $('.dialogCustomMixer')[0].close();
+        });
+
         $('.tab-mixer #mixerTailRotorMode').change(function () {
             $('.tailRotorMotorized').toggle( $(this).val() != 0 );
         });
@@ -304,103 +376,62 @@ TABS.mixer.initialize = function (callback) {
         // Initialize mixer helper
         Mixer.initialize();
 
-        // Update form
+        // UI Hooks
         data_to_form();
 
-        // UI Hooks
+        // Hide the buttons toolbar
+        $('.tab-mixer').addClass('toolbar_hidden');
+
+        self.isDirty = false;
+
+        function setDirty() {
+            if (!self.isDirty) {
+                if (self.MIXER_CONFIG_dirty || self.MIXER_INPUTS_dirty || self.MIXER_RULES_dirty) {
+                    self.isDirty = true;
+                    $('.tab-mixer').removeClass('toolbar_hidden');
+                }
+            }
+        }
 
         $('.mixerConfigs').change(function () {
             self.MIXER_CONFIG_dirty = true;
+            setDirty();
         });
-
         $('.mixerInputs').change(function () {
             self.MIXER_INPUTS_dirty = true;
+            setDirty();
         });
-
         $('.mixerRules').change(function () {
             self.MIXER_RULES_dirty = true;
+            setDirty();
+        });
+
+        self.save = function (callback) {
+            form_to_data();
+            save_data(callback);
+        };
+
+        self.revert = function (callback) {
+            FC.MIXER_RULES = self.prevRules;
+            FC.MIXER_INPUTS = self.prevInputs;
+            revert_data(callback);
+        };
+
+        $('a.save').click(function () {
+            self.save(() => GUI.tab_switch_reload());
         });
 
         $('a.revert').click(function () {
-            function send_mixer_inputs() {
-                if (self.MIXER_INPUTS_dirty)
-                    mspHelper.sendMixerInputs(send_mixer_rules);
-                else
-                    send_mixer_rules();
-            }
-            function send_mixer_rules() {
-                if (self.MIXER_RULES_dirty)
-                    mspHelper.sendMixerRules(send_done);
-                else
-                    send_done();
-            }
-            function send_done() {
-                self.refresh();
-            }
-
-            FC.MIXER_RULES = self.prevRules;
-            FC.MIXER_INPUTS = self.prevInputs;
-
-            send_mixer_inputs();
+            self.revert(() => GUI.tab_switch_reload());
         });
 
-        $('a.save').click(function () {
-            function send_mixer_config() {
-                if (self.MIXER_CONFIG_dirty)
-                    MSP.send_message(MSPCodes.MSP_SET_MIXER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG), false, send_mixer_inputs);
-                else
-                    send_mixer_inputs();
-            }
-            function send_mixer_inputs() {
-                if (self.MIXER_INPUTS_dirty)
-                    mspHelper.sendMixerInputs(send_mixer_rules);
-                else
-                    send_mixer_rules();
-            }
-            function send_mixer_rules() {
-                if (self.MIXER_RULES_dirty)
-                    mspHelper.sendMixerRules(save_eeprom);
-                else
-                    save_eeprom();
-            }
-            function save_eeprom() {
-                if (self.MIXER_CONFIG_dirty || self.MIXER_INPUTS_dirty || self.MIXER_RULES_dirty)
-                    MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, eeprom_saved);
-                else
-                    self.refresh();
-            }
-            function eeprom_saved() {
-                GUI.log(i18n.getMessage('eepromSaved'));
-                self.refresh();
-            }
-
-            form_to_data();
-            send_mixer_config();
-        });
-
-        $('.dialogCustomMixer-closebtn').click(function() {
-            $('.dialogCustomMixer')[0].close();
-        });
-
-        GUI.content_ready(callback);
+         GUI.content_ready(callback);
     }
-
 };
-
 
 TABS.mixer.cleanup = function (callback) {
-    const self = this;
+    this.isDirty = false;
 
     if (callback) callback();
-};
-
-TABS.mixer.refresh = function (callback) {
-    const self = this;
-
-    GUI.tab_switch_cleanup(function () {
-        self.initialize();
-
-        if (callback) callback();
-    });
 };
 
