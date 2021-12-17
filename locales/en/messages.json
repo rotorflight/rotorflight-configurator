@@ -4596,9 +4596,6 @@
         "message": "Kill"
     },
 
-    "powerButtonSave": {
-        "message": "Save"
-    },
     "powerFirmwareUpgradeRequired": {
         "message": "Firmware upgrade <span class=\"message-negative\">required</span>. Battery/Amperage/Voltage configurations using API &lt; 1.33.0 (Betaflight release &lt;= 3.17) is not supported."
     },
