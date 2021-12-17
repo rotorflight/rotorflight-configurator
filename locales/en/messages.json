@@ -1684,12 +1684,6 @@
     "beeperRC_SMOOTHING_INIT_FAIL": {
         "message": "Beep when armed and rc smoothing has not initialized filters"
     },
-    "beepersButtonSave": {
-        "message": "Save"
-    },
-    "beepersEepromSaved": {
-        "message": "EEPROM <span class=\"message-positive\">saved</span>"
-    },
     "configuration3d": {
         "message": "3D ESC/Motor Features"
     },
