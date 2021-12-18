@@ -948,6 +948,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 console.log("Advanced PID settings saved");
                 break;
 
+            case MSPCodes.MSP_SET_GOVERNOR:
+                console.log("Governor settings saved");
+                break;
+
             case MSPCodes.MSP_PID_ADVANCED:
                 FC.PID_PROFILE.itermLimitRoll = data.readU16();
                 FC.PID_PROFILE.itermLimitPitch = data.readU16();
