@@ -366,12 +366,6 @@
     padding-top: 8px;
 }
 
-.tab-receiver .buttons {
-    width: calc(100% - 20px);
-    position: absolute;
-    bottom: 10px;
-}
-
 /* SVG classes*/
 .tab-receiver .grid .tick {
     stroke: silver;
