@@ -1707,6 +1707,14 @@ dialog .dialog_toolbar .btn a.disabled {
     opacity: 0.5;
 }
 
+.toolbar_hidden .content_wrapper {
+    height: calc(100% - 40px) !important;
+}
+
+.toolbar_hidden .content_toolbar {
+    display: none !important;
+}
+
 .toolbar_scroll_bottom .content_wrapper {
     /*  content wrapper in view with toolbar in scroll bottom
       leave 50px space for the toolbar
