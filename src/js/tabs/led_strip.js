@@ -1,57 +1,55 @@
 'use strict';
 
 TABS.led_strip = {
-        wireMode: false,
-        directions: ['n', 'e', 's', 'w', 'u', 'd']
-    };
+    isDirty: false,
+    wireMode: false,
+    directions: ['n', 'e', 's', 'w', 'u', 'd']
+};
 
 
 TABS.led_strip.initialize = function (callback, scrollPosition) {
-    let selectedColorIndex = null;
-    let selectedModeColor = null;
-    const functionTag = '.function-';
+    const self = this;
 
-    if (semver.lt(FC.CONFIG.apiVersion, "1.20.0")) {
-        TABS.led_strip.functions = ['i', 'w', 'f', 'a', 't', 'r', 'c', 'g', 's', 'b'];
-        TABS.led_strip.baseFuncs = ['c', 'f', 'a', 'b', 'g', 'r'];
-        TABS.led_strip.overlays = ['t', 's', 'i', 'w'];
-    } else {
-        TABS.led_strip.functions = ['i', 'w', 'f', 'a', 't', 'r', 'c', 'g', 's', 'b', 'l', 'o', 'n'];
-        TABS.led_strip.baseFuncs = ['c', 'f', 'a', 'l', 's', 'g', 'r'];
-        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-            TABS.led_strip.overlays =  ['t', 'o', 'b', 'n', 'i', 'w'];
-        } else {
-            TABS.led_strip.overlays =  ['t', 'o', 'b', 'v', 'i', 'w'];
-        }
-    }
-
-    TABS.led_strip.wireMode = false;
-
-    if (GUI.active_tab != 'led_strip') {
+    if (GUI.active_tab !== 'led_strip') {
         GUI.active_tab = 'led_strip';
     }
 
-    function load_led_config() {
-        MSP.send_message(MSPCodes.MSP_LED_STRIP_CONFIG, false, false, load_led_colors);
+    load_data(load_html);
+
+    function load_data(callback) {
+        Promise.resolve(true)
+            .then(() => MSP.promise(MSPCodes.MSP_STATUS))
+            .then(() => MSP.promise(MSPCodes.MSP_LED_STRIP_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_LED_STRIP_MODECOLOR))
+            .then(() => MSP.promise(MSPCodes.MSP_LED_COLORS))
+            .then(callback);
     }
 
-    function load_led_colors() {
-        MSP.send_message(MSPCodes.MSP_LED_COLORS, false, false, load_led_mode_colors);
+    function save_data(callback) {
+        mspHelper.sendLedStripConfig(() =>
+        mspHelper.sendLedStripColors(() =>
+        mspHelper.sendLedStripModeColors(() =>
+        MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, () =>
+        {
+            GUI.log(i18n.getMessage('eepromSaved'));
+            if (callback) callback();
+        }
+        ))));
     }
-
-    function load_led_mode_colors() {
-        if (semver.gte(FC.CONFIG.apiVersion, "1.19.0"))
-            MSP.send_message(MSPCodes.MSP_LED_STRIP_MODECOLOR, false, false, load_html);
-        else
-            load_html();
-    }
-
 
     function load_html() {
         $('#content').load("./tabs/led_strip.html", process_html);
     }
 
-    load_led_config();
+    self.wireMode = false;
+
+    let selectedColorIndex = null;
+    let selectedModeColor = null;
+    const functionTag = '.function-';
+
+    self.functions = ['i', 'w', 'f', 'a', 't', 'r', 'c', 'g', 's', 'b', 'l', 'o', 'n'];
+    self.baseFuncs = ['c', 'f', 'a', 'l', 's', 'g', 'r'];
+    self.overlays =  ['t', 'o', 'b', 'v', 'i', 'w'];
 
     function buildUsedWireNumbers() {
         const usedWireNumbers = [];
@@ -69,17 +67,22 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
 
         i18n.localizePage();
 
+        $('.tab-led-strip').addClass('toolbar_hidden');
+
+        self.isDirty = false;
+
+        function setDirty() {
+            if (!self.isDirty) {
+                self.isDirty = true;
+                $('.tab-led-strip').removeClass('toolbar_hidden');
+            }
+        }
+
         // Build Grid
         const theHTML = [];
         let theHTMLlength = 0;
         for (let i = 0; i < 256; i++) {
-            if (semver.lte(FC.CONFIG.apiVersion, "1.19.0")) {
-                theHTML[theHTMLlength++] = ('<div class="gPoint"><div class="indicators"><span class="north"></span><span class="south"></span><span class="west"></span><span class="east"></span><span class="up">U</span><span class="down">D</span></div><span class="wire"></span><span class="overlay-t"> </span><span class="overlay-s"> </span><span class="overlay-w"> </span><span class="overlay-i"> </span><span class="overlay-color"> </span></div>');
-            } else if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                theHTML[theHTMLlength++] = ('<div class="gPoint"><div class="indicators"><span class="north"></span><span class="south"></span><span class="west"></span><span class="east"></span><span class="up">U</span><span class="down">D</span></div><span class="wire"></span><span class="overlay-t"> </span><span class="overlay-o"> </span><span class="overlay-b"> </span><span class="overlay-n"> </span><span class="overlay-i"> </span><span class="overlay-w"> </span><span class="overlay-color"> </span></div>');
-            } else {
-                theHTML[theHTMLlength++] = ('<div class="gPoint"><div class="indicators"><span class="north"></span><span class="south"></span><span class="west"></span><span class="east"></span><span class="up">U</span><span class="down">D</span></div><span class="wire"></span><span class="overlay-t"> </span><span class="overlay-o"> </span><span class="overlay-b"> </span><span class="overlay-v"> </span><span class="overlay-i"> </span><span class="overlay-w"> </span><span class="overlay-color"> </span></div>');
-            }
+            theHTML[theHTMLlength++] = ('<div class="gPoint"><div class="indicators"><span class="north"></span><span class="south"></span><span class="west"></span><span class="east"></span><span class="up">U</span><span class="down">D</span></div><span class="wire"></span><span class="overlay-t"> </span><span class="overlay-o"> </span><span class="overlay-b"> </span><span class="overlay-v"> </span><span class="overlay-i"> </span><span class="overlay-w"> </span><span class="overlay-color"> </span></div>');
         }
         $('.mainGrid').html(theHTML.join(''));
 
@@ -88,31 +91,20 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
         });
 
         // Aux channel drop-down
-        if (semver.lte(FC.CONFIG.apiVersion, "1.20.0")) {
-            $('.auxSelect').hide();
-            $('.labelSelect').show();
-        } else {
-            $('.auxSelect').show();
-            $('.labelSelect').hide();
+        $('.auxSelect').show();
+        $('.labelSelect').hide();
 
-            const AuxMode = 7;
-            const AuxDir = 0;
+        const AuxMode = 7;
+        const AuxDir = 0;
 
-            $('.auxSelect').val(getModeColor(AuxMode, AuxDir));
+        $('.auxSelect').val(getModeColor(AuxMode, AuxDir));
 
-            $('.auxSelect').on('change', function() {
-                setModeColor(AuxMode, AuxDir, $('.auxSelect').val());
-            });
-        }
+        $('.auxSelect').on('change', function() {
+            setModeColor(AuxMode, AuxDir, $('.auxSelect').val());
+        });
 
-        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-            $('.vtxOverlay').hide();
-            $('.landingBlinkOverlay').show();
-        }
-        else {
-            $('.landingBlinkOverlay').css("visibility", "hidden");
-            $('.vtxOverlay').show();
-        }
+        $('.landingBlinkOverlay').css("visibility", "hidden");
+        $('.vtxOverlay').show();
 
         // Clear button
         $('.funcClear').click(function() {
@@ -125,6 +117,7 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
 
             $('.controls button').removeClass('btnOn');
             updateBulkCmd();
+            setDirty();
         });
 
         // Clear All button
@@ -134,21 +127,21 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
             });
             $('.gPoint .wire').html('');
 
-            updateBulkCmd();
-
             $('.controls button').removeClass('btnOn');
+            updateBulkCmd();
+            setDirty();
         });
 
         function removeFunctionsAndDirections(element) {
             const classesToRemove = [];
 
-            TABS.led_strip.baseFuncs.forEach(function(letter) {
+            self.baseFuncs.forEach(function(letter) {
                 classesToRemove.push('function-' + letter);
             });
-            TABS.led_strip.overlays.forEach(function(letter) {
+            self.overlays.forEach(function(letter) {
                 classesToRemove.push('function-' + letter);
             });
-            TABS.led_strip.directions.forEach(function(letter) {
+            self.directions.forEach(function(letter) {
                 classesToRemove.push('dir-' + letter);
             });
             $(element).removeClass(classesToRemove.join(' '));
@@ -158,7 +151,7 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
         $('.directions').on('click', 'button', function() {
             const that = this;
             if ($('.ui-selected').length > 0) {
-                TABS.led_strip.directions.forEach(function(letter) {
+                self.directions.forEach(function(letter) {
                     if ($(that).is('.dir-' + letter)) {
                         if ($(that).is('.btnOn')) {
                             $(that).removeClass('btnOn');
@@ -293,7 +286,7 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
 
         $('.funcWire').click(function() {
             $(this).toggleClass('btnOn');
-            TABS.led_strip.wireMode = $(this).hasClass('btnOn');
+            self.wireMode = $(this).hasClass('btnOn');
             $('.mainGrid').toggleClass('gridWire');
         });
 
@@ -305,11 +298,13 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
                 }
                 updateBulkCmd();
             });
+            setDirty();
         });
 
         $('.funcWireClear').click(function() {
             $('.gPoint .wire').html('');
             updateBulkCmd();
+            setDirty();
         });
 
         $('.mainGrid').selectable({
@@ -332,7 +327,7 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
                         }
                     }
 
-                    if (TABS.led_strip.wireMode) {
+                    if (self.wireMode) {
                         if ($(this).find('.wire').html() == '' && nextWireNumber < FC.LED_STRIP.length) {
                             $(this).find('.wire').html(nextWireNumber);
                         }
@@ -343,21 +338,21 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
                         that = this;
 
                         // Get function & overlays or current cell
-                        TABS.led_strip.directions.forEach(function(letter) {
+                        self.directions.forEach(function(letter) {
                             const className = '.dir-' + letter;
                             if ($(that).is(className)) {
                                 directionsInSelection.push(className);
                             }
                         });
 
-                        TABS.led_strip.baseFuncs.forEach(function(letter) {
+                        self.baseFuncs.forEach(function(letter) {
                             const className = '.function-' + letter;
                             if ($(that).is(className)) {
                                 functionsInSelection.push(className);
                             }
                         });
 
-                        TABS.led_strip.overlays.forEach(function(letter) {
+                        self.overlays.forEach(function(letter) {
                             const className = '.function-' + letter;
                             if ($(that).is(className)) {
                                 functionsInSelection.push(className);
@@ -369,7 +364,7 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
                 const uiSelectedLast = that;
                 $('select.functionSelect').val("");
 
-                TABS.led_strip.baseFuncs.forEach(function(letter) {
+                self.baseFuncs.forEach(function(letter) {
                     const className = 'function-' + letter;
                     if ($('select.functionSelect').is("." + className)) {
                         $('select.functionSelect').removeClass(className);
@@ -393,7 +388,7 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
                     }
 
                     // set checkbox values
-                    TABS.led_strip.overlays.forEach(function(letter) {
+                    self.overlays.forEach(function(letter) {
                         const feature_o = $('.checkbox').find(`input.function-${letter}`);
 
                         const newVal = ($(uiSelectedLast).is(functionTag + letter));
@@ -405,7 +400,7 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
                     });
 
                     // Update active function in combobox
-                    TABS.led_strip.baseFuncs.forEach(function(letter) {
+                    self.baseFuncs.forEach(function(letter) {
                         if ($(uiSelectedLast).is(functionTag + letter)) {
                             $('select.functionSelect').val("function-" + letter);
                             $('select.functionSelect').addClass("function-" + letter);
@@ -462,7 +457,7 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
 
                         const p = $(this).parent();
 
-                        TABS.led_strip.functions.forEach(function(f) {
+                        self.functions.forEach(function(f) {
                             if (p.is(functionTag + f)) {
 
                                 switch (letter) {
@@ -509,7 +504,7 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
                 const that = $(this).find('input');
                 if ($('.ui-selected').length > 0) {
 
-                    TABS.led_strip.overlays.forEach(function(letter) {
+                    self.overlays.forEach(function(letter) {
                         if ($(that).is(functionTag + letter)) {
                             const ret = toggleSwitch(that, letter);
 
@@ -538,7 +533,6 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
                 // code-triggered event
             }
         });
-
 
 
         $('.mainGrid').disableSelection();
@@ -577,29 +571,6 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
 
         });
 
-        $('a.save').click(function () {
-
-            mspHelper.sendLedStripConfig(send_led_strip_colors);
-
-            function send_led_strip_colors() {
-                mspHelper.sendLedStripColors(send_led_strip_mode_colors);
-            }
-
-            function send_led_strip_mode_colors() {
-                if (semver.gte(FC.CONFIG.apiVersion, "1.19.0"))
-                    mspHelper.sendLedStripModeColors(save_to_eeprom);
-                else
-                    save_to_eeprom();
-            }
-
-            function save_to_eeprom() {
-                MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function() {
-                    GUI.log(i18n.getMessage('ledStripEepromSaved'));
-                });
-            }
-
-        });
-
         colorDefineSliders.hide();
 
         applyFunctionToSelectedLeds();
@@ -613,13 +584,28 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
             $('.mainGrid, .gridSections').css('zoom', gridZoom);
         }
 
+        self.save = function(callback) {
+            save_data(callback);
+        };
+
+        self.revert = function(callback) {
+            callback();
+        };
+
+        $('a.save').click(function () {
+            self.save(() => GUI.tab_switch_reload());
+        });
+
+        $('a.revert').on('click', function() {
+            self.revert(() => GUI.tab_switch_reload());
+        });
+
+        $('.controls').change(function () {
+            setDirty();
+        });
+
         GUI.content_ready(callback);
     }
-
-
-
-
-
 
 
     function findLed(x, y) {
@@ -656,18 +642,18 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
                     colorIndex = match[2];
                 }
 
-                TABS.led_strip.baseFuncs.forEach(function(letter){
+                self.baseFuncs.forEach(function(letter){
                     if ($(that).is(functionTag + letter)) {
                         functions += letter;
                     }
                 });
-                TABS.led_strip.overlays.forEach(function(letter){
+                self.overlays.forEach(function(letter){
                     if ($(that).is(functionTag + letter)) {
                         functions += letter;
                     }
                 });
 
-                TABS.led_strip.directions.forEach(function(letter){
+                self.directions.forEach(function(letter){
                     if ($(that).is('.dir-' + letter)) {
                         directions += letter;
                     }
@@ -710,19 +696,17 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
 
     // refresh mode color buttons
     function setModeBackgroundColor(element) {
-        if (semver.gte(FC.CONFIG.apiVersion, "1.19.0")) {
-            element.find('[class*="mode_color"]').each(function() {
-                let m = 0;
-                let d = 0;
+        element.find('[class*="mode_color"]').each(function() {
+            let m = 0;
+            let d = 0;
 
-                const match = $(this).attr("class").match(/(^|\s)mode_color-([0-9]+)-([0-9]+)(\s|$)/);
-                if (match) {
-                    m = Number(match[2]);
-                    d = Number(match[3]);
-                    $(this).css('background-color', HsvToColor(FC.LED_COLORS[getModeColor(m, d)]));
-                }
-            });
-        }
+            const match = $(this).attr("class").match(/(^|\s)mode_color-([0-9]+)-([0-9]+)(\s|$)/);
+            if (match) {
+                m = Number(match[2]);
+                d = Number(match[3]);
+                $(this).css('background-color', HsvToColor(FC.LED_COLORS[getModeColor(m, d)]));
+            }
+        });
     }
 
     function setBackgroundColor(element) {
@@ -750,45 +734,31 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
     }
 
     function areOverlaysActive(activeFunction) {
-        if (semver.lt(FC.CONFIG.apiVersion, "1.20.0")) {
-            switch (activeFunction) {
-                case "function-c":
-                case "function-a":
-                case "function-f":
-                case "function-g":
-                    return true;
-                default:
-                    break;
-            }
-        } else {
-            switch (activeFunction) {
-                case "":
-                case "function-c":
-                case "function-a":
-                case "function-f":
-                case "function-s":
-                case "function-l":
-                case "function-r":
-                case "function-o":
-                case "function-g":
-                    return true;
-                default:
-                    break;
-            }
+        switch (activeFunction) {
+            case "":
+            case "function-c":
+            case "function-a":
+            case "function-f":
+            case "function-s":
+            case "function-l":
+            case "function-r":
+            case "function-o":
+            case "function-g":
+                return true;
+            default:
+                break;
         }
         return false;
     }
 
     function areBlinkersActive(activeFunction) {
-        if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
-            switch (activeFunction) {
-                case "function-c":
-                case "function-a":
-                case "function-f":
-                    return true;
-                default:
-                    break;
-            }
+        switch (activeFunction) {
+            case "function-c":
+            case "function-a":
+            case "function-f":
+                return true;
+            default:
+                break;
         }
         return false;
     }
@@ -801,9 +771,6 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
                 return false;
             case "function-r":
             case "function-b":
-                if (semver.lt(FC.CONFIG.apiVersion, "1.20.0")) {
-                    return false;
-                }
                 break;
             default:
                 return true;
@@ -811,16 +778,14 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
     }
 
     function isVtxActive(activeFunction) {
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-            switch (activeFunction) {
-                case "function-v":
-                case "function-c":
-                case "function-a":
-                case "function-f":
-                    return true;
-                default:
-                    return false;
-            }
+        switch (activeFunction) {
+            case "function-v":
+            case "function-c":
+            case "function-a":
+            case "function-f":
+                return true;
+            default:
+                return false;
         }
     }
 
@@ -829,23 +794,11 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
         const activeFunction = $('select.functionSelect').val();
         $('select.functionSelect').addClass(activeFunction);
 
-
-        if (semver.lte(FC.CONFIG.apiVersion, "1.18.0")) {
-            // <= 18
-            // Hide GPS (Func)
-            // Hide RSSI (O/L), Blink (Func)
-            // Hide Battery, RSSI (Func), Larson (O/L), Blink (O/L), Landing (O/L)
-            $(".extra_functions20").hide();
-            $(".mode_colors").hide();
-        } else {
-            // >= 20
-            // Show GPS (Func)
-            // Hide RSSI (O/L), Blink (Func)
-            // Show Battery, RSSI (Func), Larson (O/L), Blink (O/L), Landing (O/L)
-            $(".extra_functions20").show();
-            $(".mode_colors").show();
-        }
-
+        // Show GPS (Func)
+        // Hide RSSI (O/L), Blink (Func)
+        // Show Battery, RSSI (Func), Larson (O/L), Blink (O/L), Landing (O/L)
+        $(".extra_functions20").show();
+        $(".mode_colors").show();
 
         // set color modifiers (check-boxes) visibility
         $('.overlays').hide();
@@ -869,73 +822,54 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
         if (isVtxActive(activeFunction))
             $('.vtxOverlay').show();
 
-        // set directions visibility
-        if (semver.lt(FC.CONFIG.apiVersion, "1.20.0")) {
-            switch (activeFunction) {
-                case "function-r":
-                    $('.indicatorOverlay').hide();
-                    $('.directions').hide();
-                    break;
-                default:
-                    $('.indicatorOverlay').show();
-                    $('.directions').show();
-                    break;
-            }
+        $('.mode_colors').hide();
+        // set mode colors visibility
+        if (activeFunction === "function-f") {
+            $('.mode_colors').show();
         }
 
-        $('.mode_colors').hide();
-        if (semver.gte(FC.CONFIG.apiVersion, "1.19.0")) {
-            // set mode colors visibility
+        // set special colors visibility
+        $('.special_colors').show();
+        $('.mode_color-6-0').hide();
+        $('.mode_color-6-1').hide();
+        $('.mode_color-6-2').hide();
+        $('.mode_color-6-3').hide();
+        $('.mode_color-6-4').hide();
+        $('.mode_color-6-5').hide();
+        $('.mode_color-6-6').hide();
+        $('.mode_color-6-7').hide();
 
-            if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
-                if (activeFunction === "function-f") {
-                    $('.mode_colors').show();
-                }
-            }
-
-            // set special colors visibility
-            $('.special_colors').show();
-            $('.mode_color-6-0').hide();
-            $('.mode_color-6-1').hide();
-            $('.mode_color-6-2').hide();
-            $('.mode_color-6-3').hide();
-            $('.mode_color-6-4').hide();
-            $('.mode_color-6-5').hide();
-            $('.mode_color-6-6').hide();
-            $('.mode_color-6-7').hide();
-
-            switch (activeFunction) {
-                case "":           // none
-                case "function-f": // Modes & Orientation
-                case "function-l": // Battery
-                    // $('.mode_color-6-3').show(); // background
-                    $('.special_colors').hide();
-                    break;
-                case "function-g": // GPS
-                    $('.mode_color-6-5').show(); // no sats
-                    $('.mode_color-6-6').show(); // no lock
-                    $('.mode_color-6-7').show(); // locked
-                    // $('.mode_color-6-3').show(); // background
-                    break;
-                case "function-b": // Blink
-                    $('.mode_color-6-4').show(); // blink background
-                    break;
-                case "function-a": // Arm state
-                    $('.mode_color-6-0').show(); // disarmed
-                    $('.mode_color-6-1').show(); // armed
-                    break;
-
-                case "function-r": // Ring
-                default:
-                    $('.special_colors').hide();
+        switch (activeFunction) {
+            case "":           // none
+            case "function-f": // Modes & Orientation
+            case "function-l": // Battery
+                // $('.mode_color-6-3').show(); // background
+                $('.special_colors').hide();
                 break;
-            }
+            case "function-g": // GPS
+                $('.mode_color-6-5').show(); // no sats
+                $('.mode_color-6-6').show(); // no lock
+                $('.mode_color-6-7').show(); // locked
+                // $('.mode_color-6-3').show(); // background
+                break;
+            case "function-b": // Blink
+                $('.mode_color-6-4').show(); // blink background
+                break;
+            case "function-a": // Arm state
+                $('.mode_color-6-0').show(); // disarmed
+                $('.mode_color-6-1').show(); // armed
+                break;
+
+            case "function-r": // Ring
+            default:
+                $('.special_colors').hide();
+            break;
         }
     }
 
     function applyFunctionToSelectedLeds() {
         const activeFunction = $('select.functionSelect').val();
-        TABS.led_strip.baseFuncs.forEach(function(letter) {
+        self.baseFuncs.forEach(function(letter) {
 
             if (activeFunction == 'function-' + letter) {
                 $('select.functionSelect').addClass('function-' + letter);
@@ -960,32 +894,19 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
     }
 
     function unselectOverlays(letter) {
-        if (semver.lt(FC.CONFIG.apiVersion, "1.20.0")) {
-            if (letter == 'b' || letter == 'r') {
-                unselectOverlay(letter, 'i');
-            }
-            if (letter == 'b' || letter == 'r' || letter == 'l' || letter == 'g') {
-                unselectOverlay(letter, 'w');
-                unselectOverlay(letter, 'v');
-                unselectOverlay(letter, 't');
-                unselectOverlay(letter, 's');
-            }
-        } else {
-            // MSP 1.20
-            if (letter == 'r' || letter == '') {
-                unselectOverlay(letter, 'o');
-                unselectOverlay(letter, 'b');
-                unselectOverlay(letter, 'n');
-                unselectOverlay(letter, 't');
-            }
-            if (letter == 'l' || letter == 'g' || letter == 's') {
-                unselectOverlay(letter, 'w');
-                unselectOverlay(letter, 'v');
-                unselectOverlay(letter, 't');
-                unselectOverlay(letter, 'o');
-                unselectOverlay(letter, 'b');
-                unselectOverlay(letter, 'n');
-            }
+        if (letter == 'r' || letter == '') {
+            unselectOverlay(letter, 'o');
+            unselectOverlay(letter, 'b');
+            unselectOverlay(letter, 'n');
+            unselectOverlay(letter, 't');
+        }
+        if (letter == 'l' || letter == 'g' || letter == 's') {
+            unselectOverlay(letter, 'w');
+            unselectOverlay(letter, 'v');
+            unselectOverlay(letter, 't');
+            unselectOverlay(letter, 'o');
+            unselectOverlay(letter, 'b');
+            unselectOverlay(letter, 'n');
         }
     }
 
@@ -1030,7 +951,6 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
                     break;
             }
         }
-
 
         // refresh color buttons
         $('.colors').children().each(function() { setBackgroundColor($(this)); });
@@ -1147,5 +1067,7 @@ TABS.led_strip.initialize = function (callback, scrollPosition) {
 };
 
 TABS.led_strip.cleanup = function (callback) {
+    this.isDirty = false;
+
     if (callback) callback();
 };
