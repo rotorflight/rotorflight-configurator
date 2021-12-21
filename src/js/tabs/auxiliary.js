@@ -1,27 +1,51 @@
 'use strict';
 
 TABS.auxiliary = {
+    isDirty: false,
     PRIMARY_CHANNEL_COUNT: 5,
 };
 
 TABS.auxiliary.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab != 'auxiliary') {
+    if (GUI.active_tab !== 'auxiliary') {
         GUI.active_tab = 'auxiliary';
     }
 
-    MSP.promise(MSPCodes.MSP_STATUS)
-        .then(() => MSP.promise(MSPCodes.MSP_MODE_RANGES))
-        .then(() => MSP.promise(MSPCodes.MSP_MODE_RANGES_EXTRA))
-        .then(() => MSP.promise(MSPCodes.MSP_BOXNAMES))
-        .then(() => MSP.promise(MSPCodes.MSP_BOXIDS))
-        .then(() => MSP.promise(MSPCodes.MSP_RSSI_CONFIG))
-        .then(() => MSP.promise(MSPCodes.MSP_RC))
-        .then(() => mspHelper.loadSerialConfig(load_html));
+    load_data(load_html);
 
     function load_html() {
         $('#content').load("./tabs/auxiliary.html", process_html);
+    }
+
+    function load_data(callback) {
+        Promise.resolve(true)
+            .then(() => MSP.promise(MSPCodes.MSP_STATUS))
+            .then(() => MSP.promise(MSPCodes.MSP_RC))
+            .then(() => MSP.promise(MSPCodes.MSP_BOXIDS))
+            .then(() => MSP.promise(MSPCodes.MSP_BOXNAMES))
+            .then(() => MSP.promise(MSPCodes.MSP_RSSI_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_MODE_RANGES))
+            .then(() => MSP.promise(MSPCodes.MSP_MODE_RANGES_EXTRA))
+            .then(() => mspHelper.loadSerialConfig(callback));
+    }
+
+    function save_data(callback) {
+        mspHelper.sendModeRanges(eeprom_write);
+
+        function eeprom_write() {
+            MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
+                GUI.log(i18n.getMessage('eepromSaved'));
+                if (callback) callback();
+            });
+        }
+    }
+
+    function setDirty() {
+        if (!self.isDirty) {
+            self.isDirty = true;
+            $('.tab-auxiliary').removeClass('toolbar_hidden');
+        }
     }
 
     function createMode(modeIndex, modeId) {
@@ -43,7 +67,7 @@ TABS.auxiliary.initialize = function (callback) {
         $(newMode).find('a.addLink').data('modeElement', newMode);
 
         // hide link button for ARM
-        if (modeId == 0 || semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
+        if (modeId == 0) {
             $(newMode).find('.addLink').hide();
         }
 
@@ -61,12 +85,11 @@ TABS.auxiliary.initialize = function (callback) {
         logicOption.val(0);
         logicList.append(logicOption);
 
-        if(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)){
-            logicOption = logicOptionTemplate.clone();
-            logicOption.text(i18n.getMessage('auxiliaryModeLogicAND'));
-            logicOption.val(1);
-            logicList.append(logicOption);
-        }
+        logicOption = logicOptionTemplate.clone();
+        logicOption.text(i18n.getMessage('auxiliaryModeLogicAND'));
+        logicOption.val(1);
+        logicList.append(logicOption);
+
         logicOptionTemplate.val(0);
     }
 
@@ -187,6 +210,8 @@ TABS.auxiliary.initialize = function (callback) {
             if (siblings.length == 1) {
                 siblings.eq(0).find('.logic').hide();
             }
+
+            setDirty();
         });
 
         $(rangeElement).find('.channel').val(auxChannelIndex);
@@ -228,19 +253,101 @@ TABS.auxiliary.initialize = function (callback) {
             if (siblings.length == 1) {
                 siblings.eq(0).find('.logic').hide();
             }
+
+            setDirty();
         });
 
         $(linkElement).find('.linkedTo').val(linkedTo);
         $(linkElement).find('.logic').val(modeLogic);
     }
 
-    function process_html() {
-        let auxChannelCount = FC.RC.active_channels - self.PRIMARY_CHANNEL_COUNT;
+    function formToData() {
+
+        // we must send this many back to the FC - overwrite all of the old ones to be sure.
+        const requiredModesRangeCount = FC.MODE_RANGES.length;
+
+        FC.MODE_RANGES = [];
+        FC.MODE_RANGES_EXTRA = [];
+
+        $('.tab-auxiliary .modes .mode').each(function () {
+            const modeElement = $(this);
+            const modeId = modeElement.data('id');
+
+            $(modeElement).find('.range').each(function() {
+                const rangeValues = $(this).find('.channel-slider').val();
+                const modeRange = {
+                    id: modeId,
+                    auxChannelIndex: parseInt($(this).find('.channel').val()),
+                    range: {
+                        start: rangeValues[0],
+                        end: rangeValues[1]
+                    }
+                };
+                FC.MODE_RANGES.push(modeRange);
+
+                const modeRangeExtra = {
+                    id: modeId,
+                    modeLogic: parseInt($(this).find('.logic').val()),
+                    linkedTo: 0
+                };
+                FC.MODE_RANGES_EXTRA.push(modeRangeExtra);
+            });
+
+            $(modeElement).find('.link').each(function() {
+                const linkedToSelection = parseInt($(this).find('.linkedTo').val());
+
+                if (linkedToSelection == 0) {
+                    $(this).remove();
+                } else {
+                    const modeRange = {
+                        id: modeId,
+                        auxChannelIndex: 0,
+                        range: {
+                            start: 900,
+                            end: 900
+                        }
+                    };
+                    FC.MODE_RANGES.push(modeRange);
+
+                    const modeRangeExtra = {
+                        id: modeId,
+                        modeLogic: parseInt($(this).find('.logic').val()),
+                        linkedTo: linkedToSelection
+                    };
+                    FC.MODE_RANGES_EXTRA.push(modeRangeExtra);
+                }
+            });
+        });
+
+        for (let modeRangeIndex = FC.MODE_RANGES.length; modeRangeIndex < requiredModesRangeCount; modeRangeIndex++) {
+            const defaultModeRange = {
+                id: 0,
+                auxChannelIndex: 0,
+                range: {
+                    start: 900,
+                    end: 900
+                }
+            };
+            FC.MODE_RANGES.push(defaultModeRange);
+
+            const defaultModeRangeExtra = {
+                id: 0,
+                modeLogic: 0,
+                linkedTo: 0
+            };
+            FC.MODE_RANGES_EXTRA.push(defaultModeRangeExtra);
+        }
+    }
+
+    function dataToForm() {
+
+        const auxChannelCount = FC.RC.active_channels - self.PRIMARY_CHANNEL_COUNT;
 
         configureRangeTemplate(auxChannelCount);
         configureLinkTemplate();
 
         const modeTableBodyElement = $('.tab-auxiliary .modes');
+
         for (let modeIndex = 0; modeIndex < FC.AUX_CONFIG.length; modeIndex++) {
 
             const modeId = FC.AUX_CONFIG_IDS[modeIndex];
@@ -251,15 +358,7 @@ TABS.auxiliary.initialize = function (callback) {
             // skip linked modes for now
             for (let modeRangeIndex = 0; modeRangeIndex < FC.MODE_RANGES.length; modeRangeIndex++) {
                 const modeRange = FC.MODE_RANGES[modeRangeIndex];
-
-                let modeRangeExtra = {
-                    id: modeRange.id,
-                    modeLogic: 0,
-                    linkedTo: 0
-                };
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                    modeRangeExtra = FC.MODE_RANGES_EXTRA[modeRangeIndex];
-                }
+                const modeRangeExtra = FC.MODE_RANGES_EXTRA[modeRangeIndex];
 
                 if (modeRange.id != modeId || modeRangeExtra.id != modeId) {
                     continue;
@@ -280,115 +379,37 @@ TABS.auxiliary.initialize = function (callback) {
         }
 
         const length = Math.max(...(FC.AUX_CONFIG.map(el => el.length)));
+
         $('.tab-auxiliary .mode .info').css('min-width', `${Math.round(length * getTextWidth('A'))}px`);
+
+    }
+
+    function process_html() {
+
+        // translate to user-selected language
+        i18n.localizePage();
+
+        // UI Hooks
+        dataToForm();
+
+        // Hide the buttons toolbar
+        $('.tab-auxiliary').addClass('toolbar_hidden');
+
+        self.isDirty = false;
 
         $('a.addRange').click(function () {
             const modeElement = $(this).data('modeElement');
             // auto select AUTO option; default to 'OR' logic
             addRangeToMode(modeElement, -1, 0);
+            setDirty();
         });
 
         $('a.addLink').click(function () {
             const modeElement = $(this).data('modeElement');
             // default to 'OR' logic and no link selected
             addLinkedToMode(modeElement, 0, 0);
+            setDirty();
         });
-
-        // translate to user-selected language
-        i18n.localizePage();
-
-        // UI Hooks
-        $('a.save').click(function () {
-
-            // update internal data structures based on current UI elements
-
-            // we must send this many back to the FC - overwrite all of the old ones to be sure.
-            const requiredModesRangeCount = FC.MODE_RANGES.length;
-
-            FC.MODE_RANGES = [];
-            FC.MODE_RANGES_EXTRA = [];
-
-            $('.tab-auxiliary .modes .mode').each(function () {
-                const modeElement = $(this);
-                const modeId = modeElement.data('id');
-
-                $(modeElement).find('.range').each(function() {
-                    const rangeValues = $(this).find('.channel-slider').val();
-                    const modeRange = {
-                        id: modeId,
-                        auxChannelIndex: parseInt($(this).find('.channel').val()),
-                        range: {
-                            start: rangeValues[0],
-                            end: rangeValues[1]
-                        }
-                    };
-                    FC.MODE_RANGES.push(modeRange);
-
-                    const modeRangeExtra = {
-                        id: modeId,
-                        modeLogic: parseInt($(this).find('.logic').val()),
-                        linkedTo: 0
-                    };
-                    FC.MODE_RANGES_EXTRA.push(modeRangeExtra);
-                });
-
-                $(modeElement).find('.link').each(function() {
-                    const linkedToSelection = parseInt($(this).find('.linkedTo').val());
-
-                    if (linkedToSelection == 0) {
-                        $(this).remove();
-                    } else {
-                        const modeRange = {
-                            id: modeId,
-                            auxChannelIndex: 0,
-                            range: {
-                                start: 900,
-                                end: 900
-                            }
-                        };
-                        FC.MODE_RANGES.push(modeRange);
-
-                        const modeRangeExtra = {
-                            id: modeId,
-                            modeLogic: parseInt($(this).find('.logic').val()),
-                            linkedTo: linkedToSelection
-                        };
-                        FC.MODE_RANGES_EXTRA.push(modeRangeExtra);
-                    }
-                });
-            });
-
-            for (let modeRangeIndex = FC.MODE_RANGES.length; modeRangeIndex < requiredModesRangeCount; modeRangeIndex++) {
-                const defaultModeRange = {
-                    id: 0,
-                    auxChannelIndex: 0,
-                    range: {
-                        start: 900,
-                        end: 900
-                    }
-                };
-                FC.MODE_RANGES.push(defaultModeRange);
-
-                const defaultModeRangeExtra = {
-                    id: 0,
-                    modeLogic: 0,
-                    linkedTo: 0
-                };
-                FC.MODE_RANGES_EXTRA.push(defaultModeRangeExtra);
-            }
-
-            //
-            // send data to FC
-            //
-            mspHelper.sendModeRanges(save_to_eeprom);
-
-            function save_to_eeprom() {
-                MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
-                    GUI.log(i18n.getMessage('auxiliaryEepromSaved'));
-                });
-            }
-        });
-
 
         function limit_channel(channelPosition) {
             if (channelPosition < 900) {
@@ -435,13 +456,11 @@ TABS.auxiliary.initialize = function (callback) {
                     if (i == 0) {
                         let armSwitchActive = false;
 
-                        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                            if (FC.CONFIG.armingDisableCount > 0) {
-                                // check the highest bit of the armingDisableFlags. This will be the ARMING_DISABLED_ARMSWITCH flag.
-                                const armSwitchMask = 1 << (FC.CONFIG.armingDisableCount - 1);
-                                if ((FC.CONFIG.armingDisableFlags & armSwitchMask) > 0) {
-                                    armSwitchActive = true;
-                                }
+                        if (FC.CONFIG.armingDisableCount > 0) {
+                            // check the highest bit of the armingDisableFlags. This will be the ARMING_DISABLED_ARMSWITCH flag.
+                            const armSwitchMask = 1 << (FC.CONFIG.armingDisableCount - 1);
+                            if ((FC.CONFIG.armingDisableFlags & armSwitchMask) > 0) {
+                                armSwitchActive = true;
                             }
                         }
 
@@ -472,7 +491,7 @@ TABS.auxiliary.initialize = function (callback) {
 
             auto_select_channel();
 
-            auxChannelCount = FC.RC.active_channels - self.PRIMARY_CHANNEL_COUNT;
+            const auxChannelCount = FC.RC.active_channels - self.PRIMARY_CHANNEL_COUNT;
             for (let i = 0; i < auxChannelCount; i++) {
                 update_marker(i, limit_channel(FC.RC.channels[i + self.PRIMARY_CHANNEL_COUNT]));
             }
@@ -519,6 +538,27 @@ TABS.auxiliary.initialize = function (callback) {
                 .change();
         });
 
+        self.save = function (callback) {
+            formToData();
+            save_data(callback);
+        };
+
+        self.revert = function (callback) {
+            callback();
+        };
+
+        $('a.save').click(function () {
+            self.save(() => GUI.tab_switch_reload());
+        });
+
+        $('a.revert').click(function () {
+            self.revert(() => GUI.tab_switch_reload());
+        });
+
+        $('.modes').change(function () {
+            setDirty();
+        });
+
         // update ui instantly on first load
         update_ui();
 
@@ -537,5 +577,8 @@ TABS.auxiliary.initialize = function (callback) {
 };
 
 TABS.auxiliary.cleanup = function (callback) {
+    this.isDirty = false;
+
     if (callback) callback();
 };
+

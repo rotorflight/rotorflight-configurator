@@ -2225,12 +2225,6 @@
     "auxiliaryAddLink": {
         "message": "Add Link"
     },
-    "auxiliaryButtonSave": {
-        "message": "Save"
-    },
-    "auxiliaryEepromSaved": {
-        "message": "EEPROM <span class=\"message-positive\">saved</span>"
-    },
     "auxiliaryAutoChannelSelect": {
       "message": "AUTO"
     },
