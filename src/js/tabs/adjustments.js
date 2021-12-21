@@ -1,8 +1,11 @@
 'use strict';
 
 TABS.adjustments = {
+    isDirty: false,
+
     PRIMARY_CHANNEL_COUNT: 5,
-    FUNCTIONS_1_43: [
+
+    FUNCTIONS: [
         'None',
         'PitchRate',
         'RollRate',
@@ -54,19 +57,42 @@ TABS.adjustments = {
 TABS.adjustments.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab != 'adjustments') {
+    if (GUI.active_tab !== 'adjustments') {
         GUI.active_tab = 'adjustments';
     }
 
-    MSP.promise(MSPCodes.MSP_STATUS)
-        .then(() => MSP.promise(MSPCodes.MSP_ADJUSTMENT_RANGES))
-        .then(() => MSP.promise(MSPCodes.MSP_BOXNAMES))
-        .then(() => MSP.promise(MSPCodes.MSP_BOXIDS))
-        .then(() => MSP.promise(MSPCodes.MSP_RC))
-        .then(() => load_html());
+    load_data(load_html);
 
     function load_html() {
         $('#content').load("./tabs/adjustments.html", process_html);
+    }
+
+    function load_data(callback) {
+        Promise.resolve(true)
+            .then(() => MSP.promise(MSPCodes.MSP_STATUS))
+            .then(() => MSP.promise(MSPCodes.MSP_RC))
+            .then(() => MSP.promise(MSPCodes.MSP_BOXIDS))
+            .then(() => MSP.promise(MSPCodes.MSP_BOXNAMES))
+            .then(() => MSP.promise(MSPCodes.MSP_ADJUSTMENT_RANGES))
+            .then(callback);
+    }
+
+    function save_data(callback) {
+        mspHelper.sendAdjustmentRanges(eeprom_write);
+
+        function eeprom_write() {
+            MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
+                GUI.log(i18n.getMessage('eepromSaved'));
+                if (callback) callback();
+            });
+        }
+    }
+
+    function setDirty() {
+        if (!self.isDirty) {
+            self.isDirty = true;
+            $('.tab-adjustments').removeClass('toolbar_hidden');
+        }
     }
 
     function addAdjustment(adjustmentIndex, adjustmentRange, auxChannelCount) {
@@ -199,88 +225,81 @@ TABS.adjustments.initialize = function (callback) {
         return newAdjustment;
     }
 
-    function process_html() {
+    function formToData() {
+
+        const totalAdjustmentRangeCount = FC.ADJUSTMENT_RANGES.length;
+
+        FC.ADJUSTMENT_RANGES = [];
+
+        const defaultAdjustmentRange = {
+            enaChannel: 0,
+            enaRange: {
+                start: 900,
+                end: 900,
+            },
+            adjFunction: 0,
+            adjChannel: 0,
+            adjStep: 0,
+            adjMin: 0,
+            adjMax: 0,
+        };
+
+        $('.tab-adjustments .adjustments .adjustment').each(function () {
+            const adjustmentElement = $(this);
+
+            if ($(adjustmentElement).find('.enable').prop("checked")) {
+                const rangeValues = $(this).find('.range .channel-slider').val();
+                const adjustmentRange = {
+                    enaChannel: parseInt($(this).find('.channelInfo .channel').val()),
+                    enaRange: {
+                        start: rangeValues[0],
+                        end: rangeValues[1],
+                    },
+                    adjFunction: parseInt($(this).find('.functionSelection select').val()),
+                    adjChannel: parseInt($(this).find('.functionChannel select').val()),
+                    adjStep: parseInt($(this).find('.functionStepSize input').val()),
+                    adjMin: parseInt($(this).find('.functionMinValue input').val()),
+                    adjMax: parseInt($(this).find('.functionMaxValue input').val()),
+                };
+                FC.ADJUSTMENT_RANGES.push(adjustmentRange);
+            } else {
+                FC.ADJUSTMENT_RANGES.push(defaultAdjustmentRange);
+            }
+        });
+
+        for (let index = FC.ADJUSTMENT_RANGES.length; index < totalAdjustmentRangeCount; index++) {
+            FC.ADJUSTMENT_RANGES.push(defaultAdjustmentRange);
+        }
+    }
+
+    function dataToForm() {
+        const functions = self.FUNCTIONS;
 
         const selectFunction = $('#functionSelectionSelect');
-        let functions = [];
-
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-            functions = self.FUNCTIONS_1_43;
-        }
         functions.forEach(function(value, key) {
             selectFunction.append(new Option(i18n.getMessage('adjustmentsFunction' + value), key));
         });
 
-        let auxChannelCount = FC.RC.active_channels - self.PRIMARY_CHANNEL_COUNT;
+        const auxChannelCount = FC.RC.active_channels - self.PRIMARY_CHANNEL_COUNT;
         const modeTableBodyElement = $('.tab-adjustments .adjustments tbody');
         for (let index = 0; index < FC.ADJUSTMENT_RANGES.length; index++) {
             const newAdjustment = addAdjustment(index, FC.ADJUSTMENT_RANGES[index], auxChannelCount);
             modeTableBodyElement.append(newAdjustment);
         }
+    }
+
+    function process_html() {
 
         // translate to user-selected language
         i18n.localizePage();
 
         // UI Hooks
-        $('a.save').click(function () {
+        dataToForm();
 
-            // update internal data structures based on current UI elements
-            const totalAdjustmentRangeCount = FC.ADJUSTMENT_RANGES.length;
+        // Hide the buttons toolbar
+        $('.tab-adjustments').addClass('toolbar_hidden');
 
-            FC.ADJUSTMENT_RANGES = [];
-
-            const defaultAdjustmentRange = {
-                enaChannel: 0,
-                enaRange: {
-                    start: 900,
-                    end: 900,
-                },
-                adjFunction: 0,
-                adjChannel: 0,
-                adjStep: 0,
-                adjMin: 0,
-                adjMax: 0,
-            };
-
-            $('.tab-adjustments .adjustments .adjustment').each(function () {
-                const adjustmentElement = $(this);
-
-                if ($(adjustmentElement).find('.enable').prop("checked")) {
-                    const rangeValues = $(this).find('.range .channel-slider').val();
-                    const adjustmentRange = {
-                        enaChannel: parseInt($(this).find('.channelInfo .channel').val()),
-                        enaRange: {
-                            start: rangeValues[0],
-                            end: rangeValues[1],
-                        },
-                        adjFunction: parseInt($(this).find('.functionSelection select').val()),
-                        adjChannel: parseInt($(this).find('.functionChannel select').val()),
-                        adjStep: parseInt($(this).find('.functionStepSize input').val()),
-                        adjMin: parseInt($(this).find('.functionMinValue input').val()),
-                        adjMax: parseInt($(this).find('.functionMaxValue input').val()),
-                    };
-                    FC.ADJUSTMENT_RANGES.push(adjustmentRange);
-                } else {
-                    FC.ADJUSTMENT_RANGES.push(defaultAdjustmentRange);
-                }
-            });
-
-            for (let index = FC.ADJUSTMENT_RANGES.length; index < totalAdjustmentRangeCount; index++) {
-                FC.ADJUSTMENT_RANGES.push(defaultAdjustmentRange);
-            }
-
-            //
-            // send data to FC
-            //
-            mspHelper.sendAdjustmentRanges(save_to_eeprom);
-
-            function save_to_eeprom() {
-                MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
-                    GUI.log(i18n.getMessage('adjustmentsEepromSaved'));
-                });
-            }
-
-        });
+        self.isDirty = false;
 
         function update_marker(auxChannelIndex, channelPosition) {
             if (channelPosition < 900) {
@@ -340,6 +359,30 @@ TABS.adjustments.initialize = function (callback) {
             }
         }
 
+        self.save = function (callback) {
+            formToData();
+            save_data(callback);
+        };
+
+        self.revert = function (callback) {
+            callback();
+        };
+
+        $('a.save').click(function () {
+            self.save(() => GUI.tab_switch_reload());
+        });
+
+        $('a.revert').click(function () {
+            self.revert(() => GUI.tab_switch_reload());
+        });
+
+        $('.content_wrapper').change(function () {
+            setDirty();
+        });
+
+        // update ui instantly on first load
+        update_ui();
+
         // enable data pulling
         GUI.interval_add('rc_pull', function () {
             MSP.send_message(MSPCodes.MSP_RC, false, false, update_ui);
@@ -355,6 +398,7 @@ TABS.adjustments.initialize = function (callback) {
 };
 
 TABS.adjustments.cleanup = function (callback) {
+    this.isDirty = false;
+
     if (callback) callback();
 };
-
