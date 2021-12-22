@@ -944,6 +944,25 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.FILTER_CONFIG.dyn_notch_max_hz = data.readU16();
                 break;
 
+            case MSPCodes.MSP_RPM_FILTER_CONFIG:
+                FC.RPM_FILTER_CONFIG = [];
+                if (data.byteLength % 9 == 0) {
+                    for (let i=0; i<data.byteLength; i+=9) {
+                        FC.RPM_FILTER_CONFIG.push({
+                            'motor_index' : data.readU8(),
+                            'gear_ratio'  : data.readU16(),
+                            'notch_q'     : data.readU16(),
+                            'min_hz'      : data.readU16(),
+                            'max_hz'      : data.readU16(),
+                        });
+                    }
+                }
+                break;
+
+            case MSPCodes.MSP_SET_RPM_FILTER:
+                console.log("RPM Filter settings saved");
+                break;
+
             case MSPCodes.MSP_SET_PID_ADVANCED:
                 console.log("Advanced PID settings saved");
                 break;
@@ -2084,6 +2103,36 @@ MspHelper.prototype.dataflashRead = function(address, blockSize, onDataCallback)
             onDataCallback(address, null);  // returning null to the callback forces a retry
         }
     }, true);
+};
+
+MspHelper.prototype.sendRPMFilter = function(filterIndex, onCompleteCallback)
+{
+    const CONFIG = FC.RPM_FILTER_CONFIG[filterIndex];
+    const buffer = [];
+
+    buffer.push8(filterIndex)
+          .push8(CONFIG.motor_index)
+          .push16(CONFIG.gear_ratio)
+          .push16(CONFIG.notch_q)
+          .push16(CONFIG.min_hz)
+          .push16(CONFIG.max_hz);
+
+    MSP.send_message(MSPCodes.MSP_SET_RPM_FILTER, buffer, false, onCompleteCallback);
+};
+
+MspHelper.prototype.sendRPMFilters = function(onCompleteCallback)
+{
+    const self = this;
+    var index = 0;
+
+    function send_next() {
+        if (index < FC.RPM_FILTER_CONFIG.length)
+            self.sendRPMFilter(index++, send_next);
+        else
+            if (onCompleteCallback) onCompleteCallback();
+    }
+
+    send_next();
 };
 
 MspHelper.prototype.sendMotorOverride = function(motorIndex, onCompleteCallback)

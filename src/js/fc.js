@@ -116,6 +116,7 @@ const FC = {
     FC_CONFIG: null,
     FEATURE_CONFIG: null,
     FILTER_CONFIG: null,
+    RPM_FILTER_CONFIG: null,
     GOVERNOR: null,
     GPS_CONFIG: null,
     GPS_DATA: null,
@@ -468,6 +469,8 @@ const FC = {
             dyn_notch_min_hz:           0,
             dyn_notch_max_hz:           0,
         };
+
+        this.RPM_FILTER_CONFIG = [];
 
         this.PID_PROFILE = {
             rollPitchItermIgnoreRate:   0,
