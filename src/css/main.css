@@ -1570,6 +1570,28 @@ dialog {
     border: 1px solid silver;
 }
 
+.dialogTabExit {
+    width: 40em;
+    border-radius: 5px;
+}
+
+.dialogTabExit .content {
+    margin-top: 12px;
+}
+
+.dialogTabExit .buttons {
+    position: static;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+@media all and (max-width: 575px) {
+    .dialogTabExit {
+        width: calc(100% - 2em);
+        border-radius: unset;
+    }
+}
+
 dialog .dialog_toolbar .btn a {
     /*  common styles for content toolbar buttons */
     margin-top: 0;

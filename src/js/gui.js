@@ -287,17 +287,41 @@ GuiControl.prototype.log = function (message) {
     commandLog.scrollTop($('div.wrapper', commandLog).height());
 };
 
-// Method is called every time a valid tab change event is received
-// callback = code to run when cleanup is finished
-// default switch doesn't require callback to be set
+GuiControl.prototype.tab_switch_allowed = function (callback) {
+    if (this.active_tab && TABS[this.active_tab]) {
+        if (TABS[this.active_tab].exit) {
+            TABS[this.active_tab].exit(callback);
+        }
+        else if (TABS[this.active_tab].isDirty) {
+            showTabExitDialog(TABS[this.active_tab], callback);
+        }
+        else {
+            if (callback) callback();
+        }
+    }
+    else {
+        if (callback) callback();
+    }
+};
+
+GuiControl.prototype.tab_switch_reload = function (callback) {
+    MSP.callbacks_cleanup();
+    this.interval_kill_all();
+
+    if (this.active_tab && TABS[this.active_tab]) {
+        TABS[this.active_tab].cleanup();
+        TABS[this.active_tab].initialize(callback);
+    }
+};
+
 GuiControl.prototype.tab_switch_cleanup = function (callback) {
-    MSP.callbacks_cleanup(); // we don't care about any old data that might or might not arrive
-    this.interval_kill_all(); // all intervals (mostly data pulling) needs to be removed on tab switch
+    MSP.callbacks_cleanup();
+    this.interval_kill_all();
 
     if (this.active_tab && TABS[this.active_tab]) {
         TABS[this.active_tab].cleanup(callback);
     } else {
-        callback();
+        if (callback) callback();
     }
 };
 

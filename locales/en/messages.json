@@ -89,6 +89,21 @@
     "eepromSaved": {
         "message": "EEPROM <span class=\"message-positive\">saved</span>"
     },
+    "dialogTabExitTitle" :{
+        "message": "Unsaved Changes"
+    },
+    "dialogTabExitNote" :{
+        "message": "There are <span class=\"message-negative\">unsaved changes</span> in the current Tab."
+    },
+    "dialogTabExitSave" :{
+        "message": "Save Changes"
+    },
+    "dialogTabExitRevert" :{
+        "message": "Ignore Changes"
+    },
+    "dialogTabExitCancel" :{
+        "message": "Go Back"
+    },
     "autoConnectEnabled": {
         "message": "Auto-Connect: Enabled - Configurator automatically tries to connect when new port is detected"
     },
