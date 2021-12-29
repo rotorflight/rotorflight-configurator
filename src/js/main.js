@@ -245,164 +245,165 @@ function startProcess() {
         if ($(this).parent().hasClass('active') === false && !GUI.tab_switch_in_progress) { // only initialize when the tab isn't already active
             const self = this;
             const tabClass = $(self).parent().prop('class');
-
             const tabRequiresConnection = $(self).parent().hasClass('mode-connected');
 
             const tab = tabClass.substring(4);
             const tabName = $(self).text();
-
-            if (tabRequiresConnection && !CONFIGURATOR.connectionValid) {
-                GUI.log(i18n.getMessage('tabSwitchConnectionRequired'));
-                return;
-            }
 
             if (GUI.connect_lock) { // tab switching disabled while operation is in progress
                 GUI.log(i18n.getMessage('tabSwitchWaitForOperation'));
                 return;
             }
 
-            if (GUI.allowedTabs.indexOf(tab) < 0 && tabName === "Firmware Flasher") {
-                if (GUI.connected_to || GUI.connecting_to) {
-                    $('a.connect').click();
-                } else {
-                    self.disconnect();
-                }
-                $('div.open_firmware_flasher a.flash').click();
-            } else if (GUI.allowedTabs.indexOf(tab) < 0) {
-                GUI.log(i18n.getMessage('tabSwitchUpgradeRequired', [tabName]));
+            if (tabRequiresConnection && !CONFIGURATOR.connectionValid) {
+                GUI.log(i18n.getMessage('tabSwitchConnectionRequired'));
                 return;
             }
 
-            GUI.tab_switch_in_progress = true;
-
-            GUI.tab_switch_cleanup(function () {
-                // disable active firmware flasher if it was active
-                if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
-                    $('div#flashbutton a.flash_state').removeClass('active');
-                    $('div#flashbutton a.flash').removeClass('active');
-                }
-                // disable previously active tab highlight
-                $('li', ui_tabs).removeClass('active');
-
-                // Highlight selected tab
-                $(self).parent().addClass('active');
-
-                // detach listeners and remove element data
-                const content = $('#content');
-                content.empty();
-
-                // display loading screen
-                $('#cache .data-loading').clone().appendTo(content);
-
-                function content_ready() {
-                    GUI.tab_switch_in_progress = false;
+            GUI.tab_switch_allowed(function () {
+                if (GUI.allowedTabs.indexOf(tab) < 0 && tabName === "Firmware Flasher") {
+                    if (GUI.connected_to || GUI.connecting_to) {
+                        $('a.connect').click();
+                    } else {
+                        self.disconnect();
+                    }
+                    $('div.open_firmware_flasher a.flash').click();
+                } else if (GUI.allowedTabs.indexOf(tab) < 0) {
+                    GUI.log(i18n.getMessage('tabSwitchUpgradeRequired', [tabName]));
+                    return;
                 }
 
-                checkSetupAnalytics(function (analyticsService) {
-                    analyticsService.sendAppView(tab);
+                GUI.tab_switch_in_progress = true;
+
+                GUI.tab_switch_cleanup(function () {
+                    // disable active firmware flasher if it was active
+                    if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
+                        $('div#flashbutton a.flash_state').removeClass('active');
+                        $('div#flashbutton a.flash').removeClass('active');
+                    }
+                    // disable previously active tab highlight
+                    $('li', ui_tabs).removeClass('active');
+
+                    // Highlight selected tab
+                    $(self).parent().addClass('active');
+
+                    // detach listeners and remove element data
+                    const content = $('#content');
+                    content.empty();
+
+                    // display loading screen
+                    $('#cache .data-loading').clone().appendTo(content);
+
+                    function content_ready() {
+                        GUI.tab_switch_in_progress = false;
+                    }
+
+                    checkSetupAnalytics(function (analyticsService) {
+                        analyticsService.sendAppView(tab);
+                    });
+
+                    switch (tab) {
+                        case 'landing':
+                            TABS.landing.initialize(content_ready);
+                            break;
+                        case 'changelog':
+                            TABS.staticTab.initialize('changelog', content_ready);
+                            break;
+                        case 'privacy_policy':
+                            TABS.staticTab.initialize('privacy_policy', content_ready);
+                            break;
+                        case 'options':
+                            TABS.options.initialize(content_ready);
+                            break;
+                        case 'firmware_flasher':
+                            TABS.firmware_flasher.initialize(content_ready);
+                            break;
+                        case 'help':
+                            TABS.help.initialize(content_ready);
+                            break;
+                        case 'auxiliary':
+                            TABS.auxiliary.initialize(content_ready);
+                            break;
+                        case 'adjustments':
+                            TABS.adjustments.initialize(content_ready);
+                            break;
+                        case 'ports':
+                            TABS.ports.initialize(content_ready);
+                            break;
+                        case 'led_strip':
+                            TABS.led_strip.initialize(content_ready);
+                            break;
+                        case 'failsafe':
+                            TABS.failsafe.initialize(content_ready);
+                            break;
+                        case 'transponder':
+                            TABS.transponder.initialize(content_ready);
+                            break;
+                        case 'osd':
+                            TABS.osd.initialize(content_ready);
+                            break;
+                        case 'vtx':
+                            TABS.vtx.initialize(content_ready);
+                            break;
+                        case 'power':
+                            TABS.power.initialize(content_ready);
+                            break;
+                        case 'setup':
+                            TABS.setup.initialize(content_ready);
+                            break;
+                        case 'setup_osd':
+                            TABS.setup_osd.initialize(content_ready);
+                            break;
+                        case 'status':
+                            TABS.status.initialize(content_ready);
+                            break;
+                        case 'beepers':
+                            TABS.beepers.initialize(content_ready);
+                            break;
+                        case 'configuration':
+                            TABS.configuration.initialize(content_ready);
+                            break;
+                        case 'profiles':
+                            TABS.profiles.initialize(content_ready);
+                            break;
+                        case 'rates':
+                            TABS.rates.initialize(content_ready);
+                            break;
+                        case 'gyro':
+                            TABS.gyro.initialize(content_ready);
+                            break;
+                        case 'receiver':
+                            TABS.receiver.initialize(content_ready);
+                            break;
+                        case 'servos':
+                            TABS.servos.initialize(content_ready);
+                            break;
+                        case 'gps':
+                            TABS.gps.initialize(content_ready);
+                            break;
+                        case 'motors':
+                            TABS.motors.initialize(content_ready);
+                            break;
+                        case 'mixer':
+                            TABS.mixer.initialize(content_ready);
+                            break;
+                        case 'sensors':
+                            TABS.sensors.initialize(content_ready);
+                            break;
+                        case 'logging':
+                            TABS.logging.initialize(content_ready);
+                            break;
+                        case 'onboard_logging':
+                            TABS.onboard_logging.initialize(content_ready);
+                            break;
+                        case 'cli':
+                            TABS.cli.initialize(content_ready, GUI.nwGui);
+                            break;
+
+                        default:
+                            console.log(`Tab not found: ${tab}`);
+                    }
                 });
-
-                switch (tab) {
-                    case 'landing':
-                        TABS.landing.initialize(content_ready);
-                        break;
-                    case 'changelog':
-                        TABS.staticTab.initialize('changelog', content_ready);
-                        break;
-                    case 'privacy_policy':
-                        TABS.staticTab.initialize('privacy_policy', content_ready);
-                        break;
-                    case 'options':
-                        TABS.options.initialize(content_ready);
-                        break;
-                    case 'firmware_flasher':
-                        TABS.firmware_flasher.initialize(content_ready);
-                        break;
-                    case 'help':
-                        TABS.help.initialize(content_ready);
-                        break;
-                    case 'auxiliary':
-                        TABS.auxiliary.initialize(content_ready);
-                        break;
-                    case 'adjustments':
-                        TABS.adjustments.initialize(content_ready);
-                        break;
-                    case 'ports':
-                        TABS.ports.initialize(content_ready);
-                        break;
-                    case 'led_strip':
-                        TABS.led_strip.initialize(content_ready);
-                        break;
-                    case 'failsafe':
-                        TABS.failsafe.initialize(content_ready);
-                        break;
-                    case 'transponder':
-                        TABS.transponder.initialize(content_ready);
-                        break;
-                    case 'osd':
-                        TABS.osd.initialize(content_ready);
-                        break;
-                    case 'vtx':
-                        TABS.vtx.initialize(content_ready);
-                        break;
-                    case 'power':
-                        TABS.power.initialize(content_ready);
-                        break;
-                    case 'setup':
-                        TABS.setup.initialize(content_ready);
-                        break;
-                    case 'setup_osd':
-                        TABS.setup_osd.initialize(content_ready);
-                        break;
-                    case 'status':
-                        TABS.status.initialize(content_ready);
-                        break;
-                    case 'beepers':
-                        TABS.beepers.initialize(content_ready);
-                        break;
-                    case 'configuration':
-                        TABS.configuration.initialize(content_ready);
-                        break;
-                    case 'profiles':
-                        TABS.profiles.initialize(content_ready);
-                        break;
-                    case 'rates':
-                        TABS.rates.initialize(content_ready);
-                        break;
-                    case 'gyro':
-                        TABS.gyro.initialize(content_ready);
-                        break;
-                    case 'receiver':
-                        TABS.receiver.initialize(content_ready);
-                        break;
-                    case 'servos':
-                        TABS.servos.initialize(content_ready);
-                        break;
-                    case 'gps':
-                        TABS.gps.initialize(content_ready);
-                        break;
-                    case 'motors':
-                        TABS.motors.initialize(content_ready);
-                        break;
-                    case 'mixer':
-                        TABS.mixer.initialize(content_ready);
-                        break;
-                    case 'sensors':
-                        TABS.sensors.initialize(content_ready);
-                        break;
-                    case 'logging':
-                        TABS.logging.initialize(content_ready);
-                        break;
-                    case 'onboard_logging':
-                        TABS.onboard_logging.initialize(content_ready);
-                        break;
-                    case 'cli':
-                        TABS.cli.initialize(content_ready, GUI.nwGui);
-                        break;
-
-                    default:
-                        console.log(`Tab not found: ${tab}`);
-                }
             });
         }
     });
@@ -734,3 +735,28 @@ function showDialogDynFiltersChange() {
         });
     }
 }
+
+function showTabExitDialog(tab, callback) {
+    const dialog = $('.dialogTabExit')[0];
+
+    function close() {
+        $('.tabExitSaveBtn').off('click');
+        $('.tabExitRevertBtn').off('click');
+        $('.tabExitCancelBtn').off('click');
+        dialog.close();
+    }
+
+    $('.tabExitSaveBtn').click(function() {
+        close();
+        tab.save(callback);
+    });
+    $('.tabExitRevertBtn').click(function() {
+        close();
+        tab.revert(callback);
+    });
+    $('.tabExitCancelBtn').click(function() {
+        close();
+    });
+
+    dialog.showModal();
+};
