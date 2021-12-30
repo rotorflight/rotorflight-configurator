@@ -67,7 +67,7 @@ Name: "zh_TW"; MessagesFile: "unofficial_inno_languages\ChineseTraditional.isl"
 Filename: {app}\{cm:AppName}.exe; Description: {cm:LaunchProgram,{cm:AppName}}; Flags: nowait postinstall skipifsilent
 
 [Setup]
-AppId=e72c90bb-45eb-48dc-9cf3-ac2e8ec52f8c
+AppId=f84b0b81-14b0-4e8c-b067-1c381a2754e5
 AppName={#ApplicationName}
 AppPublisher={#CompanyName}
 AppPublisherURL={#CompanyUrl}
