@@ -49,6 +49,28 @@
     margin-left: 3px;
 }
 
+.tab-gps .gpsFix {
+    float: right;
+    margin-top: 3px;
+    margin-right: 5px;
+}
+
+.tab-gps .gpsFix span {
+    font-size: 10px;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.gpsFixTrue {
+    background-color: #56ac1d;
+}
+
+.gpsFixFalse {
+    background-color: #e60000;
+}
+
+
 .tab-gps .GPS_info td {
     font-size: 12px;
 }
