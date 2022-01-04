@@ -1,25 +1,57 @@
 'use strict';
 
 TABS.status = {
-    yaw_fix: 0.0
+    yaw_fix: 0.0,
+    DISARM_FLAGS: [
+        'NO_GYRO',
+        'FAILSAFE',
+        'RX_FAILSAFE',
+        'BAD_RX_RECOVERY',
+        'BOXFAILSAFE',
+        'RUNAWAY_TAKEOFF',
+        'CRASH',
+        'THROTTLE',
+        'ANGLE',
+        'BOOT_GRACE_TIME',
+        'NOPREARM',
+        'LOAD',
+        'CALIBRATING',
+        'CLI',
+        'CMS_MENU',
+        'BST',
+        'MSP',
+        'PARALYZE',
+        'GPS',
+        'RESC',
+        'RPMFILTER',
+        'REBOOT_REQ',
+        'DSHOT_BITBANG',
+        'ACC_CALIB',
+        'MOTOR_PROTO',
+        'ARM_SWITCH' // Must be last
+    ],
 };
 
 TABS.status.initialize = function (callback) {
     var self = this;
 
-    if (GUI.active_tab != 'status') {
+    if (GUI.active_tab !== 'status') {
         GUI.active_tab = 'status';
     }
 
-    MSP.promise(MSPCodes.MSP_STATUS)
-        .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
-        .then(() => MSP.promise(MSPCodes.MSP_ACC_TRIM))
-        .then(() => MSP.promise(MSPCodes.MSP_NAME))
-        .then(() => MSP.promise(MSPCodes.MSP_RC))
-        .then(() => load_html());
+    load_data(load_html);
 
     function load_html() {
         $('#content').load("./tabs/status.html", process_html);
+    }
+
+    function load_data(callback) {
+        MSP.promise(MSPCodes.MSP_STATUS)
+            .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_ACC_TRIM))
+            .then(() => MSP.promise(MSPCodes.MSP_NAME))
+            .then(() => MSP.promise(MSPCodes.MSP_RC))
+            .then(callback);
     }
 
     function process_html() {
@@ -94,52 +126,26 @@ TABS.status.initialize = function (callback) {
         // DISARM FLAGS
         var prepareDisarmFlags = function() {
 
-            var disarmFlagElements = ['NO_GYRO',
-                                      'FAILSAFE',
-                                      'RX_FAILSAFE',
-                                      'BAD_RX_RECOVERY',
-                                      'BOXFAILSAFE',
-                                      'RUNAWAY_TAKEOFF',
-                                      'CRASH',
-                                      'THROTTLE',
-                                      'ANGLE',
-                                      'BOOT_GRACE_TIME',
-                                      'NOPREARM',
-                                      'LOAD',
-                                      'CALIBRATING',
-                                      'CLI',
-                                      'CMS_MENU',
-                                      'BST',
-                                      'MSP',
-                                      'PARALYZE',
-                                      'GPS',
-                                      'RESC',
-                                      'RPMFILTER',
-                                      'REBOOT_REQ',
-                                      'DSHOT_BITBANG',
-                                      'ACC_CALIB',
-                                      'MOTOR_PROTO',
-                                     ];
-
-            // Always the latest element
-            disarmFlagElements = disarmFlagElements.concat(['ARM_SWITCH']);
-
             // Arming allowed flag
             arming_disable_flags_e.append('<span id="statusArmingAllowed" i18n="statusArmingAllowed" style="display: none;"></span>');
 
             // Arming disabled flags
             for (var i = 0; i < FC.CONFIG.armingDisableCount; i++) {
                 // All the known elements but the ARM_SWITCH (it must be always the last element)
-                if (i < disarmFlagElements.length - 1) {
-                    arming_disable_flags_e.append('<span id="statusArmingDisableFlags' + i + '" class="cf_tip disarm-flag" title="' + i18n.getMessage('statusArmingDisableFlagsTooltip' + disarmFlagElements[i]) + '" style="display: none;">' + disarmFlagElements[i] + '</span>');
+                if (i < self.DISARM_FLAGS.length - 1) {
+                    arming_disable_flags_e.append('<span id="statusArmingDisableFlags' + i + '" class="cf_tip disarm-flag" title="' +
+                        i18n.getMessage('statusArmingDisableFlagsTooltip' + self.DISARM_FLAGS[i]) +
+                        '" style="display: none;">' + self.DISARM_FLAGS[i] + '</span>');
                 }
                 // The ARM_SWITCH, always the last element
                 else if (i == FC.CONFIG.armingDisableCount - 1) {
-                    arming_disable_flags_e.append('<span id="statusArmingDisableFlags' + i + '" class="cf_tip disarm-flag" title="' + i18n.getMessage('statusArmingDisableFlagsTooltipARM_SWITCH') + '" style="display: none;">ARM_SWITCH</span>');
+                    arming_disable_flags_e.append('<span id="statusArmingDisableFlags' + i + '" class="cf_tip disarm-flag" title="' +
+                        i18n.getMessage('statusArmingDisableFlagsTooltipARM_SWITCH') + '" style="display: none;">ARM_SWITCH</span>');
                 }
                 // Unknown disarm flags
                 else {
-                    arming_disable_flags_e.append('<span id="statusArmingDisableFlags' + i + '" class="disarm-flag" style="display: none;">' + (i + 1) + '</span>');
+                    arming_disable_flags_e.append('<span id="statusArmingDisableFlags' + i +
+                        '" class="disarm-flag" style="display: none;">' + (i + 1) + '</span>');
                 }
             }
         };
@@ -271,8 +277,8 @@ TABS.status.initialize = function (callback) {
         }
 
         // status data pull
-        GUI.interval_add('status_data_pull_fast', get_fast_data, 33, true); // 30 fps
-        GUI.interval_add('status_data_pull_slow', get_slow_data, 250, true); // 4 fps
+        GUI.interval_add('status_data_pull_fast', get_fast_data, 50, true);   // 20 fps
+        GUI.interval_add('status_data_pull_slow', get_slow_data, 250, true);  // 4 fps
 
         GUI.content_ready(callback);
     }

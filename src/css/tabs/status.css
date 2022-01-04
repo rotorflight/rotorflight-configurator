@@ -77,11 +77,11 @@
 }
 
 .configDefaults {
-    background-color: #56ac1d;
+    background-color: #f5a834;
 }
 
 .configConfigured {
-    background-color: #00e600;
+    background-color: #56ac1d;
 }
 
 .tab-status .gpsFix {
@@ -266,7 +266,7 @@
     left: 20px;
     line-height: 15px;
     font-size: 10px;
-    font-wight: bold;
+    font-weight: bold;
     text-align: center;
     color: #474747;
 }
