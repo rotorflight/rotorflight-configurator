@@ -445,37 +445,25 @@ function processUid() {
         connectionTimestamp = Date.now();
         GUI.log(i18n.getMessage('uniqueDeviceIdReceived', [uniqueDeviceIdentifier]));
 
-        if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
-            processName();
-        } else {
-            setRtc();
-        }
+        processName();
     });
 }
 
 function processName() {
     MSP.send_message(MSPCodes.MSP_NAME, false, false, function () {
         GUI.log(i18n.getMessage('craftNameReceived', [FC.CONFIG.name]));
-
         FC.CONFIG.armingDisabled = false;
         mspHelper.setArmingEnabled(false, setRtc);
     });
 }
 
 function setRtc() {
-    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-        MSP.send_message(MSPCodes.MSP_SET_RTC, mspHelper.crunch(MSPCodes.MSP_SET_RTC), false, finishOpen);
-    } else {
-        finishOpen();
-    }
+    MSP.send_message(MSPCodes.MSP_SET_RTC, mspHelper.crunch(MSPCodes.MSP_SET_RTC), false, finishOpen);
 }
 
 function finishOpen() {
     CONFIGURATOR.connectionValid = true;
     GUI.allowedTabs = GUI.defaultAllowedFCTabsWhenConnected.slice();
-    if (semver.lt(FC.CONFIG.apiVersion, "1.4.0")) {
-        GUI.allowedTabs.splice(GUI.allowedTabs.indexOf('led_strip'), 1);
-    }
 
     if (GUI.isCordova()) {
         UI_PHONES.reset();
@@ -535,9 +523,7 @@ function onConnect() {
         $('#tabs ul.mode-connected').show();
 
         MSP.send_message(MSPCodes.MSP_FEATURE_CONFIG, false, false);
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_33)) {
-            MSP.send_message(MSPCodes.MSP_BATTERY_CONFIG, false, false);
-        }
+        MSP.send_message(MSPCodes.MSP_BATTERY_CONFIG, false, false);
         MSP.send_message(MSPCodes.MSP_STATUS, false, false);
         MSP.send_message(MSPCodes.MSP_DATAFLASH_SUMMARY, false, false);
 
@@ -673,11 +659,7 @@ function have_sensor(sensors_detected, sensor_code) {
         case 'sonar':
             return bit_check(sensors_detected, 4);
         case 'gyro':
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                return bit_check(sensors_detected, 5);
-            } else {
-                return true;
-            }
+            return bit_check(sensors_detected, 5);
     }
     return false;
 }
@@ -822,9 +804,9 @@ function update_dataflash_global() {
      }
 }
 
-function reinitialiseConnection(originatorTab, callback) {
-    GUI.log(i18n.getMessage('deviceRebooting'));
+function reinitialiseConnection(callback) {
     let connectionTimeout = 200;
+
     ConfigStorage.get('connectionTimeout', function (result) {
         if (result.connectionTimeout) {
             connectionTimeout = result.connectionTimeout;
@@ -832,9 +814,7 @@ function reinitialiseConnection(originatorTab, callback) {
 
         if (FC.boardHasVcp()) { // VCP-based flight controls may crash old drivers, we catch and reconnect
             GUI.timeout_add('waiting_for_disconnect', function waiting_for_bootup() {
-                if (callback) {
-                    callback();
-                }
+                if (callback) callback();
             }, connectionTimeout);
             //TODO: Need to work out how to do a proper reconnect here.
             // caveat: Timeouts set with `GUI.timeout_add()` are removed on disconnect.
@@ -842,14 +822,9 @@ function reinitialiseConnection(originatorTab, callback) {
             GUI.timeout_add('waiting_for_bootup', function waiting_for_bootup() {
                 MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
                     GUI.log(i18n.getMessage('deviceReady'));
-                    originatorTab.initialize(false, $('#content').scrollTop());
+                    if (callback) callback();
                 });
-
-                if (callback) {
-                    callback();
-                }
-
-            }, connectionTimeout); // 1500 ms seems to be just the right amount of delay to prevent data request timeouts
+            }, connectionTimeout);
         }
     });
 }
