@@ -418,7 +418,7 @@
     "tabLogging": {
         "message": "Logging"
     },
-    "tabOnboardLogging": {
+    "tabBlackbox": {
         "message": "Blackbox"
     },
     "tabAdjustments": {
@@ -3341,7 +3341,7 @@
         "message": "Directly saving flash to file is slow and inherently prone to error / file corruption.<br>In some cases it will work for small files, but this is not supported and support requests for it will be closed without comment - use Mass Storage mode instead."
     },
     "dataflashSaveFileDepreciationHint": {
-        "message": "This method is slow and inherently prone to error / file corruption, because the MSP connection itself has intrinsic, fundamental limitations that make it unsuitable for file transfers. It may work for small log files only. Do not create support requests if file transfers fail when saved using this method. The recommended method is to use '<b>$t(onboardLoggingRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files."
+        "message": "This method is slow and inherently prone to error / file corruption, because the MSP connection itself has intrinsic, fundamental limitations that make it unsuitable for file transfers. It may work for small log files only. Do not create support requests if file transfers fail when saved using this method. The recommended method is to use '<b>$t(blackboxRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files."
     },
     "dataflashButtonErase": {
         "message": "Erase"
@@ -6255,40 +6255,40 @@
     "configurationFpvCamAngleDegrees": {
         "message": "FPV Camera Angle [degrees]"
     },
-    "onboardLoggingBlackbox": {
+    "blackboxDevice": {
         "message": "Blackbox logging device"
     },
-    "onboardLoggingRateOfLogging": {
+    "blackboxRateOfLogging": {
         "message": "Blackbox logging rate"
     },
-    "onboardLoggingDebugMode": {
+    "blackboxDebugMode": {
         "message": "Blackbox debug mode"
     },
-    "onboardLoggingDebugModeUnknown": {
+    "blackboxDebugModeUnknown": {
         "message": "UNKNOWN"
     },
-    "onboardLoggingSerialLogger": {
+    "blackboxSerialLogger": {
         "message": "Outboard serial logging device"
     },
-    "onboardLoggingFlashLogger": {
+    "blackboxFlashLogger": {
         "message": "Onboard dataflash chip"
     },
-    "onboardLoggingEraseInProgress": {
-        "message": "Erase in progress, please wait..."
-    },
-    "onboardLoggingOnboardSDCard": {
+    "blackboxSDCardLogger": {
         "message": "Onboard SD card"
     },
-    "onboardLoggingMsc": {
+    "blackboxEraseInProgress": {
+        "message": "Erase in progress, please wait..."
+    },
+    "blackboxMsc": {
         "message": "Mass Storage Mode"
     },
-    "onboardLoggingMscNote": {
+    "blackboxMscNote": {
         "message": "Reboot into <strong>mass storage device (MSC)</strong> mode. Once activated, the onboard flash or SD card on your flight controller will be recognised as a storage device by your computer, and allow you to download your log files. Eject and power cycle your flight controller to leave mass storage device mode."
     },
-    "onboardLoggingRebootMscText": {
+    "blackboxRebootMscText": {
         "message": "Activate Mass Storage Device Mode"
     },
-    "onboardLoggingMscNotReady": {
+    "blackboxMscNotReady": {
         "message": "Mass storage mode can not be activated because the storage device is not ready."
     },
     "dialogConfirmResetTitle": {

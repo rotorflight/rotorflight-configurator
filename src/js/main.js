@@ -393,8 +393,8 @@ function startProcess() {
                         case 'logging':
                             TABS.logging.initialize(content_ready);
                             break;
-                        case 'onboard_logging':
-                            TABS.onboard_logging.initialize(content_ready);
+                        case 'blackbox':
+                            TABS.blackbox.initialize(content_ready);
                             break;
                         case 'cli':
                             TABS.cli.initialize(content_ready, GUI.nwGui);
