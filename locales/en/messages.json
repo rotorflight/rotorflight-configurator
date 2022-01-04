@@ -1055,7 +1055,7 @@
         "message": "Restore"
     },
     "initialSetupButtonRebootBootloader": {
-        "message": "Activate Boot Loader / DFU"
+        "message": "Boot Loader / DFU"
     },
     "initialSetupBackupRestoreText": {
         "message": "<strong>Backup</strong> your configuration in case of an accident, <strong>CLI</strong> settings are <span class=\"message-negative\">not</span> included - use the command 'diff all' in CLI for this."

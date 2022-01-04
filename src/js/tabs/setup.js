@@ -1,21 +1,24 @@
 'use strict';
 
-TABS.setup = {
-};
+TABS.setup = {};
 
 TABS.setup.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab != 'setup') {
+    if (GUI.active_tab !== 'setup') {
         GUI.active_tab = 'setup';
     }
 
-    Promise.resolve(true)
-        .then(() => { return MSP.promise(MSPCodes.MSP_STATUS); })
-        .then(() => { return MSP.promise(MSPCodes.MSP_ARMING_CONFIG); })
-        .then(() => { return MSP.promise(MSPCodes.MSP_FEATURE_CONFIG); })
-        .then(() => { return MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG); })
-        .then(() => { load_html(); });
+    load_data(load_html);
+
+    function load_data(callback) {
+        Promise.resolve(true)
+            .then(() => MSP.promise(MSPCodes.MSP_STATUS))
+            .then(() => MSP.promise(MSPCodes.MSP_ARMING_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG))
+            .then(callback);
+    }
 
     function load_html() {
         $('#content').load("./tabs/setup.html", process_html);
@@ -43,9 +46,7 @@ TABS.setup.initialize = function (callback) {
         }
 
         $('a.rebootBootloader').click(function () {
-            const buffer = [];
-            buffer.push(mspHelper.REBOOT_TYPES.BOOTLOADER);
-            MSP.send_message(MSPCodes.MSP_SET_REBOOT, buffer, false);
+            MSP.send_message(MSPCodes.MSP_SET_REBOOT, [ mspHelper.REBOOT_TYPES.BOOTLOADER ], false);
         });
 
         // UI Hooks
@@ -58,6 +59,7 @@ TABS.setup.initialize = function (callback) {
                 // During this period MCU won't be able to process any serial commands because its locked in a for/while loop
                 // until this operation finishes, sending more commands through data_poll() will result in serial buffer overflow
                 GUI.interval_pause('setup_data_pull');
+
                 MSP.send_message(MSPCodes.MSP_ACC_CALIBRATION, false, false, function () {
                     GUI.log(i18n.getMessage('initialSetupAccelCalibStarted'));
                     $('#accel_calib_running').show();
@@ -109,10 +111,7 @@ TABS.setup.initialize = function (callback) {
             dialogConfirmReset.close();
             MSP.send_message(MSPCodes.MSP_RESET_CONF, false, false, function () {
                 GUI.log(i18n.getMessage('initialSetupSettingsRestored'));
-
-                GUI.tab_switch_cleanup(function () {
-                    TABS.setup.initialize();
-                });
+                GUI.tab_switch_reload();
             });
         });
 
@@ -141,7 +140,6 @@ TABS.setup.initialize = function (callback) {
         });
 
         const enableMotorOverrideSwitch = $('input[id="initialSetupEnableMotorOverride"]');
-
         enableMotorOverrideSwitch.prop('checked', !FC.CONFIG.motorOverrideDisabled);
 
         enableMotorOverrideSwitch.change(function () {
@@ -149,7 +147,6 @@ TABS.setup.initialize = function (callback) {
         });
 
         const enableServoOverrideSwitch = $('input[id="initialSetupEnableServoOverride"]');
-
         enableServoOverrideSwitch.prop('checked', !FC.CONFIG.servoOverrideDisabled);
 
         enableServoOverrideSwitch.change(function () {
@@ -157,7 +154,6 @@ TABS.setup.initialize = function (callback) {
         });
 
         const enableMixerOverrideSwitch = $('input[id="initialSetupEnableMixerOverride"]');
-
         enableMixerOverrideSwitch.prop('checked', !FC.CONFIG.mixerOverrideDisabled);
 
         enableMixerOverrideSwitch.change(function () {
@@ -180,28 +176,25 @@ TABS.setup.initialize = function (callback) {
             }
 
             configuration_restore(function () {
-                TABS.setup.initialize();
                 GUI.log(i18n.getMessage('initialSetupRestoreSuccess'));
+                GUI.tab_switch_reload();
             });
         });
 
         $('a.rebootMsc').click(function () {
-            const buffer = [];
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41) &&
-                GUI.operating_system === "Linux") {
-                   // Reboot into MSC using UTC time offset instead of user timezone
-                   // Linux seems to expect that the FAT file system timestamps are UTC based
-                buffer.push(mspHelper.REBOOT_TYPES.MSC_UTC);
-            } else {
-                buffer.push(mspHelper.REBOOT_TYPES.MSC);
-            }
-            MSP.send_message(MSPCodes.MSP_SET_REBOOT, buffer, false);
+            // Reboot into MSC using UTC time offset instead of user timezone
+            // Linux seems to expect that the FAT file system timestamps are UTC based
+            const code = (GUI.operating_system === "Linux") ?
+                mspHelper.REBOOT_TYPES.MSC_UTC :
+                mspHelper.REBOOT_TYPES.MSC ;
+
+            MSP.send_message(MSPCodes.MSP_SET_REBOOT, [ code ], false);
         });
 
         $('a.rebootFirmware').click(function () {
-            const buffer = [];
-            buffer.push(mspHelper.REBOOT_TYPES.FIRMWARE);
-            MSP.send_message(MSPCodes.MSP_SET_REBOOT, buffer, false);
+            GUI.log(i18n.getMessage('deviceRebooting'));
+            MSP.send_message(MSPCodes.MSP_SET_REBOOT, [ mspHelper.REBOOT_TYPES.FIRMWARE ], false);
+            reinitialiseConnection(() => GUI.tab_switch_reload());
         });
 
         GUI.content_ready(callback);
