@@ -1841,6 +1841,9 @@
     "portsFunction_RUNCAM_DEVICE_CONTROL": {
         "message": "Camera (RunCam Protocol)"
     },
+    "portsFunction_LIDAR_TF": {
+        "message": "Benewake LIDAR"
+    },
     "portsFunction_FRSKY_OSD": {
         "message": "OSD (FrSky Protocol)"
     },
