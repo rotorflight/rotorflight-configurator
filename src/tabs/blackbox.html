@@ -1,6 +1,6 @@
-<div class="tab-onboard_logging">
+<div class="tab-blackbox">
     <div class="content_wrapper">
-        <div class="tab_title" i18n="tabOnboardLogging"></div>
+        <div class="tab_title" i18n="tabBlackbox"></div>
         <div class="cf_doc_version_bt">
             <a id="button-documentation" href="https://github.com/rotorflight/rotorflight/wiki" target="_blank" rel="noopener noreferrer"></a>
         </div>
@@ -10,7 +10,7 @@
         <div class="require-blackbox-maybe-supported note">
             <p i18n="blackboxMaybeSupported"></p>
         </div>
-        <div class="require-blackbox-supported">
+        <div class="require-blackbox-supported blackbox-changes">
             <div class="gui_box grey require-blackbox-config-supported">
                 <div class="gui_box_titlebar">
                     <div class="spacer_box_title" i18n="blackboxConfiguration"></div>
@@ -19,17 +19,17 @@
                     <div class="line blackboxDevice">
                         <select name="blackbox_device">
                         </select>
-                        <span i18n="onboardLoggingBlackbox"></span>
+                        <span i18n="blackboxDevice"></span>
                     </div>
                     <div class="line blackboxRate">
                         <select name="blackbox_rate">
                         </select>
-                        <span i18n="onboardLoggingRateOfLogging"></span>
+                        <span i18n="blackboxRateOfLogging"></span>
                     </div>
                     <div class="line blackboxDebugMode">
                         <select name="blackboxDebugMode">
                         </select>
-                        <span class="blackboxDebugModeText" i18n="onboardLoggingDebugMode"></span>
+                        <span class="blackboxDebugModeText" i18n="blackboxDebugMode"></span>
                     </div>
                     <div class="line">
                         <a href="#" class="save-settings regular-button" i18n="blackboxButtonSave"></a>
@@ -39,7 +39,7 @@
             
             <div class="gui_box grey">
                 <div class="gui_box_titlebar" align="left">
-                    <div class="spacer_box_title" i18n="onboardLoggingSerialLogger">
+                    <div class="spacer_box_title" i18n="blackboxSerialLogger">
                     </div>
                 </div>
                 <div class="spacer_box">
@@ -49,7 +49,7 @@
             
             <div class="gui_box grey require-dataflash-supported">
                 <div class="gui_box_titlebar" align="left">
-                    <div class="spacer_box_title" i18n="onboardLoggingFlashLogger">
+                    <div class="spacer_box_title" i18n="blackboxFlashLogger">
                     </div>
                 </div>
                 <div class="spacer_box">
@@ -61,7 +61,7 @@
                             <div class="dataflash-confirm-erase-note" i18n="dataflashConfirmEraseNote"></div>
                             <div class="dataflash-erase-progress">
                                 <div class="data-loading">
-                                    <p i18n="onboardLoggingEraseInProgress"></p>
+                                    <p i18n="blackboxEraseInProgress"></p>
                                 </div>
                             </div>
                             <div class="buttons">
@@ -111,7 +111,7 @@
             <div class="require-sdcard-supported">
                 <div class="gui_box grey">
                     <div class="gui_box_titlebar" align="left">
-                        <div class="spacer_box_title" i18n="onboardLoggingOnboardSDCard">
+                        <div class="spacer_box_title" i18n="blackboxSDCardLogger">
                         </div>
                     </div>
                     <div class="spacer_box">
@@ -138,18 +138,18 @@
         </div>
         <div class="gui_box grey require-msc-supported">
             <div class="gui_box_titlebar" align="left">
-                <div class="spacer_box_title" i18n="onboardLoggingMsc">
+                <div class="spacer_box_title" i18n="blackboxMsc">
                 </div>
             </div>
             <div class="spacer_box">
                 <div class="require-msc-supported">
                     <div>
-                        <a class="require-msc-ready regular-button onboardLoggingRebootMsc" href="#" i18n="onboardLoggingRebootMscText"></a>
+                        <a class="require-msc-ready regular-button blackboxRebootMsc" href="#" i18n="blackboxRebootMscText"></a>
                     </div>
                 </div>
-                <p i18n="onboardLoggingMscNote"></p>
+                <p i18n="blackboxMscNote"></p>
 
-                <p class="require-msc-not-ready" i18n="onboardLoggingMscNotReady"></p>
+                <p class="require-msc-not-ready" i18n="blackboxMscNotReady"></p>
             </div>
         </div>
         <div class="clear-both"></div>

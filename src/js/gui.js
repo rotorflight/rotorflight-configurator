@@ -43,7 +43,7 @@ const GuiControl = function () {
         'gps',
         'led_strip',
         'logging',
-        'onboard_logging',
+        'blackbox',
         'modes',
         'motors',
         'mixer',

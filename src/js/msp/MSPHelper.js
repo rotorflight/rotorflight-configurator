@@ -1402,7 +1402,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
             console.log('FC reports unsupported message error: ' + code);
 
             if (code === MSPCodes.MSP_SET_REBOOT) {
-                TABS.onboard_logging.mscRebootFailedCallback();
+                TABS.blackbox.mscRebootFailedCallback();
             }
         }
     } else {
