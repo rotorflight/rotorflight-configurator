@@ -3243,6 +3243,15 @@
     "cliConfirmSnippetBtn": {
         "message": "Execute"
     },
+    "dialogCLIExitTitle": {
+        "message": "CLI Exit Warning!"
+    },
+    "dialogCLIExitNote": {
+        "message": "Type <code>save</code> to save changes and exit CLI.<br><br>Type <code>exit</code> to discard changes and exit CLI."
+    },
+    "dialogCLIExitButton": {
+        "message": "Go Back"
+    },
 
     "loggingNote": {
         "message": "Data will be logged in this tab <span class=\"message-negative\">only</span>, leaving the tab will <span class=\"message-negative\">cancel</span> logging and application will return to its normal <strong>\"configurator\"</strong> state.<br /> You are free to select the global update period, data will be written into the log file every <strong>1</strong> second for performance reasons."

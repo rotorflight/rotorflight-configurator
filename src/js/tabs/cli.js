@@ -113,6 +113,7 @@ TABS.cli.initialize = function (callback) {
     }
 
     $('#content').load("./tabs/cli.html", function () {
+
         // translate to user-selected language
         i18n.localizePage();
 
@@ -309,6 +310,22 @@ TABS.cli.initialize = function (callback) {
         // give input element user focus
         textarea.focus();
 
+        self.exit = function (callback) {
+            if (CONFIGURATOR.cliActive) {
+                const dialog = $('.dialogCLIExit')[0];
+
+                $('.cliExitBackBtn').click(function() {
+                    $('.cliExitBackBtn').off('click');
+                    dialog.close();
+                });
+
+                dialog.showModal();
+            }
+            else {
+                callback();
+            }
+        };
+
         GUI.timeout_add('enter_cli', function enter_cli() {
             // Enter CLI mode
             const bufferOut = new ArrayBuffer(1);
@@ -462,9 +479,8 @@ TABS.cli.read = function (readInfo) {
             CONFIGURATOR.cliActive = false;
             CONFIGURATOR.cliValid = false;
             GUI.log(i18n.getMessage('cliReboot'));
-            reinitialiseConnection(self);
+            reinitialiseConnection();
         }
-
     }
 
     if (!CONFIGURATOR.cliValid && validateText.indexOf('CLI') !== -1) {
@@ -511,21 +527,19 @@ TABS.cli.cleanup = function (callback) {
         TABS.cli.GUI.snippetPreviewWindow.destroy();
         TABS.cli.GUI.snippetPreviewWindow = null;
     }
-    if (!(CONFIGURATOR.connectionValid && CONFIGURATOR.cliValid && CONFIGURATOR.cliActive)) {
-        if (callback) {
-            callback();
-        }
 
+    if (!(CONFIGURATOR.connectionValid && CONFIGURATOR.cliValid && CONFIGURATOR.cliActive)) {
+        if (callback) callback();
         return;
     }
+
     this.send(getCliCommand('exit\r', this.cliBuffer), function () {
         // we could handle this "nicely", but this will do for now
         // (another approach is however much more complicated):
-        // we can setup an interval asking for data lets say every 200ms, when data arrives, callback will be triggered and tab switched
+        // we can setup an interval asking for data lets say every 200ms,
+        // when data arrives, callback will be triggered and tab switched
         // we could probably implement this someday
-        if (callback) {
-            callback();
-        }
+        if (callback) callback();
 
         CONFIGURATOR.cliActive = false;
         CONFIGURATOR.cliValid = false;
