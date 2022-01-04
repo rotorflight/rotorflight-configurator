@@ -373,8 +373,15 @@ button {
 
 /* GPS TAB */
 
-.tab-gps .GPS_info .head, .tab-gps .GPS_signal_strength .head {
+.tab-gps .GPS_info .head,
+.tab-gps .GPS_signal_strength .head {
     background-color: #393b3a;
+}
+
+.tab-gps input,
+.tab-gps select {
+    background-color: #3a3a3a;
+    color: white;
 }
 
 .tab-gps #loadmap .controls {
