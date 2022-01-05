@@ -86,10 +86,6 @@ function generateData(firmware, input, startAddress) {
     firmware.bytes_total += input.length;
 }
 
-function microtime() {
-    return new Date().getTime() / 1000;
-}
-
 const CONFIG_LABEL = `Custom defaults inserted in`;
 
 ConfigInserter.prototype.insertConfig = function (firmware, input) {

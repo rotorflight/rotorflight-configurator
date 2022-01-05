@@ -93,10 +93,6 @@ function read_hex_file(data) {
     }
 }
 
-function microtime() {
-    return new Date().getTime() / 1000;
-}
-
 const TIME_LABEL = 'HEX_PARSER - File parsed in';
 
 onmessage = function(event) {
