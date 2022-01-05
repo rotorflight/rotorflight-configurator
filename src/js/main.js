@@ -336,9 +336,6 @@ function startProcess() {
                         case 'failsafe':
                             TABS.failsafe.initialize(content_ready);
                             break;
-                        case 'transponder':
-                            TABS.transponder.initialize(content_ready);
-                            break;
                         case 'osd':
                             TABS.osd.initialize(content_ready);
                             break;
@@ -652,12 +649,6 @@ function updateTabList(features) {
         $('#tabs ul.mode-connected li.tab_led_strip').show();
     } else {
         $('#tabs ul.mode-connected li.tab_led_strip').hide();
-    }
-
-    if (features.isEnabled('TRANSPONDER')) {
-        $('#tabs ul.mode-connected li.tab_transponder').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_transponder').hide();
     }
 
     if (features.isEnabled('OSD')) {

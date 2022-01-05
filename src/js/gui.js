@@ -32,7 +32,6 @@ const GuiControl = function () {
         'status',
         'setup',
         'failsafe',
-        'transponder',
         'osd',
         'power',
         'adjustments',
