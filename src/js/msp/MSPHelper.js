@@ -5,7 +5,7 @@
 const ledDirectionLetters    = ['n', 'e', 's', 'w', 'u', 'd'];      // in LSB bit order
 const ledFunctionLetters     = ['i', 'w', 'f', 'a', 't', 'r', 'c', 'g', 's', 'b', 'l']; // in LSB bit order
 const ledBaseFunctionLetters = ['c', 'f', 'a', 'l', 's', 'g', 'r']; // in LSB bit
-let ledOverlayLetters        = ['t', 'o', 'b', 'v', 'i', 'w']; // in LSB bit
+const ledOverlayLetters      = ['t', 'o', 'b', 'v', 'i', 'w'];      // in LSB bit
 
 function MspHelper() {
     const self = this;
@@ -97,6 +97,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.CONFIG.cpuLoad = data.readU8();
                 sensor_status(FC.CONFIG.activeSensors);
                 break;
+
             case MSPCodes.MSP_RAW_IMU:
                 // 512 for mpu6050, 256 for mma
                 // currently we are unable to differentiate between the sensor types, so we are goign with 512
@@ -114,30 +115,35 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.SENSOR_DATA.magnetometer[1] = data.read16() / 1090;
                 FC.SENSOR_DATA.magnetometer[2] = data.read16() / 1090;
                 break;
+
             case MSPCodes.MSP_SERVO:
                 const servoCount = data.byteLength / 2;
                 for (let i = 0; i < servoCount; i++) {
                     FC.SERVO_DATA[i] = data.readU16();
                 }
                 break;
+
             case MSPCodes.MSP_SERVO_OVERRIDE:
                 const overrideCount = data.byteLength / 2;
                 for (let i = 0; i < overrideCount; i++) {
                     FC.SERVO_OVERRIDE[i] = data.read16();
                 }
                 break;
+
             case MSPCodes.MSP_MOTOR:
                 const motorCount = data.byteLength / 2;
                 for (let i = 0; i < motorCount; i++) {
                     FC.MOTOR_DATA[i] = data.readU16();
                 }
                 break;
+
             case MSPCodes.MSP_MOTOR_OVERRIDE:
                 const motorOverrideCount = data.byteLength / 2;
                 for (let i = 0; i < motorOverrideCount; i++) {
                     FC.MOTOR_OVERRIDE[i] = data.read16();
                 }
                 break;
+
             case MSPCodes.MSP2_MOTOR_OUTPUT_REORDERING:
                 FC.MOTOR_OUTPUT_ORDER = [];
                 const arraySize = data.read8();
@@ -145,6 +151,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.MOTOR_OUTPUT_ORDER[i] = data.readU8();
                 }
                 break;
+
             case MSPCodes.MSP2_GET_VTX_DEVICE_STATUS:
                 FC.VTX_DEVICE_STATUS = null;
                 const dataLength = data.byteLength;
@@ -156,6 +163,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.VTX_DEVICE_STATUS = vtxDeviceStatusFactory.createVtxDeviceStatus(vtxDeviceStatusData);
                 }
                 break;
+
             case MSPCodes.MSP_MOTOR_TELEMETRY:
                 const telemMotorCount = data.readU8();
                 for (let i = 0; i < telemMotorCount; i++) {
@@ -167,12 +175,14 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.MOTOR_TELEMETRY_DATA.consumption[i] = data.readU16();      // mAh
                 }
                 break;
+
             case MSPCodes.MSP_RC:
                 FC.RC.active_channels = data.byteLength / 2;
                 for (let i = 0; i < FC.RC.active_channels; i++) {
                     FC.RC.channels[i] = data.readU16();
                 }
                 break;
+
             case MSPCodes.MSP_RAW_GPS:
                 FC.GPS_DATA.fix = data.readU8();
                 FC.GPS_DATA.numSat = data.readU8();
@@ -182,32 +192,36 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.GPS_DATA.speed = data.readU16();
                 FC.GPS_DATA.ground_course = data.readU16();
                 break;
+
             case MSPCodes.MSP_COMP_GPS:
                 FC.GPS_DATA.distanceToHome = data.readU16();
                 FC.GPS_DATA.directionToHome = data.readU16();
                 FC.GPS_DATA.update = data.readU8();
                 break;
+
             case MSPCodes.MSP_ATTITUDE:
                 FC.SENSOR_DATA.kinematics[0] = data.read16() / 10.0; // x
                 FC.SENSOR_DATA.kinematics[1] = data.read16() / 10.0; // y
                 FC.SENSOR_DATA.kinematics[2] = data.read16(); // z
                 break;
+
             case MSPCodes.MSP_ALTITUDE:
                 FC.SENSOR_DATA.altitude = parseFloat((data.read32() / 100.0).toFixed(2)); // correct scale factor
                 break;
+
             case MSPCodes.MSP_SONAR:
                 FC.SENSOR_DATA.sonar = data.read32();
                 break;
+
             case MSPCodes.MSP_ANALOG:
                 FC.ANALOG.voltage = data.readU8() / 10.0;
                 FC.ANALOG.mAhdrawn = data.readU16();
                 FC.ANALOG.rssi = data.readU16(); // 0-1023
                 FC.ANALOG.amperage = data.read16() / 100; // A
                 FC.ANALOG.last_received_timestamp = Date.now();
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                    FC.ANALOG.voltage = data.readU16() / 100;
-                }
+                FC.ANALOG.voltage = data.readU16() / 100;
                 break;
+
             case MSPCodes.MSP_VOLTAGE_METERS:
                 FC.VOLTAGE_METERS = [];
                 const voltageMeterLength = 2;
@@ -220,6 +234,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.VOLTAGE_METERS.push(voltageMeter);
                 }
                 break;
+
             case MSPCodes.MSP_CURRENT_METERS:
 
                 FC.CURRENT_METERS = [];
@@ -234,6 +249,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.CURRENT_METERS.push(currentMeter);
                 }
                 break;
+
             case MSPCodes.MSP_BATTERY_STATE:
                 FC.BATTERY_STATE.cellCount = data.readU8();
                 FC.BATTERY_STATE.capacity = data.readU16(); // mAh
@@ -241,70 +257,51 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.BATTERY_STATE.voltage = data.readU8() / 10.0; // V
                 FC.BATTERY_STATE.mAhDrawn = data.readU16(); // mAh
                 FC.BATTERY_STATE.amperage = data.readU16() / 100; // A
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                    FC.BATTERY_STATE.batteryState = data.readU8();
-                    FC.BATTERY_STATE.voltage = data.readU16() / 100;
-                }
+                FC.BATTERY_STATE.batteryState = data.readU8();
+                FC.BATTERY_STATE.voltage = data.readU16() / 100;
                 break;
 
             case MSPCodes.MSP_VOLTAGE_METER_CONFIG:
-                if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                    FC.MISC.vbatscale = data.readU8(); // 10-200
-                    FC.MISC.vbatmincellvoltage = data.readU8() / 10; // 10-50
-                    FC.MISC.vbatmaxcellvoltage = data.readU8() / 10; // 10-50
-                    FC.MISC.vbatwarningcellvoltage = data.readU8() / 10; // 10-50
-                    if (semver.gte(FC.CONFIG.apiVersion, "1.23.0")) {
-                        FC.MISC.batterymetertype = data.readU8();
-                    }
-                } else {
-                    FC.VOLTAGE_METER_CONFIGS = [];
-                    const voltageMeterCount = data.readU8();
-
-                    for (let i = 0; i < voltageMeterCount; i++) {
-                        const subframeLength = data.readU8();
-                        if (subframeLength !== 5) {
-                            for (let j = 0; j < subframeLength; j++) {
-                                data.readU8();
-                            }
-                        } else {
-                            const voltageMeterConfig = {
-                                id: data.readU8(),
-                                sensorType: data.readU8(),
-                                vbatscale: data.readU8(),
-                                vbatresdivval: data.readU8(),
-                                vbatresdivmultiplier: data.readU8(),
-                            };
-
-                            FC.VOLTAGE_METER_CONFIGS.push(voltageMeterConfig);
+                FC.VOLTAGE_METER_CONFIGS = [];
+                const voltageMeterCount = data.readU8();
+                for (let i = 0; i < voltageMeterCount; i++) {
+                    const subframeLength = data.readU8();
+                    if (subframeLength !== 5) {
+                        for (let j = 0; j < subframeLength; j++) {
+                            data.readU8();
                         }
+                    } else {
+                        const voltageMeterConfig = {
+                            id: data.readU8(),
+                            sensorType: data.readU8(),
+                            vbatscale: data.readU8(),
+                            vbatresdivval: data.readU8(),
+                            vbatresdivmultiplier: data.readU8(),
+                        };
+
+                        FC.VOLTAGE_METER_CONFIGS.push(voltageMeterConfig);
                     }
                 }
                 break;
+
             case MSPCodes.MSP_CURRENT_METER_CONFIG:
-                if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_36))  {
-                    FC.BF_CONFIG.currentscale = data.read16();
-                    FC.BF_CONFIG.currentoffset = data.read16();
-                    FC.BF_CONFIG.currentmetertype = data.readU8();
-                    FC.BF_CONFIG.batterycapacity = data.readU16();
-                } else {
-                    FC.CURRENT_METER_CONFIGS = [];
-                    const currentMeterCount = data.readU8();
-                    for (let i = 0; i < currentMeterCount; i++) {
-                        const currentMeterConfig = {};
-                        const subframeLength = data.readU8();
+                FC.CURRENT_METER_CONFIGS = [];
+                const currentMeterCount = data.readU8();
+                for (let i = 0; i < currentMeterCount; i++) {
+                    const currentMeterConfig = {};
+                    const subframeLength = data.readU8();
 
-                        if (subframeLength !== 6) {
-                            for (let j = 0; j < subframeLength; j++) {
-                                data.readU8();
-                            }
-                        } else {
-                            currentMeterConfig.id = data.readU8();
-                            currentMeterConfig.sensorType = data.readU8();
-                            currentMeterConfig.scale = data.read16();
-                            currentMeterConfig.offset = data.read16();
-
-                            FC.CURRENT_METER_CONFIGS.push(currentMeterConfig);
+                    if (subframeLength !== 6) {
+                        for (let j = 0; j < subframeLength; j++) {
+                            data.readU8();
                         }
+                    } else {
+                        currentMeterConfig.id = data.readU8();
+                        currentMeterConfig.sensorType = data.readU8();
+                        currentMeterConfig.scale = data.read16();
+                        currentMeterConfig.offset = data.read16();
+
+                        FC.CURRENT_METER_CONFIGS.push(currentMeterConfig);
                     }
                 }
                 break;
@@ -316,15 +313,15 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.BATTERY_CONFIG.capacity = data.readU16();
                 FC.BATTERY_CONFIG.voltageMeterSource = data.readU8();
                 FC.BATTERY_CONFIG.currentMeterSource = data.readU8();
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                    FC.BATTERY_CONFIG.vbatmincellvoltage = data.readU16() / 100;
-                    FC.BATTERY_CONFIG.vbatmaxcellvoltage = data.readU16() / 100;
-                    FC.BATTERY_CONFIG.vbatwarningcellvoltage = data.readU16() / 100;
-                }
+                FC.BATTERY_CONFIG.vbatmincellvoltage = data.readU16() / 100;
+                FC.BATTERY_CONFIG.vbatmaxcellvoltage = data.readU16() / 100;
+                FC.BATTERY_CONFIG.vbatwarningcellvoltage = data.readU16() / 100;
                 break;
+
             case MSPCodes.MSP_SET_BATTERY_CONFIG:
                 console.log('Battery configuration saved');
                 break;
+
             case MSPCodes.MSP_RC_TUNING:
                 FC.RC_TUNING.rates_type = data.readU8();
                 FC.RC_TUNING.RC_RATE = parseFloat((data.readU8() / 100).toFixed(2));
@@ -340,6 +337,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.RC_TUNING.yaw_rate = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.yaw_rate_limit = data.readU16();
                 break;
+
             case MSPCodes.MSP_PID:
                 for (let i = 0; i < 3; i++) { // RPY
                     for (let j = 0; j < 4; j++) { // PIDF
@@ -348,14 +346,15 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     }
                 }
                 break;
+
             case MSPCodes.MSP_ARMING_CONFIG:
                 FC.ARMING_CONFIG.auto_disarm_delay = data.readU8();
                 break;
+
             case MSPCodes.MSP_LOOP_TIME:
-                if (semver.gte(FC.CONFIG.apiVersion, "1.8.0")) {
-                    FC.FC_CONFIG.loopTime = data.readU16();
-                }
+                FC.FC_CONFIG.loopTime = data.readU16();
                 break;
+
             case MSPCodes.MSP_MISC: // 22 bytes
                 FC.RX_CONFIG.midrc = data.readU16();
                 FC.MOTOR_CONFIG.minthrottle = data.readU16(); // 0-2000
@@ -374,6 +373,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MISC.vbatmaxcellvoltage = data.readU8() / 10; // 10-50
                 FC.MISC.vbatwarningcellvoltage = data.readU8() / 10; // 10-50
                 break;
+
             case MSPCodes.MSP_MOTOR_CONFIG:
                 FC.MOTOR_CONFIG.mincommand = data.readU16();
                 FC.MOTOR_CONFIG.minthrottle = data.readU16();
@@ -388,19 +388,16 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MOTOR_CONFIG.motor_poles[2] = data.readU8();
                 FC.MOTOR_CONFIG.motor_poles[3] = data.readU8();
                 break;
+
             case MSPCodes.MSP_GPS_CONFIG:
                 FC.GPS_CONFIG.provider = data.readU8();
                 FC.GPS_CONFIG.ublox_sbas = data.readU8();
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_34)) {
-                    FC.GPS_CONFIG.auto_config = data.readU8();
-                    FC.GPS_CONFIG.auto_baud = data.readU8();
-
-                    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-                        FC.GPS_CONFIG.home_point_once = data.readU8();
-                        FC.GPS_CONFIG.ublox_use_galileo = data.readU8();
-                    }
-                }
+                FC.GPS_CONFIG.auto_config = data.readU8();
+                FC.GPS_CONFIG.auto_baud = data.readU8();
+                FC.GPS_CONFIG.home_point_once = data.readU8();
+                FC.GPS_CONFIG.ublox_use_galileo = data.readU8();
                 break;
+
             case MSPCodes.MSP_GPS_RESCUE:
                 FC.GPS_RESCUE.angle             = data.readU16();
                 FC.GPS_RESCUE.initialAltitudeM  = data.readU16();
@@ -411,19 +408,19 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.GPS_RESCUE.throttleHover     = data.readU16();
                 FC.GPS_RESCUE.sanityChecks      = data.readU8();
                 FC.GPS_RESCUE.minSats           = data.readU8();
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-                    FC.GPS_RESCUE.ascendRate            = data.readU16();
-                    FC.GPS_RESCUE.descendRate           = data.readU16();
-                    FC.GPS_RESCUE.allowArmingWithoutFix = data.readU8();
-                    FC.GPS_RESCUE.altitudeMode          = data.readU8();
-                }
+                FC.GPS_RESCUE.ascendRate            = data.readU16();
+                FC.GPS_RESCUE.descendRate           = data.readU16();
+                FC.GPS_RESCUE.allowArmingWithoutFix = data.readU8();
+                FC.GPS_RESCUE.altitudeMode          = data.readU8();
                 break;
+
             case MSPCodes.MSP_RSSI_CONFIG:
                 FC.RSSI_CONFIG.channel = data.readU8();
                 FC.RSSI_CONFIG.scale   = data.readU8();
                 FC.RSSI_CONFIG.invert  = data.readU8();
                 FC.RSSI_CONFIG.offset  = data.readU8();
                 break;
+
             case MSPCodes.MSP_BOXNAMES:
                 FC.AUX_CONFIG = []; // empty the array as new data is coming in
 
@@ -440,11 +437,13 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     }
                 }
                 break;
+
             case MSPCodes.MSP_PIDNAMES:
                 for (let i = 0; i < data.byteLength; i++) {
                     char = data.readU8();
                 }
                 break;
+
             case MSPCodes.MSP_BOXIDS:
                 FC.AUX_CONFIG_IDS = []; // empty the array as new data is coming in
 
@@ -452,53 +451,52 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.AUX_CONFIG_IDS.push(data.readU8());
                 }
                 break;
+
             case MSPCodes.MSP_SERVO_CONFIGURATIONS:
                 FC.SERVO_CONFIG = []; // empty the array as new data is coming in
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                    if (data.byteLength % 12 == 0) {
-                        for (let i = 0; i < data.byteLength; i += 12) {
-                            const arr = {
-                                'mid':       data.readU16(),
-                                'min':       data.read16(),
-                                'max':       data.read16(),
-                                'rate':      data.read16(),
-                                'trim':      data.read16(),
-                                'speed':     data.readU16()
-                            };
-                            FC.SERVO_CONFIG.push(arr);
-                        }
+                if (data.byteLength % 12 == 0) {
+                    for (let i = 0; i < data.byteLength; i += 12) {
+                        const arr = {
+                            'mid':       data.readU16(),
+                            'min':       data.read16(),
+                            'max':       data.read16(),
+                            'rate':      data.read16(),
+                            'trim':      data.read16(),
+                            'speed':     data.readU16()
+                        };
+                        FC.SERVO_CONFIG.push(arr);
                     }
                 }
                 break;
+
             case MSPCodes.MSP_RC_DEADBAND:
                 FC.RC_DEADBAND_CONFIG.deadband = data.readU8();
                 FC.RC_DEADBAND_CONFIG.yaw_deadband = data.readU8();
                 FC.RC_DEADBAND_CONFIG.alt_hold_deadband = data.readU8();
-
-                if (semver.gte(FC.CONFIG.apiVersion, "1.17.0")) {
-                    FC.RC_DEADBAND_CONFIG.deadband3d_throttle = data.readU16();
-                }
+                FC.RC_DEADBAND_CONFIG.deadband3d_throttle = data.readU16();
                 break;
+
             case MSPCodes.MSP_SENSOR_ALIGNMENT:
                 FC.SENSOR_ALIGNMENT.align_gyro = data.readU8();
                 FC.SENSOR_ALIGNMENT.align_acc = data.readU8();
                 FC.SENSOR_ALIGNMENT.align_mag = data.readU8();
-
-                if (semver.gte(FC.CONFIG.apiVersion, '1.41.0')) {
-                    FC.SENSOR_ALIGNMENT.gyro_detection_flags = data.readU8();
-                    FC.SENSOR_ALIGNMENT.gyro_to_use = data.readU8();
-                    FC.SENSOR_ALIGNMENT.gyro_1_align = data.readU8();
-                    FC.SENSOR_ALIGNMENT.gyro_2_align = data.readU8();
-                }
+                FC.SENSOR_ALIGNMENT.gyro_detection_flags = data.readU8();
+                FC.SENSOR_ALIGNMENT.gyro_to_use = data.readU8();
+                FC.SENSOR_ALIGNMENT.gyro_1_align = data.readU8();
+                FC.SENSOR_ALIGNMENT.gyro_2_align = data.readU8();
                 break;
+
             case MSPCodes.MSP_DISPLAYPORT:
                 break;
+
             case MSPCodes.MSP_SET_RAW_RC:
                 break;
+
             case MSPCodes.MSP_SET_PID:
                 console.log('PID settings saved');
                 FC.PIDS_ACTIVE = FC.PIDS.map(array => array.slice());
                 break;
+
             case MSPCodes.MSP_SET_RC_TUNING:
                 console.log('RC Tuning saved');
                 break;
@@ -547,25 +545,31 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_SET_VOLTAGE_METER_CONFIG:
                 console.log('Voltage config saved');
                 break;
+
             case MSPCodes.MSP_DEBUG:
                 for (let i = 0; i < 4; i++)
                     FC.SENSOR_DATA.debug[i] = data.read16();
                 break;
+
             case MSPCodes.MSP_SET_MOTOR_OVERRIDE:
                 console.log('Motor Override set');
                 break;
+
             case MSPCodes.MSP_UID:
                 FC.CONFIG.uid[0] = data.readU32();
                 FC.CONFIG.uid[1] = data.readU32();
                 FC.CONFIG.uid[2] = data.readU32();
                 break;
+
             case MSPCodes.MSP_ACC_TRIM:
                 FC.CONFIG.accelerometerTrims[0] = data.read16(); // pitch
                 FC.CONFIG.accelerometerTrims[1] = data.read16(); // roll
                 break;
+
             case MSPCodes.MSP_SET_ACC_TRIM:
                 console.log('Accelerometer trimms saved.');
                 break;
+
             case MSPCodes.MSP_GPS_SV_INFO:
                 if (data.byteLength > 0) {
                     const numCh = data.readU8();
@@ -586,6 +590,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.RC_MAP.push(data.readU8());
                 }
                 break;
+
             case MSPCodes.MSP_SET_RX_MAP:
                 console.log('RCMAP saved');
                 break;
@@ -599,18 +604,13 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_FEATURE_CONFIG:
                 FC.FEATURE_CONFIG.features.setMask(data.readU32());
-
                 updateTabList(FC.FEATURE_CONFIG.features);
                 break;
 
             case MSPCodes.MSP_BEEPER_CONFIG:
                 FC.BEEPER_CONFIG.beepers.setDisabledMask(data.readU32());
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-                    FC.BEEPER_CONFIG.dshotBeaconTone = data.readU8();
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_39)) {
-                    FC.BEEPER_CONFIG.dshotBeaconConditions.setDisabledMask(data.readU32());
-                }
+                FC.BEEPER_CONFIG.dshotBeaconTone = data.readU8();
+                FC.BEEPER_CONFIG.dshotBeaconConditions.setDisabledMask(data.readU32());
                 break;
 
             case MSPCodes.MSP_BOARD_ALIGNMENT_CONFIG:
@@ -620,15 +620,13 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_SET_REBOOT:
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_40)) {
-                    const rebootType = data.read8();
-                    if ((rebootType === self.REBOOT_TYPES.MSC) || (rebootType === self.REBOOT_TYPES.MSC_UTC)) {
-                        if (data.read8() === 0) {
-                            console.log('Storage device not ready.');
+                const rebootType = data.read8();
+                if ((rebootType === self.REBOOT_TYPES.MSC) || (rebootType === self.REBOOT_TYPES.MSC_UTC)) {
+                    if (data.read8() === 0) {
+                        console.log('Storage device not ready.');
 
-                            showErrorDialog(i18n.getMessage('storageDeviceNotReady'));
-                            break;
-                        }
+                        showErrorDialog(i18n.getMessage('storageDeviceNotReady'));
+                        break;
                     }
                 }
                 console.log('Reboot request accepted');
@@ -674,62 +672,29 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 }
                 FC.CONFIG.boardIdentifier = boardIdentifier;
                 FC.CONFIG.boardVersion = data.readU16();
+                FC.CONFIG.boardType = data.readU8();
+                FC.CONFIG.targetCapabilities = data.readU8();
 
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_35)) {
-                    FC.CONFIG.boardType = data.readU8();
-                } else {
-                    FC.CONFIG.boardType = 0;
+                let length = data.readU8();
+                for (let i = 0; i < length; i++) {
+                    FC.CONFIG.targetName += String.fromCharCode(data.readU8());
+                }
+                length = data.readU8();
+                for (let i = 0; i < length; i++) {
+                    FC.CONFIG.boardName += String.fromCharCode(data.readU8());
+                }
+                length = data.readU8();
+                for (let i = 0; i < length; i++) {
+                    FC.CONFIG.manufacturerId += String.fromCharCode(data.readU8());
+                }
+                for (let i = 0; i < self.SIGNATURE_LENGTH; i++) {
+                    FC.CONFIG.signature.push(data.readU8());
                 }
 
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-                    FC.CONFIG.targetCapabilities = data.readU8();
-
-                    let length = data.readU8();
-                    for (let i = 0; i < length; i++) {
-                        FC.CONFIG.targetName += String.fromCharCode(data.readU8());
-                    }
-                } else {
-                    FC.CONFIG.targetCapabilities = 0;
-                    FC.CONFIG.targetName = "";
-                }
-
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_39)) {
-                    let length = data.readU8();
-                    for (let i = 0; i < length; i++) {
-                        FC.CONFIG.boardName += String.fromCharCode(data.readU8());
-                    }
-
-                    length = data.readU8();
-                    for (let i = 0; i < length; i++) {
-                        FC.CONFIG.manufacturerId += String.fromCharCode(data.readU8());
-                    }
-
-                    for (let i = 0; i < self.SIGNATURE_LENGTH; i++) {
-                        FC.CONFIG.signature.push(data.readU8());
-                    }
-                } else {
-                    FC.CONFIG.boardName = "";
-                    FC.CONFIG.manufacturerId = "";
-                    FC.CONFIG.signature = [];
-                }
-
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                    FC.CONFIG.mcuTypeId = data.readU8();
-                } else {
-                    FC.CONFIG.mcuTypeId = 255;
-                }
-
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                    FC.CONFIG.configurationState = data.readU8();
-                }
-
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-                    FC.CONFIG.sampleRateHz = data.readU16();
-                    FC.CONFIG.configurationProblems = data.readU32();
-                } else {
-                    FC.CONFIG.configurationProblems = 0;
-                }
-
+                FC.CONFIG.mcuTypeId = data.readU8();
+                FC.CONFIG.configurationState = data.readU8();
+                FC.CONFIG.sampleRateHz = data.readU16();
+                FC.CONFIG.configurationProblems = data.readU32();
                 break;
 
             case MSPCodes.MSP_NAME:
@@ -745,35 +710,19 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_CF_SERIAL_CONFIG:
                 FC.SERIAL_CONFIG.ports = [];
-                if (semver.lt(FC.CONFIG.apiVersion, "1.6.0")) {
-                    const serialPortCount = (data.byteLength - (4 * 4)) / 2;
-                    for (let i = 0; i < serialPortCount; i++) {
-                        const serialPort = {
-                            identifier: data.readU8(),
-                            scenario: data.readU8(),
-                        };
-                        FC.SERIAL_CONFIG.ports.push(serialPort);
-                    }
-                    FC.SERIAL_CONFIG.mspBaudRate = data.readU32();
-                    FC.SERIAL_CONFIG.cliBaudRate = data.readU32();
-                    FC.SERIAL_CONFIG.gpsBaudRate = data.readU32();
-                    FC.SERIAL_CONFIG.gpsPassthroughBaudRate = data.readU32();
-                } else {
-                    const bytesPerPort = 1 + 2 + (1 * 4);
+                const bytesPerPort = 1 + 2 + (1 * 4);
+                const serialPortCount = data.byteLength / bytesPerPort;
+                for (let i = 0; i < serialPortCount; i++) {
+                    const serialPort = {
+                        identifier: data.readU8(),
+                        functions: self.serialPortFunctionMaskToFunctions(data.readU16()),
+                        msp_baudrate: self.BAUD_RATES[data.readU8()],
+                        gps_baudrate: self.BAUD_RATES[data.readU8()],
+                        telemetry_baudrate: self.BAUD_RATES[data.readU8()],
+                        blackbox_baudrate: self.BAUD_RATES[data.readU8()],
+                    };
 
-                    const serialPortCount = data.byteLength / bytesPerPort;
-                    for (let i = 0; i < serialPortCount; i++) {
-                        const serialPort = {
-                            identifier: data.readU8(),
-                            functions: self.serialPortFunctionMaskToFunctions(data.readU16()),
-                            msp_baudrate: self.BAUD_RATES[data.readU8()],
-                            gps_baudrate: self.BAUD_RATES[data.readU8()],
-                            telemetry_baudrate: self.BAUD_RATES[data.readU8()],
-                            blackbox_baudrate: self.BAUD_RATES[data.readU8()],
-                        };
-
-                        FC.SERIAL_CONFIG.ports.push(serialPort);
-                    }
+                    FC.SERIAL_CONFIG.ports.push(serialPort);
                 }
                 break;
 
@@ -888,11 +837,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.FAILSAFE_CONFIG.failsafe_delay = data.readU8();
                 FC.FAILSAFE_CONFIG.failsafe_off_delay = data.readU8();
                 FC.FAILSAFE_CONFIG.failsafe_throttle = data.readU16();
-                if (semver.gte(FC.CONFIG.apiVersion, "1.15.0")) {
-                    FC.FAILSAFE_CONFIG.failsafe_switch_mode = data.readU8();
-                    FC.FAILSAFE_CONFIG.failsafe_throttle_low_delay = data.readU16();
-                    FC.FAILSAFE_CONFIG.failsafe_procedure = data.readU8();
-                }
+                FC.FAILSAFE_CONFIG.failsafe_switch_mode = data.readU8();
+                FC.FAILSAFE_CONFIG.failsafe_throttle_low_delay = data.readU16();
+                FC.FAILSAFE_CONFIG.failsafe_procedure = data.readU8();
                 break;
 
             case MSPCodes.MSP_RXFAIL_CONFIG:
@@ -1054,7 +1001,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_MIXER_OVERRIDE:
-	        FC.MIXER_OVERRIDE = [];
+                FC.MIXER_OVERRIDE = [];
                 const mixInputCount = data.byteLength / 2;
                 for (let i = 0; i < mixInputCount; i++) {
                     FC.MIXER_OVERRIDE[i] = data.read16();
@@ -1069,102 +1016,61 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_LED_STRIP_CONFIG:
                 FC.LED_STRIP = [];
+                // According to rotorflight/src/main/msp/msp.c
+                // API 1.41 - add indicator for advanced profile support and the current profile selection
+                // 0 = basic ledstrip available
+                // 1 = advanced ledstrip available
+                // Following byte is the current LED profile
+                const ledCount = (data.byteLength - 2) / 4;
 
-                let ledCount = data.byteLength / 7; // v1.4.0 and below incorrectly reported 4 bytes per led.
-                if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
-                    ledCount = data.byteLength / 4;
-                }
-                if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                    ledOverlayLetters = ['t', 'o', 'b', 'n', 'i', 'w']; // in LSB bit
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                    // According to rotorflight/src/main/msp/msp.c
-                    // API 1.41 - add indicator for advanced profile support and the current profile selection
-                    // 0 = basic ledstrip available
-                    // 1 = advanced ledstrip available
-                    // Following byte is the current LED profile
-                    ledCount = (data.byteLength - 2) / 4;
-                }
                 for (let i = 0; i < ledCount; i++) {
 
-                    if (semver.lt(FC.CONFIG.apiVersion, "1.20.0")) {
-                        const directionMask = data.readU16();
+                    const mask = data.readU32();
 
-                        const directions = [];
-                        for (let directionLetterIndex = 0; directionLetterIndex < ledDirectionLetters.length; directionLetterIndex++) {
-                            if (bit_check(directionMask, directionLetterIndex)) {
-                                directions.push(ledDirectionLetters[directionLetterIndex]);
-                            }
+                    const functionId = (mask >> 8) & 0xF;
+                    const functions = [];
+                    for (let baseFunctionLetterIndex = 0; baseFunctionLetterIndex < ledBaseFunctionLetters.length; baseFunctionLetterIndex++) {
+                        if (functionId == baseFunctionLetterIndex) {
+                            functions.push(ledBaseFunctionLetters[baseFunctionLetterIndex]);
+                            break;
                         }
-
-                        const functionMask = data.readU16();
-
-                        const functions = [];
-                        for (let functionLetterIndex = 0; functionLetterIndex < ledFunctionLetters.length; functionLetterIndex++) {
-                            if (bit_check(functionMask, functionLetterIndex)) {
-                                functions.push(ledFunctionLetters[functionLetterIndex]);
-                            }
-                        }
-
-                        const led = {
-                            directions: directions,
-                            functions: functions,
-                            x: data.readU8(),
-                            y: data.readU8(),
-                            color: data.readU8(),
-                        };
-
-                        FC.LED_STRIP.push(led);
-                    } else {
-                        const mask = data.readU32();
-
-                        const functionId = (mask >> 8) & 0xF;
-                        const functions = [];
-                        for (let baseFunctionLetterIndex = 0; baseFunctionLetterIndex < ledBaseFunctionLetters.length; baseFunctionLetterIndex++) {
-                            if (functionId == baseFunctionLetterIndex) {
-                                functions.push(ledBaseFunctionLetters[baseFunctionLetterIndex]);
-                                break;
-                            }
-                        }
-
-                        const overlayMask = (mask >> 12) & 0x3F;
-                        for (let overlayLetterIndex = 0; overlayLetterIndex < ledOverlayLetters.length; overlayLetterIndex++) {
-                            if (bit_check(overlayMask, overlayLetterIndex)) {
-                                functions.push(ledOverlayLetters[overlayLetterIndex]);
-                            }
-                        }
-
-                        const directionMask = (mask >> 22) & 0x3F;
-                        const directions = [];
-                        for (let directionLetterIndex = 0; directionLetterIndex < ledDirectionLetters.length; directionLetterIndex++) {
-                            if (bit_check(directionMask, directionLetterIndex)) {
-                                directions.push(ledDirectionLetters[directionLetterIndex]);
-                            }
-                        }
-                        const led = {
-                            y: (mask) & 0xF,
-                            x: (mask >> 4) & 0xF,
-                            functions: functions,
-                            color: (mask >> 18) & 0xF,
-                            directions: directions,
-                            parameters: (mask >> 28) & 0xF,
-                        };
-
-                        FC.LED_STRIP.push(led);
                     }
+
+                    const overlayMask = (mask >> 12) & 0x3F;
+                    for (let overlayLetterIndex = 0; overlayLetterIndex < ledOverlayLetters.length; overlayLetterIndex++) {
+                        if (bit_check(overlayMask, overlayLetterIndex)) {
+                            functions.push(ledOverlayLetters[overlayLetterIndex]);
+                        }
+                    }
+
+                    const directionMask = (mask >> 22) & 0x3F;
+                    const directions = [];
+                    for (let directionLetterIndex = 0; directionLetterIndex < ledDirectionLetters.length; directionLetterIndex++) {
+                        if (bit_check(directionMask, directionLetterIndex)) {
+                            directions.push(ledDirectionLetters[directionLetterIndex]);
+                        }
+                    }
+                    const led = {
+                        y: (mask) & 0xF,
+                        x: (mask >> 4) & 0xF,
+                        functions: functions,
+                        color: (mask >> 18) & 0xF,
+                        directions: directions,
+                        parameters: (mask >> 28) & 0xF,
+                    };
+
+                    FC.LED_STRIP.push(led);
                 }
                 break;
+
             case MSPCodes.MSP_SET_LED_STRIP_CONFIG:
                 console.log('Led strip config saved');
                 break;
+
             case MSPCodes.MSP_LED_COLORS:
-
                 FC.LED_COLORS = [];
-
                 const ledcolorCount = data.byteLength / 4;
-
                 for (let i = 0; i < ledcolorCount; i++) {
-
                     const color = {
                         h: data.readU16(),
                         s: data.readU8(),
@@ -1172,29 +1078,25 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     };
                     FC.LED_COLORS.push(color);
                 }
-
                 break;
+
             case MSPCodes.MSP_SET_LED_COLORS:
                 console.log('Led strip colors saved');
                 break;
+
             case MSPCodes.MSP_LED_STRIP_MODECOLOR:
-                if (semver.gte(FC.CONFIG.apiVersion, "1.19.0")) {
-
-                    FC.LED_MODE_COLORS = [];
-
-                    const colorCount = data.byteLength / 3;
-
-                    for (let i = 0; i < colorCount; i++) {
-
-                        const modeColor = {
-                            mode: data.readU8(),
-                            direction: data.readU8(),
-                            color: data.readU8(),
-                        };
-                        FC.LED_MODE_COLORS.push(modeColor);
-                    }
+                FC.LED_MODE_COLORS = [];
+                const colorCount = data.byteLength / 3;
+                for (let i = 0; i < colorCount; i++) {
+                    const modeColor = {
+                        mode: data.readU8(),
+                        direction: data.readU8(),
+                        color: data.readU8(),
+                    };
+                    FC.LED_MODE_COLORS.push(modeColor);
                 }
                 break;
+
             case MSPCodes.MSP_SET_LED_STRIP_MODECOLOR:
                 console.log('Led strip mode colors saved');
                 break;
@@ -1217,68 +1119,56 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 }
                 update_dataflash_global();
                 break;
+
             case MSPCodes.MSP_DATAFLASH_READ:
                 // No-op, let callback handle it
                 break;
+
             case MSPCodes.MSP_DATAFLASH_ERASE:
                 console.log("Data flash erase begun...");
                 break;
+
             case MSPCodes.MSP_SDCARD_SUMMARY:
                 flags = data.readU8();
-
                 FC.SDCARD.supported = (flags & 0x01) != 0;
                 FC.SDCARD.state = data.readU8();
                 FC.SDCARD.filesystemLastError = data.readU8();
                 FC.SDCARD.freeSizeKB = data.readU32();
                 FC.SDCARD.totalSizeKB = data.readU32();
                 break;
+
             case MSPCodes.MSP_BLACKBOX_CONFIG:
                 FC.BLACKBOX.supported = (data.readU8() & 1) != 0;
                 FC.BLACKBOX.blackboxDevice = data.readU8();
                 FC.BLACKBOX.blackboxRateNum = data.readU8();
                 FC.BLACKBOX.blackboxRateDenom = data.readU8();
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                    FC.BLACKBOX.blackboxPDenom = data.readU16();
-                }
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
-                    FC.BLACKBOX.blackboxSampleRate = data.readU8();
-                }
+                FC.BLACKBOX.blackboxPDenom = data.readU16();
                 break;
+
             case MSPCodes.MSP_SET_BLACKBOX_CONFIG:
                 console.log("Blackbox config saved");
                 break;
+
             case MSPCodes.MSP_TRANSPONDER_CONFIG:
                 let bytesRemaining = data.byteLength;
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_33)) {
-                    const providerCount = data.readU8();
-                    bytesRemaining--;
 
-                    FC.TRANSPONDER.supported = providerCount > 0;
-                    FC.TRANSPONDER.providers = [];
+                const providerCount = data.readU8();
+                bytesRemaining--;
 
-                    for (let i = 0; i < providerCount; i++) {
-                        const provider = {
-                            id: data.readU8(),
-                            dataLength: data.readU8(),
-                        };
-                        bytesRemaining -= 2;
+                FC.TRANSPONDER.supported = providerCount > 0;
+                FC.TRANSPONDER.providers = [];
 
-                        FC.TRANSPONDER.providers.push(provider);
-                    }
-                    FC.TRANSPONDER.provider = data.readU8();
-                    bytesRemaining--;
-
-                } else {
-                    FC.TRANSPONDER.supported = (data.readU8() & 1) != 0;
-                    bytesRemaining--;
-
-                    // only ILAP was supported prior to 1.33.0
-                    FC.TRANSPONDER.providers = [{
-                        id: 1, // ILAP
-                        dataLength: 6,
-                    }];
-                    FC.TRANSPONDER.provider = FC.TRANSPONDER.providers[0].id;
+                for (let i = 0; i < providerCount; i++) {
+                    const provider = {
+                        id: data.readU8(),
+                        dataLength: data.readU8(),
+                    };
+                    bytesRemaining -= 2;
+                    FC.TRANSPONDER.providers.push(provider);
                 }
+                FC.TRANSPONDER.provider = data.readU8();
+                bytesRemaining--;
+
                 FC.TRANSPONDER.data = [];
                 for (let i = 0; i < bytesRemaining; i++) {
                     FC.TRANSPONDER.data.push(data.readU8());
@@ -1299,15 +1189,12 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.VTX_CONFIG.vtx_frequency = data.readU16();
                 FC.VTX_CONFIG.vtx_device_ready = data.readU8() != 0;
                 FC.VTX_CONFIG.vtx_low_power_disarm = data.readU8();
-
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                    FC.VTX_CONFIG.vtx_pit_mode_frequency = data.readU16();
-                    FC.VTX_CONFIG.vtx_table_available = data.readU8() != 0;
-                    FC.VTX_CONFIG.vtx_table_bands = data.readU8();
-                    FC.VTX_CONFIG.vtx_table_channels = data.readU8();
-                    FC.VTX_CONFIG.vtx_table_powerlevels = data.readU8();
-                    FC.VTX_CONFIG.vtx_table_clear = false;
-                }
+                FC.VTX_CONFIG.vtx_pit_mode_frequency = data.readU16();
+                FC.VTX_CONFIG.vtx_table_available = data.readU8() != 0;
+                FC.VTX_CONFIG.vtx_table_bands = data.readU8();
+                FC.VTX_CONFIG.vtx_table_channels = data.readU8();
+                FC.VTX_CONFIG.vtx_table_powerlevels = data.readU8();
+                FC.VTX_CONFIG.vtx_table_clear = false;
                 break;
 
             case MSPCodes.MSP_SET_VTX_CONFIG:
@@ -1315,7 +1202,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_VTXTABLE_BAND:
-
                 FC.VTXTABLE_BAND.vtxtable_band_number = data.readU8();
 
                 const bandNameLength = data.readU8();
@@ -1556,27 +1442,27 @@ MspHelper.prototype.crunch = function(code) {
             const featureMask = FC.FEATURE_CONFIG.features.getMask();
             buffer.push32(featureMask);
             break;
+
         case MSPCodes.MSP_SET_BEEPER_CONFIG:
             const beeperDisabledMask = FC.BEEPER_CONFIG.beepers.getDisabledMask();
             buffer.push32(beeperDisabledMask);
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-                buffer.push8(FC.BEEPER_CONFIG.dshotBeaconTone);
-            }
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_39)) {
-                buffer.push32(FC.BEEPER_CONFIG.dshotBeaconConditions.getDisabledMask());
-            }
+            buffer.push8(FC.BEEPER_CONFIG.dshotBeaconTone);
+            buffer.push32(FC.BEEPER_CONFIG.dshotBeaconConditions.getDisabledMask());
             break;
+
         case MSPCodes.MSP_SET_MIXER_CONFIG:
             buffer.push8(FC.MIXER_CONFIG.main_rotor_dir)
                 .push8(FC.MIXER_CONFIG.tail_rotor_mode)
                 .push8(FC.MIXER_CONFIG.tail_motor_idle)
                 .push8(FC.MIXER_CONFIG.swash_ring);
             break;
+
         case MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG:
             buffer.push16(FC.BOARD_ALIGNMENT_CONFIG.roll)
                 .push16(FC.BOARD_ALIGNMENT_CONFIG.pitch)
                 .push16(FC.BOARD_ALIGNMENT_CONFIG.yaw);
             break;
+
         case MSPCodes.MSP_SET_PID:
             for (let i = 0; i < 3; i++) { // RPY
                 for (let j = 0; j < 4; j++) { // PIDF
@@ -1584,6 +1470,7 @@ MspHelper.prototype.crunch = function(code) {
                 }
             }
             break;
+
         case MSPCodes.MSP_SET_RC_TUNING:
             buffer.push8(FC.RC_TUNING.rates_type);
             buffer.push8(Math.round(FC.RC_TUNING.RC_RATE * 100))
@@ -1599,24 +1486,30 @@ MspHelper.prototype.crunch = function(code) {
                   .push8(Math.round(FC.RC_TUNING.RC_YAW_EXPO * 100))
                   .push16(FC.RC_TUNING.yaw_rate_limit);
             break;
+
         case MSPCodes.MSP_SET_RX_MAP:
             for (let i = 0; i < FC.RC_MAP.length; i++) {
                 buffer.push8(FC.RC_MAP[i]);
             }
             break;
+
         case MSPCodes.MSP_SET_ACC_TRIM:
             buffer.push16(FC.CONFIG.accelerometerTrims[0])
                 .push16(FC.CONFIG.accelerometerTrims[1]);
             break;
+
         case MSPCodes.MSP_SET_DEBUG_CONFIG:
             buffer.push8(FC.DEBUG_CONFIG.debugMode);
             break;
+
         case MSPCodes.MSP_SET_ARMING_CONFIG:
             buffer.push8(FC.ARMING_CONFIG.auto_disarm_delay);
             break;
+
         case MSPCodes.MSP_SET_LOOP_TIME:
             buffer.push16(FC.FC_CONFIG.loopTime);
             break;
+
         case MSPCodes.MSP_SET_MISC:
             buffer.push16(FC.RX_CONFIG.midrc)
                 .push16(FC.MOTOR_CONFIG.minthrottle)
@@ -1635,6 +1528,7 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(Math.round(FC.MISC.vbatmaxcellvoltage * 10))
                 .push8(Math.round(FC.MISC.vbatwarningcellvoltage * 10));
             break;
+
         case MSPCodes.MSP_SET_MOTOR_CONFIG:
             buffer.push16(FC.MOTOR_CONFIG.mincommand)
                 .push16(FC.MOTOR_CONFIG.minthrottle)
@@ -1649,19 +1543,16 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.MOTOR_CONFIG.motor_poles[2])
                 .push8(FC.MOTOR_CONFIG.motor_poles[3]);
             break;
+
         case MSPCodes.MSP_SET_GPS_CONFIG:
             buffer.push8(FC.GPS_CONFIG.provider)
-                .push8(FC.GPS_CONFIG.ublox_sbas);
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_34)) {
-                buffer.push8(FC.GPS_CONFIG.auto_config)
-                    .push8(FC.GPS_CONFIG.auto_baud);
-
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-                    buffer.push8(FC.GPS_CONFIG.home_point_once)
-                          .push8(FC.GPS_CONFIG.ublox_use_galileo);
-                }
-            }
+                  .push8(FC.GPS_CONFIG.ublox_sbas)
+                  .push8(FC.GPS_CONFIG.auto_config)
+                  .push8(FC.GPS_CONFIG.auto_baud)
+                  .push8(FC.GPS_CONFIG.home_point_once)
+                  .push8(FC.GPS_CONFIG.ublox_use_galileo);
             break;
+
         case MSPCodes.MSP_SET_GPS_RESCUE:
             buffer.push16(FC.GPS_RESCUE.angle)
                   .push16(FC.GPS_RESCUE.initialAltitudeM)
@@ -1671,15 +1562,13 @@ MspHelper.prototype.crunch = function(code) {
                   .push16(FC.GPS_RESCUE.throttleMax)
                   .push16(FC.GPS_RESCUE.throttleHover)
                   .push8(FC.GPS_RESCUE.sanityChecks)
-                  .push8(FC.GPS_RESCUE.minSats);
-
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-                    buffer.push16(FC.GPS_RESCUE.ascendRate)
-                          .push16(FC.GPS_RESCUE.descendRate)
-                          .push8(FC.GPS_RESCUE.allowArmingWithoutFix)
-                          .push8(FC.GPS_RESCUE.altitudeMode);
-                }
+                  .push8(FC.GPS_RESCUE.minSats)
+                  .push16(FC.GPS_RESCUE.ascendRate)
+                  .push16(FC.GPS_RESCUE.descendRate)
+                  .push8(FC.GPS_RESCUE.allowArmingWithoutFix)
+                  .push8(FC.GPS_RESCUE.altitudeMode);
             break;
+
         case MSPCodes.MSP_SET_RSSI_CONFIG:
             buffer.push8(FC.RSSI_CONFIG.channel)
                   .push8(FC.RSSI_CONFIG.scale)
@@ -1692,31 +1581,16 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(Math.round(FC.BATTERY_CONFIG.vbatwarningcellvoltage * 10))
                 .push16(FC.BATTERY_CONFIG.capacity)
                 .push8(FC.BATTERY_CONFIG.voltageMeterSource)
-                .push8(FC.BATTERY_CONFIG.currentMeterSource);
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                    buffer.push16(Math.round(FC.BATTERY_CONFIG.vbatmincellvoltage * 100))
-                        .push16(Math.round(FC.BATTERY_CONFIG.vbatmaxcellvoltage * 100))
-                        .push16(Math.round(FC.BATTERY_CONFIG.vbatwarningcellvoltage * 100));
-                }
+                .push8(FC.BATTERY_CONFIG.currentMeterSource)
+                .push16(Math.round(FC.BATTERY_CONFIG.vbatmincellvoltage * 100))
+                .push16(Math.round(FC.BATTERY_CONFIG.vbatmaxcellvoltage * 100))
+                .push16(Math.round(FC.BATTERY_CONFIG.vbatwarningcellvoltage * 100));
             break;
+
         case MSPCodes.MSP_SET_VOLTAGE_METER_CONFIG:
-            if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                buffer.push8(FC.MISC.vbatscale)
-                    .push8(Math.round(FC.MISC.vbatmincellvoltage * 10))
-                    .push8(Math.round(FC.MISC.vbatmaxcellvoltage * 10))
-                    .push8(Math.round(FC.MISC.vbatwarningcellvoltage * 10));
-                    if (semver.gte(FC.CONFIG.apiVersion, "1.23.0")) {
-                        buffer.push8(FC.MISC.batterymetertype);
-                    }
-            }
-           break;
+            break;
+
         case MSPCodes.MSP_SET_CURRENT_METER_CONFIG:
-            if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_36))  {
-                buffer.push16(FC.BF_CONFIG.currentscale)
-                    .push16(FC.BF_CONFIG.currentoffset)
-                    .push8(FC.BF_CONFIG.currentmetertype)
-                    .push16(FC.BF_CONFIG.batterycapacity);
-            }
             break;
 
         case MSPCodes.MSP_SET_RX_CONFIG:
@@ -1745,18 +1619,14 @@ MspHelper.prototype.crunch = function(code) {
         case MSPCodes.MSP_SET_FAILSAFE_CONFIG:
             buffer.push8(FC.FAILSAFE_CONFIG.failsafe_delay)
                 .push8(FC.FAILSAFE_CONFIG.failsafe_off_delay)
-                .push16(FC.FAILSAFE_CONFIG.failsafe_throttle);
-            if (semver.gte(FC.CONFIG.apiVersion, "1.15.0")) {
-                buffer.push8(FC.FAILSAFE_CONFIG.failsafe_switch_mode)
-                    .push16(FC.FAILSAFE_CONFIG.failsafe_throttle_low_delay)
-                    .push8(FC.FAILSAFE_CONFIG.failsafe_procedure);
-            }
+                .push16(FC.FAILSAFE_CONFIG.failsafe_throttle)
+                .push8(FC.FAILSAFE_CONFIG.failsafe_switch_mode)
+                .push16(FC.FAILSAFE_CONFIG.failsafe_throttle_low_delay)
+                .push8(FC.FAILSAFE_CONFIG.failsafe_procedure);
             break;
 
         case MSPCodes.MSP_SET_TRANSPONDER_CONFIG:
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_33)) {
-                buffer.push8(FC.TRANSPONDER.provider); //
-            }
+            buffer.push8(FC.TRANSPONDER.provider);
             for (let i = 0; i < FC.TRANSPONDER.data.length; i++) {
                 buffer.push8(FC.TRANSPONDER.data[i]);
             }
@@ -1766,28 +1636,16 @@ MspHelper.prototype.crunch = function(code) {
             break;
 
         case MSPCodes.MSP_SET_CF_SERIAL_CONFIG:
-            if (semver.lt(FC.CONFIG.apiVersion, "1.6.0")) {
+            for (let i = 0; i < FC.SERIAL_CONFIG.ports.length; i++) {
+                const serialPort = FC.SERIAL_CONFIG.ports[i];
+                buffer.push8(serialPort.identifier);
 
-                for (let i = 0; i < FC.SERIAL_CONFIG.ports.length; i++) {
-                    buffer.push8(FC.SERIAL_CONFIG.ports[i].scenario);
-                }
-                buffer.push32(FC.SERIAL_CONFIG.mspBaudRate)
-                    .push32(FC.SERIAL_CONFIG.cliBaudRate)
-                    .push32(FC.SERIAL_CONFIG.gpsBaudRate)
-                    .push32(FC.SERIAL_CONFIG.gpsPassthroughBaudRate);
-            } else {
-                for (let i = 0; i < FC.SERIAL_CONFIG.ports.length; i++) {
-                    const serialPort = FC.SERIAL_CONFIG.ports[i];
-
-                    buffer.push8(serialPort.identifier);
-
-                    const functionMask = self.serialPortFunctionsToMask(serialPort.functions);
-                    buffer.push16(functionMask)
-                        .push8(self.BAUD_RATES.indexOf(serialPort.msp_baudrate))
-                        .push8(self.BAUD_RATES.indexOf(serialPort.gps_baudrate))
-                        .push8(self.BAUD_RATES.indexOf(serialPort.telemetry_baudrate))
-                        .push8(self.BAUD_RATES.indexOf(serialPort.blackbox_baudrate));
-                }
+                const functionMask = self.serialPortFunctionsToMask(serialPort.functions);
+                buffer.push16(functionMask)
+                    .push8(self.BAUD_RATES.indexOf(serialPort.msp_baudrate))
+                    .push8(self.BAUD_RATES.indexOf(serialPort.gps_baudrate))
+                    .push8(self.BAUD_RATES.indexOf(serialPort.telemetry_baudrate))
+                    .push8(self.BAUD_RATES.indexOf(serialPort.blackbox_baudrate));
             }
             break;
 
@@ -1796,7 +1654,6 @@ MspHelper.prototype.crunch = function(code) {
 
             for (let i = 0; i < FC.SERIAL_CONFIG.ports.length; i++) {
                 const serialPort = FC.SERIAL_CONFIG.ports[i];
-
                 buffer.push8(serialPort.identifier);
 
                 const functionMask = self.serialPortFunctionsToMask(serialPort.functions);
@@ -1811,21 +1668,17 @@ MspHelper.prototype.crunch = function(code) {
         case MSPCodes.MSP_SET_RC_DEADBAND:
             buffer.push8(FC.RC_DEADBAND_CONFIG.deadband)
                 .push8(FC.RC_DEADBAND_CONFIG.yaw_deadband)
-                .push8(FC.RC_DEADBAND_CONFIG.alt_hold_deadband);
-            if (semver.gte(FC.CONFIG.apiVersion, "1.17.0")) {
-                buffer.push16(FC.RC_DEADBAND_CONFIG.deadband3d_throttle);
-            }
+                .push8(FC.RC_DEADBAND_CONFIG.alt_hold_deadband)
+                .push16(FC.RC_DEADBAND_CONFIG.deadband3d_throttle);
             break;
 
         case MSPCodes.MSP_SET_SENSOR_ALIGNMENT:
             buffer.push8(FC.SENSOR_ALIGNMENT.align_gyro)
                 .push8(FC.SENSOR_ALIGNMENT.align_acc)
-                .push8(FC.SENSOR_ALIGNMENT.align_mag);
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                buffer.push8(FC.SENSOR_ALIGNMENT.gyro_to_use)
+                .push8(FC.SENSOR_ALIGNMENT.align_mag)
+                .push8(FC.SENSOR_ALIGNMENT.gyro_to_use)
                 .push8(FC.SENSOR_ALIGNMENT.gyro_1_align)
                 .push8(FC.SENSOR_ALIGNMENT.gyro_2_align);
-            }
             break;
 
     case MSPCodes.MSP_SET_ADVANCED_CONFIG:
@@ -1935,13 +1788,9 @@ MspHelper.prototype.crunch = function(code) {
         case MSPCodes.MSP_SET_BLACKBOX_CONFIG:
             buffer.push8(FC.BLACKBOX.blackboxDevice)
                 .push8(FC.BLACKBOX.blackboxRateNum)
-                .push8(FC.BLACKBOX.blackboxRateDenom);
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                buffer.push16(FC.BLACKBOX.blackboxPDenom);
-            }
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
-                buffer.push8(FC.BLACKBOX.blackboxSampleRate);
-            }
+                .push8(FC.BLACKBOX.blackboxRateDenom)
+                .push16(FC.BLACKBOX.blackboxPDenom)
+                .push8(FC.BLACKBOX.blackboxSampleRate);
             break;
 
         case MSPCodes.MSP_COPY_PROFILE:
@@ -1956,116 +1805,72 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_RTC:
             const now = new Date();
-
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                const timestamp = now.getTime();
-                const secs = timestamp / 1000;
-                const millis = timestamp % 1000;
-                buffer.push32(secs);
-                buffer.push16(millis);
-            } else {
-                buffer.push16(now.getUTCFullYear());
-                buffer.push8(now.getUTCMonth() + 1);
-                buffer.push8(now.getUTCDate());
-                buffer.push8(now.getUTCHours());
-                buffer.push8(now.getUTCMinutes());
-                buffer.push8(now.getUTCSeconds());
-            }
-
+            const timestamp = now.getTime();
+            const secs = timestamp / 1000;
+            const millis = timestamp % 1000;
+            buffer.push32(secs);
+            buffer.push16(millis);
             break;
 
         case MSPCodes.MSP_SET_VTX_CONFIG:
-
             buffer.push16(FC.VTX_CONFIG.vtx_frequency)
                   .push8(FC.VTX_CONFIG.vtx_power)
                   .push8(FC.VTX_CONFIG.vtx_pit_mode ? 1 : 0)
-                  .push8(FC.VTX_CONFIG.vtx_low_power_disarm);
-
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-                buffer.push16(FC.VTX_CONFIG.vtx_pit_mode_frequency)
-                      .push8(FC.VTX_CONFIG.vtx_band)
-                      .push8(FC.VTX_CONFIG.vtx_channel)
-                      .push16(FC.VTX_CONFIG.vtx_frequency)
-                      .push8(FC.VTX_CONFIG.vtx_table_bands)
-                      .push8(FC.VTX_CONFIG.vtx_table_channels)
-                      .push8(FC.VTX_CONFIG.vtx_table_powerlevels)
-                      .push8(FC.VTX_CONFIG.vtx_table_clear ? 1 : 0);
-            }
-
+                  .push8(FC.VTX_CONFIG.vtx_low_power_disarm)
+                  .push16(FC.VTX_CONFIG.vtx_pit_mode_frequency)
+                  .push8(FC.VTX_CONFIG.vtx_band)
+                  .push8(FC.VTX_CONFIG.vtx_channel)
+                  .push16(FC.VTX_CONFIG.vtx_frequency)
+                  .push8(FC.VTX_CONFIG.vtx_table_bands)
+                  .push8(FC.VTX_CONFIG.vtx_table_channels)
+                  .push8(FC.VTX_CONFIG.vtx_table_powerlevels)
+                  .push8(FC.VTX_CONFIG.vtx_table_clear ? 1 : 0);
             break;
 
         case MSPCodes.MSP_SET_VTXTABLE_POWERLEVEL:
-
             buffer.push8(FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_number)
                   .push16(FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_value);
-
             buffer.push8(FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_label.length);
             for (let i = 0; i < FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_label.length; i++) {
                 buffer.push8(FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_label.charCodeAt(i));
             }
-
             break;
 
         case MSPCodes.MSP_SET_VTXTABLE_BAND:
-
             buffer.push8(FC.VTXTABLE_BAND.vtxtable_band_number);
-
             buffer.push8(FC.VTXTABLE_BAND.vtxtable_band_name.length);
             for (let i = 0; i < FC.VTXTABLE_BAND.vtxtable_band_name.length; i++) {
                 buffer.push8(FC.VTXTABLE_BAND.vtxtable_band_name.charCodeAt(i));
             }
-
             if (FC.VTXTABLE_BAND.vtxtable_band_letter != '') {
                 buffer.push8(FC.VTXTABLE_BAND.vtxtable_band_letter.charCodeAt(0));
             } else {
                 buffer.push8(' '.charCodeAt(0));
             }
             buffer.push8(FC.VTXTABLE_BAND.vtxtable_band_is_factory_band ? 1 : 0);
-
             buffer.push8(FC.VTXTABLE_BAND.vtxtable_band_frequencies.length);
             for (let i = 0; i < FC.VTXTABLE_BAND.vtxtable_band_frequencies.length; i++) {
                 buffer.push16(FC.VTXTABLE_BAND.vtxtable_band_frequencies[i]);
             }
-
             break;
 
         case MSPCodes.MSP_MULTIPLE_MSP:
-
             while (FC.MULTIPLE_MSP.msp_commands.length > 0) {
                 const mspCommand = FC.MULTIPLE_MSP.msp_commands.shift();
                 self.mspMultipleCache.push(mspCommand);
                 buffer.push8(mspCommand);
             }
-
             break;
 
         case MSPCodes.MSP2_SET_MOTOR_OUTPUT_REORDERING:
-
             buffer.push8(FC.MOTOR_OUTPUT_ORDER.length);
             for (let i = 0; i < FC.MOTOR_OUTPUT_ORDER.length; i++) {
                 buffer.push8(FC.MOTOR_OUTPUT_ORDER[i]);
             }
-
             break;
 
         case MSPCodes.MSP2_SEND_DSHOT_COMMAND:
             buffer.push8(1);
-            break;
-
-        case MSPCodes.MSP_SET_TUNING_SLIDERS:
-            buffer.push8(FC.TUNING_SLIDERS.slider_pids_mode)
-                  .push8(FC.TUNING_SLIDERS.slider_master_multiplier)
-                  .push8(FC.TUNING_SLIDERS.slider_roll_pitch_ratio)
-                  .push8(FC.TUNING_SLIDERS.slider_i_gain)
-                  .push8(FC.TUNING_SLIDERS.slider_pd_ratio)
-                  .push8(FC.TUNING_SLIDERS.slider_pd_gain)
-                  .push8(FC.TUNING_SLIDERS.slider_dmin_ratio)
-                  .push8(FC.TUNING_SLIDERS.slider_ff_gain)
-                  .push8(FC.TUNING_SLIDERS.slider_dterm_filter)
-                  .push8(FC.TUNING_SLIDERS.slider_dterm_filter_multiplier)
-                  .push8(FC.TUNING_SLIDERS.slider_gyro_filter)
-                  .push8(FC.TUNING_SLIDERS.slider_gyro_filter_multiplier);
-
             break;
 
         default:
@@ -2096,28 +1901,18 @@ MspHelper.prototype.setRawRx = function(channels) {
  */
 MspHelper.prototype.dataflashRead = function(address, blockSize, onDataCallback) {
     let outData = [address & 0xFF, (address >> 8) & 0xFF, (address >> 16) & 0xFF, (address >> 24) & 0xFF];
-
-    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_31)) {
-        outData = outData.concat([blockSize & 0xFF, (blockSize >> 8) & 0xFF]);
-    }
-
-    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-        // Allow compression
-        outData = outData.concat([1]);
-    }
+    outData = outData.concat([blockSize & 0xFF, (blockSize >> 8) & 0xFF]);
+    outData = outData.concat([1]);
 
     MSP.send_message(MSPCodes.MSP_DATAFLASH_READ, outData, false, function(response) {
         if (!response.crcError) {
             const chunkAddress = response.data.readU32();
-
             let headerSize = 4;
             let dataSize = response.data.buffer.byteLength - headerSize;
             let dataCompressionType = 0;
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_31)) {
-                headerSize = headerSize + 3;
-                dataSize = response.data.readU16();
-                dataCompressionType = response.data.readU8();
-            }
+            headerSize = headerSize + 3;
+            dataSize = response.data.readU16();
+            dataCompressionType = response.data.readU8();
 
             // Verify that the address of the memory returned matches what the caller asked for and there was not a CRC error
             if (chunkAddress == address) {
@@ -2349,20 +2144,18 @@ MspHelper.prototype.sendMixerOverrides = function(onCompleteCallback)
 
 MspHelper.prototype.sendModeRange = function(modeRangeIndex, onCompleteCallback)
 {
-    const modeRange = FC.MODE_RANGES[modeRangeIndex];
     const buffer = [];
 
+    const modeRange = FC.MODE_RANGES[modeRangeIndex];
     buffer.push8(modeRangeIndex)
           .push8(modeRange.id)
           .push8(modeRange.auxChannelIndex)
           .push8((modeRange.range.start - 900) / 25)
           .push8((modeRange.range.end - 900) / 25);
 
-    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-        const modeRangeExtra = FC.MODE_RANGES_EXTRA[modeRangeIndex];
-        buffer.push8(modeRangeExtra.modeLogic)
-              .push8(modeRangeExtra.linkedTo);
-    }
+    const modeRangeExtra = FC.MODE_RANGES_EXTRA[modeRangeIndex];
+    buffer.push8(modeRangeExtra.modeLogic)
+          .push8(modeRangeExtra.linkedTo);
 
     MSP.send_message(MSPCodes.MSP_SET_MODE_RANGE, buffer, false, onCompleteCallback);
 };
@@ -2477,66 +2270,38 @@ MspHelper.prototype.sendLedConfig = function(ledIndex, onCompleteCallback)
 
     buffer.push(ledIndex);
 
-    if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-        ledOverlayLetters = ['t', 'o', 'b', 'n', 'i', 'w']; // in LSB bit
+    let mask = 0;
+
+    mask |= (led.y << 0);
+    mask |= (led.x << 4);
+
+    for (let functionLetterIndex = 0; functionLetterIndex < led.functions.length; functionLetterIndex++) {
+        const fnIndex = ledBaseFunctionLetters.indexOf(led.functions[functionLetterIndex]);
+        if (fnIndex >= 0) {
+            mask |= (fnIndex << 8);
+            break;
+        }
     }
 
-    if (semver.lt(FC.CONFIG.apiVersion, "1.20.0")) {
-        let directionMask = 0;
-        for (let directionLetterIndex = 0; directionLetterIndex < led.directions.length; directionLetterIndex++) {
-            const bitIndex = ledDirectionLetters.indexOf(led.directions[directionLetterIndex]);
-            if (bitIndex >= 0) {
-                directionMask = bit_set(directionMask, bitIndex);
-            }
+    for (let overlayLetterIndex = 0; overlayLetterIndex < led.functions.length; overlayLetterIndex++) {
+        const bitIndex = ledOverlayLetters.indexOf(led.functions[overlayLetterIndex]);
+        if (bitIndex >= 0) {
+            mask |= bit_set(mask, bitIndex + 12);
         }
-        buffer.push16(directionMask);
-
-        let functionMask = 0;
-        for (let functionLetterIndex = 0; functionLetterIndex < led.functions.length; functionLetterIndex++) {
-            const bitIndex = ledFunctionLetters.indexOf(led.functions[functionLetterIndex]);
-            if (bitIndex >= 0) {
-                functionMask = bit_set(functionMask, bitIndex);
-            }
-        }
-        buffer.push16(functionMask)
-
-            .push8(led.x)
-            .push8(led.y)
-            .push8(led.color);
-    } else {
-        let mask = 0;
-
-        mask |= (led.y << 0);
-        mask |= (led.x << 4);
-
-        for (let functionLetterIndex = 0; functionLetterIndex < led.functions.length; functionLetterIndex++) {
-            const fnIndex = ledBaseFunctionLetters.indexOf(led.functions[functionLetterIndex]);
-            if (fnIndex >= 0) {
-                mask |= (fnIndex << 8);
-                break;
-            }
-        }
-
-        for (let overlayLetterIndex = 0; overlayLetterIndex < led.functions.length; overlayLetterIndex++) {
-            const bitIndex = ledOverlayLetters.indexOf(led.functions[overlayLetterIndex]);
-            if (bitIndex >= 0) {
-                mask |= bit_set(mask, bitIndex + 12);
-            }
-        }
-
-        mask |= (led.color << 18);
-
-        for (let directionLetterIndex = 0; directionLetterIndex < led.directions.length; directionLetterIndex++) {
-            const bitIndex = ledDirectionLetters.indexOf(led.directions[directionLetterIndex]);
-            if (bitIndex >= 0) {
-                mask |= bit_set(mask, bitIndex + 22);
-            }
-        }
-
-        mask |= (0 << 28); // parameters
-
-        buffer.push32(mask);
     }
+
+    mask |= (led.color << 18);
+
+    for (let directionLetterIndex = 0; directionLetterIndex < led.directions.length; directionLetterIndex++) {
+        const bitIndex = ledDirectionLetters.indexOf(led.directions[directionLetterIndex]);
+        if (bitIndex >= 0) {
+            mask |= bit_set(mask, bitIndex + 22);
+        }
+    }
+
+    mask |= (0 << 28); // parameters
+
+    buffer.push32(mask);
 
     MSP.send_message(MSPCodes.MSP_SET_LED_STRIP_CONFIG, buffer, false, onCompleteCallback);
 };
@@ -2673,12 +2438,12 @@ MspHelper.prototype.setArmingEnabled = function(doEnable, onCompleteCallback)
 };
 
 MspHelper.prototype.loadSerialConfig = function(callback) {
-    const mspCode = semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43) ? MSPCodes.MSP2_COMMON_SERIAL_CONFIG : MSPCodes.MSP_CF_SERIAL_CONFIG;
+    const mspCode = MSPCodes.MSP2_COMMON_SERIAL_CONFIG;
     MSP.send_message(mspCode, false, false, callback);
 };
 
 MspHelper.prototype.sendSerialConfig = function(callback) {
-    const mspCode = semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43) ? MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG : MSPCodes.MSP_SET_CF_SERIAL_CONFIG;
+    const mspCode = MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG;
     MSP.send_message(mspCode, mspHelper.crunch(mspCode), false, callback);
 };
 
