@@ -141,50 +141,39 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
 
             GUI.log(i18n.getMessage('apiVersionReceived', [FC.CONFIG.apiVersion]));
 
-            if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
+            console.log('Looking for capabilities via MSP');
 
-                self.msp_connector.disconnect(function (disconnectionResult) {
+            MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, function () {
+                var rebootMode = 0; // FIRMWARE
+                if (bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.HAS_FLASH_BOOTLOADER)) {
+                    // Board has flash bootloader
+                    GUI.log(i18n.getMessage('deviceRebooting_flashBootloader'));
+                    console.log('flash bootloader detected');
+                    rebootMode = 4; // MSP_REBOOT_BOOTLOADER_FLASH
+                } else {
+                    GUI.log(i18n.getMessage('deviceRebooting_romBootloader'));
+                    console.log('no flash bootloader detected');
+                    rebootMode = 1; // MSP_REBOOT_BOOTLOADER_ROM;
+                }
 
-                    // need some time for the port to be closed, serial port does not open if tried immediately
-                    setTimeout(legacyRebootAndFlash, 500);
-                });
-            } else {
-                console.log('Looking for capabilities via MSP');
-
-                MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, function () {
-                    var rebootMode = 0; // FIRMWARE
-                    if (bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.HAS_FLASH_BOOTLOADER)) {
-                        // Board has flash bootloader
-                        GUI.log(i18n.getMessage('deviceRebooting_flashBootloader'));
-                        console.log('flash bootloader detected');
-                        rebootMode = 4; // MSP_REBOOT_BOOTLOADER_FLASH
-                    } else {
-                        GUI.log(i18n.getMessage('deviceRebooting_romBootloader'));
-                        console.log('no flash bootloader detected');
-                        rebootMode = 1; // MSP_REBOOT_BOOTLOADER_ROM;
-                    }
-
-                    var buffer = [];
-                    buffer.push8(rebootMode);
-                    MSP.send_message(MSPCodes.MSP_SET_REBOOT, buffer, function() {
-
-                        // if firmware doesn't flush MSP/serial send buffers and gracefully shutdown VCP connections we won't get a reply, so don't wait for it.
-
-                        self.msp_connector.disconnect(function (disconnectionResult) {
-                            if (disconnectionResult) {
-                                // delay to allow board to boot in bootloader mode
-                                // required to detect if a DFU device appears
-                                setTimeout(startFlashing, 1000);
-                            } else {
-                                GUI.connect_lock = false;
-                            }
-                        });
-
-                    }, function () {
-                        console.log('Reboot request recevied by device');
+                var buffer = [];
+                buffer.push8(rebootMode);
+                MSP.send_message(MSPCodes.MSP_SET_REBOOT, buffer, function() {
+                    // if firmware doesn't flush MSP/serial send buffers and gracefully shutdown VCP connections we won't get a reply, so don't wait for it.
+                    self.msp_connector.disconnect(function (disconnectionResult) {
+                        if (disconnectionResult) {
+                            // delay to allow board to boot in bootloader mode
+                            // required to detect if a DFU device appears
+                            setTimeout(startFlashing, 1000);
+                        } else {
+                            GUI.connect_lock = false;
+                        }
                     });
+
+                }, function () {
+                    console.log('Reboot request recevied by device');
                 });
-            }
+            });
         };
 
         var onTimeoutHandler = function() {
