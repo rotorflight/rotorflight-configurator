@@ -193,7 +193,7 @@ TABS.sensors.initialize = function (callback) {
             if (!have_sensor(FC.CONFIG.activeSensors, 'mag')) {
                 checkboxes.eq(2).prop('disabled', true);
             }
-            if (!(have_sensor(FC.CONFIG.activeSensors, 'baro') || (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_40) && have_sensor(FC.CONFIG.activeSensors, 'gps')))) {
+            if (!(have_sensor(FC.CONFIG.activeSensors, 'baro') || have_sensor(FC.CONFIG.activeSensors, 'gps'))) {
                 checkboxes.eq(3).prop('disabled', true);
             }
             if (!have_sensor(FC.CONFIG.activeSensors, 'sonar')) {
@@ -242,9 +242,6 @@ TABS.sensors.initialize = function (callback) {
         });
 
         let altitudeHint_e = $('.tab-sensors #sensorsAltitudeHint');
-        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_40)) {
-            altitudeHint_e.hide();
-        }
 
         // Always start with default/empty sensor data array, clean slate all
         initSensorData();
