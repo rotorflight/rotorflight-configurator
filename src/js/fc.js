@@ -738,15 +738,8 @@ const FC = {
             'SPEKTRUM2048/SRXL',
             'TARGET_CUSTOM',
             'FPORT',
+            'SPEKTRUM SRXL2',
         ];
-
-        if (semver.gte(apiVersion, API_VERSION_1_42)) {
-            serialRxTypes.push('SPEKTRUM SRXL2');
-        }
-
-        if (semver.gte(apiVersion, API_VERSION_1_44)) {
-            serialRxTypes.push('IRC GHOST');
-        }
 
         return serialRxTypes;
     },
@@ -811,14 +804,7 @@ const FC = {
     },
 
     boardHasVcp() {
-        let hasVcp = false;
-        if (semver.gte(this.CONFIG.apiVersion, API_VERSION_1_37)) {
-            hasVcp = bit_check(this.CONFIG.targetCapabilities, this.TARGET_CAPABILITIES_FLAGS.HAS_VCP);
-        } else {
-            hasVcp = BOARD.find_board_definition(this.CONFIG.boardIdentifier).vcp;
-        }
-
-        return hasVcp;
+        return bit_check(this.CONFIG.targetCapabilities, this.TARGET_CAPABILITIES_FLAGS.HAS_VCP);
     },
 
     FILTER_TYPE_FLAGS: {
@@ -829,32 +815,19 @@ const FC = {
     getFilterDefaults() {
         const versionFilterDefaults = this.DEFAULT;
 
-        if (semver.eq(this.CONFIG.apiVersion, API_VERSION_1_40)) {
-            versionFilterDefaults.dterm_lowpass2_hz = 200;
-        } else if (semver.gte(this.CONFIG.apiVersion, API_VERSION_1_41)) {
-            versionFilterDefaults.gyro_lowpass_hz = 150;
-            versionFilterDefaults.gyro_lowpass_type = this.FILTER_TYPE_FLAGS.BIQUAD;
-            versionFilterDefaults.gyro_lowpass2_hz = 0;
-            versionFilterDefaults.gyro_lowpass2_type = this.FILTER_TYPE_FLAGS.BIQUAD;
-            versionFilterDefaults.dterm_lowpass_hz = 150;
-            versionFilterDefaults.dterm_lowpass_type = this.FILTER_TYPE_FLAGS.BIQUAD;
-            versionFilterDefaults.dterm_lowpass2_hz = 150;
-            versionFilterDefaults.dterm_lowpass2_type = this.FILTER_TYPE_FLAGS.BIQUAD;
-            if (semver.gte(this.CONFIG.apiVersion, API_VERSION_1_42)) {
-                versionFilterDefaults.gyro_lowpass_hz = 200;
-                versionFilterDefaults.gyro_lowpass_dyn_min_hz = 200;
-                versionFilterDefaults.gyro_lowpass_dyn_max_hz = 500;
-                versionFilterDefaults.gyro_lowpass_type = this.FILTER_TYPE_FLAGS.PT1;
-                versionFilterDefaults.gyro_lowpass2_hz = 250;
-                versionFilterDefaults.gyro_lowpass2_type = this.FILTER_TYPE_FLAGS.PT1;
-                versionFilterDefaults.dterm_lowpass_hz = 150;
-                versionFilterDefaults.dterm_lowpass_dyn_min_hz = 70;
-                versionFilterDefaults.dterm_lowpass_dyn_max_hz = 170;
-                versionFilterDefaults.dterm_lowpass_type = this.FILTER_TYPE_FLAGS.PT1;
-                versionFilterDefaults.dterm_lowpass2_hz = 150;
-                versionFilterDefaults.dterm_lowpass2_type = this.FILTER_TYPE_FLAGS.PT1;
-            }
-        }
+        versionFilterDefaults.gyro_lowpass_hz = 125;
+        versionFilterDefaults.gyro_lowpass_dyn_min_hz = 50;
+        versionFilterDefaults.gyro_lowpass_dyn_max_hz = 150;
+        versionFilterDefaults.gyro_lowpass_type = this.FILTER_TYPE_FLAGS.BIQUAD;
+        versionFilterDefaults.gyro_lowpass2_hz = 500;
+        versionFilterDefaults.gyro_lowpass2_type = this.FILTER_TYPE_FLAGS.BIQUAD;
+        versionFilterDefaults.dterm_lowpass_hz = 50;
+        versionFilterDefaults.dterm_lowpass_dyn_min_hz = 25;
+        versionFilterDefaults.dterm_lowpass_dyn_max_hz = 60;
+        versionFilterDefaults.dterm_lowpass_type = this.FILTER_TYPE_FLAGS.PT1;
+        versionFilterDefaults.dterm_lowpass2_hz = 0;
+        versionFilterDefaults.dterm_lowpass2_type = this.FILTER_TYPE_FLAGS.PT1;
+
         return versionFilterDefaults;
     },
 
