@@ -85,16 +85,8 @@ const RateCurve = function (useLegacyCurve) {
             rcRate = rcRate + (rcRate - 2) * 14.54;
         }
 
-        let expoPower;
-        let rcRateConstant;
-
-        if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
-            expoPower = 3;
-            rcRateConstant = 200;
-        } else {
-            expoPower = 2;
-            rcRateConstant = 205.85;
-        }
+        let expoPower = 3;
+        let rcRateConstant = 200;
 
         if (rcExpo > 0) {
             rcCommandf =  rcCommandf * Math.pow(rcCommandfAbs, expoPower) * rcExpo + rcCommandf * (1-rcExpo);
@@ -157,11 +149,7 @@ RateCurve.prototype.rcCommandRawToDegreesPerSecond = function (rcData, rate, rcR
 
     if (rate !== undefined && rcRate !== undefined && rcExpo !== undefined) {
         let rcCommandf = this.rcCommand(rcData, 1, deadband);
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-            rcCommandf = rcCommandf / (500 - deadband);
-        } else {
-            rcCommandf = rcCommandf / 500;
-        }
+        rcCommandf = rcCommandf / (500 - deadband);
 
         const rcCommandfAbs = Math.abs(rcCommandf);
 
