@@ -74,17 +74,6 @@ function generateVirtualApiVersions() {
     }
 }
 
-function getMixerImageSrc(mixerIndex, reverseMotorDir, apiVersion)
-{
-    let reverse = "";
-
-    if (semver.gte(apiVersion, API_VERSION_1_36)) {
-        reverse = reverseMotorDir ? "_reversed" : "";
-    }
-
-    return `./resources/motor_order/${mixerList[mixerIndex - 1].image}${reverse}.svg`;
-}
-
 function getTextWidth(text) {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
