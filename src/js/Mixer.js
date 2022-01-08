@@ -242,9 +242,9 @@ const Mixer = {
             rule(ADD, SC, S3,   500),
             rule(ADD, SR, S2,   866),
             rule(ADD, SR, S3,  -866),
-            rule(ADD, SP, S1,  1000),
-            rule(ADD, SP, S2,  -500),
-            rule(ADD, SP, S3,  -500),
+            rule(ADD, SP, S1, -1000),
+            rule(ADD, SP, S2,   500),
+            rule(ADD, SP, S3,   500),
             rule(SET, SY, S4,  1000),
             rule(SET, ST, M1,  1000),
         ];
@@ -255,27 +255,14 @@ const Mixer = {
             rule(ADD, SC, S3,   500),
             rule(ADD, SR, S2,   866),
             rule(ADD, SR, S3,  -866),
-            rule(ADD, SP, S1, -1000),
-            rule(ADD, SP, S2,   500),
-            rule(ADD, SP, S3,   500),
+            rule(ADD, SP, S1,  1000),
+            rule(ADD, SP, S2,  -500),
+            rule(ADD, SP, S3,  -500),
             rule(SET, SY, S4,  1000),
             rule(SET, ST, M1,  1000),
         ];
 
         self.mixerRuleSets[Mixer.CP140FV] = [
-            rule(ADD, SC, S1,   500),
-            rule(ADD, SC, S2,   500),
-            rule(ADD, SC, S3,   500),
-            rule(ADD, SR, S2,   643),
-            rule(ADD, SR, S3,  -643),
-            rule(ADD, SP, S1,  1000),
-            rule(ADD, SP, S2,  -766),
-            rule(ADD, SP, S3,  -766),
-            rule(SET, SY, S4,  1000),
-            rule(SET, ST, M1,  1000),
-        ];
-
-        self.mixerRuleSets[Mixer.CP140RV] = [
             rule(ADD, SC, S1,   500),
             rule(ADD, SC, S2,   500),
             rule(ADD, SC, S3,   500),
@@ -288,20 +275,20 @@ const Mixer = {
             rule(SET, ST, M1,  1000),
         ];
 
-        self.mixerRuleSets[Mixer.CP135FV] = [
+        self.mixerRuleSets[Mixer.CP140RV] = [
             rule(ADD, SC, S1,   500),
             rule(ADD, SC, S2,   500),
             rule(ADD, SC, S3,   500),
-            rule(ADD, SR, S2,   707),
-            rule(ADD, SR, S3,  -707),
+            rule(ADD, SR, S2,   643),
+            rule(ADD, SR, S3,  -643),
             rule(ADD, SP, S1,  1000),
-            rule(ADD, SP, S2,  -707),
-            rule(ADD, SP, S3,  -707),
+            rule(ADD, SP, S2,  -766),
+            rule(ADD, SP, S3,  -766),
             rule(SET, SY, S4,  1000),
             rule(SET, ST, M1,  1000),
         ];
 
-        self.mixerRuleSets[Mixer.CP135RV] = [
+        self.mixerRuleSets[Mixer.CP135FV] = [
             rule(ADD, SC, S1,   500),
             rule(ADD, SC, S2,   500),
             rule(ADD, SC, S3,   500),
@@ -314,7 +301,33 @@ const Mixer = {
             rule(SET, ST, M1,  1000),
         ];
 
+        self.mixerRuleSets[Mixer.CP135RV] = [
+            rule(ADD, SC, S1,   500),
+            rule(ADD, SC, S2,   500),
+            rule(ADD, SC, S3,   500),
+            rule(ADD, SR, S2,   707),
+            rule(ADD, SR, S3,  -707),
+            rule(ADD, SP, S1,  1000),
+            rule(ADD, SP, S2,  -707),
+            rule(ADD, SP, S3,  -707),
+            rule(SET, SY, S4,  1000),
+            rule(SET, ST, M1,  1000),
+        ];
+
         self.mixerRuleSets[Mixer.CP120FM] = [
+            rule(ADD, SC, S1,   500),
+            rule(ADD, SC, S2,   500),
+            rule(ADD, SC, S3,   500),
+            rule(ADD, SR, S2,   866),
+            rule(ADD, SR, S3,  -866),
+            rule(ADD, SP, S1, -1000),
+            rule(ADD, SP, S2,   500),
+            rule(ADD, SP, S3,   500),
+            rule(SET, SY, M2,  1000),
+            rule(SET, ST, M1,  1000),
+        ];
+
+        self.mixerRuleSets[Mixer.CP120RM] = [
             rule(ADD, SC, S1,   500),
             rule(ADD, SC, S2,   500),
             rule(ADD, SC, S3,   500),
@@ -327,33 +340,7 @@ const Mixer = {
             rule(SET, ST, M1,  1000),
         ];
 
-        self.mixerRuleSets[Mixer.CP120RM] = [
-            rule(ADD, SC, S1,   500),
-            rule(ADD, SC, S2,   500),
-            rule(ADD, SC, S3,   500),
-            rule(ADD, SR, S2,   866),
-            rule(ADD, SR, S3,  -866),
-            rule(ADD, SP, S1, -1000),
-            rule(ADD, SP, S2,   500),
-            rule(ADD, SP, S3,   500),
-            rule(SET, SY, M2,  1000),
-            rule(SET, ST, M1,  1000),
-        ];
-
         self.mixerRuleSets[Mixer.CP140FM] = [
-            rule(ADD, SC, S1,   500),
-            rule(ADD, SC, S2,   500),
-            rule(ADD, SC, S3,   500),
-            rule(ADD, SR, S2,   643),
-            rule(ADD, SR, S3,  -643),
-            rule(ADD, SP, S1,  1000),
-            rule(ADD, SP, S2,  -766),
-            rule(ADD, SP, S3,  -766),
-            rule(SET, SY, M2,  1000),
-            rule(SET, ST, M1,  1000),
-        ];
-
-        self.mixerRuleSets[Mixer.CP140RM] = [
             rule(ADD, SC, S1,   500),
             rule(ADD, SC, S2,   500),
             rule(ADD, SC, S3,   500),
@@ -366,15 +353,28 @@ const Mixer = {
             rule(SET, ST, M1,  1000),
         ];
 
+        self.mixerRuleSets[Mixer.CP140RM] = [
+            rule(ADD, SC, S1,   500),
+            rule(ADD, SC, S2,   500),
+            rule(ADD, SC, S3,   500),
+            rule(ADD, SR, S2,   643),
+            rule(ADD, SR, S3,  -643),
+            rule(ADD, SP, S1,  1000),
+            rule(ADD, SP, S2,  -766),
+            rule(ADD, SP, S3,  -766),
+            rule(SET, SY, M2,  1000),
+            rule(SET, ST, M1,  1000),
+        ];
+
         self.mixerRuleSets[Mixer.CP135FM] = [
             rule(ADD, SC, S1,   500),
             rule(ADD, SC, S2,   500),
             rule(ADD, SC, S3,   500),
             rule(ADD, SR, S2,   707),
             rule(ADD, SR, S3,  -707),
-            rule(ADD, SP, S1,  1000),
-            rule(ADD, SP, S2,  -707),
-            rule(ADD, SP, S3,  -707),
+            rule(ADD, SP, S1, -1000),
+            rule(ADD, SP, S2,   707),
+            rule(ADD, SP, S3,   707),
             rule(SET, SY, M2,  1000),
             rule(SET, ST, M1,  1000),
         ];
@@ -385,9 +385,9 @@ const Mixer = {
             rule(ADD, SC, S3,   500),
             rule(ADD, SR, S2,   707),
             rule(ADD, SR, S3,  -707),
-            rule(ADD, SP, S1, -1000),
-            rule(ADD, SP, S2,   707),
-            rule(ADD, SP, S3,   707),
+            rule(ADD, SP, S1,  1000),
+            rule(ADD, SP, S2,  -707),
+            rule(ADD, SP, S3,  -707),
             rule(SET, SY, M2,  1000),
             rule(SET, ST, M1,  1000),
         ];
