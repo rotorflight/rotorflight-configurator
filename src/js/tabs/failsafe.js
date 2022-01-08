@@ -32,7 +32,8 @@ TABS.failsafe.initialize = function (callback, scrollPosition) {
             .then(() => MSP.promise(MSPCodes.MSP_BOXIDS))
             .then(() => MSP.promise(MSPCodes.MSP_BOXNAMES))
             .then(() => MSP.promise(MSPCodes.MSP_RC))
-            .then(() => mspHelper.loadSerialConfig(callback));
+            .then(() => MSP.promise(MSPCodes.MSP2_COMMON_SERIAL_CONFIG))
+            .then(callback);
     }
 
     function save_data(callback) {

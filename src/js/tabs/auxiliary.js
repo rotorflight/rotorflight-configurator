@@ -27,7 +27,8 @@ TABS.auxiliary.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_RSSI_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_MODE_RANGES))
             .then(() => MSP.promise(MSPCodes.MSP_MODE_RANGES_EXTRA))
-            .then(() => mspHelper.loadSerialConfig(callback));
+            .then(() => MSP.promise(MSPCodes.MSP2_COMMON_SERIAL_CONFIG))
+            .then(callback);
     }
 
     function save_data(callback) {

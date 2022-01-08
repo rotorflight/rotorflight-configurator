@@ -22,38 +22,36 @@ TABS.configuration.initialize = function (callback) {
     }
 
     function load_data(callback) {
-        mspHelper.loadSerialConfig(() => {
-            Promise.resolve(true)
-                .then(() => MSP.promise(MSPCodes.MSP_STATUS))
-                .then(() => MSP.promise(MSPCodes.MSP_NAME))
-                .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
-                .then(() => MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG))
-                .then(() => MSP.promise(MSPCodes.MSP_SENSOR_CONFIG))
-                .then(() => MSP.promise(MSPCodes.MSP_SENSOR_ALIGNMENT))
-                .then(() => MSP.promise(MSPCodes.MSP_BOARD_ALIGNMENT_CONFIG))
-                .then(() => MSP.promise(MSPCodes.MSP_ACC_TRIM))
-                .then(callback);
-        });
+        Promise.resolve(true)
+            .then(() => MSP.promise(MSPCodes.MSP_STATUS))
+            .then(() => MSP.promise(MSPCodes.MSP_NAME))
+            .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_SENSOR_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_SENSOR_ALIGNMENT))
+            .then(() => MSP.promise(MSPCodes.MSP_BOARD_ALIGNMENT_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_ACC_TRIM))
+            .then(() => MSP.promise(MSPCodes.MSP2_COMMON_SERIAL_CONFIG))
+            .then(callback);
     }
 
     function save_data(callback) {
-        mspHelper.sendSerialConfig(() => {
-            Promise.resolve(true)
-                .then(() => MSP.promise(MSPCodes.MSP_SET_NAME, mspHelper.crunch(MSPCodes.MSP_SET_NAME)))
-                .then(() => MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG)))
-                .then(() => MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)))
-                .then(() => MSP.promise(MSPCodes.MSP_SET_SENSOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_SENSOR_CONFIG)))
-                .then(() => MSP.promise(MSPCodes.MSP_SET_SENSOR_ALIGNMENT, mspHelper.crunch(MSPCodes.MSP_SET_SENSOR_ALIGNMENT)))
-                .then(() => MSP.promise(MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG)))
-                .then(() => MSP.promise(MSPCodes.MSP_SET_ACC_TRIM, mspHelper.crunch(MSPCodes.MSP_SET_ACC_TRIM)))
-                .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
-                .then(() => {
-                    GUI.log(i18n.getMessage('eepromSaved'));
-                    MSP.send_message(MSPCodes.MSP_SET_REBOOT);
-                    GUI.log(i18n.getMessage('deviceRebooting'));
-                    reinitialiseConnection(callback);
-                });
-        });
+        Promise.resolve(true)
+            .then(() => MSP.promise(MSPCodes.MSP_SET_NAME, mspHelper.crunch(MSPCodes.MSP_SET_NAME)))
+            .then(() => MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG)))
+            .then(() => MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)))
+            .then(() => MSP.promise(MSPCodes.MSP_SET_SENSOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_SENSOR_CONFIG)))
+            .then(() => MSP.promise(MSPCodes.MSP_SET_SENSOR_ALIGNMENT, mspHelper.crunch(MSPCodes.MSP_SET_SENSOR_ALIGNMENT)))
+            .then(() => MSP.promise(MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG)))
+            .then(() => MSP.promise(MSPCodes.MSP_SET_ACC_TRIM, mspHelper.crunch(MSPCodes.MSP_SET_ACC_TRIM)))
+            .then(() => MSP.promise(MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG, mspHelper.crunch(MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG)))
+            .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
+            .then(() => {
+                GUI.log(i18n.getMessage('eepromSaved'));
+                MSP.send_message(MSPCodes.MSP_SET_REBOOT);
+                GUI.log(i18n.getMessage('deviceRebooting'));
+                reinitialiseConnection(callback);
+            });
     }
 
     function process_html() {
