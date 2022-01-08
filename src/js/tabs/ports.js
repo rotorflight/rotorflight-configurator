@@ -96,18 +96,21 @@ TABS.ports.initialize = function (callback) {
         Promise.resolve(true)
             .then(() => MSP.promise(MSPCodes.MSP_STATUS))
             .then(() => MSP.promise(MSPCodes.MSP_VTX_CONFIG))
-            .then(() => mspHelper.loadSerialConfig(callback));
+            .then(() => MSP.promise(MSPCodes.MSP_VTX_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP2_COMMON_SERIAL_CONFIG))
+            .then(callback);
     }
 
     function save_data(callback) {
-        mspHelper.sendSerialConfig(() => {
-            MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, () => {
+        Promise.resolve(true)
+            .then(() => MSP.promise(MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG, mspHelper.crunch(MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG)))
+            .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
+            .then(() => {
                 GUI.log(i18n.getMessage('eepromSaved'));
                 MSP.send_message(MSPCodes.MSP_SET_REBOOT);
                 GUI.log(i18n.getMessage('deviceRebooting'));
                 reinitialiseConnection(callback);
             });
-        });
     }
 
     function setDirty() {

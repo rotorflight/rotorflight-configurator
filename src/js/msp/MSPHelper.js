@@ -2437,16 +2437,6 @@ MspHelper.prototype.setArmingEnabled = function(doEnable, onCompleteCallback)
     }
 };
 
-MspHelper.prototype.loadSerialConfig = function(callback) {
-    const mspCode = MSPCodes.MSP2_COMMON_SERIAL_CONFIG;
-    MSP.send_message(mspCode, false, false, callback);
-};
-
-MspHelper.prototype.sendSerialConfig = function(callback) {
-    const mspCode = MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG;
-    MSP.send_message(mspCode, mspHelper.crunch(mspCode), false, callback);
-};
-
 MSP.SDCARD_STATE_NOT_PRESENT = 0; //TODO, move these to better place
 MSP.SDCARD_STATE_FATAL       = 1;
 MSP.SDCARD_STATE_CARD_INIT   = 2;
