@@ -244,29 +244,24 @@ function onOpen(openInfo) {
         serial.onReceive.addListener(read_serial);
         setConnectionTimeout();
         FC.resetState();
+
         mspHelper = new MspHelper();
         MSP.listen(mspHelper.process_data.bind(mspHelper));
         console.log(`Requesting configuration data`);
 
         MSP.send_message(MSPCodes.MSP_API_VERSION, false, false, function () {
             analytics.setFlightControllerData(analytics.DATA.API_VERSION, FC.CONFIG.apiVersion);
-
             GUI.log(i18n.getMessage('apiVersionReceived', [FC.CONFIG.apiVersion]));
 
             if (semver.gte(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_ACCEPTED)) {
-
                 MSP.send_message(MSPCodes.MSP_FC_VARIANT, false, false, function () {
                     analytics.setFlightControllerData(analytics.DATA.FIRMWARE_TYPE, FC.CONFIG.flightControllerIdentifier);
                     if (FC.CONFIG.flightControllerIdentifier === 'RTFL') {
                         MSP.send_message(MSPCodes.MSP_FC_VERSION, false, false, function () {
-                            analytics.setFlightControllerData(analytics.DATA.FIRMWARE_VERSION, FC.CONFIG.flightControllerVersion);
-
-                            GUI.log(i18n.getMessage('fcInfoReceived', [FC.CONFIG.flightControllerIdentifier, FC.CONFIG.flightControllerVersion]));
-
                             MSP.send_message(MSPCodes.MSP_BUILD_INFO, false, false, function () {
-
-                                GUI.log(i18n.getMessage('buildInfoReceived', [FC.CONFIG.buildInfo]));
-
+                                analytics.setFlightControllerData(analytics.DATA.FIRMWARE_VERSION, FC.CONFIG.buildVersion);
+                                GUI.log(i18n.getMessage('firmwareInfoReceived', [FC.CONFIG.flightControllerIdentifier, FC.CONFIG.buildVersion]));
+                                GUI.log(i18n.getMessage('buildInfoReceived', [FC.CONFIG.buildRevision, FC.CONFIG.buildInfo]));
                                 MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, processBoardInfo);
                             });
                         });
@@ -282,11 +277,11 @@ function onOpen(openInfo) {
                         });
 
                         dialog.showModal();
-
                         connectCli();
                     }
                 });
-            } else {
+            }
+            else {
                 analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'ConnectionRefusedFirmwareVersion', FC.CONFIG.apiVersion);
 
                 const dialog = $('.dialogConnectWarning')[0];
@@ -298,7 +293,6 @@ function onOpen(openInfo) {
                 });
 
                 dialog.showModal();
-
                 connectCli();
             }
         });
@@ -408,7 +402,7 @@ function checkReportProblems() {
         if (semver.gt(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MAX_SUPPORTED)) {
             const problemName = 'API_VERSION_MAX_SUPPORTED';
             problemItemTemplate.clone().html(i18n.getMessage(`reportProblemsDialog${problemName}`,
-                [CONFIGURATOR.latestVersion, CONFIGURATOR.latestVersionReleaseUrl, CONFIGURATOR.version, FC.CONFIG.flightControllerVersion])).appendTo(problemDialogList);
+                [CONFIGURATOR.latestVersion, CONFIGURATOR.latestVersionReleaseUrl, CONFIGURATOR.version, FC.CONFIG.buildVersion])).appendTo(problemDialogList);
             needsProblemReportingDialog = true;
 
             analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, PROBLEM_ANALYTICS_EVENT,

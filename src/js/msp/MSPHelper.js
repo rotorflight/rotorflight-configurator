@@ -646,23 +646,41 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_FC_VERSION:
-                FC.CONFIG.flightControllerVersion = data.readU8() + '.' + data.readU8() + '.' + data.readU8();
+                const major = data.readU8();
+                const minor = data.readU8();
+                const patch = data.readU8();
+                FC.CONFIG.flightControllerVersionMajor = major;
+                FC.CONFIG.flightControllerVersionMinor = minor;
+                FC.CONFIG.flightControllerVersionPatch = patch;
+                FC.CONFIG.flightControllerVersion = `${major}.${minor}.${patch}`;
                 break;
 
             case MSPCodes.MSP_BUILD_INFO:
+                let info = '';
                 const dateLength = 11;
-                buff = [];
-
                 for (let i = 0; i < dateLength; i++) {
-                    buff.push(data.readU8());
+                    info += String.fromCharCode(data.readU8());
                 }
-                buff.push(32); // ascii space
-
+                info += ' ';
                 const timeLength = 8;
                 for (let i = 0; i < timeLength; i++) {
-                    buff.push(data.readU8());
+                    info += String.fromCharCode(data.readU8());
                 }
-                FC.CONFIG.buildInfo = String.fromCharCode.apply(null, buff);
+                FC.CONFIG.buildInfo = info;
+
+                let revString = '';
+                const revLength = 7;
+                for (let i = 0; i < revLength; i++) {
+                    revString += String.fromCharCode(data.readU8());
+                }
+                FC.CONFIG.buildRevision = revString;
+
+                let verString = '';
+                const verLength = data.readU8();
+                for (let i = 0; i < verLength; i++) {
+                    verString += String.fromCharCode(data.readU8());
+                }
+                FC.CONFIG.buildVersion = verString;
                 break;
 
             case MSPCodes.MSP_BOARD_INFO:
