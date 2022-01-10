@@ -14,6 +14,10 @@
     color: #626262;
 }
 
+.tab-gyro .gyroRpmFilterCustomNote {
+    margin-bottom: 3px;
+}
+
 .tab-gyro input[type="number"]::-webkit-inner-spin-button {
     border: 0;
 }
@@ -31,6 +35,7 @@
 .tab-gyro table th {
     height: 10px;
     font-weight: normal;
+    text-align: left;
     text-overflow: ellipsis;
     overflow: hidden;
     border: 0;
@@ -52,7 +57,7 @@
     border-right: 1px solid var(--subtleAccent);
 }
 
-.tab-gyro table tr td.border {
+.tab-gyro table tr.border td {
     padding-bottom: 5px;
     border-bottom: 1px solid var(--subtleAccent);
 }
@@ -116,3 +121,23 @@
     margin-top: 0;
 }
 
+.tab-gyro dialog {
+    width: 40em;
+    border-radius: 5px;
+}
+
+.tab-gyro dialog .buttons {
+    position: static;
+    margin-top: 2em;
+}
+
+.tab-gyro dialog h3 {
+    margin-bottom: 0.5em;
+}
+
+@media all and (max-width: 575px) {
+    .tab-gyro dialog {
+        width: calc(100% - 2em);
+        border-radius: unset;
+    }
+}

@@ -431,7 +431,7 @@ progress[value]::-webkit-progress-bar {
     color: white;
 }
 
-.tab-gyro table tr td.border,
+.tab-gyro table tr.border td,
 .tab-gyro table tr td:first-child {
     border-color: #595959;
 }

@@ -913,16 +913,16 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.FILTER_CONFIG.dyn_notch_max_hz = data.readU16();
                 break;
 
-            case MSPCodes.MSP_RPM_FILTER_CONFIG:
+            case MSPCodes.MSP_RPM_FILTER:
                 FC.RPM_FILTER_CONFIG = [];
                 if (data.byteLength % 9 == 0) {
                     for (let i=0; i<data.byteLength; i+=9) {
                         FC.RPM_FILTER_CONFIG.push({
-                            'motor_index' : data.readU8(),
-                            'gear_ratio'  : data.readU16(),
-                            'notch_q'     : data.readU16(),
-                            'min_hz'      : data.readU16(),
-                            'max_hz'      : data.readU16(),
+                            rpm_source : data.readU8(),
+                            freq_ratio : data.readU16(),
+                            notch_q    : data.readU16(),
+                            min_hz     : data.readU16(),
+                            max_hz     : data.readU16(),
                         });
                     }
                 }
@@ -1974,8 +1974,8 @@ MspHelper.prototype.sendRPMFilter = function(filterIndex, onCompleteCallback)
     const buffer = [];
 
     buffer.push8(filterIndex)
-          .push8(CONFIG.motor_index)
-          .push16(CONFIG.gear_ratio)
+          .push8(CONFIG.rpm_source)
+          .push16(CONFIG.freq_ratio)
           .push16(CONFIG.notch_q)
           .push16(CONFIG.min_hz)
           .push16(CONFIG.max_hz);
