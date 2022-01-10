@@ -15,8 +15,23 @@ TABS.mixer = {
     prevInputs: null,
     prevRules: null,
 
-    showInputs: [ 1,2,3,4,5 ],
-    showOverrides: [ 1,2,3,4, ],
+    showInputs: [ 1,2,4,3, ],
+    showOverrides: [ 1,2,4,3, ],
+
+    inputAttr: [
+        { min:-1500, max:1500, step:10,   fixed:0, scale:1.000 },
+        { min:-24,   max:24,   step:0.1,  fixed:1, scale:0.012 },
+        { min:-24,   max:24,   step:0.1,  fixed:1, scale:0.012 },
+        { min:-24,   max:24,   step:0.1,  fixed:1, scale:0.024 },
+        { min:-24,   max:24,   step:0.1,  fixed:1, scale:0.012 },
+    ],
+    overrideAttr: [
+        { min:-1500, max:1500, step:50,   fixed:0, scale:1.000 },
+        { min:-18,   max:18,   step:0.1,  fixed:1, scale:0.012 },
+        { min:-18,   max:18,   step:0.1,  fixed:1, scale:0.012 },
+        { min:-24,   max:24,   step:0.1,  fixed:1, scale:0.024 },
+        { min:-18,   max:18,   step:0.1,  fixed:1, scale:0.012 },
+    ],
 };
 
 TABS.mixer.initialize = function (callback) {
@@ -116,21 +131,26 @@ TABS.mixer.initialize = function (callback) {
         const inputMax  = mixerInput.find('#max');
 
         const input = FC.MIXER_INPUTS[inputIndex];
+        const attr = self.inputAttr[inputIndex];
 
         mixerInput.attr('class', `mixerInput${inputIndex}`);
         mixerInput.data('index', inputIndex);
 
         inputName.text(i18n.getMessage(Mixer.inputNames[inputIndex]));
-        inputRate.val(input.rate);
-        inputMax.val(input.max);
-        inputMin.val(input.min);
+        inputRate.val(input.rate).change();
+        inputMax.attr(attr)
+            .val((input.max * attr.scale).toFixed(attr.fixed))
+            .change();
+        inputMin.attr(attr)
+            .val((input.min * attr.scale).toFixed(attr.fixed))
+            .change();
 
         $('.mixerInputs tbody').append(mixerInput);
 
         mixerInput.change(function() {
             input.rate = parseInt(inputRate.val());
-            input.max = parseInt(inputMax.val());
-            input.min = parseInt(inputMin.val());
+            input.max = parseFloat(inputMax.val()) / attr.scale;
+            input.min = parseFloat(inputMin.val()) / attr.scale;
 
             mspHelper.sendMixerInput(inputIndex);
         });
@@ -144,78 +164,91 @@ TABS.mixer.initialize = function (callback) {
         const mixerEnable = mixerOverride.find('.mixerOverrideEnable input');
         const mixerInput  = mixerOverride.find('.mixerOverrideInput input');
 
+        const attr = self.overrideAttr[inputIndex];
+
         mixerOverride.attr('class', `mixerOverride${inputIndex}`);
         mixerOverride.find('.mixerOverrideName').text(i18n.getMessage(Mixer.inputNames[inputIndex]));
 
-        function isAngle(index) {
-            switch (index) {
-                case 1: // Stabilized Roll
-                case 2: // Stabilized Pitch
-                case 3: // Stabilized Yaw
-                case 4: // Stabilized Collective
-                    return true;
-                case 6: // Commanded Roll
-                case 7: // Commanded Pitch
-                case 8: // Commanded Yaw
-                case 9: // Commanded Collective
-                    return true;
+        mixerInput.attr(attr);
+
+        switch (inputIndex) {
+            case 1:
+            case 2:
+            case 4:
+            {
+                mixerSlider.noUiSlider({
+                    range: {
+                        'min': -18,
+                        'max':  18,
+                    },
+                    start: 0,
+                    step: 1,
+                    behaviour: 'snap-drag',
+                });
+
+                mixerOverride.find('.pips-range').noUiSlider_pips({
+                    mode: 'values',
+                    values: [ -18, -15, -12, -9, -6, -3, 0, 3, 6, 9, 12, 15, 18, ],
+                    density: 100 / ((18 + 18) / 1),
+                    stepped: true,
+                    format: wNumb({
+                        decimals: 0,
+                    }),
+                });
             }
-            return false;
-        }
+            break;
 
-        if (isAngle(inputIndex)) {
-            mixerInput.attr('min', '-18');
-            mixerInput.attr('max', '18');
-            mixerInput.attr('step', '1');
+            case 3:
+            {
+                mixerSlider.noUiSlider({
+                    range: {
+                        'min': -24,
+                        'max':  24,
+                    },
+                    start: 0,
+                    step: 1,
+                    behaviour: 'snap-drag',
+                });
 
-            mixerSlider.noUiSlider({
-                range: {
-                    'min': -18,
-                    'max':  18,
-                },
-                start: 0,
-                step: 1,
-                behaviour: 'snap-drag',
-            });
+                mixerOverride.find('.pips-range').noUiSlider_pips({
+                    mode: 'values',
+                    values: [ -24, -18, -12, -6, 0, 6, 12, 18, 24, ],
+                    density: 100 / ((24 + 24) / 1),
+                    stepped: true,
+                    format: wNumb({
+                        decimals: 0,
+                    }),
+                });
+            }
+            break;
 
-            mixerOverride.find('.pips-range').noUiSlider_pips({
-                mode: 'values',
-                values: [ -18, -15, -12, -9, -6, -3, 0, 3, 6, 9, 12, 15, 18, ],
-                density: 100 / ((18 + 18) / 1),
-                stepped: true,
-                format: wNumb({
-                    decimals: 0,
-                }),
-            });
-        }
-        else {
-            mixerInput.attr('min', '-1500');
-            mixerInput.attr('max', '1500');
-            mixerInput.attr('step', '50');
+            default:
+            {
+                mixerSlider.noUiSlider({
+                    range: {
+                        'min': -1500,
+                        'max':  1500,
+                    },
+                    start: 0,
+                    step: 50,
+                    behaviour: 'snap-drag',
+                });
 
-            mixerSlider.noUiSlider({
-                range: {
-                    'min': -1500,
-                    'max':  1500,
-                },
-                start: 0,
-                step: 50,
-                behaviour: 'snap-drag',
-            });
-
-            mixerOverride.find('.pips-range').noUiSlider_pips({
-                mode: 'values',
-                values: [ -1500, -1000, -500, 0, 500, 1000, 1500, ],
-                density: 100 / ((1500 + 1500) / 100),
-                stepped: true,
-                format: wNumb({
-                    decimals: 0,
-                }),
-            });
+                mixerOverride.find('.pips-range').noUiSlider_pips({
+                    mode: 'values',
+                    values: [ -1500, -1000, -500, 0, 500, 1000, 1500, ],
+                    density: 100 / ((1500 + 1500) / 100),
+                    stepped: true,
+                    format: wNumb({
+                        decimals: 0,
+                    }),
+                });
+            }
+            break;
         }
 
         mixerSlider.on('slide', function () {
-            mixerInput.val(parseInt($(this).val()));
+            mixerInput.val(parseInt($(this).val()).toFixed(attr.fixed));
         });
 
         mixerSlider.on('change', function () {
@@ -223,11 +256,9 @@ TABS.mixer.initialize = function (callback) {
         });
 
         mixerInput.change(function () {
-            let value = $(this).val();
+            const value = $(this).val();
             mixerSlider.val(value);
-            if (isAngle(inputIndex))
-                value = value / 12 * 1000;
-            FC.MIXER_OVERRIDE[inputIndex] = Math.round(value);
+            FC.MIXER_OVERRIDE[inputIndex] = Math.round(value / attr.scale);
             mspHelper.sendMixerOverride(inputIndex);
         });
 
@@ -247,12 +278,10 @@ TABS.mixer.initialize = function (callback) {
         let value = FC.MIXER_OVERRIDE[inputIndex];
         let check = (value >= -2500 && value <= 2500);
 
-        if (isAngle(inputIndex))
-            value = value / 1000 * 12;
+        value *= attr.scale;
+        value = check ? value.toFixed(attr.fixed) : 0;
 
-        value = check ? Math.round(value) : 0;
-
-        mixerInput.val(value);
+        mixerInput.val(value).change();
         mixerSlider.val(value);
 
         mixerInput.prop('disabled', !check);
@@ -326,7 +355,7 @@ TABS.mixer.initialize = function (callback) {
         $('.tab-mixer .override').toggle(!FC.CONFIG.mixerOverrideDisabled);
 
         mixerSwashType.change(function () {
-            const swashType = parseInt( $(this).val() );
+            const swashType = parseInt($(this).val());
             if (swashType == 0) {
                 $('.dialogCustomMixer')[0].showModal();
                 $(this).val(self.swashType);
