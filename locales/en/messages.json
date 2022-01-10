@@ -4368,30 +4368,6 @@
     "gyroDynamicNotchMaxHzHelp": {
         "message": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch."
     },
-    "gyroRpmFilterGroup": {
-        "message": "Gyro RPM Filter",
-        "description": "Header text for the RPM Filter group"
-    },
-    "gyroRpmFilterHelp": {
-        "message": "RPM filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove motor noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
-        "description": "Header text for the RPM Filter group"
-    },
-    "gyroRpmHarmonics": {
-        "message": "Gyro RPM Filter Harmonics Number",
-        "description": "Text for one of the parameters of the RPM Filter"
-    },
-    "gyroRpmHarmonicsHelp": {
-        "message": "Number of harmonics per motor. A value of 3 (recommended for most quads) will generate 3 notch filters, per motor for each axis, totaling 36 notches. One at the base motor frequency and two harmonics at multiples of that base frequency.",
-        "description": "Help text for one of the parameters of the RPM Filter"
-    },
-    "gyroRpmMinHz": {
-        "message": "Gyro RPM Filter Min Frequency [Hz]",
-        "description": "Text for one of the parameters of the RPM Filter"
-    },
-    "gyroRpmMinHzHelp": {
-        "message": "Minimum frequency that will be used by the RPM Filter.",
-        "description": "Help text for one of the parameters of the RPM Filter"
-    },
     "gyroDTermLowpassFiltersGroup": {
         "message": "D Term Lowpass Filters"
     },
@@ -4427,6 +4403,103 @@
     },
     "gyroDTermNotchCutoff": {
         "message": "D Term Notch Filter Cutoff Frequency [Hz]"
+    },
+    "gyroRpmFilterSettings": {
+        "message": "Gyro RPM Notch Filter Settings"
+    },
+    "gyroRpmFilterSetup": {
+        "message": "Setup Type"
+    },
+    "gyroRpmFilterSetupBasic": {
+        "message": "Basic"
+    },
+    "gyroRpmFilterSetupAdvanced": {
+        "message": "Advanced"
+    },
+    "gyroRpmFilterSetupCustom": {
+        "message": "Custom"
+    },
+    "gyroRpmFilterCustomNote": {
+        "message": "<span class=\"message-negative\">Note!</span> Custom RPM Notch Filters are in use.<br>Please use the CLI to configure the RPM filter settings."
+    },
+    "gyroRpmFilterVibrationLevel": {
+        "message": "Vibration Level"
+    },
+    "gyroRpmFilterVibrationLow": {
+        "message": "Low"
+    },
+    "gyroRpmFilterVibrationMedium": {
+        "message": "Medium"
+    },
+    "gyroRpmFilterVibrationHigh": {
+        "message": "High"
+    },
+    "gyroRpmFilterMainRotorMinRPM": {
+        "message": "Main Rotor Minimum Filtered RPM"
+    },
+    "gyroRpmFilterTailRotorMinRPM": {
+        "message": "Tail Rotor Minimum Filtered RPM"
+    },
+    "gyroRpmFilterBanks": {
+        "message": "Gyro RPM Notch Filter Banks"
+    },
+    "gyroRpmFilterHelp": {
+        "message": "RPM filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove motor noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
+        "description": "Header text for the RPM Filter group"
+    },
+    "gyroRpmFilterMainRotorGroup": {
+        "message": "Main Rotor Notch Filters"
+    },
+    "gyroRpmFilterMainRotorHelp": {
+        "message": "RPM filters for the main rotor harmonics"
+    },
+    "gyroRpmFilterTailRotorGroup": {
+        "message": "Tail Rotor Notch Filters"
+    },
+    "gyroRpmFilterTailRotorHelp": {
+        "message": "RPM filters for the tail rotor harmonics"
+    },
+    "gyroRpmFilterMainMotorGroup": {
+        "message": "Main Motor Notch Filters"
+    },
+    "gyroRpmFilterMainMotorHelp": {
+        "message": "RPM filters for the main motor harmonics"
+    },
+    "gyroRpmFilterH1": {
+        "message": "Fundamental Frequency Notch type"
+    },
+    "gyroRpmFilterQ1": {
+        "message": "Fundamental Frequency Notch Q"
+    },
+    "gyroRpmFilterH2": {
+        "message": "2<sup>nd</sup> Harmonic Notch Type"
+    },
+    "gyroRpmFilterQ2": {
+        "message": "2<sup>nd</sup> Harmonic Notch Q"
+    },
+    "gyroRpmFilterH3": {
+        "message": "3<sup>rd</sup> Harmonic Notch Type"
+    },
+    "gyroRpmFilterQ3": {
+        "message": "3<sup>rd</sup> Harmonic Notch Q"
+    },
+    "gyroRpmFilterH4": {
+        "message": "4<sup>th</sup> Harmonic Notch Type"
+    },
+    "gyroRpmFilterQ4": {
+        "message": "4<sup>th</sup> Harmonic Notch Q"
+    },
+    "dialogGyroResetTitle": {
+        "message": "<span class=\"message-negative\">WARNING: RPM Filter Reset</span>"
+    },
+    "dialogGyroResetNote": {
+        "message": "Enabling RPM Filter Setup will reset any custom RPM filter settings to defaults."
+    },
+    "dialogGyroResetAccept": {
+        "message": "Accept"
+    },
+    "dialogGyroResetRevert": {
+        "message": "Revert"
     },
 
     "configHelp2": {
