@@ -383,10 +383,14 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MOTOR_CONFIG.use_pwm_inversion = (data.readU8() != 0);
                 FC.MOTOR_CONFIG.use_unsynced_pwd = (data.readU8() != 0);
                 FC.MOTOR_CONFIG.use_dshot_telemetry = (data.readU8() != 0);
-                FC.MOTOR_CONFIG.motor_poles[0] = data.readU8();
-                FC.MOTOR_CONFIG.motor_poles[1] = data.readU8();
-                FC.MOTOR_CONFIG.motor_poles[2] = data.readU8();
-                FC.MOTOR_CONFIG.motor_poles[3] = data.readU8();
+                for (let i = 0; i < 4; i++)
+                    FC.MOTOR_CONFIG.motor_poles[i] = data.readU8();
+                for (let i = 0; i < 4; i++)
+                    FC.MOTOR_CONFIG.motor_rpm_lpf[i] = data.readU8();
+                for (let i = 0; i < 2; i++)
+                    FC.MOTOR_CONFIG.main_rotor_gear_ratio[i] = data.readU16();
+                for (let i = 0; i < 2; i++)
+                    FC.MOTOR_CONFIG.tail_rotor_gear_ratio[i] = data.readU16();
                 break;
 
             case MSPCodes.MSP_GPS_CONFIG:
@@ -986,7 +990,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.GOVERNOR.gov_autorotation_min_entry_time  = data.readU16();
                 FC.GOVERNOR.gov_lost_throttle_timeout        = data.readU16();
                 FC.GOVERNOR.gov_lost_headspeed_timeout       = data.readU16();
-                FC.GOVERNOR.gov_gear_ratio                   = data.readU16();
                 FC.GOVERNOR.gov_pwr_filter                   = data.readU16();
                 FC.GOVERNOR.gov_rpm_filter                   = data.readU16();
                 break;
@@ -1555,11 +1558,15 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.MOTOR_CONFIG.motor_pwm_rate)
                 .push8(FC.MOTOR_CONFIG.use_unsynced_pwm ? 1 : 0)
                 .push8(FC.MOTOR_CONFIG.use_pwm_inversion ? 1 : 0)
-                .push8(FC.MOTOR_CONFIG.use_dshot_telemetry ? 1 : 0)
-                .push8(FC.MOTOR_CONFIG.motor_poles[0])
-                .push8(FC.MOTOR_CONFIG.motor_poles[1])
-                .push8(FC.MOTOR_CONFIG.motor_poles[2])
-                .push8(FC.MOTOR_CONFIG.motor_poles[3]);
+                .push8(FC.MOTOR_CONFIG.use_dshot_telemetry ? 1 : 0);
+            for (let i = 0; i < 4; i++)
+                buffer.push8(FC.MOTOR_CONFIG.motor_poles[i]);
+            for (let i = 0; i < 4; i++)
+                buffer.push8(FC.MOTOR_CONFIG.motor_rpm_lpf[i]);
+            for (let i = 0; i < 2; i++)
+                buffer.push16(FC.MOTOR_CONFIG.main_rotor_gear_ratio[i]);
+            for (let i = 0; i < 2; i++)
+                buffer.push16(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[i]);
             break;
 
         case MSPCodes.MSP_SET_GPS_CONFIG:
@@ -1785,9 +1792,8 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.GOVERNOR.gov_autorotation_min_entry_time)
                 .push16(FC.GOVERNOR.gov_lost_throttle_timeout)
                 .push16(FC.GOVERNOR.gov_lost_headspeed_timeout)
-                .push16(FC.GOVERNOR.gov_gear_ratio)
                 .push16(FC.GOVERNOR.gov_pwr_filter)
-            .push16(FC.GOVERNOR.gov_rpm_filter);
+                .push16(FC.GOVERNOR.gov_rpm_filter);
             break;
 
         case MSPCodes.MSP_SET_SENSOR_CONFIG:

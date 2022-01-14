@@ -371,9 +371,12 @@ const FC = {
             motor_pwm_protocol:         0,
             motor_pwm_rate:             0,
             motor_poles:                [ 0, 0, 0, 0 ],
+            motor_rpm_lpf:              [ 0, 0, 0, 0 ],
             use_dshot_telemetry:        false,
             use_pwm_inversion:          false,
             use_unsynced_pwm:           false,
+            main_rotor_gear_ratio:      [ 1, 1 ],
+            tail_rotor_gear_ratio:      [ 1, 1 ],
         };
 
         this.GPS_CONFIG = {
@@ -561,7 +564,6 @@ const FC = {
             gov_autorotation_entry_time:    0,
             gov_lost_throttle_timeout:      0,
             gov_lost_headspeed_timeout:     0,
-            gov_gear_ratio:                 0,
             gov_pwr_filter:                 0,
             gov_rpm_filter:                 0,
             gov_headspeed:                  0,
