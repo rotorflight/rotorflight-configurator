@@ -21,101 +21,116 @@
                                 <div id="escProtocolDisabled" class="note">
                                     <p i18n="motorsEscProtocolDisabled"></p>
                                 </div>
-                                <div class="selectEscProtocol">
+                                <div class="field selectEscProtocol">
                                     <label>
-                                        <select class="escProtocol">
-                                            <!-- list generated here -->
-                                        </select>
+                                        <div class="field_box">
+                                            <select class="escProtocol">
+                                                <!-- list generated here -->
+                                            </select>
+                                        </div>
                                         <span i18n="motorsEscProtocol"></span>
                                         <div id="escProtocolTooltip" class="helpicon cf_tip" i18n_title="motorsEscProtocolHelp"></div>
                                     </label>
                                 </div>
-                                <div class="number checkboxPwm">
-                                    <div class="numberspacer">
+                                <div class="field checkboxPwm">
+                                    <div class="field_box">
                                         <input type="checkbox" id="pwmSwitch" class="toggle" />
                                     </div>
                                     <span class="freelabel" i18n="motorsUnsyndePwm"></span>
                                 </div>
-                                <div class="number inputPwmFreq">
+                                <div class="field inputPwmFreq">
                                     <label>
-                                        <div class="numberspacer">
+                                        <div class="field_box">
                                             <input type="number" id="pwmFreq" min="50" max="8000" step="10"/>
                                         </div>
                                         <span i18n="motorsUnsyncedPWMFreq"></span>
                                     </label>
                                 </div>
-                                <div class="number checkboxDshotBidir">
-                                    <div class="numberspacer">
+                                <div class="field checkboxDshotBidir">
+                                    <div class="field_box">
                                         <input type="checkbox" id="dshotBidir" class="toggle" />
                                     </div>
                                     <span class="freelabel" i18n="motorsDshotBidir"></span>
                                     <div class="helpicon cf_tip" i18n_title="motorsDshotBidirHelp"></div>
                                 </div>
-                                <div class="number mincommand">
+                                <div class="field mincommand">
                                     <label>
-                                        <div class="numberspacer">
+                                        <div class="field_box">
                                             <input type="number" id="mincommand" min="0" max="2000" />
                                         </div>
                                         <span i18n="motorsThrottleMinimumCommand"></span>
                                         <div class="helpicon cf_tip" i18n_title="motorsThrottleMinimumCommandHelp"></div>
                                     </label>
                                 </div>
-                                <div class="number minthrottle">
+                                <div class="field minthrottle">
                                     <label>
-                                        <div class="numberspacer">
+                                        <div class="field_box">
                                             <input type="number" id="minthrottle" min="0" max="2000" />
                                         </div>
                                         <span i18n="motorsThrottleMinimum"></span>
                                         <div class="helpicon cf_tip" i18n_title="motorsThrottleMinimumHelp"></div>
                                     </label>
                                 </div>
-                                <div class="number maxthrottle">
+                                <div class="field maxthrottle">
                                     <label>
-                                        <div class="numberspacer">
+                                        <div class="field_box">
                                             <input type="number" id="maxthrottle" min="0" max="2000" />
                                         </div>
                                         <span i18n="motorsThrottleMaximum"></span>
                                     </label>
                                 </div>
-                                <div class="number mainGearRatio">
+                                <div class="field mainGearRatio">
                                     <label>
-                                        <div class="numberspacer">
-                                            <input type="number" id="govGearRatio" min="0" max="50000" />
+                                        <div class="field_box">
+                                            <input type="number" id="mainGearRatioN" min="1" max="50000" />
+                                            <span class="gear_ratio">/</span>
+                                            <input type="number" id="mainGearRatioD" min="1" max="50000" />
                                         </div>
-                                        <span i18n="govGearRatio"></span>
-                                        <div class="helpicon cf_tip" i18n_title="govGearRatioHelp"></div>
+                                        <span i18n="motorsMainRotorGearRatio"></span>
+                                        <div class="helpicon cf_tip" i18n_title="motorsMainRotorGearRatioHelp"></div>
                                     </label>
                                 </div>
-                                <div class="number motorPoles1">
+                                <div class="field tailGearRatio">
                                     <label>
-                                        <div class="numberspacer">
+                                        <div class="field_box">
+                                            <input type="number" id="tailGearRatioN" min="1" max="50000" />
+                                            <span class="gear_ratio">/</span>
+                                            <input type="number" id="tailGearRatioD" min="1" max="50000" />
+                                        </div>
+                                        <span i18n="motorsTailRotorGearRatio"></span>
+                                        <div class="helpicon cf_tip" i18n_title="motorsTailRotorGearRatioHelp"></div>
+                                    </label>
+                                </div>
+                                <div class="field motorPoles1">
+                                    <label>
+                                        <div class="field_box">
                                             <input type="number" id="motorPoles1" min="2" max="255" step="2"/>
                                         </div>
                                         <span i18n="motorsMotorPoles1Long"></span>
                                     </label>
                                     <div class="helpicon cf_tip" i18n_title="motorsMotorPolesHelp"></div>
                                 </div>
-                                <div class="number motorPoles2">
+                                <div class="field motorPoles2">
                                     <label>
-                                        <div class="numberspacer">
+                                        <div class="field_box">
                                             <input type="number" id="motorPoles2" min="2" max="255" step="2"/>
                                         </div>
                                         <span i18n="motorsMotorPoles2Long"></span>
                                     </label>
                                     <div class="helpicon cf_tip" i18n_title="motorsMotorPolesHelp"></div>
                                 </div>
-                                <div class="number motorPoles3">
+                                <div class="field motorPoles3">
                                     <label>
-                                        <div class="numberspacer">
+                                        <div class="field_box">
                                             <input type="number" id="motorPoles3" min="2" max="255" step="2"/>
                                         </div>
                                         <span i18n="motorsMotorPoles3Long"></span>
                                     </label>
                                     <div class="helpicon cf_tip" i18n_title="motorsMotorPolesHelp"></div>
                                 </div>
-                                <div class="number motorPoles4">
+                                <div class="field motorPoles4">
                                     <label>
-                                        <div class="numberspacer">
+                                        <div class="field_box">
                                             <input type="number" id="motorPoles4" min="2" max="255" step="2"/>
                                         </div>
                                         <span i18n="motorsMotorPoles4Long"></span>
@@ -137,55 +152,57 @@
                                 <div class="note">
                                     <p i18n="govConfigurationNote"></p>
                                 </div>
-                                <div class="selectGovMode">
+                                <div class="field selectGovMode">
                                     <label>
-                                        <select class="govMode">
+                                        <div class="field_box">
+                                            <select class="govMode">
                                             <!-- list generated here -->
-                                        </select>
+                                            </select>
+                                        </div>
                                         <span i18n="govMode"></span>
                                         <div class="helpicon cf_tip" i18n_title="govModeHelp"></div>
                                     </label>
                                 </div>
                                 <div class="govConfig">
-                                    <div class="number">
+                                    <div class="field">
                                         <label>
-                                            <div class="numberspacer">
+                                            <div class="field_box">
                                                 <input type="number" id="govSpoolupTime" min="0" max="1000" />
                                             </div>
                                             <span i18n="govSpoolupTime"></span>
                                             <div class="helpicon cf_tip" i18n_title="govSpoolupTimeHelp"></div>
                                         </label>
                                     </div>
-                                    <div class="number">
+                                    <div class="field">
                                         <label>
-                                            <div class="numberspacer">
+                                            <div class="field_box">
                                                 <input type="number" id="govTrackingTime" min="0" max="1000" />
                                             </div>
                                             <span i18n="govTrackingTime"></span>
                                             <div class="helpicon cf_tip" i18n_title="govTrackingTimeHelp"></div>
                                         </label>
                                     </div>
-                                    <div class="number">
+                                    <div class="field">
                                         <label>
-                                            <div class="numberspacer">
+                                            <div class="field_box">
                                                 <input type="number" id="govRecoveryTime" min="0" max="1000" />
                                             </div>
                                             <span i18n="govRecoveryTime"></span>
                                             <div class="helpicon cf_tip" i18n_title="govRecoveryTimeHelp"></div>
                                         </label>
                                     </div>
-                                    <div class="number">
+                                    <div class="field">
                                         <label>
-                                            <div class="numberspacer">
+                                            <div class="field_box">
                                                 <input type="number" id="govAutoBailoutTime" min="0" max="1000" />
                                             </div>
                                             <span i18n="govAutoBailoutTime"></span>
                                             <div class="helpicon cf_tip" i18n_title="govAutoBailoutTimeHelp"></div>
                                         </label>
                                     </div>
-                                    <div class="number">
+                                    <div class="field">
                                         <label>
-                                            <div class="numberspacer">
+                                            <div class="field_box">
                                                 <input type="number" id="govAutoTimeout" min="0" max="1000" />
                                             </div>
                                             <span i18n="govAutoTimeout"></span>
