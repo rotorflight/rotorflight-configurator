@@ -11,80 +11,73 @@
     margin: 0;
 }
 
-.tab-motors select {
-    width: 150px;
-    height: 20px;
-    float: left;
-    margin-right: 15px;
-    border: 1px solid var(--subtleAccent);
-    border-radius: 3px;
-}
-
-.tab-motors .numberspacer {
-    float: left;
-    width: 100px;
-    height: 22px;
-}
-
-.tab-motors .number input {
-    width: 60px;
-    height: 20px;
-    line-height: 20px;
-    text-align: left;
-    font-size: 12px;
-    font-weight: normal;
-    margin-right: 11px;
-    padding-left: 3px;
-    border: 1px solid var(--subtleAccent);
-    border-radius: 3px;
-}
-
-.tab-motors .number .disabled {
-    width: 48px;
-    padding: 0 5px;
-    background-color: #ececec;
-}
-
-.tab-motors .number span {
-    margin-left: 0;
-}
-
-.tab-motors .freelabel {
-    margin-left: 10px;
-    position: relative;
-}
-
 .tab-motors .spacer_box {
     padding-bottom: 10px;
     float: left;
     width: calc(100% - 20px);
 }
 
-.tab-motors .number,
-.tab-motors .select {
+.tab-motors .field_box {
+    width: 180px;
+    height: 22px;
+    float: left;
+    margin-right: 15px;
+}
+
+.tab-motors .field {
     margin-bottom: 5px;
     padding-bottom: 5px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--subtleAccent);
     width: 100%;
     float: left;
     clear: left;
 }
 
-.tab-motors .selectEscProtocol,
-.tab-motors .selectGovMode {
-    margin-bottom: 5px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid var(--subtleAccent);
-    width: 100%;
-    float: left;
-    clear: left;
-}
-
-.tab-motors .number:last-child,
-.tab-motors .select:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+.tab-motors .spacer_box .field:last-child {
     margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.tab-motors .field span {
+    margin-left: 0;
+}
+
+.tab-motors .field span.gear_ratio {
+    font-size: 14px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.tab-motors .field input {
+    width: 60px;
+    height: 20px;
+    line-height: 20px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: normal;
+    padding-left: 3px;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+}
+
+.tab-motors .field select {
+    width: 150px;
+    height: 20px;
+    float: left;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+}
+
+.tab-motors .field .disabled {
+    width: 48px;
+    padding: 0 5px;
+    background-color: #ececec;
+}
+
+.tab-motors .freelabel {
+    margin-left: 10px;
+    position: relative;
 }
 
 .tab-motors .gui_box_titlebar {

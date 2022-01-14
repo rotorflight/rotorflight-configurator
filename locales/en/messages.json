@@ -2847,6 +2847,18 @@
     "motorsDshotBidirHelp": {
         "message": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. JESC, Jazzmac, BLHeli32."
     },
+    "motorsMainRotorGearRatio": {
+        "message": "Main Rotor Gear Ratio"
+    },
+    "motorsMainRotorGearRatioHelp": {
+        "message": "Gear ratio between the motor and the main rotor (pinion/main gear tooth count)"
+    },
+    "motorsTailRotorGearRatio": {
+        "message": "Tail Rotor Gear Ratio"
+    },
+    "motorsTailRotorGearRatioHelp": {
+        "message": "Gear ratio between the main rotor and the tail rotor (tail gear/autorotation gear tooth count)"
+    },
     "motorsMotorPolesLong": {
         "message": "Pole count (number of magnets on the motor bell)"
     },
@@ -3057,12 +3069,6 @@
     },
     "govModeHelp": {
         "message": "The governor maintains the main rotor speed constant. The algorithm used in the control loop is selected with this setting."
-    },
-    "govGearRatio": {
-        "message": "Main rotor gear ratio (x1000)"
-    },
-    "govGearRatioHelp": {
-        "message": "Gearing ratio between the motor and the main rotor (x1000)"
     },
     "govSpoolupTime": {
         "message": "Spoolup time (x0.1s)"

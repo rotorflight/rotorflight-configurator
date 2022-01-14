@@ -109,6 +109,11 @@ TABS.motors.initialize = function (callback) {
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR');
         self.isEscSensorEnabled = FC.FEATURE_CONFIG.features.isEnabled('ESC_SENSOR');
 
+        $('input[id="mainGearRatioN"]').val(FC.MOTOR_CONFIG.main_rotor_gear_ratio[0]);
+        $('input[id="mainGearRatioD"]').val(FC.MOTOR_CONFIG.main_rotor_gear_ratio[1]);
+        $('input[id="tailGearRatioN"]').val(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0]);
+        $('input[id="tailGearRatioD"]').val(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1]);
+
         const govModeSelect = $('select.govMode');
 
         for (let j = 0; j < self.govModes.length; j++) {
@@ -118,7 +123,6 @@ TABS.motors.initialize = function (callback) {
         govModeSelect.val(FC.GOVERNOR.gov_mode);
 
         if (FC.GOVERNOR.gov_mode > 0) {
-            $('input[id="govGearRatio"]').val(FC.GOVERNOR.gov_gear_ratio);
             $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time);
             $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time);
             $('input[id="govRecoveryTime"]').val(FC.GOVERNOR.gov_recovery_time);
@@ -151,7 +155,7 @@ TABS.motors.initialize = function (callback) {
             }
 
             $('.mainGearRatio').toggle(self.isProtoEnabled);
-
+            $('.tailGearRatio').toggle(self.isProtoEnabled);
             $('#escProtocolDisabled').toggle(!self.isProtoEnabled);
 
             $('.governor_features').toggle(self.isGovEnabled && self.isProtoEnabled);
@@ -362,10 +366,14 @@ TABS.motors.initialize = function (callback) {
             FC.MOTOR_CONFIG.use_unsynced_pwm = pwmFreqSwitch.is(':checked');
             FC.MOTOR_CONFIG.motor_pwm_rate = parseInt($('input[id="pwmFreq"]').val());
 
+            FC.MOTOR_CONFIG.main_rotor_gear_ratio[0] = parseInt($('input[id="mainGearRatioN"]').val());
+            FC.MOTOR_CONFIG.main_rotor_gear_ratio[1] = parseInt($('input[id="mainGearRatioD"]').val());
+            FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0] = parseInt($('input[id="tailGearRatioN"]').val());
+            FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1] = parseInt($('input[id="tailGearRatioD"]').val());
+
             if (self.isGovEnabled) {
                 FC.GOVERNOR.gov_mode = govModeSelect.val();
                 if (FC.GOVERNOR.gov_mode > 0) {
-                    FC.GOVERNOR.gov_gear_ratio = parseInt($('input[id="govGearRatio"]').val());
                     FC.GOVERNOR.gov_spoolup_time = parseInt($('input[id="govSpoolupTime"]').val());
                     FC.GOVERNOR.gov_tracking_time = parseInt($('input[id="govTrackingTime"]').val());
                     FC.GOVERNOR.gov_recovery_time = parseInt($('input[id="govRecoveryTime"]').val());
