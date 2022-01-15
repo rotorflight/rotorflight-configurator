@@ -304,23 +304,18 @@ TABS.mixer.initialize = function (callback) {
 
         const mixer = Mixer.findMixer(FC.MIXER_RULES);
 
-        if (mixer > 6) {
-            if (self.tailMode > 0)
-                self.swashType = mixer - 6;
-            else
-                self.swashType = 0;
+        if (self.tailMode == 0 && mixer > 0 && mixer < 7) {
+            self.swashType = mixer;
         }
-        else if (mixer > 0) {
-            if (self.tailMode > 0)
-                self.swashType = 0;
-            else
-                self.swashType = mixer;
+        else if (self.tailMode == 1 && mixer > 6 && mixer < 13) {
+            self.swashType = mixer - 6;
         }
         else {
             self.swashType = 0;
         }
 
         const mixerSwashType = $('.tab-mixer #mixerSwashType');
+        const mixerTailMode = $('.tab-mixer #mixerTailRotorMode');
 
         Mixer.swashTypes.forEach(function(name,index) {
             mixerSwashType.append($(`<option value="${index}">` + i18n.getMessage(name)  + '</option>'));
@@ -358,7 +353,12 @@ TABS.mixer.initialize = function (callback) {
             const swashType = parseInt($(this).val());
             if (swashType == 0) {
                 $('.dialogCustomMixer')[0].showModal();
-                $(this).val(self.swashType);
+                self.MIXER_RULES_dirty = false;
+            }
+            else {
+                if (mixerTailMode.val() == 2) {
+                    mixerSwashType.val(0);
+                }
             }
         });
 
@@ -366,8 +366,14 @@ TABS.mixer.initialize = function (callback) {
             $('.dialogCustomMixer')[0].close();
         });
 
-        $('.tab-mixer #mixerTailRotorMode').change(function () {
-            $('.tailRotorMotorized').toggle( $(this).val() != 0 );
+        mixerTailMode.change(function () {
+            const val = $(this).val();
+            $('.tailRotorMotorized').toggle( val != 0 );
+            // FIXME: temporary custom mix with bidir tail
+            if (val == 2) {
+                mixerSwashType.val(0).change();
+                self.MIXER_RULES_dirty = false;
+            }
         });
 
         $('.tailRotorMotorized').toggle( self.tailMode != 0 );

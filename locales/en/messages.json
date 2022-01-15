@@ -2587,6 +2587,9 @@
     "mixerTailMotorized": {
         "message": "Motorised"
     },
+    "mixerTailBidirectional": {
+        "message": "Bidirectional"
+    },
     "mixerTailMotorIdle": {
         "message": "Motor idle throttle"
     },
