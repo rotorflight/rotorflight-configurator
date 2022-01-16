@@ -3074,31 +3074,31 @@
         "message": "The governor maintains the main rotor speed constant. The algorithm used in the control loop is selected with this setting."
     },
     "govSpoolupTime": {
-        "message": "Spoolup time (x0.1s)"
+        "message": "Spoolup time"
     },
     "govSpoolupTimeHelp": {
-        "message": "Time constant for slow spoolup. Unit is 0.1s, measuring the time from zero to max headspeed."
+        "message": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govTrackingTime": {
-        "message": "Tracking time (x0.1s)"
+        "message": "Tracking time"
     },
     "govTrackingTimeHelp": {
-        "message": "Time constant for headspeed changes. Unit is 0.1s, measuring the time from zero to max headspeed."
+        "message": "Time constant for headspeed changes, in seconds, measuring the time from zero to full headspeed."
     },
     "govRecoveryTime": {
-        "message": "Recovery time (x0.1s)"
+        "message": "Recovery time"
     },
     "govRecoveryTimeHelp": {
-        "message": "Time constant for recovery spoolup. Unit is 0.1s, measuring the time from zero to max headspeed."
+        "message": "Time constant for recovery spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govAutoBailoutTime": {
-        "message": "Autorotation bailout time (x0.1s)"
+        "message": "Autorotation bailout time"
     },
     "govAutoBailoutTimeHelp": {
-        "message": "Time constant for autorotation bailout spoolup. Unit is 0.1s, measuring the time from zero to max headspeed."
+        "message": "Time constant for autorotation bailout spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govAutoTimeout": {
-        "message": "Autorotation timeout (s)"
+        "message": "Autorotation timeout"
     },
     "govAutoTimeoutHelp": {
         "message": "Timeout for ending autorotation and moving to normal IDLE."
