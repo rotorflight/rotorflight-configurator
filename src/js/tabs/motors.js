@@ -123,11 +123,11 @@ TABS.motors.initialize = function (callback) {
         govModeSelect.val(FC.GOVERNOR.gov_mode);
 
         if (FC.GOVERNOR.gov_mode > 0) {
-            $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time);
-            $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time);
-            $('input[id="govRecoveryTime"]').val(FC.GOVERNOR.gov_recovery_time);
-            $('input[id="govAutoBailoutTime"]').val(FC.GOVERNOR.gov_autorotation_bailout_time);
-            $('input[id="govAutoTimeout"]').val(FC.GOVERNOR.gov_autorotation_timeout);
+            $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time / 10).change();
+            $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time / 10).change();
+            $('input[id="govRecoveryTime"]').val(FC.GOVERNOR.gov_recovery_time / 10).change();
+            $('input[id="govAutoBailoutTime"]').val(FC.GOVERNOR.gov_autorotation_bailout_time / 10).change();
+            $('input[id="govAutoTimeout"]').val(FC.GOVERNOR.gov_autorotation_timeout / 10).change();
 
             $('.govConfig').show();
         }
@@ -374,11 +374,11 @@ TABS.motors.initialize = function (callback) {
             if (self.isGovEnabled) {
                 FC.GOVERNOR.gov_mode = govModeSelect.val();
                 if (FC.GOVERNOR.gov_mode > 0) {
-                    FC.GOVERNOR.gov_spoolup_time = parseInt($('input[id="govSpoolupTime"]').val());
-                    FC.GOVERNOR.gov_tracking_time = parseInt($('input[id="govTrackingTime"]').val());
-                    FC.GOVERNOR.gov_recovery_time = parseInt($('input[id="govRecoveryTime"]').val());
-                    FC.GOVERNOR.gov_autorotation_bailout_time = parseInt($('input[id="govAutoBailoutTime"]').val());
-                    FC.GOVERNOR.gov_autorotation_timeout = parseInt($('input[id="govAutoTimeout"]').val());
+                    FC.GOVERNOR.gov_spoolup_time = Math.round(parseFloat($('input[id="govSpoolupTime"]').val()) * 10);
+                    FC.GOVERNOR.gov_tracking_time = Math.round(parseFloat($('input[id="govTrackingTime"]').val()) * 10);
+                    FC.GOVERNOR.gov_recovery_time = Math.round(parseFloat($('input[id="govRecoveryTime"]').val()) * 10);
+                    FC.GOVERNOR.gov_autorotation_bailout_time = Math.round(parseFloat($('input[id="govAutoBailoutTime"]').val()) * 10);
+                    FC.GOVERNOR.gov_autorotation_timeout = Math.round(parseFloat($('input[id="govAutoTimeout"]').val()) * 10);
                 }
             }
         }
