@@ -2,6 +2,7 @@
 
 TABS.mixer = {
     isDirty: false,
+    needReboot: false,
 
     MIXER_CONFIG_dirty: false,
     MIXER_INPUTS_dirty: false,
@@ -92,7 +93,14 @@ TABS.mixer.initialize = function (callback) {
             self.MIXER_RULES_dirty = false;
             self.isDirty = false;
 
-            if (callback) callback();
+            if (self.needReboot) {
+                MSP.send_message(MSPCodes.MSP_SET_REBOOT);
+                GUI.log(i18n.getMessage('deviceRebooting'));
+                reinitialiseConnection(callback);
+            }
+            else {
+                if (callback) callback();
+            }
         }
 
         send_mixer_config();
@@ -293,6 +301,9 @@ TABS.mixer.initialize = function (callback) {
 
     function data_to_form() {
 
+        self.isDirty = false;
+        self.needReboot = false;
+
         self.MIXER_CONFIG_dirty = false;
         self.MIXER_INPUTS_dirty = false;
         self.MIXER_RULES_dirty = false;
@@ -417,28 +428,31 @@ TABS.mixer.initialize = function (callback) {
         // Hide the buttons toolbar
         $('.tab-mixer').addClass('toolbar_hidden');
 
-        self.isDirty = false;
+        const saveBtn = $('.save_btn');
+        const rebootBtn = $('.reboot_btn');
 
-        function setDirty() {
+        function setDirty(reboot) {
             if (!self.isDirty) {
-                if (self.MIXER_CONFIG_dirty || self.MIXER_INPUTS_dirty || self.MIXER_RULES_dirty) {
-                    self.isDirty = true;
-                    $('.tab-mixer').removeClass('toolbar_hidden');
-                }
+                self.isDirty = true;
+                $('.tab-mixer').removeClass('toolbar_hidden');
             }
+            if (reboot)
+                self.needReboot = true;
+            saveBtn.toggle(!self.needReboot);
+            rebootBtn.toggle(self.needReboot);
         }
 
         $('.mixerConfigs').change(function () {
             self.MIXER_CONFIG_dirty = true;
-            setDirty();
+            setDirty(true);
         });
         $('.mixerInputs').change(function () {
             self.MIXER_INPUTS_dirty = true;
-            setDirty();
+            setDirty(false);
         });
         $('.mixerRules').change(function () {
             self.MIXER_RULES_dirty = true;
-            setDirty();
+            setDirty(true);
         });
 
         self.save = function (callback) {
@@ -453,6 +467,10 @@ TABS.mixer.initialize = function (callback) {
         };
 
         $('a.save').click(function () {
+            self.save(() => GUI.tab_switch_reload());
+        });
+
+        $('a.reboot').click(function () {
             self.save(() => GUI.tab_switch_reload());
         });
 
