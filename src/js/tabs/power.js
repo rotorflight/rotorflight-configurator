@@ -125,9 +125,9 @@ TABS.power.initialize = function (callback) {
             }
             destinationVoltageConfiguration.append(elementVoltageConfiguration);
 
-            $(`input[name="vbatscale-${index}"]`).val(voltageDataSource[index].vbatscale);
-            $(`input[name="vbatresdivval-${index}"]`).val(voltageDataSource[index].vbatresdivval);
-            $(`input[name="vbatresdivmultiplier-${index}"]`).val(voltageDataSource[index].vbatresdivmultiplier);
+            $(`input[name="vbatscale-${index}"]`).val(voltageDataSource[index].vbatscale).change();
+            $(`input[name="vbatresdivval-${index}"]`).val(voltageDataSource[index].vbatresdivval).change();
+            $(`input[name="vbatresdivmultiplier-${index}"]`).val(voltageDataSource[index].vbatresdivmultiplier).change();
         }
 
         $('input[name="vbatscale-0"]').change(function () {
@@ -184,8 +184,8 @@ TABS.power.initialize = function (callback) {
             }
             destinationAmperageConfiguration.append(elementAmperageConfiguration);
 
-            $(`input[name="amperagescale-${index}"]`).val(currentDataSource[index].scale);
-            $(`input[name="amperageoffset-${index}"]`).val(currentDataSource[index].offset);
+            $(`input[name="amperagescale-${index}"]`).val(currentDataSource[index].scale).change();
+            $(`input[name="amperageoffset-${index}"]`).val(currentDataSource[index].offset).change();
         }
 
         $('input[name="amperagescale-0"]').change(function () {
@@ -240,10 +240,10 @@ TABS.power.initialize = function (callback) {
         $('input[name="maxcellvoltage"]').prop('step','0.01');
         $('input[name="warningcellvoltage"]').prop('step','0.01');
 
-        $('input[name="mincellvoltage"]').val(FC.BATTERY_CONFIG.vbatmincellvoltage);
-        $('input[name="maxcellvoltage"]').val(FC.BATTERY_CONFIG.vbatmaxcellvoltage);
-        $('input[name="warningcellvoltage"]').val(FC.BATTERY_CONFIG.vbatwarningcellvoltage);
-        $('input[name="capacity"]').val(FC.BATTERY_CONFIG.capacity);
+        $('input[name="mincellvoltage"]').val(FC.BATTERY_CONFIG.vbatmincellvoltage).change();
+        $('input[name="maxcellvoltage"]').val(FC.BATTERY_CONFIG.vbatmaxcellvoltage).change();
+        $('input[name="warningcellvoltage"]').val(FC.BATTERY_CONFIG.vbatwarningcellvoltage).change();
+        $('input[name="capacity"]').val(FC.BATTERY_CONFIG.capacity).change();
 
         const haveFc = (FC.CONFIG.boardType == 0 || FC.CONFIG.boardType == 2);
 
@@ -283,7 +283,7 @@ TABS.power.initialize = function (callback) {
         batteryMeterType_e = $('select.batterymetersource');
 
         let sourceschanged = false;
-        batteryMeterType_e.val(FC.BATTERY_CONFIG.voltageMeterSource);
+        batteryMeterType_e.val(FC.BATTERY_CONFIG.voltageMeterSource).change();
         batteryMeterType_e.change(function () {
             FC.BATTERY_CONFIG.voltageMeterSource = parseInt($(this).val());
 
@@ -292,7 +292,7 @@ TABS.power.initialize = function (callback) {
         });
 
         currentMeterType_e = $('select.currentmetersource');
-        currentMeterType_e.val(FC.BATTERY_CONFIG.currentMeterSource);
+        currentMeterType_e.val(FC.BATTERY_CONFIG.currentMeterSource).change();
         currentMeterType_e.change(function () {
             FC.BATTERY_CONFIG.currentMeterSource = parseInt($(this).val());
 
@@ -454,8 +454,8 @@ TABS.power.initialize = function (callback) {
                     $('.amperagecalibration').hide();
                 }
 
-                $('output[name="vbatnewscale"').val(vbatnewscale);
-                $('output[name="amperagenewscale"').val(amperagenewscale);
+                $('output[name="vbatnewscale"').val(vbatnewscale).change();
+                $('output[name="amperagenewscale"').val(amperagenewscale).change();
 
                 $('a.applycalibration').click(function() {
                     if (vbatscalechanged) {
