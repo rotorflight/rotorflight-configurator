@@ -2848,19 +2848,19 @@
         "message": "Bidirectional DShot"
     },
     "motorsDshotBidirHelp": {
-        "message": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. JESC, Jazzmac, BLHeli32."
+        "message": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32 or BLHeli_S when flashed to Bluejay firmware."
     },
     "motorsMainRotorGearRatio": {
         "message": "Main Rotor Gear Ratio"
     },
     "motorsMainRotorGearRatioHelp": {
-        "message": "Gear ratio between the motor and the main rotor (pinion/main gear tooth count)"
+        "message": "Gear ratio between the motor and the main rotor <br><strong>[pinion]/[main gear]</strong> tooth count"
     },
     "motorsTailRotorGearRatio": {
         "message": "Tail Rotor Gear Ratio"
     },
     "motorsTailRotorGearRatioHelp": {
-        "message": "Gear ratio between the main rotor and the tail rotor (tail gear/autorotation gear tooth count)"
+        "message": "Gear ratio between the main rotor and the tail rotor <br><strong>[tail gear]/[autorotation gear]</strong> tooth count <br>For a direct drive motorized tail use [ 1 ]/[ 1 ]"
     },
     "motorsMotorPolesLong": {
         "message": "Pole count (number of magnets on the motor bell)"
@@ -3071,7 +3071,7 @@
         "message": "Governor mode"
     },
     "govModeHelp": {
-        "message": "The governor maintains the main rotor speed constant. The algorithm used in the control loop is selected with this setting."
+        "message": "The governor maintains the main rotor speed constant.<br><strong>OFF:</strong> Govenor is disabled <br> <strong>PASSTHROUGH:</strong> Only slow spoolup and autorotation bailout<br><strong>STANDARD:</strong> Motor speed is controlled by the FC and speed reference from the ESC.<br><strong>MODE1:</strong> As per statndard but with Collective and Cyclic Precompensation (e.g. for a large increase collective the FC increases the signal sent to the ESC so the motor speed does not sag due to the increased load).<br><strong>MODE2:</strong> as per Mode 1 but also Battery voltage compensation"
     },
     "govSpoolupTime": {
         "message": "Spoolup time"
@@ -3143,13 +3143,13 @@
         "message": "Tail Torque Assist (TTA) gain"
     },
     "govTTAGainHelp": {
-        "message": "Tail Torque Assist gain. Usually 0..100"
+        "message": "Tail Torque Assist gain. This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 0..100"
     },
     "govTTALimit": {
         "message": "Tail Torque Assist (TTA) limit"
     },
     "govTTALimitHelp": {
-        "message": "Tail Torque Assist maximum. Usually 0..50"
+        "message": "Tail Torque Assist maximum. How much extra headspeed can be applied to control the tail in the negative direction. Usually 0..50"
     },
     "govCyclicPrecomp": {
         "message": "Cyclic precompensation"
@@ -3482,7 +3482,7 @@
         "message": "Select your board to see available online firmware releases - Select the correct firmware appropriate for your board."
     },
     "firmwareFlasherOnlineSelectBoardHint": {
-        "message": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (F4, F7). To make the different boards work with the same firmware, a specific configuration file is deployed alongside the firmware when a Unified Target is flashed.<br>This version of Betaflight configurator supports flashing of Unified Targets with the respective board specific configurations in one step. The different firmware types that are available for each board are shown in the drop-down as follows:<br /><br /><strong>&lt;board name&gt;</strong> or<br><strong>&lt;board name&gt; (Legacy)</strong>:<br>non-unified target.<br /><br /><strong>&lt;board name&gt; (&lt;manufacturer id&gt;)</strong>:<br>(4 character manufacturer id)<br>Unified Target.<br /><br /><strong>Please use Unified Targets where available.</strong>"
+        "message": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (F4, F7, H7). To make the different boards work with the same firmware, a specific configuration file is deployed alongside the firmware when a Unified Target is flashed.<br>This version of Betaflight configurator supports flashing of Unified Targets with the respective board specific configurations in one step. The different firmware types that are available for each board are shown in the drop-down as follows:<br /><br /><strong>&lt;board name&gt;</strong> or<br><strong>&lt;board name&gt; (Legacy)</strong>:<br>non-unified target.<br /><br /><strong>&lt;board name&gt; (&lt;manufacturer id&gt;)</strong>:<br>(4 character manufacturer id)<br>Unified Target.<br /><br /><strong>Please use Unified Targets where available.</strong>"
     },
     "firmwareFlasherOnlineSelectFirmwareVersionDescription": {
         "message": "Select firmware version for your board."
@@ -3990,7 +3990,7 @@
         "message": "I Term Rotation"
     },
     "profilesItermRotationHelp": {
-        "message": "Rotates the current Roll and Pitch I Term vectors around Yaw when the carft rotates. This is sometimes called Piro Compensation."
+        "message": "Rotates the current Roll and Pitch I Term vectors around Yaw when the craft rotates. This is sometimes called Piro Compensation."
     },
     "profilesItermRelax": {
         "message": "I Term Relax"
@@ -4040,13 +4040,13 @@
         "message": "Rate normalization mode for cyclic"
     },
     "profilesCyclicNormalizationHelp": {
-        "message": "Rate normalization mode for cyclic"
+        "message": "More control action is needed at lower headspeeds to achieve the same cyclic rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> No headspeed normalization. <br><strong>Linear:</strong> Cyclic is normalized based on headspeed. <br><strong>Natural:</strong> Cyclic is normalized based on headspeed squared"
     },
     "profilesCollectiveNormalization": {
         "message": "Rate normalization mode for collective"
     },
     "profilesCollectiveNormalizationHelp": {
-        "message": "Rate normalization mode for collective"
+        "message": "More control action is needed at lower headspeeds to achieve the same collective rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> No headspeed normalization. <br><strong>Linear:</strong> Collective is normalized based on headspeed. <br><strong>Natural:</strong> Collective is normalized based on headspeed squared"
     },
     "profilesRateNormalizationNatural": {
         "message": "Natural"
@@ -4064,31 +4064,31 @@
         "message": "Acro Trainer gain"
     },
     "profilesAcroTrainerGainHelp": {
-        "message": "Acro Trainer gain"
+        "message": "Acro Trainer gain. Acro trainer Mode is not self leveling but does limit the maximum pitch/roll angle. This determines how aggressively the helicopter tilts back to the maximum angle (if exceeded) while in Acro Trainer Mode"
     },
     "profilesAcroTrainerLimit": {
         "message": "Acro Trainer angle limit"
     },
     "profilesAcroTrainerLimitHelp": {
-        "message": "Acro Trainer angle limit"
+        "message": "Acro Trainer angle limit. Acro Trainer mode does not self level (like Angle or Horizon Modes); however, it does limit the maximum angle the helicopter will pitch/roll to"
     },
     "profilesAngleModeGain": {
         "message": "Angle Mode leveling gain"
     },
     "profilesAngleModeGainHelp": {
-        "message": "Angle Mode leveling gain"
+        "message": "Angle Mode leveling gain. This determines how aggressively the helicopter tilts back to level while in Angle Mode"
     },
     "profilesAngleModeLimit": {
         "message": "Angle Mode maximum angle"
     },
     "profilesAngleModeLimitHelp": {
-        "message": "Angle Mode maximum angle"
+        "message": "Angle Mode maximum angle. Helicopter is limited to this angle when in Angle mode"
     },
     "profilesHorizonModeGain": {
         "message": "Horizon Mode leveling gain"
     },
     "profilesHorizonModeGainHelp": {
-        "message": "Horizon Mode leveling gain"
+        "message": "Horizon Mode leveling gain. This determines how aggressively the helicopter tilts back to level while in Horizon Mode"
     },
     "profilesYawSettings": {
         "message": "Yaw Settings"
@@ -4142,13 +4142,13 @@
         "message": "Initial Climb Collective Boost"
     },
     "profilesRescueBoostHelp": {
-        "message": "Extra collective boost for initial climb"
+        "message": "Extra collective boost for a rapid initial climb. This will be applied until the initial climb duration expires"
     },
     "profilesRescueDelay": {
         "message": "Initial Climb duration"
     },
     "profilesRescueDelayHelp": {
-        "message": "Duration of the initial climb before rolling upright"
+        "message": "Duration of the initial climb. During this time the heli will level in whatever orientation is closest (upright or inverted) and rapidly gain some altitude (if Initial Climb Collective Boost is not zero). When this time expires the heli will slow down to the value set in Rescue Climb Collective. If the heli is inverted at this time it will roll to upright"
     },
 
     "rateSetupCopyRateProfile": {
