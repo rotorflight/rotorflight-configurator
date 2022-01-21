@@ -308,7 +308,8 @@ TABS.motors.initialize = function (callback) {
             });
 
             motorSlider.on('slide', function () {
-                motorThrottle.val(parseInt($(this).val()));
+                const value = $(this).val();
+                motorThrottle.val(value);
             });
 
             motorSlider.on('change', function () {
