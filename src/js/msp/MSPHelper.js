@@ -1503,8 +1503,8 @@ MspHelper.prototype.crunch = function(code) {
                   .push8(Math.round(FC.RC_TUNING.pitch_rate * 100))
                   .push16(FC.RC_TUNING.pitch_rate_limit);
             buffer.push8(Math.round(FC.RC_TUNING.rcYawRate * 100))
-                  .push8(Math.round(FC.RC_TUNING.yaw_rate * 100))
                   .push8(Math.round(FC.RC_TUNING.RC_YAW_EXPO * 100))
+                  .push8(Math.round(FC.RC_TUNING.yaw_rate * 100))
                   .push16(FC.RC_TUNING.yaw_rate_limit);
             break;
 
