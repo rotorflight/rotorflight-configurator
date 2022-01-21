@@ -5,6 +5,7 @@ TABS.profiles = {
     activeSubtab: null,
     currentProfile: null,
     isGovEnabled: false,
+    isTTAEnabled: false,
     tabNames: [
         'profile1',
         'profile2',
@@ -133,24 +134,22 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="rescueDelay"]').val(FC.PID_PROFILE.rescueDelay / 10);
 
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR') && (FC.GOVERNOR.gov_mode > 1);
+        self.isTTAEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR') && (FC.GOVERNOR.gov_mode > 0);
 
-        if (self.isGovEnabled) {
-            $('.tab-profiles input[id="govHeadspeed"]').val(FC.GOVERNOR.gov_headspeed);
-            $('.tab-profiles input[id="govMasterGain"]').val(FC.GOVERNOR.gov_gain);
-            $('.tab-profiles input[id="govPGain"]').val(FC.GOVERNOR.gov_p_gain);
-            $('.tab-profiles input[id="govIGain"]').val(FC.GOVERNOR.gov_i_gain);
-            $('.tab-profiles input[id="govDGain"]').val(FC.GOVERNOR.gov_d_gain);
-            $('.tab-profiles input[id="govFGain"]').val(FC.GOVERNOR.gov_f_gain);
-            $('.tab-profiles input[id="govTTAGain"]').val(FC.GOVERNOR.gov_tta_gain);
-            $('.tab-profiles input[id="govTTALimit"]').val(FC.GOVERNOR.gov_tta_limit);
-            $('.tab-profiles input[id="govCyclicPrecomp"]').val(FC.GOVERNOR.gov_cyclic_ff_weight);
-            $('.tab-profiles input[id="govCollectivePrecomp"]').val(FC.GOVERNOR.gov_collective_ff_weight);
+        $('.tab-profiles input[id="govHeadspeed"]').val(FC.GOVERNOR.gov_headspeed);
+        $('.tab-profiles input[id="govMasterGain"]').val(FC.GOVERNOR.gov_gain);
+        $('.tab-profiles input[id="govPGain"]').val(FC.GOVERNOR.gov_p_gain);
+        $('.tab-profiles input[id="govIGain"]').val(FC.GOVERNOR.gov_i_gain);
+        $('.tab-profiles input[id="govDGain"]').val(FC.GOVERNOR.gov_d_gain);
+        $('.tab-profiles input[id="govFGain"]').val(FC.GOVERNOR.gov_f_gain);
+        $('.tab-profiles input[id="govTTAGain"]').val(FC.GOVERNOR.gov_tta_gain);
+        $('.tab-profiles input[id="govTTALimit"]').val(FC.GOVERNOR.gov_tta_limit);
+        $('.tab-profiles input[id="govCyclicPrecomp"]').val(FC.GOVERNOR.gov_cyclic_ff_weight);
+        $('.tab-profiles input[id="govCollectivePrecomp"]').val(FC.GOVERNOR.gov_collective_ff_weight);
 
-            $('.tab-profiles .gov_config').show();
-        }
-        else {
-            $('.tab-profiles .gov_config').hide();
-        }
+        $('.tab-profiles .govTTAGain').toggle(self.isTTAEnabled);
+        $('.tab-profiles .govTTALimit').toggle(self.isTTAEnabled);
+        $('.tab-profiles .gov_config').toggle(self.isGovEnabled);
     }
 
     function form_to_data() {
@@ -194,6 +193,11 @@ TABS.profiles.initialize = function (callback) {
         FC.PID_PROFILE.yawFFCollectiveGain = $('.tab-profiles input[id="yawFFCollectiveGain"]').val();
         FC.PID_PROFILE.yawFFImpulseGain = $('.tab-profiles input[id="yawFFImpulseGain"]').val();
 
+        if (self.isTTAEnabled) {
+            FC.GOVERNOR.gov_tta_gain = parseInt($('.tab-profiles input[id="govTTAGain"]').val());
+            FC.GOVERNOR.gov_tta_limit = parseInt($('.tab-profiles input[id="govTTALimit"]').val());
+        }
+
         if (self.isGovEnabled) {
             FC.GOVERNOR.gov_headspeed = parseInt($('.tab-profiles input[id="govHeadspeed"]').val());
             FC.GOVERNOR.gov_gain = parseInt($('.tab-profiles input[id="govMasterGain"]').val());
@@ -201,8 +205,6 @@ TABS.profiles.initialize = function (callback) {
             FC.GOVERNOR.gov_i_gain = parseInt($('.tab-profiles input[id="govIGain"]').val());
             FC.GOVERNOR.gov_d_gain = parseInt($('.tab-profiles input[id="govDGain"]').val());
             FC.GOVERNOR.gov_f_gain = parseInt($('.tab-profiles input[id="govFGain"]').val());
-            FC.GOVERNOR.gov_tta_gain = parseInt($('.tab-profiles input[id="govTTAGain"]').val());
-            FC.GOVERNOR.gov_tta_limit = parseInt($('.tab-profiles input[id="govTTALimit"]').val());
             FC.GOVERNOR.gov_cyclic_ff_weight = parseInt($('.tab-profiles input[id="govCyclicPrecomp"]').val());
             FC.GOVERNOR.gov_collective_ff_weight = parseInt($('.tab-profiles input[id="govCollectivePrecomp"]').val());
         }
