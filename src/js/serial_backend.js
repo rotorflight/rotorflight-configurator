@@ -180,8 +180,10 @@ function finishClose(finishedCallback) {
     // To trigger the UI updates by Vue reset the state.
     FC.resetState();
 
+    GUI.reboot_in_progress = false;
     GUI.connected_to = false;
     GUI.allowedTabs = GUI.defaultAllowedTabsWhenDisconnected.slice();
+
     // close problems dialog
     $('#dialogReportProblems-closebtn').click();
 
@@ -457,6 +459,7 @@ function setRtc() {
 
 function finishOpen() {
     CONFIGURATOR.connectionValid = true;
+    GUI.reboot_in_progress = false;
     GUI.allowedTabs = GUI.defaultAllowedFCTabsWhenConnected.slice();
 
     if (GUI.isCordova()) {
@@ -486,7 +489,6 @@ function onConnect() {
 
     $('#tabs ul.mode-disconnected').hide();
     $('#tabs ul.mode-connected-cli').show();
-
 
     // show only appropriate tabs
     $('#tabs ul.mode-connected li').hide();
@@ -799,26 +801,7 @@ function update_dataflash_global() {
 }
 
 function reinitialiseConnection(callback) {
-    let connectionTimeout = 200;
+    GUI.reboot_in_progress = true;
 
-    ConfigStorage.get('connectionTimeout', function (result) {
-        if (result.connectionTimeout) {
-            connectionTimeout = result.connectionTimeout;
-        }
-
-        if (FC.boardHasVcp()) { // VCP-based flight controls may crash old drivers, we catch and reconnect
-            GUI.timeout_add('waiting_for_disconnect', function waiting_for_bootup() {
-                if (callback) callback();
-            }, connectionTimeout);
-            //TODO: Need to work out how to do a proper reconnect here.
-            // caveat: Timeouts set with `GUI.timeout_add()` are removed on disconnect.
-        } else {
-            GUI.timeout_add('waiting_for_bootup', function waiting_for_bootup() {
-                MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
-                    GUI.log(i18n.getMessage('deviceReady'));
-                    if (callback) callback();
-                });
-            }, connectionTimeout);
-        }
-    });
+    if (callback) callback();
 }

@@ -8,10 +8,6 @@ TABS.ports = {
 TABS.ports.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab !== 'ports') {
-        GUI.active_tab = 'ports';
-    }
-
     const functionRules = [
         { name: 'MSP',                  groups: ['configuration', 'msp'], maxPorts: 2 },
         { name: 'GPS',                  groups: ['sensors'], maxPorts: 1 },

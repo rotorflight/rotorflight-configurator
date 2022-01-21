@@ -50,10 +50,6 @@ TABS.vtx.getVtxTypeString = function()
 TABS.vtx.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab !== 'vtx') {
-        GUI.active_tab = 'vtx';
-    }
-
     self.analyticsChanges = {};
 
     this.supported = semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42);

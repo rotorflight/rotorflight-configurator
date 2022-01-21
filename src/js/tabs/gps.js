@@ -5,10 +5,7 @@ TABS.gps = {
 };
 
 TABS.gps.initialize = function (callback) {
-
-    if (GUI.active_tab !== 'gps') {
-        GUI.active_tab = 'gps';
-    }
+    const self = this;
 
     load_data(load_html);
 

@@ -16,12 +16,7 @@ TABS.motors = {
  };
 
 TABS.motors.initialize = function (callback) {
-
     const self = this;
-
-    if (GUI.active_tab !== 'motors') {
-        GUI.active_tab = 'motors';
-    }
 
     load_data(load_html);
 

@@ -5,10 +5,6 @@ TABS.setup = {};
 TABS.setup.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab !== 'setup') {
-        GUI.active_tab = 'setup';
-    }
-
     load_data(load_html);
 
     function load_data(callback) {
@@ -194,7 +190,7 @@ TABS.setup.initialize = function (callback) {
         $('a.rebootFirmware').click(function () {
             GUI.log(i18n.getMessage('deviceRebooting'));
             MSP.send_message(MSPCodes.MSP_SET_REBOOT, [ mspHelper.REBOOT_TYPES.FIRMWARE ], false);
-            reinitialiseConnection(() => GUI.tab_switch_reload());
+            reinitialiseConnection();
         });
 
         GUI.content_ready(callback);

@@ -21,12 +21,7 @@ TABS.profiles = {
 };
 
 TABS.profiles.initialize = function (callback) {
-
     const self = this;
-
-    if (GUI.active_tab !== 'profiles') {
-        GUI.active_tab = 'profiles';
-    }
 
     load_data(load_html);
 

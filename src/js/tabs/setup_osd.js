@@ -5,12 +5,6 @@ TABS.setup_osd = {
 
 TABS.setup_osd.initialize = function (callback) {
 
-    if (GUI.active_tab != 'setup_osd') {
-        GUI.active_tab = 'setup_osd';
-        // Disabled on merge into betaflight-configurator
-        //googleAnalytics.sendAppView('Setup OSD');
-    }
-
     function load_status() {
         MSP.send_message(MSPCodes.MSP_STATUS, false, false, load_html);
     }

@@ -8,10 +8,7 @@ TABS.configuration = {
 TABS.configuration.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab !== 'configuration') {
-        GUI.active_tab = 'configuration';
-        GUI.configuration_loaded = true;
-    }
+    GUI.configuration_loaded = true;
 
     self.analyticsChanges = {};
 

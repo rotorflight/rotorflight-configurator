@@ -7,10 +7,6 @@ TABS.beepers = {
 TABS.beepers.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab !== 'beepers') {
-        GUI.active_tab = 'beepers';
-    }
-
     load_data(load_html);
 
     function load_html() {

@@ -15,10 +15,6 @@ TABS.receiver = {
 TABS.receiver.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab !== 'receiver') {
-        GUI.active_tab = 'receiver';
-    }
-
     load_data(load_html);
 
     function load_html() {

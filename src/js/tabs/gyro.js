@@ -9,12 +9,7 @@ TABS.gyro = {
 };
 
 TABS.gyro.initialize = function (callback) {
-
     const self = this;
-
-    if (GUI.active_tab !== 'gyro') {
-        GUI.active_tab = 'gyro';
-    }
 
     const FILTER_DEFAULT = FC.getFilterDefaults();
 
