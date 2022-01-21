@@ -256,7 +256,7 @@ TABS.mixer.initialize = function (callback) {
         }
 
         mixerSlider.on('slide', function () {
-            mixerInput.val(parseInt($(this).val()).toFixed(attr.fixed));
+            mixerInput.val(Number($(this).val()).toFixed(attr.fixed));
         });
 
         mixerSlider.on('change', function () {
