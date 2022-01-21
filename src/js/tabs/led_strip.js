@@ -7,12 +7,8 @@ TABS.led_strip = {
 };
 
 
-TABS.led_strip.initialize = function (callback, scrollPosition) {
+TABS.led_strip.initialize = function (callback) {
     const self = this;
-
-    if (GUI.active_tab !== 'led_strip') {
-        GUI.active_tab = 'led_strip';
-    }
 
     load_data(load_html);
 

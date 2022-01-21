@@ -35,10 +35,6 @@ TABS.status = {
 TABS.status.initialize = function (callback) {
     var self = this;
 
-    if (GUI.active_tab !== 'status') {
-        GUI.active_tab = 'status';
-    }
-
     load_data(load_html);
 
     function load_html() {

@@ -36,12 +36,7 @@ TABS.mixer = {
 };
 
 TABS.mixer.initialize = function (callback) {
-
     const self = this;
-
-    if (GUI.active_tab !== 'mixer') {
-        GUI.active_tab = 'mixer';
-    }
 
     load_data(load_html);
 

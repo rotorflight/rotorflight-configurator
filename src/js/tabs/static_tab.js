@@ -1,20 +1,39 @@
 'use strict';
 
-TABS.staticTab = {};
-TABS.staticTab.initialize = function (staticTabName, callback) {
+TABS.changelog = {};
 
-    if (GUI.active_tab != staticTabName) {
-        GUI.active_tab = staticTabName;
-    }
-    const tabFile = `./tabs/${staticTabName}.html`;
+TABS.changelog.initialize = function (callback) {
+    const tabFile = `./tabs/changelog.html`;
 
     $('#content').html('<div id="tab-static"><div id="tab-static-contents"></div>');
-    $('#tab-static-contents').load(tabFile, function () {
-        // translate to user-selected language
-        i18n.localizePage();
 
+    $('#tab-static-contents').load(tabFile, function () {
+        i18n.localizePage();
         GUI.content_ready(callback);
     });
 
 };
-// Just noting that other tabs have cleanup functions.
+
+TABS.changelog.cleanup = function (callback) {
+    if (callback) callback();
+};
+
+
+
+TABS.privacy_policy = {};
+
+TABS.privacy_policy.initialize = function (callback) {
+    const tabFile = `./tabs/privacy_policy.html`;
+
+    $('#content').html('<div id="tab-static"><div id="tab-static-contents"></div>');
+
+    $('#tab-static-contents').load(tabFile, function () {
+        i18n.localizePage();
+        GUI.content_ready(callback);
+    });
+
+};
+
+TABS.privacy_policy.cleanup = function (callback) {
+    if (callback) callback();
+};

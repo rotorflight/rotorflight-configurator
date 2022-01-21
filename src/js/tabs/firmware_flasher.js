@@ -16,10 +16,6 @@ TABS.firmware_flasher = {
 TABS.firmware_flasher.initialize = function (callback) {
     var self = this;
 
-    if (GUI.active_tab != 'firmware_flasher') {
-        GUI.active_tab = 'firmware_flasher';
-    }
-
     self.selectedBoard = undefined;
     self.localFirmwareLoaded = false;
     self.isConfigLocal = false;
@@ -999,6 +995,9 @@ TABS.firmware_flasher.initialize = function (callback) {
                         }
 
                         flashFirmware(self.parsed_hex);
+
+                        GUI.saveDefaultTab('status');
+
                     } catch (e) {
                         console.log(`Flashing failed: ${e.message}`);
                     }

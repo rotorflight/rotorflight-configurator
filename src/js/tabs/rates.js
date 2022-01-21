@@ -39,12 +39,7 @@ TABS.rates = {
 };
 
 TABS.rates.initialize = function (callback) {
-
     const self = this;
-
-    if (GUI.active_tab !== 'rates') {
-        GUI.active_tab = 'rates';
-    }
 
     load_data(load_html);
 

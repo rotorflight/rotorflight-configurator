@@ -2,11 +2,6 @@
 
 TABS.logging = {};
 TABS.logging.initialize = function (callback) {
-
-    if (GUI.active_tab != 'logging') {
-        GUI.active_tab = 'logging';
-    }
-
     let requestedProperties = [];
     let samples = 0;
     let requests = 0;

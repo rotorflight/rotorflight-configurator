@@ -222,20 +222,6 @@ function startProcess() {
     // log library versions in console to make version tracking easier
     console.log(`Libraries: jQuery - ${$.fn.jquery}, d3 - ${d3.version}, three.js - ${THREE.REVISION}`);
 
-    // Tabs
-    $("#tabs ul.mode-connected li").click(function() {
-        // store the first class of the current tab (omit things like ".active")
-        const tabName = $(this).attr("class").split(' ')[0];
-
-        const tabNameWithoutPrefix = tabName.substring(4);
-        if (tabNameWithoutPrefix !== "cli") {
-            // Don't store 'cli' otherwise you can never connect to another tab.
-            ConfigStorage.set(
-                {lastTab: tabName},
-            );
-        }
-    });
-
     if (GUI.isCordova()) {
         UI_PHONES.init();
     }
@@ -244,11 +230,12 @@ function startProcess() {
     $('a', ui_tabs).click(function () {
         if ($(this).parent().hasClass('active') === false && !GUI.tab_switch_in_progress) { // only initialize when the tab isn't already active
             const self = this;
+
             const tabClass = $(self).parent().prop('class');
             const tabRequiresConnection = $(self).parent().hasClass('mode-connected');
 
-            const tab = tabClass.substring(4);
-            const tabName = $(self).text();
+            var tabName = tabClass.substring(4);
+            var tabText = $(self).text();
 
             if (GUI.connect_lock) { // tab switching disabled while operation is in progress
                 GUI.log(i18n.getMessage('tabSwitchWaitForOperation'));
@@ -261,19 +248,19 @@ function startProcess() {
             }
 
             GUI.tab_switch_allowed(function () {
-                if (GUI.allowedTabs.indexOf(tab) < 0 && tabName === "Firmware Flasher") {
+
+                if (GUI.allowedTabs.indexOf(tabName) < 0 && tabText === "Firmware Flasher") {
                     if (GUI.connected_to || GUI.connecting_to) {
                         $('a.connect').click();
                     } else {
                         self.disconnect();
                     }
                     $('div.open_firmware_flasher a.flash').click();
-                } else if (GUI.allowedTabs.indexOf(tab) < 0) {
-                    GUI.log(i18n.getMessage('tabSwitchUpgradeRequired', [tabName]));
-                    return;
                 }
 
-                GUI.tab_switch_in_progress = true;
+                if (GUI.defaultAllowedFCTabsWhenConnected.indexOf(tabName) != -1) {
+                    GUI.saveDefaultTab(tabName);
+                }
 
                 GUI.tab_switch_cleanup(function () {
                     // disable active firmware flasher if it was active
@@ -284,9 +271,6 @@ function startProcess() {
                     // disable previously active tab highlight
                     $('li', ui_tabs).removeClass('active');
 
-                    // Highlight selected tab
-                    $(self).parent().addClass('active');
-
                     // detach listeners and remove element data
                     const content = $('#content');
                     content.empty();
@@ -294,111 +278,27 @@ function startProcess() {
                     // display loading screen
                     $('#cache .data-loading').clone().appendTo(content);
 
-                    function content_ready() {
-                        GUI.tab_switch_in_progress = false;
-                    }
-
                     checkSetupAnalytics(function (analyticsService) {
-                        analyticsService.sendAppView(tab);
+                        analyticsService.sendAppView(tabName);
                     });
 
-                    switch (tab) {
-                        case 'landing':
-                            TABS.landing.initialize(content_ready);
-                            break;
-                        case 'changelog':
-                            TABS.staticTab.initialize('changelog', content_ready);
-                            break;
-                        case 'privacy_policy':
-                            TABS.staticTab.initialize('privacy_policy', content_ready);
-                            break;
-                        case 'options':
-                            TABS.options.initialize(content_ready);
-                            break;
-                        case 'firmware_flasher':
-                            TABS.firmware_flasher.initialize(content_ready);
-                            break;
-                        case 'help':
-                            TABS.help.initialize(content_ready);
-                            break;
-                        case 'auxiliary':
-                            TABS.auxiliary.initialize(content_ready);
-                            break;
-                        case 'adjustments':
-                            TABS.adjustments.initialize(content_ready);
-                            break;
-                        case 'ports':
-                            TABS.ports.initialize(content_ready);
-                            break;
-                        case 'led_strip':
-                            TABS.led_strip.initialize(content_ready);
-                            break;
-                        case 'failsafe':
-                            TABS.failsafe.initialize(content_ready);
-                            break;
-                        case 'osd':
-                            TABS.osd.initialize(content_ready);
-                            break;
-                        case 'vtx':
-                            TABS.vtx.initialize(content_ready);
-                            break;
-                        case 'power':
-                            TABS.power.initialize(content_ready);
-                            break;
-                        case 'setup':
-                            TABS.setup.initialize(content_ready);
-                            break;
-                        case 'setup_osd':
-                            TABS.setup_osd.initialize(content_ready);
-                            break;
-                        case 'status':
-                            TABS.status.initialize(content_ready);
-                            break;
-                        case 'beepers':
-                            TABS.beepers.initialize(content_ready);
-                            break;
-                        case 'configuration':
-                            TABS.configuration.initialize(content_ready);
-                            break;
-                        case 'profiles':
-                            TABS.profiles.initialize(content_ready);
-                            break;
-                        case 'rates':
-                            TABS.rates.initialize(content_ready);
-                            break;
-                        case 'gyro':
-                            TABS.gyro.initialize(content_ready);
-                            break;
-                        case 'receiver':
-                            TABS.receiver.initialize(content_ready);
-                            break;
-                        case 'servos':
-                            TABS.servos.initialize(content_ready);
-                            break;
-                        case 'gps':
-                            TABS.gps.initialize(content_ready);
-                            break;
-                        case 'motors':
-                            TABS.motors.initialize(content_ready);
-                            break;
-                        case 'mixer':
-                            TABS.mixer.initialize(content_ready);
-                            break;
-                        case 'sensors':
-                            TABS.sensors.initialize(content_ready);
-                            break;
-                        case 'logging':
-                            TABS.logging.initialize(content_ready);
-                            break;
-                        case 'blackbox':
-                            TABS.blackbox.initialize(content_ready);
-                            break;
-                        case 'cli':
-                            TABS.cli.initialize(content_ready, GUI.nwGui);
-                            break;
+                    // Highlight selected tab
+                    $(self).parent().addClass('active');
 
-                        default:
-                            console.log(`Tab not found: ${tab}`);
+                    if (TABS[tabName] && !GUI.reboot_in_progress) {
+                        const tabObj = TABS[tabName];
+                        tabObj.tabName = tabName;
+                        GUI.active_tab = tabName;
+                        GUI.current_tab = tabObj;
+                        GUI.tab_switch_in_progress = true;
+                        tabObj.initialize(function () {
+                            GUI.tab_switch_in_progress = false;
+                        });
+                    }
+                    else {
+                        GUI.active_tab = null;
+                        GUI.current_tab = null;
+                        GUI.tab_switch_in_progress = false;
                     }
                 });
             });

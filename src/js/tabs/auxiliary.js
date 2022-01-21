@@ -8,10 +8,6 @@ TABS.auxiliary = {
 TABS.auxiliary.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab !== 'auxiliary') {
-        GUI.active_tab = 'auxiliary';
-    }
-
     load_data(load_html);
 
     function load_html() {

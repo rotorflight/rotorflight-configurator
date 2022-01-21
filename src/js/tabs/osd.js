@@ -2325,10 +2325,6 @@ TABS.osd = {
 };
 
 TABS.osd.initialize = function(callback) {
-    if (GUI.active_tab !== 'osd') {
-        GUI.active_tab = 'osd';
-    }
-
     if (CONFIGURATOR.virtualMode) {
         VirtualFC.setupVirtualOSD();
     }

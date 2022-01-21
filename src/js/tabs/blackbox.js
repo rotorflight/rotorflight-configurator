@@ -87,10 +87,6 @@ TABS.blackbox = {
 TABS.blackbox.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab !== 'blackbox') {
-        GUI.active_tab = 'blackbox';
-    }
-
     self.isDirty = false;
 
     let saveCancelled, eraseCancelled;

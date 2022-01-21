@@ -57,10 +57,6 @@ TABS.adjustments = {
 TABS.adjustments.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab !== 'adjustments') {
-        GUI.active_tab = 'adjustments';
-    }
-
     load_data(load_html);
 
     function load_html() {

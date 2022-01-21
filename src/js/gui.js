@@ -15,7 +15,9 @@ const GuiControl = function () {
     this.connected_to = false;
     this.connect_lock = false;
     this.active_tab = null;
+    this.current_tab = null;
     this.tab_switch_in_progress = false;
+    this.reboot_in_progress = false;
     this.operating_system = null;
     this.interval_array = [];
     this.timeout_array = [];
@@ -287,12 +289,12 @@ GuiControl.prototype.log = function (message) {
 };
 
 GuiControl.prototype.tab_switch_allowed = function (callback) {
-    if (this.active_tab && TABS[this.active_tab]) {
-        if (TABS[this.active_tab].exit) {
-            TABS[this.active_tab].exit(callback);
+    if (this.current_tab) {
+        if (this.current_tab.exit) {
+            this.current_tab.exit(callback);
         }
-        else if (TABS[this.active_tab].isDirty) {
-            showTabExitDialog(TABS[this.active_tab], callback);
+        else if (this.current_tab.isDirty) {
+            showTabExitDialog(this.current_tab, callback);
         }
         else {
             if (callback) callback();
@@ -307,9 +309,9 @@ GuiControl.prototype.tab_switch_reload = function (callback) {
     MSP.callbacks_cleanup();
     this.interval_kill_all();
 
-    if (this.active_tab && TABS[this.active_tab]) {
-        TABS[this.active_tab].cleanup();
-        TABS[this.active_tab].initialize(callback);
+    if (this.current_tab) {
+        this.current_tab.cleanup();
+        this.current_tab.initialize(callback);
     }
 };
 
@@ -317,8 +319,8 @@ GuiControl.prototype.tab_switch_cleanup = function (callback) {
     MSP.callbacks_cleanup();
     this.interval_kill_all();
 
-    if (this.active_tab && TABS[this.active_tab]) {
-        TABS[this.active_tab].cleanup(callback);
+    if (this.current_tab) {
+        this.current_tab.cleanup(callback);
     } else {
         if (callback) callback();
     }
@@ -414,10 +416,16 @@ GuiControl.prototype.content_ready = function (callback) {
     }
 };
 
+GuiControl.prototype.saveDefaultTab = function(tabName) {
+    ConfigStorage.set(
+        { lastTab: tabName },
+    );
+};
+
 GuiControl.prototype.selectDefaultTabWhenConnected = function() {
     ConfigStorage.get(['rememberLastTab', 'lastTab'], function (result) {
         if (result.rememberLastTab && result.lastTab) {
-            $(`#tabs ul.mode-connected .${result.lastTab} a`).click();
+            $(`#tabs ul.mode-connected .tab_${result.lastTab} a`).click();
         } else {
             $('#tabs ul.mode-connected .tab_status a').click();
         }

@@ -78,10 +78,6 @@ function copyToClipboard(text) {
 TABS.cli.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab !== 'cli') {
-        GUI.active_tab = 'cli';
-    }
-
     self.outputHistory = "";
     self.cliBuffer = "";
     self.startProcessing = false;
@@ -335,6 +331,8 @@ TABS.cli.initialize = function (callback) {
 
             serial.send(bufferOut);
         }, 250);
+
+        GUI.saveDefaultTab('status');
 
         GUI.content_ready(callback);
     });

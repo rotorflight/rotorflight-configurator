@@ -4,12 +4,8 @@ TABS.failsafe = {
     isDirty: false,
 };
 
-TABS.failsafe.initialize = function (callback, scrollPosition) {
+TABS.failsafe.initialize = function (callback) {
     const self = this;
-
-    if (GUI.active_tab !== 'failsafe') {
-        GUI.active_tab = 'failsafe';
-    }
 
     load_data(load_html);
 
@@ -237,11 +233,6 @@ TABS.failsafe.initialize = function (callback, scrollPosition) {
             const i = parseInt($(this).prop("id"));
             FC.RXFAIL_CONFIG[i].value = parseInt($(this).val());
         });
-
-        // for some odd reason chrome 38+ changes scroll according to the touched select element
-        // i am guessing this is a bug, since this wasn't happening on 37
-        // code below is a temporary fix, which we will be able to remove in the future (hopefully)
-        $('#content').scrollTop((scrollPosition) ? scrollPosition : 0);
 
         // fill stage 1 Valid Pulse Range Settings
         $('input[name="rx_min_usec"]').val(FC.RX_CONFIG.rx_min_usec);

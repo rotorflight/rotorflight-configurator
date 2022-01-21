@@ -9,12 +9,7 @@ TABS.servos = {
 };
 
 TABS.servos.initialize = function (callback) {
-
     const self = this;
-
-    if (GUI.active_tab !== 'servos') {
-        GUI.active_tab = 'servos';
-    }
 
     load_data(load_html);
 

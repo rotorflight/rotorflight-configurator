@@ -3,10 +3,6 @@
 TABS.sensors = {};
 TABS.sensors.initialize = function (callback) {
 
-    if (GUI.active_tab != 'sensors') {
-        GUI.active_tab = 'sensors';
-    }
-
     function initSensorData(){
         for (let i = 0; i < 3; i++) {
             FC.SENSOR_DATA.accelerometer[i] = 0;

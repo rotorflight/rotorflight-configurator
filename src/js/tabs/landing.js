@@ -2,11 +2,6 @@
 
 TABS.landing = {};
 TABS.landing.initialize = function (callback) {
-
-  if (GUI.active_tab != 'landing') {
-    GUI.active_tab = 'landing';
-  }
-
   $('#content').load("./tabs/landing.html", function () {
     function showLang(newLang) {
       bottomSection = $('.languageSwitcher');

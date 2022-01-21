@@ -8,10 +8,6 @@ TABS.power = {
 TABS.power.initialize = function (callback) {
     const self = this;
 
-    if (GUI.active_tab !== 'power') {
-        GUI.active_tab = 'power';
-    }
-
     if (GUI.calibrationManager) {
         GUI.calibrationManager.destroy();
     }
