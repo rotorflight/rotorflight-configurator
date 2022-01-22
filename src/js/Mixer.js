@@ -1,6 +1,5 @@
 'use strict';
 
-
 const Mixer = {
 
     inputNames: [
@@ -59,27 +58,28 @@ const Mixer = {
     ],
 
     swashTypes: [
-        'mixerSwashTypeCustom',
+        'mixerSwashType0',
         'mixerSwashType1',
         'mixerSwashType2',
         'mixerSwashType3',
         'mixerSwashType4',
         'mixerSwashType5',
         'mixerSwashType6',
+        'mixerSwashType7',
+        'mixerSwashType8',
+        'mixerSwashType9',
     ],
 
-    CP120FV: 1,
-    CP120RV: 2,
-    CP140FV: 3,
-    CP140RV: 4,
-    CP135FV: 5,
-    CP135RV: 6,
-    CP120FM: 7,
-    CP120RM: 8,
-    CP140FM: 9,
-    CP140RM: 10,
-    CP135FM: 11,
-    CP135RM: 12,
+    CUSTOM: 0,
+    CP120F: 1,
+    CP120R: 2,
+    CP140F: 3,
+    CP140R: 4,
+    CP135F: 5,
+    CP135R: 6,
+    FP90AE: 7,
+    FP45LR: 8,
+    PSSTHR: 9,
 
     RULE_COUNT: 32,
 
@@ -92,55 +92,37 @@ const Mixer = {
 
     cloneRule: function (a)
     {
-        const self = this;
-
-        if (a === undefined)
-            return self.nullRule();
-        else
-            return { oper: a.oper, src: a.src, dst: a.dst, weight: a.weight, offset: a.offset, modes: a.modes };
-    },
-
-    isNullRule : function (a)
-    {
-        if (a === undefined)
-            return true;
-
-        if (a.oper === 0 && a.src === 0 && a.dst === 0 && a.weight === 0 && a.offset === 0 && a.modes === 0)
-            return true;
-
-        return false;
+        return { oper: a.oper, src: a.src, dst: a.dst, weight: a.weight, offset: a.offset, modes: a.modes };
     },
 
     compareRule : function (a, b)
     {
-        const self = this;
-
-        if (self.isNullRule(a) && self.isNullRule(b))
-            return true;
-
-        if (a.oper === b.oper && a.src === b.src && a.dst === b.dst &&
-            a.weight === b.weight && a.offset === b.offset && a.modes === b.modes)
-            return true;
-
-        return false;
+        return( a.modes  === b.modes &&
+                a.oper   === b.oper &&
+                a.src    === b.src &&
+                a.dst    === b.dst &&
+                a.weight === b.weight &&
+                a.offset === b.offset );
     },
 
     cloneRules : function (a)
     {
-        const b = [];
+        const self = this;
+        const copy = [];
 
-        a.forEach(function (rule) {
-            b.push(Mixer.cloneRule(rule));
-        });
+        if (a)
+            a.forEach(function (rule) {
+                copy.push(self.cloneRule(rule));
+            });
 
-        return b;
+        return copy;
     },
 
-    compareMixer : function (a, b)
+    compareMixer : function (a, b, cnt)
     {
         const self = this;
 
-        for (let i=0; i<self.RULE_COUNT; i++)
+        for (let i=0; i<cnt; i++)
             if (!self.compareRule(a[i],b[i]))
                 return false;
 
@@ -152,27 +134,17 @@ const Mixer = {
         const self = this;
 
         for (let i=1; i<self.mixerRuleSets.length; i++)
-            if (self.compareMixer(ruleset, self.mixerRuleSets[i]))
+            if (self.compareMixer(ruleset, self.mixerRuleSets[i], self.RULE_COUNT))
                 return i;
 
         return 0;
     },
 
-    getMixer : function (swash, mode)
+    getMixer : function (swashType)
     {
         const self = this;
 
-        var src = self.mixerRuleSets[swash + 6 * mode];
-        var dst = [];
-
-        for (let i=0; i<self.RULE_COUNT; i++) {
-            if (src && src[i])
-                dst[i] = Mixer.cloneRule(src[i]);
-            else
-                dst[i] = Mixer.nullRule();
-        }
-
-        return dst;
+        return self.cloneRules( self.mixerRuleSets[swashType] );
     },
 
     cloneInput : function (a)
@@ -191,7 +163,7 @@ const Mixer = {
         return b;
     },
 
-    initialize : function ()
+    initialize : function (tailMode)
     {
         const self = this;
 
@@ -202,7 +174,8 @@ const Mixer = {
               ADD = 2,
               MUL = 3;
 
-        const SR = 1,
+        const S0 = 0,
+              SR = 1,
               SP = 2,
               SY = 3,
               SC = 4,
@@ -218,7 +191,8 @@ const Mixer = {
               RC = 14,
               RT = 15;
 
-        const S1 = 1,
+        const D0 = 0,
+              S1 = 1,
               S2 = 2,
               S3 = 3,
               S4 = 4,
@@ -231,168 +205,127 @@ const Mixer = {
               M3 = 11,
               M4 = 12;
 
+        const TAIL_MODE_VARIABLE = 0,
+              TAIL_MODE_MOTORIZED = 1,
+              TAIL_MODE_BIDIRECTIONAL = 2;
+
         function rule(oper = 0, src = 0, dst = 0, weight = 0, offset = 0, modes = 0)
         {
             return { oper: oper, src: src, dst: dst, weight: weight, offset: offset, modes: modes };
         }
 
-        self.mixerRuleSets[Mixer.CP120FV] = [
-            rule(ADD, SC, S1,   500),
-            rule(ADD, SC, S2,   500),
-            rule(ADD, SC, S3,   500),
+        self.mixerRuleSets[Mixer.CP120F] = [
             rule(ADD, SR, S2,   866),
             rule(ADD, SR, S3,  -866),
             rule(ADD, SP, S1, -1000),
             rule(ADD, SP, S2,   500),
             rule(ADD, SP, S3,   500),
-            rule(SET, SY, S4,  1000),
-            rule(SET, ST, M1,  1000),
-        ];
-
-        self.mixerRuleSets[Mixer.CP120RV] = [
             rule(ADD, SC, S1,   500),
             rule(ADD, SC, S2,   500),
             rule(ADD, SC, S3,   500),
+            rule(ADD, ST, M1,  1000),
+        ];
+
+        self.mixerRuleSets[Mixer.CP120R] = [
             rule(ADD, SR, S2,   866),
             rule(ADD, SR, S3,  -866),
             rule(ADD, SP, S1,  1000),
             rule(ADD, SP, S2,  -500),
             rule(ADD, SP, S3,  -500),
-            rule(SET, SY, S4,  1000),
-            rule(SET, ST, M1,  1000),
-        ];
-
-        self.mixerRuleSets[Mixer.CP140FV] = [
             rule(ADD, SC, S1,   500),
             rule(ADD, SC, S2,   500),
             rule(ADD, SC, S3,   500),
+            rule(ADD, ST, M1,  1000),
+        ];
+
+        self.mixerRuleSets[Mixer.CP140F] = [
             rule(ADD, SR, S2,   643),
             rule(ADD, SR, S3,  -643),
             rule(ADD, SP, S1, -1000),
             rule(ADD, SP, S2,   766),
             rule(ADD, SP, S3,   766),
-            rule(SET, SY, S4,  1000),
-            rule(SET, ST, M1,  1000),
-        ];
-
-        self.mixerRuleSets[Mixer.CP140RV] = [
             rule(ADD, SC, S1,   500),
             rule(ADD, SC, S2,   500),
             rule(ADD, SC, S3,   500),
+            rule(ADD, ST, M1,  1000),
+        ];
+
+        self.mixerRuleSets[Mixer.CP140R] = [
             rule(ADD, SR, S2,   643),
             rule(ADD, SR, S3,  -643),
             rule(ADD, SP, S1,  1000),
             rule(ADD, SP, S2,  -766),
             rule(ADD, SP, S3,  -766),
-            rule(SET, SY, S4,  1000),
-            rule(SET, ST, M1,  1000),
-        ];
-
-        self.mixerRuleSets[Mixer.CP135FV] = [
             rule(ADD, SC, S1,   500),
             rule(ADD, SC, S2,   500),
             rule(ADD, SC, S3,   500),
+            rule(ADD, ST, M1,  1000),
+        ];
+
+        self.mixerRuleSets[Mixer.CP135F] = [
             rule(ADD, SR, S2,   707),
             rule(ADD, SR, S3,  -707),
             rule(ADD, SP, S1, -1000),
             rule(ADD, SP, S2,   707),
             rule(ADD, SP, S3,   707),
-            rule(SET, SY, S4,  1000),
-            rule(SET, ST, M1,  1000),
-        ];
-
-        self.mixerRuleSets[Mixer.CP135RV] = [
             rule(ADD, SC, S1,   500),
             rule(ADD, SC, S2,   500),
             rule(ADD, SC, S3,   500),
+            rule(ADD, ST, M1,  1000),
+        ];
+
+        self.mixerRuleSets[Mixer.CP135R] = [
             rule(ADD, SR, S2,   707),
             rule(ADD, SR, S3,  -707),
             rule(ADD, SP, S1,  1000),
             rule(ADD, SP, S2,  -707),
             rule(ADD, SP, S3,  -707),
-            rule(SET, SY, S4,  1000),
-            rule(SET, ST, M1,  1000),
-        ];
-
-        self.mixerRuleSets[Mixer.CP120FM] = [
             rule(ADD, SC, S1,   500),
             rule(ADD, SC, S2,   500),
             rule(ADD, SC, S3,   500),
-            rule(ADD, SR, S2,   866),
-            rule(ADD, SR, S3,  -866),
-            rule(ADD, SP, S1, -1000),
-            rule(ADD, SP, S2,   500),
-            rule(ADD, SP, S3,   500),
-            rule(SET, SY, M2,  1000),
-            rule(SET, ST, M1,  1000),
+            rule(ADD, ST, M1,  1000),
         ];
 
-        self.mixerRuleSets[Mixer.CP120RM] = [
-            rule(ADD, SC, S1,   500),
-            rule(ADD, SC, S2,   500),
-            rule(ADD, SC, S3,   500),
-            rule(ADD, SR, S2,   866),
-            rule(ADD, SR, S3,  -866),
+        self.mixerRuleSets[Mixer.FP90AE] = [
+            rule(ADD, SR, S1,  1000),
+            rule(ADD, SP, S2,  1000),
+            rule(ADD, ST, M1,   750),
+            rule(ADD, SC, M1,   250),
+        ];
+
+        self.mixerRuleSets[Mixer.FP45LR] = [
+            rule(ADD, SR, S1,  1000),
+            rule(ADD, SR, S2, -1000),
             rule(ADD, SP, S1,  1000),
-            rule(ADD, SP, S2,  -500),
-            rule(ADD, SP, S3,  -500),
-            rule(SET, SY, M2,  1000),
-            rule(SET, ST, M1,  1000),
+            rule(ADD, SP, S2,  1000),
+            rule(ADD, ST, M1,   750),
+            rule(ADD, SC, M1,   250),
         ];
 
-        self.mixerRuleSets[Mixer.CP140FM] = [
-            rule(ADD, SC, S1,   500),
-            rule(ADD, SC, S2,   500),
-            rule(ADD, SC, S3,   500),
-            rule(ADD, SR, S2,   643),
-            rule(ADD, SR, S3,  -643),
-            rule(ADD, SP, S1, -1000),
-            rule(ADD, SP, S2,   766),
-            rule(ADD, SP, S3,   766),
-            rule(SET, SY, M2,  1000),
-            rule(SET, ST, M1,  1000),
+        self.mixerRuleSets[Mixer.PSSTHR] = [
+            rule(ADD, SR, S1,  1000),
+            rule(ADD, SP, S2,  1000),
+            rule(ADD, SC, S3,  1000),
+            rule(ADD, ST, M1,  1000),
         ];
 
-        self.mixerRuleSets[Mixer.CP140RM] = [
-            rule(ADD, SC, S1,   500),
-            rule(ADD, SC, S2,   500),
-            rule(ADD, SC, S3,   500),
-            rule(ADD, SR, S2,   643),
-            rule(ADD, SR, S3,  -643),
-            rule(ADD, SP, S1,  1000),
-            rule(ADD, SP, S2,  -766),
-            rule(ADD, SP, S3,  -766),
-            rule(SET, SY, M2,  1000),
-            rule(SET, ST, M1,  1000),
-        ];
+        if (tailMode == TAIL_MODE_VARIABLE) {
+            self.mixerRuleSets.forEach(function (rules) {
+                rules.push(rule(SET, SY, S4, 1000));
+            });
+        }
+        else {
+            self.mixerRuleSets.forEach(function (rules) {
+                rules.push(rule(SET, SY, M2, 1000));
+            });
+        }
 
-        self.mixerRuleSets[Mixer.CP135FM] = [
-            rule(ADD, SC, S1,   500),
-            rule(ADD, SC, S2,   500),
-            rule(ADD, SC, S3,   500),
-            rule(ADD, SR, S2,   707),
-            rule(ADD, SR, S3,  -707),
-            rule(ADD, SP, S1, -1000),
-            rule(ADD, SP, S2,   707),
-            rule(ADD, SP, S3,   707),
-            rule(SET, SY, M2,  1000),
-            rule(SET, ST, M1,  1000),
-        ];
-
-        self.mixerRuleSets[Mixer.CP135RM] = [
-            rule(ADD, SC, S1,   500),
-            rule(ADD, SC, S2,   500),
-            rule(ADD, SC, S3,   500),
-            rule(ADD, SR, S2,   707),
-            rule(ADD, SR, S3,  -707),
-            rule(ADD, SP, S1,  1000),
-            rule(ADD, SP, S2,  -707),
-            rule(ADD, SP, S3,  -707),
-            rule(SET, SY, M2,  1000),
-            rule(SET, ST, M1,  1000),
-        ];
-
+        self.mixerRuleSets.forEach(function (rules) {
+            for (let i=0; i<self.RULE_COUNT; i++) {
+                if (rules[i] === undefined)
+                    rules[i] = self.nullRule();
+            }
+        });
     },
 
 };
-

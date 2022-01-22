@@ -2536,6 +2536,12 @@
         "message": "Servos"
     },
 
+    "mixerCustomNote": {
+        "message": "<span class=\"message-negative\">Warning!</span> The Mixer is configured with <strong>custom</strong> rules. Any configuration changes must be done in the CLI, with the <code>mixer</code> command."
+    },
+    "mixerBidirNote": {
+        "message": "<span class=\"message-negative\">Warning!</span> <i>Bidirectional tail motor</i> is an experimental feature that requires manually setting up the mixer in the CLI."
+    },
     "mixerMainRotorSettings": {
         "message": "Main Rotor Settings"
     },
@@ -2550,6 +2556,9 @@
     },
     "mixerSwashType": {
         "message": "Swashplate type"
+    },
+    "mixerSwashType0": {
+        "message": "Custom Mixing"
     },
     "mixerSwashType1": {
         "message": "120&deg Front Elevator"
@@ -2569,8 +2578,14 @@
     "mixerSwashType6": {
         "message": "135&deg Rear Elevator"
     },
-    "mixerSwashTypeCustom": {
-        "message": "Custom mixing"
+    "mixerSwashType7": {
+        "message": "90&deg Fixed Pitch"
+    },
+    "mixerSwashType8": {
+        "message": "45&deg Fixed Pitch"
+    },
+    "mixerSwashType9": {
+        "message": "Passthrough"
     },
     "mixerSwashRing": {
         "message": "Swashring"
@@ -2761,14 +2776,17 @@
     "mixerOutputMotor4": {
         "message": "Motor #4"
     },
-    "dialogCustomMixerTitle": {
-        "message": "Custom Mixer"
+    "dialogMixerResetTitle": {
+        "message": "<span class=\"message-negative\">WARNING: Mixer Reset</span>"
     },
-    "dialogCustomMixerNote": {
-        "message": "Custom mixer rules can be only set via the CLI."
+    "dialogMixerResetNote": {
+        "message": "Selecting a pre-defined Swashplate type will reset any custom Mixer rules to defaults."
     },
-    "dialogCustomMixerClose": {
-        "message": "Close"
+    "dialogMixerResetAccept": {
+        "message": "Accept"
+    },
+    "dialogMixerResetRevert": {
+        "message": "Revert"
     },
 
     "gpsHead": {
