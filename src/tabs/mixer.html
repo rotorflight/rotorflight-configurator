@@ -7,6 +7,12 @@
 
         <!-- CONFIGURATION -->
         <div class="configuration">
+            <div class="note mixerCustomNote">
+                <p i18n="mixerCustomNote"></p>
+            </div>
+            <div class="note mixerBidirNote">
+                <p i18n="mixerBidirNote"></p>
+            </div>
             <div class="grid-row">
                 <div class="grid-col col6">
                     <div class="gui_box grey">
@@ -30,7 +36,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr class="mixerSwashTypeTR">
                                     <td>
                                         <div class="configCol1">
                                             <select id="mixerSwashType">
@@ -172,13 +178,14 @@
         </div>
     </div>
 
-    <dialog class="dialogCustomMixer">
-        <h3 i18n="dialogCustomMixerTitle"></h3>
+    <dialog class="dialogMixerReset">
+        <h3 i18n="dialogMixerResetTitle"></h3>
         <div class="content">
-            <div i18n="dialogCustomMixerNote" style="margin-top: 10px"></div>
+            <div i18n="dialogMixerResetNote" style="margin-top: 10px"></div>
         </div>
         <div class="buttons">
-            <a href="#" class="dialogCustomMixer-closebtn regular-button" i18n="dialogCustomMixerClose"></a>
+            <a href="#" class="dialogMixerReset-acceptbtn regular-button" i18n="dialogMixerResetAccept"></a>
+            <a href="#" class="dialogMixerReset-revertbtn regular-button" i18n="dialogMixerResetRevert"></a>
         </div>
     </dialog>
 
