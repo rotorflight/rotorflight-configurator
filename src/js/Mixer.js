@@ -87,16 +87,16 @@ const Mixer = {
 
     nullRule: function ()
     {
-	return { oper: 0, src: 0, dst: 0, weight: 0, offset: 0, modes: 0 };
+        return { oper: 0, src: 0, dst: 0, weight: 0, offset: 0, modes: 0 };
     },
 
     cloneRule: function (a)
     {
         const self = this;
 
-	if (a === undefined)
-	    return self.nullRule();
-	else
+        if (a === undefined)
+            return self.nullRule();
+        else
             return { oper: a.oper, src: a.src, dst: a.dst, weight: a.weight, offset: a.offset, modes: a.modes };
     },
 
@@ -127,13 +127,13 @@ const Mixer = {
 
     cloneRules : function (a)
     {
-	const b = [];
+        const b = [];
 
-	a.forEach(function (rule) {
-	    b.push(Mixer.cloneRule(rule));
-	});
+        a.forEach(function (rule) {
+            b.push(Mixer.cloneRule(rule));
+        });
 
-	return b;
+        return b;
     },
 
     compareMixer : function (a, b)
@@ -177,18 +177,18 @@ const Mixer = {
 
     cloneInput : function (a)
     {
-	return { rate: a.rate, max: a.max, min: a.min, };
+        return { rate: a.rate, max: a.max, min: a.min, };
     },
 
     cloneInputs : function (a)
     {
-	const b = [];
+        const b = [];
 
-	a.forEach( function (input) {
-	    b.push(Mixer.cloneInput(input));
-	});
+        a.forEach( function (input) {
+            b.push(Mixer.cloneInput(input));
+        });
 
-	return b;
+        return b;
     },
 
     initialize : function ()
