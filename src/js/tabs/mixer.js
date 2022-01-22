@@ -8,7 +8,9 @@ TABS.mixer = {
     MIXER_INPUTS_dirty: false,
     MIXER_RULES_dirty: false,
 
-    MIXER_OVERRIDE_OFF: 2501,
+    MIXER_OVERRIDE_MIN: -2500,
+    MIXER_OVERRIDE_MAX:  2500,
+    MIXER_OVERRIDE_OFF:  2501,
 
     swashType: 0,
     tailMode: 0,
@@ -50,6 +52,7 @@ TABS.mixer.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_MIXER_INPUTS))
             .then(() => MSP.promise(MSPCodes.MSP_MIXER_RULES))
+            .then(() => MSP.promise(MSPCodes.MSP_MIXER_OVERRIDE))
             .then(callback);
     }
 
@@ -267,10 +270,11 @@ TABS.mixer.initialize = function (callback) {
 
         mixerEnable.change(function () {
             const check = $(this).prop('checked');
-            const value = check ? 0 : self.OVERRIDE_OFF;
+            const value = check ? 0 : self.MIXER_OVERRIDE_OFF;
 
             mixerInput.val(0);
             mixerSlider.val(0);
+
             mixerInput.prop('disabled', !check);
             mixerSlider.attr('disabled', !check);
 
@@ -279,12 +283,12 @@ TABS.mixer.initialize = function (callback) {
         });
 
         let value = FC.MIXER_OVERRIDE[inputIndex];
-        let check = (value >= -2500 && value <= 2500);
+        let check = (value >= self.MIXER_OVERRIDE_MIN && value <= self.MIXER_OVERRIDE_MAX);
 
         value *= attr.scale;
-        value = check ? value.toFixed(attr.fixed) : 0;
+        value = (check ? value : 0).toFixed(attr.fixed);
 
-        mixerInput.val(value).change();
+        mixerInput.val(value);
         mixerSlider.val(value);
 
         mixerInput.prop('disabled', !check);
