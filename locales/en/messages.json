@@ -1564,11 +1564,20 @@
     "configurationAccelTrims": {
         "message": "Accelerometer Trim"
     },
+	"configurationAccelTrimsHelp": {
+        "message": "Accelerometer Roll and Pitch Trim, These settings provide fine tuning of the accelerometer calibration to remove drift while in stabilized modes such as Horizon, Angle and Rescue"
+    },
     "configurationAccelTrimRoll": {
         "message": "Accelerometer Roll Trim"
     },
+	"configurationAccelTrimRollHelp": {
+        "message": "Adjust Roll Trim to remove drift in stabilized modes on the roll axis"
+    },
     "configurationAccelTrimPitch": {
         "message": "Accelerometer Pitch Trim"
+    },
+	"configurationAccelTrimPitchHelp": {
+		"message": "Adjust Roll Trim to remove drift in stabilized modes on the roll axis"
     },
     "configurationArming": {
         "message": "Arming"
@@ -2487,6 +2496,9 @@
     "servoConfiguration":{
         "message": "Servo Configuration"
     },
+    "servoConfigurationHelp":{
+        "message": "Servo Configuration: todo"
+    },
     "servoNumber": {
         "message": "Servo"
     },
@@ -2520,6 +2532,9 @@
     "servoOverride":{
         "message": "Servo Override"
     },
+    "servoOverrideHelp":{
+        "message": "Servo Override: todo"
+    },	
     "servoOverrideEnable":{
         "message": "Enable"
     },
@@ -2535,12 +2550,14 @@
     "servosText":{
         "message": "Servos"
     },
-
     "mixerMainRotorSettings": {
         "message": "Main Rotor Settings"
     },
     "mixerMainRotorDirection": {
         "message": "Main rotor direction"
+    },
+    "mixerMainRotorDirectionHelp": {
+        "message": "Looking from the top of the helicopter what direction is the main rotor turning. For the majority of helicopters this is clockwise"
     },
     "mixerClockwise": {
         "message": "Clockwise"
@@ -2550,6 +2567,9 @@
     },
     "mixerSwashType": {
         "message": "Swashplate type"
+    },
+    "mixerSwashTypeHelp": {
+        "message": "Enter the swashplate type for your helicopter <br><strong>Angle:</strong> This is the angle between the elevator and each of the aileron servos. The options are 120&deg, 135&deg and 140&deg. This is dependant on the helicopters design.  <br><strong>Elevator:</strong> Some helicopters the elevator servo (inline with tail and nose) is at the front of the heli, while others are at the rear. Choose the one applicable to your helicopter <br><strong>Custom mixing:</strong> This option can only be configured through the CLI. "
     },
     "mixerSwashType1": {
         "message": "120&deg Front Elevator"
@@ -2575,12 +2595,18 @@
     "mixerSwashRing": {
         "message": "Swashring"
     },
+    "mixerSwashRingHelp": {
+        "message": "Swashring: todo"
+    },
     "mixerTailRotorSettings": {
         "message": "Tail Rotor Settings"
     },
     "mixerTailRotorMode": {
         "message": "Tail Rotor Type"
     },
+    "mixerTailRotorModeHelp": {
+        "message": "<strong>Variable pitch:</strong> This is a variable pitch tail controlled by a servo (Servo 4) <br><strong>Motorised:</strong> The tail has a separate motor for the tail (M2) <br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode. This is still under development"
+    },	
     "mixerTailVariablePitch": {
         "message": "Variable pitch"
     },
@@ -2593,14 +2619,23 @@
     "mixerTailMotorIdle": {
         "message": "Motor idle throttle"
     },
+    "mixerTailMotorIdleHelp": {
+        "message": "This is the minimum signal sent to the tail motor. This should be set just high enough that the motor does not stop"
+    },	
     "mixerInputChannels": {
         "message": "Mixer Control Inputs"
+    },
+    "mixerInputChannelsHelp": {
+        "message": "Mixer Control Inputs: todo"
     },
     "mixerOverrideNote":{
         "message": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "mixerOverride":{
         "message": "Mixer Override"
+    },
+    "mixerOverrideHelp":{
+        "message": "Mixer Override: todo"
     },
     "mixerOverrideEnable":{
         "message": "Enable"
@@ -2931,6 +2966,9 @@
     },
     "motorOverride":{
         "message": "Motor Override"
+    },
+    "motorOverrideHelp":{
+        "message": "Motor Override: todo"
     },
     "motorOverrideEnable":{
         "message": "Enable"
@@ -4040,13 +4078,13 @@
         "message": "Rate normalization mode for cyclic"
     },
     "profilesCyclicNormalizationHelp": {
-        "message": "More control action is needed at lower headspeeds to achieve the same cyclic rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> No headspeed normalization. <br><strong>Linear:</strong> Cyclic is normalized based on headspeed. <br><strong>Natural:</strong> Cyclic is normalized based on headspeed squared"
+        "message": "More control action is needed at lower headspeeds to achieve the same cyclic rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Natural:</strong> No headspeed normalization <br><strong>Linear:</strong> Collective is normalized based on headspeed. <br><strong>Absolute:</strong> Collective is normalized based on headspeed squared. The helicopter rates should 'feel' similar across a large headspeed range."
     },
     "profilesCollectiveNormalization": {
         "message": "Rate normalization mode for collective"
     },
     "profilesCollectiveNormalizationHelp": {
-        "message": "More control action is needed at lower headspeeds to achieve the same collective rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> No headspeed normalization. <br><strong>Linear:</strong> Collective is normalized based on headspeed. <br><strong>Natural:</strong> Collective is normalized based on headspeed squared"
+        "message": "More control action is needed at lower headspeeds to achieve the same collective rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Natural:</strong> No headspeed normalization <br><strong>Linear:</strong> Collective is normalized based on headspeed. <br><strong>Absolute:</strong> Collective is normalized based on headspeed squared. The helicopter rates should 'feel' similar across a large headspeed range. You will not have to change the collective stick position when a higher headspeed is chosen. "
     },
     "profilesRateNormalizationNatural": {
         "message": "Natural"
@@ -6128,7 +6166,6 @@
         "message": "This table represents all the frequencies that can be used for your VTX. You can have several bands and for each band you must configure:<br><b>- $t(vtxTableBandTitleName.message):</b> Name that you want to assign to this band, like BOSCAM_A, FATSHARK or RACEBAND.<br><b>- $t(vtxTableBandTitleLetter.message):</b> Short letter that references the band.<br><b>- $t(vtxTableBandTitleFactory.message):</b> This indicates if it is a factory band. If enabled Betaflight sends to the VTX a band and channel number. The VTX will then use its built-in frequency table and the frequencies configured here are only to show the value in the OSD and other places. If it is not enabled, then Betaflight will send to the VTX the real frequency configured here.<br><b>- Frequencies:</b> Frequencies for this band.<br /><br />Remember that not all frequencies are legal at your country. You must put a value of <b>zero</b> to each frequency index that you are not allowed to use to disable it.",
         "description": "Help for the table of bands-channels that appears in the VTX tab"
     },
-
     "vtxSavedFileOk": {
         "message": "VTX Config file <span class=\"message-positive\">saved</span>",
         "description": "Message in the GUI log when the VTX Config file is saved"
@@ -6185,7 +6222,6 @@
         "message": "{{version}} unlocked",
         "description": "Indicates if SA device is unlocked"
     },
-
     "mainHelpArmed": {
         "message": "Motor Arming"
     },
@@ -6213,12 +6249,21 @@
     "configurationAccHardware": {
         "message": "Accelerometer"
     },
+    "configurationAccHardwareHelp": {
+        "message": "Enables the Accelerometer. This is required for all stabilisation modes. Angle, Horizon, Acro Trainer and Rescue"
+    },	
     "configurationBaroHardware": {
         "message": "Barometer (if supported)"
     },
+    "configurationBaroHardwareHelp": {
+        "message": "Enable the Barometer"
+    },	
     "configurationMagHardware": {
         "message": "Magnetometer (if supported)"
     },
+    "configurationMagHardwareHelp": {
+        "message": "Enable the Magnetometer functions"
+    },	
     "configurationSmallAngle": {
         "message": "Maximum ARM Angle [degrees]"
     },
@@ -6276,11 +6321,20 @@
     "blackboxDevice": {
         "message": "Blackbox logging device"
     },
+    "blackboxDeviceHelp": {
+        "message": "<strong>No Logging:</strong> Disables logging <br><strong>Onboard Flash:</strong> Enables logging to onboard flash if configured for that board <br><strong>SD Card:</strong> Log to onboard SD card if available <br><strong>Serial Port:</strong> This enables logging to an external logger (e.g Open Lager) connected to the serial port. The serial port will also have to be configured to 'Blackbox Logging' and the 'Baud rate' in the 'peripherals' section on the <strong>Serial Ports</strong> tab."
+    },
     "blackboxRateOfLogging": {
         "message": "Blackbox logging rate"
     },
+    "blackboxRateOfLoggingHelp": {
+        "message": "Set the frequency to log to the external device. Openlog set to less than 500Hz. Openlager can be faster"
+    },
     "blackboxDebugMode": {
         "message": "Blackbox debug mode"
+    },
+    "blackboxDebugModeHelp": {
+        "message": "Choose what data is logged"
     },
     "blackboxDebugModeUnknown": {
         "message": "UNKNOWN"
