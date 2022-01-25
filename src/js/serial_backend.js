@@ -448,13 +448,25 @@ function processUid() {
 function processName() {
     MSP.send_message(MSPCodes.MSP_NAME, false, false, function () {
         GUI.log(i18n.getMessage('craftNameReceived', [FC.CONFIG.name]));
-        FC.CONFIG.armingDisabled = false;
-        mspHelper.setArmingEnabled(false, setRtc);
+        setRtc();
     });
 }
 
 function setRtc() {
-    MSP.send_message(MSPCodes.MSP_SET_RTC, mspHelper.crunch(MSPCodes.MSP_SET_RTC), false, finishOpen);
+    MSP.send_message(MSPCodes.MSP_SET_RTC, mspHelper.crunch(MSPCodes.MSP_SET_RTC), false, function () {
+        //GUI.log(i18n.getMessage('realTimeClockSet'));
+        setArming();
+    });
+}
+
+function setArming() {
+    if (FC.CONFIG.boardName !== 'SITL') {
+        FC.CONFIG.armingDisabled = false;
+        mspHelper.setArmingEnabled(false, finishOpen);
+    }
+    else {
+        finishOpen();
+    }
 }
 
 function finishOpen() {
