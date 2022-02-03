@@ -207,7 +207,7 @@ const FC = {
 
         this.MIXER_INPUTS =             [];
         this.MIXER_RULES =              [];
-        this.MIXER_OVERRIDE =           Array.from({length: 30});
+        this.MIXER_OVERRIDE =           Array.from({length: 29});
 
         this.BOARD_ALIGNMENT_CONFIG = {
             roll:                       0,
@@ -290,10 +290,10 @@ const FC = {
             debug:                      [0, 0, 0, 0],
         };
 
-        this.MOTOR_DATA =               Array.from({length: 8});
-        this.MOTOR_OVERRIDE =           Array.from({length: 8});
-        this.SERVO_DATA =               Array.from({length: 8});
-        this.SERVO_OVERRIDE =           Array.from({length: 8});
+        this.MOTOR_DATA =               [0, 0, 0, 0];
+        this.MOTOR_OVERRIDE =           [0, 0, 0, 0];
+        this.SERVO_DATA =               [0, 0, 0, 0, 0, 0, 0, 0];
+        this.SERVO_OVERRIDE =           [0, 0, 0, 0, 0, 0, 0, 0];
 
         this.MOTOR_TELEMETRY_DATA = {
             rpm:                        [0, 0, 0, 0, 0, 0, 0, 0],
