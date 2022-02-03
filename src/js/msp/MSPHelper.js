@@ -1998,6 +1998,14 @@ MspHelper.prototype.sendRPMFilters = function(onCompleteCallback)
     send_next();
 };
 
+MspHelper.prototype.resetMotorOverrides = function(onCompleteCallback)
+{
+    for (let i=0; i<FC.MOTOR_OVERRIDE.length; i++)
+        FC.MOTOR_OVERRIDE[i] = 0;
+
+    this.sendMotorOverrides(onCompleteCallback);
+};
+
 MspHelper.prototype.sendMotorOverride = function(motorIndex, onCompleteCallback)
 {
     const value = FC.MOTOR_OVERRIDE[motorIndex];
@@ -2022,6 +2030,14 @@ MspHelper.prototype.sendMotorOverrides = function(onCompleteCallback)
     }
 
     send_next();
+};
+
+MspHelper.prototype.resetServoOverrides = function(onCompleteCallback)
+{
+    for (let i=0; i<FC.SERVO_OVERRIDE.length; i++)
+        FC.SERVO_OVERRIDE[i] = 2001;
+
+    this.sendServoOverrides(onCompleteCallback);
 };
 
 MspHelper.prototype.sendServoOverride = function(servoIndex, onCompleteCallback)
@@ -2138,6 +2154,14 @@ MspHelper.prototype.sendMixerRules = function(onCompleteCallback)
     }
 
     send_next();
+};
+
+MspHelper.prototype.resetMixerOverrides = function(onCompleteCallback)
+{
+    for (let i=0; i<FC.MIXER_OVERRIDE.length; i++)
+        FC.MIXER_OVERRIDE[i] = 2501;
+
+    this.sendMixerOverrides(onCompleteCallback);
 };
 
 MspHelper.prototype.sendMixerOverride = function(mixerIndex, onCompleteCallback)
