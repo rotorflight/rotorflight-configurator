@@ -72,11 +72,11 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="itermRotation"]').prop('checked', FC.PID_PROFILE.itermRotation !== 0);
 
         // I-term decay
-        $('.tab-profiles input[id="itermDecayTime"]').val(FC.PID_PROFILE.itermDecay);
+        $('.tab-profiles input[id="itermDecayTime"]').val(FC.PID_PROFILE.itermDecay / 10);
 
         const itermDecayCheck = $('.tab-profiles input[id="itermDecay"]');
 
-        itermDecayCheck.prop('checked', FC.PID_PROFILE.itermDecay !== 0);
+        itermDecayCheck.prop('checked', FC.PID_PROFILE.itermDecay > 0);
 
         itermDecayCheck.change(function() {
             const checked = $(this).is(':checked');
@@ -164,7 +164,7 @@ TABS.profiles.initialize = function (callback) {
         });
 
         FC.PID_PROFILE.itermRotation = $('.tab-profiles input[id="itermRotation"]').is(':checked') ? 1 : 0;
-        FC.PID_PROFILE.itermDecay = $('.tab-profiles input[id="itermDecay"]').is(':checked') ? $('.tab-profiles input[id="itermDecayTime"]').val() : 0;
+        FC.PID_PROFILE.itermDecay = $('.tab-profiles input[id="itermDecay"]').is(':checked') ? $('.tab-profiles input[id="itermDecayTime"]').val() * 10 : 0;
         FC.PID_PROFILE.itermRelax = $('.tab-profiles input[id="itermRelax"]').is(':checked') ? $('.tab-profiles select[id="itermRelaxAxes"]').val() : 0;
         FC.PID_PROFILE.itermRelaxType = $('.tab-profiles select[id="itermRelaxType"]').val();
         FC.PID_PROFILE.itermRelaxCutoffRoll = parseInt($('.tab-profiles input[id="itermRelaxCutoffRoll"]').val());
