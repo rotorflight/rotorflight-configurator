@@ -405,6 +405,7 @@ function startProcess() {
         }
     });
 
+/**
     ConfigStorage.get('permanentExpertMode', function (result) {
         const expertModeCheckbox = 'input[name="expertModeCheckbox"]';
         if (result.permanentExpertMode) {
@@ -423,6 +424,7 @@ function startProcess() {
 
         }).change();
     });
+**/
 
     ConfigStorage.get('cliAutoComplete', function (result) {
         CliAutoComplete.setEnabled(typeof result.cliAutoComplete == 'undefined' || result.cliAutoComplete); // On by default
@@ -521,49 +523,17 @@ function notifyOutdatedVersion(releaseData) {
     });
 }
 
+/**
 function isExpertModeEnabled() {
     return $('input[name="expertModeCheckbox"]').is(':checked');
 }
+**/
 
 function updateTabList(features) {
-
-    if (isExpertModeEnabled()) {
-        $('#tabs ul.mode-connected li.tab_adjustments').show();
-        $('#tabs ul.mode-connected li.tab_sensors').show();
-        $('#tabs ul.mode-connected li.tab_logging').show();
-        //$('#tabs ul.mode-connected li.tab_cli').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_adjustments').hide();
-        $('#tabs ul.mode-connected li.tab_sensors').hide();
-        $('#tabs ul.mode-connected li.tab_logging').hide();
-        //$('#tabs ul.mode-connected li.tab_cli').hide();
-    }
-
-    if (features.isEnabled('GPS')) {
-        $('#tabs ul.mode-connected li.tab_gps').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_gps').hide();
-    }
-
-    if (features.isEnabled('LED_STRIP')) {
-        $('#tabs ul.mode-connected li.tab_led_strip').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_led_strip').hide();
-    }
-
-    if (features.isEnabled('OSD')) {
-        $('#tabs ul.mode-connected li.tab_osd').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_osd').hide();
-    }
-
-    //if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
-    if (false) { // RTFL: Until tested properly
-        $('#tabs ul.mode-connected li.tab_vtx').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_vtx').hide();
-    }
-
+    $('#tabs ul.mode-connected li.tab_gps').toggle(features.isEnabled('GPS'));
+    $('#tabs ul.mode-connected li.tab_led_strip').toggle(features.isEnabled('LED_STRIP'));
+    $('#tabs ul.mode-connected li.tab_osd').toggle(features.isEnabled('OSD'));
+    $('#tabs ul.mode-connected li.tab_vtx').toggle(false /* eatures.isEnabled('VTX') */);
 }
 
 function zeroPad(value, width) {

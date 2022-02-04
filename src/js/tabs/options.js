@@ -5,7 +5,7 @@ TABS.options.initialize = function (callback) {
     $('#content').load("./tabs/options.html", function () {
         i18n.localizePage();
 
-        TABS.options.initPermanentExpertMode();
+        //TABS.options.initPermanentExpertMode();
         TABS.options.initRememberLastTab();
         TABS.options.initCheckForConfiguratorUnstableVersions();
         TABS.options.initAnalyticsOptOut();
@@ -24,6 +24,7 @@ TABS.options.cleanup = function (callback) {
     }
 };
 
+/**
 TABS.options.initPermanentExpertMode = function () {
     ConfigStorage.get('permanentExpertMode', function (result) {
         if (result.permanentExpertMode) {
@@ -39,6 +40,7 @@ TABS.options.initPermanentExpertMode = function () {
         }).change();
     });
 };
+**/
 
 TABS.options.initRememberLastTab = function () {
     ConfigStorage.get('rememberLastTab', function (result) {
