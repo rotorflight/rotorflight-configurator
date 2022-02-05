@@ -30,6 +30,7 @@ TABS.receiver.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_RX_MAP))
             .then(() => MSP.promise(MSPCodes.MSP_RX_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_RSSI_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
             .then(callback);
     }
 

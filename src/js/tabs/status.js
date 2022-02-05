@@ -44,6 +44,7 @@ TABS.status.initialize = function (callback) {
     function load_data(callback) {
         MSP.promise(MSPCodes.MSP_STATUS)
             .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_ACC_TRIM))
             .then(() => MSP.promise(MSPCodes.MSP_NAME))
             .then(() => MSP.promise(MSPCodes.MSP_RC))

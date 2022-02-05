@@ -3,6 +3,8 @@
 // 3D model
 const Model = function (wrapper, canvas) {
 
+    const flip = (FC.MIXER_CONFIG.main_rotor_dir == 0);
+
     this.wrapper = wrapper;
     this.canvas = canvas;
 
@@ -22,6 +24,9 @@ const Model = function (wrapper, canvas) {
 
     // modelWrapper adds an extra axis of rotation to avoid gimbal lock with the euler angles
     this.modelWrapper = new THREE.Object3D();
+
+    // Flip left-right if needed
+    this.scale = new THREE.Vector3(flip ? -1 : 1, 1, 1);
 
     // stationary camera
     this.camera = new THREE.PerspectiveCamera(10, this.wrapper.width() / this.wrapper.height(), 1, 10000);
@@ -43,6 +48,7 @@ const Model = function (wrapper, canvas) {
     // Load model file, add to scene and render it
     this.loadGLTF(model_file, (function (model) {
         this.model = model;
+        this.model.scale.multiply(this.scale);
         this.modelWrapper.add(model);
         this.scene.add(this.modelWrapper);
         this.render();
@@ -57,30 +63,27 @@ Model.prototype.loadGLTF = function (model_file, callback) {
 };
 
 Model.prototype.rotateTo = function (x, y, z) {
-    if (!this.model) { return; }
-
-    this.model.rotation.x = x;
-    this.modelWrapper.rotation.y = y;
-    this.model.rotation.z = z;
-
-    this.render();
+    if (this.model) {
+        this.model.rotation.x = x;
+        this.modelWrapper.rotation.y = y;
+        this.model.rotation.z = z;
+        this.render();
+    }
 };
 
 Model.prototype.rotateBy = function (x, y, z) {
-    if (!this.model) { return; }
-
-    this.model.rotateX(x);
-    this.model.rotateY(y);
-    this.model.rotateZ(z);
-
-    this.render();
+    if (this.model) {
+        this.model.rotateX(x);
+        this.model.rotateY(y);
+        this.model.rotateZ(z);
+        this.render();
+    }
 };
 
 Model.prototype.render = function () {
-    if (!this.model) { return; }
-
-    // draw
-    this.renderer.render(this.scene, this.camera);
+    if (this.model) {
+        this.renderer.render(this.scene, this.camera);
+    }
 };
 
 // handle canvas resize
