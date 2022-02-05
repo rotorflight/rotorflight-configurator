@@ -90,10 +90,10 @@
         "message": "EEPROM <span class=\"message-positive\">saved</span>"
     },
     "dialogTabExitTitle" :{
-        "message": "Unsaved Changes"
+        "message": "<span class=\"message-negative\">WARNING:</span> Unsaved Changes"
     },
     "dialogTabExitNote" :{
-        "message": "There are <span class=\"message-negative\">unsaved changes</span> in the current Tab."
+        "message": "There are <b>unsaved changes</b> in the current Tab."
     },
     "dialogTabExitSave" :{
         "message": "Save Changes"
@@ -1564,20 +1564,20 @@
     "configurationAccelTrims": {
         "message": "Accelerometer Trim"
     },
-	"configurationAccelTrimsHelp": {
+    "configurationAccelTrimsHelp": {
         "message": "Accelerometer Roll and Pitch Trim, These settings provide fine tuning of the accelerometer calibration to remove drift while in stabilized modes such as Horizon, Angle and Rescue"
     },
     "configurationAccelTrimRoll": {
         "message": "Accelerometer Roll Trim"
     },
-	"configurationAccelTrimRollHelp": {
+    "configurationAccelTrimRollHelp": {
         "message": "Adjust Roll Trim to remove drift in stabilized modes on the roll axis"
     },
     "configurationAccelTrimPitch": {
         "message": "Accelerometer Pitch Trim"
     },
-	"configurationAccelTrimPitchHelp": {
-		"message": "Adjust Roll Trim to remove drift in stabilized modes on the roll axis"
+    "configurationAccelTrimPitchHelp": {
+        "message": "Adjust Roll Trim to remove drift in stabilized modes on the roll axis"
     },
     "configurationArming": {
         "message": "Arming"
@@ -1588,7 +1588,7 @@
     "configurationReverseMotorSwitch": {
         "message": "Motor direction is reversed"
     },
-       "configurationReverseMotorSwitchHelp": {
+    "configurationReverseMotorSwitchHelp": {
         "message": "This option configures the mixer to expect the motor direction to be reversed and the propellers to be on accordingly. <strong>Warning:</strong> This does not reverse the motor direction. Use the configuration tool for your ESCs or switch the ESC - motor wiring order to achieve this. Also, make sure to check with propellers off that your motors are rotating in the directions shown in the diagram above before attempting to arm."
     },
     "configurationAutoDisarmDelay": {
@@ -2550,6 +2550,13 @@
     "servosText":{
         "message": "Servos"
     },
+
+    "mixerCustomNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with <strong>custom</strong> rules. Any configuration changes must be done in the CLI, with the <code>mixer</code> command."
+    },
+    "mixerBidirNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> <i>Bidirectional tail motor</i> is an experimental feature that requires manually setting up the mixer in the CLI."
+    },
     "mixerMainRotorSettings": {
         "message": "Main Rotor Settings"
     },
@@ -2571,6 +2578,9 @@
     "mixerSwashTypeHelp": {
         "message": "Enter the swashplate type for your helicopter <br><strong>Angle:</strong> This is the angle between the elevator and each of the aileron servos. The options are 120&deg, 135&deg and 140&deg. This is dependant on the helicopters design.  <br><strong>Elevator:</strong> Some helicopters the elevator servo (inline with tail and nose) is at the front of the heli, while others are at the rear. Choose the one applicable to your helicopter <br><strong>Custom mixing:</strong> This option can only be configured through the CLI. "
     },
+    "mixerSwashType0": {
+        "message": "Custom Mixing"
+    },
     "mixerSwashType1": {
         "message": "120&deg Front Elevator"
     },
@@ -2589,8 +2599,14 @@
     "mixerSwashType6": {
         "message": "135&deg Rear Elevator"
     },
-    "mixerSwashTypeCustom": {
-        "message": "Custom mixing"
+    "mixerSwashType7": {
+        "message": "90&deg Fixed Pitch"
+    },
+    "mixerSwashType8": {
+        "message": "45&deg Fixed Pitch"
+    },
+    "mixerSwashType9": {
+        "message": "Passthrough"
     },
     "mixerSwashRing": {
         "message": "Swashring"
@@ -2606,7 +2622,7 @@
     },
     "mixerTailRotorModeHelp": {
         "message": "<strong>Variable pitch:</strong> This is a variable pitch tail controlled by a servo (Servo 4) <br><strong>Motorised:</strong> The tail has a separate motor for the tail (M2) <br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode. This is still under development"
-    },	
+    },
     "mixerTailVariablePitch": {
         "message": "Variable pitch"
     },
@@ -2621,7 +2637,7 @@
     },
     "mixerTailMotorIdleHelp": {
         "message": "This is the minimum signal sent to the tail motor. This should be set just high enough that the motor does not stop"
-    },	
+    },
     "mixerInputChannels": {
         "message": "Mixer Control Inputs"
     },
@@ -2796,14 +2812,17 @@
     "mixerOutputMotor4": {
         "message": "Motor #4"
     },
-    "dialogCustomMixerTitle": {
-        "message": "Custom Mixer"
+    "dialogMixerResetTitle": {
+        "message": "<span class=\"message-negative\">WARNING: Mixer Reset</span>"
     },
-    "dialogCustomMixerNote": {
-        "message": "Custom mixer rules can be only set via the CLI."
+    "dialogMixerResetNote": {
+        "message": "Selecting a pre-defined Swashplate type will reset any custom Mixer rules to defaults."
     },
-    "dialogCustomMixerClose": {
-        "message": "Close"
+    "dialogMixerResetAccept": {
+        "message": "Accept"
+    },
+    "dialogMixerResetRevert": {
+        "message": "Revert"
     },
 
     "gpsHead": {
@@ -2895,7 +2914,7 @@
         "message": "Tail Rotor Gear Ratio"
     },
     "motorsTailRotorGearRatioHelp": {
-	"message": "Gear ratio between the main rotor and the tail rotor <br><strong>[tail gear]/[autorotation gear]</strong> tooth count <br>For a direct drive motorized tail use [ 1 ]/[ 1 ]"
+        "message": "Gear ratio between the main rotor and the tail rotor <br><strong>[tail gear]/[autorotation gear]</strong> tooth count <br>For a direct drive motorized tail use [ 1 ]/[ 1 ]"
     },
     "motorsMotorPolesLong": {
         "message": "Pole count (number of magnets on the motor bell)"
@@ -2930,7 +2949,6 @@
     "motorsThrottleMinimumCommandHelp": {
         "message": "This is the value that is sent to the ESCs when the craft is disarmed. Set this to a value that has the motors stopped (1000 for most ESCs)."
     },
-
     "motorsText":{
         "message": "Motors"
     },
@@ -2985,7 +3003,6 @@
     "motorsDialogSettingsChangedOk": {
         "message": "OK"
     },
-
     "motorOutputReorderDialogClose": {
         "message": "Cancel"
     },
@@ -3019,7 +3036,6 @@
     "motorsRemapDialogStartOver": {
         "message": "Start over"
     },
-
     "escDshotDirectionDialog-Title": {
         "message": "Motor Direction - <strong class=\"message-negative-italic\">Warning: Ensure props are removed!</strong>"
     },
@@ -3095,7 +3111,6 @@
     "escDshotDirectionDialog-StopWizard": {
         "message": "Stop motors"
     },
-
     "govFeatures": {
         "message": "Governor Features"
     },
@@ -4005,7 +4020,6 @@
     "controlAxisAux16": {
         "message": "AUX 16"
     },
-
     "profilesPidGains": {
         "message": "PID Controller Gains"
     },
@@ -4078,13 +4092,13 @@
         "message": "Rate normalization mode for cyclic"
     },
     "profilesCyclicNormalizationHelp": {
-        "message": "More control action is needed at lower headspeeds to achieve the same cyclic rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Natural:</strong> No headspeed normalization <br><strong>Linear:</strong> Collective is normalized based on headspeed. <br><strong>Absolute:</strong> Collective is normalized based on headspeed squared. The helicopter rates should 'feel' similar across a large headspeed range."
+        "message": "More control action is needed at lower headspeeds to achieve the same cyclic rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> No headspeed normalization. <br><strong>Linear:</strong> Cyclic is normalized based on headspeed. <br><strong>Natural:</strong> Cyclic is normalized based on headspeed squared. The helicopter rates should 'feel' similar across a large headspeed range."
     },
     "profilesCollectiveNormalization": {
         "message": "Rate normalization mode for collective"
     },
     "profilesCollectiveNormalizationHelp": {
-        "message": "More control action is needed at lower headspeeds to achieve the same collective rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Natural:</strong> No headspeed normalization <br><strong>Linear:</strong> Collective is normalized based on headspeed. <br><strong>Absolute:</strong> Collective is normalized based on headspeed squared. The helicopter rates should 'feel' similar across a large headspeed range. You will not have to change the collective stick position when a higher headspeed is chosen. "
+        "message": "More control action is needed at lower headspeeds to achieve the same collective rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> No headspeed normalization. <br><strong>Linear:</strong> Collective is normalized based on headspeed. <br><strong>Natural:</strong> Collective is normalized based on headspeed squared. The helicopter rates should 'feel' similar across a large headspeed range. This will result in not have to change the collective stick position much when a higher headspeed is chosen."
     },
     "profilesRateNormalizationNatural": {
         "message": "Natural"
@@ -4388,30 +4402,6 @@
     "gyroDynamicNotchMaxHzHelp": {
         "message": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch."
     },
-    "gyroRpmFilterGroup": {
-        "message": "Gyro RPM Filter",
-        "description": "Header text for the RPM Filter group"
-    },
-    "gyroRpmFilterHelp": {
-        "message": "RPM filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove motor noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
-        "description": "Header text for the RPM Filter group"
-    },
-    "gyroRpmHarmonics": {
-        "message": "Gyro RPM Filter Harmonics Number",
-        "description": "Text for one of the parameters of the RPM Filter"
-    },
-    "gyroRpmHarmonicsHelp": {
-        "message": "Number of harmonics per motor. A value of 3 (recommended for most quads) will generate 3 notch filters, per motor for each axis, totaling 36 notches. One at the base motor frequency and two harmonics at multiples of that base frequency.",
-        "description": "Help text for one of the parameters of the RPM Filter"
-    },
-    "gyroRpmMinHz": {
-        "message": "Gyro RPM Filter Min Frequency [Hz]",
-        "description": "Text for one of the parameters of the RPM Filter"
-    },
-    "gyroRpmMinHzHelp": {
-        "message": "Minimum frequency that will be used by the RPM Filter.",
-        "description": "Help text for one of the parameters of the RPM Filter"
-    },
     "gyroDTermLowpassFiltersGroup": {
         "message": "D Term Lowpass Filters"
     },
@@ -4447,6 +4437,103 @@
     },
     "gyroDTermNotchCutoff": {
         "message": "D Term Notch Filter Cutoff Frequency [Hz]"
+    },
+    "gyroRpmFilterSettings": {
+        "message": "Gyro RPM Notch Filter Settings"
+    },
+    "gyroRpmFilterSetup": {
+        "message": "Setup Type"
+    },
+    "gyroRpmFilterSetupBasic": {
+        "message": "Basic"
+    },
+    "gyroRpmFilterSetupAdvanced": {
+        "message": "Advanced"
+    },
+    "gyroRpmFilterSetupCustom": {
+        "message": "Custom"
+    },
+    "gyroRpmFilterCustomNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings."
+    },
+    "gyroRpmFilterVibrationLevel": {
+        "message": "Vibration Level"
+    },
+    "gyroRpmFilterVibrationLow": {
+        "message": "Low"
+    },
+    "gyroRpmFilterVibrationMedium": {
+        "message": "Medium"
+    },
+    "gyroRpmFilterVibrationHigh": {
+        "message": "High"
+    },
+    "gyroRpmFilterMainRotorMinRPM": {
+        "message": "Main Rotor Minimum Filtered RPM"
+    },
+    "gyroRpmFilterTailRotorMinRPM": {
+        "message": "Tail Rotor Minimum Filtered RPM"
+    },
+    "gyroRpmFilterBanks": {
+        "message": "Gyro RPM Notch Filter Banks"
+    },
+    "gyroRpmFilterHelp": {
+        "message": "RPM filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
+        "description": "Header text for the RPM Filter group"
+    },
+    "gyroRpmFilterMainRotorGroup": {
+        "message": "Main Rotor Notch Filters"
+    },
+    "gyroRpmFilterMainRotorHelp": {
+        "message": "RPM filters for the main rotor harmonics"
+    },
+    "gyroRpmFilterTailRotorGroup": {
+        "message": "Tail Rotor Notch Filters"
+    },
+    "gyroRpmFilterTailRotorHelp": {
+        "message": "RPM filters for the tail rotor harmonics"
+    },
+    "gyroRpmFilterMainMotorGroup": {
+        "message": "Main Motor Notch Filters"
+    },
+    "gyroRpmFilterMainMotorHelp": {
+        "message": "RPM filters for the main motor harmonics"
+    },
+    "gyroRpmFilterH1": {
+        "message": "Fundamental Frequency Notch type"
+    },
+    "gyroRpmFilterQ1": {
+        "message": "Fundamental Frequency Notch Q"
+    },
+    "gyroRpmFilterH2": {
+        "message": "2<sup>nd</sup> Harmonic Notch Type"
+    },
+    "gyroRpmFilterQ2": {
+        "message": "2<sup>nd</sup> Harmonic Notch Q"
+    },
+    "gyroRpmFilterH3": {
+        "message": "3<sup>rd</sup> Harmonic Notch Type"
+    },
+    "gyroRpmFilterQ3": {
+        "message": "3<sup>rd</sup> Harmonic Notch Q"
+    },
+    "gyroRpmFilterH4": {
+        "message": "4<sup>th</sup> Harmonic Notch Type"
+    },
+    "gyroRpmFilterQ4": {
+        "message": "4<sup>th</sup> Harmonic Notch Q"
+    },
+    "dialogGyroResetTitle": {
+        "message": "<span class=\"message-negative\">Warning:</span> RPM Filter Reset"
+    },
+    "dialogGyroResetNote": {
+        "message": "Enabling RPM Filter Setup will reset any custom RPM filter settings to defaults."
+    },
+    "dialogGyroResetAccept": {
+        "message": "Accept"
+    },
+    "dialogGyroResetRevert": {
+        "message": "Revert"
     },
 
     "configHelp2": {
@@ -6166,6 +6253,7 @@
         "message": "This table represents all the frequencies that can be used for your VTX. You can have several bands and for each band you must configure:<br><b>- $t(vtxTableBandTitleName.message):</b> Name that you want to assign to this band, like BOSCAM_A, FATSHARK or RACEBAND.<br><b>- $t(vtxTableBandTitleLetter.message):</b> Short letter that references the band.<br><b>- $t(vtxTableBandTitleFactory.message):</b> This indicates if it is a factory band. If enabled Betaflight sends to the VTX a band and channel number. The VTX will then use its built-in frequency table and the frequencies configured here are only to show the value in the OSD and other places. If it is not enabled, then Betaflight will send to the VTX the real frequency configured here.<br><b>- Frequencies:</b> Frequencies for this band.<br /><br />Remember that not all frequencies are legal at your country. You must put a value of <b>zero</b> to each frequency index that you are not allowed to use to disable it.",
         "description": "Help for the table of bands-channels that appears in the VTX tab"
     },
+
     "vtxSavedFileOk": {
         "message": "VTX Config file <span class=\"message-positive\">saved</span>",
         "description": "Message in the GUI log when the VTX Config file is saved"
@@ -6222,6 +6310,7 @@
         "message": "{{version}} unlocked",
         "description": "Indicates if SA device is unlocked"
     },
+
     "mainHelpArmed": {
         "message": "Motor Arming"
     },
@@ -6251,19 +6340,19 @@
     },
     "configurationAccHardwareHelp": {
         "message": "Enables the Accelerometer. This is required for all stabilisation modes. Angle, Horizon, Acro Trainer and Rescue"
-    },	
+    },
     "configurationBaroHardware": {
         "message": "Barometer (if supported)"
     },
     "configurationBaroHardwareHelp": {
-        "message": "Enable the Barometer"
-    },	
+    "message": "Enable the Barometer"
+    },
     "configurationMagHardware": {
         "message": "Magnetometer (if supported)"
     },
     "configurationMagHardwareHelp": {
-        "message": "Enable the Magnetometer functions"
-    },	
+    "message": "Enable the Magnetometer functions"
+    },
     "configurationSmallAngle": {
         "message": "Maximum ARM Angle [degrees]"
     },
