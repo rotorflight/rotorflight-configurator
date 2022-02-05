@@ -53,6 +53,7 @@ TABS.rates.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_RC_TUNING))
             .then(() => MSP.promise(MSPCodes.MSP_RC_DEADBAND))
             .then(() => MSP.promise(MSPCodes.MSP_PID_ADVANCED))
+            .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
             .then(callback);
     }
 
