@@ -70,20 +70,24 @@ const Mixer = {
         'mixerSwashType9',
     ],
 
-    CUSTOM: 0,
-    CP120F: 1,
-    CP120R: 2,
-    CP140F: 3,
-    CP140R: 4,
-    CP135F: 5,
-    CP135R: 6,
-    FP90AE: 7,
-    FP45LR: 8,
-    PSSTHR: 9,
+    UNINIT: -1,
+    CUSTOM:  0,
+    CP120F:  1,
+    CP120R:  2,
+    CP140F:  3,
+    CP140R:  4,
+    CP135F:  5,
+    CP135R:  6,
+    FP90AE:  7,
+    FP45LR:  8,
+    PSSTHR:  9,
 
     RULE_COUNT: 32,
 
     mixerRuleSets: [],
+
+
+    //// Functions
 
     nullRule: function ()
     {
@@ -110,12 +114,32 @@ const Mixer = {
         const self = this;
         const copy = [];
 
-        if (a)
+        if (a) {
             a.forEach(function (rule) {
                 copy.push(self.cloneRule(rule));
             });
+        }
 
         return copy;
+    },
+
+    isNullRule : function (a) {
+        return( a.modes  == 0 &&
+                a.oper   == 0 &&
+                a.src    == 0 &&
+                a.dst    == 0 &&
+                a.weight == 0 &&
+                a.offset == 0 );
+    },
+
+    isNullMixer : function (a) {
+        const self = this;
+
+        for (let i=0; i<a.length; i++)
+            if (!self.isNullRule(a[i]))
+                return false;
+
+        return true;
     },
 
     compareMixer : function (a, b, cnt)
@@ -133,11 +157,14 @@ const Mixer = {
     {
         const self = this;
 
+        if (self.isNullMixer(ruleset))
+            return self.UNINIT;
+
         for (let i=1; i<self.mixerRuleSets.length; i++)
             if (self.compareMixer(ruleset, self.mixerRuleSets[i], self.RULE_COUNT))
                 return i;
 
-        return 0;
+        return self.CUSTOM;
     },
 
     getMixer : function (swashType)
