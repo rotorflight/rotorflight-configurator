@@ -4092,13 +4092,13 @@
         "message": "Rate normalization mode for cyclic"
     },
     "profilesCyclicNormalizationHelp": {
-        "message": "More control action is needed at lower headspeeds to achieve the same cyclic rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> No headspeed normalization. <br><strong>Linear:</strong> Cyclic is normalized based on headspeed. <br><strong>Natural:</strong> Cyclic is normalized based on headspeed squared. The helicopter rates should 'feel' similar across a large headspeed range."
+        "message": "More control action is needed at lower headspeeds to achieve the same Cyclic rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> Rotorflight will attempt to meet the requested Roll and Pitch rates as the headspeed varies. <br><strong>Linear:</strong> Small changes in Cyclic are normalized in feel similar to Absolute, but Linear will let the response drop over larger headspeed changes. <br><strong>Natural:</strong> Rotorflight will emulate the responsiveness of a flybared heli on Roll and Pitch as headspeed changes"
     },
     "profilesCollectiveNormalization": {
         "message": "Rate normalization mode for collective"
     },
     "profilesCollectiveNormalizationHelp": {
-        "message": "More control action is needed at lower headspeeds to achieve the same collective rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> No headspeed normalization. <br><strong>Linear:</strong> Collective is normalized based on headspeed. <br><strong>Natural:</strong> Collective is normalized based on headspeed squared. The helicopter rates should 'feel' similar across a large headspeed range. This will result in not have to change the collective stick position much when a higher headspeed is chosen."
+        "message": "More control action is needed at lower headspeeds to achieve the same Collective rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> Rotorflight will attempt to meet the requested Collective rate as the headspeed varies. <br><strong>Linear:</strong> Small changes in Collective are normalized in feel similar to Absolute, but Linear will let the response drop over larger headspeed changes. <br><strong>Natural:</strong> Rotorflight will emulate the responsiveness of a flybared heli on Collective as headspeed changes."
     },
     "profilesRateNormalizationNatural": {
         "message": "Natural"
