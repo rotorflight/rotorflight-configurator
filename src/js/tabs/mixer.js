@@ -318,11 +318,15 @@ TABS.mixer.initialize = function (callback) {
         const mixerSwashType = $('.tab-mixer #mixerSwashType');
         const mixerTailMode = $('.tab-mixer #mixerTailRotorMode');
 
+        if (self.swashType == -1)
+            mixerSwashType.append($('<option value="-1" disabled>[Select]</option>'));
+        if (self.swashType == 0)
+            mixerSwashType.append($('<option value="0" disabled>' + i18n.getMessage(Mixer.swashTypes[0]) + '</option>'));
+
         Mixer.swashTypes.forEach(function(name,index) {
             if (index > 0)
                 mixerSwashType.append($(`<option value="${index}">` + i18n.getMessage(name) + '</option>'));
         });
-        mixerSwashType.append($('<option value="0" disabled>' + i18n.getMessage(Mixer.swashTypes[0]) + '</option>'));
 
         const mixerRuleOpers   = $('.mixerRuleTemplate #oper');
         const mixerRuleInputs  = $('.mixerRuleTemplate #input');
