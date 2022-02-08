@@ -378,11 +378,9 @@ TABS.mixer.initialize = function (callback) {
             const val = $(this).val();
             $('.tailRotorMotorized').toggle( val != 0 );
             $('.mixerBidirNote').toggle( val == 2 );
-            $('.mixerSwashTypeTR').toggle( val != 2 );
         });
 
-        $('.mixerCustomNote').toggle( self.swashType == 0 && self.tailMode != 2 );
-        $('.mixerSwashTypeTR').toggle( self.tailMode != 2 );
+        $('.mixerCustomNote').toggle( self.swashType == 0 );
         $('.mixerBidirNote').toggle( self.tailMode == 2 );
         $('.tailRotorMotorized').toggle( self.tailMode != 0 );
 
@@ -400,7 +398,7 @@ TABS.mixer.initialize = function (callback) {
         const tailMode  = parseInt($('.tab-mixer #mixerTailRotorMode').val());
 
         if (swashType != self.swashType || tailMode != self.tailMode) {
-            if (swashType != 0 && tailMode != 2) {
+            if (swashType != 0) {
                 Mixer.initialize(tailMode);
                 FC.MIXER_RULES = Mixer.getMixer(swashType);
                 self.MIXER_RULES_dirty = true;

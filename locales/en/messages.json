@@ -2540,7 +2540,7 @@
         "message": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with <strong>custom</strong> rules. Any configuration changes must be done in the CLI, with the <code>mixer</code> command."
     },
     "mixerBidirNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> <i>Bidirectional tail motor</i> is an experimental feature that requires manually setting up the mixer in the CLI."
+        "message": "<span class=\"message-negative\">Warning:</span> <i>Bidirectional tail motor</i> is an experimental feature that requires additional settings in the CLI."
     },
     "mixerMainRotorSettings": {
         "message": "Main Rotor Settings"
