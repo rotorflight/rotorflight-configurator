@@ -232,7 +232,7 @@ TABS.motors.initialize = function (callback) {
             function updateInfo() {
 
                 const throttle = FC.MOTOR_DATA[motorIndex] / 10;
-                meterBar(thrBar, throttle + '%', throttle / 100);
+                meterBar(thrBar, throttle + '%', Math.abs(throttle / 100));
 
                 const rpm = FC.MOTOR_TELEMETRY_DATA.rpm[motorIndex];
                 if (rpm > rpmMax) {
