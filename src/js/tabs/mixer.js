@@ -25,14 +25,14 @@ TABS.mixer = {
         { min:-1500, max:1500, step:10,   fixed:0, scale:1.000 },
         { min:-24,   max:24,   step:0.1,  fixed:1, scale:0.012 },
         { min:-24,   max:24,   step:0.1,  fixed:1, scale:0.012 },
-        { min:-24,   max:24,   step:0.1,  fixed:1, scale:0.024 },
+        { min:-100,  max:100,  step:1,    fixed:0, scale:0.100 },
         { min:-24,   max:24,   step:0.1,  fixed:1, scale:0.012 },
     ],
     overrideAttr: [
         { min:-1500, max:1500, step:50,   fixed:0, scale:1.000 },
         { min:-18,   max:18,   step:0.1,  fixed:1, scale:0.012 },
         { min:-18,   max:18,   step:0.1,  fixed:1, scale:0.012 },
-        { min:-24,   max:24,   step:0.1,  fixed:1, scale:0.024 },
+        { min:-100,  max:100,  step:1,    fixed:0, scale:0.100 },
         { min:-18,   max:18,   step:0.1,  fixed:1, scale:0.012 },
     ],
 };
@@ -208,18 +208,18 @@ TABS.mixer.initialize = function (callback) {
             {
                 mixerSlider.noUiSlider({
                     range: {
-                        'min': -24,
-                        'max':  24,
+                        'min': -100,
+                        'max':  100,
                     },
                     start: 0,
-                    step: 1,
+                    step: 5,
                     behaviour: 'snap-drag',
                 });
 
                 mixerOverride.find('.pips-range').noUiSlider_pips({
                     mode: 'values',
-                    values: [ -24, -18, -12, -6, 0, 6, 12, 18, 24, ],
-                    density: 100 / ((24 + 24) / 1),
+                    values: [ -100, -75, -50, -25, 0, 25, 50, 75, 100, ],
+                    density: 100 / ((100 + 100) / 5),
                     stepped: true,
                     format: wNumb({
                         decimals: 0,
@@ -389,7 +389,7 @@ TABS.mixer.initialize = function (callback) {
         $('.tab-mixer #mixerSwashRing').val(FC.MIXER_CONFIG.swash_ring);
 
         $('.tab-mixer #mixerTailRotorMode').val(self.tailMode);
-        $('.tab-mixer #mixerTailMotorIdle').val(FC.MIXER_CONFIG.tail_motor_idle);
+        $('.tab-mixer #mixerTailMotorIdle').val(FC.MIXER_CONFIG.tail_motor_idle / 10);
     }
 
     function form_to_data() {
@@ -409,7 +409,7 @@ TABS.mixer.initialize = function (callback) {
         FC.MIXER_CONFIG.swash_ring = parseInt($('.tab-mixer #mixerSwashRing').val());
 
         FC.MIXER_CONFIG.tail_rotor_mode = tailMode;
-        FC.MIXER_CONFIG.tail_motor_idle = parseInt($('.tab-mixer #mixerTailMotorIdle').val());
+        FC.MIXER_CONFIG.tail_motor_idle = $('.tab-mixer #mixerTailMotorIdle').val() * 10;
     }
 
     function process_html() {
