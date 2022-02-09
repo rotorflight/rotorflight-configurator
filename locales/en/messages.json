@@ -2606,7 +2606,7 @@
         "message": "Bidirectional"
     },
     "mixerTailMotorIdle": {
-        "message": "Motor idle throttle"
+        "message": "Motor idle throttle [%]"
     },
     "mixerInputChannels": {
         "message": "Mixer Control Inputs"
