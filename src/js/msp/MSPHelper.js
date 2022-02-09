@@ -133,7 +133,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_MOTOR:
                 const motorCount = data.byteLength / 2;
                 for (let i = 0; i < motorCount; i++) {
-                    FC.MOTOR_DATA[i] = data.readU16();
+                    FC.MOTOR_DATA[i] = data.read16();
                 }
                 break;
 
