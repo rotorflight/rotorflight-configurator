@@ -119,18 +119,13 @@ TABS.motors.initialize = function (callback) {
 
         govModeSelect.val(FC.GOVERNOR.gov_mode);
 
-        if (FC.GOVERNOR.gov_mode > 0) {
-            $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time / 10).change();
-            $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time / 10).change();
-            $('input[id="govRecoveryTime"]').val(FC.GOVERNOR.gov_recovery_time / 10).change();
-            $('input[id="govAutoBailoutTime"]').val(FC.GOVERNOR.gov_autorotation_bailout_time / 10).change();
-            $('input[id="govAutoTimeout"]').val(FC.GOVERNOR.gov_autorotation_timeout / 10).change();
+        $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time / 10).change();
+        $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time / 10).change();
+        $('input[id="govRecoveryTime"]').val(FC.GOVERNOR.gov_recovery_time / 10).change();
+        $('input[id="govAutoBailoutTime"]').val(FC.GOVERNOR.gov_autorotation_bailout_time / 10).change();
+        $('input[id="govAutoTimeout"]').val(FC.GOVERNOR.gov_autorotation_timeout / 10).change();
 
-            $('.govConfig').show();
-        }
-        else {
-            $('.govConfig').hide();
-        }
+        $('.govConfig').toggle( FC.GOVERNOR.gov_mode > 0 );
 
         function updateVisibility() {
 
