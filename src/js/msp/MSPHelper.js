@@ -381,7 +381,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MOTOR_CONFIG.motor_pwm_protocol = data.readU8();
                 FC.MOTOR_CONFIG.motor_pwm_rate = data.readU16();
                 FC.MOTOR_CONFIG.use_pwm_inversion = (data.readU8() != 0);
-                FC.MOTOR_CONFIG.use_unsynced_pwd = (data.readU8() != 0);
+                FC.MOTOR_CONFIG.use_unsynced_pwm = (data.readU8() != 0);
                 FC.MOTOR_CONFIG.use_dshot_telemetry = (data.readU8() != 0);
                 for (let i = 0; i < 4; i++)
                     FC.MOTOR_CONFIG.motor_poles[i] = data.readU8();
@@ -1556,8 +1556,8 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.MOTOR_CONFIG.maxthrottle)
                 .push8(FC.MOTOR_CONFIG.motor_pwm_protocol)
                 .push16(FC.MOTOR_CONFIG.motor_pwm_rate)
-                .push8(FC.MOTOR_CONFIG.use_unsynced_pwm ? 1 : 0)
                 .push8(FC.MOTOR_CONFIG.use_pwm_inversion ? 1 : 0)
+                .push8(FC.MOTOR_CONFIG.use_unsynced_pwm ? 1 : 0)
                 .push8(FC.MOTOR_CONFIG.use_dshot_telemetry ? 1 : 0);
             for (let i = 0; i < 4; i++)
                 buffer.push8(FC.MOTOR_CONFIG.motor_poles[i]);
