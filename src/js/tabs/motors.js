@@ -4,6 +4,7 @@ TABS.motors = {
     isDirty: false,
     isProtoEnabled: false,
     isEscSensorEnabled: false,
+    isFreqSensorEnabled: false,
     isGovEnabled: false,
     isDshot: false,
     govModes: [
@@ -103,6 +104,7 @@ TABS.motors.initialize = function (callback) {
 
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR');
         self.isEscSensorEnabled = FC.FEATURE_CONFIG.features.isEnabled('ESC_SENSOR');
+        self.isFreqSensorEnabled = FC.FEATURE_CONFIG.features.isEnabled('FREQ_SENSOR');
 
         $('input[id="mainGearRatioN"]').val(FC.MOTOR_CONFIG.main_rotor_gear_ratio[0]);
         $('input[id="mainGearRatioD"]').val(FC.MOTOR_CONFIG.main_rotor_gear_ratio[1]);
@@ -194,7 +196,7 @@ TABS.motors.initialize = function (callback) {
 
             motorInfo.find('.spacer_box_title').html(i18n.getMessage('motorInfo', [motorIndex+1]));
 
-            rpmBar.toggle(self.isEscSensorEnabled || FC.MOTOR_CONFIG.use_dshot_telemetry);
+            rpmBar.toggle(self.isFreqSensorEnabled || self.isEscSensorEnabled || FC.MOTOR_CONFIG.use_dshot_telemetry);
             voltBar.toggle(self.isEscSensorEnabled);
             currBar.toggle(self.isEscSensorEnabled);
             tempBar.toggle(self.isEscSensorEnabled);
@@ -344,9 +346,11 @@ TABS.motors.initialize = function (callback) {
             $('.motorOverride tbody').append(motorOverride);
         }
 
-        for (let index = 0; index < FC.CONFIG.motorCount; index++) {
-            process_motor_info(index);
-            process_override(index);
+        if (self.isProtoEnabled) {
+            for (let index = 0; index < FC.CONFIG.motorCount; index++) {
+                process_motor_info(index);
+                process_override(index);
+            }
         }
 
         function update_data() {
