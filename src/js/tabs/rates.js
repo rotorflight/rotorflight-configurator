@@ -36,10 +36,13 @@ TABS.rates = {
         'rateProfile6',
     ],
     RATE_PROFILE_MASK: 128,
+    analyticsChanges: {},
 };
 
 TABS.rates.initialize = function (callback) {
     const self = this;
+
+    self.analyticsChanges = {};
 
     load_data(load_html);
 
@@ -64,6 +67,7 @@ TABS.rates.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
             .then(() => {
                 GUI.log(i18n.getMessage('eepromSaved'));
+                analytics.sendChangeEvents(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, self.analyticsChanges);
                 if (callback) callback();
             });
     }
@@ -93,7 +97,8 @@ TABS.rates.initialize = function (callback) {
     function form_to_data() {
 
         // Rates type
-        FC.RC_TUNING.rates_type = $('.rates_type select[id="ratesType"]').val();
+        FC.RC_TUNING.rates_type = parseInt($('.rates_type select[id="ratesType"]').val());
+        self.analyticsChanges['ratesType'] = FC.RC_TUNING.rates_type;
 
         // catch RC_tuning changes
         const roll_pitch_rate_e = $('.rates_setup input[name="roll_pitch_rate"]');

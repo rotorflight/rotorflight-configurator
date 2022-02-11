@@ -46,6 +46,7 @@ TABS.configuration.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG, mspHelper.crunch(MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
             .then(() => {
+                analytics.sendChangeEvents(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, self.analyticsChanges);
                 GUI.log(i18n.getMessage('eepromSaved'));
                 MSP.send_message(MSPCodes.MSP_SET_REBOOT);
                 GUI.log(i18n.getMessage('deviceRebooting'));
@@ -105,8 +106,6 @@ TABS.configuration.initialize = function (callback) {
             if (value !== FC.SENSOR_ALIGNMENT.align_mag) {
                 newValue = $(this).find('option:selected').text();
             }
-            self.analyticsChanges['MagAlignment'] = newValue;
-
             FC.SENSOR_ALIGNMENT.align_mag = value;
         });
 
@@ -151,8 +150,6 @@ TABS.configuration.initialize = function (callback) {
             if (value !== FC.SENSOR_ALIGNMENT.gyro_1_align) {
                 newValue = $(this).find('option:selected').text();
             }
-            self.analyticsChanges['Gyro1Alignment'] = newValue;
-
             FC.SENSOR_ALIGNMENT.gyro_1_align = value;
         });
 
@@ -162,8 +159,6 @@ TABS.configuration.initialize = function (callback) {
             if (value !== FC.SENSOR_ALIGNMENT.gyro_2_align) {
                 newValue = $(this).find('option:selected').text();
             }
-            self.analyticsChanges['Gyro2Alignment'] = newValue;
-
             FC.SENSOR_ALIGNMENT.gyro_2_align = value;
         });
 
@@ -272,9 +267,11 @@ TABS.configuration.initialize = function (callback) {
 
             if (value !== FC.ADVANCED_CONFIG.pid_process_denom) {
                 const newFrequency = pidSelectElement.find('option:selected').text();
-                self.analyticsChanges['PIDLoopSettings'] = `denominator: ${value} | frequency: ${newFrequency}`;
+                self.analyticsChanges['PIDLoopDenominator'] = value;
+                self.analyticsChanges['PIDLoopFrequency'] = newFrequency;
             } else {
-                self.analyticsChanges['PIDLoopSettings'] = undefined;
+                self.analyticsChanges['PIDLoopDenominator'] = undefined;
+                self.analyticsChanges['PIDLoopFrequency'] = undefined;
             }
 
             FC.ADVANCED_CONFIG.pid_process_denom = value;

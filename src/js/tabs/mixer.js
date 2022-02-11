@@ -35,10 +35,14 @@ TABS.mixer = {
         { min:-100,  max:100,  step:1,    fixed:0, scale:0.100 },
         { min:-18,   max:18,   step:0.1,  fixed:1, scale:0.012 },
     ],
+
+    analyticsChanges: {},
 };
 
 TABS.mixer.initialize = function (callback) {
     const self = this;
+
+    self.analyticsChanges = {};
 
     load_data(load_html);
 
@@ -90,6 +94,9 @@ TABS.mixer.initialize = function (callback) {
             self.MIXER_INPUTS_dirty = false;
             self.MIXER_RULES_dirty = false;
             self.isDirty = false;
+
+            analytics.sendChangeEvents(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, self.analyticsChanges);
+            self.analyticsChanges = {};
 
             if (self.needReboot) {
                 MSP.send_message(MSPCodes.MSP_SET_REBOOT);
@@ -402,6 +409,8 @@ TABS.mixer.initialize = function (callback) {
                 Mixer.initialize(tailMode);
                 FC.MIXER_RULES = Mixer.getMixer(swashType);
                 self.MIXER_RULES_dirty = true;
+                self.analyticsChanges['mixerSwashType'] = swashType;
+                self.analyticsChanges['mixerTailMode'] = tailMode;
             }
         }
 

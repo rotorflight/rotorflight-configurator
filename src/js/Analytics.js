@@ -1,172 +1,200 @@
 'use strict';
 
-const Analytics = function (trackingId, userId, appName, appVersion, changesetId, os, checkForDebugVersions, optOut, debugMode, buildType) {
-    this._trackingId = trackingId;
+const Analytics = function (trackingId, userId, appName, appVersion, changesetId, debugMode)
+{
+    const self = this;
 
-    this.setOptOut(optOut);
+    self.trackingId = trackingId;
 
-    //this._googleAnalytics = googleAnalytics;
+    self.googleAnalytics = googleAnalytics;
 
-    //this._googleAnalytics.initialize(this._trackingId, {
-    //    storage: 'none',
-    //    clientId: userId,
-    //    debug: !!debugMode
-    //});
+    self.googleAnalytics.initialize(self.trackingId, {
+        storage: 'none',
+        clientId: userId,
+        debug: !!debugMode
+    });
 
     // Make it work for the Chrome App:
-    //this._googleAnalytics.set('forceSSL', true);
-    //this._googleAnalytics.set('transport', 'xhr');
+    self.googleAnalytics.set('forceSSL', true);
+    self.googleAnalytics.set('transport', 'xhr');
 
     // Make it work for NW.js:
-    //this._googleAnalytics.set('checkProtocolTask', null);
+    self.googleAnalytics.set('checkProtocolTask', null);
 
-    //this._googleAnalytics.set('appName', appName);
-    //this._googleAnalytics.set('appVersion', debugMode ? appVersion + '-debug' : appVersion);
+    self.googleAnalytics.set('appName', appName);
+    self.googleAnalytics.set('appVersion', debugMode ? appVersion + '-debug' : appVersion);
 
-    this.EVENT_CATEGORIES = {
+    self.EVENT_CATEGORIES = {
         APPLICATION: 'Application',
         FLIGHT_CONTROLLER: 'FlightController',
         FLASHING: 'Flashing',
     };
 
-    this.DATA = {
-        BOARD_TYPE: 'boardType',
+    self.EVENT_TYPES = {
+        APP_START: 'AppStart',
+        APP_CLOSE: 'AppClose',
+        LANGUAGE: 'Language',
+        PARAMETER: 'Parameter',
+        FLASHING: 'Flashing',
+        EXIT_DFU: 'ExitDfu',
+        SET_DEFAULTS: 'SetDefaults',
+        MASS_STORAGE: 'MassStorage',
+        ENABLE_ARMING: 'EnableArming',
+        MIXER_OVERRIDE: 'MixerOverride',
+        SERVO_OVERRIDE: 'ServoOverride',
+        MOTOR_OVERRIDE: 'MotorOverride',
+        PROBLEM_FOUND: 'ProblemFound',
+    };
+
+    self.DATA = {
         API_VERSION: 'apiVersion',
-        FIRMWARE_TYPE: 'firmwareType',
-        FIRMWARE_VERSION: 'firmwareVersion',
         FIRMWARE_NAME: 'firmwareName',
         FIRMWARE_SOURCE: 'firmwareSource',
         FIRMWARE_CHANNEL: 'firmwareChannel',
-        FIRMWARE_ERASE_ALL: 'firmwareEraseAll',
+        FIRMWARE_TARGET: 'firmwareTarget',
+        FIRMWARE_VERSION: 'firmwareVersion',
+        FIRMWARE_GIT_HASH: 'firmwareChangesetId',
         FIRMWARE_SIZE: 'firmwareSize',
-        MCU_ID: 'mcuId',
-        LOGGING_STATUS: 'loggingStatus',
-        LOG_SIZE: 'logSize',
-        TARGET_NAME: 'targetName',
+        MANUFACTURER: 'manufacturerId',
         BOARD_NAME: 'boardName',
-        MANUFACTURER_ID: 'manufacturerId',
+        BOARD_TYPE: 'boardType',
         MCU_TYPE: 'mcuType',
+        SYSTEM_LOAD: 'systemLoad',
+        CPU_LOAD: 'cpuLoad',
+        LOG_SIZE: 'logSize',
+        LOGGING_STATUS: 'loggingStatus',
     };
 
-    this.DIMENSIONS = {
-        CONFIGURATOR_OS: 1,
-        BOARD_TYPE: 2,
-        FIRMWARE_TYPE: 3,
-        FIRMWARE_VERSION: 4,
-        API_VERSION: 5,
-        FIRMWARE_NAME: 6,
-        FIRMWARE_SOURCE: 7,
-        FIRMWARE_ERASE_ALL: 8,
-        CONFIGURATOR_EXPERT_MODE: 9,
-        FIRMWARE_CHANNEL: 10,
-        LOGGING_STATUS: 11,
-        MCU_ID: 12,
-        CONFIGURATOR_CHANGESET_ID: 13,
-        CONFIGURATOR_USE_DEBUG_VERSIONS: 14,
-        TARGET_NAME: 15,
-        BOARD_NAME: 16,
-        MANUFACTURER_ID: 17,
-        MCU_TYPE: 18,
-        CONFIGURATOR_BUILD_TYPE: 19,
+    self.DIMENSIONS = {
+        CONFIGURATOR_VERSION: 1,
+        CONFIGURATOR_GIT_HASH: 2,
+        CONFIGURATOR_OS: 3,
+        API_VERSION: 4,
+        FIRMWARE_NAME: 5,
+        FIRMWARE_SOURCE: 6,
+        FIRMWARE_CHANNEL: 7,
+        FIRMWARE_TARGET: 8,
+        FIRMWARE_VERSION: 9,
+        FIRMWARE_GIT_HASH: 10,
+        MANUFACTURER: 11,
+        BOARD_NAME: 12,
+        BOARD_TYPE: 13,
+        MCU_TYPE: 14,
+        MCU_ID: 15,
     };
 
-    this.METRICS = {
+    self.METRICS = {
         FIRMWARE_SIZE: 1,
-        LOG_SIZE: 2,
+        SYSTEM_LOAD: 2,
+        CPU_LOAD: 3,
+        LOG_SIZE: 4,
     };
 
-    this.setDimension(this.DIMENSIONS.CONFIGURATOR_OS, os);
-    this.setDimension(this.DIMENSIONS.CONFIGURATOR_CHANGESET_ID, changesetId);
-    this.setDimension(this.DIMENSIONS.CONFIGURATOR_USE_DEBUG_VERSIONS, checkForDebugVersions);
-    this.setDimension(this.DIMENSIONS.CONFIGURATOR_BUILD_TYPE, buildType);
+    self.resetFlightControllerData();
+    self.resetFirmwareData();
 
-    this.resetFlightControllerData();
-    this.resetFirmwareData();
-};
-
-Analytics.prototype.setDimension = function (dimension, value) {
-    const dimensionName = `dimension${dimension}`;
-    //this._googleAnalytics.custom(dimensionName, value);
-};
-
-Analytics.prototype.setMetric = function (metric, value) {
-    const metricName = `metric${metric}`;
-    //this._googleAnalytics.custom(metricName, value);
+    self.setDimension(self.DIMENSIONS.CONFIGURATOR_VERSION, appVersion);
+    self.setDimension(self.DIMENSIONS.CONFIGURATOR_GIT_HASH, changesetId);
+    self.setDimension(self.DIMENSIONS.CONFIGURATOR_OS, GUI.operating_system);
 };
 
 Analytics.prototype.sendEvent = function (category, action, options) {
-    //this._googleAnalytics.event(category, action, options);
+    const self = this;
+    self.googleAnalytics.event(category, action, options);
 };
 
-Analytics.prototype.sendChangeEvents = function (category, changeList) {
-    for (const actionName in changeList) {
-        if (changeList.hasOwnProperty(actionName)) {
-            const actionValue = changeList[actionName];
-            if (actionValue !== undefined) {
-                this.sendEvent(category, actionName, { eventLabel: actionValue });
-            }
-        }
-    }
+Analytics.prototype.setDimension = function (dimension, value) {
+    const self = this;
+    const dimensionName = `dimension${dimension}`;
+    self.googleAnalytics.custom(dimensionName, value);
 };
 
-Analytics.prototype.sendAppView = function (viewName) {
-    //this._googleAnalytics.screenview(viewName);
+Analytics.prototype.setMetric = function (metric, value) {
+    const self = this;
+    const metricName = `metric${metric}`;
+    self.googleAnalytics.custom(metricName, value);
+};
+
+Analytics.prototype.sendTabView = function (viewName) {
+    const self = this;
+    self.googleAnalytics.pageview(viewName, { title: 'Tab::' + viewName } );
+};
+
+Analytics.prototype.sendPageView = function (viewName) {
+    const self = this;
+    self.googleAnalytics.pageview(viewName, { title: viewName } );
+};
+
+Analytics.prototype.sendScreenView = function (viewName) {
+    const self = this;
+    self.googleAnalytics.screenview(viewName);
 };
 
 Analytics.prototype.sendTiming = function (category, timing, value) {
-    //this._googleAnalytics.timing(category, timing, value);
+    const self = this;
+    self.googleAnalytics.timing(category, timing, value);
 };
 
 Analytics.prototype.sendException = function (message) {
-    //this._googleAnalytics.exception(message);
+    const self = this;
+    self.googleAnalytics.exception(message);
 };
 
-Analytics.prototype.setOptOut = function (optOut) {
-    window['ga-disable-' + this._trackingId] = !!optOut;
-};
-
-Analytics.prototype._rebuildFlightControllerEvent = function () {
-    this.setDimension(this.DIMENSIONS.BOARD_TYPE, this._flightControllerData[this.DATA.BOARD_TYPE]);
-    this.setDimension(this.DIMENSIONS.FIRMWARE_TYPE, this._flightControllerData[this.DATA.FIRMWARE_TYPE]);
-    this.setDimension(this.DIMENSIONS.FIRMWARE_VERSION, this._flightControllerData[this.DATA.FIRMWARE_VERSION]);
-    this.setDimension(this.DIMENSIONS.API_VERSION, this._flightControllerData[this.DATA.API_VERSION]);
-    this.setDimension(this.DIMENSIONS.LOGGING_STATUS, this._flightControllerData[this.DATA.LOGGING_STATUS]);
-    this.setDimension(this.DIMENSIONS.MCU_ID, this._flightControllerData[this.DATA.MCU_ID]);
-    this.setMetric(this.METRICS.LOG_SIZE, this._flightControllerData[this.DATA.LOG_SIZE]);
-    this.setDimension(this.DIMENSIONS.TARGET_NAME, this._flightControllerData[this.DATA.TARGET_NAME]);
-    this.setDimension(this.DIMENSIONS.BOARD_NAME, this._flightControllerData[this.DATA.BOARD_NAME]);
-    this.setDimension(this.DIMENSIONS.MANUFACTURER_ID, this._flightControllerData[this.DATA.MANUFACTURER_ID]);
-    this.setDimension(this.DIMENSIONS.MCU_TYPE, this._flightControllerData[this.DATA.MCU_TYPE]);
+Analytics.prototype.rebuildFlightControllerEvent = function () {
+    const self = this;
+    self.setDimension(self.DIMENSIONS.API_VERSION, self.flightControllerData[self.DATA.API_VERSION]);
+    self.setDimension(self.DIMENSIONS.FIRMWARE_TARGET, self.flightControllerData[self.DATA.FIRMWARE_TARGET]);
+    self.setDimension(self.DIMENSIONS.FIRMWARE_VERSION, self.flightControllerData[self.DATA.FIRMWARE_VERSION]);
+    self.setDimension(self.DIMENSIONS.FIRMWARE_GIT_HASH, self.flightControllerData[self.DATA.FIRMWARE_GIT_HASH]);
+    self.setDimension(self.DIMENSIONS.MANUFACTURER, self.flightControllerData[self.DATA.MANUFACTURER]);
+    self.setDimension(self.DIMENSIONS.BOARD_NAME, self.flightControllerData[self.DATA.BOARD_NAME]);
+    self.setDimension(self.DIMENSIONS.BOARD_TYPE, self.flightControllerData[self.DATA.BOARD_TYPE]);
+    self.setDimension(self.DIMENSIONS.MCU_TYPE, self.flightControllerData[self.DATA.MCU_TYPE]);
+    self.setDimension(self.DIMENSIONS.MCU_ID, self.flightControllerData[self.DATA.MCU_ID]);
 };
 
 Analytics.prototype.setFlightControllerData = function (property, value) {
-    this._flightControllerData[property] = value;
-
-    this._rebuildFlightControllerEvent();
+    const self = this;
+    self.flightControllerData[property] = value;
+    self.rebuildFlightControllerEvent();
 };
 
 Analytics.prototype.resetFlightControllerData = function () {
-    this._flightControllerData = {};
-
-    this._rebuildFlightControllerEvent();
+    const self = this;
+    self.flightControllerData = {};
+    self.rebuildFlightControllerEvent();
 };
 
-Analytics.prototype._rebuildFirmwareEvent = function () {
-    this.setDimension(this.DIMENSIONS.FIRMWARE_NAME, this._firmwareData[this.DATA.FIRMWARE_NAME]);
-    this.setDimension(this.DIMENSIONS.FIRMWARE_SOURCE, this._firmwareData[this.DATA.FIRMWARE_SOURCE]);
-    this.setDimension(this.DIMENSIONS.FIRMWARE_ERASE_ALL, this._firmwareData[this.DATA.FIRMWARE_ERASE_ALL]);
-    this.setDimension(this.DIMENSIONS.FIRMWARE_CHANNEL, this._firmwareData[this.DATA.FIRMWARE_CHANNEL]);
-    this.setMetric(this.METRICS.FIRMWARE_SIZE, this._firmwareData[this.DATA.FIRMWARE_SIZE]);
+Analytics.prototype.rebuildFirmwareEvent = function () {
+    const self = this;
+    self.setDimension(self.DIMENSIONS.FIRMWARE_NAME, self.firmwareData[self.DATA.FIRMWARE_NAME]);
+    self.setDimension(self.DIMENSIONS.FIRMWARE_SOURCE, self.firmwareData[self.DATA.FIRMWARE_SOURCE]);
+    self.setDimension(self.DIMENSIONS.FIRMWARE_CHANNEL, self.firmwareData[self.DATA.FIRMWARE_CHANNEL]);
+    self.setMetric(self.METRICS.FIRMWARE_SIZE, self.firmwareData[self.DATA.FIRMWARE_SIZE]);
 };
 
 Analytics.prototype.setFirmwareData = function (property, value) {
-    this._firmwareData[property] = value;
-
-    this._rebuildFirmwareEvent();
+    const self = this;
+    self.firmwareData[property] = value;
+    self.rebuildFirmwareEvent();
 };
 
 Analytics.prototype.resetFirmwareData = function () {
-    this._firmwareData = {};
+    const self = this;
+    self.firmwareData = {};
+    self.rebuildFirmwareEvent();
+};
 
-    this._rebuildFirmwareEvent();
+Analytics.prototype.sendChangeEvents = function (category, changeList) {
+    const self = this;
+    setTimeout(function() {
+        for (const actionName in changeList) {
+            if (changeList.hasOwnProperty(actionName)) {
+                const actionValue = changeList[actionName];
+                if (actionValue !== undefined) {
+                    self.sendEvent(category, self.EVENT_TYPES.PARAMETER, { eventLabel: actionName, eventValue: actionValue });
+                }
+            }
+        }
+    });
 };

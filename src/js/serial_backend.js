@@ -260,11 +260,11 @@ function onOpen(openInfo) {
 
             if (semver.gte(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_ACCEPTED)) {
                 MSP.send_message(MSPCodes.MSP_FC_VARIANT, false, false, function () {
-                    analytics.setFlightControllerData(analytics.DATA.FIRMWARE_TYPE, FC.CONFIG.flightControllerIdentifier);
                     if (FC.CONFIG.flightControllerIdentifier === 'RTFL') {
                         MSP.send_message(MSPCodes.MSP_FC_VERSION, false, false, function () {
                             MSP.send_message(MSPCodes.MSP_BUILD_INFO, false, false, function () {
                                 analytics.setFlightControllerData(analytics.DATA.FIRMWARE_VERSION, FC.CONFIG.buildVersion);
+                                analytics.setFlightControllerData(analytics.DATA.FIRMWARE_GIT_HASH, FC.CONFIG.buildRevision);
                                 GUI.log(i18n.getMessage('firmwareInfoReceived', [FC.CONFIG.flightControllerIdentifier, FC.CONFIG.buildVersion]));
                                 GUI.log(i18n.getMessage('buildInfoReceived', [FC.CONFIG.buildRevision, FC.CONFIG.buildInfo]));
                                 if (semver.gte(FC.CONFIG.buildVersion, CONFIGURATOR.FW_VERSION_MIN_SUPPORTED) &&
@@ -272,9 +272,9 @@ function onOpen(openInfo) {
                                         MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, processBoardInfo);
                                 }
                                 else {
-                                    analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'ConnectionRefusedFirmwareVersion', FC.CONFIG.apiVersion);
+                                    analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'ConnectionRefusedFirmwareVersion', FC.CONFIG.buildVersion);
                                     const dialog = $('.dialogConnectWarning')[0];
-                                    $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareVersionNotSupported'));
+                                    $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareVersionNotSupported', [CONFIGURATOR.API_VERSION_ACCEPTED, CONFIGURATOR.FW_VERSION_MIN_SUPPORTED, CONFIGURATOR.FW_VERSION_MAX_SUPPORTED]));
                                     $('.dialogConnectWarning-closebtn').click(function() {
                                         dialog.close();
                                     });
@@ -344,11 +344,10 @@ function abortConnect() {
 }
 
 function processBoardInfo() {
-    analytics.setFlightControllerData(analytics.DATA.BOARD_TYPE, FC.CONFIG.boardIdentifier);
-    analytics.setFlightControllerData(analytics.DATA.TARGET_NAME, FC.CONFIG.targetName);
+    analytics.setFlightControllerData(analytics.DATA.FIRMWARE_TARGET, FC.CONFIG.targetName);
     analytics.setFlightControllerData(analytics.DATA.BOARD_NAME, FC.CONFIG.boardName);
-    analytics.setFlightControllerData(analytics.DATA.MANUFACTURER_ID, FC.CONFIG.manufacturerId);
-    analytics.setFlightControllerData(analytics.DATA.MCU_TYPE, FC.getMcuType());
+    analytics.setFlightControllerData(analytics.DATA.BOARD_TYPE, FC.CONFIG.boardIdentifier);
+    analytics.setFlightControllerData(analytics.DATA.MANUFACTURER, FC.CONFIG.manufacturerId);
 
     GUI.log(i18n.getMessage('boardInfoReceived', [FC.getHardwareName(), FC.CONFIG.boardVersion]));
 
@@ -380,13 +379,12 @@ function processBoardInfo() {
 }
 
 function checkReportProblems() {
-    const PROBLEM_ANALYTICS_EVENT = 'ProblemFound';
     const problemItemTemplate = $('#dialogReportProblems-listItemTemplate');
 
     function checkReportProblem(problemName, problemDialogList) {
         if (bit_check(FC.CONFIG.configurationProblems, FC.CONFIGURATION_PROBLEM_FLAGS[problemName])) {
             problemItemTemplate.clone().html(i18n.getMessage(`reportProblemsDialog${problemName}`)).appendTo(problemDialogList);
-            analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, PROBLEM_ANALYTICS_EVENT, problemName);
+            analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, analytics.EVENT_TYPES.PROBLEM_FOUND, problemName);
             return true;
         }
         return false;
@@ -402,7 +400,7 @@ function checkReportProblems() {
             problemItemTemplate.clone().html(i18n.getMessage(`reportProblemsDialog${problemName}`,
                 [CONFIGURATOR.latestVersion, CONFIGURATOR.latestVersionReleaseUrl, CONFIGURATOR.version, FC.CONFIG.buildVersion])).appendTo(problemDialogList);
             needsProblemReportingDialog |= true;
-            analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, PROBLEM_ANALYTICS_EVENT,
+            analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, analytics.EVENT_TYPES.PROBLEM_FOUND,
                 `${problemName};${CONFIGURATOR.API_VERSION_MAX_SUPPORTED};${FC.CONFIG.apiVersion}`);
         }
 
@@ -412,7 +410,7 @@ function checkReportProblems() {
                 const problemName = 'UNIFIED_FIRMWARE_WITHOUT_DEFAULTS';
                 problemItemTemplate.clone().html(i18n.getMessage(`reportProblemsDialog${problemName}`)).appendTo(problemDialogList);
                 needsProblemReportingDialog |= true;
-                analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, PROBLEM_ANALYTICS_EVENT, `${problemName}`);
+                analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, analytics.EVENT_TYPES.PROBLEM_FOUND, `${problemName}`);
         }
 
         //needsProblemReportingDialog = checkReportProblem('MOTOR_PROTOCOL_DISABLED', problemDialogList) || needsProblemReportingDialog;
@@ -437,12 +435,14 @@ function checkReportProblems() {
 
 function processUid() {
     MSP.send_message(MSPCodes.MSP_UID, false, false, function () {
-        const uniqueDeviceIdentifier = FC.CONFIG.uid[0].toString(16) + FC.CONFIG.uid[1].toString(16) + FC.CONFIG.uid[2].toString(16);
+        const UID = FC.CONFIG.uid[0].toString(16) + FC.CONFIG.uid[1].toString(16) + FC.CONFIG.uid[2].toString(16);
 
-        analytics.setFlightControllerData(analytics.DATA.MCU_ID, objectHash.sha1(uniqueDeviceIdentifier));
+        analytics.setFlightControllerData(analytics.DATA.MCU_TYPE, FC.getMcuType());
+        analytics.setFlightControllerData(analytics.DATA.MCU_ID, UID);
         analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'Connected');
+
         connectionTimestamp = Date.now();
-        GUI.log(i18n.getMessage('uniqueDeviceIdReceived', [uniqueDeviceIdentifier]));
+        GUI.log(i18n.getMessage('uniqueDeviceIdReceived', [UID]));
 
         processName();
     });

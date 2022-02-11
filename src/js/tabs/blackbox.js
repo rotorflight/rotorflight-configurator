@@ -420,7 +420,7 @@ TABS.blackbox.initialize = function (callback) {
     }
 
     function mark_saving_dialog_done(startTime, totalBytes, totalBytesCompressed) {
-        analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'SaveDataflash');
+        analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'SaveBlackBox');
 
         const totalTime = (new Date().getTime() - startTime) / 1000;
         console.log('Received ' + totalBytes + ' bytes in ' + totalTime.toFixed(2) + 's ('

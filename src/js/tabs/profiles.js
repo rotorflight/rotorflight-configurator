@@ -19,10 +19,19 @@ TABS.profiles = {
         'PITCH',
         'YAW',
     ],
+    gainNames: [
+        'P',
+        'I',
+        'D',
+        'F',
+    ],
+    analyticsChanges: {},
 };
 
 TABS.profiles.initialize = function (callback) {
     const self = this;
+
+    self.analyticsChanges = {};
 
     load_data(load_html);
 
@@ -47,6 +56,7 @@ TABS.profiles.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_SET_GOVERNOR, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR)))
             .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
             .then(() => {
+                analytics.sendChangeEvents(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, self.analyticsChanges);
                 GUI.log(i18n.getMessage('eepromSaved'));
                 if (callback) callback();
             });
@@ -168,7 +178,10 @@ TABS.profiles.initialize = function (callback) {
             const searchRow = $('.tab-profiles .' + elementPid + ' input');
             searchRow.each(function (indexInput) {
                 if ($(this).val()) {
-                    FC.PIDS[indexPid][indexInput] = parseFloat($(this).val());
+                    const value = parseInt($(this).val());
+                    const gainName = self.gainNames[indexInput];
+                    self.analyticsChanges[`pidGain_${elementPid}_${gainName}`] = value;
+                    FC.PIDS[indexPid][indexInput] = value;
                 }
             });
         });

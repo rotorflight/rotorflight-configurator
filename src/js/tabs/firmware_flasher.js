@@ -692,10 +692,8 @@ TABS.firmware_flasher.initialize = function (callback) {
             var eraseAll = false;
             if ($('input.erase_chip').is(':checked')) {
                 options.erase_chip = true;
-
                 eraseAll = true;
             }
-            analytics.setFirmwareData(analytics.DATA.FIRMWARE_ERASE_ALL, eraseAll.toString());
 
             if (!$('option:selected', portPickerElement).data().isDFU) {
                 if (String(portPickerElement.val()) !== '0') {
@@ -712,7 +710,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                         baud = parseInt($('#flash_manual_baud_rate').val());
                     }
 
-                    analytics.sendEvent(analytics.EVENT_CATEGORIES.FLASHING, 'Flashing', self.unifiedTarget.fileName || null);
+                    analytics.sendEvent(analytics.EVENT_CATEGORIES.FLASHING, analytics.EVENT_TYPES.FLASHING, self.unifiedTarget.fileName || null);
 
                     STM32.connect(port, baud, firmware, options);
                 } else {
@@ -720,7 +718,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                     GUI.log(i18n.getMessage('firmwareFlasherNoValidPort'));
                 }
             } else {
-                analytics.sendEvent(analytics.EVENT_CATEGORIES.FLASHING, 'Flashing', self.unifiedTarget.fileName || null);
+                analytics.sendEvent(analytics.EVENT_CATEGORIES.FLASHING, analytics.EVENT_TYPES.FLASHING, self.unifiedTarget.fileName || null);
 
                 STM32DFU.connect(usbDevices, firmware, options);
             }
@@ -947,7 +945,7 @@ TABS.firmware_flasher.initialize = function (callback) {
         exitDfuElement.click(function () {
             if (!$(this).hasClass('disabled')) {
                 if (!GUI.connect_lock) { // button disabled while flashing is in progress
-                    analytics.sendEvent(analytics.EVENT_CATEGORIES.FLASHING, 'ExitDfu', null);
+                    analytics.sendEvent(analytics.EVENT_CATEGORIES.FLASHING, analytics.EVENT_TYPES.EXIT_DFU, null);
                     try {
                         STM32DFU.connect(usbDevices, self.parsed_hex, { exitDfu: true });
                     } catch (e) {
@@ -1038,8 +1036,6 @@ TABS.firmware_flasher.initialize = function (callback) {
 
                                         return;
                                     }
-
-                                    analytics.sendEvent(analytics.EVENT_CATEGORIES.FLASHING, 'SaveFirmware', path);
                                 };
 
                                 writer.write(blob);

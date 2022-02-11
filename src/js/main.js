@@ -1,6 +1,6 @@
 'use strict';
 
-//window.googleAnalytics = analytics;
+window.googleAnalytics = analytics;
 window.analytics = null;
 
 $(document).ready(function () {
@@ -29,56 +29,29 @@ function appReady() {
         CONFIGURATOR.version = data.version;
         CONFIGURATOR.gitChangesetId = data.gitChangesetId;
 
-        i18n.init(function() {
-            startProcess();
-
-            checkSetupAnalytics(function (analyticsService) {
-                analyticsService.sendEvent(analyticsService.EVENT_CATEGORIES.APPLICATION, 'SelectedLanguage', i18n.selectedLanguage);
+        ConfigStorage.get(['userId'], function (result) {
+            setupAnalytics(result);
+            i18n.init(function() {
+                startProcess();
+                initializeSerialBackend();
             });
-
-            initializeSerialBackend();
         });
     });
 }
 
-function checkSetupAnalytics(callback) {
-    if (!analytics) {
-        setTimeout(function () {
-            ConfigStorage.get(['userId', 'analyticsOptOut', 'checkForConfiguratorUnstableVersions', ], function (result) {
-                if (!analytics) {
-                    setupAnalytics(result);
-                }
-
-                callback(analytics);
-            });
-        });
-    } else if (callback) {
-        callback(analytics);
-    }
-}
-
-function getBuildType() {
-    return GUI.Mode;
-}
-
 function setupAnalytics(result) {
-    let userId;
-    if (result.userId) {
-        userId = result.userId;
-    } else {
+    let userId = result.userId;
+
+    if (!userId) {
         const uid = new ShortUniqueId();
         userId = uid.randomUUID(13);
-
         ConfigStorage.set({ 'userId': userId });
     }
 
-    const optOut = !!result.analyticsOptOut;
-    const checkForDebugVersions = !!result.checkForConfiguratorUnstableVersions;
-
     const debugMode = typeof process === "object" && process.versions['nw-flavor'] === 'sdk';
 
-    window.analytics = new Analytics('UA-123456789-1', userId, 'Rotorflight Configurator', CONFIGURATOR.version, CONFIGURATOR.gitChangesetId, GUI.operating_system,
-        checkForDebugVersions, optOut, debugMode, getBuildType());
+    window.analytics = new Analytics('UA-227226350-1', userId, 'Rotorflight Configurator',
+        CONFIGURATOR.version, CONFIGURATOR.gitChangesetId, debugMode);
 
     function logException(exception) {
         analytics.sendException(exception.stack);
@@ -87,8 +60,6 @@ function setupAnalytics(result) {
     if (typeof process === "object") {
         process.on('uncaughtException', logException);
     }
-
-    analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, 'AppStart', { sessionControl: 'start' });
 
     $('.connect_b a.connect').removeClass('disabled');
     $('.firmware_b a.flash').removeClass('disabled');
@@ -154,7 +125,7 @@ function closeHandler() {
         this.hide();
     }
 
-    analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, 'AppClose', { sessionControl: 'end' });
+    analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, analytics.EVENT_TYPES.APP_CLOSE, { sessionControl: 'end' });
 
     closeSerial();
 
@@ -167,6 +138,9 @@ function closeHandler() {
 function startProcess() {
     // translate to user-selected language
     i18n.localizePage();
+
+    analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, analytics.EVENT_TYPES.APP_START, { sessionControl: 'start' });
+    analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, analytics.EVENT_TYPES.LANGUAGE, i18n.selectedLanguage);
 
     GUI.log(i18n.getMessage('infoVersions', {
         operatingSystem: GUI.operating_system,
@@ -278,9 +252,7 @@ function startProcess() {
                     // display loading screen
                     $('#cache .data-loading').clone().appendTo(content);
 
-                    checkSetupAnalytics(function (analyticsService) {
-                        analyticsService.sendAppView(tabName);
-                    });
+                    analytics.sendTabView(tabName);
 
                     // Highlight selected tab
                     $(self).parent().addClass('active');
@@ -414,9 +386,7 @@ function startProcess() {
 
         $(expertModeCheckbox).change(function () {
             const checked = $(this).is(':checked');
-            checkSetupAnalytics(function (analyticsService) {
-                analyticsService.setDimension(analyticsService.DIMENSIONS.CONFIGURATOR_EXPERT_MODE, checked ? 'On' : 'Off');
-            });
+            analytics.setDimension(analytics.DIMENSIONS.CONFIGURATOR_EXPERT_MODE, checked ? 'On' : 'Off');
 
             if (FC.FEATURE_CONFIG && FC.FEATURE_CONFIG.features !== 0) {
                 updateTabList(FC.FEATURE_CONFIG.features);
@@ -458,10 +428,7 @@ function startProcess() {
 
 function setDarkTheme(enabled) {
     DarkTheme.setConfig(enabled);
-
-    checkSetupAnalytics(function (analyticsService) {
-        analyticsService.sendEvent(analyticsService.EVENT_CATEGORIES.APPLICATION, 'DarkTheme', enabled);
-    });
+    analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, 'DarkTheme', enabled);
 }
 
 function checkForConfiguratorUpdates() {
