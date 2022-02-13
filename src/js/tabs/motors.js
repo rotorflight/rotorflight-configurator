@@ -210,7 +210,7 @@ TABS.motors.initialize = function (callback) {
 
             function meterBar(meter, label, ratio) {
 
-                const length = Math.max(Math.min(ratio*100, 100), 0);
+                const length = ratio.clamp(0,1) * 100;
                 const margin = 100 - length;
 
                 $('.meter-fill', meter).css({
@@ -228,8 +228,17 @@ TABS.motors.initialize = function (callback) {
 
             function updateInfo() {
 
-                const throttle = FC.MOTOR_DATA[motorIndex] / 10;
-                meterBar(thrBar, throttle + '%', Math.abs(throttle / 100));
+                const value = FC.MOTOR_DATA[motorIndex];
+                let throttle = 0;
+
+                if (value < 0)
+                    throttle = (value + 1000) / 10;
+                else if (value > 0)
+                    throttle = (value - 1000) / 10;
+
+                const thrStr = (value == 0) ? '' : throttle.toFixed(1) + '%';
+
+                meterBar(thrBar, thrStr, Math.abs(throttle / 100));
 
                 const rpm = FC.MOTOR_TELEMETRY_DATA.rpm[motorIndex];
                 if (rpm > rpmMax) {
