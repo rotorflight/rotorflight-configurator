@@ -80,6 +80,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
     if (!crcError) {
         if (!dataHandler.unsupported) switch (code) {
             case MSPCodes.MSP_STATUS:
+                FC.CONFIG.pidCycleTime = data.readU16();
+                FC.CONFIG.gyroCycleTime = data.readU16();
                 FC.CONFIG.activeSensors = data.readU16();
                 FC.CONFIG.mode = data.readU32();
                 FC.CONFIG.armingDisableCount = data.readU8();
@@ -91,8 +93,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.CONFIG.profile = data.readU8();
                 FC.CONFIG.numRateProfiles = data.readU8();
                 FC.CONFIG.rateProfile = data.readU8();
-                FC.CONFIG.pidCycleTime = data.readU16();
-                FC.CONFIG.gyroCycleTime = data.readU16();
                 FC.CONFIG.sysLoad = data.readU8();
                 FC.CONFIG.cpuLoad = data.readU8();
                 sensor_status(FC.CONFIG.activeSensors);
@@ -375,9 +375,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_MOTOR_CONFIG:
-                FC.MOTOR_CONFIG.mincommand = data.readU16();
                 FC.MOTOR_CONFIG.minthrottle = data.readU16();
                 FC.MOTOR_CONFIG.maxthrottle = data.readU16();
+                FC.MOTOR_CONFIG.mincommand = data.readU16();
+                data.readU8(); // MAX_SUPPORTED_MOTORS
                 FC.MOTOR_CONFIG.motor_pwm_protocol = data.readU8();
                 FC.MOTOR_CONFIG.motor_pwm_rate = data.readU16();
                 FC.MOTOR_CONFIG.use_pwm_inversion = (data.readU8() != 0);
@@ -1551,9 +1552,10 @@ MspHelper.prototype.crunch = function(code) {
             break;
 
         case MSPCodes.MSP_SET_MOTOR_CONFIG:
-            buffer.push16(FC.MOTOR_CONFIG.mincommand)
-                .push16(FC.MOTOR_CONFIG.minthrottle)
+            buffer.push16(FC.MOTOR_CONFIG.minthrottle)
                 .push16(FC.MOTOR_CONFIG.maxthrottle)
+                .push16(FC.MOTOR_CONFIG.mincommand)
+                .push8(4) // MAX_SUPPORTED_MOTORS
                 .push8(FC.MOTOR_CONFIG.motor_pwm_protocol)
                 .push16(FC.MOTOR_CONFIG.motor_pwm_rate)
                 .push8(FC.MOTOR_CONFIG.use_pwm_inversion ? 1 : 0)
