@@ -1,0 +1,35 @@
+#!/bin/bash
+
+LOCALES='
+ca
+de
+es
+eu
+fr
+gl
+hr
+hu
+id
+it
+ja
+ko
+lv
+nl
+pl
+pt
+pt_BR
+ru
+sv
+zh_CN
+zh_TW
+'
+
+ARGS='locales/en/original.json locales/en/messages.json'
+
+for L in ${LOCALES}
+do
+    ARGS="${ARGS} locales/$L/messages.json"
+done
+
+./tools/locale-cleanup ${ARGS}
+
