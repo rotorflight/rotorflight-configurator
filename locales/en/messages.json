@@ -2548,6 +2548,9 @@
     "mixerMainRotorDirection": {
         "message": "Main rotor direction"
     },
+    "mixerMainRotorDirectionHelp": {
+        "message": "Looking from the top of the helicopter, what direction is the main rotor turning? For the majority of helicopters this is clockwise"
+    },
     "mixerClockwise": {
         "message": "Clockwise"
     },
@@ -2556,6 +2559,9 @@
     },
     "mixerSwashType": {
         "message": "Swashplate type"
+    },
+    "mixerSwashTypeHelp": {
+        "message": "Select the swashplate type for your helicopter.<br><strong>Angle:</strong> This is the angle between the elevator and each of the aileron servos. The options are 120&deg, 135&deg and 140&deg. This is dependant on the helicopters design.<br><strong>Elevator:</strong> Some helicopters the elevator servo (inline with tail and nose) is at the front of the heli, while others are at the rear. Choose the one applicable to your helicopter <br><strong>Custom mixing:</strong> This option can only be configured through the CLI. "
     },
     "mixerSwashType0": {
         "message": "Custom Mixing"
@@ -2596,6 +2602,9 @@
     "mixerTailRotorMode": {
         "message": "Tail Rotor Type"
     },
+    "mixerTailRotorModeHelp": {
+        "message": "<strong>Variable pitch:</strong> This is a variable pitch tail controlled by a servo (Servo#4) <br><strong>Motorised:</strong> The tail has a separate motor (M2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode."
+    },
     "mixerTailVariablePitch": {
         "message": "Variable pitch"
     },
@@ -2607,6 +2616,9 @@
     },
     "mixerTailMotorIdle": {
         "message": "Motor idle throttle [%]"
+    },
+    "mixerTailMotorIdleHelp": {
+        "message": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop"
     },
     "mixerInputChannels": {
         "message": "Mixer Control Inputs"
@@ -4058,13 +4070,13 @@
         "message": "Rate normalization mode for cyclic"
     },
     "profilesCyclicNormalizationHelp": {
-        "message": "More control action is needed at lower headspeeds to achieve the same cyclic rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> No headspeed normalization. <br><strong>Linear:</strong> Cyclic is normalized based on headspeed. <br><strong>Natural:</strong> Cyclic is normalized based on headspeed squared"
+        "message": "More control action is needed at lower headspeeds to achieve the same Cyclic rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> Rotorflight will attempt to meet the requested Roll and Pitch rates as the headspeed varies. <br><strong>Linear:</strong> Small changes in Cyclic are normalized in feel similar to Absolute, but Linear will let the response drop over larger headspeed changes. <br><strong>Natural:</strong> Rotorflight will emulate the responsiveness of a flybared heli on Roll and Pitch as headspeed changes"
     },
     "profilesCollectiveNormalization": {
         "message": "Rate normalization mode for collective"
     },
     "profilesCollectiveNormalizationHelp": {
-        "message": "More control action is needed at lower headspeeds to achieve the same collective rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> No headspeed normalization. <br><strong>Linear:</strong> Collective is normalized based on headspeed. <br><strong>Natural:</strong> Collective is normalized based on headspeed squared"
+        "message": "More control action is needed at lower headspeeds to achieve the same Collective rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> Rotorflight will attempt to meet the requested Collective rate as the headspeed varies. <br><strong>Linear:</strong> Small changes in Collective are normalized in feel similar to Absolute, but Linear will let the response drop over larger headspeed changes. <br><strong>Natural:</strong> Rotorflight will emulate the responsiveness of a flybared heli on Collective as headspeed changes."
     },
     "profilesRateNormalizationNatural": {
         "message": "Natural"
