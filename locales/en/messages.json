@@ -1226,6 +1226,9 @@
     "configurationBeeper": {
         "message": "Buzzer Configuration"
     },
+    "configurationBeeperHelp": {
+        "message": "Buzzer Configuration"
+    },
     "beeperGYRO_CALIBRATED": {
         "message": "Beeps when gyro has been calibrated"
     },
@@ -1918,6 +1921,9 @@
     "servoConfiguration": {
         "message": "Servo Configuration"
     },
+    "servoConfigurationHelp": {
+        "message": "Servo Configuration"
+    },
     "servoNumber": {
         "message": "Servo"
     },
@@ -1949,6 +1955,9 @@
         "message": "<strong>Note.</strong> Servo Override forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "servoOverride": {
+        "message": "Servo Override"
+    },
+    "servoOverrideHelp": {
         "message": "Servo Override"
     },
     "servoOverrideEnable": {
@@ -2020,6 +2029,9 @@
     "mixerSwashRing": {
         "message": "Swashring"
     },
+    "mixerSwashRingHelp": {
+        "message": "Swashring"
+    },
     "mixerTailRotorSettings": {
         "message": "Tail Rotor Settings"
     },
@@ -2047,10 +2059,16 @@
     "mixerInputChannels": {
         "message": "Mixer Control Inputs"
     },
+    "mixerInputChannelsHelp": {
+        "message": "Mixer Inputs"
+    },
     "mixerOverrideNote": {
         "message": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "mixerOverride": {
+        "message": "Mixer Override"
+    },
+    "mixerOverrideHelp": {
         "message": "Mixer Override"
     },
     "mixerOverrideEnable": {
@@ -2371,6 +2389,9 @@
     "motorOverride": {
         "message": "Motor Override"
     },
+    "motorOverrideHelp": {
+        "message": "Motor Override"
+    },
     "motorOverrideEnable": {
         "message": "Enable"
     },
@@ -2453,6 +2474,9 @@
         "message": "Stop motors"
     },
     "govFeatures": {
+        "message": "Governor Features"
+    },
+    "govFeaturesHelp": {
         "message": "Governor Features"
     },
     "govProfile": {
@@ -3672,6 +3696,9 @@
     "gyroRpmFilterSettings": {
         "message": "Gyro RPM Notch Filter Settings"
     },
+    "gyroRpmFilterSettingsHelp": {
+        "message": "Gyro RPM Notch Filter Settings"
+    },
     "gyroRpmFilterSetup": {
         "message": "Setup Type"
     },
@@ -3702,7 +3729,13 @@
     "gyroRpmFilterMainRotorMinRPM": {
         "message": "Main Rotor Minimum Filtered RPM"
     },
+    "gyroRpmFilterMainRotorMinRPMHelp": {
+        "message": "Main Rotor Minimum Filtered RPM"
+    },
     "gyroRpmFilterTailRotorMinRPM": {
+        "message": "Tail Rotor Minimum Filtered RPM"
+    },
+    "gyroRpmFilterTailRotorMinRPMHelp": {
         "message": "Tail Rotor Minimum Filtered RPM"
     },
     "gyroRpmFilterBanks": {
