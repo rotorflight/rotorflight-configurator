@@ -134,12 +134,6 @@
     background-repeat: no-repeat;
 }
 
-.tab-failsafe .spacer_box .helpicon {
-    margin-top: 3px;
-    margin-right: 0;
-    
-}
-
 .tab-failsafe .checkbox:last-child {
     border-bottom: none;
 }

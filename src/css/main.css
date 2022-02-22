@@ -86,11 +86,11 @@ a.disabled {
 /* Help-Icon  */
 .helpicon {
     float: right;
-    margin-top: 7px;
-    margin-right: 7px;
-    display: block;
     height: 14px;
     width: 14px;
+    margin-top: 3px;
+    margin-right: 5px;
+    display: block;
     opacity: 0.2;
     background-image: url(../images/icons/cf_icon_info_grey.svg);
     background-size: contain;
@@ -100,8 +100,13 @@ a.disabled {
 
 .helpicon:hover {
     opacity: 0.9;
-    background-image: url(../images/icons/cf_icon_info_green.svg);
+    background-image: url(../images/icons/cf_icon_info_orange.svg);
     transition: none;
+}
+
+.gui_box_titlebar .helpicon {
+    margin-top: 7px;
+    margin-right: 7px;
 }
 
 .cf_doc_version_bt a {
@@ -2361,15 +2366,6 @@ button.active {
 input {
     font-size: 11px !important;
 }
-
-.helpicon {
-    float: right;
-    margin-top: 5px;
-    margin-right: 7px;
-    height: 14px;
-    width: 14px;
-    transition: none;
-    }
 
 .gps_false {
     padding: 0 3px 0 3px;

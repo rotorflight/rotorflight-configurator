@@ -71,11 +71,6 @@
     border-bottom: 0;
 }
 
-.tab-setup .gui_box_titlebar .helpicon {
-    margin-top: 5px;
-    margin-right: 5px;
-}
-
 
 @media all and (max-width: 575px) {
     .tab-setup .cell_setup {

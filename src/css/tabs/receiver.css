@@ -223,7 +223,9 @@
 
 .tab-receiver .input-helpicon-flex .helpicon {
     min-width: 14px;
+    margin-top: 7px;
     margin-left: 4px;
+    margin-right: 7px;
 }
 
 .tab-receiver .tunings .sticks th,
@@ -338,6 +340,7 @@
 
 .tab-receiver .rcSmoothing table .helpicon {
     margin-top: 0;
+    margin-right: 7px;
 }
 
 .tab-receiver .rcSmoothing td:first-child {

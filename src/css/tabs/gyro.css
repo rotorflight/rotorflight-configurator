@@ -43,7 +43,7 @@
 }
 
 .tab-gyro table td {
-    padding: 5px 5px 2px 5px;
+    padding: 5px 2px 2px 5px;
 }
 
 .tab-gyro table tr td {
@@ -84,11 +84,6 @@
     text-align-last: right;
     border-radius: 3px;
     border: 1px solid var(--subtleAccent);
-}
-
-.tab-gyro .gui_box_titlebar .helpicon {
-    margin-top: 5px;
-    margin-right: 5px;
 }
 
 .tab-gyro .subtitle {
