@@ -1160,6 +1160,9 @@
     "configurationBoardAlignment": {
         "message": "Board and Sensor Alignment"
     },
+    "configurationBoardAlignmentHelp": {
+        "message": "Arbitrary board rotation in degrees, to allow mounting it sideways / upside down / rotated etc. When running external sensors, use the sensor alignments (Gyro, Acc, Mag) to define sensor position independent from board orientation. "
+    },
     "configurationBoardAlignmentRoll": {
         "message": "Roll Degrees"
     },
@@ -1203,6 +1206,9 @@
         "message": "Default"
     },
     "configurationAccelTrims": {
+        "message": "Accelerometer Trim"
+    },
+    "configurationAccelTrimsHelp": {
         "message": "Accelerometer Trim"
     },
     "configurationAccelTrimRoll": {
@@ -1301,6 +1307,9 @@
     "configurationSystem": {
         "message": "System configuration"
     },
+    "configurationSystemHelp": {
+        "message": "<strong>Note:</strong> Make sure your FC is able to operate at the selected loop speed! Check CPU Load and Cycletime stability."
+    },
     "configurationLoopTime": {
         "message": "Flight Controller Loop Time"
     },
@@ -1315,9 +1324,6 @@
     "configurationKHzUnitLabel": {
         "message": "{{value}} kHz",
         "description": "Value for some options that show the speed of gyro, pid, etc. in kHz"
-    },
-    "configurationLoopTimeHelp": {
-        "message": "<strong>Note:</strong> Make sure your FC is able to operate at these speeds! Check CPU and cycletime stability. Changing this may require PID re-tuning. TIP: Disable Accelerometer and other sensors to gain more performance."
     },
     "configurationGPS": {
         "message": "Settings"
@@ -3798,9 +3804,6 @@
     },
     "dialogGyroResetRevert": {
         "message": "Revert"
-    },
-    "configHelp2": {
-        "message": "Arbitrary board rotation in degrees, to allow mounting it sideways / upside down / rotated etc. When running external sensors, use the sensor alignments (Gyro, Acc, Mag) to define sensor position independent from board orientation. "
     },
     "failsafeFeaturesHelpNew": {
         "message": "Failsafe has two stages. <strong>Stage 1</strong> is entered when a flightchannel has an invalid pulse length, the receiver reports failsafe mode or there is no signal from the receiver at all, the channel fallback settings are applied to <span class=\"message-negative\">all channels</span> and a short amount of time is provided to allow for recovery. <strong>Stage 2</strong> is entered when the error condition takes longer than the configured guard time while the craft is <span class=\"message-negative\">armed</span>, all channels will remain at the applied channel fallback setting unless overruled by the chosen procedure. <br /><strong>Note:</strong> Prior to entering stage 1, channel fallback settings are also applied to individual AUX channels that have invalid pulses."
