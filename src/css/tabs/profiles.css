@@ -165,10 +165,6 @@
     width: 100%;
 }
 
-.tab-profiles .settings_table .helpicon {
-    margin-top: 3px
-}
-
 .tab-profiles .settings_table .suboption {
     margin-left: 2%;
     display: flex;
@@ -213,15 +209,6 @@
     background-color: #8080FF;
 }
 
-
-.tab-profiles .helpicon {
-    margin-top: 1px;
-}
-
-.tab-profiles .gui_box_titlebar .helpicon {
-    margin-top: 5px;
-    margin-right: 5px;
-}
 
 .tab-profiles .spacer_left {
     padding-left: 0;
@@ -281,6 +268,7 @@
 }
 
 .tab-profiles .pid_titlebar .name-helpicon-flex .helpicon {
+    margin-top: 1px;
     margin-right: 0;
 }
 

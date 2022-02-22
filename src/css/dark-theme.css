@@ -136,6 +136,10 @@ button {
     background-image: url(../images/icons/cf_icon_info_grey.svg);
 }
 
+.subtitle .helpicon {
+    background-image: url(../images/icons/cf_icon_info_grey.svg);
+}
+
 .cf_table td {
     border-style: solid;
 }
