@@ -84,17 +84,23 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.CONFIG.gyroCycleTime = data.readU16();
                 FC.CONFIG.activeSensors = data.readU16();
                 FC.CONFIG.mode = data.readU32();
+                data.readU8(); // compat: profile number
+                FC.CONFIG.sysLoad = data.readU16();
+                FC.CONFIG.cpuLoad = data.readU16();
+                const flagCount = data.readU8(); // compat: extra flight mode flags
+                for (let i = 0; i < flagCount; i++) {
+                    data.readU8();
+                }
                 FC.CONFIG.armingDisableCount = data.readU8();
                 FC.CONFIG.armingDisableFlags = data.readU32();
                 FC.CONFIG.extraFlags = data.readU8();
+                FC.CONFIG.configurationState = data.readU8();
+                FC.CONFIG.profile = data.readU8();
+                FC.CONFIG.numProfiles = data.readU8();
+                FC.CONFIG.rateProfile = data.readU8();
+                FC.CONFIG.numRateProfiles = data.readU8();
                 FC.CONFIG.motorCount = data.readU8();
                 FC.CONFIG.servoCount = data.readU8();
-                FC.CONFIG.numProfiles = data.readU8();
-                FC.CONFIG.profile = data.readU8();
-                FC.CONFIG.numRateProfiles = data.readU8();
-                FC.CONFIG.rateProfile = data.readU8();
-                FC.CONFIG.sysLoad = data.readU8();
-                FC.CONFIG.cpuLoad = data.readU8();
                 sensor_status(FC.CONFIG.activeSensors);
                 break;
 
@@ -378,12 +384,13 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MOTOR_CONFIG.minthrottle = data.readU16();
                 FC.MOTOR_CONFIG.maxthrottle = data.readU16();
                 FC.MOTOR_CONFIG.mincommand = data.readU16();
-                data.readU8(); // MAX_SUPPORTED_MOTORS
+                data.readU8(); // compat: motor count
+                data.readU8(); // compat: motor poles
+                FC.MOTOR_CONFIG.use_dshot_telemetry = (data.readU8() != 0);
                 FC.MOTOR_CONFIG.motor_pwm_protocol = data.readU8();
                 FC.MOTOR_CONFIG.motor_pwm_rate = data.readU16();
                 FC.MOTOR_CONFIG.use_pwm_inversion = (data.readU8() != 0);
                 FC.MOTOR_CONFIG.use_unsynced_pwm = (data.readU8() != 0);
-                FC.MOTOR_CONFIG.use_dshot_telemetry = (data.readU8() != 0);
                 for (let i = 0; i < 4; i++)
                     FC.MOTOR_CONFIG.motor_poles[i] = data.readU8();
                 for (let i = 0; i < 4; i++)
@@ -879,7 +886,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_ADVANCED_CONFIG:
+                data.readU8(); // compat: gyro denom
                 FC.ADVANCED_CONFIG.pid_process_denom = data.readU8();
+                data.readU32(); // compat: deprecated
+                data.readU32();
                 FC.SENSOR_ALIGNMENT.gyro_to_use = data.readU8();
                 FC.ADVANCED_CONFIG.gyroHighFsr = data.readU8();
                 FC.ADVANCED_CONFIG.gyroMovementCalibThreshold = data.readU8();
@@ -1555,12 +1565,12 @@ MspHelper.prototype.crunch = function(code) {
             buffer.push16(FC.MOTOR_CONFIG.minthrottle)
                 .push16(FC.MOTOR_CONFIG.maxthrottle)
                 .push16(FC.MOTOR_CONFIG.mincommand)
-                .push8(4) // MAX_SUPPORTED_MOTORS
+                .push8(FC.MOTOR_CONFIG.motor_poles[0]) // compat: motor poles
+                .push8(FC.MOTOR_CONFIG.use_dshot_telemetry ? 1 : 0)
                 .push8(FC.MOTOR_CONFIG.motor_pwm_protocol)
                 .push16(FC.MOTOR_CONFIG.motor_pwm_rate)
                 .push8(FC.MOTOR_CONFIG.use_pwm_inversion ? 1 : 0)
-                .push8(FC.MOTOR_CONFIG.use_unsynced_pwm ? 1 : 0)
-                .push8(FC.MOTOR_CONFIG.use_dshot_telemetry ? 1 : 0);
+                .push8(FC.MOTOR_CONFIG.use_unsynced_pwm ? 1 : 0);
             for (let i = 0; i < 4; i++)
                 buffer.push8(FC.MOTOR_CONFIG.motor_poles[i]);
             for (let i = 0; i < 4; i++)
@@ -1709,7 +1719,10 @@ MspHelper.prototype.crunch = function(code) {
             break;
 
     case MSPCodes.MSP_SET_ADVANCED_CONFIG:
-            buffer.push8(FC.ADVANCED_CONFIG.pid_process_denom)
+            buffer.push8(1) // compat: gyro denom
+                .push8(FC.ADVANCED_CONFIG.pid_process_denom)
+                .push32(0) // compat: deprecated
+                .push32(0)
                 .push8(FC.SENSOR_ALIGNMENT.gyro_to_use)
                 .push8(FC.ADVANCED_CONFIG.gyroHighFsr)
                 .push8(FC.ADVANCED_CONFIG.gyroMovementCalibThreshold)
