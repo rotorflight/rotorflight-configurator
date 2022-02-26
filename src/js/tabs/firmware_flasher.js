@@ -10,7 +10,7 @@ TABS.firmware_flasher = {
     parsed_hex: undefined, // parsed raw hex in array format
     unifiedTarget: {}, // the Unified Target configuration to be spliced into the configuration
     isConfigLocal: false, // Set to true if the user loads one locally
-    compatibleFrom: '4.2.12-20220215',
+    compatibleFrom: '4.2.12-20220301',
 };
 
 TABS.firmware_flasher.initialize = function (callback) {
