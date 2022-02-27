@@ -2,6 +2,7 @@
 
 TABS.configuration = {
     isDirty: false,
+    yaw_fix: 0.0,
     analyticsChanges: {},
 };
 
@@ -24,6 +25,7 @@ TABS.configuration.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_NAME))
             .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_SENSOR_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_SENSOR_ALIGNMENT))
             .then(() => MSP.promise(MSPCodes.MSP_BOARD_ALIGNMENT_CONFIG))
@@ -61,6 +63,9 @@ TABS.configuration.initialize = function (callback) {
 
         // translate to user-selected language
         i18n.localizePage();
+
+        // initialize 3D Model
+        self.initModel();
 
         self.isDirty = false;
 
@@ -274,6 +279,17 @@ TABS.configuration.initialize = function (callback) {
         $('input[name="roll"]').val(FC.CONFIG.accelerometerTrims[1]);
         $('input[name="pitch"]').val(FC.CONFIG.accelerometerTrims[0]);
 
+        // display current yaw fix value (important during tab re-initialization)
+        $('div#interactive_block > a.reset').text(i18n.getMessage('statusButtonResetZaxisValue', [self.yaw_fix]));
+
+        // reset yaw button hook
+        $('div#interactive_block > a.reset').click(function () {
+            self.yaw_fix = FC.SENSOR_DATA.kinematics[2] * - 1.0;
+            $(this).text(i18n.getMessage('statusButtonResetZaxisValue', [self.yaw_fix]));
+            console.log('YAW reset to 0 deg, fix: ' + self.yaw_fix + ' deg');
+        });
+
+
         function updateConfig(callback) {
 
             // gather data that doesn't have automatic change event bound
@@ -352,13 +368,37 @@ TABS.configuration.initialize = function (callback) {
             MSP.send_message(MSPCodes.MSP_STATUS);
         }, 250, true);
 
+        GUI.interval_add('attitude_pull', function () {
+            MSP.send_message(MSPCodes.MSP_ATTITUDE, false, false, function () {
+                self.renderModel();
+            });
+        }, 50, true);
+
         GUI.content_ready(callback);
     }
 };
 
+TABS.configuration.initModel = function () {
+    this.model = new Model($('.model-and-info #canvas_wrapper'), $('.model-and-info #canvas'));
+
+    $(window).on('resize', $.proxy(this.model.resize, this.model));
+};
+
+TABS.configuration.renderModel = function () {
+    let x = (FC.SENSOR_DATA.kinematics[1] * -1.0) * 0.017453292519943295,
+        y = ((FC.SENSOR_DATA.kinematics[2] * -1.0) - this.yaw_fix) * 0.017453292519943295,
+        z = (FC.SENSOR_DATA.kinematics[0] * -1.0) * 0.017453292519943295;
+
+    this.model.rotateTo(x, y, z);
+};
+
 TABS.configuration.cleanup = function (callback) {
+    if (this.model) {
+        $(window).off('resize', $.proxy(this.model.resize, this.model));
+        this.model.dispose();
+    }
+
     this.isDirty = false;
 
     if (callback) callback();
 };
-

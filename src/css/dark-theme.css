@@ -294,6 +294,20 @@ button {
     color: white;
 }
 
+.tab-configuration #interactive_block {
+    background-color: #393b3a;
+}
+
+.tab-configuration #interactive_block a.reset {
+    color: white;
+    background-color: #575757;
+}
+
+.tab-configuration #interactive_block a.reset:hover {
+    background-color: #393b3a;
+}
+
+
 
 /* FAILSAFE TAB */
 
