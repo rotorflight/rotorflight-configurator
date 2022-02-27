@@ -27,38 +27,6 @@
                         </div>
                     </div> <!-- END PERSONALIZATION-->
 
-                    <!-- OTHER FEATURES -->
-                    <div class="featuresOther">
-                        <div class="gui_box grey">
-                            <div class="gui_box_titlebar">
-                                <div class="spacer_box_title" i18n="configurationFeatures"></div>
-                                <div class="helpicon cf_tip" i18n_title="configurationFeaturesHelp"></div>
-                            </div>
-                            <div class="spacer_box">
-                                <!--div class="note">
-                                    <p i18n="configurationOtherFeaturesHelp"></p>
-                                </div-->
-                                <table class="featuresMultiple">
-                                    <thead>
-                                        <tr>
-                                            <th i18n="configurationFeatureEnabled"></th>
-                                            <th i18n="configurationFeatureDescription"></th>
-                                            <th i18n="configurationFeatureName"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="features other" id="noline">
-                                        <!-- table generated here -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END OTHER FUTURES-->
-
-                </div> <!-- END grid-col col6 -->
-
-                <div class="grid-col col6">
-
                     <!-- SYSTEM CONFIGURATION -->
                     <div class="systemconfig">
                         <div class="gui_box grey">
@@ -115,6 +83,38 @@
                         </div>
                     </div>
                     <!-- END SYSTEM CONFIGURATION-->
+
+                    <!-- OTHER FEATURES -->
+                    <div class="featuresOther">
+                        <div class="gui_box grey">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="configurationFeatures"></div>
+                                <div class="helpicon cf_tip" i18n_title="configurationFeaturesHelp"></div>
+                            </div>
+                            <div class="spacer_box">
+                                <!--div class="note">
+                                    <p i18n="configurationOtherFeaturesHelp"></p>
+                                </div-->
+                                <table class="featuresMultiple">
+                                    <thead>
+                                        <tr>
+                                            <th i18n="configurationFeatureEnabled"></th>
+                                            <th i18n="configurationFeatureDescription"></th>
+                                            <th i18n="configurationFeatureName"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="features other" id="noline">
+                                        <!-- table generated here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END OTHER FUTURES-->
+
+                </div> <!-- END grid-col col6 -->
+
+                <div class="grid-col col6">
 
                     <!-- BOARD ORIENTATION -->
                     <div class="board acc">
@@ -233,7 +233,21 @@
                                 </label>
                             </div>
                         </div>
-                    </div> <!-- END ACCELEROMETER TRIM -->
+                    </div>
+                    <!-- END ACCELEROMETER TRIM -->
+
+                    <!-- ORIENTATION PREVIEW -->
+                    <div class="gui_box grey topspacer">
+                        <div class="model-and-info">
+                            <div id="interactive_block">
+                                <div id="canvas_wrapper" class="background_paper">
+                                    <canvas id="canvas"></canvas>
+                                </div>
+                                <a class="reset sm-min" href="#" i18n="statusButtonResetZaxis"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END ORIENTATION PREVIEW -->
 
                 </div>
             </div>
