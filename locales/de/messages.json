@@ -833,9 +833,9 @@
         "english": "Support Sources"
     },
     "defaultSupportSubline2": {
-        "message": "Rotorflight Information",
+        "message": "Betaflight Informationen",
         "english": "Betaflight Information",
-        "status": "Modified entry.  Whaaaat Betaflight ;-) "
+        "status": "Modified entry.   "
     },
     "defaultSupport": {
         "message": "Für Hilfe durchsuche bitte die Foren und das Wiki zuerst oder wende dich an deinen Händler.<br /><br /> ",
@@ -852,17 +852,17 @@
         "status": "Modified entry. Its ok for German"
     },
     "defaultSupport3": {
-        "message": "<a href=\"https://discord.com/invite/FyfMF4RwSA\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Discord Kanal</a>",
+        "message": "<a href=\"https://discord.com/invite/FyfMF4RwSA\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight-Diskussion auf Discord</a>",
         "english": "<a href=\"https://discord.com/invite/FyfMF4RwSA\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight discussion on Discord</a>",
         "status": "Modified entry. "
     },
     "defaultSupport4": {
-        "message": "<a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Wiki</a>",
+        "message": "<a href=\"https://betaflight.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Website</a>",
         "english": "<a href=\"https://betaflight.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Website</a>",
         "status": "Modified entry. "
     },
     "defaultSupport5": {
-        "message": "<a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Wiki</a>",
+        "message": "<a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Wiki</a>",
         "english": "<a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Wiki</a>",
         "status": "Modified entry. "
     },
@@ -1172,7 +1172,7 @@
         "status": "New entry. "
     },
     "initialSetupButtonRebootText": {
-        "message": "Neustarten und System initialisieren.",
+        "message": "Neustart und Reinitialisierung des Systems.",
         "english": "Reboot and reinitialize the system.",
         "status": "New entry. "
     },
@@ -1209,7 +1209,7 @@
         "english": "Settings restored to <strong>default</strong>"
     },
     "initialSetupDangerText": {
-        "message": "<strong>Achtung:</strong> Um Verletzungen zu vermeiden <strong>alle Rotor- und bei Motorheck auch Heckrotorblätter entfernen</strong> bevor Arming durchgeführt wird.<strong class=\"message-negative\"><strong class=\"message-negative\"><br/>NIEMALS MIT ANGESCHLOSSENEM CONFIGURATOR FLIEGEN!</strong>",
+        "message": "<strong>Achtung:</strong> Um Verletzungen zu vermeiden <strong>ALLE Rotorblätter entfernen</strong> bevor das System scharfgeschaltet (Arming) wird.<strong class=\"message-negative\"><strong class=\"message-negative\"><br/>FLIEGEN SIE IHR FLUGZEUG NIEMALS MIT ANGESCHLOSSENEM KONFIGURATOR!</strong>",
         "english": "<strong>Note:</strong> In order to prevent injury <strong>remove ALL rotor blades</strong> before enabling any arming features.<strong class=\"message-negative\"><strong class=\"message-negative\"><br/>NEVER FLY YOUR CRAFT WITH THE CONFIGURATOR CONNECTED!</strong>",
         "status": "New entry. "
     },
@@ -1224,17 +1224,17 @@
         "status": "New entry. "
     },
     "initialSetupEnableArmingText": {
-        "message": "Arming des Helikopters trotz angeschlossenem Configurator erlauben. Arming erlaubt das Anlaufen der Motoren.",
+        "message": "Ermöglicht das Scharfschalten (Arming) des Flugzeugs mit dem Sender, während der Konfigurator angeschlossen ist. Durch das Scharfschalten können die Motoren hochgefahren werden..",
         "english": "Enable arming the craft with the transmitter while the Configurator is connected. Arming your craft will allow the motors to spool up.",
         "status": "New entry. "
     },
     "initialSetupEnableMotorOverride": {
-        "message": "<strong>Motorsteuerung überschreiben</strong>",
+        "message": "<strong>Motorübersteuerung aktivieren</strong>",
         "english": "<strong>Enable Motor Override</strong>",
         "status": "New entry. "
     },
     "initialSetupEnableMotorOverrideText": {
-        "message": "Aktiviere die Motorsteuerung im Motor Tab. Dies kann zum Anlaufen der Motoren führen.",
+        "message": "Ermöglicht die Motorübersteuerung im Motor Tab. Bei Aktivieren der Motorübersteuerung KÖNNEN die Motoren hochfahren.",
         "english": "Enable the motor override feature in the Motors tab. Setting motor override WILL make the motors to spool up.",
         "status": "New entry. "
     },
