@@ -4069,17 +4069,17 @@
     },
     "firmwareFlasherOptionLabelBuildTypeRelease": {
         "message": "Veröffentlichungen",
-        "english": "Releases"
+        "english": "Releases",
         "status": "übersetzt HM"
     },
     "firmwareFlasherOptionLabelBuildTypePreRelease": {
         "message": "Veröffentlichungen und Vorabveröffentlichungen",
-        "english": "Releases and Pre-releases"
+        "english": "Releases and Pre-releases",
         "status": "übersetzt HM"
     },
     "firmwareFlasherOptionLabelBuildTypeDevelopment": {
         "message": "Alle Veröffentlichungen und Zwischenstände",
-        "english": "All Releases and Snapshots"
+        "english": "All Releases and Snapshots",
         "status": "übersetzt HM"
     },
     "firmwareFlasherOptionLabelSelectFirmware": {
@@ -5009,7 +5009,7 @@
     },
     "rateSetupMaxVel": {
         "message": "Max. Beschleunigung [Grad/s]",
-        "english": "Max Vel [deg/s]",
+        "english": "Max Vel [deg/s]"
 	},
     "rateSetupRatesCurve": {
         "message": "Ratenvorschau Steuerkurve",
