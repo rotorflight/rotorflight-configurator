@@ -23,10 +23,8 @@
 }
 
 .tab-ports table td {
-    border-bottom: 1px solid var(--subtleAccent);
     padding: 3px 3px 3px 5px;
-    border-left: 1px solid var(--subtleAccent);
-    border-right: 1px solid var(--subtleAccent);
+    border: 1px solid var(--superSubtleAccent);
 }
 
 .tab-ports table tr:nth-child(even) {
@@ -143,7 +141,8 @@
             rgba(255, 255, 255, .2) 80%, rgba(255, 255, 255, .2) 90%, transparent 90%, transparent 100%,
             rgba(255, 255, 255, .2) 100%, transparent);
     }
-    .tab-ports .ports select[name=function-peripherals], .tab-ports .ports select[name=function-telemetry],
+    .tab-ports .ports select[name=function-peripherals],
+    .tab-ports .ports select[name=function-telemetry],
     .tab-ports .ports select[name=function-sensors] {
         border-bottom: 1px solid var(--subtleAccent);
     }

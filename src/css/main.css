@@ -197,7 +197,6 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 
-
 /** Background **/
 #background {
     background: rgba(0, 0, 0, 0.5);
@@ -209,6 +208,7 @@ input[type="number"]::-webkit-inner-spin-button {
     bottom: 0;
     display: none;
 }
+
 #side_menu_swipe {
     display: none;
     position: fixed;
@@ -223,7 +223,6 @@ input[type="number"]::-webkit-inner-spin-button {
         display: block;
     }
 }
-
 
 
 /** Header **/
@@ -1708,7 +1707,7 @@ dialog .dialog_toolbar .btn a.disabled {
     width: 100%;
     height: 30px;
     background-color: #EFEFEF;
-    box-shadow: rgba(0, 0, 0, 0.10) 0 -3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.10) 0 -1px 8px;
     padding: 10px 0;
     overflow: hidden;
     border-top: 1px solid var(--subtleAccent);
@@ -1858,6 +1857,10 @@ dialog .dialog_toolbar .btn a.disabled {
 .half {
     float: left;
     width: 50%;
+}
+
+.third {
+    width: 33%;
 }
 
 .third_left {
@@ -2185,10 +2188,10 @@ dialog .dialog_toolbar .btn a.disabled {
 /* Table styling */
 .cf_table {
     margin-bottom: 5px;
-    float: left;
     margin-top: -5px;
     font-size: 11px;
     width: 100%;
+    float: left;
 }
 
 .cf_table td {
@@ -2198,11 +2201,11 @@ dialog .dialog_toolbar .btn a.disabled {
 }
 
 .cf_table tr:not(:last-child) td {
-    border-bottom: dotted 1px var(--subtleAccent);
+    border-bottom: dotted 1px var(--superSubtleAccent);
 }
 
-.third {
-    width: 33%;
+.cf_table td:last-child {
+    text-align: right;
 }
 
 .noboarder td {
@@ -2215,10 +2218,6 @@ dialog .dialog_toolbar .btn a.disabled {
 
 .border-collapse {
     border-collapse: collapse;
-}
-
-.cf_table td:last-child {
-    text-align: right;
 }
 
 .gps_false {
@@ -2336,11 +2335,6 @@ button.active {
     margin-top: -35px;
     font-size: 9px;
     line-height: 15px;
-}
-
-.cf_table td {
-    padding-top: 2px;
-    padding-bottom: 2px;
 }
 
 .default_btn {

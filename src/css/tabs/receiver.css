@@ -178,7 +178,7 @@
 .tab-receiver .tunings table th {
     background: var(--quietHeader);
     color: var(--quietText);
-    border-right: 1px solid var(--subtleAccent);
+    border-right: 1px dotted var(--superSubtleAccent);
     font-weight: normal;
 }
 
@@ -192,7 +192,7 @@
 }
 
 .tab-receiver .tunings table td {
-    border-right: 1px solid var(--subtleAccent);
+    border-right: 1px dotted var(--superSubtleAccent);
     padding: 1px;
 }
 
@@ -320,13 +320,9 @@
 .tab-receiver .rc-smoothing-channels td {
     margin-bottom: 5px;
     padding-bottom: 5px;
-    border-bottom: none;
+    border-bottom: 1px dotted var(--superSubtleAccent);
     width: 100%;
     clear: left;
-}
-
-.tab-receiver .rc-smoothing-channels-last td {
-    border-bottom: 1px solid var(--subtleAccent);
 }
 
 .tab-receiver .rcSmoothing table td {
@@ -419,6 +415,11 @@
     border-bottom-right-radius: 5px;
 }
 
+.tab-receiver #canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 .tab-receiver .full_height {
     height: calc(100% - 10px);
 }
@@ -469,11 +470,11 @@
 
 .tab-receiver table th {
     padding: 3px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
 .tab-receiver table td {
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
 .tab-receiver table tr td:first-child {

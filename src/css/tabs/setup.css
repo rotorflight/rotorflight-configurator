@@ -8,7 +8,7 @@
 }
 
 .tab-setup .cell_setup {
-    border-bottom: solid 1px var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
     padding-bottom: 8px;
     padding-top: 7px;
 }
@@ -50,7 +50,7 @@
 .tab-setup .danger td {
     padding: 8px 5px 8px 5px;
     text-align: left;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
 .tab-setup .danger tr .td1 {
