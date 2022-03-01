@@ -24,12 +24,12 @@
 
 .tab-beepers table th {
     padding: 3px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
 .tab-beepers table td {
     padding: 5px 3px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
 .tab-beepers table tr td:first-child {
@@ -78,14 +78,13 @@
 }
 
 .tab-beepers .number,
-.tab-beepers .select
-{
+.tab-beepers .select {
     margin-bottom: 5px;
-    clear: left;
     padding-bottom: 5px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
     width: 100%;
     float: left;
+    clear: left;
 }
 
 .tab-beepers .number:last-child,
@@ -98,7 +97,6 @@
 .tab-beepers .gui_box_titlebar {
     margin-bottom: 0;
 }
-
 
 .tab-beepers .beeper-configuration tr:last-child td,
 .tab-beepers .dshot-beeper-configuration tr:last-child td,

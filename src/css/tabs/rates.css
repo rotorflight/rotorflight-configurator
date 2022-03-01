@@ -4,13 +4,13 @@
 }
 
 .tab-rates .cf th {
-    border-right: solid 1px var(--subtleAccent);
     height: 19px;
     font-weight: normal;
     padding: 4px;
     color:white;
     text-align: left;
     background: var(--quietHeader);
+    border-right: dotted 1px var(--superSubtleAccent);
 }
 
 .tab-rates .cf th:first-child {
@@ -76,7 +76,7 @@
 
 .tab-rates table, .tab-rates table td {
     padding: 1px;
-    border-bottom: 0 solid var(--subtleAccent);
+    border-bottom: 0;
 }
 
 .tab-rates table th {
@@ -110,13 +110,12 @@
 }
 
 .tab-rates table tr td:last-child {
-    border-right: 0 solid var(--subtleAccent);
+    border-right: 0;
     text-align: right;
 }
 
 .tab-rates table td {
     padding: 1px 1px 1px 5px;
-    border-right: 1px solid var(--subtleAccent);
 }
 
 .tab-rates table tr td {
@@ -320,11 +319,11 @@
 
 .tab-rates .number {
     margin-bottom: 5px;
-    clear: left;
     padding-bottom: 5px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
     width: 100%;
     float: left;
+    clear: left;
 }
 
 .tab-rates .number:last-child {
@@ -438,6 +437,11 @@
     right: 0;
     bottom: 0;
     background-size: 100%;
+}
+
+.tab-rates #canvas {
+    width: 100% !important;
+    height: 100% !important;
 }
 
 .tab-rates .new_rates td:first-child {

@@ -435,7 +435,7 @@ progress[value]::-webkit-progress-bar {
 
 .tab-gyro input:disabled,
 .tab-gyro select:disabled {
-    color: #595959;
+    color: var(--superSubtleAccent);
 }
 
 .tab-gyro table input {
@@ -447,11 +447,6 @@ progress[value]::-webkit-progress-bar {
     text-align-last: right;
     background-color: #3a3a3a;
     color: white;
-}
-
-.tab-gyro table tr.border td,
-.tab-gyro table tr td:first-child {
-    border-color: #595959;
 }
 
 .tab-gyro .bottomarea {
@@ -572,6 +567,14 @@ progress[value]::-webkit-progress-bar {
 
 .tab-motors .meter-label {
     color: white;
+}
+
+.tab-motors .motorOverride tbody tr:nth-child(odd) {
+    background-color: #3f3f3f;
+}
+
+.tab-motors .motorOverride tbody tr:nth-child(even) {
+    background-color: #393939;
 }
 
 
@@ -708,11 +711,6 @@ progress[value]::-webkit-progress-bar {
     background-color: #393b3a;
 }
 
-.xxxtab-profiles .profile select {
-    background-color: #3a3a3a;
-    color: white;
-}
-
 .tab-profiles .regular-button.disabled {
     background-color: #393b3a;
 }
@@ -804,12 +802,6 @@ progress[value]::-webkit-progress-bar {
 .tab-ports .ports tr:last-child,
 .tab-ports .ports tr:last-child td {
     border-bottom: none;
-}
-
-.tab-ports table td {
-    border-bottom: 1px solid #575757;
-    border-left: 1px solid #575757;
-    border-right: 1px solid #575757;
 }
 
 
@@ -944,6 +936,14 @@ progress[value]::-webkit-progress-bar {
 
 .tab-servos .meter-label {
     color: white;
+}
+
+.tab-servos .servoOverride tbody tr:nth-child(odd) {
+    background-color: #3f3f3f;
+}
+
+.tab-servos .servoOverride tbody tr:nth-child(even) {
+    background-color: #393939;
 }
 
 

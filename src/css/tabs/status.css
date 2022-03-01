@@ -49,12 +49,7 @@
     border-radius: 5px;
 }
 
-.tab_status #canvas {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-#canvas {
+.tab-status #canvas {
     width: 100% !important;
     height: 100% !important;
 }
@@ -200,28 +195,6 @@
 
 .tab-status .disarm-flag {
     padding-left: 5px;
-}
-
-.tab-status .checkboxes {
-    margin-bottom: 4px;
-    margin-top: 24px;
-    margin-left: 10px;
-}
-
-.tab-status .checkboxes input {
-    vertical-align: middle;
-    margin: 0 5px 0 15px;
-}
-
-.tab-status .checkboxes .first {
-    margin: 0 5px 0 0;
-}
-
-.tab-status .checkboxes select {
-    float: right;
-    width: 80px;
-    border: 1px solid var(--subtleAccent);
-    border-radius: 3px;
 }
 
 .tab-status .bars {

@@ -54,12 +54,11 @@
     width: 150px;
     text-align: left;
     padding-right: 10px;
-    border-right: 1px solid var(--subtleAccent);
 }
 
 .tab-gyro table tr.border td {
     padding-bottom: 5px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
 .tab-gyro table input {

@@ -17,7 +17,7 @@
     margin-bottom: 5px;
     clear: left;
     padding-bottom: 5px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
     width: 100%;
     float: left;
 }
@@ -58,7 +58,7 @@
     width: 100%;
     margin-bottom: 6px;
     padding-bottom: 5px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
     margin-top: 0;
 }
 
@@ -246,7 +246,7 @@
 
 .tab-failsafe .featuresNew tr {
     width: 100%;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
     float: left;
     padding: 0 0 6px;
     margin-bottom: 3px;

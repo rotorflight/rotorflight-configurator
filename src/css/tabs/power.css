@@ -40,11 +40,11 @@
 .tab-power .number,
 .tab-power .select {
     margin-bottom: 5px;
-    clear: left;
     padding-bottom: 5px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
     width: 100%;
     float: left;
+    clear: left;
 }
 
 .tab-power .battery-configuration select {

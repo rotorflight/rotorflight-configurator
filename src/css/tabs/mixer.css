@@ -76,9 +76,9 @@
     padding-right: 10px;
 }
 
-.tab-mixer .mixerConfigs tr td.border {
+.tab-mixer .mixerConfigs tr:not(:last-child) td {
     padding-bottom: 5px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
 .tab-mixer .mixerInputs {
@@ -184,11 +184,11 @@
     border-bottom: 0;
 }
 
-.tab-mixer .mixerOverride tbody tr:nth-child(even) {
+.tab-mixer .mixerOverride tbody tr:nth-child(odd) {
     background-color: #f8f8f8;
 }
 
-.tab-mixer .mixerOverride tbody tr:nth-child(odd) {
+.tab-mixer .mixerOverride tbody tr:nth-child(even) {
     background-color: #e9e9e9;
 }
 

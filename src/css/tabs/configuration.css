@@ -25,12 +25,12 @@
 
 .tab-configuration table th {
     padding: 3px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
 .tab-configuration table td {
     padding: 5px 3px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
 .tab-configuration table tr td:first-child {
@@ -145,15 +145,16 @@
 .tab-configuration .select
 {
     margin-bottom: 5px;
-    clear: left;
     padding-bottom: 5px;
-    border-bottom: 1px solid var(--subtleAccent);
+    border-bottom: 1px dotted var(--superSubtleAccent);
     width: 100%;
     float: left;
+    clear: left;
 }
 
 .tab-configuration .board_align_inputs,
 .tab-configuration .gyro_alignment_inputs {
+    margin-top: 3px;
     margin-bottom: 5px;
     padding-bottom: 5px;
     width: 33.3%;
@@ -275,8 +276,8 @@
 .tab-configuration .board_align_content,
 .tab-configuration .gyro_align_content {
     width: 100%;
-    border-bottom: 1px solid var(--subtleAccent);
     display: inline-block;
+    border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
 .tab-configuration .sensoralignment span {
