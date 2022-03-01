@@ -4754,219 +4754,219 @@
         "status": "New entry. "
     },
     "profilesAcroTrainerGain": {
-        "message": "Acro Trainer gain",
+        "message": "Acro-Trainer Verstärkung",
         "english": "Acro Trainer gain",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesAcroTrainerGainHelp": {
         "message": "Acro-Trainer-Verstärkung. Der Acro-Trainer-Modus ist nicht selbstnivellierend, begrenzt aber den maximalen Nick-/Rollwinkel. Dies bestimmt, wie aggressiv der Hubschrauber im Acro-Trainer-Modus auf den maximalen Winkel zurückkippt (falls dieser überschritten wird)",
         "english": "Acro Trainer gain. Acro trainer Mode is not self leveling but does limit the maximum pitch/roll angle. This determines how aggressively the helicopter tilts back to the maximum angle (if exceeded) while in Acro Trainer Mode",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesAcroTrainerLimit": {
         "message": "Acro-Trainer-Winkelbegrenzung",
         "english": "Acro Trainer angle limit",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesAcroTrainerLimitHelp": {
         "message": "Acro-Trainer-Winkelbegrenzung. Der Acro Trainer Modus nivelliert sich nicht selbst (wie der Winkel- oder Horizontmodus); er begrenzt jedoch den maximalen Winkel, um den sich der Hubschrauber um die Nick/Rollachse neigt",
         "english": "Acro Trainer angle limit. Acro Trainer mode does not self level (like Angle or Horizon Modes); however, it does limit the maximum angle the helicopter will pitch/roll to",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesAngleModeGain": {
-        "message": "Angle Mode leveling gain",
+        "message": "Nivellierungsverstärkung im Winkelmodus",
         "english": "Angle Mode leveling gain",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesAngleModeGainHelp": {
-        "message": "Angle Mode leveling gain. This determines how aggressively the helicopter tilts back to level while in Angle Mode",
+        "message": "Nivellierungsverstärkung für den Winkelmodus. Dies bestimmt, wie aggressiv der Hubschrauber im Winkelmodus zurück in die Horizontale kippt",
         "english": "Angle Mode leveling gain. This determines how aggressively the helicopter tilts back to level while in Angle Mode",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesAngleModeLimit": {
-        "message": "Angle Mode maximum angle",
+        "message": "Winkelmodus maximaler Winkel",
         "english": "Angle Mode maximum angle",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesAngleModeLimitHelp": {
-        "message": "Angle Mode maximum angle. Helicopter is limited to this angle when in Angle mode",
+        "message": "Winkelmodus maximaler Winkel. Der Hubschrauber ist auf diesen Winkel begrenzt, wenn er sich im Winkelmodus befindet",
         "english": "Angle Mode maximum angle. Helicopter is limited to this angle when in Angle mode",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesHorizonModeGain": {
-        "message": "Horizon Mode leveling gain",
+        "message": "Nivellierungsverstärkung im Horizontalmodus",
         "english": "Horizon Mode leveling gain",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesHorizonModeGainHelp": {
-        "message": "Horizon Mode leveling gain. This determines how aggressively the helicopter tilts back to level while in Horizon Mode",
+        "message": "Nivellierungsverstärkung im Horizontalmodus. Legt fest, wie stark der Hubschrauber im Horizontalmodus zurück in die Horizontale kippt",
         "english": "Horizon Mode leveling gain. This determines how aggressively the helicopter tilts back to level while in Horizon Mode",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesYawSettings": {
-        "message": "Yaw Settings",
+        "message": "Gier Einstellungen",
         "english": "Yaw Settings",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesYawCenterOffset": {
-        "message": "Center Offset",
+        "message": "Offset der Mittelstellung",
         "english": "Center Offset",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesYawCenterOffsetHelp": {
-        "message": "Center Offset for tail motor or servo",
+        "message": "Offset der Mittelstellung für Heckmotor oder Servo",
         "english": "Center Offset for tail motor or servo",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesYawStopGainCW": {
-        "message": "CW Stop Gain",
+        "message": "Stoppverstärkung für die Drehung im Uhrzeigersinn",
         "english": "CW Stop Gain",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesYawStopGainCWHelp": {
-        "message": "Stop gain (PD) for clock-wise rotation. Typical range 50..200.",
+        "message": "Stoppverstärkung (PD) für die Drehung im Uhrzeigersinn. Typischer Bereich 50..200.",
         "english": "Stop gain (PD) for clock-wise rotation. Typical range 50..200.",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesYawStopGainCCW": {
-        "message": "CCW Stop Gain",
+        "message": "Stoppverstärkung für die Drehung gegen den Uhrzeigersinn",
         "english": "CCW Stop Gain",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesYawStopGainCCWHelp": {
-        "message": "Stop gain (PD) for counter clock-wise rotation. Typical range 50..200.",
+        "message": "Stoppverstärkung (PD) für die Drehung gegen den Uhrzeigersinn. Typischer Bereich 50..200.",
         "english": "Stop gain (PD) for counter clock-wise rotation. Typical range 50..200.",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesYawFFCyclicGain": {
-        "message": "Cyclic Feedforward Gain",
+        "message": "Zyklische Feedforwardverstärkung",
         "english": "Cyclic Feedforward Gain",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesYawFFCyclicGainHelp": {
-        "message": "Gain value for cyclic feedforward mixed into yaw",
+        "message": "Verstärkungswert für zyklische Vorsteuerung gemischt mit Gier",
         "english": "Gain value for cyclic feedforward mixed into yaw",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesYawFFCollectiveGain": {
-        "message": "Collective Feedforward Gain",
+        "message": "Kollektive Feedforwardverstärkung",
         "english": "Collective Feedforward Gain",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesYawFFCollectiveGainHelp": {
-        "message": "Gain value for collective feedforward mixed into yaw",
+        "message": "Verstärkungswert für zyklische Vorsteuerung (Feedforward) gemischt mit Gier",
         "english": "Gain value for collective feedforward mixed into yaw",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesYawFFImpulseGain": {
-        "message": "Collective Impulse Feedforward Gain",
+        "message": "Verstärkung der kollektiven Impulsvorsteuerung (Impulse Feedforward)",
         "english": "Collective Impulse Feedforward Gain",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesYawFFImpulseGainHelp": {
-        "message": "Gain value for collective impulse feedforward mixed into yaw",
+        "message": "Verstärkungswert für kollektive Impulsvorsteuerung mit Gierbeimischung",
         "english": "Gain value for collective impulse feedforward mixed into yaw",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesRescueSettings": {
-        "message": "Rescue Settings",
+        "message": "Rettungseinstellungen",
         "english": "Rescue Settings",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesRescueCollective": {
-        "message": "Rescue Climb Collective",
+        "message": "Rettungs-Steigflug Kollektiv",
         "english": "Rescue Climb Collective",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesRescueCollectiveHelp": {
-        "message": "Collective value for rescue climb",
+        "message": "Kollektiver Pitchwert für den Rettungssteigflug",
         "english": "Collective value for rescue climb",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesRescueBoost": {
-        "message": "Initial Climb Collective Boost",
+        "message": "Anfänglicher Steigflug Kollektiver Boost-Wert",
         "english": "Initial Climb Collective Boost",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesRescueBoostHelp": {
-        "message": "Extra collective boost for a rapid initial climb. This will be applied until the initial climb duration expires",
+        "message": "Zusätzlicher kollektiver Boost-Wert für einen schnellen Anfangssteigflug. Dieser wird bis zum Ablauf der Dauer des Anfangssteigens angewendet",
         "english": "Extra collective boost for a rapid initial climb. This will be applied until the initial climb duration expires",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesRescueDelay": {
-        "message": "Initial Climb duration",
+        "message": "Dauer des Anfangssteigfluges",
         "english": "Initial Climb duration",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "profilesRescueDelayHelp": {
-        "message": "Duration of the initial climb. During this time the heli will level in whatever orientation is closest (upright or inverted) and rapidly gain some altitude (if Initial Climb Collective Boost is not zero). When this time expires the heli will slow down to the value set in Rescue Climb Collective. If the heli is inverted at this time it will roll to upright",
+        "message": "Dauer des anfänglichen Steigens. Während dieser Zeit fliegt der Heli in der nächstgelegenen Ausrichtung (aufrecht oder kopfüber) und gewinnt schnell an Höhe (wenn der Initial Climb Collective Boost nicht Null ist). Nach Ablauf dieser Zeit wird der Heli auf den unter 'Rettungs-Steigflug Kollektiv' eingestellten Wert abgebremst. Wenn der Heli zu diesem Zeitpunkt in Rückenlage ist, rollt er in die aufrechte Position",
         "english": "Duration of the initial climb. During this time the heli will level in whatever orientation is closest (upright or inverted) and rapidly gain some altitude (if Initial Climb Collective Boost is not zero). When this time expires the heli will slow down to the value set in Rescue Climb Collective. If the heli is inverted at this time it will roll to upright",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupCopyRateProfile": {
-        "message": "Copy rateprofile",
+        "message": "Rateprofil kopieren",
         "english": "Copy rateprofile",
-        "status": "Modified entry. Please translate!"
+        "status": "Modified entry. "
     },
     "rateSetupActivateProfile": {
-        "message": "Loaded Rate Profile: <strong class=\"message-positive\">$1</strong>",
+        "message": "Geladenes Ratenrofil: <strong class=\"message-positive\">$1</strong>",
         "english": "Loaded Rate Profile: <strong class=\"message-positive\">$1</strong>",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupSubTab": {
-        "message": "Rate Profile #$1",
+        "message": "Ratenrofil #$1",
         "english": "Rate Profile #$1",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupSubTab1": {
-        "message": "Rate Profile #1",
+        "message": "Ratenrofil #1",
         "english": "Rate Profile #1",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupSubTab2": {
-        "message": "Rate Profile #2",
+        "message": "Ratenrofil #2",
         "english": "Rate Profile #2",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupSubTab3": {
-        "message": "Rate Profile #3",
+        "message": "Ratenrofil #3",
         "english": "Rate Profile #3",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupSubTab4": {
-        "message": "Rate Profile #4",
+        "message": "Ratenrofil #4",
         "english": "Rate Profile #4",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupSubTab5": {
-        "message": "Rate Profile #5",
+        "message": "Ratenrofil #5",
         "english": "Rate Profile #5",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupSubTab6": {
-        "message": "Rate Profile #6",
+        "message": "Ratenrofil #6",
         "english": "Rate Profile #6",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupRates": {
-        "message": "Rates",
+        "message": "Raten",
         "english": "Rates",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupTuningHelp": {
-        "message": "<b>Rates and Expo</b>: Determine your stick feel based on these parameters. Use the graph and live 3D model to find your favourite rate setting.",
+        "message": "<b>Raten und Expo</b>: Determine your stick feel based on these parameters. Use the graph and live 3D model to find your favourite rate setting.",
         "english": "<b>Rates and Expo</b>: Determine your stick feel based on these parameters. Use the graph and live 3D model to find your favourite rate setting.",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupRatesType": {
-        "message": "Rates Type",
+        "message": "Raten-Typ",
         "english": "Rates Type",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupRatesTypeTip": {
-        "message": "Changing rates type will change the rates curve and the way you can set it",
+        "message": "Wenn Sie den Raten-Typ ändern, ändert sich die Ratenkurve und die Art und Weise, wie Sie sie einstellen können",
         "english": "Changing rates type will change the rates curve and the way you can set it",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupRate": {
         "message": "Rate",
@@ -4983,7 +4983,7 @@
     "rateSetupRcRateRaceflight": {
         "message": "Rate",
         "english": "Rate",
-        "status": "New entry. Please translate!"
+        "status": "New entry. ok"
     },
     "rateSetupRcExpoRaceflight": {
         "message": "Exponentiell",
@@ -4998,14 +4998,14 @@
         "english": "RC Curve"
     },
     "rateSetupRateQuickRates": {
-        "message": "Max Rate",
+        "message": "Maximale Rate",
         "english": "Max Rate",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupRcRateActual": {
-        "message": "Center Sensitivity",
+        "message": "Mittenempfindlichkeit",
         "english": "Center Sensitivity",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "rateSetupMaxVel": {
         "message": "Max. Beschleunigung [Grad/s]",
