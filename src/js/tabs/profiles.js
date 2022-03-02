@@ -302,6 +302,29 @@ TABS.profiles.initialize = function (callback) {
             setDirty();
         });
 
+        const dialogProfileChange = $('.dialogProfileChange')[0];
+
+        $('.dialogProfileChangeConfirmBtn').click(function() {
+            dialogProfileChange.close();
+            GUI.tab_switch_reload();
+            GUI.log(i18n.getMessage('profilesActivateProfile', [FC.CONFIG.profile + 1]));
+        });
+
+        function get_status() {
+            MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
+                if (self.currentProfile != FC.CONFIG.profile && !dialogProfileChange.hasAttribute('open')) {
+                    if (self.isDirty) {
+                        dialogProfileChange.showModal();
+                    } else {
+                        GUI.tab_switch_reload();
+                        GUI.log(i18n.getMessage('profilesActivateProfile', [FC.CONFIG.profile + 1]));
+                    }
+                }
+            });
+        }
+
+        GUI.interval_add('status_pull', get_status, 250, true);
+
         GUI.content_ready(callback);
     }
 };
