@@ -68,14 +68,6 @@ TABS.rates.initialize = function (callback) {
             });
     }
 
-    function get_status_data() {
-        MSP.send_message(MSPCodes.MSP_STATUS, false, false);
-    }
-
-    function get_receiver_data() {
-        MSP.send_message(MSPCodes.MSP_RC, false, false);
-    }
-
     function data_to_form() {
 
         self.currentRatesType = FC.RC_TUNING.rates_type;
@@ -330,6 +322,14 @@ TABS.rates.initialize = function (callback) {
             });
         });
 
+        const dialogProfileChange = $('.dialogProfileChange')[0];
+
+        $('.dialogProfileChangeConfirmBtn').click(function() {
+            dialogProfileChange.close();
+            GUI.tab_switch_reload();
+            GUI.log(i18n.getMessage('rateSetupActivateProfile', [FC.CONFIG.rateProfile + 1]));
+        });
+
         self.save = function (callback) {
             form_to_data();
             save_data(callback);
@@ -354,7 +354,24 @@ TABS.rates.initialize = function (callback) {
         self.initRatesPreview();
         self.renderModel();
 
-        GUI.interval_add('receiver_pull', get_receiver_data, true);
+        function get_status_data() {
+            MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
+                if (self.currentRateProfile != FC.CONFIG.rateProfile && !dialogProfileChange.hasAttribute('open')) {
+                    if (self.isDirty) {
+                        dialogProfileChange.showModal();
+                    } else {
+                        GUI.tab_switch_reload();
+                        GUI.log(i18n.getMessage('rateSetupActivateProfile', [FC.CONFIG.rateProfile + 1]));
+                    }
+                }
+            });
+        }
+
+        function get_receiver_data() {
+            MSP.send_message(MSPCodes.MSP_RC, false, false);
+        }
+
+        GUI.interval_add('receiver_pull', get_receiver_data, 100, true);
         GUI.interval_add('status_pull', get_status_data, 250, true);
 
         GUI.content_ready(callback);

@@ -1601,6 +1601,15 @@
     "dialogCopyProfileClose": {
         "message": "Cancel"
     },
+    "dialogProfileChangeTitle": {
+        "message": "<span class=\"message-negative\">Warning:</span> Profile Changed"
+    },
+    "dialogProfileChangeNote": {
+        "message": "The active profile was changed before changes were saved. All changes are <b>lost</b>."
+    },
+    "dialogProfileChangeConfirm": {
+        "message": "OK"
+    },
     "profilesSubTab1": {
         "message": "Profile #1"
     },
