@@ -76,7 +76,7 @@ TABS.servos.initialize = function (callback) {
             servoOverride.find('.pips-range').noUiSlider_pips({
                 mode: 'values',
                 values: [ -80, -60, -40, -20, 0, 20, 40, 60, 80, ],
-                density: 2.7777777777,
+                density: 100 / ((80 + 80) / 5),
                 stepped: true,
                 format: wNumb({
                     decimals: 0,

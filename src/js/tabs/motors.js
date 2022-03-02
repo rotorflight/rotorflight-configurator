@@ -301,7 +301,7 @@ TABS.motors.initialize = function (callback) {
             motorOverride.find('.pips-range').noUiSlider_pips({
                 mode: 'values',
                 values: [ 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, ],
-                density: 1,
+                density: 100 / ((0 + 100) / 5),
                 stepped: true,
                 format: wNumb({
                     decimals: 0,
@@ -309,8 +309,7 @@ TABS.motors.initialize = function (callback) {
             });
 
             motorSlider.on('slide', function () {
-                const value = $(this).val();
-                motorThrottle.val(value);
+                motorThrottle.val(parseInt($(this).val()));
             });
 
             motorSlider.on('change', function () {
