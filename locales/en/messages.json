@@ -1209,7 +1209,7 @@
         "message": "Accelerometer Trim"
     },
     "configurationAccelTrimsHelp": {
-        "message": "Accelerometer Trim"
+        "message": "The Accelerometer Trims provide fine tuning to the accel calibration to remove drift while in stabilized modes, such as Horizon, Angle and Rescue."
     },
     "configurationAccelTrimRoll": {
         "message": "Accelerometer Roll Trim"
@@ -5564,7 +5564,7 @@
         "message": "PID loop frequency"
     },
     "configurationPidProcessDenomHelp": {
-        "message": "The maximum frequency for the PID loop is limited by the maximum frequency that updates can be sent by the chosen ESC / motor protocol."
+        "message": "The maximum frequency for the PID loop is limited by the CPU processing power. The CPU Load should not exceed 70% with the selected loop speed."
     },
     "configurationGyroUse32kHz": {
         "message": "Enable gyro 32kHz sampling mode"
@@ -5575,11 +5575,20 @@
     "configurationAccHardware": {
         "message": "Accelerometer"
     },
+    "configurationAccHardwareHelp": {
+        "message": "Enables the Accelerometer. This is required for all stabilisation modes: Angle, Horizon, Acro Trainer and Rescue."
+    },
     "configurationBaroHardware": {
-        "message": "Barometer (if supported)"
+        "message": "Barometer"
+    },
+    "configurationBaroHardwareHelp": {
+        "message": "Enables the Barometer (if available). Altitude is currently not used in Flight Control. It is informative only, available via the Telemetry."
     },
     "configurationMagHardware": {
-        "message": "Magnetometer (if supported)"
+        "message": "Magnetometer"
+    },
+    "configurationMagHardwareHelp": {
+        "message": "Enables the Magnetometer (if available). Compass direction is currently not used in Flight Control. It is informative only, available via the Telemetry."
     },
     "configurationPersonalization": {
         "message": "Personalization"
@@ -5590,11 +5599,20 @@
     "blackboxDevice": {
         "message": "Blackbox logging device"
     },
+    "blackboxDeviceHelp": {
+        "message": "<strong>No Logging:</strong> Disables logging.<br><strong>Onboard Flash:</strong> Enables logging to onboard flash chip (if available).<br><strong>SD Card:</strong> Log to onboard SD card (if available).<br><strong>Serial Port:</strong> Log to an external logger device (e.g Open Lager) connected to a serial port. The serial port will have to be configured to 'Blackbox Logging' in the 'peripherals' section on the <strong>Serial Ports</strong> tab."
+    },
     "blackboxRateOfLogging": {
         "message": "Blackbox logging rate"
     },
+    "blackboxRateOfLoggingHelp": {
+        "message": "The log data is saved to the log device with this rate. For logging to an external device, lower speed may be required."
+    },
     "blackboxDebugMode": {
         "message": "Blackbox debug mode"
+    },
+    "blackboxDebugModeHelp": {
+        "message": "Choose what <i>extra</i> data is being logged. If enabled, four extra debug items are added to the log entries."
     },
     "blackboxDebugModeUnknown": {
         "message": "UNKNOWN"
