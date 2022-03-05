@@ -1233,7 +1233,7 @@
         "message": "Buzzer Configuration"
     },
     "configurationBeeperHelp": {
-        "message": "Buzzer Configuration"
+        "message": "Enable or disable when to sound the Buzzer"
     },
     "beeperGYRO_CALIBRATED": {
         "message": "Beeps when gyro has been calibrated"
@@ -1937,7 +1937,7 @@
         "message": "Servo Configuration"
     },
     "servoConfigurationHelp": {
-        "message": "Servo Configuration"
+        "message": "<strong>NOTE! Servo limits are for avoiding mechanical issues! DO NOT use servo limits for adjusting maximum roll/pitch/collective</strong><br>For each of the configured servos. <br><strong>Center: </strong>This is determined by the servo you are using. This is often 1520&micros for cyclic servos and 760&micros for tail servos. <br><strong>Min: </strong>Minimum value the servo can be commanded to before mechanical binding/servo limits are encountered. <br><strong>Max: </strong>Maximum value the servo can be commanded to before mechanical binding/servo limits are encountered.<br><strong>Rate: </strong>This is dependant on the servo chosen. Generally for a 1520&micros servo this will be 500 while for a 760&micros servo it will be 250. <br><strong>Trim: </strong>Add trim if required to centre the servo arm.<br><strong>Speed: </strong>This setting can slow down the servo travel. This could be usefun for items such as retracts etc. <strong>Warning!</strong> Do not use this for any of the swash or tail servos. <br><strong>Reverse: </strong>Each servo should move in the direction that increases blade pitch as the PWM signal increases. If the servo moves in the opposite direction use the reverse switch to change direction.<br><strong>PWM Signal: </strong>The current commanded output sent to the servo."
     },
     "servoNumber": {
         "message": "Servo"
@@ -1973,7 +1973,7 @@
         "message": "Servo Override"
     },
     "servoOverrideHelp": {
-        "message": "Servo Override"
+        "message": "Select the Override via the switch and then move the slider to move the servo arm to the commanded angle. "
     },
     "servoOverrideEnable": {
         "message": "Enable"
@@ -2009,7 +2009,7 @@
         "message": "Swashplate type"
     },
     "mixerSwashTypeHelp": {
-        "message": "Select the swashplate type for your helicopter.<br><strong>Angle:</strong> This is the angle between the elevator and each of the aileron servos. The options are 120&deg, 135&deg and 140&deg. This is dependant on the helicopters design.<br><strong>Elevator:</strong> Some helicopters the elevator servo (inline with tail and nose) is at the front of the heli, while others are at the rear. Choose the one applicable to your helicopter <br><strong>Custom mixing:</strong> This option can only be configured through the CLI. "
+        "message": "Select the swashplate type for your helicopter.<br><strong>Angle:</strong> This is the angle between the elevator and each of the aileron servos. The options are 120&deg, 135&deg and 140&deg. This is dependant on the helicopters design.<br><strong>Elevator:</strong> Some helicopters the elevator servo (inline with tail and nose) is at the front of the heli, while others are at the rear. Choose the one applicable to your helicopter <br><strong>90&deg Fixed Pitch:</strong> For fixed pitch helicopters with Pitch and Roll servos at 90&deg. <br><strong>45&deg Fixed Pitch:</strong> For fixed pitch helicopters with Pitch and Roll servos at 45&deg. <br><strong>Passthrough:</strong> Passthrough can be used for a flybar helicopter when using the FC as a tail gyro only. <br><strong>Custom mixing:</strong> This option is very flexible and can be used for a wide range of functions. As such this option can only be configured through the CLI. "
     },
     "mixerSwashType0": {
         "message": "Custom Mixing"
@@ -2045,7 +2045,7 @@
         "message": "Swashring"
     },
     "mixerSwashRingHelp": {
-        "message": "Swashring"
+        "message": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum."
     },
     "mixerTailRotorSettings": {
         "message": "Tail Rotor Settings"
@@ -2075,7 +2075,7 @@
         "message": "Mixer Control Inputs"
     },
     "mixerInputChannelsHelp": {
-        "message": "Mixer Inputs"
+        "message": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle."
     },
     "mixerOverrideNote": {
         "message": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
@@ -2084,7 +2084,7 @@
         "message": "Mixer Override"
     },
     "mixerOverrideHelp": {
-        "message": "Mixer Override"
+        "message": "This feature is used for setting up the rotor and is part of the <strong>Mixer Calibration</strong> process. When the bypass enable is active the mixer can be commanded to the requested positions directly"
     },
     "mixerOverrideEnable": {
         "message": "Enable"
@@ -2405,7 +2405,7 @@
         "message": "Motor Override"
     },
     "motorOverrideHelp": {
-        "message": "Motor Override"
+        "message": "Select the Override via the switch and then move the slider to begin to operate the motor. "
     },
     "motorOverrideEnable": {
         "message": "Enable"
@@ -3368,7 +3368,7 @@
         "message": "I Term Relax"
     },
     "profilesItermRelaxHelp": {
-        "message": "Limits the accumulation of I Term when fast movements happen. This helps specially to reduce the bounceback at the end of rolls and other fast movements. You can choose the axes in which this is active, and if the fast movement is detectd using the Gyro or the Setpoint (stick)."
+        "message": "Limits the accumulation of I Term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements. You can choose the axes in which this is active. In addition this cutoff can be limited to the increasing direction only which can result in faster tracking correction when returning from the fast movement (labeled increment ONLY)<br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw <br><br> The fast movement can be detected either by the change in <strong>Setpoint</strong> or change in <strong>Gyro</strong>. "
     },
     "profilesItermRelaxAxes": {
         "message": "Axes",
