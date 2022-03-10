@@ -2387,7 +2387,7 @@ input {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .darkgrey_box {
