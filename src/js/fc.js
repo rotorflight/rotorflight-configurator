@@ -435,24 +435,14 @@ const FC = {
         };
 
         this.SENSOR_ALIGNMENT = {
-            align_gyro:                 0,
-            align_acc:                  0,
-            align_mag:                  0,
-            gyro_detection_flags:       0,
-            gyro_to_use:                0,
             gyro_1_align:               0,
             gyro_2_align:               0,
+            align_mag:                  0,
         };
 
         this.ADVANCED_CONFIG = {
             gyro_sync_denom:            0,
             pid_process_denom:          0,
-            gyroUse32kHz:               0,
-            gyroHighFsr:                0,
-            gyroMovementCalibThreshold: 0,
-            gyroCalibDuration:          0,
-            gyroOffsetYaw:              0,
-            gyroCheckOverflow:          0,
         };
 
         this.FILTER_CONFIG = {
@@ -582,6 +572,12 @@ const FC = {
             acc_hardware:               0,
             baro_hardware:              0,
             mag_hardware:               0,
+            gyro_to_use:                0,
+            gyroHighFsr:                0,
+            gyroMovementCalibThreshold: 0,
+            gyroCalibDuration:          0,
+            gyroOffsetYaw:              0,
+            gyroCheckOverflow:          0,
         };
 
         this.RX_CONFIG = {
