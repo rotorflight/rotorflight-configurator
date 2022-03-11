@@ -79,6 +79,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
     if (!crcError) {
         if (!dataHandler.unsupported) switch (code) {
+
             case MSPCodes.MSP_STATUS:
                 FC.CONFIG.pidCycleTime = data.readU16();
                 FC.CONFIG.gyroCycleTime = data.readU16();
@@ -101,6 +102,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.CONFIG.numRateProfiles = data.readU8();
                 FC.CONFIG.motorCount = data.readU8();
                 FC.CONFIG.servoCount = data.readU8();
+                FC.CONFIG.gyroDetectionFlags = data.readU8();
                 sensor_status(FC.CONFIG.activeSensors);
                 break;
 
@@ -489,13 +491,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_SENSOR_ALIGNMENT:
-                FC.SENSOR_ALIGNMENT.align_gyro = data.readU8();
-                FC.SENSOR_ALIGNMENT.align_acc = data.readU8();
-                FC.SENSOR_ALIGNMENT.align_mag = data.readU8();
-                FC.SENSOR_ALIGNMENT.gyro_detection_flags = data.readU8();
-                FC.SENSOR_ALIGNMENT.gyro_to_use = data.readU8();
                 FC.SENSOR_ALIGNMENT.gyro_1_align = data.readU8();
                 FC.SENSOR_ALIGNMENT.gyro_2_align = data.readU8();
+                FC.SENSOR_ALIGNMENT.align_mag = data.readU8();
                 break;
 
             case MSPCodes.MSP_DISPLAYPORT:
@@ -890,12 +888,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.ADVANCED_CONFIG.pid_process_denom = data.readU8();
                 data.readU32(); // compat: deprecated
                 data.readU32();
-                FC.SENSOR_ALIGNMENT.gyro_to_use = data.readU8();
-                FC.ADVANCED_CONFIG.gyroHighFsr = data.readU8();
-                FC.ADVANCED_CONFIG.gyroMovementCalibThreshold = data.readU8();
-                FC.ADVANCED_CONFIG.gyroCalibDuration = data.readU16();
-                FC.ADVANCED_CONFIG.gyroOffsetYaw = data.readU16();
-                FC.ADVANCED_CONFIG.gyroCheckOverflow = data.readU8();
+                data.readU32();
+                data.readU32();
                 break;
 
             case MSPCodes.MSP_FILTER_CONFIG:
@@ -1044,6 +1038,12 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.SENSOR_CONFIG.acc_hardware = data.readU8();
                 FC.SENSOR_CONFIG.baro_hardware = data.readU8();
                 FC.SENSOR_CONFIG.mag_hardware = data.readU8();
+                FC.SENSOR_CONFIG.gyro_to_use = data.readU8();
+                FC.SENSOR_CONFIG.gyroHighFsr = data.readU8();
+                FC.SENSOR_CONFIG.gyroMovementCalibThreshold = data.readU8();
+                FC.SENSOR_CONFIG.gyroCalibDuration = data.readU16();
+                FC.SENSOR_CONFIG.gyroOffsetYaw = data.readU16();
+                FC.SENSOR_CONFIG.gyroCheckOverflow = data.readU8();
                 break;
 
             case MSPCodes.MSP_LED_STRIP_CONFIG:
@@ -1710,25 +1710,18 @@ MspHelper.prototype.crunch = function(code) {
             break;
 
         case MSPCodes.MSP_SET_SENSOR_ALIGNMENT:
-            buffer.push8(FC.SENSOR_ALIGNMENT.align_gyro)
-                .push8(FC.SENSOR_ALIGNMENT.align_acc)
-                .push8(FC.SENSOR_ALIGNMENT.align_mag)
-                .push8(FC.SENSOR_ALIGNMENT.gyro_to_use)
-                .push8(FC.SENSOR_ALIGNMENT.gyro_1_align)
-                .push8(FC.SENSOR_ALIGNMENT.gyro_2_align);
+            buffer.push8(FC.SENSOR_ALIGNMENT.gyro_1_align)
+                .push8(FC.SENSOR_ALIGNMENT.gyro_2_align)
+                .push8(FC.SENSOR_ALIGNMENT.align_mag);
             break;
 
-    case MSPCodes.MSP_SET_ADVANCED_CONFIG:
+        case MSPCodes.MSP_SET_ADVANCED_CONFIG:
             buffer.push8(1) // compat: gyro denom
                 .push8(FC.ADVANCED_CONFIG.pid_process_denom)
                 .push32(0) // compat: deprecated
                 .push32(0)
-                .push8(FC.SENSOR_ALIGNMENT.gyro_to_use)
-                .push8(FC.ADVANCED_CONFIG.gyroHighFsr)
-                .push8(FC.ADVANCED_CONFIG.gyroMovementCalibThreshold)
-                .push16(FC.ADVANCED_CONFIG.gyroCalibDuration)
-                .push16(FC.ADVANCED_CONFIG.gyroOffsetYaw)
-                .push8(FC.ADVANCED_CONFIG.gyroCheckOverflow);
+                .push32(0)
+                .push32(0);
             break;
 
         case MSPCodes.MSP_SET_FILTER_CONFIG:
@@ -1814,7 +1807,13 @@ MspHelper.prototype.crunch = function(code) {
         case MSPCodes.MSP_SET_SENSOR_CONFIG:
             buffer.push8(FC.SENSOR_CONFIG.acc_hardware)
                 .push8(FC.SENSOR_CONFIG.baro_hardware)
-                .push8(FC.SENSOR_CONFIG.mag_hardware);
+                .push8(FC.SENSOR_CONFIG.mag_hardware)
+                .push8(FC.SENSOR_CONFIG.gyro_to_use)
+                .push8(FC.SENSOR_CONFIG.gyroHighFsr)
+                .push8(FC.SENSOR_CONFIG.gyroMovementCalibThreshold)
+                .push16(FC.SENSOR_CONFIG.gyroCalibDuration)
+                .push16(FC.SENSOR_CONFIG.gyroOffsetYaw)
+                .push8(FC.SENSOR_CONFIG.gyroCheckOverflow);
             break;
 
         case MSPCodes.MSP_SET_NAME:
