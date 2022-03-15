@@ -31,6 +31,16 @@
     font-size: 12px;
 }
 
+.tab-servos .warnings .note {
+    line-height: 16px;
+    font-size: 12px;
+    padding: 10px;
+}
+
+.tab-servos .warning {
+    padding: 2px 0;
+}
+
 .tab-servos input {
     border: 1px solid var(--subtleAccent);
     border-radius: 3px;
@@ -190,9 +200,10 @@
     color: #ffffff;
 }
 
-
 .tab-servos .servoOverrideNote {
-    padding: 10px 10px;
+    line-height: 16px;
+    font-size: 12px;
+    padding: 10px;
 }
 
 .tab-servos .servoOverride {
