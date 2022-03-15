@@ -884,12 +884,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_ADVANCED_CONFIG:
-                data.readU8(); // compat: gyro denom
+                FC.ADVANCED_CONFIG.gyro_sync_denom = data.readU8();
                 FC.ADVANCED_CONFIG.pid_process_denom = data.readU8();
                 data.readU32(); // compat: deprecated
-                data.readU32();
-                data.readU32();
-                data.readU32();
+                FC.ADVANCED_CONFIG.servo_pwm_rate = data.readU16();
                 break;
 
             case MSPCodes.MSP_FILTER_CONFIG:
@@ -1716,12 +1714,10 @@ MspHelper.prototype.crunch = function(code) {
             break;
 
         case MSPCodes.MSP_SET_ADVANCED_CONFIG:
-            buffer.push8(1) // compat: gyro denom
+            buffer.push8(FC.ADVANCED_CONFIG.gyro_sync_denom)
                 .push8(FC.ADVANCED_CONFIG.pid_process_denom)
                 .push32(0) // compat: deprecated
-                .push32(0)
-                .push32(0)
-                .push32(0);
+                .push16(FC.ADVANCED_CONFIG.servo_pwm_rate);
             break;
 
         case MSPCodes.MSP_SET_FILTER_CONFIG:
