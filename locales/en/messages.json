@@ -1933,6 +1933,15 @@
     "adjustmentsFunctionLEDProfile": {
         "message": "LED Profile Selection"
     },
+    "servoSettings": {
+        "message": "Servo Settings"
+    },
+    "servoPwmRate": {
+        "message": "Servo update rate"
+    },
+    "servoPwmRateHelp": {
+        "message": "Rate for servo position updates in Hz. Also known as PWM rate. For analog servos, this is always 50Hz. For digital servos, it can vary from 125Hz to 400Hz. Please check your servo's data sheet."
+    },
     "servoConfiguration": {
         "message": "Servo Configuration"
     },

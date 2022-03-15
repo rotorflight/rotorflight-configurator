@@ -59,6 +59,25 @@
     text-align: center;
 }
 
+.tab-servos .servoSettings {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 1px;
+    table-layout: auto;
+    border: 0;
+    border-collapse: collapse;
+}
+
+.tab-servos  .servoSettings tr td {
+    padding: 5px 0 0 5px;
+}
+
+.tab-servos  .servoSettings tr td:first-child {
+    width: 80px;
+    padding-right: 20px;
+}
+
 .tab-servos .servoConfig {
     width: 100%;
     border: 0;

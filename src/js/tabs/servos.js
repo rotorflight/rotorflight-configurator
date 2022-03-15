@@ -15,6 +15,7 @@ TABS.servos.initialize = function (callback) {
 
     function load_data(callback) {
         MSP.promise(MSPCodes.MSP_STATUS)
+            .then(() => MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_SERVO_CONFIGURATIONS))
             .then(() => MSP.promise(MSPCodes.MSP_SERVO_OVERRIDE))
             .then(() => MSP.promise(MSPCodes.MSP_SERVO))
@@ -22,10 +23,12 @@ TABS.servos.initialize = function (callback) {
     }
 
     function save_data(callback) {
-        mspHelper.sendServoConfigurations(function () {
-            MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
-                GUI.log(i18n.getMessage('eepromSaved'));
-                if (callback) callback();
+        MSP.send_message(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG), false, function () {
+            mspHelper.sendServoConfigurations(function () {
+                MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
+                    GUI.log(i18n.getMessage('eepromSaved'));
+                    if (callback) callback();
+                });
             });
         });
     }
@@ -205,6 +208,13 @@ TABS.servos.initialize = function (callback) {
         }
 
         $('.tab-servos .override').toggle(!FC.CONFIG.servoOverrideDisabled);
+
+        const servoPwmRate = $('.tab-servos #servoPwmRate');
+
+        servoPwmRate.change(function () {
+            FC.ADVANCED_CONFIG.servo_pwm_rate = parseInt(servoPwmRate.val());
+        });
+        servoPwmRate.val(FC.ADVANCED_CONFIG.servo_pwm_rate);
 
         for (let index = 0; index < FC.CONFIG.servoCount; index++) {
             process_config(index);
