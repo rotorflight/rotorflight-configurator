@@ -1975,6 +1975,18 @@
     "servoSignal": {
         "message": "PWM Signal"
     },
+    "servoUnusualRatesWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!"
+    },
+    "servoUnequalRatesWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The cyclic servo <i>Rates</i> are not equal. Please check!"
+    },
+    "servoUnusualLimitsWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!"
+    },
+    "servoUnequalLimitsWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The aileron servo <i>Limits</i> are not equal. Please check!"
+    },
     "servoOverrideNote": {
         "message": "<strong>Note.</strong> Servo Override forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },

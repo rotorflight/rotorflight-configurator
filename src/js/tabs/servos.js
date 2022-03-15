@@ -56,6 +56,54 @@ TABS.servos.initialize = function (callback) {
             }
         }
 
+        function process_warnings() {
+
+            let unusualRate = false;
+            let unequalRate = false;
+            let unusualLimit = false;
+            let unequalLimit = false;
+
+            const SERVOS = FC.SERVO_CONFIG;
+
+            for (let index = 0; index < FC.CONFIG.servoCount && index < 4; index++) {
+                const servo = SERVOS[index];
+                const rate = Math.abs(servo.rate);
+
+                if (servo.mid > 1300 && servo.mid < 1700) {
+                    if (rate != 500)
+                        unusualRate = true;
+                    if (servo.min < -600 || servo.min > -250)
+                        unusualLimit = true;
+                    if (servo.max >  600 || servo.max <  250)
+                        unusualLimit = true;
+                }
+                else if (servo.mid > 650 && servo.mid < 850) {
+                    if (rate != 250)
+                        unusualRate = true;
+                    if (servo.min < -300 || servo.min > -125)
+                        unusualLimit = true;
+                    if (servo.max >  300 || servo.max <  125)
+                        unusualLimit = true;
+                }
+            }
+
+            if (Math.abs(SERVOS[0].rate) != Math.abs(SERVOS[1].rate) ||
+                Math.abs(SERVOS[1].rate) != Math.abs(SERVOS[2].rate))
+                unequalRate = true;
+
+            if (SERVOS[1].min != SERVOS[2].min)
+               unequalLimit = true;
+            if (SERVOS[1].max != SERVOS[2].max)
+               unequalLimit = true;
+
+            $('.servo-unusual-rates-warning').toggle(unusualRate);
+            $('.servo-unequal-rates-warning').toggle(unequalRate);
+            $('.servo-unusual-limits-warning').toggle(unusualLimit);
+            $('.servo-unequal-limits-warning').toggle(unequalLimit);
+
+            $('.warnings').toggle(unusualRate || unusualLimit || unequalRate || unequalLimit);
+        }
+
         function process_override(servoIndex) {
 
             const servoOverride = $('#tab-servos-templates .servoOverrideTemplate tr').clone();
@@ -155,6 +203,7 @@ TABS.servos.initialize = function (callback) {
 
             servoConfig.find('input').change(function () {
                 update_servo_config(servoIndex);
+                process_warnings();
                 mspHelper.sendServoConfig(servoIndex);
             });
 
@@ -221,6 +270,7 @@ TABS.servos.initialize = function (callback) {
             if (!FC.CONFIG.servoOverrideDisabled)
                 process_override(index);
         }
+        process_warnings();
 
         self.prevConfig = self.cloneConfig(FC.SERVO_CONFIG);
 
