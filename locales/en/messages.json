@@ -3823,6 +3823,18 @@
     "gyroRpmFilterQ4": {
         "message": "4<sup>th</sup> Harmonic Notch Q"
     },
+    "gyroRpmFilterQ5": {
+        "message": "5<sup>th</sup> Harmonic Notch Q"
+    },
+    "gyroRpmFilterQ6": {
+        "message": "6<sup>th</sup> Harmonic Notch Q"
+    },
+    "gyroRpmFilterQ7": {
+        "message": "7<sup>th</sup> Harmonic Notch Q"
+    },
+    "gyroRpmFilterQ8": {
+        "message": "8<sup>th</sup> Harmonic Notch Q"
+    },
     "dialogGyroResetTitle": {
         "message": "<span class=\"message-negative\">Warning:</span> RPM Filter Reset"
     },
