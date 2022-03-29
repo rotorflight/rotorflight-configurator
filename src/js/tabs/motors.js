@@ -124,6 +124,10 @@ TABS.motors.initialize = function (callback) {
         $('input[id="govRecoveryTime"]').val(FC.GOVERNOR.gov_recovery_time / 10).change();
         $('input[id="govAutoBailoutTime"]').val(FC.GOVERNOR.gov_autorotation_bailout_time / 10).change();
         $('input[id="govAutoTimeout"]').val(FC.GOVERNOR.gov_autorotation_timeout / 10).change();
+        $('input[id="govLostThrottleTimeout"]').val(FC.GOVERNOR.gov_lost_throttle_timeout / 10).change();
+        $('input[id="govLostHeadspeedTimeout"]').val(FC.GOVERNOR.gov_lost_headspeed_timeout / 10).change();
+        $('input[id="govVoltageFilterHz"]').val(FC.GOVERNOR.gov_pwr_filter).change();
+        $('input[id="govHeadspeedFilterHz"]').val(FC.GOVERNOR.gov_rpm_filter).change();
 
         $('.govConfig').toggle( FC.GOVERNOR.gov_mode > 0 );
 
@@ -382,6 +386,10 @@ TABS.motors.initialize = function (callback) {
                     FC.GOVERNOR.gov_recovery_time = Math.round(parseFloat($('input[id="govRecoveryTime"]').val()) * 10);
                     FC.GOVERNOR.gov_autorotation_bailout_time = Math.round(parseFloat($('input[id="govAutoBailoutTime"]').val()) * 10);
                     FC.GOVERNOR.gov_autorotation_timeout = Math.round(parseFloat($('input[id="govAutoTimeout"]').val()) * 10);
+                    FC.GOVERNOR.gov_lost_throttle_timeout = Math.round(parseFloat($('input[id="govLostThrottleTimeout"]').val()) * 10);
+                    FC.GOVERNOR.gov_lost_headspeed_timeout = Math.round(parseFloat($('input[id="govLostHeadspeedTimeout"]').val()) * 10);
+                    FC.GOVERNOR.gov_pwr_filter = parseFloat($('input[id="govVoltageFilterHz"]').val());
+                    FC.GOVERNOR.gov_rpm_filter = parseFloat($('input[id="govHeadspeedFilterHz"]').val());
                 }
             }
         }
