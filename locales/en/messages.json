@@ -2560,6 +2560,30 @@
     "govAutoTimeoutHelp": {
         "message": "Timeout for ending autorotation and moving to normal IDLE."
     },
+    "govLostThrottleTimeout": {
+        "message": "Zero Throttle timeout"
+    },
+    "govLostThrottleTimeoutHelp": {
+        "message": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup."
+    },
+    "govLostHeadspeedTimeout": {
+        "message": "Headspeed signal timeout"
+    },
+    "govLostHeadspeedTimeoutHelp": {
+        "message": "Timeout for missing headspeed signal, before spooling down. If the RPM signal returns within this timeout, the governor will perform a recovery spoolup."
+    },
+    "govHeadspeedFilterHz": {
+        "message": "Headspeed filter cutoff [Hz]"
+    },
+    "govHeadspeedFilterHzHelp": {
+        "message": "Cutoff for the headspeed PID input lowpass filter."
+    },
+    "govVoltageFilterHz": {
+        "message": "Battery voltage filter cutoff [Hz]"
+    },
+    "govVoltageFilterHzHelp": {
+        "message": "Cutoff for the battery voltage lowpass filter."
+    },
     "govHeadspeed": {
         "message": "Full headspeed"
     },
