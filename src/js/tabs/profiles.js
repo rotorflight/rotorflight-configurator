@@ -131,7 +131,7 @@ TABS.profiles.initialize = function (callback) {
         // Rescue settings
         $('.tab-profiles input[id="rescueCollective"]').val(FC.PID_PROFILE.rescueCollective);
         $('.tab-profiles input[id="rescueBoost"]').val(FC.PID_PROFILE.rescueBoost);
-        $('.tab-profiles input[id="rescueDelay"]').val(FC.PID_PROFILE.rescueDelay / 10);
+        $('.tab-profiles input[id="rescueDelay"]').val(FC.PID_PROFILE.rescueDelay / 10).change();
 
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR') && (FC.GOVERNOR.gov_mode > 1);
         self.isTTAEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR') && (FC.GOVERNOR.gov_mode > 0);
