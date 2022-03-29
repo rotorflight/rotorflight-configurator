@@ -349,7 +349,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_PID:
                 for (let i = 0; i < 3; i++) { // RPY
                     for (let j = 0; j < 4; j++) { // PIDF
-                        FC.PIDS_ACTIVE[i][j] = data.readU8();
+                        FC.PIDS_ACTIVE[i][j] = data.readU16();
                         FC.PIDS[i][j] = FC.PIDS_ACTIVE[i][j];
                     }
                 }
@@ -962,9 +962,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.PID_PROFILE.yawCenterOffset = data.readU16();
                 FC.PID_PROFILE.yawStopGainCW = data.readU8();
                 FC.PID_PROFILE.yawStopGainCCW = data.readU8();
-                FC.PID_PROFILE.yawFFCyclicGain = data.readU8();
-                FC.PID_PROFILE.yawFFCollectiveGain = data.readU8();
-                FC.PID_PROFILE.yawFFImpulseGain = data.readU8();
+                FC.PID_PROFILE.yawFFCyclicGain = data.readU16();
+                FC.PID_PROFILE.yawFFCollectiveGain = data.readU16();
+                FC.PID_PROFILE.yawFFImpulseGain = data.readU16();
                 FC.PID_PROFILE.yawFFImpulseFreq = data.readU8();
                 FC.PID_PROFILE.cyclicNormalization = data.readU8();
                 FC.PID_PROFILE.collectiveNormalization = data.readU8();
@@ -1496,7 +1496,7 @@ MspHelper.prototype.crunch = function(code) {
         case MSPCodes.MSP_SET_PID:
             for (let i = 0; i < 3; i++) { // RPY
                 for (let j = 0; j < 4; j++) { // PIDF
-                    buffer.push8(parseInt(FC.PIDS[i][j]));
+                    buffer.push16(parseInt(FC.PIDS[i][j]));
                 }
             }
             break;
@@ -1765,9 +1765,9 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.PID_PROFILE.yawCenterOffset)
                 .push8(FC.PID_PROFILE.yawStopGainCW)
                 .push8(FC.PID_PROFILE.yawStopGainCCW)
-                .push8(FC.PID_PROFILE.yawFFCyclicGain)
-                .push8(FC.PID_PROFILE.yawFFCollectiveGain)
-                .push8(FC.PID_PROFILE.yawFFImpulseGain)
+                .push16(FC.PID_PROFILE.yawFFCyclicGain)
+                .push16(FC.PID_PROFILE.yawFFCollectiveGain)
+                .push16(FC.PID_PROFILE.yawFFImpulseGain)
                 .push8(FC.PID_PROFILE.yawFFImpulseFreq)
                 .push8(FC.PID_PROFILE.cyclicNormalization)
                 .push8(FC.PID_PROFILE.collectiveNormalization)
