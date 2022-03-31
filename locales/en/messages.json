@@ -3397,6 +3397,21 @@
     "profilesPidSettings": {
         "message": "PID Controller Settings"
     },
+    "profilesItermLimit": {
+        "message": "I-term Limits"
+    },
+    "profilesItermLimitHelp": {
+        "message": "Hard limit for the I-term in the PID loop. The absolute I-term values will never go above these limits."
+    },
+    "profilesItermLimitRoll": {
+        "message": "I-term limit for Roll axis [%]"
+    },
+    "profilesItermLimitPitch": {
+        "message": "I-term limit for Pitch axis [%]"
+    },
+    "profilesItermLimitYaw": {
+        "message": "I-term limit for Yaw axis [%]"
+    },
     "profilesItermDecay": {
         "message": "I Term Decay"
     },
