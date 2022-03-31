@@ -68,15 +68,24 @@ TABS.profiles.initialize = function (callback) {
             });
         });
 
-        // I-term rotation
-        $('.tab-profiles input[id="itermRotation"]').prop('checked', FC.PID_PROFILE.itermRotation !== 0);
+        // I-term limits
+        $('.tab-profiles input[id="itermLimitRoll"]').val(FC.PID_PROFILE.itermLimitRoll / 5).change();
+        $('.tab-profiles input[id="itermLimitPitch"]').val(FC.PID_PROFILE.itermLimitPitch / 5).change();
+        $('.tab-profiles input[id="itermLimitYaw"]').val(FC.PID_PROFILE.itermLimitYaw / 5).change();
+
+        const itermLimitCheck = $('.tab-profiles input[id="itermLimit"]');
+
+        itermLimitCheck.change(function() {
+            const checked = $(this).is(':checked');
+            $('.tab-profiles .itermlimit .suboption').toggle(checked);
+        });
+
+        itermLimitCheck.prop('checked', FC.PID_PROFILE.itermLimitRoll < 1000 || FC.PID_PROFILE.itermLimitPitch < 1000 || FC.PID_PROFILE.itermLimitYaw < 1000).change();
 
         // I-term decay
         $('.tab-profiles input[id="itermDecayTime"]').val(FC.PID_PROFILE.itermDecay / 10);
 
         const itermDecayCheck = $('.tab-profiles input[id="itermDecay"]');
-
-        itermDecayCheck.prop('checked', FC.PID_PROFILE.itermDecay > 0);
 
         itermDecayCheck.change(function() {
             const checked = $(this).is(':checked');
@@ -84,7 +93,10 @@ TABS.profiles.initialize = function (callback) {
             $('.tab-profiles .itermdecay .subhelp').toggle(checked);
         });
 
-        itermDecayCheck.change();
+        itermDecayCheck.prop('checked', FC.PID_PROFILE.itermDecay > 0).change();
+
+        // I-term rotation
+        $('.tab-profiles input[id="itermRotation"]').prop('checked', FC.PID_PROFILE.itermRotation !== 0);
 
         // I-term relax
         $('.tab-profiles select[id="itermRelaxAxes"]').val(FC.PID_PROFILE.itermRelax > 0 ? FC.PID_PROFILE.itermRelax : 1);
@@ -95,15 +107,13 @@ TABS.profiles.initialize = function (callback) {
 
         const itermRelaxCheck = $('.tab-profiles input[id="itermRelax"]');
 
-        itermRelaxCheck.prop('checked', FC.PID_PROFILE.itermRelax !== 0);
-
         itermRelaxCheck.change(function() {
             const checked = $(this).is(':checked');
             $('.tab-profiles .itermrelax .suboption').toggle(checked);
             $('.tab-profiles .itermrelax .subhelp').toggle(checked);
         });
 
-        itermRelaxCheck.change();
+        itermRelaxCheck.prop('checked', FC.PID_PROFILE.itermRelax !== 0).change();
 
         // Normalization
         $('.tab-profiles select[id="cyclicNormalization"]').val(FC.PID_PROFILE.cyclicNormalization);
@@ -163,8 +173,19 @@ TABS.profiles.initialize = function (callback) {
             });
         });
 
-        FC.PID_PROFILE.itermRotation = $('.tab-profiles input[id="itermRotation"]').is(':checked') ? 1 : 0;
+        if ($('.tab-profiles input[id="itermLimit"]').is(':checked')) {
+            FC.PID_PROFILE.itermLimitRoll = $('.tab-profiles input[id="itermLimitRoll"]').val() * 5;
+            FC.PID_PROFILE.itermLimitPitch = $('.tab-profiles input[id="itermLimitPitch"]').val() * 5;
+            FC.PID_PROFILE.itermLimitYaw = $('.tab-profiles input[id="itermLimitYaw"]').val() * 5;
+        }
+        else {
+            FC.PID_PROFILE.itermLimitRoll = 1000;
+            FC.PID_PROFILE.itermLimitPitch = 1000;
+            FC.PID_PROFILE.itermLimitYaw = 1000;
+        }
+
         FC.PID_PROFILE.itermDecay = $('.tab-profiles input[id="itermDecay"]').is(':checked') ? $('.tab-profiles input[id="itermDecayTime"]').val() * 10 : 0;
+        FC.PID_PROFILE.itermRotation = $('.tab-profiles input[id="itermRotation"]').is(':checked') ? 1 : 0;
         FC.PID_PROFILE.itermRelax = $('.tab-profiles input[id="itermRelax"]').is(':checked') ? $('.tab-profiles select[id="itermRelaxAxes"]').val() : 0;
         FC.PID_PROFILE.itermRelaxType = $('.tab-profiles select[id="itermRelaxType"]').val();
         FC.PID_PROFILE.itermRelaxCutoffRoll = parseInt($('.tab-profiles input[id="itermRelaxCutoffRoll"]').val());
