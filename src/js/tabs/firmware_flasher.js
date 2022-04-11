@@ -10,7 +10,6 @@ TABS.firmware_flasher = {
     parsed_hex: undefined, // parsed raw hex in array format
     unifiedTarget: {}, // the Unified Target configuration to be spliced into the configuration
     isConfigLocal: false, // Set to true if the user loads one locally
-    compatibleFrom: '4.2.12-20220401',
 };
 
 TABS.firmware_flasher.initialize = function (callback) {
@@ -174,7 +173,8 @@ TABS.firmware_flasher.initialize = function (callback) {
                         return;
                     if (match[2] && buildLevel < 1)
                         return;
-                    if (semver.lt(match[1], self.compatibleFrom))
+                    if (semver.lt(match[1], CONFIGURATOR.FW_VERSION_MIN_SUPPORTED) ||
+                        semver.gt(match[1], CONFIGURATOR.FW_VERSION_MAX_SUPPORTED))
                         return;
                     const version = match[1];
                     const target = match[5];
