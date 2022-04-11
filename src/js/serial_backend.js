@@ -267,7 +267,20 @@ function onOpen(openInfo) {
                                 analytics.setFlightControllerData(analytics.DATA.FIRMWARE_VERSION, FC.CONFIG.buildVersion);
                                 GUI.log(i18n.getMessage('firmwareInfoReceived', [FC.CONFIG.flightControllerIdentifier, FC.CONFIG.buildVersion]));
                                 GUI.log(i18n.getMessage('buildInfoReceived', [FC.CONFIG.buildRevision, FC.CONFIG.buildInfo]));
-                                MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, processBoardInfo);
+                                if (semver.gte(FC.CONFIG.buildVersion, CONFIGURATOR.FW_VERSION_MIN_SUPPORTED) &&
+                                    semver.lte(FC.CONFIG.buildVersion, CONFIGURATOR.FW_VERSION_MAX_SUPPORTED)) {
+                                        MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, processBoardInfo);
+                                }
+                                else {
+                                    analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'ConnectionRefusedFirmwareVersion', FC.CONFIG.apiVersion);
+                                    const dialog = $('.dialogConnectWarning')[0];
+                                    $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareVersionNotSupported'));
+                                    $('.dialogConnectWarning-closebtn').click(function() {
+                                        dialog.close();
+                                    });
+                                    dialog.showModal();
+                                    connectCli();
+                                }
                             });
                         });
                     } else {
@@ -285,7 +298,7 @@ function onOpen(openInfo) {
             else {
                 analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'ConnectionRefusedFirmwareVersion', FC.CONFIG.apiVersion);
                 const dialog = $('.dialogConnectWarning')[0];
-                $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareVersionNotSupported', [CONFIGURATOR.API_VERSION_ACCEPTED]));
+                $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareVersionNotSupported', [CONFIGURATOR.API_VERSION_ACCEPTED, CONFIGURATOR.FW_VERSION_MIN_SUPPORTED, CONFIGURATOR.FW_VERSION_MAX_SUPPORTED]));
                 $('.dialogConnectWarning-closebtn').click(function() {
                     dialog.close();
                 });
