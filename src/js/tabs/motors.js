@@ -128,6 +128,7 @@ TABS.motors.initialize = function (callback) {
         $('input[id="govLostHeadspeedTimeout"]').val(FC.GOVERNOR.gov_lost_headspeed_timeout / 10).change();
         $('input[id="govVoltageFilterHz"]').val(FC.GOVERNOR.gov_pwr_filter).change();
         $('input[id="govHeadspeedFilterHz"]').val(FC.GOVERNOR.gov_rpm_filter).change();
+        $('input[id="govTTAFilterHz"]').val(FC.GOVERNOR.gov_tta_filter).change();
 
         $('.govConfig').toggle( FC.GOVERNOR.gov_mode > 0 );
 
@@ -390,6 +391,7 @@ TABS.motors.initialize = function (callback) {
                     FC.GOVERNOR.gov_lost_headspeed_timeout = Math.round(parseFloat($('input[id="govLostHeadspeedTimeout"]').val()) * 10);
                     FC.GOVERNOR.gov_pwr_filter = parseFloat($('input[id="govVoltageFilterHz"]').val());
                     FC.GOVERNOR.gov_rpm_filter = parseFloat($('input[id="govHeadspeedFilterHz"]').val());
+                    FC.GOVERNOR.gov_tta_filter = parseFloat($('input[id="govTTAFilterHz"]').val());
                 }
             }
         }

@@ -555,8 +555,6 @@ const FC = {
             gov_autorotation_entry_time:    0,
             gov_lost_throttle_timeout:      0,
             gov_lost_headspeed_timeout:     0,
-            gov_pwr_filter:                 0,
-            gov_rpm_filter:                 0,
             gov_headspeed:                  0,
             gov_gain:                       0,
             gov_p_gain:                     0,
@@ -567,6 +565,9 @@ const FC = {
             gov_tta_limit:                  0,
             gov_cyclic_ff_weight:           0,
             gov_collective_ff_weight:       0,
+            gov_pwr_filter:                 0,
+            gov_rpm_filter:                 0,
+            gov_tta_filter:                 0,
         };
 
         this.SENSOR_CONFIG = {

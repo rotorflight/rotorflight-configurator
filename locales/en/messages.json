@@ -2584,6 +2584,12 @@
     "govVoltageFilterHzHelp": {
         "message": "Cutoff for the battery voltage lowpass filter."
     },
+    "govTTAFilterHz": {
+        "message": "TTA filter cutoff [Hz]"
+    },
+    "govTTAFilterHzHelp": {
+        "message": "Cutoff for the TTA input lowpass filter."
+    },
     "govHeadspeed": {
         "message": "Full headspeed"
     },

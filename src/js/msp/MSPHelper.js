@@ -995,6 +995,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.GOVERNOR.gov_lost_headspeed_timeout       = data.readU16();
                 FC.GOVERNOR.gov_pwr_filter                   = data.readU16();
                 FC.GOVERNOR.gov_rpm_filter                   = data.readU16();
+                FC.GOVERNOR.gov_tta_filter                   = data.readU16();
                 break;
 
             case MSPCodes.MSP_MIXER_INPUTS:
@@ -1797,7 +1798,8 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.GOVERNOR.gov_lost_throttle_timeout)
                 .push16(FC.GOVERNOR.gov_lost_headspeed_timeout)
                 .push16(FC.GOVERNOR.gov_pwr_filter)
-                .push16(FC.GOVERNOR.gov_rpm_filter);
+                .push16(FC.GOVERNOR.gov_rpm_filter)
+                .push16(FC.GOVERNOR.gov_tta_filter);
             break;
 
         case MSPCodes.MSP_SET_SENSOR_CONFIG:
