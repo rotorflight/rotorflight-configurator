@@ -2560,6 +2560,12 @@
     "govAutoTimeoutHelp": {
         "message": "Timeout for ending autorotation and moving to normal IDLE."
     },
+    "govAutoMinEntryTime": {
+        "message": "Autorotation minimum entry time"
+    },
+    "govAutoMinEntryTimeHelp": {
+        "message": "Minimum flight time before autorotation can be engaged."
+    },
     "govLostThrottleTimeout": {
         "message": "Zero Throttle timeout"
     },
