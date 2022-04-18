@@ -527,13 +527,13 @@
         "message": "No configuration received within <span class=\"message-negative\">10 seconds</span>, communication <span class=\"message-negative\">failed</span>"
     },
     "firmwareVersionNotSupported": {
-        "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please upgrade to firmware that supports api version <strong>$1</strong> or higher. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
+        "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
     },
     "firmwareTypeNotSupported": {
         "message": "Non - Rotorflight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode."
     },
     "resetToCustomDefaultsDialog": {
-        "message": "There are custom defaults for this board available. Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?"
+        "message": "There are custom defaults for this board available.<br />Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?"
     },
     "resetToCustomDefaultsAccept": {
         "message": "Apply Custom Defaults"
@@ -546,6 +546,9 @@
     },
     "reportProblemsDialogAPI_VERSION_MAX_SUPPORTED": {
         "message": "<strong>the version of configurator that you are using ($3) is older than the firmware you are using ($4)</strong>.<br>$t(configuratorUpdateHelp.message)"
+    },
+    "reportProblemsDialogUNIFIED_FIRMWARE_WITHOUT_DEFAULTS": {
+        "message": "<strong>Unified firmware type is flashed without custom defaults.</strong><br>Please configure the board manually via the CLI."
     },
     "reportProblemsDialogMOTOR_PROTOCOL_DISABLED": {
         "message": "<strong>there is no motor output protocol selected</strong>.<br>Please select a motor output protocol appropriate for your ESCs in '$t(configurationEscFeatures.message)' on the '$t(tabMotors.message)' tab.<br>$t(escProtocolDisabledMessage.message)"
@@ -669,6 +672,9 @@
     },
     "defaultContributingText": {
         "message": "If you would like to help make Rotorflight even better you can help in many ways, including:<br /><ul><li>using your knowledge of Rotorflight to create or update content on <a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">our Wiki</a>, or answering other users' questions in online forums;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the firmware and the configurator - new features, fixes, improvements;</li><li>testing <a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">new features and fixes</a> and providing feedback;</li><li>helping other users solve the problems they report in <a href=\"https://github.com/rotorflight/rotorflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">our issue tracker</a>, and participating in discussions on feature requests;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain the existing translations.</li></ul>"
+    },
+    "defaultChangelogHead": {
+        "message": "Configurator - Changelog"
     },
     "patreonLink": {
         "message": "<a href=\"https://www.patreon.com/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">Patreon</a>",
@@ -1160,6 +1166,9 @@
     "configurationBoardAlignment": {
         "message": "Board and Sensor Alignment"
     },
+    "configurationBoardAlignmentHelp": {
+        "message": "Arbitrary board rotation in degrees, to allow mounting it sideways / upside down / rotated etc. When running external sensors, use the sensor alignments (Gyro, Acc, Mag) to define sensor position independent from board orientation. "
+    },
     "configurationBoardAlignmentRoll": {
         "message": "Roll Degrees"
     },
@@ -1205,6 +1214,9 @@
     "configurationAccelTrims": {
         "message": "Accelerometer Trim"
     },
+    "configurationAccelTrimsHelp": {
+        "message": "The Accelerometer Trims provide fine tuning to the accel calibration to remove drift while in stabilized modes, such as Horizon, Angle and Rescue."
+    },
     "configurationAccelTrimRoll": {
         "message": "Accelerometer Roll Trim"
     },
@@ -1225,6 +1237,9 @@
     },
     "configurationBeeper": {
         "message": "Buzzer Configuration"
+    },
+    "configurationBeeperHelp": {
+        "message": "Enable or disable when to sound the Buzzer"
     },
     "beeperGYRO_CALIBRATED": {
         "message": "Beeps when gyro has been calibrated"
@@ -1298,6 +1313,9 @@
     "configurationSystem": {
         "message": "System configuration"
     },
+    "configurationSystemHelp": {
+        "message": "<strong>Note:</strong> Make sure your FC is able to operate at the selected loop speed! Check CPU Load and Cycletime stability."
+    },
     "configurationLoopTime": {
         "message": "Flight Controller Loop Time"
     },
@@ -1312,9 +1330,6 @@
     "configurationKHzUnitLabel": {
         "message": "{{value}} kHz",
         "description": "Value for some options that show the speed of gyro, pid, etc. in kHz"
-    },
-    "configurationLoopTimeHelp": {
-        "message": "<strong>Note:</strong> Make sure your FC is able to operate at these speeds! Check CPU and cycletime stability. Changing this may require PID re-tuning. TIP: Disable Accelerometer and other sensors to gain more performance."
     },
     "configurationGPS": {
         "message": "Settings"
@@ -1591,6 +1606,15 @@
     },
     "dialogCopyProfileClose": {
         "message": "Cancel"
+    },
+    "dialogProfileChangeTitle": {
+        "message": "<span class=\"message-negative\">Warning:</span> Profile Changed"
+    },
+    "dialogProfileChangeNote": {
+        "message": "The active profile was changed before changes were saved. All changes are <b>lost</b>."
+    },
+    "dialogProfileChangeConfirm": {
+        "message": "OK"
     },
     "profilesSubTab1": {
         "message": "Profile #1"
@@ -1915,7 +1939,19 @@
     "adjustmentsFunctionLEDProfile": {
         "message": "LED Profile Selection"
     },
+    "servoSettings": {
+        "message": "Servo Settings"
+    },
+    "servoPwmRate": {
+        "message": "Servo update rate"
+    },
+    "servoPwmRateHelp": {
+        "message": "Rate for servo position updates in Hz. Also known as PWM rate. For analog servos, this is always 50Hz. For digital servos, it can vary from 125Hz to 400Hz. Please check your servo's data sheet."
+    },
     "servoConfiguration": {
+        "message": "Servo Configuration"
+    },
+    "servoConfigurationHelp": {
         "message": "Servo Configuration"
     },
     "servoNumber": {
@@ -1945,11 +1981,26 @@
     "servoSignal": {
         "message": "PWM Signal"
     },
+    "servoUnusualRatesWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!"
+    },
+    "servoUnequalRatesWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The cyclic servo <i>Rates</i> are not equal. Please check!"
+    },
+    "servoUnusualLimitsWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!"
+    },
+    "servoUnequalLimitsWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The aileron servo <i>Limits</i> are not equal. Please check!"
+    },
     "servoOverrideNote": {
         "message": "<strong>Note.</strong> Servo Override forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "servoOverride": {
         "message": "Servo Override"
+    },
+    "servoOverrideHelp": {
+        "message": "Select the Override via the switch and then move the slider to move the servo arm to the commanded angle. "
     },
     "servoOverrideEnable": {
         "message": "Enable"
@@ -2020,6 +2071,9 @@
     "mixerSwashRing": {
         "message": "Swashring"
     },
+    "mixerSwashRingHelp": {
+        "message": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum."
+    },
     "mixerTailRotorSettings": {
         "message": "Tail Rotor Settings"
     },
@@ -2047,11 +2101,17 @@
     "mixerInputChannels": {
         "message": "Mixer Control Inputs"
     },
+    "mixerInputChannelsHelp": {
+        "message": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle."
+    },
     "mixerOverrideNote": {
         "message": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "mixerOverride": {
         "message": "Mixer Override"
+    },
+    "mixerOverrideHelp": {
+        "message": "This feature is used for setting up the rotor and is part of the <strong>Mixer Calibration</strong> process. When the bypass enable is active the mixer can be commanded to the requested positions directly."
     },
     "mixerOverrideEnable": {
         "message": "Enable"
@@ -2371,6 +2431,9 @@
     "motorOverride": {
         "message": "Motor Override"
     },
+    "motorOverrideHelp": {
+        "message": "Select the Override via the switch and then move the slider to begin to operate the motor. "
+    },
     "motorOverrideEnable": {
         "message": "Enable"
     },
@@ -2455,6 +2518,9 @@
     "govFeatures": {
         "message": "Governor Features"
     },
+    "govFeaturesHelp": {
+        "message": "Governor Features"
+    },
     "govProfile": {
         "message": "Governor Settings"
     },
@@ -2496,6 +2562,42 @@
     },
     "govAutoTimeoutHelp": {
         "message": "Timeout for ending autorotation and moving to normal IDLE."
+    },
+    "govAutoMinEntryTime": {
+        "message": "Autorotation minimum entry time"
+    },
+    "govAutoMinEntryTimeHelp": {
+        "message": "Minimum flight time before autorotation can be engaged."
+    },
+    "govLostThrottleTimeout": {
+        "message": "Zero Throttle timeout"
+    },
+    "govLostThrottleTimeoutHelp": {
+        "message": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup."
+    },
+    "govLostHeadspeedTimeout": {
+        "message": "Headspeed signal timeout"
+    },
+    "govLostHeadspeedTimeoutHelp": {
+        "message": "Timeout for missing headspeed signal, before spooling down. If the RPM signal returns within this timeout, the governor will perform a recovery spoolup."
+    },
+    "govHeadspeedFilterHz": {
+        "message": "Headspeed filter cutoff [Hz]"
+    },
+    "govHeadspeedFilterHzHelp": {
+        "message": "Cutoff for the headspeed PID input lowpass filter."
+    },
+    "govVoltageFilterHz": {
+        "message": "Battery voltage filter cutoff [Hz]"
+    },
+    "govVoltageFilterHzHelp": {
+        "message": "Cutoff for the battery voltage lowpass filter."
+    },
+    "govTTAFilterHz": {
+        "message": "TTA filter cutoff [Hz]"
+    },
+    "govTTAFilterHzHelp": {
+        "message": "Cutoff for the TTA input lowpass filter."
     },
     "govHeadspeed": {
         "message": "Full headspeed"
@@ -3310,6 +3412,21 @@
     "profilesPidSettings": {
         "message": "PID Controller Settings"
     },
+    "profilesItermLimit": {
+        "message": "I-term Limits"
+    },
+    "profilesItermLimitHelp": {
+        "message": "Hard limit for the I-term in the PID loop. The absolute I-term values will never go above these limits."
+    },
+    "profilesItermLimitRoll": {
+        "message": "I-term limit for Roll axis [%]"
+    },
+    "profilesItermLimitPitch": {
+        "message": "I-term limit for Pitch axis [%]"
+    },
+    "profilesItermLimitYaw": {
+        "message": "I-term limit for Yaw axis [%]"
+    },
     "profilesItermDecay": {
         "message": "I Term Decay"
     },
@@ -3329,7 +3446,7 @@
         "message": "I Term Relax"
     },
     "profilesItermRelaxHelp": {
-        "message": "Limits the accumulation of I Term when fast movements happen. This helps specially to reduce the bounceback at the end of rolls and other fast movements. You can choose the axes in which this is active, and if the fast movement is detectd using the Gyro or the Setpoint (stick)."
+        "message": "Limits the accumulation of I Term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements. You can choose the axes in which this is active. In addition this cutoff can be limited to the increasing direction only which can result in faster tracking correction when returning from the fast movement (labeled increment ONLY)<br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw <br><br> The fast movement can be detected either by the change in <strong>Setpoint</strong> or change in <strong>Gyro</strong>. "
     },
     "profilesItermRelaxAxes": {
         "message": "Axes",
@@ -3672,6 +3789,9 @@
     "gyroRpmFilterSettings": {
         "message": "Gyro RPM Notch Filter Settings"
     },
+    "gyroRpmFilterSettingsHelp": {
+        "message": "Gyro RPM Notch Filter Settings"
+    },
     "gyroRpmFilterSetup": {
         "message": "Setup Type"
     },
@@ -3702,7 +3822,13 @@
     "gyroRpmFilterMainRotorMinRPM": {
         "message": "Main Rotor Minimum Filtered RPM"
     },
+    "gyroRpmFilterMainRotorMinRPMHelp": {
+        "message": "Main Rotor Minimum Filtered RPM"
+    },
     "gyroRpmFilterTailRotorMinRPM": {
+        "message": "Tail Rotor Minimum Filtered RPM"
+    },
+    "gyroRpmFilterTailRotorMinRPMHelp": {
         "message": "Tail Rotor Minimum Filtered RPM"
     },
     "gyroRpmFilterBanks": {
@@ -3754,6 +3880,18 @@
     "gyroRpmFilterQ4": {
         "message": "4<sup>th</sup> Harmonic Notch Q"
     },
+    "gyroRpmFilterQ5": {
+        "message": "5<sup>th</sup> Harmonic Notch Q"
+    },
+    "gyroRpmFilterQ6": {
+        "message": "6<sup>th</sup> Harmonic Notch Q"
+    },
+    "gyroRpmFilterQ7": {
+        "message": "7<sup>th</sup> Harmonic Notch Q"
+    },
+    "gyroRpmFilterQ8": {
+        "message": "8<sup>th</sup> Harmonic Notch Q"
+    },
     "dialogGyroResetTitle": {
         "message": "<span class=\"message-negative\">Warning:</span> RPM Filter Reset"
     },
@@ -3765,9 +3903,6 @@
     },
     "dialogGyroResetRevert": {
         "message": "Revert"
-    },
-    "configHelp2": {
-        "message": "Arbitrary board rotation in degrees, to allow mounting it sideways / upside down / rotated etc. When running external sensors, use the sensor alignments (Gyro, Acc, Mag) to define sensor position independent from board orientation. "
     },
     "failsafeFeaturesHelpNew": {
         "message": "Failsafe has two stages. <strong>Stage 1</strong> is entered when a flightchannel has an invalid pulse length, the receiver reports failsafe mode or there is no signal from the receiver at all, the channel fallback settings are applied to <span class=\"message-negative\">all channels</span> and a short amount of time is provided to allow for recovery. <strong>Stage 2</strong> is entered when the error condition takes longer than the configured guard time while the craft is <span class=\"message-negative\">armed</span>, all channels will remain at the applied channel fallback setting unless overruled by the chosen procedure. <br /><strong>Note:</strong> Prior to entering stage 1, channel fallback settings are also applied to individual AUX channels that have invalid pulses."
@@ -3800,13 +3935,13 @@
         "message": "Stage 2 - Settings"
     },
     "failsafeDelayItem": {
-        "message": "Guard time for stage 2 activation after signal lost [1 = 0.1 sec.]"
+        "message": "Guard time for stage 2 activation after signal lost [s]"
     },
     "failsafeDelayHelp": {
         "message": "Time for stage 1 to wait for recovery"
     },
     "failsafeThrottleLowItem": {
-        "message": "Failsafe Throttle Low Delay [1 = 0.1 sec.]"
+        "message": "Failsafe Throttle Low Delay [s]"
     },
     "failsafeThrottleLowHelp": {
         "message": "Just disarm the craft instead of executing the selected failsafe procedure when the throttle was low for this amount of time"
@@ -3815,7 +3950,7 @@
         "message": "Throttle value used while landing"
     },
     "failsafeOffDelayItem": {
-        "message": "Delay for turning off the Motors during Failsafe [1 = 0.1 sec.]"
+        "message": "Delay for turning off the Motors during Failsafe [s]"
     },
     "failsafeOffDelayHelp": {
         "message": "Time to stay in landing mode until the motors are turned off and the craft is disarmed"
@@ -5519,7 +5654,7 @@
         "message": "PID loop frequency"
     },
     "configurationPidProcessDenomHelp": {
-        "message": "The maximum frequency for the PID loop is limited by the maximum frequency that updates can be sent by the chosen ESC / motor protocol."
+        "message": "The maximum frequency for the PID loop is limited by the CPU processing power. The CPU Load should not exceed 70% with the selected loop speed."
     },
     "configurationGyroUse32kHz": {
         "message": "Enable gyro 32kHz sampling mode"
@@ -5530,11 +5665,20 @@
     "configurationAccHardware": {
         "message": "Accelerometer"
     },
+    "configurationAccHardwareHelp": {
+        "message": "Enables the Accelerometer. This is required for all stabilisation modes: Angle, Horizon, Acro Trainer and Rescue."
+    },
     "configurationBaroHardware": {
-        "message": "Barometer (if supported)"
+        "message": "Barometer"
+    },
+    "configurationBaroHardwareHelp": {
+        "message": "Enables the Barometer (if available). Altitude is currently not used in Flight Control. It is informative only, available via the Telemetry."
     },
     "configurationMagHardware": {
-        "message": "Magnetometer (if supported)"
+        "message": "Magnetometer"
+    },
+    "configurationMagHardwareHelp": {
+        "message": "Enables the Magnetometer (if available). Compass direction is currently not used in Flight Control. It is informative only, available via the Telemetry."
     },
     "configurationPersonalization": {
         "message": "Personalization"
@@ -5545,11 +5689,20 @@
     "blackboxDevice": {
         "message": "Blackbox logging device"
     },
+    "blackboxDeviceHelp": {
+        "message": "<strong>No Logging:</strong> Disables logging.<br><strong>Onboard Flash:</strong> Enables logging to onboard flash chip (if available).<br><strong>SD Card:</strong> Log to onboard SD card (if available).<br><strong>Serial Port:</strong> Log to an external logger device (e.g Open Lager) connected to a serial port. The serial port will have to be configured to 'Blackbox Logging' in the 'peripherals' section on the <strong>Serial Ports</strong> tab."
+    },
     "blackboxRateOfLogging": {
         "message": "Blackbox logging rate"
     },
+    "blackboxRateOfLoggingHelp": {
+        "message": "The log data is saved to the log device with this rate. For logging to an external device, lower speed may be required."
+    },
     "blackboxDebugMode": {
         "message": "Blackbox debug mode"
+    },
+    "blackboxDebugModeHelp": {
+        "message": "Choose what <i>extra</i> data is being logged. If enabled, four extra debug items are added to the log entries."
     },
     "blackboxDebugModeUnknown": {
         "message": "UNKNOWN"

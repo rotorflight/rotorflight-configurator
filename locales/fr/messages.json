@@ -590,8 +590,9 @@
         "english": "No configuration received within <span class=\"message-negative\">10 seconds</span>, communication <span class=\"message-negative\">failed</span>"
     },
     "firmwareVersionNotSupported": {
-        "message": "Cette version du microprogramme <span class=\"message-negative\">n'est pas supportée</span>. Veuillez le mettre à jour vers une version compatible avec l'API <strong>$1</strong> ou ultérieure. Utiliser le CLI pour sauvegarder avant de flasher. Les procédures de sauvegarde / restauration par CLI sont décrites dans l'aide.<br /> Téléchargez et utilisez une ancienne version du configurateur si vous n'êtes pas prêt à mettre à jour.",
-        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please upgrade to firmware that supports api version <strong>$1</strong> or higher. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
+        "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
+        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
+        "status": "Modified entry. Please translate!"
     },
     "firmwareTypeNotSupported": {
         "message": "Non - Rotorflight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode.",
@@ -599,8 +600,9 @@
         "status": "Modified entry. Please translate!"
     },
     "resetToCustomDefaultsDialog": {
-        "message": "Des valeurs de réglage par défaut sont disponibles pour cette carte. Avec des valeurs par défaut propres à cette carte, celle-ci devrait fonctionner correctement.<br/>Souhaitez vous appliquer les réglages par défaut propres à cette carte ?",
-        "english": "There are custom defaults for this board available. Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?"
+        "message": "There are custom defaults for this board available.<br />Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?",
+        "english": "There are custom defaults for this board available.<br />Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?",
+        "status": "Modified entry. Please translate!"
     },
     "resetToCustomDefaultsAccept": {
         "message": "Appliquer les réglages par défaut de cette carte",
@@ -618,6 +620,11 @@
         "message": "<strong>la version de configurateur que vous utilisez ($3) est plus ancienne que le firmware que vous utilisez ($4)</strong>.<br>$t(configuratorUpdateHelp.message)",
         "english": "<strong>the version of configurator that you are using ($3) is older than the firmware you are using ($4)</strong>.<br>$t(configuratorUpdateHelp.message)"
     },
+    "reportProblemsDialogUNIFIED_FIRMWARE_WITHOUT_DEFAULTS": {
+        "message": "<strong>Unified firmware type is flashed without custom defaults.</strong><br>Please configure the board manually via the CLI.",
+        "english": "<strong>Unified firmware type is flashed without custom defaults.</strong><br>Please configure the board manually via the CLI.",
+        "status": "New entry. Please translate!"
+    },
     "reportProblemsDialogMOTOR_PROTOCOL_DISABLED": {
         "message": "<strong>there is no motor output protocol selected</strong>.<br>Please select a motor output protocol appropriate for your ESCs in '$t(configurationEscFeatures.message)' on the '$t(tabMotors.message)' tab.<br>$t(escProtocolDisabledMessage.message)",
         "english": "<strong>there is no motor output protocol selected</strong>.<br>Please select a motor output protocol appropriate for your ESCs in '$t(configurationEscFeatures.message)' on the '$t(tabMotors.message)' tab.<br>$t(escProtocolDisabledMessage.message)",
@@ -630,8 +637,8 @@
     "infoVersions": {
         "message": "Running - OS: <strong>{{operatingSystem}}</strong>, Configurator: <strong>{{configuratorVersion}}</strong>",
         "english": "Running - OS: <strong>{{operatingSystem}}</strong>, Configurator: <strong>{{configuratorVersion}}</strong>",
-        "status": "Modified entry. Please translate!",
-        "description": "Message that appears in the GUI log panel indicating operating system, Chrome version and Configurator version"
+        "description": "Message that appears in the GUI log panel indicating operating system, Chrome version and Configurator version",
+        "status": "Modified entry. Please translate!"
     },
     "releaseCheckLoaded": {
         "message": "Information release GitHub chargée pour $1.",
@@ -1027,8 +1034,8 @@
     "statusArmingDisableFlagsTooltipMSP": {
         "message": "MSP connection is active, probably with this Rotorflight Configurator",
         "english": "MSP connection is active, probably with this Rotorflight Configurator",
-        "status": "Modified entry. Please translate!",
-        "description": "Message that pops up to describe the MSP arming disable flag"
+        "description": "Message that pops up to describe the MSP arming disable flag",
+        "status": "Modified entry. Please translate!"
     },
     "statusArmingDisableFlagsTooltipPARALYZE": {
         "message": "Le mode Paralyze a été activé",
@@ -1482,6 +1489,10 @@
         "message": "Sens de la carte et du capteur",
         "english": "Board and Sensor Alignment"
     },
+    "configurationBoardAlignmentHelp": {
+        "message": "Rotation arbitraire de la carte en degrés permettant un montage latéral / à l'envers / de côté etc. Si des capteurs externes sont utilisés, servez vous du sensor alignments (Gyro, Acc, Mag) pour définir leur position indépendamment  de l'orientation de la carte. ",
+        "english": "Arbitrary board rotation in degrees, to allow mounting it sideways / upside down / rotated etc. When running external sensors, use the sensor alignments (Gyro, Acc, Mag) to define sensor position independent from board orientation. "
+    },
     "configurationBoardAlignmentRoll": {
         "message": "Degrés sur le Roll",
         "english": "Roll Degrees"
@@ -1542,6 +1553,11 @@
         "message": "Correction de l'accéléromètre",
         "english": "Accelerometer Trim"
     },
+    "configurationAccelTrimsHelp": {
+        "message": "The Accelerometer Trims provide fine tuning to the accel calibration to remove drift while in stabilized modes, such as Horizon, Angle and Rescue.",
+        "english": "The Accelerometer Trims provide fine tuning to the accel calibration to remove drift while in stabilized modes, such as Horizon, Angle and Rescue.",
+        "status": "New entry. Please translate!"
+    },
     "configurationAccelTrimRoll": {
         "message": "Correction de l'accéléromètre sur le Roll",
         "english": "Accelerometer Roll Trim"
@@ -1572,6 +1588,11 @@
         "message": "Buzzer Configuration",
         "english": "Buzzer Configuration",
         "status": "Modified entry. Please translate!"
+    },
+    "configurationBeeperHelp": {
+        "message": "Enable or disable when to sound the Buzzer",
+        "english": "Enable or disable when to sound the Buzzer",
+        "status": "New entry. Please translate!"
     },
     "beeperGYRO_CALIBRATED": {
         "message": "Bips après calibrage du gyro",
@@ -1670,6 +1691,11 @@
         "message": "Configuration système",
         "english": "System configuration"
     },
+    "configurationSystemHelp": {
+        "message": "<strong>Note:</strong> Make sure your FC is able to operate at the selected loop speed! Check CPU Load and Cycletime stability.",
+        "english": "<strong>Note:</strong> Make sure your FC is able to operate at the selected loop speed! Check CPU Load and Cycletime stability.",
+        "status": "New entry. Please translate!"
+    },
     "configurationLoopTime": {
         "message": "Loop time du contrôleur de vol",
         "english": "Flight Controller Loop Time"
@@ -1688,10 +1714,6 @@
         "message": "{{value}} kHz",
         "english": "{{value}} kHz",
         "description": "Value for some options that show the speed of gyro, pid, etc. in kHz"
-    },
-    "configurationLoopTimeHelp": {
-        "message": "<strong>Note:</strong> Assurez vous que votre FC peut fonctionner à ces vitesses ! Vérifiez le CPU. Cela peut demander de re-tuner ses PID. TIP: Désactivez l'accéléromètre  et les autres capteurs pour gagner en performance.",
-        "english": "<strong>Note:</strong> Make sure your FC is able to operate at these speeds! Check CPU and cycletime stability. Changing this may require PID re-tuning. TIP: Disable Accelerometer and other sensors to gain more performance."
     },
     "configurationGPS": {
         "message": "Settings",
@@ -2068,6 +2090,20 @@
     "dialogCopyProfileClose": {
         "message": "Annuler",
         "english": "Cancel"
+    },
+    "dialogProfileChangeTitle": {
+        "message": "<span class=\"message-negative\">Warning:</span> Profile Changed",
+        "english": "<span class=\"message-negative\">Warning:</span> Profile Changed",
+        "status": "New entry. Please translate!"
+    },
+    "dialogProfileChangeNote": {
+        "message": "The active profile was changed before changes were saved. All changes are <b>lost</b>.",
+        "english": "The active profile was changed before changes were saved. All changes are <b>lost</b>.",
+        "status": "New entry. Please translate!"
+    },
+    "dialogProfileChangeConfirm": {
+        "message": "OK",
+        "english": "OK"
     },
     "profilesSubTab1": {
         "message": "Profile #1",
@@ -2552,7 +2588,27 @@
         "english": "LED Profile Selection",
         "status": "New entry. Please translate!"
     },
+    "servoSettings": {
+        "message": "Servo Settings",
+        "english": "Servo Settings",
+        "status": "New entry. Please translate!"
+    },
+    "servoPwmRate": {
+        "message": "Servo update rate",
+        "english": "Servo update rate",
+        "status": "New entry. Please translate!"
+    },
+    "servoPwmRateHelp": {
+        "message": "Rate for servo position updates in Hz. Also known as PWM rate. For analog servos, this is always 50Hz. For digital servos, it can vary from 125Hz to 400Hz. Please check your servo's data sheet.",
+        "english": "Rate for servo position updates in Hz. Also known as PWM rate. For analog servos, this is always 50Hz. For digital servos, it can vary from 125Hz to 400Hz. Please check your servo's data sheet.",
+        "status": "New entry. Please translate!"
+    },
     "servoConfiguration": {
+        "message": "Servo Configuration",
+        "english": "Servo Configuration",
+        "status": "New entry. Please translate!"
+    },
+    "servoConfigurationHelp": {
         "message": "Servo Configuration",
         "english": "Servo Configuration",
         "status": "New entry. Please translate!"
@@ -2602,6 +2658,26 @@
         "english": "PWM Signal",
         "status": "New entry. Please translate!"
     },
+    "servoUnusualRatesWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!",
+        "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!",
+        "status": "New entry. Please translate!"
+    },
+    "servoUnequalRatesWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The cyclic servo <i>Rates</i> are not equal. Please check!",
+        "english": "<span class=\"message-negative\">Warning:</span> The cyclic servo <i>Rates</i> are not equal. Please check!",
+        "status": "New entry. Please translate!"
+    },
+    "servoUnusualLimitsWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!",
+        "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!",
+        "status": "New entry. Please translate!"
+    },
+    "servoUnequalLimitsWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The aileron servo <i>Limits</i> are not equal. Please check!",
+        "english": "<span class=\"message-negative\">Warning:</span> The aileron servo <i>Limits</i> are not equal. Please check!",
+        "status": "New entry. Please translate!"
+    },
     "servoOverrideNote": {
         "message": "<strong>Note.</strong> Servo Override forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset in reboot.",
         "english": "<strong>Note.</strong> Servo Override forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset in reboot.",
@@ -2610,6 +2686,11 @@
     "servoOverride": {
         "message": "Servo Override",
         "english": "Servo Override",
+        "status": "New entry. Please translate!"
+    },
+    "servoOverrideHelp": {
+        "message": "Select the Override via the switch and then move the slider to move the servo arm to the commanded angle. ",
+        "english": "Select the Override via the switch and then move the slider to move the servo arm to the commanded angle. ",
         "status": "New entry. Please translate!"
     },
     "servoOverrideEnable": {
@@ -2727,6 +2808,11 @@
         "english": "Swashring",
         "status": "New entry. Please translate!"
     },
+    "mixerSwashRingHelp": {
+        "message": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum.",
+        "english": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum.",
+        "status": "New entry. Please translate!"
+    },
     "mixerTailRotorSettings": {
         "message": "Tail Rotor Settings",
         "english": "Tail Rotor Settings",
@@ -2772,6 +2858,11 @@
         "english": "Mixer Control Inputs",
         "status": "New entry. Please translate!"
     },
+    "mixerInputChannelsHelp": {
+        "message": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle.",
+        "english": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle.",
+        "status": "New entry. Please translate!"
+    },
     "mixerOverrideNote": {
         "message": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot.",
         "english": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot.",
@@ -2780,6 +2871,11 @@
     "mixerOverride": {
         "message": "Mixer Override",
         "english": "Mixer Override",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideHelp": {
+        "message": "This feature is used for setting up the rotor and is part of the <strong>Mixer Calibration</strong> process. When the bypass enable is active the mixer can be commanded to the requested positions directly.",
+        "english": "This feature is used for setting up the rotor and is part of the <strong>Mixer Calibration</strong> process. When the bypass enable is active the mixer can be commanded to the requested positions directly.",
         "status": "New entry. Please translate!"
     },
     "mixerOverrideEnable": {
@@ -3300,6 +3396,11 @@
         "english": "Motor Override",
         "status": "New entry. Please translate!"
     },
+    "motorOverrideHelp": {
+        "message": "Select the Override via the switch and then move the slider to begin to operate the motor. ",
+        "english": "Select the Override via the switch and then move the slider to begin to operate the motor. ",
+        "status": "New entry. Please translate!"
+    },
     "motorOverrideEnable": {
         "message": "Enable",
         "english": "Enable",
@@ -3440,6 +3541,11 @@
         "english": "Governor Features",
         "status": "New entry. Please translate!"
     },
+    "govFeaturesHelp": {
+        "message": "Governor Features",
+        "english": "Governor Features",
+        "status": "New entry. Please translate!"
+    },
     "govProfile": {
         "message": "Governor Settings",
         "english": "Governor Settings",
@@ -3508,6 +3614,66 @@
     "govAutoTimeoutHelp": {
         "message": "Timeout for ending autorotation and moving to normal IDLE.",
         "english": "Timeout for ending autorotation and moving to normal IDLE.",
+        "status": "New entry. Please translate!"
+    },
+    "govAutoMinEntryTime": {
+        "message": "Autorotation minimum entry time",
+        "english": "Autorotation minimum entry time",
+        "status": "New entry. Please translate!"
+    },
+    "govAutoMinEntryTimeHelp": {
+        "message": "Minimum flight time before autorotation can be engaged.",
+        "english": "Minimum flight time before autorotation can be engaged.",
+        "status": "New entry. Please translate!"
+    },
+    "govLostThrottleTimeout": {
+        "message": "Zero Throttle timeout",
+        "english": "Zero Throttle timeout",
+        "status": "New entry. Please translate!"
+    },
+    "govLostThrottleTimeoutHelp": {
+        "message": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup.",
+        "english": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup.",
+        "status": "New entry. Please translate!"
+    },
+    "govLostHeadspeedTimeout": {
+        "message": "Headspeed signal timeout",
+        "english": "Headspeed signal timeout",
+        "status": "New entry. Please translate!"
+    },
+    "govLostHeadspeedTimeoutHelp": {
+        "message": "Timeout for missing headspeed signal, before spooling down. If the RPM signal returns within this timeout, the governor will perform a recovery spoolup.",
+        "english": "Timeout for missing headspeed signal, before spooling down. If the RPM signal returns within this timeout, the governor will perform a recovery spoolup.",
+        "status": "New entry. Please translate!"
+    },
+    "govHeadspeedFilterHz": {
+        "message": "Headspeed filter cutoff [Hz]",
+        "english": "Headspeed filter cutoff [Hz]",
+        "status": "New entry. Please translate!"
+    },
+    "govHeadspeedFilterHzHelp": {
+        "message": "Cutoff for the headspeed PID input lowpass filter.",
+        "english": "Cutoff for the headspeed PID input lowpass filter.",
+        "status": "New entry. Please translate!"
+    },
+    "govVoltageFilterHz": {
+        "message": "Battery voltage filter cutoff [Hz]",
+        "english": "Battery voltage filter cutoff [Hz]",
+        "status": "New entry. Please translate!"
+    },
+    "govVoltageFilterHzHelp": {
+        "message": "Cutoff for the battery voltage lowpass filter.",
+        "english": "Cutoff for the battery voltage lowpass filter.",
+        "status": "New entry. Please translate!"
+    },
+    "govTTAFilterHz": {
+        "message": "TTA filter cutoff [Hz]",
+        "english": "TTA filter cutoff [Hz]",
+        "status": "New entry. Please translate!"
+    },
+    "govTTAFilterHzHelp": {
+        "message": "Cutoff for the TTA input lowpass filter.",
+        "english": "Cutoff for the TTA input lowpass filter.",
         "status": "New entry. Please translate!"
     },
     "govHeadspeed": {
@@ -4616,6 +4782,31 @@
         "message": "Réglages du Contrôleur PID",
         "english": "PID Controller Settings"
     },
+    "profilesItermLimit": {
+        "message": "I-term Limits",
+        "english": "I-term Limits",
+        "status": "New entry. Please translate!"
+    },
+    "profilesItermLimitHelp": {
+        "message": "Hard limit for the I-term in the PID loop. The absolute I-term values will never go above these limits.",
+        "english": "Hard limit for the I-term in the PID loop. The absolute I-term values will never go above these limits.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesItermLimitRoll": {
+        "message": "I-term limit for Roll axis [%]",
+        "english": "I-term limit for Roll axis [%]",
+        "status": "New entry. Please translate!"
+    },
+    "profilesItermLimitPitch": {
+        "message": "I-term limit for Pitch axis [%]",
+        "english": "I-term limit for Pitch axis [%]",
+        "status": "New entry. Please translate!"
+    },
+    "profilesItermLimitYaw": {
+        "message": "I-term limit for Yaw axis [%]",
+        "english": "I-term limit for Yaw axis [%]",
+        "status": "New entry. Please translate!"
+    },
     "profilesItermDecay": {
         "message": "I Term Decay",
         "english": "I Term Decay",
@@ -4645,8 +4836,9 @@
         "english": "I Term Relax"
     },
     "profilesItermRelaxHelp": {
-        "message": "Limite l'accumulation de I Term sur des mouvements rapides. Ceci aide à réduire les rebonds en fin de rolls et autres manœuvres rapides. Vous pouvez choisir les axes pour lesquels l'option sera active et si les manœuvres rapides sont détectées par le Gyro ou les Setpoint (sticks).",
-        "english": "Limits the accumulation of I Term when fast movements happen. This helps specially to reduce the bounceback at the end of rolls and other fast movements. You can choose the axes in which this is active, and if the fast movement is detectd using the Gyro or the Setpoint (stick)."
+        "message": "Limits the accumulation of I Term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements. You can choose the axes in which this is active. In addition this cutoff can be limited to the increasing direction only which can result in faster tracking correction when returning from the fast movement (labeled increment ONLY)<br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw <br><br> The fast movement can be detected either by the change in <strong>Setpoint</strong> or change in <strong>Gyro</strong>. ",
+        "english": "Limits the accumulation of I Term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements. You can choose the axes in which this is active. In addition this cutoff can be limited to the increasing direction only which can result in faster tracking correction when returning from the fast movement (labeled increment ONLY)<br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw <br><br> The fast movement can be detected either by the change in <strong>Setpoint</strong> or change in <strong>Gyro</strong>. ",
+        "status": "Modified entry. Please translate!"
     },
     "profilesItermRelaxAxes": {
         "message": "Axes",
@@ -5174,6 +5366,11 @@
         "english": "Gyro RPM Notch Filter Settings",
         "status": "New entry. Please translate!"
     },
+    "gyroRpmFilterSettingsHelp": {
+        "message": "Gyro RPM Notch Filter Settings",
+        "english": "Gyro RPM Notch Filter Settings",
+        "status": "New entry. Please translate!"
+    },
     "gyroRpmFilterSetup": {
         "message": "Setup Type",
         "english": "Setup Type",
@@ -5224,7 +5421,17 @@
         "english": "Main Rotor Minimum Filtered RPM",
         "status": "New entry. Please translate!"
     },
+    "gyroRpmFilterMainRotorMinRPMHelp": {
+        "message": "Main Rotor Minimum Filtered RPM",
+        "english": "Main Rotor Minimum Filtered RPM",
+        "status": "New entry. Please translate!"
+    },
     "gyroRpmFilterTailRotorMinRPM": {
+        "message": "Tail Rotor Minimum Filtered RPM",
+        "english": "Tail Rotor Minimum Filtered RPM",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterTailRotorMinRPMHelp": {
         "message": "Tail Rotor Minimum Filtered RPM",
         "english": "Tail Rotor Minimum Filtered RPM",
         "status": "New entry. Please translate!"
@@ -5237,8 +5444,8 @@
     "gyroRpmFilterHelp": {
         "message": "RPM filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
         "english": "RPM filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
-        "status": "Modified entry. Please translate!",
-        "description": "Header text for the RPM Filter group"
+        "description": "Header text for the RPM Filter group",
+        "status": "Modified entry. Please translate!"
     },
     "gyroRpmFilterMainRotorGroup": {
         "message": "Main Rotor Notch Filters",
@@ -5310,6 +5517,26 @@
         "english": "4<sup>th</sup> Harmonic Notch Q",
         "status": "New entry. Please translate!"
     },
+    "gyroRpmFilterQ5": {
+        "message": "5<sup>th</sup> Harmonic Notch Q",
+        "english": "5<sup>th</sup> Harmonic Notch Q",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterQ6": {
+        "message": "6<sup>th</sup> Harmonic Notch Q",
+        "english": "6<sup>th</sup> Harmonic Notch Q",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterQ7": {
+        "message": "7<sup>th</sup> Harmonic Notch Q",
+        "english": "7<sup>th</sup> Harmonic Notch Q",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterQ8": {
+        "message": "8<sup>th</sup> Harmonic Notch Q",
+        "english": "8<sup>th</sup> Harmonic Notch Q",
+        "status": "New entry. Please translate!"
+    },
     "dialogGyroResetTitle": {
         "message": "<span class=\"message-negative\">Warning:</span> RPM Filter Reset",
         "english": "<span class=\"message-negative\">Warning:</span> RPM Filter Reset",
@@ -5329,10 +5556,6 @@
         "message": "Revert",
         "english": "Revert",
         "status": "New entry. Please translate!"
-    },
-    "configHelp2": {
-        "message": "Rotation arbitraire de la carte en degrés permettant un montage latéral / à l'envers / de côté etc. Si des capteurs externes sont utilisés, servez vous du sensor alignments (Gyro, Acc, Mag) pour définir leur position indépendamment  de l'orientation de la carte. ",
-        "english": "Arbitrary board rotation in degrees, to allow mounting it sideways / upside down / rotated etc. When running external sensors, use the sensor alignments (Gyro, Acc, Mag) to define sensor position independent from board orientation. "
     },
     "failsafeFeaturesHelpNew": {
         "message": "Failsafe a deux stages. <strong>Stage 1</strong> s'active lorsqu'une des voies de vol reçoit une impulsion erronée et que le récepteur se met en failsafe, ou qu'il n'y a plus de signal du récepteur, les valeurs de sécurité sont appliquées à  <span class=\"message-negative\">toutes les voies</span>, la récupération est encore permise sur un court lapse de temps. Le <strong>Stage 2</strong> s'active lorsque les erreurs perdurent plus longtemps que la valeur de sécurité configurée, avec la machine  <span class=\"message-negative\">armée</span>, toutes les voies reçoivent les valeurs de sécurité sauf si configurées autrement.<br /><strong>Note: </strong> Avant de passer au stage 1, les valeurs de sécurités sont appliqués sur les voies AUX qui reçoivent des impulsions erronées.",
@@ -5375,16 +5598,18 @@
         "english": "Stage 2 - Settings"
     },
     "failsafeDelayItem": {
-        "message": "Période d'attente pour l'activation du Stage 2, après la perte de signal [1 = 0.1 sec.]",
-        "english": "Guard time for stage 2 activation after signal lost [1 = 0.1 sec.]"
+        "message": "Guard time for stage 2 activation after signal lost [s]",
+        "english": "Guard time for stage 2 activation after signal lost [s]",
+        "status": "Modified entry. Please translate!"
     },
     "failsafeDelayHelp": {
         "message": "Période d'attente de recovery pour le Stage 1",
         "english": "Time for stage 1 to wait for recovery"
     },
     "failsafeThrottleLowItem": {
-        "message": "Période d'attente avant de passer les gaz à zéro [1 = 0.1 sec.]",
-        "english": "Failsafe Throttle Low Delay [1 = 0.1 sec.]"
+        "message": "Failsafe Throttle Low Delay [s]",
+        "english": "Failsafe Throttle Low Delay [s]",
+        "status": "Modified entry. Please translate!"
     },
     "failsafeThrottleLowHelp": {
         "message": "Désarme la machine à la place du Failsafe si les gaz étaient à zéro pendant la période de temps renseignée",
@@ -5395,8 +5620,9 @@
         "english": "Throttle value used while landing"
     },
     "failsafeOffDelayItem": {
-        "message": "Délais avant extinction des moteurs pendant le Failsafe [1 = 0.1 sec.]",
-        "english": "Delay for turning off the Motors during Failsafe [1 = 0.1 sec.]"
+        "message": "Delay for turning off the Motors during Failsafe [s]",
+        "english": "Delay for turning off the Motors during Failsafe [s]",
+        "status": "Modified entry. Please translate!"
     },
     "failsafeOffDelayHelp": {
         "message": "Durée du mode atterrissage avant extinction des moteurs et désarmement de la machine",
@@ -7604,8 +7830,9 @@
         "english": "PID loop frequency"
     },
     "configurationPidProcessDenomHelp": {
-        "message": "La fréquence maximale pour la boucle PID est limitée par la fréquence maximale supportée par les ESC.",
-        "english": "The maximum frequency for the PID loop is limited by the maximum frequency that updates can be sent by the chosen ESC / motor protocol."
+        "message": "The maximum frequency for the PID loop is limited by the CPU processing power. The CPU Load should not exceed 70% with the selected loop speed.",
+        "english": "The maximum frequency for the PID loop is limited by the CPU processing power. The CPU Load should not exceed 70% with the selected loop speed.",
+        "status": "Modified entry. Please translate!"
     },
     "configurationGyroUse32kHz": {
         "message": "Activer le mode d'échantillonnage Gyro à 32kHz",
@@ -7619,13 +7846,30 @@
         "message": "Accéléromètre",
         "english": "Accelerometer"
     },
+    "configurationAccHardwareHelp": {
+        "message": "Enables the Accelerometer. This is required for all stabilisation modes: Angle, Horizon, Acro Trainer and Rescue.",
+        "english": "Enables the Accelerometer. This is required for all stabilisation modes: Angle, Horizon, Acro Trainer and Rescue.",
+        "status": "New entry. Please translate!"
+    },
     "configurationBaroHardware": {
-        "message": "Baromètre ( si supporté)",
-        "english": "Barometer (if supported)"
+        "message": "Barometer",
+        "english": "Barometer",
+        "status": "Modified entry. Please translate!"
+    },
+    "configurationBaroHardwareHelp": {
+        "message": "Enables the Barometer (if available). Altitude is currently not used in Flight Control. It is informative only, available via the Telemetry.",
+        "english": "Enables the Barometer (if available). Altitude is currently not used in Flight Control. It is informative only, available via the Telemetry.",
+        "status": "New entry. Please translate!"
     },
     "configurationMagHardware": {
-        "message": "Magnétomètre ( si supporté)",
-        "english": "Magnetometer (if supported)"
+        "message": "Magnetometer",
+        "english": "Magnetometer",
+        "status": "Modified entry. Please translate!"
+    },
+    "configurationMagHardwareHelp": {
+        "message": "Enables the Magnetometer (if available). Compass direction is currently not used in Flight Control. It is informative only, available via the Telemetry.",
+        "english": "Enables the Magnetometer (if available). Compass direction is currently not used in Flight Control. It is informative only, available via the Telemetry.",
+        "status": "New entry. Please translate!"
     },
     "configurationPersonalization": {
         "message": "Personnalisation",
@@ -7640,14 +7884,29 @@
         "english": "Blackbox logging device",
         "status": "New entry. Please translate!"
     },
+    "blackboxDeviceHelp": {
+        "message": "<strong>No Logging:</strong> Disables logging.<br><strong>Onboard Flash:</strong> Enables logging to onboard flash chip (if available).<br><strong>SD Card:</strong> Log to onboard SD card (if available).<br><strong>Serial Port:</strong> Log to an external logger device (e.g Open Lager) connected to a serial port. The serial port will have to be configured to 'Blackbox Logging' in the 'peripherals' section on the <strong>Serial Ports</strong> tab.",
+        "english": "<strong>No Logging:</strong> Disables logging.<br><strong>Onboard Flash:</strong> Enables logging to onboard flash chip (if available).<br><strong>SD Card:</strong> Log to onboard SD card (if available).<br><strong>Serial Port:</strong> Log to an external logger device (e.g Open Lager) connected to a serial port. The serial port will have to be configured to 'Blackbox Logging' in the 'peripherals' section on the <strong>Serial Ports</strong> tab.",
+        "status": "New entry. Please translate!"
+    },
     "blackboxRateOfLogging": {
         "message": "Blackbox logging rate",
         "english": "Blackbox logging rate",
         "status": "New entry. Please translate!"
     },
+    "blackboxRateOfLoggingHelp": {
+        "message": "The log data is saved to the log device with this rate. For logging to an external device, lower speed may be required.",
+        "english": "The log data is saved to the log device with this rate. For logging to an external device, lower speed may be required.",
+        "status": "New entry. Please translate!"
+    },
     "blackboxDebugMode": {
         "message": "Blackbox debug mode",
         "english": "Blackbox debug mode",
+        "status": "New entry. Please translate!"
+    },
+    "blackboxDebugModeHelp": {
+        "message": "Choose what <i>extra</i> data is being logged. If enabled, four extra debug items are added to the log entries.",
+        "english": "Choose what <i>extra</i> data is being logged. If enabled, four extra debug items are added to the log entries.",
         "status": "New entry. Please translate!"
     },
     "blackboxDebugModeUnknown": {
