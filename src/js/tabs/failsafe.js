@@ -57,9 +57,9 @@ TABS.failsafe.initialize = function (callback) {
         FC.RX_CONFIG.rx_max_usec = parseInt($('input[name="rx_max_usec"]').val());
 
         FC.FAILSAFE_CONFIG.failsafe_throttle = parseInt($('input[name="failsafe_throttle"]').val());
-        FC.FAILSAFE_CONFIG.failsafe_off_delay = parseInt($('input[name="failsafe_off_delay"]').val());
-        FC.FAILSAFE_CONFIG.failsafe_throttle_low_delay = parseInt($('input[name="failsafe_throttle_low_delay"]').val());
-        FC.FAILSAFE_CONFIG.failsafe_delay = parseInt($('input[name="failsafe_delay"]').val());
+        FC.FAILSAFE_CONFIG.failsafe_off_delay = parseFloat($('input[name="failsafe_off_delay"]').val()) * 10;
+        FC.FAILSAFE_CONFIG.failsafe_throttle_low_delay = parseFloat($('input[name="failsafe_throttle_low_delay"]').val()) * 10;
+        FC.FAILSAFE_CONFIG.failsafe_delay = parseFloat($('input[name="failsafe_delay"]').val()) * 10;
 
         if( $('input[id="land"]').is(':checked')) {
             FC.FAILSAFE_CONFIG.failsafe_procedure = 0;
@@ -250,10 +250,10 @@ TABS.failsafe.initialize = function (callback) {
         $('tbody.rxFailsafe').hide();
         toggleStage2(true);
 
-        $('input[name="failsafe_throttle"]').val(FC.FAILSAFE_CONFIG.failsafe_throttle);
-        $('input[name="failsafe_off_delay"]').val(FC.FAILSAFE_CONFIG.failsafe_off_delay);
-        $('input[name="failsafe_throttle_low_delay"]').val(FC.FAILSAFE_CONFIG.failsafe_throttle_low_delay);
-        $('input[name="failsafe_delay"]').val(FC.FAILSAFE_CONFIG.failsafe_delay);
+        $('input[name="failsafe_throttle"]').val(FC.FAILSAFE_CONFIG.failsafe_throttle).change();
+        $('input[name="failsafe_off_delay"]').val(FC.FAILSAFE_CONFIG.failsafe_off_delay / 10).change();
+        $('input[name="failsafe_throttle_low_delay"]').val(FC.FAILSAFE_CONFIG.failsafe_throttle_low_delay / 10).change();
+        $('input[name="failsafe_delay"]').val(FC.FAILSAFE_CONFIG.failsafe_delay / 10).change();
 
         // set stage 2 failsafe procedure
         $('input[type="radio"].procedure').change(function () {
