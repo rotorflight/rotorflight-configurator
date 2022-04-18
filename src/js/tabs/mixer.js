@@ -389,7 +389,7 @@ TABS.mixer.initialize = function (callback) {
         $('.tab-mixer #mixerSwashRing').val(FC.MIXER_CONFIG.swash_ring);
 
         $('.tab-mixer #mixerTailRotorMode').val(self.tailMode);
-        $('.tab-mixer #mixerTailMotorIdle').val(FC.MIXER_CONFIG.tail_motor_idle / 10);
+        $('.tab-mixer #mixerTailMotorIdle').val(FC.MIXER_CONFIG.tail_motor_idle / 10).change();
     }
 
     function form_to_data() {
