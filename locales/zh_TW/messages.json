@@ -801,6 +801,10 @@
         "english": "If you would like to help make Rotorflight even better you can help in many ways, including:<br /><ul><li>using your knowledge of Rotorflight to create or update content on <a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">our Wiki</a>, or answering other users' questions in online forums;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the firmware and the configurator - new features, fixes, improvements;</li><li>testing <a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">new features and fixes</a> and providing feedback;</li><li>helping other users solve the problems they report in <a href=\"https://github.com/rotorflight/rotorflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">our issue tracker</a>, and participating in discussions on feature requests;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain the existing translations.</li></ul>",
         "status": "Modified entry. Please translate!"
     },
+    "defaultChangelogHead": {
+        "message": "配置程式 - 更新日誌",
+        "english": "Configurator - Changelog"
+    },
     "patreonLink": {
         "message": "<a href=\"https://www.patreon.com/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">Patreon</a>",
         "english": "<a href=\"https://www.patreon.com/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">Patreon</a>",
