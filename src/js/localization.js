@@ -2,19 +2,15 @@ import i18next from 'i18next';
 import i18nextXHRBackend from 'i18next-xhr-backend';
 
 const i18n = {};
+
 /*
  * Wrapper around the i18n system
  */
 window.i18n = i18n;
 
-
-const languagesAvailables = ['ca', 'de', 'en', 'es', 'eu', 'fr', 'gl', 'hr', 'hu', 'id', 'it', 'ja', 'ko', 'lv', 'nl', 'pt', 'pt_BR', 'pl', 'ru', 'sv', 'zh_CN', 'zh_TW'];
-
-const languageFallback = {
-                            'pt': ['pt_BR', 'en'],
-                            'pt_BR': ['pt', 'en'],
-                            'default': ['en'],
-};
+//const languagesAvailables = [ 'ca', 'de', 'en', 'es', 'eu', 'fr', 'gl', 'hr', 'hu', 'id', 'it', 'ja', 'ko', 'lv', 'nl', 'pt', 'pt_BR', 'pl', 'ru', 'sv', 'zh_CN', 'zh_TW', ];
+const languagesAvailables = [ 'de', 'en', 'nl', ];
+const languageFallback = { 'default': ['en'], };
 
 /**
  * Functions that depend on the i18n framework
