@@ -711,7 +711,7 @@ TABS.rates.initRatesSystem = function() {
             rateMax     = 255;
             rateStep    = 1;
             expoDec     = 0;
-            expoDef     = 50;
+            expoDef     = 0;
             expoMax     = 100;
             expoStep    = 1;
 
@@ -723,17 +723,17 @@ TABS.rates.initRatesSystem = function() {
             rcExpoLabel = "rateSetupRcExpoKISS";
 
             rcRateDec   = 2;
-            rcRateDef   = 0.80;
+            rcRateDef   = 1.80;
             rcRateMax   = 2.55;
             rcRateMin   = 0.01;
             rcRateStep  = 0.01;
             rateDec     = 2;
-            rateDef     = 0.55;
+            rateDef     = 0.00;
             rateMax     = 0.99;
             rateStep    = 0.01;
             expoDec     = 2;
             expoDef     = 0.00;
-            expoMax     = 1.0;
+            expoMax     = 1.00;
             expoStep    = 0.01;
 
             break;
@@ -744,7 +744,7 @@ TABS.rates.initRatesSystem = function() {
             rcExpoLabel = "rateSetupRcExpoRaceflight";
 
             rcRateDec   = 0;
-            rcRateDef   = 180;
+            rcRateDef   = 360;
             rcRateMax   = 1000;
             rcRateMin   = 10;
             rcRateStep  = 10;
@@ -753,8 +753,8 @@ TABS.rates.initRatesSystem = function() {
             rateMax     = 1000;
             rateStep    = 10;
             expoDec     = 2;
-            expoDef     = 0.50;
-            expoMax     = 1.0;
+            expoDef     = 0.00;
+            expoMax     = 1.00;
             expoStep    = 0.01;
 
             break;
@@ -765,7 +765,7 @@ TABS.rates.initRatesSystem = function() {
             rcExpoLabel = "rateSetupRcExpoRaceflight";
 
             rcRateDec   = 2;
-            rcRateDef   = 0.75;
+            rcRateDef   = 1.80;
             rcRateMax   = 2.55;
             rcRateMin   = 0.01;
             rcRateStep  = 0.01;
@@ -774,8 +774,8 @@ TABS.rates.initRatesSystem = function() {
             rateMax     = 1000;
             rateStep    = 10;
             expoDec     = 2;
-            expoDef     = 0.0;
-            expoMax     = 1.0;
+            expoDef     = 0.00;
+            expoMax     = 1.00;
             expoStep    = 0.01;
 
             break;
@@ -786,17 +786,17 @@ TABS.rates.initRatesSystem = function() {
             rcExpoLabel = "rateSetupRcExpo";
 
             rcRateDec   = 2;
-            rcRateDef   = 0.80;
+            rcRateDef   = 1.80;
             rcRateMax   = 2.55;
             rcRateMin   = 0.01;
             rcRateStep  = 0.01;
             rateDec     = 2;
-            rateDef     = 0.55;
+            rateDef     = 0.00;
             rateMax     = 0.99;
             rateStep    = 0.01;
             expoDec     = 2;
             expoDef     = 0.00;
-            expoMax     = 1.0;
+            expoMax     = 1.00;
             expoStep    = 0.01;
 
             break;
