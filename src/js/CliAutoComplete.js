@@ -36,6 +36,7 @@ CliAutoComplete.openLater = function(force) {
 };
 
 CliAutoComplete.setEnabled = function(enable) {
+    enable = false; // FIXME
     if (this.configEnabled !== enable) {
         this.configEnabled = enable;
 
