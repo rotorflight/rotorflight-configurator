@@ -203,8 +203,6 @@ TABS.configuration.initialize = function (callback) {
 
         gyroSelectElement.val(FC.ADVANCED_CONFIG.gyro_sync_denom);
 
-        $('.systemconfigNote').html(i18n.getMessage('configurationLoopTimeHelp'));
-
         gyroSelectElement.change(function () {
             const originalPidDenom = parseInt(pidSelectElement.val());
             const pidBaseFreq = FC.CONFIG.sampleRateHz / 1000;
