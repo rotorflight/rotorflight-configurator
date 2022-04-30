@@ -227,7 +227,7 @@
         "english": "Show update notifications for unstable versions of the configurator"
     },
     "configuratorUpdateNotice": {
-        "message": "U gebruikt een verouderde versie van de <b>Rotorflight Configurator</b>.<br>$t(configuratorUpdateHelp.message)",
+        "message": "Je gebruikt een verouderde versie van de <b>Rotorflight Configurator</b>.<br>$t(configuratorUpdateHelp.message)",
         "english": "You are using an outdated version of the <b>Rotorflight Configurator</b>.<br>$t(configuratorUpdateHelp.message)"
     },
     "configuratorUpdateHelp": {
@@ -563,16 +563,16 @@
         "english": "No configuration received within <span class=\"message-negative\">10 seconds</span>, communication <span class=\"message-negative\">failed</span>"
     },
     "firmwareVersionNotSupported": {
-        "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
+        "message": "Deze firmware-versie wordt <span class=\"message-negative\">niet ondersteund</span>. Gebruik een firmware-versie die ondersteund wordt door deze versie van de Configurator. Gebruik de CLI om een backup te maken voor het flashen. De CLI backup/restore-procedure staat beschreven in de documentie.<br />Als je nog nog klaar bent om te upgraden, gebruik dan een oude versie van de Configurator.",
         "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
         "status": "Modified entry. Please translate!"
     },
     "firmwareTypeNotSupported": {
-        "message": "Niet - Rotorflight firmware wordt <span class=\"message-negative\">niet ondersteund</span>, behalve CLI modus.",
+        "message": "Niet-Rotorflight firmware wordt <span class=\"message-negative\">niet ondersteund</span>, behalve in CLI modus.",
         "english": "Non - Rotorflight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode."
     },
     "resetToCustomDefaultsDialog": {
-        "message": "There are custom defaults for this board available.<br />Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?",
+        "message": "Er zijn aangepaste standaardwaarden beschikbaar voor dit bord.<br />Een bord zal in het algemeen niet correct werken tenzij aangepaste standaardwaarden worden toegepast.<br />Wil je aangepaste standaardwaarden toepassen voor dit bord?",
         "english": "There are custom defaults for this board available.<br />Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?",
         "status": "Modified entry. Please translate!"
     },
@@ -589,11 +589,11 @@
         "english": "Please <strong>fix these problems before attempting to fly your craft</strong>."
     },
     "reportProblemsDialogAPI_VERSION_MAX_SUPPORTED": {
-        "message": "<strong>de versie van de configuratie die u gebruikt ($3) is ouder dan de firmware die u gebruikt ($4)</strong>.<br>$t(configuratorUpdateHelp.message)",
+        "message": "<strong>de versie van de configuratie die je gebruikt ($3) is ouder dan de firmware die je gebruikt ($4)</strong>.<br>$t(configuratorUpdateHelp.message)",
         "english": "<strong>the version of configurator that you are using ($3) is older than the firmware you are using ($4)</strong>.<br>$t(configuratorUpdateHelp.message)"
     },
     "reportProblemsDialogUNIFIED_FIRMWARE_WITHOUT_DEFAULTS": {
-        "message": "<strong>Unified firmware type is flashed without custom defaults.</strong><br>Please configure the board manually via the CLI.",
+        "message": "<strong>Unified firmware is geflashed zonder aangepaste standaardwaarden.</strong><br>Configureer het bord handmatig via de CLI.",
         "english": "<strong>Unified firmware type is flashed without custom defaults.</strong><br>Please configure the board manually via the CLI.",
         "status": "New entry. Please translate!"
     },
@@ -611,7 +611,7 @@
         "description": "Message that appears in the GUI log panel indicating operating system, Chrome version and Configurator version"
     },
     "releaseCheckLoaded": {
-        "message": "Versie informatie voor $1 van GitHub geladen.",
+        "message": "Versieinformatie voor $1 van GitHub geladen.",
         "english": "Loaded release information for $1 from GitHub."
     },
     "releaseCheckFailed": {
@@ -627,11 +627,11 @@
         "english": "No release information available for $1."
     },
     "tabSwitchConnectionRequired": {
-        "message": "U moet <strong>verbinden</strong> voordat u een van de tabbladen kunt bekijken.",
+        "message": "Je moet <strong>verbinden</strong> voordat je de tabbladen kunt bekijken.",
         "english": "You need to <strong>connect</strong> before you can view any of the tabs."
     },
     "tabSwitchWaitForOperation": {
-        "message": "U kunt dit nu <span class=\"message-negative\">niet</span> doen, wacht tot de huidige bewerking is voltooid ...",
+        "message": "Je kunt dit nu <span class=\"message-negative\">niet</span> doen, wacht tot de huidige bewerking is voltooid...",
         "english": "You <span class=\"message-negative\">can't</span> do this right now, please wait for current operation to finish ..."
     },
     "firmwareVersion": {
@@ -679,11 +679,11 @@
         "english": "Firmware"
     },
     "versionLabelConfigurator": {
-        "message": "Configuratie",
+        "message": "Configurator",
         "english": "Configurator"
     },
     "statusbar_port_utilization": {
-        "message": "Port utilisatie:",
+        "message": "Poortgebruik:",
         "english": "Port utilization:",
         "description": "Port utilization text shown in the status bar"
     },
@@ -693,12 +693,12 @@
         "description": "References 'Download' in the status bar, port utilization. Keep one character long if possible"
     },
     "statusbar_usage_upload": {
-        "message": "E:",
+        "message": "U:",
         "english": "U:",
         "description": "References 'Upload' in the status bar, port utilization. Keep one character long if possible"
     },
     "statusbar_packet_error": {
-        "message": "Pakket fout:",
+        "message": "Pakketfouten:",
         "english": "Packet error:",
         "description": "Packet error text shown in the status bar"
     },
@@ -713,12 +713,12 @@
         "description": "Gyro cycle time text shown in the status bar"
     },
     "statusbar_sys_load": {
-        "message": "Systeem Laden:",
+        "message": "Systeembelasting:",
         "english": "System Load:",
         "description": "System load text shown in the status bar"
     },
     "statusbar_cpu_load": {
-        "message": "CPU belasting:",
+        "message": "CPU-belasting:",
         "english": "CPU Load:",
         "description": "CPU load text shown in the status bar"
     },
@@ -739,7 +739,7 @@
         "english": "EEPROM <span class=\"message-positive\">saved</span>"
     },
     "defaultWelcomeIntro": {
-        "message": "Welkom bij <strong>Rotorflight - Configurator</strong>, een hulpprogramma dat ontworpen is om het bijwerken, configureren en tunen van je vlucht controller te vereenvoudigen.",
+        "message": "Welkom bij <strong>Rotorflight - Configurator</strong>, een hulpprogramma dat ontworpen is om het bijwerken, configureren en tunen van je vluchtcontroller te vereenvoudigen.",
         "english": "Welcome to <strong>Rotorflight - Configurator</strong>, a utility designed to simplify updating, configuring and tuning of your flight controller."
     },
     "defaultWelcomeHead": {
@@ -747,7 +747,7 @@
         "english": "Hardware"
     },
     "defaultWelcomeText": {
-        "message": "De applicatie ondersteunt alle hardware die Rotorflight kan draaien. Dat zijn veelal F4 en F7 vluchtcontrollers die ook met Betaflight werken. Controleer het flash-tabblad voor de volledige lijst met hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts</a><br /><br />De broncode van de firmware kan <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> worden gedownload<br /><br />De nieuwste <b>STM USB VCP stuurprogramma's</b> kunnen <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> worden gedownload.<br />Het laatste <b>Zadig</b> voor Windows USB stuurprogramma kan <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> worden gedownload<br />",
+        "message": "De applicatie ondersteunt alle hardware die Rotorflight kan draaien. Dat zijn veelal F4 en F7 vluchtcontrollers die ook met Betaflight werken. Controleer het flash-tabblad voor de volledige lijst met hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts</a><br /><br />De broncode van de firmware kan <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> worden gedownload.<br /><br />De nieuwste <b>STM USB VCP stuurprogramma's</b> kunnen <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> worden gedownload.<br />Het laatste <b>Zadig</b> voor Windows USB stuurprogramma kan <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> worden gedownload.<br />",
         "english": "The application supports all hardware that can run Rotorflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts</a><br /><br />The source code can be downloaded from <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />The latest <b>Zadig</b> for Windows USB driver installer can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />"
     },
     "defaultContributingHead": {
@@ -1007,7 +1007,7 @@
         "description": "Message that pops up to describe the REBOOT_REQ arming disable flag"
     },
     "statusArmingDisableFlagsTooltipDSHOT_BITBANG": {
-        "message": "Bitbanged DSHOT werkt niet goed en de motoren kunnen niet worden gecontroleerd. Waarschijnlijk veroorzaakt door een timer conflict met andere functies ingeschakeld op de vlucht controller.",
+        "message": "Bitbanged DSHOT werkt niet goed en de motoren kunnen niet worden gecontroleerd. Waarschijnlijk veroorzaakt door een timer conflict met andere functies ingeschakeld op de vluchtcontroller.",
         "english": "Bitbanged DSHOT is not working properly and the motors can't be controlled. Likely caused by a timer conflict with other features enabled on the flight controller.",
         "description": "Message that pops up to describe the DSHOT_BITBANG arming disable flag"
     },
@@ -1055,7 +1055,7 @@
         "english": "Calibrate Accelerometer"
     },
     "initialSetupCalibrateAccelText": {
-        "message": "Plaats de FC of het frame op een <strong>platte</strong> ondergrond. Ga daarna door met de kalibratie en zorg er voor dat deze niet beweegt gedurende de kalibratie periode",
+        "message": "Plaats de FC of het frame op een <strong>platte</strong> ondergrond. Ga daarna door met de kalibratie en zorg er voor dat deze niet beweegt gedurende de kalibratieperiode",
         "english": "Place board or frame on <strong>leveled</strong> surface, proceed with calibration, ensure platform is not moving during calibration period"
     },
     "initialSetupButtonCalibrateMag": {
@@ -1063,7 +1063,7 @@
         "english": "Calibrate Magnetometer"
     },
     "initialSetupCalibrateMagText": {
-        "message": "Draai multirotor tenminste <strong>360</strong> graden om alle axisen van rotatie, je hebt 30 seconden om dit te doen",
+        "message": "Draai het vliegtuig tenminste <strong>360</strong> graden om alle rotatie-assen, je hebt 30 seconden om dit te doen",
         "english": "Move multirotor at least <strong>360</strong> degrees on all axis of rotation, you have 30 seconds to perform this task"
     },
     "initialSetupButtonCalibratingText": {
@@ -1111,7 +1111,7 @@
         "english": "System Reboot"
     },
     "initialSetupButtonRebootText": {
-        "message": "Herstart en initialiseer het systeem.",
+        "message": "Herstart en herinitialiseer het systeem.",
         "english": "Reboot and reinitialize the system."
     },
     "initialSetupBackupSuccess": {
@@ -1183,11 +1183,11 @@
         "english": "<strong>Enable Mixer Override</strong>"
     },
     "initialSetupEnableMixerOverrideText": {
-        "message": "Schakel de mixer input override functie in op het tabblad Mixers. Zet mixer override aan en dwingt de controle tot willekeurige posities.",
+        "message": "Schakel de mixer input override functie in op het tabblad Mixers. Door mixer-override in te schakelen kunnen mixer-controls naar willekeurige posities worden gestuurd.",
         "english": "Enable the mixer input override feature in the Mixers tab. Setting mixer override WILL force the flight controls to arbitrary positions."
     },
     "featureNone": {
-        "message": "&lt;Selecteer er Een&gt;",
+        "message": "&lt;Selecteer er één&gt;",
         "english": "&lt;Select One&gt;"
     },
     "featureRX_PPM": {
@@ -1275,7 +1275,7 @@
         "english": "Blackbox flight data recorder"
     },
     "featureBLACKBOXTip": {
-        "message": "Configureer via het tabblad BlackBox nadat u dit heeft ingeschakeld.",
+        "message": "Configureer via het tabblad BlackBox nadat je dit hebt ingeschakeld.",
         "english": "Configure via the BlackBox tab after enabling."
     },
     "featureRX_SPI": {
@@ -1303,7 +1303,7 @@
         "english": "Race Transponder"
     },
     "featureTRANSPONDERTip": {
-        "message": "Configureer via het tabblad Race Transponder nadat u dit heeft ingeschakeld.",
+        "message": "Configureer via het tabblad Race Transponder nadat je dit hebt ingeschakeld.",
         "english": "Configure via the Race Transponder tab after enabling."
     },
     "featureAIRMODE": {
@@ -1395,7 +1395,7 @@
         "english": "<strong>Note:</strong> Remember to configure a Serial Port (via Ports tab) and choose a Serial Receiver Provider when using RX_SERIAL feature."
     },
     "configurationSpiRxHelp": {
-        "message": "<strong>Opmerking:</strong> De SPI RX provider werkt alleen als de vereiste hardware aan boord is of verbonden is met een SPI bus.",
+        "message": "<strong>Opmerking:</strong> De SPI RX provider werkt alleen als de vereiste hardware aan bord is of verbonden is met een SPI bus.",
         "english": "<strong>Note:</strong> The SPI RX provider will only work if the required hardware is on board or connected to an SPI bus."
     },
     "configurationOtherFeaturesHelp": {
@@ -1471,7 +1471,7 @@
         "english": "Accelerometer Trim"
     },
     "configurationAccelTrimsHelp": {
-        "message": "The Accelerometer Trims provide fine tuning to the accel calibration to remove drift while in stabilized modes, such as Horizon, Angle and Rescue.",
+        "message": "Met de versnellingsmeter-trims kan de versnellingsmeterkalibratie worden verfijnd om drift te verwijderen in gestabiliseerde modi, zoals Horizon, Angle en Rescue.",
         "english": "The Accelerometer Trims provide fine tuning to the accel calibration to remove drift while in stabilized modes, such as Horizon, Angle and Rescue.",
         "status": "New entry. Please translate!"
     },
@@ -1484,7 +1484,7 @@
         "english": "Accelerometer Pitch Trim"
     },
     "escProtocolDisabledMessage": {
-        "message": "<strong>Waarschuwing:</strong> Het selecteren van een motor-uitgang protocol dat niet wordt ondersteund door uw ESC's kan leiden tot <strong>ESC's die beginnen te draaien zodra een batterij is aangesloten</strong>. Zorg er om die reden <strong>altijd voor dat je alle propellors verwijdert als je de eerste keer een accu verbindt na het wijzigen van het motor output protocol</strong>.",
+        "message": "<strong>Waarschuwing:</strong> Het selecteren van een motor-uitgang protocol dat niet wordt ondersteund door je ESC's kan leiden tot <strong>ESC's die beginnen te draaien zodra een batterij is aangesloten</strong>. Zorg er om die reden <strong>altijd voor dat je alle propellors verwijdert als je de eerste keer een accu verbindt na het wijzigen van het motor output protocol</strong>.",
         "english": "<strong>Caution:</strong> Selecting a motor output protocol that is not supported by your ESCs can lead to the <strong>ESCs spinning up as soon as a battery is connected</strong>. For this reason, <strong>always make sure to remove the props before connecting a battery for the first time after changing the motor output protocol</strong>."
     },
     "configurationDshotBeeper": {
@@ -1504,7 +1504,7 @@
         "english": "Buzzer Configuration"
     },
     "configurationBeeperHelp": {
-        "message": "Enable or disable when to sound the Buzzer",
+        "message": "In- of uitschakelen wanneer de buzzer moet klinken",
         "english": "Enable or disable when to sound the Buzzer",
         "status": "New entry. Please translate!"
     },
@@ -1605,12 +1605,12 @@
         "english": "System configuration"
     },
     "configurationSystemHelp": {
-        "message": "<strong>Note:</strong> Make sure your FC is able to operate at the selected loop speed! Check CPU Load and Cycletime stability.",
+        "message": "<strong>Noot:</strong> Zorg ervoor dat je FC kan werken met de geselecteerde loop-snelheid! Controleer de stabiliteit van de CPU-belasting en de cyclustijd.",
         "english": "<strong>Note:</strong> Make sure your FC is able to operate at the selected loop speed! Check CPU Load and Cycletime stability.",
         "status": "New entry. Please translate!"
     },
     "configurationLoopTime": {
-        "message": "Vluchtcontroller Loop Tijd",
+        "message": "Vluchtcontroller loop-tijd",
         "english": "Flight Controller Loop Time"
     },
     "configurationSpeedGyroNoGyro": {
@@ -1903,7 +1903,7 @@
         "english": "The type of filtering method used for the input. Most users should use the default \"BIQUAD\" value as it provides a good balance between smoothness and delay. \"PT1\" reduces the delay slightly but provides less smoothing."
     },
     "receiverRcSmoothingInputManual": {
-        "message": "Selecteert of de invoer filter cutoff frequentie automatisch wordt berekend of handmatig wordt geselecteerd door de gebruiker. Automatisch is aanbevolen. Het gebruik van \"Handmatig\" wordt niet aanbevolen voor protocollen zoals Crossfire. Deze kunnen namelijk gedurende de vlucht veranderen.",
+        "message": "Selecteert of de invoer filter afsnijfrequentie automatisch wordt berekend of handmatig wordt geselecteerd door de gebruiker. Automatisch is aanbevolen. Het gebruik van \"Handmatig\" wordt niet aanbevolen voor protocollen zoals Crossfire. Deze kunnen namelijk gedurende de vlucht veranderen.",
         "english": "Selects whether the input filter cutoff frequency is automatically calculated (recommended) or manually selected by the user. Using \"Manual\" is not recommended for receiver protocols like Crossfire which can change in flight."
     },
     "receiverRcSmoothingDerivativeManual": {
@@ -1911,7 +1911,7 @@
         "english": "Selects whether the setpoint derivative filter cutoff frequency is automatically calculated (recommended) or manually selected by the user. Using \"Manual\" is not recommended for receiver protocols like Crossfire which can change in flight."
     },
     "receiverRcSmoothingInputHz": {
-        "message": "Ingang Afsnijfrequentie",
+        "message": "Ingang afsnijfrequentie",
         "english": "Input Cutoff Frequency"
     },
     "receiverRcSmoothingDerivativeCutoff": {
@@ -1995,12 +1995,12 @@
         "english": "Cancel"
     },
     "dialogProfileChangeTitle": {
-        "message": "<span class=\"message-negative\">Warning:</span> Profile Changed",
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> Profiel gewijzigd",
         "english": "<span class=\"message-negative\">Warning:</span> Profile Changed",
         "status": "New entry. Please translate!"
     },
     "dialogProfileChangeNote": {
-        "message": "The active profile was changed before changes were saved. All changes are <b>lost</b>.",
+        "message": "Het actieve profiel is gewijzigd voordat de wijzigingen werden opgeslagen. Alle wijzigingen gaan <b>verloren</b>.",
         "english": "The active profile was changed before changes were saved. All changes are <b>lost</b>.",
         "status": "New entry. Please translate!"
     },
@@ -2041,7 +2041,7 @@
         "english": "Proportional"
     },
     "profilesProportionalHelp": {
-        "message": "Bepaalt hoe sterk jouw quad de positie van de sticks volgt. (de Setpoint).<br><br>Een hogere waarde (gains) zorgt voor het strakker volgen van de positie van de stick. Echter kan dit leiden tot over rotatie als de waarde te hoog zijn in verhouding met de Derivative (D-term). De P-waarde kan je vergeleken met de veer van een schokdemper.",
+        "message": "Bepaalt hoe sterk jouw machine de positie van de sticks volgt (het setpunt).<br><br>Een hogere waarde (gain) zorgt voor het strakker volgen van de positie van de stick. Echter kan dit leiden tot overrotatie als de waarde te hoog is in verhouding met de differentiërende term (D-term). De P-term kan je vergelijken met de veer van een schokdemper.",
         "english": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint).<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the Derivative (D-term).  Think of the P-term as the spring on a car.",
         "description": "Proportional Term helpicon message on PID table titlebar"
     },
@@ -2059,7 +2059,7 @@
         "english": "Derivative"
     },
     "profilesDerivativeHelp": {
-        "message": "Bepaalt de sterkte van het dempend effect op alle bewegingen van je quad. Bij bewegingen die geïntroduceerd worden door jou sticks zorgt de D-term er voor dat de invoer wordt gedempt. De D-term dempt ook externe invloeden zoals propwash of een windvlaag.<br><br>Hogere waardes zorgen voor meer demping en voorkomt het overschieten van de P-term en FeedForward.<br>Echter, de D-term is ZEER gevoelig voor vibraties op hoge frequenties. De ruis wordt tussen de 10 en de 100 keer versterkt.<br><br> Hoge frequentie ruis in combinatie met een hoge D-waarde kan er voor zorgen dat motoren warm worden of zelfs uitbranden als de gyro niet correct gefilterd is. (Zie tabblad Filters)<br><br>De D-term kan worden gezien als een schokbreker van een auto. Echter met als extra eigenschap dat deze ruis van de gyro zeer sterk vergroot.",
+        "message": "Bepaalt de sterkte van het dempend effect op alle bewegingen van je quad. Bij bewegingen die geïntroduceerd worden door jou sticks zorgt de D-term er voor dat de invoer wordt gedempt. De D-term dempt ook externe invloeden zoals propwash of een windvlaag.<br><br>Hogere waardes zorgen voor meer demping en voorkomt het overschieten van de P-term en feedforward.<br>Echter, de D-term is ZEER gevoelig voor vibraties op hoge frequenties. De ruis wordt tussen de 10 en de 100 keer versterkt.<br><br> Hoge frequentie ruis in combinatie met een hoge D-waarde kan er voor zorgen dat motoren warm worden of zelfs uitbranden als de gyro niet correct gefilterd is (zie tabblad Filters)<br><br>De D-term kan worden gezien als een schokbreker van een auto. Echter met als extra eigenschap dat deze ruis van de gyro zeer sterk vergroot.",
         "english": "Controls the strength of dampening to ANY motion on the craft.  For stick moves, the D-term dampens the command. For an outside influence (prop-wash OR wind gust) the D-term dampens the influence.<br /><br />Higher gains provide more dampening and reduce overshoot by P-term and FF.<br>However, the D-term is VERY sensitive to gyro high frequency vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise can cause motor heat and burn out motors if D-gains are too high or the gyro noise is not filtered well (see Filters tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the negative inherent property of magnifying high frequency gyro noise.",
         "description": "Derivative Term helpicon message on PID table titlebar"
     },
@@ -2085,7 +2085,7 @@
         "english": "Loaded Profile: <strong class=\"message-positive\">$1</strong>"
     },
     "receiverHelp": {
-        "message": "Neem alsjeblieft het hoofdstuk over de ontvanger door in de documentatie. Configureer seriële poort (indien nodig), ontvangermodus (serieel / ppm / pwm), provider (voor seriële ontvangers), bind ontvanger, stel kanaaloverzicht in, configureer kanaaleindpunten en het bereik op uw TX zodat alle kanalen van ~1000 tot ~2000 gaan. Stel het middelpunt in (standaard is dit 1500), trim de kanalen zodat als ze gecentreerd zijn op de waarde 1500 staan, configureer de deadband van de sticks. En controleer ook wat er gebeurt wanneer je je zender uitgeschakeld of deze buiten bereik gaat.<br /><span class=\"message-negative\">BELANGRIJK:</span> Lees voordat je gaat vliegen het hoofdstuk over failsafe en neem de documentatie door hoe je failsafe configureert.",
+        "message": "Neem alsjeblieft het hoofdstuk over de ontvanger door in de documentatie. Configureer seriële poort (indien nodig), ontvangermodus (serieel / ppm / pwm), provider (voor seriële ontvangers), bind ontvanger, stel kanaaloverzicht in, configureer kanaaleindpunten en het bereik op je TX zodat alle kanalen van ~1000 tot ~2000 gaan. Stel het middelpunt in (standaard is dit 1500), trim de kanalen zodat als ze gecentreerd zijn op de waarde 1500 staan, configureer de deadband van de sticks. En controleer ook wat er gebeurt wanneer je je zender uitgeschakeld of deze buiten bereik gaat.<br /><span class=\"message-negative\">BELANGRIJK:</span> Lees voordat je gaat vliegen het hoofdstuk over failsafe en neem de documentatie door hoe je failsafe configureert.",
         "english": "Please read receiver chapter of the documentation.  Configure serial port (if required), receiver mode (serial/ppm/pwm), provider (for serial receivers), bind receiver, set channel map, configure channel endpoints/range on TX so that all channels go from ~1000 to ~2000.  Set midpoint (default 1500), trim channels to 1500, configure stick deadband, verify behaviour when TX is off or out of range.<br /><span class=\"message-negative\">IMPORTANT:</span> Before flying read failsafe chapter of documentation and configure failsafe."
     },
     "receiverStickMin": {
@@ -2153,7 +2153,7 @@
         "english": "Bind Receiver"
     },
     "receiverButtonBindMessage": {
-        "message": "Koppel verzoek verzonden naar de vlucht controller.",
+        "message": "Koppel verzoek verzonden naar de vluchtcontroller.",
         "english": "Bind request sent to the flight controller."
     },
     "receiverButtonSticks": {
@@ -2165,7 +2165,7 @@
         "english": "Preview"
     },
     "receiverMspWarningText": {
-        "message": "Met deze sticks kan Rotorflight worden ingeschakeld en worden getest zonder dat er een zender of ontvanger aangesloten is. <strong>Deze functie is echter niet bedoeld om mee te vliegen. De propellers moeten bij gebruik van deze functie verwijderd zijn.</strong><br><br>Deze functie garandeert geen betrouwbare controle over uw quad. <strong>Verwijder uw propellors. Doe je dit niet dan is de kans op letsel ZEER groot.</strong>",
+        "message": "Met deze sticks kan Rotorflight worden ingeschakeld en worden getest zonder dat er een zender of ontvanger aangesloten is. <strong>Deze functie is echter niet bedoeld om mee te vliegen. De propellers moeten bij gebruik van deze functie verwijderd zijn.</strong><br><br>Deze functie garandeert geen betrouwbare controle over je quad. <strong>Verwijder je propellors. Doe je dit niet dan is de kans op letsel ZEER groot.</strong>",
         "english": "These sticks allow Rotorflight to be armed and tested without a transmitter or receiver being present. However, <strong>this feature is not intended for flight and rotor blades must not be attached.</strong><br /><br />This feature does not guarantee reliable control of your craft. <strong>Serious injury is likely to result if rotor blades are left on.</strong>"
     },
     "receiverMspEnableButton": {
@@ -2173,7 +2173,7 @@
         "english": "Enable controls"
     },
     "auxiliaryHelp": {
-        "message": "Configureer hier modi met een combinatie van bereiken en / of links naar andere modi (links worden ondersteund op BF 4.0 en hoger). Gebruik <strong>bereiken</strong> om de schakelaars op uw zender en bijbehorende modustoewijzingen te definiëren. Een ontvangerkanaal dat een waarde geeft tussen een min / max bereik, activeert de modus. Gebruik een <strong>link</strong> om een modus te activeren wanneer een andere modus is geactiveerd. <strong>Uitzonderingen:</strong> ARM kan niet worden gekoppeld aan of vanuit een andere modus, modi kunnen niet worden gekoppeld aan andere modi die zijn geconfigureerd met een link (geketende links). Meerdere bereiken / links kunnen worden gebruikt om elke modus te activeren. Als er meer dan één bereik / link is gedefinieerd voor een modus, kan elk van hen worden ingesteld op <strong> EN </strong> of <strong>OF</strong>. Een modus wordt geactiveerd wanneer:<br />- ALLE <strong>EN</strong> bereiken / links actief zijn; OF <br />- ten minste één <strong>OF</strong> bereik / link is actief.",
+        "message": "Configureer hier modi met een combinatie van bereiken en / of links naar andere modi (links worden ondersteund op BF 4.0 en hoger). Gebruik <strong>bereiken</strong> om de schakelaars op je zender en bijbehorende modustoewijzingen te definiëren. Een ontvangerkanaal dat een waarde geeft tussen een min / max bereik, activeert de modus. Gebruik een <strong>link</strong> om een modus te activeren wanneer een andere modus is geactiveerd. <strong>Uitzonderingen:</strong> ARM kan niet worden gekoppeld aan of vanuit een andere modus, modi kunnen niet worden gekoppeld aan andere modi die zijn geconfigureerd met een link (geketende links). Meerdere bereiken / links kunnen worden gebruikt om elke modus te activeren. Als er meer dan één bereik / link is gedefinieerd voor een modus, kan elk van hen worden ingesteld op <strong> EN </strong> of <strong>OF</strong>. Een modus wordt geactiveerd wanneer:<br />- ALLE <strong>EN</strong> bereiken / links actief zijn; OF <br />- ten minste één <strong>OF</strong> bereik / link is actief.",
         "english": "Configure modes here using a combination of ranges and/or links to other modes (links supported on BF 4.0 and later). Use <strong>ranges</strong> to define the switches on your transmitter and corresponding mode assignments. A receiver channel that gives a reading between a range min/max will activate the mode. Use a <strong>link</strong> to activate a mode when another mode is activated. <strong>Exceptions:</strong> ARM cannot be linked to or from another mode, modes cannot be linked to other modes that are configured with a link (chained links). Multiple ranges/links can be used to activate any mode. If there is more than one range/link defined for a mode, each of them can be set to <strong>AND</strong> or <strong>OR</strong>. A mode will be activated when:<br />- ALL <strong>AND</strong> ranges/links are active; OR<br />- at least one <strong>OR</strong> range/link is active.<br /><br />Remember to save your settings using the Save button."
     },
     "auxiliaryToggleUnused": {
@@ -2345,7 +2345,7 @@
         "english": "Yaw F-gain"
     },
     "adjustmentsFunctionYawCenter": {
-        "message": "Yaw Center Offset",
+        "message": "Yaw middelpunt verschuiving",
         "english": "Yaw Center Offset"
     },
     "adjustmentsFunctionYawCWStopGain": {
@@ -2437,17 +2437,17 @@
         "english": "LED Profile Selection"
     },
     "servoSettings": {
-        "message": "Servo Settings",
+        "message": "Servo-instellingen",
         "english": "Servo Settings",
         "status": "New entry. Please translate!"
     },
     "servoPwmRate": {
-        "message": "Servo update rate",
+        "message": "Servo-updatesnelheid",
         "english": "Servo update rate",
         "status": "New entry. Please translate!"
     },
     "servoPwmRateHelp": {
-        "message": "Rate for servo position updates in Hz. Also known as PWM rate. For analog servos, this is always 50Hz. For digital servos, it can vary from 125Hz to 400Hz. Please check your servo's data sheet.",
+        "message": "Updatesnelheid van servoposities in Hz. Ook bekend als PWM-snelheid. Voor analoge servo's is dit altijd 50Hz. Voor digitale servo's kan dit variëren van 125 Hz tot 400 Hz. Controleer het gegevensblad van je servo.",
         "english": "Rate for servo position updates in Hz. Also known as PWM rate. For analog servos, this is always 50Hz. For digital servos, it can vary from 125Hz to 400Hz. Please check your servo's data sheet.",
         "status": "New entry. Please translate!"
     },
@@ -2496,27 +2496,27 @@
         "english": "PWM Signal"
     },
     "servoUnusualRatesWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!",
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> De servo <i>snelheden</i> zijn ingesteld op ongebruikelijke waarden. S.v.p. controleren!",
         "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!",
         "status": "New entry. Please translate!"
     },
     "servoUnequalRatesWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The cyclic servo <i>Rates</i> are not equal. Please check!",
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> De cyclische servo <i>snelheden</i> zijn niet gelijk. S.v.p. controleren!",
         "english": "<span class=\"message-negative\">Warning:</span> The cyclic servo <i>Rates</i> are not equal. Please check!",
         "status": "New entry. Please translate!"
     },
     "servoUnusualLimitsWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!",
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> De servo <i>limieten</i> zijn ingesteld op ongebruikelijke waarden. S.v.p. controleren!",
         "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!",
         "status": "New entry. Please translate!"
     },
     "servoUnequalLimitsWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The aileron servo <i>Limits</i> are not equal. Please check!",
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> De <i>limieten</i> van de aileron-servo zijn niet gelijk. S.v.p. controleren!",
         "english": "<span class=\"message-negative\">Warning:</span> The aileron servo <i>Limits</i> are not equal. Please check!",
         "status": "New entry. Please translate!"
     },
     "servoOverrideNote": {
-        "message": "<strong>Let op.</strong> Servo Override stuurt de servo's naar vaste posities voor installatiedoeleinden. De override waarden worden niet opgeslagen en zullen worden gereset in een herstart.",
+        "message": "<strong>Let op.</strong> Servo Override stuurt de servo's naar vaste posities voor installatiedoeleinden. De override waarden worden niet opgeslagen en zullen worden gereset na een herstart.",
         "english": "<strong>Note.</strong> Servo Override forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "servoOverride": {
@@ -2524,7 +2524,7 @@
         "english": "Servo Override"
     },
     "servoOverrideHelp": {
-        "message": "Select the Override via the switch and then move the slider to move the servo arm to the commanded angle. ",
+        "message": "Selecteer de Override via de schakelaar en verplaats vervolgens de schuifregelaar om de servo-arm naar de gevraagde hoek te verplaatsen.",
         "english": "Select the Override via the switch and then move the slider to move the servo arm to the commanded angle. ",
         "status": "New entry. Please translate!"
     },
@@ -2573,7 +2573,7 @@
         "english": "Swashplate type"
     },
     "mixerSwashTypeHelp": {
-        "message": "Selecteer het tuimelschijftype voor jouw helikopter.<br><strong>Hoek:</strong> Dit is de hoek tussen de lift en elk van de aileron servos. De opties zijn 120&deg, 135&deg en 140&deg. Dit is afhankelijk van het ontwerp van de helikopters.<br><strong>Elevator:</strong> Sommige helikopters die de lift servo (inline met staart en nee) staan voor de hel, terwijl anderen achteraan staan. Kies degene die van toepassing is op uw helikopter <br><strong>Aangepaste menging:</strong> Deze optie kan alleen worden geconfigureerd via de CLI. ",
+        "message": "Selecteer het tuimelschijftype voor jouw helikopter.<br><strong>Hoek:</strong> Dit is de hoek tussen de lift en elk van de aileron servos. De opties zijn 120&deg, 135&deg en 140&deg. Dit is afhankelijk van het ontwerp van de helikopters.<br><strong>Elevator:</strong> Sommige helikopters die de lift servo (inline met staart en nee) staan voor de hel, terwijl anderen achteraan staan. Kies degene die van toepassing is op je helikopter <br><strong>Aangepaste menging:</strong> Deze optie kan alleen worden geconfigureerd via de CLI. ",
         "english": "Select the swashplate type for your helicopter.<br><strong>Angle:</strong> This is the angle between the elevator and each of the aileron servos. The options are 120&deg, 135&deg and 140&deg. This is dependant on the helicopters design.<br><strong>Elevator:</strong> Some helicopters the elevator servo (inline with tail and nose) is at the front of the heli, while others are at the rear. Choose the one applicable to your helicopter <br><strong>Custom mixing:</strong> This option can only be configured through the CLI. "
     },
     "mixerSwashType0": {
@@ -2621,7 +2621,7 @@
         "english": "Swashring"
     },
     "mixerSwashRingHelp": {
-        "message": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum.",
+        "message": "De swashring beperkt de maximale hoek die de tuimelschijf kan maken om vastlopen te voorkomen. De pitch- en rolassen moet afzonderlijk worden geconfigureerd (via de mixerinvoer en -schaalverdeling) voor de gewenste hellingshoeken (zonder vastlopen). Als echter zowel de maximale pitch als rol <strong>tegelijkertijd</strong> worden gevraagd, dan zal de tuimelschijf naar een grotere hoek moeten afbuigen dan voor beide assen afzonderlijk. Dit kan ertoe leiden dat de tuimelschijf tegen de hoofdas vastloopt.<br><br>Als je de waarde van de swashring verhoogt, wordt de maximale tuimelschijfhoek beperkt wanneer zowel pitch als rol maximaal zijn.",
         "english": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum.",
         "status": "New entry. Please translate!"
     },
@@ -2662,12 +2662,12 @@
         "english": "Mixer Control Inputs"
     },
     "mixerInputChannelsHelp": {
-        "message": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle.",
+        "message": "<strong>Let op! Dit is de juiste plaats om je controls te beperken</strong><br><br>De mixer invoersnelheid is voor het instellen van  schaalfactoren voor de rotorkop. Omdat elke rotorkop anders is, zijn voor elke opstelling verschillende schaalwaarden nodig. <br><strong>Control:</strong> deze kolom bevat alle gestabiliseerde besturingsfuncties. <br><strong>Minimum:</strong> Stel de minimale hoek van de rotorbladen in.<br><strong>Maximum:</strong> Stel de maximale hoek van de rotorbladen in.<br><strong>Schaal:</strong> Verhoog of verlaag de schaalwaarde totdat de helikopterbladen overeenkomen met de gevraagde hoek. <br><br><strong>Kalibratieproces mixerinvoer</strong><br><strong>Stap 1: </strong>Schakel de mixer override in op het tabblad 'Systeem'. Het item 'Mixer override' is nu zichtbaar op deze pagina. <br><strong>Stap 2: </strong>Schakel de override in op de te kalibreren Control. <br><strong>Stap 3: </strong>Stel de Mixer Override in op een hoek (zeg 10 graden). <br><strong>Stap 4: </strong>Meet de werkelijke bladhoek.<br><strong>Stap 5: </strong>Stel de schaal zo in dat de fysieke bladhoek overeenkomt met de ingestelde hoek.",
         "english": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle.",
         "status": "New entry. Please translate!"
     },
     "mixerOverrideNote": {
-        "message": "<strong>Let op.</strong> Mixer Override forceert de mixer invoer in willekeurige posities voor installatiedoeleinden. De override waarden zijn niet opgeslagen en zullen worden gereset in een herstart.",
+        "message": "<strong>Let op.</strong> Mixer Override forceert de mixer invoer in willekeurige posities voor installatiedoeleinden. De override waarden zijn niet opgeslagen en zullen worden gereset na een herstart.",
         "english": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "mixerOverride": {
@@ -2675,7 +2675,7 @@
         "english": "Mixer Override"
     },
     "mixerOverrideHelp": {
-        "message": "This feature is used for setting up the rotor and is part of the <strong>Mixer Calibration</strong> process. When the bypass enable is active the mixer can be commanded to the requested positions directly.",
+        "message": "Deze functie wordt gebruikt voor het instellen van de rotor en maakt deel uit van het <strong>mixer kalibratie</strong> proces. Wanneer de override actief is, kan de mixer direct naar de gevraagde posities worden gestuurd.",
         "english": "This feature is used for setting up the rotor and is part of the <strong>Mixer Calibration</strong> process. When the bypass enable is active the mixer can be commanded to the requested positions directly.",
         "status": "New entry. Please translate!"
     },
@@ -2708,11 +2708,11 @@
         "english": "Mul"
     },
     "mixerInputName": {
-        "message": "Bediening",
+        "message": "Control",
         "english": "Control"
     },
     "mixerInputRate": {
-        "message": "Schalen",
+        "message": "Schaal",
         "english": "Scaling"
     },
     "mixerInputMin": {
@@ -2916,7 +2916,7 @@
         "english": "Current GPS location"
     },
     "gpsMapMessage1": {
-        "message": "Controller alsjeblieft je internetverbinding",
+        "message": "Controleer alsjeblieft je internetverbinding",
         "english": "Please check your internet connection"
     },
     "gps3dFix": {
@@ -3092,7 +3092,7 @@
         "english": "Errors:"
     },
     "motorOverrideNote": {
-        "message": "<strong>Opmerking:</strong> Motor override forceert de output throttle naar een vaste waarde voor installatiedoeleinden. De override waarden zijn niet opgeslagen en zullen worden gereset in een herstart.<br/><br/><strong class=\"message-negative\">MOTOR OVERRIDE ZAL DE MOTOREN LATEN DRAAIEN!</strong>",
+        "message": "<strong>Opmerking:</strong> Motor override forceert de output throttle naar een vaste waarde voor installatiedoeleinden. De override waarden zijn niet opgeslagen en zullen worden gereset na een herstart.<br/><br/><strong class=\"message-negative\">MOTOR OVERRIDE ZAL DE MOTOREN LATEN DRAAIEN!</strong>",
         "english": "<strong>Note.</strong> Motor Override forces the output throttle to a fixed value for setup purposes. The override values are not saved, and will be reset in reboot.<br/><br/><strong class=\"message-negative\">MOTOR OVERRIDE WILL MAKE THE MOTORS TO SPOOL UP!</strong>"
     },
     "motorNumber": {
@@ -3104,7 +3104,7 @@
         "english": "Motor Override"
     },
     "motorOverrideHelp": {
-        "message": "Select the Override via the switch and then move the slider to begin to operate the motor. ",
+        "message": "Selecteer de Override via de schakelaar en verplaats vervolgens de schuifregelaar om de motor te bedienen. ",
         "english": "Select the Override via the switch and then move the slider to begin to operate the motor. ",
         "status": "New entry. Please translate!"
     },
@@ -3197,7 +3197,7 @@
         "english": "Number of motors is 0.<br />Verify the current Mixer on $t(tabMotors.message) tab or setup a custom one through CLI. Refer to this <a href=\"https://github.com/betaflight/betaflight/blob/master/docs/Mixer.md\" target=\"_blank\" rel=\"noopener noreferrer\">Wiki page</a>."
     },
     "escDshotDirectionDialog-WrongFirmwareText": {
-        "message": "Update de firmware.<br /> Zorg ervoor dat u de nieuwste firmware gebruikt: Betaflight 4.3 of nieuwer.",
+        "message": "Update de firmware.<br /> Zorg ervoor dat je de nieuwste firmware gebruikt: Betaflight 4.3 of nieuwer.",
         "english": "Update the firmware.<br /> Make sure you are using the latest firmware: Betaflight 4.3 or newer."
     },
     "escDshotDirectionDialog-WizardActionHint": {
@@ -3281,62 +3281,62 @@
         "english": "Timeout for ending autorotation and moving to normal IDLE."
     },
     "govAutoMinEntryTime": {
-        "message": "Autorotation minimum entry time",
+        "message": "Autorotatie minimale vliegtijd",
         "english": "Autorotation minimum entry time",
         "status": "New entry. Please translate!"
     },
     "govAutoMinEntryTimeHelp": {
-        "message": "Minimum flight time before autorotation can be engaged.",
+        "message": "Minimale vliegtijd voordat autorotatie kan worden ingeschakeld.",
         "english": "Minimum flight time before autorotation can be engaged.",
         "status": "New entry. Please translate!"
     },
     "govLostThrottleTimeout": {
-        "message": "Zero Throttle timeout",
+        "message": "Time-out geen throttle",
         "english": "Zero Throttle timeout",
         "status": "New entry. Please translate!"
     },
     "govLostThrottleTimeoutHelp": {
-        "message": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup.",
+        "message": "Time-out voor ontbrekend gassignaal, voordat de governor wordt uitgeschakeld. Als het gassignaal binnen deze time-out terugkeert, voert de governor een herstel-spoolup uit.",
         "english": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup.",
         "status": "New entry. Please translate!"
     },
     "govLostHeadspeedTimeout": {
-        "message": "Headspeed signal timeout",
+        "message": "Time-out rotortoerentalsignaal ",
         "english": "Headspeed signal timeout",
         "status": "New entry. Please translate!"
     },
     "govLostHeadspeedTimeoutHelp": {
-        "message": "Timeout for missing headspeed signal, before spooling down. If the RPM signal returns within this timeout, the governor will perform a recovery spoolup.",
+        "message": "Time-out voor ontbrekend rotortoerentalsignaal, voor spool down. Als het RPM-signaal binnen deze time-out terugkeert, voert de governor een herstel-spoolup uit.",
         "english": "Timeout for missing headspeed signal, before spooling down. If the RPM signal returns within this timeout, the governor will perform a recovery spoolup.",
         "status": "New entry. Please translate!"
     },
     "govHeadspeedFilterHz": {
-        "message": "Headspeed filter cutoff [Hz]",
+        "message": "Afsnijfrequentie rotortoerentalfilter  [Hz]",
         "english": "Headspeed filter cutoff [Hz]",
         "status": "New entry. Please translate!"
     },
     "govHeadspeedFilterHzHelp": {
-        "message": "Cutoff for the headspeed PID input lowpass filter.",
+        "message": "Afsnijfrequentie voor het rotortoerental PID invoer laagdoorlaatfilter.",
         "english": "Cutoff for the headspeed PID input lowpass filter.",
         "status": "New entry. Please translate!"
     },
     "govVoltageFilterHz": {
-        "message": "Battery voltage filter cutoff [Hz]",
+        "message": "Afsnijfrequentie batterijspanningsfilter [Hz]",
         "english": "Battery voltage filter cutoff [Hz]",
         "status": "New entry. Please translate!"
     },
     "govVoltageFilterHzHelp": {
-        "message": "Cutoff for the battery voltage lowpass filter.",
+        "message": "Afsnijfrequentie voor het laagdoorlaatfilter van de batterijspanning.",
         "english": "Cutoff for the battery voltage lowpass filter.",
         "status": "New entry. Please translate!"
     },
     "govTTAFilterHz": {
-        "message": "TTA filter cutoff [Hz]",
+        "message": "Afsnijfrequentie TTA-filter [Hz]",
         "english": "TTA filter cutoff [Hz]",
         "status": "New entry. Please translate!"
     },
     "govTTAFilterHzHelp": {
-        "message": "Cutoff for the TTA input lowpass filter.",
+        "message": "Afsnijfrequentie voor het TTA-invoer laagdoorlaatfilter.",
         "english": "Cutoff for the TTA input lowpass filter.",
         "status": "New entry. Please translate!"
     },
@@ -3457,7 +3457,7 @@
         "english": "Debug"
     },
     "sensorsGyroTitle": {
-        "message": "Gyroscope - deg/s",
+        "message": "Gyroscope - graden/s",
         "english": "Gyroscope - deg/s"
     },
     "sensorsAccelTitle": {
@@ -3529,7 +3529,7 @@
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"
     },
     "cliConfirmSnippetNote": {
-        "message": "<strong>Opmerking:</strong>U kunt opdrachten beoordelen en bewerken voordat ze worden uitgevoerd.",
+        "message": "<strong>Opmerking:</strong>Je kunt opdrachten beoordelen en bewerken voordat ze worden uitgevoerd.",
         "english": "<strong>Note</strong>: You can review and edit commands before execution."
     },
     "cliConfirmSnippetBtn": {
@@ -3613,7 +3613,7 @@
         "english": "No Logging"
     },
     "blackboxLoggingFlash": {
-        "message": "Aan boord Flash",
+        "message": "Onboard Flash",
         "english": "Onboard Flash"
     },
     "blackboxLoggingSdCard": {
@@ -3629,7 +3629,7 @@
         "english": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
     },
     "sdcardNote": {
-        "message": "Vluchtlogboek kan worden opgenomen op de SD-kaart van je vlucht controller.",
+        "message": "Vluchtlogboek kan worden opgenomen op de SD-kaart van je vluchtcontroller.",
         "english": "Flight logs can be recorded to your flight controller's onboard SD card slot."
     },
     "dataflashUsedSpace": {
@@ -3649,7 +3649,7 @@
         "english": "Free space for logs"
     },
     "dataflashNote": {
-        "message": "Vluchtlogboek kan worden opgenomen op de dataflash chip van je vlucht controller.",
+        "message": "Vluchtlogboek kan worden opgenomen op de dataflash chip van je vluchtcontroller.",
         "english": "Flight logs can be recorded to your flight controller's onboard dataflash chip."
     },
     "dataflashNotPresentNote": {
@@ -3681,7 +3681,7 @@
         "english": "Confirm dataflash erase"
     },
     "dataflashConfirmEraseNote": {
-        "message": "Dit zal alle Blackbox-logs en andere gegevens in de dataflash wissen. Dit zal ongeveer 20 seconden duren, weet u het zeker?",
+        "message": "Dit zal alle Blackbox-logs en andere gegevens in de dataflash wissen. Dit zal ongeveer 20 seconden duren, weet je het zeker?",
         "english": "This will erase any Blackbox logs or other data contained in the dataflash. It should take about 20 seconds, are you sure?"
     },
     "dataflashSavingTitle": {
@@ -3817,7 +3817,7 @@
         "english": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (F4, F7, H7). To make the different boards work with the same firmware, a specific configuration file is deployed alongside the firmware when a Unified Target is flashed.<br>This version of Betaflight configurator supports flashing of Unified Targets with the respective board specific configurations in one step. The different firmware types that are available for each board are shown in the drop-down as follows:<br /><br /><strong>&lt;board name&gt;</strong> or<br><strong>&lt;board name&gt; (Legacy)</strong>:<br>non-unified target.<br /><br /><strong>&lt;board name&gt; (&lt;manufacturer id&gt;)</strong>:<br>(4 character manufacturer id)<br>Unified Target.<br /><br /><strong>Please use Unified Targets where available.</strong>"
     },
     "firmwareFlasherOnlineSelectFirmwareVersionDescription": {
-        "message": "Selecteer de firmwareversie voor je bord.",
+        "message": "Selecteer de firmware-versie voor je bord.",
         "english": "Select firmware version for your board."
     },
     "firmwareFlasherNoRebootDescription": {
@@ -3881,11 +3881,11 @@
         "english": "Choose a Board"
     },
     "firmwareFlasherOptionLabelSelectFirmwareVersion": {
-        "message": "Kies een Firmware versie",
+        "message": "Kies een firmware-versie",
         "english": "Choose a Firmware version"
     },
     "firmwareFlasherOptionLabelSelectFirmwareVersionFor": {
-        "message": "Kies een Firmware versie voor",
+        "message": "Kies een firmware-versie voor",
         "english": "Choose a Firmware version for"
     },
     "firmwareFlasherButtonLoadLocal": {
@@ -4006,7 +4006,7 @@
         "english": "Detected: <strong>$1</strong> - previous device still flashing, please replug to try again"
     },
     "ledStripHelp": {
-        "message": "De vluchtcontroller kan de kleuren en effecten van individuele LED's op een strip regelen.<br />Configureer allereerst de LED's op het raster. Configureer daarna de bedradingsvolgorde en bevestig vervolgens de LED's op uw quad op basis van de rasterposities. LED's zonder een draadnummer worden niet opgeslagen.<br/>Dubbelklik op een kleur om de HSV-waarden te bewerken.",
+        "message": "De vluchtcontroller kan de kleuren en effecten van individuele LED's op een strip regelen.<br />Configureer allereerst de LED's op het raster. Configureer daarna de bedradingsvolgorde en bevestig vervolgens de LED's op je quad op basis van de rasterposities. LED's zonder een draadnummer worden niet opgeslagen.<br/>Dubbelklik op een kleur om de HSV-waarden te bewerken.",
         "english": "The flight controller can control colors and effects of individual LEDs on a strip.<br />Configure LEDs on the grid, configure wiring order then attach LEDs on your aircraft according to grid positions. LEDs without wire ordering number will not be saved.<br />Double-click on a color to edit the HSV values."
     },
     "ledStripColorSetupTitle": {
@@ -4015,7 +4015,7 @@
         "description": "Color setup title of the led strip"
     },
     "ledStripH": {
-        "message": "U",
+        "message": "H",
         "english": "H",
         "description": "Abbreviation of Hue in HSV (Hue, Saturation, Brightness) color model"
     },
@@ -4411,27 +4411,27 @@
         "english": "PID Controller Settings"
     },
     "profilesItermLimit": {
-        "message": "I-term Limits",
+        "message": "I-term limiet",
         "english": "I-term Limits",
         "status": "New entry. Please translate!"
     },
     "profilesItermLimitHelp": {
-        "message": "Hard limit for the I-term in the PID loop. The absolute I-term values will never go above these limits.",
+        "message": "Harde limiet voor de I-term in de PID loop. De absolute I-term waarden zullen nooit boven deze limieten komen.",
         "english": "Hard limit for the I-term in the PID loop. The absolute I-term values will never go above these limits.",
         "status": "New entry. Please translate!"
     },
     "profilesItermLimitRoll": {
-        "message": "I-term limit for Roll axis [%]",
+        "message": "I-term limiet voor rol-as [%]",
         "english": "I-term limit for Roll axis [%]",
         "status": "New entry. Please translate!"
     },
     "profilesItermLimitPitch": {
-        "message": "I-term limit for Pitch axis [%]",
+        "message": "I-term limiet voor pitch-as [%]",
         "english": "I-term limit for Pitch axis [%]",
         "status": "New entry. Please translate!"
     },
     "profilesItermLimitYaw": {
-        "message": "I-term limit for Yaw axis [%]",
+        "message": "I-term limiet voor yaw-as [%]",
         "english": "I-term limit for Yaw axis [%]",
         "status": "New entry. Please translate!"
     },
@@ -4440,7 +4440,7 @@
         "english": "I Term Decay"
     },
     "profilesItermDecayHelp": {
-        "message": "I-term vector automatisch kleiner maken zolang het vaartuig niet volledig opgetoerd is. Hierdoor wordt voorkomen dat de heli bijv. omrolt tijdens het optoeren.",
+        "message": "Maakt de I-term vector automatisch kleiner zolang het vliegtuig niet volledig opgetoerd is. Hierdoor wordt voorkomen dat de heli bijv. omrolt tijdens het optoeren.",
         "english": "Bleeds off the current I Term vector when the craft is not fully spooled up. This helps preventing the craft from tipping over on the ground."
     },
     "profilesItermDecayTime": {
@@ -4452,7 +4452,7 @@
         "english": "I Term Rotation"
     },
     "profilesItermRotationHelp": {
-        "message": "Draait de huidige Roll en Pitch I Term vectors rond Yaw als de heli draait. Dit wordt soms Piro Compensatie genoemd.",
+        "message": "Draait de huidige rol en pitch I-termvectors rond Yaw als de heli draait. Dit wordt soms Piro Compensatie genoemd.",
         "english": "Rotates the current Roll and Pitch I Term vectors around Yaw when the craft rotates. This is sometimes called Piro Compensation."
     },
     "profilesItermRelax": {
@@ -4460,7 +4460,7 @@
         "english": "I Term Relax"
     },
     "profilesItermRelaxHelp": {
-        "message": "Limits the accumulation of I Term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements. You can choose the axes in which this is active. In addition this cutoff can be limited to the increasing direction only which can result in faster tracking correction when returning from the fast movement (labeled increment ONLY)<br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw <br><br> The fast movement can be detected either by the change in <strong>Setpoint</strong> or change in <strong>Gyro</strong>. ",
+        "message": "Beperkt de accumulatie van I-term wanneer snelle bewegingen plaatsvinden. Dit helpt bij het verminderen van terugvering aan het einde van rollen en andere snelle bewegingen. Je kan de assen kiezen waarvoor dit actief is. Bovendien kan dit worden beperkt tot alleen de stijgende richting, wat kan resulteren in een snellere volgcorrectie bij terugkeer van de snelle beweging (gelabeld 'ALLEEN ophogen')<br><strong>RP:</strong> Rol, Pitch <br><strong >RPY:</strong> Rol, Pitch, Yaw <br><br> De snelle beweging kan worden gedetecteerd door de verandering in <strong>setpunt</strong> of verandering in <strong>gyro</strong>.",
         "english": "Limits the accumulation of I Term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements. You can choose the axes in which this is active. In addition this cutoff can be limited to the increasing direction only which can result in faster tracking correction when returning from the fast movement (labeled increment ONLY)<br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw <br><br> The fast movement can be detected either by the change in <strong>Setpoint</strong> or change in <strong>Gyro</strong>. ",
         "status": "Modified entry. Please translate!"
     },
@@ -4595,7 +4595,7 @@
         "english": "Center Offset"
     },
     "profilesYawCenterOffsetHelp": {
-        "message": "Center offset voor staartmotor of servo",
+        "message": "Middelpunt verschuiving voor staartmotor of servo",
         "english": "Center Offset for tail motor or servo"
     },
     "profilesYawStopGainCW": {
@@ -4715,7 +4715,7 @@
         "english": "Rates Type"
     },
     "rateSetupRatesTypeTip": {
-        "message": "Als u een ratetype wijzigt, verandert de rate curve en de manier waarop u deze kunt instellen",
+        "message": "Als je een ratetype wijzigt, verandert de rate curve en de manier waarop je deze kunt instellen",
         "english": "Changing rates type will change the rates curve and the way you can set it"
     },
     "rateSetupRate": {
@@ -4755,7 +4755,7 @@
         "english": "Center Sensitivity"
     },
     "rateSetupMaxVel": {
-        "message": "Max Vel [deg/s]",
+        "message": "Max [graden/s]",
         "english": "Max Vel [deg/s]"
     },
     "rateSetupRatesCurve": {
@@ -4779,35 +4779,35 @@
         "english": "Gyro D-term Filter Settings"
     },
     "gyroLowpassFiltersGroup": {
-        "message": "Gyro Lowpass filters",
+        "message": "Gyro laagdoorlaatfilters",
         "english": "Gyro Lowpass Filters"
     },
     "gyroLowpassFrequency": {
-        "message": "Gyro Lowpass 1 afsnijfrequentie [Hz]",
+        "message": "Gyro laagdoorlaat 1 afsnijfrequentie [Hz]",
         "english": "Gyro Lowpass 1 Cutoff Frequency [Hz]"
     },
     "gyroLowpassType": {
-        "message": "Gyro Lowpass 1 filtertype",
+        "message": "Gyro laagdoorlaat 1 filtertype",
         "english": "Gyro Lowpass 1 Filter Type"
     },
     "gyroLowpassDynMinFrequency": {
-        "message": "Gyro Lowpass 1 dynamische min afsnijfrequentie [Hz]",
+        "message": "Gyro laagdoorlaat 1 dynamische min afsnijfrequentie [Hz]",
         "english": "Gyro Lowpass 1 Dynamic Min Cutoff Frequency [Hz]"
     },
     "gyroLowpassDynMaxFrequency": {
-        "message": "Gyro Lowpass 1 dynamische max afsnijfrequentie [Hz]",
+        "message": "Gyro laagdoorlaat 1 dynamische max afsnijfrequentie [Hz]",
         "english": "Gyro Lowpass 1 Dynamic Max Cutoff Frequency [Hz]"
     },
     "gyroLowpass2Frequency": {
-        "message": "Gyro Lowpass 2 afsnijfrequentie [Hz]",
+        "message": "Gyro laagdoorlaat 2 afsnijfrequentie [Hz]",
         "english": "Gyro Lowpass 2 Cutoff Frequency [Hz]"
     },
     "gyroLowpass2Type": {
-        "message": "Gyro Lowpass 2-filtertype",
+        "message": "Gyro laagdoorlaat 2-filtertype",
         "english": "Gyro Lowpass 2 Filter Type"
     },
     "gyroLowpassFilterHelp": {
-        "message": "De Lowpass filters zijn er in twee varianten: statisch en dynamisch. De statische filter heeft een afsnijdingswaarde die definieert waar het filter precies begint en eindigt. Bij de dynamische filter definieer je een minimum- en een maximumwaarde. Hiermee geef je het bereik van de filter aan. De bepaling waar de afsnijding precies plaats vindt wordt bepaald door de positie van de gashendel.",
+        "message": "De laagdoorlaatfilters zijn er in twee varianten: statisch en dynamisch. De statische filter heeft een afsnijdingswaarde die definieert waar het filter precies begint en eindigt. Bij de dynamische filter definieer je een minimum- en een maximumwaarde. Hiermee geef je het bereik van de filter aan. De bepaling waar de afsnijding precies plaats vindt wordt bepaald door de positie van de gashendel.",
         "english": "The Lowpass Filters can have two variants: static and dynamic. For a determined lowpass filter number only one (static or dynamic) can be enabled at the same time. The static only has a Cutoff that is a value that defines in some way where the filter starts. The dynamic defines a min and max values, that is the range where the Cutoff is placed. This Cutoff moves from min to max at the same time than you move the throttle stick."
     },
     "gyroNotchFiltersGroup": {
@@ -4815,11 +4815,11 @@
         "english": "Gyro Notch Filters"
     },
     "gyroNotch1Frequency": {
-        "message": "Gyro notch filter 1 center frequentie [Hz]",
+        "message": "Gyro notch filter 1 middenfrequentie [Hz]",
         "english": "Gyro Notch Filter 1 Center Frequency [Hz]"
     },
     "gyroNotch2Frequency": {
-        "message": "Gyro notch filter 2 center frequentie [Hz]",
+        "message": "Gyro notch filter 2 middenfrequentie [Hz]",
         "english": "Gyro Notch Filter 2 Center Frequency [Hz]"
     },
     "gyroNotch1Cutoff": {
@@ -4831,7 +4831,7 @@
         "english": "Gyro Notch Filter 2 Cutoff Frequency [Hz]"
     },
     "gyroNotchFilterHelp": {
-        "message": "Het Notch-filter heeft een midden en een afsnijding. Het filter is symmetrisch. De middenfrequentie is het midden van het filter en de afsnijfrequentie is waar het notch-filter begint. Bijvoorbeeld met Notch Cutoff van 160 en Notch Center van 260 betekent dit dat het bereik 160-360Hz is. Met daarbij de meeste verzwakking rondom het centrum",
+        "message": "Het Notch-filter heeft een midden en een afsnijding. Het filter is symmetrisch. De middenfrequentie is het midden van het filter en de afsnijfrequentie is waar het notch-filter begint. Bijvoorbeeld met Notch afsnijfrequentie van 160 en Notch middenfrequentie van 260 betekent dit dat het bereik 160-360Hz is. Met daarbij de meeste verzwakking rondom het centrum",
         "english": "The Notch Filter has a Center and a Cutoff. The filter is symmetrical. The Center Frequency is the center of the filter and the Cutoff Frequency is where Notch filter starts. For example with Notch Cutoff of 160 and Notch Center of 260 it means the range is 160-360Hz with most attenuation around center"
     },
     "gyroDynamicNotchFilterGroup": {
@@ -4859,7 +4859,7 @@
         "english": "Dynamic Notch Max Hz"
     },
     "gyroDynamicNotchWidthPercentHelp": {
-        "message": "Dit stelt de breedte in tussen de twee dynamische notch-filters. Als u deze op 0 instelt wordt het tweede dynamische notch-filter uitgeschakeld en wordt de filtervertraging verkort. Maar dit kan wel de motortemperaturen verhogen.",
+        "message": "Dit stelt de breedte in tussen de twee dynamische notch-filters. Als je deze op 0 instelt wordt het tweede dynamische notch-filter uitgeschakeld en wordt de filtervertraging verkort. Maar dit kan wel de motortemperaturen verhogen.",
         "english": "This sets the width between two dynamic notch filters. Setting it at 0 will disable the second dynamic notch filter and will reduce filter delay, however it may make motor temperatures higher."
     },
     "gyroDynamicNotchQHelp": {
@@ -4875,31 +4875,31 @@
         "english": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch."
     },
     "gyroDTermLowpassFiltersGroup": {
-        "message": "D Term Lowpass Filter",
+        "message": "D Term laagdoorlaatfilter",
         "english": "D Term Lowpass Filters"
     },
     "gyroDTermLowpassType": {
-        "message": "D term Lowpass 1 filtertype",
+        "message": "D term laagdoorlaat 1 filtertype",
         "english": "D Term Lowpass 1 Filter Type"
     },
     "gyroDTermLowpassFrequency": {
-        "message": "D Term Lowpass 1 afsnijfrequentie [Hz]",
+        "message": "D Term laagdoorlaat 1 afsnijfrequentie [Hz]",
         "english": "D Term Lowpass 1 Cutoff Frequency [Hz]"
     },
     "gyroDTermLowpass2Frequency": {
-        "message": "D Term Lowpass 2 afsnijfrequentie [Hz]",
+        "message": "D Term laagdoorlaat 2 afsnijfrequentie [Hz]",
         "english": "D Term Lowpass 2 Cutoff Frequency [Hz]"
     },
     "gyroDTermLowpass2Type": {
-        "message": "D term Lowpass 2 filtertype",
+        "message": "D term laagdoorlaat 2 filtertype",
         "english": "D Term Lowpass 2 Filter Type"
     },
     "gyroDTermLowpassDynMinFrequency": {
-        "message": "D Term Lowpass 1 dynamische min afsnijfrequentie [Hz]",
+        "message": "D Term laagdoorlaat 1 dynamische min afsnijfrequentie [Hz]",
         "english": "D Term Lowpass 1 Dynamic Min Cutoff Frequency [Hz]"
     },
     "gyroDTermLowpassDynMaxFrequency": {
-        "message": "D Term Lowpass 1 dynamische max afsnijfrequentie [Hz]",
+        "message": "D Term laagdoorlaat 1 dynamische max afsnijfrequentie [Hz]",
         "english": "D Term Lowpass 1 Dynamic Max Cutoff Frequency [Hz]"
     },
     "gyroDTermNotchFiltersGroup": {
@@ -4907,7 +4907,7 @@
         "english": "D Term Notch Filters"
     },
     "gyroDTermNotchFrequency": {
-        "message": "D term filter center frequentie [Hz]",
+        "message": "D term filter middenfrequentie [Hz]",
         "english": "D Term Notch Filter Center Frequency [Hz]"
     },
     "gyroDTermNotchCutoff": {
@@ -5040,22 +5040,22 @@
         "english": "4<sup>th</sup> Harmonic Notch Q"
     },
     "gyroRpmFilterQ5": {
-        "message": "5<sup>th</sup> Harmonic Notch Q",
+        "message": "5<sup>e</sup> harmonische notch Q",
         "english": "5<sup>th</sup> Harmonic Notch Q",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterQ6": {
-        "message": "6<sup>th</sup> Harmonic Notch Q",
+        "message": "6<sup>e</sup> harmonische notch Q",
         "english": "6<sup>th</sup> Harmonic Notch Q",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterQ7": {
-        "message": "7<sup>th</sup> Harmonic Notch Q",
+        "message": "7<sup>e</sup> harmonische notch Q",
         "english": "7<sup>th</sup> Harmonic Notch Q",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterQ8": {
-        "message": "8<sup>th</sup> Harmonic Notch Q",
+        "message": "8<sup>e</sup> harmonische notch Q",
         "english": "8<sup>th</sup> Harmonic Notch Q",
         "status": "New entry. Please translate!"
     },
@@ -5252,7 +5252,7 @@
         "english": "Failsafe Switch Action"
     },
     "failsafeSwitchModeHelp": {
-        "message": "Deze optie bepaalt wat er gebeurt als Failsafe via de AUX-schakelaar wordt geactiveerd:<br/><strong>Fase 1</strong> activeert failsave fase 1. Dit is handig voor als u signaalverlies wilt simuleren.<br/><strong>Fase 2</strong> slaat fase 1 over en activeert direct de fase 2 procedure<br/><strong>Kill</strong> schakelt de quad direct uit (je drone zal gelijk crashen)",
+        "message": "Deze optie bepaalt wat er gebeurt als Failsafe via de AUX-schakelaar wordt geactiveerd:<br/><strong>Fase 1</strong> activeert failsave fase 1. Dit is handig voor als je signaalverlies wilt simuleren.<br/><strong>Fase 2</strong> slaat fase 1 over en activeert direct de fase 2 procedure<br/><strong>Kill</strong> schakelt de quad direct uit (je drone zal gelijk crashen)",
         "english": "This option determines what happens when Failsafe is activated through AUX switch:<br/><strong>Stage 1</strong> activates Stage 1 failsafe. This is useful if you want to simulate the exact signal loss failsafe behavior.<br/><strong>Stage 2</strong> skips Stage 1 and activates the Stage 2 procedure immediately<br/><strong>Kill</strong> disarms instantly (your craft will crash)"
     },
     "failsafeSwitchOptionStage1": {
@@ -5308,19 +5308,19 @@
         "english": "MSP Sensor/OSD Slave"
     },
     "powerBatteryMinimum": {
-        "message": "Minimale cell voltage",
+        "message": "Minimale celspanning",
         "english": "Minimum Cell Voltage"
     },
     "powerBatteryMaximum": {
-        "message": "Maximale cell voltage",
+        "message": "Maximale celspanning",
         "english": "Maximum Cell Voltage"
     },
     "powerBatteryWarning": {
-        "message": "Waarschuwing cell voltage",
+        "message": "Waarschuwing celspanning",
         "english": "Warning Cell Voltage"
     },
     "powerCalibrationManagerButton": {
-        "message": "Calibratie",
+        "message": "Kalibratie",
         "english": "Calibration"
     },
     "powerCalibrationManagerTitle": {
@@ -5328,7 +5328,7 @@
         "english": "Calibration Manager"
     },
     "powerCalibrationManagerHelp": {
-        "message": "Om te kalibreren dient u gebruik te maken van een multimeter om de daadwerkelijke voltage/ amperage van uw drone te meten (de batterij dient ingeplugd te zijn). Voer de gemeten waardes hieronder in. Klik vervolgens op [Kalibreer] terwijl u de batterij aangesloten houdt.",
+        "message": "Om te kalibreren dient je gebruik te maken van een multimeter om de daadwerkelijke spanning/amperage van je helicopter te meten (de batterij dient aangesloten te zijn). Voer de gemeten waardes hieronder in. Klik vervolgens op [Kalibreer] terwijl je de batterij aangesloten houdt.",
         "english": "To calibrate, use a multimeter to measure the actual voltage / current draw on your craft (with a battery plugged in), and enter the values below. Then, with the same battery still plugged in, click [Calibrate]."
     },
     "powerCalibrationManagerNote": {
@@ -5568,7 +5568,7 @@
         "english": "$1 mAh"
     },
     "powerAmperageScale": {
-        "message": "Schaal [1/10th mV/A]",
+        "message": "Schaal [1/10e mV/A]",
         "english": "Scale [1/10th mV/A]"
     },
     "powerAmperageOffset": {
@@ -5628,11 +5628,11 @@
         "english": "<span class=\"message-negative\"><b>WARNING:</b></span> No OSD chip was detected. Some flight controllers will not properly power the OSD chip unless connected to battery power. Please connect the battery before connecting the USB (PROPS REMOVED!)."
     },
     "osdSetupPreviewHelp": {
-        "message": "<strong>Opmerking:</strong> het OSD voorbeeld kan mogelijk niet het werkelijke lettertype weergeven dat is geïnstalleerd op uw vlucht controller. De lay-out van afzonderlijke elementen kan er anders uitzien wanneer oudere versies van de firmware worden gebruikt. Bekijk de lay-out door uw bril voordat u gaat vliegen.",
+        "message": "<strong>Opmerking:</strong> het OSD voorbeeld kan mogelijk niet het werkelijke lettertype weergeven dat is geïnstalleerd op je vluchtcontroller. De lay-out van afzonderlijke elementen kan er anders uitzien wanneer oudere versies van de firmware worden gebruikt. Bekijk de lay-out door je bril voordat je gaat vliegen.",
         "english": "<strong>Note:</strong> OSD preview may not show the actual font that is installed on the flight controller. The layout of individual elements may look different when older versions of the firmware are used - please check the look through your goggles before flying."
     },
     "osdSetupUnsupportedNote1": {
-        "message": "Uw vlucht controller reageert niet op OSD opdrachten. Dit betekent waarschijnlijk dat het niet de geïntegreerde BetaFlight OSD heeft.",
+        "message": "Je vluchtcontroller reageert niet op OSD opdrachten. Dit betekent waarschijnlijk dat het niet de geïntegreerde BetaFlight OSD heeft.",
         "english": "Your flight controller isn't responding to OSD commands. This probably means that it does not have an integrated BetaFlight OSD."
     },
     "osdSetupUnsupportedNote2": {
@@ -5659,7 +5659,7 @@
         "description": "Label of the selector for the OSD Profile in the preview. KEEP IT SHORT!!!"
     },
     "osdSetupPreviewForTitle": {
-        "message": "Als u hier het lettertype of het profiel wijzigd zal dit niet worden opgeslagen in de vluchtcontroller. Het heeft alleen invloed op het voorbeeldvenster. Als u de wijzigingen wilt opslaan dient u dit met behulp van de optie '$t(osdSetupSelectedProfileTitle.message) of de knop '$t(osdSetupFontManager.message) te doen.",
+        "message": "Als je hier het lettertype of het profiel wijzigd zal dit niet worden opgeslagen in de vluchtcontroller. Het heeft alleen invloed op het voorbeeldvenster. Als je de wijzigingen wilt opslaan dient je dit met behulp van de optie '$t(osdSetupSelectedProfileTitle.message) of de knop '$t(osdSetupFontManager.message) te doen.",
         "english": "Changing here the profile or the font will NOT change the profile or the font in the flight controller, only affects the preview window. If you want to change it, you must use the '$t(osdSetupSelectedProfileTitle.message)' option or the '$t(osdSetupFontManager.message)' button respectively.",
         "description": "Help content for the OSD profile and font PREVIEW"
     },
@@ -5875,7 +5875,7 @@
         "english": "Current throttle channel value"
     },
     "osdTextElementCpuLoad": {
-        "message": "CPU belasting",
+        "message": "CPU-belasting",
         "english": "CPU load",
         "description": "One of the elements of the OSD"
     },
@@ -6954,7 +6954,7 @@
         "english": "Enable or disable OSD elements."
     },
     "osdSectionHelpVideoMode": {
-        "message": "Stel de verwachte videomodus van de camera in (meestal kan deze instelling op de AUTO blijven staan. Als u problemen heeft, stel dan deze waarde correct in).",
+        "message": "Stel de verwachte videomodus van de camera in (meestal kan deze instelling op de AUTO blijven staan. Als je problemen hebt, stel dan deze waarde correct in).",
         "english": "Set the expected video mode of the camera (typically this can be left on AUTO, if you have difficulties then set this to match the camera output)."
     },
     "osdSectionHelpUnits": {
@@ -6990,17 +6990,17 @@
         "english": "Saved"
     },
     "vtxHelp": {
-        "message": "Hier kun u de waarden voor uw video zender (VTX) configureren. U kunt de transmissiewaarden en de VTX-tabellen bekijken maar ook wijzigen als de vluchtcontroller en de VTX dit ondersteunen.<br>Om uw VTX in te stellen volgt u de volgende stappen:<br>1. Ga naar <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight/wiki/VTX-tables\">deze</a> pagina;<br>2. Zoek het juiste VTX-configuratiebestand op voor uw land en uw VTX model en download deze;<br>3. Klik hieronder op '$t(vtxButtonLoadFile.message)', selecteer het VTX configuratiebestand wat u gedownload heeft en laad deze in;<br>4. Controleer of de instellingen correct zijn;<br>5. Klik op ''$t(vtxButtonSave.message)' om de instellingen op te slaan op uw vluchtcontroller.<br>6. Klik optioneel op '$t(vtxButtonSaveLua.message)' om een lua configuratiebestand op te slaan dat u kunt gebruiken met de betaflight lua scripts (Lees meer hierover op <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">deze link</a>.)",
+        "message": "Hier kun je de waarden voor je video zender (VTX) configureren. Je kunt de transmissiewaarden en de VTX-tabellen bekijken maar ook wijzigen als de vluchtcontroller en de VTX dit ondersteunen.<br>Om je VTX in te stellen volg je de volgende stappen:<br>1. Ga naar <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight/wiki/VTX-tables\">deze</a> pagina;<br>2. Zoek het juiste VTX-configuratiebestand op voor je land en je VTX model en download deze;<br>3. Klik hieronder op '$t(vtxButtonLoadFile.message)', selecteer het VTX configuratiebestand wat je gedownload heeft en laad deze in;<br>4. Controleer of de instellingen correct zijn;<br>5. Klik op ''$t(vtxButtonSave.message)' om de instellingen op te slaan op je vluchtcontroller.<br>6. Klik optioneel op '$t(vtxButtonSaveLua.message)' om een lua configuratiebestand op te slaan dat je kunt gebruiken met de betaflight lua scripts (Lees meer hierover op <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">deze link</a>.)",
         "english": "Here you can configure the values for your Video Transmitter (VTX). You can view and change the transmission values, including the VTX Tables, if the flight controller and the VTX support it.<br>To set up your VTX use the following steps:<br>1. Go to <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight/wiki/VTX-tables\">this</a> page;<br>2. Find the appropriate VTX configuration file for your country and your VTX model and download it;<br>3. Click '$t(vtxButtonLoadFile.message)' below, select the VTX configuration file, load it;<br>4. Verify that the settings are correct;<br>5. Click '$t(vtxButtonSave.message)' to store the VTX settings on the flight controller.<br>6. Optionally click '$t(vtxButtonSaveLua.message)' to save a lua configuration file you can use with the betaflight lua scripts (See more <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">here</a>.)",
         "description": "Introduction message in the VTX tab"
     },
     "vtxMessageNotSupported": {
-        "message": "<span class=\"message-negative\">Waarschuwing:</span> Uw VTX is niet geconfigureerd of wordt niet ondersteund. U kunt de VTX-waarden daardoor hier niet wijzigen. Dit is alleen mogelijk als uw vluchtcontroller is aangesloten op uw VTX met behulp van een protocol zoals Tramp of SmartAudio. En deze correct is geconfigureerd in het tabblad $t(tabPorts.message).",
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> Je VTX is niet geconfigureerd of wordt niet ondersteund. Je kunt de VTX-waarden daardoor hier niet wijzigen. Dit is alleen mogelijk als je vluchtcontroller is aangesloten op je VTX met behulp van een protocol zoals Tramp of SmartAudio. En deze correct is geconfigureerd in het tabblad $t(tabPorts.message).",
         "english": "<span class=\"message-negative\">Attention:</span> Your VTX is not configured or not supported. So you can't modify the VTX values from here. This will only be possible if the flight controller is attached to the VTX using some protocol like Tramp or SmartAudio and is correctly configured in the $t(tabPorts.message) tab if needed.",
         "description": "Message to show when the VTX is not supported in the VTX tab"
     },
     "vtxMessageTableNotConfigured": {
-        "message": "<span class=\"message-negative\">Waarschuwing:</span> U moet de VTX Tabel eerst configureren en daarna opslaan alvorens u gebruik kan maken van de $t(vtxSelectedMode.message) velden.",
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> Je moet de VTX Tabel eerst configureren en daarna opslaan alvorens je gebruik kan maken van de $t(vtxSelectedMode.message) velden.",
         "english": "<span class=\"message-negative\">Attention:</span> You need to configure and save FIRST the VTX Table at the bottom before you can make use of the $t(vtxSelectedMode.message) fields.",
         "description": "Message to show when the VTX is not supported in the VTX tab"
     },
@@ -7010,7 +7010,7 @@
         "description": "Message to show when the configured VTX type does not support factory bands, but one or more of the configured bands are of this type"
     },
     "vtxMessageVerifyTable": {
-        "message": "<span class=\"message-negative\">Waarschuwing:</span> De waarden van de VTX Tabel zijn ingeladen, maar nog niet opgeslagen op uw vluchtcontroller. Je moet de waardes controleren en waar nodig aanpassen om er zeker van te zijn dat ze geldig maar ook legaal te gebruiken zijn in jouw land. Druk na deze controle vervolgens op de $t(vtxButtonSave.message) knop om de instellingen op te slaan op de vluchtcontroller.",
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> De waarden van de VTX Tabel zijn ingeladen, maar nog niet opgeslagen op je vluchtcontroller. Je moet de waardes controleren en waar nodig aanpassen om er zeker van te zijn dat ze geldig maar ook legaal te gebruiken zijn in jouw land. Druk na deze controle vervolgens op de $t(vtxButtonSave.message) knop om de instellingen op te slaan op de vluchtcontroller.",
         "english": "<span class=\"message-negative\">Attention:</span> The values of the VTX Table have been loaded, but not yet stored on the flight controller. You must verify and modify the values to be sure that they are valid and legal in your country and then press the $t(vtxButtonSave.message) button to store them on the flight controller.",
         "description": "Message to show when the VTX Table has been loaded from a external source"
     },
@@ -7020,7 +7020,7 @@
         "description": "Text of one of the fields of the VTX tab"
     },
     "vtxFrequencyChannelHelp": {
-        "message": "Als u dit inschakelt, laat de Configurator u een frequentie selecteren in plaats van de gebruikelijke band / kanaal. Om dit te laten werken, moet uw VTX deze functie ondersteunen.",
+        "message": "Als je dit inschakelt, laat de Configurator je een frequentie selecteren in plaats van de gebruikelijke band / kanaal. Om dit te laten werken, moet je VTX deze functie ondersteunen.",
         "english": "If you enable this, the Configurator will let you select a frequency in place of the habitual band/channel. For this to work your VTX must support this feature.",
         "description": "Help text for the frequency or channel select field of the VTX tab"
     },
@@ -7070,7 +7070,7 @@
         "description": "Text of one of the fields of the VTX tab"
     },
     "vtxBandHelp": {
-        "message": "U kunt hier het kanaal voor uw VTX selecteren",
+        "message": "Je kunt hier het kanaal voor je VTX selecteren",
         "english": "You can select here the band for your VTX",
         "description": "Help text for the band field of the VTX tab"
     },
@@ -7110,7 +7110,7 @@
         "description": "Text of one of the fields of the VTX tab"
     },
     "vtxChannelHelp": {
-        "message": "U kunt hier het kanaal voor uw VTX selecteren",
+        "message": "Je kunt hier het kanaal voor je VTX selecteren",
         "english": "You can select here the channel for your VTX",
         "description": "Help text for the channel field of the VTX tab"
     },
@@ -7120,7 +7120,7 @@
         "description": "Text of one of the fields of the VTX tab"
     },
     "vtxFrequencyHelp": {
-        "message": "U kunt hier de frequentie voor uw VTX selecteren als deze ondersteund wordt",
+        "message": "Je kunt hier de frequentie voor je VTX selecteren als deze ondersteund wordt",
         "english": "You can select here the frequency for your VTX if it is supported",
         "description": "Help text for the frequency field of the VTX tab"
     },
@@ -7195,12 +7195,12 @@
         "description": "Text of one of the fields of the VTX Table element in the VTX tab"
     },
     "vtxTablePowerLevelsHelp": {
-        "message": "Dit definieert het aantal stroomniveaus die uw VTX ondersteund",
+        "message": "Dit definieert het aantal stroomniveaus die je VTX ondersteund",
         "english": "This defines the number of power levels supported by your VTX",
         "description": "Help for the number of power levels field of the VTX Table element in the VTX tab"
     },
     "vtxTablePowerLevelsTableHelp": {
-        "message": "Deze tabel representeert de verschillende vermogenswaarden die kunnen worden gebruikt door uw VTX. De waarden zijn tweeledig: <br><b>- $t(vtxTablePowerLevelsValue.message):</b> elk stroomniveau heeft een door de hardware-fabrikant gedefinieerde waarde nodig. Vraag uw fabrikant naar de juiste waardes of raadpleeg de Betaflight wiki. Hierop staan enkele voorbeelden.<br><b>- $t(vtxTablePowerLevelsLabel.message):</b> je kunt hier een gewenste label zetten voor elk stroomniveau. Dit is vrij in te vullen. U kunt bijvoorbeeld gebruik maken van getallen zoals (25, 200, 600, 1.), of letters (OFF, MIN, MAX) of een mix ervan. <br><br>U dient hier <b>alleen</b> de stroomniveaus in te vullen die legaal zijn in uw land.",
+        "message": "Deze tabel representeert de verschillende vermogenswaarden die kunnen worden gebruikt door je VTX. De waarden zijn tweeledig: <br><b>- $t(vtxTablePowerLevelsValue.message):</b> elk stroomniveau heeft een door de hardware-fabrikant gedefinieerde waarde nodig. Vraag je fabrikant naar de juiste waardes of raadpleeg de Betaflight wiki. Hierop staan enkele voorbeelden.<br><b>- $t(vtxTablePowerLevelsLabel.message):</b> je kunt hier een gewenste label zetten voor elk stroomniveau. Dit is vrij in te vullen. Je kunt bijvoorbeeld gebruik maken van getallen zoals (25, 200, 600, 1.), of letters (OFF, MIN, MAX) of een mix ervan. <br><br>Je dient hier <b>alleen</b> de stroomniveaus in te vullen die legaal zijn in je land.",
         "english": "This table represents the different values of power that can be used for the VTX. They are divided into two: <br><b>- $t(vtxTablePowerLevelsValue.message):</b> each power level requires a value that is defined by the hardware manufacturer. Ask your manufacturer for the correct value or consult the Betaflight wiki of VTX Tables to grab some samples. <br><b>- $t(vtxTablePowerLevelsLabel.message):</b> you can put here the label you want for each power level value. It can be numbers (25, 200, 600, 1.2), letters (OFF, MIN, MAX) or a mix of them. <br /><br />You must configure <b>only</b> the power levels that are legal at your country.",
         "description": "Help for the table of power levels (value-label) that appears in the VTX tab"
     },
@@ -7245,7 +7245,7 @@
         "description": "Text of one of the titles of the VTX Table element in the VTX tab"
     },
     "vtxTableBandsChannelsTableHelp": {
-        "message": "Deze tabel geeft alle frequenties weer die kunnen worden gebruikt door uw VTX. Je kunt meerdere banden hebben. Voor elke band dient u het volgende te configureren:<br><b>- $t(vtxTableBandTitleName.message): </b>Naam die je aan deze band wilt toewijzen, zoals BOSCAM_A, FATSHARK of RACEBAND.<br><b>- $t(vtxTableBandTitleLetter.message): </b>Korte letter die verwijst naar deze band.<br><b>- $t(vtxTableBandTitleFactory.message): </b>Dit geeft aan of het een factory band is. Als dit is ingeschakeld stuurt Betaflight een band en een kanaalnummer naar uw VTX. De VTX gebruikt dan de ingebouwde frequentietabel. De frequenties die hier dan wordt geconfigureerd gelden dan alleen als referentie en worden dan voor weergavedoeleinde gebruikt in de de OSD of andere plaatsen waar dit van toepassing is. Als dit niet is ingeschakeld dan stuurt Betaflight de geconfigureerde frequentie naar de VTX.<br><b>- Frequenties:</b> Frequenties voor deze band.<br><br>Onthoud dat mogelijk niet alle frequenties legaal zijn in uw land. U moet een <b>nul</b> waarde plaatsen voor elke frequentie-index die u niet mag gebruiken. Op deze manier schakelt u dan deze frequentie uit.",
+        "message": "Deze tabel geeft alle frequenties weer die kunnen worden gebruikt door je VTX. Je kunt meerdere banden hebben. Voor elke band dien je het volgende te configureren:<br><b>- $t(vtxTableBandTitleName.message): </b>Naam die je aan deze band wilt toewijzen, zoals BOSCAM_A, FATSHARK of RACEBAND.<br><b>- $t(vtxTableBandTitleLetter.message): </b>Korte letter die verwijst naar deze band.<br><b>- $t(vtxTableBandTitleFactory.message): </b>Dit geeft aan of het een factory band is. Als dit is ingeschakeld stuurt Betaflight een band en een kanaalnummer naar je VTX. De VTX gebruikt dan de ingebouwde frequentietabel. De frequenties die hier dan wordt geconfigureerd gelden dan alleen als referentie en worden dan voor weergavedoeleinde gebruikt in de de OSD of andere plaatsen waar dit van toepassing is. Als dit niet is ingeschakeld dan stuurt Betaflight de geconfigureerde frequentie naar de VTX.<br><b>- Frequenties:</b> Frequenties voor deze band.<br><br>Onthoud dat mogelijk niet alle frequenties legaal zijn in je land. Je moet een <b>nul</b> waarde plaatsen voor elke frequentie-index die je niet mag gebruiken. Op deze manier schakelt je dan deze frequentie uit.",
         "english": "This table represents all the frequencies that can be used for your VTX. You can have several bands and for each band you must configure:<br><b>- $t(vtxTableBandTitleName.message):</b> Name that you want to assign to this band, like BOSCAM_A, FATSHARK or RACEBAND.<br><b>- $t(vtxTableBandTitleLetter.message):</b> Short letter that references the band.<br><b>- $t(vtxTableBandTitleFactory.message):</b> This indicates if it is a factory band. If enabled Betaflight sends to the VTX a band and channel number. The VTX will then use its built-in frequency table and the frequencies configured here are only to show the value in the OSD and other places. If it is not enabled, then Betaflight will send to the VTX the real frequency configured here.<br><b>- Frequencies:</b> Frequencies for this band.<br /><br />Remember that not all frequencies are legal at your country. You must put a value of <b>zero</b> to each frequency index that you are not allowed to use to disable it.",
         "description": "Help for the table of bands-channels that appears in the VTX tab"
     },
@@ -7275,7 +7275,7 @@
         "description": "Message in the GUI log when the VTX Config file is pasted from clipboard"
     },
     "vtxLoadClipboardKo": {
-        "message": "<span class=\"message-negative\">Fout</span> tijdens het laden van de VTX configuratie vanaf het klembord. Controleer de inhoud van uw klembord",
+        "message": "<span class=\"message-negative\">Fout</span> tijdens het laden van de VTX configuratie vanaf het klembord. Controleer de inhoud van je klembord",
         "english": "<span class=\"message-negative\">Error</span> while loading the VTX Config info from clipboard. Maybe the contents are not correct",
         "description": "Message in the GUI log when the VTX Config file is pasted from clipboard"
     },
@@ -7290,7 +7290,7 @@
         "description": "Save Lua script button in the VTX tab"
     },
     "vtxLuaFileHelp": {
-        "message": "Met de knop '$t(vtxButtonSaveLua.message)' kunt u een <i>crafname</i>.lua bestand opslaan die de vtx configuratie bevat welke gebruikt kan worden met de betaflight lua scripts. (Voor meer informatie klik <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">hier</a>.)",
+        "message": "Met de knop '$t(vtxButtonSaveLua.message)' kan je een <i>crafname</i>.lua bestand opslaan die de vtx configuratie bevat welke gebruikt kan worden met de betaflight lua scripts. (Voor meer informatie klik <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">hier</a>.)",
         "english": "The '$t(vtxButtonSaveLua.message)' button will allow you to save a <i>craftname</i>.lua file containing the vtx table configuration that can be used with the betaflight lua scripts. (See more <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">here</a>.)",
         "description": "Tooltip message for the Save Lua script button in the VTX tab"
     },
@@ -7340,7 +7340,7 @@
         "english": "PID loop frequency"
     },
     "configurationPidProcessDenomHelp": {
-        "message": "The maximum frequency for the PID loop is limited by the CPU processing power. The CPU Load should not exceed 70% with the selected loop speed.",
+        "message": "De maximale frequentie voor de PID loop wordt beperkt door de verwerkingskracht van de CPU. De CPU-belasting mag niet hoger zijn dan 70% met de geselecteerde loop-snelheid.",
         "english": "The maximum frequency for the PID loop is limited by the CPU processing power. The CPU Load should not exceed 70% with the selected loop speed.",
         "status": "Modified entry. Please translate!"
     },
@@ -7349,7 +7349,7 @@
         "english": "Enable gyro 32kHz sampling mode"
     },
     "configurationGyroUse32kHzHelp": {
-        "message": "32 kHz gyro update frequentie is alleen mogelijk als de gyro chip dit ondersteunt (momenteel alleen MPU6500, MPU9250, en ICM20xxx indien deze verbonden zijn via SPI). Raadpleeg in geval van twijfel de specificaties van uw board.",
+        "message": "32 kHz gyro update frequentie is alleen mogelijk als de gyro chip dit ondersteunt (momenteel alleen MPU6500, MPU9250, en ICM20xxx indien deze verbonden zijn via SPI). Raadpleeg in geval van twijfel de specificaties van je board.",
         "english": "32 kHz gyro update frequency is only possible if the gyro chip supports it (currently MPU6500, MPU9250, and ICM20xxx if connected over SPI). If in doubt, consult the specification for your board."
     },
     "configurationAccHardware": {
@@ -7357,7 +7357,7 @@
         "english": "Accelerometer"
     },
     "configurationAccHardwareHelp": {
-        "message": "Enables the Accelerometer. This is required for all stabilisation modes: Angle, Horizon, Acro Trainer and Rescue.",
+        "message": "Schakelt de versnellingsmeter in. Dit is vereist voor alle stabilisatiemodi: Angle, Horizon, Acro Trainer en Rescue.",
         "english": "Enables the Accelerometer. This is required for all stabilisation modes: Angle, Horizon, Acro Trainer and Rescue.",
         "status": "New entry. Please translate!"
     },
@@ -7367,7 +7367,7 @@
         "status": "Modified entry. Please translate!"
     },
     "configurationBaroHardwareHelp": {
-        "message": "Enables the Barometer (if available). Altitude is currently not used in Flight Control. It is informative only, available via the Telemetry.",
+        "message": "Schakelt de barometer in (indien beschikbaar). Hoogte wordt momenteel niet gebruikt door de FC. Het is alleen informatief, beschikbaar via telemetrie.",
         "english": "Enables the Barometer (if available). Altitude is currently not used in Flight Control. It is informative only, available via the Telemetry.",
         "status": "New entry. Please translate!"
     },
@@ -7377,7 +7377,7 @@
         "status": "Modified entry. Please translate!"
     },
     "configurationMagHardwareHelp": {
-        "message": "Enables the Magnetometer (if available). Compass direction is currently not used in Flight Control. It is informative only, available via the Telemetry.",
+        "message": "Schakelt de magnetometer in (indien beschikbaar). Kompasrichting wordt momenteel niet gebruikt door de FC. Het is alleen informatief, beschikbaar via telemetrie.",
         "english": "Enables the Magnetometer (if available). Compass direction is currently not used in Flight Control. It is informative only, available via the Telemetry.",
         "status": "New entry. Please translate!"
     },
@@ -7394,7 +7394,7 @@
         "english": "Blackbox logging device"
     },
     "blackboxDeviceHelp": {
-        "message": "<strong>No Logging:</strong> Disables logging.<br><strong>Onboard Flash:</strong> Enables logging to onboard flash chip (if available).<br><strong>SD Card:</strong> Log to onboard SD card (if available).<br><strong>Serial Port:</strong> Log to an external logger device (e.g Open Lager) connected to a serial port. The serial port will have to be configured to 'Blackbox Logging' in the 'peripherals' section on the <strong>Serial Ports</strong> tab.",
+        "message": "<strong>Geen logboekregistratie:</strong> Schakelt logboekregistratie uit.<br><strong>Onboard Flash:</strong> Schakelt logboekregistratie in op de ingebouwde flash-chip (indien beschikbaar).<br><strong>SD-kaart:</strong> Logboekregistratie op SD-kaart (indien beschikbaar).<br><strong>Seriële poort:</strong> Logboekregistratie m.b.v. een externe logger (bijv. OpenLager) die is aangesloten op een seriële poort. De seriële poort moet worden ingesteld op 'Blackbox logboek' onder 'Randapparatuur' op het tabblad <strong>Seriële poorten</strong>.",
         "english": "<strong>No Logging:</strong> Disables logging.<br><strong>Onboard Flash:</strong> Enables logging to onboard flash chip (if available).<br><strong>SD Card:</strong> Log to onboard SD card (if available).<br><strong>Serial Port:</strong> Log to an external logger device (e.g Open Lager) connected to a serial port. The serial port will have to be configured to 'Blackbox Logging' in the 'peripherals' section on the <strong>Serial Ports</strong> tab.",
         "status": "New entry. Please translate!"
     },
@@ -7403,7 +7403,7 @@
         "english": "Blackbox logging rate"
     },
     "blackboxRateOfLoggingHelp": {
-        "message": "The log data is saved to the log device with this rate. For logging to an external device, lower speed may be required.",
+        "message": "De loggegevens worden met deze snelheid op het logapparaat opgeslagen. Voor het loggen op een extern apparaat kan een lagere snelheid vereist zijn.",
         "english": "The log data is saved to the log device with this rate. For logging to an external device, lower speed may be required.",
         "status": "New entry. Please translate!"
     },
@@ -7412,7 +7412,7 @@
         "english": "Blackbox debug mode"
     },
     "blackboxDebugModeHelp": {
-        "message": "Choose what <i>extra</i> data is being logged. If enabled, four extra debug items are added to the log entries.",
+        "message": "Kies welke <i>extra</i> gegevens worden vastgelegd. Indien ingeschakeld, worden vier extra foutopsporingsitems toegevoegd aan de logboekvermeldingen.",
         "english": "Choose what <i>extra</i> data is being logged. If enabled, four extra debug items are added to the log entries.",
         "status": "New entry. Please translate!"
     },
@@ -7441,7 +7441,7 @@
         "english": "Mass Storage Mode"
     },
     "blackboxMscNote": {
-        "message": "Herstart in <strong>massa opslagapparaat (MSC)</strong> modus. Zodra geactiveerd, zal de Flash aan boord of SD-kaart op je vlucht controller worden herkend als opslagapparaat door je computer, en laat je toe om je logbestanden te downloaden. Eject en herstart je vlucht controller om de massaopslag apparaat modus te verlaten.",
+        "message": "Herstart in <strong>massa opslagapparaat (MSC)</strong> modus. Zodra geactiveerd, zal de onboard Flash of SD-kaart op je vluchtcontroller worden herkend als opslagapparaat door je computer, en laat je toe om je logbestanden te downloaden. Eject en herstart je vluchtcontroller om de massaopslag apparaat modus te verlaten.",
         "english": "Reboot into <strong>mass storage device (MSC)</strong> mode. Once activated, the onboard flash or SD card on your flight controller will be recognised as a storage device by your computer, and allow you to download your log files. Eject and power cycle your flight controller to leave mass storage device mode."
     },
     "blackboxRebootMscText": {
@@ -7583,7 +7583,7 @@
         "english": "The tool below is intended to help you to install a new webview or to update an already installed webview."
     },
     "cordovaAvailableWebviews": {
-        "message": "Beschikbare webview-applicaties op uw apparaat",
+        "message": "Beschikbare webview-applicaties op je apparaat",
         "english": "Available webview applications on your device"
     },
     "cordovaWebviewInstall": {
@@ -7595,7 +7595,7 @@
         "english": "Install from the Google Play Store"
     },
     "cordovaWebviewUninstall": {
-        "message": "De-installatie van de <b>{{app}}</b> app kan dit compatibiliteitsprobleem oplossen. Als u de app niet kunt deïnstalleren, probeer deze dan uit te schakelen vanuit de instellingen app.",
+        "message": "De-installatie van de <b>{{app}}</b> app kan dit compatibiliteitsprobleem oplossen. Als je de app niet kunt deïnstalleren, probeer deze dan uit te schakelen vanuit de instellingen app.",
         "english": "Uninstalling the <b>{{app}}</b> app can resolve this compatibility issue. If you are not able to uninstall it, try to disable it from the settings app."
     },
     "cordovaWebviewUninstallBtn1": {
@@ -7615,7 +7615,7 @@
         "english": "Update from the Google Play Store"
     },
     "cordovaWebviewEnable": {
-        "message": "Ga naar het tabblad met informatie over uw apparaat in de instellingen en tik 10 keer op het buildversienummer om de 'Developer-opties' in te schakelen. Zoek daarna naar de ontwikkelaaropties en selecteer <b>{{app}}</b> als webviewprovider.",
+        "message": "Ga naar het tabblad met informatie over je apparaat in de instellingen en tik 10 keer op het buildversienummer om de 'Developer-opties' in te schakelen. Zoek daarna naar de ontwikkelaaropties en selecteer <b>{{app}}</b> als webviewprovider.",
         "english": "Go into the tab of informations about your device in the settings and tap 10 times on the build version number to enable 'Developper options'. After that, search and go in the developper options and select <b>{{app}}</b> as webview provider."
     },
     "cordovaWebviewEnableBtn": {
@@ -7635,7 +7635,7 @@
         "english": "Confirmation"
     },
     "cordovaExitAppMessage": {
-        "message": "Wilt u de configurator echt sluiten?",
+        "message": "Wilt je de configurator echt sluiten?",
         "english": "Do you really want to close the configurator?"
     }
 }
