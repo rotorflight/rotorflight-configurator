@@ -2,7 +2,7 @@
   "name": "rotorflight-configurator",
   "productName": "Rotorflight Configurator",
   "description": "Crossplatform configuration tool for Rotorflight flight control system.",
-  "version": "1.0.0-devel",
+  "version": "1.0.0-RC1",
   "main": "main.html",
   "chromium-args": "--disable-features=nw2",
   "scripts": {
