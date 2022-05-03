@@ -20,7 +20,7 @@ const API_VERSION_RTFL_1 = '11.1.0';
 const API_VERSION_RTFL_MIN = '11.1.0';
 const API_VERSION_RTFL_MAX = '11.1.0';
 
-const FW_VERSION_RTFL_MIN = '4.2.12-0';  // Development version accepts all
+const FW_VERSION_RTFL_MIN = '4.2.12-RC1';
 const FW_VERSION_RTFL_MAX = '4.2.99';
 
 const CONFIGURATOR = {
