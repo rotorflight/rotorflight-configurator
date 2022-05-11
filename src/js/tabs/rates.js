@@ -206,6 +206,7 @@ TABS.rates.initialize = function (callback) {
             if (!self.isDirty) {
                 self.isDirty = true;
                 $('.tab-rates').removeClass('toolbar_hidden');
+                $('#copyProfile').addClass('disabled');
             }
         }
 
@@ -300,17 +301,38 @@ TABS.rates.initialize = function (callback) {
 
         $('.rates_change').on('input change', updateRates).trigger('input');
 
+        const dialogResetProfile = $('.dialogResetProfile')[0];
+
+        $('#resetProfile').click(function() {
+            dialogResetProfile.showModal();
+        });
+
+        $('.dialogResetProfile-cancelbtn').click(function() {
+            dialogResetProfile.close();
+        });
+
+        $('.dialogResetProfile-confirmbtn').click(function() {
+            dialogResetProfile.close();
+            self.previousRatesType = null;
+            self.changeRatesLogo();
+            self.initRatesSystem();
+            setDirty();
+        });
+
         const dialogCopyProfile = $('.dialogCopyProfile')[0];
         const selectRateProfile = $('.selectRateProfile');
 
         $.each(self.TAB_NAMES, function(key, value) {
-            if (key != self.currentRateProfile)
-                selectRateProfile.append(new Option(i18n.getMessage('rateSetupSubTab', [ key + 1 ]), key));
+            if (key != self.currentRateProfile) {
+                const tabIndex = key + 1;
+                selectRateProfile.append(new Option(i18n.getMessage(`rateSetupSubTab${tabIndex}`), key));
+            }
         });
 
-        $('.copyrateprofilebtn').click(function() {
-            $('.dialogCopyProfile').find('.contentRateProfile').show();
-            dialogCopyProfile.showModal();
+        $('#copyProfile').click(function() {
+            if (!self.isDirty) {
+                dialogCopyProfile.showModal();
+            }
         });
 
         $('.dialogCopyProfile-cancelbtn').click(function() {
@@ -323,7 +345,10 @@ TABS.rates.initialize = function (callback) {
             FC.COPY_PROFILE.srcProfile = FC.CONFIG.rateProfile;
 
             MSP.send_message(MSPCodes.MSP_COPY_PROFILE, mspHelper.crunch(MSPCodes.MSP_COPY_PROFILE), false, function () {
-                dialogCopyProfile.close();
+                MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
+                    GUI.log(i18n.getMessage('eepromSaved'));
+                    dialogCopyProfile.close();
+                });
             });
         });
 

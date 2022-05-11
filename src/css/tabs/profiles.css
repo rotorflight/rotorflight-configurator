@@ -216,12 +216,12 @@
     width: calc(100% - 20px)
 }
 
-.tab-profiles .resetbt {
-    width: 140px;
+.tab-profiles .resetbtn {
+    width: 150px;
     margin-right: 10px;
 }
 
-.tab-profiles .copyprofilebtn {
+.tab-profiles .copybtn {
     width: 150px;
     margin-right:10px;
 }
@@ -286,8 +286,8 @@
     }
 
     .tab-profiles .pid_table,
-    .tab-profiles .copyprofilebtn,
-    .tab-profiles .resetbt,
+    .tab-profiles .copybtn,
+    .tab-profiles .resetbtn,
     .tab-profiles .show {
         width: calc(50% - 5px);
     }
