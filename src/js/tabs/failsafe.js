@@ -172,30 +172,34 @@ TABS.failsafe.initialize = function (callback) {
                         <div class="channelprimary">\
                             <span>' + channelNames[i] + '</span>\
                         </div>\
-                        <div class="cf_tip channelsetting" title="' + i18n.getMessage("failsafeChannelFallbackSettingsAuto") + '">\
+                        <div class="cf_tip channelsetting" i18n_title="failsafeChannelFallbackSettingsAuto">\
                             <select class="aux_set" id="' + i + '">\
-                                <option value="0">Auto</option>\
-                                <option value="1">Hold</option>\
-                                <option value="2">Set</option>\
+                                <option value="0" i18n="failsafeChannelFallbackOptionAuto" />\
+                                <option value="1" i18n="failsafeChannelFallbackOptionHold" />\
+                                <option value="2" i18n="failsafeChannelFallbackOptionSet" />\
                             </select>\
                         </div>\
-                        <div class="auxiliary"><input type="number" name="aux_value" min="750" max="2250" step="25" id="' + i + '"/></div>\
+                        <div class="auxiliary">\
+                            <input type="number" name="aux_value" min="750" max="2250" step="25" id="' + i + '"/>\
+                        </div>\
                     </div>\
                 ');
             } else {
                 fullChannels_e.append('\
                     <div class="number">\
                         <div class="channelauxiliary">\
-                            <span class="channelname">' + i18n.getMessage("controlAxisAux" + (aux_index++)) + '</span>\
-                            ' + auxAssignment[aux_assignment_index++] + '\
+                            <span class="channelname" i18n="controlAxisAux' + (aux_index++) + '" />'
+                            + auxAssignment[aux_assignment_index++] + '\
                         </div>\
-                        <div class="cf_tip channelsetting" title="' + i18n.getMessage("failsafeChannelFallbackSettingsHold") + '">\
+                        <div class="cf_tip channelsetting" i18n_title="failsafeChannelFallbackSettingsHold">\
                             <select class="aux_set" id="' + i + '">\
-                                <option value="1">Hold</option>\
-                                <option value="2">Set</option>\
+                                <option value="1" i18n="failsafeChannelFallbackOptionHold" />\
+                                <option value="2" i18n="failsafeChannelFallbackOptionSet" />\
                             </select>\
                         </div>\
-                        <div class="auxiliary"><input type="number" name="aux_value" min="750" max="2250" step="25" id="' + i + '"/></div>\
+                        <div class="auxiliary">\
+                            <input type="number" name="aux_value" min="750" max="2250" step="25" id="' + i + '"/>\
+                        </div>\
                     </div>\
                 ');
             }
