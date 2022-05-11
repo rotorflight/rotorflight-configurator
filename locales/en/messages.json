@@ -3946,6 +3946,15 @@
     "failsafeChannelFallbackSettingsHold": {
         "message": "<strong>Hold</strong> means maintain the last good value received. <strong>Set</strong> means the value given here will be used"
     },
+    "failsafeChannelFallbackOptionAuto": {
+        "message": "Auto"
+    },
+    "failsafeChannelFallbackOptionHold": {
+        "message": "Hold"
+    },
+    "failsafeChannelFallbackOptionSet": {
+        "message": "Set"
+    },
     "failsafeStageTwoSettingsTitle": {
         "message": "Stage 2 - Settings"
     },
