@@ -261,6 +261,7 @@ TABS.profiles.initialize = function (callback) {
             if (!self.isDirty) {
                 self.isDirty = true;
                 $('.tab-profiles').removeClass('toolbar_hidden');
+                $('#copyProfile').addClass('disabled');
             }
         }
 
@@ -273,32 +274,46 @@ TABS.profiles.initialize = function (callback) {
                 });
         }
 
-        function resetProfile() {
-            MSP.promise(MSPCodes.MSP_SET_RESET_CURR_PID)
-                .then(function () {
-                    GUI.log(i18n.getMessage('profilesResetProfile'));
-                    GUI.tab_switch_reload();
-                });
-        }
-
         self.tabNames.forEach(function(element, index) {
             $('.tab-profiles .tab-container .' + element).on('click', () => GUI.tab_switch_allowed(() => activateProfile(index)));
             $('.tab-profiles .tab-container .' + element).toggle(index < FC.CONFIG.numProfiles);
         });
 
-        $('#resetProfile').on('click', resetProfile);
+        const dialogResetProfile = $('.dialogResetProfile')[0];
+
+        $('#resetProfile').click(function() {
+            dialogResetProfile.showModal();
+        });
+
+        $('.dialogResetProfile-cancelbtn').click(function() {
+            dialogResetProfile.close();
+        });
+
+        $('.dialogResetProfile-confirmbtn').click(function() {
+            MSP.send_message(MSPCodes.MSP_SET_RESET_CURR_PID, false, false, function () {
+                GUI.log(i18n.getMessage('profilesResetProfile'));
+                MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
+                    GUI.log(i18n.getMessage('eepromSaved'));
+                    dialogResetProfile.close();
+                    GUI.tab_switch_reload();
+                });
+            });
+        });
 
         const dialogCopyProfile = $('.dialogCopyProfile')[0];
         const selectProfile = $('.selectProfile');
 
         $.each(self.tabNames, function(key, value) {
-            if (key != FC.CONFIG.profile)
-                selectProfile.append(new Option(value, key));
+            if (key != FC.CONFIG.profile) {
+                const tabIndex = key + 1;
+                selectProfile.append(new Option(i18n.getMessage(`profilesSubTab${tabIndex}`), key));
+            }
         });
 
-        $('.copyprofilebtn').click(function() {
-            $('.dialogCopyProfile').find('.contentProfile').show();
-            dialogCopyProfile.showModal();
+        $('#copyProfile').click(function() {
+            if (!self.isDirty) {
+                dialogCopyProfile.showModal();
+            }
         });
 
         $('.dialogCopyProfile-cancelbtn').click(function() {
@@ -311,8 +326,19 @@ TABS.profiles.initialize = function (callback) {
             FC.COPY_PROFILE.srcProfile = FC.CONFIG.profile;
 
             MSP.send_message(MSPCodes.MSP_COPY_PROFILE, mspHelper.crunch(MSPCodes.MSP_COPY_PROFILE), false, function () {
-                dialogCopyProfile.close();
+                MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
+                    GUI.log(i18n.getMessage('eepromSaved'));
+                    dialogCopyProfile.close();
+                });
             });
+        });
+
+        const dialogProfileChange = $('.dialogProfileChange')[0];
+
+        $('.dialogProfileChangeConfirmBtn').click(function() {
+            dialogProfileChange.close();
+            GUI.tab_switch_reload();
+            GUI.log(i18n.getMessage('profilesActivateProfile', [FC.CONFIG.profile + 1]));
         });
 
         self.save = function (callback) {
@@ -334,14 +360,6 @@ TABS.profiles.initialize = function (callback) {
 
         $('.tab-area').change(function () {
             setDirty();
-        });
-
-        const dialogProfileChange = $('.dialogProfileChange')[0];
-
-        $('.dialogProfileChangeConfirmBtn').click(function() {
-            dialogProfileChange.close();
-            GUI.tab_switch_reload();
-            GUI.log(i18n.getMessage('profilesActivateProfile', [FC.CONFIG.profile + 1]));
         });
 
         function get_status() {

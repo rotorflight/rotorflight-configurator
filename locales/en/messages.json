@@ -1590,21 +1590,36 @@
         "message": "RC Interpolation Interval [ms]"
     },
     "dialogCopyProfileText": {
-        "message": "Copy values from current profile to"
+        "message": "Copy values from the current profile to"
     },
     "dialogCopyRateProfileText": {
-        "message": "Copy values from current rateprofile to"
+        "message": "Copy values from the current rateprofile to"
     },
     "dialogCopyProfileTitle": {
         "message": "Copy Profile Values"
     },
     "dialogCopyProfileNote": {
-        "message": "All values on the destination profile will be wiped and overwritten"
+        "message": "All values on the destination profile will be overwritten.<br>This operation can not be reverted."
     },
     "dialogCopyProfileConfirm": {
         "message": "Copy"
     },
     "dialogCopyProfileClose": {
+        "message": "Cancel"
+    },
+    "dialogResetProfileTitle": {
+        "message": "Reset Profile Values"
+    },
+    "dialogResetProfileNote": {
+        "message": "All values on the current profile will be reset to defaults.<br>This operation can not be reverted."
+    },
+    "dialogResetRateProfileNote": {
+        "message": "All values on the current profile will be reset to defaults."
+    },
+    "dialogResetProfileConfirm": {
+        "message": "Reset"
+    },
+    "dialogResetProfileClose": {
         "message": "Cancel"
     },
     "dialogProfileChangeTitle": {
@@ -1666,10 +1681,10 @@
         "description": "Feedforward Term helpicon message on PID table titlebar"
     },
     "profilesCopyProfile": {
-        "message": "Copy profile values"
+        "message": "Copy profile"
     },
     "profilesResetProfile": {
-        "message": "Reset all profile values"
+        "message": "Reset to defaults"
     },
     "profilesActivateProfile": {
         "message": "Loaded Profile: <strong class=\"message-positive\">$1</strong>"

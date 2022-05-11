@@ -351,12 +351,12 @@
     font-size: 12px;
 }
 
-.tab-rates .resetbt {
-    width: 140px;
+.tab-rates .resetbtn {
+    width: 150px;
     margin-right: 10px;
 }
 
-.tab-rates .copyrateprofilebtn {
+.tab-rates .copybtn {
     width: 150px;
     margin-right:10px;
 }
@@ -568,8 +568,8 @@
         flex-wrap: wrap;
     }
 
-    .tab-rates .copyrateprofilebtn,
-    .tab-rates .resetbt,
+    .tab-rates .copybtn,
+    .tab-rates .resetbtn,
     .tab-rates .show {
         width: calc(50% - 5px);
     }
@@ -579,7 +579,8 @@
     }
 
     .tab-rates .rate_profile,
-    .tab-rates .copyrateprofilebtn,
+    .tab-rates .copybtn,
+    .tab-rates .resetbtn,
     .tab-rates .show {
         margin-right: 0;
     }
