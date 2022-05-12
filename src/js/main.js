@@ -443,28 +443,25 @@ function notifyOutdatedVersion(releaseData) {
         if (result.checkForConfiguratorUnstableVersions) {
             showUnstableReleases = true;
         }
+
         const versions = releaseData.filter(function (version) {
             var versionFromTagExpression = /release\/(.*)/;
             var match = versionFromTagExpression.exec(version.tag_name);
-            if (!match)
-                return null;
-            const semVerVersion = semver.parse(match[1]);
-            if (semVerVersion && (showUnstableReleases || semVerVersion.prerelease.length === 0)) {
-                return version;
-            } else {
-                return null;
+            if (match) {
+                version.release = semver.valid(match[1]);
+                if (version.release && (!semver.prerelease(version.release) || showUnstableReleases)) {
+                    return version;
+                }
             }
-         }).sort(function (v1, v2) {
-            try {
-                return semver.compare(v2.tag_name, v1.tag_name);
-            } catch (e) {
-                return false;
-            }
+            return null;
+        }).sort(function (v1, v2) {
+            return semver.compare(v2.release, v1.release);
         });
 
         if (versions.length > 0) {
-            CONFIGURATOR.latestVersion = versions[0].tag_name;
+            CONFIGURATOR.latestVersion = versions[0].release;
             CONFIGURATOR.latestVersionReleaseUrl = versions[0].html_url;
+            console.log(`Latest Configurator version is ${CONFIGURATOR.latestVersion}`);
         }
 
         if (semver.lt(CONFIGURATOR.version, CONFIGURATOR.latestVersion)) {
@@ -481,7 +478,6 @@ function notifyOutdatedVersion(releaseData) {
 
             $('.dialogConfiguratorUpdate-websitebtn').click(function() {
                 dialog.close();
-
                 window.open(CONFIGURATOR.latestVersionReleaseUrl, '_blank');
             });
 
