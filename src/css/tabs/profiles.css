@@ -197,6 +197,11 @@
     margin-left: 5px;
 }
 
+.tab-profiles .gov_config .note {
+    margin-bottom: 2px;
+    text-align: left;
+}
+
 .pid_roll {
     background-color: #FF8080;
 }
