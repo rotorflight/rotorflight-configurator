@@ -2620,6 +2620,9 @@
     "govHeadspeedHelp": {
         "message": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input."
     },
+    "govHeadspeedNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning."
+    },
     "govMasterGain": {
         "message": "PID master gain"
     },

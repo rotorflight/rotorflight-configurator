@@ -6,6 +6,7 @@ TABS.profiles = {
     currentProfile: null,
     isGovEnabled: false,
     isTTAEnabled: false,
+    isPIDDefault: false,
     tabNames: [
         'profile1',
         'profile2',
@@ -14,7 +15,7 @@ TABS.profiles = {
         'profile5',
         'profile6',
     ],
-    pidNames: [
+    axisNames: [
         'ROLL',
         'PITCH',
         'YAW',
@@ -24,6 +25,11 @@ TABS.profiles = {
         'I',
         'D',
         'F',
+    ],
+    defaultGains: [
+        [ 10, 50, 0, 50 ],
+        [ 10, 50, 0, 50 ],
+        [ 50, 50, 0,  0 ],
     ],
     analyticsChanges: {},
 };
@@ -71,10 +77,13 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles .tab-container .tab').removeClass('active');
         $('.tab-profiles .tab-container .' + self.activeSubtab).addClass('active');
 
-        self.pidNames.forEach(function(elementPid, indexPid) {
-            const searchRow = $('.tab-profiles .' + elementPid + ' .pid_data input');
-            searchRow.each(function (indexInput) {
-                $(this).val(FC.PIDS[indexPid][indexInput]);
+        self.isPIDDefault = true;
+        self.axisNames.forEach(function(axis, indexAxis) {
+            self.gainNames.forEach(function(gain, indexGain) {
+                const input = $(`.tab-profiles .${axis} input[name="${gain}"]`);
+                const value = FC.PIDS[indexAxis][indexGain];
+                self.isPIDDefault &= (value == self.defaultGains[indexAxis][indexGain]);
+                input.val(value);
             });
         });
 
@@ -174,15 +183,12 @@ TABS.profiles.initialize = function (callback) {
 
     function form_to_data() {
 
-        self.pidNames.forEach(function(elementPid, indexPid) {
-            const searchRow = $('.tab-profiles .' + elementPid + ' input');
-            searchRow.each(function (indexInput) {
-                if ($(this).val()) {
-                    const value = parseInt($(this).val());
-                    const gainName = self.gainNames[indexInput];
-                    self.analyticsChanges[`pidGain_${elementPid}_${gainName}`] = value;
-                    FC.PIDS[indexPid][indexInput] = value;
-                }
+        self.axisNames.forEach(function(axis, indexAxis) {
+            self.gainNames.forEach(function(gain, indexGain) {
+                const input = $(`.tab-profiles .${axis} input[name="${gain}"]`);
+                const value = parseInt(input.val());
+                self.analyticsChanges[`pidGain_${axis}_${gain}`] = value;
+                FC.PIDS[indexAxis][indexGain] = value;
             });
         });
 
@@ -360,6 +366,13 @@ TABS.profiles.initialize = function (callback) {
 
         $('.tab-area').change(function () {
             setDirty();
+        });
+
+        $('.tab-profiles input[id="govHeadspeed"]').change(function () {
+            const value = parseInt($(this).val());
+            if (!self.isPIDDefault && value != FC.GOVERNOR.gov_headspeed) {
+                $('.tab-profiles .gov_config .note').removeClass('hidden');
+            }
         });
 
         function get_status() {
