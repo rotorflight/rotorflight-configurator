@@ -1977,8 +1977,9 @@
         "english": "Copy Profile Values"
     },
     "dialogCopyProfileNote": {
-        "message": "Alle Werte auf dem Zielprofil werden überschrieben",
-        "english": "All values on the destination profile will be wiped and overwritten"
+        "message": "All values on the destination profile will be overwritten.<br>This operation can not be reverted.",
+        "english": "All values on the destination profile will be overwritten.<br>This operation can not be reverted.",
+        "status": "Modified entry. Please translate!"
     },
     "dialogCopyProfileConfirm": {
         "message": "Kopieren",
@@ -1987,6 +1988,31 @@
     "dialogCopyProfileClose": {
         "message": "Abbrechen",
         "english": "Cancel"
+    },
+    "dialogResetProfileTitle": {
+        "message": "Reset Profile Values",
+        "english": "Reset Profile Values",
+        "status": "New entry. Please translate!"
+    },
+    "dialogResetProfileNote": {
+        "message": "All values on the current profile will be reset to defaults.<br>This operation can not be reverted.",
+        "english": "All values on the current profile will be reset to defaults.<br>This operation can not be reverted.",
+        "status": "New entry. Please translate!"
+    },
+    "dialogResetRateProfileNote": {
+        "message": "All values on the current profile will be reset to defaults.",
+        "english": "All values on the current profile will be reset to defaults.",
+        "status": "New entry. Please translate!"
+    },
+    "dialogResetProfileConfirm": {
+        "message": "Reset",
+        "english": "Reset",
+        "status": "Reused entry. Please translate!"
+    },
+    "dialogResetProfileClose": {
+        "message": "Cancel",
+        "english": "Cancel",
+        "status": "Reused entry. Please translate!"
     },
     "dialogProfileChangeTitle": {
         "message": "<span class=\"message-negative\">Warnung:</span> Profil geändert",
@@ -2065,12 +2091,14 @@
         "description": "Feedforward Term helpicon message on PID table titlebar"
     },
     "profilesCopyProfile": {
-        "message": "Kopiere Profileinstellungen",
-        "english": "Copy profile values"
+        "message": "Copy profile",
+        "english": "Copy profile",
+        "status": "Modified entry. Please translate!"
     },
     "profilesResetProfile": {
-        "message": "alle Profileinstellungen zurücksetzen",
-        "english": "Reset all profile values"
+        "message": "Reset to defaults",
+        "english": "Reset to defaults",
+        "status": "Modified entry. Please translate!"
     },
     "profilesActivateProfile": {
         "message": "Geladenes Profil: <strong class=\"message-positive\">$1</strong>",
@@ -3315,6 +3343,11 @@
     "govHeadspeedHelp": {
         "message": "Die Zieldrehzahl des Govenors/Hauptrotors: Maximale Rotordrehzahl * Gas(%).",
         "english": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input."
+    },
+    "govHeadspeedNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning.",
+        "english": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning.",
+        "status": "New entry. Please translate!"
     },
     "govMasterGain": {
         "message": "PID Hauptverstärkung (PID master gain)",
@@ -5068,6 +5101,21 @@
     "failsafeChannelFallbackSettingsHold": {
         "message": "<strong>Hold</strong> heißt, dass der letzte gültige Wert gehalten wird.<strong>Set</strong> heißt, dass der der hier gesetzte Werk verwendet wird",
         "english": "<strong>Hold</strong> means maintain the last good value received. <strong>Set</strong> means the value given here will be used"
+    },
+    "failsafeChannelFallbackOptionAuto": {
+        "message": "Auto",
+        "english": "Auto",
+        "status": "Reused entry. Please translate!"
+    },
+    "failsafeChannelFallbackOptionHold": {
+        "message": "Hold",
+        "english": "Hold",
+        "status": "New entry. Please translate!"
+    },
+    "failsafeChannelFallbackOptionSet": {
+        "message": "Set",
+        "english": "Set",
+        "status": "Reused entry. Please translate!"
     },
     "failsafeStageTwoSettingsTitle": {
         "message": "Stufe 2 Einstellungen",
