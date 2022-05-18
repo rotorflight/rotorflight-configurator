@@ -1983,7 +1983,7 @@
         "english": "Copy Profile Values"
     },
     "dialogCopyProfileNote": {
-        "message": "All values on the destination profile will be overwritten.<br>This operation can not be reverted.",
+        "message": "Alle waarden in het doelprofiel zullen worden overschreven.<br>Deze handeling kan niet ongedaan worden gemaakt.",
         "english": "All values on the destination profile will be overwritten.<br>This operation can not be reverted.",
         "status": "Modified entry. Please translate!"
     },
@@ -1996,17 +1996,17 @@
         "english": "Cancel"
     },
     "dialogResetProfileTitle": {
-        "message": "Reset Profile Values",
+        "message": "Reset profielwaarden",
         "english": "Reset Profile Values",
         "status": "New entry. Please translate!"
     },
     "dialogResetProfileNote": {
-        "message": "All values on the current profile will be reset to defaults.<br>This operation can not be reverted.",
+        "message": "Alle waarden in het huidige profiel zullen worden gereset naar standaardwaarden.<br>Deze handeling kan niet ongedaan worden gemaakt.",
         "english": "All values on the current profile will be reset to defaults.<br>This operation can not be reverted.",
         "status": "New entry. Please translate!"
     },
     "dialogResetRateProfileNote": {
-        "message": "All values on the current profile will be reset to defaults.",
+        "message": "Alle waarden in het huidige profiel zullen worden gereset naar standaardwaarden.",
         "english": "All values on the current profile will be reset to defaults.",
         "status": "New entry. Please translate!"
     },
@@ -2016,7 +2016,7 @@
         "status": "Reused entry. Please translate!"
     },
     "dialogResetProfileClose": {
-        "message": "Cancel",
+        "message": "Annuleren",
         "english": "Cancel",
         "status": "Reused entry. Please translate!"
     },
@@ -2099,12 +2099,12 @@
         "description": "Feedforward Term helpicon message on PID table titlebar"
     },
     "profilesCopyProfile": {
-        "message": "Copy profile",
+        "message": "Profiel kopiëren",
         "english": "Copy profile",
         "status": "Modified entry. Please translate!"
     },
     "profilesResetProfile": {
-        "message": "Reset to defaults",
+        "message": "Reset naar standaardwaarden",
         "english": "Reset to defaults",
         "status": "Modified entry. Please translate!"
     },
@@ -3377,7 +3377,7 @@
         "english": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input."
     },
     "govHeadspeedNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning.",
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> Het wijzigen van het rotortoerental heeft invloed op de PIDs. Als je de PIDs al hebt getuned, dan zal je dit waarschijnlijk moeten herhalen.",
         "english": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning.",
         "status": "New entry. Please translate!"
     },
@@ -5150,12 +5150,12 @@
         "status": "Reused entry. Please translate!"
     },
     "failsafeChannelFallbackOptionHold": {
-        "message": "Hold",
+        "message": "Behouden",
         "english": "Hold",
         "status": "New entry. Please translate!"
     },
     "failsafeChannelFallbackOptionSet": {
-        "message": "Set",
+        "message": "Zet",
         "english": "Set",
         "status": "Reused entry. Please translate!"
     },
