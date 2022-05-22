@@ -1977,9 +1977,9 @@
         "english": "Copy Profile Values"
     },
     "dialogCopyProfileNote": {
-        "message": "All values on the destination profile will be overwritten.<br>This operation can not be reverted.",
+        "message": "Alle Werte auf dem Zielprofil werden überschrieben.<br>Dieser Vorgang kann nicht rückgängig gemacht werden.",
         "english": "All values on the destination profile will be overwritten.<br>This operation can not be reverted.",
-        "status": "Modified entry. Please translate!"
+        "status": "Modified entry. "
     },
     "dialogCopyProfileConfirm": {
         "message": "Kopieren",
@@ -1990,29 +1990,29 @@
         "english": "Cancel"
     },
     "dialogResetProfileTitle": {
-        "message": "Reset Profile Values",
+        "message": "Profilwerte zurücksetzen",
         "english": "Reset Profile Values",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "dialogResetProfileNote": {
-        "message": "All values on the current profile will be reset to defaults.<br>This operation can not be reverted.",
+        "message": "Alle Werte des aktuellen Profils werden auf die Standardwerte zurückgesetzt.<br>Dieser Vorgang kann nicht rückgängig gemacht werden.",
         "english": "All values on the current profile will be reset to defaults.<br>This operation can not be reverted.",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "dialogResetRateProfileNote": {
-        "message": "All values on the current profile will be reset to defaults.",
+        "message": "Alle Werte des aktuellen Profils werden auf die Standardwerte zurückgesetzt.",
         "english": "All values on the current profile will be reset to defaults.",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "dialogResetProfileConfirm": {
-        "message": "Reset",
+        "message": "Zurücksetzen",
         "english": "Reset",
-        "status": "Reused entry. Please translate!"
+        "status": "Reused entry. "
     },
     "dialogResetProfileClose": {
-        "message": "Cancel",
+        "message": "Abbrechen",
         "english": "Cancel",
-        "status": "Reused entry. Please translate!"
+        "status": "Reused entry. "
     },
     "dialogProfileChangeTitle": {
         "message": "<span class=\"message-negative\">Warnung:</span> Profil geändert",
@@ -2059,7 +2059,7 @@
         "english": "Proportional"
     },
     "profilesProportionalHelp": {
-        "message": "Steuert die Stärke, wie streng das Fluggerät den Sticks (den Setpoint) folgt.<br><br>Höhere Werte (Gains) sorgen für eine strengere Verfolgung, können aber zu Überschwingen führen, wenn sie im zu hohen Verhältnis zum Derivativen (D-Wert) stehen. Stellen Sie sich den P-Wert als Feder in einem Auto vor.",
+        "message": "Steuert die Stärke, wie streng das Flugmodell den Sticks (den Setpoint) folgt.<br><br>Höhere Werte (Gains) sorgen für eine strengere Verfolgung, können aber zu Überschwingen führen, wenn sie im zu hohen Verhältnis zum Derivativen (D-Wert) stehen. Stellen Sie sich den P-Wert als Feder in einem Auto vor.",
         "english": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint).<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the Derivative (D-term).  Think of the P-term as the spring on a car.",
         "description": "Proportional Term helpicon message on PID table titlebar"
     },
@@ -2068,7 +2068,7 @@
         "english": "Integral"
     },
     "profilesIntegralHelp": {
-        "message": "Steuert, wie stark sich die Drohne an die grundlegende Position des Setpoint hält.<br>Ähnlich zu Proportional, aber für längere Abweichungen der Drohne zum SetPoint durch einen Versatz des Massenschwerpunkts (CoG) oder anhaltender äußerer Einfluss (beständiger Wind).<br><br>Höhere Verstärkungen bieten eine engere Verfolgung des SetPoint (z.B. bei Kehrtwenden), können aber dazu führen, dass sich die Drohne bei Stick-Input steif anfühlt.<br>Ist die Verstärkung im Verhältnis zur D-term extrem hoch, kann dies langsame Schwingungen verursachen.",
+        "message": "Steuert, wie stark sich das Flugmodell an die grundlegende Position des Setpoint hält.<br>Ähnlich zu Proportional, aber für längere Abweichungen des Flugmodells zum SetPoint durch einen Versatz des Massenschwerpunkts (CoG) oder anhaltender äußerer Einfluss (beständiger Wind).<br><br>Höhere Verstärkungen bieten eine engere Verfolgung des SetPoint (z.B. bei Kehrtwenden), können aber dazu führen, dass sich das Flugmodell bei Stick-Input steif anfühlt.<br>Ist die Verstärkung im Verhältnis zur D-term extrem hoch, kann dies langsame Schwingungen verursachen.",
         "english": "Controls the strength of how tightly the machine holds the overall position of the Setpoint.<br>Similar to Proportional, but for longer biases on the craft such as an offset center of gravity (CoG) or persistent outside influence (steady wind).<br /><br />Higher gains provide tighter tracking (e.g.: in sweeping turns), but can make the craft feel stiff for commanded stick inputs.<br>If extremely high in proportion to the D-term, can cause slow oscillations.",
         "description": "Integral Term helpicon message on PID table titlebar"
     },
@@ -2077,7 +2077,7 @@
         "english": "Derivative"
     },
     "profilesDerivativeHelp": {
-        "message": "Steuert die Stärke der Dämpfung der Drohne auf JEDER Bewegung. Wenn die Sticks bewegt werden, dämpft der D-term den Befehl. Bei äußerem Einfluss (Propwash oder Windböen) dämpft der D-term den Einfluss.<br><br>Höhere Verstärkung bieten mehr Dämpfung und reduzieren die Überschreitung um P-term und FF.<br>Der D-term ist jedoch SEHR empfindlich für hochfrequentes Gyro-Rauschen (Rauschen | Vergrößern um Faktor 10 bis 100).<br><br>Hochfrequenzrauschen kann heiße Motoren verursachen und Motoren zerstören, wenn die D-Verstärkung zu hoch ist oder das Gyro-Rauschen nicht gut gefiltert wird (siehe Filter-Tab).<br><br>Der D-Term ist vergleichbar mit dem Stoßdämpfer im Auto, aber mit der negativen Eigenschaft hochfrequentes Gyro-Rauschen zu verstärken.",
+        "message": "Steuert die Stärke der Dämpfung des Flugmodells auf JEDER Bewegung. Wenn die Sticks bewegt werden, dämpft der D-term den Befehl. Bei äußerem Einfluss (Propwash oder Windböen) dämpft der D-term den Einfluss.<br><br>Höhere Verstärkung bieten mehr Dämpfung und reduzieren die Überschreitung um P-term und FF.<br>Der D-term ist jedoch SEHR empfindlich für hochfrequentes Gyro-Rauschen (Rauschen | Vergrößern um Faktor 10 bis 100).<br><br>Hochfrequenzrauschen kann heiße Motoren verursachen und Motoren zerstören, wenn die D-Verstärkung zu hoch ist oder das Gyro-Rauschen nicht gut gefiltert wird (siehe Filter-Tab).<br><br>Der D-Term ist vergleichbar mit dem Stoßdämpfer im Auto, aber mit der negativen Eigenschaft hochfrequentes Gyro-Rauschen zu verstärken.",
         "english": "Controls the strength of dampening to ANY motion on the craft.  For stick moves, the D-term dampens the command. For an outside influence (prop-wash OR wind gust) the D-term dampens the influence.<br /><br />Higher gains provide more dampening and reduce overshoot by P-term and FF.<br>However, the D-term is VERY sensitive to gyro high frequency vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise can cause motor heat and burn out motors if D-gains are too high or the gyro noise is not filtered well (see Filters tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the negative inherent property of magnifying high frequency gyro noise.",
         "description": "Derivative Term helpicon message on PID table titlebar"
     },
@@ -2091,14 +2091,14 @@
         "description": "Feedforward Term helpicon message on PID table titlebar"
     },
     "profilesCopyProfile": {
-        "message": "Copy profile",
+        "message": "Profil kopieren",
         "english": "Copy profile",
-        "status": "Modified entry. Please translate!"
+        "status": "Modified entry. "
     },
     "profilesResetProfile": {
-        "message": "Reset to defaults",
+        "message": "Auf Standardwerte zurücksetzen",
         "english": "Reset to defaults",
-        "status": "Modified entry. Please translate!"
+        "status": "Modified entry. "
     },
     "profilesActivateProfile": {
         "message": "Geladenes Profil: <strong class=\"message-positive\">$1</strong>",
@@ -3345,9 +3345,9 @@
         "english": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input."
     },
     "govHeadspeedNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning.",
+        "message": "<span class=\"message-negative\">Warning:</span> Eine Änderung der Kopfdrehzahl hat Auswirkungen auf die PID-Abstimmung. Wenn Sie die PID-Reglerverstärkungen bereits eingestellt haben, müssen Sie die Einstellung wahrscheinlich wiederholen.",
         "english": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning.",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "govMasterGain": {
         "message": "PID Hauptverstärkung (PID master gain)",
@@ -5095,27 +5095,27 @@
         "english": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 25usec, so small changes disappear"
     },
     "failsafeChannelFallbackSettingsAuto": {
-        "message": "<strong>Auto</strong> heißt Roll, Pitch, Yaw zentrieren sich, Gas wird niedrig gehalten. <strong>Hold</strong> bedeutet das der letzte empfangene Wert beibehalten wird.",
+        "message": "<strong>Automatisch</strong> heißt Roll, Nick, Gier zentrieren sich, Gas wird niedrig gehalten. <strong>Halten</strong> bedeutet das der letzte empfangene Wert beibehalten wird.",
         "english": "<strong>Auto</strong> means Roll, Pitch and Yaw to center and Throttle low. <strong>Hold</strong> means maintain the last good value received"
     },
     "failsafeChannelFallbackSettingsHold": {
-        "message": "<strong>Hold</strong> heißt, dass der letzte gültige Wert gehalten wird.<strong>Set</strong> heißt, dass der der hier gesetzte Werk verwendet wird",
+        "message": "<strong>Halten</strong> heißt, dass der letzte gültige Wert gehalten wird.<strong>Einstellen</strong> heißt, dass der hier gesetzte Wert verwendet wird",
         "english": "<strong>Hold</strong> means maintain the last good value received. <strong>Set</strong> means the value given here will be used"
     },
     "failsafeChannelFallbackOptionAuto": {
-        "message": "Auto",
+        "message": "Automatisch",
         "english": "Auto",
-        "status": "Reused entry. Please translate!"
+        "status": "Reused entry. "
     },
     "failsafeChannelFallbackOptionHold": {
-        "message": "Hold",
+        "message": "Halten",
         "english": "Hold",
-        "status": "New entry. Please translate!"
+        "status": "New entry. "
     },
     "failsafeChannelFallbackOptionSet": {
-        "message": "Set",
+        "message": "Einstellen",
         "english": "Set",
-        "status": "Reused entry. Please translate!"
+        "status": "Reused entry. "
     },
     "failsafeStageTwoSettingsTitle": {
         "message": "Stufe 2 Einstellungen",
