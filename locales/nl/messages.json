@@ -564,8 +564,7 @@
     },
     "firmwareVersionNotSupported": {
         "message": "Deze firmware-versie wordt <span class=\"message-negative\">niet ondersteund</span>. Gebruik een firmware-versie die ondersteund wordt door deze versie van de Configurator. Gebruik de CLI om een backup te maken voor het flashen. De CLI backup/restore-procedure staat beschreven in de documentie.<br />Als je nog nog klaar bent om te upgraden, gebruik dan een oude versie van de Configurator.",
-        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
-        "status": "Modified entry. Please translate!"
+        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
     },
     "firmwareTypeNotSupported": {
         "message": "Niet-Rotorflight firmware wordt <span class=\"message-negative\">niet ondersteund</span>, behalve in CLI modus.",
@@ -573,8 +572,7 @@
     },
     "resetToCustomDefaultsDialog": {
         "message": "Er zijn aangepaste standaardwaarden beschikbaar voor dit bord.<br />Een bord zal in het algemeen niet correct werken tenzij aangepaste standaardwaarden worden toegepast.<br />Wil je aangepaste standaardwaarden toepassen voor dit bord?",
-        "english": "There are custom defaults for this board available.<br />Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?",
-        "status": "Modified entry. Please translate!"
+        "english": "There are custom defaults for this board available.<br />Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?"
     },
     "resetToCustomDefaultsAccept": {
         "message": "Aangepaste standaardwaarden toepassen",
@@ -594,8 +592,7 @@
     },
     "reportProblemsDialogUNIFIED_FIRMWARE_WITHOUT_DEFAULTS": {
         "message": "<strong>Unified firmware is geflashed zonder aangepaste standaardwaarden.</strong><br>Configureer het bord handmatig via de CLI.",
-        "english": "<strong>Unified firmware type is flashed without custom defaults.</strong><br>Please configure the board manually via the CLI.",
-        "status": "Modified entry. Please translate!"
+        "english": "<strong>Unified firmware type is flashed without custom defaults.</strong><br>Please configure the board manually via the CLI."
     },
     "reportProblemsDialogMOTOR_PROTOCOL_DISABLED": {
         "message": "<strong>er is geen motor output protocol geselecteerd</strong>.<br>Selecteer een output protocol voor de ESC's in '$t(configurationEscFeatures.message)' op het tabblad '$t(tabMotors.message)'.<br>$t(escProtocolDisabledMessage.message)",
@@ -1472,8 +1469,7 @@
     },
     "configurationAccelTrimsHelp": {
         "message": "Met de versnellingsmeter-trims kan de versnellingsmeterkalibratie worden verfijnd om drift te verwijderen in gestabiliseerde modi, zoals Horizon, Angle en Rescue.",
-        "english": "The Accelerometer Trims provide fine tuning to the accel calibration to remove drift while in stabilized modes, such as Horizon, Angle and Rescue.",
-        "status": "Modified entry. Please translate!"
+        "english": "The Accelerometer Trims provide fine tuning to the accel calibration to remove drift while in stabilized modes, such as Horizon, Angle and Rescue."
     },
     "configurationAccelTrimRoll": {
         "message": "Versnellingsmeter roll trim",
@@ -1505,8 +1501,7 @@
     },
     "configurationBeeperHelp": {
         "message": "In- of uitschakelen wanneer de buzzer moet klinken",
-        "english": "Enable or disable when to sound the Buzzer",
-        "status": "Modified entry. Please translate!"
+        "english": "Enable or disable when to sound the Buzzer"
     },
     "beeperGYRO_CALIBRATED": {
         "message": "Geeft een pieptoon als de gyro is gekalibreerd",
@@ -1606,8 +1601,7 @@
     },
     "configurationSystemHelp": {
         "message": "<strong>Noot:</strong> Zorg ervoor dat je FC kan werken met de geselecteerde loop-snelheid! Controleer de stabiliteit van de CPU-belasting en de cyclustijd.",
-        "english": "<strong>Note:</strong> Make sure your FC is able to operate at the selected loop speed! Check CPU Load and Cycletime stability.",
-        "status": "Modified entry. Please translate!"
+        "english": "<strong>Note:</strong> Make sure your FC is able to operate at the selected loop speed! Check CPU Load and Cycletime stability."
     },
     "configurationLoopTime": {
         "message": "Vluchtcontroller loop-tijd",
@@ -1983,8 +1977,8 @@
         "english": "Copy Profile Values"
     },
     "dialogCopyProfileNote": {
-        "message": "Alle waarden op het bestemmingsprofiel worden gewist en overschreven",
-        "english": "All values on the destination profile will be wiped and overwritten"
+        "message": "Alle waarden in het doelprofiel zullen worden overschreven.<br>Deze handeling kan niet ongedaan worden gemaakt.",
+        "english": "All values on the destination profile will be overwritten.<br>This operation can not be reverted."
     },
     "dialogCopyProfileConfirm": {
         "message": "Kopiëren",
@@ -1994,15 +1988,33 @@
         "message": "Annuleren",
         "english": "Cancel"
     },
+    "dialogResetProfileTitle": {
+        "message": "Reset profielwaarden",
+        "english": "Reset Profile Values"
+    },
+    "dialogResetProfileNote": {
+        "message": "Alle waarden in het huidige profiel zullen worden gereset naar standaardwaarden.<br>Deze handeling kan niet ongedaan worden gemaakt.",
+        "english": "All values on the current profile will be reset to defaults.<br>This operation can not be reverted."
+    },
+    "dialogResetRateProfileNote": {
+        "message": "Alle waarden in het huidige profiel zullen worden gereset naar standaardwaarden.",
+        "english": "All values on the current profile will be reset to defaults."
+    },
+    "dialogResetProfileConfirm": {
+        "message": "Reset",
+        "english": "Reset"
+    },
+    "dialogResetProfileClose": {
+        "message": "Annuleren",
+        "english": "Cancel"
+    },
     "dialogProfileChangeTitle": {
         "message": "<span class=\"message-negative\">Waarschuwing:</span> Profiel gewijzigd",
-        "english": "<span class=\"message-negative\">Warning:</span> Profile Changed",
-        "status": "Modified entry. Please translate!"
+        "english": "<span class=\"message-negative\">Warning:</span> Profile Changed"
     },
     "dialogProfileChangeNote": {
         "message": "Het actieve profiel is gewijzigd voordat de wijzigingen werden opgeslagen. Alle wijzigingen gaan <b>verloren</b>.",
-        "english": "The active profile was changed before changes were saved. All changes are <b>lost</b>.",
-        "status": "Modified entry. Please translate!"
+        "english": "The active profile was changed before changes were saved. All changes are <b>lost</b>."
     },
     "dialogProfileChangeConfirm": {
         "message": "Oké",
@@ -2073,12 +2085,12 @@
         "description": "Feedforward Term helpicon message on PID table titlebar"
     },
     "profilesCopyProfile": {
-        "message": "Profielwaarden kopiëren",
-        "english": "Copy profile values"
+        "message": "Profiel kopiëren",
+        "english": "Copy profile"
     },
     "profilesResetProfile": {
-        "message": "Alle profielwaarden resetten",
-        "english": "Reset all profile values"
+        "message": "Reset naar standaardwaarden",
+        "english": "Reset to defaults"
     },
     "profilesActivateProfile": {
         "message": "Geladen profiel: <strong class=\"message-positive\">$1</strong>",
@@ -2438,18 +2450,15 @@
     },
     "servoSettings": {
         "message": "Servo-instellingen",
-        "english": "Servo Settings",
-        "status": "Modified entry. Please translate!"
+        "english": "Servo Settings"
     },
     "servoPwmRate": {
         "message": "Servo-updatesnelheid",
-        "english": "Servo update rate",
-        "status": "Modified entry. Please translate!"
+        "english": "Servo update rate"
     },
     "servoPwmRateHelp": {
         "message": "Updatesnelheid van servoposities in Hz. Ook bekend als PWM-snelheid. Voor analoge servo's is dit altijd 50Hz. Voor digitale servo's kan dit variëren van 125 Hz tot 400 Hz. Controleer het gegevensblad van je servo.",
-        "english": "Rate for servo position updates in Hz. Also known as PWM rate. For analog servos, this is always 50Hz. For digital servos, it can vary from 125Hz to 400Hz. Please check your servo's data sheet.",
-        "status": "Modified entry. Please translate!"
+        "english": "Rate for servo position updates in Hz. Also known as PWM rate. For analog servos, this is always 50Hz. For digital servos, it can vary from 125Hz to 400Hz. Please check your servo's data sheet."
     },
     "servoConfiguration": {
         "message": "Servo configuratie",
@@ -2497,23 +2506,19 @@
     },
     "servoUnusualRatesWarning": {
         "message": "<span class=\"message-negative\">Waarschuwing:</span> De servo <i>snelheden</i> zijn ingesteld op ongebruikelijke waarden. S.v.p. controleren!",
-        "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!",
-        "status": "Modified entry. Please translate!"
+        "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!"
     },
     "servoUnequalRatesWarning": {
         "message": "<span class=\"message-negative\">Waarschuwing:</span> De cyclische servo <i>snelheden</i> zijn niet gelijk. S.v.p. controleren!",
-        "english": "<span class=\"message-negative\">Warning:</span> The cyclic servo <i>Rates</i> are not equal. Please check!",
-        "status": "Modified entry. Please translate!"
+        "english": "<span class=\"message-negative\">Warning:</span> The cyclic servo <i>Rates</i> are not equal. Please check!"
     },
     "servoUnusualLimitsWarning": {
         "message": "<span class=\"message-negative\">Waarschuwing:</span> De servo <i>limieten</i> zijn ingesteld op ongebruikelijke waarden. S.v.p. controleren!",
-        "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!",
-        "status": "Modified entry. Please translate!"
+        "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!"
     },
     "servoUnequalLimitsWarning": {
         "message": "<span class=\"message-negative\">Waarschuwing:</span> De <i>limieten</i> van de aileron-servo zijn niet gelijk. S.v.p. controleren!",
-        "english": "<span class=\"message-negative\">Warning:</span> The aileron servo <i>Limits</i> are not equal. Please check!",
-        "status": "Modified entry. Please translate!"
+        "english": "<span class=\"message-negative\">Warning:</span> The aileron servo <i>Limits</i> are not equal. Please check!"
     },
     "servoOverrideNote": {
         "message": "<strong>Let op.</strong> Servo Override stuurt de servo's naar vaste posities voor installatiedoeleinden. De override waarden worden niet opgeslagen en zullen worden gereset na een herstart.",
@@ -2525,8 +2530,7 @@
     },
     "servoOverrideHelp": {
         "message": "Selecteer de Override via de schakelaar en verplaats vervolgens de schuifregelaar om de servo-arm naar de gevraagde hoek te verplaatsen.",
-        "english": "Select the Override via the switch and then move the slider to move the servo arm to the commanded angle. ",
-        "status": "Modified entry. Please translate!"
+        "english": "Select the Override via the switch and then move the slider to move the servo arm to the commanded angle. "
     },
     "servoOverrideEnable": {
         "message": "Inschakelen",
@@ -2622,8 +2626,7 @@
     },
     "mixerSwashRingHelp": {
         "message": "De swashring beperkt de maximale hoek die de tuimelschijf kan maken om vastlopen te voorkomen. De pitch- en rolassen moet afzonderlijk worden geconfigureerd (via de mixerinvoer en -schaalverdeling) voor de gewenste hellingshoeken (zonder vastlopen). Als echter zowel de maximale pitch als rol <strong>tegelijkertijd</strong> worden gevraagd, dan zal de tuimelschijf naar een grotere hoek moeten afbuigen dan voor beide assen afzonderlijk. Dit kan ertoe leiden dat de tuimelschijf tegen de hoofdas vastloopt.<br><br>Als je de waarde van de swashring verhoogt, wordt de maximale tuimelschijfhoek beperkt wanneer zowel pitch als rol maximaal zijn.",
-        "english": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum.",
-        "status": "Modified entry. Please translate!"
+        "english": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum."
     },
     "mixerTailRotorSettings": {
         "message": "Instellingen staartrotor",
@@ -2663,8 +2666,7 @@
     },
     "mixerInputChannelsHelp": {
         "message": "<strong>Let op! Dit is de juiste plaats om je controls te beperken</strong><br><br>De mixer invoersnelheid is voor het instellen van  schaalfactoren voor de rotorkop. Omdat elke rotorkop anders is, zijn voor elke opstelling verschillende schaalwaarden nodig. <br><strong>Control:</strong> deze kolom bevat alle gestabiliseerde besturingsfuncties. <br><strong>Minimum:</strong> Stel de minimale hoek van de rotorbladen in.<br><strong>Maximum:</strong> Stel de maximale hoek van de rotorbladen in.<br><strong>Schaal:</strong> Verhoog of verlaag de schaalwaarde totdat de helikopterbladen overeenkomen met de gevraagde hoek. <br><br><strong>Kalibratieproces mixerinvoer</strong><br><strong>Stap 1: </strong>Schakel de mixer override in op het tabblad 'Systeem'. Het item 'Mixer override' is nu zichtbaar op deze pagina. <br><strong>Stap 2: </strong>Schakel de override in op de te kalibreren Control. <br><strong>Stap 3: </strong>Stel de Mixer Override in op een hoek (zeg 10 graden). <br><strong>Stap 4: </strong>Meet de werkelijke bladhoek.<br><strong>Stap 5: </strong>Stel de schaal zo in dat de fysieke bladhoek overeenkomt met de ingestelde hoek.",
-        "english": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle.",
-        "status": "Modified entry. Please translate!"
+        "english": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle."
     },
     "mixerOverrideNote": {
         "message": "<strong>Let op.</strong> Mixer Override forceert de mixer invoer in willekeurige posities voor installatiedoeleinden. De override waarden zijn niet opgeslagen en zullen worden gereset na een herstart.",
@@ -2676,8 +2678,7 @@
     },
     "mixerOverrideHelp": {
         "message": "Deze functie wordt gebruikt voor het instellen van de rotor en maakt deel uit van het <strong>mixer kalibratie</strong> proces. Wanneer de override actief is, kan de mixer direct naar de gevraagde posities worden gestuurd.",
-        "english": "This feature is used for setting up the rotor and is part of the <strong>Mixer Calibration</strong> process. When the bypass enable is active the mixer can be commanded to the requested positions directly.",
-        "status": "Modified entry. Please translate!"
+        "english": "This feature is used for setting up the rotor and is part of the <strong>Mixer Calibration</strong> process. When the bypass enable is active the mixer can be commanded to the requested positions directly."
     },
     "mixerOverrideEnable": {
         "message": "Inschakelen",
@@ -3105,8 +3106,7 @@
     },
     "motorOverrideHelp": {
         "message": "Selecteer de Override via de schakelaar en verplaats vervolgens de schuifregelaar om de motor te bedienen. ",
-        "english": "Select the Override via the switch and then move the slider to begin to operate the motor. ",
-        "status": "Modified entry. Please translate!"
+        "english": "Select the Override via the switch and then move the slider to begin to operate the motor. "
     },
     "motorOverrideEnable": {
         "message": "Inschakelen",
@@ -3282,63 +3282,51 @@
     },
     "govAutoMinEntryTime": {
         "message": "Autorotatie minimale vliegtijd",
-        "english": "Autorotation minimum entry time",
-        "status": "Modified entry. Please translate!"
+        "english": "Autorotation minimum entry time"
     },
     "govAutoMinEntryTimeHelp": {
         "message": "Minimale vliegtijd voordat autorotatie kan worden ingeschakeld.",
-        "english": "Minimum flight time before autorotation can be engaged.",
-        "status": "Modified entry. Please translate!"
+        "english": "Minimum flight time before autorotation can be engaged."
     },
     "govLostThrottleTimeout": {
         "message": "Time-out geen throttle",
-        "english": "Zero Throttle timeout",
-        "status": "Modified entry. Please translate!"
+        "english": "Zero Throttle timeout"
     },
     "govLostThrottleTimeoutHelp": {
         "message": "Time-out voor ontbrekend gassignaal, voordat de governor wordt uitgeschakeld. Als het gassignaal binnen deze time-out terugkeert, voert de governor een herstel-spoolup uit.",
-        "english": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup.",
-        "status": "Modified entry. Please translate!"
+        "english": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup."
     },
     "govLostHeadspeedTimeout": {
         "message": "Time-out rotortoerentalsignaal ",
-        "english": "Headspeed signal timeout",
-        "status": "Modified entry. Please translate!"
+        "english": "Headspeed signal timeout"
     },
     "govLostHeadspeedTimeoutHelp": {
         "message": "Time-out voor ontbrekend rotortoerentalsignaal, voor spool down. Als het RPM-signaal binnen deze time-out terugkeert, voert de governor een herstel-spoolup uit.",
-        "english": "Timeout for missing headspeed signal, before spooling down. If the RPM signal returns within this timeout, the governor will perform a recovery spoolup.",
-        "status": "Modified entry. Please translate!"
+        "english": "Timeout for missing headspeed signal, before spooling down. If the RPM signal returns within this timeout, the governor will perform a recovery spoolup."
     },
     "govHeadspeedFilterHz": {
         "message": "Afsnijfrequentie rotortoerentalfilter  [Hz]",
-        "english": "Headspeed filter cutoff [Hz]",
-        "status": "Modified entry. Please translate!"
+        "english": "Headspeed filter cutoff [Hz]"
     },
     "govHeadspeedFilterHzHelp": {
         "message": "Afsnijfrequentie voor het rotortoerental PID invoer laagdoorlaatfilter.",
-        "english": "Cutoff for the headspeed PID input lowpass filter.",
-        "status": "Modified entry. Please translate!"
+        "english": "Cutoff for the headspeed PID input lowpass filter."
     },
     "govVoltageFilterHz": {
         "message": "Afsnijfrequentie batterijspanningsfilter [Hz]",
-        "english": "Battery voltage filter cutoff [Hz]",
-        "status": "Modified entry. Please translate!"
+        "english": "Battery voltage filter cutoff [Hz]"
     },
     "govVoltageFilterHzHelp": {
         "message": "Afsnijfrequentie voor het laagdoorlaatfilter van de batterijspanning.",
-        "english": "Cutoff for the battery voltage lowpass filter.",
-        "status": "Modified entry. Please translate!"
+        "english": "Cutoff for the battery voltage lowpass filter."
     },
     "govTTAFilterHz": {
         "message": "Afsnijfrequentie TTA-filter [Hz]",
-        "english": "TTA filter cutoff [Hz]",
-        "status": "Modified entry. Please translate!"
+        "english": "TTA filter cutoff [Hz]"
     },
     "govTTAFilterHzHelp": {
         "message": "Afsnijfrequentie voor het TTA-invoer laagdoorlaatfilter.",
-        "english": "Cutoff for the TTA input lowpass filter.",
-        "status": "Modified entry. Please translate!"
+        "english": "Cutoff for the TTA input lowpass filter."
     },
     "govHeadspeed": {
         "message": "Volledige rotortoerental",
@@ -3347,6 +3335,10 @@
     "govHeadspeedHelp": {
         "message": "Het governor doeltoerental wordt berekend door het volledige rotortoerental te vermenigvuldigen met de throttle input.",
         "english": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input."
+    },
+    "govHeadspeedNote": {
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> Het wijzigen van het rotortoerental heeft invloed op de PIDs. Als je de PIDs al hebt getuned, dan zal je dit waarschijnlijk moeten herhalen.",
+        "english": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning."
     },
     "govMasterGain": {
         "message": "PID master gain",
@@ -4412,28 +4404,23 @@
     },
     "profilesItermLimit": {
         "message": "I-term limiet",
-        "english": "I-term Limits",
-        "status": "Modified entry. Please translate!"
+        "english": "I-term Limits"
     },
     "profilesItermLimitHelp": {
         "message": "Harde limiet voor de I-term in de PID loop. De absolute I-term waarden zullen nooit boven deze limieten komen.",
-        "english": "Hard limit for the I-term in the PID loop. The absolute I-term values will never go above these limits.",
-        "status": "Modified entry. Please translate!"
+        "english": "Hard limit for the I-term in the PID loop. The absolute I-term values will never go above these limits."
     },
     "profilesItermLimitRoll": {
         "message": "I-term limiet voor rol-as [%]",
-        "english": "I-term limit for Roll axis [%]",
-        "status": "Modified entry. Please translate!"
+        "english": "I-term limit for Roll axis [%]"
     },
     "profilesItermLimitPitch": {
         "message": "I-term limiet voor pitch-as [%]",
-        "english": "I-term limit for Pitch axis [%]",
-        "status": "Modified entry. Please translate!"
+        "english": "I-term limit for Pitch axis [%]"
     },
     "profilesItermLimitYaw": {
         "message": "I-term limiet voor yaw-as [%]",
-        "english": "I-term limit for Yaw axis [%]",
-        "status": "Modified entry. Please translate!"
+        "english": "I-term limit for Yaw axis [%]"
     },
     "profilesItermDecay": {
         "message": "I-term verval",
@@ -4461,8 +4448,7 @@
     },
     "profilesItermRelaxHelp": {
         "message": "Beperkt de accumulatie van I-term wanneer snelle bewegingen plaatsvinden. Dit helpt bij het verminderen van terugvering aan het einde van rollen en andere snelle bewegingen. Je kan de assen kiezen waarvoor dit actief is. Bovendien kan dit worden beperkt tot alleen de stijgende richting, wat kan resulteren in een snellere volgcorrectie bij terugkeer van de snelle beweging (gelabeld 'ALLEEN ophogen')<br><strong>RP:</strong> Rol, Pitch <br><strong >RPY:</strong> Rol, Pitch, Yaw <br><br> De snelle beweging kan worden gedetecteerd door de verandering in <strong>setpunt</strong> of verandering in <strong>gyro</strong>.",
-        "english": "Limits the accumulation of I Term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements. You can choose the axes in which this is active. In addition this cutoff can be limited to the increasing direction only which can result in faster tracking correction when returning from the fast movement (labeled increment ONLY)<br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw <br><br> The fast movement can be detected either by the change in <strong>Setpoint</strong> or change in <strong>Gyro</strong>. ",
-        "status": "Modified entry. Please translate!"
+        "english": "Limits the accumulation of I Term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements. You can choose the axes in which this is active. In addition this cutoff can be limited to the increasing direction only which can result in faster tracking correction when returning from the fast movement (labeled increment ONLY)<br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw <br><br> The fast movement can be detected either by the change in <strong>Setpoint</strong> or change in <strong>Gyro</strong>. "
     },
     "profilesItermRelaxAxes": {
         "message": "Assen",
@@ -5041,23 +5027,19 @@
     },
     "gyroRpmFilterQ5": {
         "message": "5<sup>e</sup> harmonische notch Q",
-        "english": "5<sup>th</sup> Harmonic Notch Q",
-        "status": "Modified entry. Please translate!"
+        "english": "5<sup>th</sup> Harmonic Notch Q"
     },
     "gyroRpmFilterQ6": {
         "message": "6<sup>e</sup> harmonische notch Q",
-        "english": "6<sup>th</sup> Harmonic Notch Q",
-        "status": "Modified entry. Please translate!"
+        "english": "6<sup>th</sup> Harmonic Notch Q"
     },
     "gyroRpmFilterQ7": {
         "message": "7<sup>e</sup> harmonische notch Q",
-        "english": "7<sup>th</sup> Harmonic Notch Q",
-        "status": "Modified entry. Please translate!"
+        "english": "7<sup>th</sup> Harmonic Notch Q"
     },
     "gyroRpmFilterQ8": {
         "message": "8<sup>e</sup> harmonische notch Q",
-        "english": "8<sup>th</sup> Harmonic Notch Q",
-        "status": "Modified entry. Please translate!"
+        "english": "8<sup>th</sup> Harmonic Notch Q"
     },
     "dialogGyroResetTitle": {
         "message": "<span class=\"message-negative\">Waarschuwing:</span> RPM filter reset",
@@ -5110,6 +5092,18 @@
     "failsafeChannelFallbackSettingsHold": {
         "message": "<strong>Behouden</strong> betekent dat de laatste correct ontvangen waardes worden aangehouden. <strong>Zet</strong> betekent dat de waarde die hier wordt opgegeven zal worden gebruikt",
         "english": "<strong>Hold</strong> means maintain the last good value received. <strong>Set</strong> means the value given here will be used"
+    },
+    "failsafeChannelFallbackOptionAuto": {
+        "message": "Auto",
+        "english": "Auto"
+    },
+    "failsafeChannelFallbackOptionHold": {
+        "message": "Behouden",
+        "english": "Hold"
+    },
+    "failsafeChannelFallbackOptionSet": {
+        "message": "Zet",
+        "english": "Set"
     },
     "failsafeStageTwoSettingsTitle": {
         "message": "Fase 2 - Instellingen",
@@ -7341,8 +7335,7 @@
     },
     "configurationPidProcessDenomHelp": {
         "message": "De maximale frequentie voor de PID loop wordt beperkt door de verwerkingskracht van de CPU. De CPU-belasting mag niet hoger zijn dan 70% met de geselecteerde loop-snelheid.",
-        "english": "The maximum frequency for the PID loop is limited by the CPU processing power. The CPU Load should not exceed 70% with the selected loop speed.",
-        "status": "Modified entry. Please translate!"
+        "english": "The maximum frequency for the PID loop is limited by the CPU processing power. The CPU Load should not exceed 70% with the selected loop speed."
     },
     "configurationGyroUse32kHz": {
         "message": "Schakel 32kHz gyro sampling modes aan",
@@ -7358,28 +7351,23 @@
     },
     "configurationAccHardwareHelp": {
         "message": "Schakelt de versnellingsmeter in. Dit is vereist voor alle stabilisatiemodi: Angle, Horizon, Acro Trainer en Rescue.",
-        "english": "Enables the Accelerometer. This is required for all stabilisation modes: Angle, Horizon, Acro Trainer and Rescue.",
-        "status": "Modified entry. Please translate!"
+        "english": "Enables the Accelerometer. This is required for all stabilisation modes: Angle, Horizon, Acro Trainer and Rescue."
     },
     "configurationBaroHardware": {
         "message": "Barometer",
-        "english": "Barometer",
-        "status": "Modified entry. Please translate!"
+        "english": "Barometer"
     },
     "configurationBaroHardwareHelp": {
         "message": "Schakelt de barometer in (indien beschikbaar). Hoogte wordt momenteel niet gebruikt door de FC. Het is alleen informatief, beschikbaar via telemetrie.",
-        "english": "Enables the Barometer (if available). Altitude is currently not used in Flight Control. It is informative only, available via the Telemetry.",
-        "status": "Modified entry. Please translate!"
+        "english": "Enables the Barometer (if available). Altitude is currently not used in Flight Control. It is informative only, available via the Telemetry."
     },
     "configurationMagHardware": {
         "message": "Magnetometer",
-        "english": "Magnetometer",
-        "status": "Modified entry. Please translate!"
+        "english": "Magnetometer"
     },
     "configurationMagHardwareHelp": {
         "message": "Schakelt de magnetometer in (indien beschikbaar). Kompasrichting wordt momenteel niet gebruikt door de FC. Het is alleen informatief, beschikbaar via telemetrie.",
-        "english": "Enables the Magnetometer (if available). Compass direction is currently not used in Flight Control. It is informative only, available via the Telemetry.",
-        "status": "Modified entry. Please translate!"
+        "english": "Enables the Magnetometer (if available). Compass direction is currently not used in Flight Control. It is informative only, available via the Telemetry."
     },
     "configurationPersonalization": {
         "message": "Personaliseren",
@@ -7395,8 +7383,7 @@
     },
     "blackboxDeviceHelp": {
         "message": "<strong>Geen logboekregistratie:</strong> Schakelt logboekregistratie uit.<br><strong>Onboard Flash:</strong> Schakelt logboekregistratie in op de ingebouwde flash-chip (indien beschikbaar).<br><strong>SD-kaart:</strong> Logboekregistratie op SD-kaart (indien beschikbaar).<br><strong>Seriële poort:</strong> Logboekregistratie m.b.v. een externe logger (bijv. OpenLager) die is aangesloten op een seriële poort. De seriële poort moet worden ingesteld op 'Blackbox logboek' onder 'Randapparatuur' op het tabblad <strong>Seriële poorten</strong>.",
-        "english": "<strong>No Logging:</strong> Disables logging.<br><strong>Onboard Flash:</strong> Enables logging to onboard flash chip (if available).<br><strong>SD Card:</strong> Log to onboard SD card (if available).<br><strong>Serial Port:</strong> Log to an external logger device (e.g Open Lager) connected to a serial port. The serial port will have to be configured to 'Blackbox Logging' in the 'peripherals' section on the <strong>Serial Ports</strong> tab.",
-        "status": "Modified entry. Please translate!"
+        "english": "<strong>No Logging:</strong> Disables logging.<br><strong>Onboard Flash:</strong> Enables logging to onboard flash chip (if available).<br><strong>SD Card:</strong> Log to onboard SD card (if available).<br><strong>Serial Port:</strong> Log to an external logger device (e.g Open Lager) connected to a serial port. The serial port will have to be configured to 'Blackbox Logging' in the 'peripherals' section on the <strong>Serial Ports</strong> tab."
     },
     "blackboxRateOfLogging": {
         "message": "Blackbox logsnelheid",
@@ -7404,8 +7391,7 @@
     },
     "blackboxRateOfLoggingHelp": {
         "message": "De loggegevens worden met deze snelheid op het logapparaat opgeslagen. Voor het loggen op een extern apparaat kan een lagere snelheid vereist zijn.",
-        "english": "The log data is saved to the log device with this rate. For logging to an external device, lower speed may be required.",
-        "status": "Modified entry. Please translate!"
+        "english": "The log data is saved to the log device with this rate. For logging to an external device, lower speed may be required."
     },
     "blackboxDebugMode": {
         "message": "Blackbox debugmodus",
@@ -7413,8 +7399,7 @@
     },
     "blackboxDebugModeHelp": {
         "message": "Kies welke <i>extra</i> gegevens worden vastgelegd. Indien ingeschakeld, worden vier extra foutopsporingsitems toegevoegd aan de logboekvermeldingen.",
-        "english": "Choose what <i>extra</i> data is being logged. If enabled, four extra debug items are added to the log entries.",
-        "status": "Modified entry. Please translate!"
+        "english": "Choose what <i>extra</i> data is being logged. If enabled, four extra debug items are added to the log entries."
     },
     "blackboxDebugModeUnknown": {
         "message": "ONBEKEND",
