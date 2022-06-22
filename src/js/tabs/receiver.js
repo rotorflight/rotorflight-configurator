@@ -557,7 +557,7 @@ TABS.receiver.initialize = function (callback) {
 
         $('.content_wrapper').change(function () {
             self.saveButtons = true;
-            updateButtons();
+            updateButtons(true);
         });
 
         self.save = function(callback) {
