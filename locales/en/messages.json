@@ -5774,7 +5774,7 @@
         "message": "Confirm Arming"
     },
     "dialogConfirmArmingNote": {
-        "message": "WARNING: Are you sure you want to <strong>enable arming</strong> while Configurator is connected?"
+        "message": "WARNING: Are you sure you want to <strong>enable arming</strong> while Configurator is connected?<br /><br /><span class=\"message-negative\">NOTE:</span> While armed, all changes to settings, including saving settings, are ignored!"
     },
     "dialogConfirmArmingConfirm": {
         "message": "Enable"
