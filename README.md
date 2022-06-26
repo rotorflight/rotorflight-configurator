@@ -1,28 +1,30 @@
 # Rotorflight Configurator
 
-Rotorflight Configurator is a crossplatform configuration tool for the Rotorflight flight control system.
+**Rotorflight** is a _Flight Control_/_FBL_ Software Suite for traditional single-rotor RC helicopters. It is based on Betaflight 4.2, enjoying all the great features of the Betaflight platform, plus many new features added for helicopters. Rotorflight borrows ideas and code also from Heliflight3D, an earlier fork of Betaflight for helicopters.
 
-Rotorflight Configurator is forked from Betaflight Configurator.
+**Rotorflight Configurator** is a cross-platform configuration tool for the Rotorflight flight control system. It is available for Windows, Mac OS, and Linux.
+
+Rotorflight does **NOT** support multi-rotor 'drones', nor airplanes; it is only for traditinal RC helicopters, including co-axial and tandem helicopters.
+
 
 ## Installation
 
-### Installation for End Users:
+Please download the latest version from github:
 
-Please see the [Releases](https://github.com/rotorflight/rotorflight-configurator/releases) page on this Github repo to download the _latest official release_ for your operating system.
+ - https://github.com/rotorflight/rotorflight-configurator/releases
 
-Please ignore any snapshots on this page (github is showing them automatically).
+Then follow the instructions in the [Wiki](https://github.com/rotorflight/rotorflight/wiki/Installing-Rotorflight-Firmware).
 
-### Installation for Beta-testers:
 
-Please see the [Releases](https://github.com/rotorflight/rotorflight-configurator/releases) page on this Github repo to download the latest _snapshot_ for your operating system.
+## Information
 
-Please note that snapshots are available for beta-testing, and are otherwise _not_ supported.
+For more information, please see our github space:
 
-### Notes
+ - [Main page](https://github.com/rotorflight)
+ - [Rotorflight Wiki](https://github.com/rotorflight/rotorflight/wiki)
 
-#### Windows users
 
-The minimum required version of windows is Windows 8.
+## Notes
 
 #### MacOS X users
 
@@ -41,75 +43,52 @@ sudo usermod -aG dialout ${USER}
 If you experience graphics display problems or smudged/dithered fonts display issues in Rotorflight Configurator, try invoking the `rotorflight-configurator` executable file with the `--disable-gpu` command line switch. This will switch off hardware graphics acceleration. Likewise, setting your graphics card antialiasing option to OFF (e.g. FXAA parameter on NVidia graphics cards) might be a remedy as well.
 
 
-### Development
+## Contributing
 
-1. Install node.js (version 10 required)
-2. Install yarn: `npm install yarn -g`
-3. (For Android platform only) Install Java JDK 8, Gradle and Android Studio (Android SDK at least level 19)
-4. Change to project folder and run `yarn install`.
-5. Run `yarn start`.
+Contributions are welcome and encouraged. You can contribute in many ways:
 
-### Running tests
+ - testing Rotorflight with different types of helicopters
+ - improving the documentation in the Wiki
+ - writing How-To guides
+ - provide a new translation for the configurator
+ - implement new features or fix bugs
+ - reporting bugs
+ - new ideas & suggestions
+ - helping other users
 
-`yarn test`
 
-### App build and release
+For reporting Rotorflight issues or bugs, please raise them here:
 
-The tasks are defined in `gulpfile.js` and can be run with through yarn:
-```
-yarn gulp <taskname> [[platform] [platform] ...]
-```
+ - [Feature requests](https://github.com/rotorflight/rotorflight/issues)
+ - [Configurator issue tracker](https://github.com/rotorflight/rotorflight-configurator/issues)
+ - [Blackbox issue tracker](https://github.com/rotorflight/rotorflight-blackbox/issues)
+ - [Firmware issue tracker](https://github.com/rotorflight/rotorflight-firmware/issues)
 
-List of possible values of `<task-name>`:
-* **dist** copies all the JS and CSS files in the `./dist` folder [2].
-* **apps** builds the apps in the `./apps` folder [1].
-* **debug** builds debug version of the apps in the `./debug` folder [1][3].
-* **release** zips up the apps into individual archives in the `./release` folder [1]. 
-
-[1] Running this task on macOS or Linux requires Wine, since it's needed to set the icon for the Windows app (build for specific platform to avoid errors).
-[2] For Android platform, **dist** task will generate folders and files in the `./dist_cordova` folder.
-[3] For Android platform, you need to configure an emulator or to plug an Android device with USB debugging enabled
-
-#### Build or release app for one specific platform
-
-To build or release only for one specific platform you can append the plaform after the `task-name`.
-If no platform is provided, the build for the host platform is run.
-
-* **MacOS X** use `yarn gulp <task-name> --osx64`
-* **Linux** use `yarn gulp <task-name> --linux64` 
-* **Windows** use `yarn gulp <task-name> --win32` 
-* **Android** use `yarn gulp <task-name> --android`
-
-**Note:** Support for cross-platform building is very limited due to the requirement for platform specific build tools. If in doubt, build on the target platform.
-
-You can also use multiple platforms e.g. `yarn gulp <taskname> --osx64 --linux64`. Other platforms like `--win64`, `--linux32` and `--armv7` can be used too, but they are not officially supported, so use them at your own risk.
-
-### Issue trackers
-
-For Rotorflight configurator issues raise them here
-
-https://github.com/rotorflight/rotorflight-configurator/issues
-
-For Rotorflight firmware issues raise them here
-
-https://github.com/rotorflight/rotorflight-firmware/issues
-
-## Technical details
-
-The configurator is based on chrome.serial API running on Google Chrome/Chromium core.
-
-## Developers
-
-Please see the Rotorflight [Wiki](https://github.com/rotorflight/rotorflight/wiki)
 
 ## Credits
 
-Dr.Rudder - author and maintainer of the Rotorflight fork.
+Rotorflight is Free Software. Meaning, it is available free of charge _without warranty_, the source code is available, and it is supported by the users themselves as a community. Rotorflight is under the GPLv3 license.
 
-James-T1 - author of Heliflight3D, another Betaflight fork for helicopters.
+Rotorflight is forked from Betaflight, which in turn is forked from Cleanflight.
+Rotorflight borrows ideas and code also from Heliflight-3D, another Betaflight fork for helis.
 
-Westie - Logo for Rotorflight and Heliflight3D
+So thanks goes to all those whom have contributed along the way.
 
-ctn - primary author and maintainer of Baseflight Configurator from which Cleanflight Configurator project was forked.
+Origins for Rotorflight:
 
-Hydra -  author and maintainer of Cleanflight Configurator from which the Betaflight project was forked.
+ - **Petri Mattila** (Dr.Rudder) - author and maintainer
+ - **pkaig** - wiki, resource mapping, testing
+ - **egon** - wiki, Dutch translation, Lua Scripts, testing
+ - **mopatop** - wiki, testing
+ - **Mike_PSL** - wiki, testing
+ - **mattis** - German translation, testing
+ - **Simon Stummer** (simonsummer) - testing
+
+Origin for Heliflight-3D and Betaflight:
+
+ - **James-T1** - author
+ - **Westie** - Rotorflight and Heliflight3D logo
+ - **ctn** - primary author and maintainer of Baseflight Configurator
+ - **Hydra** -  author and maintainer of Cleanflight Configurator
+
+And many others.
