@@ -51,7 +51,7 @@ const NODE_ENV = process.env.NODE_ENV || 'production';
 let gitChangeSetId;
 
 const nwBuilderOptions = {
-    version: '0.54.0',
+    version: '0.62.2',
     files: `${DIST_DIR}**/*`,
     macIcns: './src/images/rf_icon.icns',
     macPlist: { 'CFBundleDisplayName': 'Rotorflight Configurator'},
@@ -731,7 +731,7 @@ function getLinuxPackageArch(type, arch) {
 }
 // Create distribution package for macOS platform
 function release_osx64(appDirectory) {
-    const appdmg = require('gulp-appdmg');
+    const appdmg = require('./gulp-appdmg');
 
     // The appdmg does not generate the folder correctly, manually
     createDirIfNotExists(RELEASE_DIR);
