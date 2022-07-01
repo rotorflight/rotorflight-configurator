@@ -76,7 +76,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             }
 
             var formattedNotes = summary.notes; //.replace(/#(\d+)/g, '[#$1](https://github.com/rotorflight/rotorflight-firmware/pull/$1)');
-            formattedNotes = marked(formattedNotes);
+            formattedNotes = marked.parse(formattedNotes);
             $('div.release_info .notes').html(formattedNotes);
             $('div.release_info .notes').find('a').each(function() {
                 $(this).attr('target', '_blank');
