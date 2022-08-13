@@ -51,6 +51,9 @@ TABS.adjustments = {
         'PIDProfile',
         'OSDProfile',
         'LEDProfile',
+        'PitchCollectiveFF',
+        'PitchCollectiveImpulseFF',
+        'SwashPhase',
     ],
 };
 
