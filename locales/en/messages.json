@@ -1954,6 +1954,15 @@
     "adjustmentsFunctionLEDProfile": {
         "message": "LED Profile Selection"
     },
+    "adjustmentsFunctionPitchCollectiveFF": {
+        "message": "Pitch Collective Precomnp"
+    },
+    "adjustmentsFunctionPitchCollectiveImpulseFF": {
+        "message": "Pitch Collective Impulse Precomnp"
+    },
+    "adjustmentsFunctionSwashPhase": {
+        "message": "Swash Phase Angle"
+    },
     "servoSettings": {
         "message": "Servo Settings"
     },
