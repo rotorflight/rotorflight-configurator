@@ -170,7 +170,7 @@ TABS.auxiliary.initialize = function (callback) {
             start: rangeValues,
             behaviour: 'snap-drag',
             margin: 25,
-            step: 25,
+            step: 5,
             connect: true,
             range: channel_range,
             format: wNumb({
