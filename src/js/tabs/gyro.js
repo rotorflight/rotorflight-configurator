@@ -516,7 +516,7 @@ TABS.gyro.initialize = function (callback) {
                 const quality = $(`input[id="gyroRpmFilter${rotor}Q${harm}"]`);
                 const notschy = $(`select[id="gyroRpmFilter${rotor}N${harm}"]`);
                 if (switchy.is(':checked')) {
-                    conf.notch_q = parseInt(quality.val());
+                    conf.notch_q = parseFloat(quality.val());
                     conf.count = parseInt(notschy.val());
                 } else {
                     conf.count = 0;
@@ -526,7 +526,7 @@ TABS.gyro.initialize = function (callback) {
                 const switchy = $(`input[id="gyroRpmFilter${rotor}S${harm}"]`);
                 const quality = $(`input[id="gyroRpmFilter${rotor}Q${harm}"]`);
                 if (switchy.is(':checked')) {
-                    conf.notch_q = parseInt(quality.val());
+                    conf.notch_q = parseFloat(quality.val());
                     conf.count = 1;
                 } else {
                     conf.count = 0;
