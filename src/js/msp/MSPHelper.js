@@ -793,8 +793,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                         id: data.readU8(),
                         auxChannelIndex: data.readU8(),
                         range: {
-                            start: 900 + (data.readU8() * 25),
-                            end: 900 + (data.readU8() * 25),
+                            start: 1500 + (data.read8() * 5),
+                            end: 1500 + (data.read8() * 5),
                         },
                     };
                     FC.MODE_RANGES.push(modeRange);
@@ -2210,8 +2210,8 @@ MspHelper.prototype.sendModeRange = function(modeRangeIndex, onCompleteCallback)
     buffer.push8(modeRangeIndex)
           .push8(modeRange.id)
           .push8(modeRange.auxChannelIndex)
-          .push8((modeRange.range.start - 900) / 25)
-          .push8((modeRange.range.end - 900) / 25);
+          .push8((modeRange.range.start - 1500) / 5)
+          .push8((modeRange.range.end - 1500) / 5);
 
     const modeRangeExtra = FC.MODE_RANGES_EXTRA[modeRangeIndex];
     buffer.push8(modeRangeExtra.modeLogic)
