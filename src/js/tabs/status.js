@@ -158,8 +158,8 @@ TABS.status.initialize = function (callback) {
             i18n.getMessage('controlAxisRoll'),
             i18n.getMessage('controlAxisPitch'),
             i18n.getMessage('controlAxisYaw'),
+            i18n.getMessage('controlAxisCollective'),
             i18n.getMessage('controlAxisThrottle'),
-            i18n.getMessage('controlAxisCollective')
         ];
 
         const numBars = (FC.RC.active_channels > 0) ? FC.RC.active_channels : 8;
