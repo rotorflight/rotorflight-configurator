@@ -121,8 +121,8 @@ TABS.receiver.initialize = function (callback) {
             'controlAxisRoll',
             'controlAxisPitch',
             'controlAxisYaw',
-            'controlAxisThrottle',
             'controlAxisCollective',
+            'controlAxisThrottle',
         ];
 
         const numBars = (FC.RC.active_channels > 0) ? FC.RC.active_channels : 8;
@@ -268,7 +268,7 @@ TABS.receiver.initialize = function (callback) {
         // rssi
         const rssi_channel_e = $('select[name="rssi_channel"]');
         rssi_channel_e.append(`<option value="0">${i18n.getMessage("receiverRssiChannelDisabledOption")}</option>`);
-        //1-5 reserved for Roll Pitch Yaw Throttle Collective, starting at 6
+        //1-5 reserved for Roll Pitch Yaw Collective Throttle, starting at 6
         for (let i = 6; i < FC.RC.active_channels + 1; i++) {
             rssi_channel_e.append(`<option value="${i}">${i18n.getMessage("controlAxisAux" + (i-5))}</option>`);
         }
