@@ -154,23 +154,23 @@ RateCurve.prototype.rcCommandRawToDegreesPerSecond = function (rcData, rate, rcR
         const rcCommandfAbs = Math.abs(rcCommandf);
 
         switch(TABS.rates.currentRatesType) {
-            case 0: // BETAFLIGHT
+            case TABS.rates.RATES_TYPE.BETAFLIGHT:
                 angleRate = this.getBetaflightRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo, superExpoActive, limit);
                 break;
-            case 1: // RACEFLIGHT
+            case TABS.rates.RATES_TYPE.RACEFLIGHT:
                 angleRate = this.getRaceflightRates(rcCommandf, rate, rcRate, rcExpo);
                 break;
-            case 2: // KISS
+            case TABS.rates.RATES_TYPE.KISS:
                 angleRate = this.getKISSRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo);
                 break;
-            case 3: // ACTUAL
+            case TABS.rates.RATES_TYPE.ACTUAL:
                 angleRate = this.getActualRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo);
                 break;
-            case 4: // QUICKRATES
+            case TABS.rates.RATES_TYPE.QUICKRATES:
                 angleRate = this.getQuickRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo);
                 break;
             default:
-                angleRate = 0;
+                angleRate = rcCommandf * 500;
                 break;
         }
     }
@@ -346,6 +346,10 @@ RateCurve2.prototype.rcCommandRawToDegreesPerSecond = function (rcData, ratesTyp
         const rcCommandfAbs = Math.abs(rcCommandf);
 
         switch(ratesType) {
+            case TABS.rates.RATES_TYPE.BETAFLIGHT:
+                angleRate = this.getBetaflightRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo, superExpoActive, limit);
+                break;
+
             case TABS.rates.RATES_TYPE.RACEFLIGHT:
                 angleRate = this.getRaceflightRates(rcCommandf, rate, rcRate, rcExpo);
                 break;
@@ -362,10 +366,10 @@ RateCurve2.prototype.rcCommandRawToDegreesPerSecond = function (rcData, ratesTyp
                 angleRate = this.getQuickRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo);
                 break;
 
-            default: // BetaFlight
-                angleRate = this.getBetaflightRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo, superExpoActive, limit);
+            default:
+                angleRate = rcCommandf * 500;
                 break;
-        }
+            }
     }
 
     return angleRate;
