@@ -7,13 +7,15 @@ TABS.rates = {
     currentRatesType: null,
     previousRatesType: null,
     RATES_TYPE: {
-        BETAFLIGHT:  0,
-        RACEFLIGHT:  1,
-        KISS:        2,
-        ACTUAL:      3,
-        QUICKRATES:  4,
+        NONE:        0,
+        BETAFLIGHT:  1,
+        RACEFLIGHT:  2,
+        KISS:        3,
+        ACTUAL:      4,
+        QUICKRATES:  5,
     },
     RATES_TYPE_NAMES: [
+        'None',
         'Betaflight',
         'Raceflight',
         'KISS',
@@ -21,6 +23,7 @@ TABS.rates = {
         'QuickRates',
     ],
     RATES_TYPE_IMAGES: [
+        'none.svg',
         'betaflight.svg',
         'raceflight.svg',
         'kiss.svg',
@@ -805,7 +808,7 @@ TABS.rates.initRatesSystem = function() {
 
             break;
 
-        default: // BetaFlight
+        case self.RATES_TYPE.BETAFLIGHT:
             rcRateLabel = "rateSetupRcRate";
             rateLabel   = "rateSetupRate";
             rcExpoLabel = "rateSetupRcExpo";
@@ -825,7 +828,28 @@ TABS.rates.initRatesSystem = function() {
             expoStep    = 0.01;
 
             break;
-    }
+
+        default:
+                rcRateLabel = "rateSetupRcRate";
+                rateLabel   = "rateSetupRate";
+                rcExpoLabel = "rateSetupRcExpo";
+
+                rcRateDec   = 0;
+                rcRateDef   = 0;
+                rcRateMax   = 0;
+                rcRateMin   = 0;
+                rcRateStep  = 0;
+                rateDec     = 0;
+                rateDef     = 0;
+                rateMax     = 0;
+                rateStep    = 0;
+                expoDec     = 0;
+                expoDef     = 0;
+                expoMax     = 0;
+                expoStep    = 0;
+
+                break;
+        }
 
     self.currentRates = {
         roll_rate:         FC.RC_TUNING.roll_rate,
