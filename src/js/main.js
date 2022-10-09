@@ -50,7 +50,7 @@ function setupAnalytics(result) {
 
     const debugMode = typeof process === "object" && process.versions['nw-flavor'] === 'sdk';
 
-    window.analytics = new Analytics('UA-227226350-1', userId, 'Rotorflight Configurator',
+    window.analytics = new Analytics('UA-213385601-1', userId, 'Rotorflight Configurator',
         CONFIGURATOR.version, CONFIGURATOR.gitChangesetId, debugMode);
 
     function logException(exception) {
