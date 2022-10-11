@@ -310,61 +310,6 @@
     margin: 4px;
 }
 
-.tab-receiver .rc-smoothing-type {
-    margin-bottom: 5px;
-    clear: left;
-    padding-bottom: 5px;
-    width: 100%;
-}
-
-.tab-receiver .rc-smoothing-channels td {
-    margin-bottom: 5px;
-    padding-bottom: 5px;
-    border-bottom: 1px dotted var(--superSubtleAccent);
-    width: 100%;
-    clear: left;
-}
-
-.tab-receiver .rcSmoothing table td {
-    border-right: none;
-}
-
-.tab-receiver .rcSmoothing table select,
-.tab-receiver .rcSmoothing table input {
-    width: 90%;
-}
-
-.tab-receiver .rcSmoothing table .helpicon {
-    margin-top: 0;
-    margin-right: 7px;
-}
-
-.tab-receiver .rcSmoothing td:first-child {
-    width: 120px;
-    padding-left: 8px;
-}
-
-.tab-receiver .rcSmoothing td:last-child {
-    width: calc(100% - 78px);
-}
-
-.tab-receiver .rcInterpolation .slider input {
-    -webkit-appearance: slider-horizontal;
-}
-
-.tab-receiver .rc-smoothing-roll,
-.tab-receiver .rc-smoothing-pitch,
-.tab-receiver .rc-smoothing-yaw,
-.tab-receiver .rc-smoothing-throttle,
-.tab-receiver .rc-smoothing-collective {
-    padding-bottom: 5px;
-    padding-left: 8px;
-}
-
-.tab-receiver .rc-smoothing-roll {
-    padding-top: 8px;
-}
-
 /* SVG classes*/
 .tab-receiver .grid .tick {
     stroke: silver;
