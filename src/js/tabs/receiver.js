@@ -109,13 +109,6 @@ TABS.receiver.initialize = function (callback) {
         $('.sticks input[name="stick_center"]').val(FC.RX_CONFIG.stick_center);
         $('.sticks input[name="stick_max"]').val(FC.RX_CONFIG.stick_max);
 
-        $('select[name="rcInterpolation-select"]').val(FC.RX_CONFIG.rcInterpolation);
-        $('input[name="rcInterpolationInterval-number"]').val(FC.RX_CONFIG.rcInterpolationInterval);
-
-        $('select[name="rcInterpolation-select"]').change(function () {
-            self.updateRcInterpolationParameters();
-        }).change();
-
         // generate bars
         const bar_names = [
             'controlAxisRoll',
@@ -415,25 +408,8 @@ TABS.receiver.initialize = function (callback) {
                 FC.RC_MAP[i] = strBuffer.indexOf(rcMapLetters[i]);
             }
 
-            // catch smoothing channels
-            const rcSmoothingChannels =
-                  ( $('#rcSmoothingRoll').is(':checked')       ?  1 : 0 ) +
-                  ( $('#rcSmoothingPitch').is(':checked')      ?  2 : 0 ) +
-                  ( $('#rcSmoothingYaw').is(':checked')        ?  4 : 0 ) +
-                  ( $('#rcSmoothingThrottle').is(':checked')   ?  8 : 0 ) +
-                  ( $('#rcSmoothingCollective').is(':checked') ? 16 : 0 );
-
             // catch rssi aux
             FC.RSSI_CONFIG.channel = parseInt($('select[name="rssi_channel"]').val());
-
-            FC.RX_CONFIG.rcInterpolation = parseInt($('select[name="rcInterpolation-select"]').val());
-            FC.RX_CONFIG.rcInterpolationInterval = parseInt($('input[name="rcInterpolationInterval-number"]').val());
-            FC.RX_CONFIG.rcSmoothingInputCutoff = parseInt($('input[name="rcSmoothingInputHz-number"]').val());
-            FC.RX_CONFIG.rcSmoothingDerivativeCutoff = parseInt($('input[name="rcSmoothingDerivativeCutoff-number"]').val());
-            FC.RX_CONFIG.rcSmoothingDerivativeType = parseInt($('select[name="rcSmoothingDerivativeType-select"]').val());
-            FC.RX_CONFIG.rcSmoothingInputType = parseInt($('select[name="rcSmoothingInputType-select"]').val());
-            FC.RX_CONFIG.rcInterpolationChannels = rcSmoothingChannels;
-            FC.RX_CONFIG.rcSmoothingAutoSmoothness = parseInt($('input[name="rcSmoothingAutoSmoothness-number"]').val());
         }
 
         $("a.sticks").click(function() {
@@ -476,81 +452,6 @@ TABS.receiver.initialize = function (callback) {
 
         // Only show the MSP control sticks if the MSP Rx feature is enabled
         self.stickButton = FC.FEATURE_CONFIG.features.isEnabled('RX_MSP');
-
-        // RC Smoothing
-        $('.tab-receiver .rcSmoothing').show();
-
-        const rc_smoothing_protocol_e = $('select[name="rcSmoothing-select"]');
-        rc_smoothing_protocol_e.change(function () {
-            FC.RX_CONFIG.rcSmoothingType = $(this).val();
-            updateInterpolationView();
-        });
-        rc_smoothing_protocol_e.val(FC.RX_CONFIG.rcSmoothingType);
-
-        const rcSmoothingNumberElement = $('input[name="rcSmoothingInputHz-number"]');
-        const rcSmoothingDerivativeNumberElement = $('input[name="rcSmoothingDerivativeCutoff-number"]');
-        rcSmoothingNumberElement.val(FC.RX_CONFIG.rcSmoothingInputCutoff);
-        rcSmoothingDerivativeNumberElement.val(FC.RX_CONFIG.rcSmoothingDerivativeCutoff);
-        $('.tab-receiver .rcSmoothing-input-cutoff').show();
-        $('select[name="rcSmoothing-input-manual-select"]').val("1");
-        if (FC.RX_CONFIG.rcSmoothingInputCutoff == 0) {
-            $('.tab-receiver .rcSmoothing-input-cutoff').hide();
-            $('select[name="rcSmoothing-input-manual-select"]').val("0");
-        }
-        $('select[name="rcSmoothing-input-manual-select"]').change(function () {
-            if ($(this).val() == 0) {
-                rcSmoothingNumberElement.val(0);
-                $('.tab-receiver .rcSmoothing-input-cutoff').hide();
-            }
-            if ($(this).val() == 1) {
-                rcSmoothingNumberElement.val(FC.RX_CONFIG.rcSmoothingInputCutoff);
-                $('.tab-receiver .rcSmoothing-input-cutoff').show();
-            }
-        }).change();
-
-        $('.tab-receiver .rcSmoothing-derivative-cutoff').show();
-        $('select[name="rcSmoothing-input-derivative-select"]').val("1");
-        if (FC.RX_CONFIG.rcSmoothingDerivativeCutoff == 0) {
-            $('select[name="rcSmoothing-input-derivative-select"]').val("0");
-            $('.tab-receiver .rcSmoothing-derivative-cutoff').hide();
-        }
-        $('select[name="rcSmoothing-input-derivative-select"]').change(function () {
-            if ($(this).val() == 0) {
-                $('.tab-receiver .rcSmoothing-derivative-cutoff').hide();
-                rcSmoothingDerivativeNumberElement.val(0);
-            }
-            if ($(this).val() == 1) {
-                $('.tab-receiver .rcSmoothing-derivative-cutoff').show();
-                rcSmoothingDerivativeNumberElement.val(FC.RX_CONFIG.rcSmoothingDerivativeCutoff);
-            }
-        }).change();
-
-        $('#rcSmoothingRoll').prop('checked', (FC.RX_CONFIG.rcInterpolationChannels & 1));
-        $('#rcSmoothingPitch').prop('checked', (FC.RX_CONFIG.rcInterpolationChannels & 2));
-        $('#rcSmoothingYaw').prop('checked', (FC.RX_CONFIG.rcInterpolationChannels & 4));
-        $('#rcSmoothingThrottle').prop('checked', (FC.RX_CONFIG.rcInterpolationChannels & 8));
-        $('#rcSmoothingCollective').prop('checked', (FC.RX_CONFIG.rcInterpolationChannels & 16));
-
-        const rcSmoothingDerivativeType = $('select[name="rcSmoothingDerivativeType-select"]');
-        rcSmoothingDerivativeType.append($(`<option value="3">${i18n.getMessage("receiverRcSmoothingDerivativeTypeAuto")}</option>`));
-        rcSmoothingDerivativeType.val(FC.RX_CONFIG.rcSmoothingDerivativeType);
-
-        const rcSmoothingInputType = $('select[name="rcSmoothingInputType-select"]');
-        rcSmoothingInputType.val(FC.RX_CONFIG.rcSmoothingInputType);
-
-        $('select[name="rcSmoothing-input-manual-select"], select[name="rcSmoothing-input-derivative-select"]').change(function() {
-            if ($('select[name="rcSmoothing-input-manual-select"]').val() == 0 || $('select[name="rcSmoothing-input-derivative-select"]').val() == 0) {
-                $('.tab-receiver .rcSmoothing-auto-smoothness').show();
-            } else {
-                $('.tab-receiver .rcSmoothing-auto-smoothness').hide();
-            }
-        });
-        $('select[name="rcSmoothing-input-manual-select"]').change();
-
-        const rcSmoothingAutoSmoothness = $('input[name="rcSmoothingAutoSmoothness-number"]');
-        rcSmoothingAutoSmoothness.val(FC.RX_CONFIG.rcSmoothingAutoSmoothness);
-
-        updateInterpolationView();
 
         self.initModelPreview();
         self.renderModel();
@@ -631,41 +532,3 @@ TABS.receiver.cleanup = function (callback) {
 
     if (callback) callback();
 };
-
-TABS.receiver.updateRcInterpolationParameters = function () {
-    if ($('select[name="rcInterpolation-select"]').val() === '3') {
-        $('.tab-receiver .rc-interpolation-manual').show();
-    } else {
-        $('.tab-receiver .rc-interpolation-manual').hide();
-    }
-};
-
-function updateInterpolationView() {
-    $('.tab-receiver .rcInterpolation').hide();
-    $('.tab-receiver .rcSmoothing-derivative-cutoff').show();
-    $('.tab-receiver .rcSmoothing-input-cutoff').show();
-    $('.tab-receiver .rcSmoothing-derivative-type').show();
-    $('.tab-receiver .rcSmoothing-input-type').show();
-    $('.tab-receiver .rcSmoothing-derivative-manual').show();
-    $('.tab-receiver .rcSmoothing-input-manual').show();
-
-    if (FC.RX_CONFIG.rcSmoothingDerivativeCutoff == 0 || FC.RX_CONFIG.rcSmoothingInputCutoff == 0) {
-        $('.tab-receiver .rcSmoothing-auto-smoothness').show();
-    }
-    if (FC.RX_CONFIG.rcSmoothingType == 0) {
-        $('.tab-receiver .rcInterpolation').show();
-        $('.tab-receiver .rcSmoothing-derivative-cutoff').hide();
-        $('.tab-receiver .rcSmoothing-input-cutoff').hide();
-        $('.tab-receiver .rcSmoothing-derivative-type').hide();
-        $('.tab-receiver .rcSmoothing-input-type').hide();
-        $('.tab-receiver .rcSmoothing-derivative-manual').hide();
-        $('.tab-receiver .rcSmoothing-input-manual').hide();
-        $('.tab-receiver .rcSmoothing-auto-smoothness').hide();
-    }
-    if (FC.RX_CONFIG.rcSmoothingDerivativeCutoff == 0) {
-        $('.tab-receiver .rcSmoothing-derivative-cutoff').hide();
-    }
-    if (FC.RX_CONFIG.rcSmoothingInputCutoff == 0) {
-        $('.tab-receiver .rcSmoothing-input-cutoff').hide();
-    }
-}
