@@ -825,8 +825,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     const adjustmentRange = {
                         enaChannel: data.readU8(),
                         enaRange: {
-                            start: 900 + (data.readU8() * 25),
-                            end: 900 + (data.readU8() * 25),
+                            start: 1500 + (data.read8() * 5),
+                            end: 1500 + (data.read8() * 5),
                         },
                         adjFunction: data.readU8(),
                         adjChannel: data.readU8(),
@@ -2242,8 +2242,8 @@ MspHelper.prototype.sendAdjustmentRange = function(adjustmentRangeIndex, onCompl
 
     buffer.push8(adjustmentRangeIndex)
           .push8(adjustmentRange.enaChannel)
-          .push8((adjustmentRange.enaRange.start - 900) / 25)
-          .push8((adjustmentRange.enaRange.end - 900) / 25)
+          .push8((adjustmentRange.enaRange.start - 1500) / 5)
+          .push8((adjustmentRange.enaRange.end - 1500) / 5)
           .push8(adjustmentRange.adjFunction)
           .push8(adjustmentRange.adjChannel)
           .push8(adjustmentRange.adjStep)
