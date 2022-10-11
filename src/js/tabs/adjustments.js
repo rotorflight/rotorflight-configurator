@@ -175,7 +175,7 @@ TABS.adjustments.initialize = function (callback) {
             start: rangeValues,
             behaviour: 'snap-drag',
             margin: 25,
-            step: 25,
+            step: 5,
             connect: true,
             range: channel_range,
             format: wNumb({
@@ -233,8 +233,8 @@ TABS.adjustments.initialize = function (callback) {
         const defaultAdjustmentRange = {
             enaChannel: 0,
             enaRange: {
-                start: 900,
-                end: 900,
+                start: 1500,
+                end: 1500,
             },
             adjFunction: 0,
             adjChannel: 0,
