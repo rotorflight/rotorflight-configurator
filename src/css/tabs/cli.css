@@ -15,14 +15,14 @@
     border: 1px solid var(--subtleAccent);
     background-color: rgba(0, 0, 0, 0.75);
     margin-top: 0;
-    height: calc(100% - 90px); /* - (p, textarea) */
+    height: calc(100% - 110px); /* - (p, textarea) */
     background-image: url("../../images/light-wide-1.svg");
     background-repeat: no-repeat;
     background-position: 50% 80%;
     background-size: 600px;
     border-radius: 5px;
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.80);
-    width: 100%;
+    width: auto;
 }
 
 .tab-cli .window {
