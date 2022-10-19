@@ -20,7 +20,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #f9f9f9;
+    background-color: #bbb;
     border-radius: 5px;
     border: 1px solid #e4e4e4;
 }
@@ -51,9 +51,24 @@
     top: 0;
     left: 0;
     border-radius: 5px;
+    background-image: none !important;
 }
 
 .tab-status #canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.tab-status #storm {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 50;
+}
+
+#canvas {
     width: 100% !important;
     height: 100% !important;
 }
