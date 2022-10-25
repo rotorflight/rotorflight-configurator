@@ -144,7 +144,7 @@ function startProcess() {
 
     GUI.log(i18n.getMessage('infoVersions', {
         operatingSystem: GUI.operating_system,
-        configuratorVersion: CONFIGURATOR.version }));
+        configuratorVersion: `${CONFIGURATOR.version} (${CONFIGURATOR.gitChangesetId})` }));
 
     if (GUI.isNWJS()) {
         let nwWindow = GUI.nwGui.Window.get();
