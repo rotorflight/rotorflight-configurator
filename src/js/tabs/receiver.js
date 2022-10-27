@@ -10,6 +10,7 @@ TABS.receiver = {
     bindButton: false,
     stickButton: false,
     saveButtons: false,
+    rcMapLetters: ['A', 'E', 'R', 'C', 'T', '1', '2', '3'],
 };
 
 TABS.receiver.initialize = function (callback) {
@@ -200,11 +201,10 @@ TABS.receiver.initialize = function (callback) {
         }
 
         // handle rcmap & rssi aux channel
-        let rcMapLetters = ['A', 'E', 'R', 'C', 'T', '1', '2', '3'];
 
         let strBuffer = [];
         for (let i = 0; i < FC.RC_MAP.length; i++) {
-            strBuffer[FC.RC_MAP[i]] = rcMapLetters[i];
+            strBuffer[FC.RC_MAP[i]] = self.rcMapLetters[i];
         }
 
         // reconstruct
@@ -238,7 +238,7 @@ TABS.receiver.initialize = function (callback) {
 
             // check if characters inside are all valid, also check for duplicity
             for (let i = 0; i < val.length; i++) {
-                if (rcMapLetters.indexOf(strBuffer[i]) < 0) {
+                if (self.rcMapLetters.indexOf(strBuffer[i]) < 0) {
                     $(this).val(lastValid);
                     return false;
                 }
@@ -401,11 +401,10 @@ TABS.receiver.initialize = function (callback) {
             FC.RC_DEADBAND_CONFIG.deadband = parseInt($('.deadband input[name="deadband"]').val());
 
             // catch rc map
-            rcMapLetters = ['A', 'E', 'R', 'T', 'C', '1', '2', '3'];
             strBuffer = $('input[name="rcmap"]').val().split('');
 
             for (let i = 0; i < FC.RC_MAP.length; i++) {
-                FC.RC_MAP[i] = strBuffer.indexOf(rcMapLetters[i]);
+                FC.RC_MAP[i] = strBuffer.indexOf(self.rcMapLetters[i]);
             }
 
             // catch rssi aux
