@@ -14,10 +14,10 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: 16.15.1
 
@@ -36,7 +36,7 @@ jobs:
       run: mv release/rotorflight-configurator* .
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: rotorflight-configurator-linux-alpha-${{ env.GIT_VER }}
         path: rotorflight-configurator*
@@ -48,10 +48,10 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: 16.15.1
 
@@ -70,7 +70,7 @@ jobs:
       run: mv release/rotorflight-configurator* .
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: rotorflight-configurator-macos-alpha-${{ env.GIT_VER }}
         path: rotorflight-configurator*
@@ -82,10 +82,10 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: 16.15.1
 
@@ -104,7 +104,7 @@ jobs:
       run: move release/rotorflight-configurator* .
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: rotorflight-configurator-windows-alpha-${{ env.GIT_VER }}
         path: rotorflight-configurator*
