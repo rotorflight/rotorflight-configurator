@@ -13,10 +13,10 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: 16.15.1
 
@@ -32,7 +32,7 @@ jobs:
       run: yarn gulp release --linux64
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: rotorflight-configurator-linux-snapshot-${{ env.GIT_VER }}
         path: release/rotorflight-configurator*
@@ -44,10 +44,10 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: 16.15.1
 
@@ -63,7 +63,7 @@ jobs:
       run: yarn gulp release --osx64
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: rotorflight-configurator-macos-snapshot-${{ env.GIT_VER }}
         path: release/rotorflight-configurator*
@@ -75,10 +75,10 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: 16.15.1
 
@@ -94,7 +94,7 @@ jobs:
       run: yarn gulp release --win64
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: rotorflight-configurator-windows-snapshot-${{ env.GIT_VER }}
         path: release/rotorflight-configurator*
@@ -108,7 +108,7 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set build variables
       run: |
@@ -117,17 +117,17 @@ jobs:
         cat ${GITHUB_ENV}
 
     - name: Download Linux Artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: rotorflight-configurator-linux-snapshot-${{ env.GIT_VER }}
 
     - name: Download MacOS Artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: rotorflight-configurator-macos-snapshot-${{ env.GIT_VER }}
 
     - name: Download Windows Artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: rotorflight-configurator-windows-snapshot-${{ env.GIT_VER }}
 
