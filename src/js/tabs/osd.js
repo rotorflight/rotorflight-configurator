@@ -995,6 +995,15 @@ OSD.loadDisplayFields = function() {
                 return `C${OSD.generateTemperaturePreview(osdData, 33)}`;
             },
         },
+        ANTI_GRAVITY: {
+            name: 'ANTI_GRAVITY',
+            text: 'osdTextAntiGravity',
+            desc: 'osdDescAntiGravity',
+            defaultPosition: -1,
+            draw_order: 320,
+            positionable: true,
+            preview: 'AG',
+        },
         G_FORCE: {
             name: 'G_FORCE',
             text: 'osdTextGForce',
@@ -1176,6 +1185,15 @@ OSD.loadDisplayFields = function() {
             draw_order: 465,
             positionable: true,
             preview: 'U',
+        },
+        OSD_TX_UPLINK_POWER: {
+            name: 'OSD_TX_UPLINK_POWER',
+            text: 'osdTextElementTxUplinkPower',
+            desc: 'osdDescTxUplinkPower',
+            defaultPosition: -1,
+            draw_order: 470,
+            positionable: true,
+            preview: `${FONT.symbol(SYM.RSSI)}250MW`,
         },
     };
 };
@@ -1594,12 +1612,13 @@ OSD.chooseFields = function() {
                                                         F.CAMERA_FRAME,
                                                         F.OSD_EFFICIENCY,
                                                     ]);
-                                                }
-                                                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
-                                                    OSD.constants.DISPLAY_FIELDS = OSD.constants.DISPLAY_FIELDS.concat([
-                                                        F.TOTAL_FLIGHTS,
-                                                        F.OSD_UP_DOWN_REFERENCE,
-                                                    ]);
+                                                    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
+                                                        OSD.constants.DISPLAY_FIELDS = OSD.constants.DISPLAY_FIELDS.concat([
+                                                            F.TOTAL_FLIGHTS,
+                                                            F.OSD_UP_DOWN_REFERENCE,
+                                                            F.OSD_TX_UPLINK_POWER,
+                                                        ]);
+                                                    }
                                                 }
                                             }
                                         }
