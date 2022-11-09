@@ -4859,6 +4859,13 @@
     "osdDescElementCoreTemperature": {
         "message": "Temperature of the STM32 MCU core"
     },
+    "osdTextAntiGravity": {
+        "message": "Anti gravity",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescAntiGravity": {
+        "message": "Enables an indicator when the anti gravity is active"
+    },
     "osdTextGForce": {
         "message": "G force",
         "description": "One of the elements of the OSD"
