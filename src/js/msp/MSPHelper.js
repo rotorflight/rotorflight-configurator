@@ -985,14 +985,15 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_GOVERNOR:
                 FC.GOVERNOR.gov_mode                         = data.readU8();
-                FC.GOVERNOR.gov_spoolup_time                 = data.readU16();
+                FC.GOVERNOR.gov_startup_time                 = data.readU16();
+				FC.GOVERNOR.gov_spoolup_time                 = data.readU16();
                 FC.GOVERNOR.gov_tracking_time                = data.readU16();
                 FC.GOVERNOR.gov_recovery_time                = data.readU16();
+				FC.GOVERNOR.gov_zero_throttle_timeout        = data.readU16();
+                FC.GOVERNOR.gov_lost_headspeed_timeout       = data.readU16();
                 FC.GOVERNOR.gov_autorotation_timeout         = data.readU16();
                 FC.GOVERNOR.gov_autorotation_bailout_time    = data.readU16();
                 FC.GOVERNOR.gov_autorotation_min_entry_time  = data.readU16();
-                FC.GOVERNOR.gov_lost_throttle_timeout        = data.readU16();
-                FC.GOVERNOR.gov_lost_headspeed_timeout       = data.readU16();
                 FC.GOVERNOR.gov_pwr_filter                   = data.readU16();
                 FC.GOVERNOR.gov_rpm_filter                   = data.readU16();
                 FC.GOVERNOR.gov_tta_filter                   = data.readU16();
@@ -1788,15 +1789,16 @@ MspHelper.prototype.crunch = function(code) {
            break;
 
         case MSPCodes.MSP_SET_GOVERNOR:
-            buffer.push8(FC.GOVERNOR.gov_mode)
-                .push16(FC.GOVERNOR.gov_spoolup_time)
+			buffer.push8(FC.GOVERNOR.gov_mode)
+                .push16(FC.GOVERNOR.gov_startup_time)
+				.push16(FC.GOVERNOR.gov_spoolup_time)
                 .push16(FC.GOVERNOR.gov_tracking_time)
                 .push16(FC.GOVERNOR.gov_recovery_time)
+                .push16(FC.GOVERNOR.gov_zero_throttle_timeout)
+                .push16(FC.GOVERNOR.gov_lost_headspeed_timeout)
                 .push16(FC.GOVERNOR.gov_autorotation_timeout)
                 .push16(FC.GOVERNOR.gov_autorotation_bailout_time)
                 .push16(FC.GOVERNOR.gov_autorotation_min_entry_time)
-                .push16(FC.GOVERNOR.gov_lost_throttle_timeout)
-                .push16(FC.GOVERNOR.gov_lost_headspeed_timeout)
                 .push16(FC.GOVERNOR.gov_pwr_filter)
                 .push16(FC.GOVERNOR.gov_rpm_filter)
                 .push16(FC.GOVERNOR.gov_tta_filter);

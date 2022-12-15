@@ -547,14 +547,16 @@ const FC = {
 
         this.GOVERNOR = {
             gov_mode:                       0,
+            gov_startup_time:               0,
+            gov_startup_time:               0,
             gov_spoolup_time:               0,
             gov_tracking_time:              0,
             gov_recovery_time:              0,
+            gov_zero_throttle_timeout:      0,
+            gov_lost_headspeed_timeout:     0,
             gov_autorotation_timeout:       0,
             gov_autorotation_bailout_time:  0,
             gov_autorotation_entry_time:    0,
-            gov_lost_throttle_timeout:      0,
-            gov_lost_headspeed_timeout:     0,
             gov_headspeed:                  0,
             gov_gain:                       0,
             gov_p_gain:                     0,

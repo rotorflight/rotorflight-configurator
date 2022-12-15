@@ -2557,6 +2557,12 @@
     "govModeHelp": {
         "message": "The governor maintains the main rotor speed constant.<br><strong>OFF:</strong> Govenor is disabled <br> <strong>PASSTHROUGH:</strong> Only slow spoolup and autorotation bailout<br><strong>STANDARD:</strong> Motor speed is controlled by the FC and speed reference from the ESC.<br><strong>MODE1:</strong> As per statndard but with Collective and Cyclic Precompensation (e.g. for a large increase collective the FC increases the signal sent to the ESC so the motor speed does not sag due to the increased load).<br><strong>MODE2:</strong> as per Mode 1 but also Battery voltage compensation"
     },
+    "govStartupTime": {
+        "message": "Startup time"
+    },
+    "govStartupTimeHelp": {
+        "message": "Time constant for slow startup, in seconds, measuring the time from zero to full headspeed."
+    },
     "govSpoolupTime": {
         "message": "Spoolup time"
     },
@@ -2593,10 +2599,10 @@
     "govAutoMinEntryTimeHelp": {
         "message": "Minimum flight time before autorotation can be engaged."
     },
-    "govLostThrottleTimeout": {
+    "govZeroThrottleTimeout": {
         "message": "Zero Throttle timeout"
     },
-    "govLostThrottleTimeoutHelp": {
+    "govZeroThrottleTimeoutHelp": {
         "message": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup."
     },
     "govLostHeadspeedTimeout": {
