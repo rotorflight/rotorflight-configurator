@@ -119,13 +119,14 @@ TABS.motors.initialize = function (callback) {
 
         govModeSelect.val(FC.GOVERNOR.gov_mode);
 
+        $('input[id="govStartupTime"]').val(FC.GOVERNOR.gov_startup_time / 10).change();
         $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time / 10).change();
         $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time / 10).change();
         $('input[id="govRecoveryTime"]').val(FC.GOVERNOR.gov_recovery_time / 10).change();
         $('input[id="govAutoBailoutTime"]').val(FC.GOVERNOR.gov_autorotation_bailout_time / 10).change();
         $('input[id="govAutoTimeout"]').val(FC.GOVERNOR.gov_autorotation_timeout / 10).change();
         $('input[id="govAutoMinEntryTime"]').val(FC.GOVERNOR.gov_autorotation_min_entry_time / 10).change();
-        $('input[id="govLostThrottleTimeout"]').val(FC.GOVERNOR.gov_lost_throttle_timeout / 10).change();
+        $('input[id="govZeroThrottleTimeout"]').val(FC.GOVERNOR.gov_zero_throttle_timeout / 10).change();
         $('input[id="govLostHeadspeedTimeout"]').val(FC.GOVERNOR.gov_lost_headspeed_timeout / 10).change();
         $('input[id="govVoltageFilterHz"]').val(FC.GOVERNOR.gov_pwr_filter).change();
         $('input[id="govHeadspeedFilterHz"]').val(FC.GOVERNOR.gov_rpm_filter).change();
@@ -383,13 +384,14 @@ TABS.motors.initialize = function (callback) {
             if (self.isGovEnabled) {
                 FC.GOVERNOR.gov_mode = govModeSelect.val();
                 if (FC.GOVERNOR.gov_mode > 0) {
+                    FC.GOVERNOR.gov_startup_time = Math.round(parseFloat($('input[id="govStartupTime"]').val()) * 10);
                     FC.GOVERNOR.gov_spoolup_time = Math.round(parseFloat($('input[id="govSpoolupTime"]').val()) * 10);
                     FC.GOVERNOR.gov_tracking_time = Math.round(parseFloat($('input[id="govTrackingTime"]').val()) * 10);
                     FC.GOVERNOR.gov_recovery_time = Math.round(parseFloat($('input[id="govRecoveryTime"]').val()) * 10);
                     FC.GOVERNOR.gov_autorotation_bailout_time = Math.round(parseFloat($('input[id="govAutoBailoutTime"]').val()) * 10);
                     FC.GOVERNOR.gov_autorotation_timeout = Math.round(parseFloat($('input[id="govAutoTimeout"]').val()) * 10);
                     FC.GOVERNOR.gov_autorotation_min_entry_time = Math.round(parseFloat($('input[id="govAutoMinEntryTime"]').val()) * 10);
-                    FC.GOVERNOR.gov_lost_throttle_timeout = Math.round(parseFloat($('input[id="govLostThrottleTimeout"]').val()) * 10);
+                    FC.GOVERNOR.gov_zero_throttle_timeout = Math.round(parseFloat($('input[id="govZeroThrottleTimeout"]').val()) * 10);
                     FC.GOVERNOR.gov_lost_headspeed_timeout = Math.round(parseFloat($('input[id="govLostHeadspeedTimeout"]').val()) * 10);
                     FC.GOVERNOR.gov_pwr_filter = parseFloat($('input[id="govVoltageFilterHz"]').val());
                     FC.GOVERNOR.gov_rpm_filter = parseFloat($('input[id="govHeadspeedFilterHz"]').val());
