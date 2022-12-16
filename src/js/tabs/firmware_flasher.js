@@ -655,16 +655,21 @@ TABS.firmware_flasher.initialize = function (callback) {
 
         function cleanUnifiedConfigFile(input) {
             let output = '';
-            console.log('cleanUnifiedConfigFile:');
+            let fork = 'BF';
+            console.log('Clean up Unified Config file:');
             input.split(/[\n\r]+/).forEach(function(line,index) {
-                if (index > 0 || !line.match(/^# (Beta)|(Rotor)flight/)) {
+                if (index == 0 && line.match(/^# [A-Za-z]*flight/)) {
+                    if (line.match(/^# Rotorflight/)) {
+                        fork = 'RF';
+                    }
+                } else {
                     line = line.replace(/#.*$/, '')
                                .replace(/[ \t]+$/, '')
                                .replace(/[ \t]+/, ' ')
                                .replace(/^[ ]*$/, '');
                     if (line.length == 0)
                         return;
-                    if (ignoreRegExp.some( (regexp) => line.match(regexp) )) {
+                    if (fork != 'RF' && ignoreRegExp.some( (regexp) => line.match(regexp) )) {
                         console.log(' ---' + line);
                         return;
                     }
