@@ -886,7 +886,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_ADVANCED_CONFIG:
                 FC.ADVANCED_CONFIG.gyro_sync_denom = data.readU8();
                 FC.ADVANCED_CONFIG.pid_process_denom = data.readU8();
-                data.readU32(); // compat: deprecated
+                data.readU32();// compat: deprecated
                 FC.ADVANCED_CONFIG.servo_pwm_rate = data.readU16();
                 break;
 
@@ -944,33 +944,56 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_PID_ADVANCED:
+                FC.PID_PROFILE.pid_mode = data.readU8();
+                FC.PID_PROFILE.error_decay = data.readU8();
+                FC.PID_PROFILE.error_rotation = data.readU8();
                 FC.PID_PROFILE.itermLimitRoll = data.readU16();
                 FC.PID_PROFILE.itermLimitPitch = data.readU16();
                 FC.PID_PROFILE.itermLimitYaw = data.readU16();
-                FC.PID_PROFILE.itermDecay = data.readU8();
-                FC.PID_PROFILE.itermRotation = data.readU8();
-                FC.PID_PROFILE.itermRelax = data.readU8();
                 FC.PID_PROFILE.itermRelaxType = data.readU8();
+                FC.PID_PROFILE.itermRelaxLevelRoll = data.readU8();
+                FC.PID_PROFILE.itermRelaxLevelPitch = data.readU8();
+                FC.PID_PROFILE.itermRelaxLevelYaw = data.readU8();
                 FC.PID_PROFILE.itermRelaxCutoffRoll = data.readU8();
                 FC.PID_PROFILE.itermRelaxCutoffPitch = data.readU8();
                 FC.PID_PROFILE.itermRelaxCutoffYaw = data.readU8();
-                FC.PID_PROFILE.levelAngleStrength = data.readU8();
-                FC.PID_PROFILE.levelAngleLimit = data.readU8();
-                FC.PID_PROFILE.horizonLevelStrength = data.readU8();
-                FC.PID_PROFILE.acroTrainerGain = data.readU8();
-                FC.PID_PROFILE.acroTrainerLimit = data.readU8();
-                FC.PID_PROFILE.yawCenterOffset = data.read16();
                 FC.PID_PROFILE.yawStopGainCW = data.readU8();
                 FC.PID_PROFILE.yawStopGainCCW = data.readU8();
                 FC.PID_PROFILE.yawFFCyclicGain = data.readU16();
                 FC.PID_PROFILE.yawFFCollectiveGain = data.readU16();
                 FC.PID_PROFILE.yawFFImpulseGain = data.readU16();
                 FC.PID_PROFILE.yawFFImpulseFreq = data.readU8();
-                FC.PID_PROFILE.cyclicNormalization = data.readU8();
-                FC.PID_PROFILE.collectiveNormalization = data.readU8();
-                FC.PID_PROFILE.rescueCollective = data.readU16();
-                FC.PID_PROFILE.rescueBoost = data.readU16();
-                FC.PID_PROFILE.rescueDelay = data.readU8();
+                FC.PID_PROFILE.pitchFFCollectiveGain = data.readU16();
+                FC.PID_PROFILE.pitchFFCollectiveImpulseGain = data.readU16();
+                // Angle Mode //
+                FC.PID_PROFILE.levelAngleStrength = data.readU8();
+                FC.PID_PROFILE.levelAngleLimit = data.readU8();
+                // Horizon mode //
+                FC.PID_PROFILE.horizonLevelStrength = data.readU8();
+                // Acro Trainer //
+                FC.PID_PROFILE.acroTrainerGain = data.readU8();
+                FC.PID_PROFILE.acroTrainerLimit = data.readU8();
+                // Rescue //
+                FC.PID_PROFILE.rescueMode = data.readU8();
+                FC.PID_PROFILE.rescueFlipMode = data.readU8();
+                FC.PID_PROFILE.rescueFlipGain = data.readU8();
+                FC.PID_PROFILE.rescueLevelGain = data.readU8();
+                FC.PID_PROFILE.rescuePullupTime = data.readU8();
+                FC.PID_PROFILE.rescueClimbTime = data.readU8();
+                FC.PID_PROFILE.rescueFlipTime = data.readU8();
+                FC.PID_PROFILE.rescueExitTime = data.readU8();
+                FC.PID_PROFILE.rescuePullupCollective = data.readU16();
+                FC.PID_PROFILE.rescueClimbCollective = data.readU16();
+                FC.PID_PROFILE.rescueHoverCollective = data.readU16();
+                FC.PID_PROFILE.rescueHoverAltitude = data.readU16();
+                FC.PID_PROFILE.rescueAltitudeAGain = data.readU16();
+                FC.PID_PROFILE.rescueAltitudePGain = data.readU16();
+                FC.PID_PROFILE.rescueAltitudeIGain = data.readU16();
+                FC.PID_PROFILE.rescueMaxCollective = data.readU16();
+                FC.PID_PROFILE.rescueMaxClimbRate = data.readU16();
+                FC.PID_PROFILE.rescueMaxRate = data.readU16();
+                FC.PID_PROFILE.rescueMaxAccel = data.readU16();
+                // GOVERNOR //
                 FC.GOVERNOR.gov_headspeed = data.readU16();
                 FC.GOVERNOR.gov_gain = data.readU8();
                 FC.GOVERNOR.gov_p_gain = data.readU8();
@@ -979,6 +1002,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.GOVERNOR.gov_f_gain = data.readU8();
                 FC.GOVERNOR.gov_tta_gain = data.readU8();
                 FC.GOVERNOR.gov_tta_limit = data.readU8();
+                FC.GOVERNOR.gov_yaw_ff_weight = data.readU8();
                 FC.GOVERNOR.gov_cyclic_ff_weight = data.readU8();
                 FC.GOVERNOR.gov_collective_ff_weight = data.readU8();
                 break;
@@ -1749,33 +1773,56 @@ MspHelper.prototype.crunch = function(code) {
             break;
 
         case MSPCodes.MSP_SET_PID_ADVANCED:
-            buffer.push16(FC.PID_PROFILE.itermLimitRoll)
-                .push16(FC.PID_PROFILE.itermLimitPitch)
-                .push16(FC.PID_PROFILE.itermLimitYaw)
+            buffer.push8(FC.PID_PROFILE.pid_mode)
                 .push8(FC.PID_PROFILE.itermDecay)
                 .push8(FC.PID_PROFILE.itermRotation)
-                .push8(FC.PID_PROFILE.itermRelax)
+                .push16(FC.PID_PROFILE.itermLimitRoll)
+                .push16(FC.PID_PROFILE.itermLimitPitch)
+                .push16(FC.PID_PROFILE.itermLimitYaw)
                 .push8(FC.PID_PROFILE.itermRelaxType)
+                .push8(FC.PID_PROFILE.itermRelaxLevelRoll)
+                .push8(FC.PID_PROFILE.itermRelaxLevelPitch)
+                .push8(FC.PID_PROFILE.itermRelaxLevelYaw)
                 .push8(FC.PID_PROFILE.itermRelaxCutoffRoll)
                 .push8(FC.PID_PROFILE.itermRelaxCutoffPitch)
                 .push8(FC.PID_PROFILE.itermRelaxCutoffYaw)
-                .push8(FC.PID_PROFILE.levelAngleStrength)
-                .push8(FC.PID_PROFILE.levelAngleLimit)
-                .push8(FC.PID_PROFILE.horizonLevelStrength)
-                .push8(FC.PID_PROFILE.acroTrainerGain)
-                .push8(FC.PID_PROFILE.acroTrainerLimit)
-                .push16(FC.PID_PROFILE.yawCenterOffset)
                 .push8(FC.PID_PROFILE.yawStopGainCW)
                 .push8(FC.PID_PROFILE.yawStopGainCCW)
                 .push16(FC.PID_PROFILE.yawFFCyclicGain)
                 .push16(FC.PID_PROFILE.yawFFCollectiveGain)
                 .push16(FC.PID_PROFILE.yawFFImpulseGain)
                 .push8(FC.PID_PROFILE.yawFFImpulseFreq)
-                .push8(FC.PID_PROFILE.cyclicNormalization)
-                .push8(FC.PID_PROFILE.collectiveNormalization)
-                .push16(FC.PID_PROFILE.rescueCollective)
-                .push16(FC.PID_PROFILE.rescueBoost)
-                .push8(FC.PID_PROFILE.rescueDelay)
+                .push16(FC.PID_PROFILE.pitchFFCollectiveGain)
+                .push16(FC.PID_PROFILE.pitchFFCollectiveImpulseGain)
+                // Angle //
+                .push8(FC.PID_PROFILE.levelAngleStrength)
+                .push8(FC.PID_PROFILE.levelAngleLimit)
+                // Horizon //
+                .push8(FC.PID_PROFILE.horizonLevelStrength)
+                // Acro Trainer //
+                .push8(FC.PID_PROFILE.acroTrainerGain)
+                .push8(FC.PID_PROFILE.acroTrainerLimit)
+                // Rescue //
+                .push8(FC.PID_PROFILE.rescueMode)
+                .push8(FC.PID_PROFILE.rescueFlipMode)
+                .push8(FC.PID_PROFILE.rescueFlipGain)
+                .push8(FC.PID_PROFILE.rescueLevelGain)
+                .push8(FC.PID_PROFILE.rescuePullupTime)
+                .push8(FC.PID_PROFILE.rescueClimbTime)
+                .push8(FC.PID_PROFILE.rescueFlipTime)
+                .push8(FC.PID_PROFILE.rescueExitTime)
+                .push16(FC.PID_PROFILE.rescuePullupCollective)
+                .push16(FC.PID_PROFILE.rescueClimbCollective)
+                .push16(FC.PID_PROFILE.rescueHoverCollective)
+                .push16(FC.PID_PROFILE.rescueHoverAltitude)
+                .push16(FC.PID_PROFILE.rescueAltitudeAGain)
+                .push16(FC.PID_PROFILE.rescueAltitudePGain)
+                .push16(FC.PID_PROFILE.rescueAltitudeIGain)
+                .push16(FC.PID_PROFILE.rescueMaxCollective)
+                .push16(FC.PID_PROFILE.rescueMaxClimbRate)
+                .push16(FC.PID_PROFILE.rescueMaxRate)
+                .push16(FC.PID_PROFILE.rescueMaxAccel)
+                // GOVERNOR //
                 .push16(FC.GOVERNOR.gov_headspeed)
                 .push8(FC.GOVERNOR.gov_gain)
                 .push8(FC.GOVERNOR.gov_p_gain)
@@ -1784,6 +1831,7 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.GOVERNOR.gov_f_gain)
                 .push8(FC.GOVERNOR.gov_tta_gain)
                 .push8(FC.GOVERNOR.gov_tta_limit)
+                .push8(FC.GOVERNOR.gov_yaw_ff_weight)
                 .push8(FC.GOVERNOR.gov_cyclic_ff_weight)
                 .push8(FC.GOVERNOR.gov_collective_ff_weight);
            break;

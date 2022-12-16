@@ -124,7 +124,7 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="itermRelaxCutoffPitch"]').val(FC.PID_PROFILE.itermRelaxCutoffPitch);
         $('.tab-profiles input[id="itermRelaxCutoffYaw"]').val(FC.PID_PROFILE.itermRelaxCutoffYaw);
 
-        const itermRelaxCheck = $('.tab-profiles input[id="itermRelax"]');
+        const itermRelaxCheck = $('.tab-profiles input[id="itermRelaxType"]');
 
         itermRelaxCheck.change(function() {
             const checked = $(this).is(':checked');
@@ -132,14 +132,13 @@ TABS.profiles.initialize = function (callback) {
             $('.tab-profiles .itermrelax .subhelp').toggle(checked);
         });
 
-        itermRelaxCheck.prop('checked', FC.PID_PROFILE.itermRelax !== 0).change();
+        itermRelaxCheck.prop('checked', FC.PID_PROFILE.itermRelaxType !== 0).change();
 
         // Normalization
         //$('.tab-profiles select[id="cyclicNormalization"]').val(FC.PID_PROFILE.cyclicNormalization);
         //$('.tab-profiles select[id="collectiveNormalization"]').val(FC.PID_PROFILE.collectiveNormalization);
 
         // Yaw settings
-        $('.tab-profiles input[id="yawCenterOffset"]').val(FC.PID_PROFILE.yawCenterOffset);
         $('.tab-profiles input[id="yawStopGainCW"]').val(FC.PID_PROFILE.yawStopGainCW);
         $('.tab-profiles input[id="yawStopGainCCW"]').val(FC.PID_PROFILE.yawStopGainCCW);
         $('.tab-profiles input[id="yawFFCyclicGain"]').val(FC.PID_PROFILE.yawFFCyclicGain);
@@ -157,11 +156,7 @@ TABS.profiles.initialize = function (callback) {
         // Horizon mode
         $('.tab-profiles input[id="horizonModeGain"]').val(FC.PID_PROFILE.horizonLevelStrength);
 
-        // Rescue settings
-        $('.tab-profiles input[id="rescueCollective"]').val(FC.PID_PROFILE.rescueCollective);
-        $('.tab-profiles input[id="rescueBoost"]').val(FC.PID_PROFILE.rescueBoost);
-        $('.tab-profiles input[id="rescueDelay"]').val(FC.PID_PROFILE.rescueDelay / 10).change();
-
+        // Governor settings
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR') && (FC.GOVERNOR.gov_mode > 1);
         self.isTTAEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR') && (FC.GOVERNOR.gov_mode > 0);
 
@@ -205,7 +200,7 @@ TABS.profiles.initialize = function (callback) {
 
         FC.PID_PROFILE.itermDecay = $('.tab-profiles input[id="itermDecay"]').is(':checked') ? $('.tab-profiles input[id="itermDecayTime"]').val() * 10 : 0;
         FC.PID_PROFILE.itermRotation = $('.tab-profiles input[id="itermRotation"]').is(':checked') ? 1 : 0;
-        FC.PID_PROFILE.itermRelax = $('.tab-profiles input[id="itermRelax"]').is(':checked') ? $('.tab-profiles select[id="itermRelaxAxes"]').val() : 0;
+    //    FC.PID_PROFILE.itermRelax = $('.tab-profiles input[id="itermRelax"]').is(':checked') ? $('.tab-profiles select[id="itermRelaxAxes"]').val() : 0;
         FC.PID_PROFILE.itermRelaxType = $('.tab-profiles select[id="itermRelaxType"]').val();
         FC.PID_PROFILE.itermRelaxCutoffRoll = parseInt($('.tab-profiles input[id="itermRelaxCutoffRoll"]').val());
         FC.PID_PROFILE.itermRelaxCutoffPitch = parseInt($('.tab-profiles input[id="itermRelaxCutoffPitch"]').val());
@@ -222,11 +217,7 @@ TABS.profiles.initialize = function (callback) {
 
         FC.PID_PROFILE.horizonLevelStrength = parseInt($('.tab-profiles input[id="horizonModeGain"]').val());
 
-        FC.PID_PROFILE.rescueCollective = $('.tab-profiles input[id="rescueCollective"]').val();
-        FC.PID_PROFILE.rescueBoost = $('.tab-profiles input[id="rescueBoost"]').val();
-        FC.PID_PROFILE.rescueDelay = $('.tab-profiles input[id="rescueDelay"]').val() * 10;
-
-        FC.PID_PROFILE.yawCenterOffset = $('.tab-profiles input[id="yawCenterOffset"]').val();
+        // Governor settings
         FC.PID_PROFILE.yawStopGainCW = $('.tab-profiles input[id="yawStopGainCW"]').val();
         FC.PID_PROFILE.yawStopGainCCW = $('.tab-profiles input[id="yawStopGainCCW"]').val();
         FC.PID_PROFILE.yawFFCyclicGain = $('.tab-profiles input[id="yawFFCyclicGain"]').val();
