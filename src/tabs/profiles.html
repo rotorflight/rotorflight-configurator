@@ -399,33 +399,182 @@
                             <div class="spacer_box_title" i18n="profilesRescueSettings"></div>
                         </div>
                         <table class="settings_table">
-                            <tr class="rescueCollective">
+                            <tr class="rescueMode">   
                                 <td>
-                                    <input type="number" id="rescueCollective" step="10" min="0" max="1000"/>
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="profilesRescueCollective"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profilesRescueCollectiveHelp"></div>
+                                    <input type="checkbox" id="rescueMode" class="toggle" />
+                                </td>                                               
+
+                                <td colspan="2">  
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueModeHelp"></div>
+                                    <div>
+                                        <label for="rescueMode">
+                                        <span i18n="profilesRescueMode"></span>
+                                        </label>
+                                    </div>
+                            
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueFlipModeHelp"></div>
+                                    <span class="suboption">
+                                        <select id="rescueFlipMode">
+                                            <option i18n="profilesrescueFlipModeDisable" value= "0"/>
+                                            <option i18n="profilesrescueFlipModeEnable"   value= "1"/>
+                                        </select>
+                                        <label for="rescueFlipMode">
+                                            <span i18n="profilesRescueFlipMode"></span>
+                                        </label>
+                                    </span>
+                                                                   
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescuePullupCollectiveHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescuePullupCollective" step="10" min="0" max="1000"/>
+                                        <label for="rescuePullupCollective">
+                                            <span i18n="profilesRescuePullupCollective"></span>
+                                        </label>
+                                    </span>
+									
+									<div class="helpicon cf_tip subhelp" i18n_title="profilesRescuePullupTimeHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescuePullupTime" step="0.1" min="0" max="250"/>
+                                        <label for="rescuePullupTime">
+                                            <span i18n="profilesRescuePullupTime"></span>
+                                        </label>
+                                    </span>
+									
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueClimbCollectiveHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueClimbCollective" step="10" min="0" max="1000"/>
+                                        <label for="rescueClimbCollective">
+                                            <span i18n="profilesRescueClimbCollective"></span>
+                                        </label>
+                                    </span>
+									
+									<div class="helpicon cf_tip subhelp" i18n_title="profilesRescueClimbTimeHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueClimbTime" step="0.1" min="0" max="250"/>
+                                        <label for="rescueClimbTime">
+                                            <span i18n="profilesRescueClimbTime"></span>
+                                        </label>
+                                    </span>
+
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueHoverCollectiveHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueHoverCollective" step="10" min="0" max="1000"/>
+                                        <label for="rescueHoverCollective">
+                                            <span i18n="profilesRescueHoverCollective"></span>
+                                        </label>
+                                    </span>
+
+									<div class="helpicon cf_tip subhelp" i18n_title="profilesRescueFlipTimeHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueFlipTime" step="0.1" min="0" max="250"/>
+                                        <label for="rescueFlipTime">
+                                            <span i18n="profilesRescueFlipTime"></span>
+                                        </label>
+                                    </span>
+
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueExitTimeHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueExitTime" step="0.1" min="0" max="250"/>
+                                        <label for="rescueExitTime">
+                                            <span i18n="profilesRescueExitTime"></span>
+                                        </label>
+                                    </span>
+
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueLevelGainHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueLevelGain" step="1" min="5" max="250"/>
+                                        <label for="rescueLevelGain">
+                                            <span i18n="profilesRescueLevelGain"></span>
+                                        </label>
+                                    </span>
+
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueFlipGainHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueFlipGain" step="1" min="5" max="250"/>
+                                        <label for="rescueFlipGain">
+                                            <span i18n="profilesRescueFlipGain"></span>
+                                        </label>
+                                    </span>
+
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueMaxRateHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueMaxRate" step="1" min="10" max="1000"/>
+                                        <label for="rescueMaxRate">
+                                            <span i18n="profilesRescueMaxRate"></span>
+                                        </label>
+                                    </span>
+
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueMaxAccelHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueMaxAccel" step="1" min="10" max="10000"/>
+                                        <label for="rescueMaxAccel">
+                                            <span i18n="profilesRescueMaxAccel"></span>
+                                        </label>
+                                    </span>
+                                    
+                                    <div class="note suboption">
+                                        <p i18n="baroConfigurationNote"></p>
+                                    </div>
+
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesrescueHoverAltitudeHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueHoverAltitude" step="10" min="0" max="10000"/>
+                                        <label for="rescueHoverAltitude">
+                                            <span i18n="profilesrescueHoverAltitude"></span>
+                                        </label>
+                                    </span>
+
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesrescueAltitudeAGainHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueAltitudeAGain" step="10" min="0" max="10000"/>
+                                        <label for="rescueAltitudeAGain">
+                                            <span i18n="profilesrescueAltitudeAGain"></span>
+                                        </label>
+                                    </span>
+
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesrescueAltitudePGainHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueAltitudePGain" step="10" min="0" max="10000"/>
+                                        <label for="rescueAltitudePGain">
+                                            <span i18n="profilesrescueAltitudePGain"></span>
+                                        </label>
+                                    </span>
+
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesrescueAltitudeIGainHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueAltitudeIGain" step="10" min="0" max="50000"/>
+                                        <label for="rescueAltitudeIGain">
+                                            <span i18n="profilesrescueAltitudeIGain"></span>
+                                        </label>
+                                    </span>
+
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesrescueMaxCollectiveHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueMaxCollective" step="10" min="1" max="1000"/>
+                                        <label for="rescueMaxCollective">
+                                            <span i18n="profilesrescueMaxCollective"></span>
+                                        </label>
+                                    </span>
+
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesrescueMaxClimbRateHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="rescueMaxClimbRate" step="10" min="1" max="1000"/>
+                                        <label for="rescueMaxClimbRate">
+                                            <span i18n="profilesrescueMaxClimbRate"></span>
+                                        </label>
+                                    </span>
+
+
                                 </td>
                             </tr>
-                            <tr class="rescueBoost">
-                                <td>
-                                    <input type="number" id="rescueBoost" step="10" min="0" max="1000"/>
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="profilesRescueBoost"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profilesRescueBoostHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="rescueDelay">
-                                <td>
-                                    <input type="number" id="rescueDelay" step="0.1" min="0" max="25.5"/>
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="profilesRescueDelay"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profilesRescueDelayHelp"></div>
-                                </td>
-                            </tr>
+
+
+
+
+
+
+
+
+
                         </table>
                     </div>
 
