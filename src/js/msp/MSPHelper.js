@@ -609,7 +609,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MIXER_CONFIG.main_rotor_dir = data.readU8();
                 FC.MIXER_CONFIG.tail_rotor_mode = data.readU8();
                 FC.MIXER_CONFIG.tail_motor_idle = data.readU8();
+                FC.MIXER_CONFIG.swash_type = data.readU8();
                 FC.MIXER_CONFIG.swash_ring = data.readU8();
+                FC.MIXER_CONFIG.swash_phase = data.readU8();
                 break;
 
             case MSPCodes.MSP_FEATURE_CONFIG:
@@ -1509,7 +1511,9 @@ MspHelper.prototype.crunch = function(code) {
             buffer.push8(FC.MIXER_CONFIG.main_rotor_dir)
                 .push8(FC.MIXER_CONFIG.tail_rotor_mode)
                 .push8(FC.MIXER_CONFIG.tail_motor_idle)
-                .push8(FC.MIXER_CONFIG.swash_ring);
+                .push8(FC.MIXER_CONFIG.swash_type)
+                .push8(FC.MIXER_CONFIG.swash_ring)
+                .push8(FC.MIXER_CONFIG.swash_phase);
             break;
 
         case MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG:
