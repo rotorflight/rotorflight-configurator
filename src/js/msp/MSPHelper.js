@@ -474,9 +474,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                             'mid':       data.readU16(),
                             'min':       data.read16(),
                             'max':       data.read16(),
+                            'rneg':      data.read16(),
+                            'rpos':      data.read16(),
                             'rate':      data.read16(),
-                            'trim':      data.read16(),
-                            'speed':     data.readU16()
+                            'flags':     data.read16()
                         };
                         FC.SERVO_CONFIG.push(arr);
                     }
@@ -2140,9 +2141,10 @@ MspHelper.prototype.sendServoConfig = function(servoIndex, onCompleteCallback)
           .push16(CONFIG.mid)
           .push16(CONFIG.min)
           .push16(CONFIG.max)
+          .push16(CONFIG.rneg)
+          .push16(CONFIG.rpos)
           .push16(CONFIG.rate)
-          .push16(CONFIG.trim)
-          .push16(CONFIG.speed);
+          .push16(CONFIG.flags);
 
     MSP.send_message(MSPCodes.MSP_SET_SERVO_CONFIGURATION, buffer, false, onCompleteCallback);
 };
