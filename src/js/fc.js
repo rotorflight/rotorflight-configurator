@@ -416,10 +416,9 @@ const FC = {
         this.BLACKBOX = {
             supported:                  false,
             blackboxDevice:             0,
-            blackboxRateNum:            1,
-            blackboxRateDenom:          1,
-            blackboxPDenom:             0,
-            blackboxSampleRate:         0,
+            blackboxMode:               1,
+            blackboxDenom:              0,
+            blackboxFields:             0,
         };
 
         this.TRANSPONDER = {

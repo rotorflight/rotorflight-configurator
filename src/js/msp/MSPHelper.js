@@ -1198,9 +1198,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_BLACKBOX_CONFIG:
                 FC.BLACKBOX.supported = (data.readU8() & 1) != 0;
                 FC.BLACKBOX.blackboxDevice = data.readU8();
-                FC.BLACKBOX.blackboxRateNum = data.readU8();
-                FC.BLACKBOX.blackboxRateDenom = data.readU8();
-                FC.BLACKBOX.blackboxPDenom = data.readU16();
+                FC.BLACKBOX.blackboxDenom = data.readU16();
                 break;
 
             case MSPCodes.MSP_SET_BLACKBOX_CONFIG:
@@ -1877,10 +1875,9 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_BLACKBOX_CONFIG:
             buffer.push8(FC.BLACKBOX.blackboxDevice)
-                .push8(FC.BLACKBOX.blackboxRateNum)
-                .push8(FC.BLACKBOX.blackboxRateDenom)
-                .push16(FC.BLACKBOX.blackboxPDenom)
-                .push8(FC.BLACKBOX.blackboxSampleRate);
+                .push8(FC.BLACKBOX.blackboxMode)
+                .push16(FC.BLACKBOX.blackboxDenom)
+                .push32(FC.BLACKBOX.blackboxFields);
             break;
 
         case MSPCodes.MSP_COPY_PROFILE:
