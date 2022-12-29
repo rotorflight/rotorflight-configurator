@@ -1040,7 +1040,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 const ruleCount = data.byteLength / 11;
                 for (let i = 0; i < ruleCount; i++) {
                     FC.MIXER_RULES.push({
-                        modes:  data.readU32(),
                         oper:   data.readU8(),
                         src:    data.readU8(),
                         dst:    data.readU8(),
@@ -2193,7 +2192,6 @@ MspHelper.prototype.sendMixerRule = function(ruleIndex, onCompleteCallback)
     const buffer = [];
 
     buffer.push8(ruleIndex)
-          .push32(rule.modes)
           .push8(rule.oper)
           .push8(rule.src)
           .push8(rule.dst)
