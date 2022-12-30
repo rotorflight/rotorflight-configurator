@@ -850,15 +850,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.RX_CONFIG.stick_min = data.readU16();
                 FC.RX_CONFIG.rx_min_usec = data.readU16();
                 FC.RX_CONFIG.rx_max_usec = data.readU16();
-                FC.RX_CONFIG.rcInterpolation = data.readU8();
-                FC.RX_CONFIG.rcInterpolationInterval = data.readU8();
-                FC.RX_CONFIG.rcInterpolationChannels = data.readU8();
-                FC.RX_CONFIG.rcSmoothingType = data.readU8();
-                FC.RX_CONFIG.rcSmoothingInputType = data.readU8();
-                FC.RX_CONFIG.rcSmoothingInputCutoff = data.readU8();
-                FC.RX_CONFIG.rcSmoothingDerivativeType = data.readU8();
-                FC.RX_CONFIG.rcSmoothingDerivativeCutoff = data.readU8();
-                FC.RX_CONFIG.rcSmoothingAutoSmoothness = data.readU8();
                 FC.RX_CONFIG.rxSpiProtocol = data.readU8();
                 FC.RX_CONFIG.rxSpiId = data.readU32();
                 FC.RX_CONFIG.rxSpiRfChannelCount = data.readU8();
@@ -1665,15 +1656,6 @@ MspHelper.prototype.crunch = function(code) {
                   .push16(FC.RX_CONFIG.stick_min)
                   .push16(FC.RX_CONFIG.rx_min_usec)
                   .push16(FC.RX_CONFIG.rx_max_usec)
-                  .push8(FC.RX_CONFIG.rcInterpolation)
-                  .push8(FC.RX_CONFIG.rcInterpolationInterval)
-                  .push8(FC.RX_CONFIG.rcInterpolationChannels)
-                  .push8(FC.RX_CONFIG.rcSmoothingType)
-                  .push8(FC.RX_CONFIG.rcSmoothingInputType)
-                  .push8(FC.RX_CONFIG.rcSmoothingInputCutoff)
-                  .push8(FC.RX_CONFIG.rcSmoothingDerivativeType)
-                  .push8(FC.RX_CONFIG.rcSmoothingDerivativeCutoff)
-                  .push8(FC.RX_CONFIG.rcSmoothingAutoSmoothness)
                   .push8(FC.RX_CONFIG.rxSpiProtocol)
                   .push32(FC.RX_CONFIG.rxSpiId)
                   .push8(FC.RX_CONFIG.rxSpiRfChannelCount);
