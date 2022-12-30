@@ -185,7 +185,6 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="rescueAltitudeIGain"]').val(FC.PID_PROFILE.rescueAltitudeIGain);
         $('.tab-profiles input[id="rescueMaxCollective"]').val(FC.PID_PROFILE.rescueMaxCollective);
         $('.tab-profiles input[id="rescueMaxClimbRate"]').val(FC.PID_PROFILE.rescueMaxClimbRate);
-
         // Governor settings
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR') && (FC.GOVERNOR.gov_mode > 1);
         self.isTTAEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR') && (FC.GOVERNOR.gov_mode > 0);
@@ -218,18 +217,18 @@ TABS.profiles.initialize = function (callback) {
         });
 
         if ($('.tab-profiles input[id="itermLimit"]').is(':checked')) {
-            FC.PID_PROFILE.itermLimitRoll = $('.tab-profiles input[id="itermLimitRoll"]').val() * 5;
-            FC.PID_PROFILE.itermLimitPitch = $('.tab-profiles input[id="itermLimitPitch"]').val() * 5;
-            FC.PID_PROFILE.itermLimitYaw = $('.tab-profiles input[id="itermLimitYaw"]').val() * 5;
+            FC.PID_PROFILE.errorLimitRoll = $('.tab-profiles input[id="errorLimitRoll"]').val() * 5;
+            FC.PID_PROFILE.errorLimitPitch = $('.tab-profiles input[id="errorLimitPitch"]').val() * 5;
+            FC.PID_PROFILE.errorLimitYaw = $('.tab-profiles input[id="errorLimitYaw"]').val() * 5;
         }
         else {
-            FC.PID_PROFILE.itermLimitRoll = 1000;
-            FC.PID_PROFILE.itermLimitPitch = 1000;
-            FC.PID_PROFILE.itermLimitYaw = 1000;
+            FC.PID_PROFILE.errorLimitRoll = 1000;
+            FC.PID_PROFILE.errorLimitPitch = 1000;
+            FC.PID_PROFILE.errorLimitYaw = 1000;
         }
 
-        FC.PID_PROFILE.itermDecay = $('.tab-profiles input[id="itermDecay"]').is(':checked') ? $('.tab-profiles input[id="itermDecayTime"]').val() * 10 : 0;
-        FC.PID_PROFILE.itermRotation = $('.tab-profiles input[id="itermRotation"]').is(':checked') ? 1 : 0;
+        FC.PID_PROFILE.errorDecay = $('.tab-profiles input[id="errorDecay"]').is(':checked') ? $('.tab-profiles input[id="errorDecayTime"]').val() * 10 : 0;
+        FC.PID_PROFILE.errorRotation = $('.tab-profiles input[id="errorRotation"]').is(':checked') ? 1 : 0;
         FC.PID_PROFILE.itermRelaxType = $('.tab-profiles select[id="itermRelaxType"]').val();
         FC.PID_PROFILE.itermRelaxCutoffRoll = parseInt($('.tab-profiles input[id="itermRelaxCutoffRoll"]').val());
         FC.PID_PROFILE.itermRelaxCutoffPitch = parseInt($('.tab-profiles input[id="itermRelaxCutoffPitch"]').val());
@@ -263,6 +262,8 @@ TABS.profiles.initialize = function (callback) {
         FC.PID_PROFILE.rescueMaxCollective = $('.tab-profiles input[id="rescueMaxCollective"]').val();
         FC.PID_PROFILE.rescueMaxClimbRate = $('.tab-profiles input[id="rescueMaxClimbRate"]').val();
         // Yaw settings //
+        // Governor settings
+
         FC.PID_PROFILE.yawStopGainCW = $('.tab-profiles input[id="yawStopGainCW"]').val();
         FC.PID_PROFILE.yawStopGainCCW = $('.tab-profiles input[id="yawStopGainCCW"]').val();
         FC.PID_PROFILE.yawFFCyclicGain = $('.tab-profiles input[id="yawFFCyclicGain"]').val();

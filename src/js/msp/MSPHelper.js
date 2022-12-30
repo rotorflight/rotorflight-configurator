@@ -558,7 +558,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_DEBUG:
-                for (let i = 0; i < 4; i++)
+                for (let i = 0; i < 8; i++)
                     FC.SENSOR_DATA.debug[i] = data.read32();
                 break;
 
@@ -1012,10 +1012,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_GOVERNOR:
                 FC.GOVERNOR.gov_mode                         = data.readU8();
                 FC.GOVERNOR.gov_startup_time                 = data.readU16();
-				FC.GOVERNOR.gov_spoolup_time                 = data.readU16();
+                FC.GOVERNOR.gov_spoolup_time                 = data.readU16();
                 FC.GOVERNOR.gov_tracking_time                = data.readU16();
                 FC.GOVERNOR.gov_recovery_time                = data.readU16();
-				FC.GOVERNOR.gov_zero_throttle_timeout        = data.readU16();
+                FC.GOVERNOR.gov_zero_throttle_timeout        = data.readU16();
                 FC.GOVERNOR.gov_lost_headspeed_timeout       = data.readU16();
                 FC.GOVERNOR.gov_autorotation_timeout         = data.readU16();
                 FC.GOVERNOR.gov_autorotation_bailout_time    = data.readU16();
@@ -1832,9 +1832,9 @@ MspHelper.prototype.crunch = function(code) {
            break;
 
         case MSPCodes.MSP_SET_GOVERNOR:
-			buffer.push8(FC.GOVERNOR.gov_mode)
+            buffer.push8(FC.GOVERNOR.gov_mode)
                 .push16(FC.GOVERNOR.gov_startup_time)
-				.push16(FC.GOVERNOR.gov_spoolup_time)
+                .push16(FC.GOVERNOR.gov_spoolup_time)
                 .push16(FC.GOVERNOR.gov_tracking_time)
                 .push16(FC.GOVERNOR.gov_recovery_time)
                 .push16(FC.GOVERNOR.gov_zero_throttle_timeout)

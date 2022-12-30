@@ -494,11 +494,11 @@ const FC = {
             levelSensitivity:           0,
             itermThrottleThreshold:     0,
             itermAcceleratorGain:       0,
-            itermRotation:              0,
-            itermDecay:                 0,
-            itermLimitRoll:             0,
-            itermLimitPitch:            0,
-            itermLimitYaw:              0,
+            errorRotation:              0,
+            errorDecay:                 0,
+            errorLimitRoll:             0,
+            errorLimitPitch:            0,
+            errorLimitYaw:              0,
             smartFeedforward:           0,
             itermRelax:                 0,
             itermRelaxType:             0,
@@ -547,23 +547,41 @@ const FC = {
             pitchFFCollectiveGain:      0,
             pitchFFCollectiveImpGain:   0,
             pid_mode:                   0,
-			rescueMode:                 0,
-			rescueFlipMode:             0,
-			rescueFlipGain:             0,
+		   
+								 
+								 
+								 
+										  
+								 
+								 
+								 
+										  
+										  
+										  
+								 
+	   
+            rescueMode:                 0,
+            rescueFlipMode:             0,
+            rescueFlipGain:             0,
             rescuePullupTime:           0,
-			rescueClimbTime:            0,
-			rescueFlipTime:             0,
-			rescueExitTime:             0,
+            rescueClimbTime:            0,
+            rescueFlipTime:             0,
+            rescueExitTime:             0,
             rescuePullupCollective:     0,
             rescueClimbCollective:      0,
             rescueHoverCollective:      0,
-			rescueHoverAltitude:        0,
+            rescueHoverAltitude:        0,
+			 
             rescueAltitudeAGain:        0,
             rescueAltitudePGain:        0,
             rescueAltitudeIGain:        0,
             rescueMaxCollective:        0,
             rescueMaxClimbRate:         0,
-			rescueMaxRate:              0,
+		   
+								 
+	   
+            rescueMaxRate:              0,
+			 
             rescueMaxAccel:             0,
         };
 
