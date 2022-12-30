@@ -826,16 +826,24 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
                 for (let i = 0; i < adjustmentRangeCount; i++) {
                     const adjustmentRange = {
+                        adjFunction: data.readU8(),
                         enaChannel: data.readU8(),
                         enaRange: {
                             start: 1500 + (data.read8() * 5),
                             end: 1500 + (data.read8() * 5),
                         },
-                        adjFunction: data.readU8(),
                         adjChannel: data.readU8(),
-                        adjStep: data.readU8(),
+                        adjRange1: {
+                            start: 1500 + (data.read8() * 5),
+                            end: 1500 + (data.read8() * 5),
+                        },
+                        adjRange2: {
+                            start: 1500 + (data.read8() * 5),
+                            end: 1500 + (data.read8() * 5),
+                        },
                         adjMin: data.read16(),
                         adjMax: data.read16(),
+                        adjStep: data.readU8(),
                     };
                     FC.ADJUSTMENT_RANGES.push(adjustmentRange);
                 }
@@ -2277,14 +2285,18 @@ MspHelper.prototype.sendAdjustmentRange = function(adjustmentRangeIndex, onCompl
     const buffer = [];
 
     buffer.push8(adjustmentRangeIndex)
+          .push8(adjustmentRange.adjFunction)
           .push8(adjustmentRange.enaChannel)
           .push8((adjustmentRange.enaRange.start - 1500) / 5)
           .push8((adjustmentRange.enaRange.end - 1500) / 5)
-          .push8(adjustmentRange.adjFunction)
           .push8(adjustmentRange.adjChannel)
-          .push8(adjustmentRange.adjStep)
+          .push8((adjustmentRange.adjRange1.start - 1500) / 5)
+          .push8((adjustmentRange.adjRange1.end - 1500) / 5)
+          .push8((adjustmentRange.adjRange2.start - 1500) / 5)
+          .push8((adjustmentRange.adjRange2.end - 1500) / 5)
           .push16(adjustmentRange.adjMin)
-          .push16(adjustmentRange.adjMax);
+          .push16(adjustmentRange.adjMax)
+          .push8(adjustmentRange.adjStep);
 
     MSP.send_message(MSPCodes.MSP_SET_ADJUSTMENT_RANGE, buffer, false, onCompleteCallback);
 };
