@@ -558,8 +558,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_DEBUG:
-                for (let i = 0; i < 4; i++)
-                    FC.SENSOR_DATA.debug[i] = data.read16();
+                for (let i = 0; i < 8; i++)
+                    FC.SENSOR_DATA.debug[i] = data.read32();
                 break;
 
             case MSPCodes.MSP_SET_MOTOR_OVERRIDE:
@@ -1319,7 +1319,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             case MSPCodes.MSP_DEBUG_CONFIG:
                 FC.DEBUG_CONFIG.debugModeCount = data.readU8();
+                FC.DEBUG_CONFIG.debugValueCount = data.readU8();
                 FC.DEBUG_CONFIG.debugMode = data.readU8();
+                FC.DEBUG_CONFIG.debugAxis = data.readU8();
                 break;
             case MSPCodes.MSP_SET_DEBUG_CONFIG:
                 console.log('Debug flags changed');
@@ -1549,6 +1551,7 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_DEBUG_CONFIG:
             buffer.push8(FC.DEBUG_CONFIG.debugMode);
+            buffer.push8(FC.DEBUG_CONFIG.debugAxis);
             break;
 
         case MSPCodes.MSP_SET_ARMING_CONFIG:

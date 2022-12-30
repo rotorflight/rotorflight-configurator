@@ -342,7 +342,9 @@ const FC = {
 
         this.DEBUG_CONFIG = {
             debugMode:                  0,
+            debugAxis:                  0,
             debugModeCount:             0,
+            debugValueCount:            0,
         };
 
         this.ARMING_CONFIG = {
