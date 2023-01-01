@@ -202,7 +202,9 @@ const FC = {
             main_rotor_dir:             0,
             tail_rotor_mode:            0,
             tail_motor_idle:            0,
+            swash_type:                 0,
             swash_ring:                 0,
+            swash_phase:                0,
         };
 
         this.MIXER_INPUTS =             [];
@@ -340,7 +342,9 @@ const FC = {
 
         this.DEBUG_CONFIG = {
             debugMode:                  0,
+            debugAxis:                  0,
             debugModeCount:             0,
+            debugValueCount:            0,
         };
 
         this.ARMING_CONFIG = {
@@ -414,10 +418,9 @@ const FC = {
         this.BLACKBOX = {
             supported:                  false,
             blackboxDevice:             0,
-            blackboxRateNum:            1,
-            blackboxRateDenom:          1,
-            blackboxPDenom:             0,
-            blackboxSampleRate:         0,
+            blackboxMode:               1,
+            blackboxDenom:              0,
+            blackboxFields:             0,
         };
 
         this.TRANSPONDER = {
@@ -613,15 +616,6 @@ const FC = {
             stick_min:                    0,
             rx_min_usec:                  0,
             rx_max_usec:                  0,
-            rcInterpolation:              0,
-            rcInterpolationInterval:      0,
-            rcInterpolationChannels:      0,
-            rcSmoothingType:              0,
-            rcSmoothingInputType:         0,
-            rcSmoothingInputCutoff:       0,
-            rcSmoothingDerivativeType:    0,
-            rcSmoothingDerivativeCutoff:  0,
-            rcSmoothingAutoSmoothness:    0,
             rxSpiProtocol:                0,
             rxSpiId:                      0,
             rxSpiRfChannelCount:          0,

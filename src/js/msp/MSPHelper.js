@@ -474,9 +474,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                             'mid':       data.readU16(),
                             'min':       data.read16(),
                             'max':       data.read16(),
+                            'rneg':      data.read16(),
+                            'rpos':      data.read16(),
                             'rate':      data.read16(),
-                            'trim':      data.read16(),
-                            'speed':     data.readU16()
+                            'flags':     data.read16()
                         };
                         FC.SERVO_CONFIG.push(arr);
                     }
@@ -557,8 +558,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_DEBUG:
-                for (let i = 0; i < 4; i++)
-                    FC.SENSOR_DATA.debug[i] = data.read16();
+                for (let i = 0; i < 8; i++)
+                    FC.SENSOR_DATA.debug[i] = data.read32();
                 break;
 
             case MSPCodes.MSP_SET_MOTOR_OVERRIDE:
@@ -609,7 +610,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MIXER_CONFIG.main_rotor_dir = data.readU8();
                 FC.MIXER_CONFIG.tail_rotor_mode = data.readU8();
                 FC.MIXER_CONFIG.tail_motor_idle = data.readU8();
+                FC.MIXER_CONFIG.swash_type = data.readU8();
                 FC.MIXER_CONFIG.swash_ring = data.readU8();
+                FC.MIXER_CONFIG.swash_phase = data.readU8();
                 break;
 
             case MSPCodes.MSP_FEATURE_CONFIG:
@@ -823,16 +826,24 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
                 for (let i = 0; i < adjustmentRangeCount; i++) {
                     const adjustmentRange = {
+                        adjFunction: data.readU8(),
                         enaChannel: data.readU8(),
                         enaRange: {
                             start: 1500 + (data.read8() * 5),
                             end: 1500 + (data.read8() * 5),
                         },
-                        adjFunction: data.readU8(),
                         adjChannel: data.readU8(),
-                        adjStep: data.readU8(),
+                        adjRange1: {
+                            start: 1500 + (data.read8() * 5),
+                            end: 1500 + (data.read8() * 5),
+                        },
+                        adjRange2: {
+                            start: 1500 + (data.read8() * 5),
+                            end: 1500 + (data.read8() * 5),
+                        },
                         adjMin: data.read16(),
                         adjMax: data.read16(),
+                        adjStep: data.readU8(),
                     };
                     FC.ADJUSTMENT_RANGES.push(adjustmentRange);
                 }
@@ -847,15 +858,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.RX_CONFIG.stick_min = data.readU16();
                 FC.RX_CONFIG.rx_min_usec = data.readU16();
                 FC.RX_CONFIG.rx_max_usec = data.readU16();
-                FC.RX_CONFIG.rcInterpolation = data.readU8();
-                FC.RX_CONFIG.rcInterpolationInterval = data.readU8();
-                FC.RX_CONFIG.rcInterpolationChannels = data.readU8();
-                FC.RX_CONFIG.rcSmoothingType = data.readU8();
-                FC.RX_CONFIG.rcSmoothingInputType = data.readU8();
-                FC.RX_CONFIG.rcSmoothingInputCutoff = data.readU8();
-                FC.RX_CONFIG.rcSmoothingDerivativeType = data.readU8();
-                FC.RX_CONFIG.rcSmoothingDerivativeCutoff = data.readU8();
-                FC.RX_CONFIG.rcSmoothingAutoSmoothness = data.readU8();
                 FC.RX_CONFIG.rxSpiProtocol = data.readU8();
                 FC.RX_CONFIG.rxSpiId = data.readU32();
                 FC.RX_CONFIG.rxSpiRfChannelCount = data.readU8();
@@ -1040,7 +1042,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 const ruleCount = data.byteLength / 11;
                 for (let i = 0; i < ruleCount; i++) {
                     FC.MIXER_RULES.push({
-                        modes:  data.readU32(),
                         oper:   data.readU8(),
                         src:    data.readU8(),
                         dst:    data.readU8(),
@@ -1196,9 +1197,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_BLACKBOX_CONFIG:
                 FC.BLACKBOX.supported = (data.readU8() & 1) != 0;
                 FC.BLACKBOX.blackboxDevice = data.readU8();
-                FC.BLACKBOX.blackboxRateNum = data.readU8();
-                FC.BLACKBOX.blackboxRateDenom = data.readU8();
-                FC.BLACKBOX.blackboxPDenom = data.readU16();
+                FC.BLACKBOX.blackboxDenom = data.readU16();
                 break;
 
             case MSPCodes.MSP_SET_BLACKBOX_CONFIG:
@@ -1328,7 +1327,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             case MSPCodes.MSP_DEBUG_CONFIG:
                 FC.DEBUG_CONFIG.debugModeCount = data.readU8();
+                FC.DEBUG_CONFIG.debugValueCount = data.readU8();
                 FC.DEBUG_CONFIG.debugMode = data.readU8();
+                FC.DEBUG_CONFIG.debugAxis = data.readU8();
                 break;
             case MSPCodes.MSP_SET_DEBUG_CONFIG:
                 console.log('Debug flags changed');
@@ -1510,7 +1511,9 @@ MspHelper.prototype.crunch = function(code) {
             buffer.push8(FC.MIXER_CONFIG.main_rotor_dir)
                 .push8(FC.MIXER_CONFIG.tail_rotor_mode)
                 .push8(FC.MIXER_CONFIG.tail_motor_idle)
-                .push8(FC.MIXER_CONFIG.swash_ring);
+                .push8(FC.MIXER_CONFIG.swash_type)
+                .push8(FC.MIXER_CONFIG.swash_ring)
+                .push8(FC.MIXER_CONFIG.swash_phase);
             break;
 
         case MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG:
@@ -1556,6 +1559,7 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_DEBUG_CONFIG:
             buffer.push8(FC.DEBUG_CONFIG.debugMode);
+            buffer.push8(FC.DEBUG_CONFIG.debugAxis);
             break;
 
         case MSPCodes.MSP_SET_ARMING_CONFIG:
@@ -1663,15 +1667,6 @@ MspHelper.prototype.crunch = function(code) {
                   .push16(FC.RX_CONFIG.stick_min)
                   .push16(FC.RX_CONFIG.rx_min_usec)
                   .push16(FC.RX_CONFIG.rx_max_usec)
-                  .push8(FC.RX_CONFIG.rcInterpolation)
-                  .push8(FC.RX_CONFIG.rcInterpolationInterval)
-                  .push8(FC.RX_CONFIG.rcInterpolationChannels)
-                  .push8(FC.RX_CONFIG.rcSmoothingType)
-                  .push8(FC.RX_CONFIG.rcSmoothingInputType)
-                  .push8(FC.RX_CONFIG.rcSmoothingInputCutoff)
-                  .push8(FC.RX_CONFIG.rcSmoothingDerivativeType)
-                  .push8(FC.RX_CONFIG.rcSmoothingDerivativeCutoff)
-                  .push8(FC.RX_CONFIG.rcSmoothingAutoSmoothness)
                   .push8(FC.RX_CONFIG.rxSpiProtocol)
                   .push32(FC.RX_CONFIG.rxSpiId)
                   .push8(FC.RX_CONFIG.rxSpiRfChannelCount);
@@ -1873,10 +1868,9 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_BLACKBOX_CONFIG:
             buffer.push8(FC.BLACKBOX.blackboxDevice)
-                .push8(FC.BLACKBOX.blackboxRateNum)
-                .push8(FC.BLACKBOX.blackboxRateDenom)
-                .push16(FC.BLACKBOX.blackboxPDenom)
-                .push8(FC.BLACKBOX.blackboxSampleRate);
+                .push8(FC.BLACKBOX.blackboxMode)
+                .push16(FC.BLACKBOX.blackboxDenom)
+                .push32(FC.BLACKBOX.blackboxFields);
             break;
 
         case MSPCodes.MSP_COPY_PROFILE:
@@ -2137,9 +2131,10 @@ MspHelper.prototype.sendServoConfig = function(servoIndex, onCompleteCallback)
           .push16(CONFIG.mid)
           .push16(CONFIG.min)
           .push16(CONFIG.max)
+          .push16(CONFIG.rneg)
+          .push16(CONFIG.rpos)
           .push16(CONFIG.rate)
-          .push16(CONFIG.trim)
-          .push16(CONFIG.speed);
+          .push16(CONFIG.flags);
 
     MSP.send_message(MSPCodes.MSP_SET_SERVO_CONFIGURATION, buffer, false, onCompleteCallback);
 };
@@ -2193,7 +2188,6 @@ MspHelper.prototype.sendMixerRule = function(ruleIndex, onCompleteCallback)
     const buffer = [];
 
     buffer.push8(ruleIndex)
-          .push32(rule.modes)
           .push8(rule.oper)
           .push8(rule.src)
           .push8(rule.dst)
@@ -2291,14 +2285,18 @@ MspHelper.prototype.sendAdjustmentRange = function(adjustmentRangeIndex, onCompl
     const buffer = [];
 
     buffer.push8(adjustmentRangeIndex)
+          .push8(adjustmentRange.adjFunction)
           .push8(adjustmentRange.enaChannel)
           .push8((adjustmentRange.enaRange.start - 1500) / 5)
           .push8((adjustmentRange.enaRange.end - 1500) / 5)
-          .push8(adjustmentRange.adjFunction)
           .push8(adjustmentRange.adjChannel)
-          .push8(adjustmentRange.adjStep)
+          .push8((adjustmentRange.adjRange1.start - 1500) / 5)
+          .push8((adjustmentRange.adjRange1.end - 1500) / 5)
+          .push8((adjustmentRange.adjRange2.start - 1500) / 5)
+          .push8((adjustmentRange.adjRange2.end - 1500) / 5)
           .push16(adjustmentRange.adjMin)
-          .push16(adjustmentRange.adjMax);
+          .push16(adjustmentRange.adjMax)
+          .push8(adjustmentRange.adjStep);
 
     MSP.send_message(MSPCodes.MSP_SET_ADJUSTMENT_RANGE, buffer, false, onCompleteCallback);
 };
