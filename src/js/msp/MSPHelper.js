@@ -363,25 +363,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.FC_CONFIG.loopTime = data.readU16();
                 break;
 
-            case MSPCodes.MSP_MISC: // 22 bytes
-                FC.RX_CONFIG.midrc = data.readU16();
-                FC.MOTOR_CONFIG.minthrottle = data.readU16(); // 0-2000
-                FC.MOTOR_CONFIG.maxthrottle = data.readU16(); // 0-2000
-                FC.MOTOR_CONFIG.mincommand = data.readU16(); // 0-2000
-                FC.MISC.failsafe_throttle = data.readU16(); // 1000-2000
-                FC.GPS_CONFIG.provider = data.readU8();
-                FC.MISC.gps_baudrate = data.readU8();
-                FC.GPS_CONFIG.ublox_sbas = data.readU8();
-                FC.MISC.multiwiicurrentoutput = data.readU8();
-                FC.RSSI_CONFIG.channel = data.readU8();
-                FC.MISC.placeholder2 = data.readU8();
-                data.read16(); // was mag_declination
-                FC.MISC.vbatscale = data.readU8(); // was FC.MISC.vbatscale - 10-200
-                FC.MISC.vbatmincellvoltage = data.readU8() / 10; // 10-50
-                FC.MISC.vbatmaxcellvoltage = data.readU8() / 10; // 10-50
-                FC.MISC.vbatwarningcellvoltage = data.readU8() / 10; // 10-50
-                break;
-
             case MSPCodes.MSP_MOTOR_CONFIG:
                 FC.MOTOR_CONFIG.minthrottle = data.readU16();
                 FC.MOTOR_CONFIG.maxthrottle = data.readU16();
@@ -1566,25 +1547,6 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_LOOP_TIME:
             buffer.push16(FC.FC_CONFIG.loopTime);
-            break;
-
-        case MSPCodes.MSP_SET_MISC:
-            buffer.push16(FC.RX_CONFIG.midrc)
-                .push16(FC.MOTOR_CONFIG.minthrottle)
-                .push16(FC.MOTOR_CONFIG.maxthrottle)
-                .push16(FC.MOTOR_CONFIG.mincommand)
-                .push16(FC.MISC.failsafe_throttle)
-                .push8(FC.GPS_CONFIG.provider)
-                .push8(FC.MISC.gps_baudrate)
-                .push8(FC.GPS_CONFIG.ublox_sbas)
-                .push8(FC.MISC.multiwiicurrentoutput)
-                .push8(FC.RSSI_CONFIG.channel)
-                .push8(FC.MISC.placeholder2)
-                .push16(0) // was mag_declination
-                .push8(FC.MISC.vbatscale)
-                .push8(Math.round(FC.MISC.vbatmincellvoltage * 10))
-                .push8(Math.round(FC.MISC.vbatmaxcellvoltage * 10))
-                .push8(Math.round(FC.MISC.vbatwarningcellvoltage * 10));
             break;
 
         case MSPCodes.MSP_SET_MOTOR_CONFIG:
