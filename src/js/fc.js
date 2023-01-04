@@ -125,7 +125,6 @@ const FC = {
     LED_COLORS: null,
     LED_MODE_COLORS: null,
     LED_STRIP: null,
-    MISC: null, // DEPRECATED
     MIXER_CONFIG: null,
     MIXER_INPUTS: null,
     MIXER_RULES: null,
@@ -356,18 +355,6 @@ const FC = {
             loopTime:                   0,
         };
 
-        this.MISC = {
-            // DEPRECATED = only used to store values that are written back to the fc as-is, do NOT use for any other purpose
-            failsafe_throttle:          0,
-            gps_baudrate:               0,
-            multiwiicurrentoutput:      0,
-            placeholder2:               0,
-            vbatscale:                  0,
-            vbatmincellvoltage:         0,
-            vbatmaxcellvoltage:         0,
-            vbatwarningcellvoltage:     0,
-            batterymetertype:           1, // 1=ADC, 2=ESC
-        };
         this.MOTOR_CONFIG = {
             mincommand:                 0,
             minthrottle:                0,
