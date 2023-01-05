@@ -58,7 +58,6 @@ TABS.rates.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_STATUS))
             .then(() => MSP.promise(MSPCodes.MSP_RC_TUNING))
             .then(() => MSP.promise(MSPCodes.MSP_RC_DEADBAND))
-            .then(() => MSP.promise(MSPCodes.MSP_PID_ADVANCED))
             .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
             .then(callback);
     }
@@ -66,7 +65,6 @@ TABS.rates.initialize = function (callback) {
     function save_data(callback) {
         Promise.resolve(true)
             .then(() => MSP.promise(MSPCodes.MSP_SET_RC_TUNING, mspHelper.crunch(MSPCodes.MSP_SET_RC_TUNING)))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_PID_ADVANCED, mspHelper.crunch(MSPCodes.MSP_SET_PID_ADVANCED)))
             .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
             .then(() => {
                 GUI.log(i18n.getMessage('eepromSaved'));
