@@ -72,8 +72,8 @@ const MSPCodes = {
     MSP_SET_ADVANCED_CONFIG:        91,
     MSP_FILTER_CONFIG:              92,
     MSP_SET_FILTER_CONFIG:          93,
-    MSP_PID_ADVANCED:               94,
-    MSP_SET_PID_ADVANCED:           95,
+    MSP_PID_PROFILE:                94,
+    MSP_SET_PID_PROFILE:            95,
     MSP_SENSOR_CONFIG:              96,
     MSP_SET_SENSOR_CONFIG:          97,
     //MSP_SPECIAL_PARAMETERS:         98, // DEPRECATED
@@ -91,8 +91,7 @@ const MSPCodes = {
     MSP_ALTITUDE:                   109,
     MSP_ANALOG:                     110,
     MSP_RC_TUNING:                  111,
-    MSP_PID:                        112,
-    //MSP_BOX:                        113, // DEPRECATED
+    MSP_PID_TUNING:                 112,
 
     MSP_BOXNAMES:                   116,
     MSP_PIDNAMES:                   117,
@@ -119,10 +118,14 @@ const MSPCodes = {
 
     MSP_HELI_CONFIG:                140,
     MSP_SET_HELI_CONFIG:            141,
-    MSP_GOVERNOR:                   142,
-    MSP_SET_GOVERNOR:               143,
+    MSP_GOVERNOR_CONFIG:            142,
+    MSP_SET_GOVERNOR_CONFIG:        143,
     MSP_RPM_FILTER:                 144,
     MSP_SET_RPM_FILTER:             145,
+    MSP_RESCUE_PROFILE:             146,
+    MSP_SET_RESCUE_PROFILE:         147,
+    MSP_GOVERNOR_PROFILE:           148,
+    MSP_SET_GOVERNOR_PROFILE:       149,
 
     MSP_UID:                        160,
     MSP_GPS_SV_INFO:                164,
@@ -148,7 +151,7 @@ const MSPCodes = {
 
     MSP_SET_RAW_RC:                 200,
     MSP_SET_RAW_GPS:                201, // Not used
-    MSP_SET_PID:                    202,
+    MSP_SET_PID_TUNING:             202,
     //MSP_SET_BOX:                    203, // DEPRECATED
     MSP_SET_RC_TUNING:              204,
     MSP_ACC_CALIBRATION:            205,

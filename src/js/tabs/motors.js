@@ -30,13 +30,13 @@ TABS.motors.initialize = function (callback) {
             .then(() => { return MSP.promise(MSPCodes.MSP_BATTERY_CONFIG); })
             .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_CONFIG); })
             .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_OVERRIDE); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_GOVERNOR); })
+            .then(() => { return MSP.promise(MSPCodes.MSP_GOVERNOR_CONFIG); })
             .then(callback);
     }
 
     function save_data(callback) {
         Promise.resolve(true)
-            .then(() => { return MSP.promise(MSPCodes.MSP_SET_GOVERNOR, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR)); })
+            .then(() => { return MSP.promise(MSPCodes.MSP_SET_GOVERNOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR_CONFIG)); })
             .then(() => { return MSP.promise(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG)); })
             .then(() => { return MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)); })
             .then(() => { return MSP.promise(MSPCodes.MSP_EEPROM_WRITE); })
