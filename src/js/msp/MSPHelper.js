@@ -1741,8 +1741,8 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_PID_PROFILE:
             buffer.push8(FC.PID_PROFILE.pid_mode)
-                .push8(FC.PID_PROFILE.itermDecay)
-                .push8(FC.PID_PROFILE.itermRotation)
+                .push8(FC.PID_PROFILE.error_decay)
+                .push8(FC.PID_PROFILE.error_rotation)
                 .push16(FC.PID_PROFILE.itermLimitRoll)
                 .push16(FC.PID_PROFILE.itermLimitPitch)
                 .push16(FC.PID_PROFILE.itermLimitYaw)
