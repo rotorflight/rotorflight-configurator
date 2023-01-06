@@ -1771,7 +1771,7 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.PID_PROFILE.acroTrainerLimit);
             break;
 
-        case MSPCodes.MSP_SET_GOVERNOR_PROFILE:
+        case MSPCodes.MSP_SET_RESCUE_PROFILE:
                 // Rescue //
             buffer.push8(FC.PID_PROFILE.rescueMode)
                 .push8(FC.PID_PROFILE.rescueFlipMode)
