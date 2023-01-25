@@ -55,50 +55,41 @@ TABS.servos.initialize = function (callback) {
 
         function process_warnings() {
 
+            let unusualRange = false;
             let unusualRate = false;
-            let unequalRate = false;
             let unusualLimit = false;
-            let unequalLimit = false;
 
             const SERVOS = FC.SERVO_CONFIG;
 
             for (let index = 0; index < FC.CONFIG.servoCount && index < 4; index++) {
                 const servo = SERVOS[index];
-                const rate = Math.abs(servo.rate);
 
-                if (servo.mid > 1300 && servo.mid < 1700) {
-                    if (rate != 500)
+                if (servo.mid > 860) {
+                    if (servo.rate > 333)
                         unusualRate = true;
-                    if (servo.min < -600 || servo.min > -250)
+
+                    if (servo.min < -750 || servo.min > -250 || servo.max >  750 || servo.max <  250)
                         unusualLimit = true;
-                    if (servo.max >  600 || servo.max <  250)
-                        unusualLimit = true;
-                }
-                else if (servo.mid > 650 && servo.mid < 850) {
-                    if (rate != 250)
+
+                    if (servo.rneg < 250 || servo.rneg > 750 || servo.rpos <  250 || servo.rpos >  750)
+                        unusualRange = true;
+                } else {
+                    if (servo.rate > 560)
                         unusualRate = true;
-                    if (servo.min < -300 || servo.min > -125)
+
+                    if (servo.min < -300 || servo.min > -125 || servo.max >  300 || servo.max <  125)
                         unusualLimit = true;
-                    if (servo.max >  300 || servo.max <  125)
-                        unusualLimit = true;
+
+                    if (servo.rneg < 125 || servo.rneg > 300 || servo.rpos <  125 || servo.rpos >  300)
+                        unusualRange = true;
                 }
             }
 
-            if (Math.abs(SERVOS[0].rate) != Math.abs(SERVOS[1].rate) ||
-                Math.abs(SERVOS[1].rate) != Math.abs(SERVOS[2].rate))
-                unequalRate = true;
-
-            if (SERVOS[1].min != SERVOS[2].min)
-               unequalLimit = true;
-            if (SERVOS[1].max != SERVOS[2].max)
-               unequalLimit = true;
-
-            $('.servo-unusual-rates-warning').toggle(unusualRate);
-            $('.servo-unequal-rates-warning').toggle(unequalRate);
             $('.servo-unusual-limits-warning').toggle(unusualLimit);
-            $('.servo-unequal-limits-warning').toggle(unequalLimit);
+            $('.servo-unusual-ranges-warning').toggle(unusualRange);
+            $('.servo-unusual-rates-warning').toggle(unusualRate);
 
-            $('.warnings').toggle(unusualRate || unusualLimit || unequalRate || unequalLimit);
+            $('.warnings').toggle(unusualLimit || unusualRange || unusualRate);
         }
 
         function process_override(servoIndex) {
