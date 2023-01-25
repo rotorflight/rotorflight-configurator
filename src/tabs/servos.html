@@ -8,32 +8,6 @@
         <!-- CONFIGURATION -->
         <div class="configuration">
             <div class="grid-row">
-                <div class="grid-col col6">
-
-                    <!-- SERVO SETTINGS -->
-                    <div class="gui_box grey">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="servoSettings"></div>
-                        </div>
-                        <div class="spacer_box">
-                            <table class="servoSettings">
-                                <tr>
-                                    <td>
-                                        <input type="number" id="servoPwmRate" min="50" max="498" />
-                                    </td>
-                                    <td>
-                                        <span i18n="servoPwmRate"></span>
-                                        <div class="helpicon cf_tip" i18n_title="servoPwmRateHelp"></div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="grid-row">
                 <div class="grid-col full-width">
                     <div class="gui_box">
                         <div class="gui_box_titlebar">
@@ -45,11 +19,30 @@
                                 <thead>
                                     <tr class="trhead">
                                         <th i18n="servoNumber"></th>
-                                        <th i18n="servoMid"></th>
-                                        <th i18n="servoMin"></th>
-                                        <th i18n="servoMax"></th>
-                                        <th i18n="servoRate"></th>
-                                        <th i18n="servoTrim"></th>
+                                        <th>
+                                            <span class="thtext" i18n="servoMid"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoMidHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoMin"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoMinHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoMax"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoMaxHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoRangeNeg"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoRangeNegHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoRangePos"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoRangePosHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoRate"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoRateHelp"></span>
+                                        </th>
                                         <th i18n="servoSpeed"></th>
                                         <th i18n="servoReverse"></th>
                                         <th i18n="servoSignal"></th>
@@ -149,8 +142,9 @@
                 <td><input id="mid" type="number" min="375" max="2250" /></td>
                 <td><input id="min" type="number" min="-1000" max="1000" /></td>
                 <td><input id="max" type="number" min="-1000" max="1000" /></td>
-                <td><input id="rate" type="number" min="0" max="2500" /></td>
-                <td><input id="trim" type="number" min="-250" max="250" /></td>
+                <td><input id="rneg" type="number" min="100" max="1000" /></td>
+                <td><input id="rpos" type="number" min="100" max="1000" /></td>
+                <td><input id="rate" type="number" min="50" max="1000" /></td>
                 <td><input id="speed" type="number" min="0" max="10000" /></td>
                 <td><input id="reversed" type="checkbox" class="toggle" /></td>
                 <td><div class="meter">

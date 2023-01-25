@@ -449,8 +449,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_SERVO_CONFIGURATIONS:
                 FC.SERVO_CONFIG = []; // empty the array as new data is coming in
-                if (data.byteLength % 12 == 0) {
-                    for (let i = 0; i < data.byteLength; i += 12) {
+                if (data.byteLength % 14 == 0) {
+                    for (let i = 0; i < data.byteLength; i += 14) {
                         const arr = {
                             'mid':       data.readU16(),
                             'min':       data.read16(),

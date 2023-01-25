@@ -1963,15 +1963,6 @@
     "adjustmentsFunctionSwashPhase": {
         "message": "Swash Phase Angle"
     },
-    "servoSettings": {
-        "message": "Servo Settings"
-    },
-    "servoPwmRate": {
-        "message": "Servo update rate"
-    },
-    "servoPwmRateHelp": {
-        "message": "Rate for servo position updates in Hz. Also known as PWM rate. For analog servos, this is always 50Hz. For digital servos, it can vary from 125Hz to 400Hz. Please check your servo's data sheet."
-    },
     "servoConfiguration": {
         "message": "Servo Configuration"
     },
@@ -1984,14 +1975,38 @@
     "servoMid": {
         "message": "Center"
     },
+    "servoMidHelp": {
+        "message": "Zero position in µs (servo arm level position)"
+    },
     "servoMin": {
         "message": "Min"
+    },
+    "servoMinHelp": {
+        "message": "Minimum pulse length (for avoiding binding)"
     },
     "servoMax": {
         "message": "Max"
     },
+    "servoMaxHelp": {
+        "message": "Maximum pulse length (for avoiding binding)"
+    },
+    "servoRangeNeg": {
+        "message": "Range Neg"
+    },
+    "servoRangeNegHelp": {
+        "message": "Scaling factor on negative side (below center level)"
+    },
+    "servoRangePos": {
+        "message": "Range Pos"
+    },
+    "servoRangePosHelp": {
+        "message": "Scaling factor on positive side (above center level)"
+    },
     "servoRate": {
         "message": "Rate"
+    },
+    "servoRateHelp": {
+        "message": "PWM update rate in Hz. For analog servos, this is always 50Hz. For digital servos, it can vary from 125Hz to 560Hz. Please check your servo's data sheet."
     },
     "servoTrim": {
         "message": "Trim"

@@ -105,6 +105,15 @@
     border-top: 1px solid var(--boxBackground);
 }
 
+.tab-servos .trhead .thtext {
+    color: var(--quietText);
+    background-color: var(--button-background);
+    text-align: center;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 16px;
+}
+
 @media all and (max-width: 575px) {
     .tab-servos .servoConfig th {
         min-width: 30px;
@@ -157,6 +166,10 @@
 }
 
 .tab-servos .servoConfig td:nth-child(8) {
+    width: 80px;
+}
+
+.tab-servos .servoConfig td:nth-child(9) {
     width: 60px;
     text-align: center;
 }

@@ -181,8 +181,7 @@ TABS.servos.initialize = function (callback) {
             const servoConfig = $('#tab-servos-templates .servoConfigTemplate tr').clone();
 
             const SERVO = FC.SERVO_CONFIG[servoIndex];
-            const rate = Math.abs(SERVO.rate);
-            const revs = (SERVO.rate < 0);
+            const revs = SERVO.flags & 1;
 
             servoConfig.attr('class', `servoConfig${servoIndex}`);
             servoConfig.data('index', servoIndex);
@@ -191,15 +190,11 @@ TABS.servos.initialize = function (callback) {
             servoConfig.find('#mid').val(SERVO.mid);
             servoConfig.find('#min').val(SERVO.min);
             servoConfig.find('#max').val(SERVO.max);
-            servoConfig.find('#rate').val(rate);
-            servoConfig.find('#trim').val(SERVO.trim);
+            servoConfig.find('#rneg').val(SERVO.rneg);
+            servoConfig.find('#rpos').val(SERVO.rpos);
+            servoConfig.find('#rate').val(SERVO.rate);
             servoConfig.find('#speed').val(SERVO.speed);
             servoConfig.find('#reversed').prop('checked', revs);
-
-            servoConfig.find('#reversed').change(function() {
-                const input = servoConfig.find('#trim');
-                input.val(-parseInt(input.val()));
-            });
 
             servoConfig.find('input').change(function () {
                 update_servo_config(servoIndex);
@@ -213,14 +208,15 @@ TABS.servos.initialize = function (callback) {
         function update_servo_config(servoIndex) {
 
             const servo = $(`.tab-servos .servoConfig${servoIndex}`);
-            const direc = $('#reversed',servo).prop('checked') ? -1 : 1;
 
             FC.SERVO_CONFIG[servoIndex].mid = parseInt($('#mid',servo).val());
             FC.SERVO_CONFIG[servoIndex].min = parseInt($('#min',servo).val());
             FC.SERVO_CONFIG[servoIndex].max = parseInt($('#max',servo).val());
-            FC.SERVO_CONFIG[servoIndex].rate = parseInt($('#rate',servo).val()) * direc;
-            FC.SERVO_CONFIG[servoIndex].trim = parseInt($('#trim',servo).val());
+            FC.SERVO_CONFIG[servoIndex].rneg = parseInt($('#rneg',servo).val());
+            FC.SERVO_CONFIG[servoIndex].rpos = parseInt($('#rpos',servo).val());
+            FC.SERVO_CONFIG[servoIndex].rate = parseInt($('#rate',servo).val());
             FC.SERVO_CONFIG[servoIndex].speed = parseInt($('#speed',servo).val());
+            FC.SERVO_CONFIG[servoIndex].flags =  $('#reversed',servo).prop('checked') ? 1 : 0;
         }
 
         function update_servo_bars() {
@@ -257,13 +253,6 @@ TABS.servos.initialize = function (callback) {
         }
 
         $('.tab-servos .override').toggle(!FC.CONFIG.servoOverrideDisabled);
-
-        const servoPwmRate = $('.tab-servos #servoPwmRate');
-
-        servoPwmRate.change(function () {
-            FC.ADVANCED_CONFIG.servo_pwm_rate = parseInt(servoPwmRate.val());
-        });
-        servoPwmRate.val(FC.ADVANCED_CONFIG.servo_pwm_rate);
 
         for (let index = 0; index < FC.CONFIG.servoCount; index++) {
             process_config(index);
