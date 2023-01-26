@@ -170,6 +170,7 @@ TABS.servos.initialize = function (callback) {
 
             const SERVO = FC.SERVO_CONFIG[servoIndex];
             const revs = SERVO.flags & 1;
+            const geocor = SERVO.flags & 2;
 
             servoConfig.attr('class', `servoConfig${servoIndex}`);
             servoConfig.data('index', servoIndex);
@@ -181,8 +182,9 @@ TABS.servos.initialize = function (callback) {
             servoConfig.find('#rneg').val(SERVO.rneg);
             servoConfig.find('#rpos').val(SERVO.rpos);
             servoConfig.find('#rate').val(SERVO.rate);
-            servoConfig.find('#speed').val(SERVO.speed);
+            //servoConfig.find('#speed').val(SERVO.speed);
             servoConfig.find('#reversed').prop('checked', revs);
+            servoConfig.find('#geocor').prop('checked', geocor);
 
             servoConfig.find('input').change(function () {
                 update_servo_config(servoIndex);
@@ -203,22 +205,29 @@ TABS.servos.initialize = function (callback) {
             FC.SERVO_CONFIG[servoIndex].rneg = parseInt($('#rneg',servo).val());
             FC.SERVO_CONFIG[servoIndex].rpos = parseInt($('#rpos',servo).val());
             FC.SERVO_CONFIG[servoIndex].rate = parseInt($('#rate',servo).val());
-            FC.SERVO_CONFIG[servoIndex].speed = parseInt($('#speed',servo).val());
+            //FC.SERVO_CONFIG[servoIndex].speed = parseInt($('#speed',servo).val());
             FC.SERVO_CONFIG[servoIndex].flags =  $('#reversed',servo).prop('checked') ? 1 : 0;
+            FC.SERVO_CONFIG[servoIndex].flags |=  $('#geocor',servo).prop('checked') ? 2 : 0;
         }
 
         function update_servo_bars() {
 
-            let rangeMin, rangeMax, length, margin;
+            let rangeMin, rangeMax;
 
             for (let i = 0; i < FC.SERVO_DATA.length; i++) {
                 const servoMeter = $(`.tab-servos .servoConfig${i} .meter`);
                 const servoValue = FC.SERVO_DATA[i];
 
-                if (FC.SERVO_CONFIG[i].mid < 1000) {
+                if (FC.SERVO_CONFIG[i].mid <= 860) {
+                    // 760us pulse servos
                     rangeMin = 375;
-                    rangeMax = 1125;
+                    rangeMax = 1145;
+                } else if (FC.SERVO_CONFIG[i].mid <= 1060) {
+                    // 960us
+                    rangeMin = 460;
+                    rangeMax = 1460;
                 } else {
+                    // 1520us
                     rangeMin = 750;
                     rangeMax = 2250;
                 }
@@ -302,7 +311,7 @@ TABS.servos.cloneConfig = function (servos) {
     const clone = [];
 
     function cloneServo(a) {
-        return { mid: a.mid, min: a.min, max: a.max, rate: a.rate, trim: a.trim, speed: a.speed, };
+        return { mid: a.mid, min: a.min, max: a.max, rneg: a.rneg, rpos: a.rpos, rate: a.rate, flags: a.flags /* , speed: a.speed */  };
     };
 
     servos.forEach(function (item) {

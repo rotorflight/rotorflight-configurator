@@ -1976,37 +1976,37 @@
         "message": "Center"
     },
     "servoMidHelp": {
-        "message": "Zero position in µs (servo arm level position)"
+        "message": "Zero position in µs. Servo arms should be level in this position."
     },
     "servoMin": {
         "message": "Min"
     },
     "servoMinHelp": {
-        "message": "Minimum pulse length (for avoiding binding)"
+        "message": "Minimum pulse length. Lower values can increase servo throw. Use higher values to avoid servo binding."
     },
     "servoMax": {
         "message": "Max"
     },
     "servoMaxHelp": {
-        "message": "Maximum pulse length (for avoiding binding)"
+        "message": "Maximum pulse length. Higher values can increase servo throw. Use lower values to avoid servo binding."
     },
     "servoRangeNeg": {
-        "message": "Range Neg"
+        "message": "Range neg"
     },
     "servoRangeNegHelp": {
-        "message": "Scaling factor on negative side (below center level)"
+        "message": "Scaling factor on negative side (below center level). Should be about the same as <i>Range pos</i>."
     },
     "servoRangePos": {
-        "message": "Range Pos"
+        "message": "Range pos"
     },
     "servoRangePosHelp": {
-        "message": "Scaling factor on positive side (above center level)"
+        "message": "Scaling factor on positive side (above center level). Use <i>Servo override</i> and set the angle to 30&deg;. Adjust <i>Scaling</i> until the servo arm actually has an angle of 30&deg;."
     },
     "servoRate": {
         "message": "Rate"
     },
     "servoRateHelp": {
-        "message": "PWM update rate in Hz. For analog servos, this is always 50Hz. For digital servos, it can vary from 125Hz to 560Hz. Please check your servo's data sheet."
+        "message": "PWM update rate in Hz. For analog servos, this is usually 50Hz. Higher values can damage analog servos. For digital servos, it can vary from 100Hz to 560Hz. Please check your servo's data sheet."
     },
     "servoTrim": {
         "message": "Trim"
@@ -2016,6 +2016,15 @@
     },
     "servoReverse": {
         "message": "Reverse"
+    },
+    "servoReverseHelp": {
+        "message": "Enable <i>Reverse</i> if a servo is not moving in the right direction."
+    },
+    "servoGeometryCorrection": {
+        "message": "Geo cor"
+    },
+    "servoGeometryCorrectionHelp": {
+        "message": "Enable <i>Geo cor</i> for correcting the rotational geometry. Do not use with linear servos."
     },
     "servoSignal": {
         "message": "PWM Signal"
@@ -2042,7 +2051,7 @@
         "message": "Enable the servo override feature. Setting servo override WILL move the servos to fixed positions."
     },
     "servoOverrideNote": {
-        "message": "<strong>Note.</strong>Servo override forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset in reboot."
+        "message": "<strong>Note:</strong> servo override forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "servoOverrideEnable": {
         "message": "Enable"
