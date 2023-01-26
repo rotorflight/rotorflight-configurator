@@ -1964,10 +1964,10 @@
         "message": "Swash Phase Angle"
     },
     "servoConfiguration": {
-        "message": "Servo Configuration"
+        "message": "Servo configuration"
     },
     "servoConfigurationHelp": {
-        "message": "Servo Configuration"
+        "message": "Servo configuration"
     },
     "servoNumber": {
         "message": "Servo"
@@ -2029,14 +2029,20 @@
     "servoUnusualRatesWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!"
     },
-    "servoOverrideNote": {
-        "message": "<strong>Note.</strong> Servo Override forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset in reboot."
-    },
     "servoOverride": {
-        "message": "Servo Override"
+        "message": "Servo override"
     },
     "servoOverrideHelp": {
-        "message": "Select the Override via the switch and then move the slider to move the servo arm to the commanded angle. "
+        "message": "Select the servo to be overridden and then move the slider to move the servo arm to the commanded angle."
+    },
+    "servoEnableOverrideLabel": {
+        "message": "<strong>Enable servo override</strong>"
+    },
+    "servoEnableOverrideText": {
+        "message": "Enable the servo override feature. Setting servo override WILL move the servos to fixed positions."
+    },
+    "servoOverrideNote": {
+        "message": "<strong>Note.</strong>Servo override forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "servoOverrideEnable": {
         "message": "Enable"

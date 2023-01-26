@@ -293,6 +293,18 @@
     padding-top: 15px;
 }
 
+.tab-servos .overrides tr .td1 {
+    width: 50px;
+    padding-right: 14px;
+}
+
+.tab-servos .overrides tr .td2 {
+    padding-right: 14px;
+}
+
+.tab-servos .overrides tr .td3 {
+    width: 75%;
+}
 
 @media all and (max-width: 575px) {
     .tab-servos .gui_box {

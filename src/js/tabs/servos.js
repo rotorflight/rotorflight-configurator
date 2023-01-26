@@ -240,12 +240,23 @@ TABS.servos.initialize = function (callback) {
             MSP.send_message(MSPCodes.MSP_SERVO, false, false, update_servo_bars);
         }
 
+        const enableServoOverrideSwitch = $('#servoEnableOverrideSwitch');
+        enableServoOverrideSwitch.prop('checked', !FC.CONFIG.servoOverrideDisabled);
+
+        enableServoOverrideSwitch.change(function () {
+            const checked = enableServoOverrideSwitch.prop('checked');
+            FC.CONFIG.servoOverrideDisabled = !checked;
+            if (!checked)
+                mspHelper.resetServoOverrides();
+
+            $('.tab-servos .override').toggle(checked);
+        });
+
         $('.tab-servos .override').toggle(!FC.CONFIG.servoOverrideDisabled);
 
         for (let index = 0; index < FC.CONFIG.servoCount; index++) {
             process_config(index);
-            if (!FC.CONFIG.servoOverrideDisabled)
-                process_override(index);
+            process_override(index);
         }
         process_warnings();
 

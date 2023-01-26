@@ -79,24 +79,32 @@
         </div>
         <!-- END WARNINGS -->
 
-        <!-- OVERRIDE -->
-        <div class="override">
+        <!-- OVERRIDES -->
+        <div class="overrides">
             <div class="grid-row margin-top">
                 <div class="grid-col full-width">
-                    <div class="note servoOverrideNote">
-                        <p i18n="servoOverrideNote"></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid-row">
-                <div class="grid-col full-width">
-                    <div class="gui_box">
+                    <div class="gui_box grey">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="servoOverride"></div>
                             <div class="helpicon cf_tip" i18n_title="servoOverrideHelp"></div>
                         </div>
-                        <div>
+                        <div class="spacer_box">
+                            <table class="servoSettings">
+                                <tr>
+                                    <td class="td1">
+                                        <input type="checkbox" id="servoEnableOverrideSwitch" class="toggle" />
+                                    </td>
+                                    <td class="td2">
+                                        <span i18n="servoEnableOverrideLabel"></span>
+                                    </td>
+                                    <td class="td3">
+                                        <span class="description" i18n="servoEnableOverrideText"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="override">
                             <table class="servoOverride">
                                 <thead>
                                     <tr class="trhead">
@@ -111,6 +119,14 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="override grid-row">
+                <div class="grid-col full-width">
+                    <div class="note servoOverrideNote">
+                        <p i18n="servoOverrideNote"></p>
                     </div>
                 </div>
             </div>
