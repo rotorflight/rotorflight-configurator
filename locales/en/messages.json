@@ -1963,8 +1963,11 @@
     "adjustmentsFunctionSwashPhase": {
         "message": "Swash Phase Angle"
     },
+    "servoHelp": {
+        "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arms should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Range</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Range</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
+    },
     "servoConfiguration": {
-        "message": "Servo configuration"
+        "message": "Servo Configuration"
     },
     "servoConfigurationHelp": {
         "message": "Servo configuration"
@@ -1976,19 +1979,19 @@
         "message": "Center"
     },
     "servoMidHelp": {
-        "message": "Zero position in µs. Servo arms should be level in this position."
+        "message": "Center position in µs. Servo arms should be level in this position."
     },
     "servoMin": {
         "message": "Min"
     },
     "servoMinHelp": {
-        "message": "Minimum pulse length. Lower values can increase servo throw. Use higher values to avoid servo binding."
+        "message": "Minimum pulse width. Lower values can increase servo throw. Use higher values to avoid servo binding."
     },
     "servoMax": {
         "message": "Max"
     },
     "servoMaxHelp": {
-        "message": "Maximum pulse length. Higher values can increase servo throw. Use lower values to avoid servo binding."
+        "message": "Maximum pulse width. Higher values can increase servo throw. Use lower values to avoid servo binding."
     },
     "servoRangeNeg": {
         "message": "Range neg"
@@ -2000,13 +2003,13 @@
         "message": "Range pos"
     },
     "servoRangePosHelp": {
-        "message": "Scaling factor on positive side (above center level). Use <i>Servo override</i> and set the angle to 30&deg;. Adjust <i>Scaling</i> until the servo arm actually has an angle of 30&deg;."
+        "message": "Scaling factor on positive side (above center level). Should be approximately the same as <i>Range neg</i>."
     },
     "servoRate": {
         "message": "Rate"
     },
     "servoRateHelp": {
-        "message": "PWM update rate in Hz. For analog servos, this is usually 50Hz. Higher values can damage analog servos. For digital servos, it can vary from 100Hz to 560Hz. Please check your servo's data sheet."
+        "message": "PWM update rate in Hz. For analog servos, this is usually 50Hz. Higher values can damage analog servos. For digital servos, it can vary from 100Hz to 560Hz. Please check your servo's data sheet.<br><b>Note</b>: select <i>Save and reboot</i> to actually change the update rate, since the update rate can only be set at boot time."
     },
     "servoTrim": {
         "message": "Trim"
@@ -2018,7 +2021,7 @@
         "message": "Reverse"
     },
     "servoReverseHelp": {
-        "message": "Enable <i>Reverse</i> if a servo is not moving in the right direction."
+        "message": "<i>Reverse</i> a servo if it's not moving in the right direction."
     },
     "servoGeometryCorrection": {
         "message": "Geo cor"
@@ -2039,7 +2042,7 @@
         "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!"
     },
     "servoOverride": {
-        "message": "Servo override"
+        "message": "Servo Override"
     },
     "servoOverrideHelp": {
         "message": "Select the servo to be overridden and then move the slider to move the servo arm to the commanded angle."
@@ -2051,7 +2054,7 @@
         "message": "Enable the servo override feature. Setting servo override WILL move the servos to fixed positions."
     },
     "servoOverrideNote": {
-        "message": "<strong>Note:</strong> servo override forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset in reboot."
+        "message": "<strong>Note:</strong> <i>Servo Override</i> forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset after a reboot."
     },
     "servoOverrideEnable": {
         "message": "Enable"

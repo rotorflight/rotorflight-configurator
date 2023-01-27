@@ -21,11 +21,15 @@ TABS.servos.initialize = function (callback) {
             .then(callback);
     }
 
-    function save_data(callback) {
+    function save_data(reboot, callback) {
         mspHelper.sendServoConfigurations(function () {
             MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
                 GUI.log(i18n.getMessage('eepromSaved'));
-                if (callback) callback();
+                if (reboot) {
+                    MSP.send_message(MSPCodes.MSP_SET_REBOOT);
+                    GUI.log(i18n.getMessage('deviceRebooting'));
+                    reinitialiseConnection(callback);
+                } else callback();
             });
         });
     }
@@ -61,7 +65,7 @@ TABS.servos.initialize = function (callback) {
 
             const SERVOS = FC.SERVO_CONFIG;
 
-            for (let index = 0; index < FC.CONFIG.servoCount && index < 4; index++) {
+            for (let index = 0; index < FC.CONFIG.servoCount; index++) {
                 const servo = SERVOS[index];
 
                 if (servo.mid > 860) {
@@ -255,8 +259,15 @@ TABS.servos.initialize = function (callback) {
         enableServoOverrideSwitch.change(function () {
             const checked = enableServoOverrideSwitch.prop('checked');
             FC.CONFIG.servoOverrideDisabled = !checked;
-            if (!checked)
+
+            if (!checked) {
                 mspHelper.resetServoOverrides();
+                for (let i = 0;i  < FC.CONFIG.servoCount; ++i) {
+                    const servoSwitch = $(`.servoOverride${i} .servoOverrideEnable input`);
+                    if (servoSwitch.prop('checked'))
+                        servoSwitch.click();
+                }
+            }
 
             $('.tab-servos .override').toggle(checked);
         });
@@ -271,11 +282,11 @@ TABS.servos.initialize = function (callback) {
 
         self.prevConfig = self.cloneConfig(FC.SERVO_CONFIG);
 
-        self.save = function(callback) {
+        self.save = function(reboot, callback) {
             for (let index = 0; index < FC.CONFIG.servoCount; index++) {
                 update_servo_config(index);
             }
-            save_data(callback);
+            save_data(reboot, callback);
         };
 
         self.revert = function (callback) {
@@ -284,7 +295,11 @@ TABS.servos.initialize = function (callback) {
         };
 
         $('a.save').click(function () {
-            self.save(() => GUI.tab_switch_reload());
+            self.save(false, () => GUI.tab_switch_reload());
+        });
+
+        $('a.save_reboot').click(function () {
+            self.save(true, () => GUI.tab_switch_reload());
         });
 
         $('a.revert').click(function () {
