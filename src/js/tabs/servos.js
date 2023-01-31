@@ -62,6 +62,7 @@ TABS.servos.initialize = function (callback) {
             let unusualRange = false;
             let unusualRate = false;
             let unusualLimit = false;
+            let unusualGeoCor = false;
 
             const SERVOS = FC.SERVO_CONFIG;
 
@@ -89,11 +90,22 @@ TABS.servos.initialize = function (callback) {
                 }
             }
 
+            if (FC.CONFIG.servoCount == 2) {
+                if ((SERVOS[0].flags & 2) != (SERVOS[1].flags & 2))
+                    unusualGeoCor = true;
+            } else if (FC.CONFIG.servoCount >= 3) {
+                if (((SERVOS[0].flags & 2) != (SERVOS[1].flags & 2)) ||
+                    ((SERVOS[1].flags & 2) != (SERVOS[2].flags & 2)) ||
+                    ((SERVOS[0].flags & 2) != (SERVOS[2].flags & 2)))
+                    unusualGeoCor = true;
+            }
+
             $('.servo-unusual-limits-warning').toggle(unusualLimit);
             $('.servo-unusual-ranges-warning').toggle(unusualRange);
             $('.servo-unusual-rates-warning').toggle(unusualRate);
+            $('.servo-unusual-geometry-correction').toggle(unusualGeoCor);
 
-            $('.warnings').toggle(unusualLimit || unusualRange || unusualRate);
+            $('.warnings').toggle(unusualLimit || unusualRange || unusualRate || unusualGeoCor);
         }
 
         function process_override(servoIndex) {
@@ -186,6 +198,9 @@ TABS.servos.initialize = function (callback) {
             servoConfig.find('#rneg').val(SERVO.rneg);
             servoConfig.find('#rpos').val(SERVO.rpos);
             servoConfig.find('#rate').val(SERVO.rate);
+            servoConfig.find('#rate').change(function () {
+                $('.save_reboot').toggle(true);
+            });
             //servoConfig.find('#speed').val(SERVO.speed);
             servoConfig.find('#reversed').prop('checked', revs);
             servoConfig.find('#geocor').prop('checked', geocor);
@@ -273,6 +288,7 @@ TABS.servos.initialize = function (callback) {
         });
 
         $('.tab-servos .override').toggle(!FC.CONFIG.servoOverrideDisabled);
+        $('.save_reboot').toggle(false);
 
         for (let index = 0; index < FC.CONFIG.servoCount; index++) {
             process_config(index);

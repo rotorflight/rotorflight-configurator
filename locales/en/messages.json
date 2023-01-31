@@ -1969,9 +1969,6 @@
     "servoConfiguration": {
         "message": "Servo Configuration"
     },
-    "servoConfigurationHelp": {
-        "message": "Servo configuration"
-    },
     "servoNumber": {
         "message": "Servo"
     },
@@ -2041,6 +2038,9 @@
     "servoUnusualRatesWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!"
     },
+    "servoUnusualGeometryCorrection": {
+        "message": "<span class=\"message-negative\">Warning:</span> The <i>Geometry correction</i> is not equal for all servos. Please check!"
+    },
     "servoOverride": {
         "message": "Servo Override"
     },
@@ -2051,10 +2051,7 @@
         "message": "<strong>Enable servo override</strong>"
     },
     "servoEnableOverrideText": {
-        "message": "Enable the servo override feature. Setting servo override WILL move the servos to fixed positions."
-    },
-    "servoOverrideNote": {
-        "message": "<strong>Note:</strong> <i>Servo Override</i> forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset after a reboot."
+        "message": " <i>Servo override</i> forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset after a reboot."
     },
     "servoOverrideEnable": {
         "message": "Enable"

@@ -214,12 +214,6 @@
     color: #ffffff;
 }
 
-.tab-servos .servoOverrideNote {
-    line-height: 16px;
-    font-size: 12px;
-    padding: 10px;
-}
-
 .tab-servos .servoOverride {
     width: 100%;
     border: 0;
