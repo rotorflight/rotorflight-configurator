@@ -201,7 +201,7 @@ TABS.servos.initialize = function (callback) {
             servoConfig.find('#rate').change(function () {
                 $('.save_reboot').toggle(true);
             });
-            //servoConfig.find('#speed').val(SERVO.speed);
+            servoConfig.find('#speed').val(SERVO.speed);
             servoConfig.find('#reversed').prop('checked', revs);
             servoConfig.find('#geocor').prop('checked', geocor);
 
@@ -224,7 +224,7 @@ TABS.servos.initialize = function (callback) {
             FC.SERVO_CONFIG[servoIndex].rneg = parseInt($('#rneg',servo).val());
             FC.SERVO_CONFIG[servoIndex].rpos = parseInt($('#rpos',servo).val());
             FC.SERVO_CONFIG[servoIndex].rate = parseInt($('#rate',servo).val());
-            //FC.SERVO_CONFIG[servoIndex].speed = parseInt($('#speed',servo).val());
+            FC.SERVO_CONFIG[servoIndex].speed = parseInt($('#speed',servo).val());
             FC.SERVO_CONFIG[servoIndex].flags =  $('#reversed',servo).prop('checked') ? 1 : 0;
             FC.SERVO_CONFIG[servoIndex].flags |=  $('#geocor',servo).prop('checked') ? 2 : 0;
         }
@@ -342,7 +342,7 @@ TABS.servos.cloneConfig = function (servos) {
     const clone = [];
 
     function cloneServo(a) {
-        return { mid: a.mid, min: a.min, max: a.max, rneg: a.rneg, rpos: a.rpos, rate: a.rate, flags: a.flags /* , speed: a.speed */  };
+        return { mid: a.mid, min: a.min, max: a.max, rneg: a.rneg, rpos: a.rpos, rate: a.rate, speed: a.speed, flags: a.flags };
     };
 
     servos.forEach(function (item) {

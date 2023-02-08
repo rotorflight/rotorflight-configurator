@@ -2003,16 +2003,16 @@
         "message": "Scaling factor on positive side (above center level). Should be approximately the same as <i>Range neg</i>."
     },
     "servoRate": {
-        "message": "Rate"
+        "message": "Rate [Hz]"
     },
     "servoRateHelp": {
         "message": "PWM update rate in Hz. For analog servos, this is usually 50Hz. Higher values can damage analog servos. For digital servos, it can vary from 100Hz to 560Hz. Please check your servo's data sheet.<br><b>Note</b>: select <i>Save and reboot</i> to actually change the update rate, since the update rate can only be set at boot time."
     },
-    "servoTrim": {
-        "message": "Trim"
-    },
     "servoSpeed": {
         "message": "Speed [ms]"
+    },
+    "servoSpeedHelp": {
+        "message": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 60&deg;."
     },
     "servoReverse": {
         "message": "Reverse"

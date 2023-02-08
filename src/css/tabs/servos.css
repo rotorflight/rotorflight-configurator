@@ -166,11 +166,15 @@
 }
 
 .tab-servos .servoConfig td:nth-child(8) {
+    width: 80px;
+}
+
+.tab-servos .servoConfig td:nth-child(9) {
     width: 70px;
     text-align: center;
 }
 
-.tab-servos .servoConfig td:nth-child(9) {
+.tab-servos .servoConfig td:nth-child(10) {
     width: 70px;
     text-align: center;
 }
