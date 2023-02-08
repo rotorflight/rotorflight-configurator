@@ -59,7 +59,7 @@ TABS.servos.initialize = function (callback) {
 
         function process_warnings() {
 
-            let unusualRange = false;
+            let unusualScale = false;
             let unusualRate = false;
             let unusualLimit = false;
             let unusualGeoCor = false;
@@ -77,7 +77,7 @@ TABS.servos.initialize = function (callback) {
                         unusualLimit = true;
 
                     if (servo.rneg < 250 || servo.rneg > 750 || servo.rpos <  250 || servo.rpos >  750)
-                        unusualRange = true;
+                        unusualScale = true;
                 } else {
                     if (servo.rate > 560)
                         unusualRate = true;
@@ -86,7 +86,7 @@ TABS.servos.initialize = function (callback) {
                         unusualLimit = true;
 
                     if (servo.rneg < 125 || servo.rneg > 300 || servo.rpos <  125 || servo.rpos >  300)
-                        unusualRange = true;
+                        unusualScale = true;
                 }
             }
 
@@ -101,11 +101,11 @@ TABS.servos.initialize = function (callback) {
             }
 
             $('.servo-unusual-limits-warning').toggle(unusualLimit);
-            $('.servo-unusual-ranges-warning').toggle(unusualRange);
+            $('.servo-unusual-scales-warning').toggle(unusualScale);
             $('.servo-unusual-rates-warning').toggle(unusualRate);
             $('.servo-unusual-geometry-correction').toggle(unusualGeoCor);
 
-            $('.warnings').toggle(unusualLimit || unusualRange || unusualRate || unusualGeoCor);
+            $('.warnings').toggle(unusualLimit || unusualScale || unusualRate || unusualGeoCor);
         }
 
         function process_override(servoIndex) {

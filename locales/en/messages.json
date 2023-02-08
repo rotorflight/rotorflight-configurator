@@ -1964,7 +1964,7 @@
         "message": "Swash Phase Angle"
     },
     "servoHelp": {
-        "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arms should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Range</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Range</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
+        "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arms should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
     },
     "servoConfiguration": {
         "message": "Servo Configuration"
@@ -1990,17 +1990,17 @@
     "servoMaxHelp": {
         "message": "Maximum pulse width. Higher values can increase servo throw. Use lower values to avoid servo binding."
     },
-    "servoRangeNeg": {
-        "message": "Range neg"
+    "servoScaleNeg": {
+        "message": "Scale neg"
     },
-    "servoRangeNegHelp": {
-        "message": "Scaling factor on negative side (below center level). Should be about the same as <i>Range pos</i>."
+    "servoScaleNegHelp": {
+        "message": "Scaling factor on negative side (below center level). Should be about the same as <i>Scale pos</i>."
     },
-    "servoRangePos": {
-        "message": "Range pos"
+    "servoScalePos": {
+        "message": "Scale pos"
     },
-    "servoRangePosHelp": {
-        "message": "Scaling factor on positive side (above center level). Should be approximately the same as <i>Range neg</i>."
+    "servoScalePosHelp": {
+        "message": "Scaling factor on positive side (above center level). Should be approximately the same as <i>Scale neg</i>."
     },
     "servoRate": {
         "message": "Rate [Hz]"
@@ -2032,8 +2032,8 @@
     "servoUnusualLimitsWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!"
     },
-    "servoUnusualRangesWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Ranges</i> are set to unusual values. Please check!"
+    "servoUnusualScalesWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Scales</i> are set to unusual values. Please check!"
     },
     "servoUnusualRatesWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!"
