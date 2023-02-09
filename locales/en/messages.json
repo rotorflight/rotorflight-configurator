@@ -1963,19 +1963,10 @@
     "adjustmentsFunctionSwashPhase": {
         "message": "Swash Phase Angle"
     },
-    "servoSettings": {
-        "message": "Servo Settings"
-    },
-    "servoPwmRate": {
-        "message": "Servo update rate"
-    },
-    "servoPwmRateHelp": {
-        "message": "Rate for servo position updates in Hz. Also known as PWM rate. For analog servos, this is always 50Hz. For digital servos, it can vary from 125Hz to 400Hz. Please check your servo's data sheet."
+    "servoHelp": {
+        "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arms should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
     },
     "servoConfiguration": {
-        "message": "Servo Configuration"
-    },
-    "servoConfigurationHelp": {
         "message": "Servo Configuration"
     },
     "servoNumber": {
@@ -1984,47 +1975,83 @@
     "servoMid": {
         "message": "Center"
     },
+    "servoMidHelp": {
+        "message": "Center position in µs. Servo arms should be level in this position."
+    },
     "servoMin": {
         "message": "Min"
+    },
+    "servoMinHelp": {
+        "message": "Minimum pulse width. Lower values can increase servo throw. Use higher values to avoid servo binding."
     },
     "servoMax": {
         "message": "Max"
     },
-    "servoRate": {
-        "message": "Rate"
+    "servoMaxHelp": {
+        "message": "Maximum pulse width. Higher values can increase servo throw. Use lower values to avoid servo binding."
     },
-    "servoTrim": {
-        "message": "Trim"
+    "servoScaleNeg": {
+        "message": "Scale neg"
+    },
+    "servoScaleNegHelp": {
+        "message": "Scaling factor on negative side (below center level). Should be about the same as <i>Scale pos</i>."
+    },
+    "servoScalePos": {
+        "message": "Scale pos"
+    },
+    "servoScalePosHelp": {
+        "message": "Scaling factor on positive side (above center level). Should be approximately the same as <i>Scale neg</i>."
+    },
+    "servoRate": {
+        "message": "Rate [Hz]"
+    },
+    "servoRateHelp": {
+        "message": "PWM update rate in Hz. For analog servos, this is usually 50Hz. Higher values can damage analog servos. For digital servos, it can vary from 100Hz to 560Hz. Please check your servo's data sheet.<br><b>Note</b>: select <i>Save and reboot</i> to actually change the update rate, since the update rate can only be set at boot time."
     },
     "servoSpeed": {
         "message": "Speed [ms]"
     },
+    "servoSpeedHelp": {
+        "message": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 60&deg;."
+    },
     "servoReverse": {
         "message": "Reverse"
+    },
+    "servoReverseHelp": {
+        "message": "<i>Reverse</i> a servo if it's not moving in the right direction."
+    },
+    "servoGeometryCorrection": {
+        "message": "Geo cor"
+    },
+    "servoGeometryCorrectionHelp": {
+        "message": "Enable <i>Geo cor</i> for correcting the rotational geometry. Do not use with linear servos."
     },
     "servoSignal": {
         "message": "PWM Signal"
     },
-    "servoUnusualRatesWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!"
-    },
-    "servoUnequalRatesWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The cyclic servo <i>Rates</i> are not equal. Please check!"
-    },
     "servoUnusualLimitsWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!"
     },
-    "servoUnequalLimitsWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The aileron servo <i>Limits</i> are not equal. Please check!"
+    "servoUnusualScalesWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Scales</i> are set to unusual values. Please check!"
     },
-    "servoOverrideNote": {
-        "message": "<strong>Note.</strong> Servo Override forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset in reboot."
+    "servoUnusualRatesWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!"
+    },
+    "servoUnusualGeometryCorrection": {
+        "message": "<span class=\"message-negative\">Warning:</span> The <i>Geometry correction</i> is not equal for all servos. Please check!"
     },
     "servoOverride": {
         "message": "Servo Override"
     },
     "servoOverrideHelp": {
-        "message": "Select the Override via the switch and then move the slider to move the servo arm to the commanded angle. "
+        "message": "Select the servo to be overridden and then move the slider to move the servo arm to the commanded angle."
+    },
+    "servoEnableOverrideLabel": {
+        "message": "<strong>Enable servo override</strong>"
+    },
+    "servoEnableOverrideText": {
+        "message": " <i>Servo override</i> forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset after a reboot."
     },
     "servoOverrideEnable": {
         "message": "Enable"

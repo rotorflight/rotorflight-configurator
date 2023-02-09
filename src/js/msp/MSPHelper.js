@@ -449,8 +449,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_SERVO_CONFIGURATIONS:
                 FC.SERVO_CONFIG = []; // empty the array as new data is coming in
-                if (data.byteLength % 12 == 0) {
-                    for (let i = 0; i < data.byteLength; i += 12) {
+                if (data.byteLength % 16 == 0) {
+                    for (let i = 0; i < data.byteLength; i += 16) {
                         const arr = {
                             'mid':       data.readU16(),
                             'min':       data.read16(),
@@ -458,6 +458,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                             'rneg':      data.read16(),
                             'rpos':      data.read16(),
                             'rate':      data.read16(),
+                            'speed':     data.readU16(),
                             'flags':     data.read16()
                         };
                         FC.SERVO_CONFIG.push(arr);
@@ -2112,6 +2113,7 @@ MspHelper.prototype.sendServoConfig = function(servoIndex, onCompleteCallback)
           .push16(CONFIG.rneg)
           .push16(CONFIG.rpos)
           .push16(CONFIG.rate)
+          .push16(CONFIG.speed)
           .push16(CONFIG.flags);
 
     MSP.send_message(MSPCodes.MSP_SET_SERVO_CONFIGURATION, buffer, false, onCompleteCallback);

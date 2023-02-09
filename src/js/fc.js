@@ -433,7 +433,6 @@ const FC = {
         this.ADVANCED_CONFIG = {
             gyro_sync_denom:            1,
             pid_process_denom:          1,
-            servo_pwm_rate:             0,
         };
 
         this.FILTER_CONFIG = {

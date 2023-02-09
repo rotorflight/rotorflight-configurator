@@ -105,6 +105,15 @@
     border-top: 1px solid var(--boxBackground);
 }
 
+.tab-servos .trhead .thtext {
+    color: var(--quietText);
+    background-color: var(--button-background);
+    text-align: center;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 16px;
+}
+
 @media all and (max-width: 575px) {
     .tab-servos .servoConfig th {
         min-width: 30px;
@@ -157,7 +166,16 @@
 }
 
 .tab-servos .servoConfig td:nth-child(8) {
-    width: 60px;
+    width: 80px;
+}
+
+.tab-servos .servoConfig td:nth-child(9) {
+    width: 70px;
+    text-align: center;
+}
+
+.tab-servos .servoConfig td:nth-child(10) {
+    width: 70px;
     text-align: center;
 }
 
@@ -198,12 +216,6 @@
 
 .tab-servos .meter-fill-label {
     color: #ffffff;
-}
-
-.tab-servos .servoOverrideNote {
-    line-height: 16px;
-    font-size: 12px;
-    padding: 10px;
 }
 
 .tab-servos .servoOverride {
@@ -280,6 +292,23 @@
     padding-top: 15px;
 }
 
+.tab-servos .overrides tr .td1 {
+    width: 50px;
+    padding-right: 14px;
+}
+
+.tab-servos .overrides tr .td2 {
+    padding-right: 14px;
+}
+
+.tab-servos .overrides tr .td3 {
+    width: 75%;
+}
+
+.tab-servos .note li {
+    list-style: disc;
+    margin-left: 20px;
+}
 
 @media all and (max-width: 575px) {
     .tab-servos .gui_box {

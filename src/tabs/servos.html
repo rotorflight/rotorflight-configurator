@@ -5,53 +5,59 @@
             <a id="button-documentation" href="" target="_blank"></a>
         </div>
 
+        <div class="note">
+            <p i18n="servoHelp"></p>
+        </div>
+
         <!-- CONFIGURATION -->
         <div class="configuration">
-            <div class="grid-row">
-                <div class="grid-col col6">
-
-                    <!-- SERVO SETTINGS -->
-                    <div class="gui_box grey">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="servoSettings"></div>
-                        </div>
-                        <div class="spacer_box">
-                            <table class="servoSettings">
-                                <tr>
-                                    <td>
-                                        <input type="number" id="servoPwmRate" min="50" max="498" />
-                                    </td>
-                                    <td>
-                                        <span i18n="servoPwmRate"></span>
-                                        <div class="helpicon cf_tip" i18n_title="servoPwmRateHelp"></div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
             <div class="grid-row">
                 <div class="grid-col full-width">
                     <div class="gui_box">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="servoConfiguration"></div>
-                            <div class="helpicon cf_tip" i18n_title="servoConfigurationHelp"></div>
                         </div>
                         <div>
                             <table class="servoConfig">
                                 <thead>
                                     <tr class="trhead">
                                         <th i18n="servoNumber"></th>
-                                        <th i18n="servoMid"></th>
-                                        <th i18n="servoMin"></th>
-                                        <th i18n="servoMax"></th>
-                                        <th i18n="servoRate"></th>
-                                        <th i18n="servoTrim"></th>
-                                        <th i18n="servoSpeed"></th>
-                                        <th i18n="servoReverse"></th>
+                                        <th>
+                                            <span class="thtext" i18n="servoMid"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoMidHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoMin"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoMinHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoMax"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoMaxHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoScaleNeg"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoScaleNegHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoScalePos"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoScalePosHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoRate"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoRateHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoSpeed"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoSpeedHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoReverse"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoReverseHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoGeometryCorrection"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoGeometryCorrectionHelp"></span>
+                                        </th>
                                         <th i18n="servoSignal"></th>
                                     </tr>
                                 </thead>
@@ -71,17 +77,17 @@
             <div class="grid-row">
                 <div class="grid-col full-width">
                     <div class="note">
-                        <div class="warning servo-unusual-rates-warning">
-                            <p i18n="servoUnusualRatesWarning"></p>
-                        </div>
-                        <div class="warning servo-unequal-rates-warning">
-                            <p i18n="servoUnequalRatesWarning"></p>
-                        </div>
                         <div class="warning servo-unusual-limits-warning">
                             <p i18n="servoUnusualLimitsWarning"></p>
                         </div>
-                        <div class="warning servo-unequal-limits-warning">
-                            <p i18n="servoUnequalLimitsWarning"></p>
+                        <div class="warning servo-unusual-scales-warning">
+                            <p i18n="servoUnusualScalesWarning"></p>
+                        </div>
+                        <div class="warning servo-unusual-rates-warning">
+                            <p i18n="servoUnusualRatesWarning"></p>
+                        </div>
+                        <div class="warning servo-unusual-geometry-correction">
+                            <p i18n="servoUnusualGeometryCorrection"></p>
                         </div>
                     </div>
                 </div>
@@ -89,24 +95,32 @@
         </div>
         <!-- END WARNINGS -->
 
-        <!-- OVERRIDE -->
-        <div class="override">
+        <!-- OVERRIDES -->
+        <div class="overrides">
             <div class="grid-row margin-top">
                 <div class="grid-col full-width">
-                    <div class="note servoOverrideNote">
-                        <p i18n="servoOverrideNote"></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid-row">
-                <div class="grid-col full-width">
-                    <div class="gui_box">
+                    <div class="gui_box grey">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="servoOverride"></div>
                             <div class="helpicon cf_tip" i18n_title="servoOverrideHelp"></div>
                         </div>
-                        <div>
+                        <div class="spacer_box">
+                            <table class="servoSettings">
+                                <tr>
+                                    <td class="td1">
+                                        <input type="checkbox" id="servoEnableOverrideSwitch" class="toggle" />
+                                    </td>
+                                    <td class="td2">
+                                        <span i18n="servoEnableOverrideLabel"></span>
+                                    </td>
+                                    <td class="td3">
+                                        <span class="description" i18n="servoEnableOverrideText"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="override">
                             <table class="servoOverride">
                                 <thead>
                                     <tr class="trhead">
@@ -124,6 +138,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <!-- END OVERRIDE -->
 
@@ -135,6 +150,9 @@
         </div>
         <div class="btn save_btn">
             <a class="save" href="#" i18n="buttonSave"></a>
+        </div>
+        <div class="btn save_btn">
+            <a class="save_reboot" href="#" i18n="buttonSaveReboot"></a>
         </div>
     </div>
 
@@ -149,10 +167,12 @@
                 <td><input id="mid" type="number" min="375" max="2250" /></td>
                 <td><input id="min" type="number" min="-1000" max="1000" /></td>
                 <td><input id="max" type="number" min="-1000" max="1000" /></td>
-                <td><input id="rate" type="number" min="0" max="2500" /></td>
-                <td><input id="trim" type="number" min="-250" max="250" /></td>
-                <td><input id="speed" type="number" min="0" max="10000" /></td>
+                <td><input id="rneg" type="number" min="100" max="1000" /></td>
+                <td><input id="rpos" type="number" min="100" max="1000" /></td>
+                <td><input id="rate" type="number" min="50" max="1000" /></td>
+                <td><input id="speed" type="number" min="0" max="60000" /></td>
                 <td><input id="reversed" type="checkbox" class="toggle" /></td>
+                <td><input id="geocor" type="checkbox" class="toggle" /></td>
                 <td><div class="meter">
                         <div class="meter-bar">
                             <div class="meter-label"></div>
