@@ -979,11 +979,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.PID_PROFILE.rescueClimbCollective         = data.readU16();
                 FC.PID_PROFILE.rescueHoverCollective         = data.readU16();
                 FC.PID_PROFILE.rescueHoverAltitude           = data.readU16();
-                FC.PID_PROFILE.rescueAltitudeAGain           = data.readU16();
                 FC.PID_PROFILE.rescueAltitudePGain           = data.readU16();
                 FC.PID_PROFILE.rescueAltitudeIGain           = data.readU16();
                 FC.PID_PROFILE.rescueMaxCollective           = data.readU16();
-                FC.PID_PROFILE.rescueMaxClimbRate            = data.readU16();
                 FC.PID_PROFILE.rescueMaxRate                 = data.readU16();
                 FC.PID_PROFILE.rescueMaxAccel                = data.readU16();
                 break;
@@ -1786,11 +1784,9 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.PID_PROFILE.rescueClimbCollective)
                 .push16(FC.PID_PROFILE.rescueHoverCollective)
                 .push16(FC.PID_PROFILE.rescueHoverAltitude)
-                .push16(FC.PID_PROFILE.rescueAltitudeAGain)
                 .push16(FC.PID_PROFILE.rescueAltitudePGain)
                 .push16(FC.PID_PROFILE.rescueAltitudeIGain)
                 .push16(FC.PID_PROFILE.rescueMaxCollective)
-                .push16(FC.PID_PROFILE.rescueMaxClimbRate)
                 .push16(FC.PID_PROFILE.rescueMaxRate)
                 .push16(FC.PID_PROFILE.rescueMaxAccel);
             break;

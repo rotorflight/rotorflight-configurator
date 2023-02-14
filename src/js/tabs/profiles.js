@@ -184,7 +184,6 @@ TABS.profiles.initialize = function (callback) {
         });
 
         rescueModeCheck.prop('checked', FC.PID_PROFILE.rescueMode > 0).change();
-
         $('.tab-profiles select[id="rescueFlipMode"]').val(FC.PID_PROFILE.rescueFlipMode);
         $('.tab-profiles input[id="rescuePullupCollective"]').val(FC.PID_PROFILE.rescuePullupCollective);
         $('.tab-profiles input[id="rescueClimbCollective"]').val(FC.PID_PROFILE.rescueClimbCollective);
@@ -198,11 +197,9 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="rescueFlipTime"]').val(FC.PID_PROFILE.rescueFlipTime / 10).change();
         $('.tab-profiles input[id="rescueExitTime"]').val(FC.PID_PROFILE.rescueExitTime / 10).change();
         $('.tab-profiles input[id="rescueHoverAltitude"]').val(FC.PID_PROFILE.rescueHoverAltitude);
-        $('.tab-profiles input[id="rescueAltitudeAGain"]').val(FC.PID_PROFILE.rescueAltitudeAGain);
         $('.tab-profiles input[id="rescueAltitudePGain"]').val(FC.PID_PROFILE.rescueAltitudePGain);
         $('.tab-profiles input[id="rescueAltitudeIGain"]').val(FC.PID_PROFILE.rescueAltitudeIGain);
         $('.tab-profiles input[id="rescueMaxCollective"]').val(FC.PID_PROFILE.rescueMaxCollective);
-        $('.tab-profiles input[id="rescueMaxClimbRate"]').val(FC.PID_PROFILE.rescueMaxClimbRate);
 
         const checked = FC.SENSOR_CONFIG.baro_hardware !== 1;
         $('.tab-profiles .BaroEnable .invoption').toggle(!checked);
@@ -286,11 +283,9 @@ TABS.profiles.initialize = function (callback) {
         FC.PID_PROFILE.rescueFlipTime = $('.tab-profiles input[id="rescueFlipTime"]').val() * 10;
         FC.PID_PROFILE.rescueExitTime = $('.tab-profiles input[id="rescueExitTime"]').val() * 10;
         FC.PID_PROFILE.rescueHoverAltitude = $('.tab-profiles input[id="rescueHoverAltitude"]').val();
-        FC.PID_PROFILE.rescueAltitudeAGain = $('.tab-profiles input[id="rescueAltitudeAGain"]').val();
         FC.PID_PROFILE.rescueAltitudePGain = $('.tab-profiles input[id="rescueAltitudePGain"]').val();
         FC.PID_PROFILE.rescueAltitudeIGain = $('.tab-profiles input[id="rescueAltitudeIGain"]').val();
         FC.PID_PROFILE.rescueMaxCollective = $('.tab-profiles input[id="rescueMaxCollective"]').val();
-        FC.PID_PROFILE.rescueMaxClimbRate = $('.tab-profiles input[id="rescueMaxClimbRate"]').val();
         // Yaw settings //
         FC.PID_PROFILE.yawStopGainCW = $('.tab-profiles input[id="yawStopGainCW"]').val();
         FC.PID_PROFILE.yawStopGainCCW = $('.tab-profiles input[id="yawStopGainCCW"]').val();
