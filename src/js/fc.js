@@ -544,11 +544,9 @@ const FC = {
             rescueClimbCollective:      0,
             rescueHoverCollective:      0,
             rescueHoverAltitude:        0,
-            rescueAltitudeAGain:        0,
             rescueAltitudePGain:        0,
             rescueAltitudeIGain:        0,
             rescueMaxCollective:        0,
-            rescueMaxClimbRate:         0,
             rescueMaxRate:              0,
             rescueMaxAccel:             0,
         };
