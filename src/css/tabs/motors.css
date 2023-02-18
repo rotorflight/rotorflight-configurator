@@ -193,6 +193,24 @@
     background-color: #f1453d;
 }
 
+.tab-motors .motorOverrideSet {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 1px;
+    table-layout: auto;
+    border: 0;
+    border-collapse: collapse;
+}
+
+.tab-motors  .motorOverrideSet tr td {
+    padding: 5px 0 0 5px;
+}
+
+.tab-motors  .motorOverrideSet tr td:first-child {
+    width: 80px;
+    padding-right: 20px;
+}
 
 .tab-motors .motorOverrideNote {
     padding: 15px 15px;
