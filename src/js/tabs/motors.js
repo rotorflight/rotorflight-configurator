@@ -225,7 +225,7 @@ TABS.motors.initialize = function (callback) {
             meterLabel(tailspeedBar, '0RPM', tailspeedMax + ' RPM');
             meterLabel(voltBar, '0V', voltMax.toFixed(0) + 'V');
             meterLabel(currBar, '0A', currMax.toFixed(0) + 'A');
-            meterLabel(tempBar, '0&degC', '150&degC');
+            meterLabel(tempBar, '0&deg;C', '150&deg;C');
             meterLabel(errorBar, '0%', '100%');
 
             function roundTo(value, step) {
@@ -301,7 +301,7 @@ TABS.motors.initialize = function (callback) {
                 meterBar(currBar, curr.toFixed(1) + 'A', curr/currMax);
 
                 const temp = FC.MOTOR_TELEMETRY_DATA.temperature[motorIndex];
-                meterBar(tempBar, temp + '&degC', temp/tempMax);
+                meterBar(tempBar, temp + '&deg;C', temp/tempMax);
 
                 const ratio = FC.MOTOR_TELEMETRY_DATA.invalidPercent[motorIndex] / 100;
                 meterBar(errorBar, ratio + '%', ratio / 100);
