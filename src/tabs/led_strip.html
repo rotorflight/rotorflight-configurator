@@ -82,10 +82,39 @@
             </div>
 
             <div class="blinkers extra_functions20">
-                <span class="color_section" i18n="ledStripBlinkTitle"></span>
+                <div class="color_section" i18n="ledStripBlinkTitle"></div>
                 <div class="checkbox blinkOverlay">
                     <input type="checkbox" name="blink" class="toggle function-b" />
-                    <label> <span i18n="ledStripBlinkAlwaysOverlay"></span></label>
+                    <span id="blinkbits" class="blinkbits">
+                        <span class="blinkbits-nibble">
+                            <input id="blinkbit-15" class="blinkbit" type="checkbox" />
+                            <input id="blinkbit-14" class="blinkbit" type="checkbox" />
+                            <input id="blinkbit-13" class="blinkbit" type="checkbox" />
+                            <input id="blinkbit-12" class="blinkbit" type="checkbox" />
+                        </span>
+                        <span class="blinkbits-nibble">
+                            <input id="blinkbit-11" class="blinkbit" type="checkbox" />
+                            <input id="blinkbit-10" class="blinkbit" type="checkbox" />
+                            <input id="blinkbit-9" class="blinkbit" type="checkbox" />
+                            <input id="blinkbit-8" class="blinkbit" type="checkbox" />
+                        </span>
+                        <span class="blinkbits-nibble">
+                            <input id="blinkbit-7" class="blinkbit" type="checkbox" />
+                            <input id="blinkbit-6" class="blinkbit" type="checkbox" />
+                            <input id="blinkbit-5" class="blinkbit" type="checkbox" />
+                            <input id="blinkbit-4" class="blinkbit" type="checkbox" />
+                        </span>
+                        <span class="blinkbits-nibble">
+                            <input id="blinkbit-3" class="blinkbit" type="checkbox" />
+                            <input id="blinkbit-2" class="blinkbit" type="checkbox" />
+                            <input id="blinkbit-1" class="blinkbit" type="checkbox" />
+                            <input id="blinkbit-0" class="blinkbit" type="checkbox" />
+                        </span>
+                        <label>
+                            <span i18n="ledStripBlinkPause"></span>
+                            <input type="number" id="blinkPause" step="1" min="0" max="15" />
+                        </label>
+                    </span>
                 </div>
                 <div class="checkbox landingBlinkOverlay">
                     <input type="checkbox" name="landingBlink" class="toggle function-n" />
@@ -106,6 +135,14 @@
                 <div class="checkbox vtxOverlay">
                     <input type="checkbox" name="Vtx" class="toggle function-v" />
                     <label> <span i18n="ledStripVtxOverlay"></span></label>
+                </div>
+                <div class="checkbox fadeOverlay">
+                    <input type="checkbox" name="Fade" class="toggle function-d" />
+                    <label> <span i18n="ledStripFadeOverlay"></span></label>
+                </div>
+                <div class="checkbox flickerOverlay">
+                    <input type="checkbox" name="Flicker" class="toggle function-k" />
+                    <label> <span i18n="ledStripFlickerOverlay"></span></label>
                 </div>
             </div>
 
@@ -129,7 +166,7 @@
                 <button class="mode_color-0-5 dir-d" i18n="ledStripDirD"></button>
             </div>
 
-            <div class="section" i18n="ledStripModesOrientationTitle"></div>
+            <div class="section" i18n="ledStripModesColorTitle"></div>
             <div class="directions">
                 <button class="dir-n" i18n="ledStripDirN"></button>
                 <button class="dir-e" i18n="ledStripDirE"></button>
@@ -197,6 +234,42 @@
                 <button class="funcWireClear w50" i18n="ledStripWiringClearAllControl"></button>
             </div>
             <p i18n="ledStripWiringMessage"></p>
+
+            <div class="section" i18n="ledStripGlobalSettings"></div>
+            <div class="select">
+                <span class="color_section" i18n="ledStripProfileTitle"></span>
+                <select id="ledStripProfile" class="profileSelect">
+                    <option value="0" i18n="ledStripProfileRaceOption"></option>
+                    <option value="1" i18n="ledStripProfileBeaconOption"></option>
+                    <option value="2" i18n="ledStripProfileStatusOption"></option>
+                    <option value="3" i18n="ledStripProfileStatusAltOption"></option>
+                </select>
+            </div>
+            <div class="number">
+                <label>
+                    <input type="number" id="globalBlinkRate" step="1" min="30" max="300" />
+                    <span i18n="ledStripGlobalBlinkRate"></span>
+                </label>
+            </div>
+            <div class="number">
+                <label>
+                    <input type="number" id="globalFadeRate" step="1" min="1" max="100" />
+                    <span i18n="ledStripGlobalFadeRate"></span>
+                </label>
+            </div>
+            <div class="number">
+                <label>
+                    <input type="number" id="globalFlickerRate" step="1" min="0" max="100" />
+                    <span i18n="ledStripGlobalFlickerRate"></span>
+                </label>
+            </div>
+            <div class="number">
+                <label>
+                    <input type="number" id="globalBrightness" step="1" min="5" max="100" />
+                    <span i18n="ledStripGlobalBrightness"></span>
+                </label>
+            </div>
+
         </div>
 
         <div class="colorControls">
