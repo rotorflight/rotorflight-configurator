@@ -364,7 +364,6 @@ const FC = {
             motor_poles:                [ 0, 0, 0, 0 ],
             motor_rpm_lpf:              [ 0, 0, 0, 0 ],
             use_dshot_telemetry:        false,
-            use_pwm_inversion:          false,
             use_unsynced_pwm:           false,
             main_rotor_gear_ratio:      [ 1, 1 ],
             tail_rotor_gear_ratio:      [ 1, 1 ],
