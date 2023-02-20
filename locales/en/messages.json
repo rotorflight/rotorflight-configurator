@@ -2423,10 +2423,10 @@
         "message": "Gear ratio between the main rotor and the tail rotor <br><strong>[tail gear]/[autorotation gear]</strong> tooth count <br>For a direct drive motorized tail use [ 1 ]/[ 1 ]"
     },
     "motorsMotorPoles1Long": {
-        "message": "Motor #1 pole count"
+        "message": "Main Motor pole count (M1)"
     },
     "motorsMotorPoles2Long": {
-        "message": "Motor #2 pole count"
+        "message": "Tail Motor pole count (M2)"
     },
     "motorsMotorPoles3Long": {
         "message": "Motor #3 pole count"
@@ -2452,6 +2452,12 @@
     "motorsThrottleMinimumCommandHelp": {
         "message": "This is the value that is sent to the ESCs when the craft is disarmed. Set this to a value that has the motors stopped (1000 for most ESCs)."
     },
+    "motorMain": {
+        "message": " - Main Motor"
+    },
+    "motorTail": {
+        "message": " - Tail Motor"
+    },
     "motorInfo": {
         "message": "Motor #$1"
     },
@@ -2460,6 +2466,12 @@
     },
     "motorRPM": {
         "message": "RPM:"
+    },
+    "motorHeadspeed": {
+        "message": "Headspeed:"
+    },
+    "motorTailspeed": {
+        "message": "Tailspeed:"
     },
     "motorVoltage": {
         "message": "Voltage:"
@@ -3788,12 +3800,6 @@
     "profilesrescueHoverAltitudeHelp": {
         "message": "Hover Altitude for altitude hold in rescue mode"
     },
-    "profilesrescueAltitudeAGain": {
-        "message": "Altitude Hold - A Gain"
-    },
-    "profilesrescueAltitudeAGainHelp": {
-        "message": "Altitude to climb-rate gain"
-    },
     "profilesrescueAltitudePGain": {
         "message": "Altitude Hold - P Gain"
     },
@@ -3811,12 +3817,6 @@
     },
     "profilesrescueMaxCollectiveHelp": {
         "message": "Maximum Collective to apply in Level hold rescue"
-    },
-    "profilesrescueMaxClimbRate": {
-        "message": "Altitude Hold - Rescue Max Climb rate"
-    },
-    "profilesrescueMaxClimbRateHelp": {
-        "message": "Maximum climb rate setpoint when in altitude hold."
     },
     "baroConfigurationNote": {
         "message": "<strong>Note:</strong> Barometer must be enabled to use Altitude Hold features. See Configuration Tab."
