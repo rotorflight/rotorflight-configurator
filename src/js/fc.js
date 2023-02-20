@@ -125,6 +125,7 @@ const FC = {
     LED_COLORS: null,
     LED_MODE_COLORS: null,
     LED_STRIP: null,
+    LED_STRIP_CONFIG: null,
     MIXER_CONFIG: null,
     MIXER_INPUTS: null,
     MIXER_RULES: null,
@@ -219,6 +220,22 @@ const FC = {
         this.LED_STRIP =                [];
         this.LED_COLORS =               [];
         this.LED_MODE_COLORS =          [];
+
+        this.LED_STRIP_CONFIG = {
+            ledstrip_beacon_armed_only:     0,
+            ledstrip_beacon_color:          0,
+            ledstrip_beacon_percent:        0,
+            ledstrip_beacon_period_ms:      0,
+            ledstrip_blink_period_ms:       0,
+            ledstrip_brightness:            0,
+            ledstrip_fade_rate:             0,
+            ledstrip_flicker_rate:          0,
+            ledstrip_grb_rgb:               0,
+            ledstrip_profile:               0,
+            ledstrip_race_color:            0,
+            ledstrip_visual_beeper:         0,
+            ledstrip_visual_beeper_color:   0
+        };
 
         this.PID = {
             controller:                 0,

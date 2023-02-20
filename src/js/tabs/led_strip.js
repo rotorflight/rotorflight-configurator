@@ -18,6 +18,7 @@ TABS.led_strip.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_LED_STRIP_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_LED_STRIP_MODECOLOR))
             .then(() => MSP.promise(MSPCodes.MSP_LED_COLORS))
+            .then(() => MSP.promise(MSPCodes.MSP_LED_STRIP_SETTINGS))
             .then(callback);
     }
 
@@ -25,12 +26,13 @@ TABS.led_strip.initialize = function (callback) {
         mspHelper.sendLedStripConfig(() =>
         mspHelper.sendLedStripColors(() =>
         mspHelper.sendLedStripModeColors(() =>
+        mspHelper.sendLedStripSettings(() =>
         MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, () =>
         {
             GUI.log(i18n.getMessage('eepromSaved'));
             if (callback) callback();
         }
-        ))));
+        )))));
     }
 
     function load_html() {
@@ -45,7 +47,7 @@ TABS.led_strip.initialize = function (callback) {
 
     self.functions = ['i', 'w', 'f', 'a', 't', 'r', 'c', 'g', 's', 'b', 'l', 'o', 'n'];
     self.baseFuncs = ['c', 'f', 'a', 'l', 's', 'g', 'r'];
-    self.overlays =  ['t', 'o', 'b', 'v', 'i', 'w'];
+    self.overlays =  ['t', 'o', 'b', 'v', 'i', 'w', 'k', 'd'];
 
     function buildUsedWireNumbers() {
         const usedWireNumbers = [];
@@ -73,6 +75,17 @@ TABS.led_strip.initialize = function (callback) {
                 $('.tab-led-strip').removeClass('toolbar_hidden');
             }
         }
+
+        $(':input[type="number"]').change(function() {
+            // Always keep numbers in range
+            var max = parseInt($(this).attr('max'));
+            var min = parseInt($(this).attr('min'));
+            if ($(this).val() > max) {
+                $(this).val(max);
+            } else if ($(this).val() < min) {
+                $(this).val(min);
+            }
+        });
 
         // Build Grid
         const theHTML = [];
@@ -254,6 +267,30 @@ TABS.led_strip.initialize = function (callback) {
             $('.special_colors').each(function() { setModeBackgroundColor($(this)); });
 
             updateBulkCmd();
+            mspHelper.sendLedStripConfig();
+        });
+
+        $('.colors').on('contextmenu', 'button', function(e) {
+            if (selectedModeColor) return;
+
+            const that = this;
+            const colorButtons = $(this).parent().find('button');
+            colorButtons.removeClass('btnAltOn');
+
+            for (let colorIndex = 0; colorIndex < 16; colorIndex++) {
+                $('.ui-selected').removeClass('altcolor-' + colorIndex);
+
+                if ($(that).is('.color-' + colorIndex)) {
+                    selectedColorIndex = colorIndex;
+                    $('.ui-selected').addClass('altcolor-' + colorIndex);
+                }
+            }
+            $(this).addClass('btnAltOn');
+
+            updateBulkCmd();
+            mspHelper.sendLedStripConfig();
+
+            return false;
         });
 
         $('.colors').on('dblclick', 'button', function() {
@@ -381,6 +418,13 @@ TABS.led_strip.initialize = function (callback) {
                         } else {
                             $(className).removeClass('btnOn');
                         }
+                        const altColorClass = '.altcolor-' + colorIndex;
+                        if ($(uiSelectedLast).is(altColorClass)) {
+                            $(className).addClass('btnAltOn');
+
+                        } else {
+                            $(className).removeClass('btnAltOn');
+                        }
                     }
 
                     // set checkbox values
@@ -402,7 +446,26 @@ TABS.led_strip.initialize = function (callback) {
                             $('select.functionSelect').addClass("function-" + letter);
                         }
                     });
+
+                    const blinkPatternClass = $(uiSelectedLast).attr('class').split(' ').filter(s => s.startsWith('blinkpattern-'));
+                    if (blinkPatternClass.length > 0) {
+                        const blinkPattern = blinkPatternClass[0].replace('blinkpattern-', '');
+                        for (let i = 0; i < 16; ++i) {
+                            const checked =  blinkPattern & (1 << i);
+                            $(`#blinkbit-${i}`).prop('checked', checked);
+                        }
+                    }
+
+                    const showBlinkbits = $('.checkbox').find('input.function-b').is(':checked');
+                    $('#blinkbits').toggle(showBlinkbits);
+
+                    const blinkPauseClass = $(uiSelectedLast).attr('class').split(' ').filter(s => s.startsWith('blinkpause-'));
+                    if (blinkPauseClass.length > 0) {
+                        const blinkPause = blinkPauseClass[0].replace('blinkpause-', '');
+                        $('#blinkPause').val(blinkPause);
+                    }
                 }
+
                 updateBulkCmd();
 
                 setColorSliders(selectedColorIndex);
@@ -423,6 +486,7 @@ TABS.led_strip.initialize = function (callback) {
             drawColorBoxesInColorLedPoints();
             setOptionalGroupsVisibility();
             updateBulkCmd();
+            mspHelper.sendLedStripConfig();
         });
 
         // UI: select mode from drop-down
@@ -447,7 +511,7 @@ TABS.led_strip.initialize = function (callback) {
 
         function toggleSwitch(that, letter)
         {
-            if ($(that).is(':checked')) {
+            if ($(that).first().is(':checked')) {
                 $('.ui-selected').find('.wire').each(function() {
                     if ($(this).text() != "") {
 
@@ -469,6 +533,8 @@ TABS.led_strip.initialize = function (callback) {
                                         p.addClass('function-' + letter);
                                     break;
                                 case 'i':
+                                case 'k':
+                                case 'd':
                                     if (areOverlaysActive('function-' + f))
                                         p.addClass('function-' + letter);
                                     break;
@@ -518,18 +584,84 @@ TABS.led_strip.initialize = function (callback) {
                                     toggleSwitch(cbb, 'b');
                                 }
                             }
+
+                            if (letter === 'b') {
+                                $('#blinkbits').toggle(cbb.is(':checked'));
+                            }
                         }
                     });
 
                     clearModeColorSelection();
                     updateBulkCmd();
                     setOptionalGroupsVisibility();
+                    mspHelper.sendLedStripConfig();
                 }
             } else {
                 // code-triggered event
             }
         });
 
+        $('.blinkbit').change(function(e) {
+            if (!e.originalEvent) return;
+            // user-triggered event
+            const that = $(this).find('input');
+            if ($('.ui-selected').length > 0) {
+                let blinkPatternClass = $('.ui-selected').attr('class').split(' ').filter(s => s.startsWith('blinkpattern-'));
+                if (blinkPatternClass.length > 0) {
+                    $('.ui-selected').removeClass(blinkPatternClass);
+                    let blinkPattern = blinkPatternClass[0].replace('blinkpattern-', '');
+                    const bit = $(this).attr('id').replace('blinkbit-', "");
+                    const mask = 1 << bit;
+                    blinkPattern ^= mask;
+                    blinkPatternClass = `blinkpattern-${blinkPattern}`;
+                    $('.ui-selected').addClass(blinkPatternClass);
+                    updateBulkCmd();
+                    mspHelper.sendLedStripConfig();
+                }
+            }
+        });
+
+        $('#blinkPause').change(function(e) {
+            if (!e.originalEvent) return;
+            // user-triggered event
+            const that = $(this).find('input');
+            if ($('.ui-selected').length > 0) {
+                let blinkPauseClass = $('.ui-selected').attr('class').split(' ').filter(s => s.startsWith('blinkpause-'));
+                if (blinkPauseClass.length > 0) {
+                    $('.ui-selected').removeClass(blinkPauseClass);
+                    const pause = $(this).val();
+                    blinkPauseClass = `blinkpause-${pause}`;
+                    $('.ui-selected').addClass(blinkPauseClass);
+                    updateBulkCmd();
+                    mspHelper.sendLedStripConfig();
+                }
+            }
+        });
+
+        $('#ledStripProfile').val(FC.LED_STRIP_CONFIG.ledstrip_profile);
+        $('#ledStripProfile').change(function(e) {
+            FC.LED_STRIP_CONFIG.ledstrip_profile = $('#ledStripProfile').val();
+            mspHelper.sendLedStripSettings();
+        });
+
+        $('#globalBlinkRate').val(FC.LED_STRIP_CONFIG.ledstrip_blink_period_ms);
+        $('#globalBlinkRate').change(function(e) {
+            FC.LED_STRIP_CONFIG.ledstrip_blink_period_ms = $('#globalBlinkRate').val();
+            mspHelper.sendLedStripSettings();
+        });
+
+        $('#globalFlickerRate').val(FC.LED_STRIP_CONFIG.ledstrip_flicker_rate);
+        $('#globalFlickerRate').change(function(e) {
+            FC.LED_STRIP_CONFIG.ledstrip_flicker_rate = $('#globalFlickerRate').val();
+            mspHelper.sendLedStripSettings();
+        });
+
+        $('#globalFadeRate').val(FC.LED_STRIP_CONFIG.ledstrip_fade_rate);
+        $('#globalFadeRate').change(function(e) {
+            FC.LED_STRIP_CONFIG.ledstrip_fade_rate = $('#globalFadeRate').val();
+            mspHelper.sendLedStripSettings();
+            console.debug('Fade rate: ' + FC.LED_STRIP_CONFIG.ledstrip_fade_rate);
+        });
 
         $('.mainGrid').disableSelection();
 
@@ -565,6 +697,11 @@ TABS.led_strip.initialize = function (callback) {
 
             $(this).addClass(`color-${led.color}`);
 
+            $(this).addClass(`blinkpattern-${led.blinkPattern}`);
+
+            $(this).addClass(`blinkpause-${led.blinkPause}`);
+
+            $(this).addClass(`altcolor-${led.altColor}`);
         });
 
         colorDefineSliders.hide();
@@ -631,11 +768,29 @@ TABS.led_strip.initialize = function (callback) {
                 let functions = '';
                 let directions = '';
                 let colorIndex = 0;
+                let blinkPattern = 0;
+                let blinkPause = 0;
+                let altColorIndex = 0;
                 const that = this;
 
-                const match = $(this).attr("class").match(/(^|\s)color-([0-9]+)(\s|$)/);
+                let match = $(this).attr("class").match(/(^|\s)color-([0-9]+)(\s|$)/);
                 if (match) {
                     colorIndex = match[2];
+                }
+
+                match = $(this).attr("class").match(/(^|\s)blinkpattern-([0-9]+)(\s|$)/);
+                if (match) {
+                    blinkPattern = match[2];
+                }
+
+                match = $(this).attr("class").match(/(^|\s)blinkpause-([0-9]+)(\s|$)/);
+                if (match) {
+                    blinkPause = match[2];
+                }
+
+                match = $(this).attr("class").match(/(^|\s)altcolor-([0-9]+)(\s|$)/);
+                if (match) {
+                    altColorIndex = match[2];
                 }
 
                 self.baseFuncs.forEach(function(letter){
@@ -662,6 +817,9 @@ TABS.led_strip.initialize = function (callback) {
                         directions: directions,
                         functions: functions,
                         color: colorIndex,
+                        blinkPattern: blinkPattern,
+                        blinkPause: blinkPause,
+                        altColor: altColorIndex
                     };
 
                     FC.LED_STRIP[wireNumber] = led;
@@ -955,8 +1113,10 @@ TABS.led_strip.initialize = function (callback) {
         $('.mode_colors').each(function() { setModeBackgroundColor($(this)); });
         $('.special_colors').each(function() { setModeBackgroundColor($(this)); });
 
-        if (change)
+        if (change) {
             updateBulkCmd();
+            mspHelper.sendLedStripColors();
+        }
     }
 
     function drawColorBoxesInColorLedPoints() {

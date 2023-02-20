@@ -5,7 +5,7 @@
 const ledDirectionLetters    = ['n', 'e', 's', 'w', 'u', 'd'];      // in LSB bit order
 const ledFunctionLetters     = ['i', 'w', 'f', 'a', 't', 'r', 'c', 'g', 's', 'b', 'l']; // in LSB bit order
 const ledBaseFunctionLetters = ['c', 'f', 'a', 'l', 's', 'g', 'r']; // in LSB bit
-const ledOverlayLetters      = ['t', 'o', 'b', 'v', 'i', 'w'];      // in LSB bit
+const ledOverlayLetters      = ['t', 'o', 'b', 'v', 'i', 'w', 'k', 'd']; // in LSB bit
 
 function MspHelper() {
     const self = this;
@@ -1069,11 +1069,12 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 // 0 = basic ledstrip available
                 // 1 = advanced ledstrip available
                 // Following byte is the current LED profile
-                const ledCount = (data.byteLength - 2) / 4;
+                const ledCount = (data.byteLength - 2) / 8;
 
                 for (let i = 0; i < ledCount; i++) {
 
                     const mask = data.readU32();
+                    const mask2 = data.readU32();
 
                     const functionId = (mask >> 8) & 0xF;
                     const functions = [];
@@ -1084,27 +1085,35 @@ MspHelper.prototype.process_data = function(dataHandler) {
                         }
                     }
 
-                    const overlayMask = (mask >> 12) & 0x3F;
+                    const overlayMask = (mask >> 12) & 0xFF;
                     for (let overlayLetterIndex = 0; overlayLetterIndex < ledOverlayLetters.length; overlayLetterIndex++) {
                         if (bit_check(overlayMask, overlayLetterIndex)) {
                             functions.push(ledOverlayLetters[overlayLetterIndex]);
                         }
                     }
 
-                    const directionMask = (mask >> 22) & 0x3F;
+                    const directionMask = (mask >> 24) & 0x3F;
                     const directions = [];
                     for (let directionLetterIndex = 0; directionLetterIndex < ledDirectionLetters.length; directionLetterIndex++) {
                         if (bit_check(directionMask, directionLetterIndex)) {
                             directions.push(ledDirectionLetters[directionLetterIndex]);
                         }
                     }
+
+                    const blinkPattern = (mask2 >> 1) & 0xFFFF;
+                    const blinkPause = (mask2 >> 17) & 0xF;
+                    const altColor = (mask2 >> 21) & 0xF;
+
                     const led = {
                         y: (mask) & 0xF,
                         x: (mask >> 4) & 0xF,
                         functions: functions,
-                        color: (mask >> 18) & 0xF,
+                        color: (mask >> 20) & 0xF,
                         directions: directions,
-                        parameters: (mask >> 28) & 0xF,
+                        parameters: (mask >> 30) & 0xF,
+                        blinkPattern: blinkPattern,
+                        blinkPause: blinkPause,
+                        altColor: altColor
                     };
 
                     FC.LED_STRIP.push(led);
@@ -1147,6 +1156,26 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_SET_LED_STRIP_MODECOLOR:
                 console.log('Led strip mode colors saved');
+                break;
+
+            case MSPCodes.MSP_LED_STRIP_SETTINGS:
+                FC.LED_STRIP_CONFIG.ledstrip_beacon_armed_only = data.readU8();
+                FC.LED_STRIP_CONFIG.ledstrip_beacon_color = data.readU8();
+                FC.LED_STRIP_CONFIG.ledstrip_beacon_percent = data.readU8();
+                FC.LED_STRIP_CONFIG.ledstrip_beacon_period_ms = data.readU16();
+                FC.LED_STRIP_CONFIG.ledstrip_blink_period_ms  = data.readU16();
+                FC.LED_STRIP_CONFIG.ledstrip_brightness  = data.readU8();
+                FC.LED_STRIP_CONFIG.ledstrip_fade_rate = data.readU8();
+                FC.LED_STRIP_CONFIG.ledstrip_flicker_rate = data.readU8();
+                FC.LED_STRIP_CONFIG.ledstrip_grb_rgb = data.readU8();
+                FC.LED_STRIP_CONFIG.ledstrip_profile = data.readU8();
+                FC.LED_STRIP_CONFIG.ledstrip_race_color = data.readU8();
+                FC.LED_STRIP_CONFIG.ledstrip_visual_beeper = data.readU8();
+                FC.LED_STRIP_CONFIG.ledstrip_visual_beeper_color = data.readU8();
+                break;
+
+            case MSPCodes.MSP_SET_LED_STRIP_SETTINGS:
+                console.log('Led strip settings saved');
                 break;
 
             case MSPCodes.MSP_DATAFLASH_SUMMARY:
@@ -1820,6 +1849,22 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.GOVERNOR.gov_tta_filter);
             break;
 
+        case MSPCodes.MSP_SET_LED_STRIP_SETTINGS:
+            buffer.push8(FC.LED_STRIP_CONFIG.ledstrip_beacon_armed_only)
+                .push8(FC.LED_STRIP_CONFIG.ledstrip_beacon_color)
+                .push8(FC.LED_STRIP_CONFIG.ledstrip_beacon_percent)
+                .push16(FC.LED_STRIP_CONFIG.ledstrip_beacon_period_ms)
+                .push16(FC.LED_STRIP_CONFIG.ledstrip_blink_period_ms)
+                .push8(FC.LED_STRIP_CONFIG.ledstrip_brightness)
+                .push8(FC.LED_STRIP_CONFIG.ledstrip_fade_rate)
+                .push8(FC.LED_STRIP_CONFIG.ledstrip_flicker_rate)
+                .push8(FC.LED_STRIP_CONFIG.ledstrip_grb_rgb)
+                .push8(FC.LED_STRIP_CONFIG.ledstrip_profile)
+                .push8(FC.LED_STRIP_CONFIG.ledstrip_race_color)
+                .push8(FC.LED_STRIP_CONFIG.ledstrip_visual_beeper)
+                .push8(FC.LED_STRIP_CONFIG.ledstrip_visual_beeper_color);
+            break;
+
         case MSPCodes.MSP_SET_SENSOR_CONFIG:
             buffer.push8(FC.SENSOR_CONFIG.acc_hardware)
                 .push8(FC.SENSOR_CONFIG.baro_hardware)
@@ -2372,16 +2417,22 @@ MspHelper.prototype.sendLedConfig = function(ledIndex, onCompleteCallback)
         }
     }
 
-    mask |= (led.color << 18);
+    mask |= (led.color << 20);
 
     for (let directionLetterIndex = 0; directionLetterIndex < led.directions.length; directionLetterIndex++) {
         const bitIndex = ledDirectionLetters.indexOf(led.directions[directionLetterIndex]);
         if (bitIndex >= 0) {
-            mask |= bit_set(mask, bitIndex + 22);
+            mask |= bit_set(mask, bitIndex + 24);
         }
     }
 
-    mask |= (0 << 28); // parameters
+    mask |= (0 << 30); // parameters
+
+    buffer.push32(mask);
+
+    mask = led.blinkPattern << 1;
+    mask |= led.blinkPause << 17;
+    mask |= led.altColor << 21;
 
     buffer.push32(mask);
 
@@ -2444,6 +2495,13 @@ MspHelper.prototype.sendLedStripModeColors = function(onCompleteCallback)
     }
 
     send_next();
+};
+
+MspHelper.prototype.sendLedStripSettings = function(onCompleteCallback)
+{
+    MSP.send_message(MSPCodes.MSP_SET_LED_STRIP_SETTINGS, mspHelper.crunch(MSPCodes.MSP_SET_LED_STRIP_SETTINGS), false, function () {
+        if (onCompleteCallback) onCompleteCallback();
+    });
 };
 
 MspHelper.prototype.serialPortFunctionMaskToFunctions = function(functionMask)

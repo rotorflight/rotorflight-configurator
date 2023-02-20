@@ -126,6 +126,8 @@ const MSPCodes = {
     MSP_SET_RESCUE_PROFILE:         147,
     MSP_GOVERNOR_PROFILE:           148,
     MSP_SET_GOVERNOR_PROFILE:       149,
+    MSP_LED_STRIP_SETTINGS:         150,
+    MSP_SET_LED_STRIP_SETTINGS:     151,
 
     MSP_UID:                        160,
     MSP_GPS_SV_INFO:                164,

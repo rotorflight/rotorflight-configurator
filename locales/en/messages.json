@@ -3207,6 +3207,36 @@
         "message": "Clear ALL",
         "description": "In the LED STRIP, clear all leds"
     },
+    "ledStripProfileTitle": {
+        "message": "Profile"
+    },
+    "ledStripProfileRaceOption": {
+        "message": "Race"
+    },
+    "ledStripProfileBeaconOption": {
+        "message": "Beacon"
+    },
+    "ledStripProfileStatusOption": {
+        "message": "Status"
+    },
+    "ledStripProfileAltStatusOption": {
+        "message": "Alt Status"
+    },
+    "ledStripGlobalBlinkRate": {
+        "message": "Blink rate"
+    },
+    "ledStripGlobalFlickerRate": {
+        "message": "Flicker rate"
+    },
+    "ledStripGlobalFadeRate": {
+        "message": "Fade rate"
+    },
+    "ledStripFlickerOverlay": {
+        "message": "Flicker"
+    },
+    "ledStripFadeOverlay": {
+        "message": "Fade to alt color (in profile Alt Status)"
+    },
     "ledStripVtxOverlay": {
         "message": "VTX (uses vtx frequency to assign color)"
     },
@@ -3302,8 +3332,8 @@
         "message": "D",
         "description": "Down direction in Color Mode in Led Strip"
     },
-    "ledStripModesOrientationTitle": {
-        "message": "LED Orientation ('Modes &amp; Orientation') and Color",
+    "ledStripModesColorTitle": {
+        "message": "LED Orientation, Color (left click) and Alt Color (right click)",
         "description": "One of the modes in Color Mode in Led Strip"
     },
     "ledStripModesSpecialColorsTitle": {
@@ -3358,6 +3388,10 @@
         "message": "LEDs without wire ordering number will not be saved.",
         "description": "Message in the wiring modes in Led Strip"
     },
+    "ledStripGlobalSettings": {
+        "message": "LED Strip Global Settings",
+        "description": "The Led Strip global settings, like profile etc"
+    },
     "ledStripVtxFunction": {
         "message": "Larson scanner"
     },
@@ -3369,6 +3403,9 @@
     },
     "ledStripBlinkLandingOverlay": {
         "message": "Blink on landing"
+    },
+    "ledStripBlinkPause": {
+        "message": "Pause"
     },
     "ledStripOverlayTitle": {
         "message": "Overlay"
