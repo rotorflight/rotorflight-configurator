@@ -221,8 +221,8 @@ TABS.motors.initialize = function (callback) {
 
             meterLabel(thrBar, '0%', '100%');
             meterLabel(rpmBar, 0, rpmMax);
-            meterLabel(headspeedBar, '0RPM', headspeedMax + 'RPM');
-            meterLabel(tailspeedBar, '0RPM', tailspeedMax + 'RPM');
+            meterLabel(headspeedBar, '0RPM', headspeedMax + ' RPM');
+            meterLabel(tailspeedBar, '0RPM', tailspeedMax + ' RPM');
             meterLabel(voltBar, '0V', voltMax.toFixed(0) + 'V');
             meterLabel(currBar, '0A', currMax.toFixed(0) + 'A');
             meterLabel(tempBar, '0&degC', '150&degC');
@@ -269,14 +269,14 @@ TABS.motors.initialize = function (callback) {
                     headspeedMax = roundTo(headspeed + 1000, 1000);
                     meterLabel(headspeedBar, '0', headspeedMax);
                 }
-                meterBar(headspeedBar, headspeed.toFixed(0) + 'RPM', headspeed/headspeedMax);
+                meterBar(headspeedBar, headspeed.toFixed(0) + ' RPM', headspeed/headspeedMax);
 
                 const tailspeed = FC.MOTOR_TELEMETRY_DATA.rpm[1] / tailratio;
                 if (tailspeed > tailspeedMax) {
                     tailMax = roundTo(tailspeed + 1000, 1000);
                     meterLabel(tailspeedBar, '0', tailspeedMax);
                 }
-                meterBar(tailspeedBar, tailspeed.toFixed(0) + 'RPM', tailspeed/tailspeedMax);
+                meterBar(tailspeedBar, tailspeed.toFixed(0) + ' RPM', tailspeed/tailspeedMax);
 
                 const rpm = FC.MOTOR_TELEMETRY_DATA.rpm[motorIndex];
                 if (rpm > rpmMax) {
