@@ -644,9 +644,9 @@ TABS.led_strip.initialize = function (callback) {
             mspHelper.sendLedStripSettings();
         });
 
-        $('#globalBlinkRate').val(FC.LED_STRIP_CONFIG.ledstrip_blink_period_ms);
+        $('#globalBlinkRate').val(msToBpm(FC.LED_STRIP_CONFIG.ledstrip_blink_period_ms));
         $('#globalBlinkRate').change(function(e) {
-            FC.LED_STRIP_CONFIG.ledstrip_blink_period_ms = $('#globalBlinkRate').val();
+            FC.LED_STRIP_CONFIG.ledstrip_blink_period_ms = bpmToMs($('#globalBlinkRate').val());
             mspHelper.sendLedStripSettings();
         });
 
@@ -740,6 +740,20 @@ TABS.led_strip.initialize = function (callback) {
         GUI.content_ready(callback);
     }
 
+
+    function bpmToMs(bpm) {
+        let ms = Math.round(60 * 250 / bpm);
+        if (ms < 50) ms = 50;
+        else if (ms > 500) ms = 500;
+        return ms;
+    }
+
+    function msToBpm(ms) {
+        let bpm = Math.round(60 * 250 / ms);
+        if (bpm < 30) bpm = 30;
+        else if (bpm > 300) bpm = 300;
+        return bpm;
+    }
 
     function findLed(x, y) {
         for (let ledIndex = 0; ledIndex < FC.LED_STRIP.length; ledIndex++) {

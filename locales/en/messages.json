@@ -3223,7 +3223,7 @@
         "message": "Alt Status"
     },
     "ledStripGlobalBlinkRate": {
-        "message": "Blink rate"
+        "message": "Blink tempo (BPM)"
     },
     "ledStripGlobalFlickerRate": {
         "message": "Flicker rate"
