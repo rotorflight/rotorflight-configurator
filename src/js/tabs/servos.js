@@ -73,27 +73,31 @@ TABS.servos.initialize = function (callback) {
                     if (servo.rate > 333)
                         unusualRate = true;
 
-                    if (servo.min < -750 || servo.min > -250 || servo.max >  750 || servo.max <  250)
+                    // Unusual: value > 500 ± 25%
+                    if (servo.min < -625 || servo.min > -375 || servo.max >  625 || servo.max <  375)
                         unusualLimit = true;
 
-                    if (servo.rneg < 250 || servo.rneg > 750 || servo.rpos <  250 || servo.rpos >  750)
+                    if (servo.rneg < 375 || servo.rneg > 625 || servo.rpos <  375 || servo.rpos >  625)
                         unusualScale = true;
                 } else {
                     if (servo.rate > 560)
                         unusualRate = true;
 
-                    if (servo.min < -300 || servo.min > -125 || servo.max >  300 || servo.max <  125)
+                    // Unusual: value > 250 ± 25%
+                    if (servo.min < -312 || servo.min > -187 || servo.max >  312 || servo.max <  187)
                         unusualLimit = true;
 
-                    if (servo.rneg < 125 || servo.rneg > 300 || servo.rpos <  125 || servo.rpos >  300)
+                    if (servo.rneg < 187 || servo.rneg > 312 || servo.rpos <  187 || servo.rpos >  312)
                         unusualScale = true;
                 }
             }
 
             if (FC.CONFIG.servoCount == 2) {
+                // Fixed pitch heli with 2 servos
                 if ((SERVOS[0].flags & 2) != (SERVOS[1].flags & 2))
                     unusualGeoCor = true;
             } else if (FC.CONFIG.servoCount >= 3) {
+                // Collective pitch with 3 or more servos
                 if (((SERVOS[0].flags & 2) != (SERVOS[1].flags & 2)) ||
                     ((SERVOS[1].flags & 2) != (SERVOS[2].flags & 2)) ||
                     ((SERVOS[0].flags & 2) != (SERVOS[2].flags & 2)))
