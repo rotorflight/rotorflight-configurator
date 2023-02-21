@@ -3231,6 +3231,9 @@
     "ledStripGlobalFadeRate": {
         "message": "Fade rate"
     },
+    "ledStripGlobalBrightness": {
+        "message": "Overall brightness"
+    },
     "ledStripFlickerOverlay": {
         "message": "Flicker"
     },

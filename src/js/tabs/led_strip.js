@@ -660,7 +660,12 @@ TABS.led_strip.initialize = function (callback) {
         $('#globalFadeRate').change(function(e) {
             FC.LED_STRIP_CONFIG.ledstrip_fade_rate = $('#globalFadeRate').val();
             mspHelper.sendLedStripSettings();
-            console.debug('Fade rate: ' + FC.LED_STRIP_CONFIG.ledstrip_fade_rate);
+        });
+
+        $('#globalBrightness').val(FC.LED_STRIP_CONFIG.ledstrip_brightness);
+        $('#globalBrightness').change(function(e) {
+            FC.LED_STRIP_CONFIG.ledstrip_brightness = $('#globalBrightness').val();
+            mspHelper.sendLedStripSettings();
         });
 
         $('.mainGrid').disableSelection();
