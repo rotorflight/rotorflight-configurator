@@ -3219,8 +3219,8 @@
     "ledStripProfileStatusOption": {
         "message": "Status"
     },
-    "ledStripProfileAltStatusOption": {
-        "message": "Alt Status"
+    "ledStripProfileStatusAltOption": {
+        "message": "Status Alt"
     },
     "ledStripGlobalBlinkRate": {
         "message": "Blink tempo (BPM)"
@@ -3235,7 +3235,7 @@
         "message": "Flicker"
     },
     "ledStripFadeOverlay": {
-        "message": "Fade to alt color (in profile Alt Status)"
+        "message": "Fade to alt color (in profile Status Alt)"
     },
     "ledStripVtxOverlay": {
         "message": "VTX (uses vtx frequency to assign color)"
