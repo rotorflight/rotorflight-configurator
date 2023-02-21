@@ -2012,7 +2012,7 @@
         "message": "Speed [ms]"
     },
     "servoSpeedHelp": {
-        "message": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 60&deg;."
+        "message": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 50&deg;."
     },
     "servoReverse": {
         "message": "Reverse"
