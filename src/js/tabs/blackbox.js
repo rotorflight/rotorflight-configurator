@@ -86,17 +86,56 @@ TABS.blackbox = {
         "RX_STATE_TIME",
         "PITCH_PRECOMP",
         "YAW_PRECOMP",
+        "RESCUE",
+        "RESCUE_ALTHOLD",
         "UNKNOWN1",
         "UNKNOWN2",
         "UNKNOWN3",
         "UNKNOWN4",
     ],
+
+    DEBUG_AXIS: [
+        "ROLL",
+        "PITCH",
+        "YAW",
+        "COLLECTIVE",
+        "THROTTLE",
+    ],
+
+    LOG_FIELDS: [
+        "command",
+        "setpoint",
+        "mixer",
+        "pid",
+        "gyroraw",
+        "gyro",
+        "acc",
+        "mag",
+        "alt",
+        "battery",
+        "rssi",
+        "rpm",
+        "motors",
+        "servos",
+        "gps",
+    ],
+
+    LOG_RATES: {
+        8000: [ 8, 16, 32, 80, 160, 320, 800 ],
+        4000: [ 4, 8, 16, 40, 80, 160, 400 ],
+        2000: [ 2, 4, 8, 20, 40, 80, 200 ],
+        1000: [ 1, 2, 4, 10, 20, 40, 100 ],
+        3200: [ 3, 6, 12, 32, 64, 128, 320 ],
+        1600: [ 2, 4, 8, 16, 32, 64, 160 ],
+        1067: [ 1, 2, 4, 10, 21, 42, 106 ],
+         800: [ 1, 2, 4, 8, 16, 32, 80 ],
+           0: [ 1, 2, 4, 8, 16, 32, 64, 128, 256 ],
+    },
+
 };
 
 TABS.blackbox.initialize = function (callback) {
     const self = this;
-
-    self.isDirty = false;
 
     let saveCancelled, eraseCancelled;
 
@@ -137,6 +176,18 @@ TABS.blackbox.initialize = function (callback) {
         // translate to user-selected language
         i18n.localizePage();
 
+        // Hide the buttons toolbar
+        $('.tab-blackbox').addClass('toolbar_hidden');
+
+        self.isDirty = false;
+
+        function setDirty() {
+            if (!self.isDirty) {
+                self.isDirty = true;
+                $('.tab-blackbox').removeClass('toolbar_hidden');
+            }
+        }
+
         const dataflashPresent = (FC.DATAFLASH.totalSize > 0);
 
         let blackboxSupport;
@@ -165,21 +216,38 @@ TABS.blackbox.initialize = function (callback) {
             $('.tab-blackbox a.save-flash-dismiss').click(dismiss_saving_dialog);
         }
 
-        const deviceSelect = $(".blackboxDevice select");
-        const loggingRatesSelect = $(".blackboxRate select");
-        const debugModeSelect = $(".blackboxDebugMode select");
+        const deviceSelect = $(".tab-blackbox .blackboxDevice select");
+        const modeSelect = $(".tab-blackbox .blackboxMode select");
+        const RatesSelect = $(".tab-blackbox .blackboxRate select");
+        const debugModeSelect = $(".tab-blackbox .blackboxDebugMode select");
+        const debugAxisSelect = $(".tab-blackbox .blackboxDebugAxis select");
 
-        populateLoggingRates(loggingRatesSelect);
         populateDevices(deviceSelect);
+        populateMode(modeSelect);
+        populateLoggingRates(RatesSelect);
         populateDebugModes(debugModeSelect);
+        populateDebugAxis(debugAxisSelect);
+        populateLogFlags();
 
-        deviceSelect.change(function() {
-            if ($(this).val() === "0") {
-                $("div.blackboxRate").hide();
+        function toggleLogging() {
+            if (deviceSelect.val() != 0) {
+                $("div.blackboxMode").show();
+                if (modeSelect.val() != 0) {
+                    $("div.blackboxRate").show();
+                    $("div.blackboxFlags").show();
+                } else {
+                    $("div.blackboxRate").hide();
+                    $("div.blackboxFlags").hide();
+                }
             } else {
-                $("div.blackboxRate").show();
+                $("div.blackboxMode").hide();
+                $("div.blackboxRate").hide();
+                $("div.blackboxFlags").hide();
             }
-        }).change();
+        }
+
+        deviceSelect.change(toggleLogging).change();
+        modeSelect.change(toggleLogging).change();
 
         if ((FC.SDCARD.supported && deviceSelect.val() == 2) ||
             (FC.DATAFLASH.supported && deviceSelect.val() == 1)) {
@@ -200,16 +268,19 @@ TABS.blackbox.initialize = function (callback) {
             });
         }
 
+        function form_to_data() {
+            FC.BLACKBOX.blackboxDevice = parseInt(deviceSelect.val(), 10);
+            FC.BLACKBOX.blackboxMode = parseInt(modeSelect.val(), 10);
+            FC.BLACKBOX.blackboxDenom = parseInt(RatesSelect.val(), 10);
+            FC.DEBUG_CONFIG.debugMode = parseInt(debugModeSelect.val(), 10);
+            FC.DEBUG_CONFIG.debugAxis = parseInt(debugAxisSelect.val(), 10);
+        }
+
         if (FC.BLACKBOX.supported) {
 
-            function update_data() {
-                FC.BLACKBOX.blackboxPDenom = parseInt(loggingRatesSelect.val(), 10);
-                FC.BLACKBOX.blackboxDevice = parseInt(deviceSelect.val(), 10);
-                FC.DEBUG_CONFIG.debugMode = parseInt(debugModeSelect.val());
-            }
-
             self.save = function (callback) {
-                update_data();
+                form_to_data();
+                readBackLogFlags();
                 save_data(callback);
             };
 
@@ -217,18 +288,41 @@ TABS.blackbox.initialize = function (callback) {
                 callback();
             };
 
-            $(".tab-blackbox a.save-settings").click(function() {
+            $(".tab-blackbox a.reboot").click(function() {
                 self.save(() => GUI.tab_switch_reload());
             });
 
+            $('.tab-blackbox a.revert').click(function () {
+                self.revert(() => GUI.tab_switch_reload());
+            });
+
             $('.tab-blackbox .blackbox-changes').change(function () {
-                self.isDirty = true;
+                setDirty();
             });
         }
 
         update_html();
 
         GUI.content_ready(callback);
+    }
+
+    function readBackLogFlags() {
+        $.each(self.LOG_FIELDS, function(index, value) {
+            const checked = $(`.tab-blackbox input[id="blackboxlog_${value}"]`).is(':checked');
+            if (checked)
+                FC.BLACKBOX.blackboxFields |= (1 << index);
+            else
+                FC.BLACKBOX.blackboxFields &= ~(1 << index);
+        });
+    }
+
+    function populateLogFlags() {
+        const logFlags = $('.tab-blackbox .blackboxLogFlags');
+        $.each(self.LOG_FIELDS, function(index, value) {
+            const checked = (FC.BLACKBOX.blackboxFields & (1 << index)) ? "checked" : "";
+            const message = i18n.getMessage(`blackboxLog_${value}`);
+            logFlags.append(`<div class="flag_box"><input type="checkbox" id="blackboxlog_${value}" class="toggle" ${checked} /><span>${message}</span></div>`);
+        });
     }
 
     function populateDevices(deviceSelect) {
@@ -245,35 +339,52 @@ TABS.blackbox.initialize = function (callback) {
         deviceSelect.val(FC.BLACKBOX.blackboxDevice);
     }
 
-    function populateLoggingRates(loggingRatesSelect) {
+    function populateMode(modeSelect) {
+        modeSelect.empty();
+        modeSelect.append('<option value="0">' + i18n.getMessage('blackboxModeOff') + '</option>');
+        modeSelect.append('<option value="1">' + i18n.getMessage('blackboxModeNormal') + '</option>');
+        modeSelect.append('<option value="2">' + i18n.getMessage('blackboxModeArmed') + '</option>');
+        modeSelect.append('<option value="3">' + i18n.getMessage('blackboxModeSwitch') + '</option>');
 
-        const pidRate = FC.CONFIG.sampleRateHz / FC.ADVANCED_CONFIG.pid_process_denom;
+        modeSelect.val(FC.BLACKBOX.blackboxMode);
+    }
 
-        const loggingRates = [
-            { text: "Disabled", hz: 0,     p_denom: 0 },
-            { text: "62.5 Hz",  hz: 62.5,  p_denom: 2 },
-            { text: "125 Hz",   hz: 125,   p_denom: 4 },
-            { text: "250 Hz",   hz: 250,   p_denom: 8 },
-            { text: "500 Hz",   hz: 500,   p_denom: 16 },
-            { text: "1 kHz",    hz: 1000,  p_denom: 32 },
-            { text: "1.5 kHz",  hz: 1500,  p_denom: 48 },
-            { text: "2 kHz",    hz: 2000,  p_denom: 64 },
-            { text: "4 kHz",    hz: 4000,  p_denom: 128 },
-            { text: "8 kHz",    hz: 8000,  p_denom: 256 },
-        ];
+    function populateLoggingRates(RatesSelect) {
 
-        $.each(loggingRates, function(index, item) {
-            if (pidRate >= item.hz || item.hz == 0) {
-                loggingRatesSelect.append(new Option(item.text, item.p_denom));
+        const pidDenom = FC.ADVANCED_CONFIG.pid_process_denom;
+        const pidRate = FC.CONFIG.sampleRateHz / pidDenom;
+        const rateKey = Math.round(pidRate);
+
+        let loggingRates = self.LOG_RATES[rateKey];
+
+        if (loggingRates === undefined) {
+            loggingRates = self.LOG_RATES[0];
+        }
+
+        RatesSelect.empty();
+
+        let match = false;
+
+        $.each(loggingRates, function(index, value) {
+            const rate = pidRate / value;
+            const text = `${rate.toFixed(0)}Hz`;
+            RatesSelect.append(new Option(text, value));
+            if (value == FC.BLACKBOX.blackboxDenom) {
+                match = true;
             }
         });
 
-        loggingRatesSelect.val(FC.BLACKBOX.blackboxPDenom);
+        if (!match) {
+            const rate = pidRate / FC.BLACKBOX.blackboxDenom;
+            const custom = i18n.getMessage('blackboxRateCustom');
+            RatesSelect.append(new Option(`${custom} ${rate.toFixed(0)}Hz [1/${FC.BLACKBOX.blackboxDenom}]`, FC.BLACKBOX.blackboxDenom));
+        }
+
+        RatesSelect.val(FC.BLACKBOX.blackboxDenom);
     }
 
     function populateDebugModes(debugModeSelect) {
-
-        $('.blackboxDebugMode').show();
+        debugModeSelect.empty();
 
         for (let i = 0; i < FC.DEBUG_CONFIG.debugModeCount; i++) {
             if (i < self.DEBUG_MODES.length) {
@@ -299,6 +410,16 @@ TABS.blackbox.initialize = function (callback) {
                 });
             },
         });
+    }
+
+    function populateDebugAxis(debugAxisSelect) {
+        debugAxisSelect.empty();
+
+        $.each(self.DEBUG_AXIS, function(index, item) {
+            debugAxisSelect.append(new Option(item, index));
+        });
+
+        debugAxisSelect.val(FC.DEBUG_CONFIG.debugAxis);
     }
 
     function formatFilesizeKilobytes(kilobytes) {

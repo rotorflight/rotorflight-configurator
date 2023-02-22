@@ -257,24 +257,70 @@
 .tab-blackbox .line {
     clear: left;
 }
+
 .tab-blackbox .blackboxRate select,
+.tab-blackbox .blackboxMode select,
 .tab-blackbox .blackboxDebugMode select,
+.tab-blackbox .blackboxDebugAxis select,
 .tab-blackbox .blackboxDevice select {
     float: left;
     width: 180px;
     height: 20px;
-    margin: 0 10px 5px 0;
+    margin: 0 15px 8px 0;
     border: 1px solid var(--subtleAccent);
     border-radius: 3px;
 }
+
+.tab-blackbox .blackboxDebugMode {
+    border-top: 1px dotted var(--superSubtleAccent);
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.tab-blackbox .blackboxDebugMode .select2 {
+    float: left;
+    height: 20px;
+    margin: 0 8px 8px 0;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+}
+
 .tab-blackbox .blackboxRate span,
+.tab-blackbox .blackboxMode span,
 .tab-blackbox .blackboxDebugMode span,
+.tab-blackbox .blackboxDebugAxis span,
 .tab-blackbox .blackboxDevice span {
     line-height: 20px;
 }
 .tab-blackbox .blackboxDebugModeText {
     margin-left: 7px !important;
 }
+
+.tab-blackbox .blackboxFlags .gui_box {
+    height: calc(100% - 12px);
+}
+
+.tab-blackbox .flag_box input {
+    width: calc(100% - 8px);
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+    height: 22px;
+    margin: 4px;
+    line-height: 22px;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.tab-blackbox .flag_box {
+    float: left;
+    min-width: 160px;
+    padding: 2px 8px 8px 0;
+}
+
+.tab-blackbox .flag_box span {
+    margin-left: 10px;
+}
+
 .tab-blackbox .sdcard {
 	padding:10px;
 	float:left;
@@ -290,11 +336,11 @@
 .tab-blackbox.sdcard-initializing .sdcard-icon {
     background-color: #64a5f6;
     border: 1px solid #68a7ff;
-} 
+}
 .tab-blackbox.sdcard-ready .sdcard-icon {
     background-color: #56ac1d;
     border: 1px solid #5bbb1b;
-} 
+}
 .tab-blackbox .sdcard-icon {
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 	width: 90px;
@@ -303,15 +349,19 @@
     background-position: 21px 20px;
     background-size: 50px 50px;
     background-repeat: no-repeat;
-    
+
     background-color: #808080;
     border: 1px solid #888888;
-    
+
     border-radius: 45px;
 }
 
 @media all and (max-width: 575px) {
-    .tab-blackbox .blackboxRate select, .tab-blackbox .blackboxDebugMode select, .tab-blackbox .blackboxDevice select {
+    .tab-blackbox .blackboxRate select,
+    .tab-blackbox .blackboxMode select,
+    .tab-blackbox .blackboxDebugMode select,
+    .tab-blackbox .blackboxDebugAxis select,
+    .tab-blackbox .blackboxDevice select {
         width: 120px;
     }
 }

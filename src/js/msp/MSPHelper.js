@@ -1188,7 +1188,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_BLACKBOX_CONFIG:
                 FC.BLACKBOX.supported = (data.readU8() & 1) != 0;
                 FC.BLACKBOX.blackboxDevice = data.readU8();
+                FC.BLACKBOX.blackboxMode = data.readU8();
                 FC.BLACKBOX.blackboxDenom = data.readU16();
+                FC.BLACKBOX.blackboxFields = data.readU32();
                 break;
 
             case MSPCodes.MSP_SET_BLACKBOX_CONFIG:

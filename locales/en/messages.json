@@ -2890,6 +2890,54 @@
     "blackboxLoggingSerial": {
         "message": "Serial Port"
     },
+    "blackboxOptions": {
+        "message": "Blackbox Logging Options"
+    },
+    "blackboxLog_command": {
+        "message": "Command"
+    },
+    "blackboxLog_setpoint": {
+        "message": "Setpoint"
+    },
+    "blackboxLog_mixer": {
+        "message": "Mixer"
+    },
+    "blackboxLog_pid": {
+        "message": "PID"
+    },
+    "blackboxLog_gyroraw": {
+        "message": "Raw Gyro"
+    },
+    "blackboxLog_gyro": {
+        "message": "Gyro"
+    },
+    "blackboxLog_acc": {
+        "message": "Accelerometer"
+    },
+    "blackboxLog_mag": {
+        "message": "Magnetometer"
+    },
+    "blackboxLog_alt": {
+        "message": "Altimeter"
+    },
+    "blackboxLog_battery": {
+        "message": "Battery"
+    },
+    "blackboxLog_rssi": {
+        "message": "RSSI"
+    },
+    "blackboxLog_rpm": {
+        "message": "RPM"
+    },
+    "blackboxLog_motors": {
+        "message": "Motors"
+    },
+    "blackboxLog_servos": {
+        "message": "Servos"
+    },
+    "blackboxLog_gps": {
+        "message": "GPS"
+    },
     "serialLoggingSupportedNote": {
         "message": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
     },
@@ -5923,26 +5971,53 @@
     "craftName": {
         "message": "Craft name"
     },
+    "blackboxMode": {
+        "message": "Logging mode"
+    },
+    "blackboxModeHelp": {
+        "message": "<strong>OFF:</strong> Disables logging.<br><strong>NORMAL:</strong> logging when both ARMED and BLACKBOX switch active.<br><strong>ARMED:</strong> logging when ARMED.<br><strong>SWITCH:</strong> logging when BLACKBOX switch active"
+    },
+    "blackboxModeOff": {
+        "message": "Off"
+    },
+    "blackboxModeNormal": {
+        "message": "Normal"
+    },
+    "blackboxModeArmed": {
+        "message": "Armed"
+    },
+    "blackboxModeSwitch": {
+        "message": "Switch"
+    },
     "blackboxDevice": {
-        "message": "Blackbox logging device"
+        "message": "Logging device"
     },
     "blackboxDeviceHelp": {
         "message": "<strong>No Logging:</strong> Disables logging.<br><strong>Onboard Flash:</strong> Enables logging to onboard flash chip (if available).<br><strong>SD Card:</strong> Log to onboard SD card (if available).<br><strong>Serial Port:</strong> Log to an external logger device (e.g Open Lager) connected to a serial port. The serial port will have to be configured to 'Blackbox Logging' in the 'peripherals' section on the <strong>Serial Ports</strong> tab."
     },
     "blackboxRateOfLogging": {
-        "message": "Blackbox logging rate"
+        "message": "Logging rate"
     },
     "blackboxRateOfLoggingHelp": {
         "message": "The log data is saved to the log device with this rate. For logging to an external device, lower speed may be required."
     },
+    "blackboxRateCustom": {
+        "message": "Custom"
+    },
     "blackboxDebugMode": {
-        "message": "Blackbox debug mode"
+        "message": "Debug mode"
     },
     "blackboxDebugModeHelp": {
-        "message": "Choose what <i>extra</i> data is being logged. If enabled, four extra debug items are added to the log entries."
+        "message": "Choose what <i>extra</i> data is being logged. If enabled, eight extra debug items are added to the log entries."
     },
     "blackboxDebugModeUnknown": {
         "message": "UNKNOWN"
+    },
+    "blackboxDebugAxis": {
+        "message": "Debug axis"
+    },
+    "blackboxDebugAxisHelp": {
+        "message": "Choose which <i>axis</i> is being debugged. Applies to some of the debug modes."
     },
     "blackboxSerialLogger": {
         "message": "Outboard serial logging device"

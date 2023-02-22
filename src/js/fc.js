@@ -404,7 +404,7 @@ const FC = {
         this.BLACKBOX = {
             supported:                  false,
             blackboxDevice:             0,
-            blackboxMode:               1,
+            blackboxMode:               0,
             blackboxDenom:              0,
             blackboxFields:             0,
         };

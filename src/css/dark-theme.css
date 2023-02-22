@@ -599,7 +599,9 @@ progress[value]::-webkit-progress-bar {
 }
 
 .tab-blackbox .blackboxRate select,
+.tab-blackbox .blackboxMode select,
 .tab-blackbox .blackboxDebugMode select,
+.tab-blackbox .blackboxDebugAxis select,
 .tab-blackbox .blackboxDevice select {
     background-color: #3a3a3a;
     color: white;
@@ -986,11 +988,11 @@ progress[value]::-webkit-progress-bar {
     border-bottom: 1.5px solid white !important;
     border-right: 1.5px solid white !important;
 }
- 
+
 .select2-search--dropdown {
     background-color: #3a3a3a !important;
 }
- 
+
 .select2-search--dropdown .select2-search__field {
     border: 1px solid var(--subtleAccent) !important;
     background-color: #3a3a3a !important;

@@ -1,4 +1,4 @@
-<div class="tab-blackbox">
+<div class="tab-blackbox toolbar_fixed_bottom">
     <div class="content_wrapper">
         <div class="tab_title" i18n="tabBlackbox"></div>
         <div class="cf_doc_version_bt">
@@ -10,36 +10,61 @@
         <div class="require-blackbox-maybe-supported note">
             <p i18n="blackboxMaybeSupported"></p>
         </div>
-        <div class="require-blackbox-supported blackbox-changes">
-            <div class="gui_box grey require-blackbox-config-supported">
-                <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" i18n="blackboxConfiguration"></div>
+
+        <!-- CONFIGURATION -->
+        <div class="configuration">
+            <div class="grid-row">
+                <div class="grid-col col4 require-blackbox-supported blackbox-changes">
+                    <div class="gui_box grey require-blackbox-config-supported">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="blackboxConfiguration"></div>
+                        </div>
+                        <div class="spacer_box">
+                            <div class="line blackboxDevice">
+                                <select name="blackbox_device">
+                                </select>
+                                <span i18n="blackboxDevice"></span>
+                                <span class="helpicon cf_tip" i18n_title="blackboxDeviceHelp"></span>
+                            </div>
+                            <div class="line blackboxMode">
+                                <select name="blackbox_mode">
+                                </select>
+                                <span i18n="blackboxMode"></span>
+                                <span class="helpicon cf_tip" i18n_title="blackboxModeHelp"></span>
+                            </div>
+                            <div class="line blackboxRate">
+                                <select name="blackbox_rate">
+                                </select>
+                                <span i18n="blackboxRateOfLogging"></span>
+                                <span class="helpicon cf_tip" i18n_title="blackboxRateOfLoggingHelp"></span>
+                            </div>
+                            <div class="line blackboxDebugMode">
+                                <select name="blackboxDebugMode">
+                                </select>
+                                <span class="blackboxDebugModeText" i18n="blackboxDebugMode"></span>
+                                <span class="helpicon cf_tip" i18n_title="blackboxDebugModeHelp"></span>
+                            </div>
+                            <div class="line blackboxDebugAxis">
+                                <select name="blackboxDebugAxis">
+                                </select>
+                                <span class="blackboxDebugAxisText" i18n="blackboxDebugAxis"></span>
+                                <span class="helpicon cf_tip" i18n_title="blackboxDebugAxisHelp"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="spacer_box">
-                    <div class="line blackboxDevice">
-                        <select name="blackbox_device">
-                        </select>
-                        <span i18n="blackboxDevice"></span>
-                        <span class="helpicon cf_tip" i18n_title="blackboxDeviceHelp"></span>
-                    </div>
-                    <div class="line blackboxRate">
-                        <select name="blackbox_rate">
-                        </select>
-                        <span i18n="blackboxRateOfLogging"></span>
-                        <span class="helpicon cf_tip" i18n_title="blackboxRateOfLoggingHelp"></span>
-                    </div>
-                    <div class="line blackboxDebugMode">
-                        <select name="blackboxDebugMode">
-                        </select>
-                        <span class="blackboxDebugModeText" i18n="blackboxDebugMode"></span>
-                        <span class="helpicon cf_tip" i18n_title="blackboxDebugModeHelp"></span>
-                    </div>
-                    <div class="line">
-                        <a href="#" class="save-settings regular-button" i18n="blackboxButtonSave"></a>
+                <div class="grid-col col8 require-blackbox-supported blackbox-changes blackboxFlags">
+                    <div class="gui_box grey require-blackbox-config-supported">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="blackboxOptions"></div>
+                        </div>
+                        <div class="spacer_box blackboxLogFlags">
+                            <!-- INSERT FLAGS HERE -->
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="gui_box grey">
                 <div class="gui_box_titlebar" align="left">
                     <div class="spacer_box_title" i18n="blackboxSerialLogger">
@@ -49,7 +74,7 @@
                     <p i18n="serialLoggingSupportedNote"></p>
                 </div>
             </div>
-            
+
             <div class="gui_box grey require-dataflash-supported">
                 <div class="gui_box_titlebar" align="left">
                     <div class="spacer_box_title" i18n="blackboxFlashLogger">
@@ -58,7 +83,7 @@
                 <div class="spacer_box">
                     <div class="require-dataflash-supported">
                         <p i18n="dataflashNote"></p>
-                        
+
                         <dialog class="dataflash-confirm-erase">
                             <h3 i18n="dataflashConfirmEraseTitle"></h3>
                             <div class="dataflash-confirm-erase-note" i18n="dataflashConfirmEraseNote"></div>
@@ -69,10 +94,10 @@
                             </div>
                             <div class="buttons">
                                 <a href="#" class="erase-flash-confirm regular-button" i18n="dataflashButtonEraseConfirm"></a>
-                                <a href="#" class="erase-flash-cancel regular-button" i18n="dataflashButtonEraseCancel"></a> 
+                                <a href="#" class="erase-flash-cancel regular-button" i18n="dataflashButtonEraseCancel"></a>
                             </div>
                         </dialog>
-                        
+
                         <dialog class="dataflash-saving">
                             <h3 i18n="dataflashSavingTitle"></h3>
                             <div class="dataflash-saving-before">
@@ -89,7 +114,7 @@
                                 </div>
                             </div>
                         </dialog>
-                        
+
                         <ul class="dataflash-contents">
                             <li class="dataflash-used">
                                 <div class="legend"></div>
@@ -98,7 +123,7 @@
                                 <div class="legend"></div>
                             </li>
                         </ul>
-                        
+
                         <div class="dataflash-buttons">
                             <a class="regular-button erase-flash" href="#" i18n="dataflashButtonErase"></a>
                             <a class="regular-button require-msc-not-supported save-flash" href="#" i18n="dataflashButtonSaveFile"></a>
@@ -106,11 +131,12 @@
                             <p i18n="dataflashSavetoFileNote"></p>
                         </div>
                     </div>
-                    
+
                     <p class="require-dataflash-not-present" i18n="dataflashNotPresentNote"></p>
                     <p class="require-dataflash-unsupported" i18n="dataflashFirmwareUpgradeRequired"></p>
                 </div>
             </div>
+
             <div class="require-sdcard-supported">
                 <div class="gui_box grey">
                     <div class="gui_box_titlebar" align="left">
@@ -124,7 +150,7 @@
                         </div>
 
                         <p i18n="sdcardNote"></p>
-                            
+
                         <div class="require-sdcard-ready">
                             <ul class="sdcard-contents">
                                 <li class="sdcard-other">
@@ -139,6 +165,7 @@
                 </div>
             </div>
         </div>
+
         <div class="gui_box grey require-msc-supported">
             <div class="gui_box_titlebar" align="left">
                 <div class="spacer_box_title" i18n="blackboxMsc">
@@ -157,4 +184,14 @@
         </div>
         <div class="clear-both"></div>
     </div>
+
+    <div class="content_toolbar">
+        <div class="btn revert_btn">
+            <a class="revert" href="#" i18n="buttonRevert"></a>
+        </div>
+        <div class="btn reboot_btn">
+            <a class="reboot" href="#" i18n="buttonSaveReboot"></a>
+        </div>
+    </div>
+
 </div>
