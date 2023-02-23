@@ -33,8 +33,8 @@ const MSPCodes = {
     MSP_SET_RSSI_CONFIG:            51,
     MSP_ADJUSTMENT_RANGES:          52,
     MSP_SET_ADJUSTMENT_RANGE:       53,
-    MSP_CF_SERIAL_CONFIG:           54,
-    MSP_SET_CF_SERIAL_CONFIG:       55,
+    MSP_SERIAL_CONFIG:              54,
+    MSP_SET_SERIAL_CONFIG:          55,
     MSP_VOLTAGE_METER_CONFIG:       56,
     MSP_SET_VOLTAGE_METER_CONFIG:   57,
     MSP_SONAR:                      58,
@@ -195,14 +195,10 @@ const MSPCodes = {
     MSP_DEBUGMSG:                   253, // Not used
     MSP_DEBUG:                      254,
 
-    // MSPv2 Common
-    MSP2_COMMON_SERIAL_CONFIG:      0x1009,
-    MSP2_COMMON_SET_SERIAL_CONFIG:  0x100A,
-
     // MSPv2 Betaflight specific
-    MSP2_BETAFLIGHT_BIND:           0x3000,
-    MSP2_MOTOR_OUTPUT_REORDERING:   0x3001,
-    MSP2_SET_MOTOR_OUTPUT_REORDERING:    0x3002,
-    MSP2_SEND_DSHOT_COMMAND:        0x3003,
-    MSP2_GET_VTX_DEVICE_STATUS:     0x3004,
+    MSP2_BETAFLIGHT_BIND:               0x3000,
+    MSP2_MOTOR_OUTPUT_REORDERING:       0x3001,
+    MSP2_SET_MOTOR_OUTPUT_REORDERING:   0x3002,
+    MSP2_SEND_DSHOT_COMMAND:            0x3003,
+    MSP2_GET_VTX_DEVICE_STATUS:         0x3004,
 };

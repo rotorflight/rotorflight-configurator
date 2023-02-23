@@ -1,11 +1,15 @@
-.tab-configuration .ui-grid-col {
-    margin-bottom: 0;
+
+#tab-configuration-templates {
+    display: none;
+}
+
+.tab-configuration {
+    position: relative;
 }
 
 .tab-configuration input,
 .tab-configuration select {
     border: 1px solid var(--subtleAccent);
-    width: 230px;
     height: 20px;
     float: left;
     margin-right: 15px;
@@ -18,7 +22,9 @@
     float: left;
 }
 
-.tab-configuration table, .tab-configuration table th, .tab-configuration table td {
+.tab-configuration table,
+.tab-configuration table th,
+.tab-configuration table td {
     padding: 0;
     text-align: left;
 }
@@ -42,17 +48,6 @@
     background-color: #ececec;
 }
 
-.tab-configuration {
-    position: relative;
-}
-
-.tab-configuration .groupTitle {
-    padding: 0 0 5px 0;
-    margin: 0 0 10px 0;
-    font-size: 16px;
-    border-bottom: 1px solid var(--subtleAccent);
-}
-
 .tab-configuration .featuresMultiple {
     border-collapse: collapse;
     margin-bottom: 5px;
@@ -60,21 +55,36 @@
     padding: 0;
 }
 
-.tab-configuration dl.features dt {
-    float: left;
-    width: 10px;
-    height: 18px;
-    line-height: 18px;
+.tab-configuration .serialPorts td:nth-child(1) {
+    width: 20%;
 }
 
-.tab-configuration dl.features dt input {
-    margin-top: 2px;
+.tab-configuration .serialPorts td:nth-child(2) {
+    width: 60%;
 }
 
-.tab-configuration dl.features dd {
-    margin: 0 0 0 20px;
-    height: 18px;
-    line-height: 18px;
+.tab-configuration .serialPorts td:nth-child(3) {
+    width: 20%;
+}
+
+.tab-configuration .serialPorts tr:last-child td {
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.tab-configuration .serialPorts .identifier {
+    min-width: 60px;
+}
+
+.tab-configuration .serialPorts .function {
+    min-width: 200px;
+    width: 95%;
+}
+
+.tab-configuration .serialPorts .baudrate {
+    min-width: 100px;
+    width: 95%;
 }
 
 .tab-configuration .number input {
@@ -97,29 +107,6 @@
 
 .tab-configuration .number span {
     margin-left: 0;
-}
-
-.tab-configuration .gps .line {
-    clear: left;
-}
-
-.tab-configuration .gps select {
-    float: left;
-    width: 100px;
-    height: 20px;
-    margin: 0 10px 5px 0;
-    border: 1px solid var(--subtleAccent);
-}
-
-.tab-configuration .gps .select > div:first-child {
-    float: left;
-    height: 20px;
-    margin-right: 15px;
-    margin-left: 3px;
-}
-
-.tab-configuration .gps span {
-    line-height: 20px;
 }
 
 .tab-configuration .freelabel {
@@ -187,12 +174,6 @@
     margin-bottom: 0;
 }
 
-.tab-configuration .numberspacer {
-    float: left;
-    width: 65px;
-    height: 21px;
-}
-
 .tab-configuration thead {
     display: none;
 }
@@ -202,15 +183,17 @@
     float: left;
 }
 
-.tab-configuration .tab-configuration .system .gui_box {
+.tab-configuration .system .gui_box {
     float: left;
 }
 
-.tab-configuration .board .gui_box, .tab-configuration .acc .gui_box {
+.tab-configuration .board .gui_box,
+.tab-configuration .acc .gui_box {
     float: left;
 }
 
-.tab-configuration .gps .gui_box, .tab-configuration .other .gui_box {
+.tab-configuration .gps .gui_box,
+.tab-configuration .other .gui_box {
     float: left;
     margin-bottom: 10px;
 }
@@ -219,8 +202,6 @@
     width: 38px;
 }
 
-.tab-configuration .beeper-configuration tr:last-child td,
-.tab-configuration .dshotBeaconConditions tr:last-child td,
 .tab-configuration .other tr:last-child td {
     border-bottom: 0;
     padding-bottom: 0;
@@ -284,7 +265,9 @@
     width: 100%;
 }
 
-.tab-configuration .gyroSyncDenom, .tab-configuration .pidProcessDenom, .tab-configuration .gyroFrequency {
+.tab-configuration .gyroSyncDenom,
+.tab-configuration .pidProcessDenom,
+.tab-configuration .gyroFrequency {
     width:90px;
 }
 
@@ -294,10 +277,6 @@
     padding-left: 6px;
     margin-right: 10px;
     font-weight: bold;
-}
-
-.tab-configuration .gpsSettings .note {
-    margin-top: 10px;
 }
 
 .tab-configuration .model-and-info {

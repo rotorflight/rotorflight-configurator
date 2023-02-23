@@ -9,7 +9,7 @@ const Features = function (config) {
         {bit: 3, group: 'rxMode', mode: 'select', name: 'RX_SERIAL'},
         // {bit: 6, group: 'other', name: 'SOFTSERIAL', haveTip: true},
         {bit: 7, group: 'other', name: 'GPS'},
-        {bit: 9, group: 'other', name: 'SONAR'},
+        //{bit: 9, group: 'other', name: 'SONAR'},
         {bit: 10, group: 'other', name: 'TELEMETRY'},
         {bit: 13, group: 'rxMode', mode: 'select', name: 'RX_PARALLEL_PWM'},
         {bit: 14, group: 'rxMode', mode: 'select', name: 'RX_MSP'},

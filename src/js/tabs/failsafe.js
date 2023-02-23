@@ -28,7 +28,7 @@ TABS.failsafe.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_BOXIDS))
             .then(() => MSP.promise(MSPCodes.MSP_BOXNAMES))
             .then(() => MSP.promise(MSPCodes.MSP_RC))
-            .then(() => MSP.promise(MSPCodes.MSP2_COMMON_SERIAL_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_SERIAL_CONFIG))
             .then(callback);
     }
 

@@ -720,51 +720,34 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 console.log('Channel forwarding saved');
                 break;
 
-            case MSPCodes.MSP_CF_SERIAL_CONFIG:
+            case MSPCodes.MSP_SERIAL_CONFIG:
                 FC.SERIAL_CONFIG.ports = [];
-                const bytesPerPort = 1 + 2 + (1 * 4);
+                const bytesPerPort = 1 + 4 + 4;
                 const serialPortCount = data.byteLength / bytesPerPort;
                 for (let i = 0; i < serialPortCount; i++) {
+                    const portId = data.readU8();
+                    const fnMask = data.readU32();
+                    const baudrates = [
+                        data.readU8(),
+                        data.readU8(),
+                        data.readU8(),
+                        data.readU8(),
+                    ];
                     const serialPort = {
-                        identifier: data.readU8(),
-                        functions: self.serialPortFunctionMaskToFunctions(data.readU16()),
-                        msp_baudrate: self.BAUD_RATES[data.readU8()],
-                        gps_baudrate: self.BAUD_RATES[data.readU8()],
-                        telemetry_baudrate: self.BAUD_RATES[data.readU8()],
-                        blackbox_baudrate: self.BAUD_RATES[data.readU8()],
+                        identifier: portId,
+                        functions: self.serialPortFunctionMaskToFunctions(fnMask),
+                        functionMask: fnMask,
+                        msp_baudrate: self.BAUD_RATES[baudrates[0]],
+                        gps_baudrate: self.BAUD_RATES[baudrates[1]],
+                        telemetry_baudrate: self.BAUD_RATES[baudrates[2]],
+                        blackbox_baudrate: self.BAUD_RATES[baudrates[3]],
                     };
-
                     FC.SERIAL_CONFIG.ports.push(serialPort);
                 }
                 break;
 
-            case MSPCodes.MSP2_COMMON_SERIAL_CONFIG:
-                FC.SERIAL_CONFIG.ports = [];
-                const count = data.readU8();
-                const portConfigSize = data.remaining() / count;
-                for (let ii = 0; ii < count; ii++) {
-                    const start = data.remaining();
-                    const serialPort = {
-                        identifier: data.readU8(),
-                        functions: self.serialPortFunctionMaskToFunctions(data.readU32()),
-                        msp_baudrate: self.BAUD_RATES[data.readU8()],
-                        gps_baudrate: self.BAUD_RATES[data.readU8()],
-                        telemetry_baudrate: self.BAUD_RATES[data.readU8()],
-                        blackbox_baudrate: self.BAUD_RATES[data.readU8()],
-                    };
-                    FC.SERIAL_CONFIG.ports.push(serialPort);
-                    while(start - data.remaining() < portConfigSize && data.remaining() > 0) {
-                        data.readU8();
-                    }
-                }
-                break;
-
-            case MSPCodes.MSP_SET_CF_SERIAL_CONFIG:
+            case MSPCodes.MSP_SET_SERIAL_CONFIG:
                 console.log('Serial config saved');
-                break;
-
-            case MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG:
-                console.log('Serial config saved (MSPv2)');
                 break;
 
             case MSPCodes.MSP_MODE_RANGES:
@@ -1693,29 +1676,11 @@ MspHelper.prototype.crunch = function(code) {
         case MSPCodes.MSP_SET_CHANNEL_FORWARDING:
             break;
 
-        case MSPCodes.MSP_SET_CF_SERIAL_CONFIG:
+        case MSPCodes.MSP_SET_SERIAL_CONFIG:
             for (let i = 0; i < FC.SERIAL_CONFIG.ports.length; i++) {
                 const serialPort = FC.SERIAL_CONFIG.ports[i];
-                buffer.push8(serialPort.identifier);
-
-                const functionMask = self.serialPortFunctionsToMask(serialPort.functions);
-                buffer.push16(functionMask)
-                    .push8(self.BAUD_RATES.indexOf(serialPort.msp_baudrate))
-                    .push8(self.BAUD_RATES.indexOf(serialPort.gps_baudrate))
-                    .push8(self.BAUD_RATES.indexOf(serialPort.telemetry_baudrate))
-                    .push8(self.BAUD_RATES.indexOf(serialPort.blackbox_baudrate));
-            }
-            break;
-
-        case MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG:
-            buffer.push8(FC.SERIAL_CONFIG.ports.length);
-
-            for (let i = 0; i < FC.SERIAL_CONFIG.ports.length; i++) {
-                const serialPort = FC.SERIAL_CONFIG.ports[i];
-                buffer.push8(serialPort.identifier);
-
-                const functionMask = self.serialPortFunctionsToMask(serialPort.functions);
-                buffer.push32(functionMask)
+                buffer.push8(serialPort.identifier)
+                    .push32(serialPort.functionMask)
                     .push8(self.BAUD_RATES.indexOf(serialPort.msp_baudrate))
                     .push8(self.BAUD_RATES.indexOf(serialPort.gps_baudrate))
                     .push8(self.BAUD_RATES.indexOf(serialPort.telemetry_baudrate))

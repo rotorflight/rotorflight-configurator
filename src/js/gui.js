@@ -51,7 +51,6 @@ const GuiControl = function () {
         'profiles',
         'rates',
         'gyro',
-        'ports',
         'receiver',
         'sensors',
         'servos',

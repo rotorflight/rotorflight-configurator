@@ -1136,6 +1136,12 @@
     "configurationFeatures": {
         "message": "Features"
     },
+    "configurationSerialPorts": {
+        "message": "Serial Ports"
+    },
+    "configurationSerialPortsHelp": {
+        "message": "Select function and speed for each serial port (UART)."
+    },
     "configurationReceiver": {
         "message": "Receiver"
     },
@@ -1419,6 +1425,9 @@
     "portsTelemetryDisabled": {
         "message": "Disabled"
     },
+    "portsFunction_DISABLED": {
+        "message": "Disabled"
+    },
     "portsFunction_MSP": {
         "message": "MSP"
     },
@@ -1426,49 +1435,52 @@
         "message": "GPS"
     },
     "portsFunction_TELEMETRY_FRSKY": {
-        "message": "FrSky"
+        "message": "Telemetry: FrSky Hub"
     },
     "portsFunction_TELEMETRY_HOTT": {
-        "message": "HoTT"
+        "message": "Telemetry: Graupner HoTT"
     },
     "portsFunction_TELEMETRY_LTM": {
-        "message": "LTM"
+        "message": "Telemetry: LTM"
     },
     "portsFunction_TELEMETRY_MAVLINK": {
-        "message": "MAVLink"
+        "message": "Telemetry: MAVLink"
     },
     "portsFunction_TELEMETRY_MSP": {
-        "message": "MSP"
+        "message": "Telemetry: MSP"
     },
     "portsFunction_TELEMETRY_SMARTPORT": {
-        "message": "SmartPort"
+        "message": "Telemetry: FrSky SmartPort"
     },
     "portsFunction_TELEMETRY_IBUS": {
-        "message": "iBUS"
+        "message": "Telemetry: FlySky iBUS"
     },
     "portsFunction_TELEMETRY_JETIXBUS": {
-        "message": "JETIXBUS"
+        "message": "Telemetry: JETI Xbus"
     },
     "portsFunction_TELEMETRY_CRSF": {
-        "message": "CRSF"
+        "message": "Telemetry: TBS CRSF"
     },
     "portsFunction_TELEMETRY_SRXL": {
-        "message": "SRXL"
+        "message": "Telemetry: Spektrum SRXL"
     },
     "portsFunction_ESC_SENSOR": {
-        "message": "ESC"
+        "message": "ESC Telemetry"
     },
     "portsFunction_RX_SERIAL": {
-        "message": "Serial RX"
+        "message": "Serial Rx"
     },
     "portsFunction_BLACKBOX": {
-        "message": "Blackbox logging"
+        "message": "Blackbox Logging"
     },
     "portsFunction_TBS_SMARTAUDIO": {
-        "message": "VTX (TBS SmartAudio)"
+        "message": "VTX: TBS SmartAudio"
     },
     "portsFunction_IRC_TRAMP": {
-        "message": "VTX (IRC Tramp)"
+        "message": "VTX: IRC Tramp"
+    },
+    "portsFunction_RUNCAM": {
+        "message": "Camera: RunCam"
     },
     "portsFunction_RUNCAM_DEVICE_CONTROL": {
         "message": "Camera (RunCam Protocol)"
@@ -1477,7 +1489,10 @@
         "message": "Benewake LIDAR"
     },
     "portsFunction_FRSKY_OSD": {
-        "message": "OSD (FrSky Protocol)"
+        "message": "OSD: FrSky"
+    },
+    "portsFunction_CUSTOM": {
+        "message": "Custom"
     },
     "receiverBars": {
         "message": "Receiver Channels"
