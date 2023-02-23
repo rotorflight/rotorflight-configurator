@@ -105,7 +105,6 @@ TABS.setup.initialize = function (callback) {
 
         $('.dialogConfirmReset-confirmbtn').click(function() {
             dialogConfirmReset.close();
-            analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, analytics.EVENT_TYPES.SET_DEFAULTS, 0);
             MSP.send_message(MSPCodes.MSP_RESET_CONF, false, false, function () {
                 GUI.log(i18n.getMessage('initialSetupSettingsRestored'));
                 GUI.tab_switch_reload();
@@ -134,7 +133,6 @@ TABS.setup.initialize = function (callback) {
         $('.dialogConfirmArming-confirmbtn').click(function() {
             dialogConfirmArming.close();
             mspHelper.setArmingEnabled(true);
-            analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, analytics.EVENT_TYPES.ENABLE_ARMING, 1);
         });
 
         const enableMotorOverrideSwitch = $('input[id="initialSetupEnableMotorOverride"]');
@@ -142,7 +140,6 @@ TABS.setup.initialize = function (callback) {
 
         enableMotorOverrideSwitch.change(function () {
             const checked = enableMotorOverrideSwitch.prop('checked');
-            analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, analytics.EVENT_TYPES.MOTOR_OVERRIDE, checked);
             FC.CONFIG.motorOverrideDisabled = !checked;
             if (!checked)
                 mspHelper.resetMotorOverrides();
@@ -153,7 +150,6 @@ TABS.setup.initialize = function (callback) {
 
         enableServoOverrideSwitch.change(function () {
             const checked = enableServoOverrideSwitch.prop('checked');
-            analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, analytics.EVENT_TYPES.SERVO_OVERRIDE, checked);
             FC.CONFIG.servoOverrideDisabled = !checked;
             if (!checked)
                 mspHelper.resetServoOverrides();
@@ -164,7 +160,6 @@ TABS.setup.initialize = function (callback) {
 
         enableMixerOverrideSwitch.change(function () {
             const checked = enableMixerOverrideSwitch.prop('checked');
-            analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, analytics.EVENT_TYPES.MIXER_OVERRIDE, checked);
             FC.CONFIG.mixerOverrideDisabled = !checked;
             if (!checked)
                 mspHelper.resetMixerOverrides();
@@ -197,7 +192,6 @@ TABS.setup.initialize = function (callback) {
             const code = (GUI.operating_system === "Linux") ?
                 mspHelper.REBOOT_TYPES.MSC_UTC :
                 mspHelper.REBOOT_TYPES.MSC ;
-                analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, analytics.EVENT_TYPES.MASS_STORAGE, code);
                 MSP.send_message(MSPCodes.MSP_SET_REBOOT, [ code ], false);
         });
 

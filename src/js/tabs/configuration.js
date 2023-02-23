@@ -3,15 +3,12 @@
 TABS.configuration = {
     isDirty: false,
     yaw_fix: 0.0,
-    analyticsChanges: {},
 };
 
 TABS.configuration.initialize = function (callback) {
     const self = this;
 
     GUI.configuration_loaded = true;
-
-    self.analyticsChanges = {};
 
     load_data(load_html);
 
@@ -46,7 +43,6 @@ TABS.configuration.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG, mspHelper.crunch(MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
             .then(() => {
-                analytics.sendChangeEvents(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, self.analyticsChanges);
                 GUI.log(i18n.getMessage('eepromSaved'));
                 MSP.send_message(MSPCodes.MSP_SET_REBOOT);
                 GUI.log(i18n.getMessage('deviceRebooting'));
@@ -262,15 +258,6 @@ TABS.configuration.initialize = function (callback) {
             FC.ADVANCED_CONFIG.gyro_sync_denom = parseInt(gyroSelectElement.val());
 
             const value = parseInt(pidSelectElement.val());
-
-            if (value !== FC.ADVANCED_CONFIG.pid_process_denom) {
-                const newFrequency = pidSelectElement.find('option:selected').text();
-                self.analyticsChanges['PIDLoopDenominator'] = value;
-                self.analyticsChanges['PIDLoopFrequency'] = newFrequency;
-            } else {
-                self.analyticsChanges['PIDLoopDenominator'] = undefined;
-                self.analyticsChanges['PIDLoopFrequency'] = undefined;
-            }
 
             FC.ADVANCED_CONFIG.pid_process_denom = value;
 

@@ -8,7 +8,6 @@ TABS.options.initialize = function (callback) {
         //TABS.options.initPermanentExpertMode();
         TABS.options.initRememberLastTab();
         TABS.options.initCheckForConfiguratorUnstableVersions();
-        //TABS.options.initAnalyticsOptOut();
         TABS.options.initCliAutoComplete();
         TABS.options.initAutoConnectConnectionTimeout();
         TABS.options.initCordovaForceComputerUI();
@@ -66,34 +65,6 @@ TABS.options.initCheckForConfiguratorUnstableVersions = function () {
         });
     });
 };
-
-/**
-TABS.options.initAnalyticsOptOut = function () {
-    ConfigStorage.get('analyticsOptOut', function (result) {
-        if (result.analyticsOptOut) {
-            $('div.analyticsOptOut input').prop('checked', true);
-        }
-
-        $('div.analyticsOptOut input').change(function () {
-            const checked = $(this).is(':checked');
-
-            ConfigStorage.set({'analyticsOptOut': checked});
-
-            checkSetupAnalytics(function (analyticsService) {
-                if (checked) {
-                    analyticsService.sendEvent(analyticsService.EVENT_CATEGORIES.APPLICATION, 'OptOut');
-                }
-
-                analyticsService.setOptOut(checked);
-
-                if (!checked) {
-                    analyticsService.sendEvent(analyticsService.EVENT_CATEGORIES.APPLICATION, 'OptIn');
-                }
-            });
-        }).change();
-    });
-};
-**/
 
 TABS.options.initCliAutoComplete = function () {
     $('div.cliAutoComplete input')

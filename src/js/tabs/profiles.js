@@ -31,13 +31,10 @@ TABS.profiles = {
         [ 10, 50, 0, 50 ],
         [ 50, 50, 0,  0 ],
     ],
-    analyticsChanges: {},
 };
 
 TABS.profiles.initialize = function (callback) {
     const self = this;
-
-    self.analyticsChanges = {};
 
     load_data(load_html);
 
@@ -67,7 +64,6 @@ TABS.profiles.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_SET_GOVERNOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
             .then(() => {
-                analytics.sendChangeEvents(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, self.analyticsChanges);
                 GUI.log(i18n.getMessage('eepromSaved'));
                 if (callback) callback();
             });
@@ -233,7 +229,6 @@ TABS.profiles.initialize = function (callback) {
             self.gainNames.forEach(function(gain, indexGain) {
                 const input = $(`.tab-profiles .${axis} input[name="${gain}"]`);
                 const value = parseInt(input.val());
-                self.analyticsChanges[`pidGain_${axis}_${gain}`] = value;
                 FC.PIDS[indexAxis][indexGain] = value;
             });
         });

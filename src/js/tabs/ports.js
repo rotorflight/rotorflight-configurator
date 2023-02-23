@@ -2,7 +2,6 @@
 
 TABS.ports = {
     isDirty: false,
-    analyticsChanges: {},
 };
 
 TABS.ports.initialize = function (callback) {
@@ -102,7 +101,6 @@ TABS.ports.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG, mspHelper.crunch(MSPCodes.MSP2_COMMON_SET_SERIAL_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
             .then(() => {
-                analytics.sendChangeEvents(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, self.analyticsChanges);
                 GUI.log(i18n.getMessage('eepromSaved'));
                 MSP.send_message(MSPCodes.MSP_SET_REBOOT);
                 GUI.log(i18n.getMessage('deviceRebooting'));
@@ -118,8 +116,6 @@ TABS.ports.initialize = function (callback) {
     }
 
     function update_ui() {
-
-        self.analyticsChanges = {};
 
         $(".tab-ports").addClass("supported");
         $('.tab-ports').addClass('toolbar_hidden');
@@ -340,8 +336,6 @@ TABS.ports.initialize = function (callback) {
     }
 
    function on_save_handler(callback) {
-
-        self.analyticsChanges = {};
 
         // update configuration based on current ui state
         FC.SERIAL_CONFIG.ports = [];

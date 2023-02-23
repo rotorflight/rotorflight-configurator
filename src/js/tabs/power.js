@@ -2,7 +2,6 @@
 
 TABS.power = {
     isDirty: false,
-    analyticsChanges: {},
 };
 
 TABS.power.initialize = function (callback) {
@@ -47,7 +46,6 @@ TABS.power.initialize = function (callback) {
             MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, save_completed);
         }
         function save_completed() {
-            analytics.sendChangeEvents(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, self.analyticsChanges);
             GUI.log(i18n.getMessage('eepromSaved'));
             if (callback) callback();
         }
@@ -468,8 +466,6 @@ TABS.power.initialize = function (callback) {
 
     function process_html() {
         initDisplay();
-
-        self.analyticsChanges = {};
 
         // translate to user-selected language
         i18n.localizePage();

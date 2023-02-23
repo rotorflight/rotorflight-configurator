@@ -516,9 +516,7 @@ TABS.blackbox.initialize = function (callback) {
 
         if (dataflashPresent && FC.SDCARD.state === MSP.SDCARD_STATE_NOT_PRESENT) {
             loggingStatus = 'Dataflash';
-            analytics.setFlightControllerData(analytics.DATA.LOG_SIZE, FC.DATAFLASH.usedSize);
         }
-        analytics.setFlightControllerData(analytics.DATA.LOGGING_STATUS, loggingStatus);
 
         if (FC.SDCARD.supported && !sdcardTimer) {
             // Poll for changes in SD card status
@@ -550,8 +548,6 @@ TABS.blackbox.initialize = function (callback) {
     }
 
     function mark_saving_dialog_done(startTime, totalBytes, totalBytesCompressed) {
-        analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'SaveBlackBox');
-
         const totalTime = (new Date().getTime() - startTime) / 1000;
         console.log('Received ' + totalBytes + ' bytes in ' + totalTime.toFixed(2) + 's ('
             + (totalBytes / totalTime / 1024).toFixed(2) + 'kB / s) with block size ' + self.blockSize + '.');
@@ -713,9 +709,6 @@ TABS.blackbox.initialize = function (callback) {
 
 TABS.blackbox.cleanup = function (callback) {
     this.isDirty = false;
-
-    analytics.setFlightControllerData(analytics.DATA.LOGGING_STATUS, undefined);
-    analytics.setFlightControllerData(analytics.DATA.LOG_SIZE, undefined);
 
     if (sdcardTimer) {
         clearTimeout(sdcardTimer);

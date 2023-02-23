@@ -94,8 +94,6 @@ TABS.firmware_flasher.initialize = function (callback) {
                 self.parsed_hex = data;
 
                 if (self.parsed_hex) {
-                    analytics.setFirmwareData(analytics.DATA.FIRMWARE_SIZE, self.parsed_hex.bytes_total);
-
                     if (!FirmwareCache.has(summary)) {
                         FirmwareCache.put(summary, self.intel_hex);
                     }
@@ -332,8 +330,6 @@ TABS.firmware_flasher.initialize = function (callback) {
         i18n.localizePage();
 
         buildType_e.change(function() {
-            analytics.setFirmwareData(analytics.DATA.FIRMWARE_CHANNEL, $('option:selected', this).text());
-
             $("a.load_remote_file").addClass('disabled');
             var build_type = $(this).val();
 
@@ -705,16 +701,12 @@ TABS.firmware_flasher.initialize = function (callback) {
                         baud = parseInt($('#flash_manual_baud_rate').val());
                     }
 
-                    analytics.sendEvent(analytics.EVENT_CATEGORIES.FLASHING, analytics.EVENT_TYPES.FLASHING, self.unifiedTarget.fileName || null);
-
                     STM32.connect(port, baud, firmware, options);
                 } else {
                     console.log('Please select valid serial port');
                     GUI.log(i18n.getMessage('firmwareFlasherNoValidPort'));
                 }
             } else {
-                analytics.sendEvent(analytics.EVENT_CATEGORIES.FLASHING, analytics.EVENT_TYPES.FLASHING, self.unifiedTarget.fileName || null);
-
                 STM32DFU.connect(usbDevices, firmware, options);
             }
         }
@@ -793,9 +785,6 @@ TABS.firmware_flasher.initialize = function (callback) {
         $('a.load_file').click(function () {
             self.enableFlashing(false);
 
-            analytics.setFirmwareData(analytics.DATA.FIRMWARE_CHANNEL, undefined);
-            analytics.setFirmwareData(analytics.DATA.FIRMWARE_SOURCE, 'file');
-
             chrome.fileSystem.chooseEntry({
                 type: 'openFile',
                 accepts: [
@@ -816,7 +805,6 @@ TABS.firmware_flasher.initialize = function (callback) {
                     console.log('Loading file from: ' + path);
 
                     fileEntry.file(function (file) {
-                        analytics.setFirmwareData(analytics.DATA.FIRMWARE_NAME, file.name);
                         var reader = new FileReader();
 
                         reader.onloadend = function(e) {
@@ -830,7 +818,6 @@ TABS.firmware_flasher.initialize = function (callback) {
                                         self.parsed_hex = data;
 
                                         if (self.parsed_hex) {
-                                            analytics.setFirmwareData(analytics.DATA.FIRMWARE_SIZE, self.parsed_hex.bytes_total);
                                             self.localFirmwareLoaded = true;
 
                                             flashingMessageLocal();
@@ -880,12 +867,8 @@ TABS.firmware_flasher.initialize = function (callback) {
             let isCached = FirmwareCache.has(release);
             if (evt.target.value === "0" || isCached) {
                 if (isCached) {
-                    analytics.setFirmwareData(analytics.DATA.FIRMWARE_SOURCE, 'cache');
-
                     FirmwareCache.get(release, cached => {
-                        analytics.setFirmwareData(analytics.DATA.FIRMWARE_NAME, release.file);
                         console.info("Release found in cache: " + release.file);
-
                         onLoadSuccess(cached.hexdata, release);
                     });
                 }
@@ -899,8 +882,6 @@ TABS.firmware_flasher.initialize = function (callback) {
         $('a.load_remote_file').click(function (evt) {
             self.enableFlashing(false);
             self.localFirmwareLoaded = false;
-
-            analytics.setFirmwareData(analytics.DATA.FIRMWARE_SOURCE, 'http');
 
             if ($('select[name="firmware_version"]').val() == "0") {
                 GUI.log(i18n.getMessage('firmwareFlasherNoFirmwareSelected'));
@@ -918,15 +899,12 @@ TABS.firmware_flasher.initialize = function (callback) {
             if (summary) { // undefined while list is loading or while running offline
                 if (self.isConfigLocal && FirmwareCache.has(summary)) {
                     // Load the .hex from Cache if available when the user is providing their own config.
-                    analytics.setFirmwareData(analytics.DATA.FIRMWARE_SOURCE, 'cache');
                     FirmwareCache.get(summary, cached => {
-                        analytics.setFirmwareData(analytics.DATA.FIRMWARE_NAME, summary.file);
                         console.info("Release found in cache: " + summary.file);
                         onLoadSuccess(cached.hexdata, summary);
                     });
                     return;
                 }
-                analytics.setFirmwareData(analytics.DATA.FIRMWARE_NAME, summary.file);
                 $("a.load_remote_file").text(i18n.getMessage('firmwareFlasherButtonDownloading'));
                 $("a.load_remote_file").addClass('disabled');
                 $.get(summary.url, onLoadSuccess).fail(failed_to_load);
@@ -940,7 +918,6 @@ TABS.firmware_flasher.initialize = function (callback) {
         exitDfuElement.click(function () {
             if (!$(this).hasClass('disabled')) {
                 if (!GUI.connect_lock) { // button disabled while flashing is in progress
-                    analytics.sendEvent(analytics.EVENT_CATEGORIES.FLASHING, analytics.EVENT_TYPES.EXIT_DFU, null);
                     try {
                         STM32DFU.connect(usbDevices, self.parsed_hex, { exitDfu: true });
                     } catch (e) {
@@ -1106,8 +1083,6 @@ TABS.firmware_flasher.cleanup = function (callback) {
     // Update Firmware button at top
     $('div#flashbutton a.flash_state').removeClass('active');
     $('div#flashbutton a.flash').removeClass('active');
-
-    analytics.resetFirmwareData();
 
     if (callback) callback();
 };

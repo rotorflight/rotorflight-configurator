@@ -1,14 +1,3 @@
-class MockAnalytics {
-    EVENT_CATEGORIES = {};
-
-    sendEvent() {
-        // Empty
-    }
-}
-
-let analytics;
-
-
 describe('TABS.cli', () => {
 
     function toArrayBuffer(string) {
@@ -33,8 +22,6 @@ describe('TABS.cli', () => {
         CliAutoComplete.setEnabled(false); // not testing the client-side autocomplete
 
         before(() => {
-            analytics = new MockAnalytics();
-
             $('body').append(cliTab);
 
             CONFIGURATOR.cliValid = true;
