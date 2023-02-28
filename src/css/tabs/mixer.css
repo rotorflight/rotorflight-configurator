@@ -27,6 +27,9 @@
     margin-bottom: 0;
 }
 
+.tab-mixer .attention {
+    background-color: #c04020;
+}
 
 .tab-mixer input[type="number"]::-webkit-inner-spin-button {
     border: 0;
@@ -44,7 +47,7 @@
     border-radius: 3px;
 }
 
-.tab-mixer .mixerConfigs {
+.tab-mixer .mixerConfigTable {
     float: left;
     width: 100%;
     margin: 0;
@@ -54,7 +57,7 @@
     border-collapse: collapse;
 }
 
-.tab-mixer .mixerConfigs th {
+.tab-mixer .mixerConfigTable th {
     height: 10px;
     font-weight: normal;
     text-overflow: ellipsis;
@@ -63,62 +66,25 @@
     padding: 5px 0 2px 0;
 }
 
-.tab-mixer .mixerConfigs td {
+.tab-mixer .mixerConfigTable td {
     padding: 5px 5px 2px 5px;
 }
 
-.tab-mixer .mixerConfigs tr td {
+.tab-mixer .mixerConfigTable tr td {
     text-align: left;
 }
 
-.tab-mixer .mixerConfigs tr td:first-child {
+.tab-mixer .mixerConfigTable tr td:first-child {
     width: 140px;
     padding-right: 10px;
 }
 
-.tab-mixer .mixerConfigs tr:not(:last-child) td {
+.tab-mixer .mixerConfigTable tr:not(:last-child) td {
     padding-bottom: 5px;
-    border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
-.tab-mixer .mixerInputs {
-    width: 100%;
-    border: 0;
-    border-collapse: collapse;
-    margin-top: 2px;
-}
-
-.tab-mixer .mixerInputs .trhead {
-    color: var(--quietText);
-    background-color: var(--button-background);
-    text-align: center;
-    font-size: 11px;
-    line-height: 16px;
-    height: 22px;
-    border-top: 1px solid var(--boxBackground);
-}
-
-.tab-mixer .mixerInputs td {
-    padding: 6px 5px 2px 5px;
-    text-align: center;
-}
-
-.tab-mixer .mixerInputs td:nth-child(1) {
-    padding-left: 12px;
-    text-align: left;
-}
-
-.tab-mixer .mixerInputs td:nth-child(2) {
-    text-align: center;
-}
-
-.tab-mixer .mixerInputs td:nth-child(3) {
-    text-align: center;
-}
-
-.tab-mixer .mixerInputs td:nth-child(4) {
-    text-align: center;
-    padding-right: 12px;
+.tab-mixer .mixerConfigTable tr.border td {
+    border-top: 1px dotted var(--superSubtleAccent);
 }
 
 .tab-mixer .override .gui_box {
@@ -130,14 +96,51 @@
     padding: 10px 10px;
 }
 
-.tab-mixer .mixerOverride {
+.tab-mixer .mixerOverrideSwitch {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 1px;
+    border: 0;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.tab-mixer .mixerOverrideSwitch th {
+    height: 10px;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border: 0;
+    padding: 5px 0 2px 0;
+}
+
+.tab-mixer .mixerOverrideSwitch td {
+    padding: 12px 15px 12px 15px;
+    text-align: left;
+    border-bottom: 0;
+}
+
+.tab-mixer .mixerOverrideSwitch tr td:nth-child(1) {
+    min-width: 50px;
+}
+
+.tab-mixer .mixerOverrideSwitch tr td:nth-child(2) {
+    padding-right: 15px;
+}
+
+.tab-mixer .mixerOverrideSwitch tr .td:nth-child(3) {
+    width: 75%;
+}
+
+.tab-mixer .mixerOverrideTable {
     width: 100%;
     border: 0;
     border-collapse: collapse;
     margin-top: 2px;
 }
 
-.tab-mixer .mixerOverride .trhead {
+.tab-mixer .mixerOverrideTable .trhead {
     color: var(--quietText);
     background-color: var(--button-background);
     text-align: center;
@@ -147,48 +150,48 @@
     border-top: 1px solid var(--boxBackground);
 }
 
-.tab-mixer .mixerOverride td {
+.tab-mixer .mixerOverrideTable td {
     padding: 6px 5px 7px 5px;
     border: 1px solid var(--subtleAccent);
 }
 
-.tab-mixer .mixerOverride td:nth-child(1) {
+.tab-mixer .mixerOverrideTable td:nth-child(1) {
     width: 120px;
     text-align: left;
     border-left: 0;
 }
 
-.tab-mixer .mixerOverride td:nth-child(1) span {
+.tab-mixer .mixerOverrideTable td:nth-child(1) span {
     font-size: 12px;
     font-weight: bold;
 }
 
-.tab-mixer .mixerOverride td:nth-child(2) {
+.tab-mixer .mixerOverrideTable td:nth-child(2) {
     width: 80px;
     text-align: center;
 }
 
-.tab-mixer .mixerOverride td:nth-child(3) {
+.tab-mixer .mixerOverrideTable td:nth-child(3) {
     width: 80px;
     text-align: left;
 }
 
-.tab-mixer .mixerOverride td:nth-child(4) {
+.tab-mixer .mixerOverrideTable td:nth-child(4) {
     height: 75px;
     padding: 2px 20px 2px 20px;
     text-align: left;
     border-right: 0;
 }
 
-.tab-mixer .mixerOverride tr:last-child td {
+.tab-mixer .mixerOverrideTable tr:last-child td {
     border-bottom: 0;
 }
 
-.tab-mixer .mixerOverride tbody tr:nth-child(odd) {
+.tab-mixer .mixerOverrideTable tbody tr:nth-child(odd) {
     background-color: #f8f8f8;
 }
 
-.tab-mixer .mixerOverride tbody tr:nth-child(even) {
+.tab-mixer .mixerOverrideTable tbody tr:nth-child(even) {
     background-color: #e9e9e9;
 }
 

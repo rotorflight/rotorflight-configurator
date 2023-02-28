@@ -56,11 +56,11 @@
 }
 
 .tab-configuration .serialPorts td:nth-child(1) {
-    width: 20%;
+    width: 30%;
 }
 
 .tab-configuration .serialPorts td:nth-child(2) {
-    width: 60%;
+    width: 50%;
 }
 
 .tab-configuration .serialPorts td:nth-child(3) {

@@ -536,11 +536,11 @@ progress[value]::-webkit-progress-bar {
     background-color: #393b3a;
 }
 
-.tab-mixer .mixerOverride tbody tr:nth-child(even) {
+.tab-mixer .mixerOverrideTable tbody tr:nth-child(even) {
     background-color: #3f3f3f;
 }
 
-.tab-mixer .mixerOverride tbody tr:nth-child(odd) {
+.tab-mixer .mixerOverrideTable tbody tr:nth-child(odd) {
     background-color: #393939;
 }
 

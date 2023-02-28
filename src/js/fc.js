@@ -205,6 +205,8 @@ const FC = {
             swash_type:                 0,
             swash_ring:                 0,
             swash_phase:                0,
+            swash_trim:                 [ 0, 0, 0 ],
+            blade_pitch_limit:          0,
         };
 
         this.MIXER_INPUTS =             [];

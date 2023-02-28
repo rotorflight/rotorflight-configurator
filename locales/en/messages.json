@@ -2078,16 +2078,22 @@
         "message": ""
     },
     "mixerCustomNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with <strong>custom</strong> rules. Any configuration changes must be done in the CLI, with the <code>mixer</code> command."
+        "message": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with a <strong>custom setup</strong> that can't be presented in the GUI. Any configuration changes must be done in the CLI, with the <code>mixer</code> command."
+    },
+    "mixerRulesNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with <strong>custom</strong> rules. Any rule changes must be done in the CLI, with the <code>mixer rule</code> command."
     },
     "mixerBidirNote": {
         "message": "<span class=\"message-negative\">Warning:</span> <i>Bidirectional tail motor</i> is an experimental feature that requires additional settings in the CLI."
+    },
+    "mixerRebootNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot before taking affect!"
     },
     "mixerMainRotorSettings": {
         "message": "Main Rotor Settings"
     },
     "mixerMainRotorDirection": {
-        "message": "Main rotor direction"
+        "message": "Main Rotor Direction"
     },
     "mixerMainRotorDirectionHelp": {
         "message": "Looking from the top of the helicopter, what direction is the main rotor turning? For the majority of helicopters this is clockwise"
@@ -2099,40 +2105,97 @@
         "message": "Counter-Clockwise"
     },
     "mixerSwashType": {
-        "message": "Swashplate type"
+        "message": "Swashplate Type"
     },
     "mixerSwashTypeHelp": {
-        "message": "Select the swashplate type for your helicopter.<br><strong>Angle:</strong> This is the angle between the elevator and each of the aileron servos. The options are 120&deg, 135&deg and 140&deg. This is dependant on the helicopters design.<br><strong>Elevator:</strong> Some helicopters the elevator servo (inline with tail and nose) is at the front of the heli, while others are at the rear. Choose the one applicable to your helicopter <br><strong>Custom mixing:</strong> This option can only be configured through the CLI. "
+        "message": "Select the swashplate type.<br><strong>None:</strong> The mixer is turned off. Custom mixing rules must be set in the CLI. <br><strong>Passthrough:</strong> No mixing, controls are passed through the mixer unchanged. <br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For helicopters with three swashplate servos.<br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos."
     },
     "mixerSwashType0": {
-        "message": "Custom Mixing"
+        "message": "None"
     },
     "mixerSwashType1": {
-        "message": "120&deg Front Elevator"
+        "message": "Direct"
     },
     "mixerSwashType2": {
-        "message": "120&deg Rear Elevator"
+        "message": "CCPM 120&deg;"
     },
     "mixerSwashType3": {
-        "message": "140&deg Front Elevator"
+        "message": "CCPM 135&deg;"
     },
     "mixerSwashType4": {
-        "message": "140&deg Rear Elevator"
+        "message": "CCPM 140&deg;"
     },
     "mixerSwashType5": {
-        "message": "135&deg Front Elevator"
+        "message": "FPM 90&deg; L"
     },
     "mixerSwashType6": {
-        "message": "135&deg Rear Elevator"
+        "message": "FPM 90&deg; V"
     },
     "mixerSwashType7": {
-        "message": "90&deg Fixed Pitch"
+        "message": ""
     },
     "mixerSwashType8": {
-        "message": "45&deg Fixed Pitch"
+        "message": ""
     },
     "mixerSwashType9": {
-        "message": "Passthrough"
+        "message": ""
+    },
+    "mixerDirectionNormal": {
+        "message": "Normal"
+    },
+    "mixerDirectionReverse": {
+        "message": "Reverse"
+    },
+    "mixerElevatorDirection": {
+        "message": "Elevator Control Direction"
+    },
+    "mixerElevatorDirectionHelp": {
+        "message": "Depending on the elevator servo position and the head design, the direction may be reversed."
+    },
+    "mixerAileronDirection": {
+        "message": "Aileron Control Direction"
+    },
+    "mixerAileronDirectionHelp": {
+        "message": "Depending on the aileron servo position and the head design, the direction may be reversed."
+    },
+    "mixerCollectiveDirection": {
+        "message": "Collective Control Direction"
+    },
+    "mixerCollectiveDirectionHelp": {
+        "message": "Depending on the blade grip control arm position, the collective direction may be reversed. Usually trailing edge control has reversed direction."
+    },
+    "mixerGeometrySettings": {
+        "message": "Main Rotor Geometry"
+    },
+    "mixerCyclicCalibration": {
+        "message": "Cyclic calibration [%]"
+    },
+    "mixerCyclicCalibrationHelp": {
+        "message": "Adjust the cyclic gain to match the mechanical gain in the head design."
+    },
+    "mixerCollectiveCalibration": {
+        "message": "Collective calibration [%]"
+    },
+    "mixerCollectiveCalibrationHelp": {
+        "message": "Adjust the collective gain to match the mechanical gain in the head design."
+    },
+    "mixerTotalPitchLimit": {
+        "message": "Total blade pitch limit [&deg;]"
+    },
+    "mixerTotalPitchLimitHelp": {
+        "message": "Maximum amount of total cyclic + collective blade pitch."
+    },
+    "mixerCyclicLimit": {
+        "message": "Cyclic blade pitch limit [&deg;]"
+    },
+    "mixerCyclicLimitHelp": {
+        "message": "Maximum amount of cyclic blade pitch"
+    },
+    "mixerCollectiveLimit": {
+        "message": "Collective blade pitch limit [&deg;]"
+    },
+    "mixerCollectiveLimitHelp": {
+        "message": "Maximum amount of collective blade pitch"
     },
     "mixerSwashRing": {
         "message": "Swashring"
@@ -2140,11 +2203,29 @@
     "mixerSwashRingHelp": {
         "message": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum."
     },
+    "mixerSwashPhase": {
+        "message": "Swashplate phase angle [&deg;]"
+    },
+    "mixerSwashPhaseHelp": {
+        "message": "The phase offset for the swashplate controls."
+    },
+    "mixerSwashTrim1": {
+        "message": "Link trim #1"
+    },
+    "mixerSwashTrim2": {
+        "message": "Link trim #2"
+    },
+    "mixerSwashTrim3": {
+        "message": "Link trim #3"
+    },
+    "mixerSwashTrimHelp": {
+        "message": "Trim for swashplate linkages. Use only if the linkages are not adjustable."
+    },
     "mixerTailRotorSettings": {
         "message": "Tail Rotor Settings"
     },
     "mixerTailRotorMode": {
-        "message": "Tail Rotor Type"
+        "message": "Tail rotor type"
     },
     "mixerTailRotorModeHelp": {
         "message": "<strong>Variable pitch:</strong> This is a variable pitch tail controlled by a servo (Servo#4) <br><strong>Motorised:</strong> The tail has a separate motor (M2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode."
@@ -2158,11 +2239,50 @@
     "mixerTailBidirectional": {
         "message": "Bidirectional"
     },
+    "mixerTailRotorDirection": {
+        "message": "Yaw Control Direction"
+    },
+    "mixerTailRotorDirectionHelp": {
+        "message": "Depending on the tail rotor direction and ESC/servo configuration, the yaw direction may be reversed."
+    },
+    "mixerTailRotorCalibration": {
+        "message": "Yaw calibration [%]"
+    },
+    "mixerTailRotorCalibrationHelp": {
+        "message": "Adjust the yaw gain to match the mechanical gain. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors."
+    },
+    "mixerTailRotorMinYaw": {
+        "message": "CW Yaw Blade Angle Limit"
+    },
+    "mixerTailRotorMinYawHelp": {
+        "message": "An angle limit for clockwise yaw."
+    },
+    "mixerTailRotorMaxYaw": {
+        "message": "CCW Yaw Blade Angle Limit"
+    },
+    "mixerTailRotorMaxYawHelp": {
+        "message": "An angle limit for counter-clockwise yaw."
+    },
+    "mixerTailMotorMinYaw": {
+        "message": "CW yaw limit [%]"
+    },
+    "mixerTailMotorMinYawHelp": {
+        "message": "A limit for clockwise yaw."
+    },
+    "mixerTailMotorMaxYaw": {
+        "message": "CCW yaw limit [%]"
+    },
+    "mixerTailMotorMaxYawHelp": {
+        "message": "A limit for counter-clockwise yaw."
+    },
     "mixerTailMotorIdle": {
         "message": "Motor idle throttle [%]"
     },
     "mixerTailMotorIdleHelp": {
         "message": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop"
+    },
+    "mixerSwashLinkTrim": {
+        "message": "Swashplate Link Trims"
     },
     "mixerInputChannels": {
         "message": "Mixer Control Inputs"
@@ -2178,6 +2298,12 @@
     },
     "mixerOverrideHelp": {
         "message": "This feature is used for setting up the rotor and is part of the <strong>Mixer Calibration</strong> process. When the bypass enable is active the mixer can be commanded to the requested positions directly."
+    },
+    "mixerOverrideEnableSwitch": {
+        "message": "<strong>Enable Mixer Override</strong>"
+    },
+    "mixerOverrideEnableSwitchText": {
+        "message": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "mixerOverrideEnable": {
         "message": "Enable"
@@ -2216,19 +2342,19 @@
         "message": "-"
     },
     "mixerInputStabilizedRoll": {
-        "message": "Stabilized Roll"
+        "message": "Roll"
     },
     "mixerInputStabilizedPitch": {
-        "message": "Stabilized Pitch"
+        "message": "Pitch"
     },
     "mixerInputStabilizedYaw": {
-        "message": "Stabilized Yaw"
+        "message": "Yaw"
     },
     "mixerInputStabilizedCollective": {
-        "message": "Stabilized Collective"
+        "message": "Collective"
     },
     "mixerInputStabilizedThrottle": {
-        "message": "Stabilized Throttle"
+        "message": "Throttle"
     },
     "mixerInputRCCommandRoll": {
         "message": "Commanded Roll"

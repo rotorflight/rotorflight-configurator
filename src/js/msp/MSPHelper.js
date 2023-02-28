@@ -594,6 +594,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MIXER_CONFIG.swash_type = data.readU8();
                 FC.MIXER_CONFIG.swash_ring = data.readU8();
                 FC.MIXER_CONFIG.swash_phase = data.readU8();
+                FC.MIXER_CONFIG.swash_trim[0] = data.readU8();
+                FC.MIXER_CONFIG.swash_trim[1] = data.readU8();
+                FC.MIXER_CONFIG.swash_trim[2] = data.readU8();
+                FC.MIXER_CONFIG.blade_pitch_limit = data.readU16();
                 break;
 
             case MSPCodes.MSP_FEATURE_CONFIG:
@@ -1013,7 +1017,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_MIXER_RULES:
                 FC.MIXER_RULES = [];
-                const ruleCount = data.byteLength / 11;
+                const ruleCount = data.byteLength / 7;
                 for (let i = 0; i < ruleCount; i++) {
                     FC.MIXER_RULES.push({
                         oper:   data.readU8(),
@@ -1518,7 +1522,11 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.MIXER_CONFIG.tail_motor_idle)
                 .push8(FC.MIXER_CONFIG.swash_type)
                 .push8(FC.MIXER_CONFIG.swash_ring)
-                .push8(FC.MIXER_CONFIG.swash_phase);
+                .push8(FC.MIXER_CONFIG.swash_phase)
+                .push8(FC.MIXER_CONFIG.swash_trim[0])
+                .push8(FC.MIXER_CONFIG.swash_trim[1])
+                .push8(FC.MIXER_CONFIG.swash_trim[2])
+                .push16(FC.MIXER_CONFIG.blade_pitch_limit);
             break;
 
         case MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG:

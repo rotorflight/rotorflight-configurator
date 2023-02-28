@@ -2,43 +2,48 @@
 
 TABS.mixer = {
     isDirty: false,
+    needSave: false,
     needReboot: false,
+    customConfig: false,
 
     MIXER_CONFIG_dirty: false,
-    MIXER_INPUTS_dirty: false,
+    MIXER_INPUT1_dirty: false,
+    MIXER_INPUT2_dirty: false,
+    MIXER_INPUT3_dirty: false,
+    MIXER_INPUT4_dirty: false,
     MIXER_RULES_dirty: false,
 
     MIXER_OVERRIDE_MIN: -2500,
     MIXER_OVERRIDE_MAX:  2500,
     MIXER_OVERRIDE_OFF:  2501,
 
-    swashType: 0,
-    tailMode: 0,
-
-    prevInputs: null,
-    prevRules: null,
-
-    showInputs: [ 1,2,4,3, ],
-    showOverrides: [ 1,2,4,3, ],
-
-    inputAttr: [
-        { min:-1500, max:1500, step:10,   fixed:0, scale:1.000 },
-        { min:-24,   max:24,   step:0.1,  fixed:1, scale:0.012 },
-        { min:-24,   max:24,   step:0.1,  fixed:1, scale:0.012 },
-        { min:-100,  max:100,  step:1,    fixed:0, scale:0.100 },
-        { min:-24,   max:24,   step:0.1,  fixed:1, scale:0.012 },
+    overrideMixer: [
+        { class: 'mixerMainRotor',  axis: 1,  min:-18,   max:18,   step:0.1,  fixed:1,  scale:0.012,  pipstep: 1,  pipfix: 0,  pipval: [ -18, -15, -12, -9, -6, -3, 0, 3, 6, 9, 12, 15, 18, ], },
+        { class: 'mixerMainRotor',  axis: 2,  min:-18,   max:18,   step:0.1,  fixed:1,  scale:0.012,  pipstep: 1,  pipfix: 0,  pipval: [ -18, -15, -12, -9, -6, -3, 0, 3, 6, 9, 12, 15, 18, ], },
+        { class: 'mixerMainRotor',  axis: 4,  min:-18,   max:18,   step:0.1,  fixed:1,  scale:0.012,  pipstep: 1,  pipfix: 0,  pipval: [ -18, -15, -12, -9, -6, -3, 0, 3, 6, 9, 12, 15, 18, ], },
+        { class: 'mixerTailRotor',  axis: 3,  min:-30,   max:30,   step:0.1,  fixed:0,  scale:0.024,  pipstep: 1,  pipfix: 0,  pipval: [ -30, -24, -18, -12, -6, 0, 6, 12, 18, 24, 30, ], },
+        { class: 'mixerTailMotor',  axis: 3,  min:-125,  max:125,  step:1,    fixed:0,  scale:0.100,  pipstep: 5,  pipfix: 0,  pipval: [ -125, -100, -75, -50, -25, 0, 25, 50, 75, 100, 125, ], },
     ],
-    overrideAttr: [
-        { min:-1500, max:1500, step:50,   fixed:0, scale:1.000 },
-        { min:-18,   max:18,   step:0.1,  fixed:1, scale:0.012 },
-        { min:-18,   max:18,   step:0.1,  fixed:1, scale:0.012 },
-        { min:-100,  max:100,  step:1,    fixed:0, scale:0.100 },
-        { min:-18,   max:18,   step:0.1,  fixed:1, scale:0.012 },
-    ],
+
 };
 
 TABS.mixer.initialize = function (callback) {
     const self = this;
+
+    function setDirty() {
+        if (!self.isDirty) {
+            self.isDirty = true;
+            $('.tab-mixer').removeClass('toolbar_hidden');
+        }
+
+        if (self.needReboot) {
+            $('.save_btn').hide();
+            $('.reboot_btn').show();
+        } else {
+            $('.save_btn').show();
+            $('.reboot_btn').hide();
+        }
+    }
 
     load_data(load_html);
 
@@ -59,13 +64,31 @@ TABS.mixer.initialize = function (callback) {
     function save_data(callback) {
         function send_mixer_config() {
             if (self.MIXER_CONFIG_dirty)
-                MSP.send_message(MSPCodes.MSP_SET_MIXER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG), false, send_mixer_inputs);
+                MSP.send_message(MSPCodes.MSP_SET_MIXER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG), false, send_mixer_input1);
             else
-                send_mixer_inputs();
+                send_mixer_input1();
         }
-        function send_mixer_inputs() {
-            if (self.MIXER_INPUTS_dirty)
-                mspHelper.sendMixerInputs(send_mixer_rules);
+        function send_mixer_input1() {
+            if (self.MIXER_INPUT1_dirty)
+                mspHelper.sendMixerInput(1, send_mixer_input2);
+            else
+                send_mixer_input2();
+        }
+        function send_mixer_input2() {
+            if (self.MIXER_INPUT2_dirty)
+                mspHelper.sendMixerInput(2, send_mixer_input3);
+            else
+                send_mixer_input3();
+        }
+        function send_mixer_input3() {
+            if (self.MIXER_INPUT3_dirty)
+                mspHelper.sendMixerInput(3, send_mixer_input4);
+            else
+                send_mixer_input4();
+        }
+        function send_mixer_input4() {
+            if (self.MIXER_INPUT4_dirty)
+                mspHelper.sendMixerInput(4, send_mixer_rules);
             else
                 send_mixer_rules();
         }
@@ -76,20 +99,25 @@ TABS.mixer.initialize = function (callback) {
                 save_eeprom();
         }
         function save_eeprom() {
-            if (self.MIXER_CONFIG_dirty || self.MIXER_INPUTS_dirty || self.MIXER_RULES_dirty)
+            if (self.needSave)
                 MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, eeprom_saved);
             else
                 save_done();
         }
         function eeprom_saved() {
             GUI.log(i18n.getMessage('eepromSaved'));
+            self.needSave = false;
             save_done();
         }
         function save_done() {
             self.MIXER_CONFIG_dirty = false;
-            self.MIXER_INPUTS_dirty = false;
+            self.MIXER_INPUT1_dirty = false;
+            self.MIXER_INPUT2_dirty = false;
+            self.MIXER_INPUT3_dirty = false;
+            self.MIXER_INPUT4_dirty = false;
             self.MIXER_RULES_dirty = false;
-            self.isDirty = false;
+
+            self.isDirty = self.needReboot || self.needSave;
 
             if (self.needReboot) {
                 MSP.send_message(MSPCodes.MSP_SET_REBOOT);
@@ -104,65 +132,7 @@ TABS.mixer.initialize = function (callback) {
         send_mixer_config();
     }
 
-    function revert_data(callback) {
-        function send_mixer_inputs() {
-            if (self.MIXER_INPUTS_dirty)
-                mspHelper.sendMixerInputs(send_mixer_rules);
-            else
-                send_mixer_rules();
-        }
-        function send_mixer_rules() {
-            if (self.MIXER_RULES_dirty)
-                mspHelper.sendMixerRules(revert_done);
-            else
-                revert_done();
-        }
-        function revert_done() {
-            self.MIXER_INPUTS_dirty = false;
-            self.MIXER_RULES_dirty = false;
-
-            if (callback) callback();
-        }
-
-        send_mixer_inputs();
-    }
-
-    function add_input(inputIndex) {
-
-        const mixerInput = $('#tab-mixer-templates .mixerInputTemplate tr').clone();
-
-        const inputName = mixerInput.find('#name');
-        const inputRate = mixerInput.find('#rate');
-        const inputMin  = mixerInput.find('#min');
-        const inputMax  = mixerInput.find('#max');
-
-        const input = FC.MIXER_INPUTS[inputIndex];
-        const attr = self.inputAttr[inputIndex];
-
-        mixerInput.attr('class', `mixerInput${inputIndex}`);
-        mixerInput.data('index', inputIndex);
-
-        inputName.text(i18n.getMessage(Mixer.inputNames[inputIndex]));
-        inputRate.val(input.rate).change();
-        inputMax.attr(attr)
-            .val((input.max * attr.scale).toFixed(attr.fixed))
-            .change();
-        inputMin.attr(attr)
-            .val((input.min * attr.scale).toFixed(attr.fixed))
-            .change();
-
-        $('.mixerInputs tbody').append(mixerInput);
-
-        mixerInput.change(function() {
-            input.rate = parseInt(inputRate.val());
-            input.max = parseFloat(inputMax.val()) / attr.scale;
-            input.min = parseFloat(inputMin.val()) / attr.scale;
-
-            mspHelper.sendMixerInput(inputIndex);
-        });
-    }
-
-    function add_override(inputIndex) {
+    function add_override(axis) {
 
         const mixerOverride = $('#tab-mixer-templates .mixerOverrideTemplate tr').clone();
 
@@ -170,91 +140,38 @@ TABS.mixer.initialize = function (callback) {
         const mixerEnable = mixerOverride.find('.mixerOverrideEnable input');
         const mixerInput  = mixerOverride.find('.mixerOverrideInput input');
 
-        const attr = self.overrideAttr[inputIndex];
+        const inputIndex = axis.axis;
 
-        mixerOverride.attr('class', `mixerOverride${inputIndex}`);
+        mixerOverride.addClass(axis.class);
+        mixerOverride.addClass('mixerOverrideActive');
         mixerOverride.find('.mixerOverrideName').text(i18n.getMessage(Mixer.inputNames[inputIndex]));
 
-        mixerInput.attr(attr);
+        mixerInput.attr('min', axis.min);
+        mixerInput.attr('max', axis.max);
+        mixerInput.attr('step', axis.step);
 
-        switch (inputIndex) {
-            case 1:
-            case 2:
-            case 4:
-            {
-                mixerSlider.noUiSlider({
-                    range: {
-                        'min': -18,
-                        'max':  18,
-                    },
-                    start: 0,
-                    step: 1,
-                    behaviour: 'snap-drag',
-                });
+        mixerSlider.noUiSlider({
+            range: {
+                'min': axis.min,
+                'max': axis.max,
+            },
+            start: 0,
+            step: axis.pipstep,
+            behaviour: 'snap-drag',
+        });
 
-                mixerOverride.find('.pips-range').noUiSlider_pips({
-                    mode: 'values',
-                    values: [ -18, -15, -12, -9, -6, -3, 0, 3, 6, 9, 12, 15, 18, ],
-                    density: 100 / ((18 + 18) / 1),
-                    stepped: true,
-                    format: wNumb({
-                        decimals: 0,
-                    }),
-                });
-            }
-            break;
-
-            case 3:
-            {
-                mixerSlider.noUiSlider({
-                    range: {
-                        'min': -100,
-                        'max':  100,
-                    },
-                    start: 0,
-                    step: 5,
-                    behaviour: 'snap-drag',
-                });
-
-                mixerOverride.find('.pips-range').noUiSlider_pips({
-                    mode: 'values',
-                    values: [ -100, -75, -50, -25, 0, 25, 50, 75, 100, ],
-                    density: 100 / ((100 + 100) / 5),
-                    stepped: true,
-                    format: wNumb({
-                        decimals: 0,
-                    }),
-                });
-            }
-            break;
-
-            default:
-            {
-                mixerSlider.noUiSlider({
-                    range: {
-                        'min': -1500,
-                        'max':  1500,
-                    },
-                    start: 0,
-                    step: 50,
-                    behaviour: 'snap-drag',
-                });
-
-                mixerOverride.find('.pips-range').noUiSlider_pips({
-                    mode: 'values',
-                    values: [ -1500, -1000, -500, 0, 500, 1000, 1500, ],
-                    density: 100 / ((1500 + 1500) / 100),
-                    stepped: true,
-                    format: wNumb({
-                        decimals: 0,
-                    }),
-                });
-            }
-            break;
-        }
+        mixerOverride.find('.pips-range').noUiSlider_pips({
+            mode: 'values',
+            values: axis.pipval,
+            density: 100 / ((axis.max - axis.min) / axis.pipstep),
+            stepped: true,
+            format: wNumb({
+                decimals: axis.pipfix,
+            }),
+        });
 
         mixerSlider.on('slide', function () {
-            mixerInput.val(Number($(this).val()).toFixed(attr.fixed));
+            mixerInput.val(Number($(this).val()).toFixed(axis.fixed));
         });
 
         mixerSlider.on('change', function () {
@@ -264,7 +181,7 @@ TABS.mixer.initialize = function (callback) {
         mixerInput.change(function () {
             const value = $(this).val();
             mixerSlider.val(value);
-            FC.MIXER_OVERRIDE[inputIndex] = Math.round(value / attr.scale);
+            FC.MIXER_OVERRIDE[inputIndex] = Math.round(value / axis.scale);
             mspHelper.sendMixerOverride(inputIndex);
         });
 
@@ -285,8 +202,8 @@ TABS.mixer.initialize = function (callback) {
         let value = FC.MIXER_OVERRIDE[inputIndex];
         let check = (value >= self.MIXER_OVERRIDE_MIN && value <= self.MIXER_OVERRIDE_MAX);
 
-        value *= attr.scale;
-        value = (check ? value : 0).toFixed(attr.fixed);
+        value *= axis.scale;
+        value = (check ? value : 0).toFixed(axis.fixed);
 
         mixerInput.val(value);
         mixerSlider.val(value);
@@ -295,121 +212,240 @@ TABS.mixer.initialize = function (callback) {
         mixerSlider.attr('disabled', !check);
         mixerEnable.prop('checked', check);
 
-        $('.mixerOverride tbody').append(mixerOverride);
+        $('.mixerOverrideTable tbody').append(mixerOverride);
     }
 
     function data_to_form() {
 
+        self.origMixerConfig = Mixer.cloneConfig(FC.MIXER_CONFIG);
+        self.origMixerInputs = Mixer.cloneInputs(FC.MIXER_INPUTS);
+        self.origMixerRules  = Mixer.cloneRules(FC.MIXER_RULES);
+
         self.isDirty = false;
+        self.needSave = false;
         self.needReboot = false;
 
         self.MIXER_CONFIG_dirty = false;
-        self.MIXER_INPUTS_dirty = false;
+        self.MIXER_INPUT1_dirty = false;
+        self.MIXER_INPUT2_dirty = false;
+        self.MIXER_INPUT3_dirty = false;
+        self.MIXER_INPUT4_dirty = false;
         self.MIXER_RULES_dirty = false;
 
-        self.tailMode = FC.MIXER_CONFIG.tail_rotor_mode;
+        self.overrideMixer.forEach(function(axis) { add_override(axis); });
 
-        Mixer.initialize(self.tailMode);
+        const enableOverrideSwitch = $('#mixerOverrideEnableSwitch');
 
-        self.swashType = Mixer.findMixer(FC.MIXER_RULES);
-        self.prevRules = Mixer.cloneRules(FC.MIXER_RULES);
-        self.prevInputs = Mixer.cloneInputs(FC.MIXER_INPUTS);
+        enableOverrideSwitch.change(function () {
+            const checked = enableOverrideSwitch.prop('checked');
+            FC.CONFIG.mixerOverrideDisabled = !checked;
+            if (checked) {
+                $('.mixerOverrideAxis').show();
+                $('.mixerOverrideActive .mixerOverrideEnable input').prop('checked',true).change();
+            } else {
+                $('.mixerOverrideAxis').hide();
+                $('.mixerOverrideActive .mixerOverrideEnable input').prop('checked',false).change();
+            }
+        });
 
-        const mixerSwashType = $('.tab-mixer #mixerSwashType');
-        const mixerTailMode = $('.tab-mixer #mixerTailRotorMode');
+        enableOverrideSwitch.prop('checked', !FC.CONFIG.mixerOverrideDisabled).change();
 
-        if (self.swashType == -1)
-            mixerSwashType.append($('<option value="-1" disabled>[Select]</option>'));
-        if (self.swashType == 0)
-            mixerSwashType.append($('<option value="0" disabled>' + i18n.getMessage(Mixer.swashTypes[0]) + '</option>'));
+        $('.mixerCustomNote').hide();
+        $('.mixerRulesNote').hide();
+        $('.mixerBidirNote').hide();
+        $('.mixerRebootNote').hide();
+
+        self.customConfig = false;
+
+        self.customConfig |= (FC.MIXER_INPUTS[1].rate !=  FC.MIXER_INPUTS[2].rate &&
+                              FC.MIXER_INPUTS[1].rate != -FC.MIXER_INPUTS[2].rate);
+
+        self.customConfig |= (FC.MIXER_INPUTS[1].max !=  FC.MIXER_INPUTS[2].max);
+
+        self.customConfig |= (FC.MIXER_INPUTS[1].max != -FC.MIXER_INPUTS[1].min);
+        self.customConfig |= (FC.MIXER_INPUTS[2].max != -FC.MIXER_INPUTS[2].min);
+        self.customConfig |= (FC.MIXER_INPUTS[4].max != -FC.MIXER_INPUTS[4].min);
+
+        if (self.customConfig) {
+            $('.mixerCustomNote').show();
+            $('.tab-mixer .configuration input,select').prop('disabled', true);
+        }
+
+        self.customRules = !Mixer.isNullMixer(FC.MIXER_RULES);
+
+        if (self.customRules)
+            $('.mixerRulesNote').show();
+
+        const ailDir = (FC.MIXER_INPUTS[1].rate < 0) ? -1 : 1;
+        const elevDir = (FC.MIXER_INPUTS[2].rate < 0) ? -1 : 1;
+        const collDir = (FC.MIXER_INPUTS[4].rate < 0) ? -1 : 1;
+
+        const collectiveRate = Math.abs(FC.MIXER_INPUTS[4].rate) * 0.1;
+        const cyclicRate = Math.abs(FC.MIXER_INPUTS[1].rate) * 0.1;
+
+        const collectiveMax = FC.MIXER_INPUTS[4].max * 0.012;
+        const cyclicMax = FC.MIXER_INPUTS[2].max * 0.012;
+        const totalMax = FC.MIXER_CONFIG.blade_pitch_limit * 0.012;
+
+        const yawDir = (FC.MIXER_INPUTS[3].rate < 0) ? -1 : 1;
+        const yawRate = Math.abs(FC.MIXER_INPUTS[3].rate) * 0.1;
+
+        const mixerSwashType = $('#mixerSwashType');
 
         Mixer.swashTypes.forEach(function(name,index) {
-            if (index > 0)
-                mixerSwashType.append($(`<option value="${index}">` + i18n.getMessage(name) + '</option>'));
+            mixerSwashType.append($(`<option value="${index}">` + i18n.getMessage(name) + '</option>'));
         });
 
-        const mixerRuleOpers   = $('.mixerRuleTemplate #oper');
-        const mixerRuleInputs  = $('.mixerRuleTemplate #input');
-        const mixerRuleOutputs = $('.mixerRuleTemplate #output');
+        mixerSwashType.val(FC.MIXER_CONFIG.swash_type);
 
-        Mixer.operNames.forEach(function(name,index) {
-            mixerRuleOpers.append($(`<option value="${index}">` + i18n.getMessage(name)  + '</option>'));
-        });
+        //$('#mixerSwashRing').val(FC.MIXER_CONFIG.swash_ring).change();
+        $('#mixerAileronDirection').val(ailDir).change();
+        $('#mixerElevatorDirection').val(elevDir).change();
+        $('#mixerCollectiveDirection').val(collDir).change();
+        $('#mixerMainRotorDirection').val(FC.MIXER_CONFIG.main_rotor_dir);
 
-        Mixer.inputNames.forEach(function(name,index) {
-            mixerRuleInputs.append($(`<option value="${index}">` + i18n.getMessage(name)  + '</option>'));
-        });
+        $('#mixerSwashPhase').val(FC.MIXER_CONFIG.swash_phase * 0.1).change();
 
-        Mixer.outputNames.forEach(function(name,index) {
-            mixerRuleOutputs.append($(`<option value="${index}">` + i18n.getMessage(name) + '</options>'));
-        });
+        $('#mixerSwashTrim1').val(FC.MIXER_CONFIG.swash_trim[0]).change();
+        $('#mixerSwashTrim2').val(FC.MIXER_CONFIG.swash_trim[1]).change();
+        $('#mixerSwashTrim3').val(FC.MIXER_CONFIG.swash_trim[2]).change();
 
-        self.showInputs.forEach(function(index) {
-            add_input(index);
-        });
+        $('#mixerCyclicCalibration').val(cyclicRate).change();
+        $('#mixerCollectiveCalibration').val(collectiveRate).change();
+        $('#mixerCollectiveLimit').val(collectiveMax).change();
+        $('#mixerCyclicLimit').val(cyclicMax).change();
+        $('#mixerTotalPitchLimit').val(totalMax).change();
 
-        if (!FC.CONFIG.mixerOverrideDisabled) {
-            self.showOverrides.forEach(function(index) {
-                add_override(index);
-            });
-        }
-
-        $('.tab-mixer .override').toggle(!FC.CONFIG.mixerOverrideDisabled);
-
-        mixerSwashType.change(function () {
-            const swashType = parseInt($(this).val());
-            if (swashType != 0) {
-                $('.mixerCustomNote').hide();
-                if (self.swashType == 0) {
-                    $('.dialogMixerReset')[0].showModal();
-                }
-            }
-        });
-
-        $('.dialogMixerReset-acceptbtn').click(function() {
-            $('.dialogMixerReset')[0].close();
-        });
-        $('.dialogMixerReset-revertbtn').click(function() {
-            $('.dialogMixerReset')[0].close();
-            mixerSwashType.val(0);
-        });
-
-        mixerTailMode.change(function () {
+        $('#mixerTailRotorMode').change(function () {
             const val = $(this).val();
-            $('.tailRotorMotorized').toggle( val != 0 );
-            $('.mixerBidirNote').toggle( val == 2 );
+
+            if (val > 0) {
+                const yawMax = FC.MIXER_INPUTS[3].max * 0.1;
+                const yawMin = FC.MIXER_INPUTS[3].min * 0.1;
+                $('#mixerTailMotorMinYaw').val(yawMin.toFixed(1));
+                $('#mixerTailMotorMaxYaw').val(yawMax.toFixed(1));
+                $('.mixerTailMotor').show().addClass('mixerOverrideActive');
+                $('.mixerTailRotor').hide().removeClass('mixerOverrideActive');
+                $('.mixerTailRotor .mixerOverrideEnable input').prop('checked',false).change();
+                $('.mixerTailMotor .mixerOverrideEnable input').prop('checked',true).change();
+            }
+            else {
+                const yawMax = FC.MIXER_INPUTS[3].max * 0.024;
+                const yawMin = FC.MIXER_INPUTS[3].min * 0.024;
+                $('#mixerTailRotorMinYaw').val(yawMin.toFixed(1));
+                $('#mixerTailRotorMaxYaw').val(yawMax.toFixed(1));
+                $('.mixerTailRotor').show().addClass('mixerOverrideActive');
+                $('.mixerTailMotor').hide().removeClass('mixerOverrideActive');
+                $('.mixerTailMotor .mixerOverrideEnable input').prop('checked',false).change();
+                $('.mixerTailRotor .mixerOverrideEnable input').prop('checked',true).change();
+            }
+
+            if (val == 2)
+                $('.mixerBidirNote').show();
+            else
+                $('.mixerBidirNote').hide();
         });
 
-        $('.mixerCustomNote').toggle( self.swashType == 0 );
-        $('.mixerBidirNote').toggle( self.tailMode == 2 );
-        $('.tailRotorMotorized').toggle( self.tailMode != 0 );
+        $('#mixerTailRotorMode').val(FC.MIXER_CONFIG.tail_rotor_mode).change();
+        $('#mixerTailRotorDirection').val(yawDir).change();
+        $('#mixerTailRotorCalibration').val(yawRate).change();
+        $('#mixerTailMotorIdle').val(FC.MIXER_CONFIG.tail_motor_idle / 10).change();
 
-        $('.tab-mixer #mixerMainRotorDirection').val(FC.MIXER_CONFIG.main_rotor_dir);
-        $('.tab-mixer #mixerSwashType').val(self.swashType);
-        $('.tab-mixer #mixerSwashRing').val(FC.MIXER_CONFIG.swash_ring);
+        $('.tab-mixer .mixerReboot').change(function() {
+            $('.tab-mixer .mixerRebootNote').show();
+            $('select', this).addClass('attention');
+            self.needReboot = true;
+        });
 
-        $('.tab-mixer #mixerTailRotorMode').val(self.tailMode);
-        $('.tab-mixer #mixerTailMotorIdle').val(FC.MIXER_CONFIG.tail_motor_idle / 10).change();
-    }
+        $('.tab-mixer .mixerConfig').change(function() {
+            FC.MIXER_CONFIG.swash_type = parseInt($('#mixerSwashType').val());
+            FC.MIXER_CONFIG.swash_phase = parseInt($('#mixerSwashPhase').val() * 10);
+            //FC.MIXER_CONFIG.swash_ring = parseInt($('#mixerSwashRing').val());
+            FC.MIXER_CONFIG.main_rotor_dir = parseInt($('#mixerMainRotorDirection').val());
+            FC.MIXER_CONFIG.blade_pitch_limit = $('#mixerTotalPitchLimit').val() / 0.012;
+            FC.MIXER_CONFIG.swash_trim[0] = parseInt($('#mixerSwashTrim1').val());
+            FC.MIXER_CONFIG.swash_trim[1] = parseInt($('#mixerSwashTrim2').val());
+            FC.MIXER_CONFIG.swash_trim[2] = parseInt($('#mixerSwashTrim3').val());
+            FC.MIXER_CONFIG.tail_rotor_mode = parseInt($('#mixerTailRotorMode').val());
+            FC.MIXER_CONFIG.tail_motor_idle = $('#mixerTailMotorIdle').val() * 10;
 
-    function form_to_data() {
+            self.MIXER_CONFIG_dirty = true;
+            self.needSave = true;
+            setDirty();
 
-        const swashType = parseInt($('.tab-mixer #mixerSwashType').val());
-        const tailMode  = parseInt($('.tab-mixer #mixerTailRotorMode').val());
+            MSP.send_message(MSPCodes.MSP_SET_MIXER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG));
+        });
 
-        if (swashType != self.swashType || tailMode != self.tailMode) {
-            if (swashType != 0) {
-                Mixer.initialize(tailMode);
-                FC.MIXER_RULES = Mixer.getMixer(swashType);
-                self.MIXER_RULES_dirty = true;
+        $('.tab-mixer .mixerInput1').change(function() {
+            const aileronDir = $('#mixerAileronDirection').val() * 1;
+            const cyclicRate = $('#mixerCyclicCalibration').val() * 10;
+            const cyclicMax = $('#mixerCyclicLimit').val() / 0.012;
+            FC.MIXER_INPUTS[1].rate = cyclicRate * aileronDir;
+            FC.MIXER_INPUTS[1].min = -cyclicMax;
+            FC.MIXER_INPUTS[1].max =  cyclicMax;
+
+            self.MIXER_INPUT1_dirty = true;
+            self.needSave = true;
+            setDirty();
+
+            mspHelper.sendMixerInput(1);
+        });
+
+        $('.tab-mixer .mixerInput2').change(function() {
+            const elevatorDir = $('#mixerElevatorDirection').val() * 1;
+            const cyclicRate = $('#mixerCyclicCalibration').val() * 10;
+            const cyclicMax = $('#mixerCyclicLimit').val() / 0.012;
+            FC.MIXER_INPUTS[2].rate = cyclicRate * elevatorDir;
+            FC.MIXER_INPUTS[2].min = -cyclicMax;
+            FC.MIXER_INPUTS[2].max =  cyclicMax;
+
+            self.MIXER_INPUT2_dirty = true;
+            self.needSave = true;
+            setDirty();
+
+            mspHelper.sendMixerInput(2);
+        });
+
+        $('.tab-mixer .mixerInput3').change(function() {
+            const yawDir = $('#mixerTailRotorDirection').val() * 1;
+            const yawRate = $('#mixerTailRotorCalibration').val() * 10;
+
+            let yawMin = 0.0, yawMax = 0.0;
+
+            if (FC.MIXER_CONFIG.tail_rotor_mode > 0) {
+                yawMin = $('#mixerTailMotorMinYaw').val() / 0.1;
+                yawMax = $('#mixerTailMotorMaxYaw').val() / 0.1;
             }
-        }
+            else {
+                yawMin = $('#mixerTailRotorMinYaw').val() / 0.024;
+                yawMax = $('#mixerTailRotorMaxYaw').val() / 0.024;
+            }
 
-        FC.MIXER_CONFIG.main_rotor_dir = parseInt($('.tab-mixer #mixerMainRotorDirection').val());
-        FC.MIXER_CONFIG.swash_ring = parseInt($('.tab-mixer #mixerSwashRing').val());
+            FC.MIXER_INPUTS[3].rate = yawRate * yawDir;
+            FC.MIXER_INPUTS[3].min = yawMin;
+            FC.MIXER_INPUTS[3].max = yawMax;
 
-        FC.MIXER_CONFIG.tail_rotor_mode = tailMode;
-        FC.MIXER_CONFIG.tail_motor_idle = $('.tab-mixer #mixerTailMotorIdle').val() * 10;
+            self.MIXER_INPUT3_dirty = true;
+            self.needSave = true;
+            setDirty();
+
+            mspHelper.sendMixerInput(3);
+        });
+
+        $('.tab-mixer .mixerInput4').change(function() {
+            const collectiveDir = $('#mixerCollectiveDirection').val() * 1;
+            const collectiveRate = $('#mixerCollectiveCalibration').val() * 10;
+            const collectiveMax = $('#mixerCollectiveLimit').val() / 0.012;
+            FC.MIXER_INPUTS[4].rate = collectiveRate * collectiveDir;
+            FC.MIXER_INPUTS[4].min = -collectiveMax;
+            FC.MIXER_INPUTS[4].max =  collectiveMax;
+
+            self.MIXER_INPUT4_dirty = true;
+            self.needSave = true;
+            setDirty();
+
+            mspHelper.sendMixerInput(4);
+        });
     }
 
     function process_html() {
@@ -423,44 +459,18 @@ TABS.mixer.initialize = function (callback) {
         // Hide the buttons toolbar
         $('.tab-mixer').addClass('toolbar_hidden');
 
-        const saveBtn = $('.save_btn');
-        const rebootBtn = $('.reboot_btn');
-
-        function setDirty(reboot) {
-            if (!self.isDirty) {
-                self.isDirty = true;
-                $('.tab-mixer').removeClass('toolbar_hidden');
-            }
-            if (reboot)
-                self.needReboot = true;
-            saveBtn.toggle(!self.needReboot);
-            rebootBtn.toggle(self.needReboot);
-        }
-
-        $('.mixerConfigs').change(function () {
-            self.MIXER_CONFIG_dirty = true;
-            setDirty(true);
-        });
-        $('.mixerInputs').change(function () {
-            self.MIXER_INPUTS_dirty = true;
-            setDirty(false);
-        });
-        $('.mixerRules').change(function () {
-            self.MIXER_RULES_dirty = true;
-            setDirty(true);
-        });
-
         self.save = function (callback) {
-            form_to_data();
             save_data(callback);
         };
 
         self.revert = function (callback) {
-            if (self.MIXER_RULES_dirty)
-                FC.MIXER_RULES = self.prevRules;
-            if (self.MIXER_INPUTS_dirty)
-                FC.MIXER_INPUTS = self.prevInputs;
-            revert_data(callback);
+            FC.MIXER_CONFIG = self.origMixerConfig;
+            FC.MIXER_INPUTS = self.origMixerInputs;
+
+            self.needSave = false;
+            self.needReboot = false;
+
+            save_data(callback);
         };
 
         $('a.save').click(function () {
