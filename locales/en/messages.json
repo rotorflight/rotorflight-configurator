@@ -2917,6 +2917,9 @@
     "blackboxLog_mixer": {
         "message": "Mixer"
     },
+    "blackboxLog_attitude": {
+        "message": "Attitude"
+    },
     "blackboxLog_pid": {
         "message": "PID"
     },

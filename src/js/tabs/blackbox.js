@@ -107,6 +107,7 @@ TABS.blackbox = {
         "setpoint",
         "mixer",
         "pid",
+        "attitude",
         "gyroraw",
         "gyro",
         "acc",
