@@ -96,6 +96,7 @@ TABS.profiles.initialize = function (callback) {
 
         const pidModeCheck = $('.tab-profiles select[id="pidmode"]');
         pidModeCheck.change(function(){
+            // TODO: fix or delete this, since now it doesn't seem to do anything.
             if ($('option:selected',this).text() == 'MODE 2'|| $('option:selected',this).text() == 'MODE 9') {
                 $('.tab-profiles .pid_main .WAY').show();
             } else {

@@ -192,38 +192,38 @@
                                     </div>
                                     <div class="helpicon cf_tip subhelp" i18n_title="profilesItermRelaxCutoffHelp"></div>
                                     <span class="suboption">
-                                        <input type="number" id="itermRelaxCutoffRoll" step="1" min="1" max="50" />
+                                        <input type="number" id="itermRelaxCutoffRoll" step="1" min="1" max="100" />
                                         <label for="itermRelaxCutoffRoll">
                                             <span i18n="profilesItermRelaxCutoffRoll"></span>
                                         </label>
                                     </span>
                                     <span class="suboption">
-                                        <input type="number" id="itermRelaxCutoffPitch" step="1" min="1" max="50" />
+                                        <input type="number" id="itermRelaxCutoffPitch" step="1" min="1" max="100" />
                                         <label for="itermRelaxCutoffPitch">
                                             <span i18n="profilesItermRelaxCutoffPitch"></span>
                                         </label>
                                     </span>
                                     <span class="suboption">
-                                        <input type="number" id="itermRelaxCutoffYaw" step="1" min="1" max="50" />
+                                        <input type="number" id="itermRelaxCutoffYaw" step="1" min="1" max="100" />
                                         <label for="itermRelaxCutoffYaw">
                                             <span i18n="profilesItermRelaxCutoffYaw"></span>
                                         </label>
                                     </span>
                                     <div class="helpicon cf_tip subhelp" i18n_title="profilesItermRelaxLevelHelp"></div>
                                     <span class="suboption">
-                                        <input type="number" id="itermRelaxLevelRoll" step="1" min="1" max="50" />
+                                        <input type="number" id="itermRelaxLevelRoll" step="1" min="10" max="250" />
                                         <label for="itermRelaxLevelRoll">
                                             <span i18n="profilesItermRelaxLevelRoll"></span>
                                         </label>
                                     </span>
                                     <span class="suboption">
-                                        <input type="number" id="itermRelaxLevelPitch" step="1" min="1" max="50" />
+                                        <input type="number" id="itermRelaxLevelPitch" step="1" min="10" max="250" />
                                         <label for="itermRelaxLevelPitch">
                                             <span i18n="profilesItermRelaxLevelPitch"></span>
                                         </label>
                                     </span>
                                     <span class="suboption">
-                                        <input type="number" id="itermRelaxLevelYaw" step="1" min="1" max="50" />
+                                        <input type="number" id="itermRelaxLevelYaw" step="1" min="10" max="250" />
                                         <label for="itermRelaxLevelYaw">
                                             <span i18n="profilesItermRelaxLevelYaw"></span>
                                         </label>
@@ -303,7 +303,7 @@
 
                             <tr class="govTTAGain">
                                 <td>
-                                    <input type="number" id="govTTAGain" min="0" max="200" />
+                                    <input type="number" id="govTTAGain" min="0" max="250" />
                                 </td>
                                 <td colspan="2">
                                     <span i18n="govTTAGain"></span>
@@ -312,7 +312,7 @@
                             </tr>
                             <tr class="govTTALimit">
                                 <td>
-                                    <input type="number" id="govTTALimit" min="0" max="200" />
+                                    <input type="number" id="govTTALimit" min="0" max="250" />
                                 </td>
                                 <td colspan="2">
                                     <span i18n="govTTALimit"></span>
@@ -340,7 +340,7 @@
                             </tr>
                             <tr class="pitchFFCollectiveImpulseGain">
                                 <td>
-                                    <input type="number" id="yawFFImpulseFreq" step="1" min="0" max="2500"/>
+                                    <input type="number" id="pitchFFCollectiveImpulseGain" step="1" min="0" max="2500"/>
                                 </td>
                                 <td colspan="2">
                                     <div>
@@ -361,7 +361,7 @@
                         <table class="settings_table">
                             <tr class="acroTrainerGain">
                                 <td>
-                                    <input type="number" id="acroTrainerGain" step="1" min="0" max="100"/>
+                                    <input type="number" id="acroTrainerGain" step="1" min="25" max="255"/>
                                 </td>
                                 <td colspan="2">
                                     <span i18n="profilesAcroTrainerGain"></span>
@@ -379,7 +379,7 @@
                             </tr>
                             <tr class="angleModeGain">
                                 <td>
-                                    <input type="number" id="angleModeGain" step="1" min="0" max="100"/>
+                                    <input type="number" id="angleModeGain" step="1" min="0" max="200"/>
                                 </td>
                                 <td colspan="2">
                                     <span i18n="profilesAngleModeGain"></span>
@@ -388,7 +388,7 @@
                             </tr>
                             <tr class="angleModeLimit">
                                 <td>
-                                    <input type="number" id="angleModeLimit" step="1" min="10" max="80"/>
+                                    <input type="number" id="angleModeLimit" step="1" min="10" max="90"/>
                                 </td>
                                 <td colspan="2">
                                     <span i18n="profilesAngleModeLimit"></span>
@@ -397,7 +397,7 @@
                             </tr>
                             <tr class="horizonModeGain">
                                 <td>
-                                    <input type="number" id="horizonModeGain" step="1" min="0" max="100"/>
+                                    <input type="number" id="horizonModeGain" step="1" min="0" max="200"/>
                                 </td>
                                 <td colspan="2">
                                     <span i18n="profilesHorizonModeGain"></span>
@@ -416,7 +416,7 @@
                                 <td>
                                     <input type="checkbox" id="rescueMode" class="toggle" />
                                 </td>
-                                <td colspan="2">  
+                                <td colspan="2">
                                     <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueModeHelp"></div>
                                     <div>
                                         <label for="rescueMode">
@@ -664,7 +664,7 @@
             <div i18n="dialogCopyProfileNote" style="margin-top: 10px"></div>
             <div class="contentProfile" style="margin-top:20px;">
                 <div>
-                    <span i18n="dialogCopyProfileText"></span> 
+                    <span i18n="dialogCopyProfileText"></span>
                     <select class="selectProfile"></select>
                 </div>
             </div>
