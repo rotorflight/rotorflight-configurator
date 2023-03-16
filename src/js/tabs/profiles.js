@@ -178,6 +178,7 @@ TABS.profiles.initialize = function (callback) {
             const checked = $(this).is(':checked');
             $('.tab-profiles .rescueMode .suboption').toggle(checked);
             $('.tab-profiles .rescueMode .subhelp').toggle(checked);
+            $('.tab-profiles .rescueMode .BaroEnable').toggle(checked);
         });
 
         rescueModeCheck.prop('checked', FC.PID_PROFILE.rescueMode > 0).change();
