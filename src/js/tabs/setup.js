@@ -135,36 +135,6 @@ TABS.setup.initialize = function (callback) {
             mspHelper.setArmingEnabled(true);
         });
 
-        const enableMotorOverrideSwitch = $('input[id="initialSetupEnableMotorOverride"]');
-        enableMotorOverrideSwitch.prop('checked', !FC.CONFIG.motorOverrideDisabled);
-
-        enableMotorOverrideSwitch.change(function () {
-            const checked = enableMotorOverrideSwitch.prop('checked');
-            FC.CONFIG.motorOverrideDisabled = !checked;
-            if (!checked)
-                mspHelper.resetMotorOverrides();
-            });
-
-        const enableServoOverrideSwitch = $('input[id="initialSetupEnableServoOverride"]');
-        enableServoOverrideSwitch.prop('checked', !FC.CONFIG.servoOverrideDisabled);
-
-        enableServoOverrideSwitch.change(function () {
-            const checked = enableServoOverrideSwitch.prop('checked');
-            FC.CONFIG.servoOverrideDisabled = !checked;
-            if (!checked)
-                mspHelper.resetServoOverrides();
-            });
-
-        const enableMixerOverrideSwitch = $('input[id="initialSetupEnableMixerOverride"]');
-        enableMixerOverrideSwitch.prop('checked', !FC.CONFIG.mixerOverrideDisabled);
-
-        enableMixerOverrideSwitch.change(function () {
-            const checked = enableMixerOverrideSwitch.prop('checked');
-            FC.CONFIG.mixerOverrideDisabled = !checked;
-            if (!checked)
-                mspHelper.resetMixerOverrides();
-            });
-
         $('a.backupSettings').click(function () {
             if ($(this).hasClass('disabled')) {
                 return;
