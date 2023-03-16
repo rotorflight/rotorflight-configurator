@@ -23,24 +23,25 @@ TABS.motors.initialize = function (callback) {
 
     function load_data(callback) {
         Promise.resolve(true)
-            .then(() => { return MSP.promise(MSPCodes.MSP_STATUS); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_ARMING_CONFIG); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_FEATURE_CONFIG); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_BATTERY_CONFIG); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_CONFIG); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_OVERRIDE); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_GOVERNOR_CONFIG); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_GOVERNOR_PROFILE); })
+            .then(() => MSP.promise(MSPCodes.MSP_STATUS))
+            .then(() => MSP.promise(MSPCodes.MSP_ARMING_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_BATTERY_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_MOTOR_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_MOTOR_OVERRIDE))
+            .then(() => MSP.promise(MSPCodes.MSP_GOVERNOR_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_GOVERNOR_PROFILE))
             .then(callback);
     }
 
     function save_data(callback) {
         Promise.resolve(true)
-            .then(() => { return MSP.promise(MSPCodes.MSP_SET_GOVERNOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR_CONFIG)); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG)); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)); })
-            .then(() => { return MSP.promise(MSPCodes.MSP_EEPROM_WRITE); })
+            .then(() => MSP.promise(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG)))
+            .then(() => MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)))
+            .then(() => MSP.promise(MSPCodes.MSP_SET_GOVERNOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR_CONFIG)))
+            .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
             .then(() => {
                 GUI.log(i18n.getMessage('eepromSaved'));
                 MSP.send_message(MSPCodes.MSP_SET_REBOOT);
@@ -72,126 +73,84 @@ TABS.motors.initialize = function (callback) {
             }
         }
 
-        const escProtocols = EscProtocols.GetAvailableProtocols(FC.CONFIG.apiVersion);
-        const escProtocolSelect = $('select.escProtocol');
-
-        for (let j = 0; j < escProtocols.length; j++) {
-            escProtocolSelect.append(`<option value="${j}">${escProtocols[j]}</option>`);
-        }
-
-        const pwmFreqSwitch = $("input[id='pwmSwitch']");
-        const pwmFreqInput = $("input[id='pwmFreq']");
-        const pwmFreqElem = $('.inputPwmFreq');
-
-        const pwmFreq = (FC.MOTOR_CONFIG.motor_pwm_rate > 0) ?
-              FC.MOTOR_CONFIG.motor_pwm_rate : 250;
-
-        pwmFreqSwitch.on("change", function () {
-            pwmFreqElem.toggle($(this).is(':checked') && !self.isDshot && self.isProtoEnabled);
-        });
-
-        pwmFreqSwitch.prop('checked', FC.MOTOR_CONFIG.use_unsynced_pwm);
-        pwmFreqInput.val(pwmFreq);
-
-        const dshotBidirSwitch = $('input[id="dshotBidir"]');
-        dshotBidirSwitch.prop('checked', FC.MOTOR_CONFIG.use_dshot_telemetry);
-
-        $('input[id="mincommand"]').val(FC.MOTOR_CONFIG.mincommand);
-        $('input[id="minthrottle"]').val(FC.MOTOR_CONFIG.minthrottle);
-        $('input[id="maxthrottle"]').val(FC.MOTOR_CONFIG.maxthrottle);
-
-        for (let i = 0; i < FC.CONFIG.motorCount; i++)
-            $(`input[id="motorPoles${i+1}"]`).val(FC.MOTOR_CONFIG.motor_poles[i]);
-
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR');
         self.isEscSensorEnabled = FC.FEATURE_CONFIG.features.isEnabled('ESC_SENSOR');
         self.isFreqSensorEnabled = FC.FEATURE_CONFIG.features.isEnabled('FREQ_SENSOR');
 
-        $('input[id="mainGearRatioN"]').val(FC.MOTOR_CONFIG.main_rotor_gear_ratio[0]);
-        $('input[id="mainGearRatioD"]').val(FC.MOTOR_CONFIG.main_rotor_gear_ratio[1]);
-        $('input[id="tailGearRatioN"]').val(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0]);
-        $('input[id="tailGearRatioD"]').val(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1]);
+        let infoUpdateList = [];
 
-        const govModeSelect = $('select.govMode');
-
-        for (let j = 0; j < self.govModes.length; j++) {
-            govModeSelect.append(`<option value="${j}">${self.govModes[j]}</option>`);
+        function roundTo(value, step) {
+            return Math.round(value / step) * step + step;
         }
 
-        govModeSelect.val(FC.GOVERNOR.gov_mode);
+        function meterBar(meter, label, ratio) {
 
-        $('input[id="govStartupTime"]').val(FC.GOVERNOR.gov_startup_time / 10).change();
-        $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time / 10).change();
-        $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time / 10).change();
-        $('input[id="govRecoveryTime"]').val(FC.GOVERNOR.gov_recovery_time / 10).change();
-        $('input[id="govAutoBailoutTime"]').val(FC.GOVERNOR.gov_autorotation_bailout_time / 10).change();
-        $('input[id="govAutoTimeout"]').val(FC.GOVERNOR.gov_autorotation_timeout / 10).change();
-        $('input[id="govAutoMinEntryTime"]').val(FC.GOVERNOR.gov_autorotation_min_entry_time / 10).change();
-        $('input[id="govZeroThrottleTimeout"]').val(FC.GOVERNOR.gov_zero_throttle_timeout / 10).change();
-        $('input[id="govLostHeadspeedTimeout"]').val(FC.GOVERNOR.gov_lost_headspeed_timeout / 10).change();
-        $('input[id="govVoltageFilterHz"]').val(FC.GOVERNOR.gov_pwr_filter).change();
-        $('input[id="govHeadspeedFilterHz"]').val(FC.GOVERNOR.gov_rpm_filter).change();
-        $('input[id="govTTAFilterHz"]').val(FC.GOVERNOR.gov_tta_filter).change();
+            const length = ratio.clamp(0,1) * 100;
+            const margin = 100 - length;
 
-        $('.govConfig').toggle( FC.GOVERNOR.gov_mode > 0 );
+            $('.meter-fill', meter).css({
+                'width'        : `${length}%`,
+                'margin-right' : `${margin}%`,
+            });
 
-        function updateVisibility() {
+            $('.meter-label', meter).html(label);
+        }
 
-            const protocolNum = parseInt(escProtocolSelect.val());
+        function meterLabel(meter, min, max) {
+            $('.meter-left', meter).html(min);
+            $('.meter-right', meter).html(max);
+        }
 
-            self.isProtoEnabled = !EscProtocols.IsProtocolDisabled(FC.CONFIG.apiVersion, protocolNum) && (FC.CONFIG.motorCount > 0);
-            self.isDshot = EscProtocols.IsProtocolDshot(FC.CONFIG.apiVersion, protocolNum);
+        function process_rotor_speeds() {
 
-            $('.mincommand').toggle(self.isProtoEnabled && !self.isDshot);
-            $('.minthrottle').toggle(self.isProtoEnabled && !self.isDshot);
-            $('.maxthrottle').toggle(self.isProtoEnabled && !self.isDshot);
-            $('.checkboxPwm').toggle(self.isProtoEnabled && !self.isDshot);
-            $('.inputPwmFreq').toggle(self.isProtoEnabled && !self.isDshot);
-            $('.checkboxDshotBidir').toggle(self.isProtoEnabled && self.isDshot);
+            const headspeedBar = $('.motorMainRotorSpeed');
+            const tailspeedBar = $('.motorTailRotorSpeed');
 
-            for (let i = 0; i < 4; i++) {
-                $(`.motorPoles${i+1}`).toggle(self.isProtoEnabled && FC.CONFIG.motorCount > i);
-                $(`.motorInfo${i}`).toggle(self.isProtoEnabled && FC.CONFIG.motorCount > i);
+            let headSource = 0;
+            let tailSource = 1;
+
+            let headRatio = FC.MOTOR_CONFIG.main_rotor_gear_ratio[0] / FC.MOTOR_CONFIG.main_rotor_gear_ratio[1];
+            let tailRatio = FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0] / FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1];
+
+            if (FC.MIXER_CONFIG.tail_rotor_mode == 0) {
+                tailRatio = headRatio / tailRatio;
+                tailSource = 0;
             }
 
-            $('.mainGearRatio').toggle(self.isProtoEnabled);
-            $('.tailGearRatio').toggle(self.isProtoEnabled);
-            $('#escProtocolDisabled').toggle(!self.isProtoEnabled);
+            const rpmAvailable = self.isFreqSensorEnabled || self.isEscSensorEnabled || FC.MOTOR_CONFIG.use_dshot_telemetry;
 
-            $('.governor_features').toggle(self.isGovEnabled && self.isProtoEnabled);
+            headspeedBar.toggle(rpmAvailable && FC.CONFIG.motorCount > headSource);
+            tailspeedBar.toggle(rpmAvailable && FC.CONFIG.motorCount > tailSource);
 
-            pwmFreqSwitch.trigger("change");
+            let headspeedMax = 1000;
+            let tailspeedMax = 5000;
 
-            $('.tab-motors .override').toggle(!FC.CONFIG.motorOverrideDisabled);
+            meterLabel(headspeedBar, '0', headspeedMax);
+            meterLabel(tailspeedBar, '0', tailspeedMax);
 
-            $('.govConfig').toggle(govModeSelect.val() > 0);
+            function updateInfo() {
+
+                const headspeed = FC.MOTOR_TELEMETRY_DATA.rpm[headSource] * headRatio;
+                if (headspeed > headspeedMax) {
+                    headspeedMax = roundTo(headspeed + 1000, 1000);
+                    meterLabel(headspeedBar, '0', headspeedMax);
+                }
+                meterBar(headspeedBar, headspeed.toFixed(0) + ' RPM', headspeed / headspeedMax);
+
+                const tailspeed = FC.MOTOR_TELEMETRY_DATA.rpm[tailSource] * tailRatio;
+                if (tailspeed > tailspeedMax) {
+                    tailMax = roundTo(tailspeed + 1000, 1000);
+                    meterLabel(tailspeedBar, '0', tailspeedMax);
+                }
+                meterBar(tailspeedBar, tailspeed.toFixed(0) + ' RPM', tailspeed / tailspeedMax);
+            }
+
+            infoUpdateList.push(updateInfo);
         }
-
-        escProtocolSelect.val(FC.MOTOR_CONFIG.motor_pwm_protocol);
-
-        escProtocolSelect.change(updateVisibility);
-        dshotBidirSwitch.change(updateVisibility);
-        govModeSelect.change(updateVisibility);
-
-        updateVisibility();
-
-
-        let infoUpdateList = [];
 
         function process_motor_info(motorIndex) {
 
             const motorInfo = $('#tab-motors-templates .motorInfoTemplate').clone();
-
-            let rpmMax = 10000;
-
-            let voltMax = 5;
-            let currMax = 10;
-            let tempMax = 150;
-            let headspeedMax = FC.GOVERNOR.gov_headspeed;
-            let tailspeedMax = headspeedMax * 10;
-            let headratio = FC.MOTOR_CONFIG.main_rotor_gear_ratio[1] / FC.MOTOR_CONFIG.main_rotor_gear_ratio[0];
-            let tailratio = FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1] / FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0];
-
 
             const thrBar = motorInfo.find('.Throttle');
             const rpmBar = motorInfo.find('.RPM');
@@ -199,56 +158,62 @@ TABS.motors.initialize = function (callback) {
             const currBar = motorInfo.find('.Curr');
             const tempBar = motorInfo.find('.Temp');
             const errorBar = motorInfo.find('.Errors');
-            const headspeedBar = motorInfo.find('.Headspeed');
-            const tailspeedBar = motorInfo.find('.Tailspeed');
+
+            const rpmAvailable = self.isFreqSensorEnabled || self.isEscSensorEnabled || FC.MOTOR_CONFIG.use_dshot_telemetry;
+
+            let rpmMax  = 10000;
+            let voltMax = 5;
+            let currMax = 10;
+            let tempMax = 150;
 
             motorInfo.attr('class', `motorInfo${motorIndex}`);
+            motorInfo.find('.spacer_box_title').html(i18n.getMessage(`motorInfo${motorIndex+1}`));
 
-            if (motorIndex == 0)
-                motorInfo.find('.spacer_box_title').html(i18n.getMessage('motorInfo', [motorIndex+1]) + i18n.getMessage('motorMain'));
-            else if (motorIndex == 1)
-                motorInfo.find('.spacer_box_title').html(i18n.getMessage('motorInfo', [motorIndex+1]) + i18n.getMessage('motorTail'));
-            else
-                motorInfo.find('.spacer_box_title').html(i18n.getMessage('motorInfo', [motorIndex+1]));
-
-            rpmBar.toggle(self.isFreqSensorEnabled || self.isEscSensorEnabled || FC.MOTOR_CONFIG.use_dshot_telemetry);
-            headspeedBar.toggle((self.isFreqSensorEnabled || self.isEscSensorEnabled || FC.MOTOR_CONFIG.use_dshot_telemetry) && motorIndex == 0);
-            tailspeedBar.toggle((self.isFreqSensorEnabled || self.isEscSensorEnabled || FC.MOTOR_CONFIG.use_dshot_telemetry) && motorIndex == 1);
+            rpmBar.toggle(rpmAvailable);
             voltBar.toggle(self.isEscSensorEnabled);
             currBar.toggle(self.isEscSensorEnabled);
             tempBar.toggle(self.isEscSensorEnabled);
             errorBar.toggle(FC.MOTOR_CONFIG.use_dshot_telemetry);
 
             meterLabel(thrBar, '0%', '100%');
-            meterLabel(rpmBar, 0, rpmMax);
-            meterLabel(headspeedBar, '0RPM', headspeedMax + ' RPM');
-            meterLabel(tailspeedBar, '0RPM', tailspeedMax + ' RPM');
+            meterLabel(rpmBar, '0', rpmMax);
             meterLabel(voltBar, '0V', voltMax.toFixed(0) + 'V');
             meterLabel(currBar, '0A', currMax.toFixed(0) + 'A');
             meterLabel(tempBar, '0&deg;C', '150&deg;C');
             meterLabel(errorBar, '0%', '100%');
 
-            function roundTo(value, step) {
-                return Math.round(value / step) * step + step;
-            }
+            const motorSlider = motorInfo.find('.motorOverrideSlider');
 
-            function meterBar(meter, label, ratio) {
+            motorSlider.noUiSlider({
+                range: {
+                    'min': 0,
+                    'max': 100,
+                },
+                start: 0,
+                step: 1,
+                behaviour: 'none',
+            });
 
-                const length = ratio.clamp(0,1) * 100;
-                const margin = 100 - length;
+            motorInfo.find('.pips-range').noUiSlider_pips({
+                mode: 'values',
+                values: [ 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, ],
+                density: 100 / ((0 + 100) / 5),
+                stepped: true,
+                format: wNumb({
+                    decimals: 0,
+                }),
+            });
 
-                $('.meter-fill', meter).css({
-                    'width'        : `${length}%`,
-                    'margin-right' : `${margin}%`,
-                });
+            motorSlider.on('change', function () {
+                const value = $(this).val();
+                FC.MOTOR_OVERRIDE[motorIndex] = Math.round(value * 10);
+                mspHelper.sendMotorOverride(motorIndex);
+            });
 
-                $('.meter-label', meter).html(label);
-            }
+            const value = FC.MOTOR_OVERRIDE[motorIndex];
+            const angle = Math.round(value / 10);
 
-            function meterLabel(meter, min, max) {
-                $('.meter-left', meter).html(min);
-                $('.meter-right', meter).html(max);
-            }
+            motorSlider.val(angle);
 
             function updateInfo() {
 
@@ -261,22 +226,7 @@ TABS.motors.initialize = function (callback) {
                     throttle = (value - 1000) / 10;
 
                 const thrStr = (value == 0) ? '' : throttle.toFixed(1) + '%';
-
                 meterBar(thrBar, thrStr, Math.abs(throttle / 100));
-
-                const headspeed = FC.MOTOR_TELEMETRY_DATA.rpm[0] / headratio;
-                if (headspeed > headspeedMax) {
-                    headspeedMax = roundTo(headspeed + 1000, 1000);
-                    meterLabel(headspeedBar, '0', headspeedMax);
-                }
-                meterBar(headspeedBar, headspeed.toFixed(0) + ' RPM', headspeed/headspeedMax);
-
-                const tailspeed = FC.MOTOR_TELEMETRY_DATA.rpm[1] / tailratio;
-                if (tailspeed > tailspeedMax) {
-                    tailMax = roundTo(tailspeed + 1000, 1000);
-                    meterLabel(tailspeedBar, '0', tailspeedMax);
-                }
-                meterBar(tailspeedBar, tailspeed.toFixed(0) + ' RPM', tailspeed/tailspeedMax);
 
                 const rpm = FC.MOTOR_TELEMETRY_DATA.rpm[motorIndex];
                 if (rpm > rpmMax) {
@@ -316,103 +266,116 @@ TABS.motors.initialize = function (callback) {
             infoUpdateList.push(updateInfo);
         }
 
-        const enableMotorOverrideSwitch = $('#motorEnableOverrideSwitch');
-        enableMotorOverrideSwitch.prop('checked', !FC.CONFIG.motorOverrideDisabled);
+        const enableMotorOverrideSwitch = $('input[id="motorEnableOverrideSwitch"]');
 
         enableMotorOverrideSwitch.change(function () {
             const checked = enableMotorOverrideSwitch.prop('checked');
             FC.CONFIG.motorOverrideDisabled = !checked;
-
-            if (!checked) {
-                mspHelper.resetMotorOverrides();
-                for (let i = 0;i  < FC.CONFIG.motorCount; ++i) {
-                    const motorSwitch = $(`.motorOverride${i} .motorOverrideEnable input`);
-                    if (motorSwitch.prop('checked'))
-                        motorSwitch.click();
-                }
-            }
-
-            $('.tab-motors .override').toggle(checked);
+            $('.overridesEnabled').toggle(checked);
+            $('.motorOverrideSlider').val(0).change();
         });
 
- //       $('.tab-motors .override').toggle(!FC.CONFIG.motorOverrideDisabled);
-        $('.tab-motors .save_reboot').toggle(false);
+        enableMotorOverrideSwitch.prop('checked', !FC.CONFIG.motorOverrideDisabled);
+        $('.overridesEnabled').toggle(!FC.CONFIG.motorOverrideDisabled);
 
-        function process_override(motorIndex) {
+        $('.tab-motors .mainGearRatio').change(function() {
+            const ratioN = parseInt($('input[id="mainGearRatioN"]').val());
+            const ratioD = parseInt($('input[id="mainGearRatioD"]').val());
+            const issue = (ratioN > ratioD);
+            $('.tab-motors .motorMainGearRatioIssueNote').toggle(issue);
+        });
 
-            const motorOverride = $('#tab-motors-templates .motorOverrideTemplate tr').clone();
-            const motorSlider = motorOverride.find('.motorOverrideSlider');
-            const motorEnable = motorOverride.find('.motorOverrideEnable input');
-            const motorThrottle  = motorOverride.find('.motorOverrideThrottle input');
+        $('.tab-motors .tailGearRatio').change(function() {
+            const ratioN = parseInt($('input[id="tailGearRatioN"]').val());
+            const ratioD = parseInt($('input[id="tailGearRatioD"]').val());
+            const issue = (ratioN > ratioD);
+            $('.tab-motors .motorTailGearRatioIssueNote').toggle(issue);
+        });
 
-            motorOverride.attr('class', `motorOverride${motorIndex}`);
-            motorOverride.find('.motorOverrideIndex').text(`#${motorIndex+1}`);
 
-            motorSlider.noUiSlider({
-                range: {
-                    'min': 0,
-                    'max': 100,
-                },
-                start: 0,
-                step: 1,
-                behaviour: 'none',
-            });
+        const escProtocols = EscProtocols.GetAvailableProtocols(FC.CONFIG.apiVersion);
+        const escProtocolSelect = $('select[id="escProtocol"]');
+        escProtocols.forEach(function(value,index) {
+            escProtocolSelect.append(`<option value="${index}">${value}</option>`);
+        });
+        escProtocolSelect.val(FC.MOTOR_CONFIG.motor_pwm_protocol);
 
-            motorOverride.find('.pips-range').noUiSlider_pips({
-                mode: 'values',
-                values: [ 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, ],
-                density: 100 / ((0 + 100) / 5),
-                stepped: true,
-                format: wNumb({
-                    decimals: 0,
-                }),
-            });
+        const pwmFreq = (FC.MOTOR_CONFIG.motor_pwm_rate > 0) ?
+              FC.MOTOR_CONFIG.motor_pwm_rate : 250;
+        const pwmFreqInput = $('input[id="pwmFreq"]');
+        pwmFreqInput.val(pwmFreq);
 
-            motorSlider.on('slide', function () {
-                motorThrottle.val(parseInt($(this).val()));
-            });
+        const dshotBidirSwitch = $('input[id="dshotBidir"]');
+        dshotBidirSwitch.prop('checked', FC.MOTOR_CONFIG.use_dshot_telemetry);
 
-            motorSlider.on('change', function () {
-                motorThrottle.change();
-            });
+        $('input[id="mincommand"]').val(FC.MOTOR_CONFIG.mincommand);
+        $('input[id="minthrottle"]').val(FC.MOTOR_CONFIG.minthrottle);
+        $('input[id="maxthrottle"]').val(FC.MOTOR_CONFIG.maxthrottle);
 
-            motorThrottle.change(function () {
-                const value = $(this).val();
-                motorSlider.val(value);
-                FC.MOTOR_OVERRIDE[motorIndex] = Math.round(value * 10);
-                mspHelper.sendMotorOverride(motorIndex);
-            });
+        for (let i = 0; i < FC.CONFIG.motorCount; i++)
+            $(`input[id="motorPoles${i+1}"]`).val(FC.MOTOR_CONFIG.motor_poles[i]);
 
-            motorEnable.change(function () {
-                const check = $(this).prop('checked');
+        $('input[id="mainGearRatioN"]').val(FC.MOTOR_CONFIG.main_rotor_gear_ratio[0]);
+        $('input[id="mainGearRatioD"]').val(FC.MOTOR_CONFIG.main_rotor_gear_ratio[1]).change();
+        $('input[id="tailGearRatioN"]').val(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0]);
+        $('input[id="tailGearRatioD"]').val(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1]).change();
 
-                motorThrottle.val(0);
-                motorSlider.val(0);
-                motorThrottle.prop('disabled', !check);
-                motorSlider.attr('disabled', !check);
+        const govModeSelect = $('select[id="govMode"]');
+        self.govModes.forEach(function(value,index) {
+            govModeSelect.append(`<option value="${index}">${value}</option>`);
+        });
+        govModeSelect.val(FC.GOVERNOR.gov_mode);
 
-                FC.MOTOR_OVERRIDE[motorIndex] = 0;
-                mspHelper.sendMotorOverride(motorIndex);
-            });
+        $('input[id="govStartupTime"]').val(FC.GOVERNOR.gov_startup_time / 10).change();
+        $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time / 10).change();
+        $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time / 10).change();
+        $('input[id="govRecoveryTime"]').val(FC.GOVERNOR.gov_recovery_time / 10).change();
+        $('input[id="govAutoBailoutTime"]').val(FC.GOVERNOR.gov_autorotation_bailout_time / 10).change();
+        $('input[id="govAutoTimeout"]').val(FC.GOVERNOR.gov_autorotation_timeout / 10).change();
+        $('input[id="govAutoMinEntryTime"]').val(FC.GOVERNOR.gov_autorotation_min_entry_time / 10).change();
+        $('input[id="govZeroThrottleTimeout"]').val(FC.GOVERNOR.gov_zero_throttle_timeout / 10).change();
+        $('input[id="govLostHeadspeedTimeout"]').val(FC.GOVERNOR.gov_lost_headspeed_timeout / 10).change();
+        $('input[id="govVoltageFilterHz"]').val(FC.GOVERNOR.gov_pwr_filter).change();
+        $('input[id="govHeadspeedFilterHz"]').val(FC.GOVERNOR.gov_rpm_filter).change();
+        $('input[id="govTTAFilterHz"]').val(FC.GOVERNOR.gov_tta_filter).change();
 
-            const value = FC.MOTOR_OVERRIDE[motorIndex];
-            const check = (value != 0);
-            const angle = Math.round(value / 10);
+        function updateVisibility() {
 
-            motorThrottle.val(angle);
-            motorSlider.val(angle);
+            const protocolNum = parseInt(escProtocolSelect.val());
 
-            motorThrottle.prop('disabled', !check);
-            motorSlider.attr('disabled', !check);
-            motorEnable.prop('checked', check);
+            self.isProtoEnabled = !EscProtocols.IsProtocolDisabled(FC.CONFIG.apiVersion, protocolNum) && (FC.CONFIG.motorCount > 0);
+            self.isDshot = EscProtocols.IsProtocolDshot(FC.CONFIG.apiVersion, protocolNum);
 
-            $('.motorOverride tbody').append(motorOverride);
+            $('.mincommand').toggle(self.isProtoEnabled && !self.isDshot);
+            $('.minthrottle').toggle(self.isProtoEnabled && !self.isDshot);
+            $('.maxthrottle').toggle(self.isProtoEnabled && !self.isDshot);
+            $('.inputPwmFreq').toggle(self.isProtoEnabled && !self.isDshot);
+            $('.checkboxDshotBidir').toggle(self.isProtoEnabled && self.isDshot);
+            $('.mainGearRatio').toggle(self.isProtoEnabled);
+            $('.tailGearRatio').toggle(self.isProtoEnabled);
+
+            for (let i = 0; i < 4; i++) {
+                $(`.motorPoles${i+1}`).toggle(self.isProtoEnabled && FC.CONFIG.motorCount > i);
+                $(`.motorInfo${i}`).toggle(self.isProtoEnabled && FC.CONFIG.motorCount > i);
+            }
+
+            $('#escProtocolDisabled').toggle(!self.isProtoEnabled);
+
+            $('.tab-motors .governor_features').toggle(self.isGovEnabled && self.isProtoEnabled);
+            $('.tab-motors .overrides').toggle(self.isProtoEnabled);
+
+            $('.govConfig').toggle(govModeSelect.val() > 0);
         }
 
+        escProtocolSelect.change(updateVisibility);
+        govModeSelect.change(updateVisibility);
+
+        updateVisibility();
+
         if (self.isProtoEnabled) {
+            process_rotor_speeds();
             for (let index = 0; index < FC.CONFIG.motorCount; index++) {
                 process_motor_info(index);
-                process_override(index);
             }
         }
 
@@ -426,7 +389,6 @@ TABS.motors.initialize = function (callback) {
                 FC.MOTOR_CONFIG.motor_poles[i] = parseInt($(`input[id="motorPoles${i+1}"]`).val());
 
             FC.MOTOR_CONFIG.motor_pwm_protocol = parseInt(escProtocolSelect.val());
-            FC.MOTOR_CONFIG.use_unsynced_pwm = pwmFreqSwitch.is(':checked');
             FC.MOTOR_CONFIG.motor_pwm_rate = parseInt($('input[id="pwmFreq"]').val());
 
             FC.MOTOR_CONFIG.main_rotor_gear_ratio[0] = parseInt($('input[id="mainGearRatioN"]').val());
@@ -446,23 +408,18 @@ TABS.motors.initialize = function (callback) {
                     FC.GOVERNOR.gov_autorotation_min_entry_time = Math.round(parseFloat($('input[id="govAutoMinEntryTime"]').val()) * 10);
                     FC.GOVERNOR.gov_zero_throttle_timeout = Math.round(parseFloat($('input[id="govZeroThrottleTimeout"]').val()) * 10);
                     FC.GOVERNOR.gov_lost_headspeed_timeout = Math.round(parseFloat($('input[id="govLostHeadspeedTimeout"]').val()) * 10);
-                    FC.GOVERNOR.gov_pwr_filter = parseFloat($('input[id="govVoltageFilterHz"]').val());
-                    FC.GOVERNOR.gov_rpm_filter = parseFloat($('input[id="govHeadspeedFilterHz"]').val());
-                    FC.GOVERNOR.gov_tta_filter = parseFloat($('input[id="govTTAFilterHz"]').val());
+                    FC.GOVERNOR.gov_pwr_filter = parseInt($('input[id="govVoltageFilterHz"]').val());
+                    FC.GOVERNOR.gov_rpm_filter = parseInt($('input[id="govHeadspeedFilterHz"]').val());
+                    FC.GOVERNOR.gov_tta_filter = parseInt($('input[id="govTTAFilterHz"]').val());
                 }
             }
         }
 
-        function get_motor_info() {
+        function get_info() {
             Promise.resolve(true)
-                .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR); })
-                .then(() => { return MSP.promise(MSPCodes.MSP_MOTOR_TELEMETRY); })
-                .then(() => { infoUpdateList.forEach(func => func()); });
-        }
-
-        function get_battery_info() {
-            Promise.resolve(true)
-                .then(() => { return MSP.promise(MSPCodes.MSP_BATTERY_STATE); })
+                .then(() => MSP.promise(MSPCodes.MSP_MOTOR))
+                .then(() => MSP.promise(MSPCodes.MSP_MOTOR_TELEMETRY))
+                .then(() => MSP.promise(MSPCodes.MSP_BATTERY_STATE))
                 .then(() => { infoUpdateList.forEach(func => func()); });
         }
 
@@ -487,8 +444,7 @@ TABS.motors.initialize = function (callback) {
             setDirty();
         });
 
-        GUI.interval_add('motor_info_pull', get_motor_info, 100, true);
-        GUI.interval_add('battery_info_pull', get_battery_info, 1000, true);
+        GUI.interval_add('info_pull', get_info, 100, true);
 
         GUI.content_ready(callback);
     }

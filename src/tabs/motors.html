@@ -7,8 +7,14 @@
 
         <!-- CONFIGURATION -->
         <div class="configuration">
+            <div class="note motorMainGearRatioIssueNote">
+                <p i18n="motorMainGearRatioIssueNote"></p>
+            </div>
+            <div class="note motorTailGearRatioIssueNote">
+                <p i18n="motorTailGearRatioIssueNote"></p>
+            </div>
             <div class="grid-row">
-                <div class="grid-col col5">
+                <div class="grid-col col6">
 
                     <!-- MOTOR FEATURES -->
                     <div class="motor_features">
@@ -23,7 +29,7 @@
                                 <div class="field selectEscProtocol">
                                     <label>
                                         <div class="field_box">
-                                            <select class="escProtocol">
+                                            <select id="escProtocol">
                                                 <!-- list generated here -->
                                             </select>
                                         </div>
@@ -31,13 +37,7 @@
                                         <div id="escProtocolTooltip" class="helpicon cf_tip" i18n_title="motorsEscProtocolHelp"></div>
                                     </label>
                                 </div>
-                                <div class="field checkboxPwm">
-                                    <div class="field_box">
-                                        <input type="checkbox" id="pwmSwitch" class="toggle" />
-                                    </div>
-                                    <span class="freelabel" i18n="motorsUnsyndePwm"></span>
-                                </div>
-                                <div class="field inputPwmFreq">
+                                 <div class="field inputPwmFreq">
                                     <label>
                                         <div class="field_box">
                                             <input type="number" id="pwmFreq" min="50" max="8000" step="10"/>
@@ -82,7 +82,7 @@
                                     <label>
                                         <div class="field_box">
                                             <input type="number" id="mainGearRatioN" min="1" max="50000" />
-                                            <span class="gear_ratio">/</span>
+                                            <span class="gear_ratio">:</span>
                                             <input type="number" id="mainGearRatioD" min="1" max="50000" />
                                         </div>
                                         <span i18n="motorsMainRotorGearRatio"></span>
@@ -93,7 +93,7 @@
                                     <label>
                                         <div class="field_box">
                                             <input type="number" id="tailGearRatioN" min="1" max="50000" />
-                                            <span class="gear_ratio">/</span>
+                                            <span class="gear_ratio">:</span>
                                             <input type="number" id="tailGearRatioD" min="1" max="50000" />
                                         </div>
                                         <span i18n="motorsTailRotorGearRatio"></span>
@@ -155,8 +155,8 @@
                                 <div class="field selectGovMode">
                                     <label>
                                         <div class="field_box">
-                                            <select class="govMode">
-                                            <!-- list generated here -->
+                                            <select id="govMode">
+                                                <!-- list generated here -->
                                             </select>
                                         </div>
                                         <span i18n="govMode"></span>
@@ -279,59 +279,77 @@
                     <!-- END GOVERNOR_FEATURES -->
                 </div>
 
-                <div class="grid-col col7">
+                <div class="grid-col col6">
+
+                    <!-- ROTOR SPEEDS -->
+                    <div class="rotorSpeeds">
+                        <div class="gui_box grey">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="motorRotorSpeeds"></div>
+                            </div>
+                            <div class="spacer">
+                                <table class="meter-bars">
+                                    <tr class="motorMainRotorSpeed">
+                                        <td><span class="fieldName" i18n="motorMainRotorSpeed"></span></td>
+                                        <td>
+                                            <div class="meter-range">
+                                                <span class="meter-left"></span>
+                                                <span class="meter-right"></span>
+                                            </div>
+                                            <div class="meter clear-both">
+                                                <div class="meter-bar">
+                                                    <div class="meter-label"></div>
+                                                    <div class="meter-fill">
+                                                        <div class="meter-label meter-fill-label"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="motorTailRotorSpeed">
+                                        <td><span class="fieldName" i18n="motorTailRotorSpeed"></span></td>
+                                        <td>
+                                            <div class="meter-range">
+                                                <span class="meter-left"></span>
+                                                <span class="meter-right"></span>
+                                            </div>
+                                            <div class="meter clear-both">
+                                                <div class="meter-bar">
+                                                    <div class="meter-label"></div>
+                                                    <div class="meter-fill">
+                                                        <div class="meter-label meter-fill-label"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- OVERRIDE -->
                     <div class="overrides">
-                        <div class="grid-row">  
-                            <div class="grid-col">
-                                <div class="gui_box grey">
-                                    <div class="spacer_box">
-                                        <table class="motorOverrideSet">
-                                            <tr>
-                                                <td class="td1">
-                                                    <input type="checkbox" id="motorEnableOverrideSwitch" class="toggle" />
-                                                </td>
-                                                <td class="td2">
-                                                    <span i18n="initialSetupEnableMotorOverride"></span>
-                                                </td>
-                                                <td class="td3">
-                                                    <span class="description" i18n="initialSetupEnableMotorOverrideText"></span>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="spacer_box override">
-                                        <div class="note motorOverrideNote">
-                                            <p i18n="motorOverrideNote"></p>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="gui_box">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="motorOverrideTitle"></div>
+                                <div class="helpicon cf_tip" i18n_title="motorOverrideHelp"></div>
                             </div>
-                        </div>
-
-                        <div class="grid-row override">
-                            <div class="grid-col full-width">
-                                <div class="gui_box">
-                                    <div class="gui_box_titlebar">
-                                        <div class="spacer_box_title" i18n="motorOverride"></div>
-                                        <div class="helpicon cf_tip" i18n_title="motorOverrideHelp"></div>
-                                    </div>
-                                    <div>
-                                        <table class="motorOverride">
-                                            <thead>
-                                                <tr class="trhead">
-                                                    <th i18n="motorNumber"></th>
-                                                    <th i18n="motorOverrideEnable"></th>
-                                                    <th i18n="motorOverrideThrottle"></th>
-                                                    <th i18n="motorOverrideSlider"></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <!-- ROWS GENERATED HERE -->
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            <div class="spacer_box">
+                                <table class="motorOverrideSwitch">
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="motorEnableOverrideSwitch" class="toggle" />
+                                        </td>
+                                        <td>
+                                            <span i18n="initialSetupEnableMotorOverride"></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="spacer_box overridesEnabled">
+                                <div class="note motorOverrideNote">
+                                    <p i18n="motorOverrideNote"></p>
                                 </div>
                             </div>
                         </div>
@@ -345,7 +363,6 @@
 
                 </div>
             </div>
-
         </div>
         <!-- END CONFIGURATION -->
 
@@ -370,7 +387,13 @@
                 <div class="spacer_box_title"></div>
             </div>
             <div class="spacer">
-                <table>
+                <table class="meter-bars">
+                    <tr class="Override overridesEnabled">
+                        <td><span class="fieldName" i18n="motorOverride"></span></td>
+                        <td>
+                            <div class="motorOverrideSlider pips-range"></div>
+                        </td>
+                    </tr>
                     <tr class="Throttle">
                         <td><span class="fieldName" i18n="motorThrottle"></span></td>
                         <td>
@@ -473,65 +496,10 @@
                             </div>
                         </td>
                     </tr>
-                    <tr class="Headspeed">
-                        <td><span class="fieldName" i18n="motorHeadspeed"></span></td>
-                        <td>
-                            <div class="meter-range">
-                                <span class="meter-left"></span>
-                                <span class="meter-right"></span>
-                            </div>
-                            <div class="meter clear-both">
-                                <div class="meter-bar">
-                                    <div class="meter-label"></div>
-                                    <div class="meter-fill">
-                                        <div class="meter-label meter-fill-label"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="Tailspeed">
-                        <td><span class="fieldName" i18n="motorTailspeed"></span></td>
-                        <td>
-                            <div class="meter-range">
-                                <span class="meter-left"></span>
-                                <span class="meter-right"></span>
-                            </div>
-                            <div class="meter clear-both">
-                                <div class="meter-bar">
-                                    <div class="meter-label"></div>
-                                    <div class="meter-fill">
-                                        <div class="meter-label meter-fill-label"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
                 </table>
             </div>
         </div>
     </div>
-
-    <table class="motorOverrideTemplate">
-        <tbody>
-            <tr>
-                <td><span class="motorOverrideIndex"></span></td>
-                <td>
-                    <div class="motorOverrideEnable">
-                        <input type="checkbox" class="toggle"/>
-                    </div>
-                </td>
-                <td>
-                    <div class="motorOverrideThrottle">
-                        <input type="number" min="0" max="100" step="1" value="0"/>
-                    </div>
-                </td>
-                <td>
-                    <div class="motorOverrideSlider pips-range"></div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 
 </div>
 

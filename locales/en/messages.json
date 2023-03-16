@@ -2593,14 +2593,35 @@
     "motorsThrottleMinimumCommandHelp": {
         "message": "This is the value that is sent to the ESCs when the craft is disarmed. Set this to a value that has the motors stopped (1000 for most ESCs)."
     },
-    "motorMain": {
-        "message": " - Main Motor"
+    "motorMainGearRatioIssueNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> <i>Main Rotor Gear Ratio</i> is set to an incorrect value. Please check!"
     },
-    "motorTail": {
-        "message": " - Tail Motor"
+    "motorTailGearRatioIssueNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> <i>Tail Rotor Gear Ratio</i> is set to an incorrect value. Please check!"
     },
-    "motorInfo": {
-        "message": "Motor #$1"
+    "motorRotorSpeeds": {
+        "message": "Rotor Speed"
+    },
+    "motorMainRotorSpeed": {
+        "message": "Main Rotor"
+    },
+    "motorTailRotorSpeed": {
+        "message": "Tail Rotor"
+    },
+    "motorInfo1": {
+        "message": "Motor #1 - Main Motor"
+    },
+    "motorInfo2": {
+        "message": "Motor #2 - Tail Motor"
+    },
+    "motorInfo3": {
+        "message": "Motor #3"
+    },
+    "motorInfo4": {
+        "message": "Motor #4"
+    },
+    "motorOverride": {
+        "message": "Override"
     },
     "motorThrottle": {
         "message": "Throttle:"
@@ -2627,25 +2648,16 @@
         "message": "Errors:"
     },
     "motorOverrideNote": {
-        "message": "<strong>Note.</strong> Motor Override forces the output throttle to a fixed value for setup purposes. The override values are not saved, and will be reset in reboot.<br/><br/><strong class=\"message-negative\">MOTOR OVERRIDE WILL MAKE THE MOTORS TO SPOOL UP!</strong>"
+        "message": "<strong>Note.</strong> Throttle Override forces the output throttle to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset in reboot.<br/><br/><strong class=\"message-negative\">MOTOR THROTTLE OVERRIDE WILL MAKE THE MOTORS TO SPOOL UP!</strong>"
     },
-    "motorNumber": {
-        "message": "Motor"
-    },
-    "motorOverride": {
-        "message": "Motor Override"
+    "motorOverrideTitle": {
+        "message": "Throttle Override"
     },
     "motorOverrideHelp": {
         "message": "Select the Override via the switch and then move the slider to begin to operate the motor. "
     },
     "motorOverrideEnable": {
         "message": "Enable"
-    },
-    "motorOverrideThrottle": {
-        "message": "Throttle"
-    },
-    "motorOverrideSlider": {
-        "message": ""
     },
     "escDshotDirectionDialog-Title": {
         "message": "Motor Direction - <strong class=\"message-negative-italic\">Warning: Ensure props are removed!</strong>"

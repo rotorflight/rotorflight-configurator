@@ -53,7 +53,7 @@
     width: 60px;
     height: 20px;
     line-height: 20px;
-    text-align: left;
+    text-align: right;
     font-size: 12px;
     font-weight: normal;
     padding-left: 3px;
@@ -108,17 +108,29 @@
     margin: 10px;
 }
 
-.tab-motors .motorInfo tr td:nth-child(1) {
-    padding-right: 25px;
-    padding-top: 10px;
+.tab-motors .meter-bars tr td:nth-child(1) {
+    padding-right: 20px;
+    padding-top: 8px;
+    min-width: 80px;
 }
 
-.tab-motors .motorInfo tr td:nth-child(2) {
-    width: 100%;
+.tab-motors .meter-bars tr td:nth-child(2) {
     height: 40px;
+    width: 100%;
 }
 
-.tab-motors .motorInfo .fieldName {
+.tab-motors .meter-bars tr.Override td:nth-child(1) {
+    padding-bottom: 30px;
+    border-bottom: 1px dotted var(--subtleAccent);
+}
+
+.tab-motors .meter-bars tr.Override td:nth-child(2) {
+    height: 50px;
+    padding-bottom: 15px;
+    border-bottom: 1px dotted var(--subtleAccent);
+}
+
+.tab-motors .meter-bars .fieldName {
     line-height: 12px;
     font-size: 12px;
     font-weight: bold;
@@ -193,7 +205,7 @@
     background-color: #f1453d;
 }
 
-.tab-motors .motorOverrideSet {
+.tab-motors .motorOverrideSwitch {
     float: left;
     width: 100%;
     margin: 0;
@@ -203,75 +215,18 @@
     border-collapse: collapse;
 }
 
-.tab-motors  .motorOverrideSet tr td {
+.tab-motors  .motorOverrideSwitch tr td {
     padding: 5px 0 0 5px;
 }
 
-.tab-motors  .motorOverrideSet tr td:first-child {
+.tab-motors  .motorOverrideSwitch tr td:first-child {
     width: 80px;
     padding-right: 20px;
 }
 
 .tab-motors .motorOverrideNote {
     padding: 15px 15px;
-}
-
-.tab-motors .motorOverride {
-    width: 100%;
-    border: 0;
-    border-collapse: collapse;
-    margin-top: 2px;
-}
-
-.tab-motors .motorOverride .trhead {
-    color: var(--quietText);
-    background-color: var(--button-background);
-    text-align: center;
-    font-size: 11px;
-    line-height: 16px;
-    height: 22px;
-    border-top: 1px solid var(--boxBackground);
-}
-
-.tab-motors .motorOverride td {
-    padding: 6px 5px 7px 5px;
-    border: 1px solid var(--subtleAccent);
-}
-
-.tab-motors .motorOverride td:nth-child(1) {
-    width: 50px;
-    font-weight: bold;
-    text-align: center;
-    border-left: 0;
-}
-
-.tab-motors .motorOverride td:nth-child(2) {
-    width: 80px;
-    text-align: center;
-}
-
-.tab-motors .motorOverride td:nth-child(3) {
-    width: 80px;
-    text-align: center;
-}
-
-.tab-motors .motorOverride td:nth-child(4) {
-    height: 75px;
-    padding: 2px 20px 2px 20px;
-    text-align: left;
-    border-right: 0;
-}
-
-.tab-motors .motorOverride tr:last-child td {
-    border-bottom: 0;
-}
-
-.tab-motors .motorOverride tbody tr:nth-child(odd) {
-    background-color: #f8f8f8;
-}
-
-.tab-motors .motorOverride tbody tr:nth-child(even) {
-    background-color: #e9e9e9;
+    margin-bottom: 0px;
 }
 
 .tab-motors .motorOverrideSlider {
