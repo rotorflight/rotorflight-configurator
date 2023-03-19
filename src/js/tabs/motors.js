@@ -139,7 +139,7 @@ TABS.motors.initialize = function (callback) {
 
                 const tailspeed = FC.MOTOR_TELEMETRY_DATA.rpm[tailSource] * tailRatio;
                 if (tailspeed > tailspeedMax) {
-                    tailMax = roundTo(tailspeed + 1000, 1000);
+                    tailspeedMax = roundTo(tailspeed + 1000, 1000);
                     meterLabel(tailspeedBar, '0', tailspeedMax);
                 }
                 meterBar(tailspeedBar, tailspeed.toFixed(0) + ' RPM', tailspeed / tailspeedMax);
