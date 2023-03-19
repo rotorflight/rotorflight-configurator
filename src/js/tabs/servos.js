@@ -3,9 +3,13 @@
 TABS.servos = {
 
     isDirty: false,
+    needReboot: false,
 
     MAX_SERVOS: 8,
     OVERRIDE_OFF: 2001,
+
+    FLAG_REVERSE: 1,
+    FLAG_GEOCOR: 2,
 };
 
 TABS.servos.initialize = function (callback) {
@@ -21,15 +25,17 @@ TABS.servos.initialize = function (callback) {
             .then(callback);
     }
 
-    function save_data(reboot, callback) {
+    function save_data(callback) {
         mspHelper.sendServoConfigurations(function () {
             MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
                 GUI.log(i18n.getMessage('eepromSaved'));
-                if (reboot) {
+                if (self.needReboot) {
                     MSP.send_message(MSPCodes.MSP_SET_REBOOT);
                     GUI.log(i18n.getMessage('deviceRebooting'));
                     reinitialiseConnection(callback);
-                } else callback();
+                } else {
+                    if (callback) callback();
+                }
             });
         });
     }
@@ -57,6 +63,15 @@ TABS.servos.initialize = function (callback) {
             }
         }
 
+        function setReboot(reboot) {
+            self.needReboot = reboot;
+            $('.content_toolbar .save_btn').toggle(!reboot);
+            $('.content_toolbar .reboot_btn').toggle(reboot);
+        }
+
+        $('.servoValueWarning').hide();
+        $('.servoRateRebootNote').hide();
+
         function process_warnings() {
 
             let unusualScale = false;
@@ -68,25 +83,20 @@ TABS.servos.initialize = function (callback) {
 
             for (let index = 0; index < FC.CONFIG.servoCount; index++) {
                 const servo = SERVOS[index];
-
                 if (servo.mid > 860) {
                     if (servo.rate > 333)
                         unusualRate = true;
-
                     // Unusual: value > 500 ± 25%
                     if (servo.min < -625 || servo.min > -375 || servo.max >  625 || servo.max <  375)
                         unusualLimit = true;
-
                     if (servo.rneg < 375 || servo.rneg > 625 || servo.rpos <  375 || servo.rpos >  625)
                         unusualScale = true;
                 } else {
                     if (servo.rate > 560)
                         unusualRate = true;
-
                     // Unusual: value > 250 ± 25%
                     if (servo.min < -312 || servo.min > -187 || servo.max >  312 || servo.max <  187)
                         unusualLimit = true;
-
                     if (servo.rneg < 187 || servo.rneg > 312 || servo.rpos <  187 || servo.rpos >  312)
                         unusualScale = true;
                 }
@@ -94,14 +104,20 @@ TABS.servos.initialize = function (callback) {
 
             if (FC.CONFIG.servoCount == 2) {
                 // Fixed pitch heli with 2 servos
-                if ((SERVOS[0].flags & 2) != (SERVOS[1].flags & 2))
+                if ((SERVOS[0].flags & self.FLAG_GEOCOR) != (SERVOS[1].flags & self.FLAG_GEOCOR))
                     unusualGeoCor = true;
+                if (SERVOS[0].rate != SERVOS[1].rate)
+                    unusualRate = true;
             } else if (FC.CONFIG.servoCount >= 3) {
                 // Collective pitch with 3 or more servos
-                if (((SERVOS[0].flags & 2) != (SERVOS[1].flags & 2)) ||
-                    ((SERVOS[1].flags & 2) != (SERVOS[2].flags & 2)) ||
-                    ((SERVOS[0].flags & 2) != (SERVOS[2].flags & 2)))
+                if (((SERVOS[0].flags & self.FLAG_GEOCOR) != (SERVOS[1].flags & self.FLAG_GEOCOR)) ||
+                    ((SERVOS[1].flags & self.FLAG_GEOCOR) != (SERVOS[2].flags & self.FLAG_GEOCOR)) ||
+                    ((SERVOS[0].flags & self.FLAG_GEOCOR) != (SERVOS[2].flags & self.FLAG_GEOCOR)))
                     unusualGeoCor = true;
+                if ((SERVOS[0].rate != SERVOS[1].rate) ||
+                    (SERVOS[1].rate != SERVOS[2].rate) ||
+                    (SERVOS[0].rate != SERVOS[2].rate))
+                    unusualRate = true;
             }
 
             $('.servo-unusual-limits-warning').toggle(unusualLimit);
@@ -109,7 +125,7 @@ TABS.servos.initialize = function (callback) {
             $('.servo-unusual-rates-warning').toggle(unusualRate);
             $('.servo-unusual-geometry-correction').toggle(unusualGeoCor);
 
-            $('.warnings').toggle(unusualLimit || unusualScale || unusualRate || unusualGeoCor);
+            $('.servoValueWarning').toggle(unusualLimit || unusualScale || unusualRate || unusualGeoCor);
         }
 
         function process_override(servoIndex) {
@@ -189,8 +205,9 @@ TABS.servos.initialize = function (callback) {
             const servoConfig = $('#tab-servos-templates .servoConfigTemplate tr').clone();
 
             const SERVO = FC.SERVO_CONFIG[servoIndex];
-            const revs = SERVO.flags & 1;
-            const geocor = SERVO.flags & 2;
+
+            const revs = !!(SERVO.flags & self.FLAG_REVERSE);
+            const geocor = !!(SERVO.flags & self.FLAG_GEOCOR);
 
             servoConfig.attr('class', `servoConfig${servoIndex}`);
             servoConfig.data('index', servoIndex);
@@ -202,9 +219,6 @@ TABS.servos.initialize = function (callback) {
             servoConfig.find('#rneg').val(SERVO.rneg);
             servoConfig.find('#rpos').val(SERVO.rpos);
             servoConfig.find('#rate').val(SERVO.rate);
-            servoConfig.find('#rate').change(function () {
-                $('.save_reboot').toggle(true);
-            });
             servoConfig.find('#speed').val(SERVO.speed);
             servoConfig.find('#reversed').prop('checked', revs);
             servoConfig.find('#geocor').prop('checked', geocor);
@@ -212,7 +226,14 @@ TABS.servos.initialize = function (callback) {
             servoConfig.find('input').change(function () {
                 update_servo_config(servoIndex);
                 process_warnings();
+                setDirty();
                 mspHelper.sendServoConfig(servoIndex);
+            });
+
+            servoConfig.find('#rate').change(function () {
+                $('.servoRateRebootNote').show();
+                $(this).addClass('attention');
+                setReboot(true);
             });
 
             $('.servoConfig tbody').append(servoConfig);
@@ -229,8 +250,8 @@ TABS.servos.initialize = function (callback) {
             FC.SERVO_CONFIG[servoIndex].rpos = parseInt($('#rpos',servo).val());
             FC.SERVO_CONFIG[servoIndex].rate = parseInt($('#rate',servo).val());
             FC.SERVO_CONFIG[servoIndex].speed = parseInt($('#speed',servo).val());
-            FC.SERVO_CONFIG[servoIndex].flags =  $('#reversed',servo).prop('checked') ? 1 : 0;
-            FC.SERVO_CONFIG[servoIndex].flags |=  $('#geocor',servo).prop('checked') ? 2 : 0;
+            FC.SERVO_CONFIG[servoIndex].flags = $('#reversed',servo).prop('checked') ? self.FLAG_REVERSE : 0 |
+                                                $('#geocor',servo).prop('checked') ? self.FLAG_GEOCOR : 0;
         }
 
         function update_servo_bars() {
@@ -238,7 +259,6 @@ TABS.servos.initialize = function (callback) {
             let rangeMin, rangeMax;
 
             for (let i = 0; i < FC.SERVO_DATA.length; i++) {
-                const servoMeter = $(`.tab-servos .servoConfig${i} .meter`);
                 const servoValue = FC.SERVO_DATA[i];
 
                 if (FC.SERVO_CONFIG[i].mid <= 860) {
@@ -257,8 +277,10 @@ TABS.servos.initialize = function (callback) {
 
                 const range  = rangeMax - rangeMin;
                 const percnt = 100 * (servoValue - rangeMin) / range;
-                const length = Math.max(Math.min(percnt, 100), 0);
+                const length = percnt.clamp(0, 100);
                 const margin = 100 - length;
+
+                const servoMeter = $(`.tab-servos .servoConfig${i} .meter`);
 
                 $('.meter-fill', servoMeter).css({
                     'width'        : `${length}%`,
@@ -278,35 +300,27 @@ TABS.servos.initialize = function (callback) {
         enableServoOverrideSwitch.change(function () {
             const checked = enableServoOverrideSwitch.prop('checked');
             FC.CONFIG.servoOverrideDisabled = !checked;
-
-            if (!checked) {
-                mspHelper.resetServoOverrides();
-                for (let i = 0;i  < FC.CONFIG.servoCount; ++i) {
-                    const servoSwitch = $(`.servoOverride${i} .servoOverrideEnable input`);
-                    if (servoSwitch.prop('checked'))
-                        servoSwitch.click();
-                }
-            }
-
             $('.tab-servos .override').toggle(checked);
+            $('.servoOverrideEnable input').prop('checked', checked).change();
+            mspHelper.resetServoOverrides();
         });
 
         $('.tab-servos .override').toggle(!FC.CONFIG.servoOverrideDisabled);
-        $('.save_reboot').toggle(false);
 
         for (let index = 0; index < FC.CONFIG.servoCount; index++) {
             process_config(index);
             process_override(index);
         }
         process_warnings();
+        setReboot(false);
 
         self.prevConfig = self.cloneConfig(FC.SERVO_CONFIG);
 
-        self.save = function(reboot, callback) {
+        self.save = function(callback) {
             for (let index = 0; index < FC.CONFIG.servoCount; index++) {
                 update_servo_config(index);
             }
-            save_data(reboot, callback);
+            save_data(callback);
         };
 
         self.revert = function (callback) {
@@ -315,19 +329,15 @@ TABS.servos.initialize = function (callback) {
         };
 
         $('a.save').click(function () {
-            self.save(false, () => GUI.tab_switch_reload());
+            self.save(() => GUI.tab_switch_reload());
         });
 
-        $('a.save_reboot').click(function () {
-            self.save(true, () => GUI.tab_switch_reload());
+        $('a.reboot').click(function () {
+            self.save(() => GUI.tab_switch_reload());
         });
 
         $('a.revert').click(function () {
             self.revert(() => GUI.tab_switch_reload());
-        });
-
-        $('.configuration').change(function () {
-            setDirty();
         });
 
         GUI.interval_add('servo_pull', update_servos, 100);
@@ -345,12 +355,8 @@ TABS.servos.cleanup = function (callback) {
 TABS.servos.cloneConfig = function (servos) {
     const clone = [];
 
-    function cloneServo(a) {
-        return { mid: a.mid, min: a.min, max: a.max, rneg: a.rneg, rpos: a.rpos, rate: a.rate, speed: a.speed, flags: a.flags };
-    };
-
     servos.forEach(function (item) {
-        clone.push(cloneServo(item));
+        clone.push(Object.assign({}, item));
     });
 
     return clone;

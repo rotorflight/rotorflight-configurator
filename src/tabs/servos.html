@@ -5,9 +5,9 @@
             <a id="button-documentation" href="" target="_blank"></a>
         </div>
 
-        <div class="note">
+        <!--div class="note">
             <p i18n="servoHelp"></p>
-        </div>
+        </div-->
 
         <!-- CONFIGURATION -->
         <div class="configuration">
@@ -76,7 +76,10 @@
         <div class="warnings">
             <div class="grid-row">
                 <div class="grid-col full-width">
-                    <div class="note">
+                    <div class="note servoRateRebootNote">
+                        <p i18n="servoRateRebootNote"></p>
+                    </div>
+                    <div class="note servoValueWarning">
                         <div class="warning servo-unusual-limits-warning">
                             <p i18n="servoUnusualLimitsWarning"></p>
                         </div>
@@ -105,17 +108,11 @@
                             <div class="helpicon cf_tip" i18n_title="servoOverrideHelp"></div>
                         </div>
                         <div class="spacer_box">
-                            <table class="servoSettings">
+                            <table class="servoEnableOverride">
                                 <tr>
-                                    <td class="td1">
-                                        <input type="checkbox" id="servoEnableOverrideSwitch" class="toggle" />
-                                    </td>
-                                    <td class="td2">
-                                        <span i18n="servoEnableOverrideLabel"></span>
-                                    </td>
-                                    <td class="td3">
-                                        <span class="description" i18n="servoEnableOverrideText"></span>
-                                    </td>
+                                    <td><input type="checkbox" id="servoEnableOverrideSwitch" class="toggle" /></td>
+                                    <td><span i18n="servoEnableOverrideLabel"></span></td>
+                                    <td><span class="description" i18n="servoEnableOverrideText"></span></td>
                                 </tr>
                             </table>
                         </div>
@@ -138,7 +135,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- END OVERRIDE -->
 
@@ -151,8 +147,8 @@
         <div class="btn save_btn">
             <a class="save" href="#" i18n="buttonSave"></a>
         </div>
-        <div class="btn save_btn">
-            <a class="save_reboot" href="#" i18n="buttonSaveReboot"></a>
+        <div class="btn reboot_btn">
+            <a class="reboot" href="#" i18n="buttonSaveReboot"></a>
         </div>
     </div>
 
