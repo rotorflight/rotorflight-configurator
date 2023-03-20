@@ -41,11 +41,11 @@
     padding: 2px 0;
 }
 
-.tab-servos input {
-    border: 1px solid var(--subtleAccent);
-    border-radius: 3px;
+.tab-servos .attention {
+    background-color: #c04020 !important;
 }
 
+.tab-servos input,
 .tab-servos select {
     border: 1px solid var(--subtleAccent);
     border-radius: 3px;
@@ -67,25 +67,6 @@
     width: 100%;
     line-height: 20px;
     text-align: center;
-}
-
-.tab-servos .servoSettings {
-    float: left;
-    width: 100%;
-    margin: 0;
-    padding: 1px;
-    table-layout: auto;
-    border: 0;
-    border-collapse: collapse;
-}
-
-.tab-servos  .servoSettings tr td {
-    padding: 5px 0 0 5px;
-}
-
-.tab-servos  .servoSettings tr td:first-child {
-    width: 80px;
-    padding-right: 20px;
 }
 
 .tab-servos .servoConfig {
@@ -134,7 +115,7 @@
 }
 
 .tab-servos .servoConfig td:nth-child(1) {
-    width: 50px;
+    width: 36px;
     height: 28px;
     text-align: center;
     font-weight: bold;
@@ -142,40 +123,40 @@
 }
 
 .tab-servos .servoConfig td:nth-child(2) {
-    width: 80px;
+    width: 65px;
 }
 
 .tab-servos .servoConfig td:nth-child(3) {
-    width: 80px;
+    width: 65px;
 }
 
 .tab-servos .servoConfig td:nth-child(4) {
-    width: 80px;
+    width: 65px;
 }
 
 .tab-servos .servoConfig td:nth-child(5) {
-    width: 80px;
+    width: 65px;
 }
 
 .tab-servos .servoConfig td:nth-child(6) {
-    width: 80px;
+    width: 65px;
 }
 
 .tab-servos .servoConfig td:nth-child(7) {
-    width: 80px;
+    width: 65px;
 }
 
 .tab-servos .servoConfig td:nth-child(8) {
-    width: 80px;
+    width: 70px;
 }
 
 .tab-servos .servoConfig td:nth-child(9) {
-    width: 70px;
+    width: 60px;
     text-align: center;
 }
 
 .tab-servos .servoConfig td:nth-child(10) {
-    width: 70px;
+    width: 60px;
     text-align: center;
 }
 
@@ -218,6 +199,28 @@
     color: #ffffff;
 }
 
+.tab-servos .servoEnableOverride {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 1px;
+    table-layout: auto;
+    border: 0;
+    border-collapse: collapse;
+}
+
+.tab-servos  .servoEnableOverride tr td {
+    padding: 5px 10px 5px 10px;
+}
+
+.tab-servos .servoEnableOverride tr td:nth-child(1) {
+    width: 50px;
+}
+
+.tab-servos .servoEnableOverride tr td:nth-child(2) {
+    width: 160px;
+}
+
 .tab-servos .servoOverride {
     width: 100%;
     border: 0;
@@ -236,7 +239,7 @@
 }
 
 .tab-servos .servoOverride td {
-    padding: 6px 5px 7px 5px;
+    padding: 6px 10px 7px 10px;
     border: 1px solid var(--subtleAccent);
 }
 
@@ -248,7 +251,7 @@
 }
 
 .tab-servos .servoOverride td:nth-child(2) {
-    width: 80px;
+    width: 65px;
     text-align: center;
 }
 
@@ -290,19 +293,6 @@
 
 .tab-servos .servoOverrideSlider .noUi-pips .noUi-value-large {
     padding-top: 15px;
-}
-
-.tab-servos .overrides tr .td1 {
-    width: 50px;
-    padding-right: 14px;
-}
-
-.tab-servos .overrides tr .td2 {
-    padding-right: 14px;
-}
-
-.tab-servos .overrides tr .td3 {
-    width: 75%;
 }
 
 .tab-servos .note li {
