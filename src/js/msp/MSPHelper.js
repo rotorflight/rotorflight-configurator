@@ -923,9 +923,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.PID_PROFILE.pid_mode                      = data.readU8();
                 FC.PID_PROFILE.error_decay                   = data.readU8();
                 FC.PID_PROFILE.error_rotation                = data.readU8();
-                FC.PID_PROFILE.itermLimitRoll                = data.readU16();
-                FC.PID_PROFILE.itermLimitPitch               = data.readU16();
-                FC.PID_PROFILE.itermLimitYaw                 = data.readU16();
+                FC.PID_PROFILE.errorLimitRoll                = data.readU16();
+                FC.PID_PROFILE.errorLimitPitch               = data.readU16();
+                FC.PID_PROFILE.errorLimitYaw                 = data.readU16();
                 FC.PID_PROFILE.itermRelaxType                = data.readU8();
                 FC.PID_PROFILE.itermRelaxLevelRoll           = data.readU8();
                 FC.PID_PROFILE.itermRelaxLevelPitch          = data.readU8();
@@ -1744,9 +1744,9 @@ MspHelper.prototype.crunch = function(code) {
             buffer.push8(FC.PID_PROFILE.pid_mode)
                 .push8(FC.PID_PROFILE.error_decay)
                 .push8(FC.PID_PROFILE.error_rotation)
-                .push16(FC.PID_PROFILE.itermLimitRoll)
-                .push16(FC.PID_PROFILE.itermLimitPitch)
-                .push16(FC.PID_PROFILE.itermLimitYaw)
+                .push16(FC.PID_PROFILE.errorLimitRoll)
+                .push16(FC.PID_PROFILE.errorLimitPitch)
+                .push16(FC.PID_PROFILE.errorLimitYaw)
                 .push8(FC.PID_PROFILE.itermRelaxType)
                 .push8(FC.PID_PROFILE.itermRelaxLevelRoll)
                 .push8(FC.PID_PROFILE.itermRelaxLevelPitch)

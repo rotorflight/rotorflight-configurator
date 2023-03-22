@@ -72,9 +72,8 @@
 .tab-profiles .gui_box span {
     font-style: normal;
     font-weight: normal;
-    line-height: 19px;
+    line-height: 22px;
     color: #7d7d7d;
-    font-size: 11px;
 }
 
 .tab-profiles .gui_box_titlebar {
@@ -140,7 +139,10 @@
 }
 
 .tab-profiles .settings_table tr {
-    height: 30px;
+    height: 26px;
+}
+
+.tab-profiles .settings_table tr.border {
     border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
@@ -171,6 +173,7 @@
     flex-flow: row wrap-reverse;
     align-items: center;
     padding-bottom: 2px;
+    font-size: 11px;
 }
 
 .tab-profiles .settings_table .suboption select {

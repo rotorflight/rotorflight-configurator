@@ -1664,6 +1664,15 @@
     "profilesSubTab6": {
         "message": "Profile #6"
     },
+    "profilesPIDPassthroughWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Passthrough Mode</i>. Please change the advanced settings in the <b>CLI</b>."
+    },
+    "profilesPIDCompatibilityWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Rotorflight-1 Compatiblity</i> Mode. Please change the advanced settings in the <b>CLI</b>."
+    },
+    "profilesPIDCustomWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here. Please use the <b>CLI</b> to change the PID settings."
+    },
     "profilesPIDGains": {
         "message": "Axis"
     },
@@ -3737,66 +3746,47 @@
     "profilesPidSettings": {
         "message": "PID Controller Settings"
     },
-    "profilespidmode": {
-        "message": "PID Mode"
+    "profilesErrorLimit": {
+        "message": "Cumulative Error Limits"
     },
-    "profilespidmodeHelp": {
-        "message": "PID Mode Help"
+    "profilesErrorLimitHelp": {
+        "message": "Hard limit for the angle error in the PID loop. The absolute error and thus the I-term will never go above these limits."
     },
-    "profilespidmode0": {
-        "message": "MODE 0"
+    "profilesErrorLimitRoll": {
+        "message": "Error Limit for Roll Axis [&deg;]"
     },
-    "profilespidmode1": {
-        "message": "MODE 1"
+    "profilesErrorLimitPitch": {
+        "message": "Error Limit for Pitch Axis [&deg;]"
     },
-    "profilespidmode2": {
-        "message": "MODE 2"
+    "profilesErrorLimitYaw": {
+        "message": "Error Limit for Yaw Axis [&deg;]"
     },
-    "profilespidmode9": {
-        "message": "MODE 9"
-    },
-    "profilesItermLimit": {
-        "message": "I-term Limits"
-    },
-    "profilesItermLimitHelp": {
-        "message": "Hard limit for the I-term in the PID loop. The absolute I-term values will never go above these limits."
-    },
-    "profilesItermLimitRoll": {
-        "message": "I-term limit for Roll axis [%]"
-    },
-    "profilesItermLimitPitch": {
-        "message": "I-term limit for Pitch axis [%]"
-    },
-    "profilesItermLimitYaw": {
-        "message": "I-term limit for Yaw axis [%]"
-    },
-    "profileserrorDecay": {
+    "profilesErrorDecay": {
         "message": "Error Decay"
     },
-    "profileserrorDecayHelp": {
-        "message": "Bleeds off the current controller error when the craft is not fully spooled up. This helps preventing the craft from tipping over on the ground."
+    "profilesErrorDecayHelp": {
+        "message": "Bleeds off the current controller error when the craft is not airborne. This helps preventing the craft from tipping over on the ground."
     },
-    "profileserrorDecayTime": {
+    "profilesErrorDecayTime": {
         "message": "Decay Time"
     },
-    "profileserrorRotation": {
+    "profilesErrorRotation": {
         "message": "Error Rotation"
     },
-    "profileserrorRotationHelp": {
+    "profilesErrorRotationHelp": {
         "message": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This is sometimes called Piro Compensation."
     },
     "profilesItermRelax": {
-        "message": "I Term Relax"
+        "message": "I-Term Relax"
     },
     "profilesItermRelaxHelp": {
-        "message": "Limits the accumulation of I Term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements. You can choose the axes in which this is active. <br><strong>OFF:</strong> ITerm Relax is disabled <br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw."
+        "message": "Limits the accumulation of I-term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements."
     },
     "profilesItermRelaxType": {
-        "message": "ITerm Relax Type",
-        "description": "Iterm Relax Type selection"
+        "message": "I-term Relax Type"
     },
-    "profilesItermRelaxTypeOptionOFF": {
-        "message": "OFF"
+    "profilesItermRelaxTypeHelp": {
+        "message": "Choose the axes in which this is active. <br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw."
     },
     "profilesItermRelaxTypeOptionRP": {
         "message": "RP"
@@ -3817,37 +3807,16 @@
         "message": "Lower values suppress bounce-back after movements, high values increase high-rate turn precision.<br>Set to 15-30 for small helis, 10-15 for mid-size, and less than 10 for large."
     },
     "profilesItermRelaxLevelRoll": {
-        "message": "iTerm relax Level Roll"
+        "message": "Relax Threshold for Roll"
     },
     "profilesItermRelaxLevelPitch": {
-        "message": "iTerm relax Level Pitch"
+        "message": "Relax Threshold for Pitch"
     },
     "profilesItermRelaxLevelYaw": {
-        "message": "iTerm relax Level Yaw"
+        "message": "Relax Threshold for Yaw"
     },
     "profilesItermRelaxLevelHelp": {
         "message": "Sets the setpoint limit/level for I-term relax. This is fixed to 40 in BF and RF1."
-    },
-    "profilesCyclicNormalization": {
-        "message": "Rate normalization mode for cyclic"
-    },
-    "profilesCyclicNormalizationHelp": {
-        "message": "More control action is needed at lower headspeeds to achieve the same Cyclic rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> Rotorflight will attempt to meet the requested Roll and Pitch rates as the headspeed varies. <br><strong>Linear:</strong> Small changes in Cyclic are normalized in feel similar to Absolute, but Linear will let the response drop over larger headspeed changes. <br><strong>Natural:</strong> Rotorflight will emulate the responsiveness of a flybared heli on Roll and Pitch as headspeed changes"
-    },
-    "profilesCollectiveNormalization": {
-        "message": "Rate normalization mode for collective"
-    },
-    "profilesCollectiveNormalizationHelp": {
-        "message": "More control action is needed at lower headspeeds to achieve the same Collective rate as at high headspeeds. Normalization accounts for headspeed changes. <br><strong>Absolute:</strong> Rotorflight will attempt to meet the requested Collective rate as the headspeed varies. <br><strong>Linear:</strong> Small changes in Collective are normalized in feel similar to Absolute, but Linear will let the response drop over larger headspeed changes. <br><strong>Natural:</strong> Rotorflight will emulate the responsiveness of a flybared heli on Collective as headspeed changes."
-    },
-    "profilesRateNormalizationNatural": {
-        "message": "Natural"
-    },
-    "profilesRateNormalizationLinear": {
-        "message": "Linear"
-    },
-    "profilesRateNormalizationAbsolute": {
-        "message": "Absolute"
     },
     "profilesLevelingSettings": {
         "message": "Auto-leveling Settings"
@@ -3883,10 +3852,10 @@
         "message": "Horizon Mode leveling gain. This determines how aggressively the helicopter tilts back to level while in Horizon Mode"
     },
     "profilesYawSettings": {
-        "message": "Yaw - Feed Forward Settings"
+        "message": "Yaw Settings"
     },
-    "profilesCollectiveSettings": {
-        "message": "Pitch - Feed Forward Settings"
+    "profilesPitchSettings": {
+        "message": "Pitch Settings"
     },
     "profilesYawCenterOffset": {
         "message": "Center Offset"
@@ -3895,13 +3864,13 @@
         "message": "Center Offset for tail motor or servo"
     },
     "profilesYawStopGainCW": {
-        "message": "CW Stop Gain"
+        "message": "CW Yaw Stop Gain"
     },
     "profilesYawStopGainCWHelp": {
         "message": "Stop gain (PD) for clock-wise rotation. Typical range 50..200."
     },
     "profilesYawStopGainCCW": {
-        "message": "CCW Stop Gain"
+        "message": "CCW Yaw Stop Gain"
     },
     "profilesYawStopGainCCWHelp": {
         "message": "Stop gain (PD) for counter clock-wise rotation. Typical range 50..200."
@@ -3946,127 +3915,118 @@
         "message": "Collective Impulse Feedforward Gain"
     },
     "profilespitchFFCollectiveImpulseGainHelp": {
-        "message": "Gain value for Pitch impulse feedforward mixed into Collective"
-    },
-    "profilesRescueMode": {
-        "message": "Rescue Mode Enable"
-    },
-    "profilesRescueModeHelp": {
-        "message": "Enable Rescue mode Settings"
-    },
-    "profilesrescueModeDisable": {
-        "message": "Disabled"
-    },
-    "profilesrescueModeEnable": {
-        "message": "Enabled"
-    },
-    "profilesrescueFlipModeDisable": {
-        "message": "No-Flip  "
-    },
-    "profilesrescueFlipModeEnable": {
-        "message": "Flip  "
-    },
-    "profilesRescueFlipMode": {
-        "message": "Inverted flip to upright"
-    },
-    "profilesRescueFlipModeHelp": {
-        "message": "If rescue activated while inverted. Flip to upright or remain inverted"
-    },
-    "profilesRescueLevelGain": {
-        "message": "Rescue Level Gain"
-    },
-    "profilesRescueLevelGainHelp": {
-        "message": "Gain to determine ho agressively the heli levels during rescue"
-    },
-    "profilesRescueFlipGain": {
-        "message": "Rescue Flip Gain"
-    },
-    "profilesRescueFlipGainHelp": {
-        "message": "Gain to determine ho agressively the heli Flips during inverted rescue"
-    },
-    "profilesRescueMaxRate": {
-        "message": "Rescue Max Rate"
-    },
-    "profilesRescueMaxRateHelp": {
-        "message": "Limit rescue roll/pitch rate. Larger helicopters may need slower rotation rates"
-    },
-    "profilesRescueMaxAccel": {
-        "message": "Rescue Max Acceleration"
-    },
-    "profilesRescueMaxAccelHelp": {
-        "message": "Limit how fast the helicopter accelerates into a roll/pitch. Larger helicopters may need slower acceleration"
+        "message": "Gain value for Collective Impulse mixed into Pitch"
     },
     "profilesRescueSettings": {
-        "message": "Rescue Mode Settings"
+        "message": "Rescue Settings"
+    },
+    "profilesRescueEnable": {
+        "message": "Enable Rescue"
+    },
+    "profilesRescueFlipMode": {
+        "message": "Flip to upright"
+    },
+    "profilesRescueFlipModeHelp": {
+        "message": "If rescue is activated while inverted, flip to upright - or remain inverted"
+    },
+    "profilesRescueFlipModeDisable": {
+        "message": "No-Flip"
+    },
+    "profilesRescueFlipModeEnable": {
+        "message": "Flip"
+    },
+    "profilesRescueLevelGain": {
+        "message": "Leveling Gain"
+    },
+    "profilesRescueLevelGainHelp": {
+        "message": "Gain to determine how agressively the heli levels during rescue."
+    },
+    "profilesRescueFlipGain": {
+        "message": "Flip-to-Upright Gain"
+    },
+    "profilesRescueFlipGainHelp": {
+        "message": "Gain to determine how agressively the heli flips during inverted rescue."
+    },
+    "profilesRescueMaxRate": {
+        "message": "Max Levelling Rate [&deg;/s]"
+    },
+    "profilesRescueMaxRateHelp": {
+        "message": "Limit rescue roll/pitch rate. Larger helicopters may need slower rotation rates."
+    },
+    "profilesRescueMaxAccel": {
+        "message": "Max Leveling Acceleration [&deg;/s²]"
+    },
+    "profilesRescueMaxAccelHelp": {
+        "message": "Limit how fast the helicopter accelerates into a roll/pitch. Larger helicopters may need slower acceleration."
     },
     "profilesRescuePullupCollective": {
-        "message": "Pull-up Collective"
+        "message": "Pull-up Collective [%]"
     },
     "profilesRescuePullupCollectiveHelp": {
-        "message": "Rescue Collective value for rescue Pullup climb"
+        "message": "Collective value for pull-up climb."
     },
     "profilesRescuePullupTime": {
-        "message": "Pull-up Time"
+        "message": "Pull-up Time [s]"
     },
     "profilesRescuePullupTimeHelp": {
-        "message": "Rescue Pull-up time. When Rescue activated Helicopter will apply Pull up collective for this time period before moving to flip or climb stage"
+        "message": "Rescue pull-up time. When Rescue activated Helicopter will apply pull-up collective for this time period before moving to flip or climb stage."
     },
     "profilesRescueClimbCollective": {
-        "message": "Climb Collective"
+        "message": "Climb Collective [%]"
     },
     "profilesRescueClimbCollectiveHelp": {
-        "message": "Rescue Collective value for rescue climb"
+        "message": "Collective value for rescue climb"
     },
     "profilesRescueClimbTime": {
-        "message": "Climb Time"
+        "message": "Climb Time [s]"
     },
     "profilesRescueClimbTimeHelp": {
-        "message": "Rescue climb time. Length of time helicopter aill apply Climb collective before switching to hover"
+        "message": "Length of time the <i>climb collective</i> is applied before switching to hover."
     },
     "profilesRescueHoverCollective": {
-        "message": "Hover Collective"
+        "message": "Hover Collective [%]"
     },
     "profilesRescueHoverCollectiveHelp": {
-        "message": "Rescue Collective value for Hover"
+        "message": "Collective value for Hover"
     },
     "profilesRescueExitTime": {
-        "message": "Exit Time"
+        "message": "Exit Time [s]"
     },
     "profilesRescueExitTimeHelp": {
         "message": "Collective is rate limited during this period to provide smooth transition to normal flight. This limits rapid application of negative collective if the Helicopter has rolled during rescue"
     },
     "profilesRescueFlipTime": {
-        "message": "Flip Fail Time"
+        "message": "Flip Fail Time [s]"
     },
     "profilesRescueFlipTimeHelp": {
-        "message": "This is a safety feature. If the helicopter is in rescue and is trying to flip to upright and does not do with the Rescue Flip Time, rescue more will abort"
+        "message": "Timeout for flip failure. If the helicopter is in rescue and is trying to flip to upright and does not do with the Rescue Flip Time, rescue will be aborted"
     },
-    "profilesrescueHoverAltitude": {
-        "message": "Altitude Hold - Hover Altitude"
+    "profilesRescueAltHold": {
+        "message": "Enable Altitude Hold"
     },
-    "profilesrescueHoverAltitudeHelp": {
-        "message": "Hover Altitude for altitude hold in rescue mode"
+    "profilesRescueHoverAltitude": {
+        "message": "Hover Altitude [m]"
     },
-    "profilesrescueAltitudePGain": {
-        "message": "Altitude Hold - P Gain"
+    "profilesRescueHoverAltitudeHelp": {
+        "message": "Hovering altitude after rescue action"
     },
-    "profilesrescueAltitudePGainHelp": {
-        "message": "Climb Rate P-gain"
+    "profilesRescueAltitudePGain": {
+        "message": "Altitude P-Gain"
     },
-    "profilesrescueAltitudeIGain": {
-        "message": "Altitude Hold - I Gain"
+    "profilesRescueAltitudePGainHelp": {
+        "message": "P-gain for altitude control"
     },
-    "profilesrescueAltitudeIGainHelp": {
-        "message": "Climb Rate I-gain"
+    "profilesRescueAltitudeIGain": {
+        "message": "Altitude I-Gain"
     },
-    "profilesrescueMaxCollective": {
-        "message": "Altitude Hold - Max Collective"
+    "profilesRescueAltitudeIGainHelp": {
+        "message": "I-gain for altitude control"
     },
-    "profilesrescueMaxCollectiveHelp": {
-        "message": "Maximum Collective to apply in Level hold rescue"
+    "profilesRescueMaxCollective": {
+        "message": "Maximum Collective [%]"
     },
-    "baroConfigurationNote": {
-        "message": "<strong>Note:</strong> Barometer must be enabled to use Altitude Hold features. See Configuration Tab."
+    "profilesRescueMaxCollectiveHelp": {
+        "message": "Maximum Collective to apply for altitude control"
     },
     "rateSetupCopyRateProfile": {
         "message": "Copy rateprofile"

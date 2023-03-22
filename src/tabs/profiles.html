@@ -40,11 +40,20 @@
             <div class="subtab">
                 <div class="clear-both"></div>
                 <div class="cf_column">
+                    <div class="note profilesPIDPassthroughWarning">
+                        <p i18n="profilesPIDPassthroughWarning"></p>
+                    </div>
+                    <div class="note profilesPIDCompatibilityWarning">
+                        <p i18n="profilesPIDCompatibilityWarning"></p>
+                    </div>
+                    <div class="note profilesPIDCustomWarning">
+                        <p i18n="profilesPIDCustomWarning"></p>
+                    </div>
                     <div class="gui_box grey pid_gains">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="profilesPidGains"></div>
                         </div>
-                        <table id="pid_main" class="pid_table">
+                        <table id="pid_main" class="pid_table pid_standard">
                             <tr class="pid_titlebar">
                                 <th class="name">
                                     <div class="name-helpicon-flex">
@@ -108,88 +117,83 @@
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="profilesPidSettings"></div>
                         </div>
-                        <table class="settings_table">
-                            <tr class="pidmode">
+                        <table id="pid_advanced" class="settings_table pid_standard">
+                            <tr class="errorLimit">
                                 <td>
-                                    <select id="pidmode">
-                                        <option i18n="profilespidmode0"     value="0"/>
-                                        <option i18n="profilespidmode1"     value="1"/>
-                                        <option i18n="profilespidmode2"     value="2"/>
-                                        <option i18n="profilespidmode9"     value="9"/>
-                                    </select>
+                                    <input type="number" id="errorLimitRoll" step="0.2" min="0" max="200" />
                                 </td>
                                 <td colspan="2">
-                                    <span i18n="profilespidmode"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profilespidmodeHelp"></div>
+                                    <label for="errorLimitRoll">
+                                        <span i18n="profilesErrorLimitRoll"></span>
+                                    </label>
+                                    <div class="helpicon cf_tip" i18n_title="profilesErrorLimitHelp"></div>
                                 </td>
                             </tr>
-                            <tr class="itermlimit">
+                            <tr class="errorLimit">
                                 <td>
-                                    <input type="checkbox" id="itermLimit" class="toggle" />
+                                    <input type="number" id="errorLimitPitch" step="0.2" min="0" max="200" />
                                 </td>
                                 <td colspan="2">
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesItermLimitHelp"></div>
-                                    <span i18n="profilesItermLimit"></span>
-                                    <span class="suboption">
-                                        <input type="number" id="itermLimitRoll" step="0.2" min="0" max="200" />
-                                        <label for="itermLimitRoll">
-                                            <span i18n="profilesItermLimitRoll"></span>
-                                        </label>
-                                    </span>
-                                    <span class="suboption">
-                                        <input type="number" id="itermLimitPitch" step="0.2" min="0" max="200" />
-                                        <label for="itermLimitPitch">
-                                            <span i18n="profilesItermLimitPitch"></span>
-                                        </label>
-                                    </span>
-                                    <span class="suboption">
-                                        <input type="number" id="itermLimitYaw" step="0.2" min="0" max="200" />
-                                        <label for="itermLimitYaw">
-                                            <span i18n="profilesItermLimitYaw"></span>
-                                        </label>
-                                    </span>
+                                    <label for="errorLimitPitch">
+                                        <span i18n="profilesErrorLimitPitch"></span>
+                                    </label>
                                 </td>
                             </tr>
-                            <tr class="errorrotation">
+                            <tr class="errorLimit border">
+                                <td>
+                                    <input type="number" id="errorLimitYaw" step="0.2" min="0" max="200" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="errorLimitYaw">
+                                        <span i18n="profilesErrorLimitYaw"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="errorRotation border">
                                 <td>
                                     <input type="checkbox" id="errorRotation" class="toggle" />
                                 </td>
                                 <td colspan="2">
-                                    <span i18n="profileserrorRotation"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profileserrorRotationHelp"></div>
+                                    <span i18n="profilesErrorRotation"></span>
+                                    <div class="helpicon cf_tip" i18n_title="profilesErrorRotationHelp"></div>
                                 </td>
                             </tr>
-                            <tr class="errordecay">
+                            <tr class="errorDecay border">
                                 <td>
                                     <input type="checkbox" id="errorDecay" class="toggle" />
                                 </td>
                                 <td colspan="2">
-                                    <span i18n="profileserrorDecay"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profileserrorDecayHelp"></div>
-                                    <span class="errordecayspeed suboption">
+                                    <span i18n="profilesErrorDecay"></span>
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesErrorDecayHelp"></div>
+                                    <span class="errorDecaySpeed suboption">
                                         <input type="number" id="errorDecayTime" step="0.1" min="0.1" max="25.0" />
                                         <label for="errorDecayTime">
-                                            <span i18n="profileserrorDecayTime"></span>
+                                            <span i18n="profilesErrorDecayTime"></span>
                                         </label>
                                     </span>
                                 </td>
                             </tr>
-
-                            <tr class="itermrelax">
+                            <tr class="itermRelax border">
                                 <td>
-                                    <select id="itermRelaxType">
-                                        <option i18n="profilesItermRelaxTypeOptionOFF"     value="0"/>
-                                        <option i18n="profilesItermRelaxTypeOptionRP"      value="1"/>
-                                        <option i18n="profilesItermRelaxTypeOptionRPY"     value="2"/>
-                                    </select>
+                                    <input type="checkbox" id="itermRelax" class="toggle" />
                                 </td>
                                 <td colspan="2">
                                     <div class="helpicon cf_tip" i18n_title="profilesItermRelaxHelp"></div>
                                     <div>
                                         <label for="ItermRelax">
-                                        <span i18n="profilesItermRelax"></span>
+                                            <span i18n="profilesItermRelax"></span>
                                         </label>
                                     </div>
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesItermRelaxTypeHelp"></div>
+                                    <span class="suboption">
+                                        <select id="itermRelaxType">
+                                            <option i18n="profilesItermRelaxTypeOptionRP" value="1"/>
+                                            <option i18n="profilesItermRelaxTypeOptionRPY" value="2"/>
+                                        </select>
+                                        <label for="itermRelaxType">
+                                            <span i18n="profilesItermRelaxType"></span>
+                                        </label>
+                                    </span>
                                     <div class="helpicon cf_tip subhelp" i18n_title="profilesItermRelaxCutoffHelp"></div>
                                     <span class="suboption">
                                         <input type="number" id="itermRelaxCutoffRoll" step="1" min="1" max="100" />
@@ -203,12 +207,13 @@
                                             <span i18n="profilesItermRelaxCutoffPitch"></span>
                                         </label>
                                     </span>
-                                    <span class="suboption">
+                                    <span class="suboption itermRelaxYawOption">
                                         <input type="number" id="itermRelaxCutoffYaw" step="1" min="1" max="100" />
                                         <label for="itermRelaxCutoffYaw">
                                             <span i18n="profilesItermRelaxCutoffYaw"></span>
                                         </label>
                                     </span>
+                                    <!--
                                     <div class="helpicon cf_tip subhelp" i18n_title="profilesItermRelaxLevelHelp"></div>
                                     <span class="suboption">
                                         <input type="number" id="itermRelaxLevelRoll" step="1" min="10" max="250" />
@@ -222,12 +227,13 @@
                                             <span i18n="profilesItermRelaxLevelPitch"></span>
                                         </label>
                                     </span>
-                                    <span class="suboption">
+                                    <span class="suboption itermRelaxYawOption">
                                         <input type="number" id="itermRelaxLevelYaw" step="1" min="10" max="250" />
                                         <label for="itermRelaxLevelYaw">
                                             <span i18n="profilesItermRelaxLevelYaw"></span>
                                         </label>
                                     </span>
+                                    -->
                                 </td>
                             </tr>
                         </table>
@@ -237,7 +243,7 @@
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="profilesYawSettings"></div>
                         </div>
-                        <table class="settings_table">
+                        <table id="pid_yaw_advanced" class="settings_table pid_standard">
                             <tr class="yawStopGainCW">
                                 <td>
                                     <input type="number" id="yawStopGainCW" step="1" min="25" max="250"/>
@@ -247,7 +253,7 @@
                                     <div class="helpicon cf_tip" i18n_title="profilesYawStopGainCWHelp"></div>
                                 </td>
                             </tr>
-                            <tr class="yawStopGainCCW">
+                            <tr class="yawStopGainCCW border">
                                 <td>
                                     <input type="number" id="yawStopGainCCW" step="1" min="25" max="250"/>
                                 </td>
@@ -267,7 +273,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="yawFFCollectiveGain">
+                            <tr class="yawFFCollectiveGain border">
                                 <td>
                                     <input type="number" id="yawFFCollectiveGain" step="1" min="0" max="2500"/>
                                 </td>
@@ -300,7 +306,6 @@
                                     </div>
                                 </td>
                             </tr>
-
                             <tr class="govTTAGain">
                                 <td>
                                     <input type="number" id="govTTAGain" min="0" max="250" />
@@ -322,11 +327,11 @@
                         </table>
                     </div>
 
-                    <div class="gui_box grey collective_settings">
+                    <div class="gui_box grey pitch_settings">
                         <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="profilesCollectiveSettings"></div>
+                            <div class="spacer_box_title" i18n="profilesPitchSettings"></div>
                         </div>
-                        <table class="settings_table">
+                        <table id="pid_pitch_advanced" class="settings_table pid_standard">
                             <tr class="pitchFFCollectiveGain">
                                 <td>
                                     <input type="number" id="pitchFFCollectiveGain" step="1" min="0" max="2500"/>
@@ -412,22 +417,21 @@
                             <div class="spacer_box_title" i18n="profilesRescueSettings"></div>
                         </div>
                         <table class="settings_table">
-                            <tr class="rescueMode">
+                            <tr class="rescueMode border">
                                 <td>
-                                    <input type="checkbox" id="rescueMode" class="toggle" />
+                                    <input type="checkbox" id="rescueEnable" class="toggle" />
                                 </td>
                                 <td colspan="2">
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueModeHelp"></div>
                                     <div>
-                                        <label for="rescueMode">
-                                        <span i18n="profilesRescueMode"></span>
+                                        <label for="rescueEnable">
+                                            <span i18n="profilesRescueEnable"></span>
                                         </label>
                                     </div>
                                     <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueFlipModeHelp"></div>
                                     <span class="suboption">
                                         <select id="rescueFlipMode">
-                                            <option i18n="profilesrescueFlipModeDisable" value= "0"/>
-                                            <option i18n="profilesrescueFlipModeEnable"   value= "1"/>
+                                            <option i18n="profilesRescueFlipModeDisable" value="0" />
+                                            <option i18n="profilesRescueFlipModeEnable" value="1" />
                                         </select>
                                         <label for="rescueFlipMode">
                                             <span i18n="profilesRescueFlipMode"></span>
@@ -435,7 +439,7 @@
                                     </span>
                                     <div class="helpicon cf_tip subhelp" i18n_title="profilesRescuePullupCollectiveHelp"></div>
                                     <span class="suboption">
-                                        <input type="number" id="rescuePullupCollective" step="10" min="0" max="1000"/>
+                                        <input type="number" id="rescuePullupCollective" step="1" min="0" max="100"/>
                                         <label for="rescuePullupCollective">
                                             <span i18n="profilesRescuePullupCollective"></span>
                                         </label>
@@ -449,7 +453,7 @@
                                     </span>
                                     <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueClimbCollectiveHelp"></div>
                                     <span class="suboption">
-                                        <input type="number" id="rescueClimbCollective" step="10" min="0" max="1000"/>
+                                        <input type="number" id="rescueClimbCollective" step="1" min="0" max="100"/>
                                         <label for="rescueClimbCollective">
                                             <span i18n="profilesRescueClimbCollective"></span>
                                         </label>
@@ -463,7 +467,7 @@
                                     </span>
                                     <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueHoverCollectiveHelp"></div>
                                     <span class="suboption">
-                                        <input type="number" id="rescueHoverCollective" step="10" min="0" max="1000"/>
+                                        <input type="number" id="rescueHoverCollective" step="1" min="0" max="100"/>
                                         <label for="rescueHoverCollective">
                                             <span i18n="profilesRescueHoverCollective"></span>
                                         </label>
@@ -498,7 +502,7 @@
                                     </span>
                                     <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueMaxRateHelp"></div>
                                     <span class="suboption">
-                                        <input type="number" id="rescueMaxRate" step="10" min="1" max="1000"/>
+                                        <input type="number" id="rescueMaxRate" step="1" min="5" max="250"/>
                                         <label for="rescueMaxRate">
                                             <span i18n="profilesRescueMaxRate"></span>
                                         </label>
@@ -512,38 +516,42 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr class="rescueMode BaroEnable">
-                                <td></td>
+                            <tr class="rescueAltHold">
+                                <td>
+                                    <input type="checkbox" id="rescueAltHold" class="toggle" />
+                                </td>
                                 <td colspan="2">
-                                    <div class="note invoption">
-                                        <p i18n="baroConfigurationNote"></p>
+                                    <div>
+                                        <label for="rescueAltHold">
+                                            <span i18n="profilesRescueAltHold"></span>
+                                        </label>
                                     </div>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesrescueHoverAltitudeHelp"></div>
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueHoverAltitudeHelp"></div>
                                     <span class="suboption">
-                                        <input type="number" id="rescueHoverAltitude" step="10" min="0" max="10000"/>
+                                        <input type="number" id="rescueHoverAltitude" step="0.1" min="0" max="100"/>
                                         <label for="rescueHoverAltitude">
-                                            <span i18n="profilesrescueHoverAltitude"></span>
+                                            <span i18n="profilesRescueHoverAltitude"></span>
                                         </label>
                                     </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesrescueAltitudePGainHelp"></div>
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueAltitudePGainHelp"></div>
                                     <span class="suboption">
                                         <input type="number" id="rescueAltitudePGain" step="10" min="0" max="10000"/>
                                         <label for="rescueAltitudePGain">
-                                            <span i18n="profilesrescueAltitudePGain"></span>
+                                            <span i18n="profilesRescueAltitudePGain"></span>
                                         </label>
                                     </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesrescueAltitudeIGainHelp"></div>
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueAltitudeIGainHelp"></div>
                                     <span class="suboption">
                                         <input type="number" id="rescueAltitudeIGain" step="10" min="0" max="10000"/>
                                         <label for="rescueAltitudeIGain">
-                                            <span i18n="profilesrescueAltitudeIGain"></span>
+                                            <span i18n="profilesRescueAltitudeIGain"></span>
                                         </label>
                                     </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesrescueMaxCollectiveHelp"></div>
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueMaxCollectiveHelp"></div>
                                     <span class="suboption">
-                                        <input type="number" id="rescueMaxCollective" step="10" min="1" max="1000"/>
+                                        <input type="number" id="rescueMaxCollective" step="1" min="0" max="100"/>
                                         <label for="rescueMaxCollective">
-                                            <span i18n="profilesrescueMaxCollective"></span>
+                                            <span i18n="profilesRescueMaxCollective"></span>
                                         </label>
                                     </span>
                                 </td>
@@ -555,7 +563,7 @@
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="govProfile"></div>
                         </div>
-                        <div class="note hidden">
+                        <div class="note">
                             <p i18n="govHeadspeedNote"></p>
                         </div>
                         <table class="settings_table">
