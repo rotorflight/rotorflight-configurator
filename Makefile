@@ -3,7 +3,7 @@
 ##
 
 # Default version number
-SEMVER ?= 1.1.0-devel
+SEMVER ?= 2.0.0-devel
 
 
 ## Rules
