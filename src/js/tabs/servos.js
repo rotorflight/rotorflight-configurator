@@ -250,8 +250,8 @@ TABS.servos.initialize = function (callback) {
             FC.SERVO_CONFIG[servoIndex].rpos = parseInt($('#rpos',servo).val());
             FC.SERVO_CONFIG[servoIndex].rate = parseInt($('#rate',servo).val());
             FC.SERVO_CONFIG[servoIndex].speed = parseInt($('#speed',servo).val());
-            FC.SERVO_CONFIG[servoIndex].flags = $('#reversed',servo).prop('checked') ? self.FLAG_REVERSE : 0 |
-                                                $('#geocor',servo).prop('checked') ? self.FLAG_GEOCOR : 0;
+            FC.SERVO_CONFIG[servoIndex].flags = $('#reversed',servo).prop('checked') ? self.FLAG_REVERSE : 0;
+            FC.SERVO_CONFIG[servoIndex].flags |= $('#geocor',servo).prop('checked') ? self.FLAG_GEOCOR : 0;
         }
 
         function update_servo_bars() {
