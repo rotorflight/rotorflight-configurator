@@ -145,7 +145,7 @@ TABS.servos.initialize = function (callback) {
             servoInput.change(function () {
                 const value = $(this).val();
                 servoSlider.val(value);
-                FC.SERVO_OVERRIDE[servoIndex] = Math.round(value * 1000 / 60);
+                FC.SERVO_OVERRIDE[servoIndex] = Math.round(value * 1000 / 50);
                 mspHelper.sendServoOverride(servoIndex);
             });
 
