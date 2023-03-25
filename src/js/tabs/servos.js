@@ -164,7 +164,7 @@ TABS.servos.initialize = function (callback) {
 
             const value = FC.SERVO_OVERRIDE[servoIndex];
             const check = (value >= -2000 && value <= 2000);
-            const angle = check ? Math.round(value * 60 / 1000) : 0;
+            const angle = check ? Math.round(value * 50 / 1000) : 0;
 
             servoInput.val(angle);
             servoSlider.val(angle);
