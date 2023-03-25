@@ -329,7 +329,7 @@
         "message": "Status"
     },
     "tabSetup": {
-        "message": "System"
+        "message": "Setup"
     },
     "tabSetupOSD": {
         "message": "OSD Setup"
@@ -914,11 +914,17 @@
     "initialSetupButtonCalibratingText": {
         "message": "Calibrating..."
     },
-    "initialSetupButtonReset": {
+    "initialSetupButtonResetSettings": {
         "message": "Reset Settings"
     },
-    "initialSetupResetText": {
+    "initialSetupResetSettingsText": {
         "message": "Restore settings to <strong>default</strong>"
+    },
+    "initialSetupButtonSaveSettings": {
+        "message": "Save Settings"
+    },
+    "initialSetupSaveSettingsText": {
+        "message": "Save settings into <strong>EEPROM</strong>."
     },
     "initialSetupButtonBackup": {
         "message": "Backup"
@@ -970,6 +976,9 @@
     },
     "initialSetupSettingsRestored": {
         "message": "Settings restored to <strong>default</strong>"
+    },
+    "initialSetupSettingsSaved": {
+        "message": "All settings saved in EEPROM."
     },
     "initialSetupDangerText": {
         "message": "<strong>Note:</strong> In order to prevent injury <strong>remove ALL rotor blades</strong> before enabling any arming features.<strong class=\"message-negative\"><strong class=\"message-negative\"><br/>NEVER FLY YOUR CRAFT WITH THE CONFIGURATOR CONNECTED!</strong>"

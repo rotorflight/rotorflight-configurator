@@ -111,6 +111,13 @@ TABS.setup.initialize = function (callback) {
             });
         });
 
+        $('a.saveSettings').click(function () {
+            MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
+                GUI.log(i18n.getMessage('initialSetupSettingsSaved'));
+                GUI.tab_switch_reload();
+            });
+        });
+
         const dialogConfirmArming = $('.dialogConfirmArming')[0];
         const enableArmingSwitch = $('input[id="initialSetupEnableArming"]');
 
