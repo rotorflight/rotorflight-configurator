@@ -701,6 +701,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 }
                 length = data.readU8();
                 for (let i = 0; i < length; i++) {
+                    FC.CONFIG.boardDesign += String.fromCharCode(data.readU8());
+                }
+                length = data.readU8();
+                for (let i = 0; i < length; i++) {
                     FC.CONFIG.manufacturerId += String.fromCharCode(data.readU8());
                 }
                 for (let i = 0; i < self.SIGNATURE_LENGTH; i++) {

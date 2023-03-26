@@ -433,6 +433,18 @@ TABS.firmware_flasher.initialize = function (callback) {
             return bareBoard;
         }
 
+        function grabKeywordFromConfig(config, keyword, fallback) {
+            let match = fallback || '';
+            try {
+                const res = config.match(`${keyword} (.*)\n`);
+                if (res)
+                    match = res[1];
+            } catch (e) {
+                console.log('grabKeywordFromConfig failed: ', e.message);
+            }
+            return match;
+        }
+
         function setUnifiedConfig(target, bareBoard, targetConfig, manufacturerId, fileName, fileUrl, date) {
             // a target might request a firmware with the same name, remove configuration in this case.
             if (bareBoard === target) {
@@ -554,9 +566,10 @@ TABS.firmware_flasher.initialize = function (callback) {
                                         if (config !== null) {
                                             const bareBoard = grabBuildNameFromConfig(config);
                                             TABS.firmware_flasher.bareBoard = bareBoard;
+                                            const design = grabKeywordFromConfig(config, 'board_design', 'BTFL');
 
-                                            self.gitHubApi.getFileLastCommitInfo('betaflight/unified-targets', 'master', unifiedConfig.path, function (commitInfo) {
-                                                config = self.injectTargetInfo(config, target, manufacturerId, commitInfo);
+                                            self.gitHubApi.getFileLastCommitInfo('rotorflight/rotorflight-targets', 'master', unifiedConfig.path, function (commitInfo) {
+                                                config = self.injectTargetInfo(config, target, design, manufacturerId, commitInfo);
 
                                                 setUnifiedConfig(target, bareBoard, config, manufacturerId, unifiedConfig.name, unifiedConfig.download_url, commitInfo.date);
 
@@ -830,7 +843,9 @@ TABS.firmware_flasher.initialize = function (callback) {
 
                                     let config = cleanUnifiedConfigFile(e.target.result);
                                     if (config !== null) {
-                                        config = self.injectTargetInfo(config, file.name, 'UNKN', { commitHash: 'unknown', date: file.lastModifiedDate.toISOString() });
+                                        const design = grabKeywordFromConfig(config, 'board_design', 'BTFL');
+                                        const manufac = grabKeywordFromConfig(config, 'manufacturer_id', 'NONE');
+                                        config = self.injectTargetInfo(config, file.name, design, manufac, { commitHash: 'unknown', date: file.lastModifiedDate.toISOString() });
                                         self.unifiedTarget.config = config;
                                         self.unifiedTarget.fileName = file.name;
                                         self.isConfigLocal = true;
@@ -1137,12 +1152,12 @@ TABS.firmware_flasher.flashProgress = function(value) {
     return this;
 };
 
-TABS.firmware_flasher.injectTargetInfo = function (targetConfig, targetName, manufacturerId, commitInfo) {
-    const targetInfoLineRegex = /^# config: manufacturer_id: .*, board_name: .*, version: .*$, date: .*\n/gm;
+TABS.firmware_flasher.injectTargetInfo = function (targetConfig, targetName, targetDesign, manufacturerId, commitInfo) {
+    const targetInfoLineRegex = /^# config: manufacturer_id: .*\n/gm;
 
     const config = targetConfig.replace(targetInfoLineRegex, '');
 
-    const targetInfo = `# config: manufacturer_id: ${manufacturerId}, board_name: ${targetName}, version: ${commitInfo.commitHash}, date: ${commitInfo.date}`;
+    const targetInfo = `# config: manufacturer_id: ${manufacturerId}, board_name: ${targetName}, board_design: ${targetDesign}, version: ${commitInfo.commitHash}, date: ${commitInfo.date}`;
 
     const lines = config.split('\n');
     lines.splice(1, 0, targetInfo);
