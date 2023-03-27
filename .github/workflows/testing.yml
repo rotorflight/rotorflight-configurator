@@ -76,7 +76,7 @@ jobs:
         path: rotorflight-configurator*
 
 
-  win-x64:
+  win64:
 
     runs-on: windows-latest
 
@@ -110,7 +110,7 @@ jobs:
         path: rotorflight-configurator*
 
 
-  win-x86:
+  win32:
 
     runs-on: windows-latest
 
@@ -147,7 +147,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    needs: [linux, macos, win-x86, win-x64]
+    needs: [linux, macos, win64, win32]
 
     steps:
     - name: Check out repository
