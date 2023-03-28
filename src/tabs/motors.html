@@ -4,18 +4,16 @@
         <div class="cf_doc_version_bt">
             <a id="button-documentation" href="https://github.com/rotorflight/rotorflight/wiki" target="_blank" rel="noopener noreferrer"></a>
         </div>
-
-        <!-- CONFIGURATION -->
-        <div class="configuration">
-            <div class="note motorMainGearRatioIssueNote">
-                <p i18n="motorMainGearRatioIssueNote"></p>
-            </div>
-            <div class="note motorTailGearRatioIssueNote">
-                <p i18n="motorTailGearRatioIssueNote"></p>
-            </div>
-            <div class="grid-row">
-                <div class="grid-col col6">
-
+        <div class="note motorMainGearRatioIssueNote">
+            <p i18n="motorMainGearRatioIssueNote"></p>
+        </div>
+        <div class="note motorTailGearRatioIssueNote">
+            <p i18n="motorTailGearRatioIssueNote"></p>
+        </div>
+        <div class="grid-row">
+            <div class="grid-col col6">
+                <!-- CONFIGURATION -->
+                <div class="configuration">
                     <!-- MOTOR FEATURES -->
                     <div class="motor_features">
                         <div class="gui_box grey">
@@ -37,7 +35,7 @@
                                         <div id="escProtocolTooltip" class="helpicon cf_tip" i18n_title="motorsEscProtocolHelp"></div>
                                     </label>
                                 </div>
-                                 <div class="field inputPwmFreq">
+                                    <div class="field inputPwmFreq">
                                     <label>
                                         <div class="field_box">
                                             <input type="number" id="pwmFreq" min="50" max="8000" step="10"/>
@@ -278,93 +276,91 @@
                     </div>
                     <!-- END GOVERNOR_FEATURES -->
                 </div>
+                <!-- END CONFIGURATION -->
+            </div>
 
-                <div class="grid-col col6">
-
-                    <!-- ROTOR SPEEDS -->
-                    <div class="rotorSpeeds">
-                        <div class="gui_box grey">
-                            <div class="gui_box_titlebar">
-                                <div class="spacer_box_title" i18n="motorRotorSpeeds"></div>
-                            </div>
-                            <div class="spacer">
-                                <table class="meter-bars">
-                                    <tr class="motorMainRotorSpeed">
-                                        <td><span class="fieldName" i18n="motorMainRotorSpeed"></span></td>
-                                        <td>
-                                            <div class="meter-range">
-                                                <span class="meter-left"></span>
-                                                <span class="meter-right"></span>
-                                            </div>
-                                            <div class="meter clear-both">
-                                                <div class="meter-bar">
-                                                    <div class="meter-label"></div>
-                                                    <div class="meter-fill">
-                                                        <div class="meter-label meter-fill-label"></div>
-                                                    </div>
+            <div class="grid-col col6">
+                <!-- ROTOR SPEEDS -->
+                <div class="rotorSpeeds">
+                    <div class="gui_box grey">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="motorRotorSpeeds"></div>
+                        </div>
+                        <div class="spacer">
+                            <table class="meter-bars">
+                                <tr class="motorMainRotorSpeed">
+                                    <td><span class="fieldName" i18n="motorMainRotorSpeed"></span></td>
+                                    <td>
+                                        <div class="meter-range">
+                                            <span class="meter-left"></span>
+                                            <span class="meter-right"></span>
+                                        </div>
+                                        <div class="meter clear-both">
+                                            <div class="meter-bar">
+                                                <div class="meter-label"></div>
+                                                <div class="meter-fill">
+                                                    <div class="meter-label meter-fill-label"></div>
                                                 </div>
                                             </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="motorTailRotorSpeed">
-                                        <td><span class="fieldName" i18n="motorTailRotorSpeed"></span></td>
-                                        <td>
-                                            <div class="meter-range">
-                                                <span class="meter-left"></span>
-                                                <span class="meter-right"></span>
-                                            </div>
-                                            <div class="meter clear-both">
-                                                <div class="meter-bar">
-                                                    <div class="meter-label"></div>
-                                                    <div class="meter-fill">
-                                                        <div class="meter-label meter-fill-label"></div>
-                                                    </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="motorTailRotorSpeed">
+                                    <td><span class="fieldName" i18n="motorTailRotorSpeed"></span></td>
+                                    <td>
+                                        <div class="meter-range">
+                                            <span class="meter-left"></span>
+                                            <span class="meter-right"></span>
+                                        </div>
+                                        <div class="meter clear-both">
+                                            <div class="meter-bar">
+                                                <div class="meter-label"></div>
+                                                <div class="meter-fill">
+                                                    <div class="meter-label meter-fill-label"></div>
                                                 </div>
                                             </div>
-                                        </td>
-                                    </tr>
-                                </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OVERRIDE -->
+                <div class="overrides">
+                    <div class="gui_box">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="motorOverrideTitle"></div>
+                            <div class="helpicon cf_tip" i18n_title="motorOverrideHelp"></div>
+                        </div>
+                        <div class="spacer_box">
+                            <table class="motorOverrideSwitch">
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" id="motorEnableOverrideSwitch" class="toggle" />
+                                    </td>
+                                    <td>
+                                        <span i18n="initialSetupEnableMotorOverride"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="spacer_box overridesEnabled">
+                            <div class="note motorOverrideNote">
+                                <p i18n="motorOverrideNote"></p>
                             </div>
                         </div>
                     </div>
+                </div>
+                <!-- END OVERRIDE -->
 
-                    <!-- OVERRIDE -->
-                    <div class="overrides">
-                        <div class="gui_box">
-                            <div class="gui_box_titlebar">
-                                <div class="spacer_box_title" i18n="motorOverrideTitle"></div>
-                                <div class="helpicon cf_tip" i18n_title="motorOverrideHelp"></div>
-                            </div>
-                            <div class="spacer_box">
-                                <table class="motorOverrideSwitch">
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" id="motorEnableOverrideSwitch" class="toggle" />
-                                        </td>
-                                        <td>
-                                            <span i18n="initialSetupEnableMotorOverride"></span>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="spacer_box overridesEnabled">
-                                <div class="note motorOverrideNote">
-                                    <p i18n="motorOverrideNote"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END OVERRIDE -->
-
-                    <!-- MOTOR INFO -->
-                    <div class="motorInfo">
-                        <!-- CONTENT GENERATED HERE -->
-                    </div>
-
+                <!-- MOTOR INFO -->
+                <div class="motorInfo">
+                    <!-- CONTENT GENERATED HERE -->
                 </div>
             </div>
         </div>
-        <!-- END CONFIGURATION -->
 
         <div class="clear-both"></div>
 

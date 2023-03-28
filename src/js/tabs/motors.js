@@ -440,7 +440,7 @@ TABS.motors.initialize = function (callback) {
             self.revert(() => GUI.tab_switch_reload());
         });
 
-        $('.motor_features').change(function () {
+        $('.configuration').change(function () {
             setDirty();
         });
 
