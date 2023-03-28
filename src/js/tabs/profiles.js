@@ -233,16 +233,9 @@ TABS.profiles.initialize = function (callback) {
             });
         });
 
-        if ($('.tab-profiles input[id="itermLimit"]').is(':checked')) {
-            FC.PID_PROFILE.errorLimitRoll = $('.tab-profiles input[id="errorLimitRoll"]').val();
-            FC.PID_PROFILE.errorLimitPitch = $('.tab-profiles input[id="errorLimitPitch"]').val();
-            FC.PID_PROFILE.errorLimitYaw = $('.tab-profiles input[id="errorLimitYaw"]').val();
-        }
-        else {
-            FC.PID_PROFILE.errorLimitRoll = 1000;
-            FC.PID_PROFILE.errorLimitPitch = 1000;
-            FC.PID_PROFILE.errorLimitYaw = 1000;
-        }
+        FC.PID_PROFILE.errorLimitRoll = $('.tab-profiles input[id="errorLimitRoll"]').val();
+        FC.PID_PROFILE.errorLimitPitch = $('.tab-profiles input[id="errorLimitPitch"]').val();
+        FC.PID_PROFILE.errorLimitYaw = $('.tab-profiles input[id="errorLimitYaw"]').val();
 
         FC.PID_PROFILE.error_decay = $('.tab-profiles input[id="errorDecay"]').is(':checked') ?
             $('.tab-profiles input[id="errorDecayTime"]').val() * 10 : 0;
