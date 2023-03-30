@@ -270,13 +270,13 @@ TABS.motors.initialize = function (callback) {
 
         enableMotorOverrideSwitch.change(function () {
             const checked = enableMotorOverrideSwitch.prop('checked');
-            FC.CONFIG.motorOverrideDisabled = !checked;
+            FC.CONFIG.motorOverrideEnabled = checked;
             $('.overridesEnabled').toggle(checked);
             $('.motorOverrideSlider').val(0).change();
         });
 
-        enableMotorOverrideSwitch.prop('checked', !FC.CONFIG.motorOverrideDisabled);
-        $('.overridesEnabled').toggle(!FC.CONFIG.motorOverrideDisabled);
+        enableMotorOverrideSwitch.prop('checked', FC.CONFIG.motorOverrideEnabled);
+        $('.overridesEnabled').toggle(FC.CONFIG.motorOverrideEnabled);
 
         $('.tab-motors .mainGearRatio').change(function() {
             const ratioN = parseInt($('input[id="mainGearRatioN"]').val());

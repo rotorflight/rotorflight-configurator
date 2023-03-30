@@ -238,7 +238,7 @@ TABS.mixer.initialize = function (callback) {
 
         enableOverrideSwitch.change(function () {
             const checked = enableOverrideSwitch.prop('checked');
-            FC.CONFIG.mixerOverrideDisabled = !checked;
+            FC.CONFIG.mixerOverrideEnabled = checked;
             if (checked) {
                 $('.mixerOverrideAxis').show();
                 $('.mixerOverrideActive .mixerOverrideEnable input').prop('checked',true).change();
@@ -248,7 +248,7 @@ TABS.mixer.initialize = function (callback) {
             }
         });
 
-        enableOverrideSwitch.prop('checked', !FC.CONFIG.mixerOverrideDisabled).change();
+        enableOverrideSwitch.prop('checked', FC.CONFIG.mixerOverrideEnabled).change();
 
         $('.mixerCustomNote').hide();
         $('.mixerRulesNote').hide();

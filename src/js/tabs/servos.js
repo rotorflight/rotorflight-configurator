@@ -300,23 +300,23 @@ TABS.servos.initialize = function (callback) {
         for (let index = 0; index < FC.CONFIG.servoCount; index++) {
             process_config(index);
             process_override(index);
-            FC.CONFIG.servoOverrideDisabled &= !(FC.SERVO_OVERRIDE[index] >= -2000 && FC.SERVO_OVERRIDE[index] <= 2000);
+            FC.CONFIG.servoOverrideEnabled |= (FC.SERVO_OVERRIDE[index] >= -2000 && FC.SERVO_OVERRIDE[index] <= 2000);
         }
 
         process_warnings();
         setReboot(false);
 
         const enableServoOverrideSwitch = $('#servoEnableOverrideSwitch');
-        enableServoOverrideSwitch.prop('checked', !FC.CONFIG.servoOverrideDisabled);
+        enableServoOverrideSwitch.prop('checked', FC.CONFIG.servoOverrideEnabled);
 
         enableServoOverrideSwitch.change(function () {
             const checked = enableServoOverrideSwitch.prop('checked');
-            FC.CONFIG.servoOverrideDisabled = !checked;
+            FC.CONFIG.servoOverrideEnabled = checked;
             $('.tab-servos .override').toggle(checked);
             $('.servoOverrideEnable input').prop('checked', checked).change();
         });
 
-        $('.tab-servos .override').toggle(!FC.CONFIG.servoOverrideDisabled);
+        $('.tab-servos .override').toggle(!!FC.CONFIG.servoOverrideEnabled);
 
         self.save = function(callback) {
             for (let index = 0; index < FC.CONFIG.servoCount; index++) {
