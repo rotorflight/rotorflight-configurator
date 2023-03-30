@@ -83,6 +83,10 @@ const Mixer = {
 
     RULE_COUNT: 32,
 
+    OVERRIDE_MIN: -2500,
+    OVERRIDE_MAX:  2500,
+    OVERRIDE_OFF:  2501,
+
 
     //// Functions
 
@@ -171,6 +175,13 @@ const Mixer = {
         copy.swash_trim = Array.from(orig.swash_trim);
 
         return copy;
+    },
+
+    overrideEnabled : function (value)
+    {
+        const enabled = (value >= Mixer.OVERRIDE_MIN && value <= Mixer.OVERRIDE_MAX);
+
+        return enabled;
     },
 
 };

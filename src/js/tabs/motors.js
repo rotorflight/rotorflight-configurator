@@ -266,6 +266,11 @@ TABS.motors.initialize = function (callback) {
             infoUpdateList.push(updateInfo);
         }
 
+        process_rotor_speeds();
+        for (let index = 0; index < FC.CONFIG.motorCount; index++) {
+            process_motor_info(index);
+        }
+
         const enableMotorOverrideSwitch = $('input[id="motorEnableOverrideSwitch"]');
 
         enableMotorOverrideSwitch.change(function () {
@@ -371,13 +376,6 @@ TABS.motors.initialize = function (callback) {
         govModeSelect.change(updateVisibility);
 
         updateVisibility();
-
-        if (self.isProtoEnabled) {
-            process_rotor_speeds();
-            for (let index = 0; index < FC.CONFIG.motorCount; index++) {
-                process_motor_info(index);
-            }
-        }
 
         function update_data() {
             FC.MOTOR_CONFIG.mincommand = parseInt($('input[id="mincommand"]').val());

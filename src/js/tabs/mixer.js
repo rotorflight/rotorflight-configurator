@@ -13,10 +13,6 @@ TABS.mixer = {
     MIXER_INPUT4_dirty: false,
     MIXER_RULES_dirty: false,
 
-    MIXER_OVERRIDE_MIN: -2500,
-    MIXER_OVERRIDE_MAX:  2500,
-    MIXER_OVERRIDE_OFF:  2501,
-
     overrideMixer: [
         { class: 'mixerMainRotor',  axis: 1,  min:-18,   max:18,   step:0.1,  fixed:1,  scale:0.012,  pipstep: 1,  pipfix: 0,  pipval: [ -18, -15, -12, -9, -6, -3, 0, 3, 6, 9, 12, 15, 18, ], },
         { class: 'mixerMainRotor',  axis: 2,  min:-18,   max:18,   step:0.1,  fixed:1,  scale:0.012,  pipstep: 1,  pipfix: 0,  pipval: [ -18, -15, -12, -9, -6, -3, 0, 3, 6, 9, 12, 15, 18, ], },
@@ -24,7 +20,6 @@ TABS.mixer = {
         { class: 'mixerTailRotor',  axis: 3,  min:-30,   max:30,   step:0.1,  fixed:0,  scale:0.024,  pipstep: 1,  pipfix: 0,  pipval: [ -30, -24, -18, -12, -6, 0, 6, 12, 18, 24, 30, ], },
         { class: 'mixerTailMotor',  axis: 3,  min:-125,  max:125,  step:1,    fixed:0,  scale:0.100,  pipstep: 5,  pipfix: 0,  pipval: [ -125, -100, -75, -50, -25, 0, 25, 50, 75, 100, 125, ], },
     ],
-
 };
 
 TABS.mixer.initialize = function (callback) {
@@ -36,13 +31,8 @@ TABS.mixer.initialize = function (callback) {
             $('.tab-mixer').removeClass('toolbar_hidden');
         }
 
-        if (self.needReboot) {
-            $('.save_btn').hide();
-            $('.reboot_btn').show();
-        } else {
-            $('.save_btn').show();
-            $('.reboot_btn').hide();
-        }
+        $('.save_btn').toggle(!self.needReboot);
+        $('.reboot_btn').toggle(!!self.needReboot);
     }
 
     load_data(load_html);
@@ -187,7 +177,7 @@ TABS.mixer.initialize = function (callback) {
 
         mixerEnable.change(function () {
             const check = $(this).prop('checked');
-            const value = check ? 0 : self.MIXER_OVERRIDE_OFF;
+            const value = check ? 0 : Mixer.OVERRIDE_OFF;
 
             mixerInput.val(0);
             mixerSlider.val(0);
@@ -200,7 +190,9 @@ TABS.mixer.initialize = function (callback) {
         });
 
         let value = FC.MIXER_OVERRIDE[inputIndex];
-        let check = (value >= self.MIXER_OVERRIDE_MIN && value <= self.MIXER_OVERRIDE_MAX);
+        let check = Mixer.overrideEnabled(value);
+
+        FC.CONFIG.mixerOverrideEnabled |= check;
 
         value *= axis.scale;
         value = (check ? value : 0).toFixed(axis.fixed);
@@ -217,6 +209,8 @@ TABS.mixer.initialize = function (callback) {
 
     function data_to_form() {
 
+        $('.tab-mixer .note').hide();
+
         self.origMixerConfig = Mixer.cloneConfig(FC.MIXER_CONFIG);
         self.origMixerInputs = Mixer.cloneInputs(FC.MIXER_INPUTS);
         self.origMixerRules  = Mixer.cloneRules(FC.MIXER_RULES);
@@ -232,28 +226,21 @@ TABS.mixer.initialize = function (callback) {
         self.MIXER_INPUT4_dirty = false;
         self.MIXER_RULES_dirty = false;
 
-        self.overrideMixer.forEach(function(axis) { add_override(axis); });
+        self.overrideMixer.forEach(function(axis) {
+            add_override(axis);
+        });
 
         const enableOverrideSwitch = $('#mixerOverrideEnableSwitch');
+        enableOverrideSwitch.prop('checked', FC.CONFIG.mixerOverrideEnabled);
 
         enableOverrideSwitch.change(function () {
             const checked = enableOverrideSwitch.prop('checked');
             FC.CONFIG.mixerOverrideEnabled = checked;
-            if (checked) {
-                $('.mixerOverrideAxis').show();
-                $('.mixerOverrideActive .mixerOverrideEnable input').prop('checked',true).change();
-            } else {
-                $('.mixerOverrideAxis').hide();
-                $('.mixerOverrideActive .mixerOverrideEnable input').prop('checked',false).change();
-            }
+            $('.mixerOverrideAxis').toggle(!!checked);
+            $('.mixerOverrideActive .mixerOverrideEnable input').prop('checked', checked).change();
         });
 
-        enableOverrideSwitch.prop('checked', FC.CONFIG.mixerOverrideEnabled).change();
-
-        $('.mixerCustomNote').hide();
-        $('.mixerRulesNote').hide();
-        $('.mixerBidirNote').hide();
-        $('.mixerRebootNote').hide();
+        $('.mixerOverrideAxis').toggle(!!FC.CONFIG.mixerOverrideEnabled);
 
         self.customConfig = false;
 
@@ -316,37 +303,52 @@ TABS.mixer.initialize = function (callback) {
         $('#mixerCyclicLimit').val(cyclicMax).change();
         $('#mixerTotalPitchLimit').val(totalMax).change();
 
-        $('#mixerTailRotorMode').change(function () {
-            const val = $(this).val();
+        function setTailRotorMode(mode, change) {
 
-            if (val > 0) {
+            FC.MIXER_CONFIG.tail_rotor_mode = mode;
+
+            $('#mixerTailRotorMode').val(mode);
+
+            const motorised = (mode > 0);
+            const enabled = Mixer.overrideEnabled(FC.MIXER_OVERRIDE[3]);
+
+            $('.mixerTailMotor').toggle(motorised);
+            $('.mixerTailRotor').toggle(!motorised);
+
+            $('.mixerTailRotor .mixerOverrideEnable input').prop('checked', enabled && !motorised);
+            $('.mixerTailMotor .mixerOverrideEnable input').prop('checked', enabled && motorised);
+
+            if (motorised) {
                 const yawMax = FC.MIXER_INPUTS[3].max * 0.1;
                 const yawMin = FC.MIXER_INPUTS[3].min * 0.1;
                 $('#mixerTailMotorMinYaw').val(yawMin.toFixed(1));
                 $('#mixerTailMotorMaxYaw').val(yawMax.toFixed(1));
-                $('.mixerTailMotor').show().addClass('mixerOverrideActive');
-                $('.mixerTailRotor').hide().removeClass('mixerOverrideActive');
-                $('.mixerTailRotor .mixerOverrideEnable input').prop('checked',false).change();
-                $('.mixerTailMotor .mixerOverrideEnable input').prop('checked',true).change();
+                $('.mixerOverrideAxis .mixerTailMotor').addClass('mixerOverrideActive');
+                $('.mixerOverrideAxis .mixerTailRotor').removeClass('mixerOverrideActive');
+                if (change)
+                    $('.mixerTailMotor .mixerOverrideEnable input').change();
             }
             else {
                 const yawMax = FC.MIXER_INPUTS[3].max * 0.024;
                 const yawMin = FC.MIXER_INPUTS[3].min * 0.024;
                 $('#mixerTailRotorMinYaw').val(yawMin.toFixed(1));
                 $('#mixerTailRotorMaxYaw').val(yawMax.toFixed(1));
-                $('.mixerTailRotor').show().addClass('mixerOverrideActive');
-                $('.mixerTailMotor').hide().removeClass('mixerOverrideActive');
-                $('.mixerTailMotor .mixerOverrideEnable input').prop('checked',false).change();
-                $('.mixerTailRotor .mixerOverrideEnable input').prop('checked',true).change();
+                $('.mixerOverrideAxis .mixerTailRotor').addClass('mixerOverrideActive');
+                $('.mixerOverrideAxis .mixerTailMotor').removeClass('mixerOverrideActive');
+                if (change)
+                    $('.mixerTailRotor .mixerOverrideEnable input').change();
             }
 
-            if (val == 2)
-                $('.mixerBidirNote').show();
-            else
-                $('.mixerBidirNote').hide();
+            $('.mixerBidirNote').toggle(mode == 2);
+        }
+
+        $('#mixerTailRotorMode').change(function () {
+            const val = $(this).val();
+            setTailRotorMode(val, true);
         });
 
-        $('#mixerTailRotorMode').val(FC.MIXER_CONFIG.tail_rotor_mode).change();
+        setTailRotorMode(FC.MIXER_CONFIG.tail_rotor_mode, false);
+
         $('#mixerTailRotorDirection').val(yawDir).change();
         $('#mixerTailRotorCalibration').val(yawRate).change();
         $('#mixerTailMotorIdle').val(FC.MIXER_CONFIG.tail_motor_idle / 10).change();
