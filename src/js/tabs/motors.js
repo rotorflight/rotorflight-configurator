@@ -215,6 +215,8 @@ TABS.motors.initialize = function (callback) {
 
             motorSlider.val(angle);
 
+            FC.CONFIG.motorOverrideEnabled |= (value != 0);
+
             function updateInfo() {
 
                 const value = FC.MOTOR_DATA[motorIndex];
@@ -281,7 +283,7 @@ TABS.motors.initialize = function (callback) {
         });
 
         enableMotorOverrideSwitch.prop('checked', FC.CONFIG.motorOverrideEnabled);
-        $('.overridesEnabled').toggle(FC.CONFIG.motorOverrideEnabled);
+        $('.overridesEnabled').toggle(!!FC.CONFIG.motorOverrideEnabled);
 
         $('.tab-motors .mainGearRatio').change(function() {
             const ratioN = parseInt($('input[id="mainGearRatioN"]').val());
