@@ -46,6 +46,9 @@ TABS.servos.initialize = function (callback) {
 
     function process_html() {
 
+        // Preserve initial config
+        self.prevConfig = self.cloneConfig(FC.SERVO_CONFIG);
+
         // translate to user-selected language
         i18n.localizePage();
 
@@ -294,6 +297,15 @@ TABS.servos.initialize = function (callback) {
             MSP.send_message(MSPCodes.MSP_SERVO, false, false, update_servo_bars);
         }
 
+        for (let index = 0; index < FC.CONFIG.servoCount; index++) {
+            process_config(index);
+            process_override(index);
+            FC.CONFIG.servoOverrideDisabled &= !(FC.SERVO_OVERRIDE[index] >= -2000 && FC.SERVO_OVERRIDE[index] <= 2000);
+        }
+
+        process_warnings();
+        setReboot(false);
+
         const enableServoOverrideSwitch = $('#servoEnableOverrideSwitch');
         enableServoOverrideSwitch.prop('checked', !FC.CONFIG.servoOverrideDisabled);
 
@@ -302,19 +314,9 @@ TABS.servos.initialize = function (callback) {
             FC.CONFIG.servoOverrideDisabled = !checked;
             $('.tab-servos .override').toggle(checked);
             $('.servoOverrideEnable input').prop('checked', checked).change();
-            mspHelper.resetServoOverrides();
         });
 
         $('.tab-servos .override').toggle(!FC.CONFIG.servoOverrideDisabled);
-
-        for (let index = 0; index < FC.CONFIG.servoCount; index++) {
-            process_config(index);
-            process_override(index);
-        }
-        process_warnings();
-        setReboot(false);
-
-        self.prevConfig = self.cloneConfig(FC.SERVO_CONFIG);
 
         self.save = function(callback) {
             for (let index = 0; index < FC.CONFIG.servoCount; index++) {
