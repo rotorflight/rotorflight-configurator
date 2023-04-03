@@ -483,7 +483,7 @@ TABS.receiver.initialize = function (callback) {
 
         GUI.interval_add('receiver_pull', function () {
             MSP.send_message(MSPCodes.MSP_RC, false, false, updateBars);
-        }, 33, false);
+        }, 25, false);
 
         GUI.interval_add('status_pull', function () {
             MSP.send_message(MSPCodes.MSP_STATUS);
@@ -494,39 +494,124 @@ TABS.receiver.initialize = function (callback) {
 };
 
 TABS.receiver.initModelPreview = function () {
-    this.keepRendering = true;
-    this.model = new Model($('.model_preview'), $('.model_preview canvas'));
-    this.useSuperExpo = true;
-    this.rateCurve = new RateCurve2();
+    const self = this;
 
-    $(window).on('resize', $.proxy(this.model.resize, this.model));
+    self.model = new Model($('#canvas_wrapper'), $('#canvas'));
+    self.clock = new THREE.Clock();
+    self.rateCurve = new RateCurve2();
+    self.keepRendering = true;
+
+    self.currentRatesType = FC.RC_TUNING.rates_type;
+
+    self.currentRates = {
+        roll_rate:         FC.RC_TUNING.roll_rate,
+        pitch_rate:        FC.RC_TUNING.pitch_rate,
+        yaw_rate:          FC.RC_TUNING.yaw_rate,
+        rc_rate:           FC.RC_TUNING.RC_RATE,
+        rc_rate_yaw:       FC.RC_TUNING.rcYawRate,
+        rc_expo:           FC.RC_TUNING.RC_EXPO,
+        rc_yaw_expo:       FC.RC_TUNING.RC_YAW_EXPO,
+        rc_rate_pitch:     FC.RC_TUNING.rcPitchRate,
+        rc_pitch_expo:     FC.RC_TUNING.RC_PITCH_EXPO,
+        roll_rate_limit:   FC.RC_TUNING.roll_rate_limit,
+        pitch_rate_limit:  FC.RC_TUNING.pitch_rate_limit,
+        yaw_rate_limit:    FC.RC_TUNING.yaw_rate_limit,
+        deadband:          FC.RC_DEADBAND_CONFIG.deadband,
+        yawDeadband:       FC.RC_DEADBAND_CONFIG.yaw_deadband,
+        superexpo:         true
+    };
+
+    switch (self.currentRatesType) {
+
+        case 2:
+            self.currentRates.roll_rate     *= 100;
+            self.currentRates.pitch_rate    *= 100;
+            self.currentRates.yaw_rate      *= 100;
+            self.currentRates.rc_rate       *= 1000;
+            self.currentRates.rc_rate_yaw   *= 1000;
+            self.currentRates.rc_rate_pitch *= 1000;
+            self.currentRates.rc_expo       *= 100;
+            self.currentRates.rc_yaw_expo   *= 100;
+            self.currentRates.rc_pitch_expo *= 100;
+            break;
+
+        case 4:
+            self.currentRates.roll_rate     *= 1000;
+            self.currentRates.pitch_rate    *= 1000;
+            self.currentRates.yaw_rate      *= 1000;
+            self.currentRates.rc_rate       *= 1000;
+            self.currentRates.rc_rate_yaw   *= 1000;
+            self.currentRates.rc_rate_pitch *= 1000;
+            break;
+
+        case 5:
+            self.currentRates.roll_rate     *= 1000;
+            self.currentRates.pitch_rate    *= 1000;
+            self.currentRates.yaw_rate      *= 1000;
+            break;
+
+        default:
+            break;
+    }
+
+    $(window).on('resize', $.proxy(self.model.resize, self.model));
 };
 
 TABS.receiver.renderModel = function () {
-    if (this.keepRendering) { requestAnimationFrame(this.renderModel.bind(this)); }
+    const self = this;
 
-    if (!this.clock) { this.clock = new THREE.Clock(); }
+    if (self.keepRendering) {
+        requestAnimationFrame(self.renderModel.bind(this));
+    }
 
     if (FC.RC.channels[0] && FC.RC.channels[1] && FC.RC.channels[2]) {
-        const delta = this.clock.getDelta();
+        const delta = self.clock.getDelta();
 
-        const roll  = delta * this.rateCurve.rcCommandRawToDegreesPerSecond(FC.RC.channels[0], FC.RC_TUNING.rates_type, FC.RC_TUNING.roll_rate, FC.RC_TUNING.RC_RATE, FC.RC_TUNING.RC_EXPO, this.useSuperExpo, this.deadband, FC.RC_TUNING.roll_rate_limit),
-            pitch = delta * this.rateCurve.rcCommandRawToDegreesPerSecond(FC.RC.channels[1], FC.RC_TUNING.rates_type, FC.RC_TUNING.pitch_rate, FC.RC_TUNING.rcPitchRate, FC.RC_TUNING.RC_PITCH_EXPO, this.useSuperExpo, this.deadband, FC.RC_TUNING.pitch_rate_limit),
-            yaw   = delta * this.rateCurve.rcCommandRawToDegreesPerSecond(FC.RC.channels[2], FC.RC_TUNING.rates_type, FC.RC_TUNING.yaw_rate, FC.RC_TUNING.rcYawRate, FC.RC_TUNING.RC_YAW_EXPO, this.useSuperExpo, this.yawDeadband, FC.RC_TUNING.yaw_rate_limit);
+        const roll = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
+            FC.RC.channels[0],
+            self.currentRatesType,
+            self.currentRates.roll_rate,
+            self.currentRates.rc_rate,
+            self.currentRates.rc_expo,
+            self.currentRates.superexpo,
+            self.currentRates.deadband,
+            self.currentRates.roll_rate_limit
+        );
+        const pitch = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
+            FC.RC.channels[1],
+            self.currentRatesType,
+            self.currentRates.pitch_rate,
+            self.currentRates.rc_rate_pitch,
+            self.currentRates.rc_pitch_expo,
+            self.currentRates.superexpo,
+            self.currentRates.deadband,
+            self.currentRates.pitch_rate_limit
+        );
+        const yaw = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
+            FC.RC.channels[2],
+            self.currentRatesType,
+            self.currentRates.yaw_rate,
+            self.currentRates.rc_rate_yaw,
+            self.currentRates.rc_yaw_expo,
+            self.currentRates.superexpo,
+            self.currentRates.yawDeadband,
+            self.currentRates.yaw_rate_limit
+        );
 
-        this.model.rotateBy(-degToRad(pitch), -degToRad(yaw), -degToRad(roll));
+        self.model.rotateBy(-degToRad(pitch), -degToRad(yaw), -degToRad(roll));
     }
 };
 
 TABS.receiver.cleanup = function (callback) {
     $(window).off('resize', this.resize);
 
+    this.keepRendering = false;
+
     if (this.model) {
         $(window).off('resize', $.proxy(this.model.resize, this.model));
         this.model.dispose();
     }
 
-    this.keepRendering = false;
     this.isDirty = false;
 
     if (callback) callback();

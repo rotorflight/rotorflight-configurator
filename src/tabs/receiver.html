@@ -172,23 +172,15 @@
                 </div>
 
                 <!-- MODEL PREVIEW -->
-                <div class="gui_box grey tunings topspacer">
-                    <table class="pid_titlebar">
-                        <thead>
-                        <tr>
-                            <th i18n="receiverModelPreview"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="model_preview_cell">
-                                <div class="model_preview background_paper">
-                                    <canvas id="canvas"></canvas>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="gui_box tunings grey">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="receiverModelPreview"></div>
+                    </div>
+                    <div class="model_preview background_paper">
+                        <div id="canvas_wrapper">
+                            <canvas id="canvas"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
 
