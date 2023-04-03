@@ -190,6 +190,25 @@ input[type="number"]::-webkit-inner-spin-button {
     font-style: italic;
 }
 
+/** Zoom info box **/
+#zoom-box {
+    margin: 1px;
+    padding: 10px 25px;
+    width: 100px;
+    border: 1px solid var(--button-border);
+    border-radius: 3px;
+    color: #000;
+    background-color: #fff;
+    font-weight: normal;
+    font-size: 15px;
+    text-align: center;
+    position: absolute;
+    left: 45%;
+    top: 0;
+    z-index: 1000;
+}
+
+
 /** Main wrapper **/
 #main-wrapper {
     padding: 0;
@@ -462,7 +481,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 #sensor-status div {
     white-space: nowrap;
-    overflow: hidden;    
+    overflow: hidden;
 }
 
 .gyroicon {

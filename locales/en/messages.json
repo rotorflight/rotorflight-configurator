@@ -101,6 +101,9 @@
     "autoConnectDisabled": {
         "message": "Auto-Connect: Disabled - User needs to select the correct serial port and click \"Connect\" button on its own"
     },
+    "zoomBoxText": {
+        "message": "Zoom:"
+    },
     "expertMode": {
         "message": "Enable Expert Mode"
     },

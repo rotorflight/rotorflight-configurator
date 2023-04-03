@@ -14,6 +14,7 @@ const GuiControl = function () {
     this.connecting_to = false;
     this.connected_to = false;
     this.connect_lock = false;
+    this.zoom_level = 100;
     this.active_tab = null;
     this.current_tab = null;
     this.tab_switch_in_progress = false;
@@ -61,6 +62,8 @@ const GuiControl = function () {
 
     // check which operating system is user running
     this.operating_system = GUI_checkOperatingSystem();
+
+    this.zoomBoxTimeout = null;
 
     // Check the method of execution
     this.nwGui = null;
@@ -364,6 +367,30 @@ GuiControl.prototype.switchery = function() {
          });
          $(elem).removeClass('togglemedium');
     });
+};
+
+GuiControl.prototype.set_zoom = function(zoom_level, show_box) {
+
+    if (zoom_level)
+        GUI.zoom_level = zoom_level;
+    else
+        zoom_level = GUI.zoom_level;
+
+    const percent = zoom_level + '%';
+
+    ConfigStorage.set({'zoomLevel': zoom_level});
+
+    $('#main-wrapper').css('zoom', percent).resize();
+    $('#zoom-percent').text(percent);
+
+    if (show_box) {
+        $('#zoom-box').show();
+
+        clearTimeout(this.zoomBoxTimeout);
+        this.zoomBoxTimeout = setTimeout(function () {
+            $('#zoom-box').fadeOut();
+        }, 3000);
+    }
 };
 
 GuiControl.prototype.content_ready = function (callback) {

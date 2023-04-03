@@ -253,6 +253,29 @@ function startProcess() {
         }
     });
 
+    ConfigStorage.get('zoomLevel', function (result) {
+        if (result.zoomLevel) {
+            GUI.set_zoom(result.zoomLevel, false);
+        }
+    });
+
+    $(document).on('wheel', function (ev) {
+        const zoomMin = 50;
+        const zoomMax = 200;
+        const zoomStep = 10;
+
+        let zoom_level = GUI.zoom_level;
+
+        if (ev.ctrlKey) {
+            if (ev.originalEvent.deltaY > 0)
+                zoom_level = Math.min(zoom_level + zoomStep, zoomMax);
+            else
+                zoom_level = Math.max(zoom_level - zoomStep, zoomMin);
+
+            GUI.set_zoom(zoom_level, true);
+        }
+    });
+
     $("#content").on('keydown', 'input[type="number"]', function (e) {
         // whitelist all that we need for numeric control
         const whitelist = [
