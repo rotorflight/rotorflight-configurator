@@ -566,10 +566,10 @@ TABS.firmware_flasher.initialize = function (callback) {
                                         if (config !== null) {
                                             const bareBoard = grabBuildNameFromConfig(config);
                                             TABS.firmware_flasher.bareBoard = bareBoard;
-                                            const design = grabKeywordFromConfig(config, 'board_design', 'BTFL');
 
                                             self.gitHubApi.getFileLastCommitInfo('rotorflight/rotorflight-targets', 'master', unifiedConfig.path, function (commitInfo) {
-                                                config = self.injectTargetInfo(config, target, design, manufacturerId, commitInfo);
+                                                config = self.injectDefaultDesign(config, 'BTFL');
+                                                config = self.injectTargetInfo(config, unifiedConfig.name, target, manufacturerId, commitInfo);
 
                                                 setUnifiedConfig(target, bareBoard, config, manufacturerId, unifiedConfig.name, unifiedConfig.download_url, commitInfo.date);
 
@@ -666,7 +666,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             let output = '';
             let fork = 'BF';
             console.log('Clean up Unified Config file:');
-            input.split(/[\n\r]+/).forEach(function(line,index) {
+            input.split(/[\r\n]+/).forEach(function(line,index) {
                 if (index == 0 && line.match(/^# [A-Za-z]*flight/)) {
                     if (line.match(/^# Rotorflight/)) {
                         fork = 'RF';
@@ -685,7 +685,6 @@ TABS.firmware_flasher.initialize = function (callback) {
                 }
                 output += line + '\n';
             });
-            console.log('Unified Config:\n' + output);
             return output;
         }
 
@@ -843,9 +842,10 @@ TABS.firmware_flasher.initialize = function (callback) {
 
                                     let config = cleanUnifiedConfigFile(e.target.result);
                                     if (config !== null) {
-                                        const design = grabKeywordFromConfig(config, 'board_design', 'BTFL');
                                         const manufac = grabKeywordFromConfig(config, 'manufacturer_id', 'NONE');
-                                        config = self.injectTargetInfo(config, file.name, design, manufac, { commitHash: 'unknown', date: file.lastModifiedDate.toISOString() });
+                                        const target = grabKeywordFromConfig(config, 'board_name', 'NONE');
+                                        config = self.injectDefaultDesign(config, 'BTFL');
+                                        config = self.injectTargetInfo(config, file.name, target, manufac, { commitHash: 'unknown', date: file.lastModifiedDate.toISOString() });
                                         self.unifiedTarget.config = config;
                                         self.unifiedTarget.fileName = file.name;
                                         self.isConfigLocal = true;
@@ -1152,14 +1152,39 @@ TABS.firmware_flasher.flashProgress = function(value) {
     return this;
 };
 
-TABS.firmware_flasher.injectTargetInfo = function (targetConfig, targetName, targetDesign, manufacturerId, commitInfo) {
-    const targetInfoLineRegex = /^# config: manufacturer_id: .*\n/gm;
+TABS.firmware_flasher.injectDefaultDesign = function (targetConfig, boardDesign) {
+    const designLineRegex = /board_design [A-Za-z0-9_+-]+\n/gm;
+    const nameLineRegex = /board_name [A-Za-z0-9_+-]+\n/gm;
 
-    const config = targetConfig.replace(targetInfoLineRegex, '');
+    const newLine = `board_design ${boardDesign}\n`;
 
-    const targetInfo = `# config: manufacturer_id: ${manufacturerId}, board_name: ${targetName}, board_design: ${targetDesign}, version: ${commitInfo.commitHash}, date: ${commitInfo.date}`;
+    // No design speficied, inject the default
+    if (!targetConfig.match(designLineRegex)) {
+        let match = targetConfig.match(nameLineRegex);
+        if (match) {
+            targetConfig = targetConfig.replace(nameLineRegex, match[0] + newLine);
+        }
+    }
 
-    const lines = config.split('\n');
-    lines.splice(1, 0, targetInfo);
-    return lines.join('\n');
+    return targetConfig;
+};
+
+TABS.firmware_flasher.injectTargetInfo = function (targetConfig, configName, targetName, manufacturerId, commitInfo) {
+    const configLineRegex = /# config: manufacturer_id: .*\n/gm;
+
+    targetConfig = targetConfig.replace(configLineRegex, '');
+
+    const newConfig =
+        '## Rotorflight Custom Defaults\n' +
+        `# config: ${configName}\n` +
+        `# board: ${targetName}\n` +
+        `# make: ${manufacturerId}\n` +
+        `# hash: ${commitInfo.commitHash}\n` +
+        `# date: ${commitInfo.date}\n` +
+        '##\n' +
+        targetConfig;
+
+    console.log('Unified Config:\n' + newConfig);
+
+    return newConfig;
 };
