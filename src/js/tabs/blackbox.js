@@ -115,10 +115,10 @@ TABS.blackbox = {
         "alt",
         "battery",
         "rssi",
+        "gps",
         "rpm",
         "motors",
         "servos",
-        "gps",
     ],
 
     LOG_RATES: {
