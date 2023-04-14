@@ -364,10 +364,6 @@ TABS.configuration.initialize = function (callback) {
 
         orientation_mag_e.change(function () {
             let value = parseInt($(this).val());
-            let newValue = undefined;
-            if (value !== FC.SENSOR_ALIGNMENT.align_mag) {
-                newValue = $(this).find('option:selected').text();
-            }
             FC.SENSOR_ALIGNMENT.align_mag = value;
         });
 
@@ -407,26 +403,16 @@ TABS.configuration.initialize = function (callback) {
 
         orientation_gyro_1_align_e.change(function () {
             let value = parseInt($(this).val());
-
-            let newValue = undefined;
-            if (value !== FC.SENSOR_ALIGNMENT.gyro_1_align) {
-                newValue = $(this).find('option:selected').text();
-            }
             FC.SENSOR_ALIGNMENT.gyro_1_align = value;
         });
 
         orientation_gyro_2_align_e.change(function () {
             let value = parseInt($(this).val());
-            let newValue = undefined;
-            if (value !== FC.SENSOR_ALIGNMENT.gyro_2_align) {
-                newValue = $(this).find('option:selected').text();
-            }
             FC.SENSOR_ALIGNMENT.gyro_2_align = value;
         });
 
         // Gyro and PID update
         const gyroTextElement = $('input.gyroFrequency');
-        const gyroSelectElement = $('select.gyroSyncDenom');
         const pidSelectElement = $('select.pidProcessDenom');
 
         function addDenomOption(element, denom, baseFreq) {
@@ -434,24 +420,12 @@ TABS.configuration.initialize = function (callback) {
             if (baseFreq === 0) {
                 denomDescription = i18n.getMessage('configurationSpeedPidNoGyro', {'value' : denom});
             } else {
-                denomDescription = i18n.getMessage('configurationKHzUnitLabel', { 'value' : (baseFreq / denom).toFixed(2)});
+                denomDescription = i18n.getMessage('configurationKHzUnitLabel', { 'value' : (baseFreq / denom / 1000).toFixed(2)});
             }
             element.append(`<option value="${denom}">${denomDescription}</option>`);
         }
 
-        const updateGyroDenom = function (gyroBaseFreq) {
-            gyroTextElement.hide();
-            const originalGyroDenom = gyroSelectElement.val();
-            gyroSelectElement.empty();
-            for (let denom = 1; denom <= 8; denom++) {
-                addDenomOption(gyroSelectElement, denom, gyroBaseFreq);
-            }
-            gyroSelectElement.val(originalGyroDenom);
-            gyroSelectElement.change();
-         };
-
          const updateGyroDenomReadOnly = function (gyroFrequency) {
-             gyroSelectElement.hide();
              let gyroContent;
              if (gyroFrequency === 0) {
                 gyroContent = i18n.getMessage('configurationSpeedGyroNoGyro');
@@ -461,20 +435,15 @@ TABS.configuration.initialize = function (callback) {
              gyroTextElement.val(gyroContent);
          };
 
-        updateGyroDenomReadOnly(FC.CONFIG.sampleRateHz);
+         const pidBaseFreq = FC.CONFIG.sampleRateHz;
 
-        gyroSelectElement.val(FC.ADVANCED_CONFIG.gyro_sync_denom);
+        updateGyroDenomReadOnly(pidBaseFreq);
 
-        gyroSelectElement.change(function () {
-            const originalPidDenom = parseInt(pidSelectElement.val());
-            const pidBaseFreq = FC.CONFIG.sampleRateHz / 1000;
-            pidSelectElement.empty();
-            for (let denom = 1; denom <= 16; denom++) {
+        pidSelectElement.empty();
+        for (let denom = 1; denom <= 16; denom++) {
+            if (pidBaseFreq / denom >= 1000)
                 addDenomOption(pidSelectElement, denom, pidBaseFreq);
-            }
-            pidSelectElement.val(originalPidDenom);
-        }).change();
-
+        }
         pidSelectElement.val(FC.ADVANCED_CONFIG.pid_process_denom);
 
         $('input[name="craftName"]').val(FC.CONFIG.name);
@@ -524,7 +493,6 @@ TABS.configuration.initialize = function (callback) {
 
             FC.SENSOR_CONFIG.gyro_to_use = parseInt(orientation_gyro_to_use_e.val());
 
-            FC.ADVANCED_CONFIG.gyro_sync_denom = parseInt(gyroSelectElement.val());
             FC.ADVANCED_CONFIG.pid_process_denom = parseInt(pidSelectElement.val());
         }
 
@@ -568,9 +536,9 @@ TABS.configuration.initialize = function (callback) {
             setDirty();
         });
 
-        GUI.interval_add('status_pull', function() {
-            MSP.send_message(MSPCodes.MSP_STATUS);
-        }, 250, true);
+        //GUI.interval_add('status_pull', function() {
+        //    MSP.send_message(MSPCodes.MSP_STATUS);
+        //}, 250, true);
 
         GUI.interval_add('attitude_pull', function () {
             MSP.send_message(MSPCodes.MSP_ATTITUDE, false, false, function () {
@@ -589,9 +557,9 @@ TABS.configuration.initModel = function () {
 };
 
 TABS.configuration.renderModel = function () {
-    let x = (FC.SENSOR_DATA.kinematics[1] * -1.0) * 0.017453292519943295,
-        y = ((FC.SENSOR_DATA.kinematics[2] * -1.0) - this.yaw_fix) * 0.017453292519943295,
-        z = (FC.SENSOR_DATA.kinematics[0] * -1.0) * 0.017453292519943295;
+    const x = (-FC.SENSOR_DATA.kinematics[1]) * 0.017453292519943295,
+          y = (-FC.SENSOR_DATA.kinematics[2] - this.yaw_fix) * 0.017453292519943295,
+          z = (-FC.SENSOR_DATA.kinematics[0]) * 0.017453292519943295;
 
     this.model.rotateTo(x, y, z);
 };
