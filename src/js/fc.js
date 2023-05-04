@@ -439,8 +439,6 @@ const FC = {
         this.RC_DEADBAND_CONFIG = {
             deadband:                   0,
             yaw_deadband:               0,
-            alt_hold_deadband:          0,
-            deadband3d_throttle:        0,
         };
 
         this.SENSOR_ALIGNMENT = {

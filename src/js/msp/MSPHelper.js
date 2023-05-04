@@ -468,8 +468,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_RC_DEADBAND:
                 FC.RC_DEADBAND_CONFIG.deadband = data.readU8();
                 FC.RC_DEADBAND_CONFIG.yaw_deadband = data.readU8();
-                FC.RC_DEADBAND_CONFIG.alt_hold_deadband = data.readU8();
-                FC.RC_DEADBAND_CONFIG.deadband3d_throttle = data.readU16();
                 break;
 
             case MSPCodes.MSP_SENSOR_ALIGNMENT:
@@ -1706,9 +1704,7 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_RC_DEADBAND:
             buffer.push8(FC.RC_DEADBAND_CONFIG.deadband)
-                .push8(FC.RC_DEADBAND_CONFIG.yaw_deadband)
-                .push8(FC.RC_DEADBAND_CONFIG.alt_hold_deadband)
-                .push16(FC.RC_DEADBAND_CONFIG.deadband3d_throttle);
+                .push8(FC.RC_DEADBAND_CONFIG.yaw_deadband);
             break;
 
         case MSPCodes.MSP_SET_SENSOR_ALIGNMENT:
