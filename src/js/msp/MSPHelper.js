@@ -928,13 +928,16 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.PID_PROFILE.pid_mode                      = data.readU8();
                 FC.PID_PROFILE.error_decay                   = data.readU8();
                 FC.PID_PROFILE.error_rotation                = data.readU8();
-                FC.PID_PROFILE.errorLimitRoll                = data.readU16();
-                FC.PID_PROFILE.errorLimitPitch               = data.readU16();
-                FC.PID_PROFILE.errorLimitYaw                 = data.readU16();
+                FC.PID_PROFILE.errorLimitRoll                = data.readU8();
+                FC.PID_PROFILE.errorLimitPitch               = data.readU8();
+                FC.PID_PROFILE.errorLimitYaw                 = data.readU8();
+                FC.PID_PROFILE.gyroCutoffRoll                = data.readU8();
+                FC.PID_PROFILE.gyroCutoffPitch               = data.readU8();
+                FC.PID_PROFILE.gyroCutoffYaw                 = data.readU8();
+                FC.PID_PROFILE.dtermCutoffRoll               = data.readU8();
+                FC.PID_PROFILE.dtermCutoffPitch              = data.readU8();
+                FC.PID_PROFILE.dtermCutoffYaw                = data.readU8();
                 FC.PID_PROFILE.itermRelaxType                = data.readU8();
-                FC.PID_PROFILE.itermRelaxLevelRoll           = data.readU8();
-                FC.PID_PROFILE.itermRelaxLevelPitch          = data.readU8();
-                FC.PID_PROFILE.itermRelaxLevelYaw            = data.readU8();
                 FC.PID_PROFILE.itermRelaxCutoffRoll          = data.readU8();
                 FC.PID_PROFILE.itermRelaxCutoffPitch         = data.readU8();
                 FC.PID_PROFILE.itermRelaxCutoffYaw           = data.readU8();
@@ -945,7 +948,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.PID_PROFILE.yawFFImpulseGain              = data.readU16();
                 FC.PID_PROFILE.yawFFImpulseFreq              = data.readU8();
                 FC.PID_PROFILE.pitchFFCollectiveGain         = data.readU16();
-                FC.PID_PROFILE.pitchFFCollectiveImpulseGain  = data.readU16();
                 // Angle Mode //
                 FC.PID_PROFILE.levelAngleStrength            = data.readU8();
                 FC.PID_PROFILE.levelAngleLimit               = data.readU8();
@@ -1003,9 +1005,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.GOVERNOR.gov_autorotation_timeout         = data.readU16();
                 FC.GOVERNOR.gov_autorotation_bailout_time    = data.readU16();
                 FC.GOVERNOR.gov_autorotation_min_entry_time  = data.readU16();
-                FC.GOVERNOR.gov_pwr_filter                   = data.readU16();
-                FC.GOVERNOR.gov_rpm_filter                   = data.readU16();
-                FC.GOVERNOR.gov_tta_filter                   = data.readU16();
+                FC.GOVERNOR.gov_pwr_filter                   = data.readU8();
+                FC.GOVERNOR.gov_rpm_filter                   = data.readU8();
+                FC.GOVERNOR.gov_tta_filter                   = data.readU8();
                 break;
 
             case MSPCodes.MSP_MIXER_INPUTS:
@@ -1750,13 +1752,16 @@ MspHelper.prototype.crunch = function(code) {
             buffer.push8(FC.PID_PROFILE.pid_mode)
                 .push8(FC.PID_PROFILE.error_decay)
                 .push8(FC.PID_PROFILE.error_rotation)
-                .push16(FC.PID_PROFILE.errorLimitRoll)
-                .push16(FC.PID_PROFILE.errorLimitPitch)
-                .push16(FC.PID_PROFILE.errorLimitYaw)
+                .push8(FC.PID_PROFILE.errorLimitRoll)
+                .push8(FC.PID_PROFILE.errorLimitPitch)
+                .push8(FC.PID_PROFILE.errorLimitYaw)
+                .push8(FC.PID_PROFILE.gyroCutoffRoll)
+                .push8(FC.PID_PROFILE.gyroCutoffPitch)
+                .push8(FC.PID_PROFILE.gyroCutoffYaw)
+                .push8(FC.PID_PROFILE.dtermCutoffRoll)
+                .push8(FC.PID_PROFILE.dtermCutoffPitch)
+                .push8(FC.PID_PROFILE.dtermCutoffYaw)
                 .push8(FC.PID_PROFILE.itermRelaxType)
-                .push8(FC.PID_PROFILE.itermRelaxLevelRoll)
-                .push8(FC.PID_PROFILE.itermRelaxLevelPitch)
-                .push8(FC.PID_PROFILE.itermRelaxLevelYaw)
                 .push8(FC.PID_PROFILE.itermRelaxCutoffRoll)
                 .push8(FC.PID_PROFILE.itermRelaxCutoffPitch)
                 .push8(FC.PID_PROFILE.itermRelaxCutoffYaw)
@@ -1767,7 +1772,6 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.PID_PROFILE.yawFFImpulseGain)
                 .push8(FC.PID_PROFILE.yawFFImpulseFreq)
                 .push16(FC.PID_PROFILE.pitchFFCollectiveGain)
-                .push16(FC.PID_PROFILE.pitchFFCollectiveImpulseGain)
                 // Angle //
                 .push8(FC.PID_PROFILE.levelAngleStrength)
                 .push8(FC.PID_PROFILE.levelAngleLimit)
@@ -1825,9 +1829,9 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.GOVERNOR.gov_autorotation_timeout)
                 .push16(FC.GOVERNOR.gov_autorotation_bailout_time)
                 .push16(FC.GOVERNOR.gov_autorotation_min_entry_time)
-                .push16(FC.GOVERNOR.gov_pwr_filter)
-                .push16(FC.GOVERNOR.gov_rpm_filter)
-                .push16(FC.GOVERNOR.gov_tta_filter);
+                .push8(FC.GOVERNOR.gov_pwr_filter)
+                .push8(FC.GOVERNOR.gov_rpm_filter)
+                .push8(FC.GOVERNOR.gov_tta_filter);
             break;
 
         case MSPCodes.MSP_SET_LED_STRIP_SETTINGS:

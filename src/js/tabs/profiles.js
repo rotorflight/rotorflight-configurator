@@ -102,6 +102,14 @@ TABS.profiles.initialize = function (callback) {
             $('.tab-profiles .pid_standard input').prop('disabled', true);
         }
 
+        $('.tab-profiles input[id="gyroCutoffRoll"]').val(FC.PID_PROFILE.gyroCutoffRoll).change();
+        $('.tab-profiles input[id="gyroCutoffPitch"]').val(FC.PID_PROFILE.gyroCutoffPitch).change();
+        $('.tab-profiles input[id="gyroCutoffYaw"]').val(FC.PID_PROFILE.gyroCutoffYaw).change();
+
+        $('.tab-profiles input[id="dtermCutoffRoll"]').val(FC.PID_PROFILE.dtermCutoffRoll).change();
+        $('.tab-profiles input[id="dtermCutoffPitch"]').val(FC.PID_PROFILE.dtermCutoffPitch).change();
+        $('.tab-profiles input[id="dtermCutoffYaw"]').val(FC.PID_PROFILE.dtermCutoffYaw).change();
+
         // Cumulative Error limits
         $('.tab-profiles input[id="errorLimitRoll"]').val(FC.PID_PROFILE.errorLimitRoll).change();
         $('.tab-profiles input[id="errorLimitPitch"]').val(FC.PID_PROFILE.errorLimitPitch).change();
@@ -124,18 +132,10 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="itermRelaxCutoffRoll"]').val(FC.PID_PROFILE.itermRelaxCutoffRoll);
         $('.tab-profiles input[id="itermRelaxCutoffPitch"]').val(FC.PID_PROFILE.itermRelaxCutoffPitch);
         $('.tab-profiles input[id="itermRelaxCutoffYaw"]').val(FC.PID_PROFILE.itermRelaxCutoffYaw);
-        //$('.tab-profiles input[id="itermRelaxLevelRoll"]').val(FC.PID_PROFILE.itermRelaxLevelRoll);
-        //$('.tab-profiles input[id="itermRelaxLevelPitch"]').val(FC.PID_PROFILE.itermRelaxLevelPitch);
-        //$('.tab-profiles input[id="itermRelaxLevelYaw"]').val(FC.PID_PROFILE.itermRelaxLevelYaw);
-
-        const itermRelaxType = $('.tab-profiles select[id="itermRelaxType"]');
-        itermRelaxType.change(function() {
-            const value = itermRelaxType.val();
-            $('.tab-profiles .itermRelaxYawOption').toggle(value > 1);
-        });
-        itermRelaxType.val(FC.PID_PROFILE.itermRelaxType < 2 ? 1 : 2).change();
 
         const itermRelaxCheck = $('.tab-profiles input[id="itermRelax"]');
+        const itermRelaxType = $('.tab-profiles select[id="itermRelaxType"]');
+
         itermRelaxCheck.change(function() {
             const checked = itermRelaxCheck.is(':checked');
             $('.tab-profiles .itermRelax .suboption').toggle(checked);
@@ -143,6 +143,13 @@ TABS.profiles.initialize = function (callback) {
             itermRelaxType.change();
         });
         itermRelaxCheck.prop('checked', FC.PID_PROFILE.itermRelaxType > 0).change();
+
+        itermRelaxType.change(function() {
+            const checked = itermRelaxCheck.is(':checked');
+            const value = (checked) ? itermRelaxType.val() : 0;
+            $('.tab-profiles .itermRelaxYawOption').toggle(value > 1);
+        });
+        itermRelaxType.val(FC.PID_PROFILE.itermRelaxType < 2 ? 1 : 2).change();
 
         // Yaw settings
         $('.tab-profiles input[id="yawStopGainCW"]').val(FC.PID_PROFILE.yawStopGainCW);
@@ -154,7 +161,6 @@ TABS.profiles.initialize = function (callback) {
 
         // Pitch settings
         $('.tab-profiles input[id="pitchFFCollectiveGain"]').val(FC.PID_PROFILE.pitchFFCollectiveGain);
-        $('.tab-profiles input[id="pitchFFCollectiveImpulseGain"]').val(FC.PID_PROFILE.pitchFFCollectiveImpulseGain);
 
         // Acro Trainer
         $('.tab-profiles input[id="acroTrainerGain"]').val(FC.PID_PROFILE.acroTrainerGain).trigger('input');
@@ -233,6 +239,14 @@ TABS.profiles.initialize = function (callback) {
             });
         });
 
+        FC.PID_PROFILE.gyroCutoffRoll = $('.tab-profiles input[id="gyroCutoffRoll"]').val();
+        FC.PID_PROFILE.gyroCutoffPitch = $('.tab-profiles input[id="gyroCutoffPitch"]').val();
+        FC.PID_PROFILE.gyroCutoffYaw = $('.tab-profiles input[id="gyroCutoffYaw"]').val();
+
+        FC.PID_PROFILE.dtermCutoffRoll = $('.tab-profiles input[id="dtermCutoffRoll"]').val();
+        FC.PID_PROFILE.dtermCutoffPitch = $('.tab-profiles input[id="dtermCutoffPitch"]').val();
+        FC.PID_PROFILE.dtermCutoffYaw = $('.tab-profiles input[id="dtermCutoffYaw"]').val();
+
         FC.PID_PROFILE.errorLimitRoll = $('.tab-profiles input[id="errorLimitRoll"]').val();
         FC.PID_PROFILE.errorLimitPitch = $('.tab-profiles input[id="errorLimitPitch"]').val();
         FC.PID_PROFILE.errorLimitYaw = $('.tab-profiles input[id="errorLimitYaw"]').val();
@@ -245,9 +259,6 @@ TABS.profiles.initialize = function (callback) {
         FC.PID_PROFILE.itermRelaxCutoffRoll = parseInt($('.tab-profiles input[id="itermRelaxCutoffRoll"]').val());
         FC.PID_PROFILE.itermRelaxCutoffPitch = parseInt($('.tab-profiles input[id="itermRelaxCutoffPitch"]').val());
         FC.PID_PROFILE.itermRelaxCutoffYaw = parseInt($('.tab-profiles input[id="itermRelaxCutoffYaw"]').val());
-        //FC.PID_PROFILE.itermRelaxLevelRoll = parseInt($('.tab-profiles input[id="itermRelaxLevelRoll"]').val());
-        //FC.PID_PROFILE.itermRelaxLevelPitch = parseInt($('.tab-profiles input[id="itermRelaxLevelPitch"]').val());
-        //FC.PID_PROFILE.itermRelaxLevelYaw = parseInt($('.tab-profiles input[id="itermRelaxLevelYaw"]').val());
 
         // Yaw settings
         FC.PID_PROFILE.yawStopGainCW = $('.tab-profiles input[id="yawStopGainCW"]').val();
@@ -258,7 +269,6 @@ TABS.profiles.initialize = function (callback) {
         FC.PID_PROFILE.yawFFImpulseFreq = $('.tab-profiles input[id="yawFFImpulseFreq"]').val();
         // Pitch settings
         FC.PID_PROFILE.pitchFFCollectiveGain = parseInt($('.tab-profiles input[id="pitchFFCollectiveGain"]').val());
-        FC.PID_PROFILE.pitchFFCollectiveImpulseGain = parseInt($('.tab-profiles input[id="pitchFFCollectiveImpulseGain"]').val());
 
         // Leveling modes
         FC.PID_PROFILE.acroTrainerGain = parseInt($('.tab-profiles input[id="acroTrainerGain"]').val());

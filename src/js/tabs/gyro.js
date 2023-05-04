@@ -4,13 +4,19 @@ TABS.gyro = {
     isDirty: false,
     rpmFilterDirty: false,
     FILTER_TYPE_NAMES: [
-        "PT1",
-        "BIQUAD",
+        { id: 1, name: "1ˢᵗ order", visible: true },
+        { id: 2, name: "2ⁿᵈ order", visible: true },
+        { id: 3, name: "PT1", visible: false },
+        { id: 4, name: "PT2", visible: false },
+        { id: 5, name: "PT3", visible: false },
+        { id: 6, name: "Order1", visible: false },
+        { id: 7, name: "Butter", visible: false },
+        { id: 8, name: "Bessel", visible: false },
+        { id: 9, name: "Damped", visible: false },
     ],
     RPM_FILTER_TYPES: [
-        null,
-        'SINGLE',
-        'DOUBLE',
+        { id: 1, name: "SINGLE", visible: true },
+        { id: 2, name: "DOUBLE", visible: true },
     ],
 };
 
@@ -57,41 +63,38 @@ TABS.gyro.initialize = function (callback) {
 
     function data_to_form() {
 
-        function populateSelector(name, values) {
+        function populateSelectorClass(name, values) {
             $('select.' + name).each(function () {
                 const select = $(this);
-                values.forEach(function(value, key) {
-                    if (value)
-                       select.append('<option value="' + key + '">' + value + '</option>');
+                values.forEach(function(iter) {
+                    if (iter.visible)
+                        select.append('<option value="' + iter.id + '">' + iter.name + '</option>');
                 });
             });
         }
 
-        populateSelector('lowpassTypes', self.FILTER_TYPE_NAMES);
+        function populateSelectorName(name, values, current) {
+            const select = $(`select[name="${name}"]`);
+            values.forEach(function(iter) {
+                if (iter.visible || current == iter.id)
+                    select.append('<option value="' + iter.id + '">' + iter.name + '</option>');
+            });
+            select.val(current);
+        }
 
-        $('select[name="gyroLowpassType"]').val(FC.FILTER_CONFIG.gyro_lowpass_type);
+        populateSelectorName('gyroLowpassType', self.FILTER_TYPE_NAMES, FC.FILTER_CONFIG.gyro_lowpass_type);
+
         $('input[name="gyroLowpassFrequency"]').val(FC.FILTER_CONFIG.gyro_lowpass_hz);
         $('input[name="gyroLowpassDynMinFrequency"]').val(FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz);
         $('input[name="gyroLowpassDynMaxFrequency"]').val(FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz);
 
-        $('select[name="gyroLowpass2Type"]').val(FC.FILTER_CONFIG.gyro_lowpass2_type);
+        populateSelectorName('gyroLowpass2Type', self.FILTER_TYPE_NAMES, FC.FILTER_CONFIG.gyro_lowpass2_type);
         $('input[name="gyroLowpass2Frequency"]').val(FC.FILTER_CONFIG.gyro_lowpass2_hz);
 
         $('input[name="gyroNotch1Frequency"]').val(FC.FILTER_CONFIG.gyro_notch_hz);
         $('input[name="gyroNotch1Cutoff"]').val(FC.FILTER_CONFIG.gyro_notch_cutoff);
         $('input[name="gyroNotch2Frequency"]').val(FC.FILTER_CONFIG.gyro_notch2_hz);
         $('input[name="gyroNotch2Cutoff"]').val(FC.FILTER_CONFIG.gyro_notch2_cutoff);
-
-        $('select[name="dtermLowpassType"]').val(FC.FILTER_CONFIG.dterm_lowpass_type);
-        $('input[name="dtermLowpassFrequency"]').val(FC.FILTER_CONFIG.dterm_lowpass_hz);
-        $('input[name="dtermLowpassDynMinFrequency"]').val(FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz);
-        $('input[name="dtermLowpassDynMaxFrequency"]').val(FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz);
-
-        $('select[name="dtermLowpass2Type"]').val(FC.FILTER_CONFIG.dterm_lowpass2_type);
-        $('input[name="dtermLowpass2Frequency"]').val(FC.FILTER_CONFIG.dterm_lowpass2_hz);
-
-        $('input[name="dTermNotchFrequency"]').val(FC.FILTER_CONFIG.dterm_notch_hz);
-        $('input[name="dTermNotchCutoff"]').val(FC.FILTER_CONFIG.dterm_notch_cutoff);
 
         $('input[name="dynamicNotchWidthPercent"]').val(FC.FILTER_CONFIG.dyn_notch_width_percent);
         $('input[name="dynamicNotchQ"]').val(FC.FILTER_CONFIG.dyn_notch_q);
@@ -105,13 +108,12 @@ TABS.gyro.initialize = function (callback) {
             let type = 0, freq = 0;
 
             if (checked) {
-                if (FC.FILTER_CONFIG.gyro_lowpass_hz > 0) {
-                    type = FC.FILTER_CONFIG.gyro_lowpass_type;
-                    freq = FC.FILTER_CONFIG.gyro_lowpass_hz;
-                } else {
-                    type = FILTER_DEFAULT.gyro_lowpass_type;
-                    freq = FILTER_DEFAULT.gyro_lowpass_hz;
-                }
+                type = (FC.FILTER_CONFIG.gyro_lowpass_type) ?
+                    FC.FILTER_CONFIG.gyro_lowpass_type:
+                    FILTER_DEFAULT.gyro_lowpass_type;
+                freq = (FC.FILTER_CONFIG.gyro_lowpass_hz > 0) ?
+                    FC.FILTER_CONFIG.gyro_lowpass_hz:
+                    FILTER_DEFAULT.gyro_lowpass_hz;
             }
 
             $('select[name="gyroLowpassType"]').val(type).attr('disabled', !checked);
@@ -146,13 +148,12 @@ TABS.gyro.initialize = function (callback) {
             let type = 0, freq = 0;
 
             if (checked) {
-                if (FC.FILTER_CONFIG.gyro_lowpass2_hz > 0) {
-                    type = FC.FILTER_CONFIG.gyro_lowpass2_type;
-                    freq = FC.FILTER_CONFIG.gyro_lowpass2_hz;
-                } else {
-                    type = FILTER_DEFAULT.gyro_lowpass2_type;
-                    freq = FILTER_DEFAULT.gyro_lowpass2_hz;
-                }
+                type = (FC.FILTER_CONFIG.gyro_lowpass2_type) ?
+                    FC.FILTER_CONFIG.gyro_lowpass2_type:
+                    FILTER_DEFAULT.gyro_lowpass2_type;
+                freq = (FC.FILTER_CONFIG.gyro_lowpass2_hz > 0) ?
+                    FC.FILTER_CONFIG.gyro_lowpass2_hz:
+                    FILTER_DEFAULT.gyro_lowpass2_hz;
             }
 
             $('select[name="gyroLowpass2Type"]').val(type).attr('disabled', !checked);
@@ -195,85 +196,6 @@ TABS.gyro.initialize = function (callback) {
             $('input[name="gyroNotch2Cutoff"]').val(cutf).attr('disabled', !checked).change();
         });
 
-        $('input[id="dtermLowpassEnabled"]').change(function() {
-            const checked = $(this).is(':checked');
-            let type = 0, freq = 0;
-
-            if (checked) {
-                if (FC.FILTER_CONFIG.dterm_lowpass_hz > 0) {
-                    type = FC.FILTER_CONFIG.dterm_lowpass_type;
-                    freq = FC.FILTER_CONFIG.dterm_lowpass_hz;
-                } else {
-                    type = FILTER_DEFAULT.dterm_lowpass_type;
-                    freq = FILTER_DEFAULT.dterm_lowpass_hz;
-                }
-            }
-
-            $('select[name="dtermLowpassType"]').val(type).attr('disabled', !checked);
-            $('input[name="dtermLowpassFrequency"]').val(freq).attr('disabled', !checked);
-
-            if (!checked) {
-                $('input[id="dtermLowpassDynEnabled"]').prop('checked', false).change();
-            }
-        });
-
-        $('input[id="dtermLowpassDynEnabled"]').change(function() {
-            const checked = $(this).is(':checked');
-            let minf = 0, maxf = 0;
-
-            if (checked) {
-                if (FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz > 0 &&
-                    FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz < FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz) {
-                    minf = FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz;
-                    maxf = FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz;
-                } else {
-                    minf = FILTER_DEFAULT.dterm_lowpass_dyn_min_hz;
-                    maxf = FILTER_DEFAULT.dterm_lowpass_dyn_max_hz;
-                }
-            }
-
-            $('input[name="dtermLowpassDynMinFrequency"]').val(minf).attr('disabled', !checked);
-            $('input[name="dtermLowpassDynMaxFrequency"]').val(maxf).attr('disabled', !checked);
-        });
-
-        $('input[id="dtermLowpass2Enabled"]').change(function() {
-            const checked = $(this).is(':checked');
-            let type = 0, freq = 0;
-
-            if (checked) {
-                if (FC.FILTER_CONFIG.dterm_lowpass2_hz > 0) {
-                    type = FC.FILTER_CONFIG.dterm_lowpass2_type;
-                    freq = FC.FILTER_CONFIG.dterm_lowpass2_hz;
-                } else {
-                    type = FILTER_DEFAULT.dterm_lowpass2_type;
-                    freq = FILTER_DEFAULT.dterm_lowpass2_hz;
-                }
-            }
-
-            $('select[name="dtermLowpass2Type"]').val(type).attr('disabled', !checked);
-            $('input[name="dtermLowpass2Frequency"]').val(freq).attr('disabled', !checked);
-        });
-
-        $('input[id="dtermNotchEnabled"]').change(function() {
-            const checked = $(this).is(':checked');
-            let freq = 0, cutf = 0;
-
-            if (checked) {
-                if (FC.FILTER_CONFIG.dterm_notch_hz > 0 && FC.FILTER_CONFIG.dterm_notch_cutoff > 0) {
-                    freq = FC.FILTER_CONFIG.dterm_notch_hz;
-                    cutf = FC.FILTER_CONFIG.dterm_notch_cutoff;
-                } else {
-                    freq = FILTER_DEFAULT.dterm_notch_hz;
-                    cutf = FILTER_DEFAULT.dterm_notch_cutoff;
-                }
-            }
-
-            $('input[name="dTermNotchFrequency"]').val(freq);
-            $('input[name="dTermNotchFrequency"]').attr('disabled', !checked).change();
-            $('input[name="dTermNotchCutoff"]').val(cutf);
-            $('input[name="dTermNotchCutoff"]').attr('disabled', !checked).change();
-        });
-
         // The notch cutoff must be smaller than the notch frequency
         function adjustGyroNotch(fName) {
             const freq = parseInt($(`input[name='${fName}Frequency']`).val());
@@ -292,10 +214,6 @@ TABS.gyro.initialize = function (callback) {
             adjustGyroNotch("gyroNotch2");
         }).change();
 
-        $('input[name="dTermNotchFrequency"]').change(function() {
-            adjustGyroNotch("dTermNotch");
-        }).change();
-
         $('input[id="gyroLowpassEnabled"]').prop('checked', FC.FILTER_CONFIG.gyro_lowpass_hz != 0).change();
         $('input[id="gyroLowpassDynEnabled"]').prop('checked', FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz > 0 &&
                                                     FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz < FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz).change();
@@ -305,17 +223,9 @@ TABS.gyro.initialize = function (callback) {
         $('input[id="gyroNotch1Enabled"]').prop('checked', FC.FILTER_CONFIG.gyro_notch_hz != 0).change();
         $('input[id="gyroNotch2Enabled"]').prop('checked', FC.FILTER_CONFIG.gyro_notch2_hz != 0).change();
 
-        $('input[id="dtermLowpassEnabled"]').prop('checked', FC.FILTER_CONFIG.dterm_lowpass_hz != 0).change();
-        $('input[id="dtermLowpassDynEnabled"]').prop('checked', FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz > 0 &&
-                                                     FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz < FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz).change();
-
-        $('input[id="dtermLowpass2Enabled"]').prop('checked', FC.FILTER_CONFIG.dterm_lowpass2_hz != 0).change();
-
-        $('input[id="dtermNotchEnabled"]').prop('checked', FC.FILTER_CONFIG.dterm_notch_hz != 0).change();
-
         //// RPM Filter Config
 
-        populateSelector('rpmFilterTypes', self.RPM_FILTER_TYPES);
+        populateSelectorClass('rpmFilterTypes', self.RPM_FILTER_TYPES);
 
         $('.gyro_rpm_filter_config').toggle( FC.FEATURE_CONFIG.features.isEnabled('RPM_FILTER') );
 
@@ -455,38 +365,6 @@ TABS.gyro.initialize = function (callback) {
         FC.FILTER_CONFIG.dyn_notch_q = parseInt($('input[name="dynamicNotchQ"]').val());
         FC.FILTER_CONFIG.dyn_notch_min_hz = parseInt($('input[name="dynamicNotchMinHz"]').val());
         FC.FILTER_CONFIG.dyn_notch_max_hz = parseInt($('input[name="dynamicNotchMaxHz"]').val());
-
-        if ($('input[id="dtermLowpassEnabled"]').is(':checked')) {
-            FC.FILTER_CONFIG.dterm_lowpass_type = $('select[name="dtermLowpassType"]').val();
-            FC.FILTER_CONFIG.dterm_lowpass_hz = parseInt($('input[name="dtermLowpassFrequency"]').val());
-        } else {
-            FC.FILTER_CONFIG.dterm_lowpass_type = 0;
-            FC.FILTER_CONFIG.dterm_lowpass_hz = 0;
-        }
-
-        if ($('input[id="dtermLowpassDynEnabled"]').is(':checked')) {
-            FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz = parseInt($('input[name="dtermLowpassDynMinFrequency"]').val());
-            FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz = parseInt($('input[name="dtermLowpassDynMaxFrequency"]').val());
-        } else {
-            FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz = 0;
-            FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz = 0;
-        }
-
-        if ($('input[id="dtermLowpass2Enabled"]').is(':checked')) {
-            FC.FILTER_CONFIG.dterm_lowpass2_type = $('select[name="dtermLowpass2Type"]').val();
-            FC.FILTER_CONFIG.dterm_lowpass2_hz = parseInt($('input[name="dtermLowpass2Frequency"]').val());
-        } else {
-            FC.FILTER_CONFIG.dterm_lowpass2_type = 0;
-            FC.FILTER_CONFIG.dterm_lowpass2_hz = 0;
-        }
-
-        if ($('input[id="dtermNotchEnabled"]').is(':checked')) {
-            FC.FILTER_CONFIG.dterm_notch_hz = parseInt($('input[name="dTermNotchFrequency"]').val());
-            FC.FILTER_CONFIG.dterm_notch_cutoff = parseInt($('input[name="dTermNotchCutoff"]').val());
-        } else {
-            FC.FILTER_CONFIG.dterm_notch_hz = 0;
-            FC.FILTER_CONFIG.dterm_notch_cutoff = 0;
-        }
 
         //// RPM Filter Config
 

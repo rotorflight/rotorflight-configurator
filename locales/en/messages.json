@@ -3818,17 +3818,32 @@
     "profilesItermRelaxCutoffHelp": {
         "message": "Lower values suppress bounce-back after movements, high values increase high-rate turn precision.<br>Set to 15-30 for small helis, 10-15 for mid-size, and less than 10 for large."
     },
-    "profilesItermRelaxLevelRoll": {
-        "message": "Relax Threshold for Roll"
+    "profilesPidBandwidth": {
+        "message": "PID Controller Bandwidth"
     },
-    "profilesItermRelaxLevelPitch": {
-        "message": "Relax Threshold for Pitch"
+    "profilesGyroCutoffHelp": {
+        "message": "PID Loop overall bandwidth in Hz"
     },
-    "profilesItermRelaxLevelYaw": {
-        "message": "Relax Threshold for Yaw"
+    "profilesGyroCutoffRoll": {
+        "message": "Roll Bandwidth"
     },
-    "profilesItermRelaxLevelHelp": {
-        "message": "Sets the setpoint limit/level for I-term relax. This is fixed to 40 in BF and RF1."
+    "profilesGyroCutoffPitch": {
+        "message": "Pitch Bandwidth"
+    },
+    "profilesGyroCutoffYaw": {
+        "message": "Yaw Bandwidth"
+    },
+    "profilesDtermCutoffHelp": {
+        "message": "D-term Cutoff Frequency in Hz"
+    },
+    "profilesDtermCutoffRoll": {
+        "message": "Roll D-term Cutoff"
+    },
+    "profilesDtermCutoffPitch": {
+        "message": "Pitch D-term Cutoff"
+    },
+    "profilesDtermCutoffYaw": {
+        "message": "Yaw D-term Cutoff"
     },
     "profilesLevelingSettings": {
         "message": "Auto-leveling Settings"
@@ -3911,23 +3926,11 @@
     "profilesyawFFImpulseFreqHelp": {
         "message": "Frequency value for collective impulse feedforward mixed into yaw"
     },
-    "profilespitchFFImpulseGain": {
-        "message": "Collective Impulse Feedforward Gain"
-    },
-    "profilesPitchFFImpulseGainHelp": {
-        "message": "Gain value for Collective impulse feedforward mixed into Pitch"
-    },
     "profilespitchFFCollectiveGain": {
         "message": "Collective Feedforward Gain"
     },
     "profilespitchFFCollectiveGainHelp": {
         "message": "Gain value for Collective feedforward mixed into Pitch"
-    },
-    "profilespitchFFCollectiveImpulseGain": {
-        "message": "Collective Impulse Feedforward Gain"
-    },
-    "profilespitchFFCollectiveImpulseGainHelp": {
-        "message": "Gain value for Collective Impulse mixed into Pitch"
     },
     "profilesRescueSettings": {
         "message": "Rescue Settings"

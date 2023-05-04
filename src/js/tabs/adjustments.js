@@ -35,7 +35,7 @@ TABS.adjustments = {
         'YawCollectiveFF',
         'YawImpulseFF',
         'PitchCollectiveFF',
-        'PitchCollectiveImpulseFF',
+        'PitchCollectiveUNUSED',
         'RescueCollective',
         'RescueCollectiveBoost',
         'AngleLevelStrength',

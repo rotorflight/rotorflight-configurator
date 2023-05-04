@@ -120,7 +120,7 @@
                         <table id="pid_advanced" class="settings_table pid_standard">
                             <tr class="errorLimit">
                                 <td>
-                                    <input type="number" id="errorLimitRoll" step="1" min="0" max="360" />
+                                    <input type="number" id="errorLimitRoll" step="1" min="0" max="180" />
                                 </td>
                                 <td colspan="2">
                                     <label for="errorLimitRoll">
@@ -131,7 +131,7 @@
                             </tr>
                             <tr class="errorLimit">
                                 <td>
-                                    <input type="number" id="errorLimitPitch" step="1" min="0" max="360" />
+                                    <input type="number" id="errorLimitPitch" step="1" min="0" max="180" />
                                 </td>
                                 <td colspan="2">
                                     <label for="errorLimitPitch">
@@ -141,7 +141,7 @@
                             </tr>
                             <tr class="errorLimit border">
                                 <td>
-                                    <input type="number" id="errorLimitYaw" step="1" min="0" max="360" />
+                                    <input type="number" id="errorLimitYaw" step="1" min="0" max="180" />
                                 </td>
                                 <td colspan="2">
                                     <label for="errorLimitYaw">
@@ -213,27 +213,6 @@
                                             <span i18n="profilesItermRelaxCutoffYaw"></span>
                                         </label>
                                     </span>
-                                    <!--
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesItermRelaxLevelHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="itermRelaxLevelRoll" step="1" min="10" max="250" />
-                                        <label for="itermRelaxLevelRoll">
-                                            <span i18n="profilesItermRelaxLevelRoll"></span>
-                                        </label>
-                                    </span>
-                                    <span class="suboption">
-                                        <input type="number" id="itermRelaxLevelPitch" step="1" min="10" max="250" />
-                                        <label for="itermRelaxLevelPitch">
-                                            <span i18n="profilesItermRelaxLevelPitch"></span>
-                                        </label>
-                                    </span>
-                                    <span class="suboption itermRelaxYawOption">
-                                        <input type="number" id="itermRelaxLevelYaw" step="1" min="10" max="250" />
-                                        <label for="itermRelaxLevelYaw">
-                                            <span i18n="profilesItermRelaxLevelYaw"></span>
-                                        </label>
-                                    </span>
-                                    -->
                                 </td>
                             </tr>
                         </table>
@@ -343,22 +322,82 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="pitchFFCollectiveImpulseGain">
-                                <td>
-                                    <input type="number" id="pitchFFCollectiveImpulseGain" step="1" min="0" max="2500"/>
-                                </td>
-                                <td colspan="2">
-                                    <div>
-                                        <span i18n="profilespitchFFCollectiveImpulseGain"></span>
-                                        <div class="helpicon cf_tip" i18n_title="profilespitchFFCollectiveImpulseGainHelp"></div>
-                                    </div>
-                                </td>
-                            </tr>
                         </table>
                     </div>
                 </div>
 
                 <div class="cf_column">
+
+                    <div class="gui_box grey spacer_left expert pid_bandwidth">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="profilesPidBandwidth"></div>
+                        </div>
+                        <table id="pid_bandwidth" class="settings_table pid_standard">
+                            <tr class="gyroCutoff">
+                                <td>
+                                    <input type="number" id="gyroCutoffRoll" step="1" min="0" max="250" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="gyroCutoffRoll">
+                                        <span i18n="profilesGyroCutoffRoll"></span>
+                                    </label>
+                                    <div class="helpicon cf_tip" i18n_title="profilesGyroCutoffHelp"></div>
+                                </td>
+                            </tr>
+                            <tr class="gyroCutoff">
+                                <td>
+                                    <input type="number" id="gyroCutoffPitch" step="1" min="0" max="250" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="gyroCutoffPitch">
+                                        <span i18n="profilesGyroCutoffPitch"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="gyroCutoff border">
+                                <td>
+                                    <input type="number" id="gyroCutoffYaw" step="1" min="0" max="250" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="gyroCutoffYaw">
+                                        <span i18n="profilesGyroCutoffYaw"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="dtermCutoff">
+                                <td>
+                                    <input type="number" id="dtermCutoffRoll" step="1" min="0" max="250" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="dtermCutoffRoll">
+                                        <span i18n="profilesDtermCutoffRoll"></span>
+                                    </label>
+                                    <div class="helpicon cf_tip" i18n_title="profilesDtermCutoffHelp"></div>
+                                </td>
+                            </tr>
+                            <tr class="dtermCutoff">
+                                <td>
+                                    <input type="number" id="dtermCutoffPitch" step="1" min="0" max="250" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="dtermCutoffPitch">
+                                        <span i18n="profilesDtermCutoffPitch"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="dtermCutoff border">
+                                <td>
+                                    <input type="number" id="dtermCutoffYaw" step="1" min="0" max="250" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="dtermCutoffYaw">
+                                        <span i18n="profilesDtermCutoffYaw"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
                     <div class="gui_box grey spacer_left leveling_settings">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="profilesLevelingSettings"></div>
