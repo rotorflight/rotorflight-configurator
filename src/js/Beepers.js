@@ -5,16 +5,16 @@ class Beepers {
         const self = this;
 
         const beepers = [
-            { bit: 0, name: 'GYRO_CALIBRATED', visible: true },
-            { bit: 1, name: 'RX_LOST', visible: true },
-            { bit: 2, name: 'RX_LOST_LANDING', visible: true },
-            { bit: 3, name: 'DISARMING', visible: true },
-            { bit: 4, name: 'ARMING', visible: true },
-            { bit: 5, name: 'ARMING_GPS_FIX', visible: true },
-            { bit: 6, name: 'BAT_CRIT_LOW', visible: true },
-            { bit: 7, name: 'BAT_LOW', visible: true },
-            { bit: 8, name: 'GPS_STATUS', visible: true },
-            { bit: 9, name: 'RX_SET', visible: true },
+            { bit:  0, name: 'GYRO_CALIBRATED', visible: true },
+            { bit:  1, name: 'RX_LOST', visible: true },
+            { bit:  2, name: 'RX_LOST_LANDING', visible: true },
+            { bit:  3, name: 'DISARMING', visible: true },
+            { bit:  4, name: 'ARMING', visible: true },
+            { bit:  5, name: 'ARMING_GPS_FIX', visible: true },
+            { bit:  6, name: 'BAT_CRIT_LOW', visible: true },
+            { bit:  7, name: 'BAT_LOW', visible: true },
+            { bit:  8, name: 'GPS_STATUS', visible: true },
+            { bit:  9, name: 'RX_SET', visible: true },
             { bit: 10, name: 'ACC_CALIBRATION', visible: true },
             { bit: 11, name: 'ACC_CALIBRATION_FAIL', visible: true },
             { bit: 12, name: 'READY_BEEP', visible: true },
@@ -24,10 +24,9 @@ class Beepers {
             { bit: 16, name: 'SYSTEM_INIT', visible: true },
             { bit: 17, name: 'USB', visible: true },
             { bit: 18, name: 'BLACKBOX_ERASE', visible: true },
-            { bit: 19, name: 'CRASH_FLIP', visible: true },
-            { bit: 20, name: 'CAM_CONNECTION_OPEN', visible: true },
-            { bit: 21, name: 'CAM_CONNECTION_CLOSE', visible: true },
-            { bit: 22, name: 'RC_SMOOTHING_INIT_FAIL', visible: true },
+            { bit: 19, name: 'CAM_CONNECTION_OPEN', visible: true },
+            { bit: 20, name: 'CAM_CONNECTION_CLOSE', visible: true },
+            { bit: 21, name: 'ARMING_GPS_NO_FIX', visible: true },
         ];
 
         if (supportedConditions) {
