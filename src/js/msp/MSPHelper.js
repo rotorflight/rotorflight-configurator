@@ -86,8 +86,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.CONFIG.activeSensors = data.readU16();
                 FC.CONFIG.mode = data.readU32();
                 data.readU8(); // compat: profile number
-                FC.CONFIG.sysLoad = data.readU16();
-                FC.CONFIG.cpuLoad = data.readU16();
+                FC.CONFIG.sysLoadRaw = data.readU16();
+                FC.CONFIG.sysLoad = Math.floor(FC.CONFIG.sysLoadRaw / 10);
+                FC.CONFIG.cpuLoadRaw = data.readU16();
+                FC.CONFIG.cpuLoad = Math.floor(FC.CONFIG.cpuLoadRaw / 10);
                 const flagCount = data.readU8(); // compat: extra flight mode flags
                 for (let i = 0; i < flagCount; i++) {
                     data.readU8();
