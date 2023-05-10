@@ -4,9 +4,9 @@
         <div class="cf_doc_version_bt">
             <a id="button-documentation" href="https://github.com/rotorflight/rotorflight/wiki" target="_blank" rel="noopener noreferrer"></a>
         </div>
-        <div class="note">
+        <!--div class="note">
             <p i18n="receiverHelp"></p>
-        </div>
+        </div-->
 
         <div class="grid-row">
             <div class="grid-col col6">
@@ -15,164 +15,95 @@
                 <div class="receiver">
                     <div class="gui_box grey">
                         <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="configurationReceiver"></div>
+                            <div class="spacer_box_title" i18n="receiverSelection"></div>
                         </div>
-                        <div class="spacer_box">
-                            <select class="features rxMode" name="rxMode">
-                                <!-- list generated here -->
-                            </select>
-                            <span i18n="configurationReceiverMode"></span>
-                        </div>
-                        <div class="serialRXBox spacer_box">
-                            <div class="note">
-                                <p i18n="configurationSerialRXHelp"></p>
-                            </div>
-                            <select class="serialRX">
-                                <!-- list generated here -->
-                            </select>
-                            <span i18n="configurationSerialRX"></span>
-                        </div>
-                        <div class="serialRXBox spacer_box">
-                            <div class="serial-rx-inverted">
-                                <input type="checkbox" class="toggle" name="serialRXInverted"/>
-                            </div>
-                            <span i18n="configurationSerialRXInverted"></span>
-                        </div>
-                        <div class="serialRXBox spacer_box">
-                            <div class="serial-rx-halfduplex">
-                                <input type="checkbox" class="toggle" name="serialRXHalfDuplex"/>
-                            </div>
-                            <span i18n="configurationSerialRXHalfDuplex"></span>
-                        </div>
-                        <div class="spiRxBox spacer_box">
-                            <div class="note">
-                                <p i18n="configurationSpiRxHelp"></p>
-                            </div>
-                            <select class="spiRx">
-                                <!-- list generated here -->
-                            </select>
-                            <span i18n="configurationSpiRX"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- RSSI -->
-                <div class="rssi">
-                    <div class="gui_box grey">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="configurationRSSI"></div>
-                            <div class="helpicon cf_tip" i18n_title="configurationRSSIHelp"></div>
-                        </div>
-                        <div class="spacer_box">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th scope="rssi" i18n="configurationFeatureEnabled"></th>
-                                    <th scope="rssi" i18n="configurationFeatureDescription"></th>
-                                    <th scope="rssi" i18n="configurationFeatureName"></th>
+                        <div class="spacer_box no_padding">
+                            <table class="settings_table">
+                                <tr class="receiverProtocol">
+                                    <td><select name="receiverProtocol"></select></td>
+                                    <td><span i18n="receiverProtocol"></span></td>
                                 </tr>
-                                </thead>
-                                <tbody class="features rssi">
-                                <!-- table generated here -->
-                                </tbody>
+                            </table>
+                        </div>
+                        <div class="spacer_box top_border featureSerialRx">
+                            <table class="settings_table">
+                                <tr>
+                                    <td><input type="checkbox" class="toggle" name="serial_inverted"/></td>
+                                    <td><span i18n="receiverSerialInverted"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="toggle" name="serial_half_duplex"/></td>
+                                    <td><span i18n="receiverSerialHalfDuplex"></span></td>
+                                </tr>
                             </table>
                         </div>
                     </div>
                 </div>
 
-                <!-- RSSI CHANNEL-->
-                <div class="rssi_channel_wrapper grey">
-                    <div class="head" i18n="receiverRssiChannel"></div>
-                    <select name="rssi_channel">
-                        <!-- list generated here -->
-                    </select>
-                </div>
-                <div class="rcmap_wrapper grey">
-                    <div class="head">
-                        <span i18n="receiverChannelMap" i18n_title="receiverChannelMapTitle"></span>
-                    </div>
-                    <div class="hybrid_element">
-                        <input type="text" name="rcmap" spellcheck="false" />
-                        <select class="hybrid_helper" name="rcmap_helper">
-                            <option i18n="receiverChannelDefaultOption" value="AETRC123"></option>
-                            <option value="AETRC123">FrSky</option>
-                            <option value="AETR1C23">Futaba / Hitec</option>
-                            <option value="TAER1C23">Spektrum / Graupner / JR</option>
-                            <option value="AECR1T23">ELRS</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- MINMAX -->
-                <div class="gui_box tunings grey">
-                    <table class="sticks">
-                        <tr>
-                            <th i18n="receiverStickMin"></th>
-                            <th i18n="receiverStickCenter"></th>
-                            <th i18n="receiverStickMax"></th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="input-helpicon-flex">
-                                    <input type="number" name="stick_min" min="1000" max="1200"/>
-                                    <div class="helpicon cf_tip" i18n_title="receiverHelpStickMin"></div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="input-helpicon-flex">
-                                    <input type="number" name="stick_center" min="1401" max="1599"/>
-                                    <div class="helpicon cf_tip" i18n_title="receiverHelpStickCenter"></div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="input-helpicon-flex">
-                                    <input type="number" name="stick_max" min="1800" max="2000"/>
-                                    <div class="helpicon cf_tip" i18n_title="receiverHelpStickMax"></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <!-- DEADBAND -->
-                <div class="gui_box tunings grey">
-                    <table class="deadband">
-                        <tr>
-                            <th i18n="receiverDeadband"></th>
-                            <th i18n="receiverYawDeadband"></th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="input-helpicon-flex">
-                                    <input type="number" name="deadband" step="1" min="0" max="32"/>
-                                    <div class="helpicon cf_tip" i18n_title="receiverHelpDeadband"></div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="input-helpicon-flex">
-                                    <input type="number" name="yaw_deadband" step="1" min="0" max="100"/>
-                                    <div class="helpicon cf_tip" i18n_title="receiverHelpYawDeadband"></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="grid-col col6">
-
-                <!-- RECEIVER BARS -->
-                <div class="gui_box grey margin-bottom">
-                    <div class="gui_box_titlebar">
-                        <div class="spacer_box_title" i18n="receiverBars"></div>
-                    </div>
-                    <div class="spacer_box">
-                        <div class="bars"></div>
+                <!-- SETTINGS -->
+                <div class="settings">
+                    <div class="gui_box grey">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="receiverSettings"></div>
+                        </div>
+                        <div class="spacer_box">
+                            <table class="settings_table">
+                                <tr>
+                                    <td><input type="number" name="cyclic_deadband" step="1" min="0" max="100"/></td>
+                                    <td>
+                                        <span i18n="receiverCyclicDeadband"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpCyclicDeadband"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" name="yaw_deadband" step="1" min="0" max="100"/></td>
+                                    <td>
+                                        <span i18n="receiverYawDeadband"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpYawDeadband"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" name="stick_center" min="1400" max="1600" /></td>
+                                    <td>
+                                        <span i18n="receiverStickCenter"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpStickCenter"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" name="rx_min_usec" min="750" max="2250" /></td>
+                                    <td>
+                                        <span i18n="receiverRxMinUsec"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpRxMinUsec"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" name="rx_max_usec" min="750" max="2250" /></td>
+                                    <td>
+                                        <span i18n="receiverRxMaxUsec"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpRxMaxUsec"></div>
+                                    </td>
+                                </tr>
+                                <tr class="receiverStickComamnds">
+                                    <td><input type="number" name="stick_min" min="1000" max="1200"/></td>
+                                    <td>
+                                        <span i18n="receiverStickCommandMin"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpStickCommandMin"></div>
+                                    </td>
+                                </tr>
+                                <tr class="receiverStickComamnds">
+                                    <td><input type="number" name="stick_max" min="1800" max="2000" /></td>
+                                    <td>
+                                        <span i18n="receiverStickCommandMax"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpStickCommandMax"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
                 <!-- MODEL PREVIEW -->
-                <div class="gui_box tunings grey">
+                <div class="gui_box gui_preview grey">
                     <div class="gui_box_titlebar">
                         <div class="spacer_box_title" i18n="receiverModelPreview"></div>
                     </div>
@@ -182,8 +113,44 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
+            <div class="grid-col col6">
+
+                <!-- RECEIVER BARS -->
+                <div class="gui_box grey margin-bottom">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="receiverBars"></div>
+                    </div>
+                    <div class="spacer_box bottom_border">
+                        <table class="channels_config">
+                            <tr>
+                                <td>
+                                    <div class="hybrid_element">
+                                        <input type="text" name="rcmap" spellcheck="false" />
+                                        <select class="hybrid_select" name="rcmap_preset">
+                                            <option i18n="receiverChannelDefaultOption" value="AECRT123"></option>
+                                            <option value="AECR1T23">ELRS</option>
+                                            <option value="AETRC123">FrSky</option>
+                                            <option value="AETR1C23">Futaba / Hitec</option>
+                                            <option value="TAER1C23">Spektrum / Graupner / JR</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span i18n="receiverChannelOrder"></span>
+                                    <div class="helpicon cf_tip" i18n_title="receiverHelpChannelOrder"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="spacer_box">
+                        <table class="channels"></table>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
         <div class="clear-both"></div>
@@ -206,5 +173,28 @@
             <a class="reboot" href="#" i18n="buttonSaveReboot"></a>
         </div>
     </div>
+
+</div>
+
+<div id="tab-receiver-templates">
+
+        <table id="receiverBarTemplate">
+            <tr>
+                <td><span class="name" /></td>
+                <td>
+                    <select class="channel_select" />
+                </td>
+                <td>
+                    <div class="meter">
+                        <div class="bar">
+                            <div class="label"></div>
+                            <div class="fill">
+                                <div class="label"></div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
 
 </div>

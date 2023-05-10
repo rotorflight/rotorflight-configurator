@@ -44,15 +44,13 @@ const MSPCodes = {
     MSP_SET_ARMING_CONFIG:          62,
     MSP_RX_MAP:                     64,
     MSP_SET_RX_MAP:                 65,
-    MSP_BF_CONFIG:                  66, // DEPRECATED
+    MSP_RX_CHANNELS:                66,
     MSP_SET_BF_CONFIG:              67, // DEPRECATED
     MSP_SET_REBOOT:                 68,
     MSP_BF_BUILD_INFO:              69, // Not used
     MSP_DATAFLASH_SUMMARY:          70,
     MSP_DATAFLASH_READ:             71,
     MSP_DATAFLASH_ERASE:            72,
-    MSP_LOOP_TIME:                  73,
-    MSP_SET_LOOP_TIME:              74,
     MSP_FAILSAFE_CONFIG:            75,
     MSP_SET_FAILSAFE_CONFIG:        76,
     MSP_RXFAIL_CONFIG:              77,

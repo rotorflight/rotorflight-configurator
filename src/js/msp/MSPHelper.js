@@ -366,10 +366,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.ARMING_CONFIG.auto_disarm_delay = data.readU8();
                 break;
 
-            case MSPCodes.MSP_LOOP_TIME:
-                FC.FC_CONFIG.loopTime = data.readU16();
-                break;
-
             case MSPCodes.MSP_MOTOR_CONFIG:
                 FC.MOTOR_CONFIG.minthrottle = data.readU16();
                 FC.MOTOR_CONFIG.maxthrottle = data.readU16();
@@ -585,6 +581,12 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
                 for (let i = 0; i < data.byteLength; i++) {
                     FC.RC_MAP.push(data.readU8());
+                }
+                break;
+
+            case MSPCodes.MSP_RX_CHANNELS:
+                for (let i = 0; i < data.byteLength / 2; i++) {
+                    FC.RX_CHANNELS[i] = data.readU16();
                 }
                 break;
 
@@ -1348,9 +1350,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_SET_DEBUG_CONFIG:
                 console.log('Debug flags changed');
                 break;
-            case MSPCodes.MSP_SET_LOOP_TIME:
-                console.log('Looptime saved');
-                break;
             case MSPCodes.MSP_SET_ARMING_CONFIG:
                 console.log('Arming config saved');
                 break;
@@ -1588,10 +1587,6 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_ARMING_CONFIG:
             buffer.push8(FC.ARMING_CONFIG.auto_disarm_delay);
-            break;
-
-        case MSPCodes.MSP_SET_LOOP_TIME:
-            buffer.push16(FC.FC_CONFIG.loopTime);
             break;
 
         case MSPCodes.MSP_SET_MOTOR_CONFIG:

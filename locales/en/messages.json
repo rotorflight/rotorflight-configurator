@@ -1154,12 +1154,6 @@
     "configurationSerialPortsHelp": {
         "message": "Select function and speed for each serial port (UART)."
     },
-    "configurationReceiver": {
-        "message": "Receiver"
-    },
-    "configurationReceiverMode": {
-        "message": "Receiver Mode"
-    },
     "configurationRSSI": {
         "message": "RSSI (Signal Strength)"
     },
@@ -1171,12 +1165,6 @@
     },
     "configurationFeaturesHelp": {
         "message": "<strong>Note:</strong> Not all combinations of features are valid.  When the flight controller firmware detects invalid feature combinations conflicting features will be disabled.<br /><strong>Note:</strong> Configure serial ports <span class=\"message-negative\">before</span> enabling the features that will use the ports."
-    },
-    "configurationSerialRXHelp": {
-        "message": "<strong>Note:</strong> Remember to configure a Serial Port (via Ports tab) and choose a Serial Receiver Provider when using RX_SERIAL feature."
-    },
-    "configurationSpiRxHelp": {
-        "message": "<strong>Note:</strong> The SPI RX provider will only work if the required hardware is on board or connected to an SPI bus."
     },
     "configurationOtherFeaturesHelp": {
         "message": "<strong>Note:</strong> Not all features are supported by all flight controllers. If you enable a specific feature, and it is disabled after you hit 'Save and Reboot', it means that this feature is not supported on your board."
@@ -1383,18 +1371,6 @@
         "message": "When enabled, only the first arm after the battery is connected will be used as home point. If not enabled, every time the quad is armed, the home point will be updated.",
         "description": "Help text for the option to set the Home Point with the first arm only, not with each arm in the GPS Configuration"
     },
-    "configurationSerialRX": {
-        "message": "Serial Receiver Protocol"
-    },
-    "configurationSerialRXInverted": {
-        "message": "Inverted Serial Line"
-    },
-    "configurationSerialRXHalfDuplex": {
-        "message": "Half-Duplex Communication"
-    },
-    "configurationSpiRX": {
-        "message": "SPI Bus Receiver Provider"
-    },
     "configurationEepromSaved": {
         "message": "EEPROM <span class=\"message-positive\">saved</span>"
     },
@@ -1506,116 +1482,6 @@
     "portsFunction_CUSTOM": {
         "message": "Custom"
     },
-    "receiverBars": {
-        "message": "Receiver Channels"
-    },
-    "receiverRcSmoothing": {
-        "message": "RC Smoothing"
-    },
-    "receiverRcSmoothingRoll": {
-        "message": "Roll Channel Smoothing"
-    },
-    "receiverRcSmoothingPitch": {
-        "message": "Pitch Channel Smoothing"
-    },
-    "receiverRcSmoothingYaw": {
-        "message": "Yaw Channel Smoothing"
-    },
-    "receiverRcSmoothingThrottle": {
-        "message": "Throttle Channel Smoothing"
-    },
-    "receiverRcSmoothingCollective": {
-        "message": "Collective Channel Smoothing"
-    },
-    "receiverRcSmoothingAuto": {
-        "message": "Auto"
-    },
-    "receiverRcSmoothingManual": {
-        "message": "Manual"
-    },
-    "receiverRcSmoothingAutoSmoothness": {
-        "message": "Auto Smoothness",
-        "description": "Auto Smoothness parameter for RC smoothing"
-    },
-    "receiverRcSmoothingAutoSmoothnessHelp": {
-        "message": "Adjusts the Auto smoothing calculation, 10 is the default smoothing to delay ratio. Increasing the number will smooth RC inputs more, while also adding delay. This may be useful for unreliable RC connections or for cinematic flying.<br>Be careful with numbers approaching 50, input delay will become noticeable.<br>Use the CLI command rc_smoothing_info while TX and RX are powered to see the automatically calculated RC smoothing cutoffs. ",
-        "description": "Auto Smoothness parameter help message"
-    },
-    "receiverRcDerivativeTypeSelect": {
-        "message": "Derivative Cutoff Type"
-    },
-    "receiverRcInputTypeSelect": {
-        "message": "Input Cutoff Type"
-    },
-    "receiverRcSmoothingInterpolation": {
-        "message": "Interpolation"
-    },
-    "receiverRcSmoothingFilter": {
-        "message": "Filter"
-    },
-    "rcSmoothingInputCutoffHelp": {
-        "message": "The cutoff frequency in Hz used by the input filter. Using lower values will result in smoother inputs and are more appropriate for slower receiver protocols. Most users should leave this at 0 corresponding to \"Auto\"."
-    },
-    "rcSmoothingDerivativeCutoffHelp": {
-        "message": "The cutoff frequency in Hz used by the setpoint derivative filter. Using lower values will result in smoother inputs and are more appropriate for slower receiver protocols. Most users should leave this at 0 corresponding to \"Auto\"."
-    },
-    "rcSmoothingDerivativeTypeHelp": {
-        "message": "The type of filtering method used for the setpoint derivative. Starting with 4.2 the default value of \"Auto\" is recommended. For 4.1 and earlier most users should use the default \"BIQUAD\" value as it provides a good balance between smoothness and delay. \"PT1\" reduces the delay slightly but provides less smoothing."
-    },
-    "rcSmoothingInputTypeHelp": {
-        "message": "The type of filtering method used for the input. Most users should use the default \"BIQUAD\" value as it provides a good balance between smoothness and delay. \"PT1\" reduces the delay slightly but provides less smoothing."
-    },
-    "receiverRcSmoothingInputManual": {
-        "message": "Selects whether the input filter cutoff frequency is automatically calculated (recommended) or manually selected by the user. Using \"Manual\" is not recommended for receiver protocols like Crossfire which can change in flight."
-    },
-    "receiverRcSmoothingDerivativeManual": {
-        "message": "Selects whether the setpoint derivative filter cutoff frequency is automatically calculated (recommended) or manually selected by the user. Using \"Manual\" is not recommended for receiver protocols like Crossfire which can change in flight."
-    },
-    "receiverRcSmoothingInputHz": {
-        "message": "Input Cutoff Frequency"
-    },
-    "receiverRcSmoothingDerivativeCutoff": {
-        "message": "Derivative Cutoff Frequency"
-    },
-    "receiverRcInputType": {
-        "message": "Input Filter Type"
-    },
-    "receiverRcDerivativeType": {
-        "message": "Derivative Filter Type"
-    },
-    "receiverRcSmoothingDerivativeTypeOff": {
-        "message": "Off"
-    },
-    "receiverRcSmoothingDerivativeTypeAuto": {
-        "message": "Auto"
-    },
-    "receiverRcInterpolation": {
-        "message": "RC Interpolation"
-    },
-    "receiverRcInterpolationHelp": {
-        "message": "RC TX/RX systems are not as fast as PID loops. That means that PID loop has gaps in the information stream from RC systems. This option enables interpolation of the RC input during the times when no RC frames are received. The option also offers cleaner P and D behaviour as there are no ramps in control input."
-    },
-    "receiverRcInterpolationIntervalHelp": {
-        "message": "Interpolation interval for manual RC interpolation mode in milliseconds"
-    },
-    "receiverRcInterpolationOff": {
-        "message": "Off"
-    },
-    "receiverRcSmoothingType": {
-        "message": "Smoothing Type"
-    },
-    "receiverRcInterpolationDefault": {
-        "message": "Preset"
-    },
-    "receiverRcInterpolationAuto": {
-        "message": "Auto"
-    },
-    "receiverRcInterpolationManual": {
-        "message": "Manual"
-    },
-    "receiverRcInterpolationInterval": {
-        "message": "RC Interpolation Interval [ms]"
-    },
     "dialogCopyProfileText": {
         "message": "Copy values from the current profile to"
     },
@@ -1725,53 +1591,80 @@
     "profilesActivateProfile": {
         "message": "Loaded Profile: <strong class=\"message-positive\">$1</strong>"
     },
-    "receiverHelp": {
-        "message": "Please read receiver chapter of the documentation.  Configure serial port (if required), receiver mode (serial/ppm/pwm), provider (for serial receivers), bind receiver, set channel map, configure channel endpoints/range on TX so that all channels go from ~1000 to ~2000.  Set midpoint (default 1500), trim channels to 1500, configure stick deadband, verify behaviour when TX is off or out of range.<br /><span class=\"message-negative\">IMPORTANT:</span> Before flying read failsafe chapter of documentation and configure failsafe."
+    "receiverSelection": {
+        "message": "Receiver Type"
     },
-    "receiverStickMin": {
-        "message": "'Stick Low' Threshold"
+    "receiverSettings": {
+        "message": "Receiver Settings"
     },
-    "receiverHelpStickMin": {
-        "message": "The maximum value (in us) for a stick to be recognised as low / left for command input (MIN_CHECK)."
+    "receiverProtocol": {
+        "message": "Receiver Protocol"
+    },
+    "receiverHelpProtocol": {
+        "message": "Select the protocol that the receiver is using"
+    },
+    "receiverSerialHalfDuplex": {
+        "message": "One-wire Communication (Half-Duplex)"
+    },
+    "receiverSerialInverted": {
+        "message": "Inverted Serial Signaling"
     },
     "receiverStickCenter": {
         "message": "Stick Center"
     },
     "receiverHelpStickCenter": {
-        "message": "The value (in us) used to determine if a stick is centered (MID_RC)."
+        "message": "The value of stick (channel) center in µs. Usually 1500µs or 1520µs."
     },
-    "receiverStickMax": {
+    "receiverStickCommandMin": {
+        "message": "'Stick Low' Threshold"
+    },
+    "receiverHelpStickCommandMin": {
+        "message": "The maximum value (in µs) for a stick to be recognised as low / left for command input (MIN_CHECK)."
+    },
+    "receiverStickCommandMax": {
         "message": "'Stick High' Threshold"
     },
-    "receiverHelpStickMax": {
-        "message": "The minimum value (in us) for a stick to be recognised as high / right for command input (MAX_CHECK)."
+    "receiverHelpStickCommandMax": {
+        "message": "The minimum value (in µs) for a stick to be recognised as high / right for command input (MAX_CHECK)."
     },
-    "receiverDeadband": {
-        "message": "RC Deadband"
+    "receiverCyclicDeadband": {
+        "message": "Cyclic Deadband"
     },
-    "receiverHelpDeadband": {
-        "message": "These are values (in us) by how much RC input can be different before it's considered valid. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle."
+    "receiverHelpCyclicDeadband": {
+        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle."
     },
     "receiverYawDeadband": {
         "message": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "These are values (in us) by how much RC input can be different before it's considered valid. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
+        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
     },
-    "receiverChannelMap": {
-        "message": "Channel Map"
+    "receiverRxMinUsec": {
+        "message": "Minimum channel value"
+    },
+    "receiverHelpRxMinUsec": {
+        "message": "The minimum RX channel value (in µs) that is considered valid."
+    },
+    "receiverRxMaxUsec": {
+        "message": "Maximum channel value"
+    },
+    "receiverHelpRxMaxUsec": {
+        "message": "The maximum RX channel value (in µs) that is considered valid."
+    },
+    "receiverTelemetry": {
+        "message": "Telemetry Settings"
+    },
+    "receiverBars": {
+        "message": "Receiver Channels"
+    },
+    "receiverChannelOrder": {
+        "message": "Channel Order Preset"
     },
     "receiverChannelDefaultOption": {
         "message": "Default"
     },
-    "receiverChannelMapTitle": {
-        "message": "You can define your own channel map by clicking inside the box"
-    },
-    "receiverRssiChannel": {
-        "message": "RSSI Channel"
-    },
-    "receiverRssiChannelDisabledOption": {
-        "message": "Disabled"
+    "receiverHelpChannelOrder": {
+        "message": "Select one of the presets from the dropdown menu, or enter your own channel order."
     },
     "receiverButtonBind": {
         "message": "Bind Receiver"
@@ -3698,11 +3591,14 @@
     "controlAxisYaw": {
         "message": "Yaw [R]"
     },
+    "controlAxisCollective": {
+        "message": "Coll [C]"
+    },
     "controlAxisThrottle": {
         "message": "Throttle [T]"
     },
-    "controlAxisCollective": {
-        "message": "Coll [C]"
+    "controlAxisThr": {
+        "message": "Throttle"
     },
     "controlAxisAux1": {
         "message": "AUX 1"

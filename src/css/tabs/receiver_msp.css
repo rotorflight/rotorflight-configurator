@@ -112,6 +112,10 @@ a:hover {
     text-decoration: none;
 }
 
+.button-enable {
+    padding-top: 15px;
+}
+
 .button-enable a {
     /* Center the button */
     position: absolute;

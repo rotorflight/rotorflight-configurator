@@ -8,39 +8,37 @@ const CHANNEL_MIN_VALUE = 1000;
 const CHANNEL_MID_VALUE = 1500;
 const CHANNEL_MAX_VALUE = 2000;
 
-    // What's the index of each channel in the MSP channel list?
-const channelMSPIndexes = {
-    Roll: 0,
-    Pitch: 1,
-    Throttle: 2,
-    Yaw: 3,
-    Aux1: 4,
-    Aux2: 5,
-    Aux3: 6,
-    Aux4: 7,
-};
-
-    // Set reasonable initial stick positions (Mode 2)
-const stickValues = {
-    Throttle: CHANNEL_MIN_VALUE,
-    Pitch: CHANNEL_MID_VALUE,
-    Roll: CHANNEL_MID_VALUE,
-    Yaw: CHANNEL_MID_VALUE,
-    Aux1: CHANNEL_MIN_VALUE,
-    Aux2: CHANNEL_MIN_VALUE,
-    Aux3: CHANNEL_MIN_VALUE,
-    Aux4: CHANNEL_MIN_VALUE,
-};
-
-    // First the vertical axis, then the horizontal:
-const gimbals = [
-    ["Throttle", "Yaw"],
-    ["Pitch", "Roll"],
+const channelNames = [
+    'Roll',
+    'Pitch',
+    'Yaw',
+    'Collective',
+    'Throttle',
+    'Aux1',
+    'Aux2',
+    'Aux3',
 ];
 
-let gimbalElems;
-let sliderElems;
-let enableTX = false;
+const channelValues = [
+    CHANNEL_MID_VALUE,
+    CHANNEL_MID_VALUE,
+    CHANNEL_MID_VALUE,
+    CHANNEL_MID_VALUE,
+    CHANNEL_MIN_VALUE,
+    CHANNEL_MIN_VALUE,
+    CHANNEL_MIN_VALUE,
+    CHANNEL_MIN_VALUE,
+];
+
+const gimbalChannels = [
+    [ 2, 3 ],
+    [ 0, 1 ],
+];
+
+var gimbalElems;
+var sliderElems;
+
+var enableTX = false;
 
 // This is a hack to get the i18n var of the parent, but the localizePage not works
 const i18n = opener.i18n;
@@ -58,7 +56,6 @@ const watchers = {
 $(document).ready(function () {
     $('[i18n]:not(.i18n-replaced)').each(function() {
         const element = $(this);
-
         element.html(i18n.getMessage(element.attr('i18n')));
         element.addClass('i18n-replaced');
     });
@@ -66,95 +63,110 @@ $(document).ready(function () {
     windowWatcherUtil.bindWatchers(window, watchers);
 });
 
-function transmitChannels() {
-    const channelValues = [0, 0, 0, 0, 0, 0, 0, 0];
+function applyDarkTheme()
+{
+    css_dark.forEach((el) => $('link[href="' + el + '"]').prop('disabled', false));
+}
 
-    if (!enableTX) {
-        return;
+function applyNormalTheme()
+{
+    css_dark.forEach((el) => $('link[href="' + el + '"]').prop('disabled', true));
+}
+
+function localizeAxisNames()
+{
+    for (const gimbalIndex in gimbalChannels) {
+        const gimbal = gimbalElems.get(gimbalIndex);
+        const hChannel = gimbalChannels[gimbalIndex][0];
+        const vChannel = gimbalChannels[gimbalIndex][1];
+        $(".gimbal-label-horz", gimbal).text(i18n.getMessage("controlAxis" + channelNames[hChannel]));
+        $(".gimbal-label-vert", gimbal).text(i18n.getMessage("controlAxis" + channelNames[vChannel]));
     }
 
-    for (const stickName in stickValues) {
-        channelValues[channelMSPIndexes[stickName]] = stickValues[stickName];
-    }
+    $(".slider-label", sliderElems.get(0)).text(i18n.getMessage("controlAxisThr"));
 
-    // Callback given to us by the window creator so we can have it send data over MSP for us:
-    if (!window.setRawRx(channelValues)) {
-        // MSP connection has gone away
-        chrome.app.window.current().close();
+    for (let sliderIndex = 1; sliderIndex < 4; sliderIndex++) {
+        $(".slider-label", sliderElems.get(sliderIndex)).text(i18n.getMessage("controlAxisAux" + sliderIndex));
     }
 }
 
-function stickPortionToChannelValue(portion) {
-    portion = Math.min(Math.max(portion, 0.0), 1.0);
-
-    return Math.round(portion * (CHANNEL_MAX_VALUE - CHANNEL_MIN_VALUE) + CHANNEL_MIN_VALUE);
-}
-
-function channelValueToStickPortion(channel) {
-    return (channel - CHANNEL_MIN_VALUE) / (CHANNEL_MAX_VALUE - CHANNEL_MIN_VALUE);
-}
-
-function updateControlPositions() {
-    for (const stickName in stickValues) {
-        const stickValue = stickValues[stickName];
-
-        // Look for the gimbal which corresponds to this stick name
-        for (const gimbalIndex in gimbals) {
-            const gimbal = gimbals[gimbalIndex],
-                gimbalElem = gimbalElems.get(gimbalIndex),
-                gimbalSize = $(gimbalElem).width(),
-                stickElem = $(".control-stick", gimbalElem);
-
-            if (gimbal[0] == stickName) {
-                stickElem.css('top', (1.0 - channelValueToStickPortion(stickValue)) * gimbalSize + "px");
-                break;
-            } else if (gimbal[1] == stickName) {
-                stickElem.css('left', channelValueToStickPortion(stickValue) * gimbalSize + "px");
-                break;
-            }
+function transmitChannels()
+{
+    if (enableTX) {
+        // Callback given to us by the window creator so we can have it send data over MSP for us:
+        if (!window.setRawRx(channelValues)) {
+            // MSP connection has gone away
+            chrome.app.window.current().close();
         }
     }
 }
 
-function handleGimbalMouseDrag(e) {
-    const gimbal = $(gimbalElems.get(e.data.gimbalIndex)),
-        gimbalOffset = gimbal.offset(),
-        gimbalSize = gimbal.width();
-
-    stickValues[gimbals[e.data.gimbalIndex][0]] = stickPortionToChannelValue(1.0 - (e.pageY - gimbalOffset.top) / gimbalSize);
-    stickValues[gimbals[e.data.gimbalIndex][1]] = stickPortionToChannelValue((e.pageX - gimbalOffset.left) / gimbalSize);
-
-    updateControlPositions();
+function stickPositionToChannelValue(value)
+{
+    value = Math.min(Math.max(value, 0.0), 1.0);
+    return Math.round(value * (CHANNEL_MAX_VALUE - CHANNEL_MIN_VALUE) + CHANNEL_MIN_VALUE);
 }
 
-function localizeAxisNames() {
-    for (const gimbalIndex in gimbals) {
-        const gimbal = gimbalElems.get(gimbalIndex);
+function channelValueToStickPosition(value)
+{
+    return (value - CHANNEL_MIN_VALUE) / (CHANNEL_MAX_VALUE - CHANNEL_MIN_VALUE);
+}
 
-        $(".gimbal-label-vert", gimbal).text(i18n.getMessage("controlAxis" + gimbals[gimbalIndex][0]));
-        $(".gimbal-label-horz", gimbal).text(i18n.getMessage("controlAxis" + gimbals[gimbalIndex][1]));
+function updateGimbal(gimbalElem, x, y)
+{
+    const gimbalSize = $(gimbalElem).width();
+    const stickElem = $(".control-stick", gimbalElem);
+
+    stickElem.css('top', (1.0 - channelValueToStickPosition(y)) * gimbalSize + "px");
+    stickElem.css('left', channelValueToStickPosition(x) * gimbalSize + "px");
+}
+
+function handleGimbalMouseDrag(gimbalElem, gimbalIndex, event)
+{
+    const gimbalOffset = gimbalElem.offset();
+    const gimbalSize = gimbalElem.width();
+
+    const xChannel = gimbalChannels[gimbalIndex][0];
+    const yChannel = gimbalChannels[gimbalIndex][1];
+
+    const yValue = stickPositionToChannelValue(1.0 - (event.pageY - gimbalOffset.top) / gimbalSize);
+    const xValue = stickPositionToChannelValue((event.pageX - gimbalOffset.left) / gimbalSize);
+
+    channelValues[xChannel] = xValue;
+    channelValues[yChannel] = yValue;
+
+    updateGimbal(gimbalElem, xValue, yValue);
+}
+
+function resetGimbal(gimbalElem, gimbalIndex)
+{
+    const xChannel = gimbalChannels[gimbalIndex][0];
+    const yChannel = gimbalChannels[gimbalIndex][1];
+
+    const yValue = CHANNEL_MID_VALUE;
+    const xValue = CHANNEL_MID_VALUE;
+
+    channelValues[xChannel] = xValue;
+    channelValues[yChannel] = yValue;
+
+    updateGimbal(gimbalElem, xValue, yValue);
+}
+
+function resetControls()
+{
+    for (const gimbalIndex in gimbalChannels) {
+        const gimbalElem = gimbalElems.get(gimbalIndex);
+        resetGimbal(gimbalElem, gimbalIndex);
     }
-
-    for (let sliderIndex = 0; sliderIndex < 4; sliderIndex++) {
-        $(".slider-label", sliderElems.get(sliderIndex)).text(i18n.getMessage("controlAxisAux" + (sliderIndex + 1)));
-    }
-}
-
-function applyDarkTheme() {
-    css_dark.forEach((el) => $('link[href="' + el + '"]').prop('disabled', false));
-}
-
-function applyNormalTheme() {
-    css_dark.forEach((el) => $('link[href="' + el + '"]').prop('disabled', true));
 }
 
 $(document).ready(function() {
     $(".button-enable .btn").click(function() {
-        const shrinkHeight = $(".warning").height();
+        const shrinkHeight = $(".warning").height() + 25;
 
         $(".warning").slideUp("short", function() {
-            chrome.app.window.current().innerBounds.minHeight -= shrinkHeight;
             chrome.app.window.current().innerBounds.height -= shrinkHeight;
+            chrome.app.window.current().innerBounds.minHeight -= shrinkHeight;
             chrome.app.window.current().innerBounds.maxHeight -= shrinkHeight;
         });
 
@@ -165,48 +177,42 @@ $(document).ready(function() {
     sliderElems = $(".control-slider");
 
     gimbalElems.each(function(gimbalIndex) {
-        $(this).on('mousedown', {gimbalIndex: gimbalIndex}, function(e) {
-            if (e.which == 1) { // Only move sticks on left mouse button
-                handleGimbalMouseDrag(e);
-
-                $(window).on('mousemove', {gimbalIndex: gimbalIndex}, handleGimbalMouseDrag);
+        const gimbalElem = $(this);
+        gimbalElem.on('mousemove', function(event) {
+            if (event.buttons == 1) {
+                handleGimbalMouseDrag(gimbalElem, gimbalIndex, event);
             }
+        });
+        gimbalElem.on('click', function(event) {
+            handleGimbalMouseDrag(gimbalElem, gimbalIndex, event);
+        });
+        gimbalElem.on('dblclick', function(event) {
+            resetGimbal(gimbalElem, gimbalIndex);
         });
     });
 
     $(".slider", sliderElems).each(function(sliderIndex) {
-        const initialValue = stickValues[`Aux${sliderIndex + 1}`];
-
         $(this)
             .noUiSlider({
-                start: initialValue,
+                start: CHANNEL_MIN_VALUE,
                 range: {
                     min: CHANNEL_MIN_VALUE,
                     max: CHANNEL_MAX_VALUE
                 }
             }).on('slide change set', function(e, value) {
                 value = Math.round(parseFloat(value));
-
-                stickValues[`Aux${(sliderIndex + 1)}`] = value;
-
+                channelValues[sliderIndex + 4] = value;
                 $(".tooltip", this).text(value);
             });
 
         $(this).append('<div class="tooltip"></div>');
 
-        $(".tooltip", this).text(initialValue);
-    });
-
-    /*
-     * Mouseup handler needs to be bound to the window in order to receive mouseup if mouse leaves window.
-     */
-    $(window).mouseup(function(e) {
-        $(this).off('mousemove', handleGimbalMouseDrag);
+        $(".tooltip", this).text(CHANNEL_MIN_VALUE);
     });
 
     localizeAxisNames();
 
-    updateControlPositions();
+    resetControls();
 
     setInterval(transmitChannels, 50);
 });

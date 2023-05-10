@@ -114,7 +114,6 @@ const FC = {
     DATAFLASH: null,
     DEFAULT: null,
     FAILSAFE_CONFIG: null,
-    FC_CONFIG: null,
     FEATURE_CONFIG: null,
     FILTER_CONFIG: null,
     RPM_FILTER_CONFIG: null,
@@ -261,6 +260,8 @@ const FC = {
             channels:                   Array.from({length: 32}),
         };
 
+        this.RX_CHANNELS = Array.from({length: 32});
+
         this.RC_TUNING = {
             RC_RATE:                    0,
             RC_EXPO:                    0,
@@ -374,10 +375,6 @@ const FC = {
         this.ARMING_CONFIG = {
             auto_disarm_delay:          0,
             disarm_kill_switch:         0,
-        };
-
-        this.FC_CONFIG = {
-            loopTime:                   0,
         };
 
         this.MOTOR_CONFIG = {

@@ -832,11 +832,11 @@ progress[value]::-webkit-progress-bar {
     color: white;
 }
 
-.tab-receiver .bars .bar {
+.tab-receiver .channels .bar {
     background-color: #393b3a;
 }
 
-.tab-receiver .bars .label {
+.tab-receiver .channels .label {
     color: white;
 }
 
