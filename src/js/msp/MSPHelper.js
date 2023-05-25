@@ -883,14 +883,13 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_RPM_FILTER:
                 FC.RPM_FILTER_CONFIG = [];
-                if (data.byteLength % 9 == 0) {
-                    for (let i=0; i<data.byteLength; i+=9) {
+                if (data.byteLength % 6 == 0) {
+                    for (let i=0; i<data.byteLength; i+=6) {
                         FC.RPM_FILTER_CONFIG.push({
                             rpm_source : data.readU8(),
-                            freq_ratio : data.readU16(),
-                            notch_q    : data.readU16(),
-                            min_hz     : data.readU16(),
-                            max_hz     : data.readU16(),
+                            rpm_ratio  : data.readU16(),
+                            rpm_limit  : data.readU16(),
+                            notch_q    : data.readU8(),
                         });
                     }
                 }
@@ -2016,10 +2015,9 @@ MspHelper.prototype.sendRPMFilter = function(filterIndex, onCompleteCallback)
 
     buffer.push8(filterIndex)
           .push8(CONFIG.rpm_source)
-          .push16(CONFIG.freq_ratio)
-          .push16(CONFIG.notch_q)
-          .push16(CONFIG.min_hz)
-          .push16(CONFIG.max_hz);
+          .push16(CONFIG.rpm_ratio)
+          .push16(CONFIG.rpm_limit)
+          .push8(CONFIG.notch_q);
 
     MSP.send_message(MSPCodes.MSP_SET_RPM_FILTER, buffer, false, onCompleteCallback);
 };

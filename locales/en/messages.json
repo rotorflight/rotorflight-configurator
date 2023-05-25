@@ -4266,38 +4266,43 @@
         "message": "Main Rotor Minimum Filtered RPM"
     },
     "gyroRpmFilterMainRotorMinRPMHelp": {
-        "message": "Main Rotor Minimum Filtered RPM"
+        "message": "Minimum Main Rotor RPM accepted by the filters"
     },
     "gyroRpmFilterTailRotorMinRPM": {
         "message": "Tail Rotor Minimum Filtered RPM"
     },
     "gyroRpmFilterTailRotorMinRPMHelp": {
-        "message": "Tail Rotor Minimum Filtered RPM"
+        "message": "Minimum Tail Rotor RPM accepted by the filters"
     },
     "gyroRpmFilterBanks": {
         "message": "Gyro RPM Notch Filter Banks"
     },
     "gyroRpmFilterHelp": {
-        "message": "RPM filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
-        "description": "Header text for the RPM Filter group"
+        "message": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
     },
     "gyroRpmFilterMainRotorGroup": {
         "message": "Main Rotor Notch Filters"
     },
     "gyroRpmFilterMainRotorHelp": {
-        "message": "RPM filters for the main rotor harmonics"
+        "message": "RPM controlled filters for the main rotor harmonics"
     },
     "gyroRpmFilterTailRotorGroup": {
         "message": "Tail Rotor Notch Filters"
     },
     "gyroRpmFilterTailRotorHelp": {
-        "message": "RPM filters for the tail rotor harmonics"
+        "message": "RPM controlled filters for the tail rotor harmonics"
     },
     "gyroRpmFilterMainMotorGroup": {
         "message": "Main Motor Notch Filters"
     },
     "gyroRpmFilterMainMotorHelp": {
-        "message": "RPM filters for the main motor harmonics"
+        "message": "RPM controlled filters for the main motor harmonics"
+    },
+    "gyroRpmFilterTailMotorGroup": {
+        "message": "Tail Motor Notch Filters"
+    },
+    "gyroRpmFilterTailMotorHelp": {
+        "message": "RPM controlled filters for the tail motor harmonics"
     },
     "gyroRpmFilterH1": {
         "message": "Fundamental Frequency Notch type"
