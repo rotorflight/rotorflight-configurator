@@ -873,16 +873,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.FILTER_CONFIG.gyro_notch_cutoff = data.readU16();
                 FC.FILTER_CONFIG.gyro_notch2_hz = data.readU16();
                 FC.FILTER_CONFIG.gyro_notch2_cutoff = data.readU16();
-                FC.FILTER_CONFIG.dterm_lowpass_type = data.readU8();
-                FC.FILTER_CONFIG.dterm_lowpass_hz = data.readU16();
-                FC.FILTER_CONFIG.dterm_lowpass2_type = data.readU8();
-                FC.FILTER_CONFIG.dterm_lowpass2_hz = data.readU16();
-                FC.FILTER_CONFIG.dterm_notch_hz = data.readU16();
-                FC.FILTER_CONFIG.dterm_notch_cutoff = data.readU16();
                 FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz = data.readU16();
                 FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz = data.readU16();
-                FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz = data.readU16();
-                FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz = data.readU16();
                 FC.FILTER_CONFIG.dyn_notch_width_percent = data.readU8();
                 FC.FILTER_CONFIG.dyn_notch_q = data.readU16();
                 FC.FILTER_CONFIG.dyn_notch_min_hz = data.readU16();
@@ -1730,16 +1722,8 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.FILTER_CONFIG.gyro_notch_cutoff)
                 .push16(FC.FILTER_CONFIG.gyro_notch2_hz)
                 .push16(FC.FILTER_CONFIG.gyro_notch2_cutoff)
-                .push8(FC.FILTER_CONFIG.dterm_lowpass_type)
-                .push16(FC.FILTER_CONFIG.dterm_lowpass_hz)
-                .push8(FC.FILTER_CONFIG.dterm_lowpass2_type)
-                .push16(FC.FILTER_CONFIG.dterm_lowpass2_hz)
-                .push16(FC.FILTER_CONFIG.dterm_notch_hz)
-                .push16(FC.FILTER_CONFIG.dterm_notch_cutoff)
                 .push16(FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz)
                 .push16(FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz)
-                .push16(FC.FILTER_CONFIG.dterm_lowpass_dyn_min_hz)
-                .push16(FC.FILTER_CONFIG.dterm_lowpass_dyn_max_hz)
                 .push8(FC.FILTER_CONFIG.dyn_notch_width_percent)
                 .push16(FC.FILTER_CONFIG.dyn_notch_q)
                 .push16(FC.FILTER_CONFIG.dyn_notch_min_hz)
