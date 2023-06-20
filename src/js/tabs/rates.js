@@ -87,6 +87,9 @@ TABS.rates.initialize = function (callback) {
         });
         ratesTypeListElement.val(self.currentRatesType);
 
+        const ratesSmoothnessInputElement = $('.rates_smoothness input[id="ratesSmoothness"]');
+        ratesSmoothnessInputElement.val(FC.RC_TUNING.rates_smoothness);
+
         self.changeRatesLogo();
         self.initRatesSystem();
     }
@@ -95,6 +98,9 @@ TABS.rates.initialize = function (callback) {
 
         // Rates type
         FC.RC_TUNING.rates_type = parseInt($('.rates_type select[id="ratesType"]').val());
+
+        // Rates smoothness
+        FC.RC_TUNING.rates_smoothness = parseInt($('.rates_smoothness input[id="ratesSmoothness"]').val());
 
         // catch RC_tuning changes
         const roll_pitch_rate_e = $('.rates_setup input[name="roll_pitch_rate"]');

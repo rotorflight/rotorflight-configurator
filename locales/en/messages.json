@@ -4082,6 +4082,9 @@
     "rateSetupRatesTypeTip": {
         "message": "Changing rates type will change the rates curve and the way you can set it"
     },
+    "ratesSetupRatesSmoothness": {
+        "message": "Rates Smoothness"
+    },
     "rateSetupRate": {
         "message": "Rate"
     },

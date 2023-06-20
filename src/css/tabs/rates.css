@@ -148,6 +148,11 @@
     text-align-last: left;
 }
 
+.tab-rates table .rates_smoothness input
+{
+    display: inline;
+}
+
 .tab-rates .tab-container {
     border-bottom: 3px solid var(--accent);
     border-right-width: 0;
