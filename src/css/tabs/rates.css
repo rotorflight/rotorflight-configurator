@@ -291,6 +291,9 @@
     background-color: #8080FF;
 }
 
+.rates_collective {
+    background-color: #fff200;
+}
 
 .tab-rates .rates_titlebar td:first-child {
     text-align: left;
