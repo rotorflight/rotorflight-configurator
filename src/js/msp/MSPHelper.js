@@ -346,6 +346,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.RC_TUNING.RC_YAW_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.yaw_rate = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.yaw_rate_limit = data.readU16();
+                FC.RC_TUNING.rcCollectiveRate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.RC_COLLECTIVE_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.collective_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.collective_rate_limit = data.readU16();
                 FC.RC_TUNING.rates_smoothness = data.readU8();
                 break;
 
@@ -1557,6 +1561,10 @@ MspHelper.prototype.crunch = function(code) {
                   .push8(Math.round(FC.RC_TUNING.RC_YAW_EXPO * 100))
                   .push8(Math.round(FC.RC_TUNING.yaw_rate * 100))
                   .push16(FC.RC_TUNING.yaw_rate_limit);
+            buffer.push8(Math.round(FC.RC_TUNING.rcCollectiveRate * 100))
+                  .push8(Math.round(FC.RC_TUNING.RC_COLLECTIVE_EXPO * 100))
+                  .push8(Math.round(FC.RC_TUNING.collective_rate * 100))
+                  .push16(FC.RC_TUNING.collective_rate_limit);
             buffer.push8(FC.RC_TUNING.rates_smoothness);
             break;
 

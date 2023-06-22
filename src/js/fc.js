@@ -268,6 +268,7 @@ const FC = {
             roll_rate:                  0,
             pitch_rate:                 0,
             yaw_rate:                   0,
+            collective_rate:            0,
             dynamic_THR_PID:            0,
             throttle_MID:               0,
             throttle_EXPO:              0,
@@ -276,9 +277,12 @@ const FC = {
             rcYawRate:                  0,
             rcPitchRate:                0,
             RC_PITCH_EXPO:              0,
+            rcCollectiveRate:           0,
+            RC_COLLECTIVE_EXPO:         0,
             roll_rate_limit:            1998,
             pitch_rate_limit:           1998,
             yaw_rate_limit:             1998,
+            collective_rate_limit:      1998,
             rates_smoothness:           0,
         };
 
