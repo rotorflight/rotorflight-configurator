@@ -247,6 +247,7 @@ TABS.rates.initialize = function (callback) {
         self.maxAngularVelRollElement    = $('.rates_setup .maxAngularVelRoll');
         self.maxAngularVelPitchElement   = $('.rates_setup .maxAngularVelPitch');
         self.maxAngularVelYawElement     = $('.rates_setup .maxAngularVelYaw');
+        self.maxCollectiveAngleElement   = $('.rates_setup .maxCollectiveAngle');
 
         rcCurveElement.width = 1000;
         rcCurveElement.height = 1000;
@@ -302,10 +303,12 @@ TABS.rates.initialize = function (callback) {
                     drawAxes(curveContext, curveWidth, curveHeight);
 
                     curveContext.lineWidth = 2 * lineScale;
-                    drawCurve(self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, '#ff0000', 0, curveContext);
-                    drawCurve(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -4, curveContext);
-                    drawCurve(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 4, curveContext);
-                    //drawCurve(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.collective_rate_limit, maxAngularVel, '#0000ff', 4, curveContext);
+                    drawCurve(self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, '#ff0000', 2, curveContext);
+                    drawCurve(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -6, curveContext);
+                    drawCurve(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 6, curveContext);
+
+                    const maxCollectiveAngle = printMaxAngularVel(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.collective_rate_limit, self.maxCollectiveAngleElement);
+                    drawCurve(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.collective_rate_limit, maxCollectiveAngle, '#ffbb00', 2, curveContext);
 
                     self.updateRatesLabels();
 
