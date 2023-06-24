@@ -136,11 +136,11 @@ TABS.rates.initialize = function (callback) {
                 FC.RC_TUNING.pitch_rate         /= 100;
                 FC.RC_TUNING.roll_rate          /= 100;
                 FC.RC_TUNING.yaw_rate           /= 100;
-                FC.RC_TUNING.collective_rate    /= 1.2;
+                FC.RC_TUNING.collective_rate    /= 100;
                 FC.RC_TUNING.rcPitchRate        /= 1000;
                 FC.RC_TUNING.RC_RATE            /= 1000;
                 FC.RC_TUNING.rcYawRate          /= 1000;
-                FC.RC_TUNING.rcCollectiveRate   /= 12;
+                FC.RC_TUNING.rcCollectiveRate   /= 1000;
                 FC.RC_TUNING.RC_PITCH_EXPO      /= 100;
                 FC.RC_TUNING.RC_EXPO            /= 100;
                 FC.RC_TUNING.RC_YAW_EXPO        /= 100;
@@ -162,7 +162,7 @@ TABS.rates.initialize = function (callback) {
                 FC.RC_TUNING.pitch_rate         /= 1000;
                 FC.RC_TUNING.roll_rate          /= 1000;
                 FC.RC_TUNING.yaw_rate           /= 1000;
-                FC.RC_TUNING.collective_rate    /= 12;
+                FC.RC_TUNING.collective_rate    /= 1000;
                 break;
 
             default: // BetaFlight
@@ -691,10 +691,10 @@ TABS.rates.updateRatesLabels = function() {
             // add the current rc values
             if (currentValues[0] && currentValues[1] && currentValues[2] && currentValues[3]) {
                 balloons.push(
+                    {value: parseInt(currentValues[3]), balloon: function() {drawBalloonLabel(stickContext, currentValues[3], 10, 50,  'none', BALLOON_COLORS.collective, balloonsDirty);}},
                     {value: parseInt(currentValues[0]), balloon: function() {drawBalloonLabel(stickContext, currentValues[0], 10, 150, 'none', BALLOON_COLORS.roll, balloonsDirty);}},
                     {value: parseInt(currentValues[1]), balloon: function() {drawBalloonLabel(stickContext, currentValues[1], 10, 250, 'none', BALLOON_COLORS.pitch, balloonsDirty);}},
-                    {value: parseInt(currentValues[2]), balloon: function() {drawBalloonLabel(stickContext, currentValues[2], 10, 350,  'none', BALLOON_COLORS.yaw, balloonsDirty);}},
-                    {value: parseInt(currentValues[3]), balloon: function() {drawBalloonLabel(stickContext, currentValues[3], 10, 450,  'none', BALLOON_COLORS.collective, balloonsDirty);}}
+                    {value: parseInt(currentValues[2]), balloon: function() {drawBalloonLabel(stickContext, currentValues[2], 10, 350,  'none', BALLOON_COLORS.yaw, balloonsDirty);}}
                 );
             }
             // then display them on the chart
@@ -737,11 +737,14 @@ TABS.rates.initRatesSystem = function() {
     let rcRateDef, rcRateMax, rcRateMin, rcRateStep, rcRateDec;
     let rateDef, rateMax, rateStep, rateDec;
     let expoDef, expoMax, expoStep, expoDec;
+    let rcColDef, rcColMax, rcColMin, rcColStep, rcColDec;
+    let colDef, colMax, colStep, colDec;
 
     let rcRateLabel, rateLabel, rcExpoLabel;
 
     const rateMin = 0;
     const expoMin = 0;
+    const colMin = 0;
 
     switch (self.currentRatesType) {
 
@@ -759,6 +762,15 @@ TABS.rates.initRatesSystem = function() {
             rateDef     = 0;
             rateMax     = 255;
             rateStep    = 1;
+            rcColDec    = 0;
+            rcColDef    = 360;
+            rcColMax    = 1000;
+            rcColMin    = 10;
+            rcColStep   = 10;
+            colDec      = 0;
+            colDef      = 0;
+            colMax      = 255;
+            colStep     = 1;
             expoDec     = 0;
             expoDef     = 0;
             expoMax     = 100;
@@ -780,6 +792,15 @@ TABS.rates.initRatesSystem = function() {
             rateDef     = 0.00;
             rateMax     = 0.99;
             rateStep    = 0.01;
+            rcColDec    = 2;
+            rcColDef    = 1.80;
+            rcColMax    = 2.55;
+            rcColMin    = 0.01;
+            rcColStep   = 0.01;
+            colDec      = 2;
+            colDef      = 0.00;
+            colMax      = 0.99;
+            colStep     = 0.01;
             expoDec     = 2;
             expoDef     = 0.00;
             expoMax     = 1.00;
@@ -801,6 +822,15 @@ TABS.rates.initRatesSystem = function() {
             rateDef     = 360;
             rateMax     = 1000;
             rateStep    = 10;
+            rcColDec    = 1;
+            rcColDef    = 12;
+            rcColMax    = 20;
+            rcColMin    = 0;
+            rcColStep   = 0.1;
+            colDec      = 1;
+            colDef      = 12;
+            colMax      = 20;
+            colStep     = 0.1;
             expoDec     = 2;
             expoDef     = 0.00;
             expoMax     = 1.00;
@@ -822,6 +852,15 @@ TABS.rates.initRatesSystem = function() {
             rateDef     = 360;
             rateMax     = 1000;
             rateStep    = 10;
+            rcColDec    = 2;
+            rcColDef    = 1.80;
+            rcColMax    = 2.55;
+            rcColMin    = 0.01;
+            rcColStep   = 0.01;
+            colDec      = 0;
+            colDef      = 360;
+            colMax      = 1000;
+            colStep     = 10;
             expoDec     = 2;
             expoDef     = 0.00;
             expoMax     = 1.00;
@@ -843,6 +882,15 @@ TABS.rates.initRatesSystem = function() {
             rateDef     = 0.00;
             rateMax     = 0.99;
             rateStep    = 0.01;
+            rcColDec    = 2;
+            rcColDef    = 1.80;
+            rcColMax    = 2.55;
+            rcColMin    = 0.01;
+            rcColStep   = 0.01;
+            colDec      = 2;
+            colDef      = 0.00;
+            colMax      = 0.99;
+            colStep     = 0.01;
             expoDec     = 2;
             expoDef     = 0.00;
             expoMax     = 1.00;
@@ -864,6 +912,15 @@ TABS.rates.initRatesSystem = function() {
                 rateDef     = 0;
                 rateMax     = 0;
                 rateStep    = 0;
+                rcColDec    = 0;
+                rcColDef    = 0;
+                rcColMax    = 0;
+                rcColMin    = 0;
+                rcColStep   = 0;
+                colDec      = 0;
+                colDef      = 0;
+                colMax      = 0;
+                colStep     = 0;
                 expoDec     = 0;
                 expoDef     = 0;
                 expoMax     = 0;
@@ -900,10 +957,10 @@ TABS.rates.initRatesSystem = function() {
             self.currentRates.roll_rate          *= 100;
             self.currentRates.pitch_rate         *= 100;
             self.currentRates.yaw_rate           *= 100;
-            self.currentRates.collective_rate    *= 1.2;
+            self.currentRates.collective_rate    *= 100;
             self.currentRates.rc_rate            *= 1000;
             self.currentRates.rc_rate_yaw        *= 1000;
-            self.currentRates.rc_rate_collective *= 12;
+            self.currentRates.rc_rate_collective *= 1000;
             self.currentRates.rc_rate_pitch      *= 1000;
             self.currentRates.rc_expo            *= 100;
             self.currentRates.rc_yaw_expo        *= 100;
@@ -926,7 +983,7 @@ TABS.rates.initRatesSystem = function() {
             self.currentRates.roll_rate          *= 1000;
             self.currentRates.pitch_rate         *= 1000;
             self.currentRates.yaw_rate           *= 1000;
-            self.currentRates.collective_rate    *= 12;
+            self.currentRates.collective_rate    *= 1000;
             break;
 
         default:
@@ -938,13 +995,15 @@ TABS.rates.initRatesSystem = function() {
         self.currentRates.roll_rate     = rateDef;
         self.currentRates.pitch_rate    = rateDef;
         self.currentRates.yaw_rate      = rateDef;
+        self.currentRates.collective_rate = colDef;
         self.currentRates.rc_rate       = rcRateDef;
         self.currentRates.rc_rate_yaw   = rcRateDef;
-        self.currentRates.rc_rate_collective = rcRateDef;
         self.currentRates.rc_rate_pitch = rcRateDef;
+        self.currentRates.rc_rate_collective = rcColDef;
         self.currentRates.rc_expo       = expoDef;
         self.currentRates.rc_yaw_expo   = expoDef;
         self.currentRates.rc_pitch_expo = expoDef;
+        self.currentRates.rc_collective_expo = expoDef;
     }
 
     const rcRateLabel_e = $('.rates_setup .rates_titlebar .rc_rate');
@@ -971,11 +1030,11 @@ TABS.rates.initRatesSystem = function() {
     pitch_rate_e.val(self.currentRates.pitch_rate.toFixed(rateDec));
     roll_rate_e.val(self.currentRates.roll_rate.toFixed(rateDec));
     yaw_rate_e.val(self.currentRates.yaw_rate.toFixed(rateDec));
-    collective_rate_e.val(self.currentRates.collective_rate.toFixed(1));
+    collective_rate_e.val(self.currentRates.collective_rate.toFixed(colDec));
     rc_rate_pitch_e.val(self.currentRates.rc_rate_pitch.toFixed(rcRateDec));
     rc_rate_e.val(self.currentRates.rc_rate.toFixed(rcRateDec));
     rc_rate_yaw_e.val(self.currentRates.rc_rate_yaw.toFixed(rcRateDec));
-    rc_rate_collective_e.val(self.currentRates.rc_rate_collective.toFixed(1));
+    rc_rate_collective_e.val(self.currentRates.rc_rate_collective.toFixed(rcColDec));
     rc_pitch_expo_e.val(self.currentRates.rc_pitch_expo.toFixed(expoDec));
     rc_expo_e.val(self.currentRates.rc_expo.toFixed(expoDec));
     rc_yaw_expo_e.val(self.currentRates.rc_yaw_expo.toFixed(expoDec));
@@ -988,6 +1047,11 @@ TABS.rates.initRatesSystem = function() {
     rc_rate_input_c.attr({"max":rcRateMax, "min":rcRateMin, "step":rcRateStep}).change();
     rate_input_c.attr({"max":rateMax, "min":rateMin, "step":rateStep}).change();
     expo_input_c.attr({"max":expoMax, "min":expoMin, "step":expoStep}).change();
+
+    const rc_collective_input_c = $('.rates_setup input[class="rc_collective_input"]');
+    rc_collective_input_c.attr({"max":rcColMax, "min":rcColMin, "step":rcColStep}).change();
+    const collective_input_c = $('.rates_setup input[class="collective_input"]');
+    collective_input_c.attr({"max":colMax, "min":colMin, "step":colStep}).change();
 
     self.previousRatesType = self.currentRatesType;
 };
