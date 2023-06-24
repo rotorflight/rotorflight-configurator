@@ -190,7 +190,8 @@ TABS.rates.initialize = function (callback) {
     self.rateCurve = new RateCurve2();
 
     function printMaxAngularVel(rate, rcRate, rcExpo, useSuperExpo, deadband, limit, maxAngularVelElement) {
-        const maxAngularVel = self.rateCurve.getMaxAngularVel(self.currentRatesType, rate, rcRate, rcExpo, useSuperExpo, deadband, limit).toFixed(0);
+        let maxAngularVel = self.rateCurve.getMaxAngularVel(self.currentRatesType, rate, rcRate, rcExpo, useSuperExpo, deadband, limit);
+        maxAngularVel = maxAngularVel < 30 ? maxAngularVel.toFixed(1) : maxAngularVel.toFixed(0);
         maxAngularVelElement.text(maxAngularVel);
         return maxAngularVel;
     }
@@ -681,7 +682,7 @@ TABS.rates.updateRatesLabels = function() {
                 {value: parseInt(maxAngularVelRoll), balloon: function() {drawBalloonLabel(stickContext, maxAngularVelRoll,  curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelRoll)),  'right', BALLOON_COLORS.roll, balloonsDirty);}},
                 {value: parseInt(maxAngularVelPitch), balloon: function() {drawBalloonLabel(stickContext, maxAngularVelPitch, curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelPitch)), 'right', BALLOON_COLORS.pitch, balloonsDirty);}},
                 {value: parseInt(maxAngularVelYaw), balloon: function() {drawBalloonLabel(stickContext, maxAngularVelYaw,   curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelYaw)),   'right', BALLOON_COLORS.yaw, balloonsDirty);}},
-                {value: parseInt(maxCollectiveAngle), balloon: function() {drawBalloonLabel(stickContext, maxCollectiveAngle + ' deg', curveWidth, 0,   'right', BALLOON_COLORS.collective, balloonsDirty);}}
+                {value: 10000 + parseInt(maxCollectiveAngle), balloon: function() {drawBalloonLabel(stickContext, maxCollectiveAngle + ' deg', curveWidth, 0,   'right', BALLOON_COLORS.collective, balloonsDirty);}}
             ];
 
             // and sort them in descending order so the largest value is at the top always
@@ -887,6 +888,7 @@ TABS.rates.initRatesSystem = function() {
         roll_rate_limit:   FC.RC_TUNING.roll_rate_limit,
         pitch_rate_limit:  FC.RC_TUNING.pitch_rate_limit,
         yaw_rate_limit:    FC.RC_TUNING.yaw_rate_limit,
+        collective_rate_limit: FC.RC_TUNING.collective_rate_limit,
         deadband:          FC.RC_DEADBAND_CONFIG.deadband,
         yawDeadband:       FC.RC_DEADBAND_CONFIG.yaw_deadband,
         superexpo:         true
@@ -969,11 +971,11 @@ TABS.rates.initRatesSystem = function() {
     pitch_rate_e.val(self.currentRates.pitch_rate.toFixed(rateDec));
     roll_rate_e.val(self.currentRates.roll_rate.toFixed(rateDec));
     yaw_rate_e.val(self.currentRates.yaw_rate.toFixed(rateDec));
-    collective_rate_e.val(self.currentRates.collective_rate.toFixed(rateDec));
+    collective_rate_e.val(self.currentRates.collective_rate.toFixed(1));
     rc_rate_pitch_e.val(self.currentRates.rc_rate_pitch.toFixed(rcRateDec));
     rc_rate_e.val(self.currentRates.rc_rate.toFixed(rcRateDec));
     rc_rate_yaw_e.val(self.currentRates.rc_rate_yaw.toFixed(rcRateDec));
-    rc_rate_collective_e.val(self.currentRates.rc_rate_collective.toFixed(rcRateDec));
+    rc_rate_collective_e.val(self.currentRates.rc_rate_collective.toFixed(1));
     rc_pitch_expo_e.val(self.currentRates.rc_pitch_expo.toFixed(expoDec));
     rc_expo_e.val(self.currentRates.rc_expo.toFixed(expoDec));
     rc_yaw_expo_e.val(self.currentRates.rc_yaw_expo.toFixed(expoDec));
