@@ -119,14 +119,14 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="errorRotation"]').prop('checked', FC.PID_PROFILE.error_rotation !== 0);
 
         // Error decay
-        $('.tab-profiles input[id="errorDecayTime"]').val(FC.PID_PROFILE.error_decay / 10);
+        $('.tab-profiles input[id="errorDecayTime"]').val(FC.PID_PROFILE.error_decay_ground / 10);
 
         const errorDecayCheck = $('.tab-profiles input[id="errorDecay"]');
         errorDecayCheck.change(function() {
             const checked = $(this).is(':checked');
             $('.tab-profiles .errorDecay .suboption').toggle(checked);
         });
-        errorDecayCheck.prop('checked', FC.PID_PROFILE.error_decay > 0).change();
+        errorDecayCheck.prop('checked', FC.PID_PROFILE.error_decay_ground > 0).change();
 
         // I-term relax
         $('.tab-profiles input[id="itermRelaxCutoffRoll"]').val(FC.PID_PROFILE.itermRelaxCutoffRoll);
@@ -251,7 +251,7 @@ TABS.profiles.initialize = function (callback) {
         FC.PID_PROFILE.errorLimitPitch = $('.tab-profiles input[id="errorLimitPitch"]').val();
         FC.PID_PROFILE.errorLimitYaw = $('.tab-profiles input[id="errorLimitYaw"]').val();
 
-        FC.PID_PROFILE.error_decay = $('.tab-profiles input[id="errorDecay"]').is(':checked') ?
+        FC.PID_PROFILE.error_decay_ground = $('.tab-profiles input[id="errorDecay"]').is(':checked') ?
             $('.tab-profiles input[id="errorDecayTime"]').val() * 10 : 0;
         FC.PID_PROFILE.error_rotation = $('.tab-profiles input[id="errorRotation"]').is(':checked') ? 1 : 0;
         FC.PID_PROFILE.itermRelaxType = $('.tab-profiles input[id="itermRelax"]').is(':checked') ?
