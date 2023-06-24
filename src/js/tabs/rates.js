@@ -307,8 +307,8 @@ TABS.rates.initialize = function (callback) {
                     drawCurve(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -6, curveContext);
                     drawCurve(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 6, curveContext);
 
-                    const maxCollectiveAngle = printMaxAngularVel(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.collective_rate_limit, self.maxCollectiveAngleElement);
-                    drawCurve(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.collective_rate_limit, maxCollectiveAngle, '#ffbb00', 2, curveContext);
+                    const maxCollectiveAngle = printMaxAngularVel(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngleElement);
+                    drawCurve(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, maxCollectiveAngle, '#ffbb00', 2, curveContext);
 
                     self.updateRatesLabels();
 
@@ -636,10 +636,10 @@ TABS.rates.updateRatesLabels = function() {
             const maxAngularVelRoll   = self.maxAngularVelRollElement.text()  + ' deg/s';
             const maxAngularVelPitch  = self.maxAngularVelPitchElement.text() + ' deg/s';
             const maxAngularVelYaw    = self.maxAngularVelYawElement.text()   + ' deg/s';
-            const maxCollectiveAngle  = self.maxCollectiveAngleElement.text() + ' deg';
             const curveHeight         = rcStickElement.height;
             const curveWidth          = rcStickElement.width;
             const maxAngularVel       = self.rateCurve.maxAngularVel;
+            const maxCollectiveAngle  = self.maxCollectiveAngleElement.text();
             const windowScale         = (400 / stickContext.canvas.clientHeight);
             const rateScale           = (curveHeight / 2) / maxAngularVel;
             const lineScale           = stickContext.canvas.width / stickContext.canvas.clientWidth;
@@ -661,7 +661,7 @@ TABS.rates.updateRatesLabels = function() {
                 currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[0], self.currentRatesType, self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, stickContext, '#FF8080') + ' deg/s');
                 currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[1], self.currentRatesType, self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, stickContext, '#80FF80') + ' deg/s');
                 currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[2], self.currentRatesType, self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, stickContext, '#8080FF') + ' deg/s');
-                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[3], self.currentRatesType, self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.collective_rate_limit, maxCollectiveAngle, stickContext, '#FFBB00') + ' deg');
+                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[3], self.currentRatesType, self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, maxCollectiveAngle, stickContext, '#FFBB00') + ' deg');
             } else {
                 currentValues = [];
             }
@@ -681,7 +681,7 @@ TABS.rates.updateRatesLabels = function() {
                 {value: parseInt(maxAngularVelRoll), balloon: function() {drawBalloonLabel(stickContext, maxAngularVelRoll,  curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelRoll)),  'right', BALLOON_COLORS.roll, balloonsDirty);}},
                 {value: parseInt(maxAngularVelPitch), balloon: function() {drawBalloonLabel(stickContext, maxAngularVelPitch, curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelPitch)), 'right', BALLOON_COLORS.pitch, balloonsDirty);}},
                 {value: parseInt(maxAngularVelYaw), balloon: function() {drawBalloonLabel(stickContext, maxAngularVelYaw,   curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelYaw)),   'right', BALLOON_COLORS.yaw, balloonsDirty);}},
-                {value: parseInt(maxCollectiveAngle), balloon: function() {drawBalloonLabel(stickContext, maxCollectiveAngle, curveWidth, 0,   'right', BALLOON_COLORS.collective, balloonsDirty);}}
+                {value: parseInt(maxCollectiveAngle), balloon: function() {drawBalloonLabel(stickContext, maxCollectiveAngle + ' deg', curveWidth, 0,   'right', BALLOON_COLORS.collective, balloonsDirty);}}
             ];
 
             // and sort them in descending order so the largest value is at the top always
