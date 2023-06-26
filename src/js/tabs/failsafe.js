@@ -20,7 +20,7 @@ TABS.failsafe.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_FAILSAFE_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_GPS_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_GPS_RESCUE))
-            .then(() => MSP.promise(MSPCodes.MSP_RX_CONFIG))
+            //.then(() => MSP.promise(MSPCodes.MSP_RX_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_RXFAIL_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_RSSI_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_MOTOR_CONFIG))
@@ -38,7 +38,7 @@ TABS.failsafe.initialize = function (callback) {
                 .then(() => MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG)))
                 .then(() => MSP.promise(MSPCodes.MSP_SET_FAILSAFE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FAILSAFE_CONFIG)))
                 .then(() => MSP.promise(MSPCodes.MSP_SET_GPS_RESCUE, mspHelper.crunch(MSPCodes.MSP_SET_GPS_RESCUE)))
-                .then(() => MSP.promise(MSPCodes.MSP_SET_RX_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_RX_CONFIG)))
+                //.then(() => MSP.promise(MSPCodes.MSP_SET_RX_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_RX_CONFIG)))
                 .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
                 .then(() => {
                     GUI.log(i18n.getMessage('eepromSaved'));
@@ -53,8 +53,8 @@ TABS.failsafe.initialize = function (callback) {
 
         FC.FEATURE_CONFIG.features.updateData($('input[name="FAILSAFE"]'));
 
-        FC.RX_CONFIG.rx_min_usec = parseInt($('input[name="rx_min_usec"]').val());
-        FC.RX_CONFIG.rx_max_usec = parseInt($('input[name="rx_max_usec"]').val());
+        //FC.RX_CONFIG.rx_min_usec = parseInt($('input[name="rx_min_usec"]').val());
+        //FC.RX_CONFIG.rx_max_usec = parseInt($('input[name="rx_max_usec"]').val());
 
         FC.FAILSAFE_CONFIG.failsafe_throttle = parseInt($('input[name="failsafe_throttle"]').val());
         FC.FAILSAFE_CONFIG.failsafe_off_delay = parseFloat($('input[name="failsafe_off_delay"]').val()) * 10;
@@ -239,8 +239,8 @@ TABS.failsafe.initialize = function (callback) {
         });
 
         // fill stage 1 Valid Pulse Range Settings
-        $('input[name="rx_min_usec"]').val(FC.RX_CONFIG.rx_min_usec);
-        $('input[name="rx_max_usec"]').val(FC.RX_CONFIG.rx_max_usec);
+        //$('input[name="rx_min_usec"]').val(FC.RX_CONFIG.rx_min_usec);
+        //$('input[name="rx_max_usec"]').val(FC.RX_CONFIG.rx_max_usec);
 
         // fill fallback settings (mode and value) for all channels
         for (let i = 0; i < FC.RXFAIL_CONFIG.length; i++) {
