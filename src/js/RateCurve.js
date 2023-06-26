@@ -75,8 +75,8 @@ const RateCurve = function (useLegacyCurve) {
             context.fill();
             context.restore();
         }
-        if (stickColor === '#FFBB00') return currentValue.toFixed(1); // collective angle hack
-        return (Math.abs(currentValue)<0.5)?0:currentValue.toFixed(0); // The calculated value in deg/s is returned from the function call for further processing.
+
+        return currentValue;
     };
 
     this.getBetaflightRates = function (rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo, superExpoActive, limit) {
@@ -266,8 +266,8 @@ const RateCurve2 = function () {
             context.fill();
             context.restore();
         }
-        if (stickColor === '#FFBB00') return currentValue.toFixed(1); // collective angle hack
-        return (Math.abs(currentValue)<0.5)?0:currentValue.toFixed(0); // The calculated value in deg/s is returned from the function call for further processing.
+
+        return currentValue;
     };
 
     this.getBetaflightRates = function (rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo, superExpoActive, limit) {

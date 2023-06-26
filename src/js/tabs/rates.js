@@ -189,10 +189,9 @@ TABS.rates.initialize = function (callback) {
 
     self.rateCurve = new RateCurve2();
 
-    function printMaxAngularVel(rate, rcRate, rcExpo, useSuperExpo, deadband, limit, maxAngularVelElement) {
-        let maxAngularVel = self.rateCurve.getMaxAngularVel(self.currentRatesType, rate, rcRate, rcExpo, useSuperExpo, deadband, limit);
-        maxAngularVel = maxAngularVel < 30 ? maxAngularVel.toFixed(1) : maxAngularVel.toFixed(0);
-        maxAngularVelElement.text(maxAngularVel);
+    function printMaxAngularVel(rate, rcRate, rcExpo, useSuperExpo, deadband, limit, maxAngularVelElement, isCollective) {
+        const maxAngularVel = self.rateCurve.getMaxAngularVel(self.currentRatesType, rate, rcRate, rcExpo, useSuperExpo, deadband, limit);
+        maxAngularVelElement.text(isCollective ? self.convertToCollective(maxAngularVel) : maxAngularVel.toFixed(0));
         return maxAngularVel;
     }
 
@@ -308,8 +307,8 @@ TABS.rates.initialize = function (callback) {
                     drawCurve(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -6, curveContext);
                     drawCurve(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 6, curveContext);
 
-                    const maxCollectiveAngle = printMaxAngularVel(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngleElement);
-                    drawCurve(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, maxCollectiveAngle, '#ffbb00', 2, curveContext);
+                    self.maxCollectiveAngle = printMaxAngularVel(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngleElement, true);
+                    drawCurve(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, '#ffbb00', 2, curveContext);
 
                     self.updateRatesLabels();
 
@@ -426,6 +425,25 @@ TABS.rates.initialize = function (callback) {
         GUI.content_ready(callback);
     }
 };
+
+TABS.rates.convertToCollective = function convertToCollective(rate) {
+    const self = this;
+
+    switch (self.currentRatesType) {
+        case self.RATES_TYPE.RACEFLIGHT:
+        case self.RATES_TYPE.ACTUAL:
+            break;
+        case self.RATES_TYPE.BETAFLIGHT:
+        case self.RATES_TYPE.KISS:
+        case self.RATES_TYPE.QUICKRATES:
+                rate /= 83.33;
+            break;
+        default:
+            break;
+    }
+
+    return rate.toFixed(1);
+}
 
 TABS.rates.initRatesPreview = function () {
     this.keepRendering = true;
@@ -634,13 +652,13 @@ TABS.rates.updateRatesLabels = function() {
 
             stickContext.save();
 
-            const maxAngularVelRoll   = self.maxAngularVelRollElement.text()  + ' deg/s';
-            const maxAngularVelPitch  = self.maxAngularVelPitchElement.text() + ' deg/s';
-            const maxAngularVelYaw    = self.maxAngularVelYawElement.text()   + ' deg/s';
+            const maxAngularVelRoll   = self.maxAngularVelRollElement.text();
+            const maxAngularVelPitch  = self.maxAngularVelPitchElement.text();
+            const maxAngularVelYaw    = self.maxAngularVelYawElement.text();
+            const maxCollectiveAngleText = self.maxCollectiveAngleElement.text();
             const curveHeight         = rcStickElement.height;
             const curveWidth          = rcStickElement.width;
             const maxAngularVel       = self.rateCurve.maxAngularVel;
-            const maxCollectiveAngle  = self.maxCollectiveAngleElement.text();
             const windowScale         = (400 / stickContext.canvas.clientHeight);
             const rateScale           = (curveHeight / 2) / maxAngularVel;
             const lineScale           = stickContext.canvas.width / stickContext.canvas.clientWidth;
@@ -658,11 +676,13 @@ TABS.rates.updateRatesLabels = function() {
                 stickContext.font = (24 * windowScale) + "pt Verdana, Arial, sans-serif";
             }
 
-            if (FC.RC.channels[0] && FC.RC.channels[1] && FC.RC.channels[2] && FC.RC.channels[3]) {
-                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[0], self.currentRatesType, self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, stickContext, '#FF8080') + ' deg/s');
-                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[1], self.currentRatesType, self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, stickContext, '#80FF80') + ' deg/s');
-                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[2], self.currentRatesType, self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, stickContext, '#8080FF') + ' deg/s');
-                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[3], self.currentRatesType, self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, maxCollectiveAngle, stickContext, '#FFBB00') + ' deg');
+            const drawStickPositions = FC.RC.channels[0] && FC.RC.channels[1] && FC.RC.channels[2] && FC.RC.channels[3];
+
+            if (drawStickPositions) {
+                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[0], self.currentRatesType, self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, stickContext, '#FF8080'));
+                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[1], self.currentRatesType, self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, stickContext, '#80FF80'));
+                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[2], self.currentRatesType, self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, stickContext, '#8080FF'));
+                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[3], self.currentRatesType, self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, stickContext, '#FFBB00'));
             } else {
                 currentValues = [];
             }
@@ -679,22 +699,22 @@ TABS.rates.updateRatesLabels = function() {
             balloonsDirty = []; // reset the dirty balloon draw area (for overlap detection)
             // create an array of balloons to draw
             const balloons = [
-                {value: parseInt(maxAngularVelRoll), balloon: function() {drawBalloonLabel(stickContext, maxAngularVelRoll,  curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelRoll)),  'right', BALLOON_COLORS.roll, balloonsDirty);}},
-                {value: parseInt(maxAngularVelPitch), balloon: function() {drawBalloonLabel(stickContext, maxAngularVelPitch, curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelPitch)), 'right', BALLOON_COLORS.pitch, balloonsDirty);}},
-                {value: parseInt(maxAngularVelYaw), balloon: function() {drawBalloonLabel(stickContext, maxAngularVelYaw,   curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelYaw)),   'right', BALLOON_COLORS.yaw, balloonsDirty);}},
-                {value: 10000 + parseInt(maxCollectiveAngle), balloon: function() {drawBalloonLabel(stickContext, maxCollectiveAngle + ' deg', curveWidth, 0,   'right', BALLOON_COLORS.collective, balloonsDirty);}}
+                {value: maxAngularVelRoll, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelRoll + ' deg/s',  curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelRoll)),  'right', BALLOON_COLORS.roll, balloonsDirty);}},
+                {value: maxAngularVelPitch, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelPitch + ' deg/s', curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelPitch)), 'right', BALLOON_COLORS.pitch, balloonsDirty);}},
+                {value: maxAngularVelYaw, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelYaw + ' deg/s',   curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelYaw)),   'right', BALLOON_COLORS.yaw, balloonsDirty);}},
+                {value: 10000, balloon: function() {drawBalloonLabel(stickContext, maxCollectiveAngleText + ' deg', curveWidth, 0,   'right', BALLOON_COLORS.collective, balloonsDirty);}}
             ];
 
             // and sort them in descending order so the largest value is at the top always
             balloons.sort(function(a,b) {return (b.value - a.value);});
 
             // add the current rc values
-            if (currentValues[0] && currentValues[1] && currentValues[2] && currentValues[3]) {
+            if (drawStickPositions) {
                 balloons.push(
-                    {value: parseInt(currentValues[3]), balloon: function() {drawBalloonLabel(stickContext, currentValues[3], 10, 50,  'none', BALLOON_COLORS.collective, balloonsDirty);}},
-                    {value: parseInt(currentValues[0]), balloon: function() {drawBalloonLabel(stickContext, currentValues[0], 10, 150, 'none', BALLOON_COLORS.roll, balloonsDirty);}},
-                    {value: parseInt(currentValues[1]), balloon: function() {drawBalloonLabel(stickContext, currentValues[1], 10, 250, 'none', BALLOON_COLORS.pitch, balloonsDirty);}},
-                    {value: parseInt(currentValues[2]), balloon: function() {drawBalloonLabel(stickContext, currentValues[2], 10, 350,  'none', BALLOON_COLORS.yaw, balloonsDirty);}}
+                    {value: currentValues[3], balloon: function() {drawBalloonLabel(stickContext, self.convertToCollective(currentValues[3]) + ' deg', 10, 50,  'none', BALLOON_COLORS.collective, balloonsDirty);}},
+                    {value: currentValues[0], balloon: function() {drawBalloonLabel(stickContext, currentValues[0].toFixed(0) + ' deg/s', 10, 150, 'none', BALLOON_COLORS.roll, balloonsDirty);}},
+                    {value: currentValues[1], balloon: function() {drawBalloonLabel(stickContext, currentValues[1].toFixed(0) + ' deg/s', 10, 250, 'none', BALLOON_COLORS.pitch, balloonsDirty);}},
+                    {value: currentValues[2], balloon: function() {drawBalloonLabel(stickContext, currentValues[2].toFixed(0) + ' deg/s', 10, 350,  'none', BALLOON_COLORS.yaw, balloonsDirty);}}
                 );
             }
             // then display them on the chart
