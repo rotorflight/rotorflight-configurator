@@ -426,24 +426,23 @@ TABS.rates.initialize = function (callback) {
     }
 };
 
-TABS.rates.convertToCollective = function convertToCollective(rate) {
+TABS.rates.convertToCollective = function (rate) {
     const self = this;
 
     switch (self.currentRatesType) {
-        case self.RATES_TYPE.RACEFLIGHT:
-        case self.RATES_TYPE.ACTUAL:
-            break;
         case self.RATES_TYPE.BETAFLIGHT:
         case self.RATES_TYPE.KISS:
         case self.RATES_TYPE.QUICKRATES:
-                rate /= 83.33;
+            rate /= 83.33;
             break;
+        case self.RATES_TYPE.RACEFLIGHT:
+        case self.RATES_TYPE.ACTUAL:
         default:
             break;
     }
 
     return rate.toFixed(1);
-}
+};
 
 TABS.rates.initRatesPreview = function () {
     this.keepRendering = true;
@@ -813,12 +812,12 @@ TABS.rates.initRatesSystem = function() {
             rateMax     = 0.99;
             rateStep    = 0.01;
             rcColDec    = 2;
-            rcColDef    = 1.80;
+            rcColDef    = 2.55;
             rcColMax    = 2.55;
             rcColMin    = 0.01;
             rcColStep   = 0.01;
             colDec      = 2;
-            colDef      = 0.00;
+            colDef      = 0.49;
             colMax      = 0.99;
             colStep     = 0.01;
             expoDec     = 2;
@@ -873,12 +872,12 @@ TABS.rates.initRatesSystem = function() {
             rateMax     = 1000;
             rateStep    = 10;
             rcColDec    = 2;
-            rcColDef    = 1.80;
+            rcColDef    = 2.55;
             rcColMax    = 2.55;
             rcColMin    = 0.01;
             rcColStep   = 0.01;
             colDec      = 0;
-            colDef      = 360;
+            colDef      = 1000;
             colMax      = 1000;
             colStep     = 10;
             expoDec     = 2;
@@ -903,12 +902,12 @@ TABS.rates.initRatesSystem = function() {
             rateMax     = 0.99;
             rateStep    = 0.01;
             rcColDec    = 2;
-            rcColDef    = 1.80;
+            rcColDef    = 2.19;
             rcColMax    = 2.55;
             rcColMin    = 0.01;
             rcColStep   = 0.01;
             colDec      = 2;
-            colDef      = 0.00;
+            colDef      = 0.01;
             colMax      = 0.99;
             colStep     = 0.01;
             expoDec     = 2;
