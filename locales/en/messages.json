@@ -4536,7 +4536,7 @@
         "message": "ESC Sensor"
     },
     "powerBatteryCurrentMeterTypeMsp": {
-        "message": "MSP Sensor/OSD Slave"
+        "message": "MSP Sensor"
     },
     "powerBatteryMinimum": {
         "message": "Minimum Cell Voltage"
