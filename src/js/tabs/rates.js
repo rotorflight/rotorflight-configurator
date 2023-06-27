@@ -430,6 +430,7 @@ TABS.rates.convertToCollective = function (rate) {
     const self = this;
 
     switch (self.currentRatesType) {
+        case self.RATES_TYPE.NONE:
         case self.RATES_TYPE.BETAFLIGHT:
         case self.RATES_TYPE.KISS:
         case self.RATES_TYPE.QUICKRATES:
