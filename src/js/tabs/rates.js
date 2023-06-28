@@ -303,12 +303,12 @@ TABS.rates.initialize = function (callback) {
                     drawAxes(curveContext, curveWidth, curveHeight);
 
                     curveContext.lineWidth = 2 * lineScale;
-                    drawCurve(self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, '#ff0000', 2, curveContext);
-                    drawCurve(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -6, curveContext);
-                    drawCurve(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 6, curveContext);
+                    drawCurve(self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, '#ff0000', -6, curveContext);
+                    drawCurve(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -2, curveContext);
+                    drawCurve(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 2, curveContext);
 
                     self.maxCollectiveAngle = printMaxAngularVel(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngleElement, true);
-                    drawCurve(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, '#ffbb00', 2, curveContext);
+                    drawCurve(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, '#ffbb00', 6, curveContext);
 
                     self.updateRatesLabels();
 
@@ -430,6 +430,7 @@ TABS.rates.convertToCollective = function (rate) {
     const self = this;
 
     switch (self.currentRatesType) {
+        case self.RATES_TYPE.NONE:
         case self.RATES_TYPE.BETAFLIGHT:
         case self.RATES_TYPE.KISS:
         case self.RATES_TYPE.QUICKRATES:
@@ -817,7 +818,7 @@ TABS.rates.initRatesSystem = function() {
             rcColMin    = 0.01;
             rcColStep   = 0.01;
             colDec      = 2;
-            colDef      = 0.49;
+            colDef      = 0.00;
             colMax      = 0.99;
             colStep     = 0.01;
             expoDec     = 2;
@@ -877,7 +878,7 @@ TABS.rates.initRatesSystem = function() {
             rcColMin    = 0.01;
             rcColStep   = 0.01;
             colDec      = 0;
-            colDef      = 1000;
+            colDef      = 500;
             colMax      = 1000;
             colStep     = 10;
             expoDec     = 2;
