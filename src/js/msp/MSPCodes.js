@@ -51,6 +51,8 @@ const MSPCodes = {
     MSP_DATAFLASH_SUMMARY:          70,
     MSP_DATAFLASH_READ:             71,
     MSP_DATAFLASH_ERASE:            72,
+    MSP_TELEMETRY_CONFIG:           73,
+    MSP_SET_TELEMETRY_CONFIG:       74,
     MSP_FAILSAFE_CONFIG:            75,
     MSP_SET_FAILSAFE_CONFIG:        76,
     MSP_RXFAIL_CONFIG:              77,

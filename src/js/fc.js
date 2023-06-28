@@ -149,6 +149,7 @@ const FC = {
     RSSI_CONFIG: null,
     RXFAIL_CONFIG: null,
     RX_CONFIG: null,
+    TELEMETRY_CONFIG: null,
     SDCARD: null,
     SENSOR_ALIGNMENT: null,
     SENSOR_CONFIG: null,
@@ -636,6 +637,12 @@ const FC = {
             failsafe_switch_mode:           0,
             failsafe_throttle_low_delay:    0,
             failsafe_procedure:             0,
+        };
+
+        this.TELEMETRY_CONFIG = {
+            telemetry_inverted:             0,
+            telemetry_halfduplex:           0,
+            telemetry_sensors:              0,
         };
 
         this.GPS_RESCUE = {

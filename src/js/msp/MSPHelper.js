@@ -865,6 +865,12 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 }
                 break;
 
+            case MSPCodes.MSP_TELEMETRY_CONFIG:
+                FC.TELEMETRY_CONFIG.telemetry_inverted = data.readU8();
+                FC.TELEMETRY_CONFIG.telemetry_halfduplex = data.readU8();
+                FC.TELEMETRY_CONFIG.telemetry_sensors = data.readU32();
+                break;
+
             case MSPCodes.MSP_ADVANCED_CONFIG:
                 FC.ADVANCED_CONFIG.gyro_sync_denom = data.readU8();
                 FC.ADVANCED_CONFIG.pid_process_denom = data.readU8();
@@ -1383,6 +1389,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_SET_FAILSAFE_CONFIG:
                 console.log('Failsafe config saved');
                 break;
+            case MSPCodes.MSP_SET_TELEMETRY_CONFIG:
+                console.log('Telemetry config saved');
+                break;
             case MSPCodes.MSP_OSD_CONFIG:
                 break;
             case MSPCodes.MSP_SET_OSD_CONFIG:
@@ -1678,6 +1687,12 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.FAILSAFE_CONFIG.failsafe_switch_mode)
                 .push16(FC.FAILSAFE_CONFIG.failsafe_throttle_low_delay)
                 .push8(FC.FAILSAFE_CONFIG.failsafe_procedure);
+            break;
+
+        case MSPCodes.MSP_SET_TELEMETRY_CONFIG:
+            buffer.push8(FC.TELEMETRY_CONFIG.telemetry_inverted)
+                .push8(FC.TELEMETRY_CONFIG.telemetry_halfduplex)
+                .push32(FC.TELEMETRY_CONFIG.telemetry_sensors);
             break;
 
         case MSPCodes.MSP_SET_TRANSPONDER_CONFIG:
