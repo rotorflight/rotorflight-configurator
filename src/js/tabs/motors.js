@@ -307,6 +307,9 @@ TABS.motors.initialize = function (callback) {
         });
         escProtocolSelect.val(FC.MOTOR_CONFIG.motor_pwm_protocol);
 
+        const pwmUnsyncSwitch = $('input[id="motorsUnsyncedPwm"]');
+        pwmUnsyncSwitch.prop('checked', FC.MOTOR_CONFIG.use_unsynced_pwm);
+
         const pwmFreq = (FC.MOTOR_CONFIG.motor_pwm_rate > 0) ?
               FC.MOTOR_CONFIG.motor_pwm_rate : 250;
         const pwmFreqInput = $('input[id="pwmFreq"]');
@@ -356,10 +359,13 @@ TABS.motors.initialize = function (callback) {
             $('.mincommand').toggle(self.isProtoEnabled && !self.isDshot);
             $('.minthrottle').toggle(self.isProtoEnabled && !self.isDshot);
             $('.maxthrottle').toggle(self.isProtoEnabled && !self.isDshot);
+            $('.unsyncedPwm').toggle(self.isProtoEnabled && !self.isDshot && protocolNum != 0);
             $('.inputPwmFreq').toggle(self.isProtoEnabled && !self.isDshot);
             $('.checkboxDshotBidir').toggle(self.isProtoEnabled && self.isDshot);
             $('.mainGearRatio').toggle(self.isProtoEnabled);
             $('.tailGearRatio').toggle(self.isProtoEnabled);
+
+            $('input[id="pwmFreq"]').prop('disabled', !(pwmUnsyncSwitch.is(':checked') || protocolNum == 0));
 
             for (let i = 0; i < 4; i++) {
                 $(`.motorPoles${i+1}`).toggle(self.isProtoEnabled && FC.CONFIG.motorCount > i);
@@ -374,22 +380,25 @@ TABS.motors.initialize = function (callback) {
             $('.govConfig').toggle(govModeSelect.val() > 0);
         }
 
-        escProtocolSelect.change(updateVisibility);
         govModeSelect.change(updateVisibility);
+        pwmUnsyncSwitch.change(updateVisibility);
+        escProtocolSelect.change(updateVisibility);
 
         updateVisibility();
 
         function update_data() {
+            FC.MOTOR_CONFIG.motor_pwm_protocol = parseInt(escProtocolSelect.val());
+            FC.MOTOR_CONFIG.motor_pwm_rate = parseInt($('input[id="pwmFreq"]').val());
+
+            FC.MOTOR_CONFIG.use_unsynced_pwm = pwmUnsyncSwitch.is(':checked') || FC.MOTOR_CONFIG.motor_pwm_protocol == 0;
+            FC.MOTOR_CONFIG.use_dshot_telemetry = dshotBidirSwitch.is(':checked');
+
             FC.MOTOR_CONFIG.mincommand = parseInt($('input[id="mincommand"]').val());
             FC.MOTOR_CONFIG.minthrottle = parseInt($('input[id="minthrottle"]').val());
             FC.MOTOR_CONFIG.maxthrottle = parseInt($('input[id="maxthrottle"]').val());
-            FC.MOTOR_CONFIG.use_dshot_telemetry = dshotBidirSwitch.is(':checked') ? 1 : 0;
 
             for (let i = 0; i < FC.CONFIG.motorCount; i++)
                 FC.MOTOR_CONFIG.motor_poles[i] = parseInt($(`input[id="motorPoles${i+1}"]`).val());
-
-            FC.MOTOR_CONFIG.motor_pwm_protocol = parseInt(escProtocolSelect.val());
-            FC.MOTOR_CONFIG.motor_pwm_rate = parseInt($('input[id="pwmFreq"]').val());
 
             FC.MOTOR_CONFIG.main_rotor_gear_ratio[0] = parseInt($('input[id="mainGearRatioN"]').val());
             FC.MOTOR_CONFIG.main_rotor_gear_ratio[1] = parseInt($('input[id="mainGearRatioD"]').val());

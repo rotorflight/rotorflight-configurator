@@ -2451,16 +2451,22 @@
         "message": "ESC/Motor protocol"
     },
     "motorsEscProtocolHelp": {
-        "message": "Select your motor protocol. <br>Make sure to verify the protocol is supported by your ESC, this information should be on the makers website.</b>"
+        "message": "Select your ESC protocol. <br>Make sure the protocol is supported by your ESCs.</b>"
     },
     "motorsEscProtocolDisabled": {
         "message": "Please select a motor output protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)"
     },
-    "motorsUnsyndePwm": {
-        "message": "Motor PWM speed Separated from PID speed"
+    "motorsUnsyncedPwm": {
+        "message": "Unsyncronised Motor PWM"
+    },
+    "motorsUnsyncedPwmHelp": {
+        "message": "Motor PWM is running at the specified speed, without being syncronised to the PID loop"
     },
     "motorsUnsyncedPWMFreq": {
         "message": "Motor PWM frequency"
+    },
+    "motorsUnsyncedPWMFreqHelp": {
+        "message": "Motor PWM update frequency, when running unsyncronised."
     },
     "motorsDshotBidir": {
         "message": "Bidirectional DShot"
@@ -2481,34 +2487,37 @@
         "message": "Gear ratio between the main rotor and the tail rotor <br><strong>[tail gear]/[autorotation gear]</strong> tooth count <br>For a direct drive motorized tail use [ 1 ]/[ 1 ]"
     },
     "motorsMotorPoles1Long": {
-        "message": "Main Motor pole count (M1)"
+        "message": "Main Motor pole count"
     },
     "motorsMotorPoles2Long": {
-        "message": "Tail Motor pole count (M2)"
+        "message": "Tail Motor pole count"
     },
     "motorsMotorPoles3Long": {
-        "message": "Motor #3 pole count"
+        "message": "Motor M3 pole count"
     },
     "motorsMotorPoles4Long": {
-        "message": "Motor #4 pole count"
+        "message": "Motor M4 pole count"
     },
     "motorsMotorPolesHelp": {
         "message": "The pole count is the number of magnets on the bell of the motor. Do NOT count the stators where the windings are located. Large motors usually have 8 magnets, smaller often have 6 magnets."
     },
     "motorsThrottleMinimum": {
-        "message": "Minimum Throttle (Lowest ESC value when armed)"
+        "message": "0% Throttle PWM value"
     },
     "motorsThrottleMinimumHelp": {
-        "message": "This is the 'idle' value that is sent to the ESCs when the craft is armed and the trottle stick is at minimum position. Increase the value to gain more idle speed. Also raise the value in case of desyncs!"
+        "message": "This is the PWM value that is sent to the ESCs at zero throttle (when the craft is armed)."
     },
     "motorsThrottleMaximum": {
-        "message": "Maximum Throttle (Highest ESC value when armed)"
+        "message": "100% Throttle PWM value"
+    },
+    "motorsThrottleMaximumHelp": {
+        "message": "This is the PWM value that is sent to the ESCs at full throttle (when the craft is armed)."
     },
     "motorsThrottleMinimumCommand": {
-        "message": "Minimum Command (ESC value when disarmed)"
+        "message": "Disarm Throttle PWM value"
     },
     "motorsThrottleMinimumCommandHelp": {
-        "message": "This is the value that is sent to the ESCs when the craft is disarmed. Set this to a value that has the motors stopped (1000 for most ESCs)."
+        "message": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that keep the motors stopped (1000 for most ESCs)."
     },
     "motorMainGearRatioIssueNote": {
         "message": "<span class=\"message-negative\">Warning:</span> <i>Main Rotor Gear Ratio</i> is set to an incorrect value. Please check!"

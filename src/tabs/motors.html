@@ -35,12 +35,20 @@
                                         <div id="escProtocolTooltip" class="helpicon cf_tip" i18n_title="motorsEscProtocolHelp"></div>
                                     </label>
                                 </div>
-                                    <div class="field inputPwmFreq">
+                                <div class="field unsyncedPwm">
+                                    <div class="field_box">
+                                        <input type="checkbox" id="motorsUnsyncedPwm" class="toggle" />
+                                    </div>
+                                    <span class="freelabel" i18n="motorsUnsyncedPwm"></span>
+                                    <div class="helpicon cf_tip" i18n_title="motorsUnsyncedPwmHelp"></div>
+                                </div>
+                                <div class="field inputPwmFreq">
                                     <label>
                                         <div class="field_box">
                                             <input type="number" id="pwmFreq" min="50" max="8000" step="10"/>
                                         </div>
-                                        <span i18n="motorsUnsyncedPWMFreq"></span>
+                                        <span class="freelabel" i18n="motorsUnsyncedPWMFreq"></span>
+                                        <div class="helpicon cf_tip" i18n_title="motorsUnsyncedPWMFreqHelp"></div>
                                     </label>
                                 </div>
                                 <div class="field checkboxDshotBidir">
@@ -74,6 +82,7 @@
                                             <input type="number" id="maxthrottle" min="0" max="2000" />
                                         </div>
                                         <span i18n="motorsThrottleMaximum"></span>
+                                        <div class="helpicon cf_tip" i18n_title="motorsThrottleMaximumHelp"></div>
                                     </label>
                                 </div>
                                 <div class="field mainGearRatio">
