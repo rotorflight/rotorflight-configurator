@@ -109,6 +109,7 @@ function stickPositionToChannelValue(value)
 
 function channelValueToStickPosition(value)
 {
+    value = Math.min(Math.max(value, CHANNEL_MIN_VALUE), CHANNEL_MAX_VALUE);
     return (value - CHANNEL_MIN_VALUE) / (CHANNEL_MAX_VALUE - CHANNEL_MIN_VALUE);
 }
 

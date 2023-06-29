@@ -335,11 +335,10 @@ TABS.receiver.initialize = function (callback) {
 
                 chsel.change(function () {
                     const newAxis = parseInt(chsel.val());
-                    const oldAxis = self.rcmap[ch];
-                    const hc = self.rcmap.indexOf(newAxis);
+                    const oldAxis = self.rcmap.indexOf(ch);
 
-                    self.rcmap[hc] = oldAxis;
-                    self.rcmap[ch] = newAxis;
+                    self.rcmap[oldAxis] = self.rcmap[newAxis];
+                    self.rcmap[newAxis] = ch;
 
                     setRcMapGUI();
                 });
@@ -389,10 +388,10 @@ TABS.receiver.initialize = function (callback) {
             const meterScaleMin = 750;
             const meterScaleMax = 2250;
             for (let ch = 0; ch < FC.RC.active_channels; ch++) {
-                const axis = self.rcmap[ch];
                 const value = FC.RX_CHANNELS[ch];
                 const width = (100 * (value - meterScaleMin) / (meterScaleMax - meterScaleMin)).clamp(0, 100) + '%';
                 updateChannelBar(channelElems[ch], width, value);
+                const axis = (ch < self.rcmapSize) ? self.rcmap.indexOf(ch) : ch;
                 self.rcData[axis] = value - (self.rcCenter - 1500);
             }
             MSP.send_message(MSPCodes.MSP_ANALOG, false, false, updateRSSI);
@@ -418,8 +417,8 @@ TABS.receiver.initialize = function (callback) {
 
         function setRcMapGUI() {
             const rcbuf = [];
-            for (let ch = 0; ch < self.rcmapSize; ch++) {
-                const axis = self.rcmap[ch];
+            for (let axis = 0; axis < self.rcmapSize; axis++) {
+                const ch = self.rcmap[axis];
                 rcbuf[ch] = self.axisLetters[axis];
                 channelSelect[ch].val(axis);
             }
@@ -451,7 +450,7 @@ TABS.receiver.initialize = function (callback) {
                     setRcMapGUI();
                     return false;
                 }
-                rcmap[ch] = axis;
+                rcmap[axis] = ch;
             }
 
             self.rcmap = rcmap;
@@ -488,7 +487,7 @@ TABS.receiver.initialize = function (callback) {
                     if (CONFIGURATOR.connectionValid && GUI.active_tab != 'cli') {
                         const data = [];
                         FC.RC_MAP.forEach((axis, channel) => {
-                            data[channel] = channels[axis];
+                            data[axis] = channels[channel];
                         });
                         mspHelper.setRawRx(data);
                         return true;
