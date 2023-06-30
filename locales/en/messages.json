@@ -3657,6 +3657,18 @@
     "controlAxisAux16": {
         "message": "AUX 16"
     },
+    "controlAxisAux17": {
+        "message": "AUX 17"
+    },
+    "controlAxisAux18": {
+        "message": "AUX 18"
+    },
+    "rssiOptionAUTO": {
+        "message": "AUTO"
+    },
+    "rssiOptionADC": {
+        "message": "ADC"
+    },
     "profilesPidGains": {
         "message": "PID Controller Gains"
     },
