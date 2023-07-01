@@ -4408,7 +4408,7 @@
         "message": "Set this option to make the failsafe switch (Modes Tab) act as a direct kill switch, bypassing the selected failsafe procedure. <strong>Note:</strong> Arming is blocked with the failsafe kill switch in the ON position"
     },
     "failsafeSwitchTitle": {
-        "message": "Failsafe Switch"
+        "message": "Failsafe Test Switch"
     },
     "failsafeSwitchModeItem": {
         "message": "Failsafe Switch Action"

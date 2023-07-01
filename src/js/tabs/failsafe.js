@@ -18,17 +18,17 @@ TABS.failsafe.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_STATUS))
             .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_FAILSAFE_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_RXFAIL_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_SERIAL_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_GPS_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_GPS_RESCUE))
             //.then(() => MSP.promise(MSPCodes.MSP_RX_CONFIG))
-            .then(() => MSP.promise(MSPCodes.MSP_RXFAIL_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_RSSI_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_MOTOR_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_MODE_RANGES))
             .then(() => MSP.promise(MSPCodes.MSP_BOXIDS))
             .then(() => MSP.promise(MSPCodes.MSP_BOXNAMES))
             .then(() => MSP.promise(MSPCodes.MSP_RC))
-            .then(() => MSP.promise(MSPCodes.MSP_SERIAL_CONFIG))
             .then(callback);
     }
 
@@ -158,8 +158,8 @@ TABS.failsafe.initialize = function (callback) {
                 i18n.getMessage('controlAxisRoll'),
                 i18n.getMessage('controlAxisPitch'),
                 i18n.getMessage('controlAxisYaw'),
-                i18n.getMessage('controlAxisThrottle'),
                 i18n.getMessage('controlAxisCollective'),
+                i18n.getMessage('controlAxisThrottle'),
             ],
             fullChannels_e = $('div.activechannellist');
         let aux_index = 1,
