@@ -527,7 +527,7 @@ TABS.rates.checkRC = function() {
     // Function monitors for change in the primary axes rc received data and returns true if a change is detected.
 
     if (!this.oldRC) {
-        this.oldRC = [ FC.RC.channels[0], FC.RC.channels[1], FC.RC.channels[2] ];
+        this.oldRC = [ FC.RC.channels[0], FC.RC.channels[1], FC.RC.channels[2], FC.RC.channels[3] ];
     }
 
     // Monitor FC.RC.channels and detect change of value;
