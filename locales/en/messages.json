@@ -1657,6 +1657,9 @@
     "receiverBars": {
         "message": "Receiver Channels"
     },
+    "receiverBarsHelp": {
+        "message": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the corrent function for each RC channel."
+    },
     "receiverChannelOrder": {
         "message": "Channel Order Preset"
     },
