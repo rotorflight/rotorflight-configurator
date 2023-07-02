@@ -3957,6 +3957,12 @@
     "profilesRescueAltitudeIGainHelp": {
         "message": "I-gain for altitude control"
     },
+    "profilesRescueAltitudeDGain": {
+        "message": "Altitude D-Gain"
+    },
+    "profilesRescueAltitudeDGainHelp": {
+        "message": "D-gain for altitude control (vario)"
+    },
     "profilesRescueMaxCollective": {
         "message": "Maximum Collective [%]"
     },

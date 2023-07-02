@@ -571,6 +571,7 @@ const FC = {
             rescueHoverAltitude:        0,
             rescueAltitudePGain:        0,
             rescueAltitudeIGain:        0,
+            rescueAltitudeDGain:        0,
             rescueMaxCollective:        0,
             rescueMaxRate:              0,
             rescueMaxAccel:             0,

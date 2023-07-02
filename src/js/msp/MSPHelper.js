@@ -965,7 +965,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_RESCUE_PROFILE:
-                // Rescue //
                 FC.PID_PROFILE.rescueMode                    = data.readU8();
                 FC.PID_PROFILE.rescueFlipMode                = data.readU8();
                 FC.PID_PROFILE.rescueFlipGain                = data.readU8();
@@ -980,13 +979,13 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.PID_PROFILE.rescueHoverAltitude           = data.readU16();
                 FC.PID_PROFILE.rescueAltitudePGain           = data.readU16();
                 FC.PID_PROFILE.rescueAltitudeIGain           = data.readU16();
+                FC.PID_PROFILE.rescueAltitudeDGain           = data.readU16();
                 FC.PID_PROFILE.rescueMaxCollective           = data.readU16();
                 FC.PID_PROFILE.rescueMaxRate                 = data.readU16();
                 FC.PID_PROFILE.rescueMaxAccel                = data.readU16();
                 break;
 
             case MSPCodes.MSP_GOVERNOR_PROFILE:
-                // GOVERNOR //
                 FC.GOVERNOR.gov_headspeed                    = data.readU16();
                 FC.GOVERNOR.gov_gain                         = data.readU8();
                 FC.GOVERNOR.gov_p_gain                       = data.readU8();
@@ -1788,7 +1787,6 @@ MspHelper.prototype.crunch = function(code) {
             break;
 
         case MSPCodes.MSP_SET_RESCUE_PROFILE:
-                // Rescue //
             buffer.push8(FC.PID_PROFILE.rescueMode)
                 .push8(FC.PID_PROFILE.rescueFlipMode)
                 .push8(FC.PID_PROFILE.rescueFlipGain)
@@ -1803,13 +1801,13 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.PID_PROFILE.rescueHoverAltitude)
                 .push16(FC.PID_PROFILE.rescueAltitudePGain)
                 .push16(FC.PID_PROFILE.rescueAltitudeIGain)
+                .push16(FC.PID_PROFILE.rescueAltitudeDGain)
                 .push16(FC.PID_PROFILE.rescueMaxCollective)
                 .push16(FC.PID_PROFILE.rescueMaxRate)
                 .push16(FC.PID_PROFILE.rescueMaxAccel);
             break;
 
         case MSPCodes.MSP_SET_GOVERNOR_PROFILE:
-                // GOVERNOR //
             buffer.push16(FC.GOVERNOR.gov_headspeed)
                 .push8(FC.GOVERNOR.gov_gain)
                 .push8(FC.GOVERNOR.gov_p_gain)

@@ -206,6 +206,7 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="rescueHoverAltitude"]').val(FC.PID_PROFILE.rescueHoverAltitude / 100).change();
         $('.tab-profiles input[id="rescueAltitudePGain"]').val(FC.PID_PROFILE.rescueAltitudePGain);
         $('.tab-profiles input[id="rescueAltitudeIGain"]').val(FC.PID_PROFILE.rescueAltitudeIGain);
+        $('.tab-profiles input[id="rescueAltitudeDGain"]').val(FC.PID_PROFILE.rescueAltitudeDGain);
         $('.tab-profiles input[id="rescueMaxCollective"]').val(FC.PID_PROFILE.rescueMaxCollective / 10).change();
 
         // Governor settings
@@ -297,6 +298,7 @@ TABS.profiles.initialize = function (callback) {
         FC.PID_PROFILE.rescueHoverAltitude = $('.tab-profiles input[id="rescueHoverAltitude"]').val() * 100;
         FC.PID_PROFILE.rescueAltitudePGain = $('.tab-profiles input[id="rescueAltitudePGain"]').val();
         FC.PID_PROFILE.rescueAltitudeIGain = $('.tab-profiles input[id="rescueAltitudeIGain"]').val();
+        FC.PID_PROFILE.rescueAltitudeDGain = $('.tab-profiles input[id="rescueAltitudeDGain"]').val();
         FC.PID_PROFILE.rescueMaxCollective = $('.tab-profiles input[id="rescueMaxCollective"]').val() * 10;
 
         // TTA settings
