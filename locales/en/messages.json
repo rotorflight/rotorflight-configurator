@@ -3840,11 +3840,11 @@
     "profilesYawFFImpulseGainHelp": {
         "message": "Gain value for collective impulse feedforward mixed into yaw"
     },
-    "profilesyawFFImpulseFreq": {
-        "message": "Collective Impulse Feedforward Frequency"
+    "profilesyawFFImpulseDecay": {
+        "message": "Collective Impulse Feedforward Decay time"
     },
-    "profilesyawFFImpulseFreqHelp": {
-        "message": "Frequency value for collective impulse feedforward mixed into yaw"
+    "profilesyawFFImpulseDecayHelp": {
+        "message": "Decay time for collective impulse feedforward mixed into yaw"
     },
     "profilespitchFFCollectiveGain": {
         "message": "Collective Feedforward Gain"

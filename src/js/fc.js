@@ -555,7 +555,7 @@ const FC = {
             yawFFCyclicGain:            0,
             yawFFCollectiveGain:        0,
             yawFFImpulseGain:           0,
-            yawFFImpulseFreq:           0,
+            yawFFImpulseDecay:          0,
             pitchFFCollectiveGain:      0,
             pid_mode:                   0,
             rescueMode:                 0,

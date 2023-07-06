@@ -157,7 +157,7 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="yawFFCyclicGain"]').val(FC.PID_PROFILE.yawFFCyclicGain);
         $('.tab-profiles input[id="yawFFCollectiveGain"]').val(FC.PID_PROFILE.yawFFCollectiveGain);
         $('.tab-profiles input[id="yawFFImpulseGain"]').val(FC.PID_PROFILE.yawFFImpulseGain);
-        $('.tab-profiles input[id="yawFFImpulseFreq"]').val(FC.PID_PROFILE.yawFFImpulseFreq);
+        $('.tab-profiles input[id="yawFFImpulseDecay"]').val(FC.PID_PROFILE.yawFFImpulseDecay);
 
         // Pitch settings
         $('.tab-profiles input[id="pitchFFCollectiveGain"]').val(FC.PID_PROFILE.pitchFFCollectiveGain);
@@ -267,7 +267,7 @@ TABS.profiles.initialize = function (callback) {
         FC.PID_PROFILE.yawFFCyclicGain = $('.tab-profiles input[id="yawFFCyclicGain"]').val();
         FC.PID_PROFILE.yawFFCollectiveGain = $('.tab-profiles input[id="yawFFCollectiveGain"]').val();
         FC.PID_PROFILE.yawFFImpulseGain = $('.tab-profiles input[id="yawFFImpulseGain"]').val();
-        FC.PID_PROFILE.yawFFImpulseFreq = $('.tab-profiles input[id="yawFFImpulseFreq"]').val();
+        FC.PID_PROFILE.yawFFImpulseDecay = $('.tab-profiles input[id="yawFFImpulseDecay"]').val();
         // Pitch settings
         FC.PID_PROFILE.pitchFFCollectiveGain = parseInt($('.tab-profiles input[id="pitchFFCollectiveGain"]').val());
 

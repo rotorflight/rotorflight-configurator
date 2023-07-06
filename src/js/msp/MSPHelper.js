@@ -949,11 +949,11 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.PID_PROFILE.itermRelaxCutoffYaw           = data.readU8();
                 FC.PID_PROFILE.yawStopGainCW                 = data.readU8();
                 FC.PID_PROFILE.yawStopGainCCW                = data.readU8();
-                FC.PID_PROFILE.yawFFCyclicGain               = data.readU16();
-                FC.PID_PROFILE.yawFFCollectiveGain           = data.readU16();
-                FC.PID_PROFILE.yawFFImpulseGain              = data.readU16();
-                FC.PID_PROFILE.yawFFImpulseFreq              = data.readU8();
-                FC.PID_PROFILE.pitchFFCollectiveGain         = data.readU16();
+                FC.PID_PROFILE.yawFFCyclicGain               = data.readU8();
+                FC.PID_PROFILE.yawFFCollectiveGain           = data.readU8();
+                FC.PID_PROFILE.yawFFImpulseGain              = data.read8();
+                FC.PID_PROFILE.yawFFImpulseDecay             = data.readU8();
+                FC.PID_PROFILE.pitchFFCollectiveGain         = data.readU8();
                 // Angle Mode //
                 FC.PID_PROFILE.levelAngleStrength            = data.readU8();
                 FC.PID_PROFILE.levelAngleLimit               = data.readU8();
@@ -1771,11 +1771,11 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.PID_PROFILE.itermRelaxCutoffYaw)
                 .push8(FC.PID_PROFILE.yawStopGainCW)
                 .push8(FC.PID_PROFILE.yawStopGainCCW)
-                .push16(FC.PID_PROFILE.yawFFCyclicGain)
-                .push16(FC.PID_PROFILE.yawFFCollectiveGain)
-                .push16(FC.PID_PROFILE.yawFFImpulseGain)
-                .push8(FC.PID_PROFILE.yawFFImpulseFreq)
-                .push16(FC.PID_PROFILE.pitchFFCollectiveGain)
+                .push8(FC.PID_PROFILE.yawFFCyclicGain)
+                .push8(FC.PID_PROFILE.yawFFCollectiveGain)
+                .push8(FC.PID_PROFILE.yawFFImpulseGain)
+                .push8(FC.PID_PROFILE.yawFFImpulseDecay)
+                .push8(FC.PID_PROFILE.pitchFFCollectiveGain)
                 // Angle //
                 .push8(FC.PID_PROFILE.levelAngleStrength)
                 .push8(FC.PID_PROFILE.levelAngleLimit)
