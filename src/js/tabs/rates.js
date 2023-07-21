@@ -140,7 +140,7 @@ TABS.rates.initialize = function (callback) {
                 FC.RC_TUNING.rcPitchRate        /= 1000;
                 FC.RC_TUNING.RC_RATE            /= 1000;
                 FC.RC_TUNING.rcYawRate          /= 1000;
-                FC.RC_TUNING.rcCollectiveRate   /= 12;
+                FC.RC_TUNING.rcCollectiveRate   /= 25;
                 FC.RC_TUNING.RC_PITCH_EXPO      /= 100;
                 FC.RC_TUNING.RC_EXPO            /= 100;
                 FC.RC_TUNING.RC_YAW_EXPO        /= 100;
@@ -151,18 +151,18 @@ TABS.rates.initialize = function (callback) {
                 FC.RC_TUNING.pitch_rate         /= 1000;
                 FC.RC_TUNING.roll_rate          /= 1000;
                 FC.RC_TUNING.yaw_rate           /= 1000;
-                FC.RC_TUNING.collective_rate    /= 12;
+                FC.RC_TUNING.collective_rate    /= 25;
                 FC.RC_TUNING.rcPitchRate        /= 1000;
                 FC.RC_TUNING.RC_RATE            /= 1000;
                 FC.RC_TUNING.rcYawRate          /= 1000;
-                FC.RC_TUNING.rcCollectiveRate   /= 12;
+                FC.RC_TUNING.rcCollectiveRate   /= 25;
                 break;
 
             case self.RATES_TYPE.QUICKRATES:
                 FC.RC_TUNING.pitch_rate         /= 1000;
                 FC.RC_TUNING.roll_rate          /= 1000;
                 FC.RC_TUNING.yaw_rate           /= 1000;
-                FC.RC_TUNING.collective_rate    /= 1000;
+                FC.RC_TUNING.collective_rate    /= 480;
                 break;
 
             default: // BetaFlight
@@ -434,7 +434,7 @@ TABS.rates.convertToCollective = function (rate) {
         case self.RATES_TYPE.BETAFLIGHT:
         case self.RATES_TYPE.KISS:
         case self.RATES_TYPE.QUICKRATES:
-            rate /= 83.33;
+            rate /= 40;
             break;
         case self.RATES_TYPE.RACEFLIGHT:
         case self.RATES_TYPE.ACTUAL:
@@ -772,7 +772,6 @@ TABS.rates.initRatesSystem = function() {
             rcRateLabel = "rateSetupRcRateRaceflight";
             rateLabel   = "rateSetupRateRaceflight";
             rcExpoLabel = "rateSetupRcExpoRaceflight";
-
             rcRateDec   = 0;
             rcRateDef   = 360;
             rcRateMax   = 1000;
@@ -783,8 +782,8 @@ TABS.rates.initRatesSystem = function() {
             rateMax     = 255;
             rateStep    = 1;
             rcColDec    = 1;
-            rcColDef    = 12;
-            rcColMax    = 20;
+            rcColDef    = 12.5;
+            rcColMax    = 25;
             rcColMin    = 0;
             rcColStep   = 0.1;
             colDec      = 0;
@@ -802,7 +801,6 @@ TABS.rates.initRatesSystem = function() {
             rcRateLabel = "rateSetupRcRate";
             rateLabel   = "rateSetupRcRateRaceflight";
             rcExpoLabel = "rateSetupRcExpoKISS";
-
             rcRateDec   = 2;
             rcRateDef   = 1.80;
             rcRateMax   = 2.55;
@@ -813,7 +811,7 @@ TABS.rates.initRatesSystem = function() {
             rateMax     = 0.99;
             rateStep    = 0.01;
             rcColDec    = 2;
-            rcColDef    = 2.55;
+            rcColDef    = 2.50;
             rcColMax    = 2.55;
             rcColMin    = 0.01;
             rcColStep   = 0.01;
@@ -832,7 +830,6 @@ TABS.rates.initRatesSystem = function() {
             rcRateLabel = "rateSetupRcRateActual";
             rateLabel   = "rateSetupRateQuickRates";
             rcExpoLabel = "rateSetupRcExpoRaceflight";
-
             rcRateDec   = 0;
             rcRateDef   = 360;
             rcRateMax   = 1000;
@@ -844,13 +841,13 @@ TABS.rates.initRatesSystem = function() {
             rateStep    = 10;
             rcColDec    = 1;
             rcColDef    = 12;
-            rcColMax    = 20;
+            rcColMax    = 25;
             rcColMin    = 0;
-            rcColStep   = 0.1;
+            rcColStep   = 0.5;
             colDec      = 1;
             colDef      = 12;
-            colMax      = 20;
-            colStep     = 0.1;
+            colMax      = 25;
+            colStep     = 0.5;
             expoDec     = 2;
             expoDef     = 0.00;
             expoMax     = 1.00;
@@ -862,7 +859,6 @@ TABS.rates.initRatesSystem = function() {
             rcRateLabel = "rateSetupRcRate";
             rateLabel   = "rateSetupRateQuickRates";
             rcExpoLabel = "rateSetupRcExpoRaceflight";
-
             rcRateDec   = 2;
             rcRateDef   = 1.80;
             rcRateMax   = 2.55;
@@ -873,7 +869,7 @@ TABS.rates.initRatesSystem = function() {
             rateMax     = 1000;
             rateStep    = 10;
             rcColDec    = 2;
-            rcColDef    = 2.55;
+            rcColDef    = 2.50;
             rcColMax    = 2.55;
             rcColMin    = 0.01;
             rcColStep   = 0.01;
@@ -885,14 +881,12 @@ TABS.rates.initRatesSystem = function() {
             expoDef     = 0.00;
             expoMax     = 1.00;
             expoStep    = 0.01;
-
             break;
 
         case self.RATES_TYPE.BETAFLIGHT:
             rcRateLabel = "rateSetupRcRate";
             rateLabel   = "rateSetupRate";
             rcExpoLabel = "rateSetupRcExpo";
-
             rcRateDec   = 2;
             rcRateDef   = 1.80;
             rcRateMax   = 2.55;
@@ -903,8 +897,8 @@ TABS.rates.initRatesSystem = function() {
             rateMax     = 0.99;
             rateStep    = 0.01;
             rcColDec    = 2;
-            rcColDef    = 2.19;
-            rcColMax    = 2.55;
+            rcColDef    = 2.03;
+            rcColMax    = 2.20;
             rcColMin    = 0.01;
             rcColStep   = 0.01;
             colDec      = 2;
@@ -915,38 +909,35 @@ TABS.rates.initRatesSystem = function() {
             expoDef     = 0.00;
             expoMax     = 1.00;
             expoStep    = 0.01;
-
             break;
 
         default:
-                rcRateLabel = "rateSetupRcRate";
-                rateLabel   = "rateSetupRate";
-                rcExpoLabel = "rateSetupRcExpo";
-
-                rcRateDec   = 0;
-                rcRateDef   = 0;
-                rcRateMax   = 0;
-                rcRateMin   = 0;
-                rcRateStep  = 0;
-                rateDec     = 0;
-                rateDef     = 0;
-                rateMax     = 0;
-                rateStep    = 0;
-                rcColDec    = 0;
-                rcColDef    = 0;
-                rcColMax    = 0;
-                rcColMin    = 0;
-                rcColStep   = 0;
-                colDec      = 0;
-                colDef      = 0;
-                colMax      = 0;
-                colStep     = 0;
-                expoDec     = 0;
-                expoDef     = 0;
-                expoMax     = 0;
-                expoStep    = 0;
-
-                break;
+            rcRateLabel = "rateSetupRcRate";
+            rateLabel   = "rateSetupRate";
+            rcExpoLabel = "rateSetupRcExpo";
+            rcRateDec   = 0;
+            rcRateDef   = 0;
+            rcRateMax   = 0;
+            rcRateMin   = 0;
+            rcRateStep  = 0;
+            rateDec     = 0;
+            rateDef     = 0;
+            rateMax     = 0;
+            rateStep    = 0;
+            rcColDec    = 0;
+            rcColDef    = 0;
+            rcColMax    = 0;
+            rcColMin    = 0;
+            rcColStep   = 0;
+            colDec      = 0;
+            colDef      = 0;
+            colMax      = 0;
+            colStep     = 0;
+            expoDec     = 0;
+            expoDef     = 0;
+            expoMax     = 0;
+            expoStep    = 0;
+            break;
         }
 
     self.currentRates = {
@@ -980,7 +971,7 @@ TABS.rates.initRatesSystem = function() {
             self.currentRates.collective_rate    *= 100;
             self.currentRates.rc_rate            *= 1000;
             self.currentRates.rc_rate_yaw        *= 1000;
-            self.currentRates.rc_rate_collective *= 12;
+            self.currentRates.rc_rate_collective *= 25;
             self.currentRates.rc_rate_pitch      *= 1000;
             self.currentRates.rc_expo            *= 100;
             self.currentRates.rc_yaw_expo        *= 100;
@@ -992,10 +983,10 @@ TABS.rates.initRatesSystem = function() {
             self.currentRates.roll_rate          *= 1000;
             self.currentRates.pitch_rate         *= 1000;
             self.currentRates.yaw_rate           *= 1000;
-            self.currentRates.collective_rate    *= 12;
+            self.currentRates.collective_rate    *= 25;
             self.currentRates.rc_rate            *= 1000;
             self.currentRates.rc_rate_yaw        *= 1000;
-            self.currentRates.rc_rate_collective *= 12;
+            self.currentRates.rc_rate_collective *= 25;
             self.currentRates.rc_rate_pitch      *= 1000;
             break;
 
@@ -1003,7 +994,7 @@ TABS.rates.initRatesSystem = function() {
             self.currentRates.roll_rate          *= 1000;
             self.currentRates.pitch_rate         *= 1000;
             self.currentRates.yaw_rate           *= 1000;
-            self.currentRates.collective_rate    *= 1000;
+            self.currentRates.collective_rate    *= 480;
             break;
 
         default:
@@ -1012,18 +1003,18 @@ TABS.rates.initRatesSystem = function() {
 
     // Set defaults if type changed
     if (self.currentRatesType !== self.previousRatesType) {
-        self.currentRates.roll_rate     = rateDef;
-        self.currentRates.pitch_rate    = rateDef;
-        self.currentRates.yaw_rate      = rateDef;
-        self.currentRates.collective_rate = colDef;
-        self.currentRates.rc_rate       = rcRateDef;
-        self.currentRates.rc_rate_yaw   = rcRateDef;
-        self.currentRates.rc_rate_pitch = rcRateDef;
-        self.currentRates.rc_rate_collective = rcColDef;
-        self.currentRates.rc_expo       = expoDef;
-        self.currentRates.rc_yaw_expo   = expoDef;
-        self.currentRates.rc_pitch_expo = expoDef;
-        self.currentRates.rc_collective_expo = expoDef;
+        self.currentRates.roll_rate             = rateDef;
+        self.currentRates.pitch_rate            = rateDef;
+        self.currentRates.yaw_rate              = rateDef;
+        self.currentRates.collective_rate       = colDef;
+        self.currentRates.rc_rate               = rcRateDef;
+        self.currentRates.rc_rate_yaw           = rcRateDef;
+        self.currentRates.rc_rate_pitch         = rcRateDef;
+        self.currentRates.rc_rate_collective    = rcColDef;
+        self.currentRates.rc_expo               = expoDef;
+        self.currentRates.rc_yaw_expo           = expoDef;
+        self.currentRates.rc_pitch_expo         = expoDef;
+        self.currentRates.rc_collective_expo    = expoDef;
     }
 
     const rcRateLabel_e = $('.rates_setup .rates_titlebar .rc_rate');
