@@ -4039,7 +4039,7 @@
         "message": "Center Sensitivity"
     },
     "rateSetupMaxVel": {
-        "message": "Max Vel [deg/s]"
+        "message": "Max Vel [°/s]"
     },
     "rateSetupRatesCurve": {
         "message": "Rates Curves"

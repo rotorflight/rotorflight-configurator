@@ -297,7 +297,7 @@ TABS.rates.initialize = function (callback) {
                         printMaxAngularVel(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, self.maxAngularVelPitchElement),
                         printMaxAngularVel(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, self.maxAngularVelYawElement));
 
-                    // make maxAngularVel multiple of 200deg/s so that the auto-scale doesn't keep changing for small changes of the maximum curve
+                    // make maxAngularVel multiple of 200°/s so that the auto-scale doesn't keep changing for small changes of the maximum curve
                     maxAngularVel = self.rateCurve.setMaxAngularVel(maxAngularVel);
 
                     drawAxes(curveContext, curveWidth, curveHeight);
@@ -693,16 +693,16 @@ TABS.rates.updateRatesLabels = function() {
             stickContext.scale(textScale, 1);
 
             // add the maximum range label
-            drawAxisLabel(stickContext, maxAngularVel.toFixed(0) + ' deg/s', ((curveWidth / 2) - 10) / textScale, parseInt(stickContext.font)*1.2, 'right');
+            drawAxisLabel(stickContext, maxAngularVel.toFixed(0) + '°/s', ((curveWidth / 2) - 10) / textScale, parseInt(stickContext.font)*1.2, 'right');
 
             // and then the balloon labels.
             balloonsDirty = []; // reset the dirty balloon draw area (for overlap detection)
             // create an array of balloons to draw
             const balloons = [
-                {value: maxAngularVelRoll, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelRoll + ' deg/s',  curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelRoll)),  'right', BALLOON_COLORS.roll, balloonsDirty);}},
-                {value: maxAngularVelPitch, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelPitch + ' deg/s', curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelPitch)), 'right', BALLOON_COLORS.pitch, balloonsDirty);}},
-                {value: maxAngularVelYaw, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelYaw + ' deg/s',   curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelYaw)),   'right', BALLOON_COLORS.yaw, balloonsDirty);}},
-                {value: 10000, balloon: function() {drawBalloonLabel(stickContext, maxCollectiveAngleText + ' deg', curveWidth, 0,   'right', BALLOON_COLORS.collective, balloonsDirty);}}
+                {value: maxAngularVelRoll, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelRoll + '°/s',  curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelRoll)),  'right', BALLOON_COLORS.roll, balloonsDirty);}},
+                {value: maxAngularVelPitch, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelPitch + '°/s', curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelPitch)), 'right', BALLOON_COLORS.pitch, balloonsDirty);}},
+                {value: maxAngularVelYaw, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelYaw + '°/s',   curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelYaw)),   'right', BALLOON_COLORS.yaw, balloonsDirty);}},
+                {value: 10000, balloon: function() {drawBalloonLabel(stickContext, maxCollectiveAngleText + '°', curveWidth, 0,   'right', BALLOON_COLORS.collective, balloonsDirty);}}
             ];
 
             // and sort them in descending order so the largest value is at the top always
@@ -711,10 +711,10 @@ TABS.rates.updateRatesLabels = function() {
             // add the current rc values
             if (drawStickPositions) {
                 balloons.push(
-                    {value: currentValues[3], balloon: function() {drawBalloonLabel(stickContext, self.convertToCollective(currentValues[3]) + ' deg', 10, 50,  'none', BALLOON_COLORS.collective, balloonsDirty);}},
-                    {value: currentValues[0], balloon: function() {drawBalloonLabel(stickContext, currentValues[0].toFixed(0) + ' deg/s', 10, 150, 'none', BALLOON_COLORS.roll, balloonsDirty);}},
-                    {value: currentValues[1], balloon: function() {drawBalloonLabel(stickContext, currentValues[1].toFixed(0) + ' deg/s', 10, 250, 'none', BALLOON_COLORS.pitch, balloonsDirty);}},
-                    {value: currentValues[2], balloon: function() {drawBalloonLabel(stickContext, currentValues[2].toFixed(0) + ' deg/s', 10, 350,  'none', BALLOON_COLORS.yaw, balloonsDirty);}}
+                    {value: currentValues[3], balloon: function() {drawBalloonLabel(stickContext, self.convertToCollective(currentValues[3]) + '°', 10, 50,  'none', BALLOON_COLORS.collective, balloonsDirty);}},
+                    {value: currentValues[0], balloon: function() {drawBalloonLabel(stickContext, currentValues[0].toFixed(0) + '°/s', 10, 150, 'none', BALLOON_COLORS.roll, balloonsDirty);}},
+                    {value: currentValues[1], balloon: function() {drawBalloonLabel(stickContext, currentValues[1].toFixed(0) + '°/s', 10, 250, 'none', BALLOON_COLORS.pitch, balloonsDirty);}},
+                    {value: currentValues[2], balloon: function() {drawBalloonLabel(stickContext, currentValues[2].toFixed(0) + '°/s', 10, 350,  'none', BALLOON_COLORS.yaw, balloonsDirty);}}
                 );
             }
             // then display them on the chart
