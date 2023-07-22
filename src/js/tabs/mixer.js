@@ -17,7 +17,7 @@ TABS.mixer = {
         { class: 'mixerMainRotor',  axis: 1,  min:-18,   max:18,   step:0.1,  fixed:1,  scale:0.012,  pipstep: 1,  pipfix: 0,  pipval: [ -18, -15, -12, -9, -6, -3, 0, 3, 6, 9, 12, 15, 18, ], },
         { class: 'mixerMainRotor',  axis: 2,  min:-18,   max:18,   step:0.1,  fixed:1,  scale:0.012,  pipstep: 1,  pipfix: 0,  pipval: [ -18, -15, -12, -9, -6, -3, 0, 3, 6, 9, 12, 15, 18, ], },
         { class: 'mixerMainRotor',  axis: 4,  min:-18,   max:18,   step:0.1,  fixed:1,  scale:0.012,  pipstep: 1,  pipfix: 0,  pipval: [ -18, -15, -12, -9, -6, -3, 0, 3, 6, 9, 12, 15, 18, ], },
-        { class: 'mixerTailRotor',  axis: 3,  min:-30,   max:30,   step:0.1,  fixed:0,  scale:0.024,  pipstep: 1,  pipfix: 0,  pipval: [ -30, -24, -18, -12, -6, 0, 6, 12, 18, 24, 30, ], },
+        { class: 'mixerTailRotor',  axis: 3,  min:-45,   max:45,   step:0.1,  fixed:0,  scale:0.024,  pipstep: 1,  pipfix: 0,  pipval: [ -40, -30, -20, -10, 0, 10, 20, 30, 40, ], },
         { class: 'mixerTailMotor',  axis: 3,  min:-125,  max:125,  step:1,    fixed:0,  scale:0.100,  pipstep: 5,  pipfix: 0,  pipval: [ -125, -100, -75, -50, -25, 0, 25, 50, 75, 100, 125, ], },
     ],
 };
