@@ -240,6 +240,7 @@ TABS.receiver.initialize = function (callback) {
             .val(FC.RX_CONFIG.rx_max_usec)
             .change();
 
+        $('.receiverPulseLimit').hide();
         $('.receiverStickComamnds').hide();
 
 
