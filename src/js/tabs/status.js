@@ -162,7 +162,9 @@ TABS.status.initialize = function (callback) {
             i18n.getMessage('controlAxisThrottle'),
         ];
 
-        const numBars = (FC.RC.active_channels > 0) ? FC.RC.active_channels : 8;
+
+        const numChs = Math.min(FC.RC.active_channels, 18);
+        const numBars = Math.max(numChs, 8);
         const barContainer = $('.tab-status .bars');
 
         for (let i = 0, aux = 1; i < numBars; i++) {
@@ -174,7 +176,7 @@ TABS.status.initialize = function (callback) {
                     <li class="meter">\
                         <div class="meter-bar">\
                             <div class="label"></div>\
-                            <div class="fill' + (FC.RC.active_channels == 0 ? 'disabled' : '') + '">\
+                            <div class="fill' + (i < numChs ? '' : 'disabled') + '">\
                                 <div class="label"></div>\
                             </div>\
                         </div>\
@@ -218,7 +220,7 @@ TABS.status.initialize = function (callback) {
         });
 
         function update_rc_channels() {
-            for (let i = 0; i < FC.RC.active_channels; i++) {
+            for (let i = 0; i < numChs; i++) {
                 meterFillArray[i].css('width', ((FC.RC.channels[i] - meterScaleMin) / (meterScaleMax - meterScaleMin) * 100).clamp(0, 100) + '%');
                 meterLabelArray[i].text(FC.RC.channels[i]);
             }
