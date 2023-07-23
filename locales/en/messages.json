@@ -3666,6 +3666,33 @@
     "controlAxisAux18": {
         "message": "AUX 18"
     },
+    "controlAxisAux19": {
+        "message": "AUX 19"
+    },
+    "controlAxisAux20": {
+        "message": "AUX 20"
+    },
+    "controlAxisAux21": {
+        "message": "AUX 21"
+    },
+    "controlAxisAux22": {
+        "message": "AUX 22"
+    },
+    "controlAxisAux23": {
+        "message": "AUX 23"
+    },
+    "controlAxisAux24": {
+        "message": "AUX 24"
+    },
+    "controlAxisAux25": {
+        "message": "AUX 25"
+    },
+    "controlAxisAux26": {
+        "message": "AUX 26"
+    },
+    "controlAxisAux27": {
+        "message": "AUX 27"
+    },
     "rssiOptionAUTO": {
         "message": "AUTO"
     },
