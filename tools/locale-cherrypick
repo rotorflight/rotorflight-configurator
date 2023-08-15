@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+
+import re
+import os
+import sys
+import json
+
+
+def load_locale(file):
+    with open(file) as data:
+        locale = json.load(data)
+    return locale
+
+def save_locale(file, data):
+    with open(file, 'w', encoding='utf8') as out:
+        json.dump(data, out, indent=4, ensure_ascii=False)
+
+
+def pick_locale(old_file, new_file, select, insert):
+
+    old_loc = load_locale(old_file)
+    new_loc = load_locale(new_file)
+
+    tmp_loc = {}
+
+    for key in list(new_loc):
+
+        ## Keep all entries
+        tmp_loc[key] = new_loc[key]
+
+        ## Found location for insertion
+        if key == insert:
+            if select in old_loc and select not in new_loc:
+                tmp_loc[select] = old_loc[select]
+
+    return tmp_loc
+
+
+def main(args):
+    """
+    Import/merge an old value into a new locale file.
+
+    Args: <old locale> <new locale> <select key> <insert after>
+
+    """
+
+    old_file = args[1]
+    new_file = args[2]
+
+    select = args[3]
+    insert = args[4]
+
+    print(f'Old locale: {old_file}')
+    print(f'New locale: {new_file}')
+
+    locale = pick_locale(old_file, new_file, select, insert)
+
+    save_locale(new_file, locale)
+
+
+main(sys.argv)

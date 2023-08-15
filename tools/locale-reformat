@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+
+import re
+import os
+import sys
+import json
+
+keepRegex = [
+    'translation_version',
+]
+
+noTransRegex = [
+    'language_[a-z][a-z]$',
+    'language_[a-z][a-z]_[A-Z][A-Z]$',
+]
+
+def matchRegex(key,reglist):
+    for regex in reglist:
+        if re.search(regex, key):
+            return True
+    return False
+
+def load_locale(file):
+    with open(file) as data:
+        locale = json.load(data)
+    return locale
+
+
+def save_locale(file, data):
+    with open(file, 'w', encoding='utf8') as out:
+        json.dump(data, out, indent=4, ensure_ascii=False)
+
+
+def update_translation(old_loc, old_eng):
+
+    new_loc = {}
+
+    for key in list(old_eng):
+
+        if matchRegex(key, noTransRegex):
+            continue
+
+        ## CASE: Entry present in translation
+        if key in old_loc and 'message' in old_loc[key]:
+
+            ## CASE: Take unmodified from the old translation
+            if matchRegex(key, keepRegex):
+                new_loc[key] = old_loc[key]
+                continue
+
+            new_loc[key] = {}
+
+            ## CASE: add translation
+            new_loc[key]['message'] = old_loc[key]['message']
+            new_loc[key]['english'] = old_eng[key]['message']
+
+            ## Find suitable description
+            if 'description' in old_loc[key]:
+                new_loc[key]['description'] = old_loc[key]['description']
+            elif 'description' in old_eng[key]:
+                new_loc[key]['description'] = old_eng[key]['description']
+
+        ## CASE: no entry in translation
+        else:
+
+            print(f'Key {key} missing')
+
+            ## CASE: Take from english
+            if matchRegex(key, keepRegex):
+                new_loc[key] = old_eng[key]
+
+
+    for key in list(old_loc):
+        if key not in old_eng:
+            print(f'Unkown key {key} in locale')
+
+
+    return new_loc
+
+
+def main(args):
+    """
+    Generate initial translation locale from english plus other language(s).
+
+    Args: <en locale> <locales...>
+
+    All locales used should have the same keys and correct translations.
+
+    """
+
+    en_file = args[1]
+    i18n_files = args[2:]
+
+    print(f'En locale: {en_file}')
+
+    en_loc = load_locale(en_file)
+
+    for file in i18n_files:
+        print(f'Processing locale: {file}')
+        locale = load_locale(file)
+        trans = update_translation(locale, en_loc)
+        save_locale(file, trans)
+
+
+main(sys.argv)

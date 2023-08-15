@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+
+import re
+import os
+import sys
+import json
+
+
+def load_locale(file):
+    with open(file) as data:
+        locale = json.load(data)
+    return locale
+
+def save_locale(file, data):
+    with open(file, 'w', encoding='utf8') as out:
+        json.dump(data, out, indent=4, ensure_ascii=False)
+
+
+def remove_status(loc):
+
+    for key in list(loc):
+
+        ## Remove status
+        if 'status' in loc[key]:
+            del loc[key]['status']
+
+        ## Remove previous
+        if 'previous' in loc[key]:
+            del loc[key]['previous']
+
+    return loc
+
+
+def main(args):
+    """
+    Delete status entries in locale file.
+
+    Args: <locale files...>
+
+    """
+
+    i18n_files = args[1:]
+
+    for file in i18n_files:
+        print(f'Processing locale: {file}')
+        locale = load_locale(file)
+        locale = remove_status(locale)
+        save_locale(file, locale)
+
+
+main(sys.argv)

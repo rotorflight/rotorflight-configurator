@@ -1,0 +1,16 @@
+#!/bin/bash
+
+EN='locales/en/messages.json'
+
+ARGS=$EN
+
+for L in locales/*/messages.json
+do
+    if [ "$L" != "$EN" ]
+    then
+        ARGS="${ARGS} $L"
+    fi
+done
+
+./tools/locale-update ${ARGS}
+

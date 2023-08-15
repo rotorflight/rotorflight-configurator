@@ -1,0 +1,161 @@
+#!/usr/bin/env python3
+
+import re
+import os
+import sys
+import json
+
+newitem = 'New entry. Please translate!'
+simitem = 'Reused translation. Please check!'
+changed = 'Modified entry. Please translate!'
+convert = 'Auto-converted translation. Please check!'
+
+keepRegex = [
+    'translation_version',
+]
+
+noTransRegex = [
+    'language_'
+]
+
+convertRegex = {
+    'betaflight': 'rotorflight',
+    'Betaflight': 'Rotorflight',
+    'BetaFlight': 'Rotorflight',
+}
+
+def matchRegex(key,reglist):
+    for regex in reglist:
+        if re.search(regex, key):
+            return True
+    return False
+
+def tryRename(key, new_eng, old_loc):
+    if key not in old_loc:
+        for iter in old_loc:
+            if iter not in new_eng:
+                if old_loc[iter]['english'] == new_eng[key]['message']:
+                    print(f'Key renamed: {iter} => {key}')
+                    print(f"    message: {new_eng[key]['message']}")
+                    return iter
+    return key
+
+def tryConvert(message):
+    newmsg = message
+    for (rex,rep) in convertRegex.items():
+        newmsg = re.sub(rex, rep, newmsg)
+    if newmsg != message:
+        print(f'Conversion: {newmsg}')
+    return newmsg
+
+
+def load_locale(file):
+    with open(file) as data:
+        locale = json.load(data)
+    return locale
+
+def save_locale(file, data):
+    with open(file, 'w', encoding='utf8') as out:
+        json.dump(data, out, indent=4, ensure_ascii=False)
+
+
+def load_translation(old_loc, new_eng):
+
+    new_loc = {}
+
+    for key in list(new_eng):
+
+        if matchRegex(key, noTransRegex):
+            continue
+
+        new_loc[key] = {}
+
+        ## CASE: Entry present in translation
+        if key in old_loc:
+
+            ## CASE: Always take from the old translation
+            if matchRegex(key, keepRegex):
+                new_loc[key] = old_loc[key]
+                continue
+
+            ## CASE: No edits - use old translation
+            if old_loc[key]['english'] == new_eng[key]['message']:
+                new_loc[key]['message'] = old_loc[key]['message']
+                new_loc[key]['english'] = old_loc[key]['english']
+                if 'status' in old_loc[key]:
+                    new_loc[key]['status'] = old_loc[key]['status']
+                if 'description' in new_eng[key]:
+                    new_loc[key]['description'] = new_eng[key]['description']
+                if 'previous' in old_loc[key]:
+                    new_loc[key]['previous'] = old_loc[key]['previous']
+
+            ## CASE: Try to autoconvert
+            elif tryConvert(old_loc[key]['english']) == new_eng[key]['message']:
+                new_loc[key]['message'] = tryConvert(old_loc[key]['message'])
+                new_loc[key]['english'] = new_eng[key]['message']
+                new_loc[key]['status'] = convert
+                if 'description' in new_eng[key]:
+                    new_loc[key]['description'] = new_eng[key]['description']
+                new_loc[key]['previous'] = old_loc[key]
+
+            ## CASE: Message edited - translation needed
+            else:
+                new_loc[key]['message'] = new_eng[key]['message']
+                new_loc[key]['english'] = new_eng[key]['message']
+                new_loc[key]['status'] = changed
+                if 'description' in new_eng[key]:
+                    new_loc[key]['description'] = new_eng[key]['description']
+                new_loc[key]['previous'] = old_loc[key]
+
+        ## CASE: No entry in translation
+        else:
+
+            ## CASE: Initialise key
+            if matchRegex(key, keepRegex):
+                new_loc[key] = new_eng[key]
+                continue
+
+            old_key = tryRename(key, new_eng, old_loc)
+
+            ## CASE: key renamed or same english text
+            if old_key in old_loc:
+                new_loc[key]['message'] = old_loc[old_key]['message']
+                new_loc[key]['english'] = old_loc[old_key]['english']
+                new_loc[key]['status'] = simitem
+
+            ## CASE: No translation
+            else:
+                new_loc[key]['message'] = new_eng[key]['message']
+                new_loc[key]['english'] = new_eng[key]['message']
+                new_loc[key]['status'] = newitem
+
+            if 'description' in new_eng[key]:
+                new_loc[key]['description'] = new_eng[key]['description']
+
+    return new_loc
+
+
+def main(args):
+    """
+    Propagate changes from the english locale to the translated locales.
+
+    Args: <en local> <locales...>
+
+    """
+
+    en_file = args[1]
+
+    i18n_files = args[2:]
+
+    print(f'en locale: {en_file}')
+
+    en_loc = load_locale(en_file)
+
+    for file in i18n_files:
+        print(f'Processing locale: {file}')
+        locale = load_locale(file)
+        trans = load_translation(locale, en_loc)
+        save_locale(file, trans)
+
+
+main(sys.argv)

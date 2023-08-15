@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+
+import re
+import os
+import sys
+import json
+
+
+inUseRegex = [
+    'translation_version',
+    'language_',
+    'portsFunction_[A-Z_]+$',
+    'adjustmentsFunction[A-Za-z]+$',
+    'controlAxisAux[0-9]+$',
+    'beeper[A-Z_]+$',
+    'feature[A-Z_]+$',
+    'feature[A-Z_]+Tip$',
+    'gyroRpmFilter',
+    'statusArmingDisableFlagsTooltip[A-Z_]+$',
+    'powerVoltageId[0-9]+$',
+    'powerAmperageId[0-9]+$',
+    'vtxType_',
+    'osdSetupVideoFormatOption',
+    'osdSetupUnitsOption',
+    'osdTimerSourceOption',
+    'osdTimerPrecisionOption',
+    'osdDescribeFontVersion',
+    'serialError',
+    'reportProblemsDialog[A-Z_]+$',
+]
+
+
+def matchRegex(key,reglist):
+    for regex in reglist:
+        if re.search(regex, key):
+            return True
+    return False
+
+def isInUse(key, source, locale):
+    if not os.system(f'grep -F -q "{key}" -R {source}'):
+        return True
+    if not os.system(f'grep -F -q "({key}.message)" {locale}'):
+        return True
+    return False
+
+
+def load_locale(file):
+    with open(file) as data:
+        locale = json.load(data)
+    return locale
+
+def save_locale(file, data):
+    with open(file, 'w', encoding='utf8') as out:
+        json.dump(data, out, indent=4, ensure_ascii=False)
+
+
+def remove_unused(file):
+    locale = load_locale(file)
+    for key in list(locale):
+        if matchRegex(key, inUseRegex):
+            continue
+        if isInUse(key, 'src', file):
+            continue
+        print(f'{key} NOT USED')
+        del locale[key]
+    return locale
+
+
+def main(args):
+    """
+    Filter out locale entries that are not used.
+    Must be run on the top level directory (where locale/ is)
+
+    Args: <locale files...>
+
+    """
+
+    i18n_files = args[1:]
+
+    for file in i18n_files:
+        print(f'Locale: {file}')
+        locale = remove_unused(file)
+        save_locale(file, locale)
+
+
+main(sys.argv)
