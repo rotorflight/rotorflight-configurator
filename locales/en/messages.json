@@ -3720,14 +3720,14 @@
     "profilesErrorLimitYaw": {
         "message": "Error Limit for Yaw Axis [&deg;]"
     },
-    "profilesErrorDecay": {
-        "message": "Error Decay"
+    "profilesErrorDecayGround": {
+        "message": "Ground Error Decay"
     },
-    "profilesErrorDecayHelp": {
+    "profilesErrorDecayTimeGroundHelp": {
         "message": "Bleeds off the current controller error when the craft is not airborne. This helps preventing the craft from tipping over on the ground."
     },
     "profilesErrorDecayTime": {
-        "message": "Decay Time"
+        "message": "Decay Time [s]"
     },
     "profilesErrorRotation": {
         "message": "Error Rotation"
