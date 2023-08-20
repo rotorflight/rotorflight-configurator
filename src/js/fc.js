@@ -202,6 +202,7 @@ const FC = {
             main_rotor_dir:             0,
             tail_rotor_mode:            0,
             tail_motor_idle:            0,
+            tail_center_trim:           0,
             swash_type:                 0,
             swash_ring:                 0,
             swash_phase:                0,
