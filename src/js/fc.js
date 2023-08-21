@@ -249,8 +249,8 @@ const FC = {
         this.PIDS_ACTIVE = Array.from({length: 10});
         this.PIDS = Array.from({length: 10});
         for (let i = 0; i < 10; i++) {
-            this.PIDS_ACTIVE[i] = Array.from({length: 5});
-            this.PIDS[i] = Array.from({length: 5});
+            this.PIDS_ACTIVE[i] = Array.from({length: 6});
+            this.PIDS[i] = Array.from({length: 6});
         }
 
         this.RC_MAP = [];
