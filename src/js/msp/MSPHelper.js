@@ -930,9 +930,11 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_PID_PROFILE:
                 FC.PID_PROFILE.pid_mode                      = data.readU8();
-                FC.PID_PROFILE.error_decay_ground            = data.readU8();
-                FC.PID_PROFILE.error_decay_cyclic            = data.readU8();
-                FC.PID_PROFILE.error_decay_yaw               = data.readU8();
+                FC.PID_PROFILE.error_decay_time_ground       = data.readU8();
+                FC.PID_PROFILE.error_decay_time_cyclic       = data.readU8();
+                FC.PID_PROFILE.error_decay_time_yaw          = data.readU8();
+                FC.PID_PROFILE.error_decay_limit_cyclic      = data.readU8();
+                FC.PID_PROFILE.error_decay_limit_yaw         = data.readU8();
                 FC.PID_PROFILE.error_rotation                = data.readU8();
                 FC.PID_PROFILE.errorLimitRoll                = data.readU8();
                 FC.PID_PROFILE.errorLimitPitch               = data.readU8();
@@ -1752,9 +1754,11 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_PID_PROFILE:
             buffer.push8(FC.PID_PROFILE.pid_mode)
-                .push8(FC.PID_PROFILE.error_decay_ground)
-                .push8(FC.PID_PROFILE.error_decay_cyclic)
-                .push8(FC.PID_PROFILE.error_decay_yaw)
+                .push8(FC.PID_PROFILE.error_decay_time_ground)
+                .push8(FC.PID_PROFILE.error_decay_time_cyclic)
+                .push8(FC.PID_PROFILE.error_decay_time_yaw)
+                .push8(FC.PID_PROFILE.error_decay_limit_cyclic)
+                .push8(FC.PID_PROFILE.error_decay_limit_yaw)
                 .push8(FC.PID_PROFILE.error_rotation)
                 .push8(FC.PID_PROFILE.errorLimitRoll)
                 .push8(FC.PID_PROFILE.errorLimitPitch)
