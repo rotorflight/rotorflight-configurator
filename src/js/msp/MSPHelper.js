@@ -969,6 +969,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 // Acro Trainer //
                 FC.PID_PROFILE.acroTrainerGain               = data.readU8();
                 FC.PID_PROFILE.acroTrainerLimit              = data.readU8();
+                // Cyclic CrossCoupling //
+                FC.PID_PROFILE.cyclicCrossCouplingGain       = data.readU8();
+                FC.PID_PROFILE.cyclicCrossCouplingRatio      = data.readU8();
+                FC.PID_PROFILE.cyclicCrossCouplingCutoff     = data.readU8();
                 break;
 
             case MSPCodes.MSP_RESCUE_PROFILE:
@@ -1796,7 +1800,11 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.PID_PROFILE.horizonLevelStrength)
                 // Acro Trainer //
                 .push8(FC.PID_PROFILE.acroTrainerGain)
-                .push8(FC.PID_PROFILE.acroTrainerLimit);
+                .push8(FC.PID_PROFILE.acroTrainerLimit)
+                // Cyclic Cross-coupling //
+                .push8(FC.PID_PROFILE.cyclicCrossCouplingGain)
+                .push8(FC.PID_PROFILE.cyclicCrossCouplingRatio)
+                .push8(FC.PID_PROFILE.cyclicCrossCouplingCutoff);
             break;
 
         case MSPCodes.MSP_SET_RESCUE_PROFILE:
