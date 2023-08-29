@@ -797,8 +797,8 @@
         "english": "Support Sources"
     },
     "defaultSupportSubline2": {
-        "message": "Rotorflight 信息",
-        "english": "Rotorflight Information"
+        "message": "Betaflight 信息",
+        "english": "Betaflight Information"
     },
     "defaultSupport": {
         "message": "需要帮助时请先搜索论坛或者咨询飞控的生产商。<br /><br />",
@@ -817,12 +817,12 @@
         "english": "<a href=\"https://discord.com/invite/FyfMF4RwSA\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight discussion on Discord</a>"
     },
     "defaultSupport4": {
-        "message": "<a href=\"https://betaflight.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Website</a>",
-        "english": "<a href=\"https://betaflight.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Website</a>"
+        "message": "<a href=\"https://betaflight.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Website</a>",
+        "english": "<a href=\"https://betaflight.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Website</a>"
     },
     "defaultSupport5": {
-        "message": "<a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Wiki</a>",
-        "english": "<a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Wiki</a>"
+        "message": "<a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Wiki</a>",
+        "english": "<a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Wiki</a>"
     },
     "statusButtonResetZaxis": {
         "message": "重置 Z 轴，补偿：0 度",
@@ -1113,7 +1113,7 @@
     },
     "initialSetupButtonMassStorageText": {
         "message": "重新启动到<strong>大容量存储模式（MSC）</strong>。",
-        "english": "Reboot into <strong>Mass Storage</strong> mode (MSC)"
+        "english": "Reboot into <strong>Mass Storage</strong> mode (MSC)."
     },
     "initialSetupButtonReboot": {
         "message": "重启系统",
@@ -1500,8 +1500,8 @@
         "english": "Dshot Beacon Tone"
     },
     "configurationDshotBeaconHelp": {
-        "message": "Dshot 信标使用电调和电机产生声音。这意味着当电机旋转时，Dshot 信标无法工作。在 Rotorflight 3.4 和以后的版本中，若在 Dshot 信标激活时尝试解锁，飞控会在发出最后一声信标音后延迟2秒再解锁。这是为了防止 Dshot 信标功能干扰在解锁时发送的 Dshot 命令。<br/><strong>警告：</strong> 由于 Dshot 信标会有电流通过，如果信标鸣叫强度设置得太高，可能会造成电机/电调过热甚至损毁。建议使用 BLHeli 配置程序或 BLHeliSuite 来调整和测试信标的鸣叫强度。",
-        "english": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. In Rotorflight 3.4 and newer, when arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength."
+        "message": "Dshot 信标使用电调和电机产生声音。这意味着当电机旋转时，Dshot 信标无法工作。在 Betaflight 3.4 和以后的版本中，若在 Dshot 信标激活时尝试解锁，飞控会在发出最后一声信标音后延迟2秒再解锁。这是为了防止 Dshot 信标功能干扰在解锁时发送的 Dshot 命令。<br/><strong>警告：</strong> 由于 Dshot 信标会有电流通过，如果信标鸣叫强度设置得太高，可能会造成电机/电调过热甚至损毁。建议使用 BLHeli 配置程序或 BLHeliSuite 来调整和测试信标的鸣叫强度。",
+        "english": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. In Betaflight 3.4 and newer, when arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength."
     },
     "configurationBeeper": {
         "message": "蜂鸣器配置",
@@ -4267,17 +4267,17 @@
     "ledStripH": {
         "message": "H",
         "english": "H",
-        "description": "HSV色彩模型中色相（Hue）的英文缩写"
+        "description": "Abbreviation of Hue in HSV (Hue, Saturation, Brightness) color model"
     },
     "ledStripS": {
         "message": "S",
         "english": "S",
-        "description": "HSV色彩模型中饱和度（Saturation）的英文缩写"
+        "description": "Abbreviation of Saturation in HSV  (Hue, Saturation, Brightness) color model"
     },
     "ledStripV": {
         "message": "V",
         "english": "V",
-        "description": "HSV色彩模型中饱和度（Brightness）的英文缩写"
+        "description": "Abbreviation of Brightness in HSV  (Hue, Saturation, Brightness) color model"
     },
     "ledStripRemainingText": {
         "message": "剩余",
@@ -4315,8 +4315,8 @@
         "english": "Status Alt"
     },
     "ledStripGlobalBlinkRate": {
-        "message": "",
-        "english": "闪烁频率(BPM)"
+        "message": "闪烁频率(BPM)",
+        "english": "Blink tempo (BPM)"
     },
     "ledStripGlobalFlickerRate": {
         "message": "闪烁频率",
@@ -5458,8 +5458,8 @@
         "english": "Main Rotor Minimum Filtered RPM"
     },
     "gyroRpmFilterMainRotorMinRPMHelp": {
-        "message": "",
-        "english": "滤波器接受的最小主旋翼转速"
+        "message": "滤波器接受的最小主旋翼转速",
+        "english": "Minimum Main Rotor RPM accepted by the filters"
     },
     "gyroRpmFilterTailRotorMinRPM": {
         "message": "尾旋翼最小过滤转速",
@@ -8069,32 +8069,32 @@
     "gpsSbasAutoDetect": {
         "message": "自动检测",
         "english": "Auto-detect",
-        "description": "GPS SBAS系统可选的选项之一"
+        "description": "One of the options selectable for the GPS SBAS system"
     },
     "gpsSbasEuropeanEGNOS": {
         "message": "欧洲 EGNOS",
         "english": "European EGNOS",
-        "description": "GPS SBAS系统可选的选项之一"
+        "description": "One of the options selectable for the GPS SBAS system"
     },
     "gpsSbasNorthAmericanWAAS": {
         "message": "北美 WAAS",
         "english": "North American WAAS",
-        "description": "GPS SBAS系统可选的选项之一"
+        "description": "One of the options selectable for the GPS SBAS system"
     },
     "gpsSbasJapaneseMSAS": {
         "message": "日本 MSAS",
         "english": "Japanese MSAS",
-        "description": "GPS SBAS系统可选的选项之一"
+        "description": "One of the options selectable for the GPS SBAS system"
     },
     "gpsSbasIndianGAGAN": {
         "message": "印度 GAGAN",
         "english": "Indian GAGAN",
-        "description": "GPS SBAS系统可选的选项之一"
+        "description": "One of the options selectable for the GPS SBAS system"
     },
     "gpsSbasNone": {
         "message": "无",
         "english": "None",
-        "description": "GPS SBAS系统可选的选项之一"
+        "description": "One of the options selectable for the GPS SBAS system"
     },
     "dialogFileNameTitle": {
         "message": "文件名",
