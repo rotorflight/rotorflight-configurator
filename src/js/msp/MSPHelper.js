@@ -364,6 +364,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.PIDS_ACTIVE[i][4] = data.readU16(); // B-term
                     FC.PIDS[i][4] = FC.PIDS_ACTIVE[i][4];
                 }
+                for (let i = 0; i < 2; i++) { // RP
+                    FC.PIDS_ACTIVE[i][5] = data.readU16(); // O-term
+                    FC.PIDS[i][5] = FC.PIDS_ACTIVE[i][5];
+                }
                 break;
 
             case MSPCodes.MSP_ARMING_CONFIG:
@@ -1571,6 +1575,9 @@ MspHelper.prototype.crunch = function(code) {
             }
             for (let i = 0; i < 3; i++) { // RPY
                 buffer.push16(parseInt(FC.PIDS[i][4])); // B-term
+            }
+            for (let i = 0; i < 2; i++) { // RP
+                buffer.push16(parseInt(FC.PIDS[i][5])); // O-term
             }
             break;
 

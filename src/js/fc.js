@@ -246,11 +246,11 @@ const FC = {
         };
 
         this.PID_NAMES =                [];
-        this.PIDS_ACTIVE = Array.from({length: 10});
-        this.PIDS = Array.from({length: 10});
-        for (let i = 0; i < 10; i++) {
-            this.PIDS_ACTIVE[i] = Array.from({length: 6});
-            this.PIDS[i] = Array.from({length: 6});
+        this.PIDS_ACTIVE = Array.from({length: 3});
+        this.PIDS = Array.from({length: 3});
+        for (let i = 0; i < 3; i++) {
+            this.PIDS_ACTIVE[i] = Array.from({length: 8});
+            this.PIDS[i] = Array.from({length: 8});
         }
 
         this.RC_MAP = [];
