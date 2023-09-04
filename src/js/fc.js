@@ -610,6 +610,7 @@ const FC = {
             gov_yaw_ff_weight:              0,
             gov_cyclic_ff_weight:           0,
             gov_collective_ff_weight:       0,
+            gov_max_throttle:               0,
             gov_pwr_filter:                 0,
             gov_rpm_filter:                 0,
             gov_tta_filter:                 0,
