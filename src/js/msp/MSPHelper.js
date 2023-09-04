@@ -973,6 +973,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.PID_PROFILE.cyclicCrossCouplingGain       = data.readU8();
                 FC.PID_PROFILE.cyclicCrossCouplingRatio      = data.readU8();
                 FC.PID_PROFILE.cyclicCrossCouplingCutoff     = data.readU8();
+                // Offset limtis //
+                FC.PID_PROFILE.offsetLimitRoll               = data.readU8();
+                FC.PID_PROFILE.offsetLimitPitch              = data.readU8();
                 break;
 
             case MSPCodes.MSP_RESCUE_PROFILE:
@@ -1804,7 +1807,10 @@ MspHelper.prototype.crunch = function(code) {
                 // Cyclic Cross-coupling //
                 .push8(FC.PID_PROFILE.cyclicCrossCouplingGain)
                 .push8(FC.PID_PROFILE.cyclicCrossCouplingRatio)
-                .push8(FC.PID_PROFILE.cyclicCrossCouplingCutoff);
+                .push8(FC.PID_PROFILE.cyclicCrossCouplingCutoff)
+                // Offset limits //
+                .push8(FC.PID_PROFILE.offsetLimitRoll)
+                .push8(FC.PID_PROFILE.offsetLimitPitch);
             break;
 
         case MSPCodes.MSP_SET_RESCUE_PROFILE:

@@ -510,6 +510,8 @@ const FC = {
             errorLimitRoll:             0,
             errorLimitPitch:            0,
             errorLimitYaw:              0,
+            offsetLimitRoll:            0,
+            offsetLimitPitch:           0,
             gyroCutoffRoll:             0,
             gyroCutoffPitch:            0,
             gyroCutoffYaw:              0,
