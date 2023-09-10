@@ -1543,13 +1543,16 @@
         "message": "Profile #6"
     },
     "profilesPIDPassthroughWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Passthrough Mode</i>. Please change the advanced settings in the <b>CLI</b>."
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Passthrough Mode</b>.<br>Please change the settings in the <b>CLI</b>."
     },
     "profilesPIDCompatibilityWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Rotorflight-1 Compatiblity</i> Mode. Please change the advanced settings in the <b>CLI</b>."
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Rotorflight-1 Compatiblity</b> Mode.<br>Please use the <b>CLI</b to change the PID settings>."
+    },
+    "profilesPIDModeThreeWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually to the <b>PID Test Mode 3</b>.<br>Please use the <b>CLI</b> to change the advanced PID settings."
     },
     "profilesPIDCustomWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here. Please use the <b>CLI</b> to change the PID settings."
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings."
     },
     "profilesPIDGains": {
         "message": "Axis"
@@ -1581,6 +1584,12 @@
     "profilesFeedforwardHelp": {
         "message": "Is an additional pushing term (spring) based on stick input. FF helps the P-term push the craft for commanded stick moves.<br /><br />The P-term pushes based on the difference between the commanded Setpoint (deg/sec) and the gyro reading of current rotational rate (deg/sec). FF pushes based on the commanded change of the sticks alone.<br /><br />Higher values (gains) will result in a more sharp machine response to stick input.<br>Too high of values may result in some overshoot, increased motor heat, and motor saturation (where motors can not keep up with the desired rate of change).<br>Lower or zero (0) values will result in a slower and smoother response to stick inputs.",
         "description": "Feedforward Term helpicon message on PID table titlebar"
+    },
+    "profilesBoost": {
+        "message": "Boost"
+    },
+    "profilesBoostHelp": {
+        "message": "Is an additional boost on the feedforward. This makes the heli react faster to quick stick movements."
     },
     "profilesCopyProfile": {
         "message": "Copy profile"
@@ -3720,6 +3729,24 @@
     "profilesErrorLimitYaw": {
         "message": "Error Limit for Yaw Axis [&deg;]"
     },
+    "profilesOffsetLimitHelp": {
+        "message": "Hard limit for the offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits."
+    },
+    "profilesOffsetLimitRoll": {
+        "message": "Offset Limit for Roll Axis [&deg;]"
+    },
+    "profilesOffsetLimitPitch": {
+        "message": "Offset Limit for Pitch Axis [&deg;]"
+    },
+    "profilesOffsetGainHelp": {
+        "message": "Gain for Offset term (Integral for high speed flight)."
+    },
+    "profilesOffsetGainRoll": {
+        "message": "Offset Gain for Roll Axis"
+    },
+    "profilesOffsetGainPitch": {
+        "message": "Offset Gain for Pitch Axis"
+    },
     "profilesErrorDecayGround": {
         "message": "Ground Error Decay"
     },
@@ -3792,6 +3819,18 @@
     "profilesDtermCutoffYaw": {
         "message": "Yaw D-term Cutoff"
     },
+    "profilesBtermCutoffHelp": {
+        "message": "B-term Cutoff Frequency in Hz"
+    },
+    "profilesBtermCutoffRoll": {
+        "message": "Roll B-term Cutoff"
+    },
+    "profilesBtermCutoffPitch": {
+        "message": "Pitch B-term Cutoff"
+    },
+    "profilesBtermCutoffYaw": {
+        "message": "Yaw B-term Cutoff"
+    },
     "profilesLevelingSettings": {
         "message": "Auto-leveling Settings"
     },
@@ -3825,11 +3864,11 @@
     "profilesHorizonModeGainHelp": {
         "message": "Horizon Mode leveling gain. This determines how aggressively the helicopter tilts back to level while in Horizon Mode"
     },
-    "profilesYawSettings": {
-        "message": "Yaw Settings"
+    "profilesMainRotorSettings": {
+        "message": "Main Rotor Settings"
     },
-    "profilesPitchSettings": {
-        "message": "Pitch Settings"
+    "profilesTailRotorSettings": {
+        "message": "Tail Rotor Settings"
     },
     "profilesYawCenterOffset": {
         "message": "Center Offset"
@@ -3874,10 +3913,22 @@
         "message": "Decay time for collective impulse feedforward mixed into yaw"
     },
     "profilespitchFFCollectiveGain": {
-        "message": "Collective Feedforward Gain"
+        "message": "Collective to Pitch feedforward Gain"
     },
     "profilespitchFFCollectiveGainHelp": {
-        "message": "Gain value for Collective feedforward mixed into Pitch"
+        "message": "Gain value for Collective mixed into the Pitch axis. This is for preventing the heli from pitching up in collective pitch pumps."
+    },
+    "profilesCyclicCrossCouplingHelp": {
+        "message": "Cyclic Cross-Coupling compensation removes the aileron (roll) wobble when only elevator (pitch) is applied."
+    },
+    "profilesCyclicCrossCouplingGain": {
+        "message": "Cyclic Cross-Coupling Gain"
+    },
+    "profilesCyclicCrossCouplingRatio": {
+        "message": "Cyclic Cross-Coupling Ratio (Pitch/Roll)"
+    },
+    "profilesCyclicCrossCouplingCutoff": {
+        "message": "Cyclic Cross-Coupling Cutoff Frequency"
     },
     "profilesRescueSettings": {
         "message": "Rescue Settings"

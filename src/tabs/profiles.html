@@ -40,20 +40,14 @@
             <div class="subtab">
                 <div class="clear-both"></div>
                 <div class="cf_column">
-                    <div class="note profilesPIDPassthroughWarning">
-                        <p i18n="profilesPIDPassthroughWarning"></p>
+                    <div class="note profilesPIDWarning">
+                        <p class="profilesPIDWarningText"></p>
                     </div>
-                    <div class="note profilesPIDCompatibilityWarning">
-                        <p i18n="profilesPIDCompatibilityWarning"></p>
-                    </div>
-                    <div class="note profilesPIDCustomWarning">
-                        <p i18n="profilesPIDCustomWarning"></p>
-                    </div>
-                    <div class="gui_box grey pid_gains">
+                    <div class="gui_box grey pid_config">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="profilesPidGains"></div>
                         </div>
-                        <table id="pid_main" class="pid_table pid_standard">
+                        <table id="pid_main" class="pid_table">
                             <tr class="pid_titlebar">
                                 <th class="name">
                                     <div class="name-helpicon-flex">
@@ -88,6 +82,13 @@
                                         <div class="helpicon cf_tip" i18n_title="profilesFeedforwardHelp"></div>
                                     </div>
                                 </th>
+                                <th class="boost">
+                                    <div class="name-helpicon-flex">
+                                        <div i18n="profilesBoost" class="sm-min"></div>
+                                        <div class="xs">B</div>
+                                        <div class="helpicon cf_tip" i18n_title="profilesBoostHelp"></div>
+                                    </div>
+                                </th>
                             </tr>
                             <tr class="ROLL"><!-- 0 -->
                                 <td class="pid_roll">ROLL</td>
@@ -95,6 +96,7 @@
                                 <td class="pid_data"><input type="number" name="I" step="1" min="0" max="1000" /></td>
                                 <td class="pid_data"><input type="number" name="D" step="1" min="0" max="1000" /></td>
                                 <td class="pid_data"><input type="number" name="F" step="1" min="0" max="1000" /></td>
+                                <td class="pid_data"><input type="number" name="B" step="1" min="0" max="1000" /></td>
                             </tr>
                             <tr class="PITCH"><!-- 1 -->
                                 <td class="pid_pitch">PITCH</td>
@@ -102,6 +104,7 @@
                                 <td class="pid_data"><input type="number" name="I" step="1" min="0" max="1000" /></td>
                                 <td class="pid_data"><input type="number" name="D" step="1" min="0" max="1000" /></td>
                                 <td class="pid_data"><input type="number" name="F" step="1" min="0" max="1000" /></td>
+                                <td class="pid_data"><input type="number" name="B" step="1" min="0" max="1000" /></td>
                             </tr>
                             <tr class="YAW"><!-- 2 -->
                                 <td class="pid_yaw">YAW</td>
@@ -109,46 +112,16 @@
                                 <td class="pid_data"><input type="number" name="I" step="1" min="0" max="1000" /></td>
                                 <td class="pid_data"><input type="number" name="D" step="1" min="0" max="1000" /></td>
                                 <td class="pid_data"><input type="number" name="F" step="1" min="0" max="1000" /></td>
+                                <td class="pid_data"><input type="number" name="B" step="1" min="0" max="1000" /></td>
                             </tr>
                         </table>
                     </div>
 
-                    <div class="gui_box grey pid_settings">
+                    <div class="gui_box grey pid_config">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="profilesPidSettings"></div>
                         </div>
-                        <table id="pid_advanced" class="settings_table pid_standard">
-                            <tr class="errorLimit">
-                                <td>
-                                    <input type="number" id="errorLimitRoll" step="1" min="0" max="180" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="errorLimitRoll">
-                                        <span i18n="profilesErrorLimitRoll"></span>
-                                    </label>
-                                    <div class="helpicon cf_tip" i18n_title="profilesErrorLimitHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="errorLimit">
-                                <td>
-                                    <input type="number" id="errorLimitPitch" step="1" min="0" max="180" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="errorLimitPitch">
-                                        <span i18n="profilesErrorLimitPitch"></span>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr class="errorLimit border">
-                                <td>
-                                    <input type="number" id="errorLimitYaw" step="1" min="0" max="180" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="errorLimitYaw">
-                                        <span i18n="profilesErrorLimitYaw"></span>
-                                    </label>
-                                </td>
-                            </tr>
+                        <table id="pid_advanced" class="settings_table">
                             <tr class="errorRotation border">
                                 <td>
                                     <input type="checkbox" id="errorRotation" class="toggle" />
@@ -215,14 +188,137 @@
                                     </span>
                                 </td>
                             </tr>
+                            <tr class="errorLimit">
+                                <td>
+                                    <input type="number" id="errorLimitRoll" step="1" min="0" max="180" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="errorLimitRoll">
+                                        <span i18n="profilesErrorLimitRoll"></span>
+                                    </label>
+                                    <div class="helpicon cf_tip" i18n_title="profilesErrorLimitHelp"></div>
+                                </td>
+                            </tr>
+                            <tr class="errorLimit">
+                                <td>
+                                    <input type="number" id="errorLimitPitch" step="1" min="0" max="180" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="errorLimitPitch">
+                                        <span i18n="profilesErrorLimitPitch"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="errorLimit border">
+                                <td>
+                                    <input type="number" id="errorLimitYaw" step="1" min="0" max="180" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="errorLimitYaw">
+                                        <span i18n="profilesErrorLimitYaw"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="offsetLimit HSI">
+                                <td>
+                                    <input type="number" id="offsetLimitRoll" step="1" min="0" max="180" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="offsetLimitRoll">
+                                        <span i18n="profilesOffsetLimitRoll"></span>
+                                    </label>
+                                    <div class="helpicon cf_tip" i18n_title="profilesOffsetLimitHelp"></div>
+                                </td>
+                            </tr>
+                            <tr class="offsetLimit HSI border">
+                                <td>
+                                    <input type="number" id="offsetLimitPitch" step="1" min="0" max="180" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="offsetLimitPitch">
+                                        <span i18n="profilesOffsetLimitPitch"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="offsetGain HSI">
+                                <td>
+                                    <input type="number" id="offsetGainRoll" step="1" min="0" max="250" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="offsetGainRoll">
+                                        <span i18n="profilesOffsetGainRoll"></span>
+                                    </label>
+                                    <div class="helpicon cf_tip" i18n_title="profilesOffsetGainHelp"></div>
+                                </td>
+                            </tr>
+                            <tr class="offsetGain HSI border">
+                                <td>
+                                    <input type="number" id="offsetGainPitch" step="1" min="0" max="180" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="offsetGainPitch">
+                                        <span i18n="profilesOffsetGainPitch"></span>
+                                    </label>
+                                </td>
+                            </tr>
                         </table>
                     </div>
 
-                    <div class="gui_box grey yaw_settings">
+                    <div class="gui_box grey pid_config">
                         <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="profilesYawSettings"></div>
+                            <div class="spacer_box_title" i18n="profilesMainRotorSettings"></div>
                         </div>
-                        <table id="pid_yaw_advanced" class="settings_table pid_standard">
+                        <table id="pid_cyclic_advanced" class="settings_table pid_settings">
+                            <tr class="pitchFFCollectiveGain border">
+                                <td>
+                                    <input type="number" id="pitchFFCollectiveGain" step="1" min="0" max="250"/>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <span i18n="profilespitchFFCollectiveGain"></span>
+                                        <div class="helpicon cf_tip" i18n_title="profilespitchFFCollectiveGainHelp"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="cyclicCrossCoupling">
+                                <td>
+                                    <input type="number" id="cyclicCrossCouplingGain" step="1" min="0" max="250"/>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <span i18n="profilesCyclicCrossCouplingGain"></span>
+                                        <div class="helpicon cf_tip" i18n_title="profilesCyclicCrossCouplingHelp"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="cyclicCrossCoupling">
+                                <td>
+                                    <input type="number" id="cyclicCrossCouplingRatio" step="1" min="0" max="200"/>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <span i18n="profilesCyclicCrossCouplingRatio"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="cyclicCrossCoupling border">
+                                <td>
+                                    <input type="number" id="cyclicCrossCouplingCutoff" step="1" min="1" max="250"/>
+                                </td>
+                                <td colspan="2">
+                                    <div>
+                                        <span i18n="profilesCyclicCrossCouplingCutoff"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="gui_box grey pid_config">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="profilesTailRotorSettings"></div>
+                        </div>
+                        <table class="settings_table pid_settings">
                             <tr class="yawStopGainCW">
                                 <td>
                                     <input type="number" id="yawStopGainCW" step="1" min="25" max="250"/>
@@ -274,7 +370,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="yawFFImpulseDecay">
+                            <tr class="yawFFImpulseDecay border">
                                 <td>
                                     <input type="number" id="yawFFImpulseDecay" step="1" min="1" max="250"/>
                                 </td>
@@ -306,33 +402,15 @@
                         </table>
                     </div>
 
-                    <div class="gui_box grey pitch_settings">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="profilesPitchSettings"></div>
-                        </div>
-                        <table id="pid_pitch_advanced" class="settings_table pid_standard">
-                            <tr class="pitchFFCollectiveGain">
-                                <td>
-                                    <input type="number" id="pitchFFCollectiveGain" step="1" min="0" max="250"/>
-                                </td>
-                                <td colspan="2">
-                                    <div>
-                                        <span i18n="profilespitchFFCollectiveGain"></span>
-                                        <div class="helpicon cf_tip" i18n_title="profilespitchFFCollectiveGainHelp"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
                 </div>
 
                 <div class="cf_column">
 
-                    <div class="gui_box grey spacer_left expert pid_bandwidth">
+                    <div class="gui_box grey spacer_left pid_config">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="profilesPidBandwidth"></div>
                         </div>
-                        <table id="pid_bandwidth" class="settings_table pid_standard">
+                        <table id="pid_bandwidth" class="settings_table pid_settings">
                             <tr class="gyroCutoff">
                                 <td>
                                     <input type="number" id="gyroCutoffRoll" step="1" min="0" max="250" />
@@ -395,10 +473,41 @@
                                     </label>
                                 </td>
                             </tr>
+                            <tr class="btermCutoff">
+                                <td>
+                                    <input type="number" id="btermCutoffRoll" step="1" min="0" max="250" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="btermCutoffRoll">
+                                        <span i18n="profilesBtermCutoffRoll"></span>
+                                    </label>
+                                    <div class="helpicon cf_tip" i18n_title="profilesBtermCutoffHelp"></div>
+                                </td>
+                            </tr>
+                            <tr class="btermCutoff">
+                                <td>
+                                    <input type="number" id="btermCutoffPitch" step="1" min="0" max="250" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="btermCutoffPitch">
+                                        <span i18n="profilesBtermCutoffPitch"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="btermCutoff border">
+                                <td>
+                                    <input type="number" id="btermCutoffYaw" step="1" min="0" max="250" />
+                                </td>
+                                <td colspan="2">
+                                    <label for="btermCutoffYaw">
+                                        <span i18n="profilesBtermCutoffYaw"></span>
+                                    </label>
+                                </td>
+                            </tr>
                         </table>
                     </div>
 
-                    <div class="gui_box grey spacer_left leveling_settings">
+                    <div class="gui_box grey spacer_left">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="profilesLevelingSettings"></div>
                         </div>
@@ -451,7 +560,7 @@
                         </table>
                     </div>
 
-                    <div class="gui_box grey spacer_left rescue_settings">
+                    <div class="gui_box grey spacer_left">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="profilesRescueSettings"></div>
                         </div>
@@ -605,7 +714,7 @@
                         </table>
                     </div>
 
-                    <div class="gui_box grey spacer_left gov_config">
+                    <div class="gui_box grey spacer_left gov_settings">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="govProfile"></div>
                         </div>

@@ -66,6 +66,7 @@
 
 .tab-profiles .gui_box {
     margin-bottom: 5px;
+    padding-bottom: 4px;
     display: table;
 }
 
@@ -147,7 +148,7 @@
 }
 
 .tab-profiles .settings_table tr:last-child {
-    border-bottom: none;
+    border-bottom: none !important;
 }
 
 .tab-profiles .settings_table td {

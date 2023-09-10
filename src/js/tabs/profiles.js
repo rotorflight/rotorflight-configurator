@@ -25,11 +25,12 @@ TABS.profiles = {
         'I',
         'D',
         'F',
+        'B',
     ],
     defaultGains: [
-        [ 10, 50, 0, 50 ],
-        [ 10, 50, 0, 50 ],
-        [ 50, 50, 0,  0 ],
+        [ 10, 50, 0, 50, 0 ],
+        [ 10, 50, 0, 50, 0 ],
+        [ 50, 50, 0,  0, 0 ],
     ],
 };
 
@@ -69,6 +70,11 @@ TABS.profiles.initialize = function (callback) {
             });
     }
 
+    function show_warning(name) {
+        $('.tab-profiles .profilesPIDWarningText').html(i18n.getMessage(name));
+        $('.tab-profiles .profilesPIDWarning').show();
+    }
+
     function data_to_form() {
 
         self.currentProfile = FC.CONFIG.profile;
@@ -91,16 +97,21 @@ TABS.profiles.initialize = function (callback) {
         });
 
         if (FC.PID_PROFILE.pid_mode == 0) {
-            $('.tab-profiles .profilesPIDPassthroughWarning').show();
-            $('.tab-profiles .pid_standard input').prop('disabled', true);
+            show_warning('profilesPIDPassthroughWarning');
+            $('.tab-profiles .pid_config').hide();
         }
         else if (FC.PID_PROFILE.pid_mode == 1) {
-            $('.tab-profiles .profilesPIDCompatibilityWarning').show();
+            show_warning('profilesPIDCompatibilityWarning');
         }
-        else if (FC.PID_PROFILE.pid_mode > 2) {
-            $('.tab-profiles .profilesPIDCustomWarning').show();
-            $('.tab-profiles .pid_standard input').prop('disabled', true);
+        else if (FC.PID_PROFILE.pid_mode == 3) {
+            show_warning('profilesPIDModeThreeWarning');
         }
+        else if (FC.PID_PROFILE.pid_mode > 3) {
+            show_warning('profilesPIDCustomWarning');
+            $('.tab-profiles .pid_config').hide();
+        }
+
+        $('.tab-profiles .HSI').toggle(FC.PID_PROFILE.pid_mode == 3);
 
         $('.tab-profiles input[id="gyroCutoffRoll"]').val(FC.PID_PROFILE.gyroCutoffRoll).change();
         $('.tab-profiles input[id="gyroCutoffPitch"]').val(FC.PID_PROFILE.gyroCutoffPitch).change();
@@ -110,10 +121,22 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="dtermCutoffPitch"]').val(FC.PID_PROFILE.dtermCutoffPitch).change();
         $('.tab-profiles input[id="dtermCutoffYaw"]').val(FC.PID_PROFILE.dtermCutoffYaw).change();
 
+        $('.tab-profiles input[id="btermCutoffRoll"]').val(FC.PID_PROFILE.btermCutoffRoll).change();
+        $('.tab-profiles input[id="btermCutoffPitch"]').val(FC.PID_PROFILE.btermCutoffPitch).change();
+        $('.tab-profiles input[id="btermCutoffYaw"]').val(FC.PID_PROFILE.btermCutoffYaw).change();
+
         // Cumulative Error limits
         $('.tab-profiles input[id="errorLimitRoll"]').val(FC.PID_PROFILE.errorLimitRoll).change();
         $('.tab-profiles input[id="errorLimitPitch"]').val(FC.PID_PROFILE.errorLimitPitch).change();
         $('.tab-profiles input[id="errorLimitYaw"]').val(FC.PID_PROFILE.errorLimitYaw).change();
+
+        // Offset limits
+        $('.tab-profiles input[id="offsetLimitRoll"]').val(FC.PID_PROFILE.offsetLimitRoll).change();
+        $('.tab-profiles input[id="offsetLimitPitch"]').val(FC.PID_PROFILE.offsetLimitPitch).change();
+
+        // Offset gains
+        $('.tab-profiles input[id="offsetGainRoll"]').val(FC.PIDS[0][5]).change();
+        $('.tab-profiles input[id="offsetGainPitch"]').val(FC.PIDS[1][5]).change();
 
         // Error rotation
         $('.tab-profiles input[id="errorRotation"]').prop('checked', FC.PID_PROFILE.error_rotation !== 0);
@@ -159,8 +182,11 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="yawFFImpulseGain"]').val(FC.PID_PROFILE.yawFFImpulseGain);
         $('.tab-profiles input[id="yawFFImpulseDecay"]').val(FC.PID_PROFILE.yawFFImpulseDecay);
 
-        // Pitch settings
+        // Cyclic settings
         $('.tab-profiles input[id="pitchFFCollectiveGain"]').val(FC.PID_PROFILE.pitchFFCollectiveGain);
+        $('.tab-profiles input[id="cyclicCrossCouplingGain"]').val(FC.PID_PROFILE.cyclicCrossCouplingGain);
+        $('.tab-profiles input[id="cyclicCrossCouplingRatio"]').val(FC.PID_PROFILE.cyclicCrossCouplingRatio);
+        $('.tab-profiles input[id="cyclicCrossCouplingCutoff"]').val(FC.PID_PROFILE.cyclicCrossCouplingCutoff);
 
         // Acro Trainer
         $('.tab-profiles input[id="acroTrainerGain"]').val(FC.PID_PROFILE.acroTrainerGain).trigger('input');
@@ -227,7 +253,7 @@ TABS.profiles.initialize = function (callback) {
 
         $('.tab-profiles .govTTAGain').toggle(self.isTTAEnabled);
         $('.tab-profiles .govTTALimit').toggle(self.isTTAEnabled);
-        $('.tab-profiles .gov_config').toggle(self.isGovEnabled);
+        $('.tab-profiles .gov_settings').toggle(self.isGovEnabled);
     }
 
     function form_to_data() {
@@ -248,9 +274,19 @@ TABS.profiles.initialize = function (callback) {
         FC.PID_PROFILE.dtermCutoffPitch = $('.tab-profiles input[id="dtermCutoffPitch"]').val();
         FC.PID_PROFILE.dtermCutoffYaw = $('.tab-profiles input[id="dtermCutoffYaw"]').val();
 
+        FC.PID_PROFILE.btermCutoffRoll = $('.tab-profiles input[id="btermCutoffRoll"]').val();
+        FC.PID_PROFILE.btermCutoffPitch = $('.tab-profiles input[id="btermCutoffPitch"]').val();
+        FC.PID_PROFILE.btermCutoffYaw = $('.tab-profiles input[id="btermCutoffYaw"]').val();
+
         FC.PID_PROFILE.errorLimitRoll = $('.tab-profiles input[id="errorLimitRoll"]').val();
         FC.PID_PROFILE.errorLimitPitch = $('.tab-profiles input[id="errorLimitPitch"]').val();
         FC.PID_PROFILE.errorLimitYaw = $('.tab-profiles input[id="errorLimitYaw"]').val();
+
+        FC.PID_PROFILE.offsetLimitRoll = $('.tab-profiles input[id="offsetLimitRoll"]').val();
+        FC.PID_PROFILE.offsetLimitPitch = $('.tab-profiles input[id="offsetLimitPitch"]').val();
+
+        FC.PIDS[0][5] = $('.tab-profiles input[id="offsetGainRoll"]').val();
+        FC.PIDS[1][5] = $('.tab-profiles input[id="offsetGainPitch"]').val();
 
         FC.PID_PROFILE.error_decay_time_ground = $('.tab-profiles input[id="errorDecayGround"]').is(':checked') ?
             $('.tab-profiles input[id="errorDecayTimeGround"]').val() * 10 : 0;
@@ -268,8 +304,12 @@ TABS.profiles.initialize = function (callback) {
         FC.PID_PROFILE.yawFFCollectiveGain = $('.tab-profiles input[id="yawFFCollectiveGain"]').val();
         FC.PID_PROFILE.yawFFImpulseGain = $('.tab-profiles input[id="yawFFImpulseGain"]').val();
         FC.PID_PROFILE.yawFFImpulseDecay = $('.tab-profiles input[id="yawFFImpulseDecay"]').val();
-        // Pitch settings
-        FC.PID_PROFILE.pitchFFCollectiveGain = parseInt($('.tab-profiles input[id="pitchFFCollectiveGain"]').val());
+
+        // Cyclic settings
+        FC.PID_PROFILE.cyclicCrossCouplingGain = parseInt($('.tab-profiles input[id="pitchFFCollectiveGain"]').val());
+        FC.PID_PROFILE.pitchFFCollectiveGain = parseInt($('.tab-profiles input[id="cyclicCrossCouplingGain"]').val());
+        FC.PID_PROFILE.cyclicCrossCouplingRatio = parseInt($('.tab-profiles input[id="cyclicCrossCouplingRatio"]').val());
+        FC.PID_PROFILE.cyclicCrossCouplingCutoff = parseInt($('.tab-profiles input[id="cyclicCrossCouplingCutoff"]').val());
 
         // Leveling modes
         FC.PID_PROFILE.acroTrainerGain = parseInt($('.tab-profiles input[id="acroTrainerGain"]').val());
@@ -442,7 +482,7 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="govHeadspeed"]').change(function () {
             const value = parseInt($(this).val());
             if (!self.isPIDDefault && value != FC.GOVERNOR.gov_headspeed) {
-                $('.tab-profiles .gov_config .note').show();
+                $('.tab-profiles .gov_settings .note').show();
             }
         });
 
