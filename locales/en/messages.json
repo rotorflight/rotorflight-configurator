@@ -2210,6 +2210,18 @@
     "mixerTailMotorIdleHelp": {
         "message": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop"
     },
+    "mixerTailRotorCenterTrim": {
+        "message": "Center trim for tail rotor [&deg;]"
+    },
+    "mixerTailRotorCenterTrimHelp": {
+        "message": "Set tail rotor trim for zero yaw command."
+    },
+    "mixerTailMotorCenterTrim": {
+        "message": "Center trim for tail motor [%]"
+    },
+    "mixerTailMotorCenterTrimHelp": {
+        "message": "Set tail motor throttle value for zero yaw command."
+    },
     "mixerSwashLinkTrim": {
         "message": "Swashplate Link Trims"
     },
