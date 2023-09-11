@@ -27,10 +27,6 @@
     margin-bottom: 0;
 }
 
-.tab-mixer .attention {
-    background-color: #c04020;
-}
-
 .tab-mixer input[type="number"]::-webkit-inner-spin-button {
     border: 0;
 }

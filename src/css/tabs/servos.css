@@ -41,10 +41,6 @@
     padding: 2px 0;
 }
 
-.tab-servos .attention {
-    background-color: #c04020 !important;
-}
-
 .tab-servos input,
 .tab-servos select {
     border: 1px solid var(--subtleAccent);

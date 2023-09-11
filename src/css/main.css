@@ -10,6 +10,7 @@
     --mutedText: #616161;
     --linkText: #203647;
     --error: red;
+    --attention: #f07050;
     --boxBackground: #ffffff;
     --alternativeBackground: #f9f9f9;
     --sideBackground: #ffffff;
@@ -188,6 +189,10 @@ input[type="number"]::-webkit-inner-spin-button {
     color: var(--error) !important;
     font-weight: bold !important;
     font-style: italic;
+}
+
+.attention {
+    background-color: var(--attention) !important;
 }
 
 /** Zoom info box **/
