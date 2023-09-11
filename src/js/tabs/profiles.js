@@ -306,8 +306,8 @@ TABS.profiles.initialize = function (callback) {
         FC.PID_PROFILE.yawFFImpulseDecay = $('.tab-profiles input[id="yawFFImpulseDecay"]').val();
 
         // Cyclic settings
-        FC.PID_PROFILE.cyclicCrossCouplingGain = parseInt($('.tab-profiles input[id="pitchFFCollectiveGain"]').val());
-        FC.PID_PROFILE.pitchFFCollectiveGain = parseInt($('.tab-profiles input[id="cyclicCrossCouplingGain"]').val());
+        FC.PID_PROFILE.pitchFFCollectiveGain = parseInt($('.tab-profiles input[id="pitchFFCollectiveGain"]').val());
+        FC.PID_PROFILE.cyclicCrossCouplingGain = parseInt($('.tab-profiles input[id="cyclicCrossCouplingGain"]').val());
         FC.PID_PROFILE.cyclicCrossCouplingRatio = parseInt($('.tab-profiles input[id="cyclicCrossCouplingRatio"]').val());
         FC.PID_PROFILE.cyclicCrossCouplingCutoff = parseInt($('.tab-profiles input[id="cyclicCrossCouplingCutoff"]').val());
 
