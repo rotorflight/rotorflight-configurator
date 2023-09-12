@@ -38,7 +38,7 @@ TABS.configuration.initialize = function (callback) {
     const baudRateOptions = {};
 
     baudRateOptions[portTypes.DISABLED] = [
-        'Disabled',
+        'DISABLED',
     ];
 
     baudRateOptions[portTypes.MSP] = [
@@ -182,7 +182,7 @@ TABS.configuration.initialize = function (callback) {
             case portTypes.CUSTOM:
                 return "CUSTOM";
             default:
-                return "Disabled";
+                return "DISABLED";
         }
     }
 
@@ -203,7 +203,7 @@ TABS.configuration.initialize = function (callback) {
             case portTypes.CUSTOM:
                 return "CUSTOM";
             default:
-                return "Disabled";
+                return "DISABLED";
         }
     }
 
@@ -235,10 +235,14 @@ TABS.configuration.initialize = function (callback) {
         const baudRate = get_port_baudrate(portIndex, portType);
         listElement.empty();
         for (const rate of baudRateOptions[portType]) {
-            listElement.append(`<option value="${rate}">${rate}</option>`);
+            const rateName = i18n.existsMessage('baudrate_' + rate) ?
+                i18n.getMessage('baudrate_' + rate) : rate;
+            listElement.append(`<option value="${rate}">${rateName}</option>`);
         }
         if (!baudRateOptions[portType].includes(baudRate)) {
-            listElement.append(`<option value="${baudRate}">${baudRate}</option>`);
+            const rateName = i18n.existsMessage('baudrate_' + baudRate) ?
+                i18n.getMessage('baudrate_' + baudRate) : baudRate;
+            listElement.append(`<option value="${baudRate}">${rateName}</option>`);
         }
         listElement.val(baudRate);
     }

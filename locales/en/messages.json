@@ -1519,6 +1519,15 @@
     "portsFunction_CUSTOM": {
         "message": "Custom"
     },
+    "baudrate_AUTO": {
+        "message": "Auto"
+    },
+    "baudrate_CUSTOM": {
+        "message": "Custom"
+    },
+    "baudrate_DISABLED": {
+        "message": "Disabled"
+    },
     "dialogCopyProfileText": {
         "message": "Copy values from the current profile to"
     },
