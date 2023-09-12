@@ -279,19 +279,19 @@
     border-radius: 0;
 }
 
-.rates_roll {
+.tab-rates .ROLL .axis_title {
     background-color: #FF8080;
 }
 
-.rates_pitch {
+.tab-rates .PITCH .axis_title {
     background-color: #80FF80;
 }
 
-.rates_yaw {
+.tab-rates .YAW .axis_title {
     background-color: #8080FF;
 }
 
-.rates_collective {
+.tab-rates .COLLECTIVE .axis_title {
     background-color: #FFBB00;
 }
 

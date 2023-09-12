@@ -206,15 +206,15 @@
     text-align: left;
 }
 
-.pid_roll {
+.tab-profiles .ROLL .axis_title {
     background-color: #FF8080;
 }
 
-.pid_pitch {
+.tab-profiles .PITCH .axis_title {
     background-color: #80FF80;
 }
 
-.pid_yaw {
+.tab-profiles .YAW .axis_title {
     background-color: #8080FF;
 }
 

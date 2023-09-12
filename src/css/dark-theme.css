@@ -689,15 +689,15 @@ progress[value]::-webkit-progress-bar {
     border-bottom: 1px solid #6b6b6b;
 }
 
-.tab-profiles .pid_roll {
+.tab-profiles .ROLL .axis_title {
     background-color: #A00000;
 }
 
-.tab-profiles .pid_pitch {
+.tab-profiles .PITCH .axis_title {
     background-color: #00A000;
 }
 
-.tab-profiles .pid_yaw {
+.tab-profiles .YAW .axis_title {
     background-color: #0000A0;
 }
 
@@ -769,16 +769,20 @@ progress[value]::-webkit-progress-bar {
     background-color: #ffffff33;
 }
 
-.tab-rates .rates_roll {
+.tab-rates .ROLL .axis_title {
     background-color: #A00000;
 }
 
-.tab-rates .rates_pitch {
+.tab-rates .PITCH .axis_title {
     background-color: #00A000;
 }
 
-.tab-rates .rates_yaw {
+.tab-rates .YAW .axis_title {
     background-color: #0000A0;
+}
+
+.tab-rates .COLLECTIVE .axis_title {
+    background-color: #C08000;
 }
 
 .tab-rates .gui_box span {

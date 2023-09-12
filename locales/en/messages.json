@@ -19,6 +19,22 @@
     "auto": {
         "message": "Auto"
     },
+    "axisROLL": {
+        "message": "ROLL",
+        "description": "Roll axis in capital letters"
+    },
+    "axisPITCH": {
+        "message": "PITCH",
+        "description": "Pitch axis in capital letters"
+    },
+    "axisYAW": {
+        "message": "YAW",
+        "description": "Yaw axis in capital letters"
+    },
+    "axisCOLLECTIVE": {
+        "message": "COLLECTIVE",
+        "description": "Collective in capital letters"
+    },
     "error": {
         "message": "Error: {{errorMessage}}"
     },
