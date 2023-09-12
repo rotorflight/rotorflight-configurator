@@ -182,11 +182,27 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles input[id="yawFFImpulseGain"]').val(FC.PID_PROFILE.yawFFImpulseGain);
         $('.tab-profiles input[id="yawFFImpulseDecay"]').val(FC.PID_PROFILE.yawFFImpulseDecay);
 
-        // Cyclic settings
+        // Collective-to-Pitch
         $('.tab-profiles input[id="pitchFFCollectiveGain"]').val(FC.PID_PROFILE.pitchFFCollectiveGain);
+        const pitchFFCollectiveCheck = $('.tab-profiles input[id="pitchFFCollective"]');
+        pitchFFCollectiveCheck.change(function() {
+            const checked = $(this).is(':checked');
+            $('.tab-profiles .pitchFFCollective .suboption').toggle(checked);
+            $('.tab-profiles .pitchFFCollective .subhelp').toggle(checked);
+        });
+        pitchFFCollectiveCheck.prop('checked', FC.PID_PROFILE.pitchFFCollectiveGain > 0).change();
+
+        // Cyclic Cross-Coupling
         $('.tab-profiles input[id="cyclicCrossCouplingGain"]').val(FC.PID_PROFILE.cyclicCrossCouplingGain);
         $('.tab-profiles input[id="cyclicCrossCouplingRatio"]').val(FC.PID_PROFILE.cyclicCrossCouplingRatio);
         $('.tab-profiles input[id="cyclicCrossCouplingCutoff"]').val(FC.PID_PROFILE.cyclicCrossCouplingCutoff);
+        const cyclicCrossCouplingCheck = $('.tab-profiles input[id="cyclicCrossCoupling"]');
+        cyclicCrossCouplingCheck.change(function() {
+            const checked = $(this).is(':checked');
+            $('.tab-profiles .cyclicCrossCoupling .suboption').toggle(checked);
+            $('.tab-profiles .cyclicCrossCoupling .subhelp').toggle(checked);
+        });
+        cyclicCrossCouplingCheck.prop('checked', FC.PID_PROFILE.cyclicCrossCouplingGain > 0).change();
 
         // Acro Trainer
         $('.tab-profiles input[id="acroTrainerGain"]').val(FC.PID_PROFILE.acroTrainerGain).trigger('input');
@@ -305,9 +321,14 @@ TABS.profiles.initialize = function (callback) {
         FC.PID_PROFILE.yawFFImpulseGain = $('.tab-profiles input[id="yawFFImpulseGain"]').val();
         FC.PID_PROFILE.yawFFImpulseDecay = $('.tab-profiles input[id="yawFFImpulseDecay"]').val();
 
-        // Cyclic settings
-        FC.PID_PROFILE.pitchFFCollectiveGain = parseInt($('.tab-profiles input[id="pitchFFCollectiveGain"]').val());
-        FC.PID_PROFILE.cyclicCrossCouplingGain = parseInt($('.tab-profiles input[id="cyclicCrossCouplingGain"]').val());
+        // Collective-to-Pitch
+        FC.PID_PROFILE.pitchFFCollectiveGain =  $('.tab-profiles input[id="pitchFFCollective"]').is(':checked') ?
+            parseInt($('.tab-profiles input[id="pitchFFCollectiveGain"]').val()) : 0;
+
+        // Cyclic Cross-Coupling
+        FC.PID_PROFILE.cyclicCrossCouplingGain = $('.tab-profiles input[id="cyclicCrossCoupling"]').is(':checked') ?
+            parseInt($('.tab-profiles input[id="cyclicCrossCouplingGain"]').val()) : 0;
+
         FC.PID_PROFILE.cyclicCrossCouplingRatio = parseInt($('.tab-profiles input[id="cyclicCrossCouplingRatio"]').val());
         FC.PID_PROFILE.cyclicCrossCouplingCutoff = parseInt($('.tab-profiles input[id="cyclicCrossCouplingCutoff"]').val());
 

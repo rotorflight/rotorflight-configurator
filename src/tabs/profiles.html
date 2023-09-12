@@ -153,7 +153,7 @@
                                 <td colspan="2">
                                     <div class="helpicon cf_tip" i18n_title="profilesItermRelaxHelp"></div>
                                     <div>
-                                        <label for="ItermRelax">
+                                        <label for="itermRelax">
                                             <span i18n="profilesItermRelax"></span>
                                         </label>
                                     </div>
@@ -269,46 +269,54 @@
                             <div class="spacer_box_title" i18n="profilesMainRotorSettings"></div>
                         </div>
                         <table id="pid_cyclic_advanced" class="settings_table pid_settings">
-                            <tr class="pitchFFCollectiveGain border">
+                            <tr class="pitchFFCollective border">
                                 <td>
-                                    <input type="number" id="pitchFFCollectiveGain" step="1" min="0" max="250"/>
+                                    <input type="checkbox" id="pitchFFCollective" class="toggle" />
                                 </td>
                                 <td colspan="2">
+                                    <div class="helpicon cf_tip" i18n_title="profilesPitchFFCollectiveHelp"></div>
                                     <div>
-                                        <span i18n="profilespitchFFCollectiveGain"></span>
-                                        <div class="helpicon cf_tip" i18n_title="profilespitchFFCollectiveGainHelp"></div>
+                                        <span i18n="profilesPitchFFCollective"></span>
                                     </div>
-                                </td>
-                            </tr>
-                            <tr class="cyclicCrossCoupling">
-                                <td>
-                                    <input type="number" id="cyclicCrossCouplingGain" step="1" min="0" max="250"/>
-                                </td>
-                                <td colspan="2">
-                                    <div>
-                                        <span i18n="profilesCyclicCrossCouplingGain"></span>
-                                        <div class="helpicon cf_tip" i18n_title="profilesCyclicCrossCouplingHelp"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="cyclicCrossCoupling">
-                                <td>
-                                    <input type="number" id="cyclicCrossCouplingRatio" step="1" min="0" max="200"/>
-                                </td>
-                                <td colspan="2">
-                                    <div>
-                                        <span i18n="profilesCyclicCrossCouplingRatio"></span>
-                                    </div>
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesPitchFFCollectiveGainHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="pitchFFCollectiveGain" step="1" min="0" max="250"/>
+                                        <label for="profilesPitchFFCollectiveGain">
+                                            <span i18n="profilesPitchFFCollectiveGain"></span>
+                                        </label>
+                                    </span>
                                 </td>
                             </tr>
                             <tr class="cyclicCrossCoupling border">
                                 <td>
-                                    <input type="number" id="cyclicCrossCouplingCutoff" step="1" min="1" max="250"/>
+                                    <input type="checkbox" id="cyclicCrossCoupling" class="toggle" />
                                 </td>
                                 <td colspan="2">
+                                    <div class="helpicon cf_tip" i18n_title="profilesCyclicCrossCouplingHelp"></div>
                                     <div>
-                                        <span i18n="profilesCyclicCrossCouplingCutoff"></span>
+                                        <span i18n="profilesCyclicCrossCoupling"></span>
                                     </div>
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesCyclicCrossCouplingGainHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="cyclicCrossCouplingGain" step="1" min="0" max="250"/>
+                                        <label for="cyclicCrossCouplingGain">
+                                            <span i18n="profilesCyclicCrossCouplingGain"></span>
+                                        </label>
+                                    </span>
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesCyclicCrossCouplingRatioHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="cyclicCrossCouplingRatio" step="1" min="0" max="200"/>
+                                        <label for="cyclicCrossCouplingRatio">
+                                            <span i18n="profilesCyclicCrossCouplingRatio"></span>
+                                        </label>
+                                    </span>
+                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesCyclicCrossCouplingCutoffHelp"></div>
+                                    <span class="suboption">
+                                        <input type="number" id="cyclicCrossCouplingCutoff" step="1" min="1" max="250"/>
+                                        <label for="cyclicCrossCouplingCutoff">
+                                            <span i18n="profilesCyclicCrossCouplingCutoff"></span>
+                                        </label>
+                                    </span>
                                 </td>
                             </tr>
                         </table>

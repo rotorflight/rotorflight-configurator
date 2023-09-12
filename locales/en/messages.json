@@ -3924,23 +3924,41 @@
     "profilesyawFFImpulseDecayHelp": {
         "message": "Decay time for collective impulse feedforward mixed into yaw"
     },
-    "profilespitchFFCollectiveGain": {
-        "message": "Collective to Pitch feedforward Gain"
+    "profilesPitchFFCollective": {
+        "message": "Collective to Pitch Compensation"
     },
-    "profilespitchFFCollectiveGainHelp": {
-        "message": "Gain value for Collective mixed into the Pitch axis. This is for preventing the heli from pitching up in collective pitch pumps."
+    "profilesPitchFFCollectiveHelp": {
+        "message": "Compensation for the pitching up tendency in collective pitch pumps."
+    },
+    "profilesPitchFFCollectiveGain": {
+        "message": "Compensation Gain"
+    },
+    "profilesPitchFFCollectiveGainHelp": {
+        "message": "Amount of collective mixed into the aileron control."
+    },
+    "profilesCyclicCrossCoupling": {
+        "message": "Cyclic Cross-Coupling"
     },
     "profilesCyclicCrossCouplingHelp": {
-        "message": "Cyclic Cross-Coupling compensation removes the aileron (roll) wobble when only elevator (pitch) is applied."
+        "message": "Cyclic Cross-Coupling compensation removes the aileron (roll) wobble when only elevator is applied."
     },
     "profilesCyclicCrossCouplingGain": {
-        "message": "Cyclic Cross-Coupling Gain"
+        "message": "Cross-Coupling Gain"
+    },
+    "profilesCyclicCrossCouplingGainHelp": {
+        "message": "Amount of compensation applied for Pitch-to-Roll decoupling."
     },
     "profilesCyclicCrossCouplingRatio": {
-        "message": "Cyclic Cross-Coupling Ratio (Pitch/Roll)"
+        "message": "Cross-Coupling Ratio [%]"
+    },
+    "profilesCyclicCrossCouplingRatioHelp": {
+        "message": "Amount of Roll-to-Pitch compensation needed, vs. Pitch-to-Roll."
     },
     "profilesCyclicCrossCouplingCutoff": {
-        "message": "Cyclic Cross-Coupling Cutoff Frequency"
+        "message": "Cross-Coupling Cutoff Frequency [Hz]"
+    },
+    "profilesCyclicCrossCouplingCutoffHelp": {
+        "message": "Frequency limit for the compensation. Higher value will make the compensation action faster."
     },
     "profilesRescueSettings": {
         "message": "Rescue Settings"
