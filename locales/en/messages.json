@@ -1050,128 +1050,65 @@
     "initialSetupEnableMixerOverrideText": {
         "message": "Enable the mixer input override feature in the Mixers tab. Setting mixer override WILL force the flight controls to arbitrary positions."
     },
-    "featureNone": {
-        "message": "&lt;Select One&gt;"
-    },
-    "featureRX_PPM": {
+    "feature_RX_PPM": {
         "message": "PPM RX input"
     },
-    "featureVBAT": {
-        "message": "Battery voltage monitoring"
-    },
-    "featureINFLIGHT_ACC_CAL": {
+    "feature_INFLIGHT_ACC_CAL": {
         "message": "In-flight level calibration"
     },
-    "featureRX_SERIAL": {
-        "message": "SERIAL RX input (SBUS, CRSF, F.Port)"
+    "feature_RX_SERIAL": {
+        "message": "Serial RX input"
     },
-    "featureMOTOR_STOP": {
-        "message": "Don't spin the motors when armed"
+    "feature_SOFTSERIAL": {
+        "message": "Enable Software Serial ports"
     },
-    "featureSERVO_TILT": {
-        "message": "Servo gimbal"
-    },
-    "featureSERVO_TILTTip": {
-        "message": "This feature enables CAMSTAB mode, which can be used to hold up to two axis steady using the accelerometer"
-    },
-    "featureSOFTSERIAL": {
-        "message": "Enable CPU based serial ports"
-    },
-    "featureSOFTSERIALTip": {
-        "message": "Configure ports on the Ports tab after enabling."
-    },
-    "featureGPS": {
+    "feature_GPS": {
         "message": "GPS for navigation and telemetry"
     },
-    "featureGPSTip": {
-        "message": "Configure port scenario first"
+    "feature_SONAR": {
+        "message": "Sonar altitude radar"
     },
-    "featureSONAR": {
-        "message": "Sonar"
+    "feature_TELEMETRY": {
+        "message": "Transmitter telemetry"
     },
-    "featureTELEMETRY": {
-        "message": "Telemetry output"
+    "feature_RX_PARALLEL_PWM": {
+        "message": "PWM RX input channels"
     },
-    "featureCURRENT_METER": {
-        "message": "Battery current monitoring"
+    "feature_RX_MSP": {
+        "message": "MSP RX input"
     },
-    "featureRX_PARALLEL_PWM": {
-        "message": "PWM RX input (one wire per channel)"
-    },
-    "featureRX_MSP": {
-        "message": "MSP RX input (control via MSP port)"
-    },
-    "featureRSSI_ADC": {
+    "feature_RSSI_ADC": {
         "message": "Analog RSSI input"
     },
-    "featureLED_STRIP": {
-        "message": "Multi-color RGB LED strip support"
+    "feature_LED_STRIP": {
+        "message": "RGB LED Strip support"
     },
-    "featureDISPLAY": {
-        "message": "OLED Screen Display"
+    "feature_DISPLAY": {
+        "message": "OLED Display support"
     },
-    "featureDISPLAYTip": {
-        "message": "If this feature is enabled, and no display device is connected (or the display device is not powered up), there will be a delay of approx. 10 seconds on every reboot of the flight controller."
-    },
-    "featureBLACKBOX": {
-        "message": "Blackbox flight data recorder"
-    },
-    "featureBLACKBOXTip": {
-        "message": "Configure via the BlackBox tab after enabling."
-    },
-    "featureRX_SPI": {
-        "message": "SPI RX support"
-    },
-    "featureGOVERNOR": {
-        "message": "Helicopter headspeed governor"
-    },
-    "featureESC_SENSOR": {
-        "message": "Use KISS ESC telemetry"
-    },
-    "featureFREQ_SENSOR": {
-        "message": "Use frequency input for RPM detection</b>"
-    },
-    "featureCHANNEL_FORWARDING": {
-        "message": "Forward aux channels to servo outputs"
-    },
-    "featureTRANSPONDER": {
-        "message": "Race Transponder"
-    },
-    "featureTRANSPONDERTip": {
-        "message": "Configure via the Race Transponder tab after enabling."
-    },
-    "featureAIRMODE": {
-        "message": "Permanently enable Airmode"
-    },
-    "featureSUPEREXPO_RATES": {
-        "message": "Super Expo Rates"
-    },
-    "featureSDCARD": {
-        "message": "SDCard support (for logging)"
-    },
-    "featureOSD": {
+    "feature_OSD": {
         "message": "On Screen Display"
     },
-    "featureVTX": {
+    "feature_RX_SPI": {
+        "message": "SPI RX support"
+    },
+    "feature_GOVERNOR": {
+        "message": "Headspeed governor"
+    },
+    "feature_ESC_SENSOR": {
+        "message": "ESC Telemetry support"
+    },
+    "feature_FREQ_SENSOR": {
+        "message": "RPM signal input support"
+    },
+    "feature_VTX": {
         "message": "Video Transmitter"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Permanently enable Anti Gravity"
-    },
-    "featureANTI_GRAVITYTip": {
-        "message": "If this is disabled, the 'ANTI GRAVITY' mode can be used to enable Anti Gravity with a switch."
-    },
-    "featureDYNAMIC_FILTER": {
+    "feature_DYNAMIC_FILTER": {
         "message": "Dynamic gyro notch filtering"
     },
-    "featureRPM_FILTER": {
-        "message": "Motor RPM controlled notch filtering"
-    },
-    "featureFAILSAFE": {
-        "message": "Enable Failsafe Stage 2"
-    },
-    "featureFAILSAFETip": {
-        "message": "<strong>Note:</strong> When Stage 2 is DISABLED, the fallback setting <strong>Auto</strong> is used instead of the user settings for all flightchannels (Roll, Pitch, Yaw and Throttle)."
+    "feature_RPM_FILTER": {
+        "message": "RPM controlled gyro notch filtering"
     },
     "configurationFeatureEnabled": {
         "message": "Enabled"

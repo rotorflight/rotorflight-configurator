@@ -6,7 +6,7 @@ const Features = function (config) {
     const features = [
         { bit:  0,  group: 'RX_PROTO',     name: 'RX_PPM' },
         { bit:  3,  group: 'RX_PROTO',     name: 'RX_SERIAL' },
-        { bit:  6,  group: 'HIDDEN',       name: 'SOFTSERIAL', haveTip: true },
+        { bit:  6,  group: 'HIDDEN',       name: 'SOFTSERIAL' },
         { bit:  7,  group: 'OTHER',        name: 'GPS' },
         { bit:  9,  group: 'HIDDEN',       name: 'SONAR' },
         { bit: 10,  group: 'OTHER',        name: 'TELEMETRY' },
@@ -14,7 +14,7 @@ const Features = function (config) {
         { bit: 14,  group: 'RX_PROTO',     name: 'RX_MSP' },
         { bit: 15,  group: 'RSSI',         name: 'RSSI_ADC' },
         { bit: 16,  group: 'OTHER',        name: 'LED_STRIP' },
-        { bit: 17,  group: 'HIDDEN',       name: 'DISPLAY', haveTip: true },
+        { bit: 17,  group: 'HIDDEN',       name: 'DISPLAY' },
         { bit: 18,  group: 'OTHER',        name: 'OSD' },
         { bit: 25,  group: 'RX_PROTO',     name: 'RX_SPI' },
         { bit: 26,  group: 'OTHER',        name: 'GOVERNOR' },
@@ -99,23 +99,20 @@ Features.prototype.generateElements = function (featuresElements) {
     const listElements = [];
 
     for (let i = 0; i < self._features.length; i++) {
-        const rawFeatureName = self._features[i].name;
+        const featureName = self._features[i].name;
         const featureBit = self._features[i].bit;
         const newElements = [];
 
         let feature_tip_html = '';
-        if (self._features[i].haveTip) {
-            feature_tip_html = `<div class="helpicon cf_tip" i18n_title="feature${rawFeatureName}Tip"></div>`;
+        if (i18n.existsMessage('featureTip_' + featureName)) {
+            feature_tip_html = `<div class="helpicon cf_tip" i18n_title="featureTip_${featureName}"></div>`;
         }
 
-        let featureName = `<td><div>${rawFeatureName}</div></td>`;
-
-        let element = `<tr><td><input class="feature toggle" id="feature-${i}"`;
-        element += `name="${self._features[i].name}" title="${self._features[i].name}"`;
-        element += `type="checkbox"/></td><td><div>${featureName}</div>`;
-        element += `<span class="xs" i18n="feature${self._features[i].name}"></span></td>`;
-        element += `<td><span class="sm-min" i18n="feature${self._features[i].name}"></span>`;
-        element += `${feature_tip_html}</td></tr>`;
+        let element = `<tr>`;
+        element += `<td><input class="feature toggle" id="feature-${i}" name="${self._features[i].name}" title="${featureName}" type="checkbox"/></td>`;
+        element += `<td><div>${featureName}</div><span class="xs" i18n="feature_${featureName}"></span></td>`;
+        element += `<td><span class="sm-min" i18n="feature_${featureName}"></span>${feature_tip_html}</td>`;
+        element += `</tr>`;
 
         const newElement = $(element);
         const featureElement = newElement.find('input.feature');
