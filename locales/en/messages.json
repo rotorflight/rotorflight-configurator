@@ -35,6 +35,27 @@
         "message": "COLLECTIVE",
         "description": "Collective in capital letters"
     },
+    "titleRoll": {
+        "message": "Roll"
+    },
+    "titlePitch": {
+        "message": "Pitch"
+    },
+    "titleYaw": {
+        "message": "Yaw"
+    },
+    "titleCollective": {
+        "message": "Collective"
+    },
+    "titleHeading": {
+        "message": "Heading"
+    },
+    "titleAltitude": {
+        "message": "Altitude"
+    },
+    "titleAttitude": {
+        "message": "Attitude"
+    },
     "error": {
         "message": "Error: {{errorMessage}}"
     },
