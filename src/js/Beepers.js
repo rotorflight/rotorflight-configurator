@@ -24,8 +24,8 @@ class Beepers {
             { bit: 16, name: 'SYSTEM_INIT', visible: true },
             { bit: 17, name: 'USB', visible: true },
             { bit: 18, name: 'BLACKBOX_ERASE', visible: true },
-            { bit: 19, name: 'CAM_CONNECTION_OPEN', visible: true },
-            { bit: 20, name: 'CAM_CONNECTION_CLOSE', visible: true },
+            //{ bit: 19, name: 'CAM_CONNECTION_OPEN', visible: true },
+            //{ bit: 20, name: 'CAM_CONNECTION_CLOSE', visible: true },
             { bit: 21, name: 'ARMING_GPS_NO_FIX', visible: true },
         ];
 
@@ -69,6 +69,7 @@ class Beepers {
 
         for (let i = 0; i < self._beepers.length; i++) {
             if (self._beepers[i].visible) {
+                const beeperName = self._beepers[i].name;
                 const element = template.clone();
                 destination.append(element);
 
@@ -77,14 +78,14 @@ class Beepers {
                 const spanElement = $(element).find('span');
 
                 inputElement.attr('id', `beeper-${i}`);
-                inputElement.attr('name', self._beepers[i].name);
-                inputElement.attr('title', self._beepers[i].name);
+                inputElement.attr('name', beeperName);
+                inputElement.attr('title', beeperName);
                 inputElement.prop('checked', !bit_check(self._beeperDisabledMask, self._beepers[i].bit));
                 inputElement.data('bit', self._beepers[i].bit);
 
-                labelElement.text(self._beepers[i].name);
+                labelElement.text(beeperName);
 
-                spanElement.attr('i18n', `beeper${self._beepers[i].name}`);
+                spanElement.html(i18n.getMessage(`beeper_${beeperName}`));
 
                 element.show();
             }

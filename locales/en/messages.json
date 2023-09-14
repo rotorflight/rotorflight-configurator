@@ -1221,74 +1221,71 @@
     "configurationBeeperHelp": {
         "message": "Enable or disable when to sound the Buzzer"
     },
-    "beeperGYRO_CALIBRATED": {
+    "beeper_GYRO_CALIBRATED": {
         "message": "Beeps when gyro has been calibrated"
     },
-    "beeperRX_LOST": {
+    "beeper_RX_LOST": {
         "message": "Beeps when TX is turned off or signal lost (repeat until TX is okay)"
     },
-    "beeperRX_LOST_LANDING": {
+    "beeper_RX_LOST_LANDING": {
         "message": "Beeps SOS when armed and TX is turned off or signal lost (autolanding/autodisarm)"
     },
-    "beeperDISARMING": {
+    "beeper_DISARMING": {
         "message": "Beep when disarming the flightcontroller"
     },
-    "beeperARMING": {
+    "beeper_ARMING": {
         "message": "Beep when arming the flightcontroller"
     },
-    "beeperARMING_GPS_FIX": {
-        "message": "Beep a special tone when arming the board and GPS has fix"
+    "beeper_ARMING_GPS_FIX": {
+        "message": "Beep a special tone when arming the FC and GPS has fix"
     },
-    "beeperBAT_CRIT_LOW": {
+    "beeper_BAT_CRIT_LOW": {
         "message": "Longer warning beeps when battery is critically low (repeats)"
     },
-    "beeperBAT_LOW": {
+    "beeper_BAT_LOW": {
         "message": "Warning beeps when battery is getting low (repeats)"
     },
-    "beeperGPS_STATUS": {
+    "beeper_GPS_STATUS": {
         "message": "Use the number of beeps to indicate how many GPS satellites were found"
     },
-    "beeperRX_SET": {
+    "beeper_RX_SET": {
         "message": "Beeps when aux channel is set for beep"
     },
-    "beeperACC_CALIBRATION": {
+    "beeper_ACC_CALIBRATION": {
         "message": "Accelerometer inflight calibration completed confirmation"
     },
-    "beeperACC_CALIBRATION_FAIL": {
+    "beeper_ACC_CALIBRATION_FAIL": {
         "message": "Accelerometer inflight calibration failed"
     },
-    "beeperREADY_BEEP": {
+    "beeper_READY_BEEP": {
         "message": "Ring a tone when GPS is locked and ready"
     },
-    "beeperMULTI_BEEPS": {
+    "beeper_MULTI_BEEPS": {
         "message": ""
     },
-    "beeperDISARM_REPEAT": {
+    "beeper_DISARM_REPEAT": {
         "message": "Beeps sounded while stick held in disarm position"
     },
-    "beeperARMED": {
+    "beeper_ARMED": {
         "message": "Warning beeps when board is armed with motors off when idle (repeats until board is disarmed or throttle is increased)"
     },
-    "beeperSYSTEM_INIT": {
+    "beeper_SYSTEM_INIT": {
         "message": "Initialisation beeps when board is powered on"
     },
-    "beeperUSB": {
+    "beeper_USB": {
         "message": "Beep when flight controller is powered from USB. Turn this off if you don't want the beeper to be on when on the workbench"
     },
-    "beeperBLACKBOX_ERASE": {
+    "beeper_BLACKBOX_ERASE": {
         "message": "Beep when blackbox erase completes"
     },
-    "beeperCRASH_FLIP": {
-        "message": "Beep when crash flip mode is active"
-    },
-    "beeperCAM_CONNECTION_OPEN": {
+    "beeper_CAM_CONNECTION_OPEN": {
         "message": "Beep when the 5 key camera control is entered"
     },
-    "beeperCAM_CONNECTION_CLOSE": {
+    "beeper_CAM_CONNECTION_CLOSE": {
         "message": "Beep when the 5 key camera control is exited"
     },
-    "beeperRC_SMOOTHING_INIT_FAIL": {
-        "message": "Beep when armed and rc smoothing has not initialized filters"
+    "beeper_ARMING_GPS_NO_FIX": {
+        "message": "Beep a special tone when arming the FC and GPS does not have fix"
     },
     "configurationSystem": {
         "message": "System configuration"
