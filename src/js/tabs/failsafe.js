@@ -145,9 +145,7 @@ TABS.failsafe.initialize = function (callback) {
                     continue; // invalid!
                 }
 
-                // Search for the real name if it belongs to a peripheral
                 let modeName = FC.AUX_CONFIG[modeIndex];
-                modeName = adjustBoxNameIfPeripheralWithModeID(modeId, modeName);
 
                 auxAssignment[modeRange.auxChannelIndex] += "<span class=\"modename\">" + modeName + "</span>";
             }

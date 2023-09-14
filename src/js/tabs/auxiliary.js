@@ -48,13 +48,16 @@ TABS.auxiliary.initialize = function (callback) {
     function createMode(modeIndex, modeId) {
         const modeTemplate = $('#tab-auxiliary-templates .mode');
         const newMode = modeTemplate.clone();
+        const modeName = FC.AUX_CONFIG[modeIndex];
 
-        let modeName = FC.AUX_CONFIG[modeIndex];
-        // Adjust the name of the box if a peripheral is selected
-        modeName = adjustBoxNameIfPeripheralWithModeID(modeId, modeName);
+        let modeDesc = i18n.existsMessage('mode ' + modeName) ?
+            i18n.getMessage('mode ' + modeName) : modeName;
 
         $(newMode).attr('id', 'mode-' + modeIndex);
         $(newMode).find('.name').text(modeName);
+
+        if (modeDesc != modeName)
+            $(newMode).find('.desc').text(modeDesc);
 
         $(newMode).data('index', modeIndex);
         $(newMode).data('id', modeId);

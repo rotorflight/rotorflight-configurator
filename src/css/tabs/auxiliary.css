@@ -60,9 +60,16 @@
     display: flex;
 }
 
+.tab-auxiliary .mode .names {
+    min-height: 88px;
+}
+
 .tab-auxiliary .mode .name {
-    min-height: 80px;
-    padding: 5px 0;
+    padding: 4px 0 1px 0;
+}
+
+.tab-auxiliary .mode .desc {
+    padding: 1px 0 4px 0;
 }
 
 .tab-auxiliary .mode .info {
@@ -78,6 +85,11 @@
 .tab-auxiliary .mode .info .name {
     font-weight: bold;
     font-size: 1.0em;
+}
+
+.tab-auxiliary .mode .info .desc {
+    font-weight: normal;
+    font-size: 0.9em;
 }
 
 .tab-auxiliary .mode .info .buttons {

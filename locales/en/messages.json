@@ -6263,14 +6263,65 @@
     "dialogConfirmArmingClose": {
         "message": "Cancel"
     },
-    "modeCameraWifi": {
-        "message": "CAMERA WI-FI BUTTON"
+    "mode ARM": {
+        "message": "ARM"
     },
-    "modeCameraPower": {
-        "message": "CAMERA POWER BUTTON"
+    "mode ANGLE": {
+        "message": "ANGLE"
     },
-    "modeCameraChangeMode": {
-        "message": "CAMERA CHANGE MODE"
+    "mode HORIZON": {
+        "message": "HORIZON"
+    },
+    "mode ALTHOLD": {
+        "message": "ALTHOLD"
+    },
+    "mode BEEPER": {
+        "message": "BEEPER"
+    },
+    "mode LEDLOW": {
+        "message": "LEDLOW"
+    },
+    "mode CALIB": {
+        "message": "CALIB"
+    },
+    "mode OSD DISABLE": {
+        "message": "OSD DISABLE"
+    },
+    "mode TELEMETRY": {
+        "message": "TELEMETRY"
+    },
+    "mode BLACKBOX": {
+        "message": "BLACKBOX"
+    },
+    "mode FAILSAFE": {
+        "message": "FAILSAFE"
+    },
+    "mode BLACKBOX ERASE": {
+        "message": "BLACKBOX ERASE"
+    },
+    "mode PREARM": {
+        "message": "PREARM"
+    },
+    "mode PARALYZE": {
+        "message": "PARALYZE"
+    },
+    "mode GPS RESCUE": {
+        "message": "GPS RESCUE"
+    },
+    "mode TRAINER": {
+        "message": "TRAINER"
+    },
+    "mode MSP OVERRIDE": {
+        "message": "MSP OVERRIDE"
+    },
+    "mode STICK COMMANDS DISABLE": {
+        "message": "STICK COMMANDS DISABLE"
+    },
+    "mode BEEPER MUTE": {
+        "message": "BEEPER MUTE"
+    },
+    "mode RESCUE": {
+        "message": "RESCUE"
     },
     "flashTab": {
         "message": "Update Firmware"
