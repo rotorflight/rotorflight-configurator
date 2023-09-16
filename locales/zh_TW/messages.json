@@ -24,6 +24,65 @@
         "message": "自動",
         "english": "Auto"
     },
+    "axisROLL": {
+        "message": "ROLL",
+        "english": "ROLL",
+        "status": "New entry. Please translate!",
+        "description": "Roll axis in capital letters"
+    },
+    "axisPITCH": {
+        "message": "PITCH",
+        "english": "PITCH",
+        "status": "New entry. Please translate!",
+        "description": "Pitch axis in capital letters"
+    },
+    "axisYAW": {
+        "message": "YAW",
+        "english": "YAW",
+        "status": "New entry. Please translate!",
+        "description": "Yaw axis in capital letters"
+    },
+    "axisCOLLECTIVE": {
+        "message": "COLLECTIVE",
+        "english": "COLLECTIVE",
+        "status": "New entry. Please translate!",
+        "description": "Collective in capital letters"
+    },
+    "titleRoll": {
+        "message": "Roll",
+        "english": "Roll",
+        "status": "New entry. Please translate!"
+    },
+    "titlePitch": {
+        "message": "Pitch",
+        "english": "Pitch",
+        "status": "New entry. Please translate!"
+    },
+    "titleYaw": {
+        "message": "Yaw",
+        "english": "Yaw",
+        "status": "New entry. Please translate!"
+    },
+    "titleCollective": {
+        "message": "Collective",
+        "english": "Collective",
+        "status": "New entry. Please translate!"
+    },
+    "titleHeading": {
+        "message": "Heading",
+        "english": "Heading",
+        "status": "New entry. Please translate!"
+    },
+    "titleAltitude": {
+        "message": "Altitude",
+        "english": "Altitude",
+        "status": "New entry. Please translate!"
+    },
+    "titleAttitude": {
+        "message": "Attitude",
+        "english": "Attitude",
+        "status": "New entry. Please translate!"
+    },
     "error": {
         "message": "錯誤：{{errorMessage}}",
         "english": "Error: {{errorMessage}}"
@@ -1415,183 +1474,105 @@
         "english": "Enable the mixer input override feature in the Mixers tab. Setting mixer override WILL force the flight controls to arbitrary positions.",
         "status": "New entry. Please translate!"
     },
-    "featureNone": {
-        "message": "&lt;請選擇&gt;",
-        "english": "&lt;Select One&gt;"
-    },
-    "featureRX_PPM": {
+    "feature_RX_PPM": {
         "message": "PPM RX input",
         "english": "PPM RX input",
-        "status": "New entry. Please translate!"
+        "status": "Reused translation. Please check!"
     },
-    "featureVBAT": {
-        "message": "電池電壓檢測",
-        "english": "Battery voltage monitoring"
-    },
-    "featureINFLIGHT_ACC_CAL": {
+    "feature_INFLIGHT_ACC_CAL": {
         "message": "實時水平校準",
-        "english": "In-flight level calibration"
+        "english": "In-flight level calibration",
+        "status": "Reused translation. Please check!"
     },
-    "featureRX_SERIAL": {
-        "message": "SERIAL RX input (SBUS, CRSF, F.Port)",
-        "english": "SERIAL RX input (SBUS, CRSF, F.Port)",
+    "feature_RX_SERIAL": {
+        "message": "Serial RX input",
+        "english": "Serial RX input",
         "status": "New entry. Please translate!"
     },
-    "featureMOTOR_STOP": {
-        "message": "解鎖時不要轉動電機",
-        "english": "Don't spin the motors when armed"
+    "feature_SOFTSERIAL": {
+        "message": "Enable Software Serial ports",
+        "english": "Enable Software Serial ports",
+        "status": "New entry. Please translate!"
     },
-    "featureSERVO_TILT": {
-        "message": "舵機雲台",
-        "english": "Servo gimbal"
-    },
-    "featureSERVO_TILTTip": {
-        "message": "此功能將開啟相機穩定模式，使用加速度計來保持兩個軸的穩定。",
-        "english": "This feature enables CAMSTAB mode, which can be used to hold up to two axis steady using the accelerometer"
-    },
-    "featureSOFTSERIAL": {
-        "message": "啟用軟串口",
-        "english": "Enable CPU based serial ports"
-    },
-    "featureSOFTSERIALTip": {
-        "message": "開啟後，請在埠口頁面設置埠口。",
-        "english": "Configure ports on the Ports tab after enabling."
-    },
-    "featureGPS": {
+    "feature_GPS": {
         "message": "啟用 GPS 導航",
-        "english": "GPS for navigation and telemetry"
+        "english": "GPS for navigation and telemetry",
+        "status": "Reused translation. Please check!"
     },
-    "featureGPSTip": {
-        "message": "請先設置埠口",
-        "english": "Configure port scenario first"
-    },
-    "featureSONAR": {
-        "message": "聲納",
-        "english": "Sonar"
-    },
-    "featureTELEMETRY": {
-        "message": "遙測輸出",
-        "english": "Telemetry output"
-    },
-    "featureCURRENT_METER": {
-        "message": "檢測電池電流",
-        "english": "Battery current monitoring"
-    },
-    "featureRX_PARALLEL_PWM": {
-        "message": "PWM RX input (one wire per channel)",
-        "english": "PWM RX input (one wire per channel)",
+    "feature_SONAR": {
+        "message": "Sonar altitude radar",
+        "english": "Sonar altitude radar",
         "status": "New entry. Please translate!"
     },
-    "featureRX_MSP": {
-        "message": "MSP RX input (control via MSP port)",
-        "english": "MSP RX input (control via MSP port)",
+    "feature_TELEMETRY": {
+        "message": "Transmitter telemetry",
+        "english": "Transmitter telemetry",
         "status": "New entry. Please translate!"
     },
-    "featureRSSI_ADC": {
+    "feature_RX_PARALLEL_PWM": {
+        "message": "PWM RX input channels",
+        "english": "PWM RX input channels",
+        "status": "New entry. Please translate!"
+    },
+    "feature_RX_MSP": {
+        "message": "MSP RX input",
+        "english": "MSP RX input",
+        "status": "New entry. Please translate!"
+    },
+    "feature_RSSI_ADC": {
         "message": "模擬 RSSI 輸入",
-        "english": "Analog RSSI input"
+        "english": "Analog RSSI input",
+        "status": "Reused translation. Please check!"
     },
-    "featureLED_STRIP": {
-        "message": "彩色 RGB LED燈帶",
-        "english": "Multi-color RGB LED strip support"
+    "feature_LED_STRIP": {
+        "message": "RGB LED Strip support",
+        "english": "RGB LED Strip support",
+        "status": "New entry. Please translate!"
     },
-    "featureDISPLAY": {
-        "message": "OLED 顯示屏",
-        "english": "OLED Screen Display"
+    "feature_DISPLAY": {
+        "message": "OLED Display support",
+        "english": "OLED Display support",
+        "status": "New entry. Please translate!"
     },
-    "featureDISPLAYTip": {
-        "message": "當啟用該功能後，如果沒有連接熒幕（或沒有通電），則飛控的每次啟動都會有10秒鐘左右的延遲。",
-        "english": "If this feature is enabled, and no display device is connected (or the display device is not powered up), there will be a delay of approx. 10 seconds on every reboot of the flight controller."
+    "feature_OSD": {
+        "message": "OSD",
+        "english": "On Screen Display",
+        "status": "Reused translation. Please check!"
     },
-    "featureBLACKBOX": {
-        "message": "黑盒記錄器",
-        "english": "Blackbox flight data recorder"
-    },
-    "featureBLACKBOXTip": {
-        "message": "打開後，請在黑盒日誌頁面完成設置。",
-        "english": "Configure via the BlackBox tab after enabling."
-    },
-    "featureRX_SPI": {
+    "feature_RX_SPI": {
         "message": "SPI RX support",
         "english": "SPI RX support",
+        "status": "Reused translation. Please check!"
+    },
+    "feature_GOVERNOR": {
+        "message": "Headspeed governor",
+        "english": "Headspeed governor",
         "status": "New entry. Please translate!"
     },
-    "featureGOVERNOR": {
-        "message": "Helicopter headspeed governor",
-        "english": "Helicopter headspeed governor",
+    "feature_ESC_SENSOR": {
+        "message": "ESC Telemetry support",
+        "english": "ESC Telemetry support",
         "status": "New entry. Please translate!"
     },
-    "featureESC_SENSOR": {
-        "message": "Use KISS ESC telemetry",
-        "english": "Use KISS ESC telemetry",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "使用<b>專線</b>回傳 KISS/BLHeli_32 電調遙測數據",
-            "english": "Use KISS/BLHeli_32 ESC telemetry <b>over a separate wire</b>"
-        }
-    },
-    "featureFREQ_SENSOR": {
-        "message": "Use frequency input for RPM detection</b>",
-        "english": "Use frequency input for RPM detection</b>",
+    "feature_FREQ_SENSOR": {
+        "message": "RPM signal input support",
+        "english": "RPM signal input support",
         "status": "New entry. Please translate!"
     },
-    "featureCHANNEL_FORWARDING": {
-        "message": "轉發 Aux 通道訊號到舵機輸出",
-        "english": "Forward aux channels to servo outputs"
-    },
-    "featureTRANSPONDER": {
-        "message": "比賽應答器",
-        "english": "Race Transponder"
-    },
-    "featureTRANSPONDERTip": {
-        "message": "開啟後，請在比賽應答器頁面完成設置。",
-        "english": "Configure via the Race Transponder tab after enabling."
-    },
-    "featureAIRMODE": {
-        "message": "永久啟用 Airmode",
-        "english": "Permanently enable Airmode"
-    },
-    "featureSUPEREXPO_RATES": {
-        "message": "Super Expo Rates",
-        "english": "Super Expo Rates"
-    },
-    "featureSDCARD": {
-        "message": "SD卡支援（記錄用）",
-        "english": "SDCard support (for logging)"
-    },
-    "featureOSD": {
-        "message": "OSD",
-        "english": "On Screen Display"
-    },
-    "featureVTX": {
+    "feature_VTX": {
         "message": "圖傳",
-        "english": "Video Transmitter"
+        "english": "Video Transmitter",
+        "status": "Reused translation. Please check!"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Permanently enable Anti Gravity",
-        "english": "Permanently enable Anti Gravity",
-        "status": "New entry. Please translate!"
-    },
-    "featureANTI_GRAVITYTip": {
-        "message": "如果禁用，那麼“反重力”模式可以由開關來啟用。",
-        "english": "If this is disabled, the 'ANTI GRAVITY' mode can be used to enable Anti Gravity with a switch."
-    },
-    "featureDYNAMIC_FILTER": {
+    "feature_DYNAMIC_FILTER": {
         "message": "動態陷波濾波",
-        "english": "Dynamic gyro notch filtering"
+        "english": "Dynamic gyro notch filtering",
+        "status": "Reused translation. Please check!"
     },
-    "featureRPM_FILTER": {
-        "message": "Motor RPM controlled notch filtering",
-        "english": "Motor RPM controlled notch filtering",
+    "feature_RPM_FILTER": {
+        "message": "RPM controlled gyro notch filtering",
+        "english": "RPM controlled gyro notch filtering",
         "status": "New entry. Please translate!"
-    },
-    "featureFAILSAFE": {
-        "message": "啟用二階失控保護",
-        "english": "Enable Failsafe Stage 2"
-    },
-    "featureFAILSAFETip": {
-        "message": "<strong>注意:</strong> 當禁用二階失控保護時, 飛控將在所有通道（橫滾、俯仰、偏航、油門）都忽略用戶預設值，轉而使用 <strong>自動</strong> 失控保護設置",
-        "english": "<strong>Note:</strong> When Stage 2 is DISABLED, the fallback setting <strong>Auto</strong> is used instead of the user settings for all flightchannels (Roll, Pitch, Yaw and Throttle)."
     },
     "configurationFeatureEnabled": {
         "message": "已啟用",
@@ -1766,98 +1747,115 @@
         "english": "Enable or disable when to sound the Buzzer",
         "status": "New entry. Please translate!"
     },
-    "beeperGYRO_CALIBRATED": {
+    "beeper_GYRO_CALIBRATED": {
         "message": "陀螺儀校準完成後鳴叫",
-        "english": "Beeps when gyro has been calibrated"
+        "english": "Beeps when gyro has been calibrated",
+        "status": "Reused translation. Please check!"
     },
-    "beeperRX_LOST": {
+    "beeper_RX_LOST": {
         "message": "遙控器關閉或訊號丟失時持續鳴叫直到訊號恢復",
-        "english": "Beeps when TX is turned off or signal lost (repeat until TX is okay)"
+        "english": "Beeps when TX is turned off or signal lost (repeat until TX is okay)",
+        "status": "Reused translation. Please check!"
     },
-    "beeperRX_LOST_LANDING": {
+    "beeper_RX_LOST_LANDING": {
         "message": "解鎖後遙控器關閉或訊號丟失（自動降落/自動鎖定）時鳴叫 SOS 訊號",
-        "english": "Beeps SOS when armed and TX is turned off or signal lost (autolanding/autodisarm)"
+        "english": "Beeps SOS when armed and TX is turned off or signal lost (autolanding/autodisarm)",
+        "status": "Reused translation. Please check!"
     },
-    "beeperDISARMING": {
+    "beeper_DISARMING": {
         "message": "鎖定飛控時鳴叫",
-        "english": "Beep when disarming the flightcontroller"
+        "english": "Beep when disarming the flightcontroller",
+        "status": "Reused translation. Please check!"
     },
-    "beeperARMING": {
+    "beeper_ARMING": {
         "message": "解鎖飛控時鳴叫",
-        "english": "Beep when arming the flightcontroller"
+        "english": "Beep when arming the flightcontroller",
+        "status": "Reused translation. Please check!"
     },
-    "beeperARMING_GPS_FIX": {
-        "message": "GPS 定位成功後解鎖飛控時鳴叫特殊音調",
-        "english": "Beep a special tone when arming the board and GPS has fix"
-    },
-    "beeperBAT_CRIT_LOW": {
-        "message": "当电池电压严重偏低时持续长鸣",
-        "english": "Longer warning beeps when battery is critically low (repeats)"
-    },
-    "beeperBAT_LOW": {
-        "message": "当电池电压偏低时重复鸣叫",
-        "english": "Warning beeps when battery is getting low (repeats)"
-    },
-    "beeperGPS_STATUS": {
-        "message": "使用蜂鳴音的次數來表示找到了多少個 GPS 衛星",
-        "english": "Use the number of beeps to indicate how many GPS satellites were found"
-    },
-    "beeperRX_SET": {
-        "message": "通過輔助通道發出蜂鳴音",
-        "english": "Beeps when aux channel is set for beep"
-    },
-    "beeperACC_CALIBRATION": {
-        "message": "加速度計飛行中校準完成",
-        "english": "Accelerometer inflight calibration completed confirmation"
-    },
-    "beeperACC_CALIBRATION_FAIL": {
-        "message": "加速度計飛行中校準失敗",
-        "english": "Accelerometer inflight calibration failed"
-    },
-    "beeperREADY_BEEP": {
-        "message": "當 GPS 定位成功且就緒時發出蜂鳴聲",
-        "english": "Ring a tone when GPS is locked and ready"
-    },
-    "beeperMULTI_BEEPS": {
-        "message": "",
-        "english": "",
+    "beeper_ARMING_GPS_FIX": {
+        "message": "Beep a special tone when arming the FC and GPS has fix",
+        "english": "Beep a special tone when arming the FC and GPS has fix",
         "status": "New entry. Please translate!"
     },
-    "beeperDISARM_REPEAT": {
+    "beeper_BAT_CRIT_LOW": {
+        "message": "当电池电压严重偏低时持续长鸣",
+        "english": "Longer warning beeps when battery is critically low (repeats)",
+        "status": "Reused translation. Please check!"
+    },
+    "beeper_BAT_LOW": {
+        "message": "当电池电压偏低时重复鸣叫",
+        "english": "Warning beeps when battery is getting low (repeats)",
+        "status": "Reused translation. Please check!"
+    },
+    "beeper_GPS_STATUS": {
+        "message": "使用蜂鳴音的次數來表示找到了多少個 GPS 衛星",
+        "english": "Use the number of beeps to indicate how many GPS satellites were found",
+        "status": "Reused translation. Please check!"
+    },
+    "beeper_RX_SET": {
+        "message": "通過輔助通道發出蜂鳴音",
+        "english": "Beeps when aux channel is set for beep",
+        "status": "Reused translation. Please check!"
+    },
+    "beeper_ACC_CALIBRATION": {
+        "message": "加速度計飛行中校準完成",
+        "english": "Accelerometer inflight calibration completed confirmation",
+        "status": "Reused translation. Please check!"
+    },
+    "beeper_ACC_CALIBRATION_FAIL": {
+        "message": "加速度計飛行中校準失敗",
+        "english": "Accelerometer inflight calibration failed",
+        "status": "Reused translation. Please check!"
+    },
+    "beeper_READY_BEEP": {
+        "message": "當 GPS 定位成功且就緒時發出蜂鳴聲",
+        "english": "Ring a tone when GPS is locked and ready",
+        "status": "Reused translation. Please check!"
+    },
+    "beeper_MULTI_BEEPS": {
+        "message": "",
+        "english": "",
+        "status": "Reused translation. Please check!"
+    },
+    "beeper_DISARM_REPEAT": {
         "message": "搖桿保持在鎖定位置時鳴叫",
-        "english": "Beeps sounded while stick held in disarm position"
+        "english": "Beeps sounded while stick held in disarm position",
+        "status": "Reused translation. Please check!"
     },
-    "beeperARMED": {
+    "beeper_ARMED": {
         "message": "當飛控解鎖且電機未轉時，持續發出警告鳴叫直到上推油門或重新鎖定",
-        "english": "Warning beeps when board is armed with motors off when idle (repeats until board is disarmed or throttle is increased)"
+        "english": "Warning beeps when board is armed with motors off when idle (repeats until board is disarmed or throttle is increased)",
+        "status": "Reused translation. Please check!"
     },
-    "beeperSYSTEM_INIT": {
+    "beeper_SYSTEM_INIT": {
         "message": "飛控上電時鳴叫初始化音",
-        "english": "Initialisation beeps when board is powered on"
+        "english": "Initialisation beeps when board is powered on",
+        "status": "Reused translation. Please check!"
     },
-    "beeperUSB": {
+    "beeper_USB": {
         "message": "通過 USB 連接飛控時啟用蜂鳴器。不想再調試時聽到鳴叫可禁用這個選項。",
-        "english": "Beep when flight controller is powered from USB. Turn this off if you don't want the beeper to be on when on the workbench"
+        "english": "Beep when flight controller is powered from USB. Turn this off if you don't want the beeper to be on when on the workbench",
+        "status": "Reused translation. Please check!"
     },
-    "beeperBLACKBOX_ERASE": {
+    "beeper_BLACKBOX_ERASE": {
         "message": "黑盒擦除完成時鳴叫",
-        "english": "Beep when blackbox erase completes"
+        "english": "Beep when blackbox erase completes",
+        "status": "Reused translation. Please check!"
     },
-    "beeperCRASH_FLIP": {
-        "message": "當處於反烏龜模式時發出蜂鳴音",
-        "english": "Beep when crash flip mode is active"
-    },
-    "beeperCAM_CONNECTION_OPEN": {
+    "beeper_CAM_CONNECTION_OPEN": {
         "message": "當進入5鍵相機控制模式時發出蜂鳴音",
-        "english": "Beep when the 5 key camera control is entered"
+        "english": "Beep when the 5 key camera control is entered",
+        "status": "Reused translation. Please check!"
     },
-    "beeperCAM_CONNECTION_CLOSE": {
+    "beeper_CAM_CONNECTION_CLOSE": {
         "message": "當退出5鍵相機控制模式是發出蜂鳴音",
-        "english": "Beep when the 5 key camera control is exited"
+        "english": "Beep when the 5 key camera control is exited",
+        "status": "Reused translation. Please check!"
     },
-    "beeperRC_SMOOTHING_INIT_FAIL": {
-        "message": "當已解鎖且 RC 平滑尚未完成濾波器初始化時發出警告",
-        "english": "Beep when armed and rc smoothing has not initialized filters"
+    "beeper_ARMING_GPS_NO_FIX": {
+        "message": "Beep a special tone when arming the FC and GPS does not have fix",
+        "english": "Beep a special tone when arming the FC and GPS does not have fix",
+        "status": "New entry. Please translate!"
     },
     "configurationSystem": {
         "message": "系統設置",
@@ -2170,6 +2168,21 @@
         "english": "Custom",
         "status": "New entry. Please translate!"
     },
+    "baudrate_AUTO": {
+        "message": "Auto",
+        "english": "Auto",
+        "status": "New entry. Please translate!"
+    },
+    "baudrate_CUSTOM": {
+        "message": "Custom",
+        "english": "Custom",
+        "status": "New entry. Please translate!"
+    },
+    "baudrate_DISABLED": {
+        "message": "Disabled",
+        "english": "Disabled",
+        "status": "New entry. Please translate!"
+    },
     "dialogCopyProfileText": {
         "message": "Copy values from the current profile to",
         "english": "Copy values from the current profile to",
@@ -2280,19 +2293,39 @@
         "status": "New entry. Please translate!"
     },
     "profilesPIDPassthroughWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Passthrough Mode</i>. Please change the advanced settings in the <b>CLI</b>.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Passthrough Mode</i>. Please change the advanced settings in the <b>CLI</b>.",
-        "status": "New entry. Please translate!"
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Passthrough Mode</b>.<br>Please change the settings in the <b>CLI</b>.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Passthrough Mode</b>.<br>Please change the settings in the <b>CLI</b>.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Passthrough Mode</i>. Please change the advanced settings in the <b>CLI</b>.",
+            "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Passthrough Mode</i>. Please change the advanced settings in the <b>CLI</b>.",
+            "status": "New entry. Please translate!"
+        }
     },
     "profilesPIDCompatibilityWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Rotorflight-1 Compatiblity</i> Mode. Please change the advanced settings in the <b>CLI</b>.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Rotorflight-1 Compatiblity</i> Mode. Please change the advanced settings in the <b>CLI</b>.",
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Rotorflight-1 Compatiblity</b> Mode.<br>Please use the <b>CLI</b to change the PID settings>.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Rotorflight-1 Compatiblity</b> Mode.<br>Please use the <b>CLI</b to change the PID settings>.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Rotorflight-1 Compatiblity</i> Mode. Please change the advanced settings in the <b>CLI</b>.",
+            "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Rotorflight-1 Compatiblity</i> Mode. Please change the advanced settings in the <b>CLI</b>.",
+            "status": "New entry. Please translate!"
+        }
+    },
+    "profilesPIDModeThreeWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually to the <b>PID Test Mode 3</b>.<br>Please use the <b>CLI</b> to change the advanced PID settings.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually to the <b>PID Test Mode 3</b>.<br>Please use the <b>CLI</b> to change the advanced PID settings.",
         "status": "New entry. Please translate!"
     },
     "profilesPIDCustomWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here. Please use the <b>CLI</b> to change the PID settings.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here. Please use the <b>CLI</b> to change the PID settings.",
-        "status": "New entry. Please translate!"
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here. Please use the <b>CLI</b> to change the PID settings.",
+            "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here. Please use the <b>CLI</b> to change the PID settings.",
+            "status": "New entry. Please translate!"
+        }
     },
     "profilesPIDGains": {
         "message": "Axis",
@@ -2342,6 +2375,16 @@
         "english": "Is an additional pushing term (spring) based on stick input. FF helps the P-term push the craft for commanded stick moves.<br /><br />The P-term pushes based on the difference between the commanded Setpoint (deg/sec) and the gyro reading of current rotational rate (deg/sec). FF pushes based on the commanded change of the sticks alone.<br /><br />Higher values (gains) will result in a more sharp machine response to stick input.<br>Too high of values may result in some overshoot, increased motor heat, and motor saturation (where motors can not keep up with the desired rate of change).<br>Lower or zero (0) values will result in a slower and smoother response to stick inputs.",
         "status": "New entry. Please translate!",
         "description": "Feedforward Term helpicon message on PID table titlebar"
+    },
+    "profilesBoost": {
+        "message": "Boost",
+        "english": "Boost",
+        "status": "New entry. Please translate!"
+    },
+    "profilesBoostHelp": {
+        "message": "Is an additional boost on the feedforward. This makes the heli react faster to quick stick movements.",
+        "english": "Is an additional boost on the feedforward. This makes the heli react faster to quick stick movements.",
+        "status": "New entry. Please translate!"
     },
     "profilesCopyProfile": {
         "message": "Copy profile",
@@ -3355,6 +3398,26 @@
     "mixerTailMotorIdleHelp": {
         "message": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop",
         "english": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop",
+        "status": "New entry. Please translate!"
+    },
+    "mixerTailRotorCenterTrim": {
+        "message": "Center trim for tail rotor [&deg;]",
+        "english": "Center trim for tail rotor [&deg;]",
+        "status": "New entry. Please translate!"
+    },
+    "mixerTailRotorCenterTrimHelp": {
+        "message": "Set tail rotor trim for zero yaw command.",
+        "english": "Set tail rotor trim for zero yaw command.",
+        "status": "New entry. Please translate!"
+    },
+    "mixerTailMotorCenterTrim": {
+        "message": "Center trim for tail motor [%]",
+        "english": "Center trim for tail motor [%]",
+        "status": "New entry. Please translate!"
+    },
+    "mixerTailMotorCenterTrimHelp": {
+        "message": "Set tail motor throttle value for zero yaw command.",
+        "english": "Set tail motor throttle value for zero yaw command.",
         "status": "New entry. Please translate!"
     },
     "mixerSwashLinkTrim": {
@@ -5665,6 +5728,36 @@
         "english": "Error Limit for Yaw Axis [&deg;]",
         "status": "New entry. Please translate!"
     },
+    "profilesOffsetLimitHelp": {
+        "message": "Hard limit for the offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits.",
+        "english": "Hard limit for the offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesOffsetLimitRoll": {
+        "message": "Offset Limit for Roll Axis [&deg;]",
+        "english": "Offset Limit for Roll Axis [&deg;]",
+        "status": "New entry. Please translate!"
+    },
+    "profilesOffsetLimitPitch": {
+        "message": "Offset Limit for Pitch Axis [&deg;]",
+        "english": "Offset Limit for Pitch Axis [&deg;]",
+        "status": "New entry. Please translate!"
+    },
+    "profilesOffsetGainHelp": {
+        "message": "Gain for Offset term (Integral for high speed flight).",
+        "english": "Gain for Offset term (Integral for high speed flight).",
+        "status": "New entry. Please translate!"
+    },
+    "profilesOffsetGainRoll": {
+        "message": "Offset Gain for Roll Axis",
+        "english": "Offset Gain for Roll Axis",
+        "status": "New entry. Please translate!"
+    },
+    "profilesOffsetGainPitch": {
+        "message": "Offset Gain for Pitch Axis",
+        "english": "Offset Gain for Pitch Axis",
+        "status": "New entry. Please translate!"
+    },
     "profilesErrorDecayGround": {
         "message": "Ground Error Decay",
         "english": "Ground Error Decay",
@@ -5790,6 +5883,26 @@
         "english": "Yaw D-term Cutoff",
         "status": "New entry. Please translate!"
     },
+    "profilesBtermCutoffHelp": {
+        "message": "B-term Cutoff Frequency in Hz",
+        "english": "B-term Cutoff Frequency in Hz",
+        "status": "New entry. Please translate!"
+    },
+    "profilesBtermCutoffRoll": {
+        "message": "Roll B-term Cutoff",
+        "english": "Roll B-term Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "profilesBtermCutoffPitch": {
+        "message": "Pitch B-term Cutoff",
+        "english": "Pitch B-term Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "profilesBtermCutoffYaw": {
+        "message": "Yaw B-term Cutoff",
+        "english": "Yaw B-term Cutoff",
+        "status": "New entry. Please translate!"
+    },
     "profilesLevelingSettings": {
         "message": "Auto-leveling Settings",
         "english": "Auto-leveling Settings",
@@ -5845,14 +5958,14 @@
         "english": "Horizon Mode leveling gain. This determines how aggressively the helicopter tilts back to level while in Horizon Mode",
         "status": "New entry. Please translate!"
     },
-    "profilesYawSettings": {
-        "message": "Yaw Settings",
-        "english": "Yaw Settings",
+    "profilesMainRotorSettings": {
+        "message": "Main Rotor Settings",
+        "english": "Main Rotor Settings",
         "status": "New entry. Please translate!"
     },
-    "profilesPitchSettings": {
-        "message": "Pitch Settings",
-        "english": "Pitch Settings",
+    "profilesTailRotorSettings": {
+        "message": "Tail Rotor Settings",
+        "english": "Tail Rotor Settings",
         "status": "New entry. Please translate!"
     },
     "profilesYawCenterOffset": {
@@ -5925,14 +6038,64 @@
         "english": "Decay time for collective impulse feedforward mixed into yaw",
         "status": "New entry. Please translate!"
     },
-    "profilespitchFFCollectiveGain": {
-        "message": "Collective Feedforward Gain",
-        "english": "Collective Feedforward Gain",
+    "profilesPitchFFCollective": {
+        "message": "Collective to Pitch Compensation",
+        "english": "Collective to Pitch Compensation",
         "status": "New entry. Please translate!"
     },
-    "profilespitchFFCollectiveGainHelp": {
-        "message": "Gain value for Collective feedforward mixed into Pitch",
-        "english": "Gain value for Collective feedforward mixed into Pitch",
+    "profilesPitchFFCollectiveHelp": {
+        "message": "Compensation for the pitching up tendency in collective pitch pumps.",
+        "english": "Compensation for the pitching up tendency in collective pitch pumps.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesPitchFFCollectiveGain": {
+        "message": "Compensation Gain",
+        "english": "Compensation Gain",
+        "status": "New entry. Please translate!"
+    },
+    "profilesPitchFFCollectiveGainHelp": {
+        "message": "Amount of collective mixed into the aileron control.",
+        "english": "Amount of collective mixed into the aileron control.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesCyclicCrossCoupling": {
+        "message": "Cyclic Cross-Coupling",
+        "english": "Cyclic Cross-Coupling",
+        "status": "New entry. Please translate!"
+    },
+    "profilesCyclicCrossCouplingHelp": {
+        "message": "Cyclic Cross-Coupling compensation removes the aileron (roll) wobble when only elevator is applied.",
+        "english": "Cyclic Cross-Coupling compensation removes the aileron (roll) wobble when only elevator is applied.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesCyclicCrossCouplingGain": {
+        "message": "Cross-Coupling Gain",
+        "english": "Cross-Coupling Gain",
+        "status": "New entry. Please translate!"
+    },
+    "profilesCyclicCrossCouplingGainHelp": {
+        "message": "Amount of compensation applied for Pitch-to-Roll decoupling.",
+        "english": "Amount of compensation applied for Pitch-to-Roll decoupling.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesCyclicCrossCouplingRatio": {
+        "message": "Cross-Coupling Ratio [%]",
+        "english": "Cross-Coupling Ratio [%]",
+        "status": "New entry. Please translate!"
+    },
+    "profilesCyclicCrossCouplingRatioHelp": {
+        "message": "Amount of Roll-to-Pitch compensation needed, vs. Pitch-to-Roll.",
+        "english": "Amount of Roll-to-Pitch compensation needed, vs. Pitch-to-Roll.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesCyclicCrossCouplingCutoff": {
+        "message": "Cross-Coupling Cutoff Frequency [Hz]",
+        "english": "Cross-Coupling Cutoff Frequency [Hz]",
+        "status": "New entry. Please translate!"
+    },
+    "profilesCyclicCrossCouplingCutoffHelp": {
+        "message": "Frequency limit for the compensation. Higher value will make the compensation action faster.",
+        "english": "Frequency limit for the compensation. Higher value will make the compensation action faster.",
         "status": "New entry. Please translate!"
     },
     "profilesRescueSettings": {
@@ -9180,17 +9343,105 @@
         "english": "Cancel",
         "status": "New entry. Please translate!"
     },
-    "modeCameraWifi": {
-        "message": "攝像頭 WI-FI 按鍵",
-        "english": "CAMERA WI-FI BUTTON"
+    "mode ARM": {
+        "message": "ARM",
+        "english": "ARM",
+        "status": "New entry. Please translate!"
     },
-    "modeCameraPower": {
-        "message": "攝像頭電源按鍵",
-        "english": "CAMERA POWER BUTTON"
+    "mode ANGLE": {
+        "message": "ANGLE",
+        "english": "ANGLE",
+        "status": "New entry. Please translate!"
     },
-    "modeCameraChangeMode": {
-        "message": "攝像頭改變模式",
-        "english": "CAMERA CHANGE MODE"
+    "mode HORIZON": {
+        "message": "HORIZON",
+        "english": "HORIZON",
+        "status": "New entry. Please translate!"
+    },
+    "mode ALTHOLD": {
+        "message": "ALTHOLD",
+        "english": "ALTHOLD",
+        "status": "New entry. Please translate!"
+    },
+    "mode BEEPER": {
+        "message": "BEEPER",
+        "english": "BEEPER",
+        "status": "New entry. Please translate!"
+    },
+    "mode LEDLOW": {
+        "message": "LEDLOW",
+        "english": "LEDLOW",
+        "status": "New entry. Please translate!"
+    },
+    "mode CALIB": {
+        "message": "CALIB",
+        "english": "CALIB",
+        "status": "New entry. Please translate!"
+    },
+    "mode OSD DISABLE": {
+        "message": "OSD DISABLE",
+        "english": "OSD DISABLE",
+        "status": "New entry. Please translate!"
+    },
+    "mode TELEMETRY": {
+        "message": "TELEMETRY",
+        "english": "TELEMETRY",
+        "status": "New entry. Please translate!"
+    },
+    "mode BLACKBOX": {
+        "message": "BLACKBOX",
+        "english": "BLACKBOX",
+        "status": "New entry. Please translate!"
+    },
+    "mode FAILSAFE": {
+        "message": "FAILSAFE",
+        "english": "FAILSAFE",
+        "status": "New entry. Please translate!"
+    },
+    "mode BLACKBOX ERASE": {
+        "message": "BLACKBOX ERASE",
+        "english": "BLACKBOX ERASE",
+        "status": "New entry. Please translate!"
+    },
+    "mode PREARM": {
+        "message": "PREARM",
+        "english": "PREARM",
+        "status": "New entry. Please translate!"
+    },
+    "mode PARALYZE": {
+        "message": "PARALYZE",
+        "english": "PARALYZE",
+        "status": "New entry. Please translate!"
+    },
+    "mode GPS RESCUE": {
+        "message": "GPS RESCUE",
+        "english": "GPS RESCUE",
+        "status": "New entry. Please translate!"
+    },
+    "mode TRAINER": {
+        "message": "TRAINER",
+        "english": "TRAINER",
+        "status": "New entry. Please translate!"
+    },
+    "mode MSP OVERRIDE": {
+        "message": "MSP OVERRIDE",
+        "english": "MSP OVERRIDE",
+        "status": "New entry. Please translate!"
+    },
+    "mode STICK COMMANDS DISABLE": {
+        "message": "STICK COMMANDS DISABLE",
+        "english": "STICK COMMANDS DISABLE",
+        "status": "New entry. Please translate!"
+    },
+    "mode BEEPER MUTE": {
+        "message": "BEEPER MUTE",
+        "english": "BEEPER MUTE",
+        "status": "New entry. Please translate!"
+    },
+    "mode RESCUE": {
+        "message": "RESCUE",
+        "english": "RESCUE",
+        "status": "New entry. Please translate!"
     },
     "flashTab": {
         "message": "更新固件",
