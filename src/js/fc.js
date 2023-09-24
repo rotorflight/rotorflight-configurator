@@ -476,7 +476,7 @@ const FC = {
             gyro_lowpass_dyn_max_hz:    0,
             dterm_lowpass_dyn_min_hz:   0,
             dterm_lowpass_dyn_max_hz:   0,
-            dyn_notch_width_percent:    0,
+            dyn_notch_count:            0,
             dyn_notch_q:                0,
             dyn_notch_min_hz:           0,
             dyn_notch_max_hz:           0,
@@ -738,12 +738,12 @@ const FC = {
             dterm_notch_cutoff:             160,
             dterm_notch_hz:                 260,
             yaw_lowpass_hz:                 100,
-            dyn_notch_q:                    120,
-            dyn_notch_width_percent:          8,
+            dyn_notch_q:                    200,
+            dyn_notch_count:                  0,
             dyn_notch_q_rpm:                250, // default with rpm filtering
-            dyn_notch_width_percent_rpm:      0,
-            dyn_notch_min_hz:               150,
-            dyn_notch_max_hz:               600,
+            dyn_notch_count_rpm:              0,
+            dyn_notch_min_hz:                25,
+            dyn_notch_max_hz:               245,
         };
 
         this.VTX_DEVICE_STATUS = null;
