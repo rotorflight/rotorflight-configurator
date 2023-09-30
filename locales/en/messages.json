@@ -1604,17 +1604,23 @@
     "receiverHelpStickCenter": {
         "message": "The value of stick (channel) center in µs. Usually 1500µs or 1520µs."
     },
-    "receiverStickCommandMin": {
-        "message": "'Stick Low' Threshold"
+    "receiverStickDeflection": {
+        "message": "Stick Maximum Travel"
     },
-    "receiverHelpStickCommandMin": {
-        "message": "The maximum value (in µs) for a stick to be recognised as low / left for command input (MIN_CHECK)."
+    "receiverHelpStickDeflection": {
+        "message": "The maximum value (in µs) for stick deflection from the center, for RPY."
     },
-    "receiverStickCommandMax": {
-        "message": "'Stick High' Threshold"
+    "receiverZeroThrottle": {
+        "message": "Throttle Channel value for 0% throttle"
     },
-    "receiverHelpStickCommandMax": {
-        "message": "The minimum value (in µs) for a stick to be recognised as high / right for command input (MAX_CHECK)."
+    "receiverHelpZeroThrottle": {
+        "message": "The channel value (in µs) for the throttle channel to be considered 0%"
+    },
+    "receiverFullThrottle": {
+        "message": "Throttle Channel value for 100% throttle"
+    },
+    "receiverHelpFullThrottle": {
+        "message": "The channel value (in µs) for the throttle channel to be considered 100%"
     },
     "receiverCyclicDeadband": {
         "message": "Cyclic Deadband"
@@ -1627,18 +1633,6 @@
     },
     "receiverHelpYawDeadband": {
         "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
-    },
-    "receiverRxMinUsec": {
-        "message": "Minimum channel value"
-    },
-    "receiverHelpRxMinUsec": {
-        "message": "The minimum RX channel value (in µs) that is considered valid."
-    },
-    "receiverRxMaxUsec": {
-        "message": "Maximum channel value"
-    },
-    "receiverHelpRxMaxUsec": {
-        "message": "The maximum RX channel value (in µs) that is considered valid."
     },
     "receiverTelemetry": {
         "message": "Telemetry Settings"

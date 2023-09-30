@@ -44,8 +44,8 @@ const MSPCodes = {
     MSP_SET_ARMING_CONFIG:          62,
     MSP_RX_MAP:                     64,
     MSP_SET_RX_MAP:                 65,
-    MSP_RX_CHANNELS:                66,
-    MSP_SET_BF_CONFIG:              67, // DEPRECATED
+    MSP_RC_CONFIG:                  66,
+    MSP_SET_RC_CONFIG:              67,
     MSP_SET_REBOOT:                 68,
     MSP_BF_BUILD_INFO:              69, // Not used
     MSP_DATAFLASH_SUMMARY:          70,
@@ -92,6 +92,8 @@ const MSPCodes = {
     MSP_ANALOG:                     110,
     MSP_RC_TUNING:                  111,
     MSP_PID_TUNING:                 112,
+    MSP_RC_COMMAND:                 113,
+    MSP_RX_CHANNELS:                114,
 
     MSP_BOXNAMES:                   116,
     MSP_PIDNAMES:                   117,
@@ -99,7 +101,6 @@ const MSPCodes = {
     MSP_BOXIDS:                     119,
     MSP_SERVO_CONFIGURATIONS:       120,
     MSP_MOTOR_3D_CONFIG:            124,
-    MSP_RC_DEADBAND:                125,
     MSP_SENSOR_ALIGNMENT:           126,
     MSP_LED_STRIP_MODECOLOR:        127,
 
@@ -166,7 +167,6 @@ const MSPCodes = {
     MSP_SET_SERVO_CONFIGURATION:    212,
     MSP_SET_MOTOR:                  214,
     MSP_SET_MOTOR_3D_CONFIG:        217,
-    MSP_SET_RC_DEADBAND:            218,
     MSP_SET_RESET_CURR_PID:         219,
     MSP_SET_SENSOR_ALIGNMENT:       220,
     MSP_SET_LED_STRIP_MODECOLOR:    221,

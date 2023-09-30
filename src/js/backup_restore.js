@@ -584,8 +584,8 @@ function configuration_restore(callback) {
                     stick_center:           1500,
                     stick_min:              1100,
                     stick_max:              1900,
-                    rx_min_usec:            885,
-                    rx_max_usec:            2115
+                    rx_pulse_min:            885,
+                    rx_pulse_max:            2115
                 };
             }
 

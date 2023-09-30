@@ -53,8 +53,8 @@ TABS.failsafe.initialize = function (callback) {
 
         FC.FEATURE_CONFIG.features.updateData($('input[name="FAILSAFE"]'));
 
-        FC.RX_CONFIG.rx_min_usec = parseInt($('input[name="rx_min_usec"]').val());
-        FC.RX_CONFIG.rx_max_usec = parseInt($('input[name="rx_max_usec"]').val());
+        FC.RX_CONFIG.rx_pulse_min = parseInt($('input[name="rx_pulse_min"]').val());
+        FC.RX_CONFIG.rx_pulse_max = parseInt($('input[name="rx_pulse_max"]').val());
 
         FC.FAILSAFE_CONFIG.failsafe_throttle = parseInt($('input[name="failsafe_throttle"]').val());
         FC.FAILSAFE_CONFIG.failsafe_off_delay = parseFloat($('input[name="failsafe_off_delay"]').val()) * 10;
@@ -237,8 +237,8 @@ TABS.failsafe.initialize = function (callback) {
         });
 
         // fill stage 1 Valid Pulse Range Settings
-        $('input[name="rx_min_usec"]').val(FC.RX_CONFIG.rx_min_usec);
-        $('input[name="rx_max_usec"]').val(FC.RX_CONFIG.rx_max_usec);
+        $('input[name="rx_pulse_min"]').val(FC.RX_CONFIG.rx_pulse_min);
+        $('input[name="rx_pulse_max"]').val(FC.RX_CONFIG.rx_pulse_max);
 
         // fill fallback settings (mode and value) for all channels
         for (let i = 0; i < FC.RXFAIL_CONFIG.length; i++) {

@@ -476,11 +476,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 }
                 break;
 
-            case MSPCodes.MSP_RC_DEADBAND:
-                FC.RC_DEADBAND_CONFIG.deadband = data.readU8();
-                FC.RC_DEADBAND_CONFIG.yaw_deadband = data.readU8();
-                break;
-
             case MSPCodes.MSP_SENSOR_ALIGNMENT:
                 FC.SENSOR_ALIGNMENT.gyro_1_align = data.readU8();
                 FC.SENSOR_ALIGNMENT.gyro_2_align = data.readU8();
@@ -592,14 +587,29 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 }
                 break;
 
+            case MSPCodes.MSP_SET_RX_MAP:
+                console.log('RCMAP saved');
+                break;
+
+            case MSPCodes.MSP_RC_CONFIG:
+                FC.RC_CONFIG.rc_center = data.readU16();
+                FC.RC_CONFIG.rc_deflection = data.readU16();
+                FC.RC_CONFIG.rc_min_throttle = data.readU16();
+                FC.RC_CONFIG.rc_max_throttle = data.readU16();
+                FC.RC_CONFIG.rc_deadband = data.readU8();
+                FC.RC_CONFIG.rc_yaw_deadband = data.readU8();
+                break;
+
             case MSPCodes.MSP_RX_CHANNELS:
                 for (let i = 0; i < data.byteLength / 2; i++) {
                     FC.RX_CHANNELS[i] = data.readU16();
                 }
                 break;
 
-            case MSPCodes.MSP_SET_RX_MAP:
-                console.log('RCMAP saved');
+            case MSPCodes.MSP_RC_COMMAND:
+                for (let i = 0; i < data.byteLength / 2; i++) {
+                    FC.RC_COMMAND[i] = data.readU16();
+                }
                 break;
 
             case MSPCodes.MSP_MIXER_CONFIG:
@@ -842,11 +852,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.RX_CONFIG.serialrx_provider = data.readU8();
                 FC.RX_CONFIG.serialrx_inverted = data.readU8();
                 FC.RX_CONFIG.serialrx_halfduplex = data.readU8();
-                FC.RX_CONFIG.stick_max = data.readU16();
-                FC.RX_CONFIG.stick_center = data.readU16();
-                FC.RX_CONFIG.stick_min = data.readU16();
-                FC.RX_CONFIG.rx_min_usec = data.readU16();
-                FC.RX_CONFIG.rx_max_usec = data.readU16();
+                FC.RX_CONFIG.rx_pulse_min = data.readU16();
+                FC.RX_CONFIG.rx_pulse_max = data.readU16();
                 FC.RX_CONFIG.rxSpiProtocol = data.readU8();
                 FC.RX_CONFIG.rxSpiId = data.readU32();
                 FC.RX_CONFIG.rxSpiRfChannelCount = data.readU8();
@@ -1396,8 +1403,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_SET_MIXER_OVERRIDE:
                 console.log('Mixer Override set');
                 break;
-            case MSPCodes.MSP_SET_RC_DEADBAND:
-                console.log('Rc controls settings saved');
+            case MSPCodes.MSP_SET_RC_CONFIG:
+                console.log('RC controls settings saved');
                 break;
             case MSPCodes.MSP_SET_SENSOR_ALIGNMENT:
                 console.log('Sensor alignment saved');
@@ -1677,6 +1684,7 @@ MspHelper.prototype.crunch = function(code) {
                   .push8(FC.RSSI_CONFIG.invert)
                   .push8(FC.RSSI_CONFIG.offset);
             break;
+
         case MSPCodes.MSP_SET_BATTERY_CONFIG:
             buffer.push8(Math.round(FC.BATTERY_CONFIG.vbatmincellvoltage * 10))
                 .push8(Math.round(FC.BATTERY_CONFIG.vbatmaxcellvoltage * 10))
@@ -1699,11 +1707,8 @@ MspHelper.prototype.crunch = function(code) {
             buffer.push8(FC.RX_CONFIG.serialrx_provider)
                   .push8(FC.RX_CONFIG.serialrx_inverted)
                   .push8(FC.RX_CONFIG.serialrx_halfduplex)
-                  .push16(FC.RX_CONFIG.stick_max)
-                  .push16(FC.RX_CONFIG.stick_center)
-                  .push16(FC.RX_CONFIG.stick_min)
-                  .push16(FC.RX_CONFIG.rx_min_usec)
-                  .push16(FC.RX_CONFIG.rx_max_usec)
+                  .push16(FC.RX_CONFIG.rx_pulse_min)
+                  .push16(FC.RX_CONFIG.rx_pulse_max)
                   .push8(FC.RX_CONFIG.rxSpiProtocol)
                   .push32(FC.RX_CONFIG.rxSpiId)
                   .push8(FC.RX_CONFIG.rxSpiRfChannelCount);
@@ -1746,9 +1751,13 @@ MspHelper.prototype.crunch = function(code) {
             }
             break;
 
-        case MSPCodes.MSP_SET_RC_DEADBAND:
-            buffer.push8(FC.RC_DEADBAND_CONFIG.deadband)
-                .push8(FC.RC_DEADBAND_CONFIG.yaw_deadband);
+        case MSPCodes.MSP_SET_RC_CONFIG:
+            buffer.push16(FC.RC_CONFIG.rc_center)
+                  .push16(FC.RC_CONFIG.rc_deflection)
+                  .push16(FC.RC_CONFIG.rc_min_throttle)
+                  .push16(FC.RC_CONFIG.rc_max_throttle)
+                  .push8(FC.RC_CONFIG.rc_deadband)
+                  .push8(FC.RC_CONFIG.rc_yaw_deadband);
             break;
 
         case MSPCodes.MSP_SET_SENSOR_ALIGNMENT:

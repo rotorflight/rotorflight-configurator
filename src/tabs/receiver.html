@@ -49,6 +49,34 @@
                         <div class="spacer_box">
                             <table class="settings_table">
                                 <tr>
+                                    <td><input type="number" name="stick_center" min="1400" max="1600" /></td>
+                                    <td>
+                                        <span i18n="receiverStickCenter"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpStickCenter"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" name="stick_deflection" min="200" max="700" /></td>
+                                    <td>
+                                        <span i18n="receiverStickDeflection"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpStickDeflection"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" name="zero_throttle" min="850" max="1500" /></td>
+                                    <td>
+                                        <span i18n="receiverZeroThrottle"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpZeroThrottle"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" name="full_throttle" min="1500" max="2150" /></td>
+                                    <td>
+                                        <span i18n="receiverFullThrottle"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpFullThrottle"></div>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td><input type="number" name="cyclic_deadband" step="1" min="0" max="100"/></td>
                                     <td>
                                         <span i18n="receiverCyclicDeadband"></span>
@@ -60,41 +88,6 @@
                                     <td>
                                         <span i18n="receiverYawDeadband"></span>
                                         <div class="helpicon cf_tip" i18n_title="receiverHelpYawDeadband"></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="number" name="stick_center" min="1400" max="1600" /></td>
-                                    <td>
-                                        <span i18n="receiverStickCenter"></span>
-                                        <div class="helpicon cf_tip" i18n_title="receiverHelpStickCenter"></div>
-                                    </td>
-                                </tr>
-                                <tr class="receiverPulseLimit">
-                                    <td><input type="number" name="rx_min_usec" min="750" max="2250" /></td>
-                                    <td>
-                                        <span i18n="receiverRxMinUsec"></span>
-                                        <div class="helpicon cf_tip" i18n_title="receiverHelpRxMinUsec"></div>
-                                    </td>
-                                </tr>
-                                <tr class="receiverPulseLimit">
-                                    <td><input type="number" name="rx_max_usec" min="750" max="2250" /></td>
-                                    <td>
-                                        <span i18n="receiverRxMaxUsec"></span>
-                                        <div class="helpicon cf_tip" i18n_title="receiverHelpRxMaxUsec"></div>
-                                    </td>
-                                </tr>
-                                <tr class="receiverStickComamnds">
-                                    <td><input type="number" name="stick_min" min="1000" max="1200"/></td>
-                                    <td>
-                                        <span i18n="receiverStickCommandMin"></span>
-                                        <div class="helpicon cf_tip" i18n_title="receiverHelpStickCommandMin"></div>
-                                    </td>
-                                </tr>
-                                <tr class="receiverStickComamnds">
-                                    <td><input type="number" name="stick_max" min="1800" max="2000" /></td>
-                                    <td>
-                                        <span i18n="receiverStickCommandMax"></span>
-                                        <div class="helpicon cf_tip" i18n_title="receiverHelpStickCommandMax"></div>
                                     </td>
                                 </tr>
                             </table>
@@ -188,9 +181,11 @@
                 <td>
                     <div class="meter">
                         <div class="bar">
-                            <div class="label"></div>
+                            <div class="label1">1500</div>
+                            <div class="label2">100.0%</div>
                             <div class="fill">
-                                <div class="label"></div>
+                                <div class="label1">1500</div>
+                                <div class="label2">100.0%</div>
                             </div>
                         </div>
                     </div>

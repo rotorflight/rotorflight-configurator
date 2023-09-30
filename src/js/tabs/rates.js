@@ -54,7 +54,7 @@ TABS.rates.initialize = function (callback) {
         Promise.resolve(true)
             .then(() => MSP.promise(MSPCodes.MSP_STATUS))
             .then(() => MSP.promise(MSPCodes.MSP_RC_TUNING))
-            .then(() => MSP.promise(MSPCodes.MSP_RC_DEADBAND))
+            .then(() => MSP.promise(MSPCodes.MSP_RC_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
             .then(callback);
     }
@@ -957,8 +957,8 @@ TABS.rates.initRatesSystem = function() {
         pitch_rate_limit:  FC.RC_TUNING.pitch_rate_limit,
         yaw_rate_limit:    FC.RC_TUNING.yaw_rate_limit,
         collective_rate_limit: FC.RC_TUNING.collective_rate_limit,
-        deadband:          FC.RC_DEADBAND_CONFIG.deadband,
-        yawDeadband:       FC.RC_DEADBAND_CONFIG.yaw_deadband,
+        deadband:          FC.RC_CONFIG.rc_deadband,
+        yawDeadband:       FC.RC_CONFIG.rc_yaw_deadband,
         superexpo:         true
     };
 

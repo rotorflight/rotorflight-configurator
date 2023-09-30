@@ -143,7 +143,6 @@ const FC = {
     PID_NAMES: null,
     PIDS: null,
     RC: null,
-    RC_DEADBAND_CONFIG: null,
     RC_MAP: null,
     RC_TUNING: null,
     RSSI_CONFIG: null,
@@ -263,6 +262,7 @@ const FC = {
         };
 
         this.RX_CHANNELS = Array.from({length: 32});
+        this.RC_COMMAND = Array.from({length: 32});
 
         this.RC_TUNING = {
             RC_RATE:                    0,
@@ -438,11 +438,6 @@ const FC = {
             data:                       [],
             provider:                   0,
             providers:                  [],
-        };
-
-        this.RC_DEADBAND_CONFIG = {
-            deadband:                   0,
-            yaw_deadband:               0,
         };
 
         this.SENSOR_ALIGNMENT = {
@@ -635,14 +630,20 @@ const FC = {
             serialrx_provider:            0,
             serialrx_inverted:            0,
             serialrx_halfduplex:          0,
-            stick_max:                    0,
-            stick_center:                 0,
-            stick_min:                    0,
-            rx_min_usec:                  0,
-            rx_max_usec:                  0,
+            rx_pulse_min:                 0,
+            rx_pulse_max:                 0,
             rxSpiProtocol:                0,
             rxSpiId:                      0,
             rxSpiRfChannelCount:          0,
+        };
+
+        this.RC_CONFIG = {
+            rc_center:                    0,
+            rc_deflection:                0,
+            rc_min_throttle:              0,
+            rc_max_throttle:              0,
+            rc_deadband:                  0,
+            rc_yaw_deadband:              0,
         };
 
         this.FAILSAFE_CONFIG = {
