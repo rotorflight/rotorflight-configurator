@@ -253,7 +253,8 @@ function onOpen(openInfo) {
         MSP.send_message(MSPCodes.MSP_API_VERSION, false, false, function () {
             GUI.log(i18n.getMessage('apiVersionReceived', [FC.CONFIG.apiVersion]));
 
-            if (semver.gte(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_ACCEPTED)) {
+            if (semver.gte(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MIN_SUPPORTED) &&
+                semver.lte(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MAX_SUPPORTED)) {
                 MSP.send_message(MSPCodes.MSP_FC_VARIANT, false, false, function () {
                     if (FC.CONFIG.flightControllerIdentifier === 'RTFL') {
                         MSP.send_message(MSPCodes.MSP_FC_VERSION, false, false, function () {

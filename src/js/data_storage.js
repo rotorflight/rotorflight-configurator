@@ -16,16 +16,17 @@ const API_VERSION_1_43 = '1.43.0';
 const API_VERSION_1_44 = '1.44.0';
 
 const API_VERSION_RTFL_1 = '11.1.0';
-const API_VERSION_RTFL_2 = '11.2.0';
+const API_VERSION_RTFL_2 = '12.1.0';
 
-const API_VERSION_RTFL_MIN = '11.2.0';
-const API_VERSION_RTFL_MAX = '11.2.0';
+const API_VERSION_RTFL_MIN = '12.1.0';
+const API_VERSION_RTFL_MAX = '12.1.0';
 
 const FW_VERSION_RTFL_MIN = '4.3.0-0';
 const FW_VERSION_RTFL_MAX = '4.3.99';
 
 const CONFIGURATOR = {
     // all versions are specified and compared using semantic versioning http://semver.org/
+    API_VERSION_MIN_SUPPORTED: API_VERSION_RTFL_MIN,
     API_VERSION_MAX_SUPPORTED: API_VERSION_RTFL_MAX,
     API_VERSION_ACCEPTED: API_VERSION_RTFL_MIN,
 
