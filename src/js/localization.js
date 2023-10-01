@@ -67,7 +67,11 @@ i18n.parseInputFile = function(data) {
     // Move the .message of the json object to root xxxxx.message -> xxxxx
     const jsonData = JSON.parse(dataNesting);
     Object.entries(jsonData).forEach(([key, value]) => {
-        jsonData[key] = value.message;
+        // Translation not done if status exists
+        if ('status' in value || 'previous' in value)
+            jsonData[key] = value.english;
+        else
+            jsonData[key] = value.message;
     });
 
     return jsonData;
