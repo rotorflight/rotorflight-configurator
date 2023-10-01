@@ -25,61 +25,61 @@
         "english": "Auto"
     },
     "axisROLL": {
-        "message": "ROLL",
+        "message": "副翼",
         "english": "ROLL",
         "status": "New entry. Please translate!",
         "description": "Roll axis in capital letters"
     },
     "axisPITCH": {
-        "message": "PITCH",
+        "message": "升降",
         "english": "PITCH",
         "status": "New entry. Please translate!",
         "description": "Pitch axis in capital letters"
     },
     "axisYAW": {
-        "message": "YAW",
+        "message": "航向",
         "english": "YAW",
         "status": "New entry. Please translate!",
         "description": "Yaw axis in capital letters"
     },
     "axisCOLLECTIVE": {
-        "message": "COLLECTIVE",
+        "message": "集体螺距",
         "english": "COLLECTIVE",
         "status": "New entry. Please translate!",
         "description": "Collective in capital letters"
     },
     "titleRoll": {
-        "message": "Roll",
+        "message": "副翼",
         "english": "Roll",
         "status": "New entry. Please translate!"
     },
     "titlePitch": {
-        "message": "Pitch",
+        "message": "升降",
         "english": "Pitch",
         "status": "New entry. Please translate!"
     },
     "titleYaw": {
-        "message": "Yaw",
+        "message": "航向",
         "english": "Yaw",
         "status": "New entry. Please translate!"
     },
     "titleCollective": {
-        "message": "Collective",
+        "message": "集体螺距",
         "english": "Collective",
         "status": "New entry. Please translate!"
     },
     "titleHeading": {
-        "message": "Heading",
+        "message": "航向",
         "english": "Heading",
         "status": "New entry. Please translate!"
     },
     "titleAltitude": {
-        "message": "Altitude",
+        "message": "高度",
         "english": "Altitude",
         "status": "New entry. Please translate!"
     },
     "titleAttitude": {
-        "message": "Attitude",
+        "message": "姿态",
         "english": "Attitude",
         "status": "New entry. Please translate!"
     },
@@ -1269,12 +1269,12 @@
         "status": "Reused translation. Please check!"
     },
     "feature_RX_SERIAL": {
-        "message": "Serial RX input",
+        "message": "串行接收机输入",
         "english": "Serial RX input",
         "status": "New entry. Please translate!"
     },
     "feature_SOFTSERIAL": {
-        "message": "Enable Software Serial ports",
+        "message": "启用软串口功能",
         "english": "Enable Software Serial ports",
         "status": "New entry. Please translate!"
     },
@@ -1284,22 +1284,22 @@
         "status": "Reused translation. Please check!"
     },
     "feature_SONAR": {
-        "message": "Sonar altitude radar",
+        "message": "声呐高度雷达",
         "english": "Sonar altitude radar",
         "status": "New entry. Please translate!"
     },
     "feature_TELEMETRY": {
-        "message": "Transmitter telemetry",
+        "message": "高频头遥测",
         "english": "Transmitter telemetry",
         "status": "New entry. Please translate!"
     },
     "feature_RX_PARALLEL_PWM": {
-        "message": "PWM RX input channels",
+        "message": "PWM 接收机输入通道",
         "english": "PWM RX input channels",
         "status": "New entry. Please translate!"
     },
     "feature_RX_MSP": {
-        "message": "MSP RX input",
+        "message": "MSP 接收机输入",
         "english": "MSP RX input",
         "status": "New entry. Please translate!"
     },
@@ -1309,12 +1309,12 @@
         "status": "Reused translation. Please check!"
     },
     "feature_LED_STRIP": {
-        "message": "RGB LED Strip support",
+        "message": "RGB LED 灯带支持",
         "english": "RGB LED Strip support",
         "status": "New entry. Please translate!"
     },
     "feature_DISPLAY": {
-        "message": "OLED Display support",
+        "message": "OLED 显示屏支持",
         "english": "OLED Display support",
         "status": "New entry. Please translate!"
     },
@@ -1329,17 +1329,17 @@
         "status": "Reused translation. Please check!"
     },
     "feature_GOVERNOR": {
-        "message": "Headspeed governor",
+        "message": "主旋翼转速定速器",
         "english": "Headspeed governor",
         "status": "New entry. Please translate!"
     },
     "feature_ESC_SENSOR": {
-        "message": "ESC Telemetry support",
+        "message": "电调遥测支持",
         "english": "ESC Telemetry support",
         "status": "New entry. Please translate!"
     },
     "feature_FREQ_SENSOR": {
-        "message": "RPM signal input support",
+        "message": "转速信号输入支持",
         "english": "RPM signal input support",
         "status": "New entry. Please translate!"
     },
@@ -1354,7 +1354,7 @@
         "status": "Reused translation. Please check!"
     },
     "feature_RPM_FILTER": {
-        "message": "RPM controlled gyro notch filtering",
+        "message": "基于转速的陀螺仪陷波滤波器",
         "english": "RPM controlled gyro notch filtering",
         "status": "New entry. Please translate!"
     },
@@ -1532,7 +1532,7 @@
         "status": "Reused translation. Please check!"
     },
     "beeper_ARMING_GPS_FIX": {
-        "message": "Beep a special tone when arming the FC and GPS has fix",
+        "message": "当飞控解锁和 GPS 获得定位时，发出蜂鸣音",
         "english": "Beep a special tone when arming the FC and GPS has fix",
         "status": "New entry. Please translate!"
     },
@@ -1612,7 +1612,7 @@
         "status": "Reused translation. Please check!"
     },
     "beeper_ARMING_GPS_NO_FIX": {
-        "message": "Beep a special tone when arming the FC and GPS does not have fix",
+        "message": "当飞控解锁和 GPS 没有获得定位时，发出蜂鸣音",
         "english": "Beep a special tone when arming the FC and GPS does not have fix",
         "status": "New entry. Please translate!"
     },
@@ -1836,17 +1836,17 @@
         "english": "Custom"
     },
     "baudrate_AUTO": {
-        "message": "Auto",
+        "message": "自动",
         "english": "Auto",
         "status": "New entry. Please translate!"
     },
     "baudrate_CUSTOM": {
-        "message": "Custom",
+        "message": "自定义",
         "english": "Custom",
         "status": "New entry. Please translate!"
     },
     "baudrate_DISABLED": {
-        "message": "Disabled",
+        "message": "禁用",
         "english": "Disabled",
         "status": "New entry. Please translate!"
     },
@@ -1949,7 +1949,7 @@
         }
     },
     "profilesPIDModeThreeWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually to the <b>PID Test Mode 3</b>.<br>Please use the <b>CLI</b> to change the advanced PID settings.",
+        "message": "<span class=\"message-negative\">警告：</span> PID控制手动配置为 <b>PID Test Mode 3</b>.<br>请在 <b>命令行</b> 中修改高级设置。",
         "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually to the <b>PID Test Mode 3</b>.<br>Please use the <b>CLI</b> to change the advanced PID settings.",
         "status": "New entry. Please translate!"
     },
@@ -2003,12 +2003,12 @@
         "description": "Feedforward Term helpicon message on PID table titlebar"
     },
     "profilesBoost": {
-        "message": "Boost",
+        "message": "B（增压）",
         "english": "Boost",
         "status": "New entry. Please translate!"
     },
     "profilesBoostHelp": {
-        "message": "Is an additional boost on the feedforward. This makes the heli react faster to quick stick movements.",
+        "message": "是对前馈的额外提升。这将使直升机对快速打杆做出更快的反应。",
         "english": "Is an additional boost on the feedforward. This makes the heli react faster to quick stick movements.",
         "status": "New entry. Please translate!"
     },
@@ -2837,22 +2837,22 @@
         "english": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop"
     },
     "mixerTailRotorCenterTrim": {
-        "message": "Center trim for tail rotor [&deg;]",
+        "message": "尾旋翼中心点微调 [&deg;]",
         "english": "Center trim for tail rotor [&deg;]",
         "status": "New entry. Please translate!"
     },
     "mixerTailRotorCenterTrimHelp": {
-        "message": "Set tail rotor trim for zero yaw command.",
+        "message": "微调0度航向指令时的尾旋翼螺距。",
         "english": "Set tail rotor trim for zero yaw command.",
         "status": "New entry. Please translate!"
     },
     "mixerTailMotorCenterTrim": {
-        "message": "Center trim for tail motor [%]",
+        "message": "尾电机中心点微调 [%]",
         "english": "Center trim for tail motor [%]",
         "status": "New entry. Please translate!"
     },
     "mixerTailMotorCenterTrimHelp": {
-        "message": "Set tail motor throttle value for zero yaw command.",
+        "message": "微调0度航向指令时的尾电机油门值。",
         "english": "Set tail motor throttle value for zero yaw command.",
         "status": "New entry. Please translate!"
     },
@@ -4868,32 +4868,32 @@
         "english": "Error Limit for Yaw Axis [&deg;]"
     },
     "profilesOffsetLimitHelp": {
-        "message": "Hard limit for the offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits.",
+        "message": "PID 循环中偏移角的硬限制。绝对偏移量以及 O 项(高速优化)永远不会超过这些限制。",
         "english": "Hard limit for the offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits.",
         "status": "New entry. Please translate!"
     },
     "profilesOffsetLimitRoll": {
-        "message": "Offset Limit for Roll Axis [&deg;]",
+        "message": "副翼高速优化限制 [&deg;]",
         "english": "Offset Limit for Roll Axis [&deg;]",
         "status": "New entry. Please translate!"
     },
     "profilesOffsetLimitPitch": {
-        "message": "Offset Limit for Pitch Axis [&deg;]",
+        "message": "升降高速优化限制 [&deg;]",
         "english": "Offset Limit for Pitch Axis [&deg;]",
         "status": "New entry. Please translate!"
     },
     "profilesOffsetGainHelp": {
-        "message": "Gain for Offset term (Integral for high speed flight).",
+        "message": "PID循环中的 O 项增益 (作用于高速飞行中的 I 项)。",
         "english": "Gain for Offset term (Integral for high speed flight).",
         "status": "New entry. Please translate!"
     },
     "profilesOffsetGainRoll": {
-        "message": "Offset Gain for Roll Axis",
+        "message": "副翼高速优化增益",
         "english": "Offset Gain for Roll Axis",
         "status": "New entry. Please translate!"
     },
     "profilesOffsetGainPitch": {
-        "message": "Offset Gain for Pitch Axis",
+        "message": "升降高速优化增益",
         "english": "Offset Gain for Pitch Axis",
         "status": "New entry. Please translate!"
     },
@@ -4978,38 +4978,38 @@
         "english": "Yaw Bandwidth"
     },
     "profilesDtermCutoffHelp": {
-        "message": "D-term 截止频率（Hz）",
+        "message": "D 截止频率（Hz）",
         "english": "D-term Cutoff Frequency in Hz"
     },
     "profilesDtermCutoffRoll": {
-        "message": "副翼 D-term 截止",
+        "message": "副翼 D 截止",
         "english": "Roll D-term Cutoff"
     },
     "profilesDtermCutoffPitch": {
-        "message": "升降 D-term 截止",
+        "message": "升降 D 截止",
         "english": "Pitch D-term Cutoff"
     },
     "profilesDtermCutoffYaw": {
-        "message": "航向 D-term 截止",
+        "message": "航向 D 截止",
         "english": "Yaw D-term Cutoff"
     },
     "profilesBtermCutoffHelp": {
-        "message": "B-term Cutoff Frequency in Hz",
+        "message": "B 项截止频率（Hz）",
         "english": "B-term Cutoff Frequency in Hz",
         "status": "New entry. Please translate!"
     },
     "profilesBtermCutoffRoll": {
-        "message": "Roll B-term Cutoff",
+        "message": "副翼 B 截止",
         "english": "Roll B-term Cutoff",
         "status": "New entry. Please translate!"
     },
     "profilesBtermCutoffPitch": {
-        "message": "Pitch B-term Cutoff",
+        "message": "升降 B 截止",
         "english": "Pitch B-term Cutoff",
         "status": "New entry. Please translate!"
     },
     "profilesBtermCutoffYaw": {
-        "message": "Yaw B-term Cutoff",
+        "message": "航向 B 截止",
         "english": "Yaw B-term Cutoff",
         "status": "New entry. Please translate!"
     },
@@ -5058,12 +5058,12 @@
         "english": "Horizon Mode leveling gain. This determines how aggressively the helicopter tilts back to level while in Horizon Mode"
     },
     "profilesMainRotorSettings": {
-        "message": "Main Rotor Settings",
+        "message": "主旋翼设置",
         "english": "Main Rotor Settings",
         "status": "New entry. Please translate!"
     },
     "profilesTailRotorSettings": {
-        "message": "Tail Rotor Settings",
+        "message": "尾旋翼设置",
         "english": "Tail Rotor Settings",
         "status": "New entry. Please translate!"
     },
@@ -5092,19 +5092,19 @@
         "english": "Stop gain (PD) for counter clock-wise rotation. Typical range 50..200."
     },
     "profilesYawFFCyclicGain": {
-        "message": "循环螺距前馈增益(循环补偿)",
+        "message": "循环螺距前馈增益",
         "english": "Cyclic Feedforward Gain"
     },
     "profilesYawFFCyclicGainHelp": {
-        "message": "循环螺距与航向混控的增益值",
+        "message": "<strong>循环补偿</strong>，循环螺距与航向混控的增益值",
         "english": "Gain value for cyclic feedforward mixed into yaw"
     },
     "profilesYawFFCollectiveGain": {
-        "message": "集体螺距前馈增益(集体螺距补偿)",
+        "message": "集体螺距前馈增益",
         "english": "Collective Feedforward Gain"
     },
     "profilesYawFFCollectiveGainHelp": {
-        "message": "集体螺距前馈与航向混控的增益值",
+        "message": "<strong>集体螺距补偿</strong>，集体螺距前馈与航向混控的增益值",
         "english": "Gain value for collective feedforward mixed into yaw"
     },
     "profilesYawFFImpulseGain": {
@@ -5124,62 +5124,62 @@
         "english": "Decay time for collective impulse feedforward mixed into yaw"
     },
     "profilesPitchFFCollective": {
-        "message": "Collective to Pitch Compensation",
+        "message": "集体螺距-升降预补偿",
         "english": "Collective to Pitch Compensation",
         "status": "New entry. Please translate!"
     },
     "profilesPitchFFCollectiveHelp": {
-        "message": "Compensation for the pitching up tendency in collective pitch pumps.",
+        "message": "补偿集体螺距快速变化时的升降偏差。",
         "english": "Compensation for the pitching up tendency in collective pitch pumps.",
         "status": "New entry. Please translate!"
     },
     "profilesPitchFFCollectiveGain": {
-        "message": "Compensation Gain",
+        "message": "补偿增益",
         "english": "Compensation Gain",
         "status": "New entry. Please translate!"
     },
     "profilesPitchFFCollectiveGainHelp": {
-        "message": "Amount of collective mixed into the aileron control.",
+        "message": "混控到副翼控制中的集体螺距的量。",
         "english": "Amount of collective mixed into the aileron control.",
         "status": "New entry. Please translate!"
     },
     "profilesCyclicCrossCoupling": {
-        "message": "Cyclic Cross-Coupling",
+        "message": "循环螺距交叉耦合",
         "english": "Cyclic Cross-Coupling",
         "status": "New entry. Please translate!"
     },
     "profilesCyclicCrossCouplingHelp": {
-        "message": "Cyclic Cross-Coupling compensation removes the aileron (roll) wobble when only elevator is applied.",
+        "message": "当只使用升降舵时，循环螺距交叉耦合补偿可消除副翼摆动。",
         "english": "Cyclic Cross-Coupling compensation removes the aileron (roll) wobble when only elevator is applied.",
         "status": "New entry. Please translate!"
     },
     "profilesCyclicCrossCouplingGain": {
-        "message": "Cross-Coupling Gain",
+        "message": "交叉耦合增益",
         "english": "Cross-Coupling Gain",
         "status": "New entry. Please translate!"
     },
     "profilesCyclicCrossCouplingGainHelp": {
-        "message": "Amount of compensation applied for Pitch-to-Roll decoupling.",
+        "message": "对升降-副翼解耦所应用的补偿量",
         "english": "Amount of compensation applied for Pitch-to-Roll decoupling.",
         "status": "New entry. Please translate!"
     },
     "profilesCyclicCrossCouplingRatio": {
-        "message": "Cross-Coupling Ratio [%]",
+        "message": "交叉耦合比率 [%]",
         "english": "Cross-Coupling Ratio [%]",
         "status": "New entry. Please translate!"
     },
     "profilesCyclicCrossCouplingRatioHelp": {
-        "message": "Amount of Roll-to-Pitch compensation needed, vs. Pitch-to-Roll.",
+        "message": "所需的副翼-升降补偿量与升降-副翼补偿量的比率。",
         "english": "Amount of Roll-to-Pitch compensation needed, vs. Pitch-to-Roll.",
         "status": "New entry. Please translate!"
     },
     "profilesCyclicCrossCouplingCutoff": {
-        "message": "Cross-Coupling Cutoff Frequency [Hz]",
+        "message": "交叉耦合截止频率 [Hz]",
         "english": "Cross-Coupling Cutoff Frequency [Hz]",
         "status": "New entry. Please translate!"
     },
     "profilesCyclicCrossCouplingCutoffHelp": {
-        "message": "Frequency limit for the compensation. Higher value will make the compensation action faster.",
+        "message": "补偿的频率限制。数值越大补偿动作越快。",
         "english": "Frequency limit for the compensation. Higher value will make the compensation action faster.",
         "status": "New entry. Please translate!"
     },
@@ -8213,102 +8213,102 @@
         "english": "Cancel"
     },
     "mode ARM": {
-        "message": "ARM",
+        "message": "解锁",
         "english": "ARM",
         "status": "New entry. Please translate!"
     },
     "mode ANGLE": {
-        "message": "ANGLE",
+        "message": "自稳",
         "english": "ANGLE",
         "status": "New entry. Please translate!"
     },
     "mode HORIZON": {
-        "message": "HORIZON",
+        "message": "半自稳",
         "english": "HORIZON",
         "status": "New entry. Please translate!"
     },
     "mode ALTHOLD": {
-        "message": "ALTHOLD",
+        "message": "高度保持",
         "english": "ALTHOLD",
         "status": "New entry. Please translate!"
     },
     "mode BEEPER": {
-        "message": "BEEPER",
+        "message": "蜂鸣器",
         "english": "BEEPER",
         "status": "New entry. Please translate!"
     },
     "mode LEDLOW": {
-        "message": "LEDLOW",
+        "message": "关闭LED",
         "english": "LEDLOW",
         "status": "New entry. Please translate!"
     },
     "mode CALIB": {
-        "message": "CALIB",
+        "message": "校准",
         "english": "CALIB",
         "status": "New entry. Please translate!"
     },
     "mode OSD DISABLE": {
-        "message": "OSD DISABLE",
+        "message": "关闭OSD",
         "english": "OSD DISABLE",
         "status": "New entry. Please translate!"
     },
     "mode TELEMETRY": {
-        "message": "TELEMETRY",
+        "message": "遥测",
         "english": "TELEMETRY",
         "status": "New entry. Please translate!"
     },
     "mode BLACKBOX": {
-        "message": "BLACKBOX",
+        "message": "黑盒子",
         "english": "BLACKBOX",
         "status": "New entry. Please translate!"
     },
     "mode FAILSAFE": {
-        "message": "FAILSAFE",
+        "message": "失控保护",
         "english": "FAILSAFE",
         "status": "New entry. Please translate!"
     },
     "mode BLACKBOX ERASE": {
-        "message": "BLACKBOX ERASE",
+        "message": "擦除黑盒子",
         "english": "BLACKBOX ERASE",
         "status": "New entry. Please translate!"
     },
     "mode PREARM": {
-        "message": "PREARM",
+        "message": "预解锁",
         "english": "PREARM",
         "status": "New entry. Please translate!"
     },
     "mode PARALYZE": {
-        "message": "PARALYZE",
+        "message": "瘫痪",
         "english": "PARALYZE",
         "status": "New entry. Please translate!"
     },
     "mode GPS RESCUE": {
-        "message": "GPS RESCUE",
+        "message": "GPS 救援",
         "english": "GPS RESCUE",
         "status": "New entry. Please translate!"
     },
     "mode TRAINER": {
-        "message": "TRAINER",
+        "message": "教练",
         "english": "TRAINER",
         "status": "New entry. Please translate!"
     },
     "mode MSP OVERRIDE": {
-        "message": "MSP OVERRIDE",
+        "message": "MSP 覆盖",
         "english": "MSP OVERRIDE",
         "status": "New entry. Please translate!"
     },
     "mode STICK COMMANDS DISABLE": {
-        "message": "STICK COMMANDS DISABLE",
+        "message": "禁用摇杆指令",
         "english": "STICK COMMANDS DISABLE",
         "status": "New entry. Please translate!"
     },
     "mode BEEPER MUTE": {
-        "message": "BEEPER MUTE",
+        "message": "蜂鸣器静音",
         "english": "BEEPER MUTE",
         "status": "New entry. Please translate!"
     },
     "mode RESCUE": {
-        "message": "RESCUE",
+        "message": "救机",
         "english": "RESCUE",
         "status": "New entry. Please translate!"
     },
