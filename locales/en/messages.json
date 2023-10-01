@@ -2461,22 +2461,22 @@
         "message": "Please select a motor output protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)"
     },
     "motorsUnsyncedPwm": {
-        "message": "Unsyncronised Motor PWM"
+        "message": "Unsyncronised ESC update"
     },
     "motorsUnsyncedPwmHelp": {
-        "message": "Motor PWM is running at the specified speed, without being syncronised to the PID loop"
+        "message": "ESC PWM is running unsyncronised, separate from the PID loop, at the specified frequency."
     },
     "motorsUnsyncedPWMFreq": {
-        "message": "Motor PWM frequency"
+        "message": "ESC update frequency"
     },
     "motorsUnsyncedPWMFreqHelp": {
-        "message": "Motor PWM update frequency, when running unsyncronised."
+        "message": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC."
     },
     "motorsDshotBidir": {
         "message": "Bidirectional DShot"
     },
     "motorsDshotBidirHelp": {
-        "message": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32 or BLHeli_S when flashed to Bluejay firmware."
+        "message": "Sends ESC RPM telemetry back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32, Bluejay or AM32."
     },
     "motorsMainRotorGearRatio": {
         "message": "Main Rotor Gear Ratio"
