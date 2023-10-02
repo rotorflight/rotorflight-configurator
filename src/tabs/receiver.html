@@ -95,14 +95,36 @@
                     </div>
                 </div>
 
-                <!-- MODEL PREVIEW -->
-                <div class="gui_box gui_preview grey">
-                    <div class="gui_box_titlebar">
-                        <div class="spacer_box_title" i18n="receiverModelPreview"></div>
+                <!-- TELEMETRY SETTINGS -->
+                <div class="telemetry_settings">
+                    <div class="gui_box grey">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="receiverTelemetrySettings"></div>
+                        </div>
+                        <div class="spacer_box no_padding telemetrySerial">
+                            <table class="settings_table">
+                                <tr>
+                                    <td><input type="checkbox" class="toggle" name="telemetry_inverted"/></td>
+                                    <td><span i18n="receiverTelemetryInverted"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="toggle" name="telemetry_half_duplex"/></td>
+                                    <td><span i18n="receiverTelemetryHalfDuplex"></span></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                    <div class="model_preview background_paper">
-                        <div id="canvas_wrapper">
-                            <canvas id="canvas"></canvas>
+                </div>
+
+                <div class="telemetry_sensors">
+                    <div class="gui_box grey">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="receiverTelemetrySensors"></div>
+                        </div>
+                        <div class="spacer_box top_border">
+                            <table class="settings_table">
+                                <!-- SENSORS HERE -->
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -141,6 +163,18 @@
                     </div>
                     <div class="spacer_box">
                         <table class="channels"></table>
+                    </div>
+                </div>
+
+                <!-- MODEL PREVIEW -->
+                <div class="gui_box gui_preview grey">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="receiverModelPreview"></div>
+                    </div>
+                    <div class="model_preview background_paper">
+                        <div id="canvas_wrapper">
+                            <canvas id="canvas"></canvas>
+                        </div>
                     </div>
                 </div>
 
@@ -193,4 +227,10 @@
             </tr>
         </table>
 
+        <table id="telemetrySensorTemplate">
+            <tr>
+                <td><input type="checkbox" class="toggle"/></td>
+                <td><span class="sensorName"></span></td>
+            </tr>
+        </table>
 </div>

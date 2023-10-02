@@ -1634,10 +1634,85 @@
     "receiverHelpYawDeadband": {
         "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
     },
-    "receiverTelemetry": {
+    "receiverTelemetrySettings": {
         "message": "Telemetry Settings"
     },
-    "receiverBars": {
+    "receiverTelemetrySensors": {
+        "message": "Telemetry Sensors"
+    },
+    "receiverTelemetryHalfDuplex": {
+        "message": "One-wire Telemetry Communication"
+    },
+    "receiverTelemetryInverted": {
+        "message": "Inverted Telemetry Signaling"
+    },
+    "receiverTelemetrySensor_VOLTAGE": {
+        "message": "Battery Voltage"
+    },
+    "receiverTelemetrySensor_CURRENT": {
+        "message": "Battery Current"
+    },
+    "receiverTelemetrySensor_FUEL_LEVEL": {
+        "message": "Battery Charge Level"
+    },
+    "receiverTelemetrySensor_USED_CAPACITY": {
+        "message": "Used Battery Capacity"
+    },
+    "receiverTelemetrySensor_TEMPERATURE": {
+        "message": "FC Temperature"
+    },
+    "receiverTelemetrySensor_MODE": {
+        "message": "Flight Mode"
+    },
+    "receiverTelemetrySensor_PITCH": {
+        "message": "Pitch angle (attitude)"
+    },
+    "receiverTelemetrySensor_ROLL": {
+        "message": "Roll angle (attitude)"
+    },
+    "receiverTelemetrySensor_HEADING": {
+        "message": "Heading"
+    },
+    "receiverTelemetrySensor_ACC_X": {
+        "message": "Accelerometer X-axis"
+    },
+    "receiverTelemetrySensor_ACC_Y": {
+        "message": "Accelerometer Y-axis"
+    },
+    "receiverTelemetrySensor_ACC_Z": {
+        "message": "Accelerometer Z-axis"
+    },
+    "receiverTelemetrySensor_ALTITUDE": {
+        "message": "Altitude"
+    },
+    "receiverTelemetrySensor_VARIO": {
+        "message": "Vario"
+    },
+    "receiverTelemetrySensor_LAT_LONG": {
+        "message": "GPS Latitide & Longitude"
+    },
+    "receiverTelemetrySensor_GROUND_SPEED": {
+        "message": "GPS Ground Speed"
+    },
+    "receiverTelemetrySensor_DISTANCE": {
+        "message": "GPS Distance"
+    },
+    "receiverTelemetrySensor_ESC_CURRENT": {
+        "message": "ESC Current"
+    },
+    "receiverTelemetrySensor_ESC_VOLTAGE": {
+        "message": "ESC Voltage"
+    },
+    "receiverTelemetrySensor_ESC_RPM": {
+        "message": "ESC RPM"
+    },
+    "receiverTelemetrySensor_ESC_TEMPERATURE": {
+        "message": "ESC Temperature"
+    },
+    "receiverTelemetrySensor_ADJUSTMENT": {
+        "message": "Adjustment Function"
+    },
+     "receiverBars": {
         "message": "Receiver Channels"
     },
     "receiverBarsHelp": {
