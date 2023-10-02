@@ -3914,7 +3914,7 @@
         "message": "Compensation Gain"
     },
     "profilesPitchFFCollectiveGainHelp": {
-        "message": "Amount of collective mixed into the aileron control."
+        "message": "Amount of collective mixed into the elevator control."
     },
     "profilesCyclicCrossCoupling": {
         "message": "Cyclic Cross-Coupling"
