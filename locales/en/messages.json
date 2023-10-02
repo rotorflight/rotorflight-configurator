@@ -2521,13 +2521,22 @@
         "message": "Qty"
     },
     "motorsEscProtocol": {
-        "message": "ESC/Motor protocol"
+        "message": "ESC Throttle protocol"
     },
     "motorsEscProtocolHelp": {
         "message": "Select your ESC protocol. <br>Make sure the protocol is supported by your ESCs.</b>"
     },
     "motorsEscProtocolDisabled": {
-        "message": "Please select a motor output protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)"
+        "message": "Please select a protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)"
+    },
+    "motorsEscTelemetry": {
+        "message": "ESC Telemetry"
+    },
+    "motorsEscTelemetryProtocol": {
+        "message": "ESC Telemetry protocol"
+    },
+    "motorsEscTelemetryProtocolHelp": {
+        "message": "Select your ESC Telemetry protocol. <br>This data is transmitted via a separate connection from the ESC.</b>"
     },
     "motorsUnsyncedPwm": {
         "message": "Unsyncronised ESC update"

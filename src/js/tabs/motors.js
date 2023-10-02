@@ -14,6 +14,18 @@ TABS.motors = {
         "MODE1",
         "MODE2",
     ],
+    telemetryProtocols: [
+        "Disabled",
+        "BLHeli32",
+        "Hobbywing V4",
+        "Hobbywing V5",
+        "Scorpion",
+        "Kontronik",
+        "OMPHobby",
+        "ZTW",
+        "APD",
+        "Custom",
+    ],
  };
 
 TABS.motors.initialize = function (callback) {
@@ -33,6 +45,7 @@ TABS.motors.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_MOTOR_OVERRIDE))
             .then(() => MSP.promise(MSPCodes.MSP_GOVERNOR_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_GOVERNOR_PROFILE))
+            .then(() => MSP.promise(MSPCodes.MSP_ESC_SENSOR_CONFIG))
             .then(callback);
     }
 
@@ -41,6 +54,7 @@ TABS.motors.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_SET_GOVERNOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR_CONFIG)))
+            .then(() => MSP.promise(MSPCodes.MSP_SET_ESC_SENSOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ESC_SENSOR_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
             .then(() => {
                 GUI.log(i18n.getMessage('eepromSaved'));
@@ -330,6 +344,14 @@ TABS.motors.initialize = function (callback) {
         $('input[id="tailGearRatioN"]').val(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0]);
         $('input[id="tailGearRatioD"]').val(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1]).change();
 
+        $('.tab-motors .esc_telemetry').toggle(self.isEscSensorEnabled);
+
+        const telemProtocolSelect = $('select[id="telemetryProtocol"]');
+        self.telemetryProtocols.forEach(function(value,index) {
+            telemProtocolSelect.append(`<option value="${index}">${value}</option>`);
+        });
+        telemProtocolSelect.val(FC.ESC_SENSOR_CONFIG.protocol);
+
         const govModeSelect = $('select[id="govMode"]');
         self.govModes.forEach(function(value,index) {
             govModeSelect.append(`<option value="${index}">${value}</option>`);
@@ -404,6 +426,8 @@ TABS.motors.initialize = function (callback) {
             FC.MOTOR_CONFIG.main_rotor_gear_ratio[1] = parseInt($('input[id="mainGearRatioD"]').val());
             FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0] = parseInt($('input[id="tailGearRatioN"]').val());
             FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1] = parseInt($('input[id="tailGearRatioD"]').val());
+
+            FC.ESC_SENSOR_CONFIG.protocol = parseInt($('select[id="telemetryProtocol"]').val());
 
             if (self.isGovEnabled) {
                 FC.GOVERNOR.gov_mode = govModeSelect.val();

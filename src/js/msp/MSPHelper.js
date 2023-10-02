@@ -476,6 +476,16 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 }
                 break;
 
+            case MSPCodes.MSP_ESC_SENSOR_CONFIG:
+                FC.ESC_SENSOR_CONFIG.protocol = data.readU8();
+                FC.ESC_SENSOR_CONFIG.half_duplex = data.readU8();
+                FC.ESC_SENSOR_CONFIG.update_hz = data.readU8();
+                FC.ESC_SENSOR_CONFIG.current_offset = data.readU16();
+                FC.ESC_SENSOR_CONFIG.hw4_current_offset = data.readU16();
+                FC.ESC_SENSOR_CONFIG.hw4_current_gain = data.readU8();
+                FC.ESC_SENSOR_CONFIG.hw4_voltage_gain = data.readU8();
+                break;
+
             case MSPCodes.MSP_SENSOR_ALIGNMENT:
                 FC.SENSOR_ALIGNMENT.gyro_1_align = data.readU8();
                 FC.SENSOR_ALIGNMENT.gyro_2_align = data.readU8();
@@ -1409,6 +1419,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_SET_SENSOR_ALIGNMENT:
                 console.log('Sensor alignment saved');
                 break;
+            case MSPCodes.MSP_SET_ESC_SENSOR_CONFIG:
+                console.log('ESC sensor config saved');
+                break;
             case MSPCodes.MSP_SET_RX_CONFIG:
                 console.log('Rx config saved');
                 break;
@@ -1701,6 +1714,16 @@ MspHelper.prototype.crunch = function(code) {
             break;
 
         case MSPCodes.MSP_SET_CURRENT_METER_CONFIG:
+            break;
+
+        case MSPCodes.MSP_SET_ESC_SENSOR_CONFIG:
+            buffer.push8(FC.ESC_SENSOR_CONFIG.protocol)
+                  .push8(FC.ESC_SENSOR_CONFIG.half_duplex)
+                  .push8(FC.ESC_SENSOR_CONFIG.update_hz)
+                  .push8(FC.ESC_SENSOR_CONFIG.current_offset)
+                  .push16(FC.ESC_SENSOR_CONFIG.hw4_current_offset)
+                  .push8(FC.ESC_SENSOR_CONFIG.hw4_current_gain)
+                  .push8(FC.ESC_SENSOR_CONFIG.hw4_voltage_gain);
             break;
 
         case MSPCodes.MSP_SET_RX_CONFIG:

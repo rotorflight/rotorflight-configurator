@@ -100,6 +100,7 @@ const MSPCodes = {
     MSP_WP:                         118, // Not used
     MSP_BOXIDS:                     119,
     MSP_SERVO_CONFIGURATIONS:       120,
+    MSP_ESC_SENSOR_CONFIG:          123,
     MSP_MOTOR_3D_CONFIG:            124,
     MSP_SENSOR_ALIGNMENT:           126,
     MSP_LED_STRIP_MODECOLOR:        127,
@@ -166,6 +167,7 @@ const MSPCodes = {
     MSP_SET_HEADING:                211, // Not used
     MSP_SET_SERVO_CONFIGURATION:    212,
     MSP_SET_MOTOR:                  214,
+    MSP_SET_ESC_SENSOR_CONFIG:      216,
     MSP_SET_MOTOR_3D_CONFIG:        217,
     MSP_SET_RESET_CURR_PID:         219,
     MSP_SET_SENSOR_ALIGNMENT:       220,

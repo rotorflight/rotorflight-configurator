@@ -153,6 +153,7 @@ const FC = {
     SENSOR_ALIGNMENT: null,
     SENSOR_CONFIG: null,
     SENSOR_DATA: null,
+    ESC_SENSOR_CONFIG: null,
     SERIAL_CONFIG: null,
     SERVO_CONFIG: null,
     SERVO_DATA: null,
@@ -307,6 +308,13 @@ const FC = {
             gpsBaudRate:                0,
             gpsPassthroughBaudRate:     0,
             cliBaudRate:                0,
+        };
+
+        this.ESC_SENSOR_CONFIG = {
+            protocol:                   0,
+            half_duplex:                0,
+            update_hz:                  0,
+            current_offset:             0,
         };
 
         this.SENSOR_DATA = {
