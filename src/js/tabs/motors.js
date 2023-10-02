@@ -2,17 +2,22 @@
 
 TABS.motors = {
     isDirty: false,
+    isDshot: false,
     isProtoEnabled: false,
     isEscSensorEnabled: false,
     isFreqSensorEnabled: false,
     isGovEnabled: false,
-    isDshot: false,
-    govModes: [
-        "OFF",
-        "PASSTHROUGH",
-        "STANDARD",
-        "MODE1",
-        "MODE2",
+    escProtocols: [
+        "PWM",
+        "ONESHOT125",
+        "ONESHOT42",
+        "MULTISHOT",
+        "BRUSHED",
+        "DSHOT150",
+        "DSHOT300",
+        "DSHOT600",
+        "PROSHOT",
+        "DISABLED",
     ],
     telemetryProtocols: [
         "Disabled",
@@ -25,6 +30,13 @@ TABS.motors = {
         "ZTW",
         "APD",
         "Custom",
+    ],
+    govModes: [
+        "OFF",
+        "PASSTHROUGH",
+        "STANDARD",
+        "MODE1",
+        "MODE2",
     ],
  };
 
@@ -313,10 +325,8 @@ TABS.motors.initialize = function (callback) {
             $('.tab-motors .motorTailGearRatioIssueNote').toggle(issue);
         });
 
-
-        const escProtocols = EscProtocols.GetAvailableProtocols(FC.CONFIG.apiVersion);
         const escProtocolSelect = $('select[id="escProtocol"]');
-        escProtocols.forEach(function(value,index) {
+        self.escProtocols.forEach(function(value,index) {
             escProtocolSelect.append(`<option value="${index}">${value}</option>`);
         });
         escProtocolSelect.val(FC.MOTOR_CONFIG.motor_pwm_protocol);
@@ -375,8 +385,8 @@ TABS.motors.initialize = function (callback) {
 
             const protocolNum = parseInt(escProtocolSelect.val());
 
-            self.isProtoEnabled = !EscProtocols.IsProtocolDisabled(FC.CONFIG.apiVersion, protocolNum) && (FC.CONFIG.motorCount > 0);
-            self.isDshot = EscProtocols.IsProtocolDshot(FC.CONFIG.apiVersion, protocolNum);
+            self.isProtoEnabled = (protocolNum < 9) && (FC.CONFIG.motorCount > 0);
+            self.isDshot = (protocolNum >= 5 && protocolNum < 9);
 
             $('.mincommand').toggle(self.isProtoEnabled && !self.isDshot);
             $('.minthrottle').toggle(self.isProtoEnabled && !self.isDshot);
