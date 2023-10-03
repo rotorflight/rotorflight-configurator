@@ -618,7 +618,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_RC_COMMAND:
                 for (let i = 0; i < data.byteLength / 2; i++) {
-                    FC.RC_COMMAND[i] = data.readU16();
+                    FC.RC_COMMAND[i] = data.read16();
                 }
                 break;
 

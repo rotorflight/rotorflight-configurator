@@ -30,6 +30,40 @@ TABS.status = {
         'MOTOR_PROTO',
         'ARM_SWITCH' // Must be last
     ],
+    axisNames: [
+        { value: 0, text: 'controlAxisRoll' },
+        { value: 1, text: 'controlAxisPitch' },
+        { value: 2, text: 'controlAxisYaw' },
+        { value: 3, text: 'controlAxisCollective' },
+        { value: 4, text: 'controlAxisThrottle' },
+        { value: 5, text: 'controlAxisAux1' },
+        { value: 6, text: 'controlAxisAux2' },
+        { value: 7, text: 'controlAxisAux3' },
+        { value: 8, text: 'controlAxisAux4' },
+        { value: 9, text: 'controlAxisAux5' },
+        { value: 10, text: 'controlAxisAux6' },
+        { value: 11, text: 'controlAxisAux7' },
+        { value: 12, text: 'controlAxisAux8' },
+        { value: 13, text: 'controlAxisAux9' },
+        { value: 14, text: 'controlAxisAux10' },
+        { value: 15, text: 'controlAxisAux11' },
+        { value: 16, text: 'controlAxisAux12' },
+        { value: 17, text: 'controlAxisAux13' },
+        { value: 18, text: 'controlAxisAux14' },
+        { value: 19, text: 'controlAxisAux15' },
+        { value: 20, text: 'controlAxisAux16' },
+        { value: 21, text: 'controlAxisAux17' },
+        { value: 22, text: 'controlAxisAux18' },
+        { value: 23, text: 'controlAxisAux19' },
+        { value: 24, text: 'controlAxisAux20' },
+        { value: 25, text: 'controlAxisAux21' },
+        { value: 26, text: 'controlAxisAux22' },
+        { value: 27, text: 'controlAxisAux23' },
+        { value: 28, text: 'controlAxisAux24' },
+        { value: 29, text: 'controlAxisAux25' },
+        { value: 30, text: 'controlAxisAux26' },
+        { value: 31, text: 'controlAxisAux27' },
+    ],
 };
 
 TABS.status.initialize = function (callback) {
@@ -154,76 +188,63 @@ TABS.status.initialize = function (callback) {
         // Receiver bars
         //
 
-        const bar_names = [
-            i18n.getMessage('controlAxisRoll'),
-            i18n.getMessage('controlAxisPitch'),
-            i18n.getMessage('controlAxisYaw'),
-            i18n.getMessage('controlAxisCollective'),
-            i18n.getMessage('controlAxisThrottle'),
-        ];
+        function addChannelBar(parent, name) {
+            const elem = $('#statusBarTemplate tr').clone();
+            elem.find('.name').text(name);
+            elem.find('.fill').css('width', '0%');
+            parent.append(elem);
+            return elem;
+        }
 
+        function updateChannelBar(elem, width, label, rabel) {
+            elem.find('.fill').css('width', width);
+            elem.find('.label1').text(label);
+            elem.find('.label2').text(rabel);
+        }
 
         const numChs = Math.min(FC.RC.active_channels, 18);
         const numBars = Math.max(numChs, 8);
         const barContainer = $('.tab-status .bars');
 
-        for (let i = 0, aux = 1; i < numBars; i++) {
-            const name = (i < bar_names.length) ?
-                  bar_names[i] : i18n.getMessage("controlAxisAux" + (aux++));
-            barContainer.append('\
-                <ul>\
-                    <li class="name">' + name + '</li>\
-                    <li class="meter">\
-                        <div class="meter-bar">\
-                            <div class="label"></div>\
-                            <div class="fill' + (i < numChs ? '' : 'disabled') + '">\
-                                <div class="label"></div>\
-                            </div>\
-                        </div>\
-                    </li>\
-                </ul>\
-            ');
+        const barElems = [];
+
+        for (let i = 0; i < numBars; i++) {
+            const name = i18n.getMessage(self.axisNames[i].text);
+            const elem = addChannelBar(barContainer, name);
+            barElems.push(elem);
         }
 
-        barContainer.append('\
-            <ul><li></li></ul>\
-            <ul>\
-                <li class="name">RSSI</li>\
-                <li class="meter">\
-                    <div class="meter-bar">\
-                        <div class="label"></div>\
-                        <div class="fill">\
-                            <div class="label"></div>\
-                        </div>\
-                    </div>\
-                </li>\
-            </ul>\
-        ');
+        const rssiElem = addChannelBar(barContainer, 'RSSI');
 
-        function update_rc_rssi() {
-            const rssi = ((FC.ANALOG.rssi / 1023) * 100).toFixed(0) + '%';
-            meterFillArray[numBars].css('width', rssi);
-            meterLabelArray[numBars].text(rssi);
-        }
+        self.resize = function () {
+            const barWidth = $('.meter:first', barContainer).width();
+            const labelWidth = $('.meter:first .label2', barContainer).width();
+            const margin = Math.max(barWidth - labelWidth - 15, 40) + 'px';
+            $('.meter .label1', barContainer).css('margin-left', '15px');
+            $('.meter .label2', barContainer).css('margin-left', margin);
+        };
 
-        const meterScaleMin = 750;
-        const meterScaleMax = 2250;
+        $(window).on('resize', self.resize).resize();
 
-        const meterFillArray = [];
-        $('.meter .fill', barContainer).each(function () {
-            meterFillArray.push($(this));
-        });
-
-        const meterLabelArray = [];
-        $('.meter', barContainer).each(function () {
-            meterLabelArray.push($('.label', this));
-        });
+        const barScaleMin = 750;
+        const barScaleMax = 2250;
 
         function update_rc_channels() {
             for (let i = 0; i < numChs; i++) {
-                meterFillArray[i].css('width', ((FC.RC.channels[i] - meterScaleMin) / (meterScaleMax - meterScaleMin) * 100).clamp(0, 100) + '%');
-                meterLabelArray[i].text(FC.RC.channels[i]);
+                const width = ((FC.RC.channels[i] - barScaleMin) / (barScaleMax - barScaleMin) * 100).clamp(0, 100) + '%';
+                const label = (FC.RC.channels[i]).toFixed(0);
+                let rabel = '';
+                if (i < 4)
+                    rabel = (FC.RC_COMMAND[i] / 5).toFixed(1) + '%';
+                else if (i == 4)
+                    rabel = (FC.RC_COMMAND[i] / 10 + 50).toFixed(1) + '%';
+                updateChannelBar(barElems[i], width, label, rabel);
             }
+        }
+
+        function update_rc_rssi() {
+            const rssi = (FC.ANALOG.rssi / 1023 * 100).toFixed(0) + '%';
+            updateChannelBar(rssiElem, rssi, FC.ANALOG.rssi, rssi);
         }
 
         function get_slow_data() {
@@ -242,6 +263,11 @@ TABS.status.initialize = function (callback) {
                 update_rc_rssi();
             });
 
+            MSP.send_message(MSPCodes.MSP_ALTITUDE, false, false, function () {
+                // Usually altimeter indicates feet. We show centimeters, as it is more useful here.
+                altitude.setAltitude(FC.SENSOR_DATA.altitude * 100);
+            });
+
             if (have_sensor(FC.CONFIG.activeSensors, 'gps')) {
                 MSP.send_message(MSPCodes.MSP_RAW_GPS, false, false, function () {
                     gpsFix_e.html((FC.GPS_DATA.fix) ? i18n.getMessage('gpsFixYes') : i18n.getMessage('gpsFixNo'));
@@ -255,7 +281,9 @@ TABS.status.initialize = function (callback) {
 
         function get_fast_data() {
 
-            MSP.send_message(MSPCodes.MSP_RC, false, false, update_rc_channels);
+            MSP.send_message(MSPCodes.MSP_RC, false, false, function () {
+                MSP.send_message(MSPCodes.MSP_RC_COMMAND, false, false, update_rc_channels);
+            });
 
             MSP.send_message(MSPCodes.MSP_ATTITUDE, false, false, function () {
                 roll_e.text(i18n.getMessage('statusAttitude', [FC.SENSOR_DATA.kinematics[0]]));
@@ -268,14 +296,8 @@ TABS.status.initialize = function (callback) {
                 attitude.setPitch(FC.SENSOR_DATA.kinematics[1]);
                 heading.setHeading(FC.SENSOR_DATA.kinematics[2]);
             });
-
-            MSP.send_message(MSPCodes.MSP_ALTITUDE, false, false, function () {
-                // Usually altimeter indicates feet. We show centimeters, as it is more useful here.
-                altitude.setAltitude(FC.SENSOR_DATA.altitude * 100);
-            });
         }
 
-        // status data pull
         GUI.interval_add('status_data_pull_fast', get_fast_data, 50, true);   // 20 fps
         GUI.interval_add('status_data_pull_slow', get_slow_data, 250, true);  // 4 fps
 

@@ -1,4 +1,8 @@
 
+#tab-status-templates {
+    display: none;
+}
+
 .tab-status .content_wrapper {
     position: initial;
 }
@@ -197,140 +201,145 @@
     padding-left: 5px;
 }
 
+
 .tab-status .bars {
+    width: 100%;
+    float: left;
+}
+
+.tab-status .bars td {
+    padding: 1px 5px 4px 5px;
+}
+
+.tab-status .bars td:nth-child(1) {
+    width: 70px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.tab-status .bars td:nth-child(1) span {
+    font-size: 12px;
     font-weight: bold;
 }
 
-.tab-status .bars ul {
-    margin-bottom: 5px;
-    clear: left;
+.tab-status .bars td:nth-child(2) {
+    width: calc(100% - 150px);
 }
 
-.tab-status .bars li {
-    float: left;
-    height: 22px;
-    line-height: 20px;
-    white-space: nowrap;
+.tab-status .bars tr:last-child td {
+    padding-top: 15px;
 }
 
-.tab-status .bars .name {
-    padding: 0 10px 0 0;
-    width: 80px;
-    text-align: right;
-}
-
-.tab-status .bars .meter {
-    width: calc(100% - 90px);
-    margin-top: 2px;
-}
-
-.tab-status .bars .meter-bar {
+.tab-status .bars .bar {
     position: relative;
     width: 100%;
-    height: 15px;
-    background-color: #f4f4f4;
+    height: 16px;
     border: 1px solid var(--subtleAccent);
+    background-color: #f4f4f4;
     border-radius: 3px;
-    border-collapse: collapse;
 }
 
-.tab-status .bars .meter-bar .label {
+.tab-status .bars .label1,
+.tab-status .bars .label2 {
     position: absolute;
-    left: 20px;
-    line-height: 15px;
-    font-size: 10px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 11px;
     font-weight: bold;
-    text-align: center;
+    text-align: right;
     color: #474747;
 }
 
-.tab-status .bars .meter-bar .fill {
-    position: relative;
-    overflow: hidden;
-    width: 50%;
-    height: 100%;
-    border: none;
-    border-radius: 3px;
-    background-color: green;
+.tab-status .bars .label2 {
+    width: 40px;
 }
 
-.tab-status .bars .meter-bar .fill .label {
+.tab-status .bars .fill .label1,
+.tab-status .bars .fill .label2 {
     color: white;
 }
 
-.tab-status .bars ul:nth-of-type(1) .fill {
+.tab-status .bars .fill {
+    position: absolute;
+    overflow: hidden;
+    width: 50%;
+    height: 100%;
+    background-color: green;
+}
+
+.tab-status .bars tr:nth-of-type(1) .fill {
     background-color: #f1453d;
 }
 
-.tab-status .bars ul:nth-of-type(2) .fill {
+.tab-status .bars tr:nth-of-type(2) .fill {
     background-color: #673fb4;
 }
 
-.tab-status .bars ul:nth-of-type(3) .fill {
+.tab-status .bars tr:nth-of-type(3) .fill {
     background-color: #2b98f0;
 }
 
-.tab-status .bars ul:nth-of-type(4) .fill {
+.tab-status .bars tr:nth-of-type(4) .fill {
     background-color: #1fbcd2;
 }
 
-.tab-status .bars ul:nth-of-type(5) .fill {
+.tab-status .bars tr:nth-of-type(5) .fill {
     background-color: #159588;
 }
 
-.tab-status .bars ul:nth-of-type(6) .fill {
+.tab-status .bars tr:nth-of-type(6) .fill {
     background-color: #50ae55;
 }
 
-.tab-status .bars ul:nth-of-type(7) .fill {
+.tab-status .bars tr:nth-of-type(7) .fill {
     background-color: #cdda49;
 }
 
-.tab-status .bars ul:nth-of-type(8) .fill {
+.tab-status .bars tr:nth-of-type(8) .fill {
     background-color: #fdc02f;
 }
 
-.tab-status .bars ul:nth-of-type(9) .fill {
+.tab-status .bars tr:nth-of-type(9) .fill {
     background-color: #fc5830;
 }
 
-.tab-status .bars ul:nth-of-type(10) .fill {
+.tab-status .bars tr:nth-of-type(10) .fill {
     background-color: #785549;
 }
 
-.tab-status .bars ul:nth-of-type(11) .fill {
+.tab-status .bars tr:nth-of-type(11) .fill {
     background-color: #9e9e9e;
 }
 
-.tab-status .bars ul:nth-of-type(12) .fill {
+.tab-status .bars tr:nth-of-type(12) .fill {
     background-color: #617d8a;
 }
 
-.tab-status .bars ul:nth-of-type(13) .fill {
+.tab-status .bars tr:nth-of-type(13) .fill {
     background-color: #cf267d;
 }
 
-.tab-status .bars ul:nth-of-type(14) .fill {
+.tab-status .bars tr:nth-of-type(14) .fill {
     background-color: #7a1464;
 }
 
-.tab-status .bars ul:nth-of-type(15) .fill {
+.tab-status .bars tr:nth-of-type(15) .fill {
     background-color: #3a7a14;
 }
 
-.tab-status .bars ul:nth-of-type(16) .fill {
+.tab-status .bars tr:nth-of-type(16) .fill {
     background-color: #14407a;
 }
 
-.tab-status .bars ul:nth-of-type(17) .fill {
+.tab-status .bars tr:nth-of-type(17) .fill {
     background-color: #eb34e1;
 }
 
-.tab-status .bars ul:nth-of-type(18) .fill {
+.tab-status .bars tr:nth-of-type(18) .fill {
     background-color: #baeb34;
 }
 
-.tab-status .bars ul:nth-of-type(19) .fill {
+.tab-status .bars tr:nth-of-type(19) .fill {
     background-color: #34d8eb;
 }
 
