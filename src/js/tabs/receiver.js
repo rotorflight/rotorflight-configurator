@@ -7,7 +7,7 @@ TABS.receiver = {
     stickButton: false,
     saveButtons: false,
     rxProto: null,
-    rcData: [ 0, 0, 0, 0, 0, 0, 0, 0, ],
+    rcRPY: [ 0, 0, 0, ],
     rcmap: [ 0, 1, 2, 3, 4, 5, 6, 7 ],
     rcmapSize: 8,
     deadband: 0,
@@ -480,26 +480,46 @@ TABS.receiver.initialize = function (callback) {
 
     //// RX Channels
 
-        function calcStickPercentage(axis, pulse) {
-            let value = pulse - self.rcCenter;
-            let deadband = 0;
-            let result = 0;
-            if (axis == 0 || axis == 1)
-                deadband = self.deadband;
-            else if (axis == 2)
-                deadband = self.yawDeadband;
-            const range = self.rcDeflection - deadband;
-            if (value > deadband)
-                result = (value - deadband) / range;
-            else if (value < deadband)
-                result = (value + deadband) / range;
-            return result * 100;
+        function calcRcCommand(axis, pulse) {
+            var deflection = 0;
+            var deadband = 0;
+            var result = 0;
+            var range = 0;
+            if (axis > 4 || pulse < 750 || pulse > 2250) {
+                return 0;
+            }
+            switch (axis) {
+                case 0:
+                case 1:
+                    deflection = pulse - self.rcCenter;
+                    deadband = self.deadband;
+                    range = self.rcDeflection - self.deadband;
+                    break;
+                case 2:
+                    deflection = pulse - self.rcCenter;
+                    deadband = self.yawDeadband;
+                    range = self.rcDeflection - self.yawDeadband;
+                    break;
+                case 3:
+                    deflection = pulse - self.rcCenter;
+                    deadband = 0;
+                    range = self.rcDeflection;
+                    break;
+                case 4:
+                    deflection = pulse - self.rcZeroThrottle;
+                    deadband = 0;
+                    range = self.rcFullThrottle - self.rcZeroThrottle;
+                    break;
+            }
+            if (deflection > deadband)
+                result = (deflection - deadband) / range;
+            else if (deflection < -deadband)
+                result = (deflection + deadband) / range;
+            return result;
         }
 
-        function calcThrottlePercentage(pulse) {
-            let range = self.rcFullThrottle - self.rcZeroThrottle;
-            let result = (pulse - self.rcZeroThrottle) / range;
-            return result * 100;
+        function calcStickPercentage(axis, command) {
+            return (axis < 5) ? (command * 100).toFixed(1) + '%' : '';
         }
 
         function updateBars() {
@@ -509,13 +529,13 @@ TABS.receiver.initialize = function (callback) {
                 const axis = (ch < self.mapChannels) ? self.rcmap.indexOf(ch) : ch;
                 const pulse = FC.RX_CHANNELS[ch];
                 const width = (100 * (pulse - meterScaleMin) / (meterScaleMax - meterScaleMin)).clamp(0, 100) + '%';
-                let command = '';
-                if (axis < 4)
-                    command = calcStickPercentage(axis, pulse).toFixed(1) + '%';
-                else if (axis == 4)
-                    command = calcThrottlePercentage(pulse).toFixed(1) + '%';
-                updateChannelBar(channelElems[ch], width, pulse, command);
-                self.rcData[axis] = pulse - (self.rcCenter - 1500);
+                const command = calcRcCommand(axis, pulse);
+                const percent = calcStickPercentage(axis, command);
+                updateChannelBar(channelElems[ch], width, pulse, percent);
+                if (axis < 3) {
+                    // RPY used with the preview model
+                    self.rcRPY[axis] = pulse ? 1500 + 500 * command : 0;
+                }
             }
 
             const rssi = ((FC.ANALOG.rssi / 1023) * 100).toFixed(0) + '%';
@@ -737,8 +757,8 @@ TABS.receiver.initModelPreview = function () {
         roll_rate_limit:   FC.RC_TUNING.roll_rate_limit,
         pitch_rate_limit:  FC.RC_TUNING.pitch_rate_limit,
         yaw_rate_limit:    FC.RC_TUNING.yaw_rate_limit,
-        deadband:          FC.RC_CONFIG.rc_deadband,
-        yawDeadband:       FC.RC_CONFIG.rc_yaw_deadband,
+        deadband:          0,
+        yawDeadband:       0,
         superexpo:         true
     };
 
@@ -785,11 +805,11 @@ TABS.receiver.renderModel = function () {
         requestAnimationFrame(self.renderModel.bind(this));
     }
 
-    if (self.rcData[0] && self.rcData[1] && self.rcData[2]) {
+    if (self.rcRPY[0] && self.rcRPY[1] && self.rcRPY[2]) {
         const delta = self.clock.getDelta();
 
         const roll = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
-            self.rcData[0],
+            self.rcRPY[0],
             self.currentRatesType,
             self.currentRates.roll_rate,
             self.currentRates.rc_rate,
@@ -799,7 +819,7 @@ TABS.receiver.renderModel = function () {
             self.currentRates.roll_rate_limit
         );
         const pitch = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
-            self.rcData[1],
+            self.rcRPY[1],
             self.currentRatesType,
             self.currentRates.pitch_rate,
             self.currentRates.rc_rate_pitch,
@@ -809,7 +829,7 @@ TABS.receiver.renderModel = function () {
             self.currentRates.pitch_rate_limit
         );
         const yaw = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
-            self.rcData[2],
+            self.rcRPY[2],
             self.currentRatesType,
             self.currentRates.yaw_rate,
             self.currentRates.rc_rate_yaw,
