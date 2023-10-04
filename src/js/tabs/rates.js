@@ -39,6 +39,8 @@ TABS.rates = {
         'rateProfile6',
     ],
     RATE_PROFILE_MASK: 128,
+    rcChannels: [ 0, 0, 0, 0, ],
+    oldChannels: [ 0, 0, 0, 0, ],
 };
 
 TABS.rates.initialize = function (callback) {
@@ -416,7 +418,12 @@ TABS.rates.initialize = function (callback) {
         }
 
         function get_receiver_data() {
-            MSP.send_message(MSPCodes.MSP_RC, false, false);
+            MSP.send_message(MSPCodes.MSP_RC_COMMAND, false, false, function() {
+                self.rcChannels[0] = 1500 + FC.RC_COMMAND[0];
+                self.rcChannels[1] = 1500 + FC.RC_COMMAND[1];
+                self.rcChannels[2] = 1500 - FC.RC_COMMAND[2];
+                self.rcChannels[3] = 1500 + FC.RC_COMMAND[3];
+            });
         }
 
         GUI.interval_add('receiver_pull', get_receiver_data, 100, true);
@@ -458,51 +465,53 @@ TABS.rates.initRatesPreview = function () {
 };
 
 TABS.rates.renderModel = function () {
-    if (this.keepRendering) {
-        requestAnimationFrame(this.renderModel.bind(this));
+    const self = this;
+
+    if (self.keepRendering) {
+        requestAnimationFrame(self.renderModel.bind(self));
     }
-    if (!this.clock) {
-        this.clock = new THREE.Clock();
+    if (!self.clock) {
+        self.clock = new THREE.Clock();
     }
 
-    if (FC.RC.channels[0] && FC.RC.channels[1] && FC.RC.channels[2]) {
-        const delta = this.clock.getDelta();
+    if (self.rcChannels[0] && self.rcChannels[1] && self.rcChannels[2]) {
+        const delta = self.clock.getDelta();
 
-        const roll = delta * this.rateCurve.rcCommandRawToDegreesPerSecond(
-            FC.RC.channels[0],
-            this.currentRatesType,
-            this.currentRates.roll_rate,
-            this.currentRates.rc_rate,
-            this.currentRates.rc_expo,
-            this.currentRates.superexpo,
-            this.currentRates.deadband,
-            this.currentRates.roll_rate_limit
+        const roll = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
+            self.rcChannels[0],
+            self.currentRatesType,
+            self.currentRates.roll_rate,
+            self.currentRates.rc_rate,
+            self.currentRates.rc_expo,
+            self.currentRates.superexpo,
+            self.currentRates.deadband,
+            self.currentRates.roll_rate_limit
         );
-        const pitch = delta * this.rateCurve.rcCommandRawToDegreesPerSecond(
-            FC.RC.channels[1],
-            this.currentRatesType,
-            this.currentRates.pitch_rate,
-            this.currentRates.rc_rate_pitch,
-            this.currentRates.rc_pitch_expo,
-            this.currentRates.superexpo,
-            this.currentRates.deadband,
-            this.currentRates.pitch_rate_limit
+        const pitch = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
+            self.rcChannels[1],
+            self.currentRatesType,
+            self.currentRates.pitch_rate,
+            self.currentRates.rc_rate_pitch,
+            self.currentRates.rc_pitch_expo,
+            self.currentRates.superexpo,
+            self.currentRates.deadband,
+            self.currentRates.pitch_rate_limit
         );
-        const yaw = delta * this.rateCurve.rcCommandRawToDegreesPerSecond(
-            FC.RC.channels[2],
-            this.currentRatesType,
-            this.currentRates.yaw_rate,
-            this.currentRates.rc_rate_yaw,
-            this.currentRates.rc_yaw_expo,
-            this.currentRates.superexpo,
-            this.currentRates.yawDeadband,
-            this.currentRates.yaw_rate_limit
+        const yaw = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
+            self.rcChannels[2],
+            self.currentRatesType,
+            self.currentRates.yaw_rate,
+            self.currentRates.rc_rate_yaw,
+            self.currentRates.rc_yaw_expo,
+            self.currentRates.superexpo,
+            self.currentRates.yawDeadband,
+            self.currentRates.yaw_rate_limit
         );
 
-        this.model.rotateBy(-degToRad(pitch), -degToRad(yaw), -degToRad(roll));
+        self.model.rotateBy(-degToRad(pitch), -degToRad(yaw), -degToRad(roll));
 
-        if (this.checkRC()) {
-            this.updateRatesLabels();
+        if (self.checkChannels()) {
+            self.updateRatesLabels();
         }
     }
 };
@@ -523,22 +532,17 @@ TABS.rates.cleanup = function (callback) {
     if (callback) callback();
 };
 
-TABS.rates.checkRC = function() {
-    // Function monitors for change in the primary axes rc received data and returns true if a change is detected.
+TABS.rates.checkChannels = function() {
+    const self = this;
 
-    if (!this.oldRC) {
-        this.oldRC = [ FC.RC.channels[0], FC.RC.channels[1], FC.RC.channels[2], FC.RC.channels[3] ];
-    }
-
-    // Monitor FC.RC.channels and detect change of value;
-    let rateCurveUpdateRequired = false;
-    for (let i = 0; i < this.oldRC.length; i++) { // has the value changed ?
-        if (this.oldRC[i] !== FC.RC.channels[i]) {
-            this.oldRC[i] = FC.RC.channels[i];
-            rateCurveUpdateRequired = true;     // yes, then an update of the values displayed on the rate curve graph is required
+    let changeDetected = false;
+    for (let i = 0; i < self.oldChannels.length; i++) {
+        if (self.oldChannels[i] !== self.rcChannels[i]) {
+            self.oldChannels[i] = self.rcChannels[i];
+            changeDetected = true;
         }
     }
-    return rateCurveUpdateRequired;
+    return changeDetected;
 };
 
 TABS.rates.updateRatesLabels = function() {
@@ -676,13 +680,13 @@ TABS.rates.updateRatesLabels = function() {
                 stickContext.font = (24 * windowScale) + "pt Verdana, Arial, sans-serif";
             }
 
-            const drawStickPositions = FC.RC.channels[0] && FC.RC.channels[1] && FC.RC.channels[2] && FC.RC.channels[3];
+            const drawStickPositions = self.rcChannels[0] && self.rcChannels[1] && self.rcChannels[2] && self.rcChannels[3];
 
             if (drawStickPositions) {
-                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[0], self.currentRatesType, self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, stickContext, '#FF8080'));
-                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[1], self.currentRatesType, self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, stickContext, '#80FF80'));
-                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[2], self.currentRatesType, self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, stickContext, '#8080FF'));
-                currentValues.push(self.rateCurve.drawStickPosition(FC.RC.channels[3], self.currentRatesType, self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, stickContext, '#FFBB00'));
+                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[0], self.currentRatesType, self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, stickContext, '#FF8080'));
+                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[1], self.currentRatesType, self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, stickContext, '#80FF80'));
+                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[2], self.currentRatesType, self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, stickContext, '#8080FF'));
+                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[3], self.currentRatesType, self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, stickContext, '#FFBB00'));
             } else {
                 currentValues = [];
             }
@@ -957,8 +961,8 @@ TABS.rates.initRatesSystem = function() {
         pitch_rate_limit:  FC.RC_TUNING.pitch_rate_limit,
         yaw_rate_limit:    FC.RC_TUNING.yaw_rate_limit,
         collective_rate_limit: FC.RC_TUNING.collective_rate_limit,
-        deadband:          FC.RC_CONFIG.rc_deadband,
-        yawDeadband:       FC.RC_CONFIG.rc_yaw_deadband,
+        deadband:          0,
+        yawDeadband:       0,
         superexpo:         true
     };
 
