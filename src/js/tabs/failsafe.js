@@ -178,7 +178,7 @@ TABS.failsafe.initialize = function (callback) {
                             </select>\
                         </div>\
                         <div class="auxiliary">\
-                            <input type="number" name="aux_value" min="750" max="2250" step="25" id="' + i + '"/>\
+                            <input type="number" name="aux_value" min="875" max="2125" step="5" id="' + i + '"/>\
                         </div>\
                     </div>\
                 ');
@@ -196,7 +196,7 @@ TABS.failsafe.initialize = function (callback) {
                             </select>\
                         </div>\
                         <div class="auxiliary">\
-                            <input type="number" name="aux_value" min="750" max="2250" step="25" id="' + i + '"/>\
+                            <input type="number" name="aux_value" min="875" max="2125" step="5" id="' + i + '"/>\
                         </div>\
                     </div>\
                 ');
