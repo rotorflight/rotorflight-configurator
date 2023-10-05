@@ -2631,12 +2631,12 @@ MspHelper.prototype.setArmingEnabled = function(doEnable, onCompleteCallback)
         FC.CONFIG.armingDisabled = !doEnable;
 
         MSP.send_message(MSPCodes.MSP_ARMING_DISABLE, mspHelper.crunch(MSPCodes.MSP_ARMING_DISABLE), false, function () {
-            GUI.log(i18n.getMessage(doEnable ? 'armingEnabled' : 'armingDisabled'));
-            if (onCompleteCallback) onCompleteCallback();
+            console.log(i18n.getMessage(doEnable ? 'armingEnabled' : 'armingDisabled'));
+            onCompleteCallback?.();
         });
     }
     else {
-        if (onCompleteCallback) onCompleteCallback();
+        onCompleteCallback?.();
     }
 };
 

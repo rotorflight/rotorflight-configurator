@@ -1,6 +1,7 @@
 'use strict';
 
 TABS.status = {
+    armingEnabled: true,
     yaw_fix: 0.0,
     DISARM_FLAGS: [
         'NO_GYRO',

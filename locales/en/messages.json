@@ -630,6 +630,9 @@
     "craftNameReceived": {
         "message": "Craft name: <strong>$1</strong>"
     },
+    "realTimeClockSet": {
+        "message": "Real-Time Clock set"
+    },
     "armingDisabled": {
         "message": "<strong>Arming Disabled</strong>"
     },

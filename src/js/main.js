@@ -227,9 +227,19 @@ function startProcess() {
                         GUI.active_tab = tabName;
                         GUI.current_tab = tabObj;
                         GUI.tab_switch_in_progress = true;
-                        tabObj.initialize(function () {
-                            GUI.tab_switch_in_progress = false;
-                        });
+
+                        function tabInitialize() {
+                            tabObj.initialize(function () {
+                                GUI.tab_switch_in_progress = false;
+                            });
+                        }
+
+                        if (GUI.connected_to) {
+                            mspHelper.setArmingEnabled(tabObj.armingEnabled === true, tabInitialize);
+                        }
+                        else {
+                            tabInitialize();
+                        }
                     }
                     else {
                         GUI.active_tab = null;

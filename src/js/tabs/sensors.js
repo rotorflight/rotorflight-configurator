@@ -1,6 +1,9 @@
 'use strict';
 
-TABS.sensors = {};
+TABS.sensors = {
+    armingEnabled: true,
+};
+
 TABS.sensors.initialize = function (callback) {
 
     function initSensorData(){
