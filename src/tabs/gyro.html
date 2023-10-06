@@ -176,31 +176,43 @@
                                         </div>
                                     </td>
                                 </tr>
+                            </table>
+                        </div>
+                    </div>
 
-                                <tr class="dynamicNotch">
+                    <div class="gui_box grey">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="gyroDynamicNotchFilterSettings"></div>
+                        </div>
+                        <div class="spacer_box">
+                            <table class="filterTable">
+                                <!--tr>
                                     <th colspan="2">
                                         <div class="subtitle">
                                             <div i18n="gyroDynamicNotchFilterGroup" ></div>
                                             <div class="helpicon cf_tip" i18n_title="gyroDynamicNotchFilterHelp" ></div>
                                         </div>
                                     </th>
-                                </tr>
-                                <tr class="dynamicNotch">
+                                </tr-->
+                                <tr>
                                     <td>
-                                        <input type="number" name="dynamicNotchWidthPercent" step="1" min="0" max="20"/>
+                                        <span class="groupSwitchValue">
+                                            <span class="inputSwitch"><input type="checkbox" id="dynamicNotchEnabled" class="toggle" /></span>
+                                            <span class="inputValue"><input type="number" name="dynamicNotchCount" class="dynamicNotchParam" step="1" min="0" max="8" /></span>
+                                        </span>
                                     </td>
                                     <td>
                                         <div>
                                             <label>
-                                                <span i18n="gyroDynamicNotchWidthPercent"></span>
+                                                <span i18n="gyroDynamicNotchCount"></span>
                                             </label>
-                                            <div class="helpicon cf_tip" i18n_title="gyroDynamicNotchWidthPercentHelp" ></div>
+                                            <div class="helpicon cf_tip" i18n_title="gyroDynamicNotchCountHelp" ></div>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="dynamicNotch">
+                                <tr>
                                     <td>
-                                        <input type="number" name="dynamicNotchQ" step="1" min="1" max="1000"/>
+                                        <input type="number" name="dynamicNotchQ" class="dynamicNotchParam" step="0.1" min="1" max="10"/>
                                     </td>
                                     <td>
                                         <div>
@@ -211,9 +223,9 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="dynamicNotch">
+                                <tr>
                                     <td>
-                                        <input type="number" name="dynamicNotchMinHz" step="1" min="60" max="250"/>
+                                        <input type="number" name="dynamicNotchMinHz" class="dynamicNotchParam" step="1" min="10" max="200"/>
                                     </td>
                                     <td>
                                         <div>
@@ -224,9 +236,9 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="dynamicNotch dynamicNotchMaxHz">
+                                <tr>
                                     <td>
-                                        <input type="number" name="dynamicNotchMaxHz" step="1" min="200" max="1000"/>
+                                        <input type="number" name="dynamicNotchMaxHz" class="dynamicNotchParam" step="1" min="100" max="500"/>
                                     </td>
                                     <td>
                                         <div>
@@ -259,7 +271,7 @@
                                         </div>
                                     </th>
                                 </tr>
-                                <tr class="border">
+                                <tr>
                                     <td>
                                         <span class="groupSwitchValue">
                                             <span class="inputSwitch"><input type="checkbox" id="gyroRpmFilterEnable" class="toggle"></input></span>

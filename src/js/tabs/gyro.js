@@ -50,6 +50,7 @@ TABS.gyro.initialize = function (callback) {
         }
         function save_gyro_filter() {
             Promise.resolve(true)
+                .then(() => MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG)))
                 .then(() => MSP.promise(MSPCodes.MSP_SET_FILTER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FILTER_CONFIG)))
                 .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
                 .then(() => {
@@ -96,13 +97,6 @@ TABS.gyro.initialize = function (callback) {
         $('input[name="gyroNotch1Cutoff"]').val(FC.FILTER_CONFIG.gyro_notch_cutoff);
         $('input[name="gyroNotch2Frequency"]').val(FC.FILTER_CONFIG.gyro_notch2_hz);
         $('input[name="gyroNotch2Cutoff"]').val(FC.FILTER_CONFIG.gyro_notch2_cutoff);
-
-        $('input[name="dynamicNotchWidthPercent"]').val(FC.FILTER_CONFIG.dyn_notch_width_percent);
-        $('input[name="dynamicNotchQ"]').val(FC.FILTER_CONFIG.dyn_notch_q);
-        $('input[name="dynamicNotchMinHz"]').val(FC.FILTER_CONFIG.dyn_notch_min_hz);
-        $('input[name="dynamicNotchMaxHz"]').val(FC.FILTER_CONFIG.dyn_notch_max_hz);
-
-        $('.dynamicNotch').toggle( FC.FEATURE_CONFIG.features.isEnabled('DYNAMIC_FILTER') );
 
         $('input[id="gyroLowpassEnabled"]').change(function() {
             const checked = $(this).is(':checked');
@@ -223,6 +217,22 @@ TABS.gyro.initialize = function (callback) {
 
         $('input[id="gyroNotch1Enabled"]').prop('checked', FC.FILTER_CONFIG.gyro_notch_hz != 0).change();
         $('input[id="gyroNotch2Enabled"]').prop('checked', FC.FILTER_CONFIG.gyro_notch2_hz != 0).change();
+
+
+    //// Dynamic Notch filter
+
+        $('input[name="dynamicNotchCount"]').val(FC.FILTER_CONFIG.dyn_notch_count).change();
+        $('input[name="dynamicNotchQ"]').val(FC.FILTER_CONFIG.dyn_notch_q / 10).change();
+        $('input[name="dynamicNotchMinHz"]').val(FC.FILTER_CONFIG.dyn_notch_min_hz).change();
+        $('input[name="dynamicNotchMaxHz"]').val(FC.FILTER_CONFIG.dyn_notch_max_hz).change();
+
+        $('input[id="dynamicNotchEnabled"]').change(function() {
+            const checked = $(this).is(':checked');
+            $('.dynamicNotchParam').attr('disabled', !checked);
+        })
+        .prop('checked', FC.FEATURE_CONFIG.features.isEnabled('DYN_NOTCH'))
+        .change();
+
 
     //// RPM Filter Config
 
@@ -384,10 +394,18 @@ TABS.gyro.initialize = function (callback) {
             FC.FILTER_CONFIG.gyro_notch2_cutoff = 0;
         }
 
-        FC.FILTER_CONFIG.dyn_notch_width_percent = parseInt($('input[name="dynamicNotchWidthPercent"]').val());
-        FC.FILTER_CONFIG.dyn_notch_q = parseInt($('input[name="dynamicNotchQ"]').val());
+
+    //// Dynamic Notch config
+
+        FC.FILTER_CONFIG.dyn_notch_count = parseInt($('input[name="dynamicNotchCount"]').val());
+        FC.FILTER_CONFIG.dyn_notch_q = parseFloat($('input[name="dynamicNotchQ"]').val()) * 10;
         FC.FILTER_CONFIG.dyn_notch_min_hz = parseInt($('input[name="dynamicNotchMinHz"]').val());
         FC.FILTER_CONFIG.dyn_notch_max_hz = parseInt($('input[name="dynamicNotchMaxHz"]').val());
+
+        const dynNotchEnabled = $('input[id="dynamicNotchEnabled"]').is(':checked') &&
+            FC.FILTER_CONFIG.dyn_notch_count > 0;
+        FC.FEATURE_CONFIG.features.setFeature('DYN_NOTCH', dynNotchEnabled);
+
 
     //// RPM Filter Config
 

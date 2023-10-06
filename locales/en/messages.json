@@ -1107,11 +1107,11 @@
     "feature_VTX": {
         "message": "Video Transmitter"
     },
-    "feature_DYNAMIC_FILTER": {
-        "message": "Dynamic gyro notch filtering"
+    "feature_DYN_NOTCH": {
+        "message": "Dynamic Notch filtering"
     },
     "feature_RPM_FILTER": {
-        "message": "RPM controlled gyro notch filtering"
+        "message": "RPM controlled notch filtering"
     },
     "configurationFeatureEnabled": {
         "message": "Enabled"
@@ -4270,32 +4270,35 @@
     "gyroDynamicNotchFilterGroup": {
         "message": "Dynamic Notch Filter"
     },
-    "gyroDynamicNotchFilterHelp": {
-        "message": "Dynamic Notch Filter tracks peak motors noise frequency and places one or two notch filters with their center at that frequency."
+    "gyroDynamicNotchFilterSettings": {
+        "message": "Gyro Dynamic Notch Filter Settings"
     },
-    "gyroDynamicNotchWidthPercent": {
-        "message": "Dynamic Notch Width Percent"
+    "gyroDynamicNotchFilterHelp": {
+        "message": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at that frequency. Requires at least 1k filter or loop rate."
+    },
+    "gyroDynamicNotchCount": {
+        "message": "Dynamic Notch Count"
     },
     "gyroDynamicNotchQ": {
         "message": "Dynamic Notch Q"
     },
     "gyroDynamicNotchMinHz": {
-        "message": "Dynamic Notch Min Hz"
+        "message": "Dynamic Notch Minimum Frequency"
     },
     "gyroDynamicNotchMaxHz": {
-        "message": "Dynamic Notch Max Hz"
+        "message": "Dynamic Notch Maximum Frequency"
     },
-    "gyroDynamicNotchWidthPercentHelp": {
-        "message": "This sets the width between two dynamic notch filters. Setting it at 0 will disable the second dynamic notch filter and will reduce filter delay, however it may make motor temperatures higher."
+    "gyroDynamicNotchCountHelp": {
+        "message": "This sets the number of dynamic notch filters. Setting it at 0 will disable dynamic notch filter. If used standalone, 2 is absolute minimum, 4-6 recommended."
     },
     "gyroDynamicNotchQHelp": {
-        "message": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Having a really low value will greatly increase filter delay."
+        "message": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Values between 2.0 and 3.0 are recommended."
     },
     "gyroDynamicNotchMinHzHelp": {
-        "message": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch."
+        "message": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent of 1200 rpm"
     },
     "gyroDynamicNotchMaxHzHelp": {
-        "message": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch."
+        "message": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be about 10-20% higher than max tail rotor frequency, but no higher than 250Hz if filter rate is 1k. If filter rate is 2k or more, then 330-500 Hz can be used, especially for smaller helis or that with motorized tail (higher range means less precision and performance)"
     },
     "gyroDTermLowpassFiltersGroup": {
         "message": "D Term Lowpass Filters"

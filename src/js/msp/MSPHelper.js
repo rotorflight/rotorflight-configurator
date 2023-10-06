@@ -914,8 +914,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.FILTER_CONFIG.gyro_notch2_cutoff = data.readU16();
                 FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz = data.readU16();
                 FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz = data.readU16();
-                FC.FILTER_CONFIG.dyn_notch_width_percent = data.readU8();
-                FC.FILTER_CONFIG.dyn_notch_q = data.readU16();
+                FC.FILTER_CONFIG.dyn_notch_count = data.readU8();
+                FC.FILTER_CONFIG.dyn_notch_q = data.readU8();
                 FC.FILTER_CONFIG.dyn_notch_min_hz = data.readU16();
                 FC.FILTER_CONFIG.dyn_notch_max_hz = data.readU16();
                 break;
@@ -1806,8 +1806,8 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.FILTER_CONFIG.gyro_notch2_cutoff)
                 .push16(FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz)
                 .push16(FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz)
-                .push8(FC.FILTER_CONFIG.dyn_notch_width_percent)
-                .push16(FC.FILTER_CONFIG.dyn_notch_q)
+                .push8(FC.FILTER_CONFIG.dyn_notch_count)
+                .push8(FC.FILTER_CONFIG.dyn_notch_q)
                 .push16(FC.FILTER_CONFIG.dyn_notch_min_hz)
                 .push16(FC.FILTER_CONFIG.dyn_notch_max_hz);
             break;
