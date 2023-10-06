@@ -63,6 +63,7 @@ TABS.motors.initialize = function (callback) {
 
     function save_data(callback) {
         Promise.resolve(true)
+            .then(() => MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_SET_GOVERNOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR_CONFIG)))
@@ -354,13 +355,11 @@ TABS.motors.initialize = function (callback) {
         $('input[id="tailGearRatioN"]').val(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0]);
         $('input[id="tailGearRatioD"]').val(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1]).change();
 
-        $('.tab-motors .esc_telemetry').toggle(self.isEscSensorEnabled);
-
         const telemProtocolSelect = $('select[id="telemetryProtocol"]');
         self.telemetryProtocols.forEach(function(value,index) {
             telemProtocolSelect.append(`<option value="${index}">${value}</option>`);
         });
-        telemProtocolSelect.val(FC.ESC_SENSOR_CONFIG.protocol);
+        telemProtocolSelect.val(FC.FEATURE_CONFIG.features.isEnabled('ESC_SENSOR') ? FC.ESC_SENSOR_CONFIG.protocol : 0);
 
         const govModeSelect = $('select[id="govMode"]');
         self.govModes.forEach(function(value,index) {
@@ -437,7 +436,9 @@ TABS.motors.initialize = function (callback) {
             FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0] = parseInt($('input[id="tailGearRatioN"]').val());
             FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1] = parseInt($('input[id="tailGearRatioD"]').val());
 
-            FC.ESC_SENSOR_CONFIG.protocol = parseInt($('select[id="telemetryProtocol"]').val());
+            const telemProto =  parseInt($('select[id="telemetryProtocol"]').val());
+            FC.ESC_SENSOR_CONFIG.protocol = telemProto;
+            FC.FEATURE_CONFIG.features.setFeature('ESC_SENSOR', telemProto > 0);
 
             if (self.isGovEnabled) {
                 FC.GOVERNOR.gov_mode = govModeSelect.val();
