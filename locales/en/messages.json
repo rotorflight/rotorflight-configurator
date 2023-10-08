@@ -1812,8 +1812,32 @@
     "adjustmentsMax": {
         "message": "Max"
     },
+    "adjustmentsRange": {
+        "message": "Active"
+    },
+    "adjustmentsRangeInc": {
+        "message": "Increase"
+    },
+    "adjustmentsRangeDec": {
+        "message": "Decrease"
+    },
+    "adjustmentsRangeScale": {
+        "message": "Scale"
+    },
     "adjustmentsFunctionNone": {
         "message": "No changes"
+    },
+    "adjustmentsFunctionRateProfile": {
+        "message": "Rate Profile Selection"
+    },
+    "adjustmentsFunctionPIDProfile": {
+        "message": "Profile Selection"
+    },
+    "adjustmentsFunctionLEDProfile": {
+        "message": "LED Profile Selection"
+    },
+    "adjustmentsFunctionOSDProfile": {
+        "message": "OSD Profile Selection"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "Pitch Rate"
@@ -1878,9 +1902,6 @@
     "adjustmentsFunctionYawF": {
         "message": "Yaw F-gain"
     },
-    "adjustmentsFunctionYawCenter": {
-        "message": "Yaw Center Offset"
-    },
     "adjustmentsFunctionYawCWStopGain": {
         "message": "Yaw CW Stop Gain"
     },
@@ -1893,23 +1914,59 @@
     "adjustmentsFunctionYawCollectiveFF": {
         "message": "Yaw Collective Precomp"
     },
-    "adjustmentsFunctionYawImpulseFF": {
-        "message": "Yaw Collective Impulse Precomp"
+    "adjustmentsFunctionYawCollectiveDyn": {
+        "message": "Yaw Collective Impulse FF"
     },
-    "adjustmentsFunctionRescueCollective": {
-        "message": "Rescue Collective"
+    "adjustmentsFunctionYawCollectiveDecay": {
+        "message": "Yaw Collective Impulse FF Decay"
     },
-    "adjustmentsFunctionRescueCollectiveBoost": {
-        "message": "Rescue Collective Boost"
+    "adjustmentsFunctionPitchCollectiveFF": {
+        "message": "Pitch Collective Precomnp"
     },
-    "adjustmentsFunctionAngleLevelStrength": {
-        "message": "Angle mode leveling strength"
+    "adjustmentsFunctionPitchGyroCutoff": {
+        "message": "Pitch Gyro Cutoff"
     },
-    "adjustmentsFunctionHorizonLevelStrength": {
-        "message": "Horizon mode leveling strength"
+    "adjustmentsFunctionRollGyroCutoff": {
+        "message": "Roll Gyro Cutoff"
+    },
+    "adjustmentsFunctionYawGyroCutoff": {
+        "message": "Yaw Gyro Cutoff"
+    },
+    "adjustmentsFunctionPitchDtermCutoff": {
+        "message": "Pitch D-term Cutoff"
+    },
+    "adjustmentsFunctionRollDtermCutoff": {
+        "message": "Roll D-term Cutoff"
+    },
+    "adjustmentsFunctionYawDtermCutoff": {
+        "message": "Yaw D-term Cutoff"
+    },
+    "adjustmentsFunctionRescueClimbCollective": {
+        "message": "Rescue Climb Collective"
+    },
+    "adjustmentsFunctionRescueHoverCollective": {
+        "message": "Rescue Hover Collective"
+    },
+    "adjustmentsFunctionRescueHoverAltitude": {
+        "message": "Rescue Hover Altitude"
+    },
+    "adjustmentsFunctionRescueAltP": {
+        "message": "Rescue Altitude P-gain"
+    },
+    "adjustmentsFunctionRescueAltI": {
+        "message": "Rescue Altitude I-gain"
+    },
+    "adjustmentsFunctionRescueAltD": {
+        "message": "Rescue Altitude D-gain"
+    },
+    "adjustmentsFunctionAngleLevelGain": {
+        "message": "Angle Level Gain"
+    },
+    "adjustmentsFunctionHorizonLevelGain": {
+        "message": "Horizon Level Gain"
     },
     "adjustmentsFunctionAcroTrainerGain": {
-        "message": "Acro Trainer leveling strength"
+        "message": "Acro Trainer Gain"
     },
     "adjustmentsFunctionGovernorGain": {
         "message": "Governor PID-gain"
@@ -1935,26 +1992,29 @@
     "adjustmentsFunctionGovernorCollectiveFF": {
         "message": "Governor Collective Precomp"
     },
-    "adjustmentsFunctionRateProfile": {
-        "message": "Rate Profile Selection"
+    "adjustmentsFunctionPitchB": {
+        "message": "Pitch B-gain"
     },
-    "adjustmentsFunctionPIDProfile": {
-        "message": "Profile Selection"
+    "adjustmentsFunctionRollB": {
+        "message": "Roll B-gain"
     },
-    "adjustmentsFunctionOSDProfile": {
-        "message": "OSD Profile Selection"
+    "adjustmentsFunctionYawB": {
+        "message": "Yaw B-gain"
     },
-    "adjustmentsFunctionLEDProfile": {
-        "message": "LED Profile Selection"
+    "adjustmentsFunctionPitchO": {
+        "message": "Pitch O-gain"
     },
-    "adjustmentsFunctionPitchCollectiveFF": {
-        "message": "Pitch Collective Precomnp"
+    "adjustmentsFunctionRollO": {
+        "message": "Roll O-gain"
     },
-    "adjustmentsFunctionPitchCollectiveImpulseFF": {
-        "message": "Pitch Collective Impulse Precomnp"
+    "adjustmentsFunctionCrossCoupling": {
+        "message": "Cross Coupling Gain"
     },
-    "adjustmentsFunctionSwashPhase": {
-        "message": "Swash Phase Angle"
+    "adjustmentsFunctionCrossCouplingRatio": {
+        "message": "Cross Coupling Ratio"
+    },
+    "adjustmentsFunctionCrossCouplingCutoff": {
+        "message": "Cross Coupling Cutoff"
     },
     "servoHelp": {
         "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arms should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"

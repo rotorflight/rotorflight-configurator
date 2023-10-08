@@ -7,6 +7,10 @@ TABS.adjustments = {
 
     FUNCTIONS: [
         'None',
+        'RateProfile',
+        'PIDProfile',
+        'LEDProfile',
+        'OSDProfile',
         'PitchRate',
         'RollRate',
         'YawRate',
@@ -28,18 +32,27 @@ TABS.adjustments = {
         'YawI',
         'YawD',
         'YawF',
-        'YawCenter',
         'YawCWStopGain',
         'YawCCWStopGain',
         'YawCyclicFF',
         'YawCollectiveFF',
-        'YawImpulseFF',
+        'YawCollectiveDyn',
+        'YawCollectiveDecay',
         'PitchCollectiveFF',
-        'PitchCollectiveUNUSED',
-        'RescueCollective',
-        'RescueCollectiveBoost',
-        'AngleLevelStrength',
-        'HorizonLevelStrength',
+        'PitchGyroCutoff',
+        'RollGyroCutoff',
+        'YawGyroCutoff',
+        'PitchDtermCutoff',
+        'RollDtermCutoff',
+        'YawDtermCutoff',
+        'RescueClimbCollective',
+        'RescueHoverCollective',
+        'RescueHoverAltitude',
+        'RescueAltP',
+        'RescueAltI',
+        'RescueAltD',
+        'AngleLevelGain',
+        'HorizonLevelGain',
         'AcroTrainerGain',
         'GovernorGain',
         'GovernorP',
@@ -49,25 +62,14 @@ TABS.adjustments = {
         'GovernorTTA',
         'GovernorCyclicFF',
         'GovernorCollectiveFF',
-        'TailMotorIdle',
-        'SwashPhase',
-        'RateProfile',
-        'PIDProfile',
-        'OSDProfile',
-        'LEDProfile',
-        'WayP',
-        'WayI',
-        'WayD',
-        'WayF',
-        'PitchErrorCutoff',
-        'PitchDtermCutoff',
-        'PitchFtermCutoff',
-        'RollErrorCutoff',
-        'RollDtermCutoff',
-        'RollFtermCutoff',
-        'YawErrorCutoff',
-        'YawDtermCutoff',
-        'YawFtermCutoff',
+        'PitchB',
+        'RollB',
+        'YawB',
+        'PitchO',
+        'RollO',
+        'CrossCoupling',
+        'CrossCouplingRatio',
+        'CrossCouplingCutoff',
     ],
 };
 
@@ -183,6 +185,16 @@ TABS.adjustments.initialize = function (callback) {
             rangeValues = [adjustmentRange.enaRange.start, adjustmentRange.enaRange.end];
         }
 
+        let decValues = [1300, 1700];
+        if (adjustmentRange.adjRange1 != undefined) {
+            decValues = [adjustmentRange.adjRange1.start, adjustmentRange.adjRange1.end];
+        }
+
+        let incValues = [1300, 1700];
+        if (adjustmentRange.adjRange2 != undefined) {
+            incValues = [adjustmentRange.adjRange2.start, adjustmentRange.adjRange2.end];
+        }
+
         let rangeElement = $(newAdjustment).find('.range');
 
         $(rangeElement).find('.channel-slider').noUiSlider({
@@ -196,9 +208,35 @@ TABS.adjustments.initialize = function (callback) {
                 decimals: 0
             })
         });
+        $(rangeElement).find('.IncVal').noUiSlider({
+            start: incValues,
+            behaviour: 'snap-drag',
+            margin: 25,
+            step: 5,
+            connect: true,
+            range: channel_range,
+            format: wNumb({
+                decimals: 0
+            })
+        });
+        $(rangeElement).find('.DecVal').noUiSlider({
+            start: decValues,
+            behaviour: 'snap-drag',
+            margin: 25,
+            step: 5,
+            connect: true,
+            range: channel_range,
+            format: wNumb({
+                decimals: 0
+            })
+        });
 
         $(newAdjustment).find('.channel-slider').Link('lower').to($(newAdjustment).find('.lowerLimitValue'));
         $(newAdjustment).find('.channel-slider').Link('upper').to($(newAdjustment).find('.upperLimitValue'));
+        $(newAdjustment).find('.IncVal').Link('lower').to($(newAdjustment).find('.lowerIncValue'));
+        $(newAdjustment).find('.IncVal').Link('upper').to($(newAdjustment).find('.upperIncValue'));
+        $(newAdjustment).find('.DecVal').Link('lower').to($(newAdjustment).find('.lowerDecValue'));
+        $(newAdjustment).find('.DecVal').Link('upper').to($(newAdjustment).find('.upperDecValue'));
 
         $(rangeElement).find(".pips-channel-range").noUiSlider_pips({
             mode: 'values',
@@ -217,6 +255,8 @@ TABS.adjustments.initialize = function (callback) {
             if ($(this).prop("checked")) {
                 $(adjustmentElement).find(':input').prop("disabled", false);
                 $(adjustmentElement).find('.channel-slider').removeAttr("disabled");
+                $(adjustmentElement).find('.IncVal').removeAttr("disabled");
+                $(adjustmentElement).find('.DecVal').removeAttr("disabled");
                 rangeElement = $(adjustmentElement).find('.range .channel-slider');
                 const range = $(rangeElement).val();
                 if (range[0] == range[1]) {
@@ -226,10 +266,17 @@ TABS.adjustments.initialize = function (callback) {
             } else {
                 $(adjustmentElement).find(':input').prop("disabled", true);
                 $(adjustmentElement).find('.channel-slider').attr("disabled", "disabled");
+                $(adjustmentElement).find('.IncVal').attr("disabled", "disabled");
+                $(adjustmentElement).find('.DecVal').attr("disabled", "disabled");
             }
 
+            $(adjustmentElement).find(`.IncVal`).toggle(adjustmentRange.adjStep > 0);
+            $(adjustmentElement).find(`.IncLimit`).toggle(adjustmentRange.adjStep > 0);
+            $(adjustmentElement).find(`.DecLimit`).toggle(adjustmentRange.adjStep > 0);
+            $(adjustmentElement).find(`.ScaleLimit`).toggle(adjustmentRange.adjStep == 0);
             // keep this element enabled
             $(this).prop("disabled", false);
+
         });
 
         const isEnabled = (adjustmentRange?.enaRange?.start !== adjustmentRange?.enaRange?.end);
@@ -250,6 +297,14 @@ TABS.adjustments.initialize = function (callback) {
                 start: 1500,
                 end: 1500,
             },
+            adjRange1: {
+                start: 1500,
+                end: 1500,
+            },
+            adjRange2: {
+                start: 1500,
+                end: 1500,
+            },
             adjFunction: 0,
             adjChannel: 0,
             adjStep: 0,
@@ -262,12 +317,25 @@ TABS.adjustments.initialize = function (callback) {
 
             if ($(adjustmentElement).find('.enable').prop("checked")) {
                 const rangeValues = $(this).find('.range .channel-slider').val();
+                const incValues = $(this).find('.range .IncVal').val();
+                const decValues = $(this).find('.range .DecVal').val();
                 const adjustmentRange = {
                     enaChannel: parseInt($(this).find('.channelInfo .channel').val()),
                     enaRange: {
                         start: rangeValues[0],
                         end: rangeValues[1],
                     },
+
+                    adjRange1: {
+                        start: decValues[0],
+                        end: decValues[1],
+                    },
+
+                    adjRange2: {
+                        start: incValues[0],
+                        end: incValues[1],
+                    },
+
                     adjFunction: parseInt($(this).find('.functionSelection select').val()),
                     adjChannel: parseInt($(this).find('.functionChannel select').val()),
                     adjStep: parseInt($(this).find('.functionStepSize input').val()),

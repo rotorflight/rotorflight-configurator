@@ -6,6 +6,14 @@
     background: var(--accent);
 }
 
+.tab-adjustments .IncVal .noUi-connect {
+    background: var(--accent);
+}
+
+.tab-adjustments .DecVal .noUi-connect {
+    background: var(--accent);
+}
+
 .noUi-target {
     border-radius: 4px;
 }
@@ -77,32 +85,77 @@
 }
 
 .tab-adjustments .adjustment .channelInfo {
-    width: 5%;
-    padding: 10px 10px 5px 10px;
+    width: 10%;
+    padding: 0px 0px 0px 0px;
 }
 
 .tab-adjustments .adjustment .channelInfo .limits {
     padding: 5px 0px;
+    margin-bottom: 10px;
 }
 
 .tab-adjustments .adjustment .range {
     width: 65%;
-    padding: 0px 20px;
+    padding: 10px 20px;
 }
 
 .tab-adjustments .adjustment .range .channel-slider {
-    margin-top: -28px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    height: 13px;
+    marker-start: 10px;
+}
+
+.tab-adjustments .adjustment .range .IncVal {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    height: 13px;
+    marker-start: 10px;
+}
+
+.tab-adjustments .adjustment .range .DecVal {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    height: 13px;
+    marker-start: 10px;
+}
+
+.tab-adjustments .adjustment .range .pips-channel-range {
+    margin-bottom: 35px;
 }
 
 .tab-adjustments .adjustment .range .marker {
     position: absolute;
     left: 50%;
-    top: 26px;
+    top: 0px;
     height: 10px;
     width: 5px;
     margin-left: -3px;
     border-radius: 3px;
     z-index: 1000;
+}
+
+.tab-adjustments .adjustment .range .noUi-horizontal .noUi-handle {
+    background: var(--sideBackground);
+    border-color: var(--subtleAccent);
+    border-radius: 15px;
+    box-shadow: none;
+    width: 20px;
+    height: 20px;
+    left: -14px;
+    top: -5px;
+}
+
+.tab-adjustments .adjustment .range .noUi-handle:before,
+.tab-adjustments .adjustment .range .noUi-handle:after {
+    border-color: var(--subtleAccent);
+    background-color: var(--subtleAccent);
+    height: 8px;
+    width: 4px;
+    top: 11px;
+    left: 7px;
+    border: 1px;
+    border-radius: 2px;
 }
 
 .tab-adjustments .adjustment .range .enaMarker {

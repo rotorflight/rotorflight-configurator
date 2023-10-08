@@ -49,22 +49,36 @@
                     </div>
                 </td>
                 <td class="channelInfo">
+                    <div class="limits">
+                        <p class="RangeLimit">
+                            <label i18n="adjustmentsRange"></label>: <span class="lowerLimitValue"></span> : <span class="upperLimitValue"></span>
+                        </p>
+                        <p class="IncLimit">
+                            <label i18n="adjustmentsRangeInc"></label>: <span class="lowerIncValue"></span> : <span class="upperIncValue"></span>
+                        </p>
+                        <p class="DecLimit">
+                            <label i18n="adjustmentsRangeDec"></label>: <span class="lowerDecValue"></span> : <span class="upperDecValue"></span>
+                        </p>
+                        <p class="ScaleLimit">
+                            <label i18n="adjustmentsRangeScale"></label>: <span class="lowerDecValue"></span> : <span class="upperDecValue"></span>
+                        </p>
+                    </div>
                     <div>
                         <select class="channel enaChannel">
                             <option value=""></option>
                         </select>
                     </div>
-                    <div class="limits">
-                        <p class="lowerLimit">
-                            <span i18n="adjustmentsMin"></span>: <span class="lowerLimitValue"></span>
-                        </p>
-                        <p class="upperLimit">
-                            <span i18n="adjustmentsMax"></span>: <span class="upperLimitValue"></span>
-                        </p>
-                    </div>
                 </td>
                 <td class="range">
-                    <div class="channel-slider pips-channel-range">
+                    <div class="channel-slider">
+                        <div class="marker enaMarker"></div>
+                        <div class="marker adjMarker"></div>
+                    </div>
+                    <div class="IncVal">
+                        <div class="marker enaMarker"></div>
+                        <div class="marker adjMarker"></div>
+                    </div>
+                    <div class="pips-channel-range DecVal">
                         <div class="marker enaMarker"></div>
                         <div class="marker adjMarker"></div>
                     </div>

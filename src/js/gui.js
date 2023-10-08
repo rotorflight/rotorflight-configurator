@@ -37,7 +37,7 @@ const GuiControl = function () {
         'failsafe',
         'osd',
         'power',
-        //'adjustments',
+        'adjustments',
         'auxiliary',
         'cli',
         'configuration',
