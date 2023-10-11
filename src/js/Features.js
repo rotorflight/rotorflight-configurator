@@ -21,7 +21,7 @@ const Features = function (config) {
         { bit: 27,  group: 'HIDDEN',       name: 'ESC_SENSOR' },
         { bit: 28,  group: 'OTHER',        name: 'FREQ_SENSOR' },
         { bit: 29,  group: 'HIDDEN',       name: 'DYN_NOTCH' },
-        { bit: 30,  group: 'OTHER',        name: 'RPM_FILTER' }
+        { bit: 30,  group: 'HIDDEN',       name: 'RPM_FILTER' }
     ];
 
     self._features = features;

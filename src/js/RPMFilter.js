@@ -2,6 +2,11 @@
 
 const RPMFilter = {
 
+    DISABLED:   0,
+    BASIC:      1,
+    ADVANCED:   2,
+    CUSTOM:     3,
+
     MAX_NOTCH_COUNT: 16,
 
     MAIN_MOTOR_HARMONICS: 1,
@@ -245,9 +250,10 @@ const RPMFilter = {
     },
 
     initConfig : function() {
+        const self = this;
+
         const config = {
-            enable:     false,
-            custom:     false,
+            type:       self.DISABLED,
             mainMotor:  [],
             mainRotor:  [],
             tailMotor:  [],
@@ -261,7 +267,7 @@ const RPMFilter = {
         const self = this;
         const bank = [];
 
-        if (config.enable) {
+        if (config.type == self.ADVANCED) {
             config.mainMotor.forEach((item) => self.generateNotch(bank, item));
             config.tailMotor.forEach((item) => self.generateNotch(bank, item));
             config.mainRotor.forEach((item) => self.generateNotch(bank, item));
@@ -277,7 +283,8 @@ const RPMFilter = {
         const bank = self.cloneBank(rpm_filter);
         const config = self.initConfig();
 
-        config.enable = !self.isNullBank(bank);
+        if (!self.isNullBank(bank))
+            config.type = self.ADVANCED;
 
         for (let i=0; i<self.MAIN_ROTOR_HARMONICS; i++)
             config.mainRotor[i] = this.findHarmonic(bank, self.MAIN_ROTOR_SRC + i, 1);
@@ -288,7 +295,8 @@ const RPMFilter = {
         config.mainMotor[0] = this.findHarmonic(bank, self.MAIN_MOTOR_SRC, 1);
         config.tailMotor[0] = this.findHarmonic(bank, self.TAIL_MOTOR_SRC, 1);
 
-        config.custom = !self.isNullBank(bank);
+        if (!self.isNullBank(bank))
+            config.type = self.CUSTOM;
 
         return config;
     },

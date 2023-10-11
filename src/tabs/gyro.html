@@ -275,9 +275,10 @@
                                     <td>
                                         <span class="groupSwitchValue">
                                             <span class="inputSwitch"><input type="checkbox" id="gyroRpmFilterEnable" class="toggle"></input></span>
-                                            <span class="inputSelect"><select id="gyroRpmFilterSetupType">
+                                            <span class="inputSelect"><select id="gyroRpmFilterSetupType" class="rpm_filter_active">
                                                 <option value="1" i18n="gyroRpmFilterSetupBasic" disabled></option>
                                                 <option value="2" i18n="gyroRpmFilterSetupAdvanced"></option>
+                                                <option value="3" i18n="gyroRpmFilterSetupCustom"></option>
                                             </select></span>
                                         </span>
                                     </td>
@@ -289,7 +290,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <!--tr class="gyroRpmFilterVibrationLevelRow">
+                                <!--tr>
                                     <td>
                                         <span class="inputSelect"><select id="gyroRpmFilterVibrationLevel">
                                             <option value="1" i18n="gyroRpmFilterVibrationLow"></option>

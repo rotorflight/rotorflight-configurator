@@ -3,6 +3,7 @@
 TABS.gyro = {
     isDirty: false,
     rpmFilterDirty: false,
+    rpmFilterType: 0,
     FILTER_TYPE_NAMES: [
         { id: 1, name: "1ˢᵗ order", visible: true },
         { id: 2, name: "2ⁿᵈ order", visible: true },
@@ -238,37 +239,57 @@ TABS.gyro.initialize = function (callback) {
 
         populateSelectorClass('rpmFilterTypes', self.RPM_FILTER_TYPES);
 
-        $('.gyro_rpm_filter_config').toggle( FC.FEATURE_CONFIG.features.isEnabled('RPM_FILTER') );
+        const rpmFeatureEnabled = FC.FEATURE_CONFIG.features.isEnabled('RPM_FILTER');
+        const rpmFilterEnabled = rpmFeatureEnabled && self.rpmFilter.type != RPMFilter.DISABLED;
 
-        $('.gyroRpmFilterCustomNoteRow').toggle(self.rpmFilter.custom);
-        $('select[id="gyroRpmFilterSetupType"]').val(2);
+        self.rpmFilterType = self.rpmFilter.type;
+
+        $('select[id="gyroRpmFilterSetupType"] option[value="3"]').attr('hidden', self.rpmFilterType != RPMFilter.CUSTOM);
 
         const enableElem = $('input[id="gyroRpmFilterEnable"]');
+        const typeElem = $('select[id="gyroRpmFilterSetupType"]');
 
-        let resetCustom = self.rpmFilter.custom;
-
-        enableElem.change(function () {
+        function rpmFilterVisibility() {
+            const typeval = self.rpmFilterType;
             const enabled = enableElem.is(':checked');
-
-            $('.rpm_filter_notches').toggle(enabled);
-            $('.rpm_filter_settings').toggle(enabled);
-            $('select[id="gyroRpmFilterSetupType"]').attr('disabled', !enabled);
-
-            if (enabled && resetCustom)
-                $('.dialogGyroReset')[0].showModal();
-        });
+            const advanced = enabled && (typeval == RPMFilter.ADVANCED);
+            const custom = (typeval == RPMFilter.CUSTOM);
+            $('.rpm_filter_settings').toggle(advanced);
+            $('.rpm_filter_notches').toggle(advanced);
+            $('.rpm_filter_active').attr('disabled', !enabled);
+            $('.gyroRpmFilterCustomNoteRow').toggle(custom);
+        }
 
         $('.dialogGyroReset-acceptbtn').click(function() {
             $('.dialogGyroReset')[0].close();
-            $('.gyroRpmFilterCustomNoteRow').hide();
-            resetCustom = false;
+            self.rpmFilterType = typeElem.val();
+            rpmFilterVisibility();
         });
         $('.dialogGyroReset-revertbtn').click(function() {
             $('.dialogGyroReset')[0].close();
-            enableElem.prop('checked', false).change();
+            typeElem.val(self.rpmFilterType);
+            rpmFilterVisibility();
         });
 
-        enableElem.prop('checked', self.rpmFilter.enable && !self.rpmFilter.custom).change();
+        enableElem.change(function () {
+            const enabled = enableElem.is(':checked');
+            if (enabled && self.rpmFilterType == RPMFilter.DISABLED)
+                typeElem.val(RPMFilter.ADVANCED).change();
+            rpmFilterVisibility();
+        });
+
+        enableElem.prop('checked', rpmFilterEnabled).change();
+
+        typeElem.change(function () {
+            const typeval = typeElem.val();
+            if (self.rpmFilterType == RPMFilter.CUSTOM && typeval != RPMFilter.CUSTOM)
+                $('.dialogGyroReset')[0].showModal();
+            else
+                self.rpmFilterType = typeval;
+            rpmFilterVisibility();
+        });
+
+        typeElem.val(self.rpmFilter.type);
 
         let mainMinRPM = (self.rpmFilter.mainRotor[0].rpm_limit > 50) ?
                          self.rpmFilter.mainRotor[0].rpm_limit : 500;
@@ -409,10 +430,13 @@ TABS.gyro.initialize = function (callback) {
 
     //// RPM Filter Config
 
-        self.rpmFilter.enable = $('input[id="gyroRpmFilterEnable"]').is(':checked');
-        self.rpmFilter.custom &= !self.rpmFilter.enable;
+        const rpmFilterEnabled = $('input[id="gyroRpmFilterEnable"]').is(':checked');
 
-        if (self.rpmFilter.enable && !self.rpmFilter.custom) {
+        FC.FEATURE_CONFIG.features.setFeature('RPM_FILTER', rpmFilterEnabled);
+
+        self.rpmFilter.type = rpmFilterEnabled ? self.rpmFilterType : RPMFilter.DISABLED;
+
+        if (self.rpmFilter.type == RPMFilter.ADVANCED) {
 
             const mainMotorGroupActive =
                 (FC.MOTOR_CONFIG.main_rotor_gear_ratio[0] != 1 || FC.MOTOR_CONFIG.main_rotor_gear_ratio[1] != 1);
@@ -469,9 +493,7 @@ TABS.gyro.initialize = function (callback) {
 
             access_single_notch('MainMotor', 1, self.rpmFilter.mainMotor[0]);
             access_single_notch('TailMotor', 1, self.rpmFilter.tailMotor[0]);
-        }
 
-        if (!self.rpmFilter.custom) {
             FC.RPM_FILTER_CONFIG = RPMFilter.generateConfig(self.rpmFilter);
             self.rpmFilterDirty = true;
         }

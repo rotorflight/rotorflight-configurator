@@ -2554,7 +2554,7 @@
         "message": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC."
     },
     "motorsDshotBidir": {
-        "message": "Bidirectional DShot"
+        "message": "DShot RPM Telemetry"
     },
     "motorsDshotBidirHelp": {
         "message": "Sends ESC RPM telemetry back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32, Bluejay or AM32."
@@ -4445,7 +4445,7 @@
         "message": "<span class=\"message-negative\">Warning:</span> RPM Filter Reset"
     },
     "dialogGyroResetNote": {
-        "message": "Enabling RPM Filter Setup will reset any custom RPM filter settings to defaults."
+        "message": "Changing the Setup Type will reset any custom RPM filter settings to defaults."
     },
     "dialogGyroResetAccept": {
         "message": "Accept"

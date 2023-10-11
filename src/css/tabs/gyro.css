@@ -80,7 +80,7 @@
 }
 
 .tab-gyro table select {
-    text-align-last: right;
+    text-align: left;
     border-radius: 3px;
     border: 1px solid var(--subtleAccent);
 }
