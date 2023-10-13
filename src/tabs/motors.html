@@ -182,137 +182,133 @@
                     <!-- END ESC TELEMETRY -->
 
                     <!-- GOVERNOR FEATURES -->
-                    <div class="governor_features">
-                        <div class="gui_box grey">
-                            <div class="gui_box_titlebar">
-                                <div class="spacer_box_title" i18n="govFeatures"></div>
-                                <div class="helpicon cf_tip" i18n_title="govFeaturesHelp"></div>
+                    <div class="gui_box grey">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="govFeatures"></div>
+                            <div class="helpicon cf_tip" i18n_title="govFeaturesHelp"></div>
+                        </div>
+                        <div class="spacer_box">
+                            <div class="note govEnabled">
+                                <p i18n="govConfigurationNote"></p>
                             </div>
-                            <div class="spacer_box">
-                                <div class="note">
-                                    <p i18n="govConfigurationNote"></p>
-                                </div>
-                                <div class="field selectGovMode">
-                                    <label>
-                                        <div class="field_box">
-                                            <select id="govMode">
-                                                <!-- list generated here -->
-                                            </select>
-                                        </div>
-                                        <span i18n="govMode"></span>
-                                        <div class="helpicon cf_tip" i18n_title="govModeHelp"></div>
-                                    </label>
-                                </div>
-                                <div class="govConfig">
-                                    <div class="field">
-                                        <label>
-                                            <div class="field_box">
-                                                <input type="number" id="govStartupTime" min="0" max="60" step="0.1" />
-                                            </div>
-                                            <span i18n="govStartupTime"></span>
-                                            <div class="helpicon cf_tip" i18n_title="govStartupTimeHelp"></div>
-                                        </label>
+                            <div class="field">
+                                <label>
+                                    <div class="field_box">
+                                        <select id="govMode">
+                                            <!-- list generated here -->
+                                        </select>
                                     </div>
-                                    <div class="field">
-                                        <label>
-                                            <div class="field_box">
-                                                <input type="number" id="govSpoolupTime" min="0" max="60" step="0.1" />
-                                            </div>
-                                            <span i18n="govSpoolupTime"></span>
-                                            <div class="helpicon cf_tip" i18n_title="govSpoolupTimeHelp"></div>
-                                        </label>
+                                    <span i18n="govMode"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govModeHelp"></div>
+                                </label>
+                            </div>
+                            <div class="field govEnabled">
+                                <label>
+                                    <div class="field_box">
+                                        <input type="number" id="govStartupTime" min="0" max="60" step="0.1" />
                                     </div>
-                                    <div class="field">
-                                        <label>
-                                            <div class="field_box">
-                                                <input type="number" id="govTrackingTime" min="0" max="10" step="0.1" />
-                                            </div>
-                                            <span i18n="govTrackingTime"></span>
-                                            <div class="helpicon cf_tip" i18n_title="govTrackingTimeHelp"></div>
-                                        </label>
+                                    <span i18n="govStartupTime"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govStartupTimeHelp"></div>
+                                </label>
+                            </div>
+                            <div class="field govEnabled">
+                                <label>
+                                    <div class="field_box">
+                                        <input type="number" id="govSpoolupTime" min="0" max="60" step="0.1" />
                                     </div>
-                                    <div class="field">
-                                        <label>
-                                            <div class="field_box">
-                                                <input type="number" id="govRecoveryTime" min="0" max="10" step="0.1" />
-                                            </div>
-                                            <span i18n="govRecoveryTime"></span>
-                                            <div class="helpicon cf_tip" i18n_title="govRecoveryTimeHelp"></div>
-                                        </label>
+                                    <span i18n="govSpoolupTime"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govSpoolupTimeHelp"></div>
+                                </label>
+                            </div>
+                            <div class="field govEnabled">
+                                <label>
+                                    <div class="field_box">
+                                        <input type="number" id="govTrackingTime" min="0" max="10" step="0.1" />
                                     </div>
-                                    <div class="field">
-                                        <label>
-                                            <div class="field_box">
-                                                <input type="number" id="govAutoBailoutTime" min="0" max="10" step="0.1" />
-                                            </div>
-                                            <span i18n="govAutoBailoutTime"></span>
-                                            <div class="helpicon cf_tip" i18n_title="govAutoBailoutTimeHelp"></div>
-                                        </label>
+                                    <span i18n="govTrackingTime"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govTrackingTimeHelp"></div>
+                                </label>
+                            </div>
+                            <div class="field govEnabled">
+                                <label>
+                                    <div class="field_box">
+                                        <input type="number" id="govRecoveryTime" min="0" max="10" step="0.1" />
                                     </div>
-                                    <div class="field">
-                                        <label>
-                                            <div class="field_box">
-                                                <input type="number" id="govAutoTimeout" min="0" max="60" step="0.1" />
-                                            </div>
-                                            <span i18n="govAutoTimeout"></span>
-                                            <div class="helpicon cf_tip" i18n_title="govAutoTimeoutHelp"></div>
-                                        </label>
+                                    <span i18n="govRecoveryTime"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govRecoveryTimeHelp"></div>
+                                </label>
+                            </div>
+                            <div class="field govEnabled">
+                                <label>
+                                    <div class="field_box">
+                                        <input type="number" id="govAutoBailoutTime" min="0" max="10" step="0.1" />
                                     </div>
-                                    <div class="field">
-                                        <label>
-                                            <div class="field_box">
-                                                <input type="number" id="govAutoMinEntryTime" min="0" max="60" step="0.1" />
-                                            </div>
-                                            <span i18n="govAutoMinEntryTime"></span>
-                                            <div class="helpicon cf_tip" i18n_title="govAutoMinEntryTimeHelp"></div>
-                                        </label>
+                                    <span i18n="govAutoBailoutTime"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govAutoBailoutTimeHelp"></div>
+                                </label>
+                            </div>
+                            <div class="field govEnabled">
+                                <label>
+                                    <div class="field_box">
+                                        <input type="number" id="govAutoTimeout" min="0" max="60" step="0.1" />
                                     </div>
-                                    <div class="field">
-                                        <label>
-                                            <div class="field_box">
-                                                <input type="number" id="govZeroThrottleTimeout" min="0" max="10" step="0.1" />
-                                            </div>
-                                            <span i18n="govZeroThrottleTimeout"></span>
-                                            <div class="helpicon cf_tip" i18n_title="govZeroThrottleTimeoutHelp"></div>
-                                        </label>
+                                    <span i18n="govAutoTimeout"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govAutoTimeoutHelp"></div>
+                                </label>
+                            </div>
+                            <div class="field govEnabled">
+                                <label>
+                                    <div class="field_box">
+                                        <input type="number" id="govAutoMinEntryTime" min="0" max="60" step="0.1" />
                                     </div>
-                                    <div class="field">
-                                        <label>
-                                            <div class="field_box">
-                                                <input type="number" id="govLostHeadspeedTimeout" min="0" max="10" step="0.1" />
-                                            </div>
-                                            <span i18n="govLostHeadspeedTimeout"></span>
-                                            <div class="helpicon cf_tip" i18n_title="govLostHeadspeedTimeoutHelp"></div>
-                                        </label>
+                                    <span i18n="govAutoMinEntryTime"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govAutoMinEntryTimeHelp"></div>
+                                </label>
+                            </div>
+                            <div class="field govEnabled">
+                                <label>
+                                    <div class="field_box">
+                                        <input type="number" id="govZeroThrottleTimeout" min="0" max="10" step="0.1" />
                                     </div>
-                                    <div class="field">
-                                        <label>
-                                            <div class="field_box">
-                                                <input type="number" id="govHeadspeedFilterHz" min="0" max="250" step="1" />
-                                            </div>
-                                            <span i18n="govHeadspeedFilterHz"></span>
-                                            <div class="helpicon cf_tip" i18n_title="govHeadspeedFilterHzHelp"></div>
-                                        </label>
+                                    <span i18n="govZeroThrottleTimeout"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govZeroThrottleTimeoutHelp"></div>
+                                </label>
+                            </div>
+                            <div class="field govEnabled">
+                                <label>
+                                    <div class="field_box">
+                                        <input type="number" id="govLostHeadspeedTimeout" min="0" max="10" step="0.1" />
                                     </div>
-                                    <div class="field">
-                                        <label>
-                                            <div class="field_box">
-                                                <input type="number" id="govVoltageFilterHz" min="0" max=250" step="1" />
-                                            </div>
-                                            <span i18n="govVoltageFilterHz"></span>
-                                            <div class="helpicon cf_tip" i18n_title="govVoltageFilterHzHelp"></div>
-                                        </label>
+                                    <span i18n="govLostHeadspeedTimeout"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govLostHeadspeedTimeoutHelp"></div>
+                                </label>
+                            </div>
+                            <div class="field govEnabled">
+                                <label>
+                                    <div class="field_box">
+                                        <input type="number" id="govHeadspeedFilterHz" min="0" max="250" step="1" />
                                     </div>
-                                    <div class="field">
-                                        <label>
-                                            <div class="field_box">
-                                                <input type="number" id="govTTAFilterHz" min="0" max="250" step="1" />
-                                            </div>
-                                            <span i18n="govTTAFilterHz"></span>
-                                            <div class="helpicon cf_tip" i18n_title="govTTAFilterHzHelp"></div>
-                                        </label>
+                                    <span i18n="govHeadspeedFilterHz"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govHeadspeedFilterHzHelp"></div>
+                                </label>
+                            </div>
+                            <div class="field govEnabled">
+                                <label>
+                                    <div class="field_box">
+                                        <input type="number" id="govVoltageFilterHz" min="0" max=250" step="1" />
                                     </div>
-                                </div>
+                                    <span i18n="govVoltageFilterHz"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govVoltageFilterHzHelp"></div>
+                                </label>
+                            </div>
+                            <div class="field govEnabled">
+                                <label>
+                                    <div class="field_box">
+                                        <input type="number" id="govTTAFilterHz" min="0" max="250" step="1" />
+                                    </div>
+                                    <span i18n="govTTAFilterHz"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govTTAFilterHzHelp"></div>
+                                </label>
                             </div>
                         </div>
                     </div>
