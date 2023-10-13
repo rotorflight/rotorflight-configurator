@@ -16,8 +16,9 @@ TABS.receiver = {
     rcDeflection: 500,
     rcZeroThrottle: 1100,
     rcFullThrottle: 1900,
-    telemetrySensorMask: 0,
-    telemetrySerialPortMask: 4668,
+    telemetryFeature: false,
+    telemetrySensors: 0,
+    telemetryExtSensors: 0,
     axisLetters: ['A', 'E', 'R', 'C', 'T', '1', '2', '3'],
     axisNames: [
         { value: 0, text: 'controlAxisRoll' },
@@ -85,49 +86,57 @@ TABS.receiver = {
         { value: 32, text:'controlAxisAux27' },
     ],
     rxProtocols: [
-        { name: 'None',                 id: 0,   feature: null,           telemetry: false,     visible: true, },
-        { name: 'CRSF',                 id: 9,   feature: 'RX_SERIAL',    telemetry: true,      visible: true, },
-        { name: 'S.BUS',                id: 2,   feature: 'RX_SERIAL',    telemetry: false,     visible: true, },
-        { name: 'F.PORT',               id: 12,  feature: 'RX_SERIAL',    telemetry: true,      visible: true, },
-        { name: 'DSM/1024',             id: 0,   feature: 'RX_SERIAL',    telemetry: false,     visible: true, },
-        { name: 'DSM/2048',             id: 1,   feature: 'RX_SERIAL',    telemetry: false,     visible: true, },
-        { name: 'DSM/SRXL',             id: 10,  feature: 'RX_SERIAL',    telemetry: false,     visible: true, },
-        { name: 'DSM/SRXL2',            id: 13,  feature: 'RX_SERIAL',    telemetry: false,     visible: true, },
-        { name: 'GHOST',                id: 14,  feature: 'RX_SERIAL',    telemetry: true,      visible: true, },
-        { name: 'SUMD',                 id: 3,   feature: 'RX_SERIAL',    telemetry: false,     visible: true, },
-        { name: 'SUMH',                 id: 4,   feature: 'RX_SERIAL',    telemetry: false,     visible: true, },
-        { name: 'IBUS',                 id: 7,   feature: 'RX_SERIAL',    telemetry: false,     visible: true, },
-        { name: 'XBUS',                 id: 5,   feature: 'RX_SERIAL',    telemetry: false,     visible: true, },
-        { name: 'XBUS/RJ01',            id: 6,   feature: 'RX_SERIAL',    telemetry: false,     visible: true, },
-        { name: 'EXBUS',                id: 8,   feature: 'RX_SERIAL',    telemetry: false,     visible: true, },
-        { name: 'PPM',                  id: 0,   feature: 'RX_PPM',       telemetry: false,     visible: true, },
-        { name: 'MSP',                  id: 0,   feature: 'RX_MSP',       telemetry: false,     visible: true, },
+        { name: 'None',                 id: 0,   feature: null,           telemetry: 0,           visible: true, },
+        { name: 'CRSF',                 id: 9,   feature: 'RX_SERIAL',    telemetry: 0xFFFFFFFF,  visible: true, },
+        { name: 'S.BUS',                id: 2,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'F.PORT',               id: 12,  feature: 'RX_SERIAL',    telemetry: 0xFFFFFFFF,  visible: true, },
+        { name: 'DSM/1024',             id: 0,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'DSM/2048',             id: 1,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'DSM/SRXL',             id: 10,  feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'DSM/SRXL2',            id: 13,  feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'GHOST',                id: 14,  feature: 'RX_SERIAL',    telemetry: 0xFFFFFFFF,  visible: true, },
+        { name: 'SUMD',                 id: 3,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'SUMH',                 id: 4,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'IBUS',                 id: 7,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'XBUS',                 id: 5,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'XBUS/RJ01',            id: 6,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'EXBUS',                id: 8,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'PPM',                  id: 0,   feature: 'RX_PPM',       telemetry: 0,           visible: true, },
+        { name: 'MSP',                  id: 0,   feature: 'RX_MSP',       telemetry: 0,           visible: true, },
         // Unsupported SPI receivers
-        { name: 'SPI/CX10',             id: 4,   feature: 'RX_SPI',       telemetry: false,     visible: false, },
-        { name: 'SPI/CX10A',            id: 5,   feature: 'RX_SPI',       telemetry: false,     visible: false, },
-        { name: 'SPI/ELRS',             id: 19,  feature: 'RX_SPI',       telemetry: true,      visible: false, },
-        { name: 'SPI/FRSKY D',          id: 8,   feature: 'RX_SPI',       telemetry: true,      visible: false, },
-        { name: 'SPI/FRSKY X',          id: 9,   feature: 'RX_SPI',       telemetry: true,      visible: false, },
-        { name: 'SPI/FRSKY X LBT',      id: 15,  feature: 'RX_SPI',       telemetry: true,      visible: false, },
-        { name: 'SPI/FRSKY X V2',       id: 17,  feature: 'RX_SPI',       telemetry: true,      visible: false, },
-        { name: 'SPI/FRSKY X LBT V2',   id: 18,  feature: 'RX_SPI',       telemetry: true,      visible: false, },
-        { name: 'SPI/FLYSKY',           id: 10,  feature: 'RX_SPI',       telemetry: false,     visible: false, },
-        { name: 'SPI/FLYSKY 2A',        id: 11,  feature: 'RX_SPI',       telemetry: false,     visible: false, },
-        { name: 'SPI/H8_3D',            id: 6,   feature: 'RX_SPI',       telemetry: false,     visible: false, },
-        { name: 'SPI/INAV',             id: 7,   feature: 'RX_SPI',       telemetry: false,     visible: false, },
-        { name: 'SPI/KN',               id: 12,  feature: 'RX_SPI',       telemetry: false,     visible: false, },
-        { name: 'SPI/REDPINE',          id: 16,  feature: 'RX_SPI',       telemetry: false,     visible: false, },
-        { name: 'SPI/SFHSS',            id: 13,  feature: 'RX_SPI',       telemetry: false,     visible: false, },
-        { name: 'SPI/SYMA X',           id: 2,   feature: 'RX_SPI',       telemetry: false,     visible: false, },
-        { name: 'SPI/SYMA X5C',         id: 3,   feature: 'RX_SPI',       telemetry: false,     visible: false, },
-        { name: 'SPI/SPEKTRUM',         id: 14,  feature: 'RX_SPI',       telemetry: false,     visible: false, },
-        { name: 'SPI/V202 250k',        id: 0,   feature: 'RX_SPI',       telemetry: false,     visible: false, },
-        { name: 'SPI/V202 1M',          id: 1,   feature: 'RX_SPI',       telemetry: false,     visible: false, },
+        { name: 'SPI/CX10',             id: 4,   feature: 'RX_SPI',       telemetry: 0,           visible: false, },
+        { name: 'SPI/CX10A',            id: 5,   feature: 'RX_SPI',       telemetry: 0,           visible: false, },
+        { name: 'SPI/ELRS',             id: 19,  feature: 'RX_SPI',       telemetry: 0xFFFFFFFF,  visible: false, },
+        { name: 'SPI/FRSKY D',          id: 8,   feature: 'RX_SPI',       telemetry: 0xFFFFFFFF,  visible: false, },
+        { name: 'SPI/FRSKY X',          id: 9,   feature: 'RX_SPI',       telemetry: 0xFFFFFFFF,  visible: false, },
+        { name: 'SPI/FRSKY X LBT',      id: 15,  feature: 'RX_SPI',       telemetry: 0xFFFFFFFF,  visible: false, },
+        { name: 'SPI/FRSKY X V2',       id: 17,  feature: 'RX_SPI',       telemetry: 0xFFFFFFFF,  visible: false, },
+        { name: 'SPI/FRSKY X LBT V2',   id: 18,  feature: 'RX_SPI',       telemetry: 0xFFFFFFFF,  visible: false, },
+        { name: 'SPI/FLYSKY',           id: 10,  feature: 'RX_SPI',       telemetry: 0,           visible: false, },
+        { name: 'SPI/FLYSKY 2A',        id: 11,  feature: 'RX_SPI',       telemetry: 0,           visible: false, },
+        { name: 'SPI/H8_3D',            id: 6,   feature: 'RX_SPI',       telemetry: 0,           visible: false, },
+        { name: 'SPI/INAV',             id: 7,   feature: 'RX_SPI',       telemetry: 0,           visible: false, },
+        { name: 'SPI/KN',               id: 12,  feature: 'RX_SPI',       telemetry: 0,           visible: false, },
+        { name: 'SPI/REDPINE',          id: 16,  feature: 'RX_SPI',       telemetry: 0,           visible: false, },
+        { name: 'SPI/SFHSS',            id: 13,  feature: 'RX_SPI',       telemetry: 0,           visible: false, },
+        { name: 'SPI/SYMA X',           id: 2,   feature: 'RX_SPI',       telemetry: 0,           visible: false, },
+        { name: 'SPI/SYMA X5C',         id: 3,   feature: 'RX_SPI',       telemetry: 0,           visible: false, },
+        { name: 'SPI/SPEKTRUM',         id: 14,  feature: 'RX_SPI',       telemetry: 0,           visible: false, },
+        { name: 'SPI/V202 250k',        id: 0,   feature: 'RX_SPI',       telemetry: 0,           visible: false, },
+        { name: 'SPI/V202 1M',          id: 1,   feature: 'RX_SPI',       telemetry: 0,           visible: false, },
         // Hidden options
-        { name: 'PWM',                  id: 0,   feature: 'RX_PARALLEL_PWM', telemetry: false,     visible: false, },
-        { name: 'CUSTOM',               id: 11,  feature: 'RX_SERIAL',       telemetry: false,     visible: false, },
+        { name: 'PWM',                  id: 0,   feature: 'RX_PARALLEL_PWM', telemetry: 0,           visible: false, },
+        { name: 'CUSTOM',               id: 11,  feature: 'RX_SERIAL',       telemetry: 0,           visible: false, },
     ],
-    telemetrySensors: [
+    telemetryProtoSensors: [
+        { name: 'FrSky Hub',            id: 4,     sensors: 0xFFFFFFFF },
+        { name: 'FrSky S.Port',         id: 32,    sensors: 0xFFFFFFFF },
+        { name: 'FlySky iBUS',          id: 4096,  sensors: 0xFFFFFFFF },
+        { name: 'Graupner HoTT',        id: 8,     sensors: 0xFFFFFFFF },
+        { name: 'MAVLink',              id: 512,   sensors: 0xFFFFFFFF },
+        { name: 'LTM',                  id: 16,    sensors: 0xFFFFFFFF },
+    ],
+    telemetrySensorList: [
         { name: 'VOLTAGE',              id:  0, },
         { name: 'CURRENT',              id:  1, },
         { name: 'FUEL_LEVEL',           id:  2, },
@@ -283,10 +292,17 @@ TABS.receiver.initialize = function (callback) {
         const rxProtoSelectElement = $('select[name="receiverProtocol"]');
         var currentProto = 0;
 
+        self.rxSerialPort = false;
+        for (const port of FC.SERIAL_CONFIG.ports) {
+            if (port.functionMask & 64)
+                self.rxSerialPort = true;
+        }
+
         self.rxProtocols.forEach((item, index) => {
             let visible = item.visible;
+            let disabled = '';
             if (FC.FEATURE_CONFIG.features.isEnabled(item.feature)) {
-                if ((item.feature == 'RX_SERIAL' && item.id == FC.RX_CONFIG.serialrx_provider) ||
+                if ((item.feature == 'RX_SERIAL' && item.id == FC.RX_CONFIG.serialrx_provider && self.rxSerialPort) ||
                     (item.feature == 'RX_SPI' && item.id == FC.RX_CONFIG.rxSpiProtocol) ||
                     (item.feature == 'RX_MSP') ||
                     (item.feature == 'RX_PPM') ||
@@ -295,8 +311,11 @@ TABS.receiver.initialize = function (callback) {
                         currentProto = index;
                 }
             }
+            if (item.feature == 'RX_SERIAL' && !self.rxSerialPort) {
+                disabled = 'disabled';
+            }
             if (visible) {
-                rxProtoSelectElement.append(`<option value="${index}">${item.name}</option>`);
+                rxProtoSelectElement.append(`<option value="${index}" ${disabled}>${item.name}</option>`);
             }
         });
 
@@ -351,44 +370,64 @@ TABS.receiver.initialize = function (callback) {
 
     //// Telemetry Options
 
-        function hasTelemetrySerialPort() {
-            for (const port of FC.SERIAL_CONFIG.ports) {
-                if (port.functionMask & self.telemetrySerialPortMask)
-                    return true;
-            }
-            return false;
-        }
-
-        function isTelemetryEnabled() {
-            return FC.FEATURE_CONFIG.features.isEnabled('TELEMETRY') ||
-                (self.rxProto && self.rxProto.telemetry);
-        }
-
         function populateTelemetrySensors() {
-            const table = $('.tab-receiver .telemetry_sensors table');
             const templ = $('#telemetrySensorTemplate tr');
-            self.telemetrySensors.forEach((sensor) => {
-                const state = !!(self.telemetrySensorMask & (1 << sensor.id));
+            const table = $('.tab-receiver .telemetry_sensors table');
+            for (const sensor of self.telemetrySensorList) {
+                const state = !!(self.telemetrySensors & (1 << sensor.id));
                 const desc = i18n.getMessage(`receiverTelemetrySensor_${sensor.name}`);
                 const elem = templ.clone();
-                elem.find('.sensorName').text(desc);
-                elem.find('input.toggle').prop('checked', state).change(function () {
+                elem.attr('sensor', sensor.id);
+                elem.find('span').text(desc);
+                elem.find('input').prop('checked', state).change(function () {
                     const checked = $(this).is(':checked');
                     if (checked)
-                        self.telemetrySensorMask |= (1 << sensor.id);
+                        self.telemetrySensors |= (1 << sensor.id);
                     else
-                        self.telemetrySensorMask &= ~(1 << sensor.id);
+                        self.telemetrySensors &= ~(1 << sensor.id);
                 });
                 table.append(elem);
-            });
+            }
         }
 
-        $('.tab-receiver .telemetry_settings').toggle(hasTelemetrySerialPort() && isTelemetryEnabled);
-        $('.tab-receiver .telemetry_sensors').toggle(isTelemetryEnabled());
+        function updateTelemetrySensors() {
+            const sensorList = self.telemetryFeature ?
+                (self.telemetryExtSensors | (self.rxProto ? self.rxProto.telemetry : 0)) : 0;
+            $('.tab-receiver .telemetry_setting').toggle(self.telemetryExtSensors != 0);
+            $('.tab-receiver .telemetry_sensors').toggle(sensorList != 0);
+            for (const sensor of self.telemetrySensorList) {
+                const state = !!(self.telemetrySensors & (1 << sensor.id));
+                const visbl = !!(sensorList & (1 << sensor.id));
+                const elem = $(`.tab-receiver .telemetry_sensors tr[sensor="${sensor.id}"]`);
+                elem.toggle(visbl);
+                elem.find('input').prop('checked', state);
+            }
+        }
 
-        self.telemetrySensorMask = FC.TELEMETRY_CONFIG.telemetry_sensors;
+        function updateExternalTelemetry() {
+            self.telemetryExtSensors = 0;
+            for (const port of FC.SERIAL_CONFIG.ports) {
+                for (const proto of self.telemetryProtoSensors) {
+                    if (port.functionMask & proto.id) {
+                        self.telemetryExtSensors |= proto.sensors;
+                    }
+                }
+            }
+        }
 
+        self.telemetryFeature = FC.FEATURE_CONFIG.features.isEnabled('TELEMETRY');
+        self.telemetrySensors = FC.TELEMETRY_CONFIG.telemetry_sensors;
+
+        updateExternalTelemetry();
         populateTelemetrySensors();
+
+        $('.tab-receiver input[name="telemetry_enabled"]').change(function () {
+            self.telemetryFeature = $(this).is(':checked');
+            FC.FEATURE_CONFIG.features.setFeature('TELEMETRY', self.telemetryFeature);
+            updateTelemetrySensors();
+        }).prop('checked', self.telemetryFeature).change();
+
+        rxProtoSelectElement.change(updateTelemetrySensors);
 
 
     //// Channels Bars
@@ -678,9 +717,7 @@ TABS.receiver.initialize = function (callback) {
 
             FC.RC_MAP = self.rcmap;
 
-            FC.TELEMETRY_CONFIG.telemetry_sensors = self.telemetrySensorMask;
-
-            console.log(`telemetry sensors ${self.telemetrySensorMask}`);
+            FC.TELEMETRY_CONFIG.telemetry_sensors = self.telemetrySensors;
         }
 
 

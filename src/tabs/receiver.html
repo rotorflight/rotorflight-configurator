@@ -101,7 +101,15 @@
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="receiverTelemetrySettings"></div>
                         </div>
-                        <div class="spacer_box no_padding telemetrySerial">
+                        <div class="spacer_box no_padding">
+                            <table class="settings_table">
+                                <tr>
+                                    <td><input type="checkbox" class="toggle" name="telemetry_enabled"/></td>
+                                    <td><span i18n="receiverTelemetryEnabled"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="spacer_box top_border telemetry_setting">
                             <table class="settings_table">
                                 <tr>
                                     <td><input type="checkbox" class="toggle" name="telemetry_inverted"/></td>
@@ -121,7 +129,7 @@
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="receiverTelemetrySensors"></div>
                         </div>
-                        <div class="spacer_box top_border">
+                        <div class="spacer_box">
                             <table class="settings_table">
                                 <!-- SENSORS HERE -->
                             </table>

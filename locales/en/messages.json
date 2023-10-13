@@ -1640,14 +1640,17 @@
     "receiverTelemetrySettings": {
         "message": "Telemetry Settings"
     },
-    "receiverTelemetrySensors": {
-        "message": "Telemetry Sensors"
+    "receiverTelemetryEnabled": {
+        "message": "Enable Telemetry"
     },
     "receiverTelemetryHalfDuplex": {
         "message": "One-wire Telemetry Communication"
     },
     "receiverTelemetryInverted": {
         "message": "Inverted Telemetry Signaling"
+    },
+    "receiverTelemetrySensors": {
+        "message": "Telemetry Sensors"
     },
     "receiverTelemetrySensor_VOLTAGE": {
         "message": "Battery Voltage"

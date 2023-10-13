@@ -9,7 +9,7 @@ const Features = function (config) {
         { bit:  6,  group: 'HIDDEN',       name: 'SOFTSERIAL' },
         { bit:  7,  group: 'OTHER',        name: 'GPS' },
         { bit:  9,  group: 'HIDDEN',       name: 'SONAR' },
-        { bit: 10,  group: 'OTHER',        name: 'TELEMETRY' },
+        { bit: 10,  group: 'HIDDEN',       name: 'TELEMETRY' },
         { bit: 13,  group: 'RX_PROTO',     name: 'RX_PARALLEL_PWM' },
         { bit: 14,  group: 'RX_PROTO',     name: 'RX_MSP' },
         { bit: 15,  group: 'RSSI',         name: 'RSSI_ADC' },
