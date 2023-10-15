@@ -730,7 +730,7 @@
                             <p i18n="govHeadspeedNote"></p>
                         </div>
                         <table class="settings_table">
-                            <tr class="govHeadspeed">
+                            <tr class="govHeadspeed govActive">
                                 <td>
                                     <input type="number" id="govHeadspeed" min="100" max="50000" step="10"/>
                                 </td>
@@ -739,7 +739,16 @@
                                     <div class="helpicon cf_tip" i18n_title="govHeadspeedHelp"></div>
                                 </td>
                             </tr>
-                            <tr class="govMasterGain">
+                            <tr class="govMaxThrottle border">
+                                <td>
+                                    <input type="number" id="govMaxThrottle" min="40" max="100" step="1"/>
+                                </td>
+                                <td colspan="2">
+                                    <span i18n="govMaxThrottle"></span>
+                                    <div class="helpicon cf_tip" i18n_title="govMaxThrottleHelp"></div>
+                                </td>
+                            </tr>
+                            <tr class="govMasterGain govActive">
                                 <td>
                                     <input type="number" id="govMasterGain" min="0" max="250" />
                                 </td>
@@ -748,7 +757,7 @@
                                     <div class="helpicon cf_tip" i18n_title="govMasterGainHelp"></div>
                                 </td>
                             </tr>
-                            <tr class="govPGain">
+                            <tr class="govPGain govActive">
                                 <td>
                                     <input type="number" id="govPGain" min="0" max="250" />
                                 </td>
@@ -757,7 +766,7 @@
                                     <div class="helpicon cf_tip" i18n_title="govPGainHelp"></div>
                                 </td>
                             </tr>
-                            <tr class="govIGain">
+                            <tr class="govIGain govActive">
                                 <td>
                                     <input type="number" id="govIGain" min="0" max="250" />
                                 </td>
@@ -766,7 +775,7 @@
                                     <div class="helpicon cf_tip" i18n_title="govIGainHelp"></div>
                                 </td>
                             </tr>
-                            <tr class="govDGain">
+                            <tr class="govDGain govActive">
                                 <td>
                                     <input type="number" id="govDGain" min="0" max="250" />
                                 </td>
@@ -775,7 +784,7 @@
                                     <div class="helpicon cf_tip" i18n_title="govDGainHelp"></div>
                                 </td>
                             </tr>
-                            <tr class="govFGain">
+                            <tr class="govFGain govActive border">
                                 <td>
                                     <input type="number" id="govFGain" min="0" max="250" />
                                 </td>
@@ -784,7 +793,7 @@
                                     <div class="helpicon cf_tip" i18n_title="govFGainHelp"></div>
                                 </td>
                             </tr>
-                            <tr class="govYawPrecomp">
+                            <tr class="govYawPrecomp govActive">
                                 <td>
                                     <input type="number" id="govYawPrecomp" min="0" max="250" />
                                 </td>
@@ -793,7 +802,7 @@
                                     <div class="helpicon cf_tip" i18n_title="govYawPrecompHelp"></div>
                                 </td>
                             </tr>
-                            <tr class="govCyclicPrecomp">
+                            <tr class="govCyclicPrecomp govActive">
                                 <td>
                                     <input type="number" id="govCyclicPrecomp" min="0" max="250" />
                                 </td>
@@ -802,7 +811,7 @@
                                     <div class="helpicon cf_tip" i18n_title="govCyclicPrecompHelp"></div>
                                 </td>
                             </tr>
-                            <tr class="govCollectivePrecomp">
+                            <tr class="govCollectivePrecomp govActive">
                                 <td>
                                     <input type="number" id="govCollectivePrecomp" min="0" max="250" />
                                 </td>

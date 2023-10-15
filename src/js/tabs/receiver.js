@@ -87,7 +87,7 @@ TABS.receiver = {
     ],
     rxProtocols: [
         { name: 'None',                 id: 0,   feature: null,           telemetry: 0,           visible: true, },
-        { name: 'CRSF',                 id: 9,   feature: 'RX_SERIAL',    telemetry: 0xFFFFFFFF,  visible: true, },
+        { name: 'CRSF',                 id: 9,   feature: 'RX_SERIAL',    telemetry: 0x0010378F,  visible: true, },
         { name: 'S.BUS',                id: 2,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'F.PORT',               id: 12,  feature: 'RX_SERIAL',    telemetry: 0xFFFFFFFF,  visible: true, },
         { name: 'DSM/1024',             id: 0,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
