@@ -785,6 +785,11 @@
         "message": "機体名: <strong>$1</strong>",
         "english": "Craft name: <strong>$1</strong>"
     },
+    "realTimeClockSet": {
+        "message": "Real-Time Clock set",
+        "english": "Real-Time Clock set",
+        "status": "New entry. Please translate!"
+    },
     "armingDisabled": {
         "message": "<strong>アーミング無効</strong>",
         "english": "<strong>Arming Disabled</strong>"
@@ -1577,15 +1582,20 @@
         "english": "Video Transmitter",
         "status": "Reused translation. Please check!"
     },
-    "feature_DYNAMIC_FILTER": {
-        "message": "動的ジャイロノッチフィルター",
-        "english": "Dynamic gyro notch filtering",
-        "status": "Reused translation. Please check!"
+    "feature_DYN_NOTCH": {
+        "message": "Dynamic Notch filtering",
+        "english": "Dynamic Notch filtering",
+        "status": "New entry. Please translate!"
     },
     "feature_RPM_FILTER": {
-        "message": "RPM controlled gyro notch filtering",
-        "english": "RPM controlled gyro notch filtering",
-        "status": "New entry. Please translate!"
+        "message": "RPM controlled notch filtering",
+        "english": "RPM controlled notch filtering",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "RPM controlled gyro notch filtering",
+            "english": "RPM controlled gyro notch filtering",
+            "status": "New entry. Please translate!"
+        }
     },
     "configurationFeatureEnabled": {
         "message": "有効",
@@ -2466,24 +2476,34 @@
             "english": "The value (in us) used to determine if a stick is centered (MID_RC)."
         }
     },
-    "receiverStickCommandMin": {
-        "message": "スティック 低",
-        "english": "'Stick Low' Threshold",
-        "status": "Reused translation. Please check!"
-    },
-    "receiverHelpStickCommandMin": {
-        "message": "The maximum value (in µs) for a stick to be recognised as low / left for command input (MIN_CHECK).",
-        "english": "The maximum value (in µs) for a stick to be recognised as low / left for command input (MIN_CHECK).",
+    "receiverStickDeflection": {
+        "message": "Stick Maximum Travel",
+        "english": "Stick Maximum Travel",
         "status": "New entry. Please translate!"
     },
-    "receiverStickCommandMax": {
-        "message": "スティック 高",
-        "english": "'Stick High' Threshold",
-        "status": "Reused translation. Please check!"
+    "receiverHelpStickDeflection": {
+        "message": "The maximum value (in µs) for stick deflection from the center, for RPY.",
+        "english": "The maximum value (in µs) for stick deflection from the center, for RPY.",
+        "status": "New entry. Please translate!"
     },
-    "receiverHelpStickCommandMax": {
-        "message": "The minimum value (in µs) for a stick to be recognised as high / right for command input (MAX_CHECK).",
-        "english": "The minimum value (in µs) for a stick to be recognised as high / right for command input (MAX_CHECK).",
+    "receiverZeroThrottle": {
+        "message": "Throttle Channel value for 0% throttle",
+        "english": "Throttle Channel value for 0% throttle",
+        "status": "New entry. Please translate!"
+    },
+    "receiverHelpZeroThrottle": {
+        "message": "The channel value (in µs) for the throttle channel to be considered 0%",
+        "english": "The channel value (in µs) for the throttle channel to be considered 0%",
+        "status": "New entry. Please translate!"
+    },
+    "receiverFullThrottle": {
+        "message": "Throttle Channel value for 100% throttle",
+        "english": "Throttle Channel value for 100% throttle",
+        "status": "New entry. Please translate!"
+    },
+    "receiverHelpFullThrottle": {
+        "message": "The channel value (in µs) for the throttle channel to be considered 100%",
+        "english": "The channel value (in µs) for the throttle channel to be considered 100%",
         "status": "New entry. Please translate!"
     },
     "receiverCyclicDeadband": {
@@ -2509,29 +2529,139 @@
             "english": "These are values (in us) by how much RC input can be different before it's considered valid. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
         }
     },
-    "receiverRxMinUsec": {
-        "message": "Minimum channel value",
-        "english": "Minimum channel value",
-        "status": "New entry. Please translate!"
-    },
-    "receiverHelpRxMinUsec": {
-        "message": "The minimum RX channel value (in µs) that is considered valid.",
-        "english": "The minimum RX channel value (in µs) that is considered valid.",
-        "status": "New entry. Please translate!"
-    },
-    "receiverRxMaxUsec": {
-        "message": "Maximum channel value",
-        "english": "Maximum channel value",
-        "status": "New entry. Please translate!"
-    },
-    "receiverHelpRxMaxUsec": {
-        "message": "The maximum RX channel value (in µs) that is considered valid.",
-        "english": "The maximum RX channel value (in µs) that is considered valid.",
-        "status": "New entry. Please translate!"
-    },
-    "receiverTelemetry": {
+    "receiverTelemetrySettings": {
         "message": "Telemetry Settings",
         "english": "Telemetry Settings",
+        "status": "Reused translation. Please check!"
+    },
+    "receiverTelemetryEnabled": {
+        "message": "Enable Telemetry",
+        "english": "Enable Telemetry",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryHalfDuplex": {
+        "message": "One-wire Telemetry Communication",
+        "english": "One-wire Telemetry Communication",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryInverted": {
+        "message": "Inverted Telemetry Signaling",
+        "english": "Inverted Telemetry Signaling",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensors": {
+        "message": "Telemetry Sensors",
+        "english": "Telemetry Sensors",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_VOLTAGE": {
+        "message": "Battery Voltage",
+        "english": "Battery Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_CURRENT": {
+        "message": "Battery Current",
+        "english": "Battery Current",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_FUEL_LEVEL": {
+        "message": "Battery Charge Level",
+        "english": "Battery Charge Level",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_USED_CAPACITY": {
+        "message": "Used Battery Capacity",
+        "english": "Used Battery Capacity",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_TEMPERATURE": {
+        "message": "FC Temperature",
+        "english": "FC Temperature",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_MODE": {
+        "message": "Flight Mode",
+        "english": "Flight Mode",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_PITCH": {
+        "message": "Pitch angle (attitude)",
+        "english": "Pitch angle (attitude)",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_ROLL": {
+        "message": "Roll angle (attitude)",
+        "english": "Roll angle (attitude)",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_HEADING": {
+        "message": "Heading",
+        "english": "Heading",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_ACC_X": {
+        "message": "Accelerometer X-axis",
+        "english": "Accelerometer X-axis",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_ACC_Y": {
+        "message": "Accelerometer Y-axis",
+        "english": "Accelerometer Y-axis",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_ACC_Z": {
+        "message": "Accelerometer Z-axis",
+        "english": "Accelerometer Z-axis",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_ALTITUDE": {
+        "message": "Altitude",
+        "english": "Altitude",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_VARIO": {
+        "message": "Vario",
+        "english": "Vario",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_LAT_LONG": {
+        "message": "GPS Latitide & Longitude",
+        "english": "GPS Latitide & Longitude",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_GROUND_SPEED": {
+        "message": "GPS Ground Speed",
+        "english": "GPS Ground Speed",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_DISTANCE": {
+        "message": "GPS Distance",
+        "english": "GPS Distance",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_ESC_CURRENT": {
+        "message": "ESC Current",
+        "english": "ESC Current",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_ESC_VOLTAGE": {
+        "message": "ESC Voltage",
+        "english": "ESC Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_ESC_RPM": {
+        "message": "ESC RPM",
+        "english": "ESC RPM",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_ESC_TEMPERATURE": {
+        "message": "ESC Temperature",
+        "english": "ESC Temperature",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_ADJUSTMENT": {
+        "message": "Adjustment Function",
+        "english": "Adjustment Function",
         "status": "New entry. Please translate!"
     },
     "receiverBars": {
@@ -2997,9 +3127,14 @@
         "status": "New entry. Please translate!"
     },
     "servoSpeedHelp": {
-        "message": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 50&deg;.",
-        "english": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 50&deg;.",
-        "status": "New entry. Please translate!"
+        "message": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 60&deg;.",
+        "english": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 60&deg;.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 50&deg;.",
+            "english": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 50&deg;.",
+            "status": "New entry. Please translate!"
+        }
     },
     "servoReverse": {
         "message": "リバース",
@@ -3867,9 +4002,14 @@
         "status": "New entry. Please translate!"
     },
     "motorsEscProtocol": {
-        "message": "ESC / モータープロトコル",
-        "english": "ESC/Motor protocol",
-        "status": "Reused translation. Please check!"
+        "message": "ESC Throttle protocol",
+        "english": "ESC Throttle protocol",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "ESC / モータープロトコル",
+            "english": "ESC/Motor protocol",
+            "status": "Reused translation. Please check!"
+        }
     },
     "motorsEscProtocolHelp": {
         "message": "Select your ESC protocol. <br>Make sure the protocol is supported by your ESCs.</b>",
@@ -3877,39 +4017,89 @@
         "status": "New entry. Please translate!"
     },
     "motorsEscProtocolDisabled": {
-        "message": "ESCに適したモーター出力プロトコルを選択してください。$t(escProtocolDisabledMessage.message)",
-        "english": "Please select a motor output protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)",
-        "status": "Reused translation. Please check!"
+        "message": "Please select a protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)",
+        "english": "Please select a protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "ESCに適したモーター出力プロトコルを選択してください。$t(escProtocolDisabledMessage.message)",
+            "english": "Please select a motor output protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)",
+            "status": "Reused translation. Please check!"
+        }
+    },
+    "motorsEscTelemetry": {
+        "message": "ESC Telemetry",
+        "english": "ESC Telemetry",
+        "status": "New entry. Please translate!"
+    },
+    "motorsEscTelemetryProtocol": {
+        "message": "ESC Telemetry protocol",
+        "english": "ESC Telemetry protocol",
+        "status": "New entry. Please translate!"
+    },
+    "motorsEscTelemetryProtocolHelp": {
+        "message": "Select your ESC Telemetry protocol. <br>This data is transmitted via a separate connection from the ESC.</b>",
+        "english": "Select your ESC Telemetry protocol. <br>This data is transmitted via a separate connection from the ESC.</b>",
+        "status": "New entry. Please translate!"
     },
     "motorsUnsyncedPwm": {
-        "message": "Unsyncronised Motor PWM",
-        "english": "Unsyncronised Motor PWM",
-        "status": "New entry. Please translate!"
+        "message": "Unsyncronised ESC update",
+        "english": "Unsyncronised ESC update",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Unsyncronised Motor PWM",
+            "english": "Unsyncronised Motor PWM",
+            "status": "New entry. Please translate!"
+        }
     },
     "motorsUnsyncedPwmHelp": {
-        "message": "Motor PWM is running at the specified speed, without being syncronised to the PID loop",
-        "english": "Motor PWM is running at the specified speed, without being syncronised to the PID loop",
-        "status": "New entry. Please translate!"
+        "message": "ESC PWM is running unsyncronised, separate from the PID loop, at the specified frequency.",
+        "english": "ESC PWM is running unsyncronised, separate from the PID loop, at the specified frequency.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Motor PWM is running at the specified speed, without being syncronised to the PID loop",
+            "english": "Motor PWM is running at the specified speed, without being syncronised to the PID loop",
+            "status": "New entry. Please translate!"
+        }
     },
     "motorsUnsyncedPWMFreq": {
-        "message": "モーターPWM 周波数",
-        "english": "Motor PWM frequency",
-        "status": "Reused translation. Please check!"
+        "message": "ESC update frequency",
+        "english": "ESC update frequency",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "モーターPWM 周波数",
+            "english": "Motor PWM frequency",
+            "status": "Reused translation. Please check!"
+        }
     },
     "motorsUnsyncedPWMFreqHelp": {
-        "message": "Motor PWM update frequency, when running unsyncronised.",
-        "english": "Motor PWM update frequency, when running unsyncronised.",
-        "status": "New entry. Please translate!"
+        "message": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC.",
+        "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Motor PWM update frequency, when running unsyncronised.",
+            "english": "Motor PWM update frequency, when running unsyncronised.",
+            "status": "New entry. Please translate!"
+        }
     },
     "motorsDshotBidir": {
-        "message": "Bidirectional DShot",
-        "english": "Bidirectional DShot",
-        "status": "New entry. Please translate!"
+        "message": "DShot RPM Telemetry",
+        "english": "DShot RPM Telemetry",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Bidirectional DShot",
+            "english": "Bidirectional DShot",
+            "status": "New entry. Please translate!"
+        }
     },
     "motorsDshotBidirHelp": {
-        "message": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32 or BLHeli_S when flashed to Bluejay firmware.",
-        "english": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32 or BLHeli_S when flashed to Bluejay firmware.",
-        "status": "New entry. Please translate!"
+        "message": "Sends ESC RPM telemetry back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32, Bluejay or AM32.",
+        "english": "Sends ESC RPM telemetry back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32, Bluejay or AM32.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32 or BLHeli_S when flashed to Bluejay firmware.",
+            "english": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32 or BLHeli_S when flashed to Bluejay firmware.",
+            "status": "New entry. Please translate!"
+        }
     },
     "motorsMainRotorGearRatio": {
         "message": "Main Rotor Gear Ratio",
@@ -4370,6 +4560,16 @@
     "govHeadspeedNote": {
         "message": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning.",
         "english": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning.",
+        "status": "New entry. Please translate!"
+    },
+    "govMaxThrottle": {
+        "message": "Maximum Throttle",
+        "english": "Maximum Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "govMaxThrottleHelp": {
+        "message": "Maximum output throttle the governor is allowed to use.",
+        "english": "Maximum output throttle the governor is allowed to use.",
         "status": "New entry. Please translate!"
     },
     "govMasterGain": {
@@ -6097,9 +6297,14 @@
         "status": "New entry. Please translate!"
     },
     "profilesPitchFFCollectiveGainHelp": {
-        "message": "Amount of collective mixed into the aileron control.",
-        "english": "Amount of collective mixed into the aileron control.",
-        "status": "New entry. Please translate!"
+        "message": "Amount of collective mixed into the elevator control.",
+        "english": "Amount of collective mixed into the elevator control.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Amount of collective mixed into the aileron control.",
+            "english": "Amount of collective mixed into the aileron control.",
+            "status": "New entry. Please translate!"
+        }
     },
     "profilesCyclicCrossCoupling": {
         "message": "Cyclic Cross-Coupling",
@@ -6556,15 +6761,25 @@
         "english": "Dynamic Notch Filter",
         "status": "Reused translation. Please check!"
     },
-    "gyroDynamicNotchFilterHelp": {
-        "message": "Dynamic Notch Filter tracks peak motors noise frequency and places one or two notch filters with their center at that frequency.",
-        "english": "Dynamic Notch Filter tracks peak motors noise frequency and places one or two notch filters with their center at that frequency.",
+    "gyroDynamicNotchFilterSettings": {
+        "message": "Gyro Dynamic Notch Filter Settings",
+        "english": "Gyro Dynamic Notch Filter Settings",
         "status": "New entry. Please translate!"
     },
-    "gyroDynamicNotchWidthPercent": {
-        "message": "動的ノッチ 幅%",
-        "english": "Dynamic Notch Width Percent",
-        "status": "Reused translation. Please check!"
+    "gyroDynamicNotchFilterHelp": {
+        "message": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at that frequency. Requires at least 1k filter or loop rate.",
+        "english": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at that frequency. Requires at least 1k filter or loop rate.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Dynamic Notch Filter tracks peak motors noise frequency and places one or two notch filters with their center at that frequency.",
+            "english": "Dynamic Notch Filter tracks peak motors noise frequency and places one or two notch filters with their center at that frequency.",
+            "status": "New entry. Please translate!"
+        }
+    },
+    "gyroDynamicNotchCount": {
+        "message": "Dynamic Notch Count",
+        "english": "Dynamic Notch Count",
+        "status": "New entry. Please translate!"
     },
     "gyroDynamicNotchQ": {
         "message": "Dynamic Notch Q",
@@ -6572,34 +6787,59 @@
         "status": "New entry. Please translate!"
     },
     "gyroDynamicNotchMinHz": {
-        "message": "Dynamic Notch Min Hz",
-        "english": "Dynamic Notch Min Hz",
-        "status": "New entry. Please translate!"
+        "message": "Dynamic Notch Minimum Frequency",
+        "english": "Dynamic Notch Minimum Frequency",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Dynamic Notch Min Hz",
+            "english": "Dynamic Notch Min Hz",
+            "status": "New entry. Please translate!"
+        }
     },
     "gyroDynamicNotchMaxHz": {
-        "message": "Dynamic Notch Max Hz",
-        "english": "Dynamic Notch Max Hz",
+        "message": "Dynamic Notch Maximum Frequency",
+        "english": "Dynamic Notch Maximum Frequency",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Dynamic Notch Max Hz",
+            "english": "Dynamic Notch Max Hz",
+            "status": "New entry. Please translate!"
+        }
+    },
+    "gyroDynamicNotchCountHelp": {
+        "message": "This sets the number of dynamic notch filters. Setting it at 0 will disable dynamic notch filter. If used standalone, 2 is absolute minimum, 4-6 recommended.",
+        "english": "This sets the number of dynamic notch filters. Setting it at 0 will disable dynamic notch filter. If used standalone, 2 is absolute minimum, 4-6 recommended.",
         "status": "New entry. Please translate!"
     },
-    "gyroDynamicNotchWidthPercentHelp": {
-        "message": "これにより、2つの動的ノッチフィルター間の幅が設定されます。0に設定すると、動的ノッチフィルター2が無効となり、フィルター遅延が減少しますが、モーターの温度が高くなる場合があります。",
-        "english": "This sets the width between two dynamic notch filters. Setting it at 0 will disable the second dynamic notch filter and will reduce filter delay, however it may make motor temperatures higher.",
-        "status": "Reused translation. Please check!"
-    },
     "gyroDynamicNotchQHelp": {
-        "message": "Q 係数は動的ノッチフィルターの幅を調整します。値を大きくすると幅が狭くなり、より正確となり、値を低くすると幅が広くなります。本当に低い値を設定すると、フィルター遅延が大幅に増加します。",
-        "english": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Having a really low value will greatly increase filter delay.",
-        "status": "Reused translation. Please check!"
+        "message": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Values between 2.0 and 3.0 are recommended.",
+        "english": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Values between 2.0 and 3.0 are recommended.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Q 係数は動的ノッチフィルターの幅を調整します。値を大きくすると幅が狭くなり、より正確となり、値を低くすると幅が広くなります。本当に低い値を設定すると、フィルター遅延が大幅に増加します。",
+            "english": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Having a really low value will greatly increase filter delay.",
+            "status": "Reused translation. Please check!"
+        }
     },
     "gyroDynamicNotchMinHzHelp": {
-        "message": "動的ノッチで制御が必要なノイズ周波数の最低値を設定します。",
-        "english": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch.",
-        "status": "Reused translation. Please check!"
+        "message": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent of 1200 rpm",
+        "english": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent of 1200 rpm",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "動的ノッチで制御が必要なノイズ周波数の最低値を設定します。",
+            "english": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch.",
+            "status": "Reused translation. Please check!"
+        }
     },
     "gyroDynamicNotchMaxHzHelp": {
-        "message": "動的ノッチで制御が必要なノイズ周波数の最大値を設定します。",
-        "english": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch.",
-        "status": "Reused translation. Please check!"
+        "message": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be about 10-20% higher than max tail rotor frequency, but no higher than 250Hz if filter rate is 1k. If filter rate is 2k or more, then 330-500 Hz can be used, especially for smaller helis or that with motorized tail (higher range means less precision and performance)",
+        "english": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be about 10-20% higher than max tail rotor frequency, but no higher than 250Hz if filter rate is 1k. If filter rate is 2k or more, then 330-500 Hz can be used, especially for smaller helis or that with motorized tail (higher range means less precision and performance)",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "動的ノッチで制御が必要なノイズ周波数の最大値を設定します。",
+            "english": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch.",
+            "status": "Reused translation. Please check!"
+        }
     },
     "gyroDTermLowpassFiltersGroup": {
         "message": "D値 ローパスフィルター",
@@ -6842,9 +7082,14 @@
         "status": "New entry. Please translate!"
     },
     "dialogGyroResetNote": {
-        "message": "Enabling RPM Filter Setup will reset any custom RPM filter settings to defaults.",
-        "english": "Enabling RPM Filter Setup will reset any custom RPM filter settings to defaults.",
-        "status": "New entry. Please translate!"
+        "message": "Changing the Setup Type will reset any custom RPM filter settings to defaults.",
+        "english": "Changing the Setup Type will reset any custom RPM filter settings to defaults.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Enabling RPM Filter Setup will reset any custom RPM filter settings to defaults.",
+            "english": "Enabling RPM Filter Setup will reset any custom RPM filter settings to defaults.",
+            "status": "New entry. Please translate!"
+        }
     },
     "dialogGyroResetAccept": {
         "message": "Accept",
