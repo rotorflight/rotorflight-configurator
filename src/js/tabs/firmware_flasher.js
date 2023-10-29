@@ -425,7 +425,9 @@ TABS.firmware_flasher.initialize = function (callback) {
         function grabBuildNameFromConfig(config) {
             let bareBoard;
             try {
-                bareBoard = config.split("\n")[0].split(' ')[3];
+                const pattern = /.+\/ (STM32[^ ]*)/;
+                const matches = config.match(pattern);
+                bareBoard = matches[1];
             } catch (e) {
                 bareBoard = undefined;
                 console.log('grabBuildNameFromConfig failed: ', e.message);
