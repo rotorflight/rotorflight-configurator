@@ -993,51 +993,6 @@ TABS.firmware_flasher.initialize = function (callback) {
             }
         }
 
-        $('span.progressLabel a.save_firmware').click(function () {
-            var summary = $('select[name="firmware_version"] option:selected').data('summary');
-            chrome.fileSystem.chooseEntry({type: 'saveFile', suggestedName: summary.file, accepts: [{description: 'HEX files', extensions: ['hex']}]}, function (fileEntry) {
-                if (checkChromeRuntimeError()) {
-                    return;
-                }
-
-                chrome.fileSystem.getDisplayPath(fileEntry, function (path) {
-                    console.log('Saving firmware to: ' + path);
-
-                    // check if file is writable
-                    chrome.fileSystem.isWritableEntry(fileEntry, function (isWritable) {
-                        if (isWritable) {
-                            var blob = new Blob([self.intel_hex], {type: 'text/plain'});
-
-                            fileEntry.createWriter(function (writer) {
-                                var truncated = false;
-
-                                writer.onerror = function (e) {
-                                    console.error(e);
-                                };
-
-                                writer.onwriteend = function() {
-                                    if (!truncated) {
-                                        // onwriteend will be fired again when truncation is finished
-                                        truncated = true;
-                                        writer.truncate(blob.size);
-
-                                        return;
-                                    }
-                                };
-
-                                writer.write(blob);
-                            }, function (e) {
-                                console.error(e);
-                            });
-                        } else {
-                            console.log('You don\'t have write permissions for this file, sorry.');
-                            GUI.log(i18n.getMessage('firmwareFlasherWritePermissions'));
-                        }
-                    });
-                });
-            });
-        });
-
         $('input.flash_on_connect').change(function () {
             var status = $(this).is(':checked');
 
@@ -1141,6 +1096,50 @@ TABS.firmware_flasher.flashingMessage = function(message, type) {
     }
     if (message != null) {
         progressLabel_e.html(message);
+        $('span.progressLabel a.save_firmware').click(function () {
+            var summary = $('select[name="firmware_version"] option:selected').data('summary');
+            chrome.fileSystem.chooseEntry({type: 'saveFile', suggestedName: summary.file, accepts: [{description: 'HEX files', extensions: ['hex']}]}, function (fileEntry) {
+                if (checkChromeRuntimeError()) {
+                    return;
+                }
+
+                chrome.fileSystem.getDisplayPath(fileEntry, function (path) {
+                    console.log('Saving firmware to: ' + path);
+
+                    // check if file is writable
+                    chrome.fileSystem.isWritableEntry(fileEntry, function (isWritable) {
+                        if (isWritable) {
+                            var blob = new Blob([self.intel_hex], {type: 'text/plain'});
+
+                            fileEntry.createWriter(function (writer) {
+                                var truncated = false;
+
+                                writer.onerror = function (e) {
+                                    console.error(e);
+                                };
+
+                                writer.onwriteend = function() {
+                                    if (!truncated) {
+                                        // onwriteend will be fired again when truncation is finished
+                                        truncated = true;
+                                        writer.truncate(blob.size);
+
+                                        return;
+                                    }
+                                };
+
+                                writer.write(blob);
+                            }, function (e) {
+                                console.error(e);
+                            });
+                        } else {
+                            console.log('You don\'t have write permissions for this file, sorry.');
+                            GUI.log(i18n.getMessage('firmwareFlasherWritePermissions'));
+                        }
+                    });
+                });
+            });
+        });
     }
 
     return self;
