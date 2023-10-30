@@ -27,61 +27,50 @@
     "axisROLL": {
         "message": "副翼",
         "english": "ROLL",
-        "status": "New entry. Please translate!",
         "description": "Roll axis in capital letters"
     },
     "axisPITCH": {
         "message": "升降",
         "english": "PITCH",
-        "status": "New entry. Please translate!",
         "description": "Pitch axis in capital letters"
     },
     "axisYAW": {
         "message": "航向",
         "english": "YAW",
-        "status": "New entry. Please translate!",
         "description": "Yaw axis in capital letters"
     },
     "axisCOLLECTIVE": {
         "message": "集体螺距",
         "english": "COLLECTIVE",
-        "status": "New entry. Please translate!",
         "description": "Collective in capital letters"
     },
     "titleRoll": {
         "message": "副翼",
-        "english": "Roll",
-        "status": "New entry. Please translate!"
+        "english": "Roll"
     },
     "titlePitch": {
         "message": "升降",
-        "english": "Pitch",
-        "status": "New entry. Please translate!"
+        "english": "Pitch"
     },
     "titleYaw": {
         "message": "航向",
-        "english": "Yaw",
-        "status": "New entry. Please translate!"
+        "english": "Yaw"
     },
     "titleCollective": {
         "message": "集体螺距",
-        "english": "Collective",
-        "status": "New entry. Please translate!"
+        "english": "Collective"
     },
     "titleHeading": {
         "message": "航向",
-        "english": "Heading",
-        "status": "New entry. Please translate!"
+        "english": "Heading"
     },
     "titleAltitude": {
         "message": "高度",
-        "english": "Altitude",
-        "status": "New entry. Please translate!"
+        "english": "Altitude"
     },
     "titleAttitude": {
         "message": "姿态",
-        "english": "Attitude",
-        "status": "New entry. Please translate!"
+        "english": "Attitude"
     },
     "error": {
         "message": "错误: {{errorMessage}}",
@@ -711,9 +700,8 @@
         "english": "Craft name: <strong>$1</strong>"
     },
     "realTimeClockSet": {
-        "message": "Real-Time Clock set",
-        "english": "Real-Time Clock set",
-        "status": "New entry. Please translate!"
+        "message": "实时时钟设定",
+        "english": "Real-Time Clock set"
     },
     "armingDisabled": {
         "message": "<strong>禁止解锁</strong>",
@@ -1265,108 +1253,83 @@
     },
     "feature_RX_PPM": {
         "message": "PPM 接收机",
-        "english": "PPM RX input",
-        "status": "Reused translation. Please check!"
+        "english": "PPM RX input"
     },
     "feature_INFLIGHT_ACC_CAL": {
         "message": "实时水平校准",
-        "english": "In-flight level calibration",
-        "status": "Reused translation. Please check!"
+        "english": "In-flight level calibration"
     },
     "feature_RX_SERIAL": {
         "message": "串行接收机输入",
-        "english": "Serial RX input",
-        "status": "New entry. Please translate!"
+        "english": "Serial RX input"
     },
     "feature_SOFTSERIAL": {
         "message": "启用软串口功能",
-        "english": "Enable Software Serial ports",
-        "status": "New entry. Please translate!"
+        "english": "Enable Software Serial ports"
     },
     "feature_GPS": {
         "message": "启用 GPS 导航",
-        "english": "GPS for navigation and telemetry",
-        "status": "Reused translation. Please check!"
+        "english": "GPS for navigation and telemetry"
     },
     "feature_SONAR": {
         "message": "声呐高度雷达",
-        "english": "Sonar altitude radar",
-        "status": "New entry. Please translate!"
+        "english": "Sonar altitude radar"
     },
     "feature_TELEMETRY": {
         "message": "高频头遥测",
-        "english": "Transmitter telemetry",
-        "status": "New entry. Please translate!"
+        "english": "Transmitter telemetry"
     },
     "feature_RX_PARALLEL_PWM": {
         "message": "PWM 接收机输入通道",
-        "english": "PWM RX input channels",
-        "status": "New entry. Please translate!"
+        "english": "PWM RX input channels"
     },
     "feature_RX_MSP": {
         "message": "MSP 接收机输入",
-        "english": "MSP RX input",
-        "status": "New entry. Please translate!"
+        "english": "MSP RX input"
     },
     "feature_RSSI_ADC": {
         "message": "模拟 RSSI 输入",
-        "english": "Analog RSSI input",
-        "status": "Reused translation. Please check!"
+        "english": "Analog RSSI input"
     },
     "feature_LED_STRIP": {
-        "message": "RGB LED 灯带支持",
-        "english": "RGB LED Strip support",
-        "status": "New entry. Please translate!"
+        "message": "RGB LED 灯带",
+        "english": "RGB LED Strip support"
     },
     "feature_DISPLAY": {
-        "message": "OLED 显示屏支持",
-        "english": "OLED Display support",
-        "status": "New entry. Please translate!"
+        "message": "OLED 显示屏",
+        "english": "OLED Display support"
     },
     "feature_OSD": {
         "message": "启用 OSD",
-        "english": "On Screen Display",
-        "status": "Reused translation. Please check!"
+        "english": "On Screen Display"
     },
     "feature_RX_SPI": {
         "message": "支持 SPI 接收机",
-        "english": "SPI RX support",
-        "status": "Reused translation. Please check!"
+        "english": "SPI RX support"
     },
     "feature_GOVERNOR": {
         "message": "主旋翼转速定速器",
-        "english": "Headspeed governor",
-        "status": "New entry. Please translate!"
+        "english": "Headspeed governor"
     },
     "feature_ESC_SENSOR": {
-        "message": "电调遥测支持",
-        "english": "ESC Telemetry support",
-        "status": "New entry. Please translate!"
+        "message": "电调遥测",
+        "english": "ESC Telemetry support"
     },
     "feature_FREQ_SENSOR": {
-        "message": "转速信号输入支持",
-        "english": "RPM signal input support",
-        "status": "New entry. Please translate!"
+        "message": "转速信号输入",
+        "english": "RPM signal input support"
     },
     "feature_VTX": {
         "message": "图传",
-        "english": "Video Transmitter",
-        "status": "Reused translation. Please check!"
+        "english": "Video Transmitter"
     },
     "feature_DYN_NOTCH": {
-        "message": "Dynamic Notch filtering",
-        "english": "Dynamic Notch filtering",
-        "status": "New entry. Please translate!"
+        "message": "动态陷波滤波器",
+        "english": "Dynamic Notch filtering"
     },
     "feature_RPM_FILTER": {
-        "message": "RPM controlled notch filtering",
-        "english": "RPM controlled notch filtering",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "基于转速的陀螺仪陷波滤波器",
-            "english": "RPM controlled gyro notch filtering",
-            "status": "New entry. Please translate!"
-        }
+        "message": "转速陷波滤波器",
+        "english": "RPM controlled notch filtering"
     },
     "configurationFeatureEnabled": {
         "message": "已启用",
@@ -1518,113 +1481,91 @@
     },
     "beeper_GYRO_CALIBRATED": {
         "message": "陀螺仪校准完成后鸣叫",
-        "english": "Beeps when gyro has been calibrated",
-        "status": "Reused translation. Please check!"
+        "english": "Beeps when gyro has been calibrated"
     },
     "beeper_RX_LOST": {
         "message": "遥控器关闭或信号丢失时持续鸣叫直到信号恢复",
-        "english": "Beeps when TX is turned off or signal lost (repeat until TX is okay)",
-        "status": "Reused translation. Please check!"
+        "english": "Beeps when TX is turned off or signal lost (repeat until TX is okay)"
     },
     "beeper_RX_LOST_LANDING": {
         "message": "解锁后遥控器关闭或信号丢失（自动降落/自动锁定）时鸣叫 SOS 信号",
-        "english": "Beeps SOS when armed and TX is turned off or signal lost (autolanding/autodisarm)",
-        "status": "Reused translation. Please check!"
+        "english": "Beeps SOS when armed and TX is turned off or signal lost (autolanding/autodisarm)"
     },
     "beeper_DISARMING": {
         "message": "锁定飞控时鸣叫",
-        "english": "Beep when disarming the flightcontroller",
-        "status": "Reused translation. Please check!"
+        "english": "Beep when disarming the flightcontroller"
     },
     "beeper_ARMING": {
         "message": "解锁飞控时鸣叫",
-        "english": "Beep when arming the flightcontroller",
-        "status": "Reused translation. Please check!"
+        "english": "Beep when arming the flightcontroller"
     },
     "beeper_ARMING_GPS_FIX": {
         "message": "当飞控解锁和 GPS 获得定位时，发出蜂鸣音",
-        "english": "Beep a special tone when arming the FC and GPS has fix",
-        "status": "New entry. Please translate!"
+        "english": "Beep a special tone when arming the FC and GPS has fix"
     },
     "beeper_BAT_CRIT_LOW": {
         "message": "当电池电压严重偏低时持续长鸣",
-        "english": "Longer warning beeps when battery is critically low (repeats)",
-        "status": "Reused translation. Please check!"
+        "english": "Longer warning beeps when battery is critically low (repeats)"
     },
     "beeper_BAT_LOW": {
         "message": "当电池电压偏低时重复鸣叫",
-        "english": "Warning beeps when battery is getting low (repeats)",
-        "status": "Reused translation. Please check!"
+        "english": "Warning beeps when battery is getting low (repeats)"
     },
     "beeper_GPS_STATUS": {
         "message": "使用蜂鸣音的次数来表示找到了多少个 GPS 卫星",
-        "english": "Use the number of beeps to indicate how many GPS satellites were found",
-        "status": "Reused translation. Please check!"
+        "english": "Use the number of beeps to indicate how many GPS satellites were found"
     },
     "beeper_RX_SET": {
         "message": "通过辅助通道(Aux)发出蜂鸣音",
-        "english": "Beeps when aux channel is set for beep",
-        "status": "Reused translation. Please check!"
+        "english": "Beeps when aux channel is set for beep"
     },
     "beeper_ACC_CALIBRATION": {
         "message": "加速度计飞行中校准完成",
-        "english": "Accelerometer inflight calibration completed confirmation",
-        "status": "Reused translation. Please check!"
+        "english": "Accelerometer inflight calibration completed confirmation"
     },
     "beeper_ACC_CALIBRATION_FAIL": {
         "message": "加速度计飞行中校准失败",
-        "english": "Accelerometer inflight calibration failed",
-        "status": "Reused translation. Please check!"
+        "english": "Accelerometer inflight calibration failed"
     },
     "beeper_READY_BEEP": {
         "message": "当 GPS 定位成功且就绪时发出蜂鸣声",
-        "english": "Ring a tone when GPS is locked and ready",
-        "status": "Reused translation. Please check!"
+        "english": "Ring a tone when GPS is locked and ready"
     },
     "beeper_MULTI_BEEPS": {
         "message": "",
-        "english": "",
-        "status": "Reused translation. Please check!"
+        "english": ""
     },
     "beeper_DISARM_REPEAT": {
         "message": "摇杆保持在锁定位置时鸣叫",
-        "english": "Beeps sounded while stick held in disarm position",
-        "status": "Reused translation. Please check!"
+        "english": "Beeps sounded while stick held in disarm position"
     },
     "beeper_ARMED": {
         "message": "当飞控解锁且电机未转时，持续发出警告鸣叫直到上推油门或重新锁定",
-        "english": "Warning beeps when board is armed with motors off when idle (repeats until board is disarmed or throttle is increased)",
-        "status": "Reused translation. Please check!"
+        "english": "Warning beeps when board is armed with motors off when idle (repeats until board is disarmed or throttle is increased)"
     },
     "beeper_SYSTEM_INIT": {
         "message": "飞控上电时鸣叫初始化音",
-        "english": "Initialisation beeps when board is powered on",
-        "status": "Reused translation. Please check!"
+        "english": "Initialisation beeps when board is powered on"
     },
     "beeper_USB": {
         "message": "通过 USB 连接飞控时启用蜂鸣器。不想在调试时听到鸣叫可禁用这个选项。",
-        "english": "Beep when flight controller is powered from USB. Turn this off if you don't want the beeper to be on when on the workbench",
-        "status": "Reused translation. Please check!"
+        "english": "Beep when flight controller is powered from USB. Turn this off if you don't want the beeper to be on when on the workbench"
     },
     "beeper_BLACKBOX_ERASE": {
         "message": "黑盒擦除完成时鸣叫",
-        "english": "Beep when blackbox erase completes",
-        "status": "Reused translation. Please check!"
+        "english": "Beep when blackbox erase completes"
     },
     "beeper_CAM_CONNECTION_OPEN": {
         "message": "当进入5键相机控制模式时发出蜂鸣音",
-        "english": "Beep when the 5 key camera control is entered",
-        "status": "Reused translation. Please check!"
+        "english": "Beep when the 5 key camera control is entered"
     },
     "beeper_CAM_CONNECTION_CLOSE": {
         "message": "当退出5键相机控制模式时发出蜂鸣音",
-        "english": "Beep when the 5 key camera control is exited",
-        "status": "Reused translation. Please check!"
+        "english": "Beep when the 5 key camera control is exited"
     },
     "beeper_ARMING_GPS_NO_FIX": {
         "message": "当飞控解锁和 GPS 没有获得定位时，发出蜂鸣音",
-        "english": "Beep a special tone when arming the FC and GPS does not have fix",
-        "status": "New entry. Please translate!"
+        "english": "Beep a special tone when arming the FC and GPS does not have fix"
     },
     "configurationSystem": {
         "message": "系统配置",
@@ -1847,18 +1788,15 @@
     },
     "baudrate_AUTO": {
         "message": "自动",
-        "english": "Auto",
-        "status": "New entry. Please translate!"
+        "english": "Auto"
     },
     "baudrate_CUSTOM": {
         "message": "自定义",
-        "english": "Custom",
-        "status": "New entry. Please translate!"
+        "english": "Custom"
     },
     "baudrate_DISABLED": {
         "message": "禁用",
-        "english": "Disabled",
-        "status": "New entry. Please translate!"
+        "english": "Disabled"
     },
     "dialogCopyProfileText": {
         "message": "将值从当前配置文件复制到",
@@ -1941,36 +1879,20 @@
         "english": "Profile #6"
     },
     "profilesPIDPassthroughWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Passthrough Mode</b>.<br>Please change the settings in the <b>CLI</b>.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Passthrough Mode</b>.<br>Please change the settings in the <b>CLI</b>.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">警告：</span>PID控制手动设置为 <i>直通模式</i> 。请在<b>命令行</b>中修改高级设置。",
-            "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Passthrough Mode</i>. Please change the advanced settings in the <b>CLI</b>."
-        }
+        "message": "<span class=\"message-negative\">警告：</span>PID控制手动设置为 <b>直通模式</b> 。请在<b>命令行</b>中修改设置。",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Passthrough Mode</b>.<br>Please change the settings in the <b>CLI</b>."
     },
     "profilesPIDCompatibilityWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Rotorflight-1 Compatiblity</b> Mode.<br>Please use the <b>CLI</b to change the PID settings>.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Rotorflight-1 Compatiblity</b> Mode.<br>Please use the <b>CLI</b to change the PID settings>.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">警告：</span> PID控制手动配置为 <i>Rotorflight-1兼容</i> 模式。请在<b>命令行</b>中更改高级设置。",
-            "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Rotorflight-1 Compatiblity</i> Mode. Please change the advanced settings in the <b>CLI</b>."
-        }
+        "message": "<span class=\"message-negative\">警告：</span> PID控制手动配置为 <b>Rotorflight-1兼容</b> 模式。请在<b>命令行</b>中更改设置。",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Rotorflight-1 Compatiblity</b> Mode.<br>Please use the <b>CLI</b to change the PID settings>."
     },
     "profilesPIDModeThreeWarning": {
         "message": "<span class=\"message-negative\">警告：</span> PID控制手动配置为 <b>PID Test Mode 3</b>.<br>请在 <b>命令行</b> 中修改高级设置。",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually to the <b>PID Test Mode 3</b>.<br>Please use the <b>CLI</b> to change the advanced PID settings.",
-        "status": "New entry. Please translate!"
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually to the <b>PID Test Mode 3</b>.<br>Please use the <b>CLI</b> to change the advanced PID settings."
     },
     "profilesPIDCustomWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">警告：</span> PID 控制器的参数是手动配置的，这里无法表达。请使用<b>命令行</b>更改 PID 设置。",
-            "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here. Please use the <b>CLI</b> to change the PID settings."
-        }
+        "message": "<span class=\"message-negative\">警告：</span> PID 控制器的参数是手动配置的，这里无法表达。<br>请使用<b>命令行</b>更改 PID 设置。",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings."
     },
     "profilesPIDGains": {
         "message": "轴向",
@@ -2014,13 +1936,11 @@
     },
     "profilesBoost": {
         "message": "B（增压）",
-        "english": "Boost",
-        "status": "New entry. Please translate!"
+        "english": "Boost"
     },
     "profilesBoostHelp": {
         "message": "是对前馈的额外提升。这将使直升机对快速打杆做出更快的反应。",
-        "english": "Is an additional boost on the feedforward. This makes the heli react faster to quick stick movements.",
-        "status": "New entry. Please translate!"
+        "english": "Is an additional boost on the feedforward. This makes the heli react faster to quick stick movements."
     },
     "profilesCopyProfile": {
         "message": "复制配置文件",
@@ -2067,34 +1987,28 @@
         "english": "The value of stick (channel) center in µs. Usually 1500µs or 1520µs."
     },
     "receiverStickDeflection": {
-        "message": "Stick Maximum Travel",
-        "english": "Stick Maximum Travel",
-        "status": "New entry. Please translate!"
+        "message": "摇杆最大行程",
+        "english": "Stick Maximum Travel"
     },
     "receiverHelpStickDeflection": {
-        "message": "The maximum value (in µs) for stick deflection from the center, for RPY.",
-        "english": "The maximum value (in µs) for stick deflection from the center, for RPY.",
-        "status": "New entry. Please translate!"
+        "message": "副翼升降航向轴偏离中心的最大值，单位为μs。",
+        "english": "The maximum value (in µs) for stick deflection from the center, for RPY."
     },
     "receiverZeroThrottle": {
-        "message": "Throttle Channel value for 0% throttle",
-        "english": "Throttle Channel value for 0% throttle",
-        "status": "New entry. Please translate!"
+        "message": "0% 油门通道值",
+        "english": "Throttle Channel value for 0% throttle"
     },
     "receiverHelpZeroThrottle": {
-        "message": "The channel value (in µs) for the throttle channel to be considered 0%",
-        "english": "The channel value (in µs) for the throttle channel to be considered 0%",
-        "status": "New entry. Please translate!"
+        "message": "判断油门为 0% 时的油门通道值，单位为 μs。",
+        "english": "The channel value (in µs) for the throttle channel to be considered 0%"
     },
     "receiverFullThrottle": {
-        "message": "Throttle Channel value for 100% throttle",
-        "english": "Throttle Channel value for 100% throttle",
-        "status": "New entry. Please translate!"
+        "message": "100% 油门通道值",
+        "english": "Throttle Channel value for 100% throttle"
     },
     "receiverHelpFullThrottle": {
-        "message": "The channel value (in µs) for the throttle channel to be considered 100%",
-        "english": "The channel value (in µs) for the throttle channel to be considered 100%",
-        "status": "New entry. Please translate!"
+        "message": "判断油门为 100% 时的油门通道值，单位为 μs。",
+        "english": "The channel value (in µs) for the throttle channel to be considered 100%"
     },
     "receiverCyclicDeadband": {
         "message": "循环死区",
@@ -2114,138 +2028,111 @@
     },
     "receiverTelemetrySettings": {
         "message": "遥测设置",
-        "english": "Telemetry Settings",
-        "status": "Reused translation. Please check!"
+        "english": "Telemetry Settings"
     },
     "receiverTelemetryEnabled": {
-        "message": "Enable Telemetry",
-        "english": "Enable Telemetry",
-        "status": "New entry. Please translate!"
+        "message": "启用遥测",
+        "english": "Enable Telemetry"
     },
     "receiverTelemetryHalfDuplex": {
-        "message": "One-wire Telemetry Communication",
-        "english": "One-wire Telemetry Communication",
-        "status": "New entry. Please translate!"
+        "message": "单线遥测通信",
+        "english": "One-wire Telemetry Communication"
     },
     "receiverTelemetryInverted": {
-        "message": "Inverted Telemetry Signaling",
-        "english": "Inverted Telemetry Signaling",
-        "status": "New entry. Please translate!"
+        "message": "反向遥测信号",
+        "english": "Inverted Telemetry Signaling"
     },
     "receiverTelemetrySensors": {
-        "message": "Telemetry Sensors",
-        "english": "Telemetry Sensors",
-        "status": "New entry. Please translate!"
+        "message": "遥测传感器",
+        "english": "Telemetry Sensors"
     },
     "receiverTelemetrySensor_VOLTAGE": {
-        "message": "Battery Voltage",
-        "english": "Battery Voltage",
-        "status": "New entry. Please translate!"
+        "message": "电池电压",
+        "english": "Battery Voltage"
     },
     "receiverTelemetrySensor_CURRENT": {
-        "message": "Battery Current",
-        "english": "Battery Current",
-        "status": "New entry. Please translate!"
+        "message": "电池电流",
+        "english": "Battery Current"
     },
     "receiverTelemetrySensor_FUEL_LEVEL": {
-        "message": "Battery Charge Level",
-        "english": "Battery Charge Level",
-        "status": "New entry. Please translate!"
+        "message": "电池电量级别",
+        "english": "Battery Charge Level"
     },
     "receiverTelemetrySensor_USED_CAPACITY": {
-        "message": "Used Battery Capacity",
-        "english": "Used Battery Capacity",
-        "status": "New entry. Please translate!"
+        "message": "已消耗电量",
+        "english": "Used Battery Capacity"
     },
     "receiverTelemetrySensor_TEMPERATURE": {
-        "message": "FC Temperature",
-        "english": "FC Temperature",
-        "status": "New entry. Please translate!"
+        "message": "飞控温度",
+        "english": "FC Temperature"
     },
     "receiverTelemetrySensor_MODE": {
-        "message": "Flight Mode",
-        "english": "Flight Mode",
-        "status": "New entry. Please translate!"
+        "message": "飞行模式",
+        "english": "Flight Mode"
     },
     "receiverTelemetrySensor_PITCH": {
-        "message": "Pitch angle (attitude)",
-        "english": "Pitch angle (attitude)",
-        "status": "New entry. Please translate!"
+        "message": "俯仰角（姿态）",
+        "english": "Pitch angle (attitude)"
     },
     "receiverTelemetrySensor_ROLL": {
-        "message": "Roll angle (attitude)",
-        "english": "Roll angle (attitude)",
-        "status": "New entry. Please translate!"
+        "message": "横滚角（姿态）",
+        "english": "Roll angle (attitude)"
     },
     "receiverTelemetrySensor_HEADING": {
-        "message": "Heading",
-        "english": "Heading",
-        "status": "New entry. Please translate!"
+        "message": "航向",
+        "english": "Heading"
     },
     "receiverTelemetrySensor_ACC_X": {
-        "message": "Accelerometer X-axis",
-        "english": "Accelerometer X-axis",
-        "status": "New entry. Please translate!"
+        "message": "X轴加速度计",
+        "english": "Accelerometer X-axis"
     },
     "receiverTelemetrySensor_ACC_Y": {
-        "message": "Accelerometer Y-axis",
-        "english": "Accelerometer Y-axis",
-        "status": "New entry. Please translate!"
+        "message": "Y轴加速度计",
+        "english": "Accelerometer Y-axis"
     },
     "receiverTelemetrySensor_ACC_Z": {
-        "message": "Accelerometer Z-axis",
-        "english": "Accelerometer Z-axis",
-        "status": "New entry. Please translate!"
+        "message": "Z轴加速度计",
+        "english": "Accelerometer Z-axis"
     },
     "receiverTelemetrySensor_ALTITUDE": {
-        "message": "Altitude",
-        "english": "Altitude",
-        "status": "New entry. Please translate!"
+        "message": "高度",
+        "english": "Altitude"
     },
     "receiverTelemetrySensor_VARIO": {
-        "message": "Vario",
-        "english": "Vario",
-        "status": "New entry. Please translate!"
+        "message": "垂直速度",
+        "english": "Vario"
     },
     "receiverTelemetrySensor_LAT_LONG": {
-        "message": "GPS Latitide & Longitude",
-        "english": "GPS Latitide & Longitude",
-        "status": "New entry. Please translate!"
+        "message": "GPS 经纬度",
+        "english": "GPS Latitide & Longitude"
     },
     "receiverTelemetrySensor_GROUND_SPEED": {
-        "message": "GPS Ground Speed",
-        "english": "GPS Ground Speed",
-        "status": "New entry. Please translate!"
+        "message": "GPS 地面速度",
+        "english": "GPS Ground Speed"
     },
     "receiverTelemetrySensor_DISTANCE": {
-        "message": "GPS Distance",
-        "english": "GPS Distance",
-        "status": "New entry. Please translate!"
+        "message": "GPS 距离",
+        "english": "GPS Distance"
     },
     "receiverTelemetrySensor_ESC_CURRENT": {
-        "message": "ESC Current",
-        "english": "ESC Current",
-        "status": "New entry. Please translate!"
+        "message": "电调电流",
+        "english": "ESC Current"
     },
     "receiverTelemetrySensor_ESC_VOLTAGE": {
-        "message": "ESC Voltage",
-        "english": "ESC Voltage",
-        "status": "New entry. Please translate!"
+        "message": "电调电压",
+        "english": "ESC Voltage"
     },
     "receiverTelemetrySensor_ESC_RPM": {
-        "message": "ESC RPM",
-        "english": "ESC RPM",
-        "status": "New entry. Please translate!"
+        "message": "电调转速",
+        "english": "ESC RPM"
     },
     "receiverTelemetrySensor_ESC_TEMPERATURE": {
-        "message": "ESC Temperature",
-        "english": "ESC Temperature",
-        "status": "New entry. Please translate!"
+        "message": "电调温度",
+        "english": "ESC Temperature"
     },
     "receiverTelemetrySensor_ADJUSTMENT": {
-        "message": "Adjustment Function",
-        "english": "Adjustment Function",
-        "status": "New entry. Please translate!"
+        "message": "调整功能",
+        "english": "Adjustment Function"
     },
     "receiverBars": {
         "message": "接收机通道",
@@ -2632,13 +2519,8 @@
         "english": "Speed [ms]"
     },
     "servoSpeedHelp": {
-        "message": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 60&deg;.",
-        "english": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 60&deg;.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "限制舵机的运动速度。可用于回缩等情况。数值为 0 表示没有限制。1-60000 毫秒之间的数值表示伺服旋转 50 度所需的时间。",
-            "english": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 50&deg;."
-        }
+        "message": "限制舵机的运动速度。可用于回缩等情况。数值为 0 表示没有限制。1-60000 毫秒之间的数值表示伺服旋转 60 度所需的时间。",
+        "english": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 60&deg;."
     },
     "servoReverse": {
         "message": "反向",
@@ -2982,23 +2864,19 @@
     },
     "mixerTailRotorCenterTrim": {
         "message": "尾旋翼中心点微调 [&deg;]",
-        "english": "Center trim for tail rotor [&deg;]",
-        "status": "New entry. Please translate!"
+        "english": "Center trim for tail rotor [&deg;]"
     },
     "mixerTailRotorCenterTrimHelp": {
         "message": "微调0度航向指令时的尾旋翼螺距。",
-        "english": "Set tail rotor trim for zero yaw command.",
-        "status": "New entry. Please translate!"
+        "english": "Set tail rotor trim for zero yaw command."
     },
     "mixerTailMotorCenterTrim": {
         "message": "尾电机中心点微调 [%]",
-        "english": "Center trim for tail motor [%]",
-        "status": "New entry. Please translate!"
+        "english": "Center trim for tail motor [%]"
     },
     "mixerTailMotorCenterTrimHelp": {
         "message": "微调0度航向指令时的尾电机油门值。",
-        "english": "Set tail motor throttle value for zero yaw command.",
-        "status": "New entry. Please translate!"
+        "english": "Set tail motor throttle value for zero yaw command."
     },
     "mixerSwashLinkTrim": {
         "message": "斜盘连杆微调",
@@ -3333,95 +3211,52 @@
         "english": "Qty"
     },
     "motorsEscProtocol": {
-        "message": "ESC Throttle protocol",
-        "english": "ESC Throttle protocol",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电调 / 电机协议",
-            "english": "ESC/Motor protocol"
-        }
+        "message": "电调油门协议",
+        "english": "ESC Throttle protocol"
     },
     "motorsEscProtocolHelp": {
         "message": "选择您的电调协议 <br>请确保您的电调支持该协议</b>",
         "english": "Select your ESC protocol. <br>Make sure the protocol is supported by your ESCs.</b>"
     },
     "motorsEscProtocolDisabled": {
-        "message": "Please select a protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)",
-        "english": "Please select a protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "请选择适合您的电调的输出协议。 $t(escProtocolDisabledMessage.message)",
-            "english": "Please select a motor output protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)"
-        }
+        "message": "请选择合适您的电调的输出协议。 $t(escProtocolDisabledMessage.message)",
+        "english": "Please select a protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)"
     },
     "motorsEscTelemetry": {
-        "message": "ESC Telemetry",
-        "english": "ESC Telemetry",
-        "status": "New entry. Please translate!"
+        "message": "电调遥测",
+        "english": "ESC Telemetry"
     },
     "motorsEscTelemetryProtocol": {
-        "message": "ESC Telemetry protocol",
-        "english": "ESC Telemetry protocol",
-        "status": "New entry. Please translate!"
+        "message": "电调遥测协议",
+        "english": "ESC Telemetry protocol"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "Select your ESC Telemetry protocol. <br>This data is transmitted via a separate connection from the ESC.</b>",
-        "english": "Select your ESC Telemetry protocol. <br>This data is transmitted via a separate connection from the ESC.</b>",
-        "status": "New entry. Please translate!"
+        "message": "选择电调遥测协议。 <br>这个数据会通过一个独立的接口传输。</b>",
+        "english": "Select your ESC Telemetry protocol. <br>This data is transmitted via a separate connection from the ESC.</b>"
     },
     "motorsUnsyncedPwm": {
-        "message": "Unsyncronised ESC update",
-        "english": "Unsyncronised ESC update",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "非同步电机 PWM",
-            "english": "Unsyncronised Motor PWM"
-        }
+        "message": "非同步电调刷新率",
+        "english": "Unsyncronised ESC update"
     },
     "motorsUnsyncedPwmHelp": {
-        "message": "ESC PWM is running unsyncronised, separate from the PID loop, at the specified frequency.",
-        "english": "ESC PWM is running unsyncronised, separate from the PID loop, at the specified frequency.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电机 PWM 以指定速度运行，但不与 PID 循环同步",
-            "english": "Motor PWM is running at the specified speed, without being syncronised to the PID loop"
-        }
+        "message": "电调 PWM 未同步运行，与 PID 循环分开，以指定频率运行。",
+        "english": "ESC PWM is running unsyncronised, separate from the PID loop, at the specified frequency."
     },
     "motorsUnsyncedPWMFreq": {
-        "message": "ESC update frequency",
-        "english": "ESC update frequency",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电机 PWM 频率",
-            "english": "Motor PWM frequency"
-        }
+        "message": "电调刷新率",
+        "english": "ESC update frequency"
     },
     "motorsUnsyncedPWMFreqHelp": {
-        "message": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC.",
-        "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "非同步运行时的电机 PWM 更新频率。",
-            "english": "Motor PWM update frequency, when running unsyncronised."
-        }
+        "message": "电调 PWM 更新频率（Hz）。这是向电调发送油门值的频率。",
+        "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC."
     },
     "motorsDshotBidir": {
-        "message": "DShot RPM Telemetry",
-        "english": "DShot RPM Telemetry",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "双向 DShot",
-            "english": "Bidirectional DShot"
-        }
+        "message": "DShot 转速遥测",
+        "english": "DShot RPM Telemetry"
     },
     "motorsDshotBidirHelp": {
-        "message": "Sends ESC RPM telemetry back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32, Bluejay or AM32.",
-        "english": "Sends ESC RPM telemetry back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32, Bluejay or AM32.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "通过 DShot 信号将电调遥测数据发回飞控。RPM 滤波器和定速器依赖此功能。 <br> <br>注： 需要兼容的电调和固件，例如 BLHeli32 或是刷写了 Bluejay 固件的 BLHeli_S 电调。.",
-            "english": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32 or BLHeli_S when flashed to Bluejay firmware."
-        }
+        "message": "通过 DShot 信号将电调遥测数据发回飞控。RPM 滤波器和定速器依赖此功能。 <br> <br>注： 需要兼容的电调和固件，例如 BLHeli32、AM32 或是 Bluejay。",
+        "english": "Sends ESC RPM telemetry back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32, Bluejay or AM32."
     },
     "motorsMainRotorGearRatio": {
         "message": "主旋翼齿比",
@@ -3800,14 +3635,12 @@
         "english": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning."
     },
     "govMaxThrottle": {
-        "message": "Maximum Throttle",
-        "english": "Maximum Throttle",
-        "status": "New entry. Please translate!"
+        "message": "最大油门",
+        "english": "Maximum Throttle"
     },
     "govMaxThrottleHelp": {
-        "message": "Maximum output throttle the governor is allowed to use.",
-        "english": "Maximum output throttle the governor is allowed to use.",
-        "status": "New entry. Please translate!"
+        "message": "定速器允许输出的最大油门量",
+        "english": "Maximum output throttle the governor is allowed to use."
     },
     "govMasterGain": {
         "message": "主 PID 增益",
@@ -5078,33 +4911,27 @@
     },
     "profilesOffsetLimitHelp": {
         "message": "PID 循环中偏移角的硬限制。绝对偏移量以及 O 项(高速优化)永远不会超过这些限制。",
-        "english": "Hard limit for the offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits.",
-        "status": "New entry. Please translate!"
+        "english": "Hard limit for the offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits."
     },
     "profilesOffsetLimitRoll": {
         "message": "副翼高速优化限制 [&deg;]",
-        "english": "Offset Limit for Roll Axis [&deg;]",
-        "status": "New entry. Please translate!"
+        "english": "Offset Limit for Roll Axis [&deg;]"
     },
     "profilesOffsetLimitPitch": {
         "message": "升降高速优化限制 [&deg;]",
-        "english": "Offset Limit for Pitch Axis [&deg;]",
-        "status": "New entry. Please translate!"
+        "english": "Offset Limit for Pitch Axis [&deg;]"
     },
     "profilesOffsetGainHelp": {
         "message": "PID循环中的 O 项增益 (作用于高速飞行中的 I 项)。",
-        "english": "Gain for Offset term (Integral for high speed flight).",
-        "status": "New entry. Please translate!"
+        "english": "Gain for Offset term (Integral for high speed flight)."
     },
     "profilesOffsetGainRoll": {
         "message": "副翼高速优化增益",
-        "english": "Offset Gain for Roll Axis",
-        "status": "New entry. Please translate!"
+        "english": "Offset Gain for Roll Axis"
     },
     "profilesOffsetGainPitch": {
         "message": "升降高速优化增益",
-        "english": "Offset Gain for Pitch Axis",
-        "status": "New entry. Please translate!"
+        "english": "Offset Gain for Pitch Axis"
     },
     "profilesErrorDecayGround": {
         "message": "地面误差衰减",
@@ -5204,23 +5031,19 @@
     },
     "profilesBtermCutoffHelp": {
         "message": "B 项截止频率（Hz）",
-        "english": "B-term Cutoff Frequency in Hz",
-        "status": "New entry. Please translate!"
+        "english": "B-term Cutoff Frequency in Hz"
     },
     "profilesBtermCutoffRoll": {
         "message": "副翼 B 截止",
-        "english": "Roll B-term Cutoff",
-        "status": "New entry. Please translate!"
+        "english": "Roll B-term Cutoff"
     },
     "profilesBtermCutoffPitch": {
         "message": "升降 B 截止",
-        "english": "Pitch B-term Cutoff",
-        "status": "New entry. Please translate!"
+        "english": "Pitch B-term Cutoff"
     },
     "profilesBtermCutoffYaw": {
         "message": "航向 B 截止",
-        "english": "Yaw B-term Cutoff",
-        "status": "New entry. Please translate!"
+        "english": "Yaw B-term Cutoff"
     },
     "profilesLevelingSettings": {
         "message": "自动回正设置",
@@ -5268,13 +5091,11 @@
     },
     "profilesMainRotorSettings": {
         "message": "主旋翼设置",
-        "english": "Main Rotor Settings",
-        "status": "New entry. Please translate!"
+        "english": "Main Rotor Settings"
     },
     "profilesTailRotorSettings": {
         "message": "尾旋翼设置",
-        "english": "Tail Rotor Settings",
-        "status": "New entry. Please translate!"
+        "english": "Tail Rotor Settings"
     },
     "profilesYawCenterOffset": {
         "message": "中点偏移",
@@ -5297,7 +5118,7 @@
         "english": "CCW Yaw Stop Gain"
     },
     "profilesYawStopGainCCWHelp": {
-        "message": "顺时针方向自旋停止时的增益值（PD），常见范围为50..200",
+        "message": "逆时针方向自旋停止时的增益值（PD），常见范围为50..200",
         "english": "Stop gain (PD) for counter clock-wise rotation. Typical range 50..200."
     },
     "profilesYawFFCyclicGain": {
@@ -5334,68 +5155,51 @@
     },
     "profilesPitchFFCollective": {
         "message": "集体螺距-升降预补偿",
-        "english": "Collective to Pitch Compensation",
-        "status": "New entry. Please translate!"
+        "english": "Collective to Pitch Compensation"
     },
     "profilesPitchFFCollectiveHelp": {
         "message": "补偿集体螺距快速变化时的升降偏差。",
-        "english": "Compensation for the pitching up tendency in collective pitch pumps.",
-        "status": "New entry. Please translate!"
+        "english": "Compensation for the pitching up tendency in collective pitch pumps."
     },
     "profilesPitchFFCollectiveGain": {
         "message": "补偿增益",
-        "english": "Compensation Gain",
-        "status": "New entry. Please translate!"
+        "english": "Compensation Gain"
     },
     "profilesPitchFFCollectiveGainHelp": {
-        "message": "Amount of collective mixed into the elevator control.",
-        "english": "Amount of collective mixed into the elevator control.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "混控到副翼控制中的集体螺距的量。",
-            "english": "Amount of collective mixed into the aileron control.",
-            "status": "New entry. Please translate!"
-        }
+        "message": "混控到升降控制中的集体螺距的量。",
+        "english": "Amount of collective mixed into the elevator control."
     },
     "profilesCyclicCrossCoupling": {
         "message": "循环螺距交叉耦合",
-        "english": "Cyclic Cross-Coupling",
-        "status": "New entry. Please translate!"
+        "english": "Cyclic Cross-Coupling"
     },
     "profilesCyclicCrossCouplingHelp": {
         "message": "当只使用升降舵时，循环螺距交叉耦合补偿可消除副翼摆动。",
-        "english": "Cyclic Cross-Coupling compensation removes the aileron (roll) wobble when only elevator is applied.",
-        "status": "New entry. Please translate!"
+        "english": "Cyclic Cross-Coupling compensation removes the aileron (roll) wobble when only elevator is applied."
     },
     "profilesCyclicCrossCouplingGain": {
         "message": "交叉耦合增益",
-        "english": "Cross-Coupling Gain",
-        "status": "New entry. Please translate!"
+        "english": "Cross-Coupling Gain"
     },
     "profilesCyclicCrossCouplingGainHelp": {
         "message": "对升降-副翼解耦所应用的补偿量",
-        "english": "Amount of compensation applied for Pitch-to-Roll decoupling.",
-        "status": "New entry. Please translate!"
+        "english": "Amount of compensation applied for Pitch-to-Roll decoupling."
     },
     "profilesCyclicCrossCouplingRatio": {
         "message": "交叉耦合比率 [%]",
-        "english": "Cross-Coupling Ratio [%]",
-        "status": "New entry. Please translate!"
+        "english": "Cross-Coupling Ratio [%]"
     },
     "profilesCyclicCrossCouplingRatioHelp": {
         "message": "所需的副翼-升降补偿量与升降-副翼补偿量的比率。",
-        "english": "Amount of Roll-to-Pitch compensation needed, vs. Pitch-to-Roll.",
-        "status": "New entry. Please translate!"
+        "english": "Amount of Roll-to-Pitch compensation needed, vs. Pitch-to-Roll."
     },
     "profilesCyclicCrossCouplingCutoff": {
         "message": "交叉耦合截止频率 [Hz]",
-        "english": "Cross-Coupling Cutoff Frequency [Hz]",
-        "status": "New entry. Please translate!"
+        "english": "Cross-Coupling Cutoff Frequency [Hz]"
     },
     "profilesCyclicCrossCouplingCutoffHelp": {
         "message": "补偿的频率限制。数值越大补偿动作越快。",
-        "english": "Frequency limit for the compensation. Higher value will make the compensation action faster.",
-        "status": "New entry. Please translate!"
+        "english": "Frequency limit for the compensation. Higher value will make the compensation action faster."
     },
     "profilesRescueSettings": {
         "message": "救机设置",
@@ -5730,76 +5534,68 @@
         "english": "Dynamic Notch Filter"
     },
     "gyroDynamicNotchFilterSettings": {
-        "message": "Gyro Dynamic Notch Filter Settings",
-        "english": "Gyro Dynamic Notch Filter Settings",
-        "status": "New entry. Please translate!"
+        "message": "陀螺仪动态陷波滤波器设置",
+        "english": "Gyro Dynamic Notch Filter Settings"
     },
     "gyroDynamicNotchFilterHelp": {
-        "message": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at that frequency. Requires at least 1k filter or loop rate.",
-        "english": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at that frequency. Requires at least 1k filter or loop rate.",
+        "message": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at those frequencies. Requires at least 1k filter or loop rate.",
+        "english": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at those frequencies. Requires at least 1k filter or loop rate.",
         "status": "Modified entry. Please translate!",
         "previous": {
-            "message": "动态陷波滤波器识别电机噪声峰值频率，并将一个或两个陷波滤波器的中心应用于该频率上。",
-            "english": "Dynamic Notch Filter tracks peak motors noise frequency and places one or two notch filters with their center at that frequency."
+            "message": "动态陷波滤波器会自动跟踪峰值噪声频率，并将陷波滤波器的中心置于该频率上。至少需要 1KHz 刷新率。",
+            "english": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at that frequency. Requires at least 1k filter or loop rate."
         }
     },
     "gyroDynamicNotchCount": {
-        "message": "Dynamic Notch Count",
-        "english": "Dynamic Notch Count",
-        "status": "New entry. Please translate!"
+        "message": "动态陷波器数量",
+        "english": "Dynamic Notch Count"
     },
     "gyroDynamicNotchQ": {
         "message": "动态陷波器 Q 因子",
         "english": "Dynamic Notch Q"
     },
     "gyroDynamicNotchMinHz": {
-        "message": "Dynamic Notch Minimum Frequency",
-        "english": "Dynamic Notch Minimum Frequency",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "动态陷波器最小频率（Hz）",
-            "english": "Dynamic Notch Min Hz"
-        }
+        "message": "动态陷波器最小频率",
+        "english": "Dynamic Notch Minimum Frequency"
     },
     "gyroDynamicNotchMaxHz": {
-        "message": "Dynamic Notch Maximum Frequency",
-        "english": "Dynamic Notch Maximum Frequency",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "动态陷波器最大频率（Hz）",
-            "english": "Dynamic Notch Max Hz"
-        }
+        "message": "动态陷波器最大频率",
+        "english": "Dynamic Notch Maximum Frequency"
     },
     "gyroDynamicNotchCountHelp": {
-        "message": "This sets the number of dynamic notch filters. Setting it at 0 will disable dynamic notch filter. If used standalone, 2 is absolute minimum, 4-6 recommended.",
-        "english": "This sets the number of dynamic notch filters. Setting it at 0 will disable dynamic notch filter. If used standalone, 2 is absolute minimum, 4-6 recommended.",
-        "status": "New entry. Please translate!"
-    },
-    "gyroDynamicNotchQHelp": {
-        "message": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Values between 2.0 and 3.0 are recommended.",
-        "english": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Values between 2.0 and 3.0 are recommended.",
+        "message": "This sets the number of dynamic notch filters. If used standalone without RPM filters, 4-6 is recommended. With RPM filters 2-4 is recommended.",
+        "english": "This sets the number of dynamic notch filters. If used standalone without RPM filters, 4-6 is recommended. With RPM filters 2-4 is recommended.",
         "status": "Modified entry. Please translate!",
         "previous": {
-            "message": "Q因子调整了动态陷波滤波器的宽度。更高的值将使其变得更窄、更精准，较低的值将使其变得更宽、更宽泛。将Q调到很低将会带来很大的滤波器延迟。",
-            "english": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Having a really low value will greatly increase filter delay."
+            "message": "设置动态陷波滤波器的数量。设置为 0 将禁用动态陷波滤波器。如果单独使用，最少需要 2 个，建议使用 4-6 个。",
+            "english": "This sets the number of dynamic notch filters. Setting it at 0 will disable dynamic notch filter. If used standalone, 2 is absolute minimum, 4-6 recommended."
+        }
+    },
+    "gyroDynamicNotchQHelp": {
+        "message": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more precise, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and degrade flight performance.",
+        "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more precise, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and degrade flight performance.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Q因子调整了动态陷波滤波器的宽度。更高的值将使其变得更窄、更精准，较低的值将使其变得更宽、更模糊。 建议设置为2.0 至 3.0 。",
+            "english": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Values between 2.0 and 3.0 are recommended."
         }
     },
     "gyroDynamicNotchMinHzHelp": {
-        "message": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent of 1200 rpm",
-        "english": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent of 1200 rpm",
+        "message": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm.",
+        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm.",
         "status": "Modified entry. Please translate!",
         "previous": {
-            "message": "将此设置为需要由动态陷波器控制的传入噪声的最低频率。",
-            "english": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch."
+            "message": "将其设置为需要由动态陷波控制的最低传入噪声频率。应低于主旋翼频率，但不低于 20 Hz，相当于 1200 RPM",
+            "english": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent of 1200 rpm"
         }
     },
     "gyroDynamicNotchMaxHzHelp": {
-        "message": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be about 10-20% higher than max tail rotor frequency, but no higher than 250Hz if filter rate is 1k. If filter rate is 2k or more, then 330-500 Hz can be used, especially for smaller helis or that with motorized tail (higher range means less precision and performance)",
-        "english": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be about 10-20% higher than max tail rotor frequency, but no higher than 250Hz if filter rate is 1k. If filter rate is 2k or more, then 330-500 Hz can be used, especially for smaller helis or that with motorized tail (higher range means less precision and performance)",
+        "message": "Set this to the highest incoming noise frequency that is needed to be filtered. Should be 10-20% higher than the max tail rotor frequency, but no higher than 250Hz, if filter rate is 1k. If filter rate is 2k or higher, then 330-500 Hz can be used, especially for smaller helis with a motorised tail (higher range means less precision and lower performance).",
+        "english": "Set this to the highest incoming noise frequency that is needed to be filtered. Should be 10-20% higher than the max tail rotor frequency, but no higher than 250Hz, if filter rate is 1k. If filter rate is 2k or higher, then 330-500 Hz can be used, especially for smaller helis with a motorised tail (higher range means less precision and lower performance).",
         "status": "Modified entry. Please translate!",
         "previous": {
-            "message": "将此设置为需要由动态陷波器控制的传入噪声的最高频率。",
-            "english": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch."
+            "message": "将其设置为需要由动态陷波控制的最高传入噪声频率。应比最大尾旋翼频率高 10-20%，但如果滤波器频率为 1k，则不应高于 250Hz。如果滤波器频率为 2k 或更高，则可使用 330-500Hz 的频率，特别是对于较小的直升机或带有电机直驱尾旋翼的直升机（范围越大，精度和性能越低）。",
+            "english": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be about 10-20% higher than max tail rotor frequency, but no higher than 250Hz if filter rate is 1k. If filter rate is 2k or more, then 330-500 Hz can be used, especially for smaller helis or that with motorized tail (higher range means less precision and performance)"
         }
     },
     "gyroDTermLowpassFiltersGroup": {
@@ -5995,13 +5791,8 @@
         "english": "<span class=\"message-negative\">Warning:</span> RPM Filter Reset"
     },
     "dialogGyroResetNote": {
-        "message": "Changing the Setup Type will reset any custom RPM filter settings to defaults.",
-        "english": "Changing the Setup Type will reset any custom RPM filter settings to defaults.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "启用转速过滤器将使自定义转速过滤器恢复默认",
-            "english": "Enabling RPM Filter Setup will reset any custom RPM filter settings to defaults."
-        }
+        "message": "更改设置类型会将任何自定义转速滤波器设置重置为默认值。",
+        "english": "Changing the Setup Type will reset any custom RPM filter settings to defaults."
     },
     "dialogGyroResetAccept": {
         "message": "接受",
@@ -8470,103 +8261,83 @@
     },
     "mode ARM": {
         "message": "解锁",
-        "english": "ARM",
-        "status": "New entry. Please translate!"
+        "english": "ARM"
     },
     "mode ANGLE": {
         "message": "自稳",
-        "english": "ANGLE",
-        "status": "New entry. Please translate!"
+        "english": "ANGLE"
     },
     "mode HORIZON": {
         "message": "半自稳",
-        "english": "HORIZON",
-        "status": "New entry. Please translate!"
+        "english": "HORIZON"
     },
     "mode ALTHOLD": {
         "message": "高度保持",
-        "english": "ALTHOLD",
-        "status": "New entry. Please translate!"
+        "english": "ALTHOLD"
     },
     "mode BEEPER": {
         "message": "蜂鸣器",
-        "english": "BEEPER",
-        "status": "New entry. Please translate!"
+        "english": "BEEPER"
     },
     "mode LEDLOW": {
         "message": "关闭LED",
-        "english": "LEDLOW",
-        "status": "New entry. Please translate!"
+        "english": "LEDLOW"
     },
     "mode CALIB": {
         "message": "校准",
-        "english": "CALIB",
-        "status": "New entry. Please translate!"
+        "english": "CALIB"
     },
     "mode OSD DISABLE": {
         "message": "关闭OSD",
-        "english": "OSD DISABLE",
-        "status": "New entry. Please translate!"
+        "english": "OSD DISABLE"
     },
     "mode TELEMETRY": {
         "message": "遥测",
-        "english": "TELEMETRY",
-        "status": "New entry. Please translate!"
+        "english": "TELEMETRY"
     },
     "mode BLACKBOX": {
         "message": "黑盒子",
-        "english": "BLACKBOX",
-        "status": "New entry. Please translate!"
+        "english": "BLACKBOX"
     },
     "mode FAILSAFE": {
         "message": "失控保护",
-        "english": "FAILSAFE",
-        "status": "New entry. Please translate!"
+        "english": "FAILSAFE"
     },
     "mode BLACKBOX ERASE": {
         "message": "擦除黑盒子",
-        "english": "BLACKBOX ERASE",
-        "status": "New entry. Please translate!"
+        "english": "BLACKBOX ERASE"
     },
     "mode PREARM": {
         "message": "预解锁",
-        "english": "PREARM",
-        "status": "New entry. Please translate!"
+        "english": "PREARM"
     },
     "mode PARALYZE": {
         "message": "瘫痪",
-        "english": "PARALYZE",
-        "status": "New entry. Please translate!"
+        "english": "PARALYZE"
     },
     "mode GPS RESCUE": {
         "message": "GPS 救援",
-        "english": "GPS RESCUE",
-        "status": "New entry. Please translate!"
+        "english": "GPS RESCUE"
     },
     "mode TRAINER": {
         "message": "教练",
-        "english": "TRAINER",
-        "status": "New entry. Please translate!"
+        "english": "TRAINER"
     },
     "mode MSP OVERRIDE": {
         "message": "MSP 覆盖",
-        "english": "MSP OVERRIDE",
-        "status": "New entry. Please translate!"
+        "english": "MSP OVERRIDE"
     },
     "mode STICK COMMANDS DISABLE": {
         "message": "禁用摇杆指令",
-        "english": "STICK COMMANDS DISABLE",
-        "status": "New entry. Please translate!"
+        "english": "STICK COMMANDS DISABLE"
     },
     "mode BEEPER MUTE": {
         "message": "蜂鸣器静音",
-        "english": "BEEPER MUTE",
-        "status": "New entry. Please translate!"
+        "english": "BEEPER MUTE"
     },
     "mode RESCUE": {
         "message": "救机",
-        "english": "RESCUE",
-        "status": "New entry. Please translate!"
+        "english": "RESCUE"
     },
     "flashTab": {
         "message": "更新固件",
