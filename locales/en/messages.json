@@ -4283,7 +4283,7 @@
         "message": "Gyro Dynamic Notch Filter Settings"
     },
     "gyroDynamicNotchFilterHelp": {
-        "message": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at that frequency. Requires at least 1k filter or loop rate."
+        "message": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at those frequencies. Requires at least 1k filter or loop rate."
     },
     "gyroDynamicNotchCount": {
         "message": "Dynamic Notch Count"
@@ -4298,16 +4298,16 @@
         "message": "Dynamic Notch Maximum Frequency"
     },
     "gyroDynamicNotchCountHelp": {
-        "message": "This sets the number of dynamic notch filters. Setting it at 0 will disable dynamic notch filter. If used standalone, 2 is absolute minimum, 4-6 recommended."
+        "message": "This sets the number of dynamic notch filters. If used standalone without RPM filters, 4-6 is recommended. With RPM filters 2-4 is recommended."
     },
     "gyroDynamicNotchQHelp": {
-        "message": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Values between 2.0 and 3.0 are recommended."
+        "message": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more precise, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and degrade flight performance."
     },
     "gyroDynamicNotchMinHzHelp": {
-        "message": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent of 1200 rpm"
+        "message": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm."
     },
     "gyroDynamicNotchMaxHzHelp": {
-        "message": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be about 10-20% higher than max tail rotor frequency, but no higher than 250Hz if filter rate is 1k. If filter rate is 2k or more, then 330-500 Hz can be used, especially for smaller helis or that with motorized tail (higher range means less precision and performance)"
+        "message": "Set this to the highest incoming noise frequency that is needed to be filtered. Should be 10-20% higher than the max tail rotor frequency, but no higher than 250Hz, if filter rate is 1k. If filter rate is 2k or higher, then 330-500 Hz can be used, especially for smaller helis with a motorised tail (higher range means less precision and lower performance)."
     },
     "gyroDTermLowpassFiltersGroup": {
         "message": "D Term Lowpass Filters"
