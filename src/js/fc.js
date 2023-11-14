@@ -648,6 +648,7 @@ const FC = {
         this.RC_CONFIG = {
             rc_center:                    0,
             rc_deflection:                0,
+            rc_arm_throttle:              0,
             rc_min_throttle:              0,
             rc_max_throttle:              0,
             rc_deadband:                  0,

@@ -14,6 +14,7 @@ TABS.receiver = {
     yawDeadband: 0,
     rcCenter: 1500,
     rcDeflection: 500,
+    rcArmThrottle: 1050,
     rcZeroThrottle: 1100,
     rcFullThrottle: 1900,
     telemetryFeature: false,
@@ -269,6 +270,13 @@ TABS.receiver.initialize = function (callback) {
             .val(FC.RC_CONFIG.rc_deflection)
             .change(function () {
                 self.rcDeflection = parseInt($(this).val());
+            })
+            .change();
+
+        $('input[name="arm_throttle"]')
+            .val(FC.RC_CONFIG.rc_arm_throttle)
+            .change(function () {
+                self.rcArmThrottle = parseInt($(this).val());
             })
             .change();
 
@@ -709,6 +717,7 @@ TABS.receiver.initialize = function (callback) {
             FC.RC_CONFIG.rc_center = self.rcCenter;
             FC.RC_CONFIG.rc_deflection = self.rcDeflection;
 
+            FC.RC_CONFIG.rc_arm_throttle = self.rcArmThrottle;
             FC.RC_CONFIG.rc_min_throttle = self.rcZeroThrottle;
             FC.RC_CONFIG.rc_max_throttle = self.rcFullThrottle;
 
