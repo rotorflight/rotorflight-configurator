@@ -1720,7 +1720,7 @@ MspHelper.prototype.crunch = function(code) {
             buffer.push8(FC.ESC_SENSOR_CONFIG.protocol)
                   .push8(FC.ESC_SENSOR_CONFIG.half_duplex)
                   .push8(FC.ESC_SENSOR_CONFIG.update_hz)
-                  .push8(FC.ESC_SENSOR_CONFIG.current_offset)
+                  .push16(FC.ESC_SENSOR_CONFIG.current_offset)
                   .push16(FC.ESC_SENSOR_CONFIG.hw4_current_offset)
                   .push8(FC.ESC_SENSOR_CONFIG.hw4_current_gain)
                   .push8(FC.ESC_SENSOR_CONFIG.hw4_voltage_gain);
