@@ -604,6 +604,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_RC_CONFIG:
                 FC.RC_CONFIG.rc_center = data.readU16();
                 FC.RC_CONFIG.rc_deflection = data.readU16();
+                FC.RC_CONFIG.rc_arm_throttle = data.readU16();
                 FC.RC_CONFIG.rc_min_throttle = data.readU16();
                 FC.RC_CONFIG.rc_max_throttle = data.readU16();
                 FC.RC_CONFIG.rc_deadband = data.readU8();
@@ -1777,6 +1778,7 @@ MspHelper.prototype.crunch = function(code) {
         case MSPCodes.MSP_SET_RC_CONFIG:
             buffer.push16(FC.RC_CONFIG.rc_center)
                   .push16(FC.RC_CONFIG.rc_deflection)
+                  .push16(FC.RC_CONFIG.rc_arm_throttle)
                   .push16(FC.RC_CONFIG.rc_min_throttle)
                   .push16(FC.RC_CONFIG.rc_max_throttle)
                   .push8(FC.RC_CONFIG.rc_deadband)
