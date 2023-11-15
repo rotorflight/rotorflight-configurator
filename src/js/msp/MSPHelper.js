@@ -1051,6 +1051,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.GOVERNOR.gov_autorotation_timeout         = data.readU16();
                 FC.GOVERNOR.gov_autorotation_bailout_time    = data.readU16();
                 FC.GOVERNOR.gov_autorotation_min_entry_time  = data.readU16();
+                FC.GOVERNOR.gov_handover_throttle            = data.readU8();
                 FC.GOVERNOR.gov_pwr_filter                   = data.readU8();
                 FC.GOVERNOR.gov_rpm_filter                   = data.readU8();
                 FC.GOVERNOR.gov_tta_filter                   = data.readU8();
@@ -1910,6 +1911,7 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.GOVERNOR.gov_autorotation_timeout)
                 .push16(FC.GOVERNOR.gov_autorotation_bailout_time)
                 .push16(FC.GOVERNOR.gov_autorotation_min_entry_time)
+                .push8(FC.GOVERNOR.gov_handover_throttle)
                 .push8(FC.GOVERNOR.gov_pwr_filter)
                 .push8(FC.GOVERNOR.gov_rpm_filter)
                 .push8(FC.GOVERNOR.gov_tta_filter);
