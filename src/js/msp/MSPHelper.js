@@ -832,7 +832,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_ADJUSTMENT_RANGES:
                 FC.ADJUSTMENT_RANGES = []; // empty the array as new data is coming in
 
-                const adjustmentRangeCount = data.byteLength / 10; // 10 bytes per item.
+                const adjustmentRangeCount = data.byteLength / 14;
 
                 for (let i = 0; i < adjustmentRangeCount; i++) {
                     const adjustmentRange = {

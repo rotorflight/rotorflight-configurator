@@ -2502,13 +2502,13 @@ input {
 
 .noUi-target {
     background: var(--alternativeBackground);
-    border-color: var(--subtleAccent);
+    border-color: #999;
     box-shadow: none;
 }
 
 .noUi-horizontal .noUi-handle {
     background: var(--sideBackground);
-    border-color: var(--subtleAccent);
+    border-color: #999;
     border-radius: 15px;
     box-shadow: none;
     width: 28px;
@@ -2519,8 +2519,8 @@ input {
 
 .noUi-handle:before,
 .noUi-handle:after {
-    border-color: var(--subtleAccent);
-    background-color: var(--subtleAccent);
+    border-color: #999;
+    background-color: #999;
     height: 10px;
     width: 4px;
     top: 17px;
@@ -2534,9 +2534,30 @@ input {
     box-shadow: none;
 }
 
-.noUi-connect {
+.noUi-target .noUi-connect {
     box-shadow: none;
+    background: var(--accent);
 }
+
+.noUi-target[disabled="disabled"] {
+    border-color: var(--subtleAccent) !important;
+}
+
+.noUi-target[disabled="disabled"] .noUi-connect {
+    background: var(--subtleAccent) !important;
+}
+
+.noUi-target[disabled="disabled"] .noUi-handle {
+    border-color: var(--subtleAccent) !important;
+}
+
+.noUi-target[disabled="disabled"] .noUi-handle:before,
+.noUi-target[disabled="disabled"] .noUi-handle:after {
+    border-color: var(--subtleAccent) !important;
+    background: var(--subtleAccent) !important;
+}
+
+
 
 /** Responsive grid **/
 @media all and (max-width: 575px) {

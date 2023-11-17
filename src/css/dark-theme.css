@@ -149,6 +149,37 @@ button {
     border-style: unset;
 }
 
+.noUi-target {
+    border-color: var(--subtleAccent) !important;
+}
+
+.noUi-background {
+    background: #333 !important;
+}
+
+.noUi-handle {
+    background: var(--sideBackground);
+    border-color: var(--subtleAccent) !important;
+}
+
+.noUi-target[disabled="disabled"] {
+    border-color: #888 !important;
+}
+
+.noUi-target[disabled="disabled"] .noUi-connect {
+    background: #555 !important;
+}
+
+.noUi-target[disabled="disabled"] .noUi-handle {
+    border-color: #888 !important;
+}
+
+.noUi-target[disabled="disabled"] .noUi-handle:before,
+.noUi-target[disabled="disabled"] .noUi-handle:after {
+    border-color: #888 !important;
+    background: #888 !important;
+}
+
 .noUi-pips {
     color: var(--mutedText);
 }
@@ -180,28 +211,32 @@ button {
 
 /* ADJUSTMENTS TAB */
 
-.tab-adjustments .adjustment:nth-child(odd) {
-    background-color: #2f2f2f;
+.tab-adjustments .adjustments tbody:nth-child(odd) {
+    background-color: #454545;
 }
 
-.tab-adjustments .adjustments {
-    background-color: #393b3a;
+.tab-adjustments .adjustments tbody {
+    background-color: #4f5150;
 }
 
-.tab-adjustments .adjustments td {
-    border-top: 1px solid #00000000;
-    border-bottom: 1px solid #00000000;
+.tab-adjustments .adjustments tbody tr td {
+    border-color: var(--alternativeBackground);
 }
 
-.tab-adjustments .adjustment select {
+.tab-adjustments .adjustments select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-adjustments .adjustment input {
+.tab-adjustments .adjustments input {
     background-color: #3a3a3a;
     color: white;
 }
+
+.tab-adjustments .adjustmentBody .value-box {
+    background: #252525;
+}
+
 
 /* AUXILIARY TAB */
 
@@ -788,7 +823,6 @@ progress[value]::-webkit-progress-bar {
 .tab-rates .gui_box span {
     color: white;
 }
-
 
 
 /* PORTS TAB */
