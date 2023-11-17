@@ -2769,6 +2769,12 @@
     "govModeHelp": {
         "message": "The governor maintains the main rotor speed constant.<br><strong>OFF:</strong> Govenor is disabled <br> <strong>PASSTHROUGH:</strong> Only slow spoolup and autorotation bailout<br><strong>STANDARD:</strong> Motor speed is controlled by the FC and speed reference from the ESC.<br><strong>MODE1:</strong> As per statndard but with Collective and Cyclic Precompensation (e.g. for a large increase collective the FC increases the signal sent to the ESC so the motor speed does not sag due to the increased load).<br><strong>MODE2:</strong> as per Mode 1 but also Battery voltage compensation"
     },
+    "govHandoverThrottle": {
+        "message": "Handover throttle [%]"
+    },
+    "govHandoverThrottleHelp": {
+        "message": "Throttle level above which the governor is activated. The motor must be able to start below this throttle level."
+    },
     "govStartupTime": {
         "message": "Startup time"
     },

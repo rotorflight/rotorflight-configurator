@@ -367,6 +367,7 @@ TABS.motors.initialize = function (callback) {
         });
         govModeSelect.val(self.isGovEnabled ? FC.GOVERNOR.gov_mode : 0);
 
+        $('input[id="govHandoverThrottle"]').val(FC.GOVERNOR.gov_handover_throttle).change();
         $('input[id="govStartupTime"]').val(FC.GOVERNOR.gov_startup_time / 10).change();
         $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time / 10).change();
         $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time / 10).change();
@@ -444,6 +445,7 @@ TABS.motors.initialize = function (callback) {
             FC.FEATURE_CONFIG.features.setFeature('GOVERNOR', govMode > 0);
 
             if (govMode > 0) {
+                FC.GOVERNOR.gov_handover_throttle = parseInt($('input[id="govHandoverThrottle"]').val());
                 FC.GOVERNOR.gov_startup_time = Math.round(parseFloat($('input[id="govStartupTime"]').val()) * 10);
                 FC.GOVERNOR.gov_spoolup_time = Math.round(parseFloat($('input[id="govSpoolupTime"]').val()) * 10);
                 FC.GOVERNOR.gov_tracking_time = Math.round(parseFloat($('input[id="govTrackingTime"]').val()) * 10);
