@@ -924,8 +924,14 @@
         "message": "One of the others disarm flags is active when arming",
         "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
     },
-    "statusGPSHead": {
-        "message": "GPS"
+    "statusArmingHead": {
+        "message": "Arming"
+    },
+    "statusArmingDanger": {
+        "message": "<strong class=\"message-negative\">WARNING!</strong> <strong>ARMING is ENABLED.</strong> Never fly the craft with the Configurator connected!</strong>"
+    },
+    "statusEnableArming": {
+        "message": "Enable Arming:"
     },
     "statusInstrumentsHead": {
         "message": "Instruments"
@@ -6360,7 +6366,7 @@
         "message": "Confirm Arming"
     },
     "dialogConfirmArmingNote": {
-        "message": "WARNING: Are you sure you want to <strong>enable arming</strong> while Configurator is connected?<br /><br /><span class=\"message-negative\">NOTE:</span> While armed, all changes to settings, including saving settings, are ignored!"
+        "message": "WARNING: Are you sure you want to <strong>enable arming</strong> while the Configurator is connected?"
     },
     "dialogConfirmArmingConfirm": {
         "message": "Enable"

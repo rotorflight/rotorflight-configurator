@@ -29,7 +29,7 @@ TABS.status = {
         'DSHOT_BITBANG',
         'ACC_CALIB',
         'MOTOR_PROTO',
-        'ARM_SWITCH' // Must be last
+        'ARM_SWITCH'
     ],
     axisNames: [
         { value: 0, text: 'controlAxisRoll' },
@@ -132,57 +132,46 @@ TABS.status.initialize = function (callback) {
             bat_voltage_e = $('.bat-voltage'),
             bat_mah_drawn_e = $('.bat-mah-drawn'),
             bat_mah_drawing_e = $('.bat-mah-drawing'),
-            rssi_e = $('.rssi-value'),
-            gpsFix_e = $('.gpsFix'),
-            gpsSats_e = $('.gpsSats'),
-            gpsAlt_e = $('.gpsAlt'),
-            gpsLat_e = $('.gpsLat'),
-            gpsLon_e = $('.gpsLon'),
             roll_e = $('dd.roll'),
             pitch_e = $('dd.pitch'),
             heading_e = $('dd.heading');
 
         // Configuration status
         switch (FC.CONFIG.configurationState) {
-        case FC.CONFIGURATION_STATES.CONFIGURED:
-            configState_e.html(i18n.getMessage('statusConfigConfigured'));
-            break;
-        case FC.CONFIGURATION_STATES.DEFAULTS_CUSTOM:
-            configState_e.html(i18n.getMessage('statusConfigDefaults'));
-            break;
-        case FC.CONFIGURATION_STATES.DEFAULTS_BARE:
-            configState_e.html(i18n.getMessage('statusConfigBare'));
-            break;
+            case FC.CONFIGURATION_STATES.CONFIGURED:
+                configState_e.html(i18n.getMessage('statusConfigConfigured'));
+                break;
+            case FC.CONFIGURATION_STATES.DEFAULTS_CUSTOM:
+                configState_e.html(i18n.getMessage('statusConfigDefaults'));
+                break;
+            case FC.CONFIGURATION_STATES.DEFAULTS_BARE:
+                configState_e.html(i18n.getMessage('statusConfigBare'));
+                break;
         }
 
-        // DISARM FLAGS
-        var prepareDisarmFlags = function() {
+        // Arming related elements
+        function prepareArmingFlags() {
 
-            // Arming allowed flag
-            arming_disable_flags_e.append('<span id="statusArmingAllowed" i18n="statusArmingAllowed" style="display: none;"></span>');
+            // Hide arm warning
+            $('.arm-danger-row').hide();
 
             // Arming disabled flags
             for (var i = 0; i < FC.CONFIG.armingDisableCount; i++) {
-                // All the known elements but the ARM_SWITCH (it must be always the last element)
-                if (i < self.DISARM_FLAGS.length - 1) {
-                    arming_disable_flags_e.append('<span id="statusArmingDisableFlags' + i + '" class="cf_tip disarm-flag" title="' +
+                // All the known elements
+                if (i < self.DISARM_FLAGS.length) {
+                    arming_disable_flags_e.append('<div id="statusArmingDisableFlags' + i + '" class="cf_tip disarm-flag" title="' +
                         i18n.getMessage('statusArmingDisableFlagsTooltip' + self.DISARM_FLAGS[i]) +
-                        '" style="display: none;">' + self.DISARM_FLAGS[i] + '</span>');
-                }
-                // The ARM_SWITCH, always the last element
-                else if (i == FC.CONFIG.armingDisableCount - 1) {
-                    arming_disable_flags_e.append('<span id="statusArmingDisableFlags' + i + '" class="cf_tip disarm-flag" title="' +
-                        i18n.getMessage('statusArmingDisableFlagsTooltipARM_SWITCH') + '" style="display: none;">ARM_SWITCH</span>');
+                        '" style="display: none;">' + self.DISARM_FLAGS[i] + '</div>');
                 }
                 // Unknown disarm flags
                 else {
-                    arming_disable_flags_e.append('<span id="statusArmingDisableFlags' + i +
-                        '" class="disarm-flag" style="display: none;">' + (i + 1) + '</span>');
+                    arming_disable_flags_e.append('<div id="statusArmingDisableFlags' + i +
+                        '" class="disarm-flag" style="display: none;">' + (i + 1) + '</div>');
                 }
             }
         };
 
-        prepareDisarmFlags();
+        prepareArmingFlags();
 
 
         //
@@ -251,9 +240,10 @@ TABS.status.initialize = function (callback) {
         function get_slow_data() {
 
             MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
-                $('#statusArmingAllowed').toggle(FC.CONFIG.armingDisableFlags == 0);
+                const armingEnabled = (FC.CONFIG.armingDisableFlags == 0);
+                $('.arm-danger-row').toggle(armingEnabled);
                 for (var i = 0; i < FC.CONFIG.armingDisableCount; i++) {
-                    $('#statusArmingDisableFlags'+i).css('display',(FC.CONFIG.armingDisableFlags & (1 << i)) == 0 ? 'none':'inline-block');
+                    $('#statusArmingDisableFlags'+i).toggle((FC.CONFIG.armingDisableFlags & (1 << i)) != 0);
                 }
             });
 
@@ -268,16 +258,6 @@ TABS.status.initialize = function (callback) {
                 // Usually altimeter indicates feet. We show centimeters, as it is more useful here.
                 altitude.setAltitude(FC.SENSOR_DATA.altitude * 100);
             });
-
-            if (have_sensor(FC.CONFIG.activeSensors, 'gps')) {
-                MSP.send_message(MSPCodes.MSP_RAW_GPS, false, false, function () {
-                    gpsFix_e.html((FC.GPS_DATA.fix) ? i18n.getMessage('gpsFixYes') : i18n.getMessage('gpsFixNo'));
-                    gpsSats_e.text(FC.GPS_DATA.numSat);
-                    gpsAlt_e.text(FC.GPS_DATA.alt + ' m');
-                    gpsLat_e.text((FC.GPS_DATA.lat / 10000000).toFixed(4) + ' deg');
-                    gpsLon_e.text((FC.GPS_DATA.lon / 10000000).toFixed(4) + ' deg');
-                });
-            }
         }
 
         function get_fast_data() {
@@ -301,6 +281,37 @@ TABS.status.initialize = function (callback) {
 
         GUI.interval_add('status_data_pull_fast', get_fast_data, 50, true);   // 20 fps
         GUI.interval_add('status_data_pull_slow', get_slow_data, 250, true);  // 4 fps
+
+        const enableArmingSwitch = $('input[id="statusEnableArming"]');
+        const dialogConfirmArming = $('.dialogConfirmArming')[0];
+
+        function updateArming(active) {
+            enableArmingSwitch.prop('checked', active);
+            FC.CONFIG.enableArmingFlag = active;
+            mspHelper.setArmingEnabled(active);
+        }
+
+        enableArmingSwitch.change(function () {
+            if (enableArmingSwitch.prop('checked')) {
+                dialogConfirmArming.showModal();
+            }
+            else {
+                updateArming(false);
+            }
+        });
+
+        $('.dialogConfirmArming-cancelbtn').click(function() {
+            dialogConfirmArming.close();
+            updateArming(false);
+        });
+
+        $('.dialogConfirmArming-confirmbtn').click(function() {
+            dialogConfirmArming.close();
+            updateArming(true);
+        });
+
+        updateArming(FC.CONFIG.enableArmingFlag);
+
 
         GUI.content_ready(callback);
     }

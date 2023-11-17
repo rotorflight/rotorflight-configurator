@@ -6,6 +6,14 @@
             <a id="button-documentation" href="" target="_blank"></a>
         </div>
 
+        <div class="grid-row margin-bottom arm-danger-row">
+            <div class="grid-col full-width">
+                <div class="note arm-danger-note">
+                    <p i18n="statusArmingDanger"></p>
+                </div>
+            </div>
+        </div>
+
         <div class="grid-row margin-bottom">
             <div class="grid-col col3">
                 <div class="gui_box grey full_height">
@@ -28,10 +36,6 @@
                                     <td i18n="statusBoardName""></td>
                                     <td class="board-name"></td>
                                 </tr>
-                                <tr>
-                                    <td id="arming-disable-flag" i18n="statusArmingDisableFlags" class="cf_tip"></td>
-                                    <td class="arming-disable-flags"></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -40,28 +44,19 @@
             <div class="grid-col col3">
                 <div class="gui_box grey full_height">
                     <div class="gui_box_titlebar">
-                        <div class="spacer_box_title" i18n="statusGPSHead"></div>
-                        <div class="gpsFix"></div>
+                        <div class="spacer_box_title" i18n="statusArmingHead"></div>
                     </div>
                     <div class="spacer_box">
-                        <table class="cf_table">
+                        <table class="cf_table arm_table">
                             <tbody>
-                            <tr>
-                                <td i18n="gpsSats"></td>
-                                <td class="gpsSats"></td>
-                            </tr>
-                            <tr>
-                                <td i18n="gpsAltitude"></td>
-                                <td class="gpsAlt"></td>
-                            </tr>
-                            <tr>
-                                <td i18n="gpsLat"></td>
-                                <td class="gpsLat"></td>
-                            </tr>
-                            <tr class="noboarder">
-                                <td i18n="gpsLon"></td>
-                                <td class="gpsLon"></td>
-                            </tr>
+                                <tr>
+                                    <td><span i18n="statusEnableArming"></span></td>
+                                    <td><input type="checkbox" id="statusEnableArming" class="toggle" /></td>
+                                </tr>
+                                <tr>
+                                    <td id="arming-disable-flag" i18n="statusArmingDisableFlags" class="cf_tip"></td>
+                                    <td class="arming-disable-flags"></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -138,6 +133,18 @@
         </div>
 
     </div>
+
+    <dialog class="dialogConfirmArming">
+        <h3 i18n="dialogConfirmArmingTitle"></h3>
+        <div class="content">
+            <div i18n="dialogConfirmArmingNote" style="margin-top: 10px"></div>
+        </div>
+        <div class="buttons">
+            <a href="#" class="dialogConfirmArming-confirmbtn regular-button" i18n="dialogConfirmArmingConfirm"></a>
+            <a href="#" class="dialogConfirmArming-cancelbtn regular-button" i18n="dialogConfirmArmingClose"></a>
+        </div>
+    </dialog>
+
 </div>
 
 <div id="tab-status-templates">

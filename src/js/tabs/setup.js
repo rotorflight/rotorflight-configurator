@@ -118,30 +118,6 @@ TABS.setup.initialize = function (callback) {
             });
         });
 
-        const dialogConfirmArming = $('.dialogConfirmArming')[0];
-        const enableArmingSwitch = $('input[id="initialSetupEnableArming"]');
-
-        enableArmingSwitch.prop('checked', !FC.CONFIG.armingDisabled);
-
-        enableArmingSwitch.change(function () {
-            if (enableArmingSwitch.prop('checked')) {
-                dialogConfirmArming.showModal();
-            }
-            else {
-                mspHelper.setArmingEnabled(false);
-            }
-        });
-
-        $('.dialogConfirmArming-cancelbtn').click(function() {
-            dialogConfirmArming.close();
-            enableArmingSwitch.prop('checked', false).change();
-        });
-
-        $('.dialogConfirmArming-confirmbtn').click(function() {
-            dialogConfirmArming.close();
-            mspHelper.setArmingEnabled(true);
-        });
-
         $('a.backupSettings').click(function () {
             if ($(this).hasClass('disabled')) {
                 return;

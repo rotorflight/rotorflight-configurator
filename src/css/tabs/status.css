@@ -83,25 +83,23 @@
     background-color: #56ac1d;
 }
 
-.tab-status .gpsFix {
-    float: right;
-    margin-top: 3px;
-    margin-right: 5px;
+.tab-status .arm_table tr td {
+    vertical-align: top;
 }
 
-.tab-status .gpsFix span {
-    font-size: 10px;
-    color: #fff;
-    padding: 2px 5px;
-    border-radius: 3px;
+.tab-status .arm_table tr:first-child td {
+    padding-top: 5px;
+    padding-bottom: 10px;
 }
 
-.gpsFixTrue {
-    background-color: #56ac1d;
+.tab-status .arm_table tr td:first-child {
+    min-width: 120px;
 }
 
-.gpsFixFalse {
-    background-color: #e60000;
+.tab-status .arm_table .disarm-flag {
+    padding-left: 5px;
+    font-weight: bold;
+    display: inline-block;
 }
 
 .attitude_info {
@@ -159,23 +157,6 @@
     margin-left: 99px;
 }
 
-.block.gps {
-    width: 185px;
-    margin-bottom: 10px;
-}
-
-.block.gps .fields {
-    padding: 5px 5px 3px 5px;
-}
-
-.block.gps dt {
-    float: left;
-    width: 85px;
-    height: 20px;
-    margin-bottom: 2px;
-    line-height: 20px;
-}
-
 .block.instruments {
     width: 285px;
     align-content: center;
@@ -196,11 +177,6 @@
         height: 50px;
     }
 }
-
-.tab-status .disarm-flag {
-    padding-left: 5px;
-}
-
 
 .tab-status .bars {
     width: 100%;
@@ -341,5 +317,33 @@
 
 .tab-status .bars tr:nth-of-type(19) .fill {
     background-color: #34d8eb;
+}
+
+.tab-status .arm-danger-note {
+    line-height: 25px;
+    font-size: 15px;
+    padding: 14px 16px;
+    margin-bottom: 0;
+}
+
+.tab-status dialog {
+    width: 40em;
+    border-radius: 5px;
+}
+
+.tab-status dialog .buttons {
+    position: static;
+    margin-top: 2em;
+}
+
+.tab-status dialog h3 {
+    margin-bottom: 0.5em;
+}
+
+@media all and (max-width: 575px) {
+    .tab-status dialog {
+        width: calc(100% - 2em);
+        border-radius: unset;
+    }
 }
 

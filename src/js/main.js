@@ -235,7 +235,7 @@ function startProcess() {
                         }
 
                         if (GUI.connected_to) {
-                            mspHelper.setArmingEnabled(tabObj.armingEnabled === true, tabInitialize);
+                            mspHelper.setArmingEnabled(tabObj.armingEnabled === true && FC.CONFIG.enableArmingFlag === true, tabInitialize);
                         }
                         else {
                             tabInitialize();
