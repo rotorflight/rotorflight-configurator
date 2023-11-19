@@ -15,6 +15,11 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v3
 
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
@@ -45,6 +50,11 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v3
+
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
 
     - name: Install Node.js
       uses: actions/setup-node@v3
@@ -77,6 +87,11 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v3
 
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
@@ -107,6 +122,11 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v3
+
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
 
     - name: Install Node.js
       uses: actions/setup-node@v3
