@@ -273,24 +273,32 @@ TABS.receiver.initialize = function (callback) {
             })
             .change();
 
-        $('input[name="arm_throttle"]')
-            .val(FC.RC_CONFIG.rc_arm_throttle)
+        const armThrottle = $('input[name="arm_throttle"]');
+        const zeroThrottle = $('input[name="zero_throttle"]');
+        const fullThrottle = $('input[name="full_throttle"]');
+
+        armThrottle.val(FC.RC_CONFIG.rc_arm_throttle)
             .change(function () {
-                self.rcArmThrottle = parseInt($(this).val());
+                const value = parseInt($(this).val());
+                self.rcArmThrottle = value;
+                zeroThrottle.attr('min', value + 10);
             })
             .change();
 
-        $('input[name="zero_throttle"]')
-            .val(FC.RC_CONFIG.rc_min_throttle)
+        zeroThrottle.val(FC.RC_CONFIG.rc_min_throttle)
             .change(function () {
-                self.rcZeroThrottle = parseInt($(this).val());
+                const value = parseInt($(this).val());
+                self.rcZeroThrottle = value;
+                armThrottle.attr('max', value - 10);
+                fullThrottle.attr('min', value + 10);
             })
             .change();
 
-        $('input[name="full_throttle"]')
-            .val(FC.RC_CONFIG.rc_max_throttle)
+        fullThrottle.val(FC.RC_CONFIG.rc_max_throttle)
             .change(function () {
-                self.rcFullThrottle = parseInt($(this).val());
+                const value = parseInt($(this).val());
+                self.rcFullThrottle = value;
+                zeroThrottle.attr('max', value - 10);
             })
             .change();
 
