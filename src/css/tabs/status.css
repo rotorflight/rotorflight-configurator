@@ -93,7 +93,7 @@
 }
 
 .tab-status .arm_table tr td:first-child {
-    min-width: 120px;
+    min-width: 80px;
 }
 
 .tab-status .arm_table .disarm-flag {
