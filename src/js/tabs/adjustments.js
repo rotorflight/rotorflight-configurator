@@ -311,120 +311,120 @@ TABS.adjustments.initialize = function (callback) {
         const funcStepInput = adjBody.find('.functionStepSize');
         funcStepInput.val(adjRange.adjStep);
 
+        function setEnaRange(min, max, noslide) {
+            enaMinInput.attr('max',max).val(min);
+            enaMaxInput.attr('min',min).val(max);
+            if (noslide !== true)
+                enaSlider.val([min,max]);
+            adjRange.dirty = true;
+            adjRange.enaRange.start = min;
+            adjRange.enaRange.end = max;
+        }
+
         enaSlider.on('slide', function() {
             const range = enaSlider.val();
             const min = parseInt(range[0]);
             const max = parseInt(range[1]);
-            enaMinInput.val(min).attr('max', max);
-            enaMaxInput.val(max).attr('min', min);
-            adjRange.dirty = true;
-            adjRange.enaRange.start = min;
-            adjRange.enaRange.end = max;
+            setEnaRange(min,max,true);
         });
 
         enaMinInput.on('change', function () {
             const min = parseInt(enaMinInput.val());
             const max = parseInt(enaMaxInput.val());
-            enaSlider.val([min,max]);
-            enaMaxInput.attr('min', min);
-            adjRange.dirty = true;
-            adjRange.enaRange.start = min;
+            setEnaRange(min,max);
         });
 
         enaMaxInput.on('change', function() {
             const min = parseInt(enaMinInput.val());
             const max = parseInt(enaMaxInput.val());
-            enaSlider.val([min,max]);
-            enaMinInput.attr('max', max);
-            adjRange.dirty = true;
-            adjRange.enaRange.end = max;
+            setEnaRange(min,max);
         });
+
+        function setDecRange(min, max, noslide) {
+            decMinInput.attr('max',max).val(min);
+            decMaxInput.attr('min',min).val(max);
+            if (noslide !== true)
+                decSlider.val([min,max]);
+            adjRange.dirty = true;
+            adjRange.adjRange1.start = min;
+            adjRange.adjRange1.end = max;
+        }
 
         decSlider.on('slide', function() {
             const range = decSlider.val();
             const min = parseInt(range[0]);
             const max = parseInt(range[1]);
-            decMinInput.val(min).attr('max', max);
-            decMaxInput.val(max).attr('min', min);
-            adjRange.dirty = true;
-            adjRange.adjRange1.start = min;
-            adjRange.adjRange1.end = max;
+            setDecRange(min,max,true);
         });
 
         decMinInput.on('change', function () {
             const min = parseInt(decMinInput.val());
             const max = parseInt(decMaxInput.val());
-            decSlider.val([min,max]);
-            decMaxInput.attr('min', min);
-            adjRange.dirty = true;
-            adjRange.adjRange1.start = min;
+            setDecRange(min,max);
         });
 
         decMaxInput.on('change', function () {
             const min = parseInt(decMinInput.val());
             const max = parseInt(decMaxInput.val());
-            decSlider.val([min,max]);
-            decMinInput.attr('max', max);
-            adjRange.dirty = true;
-            adjRange.adjRange1.end = max;
+            setDecRange(min,max);
         });
+
+        function setIncRange(min, max, noslide) {
+            incMinInput.attr('max',max).val(min);
+            incMaxInput.attr('min',min).val(max);
+            if (noslide !== true)
+               incSlider.val([min,max]);
+            adjRange.dirty = true;
+            adjRange.adjRange2.start = min;
+            adjRange.adjRange2.end = max;
+        }
 
         incSlider.on('slide', function() {
             const range = incSlider.val();
             const min = parseInt(range[0]);
             const max = parseInt(range[1]);
-            incMinInput.val(min).attr('max', max);
-            incMaxInput.val(max).attr('min', min);
-            adjRange.dirty = true;
-            adjRange.adjRange2.start = min;
-            adjRange.adjRange2.end = max;
+            setIncRange(min,max,true);
         });
 
         incMinInput.on('change', function () {
             const min = parseInt(incMinInput.val());
             const max = parseInt(incMaxInput.val());
-            incSlider.val([min,max]);
-            incMaxInput.attr('min', min);
-            adjRange.dirty = true;
-            adjRange.adjRange2.start = min;
+            setIncRange(min,max);
         });
 
         incMaxInput.on('change', function () {
             const min = parseInt(incMinInput.val());
             const max = parseInt(incMaxInput.val());
-            incSlider.val([min,max]);
-            incMinInput.attr('max', max);
-            adjRange.dirty = true;
-            adjRange.adjRange2.end = max;
+            setIncRange(min,max);
         });
+
+        function setValRange(min, max, noslide) {
+            funcMinInput.attr('max',max).val(min);
+            funcMaxInput.attr('min',min).val(max);
+            if (noslide !== true)
+                valSlider.val([min,max]);
+            adjRange.dirty = true;
+            adjRange.adjMin = min;
+            adjRange.adjMax = max;
+        }
 
         valSlider.on('slide', function() {
             const range = valSlider.val();
             const min = parseInt(range[0]);
             const max = parseInt(range[1]);
-            funcMinInput.val(min).attr('max', max);
-            funcMaxInput.val(max).attr('min', min);
-            adjRange.dirty = true;
-            adjRange.adjMin = min;
-            adjRange.adjMax = max;
+            setValRange(min,max,true);
         });
 
         funcMinInput.on('change', function () {
             const min = parseInt(funcMinInput.val());
             const max = parseInt(funcMaxInput.val());
-            funcMaxInput.attr('min', min);
-            valSlider.val([min,max]);
-            adjRange.dirty = true;
-            adjRange.adjMin = min;
+            setValRange(min,max);
         });
 
         funcMaxInput.on('change', function () {
             const min = parseInt(funcMinInput.val());
             const max = parseInt(funcMaxInput.val());
-            funcMinInput.attr('max', max);
-            valSlider.val([min,max]);
-            adjRange.dirty = true;
-            adjRange.adjMax = max;
+            setValRange(min,max);
         });
 
         funcStepInput.on('change', function () {
@@ -446,14 +446,9 @@ TABS.adjustments.initialize = function (callback) {
             valPipsConfig.values = adjConfig.pips;
             valPipsConfig.density = density(adjConfig.min, adjConfig.max, adjConfig.ticks);
             valPips.noUiSlider_pips(valPipsConfig, true);
-            funcMinInput.val(adjConfig.min)
-                .attr('min', adjConfig.min)
-                .attr('max', adjConfig.max)
-                .trigger('change');
-            funcMaxInput.val(adjConfig.max)
-                .attr('min', adjConfig.min)
-                .attr('max', adjConfig.max)
-                .trigger('change');
+            funcMinInput.attr('min', adjConfig.min);
+            funcMaxInput.attr('max', adjConfig.max);
+            setValRange(adjConfig.min, adjConfig.max);
         });
 
         enaChannelList.on('change', function () {
@@ -461,8 +456,7 @@ TABS.adjustments.initialize = function (callback) {
             adjRange.dirty = true;
             adjRange.enaChannel = channel;
             if (channel == self.ALWAYS_ON_CH) {
-                enaMinInput.val(1500);
-                enaMaxInput.val(1500).trigger('change');
+                setEnaRange(1500,1500);
                 adjBody.find('.ena-channel-value').text('-');
                 adjBody.find('.ena-slider').attr("disabled", "disabled");
                 adjBody.find('.enaChannelRanges input').prop('disabled', true);
@@ -484,35 +478,34 @@ TABS.adjustments.initialize = function (callback) {
         function enaSliderAuto() {
             const min = xround(adjRange.enaChannelPos - 25, 5);
             const max = xround(adjRange.enaChannelPos + 25, 5);
-            enaMinInput.val(min).trigger('change');
-            enaMaxInput.val(max).trigger('change');
+            setEnaRange(min,max);
         }
         enaSlider.find('.noUi-handle-lower').on('dblclick', enaSliderAuto);
         enaSlider.find('.noUi-handle-upper').on('dblclick', enaSliderAuto);
 
         decSlider.find('.noUi-handle-lower').on('dblclick', function () {
             if (adjRange.adjType == 1) {
-                const pos = xround(adjRange.adjChannelPos, 5);
-                decMinInput.val(pos).trigger('change');
+                const min = xround(adjRange.adjChannelPos, 5);
+                const max = Math.max(adjRange.adjRange1.end, min);
+                setDecRange(min,max);
             }
             else if (adjRange.adjType == 2) {
                 const min = xround(adjRange.adjChannelPos - 10, 5);
                 const max = xround(adjRange.adjChannelPos + 10, 5);
-                decMinInput.val(min).trigger('change');
-                decMaxInput.val(max).trigger('change');
+                setDecRange(min,max);
             }
         });
 
         decSlider.find('.noUi-handle-upper').on('dblclick', function () {
             if (adjRange.adjType == 1) {
-                const pos = xround(adjRange.adjChannelPos + 4, 5);
-                decMaxInput.val(pos).trigger('change');
+                const max = xround(adjRange.adjChannelPos + 4, 5);
+                const min = Math.min(adjRange.adjRange1.start, max);
+                setDecRange(min,max);
             }
             else if (adjRange.adjType == 2) {
                 const min = xround(adjRange.adjChannelPos - 10, 5);
                 const max = xround(adjRange.adjChannelPos + 10, 5);
-                decMinInput.val(min).trigger('change');
-                decMaxInput.val(max).trigger('change');
+                setDecRange(min,max);
             }
         });
 
@@ -520,8 +513,7 @@ TABS.adjustments.initialize = function (callback) {
             if (adjRange.adjType == 2) {
                 const min = xround(adjRange.adjChannelPos - 10, 5);
                 const max = xround(adjRange.adjChannelPos + 10, 5);
-                incMinInput.val(min).trigger('change');
-                incMaxInput.val(max).trigger('change');
+                setIncRange(min,max);
             }
         });
 
@@ -529,8 +521,7 @@ TABS.adjustments.initialize = function (callback) {
             if (adjRange.adjType == 2) {
                 const min = xround(adjRange.adjChannelPos - 10, 5);
                 const max = xround(adjRange.adjChannelPos + 10, 5);
-                incMinInput.val(min).trigger('change');
-                incMaxInput.val(max).trigger('change');
+                setIncRange(min,max);
             }
         });
 
@@ -552,8 +543,7 @@ TABS.adjustments.initialize = function (callback) {
                     adjFuncList.val(0).trigger('change');
                 }
                 if (adjRange.adjMin != 0 || adjRange.adjMax != 100) {
-                    funcMinInput.val(0);
-                    funcMaxInput.val(100).trigger('change');
+                    setValRange(0,100);
                 }
             }
             else if (adjRange.adjType == 1) {
