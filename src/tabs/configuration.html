@@ -115,13 +115,6 @@
                             </div>
                             <div class="spacer_box">
                                 <table class="featuresMultiple">
-                                    <!--thead>
-                                        <tr>
-                                            <th i18n="configurationSerialPortIdentifier"></th>
-                                            <th i18n="configurationSerialPortFunction"></th>
-                                            <th i18n="configurationSerialPortSpeed"></th>
-                                        </tr>
-                                    </thead-->
                                     <tbody class="serialPorts" id="noline">
                                         <!-- table generated here -->
                                     </tbody>
@@ -265,7 +258,10 @@
         <tbody>
             <tr class="portConfiguration">
                 <td>
-                    <p class="identifier"></p>
+                    <div class="identifier">
+                        <div class="portid"></div>
+                        <div class="uartid"></div>
+                    </div>
                 </td>
                 <td>
                     <select class="function">

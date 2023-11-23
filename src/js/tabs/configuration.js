@@ -8,7 +8,7 @@ TABS.configuration = {
 TABS.configuration.initialize = function (callback) {
     const self = this;
 
-    const serialPortNames = {
+    const uartNames = {
         0: 'UART1',
         1: 'UART2',
         2: 'UART3',
@@ -22,6 +22,45 @@ TABS.configuration.initialize = function (callback) {
         20: 'USB VCP',
         30: 'SOFTSERIAL1',
         31: 'SOFTSERIAL2',
+    };
+
+    const portNamesRF2 = {
+        'F7A1':
+        {
+            0: 'DSM Ⓓ',
+            1: 'S.BUS',
+            2: 'Port Ⓒ',
+            3: 'Port Ⓐ',
+            4: 'Port Ⓔ',
+            5: 'Port Ⓑ',
+        },
+        'F7A2':
+        {
+            0: 'DSM Ⓓ',
+            1: 'S.BUS',
+            2: 'Port Ⓕ',
+            3: 'Port Ⓐ',
+            4: 'Port Ⓔ',
+            5: 'Port Ⓖ',
+        },
+        'F7A3':
+        {
+            0: 'DSM Ⓓ',
+            1: 'S.BUS',
+            2: 'Port Ⓒ',
+            3: 'Port Ⓕ',
+            4: 'Port Ⓔ',
+            5: 'Port Ⓑ',
+        },
+        'F7A4':
+        {
+            0: 'DSM Ⓓ',
+            1: 'S.BUS',
+            2: 'Port Ⓖ',
+            3: 'Port Ⓕ',
+            4: 'Port Ⓔ',
+            5: 'Port Ⓖ',
+        },
     };
 
     const portTypes = {
@@ -62,6 +101,8 @@ TABS.configuration.initialize = function (callback) {
         '38400',
         '57600',
         '115200',
+        '230400',
+        '460800',
     ];
 
     baudRateOptions[portTypes.MAVLINK] = [
@@ -71,6 +112,8 @@ TABS.configuration.initialize = function (callback) {
         '38400',
         '57600',
         '115200',
+        '230400',
+        '460800',
     ];
 
     baudRateOptions[portTypes.TELEM] = [
@@ -134,6 +177,7 @@ TABS.configuration.initialize = function (callback) {
         Promise.resolve(true)
             .then(() => MSP.promise(MSPCodes.MSP_STATUS))
             .then(() => MSP.promise(MSPCodes.MSP_NAME))
+            .then(() => MSP.promise(MSPCodes.MSP_BOARD_INFO))
             .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
@@ -141,7 +185,6 @@ TABS.configuration.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_SENSOR_ALIGNMENT))
             .then(() => MSP.promise(MSPCodes.MSP_BOARD_ALIGNMENT_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_ACC_TRIM))
-            .then(() => MSP.promise(MSPCodes.MSP_VTX_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_SERIAL_CONFIG))
             .then(callback);
     }
@@ -281,11 +324,19 @@ TABS.configuration.initialize = function (callback) {
 
             const element = portTemplate.clone();
 
-            const nameElement = element.find('.identifier');
+            const portElement = element.find('.portid');
+            const uartElement = element.find('.uartid');
             const funcElement = element.find('select.function');
             const baudElement = element.find('select.baudrate');
 
-            nameElement.text(serialPortNames[serialPort.identifier]);
+            if (FC.CONFIG.boardDesign in portNamesRF2) {
+                const portNames = portNamesRF2[FC.CONFIG.boardDesign];
+                portElement.text(portNames[serialPort.identifier]);
+                uartElement.text('[' + uartNames[serialPort.identifier] + ']');
+            }
+            else {
+                portElement.text(uartNames[serialPort.identifier]);
+            }
 
             for (const func of portFunctions) {
                 const funcName = i18n.getMessage('portsFunction_' + func.name);

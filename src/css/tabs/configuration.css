@@ -41,7 +41,6 @@
 
 .tab-configuration table tr td:first-child {
     text-align: left;
-    width: 55px;
 }
 
 .tab-configuration table thead tr:first-child {
@@ -53,6 +52,19 @@
     margin-bottom: 5px;
     margin-top: -5px;
     padding: 0;
+}
+
+.tab-configuration .serialPorts .portid {
+    display: inline-block;
+    min-width: 60px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.tab-configuration .serialPorts .uartid {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: normal;
 }
 
 .tab-configuration .serialPorts td:nth-child(1) {
