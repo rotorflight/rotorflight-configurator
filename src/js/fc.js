@@ -337,10 +337,11 @@ const FC = {
         this.MOTOR_TELEMETRY_DATA = {
             rpm:                        [0, 0, 0, 0, 0, 0, 0, 0],
             invalidPercent:             [0, 0, 0, 0, 0, 0, 0, 0],
-            temperature:                [0, 0, 0, 0, 0, 0, 0, 0],
             voltage:                    [0, 0, 0, 0, 0, 0, 0, 0],
             current:                    [0, 0, 0, 0, 0, 0, 0, 0],
             consumption:                [0, 0, 0, 0, 0, 0, 0, 0],
+            temperature:                [0, 0, 0, 0, 0, 0, 0, 0],
+            temperature2:               [0, 0, 0, 0, 0, 0, 0, 0],
         };
 
         this.GPS_DATA = {

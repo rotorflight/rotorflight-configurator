@@ -123,6 +123,8 @@ TABS.blackbox = {
         "rpm",
         "motors",
         "servos",
+        "vbec",
+        "vbus",
     ],
 
     LOG_RATES: {

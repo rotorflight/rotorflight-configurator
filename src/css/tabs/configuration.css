@@ -86,16 +86,15 @@
 }
 
 .tab-configuration .serialPorts .identifier {
-    min-width: 60px;
+    min-width: 50px;
 }
 
 .tab-configuration .serialPorts .function {
-    min-width: 200px;
     width: 95%;
 }
 
 .tab-configuration .serialPorts .baudrate {
-    min-width: 100px;
+    min-width: 90px;
     width: 95%;
 }
 

@@ -177,12 +177,13 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_MOTOR_TELEMETRY:
                 const telemMotorCount = data.readU8();
                 for (let i = 0; i < telemMotorCount; i++) {
-                    FC.MOTOR_TELEMETRY_DATA.rpm[i] = data.readU32();   // RPM
+                    FC.MOTOR_TELEMETRY_DATA.rpm[i] = data.readU32();              // RPM
                     FC.MOTOR_TELEMETRY_DATA.invalidPercent[i] = data.readU16();   // 10000 = 100.00%
-                    FC.MOTOR_TELEMETRY_DATA.temperature[i] = data.readU8();       // degrees celsius
-                    FC.MOTOR_TELEMETRY_DATA.voltage[i] = data.readU16();          // 0.01V per unit
-                    FC.MOTOR_TELEMETRY_DATA.current[i] = data.readU16();          // 0.01A per unit
+                    FC.MOTOR_TELEMETRY_DATA.voltage[i] = data.readU16();          // 1mV per unit
+                    FC.MOTOR_TELEMETRY_DATA.current[i] = data.readU16();          // 1mv per unit
                     FC.MOTOR_TELEMETRY_DATA.consumption[i] = data.readU16();      // mAh
+                    FC.MOTOR_TELEMETRY_DATA.temperature[i] = data.read16();       // 0.1C
+                    FC.MOTOR_TELEMETRY_DATA.temperature2[i] = data.read16();      // 0.1C
                 }
                 break;
 
@@ -234,39 +235,36 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_VOLTAGE_METERS:
                 FC.VOLTAGE_METERS = [];
-                const voltageMeterLength = 2;
+                const voltageMeterLength = 3;
                 for (let i = 0; i < (data.byteLength / voltageMeterLength); i++) {
                     const voltageMeter = {
                         id: data.readU8(),
-                        voltage: data.readU8() / 10.0,
+                        voltage: data.readU16() / 1000,
                     };
-
                     FC.VOLTAGE_METERS.push(voltageMeter);
                 }
                 break;
 
             case MSPCodes.MSP_CURRENT_METERS:
-
                 FC.CURRENT_METERS = [];
                 const currentMeterLength = 5;
                 for (let i = 0; i < (data.byteLength / currentMeterLength); i++) {
                     const currentMeter = {
                         id: data.readU8(),
-                        mAhDrawn: data.readU16(), // mAh
-                        amperage: data.readU16() / 1000, // A
+                        amperage: data.readU16() / 100,     // A
+                        mAhDrawn: data.readU16(),           // mAh
                     };
-
                     FC.CURRENT_METERS.push(currentMeter);
                 }
                 break;
 
             case MSPCodes.MSP_BATTERY_STATE:
                 FC.BATTERY_STATE.cellCount = data.readU8();
-                FC.BATTERY_STATE.capacity = data.readU16(); // mAh
+                FC.BATTERY_STATE.capacity = data.readU16();         // mAh
 
-                FC.BATTERY_STATE.voltage = data.readU8() / 10.0; // V
-                FC.BATTERY_STATE.mAhDrawn = data.readU16(); // mAh
-                FC.BATTERY_STATE.amperage = data.readU16() / 100; // A
+                FC.BATTERY_STATE.voltage = data.readU8() / 10;      // V
+                FC.BATTERY_STATE.mAhDrawn = data.readU16();         // mAh
+                FC.BATTERY_STATE.amperage = data.readU16() / 100;   // A
                 FC.BATTERY_STATE.batteryState = data.readU8();
                 FC.BATTERY_STATE.voltage = data.readU16() / 100;
                 break;
@@ -276,7 +274,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 const voltageMeterCount = data.readU8();
                 for (let i = 0; i < voltageMeterCount; i++) {
                     const subframeLength = data.readU8();
-                    if (subframeLength !== 5) {
+                    if (subframeLength !== 7) {
                         for (let j = 0; j < subframeLength; j++) {
                             data.readU8();
                         }
@@ -284,8 +282,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                         const voltageMeterConfig = {
                             id: data.readU8(),
                             sensorType: data.readU8(),
-                            vbatscale: data.readU8(),
-                            vbatresdivval: data.readU8(),
+                            vbatscale: data.readU16(),
+                            vbatresdivval: data.readU16(),
                             vbatresdivmultiplier: data.readU8(),
                         };
 
@@ -2416,8 +2414,8 @@ MspHelper.prototype.sendVoltageMeterConfig = function(configIndex, onCompleteCal
     const buffer = [];
 
     buffer.push8(config.id)
-          .push8(config.vbatscale)
-          .push8(config.vbatresdivval)
+          .push16(config.vbatscale)
+          .push16(config.vbatresdivval)
           .push8(config.vbatresdivmultiplier);
 
     MSP.send_message(MSPCodes.MSP_SET_VOLTAGE_METER_CONFIG, buffer, false, onCompleteCallback);

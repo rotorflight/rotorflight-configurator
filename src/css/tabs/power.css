@@ -39,9 +39,8 @@
 
 .tab-power .number,
 .tab-power .select {
-    margin-bottom: 5px;
-    padding-bottom: 5px;
-    border-bottom: 1px dotted var(--superSubtleAccent);
+    margin-bottom: 2px;
+    padding-bottom: 2px;
     width: 100%;
     float: left;
     clear: left;
@@ -62,18 +61,15 @@
     margin-bottom: 0;
 }
 
-.tab-power .require-support {
-    display: none;
+.tab-power .voltage-meter td,
+.tab-power .amperage-meter td {
+    padding: 8px;
 }
 
-.tab-power.supported .require-support {
-    display: block;
-}
-
-.tab-power .require-upgrade {
-    display: block;
-}
-
-.tab-power.supported .require-upgrade {
-    display: none;
+.tab-power .voltage-meter .label,
+.tab-power .voltage-meter .value,
+.tab-power .amperage-meter .label,
+.tab-power .amperage-meter .value {
+    font-size: 12px;
+    font-weight: 600;
 }

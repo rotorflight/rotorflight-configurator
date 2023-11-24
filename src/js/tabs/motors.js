@@ -184,12 +184,13 @@ TABS.motors.initialize = function (callback) {
             const voltBar = motorInfo.find('.Volt');
             const currBar = motorInfo.find('.Curr');
             const tempBar = motorInfo.find('.Temp');
+            const temp2Bar = motorInfo.find('.Temp2');
             const errorBar = motorInfo.find('.Errors');
 
             const rpmAvailable = self.isFreqSensorEnabled || self.isEscSensorEnabled || FC.MOTOR_CONFIG.use_dshot_telemetry;
 
-            let rpmMax  = 10000;
-            let voltMax = 5;
+            let rpmMax  = 5000;
+            let voltMax = 10;
             let currMax = 10;
             let tempMax = 150;
 
@@ -207,6 +208,7 @@ TABS.motors.initialize = function (callback) {
             meterLabel(voltBar, '0V', voltMax.toFixed(0) + 'V');
             meterLabel(currBar, '0A', currMax.toFixed(0) + 'A');
             meterLabel(tempBar, '0&deg;C', '150&deg;C');
+            meterLabel(temp2Bar, '0&deg;C', '150&deg;C');
             meterLabel(errorBar, '0%', '100%');
 
             const motorSlider = motorInfo.find('.motorOverrideSlider');
@@ -264,7 +266,7 @@ TABS.motors.initialize = function (callback) {
                 }
                 meterBar(rpmBar, rpm, rpm/rpmMax);
 
-                const volt = FC.MOTOR_TELEMETRY_DATA.voltage[motorIndex] / 100;
+                const volt = FC.MOTOR_TELEMETRY_DATA.voltage[motorIndex] / 1000;
                 if (volt > voltMax) {
                     voltMax = Math.max(FC.BATTERY_STATE.cellCount * FC.BATTERY_CONFIG.vbatmaxcellvoltage, voltMax);
                     voltMax = Math.max(voltMax, roundTo(volt,1));
@@ -272,15 +274,19 @@ TABS.motors.initialize = function (callback) {
                 }
                 meterBar(voltBar, volt.toFixed(2) + 'V', volt/voltMax);
 
-                const curr = FC.MOTOR_TELEMETRY_DATA.current[motorIndex] / 100;
+                const curr = FC.MOTOR_TELEMETRY_DATA.current[motorIndex] / 1000;
                 if (curr > currMax) {
                     currMax = roundTo(curr, 10);
                     meterLabel(currBar, '0A', currMax.toFixed(0) + 'A');
                 }
                 meterBar(currBar, curr.toFixed(1) + 'A', curr/currMax);
 
-                const temp = FC.MOTOR_TELEMETRY_DATA.temperature[motorIndex];
+                const temp = FC.MOTOR_TELEMETRY_DATA.temperature[motorIndex] / 10;
                 meterBar(tempBar, temp + '&deg;C', temp/tempMax);
+
+                const temp2 = FC.MOTOR_TELEMETRY_DATA.temperature2[motorIndex] / 10;
+                meterBar(temp2Bar, temp2 + '&deg;C', temp2/tempMax);
+                temp2Bar.toggle(self.isEscSensorEnabled && temp2 > 0);
 
                 const ratio = FC.MOTOR_TELEMETRY_DATA.invalidPercent[motorIndex] / 100;
                 meterBar(errorBar, ratio + '%', ratio / 100);
