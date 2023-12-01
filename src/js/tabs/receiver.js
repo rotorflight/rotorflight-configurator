@@ -138,12 +138,12 @@ TABS.receiver = {
         { name: 'LTM',                  id: 16,    sensors: 0xFFFFFFFF },
     ],
     telemetrySensorList: [
+        { name: 'MODE',                 id:  3, },
         { name: 'VOLTAGE',              id:  0, },
         { name: 'CURRENT',              id:  1, },
         { name: 'FUEL_LEVEL',           id:  2, },
         { name: 'USED_CAPACITY',        id: 20, },
         { name: 'TEMPERATURE',          id: 19, },
-        { name: 'MODE',                 id:  3, },
         { name: 'PITCH',                id:  7, },
         { name: 'ROLL',                 id:  8, },
         { name: 'HEADING',              id:  9, },
