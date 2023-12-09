@@ -398,10 +398,16 @@ GuiControl.prototype.content_ready = function (callback) {
     this.switchery();
 
     if (CONFIGURATOR.connectionValid) {
-        // Build link to in-use CF version documentation
-        const documentationButton = $('div#content #button-documentation');
+        // Find tab name
+        const wikiLoc = $('#content .tab_title').attr("i18n");
+        // Build link to Rotorflight documentation
+        const documentationButton = $('#content #button-documentation');
         documentationButton.html("Wiki");
-        documentationButton.attr("href","https://github.com/rotorflight/rotorflight/wiki");
+        documentationButton.attr("target", "_rfwiki");
+        documentationButton.attr("rel", "noopener noreferrer");
+        if (documentationButton.attr("href") == '' || documentationButton.attr("href") == null) {
+            documentationButton.attr("href",buildWikiURL(wikiLoc));
+        }
     }
 
     // loading tooltip
