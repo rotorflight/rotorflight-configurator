@@ -404,7 +404,7 @@ GuiControl.prototype.content_ready = function (callback) {
         const documentationButton = $('div#content #button-documentation');
         documentationButton.html("Wiki");
         documentationButton.attr("target","_rfwiki");
-        if(documentationButton.attr("href") == '' || documentationButton.attr("href") == null){
+        if (documentationButton.attr("href") == '' || documentationButton.attr("href") == null){
             documentationButton.attr("href",buildWikiURL(wikiLoc));
         }
     }
