@@ -396,22 +396,17 @@ GuiControl.prototype.set_zoom = function(zoom_level, show_box) {
 GuiControl.prototype.content_ready = function (callback) {
 
     this.switchery();
-
     if (CONFIGURATOR.connectionValid) {
-
-		//find page title
+    //find page title
         const pageTitle = $('div#content .tab_title');
-		var wikiLoc = pageTitle.attr("i18n");
-
+        const wikiLoc = pageTitle.attr("i18n");
         // Build link to in-use CF version documentation
         const documentationButton = $('div#content #button-documentation');
         documentationButton.html("Wiki");
-		documentationButton.attr("target","_rfwiki");
-
-		if(documentationButton.attr("href") == '' || documentationButton.attr("href") == null){
-			documentationButton.attr("href",buildWikiURL(wikiLoc));
-		}
-
+        documentationButton.attr("target","_rfwiki");
+        if(documentationButton.attr("href") == '' || documentationButton.attr("href") == null){
+            documentationButton.attr("href",buildWikiURL(wikiLoc));
+        }
     }
 
     // loading tooltip
