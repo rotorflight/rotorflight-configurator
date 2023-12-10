@@ -29,9 +29,9 @@ function buildWikiURL(wikiLoc){
         loc = wiki[wikiLoc];
         if (loc == undefined){
             return wikiURL + wikiLoc;
-            } else if (loc == ''){
-                return wikiURL;
-            } else {
+        } else if (loc == ''){
+            return wikiURL;
+        } else {
             return loc;
         }
     }
