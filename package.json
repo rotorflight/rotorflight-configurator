@@ -102,7 +102,6 @@
     "gulp-xml-transformer": "^5.1.1",
     "gulp-yarn": "^3.0.0",
     "gulp-zip": "^5.0.0",
-    "husky": "^4.3.0",
     "karma": "^6.4.0",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^3.1.1",
@@ -132,10 +131,5 @@
   },
   "optionalDependencies": {
     "appdmg": "^0.6.4"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint"
-    }
   }
 }
