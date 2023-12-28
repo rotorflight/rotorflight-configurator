@@ -300,6 +300,7 @@ TABS.mixer.initialize = function (callback) {
 
         $('#mixerCyclicCalibration').val(cyclicRate).change();
         $('#mixerCollectiveCalibration').val(collectiveRate).change();
+        $('#mixerCollectiveGeoCorrection').val(FC.MIXER_CONFIG.coll_geo_correction / 5).change();
         $('#mixerCollectiveLimit').val(collectiveMax).change();
         $('#mixerCyclicLimit').val(cyclicMax).change();
         $('#mixerTotalPitchLimit').val(totalMax).change();
@@ -373,6 +374,7 @@ TABS.mixer.initialize = function (callback) {
             FC.MIXER_CONFIG.swash_trim[2] = parseInt($('#mixerSwashCollectiveTrim').val() * 10);
             FC.MIXER_CONFIG.tail_rotor_mode = parseInt($('#mixerTailRotorMode').val());
             FC.MIXER_CONFIG.tail_motor_idle = parseInt($('#mixerTailMotorIdle').val() * 10);
+            FC.MIXER_CONFIG.coll_geo_correction = parseInt($('#mixerCollectiveGeoCorrection').val() * 5);
 
             if (FC.MIXER_CONFIG.tail_rotor_mode > 0)
                 FC.MIXER_CONFIG.tail_center_trim = parseInt($('#mixerTailMotorCenterTrim').val() * 10);

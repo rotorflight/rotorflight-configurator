@@ -636,6 +636,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MIXER_CONFIG.swash_trim[1] = data.read16();
                 FC.MIXER_CONFIG.swash_trim[2] = data.read16();
                 FC.MIXER_CONFIG.coll_rpm_correction = data.readU8();
+                FC.MIXER_CONFIG.coll_geo_correction = data.read8();
                 break;
 
             case MSPCodes.MSP_FEATURE_CONFIG:
@@ -1591,7 +1592,8 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.MIXER_CONFIG.swash_trim[0])
                 .push16(FC.MIXER_CONFIG.swash_trim[1])
                 .push16(FC.MIXER_CONFIG.swash_trim[2])
-                .push8(FC.MIXER_CONFIG.coll_rpm_correction);
+                .push8(FC.MIXER_CONFIG.coll_rpm_correction)
+                .push8(FC.MIXER_CONFIG.coll_geo_correction);
             break;
 
         case MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG:

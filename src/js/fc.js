@@ -210,6 +210,7 @@ const FC = {
             swash_trim:                 [ 0, 0, 0 ],
             blade_pitch_limit:          0,
             coll_rpm_correction:        0,
+            coll_geo_correction:        0,
         };
 
         this.MIXER_INPUTS =             [];

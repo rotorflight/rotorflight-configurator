@@ -2274,6 +2274,12 @@
     "mixerCollectiveCalibrationHelp": {
         "message": "Adjust the collective gain to match the mechanical gain in the head design."
     },
+    "mixerCollectiveGeoCorrection": {
+        "message": "Collective Geometry Correction [%]"
+    },
+    "mixerCollectiveGeoCorrectionHelp": {
+        "message": "Adjust until the collective positive and negative deflection are equal."
+    },
     "mixerTotalPitchLimit": {
         "message": "Total blade pitch limit [&deg;]"
     },
