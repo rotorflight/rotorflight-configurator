@@ -2301,14 +2301,14 @@
     "mixerSwashPhaseHelp": {
         "message": "The phase offset for the swashplate controls."
     },
-    "mixerSwashTrim1": {
-        "message": "Link trim #1"
+    "mixerSwashRollTrim": {
+        "message": "Roll trim [%]"
     },
-    "mixerSwashTrim2": {
-        "message": "Link trim #2"
+    "mixerSwashPitchTrim": {
+        "message": "Pitch trim [%]"
     },
-    "mixerSwashTrim3": {
-        "message": "Link trim #3"
+    "mixerSwashCollectiveTrim": {
+        "message": "Collective trim [%]"
     },
     "mixerSwashTrimHelp": {
         "message": "Trim for swashplate linkages. Use only if the linkages are not adjustable."
@@ -2386,7 +2386,7 @@
         "message": "Set tail motor throttle value for zero yaw command."
     },
     "mixerSwashLinkTrim": {
-        "message": "Swashplate Link Trims"
+        "message": "Swashplate Trims"
     },
     "mixerInputChannels": {
         "message": "Mixer Control Inputs"

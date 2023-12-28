@@ -632,9 +632,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MIXER_CONFIG.swash_ring = data.readU8();
                 FC.MIXER_CONFIG.swash_phase = data.read16();
                 FC.MIXER_CONFIG.blade_pitch_limit = data.readU16();
-                FC.MIXER_CONFIG.swash_trim[0] = data.read8();
-                FC.MIXER_CONFIG.swash_trim[1] = data.read8();
-                FC.MIXER_CONFIG.swash_trim[2] = data.read8();
+                FC.MIXER_CONFIG.swash_trim[0] = data.read16();
+                FC.MIXER_CONFIG.swash_trim[1] = data.read16();
+                FC.MIXER_CONFIG.swash_trim[2] = data.read16();
                 FC.MIXER_CONFIG.coll_rpm_correction = data.readU8();
                 break;
 
@@ -1588,9 +1588,9 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.MIXER_CONFIG.swash_ring)
                 .push16(FC.MIXER_CONFIG.swash_phase)
                 .push16(FC.MIXER_CONFIG.blade_pitch_limit)
-                .push8(FC.MIXER_CONFIG.swash_trim[0])
-                .push8(FC.MIXER_CONFIG.swash_trim[1])
-                .push8(FC.MIXER_CONFIG.swash_trim[2])
+                .push16(FC.MIXER_CONFIG.swash_trim[0])
+                .push16(FC.MIXER_CONFIG.swash_trim[1])
+                .push16(FC.MIXER_CONFIG.swash_trim[2])
                 .push8(FC.MIXER_CONFIG.coll_rpm_correction);
             break;
 

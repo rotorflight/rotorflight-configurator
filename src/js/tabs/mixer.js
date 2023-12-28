@@ -115,7 +115,7 @@ TABS.mixer.initialize = function (callback) {
                 reinitialiseConnection(callback);
             }
             else {
-                if (callback) callback();
+                callback?.();
             }
         }
 
@@ -248,6 +248,7 @@ TABS.mixer.initialize = function (callback) {
                               FC.MIXER_INPUTS[1].rate != -FC.MIXER_INPUTS[2].rate);
 
         self.customConfig |= (FC.MIXER_INPUTS[1].max !=  FC.MIXER_INPUTS[2].max);
+        self.customConfig |= (FC.MIXER_INPUTS[1].min !=  FC.MIXER_INPUTS[2].min);
 
         self.customConfig |= (FC.MIXER_INPUTS[1].max != -FC.MIXER_INPUTS[1].min);
         self.customConfig |= (FC.MIXER_INPUTS[2].max != -FC.MIXER_INPUTS[2].min);
@@ -293,9 +294,9 @@ TABS.mixer.initialize = function (callback) {
 
         $('#mixerSwashPhase').val(FC.MIXER_CONFIG.swash_phase * 0.1).change();
 
-        $('#mixerSwashTrim1').val(FC.MIXER_CONFIG.swash_trim[0]).change();
-        $('#mixerSwashTrim2').val(FC.MIXER_CONFIG.swash_trim[1]).change();
-        $('#mixerSwashTrim3').val(FC.MIXER_CONFIG.swash_trim[2]).change();
+        $('#mixerSwashRollTrim').val(FC.MIXER_CONFIG.swash_trim[0] * 0.1).change();
+        $('#mixerSwashPitchTrim').val(FC.MIXER_CONFIG.swash_trim[1] * 0.1).change();
+        $('#mixerSwashCollectiveTrim').val(FC.MIXER_CONFIG.swash_trim[2] * 0.1).change();
 
         $('#mixerCyclicCalibration').val(cyclicRate).change();
         $('#mixerCollectiveCalibration').val(collectiveRate).change();
@@ -367,9 +368,9 @@ TABS.mixer.initialize = function (callback) {
             //FC.MIXER_CONFIG.swash_ring = parseInt($('#mixerSwashRing').val());
             FC.MIXER_CONFIG.main_rotor_dir = parseInt($('#mixerMainRotorDirection').val());
             FC.MIXER_CONFIG.blade_pitch_limit = $('#mixerTotalPitchLimit').val() / 0.012;
-            FC.MIXER_CONFIG.swash_trim[0] = parseInt($('#mixerSwashTrim1').val());
-            FC.MIXER_CONFIG.swash_trim[1] = parseInt($('#mixerSwashTrim2').val());
-            FC.MIXER_CONFIG.swash_trim[2] = parseInt($('#mixerSwashTrim3').val());
+            FC.MIXER_CONFIG.swash_trim[0] = parseInt($('#mixerSwashRollTrim').val() * 10);
+            FC.MIXER_CONFIG.swash_trim[1] = parseInt($('#mixerSwashPitchTrim').val() * 10);
+            FC.MIXER_CONFIG.swash_trim[2] = parseInt($('#mixerSwashCollectiveTrim').val() * 10);
             FC.MIXER_CONFIG.tail_rotor_mode = parseInt($('#mixerTailRotorMode').val());
             FC.MIXER_CONFIG.tail_motor_idle = parseInt($('#mixerTailMotorIdle').val() * 10);
 
