@@ -224,7 +224,8 @@ TABS.profiles.initialize = function (callback) {
             const checked = $(this).is(':checked');
             $('.tab-profiles .rescueMode .suboption').toggle(checked);
             $('.tab-profiles .rescueMode .subhelp').toggle(checked);
-            $('.tab-profiles .rescueAltHold').toggle(checked);
+            // Hide unless already in use
+            $('.tab-profiles .rescueAltHold').toggle(checked && FC.PID_PROFILE.rescueMode > 1);
         });
         rescueModeCheck.prop('checked', FC.PID_PROFILE.rescueMode > 0).change();
 
