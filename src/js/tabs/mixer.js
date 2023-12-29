@@ -324,7 +324,7 @@ TABS.mixer.initialize = function (callback) {
                 const yawMin = FC.MIXER_INPUTS[3].min * 0.1;
                 $('#mixerTailMotorMinYaw').val(yawMin.toFixed(1));
                 $('#mixerTailMotorMaxYaw').val(yawMax.toFixed(1));
-                $('#mixerTailMotorCenterTrim').val(FC.MIXER_CONFIG.tail_center_trim / 4);
+                $('#mixerTailMotorCenterTrim').val(FC.MIXER_CONFIG.tail_center_trim * 0.1);
                 $('.mixerOverrideAxis .mixerTailMotor').addClass('mixerOverrideActive');
                 $('.mixerOverrideAxis .mixerTailRotor').removeClass('mixerOverrideActive');
                 if (change)
@@ -335,7 +335,7 @@ TABS.mixer.initialize = function (callback) {
                 const yawMin = FC.MIXER_INPUTS[3].min * 0.024;
                 $('#mixerTailRotorMinYaw').val(yawMin.toFixed(1));
                 $('#mixerTailRotorMaxYaw').val(yawMax.toFixed(1));
-                $('#mixerTailRotorCenterTrim').val(FC.MIXER_CONFIG.tail_center_trim / 10);
+                $('#mixerTailRotorCenterTrim').val(FC.MIXER_CONFIG.tail_center_trim * 0.024);
                 $('.mixerOverrideAxis .mixerTailRotor').addClass('mixerOverrideActive');
                 $('.mixerOverrideAxis .mixerTailMotor').removeClass('mixerOverrideActive');
                 if (change)
@@ -375,9 +375,9 @@ TABS.mixer.initialize = function (callback) {
             FC.MIXER_CONFIG.tail_motor_idle = parseInt($('#mixerTailMotorIdle').val() * 10);
 
             if (FC.MIXER_CONFIG.tail_rotor_mode > 0)
-                FC.MIXER_CONFIG.tail_center_trim = parseInt($('#mixerTailMotorCenterTrim').val() * 4);
+                FC.MIXER_CONFIG.tail_center_trim = parseInt($('#mixerTailMotorCenterTrim').val() * 10);
             else
-                FC.MIXER_CONFIG.tail_center_trim = parseInt($('#mixerTailRotorCenterTrim').val() * 10);
+                FC.MIXER_CONFIG.tail_center_trim = parseInt($('#mixerTailRotorCenterTrim').val() / 0.024);
 
             self.MIXER_CONFIG_dirty = true;
             self.needSave = true;
