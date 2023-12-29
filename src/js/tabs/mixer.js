@@ -136,6 +136,12 @@ TABS.mixer.initialize = function (callback) {
         mixerOverride.addClass('mixerOverrideActive');
         mixerOverride.find('.mixerOverrideName').text(i18n.getMessage(Mixer.inputNames[inputIndex]));
 
+        const leftLabel = i18n.getMessage('mixerOverrideSliderLeftLabel' + inputIndex);
+        const rightLabel = i18n.getMessage('mixerOverrideSliderRightLabel' + inputIndex);
+
+        mixerOverride.find('.mixerOverrideSliderLeftLabel').text(leftLabel);
+        mixerOverride.find('.mixerOverrideSliderRightLabel').text(rightLabel);
+
         mixerInput.attr('min', axis.min);
         mixerInput.attr('max', axis.max);
         mixerInput.attr('step', axis.step);

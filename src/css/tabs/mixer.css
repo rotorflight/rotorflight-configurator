@@ -176,6 +176,7 @@
     height: 75px;
     padding: 2px 20px 2px 20px;
     text-align: left;
+    vertical-align: top;
     border-right: 0;
 }
 
@@ -192,7 +193,7 @@
 }
 
 .tab-mixer .mixerOverrideSlider {
-    margin-top: -20px;
+    margin-top: 20px;
 }
 
 .tab-mixer .mixerOverrideSlider .noUi-pips {
@@ -205,6 +206,18 @@
 
 .tab-mixer .mixerOverrideSlider .noUi-pips .noUi-value-large {
     padding-top: 15px;
+}
+
+.tab-mixer .mixerOverrideSliderLeftLabel {
+    float: left;
+    color: #999;
+    padding: 2px 0;
+}
+
+.tab-mixer .mixerOverrideSliderRightLabel {
+    float: right;
+    color: #999;
+    padding: 2px 2px;
 }
 
 .tab-mixer dialog {

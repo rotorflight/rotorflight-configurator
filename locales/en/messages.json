@@ -2427,6 +2427,30 @@
     "mixerOverrideSlider": {
         "message": ""
     },
+    "mixerOverrideSliderLeftLabel1": {
+        "message": "Left"
+    },
+    "mixerOverrideSliderRightLabel1": {
+        "message": "Right"
+    },
+    "mixerOverrideSliderLeftLabel2": {
+        "message": "Backward"
+    },
+    "mixerOverrideSliderRightLabel2": {
+        "message": "Forward"
+    },
+    "mixerOverrideSliderLeftLabel3": {
+        "message": "CW"
+    },
+    "mixerOverrideSliderRightLabel3": {
+        "message": "CCW"
+    },
+    "mixerOverrideSliderLeftLabel4": {
+        "message": "Down"
+    },
+    "mixerOverrideSliderRightLabel4": {
+        "message": "Up"
+    },
     "mixerRuleNOP": {
         "message": "-"
     },
