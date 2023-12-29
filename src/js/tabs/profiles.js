@@ -97,17 +97,20 @@ TABS.profiles.initialize = function (callback) {
         });
 
         if (FC.PID_PROFILE.pid_mode == 0) {
-            show_warning('profilesPIDPassthroughWarning');
+            show_warning('profilesPIDModeZeroWarning');
             $('.tab-profiles .pid_config').hide();
         }
         else if (FC.PID_PROFILE.pid_mode == 1) {
-            show_warning('profilesPIDCompatibilityWarning');
+            show_warning('profilesPIDModeOneWarning');
+        }
+        else if (FC.PID_PROFILE.pid_mode == 2) {
+            show_warning('profilesPIDModeTwoWarning');
         }
         else if (FC.PID_PROFILE.pid_mode == 3) {
             show_warning('profilesPIDModeThreeWarning');
         }
         else if (FC.PID_PROFILE.pid_mode > 3) {
-            show_warning('profilesPIDCustomWarning');
+            show_warning('profilesPIDModeCustomWarning');
             $('.tab-profiles .pid_config').hide();
         }
 

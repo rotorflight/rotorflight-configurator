@@ -1531,16 +1531,19 @@
     "profilesSubTab6": {
         "message": "Profile #6"
     },
-    "profilesPIDPassthroughWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Passthrough Mode</b>.<br>Please change the settings in the <b>CLI</b>."
+    "profilesPIDModeZeroWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>Passthrough Mode</b>.<br>Please use the <b>CLI</b> to change the PID settings."
     },
-    "profilesPIDCompatibilityWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Rotorflight-1 Compatiblity</b> Mode.<br>Please use the <b>CLI</b to change the PID settings>."
+    "profilesPIDModeOneWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 1</b>.<br>Please use the <b>CLI</b> to change the PID settings."
+    },
+    "profilesPIDModeTwoWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>."
     },
     "profilesPIDModeThreeWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually to the <b>PID Test Mode 3</b>.<br>Please use the <b>CLI</b> to change the advanced PID settings."
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b>, that uses HSI. Please check the Offset gains."
     },
-    "profilesPIDCustomWarning": {
+    "profilesPIDModeCustomWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings."
     },
     "profilesPIDGains": {
