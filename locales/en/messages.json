@@ -1541,7 +1541,7 @@
         "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>."
     },
     "profilesPIDModeThreeWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b>, that uses HSI. Please check the Offset gains."
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b>, that uses HSI.<br>Please check the Offset gains."
     },
     "profilesPIDModeCustomWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings."
@@ -4503,6 +4503,9 @@
     },
     "gyroRpmFilterSetupCustom": {
         "message": "Custom"
+    },
+    "gyroRpmFilterConfigNote": {
+        "message": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable."
     },
     "gyroRpmFilterCustomNote": {
         "message": "<span class=\"message-negative\">Warning:</span> Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings."

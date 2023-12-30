@@ -257,6 +257,7 @@ TABS.gyro.initialize = function (callback) {
             $('.rpm_filter_settings').toggle(advanced);
             $('.rpm_filter_notches').toggle(advanced);
             $('.rpm_filter_active').attr('disabled', !enabled);
+            $('.gyroRpmFilterConfigNoteRow').toggle(enabled);
             $('.gyroRpmFilterCustomNoteRow').toggle(custom);
         }
 
