@@ -3031,13 +3031,13 @@
         "message": "Tail Torque Assist (TTA) gain"
     },
     "govTTAGainHelp": {
-        "message": "Tail Torque Assist gain. This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 0..100"
+        "message": "Tail Torque Assist strength (gain). This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 50..150"
     },
     "govTTALimit": {
-        "message": "Tail Torque Assist (TTA) limit"
+        "message": "Tail Torque Assist (TTA) limit [%]"
     },
     "govTTALimitHelp": {
-        "message": "Tail Torque Assist maximum. How much extra headspeed can be applied to control the tail in the negative direction. Usually 0..50"
+        "message": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%."
     },
     "govYawPrecomp": {
         "message": "Yaw precompensation"
