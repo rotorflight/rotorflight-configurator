@@ -93,19 +93,31 @@ def load_translation(old_loc, new_eng):
             elif tryConvert(old_loc[key]['english']) == new_eng[key]['message']:
                 new_loc[key]['message'] = tryConvert(old_loc[key]['message'])
                 new_loc[key]['english'] = new_eng[key]['message']
-                new_loc[key]['status'] = convert
+                if 'status' in old_loc[key]:
+                    new_loc[key]['status'] = old_loc[key]['status']
+                else:
+                    new_loc[key]['status'] = convert
                 if 'description' in new_eng[key]:
                     new_loc[key]['description'] = new_eng[key]['description']
-                new_loc[key]['previous'] = old_loc[key]
+                if 'previous' in old_loc[key]:
+                    new_loc[key]['previous'] = old_loc[key]['previous']
+                elif old_loc[key]['message'] != old_loc[key]['english']:
+                    new_loc[key]['previous'] = old_loc[key]
 
             ## CASE: Message edited - translation needed
             else:
                 new_loc[key]['message'] = new_eng[key]['message']
                 new_loc[key]['english'] = new_eng[key]['message']
-                new_loc[key]['status'] = changed
+                if 'status' in old_loc[key]:
+                    new_loc[key]['status'] = old_loc[key]['status']
+                else:
+                    new_loc[key]['status'] = changed
                 if 'description' in new_eng[key]:
                     new_loc[key]['description'] = new_eng[key]['description']
-                new_loc[key]['previous'] = old_loc[key]
+                if 'previous' in old_loc[key]:
+                    new_loc[key]['previous'] = old_loc[key]['previous']
+                elif old_loc[key]['message'] != old_loc[key]['english']:
+                    new_loc[key]['previous'] = old_loc[key]
 
         ## CASE: No entry in translation
         else:
