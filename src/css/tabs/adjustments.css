@@ -120,6 +120,7 @@
 .tab-adjustments .adjustmentBody .range-input {
     width: 60px;
     height: 18px;
+    line-height:18px;
     font-size: 12px;
     text-align: right;
 }

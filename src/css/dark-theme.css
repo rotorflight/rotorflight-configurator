@@ -211,6 +211,10 @@ button {
 
 /* ADJUSTMENTS TAB */
 
+.tab-adjustments .adjustments {
+    background-color: #454545;
+}
+
 .tab-adjustments .adjustments tbody:nth-child(odd) {
     background-color: #454545;
 }
