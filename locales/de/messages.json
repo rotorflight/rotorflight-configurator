@@ -1079,9 +1079,20 @@
         "english": "One of the others disarm flags is active when arming",
         "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
     },
-    "statusGPSHead": {
-        "message": "GPS",
-        "english": "GPS"
+    "statusArmingHead": {
+        "message": "Arming",
+        "english": "Arming",
+        "status": "New entry. Please translate!"
+    },
+    "statusArmingDanger": {
+        "message": "<strong class=\"message-negative\">WARNING!</strong> <strong>ARMING is ENABLED.</strong> Never fly the craft with the Configurator connected!</strong>",
+        "english": "<strong class=\"message-negative\">WARNING!</strong> <strong>ARMING is ENABLED.</strong> Never fly the craft with the Configurator connected!</strong>",
+        "status": "New entry. Please translate!"
+    },
+    "statusEnableArming": {
+        "message": "Enable Arming:",
+        "english": "Enable Arming:",
+        "status": "New entry. Please translate!"
     },
     "statusInstrumentsHead": {
         "message": "Instrumente",
@@ -1878,21 +1889,34 @@
         "message": "Profil #6",
         "english": "Profile #6"
     },
-    "profilesPIDPassthroughWarning": {
-        "message": "<span class=\"message-negative\">Warnung:</span> Der PID-Regler ist manuell im <b>Passthrough Mode</b> konfiguriert.<br>Bitte ändere die erweiterten Einstellungen in der <b>CLI</b>.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Passthrough Mode</b>.<br>Please change the settings in the <b>CLI</b>."
+    "profilesPIDModeZeroWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>Passthrough Mode</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>Passthrough Mode</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
+        "status": "New entry. Please translate!"
     },
-    "profilesPIDCompatibilityWarning": {
-        "message": "<span class=\"message-negative\">Warnung:</span> Der PID-Regler ist manuell im <b>Rotorflight-1 Kompatibilitäts-</b> Mode konfiguriert.<br>Bitte verwende die <b>CLI</b um die PID-Einstellungen zu ändern>.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Rotorflight-1 Compatiblity</b> Mode.<br>Please use the <b>CLI</b to change the PID settings>."
+    "profilesPIDModeOneWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 1</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 1</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesPIDModeTwoWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>.",
+        "status": "New entry. Please translate!"
     },
     "profilesPIDModeThreeWarning": {
-        "message": "<span class=\"message-negative\">Warnung> Der PID-Regler ist manuell im <b>PID Test Mode 3</b>.<br>Bitte verwende die <b>CLI</b um die erweiterten PID-Einstellungen zu ändern.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually to the <b>PID Test Mode 3</b>.<br>Please use the <b>CLI</b> to change the advanced PID settings."
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b>, that uses HSI.<br>Please check the Offset gains.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b>, that uses HSI.<br>Please check the Offset gains.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<span class=\"message-negative\">Warnung> Der PID-Regler ist manuell im <b>PID Test Mode 3</b>.<br>Bitte verwende die <b>CLI</b um die erweiterten PID-Einstellungen zu ändern.",
+            "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually to the <b>PID Test Mode 3</b>.<br>Please use the <b>CLI</b> to change the advanced PID settings."
+        }
     },
-    "profilesPIDCustomWarning": {
+    "profilesPIDModeCustomWarning": {
         "message": "<span class=\"message-negative\">Warnung:</span> Der PID-Regler ist manuell mit Parametern konfiguriert, die hier nicht dargestellt werden können .<br>Bitte verwende die <b>CLI</b um die PID-Einstellungen zu ändern.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings."
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings.",
+        "status": "Reused translation. Please check!"
     },
     "profilesPIDGains": {
         "message": "Achse",
@@ -1993,6 +2017,16 @@
     "receiverHelpStickDeflection": {
         "message": "Der Höchstwert (in µs) für die Knüppelauslenkung aus der Mitte, für Roll/Nick/Gier.",
         "english": "The maximum value (in µs) for stick deflection from the center, for RPY."
+    },
+    "receiverArmingThrottle": {
+        "message": "Throttle Channel value for arming",
+        "english": "Throttle Channel value for arming",
+        "status": "New entry. Please translate!"
+    },
+    "receiverHelpArmingThrottle": {
+        "message": "The channel value (in µs) under which arming is allowed",
+        "english": "The channel value (in µs) under which arming is allowed",
+        "status": "New entry. Please translate!"
     },
     "receiverZeroThrottle": {
         "message": "Gashebel Kanalwert für 0% Gashebel",
@@ -2206,6 +2240,11 @@
         "message": "Link hinzufügen",
         "english": "Add Link"
     },
+    "auxiliaryAlwaysChannelSelect": {
+        "message": "ALWAYS",
+        "english": "ALWAYS",
+        "status": "New entry. Please translate!"
+    },
     "auxiliaryAutoChannelSelect": {
         "message": "AUTO",
         "english": "AUTO"
@@ -2238,21 +2277,80 @@
         "message": "Benutze Speicherplatz 2 und einen 3 Pos. Schalter auf AUX4, um die Auswahl des Rate Profils über diesen 3 Kanal Schalter auf dem selben Kanal auszuwählen.",
         "english": "Use a three position switch on AUX4 to select enable Rate Profile Selection via the same three position switch on the same channel."
     },
-    "adjustmentsColumnEnable": {
-        "message": "falls aktiviert",
-        "english": "If enabled"
+    "adjustmentsColumnMode": {
+        "message": "Mode",
+        "english": "Mode",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsColumnWhenChannel": {
-        "message": "falls Kanal",
-        "english": "when channel"
+    "adjustmentsColumnChannels": {
+        "message": "Channels",
+        "english": "Channels",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsColumnIsInRange": {
-        "message": "ist im Bereich von",
-        "english": "is in range"
+    "adjustmentsColumnSliders": {
+        "message": "Range Sliders",
+        "english": "Range Sliders",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsColumnThenApplyFunction": {
-        "message": "Wert des Kanals übernehmen zwischen <br>Minimum und Maximum in Schrittweite übernehmen",
-        "english": "then apply value from channel,<br>limited between minimum and maximum, with step size"
+    "adjustmentsColumnRanges": {
+        "message": "Value Ranges",
+        "english": "Value Ranges",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsTypeOff": {
+        "message": "Off",
+        "english": "Off",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsTypeMapped": {
+        "message": "Mapped",
+        "english": "Mapped",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsTypeStepped": {
+        "message": "Stepped",
+        "english": "Stepped",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentEnableChannel": {
+        "message": "Enable Channel",
+        "english": "Enable Channel",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentValueChannel": {
+        "message": "Value Channel",
+        "english": "Value Channel",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentFunctionValue": {
+        "message": "Value",
+        "english": "Value",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentRangeEnable": {
+        "message": "Ena:",
+        "english": "Ena:",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentRangeInc": {
+        "message": "Inc:",
+        "english": "Inc:",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentRangeDec": {
+        "message": "Dec:",
+        "english": "Dec:",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentRangeValue": {
+        "message": "Value:",
+        "english": "Value:",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentRangeStep": {
+        "message": "Step:",
+        "english": "Step:",
+        "status": "New entry. Please translate!"
     },
     "adjustmentsMin": {
         "message": "Min",
@@ -2262,9 +2360,45 @@
         "message": "Max",
         "english": "Max"
     },
+    "adjustmentsRange": {
+        "message": "Active",
+        "english": "Active",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsRangeInc": {
+        "message": "Increase",
+        "english": "Increase",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsRangeDec": {
+        "message": "Decrease",
+        "english": "Decrease",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsRangeScale": {
+        "message": "Scale",
+        "english": "Scale",
+        "status": "New entry. Please translate!"
+    },
     "adjustmentsFunctionNone": {
         "message": "Keine Veränderung",
         "english": "No changes"
+    },
+    "adjustmentsFunctionRateProfile": {
+        "message": "Rate Profilauswahl",
+        "english": "Rate Profile Selection"
+    },
+    "adjustmentsFunctionPIDProfile": {
+        "message": "Profilauswahl",
+        "english": "Profile Selection"
+    },
+    "adjustmentsFunctionLEDProfile": {
+        "message": "LED Profilauswahl",
+        "english": "LED Profile Selection"
+    },
+    "adjustmentsFunctionOSDProfile": {
+        "message": "OSD Profilauswahl",
+        "english": "OSD Profile Selection"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "Nick Rate",
@@ -2350,10 +2484,6 @@
         "message": "Heck F-gain",
         "english": "Yaw F-gain"
     },
-    "adjustmentsFunctionYawCenter": {
-        "message": "Heck Mittenoffset",
-        "english": "Yaw Center Offset"
-    },
     "adjustmentsFunctionYawCWStopGain": {
         "message": "Heck Rechts Stop Verstärkung",
         "english": "Yaw CW Stop Gain"
@@ -2370,29 +2500,98 @@
         "message": "Heck Kollektiv Vorkompensation",
         "english": "Yaw Collective Precomp"
     },
-    "adjustmentsFunctionYawImpulseFF": {
-        "message": "Heck Kollektiv Impuls Vorkompensation",
-        "english": "Yaw Collective Impulse Precomp"
+    "adjustmentsFunctionYawCollectiveDyn": {
+        "message": "Yaw Collective Impulse FF",
+        "english": "Yaw Collective Impulse FF",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionRescueCollective": {
-        "message": "Rettung Kollektiv",
-        "english": "Rescue Collective"
+    "adjustmentsFunctionYawCollectiveDecay": {
+        "message": "Yaw Collective Impulse FF Decay",
+        "english": "Yaw Collective Impulse FF Decay",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionRescueCollectiveBoost": {
-        "message": "Rettung Kollektiv Boost",
-        "english": "Rescue Collective Boost"
+    "adjustmentsFunctionPitchCollectiveFF": {
+        "message": "Kollektiv Pitch Precomnp",
+        "english": "Pitch Collective Precomnp"
     },
-    "adjustmentsFunctionAngleLevelStrength": {
-        "message": "Angle mode Stärke",
-        "english": "Angle mode leveling strength"
+    "adjustmentsFunctionPitchGyroCutoff": {
+        "message": "Pitch Gyro Cutoff",
+        "english": "Pitch Gyro Cutoff",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionHorizonLevelStrength": {
-        "message": "Horizont-Modus Leveling Stärke",
-        "english": "Horizon mode leveling strength"
+    "adjustmentsFunctionRollGyroCutoff": {
+        "message": "Roll Gyro Cutoff",
+        "english": "Roll Gyro Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionYawGyroCutoff": {
+        "message": "Yaw Gyro Cutoff",
+        "english": "Yaw Gyro Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionPitchDtermCutoff": {
+        "message": "Pitch D-term Cutoff",
+        "english": "Pitch D-term Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRollDtermCutoff": {
+        "message": "Roll D-term Cutoff",
+        "english": "Roll D-term Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionYawDtermCutoff": {
+        "message": "Yaw D-term Cutoff",
+        "english": "Yaw D-term Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRescueClimbCollective": {
+        "message": "Rescue Climb Collective",
+        "english": "Rescue Climb Collective",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRescueHoverCollective": {
+        "message": "Rescue Hover Collective",
+        "english": "Rescue Hover Collective",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRescueHoverAltitude": {
+        "message": "Rescue Hover Altitude",
+        "english": "Rescue Hover Altitude",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRescueAltP": {
+        "message": "Rescue Altitude P-gain",
+        "english": "Rescue Altitude P-gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRescueAltI": {
+        "message": "Rescue Altitude I-gain",
+        "english": "Rescue Altitude I-gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRescueAltD": {
+        "message": "Rescue Altitude D-gain",
+        "english": "Rescue Altitude D-gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionAngleLevelGain": {
+        "message": "Angle Level Gain",
+        "english": "Angle Level Gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionHorizonLevelGain": {
+        "message": "Horizon Level Gain",
+        "english": "Horizon Level Gain",
+        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionAcroTrainerGain": {
-        "message": "Acro Trainer Leveling Stärke",
-        "english": "Acro Trainer leveling strength"
+        "message": "Acro Trainer Gain",
+        "english": "Acro Trainer Gain",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Acro Trainer Leveling Stärke",
+            "english": "Acro Trainer leveling strength"
+        }
     },
     "adjustmentsFunctionGovernorGain": {
         "message": "Governor PID-gain",
@@ -2426,33 +2625,45 @@
         "message": "Governor Kollektiv Pitch Precomp",
         "english": "Governor Collective Precomp"
     },
-    "adjustmentsFunctionRateProfile": {
-        "message": "Rate Profilauswahl",
-        "english": "Rate Profile Selection"
+    "adjustmentsFunctionPitchB": {
+        "message": "Pitch B-gain",
+        "english": "Pitch B-gain",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionPIDProfile": {
-        "message": "Profilauswahl",
-        "english": "Profile Selection"
+    "adjustmentsFunctionRollB": {
+        "message": "Roll B-gain",
+        "english": "Roll B-gain",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionOSDProfile": {
-        "message": "OSD Profilauswahl",
-        "english": "OSD Profile Selection"
+    "adjustmentsFunctionYawB": {
+        "message": "Yaw B-gain",
+        "english": "Yaw B-gain",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionLEDProfile": {
-        "message": "LED Profilauswahl",
-        "english": "LED Profile Selection"
+    "adjustmentsFunctionPitchO": {
+        "message": "Pitch O-gain",
+        "english": "Pitch O-gain",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionPitchCollectiveFF": {
-        "message": "Kollektiv Pitch Precomnp",
-        "english": "Pitch Collective Precomnp"
+    "adjustmentsFunctionRollO": {
+        "message": "Roll O-gain",
+        "english": "Roll O-gain",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionPitchCollectiveImpulseFF": {
-        "message": "Kollektiv Pitch Impuls Precomnp",
-        "english": "Pitch Collective Impulse Precomnp"
+    "adjustmentsFunctionCrossCouplingGain": {
+        "message": "Cross Coupling Gain",
+        "english": "Cross Coupling Gain",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionSwashPhase": {
-        "message": "Taumelscheibe Phasenwinkel",
-        "english": "Swash Phase Angle"
+    "adjustmentsFunctionCrossCouplingRatio": {
+        "message": "Cross Coupling Ratio",
+        "english": "Cross Coupling Ratio",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionCrossCouplingCutoff": {
+        "message": "Cross Coupling Cutoff",
+        "english": "Cross Coupling Cutoff",
+        "status": "New entry. Please translate!"
     },
     "servoHelp": {
         "message": "Servo 101<ul><li>Überprüfe zunächst die Servorichtungen. Prüfe die zyklischen Servos, indem z.B. etwas kollektiv Pitch gegeben wird. Bei Bedarf die Servorichtung umkehren.</li><li>Justieren der Servoarme durch Aktivieren der <i> Servoübersteuerung</i> und Einstellen der <i>Mitte</i>. Die Servoarme sollten in dieser Position senkrecht zur Hauptwelle stehen.</li><li>Einstellen der <i>Skalierung</i> damit die Servowinkel korrekt sind. Gib einen Winkel von 30&deg; für ein Servo unter <i>Servoübersteuerung</i> an. Das Servo sollte sich nun um 30&deg; bewegen. Wenn es geringer ist, erhöhe die <i>Skalierung</i> für dieses Servo. Wenn er größer ist, verringere sie.</li><li>Du kannst den Bewegungsbereich des Servos begrenzen oder erweitern durch anpassen von <i>Min</i> oder <i>Max</i>. Verwende diese Einstellung nur, wenn ein mechanisches Problem vorliegt, z.B. wenn ein Servo blockiert. Verwende den Mischer um Roll/Nick/Kollektiv Pitch zu begrenzen.</li></ul>",
@@ -2726,6 +2937,16 @@
         "message": "Anpassung der kollektiven Verstärkung an die mechanische Verstärkung im Kopfdesign.",
         "english": "Adjust the collective gain to match the mechanical gain in the head design."
     },
+    "mixerCollectiveGeoCorrection": {
+        "message": "Collective Geometry Correction [%]",
+        "english": "Collective Geometry Correction [%]",
+        "status": "New entry. Please translate!"
+    },
+    "mixerCollectiveGeoCorrectionHelp": {
+        "message": "Adjust until the collective positive and negative deflection are equal.",
+        "english": "Adjust until the collective positive and negative deflection are equal.",
+        "status": "New entry. Please translate!"
+    },
     "mixerTotalPitchLimit": {
         "message": "Grenzwert für Gesamtblattverstellung [&deg;]",
         "english": "Total blade pitch limit [&deg;]"
@@ -2766,17 +2987,20 @@
         "message": "Der Phasenversatz für die Steuerung der Taumelscheibe.",
         "english": "The phase offset for the swashplate controls."
     },
-    "mixerSwashTrim1": {
-        "message": "Gestänge-Trimmung #1",
-        "english": "Link trim #1"
+    "mixerSwashRollTrim": {
+        "message": "Roll trim [%]",
+        "english": "Roll trim [%]",
+        "status": "New entry. Please translate!"
     },
-    "mixerSwashTrim2": {
-        "message": "Gestänge-Trimmung #2",
-        "english": "Link trim #2"
+    "mixerSwashPitchTrim": {
+        "message": "Pitch trim [%]",
+        "english": "Pitch trim [%]",
+        "status": "New entry. Please translate!"
     },
-    "mixerSwashTrim3": {
-        "message": "Gestänge-Trimmung #3",
-        "english": "Link trim #3"
+    "mixerSwashCollectiveTrim": {
+        "message": "Collective trim [%]",
+        "english": "Collective trim [%]",
+        "status": "New entry. Please translate!"
     },
     "mixerSwashTrimHelp": {
         "message": "Trimmung für Taumelscheibenanlenkungen. Nur verwenden, wenn die Anlenkungen nicht einstellbar sind..",
@@ -2879,8 +3103,13 @@
         "english": "Set tail motor throttle value for zero yaw command."
     },
     "mixerSwashLinkTrim": {
-        "message": "Trimmung der Anlenkungen der Taumelscheibe",
-        "english": "Swashplate Link Trims"
+        "message": "Swashplate Trims",
+        "english": "Swashplate Trims",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Trimmung der Anlenkungen der Taumelscheibe",
+            "english": "Swashplate Link Trims"
+        }
     },
     "mixerInputChannels": {
         "message": "Mixer Eingänge",
@@ -2921,6 +3150,46 @@
     "mixerOverrideSlider": {
         "message": "",
         "english": ""
+    },
+    "mixerOverrideSliderLeftLabel1": {
+        "message": "Left",
+        "english": "Left",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderRightLabel1": {
+        "message": "Right",
+        "english": "Right",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderLeftLabel2": {
+        "message": "Backward",
+        "english": "Backward",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderRightLabel2": {
+        "message": "Forward",
+        "english": "Forward",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderLeftLabel3": {
+        "message": "CW",
+        "english": "CW",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderRightLabel3": {
+        "message": "CCW",
+        "english": "CCW",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderLeftLabel4": {
+        "message": "Down",
+        "english": "Down",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderRightLabel4": {
+        "message": "Up",
+        "english": "Up",
+        "status": "New entry. Please translate!"
     },
     "mixerRuleNOP": {
         "message": "-",
@@ -3526,6 +3795,16 @@
         "message": "Der Governor regelt automatisch eine konstante Rotordrehzahl.<br><strong>Deaktiviert:</strong> Der Govenor ist deaktiviert <br> <strong>PASSTHROUGH:</strong> Nur Langsamanlauf und Autorotionsabbruch <br><strong>STANDARD:</strong> Die Rotor/Motordrehzahl wird durch den FC und das Drehzahlsignal gesteuert.<br><strong>MODE1:</strong> Wie Standard aber mit Kolletiv und Zyklischer Kompensation (Verhindert Drehzahlabfall bei großen Steuereingriffen in Kollektiv oder Taumelscheibe).<br><strong>MODE2:</strong> wie Mode1, jedoch zusätzlich mit Spannungskompensation",
         "english": "The governor maintains the main rotor speed constant.<br><strong>OFF:</strong> Govenor is disabled <br> <strong>PASSTHROUGH:</strong> Only slow spoolup and autorotation bailout<br><strong>STANDARD:</strong> Motor speed is controlled by the FC and speed reference from the ESC.<br><strong>MODE1:</strong> As per statndard but with Collective and Cyclic Precompensation (e.g. for a large increase collective the FC increases the signal sent to the ESC so the motor speed does not sag due to the increased load).<br><strong>MODE2:</strong> as per Mode 1 but also Battery voltage compensation"
     },
+    "govHandoverThrottle": {
+        "message": "Handover throttle [%]",
+        "english": "Handover throttle [%]",
+        "status": "New entry. Please translate!"
+    },
+    "govHandoverThrottleHelp": {
+        "message": "Throttle level above which the governor is activated. The motor must be able to start below this throttle level.",
+        "english": "Throttle level above which the governor is activated. The motor must be able to start below this throttle level.",
+        "status": "New entry. Please translate!"
+    },
     "govStartupTime": {
         "message": "Anlaufzeit",
         "english": "Startup time"
@@ -3687,16 +3966,31 @@
         "english": "Tail Torque Assist (TTA) gain"
     },
     "govTTAGainHelp": {
-        "message": "Tail Torque Assist (TTA) Verstärkung. Dies ist eine Verstärkung, die angewendet wird, um die Kopfdrehzahl zu erhöhen, um das Heck in negativer Richtung zu steuern (z. B. motorisiertes Heck unter Leerlaufdrehzahl). Normalerweise 0..100",
-        "english": "Tail Torque Assist gain. This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 0..100"
+        "message": "Tail Torque Assist strength (gain). This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 50..150",
+        "english": "Tail Torque Assist strength (gain). This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 50..150",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Tail Torque Assist (TTA) Verstärkung. Dies ist eine Verstärkung, die angewendet wird, um die Kopfdrehzahl zu erhöhen, um das Heck in negativer Richtung zu steuern (z. B. motorisiertes Heck unter Leerlaufdrehzahl). Normalerweise 0..100",
+            "english": "Tail Torque Assist gain. This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 0..100"
+        }
     },
     "govTTALimit": {
-        "message": "Tail Torque Assist (TTA) Limit",
-        "english": "Tail Torque Assist (TTA) limit"
+        "message": "Tail Torque Assist (TTA) limit [%]",
+        "english": "Tail Torque Assist (TTA) limit [%]",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Tail Torque Assist (TTA) Limit",
+            "english": "Tail Torque Assist (TTA) limit"
+        }
     },
     "govTTALimitHelp": {
-        "message": "Tail Torque Assist (TTA) Limit. Maximale Erhöhung der Rotordrehzahl. Üblicherweise 0..50",
-        "english": "Tail Torque Assist maximum. How much extra headspeed can be applied to control the tail in the negative direction. Usually 0..50"
+        "message": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%.",
+        "english": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Tail Torque Assist (TTA) Limit. Maximale Erhöhung der Rotordrehzahl. Üblicherweise 0..50",
+            "english": "Tail Torque Assist maximum. How much extra headspeed can be applied to control the tail in the negative direction. Usually 0..50"
+        }
     },
     "govYawPrecomp": {
         "message": "Gier-Vorkompensation",
@@ -3993,6 +4287,21 @@
     "blackboxLog_gps": {
         "message": "GPS",
         "english": "GPS"
+    },
+    "blackboxLog_vbec": {
+        "message": "BEC Voltage",
+        "english": "BEC Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "blackboxLog_vbus": {
+        "message": "+5V Voltage",
+        "english": "+5V Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "blackboxLog_temps": {
+        "message": "Temperatures",
+        "english": "Temperatures",
+        "status": "New entry. Please translate!"
     },
     "serialLoggingSupportedNote": {
         "message": "Das Speichern der Logs ist auf einem externen Gerät (z.B. OpenLager), mittels seriellem Port möglich. Dazu bitte den Anschluss im \"Anschlüsse Tab\" konfigurieren.",
@@ -5637,6 +5946,11 @@
         "message": "Benutzerdefiniert",
         "english": "Custom"
     },
+    "gyroRpmFilterConfigNote": {
+        "message": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable.",
+        "english": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable.",
+        "status": "New entry. Please translate!"
+    },
     "gyroRpmFilterCustomNote": {
         "message": "<span class=\"message-negative\">Warnung:</span> Es wird eine benutzerdefinierte RPM Kerbfilterkonfiguration verwendet.<br>Benutze die CLI, um die RPM Filtereinstellungen zu ändern.",
         "english": "<span class=\"message-negative\">Warning:</span> Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings."
@@ -5981,41 +6295,63 @@
         "message": "Kill",
         "english": "Kill"
     },
-    "powerFirmwareUpgradeRequired": {
-        "message": "Firmware-Aktualisierung <span class=\"message-negative\">benötigt</span>. Batterie-/Strom-/Spannungsmessungs-Konfiguration via API &lt; 1.33.0 (Betaflight Version &lt;= 3.17) wird nicht unterstützt.",
-        "english": "Firmware upgrade <span class=\"message-negative\">required</span>. Battery/Amperage/Voltage configurations using API &lt; 1.33.0 (Betaflight release &lt;= 3.17) is not supported."
-    },
     "powerBatteryVoltageMeterSource": {
-        "message": "Voltmeter Quelle",
-        "english": "Voltage Meter Source"
+        "message": "Battery Voltage Source",
+        "english": "Battery Voltage Source",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Voltmeter Quelle",
+            "english": "Voltage Meter Source"
+        }
     },
     "powerBatteryVoltageMeterTypeNone": {
         "message": "Keine",
         "english": "None"
     },
     "powerBatteryVoltageMeterTypeAdc": {
-        "message": "Onboard Spannungmessung",
-        "english": "Onboard ADC"
+        "message": "Battery ADC",
+        "english": "Battery ADC",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Onboard Spannungmessung",
+            "english": "Onboard ADC"
+        }
     },
     "powerBatteryVoltageMeterTypeEsc": {
-        "message": "Sensoren der Regler",
-        "english": "ESC Sensor"
+        "message": "ESC Telemetry",
+        "english": "ESC Telemetry",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Sensoren der Regler",
+            "english": "ESC Sensor"
+        }
     },
     "powerBatteryCurrentMeterSource": {
-        "message": "Amperemeter Quelle",
-        "english": "Current Meter Source"
+        "message": "Battery Current Source",
+        "english": "Battery Current Source",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Amperemeter Quelle",
+            "english": "Current Meter Source"
+        }
     },
     "powerBatteryCurrentMeterTypeNone": {
         "message": "Keine",
         "english": "None"
     },
     "powerBatteryCurrentMeterTypeAdc": {
-        "message": "Onboard ADC",
-        "english": "Onboard ADC"
+        "message": "Battery ADC",
+        "english": "Battery ADC",
+        "status": "Modified entry. Please translate!"
     },
     "powerBatteryCurrentMeterTypeEsc": {
-        "message": "Sensoren der Regler",
-        "english": "ESC Sensor"
+        "message": "ESC Telemetry",
+        "english": "ESC Telemetry",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Sensoren der Regler",
+            "english": "ESC Sensor"
+        }
     },
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP Sensor",
@@ -6046,16 +6382,31 @@
         "english": "To calibrate, use a multimeter to measure the actual voltage / current draw on your craft (with a battery plugged in), and enter the values below. Then, with the same battery still plugged in, click [Calibrate]."
     },
     "powerCalibrationManagerNote": {
-        "message": "<strong>Hinweis:</strong> Vor dem Kalibrieren stelle sicher, dass Teiler und Multiplikator für die Spannung und Abweichung für den Stromverbrauch korrekt eingestellt sind.<br>Wenn du die Werte auf 0 lässt, wird keine Kalibrierung angewendet.</br><strong>Denk dran die Propeller vor Anschliessen eines Akkus zu entfernen!</strong>",
-        "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for amperage is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>"
+        "message": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>",
+        "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<strong>Hinweis:</strong> Vor dem Kalibrieren stelle sicher, dass Teiler und Multiplikator für die Spannung und Abweichung für den Stromverbrauch korrekt eingestellt sind.<br>Wenn du die Werte auf 0 lässt, wird keine Kalibrierung angewendet.</br><strong>Denk dran die Propeller vor Anschliessen eines Akkus zu entfernen!</strong>",
+            "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for amperage is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>"
+        }
     },
     "powerCalibrationManagerWarning": {
-        "message": "<span class=\"message-negative\">Warnung:</span> Der Akku <span class=\"message-negative\">ist nicht angesteckt</span> oder die Spannungs- und Strom-Sensoren <span class=\"message-negative\">nicht richtig eingestellt.</span> Stelle sicher, dass die Spannung- und/oder Stromwerte über 0 liegen. Andernfalls wirst du hiermit nicht kalibrieren können.",
-        "english": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and amperage meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or amperage are reading a value above 0. Otherwise you will not be able to calibrate using this tool."
+        "message": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and current meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or current are reading a value above 0. Otherwise you will not be able to calibrate using this tool.",
+        "english": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and current meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or current are reading a value above 0. Otherwise you will not be able to calibrate using this tool.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<span class=\"message-negative\">Warnung:</span> Der Akku <span class=\"message-negative\">ist nicht angesteckt</span> oder die Spannungs- und Strom-Sensoren <span class=\"message-negative\">nicht richtig eingestellt.</span> Stelle sicher, dass die Spannung- und/oder Stromwerte über 0 liegen. Andernfalls wirst du hiermit nicht kalibrieren können.",
+            "english": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and amperage meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or amperage are reading a value above 0. Otherwise you will not be able to calibrate using this tool."
+        }
     },
     "powerCalibrationManagerSourceNote": {
-        "message": "<span class=\"message-negative\">Warnung:</span> Spannungs- und/oder Strom-Messquellen <strong>wurden geändert, aber nicht gespeichert.</strong> Bitte stelle die richtigen Messquellen ein und speichere sie, bevor du versuchst zu Kalibrieren.",
-        "english": "<span class=\"message-negative\">Warning:</span> Voltage and/or amperage meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate."
+        "message": "<span class=\"message-negative\">Warning:</span> Voltage and/or current meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate.",
+        "english": "<span class=\"message-negative\">Warning:</span> Voltage and/or current meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<span class=\"message-negative\">Warnung:</span> Spannungs- und/oder Strom-Messquellen <strong>wurden geändert, aber nicht gespeichert.</strong> Bitte stelle die richtigen Messquellen ein und speichere sie, bevor du versuchst zu Kalibrieren.",
+            "english": "<span class=\"message-negative\">Warning:</span> Voltage and/or amperage meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate."
+        }
     },
     "powerCalibrationManagerConfirmationTitle": {
         "message": "Kalibrierungsmanager Bestätigung",
@@ -6078,12 +6429,13 @@
         "english": "New calibrated scales are shown here. <br>Applying them will set the scales but <strong>will not save them.</strong></br> <br>After saving make sure that the new voltage and current are correct.</br>"
     },
     "powerVoltageHead": {
-        "message": "Voltmeter",
-        "english": "Voltage Meter"
-    },
-    "powerVoltageWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> Werte auf 25.5V begrenzt.",
-        "english": "<span class=\"message-negative\">Warning:</span> Values limited to 25.5V."
+        "message": "Voltage Meters",
+        "english": "Voltage Meters",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Voltmeter",
+            "english": "Voltage Meter"
+        }
     },
     "powerVoltageValue": {
         "message": "$1 V",
@@ -6102,112 +6454,154 @@
         "english": "Battery"
     },
     "powerVoltageId20": {
-        "message": "5V",
-        "english": "5V"
+        "message": "BEC",
+        "english": "BEC",
+        "status": "Modified entry. Please translate!"
     },
     "powerVoltageId30": {
-        "message": "9V",
-        "english": "9V"
+        "message": "5V",
+        "english": "5V",
+        "status": "Modified entry. Please translate!"
     },
     "powerVoltageId40": {
-        "message": "12V",
-        "english": "12V"
+        "message": "EXT",
+        "english": "EXT",
+        "status": "Modified entry. Please translate!"
     },
     "powerVoltageId50": {
+        "message": "MCU",
+        "english": "MCU",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "ESC kombiniert",
+            "english": "ESC Combined"
+        }
+    },
+    "powerVoltageId100": {
         "message": "ESC kombiniert",
-        "english": "ESC Combined"
+        "english": "ESC Combined",
+        "status": "Reused translation. Please check!"
     },
-    "powerVoltageId60": {
-        "message": "ESC Motor 1",
-        "english": "ESC Motor 1"
+    "powerVoltageId101": {
+        "message": "ESC 1",
+        "english": "ESC 1",
+        "status": "New entry. Please translate!"
     },
-    "powerVoltageId61": {
-        "message": "ESC Motor 2",
-        "english": "ESC Motor 2"
+    "powerVoltageId102": {
+        "message": "ESC 2",
+        "english": "ESC 2",
+        "status": "New entry. Please translate!"
     },
-    "powerVoltageId62": {
-        "message": "ESC Motor 3",
-        "english": "ESC Motor 3"
+    "powerVoltageId103": {
+        "message": "ESC 3",
+        "english": "ESC 3",
+        "status": "New entry. Please translate!"
     },
-    "powerVoltageId63": {
-        "message": "ESC Motor 4",
-        "english": "ESC Motor 4"
+    "powerVoltageId104": {
+        "message": "ESC 4",
+        "english": "ESC 4",
+        "status": "New entry. Please translate!"
     },
-    "powerVoltageId64": {
-        "message": "ESC Motor 5",
-        "english": "ESC Motor 5"
-    },
-    "powerVoltageId65": {
-        "message": "ESC Motor 6",
-        "english": "ESC Motor 6"
-    },
-    "powerVoltageId66": {
-        "message": "ESC Motor 7",
-        "english": "ESC Motor 7"
-    },
-    "powerVoltageId67": {
-        "message": "ESC Motor 8",
-        "english": "ESC Motor 8"
-    },
-    "powerVoltageId68": {
-        "message": "ESC Motor 9",
-        "english": "ESC Motor 9"
-    },
-    "powerVoltageId69": {
-        "message": "ESC Motor 10",
-        "english": "ESC Motor 10"
-    },
-    "powerVoltageId70": {
-        "message": "ESC Motor 11",
-        "english": "ESC Motor 11"
-    },
-    "powerVoltageId71": {
-        "message": "ESC Motor 12",
-        "english": "ESC Motor 12"
-    },
-    "powerVoltageId80": {
+    "powerVoltageId200": {
         "message": "Zelle 1",
-        "english": "Cell 1"
+        "english": "Cell 1",
+        "status": "Reused translation. Please check!"
     },
-    "powerVoltageId81": {
+    "powerVoltageId201": {
         "message": "Zelle 2",
-        "english": "Cell 2"
+        "english": "Cell 2",
+        "status": "Reused translation. Please check!"
     },
-    "powerVoltageId82": {
+    "powerVoltageId202": {
         "message": "Zelle 3",
-        "english": "Cell 3"
+        "english": "Cell 3",
+        "status": "Reused translation. Please check!"
     },
-    "powerVoltageId83": {
+    "powerVoltageId203": {
         "message": "Zelle 4",
-        "english": "Cell 4"
+        "english": "Cell 4",
+        "status": "Reused translation. Please check!"
     },
-    "powerVoltageId84": {
+    "powerVoltageId204": {
         "message": "Zelle 5",
-        "english": "Cell 5"
+        "english": "Cell 5",
+        "status": "Reused translation. Please check!"
     },
-    "powerVoltageId85": {
+    "powerVoltageId205": {
         "message": "Zelle 6",
-        "english": "Cell 6"
+        "english": "Cell 6",
+        "status": "Reused translation. Please check!"
+    },
+    "powerVoltageId206": {
+        "message": "Cell 7",
+        "english": "Cell 7",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId207": {
+        "message": "Cell 8",
+        "english": "Cell 8",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId208": {
+        "message": "Cell 9",
+        "english": "Cell 9",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId209": {
+        "message": "Cell 10",
+        "english": "Cell 10",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId210": {
+        "message": "Cell 11",
+        "english": "Cell 11",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId211": {
+        "message": "Cell 12",
+        "english": "Cell 12",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId212": {
+        "message": "Cell 13",
+        "english": "Cell 13",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId214": {
+        "message": "Cell 14",
+        "english": "Cell 14",
+        "status": "New entry. Please translate!"
     },
     "powerVoltageScale": {
         "message": "Skalierung",
         "english": "Scale"
     },
     "powerVoltageDivider": {
-        "message": "Teiler",
-        "english": "Divider Value"
+        "message": "Divider",
+        "english": "Divider",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Teiler",
+            "english": "Divider Value"
+        }
     },
     "powerVoltageMultiplier": {
-        "message": "Multiplikator",
-        "english": "Multiplier Value"
+        "message": "Multiplier",
+        "english": "Multiplier",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Multiplikator",
+            "english": "Multiplier Value"
+        }
     },
     "powerAmperageHead": {
-        "message": "Amperemeter",
-        "english": "Amperage Meter"
-    },
-    "powerAmperageWarning": {
-        "message": "<span class=\"message-negative\">Warnung:</span> Werte auf 63.5A begrenzt.",
-        "english": "<span class=\"message-negative\">Warning:</span> Values limited to 63.5A."
+        "message": "Current Meters",
+        "english": "Current Meters",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Amperemeter",
+            "english": "Amperage Meter"
+        }
     },
     "powerAmperageValue": {
         "message": "$1 A",
@@ -6217,65 +6611,30 @@
         "message": "Akku",
         "english": "Battery"
     },
-    "powerAmperageId50": {
+    "powerAmperageId100": {
         "message": "ESC kombiniert",
-        "english": "ESC Combined"
+        "english": "ESC Combined",
+        "status": "Reused translation. Please check!"
     },
-    "powerAmperageId60": {
-        "message": "ESC Motor 1",
-        "english": "ESC Motor 1"
+    "powerAmperageId101": {
+        "message": "ESC 1",
+        "english": "ESC 1",
+        "status": "New entry. Please translate!"
     },
-    "powerAmperageId61": {
-        "message": "ESC Motor 2",
-        "english": "ESC Motor 2"
+    "powerAmperageId102": {
+        "message": "ESC 2",
+        "english": "ESC 2",
+        "status": "New entry. Please translate!"
     },
-    "powerAmperageId62": {
-        "message": "ESC Motor 3",
-        "english": "ESC Motor 3"
+    "powerAmperageId103": {
+        "message": "ESC 3",
+        "english": "ESC 3",
+        "status": "New entry. Please translate!"
     },
-    "powerAmperageId63": {
-        "message": "ESC Motor 4",
-        "english": "ESC Motor 4"
-    },
-    "powerAmperageId64": {
-        "message": "ESC Motor 5",
-        "english": "ESC Motor 5"
-    },
-    "powerAmperageId65": {
-        "message": "ESC Motor 6",
-        "english": "ESC Motor 6"
-    },
-    "powerAmperageId66": {
-        "message": "ESC Motor 7",
-        "english": "ESC Motor 7"
-    },
-    "powerAmperageId67": {
-        "message": "ESC Motor 8",
-        "english": "ESC Motor 8"
-    },
-    "powerAmperageId68": {
-        "message": "ESC Motor 9",
-        "english": "ESC Motor 9"
-    },
-    "powerAmperageId69": {
-        "message": "ESC Motor 10",
-        "english": "ESC Motor 10"
-    },
-    "powerAmperageId70": {
-        "message": "ESC Motor 11",
-        "english": "ESC Motor 11"
-    },
-    "powerAmperageId71": {
-        "message": "ESC Motor 12",
-        "english": "ESC Motor 12"
-    },
-    "powerAmperageId80": {
-        "message": "Virtuell",
-        "english": "Virtual"
-    },
-    "powerAmperageId90": {
-        "message": "MSP",
-        "english": "MSP"
+    "powerAmperageId104": {
+        "message": "ESC 4",
+        "english": "ESC 4",
+        "status": "New entry. Please translate!"
     },
     "powerMahValue": {
         "message": "$1 mAh",
@@ -6290,12 +6649,22 @@
         "english": "Offset [mA]"
     },
     "powerAmperageCalibration": {
-        "message": "Gemessener Strom",
-        "english": "Measured Amperage"
+        "message": "Measured Current",
+        "english": "Measured Current",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Gemessener Strom",
+            "english": "Measured Amperage"
+        }
     },
     "powerAmperageCalibratedScale": {
-        "message": "Kalibrierte Stromskala:",
-        "english": "Calibrated Amperage Scale:"
+        "message": "Calibrated Current Scale:",
+        "english": "Calibrated Current Scale:",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Kalibrierte Stromskala:",
+            "english": "Calibrated Amperage Scale:"
+        }
     },
     "powerBatteryHead": {
         "message": "Akku",
@@ -6326,8 +6695,13 @@
         "english": "mAh used"
     },
     "powerBatteryAmperage": {
-        "message": "Strom",
-        "english": "Amperage"
+        "message": "Current",
+        "english": "Current",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Strom",
+            "english": "Amperage"
+        }
     },
     "powerBatteryCapacity": {
         "message": "Kapazität (mAh)",
@@ -8223,8 +8597,13 @@
         "english": "Confirm Arming"
     },
     "dialogConfirmArmingNote": {
-        "message": "WARNING: Bist du sicher, dass du <strong>Arming (Scharfschaltung) aktivieren</strong> willst, während der Konfigurator angeschlossen ist?<br /><br /><span class=\"message-negative\">NOTE:</span> Während der Scharfschaltung werden alle Änderungen an den Einstellungen, einschließlich der Speicherung der Einstellungen, nicht übernommen!",
-        "english": "WARNING: Are you sure you want to <strong>enable arming</strong> while Configurator is connected?<br /><br /><span class=\"message-negative\">NOTE:</span> While armed, all changes to settings, including saving settings, are ignored!"
+        "message": "WARNING: Are you sure you want to <strong>enable arming</strong> while the Configurator is connected?",
+        "english": "WARNING: Are you sure you want to <strong>enable arming</strong> while the Configurator is connected?",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "WARNING: Bist du sicher, dass du <strong>Arming (Scharfschaltung) aktivieren</strong> willst, während der Konfigurator angeschlossen ist?<br /><br /><span class=\"message-negative\">NOTE:</span> Während der Scharfschaltung werden alle Änderungen an den Einstellungen, einschließlich der Speicherung der Einstellungen, nicht übernommen!",
+            "english": "WARNING: Are you sure you want to <strong>enable arming</strong> while Configurator is connected?<br /><br /><span class=\"message-negative\">NOTE:</span> While armed, all changes to settings, including saving settings, are ignored!"
+        }
     },
     "dialogConfirmArmingConfirm": {
         "message": "Aktivieren",

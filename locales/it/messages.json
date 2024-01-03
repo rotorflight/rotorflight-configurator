@@ -1280,10 +1280,20 @@
         "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
     },
-    "statusGPSHead": {
-        "message": "GPS",
-        "english": "GPS",
-        "status": "Reused translation. Please check!"
+    "statusArmingHead": {
+        "message": "Arming",
+        "english": "Arming",
+        "status": "New entry. Please translate!"
+    },
+    "statusArmingDanger": {
+        "message": "<strong class=\"message-negative\">WARNING!</strong> <strong>ARMING is ENABLED.</strong> Never fly the craft with the Configurator connected!</strong>",
+        "english": "<strong class=\"message-negative\">WARNING!</strong> <strong>ARMING is ENABLED.</strong> Never fly the craft with the Configurator connected!</strong>",
+        "status": "New entry. Please translate!"
+    },
+    "statusEnableArming": {
+        "message": "Enable Arming:",
+        "english": "Enable Arming:",
+        "status": "New entry. Please translate!"
     },
     "statusInstrumentsHead": {
         "message": "Strumentazione",
@@ -2324,40 +2334,30 @@
         "english": "Profile #6",
         "status": "New entry. Please translate!"
     },
-    "profilesPIDPassthroughWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Passthrough Mode</b>.<br>Please change the settings in the <b>CLI</b>.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Passthrough Mode</b>.<br>Please change the settings in the <b>CLI</b>.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Passthrough Mode</i>. Please change the advanced settings in the <b>CLI</b>.",
-            "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Passthrough Mode</i>. Please change the advanced settings in the <b>CLI</b>.",
-            "status": "New entry. Please translate!"
-        }
-    },
-    "profilesPIDCompatibilityWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Rotorflight-1 Compatiblity</b> Mode.<br>Please use the <b>CLI</b to change the PID settings>.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <b>Rotorflight-1 Compatiblity</b> Mode.<br>Please use the <b>CLI</b to change the PID settings>.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Rotorflight-1 Compatiblity</i> Mode. Please change the advanced settings in the <b>CLI</b>.",
-            "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is configured manually to the <i>Rotorflight-1 Compatiblity</i> Mode. Please change the advanced settings in the <b>CLI</b>.",
-            "status": "New entry. Please translate!"
-        }
-    },
-    "profilesPIDModeThreeWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually to the <b>PID Test Mode 3</b>.<br>Please use the <b>CLI</b> to change the advanced PID settings.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually to the <b>PID Test Mode 3</b>.<br>Please use the <b>CLI</b> to change the advanced PID settings.",
+    "profilesPIDModeZeroWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>Passthrough Mode</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>Passthrough Mode</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
         "status": "New entry. Please translate!"
     },
-    "profilesPIDCustomWarning": {
+    "profilesPIDModeOneWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 1</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 1</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesPIDModeTwoWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesPIDModeThreeWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b>, that uses HSI.<br>Please check the Offset gains.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b>, that uses HSI.<br>Please check the Offset gains.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesPIDModeCustomWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings.",
         "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here. Please use the <b>CLI</b> to change the PID settings.",
-            "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here. Please use the <b>CLI</b> to change the PID settings.",
-            "status": "New entry. Please translate!"
-        }
+        "status": "Reused translation. Please check!"
     },
     "profilesPIDGains": {
         "message": "Axis",
@@ -2484,6 +2484,16 @@
     "receiverHelpStickDeflection": {
         "message": "The maximum value (in µs) for stick deflection from the center, for RPY.",
         "english": "The maximum value (in µs) for stick deflection from the center, for RPY.",
+        "status": "New entry. Please translate!"
+    },
+    "receiverArmingThrottle": {
+        "message": "Throttle Channel value for arming",
+        "english": "Throttle Channel value for arming",
+        "status": "New entry. Please translate!"
+    },
+    "receiverHelpArmingThrottle": {
+        "message": "The channel value (in µs) under which arming is allowed",
+        "english": "The channel value (in µs) under which arming is allowed",
         "status": "New entry. Please translate!"
     },
     "receiverZeroThrottle": {
@@ -2745,6 +2755,11 @@
         "message": "Agg. collegamento",
         "english": "Add Link"
     },
+    "auxiliaryAlwaysChannelSelect": {
+        "message": "ALWAYS",
+        "english": "ALWAYS",
+        "status": "New entry. Please translate!"
+    },
     "auxiliaryAutoChannelSelect": {
         "message": "AUTO",
         "english": "AUTO"
@@ -2777,26 +2792,80 @@
         "message": "Usare lo slot 2 e un interruttore a 3 posizioni su AUX4 per selezionare e abilitare la selezione del profilo rate tramite lo stesso interruttore 3 posizioni sullo stesso canale.",
         "english": "Use a three position switch on AUX4 to select enable Rate Profile Selection via the same three position switch on the same channel."
     },
-    "adjustmentsColumnEnable": {
-        "message": "Se abilitato",
-        "english": "If enabled"
+    "adjustmentsColumnMode": {
+        "message": "Mode",
+        "english": "Mode",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsColumnWhenChannel": {
-        "message": "quando il canale",
-        "english": "when channel"
+    "adjustmentsColumnChannels": {
+        "message": "Channels",
+        "english": "Channels",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsColumnIsInRange": {
-        "message": "è nell'intervallo",
-        "english": "is in range"
+    "adjustmentsColumnSliders": {
+        "message": "Range Sliders",
+        "english": "Range Sliders",
+        "status": "New entry. Please translate!"
     },
-    "adjustmentsColumnThenApplyFunction": {
-        "message": "then apply value from channel,<br>limited between minimum and maximum, with step size",
-        "english": "then apply value from channel,<br>limited between minimum and maximum, with step size",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "quindi applicare",
-            "english": "then apply"
-        }
+    "adjustmentsColumnRanges": {
+        "message": "Value Ranges",
+        "english": "Value Ranges",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsTypeOff": {
+        "message": "Off",
+        "english": "Off",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsTypeMapped": {
+        "message": "Mapped",
+        "english": "Mapped",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsTypeStepped": {
+        "message": "Stepped",
+        "english": "Stepped",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentEnableChannel": {
+        "message": "Enable Channel",
+        "english": "Enable Channel",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentValueChannel": {
+        "message": "Value Channel",
+        "english": "Value Channel",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentFunctionValue": {
+        "message": "Value",
+        "english": "Value",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentRangeEnable": {
+        "message": "Ena:",
+        "english": "Ena:",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentRangeInc": {
+        "message": "Inc:",
+        "english": "Inc:",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentRangeDec": {
+        "message": "Dec:",
+        "english": "Dec:",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentRangeValue": {
+        "message": "Value:",
+        "english": "Value:",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentRangeStep": {
+        "message": "Step:",
+        "english": "Step:",
+        "status": "New entry. Please translate!"
     },
     "adjustmentsMin": {
         "message": "Min",
@@ -2806,9 +2875,49 @@
         "message": "Max",
         "english": "Max"
     },
+    "adjustmentsRange": {
+        "message": "Active",
+        "english": "Active",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsRangeInc": {
+        "message": "Increase",
+        "english": "Increase",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsRangeDec": {
+        "message": "Decrease",
+        "english": "Decrease",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsRangeScale": {
+        "message": "Scale",
+        "english": "Scale",
+        "status": "New entry. Please translate!"
+    },
     "adjustmentsFunctionNone": {
         "message": "Nessun cambiamento",
         "english": "No changes",
+        "status": "Reused translation. Please check!"
+    },
+    "adjustmentsFunctionRateProfile": {
+        "message": "Selezione del profilo rate",
+        "english": "Rate Profile Selection",
+        "status": "Reused translation. Please check!"
+    },
+    "adjustmentsFunctionPIDProfile": {
+        "message": "Profile Selection",
+        "english": "Profile Selection",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionLEDProfile": {
+        "message": "Selezione profilo LED",
+        "english": "LED Profile Selection",
+        "status": "Reused translation. Please check!"
+    },
+    "adjustmentsFunctionOSDProfile": {
+        "message": "Selezione profilo OSD",
+        "english": "OSD Profile Selection",
         "status": "Reused translation. Please check!"
     },
     "adjustmentsFunctionPitchRate": {
@@ -2916,11 +3025,6 @@
         "english": "Yaw F-gain",
         "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionYawCenter": {
-        "message": "Yaw Center Offset",
-        "english": "Yaw Center Offset",
-        "status": "New entry. Please translate!"
-    },
     "adjustmentsFunctionYawCWStopGain": {
         "message": "Yaw CW Stop Gain",
         "english": "Yaw CW Stop Gain",
@@ -2941,34 +3045,94 @@
         "english": "Yaw Collective Precomp",
         "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionYawImpulseFF": {
-        "message": "Yaw Collective Impulse Precomp",
-        "english": "Yaw Collective Impulse Precomp",
+    "adjustmentsFunctionYawCollectiveDyn": {
+        "message": "Yaw Collective Impulse FF",
+        "english": "Yaw Collective Impulse FF",
         "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionRescueCollective": {
-        "message": "Rescue Collective",
-        "english": "Rescue Collective",
+    "adjustmentsFunctionYawCollectiveDecay": {
+        "message": "Yaw Collective Impulse FF Decay",
+        "english": "Yaw Collective Impulse FF Decay",
         "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionRescueCollectiveBoost": {
-        "message": "Rescue Collective Boost",
-        "english": "Rescue Collective Boost",
+    "adjustmentsFunctionPitchCollectiveFF": {
+        "message": "Pitch Collective Precomnp",
+        "english": "Pitch Collective Precomnp",
         "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionAngleLevelStrength": {
-        "message": "Angle mode leveling strength",
-        "english": "Angle mode leveling strength",
+    "adjustmentsFunctionPitchGyroCutoff": {
+        "message": "Pitch Gyro Cutoff",
+        "english": "Pitch Gyro Cutoff",
         "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionHorizonLevelStrength": {
-        "message": "Horizon mode leveling strength",
-        "english": "Horizon mode leveling strength",
+    "adjustmentsFunctionRollGyroCutoff": {
+        "message": "Roll Gyro Cutoff",
+        "english": "Roll Gyro Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionYawGyroCutoff": {
+        "message": "Yaw Gyro Cutoff",
+        "english": "Yaw Gyro Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionPitchDtermCutoff": {
+        "message": "Pitch D-term Cutoff",
+        "english": "Pitch D-term Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRollDtermCutoff": {
+        "message": "Roll D-term Cutoff",
+        "english": "Roll D-term Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionYawDtermCutoff": {
+        "message": "Yaw D-term Cutoff",
+        "english": "Yaw D-term Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRescueClimbCollective": {
+        "message": "Rescue Climb Collective",
+        "english": "Rescue Climb Collective",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRescueHoverCollective": {
+        "message": "Rescue Hover Collective",
+        "english": "Rescue Hover Collective",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRescueHoverAltitude": {
+        "message": "Rescue Hover Altitude",
+        "english": "Rescue Hover Altitude",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRescueAltP": {
+        "message": "Rescue Altitude P-gain",
+        "english": "Rescue Altitude P-gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRescueAltI": {
+        "message": "Rescue Altitude I-gain",
+        "english": "Rescue Altitude I-gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRescueAltD": {
+        "message": "Rescue Altitude D-gain",
+        "english": "Rescue Altitude D-gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionAngleLevelGain": {
+        "message": "Angle Level Gain",
+        "english": "Angle Level Gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionHorizonLevelGain": {
+        "message": "Horizon Level Gain",
+        "english": "Horizon Level Gain",
         "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionAcroTrainerGain": {
-        "message": "Acro Trainer leveling strength",
-        "english": "Acro Trainer leveling strength",
+        "message": "Acro Trainer Gain",
+        "english": "Acro Trainer Gain",
         "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionGovernorGain": {
@@ -3011,39 +3175,44 @@
         "english": "Governor Collective Precomp",
         "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionRateProfile": {
-        "message": "Selezione del profilo rate",
-        "english": "Rate Profile Selection",
-        "status": "Reused translation. Please check!"
-    },
-    "adjustmentsFunctionPIDProfile": {
-        "message": "Profile Selection",
-        "english": "Profile Selection",
+    "adjustmentsFunctionPitchB": {
+        "message": "Pitch B-gain",
+        "english": "Pitch B-gain",
         "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionOSDProfile": {
-        "message": "Selezione profilo OSD",
-        "english": "OSD Profile Selection",
-        "status": "Reused translation. Please check!"
-    },
-    "adjustmentsFunctionLEDProfile": {
-        "message": "Selezione profilo LED",
-        "english": "LED Profile Selection",
-        "status": "Reused translation. Please check!"
-    },
-    "adjustmentsFunctionPitchCollectiveFF": {
-        "message": "Pitch Collective Precomnp",
-        "english": "Pitch Collective Precomnp",
+    "adjustmentsFunctionRollB": {
+        "message": "Roll B-gain",
+        "english": "Roll B-gain",
         "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionPitchCollectiveImpulseFF": {
-        "message": "Pitch Collective Impulse Precomnp",
-        "english": "Pitch Collective Impulse Precomnp",
+    "adjustmentsFunctionYawB": {
+        "message": "Yaw B-gain",
+        "english": "Yaw B-gain",
         "status": "New entry. Please translate!"
     },
-    "adjustmentsFunctionSwashPhase": {
-        "message": "Swash Phase Angle",
-        "english": "Swash Phase Angle",
+    "adjustmentsFunctionPitchO": {
+        "message": "Pitch O-gain",
+        "english": "Pitch O-gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRollO": {
+        "message": "Roll O-gain",
+        "english": "Roll O-gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionCrossCouplingGain": {
+        "message": "Cross Coupling Gain",
+        "english": "Cross Coupling Gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionCrossCouplingRatio": {
+        "message": "Cross Coupling Ratio",
+        "english": "Cross Coupling Ratio",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionCrossCouplingCutoff": {
+        "message": "Cross Coupling Cutoff",
+        "english": "Cross Coupling Cutoff",
         "status": "New entry. Please translate!"
     },
     "servoHelp": {
@@ -3391,6 +3560,16 @@
         "english": "Adjust the collective gain to match the mechanical gain in the head design.",
         "status": "New entry. Please translate!"
     },
+    "mixerCollectiveGeoCorrection": {
+        "message": "Collective Geometry Correction [%]",
+        "english": "Collective Geometry Correction [%]",
+        "status": "New entry. Please translate!"
+    },
+    "mixerCollectiveGeoCorrectionHelp": {
+        "message": "Adjust until the collective positive and negative deflection are equal.",
+        "english": "Adjust until the collective positive and negative deflection are equal.",
+        "status": "New entry. Please translate!"
+    },
     "mixerTotalPitchLimit": {
         "message": "Total blade pitch limit [&deg;]",
         "english": "Total blade pitch limit [&deg;]",
@@ -3441,19 +3620,19 @@
         "english": "The phase offset for the swashplate controls.",
         "status": "New entry. Please translate!"
     },
-    "mixerSwashTrim1": {
-        "message": "Link trim #1",
-        "english": "Link trim #1",
+    "mixerSwashRollTrim": {
+        "message": "Roll trim [%]",
+        "english": "Roll trim [%]",
         "status": "New entry. Please translate!"
     },
-    "mixerSwashTrim2": {
-        "message": "Link trim #2",
-        "english": "Link trim #2",
+    "mixerSwashPitchTrim": {
+        "message": "Pitch trim [%]",
+        "english": "Pitch trim [%]",
         "status": "New entry. Please translate!"
     },
-    "mixerSwashTrim3": {
-        "message": "Link trim #3",
-        "english": "Link trim #3",
+    "mixerSwashCollectiveTrim": {
+        "message": "Collective trim [%]",
+        "english": "Collective trim [%]",
         "status": "New entry. Please translate!"
     },
     "mixerSwashTrimHelp": {
@@ -3582,8 +3761,8 @@
         "status": "New entry. Please translate!"
     },
     "mixerSwashLinkTrim": {
-        "message": "Swashplate Link Trims",
-        "english": "Swashplate Link Trims",
+        "message": "Swashplate Trims",
+        "english": "Swashplate Trims",
         "status": "New entry. Please translate!"
     },
     "mixerInputChannels": {
@@ -3634,6 +3813,46 @@
     "mixerOverrideSlider": {
         "message": "",
         "english": "",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderLeftLabel1": {
+        "message": "Left",
+        "english": "Left",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderRightLabel1": {
+        "message": "Right",
+        "english": "Right",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderLeftLabel2": {
+        "message": "Backward",
+        "english": "Backward",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderRightLabel2": {
+        "message": "Forward",
+        "english": "Forward",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderLeftLabel3": {
+        "message": "CW",
+        "english": "CW",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderRightLabel3": {
+        "message": "CCW",
+        "english": "CCW",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderLeftLabel4": {
+        "message": "Down",
+        "english": "Down",
+        "status": "New entry. Please translate!"
+    },
+    "mixerOverrideSliderRightLabel4": {
+        "message": "Up",
+        "english": "Up",
         "status": "New entry. Please translate!"
     },
     "mixerRuleNOP": {
@@ -4427,6 +4646,16 @@
         "english": "The governor maintains the main rotor speed constant.<br><strong>OFF:</strong> Govenor is disabled <br> <strong>PASSTHROUGH:</strong> Only slow spoolup and autorotation bailout<br><strong>STANDARD:</strong> Motor speed is controlled by the FC and speed reference from the ESC.<br><strong>MODE1:</strong> As per statndard but with Collective and Cyclic Precompensation (e.g. for a large increase collective the FC increases the signal sent to the ESC so the motor speed does not sag due to the increased load).<br><strong>MODE2:</strong> as per Mode 1 but also Battery voltage compensation",
         "status": "New entry. Please translate!"
     },
+    "govHandoverThrottle": {
+        "message": "Handover throttle [%]",
+        "english": "Handover throttle [%]",
+        "status": "New entry. Please translate!"
+    },
+    "govHandoverThrottleHelp": {
+        "message": "Throttle level above which the governor is activated. The motor must be able to start below this throttle level.",
+        "english": "Throttle level above which the governor is activated. The motor must be able to start below this throttle level.",
+        "status": "New entry. Please translate!"
+    },
     "govStartupTime": {
         "message": "Startup time",
         "english": "Startup time",
@@ -4628,18 +4857,18 @@
         "status": "New entry. Please translate!"
     },
     "govTTAGainHelp": {
-        "message": "Tail Torque Assist gain. This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 0..100",
-        "english": "Tail Torque Assist gain. This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 0..100",
+        "message": "Tail Torque Assist strength (gain). This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 50..150",
+        "english": "Tail Torque Assist strength (gain). This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 50..150",
         "status": "New entry. Please translate!"
     },
     "govTTALimit": {
-        "message": "Tail Torque Assist (TTA) limit",
-        "english": "Tail Torque Assist (TTA) limit",
+        "message": "Tail Torque Assist (TTA) limit [%]",
+        "english": "Tail Torque Assist (TTA) limit [%]",
         "status": "New entry. Please translate!"
     },
     "govTTALimitHelp": {
-        "message": "Tail Torque Assist maximum. How much extra headspeed can be applied to control the tail in the negative direction. Usually 0..50",
-        "english": "Tail Torque Assist maximum. How much extra headspeed can be applied to control the tail in the negative direction. Usually 0..50",
+        "message": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%.",
+        "english": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%.",
         "status": "New entry. Please translate!"
     },
     "govYawPrecomp": {
@@ -4963,6 +5192,21 @@
         "message": "GPS",
         "english": "GPS",
         "status": "Reused translation. Please check!"
+    },
+    "blackboxLog_vbec": {
+        "message": "BEC Voltage",
+        "english": "BEC Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "blackboxLog_vbus": {
+        "message": "+5V Voltage",
+        "english": "+5V Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "blackboxLog_temps": {
+        "message": "Temperatures",
+        "english": "Temperatures",
+        "status": "New entry. Please translate!"
     },
     "serialLoggingSupportedNote": {
         "message": "Puoi registrare i dati su un dispositivo esterno (come OpenLager) usando una porta seriale. Configura la porta nella scheda Porte.",
@@ -6767,8 +7011,8 @@
         "status": "New entry. Please translate!"
     },
     "gyroDynamicNotchFilterHelp": {
-        "message": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at that frequency. Requires at least 1k filter or loop rate.",
-        "english": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at that frequency. Requires at least 1k filter or loop rate.",
+        "message": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at those frequencies. Requires at least 1k filter or loop rate.",
+        "english": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at those frequencies. Requires at least 1k filter or loop rate.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Dynamic Notch Filter tracks peak motors noise frequency and places one or two notch filters with their center at that frequency.",
@@ -6807,13 +7051,13 @@
         }
     },
     "gyroDynamicNotchCountHelp": {
-        "message": "This sets the number of dynamic notch filters. Setting it at 0 will disable dynamic notch filter. If used standalone, 2 is absolute minimum, 4-6 recommended.",
-        "english": "This sets the number of dynamic notch filters. Setting it at 0 will disable dynamic notch filter. If used standalone, 2 is absolute minimum, 4-6 recommended.",
+        "message": "This sets the number of dynamic notch filters. If used standalone without RPM filters, 4-6 is recommended. With RPM filters 2-4 is recommended.",
+        "english": "This sets the number of dynamic notch filters. If used standalone without RPM filters, 4-6 is recommended. With RPM filters 2-4 is recommended.",
         "status": "New entry. Please translate!"
     },
     "gyroDynamicNotchQHelp": {
-        "message": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Values between 2.0 and 3.0 are recommended.",
-        "english": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Values between 2.0 and 3.0 are recommended.",
+        "message": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more precise, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and degrade flight performance.",
+        "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more precise, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and degrade flight performance.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Il fattore Q regola la larghezza del filtro notch dinamico. Un valore più alto lo rende più stretto e preciso e un valore inferiore lo rende sempre più ampio. Impostando un valore molto basso si aumenterà notevolmente il ritardo del filtro.",
@@ -6822,8 +7066,8 @@
         }
     },
     "gyroDynamicNotchMinHzHelp": {
-        "message": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent of 1200 rpm",
-        "english": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent of 1200 rpm",
+        "message": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm.",
+        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Impostala alla frequenza più bassa del rumore in ingresso che deve essere controllato dal notch dinamico.",
@@ -6832,8 +7076,8 @@
         }
     },
     "gyroDynamicNotchMaxHzHelp": {
-        "message": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be about 10-20% higher than max tail rotor frequency, but no higher than 250Hz if filter rate is 1k. If filter rate is 2k or more, then 330-500 Hz can be used, especially for smaller helis or that with motorized tail (higher range means less precision and performance)",
-        "english": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be about 10-20% higher than max tail rotor frequency, but no higher than 250Hz if filter rate is 1k. If filter rate is 2k or more, then 330-500 Hz can be used, especially for smaller helis or that with motorized tail (higher range means less precision and performance)",
+        "message": "Set this to the highest incoming noise frequency that is needed to be filtered. Should be 10-20% higher than the max tail rotor frequency, but no higher than 250Hz, if filter rate is 1k. If filter rate is 2k or higher, then 330-500 Hz can be used, especially for smaller helis with a motorised tail (higher range means less precision and lower performance).",
+        "english": "Set this to the highest incoming noise frequency that is needed to be filtered. Should be 10-20% higher than the max tail rotor frequency, but no higher than 250Hz, if filter rate is 1k. If filter rate is 2k or higher, then 330-500 Hz can be used, especially for smaller helis with a motorised tail (higher range means less precision and lower performance).",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Impostala alla frequenza più alta del rumore in ingresso che deve essere controllato dal notch dinamico.",
@@ -6919,6 +7163,11 @@
     "gyroRpmFilterSetupCustom": {
         "message": "Custom",
         "english": "Custom",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterConfigNote": {
+        "message": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable.",
+        "english": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable.",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterCustomNote": {
@@ -7328,41 +7577,67 @@
         "message": "Kill",
         "english": "Kill"
     },
-    "powerFirmwareUpgradeRequired": {
-        "message": "Aggiornamento firmware <span class=\"message-negative\">richiesto</span>. La configurazione di Batteria/Corrente/Tensione non è supportata usando API &lt; 1.33.0 (release Betaflight &lt;= 3.17).",
-        "english": "Firmware upgrade <span class=\"message-negative\">required</span>. Battery/Amperage/Voltage configurations using API &lt; 1.33.0 (Betaflight release &lt;= 3.17) is not supported."
-    },
     "powerBatteryVoltageMeterSource": {
-        "message": "Sorgente del Monitor Tensione",
-        "english": "Voltage Meter Source"
+        "message": "Battery Voltage Source",
+        "english": "Battery Voltage Source",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Sorgente del Monitor Tensione",
+            "english": "Voltage Meter Source"
+        }
     },
     "powerBatteryVoltageMeterTypeNone": {
         "message": "Nessuna",
         "english": "None"
     },
     "powerBatteryVoltageMeterTypeAdc": {
-        "message": "ADC integrato",
-        "english": "Onboard ADC"
+        "message": "Battery ADC",
+        "english": "Battery ADC",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "ADC integrato",
+            "english": "Onboard ADC"
+        }
     },
     "powerBatteryVoltageMeterTypeEsc": {
-        "message": "Sensore ESC",
-        "english": "ESC Sensor"
+        "message": "ESC Telemetry",
+        "english": "ESC Telemetry",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Sensore ESC",
+            "english": "ESC Sensor"
+        }
     },
     "powerBatteryCurrentMeterSource": {
-        "message": "Sorgente Monitor della Corrente",
-        "english": "Current Meter Source"
+        "message": "Battery Current Source",
+        "english": "Battery Current Source",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Sorgente Monitor della Corrente",
+            "english": "Current Meter Source"
+        }
     },
     "powerBatteryCurrentMeterTypeNone": {
         "message": "Nessuna",
         "english": "None"
     },
     "powerBatteryCurrentMeterTypeAdc": {
-        "message": "ADC integrato",
-        "english": "Onboard ADC"
+        "message": "Battery ADC",
+        "english": "Battery ADC",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "ADC integrato",
+            "english": "Onboard ADC"
+        }
     },
     "powerBatteryCurrentMeterTypeEsc": {
-        "message": "Sensore ESC",
-        "english": "ESC Sensor"
+        "message": "ESC Telemetry",
+        "english": "ESC Telemetry",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Sensore ESC",
+            "english": "ESC Sensor"
+        }
     },
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP Sensor",
@@ -7398,16 +7673,31 @@
         "english": "To calibrate, use a multimeter to measure the actual voltage / current draw on your craft (with a battery plugged in), and enter the values below. Then, with the same battery still plugged in, click [Calibrate]."
     },
     "powerCalibrationManagerNote": {
-        "message": "<strong>Nota:</strong> Prima di calibrare la scala assicurati che il divisore e il moltiplicatore per la tensione e l'offset per la corrente siano impostati correttamente.<br>Lasciando i valori a 0 non verrà applicata la calibrazione.</br><strong>Ricordati di rimuovere le pale prima di collegare una batteria!</strong>",
-        "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for amperage is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>"
+        "message": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>",
+        "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<strong>Nota:</strong> Prima di calibrare la scala assicurati che il divisore e il moltiplicatore per la tensione e l'offset per la corrente siano impostati correttamente.<br>Lasciando i valori a 0 non verrà applicata la calibrazione.</br><strong>Ricordati di rimuovere le pale prima di collegare una batteria!</strong>",
+            "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for amperage is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>"
+        }
     },
     "powerCalibrationManagerWarning": {
-        "message": "<span class=\"message-negative\">Attenzione:</span> La batteria <span class=\"message-negative\">non è collegata</span> oppure i sensori di tensione o corrente <span class=\"message-negative\">non sono stati configurati correttamente.</span> Assicurati che i sensori di tensione e/o corrente stiano leggendo un valore al di sopra dello 0, altrimenti non sarai in grado di calibrare usando questo strumento.",
-        "english": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and amperage meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or amperage are reading a value above 0. Otherwise you will not be able to calibrate using this tool."
+        "message": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and current meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or current are reading a value above 0. Otherwise you will not be able to calibrate using this tool.",
+        "english": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and current meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or current are reading a value above 0. Otherwise you will not be able to calibrate using this tool.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<span class=\"message-negative\">Attenzione:</span> La batteria <span class=\"message-negative\">non è collegata</span> oppure i sensori di tensione o corrente <span class=\"message-negative\">non sono stati configurati correttamente.</span> Assicurati che i sensori di tensione e/o corrente stiano leggendo un valore al di sopra dello 0, altrimenti non sarai in grado di calibrare usando questo strumento.",
+            "english": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and amperage meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or amperage are reading a value above 0. Otherwise you will not be able to calibrate using this tool."
+        }
     },
     "powerCalibrationManagerSourceNote": {
-        "message": "<span class=\"message-negative\">Attenzione:</span> I sensori di tensione e/o corrente <strong>sono stati modificati ma non salvati.</strong> Per favore, imposta correttamente i sensori e salva prima di procedere alla calibrazione.",
-        "english": "<span class=\"message-negative\">Warning:</span> Voltage and/or amperage meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate."
+        "message": "<span class=\"message-negative\">Warning:</span> Voltage and/or current meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate.",
+        "english": "<span class=\"message-negative\">Warning:</span> Voltage and/or current meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<span class=\"message-negative\">Attenzione:</span> I sensori di tensione e/o corrente <strong>sono stati modificati ma non salvati.</strong> Per favore, imposta correttamente i sensori e salva prima di procedere alla calibrazione.",
+            "english": "<span class=\"message-negative\">Warning:</span> Voltage and/or amperage meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate."
+        }
     },
     "powerCalibrationManagerConfirmationTitle": {
         "message": "Conferma gestore calibrazione",
@@ -7430,12 +7720,13 @@
         "english": "New calibrated scales are shown here. <br>Applying them will set the scales but <strong>will not save them.</strong></br> <br>After saving make sure that the new voltage and current are correct.</br>"
     },
     "powerVoltageHead": {
-        "message": "Misuratore di tensione",
-        "english": "Voltage Meter"
-    },
-    "powerVoltageWarning": {
-        "message": "<span class=\"message-negative\">Attenzione:</span> Valori limitati a 25.5V.",
-        "english": "<span class=\"message-negative\">Warning:</span> Values limited to 25.5V."
+        "message": "Voltage Meters",
+        "english": "Voltage Meters",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Misuratore di tensione",
+            "english": "Voltage Meter"
+        }
     },
     "powerVoltageValue": {
         "message": "$1 V",
@@ -7454,112 +7745,154 @@
         "english": "Battery"
     },
     "powerVoltageId20": {
-        "message": "5V",
-        "english": "5V"
+        "message": "BEC",
+        "english": "BEC",
+        "status": "Modified entry. Please translate!"
     },
     "powerVoltageId30": {
-        "message": "9V",
-        "english": "9V"
+        "message": "5V",
+        "english": "5V",
+        "status": "Modified entry. Please translate!"
     },
     "powerVoltageId40": {
-        "message": "12V",
-        "english": "12V"
+        "message": "EXT",
+        "english": "EXT",
+        "status": "Modified entry. Please translate!"
     },
     "powerVoltageId50": {
+        "message": "MCU",
+        "english": "MCU",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "ESC combinato",
+            "english": "ESC Combined"
+        }
+    },
+    "powerVoltageId100": {
         "message": "ESC combinato",
-        "english": "ESC Combined"
+        "english": "ESC Combined",
+        "status": "Reused translation. Please check!"
     },
-    "powerVoltageId60": {
-        "message": "ESC Motore 1",
-        "english": "ESC Motor 1"
+    "powerVoltageId101": {
+        "message": "ESC 1",
+        "english": "ESC 1",
+        "status": "New entry. Please translate!"
     },
-    "powerVoltageId61": {
-        "message": "ESC Motore 2",
-        "english": "ESC Motor 2"
+    "powerVoltageId102": {
+        "message": "ESC 2",
+        "english": "ESC 2",
+        "status": "New entry. Please translate!"
     },
-    "powerVoltageId62": {
-        "message": "ESC Motore 3",
-        "english": "ESC Motor 3"
+    "powerVoltageId103": {
+        "message": "ESC 3",
+        "english": "ESC 3",
+        "status": "New entry. Please translate!"
     },
-    "powerVoltageId63": {
-        "message": "ESC Motore 4",
-        "english": "ESC Motor 4"
+    "powerVoltageId104": {
+        "message": "ESC 4",
+        "english": "ESC 4",
+        "status": "New entry. Please translate!"
     },
-    "powerVoltageId64": {
-        "message": "ESC Motore 5",
-        "english": "ESC Motor 5"
-    },
-    "powerVoltageId65": {
-        "message": "ESC Motore 6",
-        "english": "ESC Motor 6"
-    },
-    "powerVoltageId66": {
-        "message": "ESC Motore 7",
-        "english": "ESC Motor 7"
-    },
-    "powerVoltageId67": {
-        "message": "ESC Motore 8",
-        "english": "ESC Motor 8"
-    },
-    "powerVoltageId68": {
-        "message": "ESC Motore 9",
-        "english": "ESC Motor 9"
-    },
-    "powerVoltageId69": {
-        "message": "ESC Motore 10",
-        "english": "ESC Motor 10"
-    },
-    "powerVoltageId70": {
-        "message": "ESC Motore 11",
-        "english": "ESC Motor 11"
-    },
-    "powerVoltageId71": {
-        "message": "ESC Motore 12",
-        "english": "ESC Motor 12"
-    },
-    "powerVoltageId80": {
+    "powerVoltageId200": {
         "message": "Cella 1",
-        "english": "Cell 1"
+        "english": "Cell 1",
+        "status": "Reused translation. Please check!"
     },
-    "powerVoltageId81": {
+    "powerVoltageId201": {
         "message": "Cella 2",
-        "english": "Cell 2"
+        "english": "Cell 2",
+        "status": "Reused translation. Please check!"
     },
-    "powerVoltageId82": {
+    "powerVoltageId202": {
         "message": "Cella 3",
-        "english": "Cell 3"
+        "english": "Cell 3",
+        "status": "Reused translation. Please check!"
     },
-    "powerVoltageId83": {
+    "powerVoltageId203": {
         "message": "Cella 4",
-        "english": "Cell 4"
+        "english": "Cell 4",
+        "status": "Reused translation. Please check!"
     },
-    "powerVoltageId84": {
+    "powerVoltageId204": {
         "message": "Cella 5",
-        "english": "Cell 5"
+        "english": "Cell 5",
+        "status": "Reused translation. Please check!"
     },
-    "powerVoltageId85": {
+    "powerVoltageId205": {
         "message": "Cella 6",
-        "english": "Cell 6"
+        "english": "Cell 6",
+        "status": "Reused translation. Please check!"
+    },
+    "powerVoltageId206": {
+        "message": "Cell 7",
+        "english": "Cell 7",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId207": {
+        "message": "Cell 8",
+        "english": "Cell 8",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId208": {
+        "message": "Cell 9",
+        "english": "Cell 9",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId209": {
+        "message": "Cell 10",
+        "english": "Cell 10",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId210": {
+        "message": "Cell 11",
+        "english": "Cell 11",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId211": {
+        "message": "Cell 12",
+        "english": "Cell 12",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId212": {
+        "message": "Cell 13",
+        "english": "Cell 13",
+        "status": "New entry. Please translate!"
+    },
+    "powerVoltageId214": {
+        "message": "Cell 14",
+        "english": "Cell 14",
+        "status": "New entry. Please translate!"
     },
     "powerVoltageScale": {
         "message": "Scala",
         "english": "Scale"
     },
     "powerVoltageDivider": {
-        "message": "Valore divisore",
-        "english": "Divider Value"
+        "message": "Divider",
+        "english": "Divider",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Valore divisore",
+            "english": "Divider Value"
+        }
     },
     "powerVoltageMultiplier": {
-        "message": "Valore moltiplicatore",
-        "english": "Multiplier Value"
+        "message": "Multiplier",
+        "english": "Multiplier",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Valore moltiplicatore",
+            "english": "Multiplier Value"
+        }
     },
     "powerAmperageHead": {
-        "message": "Amperometro",
-        "english": "Amperage Meter"
-    },
-    "powerAmperageWarning": {
-        "message": "<span class=\"message-negative\">Attenzione:</span> Valori limitati a 63.5A.",
-        "english": "<span class=\"message-negative\">Warning:</span> Values limited to 63.5A."
+        "message": "Current Meters",
+        "english": "Current Meters",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Amperometro",
+            "english": "Amperage Meter"
+        }
     },
     "powerAmperageValue": {
         "message": "$1 A",
@@ -7569,65 +7902,30 @@
         "message": "Batteria",
         "english": "Battery"
     },
-    "powerAmperageId50": {
+    "powerAmperageId100": {
         "message": "ESC combinato",
-        "english": "ESC Combined"
+        "english": "ESC Combined",
+        "status": "Reused translation. Please check!"
     },
-    "powerAmperageId60": {
-        "message": "ESC Motore 1",
-        "english": "ESC Motor 1"
+    "powerAmperageId101": {
+        "message": "ESC 1",
+        "english": "ESC 1",
+        "status": "New entry. Please translate!"
     },
-    "powerAmperageId61": {
-        "message": "ESC Motore 2",
-        "english": "ESC Motor 2"
+    "powerAmperageId102": {
+        "message": "ESC 2",
+        "english": "ESC 2",
+        "status": "New entry. Please translate!"
     },
-    "powerAmperageId62": {
-        "message": "ESC Motore 3",
-        "english": "ESC Motor 3"
+    "powerAmperageId103": {
+        "message": "ESC 3",
+        "english": "ESC 3",
+        "status": "New entry. Please translate!"
     },
-    "powerAmperageId63": {
-        "message": "ESC Motore 4",
-        "english": "ESC Motor 4"
-    },
-    "powerAmperageId64": {
-        "message": "ESC Motore 5",
-        "english": "ESC Motor 5"
-    },
-    "powerAmperageId65": {
-        "message": "ESC Motore 6",
-        "english": "ESC Motor 6"
-    },
-    "powerAmperageId66": {
-        "message": "ESC Motore 7",
-        "english": "ESC Motor 7"
-    },
-    "powerAmperageId67": {
-        "message": "ESC Motore 8",
-        "english": "ESC Motor 8"
-    },
-    "powerAmperageId68": {
-        "message": "ESC Motore 9",
-        "english": "ESC Motor 9"
-    },
-    "powerAmperageId69": {
-        "message": "ESC Motore 10",
-        "english": "ESC Motor 10"
-    },
-    "powerAmperageId70": {
-        "message": "ESC Motore 11",
-        "english": "ESC Motor 11"
-    },
-    "powerAmperageId71": {
-        "message": "ESC Motore 12",
-        "english": "ESC Motor 12"
-    },
-    "powerAmperageId80": {
-        "message": "Virtuale",
-        "english": "Virtual"
-    },
-    "powerAmperageId90": {
-        "message": "MSP",
-        "english": "MSP"
+    "powerAmperageId104": {
+        "message": "ESC 4",
+        "english": "ESC 4",
+        "status": "New entry. Please translate!"
     },
     "powerMahValue": {
         "message": "$1 mAh",
@@ -7642,12 +7940,22 @@
         "english": "Offset [mA]"
     },
     "powerAmperageCalibration": {
-        "message": "Corrente misurata",
-        "english": "Measured Amperage"
+        "message": "Measured Current",
+        "english": "Measured Current",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Corrente misurata",
+            "english": "Measured Amperage"
+        }
     },
     "powerAmperageCalibratedScale": {
-        "message": "Scala Corrente Calibrata:",
-        "english": "Calibrated Amperage Scale:"
+        "message": "Calibrated Current Scale:",
+        "english": "Calibrated Current Scale:",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Scala Corrente Calibrata:",
+            "english": "Calibrated Amperage Scale:"
+        }
     },
     "powerBatteryHead": {
         "message": "Batteria",
@@ -7678,8 +7986,13 @@
         "english": "mAh used"
     },
     "powerBatteryAmperage": {
-        "message": "Corrente",
-        "english": "Amperage"
+        "message": "Current",
+        "english": "Current",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Corrente",
+            "english": "Amperage"
+        }
     },
     "powerBatteryCapacity": {
         "message": "Capacità (mAh)",
@@ -9624,8 +9937,8 @@
         "status": "New entry. Please translate!"
     },
     "dialogConfirmArmingNote": {
-        "message": "WARNING: Are you sure you want to <strong>enable arming</strong> while Configurator is connected?<br /><br /><span class=\"message-negative\">NOTE:</span> While armed, all changes to settings, including saving settings, are ignored!",
-        "english": "WARNING: Are you sure you want to <strong>enable arming</strong> while Configurator is connected?<br /><br /><span class=\"message-negative\">NOTE:</span> While armed, all changes to settings, including saving settings, are ignored!",
+        "message": "WARNING: Are you sure you want to <strong>enable arming</strong> while the Configurator is connected?",
+        "english": "WARNING: Are you sure you want to <strong>enable arming</strong> while the Configurator is connected?",
         "status": "New entry. Please translate!"
     },
     "dialogConfirmArmingConfirm": {
