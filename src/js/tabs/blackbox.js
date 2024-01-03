@@ -125,6 +125,7 @@ TABS.blackbox = {
         "servos",
         "vbec",
         "vbus",
+        "temps"
     ],
 
     LOG_RATES: {

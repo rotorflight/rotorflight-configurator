@@ -3267,6 +3267,9 @@
     "blackboxLog_vbus": {
         "message": "+5V Voltage"
     },
+    "blackboxLog_temps": {
+        "message": "Temperatures"
+    },
     "serialLoggingSupportedNote": {
         "message": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
     },
