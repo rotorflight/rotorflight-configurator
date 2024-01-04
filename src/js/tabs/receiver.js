@@ -248,28 +248,28 @@ TABS.receiver.initialize = function (callback) {
         $('input[name="cyclic_deadband"]')
             .val(FC.RC_CONFIG.rc_deadband)
             .change(function () {
-                self.deadband = parseInt($(this).val());
+                self.deadband = getIntegerValue(this);
             })
             .change();
 
         $('input[name="yaw_deadband"]')
             .val(FC.RC_CONFIG.rc_yaw_deadband)
             .change(function () {
-                self.yawDeadband = parseInt($(this).val());
+                self.yawDeadband = getIntegerValue(this);
             })
             .change();
 
         $('input[name="stick_center"]')
             .val(FC.RC_CONFIG.rc_center)
             .change(function () {
-                self.rcCenter = parseInt($(this).val());
+                self.rcCenter = getIntegerValue(this);
             })
             .change();
 
         $('input[name="stick_deflection"]')
             .val(FC.RC_CONFIG.rc_deflection)
             .change(function () {
-                self.rcDeflection = parseInt($(this).val());
+                self.rcDeflection = getIntegerValue(this);
             })
             .change();
 
@@ -279,7 +279,7 @@ TABS.receiver.initialize = function (callback) {
 
         armThrottle.val(FC.RC_CONFIG.rc_arm_throttle)
             .change(function () {
-                const value = parseInt($(this).val());
+                const value = getIntegerValue(this);
                 self.rcArmThrottle = value;
                 zeroThrottle.attr('min', value + 10);
             })
@@ -287,7 +287,7 @@ TABS.receiver.initialize = function (callback) {
 
         zeroThrottle.val(FC.RC_CONFIG.rc_min_throttle)
             .change(function () {
-                const value = parseInt($(this).val());
+                const value = getIntegerValue(this);
                 self.rcZeroThrottle = value;
                 armThrottle.attr('max', value - 10);
                 fullThrottle.attr('min', value + 10);
@@ -296,7 +296,7 @@ TABS.receiver.initialize = function (callback) {
 
         fullThrottle.val(FC.RC_CONFIG.rc_max_throttle)
             .change(function () {
-                const value = parseInt($(this).val());
+                const value = getIntegerValue(this);
                 self.rcFullThrottle = value;
                 zeroThrottle.attr('max', value - 10);
             })

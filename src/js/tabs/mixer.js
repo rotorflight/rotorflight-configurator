@@ -167,7 +167,7 @@ TABS.mixer.initialize = function (callback) {
         });
 
         mixerSlider.on('slide', function () {
-            mixerInput.val(Number($(this).val()).toFixed(axis.fixed));
+            mixerInput.val(parseFloat($(this).val()).toFixed(axis.fixed));
         });
 
         mixerSlider.on('change', function () {
@@ -175,7 +175,7 @@ TABS.mixer.initialize = function (callback) {
         });
 
         mixerInput.change(function () {
-            const value = $(this).val();
+            const value = parseFloat(getNumberInput($(this)));
             mixerSlider.val(value);
             FC.MIXER_OVERRIDE[inputIndex] = Math.round(value / axis.scale);
             mspHelper.sendMixerOverride(inputIndex);
@@ -277,9 +277,9 @@ TABS.mixer.initialize = function (callback) {
         const collectiveRate = Math.abs(FC.MIXER_INPUTS[4].rate) * 0.1;
         const cyclicRate = Math.abs(FC.MIXER_INPUTS[1].rate) * 0.1;
 
-        const collectiveMax = FC.MIXER_INPUTS[4].max * 0.012;
-        const cyclicMax = FC.MIXER_INPUTS[2].max * 0.012;
-        const totalMax = FC.MIXER_CONFIG.blade_pitch_limit * 0.012;
+        const collectiveMax = FC.MIXER_INPUTS[4].max * 12/1000;
+        const cyclicMax = FC.MIXER_INPUTS[2].max * 12/1000;
+        const totalMax = FC.MIXER_CONFIG.blade_pitch_limit * 12/1000;
 
         const yawDir = (FC.MIXER_INPUTS[3].rate < 0) ? -1 : 1;
         const yawRate = Math.abs(FC.MIXER_INPUTS[3].rate) * 0.1;
@@ -338,11 +338,11 @@ TABS.mixer.initialize = function (callback) {
                     $('.mixerTailMotor .mixerOverrideEnable input').change();
             }
             else {
-                const yawMax = FC.MIXER_INPUTS[3].max * 0.024;
-                const yawMin = FC.MIXER_INPUTS[3].min * 0.024;
+                const yawMax = FC.MIXER_INPUTS[3].max * 24/1000;
+                const yawMin = FC.MIXER_INPUTS[3].min * 24/1000;
                 $('#mixerTailRotorMinYaw').val(yawMin.toFixed(1));
                 $('#mixerTailRotorMaxYaw').val(yawMax.toFixed(1));
-                $('#mixerTailRotorCenterTrim').val(FC.MIXER_CONFIG.tail_center_trim * 0.024);
+                $('#mixerTailRotorCenterTrim').val(FC.MIXER_CONFIG.tail_center_trim * 24/1000);
                 $('.mixerOverrideAxis .mixerTailRotor').addClass('mixerOverrideActive');
                 $('.mixerOverrideAxis .mixerTailMotor').removeClass('mixerOverrideActive');
                 if (change)
@@ -353,7 +353,7 @@ TABS.mixer.initialize = function (callback) {
         }
 
         $('#mixerTailRotorMode').change(function () {
-            const val = $(this).val();
+            const val = parseInt($(this).val());
             setTailRotorMode(val, true);
         });
 
@@ -370,22 +370,21 @@ TABS.mixer.initialize = function (callback) {
         });
 
         $('.tab-mixer .mixerConfig').change(function() {
-            FC.MIXER_CONFIG.swash_type = parseInt($('#mixerSwashType').val());
-            FC.MIXER_CONFIG.swash_phase = parseInt($('#mixerSwashPhase').val() * 10);
-            //FC.MIXER_CONFIG.swash_ring = parseInt($('#mixerSwashRing').val());
+            FC.MIXER_CONFIG.swash_type = getIntegerValue('#mixerSwashType');
+            FC.MIXER_CONFIG.swash_phase = getIntegerValue('#mixerSwashPhase', 10);
             FC.MIXER_CONFIG.main_rotor_dir = parseInt($('#mixerMainRotorDirection').val());
-            FC.MIXER_CONFIG.blade_pitch_limit = $('#mixerTotalPitchLimit').val() / 0.012;
-            FC.MIXER_CONFIG.swash_trim[0] = parseInt($('#mixerSwashRollTrim').val() * 10);
-            FC.MIXER_CONFIG.swash_trim[1] = parseInt($('#mixerSwashPitchTrim').val() * 10);
-            FC.MIXER_CONFIG.swash_trim[2] = parseInt($('#mixerSwashCollectiveTrim').val() * 10);
-            FC.MIXER_CONFIG.tail_rotor_mode = parseInt($('#mixerTailRotorMode').val());
-            FC.MIXER_CONFIG.tail_motor_idle = parseInt($('#mixerTailMotorIdle').val() * 10);
-            FC.MIXER_CONFIG.coll_geo_correction = parseInt($('#mixerCollectiveGeoCorrection').val() * 5);
+            FC.MIXER_CONFIG.blade_pitch_limit = getIntegerValue('#mixerTotalPitchLimit', 1000/12);
+            FC.MIXER_CONFIG.swash_trim[0] = getIntegerValue('#mixerSwashRollTrim', 10);
+            FC.MIXER_CONFIG.swash_trim[1] = getIntegerValue('#mixerSwashPitchTrim', 10);
+            FC.MIXER_CONFIG.swash_trim[2] = getIntegerValue('#mixerSwashCollectiveTrim', 10);
+            FC.MIXER_CONFIG.tail_rotor_mode = getIntegerValue('#mixerTailRotorMode');
+            FC.MIXER_CONFIG.tail_motor_idle = getIntegerValue('#mixerTailMotorIdle', 10);
+            FC.MIXER_CONFIG.coll_geo_correction = getIntegerValue('#mixerCollectiveGeoCorrection', 5);
 
             if (FC.MIXER_CONFIG.tail_rotor_mode > 0)
-                FC.MIXER_CONFIG.tail_center_trim = parseInt($('#mixerTailMotorCenterTrim').val() * 10);
+                FC.MIXER_CONFIG.tail_center_trim = getIntegerValue('#mixerTailMotorCenterTrim', 10);
             else
-                FC.MIXER_CONFIG.tail_center_trim = parseInt($('#mixerTailRotorCenterTrim').val() / 0.024);
+                FC.MIXER_CONFIG.tail_center_trim = getIntegerValue('#mixerTailRotorCenterTrim', 1000/24);
 
             self.MIXER_CONFIG_dirty = true;
             self.needSave = true;
@@ -395,9 +394,9 @@ TABS.mixer.initialize = function (callback) {
         });
 
         $('.tab-mixer .mixerInput1').change(function() {
-            const aileronDir = $('#mixerAileronDirection').val() * 1;
-            const cyclicRate = $('#mixerCyclicCalibration').val() * 10;
-            const cyclicMax = $('#mixerCyclicLimit').val() / 0.012;
+            const aileronDir = getIntegerValue('#mixerAileronDirection');
+            const cyclicRate = getIntegerValue('#mixerCyclicCalibration', 10);
+            const cyclicMax = getIntegerValue('#mixerCyclicLimit', 1000/12);
             FC.MIXER_INPUTS[1].rate = cyclicRate * aileronDir;
             FC.MIXER_INPUTS[1].min = -cyclicMax;
             FC.MIXER_INPUTS[1].max =  cyclicMax;
@@ -410,9 +409,9 @@ TABS.mixer.initialize = function (callback) {
         });
 
         $('.tab-mixer .mixerInput2').change(function() {
-            const elevatorDir = $('#mixerElevatorDirection').val() * 1;
-            const cyclicRate = $('#mixerCyclicCalibration').val() * 10;
-            const cyclicMax = $('#mixerCyclicLimit').val() / 0.012;
+            const elevatorDir = getIntegerValue('#mixerElevatorDirection');
+            const cyclicRate = getIntegerValue('#mixerCyclicCalibration', 10);
+            const cyclicMax = getIntegerValue('#mixerCyclicLimit', 1000/12);
             FC.MIXER_INPUTS[2].rate = cyclicRate * elevatorDir;
             FC.MIXER_INPUTS[2].min = -cyclicMax;
             FC.MIXER_INPUTS[2].max =  cyclicMax;
@@ -425,18 +424,18 @@ TABS.mixer.initialize = function (callback) {
         });
 
         $('.tab-mixer .mixerInput3').change(function() {
-            const yawDir = $('#mixerTailRotorDirection').val() * 1;
-            const yawRate = $('#mixerTailRotorCalibration').val() * 10;
+            const yawDir = getIntegerValue('#mixerTailRotorDirection');
+            const yawRate = getIntegerValue('#mixerTailRotorCalibration', 10);
 
             let yawMin = 0.0, yawMax = 0.0;
 
             if (FC.MIXER_CONFIG.tail_rotor_mode > 0) {
-                yawMin = $('#mixerTailMotorMinYaw').val() / 0.1;
-                yawMax = $('#mixerTailMotorMaxYaw').val() / 0.1;
+                yawMin = getIntegerValue('#mixerTailMotorMinYaw', 10);
+                yawMax = getIntegerValue('#mixerTailMotorMaxYaw', 10);
             }
             else {
-                yawMin = $('#mixerTailRotorMinYaw').val() / 0.024;
-                yawMax = $('#mixerTailRotorMaxYaw').val() / 0.024;
+                yawMin = getIntegerValue('#mixerTailRotorMinYaw', 1000/24);
+                yawMax = getIntegerValue('#mixerTailRotorMaxYaw', 1000/24);
             }
 
             FC.MIXER_INPUTS[3].rate = yawRate * yawDir;
@@ -451,9 +450,9 @@ TABS.mixer.initialize = function (callback) {
         });
 
         $('.tab-mixer .mixerInput4').change(function() {
-            const collectiveDir = $('#mixerCollectiveDirection').val() * 1;
-            const collectiveRate = $('#mixerCollectiveCalibration').val() * 10;
-            const collectiveMax = $('#mixerCollectiveLimit').val() / 0.012;
+            const collectiveDir = getIntegerValue('#mixerCollectiveDirection');
+            const collectiveRate = getIntegerValue('#mixerCollectiveCalibration', 10);
+            const collectiveMax = getIntegerValue('#mixerCollectiveLimit', 1000/12);
             FC.MIXER_INPUTS[4].rate = collectiveRate * collectiveDir;
             FC.MIXER_INPUTS[4].min = -collectiveMax;
             FC.MIXER_INPUTS[4].max =  collectiveMax;

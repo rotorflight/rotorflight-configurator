@@ -253,16 +253,6 @@ function startProcess() {
 
     $('#tabs ul.mode-disconnected li a:first').click();
 
-    // listen to all input change events and adjust the value within limits if necessary
-    $("#content").on('focus', 'input[type="number"]', function () {
-        const element = $(this);
-        const val = element.val();
-
-        if (!isNaN(val)) {
-            element.data('previousValue', parseFloat(val));
-        }
-    });
-
     ConfigStorage.get('zoomLevel', function (result) {
         if (result.zoomLevel) {
             GUI.set_zoom(result.zoomLevel, false);
@@ -289,11 +279,12 @@ function startProcess() {
     $("#content").on('keydown', 'input[type="number"]', function (e) {
         // whitelist all that we need for numeric control
         const whitelist = [
-            96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, // numpad and standard number keypad
-            109, 189, // minus on numpad and in standard keyboard
-            8, 46, 9, // backspace, delete, tab
-            190, 110, // decimal point
-            37, 38, 39, 40, 13, // arrows and enter
+            96, 97, 98, 99, 100, 101, 102, 103, 104, 105,       // numpad
+            48, 49, 50, 51, 52, 53, 54, 55, 56, 57,             // number keys
+            109, 189,                                           // minus on numpad and in standard keyboard
+            190, 110,                                           // decimal point
+            37, 38, 39, 40,                                     // arrows
+            8, 46, 9, 13                                        // backspace, delete, tab, enter
         ];
 
         if (whitelist.indexOf(e.keyCode) === -1) {
@@ -301,46 +292,19 @@ function startProcess() {
         }
     });
 
+    // listen to all input change events and adjust the value within limits if necessary
+    $("#content").on('focus', 'input[type="number"]', function () {
+        const element = $(this);
+        const value = element.val();
+        if (!isNaN(value)) {
+            element.data('previousValue', parseFloat(value));
+        }
+    });
+
     $("#content").on('change', 'input[type="number"]', function () {
         const element = $(this);
-        const min = parseFloat(element.prop('min'));
-        const max = parseFloat(element.prop('max'));
-        const step = parseFloat(element.prop('step'));
-
-        let val = parseFloat(element.val());
-
-        // only adjust minimal end if bound is set
-        if (element.prop('min') && val < min) {
-            element.val(min);
-            val = min;
-        }
-
-        // only adjust maximal end if bound is set
-        if (element.prop('max') && val > max) {
-            element.val(max);
-            val = max;
-        }
-
-        // if entered value is illegal use previous value instead
-        if (isNaN(val)) {
-            element.val(element.data('previousValue'));
-            val = element.data('previousValue');
-        }
-
-        // if step is not set or step is int and value is float use previous value instead
-        if ((isNaN(step) || step % 1 === 0) && val % 1 !== 0) {
-            element.val(element.data('previousValue'));
-            val = element.data('previousValue');
-        }
-
-        // if step is set and is float and value is int, convert to float, keep decimal places in float according to step *experimental*
-        if (!isNaN(step) && step % 1 !== 0) {
-            const decimal_places = String(step).split('.')[1].length;
-
-            if (val % 1 === 0 || String(val).split('.')[1].length !== decimal_places) {
-                element.val(val.toFixed(decimal_places));
-            }
-        }
+        const value = getNumberInput(element);
+        element.val(value);
     });
 
     $("#showlog").on('click', function () {
@@ -503,6 +467,41 @@ function zeroPad(value, width) {
     }
 
     return valuePadded;
+}
+
+function getNumberInput(self) {
+    const elem = $(self);
+    const step = parseFloat(elem.prop('step')) || 1;
+    const min = parseFloat(elem.prop('min'));
+    const max = parseFloat(elem.prop('max'));
+
+    let val = parseFloat(elem.val());
+
+    // if entered value is illegal use previous value instead
+    if (isNaN(val)) {
+        val = elem.data('previousValue') || 0;
+    }
+
+    // only adjust minimal end if bound is set
+    if (elem.prop('min') && val < min) {
+        val = min;
+    }
+
+    // only adjust maximal end if bound is set
+    if (elem.prop('max') && val > max) {
+        val = max;
+    }
+
+    // Round to steps
+    const decimals = (step % 1 === 0) ? 0 : String(step).split('.')[1].length;
+    const value = Math.round(val / step) * step;
+    val = value.toFixed(decimals);
+
+    return val;
+}
+
+function getIntegerValue(self, scale=1) {
+    return Math.round(getNumberInput(self) * scale);
 }
 
 function generateFilename(prefix, suffix) {

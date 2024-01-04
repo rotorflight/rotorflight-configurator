@@ -170,7 +170,7 @@ TABS.servos.initialize = function (callback) {
             });
 
             servoInput.change(function () {
-                const value = $(this).val();
+                const value = getIntegerValue(this);
                 servoSlider.val(value);
                 FC.SERVO_OVERRIDE[servoIndex] = Math.round(value * 1000 / 50);
                 mspHelper.sendServoOverride(servoIndex);
@@ -246,13 +246,13 @@ TABS.servos.initialize = function (callback) {
 
             const servo = $(`.tab-servos .servoConfig${servoIndex}`);
 
-            FC.SERVO_CONFIG[servoIndex].mid = parseInt($('#mid',servo).val());
-            FC.SERVO_CONFIG[servoIndex].min = parseInt($('#min',servo).val());
-            FC.SERVO_CONFIG[servoIndex].max = parseInt($('#max',servo).val());
-            FC.SERVO_CONFIG[servoIndex].rneg = parseInt($('#rneg',servo).val());
-            FC.SERVO_CONFIG[servoIndex].rpos = parseInt($('#rpos',servo).val());
-            FC.SERVO_CONFIG[servoIndex].rate = parseInt($('#rate',servo).val());
-            FC.SERVO_CONFIG[servoIndex].speed = parseInt($('#speed',servo).val());
+            FC.SERVO_CONFIG[servoIndex].mid = getIntegerValue($('#mid',servo));
+            FC.SERVO_CONFIG[servoIndex].min = getIntegerValue($('#min',servo));
+            FC.SERVO_CONFIG[servoIndex].max = getIntegerValue($('#max',servo));
+            FC.SERVO_CONFIG[servoIndex].rneg = getIntegerValue($('#rneg',servo));
+            FC.SERVO_CONFIG[servoIndex].rpos = getIntegerValue($('#rpos',servo));
+            FC.SERVO_CONFIG[servoIndex].rate = getIntegerValue($('#rate',servo));
+            FC.SERVO_CONFIG[servoIndex].speed = getIntegerValue($('#speed',servo));
             FC.SERVO_CONFIG[servoIndex].flags = $('#reversed',servo).prop('checked') ? self.FLAG_REVERSE : 0;
             FC.SERVO_CONFIG[servoIndex].flags |= $('#geocor',servo).prop('checked') ? self.FLAG_GEOCOR : 0;
         }
