@@ -286,7 +286,6 @@ TABS.status.initialize = function (callback) {
         const dialogConfirmArming = $('.dialogConfirmArming')[0];
 
         function updateArming(active) {
-            enableArmingSwitch.prop('checked', active);
             FC.CONFIG.enableArmingFlag = active;
             mspHelper.setArmingEnabled(active);
         }
@@ -302,7 +301,7 @@ TABS.status.initialize = function (callback) {
 
         $('.dialogConfirmArming-cancelbtn').click(function() {
             dialogConfirmArming.close();
-            updateArming(false);
+            enableArmingSwitch.prop('checked', false).change();
         });
 
         $('.dialogConfirmArming-confirmbtn').click(function() {
