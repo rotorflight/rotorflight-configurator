@@ -327,8 +327,8 @@ TABS.mixer.initialize = function (callback) {
             $('.mixerTailMotor .mixerOverrideEnable input').prop('checked', enabled && motorised);
 
             if (motorised) {
-                const yawMax = FC.MIXER_INPUTS[3].max * 0.1;
-                const yawMin = FC.MIXER_INPUTS[3].min * 0.1;
+                const yawMin = FC.MIXER_INPUTS[3].min * -0.1;
+                const yawMax = FC.MIXER_INPUTS[3].max *  0.1;
                 $('#mixerTailMotorMinYaw').val(yawMin.toFixed(1));
                 $('#mixerTailMotorMaxYaw').val(yawMax.toFixed(1));
                 $('#mixerTailMotorCenterTrim').val(FC.MIXER_CONFIG.tail_center_trim * 0.1);
@@ -338,8 +338,8 @@ TABS.mixer.initialize = function (callback) {
                     $('.mixerTailMotor .mixerOverrideEnable input').change();
             }
             else {
-                const yawMax = FC.MIXER_INPUTS[3].max * 24/1000;
-                const yawMin = FC.MIXER_INPUTS[3].min * 24/1000;
+                const yawMin = FC.MIXER_INPUTS[3].min * -24/1000;
+                const yawMax = FC.MIXER_INPUTS[3].max *  24/1000;
                 $('#mixerTailRotorMinYaw').val(yawMin.toFixed(1));
                 $('#mixerTailRotorMaxYaw').val(yawMax.toFixed(1));
                 $('#mixerTailRotorCenterTrim').val(FC.MIXER_CONFIG.tail_center_trim * 24/1000);
@@ -430,12 +430,12 @@ TABS.mixer.initialize = function (callback) {
             let yawMin = 0.0, yawMax = 0.0;
 
             if (FC.MIXER_CONFIG.tail_rotor_mode > 0) {
-                yawMin = getIntegerValue('#mixerTailMotorMinYaw', 10);
-                yawMax = getIntegerValue('#mixerTailMotorMaxYaw', 10);
+                yawMin = getIntegerValue('#mixerTailMotorMinYaw', -10);
+                yawMax = getIntegerValue('#mixerTailMotorMaxYaw',  10);
             }
             else {
-                yawMin = getIntegerValue('#mixerTailRotorMinYaw', 1000/24);
-                yawMax = getIntegerValue('#mixerTailRotorMaxYaw', 1000/24);
+                yawMin = getIntegerValue('#mixerTailRotorMinYaw', -1000/24);
+                yawMax = getIntegerValue('#mixerTailRotorMaxYaw',  1000/24);
             }
 
             FC.MIXER_INPUTS[3].rate = yawRate * yawDir;
