@@ -879,7 +879,8 @@ progress[value]::-webkit-progress-bar {
     background-color: #393b3a;
 }
 
-.tab-receiver .channels .label {
+.tab-receiver .channels .label1,
+.tab-receiver .channels .label2 {
     color: white;
 }
 
@@ -1011,12 +1012,13 @@ progress[value]::-webkit-progress-bar {
     background-color: #393b3a;
 }
 
-.tab-status .bars .meter-bar {
+.tab-status .bars .bar {
     background-color: #393b3a;
     border: 1px solid #c0c0c0;
 }
 
-.tab-status .bars .meter-bar .label {
+.tab-status .bars .label1,
+.tab-status .bars .label2 {
     color: white;
 }
 
