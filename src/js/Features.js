@@ -15,7 +15,7 @@ const Features = function (config) {
         { bit: 15,  group: 'RSSI',         name: 'RSSI_ADC' },
         { bit: 16,  group: 'OTHER',        name: 'LED_STRIP' },
         { bit: 17,  group: 'HIDDEN',       name: 'DISPLAY' },
-        { bit: 18,  group: 'OTHER',        name: 'OSD' },
+        { bit: 18,  group: 'HIDDEN',       name: 'OSD' },
         { bit: 25,  group: 'RX_PROTO',     name: 'RX_SPI' },
         { bit: 26,  group: 'HIDDEN',       name: 'GOVERNOR' },
         { bit: 27,  group: 'HIDDEN',       name: 'ESC_SENSOR' },
