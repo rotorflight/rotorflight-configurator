@@ -331,7 +331,7 @@ TABS.mixer.initialize = function (callback) {
                 const yawMax = FC.MIXER_INPUTS[3].max *  0.1;
                 $('#mixerTailMotorMinYaw').val(yawMin.toFixed(1));
                 $('#mixerTailMotorMaxYaw').val(yawMax.toFixed(1));
-                $('#mixerTailMotorCenterTrim').val(FC.MIXER_CONFIG.tail_center_trim * 0.1);
+                $('#mixerTailMotorCenterTrim').val((FC.MIXER_CONFIG.tail_center_trim * 0.1).toFixed(1));
                 $('.mixerOverrideAxis .mixerTailMotor').addClass('mixerOverrideActive');
                 $('.mixerOverrideAxis .mixerTailRotor').removeClass('mixerOverrideActive');
                 if (change)
@@ -342,7 +342,7 @@ TABS.mixer.initialize = function (callback) {
                 const yawMax = FC.MIXER_INPUTS[3].max *  24/1000;
                 $('#mixerTailRotorMinYaw').val(yawMin.toFixed(1));
                 $('#mixerTailRotorMaxYaw').val(yawMax.toFixed(1));
-                $('#mixerTailRotorCenterTrim').val(FC.MIXER_CONFIG.tail_center_trim * 24/1000);
+                $('#mixerTailRotorCenterTrim').val((FC.MIXER_CONFIG.tail_center_trim * 24/1000).toFixed(1));
                 $('.mixerOverrideAxis .mixerTailRotor').addClass('mixerOverrideActive');
                 $('.mixerOverrideAxis .mixerTailMotor').removeClass('mixerOverrideActive');
                 if (change)
