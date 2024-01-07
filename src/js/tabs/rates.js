@@ -421,7 +421,7 @@ TABS.rates.initialize = function (callback) {
             MSP.send_message(MSPCodes.MSP_RC_COMMAND, false, false, function() {
                 self.rcChannels[0] = 1500 + FC.RC_COMMAND[0];
                 self.rcChannels[1] = 1500 + FC.RC_COMMAND[1];
-                self.rcChannels[2] = 1500 - FC.RC_COMMAND[2];
+                self.rcChannels[2] = 1500 + FC.RC_COMMAND[2];
                 self.rcChannels[3] = 1500 + FC.RC_COMMAND[3];
             });
         }
