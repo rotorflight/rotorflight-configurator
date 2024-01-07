@@ -102,19 +102,19 @@
 
     <table class="battery-state">
         <tbody class="battery-state">
-        <tr class="connection-state">
+        <tr class="connection-state" id="battery-connection-state">
             <td i18n="powerBatteryConnected"></td>
             <td class="value">?</td>
         </tr>
-        <tr class="voltage">
+        <tr class="voltage" id="battery-voltage">
             <td i18n="powerBatteryVoltage"></td>
             <td class="value"></td>
         </tr>
-        <tr class="amperage">
+        <tr class="amperage" id="battery-amperage">
             <td i18n="powerBatteryAmperage"></td>
             <td class="value"></td>
         </tr>
-        <tr class="mah-drawn">
+        <tr class="mah-drawn" id="battery-mah-drawn">
             <td i18n="powerBatteryCurrentDrawn"></td>
             <td class="value"></td>
         </tr>
@@ -136,54 +136,57 @@
         </div>
 
         <div class="number">
-            <label> <input type="number" name="mincellvoltage" step="0.1" min="1" max="5" /> <span
-                i18n="powerBatteryMinimum"></span>
+            <label>
+                <input type="number" name="mincellvoltage" step="0.01" min="1" max="5" />
+                <span i18n="powerBatteryMinimum"></span>
             </label>
         </div>
         <div class="number">
-            <label> <input type="number" name="maxcellvoltage" step="0.1" min="1" max="5" /> <span
-                i18n="powerBatteryMaximum"></span>
+            <label>
+                <input type="number" name="maxcellvoltage" step="0.01" min="1" max="5" />
+                <span i18n="powerBatteryMaximum"></span>
             </label>
         </div>
         <div class="number">
-            <label> <input type="number" name="warningcellvoltage" step="0.1" min="1" max="5" /> <span
-                i18n="powerBatteryWarning"></span>
+            <label>
+                <input type="number" name="warningcellvoltage" step="0.01" min="1" max="5" />
+                <span i18n="powerBatteryWarning"></span>
             </label>
         </div>
         <div class="number">
-            <label> <input type="number" name="capacity" step="50" min="0" max="20000" /> <span
-                i18n="powerBatteryCapacity"></span>
+            <label>
+                <input type="number" name="capacity" step="50" min="0" max="20000" />
+                <span i18n="powerBatteryCapacity"></span>
             </label>
         </div>
     </div>
 
     <div class="voltage-configuration">
         <div class="number">
-            <label> <input type="number" name="vbatscale" step="1" min="0" max="65535" /> <span
-                i18n="powerVoltageScale"></span>
+            <label>
+                <input type="number" name="vbatscale" step="1" min="0" max="65535" />
+                <span i18n="powerVoltageScale"></span>
             </label>
         </div>
         <div class="number">
-            <label> <input type="number" name="vbatresdivval" step="1" min="1" max="65535" /> <span
-                i18n="powerVoltageDivider"></span>
+            <label>
+                <input type="number" name="vbatresdivval" step="1" min="1" max="65535" />
+                <span i18n="powerVoltageDivider"></span>
             </label>
         </div>
-        <!--div class="number">
-            <label> <input type="number" name="vbatresdivmultiplier" step="1" min="1" max="255" /> <span
-                i18n="powerVoltageMultiplier"></span>
-            </label>
-        </div-->
     </div>
 
     <div class="amperage-configuration">
         <div class="number">
-            <label> <input type="number" name="amperagescale" step="1" min="-16000" max="16000" /> <span
-                i18n="powerAmperageScale"></span>
+            <label>
+                <input type="number" name="amperagescale" step="1" min="-16000" max="16000" />
+                <span i18n="powerAmperageScale"></span>
             </label>
         </div>
         <div class="number">
-            <label> <input type="number" name="amperageoffset" step="1" min="-32000" max="32000" /> <span
-                i18n="powerAmperageOffset"></span>
+            <label>
+                <input type="number" name="amperageoffset" step="1" min="-32000" max="32000" />
+                <span i18n="powerAmperageOffset"></span>
             </label>
         </div>
     </div>
@@ -204,15 +207,17 @@
     </div>
     <div class="vbatcalibration">
         <div class="number">
-            <label> <input type="number" name="vbatcalibration" step="0.01" min="0" max="255" /> <span
-                i18n="powerVoltageCalibration"></span>
+            <label>
+                <input type="number" name="vbatcalibration" step="0.01" min="0" max="255" />
+                <span i18n="powerVoltageCalibration"></span>
             </label>
         </div>
     </div>
     <div class="amperagecalibration">
         <div class="number">
-            <label> <input type="number" name="amperagecalibration" step="0.01" min="0" max="255" /> <span
-                i18n="powerAmperageCalibration"></span>
+            <label>
+                <input type="number" name="amperagecalibration" step="0.01" min="0" max="255" />
+                <span i18n="powerAmperageCalibration"></span>
             </label>
         </div>
     </div>

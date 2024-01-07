@@ -469,8 +469,8 @@ function zeroPad(value, width) {
     return valuePadded;
 }
 
-function getNumberInput(self) {
-    const elem = $(self);
+function getNumberInput(query) {
+    const elem = $(query);
     const step = parseFloat(elem.prop('step')) || 1;
     const min = parseFloat(elem.prop('min'));
     const max = parseFloat(elem.prop('max'));
@@ -500,8 +500,16 @@ function getNumberInput(self) {
     return val;
 }
 
-function getIntegerValue(self, scale=1) {
-    return Math.round(getNumberInput(self) * scale);
+function getIntegerValue(query, scale=1) {
+    return Math.round(getNumberInput(query) * scale);
+}
+
+function getFloatValue(query, scale=1) {
+    return getNumberInput(query) * scale;
+}
+
+function deep_copy(obj) {
+    return JSON.parse(JSON.stringify(obj));
 }
 
 function generateFilename(prefix, suffix) {

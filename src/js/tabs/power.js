@@ -5,6 +5,9 @@ TABS.power = {
     needReboot: false,
     voltageMeterCount: 0,
     currentMeterCount: 0,
+    BATTER_CONFIG_COPY: null,
+    VOLTAGE_METER_CONFIGS_COPY: null,
+    CURRENT_METER_CONFIGS_COPY: null,
     batteryMeterTypes: [
         'None',
         'Adc',
@@ -36,171 +39,135 @@ TABS.power.initialize = function (callback) {
     function load_data(callback) {
         Promise.resolve(true)
             .then(() => MSP.promise(MSPCodes.MSP_STATUS))
+            .then(() => MSP.promise(MSPCodes.MSP_BATTERY_STATE))
             .then(() => MSP.promise(MSPCodes.MSP_VOLTAGE_METERS))
             .then(() => MSP.promise(MSPCodes.MSP_CURRENT_METERS))
-            .then(() => MSP.promise(MSPCodes.MSP_CURRENT_METER_CONFIG))
-            .then(() => MSP.promise(MSPCodes.MSP_VOLTAGE_METER_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_BATTERY_CONFIG))
-            .then(() => MSP.promise(MSPCodes.MSP_BATTERY_STATE))
+            .then(() => MSP.promise(MSPCodes.MSP_VOLTAGE_METER_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_CURRENT_METER_CONFIG))
             .then(callback);
     }
 
+    function send_data(callback) {
+        MSP.send_message(MSPCodes.MSP_SET_BATTERY_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_BATTERY_CONFIG), false, () => {
+            mspHelper.sendVoltageConfig(() => {
+                mspHelper.sendCurrentConfig(callback);
+            });
+        });
+    }
+
     function save_data(callback) {
-        function save_battery_config() {
-            MSP.send_message(MSPCodes.MSP_SET_BATTERY_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_BATTERY_CONFIG), false, save_voltage_config);
-        }
-        function save_voltage_config() {
-            mspHelper.sendVoltageConfig(save_current_config);
-        }
-        function save_current_config() {
-            mspHelper.sendCurrentConfig(save_to_eeprom);
-        }
-        function save_to_eeprom() {
-            MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, save_completed);
-        }
-        function save_completed() {
-            GUI.log(i18n.getMessage('eepromSaved'));
-            if (self.needReboot) {
-                MSP.send_message(MSPCodes.MSP_SET_REBOOT);
-                GUI.log(i18n.getMessage('deviceRebooting'));
-                reinitialiseConnection(callback);
-            } else {
-                callback?.();
-            }
-        }
-
-        save_battery_config();
+        send_data(() => {
+            MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, () => {
+                GUI.log(i18n.getMessage('eepromSaved'));
+                if (self.needReboot) {
+                    MSP.send_message(MSPCodes.MSP_SET_REBOOT);
+                    GUI.log(i18n.getMessage('deviceRebooting'));
+                    reinitialiseConnection(callback);
+                } else {
+                    callback?.();
+                }
+            });
+        });
     }
 
-    function updateData() {
-        for (let index = 0; index < FC.VOLTAGE_METER_CONFIGS.length; index++) {
-            const meterId = FC.VOLTAGE_METER_CONFIGS[index].id;
-            if (FC.VOLTAGE_METER_CONFIGS[index].sensorType == 1) {
-                FC.VOLTAGE_METER_CONFIGS[index].vbatscale = parseInt($(`input[name="vbatscale-${meterId}"]`).val());
-                FC.VOLTAGE_METER_CONFIGS[index].vbatresdivval = parseInt($(`input[name="vbatresdivval-${meterId}"]`).val());
-                //FC.VOLTAGE_METER_CONFIGS[index].vbatresdivmultiplier = parseInt($(`input[name="vbatresdivmultiplier-${meterId}"]`).val());
-            }
-        }
-
-        for (let index = 0; index < FC.CURRENT_METER_CONFIGS.length; index++) {
-            const meterId = FC.CURRENT_METER_CONFIGS[index].id;
-            if (FC.CURRENT_METER_CONFIGS[index].sensorType == 1) {
-                FC.CURRENT_METER_CONFIGS[index].scale = parseInt($(`input[name="amperagescale-${meterId}"]`).val());
-                FC.CURRENT_METER_CONFIGS[index].offset = parseInt($(`input[name="amperageoffset-${meterId}"]`).val());
-            }
-        }
-
-        FC.BATTERY_CONFIG.vbatmincellvoltage = parseFloat($('input[name="mincellvoltage"]').val());
-        FC.BATTERY_CONFIG.vbatmaxcellvoltage = parseFloat($('input[name="maxcellvoltage"]').val());
-        FC.BATTERY_CONFIG.vbatwarningcellvoltage = parseFloat($('input[name="warningcellvoltage"]').val());
-
-        FC.BATTERY_CONFIG.capacity = parseInt($('input[name="capacity"]').val());
+    function revertData() {
+        FC.BATTERY_CONFIG = self.BATTER_CONFIG_COPY;
+        FC.VOLTAGE_METER_CONFIGS = self.VOLTAGE_METER_CONFIGS_COPY;
+        FC.CURRENT_METER_CONFIGS = self.CURRENT_METER_CONFIGS_COPY;
     }
 
-    function updateDisplay(voltageDataSource, currentDataSource) {
+    function updateDisplay() {
 
-        // voltage meters
-        if (!voltageDataSource) {
-            voltageDataSource = [];
-            for (let index = 0; index < FC.VOLTAGE_METER_CONFIGS.length; index++) {
-                const meterId = FC.VOLTAGE_METER_CONFIGS[index].id;
-                voltageDataSource[index] = {
-                    id: meterId,
-                    sensorType: 1,
-                    vbatscale: parseInt($(`input[name="vbatscale-${meterId}"]`).val()),
-                    vbatresdivval: parseInt($(`input[name="vbatresdivval-${meterId}"]`).val()),
-                    //vbatresdivmultiplier: parseInt($(`input[name="vbatresdivmultiplier-${meterId}"]`).val())
-                };
-            }
-        }
-
+        // Voltage Meters
         $('.tab-power .boxVoltageConfiguration').toggle(FC.VOLTAGE_METERS.length > 0);
 
         const destinationVoltageMeter = $('.tab-power .voltage-meters');
+
         destinationVoltageMeter.empty();
 
         const templateVoltageMeter = $('#tab-power-templates .voltage-meters .voltage-meter');
+        const templateVoltageConfiguration = $('#tab-power-templates .voltage-configuration');
+
         for (let index = 0; index < FC.VOLTAGE_METERS.length; index++) {
             const meterId = FC.VOLTAGE_METERS[index].id;
 
             const elementVoltageMeter = templateVoltageMeter.clone();
-            elementVoltageMeter.attr('id', `voltage-meter-${meterId}`);
+            const destVoltageConfiguration = elementVoltageMeter.find('.configuration');
 
-            const message = i18n.getMessage('powerVoltageId' + meterId);
-            elementVoltageMeter.find('.label').text(message);
+            elementVoltageMeter.attr('id', `voltage-meter-${meterId}`);
+            elementVoltageMeter.find('.label').text(i18n.getMessage('powerVoltageId' + meterId));
+
+            for (let jndex = 0; jndex < FC.VOLTAGE_METER_CONFIGS.length; jndex++) {
+                if (FC.VOLTAGE_METER_CONFIGS[jndex].sensorType == 1) {
+                    if (FC.VOLTAGE_METER_CONFIGS[jndex].id == meterId) {
+                        const elementVoltageConfiguration = templateVoltageConfiguration.clone();
+
+                        elementVoltageConfiguration.find('input[name="vbatscale"]')
+                            .val(FC.VOLTAGE_METER_CONFIGS[jndex].vbatscale)
+                            .change(function () {
+                                FC.VOLTAGE_METER_CONFIGS[jndex].vbatscale = getIntegerValue(this);
+                                mspHelper.sendVoltageMeterConfig(jndex);
+                            });
+
+                        elementVoltageConfiguration.find('input[name="vbatresdivval"]')
+                            .val(FC.VOLTAGE_METER_CONFIGS[jndex].vbatresdivval)
+                            .change(function () {
+                                FC.VOLTAGE_METER_CONFIGS[jndex].vbatresdivval = getIntegerValue(this);
+                                mspHelper.sendVoltageMeterConfig(jndex);
+                            });
+
+                        destVoltageConfiguration.append(elementVoltageConfiguration);
+                    }
+                }
+            }
 
             destinationVoltageMeter.append(elementVoltageMeter);
         }
 
-        const templateVoltageConfiguration = $('#tab-power-templates .voltage-configuration');
-        for (let index = 0; index < FC.VOLTAGE_METER_CONFIGS.length; index++) {
-            const meterId = FC.VOLTAGE_METER_CONFIGS[index].id;
-
-            if (FC.VOLTAGE_METER_CONFIGS[index].sensorType == 1) {
-                const destinationVoltageConfiguration = $(`#voltage-meter-${meterId} .configuration`);
-                const elementVoltageConfiguration = templateVoltageConfiguration.clone();
-
-                const attributeNames = [ "vbatscale", "vbatresdivval" ]; //, "vbatresdivmultiplier" ];
-                for (let attribute of attributeNames) {
-                    elementVoltageConfiguration.find(`input[name="${attribute}"]`).attr('name', `${attribute}-${meterId}`);
-                }
-
-                destinationVoltageConfiguration.append(elementVoltageConfiguration);
-
-                $(`input[name="vbatscale-${meterId}"]`).val(voltageDataSource[index].vbatscale);
-                $(`input[name="vbatresdivval-${meterId}"]`).val(voltageDataSource[index].vbatresdivval);
-                //$(`input[name="vbatresdivmultiplier-${meterId}"]`).val(voltageDataSource[index].vbatresdivmultiplier);
-            }
-        }
-
-        // amperage meters
-        if (!currentDataSource) {
-            currentDataSource = [];
-            for (let index = 0; index < FC.CURRENT_METER_CONFIGS.length; index++) {
-                const meterId = FC.CURRENT_METER_CONFIGS[index].id;
-                currentDataSource[index] = {
-                    id: meterId,
-                    sensorType: 1,
-                    scale: parseInt($(`input[name="amperagescale-${meterId}"]`).val()),
-                    offset: parseInt($(`input[name="amperageoffset-${meterId}"]`).val()),
-                };
-            }
-        }
-
+        // Current Meters
         $('.tab-power .boxAmperageConfiguration').toggle(FC.CURRENT_METERS.length > 0);
 
         const destinationAmperageMeter = $('.tab-power .amperage-meters');
+
         destinationAmperageMeter.empty();
 
         const templateAmperageMeter = $('#tab-power-templates .amperage-meters .amperage-meter');
+        const templateAmperageConfiguration = $('#tab-power-templates .amperage-configuration');
+
         for (let index = 0; index < FC.CURRENT_METERS.length; index++) {
             const meterId = FC.CURRENT_METERS[index].id;
 
             const elementAmperageMeter = templateAmperageMeter.clone();
+            const destAmperageConfiguration = elementAmperageMeter.find('.configuration');
+
             elementAmperageMeter.attr('id', `amperage-meter-${meterId}`);
+            elementAmperageMeter.find('.label').text(i18n.getMessage('powerAmperageId' + meterId));
 
-            const message = i18n.getMessage('powerAmperageId' + meterId);
-            elementAmperageMeter.find('.label').text(message);
+            for (let jndex = 0; jndex < FC.CURRENT_METER_CONFIGS.length; jndex++) {
+                if (FC.CURRENT_METER_CONFIGS[jndex].sensorType == 1) {
+                    if (FC.CURRENT_METER_CONFIGS[jndex].id == meterId) {
+                        const elementAmperageConfiguration = templateAmperageConfiguration.clone();
 
-            destinationAmperageMeter.append(elementAmperageMeter);
-        }
+                        elementAmperageConfiguration.find('input[name="amperagescale"]')
+                            .val(FC.CURRENT_METER_CONFIGS[jndex].scale)
+                            .change(function () {
+                                FC.CURRENT_METER_CONFIGS[jndex].scale = getIntegerValue(this);
+                                mspHelper.sendCurrentMeterConfig(jndex);
+                            });
 
-        const templateAmperageConfiguration = $('#tab-power-templates .amperage-configuration');
-        for (let index = 0; index < FC.CURRENT_METER_CONFIGS.length; index++) {
-            const meterId = FC.CURRENT_METER_CONFIGS[index].id;
+                        elementAmperageConfiguration.find('input[name="amperageoffset"]')
+                            .val(FC.CURRENT_METER_CONFIGS[jndex].offset)
+                            .change(function () {
+                                FC.CURRENT_METER_CONFIGS[jndex].offset = getIntegerValue(this);
+                                mspHelper.sendCurrentMeterConfig(jndex);
+                            });
 
-            if (FC.CURRENT_METER_CONFIGS[index].sensorType == 1) {
-                const destinationAmperageConfiguration = $(`#amperage-meter-${meterId} .configuration`);
-                const elementAmperageConfiguration = templateAmperageConfiguration.clone();
-
-                const attributeNames = [ "amperagescale", "amperageoffset" ];
-                for (let attributeName of attributeNames) {
-                    elementAmperageConfiguration.find(`input[name="${attributeName}"]`).attr('name', `${attributeName}-${meterId}`);
+                        destAmperageConfiguration.append(elementAmperageConfiguration);
+                    }
                 }
-                destinationAmperageConfiguration.append(elementAmperageConfiguration);
 
-                $(`input[name="amperagescale-${meterId}"]`).val(currentDataSource[index].scale);
-                $(`input[name="amperageoffset-${meterId}"]`).val(currentDataSource[index].offset);
+                destinationAmperageMeter.append(elementAmperageMeter);
             }
         }
 
@@ -209,19 +176,12 @@ TABS.power.initialize = function (callback) {
 
     function initDisplay() {
 
-        $(".tab-power").addClass("supported");
-
         $("#calibrationmanagercontent").hide();
         $("#calibrationmanagerconfirmcontent").hide();
 
         const templateBatteryState = $('#tab-power-templates .battery-state .battery-state');
         const destinationBatteryState = $('.tab-power .battery-state');
         const elementBatteryState = templateBatteryState.clone();
-
-        elementBatteryState.find('.connection-state').attr('id', 'battery-connection-state');
-        elementBatteryState.find('.voltage').attr('id', 'battery-voltage');
-        elementBatteryState.find('.amperage').attr('id', 'battery-amperage');
-        elementBatteryState.find('.mah-drawn').attr('id', 'battery-mah-drawn');
 
         destinationBatteryState.append(elementBatteryState.children());
 
@@ -231,50 +191,66 @@ TABS.power.initialize = function (callback) {
 
         destinationBatteryConfiguration.append(elementBatteryConfiguration);
 
-        $('input[name="mincellvoltage"]').prop('step','0.01');
-        $('input[name="maxcellvoltage"]').prop('step','0.01');
-        $('input[name="warningcellvoltage"]').prop('step','0.01');
+        elementBatteryConfiguration.find('input[name="mincellvoltage"]')
+            .val(FC.BATTERY_CONFIG.vbatmincellvoltage).change()
+            .change(function () {
+                FC.BATTERY_CONFIG.vbatmincellvoltage = getFloatValue(this);
+            });
 
-        $('input[name="mincellvoltage"]').val(FC.BATTERY_CONFIG.vbatmincellvoltage).change();
-        $('input[name="maxcellvoltage"]').val(FC.BATTERY_CONFIG.vbatmaxcellvoltage).change();
-        $('input[name="warningcellvoltage"]').val(FC.BATTERY_CONFIG.vbatwarningcellvoltage).change();
-        $('input[name="capacity"]').val(FC.BATTERY_CONFIG.capacity).change();
+        elementBatteryConfiguration.find('input[name="maxcellvoltage"]')
+            .val(FC.BATTERY_CONFIG.vbatmaxcellvoltage).change()
+            .change(function () {
+                FC.BATTERY_CONFIG.vbatmaxcellvoltage = getFloatValue(this);
+            });
 
-        let batteryMeterType_e = $('select.batterymetersource');
+        elementBatteryConfiguration.find('input[name="warningcellvoltage"]')
+            .val(FC.BATTERY_CONFIG.vbatwarningcellvoltage).change()
+            .change(function () {
+                FC.BATTERY_CONFIG.vbatwarningcellvoltage = getFloatValue(this);
+            });
+
+        elementBatteryConfiguration.find('input[name="capacity"]')
+            .val(FC.BATTERY_CONFIG.capacity).change()
+            .change(function () {
+                FC.BATTERY_CONFIG.capacity = getIntegerValue(this);
+            });
+
+        const batteryMeterType_e = elementBatteryConfiguration.find('select.batterymetersource');
+        const currentMeterType_e = elementBatteryConfiguration.find('select.currentmetersource');
+
         self.batteryMeterTypes.forEach((item, index) => {
             const text = i18n.getMessage('powerBatteryVoltageMeterType' + item);
             batteryMeterType_e.append(`<option value="${index}">${text}</option>`);
         });
 
-        let currentMeterType_e = $('select.currentmetersource');
         self.currentMeterTypes.forEach((item, index) => {
             const text = i18n.getMessage('powerBatteryCurrentMeterType' + item);
             currentMeterType_e.append(`<option value="${index}">${text}</option>`);
         });
 
-        updateDisplay(FC.VOLTAGE_METER_CONFIGS, FC.CURRENT_METER_CONFIGS);
+        updateDisplay();
 
         let sourceschanged = false;
 
-        batteryMeterType_e = $('select.batterymetersource');
-        batteryMeterType_e.val(FC.BATTERY_CONFIG.voltageMeterSource).change();
-        batteryMeterType_e.change(function () {
-            FC.BATTERY_CONFIG.voltageMeterSource = parseInt($(this).val());
-            sourceschanged = true;
-            setDirty(true);
-        });
+        batteryMeterType_e
+            .val(FC.BATTERY_CONFIG.voltageMeterSource).change()
+            .change(function () {
+                FC.BATTERY_CONFIG.voltageMeterSource = parseInt($(this).val());
+                sourceschanged = true;
+                setDirty(true);
+            });
 
-        currentMeterType_e = $('select.currentmetersource');
-        currentMeterType_e.val(FC.BATTERY_CONFIG.currentMeterSource).change();
-        currentMeterType_e.change(function () {
-            FC.BATTERY_CONFIG.currentMeterSource = parseInt($(this).val());
-            sourceschanged = true;
-            setDirty(true);
-        });
+        currentMeterType_e
+            .val(FC.BATTERY_CONFIG.currentMeterSource).change()
+            .change(function () {
+                FC.BATTERY_CONFIG.currentMeterSource = parseInt($(this).val());
+                sourceschanged = true;
+                setDirty(true);
+            });
 
         function get_slow_data() {
             MSP.send_message(MSPCodes.MSP_VOLTAGE_METERS, false, false, function () {
-                if (FC.VOLTAGE_METERS.length > self.voltageMeterCount) {
+                if (FC.VOLTAGE_METERS.length != self.voltageMeterCount) {
                     self.voltageMeterCount = FC.VOLTAGE_METERS.length;
                     updateDisplay();
                 }
@@ -282,36 +258,31 @@ TABS.power.initialize = function (callback) {
                     const meterId = FC.VOLTAGE_METERS[i].id;
                     const voltage = FC.VOLTAGE_METERS[i].voltage;
                     const decimals = (voltage < 4) ? 3 : 2;
-                    const elementVoltageMeters = $(`#voltage-meter-${meterId} .value`);
-                    elementVoltageMeters.text(i18n.getMessage('powerVoltageValue', [voltage.toFixed(decimals)]));
+                    const message = i18n.getMessage('powerVoltageValue', [voltage.toFixed(decimals)]);
+                    $(`#voltage-meter-${meterId} .value`).text(message);
                 }
             });
 
             MSP.send_message(MSPCodes.MSP_CURRENT_METERS, false, false, function () {
-                if (FC.CURRENT_METERS.length > self.currentMeterCount) {
+                if (FC.CURRENT_METERS.length != self.currentMeterCount) {
                     self.currentMeterCount = FC.CURRENT_METERS.length;
                     updateDisplay();
                 }
                 for (let i = 0; i < FC.CURRENT_METERS.length; i++) {
                     const meterId = FC.CURRENT_METERS[i].id;
                     const amperage = FC.CURRENT_METERS[i].amperage;
-                    const elementCurrentMeters = $(`#amperage-meter-${meterId} .value`);
-                    elementCurrentMeters.text(i18n.getMessage('powerAmperageValue', [amperage.toFixed(2)]));
+                    const message = i18n.getMessage('powerAmperageValue', [amperage.toFixed(2)]);
+                    $(`#amperage-meter-${meterId} .value`).text(message);
                 }
             });
 
             MSP.send_message(MSPCodes.MSP_BATTERY_STATE, false, false, function () {
-                let elementMspBatteryState;
-                elementMspBatteryState = $(`#battery-connection-state .value`);
-                elementMspBatteryState.text(FC.BATTERY_STATE.cellCount > 0
+                $('#battery-connection-state .value').text(FC.BATTERY_STATE.cellCount > 0
                     ? i18n.getMessage('powerBatteryConnectedValueYes', [FC.BATTERY_STATE.cellCount])
                     : i18n.getMessage('powerBatteryConnectedValueNo'));
-                elementMspBatteryState = $(`#battery-voltage .value`);
-                elementMspBatteryState.text(i18n.getMessage('powerVoltageValue', [FC.BATTERY_STATE.voltage]));
-                elementMspBatteryState = $(`#battery-amperage .value`);
-                elementMspBatteryState.text(i18n.getMessage('powerAmperageValue', [FC.BATTERY_STATE.amperage]));
-                elementMspBatteryState = $(`#battery-mah-drawn .value`);
-                elementMspBatteryState.text(i18n.getMessage('powerMahValue', [FC.BATTERY_STATE.mAhDrawn]));
+                $('#battery-voltage .value').text(i18n.getMessage('powerVoltageValue', [FC.BATTERY_STATE.voltage]));
+                $('#battery-amperage .value').text(i18n.getMessage('powerAmperageValue', [FC.BATTERY_STATE.amperage]));
+                $('#battery-mah-drawn .value').text(i18n.getMessage('powerMahValue', [FC.BATTERY_STATE.mAhDrawn]));
             });
         }
 
@@ -458,12 +429,12 @@ TABS.power.initialize = function (callback) {
         revertButton.hide();
 
         self.save = function (callback) {
-            updateData();
             save_data(callback);
         };
 
         self.revert = function (callback) {
-            callback();
+            revertData();
+            send_data(callback);
         };
 
         $('a.save').click(function () {
@@ -486,6 +457,11 @@ TABS.power.initialize = function (callback) {
     }
 
     function process_html() {
+
+        self.BATTER_CONFIG_COPY = deep_copy(FC.BATTERY_CONFIG);
+        self.VOLTAGE_METER_CONFIGS_COPY = deep_copy(FC.VOLTAGE_METER_CONFIGS);
+        self.CURRENT_METER_CONFIGS_COPY = deep_copy(FC.CURRENT_METER_CONFIGS);
+
         initDisplay();
 
         // translate to user-selected language
