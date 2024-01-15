@@ -4967,6 +4967,9 @@
     "powerMahValue": {
         "message": "$1 mAh"
     },
+    "powerChargeLevel": {
+        "message": "$1 %"
+    },
     "powerAmperageScale": {
         "message": "Scale [1/10th mV/A]"
     },
@@ -4999,6 +5002,9 @@
     },
     "powerBatteryCurrentDrawn": {
         "message": "mAh used"
+    },
+    "powerBatteryChargeLevel": {
+        "message": "Charge level"
     },
     "powerBatteryAmperage": {
         "message": "Current"

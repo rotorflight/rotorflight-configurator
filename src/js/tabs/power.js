@@ -283,6 +283,7 @@ TABS.power.initialize = function (callback) {
                 $('#battery-voltage .value').text(i18n.getMessage('powerVoltageValue', [FC.BATTERY_STATE.voltage]));
                 $('#battery-amperage .value').text(i18n.getMessage('powerAmperageValue', [FC.BATTERY_STATE.amperage]));
                 $('#battery-mah-drawn .value').text(i18n.getMessage('powerMahValue', [FC.BATTERY_STATE.mAhDrawn]));
+                $('#battery-charge-level .value').text(i18n.getMessage('powerChargeLevel', [FC.BATTERY_STATE.chargeLevel]));
             });
         }
 
