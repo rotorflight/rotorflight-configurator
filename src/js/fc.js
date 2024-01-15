@@ -12,7 +12,7 @@ const INITIAL_CONFIG = {
     pidCycleTime:                     0,
     gyroCycleTime:                    0,
     cpuLoad:                          0,
-    sysLoad:                          0,
+    rtLoad:                           0,
     activeSensors:                    0,
     mode:                             0,
     motorCount:                       0,

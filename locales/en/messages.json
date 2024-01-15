@@ -685,6 +685,10 @@
         "message": "System Load:",
         "description": "System load text shown in the status bar"
     },
+    "statusbar_rt_load": {
+        "message": "Realtime Load:",
+        "description": "Realtime CPU load text shown in the status bar"
+    },
     "statusbar_cpu_load": {
         "message": "CPU Load:",
         "description": "CPU load text shown in the status bar"

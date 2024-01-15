@@ -17,8 +17,8 @@
       :value="gyroCycleTime"
     />
     <ReadingStat
-      message="statusbar_sys_load"
-      :value="sysLoad"
+      message="statusbar_rt_load"
+      :value="rtLoad"
       unit="%"
     />
     <ReadingStat
@@ -62,7 +62,7 @@ export default {
     gyroCycleTime: {
       type: Number,
     },
-    sysLoad: {
+    rtLoad: {
       type: Number,
     },
     cpuLoad: {
