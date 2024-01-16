@@ -130,49 +130,52 @@ TABS.motors.initialize = function (callback) {
 
         function process_rotor_speeds() {
 
-            const headspeedBar = $('.motorMainRotorSpeed');
-            const tailspeedBar = $('.motorTailRotorSpeed');
-
-            let headSource = 0;
-            let tailSource = 1;
-
-            let headRatio = FC.MOTOR_CONFIG.main_rotor_gear_ratio[0] / FC.MOTOR_CONFIG.main_rotor_gear_ratio[1];
-            let tailRatio = FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0] / FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1];
-
-            if (FC.MIXER_CONFIG.tail_rotor_mode == 0) {
-                tailRatio = headRatio / tailRatio;
-                tailSource = 0;
-            }
-
             const rpmAvailable = self.isFreqSensorEnabled || self.isEscSensorEnabled || FC.MOTOR_CONFIG.use_dshot_telemetry;
+            $('.rotorSpeeds').toggle(rpmAvailable);
 
-            headspeedBar.toggle(rpmAvailable && FC.CONFIG.motorCount > headSource);
-            tailspeedBar.toggle(rpmAvailable && FC.CONFIG.motorCount > tailSource);
+            if (rpmAvailable) {
+                const headspeedBar = $('.motorMainRotorSpeed');
+                const tailspeedBar = $('.motorTailRotorSpeed');
 
-            let headspeedMax = 1000;
-            let tailspeedMax = 5000;
+                let headSource = 0;
+                let tailSource = 1;
 
-            meterLabel(headspeedBar, '0', headspeedMax);
-            meterLabel(tailspeedBar, '0', tailspeedMax);
+                let headRatio = FC.MOTOR_CONFIG.main_rotor_gear_ratio[0] / FC.MOTOR_CONFIG.main_rotor_gear_ratio[1];
+                let tailRatio = FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0] / FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1];
 
-            function updateInfo() {
-
-                const headspeed = FC.MOTOR_TELEMETRY_DATA.rpm[headSource] * headRatio;
-                if (headspeed > headspeedMax) {
-                    headspeedMax = roundTo(headspeed + 1000, 1000);
-                    meterLabel(headspeedBar, '0', headspeedMax);
+                if (FC.MIXER_CONFIG.tail_rotor_mode == 0) {
+                    tailRatio = headRatio / tailRatio;
+                    tailSource = 0;
                 }
-                meterBar(headspeedBar, headspeed.toFixed(0) + ' RPM', headspeed / headspeedMax);
 
-                const tailspeed = FC.MOTOR_TELEMETRY_DATA.rpm[tailSource] * tailRatio;
-                if (tailspeed > tailspeedMax) {
-                    tailspeedMax = roundTo(tailspeed + 1000, 1000);
-                    meterLabel(tailspeedBar, '0', tailspeedMax);
+                headspeedBar.toggle(FC.CONFIG.motorCount > headSource);
+                tailspeedBar.toggle(FC.CONFIG.motorCount > tailSource);
+
+                let headspeedMax = 1000;
+                let tailspeedMax = 5000;
+
+                meterLabel(headspeedBar, '0', headspeedMax);
+                meterLabel(tailspeedBar, '0', tailspeedMax);
+
+                function updateInfo() {
+
+                    const headspeed = FC.MOTOR_TELEMETRY_DATA.rpm[headSource] * headRatio;
+                    if (headspeed > headspeedMax) {
+                        headspeedMax = roundTo(headspeed + 1000, 1000);
+                        meterLabel(headspeedBar, '0', headspeedMax);
+                    }
+                    meterBar(headspeedBar, headspeed.toFixed(0) + ' RPM', headspeed / headspeedMax);
+
+                    const tailspeed = FC.MOTOR_TELEMETRY_DATA.rpm[tailSource] * tailRatio;
+                    if (tailspeed > tailspeedMax) {
+                        tailspeedMax = roundTo(tailspeed + 1000, 1000);
+                        meterLabel(tailspeedBar, '0', tailspeedMax);
+                    }
+                    meterBar(tailspeedBar, tailspeed.toFixed(0) + ' RPM', tailspeed / tailspeedMax);
                 }
-                meterBar(tailspeedBar, tailspeed.toFixed(0) + ' RPM', tailspeed / tailspeedMax);
+
+                infoUpdateList.push(updateInfo);
             }
-
-            infoUpdateList.push(updateInfo);
         }
 
         function process_motor_info(motorIndex) {
