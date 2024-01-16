@@ -61,7 +61,7 @@ TABS.blackbox = {
         "DSHOT_RPM_TELEMETRY",
         "RPM_FILTER",
         "RPM_SOURCE",
-        "UNUSED_48",
+        "TTA",
         "AIRBORNE",
         "DUAL_GYRO_SCALED",
         "DSHOT_RPM_ERRORS",
