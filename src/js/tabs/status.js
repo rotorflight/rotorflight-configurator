@@ -9,7 +9,7 @@ TABS.status = {
         'RX_FAILSAFE',
         'BAD_RX_RECOVERY',
         'BOXFAILSAFE',
-        'RUNAWAY_TAKEOFF',
+        'GOVERNOR',
         'CRASH',
         'THROTTLE',
         'ANGLE',

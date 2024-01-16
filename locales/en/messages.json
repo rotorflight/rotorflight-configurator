@@ -840,9 +840,9 @@
         "message": "The 'FAILSAFE' switch was activated",
         "description": "Message that pops up to describe the BOXFAILSAFE arming disable flag"
     },
-    "statusArmingDisableFlagsTooltipRUNAWAY_TAKEOFF": {
-        "message": "Runway Takeoff Prevention has been triggered",
-        "description": "Message that pops up to describe the RUNAWAY_TAKEOFF arming disable flag"
+    "statusArmingDisableFlagsTooltipGOVERNOR": {
+        "message": "Governor can't function without an RPM signal",
+        "description": "Message that pops up to describe the GOVERNOR arming disable flag"
     },
     "statusArmingDisableFlagsTooltipCRASH": {
         "message": "Disarmed via crash detection",
