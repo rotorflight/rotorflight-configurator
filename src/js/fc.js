@@ -568,6 +568,7 @@ const FC = {
             yawCenterOffset:            0,
             yawStopGainCW:              0,
             yawStopGainCCW:             0,
+            yawPrecompCutoff:           0,
             yawFFCyclicGain:            0,
             yawFFCollectiveGain:        0,
             yawFFImpulseGain:           0,

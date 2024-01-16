@@ -982,6 +982,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.PID_PROFILE.itermRelaxCutoffYaw           = data.readU8();
                 FC.PID_PROFILE.yawStopGainCW                 = data.readU8();
                 FC.PID_PROFILE.yawStopGainCCW                = data.readU8();
+                FC.PID_PROFILE.yawPrecompCutoff              = data.readU8();
                 FC.PID_PROFILE.yawFFCyclicGain               = data.readU8();
                 FC.PID_PROFILE.yawFFCollectiveGain           = data.readU8();
                 FC.PID_PROFILE.yawFFImpulseGain              = data.read8();
@@ -1843,6 +1844,7 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.PID_PROFILE.itermRelaxCutoffYaw)
                 .push8(FC.PID_PROFILE.yawStopGainCW)
                 .push8(FC.PID_PROFILE.yawStopGainCCW)
+                .push8(FC.PID_PROFILE.yawPrecompCutoff)
                 .push8(FC.PID_PROFILE.yawFFCyclicGain)
                 .push8(FC.PID_PROFILE.yawFFCollectiveGain)
                 .push8(FC.PID_PROFILE.yawFFImpulseGain)
