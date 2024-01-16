@@ -4130,6 +4130,12 @@
     "profilesYawStopGainCCWHelp": {
         "message": "Stop gain (PD) for counter clock-wise rotation. Typical range 50..200."
     },
+    "profilesYawPrecompCutoff": {
+        "message": "Yaw Precomp Cutoff [Hz]"
+    },
+    "profilesYawPrecompCutoffHelp": {
+        "message": "Frequency limit for all yaw precompensation actions"
+    },
     "profilesYawFFCyclicGain": {
         "message": "Cyclic Feedforward Gain"
     },
