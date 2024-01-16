@@ -1080,19 +1080,16 @@
         "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
     },
     "statusArmingHead": {
-        "message": "Arming",
-        "english": "Arming",
-        "status": "New entry. Please translate!"
+        "message": "解锁",
+        "english": "Arming"
     },
     "statusArmingDanger": {
-        "message": "<strong class=\"message-negative\">WARNING!</strong> <strong>ARMING is ENABLED.</strong> Never fly the craft with the Configurator connected!</strong>",
-        "english": "<strong class=\"message-negative\">WARNING!</strong> <strong>ARMING is ENABLED.</strong> Never fly the craft with the Configurator connected!</strong>",
-        "status": "New entry. Please translate!"
+        "message": "<strong class=\"message-negative\">警告！</strong> <strong>已允许解锁</strong> 永远不要在连接配置器的情况下飞行!</strong>",
+        "english": "<strong class=\"message-negative\">WARNING!</strong> <strong>ARMING is ENABLED.</strong> Never fly the craft with the Configurator connected!</strong>"
     },
     "statusEnableArming": {
-        "message": "Enable Arming:",
-        "english": "Enable Arming:",
-        "status": "New entry. Please translate!"
+        "message": "允许解锁：",
+        "english": "Enable Arming:"
     },
     "statusInstrumentsHead": {
         "message": "仪表",
@@ -1111,7 +1108,7 @@
         "english": "<span class=\"configDefaults\">DEFAULTS</span>"
     },
     "statusConfigConfigured": {
-        "message": "<span class=\"configConfigured\">CONFIGURED</span>",
+        "message": "<span class=\"configConfigured\">已连接</span>",
         "english": "<span class=\"configConfigured\">CONFIGURED</span>"
     },
     "initialSetupButtonCalibrateAccel": {
@@ -1890,33 +1887,24 @@
         "english": "Profile #6"
     },
     "profilesPIDModeZeroWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>Passthrough Mode</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>Passthrough Mode</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
-        "status": "New entry. Please translate!"
+        "message": "<span class=\"message-negative\">警告：</span> PID控制器处于<b>直通模式</b>.<br>请使用 <b>CLI</b> 调整PID设置",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>Passthrough Mode</b>.<br>Please use the <b>CLI</b> to change the PID settings."
     },
     "profilesPIDModeOneWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 1</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 1</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
-        "status": "New entry. Please translate!"
+        "message": "<span class=\"message-negative\">警告：</span> PID控制器处于 <b>PID Mode 1</b>.<br>请使用 <b>CLI</b> 调整PID设置",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 1</b>.<br>Please use the <b>CLI</b> to change the PID settings."
     },
     "profilesPIDModeTwoWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>.",
-        "status": "New entry. Please translate!"
+        "message": "<span class=\"message-negative\">警告：</span> PID控制器当前处于 <b>PID模式2</b>.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>."
     },
     "profilesPIDModeThreeWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b>, that uses HSI.<br>Please check the Offset gains.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b>, that uses HSI.<br>Please check the Offset gains.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">警告：</span> PID控制手动配置为 <b>PID Test Mode 3</b>.<br>请在 <b>命令行</b> 中修改高级设置。",
-            "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually to the <b>PID Test Mode 3</b>.<br>Please use the <b>CLI</b> to change the advanced PID settings."
-        }
+        "message": "<span class=\"message-negative\">警告：</span> PID控制器当前使用最新的 <b>PID模式3</b>它使用了HSI（高速积分优化）<br>请检查O项增益设置准确",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b>, that uses HSI.<br>Please check the Offset gains."
     },
     "profilesPIDModeCustomWarning": {
         "message": "<span class=\"message-negative\">警告：</span> PID 控制器的参数是手动配置的，这里无法表达。<br>请使用<b>命令行</b>更改 PID 设置。",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings.",
-        "status": "Reused translation. Please check!"
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings."
     },
     "profilesPIDGains": {
         "message": "轴向",
@@ -2019,14 +2007,12 @@
         "english": "The maximum value (in µs) for stick deflection from the center, for RPY."
     },
     "receiverArmingThrottle": {
-        "message": "Throttle Channel value for arming",
-        "english": "Throttle Channel value for arming",
-        "status": "New entry. Please translate!"
+        "message": "解锁油门通道值",
+        "english": "Throttle Channel value for arming"
     },
     "receiverHelpArmingThrottle": {
-        "message": "The channel value (in µs) under which arming is allowed",
-        "english": "The channel value (in µs) under which arming is allowed",
-        "status": "New entry. Please translate!"
+        "message": "允许解锁的通道值（以µs为单位）",
+        "english": "The channel value (in µs) under which arming is allowed"
     },
     "receiverZeroThrottle": {
         "message": "0% 油门通道值",
@@ -2241,9 +2227,8 @@
         "english": "Add Link"
     },
     "auxiliaryAlwaysChannelSelect": {
-        "message": "ALWAYS",
-        "english": "ALWAYS",
-        "status": "New entry. Please translate!"
+        "message": "总是",
+        "english": "ALWAYS"
     },
     "auxiliaryAutoChannelSelect": {
         "message": "自动",
@@ -2278,79 +2263,64 @@
         "english": "Use a three position switch on AUX4 to select enable Rate Profile Selection via the same three position switch on the same channel."
     },
     "adjustmentsColumnMode": {
-        "message": "Mode",
-        "english": "Mode",
-        "status": "New entry. Please translate!"
+        "message": "模式",
+        "english": "Mode"
     },
     "adjustmentsColumnChannels": {
-        "message": "Channels",
-        "english": "Channels",
-        "status": "New entry. Please translate!"
+        "message": "通道",
+        "english": "Channels"
     },
     "adjustmentsColumnSliders": {
-        "message": "Range Sliders",
-        "english": "Range Sliders",
-        "status": "New entry. Please translate!"
+        "message": "范围滑块",
+        "english": "Range Sliders"
     },
     "adjustmentsColumnRanges": {
-        "message": "Value Ranges",
-        "english": "Value Ranges",
-        "status": "New entry. Please translate!"
+        "message": "滑块值",
+        "english": "Value Ranges"
     },
     "adjustmentsTypeOff": {
-        "message": "Off",
-        "english": "Off",
-        "status": "New entry. Please translate!"
+        "message": "关闭",
+        "english": "Off"
     },
     "adjustmentsTypeMapped": {
-        "message": "Mapped",
-        "english": "Mapped",
-        "status": "New entry. Please translate!"
+        "message": "映射",
+        "english": "Mapped"
     },
     "adjustmentsTypeStepped": {
-        "message": "Stepped",
-        "english": "Stepped",
-        "status": "New entry. Please translate!"
+        "message": "步进",
+        "english": "Stepped"
     },
     "adjustmentEnableChannel": {
-        "message": "Enable Channel",
-        "english": "Enable Channel",
-        "status": "New entry. Please translate!"
+        "message": "启用通道",
+        "english": "Enable Channel"
     },
     "adjustmentValueChannel": {
-        "message": "Value Channel",
-        "english": "Value Channel",
-        "status": "New entry. Please translate!"
+        "message": "参数通道",
+        "english": "Value Channel"
     },
     "adjustmentFunctionValue": {
-        "message": "Value",
-        "english": "Value",
-        "status": "New entry. Please translate!"
+        "message": "参数",
+        "english": "Value"
     },
     "adjustmentRangeEnable": {
-        "message": "Ena:",
-        "english": "Ena:",
-        "status": "New entry. Please translate!"
+        "message": "启用：",
+        "english": "Ena:"
     },
     "adjustmentRangeInc": {
-        "message": "Inc:",
-        "english": "Inc:",
-        "status": "New entry. Please translate!"
+        "message": "增加：",
+        "english": "Inc:"
     },
     "adjustmentRangeDec": {
-        "message": "Dec:",
-        "english": "Dec:",
-        "status": "New entry. Please translate!"
+        "message": "减少",
+        "english": "Dec:"
     },
     "adjustmentRangeValue": {
-        "message": "Value:",
-        "english": "Value:",
-        "status": "New entry. Please translate!"
+        "message": "值：",
+        "english": "Value:"
     },
     "adjustmentRangeStep": {
-        "message": "Step:",
-        "english": "Step:",
-        "status": "New entry. Please translate!"
+        "message": "步幅",
+        "english": "Step:"
     },
     "adjustmentsMin": {
         "message": "最小",
@@ -2361,24 +2331,20 @@
         "english": "Max"
     },
     "adjustmentsRange": {
-        "message": "Active",
-        "english": "Active",
-        "status": "New entry. Please translate!"
+        "message": "激活",
+        "english": "Active"
     },
     "adjustmentsRangeInc": {
-        "message": "Increase",
-        "english": "Increase",
-        "status": "New entry. Please translate!"
+        "message": "增加",
+        "english": "Increase"
     },
     "adjustmentsRangeDec": {
-        "message": "Decrease",
-        "english": "Decrease",
-        "status": "New entry. Please translate!"
+        "message": "减少",
+        "english": "Decrease"
     },
     "adjustmentsRangeScale": {
-        "message": "Scale",
-        "english": "Scale",
-        "status": "New entry. Please translate!"
+        "message": "缩放",
+        "english": "Scale"
     },
     "adjustmentsFunctionNone": {
         "message": "不变",
@@ -2501,97 +2467,76 @@
         "english": "Yaw Collective Precomp"
     },
     "adjustmentsFunctionYawCollectiveDyn": {
-        "message": "Yaw Collective Impulse FF",
-        "english": "Yaw Collective Impulse FF",
-        "status": "New entry. Please translate!"
+        "message": "航向集体螺距瞬时前馈增益",
+        "english": "Yaw Collective Impulse FF"
     },
     "adjustmentsFunctionYawCollectiveDecay": {
-        "message": "Yaw Collective Impulse FF Decay",
-        "english": "Yaw Collective Impulse FF Decay",
-        "status": "New entry. Please translate!"
+        "message": "航向集体螺距瞬时前馈增益衰减",
+        "english": "Yaw Collective Impulse FF Decay"
     },
     "adjustmentsFunctionPitchCollectiveFF": {
         "message": "升降集体螺距预补偿",
         "english": "Pitch Collective Precomnp"
     },
     "adjustmentsFunctionPitchGyroCutoff": {
-        "message": "Pitch Gyro Cutoff",
-        "english": "Pitch Gyro Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "升降陀螺仪截止",
+        "english": "Pitch Gyro Cutoff"
     },
     "adjustmentsFunctionRollGyroCutoff": {
-        "message": "Roll Gyro Cutoff",
-        "english": "Roll Gyro Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "副翼陀螺仪截止",
+        "english": "Roll Gyro Cutoff"
     },
     "adjustmentsFunctionYawGyroCutoff": {
-        "message": "Yaw Gyro Cutoff",
-        "english": "Yaw Gyro Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "航向陀螺仪截止",
+        "english": "Yaw Gyro Cutoff"
     },
     "adjustmentsFunctionPitchDtermCutoff": {
-        "message": "Pitch D-term Cutoff",
-        "english": "Pitch D-term Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "升降D项截止",
+        "english": "Pitch D-term Cutoff"
     },
     "adjustmentsFunctionRollDtermCutoff": {
-        "message": "Roll D-term Cutoff",
-        "english": "Roll D-term Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "副翼D项截止",
+        "english": "Roll D-term Cutoff"
     },
     "adjustmentsFunctionYawDtermCutoff": {
-        "message": "Yaw D-term Cutoff",
-        "english": "Yaw D-term Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "航向D项截止",
+        "english": "Yaw D-term Cutoff"
     },
     "adjustmentsFunctionRescueClimbCollective": {
-        "message": "Rescue Climb Collective",
-        "english": "Rescue Climb Collective",
-        "status": "New entry. Please translate!"
+        "message": "救机爬升集体螺距",
+        "english": "Rescue Climb Collective"
     },
     "adjustmentsFunctionRescueHoverCollective": {
-        "message": "Rescue Hover Collective",
-        "english": "Rescue Hover Collective",
-        "status": "New entry. Please translate!"
+        "message": "救机悬停集体螺距",
+        "english": "Rescue Hover Collective"
     },
     "adjustmentsFunctionRescueHoverAltitude": {
-        "message": "Rescue Hover Altitude",
-        "english": "Rescue Hover Altitude",
-        "status": "New entry. Please translate!"
+        "message": "救机悬停高度",
+        "english": "Rescue Hover Altitude"
     },
     "adjustmentsFunctionRescueAltP": {
-        "message": "Rescue Altitude P-gain",
-        "english": "Rescue Altitude P-gain",
-        "status": "New entry. Please translate!"
+        "message": "救机高度P项增益",
+        "english": "Rescue Altitude P-gain"
     },
     "adjustmentsFunctionRescueAltI": {
-        "message": "Rescue Altitude I-gain",
-        "english": "Rescue Altitude I-gain",
-        "status": "New entry. Please translate!"
+        "message": "救机高度I项增益",
+        "english": "Rescue Altitude I-gain"
     },
     "adjustmentsFunctionRescueAltD": {
-        "message": "Rescue Altitude D-gain",
-        "english": "Rescue Altitude D-gain",
-        "status": "New entry. Please translate!"
+        "message": "救机高度D项增益",
+        "english": "Rescue Altitude D-gain"
     },
     "adjustmentsFunctionAngleLevelGain": {
-        "message": "Angle Level Gain",
-        "english": "Angle Level Gain",
-        "status": "New entry. Please translate!"
+        "message": "自稳回正增益",
+        "english": "Angle Level Gain"
     },
     "adjustmentsFunctionHorizonLevelGain": {
-        "message": "Horizon Level Gain",
-        "english": "Horizon Level Gain",
-        "status": "New entry. Please translate!"
+        "message": "半自稳回正增益",
+        "english": "Horizon Level Gain"
     },
     "adjustmentsFunctionAcroTrainerGain": {
-        "message": "Acro Trainer Gain",
-        "english": "Acro Trainer Gain",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "手动教练模式回正力度",
-            "english": "Acro Trainer leveling strength"
-        }
+        "message": "手动教练增益",
+        "english": "Acro Trainer Gain"
     },
     "adjustmentsFunctionGovernorGain": {
         "message": "定速器 PID 增益",
@@ -2626,44 +2571,36 @@
         "english": "Governor Collective Precomp"
     },
     "adjustmentsFunctionPitchB": {
-        "message": "Pitch B-gain",
-        "english": "Pitch B-gain",
-        "status": "New entry. Please translate!"
+        "message": "升降B项增益",
+        "english": "Pitch B-gain"
     },
     "adjustmentsFunctionRollB": {
-        "message": "Roll B-gain",
-        "english": "Roll B-gain",
-        "status": "New entry. Please translate!"
+        "message": "副翼B项增益",
+        "english": "Roll B-gain"
     },
     "adjustmentsFunctionYawB": {
-        "message": "Yaw B-gain",
-        "english": "Yaw B-gain",
-        "status": "New entry. Please translate!"
+        "message": "航向B项增益",
+        "english": "Yaw B-gain"
     },
     "adjustmentsFunctionPitchO": {
-        "message": "Pitch O-gain",
-        "english": "Pitch O-gain",
-        "status": "New entry. Please translate!"
+        "message": "升降O项增益",
+        "english": "Pitch O-gain"
     },
     "adjustmentsFunctionRollO": {
-        "message": "Roll O-gain",
-        "english": "Roll O-gain",
-        "status": "New entry. Please translate!"
+        "message": "副翼O项增益",
+        "english": "Roll O-gain"
     },
     "adjustmentsFunctionCrossCouplingGain": {
-        "message": "Cross Coupling Gain",
-        "english": "Cross Coupling Gain",
-        "status": "New entry. Please translate!"
+        "message": "循环交叉耦合增益",
+        "english": "Cross Coupling Gain"
     },
     "adjustmentsFunctionCrossCouplingRatio": {
-        "message": "Cross Coupling Ratio",
-        "english": "Cross Coupling Ratio",
-        "status": "New entry. Please translate!"
+        "message": "循环交叉耦合比率",
+        "english": "Cross Coupling Ratio"
     },
     "adjustmentsFunctionCrossCouplingCutoff": {
-        "message": "Cross Coupling Cutoff",
-        "english": "Cross Coupling Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "循环交叉耦合截止",
+        "english": "Cross Coupling Cutoff"
     },
     "servoHelp": {
         "message": "舵机 101<ul><li>首先检查舵机的方向，必要时反转舵机。</li><li>通过启用 <i>舵机调试</i> 和调整 <i>中心点</i> 来调平舵机臂。在此位置，舵机臂应与主轴垂直。</li><li>调整标尺使舵机角度正确。在 <i>舵机调试</i> 下为舵机指定一个 30° 的角度。现在舵机应该移动到 30°。如果角度较小，则增加该舵机的 <i>缩放</i> 。如果角度较大，则减小。</li><li>您可以通过调整 <i>最小值</i> 或 <i>最大值</i> 来限制或扩展舵机的移动范围。只有在出现机械问题（如舵机阻滞）时才会这样做。使用混控来限制副翼/升降/集体螺距。</li></ul>",
@@ -2938,14 +2875,12 @@
         "english": "Adjust the collective gain to match the mechanical gain in the head design."
     },
     "mixerCollectiveGeoCorrection": {
-        "message": "Collective Geometry Correction [%]",
-        "english": "Collective Geometry Correction [%]",
-        "status": "New entry. Please translate!"
+        "message": "集体螺距几何校正[%]",
+        "english": "Collective Geometry Correction [%]"
     },
     "mixerCollectiveGeoCorrectionHelp": {
-        "message": "Adjust until the collective positive and negative deflection are equal.",
-        "english": "Adjust until the collective positive and negative deflection are equal.",
-        "status": "New entry. Please translate!"
+        "message": "调整集体螺距的正负偏差使其一致",
+        "english": "Adjust until the collective positive and negative deflection are equal."
     },
     "mixerTotalPitchLimit": {
         "message": "总螺距限制 [&deg;]",
@@ -2988,19 +2923,16 @@
         "english": "The phase offset for the swashplate controls."
     },
     "mixerSwashRollTrim": {
-        "message": "Roll trim [%]",
-        "english": "Roll trim [%]",
-        "status": "New entry. Please translate!"
+        "message": "副翼微调 [%]",
+        "english": "Roll trim [%]"
     },
     "mixerSwashPitchTrim": {
-        "message": "Pitch trim [%]",
-        "english": "Pitch trim [%]",
-        "status": "New entry. Please translate!"
+        "message": "升降微调 [%]",
+        "english": "Pitch trim [%]"
     },
     "mixerSwashCollectiveTrim": {
-        "message": "Collective trim [%]",
-        "english": "Collective trim [%]",
-        "status": "New entry. Please translate!"
+        "message": "集体螺距微调 [%]",
+        "english": "Collective trim [%]"
     },
     "mixerSwashTrimHelp": {
         "message": "微调斜盘舵机连杆的功能，仅在连杆物理长度不可调时使用",
@@ -3103,13 +3035,8 @@
         "english": "Set tail motor throttle value for zero yaw command."
     },
     "mixerSwashLinkTrim": {
-        "message": "Swashplate Trims",
-        "english": "Swashplate Trims",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "斜盘连杆微调",
-            "english": "Swashplate Link Trims"
-        }
+        "message": "斜盘微调",
+        "english": "Swashplate Trims"
     },
     "mixerInputChannels": {
         "message": "混控控制输入",
@@ -3152,44 +3079,36 @@
         "english": ""
     },
     "mixerOverrideSliderLeftLabel1": {
-        "message": "Left",
-        "english": "Left",
-        "status": "New entry. Please translate!"
+        "message": "左",
+        "english": "Left"
     },
     "mixerOverrideSliderRightLabel1": {
-        "message": "Right",
-        "english": "Right",
-        "status": "New entry. Please translate!"
+        "message": "右",
+        "english": "Right"
     },
     "mixerOverrideSliderLeftLabel2": {
-        "message": "Backward",
-        "english": "Backward",
-        "status": "New entry. Please translate!"
+        "message": "后",
+        "english": "Backward"
     },
     "mixerOverrideSliderRightLabel2": {
-        "message": "Forward",
-        "english": "Forward",
-        "status": "New entry. Please translate!"
+        "message": "前",
+        "english": "Forward"
     },
     "mixerOverrideSliderLeftLabel3": {
-        "message": "CW",
-        "english": "CW",
-        "status": "New entry. Please translate!"
+        "message": "顺时针",
+        "english": "CW"
     },
     "mixerOverrideSliderRightLabel3": {
-        "message": "CCW",
-        "english": "CCW",
-        "status": "New entry. Please translate!"
+        "message": "逆时针",
+        "english": "CCW"
     },
     "mixerOverrideSliderLeftLabel4": {
-        "message": "Down",
-        "english": "Down",
-        "status": "New entry. Please translate!"
+        "message": "下",
+        "english": "Down"
     },
     "mixerOverrideSliderRightLabel4": {
-        "message": "Up",
-        "english": "Up",
-        "status": "New entry. Please translate!"
+        "message": "上",
+        "english": "Up"
     },
     "mixerRuleNOP": {
         "message": "-",
@@ -3796,14 +3715,12 @@
         "english": "The governor maintains the main rotor speed constant.<br><strong>OFF:</strong> Govenor is disabled <br> <strong>PASSTHROUGH:</strong> Only slow spoolup and autorotation bailout<br><strong>STANDARD:</strong> Motor speed is controlled by the FC and speed reference from the ESC.<br><strong>MODE1:</strong> As per statndard but with Collective and Cyclic Precompensation (e.g. for a large increase collective the FC increases the signal sent to the ESC so the motor speed does not sag due to the increased load).<br><strong>MODE2:</strong> as per Mode 1 but also Battery voltage compensation"
     },
     "govHandoverThrottle": {
-        "message": "Handover throttle [%]",
-        "english": "Handover throttle [%]",
-        "status": "New entry. Please translate!"
+        "message": "接管油门 [%]",
+        "english": "Handover throttle [%]"
     },
     "govHandoverThrottleHelp": {
-        "message": "Throttle level above which the governor is activated. The motor must be able to start below this throttle level.",
-        "english": "Throttle level above which the governor is activated. The motor must be able to start below this throttle level.",
-        "status": "New entry. Please translate!"
+        "message": "定速器接管油门的油门值，超过此油门定速器才会介入，请确保电机在此值以下能够顺利旋转。",
+        "english": "Throttle level above which the governor is activated. The motor must be able to start below this throttle level."
     },
     "govStartupTime": {
         "message": "一阶缓启动时间 [秒]",
@@ -3966,31 +3883,16 @@
         "english": "Tail Torque Assist (TTA) gain"
     },
     "govTTAGainHelp": {
-        "message": "Tail Torque Assist strength (gain). This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 50..150",
-        "english": "Tail Torque Assist strength (gain). This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 50..150",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "尾旋翼扭矩辅助增益。这是一个增益，用于增加主旋翼转速，以控制负方向的尾旋翼（例如，电机直驱尾旋翼低于空转速度）。通常为 0...100",
-            "english": "Tail Torque Assist gain. This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 0..100"
-        }
+        "message": "尾旋翼扭矩辅助强度（增益）。这是一个增益，用于增加主旋翼转速，以增加逆时针自旋的尾巴力度（例如，电机直驱尾旋翼低于空转速度）。通常为 50...150",
+        "english": "Tail Torque Assist strength (gain). This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 50..150"
     },
     "govTTALimit": {
-        "message": "Tail Torque Assist (TTA) limit [%]",
-        "english": "Tail Torque Assist (TTA) limit [%]",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "尾旋翼扭矩辅助（TTA）增益限制",
-            "english": "Tail Torque Assist (TTA) limit"
-        }
+        "message": "尾旋翼扭矩辅助（TTA） 增益上限[%]",
+        "english": "Tail Torque Assist (TTA) limit [%]"
     },
     "govTTALimitHelp": {
-        "message": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%.",
-        "english": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "尾旋翼扭矩辅助最大值。在负方向控制尾旋翼时，可额外增加的主旋翼转速。通常为 0...50",
-            "english": "Tail Torque Assist maximum. How much extra headspeed can be applied to control the tail in the negative direction. Usually 0..50"
-        }
+        "message": "尾部扭矩辅助最大主旋翼转速增幅。允许主旋翼转速增加的上限。通常为 20%...50%。",
+        "english": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%."
     },
     "govYawPrecomp": {
         "message": "航向预补偿",
@@ -4289,19 +4191,12 @@
         "english": "GPS"
     },
     "blackboxLog_vbec": {
-        "message": "BEC Voltage",
-        "english": "BEC Voltage",
-        "status": "New entry. Please translate!"
+        "message": "BEC电压",
+        "english": "BEC Voltage"
     },
     "blackboxLog_vbus": {
-        "message": "+5V Voltage",
-        "english": "+5V Voltage",
-        "status": "New entry. Please translate!"
-    },
-    "blackboxLog_temps": {
-        "message": "Temperatures",
-        "english": "Temperatures",
-        "status": "New entry. Please translate!"
+        "message": "+5V 电压",
+        "english": "+5V Voltage"
     },
     "serialLoggingSupportedNote": {
         "message": "你可以使用串口外接记录设备来记录日志（例如 OpenLager）。需要在串口设置页设置相应的串口。",
@@ -5847,13 +5742,8 @@
         "english": "Gyro Dynamic Notch Filter Settings"
     },
     "gyroDynamicNotchFilterHelp": {
-        "message": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at those frequencies. Requires at least 1k filter or loop rate.",
-        "english": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at those frequencies. Requires at least 1k filter or loop rate.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "动态陷波滤波器会自动跟踪峰值噪声频率，并将陷波滤波器的中心置于该频率上。至少需要 1KHz 刷新率。",
-            "english": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at that frequency. Requires at least 1k filter or loop rate."
-        }
+        "message": "动态陷波滤波器会自动跟踪峰值噪声频率，并将陷波滤波器的中心置于这些频率上。至少需要 1KHz 刷新率。",
+        "english": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at those frequencies. Requires at least 1k filter or loop rate."
     },
     "gyroDynamicNotchCount": {
         "message": "动态陷波器数量",
@@ -5872,40 +5762,20 @@
         "english": "Dynamic Notch Maximum Frequency"
     },
     "gyroDynamicNotchCountHelp": {
-        "message": "This sets the number of dynamic notch filters. If used standalone without RPM filters, 4-6 is recommended. With RPM filters 2-4 is recommended.",
-        "english": "This sets the number of dynamic notch filters. If used standalone without RPM filters, 4-6 is recommended. With RPM filters 2-4 is recommended.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "设置动态陷波滤波器的数量。设置为 0 将禁用动态陷波滤波器。如果单独使用，最少需要 2 个，建议使用 4-6 个。",
-            "english": "This sets the number of dynamic notch filters. Setting it at 0 will disable dynamic notch filter. If used standalone, 2 is absolute minimum, 4-6 recommended."
-        }
+        "message": "设置动态陷波滤波器的数量。如果不带 RPM 滤波器答单独使用，建议使用 4-6个。使用 RPM 滤波器时，建议使用 2-4个。",
+        "english": "This sets the number of dynamic notch filters. If used standalone without RPM filters, 4-6 is recommended. With RPM filters 2-4 is recommended."
     },
     "gyroDynamicNotchQHelp": {
-        "message": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more precise, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and degrade flight performance.",
-        "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more precise, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and degrade flight performance.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Q因子调整了动态陷波滤波器的宽度。更高的值将使其变得更窄、更精准，较低的值将使其变得更宽、更模糊。 建议设置为2.0 至 3.0 。",
-            "english": "Q factor adjust how narrow or wide the dynamic notch filters are. Higher value makes it narrower and more precise and lower value makes it wider and broader. Values between 2.0 and 3.0 are recommended."
-        }
+        "message": "Q因子调整了动态陷波滤波器的宽度。更高的值将使其变得更窄、更精准，较低的值将使其变得更宽、更模糊。 建议设置为2.0 至 3.0 ，低于2.0将会明显增加延迟并影响飞行性能。",
+        "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more precise, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and degrade flight performance."
     },
     "gyroDynamicNotchMinHzHelp": {
-        "message": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm.",
-        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "将其设置为需要由动态陷波控制的最低传入噪声频率。应低于主旋翼频率，但不低于 20 Hz，相当于 1200 RPM",
-            "english": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent of 1200 rpm"
-        }
+        "message": "将其设置为需要过滤的最低传入噪声频率。应低于主旋翼频率，但不低于 20Hz，相当于 1200rpm。",
+        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm."
     },
     "gyroDynamicNotchMaxHzHelp": {
-        "message": "Set this to the highest incoming noise frequency that is needed to be filtered. Should be 10-20% higher than the max tail rotor frequency, but no higher than 250Hz, if filter rate is 1k. If filter rate is 2k or higher, then 330-500 Hz can be used, especially for smaller helis with a motorised tail (higher range means less precision and lower performance).",
-        "english": "Set this to the highest incoming noise frequency that is needed to be filtered. Should be 10-20% higher than the max tail rotor frequency, but no higher than 250Hz, if filter rate is 1k. If filter rate is 2k or higher, then 330-500 Hz can be used, especially for smaller helis with a motorised tail (higher range means less precision and lower performance).",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "将其设置为需要由动态陷波控制的最高传入噪声频率。应比最大尾旋翼频率高 10-20%，但如果滤波器频率为 1k，则不应高于 250Hz。如果滤波器频率为 2k 或更高，则可使用 330-500Hz 的频率，特别是对于较小的直升机或带有电机直驱尾旋翼的直升机（范围越大，精度和性能越低）。",
-            "english": "Set this to the highest incoming noise frequency that is needed to be controlled by the dynamic notch. Should be about 10-20% higher than max tail rotor frequency, but no higher than 250Hz if filter rate is 1k. If filter rate is 2k or more, then 330-500 Hz can be used, especially for smaller helis or that with motorized tail (higher range means less precision and performance)"
-        }
+        "message": "将其设置为需要过滤的最高传入噪声频率。如果滤波器频率为 1k，则应比最大尾旋翼频率高 10-20%，但不高于 250Hz。如果滤波器频率为 2k 或更高，则可使用 330-500 Hz，特别是对于电机直驱尾旋翼的小型直升机（范围越大，精度越低，性能越差）。",
+        "english": "Set this to the highest incoming noise frequency that is needed to be filtered. Should be 10-20% higher than the max tail rotor frequency, but no higher than 250Hz, if filter rate is 1k. If filter rate is 2k or higher, then 330-500 Hz can be used, especially for smaller helis with a motorised tail (higher range means less precision and lower performance)."
     },
     "gyroDTermLowpassFiltersGroup": {
         "message": "D Term 低通滤波器",
@@ -5972,9 +5842,8 @@
         "english": "Custom"
     },
     "gyroRpmFilterConfigNote": {
-        "message": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable.",
-        "english": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable.",
-        "status": "New entry. Please translate!"
+        "message": "<b>警告：</b> RPM滤波器要求通过Dshot遥测或RPM回传线获得精确的电机转速。电调遥测获得的转速不适合使用。",
+        "english": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable."
     },
     "gyroRpmFilterCustomNote": {
         "message": "<span class=\"message-negative\">警告：</span>自定义转速滤波器使用中.<br>请使用CLI进行RPM滤波器设置。",
@@ -6321,66 +6190,37 @@
         "english": "Kill"
     },
     "powerBatteryVoltageMeterSource": {
-        "message": "Battery Voltage Source",
-        "english": "Battery Voltage Source",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电压计选择",
-            "english": "Voltage Meter Source"
-        }
+        "message": "电池电压数据源",
+        "english": "Battery Voltage Source"
     },
     "powerBatteryVoltageMeterTypeNone": {
         "message": "无",
         "english": "None"
     },
     "powerBatteryVoltageMeterTypeAdc": {
-        "message": "Battery ADC",
-        "english": "Battery ADC",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "板载传感器",
-            "english": "Onboard ADC"
-        }
+        "message": "电池传感器",
+        "english": "Battery ADC"
+
     },
     "powerBatteryVoltageMeterTypeEsc": {
-        "message": "ESC Telemetry",
-        "english": "ESC Telemetry",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电调传感器",
-            "english": "ESC Sensor"
-        }
+        "message": "电调遥测",
+        "english": "ESC Telemetry"
     },
     "powerBatteryCurrentMeterSource": {
-        "message": "Battery Current Source",
-        "english": "Battery Current Source",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电流计选择",
-            "english": "Current Meter Source"
-        }
+        "message": "电池电流数据源",
+        "english": "Battery Current Source"
     },
     "powerBatteryCurrentMeterTypeNone": {
         "message": "无",
         "english": "None"
     },
     "powerBatteryCurrentMeterTypeAdc": {
-        "message": "Battery ADC",
-        "english": "Battery ADC",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "板载传感器",
-            "english": "Onboard ADC"
-        }
+        "message": "电池传感器",
+        "english": "Battery ADC"
     },
     "powerBatteryCurrentMeterTypeEsc": {
-        "message": "ESC Telemetry",
-        "english": "ESC Telemetry",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电调传感器",
-            "english": "ESC Sensor"
-        }
+        "message": "电调遥测",
+        "english": "ESC Telemetry"
     },
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP 传感器",
@@ -6411,31 +6251,16 @@
         "english": "To calibrate, use a multimeter to measure the actual voltage / current draw on your craft (with a battery plugged in), and enter the values below. Then, with the same battery still plugged in, click [Calibrate]."
     },
     "powerCalibrationManagerNote": {
-        "message": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>",
-        "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<strong>注意：</strong>在校准缩放之前，请确保电压和电流漂移的除数和乘数设置正确。<br>将值设置为0将不会应用校准。</br><strong>切记在插入电池之前移除螺旋桨！</strong>",
-            "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for amperage is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>"
-        }
+        "message": "<strong>注意：</strong> 在校准缩放之前，请确保电压和电流漂移的除数和乘数设置正确。<br>将值设置为0将不会应用校准。</br><strong>在插上电池前记得卸下螺旋桨！</strong>",
+        "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>"
     },
     "powerCalibrationManagerWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and current meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or current are reading a value above 0. Otherwise you will not be able to calibrate using this tool.",
-        "english": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and current meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or current are reading a value above 0. Otherwise you will not be able to calibrate using this tool.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">警告：</span>电池<span class=\"message-negative\">未接入</span>或电压计源和电流计源<span class=\"message-negative\">没有正确设置。</span>请确保电压计和/或电流计读数超过0. 否则您将无法使用此工具进行校准。",
-            "english": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and amperage meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or amperage are reading a value above 0. Otherwise you will not be able to calibrate using this tool."
-        }
+        "message": "<span class=\"message-negative\">警告：</span>电池<span class=\"message-negative\">未接入</span>或电压计源和电流计源<span class=\"message-negative\">没有正确设置。</span>请确保电压计和/或电流计读数超过0. 否则您将无法使用此工具进行校准。",
+        "english": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and current meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or current are reading a value above 0. Otherwise you will not be able to calibrate using this tool."
     },
     "powerCalibrationManagerSourceNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Voltage and/or current meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate.",
-        "english": "<span class=\"message-negative\">Warning:</span> Voltage and/or current meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">警告：</span>电压计和/或电流计测量源<strong>已经更改，但未保存</strong>。请在校准之前设置并保存正确的测量源。",
-            "english": "<span class=\"message-negative\">Warning:</span> Voltage and/or amperage meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate."
-        }
+        "message": "<span class=\"message-negative\">警告：</span>电压计和/或电流计测量源<strong>已经更改，但未保存</strong>。请在校准之前设置并保存正确的测量源。",
+        "english": "<span class=\"message-negative\">Warning:</span> Voltage and/or current meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate."
     },
     "powerCalibrationManagerConfirmationTitle": {
         "message": "校准管理器确认信息",
@@ -6458,13 +6283,8 @@
         "english": "New calibrated scales are shown here. <br>Applying them will set the scales but <strong>will not save them.</strong></br> <br>After saving make sure that the new voltage and current are correct.</br>"
     },
     "powerVoltageHead": {
-        "message": "Voltage Meters",
-        "english": "Voltage Meters",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电压计",
-            "english": "Voltage Meter"
-        }
+        "message": "电压计",
+        "english": "Voltage Meters"
     },
     "powerVoltageValue": {
         "message": "$1 V",
@@ -6484,153 +6304,111 @@
     },
     "powerVoltageId20": {
         "message": "BEC",
-        "english": "BEC",
-        "status": "Modified entry. Please translate!"
+        "english": "BEC"
     },
     "powerVoltageId30": {
         "message": "5V",
-        "english": "5V",
-        "status": "Modified entry. Please translate!"
+        "english": "5V"
     },
     "powerVoltageId40": {
         "message": "EXT",
-        "english": "EXT",
-        "status": "Modified entry. Please translate!"
+        "english": "EXT"
     },
     "powerVoltageId50": {
-        "message": "MCU",
-        "english": "MCU",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电调组合",
-            "english": "ESC Combined"
-        }
+        "message": "主控芯片",
+        "english": "MCU"
     },
     "powerVoltageId100": {
         "message": "电调组合",
-        "english": "ESC Combined",
-        "status": "Reused translation. Please check!"
+        "english": "ESC Combined"
     },
     "powerVoltageId101": {
-        "message": "ESC 1",
-        "english": "ESC 1",
-        "status": "New entry. Please translate!"
+        "message": "电调 1",
+        "english": "ESC 1"
     },
     "powerVoltageId102": {
-        "message": "ESC 2",
-        "english": "ESC 2",
-        "status": "New entry. Please translate!"
+        "message": "电调 2",
+        "english": "ESC 2"
     },
     "powerVoltageId103": {
-        "message": "ESC 3",
-        "english": "ESC 3",
-        "status": "New entry. Please translate!"
+        "message": "电调 3",
+        "english": "ESC 3"
     },
     "powerVoltageId104": {
-        "message": "ESC 4",
-        "english": "ESC 4",
-        "status": "New entry. Please translate!"
+        "message": "电调 4",
+        "english": "ESC 4"
     },
     "powerVoltageId200": {
-        "message": "第一节",
-        "english": "Cell 1",
-        "status": "Reused translation. Please check!"
+        "message": "电芯 1",
+        "english": "Cell 1"
     },
     "powerVoltageId201": {
-        "message": "第二节",
-        "english": "Cell 2",
-        "status": "Reused translation. Please check!"
+        "message": "电芯 2",
+        "english": "Cell 2"
     },
     "powerVoltageId202": {
-        "message": "第三节",
-        "english": "Cell 3",
-        "status": "Reused translation. Please check!"
+        "message": "电芯 3",
+        "english": "Cell 3"
     },
     "powerVoltageId203": {
-        "message": "第四节",
-        "english": "Cell 4",
-        "status": "Reused translation. Please check!"
+        "message": "电芯 4",
+        "english": "Cell 4"
     },
     "powerVoltageId204": {
-        "message": "第五节",
-        "english": "Cell 5",
-        "status": "Reused translation. Please check!"
+        "message": "电芯 5",
+        "english": "Cell 5"
     },
     "powerVoltageId205": {
-        "message": "第六节",
-        "english": "Cell 6",
-        "status": "Reused translation. Please check!"
+        "message": "电芯 6",
+        "english": "Cell 6"
     },
     "powerVoltageId206": {
-        "message": "Cell 7",
-        "english": "Cell 7",
-        "status": "New entry. Please translate!"
+        "message": "电芯 7",
+        "english": "Cell 7"
     },
     "powerVoltageId207": {
-        "message": "Cell 8",
-        "english": "Cell 8",
-        "status": "New entry. Please translate!"
+        "message": "电芯 8",
+        "english": "Cell 8"
     },
     "powerVoltageId208": {
-        "message": "Cell 9",
-        "english": "Cell 9",
-        "status": "New entry. Please translate!"
+        "message": "电芯 9",
+        "english": "Cell 9"
     },
     "powerVoltageId209": {
-        "message": "Cell 10",
-        "english": "Cell 10",
-        "status": "New entry. Please translate!"
+        "message": "电芯 10",
+        "english": "Cell 10"
     },
     "powerVoltageId210": {
-        "message": "Cell 11",
-        "english": "Cell 11",
-        "status": "New entry. Please translate!"
+        "message": "电芯 11",
+        "english": "Cell 11"
     },
     "powerVoltageId211": {
-        "message": "Cell 12",
-        "english": "Cell 12",
-        "status": "New entry. Please translate!"
+        "message": "电芯 12",
+        "english": "Cell 12"
     },
     "powerVoltageId212": {
-        "message": "Cell 13",
-        "english": "Cell 13",
-        "status": "New entry. Please translate!"
+        "message": "电芯 13",
+        "english": "Cell 13"
     },
     "powerVoltageId214": {
-        "message": "Cell 14",
-        "english": "Cell 14",
-        "status": "New entry. Please translate!"
+        "message": "电芯 14",
+        "english": "Cell 14"
     },
     "powerVoltageScale": {
         "message": "比例",
         "english": "Scale"
     },
     "powerVoltageDivider": {
-        "message": "Divider",
-        "english": "Divider",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电阻分压器数值",
-            "english": "Divider Value"
-        }
+        "message": "电阻分压器",
+        "english": "Divider"
     },
     "powerVoltageMultiplier": {
-        "message": "Multiplier",
-        "english": "Multiplier",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "倍数",
-            "english": "Multiplier Value"
-        }
+        "message": "乘数",
+        "english": "Multiplier"
     },
     "powerAmperageHead": {
-        "message": "Current Meters",
-        "english": "Current Meters",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电流计",
-            "english": "Amperage Meter"
-        }
+        "message": "电流计",
+        "english": "Current Meters"
     },
     "powerAmperageValue": {
         "message": "$1 A",
@@ -6642,28 +6420,23 @@
     },
     "powerAmperageId100": {
         "message": "电调组合",
-        "english": "ESC Combined",
-        "status": "Reused translation. Please check!"
+        "english": "ESC Combined"
     },
     "powerAmperageId101": {
-        "message": "ESC 1",
-        "english": "ESC 1",
-        "status": "New entry. Please translate!"
+        "message": "电调 1",
+        "english": "ESC 1"
     },
     "powerAmperageId102": {
-        "message": "ESC 2",
-        "english": "ESC 2",
-        "status": "New entry. Please translate!"
+        "message": "电调 2",
+        "english": "ESC 2"
     },
     "powerAmperageId103": {
-        "message": "ESC 3",
-        "english": "ESC 3",
-        "status": "New entry. Please translate!"
+        "message": "电调 3",
+        "english": "ESC 3"
     },
     "powerAmperageId104": {
-        "message": "ESC 4",
-        "english": "ESC 4",
-        "status": "New entry. Please translate!"
+        "message": "电调 4",
+        "english": "ESC 4"
     },
     "powerMahValue": {
         "message": "$1 mAh",
@@ -6678,22 +6451,12 @@
         "english": "Offset [mA]"
     },
     "powerAmperageCalibration": {
-        "message": "Measured Current",
-        "english": "Measured Current",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "测量电流",
-            "english": "Measured Amperage"
-        }
+        "message": "测量电流",
+        "english": "Measured Current"
     },
     "powerAmperageCalibratedScale": {
-        "message": "Calibrated Current Scale:",
-        "english": "Calibrated Current Scale:",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "校准电流缩放：",
-            "english": "Calibrated Amperage Scale:"
-        }
+        "message": "校准电流缩放",
+        "english": "Calibrated Current Scale:"
     },
     "powerBatteryHead": {
         "message": "电池",
@@ -6724,13 +6487,8 @@
         "english": "mAh used"
     },
     "powerBatteryAmperage": {
-        "message": "Current",
-        "english": "Current",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电流",
-            "english": "Amperage"
-        }
+        "message": "电流",
+        "english": "Current"
     },
     "powerBatteryCapacity": {
         "message": "容量 [mAh]",
@@ -8626,16 +8384,11 @@
         "english": "Confirm Arming"
     },
     "dialogConfirmArmingNote": {
-        "message": "WARNING: Are you sure you want to <strong>enable arming</strong> while the Configurator is connected?",
-        "english": "WARNING: Are you sure you want to <strong>enable arming</strong> while the Configurator is connected?",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "警告: 你确定要在连接配置器时 <strong>启用解锁</strong> 吗？<br /><br /><span class=\"message-negative\">笔记：</span> 当解锁时，所有对设置的更改，包括保存设置，都将被忽略!",
-            "english": "WARNING: Are you sure you want to <strong>enable arming</strong> while Configurator is connected?<br /><br /><span class=\"message-negative\">NOTE:</span> While armed, all changes to settings, including saving settings, are ignored!"
-        }
+        "message": "警告：你确定要在连接配置器时<strong>允许解锁</strong> 吗？",
+        "english": "WARNING: Are you sure you want to <strong>enable arming</strong> while the Configurator is connected?"
     },
     "dialogConfirmArmingConfirm": {
-        "message": "启用",
+        "message": "允许",
         "english": "Enable"
     },
     "dialogConfirmArmingClose": {
