@@ -349,6 +349,9 @@ TABS.motors.initialize = function (callback) {
         const dshotBidirSwitch = $('input[id="dshotBidir"]');
         dshotBidirSwitch.prop('checked', FC.MOTOR_CONFIG.use_dshot_telemetry);
 
+        const rpmSensorSwitch = $('input[id="rpmSensor"]');
+        rpmSensorSwitch.prop('checked', self.isFreqSensorEnabled);
+
         $('input[id="mincommand"]').val(FC.MOTOR_CONFIG.mincommand);
         $('input[id="minthrottle"]').val(FC.MOTOR_CONFIG.minthrottle);
         $('input[id="maxthrottle"]').val(FC.MOTOR_CONFIG.maxthrottle);
@@ -365,7 +368,7 @@ TABS.motors.initialize = function (callback) {
         self.telemetryProtocols.forEach(function(value,index) {
             telemProtocolSelect.append(`<option value="${index}">${value}</option>`);
         });
-        telemProtocolSelect.val(FC.FEATURE_CONFIG.features.isEnabled('ESC_SENSOR') ? FC.ESC_SENSOR_CONFIG.protocol : 0);
+        telemProtocolSelect.val(self.isEscSensorEnabled ? FC.ESC_SENSOR_CONFIG.protocol : 0);
 
         const govModeSelect = $('select[id="govMode"]');
         self.govModes.forEach(function(value,index) {
@@ -399,7 +402,8 @@ TABS.motors.initialize = function (callback) {
             $('.maxthrottle').toggle(self.isProtoEnabled && !self.isDshot);
             $('.unsyncedPwm').toggle(self.isProtoEnabled && !self.isDshot && protocolNum != 0);
             $('.inputPwmFreq').toggle(self.isProtoEnabled && !self.isDshot);
-            $('.checkboxDshotBidir').toggle(self.isProtoEnabled && self.isDshot);
+            $('.dshotBidir').toggle(self.isProtoEnabled && self.isDshot);
+            $('.rpmSensor').toggle(self.isProtoEnabled);
             $('.mainGearRatio').toggle(self.isProtoEnabled);
             $('.tailGearRatio').toggle(self.isProtoEnabled);
 
@@ -441,6 +445,9 @@ TABS.motors.initialize = function (callback) {
             FC.MOTOR_CONFIG.main_rotor_gear_ratio[1] = parseInt($('input[id="mainGearRatioD"]').val());
             FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0] = parseInt($('input[id="tailGearRatioN"]').val());
             FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1] = parseInt($('input[id="tailGearRatioD"]').val());
+
+            const rpmSensorEnabled = rpmSensorSwitch.is(':checked');
+            FC.FEATURE_CONFIG.features.setFeature('FREQ_SENSOR', rpmSensorEnabled);
 
             const telemProto =  parseInt($('select[id="telemetryProtocol"]').val());
             FC.ESC_SENSOR_CONFIG.protocol = telemProto;

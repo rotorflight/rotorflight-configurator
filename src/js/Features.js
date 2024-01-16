@@ -19,7 +19,7 @@ const Features = function (config) {
         { bit: 25,  group: 'RX_PROTO',     name: 'RX_SPI' },
         { bit: 26,  group: 'HIDDEN',       name: 'GOVERNOR' },
         { bit: 27,  group: 'HIDDEN',       name: 'ESC_SENSOR' },
-        { bit: 28,  group: 'OTHER',        name: 'FREQ_SENSOR' },
+        { bit: 28,  group: 'HIDDEN',       name: 'FREQ_SENSOR' },
         { bit: 29,  group: 'HIDDEN',       name: 'DYN_NOTCH' },
         { bit: 30,  group: 'HIDDEN',       name: 'RPM_FILTER' }
     ];

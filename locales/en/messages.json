@@ -2707,6 +2707,12 @@
     "motorsDshotBidirHelp": {
         "message": "Sends ESC RPM telemetry back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32, Bluejay or AM32."
     },
+    "motorsRPMSensor": {
+        "message": "RPM Sensor"
+    },
+    "motorsRPMSensorHelp": {
+        "message": "Use RPM Sensor input for motor RPM."
+    },
     "motorsMainRotorGearRatio": {
         "message": "Main Rotor Gear Ratio"
     },
