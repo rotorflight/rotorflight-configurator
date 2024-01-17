@@ -289,7 +289,14 @@ const FC = {
             pitch_rate_limit:           2000,
             yaw_rate_limit:             2000,
             collective_rate_limit:      2000,
-            rates_smoothness:           0,
+            roll_response_time:         0,
+            pitch_response_time:        0,
+            yaw_response_time:          0,
+            collective_response_time:   0,
+            roll_accel_limit:           0,
+            pitch_accel_limit:          0,
+            yaw_accel_limit:            0,
+            collective_accel_limit:     0,
         };
 
         this.AUX_CONFIG =               [];

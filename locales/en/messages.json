@@ -4361,9 +4361,6 @@
     "rateSetupRatesTypeTip": {
         "message": "Changing rates type will change the rates curve and the way you can set it"
     },
-    "ratesSetupRatesSmoothness": {
-        "message": "Rates Smoothness"
-    },
     "rateSetupRate": {
         "message": "Rate"
     },
@@ -4402,6 +4399,15 @@
     },
     "rateSetupRatesPreview": {
         "message": "Rates Preview"
+    },
+    "rateSetupDynamic": {
+        "message": "Dynamics"
+    },
+    "rateSetupAcceleration": {
+        "message": "Max Acceleration [°/s²]"
+    },
+    "rateSetupResponse": {
+        "message": "Response Time [ms]"
     },
     "gyroFilterSettings": {
         "message": "Gyro Filter Settings"

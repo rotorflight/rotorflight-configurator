@@ -148,11 +148,6 @@
     text-align-last: left;
 }
 
-.tab-rates table .rates_smoothness input
-{
-    display: inline;
-}
-
 .tab-rates .tab-container {
     border-bottom: 3px solid var(--accent);
     border-right-width: 0;
@@ -435,7 +430,7 @@
 .tab-rates .rates_preview_cell {
     position: relative;
     width: 100%;
-    height: 454px;
+    height: 353px;
 }
 
 .tab-rates .rates_preview {

@@ -61,10 +61,6 @@
                                         <select id="ratesType">
                                             <!-- list generated here -->
                                         </select>
-                                        <div class="number rates_smoothness">
-                                            <input type="number" id="ratesSmoothness" min="1" max="250"/>
-                                            <span i18n="ratesSetupRatesSmoothness"></span>
-                                        </div>
                                     </td>
                                     <td class="rates_logo_bg">
                                         <div class="rates_logo_div">
@@ -171,6 +167,53 @@
                 </div>
 
                 <div class="cf_column">
+
+                    <div class="gui_box rateDynamic grey spacer_left">
+                        <table>
+                            <tr class="rates_titlebar">
+                                <th class="name" i18n="rateSetupDynamic"></th>
+                                <th class="smooth" i18n="rateSetupResponse"></th>
+                                <th class="accel" i18n="rateSetupAcceleration"></th>
+                            </tr>
+                            <tr class="ROLL">
+                                <td class="axis_title" i18n="axisROLL">ROLL</td>
+                                <td class="rc_response">
+                                    <input type="number" class="smooth_input" name="roll_response" step="1" min="0" max="250" />
+                                </td>
+                                <td class="rc_accel">
+                                    <input type="number" class="accel_input" name="roll_accel" step="10" min="0" max="500000" />
+                                </td>
+                            </tr>
+                            <tr class="PITCH">
+                                <td class="axis_title" i18n="axisPITCH">PITCH</td>
+                                <td class="rc_response">
+                                    <input type="number" class="smooth_input" name="pitch_response" step="1" min="0" max="250" />
+                                </td>
+                                <td class="rc_accel">
+                                    <input type="number" class="accel_input" name="pitch_accel" step="10" min="0" max="500000" />
+                                </td>
+                            </tr>
+                            <tr class="YAW">
+                                <td class="axis_title" i18n="axisYAW">YAW</td>
+                                <td class="rc_response">
+                                    <input type="number" class="smooth_input" name="yaw_response" step="1" min="0" max="250" />
+                                </td>
+                                <td class="rc_accel">
+                                    <input type="number" class="accel_input" name="yaw_accel" step="10" min="0" max="500000" />
+                                </td>
+                            </tr>
+                            <tr class="COLLECTIVE">
+                                <td class="axis_title" i18n="axisCOLLECTIVE">COLLECTIVE</td>
+                                <td class="rc_response">
+                                    <input type="number" class="smooth_input" name="coll_response" step="1" min="0" max="250" />
+                                </td>
+                                <td class="rc_accel">
+                                    <input type="number" class="accel_input" name="coll_accel" step="10" min="0" max="500000" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
                     <div class="gui_box ratePreview grey spacer_left">
                         <table class="rates_titlebar">
                             <thead>
@@ -189,6 +232,7 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
 

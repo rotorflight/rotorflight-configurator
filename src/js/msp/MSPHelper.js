@@ -334,16 +334,23 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.RC_TUNING.RC_RATE = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.RC_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.roll_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.roll_response_time = data.readU8();
+                FC.RC_TUNING.roll_accel_limit = data.readU16();
                 FC.RC_TUNING.rcPitchRate = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.RC_PITCH_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.pitch_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.pitch_response_time = data.readU8();
+                FC.RC_TUNING.pitch_accel_limit = data.readU16();
                 FC.RC_TUNING.rcYawRate = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.RC_YAW_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.yaw_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.yaw_response_time = data.readU8();
+                FC.RC_TUNING.yaw_accel_limit = data.readU16();
                 FC.RC_TUNING.rcCollectiveRate = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.RC_COLLECTIVE_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.collective_rate = parseFloat((data.readU8() / 100).toFixed(2));
-                FC.RC_TUNING.rates_smoothness = data.readU8();
+                FC.RC_TUNING.collective_response_time = data.readU8();
+                FC.RC_TUNING.collective_accel_limit = data.readU16();
                 break;
 
             case MSPCodes.MSP_PID_TUNING:
@@ -1614,17 +1621,24 @@ MspHelper.prototype.crunch = function(code) {
             buffer.push8(FC.RC_TUNING.rates_type);
             buffer.push8(Math.round(FC.RC_TUNING.RC_RATE * 100))
                   .push8(Math.round(FC.RC_TUNING.RC_EXPO * 100))
-                  .push8(Math.round(FC.RC_TUNING.roll_rate * 100));
+                  .push8(Math.round(FC.RC_TUNING.roll_rate * 100))
+                  .push8(FC.RC_TUNING.roll_response_time)
+                  .push16(FC.RC_TUNING.roll_accel_limit);
             buffer.push8(Math.round(FC.RC_TUNING.rcPitchRate * 100))
                   .push8(Math.round(FC.RC_TUNING.RC_PITCH_EXPO * 100))
-                  .push8(Math.round(FC.RC_TUNING.pitch_rate * 100));
+                  .push8(Math.round(FC.RC_TUNING.pitch_rate * 100))
+                  .push8(FC.RC_TUNING.pitch_response_time)
+                  .push16(FC.RC_TUNING.pitch_accel_limit);
             buffer.push8(Math.round(FC.RC_TUNING.rcYawRate * 100))
                   .push8(Math.round(FC.RC_TUNING.RC_YAW_EXPO * 100))
-                  .push8(Math.round(FC.RC_TUNING.yaw_rate * 100));
+                  .push8(Math.round(FC.RC_TUNING.yaw_rate * 100))
+                  .push8(FC.RC_TUNING.yaw_response_time)
+                  .push16(FC.RC_TUNING.yaw_accel_limit);
             buffer.push8(Math.round(FC.RC_TUNING.rcCollectiveRate * 100))
                   .push8(Math.round(FC.RC_TUNING.RC_COLLECTIVE_EXPO * 100))
-                  .push8(Math.round(FC.RC_TUNING.collective_rate * 100));
-            buffer.push8(FC.RC_TUNING.rates_smoothness);
+                  .push8(Math.round(FC.RC_TUNING.collective_rate * 100))
+                  .push8(FC.RC_TUNING.collective_response_time)
+                  .push16(FC.RC_TUNING.collective_accel_limit);
             break;
 
         case MSPCodes.MSP_SET_RX_MAP:
