@@ -285,10 +285,10 @@ const FC = {
             RC_PITCH_EXPO:              0,
             rcCollectiveRate:           0,
             RC_COLLECTIVE_EXPO:         0,
-            roll_rate_limit:            1998,
-            pitch_rate_limit:           1998,
-            yaw_rate_limit:             1998,
-            collective_rate_limit:      1998,
+            roll_rate_limit:            2000,
+            pitch_rate_limit:           2000,
+            yaw_rate_limit:             2000,
+            collective_rate_limit:      2000,
             rates_smoothness:           0,
         };
 
