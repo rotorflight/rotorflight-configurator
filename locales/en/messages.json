@@ -1102,6 +1102,9 @@
     "feature_OSD": {
         "message": "On Screen Display"
     },
+    "feature_CMS": {
+        "message": "Configuration Menu System"
+    },
     "feature_RX_SPI": {
         "message": "SPI RX support"
     },
