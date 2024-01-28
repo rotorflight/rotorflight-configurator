@@ -15,11 +15,8 @@ const API_VERSION_1_42 = '1.42.0';
 const API_VERSION_1_43 = '1.43.0';
 const API_VERSION_1_44 = '1.44.0';
 
-const API_VERSION_RTFL_1 = '11.1.0';
-const API_VERSION_RTFL_2 = '12.1.0';
-
-const API_VERSION_RTFL_MIN = '12.3.0';
-const API_VERSION_RTFL_MAX = '12.3.0';
+const API_VERSION_RTFL_MIN = '12.4.0';
+const API_VERSION_RTFL_MAX = '12.4.0';
 
 const FW_VERSION_RTFL_MIN = '4.3.0-0';
 const FW_VERSION_RTFL_MAX = '4.3.99';
