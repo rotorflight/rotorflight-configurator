@@ -314,15 +314,16 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_BATTERY_CONFIG:
-                FC.BATTERY_CONFIG.vbatmincellvoltage = data.readU8() / 10; // 10-50
-                FC.BATTERY_CONFIG.vbatmaxcellvoltage = data.readU8() / 10; // 10-50
-                FC.BATTERY_CONFIG.vbatwarningcellvoltage = data.readU8() / 10; // 10-50
                 FC.BATTERY_CONFIG.capacity = data.readU16();
+                FC.BATTERY_CONFIG.cellCount = data.readU8();
                 FC.BATTERY_CONFIG.voltageMeterSource = data.readU8();
                 FC.BATTERY_CONFIG.currentMeterSource = data.readU8();
                 FC.BATTERY_CONFIG.vbatmincellvoltage = data.readU16() / 100;
                 FC.BATTERY_CONFIG.vbatmaxcellvoltage = data.readU16() / 100;
+                FC.BATTERY_CONFIG.vbatfullcellvoltage = data.readU16() / 100;
                 FC.BATTERY_CONFIG.vbatwarningcellvoltage = data.readU16() / 100;
+                FC.BATTERY_CONFIG.lvcPercentage = data.readU8();
+                FC.BATTERY_CONFIG.mahWarningPercentage = data.readU8();
                 break;
 
             case MSPCodes.MSP_SET_BATTERY_CONFIG:
@@ -1713,15 +1714,16 @@ MspHelper.prototype.crunch = function(code) {
             break;
 
         case MSPCodes.MSP_SET_BATTERY_CONFIG:
-            buffer.push8(Math.round(FC.BATTERY_CONFIG.vbatmincellvoltage * 10))
-                .push8(Math.round(FC.BATTERY_CONFIG.vbatmaxcellvoltage * 10))
-                .push8(Math.round(FC.BATTERY_CONFIG.vbatwarningcellvoltage * 10))
-                .push16(FC.BATTERY_CONFIG.capacity)
-                .push8(FC.BATTERY_CONFIG.voltageMeterSource)
-                .push8(FC.BATTERY_CONFIG.currentMeterSource)
-                .push16(Math.round(FC.BATTERY_CONFIG.vbatmincellvoltage * 100))
-                .push16(Math.round(FC.BATTERY_CONFIG.vbatmaxcellvoltage * 100))
-                .push16(Math.round(FC.BATTERY_CONFIG.vbatwarningcellvoltage * 100));
+            buffer.push16(FC.BATTERY_CONFIG.capacity)
+                  .push8(FC.BATTERY_CONFIG.cellCount)
+                  .push8(FC.BATTERY_CONFIG.voltageMeterSource)
+                  .push8(FC.BATTERY_CONFIG.currentMeterSource)
+                  .push16(Math.round(FC.BATTERY_CONFIG.vbatmincellvoltage * 100))
+                  .push16(Math.round(FC.BATTERY_CONFIG.vbatmaxcellvoltage * 100))
+                  .push16(Math.round(FC.BATTERY_CONFIG.vbatfullcellvoltage * 100))
+                  .push16(Math.round(FC.BATTERY_CONFIG.vbatwarningcellvoltage * 100))
+                  .push8(FC.BATTERY_CONFIG.lvcPercentage)
+                  .push8(FC.BATTERY_CONFIG.mahWarningPercentage);
             break;
 
         case MSPCodes.MSP_SET_VOLTAGE_METER_CONFIG:

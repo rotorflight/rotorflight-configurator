@@ -57,12 +57,16 @@ const INITIAL_ANALOG = {
 };
 
 const INITIAL_BATTERY_CONFIG = {
-    vbatmincellvoltage:         0,
-    vbatmaxcellvoltage:         0,
-    vbatwarningcellvoltage:     0,
     capacity:                   0,
+    cellCount:                  0,
     voltageMeterSource:         0,
     currentMeterSource:         0,
+    vbatmincellvoltage:         0,
+    vbatmaxcellvoltage:         0,
+    vbatfullcellvoltage:        0,
+    vbatwarningcellvoltage:     0,
+    lvcPercentage:              0,
+    mahWarningPercentage:       0,
 };
 
 const FC = {
