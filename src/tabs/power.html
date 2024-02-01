@@ -141,26 +141,38 @@
 
         <div class="number">
             <label>
-                <input type="number" name="mincellvoltage" step="0.01" min="1" max="5" />
-                <span i18n="powerBatteryMinimum"></span>
+                <input type="number" name="maxcellvoltage" step="0.01" min="1" max="5" />
+                <span i18n="powerBatteryMaximumCellVoltage"></span>
             </label>
         </div>
         <div class="number">
             <label>
-                <input type="number" name="maxcellvoltage" step="0.01" min="1" max="5" />
-                <span i18n="powerBatteryMaximum"></span>
+                <input type="number" name="fullcellvoltage" step="0.01" min="1" max="5" />
+                <span i18n="powerBatteryFullCellVoltage"></span>
             </label>
         </div>
         <div class="number">
             <label>
                 <input type="number" name="warningcellvoltage" step="0.01" min="1" max="5" />
-                <span i18n="powerBatteryWarning"></span>
+                <span i18n="powerBatteryWarningCellVoltage"></span>
+            </label>
+        </div>
+        <div class="number">
+            <label>
+                <input type="number" name="mincellvoltage" step="0.01" min="1" max="5" />
+                <span i18n="powerBatteryMinimumCellVoltage"></span>
             </label>
         </div>
         <div class="number">
             <label>
                 <input type="number" name="capacity" step="50" min="0" max="20000" />
                 <span i18n="powerBatteryCapacity"></span>
+            </label>
+        </div>
+        <div class="number">
+            <label>
+                <input type="number" name="cellcount" step="1" min="0" max="24" />
+                <span i18n="powerBatteryCellCount"></span>
             </label>
         </div>
     </div>

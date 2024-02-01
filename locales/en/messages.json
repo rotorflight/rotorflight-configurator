@@ -4826,13 +4826,16 @@
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP Sensor"
     },
-    "powerBatteryMinimum": {
+    "powerBatteryMinimumCellVoltage": {
         "message": "Minimum Cell Voltage"
     },
-    "powerBatteryMaximum": {
+    "powerBatteryMaximumCellVoltage": {
         "message": "Maximum Cell Voltage"
     },
-    "powerBatteryWarning": {
+    "powerBatteryFullCellVoltage": {
+        "message": "Full Cell Voltage"
+    },
+    "powerBatteryWarningCellVoltage": {
         "message": "Warning Cell Voltage"
     },
     "powerCalibrationManagerButton": {
@@ -5031,7 +5034,10 @@
         "message": "Current"
     },
     "powerBatteryCapacity": {
-        "message": "Capacity (mAh)"
+        "message": "Capacity [mAh]"
+    },
+    "powerBatteryCellCount": {
+        "message": "Cell count"
     },
     "osdSetupTitle": {
         "message": "OSD"

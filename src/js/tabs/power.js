@@ -197,6 +197,12 @@ TABS.power.initialize = function (callback) {
                 FC.BATTERY_CONFIG.vbatmincellvoltage = getFloatValue(this);
             });
 
+            elementBatteryConfiguration.find('input[name="fullcellvoltage"]')
+            .val(FC.BATTERY_CONFIG.vbatfullcellvoltage).change()
+            .change(function () {
+                FC.BATTERY_CONFIG.vbatfullcellvoltage = getFloatValue(this);
+            });
+
         elementBatteryConfiguration.find('input[name="maxcellvoltage"]')
             .val(FC.BATTERY_CONFIG.vbatmaxcellvoltage).change()
             .change(function () {
@@ -213,6 +219,12 @@ TABS.power.initialize = function (callback) {
             .val(FC.BATTERY_CONFIG.capacity).change()
             .change(function () {
                 FC.BATTERY_CONFIG.capacity = getIntegerValue(this);
+            });
+
+        elementBatteryConfiguration.find('input[name="cellcount"]')
+            .val(FC.BATTERY_CONFIG.cellCount).change()
+            .change(function () {
+                FC.BATTERY_CONFIG.cellCount = getIntegerValue(this);
             });
 
         const batteryMeterType_e = elementBatteryConfiguration.find('select.batterymetersource');
