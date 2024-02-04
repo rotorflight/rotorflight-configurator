@@ -132,6 +132,7 @@ TABS.status.initialize = function (callback) {
             bat_voltage_e = $('.bat-voltage'),
             bat_mah_drawn_e = $('.bat-mah-drawn'),
             bat_mah_drawing_e = $('.bat-mah-drawing'),
+            bat_charge_level_e = $('.bat-charge-level'),
             roll_e = $('dd.roll'),
             pitch_e = $('dd.pitch'),
             heading_e = $('dd.heading');
@@ -232,11 +233,6 @@ TABS.status.initialize = function (callback) {
             }
         }
 
-        function update_rc_rssi() {
-            const rssi = (FC.ANALOG.rssi / 1023 * 100).toFixed(0) + '%';
-            updateChannelBar(rssiElem, rssi, FC.ANALOG.rssi, rssi);
-        }
-
         function get_slow_data() {
 
             MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
@@ -247,11 +243,16 @@ TABS.status.initialize = function (callback) {
                 }
             });
 
+            MSP.send_message(MSPCodes.MSP_BATTERY_STATE, false, false, function () {
+                bat_voltage_e.text(i18n.getMessage('powerVoltageValue', [FC.BATTERY_STATE.voltage]));
+                bat_mah_drawn_e.text(i18n.getMessage('powerMahValue', [FC.BATTERY_STATE.mAhDrawn]));
+                bat_mah_drawing_e.text(i18n.getMessage('powerAmperageValue', [FC.BATTERY_STATE.amperage]));
+                bat_charge_level_e.text(i18n.getMessage('powerChargeLevel', [FC.BATTERY_STATE.chargeLevel]));
+            });
+
             MSP.send_message(MSPCodes.MSP_ANALOG, false, false, function () {
-                bat_voltage_e.text(i18n.getMessage('statusBatteryValue', [FC.ANALOG.voltage]));
-                bat_mah_drawn_e.text(i18n.getMessage('statusBatteryMahValue', [FC.ANALOG.mAhdrawn]));
-                bat_mah_drawing_e.text(i18n.getMessage('statusBatteryAValue', [FC.ANALOG.amperage.toFixed(2)]));
-                update_rc_rssi();
+                const rssi = (FC.ANALOG.rssi / 1023 * 100).toFixed(0) + '%';
+                updateChannelBar(rssiElem, rssi, FC.ANALOG.rssi, rssi);
             });
 
             MSP.send_message(MSPCodes.MSP_ALTITUDE, false, false, function () {

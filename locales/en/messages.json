@@ -787,20 +787,14 @@
     "statusBattery": {
         "message": "Voltage:"
     },
-    "statusBatteryValue": {
-        "message": "$1 V"
-    },
     "statusDrawn": {
         "message": "Capacity:"
     },
     "statusDrawing": {
         "message": "Current:"
     },
-    "statusBatteryMahValue": {
-        "message": "$1 mAh"
-    },
-    "statusBatteryAValue": {
-        "message": "$1 A"
+    "statusChargeLevel": {
+        "message": "Charge level:"
     },
     "statusCraftName": {
         "message": "Craft Name:"
