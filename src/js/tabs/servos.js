@@ -87,20 +87,20 @@ TABS.servos.initialize = function (callback) {
             for (let index = 0; index < FC.CONFIG.servoCount; index++) {
                 const servo = SERVOS[index];
                 if (servo.mid > 860) {
-                    if (servo.rate > 333)
+                    if (servo.rate > 433)
                         unusualRate = true;
-                    // Unusual: value > 500 ± 25%
-                    if (servo.min < -625 || servo.min > -375 || servo.max >  625 || servo.max <  375)
+                    // Unusual: value > 600 ± 25%
+                    if (servo.min < -750 || servo.min > -300 || servo.max >  750 || servo.max <  300)
                         unusualLimit = true;
-                    if (servo.rneg < 375 || servo.rneg > 625 || servo.rpos <  375 || servo.rpos >  625)
+                    if (servo.rneg < 300 || servo.rneg > 750 || servo.rpos < 300 || servo.rpos > 750)
                         unusualScale = true;
                 } else {
-                    if (servo.rate > 560)
+                    if (servo.rate > 600)
                         unusualRate = true;
-                    // Unusual: value > 250 ± 25%
-                    if (servo.min < -312 || servo.min > -187 || servo.max >  312 || servo.max <  187)
+                    // Unusual: value > 300 ± 25%
+                    if (servo.min < -375 || servo.min > -150 || servo.max > 375 || servo.max <  150)
                         unusualLimit = true;
-                    if (servo.rneg < 187 || servo.rneg > 312 || servo.rpos <  187 || servo.rpos >  312)
+                    if (servo.rneg < 150 || servo.rneg > 375 || servo.rpos < 150 || servo.rpos > 375)
                         unusualScale = true;
                 }
             }
