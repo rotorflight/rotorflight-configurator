@@ -68,7 +68,7 @@ TABS.status = {
 };
 
 TABS.status.initialize = function (callback) {
-    var self = this;
+    const self = this;
 
     load_data(load_html);
 
@@ -109,10 +109,10 @@ TABS.status.initialize = function (callback) {
         $('span.heading').text(i18n.getMessage('statusAttitude', [0]));
 
         // Flight instruments
-        var options = { size:90, showBox : false, img_directory: 'images/flightindicators/' };
-        var attitude = $.flightIndicator('#attitude', 'attitude', options);
-        var heading  = $.flightIndicator('#heading', 'heading', options);
-        var altitude = $.flightIndicator('#altitude', 'altimeter', options);
+        const options = { size:90, showBox : false, img_directory: 'images/flightindicators/' };
+        const attitude = $.flightIndicator('#attitude', 'attitude', options);
+        const heading  = $.flightIndicator('#heading', 'heading', options);
+        const altitude = $.flightIndicator('#altitude', 'altimeter', options);
 
         $('#arming-disable-flag').attr('title', i18n.getMessage('statusArmingDisableFlagsTooltip'));
 
@@ -127,7 +127,8 @@ TABS.status.initialize = function (callback) {
         });
 
         // cached elements
-        var arming_disable_flags_e = $('.arming-disable-flags'),
+        const
+            arming_disable_flags_e = $('.arming-disable-flags'),
             configState_e = $('.configState'),
             bat_voltage_e = $('.bat-voltage'),
             bat_mah_drawn_e = $('.bat-mah-drawn'),
@@ -157,7 +158,7 @@ TABS.status.initialize = function (callback) {
             $('.arm-danger-row').hide();
 
             // Arming disabled flags
-            for (var i = 0; i < FC.CONFIG.armingDisableCount; i++) {
+            for (let i = 0; i < FC.CONFIG.armingDisableCount; i++) {
                 // All the known elements
                 if (i < self.DISARM_FLAGS.length) {
                     arming_disable_flags_e.append('<div id="statusArmingDisableFlags' + i + '" class="cf_tip disarm-flag" title="' +
@@ -238,7 +239,7 @@ TABS.status.initialize = function (callback) {
             MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
                 const armingEnabled = (FC.CONFIG.armingDisableFlags == 0);
                 $('.arm-danger-row').toggle(armingEnabled);
-                for (var i = 0; i < FC.CONFIG.armingDisableCount; i++) {
+                for (let i = 0; i < FC.CONFIG.armingDisableCount; i++) {
                     $('#statusArmingDisableFlags'+i).toggle((FC.CONFIG.armingDisableFlags & (1 << i)) != 0);
                 }
             });
@@ -325,7 +326,7 @@ TABS.status.initModel = function () {
 };
 
 TABS.status.renderModel = function () {
-    var x = (FC.SENSOR_DATA.kinematics[1] * -1.0) * 0.017453292519943295,
+    let x = (FC.SENSOR_DATA.kinematics[1] * -1.0) * 0.017453292519943295,
         y = ((FC.SENSOR_DATA.kinematics[2] * -1.0) - this.yaw_fix) * 0.017453292519943295,
         z = (FC.SENSOR_DATA.kinematics[0] * -1.0) * 0.017453292519943295;
 
