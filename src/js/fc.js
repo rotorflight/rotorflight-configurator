@@ -636,6 +636,7 @@ const FC = {
             gov_pwr_filter:                 0,
             gov_rpm_filter:                 0,
             gov_tta_filter:                 0,
+            gov_ff_filter:                  0,
         };
 
         this.SENSOR_CONFIG = {

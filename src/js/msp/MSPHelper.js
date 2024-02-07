@@ -1064,6 +1064,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.GOVERNOR.gov_pwr_filter                   = data.readU8();
                 FC.GOVERNOR.gov_rpm_filter                   = data.readU8();
                 FC.GOVERNOR.gov_tta_filter                   = data.readU8();
+                FC.GOVERNOR.gov_ff_filter                    = data.readU8();
                 break;
 
             case MSPCodes.MSP_MIXER_INPUTS:
@@ -1929,7 +1930,8 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.GOVERNOR.gov_handover_throttle)
                 .push8(FC.GOVERNOR.gov_pwr_filter)
                 .push8(FC.GOVERNOR.gov_rpm_filter)
-                .push8(FC.GOVERNOR.gov_tta_filter);
+                .push8(FC.GOVERNOR.gov_tta_filter)
+                .push8(FC.GOVERNOR.gov_ff_filter);
             break;
 
         case MSPCodes.MSP_SET_LED_STRIP_SETTINGS:

@@ -2975,7 +2975,7 @@
         "message": "Headspeed filter cutoff [Hz]"
     },
     "govHeadspeedFilterHzHelp": {
-        "message": "Cutoff for the headspeed PID input lowpass filter."
+        "message": "Cutoff for the headspeed lowpass filter."
     },
     "govVoltageFilterHz": {
         "message": "Battery voltage filter cutoff [Hz]"
@@ -2984,10 +2984,16 @@
         "message": "Cutoff for the battery voltage lowpass filter."
     },
     "govTTAFilterHz": {
-        "message": "TTA filter cutoff [Hz]"
+        "message": "TTA Bandwidth [Hz]"
     },
     "govTTAFilterHzHelp": {
-        "message": "Cutoff for the TTA input lowpass filter."
+        "message": "Cutoff for the TTA lowpass filter."
+    },
+    "govFFFilterHz": {
+        "message": "Precomp Bandwidth [Hz]"
+    },
+    "govFFFilterHzHelp": {
+        "message": "Cutoff for the cyclic/collective precompensation lowpass filter."
     },
     "govHeadspeed": {
         "message": "Full headspeed"

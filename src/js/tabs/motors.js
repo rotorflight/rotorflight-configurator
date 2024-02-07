@@ -392,6 +392,7 @@ TABS.motors.initialize = function (callback) {
         $('input[id="govVoltageFilterHz"]').val(FC.GOVERNOR.gov_pwr_filter).change();
         $('input[id="govHeadspeedFilterHz"]').val(FC.GOVERNOR.gov_rpm_filter).change();
         $('input[id="govTTAFilterHz"]').val(FC.GOVERNOR.gov_tta_filter).change();
+        $('input[id="govFFFilterHz"]').val(FC.GOVERNOR.gov_ff_filter).change();
 
         function updateVisibility() {
 
@@ -474,6 +475,7 @@ TABS.motors.initialize = function (callback) {
                 FC.GOVERNOR.gov_pwr_filter = parseInt($('input[id="govVoltageFilterHz"]').val());
                 FC.GOVERNOR.gov_rpm_filter = parseInt($('input[id="govHeadspeedFilterHz"]').val());
                 FC.GOVERNOR.gov_tta_filter = parseInt($('input[id="govTTAFilterHz"]').val());
+                FC.GOVERNOR.gov_ff_filter = parseInt($('input[id="govFFFilterHz"]').val());
             }
         }
 
