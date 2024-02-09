@@ -29,6 +29,7 @@ TABS.motors = {
         "OMPHobby",
         "ZTW",
         "APD",
+        "OpenYGE",
         "Custom",
     ],
     govModes: [
