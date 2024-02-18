@@ -111,7 +111,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: rotorflight-configurator-windows-snapshot-${{ env.GIT_VER }}
+        name: rotorflight-configurator-win64-snapshot-${{ env.GIT_VER }}
         path: release/rotorflight-configurator*
 
 
@@ -147,7 +147,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: rotorflight-configurator-windows-snapshot-${{ env.GIT_VER }}
+        name: rotorflight-configurator-win32-snapshot-${{ env.GIT_VER }}
         path: release/rotorflight-configurator*
 
 
@@ -177,10 +177,15 @@ jobs:
       with:
         name: rotorflight-configurator-macos-snapshot-${{ env.GIT_VER }}
 
-    - name: Download Windows Artifacts
+    - name: Download Win64 Artifacts
       uses: actions/download-artifact@v4
       with:
-        name: rotorflight-configurator-windows-snapshot-${{ env.GIT_VER }}
+        name: rotorflight-configurator-win64-snapshot-${{ env.GIT_VER }}
+
+    - name: Download Win32 Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: rotorflight-configurator-win32-snapshot-${{ env.GIT_VER }}
 
     - name: Create Snapshot
       run: |
