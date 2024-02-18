@@ -788,6 +788,12 @@
         "english": "System Load:",
         "description": "System load text shown in the status bar"
     },
+    "statusbar_rt_load": {
+        "message": "Realtime Load:",
+        "english": "Realtime Load:",
+        "status": "New entry. Please translate!",
+        "description": "Realtime CPU load text shown in the status bar"
+    },
     "statusbar_cpu_load": {
         "message": "CPU-belasting:",
         "english": "CPU Load:",
@@ -918,10 +924,6 @@
         "message": "Spanning:",
         "english": "Voltage:"
     },
-    "statusBatteryValue": {
-        "message": "$1 V",
-        "english": "$1 V"
-    },
     "statusDrawn": {
         "message": "Inhoud:",
         "english": "Capacity:"
@@ -930,13 +932,10 @@
         "message": "Huidig:",
         "english": "Current:"
     },
-    "statusBatteryMahValue": {
-        "message": "$1 mAh",
-        "english": "$1 mAh"
-    },
-    "statusBatteryAValue": {
-        "message": "$1 A",
-        "english": "$1 A"
+    "statusChargeLevel": {
+        "message": "Charge level:",
+        "english": "Charge level:",
+        "status": "New entry. Please translate!"
     },
     "statusCraftName": {
         "message": "Naam helikopter:",
@@ -987,10 +986,11 @@
         "english": "The 'FAILSAFE' switch was activated",
         "description": "Message that pops up to describe the BOXFAILSAFE arming disable flag"
     },
-    "statusArmingDisableFlagsTooltipRUNAWAY_TAKEOFF": {
-        "message": "Runway Takeoff preventie is geactiveerd",
-        "english": "Runway Takeoff Prevention has been triggered",
-        "description": "Message that pops up to describe the RUNAWAY_TAKEOFF arming disable flag"
+    "statusArmingDisableFlagsTooltipGOVERNOR": {
+        "message": "Governor can't function without an RPM signal",
+        "english": "Governor can't function without an RPM signal",
+        "status": "New entry. Please translate!",
+        "description": "Message that pops up to describe the GOVERNOR arming disable flag"
     },
     "statusArmingDisableFlagsTooltipCRASH": {
         "message": "Uitgeschakeld via crash detectie",
@@ -1349,6 +1349,11 @@
         "message": "Weergave op het scherm",
         "english": "On Screen Display",
         "status": "Reused translation. Please check!"
+    },
+    "feature_CMS": {
+        "message": "Configuration Menu System",
+        "english": "Configuration Menu System",
+        "status": "New entry. Please translate!"
     },
     "feature_RX_SPI": {
         "message": "SPI RX ondersteuning",
@@ -2073,8 +2078,8 @@
         "status": "New entry. Please translate!"
     },
     "profilesPIDModeThreeWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b>, that uses HSI.<br>Please check the Offset gains.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b>, that uses HSI.<br>Please check the Offset gains.",
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b> with HSI.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b> with HSI.",
         "status": "New entry. Please translate!"
     },
     "profilesPIDModeCustomWarning": {
@@ -3970,6 +3975,16 @@
             "english": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32 or BLHeli_S when flashed to Bluejay firmware."
         }
     },
+    "motorsRPMSensor": {
+        "message": "RPM Sensor",
+        "english": "RPM Sensor",
+        "status": "New entry. Please translate!"
+    },
+    "motorsRPMSensorHelp": {
+        "message": "Use RPM Sensor input for motor RPM.",
+        "english": "Use RPM Sensor input for motor RPM.",
+        "status": "New entry. Please translate!"
+    },
     "motorsMainRotorGearRatio": {
         "message": "Hoofdrotor overbrengingsverhouding",
         "english": "Main Rotor Gear Ratio"
@@ -4397,8 +4412,13 @@
         "english": "Headspeed filter cutoff [Hz]"
     },
     "govHeadspeedFilterHzHelp": {
-        "message": "Afsnijfrequentie voor het rotortoerental PID invoer laagdoorlaatfilter.",
-        "english": "Cutoff for the headspeed PID input lowpass filter."
+        "message": "Cutoff for the headspeed lowpass filter.",
+        "english": "Cutoff for the headspeed lowpass filter.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Afsnijfrequentie voor het rotortoerental PID invoer laagdoorlaatfilter.",
+            "english": "Cutoff for the headspeed PID input lowpass filter."
+        }
     },
     "govVoltageFilterHz": {
         "message": "Afsnijfrequentie batterijspanningsfilter [Hz]",
@@ -4409,12 +4429,32 @@
         "english": "Cutoff for the battery voltage lowpass filter."
     },
     "govTTAFilterHz": {
-        "message": "Afsnijfrequentie TTA-filter [Hz]",
-        "english": "TTA filter cutoff [Hz]"
+        "message": "TTA Bandwidth [Hz]",
+        "english": "TTA Bandwidth [Hz]",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Afsnijfrequentie TTA-filter [Hz]",
+            "english": "TTA filter cutoff [Hz]"
+        }
     },
     "govTTAFilterHzHelp": {
-        "message": "Afsnijfrequentie voor het TTA-invoer laagdoorlaatfilter.",
-        "english": "Cutoff for the TTA input lowpass filter."
+        "message": "Cutoff for the TTA lowpass filter.",
+        "english": "Cutoff for the TTA lowpass filter.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Afsnijfrequentie voor het TTA-invoer laagdoorlaatfilter.",
+            "english": "Cutoff for the TTA input lowpass filter."
+        }
+    },
+    "govFFFilterHz": {
+        "message": "Precomp Bandwidth [Hz]",
+        "english": "Precomp Bandwidth [Hz]",
+        "status": "New entry. Please translate!"
+    },
+    "govFFFilterHzHelp": {
+        "message": "Cutoff for the cyclic/collective precompensation lowpass filter.",
+        "english": "Cutoff for the cyclic/collective precompensation lowpass filter.",
+        "status": "New entry. Please translate!"
     },
     "govHeadspeed": {
         "message": "Volledige rotortoerental",
@@ -6059,6 +6099,16 @@
         "message": "Stop gain (PD) voor counter clock-wise rotatie. Typisch bereik 50..200.",
         "english": "Stop gain (PD) for counter clock-wise rotation. Typical range 50..200."
     },
+    "profilesYawPrecompCutoff": {
+        "message": "Yaw Precomp Cutoff [Hz]",
+        "english": "Yaw Precomp Cutoff [Hz]",
+        "status": "New entry. Please translate!"
+    },
+    "profilesYawPrecompCutoffHelp": {
+        "message": "Frequency limit for all yaw precompensation actions",
+        "english": "Frequency limit for all yaw precompensation actions",
+        "status": "New entry. Please translate!"
+    },
     "profilesYawFFCyclicGain": {
         "message": "Cyclische feedforward gain",
         "english": "Cyclic Feedforward Gain"
@@ -6404,11 +6454,6 @@
         "message": "Als je een ratetype wijzigt, verandert de rate curve en de manier waarop je deze kunt instellen",
         "english": "Changing rates type will change the rates curve and the way you can set it"
     },
-    "ratesSetupRatesSmoothness": {
-        "message": "Rates Smoothness",
-        "english": "Rates Smoothness",
-        "status": "New entry. Please translate!"
-    },
     "rateSetupRate": {
         "message": "Rate",
         "english": "Rate"
@@ -6465,6 +6510,21 @@
     "rateSetupRatesPreview": {
         "message": "Voorbeeld",
         "english": "Rates Preview"
+    },
+    "rateSetupDynamic": {
+        "message": "Dynamics",
+        "english": "Dynamics",
+        "status": "New entry. Please translate!"
+    },
+    "rateSetupAcceleration": {
+        "message": "Max Acceleration [°/s²]",
+        "english": "Max Acceleration [°/s²]",
+        "status": "New entry. Please translate!"
+    },
+    "rateSetupResponse": {
+        "message": "Response Time [ms]",
+        "english": "Response Time [ms]",
+        "status": "New entry. Please translate!"
     },
     "gyroFilterSettings": {
         "message": "Gyro filterinstellingen",
@@ -7118,17 +7178,25 @@
             "english": "MSP Sensor/OSD Slave"
         }
     },
-    "powerBatteryMinimum": {
+    "powerBatteryMinimumCellVoltage": {
         "message": "Minimale celspanning",
-        "english": "Minimum Cell Voltage"
+        "english": "Minimum Cell Voltage",
+        "status": "Reused translation. Please check!"
     },
-    "powerBatteryMaximum": {
+    "powerBatteryMaximumCellVoltage": {
         "message": "Maximale celspanning",
-        "english": "Maximum Cell Voltage"
+        "english": "Maximum Cell Voltage",
+        "status": "Reused translation. Please check!"
     },
-    "powerBatteryWarning": {
+    "powerBatteryFullCellVoltage": {
+        "message": "Full Cell Voltage",
+        "english": "Full Cell Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "powerBatteryWarningCellVoltage": {
         "message": "Waarschuwing celspanning",
-        "english": "Warning Cell Voltage"
+        "english": "Warning Cell Voltage",
+        "status": "Reused translation. Please check!"
     },
     "powerCalibrationManagerButton": {
         "message": "Kalibratie",
@@ -7401,6 +7469,11 @@
         "message": "$1 mAh",
         "english": "$1 mAh"
     },
+    "powerChargeLevel": {
+        "message": "$1 %",
+        "english": "$1 %",
+        "status": "New entry. Please translate!"
+    },
     "powerAmperageScale": {
         "message": "Schaal [1/10e mV/A]",
         "english": "Scale [1/10th mV/A]"
@@ -7455,14 +7528,29 @@
         "message": "mAh verbruikt",
         "english": "mAh used"
     },
+    "powerBatteryChargeLevel": {
+        "message": "Charge level",
+        "english": "Charge level",
+        "status": "New entry. Please translate!"
+    },
     "powerBatteryAmperage": {
         "message": "Current",
         "english": "Current",
         "status": "Modified entry. Please translate!"
     },
     "powerBatteryCapacity": {
-        "message": "Capaciteit (mAh)",
-        "english": "Capacity (mAh)"
+        "message": "Capacity [mAh]",
+        "english": "Capacity [mAh]",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Capaciteit (mAh)",
+            "english": "Capacity (mAh)"
+        }
+    },
+    "powerBatteryCellCount": {
+        "message": "Cell count",
+        "english": "Cell count",
+        "status": "New entry. Please translate!"
     },
     "osdSetupTitle": {
         "message": "OSD",
