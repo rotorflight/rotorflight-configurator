@@ -13,15 +13,15 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Install Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.11
 
     - name: Install Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
 
@@ -37,7 +37,7 @@ jobs:
       run: yarn gulp release --linux64
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-linux-snapshot-${{ env.GIT_VER }}
         path: release/rotorflight-configurator*
@@ -49,15 +49,15 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Install Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.11
 
     - name: Install Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
 
@@ -73,7 +73,7 @@ jobs:
       run: yarn gulp release --osx64
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-macos-snapshot-${{ env.GIT_VER }}
         path: release/rotorflight-configurator*
@@ -85,15 +85,15 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Install Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.11
 
     - name: Install Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
 
@@ -109,7 +109,7 @@ jobs:
       run: yarn gulp release --win64
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-windows-snapshot-${{ env.GIT_VER }}
         path: release/rotorflight-configurator*
@@ -121,15 +121,15 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Install Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.11
 
     - name: Install Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
 
@@ -145,7 +145,7 @@ jobs:
       run: yarn gulp release --win32
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-windows-snapshot-${{ env.GIT_VER }}
         path: release/rotorflight-configurator*
@@ -159,7 +159,7 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set build variables
       run: |
@@ -168,17 +168,17 @@ jobs:
         cat ${GITHUB_ENV}
 
     - name: Download Linux Artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: rotorflight-configurator-linux-snapshot-${{ env.GIT_VER }}
 
     - name: Download MacOS Artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: rotorflight-configurator-macos-snapshot-${{ env.GIT_VER }}
 
     - name: Download Windows Artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: rotorflight-configurator-windows-snapshot-${{ env.GIT_VER }}
 
