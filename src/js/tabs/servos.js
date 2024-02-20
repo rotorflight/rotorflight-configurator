@@ -261,7 +261,7 @@ TABS.servos.initialize = function (callback) {
 
             let rangeMin, rangeMax;
 
-            for (let i = 0; i < FC.SERVO_DATA.length; i++) {
+            for (let i = 0; i < FC.SERVO_CONFIG.length; i++) {
                 const servoValue = FC.SERVO_DATA[i];
 
                 if (FC.SERVO_CONFIG[i].mid <= 860) {
