@@ -107,7 +107,7 @@ TABS.profiles.initialize = function (callback) {
             show_warning('profilesPIDModeTwoWarning');
         }
         else if (FC.PID_PROFILE.pid_mode == 3) {
-            show_warning('profilesPIDModeThreeWarning');
+            //show_warning('profilesPIDModeThreeWarning');
         }
         else if (FC.PID_PROFILE.pid_mode > 3) {
             show_warning('profilesPIDModeCustomWarning');
