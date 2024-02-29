@@ -1598,16 +1598,6 @@ dialog {
     border: 1px solid silver;
 }
 
-dialog code {
-    font-family: monospace;
-    color: #fff;
-    background-color: #000;
-    padding: 3px 5px;
-    margin: 4px;
-    border: none;
-    border-radius: 5px;
-}
-
 .dialogTabExit {
     width: 40em;
     border-radius: 5px;
@@ -1684,16 +1674,6 @@ dialog .dialog_toolbar .btn a.disabled {
 }
 /* Border of the Tab */
 
-/* Tab Title */
-.tab_title {
-    border-bottom: 1px solid var(--accent);
-    font-size: 20px;
-    line-height: 24px;
-    height: 30px;
-    font-weight: 300;
-    margin-bottom: 15px;
-}
-
 /* Note */
 .note {
     background-color: #fff7cd;
@@ -1707,7 +1687,7 @@ dialog .dialog_toolbar .btn a.disabled {
     padding: 5px 7px 5px 7px;
 }
 
-.note code {
+code {
     font-family: monospace;
     color: #fff;
     background-color: #000;
@@ -1715,6 +1695,28 @@ dialog .dialog_toolbar .btn a.disabled {
     margin: 4px;
     border: none;
     border-radius: 5px;
+}
+
+span.value {
+    display: inline-block;
+    line-height: 12px;
+    font-size: 11px;
+    text-align: right;
+    box-sizing: border-box;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 2px;
+    padding: 0 4px;
+    margin: 2px 1px;
+}
+
+/* Tab Title */
+.tab_title {
+    border-bottom: 1px solid var(--accent);
+    font-size: 20px;
+    line-height: 24px;
+    height: 30px;
+    font-weight: 300;
+    margin-bottom: 15px;
 }
 
 .tab_wrapper {

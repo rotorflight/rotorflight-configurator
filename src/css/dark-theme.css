@@ -201,6 +201,10 @@ button {
     background: #393b3a;
 }
 
+span.value {
+    background-color: #202020;
+}
+
 
 /* TABS */
 
