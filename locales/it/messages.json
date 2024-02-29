@@ -907,8 +907,8 @@
         "english": "Hardware"
     },
     "defaultWelcomeText": {
-        "message": "The application supports all hardware that can run Rotorflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts</a><br /><br />The source code can be downloaded from <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />The latest <b>Zadig</b> for Windows USB driver installer can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />",
-        "english": "The application supports all hardware that can run Rotorflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts</a><br /><br />The source code can be downloaded from <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />The latest <b>Zadig</b> for Windows USB driver installer can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />",
+        "message": "The application supports all hardware that can run Rotorflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts for EdgeTx</a><br /><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts for FrSky Ethos</a><br /><br />The source code can be downloaded from <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>Zadig</b> for Windows USB driver installer can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.<br />",
+        "english": "The application supports all hardware that can run Rotorflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts for EdgeTx</a><br /><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts for FrSky Ethos</a><br /><br />The source code can be downloaded from <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>Zadig</b> for Windows USB driver installer can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.<br />",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "L'applicazione supporta tutto l'hardware che può eseguire Betaflight. Controlla la scheda per il flash per una lista completa dell'hardware.<br /><br /><a href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Scarica il Betaflight Blackbox Log Viewer</a><br /><br /><a href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Scarica gli script LUA di Betaflight per la trasmittente</a><br /><br />Il codice sorgente del firmware può essere scaricato da <a href=\"https://github.com/betaflight/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">qui</a><br /><br />Gli ultimi <b>Driver USB STM VCP</b> possono essere scaricati da <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">qui</a><br />Per hardware obsoleti che usano un chip USB-seriale CP210x:<br />gli ultimi <b>driver CP210x</b>possono essere scaricati da <a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers\" target=\"_blank\" rel=\"noopener noreferrer\">qui</a><br />L'ultima versione di <b>Zadig</b> per l'installazione dei driver Windows USB può essere scaricata da <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">qui</a><br /><b>ImpulseRC Driver Fixer</b> può essere scaricato da <a href=\"https://impulserc.com/pages/downloads\" target=\"blank\" rel=\"noopener noreferrer\">qui</a>",
@@ -1474,8 +1474,8 @@
         "status": "New entry. Please translate!"
     },
     "initialSetupEnableMotorOverrideText": {
-        "message": "Enable the motor override feature in the Motors tab. Setting motor override WILL make the motors to spool up.",
-        "english": "Enable the motor override feature in the Motors tab. Setting motor override WILL make the motors to spool up.",
+        "message": "Enable the motor override feature in the Motors tab. Using motor override WILL SPOOL UP the motors!",
+        "english": "Enable the motor override feature in the Motors tab. Using motor override WILL SPOOL UP the motors!",
         "status": "New entry. Please translate!"
     },
     "initialSetupEnableServoOverride": {
@@ -1484,8 +1484,8 @@
         "status": "New entry. Please translate!"
     },
     "initialSetupEnableServoOverrideText": {
-        "message": "Enable the servo override feature in the Servos tab. Setting servo override WILL move the servos to arbitrary positions.",
-        "english": "Enable the servo override feature in the Servos tab. Setting servo override WILL move the servos to arbitrary positions.",
+        "message": "Enable the servo override feature in the Servos tab. Using servo override WILL move the servos to arbitrary positions.",
+        "english": "Enable the servo override feature in the Servos tab. Using servo override WILL move the servos to arbitrary positions.",
         "status": "New entry. Please translate!"
     },
     "initialSetupEnableMixerOverride": {
@@ -1494,8 +1494,8 @@
         "status": "New entry. Please translate!"
     },
     "initialSetupEnableMixerOverrideText": {
-        "message": "Enable the mixer input override feature in the Mixers tab. Setting mixer override WILL force the flight controls to arbitrary positions.",
-        "english": "Enable the mixer input override feature in the Mixers tab. Setting mixer override WILL force the flight controls to arbitrary positions.",
+        "message": "Enable the mixer input override feature in the Mixers tab. Using mixer override WILL force the flight controls to arbitrary positions.",
+        "english": "Enable the mixer input override feature in the Mixers tab. Using mixer override WILL force the flight controls to arbitrary positions.",
         "status": "New entry. Please translate!"
     },
     "feature_RX_PPM": {
@@ -1652,21 +1652,27 @@
         "english": "ESC/Motor Features"
     },
     "configurationFeaturesHelp": {
-        "message": "<strong>Nota:</strong> Non tutte le combinazioni di funzionalità sono valide. Quando il firmware del controllore di volo rileva delle combinazioni di funzionalità in conflitto queste funzionalità vengono disabilitate.<br /><strong>Nota:</strong> Configura le porte seriali <span class=\"message-negative\">prima</span> di abilitare le funzionalità che utilizzano le porte.",
-        "english": "<strong>Note:</strong> Not all combinations of features are valid.  When the flight controller firmware detects invalid feature combinations conflicting features will be disabled.<br /><strong>Note:</strong> Configure serial ports <span class=\"message-negative\">before</span> enabling the features that will use the ports."
-    },
-    "configurationOtherFeaturesHelp": {
-        "message": "<strong>Nota:</strong> Non tutte le funzionalità sono supportate da tutti i controller di volo. Se abiliti una specifica impostazione, e risulta disabilitata dopo aver fatto 'Salva e Riavvia', vuol dire che tale impostazione non è supportata dalla tua scheda.",
-        "english": "<strong>Note:</strong> Not all features are supported by all flight controllers. If you enable a specific feature, and it is disabled after you hit 'Save and Reboot', it means that this feature is not supported on your board."
+        "message": "<strong>Note:</strong> Not all features are supported by all flight controllers. If you enable a specific feature, and it is disabled after you hit 'Save and Reboot', it means that this feature is not supported.",
+        "english": "<strong>Note:</strong> Not all features are supported by all flight controllers. If you enable a specific feature, and it is disabled after you hit 'Save and Reboot', it means that this feature is not supported.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<strong>Nota:</strong> Non tutte le combinazioni di funzionalità sono valide. Quando il firmware del controllore di volo rileva delle combinazioni di funzionalità in conflitto queste funzionalità vengono disabilitate.<br /><strong>Nota:</strong> Configura le porte seriali <span class=\"message-negative\">prima</span> di abilitare le funzionalità che utilizzano le porte.",
+            "english": "<strong>Note:</strong> Not all combinations of features are valid.  When the flight controller firmware detects invalid feature combinations conflicting features will be disabled.<br /><strong>Note:</strong> Configure serial ports <span class=\"message-negative\">before</span> enabling the features that will use the ports."
+        }
     },
     "configurationBoardAlignment": {
         "message": "Allineamento Scheda e Sensori",
         "english": "Board and Sensor Alignment"
     },
     "configurationBoardAlignmentHelp": {
-        "message": "Rotazione arbitraria del controllore di volo, per permettere di montarlo di lato, sottosopra, ruotato ecc.. Quando si utilizzano sensori esterni, usa l'allineamento del sensore (Gyro, Acc, Mag) per definire la posizione del sensore indipendente dall'orientamento del controllore di volo.",
-        "english": "Arbitrary board rotation in degrees, to allow mounting it sideways / upside down / rotated etc. When running external sensors, use the sensor alignments (Gyro, Acc, Mag) to define sensor position independent from board orientation. ",
-        "status": "Reused translation. Please check!"
+        "message": "Arbitrary board rotation allows mounting the FC sideways / upside down / rotated etc. When using external sensors, use the sensor alignments to define sensor position independent from the board orientation.",
+        "english": "Arbitrary board rotation allows mounting the FC sideways / upside down / rotated etc. When using external sensors, use the sensor alignments to define sensor position independent from the board orientation.",
+        "status": "Reused translation. Please check!",
+        "previous": {
+            "message": "Rotazione arbitraria del controllore di volo, per permettere di montarlo di lato, sottosopra, ruotato ecc.. Quando si utilizzano sensori esterni, usa l'allineamento del sensore (Gyro, Acc, Mag) per definire la posizione del sensore indipendente dall'orientamento del controllore di volo.",
+            "english": "Arbitrary board rotation in degrees, to allow mounting it sideways / upside down / rotated etc. When running external sensors, use the sensor alignments (Gyro, Acc, Mag) to define sensor position independent from board orientation. ",
+            "status": "Reused translation. Please check!"
+        }
     },
     "configurationBoardAlignmentRoll": {
         "message": "Gradi Roll",
@@ -1729,8 +1735,8 @@
         "english": "Accelerometer Trim"
     },
     "configurationAccelTrimsHelp": {
-        "message": "The Accelerometer Trims provide fine tuning to the accel calibration to remove drift while in stabilized modes, such as Horizon, Angle and Rescue.",
-        "english": "The Accelerometer Trims provide fine tuning to the accel calibration to remove drift while in stabilized modes, such as Horizon, Angle and Rescue.",
+        "message": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue.",
+        "english": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue.",
         "status": "New entry. Please translate!"
     },
     "configurationAccelTrimRoll": {
@@ -1764,8 +1770,13 @@
         }
     },
     "configurationDshotBeaconHelp": {
-        "message": "Il beacon DShot utilizza gli ESC e i motori per produrre un suono. Ciò significa che il beacon DShot non può essere utilizzato quando i motori girano. In Betaflight 3.4 e successivi, quando si prova ad armare mentre il BEACON DShot è attivo, si ha un ritardo di 2 secondi dopo l'ultimo beacon prima che il modello sia armato. Questo per impedire che la funzionalità di beacon interferisca con i comandi DShot inviati quando si arma.<br/><strong>Attenzione:</strong> poiché il beacon DShot porta corrente attraverso i motori quando è attivo, può provocare surriscaldamento e danni ai motori e/o ai regolatori se la forza del beacon impostata è troppo alta. Utilizzare BLHeli Configurator o la Suite BLHeli per regolare e testare la potenza del beacon.",
-        "english": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. In Betaflight 3.4 and newer, when arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength."
+        "message": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. If arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength.",
+        "english": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. If arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Il beacon DShot utilizza gli ESC e i motori per produrre un suono. Ciò significa che il beacon DShot non può essere utilizzato quando i motori girano. In Betaflight 3.4 e successivi, quando si prova ad armare mentre il BEACON DShot è attivo, si ha un ritardo di 2 secondi dopo l'ultimo beacon prima che il modello sia armato. Questo per impedire che la funzionalità di beacon interferisca con i comandi DShot inviati quando si arma.<br/><strong>Attenzione:</strong> poiché il beacon DShot porta corrente attraverso i motori quando è attivo, può provocare surriscaldamento e danni ai motori e/o ai regolatori se la forza del beacon impostata è troppo alta. Utilizzare BLHeli Configurator o la Suite BLHeli per regolare e testare la potenza del beacon.",
+            "english": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. In Betaflight 3.4 and newer, when arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength."
+        }
     },
     "configurationBeeper": {
         "message": "Buzzer Configuration",
@@ -1894,11 +1905,6 @@
     "configurationSystem": {
         "message": "Configurazione sistema",
         "english": "System configuration"
-    },
-    "configurationSystemHelp": {
-        "message": "<strong>Note:</strong> Make sure your FC is able to operate at the selected loop speed! Check CPU Load and Cycletime stability.",
-        "english": "<strong>Note:</strong> Make sure your FC is able to operate at the selected loop speed! Check CPU Load and Cycletime stability.",
-        "status": "New entry. Please translate!"
     },
     "configurationLoopTime": {
         "message": "Tempo di Loop del controllore di volo",
@@ -3217,8 +3223,8 @@
         "status": "New entry. Please translate!"
     },
     "servoHelp": {
-        "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arms should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
-        "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arms should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
+        "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
+        "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
         "status": "New entry. Please translate!"
     },
     "servoConfiguration": {
@@ -3237,8 +3243,8 @@
         "status": "New entry. Please translate!"
     },
     "servoMidHelp": {
-        "message": "Center position in µs. Servo arms should be level in this position.",
-        "english": "Center position in µs. Servo arms should be level in this position.",
+        "message": "Center position in µs. The servo arm should be level in this position.",
+        "english": "Center position in µs. The servo arm should be level in this position.",
         "status": "New entry. Please translate!"
     },
     "servoMin": {
@@ -3247,8 +3253,8 @@
         "status": "New entry. Please translate!"
     },
     "servoMinHelp": {
-        "message": "Minimum pulse width. Lower values can increase servo throw. Use higher values to avoid servo binding.",
-        "english": "Minimum pulse width. Lower values can increase servo throw. Use higher values to avoid servo binding.",
+        "message": "Lowest point of travel (minimum pulse width). This setting changes the allowed negative servo throw. It is used for avoiding servo arm binding at the negative travel extreme.",
+        "english": "Lowest point of travel (minimum pulse width). This setting changes the allowed negative servo throw. It is used for avoiding servo arm binding at the negative travel extreme.",
         "status": "New entry. Please translate!"
     },
     "servoMax": {
@@ -3257,8 +3263,8 @@
         "status": "New entry. Please translate!"
     },
     "servoMaxHelp": {
-        "message": "Maximum pulse width. Higher values can increase servo throw. Use lower values to avoid servo binding.",
-        "english": "Maximum pulse width. Higher values can increase servo throw. Use lower values to avoid servo binding.",
+        "message": "Highest point of travel (maximum pulse width). This setting changes the allowed positive servo throw. It is used for avoiding servo arm binding at the positive travel extreme.",
+        "english": "Highest point of travel (maximum pulse width). This setting changes the allowed positive servo throw. It is used for avoiding servo arm binding at the positive travel extreme.",
         "status": "New entry. Please translate!"
     },
     "servoScaleNeg": {
@@ -3267,8 +3273,8 @@
         "status": "New entry. Please translate!"
     },
     "servoScaleNegHelp": {
-        "message": "Scaling factor on negative side (below center level). Should be about the same as <i>Scale pos</i>.",
-        "english": "Scaling factor on negative side (below center level). Should be about the same as <i>Scale pos</i>.",
+        "message": "Scaling factor on the negative side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws.",
+        "english": "Scaling factor on the negative side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws.",
         "status": "New entry. Please translate!"
     },
     "servoScalePos": {
@@ -3277,8 +3283,8 @@
         "status": "New entry. Please translate!"
     },
     "servoScalePosHelp": {
-        "message": "Scaling factor on positive side (above center level). Should be approximately the same as <i>Scale neg</i>.",
-        "english": "Scaling factor on positive side (above center level). Should be approximately the same as <i>Scale neg</i>.",
+        "message": "Scaling factor on the positive side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws.",
+        "english": "Scaling factor on the positive side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws.",
         "status": "New entry. Please translate!"
     },
     "servoRate": {
@@ -3287,8 +3293,8 @@
         "status": "New entry. Please translate!"
     },
     "servoRateHelp": {
-        "message": "PWM update rate in Hz. For analog servos, this is usually 50Hz. Higher values can damage analog servos. For digital servos, it can vary from 100Hz to 560Hz. Please check your servo's data sheet.<br><b>Note</b>: select <i>Save and reboot</i> to actually change the update rate, since the update rate can only be set at boot time.",
-        "english": "PWM update rate in Hz. For analog servos, this is usually 50Hz. Higher values can damage analog servos. For digital servos, it can vary from 100Hz to 560Hz. Please check your servo's data sheet.<br><b>Note</b>: select <i>Save and reboot</i> to actually change the update rate, since the update rate can only be set at boot time.",
+        "message": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time.",
+        "english": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time.",
         "status": "New entry. Please translate!"
     },
     "servoSpeed": {
@@ -3297,8 +3303,8 @@
         "status": "New entry. Please translate!"
     },
     "servoSpeedHelp": {
-        "message": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 60&deg;.",
-        "english": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 60&deg;.",
+        "message": "Limits the servo motion speed. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed for 60&deg; rotation.",
+        "english": "Limits the servo motion speed. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed for 60&deg; rotation.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 50&deg;.",
@@ -3312,8 +3318,8 @@
         "status": "Reused translation. Please check!"
     },
     "servoReverseHelp": {
-        "message": "<i>Reverse</i> a servo if it's not moving in the right direction.",
-        "english": "<i>Reverse</i> a servo if it's not moving in the right direction.",
+        "message": "Reverse the servo if it's not moving in the right direction.",
+        "english": "Reverse the servo if it's not moving in the right direction.",
         "status": "New entry. Please translate!"
     },
     "servoGeometryCorrection": {
@@ -3322,8 +3328,8 @@
         "status": "New entry. Please translate!"
     },
     "servoGeometryCorrectionHelp": {
-        "message": "Enable <i>Geo cor</i> for correcting the rotational geometry. Do not use with linear servos.",
-        "english": "Enable <i>Geo cor</i> for correcting the rotational geometry. Do not use with linear servos.",
+        "message": "Enable <i>Geometry Correction</i> for correcting the rotational geometry at the servo movement extremes. Do not use with linear servos.",
+        "english": "Enable <i>Geometry Correction</i> for correcting the rotational geometry at the servo movement extremes. Do not use with linear servos.",
         "status": "New entry. Please translate!"
     },
     "servoSignal": {
@@ -3362,8 +3368,8 @@
         "status": "New entry. Please translate!"
     },
     "servoOverrideHelp": {
-        "message": "Select the servo to be overridden and then move the slider to move the servo arm to the commanded angle.",
-        "english": "Select the servo to be overridden and then move the slider to move the servo arm to the commanded angle.",
+        "message": "Select the servo to be controlled and then move the slider to move the servo arm to the commanded angle.",
+        "english": "Select the servo to be controlled and then move the slider to move the servo arm to the commanded angle.",
         "status": "New entry. Please translate!"
     },
     "servoEnableOverrideLabel": {
@@ -3372,8 +3378,8 @@
         "status": "New entry. Please translate!"
     },
     "servoEnableOverrideText": {
-        "message": " <i>Servo override</i> forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset after a reboot.",
-        "english": " <i>Servo override</i> forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset after a reboot.",
+        "message": " <i>Servo override</i> forces the servos to a arbitrary positions for setup purposes. The override values are not saved, and will be reset after a reboot.",
+        "english": " <i>Servo override</i> forces the servos to a arbitrary positions for setup purposes. The override values are not saved, and will be reset after a reboot.",
         "status": "New entry. Please translate!"
     },
     "servoOverrideEnable": {
@@ -3407,8 +3413,8 @@
         "status": "New entry. Please translate!"
     },
     "mixerRebootNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot before taking affect!",
-        "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot before taking affect!",
+        "message": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!",
+        "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!",
         "status": "New entry. Please translate!"
     },
     "mixerMainRotorSettings": {
@@ -3422,8 +3428,8 @@
         "status": "New entry. Please translate!"
     },
     "mixerMainRotorDirectionHelp": {
-        "message": "Looking from the top of the helicopter, what direction is the main rotor turning? For the majority of helicopters this is clockwise",
-        "english": "Looking from the top of the helicopter, what direction is the main rotor turning? For the majority of helicopters this is clockwise",
+        "message": "Looking from the top of the helicopter, what direction is the main rotor turning? For the majority of helicopters this is clockwise.",
+        "english": "Looking from the top of the helicopter, what direction is the main rotor turning? For the majority of helicopters this is clockwise.",
         "status": "New entry. Please translate!"
     },
     "mixerClockwise": {
@@ -3442,8 +3448,8 @@
         "status": "New entry. Please translate!"
     },
     "mixerSwashTypeHelp": {
-        "message": "Select the swashplate type.<br><strong>None:</strong> The mixer is turned off. Custom mixing rules must be set in the CLI. <br><strong>Passthrough:</strong> No mixing, controls are passed through the mixer unchanged. <br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For helicopters with three swashplate servos.<br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos.",
-        "english": "Select the swashplate type.<br><strong>None:</strong> The mixer is turned off. Custom mixing rules must be set in the CLI. <br><strong>Passthrough:</strong> No mixing, controls are passed through the mixer unchanged. <br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For helicopters with three swashplate servos.<br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos.",
+        "message": "<strong>None:</strong> The mixer is disabled. Custom mixing rules must be set in the CLI. <br><br><strong>Direct:</strong> No mixing, controls are passed through the mixer unchanged for external mixing.<br><br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For cyclic-pitch helicopters with three swashplate servos, at 120&deg;, 135&deg;, or 140&deg; angle.<br><br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos at 90&deg; angle, either in L or V configuration.",
+        "english": "<strong>None:</strong> The mixer is disabled. Custom mixing rules must be set in the CLI. <br><br><strong>Direct:</strong> No mixing, controls are passed through the mixer unchanged for external mixing.<br><br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For cyclic-pitch helicopters with three swashplate servos, at 120&deg;, 135&deg;, or 140&deg; angle.<br><br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos at 90&deg; angle, either in L or V configuration.",
         "status": "New entry. Please translate!"
     },
     "mixerSwashType0": {
@@ -3567,8 +3573,8 @@
         "status": "New entry. Please translate!"
     },
     "mixerCollectiveGeoCorrectionHelp": {
-        "message": "Adjust until the collective positive and negative deflection are equal.",
-        "english": "Adjust until the collective positive and negative deflection are equal.",
+        "message": "Adjust until the collective positive and negative deflections are equal.",
+        "english": "Adjust until the collective positive and negative deflections are equal.",
         "status": "New entry. Please translate!"
     },
     "mixerTotalPitchLimit": {
@@ -3587,8 +3593,8 @@
         "status": "New entry. Please translate!"
     },
     "mixerCyclicLimitHelp": {
-        "message": "Maximum amount of cyclic blade pitch",
-        "english": "Maximum amount of cyclic blade pitch",
+        "message": "Maximum amount of cyclic blade pitch.",
+        "english": "Maximum amount of cyclic blade pitch.",
         "status": "New entry. Please translate!"
     },
     "mixerCollectiveLimit": {
@@ -3597,8 +3603,8 @@
         "status": "New entry. Please translate!"
     },
     "mixerCollectiveLimitHelp": {
-        "message": "Maximum amount of collective blade pitch",
-        "english": "Maximum amount of collective blade pitch",
+        "message": "Maximum amount of collective blade pitch.",
+        "english": "Maximum amount of collective blade pitch.",
         "status": "New entry. Please translate!"
     },
     "mixerSwashRing": {
@@ -3652,8 +3658,8 @@
         "status": "New entry. Please translate!"
     },
     "mixerTailRotorModeHelp": {
-        "message": "<strong>Variable pitch:</strong> This is a variable pitch tail controlled by a servo (Servo#4) <br><strong>Motorised:</strong> The tail has a separate motor (M2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode.",
-        "english": "<strong>Variable pitch:</strong> This is a variable pitch tail controlled by a servo (Servo#4) <br><strong>Motorised:</strong> The tail has a separate motor (M2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode.",
+        "message": "<strong>Variable pitch:</strong> Variable pitch tail controlled by a tail servo (Servo#4). <br><strong>Motorised:</strong> The tail has a separate motor (Motor#2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode (experimental).",
+        "english": "<strong>Variable pitch:</strong> Variable pitch tail controlled by a tail servo (Servo#4). <br><strong>Motorised:</strong> The tail has a separate motor (Motor#2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode (experimental).",
         "status": "New entry. Please translate!"
     },
     "mixerTailVariablePitch": {
@@ -4232,8 +4238,8 @@
         }
     },
     "motorsEscProtocolHelp": {
-        "message": "Select your ESC protocol. <br>Make sure the protocol is supported by your ESCs.</b>",
-        "english": "Select your ESC protocol. <br>Make sure the protocol is supported by your ESCs.</b>",
+        "message": "Select your ESC protocol.<br>Traditional helicopter ESCs use PWM. Drone ESCs may use other protocols, like DSHOT. <br>Make sure the protocol is supported by your ESC.",
+        "english": "Select your ESC protocol.<br>Traditional helicopter ESCs use PWM. Drone ESCs may use other protocols, like DSHOT. <br>Make sure the protocol is supported by your ESC.",
         "status": "New entry. Please translate!"
     },
     "motorsEscProtocolDisabled": {
@@ -4257,8 +4263,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "Select your ESC Telemetry protocol. <br>This data is transmitted via a separate connection from the ESC.</b>",
-        "english": "Select your ESC Telemetry protocol. <br>This data is transmitted via a separate connection from the ESC.</b>",
+        "message": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC.",
+        "english": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC.",
         "status": "New entry. Please translate!"
     },
     "motorsUnsyncedPwm": {
@@ -4292,8 +4298,8 @@
         }
     },
     "motorsUnsyncedPWMFreqHelp": {
-        "message": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC.",
-        "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC.",
+        "message": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz.",
+        "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Motor PWM update frequency, when running unsyncronised.",
@@ -4312,8 +4318,8 @@
         }
     },
     "motorsDshotBidirHelp": {
-        "message": "Sends ESC RPM telemetry back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32, Bluejay or AM32.",
-        "english": "Sends ESC RPM telemetry back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32, Bluejay or AM32.",
+        "message": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32.",
+        "english": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32 or BLHeli_S when flashed to Bluejay firmware.",
@@ -4327,8 +4333,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsRPMSensorHelp": {
-        "message": "Use RPM Sensor input for motor RPM.",
-        "english": "Use RPM Sensor input for motor RPM.",
+        "message": "Use the RPM Sensor input for motor RPM. You can connect an RPM signal from the ESC, or from an external RPM Sensor dongle.",
+        "english": "Use the RPM Sensor input for motor RPM. You can connect an RPM signal from the ESC, or from an external RPM Sensor dongle.",
         "status": "New entry. Please translate!"
     },
     "motorsMainRotorGearRatio": {
@@ -4337,8 +4343,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsMainRotorGearRatioHelp": {
-        "message": "Gear ratio between the motor and the main rotor <br><strong>[pinion]/[main gear]</strong> tooth count",
-        "english": "Gear ratio between the motor and the main rotor <br><strong>[pinion]/[main gear]</strong> tooth count",
+        "message": "Gear ratio between the motor and the main rotor.<br>Use <span class=\"value\">motor pinion</span> : <span class=\"value\">main gear</span> tooth count.",
+        "english": "Gear ratio between the motor and the main rotor.<br>Use <span class=\"value\">motor pinion</span> : <span class=\"value\">main gear</span> tooth count.",
         "status": "New entry. Please translate!"
     },
     "motorsTailRotorGearRatio": {
@@ -4347,8 +4353,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsTailRotorGearRatioHelp": {
-        "message": "Gear ratio between the main rotor and the tail rotor <br><strong>[tail gear]/[autorotation gear]</strong> tooth count <br>For a direct drive motorized tail use [ 1 ]/[ 1 ]",
-        "english": "Gear ratio between the main rotor and the tail rotor <br><strong>[tail gear]/[autorotation gear]</strong> tooth count <br>For a direct drive motorized tail use [ 1 ]/[ 1 ]",
+        "message": "Gear ratio between the tail rotor and the main rotor. Use <span class=\"value\">tail gear</span> : <span class=\"value\">autorotation gear</span> tooth count for Torque Tube, or <span class=\"value\">tail pulley</span> : <span class=\"value\">front pulley</span> for a belt tail. For a direct drive tail, use <span class=\"value\">1</span> : <span class=\"value\">1</span>",
+        "english": "Gear ratio between the tail rotor and the main rotor. Use <span class=\"value\">tail gear</span> : <span class=\"value\">autorotation gear</span> tooth count for Torque Tube, or <span class=\"value\">tail pulley</span> : <span class=\"value\">front pulley</span> for a belt tail. For a direct drive tail, use <span class=\"value\">1</span> : <span class=\"value\">1</span>",
         "status": "New entry. Please translate!"
     },
     "motorsMotorPoles1Long": {
@@ -4372,8 +4378,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsMotorPolesHelp": {
-        "message": "The pole count is the number of magnets on the bell of the motor. Do NOT count the stators where the windings are located. Large motors usually have 8 magnets, smaller often have 6 magnets.",
-        "english": "The pole count is the number of magnets on the bell of the motor. Do NOT count the stators where the windings are located. Large motors usually have 8 magnets, smaller often have 6 magnets.",
+        "message": "The <i>pole count</i> is the number of magnets on the motor bell. The manual should give this number. Or you can count the magnets. Do NOT count the stators with the copper wire windings.",
+        "english": "The <i>pole count</i> is the number of magnets on the motor bell. The manual should give this number. Or you can count the magnets. Do NOT count the stators with the copper wire windings.",
         "status": "New entry. Please translate!"
     },
     "motorsThrottleMinimum": {
@@ -4402,8 +4408,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsThrottleMinimumCommandHelp": {
-        "message": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that keep the motors stopped (1000 for most ESCs).",
-        "english": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that keep the motors stopped (1000 for most ESCs).",
+        "message": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that allows the ESC to arm (typically 1000).",
+        "english": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that allows the ESC to arm (typically 1000).",
         "status": "New entry. Please translate!"
     },
     "motorMainGearRatioIssueNote": {
@@ -4506,133 +4512,12 @@
         "english": "Throttle Override",
         "status": "New entry. Please translate!"
     },
-    "motorOverrideHelp": {
-        "message": "Select the Override via the switch and then move the slider to begin to operate the motor. ",
-        "english": "Select the Override via the switch and then move the slider to begin to operate the motor. ",
-        "status": "New entry. Please translate!"
-    },
     "motorOverrideEnable": {
         "message": "Enable",
         "english": "Enable",
         "status": "New entry. Please translate!"
     },
-    "escDshotDirectionDialog-Title": {
-        "message": "Direzione motore - <strong class=\"message-negative-italic\">Attenzione: assicurati di aver rimosso le eliche!</strong>",
-        "english": "Motor Direction - <strong class=\"message-negative-italic\">Warning: Ensure props are removed!</strong>"
-    },
-    "escDshotDirectionDialog-SelectMotor": {
-        "message": "Seleziona uno o tutti i motori",
-        "english": "Select one or all motors"
-    },
-    "escDshotDirectionDialog-SelectMotorSafety": {
-        "message": "I motori gireranno quando selezionati!",
-        "english": "Motors will spin when selected!"
-    },
-    "escDshotDirectionDialog-RiskNotice": {
-        "message": "<strong>Avviso di sicurezza</strong><br /><strong class=\"message-negative-italic\">Rimuovi tutte le eliche per evitare danni!</strong><br />I motori <strong>gireranno!</strong>!",
-        "english": "<strong>Safety notice</strong><br /><strong class=\"message-negative-italic\">Remove all propellers to prevent injury!</strong><br />The motors will <strong>spin up</strong> immediately when selected!"
-    },
-    "escDshotDirectionDialog-UnderstandRisks": {
-        "message": "<strong>Sono al corrente dei rischi</strong>,<br />le eliche sono rimosse.",
-        "english": "<strong>I understand the risks</strong>,<br />all propellers are removed."
-    },
-    "escDshotDirectionDialog-InformationNotice": {
-        "message": "<strong>Information notice</strong><br />To change the motor directions, the battery must be plugged in and the correct ESC protocol must be set up in the $t(tabMotors.message) tab. Note that not all Dshot ESCs will work with this dialog. Check your ESC firmware.",
-        "english": "<strong>Information notice</strong><br />To change the motor directions, the battery must be plugged in and the correct ESC protocol must be set up in the $t(tabMotors.message) tab. Note that not all Dshot ESCs will work with this dialog. Check your ESC firmware.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<strong>Avviso</strong><br />Per cambiare le direzioni dei motori la batteria deve essere collegata e deve essere impostato il protocollo ESC corretto nella scheda $t(tabMotorTesting.message). Nota che non tutti gli ESC DSHOT funzioneranno con questa finestra. Controlla il firmware ESC.",
-            "english": "<strong>Information notice</strong><br />To change the motor directions, the battery must be plugged in and the correct ESC protocol must be set up in the $t(tabMotorTesting.message) tab. Note that not all Dshot ESCs will work with this dialog. Check your ESC firmware."
-        }
-    },
-    "escDshotDirectionDialog-NormalInformationNotice": {
-        "message": "Imposta la direzione di rotazione dei motori selezionando e facendo girare ogni motore individualmente.",
-        "english": "Set motor spin direction by selecting and spinning each motor individually."
-    },
-    "escDshotDirectionDialog-WizardInformationNotice": {
-        "message": "Ripristina la direzione di rotazione di tutti i motori, quindi permette all'utente di scegliere quale invertire.",
-        "english": "Resets all motor spin directions, then allows the user to choose which to reverse."
-    },
-    "escDshotDirectionDialog-CommandNormal": {
-        "message": "Normale",
-        "english": "Normal"
-    },
-    "escDshotDirectionDialog-CommandReverse": {
-        "message": "Invertita",
-        "english": "Reverse"
-    },
-    "escDshotDirectionDialog-CommandSpin": {
-        "message": "Prova motore",
-        "english": "Test motor"
-    },
-    "escDshotDirectionDialog-ReleaseButtonToStop": {
-        "message": "Rilascia il pulsante per fermare",
-        "english": "Release button to stop"
-    },
-    "escDshotDirectionDialog-ReleaseToStop": {
-        "message": "Rilascia per fermare",
-        "english": "Release to stop"
-    },
-    "escDshotDirectionDialog-Start": {
-        "message": "Individualmente",
-        "english": "Individually"
-    },
-    "escDshotDirectionDialog-StartWizard": {
-        "message": "Procedura guidata",
-        "english": "Wizard"
-    },
-    "escDshotDirectionDialog-SetDirectionHint": {
-        "message": "Cambia la direzione dei motori selezionati",
-        "english": "Change direction of selected motor(s)"
-    },
-    "escDshotDirectionDialog-SetDirectionHintSafety": {
-        "message": "I motori gireranno quando si imposta la direzione!",
-        "english": "Motors will spin when setting the direction!"
-    },
-    "escDshotDirectionDialog-WrongProtocolText": {
-        "message": "Feature works with DSHOT ESCs only.<br />Verify that your ESC (electric speed controller) supports DSHOT protocol and change it on $t(tabMotors.message) tab.",
-        "english": "Feature works with DSHOT ESCs only.<br />Verify that your ESC (electric speed controller) supports DSHOT protocol and change it on $t(tabMotors.message) tab.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Funziona solo con ESC DSHOT.<br />Verifica il supporto del protocollo DSHOT da parte del tuo ESC o cambialo nella scheda $t(tabMotorTesting.message).",
-            "english": "Feature works with DSHOT ESCs only.<br />Verify that your ESC (electric speed controller) supports DSHOT protocol and change it on $t(tabMotorTesting.message) tab."
-        }
-    },
-    "escDshotDirectionDialog-WrongMixerText": {
-        "message": "Number of motors is 0.<br />Verify the current Mixer on $t(tabMotors.message) tab or setup a custom one through CLI. Refer to this <a href=\"https://github.com/betaflight/betaflight/blob/master/docs/Mixer.md\" target=\"_blank\" rel=\"noopener noreferrer\">Wiki page</a>.",
-        "english": "Number of motors is 0.<br />Verify the current Mixer on $t(tabMotors.message) tab or setup a custom one through CLI. Refer to this <a href=\"https://github.com/betaflight/betaflight/blob/master/docs/Mixer.md\" target=\"_blank\" rel=\"noopener noreferrer\">Wiki page</a>.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Il numero di motori è 0.<br />Verifica il Mixer attuale nella scheda $t(tabMotorTesting.message) oppure impostane uno personalizzato via CLI. Fai riferimento a questa <a href=\"https://github.com/betaflight/betaflight/blob/master/docs/Mixer.md\" target=\"_blank\" rel=\"noopener noreferrer\">pagina Wiki</a>.",
-            "english": "Number of motors is 0.<br />Verify the current Mixer on $t(tabMotorTesting.message) tab or setup a custom one through CLI. Refer to this <a href=\"https://github.com/betaflight/betaflight/blob/master/docs/Mixer.md\" target=\"_blank\" rel=\"noopener noreferrer\">Wiki page</a>."
-        }
-    },
-    "escDshotDirectionDialog-WrongFirmwareText": {
-        "message": "Aggiorna il firmware.<br /> Assicurati di utilizzare l'ultimo firmware: Betaflight 4.3 o successivo.",
-        "english": "Update the firmware.<br /> Make sure you are using the latest firmware: Betaflight 4.3 or newer."
-    },
-    "escDshotDirectionDialog-WizardActionHint": {
-        "message": "Fai click sui numeri dei motori individualmente per cambiare direzione di rotazione",
-        "english": "Click on motor numbers individually to change spin direction"
-    },
-    "escDshotDirectionDialog-WizardActionHintSecondLine": {
-        "message": "Verifica che tutti i motori stiano girando correttamente",
-        "english": "Verify all motors are spinning correctly"
-    },
-    "escDshotDirectionDialog-SpinWizard": {
-        "message": "Avvia/fai girare i motori",
-        "english": "Start / spin motors"
-    },
-    "escDshotDirectionDialog-StopWizard": {
-        "message": "Ferma i motori",
-        "english": "Stop motors"
-    },
     "govFeatures": {
-        "message": "Governor Features",
-        "english": "Governor Features",
-        "status": "New entry. Please translate!"
-    },
-    "govFeaturesHelp": {
         "message": "Governor Features",
         "english": "Governor Features",
         "status": "New entry. Please translate!"
@@ -4653,8 +4538,8 @@
         "status": "New entry. Please translate!"
     },
     "govModeHelp": {
-        "message": "The governor maintains the main rotor speed constant.<br><strong>OFF:</strong> Govenor is disabled <br> <strong>PASSTHROUGH:</strong> Only slow spoolup and autorotation bailout<br><strong>STANDARD:</strong> Motor speed is controlled by the FC and speed reference from the ESC.<br><strong>MODE1:</strong> As per statndard but with Collective and Cyclic Precompensation (e.g. for a large increase collective the FC increases the signal sent to the ESC so the motor speed does not sag due to the increased load).<br><strong>MODE2:</strong> as per Mode 1 but also Battery voltage compensation",
-        "english": "The governor maintains the main rotor speed constant.<br><strong>OFF:</strong> Govenor is disabled <br> <strong>PASSTHROUGH:</strong> Only slow spoolup and autorotation bailout<br><strong>STANDARD:</strong> Motor speed is controlled by the FC and speed reference from the ESC.<br><strong>MODE1:</strong> As per statndard but with Collective and Cyclic Precompensation (e.g. for a large increase collective the FC increases the signal sent to the ESC so the motor speed does not sag due to the increased load).<br><strong>MODE2:</strong> as per Mode 1 but also Battery voltage compensation",
+        "message": "<strong>OFF:</strong> Govenor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
+        "english": "<strong>OFF:</strong> Govenor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
         "status": "New entry. Please translate!"
     },
     "govHandoverThrottle": {
@@ -4663,8 +4548,8 @@
         "status": "New entry. Please translate!"
     },
     "govHandoverThrottleHelp": {
-        "message": "Throttle level above which the governor is activated. The motor must be able to start below this throttle level.",
-        "english": "Throttle level above which the governor is activated. The motor must be able to start below this throttle level.",
+        "message": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level.",
+        "english": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level.",
         "status": "New entry. Please translate!"
     },
     "govStartupTime": {
@@ -5279,8 +5164,8 @@
         "english": "Directly saving flash to file is slow and inherently prone to error / file corruption.<br>In some cases it will work for small files, but this is not supported and support requests for it will be closed without comment - use Mass Storage mode instead."
     },
     "dataflashSaveFileDepreciationHint": {
-        "message": "This method is slow and inherently prone to error / file corruption, because the MSP connection itself has intrinsic, fundamental limitations that make it unsuitable for file transfers. It may work for small log files only. Do not create support requests if file transfers fail when saved using this method. The recommended method is to use '<b>$t(blackboxRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files.",
-        "english": "This method is slow and inherently prone to error / file corruption, because the MSP connection itself has intrinsic, fundamental limitations that make it unsuitable for file transfers. It may work for small log files only. Do not create support requests if file transfers fail when saved using this method. The recommended method is to use '<b>$t(blackboxRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files.",
+        "message": "This method is slow, because the MSP connection itself has fundamental limitations for file transfer. The recommended method is to use '<b>$t(blackboxRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files.",
+        "english": "This method is slow, because the MSP connection itself has fundamental limitations for file transfer. The recommended method is to use '<b>$t(blackboxRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Questo metodo è lento e intrinsecamente incline a errori / corruzione del file perché la stessa connessione MSP ha limitazioni fondamentali che la rendono inadatta per trasferimenti di file. Potrebbe funzionare solo per i piccoli file di log. Non creare richieste di supporto se i trasferimenti di file non vengono salvati utilizzando questo metodo. Il metodo raccomandato è quello di usare '<b>$t(onboardLoggingRebootMscText.message)</b>' (sotto) per attivare la modalità di archiviazione di massa, e accedere al tuo controllore di volo come dispositivo di archiviazione per scaricare i file di log.",
@@ -5438,8 +5323,8 @@
         }
     },
     "firmwareFlasherOnlineSelectBoardHint": {
-        "message": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (F4, F7, H7). To make the different boards work with the same firmware, a specific configuration file is deployed alongside the firmware when a Unified Target is flashed.<br>This version of Betaflight configurator supports flashing of Unified Targets with the respective board specific configurations in one step. The different firmware types that are available for each board are shown in the drop-down as follows:<br /><br /><strong>&lt;board name&gt;</strong> or<br><strong>&lt;board name&gt; (Legacy)</strong>:<br>non-unified target.<br /><br /><strong>&lt;board name&gt; (&lt;manufacturer id&gt;)</strong>:<br>(4 character manufacturer id)<br>Unified Target.<br /><br /><strong>Please use Unified Targets where available.</strong>",
-        "english": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (F4, F7, H7). To make the different boards work with the same firmware, a specific configuration file is deployed alongside the firmware when a Unified Target is flashed.<br>This version of Betaflight configurator supports flashing of Unified Targets with the respective board specific configurations in one step. The different firmware types that are available for each board are shown in the drop-down as follows:<br /><br /><strong>&lt;board name&gt;</strong> or<br><strong>&lt;board name&gt; (Legacy)</strong>:<br>non-unified target.<br /><br /><strong>&lt;board name&gt; (&lt;manufacturer id&gt;)</strong>:<br>(4 character manufacturer id)<br>Unified Target.<br /><br /><strong>Please use Unified Targets where available.</strong>",
+        "message": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (G4, F4, F7, H7). To make the different boards work with the same firmware, a separate configuration file is flashed alongside the firmware.<br>The Configurator supports this transparently in one flashing step.",
+        "english": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (G4, F4, F7, H7). To make the different boards work with the same firmware, a separate configuration file is flashed alongside the firmware.<br>The Configurator supports this transparently in one flashing step.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "A partire da Betaflight 4.1, Betaflight sta introducendo il supporto per i <strong>Target Unificati</strong>. Il concetto dei Target Unificati è che lo stesso file .hex del firmware può essere usato per tutte le schede con lo stesso MCU (F4, F7). Per far sì che schede differenti funzionino con lo stesso firmware, verrà usato durante il flash un file di configurazione specifico insieme al firmware.<br>Questa versione del configuratore di Betaflight supporta il flashing in un solo passaggio dei Target Unificati con i rispettivi file di configurazione delle schede. I tipi differenti di firmware disponibili per ogni scheda sono mostrati nel menu a tendina come mostrato:<br /><br /><strong>&lt;nome scheda&gt;</strong> o<br><strong>&lt;nome scheda&gt; (Legacy)</strong>:<br>target non unificato o versione pre-4.1 del firmware per Target Unificati.<br /><br /><strong>&lt;nome scheda&gt; (&lt;id costruttore&gt;)</strong>:<br>(id costruttore di 4 caratteri)<br>Target Unificato.<br /><br /><strong>Per favore usa i Target Unificati quando disponibili.</strong> Se riscontri problemi usando i Target Unificati apri una <a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">issue</a> e usa il target non unificato fin quando il problema non verrà risolto.",
@@ -7007,8 +6892,8 @@
         "status": "New entry. Please translate!"
     },
     "gyroLowpassFilterHelp": {
-        "message": "The Lowpass Filters can have two variants: static and dynamic. For a determined lowpass filter number only one (static or dynamic) can be enabled at the same time. The static only has a Cutoff that is a value that defines in some way where the filter starts. The dynamic defines a min and max values, that is the range where the Cutoff is placed. This Cutoff moves from min to max at the same time than you move the throttle stick.",
-        "english": "The Lowpass Filters can have two variants: static and dynamic. For a determined lowpass filter number only one (static or dynamic) can be enabled at the same time. The static only has a Cutoff that is a value that defines in some way where the filter starts. The dynamic defines a min and max values, that is the range where the Cutoff is placed. This Cutoff moves from min to max at the same time than you move the throttle stick.",
+        "message": "The Gyro Lowpass Filters are used for cutting off excess noise in the gyro signal. Two filters can be used, either 1<sup>st</sup> or 2<sup>nd</sup> order. The first filter can be dynamic, changing its cutoff frequency with the main rotor RPM. The minimum and maximum are limiting the dynamic range. With RPM Filters or Dynamic Notch Filters, one extra filter is needed around 100Hz. Without them, two second order filters are required.",
+        "english": "The Gyro Lowpass Filters are used for cutting off excess noise in the gyro signal. Two filters can be used, either 1<sup>st</sup> or 2<sup>nd</sup> order. The first filter can be dynamic, changing its cutoff frequency with the main rotor RPM. The minimum and maximum are limiting the dynamic range. With RPM Filters or Dynamic Notch Filters, one extra filter is needed around 100Hz. Without them, two second order filters are required.",
         "status": "New entry. Please translate!"
     },
     "gyroNotchFiltersGroup": {
@@ -7037,8 +6922,8 @@
         "status": "New entry. Please translate!"
     },
     "gyroNotchFilterHelp": {
-        "message": "The Notch Filter has a Center and a Cutoff. The filter is symmetrical. The Center Frequency is the center of the filter and the Cutoff Frequency is where Notch filter starts. For example with Notch Cutoff of 160 and Notch Center of 260 it means the range is 160-360Hz with most attenuation around center",
-        "english": "The Notch Filter has a Center and a Cutoff. The filter is symmetrical. The Center Frequency is the center of the filter and the Cutoff Frequency is where Notch filter starts. For example with Notch Cutoff of 160 and Notch Center of 260 it means the range is 160-360Hz with most attenuation around center",
+        "message": "The Notch Filters are used for filtering out additional resonances. Each filter has a Center and a Cutoff. The Center Frequency is the center of the filter and the Cutoff Frequency is where filter starts. For example with cutoff of 160 and center of 260, it means the range is 160-360Hz with most attenuation around the center.",
+        "english": "The Notch Filters are used for filtering out additional resonances. Each filter has a Center and a Cutoff. The Center Frequency is the center of the filter and the Cutoff Frequency is where filter starts. For example with cutoff of 160 and center of 260, it means the range is 160-360Hz with most attenuation around the center.",
         "status": "New entry. Please translate!"
     },
     "gyroDynamicNotchFilterGroup": {
@@ -7052,8 +6937,8 @@
         "status": "New entry. Please translate!"
     },
     "gyroDynamicNotchFilterHelp": {
-        "message": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at those frequencies. Requires at least 1k filter or loop rate.",
-        "english": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at those frequencies. Requires at least 1k filter or loop rate.",
+        "message": "Dynamic Notch Filter tracks peak noise frequencies in the gyro signal and places notch filters at those frequencies automatically.",
+        "english": "Dynamic Notch Filter tracks peak noise frequencies in the gyro signal and places notch filters at those frequencies automatically.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Dynamic Notch Filter tracks peak motors noise frequency and places one or two notch filters with their center at that frequency.",
@@ -7092,13 +6977,13 @@
         }
     },
     "gyroDynamicNotchCountHelp": {
-        "message": "This sets the number of dynamic notch filters. If used standalone without RPM filters, 4-6 is recommended. With RPM filters 2-4 is recommended.",
-        "english": "This sets the number of dynamic notch filters. If used standalone without RPM filters, 4-6 is recommended. With RPM filters 2-4 is recommended.",
+        "message": "Select the number of dynamic notch filters. If used standalone without the RPM filters, 4-6 is recommended. With the RPM filters, 2-4 is recommended.",
+        "english": "Select the number of dynamic notch filters. If used standalone without the RPM filters, 4-6 is recommended. With the RPM filters, 2-4 is recommended.",
         "status": "New entry. Please translate!"
     },
     "gyroDynamicNotchQHelp": {
-        "message": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more precise, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and degrade flight performance.",
-        "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more precise, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and degrade flight performance.",
+        "message": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance.",
+        "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Il fattore Q regola la larghezza del filtro notch dinamico. Un valore più alto lo rende più stretto e preciso e un valore inferiore lo rende sempre più ampio. Impostando un valore molto basso si aumenterà notevolmente il ritardo del filtro.",
@@ -7177,11 +7062,6 @@
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterSettings": {
-        "message": "Gyro RPM Notch Filter Settings",
-        "english": "Gyro RPM Notch Filter Settings",
-        "status": "New entry. Please translate!"
-    },
-    "gyroRpmFilterSettingsHelp": {
         "message": "Gyro RPM Notch Filter Settings",
         "english": "Gyro RPM Notch Filter Settings",
         "status": "New entry. Please translate!"
@@ -7416,8 +7296,13 @@
         "english": "Channel Fallback Settings"
     },
     "failsafeChannelFallbackSettingsHelp": {
-        "message": "Queste impostazioni vengono applicate ai singoli canali AUX non validi o a tutti i canali quando si accede allo Stadio 1. <strong>Nota:</strong> i valori vengono salvati in step di 25usec, quindi piccole modifiche scompaiono",
-        "english": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 25usec, so small changes disappear"
+        "message": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 5µs, so smaller changes may be ignored.",
+        "english": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 5µs, so smaller changes may be ignored.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Queste impostazioni vengono applicate ai singoli canali AUX non validi o a tutti i canali quando si accede allo Stadio 1. <strong>Nota:</strong> i valori vengono salvati in step di 25usec, quindi piccole modifiche scompaiono",
+            "english": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 25usec, so small changes disappear"
+        }
     },
     "failsafeChannelFallbackSettingsAuto": {
         "message": "<strong>Auto:</strong> significa che Roll, Pitch e Yaw stanno al centro e Gas a zero. <strong>Hold:</strong> significa che verrà mantenuto l'ultimo valore valido ricevuto",
@@ -9803,8 +9688,8 @@
         "english": "PID loop frequency"
     },
     "configurationPidProcessDenomHelp": {
-        "message": "The maximum frequency for the PID loop is limited by the CPU processing power. The CPU Load should not exceed 70% with the selected loop speed.",
-        "english": "The maximum frequency for the PID loop is limited by the CPU processing power. The CPU Load should not exceed 70% with the selected loop speed.",
+        "message": "The maximum frequency for the PID loop is limited by the CPU processing power. The Realtime Load should not exceed 70% with the selected loop speed.",
+        "english": "The maximum frequency for the PID loop is limited by the CPU processing power. The Realtime Load should not exceed 70% with the selected loop speed.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "La frequenza massima del loop PID è limitata dalla frequenza massima a cui gli aggiornamenti vengono inviati dal protocollo impostato per gli ESC/motori.",
@@ -9870,8 +9755,8 @@
         "status": "New entry. Please translate!"
     },
     "blackboxModeHelp": {
-        "message": "<strong>OFF:</strong> Disables logging.<br><strong>NORMAL:</strong> logging when both ARMED and BLACKBOX switch active.<br><strong>ARMED:</strong> logging when ARMED.<br><strong>SWITCH:</strong> logging when BLACKBOX switch active",
-        "english": "<strong>OFF:</strong> Disables logging.<br><strong>NORMAL:</strong> logging when both ARMED and BLACKBOX switch active.<br><strong>ARMED:</strong> logging when ARMED.<br><strong>SWITCH:</strong> logging when BLACKBOX switch active",
+        "message": "<strong>OFF:</strong> Disable logging.<br><br><strong>NORMAL:</strong> Enable logging when both ARMED and BLACKBOX switch are active.<br><br><strong>ARMED:</strong> Enable logging when ARMED.<br><br><strong>SWITCH:</strong> Enable logging when BLACKBOX switch is active.",
+        "english": "<strong>OFF:</strong> Disable logging.<br><br><strong>NORMAL:</strong> Enable logging when both ARMED and BLACKBOX switch are active.<br><br><strong>ARMED:</strong> Enable logging when ARMED.<br><br><strong>SWITCH:</strong> Enable logging when BLACKBOX switch is active.",
         "status": "New entry. Please translate!"
     },
     "blackboxModeOff": {
@@ -9900,8 +9785,8 @@
         "status": "New entry. Please translate!"
     },
     "blackboxDeviceHelp": {
-        "message": "<strong>No Logging:</strong> Disables logging.<br><strong>Onboard Flash:</strong> Enables logging to onboard flash chip (if available).<br><strong>SD Card:</strong> Log to onboard SD card (if available).<br><strong>Serial Port:</strong> Log to an external logger device (e.g Open Lager) connected to a serial port. The serial port will have to be configured to 'Blackbox Logging' in the 'peripherals' section on the <strong>Serial Ports</strong> tab.",
-        "english": "<strong>No Logging:</strong> Disables logging.<br><strong>Onboard Flash:</strong> Enables logging to onboard flash chip (if available).<br><strong>SD Card:</strong> Log to onboard SD card (if available).<br><strong>Serial Port:</strong> Log to an external logger device (e.g Open Lager) connected to a serial port. The serial port will have to be configured to 'Blackbox Logging' in the 'peripherals' section on the <strong>Serial Ports</strong> tab.",
+        "message": "<strong>No Logging:</strong> Disable logging.<br><br><strong>Onboard Flash:</strong> Log to the onboard flash chip (if available).<br><br><strong>SD Card:</strong> Log to the onboard SD card (if available).<br><br><strong>Serial Port:</strong> Log to an external logger device (e.g OpenLager) connected to a serial port. The serial port must to be configured to 'Blackbox Logging' on the <strong>Configuration</strong> tab.",
+        "english": "<strong>No Logging:</strong> Disable logging.<br><br><strong>Onboard Flash:</strong> Log to the onboard flash chip (if available).<br><br><strong>SD Card:</strong> Log to the onboard SD card (if available).<br><br><strong>Serial Port:</strong> Log to an external logger device (e.g OpenLager) connected to a serial port. The serial port must to be configured to 'Blackbox Logging' on the <strong>Configuration</strong> tab.",
         "status": "New entry. Please translate!"
     },
     "blackboxRateOfLogging": {
@@ -9925,8 +9810,8 @@
         "status": "New entry. Please translate!"
     },
     "blackboxDebugModeHelp": {
-        "message": "Choose what <i>extra</i> data is being logged. If enabled, eight extra debug items are added to the log entries.",
-        "english": "Choose what <i>extra</i> data is being logged. If enabled, eight extra debug items are added to the log entries.",
+        "message": "Choose what <i>extra</i> data is being logged. If enabled, eight extra debug items are added to the Blackbox Log.",
+        "english": "Choose what <i>extra</i> data is being logged. If enabled, eight extra debug items are added to the Blackbox Log.",
         "status": "New entry. Please translate!"
     },
     "blackboxDebugModeUnknown": {
