@@ -771,9 +771,8 @@
         "description": "System load text shown in the status bar"
     },
     "statusbar_rt_load": {
-        "message": "Realtime Load:",
+        "message": "实时负载：",
         "english": "Realtime Load:",
-        "status": "New entry. Please translate!",
         "description": "Realtime CPU load text shown in the status bar"
     },
     "statusbar_cpu_load": {
@@ -806,13 +805,8 @@
         "english": "Hardware"
     },
     "defaultWelcomeText": {
-        "message": "The application supports all hardware that can run Rotorflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts for EdgeTx</a><br /><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts for FrSky Ethos</a><br /><br />The source code can be downloaded from <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>Zadig</b> for Windows USB driver installer can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.<br />",
-        "english": "The application supports all hardware that can run Rotorflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts for EdgeTx</a><br /><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts for FrSky Ethos</a><br /><br />The source code can be downloaded from <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>Zadig</b> for Windows USB driver installer can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.<br />",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "本应用支持所有能运行 Rotorflight 的飞控。在 “固件烧写” 页面查看所有支持的飞控列表。<br/> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">下载 Rotorflight Blackbox 日志查看工具。<br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">下载 Rotorflight TX Lua 脚本。<br/> <a href=\"https://github.com/rotorflight/rotorflight-firmware\" target=\"_blank\" rel=\"noopener noreferrer\">下载 Rotorflight 固件 & 源码。<br/> <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">下载 STM USB VCP 驱动。<br/> <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">下载 Windows USB 驱动安装 Zadig 软件。",
-            "english": "The application supports all hardware that can run Rotorflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts</a><br /><br />The source code can be downloaded from <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />The latest <b>Zadig</b> for Windows USB driver installer can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />"
-        }
+        "message": "该应用程序支持所有可以运行 otorfliht 的飞控。在 “固件烧写” 页面查看所有支持的飞控列表。<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">下载 Rotorflight Blackbox 日志查看工具</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">下载 Rotorflight EdgeTx 遥控器调参脚本</a><br /><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">下载 Rotorflight FrSky Ethos 遥控器调参脚本</a><br /><br />源码下载可以从 <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a><br /><br />最新的 <b>STM USB VCP 驱动</b> 可以从<a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">这里下载</a><br /><br />最新的 <b>Zadig</b> Windows版驱动安装程序可以从 <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">这里下载</a>.<br />",
+        "english": "The application supports all hardware that can run Rotorflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts for EdgeTx</a><br /><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts for FrSky Ethos</a><br /><br />The source code can be downloaded from <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>Zadig</b> for Windows USB driver installer can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.<br />"
     },
     "defaultContributingHead": {
         "message": "参与开发",
@@ -920,9 +914,8 @@
         "english": "Current:"
     },
     "statusChargeLevel": {
-        "message": "Charge level:",
-        "english": "Charge level:",
-        "status": "New entry. Please translate!"
+        "message": "电量：",
+        "english": "Charge level:"
     },
     "statusCraftName": {
         "message": "直升机名称：",
@@ -974,9 +967,8 @@
         "description": "Message that pops up to describe the BOXFAILSAFE arming disable flag"
     },
     "statusArmingDisableFlagsTooltipGOVERNOR": {
-        "message": "Governor can't function without an RPM signal",
+        "message": "定速器无法在缺少转速信号时工作",
         "english": "Governor can't function without an RPM signal",
-        "status": "New entry. Please translate!",
         "description": "Message that pops up to describe the GOVERNOR arming disable flag"
     },
     "statusArmingDisableFlagsTooltipCRASH": {
@@ -1245,39 +1237,24 @@
         "english": "<strong>Enable Motor Override</strong>"
     },
     "initialSetupEnableMotorOverrideText": {
-        "message": "Enable the motor override feature in the Motors tab. Using motor override WILL SPOOL UP the motors!",
-        "english": "Enable the motor override feature in the Motors tab. Using motor override WILL SPOOL UP the motors!",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "在电机选项卡启用电机调试功能，设置电机调试将会允许电机启动。",
-            "english": "Enable the motor override feature in the Motors tab. Setting motor override WILL make the motors to spool up."
-        }
+        "message": "在电机选项卡启用电机调试功能，使用电机调试将会允许电机启动！",
+        "english": "Enable the motor override feature in the Motors tab. Using motor override WILL SPOOL UP the motors!"
     },
     "initialSetupEnableServoOverride": {
         "message": "<strong>启用舵机调试</strong>",
         "english": "<strong>Enable Servo Override</strong>"
     },
     "initialSetupEnableServoOverrideText": {
-        "message": "Enable the servo override feature in the Servos tab. Using servo override WILL move the servos to arbitrary positions.",
-        "english": "Enable the servo override feature in the Servos tab. Using servo override WILL move the servos to arbitrary positions.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "在舵机选项卡中启用舵机调试功能。 设置舵机调试可以将舵机旋转到任意角度。",
-            "english": "Enable the servo override feature in the Servos tab. Setting servo override WILL move the servos to arbitrary positions."
-        }
+        "message": "在舵机选项卡中启用舵机调试功能。 使用舵机调试可以将舵机旋转到任意角度。",
+        "english": "Enable the servo override feature in the Servos tab. Using servo override WILL move the servos to arbitrary positions."
     },
     "initialSetupEnableMixerOverride": {
         "message": "<strong>启用混控调试</strong>",
         "english": "<strong>Enable Mixer Override</strong>"
     },
     "initialSetupEnableMixerOverrideText": {
-        "message": "Enable the mixer input override feature in the Mixers tab. Using mixer override WILL force the flight controls to arbitrary positions.",
-        "english": "Enable the mixer input override feature in the Mixers tab. Using mixer override WILL force the flight controls to arbitrary positions.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "在界面中启用混控调试功能，设定混控调试值可以使对应的通道移动到指令位置。",
-            "english": "Enable the mixer input override feature in the Mixers tab. Setting mixer override WILL force the flight controls to arbitrary positions."
-        }
+        "message": "在界面中启用混控调试功能，使用混控调试可以使对应的通道移动到指令位置。",
+        "english": "Enable the mixer input override feature in the Mixers tab. Using mixer override WILL force the flight controls to arbitrary positions."
     },
     "feature_RX_PPM": {
         "message": "PPM 接收机",
@@ -1332,9 +1309,8 @@
         "english": "On Screen Display"
     },
     "feature_CMS": {
-        "message": "Configuration Menu System",
-        "english": "Configuration Menu System",
-        "status": "New entry. Please translate!"
+        "message": "配置菜单系统",
+        "english": "Configuration Menu System"
     },
     "feature_RX_SPI": {
         "message": "支持 SPI 接收机",
@@ -1401,26 +1377,16 @@
         "english": "ESC/Motor Features"
     },
     "configurationFeaturesHelp": {
-        "message": "<strong>Note:</strong> Not all features are supported by all flight controllers. If you enable a specific feature, and it is disabled after you hit 'Save and Reboot', it means that this feature is not supported.",
-        "english": "<strong>Note:</strong> Not all features are supported by all flight controllers. If you enable a specific feature, and it is disabled after you hit 'Save and Reboot', it means that this feature is not supported.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<strong>注意:</strong> 不是所有的功能都能同时被启用。当飞控检测到有冲突时会禁用相应的功能。<br /><strong>注意:</strong>  <span class=\"message-negative\">先</span> 设置串口，再启用需要用到串口的功能。",
-            "english": "<strong>Note:</strong> Not all combinations of features are valid.  When the flight controller firmware detects invalid feature combinations conflicting features will be disabled.<br /><strong>Note:</strong> Configure serial ports <span class=\"message-negative\">before</span> enabling the features that will use the ports."
-        }
+        "message": "<strong>注意：</strong> 并非所有飞控都支持所有功能。如果你启用了一个特定的功能，但它在你点击“保存并重启”后被禁用，这意味着这个功能是不支持的。",
+        "english": "<strong>Note:</strong> Not all features are supported by all flight controllers. If you enable a specific feature, and it is disabled after you hit 'Save and Reboot', it means that this feature is not supported."
     },
     "configurationBoardAlignment": {
         "message": "飞控和传感器方向",
         "english": "Board and Sensor Alignment"
     },
     "configurationBoardAlignmentHelp": {
-        "message": "Arbitrary board rotation allows mounting the FC sideways / upside down / rotated etc. When using external sensors, use the sensor alignments to define sensor position independent from the board orientation.",
-        "english": "Arbitrary board rotation allows mounting the FC sideways / upside down / rotated etc. When using external sensors, use the sensor alignments to define sensor position independent from the board orientation.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "安装飞控板的任意角度（直立，反转，旋转等)。当使用外部传感器时，请使用传感器校正设置(陀螺，加速度计，磁场计)来决定独立于飞控板的传感器位置。",
-            "english": "Arbitrary board rotation in degrees, to allow mounting it sideways / upside down / rotated etc. When running external sensors, use the sensor alignments (Gyro, Acc, Mag) to define sensor position independent from board orientation. "
-        }
+        "message": "飞控板旋转将允许飞控安装在侧面/倒装等任意角度，当使用外置传感器时，可使用传感器对齐来定义传感器的位置，独立于飞控板的安装方向。",
+        "english": "Arbitrary board rotation allows mounting the FC sideways / upside down / rotated etc. When using external sensors, use the sensor alignments to define sensor position independent from the board orientation."
     },
     "configurationBoardAlignmentRoll": {
         "message": "副翼（度）",
@@ -1483,20 +1449,15 @@
         "english": "Accelerometer Trim"
     },
     "configurationAccelTrimsHelp": {
-        "message": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue.",
-        "english": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "加速度计微调可对加速度校准进行微调，以消除处于稳定模式（如地平线、角度和救援）时的漂移。",
-            "english": "The Accelerometer Trims provide fine tuning to the accel calibration to remove drift while in stabilized modes, such as Horizon, Angle and Rescue."
-        }
+        "message": "加速度计的微调提供了对水平的微调，这可以用来减少在自稳模式和救机时的漂移。",
+        "english": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue."
     },
     "configurationAccelTrimRoll": {
-        "message": "加速度计副翼微调",
+        "message": "副翼微调",
         "english": "Accelerometer Roll Trim"
     },
     "configurationAccelTrimPitch": {
-        "message": "加速度计升降微调",
+        "message": "升降微调",
         "english": "Accelerometer Pitch Trim"
     },
     "escProtocolDisabledMessage": {
@@ -1512,13 +1473,8 @@
         "english": "Dshot Beacon Tone"
     },
     "configurationDshotBeaconHelp": {
-        "message": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. If arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength.",
-        "english": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. If arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Dshot 信标使用电调和电机产生声音。这意味着当电机旋转时，Dshot 信标无法工作。在 Betaflight 3.4 和以后的版本中，若在 Dshot 信标激活时尝试解锁，飞控会在发出最后一声信标音后延迟2秒再解锁。这是为了防止 Dshot 信标功能干扰在解锁时发送的 Dshot 命令。<br/><strong>警告：</strong> 由于 Dshot 信标会有电流通过，如果信标鸣叫强度设置得太高，可能会造成电机/电调过热甚至损毁。建议使用 BLHeli 配置程序或 BLHeliSuite 来调整和测试信标的鸣叫强度。",
-            "english": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. In Betaflight 3.4 and newer, when arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength."
-        }
+        "message": "Dshot 信标使用电调和电机产生声音。这意味着当电机旋转时，Dshot 信标无法工作。若在 Dshot 信标激活时尝试解锁，飞控会在发出最后一声信标音后延迟2秒再解锁。这是为了防止 Dshot 信标功能干扰在解锁时发送的 Dshot 命令。<br/><strong>警告：</strong> 由于 Dshot 信标会有电流通过，如果信标鸣叫强度设置得太高，可能会造成电机/电调过热甚至损毁。建议使用 BLHeli 配置程序或 BLHeliSuite 来调整和测试信标的鸣叫强度。",
+        "english": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. If arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength."
     },
     "configurationBeeper": {
         "message": "蜂鸣器配置",
@@ -1936,13 +1892,8 @@
         "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>."
     },
     "profilesPIDModeThreeWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b> with HSI.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b> with HSI.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">警告：</span> PID控制器当前使用最新的 <b>PID模式3</b>它使用了HSI（高速积分优化）<br>请检查O项增益设置准确",
-            "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b>, that uses HSI.<br>Please check the Offset gains."
-        }
+        "message": "<span class=\"message-negative\">警告：</span> PID控制器当前处于带HSI的 <b>PID模式3</b>。",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b> with HSI."
     },
     "profilesPIDModeCustomWarning": {
         "message": "<span class=\"message-negative\">警告：</span> PID 控制器的参数是手动配置的，这里无法表达。<br>请使用<b>命令行</b>更改 PID 设置。",
@@ -2645,13 +2596,8 @@
         "english": "Cross Coupling Cutoff"
     },
     "servoHelp": {
-        "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
-        "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "舵机 101<ul><li>首先检查舵机的方向，必要时反转舵机。</li><li>通过启用 <i>舵机调试</i> 和调整 <i>中心点</i> 来调平舵机臂。在此位置，舵机臂应与主轴垂直。</li><li>调整标尺使舵机角度正确。在 <i>舵机调试</i> 下为舵机指定一个 30° 的角度。现在舵机应该移动到 30°。如果角度较小，则增加该舵机的 <i>缩放</i> 。如果角度较大，则减小。</li><li>您可以通过调整 <i>最小值</i> 或 <i>最大值</i> 来限制或扩展舵机的移动范围。只有在出现机械问题（如舵机阻滞）时才会这样做。使用混控来限制副翼/升降/集体螺距。</li></ul>",
-            "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arms should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
-        }
+        "message": "舵机101<ul><li>首先检查舵机方向。例如，通过给予一些集体螺距来检查循环舵机系统。反向舵机，如果需要。</li><li>通过启动<i>舵机调试</i>和调节<i>中心点</i>来调平舵机臂。舵机臂在此位置应垂直于主轴。</li><li>调整<i>缩放</i>使舵机角度正确。指定角度为30°;在<i>舵机调试</i>下的舵机。舵机现在应该移动到30度。如果小于，则增加该舵机的<i>缩放</i>。如果更多，就减少。</li><li>您可以通过调整<i>最小值</i>或<i>最大值</i>来限制或扩展舵机运动范围。只有在出现机械问题时才这样做，比如舵机干涉。使用混控限制副翼/升降/集体螺距</li></ul>",
+        "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
     },
     "servoConfiguration": {
         "message": "舵机配置",
@@ -2666,117 +2612,72 @@
         "english": "Center"
     },
     "servoMidHelp": {
-        "message": "Center position in µs. The servo arm should be level in this position.",
-        "english": "Center position in µs. The servo arm should be level in this position.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "中心点的信号，在这个信号下，舵机臂应该是水平的",
-            "english": "Center position in µs. Servo arms should be level in this position."
-        }
+        "message": "中心点的信号，在这个信号下，舵机臂应该是水平的",
+        "english": "Center position in µs. The servo arm should be level in this position."
     },
     "servoMin": {
         "message": "最小值",
         "english": "Min"
     },
     "servoMinHelp": {
-        "message": "Lowest point of travel (minimum pulse width). This setting changes the allowed negative servo throw. It is used for avoiding servo arm binding at the negative travel extreme.",
-        "english": "Lowest point of travel (minimum pulse width). This setting changes the allowed negative servo throw. It is used for avoiding servo arm binding at the negative travel extreme.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "最小脉冲宽度。较低的数值可以增加舵机行程。使用更高的值来避免舵机阻滞。",
-            "english": "Minimum pulse width. Lower values can increase servo throw. Use higher values to avoid servo binding."
-        }
+        "message": "舵机摆动的最低点(最小脉冲宽度)。这个参数会限制舵机允许摆动的范围。用于避免舵机臂在移动到最小值的干涉碰撞。",
+        "english": "Lowest point of travel (minimum pulse width). This setting changes the allowed negative servo throw. It is used for avoiding servo arm binding at the negative travel extreme."
     },
     "servoMax": {
         "message": "最大值",
         "english": "Max"
     },
     "servoMaxHelp": {
-        "message": "Highest point of travel (maximum pulse width). This setting changes the allowed positive servo throw. It is used for avoiding servo arm binding at the positive travel extreme.",
-        "english": "Highest point of travel (maximum pulse width). This setting changes the allowed positive servo throw. It is used for avoiding servo arm binding at the positive travel extreme.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "最大脉冲宽度。较高的数值可以增加舵机行程。使用更低的值来避免舵机阻滞。",
-            "english": "Maximum pulse width. Higher values can increase servo throw. Use lower values to avoid servo binding."
-        }
+        "message": "舵机摆动的最高点(最大脉冲宽度)。这个参数会限制舵机允许摆动的范围。用于避免舵机臂在移动到最小值的干涉碰撞。",
+        "english": "Highest point of travel (maximum pulse width). This setting changes the allowed positive servo throw. It is used for avoiding servo arm binding at the positive travel extreme."
     },
     "servoScaleNeg": {
         "message": "负缩放",
         "english": "Scale neg"
     },
     "servoScaleNegHelp": {
-        "message": "Scaling factor on the negative side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws.",
-        "english": "Scaling factor on the negative side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "负方向的缩放比例(比中心点更低)，应该与<i>正缩放</i>大致相同。",
-            "english": "Scaling factor on negative side (below center level). Should be about the same as <i>Scale pos</i>."
-        }
+        "message": "负方向的缩放系数。 对于宽频（1520µs）舵机，通常为 500µs；对于窄频（760µs）舵机，通常为 250µs。修改这个值可以用于纠正舵机在正负方向的非线性。",
+        "english": "Scaling factor on the negative side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws."
     },
     "servoScalePos": {
         "message": "正缩放",
         "english": "Scale pos"
     },
     "servoScalePosHelp": {
-        "message": "Scaling factor on the positive side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws.",
-        "english": "Scaling factor on the positive side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "正方向的缩放比例(比中心点更高)，应该与<i>负缩放</i>大致相同。",
-            "english": "Scaling factor on positive side (above center level). Should be approximately the same as <i>Scale neg</i>."
-        }
+        "message": "负方向的缩放系数。 对于宽频（1520µs）舵机，通常为 500µs；对于窄频（760µs）舵机，通常为 250µs。修改这个值可以用于纠正舵机在正负方向的非线性。",
+        "english": "Scaling factor on the positive side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws."
     },
     "servoRate": {
         "message": "频率 [Hz]",
         "english": "Rate [Hz]"
     },
     "servoRateHelp": {
-        "message": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time.",
-        "english": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "PWM更新频率(Hz)。对于模拟舵机，这通常是50Hz。较高的数值会损坏模拟舵机。对于数字舵机，它可以从100Hz到560Hz变化。请检查你的舵机的数据表。<br><b>注意</b>: 选择 <i>保存并重新启动</i> 以实际更改更新速率，因为更新速率只能在启动时设置。",
-            "english": "PWM update rate in Hz. For analog servos, this is usually 50Hz. Higher values can damage analog servos. For digital servos, it can vary from 100Hz to 560Hz. Please check your servo's data sheet.<br><b>Note</b>: select <i>Save and reboot</i> to actually change the update rate, since the update rate can only be set at boot time."
-        }
+        "message": "PWM更新频率(Hz)。对于模拟舵机，将其设置为50Hz，太高的值可能会损坏舵机。对于数字舵机，数值从100Hz到560Hz是比较常见的。请检查舵机的参数。<br><b>说明</b>:选择<i>保存并重启</i>后，舵机频率的更改才会生效。",
+        "english": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time."
     },
     "servoSpeed": {
         "message": "速度 [ms]",
         "english": "Speed [ms]"
     },
     "servoSpeedHelp": {
-        "message": "Limits the servo motion speed. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed for 60&deg; rotation.",
-        "english": "Limits the servo motion speed. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed for 60&deg; rotation.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "限制舵机的运动速度。可用于回缩等情况。数值为 0 表示没有限制。1-60000 毫秒之间的数值表示伺服旋转 60 度所需的时间。",
-            "english": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 60&deg;."
-        }
+        "message": "限制舵机的旋转速度。可用于回缩等情况。数值为 0 表示没有限制。1-60000 毫秒之间的数值表示 60° 旋转所需的时间。",
+        "english": "Limits the servo motion speed. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed for 60&deg; rotation."
     },
     "servoReverse": {
         "message": "反向",
         "english": "Reverse"
     },
     "servoReverseHelp": {
-        "message": "Reverse the servo if it's not moving in the right direction.",
-        "english": "Reverse the servo if it's not moving in the right direction.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<i>反向</i> 如果舵机没有按照预期的方向移动",
-            "english": "<i>Reverse</i> a servo if it's not moving in the right direction."
-        }
+        "message": "反转舵机的旋转方向，如果它没有按照预期的方向旋转",
+        "english": "Reverse the servo if it's not moving in the right direction."
     },
     "servoGeometryCorrection": {
         "message": "几何校正",
         "english": "Geo cor"
     },
     "servoGeometryCorrectionHelp": {
-        "message": "Enable <i>Geometry Correction</i> for correcting the rotational geometry at the servo movement extremes. Do not use with linear servos.",
-        "english": "Enable <i>Geometry Correction</i> for correcting the rotational geometry at the servo movement extremes. Do not use with linear servos.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "启用 <i>几何校正</i>用于校正舵机臂在旋转到高角度时的行程误差。请勿与线性伺服器一起使用。",
-            "english": "Enable <i>Geo cor</i> for correcting the rotational geometry. Do not use with linear servos."
-        }
+        "message": "启用 <i>几何校正</i>用于校正舵机臂在旋转到高角度时的几何误差。请勿与线性伺服器一起使用。",
+        "english": "Enable <i>Geometry Correction</i> for correcting the rotational geometry at the servo movement extremes. Do not use with linear servos."
     },
     "servoSignal": {
         "message": "PWM 信号",
@@ -2807,26 +2708,16 @@
         "english": "Servo Override"
     },
     "servoOverrideHelp": {
-        "message": "Select the servo to be controlled and then move the slider to move the servo arm to the commanded angle.",
-        "english": "Select the servo to be controlled and then move the slider to move the servo arm to the commanded angle.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "选中要调试的舵机，然后移动滑块，将舵机臂移动到指令角度。",
-            "english": "Select the servo to be overridden and then move the slider to move the servo arm to the commanded angle."
-        }
+        "message": "选择要调试的舵机，移动滑块，舵机将会旋转到指定的角度。",
+        "english": "Select the servo to be controlled and then move the slider to move the servo arm to the commanded angle."
     },
     "servoEnableOverrideLabel": {
         "message": "<strong>启用舵机调试</strong>",
         "english": "<strong>Enable servo override</strong>"
     },
     "servoEnableOverrideText": {
-        "message": " <i>Servo override</i> forces the servos to a arbitrary positions for setup purposes. The override values are not saved, and will be reset after a reboot.",
-        "english": " <i>Servo override</i> forces the servos to a arbitrary positions for setup purposes. The override values are not saved, and will be reset after a reboot.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": " <i>舵机调试</i> 将舵机强制设置到固定位置，以便进行调试。调试值不会保存，重启后将被重置。",
-            "english": " <i>Servo override</i> forces the servos to fixed positions for setup purposes. The override values are not saved, and will be reset after a reboot."
-        }
+        "message": " <i>舵机调试</i>  出于调试的目的，将舵机旋转到指定角度。 这个指令不会被保存，重启后将会重置。",
+        "english": " <i>Servo override</i> forces the servos to a arbitrary positions for setup purposes. The override values are not saved, and will be reset after a reboot."
     },
     "servoOverrideEnable": {
         "message": "启用",
@@ -2853,13 +2744,8 @@
         "english": "<span class=\"message-negative\">Warning:</span> <i>Bidirectional tail motor</i> is an experimental feature that requires additional settings in the CLI."
     },
     "mixerRebootNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!",
-        "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">警告：</span> 某些设置需要重启系统后才会生效！",
-            "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot before taking affect!"
-        }
+        "message": "<span class=\"message-negative\">警告：</span> 某些设置需要重启后才会生效！",
+        "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!"
     },
     "mixerMainRotorSettings": {
         "message": "主旋翼设置",
@@ -2870,13 +2756,8 @@
         "english": "Main Rotor Direction"
     },
     "mixerMainRotorDirectionHelp": {
-        "message": "Looking from the top of the helicopter, what direction is the main rotor turning? For the majority of helicopters this is clockwise.",
-        "english": "Looking from the top of the helicopter, what direction is the main rotor turning? For the majority of helicopters this is clockwise.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "从直升机的顶部往下看，主旋翼以什么方向旋转？对于大多数直升机，它是顺时针旋转的",
-            "english": "Looking from the top of the helicopter, what direction is the main rotor turning? For the majority of helicopters this is clockwise"
-        }
+        "message": "从直升机的顶部往下看，主旋翼以什么方向旋转？对于大多数直升机，它是顺时针旋转的",
+        "english": "Looking from the top of the helicopter, what direction is the main rotor turning? For the majority of helicopters this is clockwise."
     },
     "mixerClockwise": {
         "message": "顺时针",
@@ -2891,13 +2772,8 @@
         "english": "Swashplate Type"
     },
     "mixerSwashTypeHelp": {
-        "message": "<strong>None:</strong> The mixer is disabled. Custom mixing rules must be set in the CLI. <br><br><strong>Direct:</strong> No mixing, controls are passed through the mixer unchanged for external mixing.<br><br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For cyclic-pitch helicopters with three swashplate servos, at 120&deg;, 135&deg;, or 140&deg; angle.<br><br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos at 90&deg; angle, either in L or V configuration.",
-        "english": "<strong>None:</strong> The mixer is disabled. Custom mixing rules must be set in the CLI. <br><br><strong>Direct:</strong> No mixing, controls are passed through the mixer unchanged for external mixing.<br><br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For cyclic-pitch helicopters with three swashplate servos, at 120&deg;, 135&deg;, or 140&deg; angle.<br><br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos at 90&deg; angle, either in L or V configuration.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "选择斜盘类型<br><strong>无：</strong> 混控将会关闭，需要在命令行中进行配置。 <br><strong>直通：</strong> 不进行混控，命令将会直接通过。<br><strong>CCPM:</strong> 循环-集体螺距混控，适用于有三个斜盘舵机的直升机。<br><strong>FPM:</strong> 固定螺距混控。 适用于配有两个斜盘舵机器的固定螺距直升机。",
-            "english": "Select the swashplate type.<br><strong>None:</strong> The mixer is turned off. Custom mixing rules must be set in the CLI. <br><strong>Passthrough:</strong> No mixing, controls are passed through the mixer unchanged. <br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For helicopters with three swashplate servos.<br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos."
-        }
+        "message": "<strong>无：</strong> 混控将会关闭，需要在命令行中进行配置。 <br><br><strong>直通：</strong> 不进行混控，控制功能原封不动地通过混控器进行外部混合。<br><br><strong>CCPM:</strong> 循环-集体 螺距混控。用于具有三个斜盘舵机的循环螺距直升机（120°，135°或140°）。<br><br><strong>FPM:</strong> 固定螺距混控。用于固定螺距直升机与两个90度摆放的斜盘舵机，可以是L型或是V型。",
+        "english": "<strong>None:</strong> The mixer is disabled. Custom mixing rules must be set in the CLI. <br><br><strong>Direct:</strong> No mixing, controls are passed through the mixer unchanged for external mixing.<br><br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For cyclic-pitch helicopters with three swashplate servos, at 120&deg;, 135&deg;, or 140&deg; angle.<br><br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos at 90&deg; angle, either in L or V configuration."
     },
     "mixerSwashType0": {
         "message": "无",
@@ -2996,13 +2872,8 @@
         "english": "Collective Geometry Correction [%]"
     },
     "mixerCollectiveGeoCorrectionHelp": {
-        "message": "Adjust until the collective positive and negative deflections are equal.",
-        "english": "Adjust until the collective positive and negative deflections are equal.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "调整集体螺距的正负偏差使其一致",
-            "english": "Adjust until the collective positive and negative deflection are equal."
-        }
+        "message": "调整该值直到集体螺距正负一致",
+        "english": "Adjust until the collective positive and negative deflections are equal."
     },
     "mixerTotalPitchLimit": {
         "message": "总螺距限制 [&deg;]",
@@ -3017,26 +2888,16 @@
         "english": "Cyclic blade pitch limit [&deg;]"
     },
     "mixerCyclicLimitHelp": {
-        "message": "Maximum amount of cyclic blade pitch.",
-        "english": "Maximum amount of cyclic blade pitch.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "主旋翼的最大循环螺距限制",
-            "english": "Maximum amount of cyclic blade pitch"
-        }
+        "message": "主旋翼的最大循环螺距限制。",
+        "english": "Maximum amount of cyclic blade pitch."
     },
     "mixerCollectiveLimit": {
         "message": "集体螺距限制 [&deg;]",
         "english": "Collective blade pitch limit [&deg;]"
     },
     "mixerCollectiveLimitHelp": {
-        "message": "Maximum amount of collective blade pitch.",
-        "english": "Maximum amount of collective blade pitch.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "主旋翼的最大集体螺距限制",
-            "english": "Maximum amount of collective blade pitch"
-        }
+        "message": "主旋翼的最大集体螺距限制。",
+        "english": "Maximum amount of collective blade pitch."
     },
     "mixerSwashRing": {
         "message": "倾斜盘限制",
@@ -3079,13 +2940,8 @@
         "english": "Tail rotor type"
     },
     "mixerTailRotorModeHelp": {
-        "message": "<strong>Variable pitch:</strong> Variable pitch tail controlled by a tail servo (Servo#4). <br><strong>Motorised:</strong> The tail has a separate motor (Motor#2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode (experimental).",
-        "english": "<strong>Variable pitch:</strong> Variable pitch tail controlled by a tail servo (Servo#4). <br><strong>Motorised:</strong> The tail has a separate motor (Motor#2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode (experimental).",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<strong>可变螺距：</strong> 由一个舵机(舵机#4)驱动的可变螺距尾旋翼。 <br><strong>电机直驱:</strong> 由一个尾电机 (M2)驱动的尾旋翼。<br><strong>双向电驱：</strong> 与电机直驱一样，但它工作在双向模式下。",
-            "english": "<strong>Variable pitch:</strong> This is a variable pitch tail controlled by a servo (Servo#4) <br><strong>Motorised:</strong> The tail has a separate motor (M2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode."
-        }
+        "message": "<strong>变距尾翼：</strong> 由一个舵机驱动的可变螺距尾旋翼(4号舵机).  <br><strong>电机直驱：</strong> 由电机（2号电机）直接驱动尾旋翼控制航向<br><strong>双向电机直驱：</strong> 与电机直驱一样，但允许电机改变旋转方向（实验性）",
+        "english": "<strong>Variable pitch:</strong> Variable pitch tail controlled by a tail servo (Servo#4). <br><strong>Motorised:</strong> The tail has a separate motor (Motor#2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode (experimental)."
     },
     "mixerTailVariablePitch": {
         "message": "可变螺距",
@@ -3540,13 +3396,8 @@
         "english": "ESC Throttle protocol"
     },
     "motorsEscProtocolHelp": {
-        "message": "Select your ESC protocol.<br>Traditional helicopter ESCs use PWM. Drone ESCs may use other protocols, like DSHOT. <br>Make sure the protocol is supported by your ESC.",
-        "english": "Select your ESC protocol.<br>Traditional helicopter ESCs use PWM. Drone ESCs may use other protocols, like DSHOT. <br>Make sure the protocol is supported by your ESC.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "选择您的电调协议 <br>请确保您的电调支持该协议</b>",
-            "english": "Select your ESC protocol. <br>Make sure the protocol is supported by your ESCs.</b>"
-        }
+        "message": "选择您的电调协议<br>传统的直升机电调使用PWM，无人机电调可能使用其他协议，如Dshot<br>确保你的电调支持该协议",
+        "english": "Select your ESC protocol.<br>Traditional helicopter ESCs use PWM. Drone ESCs may use other protocols, like DSHOT. <br>Make sure the protocol is supported by your ESC."
     },
     "motorsEscProtocolDisabled": {
         "message": "请选择合适您的电调的输出协议。 $t(escProtocolDisabledMessage.message)",
@@ -3561,13 +3412,8 @@
         "english": "ESC Telemetry protocol"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC.",
-        "english": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "选择电调遥测协议。 <br>这个数据会通过一个独立的接口传输。</b>",
-            "english": "Select your ESC Telemetry protocol. <br>This data is transmitted via a separate connection from the ESC.</b>"
-        }
+        "message": "选择电调遥测协议。遥测是通过一根独立的连接线传送的。",
+        "english": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC."
     },
     "motorsUnsyncedPwm": {
         "message": "非同步电调刷新率",
@@ -3582,62 +3428,40 @@
         "english": "ESC update frequency"
     },
     "motorsUnsyncedPWMFreqHelp": {
-        "message": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz.",
-        "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电调 PWM 更新频率（Hz）。这是向电调发送油门值的频率。",
-            "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC."
-        }
+        "message": "ESC PWM更新频率，单位为Hz。这就是油门值发送到电调的频率。通常在50Hz到250Hz之间。大多数现代电调在250Hz时工作良好。",
+        "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz."
     },
     "motorsDshotBidir": {
         "message": "DShot 转速遥测",
         "english": "DShot RPM Telemetry"
     },
     "motorsDshotBidirHelp": {
-        "message": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32.",
-        "english": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "通过 DShot 信号将电调遥测数据发回飞控。RPM 滤波器和定速器依赖此功能。 <br> <br>注： 需要兼容的电调和固件，例如 BLHeli32、AM32 或是 Bluejay。",
-            "english": "Sends ESC RPM telemetry back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32, Bluejay or AM32."
-        }
+        "message": "通过DShot将转速发送回飞控<br>注：需要兼容的电调和固件，例如BLHeli32, Bluejay 或是 AM32.",
+        "english": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32."
     },
     "motorsRPMSensor": {
-        "message": "RPM Sensor",
-        "english": "RPM Sensor",
-        "status": "New entry. Please translate!"
+        "message": "转速传感器",
+        "english": "RPM Sensor"
     },
     "motorsRPMSensorHelp": {
-        "message": "Use the RPM Sensor input for motor RPM. You can connect an RPM signal from the ESC, or from an external RPM Sensor dongle.",
-        "english": "Use the RPM Sensor input for motor RPM. You can connect an RPM signal from the ESC, or from an external RPM Sensor dongle.",
-        "status": "New entry. Please translate!"
+        "message": "使用转速传感器输入电机转速，你可以通过连接电调或者外部传感器获得",
+        "english": "Use the RPM Sensor input for motor RPM. You can connect an RPM signal from the ESC, or from an external RPM Sensor dongle."
     },
     "motorsMainRotorGearRatio": {
         "message": "主旋翼齿比",
         "english": "Main Rotor Gear Ratio"
     },
     "motorsMainRotorGearRatioHelp": {
-        "message": "Gear ratio between the motor and the main rotor.<br>Use <span class=\"value\">motor pinion</span> : <span class=\"value\">main gear</span> tooth count.",
-        "english": "Gear ratio between the motor and the main rotor.<br>Use <span class=\"value\">motor pinion</span> : <span class=\"value\">main gear</span> tooth count.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "电机与主旋翼的传动比<br><strong>[电机齿轮] / [主齿轮]</strong> 齿数",
-            "english": "Gear ratio between the motor and the main rotor <br><strong>[pinion]/[main gear]</strong> tooth count"
-        }
+        "message": "电机与主旋翼的传动比<br>使用 <span class=\"value\">电机齿</span> : <span class=\"value\">主齿</span> 牙数",
+        "english": "Gear ratio between the motor and the main rotor.<br>Use <span class=\"value\">motor pinion</span> : <span class=\"value\">main gear</span> tooth count."
     },
     "motorsTailRotorGearRatio": {
         "message": "尾旋翼齿比",
         "english": "Tail Rotor Gear Ratio"
     },
     "motorsTailRotorGearRatioHelp": {
-        "message": "Gear ratio between the tail rotor and the main rotor. Use <span class=\"value\">tail gear</span> : <span class=\"value\">autorotation gear</span> tooth count for Torque Tube, or <span class=\"value\">tail pulley</span> : <span class=\"value\">front pulley</span> for a belt tail. For a direct drive tail, use <span class=\"value\">1</span> : <span class=\"value\">1</span>",
-        "english": "Gear ratio between the tail rotor and the main rotor. Use <span class=\"value\">tail gear</span> : <span class=\"value\">autorotation gear</span> tooth count for Torque Tube, or <span class=\"value\">tail pulley</span> : <span class=\"value\">front pulley</span> for a belt tail. For a direct drive tail, use <span class=\"value\">1</span> : <span class=\"value\">1</span>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "主旋翼和尾旋翼之间的齿轮比 <br><strong>[后尾皮带轮] / [前尾皮带轮]</strong> 齿数 <br>对于电机直驱尾旋翼，请使用[ 1 ]/[ 1 ]",
-            "english": "Gear ratio between the main rotor and the tail rotor <br><strong>[tail gear]/[autorotation gear]</strong> tooth count <br>For a direct drive motorized tail use [ 1 ]/[ 1 ]"
-        }
+        "message": "尾旋翼与主旋翼的传动比，使用 <span class=\"value\">后尾齿</span> : <span class=\"value\">前尾齿</span> 牙数, 或是<span class=\"value\">后皮带轮</span> : <span class=\"value\">前皮带轮</span>， 对于电机直驱尾旋翼，请使用 <span class=\"value\">1</span> : <span class=\"value\">1</span>",
+        "english": "Gear ratio between the tail rotor and the main rotor. Use <span class=\"value\">tail gear</span> : <span class=\"value\">autorotation gear</span> tooth count for Torque Tube, or <span class=\"value\">tail pulley</span> : <span class=\"value\">front pulley</span> for a belt tail. For a direct drive tail, use <span class=\"value\">1</span> : <span class=\"value\">1</span>"
     },
     "motorsMotorPoles1Long": {
         "message": "主电机极数",
@@ -3656,13 +3480,8 @@
         "english": "Motor M4 pole count"
     },
     "motorsMotorPolesHelp": {
-        "message": "The <i>pole count</i> is the number of magnets on the motor bell. The manual should give this number. Or you can count the magnets. Do NOT count the stators with the copper wire windings.",
-        "english": "The <i>pole count</i> is the number of magnets on the motor bell. The manual should give this number. Or you can count the magnets. Do NOT count the stators with the copper wire windings.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "极数是电机转子上磁铁的数量（非对数）。不计算定子上的绕组。大型电机通常有8个磁铁，较小的电机通常有6个磁铁。",
-            "english": "The pole count is the number of magnets on the bell of the motor. Do NOT count the stators where the windings are located. Large motors usually have 8 magnets, smaller often have 6 magnets."
-        }
+        "message": "<i>磁铁极数</i> 电机转子上面的磁铁数量，一般可以在说明书上找到，或者你可以手动数一下磁铁数量，注意不是铜线绕组的定子。",
+        "english": "The <i>pole count</i> is the number of magnets on the motor bell. The manual should give this number. Or you can count the magnets. Do NOT count the stators with the copper wire windings."
     },
     "motorsThrottleMinimum": {
         "message": "0% 油门 PWM 值",
@@ -3685,13 +3504,8 @@
         "english": "Disarm Throttle PWM value"
     },
     "motorsThrottleMinimumCommandHelp": {
-        "message": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that allows the ESC to arm (typically 1000).",
-        "english": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that allows the ESC to arm (typically 1000).",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "当直升机上锁时，这是发送到电调的 PWM 值。将此设置为保持电机停止的值（对于大多数电调为1000）。",
-            "english": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that keep the motors stopped (1000 for most ESCs)."
-        }
+        "message": "当直升机上锁时，这是发送到电调的PWM值。将其设置为允许电调进入解锁的值(通常为1000)。",
+        "english": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that allows the ESC to arm (typically 1000)."
     },
     "motorMainGearRatioIssueNote": {
         "message": "<span class=\"message-negative\">警告：</span> <i>主旋翼齿比</i> 设置为不正确的值。请检查!",
@@ -3794,26 +3608,16 @@
         "english": "Governor mode"
     },
     "govModeHelp": {
-        "message": "<strong>OFF:</strong> Govenor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
-        "english": "<strong>OFF:</strong> Govenor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "定速器将会保持主旋翼的转速恒定<br><strong>关:</strong> 定速器禁用 <br> <strong>直通：</strong> 调速器不控制转速，但提供缓启动与自转保护的功能<br><strong>标准：</strong> 飞控以电调转速为参考控制电机转速。<br><strong>模式1：</strong> 基于标准，但会有额外的集体/循环螺距的预补偿（例如，在大幅度的螺距增加时，飞控会增加到电调的信号值，以便电机转速不会因为负载增加而下降）<br><strong>模式2：</strong>基于模式2，但有电池电压补偿。",
-            "english": "The governor maintains the main rotor speed constant.<br><strong>OFF:</strong> Govenor is disabled <br> <strong>PASSTHROUGH:</strong> Only slow spoolup and autorotation bailout<br><strong>STANDARD:</strong> Motor speed is controlled by the FC and speed reference from the ESC.<br><strong>MODE1:</strong> As per statndard but with Collective and Cyclic Precompensation (e.g. for a large increase collective the FC increases the signal sent to the ESC so the motor speed does not sag due to the increased load).<br><strong>MODE2:</strong> as per Mode 1 but also Battery voltage compensation"
-        }
+        "message": "<strong>关闭：</strong> 定速器禁用，油门信号将直接从遥控器传送到电调。<br><br><strong>直通：</strong>定速器不控制转速，但提供缓启动和熄火重启的功能。<br><br><strong>标准：</strong> 转速由飞控定速器控制，类似于一个普通的电调定速功能。<br><br><strong>模式1：</strong> 与标准类似，但提供集体螺距与循环螺距的补偿（类似于遥控器中的油门曲线）<br><br><strong>模式2：</strong> 类似于模式1，但具有对电压骤降的补偿，该模式需要有足够快的电压回传才能使用。",
+        "english": "<strong>OFF:</strong> Govenor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
     },
     "govHandoverThrottle": {
         "message": "接管油门 [%]",
         "english": "Handover throttle [%]"
     },
     "govHandoverThrottleHelp": {
-        "message": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level.",
-        "english": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "定速器接管油门的油门值，超过此油门定速器才会介入，请确保电机在此值以下能够顺利旋转。",
-            "english": "Throttle level above which the governor is activated. The motor must be able to start below this throttle level."
-        }
+        "message": "定速器接管油门的油门值，低于这个油门的会直接传送到电调，超过此油门定速器才会介入，并通过油门值计算需要达到的目标转速。请确保电机在此值以下能够顺利启动。",
+        "english": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level."
     },
     "govStartupTime": {
         "message": "一阶缓启动时间 [秒]",
@@ -3892,13 +3696,8 @@
         "english": "Headspeed filter cutoff [Hz]"
     },
     "govHeadspeedFilterHzHelp": {
-        "message": "Cutoff for the headspeed lowpass filter.",
-        "english": "Cutoff for the headspeed lowpass filter.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "主旋翼转速 PID 输入低通滤波器的截止点。",
-            "english": "Cutoff for the headspeed PID input lowpass filter."
-        }
+        "message": "主旋翼转速低通滤波器的截止点",
+        "english": "Cutoff for the headspeed lowpass filter."
     },
     "govVoltageFilterHz": {
         "message": "电池电压滤波器截止点 [Hz]",
@@ -3909,32 +3708,20 @@
         "english": "Cutoff for the battery voltage lowpass filter."
     },
     "govTTAFilterHz": {
-        "message": "TTA Bandwidth [Hz]",
-        "english": "TTA Bandwidth [Hz]",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "TTA 滤波器截止点 [Hz]",
-            "english": "TTA filter cutoff [Hz]"
-        }
+        "message": "TTA 控制带宽 [Hz]",
+        "english": "TTA Bandwidth [Hz]"
     },
     "govTTAFilterHzHelp": {
-        "message": "Cutoff for the TTA lowpass filter.",
-        "english": "Cutoff for the TTA lowpass filter.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "尾旋翼扭转辅助（TTA）输入低通滤波器的截止点。",
-            "english": "Cutoff for the TTA input lowpass filter."
-        }
+        "message": "TTA 低通滤波器的截止点。",
+        "english": "Cutoff for the TTA lowpass filter."
     },
     "govFFFilterHz": {
-        "message": "Precomp Bandwidth [Hz]",
-        "english": "Precomp Bandwidth [Hz]",
-        "status": "New entry. Please translate!"
+        "message": "预补偿带宽 [Hz]",
+        "english": "Precomp Bandwidth [Hz]"
     },
     "govFFFilterHzHelp": {
-        "message": "Cutoff for the cyclic/collective precompensation lowpass filter.",
-        "english": "Cutoff for the cyclic/collective precompensation lowpass filter.",
-        "status": "New entry. Please translate!"
+        "message": "循环/集体预补偿低通滤波器的截止频率。",
+        "english": "Cutoff for the cyclic/collective precompensation lowpass filter."
     },
     "govHeadspeed": {
         "message": "主旋翼最高转速",
@@ -4317,9 +4104,8 @@
         "english": "+5V Voltage"
     },
     "blackboxLog_temps": {
-        "message": "Temperatures",
-        "english": "Temperatures",
-        "status": "New entry. Please translate!"
+        "message": "温度",
+        "english": "Temperatures"
     },
     "serialLoggingSupportedNote": {
         "message": "你可以使用串口外接记录设备来记录日志（例如 OpenLager）。需要在串口设置页设置相应的串口。",
@@ -4366,13 +4152,8 @@
         "english": "Directly saving flash to file is slow and inherently prone to error / file corruption.<br>In some cases it will work for small files, but this is not supported and support requests for it will be closed without comment - use Mass Storage mode instead."
     },
     "dataflashSaveFileDepreciationHint": {
-        "message": "This method is slow, because the MSP connection itself has fundamental limitations for file transfer. The recommended method is to use '<b>$t(blackboxRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files.",
-        "english": "This method is slow, because the MSP connection itself has fundamental limitations for file transfer. The recommended method is to use '<b>$t(blackboxRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "这种方式十分缓慢，且容易发生内部错误/文件损坏，这是因为 MSP 连接其本身具有一些基本的内部限制，这使得它并不适合进行文件传输。它可能仅能传输较小的日志文件。如果您在使用此方法保存文件时传输失败，请不要创建支持请求。 推荐的方法是使用 '<b>$t(onboardLoggingRebootMscText)。 essage)</b>' (下面) 激活大容量存储模式，并将您的飞行控制器设置为存储设备以访问并下载日志文件。",
-            "english": "This method is slow and inherently prone to error / file corruption, because the MSP connection itself has intrinsic, fundamental limitations that make it unsuitable for file transfers. It may work for small log files only. Do not create support requests if file transfers fail when saved using this method. The recommended method is to use '<b>$t(blackboxRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files."
-        }
+        "message": "这种方法比较慢，因为MSP连接本身对文件传输有限制。推荐的方法是使用 '<b>$t(blackboxRebootMscText.message)</b>' （下方）激活海量存储模式，并将您的飞控作为存储设备来下载日志文件。",
+        "english": "This method is slow, because the MSP connection itself has fundamental limitations for file transfer. The recommended method is to use '<b>$t(blackboxRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files."
     },
     "dataflashButtonErase": {
         "message": "擦除",
@@ -4515,13 +4296,8 @@
         "english": "Select your board to see available online firmware releases - Select the correct firmware appropriate for your board."
     },
     "firmwareFlasherOnlineSelectBoardHint": {
-        "message": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (G4, F4, F7, H7). To make the different boards work with the same firmware, a separate configuration file is flashed alongside the firmware.<br>The Configurator supports this transparently in one flashing step.",
-        "english": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (G4, F4, F7, H7). To make the different boards work with the same firmware, a separate configuration file is flashed alongside the firmware.<br>The Configurator supports this transparently in one flashing step.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "统一目标的概念意味着使用相同 MCU（F4、F7、H7）的所有电路板均可使用相同的固件 .hex 文件。为了使不同的电路板使用相同的固件，在刷写统一目标时，固件会同时部署一个特定的配置文件。<br>此版本的 Betaflight 配置器支持在一个步骤中闪存带有各自飞控板特定配置的统一目标。每个板可用的不同固件类型在下拉菜单中显示如下：<br /><br /><strong>&lt;飞控板名称&gt;</strong> or<br><strong>&lt;飞控板名称&gt; (传统)</strong>:<br>非统一目标.<br /><br /><strong>&lt;飞控板名称&gt; (&lt;制造商ID&gt;)</strong>:<br>(4 个字符的制造商 ID)<br>统一目标。<br /><br /><strong>请使用可用的统一目标。</strong>",
-            "english": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (F4, F7, H7). To make the different boards work with the same firmware, a specific configuration file is deployed alongside the firmware when a Unified Target is flashed.<br>This version of Betaflight configurator supports flashing of Unified Targets with the respective board specific configurations in one step. The different firmware types that are available for each board are shown in the drop-down as follows:<br /><br /><strong>&lt;board name&gt;</strong> or<br><strong>&lt;board name&gt; (Legacy)</strong>:<br>non-unified target.<br /><br /><strong>&lt;board name&gt; (&lt;manufacturer id&gt;)</strong>:<br>(4 character manufacturer id)<br>Unified Target.<br /><br /><strong>Please use Unified Targets where available.</strong>"
-        }
+        "message": "统一目标的概念意味着使用相同 MCU（G4、F4、F7、H7）的所有电路板均可使用相同的固件 .hex 文件。为了让不同的电路板使用相同的固件，需要在固件烧写的同时写入单独的配置文件。",
+        "english": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (G4, F4, F7, H7). To make the different boards work with the same firmware, a separate configuration file is flashed alongside the firmware.<br>The Configurator supports this transparently in one flashing step."
     },
     "firmwareFlasherOnlineSelectFirmwareVersionDescription": {
         "message": "选择对应你飞控型号的固件版本",
@@ -5459,14 +5235,12 @@
         "english": "Stop gain (PD) for counter clock-wise rotation. Typical range 50..200."
     },
     "profilesYawPrecompCutoff": {
-        "message": "Yaw Precomp Cutoff [Hz]",
-        "english": "Yaw Precomp Cutoff [Hz]",
-        "status": "New entry. Please translate!"
+        "message": "航向预补偿截止频率 [Hz]",
+        "english": "Yaw Precomp Cutoff [Hz]"
     },
     "profilesYawPrecompCutoffHelp": {
-        "message": "Frequency limit for all yaw precompensation actions",
-        "english": "Frequency limit for all yaw precompensation actions",
-        "status": "New entry. Please translate!"
+        "message": "所有航向预补偿动作的频率限制",
+        "english": "Frequency limit for all yaw precompensation actions"
     },
     "profilesYawFFCyclicGain": {
         "message": "循环螺距前馈增益",
@@ -5809,19 +5583,16 @@
         "english": "Rates Preview"
     },
     "rateSetupDynamic": {
-        "message": "Dynamics",
-        "english": "Dynamics",
-        "status": "New entry. Please translate!"
+        "message": "动态",
+        "english": "Dynamics"
     },
     "rateSetupAcceleration": {
-        "message": "Max Acceleration [°/s²]",
-        "english": "Max Acceleration [°/s²]",
-        "status": "New entry. Please translate!"
+        "message": "最大加速度 [°/s²]",
+        "english": "Max Acceleration [°/s²]"
     },
     "rateSetupResponse": {
-        "message": "Response Time [ms]",
-        "english": "Response Time [ms]",
-        "status": "New entry. Please translate!"
+        "message": "响应时间 [ms]",
+        "english": "Response Time [ms]"
     },
     "gyroFilterSettings": {
         "message": "陀螺仪滤波设置",
@@ -5860,13 +5631,8 @@
         "english": "Gyro Lowpass 2 Filter Type"
     },
     "gyroLowpassFilterHelp": {
-        "message": "The Gyro Lowpass Filters are used for cutting off excess noise in the gyro signal. Two filters can be used, either 1<sup>st</sup> or 2<sup>nd</sup> order. The first filter can be dynamic, changing its cutoff frequency with the main rotor RPM. The minimum and maximum are limiting the dynamic range. With RPM Filters or Dynamic Notch Filters, one extra filter is needed around 100Hz. Without them, two second order filters are required.",
-        "english": "The Gyro Lowpass Filters are used for cutting off excess noise in the gyro signal. Two filters can be used, either 1<sup>st</sup> or 2<sup>nd</sup> order. The first filter can be dynamic, changing its cutoff frequency with the main rotor RPM. The minimum and maximum are limiting the dynamic range. With RPM Filters or Dynamic Notch Filters, one extra filter is needed around 100Hz. Without them, two second order filters are required.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "低通滤波器有两种：静态和动态。对于一个确定的低通滤波器编号，只能同时启用一个（静态或动态）。静态滤波器只有一个截止值，该值以某种方式定义了滤波器的起始位置。动态滤波器定义了最小值和最大值，也就是截止点所在的范围。在油门变化的同时，截止值也会从最小值移动到最大值。",
-            "english": "The Lowpass Filters can have two variants: static and dynamic. For a determined lowpass filter number only one (static or dynamic) can be enabled at the same time. The static only has a Cutoff that is a value that defines in some way where the filter starts. The dynamic defines a min and max values, that is the range where the Cutoff is placed. This Cutoff moves from min to max at the same time than you move the throttle stick."
-        }
+        "message": "陀螺仪低通滤波器用于消除陀螺仪信号中多余的噪声。  可使用两个滤波器，一阶或二阶均可。  第一个滤波器可以是动态的，随主旋翼转速改变其截止频率。  最小和最大值限制了动态范围。  使用转速滤波器或动态陷波滤波器时，需要在 100Hz 左右增加一个滤波器。  如果没有这些滤波器，则需要两个二阶滤波器。",
+        "english": "The Gyro Lowpass Filters are used for cutting off excess noise in the gyro signal. Two filters can be used, either 1<sup>st</sup> or 2<sup>nd</sup> order. The first filter can be dynamic, changing its cutoff frequency with the main rotor RPM. The minimum and maximum are limiting the dynamic range. With RPM Filters or Dynamic Notch Filters, one extra filter is needed around 100Hz. Without them, two second order filters are required."
     },
     "gyroNotchFiltersGroup": {
         "message": "陀螺仪陷波滤波器",
@@ -5889,13 +5655,8 @@
         "english": "Gyro Notch Filter 2 Cutoff Frequency [Hz]"
     },
     "gyroNotchFilterHelp": {
-        "message": "The Notch Filters are used for filtering out additional resonances. Each filter has a Center and a Cutoff. The Center Frequency is the center of the filter and the Cutoff Frequency is where filter starts. For example with cutoff of 160 and center of 260, it means the range is 160-360Hz with most attenuation around the center.",
-        "english": "The Notch Filters are used for filtering out additional resonances. Each filter has a Center and a Cutoff. The Center Frequency is the center of the filter and the Cutoff Frequency is where filter starts. For example with cutoff of 160 and center of 260, it means the range is 160-360Hz with most attenuation around the center.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "陷波滤波器有一个中心点和一个截止点。陷波滤波器是对称的。中心频率是滤波器的中心，截止频率是陷波滤波器的起始频率。例如，陷波截止频率为 160，陷波中心频率为 260，这意味着滤波器的频率范围为 160-360Hz，中心频率附近的衰减最大。",
-            "english": "The Notch Filter has a Center and a Cutoff. The filter is symmetrical. The Center Frequency is the center of the filter and the Cutoff Frequency is where Notch filter starts. For example with Notch Cutoff of 160 and Notch Center of 260 it means the range is 160-360Hz with most attenuation around center"
-        }
+        "message": "陷波滤波器用于滤除额外的共振。每个滤波器都有一个中心和一个截止。中心频率是滤波器的中心，截止频率是滤波器开始的位置。例如，截止频率为160，中心频率为260，这意味着范围为160- 360hz，中心附近衰减最多。",
+        "english": "The Notch Filters are used for filtering out additional resonances. Each filter has a Center and a Cutoff. The Center Frequency is the center of the filter and the Cutoff Frequency is where filter starts. For example with cutoff of 160 and center of 260, it means the range is 160-360Hz with most attenuation around the center."
     },
     "gyroDynamicNotchFilterGroup": {
         "message": "动态陷波滤波器",
@@ -5906,13 +5667,8 @@
         "english": "Gyro Dynamic Notch Filter Settings"
     },
     "gyroDynamicNotchFilterHelp": {
-        "message": "Dynamic Notch Filter tracks peak noise frequencies in the gyro signal and places notch filters at those frequencies automatically.",
-        "english": "Dynamic Notch Filter tracks peak noise frequencies in the gyro signal and places notch filters at those frequencies automatically.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "动态陷波滤波器会自动跟踪峰值噪声频率，并将陷波滤波器的中心置于这些频率上。至少需要 1KHz 刷新率。",
-            "english": "Dynamic Notch Filter tracks peak noise frequencies and places notch filters with their center at those frequencies. Requires at least 1k filter or loop rate."
-        }
+        "message": "动态陷波器将会自动识别陀螺仪信号中的峰值噪声频率，并将滤波器作用于该频率上。",
+        "english": "Dynamic Notch Filter tracks peak noise frequencies in the gyro signal and places notch filters at those frequencies automatically."
     },
     "gyroDynamicNotchCount": {
         "message": "动态陷波器数量",
@@ -5931,22 +5687,12 @@
         "english": "Dynamic Notch Maximum Frequency"
     },
     "gyroDynamicNotchCountHelp": {
-        "message": "Select the number of dynamic notch filters. If used standalone without the RPM filters, 4-6 is recommended. With the RPM filters, 2-4 is recommended.",
-        "english": "Select the number of dynamic notch filters. If used standalone without the RPM filters, 4-6 is recommended. With the RPM filters, 2-4 is recommended.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "设置动态陷波滤波器的数量。如果不带 RPM 滤波器答单独使用，建议使用 4-6个。使用 RPM 滤波器时，建议使用 2-4个。",
-            "english": "This sets the number of dynamic notch filters. If used standalone without RPM filters, 4-6 is recommended. With RPM filters 2-4 is recommended."
-        }
+        "message": "选择动态陷波滤波器的数量, 如果不带 RPM 滤波器答单独使用，建议使用 4-6个。使用 RPM 滤波器时，建议使用 2-4个。",
+        "english": "Select the number of dynamic notch filters. If used standalone without the RPM filters, 4-6 is recommended. With the RPM filters, 2-4 is recommended."
     },
     "gyroDynamicNotchQHelp": {
-        "message": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance.",
-        "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Q因子调整了动态陷波滤波器的宽度。更高的值将使其变得更窄、更精准，较低的值将使其变得更宽、更模糊。 建议设置为2.0 至 3.0 ，低于2.0将会明显增加延迟并影响飞行性能。",
-            "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more precise, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and degrade flight performance."
-        }
+        "message": "Q因子调整了动态陷波滤波器的宽度。更高的值将使其变得更窄，较低的值将使其变得更宽。 建议设置为2.0 至 4.0 ，低于2.0将会明显增加延迟并影响飞行性能。",
+        "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance."
     },
     "gyroDynamicNotchMinHzHelp": {
         "message": "将其设置为需要过滤的最低传入噪声频率。应低于主旋翼频率，但不低于 20Hz，相当于 1200rpm。",
@@ -6185,13 +5931,8 @@
         "english": "Channel Fallback Settings"
     },
     "failsafeChannelFallbackSettingsHelp": {
-        "message": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 5µs, so smaller changes may be ignored.",
-        "english": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 5µs, so smaller changes may be ignored.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "当进入一阶失控保护时，这些设置将会应用于单独无效的AUX 通道，或者是所有通道。<strong>注意：</strong>数值应是25us的整数倍，小于25us的设置会被上下取整。",
-            "english": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 25usec, so small changes disappear"
-        }
+        "message": "当进入一阶失控保护时，这些设置将会应用于单独无效的AUX 通道，或者是所有通道。<strong>注意：</strong>数值应是5us的整数倍，小于5us的设置会被上下取整。",
+        "english": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 5µs, so smaller changes may be ignored."
     },
     "failsafeChannelFallbackSettingsAuto": {
         "message": "<strong>自动</strong> 指的是 横滚、俯仰、方向都回中，油门最低。 <strong>保持</strong> 指的是 所有通道保持最后从接收机接收到的有效的数值。",
@@ -6407,23 +6148,19 @@
     },
     "powerBatteryMinimumCellVoltage": {
         "message": "最低单芯电压 [V]",
-        "english": "Minimum Cell Voltage",
-        "status": "Reused translation. Please check!"
+        "english": "Minimum Cell Voltage"
     },
     "powerBatteryMaximumCellVoltage": {
         "message": "最高单芯电压 [V]",
-        "english": "Maximum Cell Voltage",
-        "status": "Reused translation. Please check!"
+        "english": "Maximum Cell Voltage"
     },
     "powerBatteryFullCellVoltage": {
-        "message": "Full Cell Voltage",
-        "english": "Full Cell Voltage",
-        "status": "New entry. Please translate!"
+        "message": "单芯满电电压 [V]",
+        "english": "Full Cell Voltage"
     },
     "powerBatteryWarningCellVoltage": {
         "message": "警告单芯电压 [V]",
-        "english": "Warning Cell Voltage",
-        "status": "Reused translation. Please check!"
+        "english": "Warning Cell Voltage"
     },
     "powerCalibrationManagerButton": {
         "message": "校准",
@@ -6631,8 +6368,7 @@
     },
     "powerChargeLevel": {
         "message": "$1 %",
-        "english": "$1 %",
-        "status": "New entry. Please translate!"
+        "english": "$1 %"
     },
     "powerAmperageScale": {
         "message": "比例 [1/10 mV/A]",
@@ -6679,27 +6415,20 @@
         "english": "mAh used"
     },
     "powerBatteryChargeLevel": {
-        "message": "Charge level",
-        "english": "Charge level",
-        "status": "New entry. Please translate!"
+        "message": "电量",
+        "english": "Charge level"
     },
     "powerBatteryAmperage": {
         "message": "电流",
         "english": "Current"
     },
     "powerBatteryCapacity": {
-        "message": "Capacity [mAh]",
-        "english": "Capacity [mAh]",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "容量 [mAh]",
-            "english": "Capacity (mAh)"
-        }
+        "message": "容量 [mAh]",
+        "english": "Capacity [mAh]"
     },
     "powerBatteryCellCount": {
-        "message": "Cell count",
-        "english": "Cell count",
-        "status": "New entry. Please translate!"
+        "message": "电芯数量 [S]",
+        "english": "Cell count"
     },
     "osdSetupTitle": {
         "message": "OSD 屏幕叠加显示",
@@ -8431,13 +8160,8 @@
         "english": "PID loop frequency"
     },
     "configurationPidProcessDenomHelp": {
-        "message": "The maximum frequency for the PID loop is limited by the CPU processing power. The Realtime Load should not exceed 70% with the selected loop speed.",
-        "english": "The maximum frequency for the PID loop is limited by the CPU processing power. The Realtime Load should not exceed 70% with the selected loop speed.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "PID 循环的最高频率受 CPU 处理能力的限制。在所选循环速度下，CPU 负载不应超过 70%。",
-            "english": "The maximum frequency for the PID loop is limited by the CPU processing power. The CPU Load should not exceed 70% with the selected loop speed."
-        }
+        "message": "PID 循环的最高频率受 CPU 处理能力的限制。在所选循环速度下，CPU 负载不应超过 70%。",
+        "english": "The maximum frequency for the PID loop is limited by the CPU processing power. The Realtime Load should not exceed 70% with the selected loop speed."
     },
     "configurationGyroUse32kHz": {
         "message": "启用陀螺仪 32kHz 采样模式",
@@ -8484,13 +8208,8 @@
         "english": "Logging mode"
     },
     "blackboxModeHelp": {
-        "message": "<strong>OFF:</strong> Disable logging.<br><br><strong>NORMAL:</strong> Enable logging when both ARMED and BLACKBOX switch are active.<br><br><strong>ARMED:</strong> Enable logging when ARMED.<br><br><strong>SWITCH:</strong> Enable logging when BLACKBOX switch is active.",
-        "english": "<strong>OFF:</strong> Disable logging.<br><br><strong>NORMAL:</strong> Enable logging when both ARMED and BLACKBOX switch are active.<br><br><strong>ARMED:</strong> Enable logging when ARMED.<br><br><strong>SWITCH:</strong> Enable logging when BLACKBOX switch is active.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<strong>关：</strong>关闭日志。<br><strong>正常：</strong>同时解锁和打开黑盒子开关时记录日志。<br><strong>已解锁：</strong>在解锁时记录日志。<br><strong>开关：</strong>在打开黑盒子开关时记录日志。",
-            "english": "<strong>OFF:</strong> Disables logging.<br><strong>NORMAL:</strong> logging when both ARMED and BLACKBOX switch active.<br><strong>ARMED:</strong> logging when ARMED.<br><strong>SWITCH:</strong> logging when BLACKBOX switch active"
-        }
+        "message": "<strong>关：</strong> 禁用日志记录。<br><br><strong>正常：</strong> 在直升机解锁后并同时打开黑盒子开关时进行记录。<br><br><strong>解锁后：</strong> 在直升机解锁后开始记录。<br><br><strong>开关控制：</strong> 在打开黑盒子记录开关后开始记录。",
+        "english": "<strong>OFF:</strong> Disable logging.<br><br><strong>NORMAL:</strong> Enable logging when both ARMED and BLACKBOX switch are active.<br><br><strong>ARMED:</strong> Enable logging when ARMED.<br><br><strong>SWITCH:</strong> Enable logging when BLACKBOX switch is active."
     },
     "blackboxModeOff": {
         "message": "关闭",
@@ -8501,11 +8220,11 @@
         "english": "Normal"
     },
     "blackboxModeArmed": {
-        "message": "已解锁",
+        "message": "解锁后",
         "english": "Armed"
     },
     "blackboxModeSwitch": {
-        "message": "开关",
+        "message": "开关控制",
         "english": "Switch"
     },
     "blackboxDevice": {
@@ -8513,13 +8232,8 @@
         "english": "Logging device"
     },
     "blackboxDeviceHelp": {
-        "message": "<strong>No Logging:</strong> Disable logging.<br><br><strong>Onboard Flash:</strong> Log to the onboard flash chip (if available).<br><br><strong>SD Card:</strong> Log to the onboard SD card (if available).<br><br><strong>Serial Port:</strong> Log to an external logger device (e.g OpenLager) connected to a serial port. The serial port must to be configured to 'Blackbox Logging' on the <strong>Configuration</strong> tab.",
-        "english": "<strong>No Logging:</strong> Disable logging.<br><br><strong>Onboard Flash:</strong> Log to the onboard flash chip (if available).<br><br><strong>SD Card:</strong> Log to the onboard SD card (if available).<br><br><strong>Serial Port:</strong> Log to an external logger device (e.g OpenLager) connected to a serial port. The serial port must to be configured to 'Blackbox Logging' on the <strong>Configuration</strong> tab.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<strong>无日志:</strong>禁用日志记录。<br><strong>板载闪存:</strong>允许记录到板载闪存芯片(如果可用)。<br><strong>SD卡:</strong>记录到板载SD卡(如果可用)。<br><strong>串行端口:</strong>记录到连接到串行端口的外部记录器设备(例如Open Lager)。串行端口必须在<strong> 串行端口</strong>选项卡的“外设”部分配置为“黑匣子日志”。",
-            "english": "<strong>No Logging:</strong> Disables logging.<br><strong>Onboard Flash:</strong> Enables logging to onboard flash chip (if available).<br><strong>SD Card:</strong> Log to onboard SD card (if available).<br><strong>Serial Port:</strong> Log to an external logger device (e.g Open Lager) connected to a serial port. The serial port will have to be configured to 'Blackbox Logging' in the 'peripherals' section on the <strong>Serial Ports</strong> tab."
-        }
+        "message": "<strong>无日志：</strong> 禁用日志记录<br><br><strong>板载闪存：</strong> 记录到板载闪存中（如果可用）。<br><br><strong>SD卡：</strong> 记录到SD卡中（如果可用）。<br><br><strong>串行端口：</strong> 记录到通过串行端口连接的外部设备上（如 OpenLager），必须在<strong>配置</strong> 选项卡中将对应串口设置为“黑盒日志记录”.",
+        "english": "<strong>No Logging:</strong> Disable logging.<br><br><strong>Onboard Flash:</strong> Log to the onboard flash chip (if available).<br><br><strong>SD Card:</strong> Log to the onboard SD card (if available).<br><br><strong>Serial Port:</strong> Log to an external logger device (e.g OpenLager) connected to a serial port. The serial port must to be configured to 'Blackbox Logging' on the <strong>Configuration</strong> tab."
     },
     "blackboxRateOfLogging": {
         "message": "记录比率",
@@ -8538,13 +8252,8 @@
         "english": "Debug mode"
     },
     "blackboxDebugModeHelp": {
-        "message": "Choose what <i>extra</i> data is being logged. If enabled, eight extra debug items are added to the Blackbox Log.",
-        "english": "Choose what <i>extra</i> data is being logged. If enabled, eight extra debug items are added to the Blackbox Log.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "选择要记录的 <i>额外</i> 数据。如果启用，日志条目中将添加八个额外的调试项。",
-            "english": "Choose what <i>extra</i> data is being logged. If enabled, eight extra debug items are added to the log entries."
-        }
+        "message": "选择要记录的 <i>额外</i> 数据。如果启用，黑盒日志中将添加八个额外的调试项。",
+        "english": "Choose what <i>extra</i> data is being logged. If enabled, eight extra debug items are added to the Blackbox Log."
     },
     "blackboxDebugModeUnknown": {
         "message": "未知模式",
