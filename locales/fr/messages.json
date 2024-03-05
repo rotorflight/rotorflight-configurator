@@ -2756,15 +2756,15 @@
         "english": "Main Rotor Direction"
     },
     "mixerMainRotorDirectionHelp": {
-        "message": "En regardant du haut de l’hélicoptère, dans quelle direction tourne le rotor principal ? Pour la majorité des hélicoptères, c'est dans le sens des aiguilles d'une montre.",
+        "message": "En regardant du haut de l’hélicoptère, dans quelle direction tourne le rotor principal ? Pour la majorité des hélicoptères, c'est dans le sens horaire.",
         "english": "Looking from the top of the helicopter, what direction is the main rotor turning? For the majority of helicopters this is clockwise."
     },
     "mixerClockwise": {
-        "message": "Dans le sens des aiguilles d'une montre",
+        "message": "Dans le sens horaire",
         "english": "Clockwise"
     },
     "mixerCounterClockwise": {
-        "message": "Dans le sens inverse des aiguilles d'une montre",
+        "message": "Dans le sens anti-horaire",
         "english": "Counter-Clockwise"
     },
     "mixerSwashType": {
@@ -2972,35 +2972,35 @@
         "english": "Adjust the yaw gain to match the mechanical gain. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors."
     },
     "mixerTailRotorMinYaw": {
-        "message": "Limite d'angle de pale du lacet dans le sens des aiguilles d'une montre",
+        "message": "Limite d'angle de pale du lacet dans le sens horaire",
         "english": "CW Yaw Blade Angle Limit"
     },
     "mixerTailRotorMinYawHelp": {
-        "message": "Une limite d'angle pour le lacet dans le sens des aiguilles d'une montre.",
+        "message": "Une limite d'angle pour le lacet dans le sens horaire.",
         "english": "An angle limit for clockwise yaw."
     },
     "mixerTailRotorMaxYaw": {
-        "message": "Limite d'angle de pale du lacet dans le sens inverse des aiguilles d'une montre",
+        "message": "Limite d'angle de pale du lacet dans le sens anti-horaire",
         "english": "CCW Yaw Blade Angle Limit"
     },
     "mixerTailRotorMaxYawHelp": {
-        "message": "Une limite d'angle pour le lacet dans le sens inverse des aiguilles d'une montre.",
+        "message": "Une limite d'angle pour le lacet dans le sens anti-horaire.",
         "english": "An angle limit for counter-clockwise yaw."
     },
     "mixerTailMotorMinYaw": {
-        "message": "Limite de lacet dans le sens des aiguilles d'une montre [%]",
+        "message": "Limite de lacet dans le sens horaire [%]",
         "english": "CW yaw limit [%]"
     },
     "mixerTailMotorMinYawHelp": {
-        "message": "Une limite pour le lacet dans le sens des aiguilles d'une montre.",
+        "message": "Une limite pour le lacet dans le sens horaire.",
         "english": "A limit for clockwise yaw."
     },
     "mixerTailMotorMaxYaw": {
-        "message": "Limite de lacet dans le sens inverse des aiguilles d'une montre [%]",
+        "message": "Limite de lacet dans le sens anti-horaire [%]",
         "english": "CCW yaw limit [%]"
     },
     "mixerTailMotorMaxYawHelp": {
-        "message": "Une limite pour le lacet dans le sens inverse des aiguilles d'une montre.",
+        "message": "Une limite pour le lacet dans le sens anti-horaire.",
         "english": "A limit for counter-clockwise yaw."
     },
     "mixerTailMotorIdle": {
@@ -3088,11 +3088,11 @@
         "english": "Forward"
     },
     "mixerOverrideSliderLeftLabel3": {
-        "message": "Sens aiguille montre",
+        "message": "Sens horaire",
         "english": "CW"
     },
     "mixerOverrideSliderRightLabel3": {
-        "message": "Inverse aiguille montre",
+        "message": "Sens anti-horaire",
         "english": "CCW"
     },
     "mixerOverrideSliderLeftLabel4": {
@@ -5219,19 +5219,19 @@
         "english": "Center Offset for tail motor or servo"
     },
     "profilesYawStopGainCW": {
-        "message": "Gain d'arrêt de lacet dans le sens des aiguilles d'une montre",
+        "message": "Gain d'arrêt de lacet dans le sens horaire",
         "english": "CW Yaw Stop Gain"
     },
     "profilesYawStopGainCWHelp": {
-        "message": "Gain d'arrêt (PD) pour une rotation dans le sens des aiguilles d'une montre. Plage typique 50..200.",
+        "message": "Gain d'arrêt (PD) pour une rotation dans le sens horaire. Plage typique 50..200.",
         "english": "Stop gain (PD) for clock-wise rotation. Typical range 50..200."
     },
     "profilesYawStopGainCCW": {
-        "message": "Gain d'arrêt de lacet dans le sens inverse des aiguilles d'une montre",
+        "message": "Gain d'arrêt de lacet dans le sens anti-horaire",
         "english": "CCW Yaw Stop Gain"
     },
     "profilesYawStopGainCCWHelp": {
-        "message": "Gain d'arrêt (PD) pour une rotation dans le sens inverse des aiguilles d'une montre. Plage typique 50..200.",
+        "message": "Gain d'arrêt (PD) pour une rotation dans le sens anti-horaire. Plage typique 50..200.",
         "english": "Stop gain (PD) for counter clock-wise rotation. Typical range 50..200."
     },
     "profilesYawPrecompCutoff": {
