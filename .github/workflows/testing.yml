@@ -31,6 +31,9 @@ jobs:
         echo "GIT_VER=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
         cat ${GITHUB_ENV}
 
+    - name: Update version number
+      run: make version SEMVER=${{ env.GIT_VER }}
+
     - name: Initialise build environment
       run: yarn install
 
@@ -69,6 +72,9 @@ jobs:
       run: |
         echo "GIT_VER=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
         cat ${GITHUB_ENV}
+
+    - name: Update version number
+      run: make version SEMVER=${{ env.GIT_VER }}
 
     - name: Initialise build environment
       run: yarn install
@@ -109,6 +115,9 @@ jobs:
         $GIT_VER = $env:GITHUB_REF -replace '.*/',''
         echo "GIT_VER=$GIT_VER" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
+    - name: Update version number
+      run: make version SEMVER=${{ env.GIT_VER }}
+
     - name: Initialise build environment
       run: yarn install
 
@@ -147,6 +156,9 @@ jobs:
       run: |
         $GIT_VER = $env:GITHUB_REF -replace '.*/',''
         echo "GIT_VER=$GIT_VER" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+    - name: Update version number
+      run: make version SEMVER=${{ env.GIT_VER }}
 
     - name: Initialise build environment
       run: yarn install
