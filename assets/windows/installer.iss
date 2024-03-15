@@ -1,7 +1,7 @@
 ; ------------------------------------------
 ; Installer for Rotorflight Configurator
 ; ------------------------------------------
-; It receives from the command line with /D the parameters: 
+; It receives from the command line with /D the parameters:
 ; version
 ; archName
 ; archAllowed
@@ -30,7 +30,7 @@ Source: "{#SourcePath}\*"; DestDir: "{app}"; Flags: recursesubdirs
 ; Programs group
 Name: "{group}\{#ApplicationName}"; Filename: "{app}\{#ExecutableFileName}";
 ; Desktop icon
-Name: "{autodesktop}\{#ApplicationName}"; Filename: "{app}\{#ExecutableFileName}"; 
+Name: "{autodesktop}\{#ApplicationName}"; Filename: "{app}\{#ExecutableFileName}";
 ; Non admin users, uninstall icon
 Name: "{group}\Uninstall {#ApplicationName}"; Filename: "{uninstallexe}"; Check: not IsAdminInstallMode
 
@@ -93,21 +93,6 @@ WizardSmallImageFile=rf_installer_small.bmp
 WizardStyle=modern
 
 [Code]
-function GetOldNsisUninstallerPath(): String;
-var
-    RegKey: String;
-begin
-    Result := '';
-    // Look into the different registry entries: win32, win64 and without user rights
-    if not RegQueryStringValue(HKLM, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Rotorflight Configurator', 'UninstallString', Result) then
-    begin
-        if not RegQueryStringValue(HKLM, 'SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Rotorflight Configurator', 'UninstallString', Result) then
-        begin
-            RegQueryStringValue(HKCU, 'SOFTWARE\Rotorflight\Rotorflight Configurator', 'UninstallString', Result)
-        end;
-    end;
-end;
-
 function GetQuietUninstallerPath(): String;
 var
     RegKey: String;
@@ -126,43 +111,17 @@ var
     ParameterStr : String;
     UninstPath : String;
 begin
-    
+
     Result := True;
 
-    // Check if the application is already installed by the old NSIS installer, and uninstall it
-    UninstPath := GetOldNsisUninstallerPath();
-
-    // Found, start uninstall
-    if UninstPath <> '' then 
+    // Search for new Inno Setup installations
+    UninstPath := GetQuietUninstallerPath();
+    if UninstPath <> '' then
     begin
-        
-        UninstPath := RemoveQuotes(UninstPath);
-
-        // Add this parameter to not return until uninstall finished. The drawback is that the uninstaller file is not deleted
-        ParameterStr := '_?=' + ExtractFilePath(UninstPath);
-
-        if Exec(UninstPath, ParameterStr, '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
+        if not Exec('>', UninstPath, '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
         begin
-          // Delete the unistaller file and empty folders. Not deleting the files.
-          DeleteFile(UninstPath);
-          DelTree(ExtractFilePath(UninstPath), True, False, True);
-        end
-        else begin
             Result := False;
-            MsgBox('Error uninstalling old Configurator ' + SysErrorMessage(ResultCode) + '.', mbError, MB_OK);
-        end;        
-    end
-    else begin
-
-        // Search for new Inno Setup installations
-        UninstPath := GetQuietUninstallerPath();
-        if UninstPath <> '' then
-        begin
-            if not Exec('>', UninstPath, '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
-            begin
-                Result := False;
-                MsgBox('Error uninstalling Configurator ' + SysErrorMessage(ResultCode) + '.', mbError, MB_OK);
-            end;
+            MsgBox('Error uninstalling Configurator ' + SysErrorMessage(ResultCode) + '.', mbError, MB_OK);
         end;
     end;
 end;
