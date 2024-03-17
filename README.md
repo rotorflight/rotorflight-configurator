@@ -13,15 +13,15 @@ Please download the latest version from github:
 
  - https://github.com/rotorflight/rotorflight-configurator/releases
 
-Then follow the instructions in the [Wiki](https://github.com/rotorflight/rotorflight/wiki/Installing-Rotorflight-Firmware).
+Then follow the instructions on the [Website](https://www.rotorflight.org/docs/Tutorial-Setup/Flashing-the-firmware).
 
 
 ## Information
 
-For more information, please see our github space:
+For more information and a setup doccumentation, please see our website:
 
- - [Main page](https://github.com/rotorflight)
- - [Rotorflight Wiki](https://github.com/rotorflight/rotorflight/wiki)
+ - [Main page](https://www.rotorflight.org/)
+ - [Rotorflight Tutorial](https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction)
 
 
 ## Notes

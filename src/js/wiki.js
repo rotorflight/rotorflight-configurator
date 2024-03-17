@@ -19,7 +19,7 @@ wiki["tabAuxiliary"]        = 'https://www.rotorflight.org/docs/Tutorial-Setup/M
 wiki["tabAdjustments"]      = 'https://www.rotorflight.org/docs/Tutorial-Setup/Adjustments';
 wiki["tabSensors"]          = 'https://www.rotorflight.org/docs/Tutorial-Setup/Sensors';
 wiki["tabBlackbox"]         = 'https://www.rotorflight.org/docs/Tutorial-Setup/Blackbox';
-wiki["tabCli"]              = '';
+wiki["tabCli"]              = 'https://www.rotorflight.org/docs/Tutorial-Setup/CLI';
 
 // default wiki url
 const wikiURL = 'https://www.rotorflight.org/';
