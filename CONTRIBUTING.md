@@ -8,6 +8,7 @@ Remember that issues that are due to mis-configuration, wiring or failure to rea
 
 Please search for existing issues *before* creating new ones.
 
-# Developers
+# Contributing
 
-Please refer to the development section in the [Wiki](https://github.com/rotorflight/rotorflight/wiki/).
+Please refer to the Contributing section on the [Website](https://www.rotorflight.org/docs/Contributing/intro).
+

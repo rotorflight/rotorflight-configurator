@@ -402,7 +402,7 @@ GuiControl.prototype.content_ready = function (callback) {
         const wikiLoc = $('#content .tab_title').attr("i18n");
         // Build link to Rotorflight documentation
         const documentationButton = $('#content #button-documentation');
-        documentationButton.html("Wiki");
+        documentationButton.html("Website");
         documentationButton.attr("target", "_rfwiki");
         documentationButton.attr("rel", "noopener noreferrer");
         if (documentationButton.attr("href") == '' || documentationButton.attr("href") == null) {
