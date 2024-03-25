@@ -18,7 +18,7 @@ const API_VERSION_1_44 = '1.44.0';
 const API_VERSION_RTFL_MIN = '12.6.0';
 const API_VERSION_RTFL_MAX = '12.6.0';
 
-const FW_VERSION_RTFL_MIN = '4.3.0-RC';
+const FW_VERSION_RTFL_MIN = '4.3.0-0';
 const FW_VERSION_RTFL_MAX = '4.3.99';
 
 const CONFIGURATOR = {
