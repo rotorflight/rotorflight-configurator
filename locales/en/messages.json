@@ -1728,6 +1728,9 @@
     "receiverTelemetrySensor_ADJUSTMENT": {
         "message": "Adjustment Function"
     },
+    "receiverTelemetrySensor_GOV_MODE": {
+        "message": "Govenor Mode"
+    },   
      "receiverBars": {
         "message": "Receiver Channels"
     },
