@@ -1729,7 +1729,7 @@
         "message": "Adjustment Function"
     },
     "receiverTelemetrySensor_GOV_MODE": {
-        "message": "Govenor Mode"
+        "message": "Governor Mode"
     },   
      "receiverBars": {
         "message": "Receiver Channels"
