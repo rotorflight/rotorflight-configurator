@@ -160,6 +160,7 @@ TABS.receiver = {
         { name: 'ESC_RPM',              id: 17, },
         { name: 'ESC_TEMPERATURE',      id: 18, },
         { name: 'ADJUSTMENT',           id: 21, },
+        { name: 'GOV_MODE',             id: 22, },
     ],
 };
 
