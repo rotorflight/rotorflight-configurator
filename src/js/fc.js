@@ -53,7 +53,6 @@ const INITIAL_ANALOG = {
     mAhdrawn:                   0,
     rssi:                       0,
     amperage:                   0,
-    last_received_timestamp:    Date.now(), // FIXME this code lies, it's never been received at this point
 };
 
 const INITIAL_BATTERY_CONFIG = {
@@ -69,19 +68,29 @@ const INITIAL_BATTERY_CONFIG = {
     mahWarningPercentage:       0,
 };
 
+const INITIAL_BATTERY_STATE = {
+    batteryState:               0,
+    cellCount:                  0,
+    capacity:                   0,
+    mAhDrawn:                   0,
+    voltage:                    0,
+    amperage:                   0,
+    chargeLevel:                0,
+};
+
 const FC = {
 
     // define all the global variables that are uses to hold FC state
     // the default state must be defined inside the resetState() method
     ADJUSTMENT_RANGES: null,
     PID_PROFILE: null,
-    ANALOG: {...INITIAL_CONFIG},
+    ANALOG: {...INITIAL_ANALOG},
     DEBUG_CONFIG: null,
     ARMING_CONFIG: null,
     AUX_CONFIG: null,
     AUX_CONFIG_IDS: null,
     BATTERY_CONFIG: {...INITIAL_BATTERY_CONFIG},
-    BATTERY_STATE: null,
+    BATTERY_STATE: {...INITIAL_BATTERY_STATE},
     BEEPER_CONFIG: null,
     BF_CONFIG: null,          // Remove when we officialy retire BF 3.1
     BLACKBOX: null,
@@ -177,8 +186,9 @@ const FC = {
         // Using `Object.assign` instead of reassigning to
         // trigger the updates on the Vue side
         Object.assign(this.CONFIG, INITIAL_CONFIG);
-        Object.assign(this.ANALOG, INITIAL_CONFIG);
         Object.assign(this.BATTERY_CONFIG, INITIAL_BATTERY_CONFIG);
+        Object.assign(this.BATTERY_STATE, INITIAL_BATTERY_STATE);
+        Object.assign(this.ANALOG, INITIAL_ANALOG);
 
         this.BF_CONFIG = {
             currentscale:               0,
@@ -373,21 +383,10 @@ const FC = {
             cno:                        [],
         };
 
-
         this.VOLTAGE_METERS =           [];
         this.VOLTAGE_METER_CONFIGS =    [];
         this.CURRENT_METERS =           [];
         this.CURRENT_METER_CONFIGS =    [];
-
-        this.BATTERY_STATE = {};
-        this.BATTERY_CONFIG = {
-            vbatmincellvoltage:         0,
-            vbatmaxcellvoltage:         0,
-            vbatwarningcellvoltage:     0,
-            capacity:                   0,
-            voltageMeterSource:         0,
-            currentMeterSource:         0,
-        };
 
         this.DEBUG_CONFIG = {
             debugMode:                  0,

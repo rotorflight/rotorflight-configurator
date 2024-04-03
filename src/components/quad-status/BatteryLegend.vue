@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-const NO_BATTERY_VOLTAGE_MAXIMUM = 1.8; // Maybe is better to add a call to MSP_BATTERY_STATE but is not available for all versions
+const NO_BATTERY_VOLTAGE_MAXIMUM = 1.8;
 
 export default {
   props: {
@@ -12,21 +12,15 @@ export default {
       type: Number,
       default: 0,
     },
-    vbatmaxcellvoltage: {
+    cellcount: {
       type: Number,
-      default: 1,
+      default: 0,
     },
   },
   computed: {
     reading() {
-      let nbCells = Math.floor(this.voltage / this.vbatmaxcellvoltage) + 1;
-
-      if (this.voltage === 0) {
-        nbCells = 1;
-      }
-
       const cellsText =
-        this.voltage > NO_BATTERY_VOLTAGE_MAXIMUM ? `${nbCells}S` : "USB";
+        this.voltage > NO_BATTERY_VOLTAGE_MAXIMUM ? `${this.cellcount}S` : "USB";
       return `${this.voltage.toFixed(2)}V (${cellsText})`;
     },
   },

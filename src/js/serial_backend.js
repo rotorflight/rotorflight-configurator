@@ -658,10 +658,8 @@ function update_live_status() {
     if (GUI.active_tab != 'cli') {
         MSP.send_message(MSPCodes.MSP_BOXNAMES, false, false);
         MSP.send_message(MSPCodes.MSP_STATUS, false, false);
-        MSP.send_message(MSPCodes.MSP_ANALOG, false, false);
+        MSP.send_message(MSPCodes.MSP_BATTERY_STATE, false, false);
     }
-
-    const active = ((Date.now() - FC.ANALOG.last_received_timestamp) < 300);
 
     for (let i = 0; i < FC.AUX_CONFIG.length; i++) {
         if (FC.AUX_CONFIG[i] === 'ARM') {
@@ -680,39 +678,32 @@ function update_live_status() {
         }
     }
 
-    if (FC.ANALOG != undefined) {
-        let nbCells = Math.floor(FC.ANALOG.voltage / FC.BATTERY_CONFIG.vbatmaxcellvoltage) + 1;
+    const cells = FC.BATTERY_STATE.cellCount;
+    const min = FC.BATTERY_CONFIG.vbatmincellvoltage * cells;
+    const max = FC.BATTERY_CONFIG.vbatmaxcellvoltage * cells;
+    const warn = FC.BATTERY_CONFIG.vbatwarningcellvoltage * cells;
 
-        if (FC.ANALOG.voltage == 0) {
-               nbCells = 1;
+    const NO_BATTERY_VOLTAGE_MAXIMUM = 1.8;
+
+    if (FC.BATTERY_STATE.voltage < NO_BATTERY_VOLTAGE_MAXIMUM) {
+        $(".battery-status").removeClass('state-empty').addClass('state-ok').removeClass('state-warning');
+        $(".battery-status").css({ width: "0%", });
+    }
+    else if (FC.BATTERY_STATE.voltage < min) {
+        $(".battery-status").addClass('state-empty').removeClass('state-ok').removeClass('state-warning');
+        $(".battery-status").css({ width: "100%", });
+    } else {
+        $(".battery-status").css({ width: `${((FC.BATTERY_STATE.voltage - min) / (max - min) * 100)}%`, });
+        if (FC.BATTERY_STATE.voltage < warn) {
+            $(".battery-status").addClass('state-warning').removeClass('state-empty').removeClass('state-ok');
+        } else  {
+            $(".battery-status").addClass('state-ok').removeClass('state-warning').removeClass('state-empty');
         }
-
-       const min = FC.BATTERY_CONFIG.vbatmincellvoltage * nbCells;
-       const max = FC.BATTERY_CONFIG.vbatmaxcellvoltage * nbCells;
-       const warn = FC.BATTERY_CONFIG.vbatwarningcellvoltage * nbCells;
-
-       const NO_BATTERY_VOLTAGE_MAXIMUM = 1.8; // Maybe is better to add a call to MSP_BATTERY_STATE but is not available for all versions
-
-       if (FC.ANALOG.voltage < min && FC.ANALOG.voltage > NO_BATTERY_VOLTAGE_MAXIMUM) {
-           $(".battery-status").addClass('state-empty').removeClass('state-ok').removeClass('state-warning');
-           $(".battery-status").css({
-               width: "100%",
-           });
-       } else {
-           $(".battery-status").css({
-               width: `${((FC.ANALOG.voltage - min) / (max - min) * 100)}%`,
-           });
-
-           if (FC.ANALOG.voltage < warn) {
-               $(".battery-status").addClass('state-warning').removeClass('state-empty').removeClass('state-ok');
-           } else  {
-               $(".battery-status").addClass('state-ok').removeClass('state-warning').removeClass('state-empty');
-           }
-       }
-
     }
 
-    if (active) {
+    const last_received = Date.now() - MSP.last_received_timestamp;
+
+    if (last_received < 300) {
         $(".linkicon").addClass('active');
     } else {
         $(".linkicon").removeClass('active');

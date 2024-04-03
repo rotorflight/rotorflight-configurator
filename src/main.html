@@ -226,8 +226,8 @@
                     </div>
                 </div>
                 <battery-legend
-                    :voltage="FC.ANALOG.voltage"
-                    :vbatmaxcellvoltage="FC.BATTERY_CONFIG.vbatmaxcellvoltage"
+                    :voltage="FC.BATTERY_STATE.voltage"
+                    :cellcount="FC.BATTERY_STATE.cellCount"
                 ></battery-legend>
                 <div class="bottomStatusIcons">
                     <div class="armedicon cf_tip" i18n_title="mainHelpArmed"></div>

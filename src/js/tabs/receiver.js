@@ -774,7 +774,7 @@ TABS.receiver.initialize = function (callback) {
         });
 
         GUI.interval_add('receiver_pull', function () {
-            MSP.send_message(MSPCodes.MSP_ANALOG, false, false, function () {
+            MSP.send_message(MSPCodes.MSP_BATTERY_STATE, false, false, function () {
                 MSP.send_message(MSPCodes.MSP_RX_CHANNELS, false, false, function () {
                     MSP.send_message(MSPCodes.MSP_RC_COMMAND, false, false, updateBars);
                 });
