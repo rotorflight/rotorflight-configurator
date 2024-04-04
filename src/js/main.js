@@ -423,10 +423,8 @@ function notifyOutdatedVersion(releaseData) {
             console.log(`Latest Configurator version is ${CONFIGURATOR.latestVersion}`);
         }
 
-        if (semver.lt(CONFIGURATOR.version, CONFIGURATOR.latestVersion)) {
-            const message = i18n.getMessage('configuratorUpdateNotice', [CONFIGURATOR.latestVersion, CONFIGURATOR.latestVersionReleaseUrl]);
-            GUI.log(message);
-
+        function configuratorVersionDialog(message, releaseUrl)
+        {
             const dialog = $('.dialogConfiguratorUpdate')[0];
 
             $('.dialogConfiguratorUpdate-content').html(message);
@@ -437,10 +435,19 @@ function notifyOutdatedVersion(releaseData) {
 
             $('.dialogConfiguratorUpdate-websitebtn').click(function() {
                 dialog.close();
-                window.open(CONFIGURATOR.latestVersionReleaseUrl, '_blank');
+                window.open(releaseUrl, '_blank');
             });
 
             dialog.showModal();
+        }
+
+        if (CONFIGURATOR.version === "0.0.0") {
+            const message = i18n.getMessage('configuratorDevelopmentNotice');
+            configuratorVersionDialog(message, CONFIGURATOR.allReleasesUrl);
+        }
+        else if (semver.lt(CONFIGURATOR.version, CONFIGURATOR.latestVersion)) {
+            const message = i18n.getMessage('configuratorUpdateNotice', [CONFIGURATOR.latestVersion, CONFIGURATOR.latestVersionReleaseUrl]);
+            configuratorVersionDialog(message, CONFIGURATOR.latestVersionReleaseUrl);
         }
     });
 }

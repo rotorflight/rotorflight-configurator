@@ -43,4 +43,5 @@ const CONFIGURATOR = {
     version: '0.0.1',
     latestVersion: '0.0.1',
     latestVersionReleaseUrl: 'https://github.com/rotorflight/rotorflight-configurator/releases',
+    allReleasesUrl: 'https://github.com/rotorflight/rotorflight-configurator/releases',
 };

@@ -314,6 +314,9 @@
     "checkForConfiguratorUnstableVersions": {
         "message": "Show update notifications for unstable versions of the configurator"
     },
+    "configuratorDevelopmentNotice": {
+        "message": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version."
+    },
     "configuratorUpdateNotice": {
         "message": "You are using an outdated version of the <b>Rotorflight Configurator</b>.<br>$t(configuratorUpdateHelp.message)"
     },
