@@ -261,8 +261,15 @@ function onOpen(openInfo) {
                             MSP.send_message(MSPCodes.MSP_BUILD_INFO, false, false, function () {
                                 GUI.log(i18n.getMessage('firmwareInfoReceived', [FC.CONFIG.flightControllerIdentifier, FC.CONFIG.buildVersion]));
                                 GUI.log(i18n.getMessage('buildInfoReceived', [FC.CONFIG.buildRevision, FC.CONFIG.buildInfo]));
-                                if (semver.gte(FC.CONFIG.buildVersion, CONFIGURATOR.FW_VERSION_MIN_SUPPORTED) &&
-                                    semver.lte(FC.CONFIG.buildVersion, CONFIGURATOR.FW_VERSION_MAX_SUPPORTED)) {
+                                function removeAfterHyphen(str) {
+                                    const index = str.indexOf('-');
+                                    if (index !== -1) {
+                                        return str.substring(0, index);
+                                    }
+                                    return str;
+                                }
+                                if (semver.gte(removeAfterHyphen(FC.CONFIG.buildVersion), removeAfterHyphen(CONFIGURATOR.FW_VERSION_MIN_SUPPORTED)) &&
+                                    semver.lte(removeAfterHyphen(FC.CONFIG.buildVersion), removeAfterHyphen(CONFIGURATOR.FW_VERSION_MAX_SUPPORTED))) {
                                         MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, processBoardInfo);
                                 }
                                 else {
