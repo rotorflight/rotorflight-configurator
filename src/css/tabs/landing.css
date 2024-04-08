@@ -59,23 +59,39 @@
 }
 
 /* text columns */
+.tab-landing .content_mid .column .wrap {
+    padding: 10px;
+}
+
 .tab-landing .content_mid .column .wrap2 {
     padding: 10px;
 }
 
 .tab-landing .content_mid h2 {
     margin-bottom: 5px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .tab-landing .content_mid h3 {
-    font-size: 12px;
     margin-bottom: 5px;
+    font-size: 12px;
+}
 
+.tab-landing .content_mid .text1 ul {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tab-landing .content_mid .text1 li {
+    padding: 2px 0;
+    list-style: initial;
+    list-style-type: none;
+    margin-left: 15px;
 }
 
 .tab-landing .content_mid .text2 ul {
     margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 .tab-landing .content_mid .text2 li {
@@ -85,7 +101,7 @@
     margin-left: 30px;
 }
 
-.tab-landing .content_mid .text3 .wrap2 {
+.tab-landing .content_mid .wrap2 {
     border: 1px solid var(--subtleAccent);
     border-radius: 5px;
     background: white;
@@ -93,24 +109,44 @@
     font-size: 11px;
 }
 
-.tab-landing .content_mid .text3 .donate {
-    margin-top: 10px;
+.tab-landing .content_mid .wrap2 p {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.tab-landing .content_mid .donate,
+.tab-landing .content_mid .qrcode {
+    margin: 10px;
     text-align: center;
 }
 
-.tab-landing .content_mid_bottom {
-    padding: 0 15px;
+.tab-landing .content_mid .donate img {
+    height: 35px;
 }
 
-.tab-landing .content_mid_bottom .logoFacebook {
-    float: left;
-    width: 40px;
+.tab-landing .content_mid .qrcode img {
+    height: 120px;
+    padding: 10px;
+    background-color: white;
 }
 
-.tab-landing .content_mid_bottom .text4 {
-    margin-top: 0;
-    margin-left: 5px;
-    display: inline-block;
+.tab-landing .content_mid .defaultCommunityTable {
+    margin-top: 5px;
+}
+
+.tab-landing .content_mid .socialMediaText {
+    font-size: 12px;
+    font-weight: normal;
+    padding-bottom: 5px;
+}
+
+.tab-landing .content_mid .socialMediaLogo {
+    padding: 5px 10px;
+}
+
+.tab-landing .content_mid .logoSocialMedia {
+    height: 30px;
+    width: 30px;
 }
 
 .tab-landing .languageSwitcher .selected_language {
