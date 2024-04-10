@@ -8,7 +8,8 @@ const i18n = {};
  */
 window.i18n = i18n;
 
-const languagesAvailables = [ 'de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'nl', 'pl', 'pt', 'pt_BR', 'zh_CN', 'zh_TW', ];
+//const languagesAvailables = [ 'de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'nl', 'pl', 'pt', 'pt_BR', 'zh_CN', 'zh_TW', ];
+const languagesAvailables = [ 'de', 'en', 'fr', 'nl', 'zh_CN', ];
 const languageFallback = { 'default': ['en'], };
 
 /**
