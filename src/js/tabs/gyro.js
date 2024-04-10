@@ -293,10 +293,10 @@ TABS.gyro.initialize = function (callback) {
         typeElem.val(self.rpmFilter.type);
 
         let mainMinRPM = (self.rpmFilter.mainRotor[0].rpm_limit > 50) ?
-                         self.rpmFilter.mainRotor[0].rpm_limit : 500;
+                         self.rpmFilter.mainRotor[0].rpm_limit : 1000;
 
         let tailMinRPM = (self.rpmFilter.tailRotor[0].rpm_limit > 50) ?
-                         self.rpmFilter.tailRotor[0].rpm_limit : 1000;
+                         self.rpmFilter.tailRotor[0].rpm_limit : 2000;
 
         $('input[id="gyroRpmFilterMainRotorMinRPM"]').val(mainMinRPM);
         $('input[id="gyroRpmFilterTailRotorMinRPM"]').val(tailMinRPM);
