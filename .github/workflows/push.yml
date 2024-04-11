@@ -28,7 +28,7 @@ jobs:
 
     - name: Set build variables
       run: |
-        echo "GIT_VER=${GITHUB_SHA:0:7}" >> ${GITHUB_ENV}
+        echo "GIT_VER=CI-${GITHUB_SHA:0:7}" >> ${GITHUB_ENV}
         cat ${GITHUB_ENV}
 
     - name: Update version number
@@ -70,7 +70,7 @@ jobs:
 
     - name: Set build variables
       run: |
-        echo "GIT_VER=${GITHUB_SHA:0:7}" >> ${GITHUB_ENV}
+        echo "GIT_VER=CI-${GITHUB_SHA:0:7}" >> ${GITHUB_ENV}
         cat ${GITHUB_ENV}
 
     - name: Update version number
@@ -113,7 +113,7 @@ jobs:
     - name: Set build variables
       run: |
         $VER = $env:GITHUB_SHA.substring(0,7)
-        echo "GIT_VER=$VER" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        echo "GIT_VER=CI-$VER" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
     - name: Update version number
       run: make version SEMVER="0.0.0-${{ env.GIT_VER }}"
@@ -155,7 +155,7 @@ jobs:
     - name: Set build variables
       run: |
         $VER = $env:GITHUB_SHA.substring(0,7)
-        echo "GIT_VER=$VER" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        echo "GIT_VER=CI-$VER" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
     - name: Update version number
       run: make version SEMVER="0.0.0-${{ env.GIT_VER }}"

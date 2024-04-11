@@ -441,7 +441,7 @@ function notifyOutdatedVersion(releaseData) {
             dialog.showModal();
         }
 
-        if (CONFIGURATOR.version === "0.0.0") {
+        if (CONFIGURATOR.version.startsWith("0.0.0")) {
             const message = i18n.getMessage('configuratorDevelopmentNotice');
             configuratorVersionDialog(message, CONFIGURATOR.allReleasesUrl);
         }

@@ -32,7 +32,7 @@ jobs:
         PR=${PR%%/merge}
         PR=${PR##*/}
         echo "GIT_PR=${PR}" >> ${GITHUB_ENV}
-        echo "GIT_VER=${GITHUB_SHA:0:7}" >> ${GITHUB_ENV}
+        echo "GIT_VER=PR${PR}-${GITHUB_SHA:0:7}" >> ${GITHUB_ENV}
         cat ${GITHUB_ENV}
 
     - name: Update version number
@@ -50,7 +50,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: rotorflight-configurator-linux-PR${{ env.GIT_PR }}-${{ env.GIT_VER }}
+        name: rotorflight-configurator-linux-${{ env.GIT_VER }}
         path: rotorflight-configurator*
 
 
@@ -78,7 +78,7 @@ jobs:
         PR=${PR%%/merge}
         PR=${PR##*/}
         echo "GIT_PR=${PR}" >> ${GITHUB_ENV}
-        echo "GIT_VER=${GITHUB_SHA:0:7}" >> ${GITHUB_ENV}
+        echo "GIT_VER=PR${PR}-${GITHUB_SHA:0:7}" >> ${GITHUB_ENV}
         cat ${GITHUB_ENV}
 
     - name: Update version number
@@ -96,7 +96,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: rotorflight-configurator-macos-PR${{ env.GIT_PR }}-${{ env.GIT_VER }}
+        name: rotorflight-configurator-macos-${{ env.GIT_VER }}
         path: rotorflight-configurator*
 
 
@@ -125,7 +125,7 @@ jobs:
         $PR = $PR -replace '.*/',''
         echo "GIT_PR=$PR" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         $VER = $env:GITHUB_SHA.substring(0,7)
-        echo "GIT_VER=$VER" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        echo "GIT_VER=PR$PR-$VER" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
     - name: Update version number
       run: make version SEMVER="0.0.0-${{ env.GIT_VER }}"
@@ -142,7 +142,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: rotorflight-configurator-win64-PR${{ env.GIT_PR }}-${{ env.GIT_VER }}
+        name: rotorflight-configurator-win64-${{ env.GIT_VER }}
         path: rotorflight-configurator*
 
 
@@ -171,7 +171,7 @@ jobs:
         $PR = $PR -replace '.*/',''
         echo "GIT_PR=$PR" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         $VER = $env:GITHUB_SHA.substring(0,7)
-        echo "GIT_VER=$VER" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        echo "GIT_VER=PR$PR-$VER" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
     - name: Update version number
       run: make version SEMVER="0.0.0-${{ env.GIT_VER }}"
@@ -188,5 +188,5 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: rotorflight-configurator-win32-PR${{ env.GIT_PR }}-${{ env.GIT_VER }}
+        name: rotorflight-configurator-win32-${{ env.GIT_VER }}
         path: rotorflight-configurator*
