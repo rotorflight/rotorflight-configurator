@@ -397,17 +397,14 @@ GuiControl.prototype.content_ready = function (callback) {
 
     this.switchery();
 
+    // Build link to Rotorflight documentation
     if (CONFIGURATOR.connectionValid) {
-        // Find tab name
-        const wikiLoc = $('#content .tab_title').attr("i18n");
-        // Build link to Rotorflight documentation
-        const documentationButton = $('#content #button-documentation');
-        documentationButton.html("Website");
-        documentationButton.attr("target", "_rfwiki");
-        documentationButton.attr("rel", "noopener noreferrer");
-        if (documentationButton.attr("href") == '' || documentationButton.attr("href") == null) {
-            documentationButton.attr("href",buildWikiURL(wikiLoc));
-        }
+        const tabName = $('#content .tab_title').attr("i18n");
+        const helpButton = $('#content #button-documentation');
+        helpButton.text(i18n.getMessage("buttonHelp"))
+            .attr("target", "_rfhelp")
+            .attr("rel", "noopener noreferrer")
+            .attr("href", getTabHelpURL(tabName));
     }
 
     // loading tooltip

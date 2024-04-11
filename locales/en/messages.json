@@ -114,6 +114,9 @@
     "buttonRevert": {
         "message": "Revert"
     },
+    "buttonHelp": {
+        "message": "Help"
+    },
     "eepromSaved": {
         "message": "EEPROM <span class=\"message-positive\">saved</span>"
     },
