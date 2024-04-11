@@ -16,7 +16,7 @@
 
 .tab-cli .backdrop {
     border: 1px solid var(--subtleAccent);
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.8);
     margin-top: 0;
     flex-grow: 1;
     background-image: url("../../images/light-wide-1.svg");
@@ -46,17 +46,22 @@
 
 .tab-cli textarea[name='commands'] {
     -webkit-box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
     width: 100%;
-    margin-top: 8px;
-    height: 22px;
+    margin-top: 5px;
+    height: 100px;
     line-height: 20px;
     padding-left: 5px;
     border: 1px solid var(--subtleAccent);
+    border-radius: 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     resize: none;
 }
 
 .jBox-container textarea#preview {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.8);
     width: 100%;
     resize: none;
     overflow-y: scroll;

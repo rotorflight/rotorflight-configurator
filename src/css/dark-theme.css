@@ -305,14 +305,6 @@ span.value {
 
 /* CLI TAB */
 
-.tab-cli textarea[name='commands']::placeholder {
-    color: silver;
-}
-
-.tab-cli textarea[name='commands'] {
-    background: black;
-    color: white;
-}
 
 /* AutoComplete */
 .cli-textcomplete-dropdown {

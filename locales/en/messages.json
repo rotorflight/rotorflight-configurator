@@ -3064,7 +3064,7 @@
         "message": "<strong>Note:</strong> Leaving CLI tab or pressing Disconnect will <strong>automatically</strong> send \"<strong>exit</strong>\" to the board.  With the latest firmware this will make the controller <strong>restart</strong> and unsaved changes will be <strong>lost</strong>.<p><strong><span class=\"message-negative\">Warning:</span></strong> Some commands in CLI can result in arbitrary signals being sent on the motor output pins. This can cause motors to spin up if a battery is connected. Therefore it is highly recommended to make sure that <strong>no battery is connected before entering commands in CLI</strong>."
     },
     "cliInputPlaceholder": {
-        "message": "Write your command here. Press Tab for AutoComplete."
+        "message": "Write your command here."
     },
     "cliInputPlaceholderBuilding": {
         "message": "Please wait while building AutoComplete cache ..."
