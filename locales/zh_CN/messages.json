@@ -149,6 +149,11 @@
         "message": "恢复",
         "english": "Revert"
     },
+    "buttonHelp": {
+        "message": "Help",
+        "english": "Help",
+        "status": "New entry. Please translate!"
+    },
     "eepromSaved": {
         "message": "EEPROM <span class=\"message-positive\">已保存</span>",
         "english": "EEPROM <span class=\"message-positive\">saved</span>"
@@ -277,6 +282,11 @@
     "checkForConfiguratorUnstableVersions": {
         "message": "显示测试版本的配置程序更新提示",
         "english": "Show update notifications for unstable versions of the configurator"
+    },
+    "configuratorDevelopmentNotice": {
+        "message": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version.",
+        "english": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version.",
+        "status": "New entry. Please translate!"
     },
     "configuratorUpdateNotice": {
         "message": "您正在使用旧版本的 <b>Rotorflight配置程序</b>。<br>$t(configuratorUpdateHelp.message)",
@@ -800,46 +810,103 @@
         "message": "欢迎使用 <strong>Rotorflight - 配置程序</strong>，为简化固件升级，设置和调校飞控而生的工具。",
         "english": "Welcome to <strong>Rotorflight - Configurator</strong>, a utility designed to simplify updating, configuring and tuning of your flight controller."
     },
-    "defaultWelcomeHead": {
-        "message": "硬件",
-        "english": "Hardware"
+    "defaultDownloadsHead": {
+        "message": "Downloads",
+        "english": "Downloads",
+        "status": "New entry. Please translate!"
     },
-    "defaultWelcomeText": {
-        "message": "该应用程序支持所有可以运行 otorfliht 的飞控。在 “固件烧写” 页面查看所有支持的飞控列表。<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">下载 Rotorflight Blackbox 日志查看工具</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">下载 Rotorflight EdgeTx 遥控器调参脚本</a><br /><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">下载 Rotorflight FrSky Ethos 遥控器调参脚本</a><br /><br />源码下载可以从 <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a><br /><br />最新的 <b>STM USB VCP 驱动</b> 可以从<a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">这里下载</a><br /><br />最新的 <b>Zadig</b> Windows版驱动安装程序可以从 <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">这里下载</a>.<br />",
-        "english": "The application supports all hardware that can run Rotorflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight Blackbox Log Viewer</a><br /><br /> <a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts for EdgeTx</a><br /><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Rotorflight TX LUA Scripts for FrSky Ethos</a><br /><br />The source code can be downloaded from <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>Zadig</b> for Windows USB driver installer can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.<br />"
+    "defaultDownloadsText": {
+        "message": "The latest Rotorflight software downloads are available here:<br /><ul><li><a href=\"https://github.com/rotorflight/rotorflight-configurator/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Configurator</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Blackbox Log Viewer</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for EdgeTx & OpenTx</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for FrSky Ethos</a></li></ul>Rotorflight is <b>Open Source</b> software. The source code is available in <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>.",
+        "english": "The latest Rotorflight software downloads are available here:<br /><ul><li><a href=\"https://github.com/rotorflight/rotorflight-configurator/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Configurator</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Blackbox Log Viewer</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for EdgeTx & OpenTx</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for FrSky Ethos</a></li></ul>Rotorflight is <b>Open Source</b> software. The source code is available in <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>.",
+        "status": "New entry. Please translate!"
+    },
+    "defaultCommunityHead": {
+        "message": "Community",
+        "english": "Community",
+        "status": "New entry. Please translate!"
+    },
+    "defaultCommunityText": {
+        "message": "Rotorflight has an active online ommunity of normal users, pro-pilots, and developers.",
+        "english": "Rotorflight has an active online ommunity of normal users, pro-pilots, and developers.",
+        "status": "New entry. Please translate!"
+    },
+    "defaultWebsiteText": {
+        "message": "<a href=\"https://www.rotorflight.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight website</a> is the first stop for instructions, manuals, and information.",
+        "english": "<a href=\"https://www.rotorflight.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight website</a> is the first stop for instructions, manuals, and information.",
+        "status": "New entry. Please translate!"
+    },
+    "defaultDiscordText": {
+        "message": "<a href=\"https://discord.gg/FyfMF4RwSA/\" target=\"_blank\" rel=\"noopener noreferrer\">Discord</a> is the official place for online support and discussions.",
+        "english": "<a href=\"https://discord.gg/FyfMF4RwSA/\" target=\"_blank\" rel=\"noopener noreferrer\">Discord</a> is the official place for online support and discussions.",
+        "status": "New entry. Please translate!"
+    },
+    "defaultFacebookText": {
+        "message": "<a href=\"https://www.facebook.com/groups/876445460825093\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a> is a good place for hanging out with other RF pilots.",
+        "english": "<a href=\"https://www.facebook.com/groups/876445460825093\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a> is a good place for hanging out with other RF pilots.",
+        "status": "New entry. Please translate!"
     },
     "defaultContributingHead": {
         "message": "参与开发",
         "english": "Contributing"
     },
     "defaultContributingText": {
-        "message": "如果你想帮助 Rotorflight 变得更好，你可以：<br /><ul><li>用您的 Rotorflight 知识来为我们的<a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\"> Wiki </a> 创建或更新内容，或者是在论坛里回答其他用户的问题；</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">贡献代码</a> - 增加新功能，解决漏洞，改善代码；</li><li>测试<a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">新功能</a>并提供测试反馈；</li><li>帮助在<a href=\"https://github.com/rotorflight/rotorflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">问题跟踪器里上报告问题的用户解决问题，并参与功能请求的讨论；</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">翻译</a> - 为 Rotorflight 配置软件添加新语言的翻译</a>，或者帮助维护既有的翻译。</li></ul>",
-        "english": "If you would like to help make Rotorflight even better you can help in many ways, including:<br /><ul><li>using your knowledge of Rotorflight to create or update content on <a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">our Wiki</a>, or answering other users' questions in online forums;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the firmware and the configurator - new features, fixes, improvements;</li><li>testing <a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">new features and fixes</a> and providing feedback;</li><li>helping other users solve the problems they report in <a href=\"https://github.com/rotorflight/rotorflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">our issue tracker</a>, and participating in discussions on feature requests;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain the existing translations.</li></ul>"
+        "message": "Rotorflight is a open-source community project. Anybody can join in and help to make it better, including:<br /><ul><li>helping other users on Rotorflight Discord or other online forums</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">reporting</a> bugs and issues, and suggesting improvements</li><li>testing new software versions, new features and fixes; and providing feedback</li><li>participating in discussions on new features</li><li>create or update content on <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">our Website</a></li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the software development - fixing bugs, implementing new features and improvements</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain an existing translation</li></ul>",
+        "english": "Rotorflight is a open-source community project. Anybody can join in and help to make it better, including:<br /><ul><li>helping other users on Rotorflight Discord or other online forums</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">reporting</a> bugs and issues, and suggesting improvements</li><li>testing new software versions, new features and fixes; and providing feedback</li><li>participating in discussions on new features</li><li>create or update content on <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">our Website</a></li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the software development - fixing bugs, implementing new features and improvements</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain an existing translation</li></ul>",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "如果你想帮助 Rotorflight 变得更好，你可以：<br /><ul><li>用您的 Rotorflight 知识来为我们的<a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\"> Wiki </a> 创建或更新内容，或者是在论坛里回答其他用户的问题；</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">贡献代码</a> - 增加新功能，解决漏洞，改善代码；</li><li>测试<a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">新功能</a>并提供测试反馈；</li><li>帮助在<a href=\"https://github.com/rotorflight/rotorflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">问题跟踪器里上报告问题的用户解决问题，并参与功能请求的讨论；</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">翻译</a> - 为 Rotorflight 配置软件添加新语言的翻译</a>，或者帮助维护既有的翻译。</li></ul>",
+            "english": "If you would like to help make Rotorflight even better you can help in many ways, including:<br /><ul><li>using your knowledge of Rotorflight to create or update content on <a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">our Wiki</a>, or answering other users' questions in online forums;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the firmware and the configurator - new features, fixes, improvements;</li><li>testing <a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">new features and fixes</a> and providing feedback;</li><li>helping other users solve the problems they report in <a href=\"https://github.com/rotorflight/rotorflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">our issue tracker</a>, and participating in discussions on feature requests;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain the existing translations.</li></ul>"
+        }
+    },
+    "defaultDonateHead": {
+        "message": "Supporting Rotorflight",
+        "english": "Supporting Rotorflight",
+        "status": "New entry. Please translate!"
+    },
+    "defaultDonateText": {
+        "message": "<p>Rotorflight is <i>open source software</i> and is available <i>free of charge</i>, without warranty.</p><p>If you find Rotorflight useful, please consider <b>supporting</b> the development by donating to the Rotorflight Project.</p>",
+        "english": "<p>Rotorflight is <i>open source software</i> and is available <i>free of charge</i>, without warranty.</p><p>If you find Rotorflight useful, please consider <b>supporting</b> the development by donating to the Rotorflight Project.</p>",
+        "status": "New entry. Please translate!"
+    },
+    "defaultDonateTooltip": {
+        "message": "Donate to the Rotorflight Project",
+        "english": "Donate to the Rotorflight Project",
+        "status": "New entry. Please translate!"
     },
     "defaultChangelogHead": {
         "message": "配置程序-更新日志",
         "english": "Configurator - Changelog"
-    },
-    "patreonLink": {
-        "message": "<a href=\"https://www.patreon.com/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">Patreon</a>",
-        "english": "<a href=\"https://www.patreon.com/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">Patreon</a>",
-        "description": "Patreon is name, and should not require translation"
     },
     "defaultDocumentationHead": {
         "message": "文档 / 手册",
         "english": "Documentation / Manual"
     },
     "defaultDocumentation": {
-        "message": "Rotorflight 的文档和发布说明可以在 wiki 里面找到。<br /><br />",
-        "english": "Rotorflight documentation is available in release notes and wiki.<br /><br />"
+        "message": "Rotorflight documentation is available in release notes and website.<br /><br />",
+        "english": "Rotorflight documentation is available in release notes and website.<br /><br />",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Rotorflight 的文档和发布说明可以在 wiki 里面找到。<br /><br />",
+            "english": "Rotorflight documentation is available in release notes and wiki.<br /><br />"
+        }
     },
     "defaultDocumentation1": {
-        "message": "学习 Rotorflight 最好的资源是使用 Rotorflight wiki，而不是听信各种 “老师” 和质量堪忧的 “教学” 视频，<a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">这里</a> 。",
-        "english": "The Rotorflight wiki is a great resource for information, it can be found <a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        "message": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
+        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "学习 Rotorflight 最好的资源是使用 Rotorflight wiki，而不是听信各种 “老师” 和质量堪忧的 “教学” 视频，<a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">这里</a> 。",
+            "english": "The Rotorflight wiki is a great resource for information, it can be found <a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        }
     },
     "defaultDocumentation2": {
-        "message": "最新消息可以在 Wiki 新闻页面阅读，<a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">这里</a>.",
-        "english": "The latest news can be read at the Wiki News page, <a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        "message": "The latest news can be read at the Website Announcements page, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
+        "english": "The latest news can be read at the Website Announcements page, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "最新消息可以在 Wiki 新闻页面阅读，<a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">这里</a>.",
+            "english": "The latest news can be read at the Wiki News page, <a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        }
     },
     "defaultDocumentation3": {
         "message": "固件的发行说明可以在 GitHub 发布页面阅读，<a href=\"https://github.com/rotorflight/rotorflight-firmware/releases\" target=\"_blank\" rel=\"noopener noreferrer\">这里</a>.",
@@ -858,12 +925,18 @@
         "english": "Betaflight Information"
     },
     "defaultSupport": {
-        "message": "需要帮助时请先搜索论坛或者咨询飞控的生产商。<br /><br />",
-        "english": "For support please search the forums and wiki first or contact your vendor.<br /><br />"
+        "message": "For support please search the forums and website first or contact your vendor.<br /><br />",
+        "english": "For support please search the forums and website first or contact your vendor.<br /><br />",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "需要帮助时请先搜索论坛或者咨询飞控的生产商。<br /><br />",
+            "english": "For support please search the forums and wiki first or contact your vendor.<br /><br />"
+        }
     },
     "defaultSupport1": {
-        "message": "<a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Wiki</a>",
-        "english": "<a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Wiki</a>"
+        "message": "<a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Website</a>",
+        "english": "<a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Website</a>",
+        "status": "Modified entry. Please translate!"
     },
     "defaultSupport2": {
         "message": "<a href=\"http://www.rcgroups.com/forums/showthread.php?t=4000345\" target=\"_blank\" rel=\"noopener noreferrer\">RC Groups Rotorflight thread</a>",
@@ -938,8 +1011,13 @@
         "english": "Arming Allowed"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "阻止解锁的原因列表。将鼠标停留在标志上以获得信息，或参考Wiki中的(解锁顺序与安全) 章节。",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Wiki ('Arming Sequence & Safety' page) for more info."
+        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "阻止解锁的原因列表。将鼠标停留在标志上以获得信息，或参考Wiki中的(解锁顺序与安全) 章节。",
+            "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Wiki ('Arming Sequence & Safety' page) for more info."
+        }
     },
     "statusArmingDisableFlagsTooltipNO_GYRO": {
         "message": "未检测到陀螺仪",
@@ -1047,9 +1125,15 @@
         "description": "Message that pops up to describe the RESC arming disable flag"
     },
     "statusArmingDisableFlagsTooltipRPMFILTER": {
-        "message": "基于转速的滤波器已开启，但一个或多个电调未发送有效的 DSHOT 回传数据。请确认电调支持 DSHOT 回传功能并且已刷入支持双向 DSHOT 回传的固件。",
-        "english": "RPM-based filtering is enabled but one or more ESC's are not supplying valid DSHOT telemetry. Check that the ESC's are capable of and have the required firmware installed to support bidirectional DSHOT telemetry.",
-        "description": "Message that pops up to describe the RPMFILTER arming disable flag"
+        "message": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailble",
+        "english": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailble",
+        "status": "Modified entry. Please translate!",
+        "description": "Message that pops up to describe the RPMFILTER arming disable flag",
+        "previous": {
+            "message": "基于转速的滤波器已开启，但一个或多个电调未发送有效的 DSHOT 回传数据。请确认电调支持 DSHOT 回传功能并且已刷入支持双向 DSHOT 回传的固件。",
+            "english": "RPM-based filtering is enabled but one or more ESC's are not supplying valid DSHOT telemetry. Check that the ESC's are capable of and have the required firmware installed to support bidirectional DSHOT telemetry.",
+            "description": "Message that pops up to describe the RPMFILTER arming disable flag"
+        }
     },
     "statusArmingDisableFlagsTooltipREBOOT_REQ": {
         "message": "配置更改需要重启",
@@ -1067,14 +1151,26 @@
         "description": "Message that pops up to describe the ACC_CALIB arming disable flag"
     },
     "statusArmingDisableFlagsTooltipMOTOR_PROTO": {
-        "message": "尚未选择电机输出协议",
-        "english": "There is no motor output protocol selected",
-        "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
+        "message": "There is no motor throttle protocol selected",
+        "english": "There is no motor throttle protocol selected",
+        "status": "Modified entry. Please translate!",
+        "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag",
+        "previous": {
+            "message": "尚未选择电机输出协议",
+            "english": "There is no motor output protocol selected",
+            "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
+        }
     },
     "statusArmingDisableFlagsTooltipARM_SWITCH": {
-        "message": "解锁时有一个阻止解锁的标志处于活跃状态",
-        "english": "One of the others disarm flags is active when arming",
-        "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
+        "message": "Arm switch is activated while other arming disable conditions are active",
+        "english": "Arm switch is activated while other arming disable conditions are active",
+        "status": "Modified entry. Please translate!",
+        "description": "Message that pops up to describe the ARM_SWITCH arming disable flag",
+        "previous": {
+            "message": "解锁时有一个阻止解锁的标志处于活跃状态",
+            "english": "One of the others disarm flags is active when arming",
+            "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
+        }
     },
     "statusArmingHead": {
         "message": "解锁",
@@ -1908,44 +2004,73 @@
         "english": "Proportional"
     },
     "profilesProportionalHelp": {
-        "message": "控制直升机紧跟摇杆的力度（设定点）。 <br /><br />较高的值（增益）可提供更紧密的跟踪，但如果与微分（D 项）的比例过高，则可能导致过冲。  将 P 项想象成汽车上的弹簧。",
-        "english": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint).<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the Derivative (D-term).  Think of the P-term as the spring on a car.",
-        "description": "Proportional Term helpicon message on PID table titlebar"
+        "message": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint) and corrects for external influences.<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the derivative (D-gain). Think of the P-term as the spring on a car.",
+        "english": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint) and corrects for external influences.<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the derivative (D-gain). Think of the P-term as the spring on a car.",
+        "status": "Modified entry. Please translate!",
+        "description": "Proportional Term helpicon message on PID table titlebar",
+        "previous": {
+            "message": "控制直升机紧跟摇杆的力度（设定点）。 <br /><br />较高的值（增益）可提供更紧密的跟踪，但如果与微分（D 项）的比例过高，则可能导致过冲。  将 P 项想象成汽车上的弹簧。",
+            "english": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint).<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the Derivative (D-term).  Think of the P-term as the spring on a car.",
+            "description": "Proportional Term helpicon message on PID table titlebar"
+        }
     },
     "profilesIntegral": {
         "message": "I（积分）",
         "english": "Integral"
     },
     "profilesIntegralHelp": {
-        "message": "控制直升机保持设定点整体位置的力度。<br>与 P项类似，但适用于较长的飞行偏差，如重心偏移（CoG）或持续的外部影响（稳定的风）。<br /><br />增益越大，跟踪越紧密（例如：在急转弯时），但会使直升机在指令摇杆输入时感觉僵硬。<br>如果与 D 项的比例极高，则会导致缓慢振荡。",
-        "english": "Controls the strength of how tightly the machine holds the overall position of the Setpoint.<br>Similar to Proportional, but for longer biases on the craft such as an offset center of gravity (CoG) or persistent outside influence (steady wind).<br /><br />Higher gains provide tighter tracking (e.g.: in sweeping turns), but can make the craft feel stiff for commanded stick inputs.<br>If extremely high in proportion to the D-term, can cause slow oscillations.",
-        "description": "Integral Term helpicon message on PID table titlebar"
+        "message": "Controls the strength of how tightly the machine holds the overall rotation rate setpoint.<br>Similar to Proportional, but for longer biases on the craft from the rotation rate setpoint, as well as persistent outside influence, for example steady wind or CG offsets.<br /><br />Higher gains provide tighter tracking of the setpoint (i.e. in constant flips and rolls), but can lead to the craft now being able to follow the setpoint on extremely quick inputs, which can lead to it continuing to rotate after the stick is released. <br>If extremely high in proportion to the D-term, can cause oscillations.",
+        "english": "Controls the strength of how tightly the machine holds the overall rotation rate setpoint.<br>Similar to Proportional, but for longer biases on the craft from the rotation rate setpoint, as well as persistent outside influence, for example steady wind or CG offsets.<br /><br />Higher gains provide tighter tracking of the setpoint (i.e. in constant flips and rolls), but can lead to the craft now being able to follow the setpoint on extremely quick inputs, which can lead to it continuing to rotate after the stick is released. <br>If extremely high in proportion to the D-term, can cause oscillations.",
+        "status": "Modified entry. Please translate!",
+        "description": "Integral Term helpicon message on PID table titlebar",
+        "previous": {
+            "message": "控制直升机保持设定点整体位置的力度。<br>与 P项类似，但适用于较长的飞行偏差，如重心偏移（CoG）或持续的外部影响（稳定的风）。<br /><br />增益越大，跟踪越紧密（例如：在急转弯时），但会使直升机在指令摇杆输入时感觉僵硬。<br>如果与 D 项的比例极高，则会导致缓慢振荡。",
+            "english": "Controls the strength of how tightly the machine holds the overall position of the Setpoint.<br>Similar to Proportional, but for longer biases on the craft such as an offset center of gravity (CoG) or persistent outside influence (steady wind).<br /><br />Higher gains provide tighter tracking (e.g.: in sweeping turns), but can make the craft feel stiff for commanded stick inputs.<br>If extremely high in proportion to the D-term, can cause slow oscillations.",
+            "description": "Integral Term helpicon message on PID table titlebar"
+        }
     },
     "profilesDerivative": {
         "message": "D（微分）",
         "english": "Derivative"
     },
     "profilesDerivativeHelp": {
-        "message": "控制直升机上任何运动的阻尼强度。对于摇杆移动，D 项会抑制指令。对于外部影响（螺旋桨冲刷或阵风），D 项会抑制影响。<br /><br />增益越高，阻尼越大，P 项和 FF 的过冲越小。<br>不过，D项对陀螺仪的高频振动非常敏感（噪声放大 10 倍到 100 倍）。<br /><br />把 D 项想象成汽车上的减震器，但它有放大高频陀螺噪音的负面固有特性。",
-        "english": "Controls the strength of dampening to ANY motion on the craft.  For stick moves, the D-term dampens the command. For an outside influence (prop-wash OR wind gust) the D-term dampens the influence.<br /><br />Higher gains provide more dampening and reduce overshoot by P-term and FF.<br>However, the D-term is VERY sensitive to gyro high frequency vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise can cause motor heat and burn out motors if D-gains are too high or the gyro noise is not filtered well (see Filters tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the negative inherent property of magnifying high frequency gyro noise.",
-        "description": "Derivative Term helpicon message on PID table titlebar"
+        "message": "Controls the strength of damping ANY angular acceleration of the craft, whether from stick inputs or external influences. For stick inputs, the D-term damps the movement to prevent overshooting. For an outside influence (vorticity or wind gust) the D-term damps the disturbance.<br /><br />Higher gains provide more damping and reduce possible overshoot from high P-terms.<br>However, the D-term is VERY sensitive to high frequency gyro vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise in the control loop can cause excessive servo heat and burn out servos if the gyro noise is not filtered properly (see Gyro tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the inherent negative property of magnifying high frequency gyro noise.",
+        "english": "Controls the strength of damping ANY angular acceleration of the craft, whether from stick inputs or external influences. For stick inputs, the D-term damps the movement to prevent overshooting. For an outside influence (vorticity or wind gust) the D-term damps the disturbance.<br /><br />Higher gains provide more damping and reduce possible overshoot from high P-terms.<br>However, the D-term is VERY sensitive to high frequency gyro vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise in the control loop can cause excessive servo heat and burn out servos if the gyro noise is not filtered properly (see Gyro tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the inherent negative property of magnifying high frequency gyro noise.",
+        "status": "Modified entry. Please translate!",
+        "description": "Derivative Term helpicon message on PID table titlebar",
+        "previous": {
+            "message": "控制直升机上任何运动的阻尼强度。对于摇杆移动，D 项会抑制指令。对于外部影响（螺旋桨冲刷或阵风），D 项会抑制影响。<br /><br />增益越高，阻尼越大，P 项和 FF 的过冲越小。<br>不过，D项对陀螺仪的高频振动非常敏感（噪声放大 10 倍到 100 倍）。<br /><br />把 D 项想象成汽车上的减震器，但它有放大高频陀螺噪音的负面固有特性。",
+            "english": "Controls the strength of dampening to ANY motion on the craft.  For stick moves, the D-term dampens the command. For an outside influence (prop-wash OR wind gust) the D-term dampens the influence.<br /><br />Higher gains provide more dampening and reduce overshoot by P-term and FF.<br>However, the D-term is VERY sensitive to gyro high frequency vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise can cause motor heat and burn out motors if D-gains are too high or the gyro noise is not filtered well (see Filters tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the negative inherent property of magnifying high frequency gyro noise.",
+            "description": "Derivative Term helpicon message on PID table titlebar"
+        }
     },
     "profilesFeedforward": {
         "message": "FF（前馈）",
         "english": "Feedforward"
     },
     "profilesFeedforwardHelp": {
-        "message": "是基于摇杆输入的附加推动项（弹簧）。FF 可帮助 P 项推动直升机进行指令摇杆移动。<br /><br />P 项根据指令设定点（度/秒）和陀螺仪读数（度/秒）之间的差值进行推动。FF 仅根据摇杆的指令变化进行推动。<br /><br />数值（增益）越高，对摇杆输入的响应越灵敏。过高的值可能会导致过冲、电机发热增加和电机过载（电机无法跟上所需的变化率）。<br>数值越小或为零（0），对摇杆输入的响应越慢、越平滑。",
-        "english": "Is an additional pushing term (spring) based on stick input. FF helps the P-term push the craft for commanded stick moves.<br /><br />The P-term pushes based on the difference between the commanded Setpoint (deg/sec) and the gyro reading of current rotational rate (deg/sec). FF pushes based on the commanded change of the sticks alone.<br /><br />Higher values (gains) will result in a more sharp machine response to stick input.<br>Too high of values may result in some overshoot, increased motor heat, and motor saturation (where motors can not keep up with the desired rate of change).<br>Lower or zero (0) values will result in a slower and smoother response to stick inputs.",
-        "description": "Feedforward Term helpicon message on PID table titlebar"
+        "message": "This is an additional pushing term based on stick input. FF helps the P-term push the craft for commanded stick moves, does not react to any helicopter movements though.<br /><br />The FF-term pushes based on the difference between the commanded Setpoint (deg/sec). <br /><br />Higher values (gains) will result in a sharper response to stick input.<br>Too high of values may result in overshoot, as well as strikeback at the end of control inputs.<br>Too low or zero (0) values will result in a slow and delayed response to stick inputs, as well as continued rotation after the stick is released.",
+        "english": "This is an additional pushing term based on stick input. FF helps the P-term push the craft for commanded stick moves, does not react to any helicopter movements though.<br /><br />The FF-term pushes based on the difference between the commanded Setpoint (deg/sec). <br /><br />Higher values (gains) will result in a sharper response to stick input.<br>Too high of values may result in overshoot, as well as strikeback at the end of control inputs.<br>Too low or zero (0) values will result in a slow and delayed response to stick inputs, as well as continued rotation after the stick is released.",
+        "status": "Modified entry. Please translate!",
+        "description": "Feedforward Term helpicon message on PID table titlebar",
+        "previous": {
+            "message": "是基于摇杆输入的附加推动项（弹簧）。FF 可帮助 P 项推动直升机进行指令摇杆移动。<br /><br />P 项根据指令设定点（度/秒）和陀螺仪读数（度/秒）之间的差值进行推动。FF 仅根据摇杆的指令变化进行推动。<br /><br />数值（增益）越高，对摇杆输入的响应越灵敏。过高的值可能会导致过冲、电机发热增加和电机过载（电机无法跟上所需的变化率）。<br>数值越小或为零（0），对摇杆输入的响应越慢、越平滑。",
+            "english": "Is an additional pushing term (spring) based on stick input. FF helps the P-term push the craft for commanded stick moves.<br /><br />The P-term pushes based on the difference between the commanded Setpoint (deg/sec) and the gyro reading of current rotational rate (deg/sec). FF pushes based on the commanded change of the sticks alone.<br /><br />Higher values (gains) will result in a more sharp machine response to stick input.<br>Too high of values may result in some overshoot, increased motor heat, and motor saturation (where motors can not keep up with the desired rate of change).<br>Lower or zero (0) values will result in a slower and smoother response to stick inputs.",
+            "description": "Feedforward Term helpicon message on PID table titlebar"
+        }
     },
     "profilesBoost": {
         "message": "B（增压）",
         "english": "Boost"
     },
     "profilesBoostHelp": {
-        "message": "是对前馈的额外提升。这将使直升机对快速打杆做出更快的反应。",
-        "english": "Is an additional boost on the feedforward. This makes the heli react faster to quick stick movements."
+        "message": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without he drawbacks of high Proportional or Feedforward gains.",
+        "english": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without he drawbacks of high Proportional or Feedforward gains.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "是对前馈的额外提升。这将使直升机对快速打杆做出更快的反应。",
+            "english": "Is an additional boost on the feedforward. This makes the heli react faster to quick stick movements."
+        }
     },
     "profilesCopyProfile": {
         "message": "复制配置文件",
@@ -2146,6 +2271,11 @@
     "receiverTelemetrySensor_ADJUSTMENT": {
         "message": "调整功能",
         "english": "Adjustment Function"
+    },
+    "receiverTelemetrySensor_GOV_MODE": {
+        "message": "Governor Mode",
+        "english": "Governor Mode",
+        "status": "New entry. Please translate!"
     },
     "receiverBars": {
         "message": "接收机通道",
@@ -2468,8 +2598,13 @@
         "english": "Yaw Collective Impulse FF Decay"
     },
     "adjustmentsFunctionPitchCollectiveFF": {
-        "message": "升降集体螺距预补偿",
-        "english": "Pitch Collective Precomnp"
+        "message": "Pitch Collective Precomp",
+        "english": "Pitch Collective Precomp",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "升降集体螺距预补偿",
+            "english": "Pitch Collective Precomnp"
+        }
     },
     "adjustmentsFunctionPitchGyroCutoff": {
         "message": "升降陀螺仪截止",
@@ -3016,8 +3151,13 @@
         "english": "Center trim for tail rotor [&deg;]"
     },
     "mixerTailRotorCenterTrimHelp": {
-        "message": "微调0度航向指令时的尾旋翼螺距。",
-        "english": "Set tail rotor trim for zero yaw command."
+        "message": "Set tail rotor trim to achieve zero blade pitch with 0° yaw mixer override.",
+        "english": "Set tail rotor trim to achieve zero blade pitch with 0° yaw mixer override.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "微调0度航向指令时的尾旋翼螺距。",
+            "english": "Set tail rotor trim for zero yaw command."
+        }
     },
     "mixerTailMotorCenterTrim": {
         "message": "尾电机中心点微调 [%]",
@@ -3892,8 +4032,13 @@
         "english": "<strong>Note:</strong> Leaving CLI tab or pressing Disconnect will <strong>automatically</strong> send \"<strong>exit</strong>\" to the board.  With the latest firmware this will make the controller <strong>restart</strong> and unsaved changes will be <strong>lost</strong>.<p><strong><span class=\"message-negative\">Warning:</span></strong> Some commands in CLI can result in arbitrary signals being sent on the motor output pins. This can cause motors to spin up if a battery is connected. Therefore it is highly recommended to make sure that <strong>no battery is connected before entering commands in CLI</strong>."
     },
     "cliInputPlaceholder": {
-        "message": "在这里输入你的命令。按 Tab 可以进行自动填充。",
-        "english": "Write your command here. Press Tab for AutoComplete."
+        "message": "Write your command here.",
+        "english": "Write your command here.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "在这里输入你的命令。按 Tab 可以进行自动填充。",
+            "english": "Write your command here. Press Tab for AutoComplete."
+        }
     },
     "cliInputPlaceholderBuilding": {
         "message": "正在构建“自动填充”缓存，请稍候…",
@@ -4473,8 +4618,13 @@
         "english": "Detected: <strong>$1</strong> - triggering flash on connect"
     },
     "unstableFirmwareAcknoledgementDialog": {
-        "message": "您将要刷入一个<strong>开发版本固件</strong>。这些固件仍在开发中，并且可能会造成下列问题：<strong><ul><li>固件完全不工作；</li><li>固件无法飞行；</li><li>固件存在安全性问题</li><li>固件可能会造成飞控变砖，甚至损坏；</li></ul></strong>如果您继续刷入此固件，<strong>您将对上述所有风险承担全部责任</strong>。此外，您需要明白，您必须在尝试解锁起飞之前<strong>卸下螺旋桨并进行必要的测试</strong>。",
-        "english": "You are about to flash a <strong>development build of the firmware</strong>. These builds are a work in progress, and any of the following can be the case:<strong><ul><li>the firmware does not work at all;</li><li>the firmware is not flyable;</li><li>there are safety issues with the firmware, for example flyaways</li><li>the firmware can cause the flight controller to become unresponsive, or damaged</li></ul></strong>If you proceed with flashing this firmware, <strong>you are assuming full responsibility for the risk of any of the above happening</strong>. Furthermore you acknowledge that it is necessary to perform <strong>thorough bench tests with props off</strong> before any attempts to fly this firmware."
+        "message": "You are about to flash a <strong>development build of the firmware</strong>. These builds are a work-in-progress, and any of the following can be the case:<strong><ul><li>the firmware does not work at all;</li><li>the firmware is not flyable;</li><li>there are safety issues with the firmware, for example flyaways</li><li>the firmware can cause the flight controller to become unresponsive, or damaged</li></ul></strong>If you proceed with flashing this firmware, <strong>you are assuming full responsibility for the risk of any of the above happening</strong>. Furthermore you acknowledge that it is necessary to perform <strong>thorough bench tests with rotor blades removed</strong> before any attempts to fly this firmware.",
+        "english": "You are about to flash a <strong>development build of the firmware</strong>. These builds are a work-in-progress, and any of the following can be the case:<strong><ul><li>the firmware does not work at all;</li><li>the firmware is not flyable;</li><li>there are safety issues with the firmware, for example flyaways</li><li>the firmware can cause the flight controller to become unresponsive, or damaged</li></ul></strong>If you proceed with flashing this firmware, <strong>you are assuming full responsibility for the risk of any of the above happening</strong>. Furthermore you acknowledge that it is necessary to perform <strong>thorough bench tests with rotor blades removed</strong> before any attempts to fly this firmware.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "您将要刷入一个<strong>开发版本固件</strong>。这些固件仍在开发中，并且可能会造成下列问题：<strong><ul><li>固件完全不工作；</li><li>固件无法飞行；</li><li>固件存在安全性问题</li><li>固件可能会造成飞控变砖，甚至损坏；</li></ul></strong>如果您继续刷入此固件，<strong>您将对上述所有风险承担全部责任</strong>。此外，您需要明白，您必须在尝试解锁起飞之前<strong>卸下螺旋桨并进行必要的测试</strong>。",
+            "english": "You are about to flash a <strong>development build of the firmware</strong>. These builds are a work in progress, and any of the following can be the case:<strong><ul><li>the firmware does not work at all;</li><li>the firmware is not flyable;</li><li>there are safety issues with the firmware, for example flyaways</li><li>the firmware can cause the flight controller to become unresponsive, or damaged</li></ul></strong>If you proceed with flashing this firmware, <strong>you are assuming full responsibility for the risk of any of the above happening</strong>. Furthermore you acknowledge that it is necessary to perform <strong>thorough bench tests with props off</strong> before any attempts to fly this firmware."
+        }
     },
     "unstableFirmwareAcknoledgementAcknowledge": {
         "message": "我已阅读上述声明并且<strong>我自愿承担刷入不稳定版本固件的一切后果<strong>",
@@ -5023,28 +5173,58 @@
         "english": "Error Limit for Yaw Axis [&deg;]"
     },
     "profilesOffsetLimitHelp": {
-        "message": "PID 循环中偏移角的硬限制。绝对偏移量以及 O 项(高速优化)永远不会超过这些限制。",
-        "english": "Hard limit for the offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits."
+        "message": "Hard limit for the High Speed Integral offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits.",
+        "english": "Hard limit for the High Speed Integral offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "PID 循环中偏移角的硬限制。绝对偏移量以及 O 项(高速优化)永远不会超过这些限制。",
+            "english": "Hard limit for the offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits."
+        }
     },
     "profilesOffsetLimitRoll": {
-        "message": "副翼高速优化限制 [&deg;]",
-        "english": "Offset Limit for Roll Axis [&deg;]"
+        "message": "HSI Offset Limit for Roll Axis [&deg;]",
+        "english": "HSI Offset Limit for Roll Axis [&deg;]",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "副翼高速优化限制 [&deg;]",
+            "english": "Offset Limit for Roll Axis [&deg;]"
+        }
     },
     "profilesOffsetLimitPitch": {
-        "message": "升降高速优化限制 [&deg;]",
-        "english": "Offset Limit for Pitch Axis [&deg;]"
+        "message": "HSI Offset Limit for Pitch Axis [&deg;]",
+        "english": "HSI Offset Limit for Pitch Axis [&deg;]",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "升降高速优化限制 [&deg;]",
+            "english": "Offset Limit for Pitch Axis [&deg;]"
+        }
     },
     "profilesOffsetGainHelp": {
-        "message": "PID循环中的 O 项增益 (作用于高速飞行中的 I 项)。",
-        "english": "Gain for Offset term (Integral for high speed flight)."
+        "message": "Gain for the High Speed Integral Offset term (Integral for high speed flight), which is only active at large collective angles. This term of the control loop provides angular stability and safe control following at high speeds, as well as attitude stability on large changes of the collective pitch angle of the rotor disk, which would lead to rapid diving and unwanted attitude changes without HSI. Too low values cause the model to become unstable at high speeds, as well as slow reaction and large attitude changes on collective pitch changes. Too large values can cause oscillation and restlessness at large collective pitch angles. For testing of the lower bounds of the parameter, fly in a straight line <strong> AT SAFE ALTITUDE</strong>, only briefly pull the collective into the negative range and observe the model's reaction. Should the model dive, increase the HSI Offset Gain. For testing the upper bounds of the parameter, give short jabs of elevator and aileron in a high collective vertical climb and observe the model's behavior. If the model swings, wobbles or exerts restlessness after releasing the stick, decrease the HSI Offset Gain.",
+        "english": "Gain for the High Speed Integral Offset term (Integral for high speed flight), which is only active at large collective angles. This term of the control loop provides angular stability and safe control following at high speeds, as well as attitude stability on large changes of the collective pitch angle of the rotor disk, which would lead to rapid diving and unwanted attitude changes without HSI. Too low values cause the model to become unstable at high speeds, as well as slow reaction and large attitude changes on collective pitch changes. Too large values can cause oscillation and restlessness at large collective pitch angles. For testing of the lower bounds of the parameter, fly in a straight line <strong> AT SAFE ALTITUDE</strong>, only briefly pull the collective into the negative range and observe the model's reaction. Should the model dive, increase the HSI Offset Gain. For testing the upper bounds of the parameter, give short jabs of elevator and aileron in a high collective vertical climb and observe the model's behavior. If the model swings, wobbles or exerts restlessness after releasing the stick, decrease the HSI Offset Gain.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "PID循环中的 O 项增益 (作用于高速飞行中的 I 项)。",
+            "english": "Gain for Offset term (Integral for high speed flight)."
+        }
     },
     "profilesOffsetGainRoll": {
-        "message": "副翼高速优化增益",
-        "english": "Offset Gain for Roll Axis"
+        "message": "HSI Offset Gain for Roll Axis",
+        "english": "HSI Offset Gain for Roll Axis",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "副翼高速优化增益",
+            "english": "Offset Gain for Roll Axis"
+        }
     },
     "profilesOffsetGainPitch": {
-        "message": "升降高速优化增益",
-        "english": "Offset Gain for Pitch Axis"
+        "message": "HSI Offset Gain for Pitch Axis",
+        "english": "HSI Offset Gain for Pitch Axis",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "升降高速优化增益",
+            "english": "Offset Gain for Pitch Axis"
+        }
     },
     "profilesErrorDecayGround": {
         "message": "地面误差衰减",
@@ -5059,12 +5239,22 @@
         "english": "Decay Time [s]"
     },
     "profilesErrorRotation": {
-        "message": "自旋补偿",
-        "english": "Error Rotation"
+        "message": "Piro Compensation",
+        "english": "Piro Compensation",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "自旋补偿",
+            "english": "Error Rotation"
+        }
     },
     "profilesErrorRotationHelp": {
-        "message": "当直升机机身旋转时，围绕航向轴旋转当前的副翼和升降误差项。这有时称为Piro补偿。",
-        "english": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This is sometimes called Piro Compensation."
+        "message": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This improves piro control and helps the model to travel in a straight line while pirouetting.",
+        "english": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This improves piro control and helps the model to travel in a straight line while pirouetting.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "当直升机机身旋转时，围绕航向轴旋转当前的副翼和升降误差项。这有时称为Piro补偿。",
+            "english": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This is sometimes called Piro Compensation."
+        }
     },
     "profilesItermRelax": {
         "message": "I-Term 释放",
@@ -6175,8 +6365,13 @@
         "english": "To calibrate, use a multimeter to measure the actual voltage / current draw on your craft (with a battery plugged in), and enter the values below. Then, with the same battery still plugged in, click [Calibrate]."
     },
     "powerCalibrationManagerNote": {
-        "message": "<strong>注意：</strong> 在校准缩放之前，请确保电压和电流漂移的除数和乘数设置正确。<br>将值设置为0将不会应用校准。</br><strong>在插上电池前记得卸下螺旋桨！</strong>",
-        "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>"
+        "message": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove rotor blades before plugging in a battery!</strong>",
+        "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove rotor blades before plugging in a battery!</strong>",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<strong>注意：</strong> 在校准缩放之前，请确保电压和电流漂移的除数和乘数设置正确。<br>将值设置为0将不会应用校准。</br><strong>在插上电池前记得卸下螺旋桨！</strong>",
+            "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>"
+        }
     },
     "powerCalibrationManagerWarning": {
         "message": "<span class=\"message-negative\">警告：</span>电池<span class=\"message-negative\">未接入</span>或电压计源和电流计源<span class=\"message-negative\">没有正确设置。</span>请确保电压计和/或电流计读数超过0. 否则您将无法使用此工具进行校准。",
