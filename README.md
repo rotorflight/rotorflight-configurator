@@ -1,38 +1,79 @@
 # Rotorflight Configurator
 
-**Rotorflight** is a _Flight Control_/_FBL_ Software Suite for traditional single-rotor RC helicopters. It is based on Betaflight 4.2, enjoying all the great features of the Betaflight platform, plus many new features added for helicopters. Rotorflight borrows ideas and code also from Heliflight3D, an earlier fork of Betaflight for helicopters.
+[Rotorflight](https://github.com/rotorflight) is a Flight Control software suite designed for
+single-rotor helicopters. It consists of:
 
-**Rotorflight Configurator** is a cross-platform configuration tool for the Rotorflight flight control system. It is available for Windows, Mac OS, and Linux.
+- Rotorflight Flight Controller Firmware
+- Rotorflight Configurator, for flashing and configuring the flight controller (this repository)
+- Rotorflight Blackbox Explorer, for analyzing blackbox flight logs
+- Rotorflight LUA Scripts, for configuring the flight controller using a transmitter
 
-Rotorflight does **NOT** support multi-rotor 'drones', nor airplanes; it is only for traditinal RC helicopters, including co-axial and tandem helicopters.
+Built on Betaflight 4.3, Rotorflight incorporates numerous advanced features specifically
+tailored for helicopters. It's important to note that Rotorflight does _not_ support multi-rotor
+crafts or airplanes; it's exclusively designed for RC helicopters.
 
-
-## Installation
-
-Please download the latest version from github:
-
- - https://github.com/rotorflight/rotorflight-configurator/releases
-
-Then follow the instructions on the [Website](https://www.rotorflight.org/docs/Tutorial-Setup/Flashing-the-firmware).
+This version of Rotorflight is also known as **Rotorflight 2** or **RF2**.
 
 
 ## Information
 
-For more information and a setup doccumentation, please see our website:
+Tutorials, documentation, and flight videos can be found on the [Rotorflight website](https://www.rotorflight.org/).
 
- - [Main page](https://www.rotorflight.org/)
- - [Rotorflight Tutorial](https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction)
+
+## Installation
+
+Please download the latest version from [github](https://github.com/rotorflight/rotorflight-configurator/releases/).
+
+
+## Features
+
+Rotorflight has many features:
+
+* Many receiver protocols: CRSF, S.BUS, F.Port, DSM, IBUS, XBUS, EXBUS, GHOST, CPPM
+* Support for various telemetry protocols: CSRF, S.Port, HoTT, etc.
+* ESC telemetry protocols: BLHeli32, Hobbywing, Scorpion, Kontronik, OMP Hobby, ZTW, APD, YGE
+* Advanced PID control tuned for helicopters
+* Stabilisation modes (6D)
+* Rotor speed governor
+* Motorised tail support with Tail Torque Assist (TTA, also known as TALY)
+* Remote configuration and tuning with the transmitter
+  - With knobs / switches assigned to functions
+  - With LUA scripts on EdgeTX, OpenTX and Ethos
+* Extra servo/motor outputs for AUX functions
+* Fully customisable servo/motor mixer
+* Sensors for battery voltage, current, BEC, etc.
+* Advanced gyro filtering
+  - Dynamic RPM based notch filters
+  - Dynamic notch filters based on FFT
+  - Dynamic LPF
+* High-speed Blackbox logging
+
+Plus lots of features inherited from Betaflight:
+
+* Configuration profiles for changing various tuning parameters
+* Rates profiles for changing the stick feel and agility
+* Multiple ESC protocols: PWM, DSHOT, Multishot, etc.
+* Configurable buzzer sounds
+* Multi-color RGB LEDs
+* GPS support
+
+And many more...
 
 
 ## Notes
 
-#### MacOS X users
+#### Windows
 
-Changes to the security model used in the latest versions of MacOS X 10.14 (Mojave) and 10.15 (Catalina) mean that the operating system will show an error message ('"Rotorflight Configurator.app" is damaged and can’t be opened. You should move it to the Trash.') when trying to install the application. To work around this, run the following command in a terminal after installing: `sudo xattr -rd com.apple.quarantine /Applications/Rotorflight\ Configurator.app`.
+Rotorflight Configurator requires Windows 10 or later. Windows 7 is not supported.
 
-#### Linux users
+Windows has sometimes issues with detecting the flight controller USB device correctly.
+Impulse RC has created a _Driver Fixer_ software for fixing these issues. You can download it
+[here](https://impulserc.com/pages/downloads).
 
-In most Linux distributions your user won't have access to serial interfaces by default. To add this access right type the following command in a terminal, log out your user and log in again:
+#### Linux
+
+In most Linux distributions your user won't have access to serial interfaces by default.
+To add this access right type the following command in a terminal, then log out and log in again:
 
 ```
 sudo usermod -aG dialout ${USER}
@@ -45,50 +86,27 @@ If you experience graphics display problems or smudged/dithered fonts display is
 
 ## Contributing
 
-Contributions are welcome and encouraged. You can contribute in many ways:
+Rotorflight is an open-source community project. Anybody can join in and help to make it better by:
 
- - testing Rotorflight with different types of helicopters
- - improving the documentation in the Wiki
- - writing How-To guides
- - provide a new translation for the configurator
- - implement new features or fix bugs
- - reporting bugs
- - new ideas & suggestions
- - helping other users
-
-
-For reporting Rotorflight issues or bugs, please raise them here:
-
- - [Feature requests](https://github.com/rotorflight/rotorflight/issues)
- - [Configurator issue tracker](https://github.com/rotorflight/rotorflight-configurator/issues)
- - [Blackbox issue tracker](https://github.com/rotorflight/rotorflight-blackbox/issues)
- - [Firmware issue tracker](https://github.com/rotorflight/rotorflight-firmware/issues)
+* helping other users on Rotorflight Discord or other online forums
+* [reporting](https://github.com/rotorflight?tab=repositories) bugs and issues, and suggesting improvements
+* testing new software versions, new features and fixes; and providing feedback
+* participating in discussions on new features
+* create or update content on the [Website](https://www.rotorflight.org)
+* [contributing](https://www.rotorflight.org/docs/Contributing/intro) to the software development - fixing bugs, implementing new features and improvements
+* [translating](https://www.rotorflight.org/docs/Contributing/intro#translations) Rotorflight Configurator into a new language, or helping to maintain an existing translation
 
 
-## Credits
+## Origins
 
-Rotorflight is Free Software. Meaning, it is available free of charge _without warranty_, the source code is available, and it is supported by the users themselves as a community. Rotorflight is under the GPLv3 license.
+Rotorflight is software that is **open source** and is available free of charge without warranty.
 
-Rotorflight is forked from Betaflight, which in turn is forked from Cleanflight.
-Rotorflight borrows ideas and code also from Heliflight-3D, another Betaflight fork for helis.
+Rotorflight is forked from [Betaflight](https://github.com/betaflight), which in turn is forked from [Cleanflight](https://github.com/cleanflight).
+Rotorflight borrows ideas and code also from [HeliFlight3D](https://github.com/heliflight3d/), another Betaflight fork for helicopters.
 
-So thanks goes to all those whom have contributed along the way.
+Big thanks to everyone who has contributed along the journey!
 
-Origins for Rotorflight:
 
- - **Petri Mattila** (Dr.Rudder) - author and maintainer
- - **pkaig** - wiki, resource mapping, testing
- - **egon** - wiki, Dutch translation, Lua Scripts, testing
- - **mopatop** - wiki, testing
- - **Mike_PSL** - wiki, testing
- - **mattis** - German translation, testing
- - **Simon Stummer** (simonsummer) - testing
+## Contact
 
-Origin for Heliflight-3D and Betaflight:
-
- - **James-T1** - author
- - **Westie** - Rotorflight and Heliflight3D logo
- - **ctn** - primary author and maintainer of Baseflight Configurator
- - **Hydra** -  author and maintainer of Cleanflight Configurator
-
-And many others.
+Team Rotorflight can be contacted by email at rotorflightfc@gmail.com.

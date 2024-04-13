@@ -2,10 +2,11 @@
 
 ### Setup
 
-1. Install node.js (version 16 required)
-2. Install yarn: `npm install yarn -g`
-3. Change to project folder and run `yarn install`.
-4. Run `yarn start`.
+1. Change to the project folder
+2. Install Node.js: `nvm install`
+3. Install yarn: `npm install yarn -g`
+4. Install dependencies: `yarn install`
+5. Run `yarn start`
 
 
 ### App build and release
@@ -39,5 +40,4 @@ If no platform is provided, the build for the host platform is run.
 **Note:** Support for cross-platform building is very limited due to the requirement for platform specific build tools. If in doubt, build on the target platform.
 
 You can also use multiple platforms e.g. `yarn gulp <taskname> --osx64 --linux64`. Other platforms like `--win64`, `--linux32` and `--armv7` can be used too, but they are not officially supported, so use them at your own risk.
-
 
