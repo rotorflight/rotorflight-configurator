@@ -150,9 +150,8 @@
         "english": "Revert"
     },
     "buttonHelp": {
-        "message": "Help",
-        "english": "Help",
-        "status": "New entry. Please translate!"
+        "message": "Hilfe",
+        "english": "Help"
     },
     "eepromSaved": {
         "message": "EEPROM <span class=\"message-positive\">gespeichert</span>",
@@ -284,16 +283,15 @@
         "english": "Show update notifications for unstable versions of the configurator"
     },
     "configuratorDevelopmentNotice": {
-        "message": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version.",
-        "english": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version.",
-        "status": "New entry. Please translate!"
+        "message": "Du verwendest eine <b>Entwicklungsversion</b> des <b>Rotorflight-Konfigurator</b>.<br> Bitte verwende eine freigegebene Version, es sei denn, du hast einen guten Grund für die Verwendung einer nicht freigegebenen Entwicklerversion.",
+        "english": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version."
     },
     "configuratorUpdateNotice": {
         "message": "Es wird eine veraltete Version des <b>Rotorflight Configurator</b> verwendet.<br>$t(configuratorUpdateHelp.message)",
         "english": "You are using an outdated version of the <b>Rotorflight Configurator</b>.<br>$t(configuratorUpdateHelp.message)"
     },
     "configuratorUpdateHelp": {
-        "message": "Die Verwendung einer neueren Version der Firmware mit einer veralteten Version des Konfigurators bedeutet, dass die Änderung einiger Einstellungen zu einer <strong>beschädigten Firmware-Konfiguration und einem nicht funktionierenden Modell</strong> führt. Darüber hinaus können einige Funktionen nur per CLI geändert werden.<br><strong>Rotorflight Configurator version <b>$1</b> steht online zum Download zur Verfügung</strong>, siehe <a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">this page</a> um die neueste Version mit Korrekturen und Verbesserungen herunterzuladen und zu installieren.<br> Bitte Konfigurator-Fenster vor dem Update schließen.",
+        "message": "Die Verwendung einer neueren Version der Firmware mit einer veralteten Version des Konfigurators bedeutet, dass die Änderung einiger Einstellungen zu einer <strong>beschädigten Firmware-Konfiguration und einem nicht funktionierenden Modell</strong> führt. Darüber hinaus können einige Funktionen nur per CLI geändert werden.<br><strong>Rotorflight Configurator version <b>$1</b> steht online zum Download zur Verfügung</strong>, siehe <a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">diese Seite</a> um die neueste Version mit Korrekturen und Verbesserungen herunterzuladen und zu installieren.<br> Bitte Konfigurator-Fenster vor dem Update schließen.",
         "english": "Using a newer version of the firmware with an outdated version of Configurator means that changing some settings will result in a <strong>corrupted firmware configuration and a non-working craft</strong>. Furthermore, some features of the firmware will only be configurable in CLI.<br><strong>Rotorflight Configurator version <b>$1</b> is available for download online</strong>, please visit <a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">this page</a> to download and install the latest version with fixes and improvements.<br>Please close the configurator window before updating."
     },
     "configuratorUpdateWebsite": {
@@ -811,67 +809,52 @@
         "english": "Welcome to <strong>Rotorflight - Configurator</strong>, a utility designed to simplify updating, configuring and tuning of your flight controller."
     },
     "defaultDownloadsHead": {
-        "message": "Downloads",
-        "english": "Downloads",
-        "status": "New entry. Please translate!"
+        "message": "Herunterladen",
+        "english": "Downloads"
     },
     "defaultDownloadsText": {
-        "message": "The latest Rotorflight software downloads are available here:<br /><ul><li><a href=\"https://github.com/rotorflight/rotorflight-configurator/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Configurator</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Blackbox Log Viewer</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for EdgeTx & OpenTx</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for FrSky Ethos</a></li></ul>Rotorflight is <b>Open Source</b> software. The source code is available in <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>.",
-        "english": "The latest Rotorflight software downloads are available here:<br /><ul><li><a href=\"https://github.com/rotorflight/rotorflight-configurator/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Configurator</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Blackbox Log Viewer</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for EdgeTx & OpenTx</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for FrSky Ethos</a></li></ul>Rotorflight is <b>Open Source</b> software. The source code is available in <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>.",
-        "status": "New entry. Please translate!"
+        "message": "Die neuesten Rotorflight-Software-Downloads sind hier verfügbar:<br /><ul><li><a href=\"https://github.com/rotorflight/rotorflight-configurator/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Konfigurator</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Blackbox Log Viewer</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripte für EdgeTx & OpenTx</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripte für FrSky Ethos</a></li></ul>Rotorflight ist <b>Open Source</b> Software. Der Quellcode ist verfügbar in <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>.",
+        "english": "The latest Rotorflight software downloads are available here:<br /><ul><li><a href=\"https://github.com/rotorflight/rotorflight-configurator/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Configurator</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Blackbox Log Viewer</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for EdgeTx & OpenTx</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for FrSky Ethos</a></li></ul>Rotorflight is <b>Open Source</b> software. The source code is available in <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>."
     },
     "defaultCommunityHead": {
         "message": "Community",
-        "english": "Community",
-        "status": "New entry. Please translate!"
+        "english": "Community"
     },
     "defaultCommunityText": {
-        "message": "Rotorflight has an active online community of normal users, pro-pilots, and developers.",
-        "english": "Rotorflight has an active online community of normal users, pro-pilots, and developers.",
-        "status": "New entry. Please translate!"
+        "message": "Rotorflight hat eine aktive Online-Community aus normalen Nutzern, Profipiloten und Entwicklern.",
+        "english": "Rotorflight has an active online community of normal users, pro-pilots, and developers."
     },
     "defaultWebsiteText": {
-        "message": "<a href=\"https://www.rotorflight.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight website</a> is the first stop for instructions, manuals, and information.",
-        "english": "<a href=\"https://www.rotorflight.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight website</a> is the first stop for instructions, manuals, and information.",
-        "status": "New entry. Please translate!"
+        "message": "<a href=\"https://www.rotorflight.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Die Rotorflight-Website</a> ist die erste Anlaufstelle für Anleitungen, Handbücher und Informationen.",
+        "english": "<a href=\"https://www.rotorflight.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight website</a> is the first stop for instructions, manuals, and information."
     },
     "defaultDiscordText": {
-        "message": "<a href=\"https://discord.gg/FyfMF4RwSA/\" target=\"_blank\" rel=\"noopener noreferrer\">Discord</a> is the official place for online support and discussions.",
-        "english": "<a href=\"https://discord.gg/FyfMF4RwSA/\" target=\"_blank\" rel=\"noopener noreferrer\">Discord</a> is the official place for online support and discussions.",
-        "status": "New entry. Please translate!"
+        "message": "<a href=\"https://discord.gg/FyfMF4RwSA/\" target=\"_blank\" rel=\"noopener noreferrer\">Discord</a> ist der offizielle Ort für Online-Support und Diskussionen.",
+        "english": "<a href=\"https://discord.gg/FyfMF4RwSA/\" target=\"_blank\" rel=\"noopener noreferrer\">Discord</a> is the official place for online support and discussions."
     },
     "defaultFacebookText": {
-        "message": "<a href=\"https://www.facebook.com/groups/876445460825093\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a> is a good place for hanging out with other RF pilots.",
-        "english": "<a href=\"https://www.facebook.com/groups/876445460825093\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a> is a good place for hanging out with other RF pilots.",
-        "status": "New entry. Please translate!"
+        "message": "<a href=\"https://www.facebook.com/groups/876445460825093\" target=\"_blank\" rel=\"noopener noreferrer\">Die Facebook-Gruppe</a> ist ein guter Ort, um sich mit anderen RF-Piloten auszutauschen.",
+        "english": "<a href=\"https://www.facebook.com/groups/876445460825093\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a> is a good place for hanging out with other RF pilots."
     },
     "defaultContributingHead": {
         "message": "Mitmachen",
         "english": "Contributing"
     },
     "defaultContributingText": {
-        "message": "Rotorflight is a open-source community project. Anybody can join in and help to make it better, including:<br /><ul><li>helping other users on Rotorflight Discord or other online forums</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">reporting</a> bugs and issues, and suggesting improvements</li><li>testing new software versions, new features and fixes; and providing feedback</li><li>participating in discussions on new features</li><li>create or update content on <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">our Website</a></li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the software development - fixing bugs, implementing new features and improvements</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain an existing translation</li></ul>",
-        "english": "Rotorflight is a open-source community project. Anybody can join in and help to make it better, including:<br /><ul><li>helping other users on Rotorflight Discord or other online forums</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">reporting</a> bugs and issues, and suggesting improvements</li><li>testing new software versions, new features and fixes; and providing feedback</li><li>participating in discussions on new features</li><li>create or update content on <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">our Website</a></li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the software development - fixing bugs, implementing new features and improvements</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain an existing translation</li></ul>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Wenn Du mithelfen möchtest, Rotorflight besser zu machen, mach mit! Du kannst auf viele Arten helfen, zum Beispiel:<br /><ul><li>durch Einbringen deiner Kenntnisse über Rotorflight zur Erstellung oder Aktualisierung von Inhalten auf <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">unserer Website</a>, oder die Beantwortung von Fragen anderer Nutzer in Online-Foren;</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">Mitwirkung</a> an der Firmware und dem Konfigurator - neue Funktionen, Korrekturen, Verbesserungen;</li><li>das Testen neuer Funktionen und Korrekturen und die Rückmeldung von Feedback;</li><li>anderen Nutzern bei der Lösung der Probleme helfen, die sie in <a href=\"https://github.com/rotorflight/rotorflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">unser Problem-Tracker</a> melden, und Teilnahme an Diskussionen über Funktionswünsche;</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">Übersetzung</a> des Rotorflight Konfigurators in eine neue Sprache oder Hilfe bei der Pflege der bestehenden Übersetzungen.</li></ul>",
-            "english": "If you would like to help make Rotorflight even better you can help in many ways, including:<br /><ul><li>using your knowledge of Rotorflight to create or update content on <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">our Website</a>, or answering other users' questions in online forums;</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the firmware and the configurator - new features, fixes, improvements;</li><li>testing new features and fixes and providing feedback;</li><li>helping other users solve the problems they report in <a href=\"https://github.com/rotorflight/rotorflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">our issue tracker</a>, and participating in discussions on feature requests;</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain the existing translations.</li></ul>"
-        }
+        "message": "Rotorflight ist ein Open-Source-Gemeinschaftsprojekt. Jeder kann mitmachen und helfen, es besser zu machen, einschließlich:<br /><ul><li>anderen Nutzern im Rotorflight Discord oder anderen Online-Foren zu helfen</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">Meldung</a> von Fehlern und Problemen, und Verbesserungen vorzuschlagen</li><li>Testen neuer Softwareversionen, neuer Funktionen und Fehlerbehebungen und Rückmeldung geben</li><li>Teilnahme an Diskussionen über neue Funktionen</li><li>Erstellen oder Aktualisieren von Inhalten auf <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">unserer Webseite</a></li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">Mitwirkung</a> an der Softwareentwicklung - Fehler beheben, neue Funktionen und Verbesserungen einführen</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">Übersetzung</a> des Rotorflight Konfigurators in eine neue Sprache oder die Mitarbeit bei der Pflege einer bestehenden Übersetzung</li></ul>",
+        "english": "Rotorflight is a open-source community project. Anybody can join in and help to make it better, including:<br /><ul><li>helping other users on Rotorflight Discord or other online forums</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">reporting</a> bugs and issues, and suggesting improvements</li><li>testing new software versions, new features and fixes; and providing feedback</li><li>participating in discussions on new features</li><li>create or update content on <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">our Website</a></li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the software development - fixing bugs, implementing new features and improvements</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain an existing translation</li></ul>"
     },
     "defaultDonateHead": {
-        "message": "Supporting Rotorflight",
-        "english": "Supporting Rotorflight",
-        "status": "New entry. Please translate!"
+        "message": "Unterstützung von Rotorflight",
+        "english": "Supporting Rotorflight"
     },
     "defaultDonateText": {
-        "message": "<p>Rotorflight is <i>open source software</i> and is available <i>free of charge</i>, without warranty.</p><p>If you find Rotorflight useful, please consider <b>supporting</b> the development by donating to the Rotorflight Project.</p>",
-        "english": "<p>Rotorflight is <i>open source software</i> and is available <i>free of charge</i>, without warranty.</p><p>If you find Rotorflight useful, please consider <b>supporting</b> the development by donating to the Rotorflight Project.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p>Rotorflight ist <i>Open-Source-Software</i> und ist <i>kostenlos</i> erhältlich, ohne Garantie.</p><p>Wenn du Rotorflight nützlich findest, erwäge bitte die <b>Unterstützung</b> der Entwicklung durch eine Spende für das Rotorflight-Projekt.</p>",
+        "english": "<p>Rotorflight is <i>open source software</i> and is available <i>free of charge</i>, without warranty.</p><p>If you find Rotorflight useful, please consider <b>supporting</b> the development by donating to the Rotorflight Project.</p>"
     },
     "defaultDonateTooltip": {
-        "message": "Donate to the Rotorflight Project",
-        "english": "Donate to the Rotorflight Project",
-        "status": "New entry. Please translate!"
+        "message": "Spende für das Rotorflight-Projekt",
+        "english": "Donate to the Rotorflight Project"
     },
     "defaultChangelogHead": {
         "message": "Konfigurator - Changelog",
@@ -886,11 +869,11 @@
         "english": "Rotorflight documentation is available in release notes and website.<br /><br />"
     },
     "defaultDocumentation1": {
-        "message": "Das Anleitung auf der Rotorflight-Website ist eine hervorragende Informationsquelle, siehe <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
+        "message": "Die Anleitung auf der Rotorflight-Website ist eine hervorragende Informationsquelle, siehe <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a>.",
         "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultDocumentation2": {
-        "message": "Die aktuellsten Nachrichten können auf der Seite Ankündigungen der Website nachgelesen werden, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
+        "message": "Die aktuellsten Nachrichten können auf der Seite Ankündigungen der Website nachgelesen werden, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a>.",
         "english": "The latest news can be read at the Website Announcements page, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultDocumentation3": {
@@ -1099,15 +1082,9 @@
         "description": "Message that pops up to describe the RESC arming disable flag"
     },
     "statusArmingDisableFlagsTooltipRPMFILTER": {
-        "message": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailble",
+        "message": "Die RPM-basierte Filterung ist aktiviert, aber das Drehzahlsignal ist nicht konfiguriert oder steht aus anderen Gründen nicht zur Verfügung.",
         "english": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailble",
-        "status": "Modified entry. Please translate!",
-        "description": "Message that pops up to describe the RPMFILTER arming disable flag",
-        "previous": {
-            "message": "Die RPM-basierte Filterung ist aktiviert, aber ein oder mehrere ESCs liefern keine gültige DSHOT-Telemetrie. Prüfe, ob die ESCs kompatibel sind und die erforderliche Firmware installiert haben, um bidirektionale DSHOT-Telemetrie zu unterstützen.",
-            "english": "RPM-based filtering is enabled but one or more ESC's are not supplying valid DSHOT telemetry. Check that the ESC's are capable of and have the required firmware installed to support bidirectional DSHOT telemetry.",
-            "description": "Message that pops up to describe the RPMFILTER arming disable flag"
-        }
+        "description": "Message that pops up to describe the RPMFILTER arming disable flag"
     },
     "statusArmingDisableFlagsTooltipREBOOT_REQ": {
         "message": "Ein Reboot des Flight Controllers ist erforderlich",
@@ -1125,26 +1102,14 @@
         "description": "Message that pops up to describe the ACC_CALIB arming disable flag"
     },
     "statusArmingDisableFlagsTooltipMOTOR_PROTO": {
-        "message": "There is no motor throttle protocol selected",
+        "message": "Es ist kein Motorsteuerungsprotokoll ausgewählt",
         "english": "There is no motor throttle protocol selected",
-        "status": "Modified entry. Please translate!",
-        "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag",
-        "previous": {
-            "message": "Es ist kein Motorausgabeprotokoll ausgewählt",
-            "english": "There is no motor output protocol selected",
-            "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
-        }
+        "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
     },
     "statusArmingDisableFlagsTooltipARM_SWITCH": {
-        "message": "Arm switch is activated while other arming disable conditions are active",
+        "message": "Der Armschalter wurde aktiviert, während andere Bedingungen für die Deaktivierung der Scharfschaltung aktiv sind",
         "english": "Arm switch is activated while other arming disable conditions are active",
-        "status": "Modified entry. Please translate!",
-        "description": "Message that pops up to describe the ARM_SWITCH arming disable flag",
-        "previous": {
-            "message": "Einer der anderen 'Disarm-Flags' ist aktiv während des Armings",
-            "english": "One of the others disarm flags is active when arming",
-            "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
-        }
+        "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
     },
     "statusArmingHead": {
         "message": "Arming",
@@ -3966,13 +3931,8 @@
         "english": "<strong>Note:</strong> Leaving CLI tab or pressing Disconnect will <strong>automatically</strong> send \"<strong>exit</strong>\" to the board.  With the latest firmware this will make the controller <strong>restart</strong> and unsaved changes will be <strong>lost</strong>.<p><strong><span class=\"message-negative\">Warning:</span></strong> Some commands in CLI can result in arbitrary signals being sent on the motor output pins. This can cause motors to spin up if a battery is connected. Therefore it is highly recommended to make sure that <strong>no battery is connected before entering commands in CLI</strong>."
     },
     "cliInputPlaceholder": {
-        "message": "Write your command here.",
-        "english": "Write your command here.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Schreibe hier deinen Befehl. Drücke Tab zur Autovervollständigung.",
-            "english": "Write your command here. Press Tab for AutoComplete."
-        }
+        "message": "Schreibe hier deinen Befehl.",
+        "english": "Write your command here."
     },
     "cliInputPlaceholderBuilding": {
         "message": "Bitte warten, während der AutoComplete-Cache aufgebaut wird ...",
