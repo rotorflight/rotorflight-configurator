@@ -427,7 +427,7 @@
         "english": "Mixer"
     },
     "tabLedStrip": {
-        "message": "LED 燈帶",
+        "message": "LED 燈條",
         "english": "LED Strip"
     },
     "tabRawSensorData": {
@@ -435,7 +435,7 @@
         "english": "Sensors"
     },
     "tabCLI": {
-        "message": "CLI（命令列）",
+        "message": "CLI命令列",
         "english": "CLI"
     },
     "tabLogging": {
@@ -1042,7 +1042,7 @@
         "description": "Message that pops up to describe the CALIBRATING arming disable flag"
     },
     "statusArmingDisableFlagsTooltipCLI": {
-        "message": "CLI (命令列) 已啟用",
+        "message": "CLI命令列 已啟用",
         "english": "CLI is active",
         "description": "Message that pops up to describe the CLI arming disable flag"
     },
@@ -1192,7 +1192,7 @@
         "english": "Boot Loader / DFU"
     },
     "initialSetupBackupRestoreText": {
-        "message": "在 CLI 命令列中使用 'dump' 命令來<strong>備份</strong>你的設定以防意外遺失，注意<strong>CLI命令列</strong>設定 <span class=\"message-negative\">沒有</span> 包括在內。",
+        "message": "在 CLI命令列 中使用 'dump' 指令來<strong>備份</strong>你的設定以防意外遺失，注意<strong>CLI命令列</strong>設定 <span class=\"message-negative\">沒有</span> 包括在內。",
         "english": "<strong>Backup</strong> your configuration in case of an accident, <strong>CLI</strong> settings are <span class=\"message-negative\">not</span> included - use the command 'diff all' in CLI for this."
     },
     "initialSetupRebootBootloaderText": {
@@ -1332,7 +1332,7 @@
         "english": "Analog RSSI input"
     },
     "feature_LED_STRIP": {
-        "message": "RGB LED 燈帶",
+        "message": "RGB LED 燈條",
         "english": "RGB LED Strip support"
     },
     "feature_DISPLAY": {
@@ -1931,7 +1931,7 @@
         "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b> with HSI."
     },
     "profilesPIDModeCustomWarning": {
-        "message": "<span class=\"message-negative\">警告：</span> PID 控制器的參數是手動設定的，這裡無法表達。<br>請使用<b>命令列</b>修改 PID 設定。",
+        "message": "<span class=\"message-negative\">警告：</span> PID 控制器的參數是手動設定的因此無法顯示。<br>請使用<b>CLI命令列</b>修改 PID 設定。",
         "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings."
     },
     "profilesPIDGains": {
@@ -2771,15 +2771,15 @@
         "english": ""
     },
     "mixerCustomNote": {
-        "message": "<span class=\"message-negative\">警告：</span> 混控被設定為<strong>自訂設定</strong>因此無法於圖形界面中顯示。任何設定修改都必須在命令列中使用<code>mixer</code>命令完成。",
+        "message": "<span class=\"message-negative\">警告：</span> 混控被設定為<strong>自訂設定</strong>因此無法於圖形界面中顯示。任何設定修改都必須在CLI命令列中使用<code>mixer</code>指令完成。",
         "english": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with a <strong>custom setup</strong> that can't be presented in the GUI. Any configuration changes must be done in the CLI, with the <code>mixer</code> command."
     },
     "mixerRulesNote": {
-        "message": "<span class=\"message-negative\">警告：</span> 混控使用<strong>自訂設定</strong>進行設定，任何規則修改都需要在命令列中使用<code>mixer rule</code>進行設定",
+        "message": "<span class=\"message-negative\">警告：</span> 混控使用<strong>自訂設定</strong>進行設定，任何規則修改都需要在CLI命令列中使用<code>mixer rule</code>指令進行設定",
         "english": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with <strong>custom</strong> rules. Any rule changes must be done in the CLI, with the <code>mixer rule</code> command."
     },
     "mixerBidirNote": {
-        "message": "<span class=\"message-negative\">警告：</span> <i>雙向尾馬達</i> 是一項實驗性功能，需要在命令列中進行額外設定。",
+        "message": "<span class=\"message-negative\">警告：</span> <i>雙向尾馬達</i> 是一項實驗性功能，需要在CLI命令列中進行額外設定。",
         "english": "<span class=\"message-negative\">Warning:</span> <i>Bidirectional tail motor</i> is an experimental feature that requires additional settings in the CLI."
     },
     "mixerRebootNote": {
@@ -2811,7 +2811,7 @@
         "english": "Swashplate Type"
     },
     "mixerSwashTypeHelp": {
-        "message": "<strong>無：</strong> 混控將會關閉，需要在命令列中進行設定。 <br><br><strong>直通：</strong> 不進行混控，控制功能原封不動地通過混控器進行外部混合。<br><br><strong>CCPM:</strong> 循環-集體 螺距混控。用於具有三個十字盤舵機的循環螺距直升機（120°，135°或140°）。<br><br><strong>FPM:</strong> 固定螺距混控。用於固定螺距直升機與兩個90度擺放的十字盤舵機，可以是L型或是V型。",
+        "message": "<strong>無：</strong> 混控將會關閉，需要在CLI命令列中進行設定。 <br><br><strong>直通：</strong> 不進行混控，控制功能原封不動地通過混控器進行外部混合。<br><br><strong>CCPM:</strong> 循環-集體 螺距混控。用於具有三個十字盤舵機的循環螺距直升機（120°，135°或140°）。<br><br><strong>FPM:</strong> 固定螺距混控。用於固定螺距直升機與兩個90度擺放的十字盤舵機，可以是L型或是V型。",
         "english": "<strong>None:</strong> The mixer is disabled. Custom mixing rules must be set in the CLI. <br><br><strong>Direct:</strong> No mixing, controls are passed through the mixer unchanged for external mixing.<br><br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For cyclic-pitch helicopters with three swashplate servos, at 120&deg;, 135&deg;, or 140&deg; angle.<br><br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos at 90&deg; angle, either in L or V configuration."
     },
     "mixerSwashType0": {
@@ -3927,7 +3927,7 @@
         "english": "Debug"
     },
     "cliInfo": {
-        "message": "<strong>注意：</strong>退出 CLI 頁面或者點擊斷開連接將<strong>自動</strong>向飛控發送“<strong>退出</strong>”指令。在最新的韌體中這將使飛控<strong>重新啟動</strong>並且未儲存的設定將會<strong>遺失</strong>。<p><strong><span class=\"message-negative\">警告：</span></strong>CLI中的某些命令可能導致馬達輸出接腳發出隨機指令。如果連接電池，這有可能導致馬達旋轉。因此，強烈建議<strong>在 CLI 中輸入命令之前確保未連接電池</strong>。",
+        "message": "<strong>注意：</strong>退出 CLI 頁面或者點擊斷開連接將<strong>自動</strong>向飛控發送“<strong>退出</strong>”指令。在最新的韌體中這將使飛控<strong>重新啟動</strong>並且未儲存的設定將會<strong>遺失</strong>。<p><strong><span class=\"message-negative\">警告：</span></strong>CLI中的某些指令可能導致馬達輸出接腳發出隨機指令。如果連接電池有可能導致馬達旋轉。因此強烈建議<strong>在 CLI命令列 中輸入指令之前確保未連接電池</strong>。",
         "english": "<strong>Note:</strong> Leaving CLI tab or pressing Disconnect will <strong>automatically</strong> send \"<strong>exit</strong>\" to the board.  With the latest firmware this will make the controller <strong>restart</strong> and unsaved changes will be <strong>lost</strong>.<p><strong><span class=\"message-negative\">Warning:</span></strong> Some commands in CLI can result in arbitrary signals being sent on the motor output pins. This can cause motors to spin up if a battery is connected. Therefore it is highly recommended to make sure that <strong>no battery is connected before entering commands in CLI</strong>."
     },
     "cliInputPlaceholder": {
@@ -3939,11 +3939,11 @@
         "english": "Please wait while building AutoComplete cache ..."
     },
     "cliEnter": {
-        "message": "偵測到命令列模式",
+        "message": "偵測到CLI命令列模式",
         "english": "CLI mode detected"
     },
     "cliReboot": {
-        "message": "偵測到命令列重新啟動",
+        "message": "偵測到CLI命令列重新啟動",
         "english": "CLI reboot detected"
     },
     "cliSaveToFileBtn": {
@@ -3967,11 +3967,11 @@
         "english": "Load from file"
     },
     "cliConfirmSnippetDialogTitle": {
-        "message": "已載入檔案<strong>{{fileName}}</strong>。查看已載入的命令",
+        "message": "已載入檔案<strong>{{fileName}}</strong>。查看已載入的指令",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"
     },
     "cliConfirmSnippetNote": {
-        "message": "<strong>注意</strong>: 您可以在執行前查看和編輯命令。",
+        "message": "<strong>注意</strong>: 您可以在執行前查看和編輯指令。",
         "english": "<strong>Note</strong>: You can review and edit commands before execution."
     },
     "cliConfirmSnippetBtn": {
@@ -3979,11 +3979,11 @@
         "english": "Execute"
     },
     "dialogCLIExitTitle": {
-        "message": "命令列退出警告！",
+        "message": "CLI命令列退出警告！",
         "english": "CLI Exit Warning!"
     },
     "dialogCLIExitNote": {
-        "message": "輸入 <code>save</code> 將儲存並退出命令列（CLI）<br><br>輸入 <code>exit</code> 將放棄修改並退出命令列（CLI)",
+        "message": "輸入 <code>save</code> 將儲存並退出CLI命令列<br><br>輸入 <code>exit</code> 將放棄修改並退出CLI命令列",
         "english": "Type <code>save</code> to save changes and exit CLI.<br><br>Type <code>exit</code> to discard changes and exit CLI."
     },
     "dialogCLIExitButton": {
@@ -4528,7 +4528,7 @@
         "english": "Detected: <strong>$1</strong> - previous device still flashing, please replug to try again"
     },
     "ledStripHelp": {
-        "message": "飛控可以控制 LED 燈帶上的每一個燈珠的顏色和效果。<br />設定燈珠的位置，連線的順序，然後按位置將燈帶接入。沒有設定過接線順序的燈珠設定不會被儲存。<br />在一個顏色上雙擊可編輯 HSV 值。",
+        "message": "飛控可以控制 LED 燈條上的每一個燈珠的顏色和效果。<br />設定燈珠的位置，連線的順序，然後按位置將燈條接入。沒有設定過接線順序的燈珠設定不會被儲存。<br />在一個顏色上雙擊可編輯 HSV 值。",
         "english": "The flight controller can control colors and effects of individual LEDs on a strip.<br />Configure LEDs on the grid, configure wiring order then attach LEDs on your aircraft according to grid positions. LEDs without wire ordering number will not be saved.<br />Double-click on a color to edit the HSV values."
     },
     "ledStripColorSetupTitle": {
@@ -4776,12 +4776,12 @@
         "description": "One of the modes in Color Mode in Led Strip"
     },
     "ledStripWiring": {
-        "message": "LED 燈帶布線",
+        "message": "LED 燈條佈線",
         "english": "LED Strip Wiring",
         "description": "One of the modes in Led Strip"
     },
     "ledStripWiringMode": {
-        "message": "布線模式",
+        "message": "佈線模式",
         "english": "Wire Ordering Mode",
         "description": "One of the wiring modes in Led Strip"
     },
@@ -4791,17 +4791,17 @@
         "description": "Control button in the wiring modes in Led Strip"
     },
     "ledStripWiringClearAllControl": {
-        "message": "清除所有布線",
+        "message": "清除所有佈線",
         "english": "Clear ALL Wiring",
         "description": "Control button in the wiring modes in Led Strip"
     },
     "ledStripWiringMessage": {
-        "message": "沒有布線序號的 LED 不會被儲存。",
+        "message": "沒有佈線序號的 LED 不會被儲存。",
         "english": "LEDs without wire ordering number will not be saved.",
         "description": "Message in the wiring modes in Led Strip"
     },
     "ledStripGlobalSettings": {
-        "message": "LED 燈帶全域設定",
+        "message": "LED 燈條全域設定",
         "english": "LED Strip Global Settings",
         "description": "The Led Strip global settings, like profile etc"
     },
@@ -6482,7 +6482,7 @@
         "english": "<strong>Note:</strong> OSD preview may not show the actual font that is installed on the flight controller. The layout of individual elements may look different when older versions of the firmware are used - please check the look through your goggles before flying."
     },
     "osdSetupUnsupportedNote1": {
-        "message": "飛控對 OSD 命令無反應，有可能飛控不帶 OSD 功能。",
+        "message": "飛控對 OSD 指令無反應，有可能飛控不帶 OSD 功能。",
         "english": "Your flight controller isn't responding to OSD commands. This probably means that it does not have an integrated BetaFlight OSD."
     },
     "osdSetupUnsupportedNote2": {
@@ -7216,7 +7216,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementDisplayName": {
-        "message": "由 CLI 命令\"display_name\"設定的顯示名稱",
+        "message": "由 CLI 指令\"display_name\"設定的顯示名稱",
         "english": "Display name as set by the \"display_name\" cli command"
     },
     "osdTextElementEscRpmFreq": {
