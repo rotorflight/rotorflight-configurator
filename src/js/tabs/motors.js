@@ -59,6 +59,7 @@ TABS.motors.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_GOVERNOR_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_GOVERNOR_PROFILE))
             .then(() => MSP.promise(MSPCodes.MSP_ESC_SENSOR_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_SERIAL_CONFIG))
             .then(callback);
     }
 
@@ -368,9 +369,12 @@ TABS.motors.initialize = function (callback) {
         $('input[id="tailGearRatioN"]').val(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0]);
         $('input[id="tailGearRatioD"]').val(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1]).change();
 
+        self.telemetrySerialPort = FC.SERIAL_CONFIG.ports.some((port) => (port.functionMask & 1024));
+
         const telemProtocolSelect = $('select[id="telemetryProtocol"]');
         self.telemetryProtocols.forEach(function(value,index) {
-            telemProtocolSelect.append(`<option value="${index}">${value}</option>`);
+            const disabled = (index > 0 && !self.telemetrySerialPort) ? 'disabled' : '';
+            telemProtocolSelect.append(`<option value="${index}" ${disabled}>${value}</option>`);
         });
         telemProtocolSelect.val(self.isEscSensorEnabled ? FC.ESC_SENSOR_CONFIG.protocol : 0);
 
