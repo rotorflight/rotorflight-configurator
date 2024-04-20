@@ -25,12 +25,12 @@
         "english": "Auto"
     },
     "axisROLL": {
-        "message": "副翼",
+        "message": "橫滾",
         "english": "ROLL",
         "description": "Roll axis in capital letters"
     },
     "axisPITCH": {
-        "message": "升降",
+        "message": "俯仰",
         "english": "PITCH",
         "description": "Pitch axis in capital letters"
     },
@@ -45,11 +45,11 @@
         "description": "Collective in capital letters"
     },
     "titleRoll": {
-        "message": "副翼",
+        "message": "橫滾",
         "english": "Roll"
     },
     "titlePitch": {
-        "message": "升降",
+        "message": "俯仰",
         "english": "Pitch"
     },
     "titleYaw": {
@@ -150,9 +150,8 @@
         "english": "Revert"
     },
     "buttonHelp": {
-        "message": "Help",
-        "english": "Help",
-        "status": "New entry. Please translate!"
+        "message": "求助",
+        "english": "Help"
     },
     "eepromSaved": {
         "message": "EEPROM <span class=\"message-positive\">已儲存</span>",
@@ -207,7 +206,7 @@
         "english": "Opt out of the anonymised collection of statistics data"
     },
     "connectionTimeout": {
-        "message": "設定連接超時閾值，以允許更長時間的初始化或重新啟動",
+        "message": "設定連接超時臨限值以允許更長時間的初始化或重新啟動",
         "english": "Set connection timeout to allow longer initialisation on device plugin or reboot",
         "description": "Change timeout on auto-connect and reboot so the bus has more time to initialize after being detected by the system"
     },
@@ -284,9 +283,8 @@
         "english": "Show update notifications for unstable versions of the configurator"
     },
     "configuratorDevelopmentNotice": {
-        "message": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version.",
-        "english": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version.",
-        "status": "New entry. Please translate!"
+        "message": "您正在使用 <b>開發版本</b> 的 <b>Rotorflight 設定程式</b>.<br> 請考慮使用發佈版本，除非你有很好的理由使用未發佈的開發版本。",
+        "english": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version."
     },
     "configuratorUpdateNotice": {
         "message": "您正在使用舊版本的 <b>Rotorflight設定程式</b>。<br>$t(configuratorUpdateHelp.message)",
@@ -421,7 +419,7 @@
         "english": "GPS"
     },
     "tabMotors": {
-        "message": "電機",
+        "message": "馬達",
         "english": "Motors"
     },
     "tabMixer": {
@@ -811,67 +809,52 @@
         "english": "Welcome to <strong>Rotorflight - Configurator</strong>, a utility designed to simplify updating, configuring and tuning of your flight controller."
     },
     "defaultDownloadsHead": {
-        "message": "Downloads",
-        "english": "Downloads",
-        "status": "New entry. Please translate!"
+        "message": "下載",
+        "english": "Downloads"
     },
     "defaultDownloadsText": {
-        "message": "The latest Rotorflight software downloads are available here:<br /><ul><li><a href=\"https://github.com/rotorflight/rotorflight-configurator/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Configurator</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Blackbox Log Viewer</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for EdgeTx & OpenTx</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for FrSky Ethos</a></li></ul>Rotorflight is <b>Open Source</b> software. The source code is available in <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>.",
-        "english": "The latest Rotorflight software downloads are available here:<br /><ul><li><a href=\"https://github.com/rotorflight/rotorflight-configurator/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Configurator</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Blackbox Log Viewer</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for EdgeTx & OpenTx</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for FrSky Ethos</a></li></ul>Rotorflight is <b>Open Source</b> software. The source code is available in <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>.",
-        "status": "New entry. Please translate!"
+        "message": "最新的 Rotorflight 軟體可在此下載：<br /><ul><li><a href=\"https://github.com/rotorflight/rotorflight-configurator/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Configurator</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Blackbox Log Viewer</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for EdgeTx & OpenTx</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for FrSky Ethos</a></li></ul>Rotorflight 是 <b>開放原始碼</b> 軟體。原始碼可在<a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>取得。",
+        "english": "The latest Rotorflight software downloads are available here:<br /><ul><li><a href=\"https://github.com/rotorflight/rotorflight-configurator/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Configurator</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Blackbox Log Viewer</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for EdgeTx & OpenTx</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for FrSky Ethos</a></li></ul>Rotorflight is <b>Open Source</b> software. The source code is available in <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>."
     },
     "defaultCommunityHead": {
-        "message": "Community",
-        "english": "Community",
-        "status": "New entry. Please translate!"
+        "message": "社群",
+        "english": "Community"
     },
     "defaultCommunityText": {
-        "message": "Rotorflight has an active online community of normal users, pro-pilots, and developers.",
-        "english": "Rotorflight has an active online community of normal users, pro-pilots, and developers.",
-        "status": "New entry. Please translate!"
+        "message": "Rotorflight 網站有一個活躍的線上社群，包括一般使用者、專業飛行員和開發者。",
+        "english": "Rotorflight has an active online community of normal users, pro-pilots, and developers."
     },
     "defaultWebsiteText": {
-        "message": "<a href=\"https://www.rotorflight.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight website</a> is the first stop for instructions, manuals, and information.",
-        "english": "<a href=\"https://www.rotorflight.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight website</a> is the first stop for instructions, manuals, and information.",
-        "status": "New entry. Please translate!"
+        "message": "<a href=\"https://www.rotorflight.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight 網站</a> 是取得教學、手冊與相關資訊的首選。",
+        "english": "<a href=\"https://www.rotorflight.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight website</a> is the first stop for instructions, manuals, and information."
     },
     "defaultDiscordText": {
-        "message": "<a href=\"https://discord.gg/FyfMF4RwSA/\" target=\"_blank\" rel=\"noopener noreferrer\">Discord</a> is the official place for online support and discussions.",
-        "english": "<a href=\"https://discord.gg/FyfMF4RwSA/\" target=\"_blank\" rel=\"noopener noreferrer\">Discord</a> is the official place for online support and discussions.",
-        "status": "New entry. Please translate!"
+        "message": "<a href=\"https://discord.gg/FyfMF4RwSA/\" target=\"_blank\" rel=\"noopener noreferrer\">Discord</a> 是官方提供線上支援和討論的地方。",
+        "english": "<a href=\"https://discord.gg/FyfMF4RwSA/\" target=\"_blank\" rel=\"noopener noreferrer\">Discord</a> is the official place for online support and discussions."
     },
     "defaultFacebookText": {
-        "message": "<a href=\"https://www.facebook.com/groups/876445460825093\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a> is a good place for hanging out with other RF pilots.",
-        "english": "<a href=\"https://www.facebook.com/groups/876445460825093\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a> is a good place for hanging out with other RF pilots.",
-        "status": "New entry. Please translate!"
+        "message": "<a href=\"https://www.facebook.com/groups/876445460825093\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook 群組</a> 群組是與其他 RF 飛行員交流的好地方。",
+        "english": "<a href=\"https://www.facebook.com/groups/876445460825093\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a> is a good place for hanging out with other RF pilots."
     },
     "defaultContributingHead": {
         "message": "參與開發",
         "english": "Contributing"
     },
     "defaultContributingText": {
-        "message": "Rotorflight is a open-source community project. Anybody can join in and help to make it better, including:<br /><ul><li>helping other users on Rotorflight Discord or other online forums</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">reporting</a> bugs and issues, and suggesting improvements</li><li>testing new software versions, new features and fixes; and providing feedback</li><li>participating in discussions on new features</li><li>create or update content on <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">our Website</a></li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the software development - fixing bugs, implementing new features and improvements</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain an existing translation</li></ul>",
-        "english": "Rotorflight is a open-source community project. Anybody can join in and help to make it better, including:<br /><ul><li>helping other users on Rotorflight Discord or other online forums</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">reporting</a> bugs and issues, and suggesting improvements</li><li>testing new software versions, new features and fixes; and providing feedback</li><li>participating in discussions on new features</li><li>create or update content on <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">our Website</a></li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the software development - fixing bugs, implementing new features and improvements</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain an existing translation</li></ul>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "如果你想幫助 Rotorflight 變得更好，你可以：<br /><ul><li>用您的 Rotorflight 知識來為我們的<a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\"> Wiki </a> 創建或更新內容，或者是在論壇裡回答其他用戶的問題；</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">貢獻代碼</a> - 增加新功能，解決漏洞，改善代碼；</li><li>測試<a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">新功能</a>並提供測試回饋；</li><li>幫助在<a href=\"https://github.com/rotorflight/rotorflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">問題跟蹤器裡上報告問題的用戶解決問題，並參與功能請求的討論；</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">翻譯</a> - 為 Rotorflight 設定軟體添加新語言的翻譯</a>，或者幫助維護既有的翻譯。</li></ul>",
-            "english": "If you would like to help make Rotorflight even better you can help in many ways, including:<br /><ul><li>using your knowledge of Rotorflight to create or update content on <a href=\"https://github.com/rotorflight/rotorflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">our Wiki</a>, or answering other users' questions in online forums;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the firmware and the configurator - new features, fixes, improvements;</li><li>testing <a href=\"https://github.com/rotorflight/rotorflight/wiki/News\" target=\"_blank\" rel=\"noopener noreferrer\">new features and fixes</a> and providing feedback;</li><li>helping other users solve the problems they report in <a href=\"https://github.com/rotorflight/rotorflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">our issue tracker</a>, and participating in discussions on feature requests;</li><li><a href=\"https://github.com/rotorflight/rotorflight/wiki/Contributing\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain the existing translations.</li></ul>"
-        }
+        "message": "Rotorflight 是一個開放原始碼的社群專案。任何人都可以加入並協助改善它，包括：<br /><ul><li>在 Rotorflight Discord 或其他線上論壇上幫助其他使用者</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">回報</a>錯誤和問題，並提出改進建議</li><li>測試新的軟體版本、新功能和修復；並提供反饋意見</li><li>參與新功能討論</li><li>在我們的<a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">網站</a>上建立或更新內容</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">協助</a>軟體開發 - 修復錯誤、實作新功能和改進</li><li>將 Rotorflight Configurator <a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">翻譯</a>成新語言，或協助維護現有的翻譯</li></ul>",
+        "english": "Rotorflight is a open-source community project. Anybody can join in and help to make it better, including:<br /><ul><li>helping other users on Rotorflight Discord or other online forums</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">reporting</a> bugs and issues, and suggesting improvements</li><li>testing new software versions, new features and fixes; and providing feedback</li><li>participating in discussions on new features</li><li>create or update content on <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">our Website</a></li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the software development - fixing bugs, implementing new features and improvements</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain an existing translation</li></ul>"
     },
     "defaultDonateHead": {
-        "message": "Supporting Rotorflight",
-        "english": "Supporting Rotorflight",
-        "status": "New entry. Please translate!"
+        "message": "支持 Rotorflight",
+        "english": "Supporting Rotorflight"
     },
     "defaultDonateText": {
-        "message": "<p>Rotorflight is <i>open source software</i> and is available <i>free of charge</i>, without warranty.</p><p>If you find Rotorflight useful, please consider <b>supporting</b> the development by donating to the Rotorflight Project.</p>",
-        "english": "<p>Rotorflight is <i>open source software</i> and is available <i>free of charge</i>, without warranty.</p><p>If you find Rotorflight useful, please consider <b>supporting</b> the development by donating to the Rotorflight Project.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p>Rotorflight 是<i>開源軟體</i>，提供<i>免費使用</i>，並且沒有任何保證。</p><p>如果您覺得 Rotorflight 對您有所幫助，請考慮捐款<b>支持</b> Rotorflight 專案的開發。</p>",
+        "english": "<p>Rotorflight is <i>open source software</i> and is available <i>free of charge</i>, without warranty.</p><p>If you find Rotorflight useful, please consider <b>supporting</b> the development by donating to the Rotorflight Project.</p>"
     },
     "defaultDonateTooltip": {
-        "message": "Donate to the Rotorflight Project",
-        "english": "Donate to the Rotorflight Project",
-        "status": "New entry. Please translate!"
+        "message": "捐款支持 Rotorflight 專案",
+        "english": "Donate to the Rotorflight Project"
     },
     "defaultChangelogHead": {
         "message": "設定程式-更新日誌",
@@ -1109,7 +1092,7 @@
         "description": "Message that pops up to describe the REBOOT_REQ arming disable flag"
     },
     "statusArmingDisableFlagsTooltipDSHOT_BITBANG": {
-        "message": "雙向 DShot 無法正常工作，無法正常控制電機。可能是由於在飛控上啟用了其他功能造成了定時器衝突。",
+        "message": "雙向 DShot 無法正常工作，無法正常控制馬達。可能是由於在飛控上啟用了其他功能造成了定時器衝突。",
         "english": "Bitbanged DSHOT is not working properly and the motors can't be controlled. Likely caused by a timer conflict with other features enabled on the flight controller.",
         "description": "Message that pops up to describe the DSHOT_BITBANG arming disable flag"
     },
@@ -1119,12 +1102,12 @@
         "description": "Message that pops up to describe the ACC_CALIB arming disable flag"
     },
     "statusArmingDisableFlagsTooltipMOTOR_PROTO": {
-        "message": "尚未選擇電機油門協定",
+        "message": "尚未選擇馬達油門協定",
         "english": "There is no motor throttle protocol selected",
         "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
     },
     "statusArmingDisableFlagsTooltipARM_SWITCH": {
-        "message": "解鎖開關已啟用但部分禁止解鎖條件已被觸發",
+        "message": "在其他禁止解鎖條件被觸發的狀況下開啟了解鎖開關",
         "english": "Arm switch is activated while other arming disable conditions are active",
         "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
     },
@@ -1269,7 +1252,7 @@
         "english": "All settings saved in EEPROM."
     },
     "initialSetupDangerText": {
-        "message": "<strong>注意：</strong> 為了防止受傷，在解鎖、啟動電機之前<strong>，請卸下所有槳葉</strong>。<strong class=\"message-negative\"><strong class=\"message-negative\"><br/>永遠不要在連接電腦的情況下啟動您的直升機！</strong>",
+        "message": "<strong>注意：</strong> 為了防止受傷，在解鎖、啟動馬達之前<strong>，請卸下所有槳葉</strong>。<strong class=\"message-negative\"><strong class=\"message-negative\"><br/>永遠不要在連接電腦的情況下啟動您的直升機！</strong>",
         "english": "<strong>Note:</strong> In order to prevent injury <strong>remove ALL rotor blades</strong> before enabling any arming features.<strong class=\"message-negative\"><strong class=\"message-negative\"><br/>NEVER FLY YOUR CRAFT WITH THE CONFIGURATOR CONNECTED!</strong>"
     },
     "initialSetupDangerTitle": {
@@ -1281,15 +1264,15 @@
         "english": "<strong>Enable Arming</strong>"
     },
     "initialSetupEnableArmingText": {
-        "message": "啟用解鎖後將允許直升機在連接設定程式時解鎖，解鎖將允許你的電機旋轉。",
+        "message": "啟用解鎖後將允許直升機在連接設定程式時解鎖，解鎖將允許你的馬達旋轉。",
         "english": "Enable arming the craft with the transmitter while the Configurator is connected. Arming your craft will allow the motors to spool up."
     },
     "initialSetupEnableMotorOverride": {
-        "message": "<strong>啟用電機覆寫</strong>",
+        "message": "<strong>啟用馬達覆寫</strong>",
         "english": "<strong>Enable Motor Override</strong>"
     },
     "initialSetupEnableMotorOverrideText": {
-        "message": "在電機選項卡啟用電機覆寫功能，使用電機覆寫將會允許電機啟動！",
+        "message": "在馬達頁面啟用馬達覆寫功能，使用馬達覆寫將會允許馬達啟動！",
         "english": "Enable the motor override feature in the Motors tab. Using motor override WILL SPOOL UP the motors!"
     },
     "initialSetupEnableServoOverride": {
@@ -1297,7 +1280,7 @@
         "english": "<strong>Enable Servo Override</strong>"
     },
     "initialSetupEnableServoOverrideText": {
-        "message": "在舵機選項卡中啟用舵機覆寫功能。 使用舵機覆寫可以將舵機旋轉到任意角度。",
+        "message": "在舵機頁面中啟用舵機覆寫功能。 使用舵機覆寫可以將舵機旋轉到任意角度。",
         "english": "Enable the servo override feature in the Servos tab. Using servo override WILL move the servos to arbitrary positions."
     },
     "initialSetupEnableMixerOverride": {
@@ -1425,7 +1408,7 @@
         "english": "RSSI is a measurement of signal strength and is very handy so you know when your aircraft is going out of range or if it is suffering RF interference."
     },
     "configurationEscFeatures": {
-        "message": "電變/電機功能",
+        "message": "電變/馬達功能",
         "english": "ESC/Motor Features"
     },
     "configurationFeaturesHelp": {
@@ -1441,11 +1424,11 @@
         "english": "Arbitrary board rotation allows mounting the FC sideways / upside down / rotated etc. When using external sensors, use the sensor alignments to define sensor position independent from the board orientation."
     },
     "configurationBoardAlignmentRoll": {
-        "message": "副翼（度）",
+        "message": "橫滾（度）",
         "english": "Roll Degrees"
     },
     "configurationBoardAlignmentPitch": {
-        "message": "升降（度）",
+        "message": "俯仰（度）",
         "english": "Pitch Degrees"
     },
     "configurationBoardAlignmentYaw": {
@@ -1505,15 +1488,15 @@
         "english": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue."
     },
     "configurationAccelTrimRoll": {
-        "message": "副翼微調",
+        "message": "加速度計橫滾微調",
         "english": "Accelerometer Roll Trim"
     },
     "configurationAccelTrimPitch": {
-        "message": "升降微調",
+        "message": "加速度計俯仰微調",
         "english": "Accelerometer Pitch Trim"
     },
     "escProtocolDisabledMessage": {
-        "message": "<strong>注意：</strong> 若選擇不被您的電變所支援的電變協定將導致<strong>連接電池後電變會立刻驅動電機旋轉</strong>。出於這個原因，<strong>在修改電變協定後，連接電池之前，請確保您的螺旋槳已被卸下</strong>！",
+        "message": "<strong>注意：</strong> 若選擇不被您的電變所支援的電變協定將導致<strong>連接電池後電變會立刻驅動馬達旋轉</strong>。出於這個原因，<strong>在修改電變協定後，連接電池之前，請確保您的螺旋槳已被卸下</strong>！",
         "english": "<strong>Caution:</strong> Selecting a motor output protocol that is not supported by your ESCs can lead to the <strong>ESCs spinning up as soon as a battery is connected</strong>. For this reason, <strong>always make sure to remove the props before connecting a battery for the first time after changing the motor output protocol</strong>."
     },
     "configurationDshotBeeper": {
@@ -1525,7 +1508,7 @@
         "english": "Dshot Beacon Tone"
     },
     "configurationDshotBeaconHelp": {
-        "message": "Dshot 信標使用電變和電機產生聲音。這意味著當電機旋轉時，Dshot 信標無法工作。若在 Dshot 信標啟用時嘗試解鎖，飛控會在發出最後一聲信標音後延遲2秒再解鎖。這是為了防止 Dshot 信標功能干擾在解鎖時發送的 Dshot 命令。<br/><strong>警告：</strong> 由於 Dshot 信標會有電流通過，如果信標鳴叫強度設定得太高，可能會造成電機/電變過熱甚至損毀。建議使用 BLHeli 設定程式或 BLHeliSuite 來調整和測試信標的鳴叫強度。",
+        "message": "Dshot 信標使用電變和馬達產生聲音。這意味著當馬達旋轉時，Dshot 信標無法工作。若在 Dshot 信標啟用時嘗試解鎖，飛控會在發出最後一聲信標音後延遲2秒再解鎖。這是為了防止 Dshot 信標功能干擾在解鎖時發送的 Dshot 命令。<br/><strong>警告：</strong> 由於 Dshot 信標會有電流通過，如果信標鳴叫強度設定得太高，可能會造成馬達/電變過熱甚至損毀。建議使用 BLHeli 設定程式或 BLHeliSuite 來調整和測試信標的鳴叫強度。",
         "english": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. If arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength."
     },
     "configurationBeeper": {
@@ -1597,7 +1580,7 @@
         "english": "Beeps sounded while stick held in disarm position"
     },
     "beeper_ARMED": {
-        "message": "當飛控解鎖且電機未轉時，持續發出警告鳴叫直到上推油門或重新鎖定",
+        "message": "當飛控解鎖且馬達未轉時，持續發出警告鳴叫直到上推油門或重新鎖定",
         "english": "Warning beeps when board is armed with motors off when idle (repeats until board is disarmed or throttle is increased)"
     },
     "beeper_SYSTEM_INIT": {
@@ -1736,7 +1719,7 @@
         "english": "<strong>Note:</strong> not all combinations are valid.  When the flight controller firmware detects this the serial port configuration will be reset."
     },
     "portsVtxTableNotSet": {
-        "message": "<span class=\"message-negative\">警告: </span>圖傳表尚未正確設定，圖傳控制功能不可用。請在$t(tabVtx.message)選項卡內設定圖傳表。",
+        "message": "<span class=\"message-negative\">警告: </span>圖傳表尚未正確設定，圖傳控制功能不可用。請在$t(tabVtx.message)頁面內設定圖傳表。",
         "english": "<span class=\"message-negative\">WARNING:</span> The VTX table has not been set up correctly and without it VTX control will not be possible. Please set up the VTX table in $t(tabVtx.message) tab."
     },
     "portsMSPHelp": {
@@ -1960,73 +1943,44 @@
         "english": "Proportional"
     },
     "profilesProportionalHelp": {
-        "message": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint) and corrects for external influences.<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the derivative (D-gain). Think of the P-term as the spring on a car.",
+        "message": "控制機體追蹤操縱桿（目標點）的力度，並校正外部影響。<br /><br />較高的值（增益）提供更緊密的追蹤，但如果與導數（D-gain）比例過高，可能會造成過度振盪。可以把 P-term 想像成汽車的彈簧。",
         "english": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint) and corrects for external influences.<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the derivative (D-gain). Think of the P-term as the spring on a car.",
-        "status": "Modified entry. Please translate!",
-        "description": "Proportional Term helpicon message on PID table titlebar",
-        "previous": {
-            "message": "控制直升機緊跟搖桿的力度（設定點）。 <br /><br />較高的值（增益）可提供更緊密的跟蹤，但如果與微分（D 項）的比例過高，則可能導致過沖。  將 P 項想像成汽車上的彈簧。",
-            "english": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint).<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the Derivative (D-term).  Think of the P-term as the spring on a car.",
-            "description": "Proportional Term helpicon message on PID table titlebar"
-        }
+        "description": "Proportional Term helpicon message on PID table titlebar"
     },
     "profilesIntegral": {
         "message": "I（積分）",
         "english": "Integral"
     },
     "profilesIntegralHelp": {
-        "message": "Controls the strength of how tightly the machine holds the overall rotation rate setpoint.<br>Similar to Proportional, but for longer biases on the craft from the rotation rate setpoint, as well as persistent outside influence, for example steady wind or CG offsets.<br /><br />Higher gains provide tighter tracking of the setpoint (i.e. in constant flips and rolls), but can lead to the craft now being able to follow the setpoint on extremely quick inputs, which can lead to it continuing to rotate after the stick is released. <br>If extremely high in proportion to the D-term, can cause oscillations.",
+        "message": "控制機體保持整體旋轉速率設定點的力度。<br>類似於比例，但更長時間地保持航空器與旋轉速率設定點之間的偏差，以及持續的外部影響，例如穩定的風或重心偏移。<br /><br />較高的增益提供更緊密的設定點追蹤（例如在不斷的翻轉和滾動中），但可能導致飛行器無法在極快的輸入下跟隨設定點，這可能會導致在鬆開操縱桿後仍繼續旋轉。<br>如果與 D-term 比例極高，可能導致振盪。",
         "english": "Controls the strength of how tightly the machine holds the overall rotation rate setpoint.<br>Similar to Proportional, but for longer biases on the craft from the rotation rate setpoint, as well as persistent outside influence, for example steady wind or CG offsets.<br /><br />Higher gains provide tighter tracking of the setpoint (i.e. in constant flips and rolls), but can lead to the craft now being able to follow the setpoint on extremely quick inputs, which can lead to it continuing to rotate after the stick is released. <br>If extremely high in proportion to the D-term, can cause oscillations.",
-        "status": "Modified entry. Please translate!",
-        "description": "Integral Term helpicon message on PID table titlebar",
-        "previous": {
-            "message": "控制直升機保持設定點整體位置的力度。<br>與 P項類似，但適用於較長的飛行偏差，如重心偏移（CoG）或持續的外部影響（穩定的風）。<br /><br />增益越大，跟蹤越緊密（例如：在急轉彎時），但會使直升機在指令搖桿輸入時感覺僵硬。<br>如果與 D 項的比例極高，則會導致緩慢振盪。",
-            "english": "Controls the strength of how tightly the machine holds the overall position of the Setpoint.<br>Similar to Proportional, but for longer biases on the craft such as an offset center of gravity (CoG) or persistent outside influence (steady wind).<br /><br />Higher gains provide tighter tracking (e.g.: in sweeping turns), but can make the craft feel stiff for commanded stick inputs.<br>If extremely high in proportion to the D-term, can cause slow oscillations.",
-            "description": "Integral Term helpicon message on PID table titlebar"
-        }
+        "description": "Integral Term helpicon message on PID table titlebar"
     },
     "profilesDerivative": {
         "message": "D（微分）",
         "english": "Derivative"
     },
     "profilesDerivativeHelp": {
-        "message": "Controls the strength of damping ANY angular acceleration of the craft, whether from stick inputs or external influences. For stick inputs, the D-term damps the movement to prevent overshooting. For an outside influence (vorticity or wind gust) the D-term damps the disturbance.<br /><br />Higher gains provide more damping and reduce possible overshoot from high P-terms.<br>However, the D-term is VERY sensitive to high frequency gyro vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise in the control loop can cause excessive servo heat and burn out servos if the gyro noise is not filtered properly (see Gyro tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the inherent negative property of magnifying high frequency gyro noise.",
+        "message": "控制飛行器任何角加速度的阻尼強度，無論是來自操縱桿的輸入還是外部影響。對於操縱桿輸入，D-term 會以阻尼來防止過度擺動。對於外部影響（渦流或陣風），D-term 會以阻尼抑制。<br /><br />較高的增益提供更多的阻尼，並減少高 P-term 可能導致的過度擺動。<br>然而，D-term 對高頻陀螺儀振動（噪音 | 放大 10 倍至 100 倍）非常敏感。<br /><br />如果陀螺儀噪音未能正確過濾，控制迴路中的高頻噪音可能導致伺服器過熱並燒壞伺服器（請參照陀螺儀頁面）。<br /><br />將 D-term 想像成汽車的避震器，但具有放大高頻陀螺儀噪音的負面特性。",
         "english": "Controls the strength of damping ANY angular acceleration of the craft, whether from stick inputs or external influences. For stick inputs, the D-term damps the movement to prevent overshooting. For an outside influence (vorticity or wind gust) the D-term damps the disturbance.<br /><br />Higher gains provide more damping and reduce possible overshoot from high P-terms.<br>However, the D-term is VERY sensitive to high frequency gyro vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise in the control loop can cause excessive servo heat and burn out servos if the gyro noise is not filtered properly (see Gyro tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the inherent negative property of magnifying high frequency gyro noise.",
-        "status": "Modified entry. Please translate!",
-        "description": "Derivative Term helpicon message on PID table titlebar",
-        "previous": {
-            "message": "控制直升機上任何運動的阻尼強度。對於搖桿移動，D 項會抑制指令。對於外部影響（螺旋槳沖刷或陣風），D 項會抑制影響。<br /><br />增益越高，阻尼越大，P 項和 FF 的過沖越小。<br>不過，D項對陀螺儀的高頻振動非常敏感（噪聲放大 10 倍到 100 倍）。<br /><br />把 D 項想像成汽車上的減震器，但它有放大高頻陀螺噪音的負面固有特性。",
-            "english": "Controls the strength of dampening to ANY motion on the craft.  For stick moves, the D-term dampens the command. For an outside influence (prop-wash OR wind gust) the D-term dampens the influence.<br /><br />Higher gains provide more dampening and reduce overshoot by P-term and FF.<br>However, the D-term is VERY sensitive to gyro high frequency vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise can cause motor heat and burn out motors if D-gains are too high or the gyro noise is not filtered well (see Filters tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the negative inherent property of magnifying high frequency gyro noise.",
-            "description": "Derivative Term helpicon message on PID table titlebar"
-        }
+        "description": "Derivative Term helpicon message on PID table titlebar"
     },
     "profilesFeedforward": {
         "message": "FF（前饋）",
         "english": "Feedforward"
     },
     "profilesFeedforwardHelp": {
-        "message": "This is an additional pushing term based on stick input. FF helps the P-term push the craft for commanded stick moves, does not react to any helicopter movements though.<br /><br />The FF-term pushes based on the difference between the commanded Setpoint (deg/sec). <br /><br />Higher values (gains) will result in a sharper response to stick input.<br>Too high of values may result in overshoot, as well as strikeback at the end of control inputs.<br>Too low or zero (0) values will result in a slow and delayed response to stick inputs, as well as continued rotation after the stick is released.",
+        "message": "這是基於操縱桿輸入的額外推力。 FF 有助於 P-term 推動飛行器進行指令的操縱移動，但不會對任何直升機動作做出反應。<br /><br />FF-term 是基於指令設定點（度/秒）的差異而進行推動。<br /><br />較高的值（增益）會導致對操縱桿輸入的更快速反應。<br>過高的值可能會導致過度擺動，以及在操控輸入結束時的反彈效應。<br>過低或零（0）值會導致對操縱桿輸入的反應緩慢延遲，以及在鬆開操縱桿後繼續旋轉。",
         "english": "This is an additional pushing term based on stick input. FF helps the P-term push the craft for commanded stick moves, does not react to any helicopter movements though.<br /><br />The FF-term pushes based on the difference between the commanded Setpoint (deg/sec). <br /><br />Higher values (gains) will result in a sharper response to stick input.<br>Too high of values may result in overshoot, as well as strikeback at the end of control inputs.<br>Too low or zero (0) values will result in a slow and delayed response to stick inputs, as well as continued rotation after the stick is released.",
-        "status": "Modified entry. Please translate!",
-        "description": "Feedforward Term helpicon message on PID table titlebar",
-        "previous": {
-            "message": "是基於搖桿輸入的附加推動項（彈簧）。FF 可幫助 P 項推動直升機進行指令搖桿移動。<br /><br />P 項根據指令設定點（度/秒）和陀螺儀讀數（度/秒）之間的差值進行推動。FF 僅根據搖桿的指令變化進行推動。<br /><br />數值（增益）越高，對搖桿輸入的響應越靈敏。過高的值可能會導致過沖、電機發熱增加和電機過載（電機無法跟上所需的變化率）。<br>數值越小或為零（0），對搖桿輸入的響應越慢、越平滑。",
-            "english": "Is an additional pushing term (spring) based on stick input. FF helps the P-term push the craft for commanded stick moves.<br /><br />The P-term pushes based on the difference between the commanded Setpoint (deg/sec) and the gyro reading of current rotational rate (deg/sec). FF pushes based on the commanded change of the sticks alone.<br /><br />Higher values (gains) will result in a more sharp machine response to stick input.<br>Too high of values may result in some overshoot, increased motor heat, and motor saturation (where motors can not keep up with the desired rate of change).<br>Lower or zero (0) values will result in a slower and smoother response to stick inputs.",
-            "description": "Feedforward Term helpicon message on PID table titlebar"
-        }
+        "description": "Feedforward Term helpicon message on PID table titlebar"
     },
     "profilesBoost": {
         "message": "B（增壓）",
         "english": "Boost"
     },
     "profilesBoostHelp": {
-        "message": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without he drawbacks of high Proportional or Feedforward gains.",
-        "english": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without he drawbacks of high Proportional or Feedforward gains.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "是對前饋的額外提升。這將使直升機對快速打杆做出更快的反應。",
-            "english": "Is an additional boost on the feedforward. This makes the heli react faster to quick stick movements."
-        }
+        "message": "這是基於設定點的導數對前饋的額外增益。增加 Boost 可以使機體的反應更為迅速，而且不會帶來高比例或前饋的缺點。",
+        "english": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without he drawbacks of high Proportional or Feedforward gains."
     },
     "profilesCopyProfile": {
         "message": "複製設定檔",
@@ -2077,7 +2031,7 @@
         "english": "Stick Maximum Travel"
     },
     "receiverHelpStickDeflection": {
-        "message": "副翼升降航向軸偏離中心的最大值，單位為μs。",
+        "message": "橫滾俯仰航向軸偏離中心的最大值，單位為μs。",
         "english": "The maximum value (in µs) for stick deflection from the center, for RPY."
     },
     "receiverArmingThrottle": {
@@ -2229,9 +2183,8 @@
         "english": "Adjustment Function"
     },
     "receiverTelemetrySensor_GOV_MODE": {
-        "message": "Governor Mode",
-        "english": "Governor Mode",
-        "status": "New entry. Please translate!"
+        "message": "定速器模式",
+        "english": "Governor Mode"
     },
     "receiverBars": {
         "message": "接收機通道",
@@ -2446,11 +2399,11 @@
         "english": "OSD Profile Selection"
     },
     "adjustmentsFunctionPitchRate": {
-        "message": "升降 Rate",
+        "message": "俯仰 Rate",
         "english": "Pitch Rate"
     },
     "adjustmentsFunctionRollRate": {
-        "message": "副翼 Rate",
+        "message": "橫滾 Rate",
         "english": "Roll Rate"
     },
     "adjustmentsFunctionYawRate": {
@@ -2458,11 +2411,11 @@
         "english": "Yaw Rate"
     },
     "adjustmentsFunctionPitchRCRate": {
-        "message": "升降 RC Rate",
+        "message": "俯仰 RC Rate",
         "english": "Pitch RC Rate"
     },
     "adjustmentsFunctionRollRCRate": {
-        "message": "副翼 RC Rate",
+        "message": "橫滾 RC Rate",
         "english": "Roll RC Rate"
     },
     "adjustmentsFunctionYawRCRate": {
@@ -2470,11 +2423,11 @@
         "english": "Yaw RC Rate"
     },
     "adjustmentsFunctionPitchRCExpo": {
-        "message": "升降 RC Expo",
+        "message": "俯仰 RC Expo",
         "english": "Pitch RC Expo"
     },
     "adjustmentsFunctionRollRCExpo": {
-        "message": "副翼 RC Expo",
+        "message": "橫滾 RC Expo",
         "english": "Roll RC Expo"
     },
     "adjustmentsFunctionYawRCExpo": {
@@ -2482,51 +2435,51 @@
         "english": "Yaw RC Expo"
     },
     "adjustmentsFunctionPitchP": {
-        "message": "升降 P 增益",
+        "message": "俯仰 P-增益",
         "english": "Pitch P-gain"
     },
     "adjustmentsFunctionPitchI": {
-        "message": "升降 I 增益",
+        "message": "俯仰 I-增益",
         "english": "Pitch I-gain"
     },
     "adjustmentsFunctionPitchD": {
-        "message": "升降 D 增益",
+        "message": "俯仰 D-增益",
         "english": "Pitch D-gain"
     },
     "adjustmentsFunctionPitchF": {
-        "message": "升降 F 增益",
+        "message": "俯仰 F-增益",
         "english": "Pitch F-gain"
     },
     "adjustmentsFunctionRollP": {
-        "message": "副翼 P 增益",
+        "message": "橫滾 P-增益",
         "english": "Roll P-gain"
     },
     "adjustmentsFunctionRollI": {
-        "message": "副翼 I 增益",
+        "message": "橫滾 I-增益",
         "english": "Roll I-gain"
     },
     "adjustmentsFunctionRollD": {
-        "message": "副翼 D 增益",
+        "message": "橫滾 D-增益",
         "english": "Roll D-gain"
     },
     "adjustmentsFunctionRollF": {
-        "message": "副翼 F 增益",
+        "message": "橫滾 F-增益",
         "english": "Roll F-gain"
     },
     "adjustmentsFunctionYawP": {
-        "message": "航向 P 增益",
+        "message": "航向 P-增益",
         "english": "Yaw P-gain"
     },
     "adjustmentsFunctionYawI": {
-        "message": "航向 I 增益",
+        "message": "航向 I-增益",
         "english": "Yaw I-gain"
     },
     "adjustmentsFunctionYawD": {
-        "message": "航向 D 增益",
+        "message": "航向 D-增益",
         "english": "Yaw D-gain"
     },
     "adjustmentsFunctionYawF": {
-        "message": "航向 F 增益",
+        "message": "航向 F-增益",
         "english": "Yaw F-gain"
     },
     "adjustmentsFunctionYawCWStopGain": {
@@ -2554,15 +2507,15 @@
         "english": "Yaw Collective Impulse FF Decay"
     },
     "adjustmentsFunctionPitchCollectiveFF": {
-        "message": "升降集體螺距預補償",
+        "message": "俯仰集體螺距預補償",
         "english": "Pitch Collective Precomp"
     },
     "adjustmentsFunctionPitchGyroCutoff": {
-        "message": "升降陀螺儀截止",
+        "message": "俯仰陀螺儀截止",
         "english": "Pitch Gyro Cutoff"
     },
     "adjustmentsFunctionRollGyroCutoff": {
-        "message": "副翼陀螺儀截止",
+        "message": "橫滾陀螺儀截止",
         "english": "Roll Gyro Cutoff"
     },
     "adjustmentsFunctionYawGyroCutoff": {
@@ -2570,11 +2523,11 @@
         "english": "Yaw Gyro Cutoff"
     },
     "adjustmentsFunctionPitchDtermCutoff": {
-        "message": "升降D項截止",
+        "message": "俯仰D項截止",
         "english": "Pitch D-term Cutoff"
     },
     "adjustmentsFunctionRollDtermCutoff": {
-        "message": "副翼D項截止",
+        "message": "橫滾D項截止",
         "english": "Roll D-term Cutoff"
     },
     "adjustmentsFunctionYawDtermCutoff": {
@@ -2594,15 +2547,15 @@
         "english": "Rescue Hover Altitude"
     },
     "adjustmentsFunctionRescueAltP": {
-        "message": "救機高度P項增益",
+        "message": "救機高度 P-增益",
         "english": "Rescue Altitude P-gain"
     },
     "adjustmentsFunctionRescueAltI": {
-        "message": "救機高度I項增益",
+        "message": "救機高度 I-增益",
         "english": "Rescue Altitude I-gain"
     },
     "adjustmentsFunctionRescueAltD": {
-        "message": "救機高度D項增益",
+        "message": "救機高度 D-增益",
         "english": "Rescue Altitude D-gain"
     },
     "adjustmentsFunctionAngleLevelGain": {
@@ -2618,27 +2571,27 @@
         "english": "Acro Trainer Gain"
     },
     "adjustmentsFunctionGovernorGain": {
-        "message": "定速器 PID 增益",
+        "message": "定速器 PID-增益",
         "english": "Governor PID-gain"
     },
     "adjustmentsFunctionGovernorP": {
-        "message": "定速器 P 增益",
+        "message": "定速器 P-增益",
         "english": "Governor P-gain"
     },
     "adjustmentsFunctionGovernorI": {
-        "message": "定速器 I 增益",
+        "message": "定速器 I-增益",
         "english": "Governor I-gain"
     },
     "adjustmentsFunctionGovernorD": {
-        "message": "定速器 D 增益",
+        "message": "定速器 D-增益",
         "english": "Governor D-gain"
     },
     "adjustmentsFunctionGovernorF": {
-        "message": "定速器 F 增益",
+        "message": "定速器 F-增益",
         "english": "Governor F-gain"
     },
     "adjustmentsFunctionGovernorTTA": {
-        "message": "定速器 TTA 增益",
+        "message": "定速器 TTA-增益",
         "english": "Governor TTA-gain"
     },
     "adjustmentsFunctionGovernorCyclicFF": {
@@ -2650,23 +2603,23 @@
         "english": "Governor Collective Precomp"
     },
     "adjustmentsFunctionPitchB": {
-        "message": "升降B項增益",
+        "message": "俯仰 B-增益",
         "english": "Pitch B-gain"
     },
     "adjustmentsFunctionRollB": {
-        "message": "副翼B項增益",
+        "message": "橫滾 B-增益",
         "english": "Roll B-gain"
     },
     "adjustmentsFunctionYawB": {
-        "message": "航向B項增益",
+        "message": "航向 B-增益",
         "english": "Yaw B-gain"
     },
     "adjustmentsFunctionPitchO": {
-        "message": "升降O項增益",
+        "message": "俯仰 O-增益",
         "english": "Pitch O-gain"
     },
     "adjustmentsFunctionRollO": {
-        "message": "副翼O項增益",
+        "message": "橫滾 O-增益",
         "english": "Roll O-gain"
     },
     "adjustmentsFunctionCrossCouplingGain": {
@@ -2682,7 +2635,7 @@
         "english": "Cross Coupling Cutoff"
     },
     "servoHelp": {
-        "message": "舵機101<ul><li>首先檢查舵機方向。例如，透過給予一些集體螺距來檢查循環舵機系統。反向舵機，如果需要。</li><li>透過啟動<i>舵機覆寫</i>和調節<i>中心點</i>來調平舵機臂。舵機臂在此位置應垂直於主軸。</li><li>調整<i>縮放</i>使舵機角度正確。指定角度為30°;在<i>舵機覆寫</i>下的舵機。舵機現在應該移動到30度。如果小於，則增加該舵機的<i>縮放</i>。如果更多，就減少。</li><li>您可以透過調整<i>最小值</i>或<i>最大值</i>來限制或擴展舵機運動範圍。只有在出現機械問題時才這樣做，比如舵機干涉。使用混控限制副翼/升降/集體螺距</li></ul>",
+        "message": "舵機101<ul><li>首先檢查舵機方向。例如，透過給予一些集體螺距來檢查循環舵機系統。反向舵機，如果需要。</li><li>透過啟動<i>舵機覆寫</i>和調節<i>中心點</i>來調平舵機臂。舵機臂在此位置應垂直於主軸。</li><li>調整<i>縮放</i>使舵機角度正確。指定角度為30°;在<i>舵機覆寫</i>下的舵機。舵機現在應該移動到30度。如果小於，則增加該舵機的<i>縮放</i>。如果更多，就減少。</li><li>您可以透過調整<i>最小值</i>或<i>最大值</i>來限制或擴展舵機運動範圍。只有在出現機械問題時才這樣做，比如舵機干涉。使用混控限制橫滾/俯仰/集體螺距</li></ul>",
         "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
     },
     "servoConfiguration": {
@@ -2826,7 +2779,7 @@
         "english": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with <strong>custom</strong> rules. Any rule changes must be done in the CLI, with the <code>mixer rule</code> command."
     },
     "mixerBidirNote": {
-        "message": "<span class=\"message-negative\">警告：</span> <i>雙向尾電機</i> 是一項試驗性功能，需要在命令列中進行額外設定。",
+        "message": "<span class=\"message-negative\">警告：</span> <i>雙向尾馬達</i> 是一項試驗性功能，需要在命令列中進行額外設定。",
         "english": "<span class=\"message-negative\">Warning:</span> <i>Bidirectional tail motor</i> is an experimental feature that requires additional settings in the CLI."
     },
     "mixerRebootNote": {
@@ -2990,7 +2943,7 @@
         "english": "Swashring"
     },
     "mixerSwashRingHelp": {
-        "message": "當升降角和副翼角均為最大值時，增加十字盤限制值將限制十字盤的最大角度。",
+        "message": "當俯仰角和橫滾角均為最大值時，增加十字盤限制值將限制十字盤的最大角度。",
         "english": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum."
     },
     "mixerSwashPhase": {
@@ -3002,11 +2955,11 @@
         "english": "The phase offset for the swashplate controls."
     },
     "mixerSwashRollTrim": {
-        "message": "副翼微調 [%]",
+        "message": "橫滾微調 [%]",
         "english": "Roll trim [%]"
     },
     "mixerSwashPitchTrim": {
-        "message": "升降微調 [%]",
+        "message": "俯仰微調 [%]",
         "english": "Pitch trim [%]"
     },
     "mixerSwashCollectiveTrim": {
@@ -3026,7 +2979,7 @@
         "english": "Tail rotor type"
     },
     "mixerTailRotorModeHelp": {
-        "message": "<strong>變距尾翼：</strong> 由一個舵機驅動的可變螺距尾旋翼(4號舵機).  <br><strong>電機直驅：</strong> 由電機（2號電機）直接驅動尾旋翼控制航向<br><strong>雙向電機直驅：</strong> 與電機直驅一樣，但允許電機改變旋轉方向（實驗功能）",
+        "message": "<strong>變距尾翼：</strong> 由一個舵機驅動的可變螺距尾旋翼(4號舵機).  <br><strong>馬達直驅：</strong> 由馬達（2號馬達）直接驅動尾旋翼控制航向<br><strong>雙向馬達直驅：</strong> 與馬達直驅一樣，但允許馬達改變旋轉方向（實驗功能）",
         "english": "<strong>Variable pitch:</strong> Variable pitch tail controlled by a tail servo (Servo#4). <br><strong>Motorised:</strong> The tail has a separate motor (Motor#2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode (experimental)."
     },
     "mixerTailVariablePitch": {
@@ -3034,7 +2987,7 @@
         "english": "Variable pitch"
     },
     "mixerTailMotorized": {
-        "message": "電機直驅",
+        "message": "馬達直驅",
         "english": "Motorised"
     },
     "mixerTailBidirectional": {
@@ -3054,7 +3007,7 @@
         "english": "Yaw calibration [%]"
     },
     "mixerTailRotorCalibrationHelp": {
-        "message": "調整航向增益以匹配機械增益。舵機驅動尾旋翼的比例通常在50-150%左右，但電機直驅尾旋翼的比例可能大不相同。",
+        "message": "調整航向增益以匹配機械增益。舵機驅動尾旋翼的比例通常在50-150%左右，但馬達直驅尾旋翼的比例可能大不相同。",
         "english": "Adjust the yaw gain to match the mechanical gain. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors."
     },
     "mixerTailRotorMinYaw": {
@@ -3090,11 +3043,11 @@
         "english": "A limit for counter-clockwise yaw."
     },
     "mixerTailMotorIdle": {
-        "message": "電機怠速油門 [%]",
+        "message": "馬達怠速油門 [%]",
         "english": "Motor idle throttle [%]"
     },
     "mixerTailMotorIdleHelp": {
-        "message": "這是發送到尾電機的最小油門信號。這應該設定得足夠高，電機才不會停止",
+        "message": "這是發送到尾馬達的最小油門信號。這應該設定得足夠高，馬達才不會停止",
         "english": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop"
     },
     "mixerTailRotorCenterTrim": {
@@ -3102,20 +3055,15 @@
         "english": "Center trim for tail rotor [&deg;]"
     },
     "mixerTailRotorCenterTrimHelp": {
-        "message": "Set tail rotor trim to achieve zero blade pitch with 0° yaw mixer override.",
-        "english": "Set tail rotor trim to achieve zero blade pitch with 0° yaw mixer override.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "微調0度航向指令時的尾旋翼螺距。",
-            "english": "Set tail rotor trim for zero yaw command."
-        }
+        "message": "設定尾旋翼微調值以達到航向混控覆寫0°時尾槳亦為零螺距。",
+        "english": "Set tail rotor trim to achieve zero blade pitch with 0° yaw mixer override."
     },
     "mixerTailMotorCenterTrim": {
-        "message": "尾電機中心點微調 [%]",
+        "message": "尾馬達中心點微調 [%]",
         "english": "Center trim for tail motor [%]"
     },
     "mixerTailMotorCenterTrimHelp": {
-        "message": "微調0度航向指令時的尾電機油門值。",
+        "message": "微調0度航向指令時的尾馬達油門值。",
         "english": "Set tail motor throttle value for zero yaw command."
     },
     "mixerSwashLinkTrim": {
@@ -3231,11 +3179,11 @@
         "english": "-"
     },
     "mixerInputStabilizedRoll": {
-        "message": "副翼",
+        "message": "橫滾",
         "english": "Roll"
     },
     "mixerInputStabilizedPitch": {
-        "message": "升降",
+        "message": "俯仰",
         "english": "Pitch"
     },
     "mixerInputStabilizedYaw": {
@@ -3251,11 +3199,11 @@
         "english": "Throttle"
     },
     "mixerInputRCCommandRoll": {
-        "message": "副翼控制",
+        "message": "橫滾控制",
         "english": "Commanded Roll"
     },
     "mixerInputRCCommandPitch": {
-        "message": "升降控制",
+        "message": "俯仰控制",
         "english": "Commanded Pitch"
     },
     "mixerInputRCCommandYaw": {
@@ -3271,11 +3219,11 @@
         "english": "Commanded Throttle"
     },
     "mixerInputRCChannelRoll": {
-        "message": "RC 副翼通道",
+        "message": "RC 橫滾通道",
         "english": "RC Channel Roll"
     },
     "mixerInputRCChannelPitch": {
-        "message": "RC 升降通道",
+        "message": "RC 俯仰通道",
         "english": "RC Channel Pitch"
     },
     "mixerInputRCChannelYaw": {
@@ -3379,19 +3327,19 @@
         "english": "Servo #8"
     },
     "mixerOutputMotor1": {
-        "message": "電機 #1",
+        "message": "馬達 #1",
         "english": "Motor #1"
     },
     "mixerOutputMotor2": {
-        "message": "電機 #2",
+        "message": "馬達 #2",
         "english": "Motor #2"
     },
     "mixerOutputMotor3": {
-        "message": "電機 #3",
+        "message": "馬達 #3",
         "english": "Motor #3"
     },
     "mixerOutputMotor4": {
-        "message": "電機 #4",
+        "message": "馬達 #4",
         "english": "Motor #4"
     },
     "dialogMixerResetTitle": {
@@ -3535,7 +3483,7 @@
         "english": "RPM Sensor"
     },
     "motorsRPMSensorHelp": {
-        "message": "使用轉速感測器輸入電機轉速，你可以通過連接電變或者外部感測器獲得",
+        "message": "使用轉速感測器輸入馬達轉速，你可以通過連接電變或者外部感測器獲得",
         "english": "Use the RPM Sensor input for motor RPM. You can connect an RPM signal from the ESC, or from an external RPM Sensor dongle."
     },
     "motorsMainRotorGearRatio": {
@@ -3543,7 +3491,7 @@
         "english": "Main Rotor Gear Ratio"
     },
     "motorsMainRotorGearRatioHelp": {
-        "message": "電機與主旋翼的傳動比<br>使用 <span class=\"value\">電機齒</span> : <span class=\"value\">主齒</span> 牙數",
+        "message": "馬達與主旋翼的傳動比<br>使用 <span class=\"value\">馬達齒</span> : <span class=\"value\">主齒</span> 牙數",
         "english": "Gear ratio between the motor and the main rotor.<br>Use <span class=\"value\">motor pinion</span> : <span class=\"value\">main gear</span> tooth count."
     },
     "motorsTailRotorGearRatio": {
@@ -3551,27 +3499,27 @@
         "english": "Tail Rotor Gear Ratio"
     },
     "motorsTailRotorGearRatioHelp": {
-        "message": "尾旋翼與主旋翼的傳動比，使用 <span class=\"value\">後尾齒</span> : <span class=\"value\">前尾齒</span> 牙數, 或是<span class=\"value\">後皮帶輪</span> : <span class=\"value\">前皮帶輪</span>， 對於電機直驅尾旋翼，請使用 <span class=\"value\">1</span> : <span class=\"value\">1</span>",
+        "message": "尾旋翼與主旋翼的傳動比，使用 <span class=\"value\">後尾齒</span> : <span class=\"value\">前尾齒</span> 牙數, 或是<span class=\"value\">後皮帶輪</span> : <span class=\"value\">前皮帶輪</span>， 對於馬達直驅尾旋翼，請使用 <span class=\"value\">1</span> : <span class=\"value\">1</span>",
         "english": "Gear ratio between the tail rotor and the main rotor. Use <span class=\"value\">tail gear</span> : <span class=\"value\">autorotation gear</span> tooth count for Torque Tube, or <span class=\"value\">tail pulley</span> : <span class=\"value\">front pulley</span> for a belt tail. For a direct drive tail, use <span class=\"value\">1</span> : <span class=\"value\">1</span>"
     },
     "motorsMotorPoles1Long": {
-        "message": "主電機極數",
+        "message": "主馬達極數",
         "english": "Main Motor pole count"
     },
     "motorsMotorPoles2Long": {
-        "message": "尾電機極數",
+        "message": "尾馬達極數",
         "english": "Tail Motor pole count"
     },
     "motorsMotorPoles3Long": {
-        "message": "電機 M3 極數",
+        "message": "馬達 M3 極數",
         "english": "Motor M3 pole count"
     },
     "motorsMotorPoles4Long": {
-        "message": "電機 M4 極數",
+        "message": "馬達 M4 極數",
         "english": "Motor M4 pole count"
     },
     "motorsMotorPolesHelp": {
-        "message": "<i>磁鐵極數</i> 電機轉子上面的磁鐵數量，一般可以在說明書上找到，或者你可以手動數一下磁鐵數量，注意不是銅線繞組的定子。",
+        "message": "<i>磁鐵極數</i> 馬達轉子上面的磁鐵數量，一般可以在說明書上找到，或者你可以手動數一下磁鐵數量，注意不是銅線繞組的定子。",
         "english": "The <i>pole count</i> is the number of magnets on the motor bell. The manual should give this number. Or you can count the magnets. Do NOT count the stators with the copper wire windings."
     },
     "motorsThrottleMinimum": {
@@ -3619,19 +3567,19 @@
         "english": "Tail Rotor"
     },
     "motorInfo1": {
-        "message": "電機 #1 - 主電機",
+        "message": "馬達 #1 - 主馬達",
         "english": "Motor #1 - Main Motor"
     },
     "motorInfo2": {
-        "message": "電機 #2 - 尾電機",
+        "message": "馬達 #2 - 尾馬達",
         "english": "Motor #2 - Tail Motor"
     },
     "motorInfo3": {
-        "message": "電機 #3",
+        "message": "馬達 #3",
         "english": "Motor #3"
     },
     "motorInfo4": {
-        "message": "電機 #4",
+        "message": "馬達 #4",
         "english": "Motor #4"
     },
     "motorOverride": {
@@ -3643,7 +3591,7 @@
         "english": "Throttle:"
     },
     "motorRPM": {
-        "message": "電機轉速：",
+        "message": "馬達轉速：",
         "english": "RPM:"
     },
     "motorHeadspeed": {
@@ -3671,7 +3619,7 @@
         "english": "Errors:"
     },
     "motorOverrideNote": {
-        "message": "<strong>注釋</strong> 油門覆寫：出於設定和測試目的，將輸出油門強制設定為任意值。覆寫值不會儲存，會在重新啟動時重設。<br/><br/><strong class=\"message-negative\">電機油門覆寫將使電機啟動！</strong>",
+        "message": "<strong>注釋</strong> 油門覆寫：出於設定和測試目的，將輸出油門強制設定為任意值。覆寫值不會儲存，會在重新啟動時重設。<br/><br/><strong class=\"message-negative\">馬達油門覆寫將使馬達啟動！</strong>",
         "english": "<strong>Note.</strong> Throttle Override forces the output throttle to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset in reboot.<br/><br/><strong class=\"message-negative\">MOTOR THROTTLE OVERRIDE WILL MAKE THE MOTORS TO SPOOL UP!</strong>"
     },
     "motorOverrideTitle": {
@@ -3691,7 +3639,7 @@
         "english": "Governor Settings"
     },
     "govConfigurationNote": {
-        "message": "<strong>注意：</strong>定速器具有全域參數與飛行設定參數。請參閱飛行參數選項卡的飛行參數具體參數。",
+        "message": "<strong>注意：</strong>定速器具有全域參數與飛行設定參數。請參閱飛行參數頁面的飛行參數具體參數。",
         "english": "<strong>Note:</strong> Governor has both global and profile parameters. Please see the Profiles tab for profile specific parameters."
     },
     "govMode": {
@@ -3707,7 +3655,7 @@
         "english": "Handover throttle [%]"
     },
     "govHandoverThrottleHelp": {
-        "message": "定速器接管油門的油門值，低於這個油門的會直接傳送到電變，超過此油門定速器才會介入，並通過油門值計算需要達到的目標轉速。請確保電機在此值以下能夠順利啟動。",
+        "message": "定速器接管油門的油門值，低於這個油門的會直接傳送到電變，超過此油門定速器才會介入，並通過油門值計算需要達到的目標轉速。請確保馬達在此值以下能夠順利啟動。",
         "english": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level."
     },
     "govStartupTime": {
@@ -3843,27 +3791,27 @@
         "english": "Master PID loop gain. Usually 10..100"
     },
     "govPGain": {
-        "message": "P 增益",
+        "message": "P-增益",
         "english": "P-gain"
     },
     "govPGainHelp": {
-        "message": "PID 循環中的 P 增益，通常是10..100",
+        "message": "PID 循環中的 P-增益，通常是 10..100",
         "english": "PID loop P-term gain. Usually 10..100"
     },
     "govIGain": {
-        "message": "I 增益",
+        "message": "I-增益",
         "english": "I-gain"
     },
     "govIGainHelp": {
-        "message": "PID 循環中的 I 增益，通常是10..100",
+        "message": "PID 循環中的 I-增益，通常是 10..100",
         "english": "PID loop I-term gain. Usually 10..100"
     },
     "govDGain": {
-        "message": "D 增益",
+        "message": "D-增益",
         "english": "D-gain"
     },
     "govDGainHelp": {
-        "message": "PID 循環中的 D 增益，通常是10..100",
+        "message": "PID 循環中的 D-增益，通常是 0..100",
         "english": "PID loop D-term gain. Usually 0..100"
     },
     "govFGain": {
@@ -3879,7 +3827,7 @@
         "english": "Tail Torque Assist (TTA) gain"
     },
     "govTTAGainHelp": {
-        "message": "尾旋翼扭矩輔助強度（增益）。這是一個增益，用於增加主旋翼轉速，以增加逆時針自旋的尾巴力度（例如，電機直驅尾旋翼低於空轉速度）。通常為 50...150",
+        "message": "尾旋翼扭矩輔助強度（增益）。這是一個增益，用於增加主旋翼轉速，以增加逆時針自旋的尾巴力度（例如，馬達直驅尾旋翼低於空轉速度）。通常為 50...150",
         "english": "Tail Torque Assist strength (gain). This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 50..150"
     },
     "govTTALimit": {
@@ -3979,7 +3927,7 @@
         "english": "Debug"
     },
     "cliInfo": {
-        "message": "<strong>注意：</strong>退出 CLI 頁面或者點擊斷開連接將<strong>自動</strong>向飛控發送“<strong>退出</strong>”指令。在最新的韌體中這將使飛控<strong>重新啟動</strong>並且未儲存的設定將會<strong>遺失</strong>。<p><strong><span class=\"message-negative\">警告：</span></strong>CLI中的某些命令可能導致電機輸出引腳發出隨機指令。如果連接電池，這有可能導致電機旋轉。因此，強烈建議<strong>在 CLI 中輸入命令之前確保未連接電池</strong>。",
+        "message": "<strong>注意：</strong>退出 CLI 頁面或者點擊斷開連接將<strong>自動</strong>向飛控發送“<strong>退出</strong>”指令。在最新的韌體中這將使飛控<strong>重新啟動</strong>並且未儲存的設定將會<strong>遺失</strong>。<p><strong><span class=\"message-negative\">警告：</span></strong>CLI中的某些命令可能導致馬達輸出引腳發出隨機指令。如果連接電池，這有可能導致馬達旋轉。因此，強烈建議<strong>在 CLI 中輸入命令之前確保未連接電池</strong>。",
         "english": "<strong>Note:</strong> Leaving CLI tab or pressing Disconnect will <strong>automatically</strong> send \"<strong>exit</strong>\" to the board.  With the latest firmware this will make the controller <strong>restart</strong> and unsaved changes will be <strong>lost</strong>.<p><strong><span class=\"message-negative\">Warning:</span></strong> Some commands in CLI can result in arbitrary signals being sent on the motor output pins. This can cause motors to spin up if a battery is connected. Therefore it is highly recommended to make sure that <strong>no battery is connected before entering commands in CLI</strong>."
     },
     "cliInputPlaceholder": {
@@ -4175,7 +4123,7 @@
         "english": "RPM"
     },
     "blackboxLog_motors": {
-        "message": "電機",
+        "message": "馬達",
         "english": "Motors"
     },
     "blackboxLog_servos": {
@@ -4946,11 +4894,11 @@
         "english": "deep pink"
     },
     "controlAxisRoll": {
-        "message": "副翼 [A]",
+        "message": "橫滾 [A]",
         "english": "Roll [A]"
     },
     "controlAxisPitch": {
-        "message": "升降 [E]",
+        "message": "俯仰 [E]",
         "english": "Pitch [E]"
     },
     "controlAxisYaw": {
@@ -5102,11 +5050,11 @@
         "english": "Hard limit for the angle error in the PID loop. The absolute error and thus the I-term will never go above these limits."
     },
     "profilesErrorLimitRoll": {
-        "message": "副翼軸誤差限值 [&deg;]",
+        "message": "橫滾軸誤差限值 [&deg;]",
         "english": "Error Limit for Roll Axis [&deg;]"
     },
     "profilesErrorLimitPitch": {
-        "message": "升降軸誤差限值 [&deg;]",
+        "message": "俯仰軸誤差限值 [&deg;]",
         "english": "Error Limit for Pitch Axis [&deg;]"
     },
     "profilesErrorLimitYaw": {
@@ -5114,58 +5062,28 @@
         "english": "Error Limit for Yaw Axis [&deg;]"
     },
     "profilesOffsetLimitHelp": {
-        "message": "Hard limit for the High Speed Integral offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits.",
-        "english": "Hard limit for the High Speed Integral offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "PID 循環中偏移角的硬限制。絕對偏移量以及 O 項(高速最佳化)永遠不會超過這些限制。",
-            "english": "Hard limit for the offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits."
-        }
+        "message": "在 PID 循環中的高速積分偏移角度的硬限制。絕對偏移量和 O-term 永遠不會超過這些限制。",
+        "english": "Hard limit for the High Speed Integral offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits."
     },
     "profilesOffsetLimitRoll": {
-        "message": "HSI Offset Limit for Roll Axis [&deg;]",
-        "english": "HSI Offset Limit for Roll Axis [&deg;]",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "副翼高速最佳化限制 [&deg;]",
-            "english": "Offset Limit for Roll Axis [&deg;]"
-        }
+        "message": "橫滾軸高速最佳化限制 [&deg;]",
+        "english": "HSI Offset Limit for Roll Axis [&deg;]"
     },
     "profilesOffsetLimitPitch": {
-        "message": "HSI Offset Limit for Pitch Axis [&deg;]",
-        "english": "HSI Offset Limit for Pitch Axis [&deg;]",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "升降高速最佳化限制 [&deg;]",
-            "english": "Offset Limit for Pitch Axis [&deg;]"
-        }
+        "message": "俯仰軸高速最佳化限制 [&deg;]",
+        "english": "HSI Offset Limit for Pitch Axis [&deg;]"
     },
     "profilesOffsetGainHelp": {
-        "message": "Gain for the High Speed Integral Offset term (Integral for high speed flight), which is only active at large collective angles. This term of the control loop provides angular stability and safe control following at high speeds, as well as attitude stability on large changes of the collective pitch angle of the rotor disk, which would lead to rapid diving and unwanted attitude changes without HSI. Too low values cause the model to become unstable at high speeds, as well as slow reaction and large attitude changes on collective pitch changes. Too large values can cause oscillation and restlessness at large collective pitch angles. For testing of the lower bounds of the parameter, fly in a straight line <strong> AT SAFE ALTITUDE</strong>, only briefly pull the collective into the negative range and observe the model's reaction. Should the model dive, increase the HSI Offset Gain. For testing the upper bounds of the parameter, give short jabs of elevator and aileron in a high collective vertical climb and observe the model's behavior. If the model swings, wobbles or exerts restlessness after releasing the stick, decrease the HSI Offset Gain.",
-        "english": "Gain for the High Speed Integral Offset term (Integral for high speed flight), which is only active at large collective angles. This term of the control loop provides angular stability and safe control following at high speeds, as well as attitude stability on large changes of the collective pitch angle of the rotor disk, which would lead to rapid diving and unwanted attitude changes without HSI. Too low values cause the model to become unstable at high speeds, as well as slow reaction and large attitude changes on collective pitch changes. Too large values can cause oscillation and restlessness at large collective pitch angles. For testing of the lower bounds of the parameter, fly in a straight line <strong> AT SAFE ALTITUDE</strong>, only briefly pull the collective into the negative range and observe the model's reaction. Should the model dive, increase the HSI Offset Gain. For testing the upper bounds of the parameter, give short jabs of elevator and aileron in a high collective vertical climb and observe the model's behavior. If the model swings, wobbles or exerts restlessness after releasing the stick, decrease the HSI Offset Gain.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "PID循環中的 O 項增益 (作用於高速飛行中的 I 項)。",
-            "english": "Gain for Offset term (Integral for high speed flight)."
-        }
+        "message": "僅在大集體螺距下起作用的高速積分偏移量（高速飛行的積分）。這個控制迴路提供了角度穩定性和高速飛行下安全控制的跟隨性，同時在旋翼頭的集體螺距大角度變化時提供了姿態穩定性，否則將導致快速俯衝和不必要的姿態變化。過低的值會導致機體在高速下不穩定，以及在集體螺距角度變化時反應緩慢和姿態變化大。過大的值會在大集體螺距角度下導致振動和不安定性。測試參數的下限時，在安全高度直線飛行，只需短暫將集體螺距拉到負範圍並觀察機體的反應。如果模型俯衝則增加 HSI 偏移增益。測試參數的上限時，在高集體螺距角度垂直攀升中給予短促的升降舵和副翼並觀察機體的反應。如果機體搖擺、擺動或在鬆開操縱桿後顯示不安定則降低 HSI 偏移增益。",
+        "english": "Gain for the High Speed Integral Offset term (Integral for high speed flight), which is only active at large collective angles. This term of the control loop provides angular stability and safe control following at high speeds, as well as attitude stability on large changes of the collective pitch angle of the rotor disk, which would lead to rapid diving and unwanted attitude changes without HSI. Too low values cause the model to become unstable at high speeds, as well as slow reaction and large attitude changes on collective pitch changes. Too large values can cause oscillation and restlessness at large collective pitch angles. For testing of the lower bounds of the parameter, fly in a straight line <strong> AT SAFE ALTITUDE</strong>, only briefly pull the collective into the negative range and observe the model's reaction. Should the model dive, increase the HSI Offset Gain. For testing the upper bounds of the parameter, give short jabs of elevator and aileron in a high collective vertical climb and observe the model's behavior. If the model swings, wobbles or exerts restlessness after releasing the stick, decrease the HSI Offset Gain."
     },
     "profilesOffsetGainRoll": {
-        "message": "HSI Offset Gain for Roll Axis",
-        "english": "HSI Offset Gain for Roll Axis",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "副翼高速最佳化增益",
-            "english": "Offset Gain for Roll Axis"
-        }
+        "message": "橫滾軸高速最佳化增益",
+        "english": "HSI Offset Gain for Roll Axis"
     },
     "profilesOffsetGainPitch": {
-        "message": "HSI Offset Gain for Pitch Axis",
-        "english": "HSI Offset Gain for Pitch Axis",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "升降高速最佳化增益",
-            "english": "Offset Gain for Pitch Axis"
-        }
+        "message": "俯仰軸高速最佳化增益",
+        "english": "HSI Offset Gain for Pitch Axis"
     },
     "profilesErrorDecayGround": {
         "message": "地面誤差衰減",
@@ -5180,29 +5098,19 @@
         "english": "Decay Time [s]"
     },
     "profilesErrorRotation": {
-        "message": "Piro Compensation",
-        "english": "Piro Compensation",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "自旋補償",
-            "english": "Error Rotation"
-        }
+        "message": "自旋補償",
+        "english": "Piro Compensation"
     },
     "profilesErrorRotationHelp": {
-        "message": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This improves piro control and helps the model to travel in a straight line while pirouetting.",
-        "english": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This improves piro control and helps the model to travel in a straight line while pirouetting.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "當直升機機身旋轉時，圍繞航向軸旋轉目前的副翼和升降誤差項。這有時稱為Piro補償。",
-            "english": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This is sometimes called Piro Compensation."
-        }
+        "message": "當飛行器旋轉時，將當前的横滾和俯仰誤差量圍繞著航向軸旋轉。這樣可以提升旋轉控制並幫助機體在旋轉時保持直線行駛。",
+        "english": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This improves piro control and helps the model to travel in a straight line while pirouetting."
     },
     "profilesItermRelax": {
         "message": "I-Term 釋放",
         "english": "I-Term Relax"
     },
     "profilesItermRelaxHelp": {
-        "message": "快速打杆(升降/副翼/航向)時，可限制 I-term的累積。這有助於減少翻滾和其他快速運動結束時的反彈。",
+        "message": "快速打杆(俯仰/橫滾/航向)時，可限制 I-term的累積。這有助於減少翻滾和其他快速運動結束時的反彈。",
         "english": "Limits the accumulation of I-term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements."
     },
     "profilesItermRelaxType": {
@@ -5210,7 +5118,7 @@
         "english": "I-term Relax Type"
     },
     "profilesItermRelaxTypeHelp": {
-        "message": "選擇使用 I-Term 釋放的軸。<br><strong>RP: 副翼，升降<br><strong>RPY:</strong> 副翼，升降，航向",
+        "message": "選擇使用 I-Term 釋放的軸。<br><strong>RP: 橫滾，俯仰<br><strong>RPY:</strong> 橫滾，俯仰，航向",
         "english": "Choose the axes in which this is active. <br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw."
     },
     "profilesItermRelaxTypeOptionRP": {
@@ -5222,11 +5130,11 @@
         "english": "RPY"
     },
     "profilesItermRelaxCutoffRoll": {
-        "message": "副翼截止點",
+        "message": "橫滾截止點",
         "english": "Cutoff Point for Roll"
     },
     "profilesItermRelaxCutoffPitch": {
-        "message": "升降截止點",
+        "message": "俯仰截止點",
         "english": "Cutoff Point for Pitch"
     },
     "profilesItermRelaxCutoffYaw": {
@@ -5246,11 +5154,11 @@
         "english": "PID Loop overall bandwidth in Hz"
     },
     "profilesGyroCutoffRoll": {
-        "message": "副翼頻寬",
+        "message": "橫滾頻寬",
         "english": "Roll Bandwidth"
     },
     "profilesGyroCutoffPitch": {
-        "message": "升降頻寬",
+        "message": "俯仰頻寬",
         "english": "Pitch Bandwidth"
     },
     "profilesGyroCutoffYaw": {
@@ -5262,11 +5170,11 @@
         "english": "D-term Cutoff Frequency in Hz"
     },
     "profilesDtermCutoffRoll": {
-        "message": "副翼 D 截止",
+        "message": "橫滾 D 截止",
         "english": "Roll D-term Cutoff"
     },
     "profilesDtermCutoffPitch": {
-        "message": "升降 D 截止",
+        "message": "俯仰 D 截止",
         "english": "Pitch D-term Cutoff"
     },
     "profilesDtermCutoffYaw": {
@@ -5278,11 +5186,11 @@
         "english": "B-term Cutoff Frequency in Hz"
     },
     "profilesBtermCutoffRoll": {
-        "message": "副翼 B 截止",
+        "message": "橫滾 B 截止",
         "english": "Roll B-term Cutoff"
     },
     "profilesBtermCutoffPitch": {
-        "message": "升降 B 截止",
+        "message": "俯仰 B 截止",
         "english": "Pitch B-term Cutoff"
     },
     "profilesBtermCutoffYaw": {
@@ -5298,7 +5206,7 @@
         "english": "Acro Trainer gain"
     },
     "profilesAcroTrainerGainHelp": {
-        "message": "手動模式教練增益。Acro 教練模式直升機不會自動回正，但可以限制最大副翼/升降角度。這決定了在 Acro 教練模式下，直升機超過最大角度時，會有多大的強度糾正姿態。",
+        "message": "手動模式教練增益。Acro 教練模式直升機不會自動回正，但可以限制最大橫滾/俯仰角度。這決定了在 Acro 教練模式下，直升機超過最大角度時，會有多大的強度糾正姿態。",
         "english": "Acro Trainer gain. Acro trainer Mode is not self leveling but does limit the maximum pitch/roll angle. This determines how aggressively the helicopter tilts back to the maximum angle (if exceeded) while in Acro Trainer Mode"
     },
     "profilesAcroTrainerLimit": {
@@ -5306,7 +5214,7 @@
         "english": "Acro Trainer angle limit"
     },
     "profilesAcroTrainerLimitHelp": {
-        "message": "手動模式教練角度限制。Acro 教練模式不會自動回正（與自穩或半自穩模式一樣），但會限制直升機升降/副翼的最大角度。",
+        "message": "手動模式教練角度限制。Acro 教練模式不會自動回正（與自穩或半自穩模式一樣），但會限制直升機俯仰/橫滾的最大角度。",
         "english": "Acro Trainer angle limit. Acro Trainer mode does not self level (like Angle or Horizon Modes); however, it does limit the maximum angle the helicopter will pitch/roll to"
     },
     "profilesAngleModeGain": {
@@ -5346,7 +5254,7 @@
         "english": "Center Offset"
     },
     "profilesYawCenterOffsetHelp": {
-        "message": "尾電機/舵機 的中心點偏移",
+        "message": "尾馬達/舵機 的中心點偏移",
         "english": "Center Offset for tail motor or servo"
     },
     "profilesYawStopGainCW": {
@@ -5406,11 +5314,11 @@
         "english": "Decay time for collective impulse feedforward mixed into yaw"
     },
     "profilesPitchFFCollective": {
-        "message": "集體螺距-升降預補償",
+        "message": "集體螺距-俯仰預補償",
         "english": "Collective to Pitch Compensation"
     },
     "profilesPitchFFCollectiveHelp": {
-        "message": "補償集體螺距快速變化時的升降偏差。",
+        "message": "補償集體螺距快速變化時的俯仰偏差。",
         "english": "Compensation for the pitching up tendency in collective pitch pumps."
     },
     "profilesPitchFFCollectiveGain": {
@@ -5418,7 +5326,7 @@
         "english": "Compensation Gain"
     },
     "profilesPitchFFCollectiveGainHelp": {
-        "message": "混控到升降控制中的集體螺距的量。",
+        "message": "混控到俯仰控制中的集體螺距的量。",
         "english": "Amount of collective mixed into the elevator control."
     },
     "profilesCyclicCrossCoupling": {
@@ -5426,7 +5334,7 @@
         "english": "Cyclic Cross-Coupling"
     },
     "profilesCyclicCrossCouplingHelp": {
-        "message": "當只使用升降舵時，循環螺距交叉耦合補償可消除副翼擺動。",
+        "message": "當只使用俯仰舵時，循環螺距交叉耦合補償可消除橫滾擺動。",
         "english": "Cyclic Cross-Coupling compensation removes the aileron (roll) wobble when only elevator is applied."
     },
     "profilesCyclicCrossCouplingGain": {
@@ -5434,7 +5342,7 @@
         "english": "Cross-Coupling Gain"
     },
     "profilesCyclicCrossCouplingGainHelp": {
-        "message": "對升降-副翼解耦所套用的補償量",
+        "message": "對俯仰-橫滾解耦所套用的補償量",
         "english": "Amount of compensation applied for Pitch-to-Roll decoupling."
     },
     "profilesCyclicCrossCouplingRatio": {
@@ -5442,7 +5350,7 @@
         "english": "Cross-Coupling Ratio [%]"
     },
     "profilesCyclicCrossCouplingRatioHelp": {
-        "message": "所需的副翼-升降補償量與升降-副翼補償量的比率。",
+        "message": "所需的橫滾-俯仰補償量與俯仰-橫滾補償量的比率。",
         "english": "Amount of Roll-to-Pitch compensation needed, vs. Pitch-to-Roll."
     },
     "profilesCyclicCrossCouplingCutoff": {
@@ -5578,27 +5486,27 @@
         "english": "Hovering altitude after rescue action"
     },
     "profilesRescueAltitudePGain": {
-        "message": "高度P增益",
+        "message": "高度 P-增益",
         "english": "Altitude P-Gain"
     },
     "profilesRescueAltitudePGainHelp": {
-        "message": "高度控制的P增益",
+        "message": "高度控制的P-增益",
         "english": "P-gain for altitude control"
     },
     "profilesRescueAltitudeIGain": {
-        "message": "高度I增益",
+        "message": "高度 I-增益",
         "english": "Altitude I-Gain"
     },
     "profilesRescueAltitudeIGainHelp": {
-        "message": "高度控制的I增益",
+        "message": "高度控制的I-增益",
         "english": "I-gain for altitude control"
     },
     "profilesRescueAltitudeDGain": {
-        "message": "高度D增益",
+        "message": "高度 D-增益",
         "english": "Altitude D-Gain"
     },
     "profilesRescueAltitudeDGainHelp": {
-        "message": "高度控制的D增益(變數)",
+        "message": "高度控制的D-增益(變數)",
         "english": "D-gain for altitude control (vario)"
     },
     "profilesRescueMaxCollective": {
@@ -5830,7 +5738,7 @@
         "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm."
     },
     "gyroDynamicNotchMaxHzHelp": {
-        "message": "將其設定為需要過濾的最高傳入噪聲頻率。如果濾波器頻率為 1k，則應比最大尾旋翼頻率高 10-20%，但不高於 250Hz。如果濾波器頻率為 2k 或更高，則可使用 330-500 Hz，特別是對於電機直驅尾旋翼的小型直升機（範圍越大，精度越低，性能越差）。",
+        "message": "將其設定為需要過濾的最高傳入噪聲頻率。如果濾波器頻率為 1k，則應比最大尾旋翼頻率高 10-20%，但不高於 250Hz。如果濾波器頻率為 2k 或更高，則可使用 330-500 Hz，特別是對於馬達直驅尾旋翼的小型直升機（範圍越大，精度越低，性能越差）。",
         "english": "Set this to the highest incoming noise frequency that is needed to be filtered. Should be 10-20% higher than the max tail rotor frequency, but no higher than 250Hz, if filter rate is 1k. If filter rate is 2k or higher, then 330-500 Hz can be used, especially for smaller helis with a motorised tail (higher range means less precision and lower performance)."
     },
     "gyroDTermLowpassFiltersGroup": {
@@ -5894,7 +5802,7 @@
         "english": "Custom"
     },
     "gyroRpmFilterConfigNote": {
-        "message": "<b>警告：</b> RPM濾波器要求通過Dshot遙測或RPM回傳線獲得精確的電機轉速。電變遙測獲得的轉速不適合使用。",
+        "message": "<b>警告：</b> RPM濾波器要求通過Dshot遙測或RPM回傳線獲得精確的馬達轉速。電變遙測獲得的轉速不適合使用。",
         "english": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable."
     },
     "gyroRpmFilterCustomNote": {
@@ -5938,7 +5846,7 @@
         "english": "Gyro RPM Notch Filter Banks"
     },
     "gyroRpmFilterHelp": {
-        "message": "轉速控制濾波是陀螺上的一組陷波濾波器，它利用轉速遙測數據以外科手術般精準去除噪聲。<br /><br /><b><span>重要</span>: 電變必須支援雙向DShot協定，並且$t(tabmotors.com message)選項卡中的$t(configurationMotorPoles.message)的值必須正確才能使此過濾器工作。</b>",
+        "message": "轉速控制濾波是陀螺上的一組陷波濾波器，它利用轉速遙測數據以外科手術般精準去除噪聲。<br /><br /><b><span>重要</span>: 電變必須支援雙向DShot協定，並且$t(tabmotors.com message)頁面中的$t(configurationMotorPoles.message)的值必須正確才能使此過濾器工作。</b>",
         "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
     },
     "gyroRpmFilterMainRotorGroup": {
@@ -5958,19 +5866,19 @@
         "english": "RPM controlled filters for the tail rotor harmonics"
     },
     "gyroRpmFilterMainMotorGroup": {
-        "message": "主電機陷波濾波器",
+        "message": "主馬達陷波濾波器",
         "english": "Main Motor Notch Filters"
     },
     "gyroRpmFilterMainMotorHelp": {
-        "message": "針對主電機諧波的轉速控制濾波器",
+        "message": "針對主馬達諧波的轉速控制濾波器",
         "english": "RPM controlled filters for the main motor harmonics"
     },
     "gyroRpmFilterTailMotorGroup": {
-        "message": "尾電機陷波濾波器",
+        "message": "尾馬達陷波濾波器",
         "english": "Tail Motor Notch Filters"
     },
     "gyroRpmFilterTailMotorHelp": {
-        "message": "針對尾電機諧波的轉速控制濾波器",
+        "message": "針對尾馬達諧波的轉速控制濾波器",
         "english": "RPM controlled filters for the tail motor harmonics"
     },
     "gyroRpmFilterH1": {
@@ -6102,7 +6010,7 @@
         "english": "Failsafe Throttle Low Delay [s]"
     },
     "failsafeThrottleLowHelp": {
-        "message": "在油門保持低位超過該時間，不再執行失控保護措施轉而直接鎖定電機。",
+        "message": "在油門保持低位超過該時間，不再執行失控保護措施轉而直接鎖定飛行器。",
         "english": "Just disarm the craft instead of executing the selected failsafe procedure when the throttle was low for this amount of time"
     },
     "failsafeThrottleItem": {
@@ -6110,11 +6018,11 @@
         "english": "Throttle value used while landing"
     },
     "failsafeOffDelayItem": {
-        "message": "失控保護過程中關閉電機延時 [秒]",
+        "message": "失控保護過程中關閉馬達延時 [秒]",
         "english": "Delay for turning off the Motors during Failsafe [s]"
     },
     "failsafeOffDelayHelp": {
-        "message": "暫時保持在降落模式而不鎖定電機的時間",
+        "message": "暫時保持在降落模式而不鎖定馬達的時間",
         "english": "Time to stay in landing mode until the motors are turned off and the craft is disarmed"
     },
     "failsafeSubTitle1": {
@@ -6306,13 +6214,8 @@
         "english": "To calibrate, use a multimeter to measure the actual voltage / current draw on your craft (with a battery plugged in), and enter the values below. Then, with the same battery still plugged in, click [Calibrate]."
     },
     "powerCalibrationManagerNote": {
-        "message": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove rotor blades before plugging in a battery!</strong>",
-        "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove rotor blades before plugging in a battery!</strong>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<strong>注意：</strong> 在校準縮放之前，請確保電壓和電流飄移的除數和乘數設定正確。<br>將值設定為0將不會套用校準。</br><strong>在插上電池前記得卸下螺旋槳！</strong>",
-            "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>"
-        }
+        "message": "<strong>注意：</strong> 在校準比例之前，請確保電壓的除數和乘數以及電流的偏移值已正確設置。<br>將這些值設置為 0 將不會於校準中生效。</br><strong>在插上電池前記得卸下螺旋槳！</strong>",
+        "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove rotor blades before plugging in a battery!</strong>"
     },
     "powerCalibrationManagerWarning": {
         "message": "<span class=\"message-negative\">警告：</span>電池<span class=\"message-negative\">未接入</span>或電壓計源和電流計源<span class=\"message-negative\">沒有正確設定。</span>請確保電壓計和/或電流計讀數超過0. 否則您將無法使用此工具進行校準。",
@@ -7002,21 +6905,21 @@
         "english": "Debug variables"
     },
     "osdTextElementPIDRoll": {
-        "message": "PID 副翼",
+        "message": "PID 橫滾",
         "english": "PID roll",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementPIDRoll": {
-        "message": "副翼 PID 增益",
+        "message": "橫滾軸 PID 增益",
         "english": "Roll axis PID gains"
     },
     "osdTextElementPIDPitch": {
-        "message": "PID 升降",
+        "message": "PID 俯仰",
         "english": "PID pitch",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementPIDPitch": {
-        "message": "俯仰 PID 數值",
+        "message": "俯仰軸 PID 數值",
         "english": "Pitch axis PID gains"
     },
     "osdTextElementPIDYaw": {
@@ -7025,7 +6928,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementPIDYaw": {
-        "message": "航向 PID 增益",
+        "message": "航向軸 PID 增益",
         "english": "Yaw axis PID gains"
     },
     "osdTextElementPower": {
@@ -7065,21 +6968,21 @@
         "english": "Average cell voltage (main battery voltage / cell count)"
     },
     "osdTextElementPitchAngle": {
-        "message": "角度：升降",
+        "message": "角度：俯仰",
         "english": "Angle: pitch",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementPitchAngle": {
-        "message": "升降角度數字",
+        "message": "俯仰角度數字",
         "english": "Numerical pitch angle in degrees"
     },
     "osdTextElementRollAngle": {
-        "message": "角度：副翼",
+        "message": "角度：橫滾",
         "english": "Angle: roll",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementRollAngle": {
-        "message": "副翼角度數字",
+        "message": "橫滾角度數字",
         "english": "Numerical roll angle in degrees"
     },
     "osdTextElementMainBattUsage": {
@@ -7169,7 +7072,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementEscRpm": {
-        "message": "電變回傳電機轉速",
+        "message": "電變回傳轉速",
         "english": "RPM reported by ESC telemetry"
     },
     "osdTextElementRemaningTimeEstimate": {
@@ -7245,12 +7148,12 @@
         "english": "Shows how much G-Force the craft is experiencing"
     },
     "osdTextElementMotorDiag": {
-        "message": "電機診斷",
+        "message": "馬達診斷",
         "english": "Motor diagnostics",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementMotorDiag": {
-        "message": "顯示每個電機輸出的圖表",
+        "message": "顯示每個馬達輸出的圖表",
         "english": "Shows a graph of the output of each motor"
     },
     "osdTextElementLogStatus": {
@@ -7268,7 +7171,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementFlipArrow": {
-        "message": "在反烏龜模式中，箭頭指示哪邊的電機朝上",
+        "message": "在反烏龜模式中，箭頭指示哪邊的馬達朝上",
         "english": "Arrow showing which side motors are up in turtle mode"
     },
     "osdTextElementLinkQuality": {
@@ -7322,7 +7225,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementEscRpmFreq": {
-        "message": "電變回傳電機轉速頻率",
+        "message": "電變回傳轉速頻率",
         "english": "RPM frequency reported by ESC telemetry"
     },
     "osdTextElementRateProfileName": {
@@ -7804,7 +7707,7 @@
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningEscFail": {
-        "message": "列舉一個出現故障的電變/電機的列表 (RPM 或溫度超出設定的閾值)",
+        "message": "列舉一個出現故障的電變/馬達的列表 (RPM 或溫度超出設定的臨限值)",
         "english": "Enumerates a list with the ESCs/motors that are failing (RPM or temperature are out of the configured threshold)"
     },
     "osdWarningTextCoreTemperature": {
@@ -7813,16 +7716,16 @@
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningCoreTemperature": {
-        "message": "當 MCU 核心溫度超過設定的閾值時發出警告",
+        "message": "當 MCU 核心溫度超過設定的臨限值時發出警告",
         "english": "Warns when MCU core temperature exceeds a configured threshold"
     },
     "osdWarningTextRcSmoothingFailure": {
-        "message": "RC 平滑失敗",
+        "message": "RC 平滑化失敗",
         "english": "RC Smoothing failure",
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningRcSmoothingFailure": {
-        "message": "當 RC 平滑初始化失敗時發出警告",
+        "message": "當 RC 平滑化初始化失敗時發出警告",
         "english": "Warns when RC Smoothing initialization failed"
     },
     "osdWarningTextFailsafe": {
@@ -7922,7 +7825,7 @@
         "english": "Configure flight timers."
     },
     "osdSectionHelpAlarms": {
-        "message": "設定OSD警報閾值",
+        "message": "設定OSD警報臨限值",
         "english": "Set the thresholds used for OSD elements with alarm states."
     },
     "osdSectionHelpStats": {
@@ -8276,7 +8179,7 @@
         "description": "Indicates if SA device is unlocked"
     },
     "mainHelpArmed": {
-        "message": "電機解鎖",
+        "message": "馬達解鎖",
         "english": "Motor Arming"
     },
     "mainHelpFailsafe": {
@@ -8368,7 +8271,7 @@
         "english": "Logging device"
     },
     "blackboxDeviceHelp": {
-        "message": "<strong>無日誌：</strong> 關閉日誌記錄<br><br><strong>內建快閃記憶體：</strong> 記錄到內建快閃記憶體中（如果可用）。<br><br><strong>SD卡：</strong> 記錄到SD卡中（如果可用）。<br><br><strong>串列埠：</strong> 記錄到通過串列埠連接的外部設備上（如 OpenLager），必須在<strong>設定</strong> 選項卡中將對應串列埠設定為“黑盒日誌記錄”.",
+        "message": "<strong>無日誌：</strong> 關閉日誌記錄<br><br><strong>內建快閃記憶體：</strong> 記錄到內建快閃記憶體中（如果可用）。<br><br><strong>SD卡：</strong> 記錄到SD卡中（如果可用）。<br><br><strong>串列埠：</strong> 記錄到通過串列埠連接的外部設備上（如 OpenLager），必須在<strong>設定</strong> 頁面中將對應串列埠設定為“黑盒日誌記錄”.",
         "english": "<strong>No Logging:</strong> Disable logging.<br><br><strong>Onboard Flash:</strong> Log to the onboard flash chip (if available).<br><br><strong>SD Card:</strong> Log to the onboard SD card (if available).<br><br><strong>Serial Port:</strong> Log to an external logger device (e.g OpenLager) connected to a serial port. The serial port must to be configured to 'Blackbox Logging' on the <strong>Configuration</strong> tab."
     },
     "blackboxRateOfLogging": {
