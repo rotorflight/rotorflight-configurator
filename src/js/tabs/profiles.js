@@ -2,7 +2,9 @@
 
 TABS.profiles = {
     isDirty: false,
+    isChanged: false,
     activeSubtab: null,
+    savedProfile: null,
     currentProfile: null,
     isGovEnabled: false,
     isGovActive: false,
@@ -65,8 +67,17 @@ TABS.profiles.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_SET_GOVERNOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_GOVERNOR_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
             .then(() => {
+                self.savedProfile = self.currentProfile;
                 GUI.log(i18n.getMessage('eepromSaved'));
-                if (callback) callback();
+                callback?.();
+            });
+    }
+
+    function revert_data(callback) {
+        MSP.promise(MSPCodes.MSP_SELECT_SETTING, [self.savedProfile])
+            .then(() => {
+                GUI.log(i18n.getMessage('profilesActivateProfile', [self.savedProfile + 1]));
+                callback?.();
             });
     }
 
@@ -78,6 +89,9 @@ TABS.profiles.initialize = function (callback) {
     function data_to_form() {
 
         self.currentProfile = FC.CONFIG.profile;
+
+        if (self.savedProfile == undefined)
+            self.savedProfile = self.currentProfile;
 
         self.activeSubtab = self.tabNames[self.currentProfile];
 
@@ -405,12 +419,21 @@ TABS.profiles.initialize = function (callback) {
         $('.tab-profiles').addClass('toolbar_hidden');
 
         self.isDirty = false;
+        self.isChanged = false;
+
+        function setChanged() {
+            if (!self.isChanged) {
+                self.isDirty = true;
+                self.isChanged = true;
+                $('.tab-profiles').removeClass('toolbar_hidden');
+                $('#copyProfile').addClass('disabled');
+            }
+        }
 
         function setDirty() {
             if (!self.isDirty) {
                 self.isDirty = true;
                 $('.tab-profiles').removeClass('toolbar_hidden');
-                $('#copyProfile').addClass('disabled');
             }
         }
 
@@ -419,12 +442,17 @@ TABS.profiles.initialize = function (callback) {
             MSP.promise(MSPCodes.MSP_SELECT_SETTING, [profile])
                 .then(function () {
                     GUI.log(i18n.getMessage('profilesActivateProfile', [profile + 1]));
-                    GUI.tab_switch_reload();
+                    GUI.tab_switch_reload(() => setDirty());
                 });
         }
 
         self.tabNames.forEach(function(element, index) {
-            $('.tab-profiles .tab-container .' + element).on('click', () => GUI.tab_switch_allowed(() => activateProfile(index)));
+            $('.tab-profiles .tab-container .' + element).on('click', function () {
+                if (index != self.currentProfile) {
+                    self.isDirty = self.isChanged;
+                    GUI.tab_switch_allowed(() => activateProfile(index));
+                }
+            });
             $('.tab-profiles .tab-container .' + element).toggle(index < FC.CONFIG.numProfiles);
         });
 
@@ -460,7 +488,7 @@ TABS.profiles.initialize = function (callback) {
         });
 
         $('#copyProfile').click(function() {
-            if (!self.isDirty) {
+            if (!self.isChanged) {
                 dialogCopyProfile.showModal();
             }
         });
@@ -496,7 +524,10 @@ TABS.profiles.initialize = function (callback) {
         };
 
         self.revert = function (callback) {
-            callback();
+            if (self.currentProfile != self.savedProfile)
+                revert_data(callback);
+            else
+                callback?.();
         };
 
         $('a.save').click(function () {
@@ -508,7 +539,7 @@ TABS.profiles.initialize = function (callback) {
         });
 
         $('.tab-area').change(function () {
-            setDirty();
+            setChanged();
         });
 
         $('.tab-profiles input[id="govHeadspeed"]').change(function () {
@@ -521,7 +552,7 @@ TABS.profiles.initialize = function (callback) {
         function get_status() {
             MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
                 if (self.currentProfile != FC.CONFIG.profile && !dialogProfileChange.hasAttribute('open')) {
-                    if (self.isDirty) {
+                    if (self.isChanged) {
                         dialogProfileChange.showModal();
                     } else {
                         GUI.tab_switch_reload();
@@ -541,5 +572,5 @@ TABS.profiles.initialize = function (callback) {
 TABS.profiles.cleanup = function (callback) {
     this.isDirty = false;
 
-    if (callback) callback();
+    callback?.();
 };
