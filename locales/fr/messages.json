@@ -150,9 +150,8 @@
         "english": "Revert"
     },
     "buttonHelp": {
-        "message": "Help",
-        "english": "Help",
-        "status": "New entry. Please translate!"
+        "message": "Aide",
+        "english": "Help"
     },
     "eepromSaved": {
         "message": "EEPROM <span class=\"message-positive\">sauvegardée</span>",
@@ -284,9 +283,8 @@
         "english": "Show update notifications for unstable versions of the configurator"
     },
     "configuratorDevelopmentNotice": {
-        "message": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version.",
-        "english": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version.",
-        "status": "New entry. Please translate!"
+        "message": "Vous utilisez une <b>version de développement</b> du <b>Configurateur Rotorflight</b>.<br> Veuillez envisager d'utiliser une version publiée, à moins que vous n'ayez une bonne raison d'utiliser une version de développement non publiée.",
+        "english": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version."
     },
     "configuratorUpdateNotice": {
         "message": "Votre version du <b>Configurateur Rotorflight</b> est obsolète.<br>$t(configuratorUpdateHelp.message)",
@@ -995,9 +993,8 @@
         "english": "Arming Allowed"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
+        "message": "Liste des drapeaux indiquant pourquoi l'armement n'est actuellement pas autorisé. Passez la souris sur le drapeau ou référez-vous au tutoriel du site Web <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\" noopener noreferrer\">(Drapeaux du mode Armement)</a> pour plus d'informations.",
         "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
-        "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Liste des drapeaux indicant pourquoi l'armement est actuellement indisponible. Passez la souris sur le drapeaux ou référez vous au wiki (page séquence armement et sécurité ) pour plus d'infos.",
             "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Wiki ('Arming Sequence & Safety' page) for more info."
@@ -2249,9 +2246,8 @@
         "english": "Adjustment Function"
     },
     "receiverTelemetrySensor_GOV_MODE": {
-        "message": "Governor Mode",
-        "english": "Governor Mode",
-        "status": "New entry. Please translate!"
+        "message": "Mode gouverneur",
+        "english": "Governor Mode"
     },
     "receiverBars": {
         "message": "Canaux de réception",
