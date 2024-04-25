@@ -114,18 +114,13 @@
     margin-bottom: 1em;
 }
 
-.tab-landing .content_mid .donate,
 .tab-landing .content_mid .qrcode {
     margin: 10px;
     text-align: center;
 }
 
-.tab-landing .content_mid .donate img {
-    height: 35px;
-}
-
 .tab-landing .content_mid .qrcode img {
-    height: 120px;
+    height: 160px;
     padding: 10px;
     background-color: white;
 }
