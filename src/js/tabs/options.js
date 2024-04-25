@@ -18,9 +18,7 @@ TABS.options.initialize = function (callback) {
 };
 
 TABS.options.cleanup = function (callback) {
-    if (callback) {
-        callback();
-    }
+    callback?.();
 };
 
 /**

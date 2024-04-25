@@ -203,7 +203,7 @@ const serial = {
             self.bytesSent = 0;
             self.failed = 0;
 
-            callback();
+            callback?.();
         }
     },
     disconnect: function (callback) {

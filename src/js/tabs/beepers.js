@@ -26,7 +26,7 @@ TABS.beepers.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
             .then(() => {
                 GUI.log(i18n.getMessage('eepromSaved'));
-                if (callback) callback();
+                callback?.();
             });
     }
 
@@ -89,7 +89,7 @@ TABS.beepers.initialize = function (callback) {
         };
 
         self.revert = function (callback) {
-            callback();
+            callback?.();
         };
 
         $('a.save').click(function () {
@@ -111,5 +111,5 @@ TABS.beepers.initialize = function (callback) {
 TABS.beepers.cleanup = function (callback) {
     this.isDirty = false;
 
-    if (callback) callback();
+    callback?.();
 };

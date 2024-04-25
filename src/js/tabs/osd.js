@@ -3124,7 +3124,5 @@ TABS.osd.cleanup = function(callback) {
     $(document).unbind('keypress');
     $(document).off('click', 'span.progressLabel a');
 
-    if (callback) {
-        callback();
-    }
+    callback?.();
 };

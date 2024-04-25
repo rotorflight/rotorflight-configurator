@@ -293,7 +293,7 @@ TABS.blackbox.initialize = function (callback) {
             };
 
             self.revert = function (callback) {
-                callback();
+                callback?.();
             };
 
             $(".tab-blackbox a.reboot").click(function() {
@@ -723,7 +723,7 @@ TABS.blackbox.cleanup = function (callback) {
         sdcardTimer = false;
     }
 
-    if (callback) callback();
+    callback?.();
 };
 
 TABS.blackbox.mscRebootFailedCallback = function () {

@@ -992,7 +992,5 @@ TABS.vtx.cleanup = function (callback) {
 
     GUI.interval_remove(this._DEVICE_STATUS_UPDATE_INTERVAL_NAME);
 
-    if (callback) {
-        callback();
-    }
+    callback?.();
 };

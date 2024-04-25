@@ -15,7 +15,7 @@ TABS.changelog.initialize = function (callback) {
 };
 
 TABS.changelog.cleanup = function (callback) {
-    if (callback) callback();
+    callback?.();
 };
 
 
@@ -35,5 +35,5 @@ TABS.privacy_policy.initialize = function (callback) {
 };
 
 TABS.privacy_policy.cleanup = function (callback) {
-    if (callback) callback();
+    callback?.();
 };

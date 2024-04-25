@@ -33,7 +33,7 @@ TABS.auxiliary.initialize = function (callback) {
         function eeprom_write() {
             MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, function () {
                 GUI.log(i18n.getMessage('eepromSaved'));
-                if (callback) callback();
+                callback?.();
             });
         }
     }
@@ -544,7 +544,7 @@ TABS.auxiliary.initialize = function (callback) {
         };
 
         self.revert = function (callback) {
-            callback();
+            callback?.();
         };
 
         $('a.save').click(function () {
@@ -579,6 +579,6 @@ TABS.auxiliary.initialize = function (callback) {
 TABS.auxiliary.cleanup = function (callback) {
     this.isDirty = false;
 
-    if (callback) callback();
+    callback?.();
 };
 

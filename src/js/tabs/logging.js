@@ -315,5 +315,5 @@ TABS.logging.initialize = function (callback) {
 };
 
 TABS.logging.cleanup = function (callback) {
-    if (callback) callback();
+    callback?.();
 };

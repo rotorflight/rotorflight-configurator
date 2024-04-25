@@ -174,8 +174,7 @@ STM32DFU_protocol.prototype.releaseInterface = function (interfaceNumber) {
 STM32DFU_protocol.prototype.resetDevice = function (callback) {
     chrome.usb.resetDevice(this.handle, function (result) {
         console.log('Reset Device: ' + result);
-
-        if (callback) callback();
+        callback?.();
     });
 };
 
@@ -1069,9 +1068,7 @@ STM32DFU_protocol.prototype.cleanup = function () {
 
     console.log('Script finished after: ' + (timeSpent / 1000) + ' seconds');
 
-    if (self.callback) {
-        self.callback();
-    }
+    self.callback?.();
 };
 
 // initialize object

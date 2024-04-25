@@ -253,7 +253,7 @@ function configuration_backup(callback) {
                                 }
 
                                 console.log('Write SUCCESSFUL');
-                                if (callback) callback();
+                                callback?.();
                             };
 
                             writer.write(blob);

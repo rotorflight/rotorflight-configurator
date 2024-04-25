@@ -339,6 +339,6 @@ TABS.status.cleanup = function (callback) {
         this.model.dispose();
     }
 
-    if (callback) callback();
+    callback?.();
 };
 

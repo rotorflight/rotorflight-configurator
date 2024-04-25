@@ -159,5 +159,5 @@ TABS.setup.initialize = function (callback) {
 };
 
 TABS.setup.cleanup = function (callback) {
-    if (callback) callback();
+    callback?.();
 };
