@@ -309,11 +309,7 @@ TABS.receiver.initialize = function (callback) {
         const rxProtoSelectElement = $('select[name="receiverProtocol"]');
         var currentProto = 0;
 
-        self.rxSerialPort = false;
-        for (const port of FC.SERIAL_CONFIG.ports) {
-            if (port.functionMask & 64)
-                self.rxSerialPort = true;
-        }
+        self.rxSerialPort = FC.SERIAL_CONFIG.ports.some((port) => (port.functionMask & 64));
 
         self.rxProtocols.forEach((item, index) => {
             let visible = item.visible;
