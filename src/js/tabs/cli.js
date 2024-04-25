@@ -311,7 +311,7 @@ TABS.cli.initialize = function (callback) {
                 dialog.showModal();
             }
             else {
-                callback();
+                callback?.();
             }
         };
 
@@ -520,7 +520,7 @@ TABS.cli.cleanup = function (callback) {
     }
 
     if (!(CONFIGURATOR.connectionValid && CONFIGURATOR.cliValid && CONFIGURATOR.cliActive)) {
-        if (callback) callback();
+        callback?.();
         return;
     }
 
@@ -530,7 +530,7 @@ TABS.cli.cleanup = function (callback) {
         // we can setup an interval asking for data lets say every 200ms,
         // when data arrives, callback will be triggered and tab switched
         // we could probably implement this someday
-        if (callback) callback();
+        callback?.();
 
         CONFIGURATOR.cliActive = false;
         CONFIGURATOR.cliValid = false;

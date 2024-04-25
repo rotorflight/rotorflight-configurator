@@ -30,7 +30,7 @@ TABS.led_strip.initialize = function (callback) {
         MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, () =>
         {
             GUI.log(i18n.getMessage('eepromSaved'));
-            if (callback) callback();
+            callback?.();
         }
         )))));
     }
@@ -727,7 +727,7 @@ TABS.led_strip.initialize = function (callback) {
         };
 
         self.revert = function(callback) {
-            callback();
+            callback?.();
         };
 
         $('a.save').click(function () {
@@ -1244,5 +1244,5 @@ TABS.led_strip.initialize = function (callback) {
 TABS.led_strip.cleanup = function (callback) {
     this.isDirty = false;
 
-    if (callback) callback();
+    callback?.();
 };

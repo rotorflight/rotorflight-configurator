@@ -690,7 +690,7 @@ TABS.adjustments.initialize = function (callback) {
 
         function update_ui() {
             for (const callback of self.callback_stack) {
-                callback();
+                callback?.();
             }
             autoSelectChannel();
         }

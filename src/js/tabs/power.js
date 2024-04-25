@@ -490,5 +490,5 @@ TABS.power.cleanup = function (callback) {
 
     this.isDirty = false;
 
-    if (callback) callback();
+    callback?.();
 };

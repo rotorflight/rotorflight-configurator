@@ -576,7 +576,7 @@ TABS.configuration.initialize = function (callback) {
         };
 
         self.revert = function (callback) {
-            callback();
+            callback?.();
         };
 
         $('a.save').click(function () {
@@ -627,5 +627,5 @@ TABS.configuration.cleanup = function (callback) {
 
     this.isDirty = false;
 
-    if (callback) callback();
+    callback?.();
 };

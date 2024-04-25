@@ -509,6 +509,6 @@ TABS.mixer.initialize = function (callback) {
 TABS.mixer.cleanup = function (callback) {
     this.isDirty = false;
 
-    if (callback) callback();
+    callback?.();
 };
 

@@ -366,9 +366,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                 });
             }
 
-            if (callback) {
-                callback();
-            }
+            callback?.();
         }
 
         function populateVersions(versions_element, builds, target) {
@@ -1056,7 +1054,7 @@ TABS.firmware_flasher.cleanup = function (callback) {
     $('div#flashbutton a.flash_state').removeClass('active');
     $('div#flashbutton a.flash').removeClass('active');
 
-    if (callback) callback();
+    callback?.();
 };
 
 TABS.firmware_flasher.enableFlashing = function (enabled) {

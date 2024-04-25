@@ -205,7 +205,7 @@ TABS.receiver.initialize = function (callback) {
                     reinitialiseConnection(callback);
                 }
                 else {
-                    if (callback) callback();
+                    callback?.();
                 }
             });
     }
@@ -758,7 +758,7 @@ TABS.receiver.initialize = function (callback) {
         };
 
         self.revert = function(callback) {
-            callback();
+            callback?.();
         };
 
         $('a.save').click(function () {
@@ -910,5 +910,5 @@ TABS.receiver.cleanup = function (callback) {
 
     this.isDirty = false;
 
-    if (callback) callback();
+    callback?.();
 };

@@ -34,7 +34,7 @@ TABS.servos.initialize = function (callback) {
                     GUI.log(i18n.getMessage('deviceRebooting'));
                     reinitialiseConnection(callback);
                 } else {
-                    if (callback) callback();
+                    callback?.();
                 }
             });
         });
@@ -351,7 +351,7 @@ TABS.servos.initialize = function (callback) {
 TABS.servos.cleanup = function (callback) {
     this.isDirty = false;
 
-    if (callback) callback();
+    callback?.();
 };
 
 TABS.servos.cloneConfig = function (servos) {

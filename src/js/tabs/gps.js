@@ -225,7 +225,7 @@ TABS.gps.initialize = function (callback) {
         };
 
         self.revert = function (callback) {
-            callback();
+            callback?.();
         };
 
         $('a.save').click(function () {
@@ -259,5 +259,5 @@ TABS.gps.initialize = function (callback) {
 TABS.gps.cleanup = function (callback) {
     this.isDirty = false;
 
-    if (callback) callback();
+    callback?.();
 };

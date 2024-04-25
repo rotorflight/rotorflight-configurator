@@ -776,5 +776,5 @@ function update_dataflash_global() {
 function reinitialiseConnection(callback) {
     GUI.reboot_in_progress = true;
 
-    if (callback) callback();
+    callback?.();
 }

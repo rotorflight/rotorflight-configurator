@@ -826,9 +826,7 @@ STM32_protocol.prototype.cleanup = function () {
 
     console.log('Script finished after: ' + (timeSpent / 1000) + ' seconds');
 
-    if (self.callback) {
-        self.callback();
-    }
+    self.callback?.();
 };
 
 // initialize object

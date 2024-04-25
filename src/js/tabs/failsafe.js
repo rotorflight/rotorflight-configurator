@@ -307,7 +307,7 @@ TABS.failsafe.initialize = function (callback) {
         };
 
         self.revert = function (callback) {
-            callback();
+            callback?.();
         };
 
         $('a.save').click(function () {
@@ -336,6 +336,6 @@ TABS.failsafe.initialize = function (callback) {
 TABS.failsafe.cleanup = function (callback) {
     this.isDirty = false;
 
-    if (callback) callback();
+    callback?.();
 };
 

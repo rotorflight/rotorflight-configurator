@@ -299,11 +299,11 @@ GuiControl.prototype.tab_switch_allowed = function (callback) {
             showTabExitDialog(this.current_tab, callback);
         }
         else {
-            if (callback) callback();
+            callback?.();
         }
     }
     else {
-        if (callback) callback();
+        callback?.();
     }
 };
 
@@ -324,7 +324,7 @@ GuiControl.prototype.tab_switch_cleanup = function (callback) {
     if (this.current_tab) {
         this.current_tab.cleanup(callback);
     } else {
-        if (callback) callback();
+        callback?.();
     }
 };
 
@@ -440,9 +440,7 @@ GuiControl.prototype.content_ready = function (callback) {
         });
     });
 
-    if (callback) {
-        callback();
-    }
+    callback?.();
 };
 
 GuiControl.prototype.saveDefaultTab = function(tabName) {

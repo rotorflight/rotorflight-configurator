@@ -537,7 +537,7 @@ TABS.gyro.initialize = function (callback) {
         };
 
         self.revert = function (callback) {
-            callback();
+            callback?.();
         };
 
         $('a.save').click(function () {
@@ -556,5 +556,5 @@ TABS.gyro.initialize = function (callback) {
 TABS.gyro.cleanup = function (callback) {
     this.isDirty = false;
 
-    if (callback) callback();
+    callback?.();
 };
