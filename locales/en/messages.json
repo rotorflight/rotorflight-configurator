@@ -2764,19 +2764,19 @@
         "message": "0% Throttle PWM value"
     },
     "motorsThrottleMinimumHelp": {
-        "message": "This is the PWM value that is sent to the ESCs at zero throttle (when the craft is armed)."
+        "message": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE)."
     },
     "motorsThrottleMaximum": {
         "message": "100% Throttle PWM value"
     },
     "motorsThrottleMaximumHelp": {
-        "message": "This is the PWM value that is sent to the ESCs at full throttle (when the craft is armed)."
+        "message": "This PWM value is sent to the ESC/servo at full throttle."
     },
     "motorsThrottleMinimumCommand": {
-        "message": "Disarm Throttle PWM value"
+        "message": "Motor Stop Throttle PWM value"
     },
     "motorsThrottleMinimumCommandHelp": {
-        "message": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that allows the ESC to arm (typically 1000)."
+        "message": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm."
     },
     "motorMainGearRatioIssueNote": {
         "message": "<span class=\"message-negative\">Warning:</span> <i>Main Rotor Gear Ratio</i> is set to an incorrect value. Please check!"
