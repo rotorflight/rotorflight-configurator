@@ -3952,6 +3952,30 @@
     "profilesErrorDecayTime": {
         "message": "Decay Time [s]"
     },
+    "profilesErrorDecayTimeCyclic": {
+        "message": "Error Decay time [s]"
+    },
+    "profilesErrorDecayTimeCyclicHelp": {
+        "message": "Time constant for bleeding off the accumulated cyclic error (I-term). Longer decay time makes hovering more stable, but may reduce 3D performance."
+    },
+    "profilesErrorDecayLimitCyclic": {
+        "message": "Error Decay maximum rate [&deg;/s]"
+    },
+    "profilesErrorDecayLimitCyclicHelp": {
+        "message": "Maximum bleed-off speed for the accumulated cyclic error (I-term)."
+    },
+    "profilesErrorDecayTimeYaw": {
+        "message": "Error Decay time [s]"
+    },
+    "profilesErrorDecayTimeYawHelp": {
+        "message": "Time constant for bleeding off the accumulated yaw error (I-term)."
+    },
+    "profilesErrorDecayLimitYaw": {
+        "message": "Error Decay maximum rate [&deg;/s]"
+    },
+    "profilesErrorDecayLimitYawHelp": {
+        "message": "Maximum bleed-off speed for the accumulated yaw error (I-term)."
+    },
     "profilesErrorRotation": {
         "message": "Piro Compensation"
     },

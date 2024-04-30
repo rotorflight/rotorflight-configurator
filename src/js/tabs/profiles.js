@@ -158,8 +158,12 @@ TABS.profiles.initialize = function (callback) {
         // Error rotation
         $('.tab-profiles input[id="errorRotation"]').prop('checked', FC.PID_PROFILE.error_rotation !== 0);
 
-        // Error decay
+        // Error decays
         $('.tab-profiles input[id="errorDecayTimeGround"]').val(FC.PID_PROFILE.error_decay_time_ground / 10);
+        $('.tab-profiles input[id="errorDecayTimeCyclic"]').val(FC.PID_PROFILE.error_decay_time_cyclic / 10);
+        $('.tab-profiles input[id="errorDecayLimitCyclic"]').val(FC.PID_PROFILE.error_decay_limit_cyclic);
+        //$('.tab-profiles input[id="errorDecayTimeYaw"]').val(FC.PID_PROFILE.error_decay_time_yaw / 10);
+        //$('.tab-profiles input[id="errorDecayLimitYaw"]').val(FC.PID_PROFILE.error_decay_limit_yaw);
 
         const errorDecayCheck = $('.tab-profiles input[id="errorDecayGround"]');
         errorDecayCheck.change(function() {
@@ -327,6 +331,13 @@ TABS.profiles.initialize = function (callback) {
 
         FC.PID_PROFILE.error_decay_time_ground = $('.tab-profiles input[id="errorDecayGround"]').is(':checked') ?
             $('.tab-profiles input[id="errorDecayTimeGround"]').val() * 10 : 0;
+
+        FC.PID_PROFILE.error_decay_time_cyclic = $('.tab-profiles input[id="errorDecayTimeCyclic"]').val() * 10;
+        FC.PID_PROFILE.error_decay_limit_cyclic = $('.tab-profiles input[id="errorDecayLimitCyclic"]').val();
+
+        //FC.PID_PROFILE.error_decay_time_yaw = $('.tab-profiles input[id="errorDecayTimeYaw"]').val() * 10;
+        //FC.PID_PROFILE.error_decay_limit_yaw = $('.tab-profiles input[id="errorDecayLimitYaw"]').val();
+
         FC.PID_PROFILE.error_rotation = $('.tab-profiles input[id="errorRotation"]').is(':checked') ? 1 : 0;
         FC.PID_PROFILE.itermRelaxType = $('.tab-profiles input[id="itermRelax"]').is(':checked') ?
             $('.tab-profiles select[id="itermRelaxType"]').val() : 0;
