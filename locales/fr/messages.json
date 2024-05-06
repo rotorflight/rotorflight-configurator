@@ -3527,24 +3527,44 @@
         "english": "0% Throttle PWM value"
     },
     "motorsThrottleMinimumHelp": {
-        "message": "Il s'agit de la valeur PWM qui est envoyée aux ESC à régime nul (lorsque l'appareil est armé).",
-        "english": "This is the PWM value that is sent to the ESCs at zero throttle (when the craft is armed)."
+        "message": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE).",
+        "english": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE).",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Il s'agit de la valeur PWM qui est envoyée aux ESC à régime nul (lorsque l'appareil est armé).",
+            "english": "This is the PWM value that is sent to the ESCs at zero throttle (when the craft is armed)."
+        }
     },
     "motorsThrottleMaximum": {
         "message": "Valeur PWM des gaz à 100%",
         "english": "100% Throttle PWM value"
     },
     "motorsThrottleMaximumHelp": {
-        "message": "Il s'agit de la valeur PWM qui est envoyée aux ESC à plein régime (lorsque l'appareil est armé).",
-        "english": "This is the PWM value that is sent to the ESCs at full throttle (when the craft is armed)."
+        "message": "This PWM value is sent to the ESC/servo at full throttle.",
+        "english": "This PWM value is sent to the ESC/servo at full throttle.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Il s'agit de la valeur PWM qui est envoyée aux ESC à plein régime (lorsque l'appareil est armé).",
+            "english": "This is the PWM value that is sent to the ESCs at full throttle (when the craft is armed)."
+        }
     },
     "motorsThrottleMinimumCommand": {
-        "message": "Désarmer la valeur PWM de l'accélérateur",
-        "english": "Disarm Throttle PWM value"
+        "message": "Motor Stop Throttle PWM value",
+        "english": "Motor Stop Throttle PWM value",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Désarmer la valeur PWM de l'accélérateur",
+            "english": "Disarm Throttle PWM value"
+        }
     },
     "motorsThrottleMinimumCommandHelp": {
-        "message": "Il s'agit de la valeur PWM qui est envoyée aux ESC lorsque l'appareil est désarmé. Réglez-le sur une valeur qui permet à l'ESC de s'armer (généralement 1000).",
-        "english": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that allows the ESC to arm (typically 1000)."
+        "message": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm.",
+        "english": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Il s'agit de la valeur PWM qui est envoyée aux ESC lorsque l'appareil est désarmé. Réglez-le sur une valeur qui permet à l'ESC de s'armer (généralement 1000).",
+            "english": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that allows the ESC to arm (typically 1000)."
+        }
     },
     "motorMainGearRatioIssueNote": {
         "message": "<span class=\"message-negative\">Avertissement:</span> <i>Le rapport de démultiplication du rotor principal</i> est défini sur une valeur incorrecte. Vérifiez s'il vous plaît!",
@@ -5096,6 +5116,46 @@
     "profilesErrorDecayTime": {
         "message": "Temps de décroissance [s]",
         "english": "Decay Time [s]"
+    },
+    "profilesErrorDecayTimeCyclic": {
+        "message": "Error Decay time [s]",
+        "english": "Error Decay time [s]",
+        "status": "New entry. Please translate!"
+    },
+    "profilesErrorDecayTimeCyclicHelp": {
+        "message": "Time constant for bleeding off the accumulated cyclic error (I-term). Longer decay time makes hovering more stable, but may reduce 3D performance.",
+        "english": "Time constant for bleeding off the accumulated cyclic error (I-term). Longer decay time makes hovering more stable, but may reduce 3D performance.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesErrorDecayLimitCyclic": {
+        "message": "Error Decay maximum rate [&deg;/s]",
+        "english": "Error Decay maximum rate [&deg;/s]",
+        "status": "New entry. Please translate!"
+    },
+    "profilesErrorDecayLimitCyclicHelp": {
+        "message": "Maximum bleed-off speed for the accumulated cyclic error (I-term).",
+        "english": "Maximum bleed-off speed for the accumulated cyclic error (I-term).",
+        "status": "New entry. Please translate!"
+    },
+    "profilesErrorDecayTimeYaw": {
+        "message": "Error Decay time [s]",
+        "english": "Error Decay time [s]",
+        "status": "New entry. Please translate!"
+    },
+    "profilesErrorDecayTimeYawHelp": {
+        "message": "Time constant for bleeding off the accumulated yaw error (I-term).",
+        "english": "Time constant for bleeding off the accumulated yaw error (I-term).",
+        "status": "New entry. Please translate!"
+    },
+    "profilesErrorDecayLimitYaw": {
+        "message": "Error Decay maximum rate [&deg;/s]",
+        "english": "Error Decay maximum rate [&deg;/s]",
+        "status": "New entry. Please translate!"
+    },
+    "profilesErrorDecayLimitYawHelp": {
+        "message": "Maximum bleed-off speed for the accumulated yaw error (I-term).",
+        "english": "Maximum bleed-off speed for the accumulated yaw error (I-term).",
+        "status": "New entry. Please translate!"
     },
     "profilesErrorRotation": {
         "message": "Compensation Piro",
