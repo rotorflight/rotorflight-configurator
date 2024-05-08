@@ -3527,44 +3527,24 @@
         "english": "0% Throttle PWM value"
     },
     "motorsThrottleMinimumHelp": {
-        "message": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE).",
-        "english": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE).",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "這是在零油門時(直升機已解鎖)發送到電變的 PWM 值。",
-            "english": "This is the PWM value that is sent to the ESCs at zero throttle (when the craft is armed)."
-        }
+        "message": "這是在低油門(怠速但不會動)時發送到電變/舵機的 PWM 值。",
+        "english": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE)."
     },
     "motorsThrottleMaximum": {
         "message": "100% 油門 PWM 值",
         "english": "100% Throttle PWM value"
     },
     "motorsThrottleMaximumHelp": {
-        "message": "This PWM value is sent to the ESC/servo at full throttle.",
-        "english": "This PWM value is sent to the ESC/servo at full throttle.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "這是在全油門時(直升機已解鎖)發送到電變的 PWM 值。",
-            "english": "This is the PWM value that is sent to the ESCs at full throttle (when the craft is armed)."
-        }
+        "message": "這是在全油門時發送到電變/舵機的 PWM 值。",
+        "english": "This PWM value is sent to the ESC/servo at full throttle."
     },
     "motorsThrottleMinimumCommand": {
-        "message": "Motor Stop Throttle PWM value",
-        "english": "Motor Stop Throttle PWM value",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "上鎖油門 PWM 值",
-            "english": "Disarm Throttle PWM value"
-        }
+        "message": "馬達停止油門 PWM 值",
+        "english": "Motor Stop Throttle PWM value"
     },
     "motorsThrottleMinimumCommandHelp": {
-        "message": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm.",
-        "english": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "當直升機上鎖時，這是發送到電變的PWM值。將其設定為允許電變進入解鎖的值(通常為1000)。",
-            "english": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that allows the ESC to arm (typically 1000)."
-        }
+        "message": "這是在馬達停止運轉時發送到電變/舵機的 PWM 值。這也同時是允許電變進入解鎖狀態的值。",
+        "english": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm."
     },
     "motorMainGearRatioIssueNote": {
         "message": "<span class=\"message-negative\">警告：</span> <i>主旋翼齒比</i> 設定為不正確的值。請檢查!",
@@ -5114,48 +5094,40 @@
         "english": "Bleeds off the current controller error when the craft is not airborne. This helps preventing the craft from tipping over on the ground."
     },
     "profilesErrorDecayTime": {
-        "message": "衰減時間常數 [秒]",
+        "message": "衰減時間 [秒]",
         "english": "Decay Time [s]"
     },
     "profilesErrorDecayTimeCyclic": {
-        "message": "Error Decay time [s]",
-        "english": "Error Decay time [s]",
-        "status": "New entry. Please translate!"
+        "message": "誤差衰減時間 [秒]",
+        "english": "Error Decay time [s]"
     },
     "profilesErrorDecayTimeCyclicHelp": {
-        "message": "Time constant for bleeding off the accumulated cyclic error (I-term). Longer decay time makes hovering more stable, but may reduce 3D performance.",
-        "english": "Time constant for bleeding off the accumulated cyclic error (I-term). Longer decay time makes hovering more stable, but may reduce 3D performance.",
-        "status": "New entry. Please translate!"
+        "message": "用來消除累積的循環螺距誤差（I-term）的時間常數。較長的衰減時間可以使懸停更穩定，但可能會降低 3D 表現。",
+        "english": "Time constant for bleeding off the accumulated cyclic error (I-term). Longer decay time makes hovering more stable, but may reduce 3D performance."
     },
     "profilesErrorDecayLimitCyclic": {
-        "message": "Error Decay maximum rate [&deg;/s]",
-        "english": "Error Decay maximum rate [&deg;/s]",
-        "status": "New entry. Please translate!"
+        "message": "誤差衰減最大速率 [&deg;/s]",
+        "english": "Error Decay maximum rate [&deg;/s]"
     },
     "profilesErrorDecayLimitCyclicHelp": {
-        "message": "Maximum bleed-off speed for the accumulated cyclic error (I-term).",
-        "english": "Maximum bleed-off speed for the accumulated cyclic error (I-term).",
-        "status": "New entry. Please translate!"
+        "message": "累積的循環螺距誤差（I-term）的最大消減速度。",
+        "english": "Maximum bleed-off speed for the accumulated cyclic error (I-term)."
     },
     "profilesErrorDecayTimeYaw": {
-        "message": "Error Decay time [s]",
-        "english": "Error Decay time [s]",
-        "status": "New entry. Please translate!"
+        "message": "誤差衰減時間 [秒]",
+        "english": "Error Decay time [s]"
     },
     "profilesErrorDecayTimeYawHelp": {
-        "message": "Time constant for bleeding off the accumulated yaw error (I-term).",
-        "english": "Time constant for bleeding off the accumulated yaw error (I-term).",
-        "status": "New entry. Please translate!"
+        "message": "用來消除累積的偏航誤差（I-term）的時間常數。",
+        "english": "Time constant for bleeding off the accumulated yaw error (I-term)."
     },
     "profilesErrorDecayLimitYaw": {
-        "message": "Error Decay maximum rate [&deg;/s]",
-        "english": "Error Decay maximum rate [&deg;/s]",
-        "status": "New entry. Please translate!"
+        "message": "誤差衰減最大速率 [&deg;/s]",
+        "english": "Error Decay maximum rate [&deg;/s]"
     },
     "profilesErrorDecayLimitYawHelp": {
-        "message": "Maximum bleed-off speed for the accumulated yaw error (I-term).",
-        "english": "Maximum bleed-off speed for the accumulated yaw error (I-term).",
-        "status": "New entry. Please translate!"
+        "message": "累積的偏航誤差（I-term）的最大消減速度。",
+        "english": "Maximum bleed-off speed for the accumulated yaw error (I-term)."
     },
     "profilesErrorRotation": {
         "message": "自旋補償",
