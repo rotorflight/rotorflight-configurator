@@ -3527,7 +3527,7 @@
         "english": "0% Throttle PWM value"
     },
     "motorsThrottleMinimumHelp": {
-        "message": "Cette valeur PWM est envoyée à l'ESC/servo à faible régime (accélérateur au ralenti avec ICE).",
+        "message": "Cette valeur PWM est envoyée à l'ESC/servo à faible régime (accélérateur au ralenti pour les moteur à combustion interne. Nitro ou Gasser).",
         "english": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE).",
         "previous": {
             "message": "Il s'agit de la valeur PWM qui est envoyée aux ESC à régime nul (lorsque l'appareil est armé).",
