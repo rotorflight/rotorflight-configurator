@@ -3527,44 +3527,24 @@
         "english": "0% Throttle PWM value"
     },
     "motorsThrottleMinimumHelp": {
-        "message": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE).",
-        "english": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE).",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Dit is de PWM-waarde die naar de ESC's wordt gestuurd bij nul throttle (wanneer het voertuig ge-armed is).",
-            "english": "This is the PWM value that is sent to the ESCs at zero throttle (when the craft is armed)."
-        }
+        "message": "Deze PWM-waarde wordt verzonden naar de ESC/servo bij lage throttle (stationair toerental met ICE).",
+        "english": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE)."
     },
     "motorsThrottleMaximum": {
         "message": "100% throttle PWM-waarde",
         "english": "100% Throttle PWM value"
     },
     "motorsThrottleMaximumHelp": {
-        "message": "This PWM value is sent to the ESC/servo at full throttle.",
-        "english": "This PWM value is sent to the ESC/servo at full throttle.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Dit is de PWM-waarde die naar de ESC's wordt gestuurd bij full throttle (wanneer het voertuig ge-armed is).",
-            "english": "This is the PWM value that is sent to the ESCs at full throttle (when the craft is armed)."
-        }
+        "message": "Deze PWM-waarde wordt naar de ESC/servo gestuurd bij full throttle.",
+        "english": "This PWM value is sent to the ESC/servo at full throttle."
     },
     "motorsThrottleMinimumCommand": {
-        "message": "Motor Stop Throttle PWM value",
-        "english": "Motor Stop Throttle PWM value",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Disarm throttle PWM-waarde",
-            "english": "Disarm Throttle PWM value"
-        }
+        "message": "Motor stop throttle PWM-waarde",
+        "english": "Motor Stop Throttle PWM value"
     },
     "motorsThrottleMinimumCommandHelp": {
-        "message": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm.",
-        "english": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Dit is de PWM-waarde die naar de ESC's wordt gestuurd wanneer het voertuig niet ge-armed is. Stel dit in op een waarde die de ESC in staat stelt te armen (typisch 1000).",
-            "english": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that allows the ESC to arm (typically 1000)."
-        }
+        "message": "Deze PWM-waarde wordt naar de ESC/servo gestuurd wanneer de motor is gestopt. Dit is ook een waarde die de ESC toestaat om te armen.",
+        "english": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm."
     },
     "motorMainGearRatioIssueNote": {
         "message": "<span class=\"message-negative\">Waarschuwing:</span> De <i>hoofdrotor tandwielverhouding</i> is ingesteld op een onjuiste waarde. S.v.p. controleren!",
@@ -3575,7 +3555,7 @@
         "english": "<span class=\"message-negative\">Warning:</span> <i>Tail Rotor Gear Ratio</i> is set to an incorrect value. Please check!"
     },
     "motorRotorSpeeds": {
-        "message": "Rotor snelheid",
+        "message": "Rotorsnelheid",
         "english": "Rotor Speed"
     },
     "motorMainRotorSpeed": {
@@ -5118,44 +5098,36 @@
         "english": "Decay Time [s]"
     },
     "profilesErrorDecayTimeCyclic": {
-        "message": "Error Decay time [s]",
-        "english": "Error Decay time [s]",
-        "status": "New entry. Please translate!"
+        "message": "Foutvervaltijd [s]",
+        "english": "Error Decay time [s]"
     },
     "profilesErrorDecayTimeCyclicHelp": {
-        "message": "Time constant for bleeding off the accumulated cyclic error (I-term). Longer decay time makes hovering more stable, but may reduce 3D performance.",
-        "english": "Time constant for bleeding off the accumulated cyclic error (I-term). Longer decay time makes hovering more stable, but may reduce 3D performance.",
-        "status": "New entry. Please translate!"
+        "message": "De tijdsconstante voor het wegwerken van de opgebouwde cyclische fout (I-term). Een langere vervaltijd maakt hoveren stabieler, maar kan de 3D-prestaties verminderen.",
+        "english": "Time constant for bleeding off the accumulated cyclic error (I-term). Longer decay time makes hovering more stable, but may reduce 3D performance."
     },
     "profilesErrorDecayLimitCyclic": {
-        "message": "Error Decay maximum rate [&deg;/s]",
-        "english": "Error Decay maximum rate [&deg;/s]",
-        "status": "New entry. Please translate!"
+        "message": "Maximum snelheid foutverval [&deg;/s]",
+        "english": "Error Decay maximum rate [&deg;/s]"
     },
     "profilesErrorDecayLimitCyclicHelp": {
-        "message": "Maximum bleed-off speed for the accumulated cyclic error (I-term).",
-        "english": "Maximum bleed-off speed for the accumulated cyclic error (I-term).",
-        "status": "New entry. Please translate!"
+        "message": "Maximale snelheid voor het wegwerken van de opgebouwde cyclische fout (I-term).",
+        "english": "Maximum bleed-off speed for the accumulated cyclic error (I-term)."
     },
     "profilesErrorDecayTimeYaw": {
-        "message": "Error Decay time [s]",
-        "english": "Error Decay time [s]",
-        "status": "New entry. Please translate!"
+        "message": "Foutvervaltijd [s]",
+        "english": "Error Decay time [s]"
     },
     "profilesErrorDecayTimeYawHelp": {
-        "message": "Time constant for bleeding off the accumulated yaw error (I-term).",
-        "english": "Time constant for bleeding off the accumulated yaw error (I-term).",
-        "status": "New entry. Please translate!"
+        "message": "Tijdconstante voor het wegwerken van de opgebouwde yaw-fout (I-term).",
+        "english": "Time constant for bleeding off the accumulated yaw error (I-term)."
     },
     "profilesErrorDecayLimitYaw": {
-        "message": "Error Decay maximum rate [&deg;/s]",
-        "english": "Error Decay maximum rate [&deg;/s]",
-        "status": "New entry. Please translate!"
+        "message": "Maximum snelheid foutverval [&deg;/s]",
+        "english": "Error Decay maximum rate [&deg;/s]"
     },
     "profilesErrorDecayLimitYawHelp": {
-        "message": "Maximum bleed-off speed for the accumulated yaw error (I-term).",
-        "english": "Maximum bleed-off speed for the accumulated yaw error (I-term).",
-        "status": "New entry. Please translate!"
+        "message": "Maximale snelheid voor het wegwerken van de opgebouwde yaw-fout (I-term).",
+        "english": "Maximum bleed-off speed for the accumulated yaw error (I-term)."
     },
     "profilesErrorRotation": {
         "message": "Piro-compensatie",
