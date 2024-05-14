@@ -3529,10 +3529,6 @@
     "motorsThrottleMinimumHelp": {
         "message": "Cette valeur PWM est envoyée à l'ESC/servo à faible régime (accélérateur au ralenti pour les moteur à combustion interne. Nitro ou Gasser).",
         "english": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE).",
-        "previous": {
-            "message": "Il s'agit de la valeur PWM qui est envoyée aux ESC à régime nul (lorsque l'appareil est armé).",
-            "english": "This is the PWM value that is sent to the ESCs at zero throttle (when the craft is armed)."
-        }
     },
     "motorsThrottleMaximum": {
         "message": "Valeur PWM des gaz à 100%",
@@ -3540,27 +3536,15 @@
     },
     "motorsThrottleMaximumHelp": {
         "message": "Cette valeur PWM est envoyée à l'ESC/servo à plein régime.",
-        "english": "This PWM value is sent to the ESC/servo at full throttle.",
-        "previous": {
-            "message": "Il s'agit de la valeur PWM qui est envoyée aux ESC à plein régime (lorsque l'appareil est armé).",
-            "english": "This is the PWM value that is sent to the ESCs at full throttle (when the craft is armed)."
-        }
+        "english": "This PWM value is sent to the ESC/servo at full throttle."
     },
     "motorsThrottleMinimumCommand": {
         "message": "Valeur PWM du papillon d'arrêt du moteur",
-        "english": "Motor Stop Throttle PWM value",
-        "previous": {
-            "message": "Désarmer la valeur PWM de l'accélérateur",
-            "english": "Disarm Throttle PWM value"
-        }
+        "english": "Motor Stop Throttle PWM value"
     },
     "motorsThrottleMinimumCommandHelp": {
         "message": "Cette valeur PWM est envoyée à l'ESC/servo lorsque le moteur est arrêté. C'est également une valeur qui permet à l'ESC de s'armer.",
-        "english": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm.",
-        "previous": {
-            "message": "Il s'agit de la valeur PWM qui est envoyée aux ESC lorsque l'appareil est désarmé. Réglez-le sur une valeur qui permet à l'ESC de s'armer (généralement 1000).",
-            "english": "This is the PWM value that is sent to the ESCs when the craft is disarmed. Set this to a value that allows the ESC to arm (typically 1000)."
-        }
+        "english": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm."
     },
     "motorMainGearRatioIssueNote": {
         "message": "<span class=\"message-negative\">Avertissement:</span> <i>Le rapport de démultiplication du rotor principal</i> est défini sur une valeur incorrecte. Vérifiez s'il vous plaît!",
