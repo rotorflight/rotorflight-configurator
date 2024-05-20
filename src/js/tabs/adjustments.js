@@ -75,6 +75,8 @@ TABS.adjustments = {
         { id: 61,   name: 'CrossCouplingGain',          min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
         { id: 62,   name: 'CrossCouplingRatio',         min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
         { id: 63,   name: 'CrossCouplingCutoff',        min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
+        { id: 64,   name: 'AccTrimPitch',               min: -300,  max: 300,    ticks: 10,   pips: [ -300, -200, -100, 0, 100, 200, 300 ] },
+        { id: 65,   name: 'AccTrimRoll',                min: -300,  max: 300,    ticks: 10,   pips: [ -300, -200, -100, 0, 100, 200, 300 ] },
     ],
 
     callback_stack: [],
