@@ -4475,7 +4475,7 @@
         "english": "Loaded Local Firmware: ($1 bytes)"
     },
     "firmwareFlasherFirmwareOnlineLoaded": {
-        "message": "Micrologiciel en ligne chargé: (1$ octets)",
+        "message": "Micrologiciel en ligne chargé: ($1 octets)",
         "english": "Loaded Online Firmware: ($1 bytes)"
     },
     "firmwareFlasherHexCorrupted": {
