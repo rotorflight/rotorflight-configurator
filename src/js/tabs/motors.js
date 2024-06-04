@@ -22,8 +22,8 @@ TABS.motors = {
     telemetryProtocols: [
         "Disabled",
         "BLHeli32",
-        "Hobbywing V4",
-        "Hobbywing V5",
+        "Hobbywing Platinum V4 / FlyFun V5",
+        "Hobbywing Platinum V5",
         "Scorpion",
         "Kontronik",
         "OMPHobby",
