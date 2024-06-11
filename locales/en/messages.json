@@ -153,6 +153,9 @@
     "rememberLastTab": {
         "message": "Reopen last tab on connect"
     },
+    "rememberLastSelectedBoard": {
+        "message": "Remember last selected board in firmware flasher"
+    },
     "analyticsOptOut": {
         "message": "Opt out of the anonymised collection of statistics data"
     },
@@ -3519,6 +3522,29 @@
     },
     "firmwareFlasherPreviousDevice": {
         "message": "Detected: <strong>$1</strong> - previous device still flashing, please replug to try again"
+    },
+    "firmwareFlasherNoBoardsLoaded": {
+        "message": "No boards loaded"
+    },
+    "firmwareFlasherBoardDetectionButton": {
+        "message": "Auto-detect Board"
+    },
+    "firmwareFlasherBoardDetectionSucceeded": {
+        "message": "Detected board: <strong>{{boardName}}</strong>",
+        "description": "Board detection was successful!"
+    },
+    "firmwareFlasherBoardDetectionFail": {
+        "message": "Unable to detect board for connected device"
+    },
+    "firmwareFlasherBoardDetectionBoardNotFound": {
+        "message": "Detected board: <strong>{{boardName}}</strong>, but no matching target found.",
+        "description": "Board detection was successful, but there was no matching target available."
+    },
+    "firmwareFlasherBoardDetectionDescriptionHint": {
+        "message": "Detect only works when not in DFU mode and when MSP communication is working. Sometimes you have to retry a few times or even reconnect USB. Try connecting as normal first as you could have forgotten to apply custom defaults. Please reboot after flashing - replug your USB."
+    },
+    "firmwareFlasherBoardDetectionInProgress": {
+        "message": "Auto-detecting board for connected device..."
     },
     "ledStripHelp": {
         "message": "The flight controller can control colors and effects of individual LEDs on a strip.<br />Configure LEDs on the grid, configure wiring order then attach LEDs on your aircraft according to grid positions. LEDs without wire ordering number will not be saved.<br />Double-click on a color to edit the HSV values."
