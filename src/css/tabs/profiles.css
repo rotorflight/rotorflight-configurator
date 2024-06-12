@@ -1,4 +1,3 @@
-
 .tab-profiles input[type="number"]::-webkit-inner-spin-button {
     border: 0;
 }
@@ -13,7 +12,7 @@
     width: 100%;
 }
 
-.tab-profiles .tab-container > div {
+.tab-profiles .tab-container>div {
     background-color: #2e2e2e;
     padding: 6px 12px;
     border-right: 1px solid white;
@@ -21,21 +20,21 @@
     text-align: center;
 }
 
-.tab-profiles .tab-container > div:first-child {
+.tab-profiles .tab-container>div:first-child {
     border-top-left-radius: 4px;
 }
 
-.tab-profiles .tab-container > div:last-child {
+.tab-profiles .tab-container>div:last-child {
     border-top-right-radius: 4px;
 }
 
-.tab-profiles .tab-container > div a {
+.tab-profiles .tab-container>div a {
     display: block;
     color: #999999;
 }
 
-.tab-profiles .tab-container > div.active,
-.tab-profiles .tab-container > div.active a {
+.tab-profiles .tab-container>div.active,
+.tab-profiles .tab-container>div.active a {
     background-color: var(--accent);
     color: #000;
     transition: none;
@@ -122,6 +121,10 @@
     border-right: 0;
 }
 
+.tab-profiles .pid_table {
+    table-layout: fixed;
+    width: 100%;
+}
 
 .tab-profiles .pid_table tr.pid_titlebar th {
     color: var(--quietText);
@@ -233,7 +236,7 @@
 
 .tab-profiles .copybtn {
     width: 150px;
-    margin-right:10px;
+    margin-right: 10px;
 }
 
 
@@ -286,10 +289,6 @@
     display: flex;
 }
 
-.tab-profiles .content_wrapper_header_btns {
-    margin-left: auto;
-}
-
 @media all and (max-width: 575px) {
     .tab-profiles .content_wrapper_header {
         flex-wrap: wrap;
@@ -302,12 +301,7 @@
         width: calc(50% - 5px);
     }
 
-    .tab-profiles .content_wrapper_header_btns {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .tab-profiles .tab-container > div {
+    .tab-profiles .tab-container>div {
         width: calc(100% / 3);
     }
 

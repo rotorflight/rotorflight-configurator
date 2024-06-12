@@ -2110,37 +2110,37 @@
         "message": "Center position in µs. The servo arm should be level in this position."
     },
     "servoMin": {
-        "message": "Min"
+        "message": "Limit"
     },
     "servoMinHelp": {
         "message": "Lowest point of travel (minimum pulse width). This setting changes the allowed negative servo throw. It is used for avoiding servo arm binding at the negative travel extreme."
     },
     "servoMax": {
-        "message": "Max"
+        "message": "Limit"
     },
     "servoMaxHelp": {
         "message": "Highest point of travel (maximum pulse width). This setting changes the allowed positive servo throw. It is used for avoiding servo arm binding at the positive travel extreme."
     },
     "servoScaleNeg": {
-        "message": "Scale neg"
+        "message": "Scale"
     },
     "servoScaleNegHelp": {
         "message": "Scaling factor on the negative side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws."
     },
     "servoScalePos": {
-        "message": "Scale pos"
+        "message": "Scale"
     },
     "servoScalePosHelp": {
         "message": "Scaling factor on the positive side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws."
     },
     "servoRate": {
-        "message": "Rate [Hz]"
+        "message": "Rate"
     },
     "servoRateHelp": {
         "message": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time."
     },
     "servoSpeed": {
-        "message": "Speed [ms]"
+        "message": "Speed"
     },
     "servoSpeedHelp": {
         "message": "Limits the servo motion speed. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed for 60&deg; rotation."
