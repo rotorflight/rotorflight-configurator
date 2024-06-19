@@ -6,10 +6,10 @@
         </div>
         <div class="content_wrapper_header">
             <div class="content_wrapper_header_btns">
-                <div class="default_btn copybtn">
+                <div class="default_btn copybtn" style="width: 200px;">
                     <a href="#" id="copyProfile" i18n="profilesCopyProfile"></a>
                 </div>
-                <div class="default_btn resetbtn">
+                <div class="default_btn resetbtn" style="width: 200px;">
                     <a href="#" id="resetProfile" i18n="profilesResetProfile"></a>
                 </div>
             </div>
@@ -35,394 +35,395 @@
                 <a href="#" i18n="profilesSubTab6"></a>
             </div>
         </div>
+
         <div class="tab-area">
-        <form name="profile" id="profile">
-            <div class="subtab">
-                <div class="clear-both"></div>
-                <div class="cf_column">
-                    <div class="note profilesPIDWarning">
-                        <p class="profilesPIDWarningText"></p>
-                    </div>
-                    <div class="gui_box grey pid_config">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="profilesPidGains"></div>
+            <form name="profile" id="profile">
+                <div class="subtab">
+                    <div class="clear-both"></div>
+                    <div class="cf_column">
+                        <div class="note profilesPIDWarning">
+                            <p class="profilesPIDWarningText"></p>
                         </div>
-                        <table id="pid_main" class="pid_table">
-                            <tr class="pid_titlebar">
-                                <th class="name">
-                                    <div class="name-helpicon-flex">
-                                        <div i18n="profilesPIDGains" class="sm-min"></div>
-                                    </div>
-                                </th>
-                                <th class="proportional">
-                                    <div class="name-helpicon-flex">
-                                        <div i18n="profilesProportional" class="sm-min"></div>
-                                        <div class="xs">P</div>
-                                        <div class="helpicon cf_tip" i18n_title="profilesProportionalHelp"></div>
-                                    </div>
-                                </th>
-                                <th class="integral">
-                                    <div class="name-helpicon-flex">
-                                        <div i18n="profilesIntegral" class="sm-min"></div>
-                                        <div class="xs">I</div>
-                                        <div class="helpicon cf_tip" i18n_title="profilesIntegralHelp"></div>
-                                    </div>
-                                </th>
-                                <th class="derivative">
-                                    <div class="name-helpicon-flex">
-                                        <div i18n="profilesDerivative" class="derivativeText"></div>
-                                        <div class="xs">D</div>
-                                        <div class="helpicon cf_tip" i18n_title="profilesDerivativeHelp"></div>
-                                    </div>
-                                </th>
-                                <th class="feedforward">
-                                    <div class="name-helpicon-flex">
-                                        <div i18n="profilesFeedforward" class="sm-min"></div>
-                                        <div class="xs">FF</div>
-                                        <div class="helpicon cf_tip" i18n_title="profilesFeedforwardHelp"></div>
-                                    </div>
-                                </th>
-                                <th class="boost">
-                                    <div class="name-helpicon-flex">
-                                        <div i18n="profilesBoost" class="sm-min"></div>
-                                        <div class="xs">B</div>
-                                        <div class="helpicon cf_tip" i18n_title="profilesBoostHelp"></div>
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr class="ROLL"><!-- 0 -->
-                                <td class="axis_title" i18n="axisROLL">ROLL</td>
-                                <td class="pid_data"><input type="number" name="P" step="1" min="0" max="1000" /></td>
-                                <td class="pid_data"><input type="number" name="I" step="1" min="0" max="1000" /></td>
-                                <td class="pid_data"><input type="number" name="D" step="1" min="0" max="1000" /></td>
-                                <td class="pid_data"><input type="number" name="F" step="1" min="0" max="1000" /></td>
-                                <td class="pid_data"><input type="number" name="B" step="1" min="0" max="1000" /></td>
-                            </tr>
-                            <tr class="PITCH"><!-- 1 -->
-                                <td class="axis_title" i18n="axisPITCH">PITCH</td>
-                                <td class="pid_data"><input type="number" name="P" step="1" min="0" max="1000" /></td>
-                                <td class="pid_data"><input type="number" name="I" step="1" min="0" max="1000" /></td>
-                                <td class="pid_data"><input type="number" name="D" step="1" min="0" max="1000" /></td>
-                                <td class="pid_data"><input type="number" name="F" step="1" min="0" max="1000" /></td>
-                                <td class="pid_data"><input type="number" name="B" step="1" min="0" max="1000" /></td>
-                            </tr>
-                            <tr class="YAW"><!-- 2 -->
-                                <td class="axis_title" i18n="axisYAW">YAW</td>
-                                <td class="pid_data"><input type="number" name="P" step="1" min="0" max="1000" /></td>
-                                <td class="pid_data"><input type="number" name="I" step="1" min="0" max="1000" /></td>
-                                <td class="pid_data"><input type="number" name="D" step="1" min="0" max="1000" /></td>
-                                <td class="pid_data"><input type="number" name="F" step="1" min="0" max="1000" /></td>
-                                <td class="pid_data"><input type="number" name="B" step="1" min="0" max="1000" /></td>
-                            </tr>
-                        </table>
-                    </div>
+                        <div class="gui_box grey pid_config">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="profilesPidGains"></div>
+                            </div>
+                            <table id="pid_main" class="pid_table">
+                                <tr class="pid_titlebar">
+                                    <th class="name">
+                                        <div class="name-helpicon-flex">
+                                            <div i18n="profilesPIDGains" class="sm-min"></div>
+                                        </div>
+                                    </th>
+                                    <th class="proportional">
+                                        <div class="name-helpicon-flex">
+                                            <div i18n="profilesProportional" class="sm-min"></div>
+                                            <div class="xs">P</div>
+                                            <div class="helpicon cf_tip" i18n_title="profilesProportionalHelp"></div>
+                                        </div>
+                                    </th>
+                                    <th class="integral">
+                                        <div class="name-helpicon-flex">
+                                            <div i18n="profilesIntegral" class="sm-min"></div>
+                                            <div class="xs">I</div>
+                                            <div class="helpicon cf_tip" i18n_title="profilesIntegralHelp"></div>
+                                        </div>
+                                    </th>
+                                    <th class="derivative">
+                                        <div class="name-helpicon-flex">
+                                            <div i18n="profilesDerivative" class="derivativeText"></div>
+                                            <div class="xs">D</div>
+                                            <div class="helpicon cf_tip" i18n_title="profilesDerivativeHelp"></div>
+                                        </div>
+                                    </th>
+                                    <th class="feedforward">
+                                        <div class="name-helpicon-flex">
+                                            <div i18n="profilesFeedforward" class="sm-min"></div>
+                                            <div class="xs">FF</div>
+                                            <div class="helpicon cf_tip" i18n_title="profilesFeedforwardHelp"></div>
+                                        </div>
+                                    </th>
+                                    <th class="boost">
+                                        <div class="name-helpicon-flex">
+                                            <div i18n="profilesBoost" class="sm-min"></div>
+                                            <div class="xs">B</div>
+                                            <div class="helpicon cf_tip" i18n_title="profilesBoostHelp"></div>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr class="ROLL"><!-- 0 -->
+                                    <td class="axis_title" i18n="axisROLL">ROLL</td>
+                                    <td class="pid_data"><input type="number" name="P" step="1" min="0" max="1000" /></td>
+                                    <td class="pid_data"><input type="number" name="I" step="1" min="0" max="1000" /></td>
+                                    <td class="pid_data"><input type="number" name="D" step="1" min="0" max="1000" /></td>
+                                    <td class="pid_data"><input type="number" name="F" step="1" min="0" max="1000" /></td>
+                                    <td class="pid_data"><input type="number" name="B" step="1" min="0" max="1000" /></td>
+                                </tr>
+                                <tr class="PITCH"><!-- 1 -->
+                                    <td class="axis_title" i18n="axisPITCH">PITCH</td>
+                                    <td class="pid_data"><input type="number" name="P" step="1" min="0" max="1000" /></td>
+                                    <td class="pid_data"><input type="number" name="I" step="1" min="0" max="1000" /></td>
+                                    <td class="pid_data"><input type="number" name="D" step="1" min="0" max="1000" /></td>
+                                    <td class="pid_data"><input type="number" name="F" step="1" min="0" max="1000" /></td>
+                                    <td class="pid_data"><input type="number" name="B" step="1" min="0" max="1000" /></td>
+                                </tr>
+                                <tr class="YAW"><!-- 2 -->
+                                    <td class="axis_title" i18n="axisYAW">YAW</td>
+                                    <td class="pid_data"><input type="number" name="P" step="1" min="0" max="1000" /></td>
+                                    <td class="pid_data"><input type="number" name="I" step="1" min="0" max="1000" /></td>
+                                    <td class="pid_data"><input type="number" name="D" step="1" min="0" max="1000" /></td>
+                                    <td class="pid_data"><input type="number" name="F" step="1" min="0" max="1000" /></td>
+                                    <td class="pid_data"><input type="number" name="B" step="1" min="0" max="1000" /></td>
+                                </tr>
+                            </table>
+                        </div>
 
-                    <div class="gui_box grey pid_config">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="profilesPidSettings"></div>
+                        <div class="gui_box grey pid_config">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="profilesPidSettings"></div>
+                            </div>
+                            <table id="pid_advanced" class="settings_table">
+                                <tr class="errorRotation border">
+                                    <td>
+                                        <input type="checkbox" id="errorRotation" class="toggle" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="profilesErrorRotation"></span>
+                                        <div class="helpicon cf_tip" i18n_title="profilesErrorRotationHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="errorDecayGround border">
+                                    <td>
+                                        <input type="checkbox" id="errorDecayGround" class="toggle" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="profilesErrorDecayGround"></span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesErrorDecayTimeGroundHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="errorDecayTimeGround" step="0.1" min="0.1" max="25.0" />
+                                            <label for="errorDecayTimeGround">
+                                                <span i18n="profilesErrorDecayTime"></span>
+                                            </label>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="itermRelax border">
+                                    <td>
+                                        <input type="checkbox" id="itermRelax" class="toggle" />
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="helpicon cf_tip" i18n_title="profilesItermRelaxHelp"></div>
+                                        <div>
+                                            <label for="itermRelax">
+                                                <span i18n="profilesItermRelax"></span>
+                                            </label>
+                                        </div>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesItermRelaxTypeHelp"></div>
+                                        <span class="suboption">
+                                            <select id="itermRelaxType">
+                                                <option i18n="profilesItermRelaxTypeOptionRP" value="1" />
+                                                <option i18n="profilesItermRelaxTypeOptionRPY" value="2" />
+                                            </select>
+                                            <label for="itermRelaxType">
+                                                <span i18n="profilesItermRelaxType"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesItermRelaxCutoffHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="itermRelaxCutoffRoll" step="1" min="1" max="100" />
+                                            <label for="itermRelaxCutoffRoll">
+                                                <span i18n="profilesItermRelaxCutoffRoll"></span>
+                                            </label>
+                                        </span>
+                                        <span class="suboption">
+                                            <input type="number" id="itermRelaxCutoffPitch" step="1" min="1" max="100" />
+                                            <label for="itermRelaxCutoffPitch">
+                                                <span i18n="profilesItermRelaxCutoffPitch"></span>
+                                            </label>
+                                        </span>
+                                        <span class="suboption itermRelaxYawOption">
+                                            <input type="number" id="itermRelaxCutoffYaw" step="1" min="1" max="100" />
+                                            <label for="itermRelaxCutoffYaw">
+                                                <span i18n="profilesItermRelaxCutoffYaw"></span>
+                                            </label>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="errorLimit">
+                                    <td>
+                                        <input type="number" id="errorLimitRoll" step="1" min="0" max="180" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="errorLimitRoll">
+                                            <span i18n="profilesErrorLimitRoll"></span>
+                                        </label>
+                                        <div class="helpicon cf_tip" i18n_title="profilesErrorLimitHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="errorLimit">
+                                    <td>
+                                        <input type="number" id="errorLimitPitch" step="1" min="0" max="180" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="errorLimitPitch">
+                                            <span i18n="profilesErrorLimitPitch"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="errorLimit border">
+                                    <td>
+                                        <input type="number" id="errorLimitYaw" step="1" min="0" max="180" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="errorLimitYaw">
+                                            <span i18n="profilesErrorLimitYaw"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="offsetLimit HSI">
+                                    <td>
+                                        <input type="number" id="offsetLimitRoll" step="1" min="0" max="180" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="offsetLimitRoll">
+                                            <span i18n="profilesOffsetLimitRoll"></span>
+                                        </label>
+                                        <div class="helpicon cf_tip" i18n_title="profilesOffsetLimitHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="offsetLimit HSI border">
+                                    <td>
+                                        <input type="number" id="offsetLimitPitch" step="1" min="0" max="180" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="offsetLimitPitch">
+                                            <span i18n="profilesOffsetLimitPitch"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="offsetGain HSI">
+                                    <td>
+                                        <input type="number" id="offsetGainRoll" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="offsetGainRoll">
+                                            <span i18n="profilesOffsetGainRoll"></span>
+                                        </label>
+                                        <div class="helpicon cf_tip" i18n_title="profilesOffsetGainHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="offsetGain HSI border">
+                                    <td>
+                                        <input type="number" id="offsetGainPitch" step="1" min="0" max="180" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="offsetGainPitch">
+                                            <span i18n="profilesOffsetGainPitch"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-                        <table id="pid_advanced" class="settings_table">
-                            <tr class="errorRotation border">
-                                <td>
-                                    <input type="checkbox" id="errorRotation" class="toggle" />
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="profilesErrorRotation"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profilesErrorRotationHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="errorDecayGround border">
-                                <td>
-                                    <input type="checkbox" id="errorDecayGround" class="toggle" />
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="profilesErrorDecayGround"></span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesErrorDecayTimeGroundHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="errorDecayTimeGround" step="0.1" min="0.1" max="25.0" />
-                                        <label for="errorDecayTimeGround">
-                                            <span i18n="profilesErrorDecayTime"></span>
-                                        </label>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr class="itermRelax border">
-                                <td>
-                                    <input type="checkbox" id="itermRelax" class="toggle" />
-                                </td>
-                                <td colspan="2">
-                                    <div class="helpicon cf_tip" i18n_title="profilesItermRelaxHelp"></div>
-                                    <div>
-                                        <label for="itermRelax">
-                                            <span i18n="profilesItermRelax"></span>
-                                        </label>
-                                    </div>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesItermRelaxTypeHelp"></div>
-                                    <span class="suboption">
-                                        <select id="itermRelaxType">
-                                            <option i18n="profilesItermRelaxTypeOptionRP" value="1"/>
-                                            <option i18n="profilesItermRelaxTypeOptionRPY" value="2"/>
-                                        </select>
-                                        <label for="itermRelaxType">
-                                            <span i18n="profilesItermRelaxType"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesItermRelaxCutoffHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="itermRelaxCutoffRoll" step="1" min="1" max="100" />
-                                        <label for="itermRelaxCutoffRoll">
-                                            <span i18n="profilesItermRelaxCutoffRoll"></span>
-                                        </label>
-                                    </span>
-                                    <span class="suboption">
-                                        <input type="number" id="itermRelaxCutoffPitch" step="1" min="1" max="100" />
-                                        <label for="itermRelaxCutoffPitch">
-                                            <span i18n="profilesItermRelaxCutoffPitch"></span>
-                                        </label>
-                                    </span>
-                                    <span class="suboption itermRelaxYawOption">
-                                        <input type="number" id="itermRelaxCutoffYaw" step="1" min="1" max="100" />
-                                        <label for="itermRelaxCutoffYaw">
-                                            <span i18n="profilesItermRelaxCutoffYaw"></span>
-                                        </label>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr class="errorLimit">
-                                <td>
-                                    <input type="number" id="errorLimitRoll" step="1" min="0" max="180" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="errorLimitRoll">
-                                        <span i18n="profilesErrorLimitRoll"></span>
-                                    </label>
-                                    <div class="helpicon cf_tip" i18n_title="profilesErrorLimitHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="errorLimit">
-                                <td>
-                                    <input type="number" id="errorLimitPitch" step="1" min="0" max="180" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="errorLimitPitch">
-                                        <span i18n="profilesErrorLimitPitch"></span>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr class="errorLimit border">
-                                <td>
-                                    <input type="number" id="errorLimitYaw" step="1" min="0" max="180" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="errorLimitYaw">
-                                        <span i18n="profilesErrorLimitYaw"></span>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr class="offsetLimit HSI">
-                                <td>
-                                    <input type="number" id="offsetLimitRoll" step="1" min="0" max="180" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="offsetLimitRoll">
-                                        <span i18n="profilesOffsetLimitRoll"></span>
-                                    </label>
-                                    <div class="helpicon cf_tip" i18n_title="profilesOffsetLimitHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="offsetLimit HSI border">
-                                <td>
-                                    <input type="number" id="offsetLimitPitch" step="1" min="0" max="180" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="offsetLimitPitch">
-                                        <span i18n="profilesOffsetLimitPitch"></span>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr class="offsetGain HSI">
-                                <td>
-                                    <input type="number" id="offsetGainRoll" step="1" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="offsetGainRoll">
-                                        <span i18n="profilesOffsetGainRoll"></span>
-                                    </label>
-                                    <div class="helpicon cf_tip" i18n_title="profilesOffsetGainHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="offsetGain HSI border">
-                                <td>
-                                    <input type="number" id="offsetGainPitch" step="1" min="0" max="180" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="offsetGainPitch">
-                                        <span i18n="profilesOffsetGainPitch"></span>
-                                    </label>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
 
-                    <div class="gui_box grey pid_config">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="profilesMainRotorSettings"></div>
+                        <div class="gui_box grey pid_config">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="profilesMainRotorSettings"></div>
+                            </div>
+                            <table id="pid_cyclic_advanced" class="settings_table pid_settings">
+                                <tr class="pitchFFCollective border">
+                                    <td>
+                                        <input type="checkbox" id="pitchFFCollective" class="toggle" />
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="helpicon cf_tip" i18n_title="profilesPitchFFCollectiveHelp"></div>
+                                        <div>
+                                            <span i18n="profilesPitchFFCollective"></span>
+                                        </div>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesPitchFFCollectiveGainHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="pitchFFCollectiveGain" step="1" min="0" max="250" />
+                                            <label for="profilesPitchFFCollectiveGain">
+                                                <span i18n="profilesPitchFFCollectiveGain"></span>
+                                            </label>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="cyclicCrossCoupling border">
+                                    <td>
+                                        <input type="checkbox" id="cyclicCrossCoupling" class="toggle" />
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="helpicon cf_tip" i18n_title="profilesCyclicCrossCouplingHelp"></div>
+                                        <div>
+                                            <span i18n="profilesCyclicCrossCoupling"></span>
+                                        </div>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesCyclicCrossCouplingGainHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="cyclicCrossCouplingGain" step="1" min="0" max="250" />
+                                            <label for="cyclicCrossCouplingGain">
+                                                <span i18n="profilesCyclicCrossCouplingGain"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesCyclicCrossCouplingRatioHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="cyclicCrossCouplingRatio" step="1" min="0" max="200" />
+                                            <label for="cyclicCrossCouplingRatio">
+                                                <span i18n="profilesCyclicCrossCouplingRatio"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesCyclicCrossCouplingCutoffHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="cyclicCrossCouplingCutoff" step="1" min="1" max="250" />
+                                            <label for="cyclicCrossCouplingCutoff">
+                                                <span i18n="profilesCyclicCrossCouplingCutoff"></span>
+                                            </label>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="errorDecay">
+                                    <td>
+                                        <input type="number" id="errorDecayTimeCyclic" step="0.1" min="0" max="25" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="errorDecayTimeCyclic">
+                                            <span i18n="profilesErrorDecayTimeCyclic"></span>
+                                        </label>
+                                        <div class="helpicon cf_tip" i18n_title="profilesErrorDecayTimeCyclicHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="errorDecay">
+                                    <td>
+                                        <input type="number" id="errorDecayLimitCyclic" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="errorDecayLimitCyclic">
+                                            <span i18n="profilesErrorDecayLimitCyclic"></span>
+                                        </label>
+                                        <div class="helpicon cf_tip" i18n_title="profilesErrorDecayLimitCyclicHelp"></div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-                        <table id="pid_cyclic_advanced" class="settings_table pid_settings">
-                            <tr class="pitchFFCollective border">
-                                <td>
-                                    <input type="checkbox" id="pitchFFCollective" class="toggle" />
-                                </td>
-                                <td colspan="2">
-                                    <div class="helpicon cf_tip" i18n_title="profilesPitchFFCollectiveHelp"></div>
-                                    <div>
-                                        <span i18n="profilesPitchFFCollective"></span>
-                                    </div>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesPitchFFCollectiveGainHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="pitchFFCollectiveGain" step="1" min="0" max="250"/>
-                                        <label for="profilesPitchFFCollectiveGain">
-                                            <span i18n="profilesPitchFFCollectiveGain"></span>
-                                        </label>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr class="cyclicCrossCoupling border">
-                                <td>
-                                    <input type="checkbox" id="cyclicCrossCoupling" class="toggle" />
-                                </td>
-                                <td colspan="2">
-                                    <div class="helpicon cf_tip" i18n_title="profilesCyclicCrossCouplingHelp"></div>
-                                    <div>
-                                        <span i18n="profilesCyclicCrossCoupling"></span>
-                                    </div>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesCyclicCrossCouplingGainHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="cyclicCrossCouplingGain" step="1" min="0" max="250"/>
-                                        <label for="cyclicCrossCouplingGain">
-                                            <span i18n="profilesCyclicCrossCouplingGain"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesCyclicCrossCouplingRatioHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="cyclicCrossCouplingRatio" step="1" min="0" max="200"/>
-                                        <label for="cyclicCrossCouplingRatio">
-                                            <span i18n="profilesCyclicCrossCouplingRatio"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesCyclicCrossCouplingCutoffHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="cyclicCrossCouplingCutoff" step="1" min="1" max="250"/>
-                                        <label for="cyclicCrossCouplingCutoff">
-                                            <span i18n="profilesCyclicCrossCouplingCutoff"></span>
-                                        </label>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr class="errorDecay">
-                                <td>
-                                    <input type="number" id="errorDecayTimeCyclic" step="0.1" min="0" max="25" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="errorDecayTimeCyclic">
-                                        <span i18n="profilesErrorDecayTimeCyclic"></span>
-                                    </label>
-                                    <div class="helpicon cf_tip" i18n_title="profilesErrorDecayTimeCyclicHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="errorDecay">
-                                <td>
-                                    <input type="number" id="errorDecayLimitCyclic" step="1" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="errorDecayLimitCyclic">
-                                        <span i18n="profilesErrorDecayLimitCyclic"></span>
-                                    </label>
-                                    <div class="helpicon cf_tip" i18n_title="profilesErrorDecayLimitCyclicHelp"></div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
 
-                    <div class="gui_box grey pid_config">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="profilesTailRotorSettings"></div>
-                        </div>
-                        <table class="settings_table pid_settings">
-                            <tr class="yawStopGainCW">
-                                <td>
-                                    <input type="number" id="yawStopGainCW" step="1" min="25" max="250"/>
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="profilesYawStopGainCW"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profilesYawStopGainCWHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="yawStopGainCCW border">
-                                <td>
-                                    <input type="number" id="yawStopGainCCW" step="1" min="25" max="250"/>
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="profilesYawStopGainCCW"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profilesYawStopGainCCWHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="yawPrecompCutoff">
-                                <td>
-                                    <input type="number" id="yawPrecompCutoff" step="1" min="0" max="250"/>
-                                </td>
-                                <td colspan="2">
-                                    <div>
-                                        <span i18n="profilesYawPrecompCutoff"></span>
-                                        <div class="helpicon cf_tip" i18n_title="profilesYawPrecompCutoffHelp"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="yawFFCyclicGain">
-                                <td>
-                                    <input type="number" id="yawFFCyclicGain" step="1" min="0" max="250"/>
-                                </td>
-                                <td colspan="2">
-                                    <div>
-                                        <span i18n="profilesYawFFCyclicGain"></span>
-                                        <div class="helpicon cf_tip" i18n_title="profilesYawFFCyclicGainHelp"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="yawFFCollectiveGain border">
-                                <td>
-                                    <input type="number" id="yawFFCollectiveGain" step="1" min="0" max="250"/>
-                                </td>
-                                <td colspan="2">
-                                    <div>
-                                        <span i18n="profilesYawFFCollectiveGain"></span>
-                                        <div class="helpicon cf_tip" i18n_title="profilesYawFFCollectiveGainHelp"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="yawFFImpulseGain">
-                                <td>
-                                    <input type="number" id="yawFFImpulseGain" step="1" min="-125" max="125"/>
-                                </td>
-                                <td colspan="2">
-                                    <div>
-                                        <span i18n="profilesYawFFImpulseGain"></span>
-                                        <div class="helpicon cf_tip" i18n_title="profilesYawFFImpulseGainHelp"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="yawFFImpulseDecay border">
-                                <td>
-                                    <input type="number" id="yawFFImpulseDecay" step="1" min="1" max="250"/>
-                                </td>
-                                <td colspan="2">
-                                    <div>
-                                        <span i18n="profilesyawFFImpulseDecay"></span>
-                                        <div class="helpicon cf_tip" i18n_title="profilesyawFFImpulseDecayHelp"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!--tr class="errorDecay">
+                        <div class="gui_box grey pid_config">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="profilesTailRotorSettings"></div>
+                            </div>
+                            <table class="settings_table pid_settings">
+                                <tr class="yawStopGainCW">
+                                    <td>
+                                        <input type="number" id="yawStopGainCW" step="1" min="25" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="profilesYawStopGainCW"></span>
+                                        <div class="helpicon cf_tip" i18n_title="profilesYawStopGainCWHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="yawStopGainCCW border">
+                                    <td>
+                                        <input type="number" id="yawStopGainCCW" step="1" min="25" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="profilesYawStopGainCCW"></span>
+                                        <div class="helpicon cf_tip" i18n_title="profilesYawStopGainCCWHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="yawPrecompCutoff">
+                                    <td>
+                                        <input type="number" id="yawPrecompCutoff" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <div>
+                                            <span i18n="profilesYawPrecompCutoff"></span>
+                                            <div class="helpicon cf_tip" i18n_title="profilesYawPrecompCutoffHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="yawFFCyclicGain">
+                                    <td>
+                                        <input type="number" id="yawFFCyclicGain" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <div>
+                                            <span i18n="profilesYawFFCyclicGain"></span>
+                                            <div class="helpicon cf_tip" i18n_title="profilesYawFFCyclicGainHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="yawFFCollectiveGain border">
+                                    <td>
+                                        <input type="number" id="yawFFCollectiveGain" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <div>
+                                            <span i18n="profilesYawFFCollectiveGain"></span>
+                                            <div class="helpicon cf_tip" i18n_title="profilesYawFFCollectiveGainHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="yawFFImpulseGain">
+                                    <td>
+                                        <input type="number" id="yawFFImpulseGain" step="1" min="-125" max="125" />
+                                    </td>
+                                    <td colspan="2">
+                                        <div>
+                                            <span i18n="profilesYawFFImpulseGain"></span>
+                                            <div class="helpicon cf_tip" i18n_title="profilesYawFFImpulseGainHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="yawFFImpulseDecay border">
+                                    <td>
+                                        <input type="number" id="yawFFImpulseDecay" step="1" min="1" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <div>
+                                            <span i18n="profilesyawFFImpulseDecay"></span>
+                                            <div class="helpicon cf_tip" i18n_title="profilesyawFFImpulseDecayHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!--tr class="errorDecay">
                                 <td>
                                     <input type="number" id="errorDecayTimeYaw" step="0.1" min="0" max="25" />
                                 </td>
@@ -444,442 +445,442 @@
                                     <div class="helpicon cf_tip" i18n_title="profilesErrorDecayLimitYawHelp"></div>
                                 </td>
                             </tr-->
-                            <tr class="govTTAGain">
-                                <td>
-                                    <input type="number" id="govTTAGain" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="govTTAGain"></span>
-                                    <div class="helpicon cf_tip" i18n_title="govTTAGainHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="govTTALimit">
-                                <td>
-                                    <input type="number" id="govTTALimit" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="govTTALimit"></span>
-                                    <div class="helpicon cf_tip" i18n_title="govTTALimitHelp"></div>
-                                </td>
-                            </tr>
-                        </table>
+                                <tr class="govTTAGain">
+                                    <td>
+                                        <input type="number" id="govTTAGain" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="govTTAGain"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govTTAGainHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="govTTALimit">
+                                    <td>
+                                        <input type="number" id="govTTALimit" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="govTTALimit"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govTTALimitHelp"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
                     </div>
 
+                    <div class="cf_column">
+
+                        <div class="gui_box grey spacer_left pid_config">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="profilesPidBandwidth"></div>
+                            </div>
+                            <table id="pid_bandwidth" class="settings_table pid_settings">
+                                <tr class="gyroCutoff">
+                                    <td>
+                                        <input type="number" id="gyroCutoffRoll" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="gyroCutoffRoll">
+                                            <span i18n="profilesGyroCutoffRoll"></span>
+                                        </label>
+                                        <div class="helpicon cf_tip" i18n_title="profilesGyroCutoffHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="gyroCutoff">
+                                    <td>
+                                        <input type="number" id="gyroCutoffPitch" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="gyroCutoffPitch">
+                                            <span i18n="profilesGyroCutoffPitch"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="gyroCutoff border">
+                                    <td>
+                                        <input type="number" id="gyroCutoffYaw" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="gyroCutoffYaw">
+                                            <span i18n="profilesGyroCutoffYaw"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="dtermCutoff">
+                                    <td>
+                                        <input type="number" id="dtermCutoffRoll" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="dtermCutoffRoll">
+                                            <span i18n="profilesDtermCutoffRoll"></span>
+                                        </label>
+                                        <div class="helpicon cf_tip" i18n_title="profilesDtermCutoffHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="dtermCutoff">
+                                    <td>
+                                        <input type="number" id="dtermCutoffPitch" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="dtermCutoffPitch">
+                                            <span i18n="profilesDtermCutoffPitch"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="dtermCutoff border">
+                                    <td>
+                                        <input type="number" id="dtermCutoffYaw" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="dtermCutoffYaw">
+                                            <span i18n="profilesDtermCutoffYaw"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="btermCutoff">
+                                    <td>
+                                        <input type="number" id="btermCutoffRoll" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="btermCutoffRoll">
+                                            <span i18n="profilesBtermCutoffRoll"></span>
+                                        </label>
+                                        <div class="helpicon cf_tip" i18n_title="profilesBtermCutoffHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="btermCutoff">
+                                    <td>
+                                        <input type="number" id="btermCutoffPitch" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="btermCutoffPitch">
+                                            <span i18n="profilesBtermCutoffPitch"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="btermCutoff border">
+                                    <td>
+                                        <input type="number" id="btermCutoffYaw" step="1" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <label for="btermCutoffYaw">
+                                            <span i18n="profilesBtermCutoffYaw"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="gui_box grey spacer_left">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="profilesLevelingSettings"></div>
+                            </div>
+                            <table class="settings_table">
+                                <tr class="acroTrainerGain">
+                                    <td>
+                                        <input type="number" id="acroTrainerGain" step="1" min="25" max="255" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="profilesAcroTrainerGain"></span>
+                                        <div class="helpicon cf_tip" i18n_title="profilesAcroTrainerGainHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="acroTrainerLimit">
+                                    <td>
+                                        <input type="number" id="acroTrainerLimit" step="1" min="10" max="80" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="profilesAcroTrainerLimit"></span>
+                                        <div class="helpicon cf_tip" i18n_title="profilesAcroTrainerLimitHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="angleModeGain">
+                                    <td>
+                                        <input type="number" id="angleModeGain" step="1" min="0" max="200" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="profilesAngleModeGain"></span>
+                                        <div class="helpicon cf_tip" i18n_title="profilesAngleModeGainHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="angleModeLimit">
+                                    <td>
+                                        <input type="number" id="angleModeLimit" step="1" min="10" max="90" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="profilesAngleModeLimit"></span>
+                                        <div class="helpicon cf_tip" i18n_title="profilesAngleModeLimitHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="horizonModeGain">
+                                    <td>
+                                        <input type="number" id="horizonModeGain" step="1" min="0" max="200" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="profilesHorizonModeGain"></span>
+                                        <div class="helpicon cf_tip" i18n_title="profilesHorizonModeGainHelp"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="gui_box grey spacer_left">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="profilesRescueSettings"></div>
+                            </div>
+                            <table class="settings_table">
+                                <tr class="rescueMode border">
+                                    <td>
+                                        <input type="checkbox" id="rescueEnable" class="toggle" />
+                                    </td>
+                                    <td colspan="2">
+                                        <div>
+                                            <label for="rescueEnable">
+                                                <span i18n="profilesRescueEnable"></span>
+                                            </label>
+                                        </div>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueFlipModeHelp"></div>
+                                        <span class="suboption">
+                                            <select id="rescueFlipMode">
+                                                <option i18n="profilesRescueFlipModeDisable" value="0" />
+                                                <option i18n="profilesRescueFlipModeEnable" value="1" />
+                                            </select>
+                                            <label for="rescueFlipMode">
+                                                <span i18n="profilesRescueFlipMode"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescuePullupCollectiveHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescuePullupCollective" step="1" min="0" max="100" />
+                                            <label for="rescuePullupCollective">
+                                                <span i18n="profilesRescuePullupCollective"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescuePullupTimeHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescuePullupTime" step="0.1" min="0" max="25" />
+                                            <label for="rescuePullupTime">
+                                                <span i18n="profilesRescuePullupTime"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueClimbCollectiveHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueClimbCollective" step="1" min="0" max="100" />
+                                            <label for="rescueClimbCollective">
+                                                <span i18n="profilesRescueClimbCollective"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueClimbTimeHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueClimbTime" step="0.1" min="0" max="25" />
+                                            <label for="rescueClimbTime">
+                                                <span i18n="profilesRescueClimbTime"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueHoverCollectiveHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueHoverCollective" step="1" min="0" max="100" />
+                                            <label for="rescueHoverCollective">
+                                                <span i18n="profilesRescueHoverCollective"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueFlipTimeHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueFlipTime" step="0.1" min="0" max="25" />
+                                            <label for="rescueFlipTime">
+                                                <span i18n="profilesRescueFlipTime"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueExitTimeHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueExitTime" step="0.1" min="0" max="25" />
+                                            <label for="rescueExitTime">
+                                                <span i18n="profilesRescueExitTime"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueLevelGainHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueLevelGain" step="1" min="5" max="250" />
+                                            <label for="rescueLevelGain">
+                                                <span i18n="profilesRescueLevelGain"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueFlipGainHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueFlipGain" step="1" min="5" max="250" />
+                                            <label for="rescueFlipGain">
+                                                <span i18n="profilesRescueFlipGain"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueMaxRateHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueMaxRate" step="1" min="5" max="1000" />
+                                            <label for="rescueMaxRate">
+                                                <span i18n="profilesRescueMaxRate"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueMaxAccelHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueMaxAccel" step="10" min="1" max="10000" />
+                                            <label for="rescueMaxAccel">
+                                                <span i18n="profilesRescueMaxAccel"></span>
+                                            </label>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="rescueAltHold">
+                                    <td>
+                                        <input type="checkbox" id="rescueAltHold" class="toggle" />
+                                    </td>
+                                    <td colspan="2">
+                                        <div>
+                                            <label for="rescueAltHold">
+                                                <span i18n="profilesRescueAltHold"></span>
+                                            </label>
+                                        </div>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueHoverAltitudeHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueHoverAltitude" step="0.1" min="0" max="100" />
+                                            <label for="rescueHoverAltitude">
+                                                <span i18n="profilesRescueHoverAltitude"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueAltitudePGainHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueAltitudePGain" step="10" min="0" max="10000" />
+                                            <label for="rescueAltitudePGain">
+                                                <span i18n="profilesRescueAltitudePGain"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueAltitudeIGainHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueAltitudeIGain" step="10" min="0" max="10000" />
+                                            <label for="rescueAltitudeIGain">
+                                                <span i18n="profilesRescueAltitudeIGain"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueAltitudeDGainHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueAltitudeDGain" step="10" min="0" max="10000" />
+                                            <label for="rescueAltitudeDGain">
+                                                <span i18n="profilesRescueAltitudeDGain"></span>
+                                            </label>
+                                        </span>
+                                        <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueMaxCollectiveHelp"></div>
+                                        <span class="suboption">
+                                            <input type="number" id="rescueMaxCollective" step="1" min="0" max="100" />
+                                            <label for="rescueMaxCollective">
+                                                <span i18n="profilesRescueMaxCollective"></span>
+                                            </label>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="gui_box grey spacer_left gov_settings">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="govProfile"></div>
+                            </div>
+                            <div class="note">
+                                <p i18n="govHeadspeedNote"></p>
+                            </div>
+                            <table class="settings_table">
+                                <tr class="govHeadspeed govActive">
+                                    <td>
+                                        <input type="number" id="govHeadspeed" min="100" max="50000" step="10" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="govHeadspeed"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govHeadspeedHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="govMaxThrottle border">
+                                    <td>
+                                        <input type="number" id="govMaxThrottle" min="0" max="100" step="1" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="govMaxThrottle"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govMaxThrottleHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="govMasterGain govActive">
+                                    <td>
+                                        <input type="number" id="govMasterGain" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="govMasterGain"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govMasterGainHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="govPGain govActive">
+                                    <td>
+                                        <input type="number" id="govPGain" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="govPGain"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govPGainHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="govIGain govActive">
+                                    <td>
+                                        <input type="number" id="govIGain" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="govIGain"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govIGainHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="govDGain govActive">
+                                    <td>
+                                        <input type="number" id="govDGain" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="govDGain"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govDGainHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="govFGain govActive border">
+                                    <td>
+                                        <input type="number" id="govFGain" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="govFGain"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govFGainHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="govYawPrecomp govActive">
+                                    <td>
+                                        <input type="number" id="govYawPrecomp" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="govYawPrecomp"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govYawPrecompHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="govCyclicPrecomp govActive">
+                                    <td>
+                                        <input type="number" id="govCyclicPrecomp" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="govCyclicPrecomp"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govCyclicPrecompHelp"></div>
+                                    </td>
+                                </tr>
+                                <tr class="govCollectivePrecomp govActive">
+                                    <td>
+                                        <input type="number" id="govCollectivePrecomp" min="0" max="250" />
+                                    </td>
+                                    <td colspan="2">
+                                        <span i18n="govCollectivePrecomp"></span>
+                                        <div class="helpicon cf_tip" i18n_title="govCollectivePrecompHelp"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="cf_column">
-
-                    <div class="gui_box grey spacer_left pid_config">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="profilesPidBandwidth"></div>
-                        </div>
-                        <table id="pid_bandwidth" class="settings_table pid_settings">
-                            <tr class="gyroCutoff">
-                                <td>
-                                    <input type="number" id="gyroCutoffRoll" step="1" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="gyroCutoffRoll">
-                                        <span i18n="profilesGyroCutoffRoll"></span>
-                                    </label>
-                                    <div class="helpicon cf_tip" i18n_title="profilesGyroCutoffHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="gyroCutoff">
-                                <td>
-                                    <input type="number" id="gyroCutoffPitch" step="1" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="gyroCutoffPitch">
-                                        <span i18n="profilesGyroCutoffPitch"></span>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr class="gyroCutoff border">
-                                <td>
-                                    <input type="number" id="gyroCutoffYaw" step="1" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="gyroCutoffYaw">
-                                        <span i18n="profilesGyroCutoffYaw"></span>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr class="dtermCutoff">
-                                <td>
-                                    <input type="number" id="dtermCutoffRoll" step="1" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="dtermCutoffRoll">
-                                        <span i18n="profilesDtermCutoffRoll"></span>
-                                    </label>
-                                    <div class="helpicon cf_tip" i18n_title="profilesDtermCutoffHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="dtermCutoff">
-                                <td>
-                                    <input type="number" id="dtermCutoffPitch" step="1" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="dtermCutoffPitch">
-                                        <span i18n="profilesDtermCutoffPitch"></span>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr class="dtermCutoff border">
-                                <td>
-                                    <input type="number" id="dtermCutoffYaw" step="1" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="dtermCutoffYaw">
-                                        <span i18n="profilesDtermCutoffYaw"></span>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr class="btermCutoff">
-                                <td>
-                                    <input type="number" id="btermCutoffRoll" step="1" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="btermCutoffRoll">
-                                        <span i18n="profilesBtermCutoffRoll"></span>
-                                    </label>
-                                    <div class="helpicon cf_tip" i18n_title="profilesBtermCutoffHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="btermCutoff">
-                                <td>
-                                    <input type="number" id="btermCutoffPitch" step="1" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="btermCutoffPitch">
-                                        <span i18n="profilesBtermCutoffPitch"></span>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr class="btermCutoff border">
-                                <td>
-                                    <input type="number" id="btermCutoffYaw" step="1" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <label for="btermCutoffYaw">
-                                        <span i18n="profilesBtermCutoffYaw"></span>
-                                    </label>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div class="gui_box grey spacer_left">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="profilesLevelingSettings"></div>
-                        </div>
-                        <table class="settings_table">
-                            <tr class="acroTrainerGain">
-                                <td>
-                                    <input type="number" id="acroTrainerGain" step="1" min="25" max="255"/>
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="profilesAcroTrainerGain"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profilesAcroTrainerGainHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="acroTrainerLimit">
-                                <td>
-                                    <input type="number" id="acroTrainerLimit" step="1" min="10" max="80"/>
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="profilesAcroTrainerLimit"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profilesAcroTrainerLimitHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="angleModeGain">
-                                <td>
-                                    <input type="number" id="angleModeGain" step="1" min="0" max="200"/>
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="profilesAngleModeGain"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profilesAngleModeGainHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="angleModeLimit">
-                                <td>
-                                    <input type="number" id="angleModeLimit" step="1" min="10" max="90"/>
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="profilesAngleModeLimit"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profilesAngleModeLimitHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="horizonModeGain">
-                                <td>
-                                    <input type="number" id="horizonModeGain" step="1" min="0" max="200"/>
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="profilesHorizonModeGain"></span>
-                                    <div class="helpicon cf_tip" i18n_title="profilesHorizonModeGainHelp"></div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div class="gui_box grey spacer_left">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="profilesRescueSettings"></div>
-                        </div>
-                        <table class="settings_table">
-                            <tr class="rescueMode border">
-                                <td>
-                                    <input type="checkbox" id="rescueEnable" class="toggle" />
-                                </td>
-                                <td colspan="2">
-                                    <div>
-                                        <label for="rescueEnable">
-                                            <span i18n="profilesRescueEnable"></span>
-                                        </label>
-                                    </div>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueFlipModeHelp"></div>
-                                    <span class="suboption">
-                                        <select id="rescueFlipMode">
-                                            <option i18n="profilesRescueFlipModeDisable" value="0" />
-                                            <option i18n="profilesRescueFlipModeEnable" value="1" />
-                                        </select>
-                                        <label for="rescueFlipMode">
-                                            <span i18n="profilesRescueFlipMode"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescuePullupCollectiveHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescuePullupCollective" step="1" min="0" max="100"/>
-                                        <label for="rescuePullupCollective">
-                                            <span i18n="profilesRescuePullupCollective"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescuePullupTimeHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescuePullupTime" step="0.1" min="0" max="25"/>
-                                        <label for="rescuePullupTime">
-                                            <span i18n="profilesRescuePullupTime"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueClimbCollectiveHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueClimbCollective" step="1" min="0" max="100"/>
-                                        <label for="rescueClimbCollective">
-                                            <span i18n="profilesRescueClimbCollective"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueClimbTimeHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueClimbTime" step="0.1" min="0" max="25"/>
-                                        <label for="rescueClimbTime">
-                                            <span i18n="profilesRescueClimbTime"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueHoverCollectiveHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueHoverCollective" step="1" min="0" max="100"/>
-                                        <label for="rescueHoverCollective">
-                                            <span i18n="profilesRescueHoverCollective"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueFlipTimeHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueFlipTime" step="0.1" min="0" max="25"/>
-                                        <label for="rescueFlipTime">
-                                            <span i18n="profilesRescueFlipTime"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueExitTimeHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueExitTime" step="0.1" min="0" max="25"/>
-                                        <label for="rescueExitTime">
-                                            <span i18n="profilesRescueExitTime"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueLevelGainHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueLevelGain" step="1" min="5" max="250"/>
-                                        <label for="rescueLevelGain">
-                                            <span i18n="profilesRescueLevelGain"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueFlipGainHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueFlipGain" step="1" min="5" max="250"/>
-                                        <label for="rescueFlipGain">
-                                            <span i18n="profilesRescueFlipGain"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueMaxRateHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueMaxRate" step="1" min="5" max="1000"/>
-                                        <label for="rescueMaxRate">
-                                            <span i18n="profilesRescueMaxRate"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueMaxAccelHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueMaxAccel" step="10" min="1" max="10000"/>
-                                        <label for="rescueMaxAccel">
-                                            <span i18n="profilesRescueMaxAccel"></span>
-                                        </label>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr class="rescueAltHold">
-                                <td>
-                                    <input type="checkbox" id="rescueAltHold" class="toggle" />
-                                </td>
-                                <td colspan="2">
-                                    <div>
-                                        <label for="rescueAltHold">
-                                            <span i18n="profilesRescueAltHold"></span>
-                                        </label>
-                                    </div>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueHoverAltitudeHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueHoverAltitude" step="0.1" min="0" max="100"/>
-                                        <label for="rescueHoverAltitude">
-                                            <span i18n="profilesRescueHoverAltitude"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueAltitudePGainHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueAltitudePGain" step="10" min="0" max="10000"/>
-                                        <label for="rescueAltitudePGain">
-                                            <span i18n="profilesRescueAltitudePGain"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueAltitudeIGainHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueAltitudeIGain" step="10" min="0" max="10000"/>
-                                        <label for="rescueAltitudeIGain">
-                                            <span i18n="profilesRescueAltitudeIGain"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueAltitudeDGainHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueAltitudeDGain" step="10" min="0" max="10000"/>
-                                        <label for="rescueAltitudeDGain">
-                                            <span i18n="profilesRescueAltitudeDGain"></span>
-                                        </label>
-                                    </span>
-                                    <div class="helpicon cf_tip subhelp" i18n_title="profilesRescueMaxCollectiveHelp"></div>
-                                    <span class="suboption">
-                                        <input type="number" id="rescueMaxCollective" step="1" min="0" max="100"/>
-                                        <label for="rescueMaxCollective">
-                                            <span i18n="profilesRescueMaxCollective"></span>
-                                        </label>
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div class="gui_box grey spacer_left gov_settings">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="govProfile"></div>
-                        </div>
-                        <div class="note">
-                            <p i18n="govHeadspeedNote"></p>
-                        </div>
-                        <table class="settings_table">
-                            <tr class="govHeadspeed govActive">
-                                <td>
-                                    <input type="number" id="govHeadspeed" min="100" max="50000" step="10"/>
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="govHeadspeed"></span>
-                                    <div class="helpicon cf_tip" i18n_title="govHeadspeedHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="govMaxThrottle border">
-                                <td>
-                                    <input type="number" id="govMaxThrottle" min="0" max="100" step="1"/>
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="govMaxThrottle"></span>
-                                    <div class="helpicon cf_tip" i18n_title="govMaxThrottleHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="govMasterGain govActive">
-                                <td>
-                                    <input type="number" id="govMasterGain" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="govMasterGain"></span>
-                                    <div class="helpicon cf_tip" i18n_title="govMasterGainHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="govPGain govActive">
-                                <td>
-                                    <input type="number" id="govPGain" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="govPGain"></span>
-                                    <div class="helpicon cf_tip" i18n_title="govPGainHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="govIGain govActive">
-                                <td>
-                                    <input type="number" id="govIGain" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="govIGain"></span>
-                                    <div class="helpicon cf_tip" i18n_title="govIGainHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="govDGain govActive">
-                                <td>
-                                    <input type="number" id="govDGain" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="govDGain"></span>
-                                    <div class="helpicon cf_tip" i18n_title="govDGainHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="govFGain govActive border">
-                                <td>
-                                    <input type="number" id="govFGain" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="govFGain"></span>
-                                    <div class="helpicon cf_tip" i18n_title="govFGainHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="govYawPrecomp govActive">
-                                <td>
-                                    <input type="number" id="govYawPrecomp" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="govYawPrecomp"></span>
-                                    <div class="helpicon cf_tip" i18n_title="govYawPrecompHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="govCyclicPrecomp govActive">
-                                <td>
-                                    <input type="number" id="govCyclicPrecomp" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="govCyclicPrecomp"></span>
-                                    <div class="helpicon cf_tip" i18n_title="govCyclicPrecompHelp"></div>
-                                </td>
-                            </tr>
-                            <tr class="govCollectivePrecomp govActive">
-                                <td>
-                                    <input type="number" id="govCollectivePrecomp" min="0" max="250" />
-                                </td>
-                                <td colspan="2">
-                                    <span i18n="govCollectivePrecomp"></span>
-                                    <div class="helpicon cf_tip" i18n_title="govCollectivePrecompHelp"></div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </form>
+            </form>
         </div>
         <div class="clear-both"></div>
     </div>
