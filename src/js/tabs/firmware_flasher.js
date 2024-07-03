@@ -947,6 +947,8 @@ TABS.firmware_flasher.initialize = function (callback) {
                 }
             }
         });
+        
+        const detectBoardElement = $('a.detect-board');
 
         portPickerElement.change(function () {
             if (!GUI.connect_lock) {
@@ -955,6 +957,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                 } else {
                     $("a.load_remote_file").removeClass('disabled');
                     $("a.load_file").removeClass('disabled');
+                    detectBoardElement.toggleClass('disabled', false);
                     exitDfuElement.addClass('disabled');
                 }
             }
@@ -1046,8 +1049,6 @@ TABS.firmware_flasher.initialize = function (callback) {
             };
         })();
 
-        const detectBoardElement = $('a.detect-board');
-
         detectBoardElement.on('click', () => {
             detectBoardElement.toggleClass('disabled', true);
             if (!GUI.connect_lock) {
@@ -1059,6 +1060,8 @@ TABS.firmware_flasher.initialize = function (callback) {
                             baud = parseInt($('#flash_manual_baud_rate').val());
                         }
                         board_auto_detect.detect(port, baud)
+                    } else {
+                        GUI.log(i18n.getMessage('firmwareFlasher'))
                     }
                 }
             }
@@ -1075,6 +1078,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             exitDfuElement.addClass('disabled');
             $("a.load_remote_file").addClass('disabled');
             $("a.load_file").addClass('disabled');
+            detectBoardElement.toggleClass('disabled', true);
             if (!GUI.connect_lock) { // button disabled while flashing is in progress
                 if (self.parsed_hex) {
                     try {
