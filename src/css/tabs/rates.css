@@ -1,3 +1,4 @@
+
 .tab-rates .cf tr {
     background-color: #DEDEDE;
 }
@@ -6,7 +7,7 @@
     height: 19px;
     font-weight: normal;
     padding: 4px;
-    color: white;
+    color:white;
     text-align: left;
     background: var(--quietHeader);
     border-right: dotted 1px var(--superSubtleAccent);
@@ -73,8 +74,7 @@
     display: table;
 }
 
-.tab-rates table,
-.tab-rates table td {
+.tab-rates table, .tab-rates table td {
     padding: 1px;
     border-bottom: 0;
 }
@@ -158,7 +158,7 @@
     width: 100%;
 }
 
-.tab-rates .tab-container>div {
+.tab-rates .tab-container > div {
     background-color: #2e2e2e;
     padding: 6px 12px;
     border-right: 1px solid white;
@@ -166,21 +166,21 @@
     text-align: center;
 }
 
-.tab-rates .tab-container>div:first-child {
+.tab-rates .tab-container > div:first-child {
     border-top-left-radius: 4px;
 }
 
-.tab-rates .tab-container>div:last-child {
+.tab-rates .tab-container > div:last-child {
     border-top-right-radius: 4px;
 }
 
-.tab-rates .tab-container>div a {
+.tab-rates .tab-container > div a {
     display: block;
     color: #999999;
 }
 
-.tab-rates .tab-container>div.active,
-.tab-rates .tab-container>div.active a {
+.tab-rates .tab-container > div.active,
+.tab-rates .tab-container > div.active a {
     background-color: var(--accent);
     color: #000;
     transition: none;
@@ -219,12 +219,12 @@
 }
 
 .fancy.header {
-    background-color: #D6D6D6;
-    padding-top: 8px;
-    font-size: 12px;
-    border-bottom: 1px solid var(--subtleAccent);
-    color: #828282;
-    background-image: linear-gradient(315deg, rgba(255, 255, 255, .2) 10%, transparent 10%, transparent 20%, rgba(255, 255, 255, .2) 20%, rgba(255, 255, 255, .2) 30%, transparent 30%, transparent 40%, rgba(255, 255, 255, .2) 40%, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent 60%, rgba(255, 255, 255, .2) 60%, rgba(255, 255, 255, .2) 70%, transparent 70%, transparent 80%, rgba(255, 255, 255, .2) 80%, rgba(255, 255, 255, .2) 90%, transparent 90%, transparent 100%, rgba(255, 255, 255, .2) 100%, transparent);
+  background-color: #D6D6D6;
+  padding-top: 8px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--subtleAccent);
+  color: #828282;
+  background-image: linear-gradient(315deg, rgba(255, 255, 255, .2) 10%, transparent 10%, transparent 20%, rgba(255, 255, 255, .2) 20%, rgba(255, 255, 255, .2) 30%, transparent 30%, transparent 40%, rgba(255, 255, 255, .2) 40%, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent 60%, rgba(255, 255, 255, .2) 60%, rgba(255, 255, 255, .2) 70%, transparent 70%, transparent 80%, rgba(255, 255, 255, .2) 80%, rgba(255, 255, 255, .2) 90%, transparent 90%, transparent 100%, rgba(255, 255, 255, .2) 100%, transparent);
 }
 
 .fancy.header th {
@@ -247,14 +247,14 @@
     color: #828282;
     font-weight: normal;
     background-image: linear-gradient(315deg, rgba(255, 255, 255, .2) 10%, transparent 10%, transparent 20%,
-            rgba(255, 255, 255, .2) 20%, rgba(255, 255, 255, .2) 30%, transparent 30%, transparent 40%,
-            rgba(255, 255, 255, .2) 40%, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent 60%,
-            rgba(255, 255, 255, .2) 60%, rgba(255, 255, 255, .2) 70%, transparent 70%, transparent 80%,
-            rgba(255, 255, 255, .2) 80%, rgba(255, 255, 255, .2) 90%, transparent 90%, transparent 100%,
-            rgba(255, 255, 255, .2) 100%, transparent);
+        rgba(255, 255, 255, .2) 20%, rgba(255, 255, 255, .2) 30%, transparent 30%, transparent 40%,
+        rgba(255, 255, 255, .2) 40%, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent 60%,
+        rgba(255, 255, 255, .2) 60%, rgba(255, 255, 255, .2) 70%, transparent 70%, transparent 80%,
+        rgba(255, 255, 255, .2) 80%, rgba(255, 255, 255, .2) 90%, transparent 90%, transparent 100%,
+        rgba(255, 255, 255, .2) 100%, transparent);
 }
 
-.rates_mode>div:first-child {
+.rates_mode > div:first-child {
     float: left;
 }
 
@@ -295,8 +295,8 @@
 }
 
 .show {
-    width: 130px;
-    margin-right: 3px;
+    width:130px;
+    margin-right:3px;
 }
 
 .tab-rates .helpicon {
@@ -361,7 +361,7 @@
 
 .tab-rates .copybtn {
     width: 150px;
-    margin-right: 10px;
+    margin-right:10px;
 }
 
 .tab-rates .right {
@@ -562,6 +562,10 @@
     display: flex;
 }
 
+.tab-rates .content_wrapper_header_btns {
+    margin-left: auto;
+}
+
 @media all and (max-width: 575px) {
     .tab-rates .content_wrapper_header {
         flex-wrap: wrap;
@@ -588,7 +592,12 @@
         width: 100%;
     }
 
-    .tab-rates .tab-container>div {
+    .tab-rates .content_wrapper_header_btns {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .tab-rates .tab-container > div {
         width: calc(100% / 3);
     }
 
@@ -602,3 +611,4 @@
     }
 
 }
+

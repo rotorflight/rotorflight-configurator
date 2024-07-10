@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="org.rotorflight.rotorflightconfigurator" versionCode="13" version="[INJECTED_BY_GULPFILE]">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.betaflight.betaflightconfigurator" version="[INJECTED_BY_GULPFILE]">
     <name>[INJECTED_BY_GULPFILE]</name>
     <description>[INJECTED_BY_GULPFILE]</description>
-    <author href="https://www.rotorflight.org">[INJECTED_BY_GULPFILE]</author>
+    <author href="https://betaflight.com">[INJECTED_BY_GULPFILE]</author>
     <content src="main_cordova.html"/>
     <access origin="*"/>
     <allow-intent href="http://*/*"/>

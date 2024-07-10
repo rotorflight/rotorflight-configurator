@@ -1,3 +1,4 @@
+
 #tab-configuration-templates {
     display: none;
 }
@@ -139,7 +140,8 @@
 }
 
 .tab-configuration .number,
-.tab-configuration .select {
+.tab-configuration .select
+{
     margin-bottom: 5px;
     padding-bottom: 5px;
     border-bottom: 1px dotted var(--superSubtleAccent);
@@ -152,26 +154,24 @@
 .tab-configuration .gyro_alignment_inputs {
     margin-top: 3px;
     margin-bottom: 5px;
+    padding-bottom: 5px;
+    width: 33.3%;
+    float: left;
     white-space: nowrap;
 }
 
-.tab-configuration .board_align_inputs label,
-.tab-configuration .gyro_alignment_inputs label {
-    display: inline-block;
-    vertical-align: middle;
-    max-width: calc(100% - 4em - 10px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.tab-configuration .board_align_inputs input,
-.tab-configuration .gyro_alignment_inputs input {
+.tab-configuration .board_align_inputs input {
     width: 3.5em;
     height: 20px;
     line-height: 20px;
     padding-left: 3px;
-    display: inline-block;
-    vertical-align: middle;
+}
+
+.tab-configuration .board_align_inputs label,
+.tab-configuration .gyro_alignment_inputs label {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .tab-configuration .number:last-child,
@@ -258,19 +258,18 @@
 
 .tab-configuration .board select {
     float: left;
-    width: 105px;
+    width: fit-content;
+    max-width: 50%;
     height: 20px;
     margin-right: 5px;
-    border-radius: 3px;
+    border-radius:3px;
 }
 
 .tab-configuration .board_align_content,
-.tab-configuration .gyro_align_content,
-.tab-configuration .sensor_align_content {
+.tab-configuration .gyro_align_content {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* border-bottom: 1px dotted var(--superSubtleAccent); */
+    display: inline-block;
+    border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
 .tab-configuration .sensoralignment span {
@@ -280,7 +279,7 @@
 .tab-configuration .gyroSyncDenom,
 .tab-configuration .pidProcessDenom,
 .tab-configuration .gyroFrequency {
-    width: 100px;
+    width:90px;
 }
 
 .tab-configuration .gyroFrequency {
@@ -308,7 +307,6 @@
     border-radius: 3px;
     border: 1px solid #e4e4e4;
 }
-
 .tab-configuration #interactive_block a.reset {
     position: absolute;
     display: block;
@@ -325,7 +323,6 @@
     background-color: #ececec;
     z-index: 100;
 }
-
 .tab-configuration #interactive_block a.reset:hover {
     background-color: #dedcdc;
 }
@@ -344,38 +341,28 @@
     height: 100% !important;
 }
 
-@media only screen and (max-width: 1055px),
-only screen and (max-device-width: 1055px) {
+@media only screen and (max-width: 1055px) , only screen and (max-device-width: 1055px) {
     .tab-configuration .gui_box span {
         line-height: 17px;
     }
-
     .tab-configuration .system .gui_box {
         float: left;
     }
-
-    .tab-configuration .board .gui_box,
-    .tab-configuration .acc .gui_box {
+    .tab-configuration .board .gui_box, .tab-configuration .acc .gui_box {
         float: left;
     }
-
-    .tab-configuration .gps .gui_box,
-    .tab-configuration .other .gui_box {
+    .tab-configuration .gps .gui_box, .tab-configuration .other .gui_box {
         float: left;
     }
 }
-
 @media all and (max-width: 575px) {
     .tab-configuration .system .gui_box {
         min-height: auto;
     }
-
     .tab-configuration .gps td:nth-child(2) {
         width: auto;
     }
-
-    .dshotbeacon>td>div.select>div,
-    .dshotbeacon select.dshotBeeperBeaconTone {
+    .dshotbeacon > td > div.select > div, .dshotbeacon select.dshotBeeperBeaconTone {
         width: 100%;
     }
 }

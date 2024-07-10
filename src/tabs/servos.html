@@ -31,8 +31,16 @@
                                             <span class="helpicon cf_tip" i18n_title="servoMinHelp"></span>
                                         </th>
                                         <th>
+                                            <span class="thtext" i18n="servoMax"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoMaxHelp"></span>
+                                        </th>
+                                        <th>
                                             <span class="thtext" i18n="servoScaleNeg"></span>
                                             <span class="helpicon cf_tip" i18n_title="servoScaleNegHelp"></span>
+                                        </th>
+                                        <th>
+                                            <span class="thtext" i18n="servoScalePos"></span>
+                                            <span class="helpicon cf_tip" i18n_title="servoScalePosHelp"></span>
                                         </th>
                                         <th>
                                             <span class="thtext" i18n="servoRate"></span>
@@ -50,6 +58,7 @@
                                             <span class="thtext" i18n="servoGeometryCorrection"></span>
                                             <span class="helpicon cf_tip" i18n_title="servoGeometryCorrectionHelp"></span>
                                         </th>
+                                        <th i18n="servoSignal"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -103,9 +112,7 @@
                                 <tr>
                                     <td><input type="checkbox" id="servoEnableOverrideSwitch" class="toggle" /></td>
                                     <td><span i18n="servoEnableOverrideLabel"></span></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"> <span class="description" i18n="servoEnableOverrideText"></span></td>
+                                    <td><span class="description" i18n="servoEnableOverrideText"></span></td>
                                 </tr>
                             </table>
                         </div>
@@ -117,6 +124,7 @@
                                         <th i18n="servoNumber"></th>
                                         <th i18n="servoOverrideEnable"></th>
                                         <th i18n="servoOverrideAngle"></th>
+                                        <th i18n="servoOverrideSlider"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -152,25 +160,16 @@
         <tbody>
             <tr>
                 <td><span id="index"></span></td>
-                <td>
-                    <input id="mid" type="number" min="50" max="2250" />
-                </td>
-                <td>
-                    <input id="min" type="number" min="-1000" max="1000" />
-                    <input id="max" type="number" min="-1000" max="1000" />
-                </td>
-                <td>
-                    <input id="rneg" type="number" min="100" max="1000" />
-                    <input id="rpos" type="number" min="100" max="1000" />
-                </td>
+                <td><input id="mid" type="number" min="50" max="2250" /></td>
+                <td><input id="min" type="number" min="-1000" max="1000" /></td>
+                <td><input id="max" type="number" min="-1000" max="1000" /></td>
+                <td><input id="rneg" type="number" min="100" max="1000" /></td>
+                <td><input id="rpos" type="number" min="100" max="1000" /></td>
                 <td><input id="rate" type="number" min="50" max="5000" /></td>
                 <td><input id="speed" type="number" min="0" max="60000" /></td>
                 <td><input id="reversed" type="checkbox" class="toggle" /></td>
                 <td><input id="geocor" type="checkbox" class="toggle" /></td>
-            </tr>
-            <tr>
-                <td colspan="8">
-                    <div class="meter">
+                <td><div class="meter">
                         <div class="meter-bar">
                             <div class="meter-label"></div>
                             <div class="meter-fill">
@@ -189,17 +188,15 @@
                 <td><span class="servoOverrideIndex"></span></td>
                 <td>
                     <div class="servoOverrideEnable">
-                        <input type="checkbox" class="toggle" />
+                        <input type="checkbox" class="toggle"/>
                     </div>
                 </td>
                 <td>
                     <div class="servoOverrideInput">
-                        <input type="number" min="-90" max="90" step="1" value="0" />
+                        <input type="number" min="-90" max="90" step="1" value="0"/>
                     </div>
                 </td>
-            </tr>
-            <tr>
-                <td colspan="3">
+                <td>
                     <div class="servoOverrideSlider pips-range"></div>
                 </td>
             </tr>
@@ -207,3 +204,4 @@
     </table>
 
 </div>
+

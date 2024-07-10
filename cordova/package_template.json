@@ -1,6 +1,6 @@
 {
   "name": "[INJECTED_BY_GULPFILE]",
-  "displayName": "Rotorflight Configurator",
+  "displayName": "Betaflight Configurator",
   "version": "[INJECTED_BY_GULPFILE]",
   "description": "[INJECTED_BY_GULPFILE]",
   "main": "index.js",
