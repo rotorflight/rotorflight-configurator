@@ -214,3 +214,25 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.board-select-flex {
+    display: flex;
+    width: 300px;
+}
+
+.detect_btn {
+    margin-left: 5px;
+    margin-bottom: 0px;
+    width: auto;
+}
+
+.detect_btn span {
+    padding-right: 3px;
+}
+
+.detect_btn a {
+    font-size: 11px;
+    padding: 3px;
+    margin-left: 5px;
+    width: 50px;
+}

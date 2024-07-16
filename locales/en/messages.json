@@ -3527,7 +3527,7 @@
         "message": "No boards loaded"
     },
     "firmwareFlasherBoardDetectionButton": {
-        "message": "Auto-detect Board"
+        "message": "Detect"
     },
     "firmwareFlasherBoardDetectionSucceeded": {
         "message": "Detected board: <strong>{{boardName}}</strong>",

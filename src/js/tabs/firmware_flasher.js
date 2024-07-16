@@ -10,6 +10,7 @@ TABS.firmware_flasher = {
     parsed_hex: undefined, // parsed raw hex in array format
     unifiedTarget: {}, // the Unified Target configuration to be spliced into the configuration
     isConfigLocal: false, // Set to true if the user loads one locally
+    boardDetectionInProgress: false,
 };
 
 TABS.firmware_flasher.initialize = function (callback) {
@@ -481,7 +482,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             $("a.load_remote_file").addClass('disabled');
             var target = $(this).val();
 
-            if (!GUI.connect_lock) {
+            if (!GUI.connect_lock || self.boardDetectionInProgress) {
                 if (TABS.firmware_flasher.selectedBoard != target) {
                     // We're sure the board actually changed
                     if (self.isConfigLocal) {
@@ -950,10 +951,12 @@ TABS.firmware_flasher.initialize = function (callback) {
         
         const detectBoardElement = $('a.detect-board');
 
-        portPickerElement.change(function () {
+        // Notably, the portPickerElement "change" will be triggered repeatedly as it is setup on a timer in the port_handler
+        portPickerElement.on("change", function () {
             if (!GUI.connect_lock) {
                 if ($('option:selected', this).data().isDFU) {
                     exitDfuElement.removeClass('disabled');
+                    detectBoardElement.toggleClass('disabled', true); // can't detect board in DFU mode.
                 } else {
                     $("a.load_remote_file").removeClass('disabled');
                     $("a.load_file").removeClass('disabled');
@@ -961,11 +964,12 @@ TABS.firmware_flasher.initialize = function (callback) {
                     exitDfuElement.addClass('disabled');
                 }
             }
-        }).change();
+        });
 
         let board_auto_detect = (function() {
             let targetAvailable = false;
             let mspHelper = null;
+            let detectTimer = null;
         
             function detect(port, baud) {
                 const isLoaded = TABS.firmware_flasher.releases ? Object.keys(TABS.firmware_flasher.releases).length > 0 : false;
@@ -982,9 +986,13 @@ TABS.firmware_flasher.initialize = function (callback) {
                 }
 
                 TABS.firmware_flasher.enableFlashing(false);
+                GUI.connect_lock = true;
+                self.boardDetectionInProgress = true;
         
                 GUI.log(i18n.getMessage('firmwareFlasherBoardDetectionInProgress'));
-        
+                detectTimer = setTimeout(function() {
+                    disconnect();
+                }, 5000); // Disconnect after 5 seconds, as board detection should happen by then.
                 serial.connect(port, {bitrate: baud}, onConnect);
             }
         
@@ -993,10 +1001,16 @@ TABS.firmware_flasher.initialize = function (callback) {
                 handleMSPResponse();
             }
 
+            function disconnect() {
+                serial.disconnect(onClose);
+                MSP.disconnect_cleanup();
+            }
+
             function handleMSPResponse() {
                 const board = FC.CONFIG.boardName;
         
                 if (board) {
+                    clearTimeout(detectTimer);
                     const boardSelect = $('select[name="board"]');
                     const boardSelectOptions = $('select[name="board"] option');
                     const target = boardSelect.val();
@@ -1012,10 +1026,8 @@ TABS.firmware_flasher.initialize = function (callback) {
                     }
         
                     GUI.log(i18n.getMessage(targetAvailable ? 'firmwareFlasherBoardDetectionSucceeded' : 'firmwareFlasherBoardDetectionBoardNotFound', { boardName: board }));
+                    disconnect();
                 }
-        
-                serial.disconnect(onClose);
-                MSP.disconnect_cleanup();
             }
         
             function onConnect(openInfo) {
@@ -1042,6 +1054,8 @@ TABS.firmware_flasher.initialize = function (callback) {
         
                 MSP.clearListeners();
                 TABS.firmware_flasher.enableFlashing(true);
+                self.boardDetectionInProgress = false;
+                GUI.connect_lock = false;
             }
 
             return {
@@ -1065,7 +1079,6 @@ TABS.firmware_flasher.initialize = function (callback) {
                     }
                 }
             }
-            setTimeout(() => detectBoardElement.toggleClass('disabled', false), 2000);
         });
 
         $('a.flash_firmware').click(function () {
