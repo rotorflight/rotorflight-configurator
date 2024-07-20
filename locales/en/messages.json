@@ -1647,7 +1647,7 @@
         "message": "The maximum value (in µs) for stick deflection from the center, for RPY."
     },
     "receiverArmingThrottle": {
-        "message": "Throttle Channel value for arming"
+        "message": "Throttle Channel limit for arming"
     },
     "receiverHelpArmingThrottle": {
         "message": "The channel value (in µs) under which arming is allowed"
