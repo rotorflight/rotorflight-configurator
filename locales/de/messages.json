@@ -2035,8 +2035,8 @@
         "english": "The maximum value (in µs) for stick deflection from the center, for RPY."
     },
     "receiverArmingThrottle": {
-        "message": "Gaskanal Wert für Arming",
-        "english": "Throttle Channel value for arming"
+        "message": "Gaskanal Grenze für Arming",
+        "english": "Throttle Channel limit for arming"
     },
     "receiverHelpArmingThrottle": {
         "message": "Kanalwert in µs, unter welchem Arming erlaubt ist.",

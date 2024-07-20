@@ -2544,8 +2544,8 @@
         "status": "New entry. Please translate!"
     },
     "receiverArmingThrottle": {
-        "message": "Throttle Channel value for arming",
-        "english": "Throttle Channel value for arming",
+        "message": "Throttle Channel limit for arming",
+        "english": "Throttle Channel limit for arming",
         "status": "New entry. Please translate!"
     },
     "receiverHelpArmingThrottle": {

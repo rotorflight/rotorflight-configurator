@@ -2036,7 +2036,7 @@
     },
     "receiverArmingThrottle": {
         "message": "解鎖油門通道值",
-        "english": "Throttle Channel value for arming"
+        "english": "Throttle Channel limit for arming"
     },
     "receiverHelpArmingThrottle": {
         "message": "允許解鎖的通道值（以µs為單位）",
