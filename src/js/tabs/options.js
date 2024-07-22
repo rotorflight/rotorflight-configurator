@@ -48,6 +48,15 @@ TABS.options.initRememberLastTab = function () {
     });
 };
 
+TABS.options.rememberLastSelectedBoard = function () {
+    ConfigStorage.get('rememberLastSelectedBoard', function (result) {
+        $('div.rememberLastSelectedBoard input')
+            .prop('checked', !!result.rememberLastSelectedBoard)
+            .change(function() { ConfigStorage.set({rememberLastSelectedBoard: $(this).is(':checked')}); })
+            .change();
+    });
+};
+
 TABS.options.initCheckForConfiguratorUnstableVersions = function () {
     ConfigStorage.get('checkForConfiguratorUnstableVersions', function (result) {
         if (result.checkForConfiguratorUnstableVersions) {

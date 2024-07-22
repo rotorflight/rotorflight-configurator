@@ -10,6 +10,7 @@ TABS.firmware_flasher = {
     parsed_hex: undefined, // parsed raw hex in array format
     unifiedTarget: {}, // the Unified Target configuration to be spliced into the configuration
     isConfigLocal: false, // Set to true if the user loads one locally
+    boardDetectionInProgress: false,
 };
 
 TABS.firmware_flasher.initialize = function (callback) {
@@ -151,10 +152,14 @@ TABS.firmware_flasher.initialize = function (callback) {
 
             TABS.firmware_flasher.releases = builds;
 
-            ConfigStorage.get('selected_board', function (result) {
-                if (result.selected_board) {
-                    var boardBuilds = builds[result.selected_board];
-                    $('select[name="board"]').val(boardBuilds ? result.selected_board : 0).trigger('change');
+            ConfigStorage.get('rememberLastSelectedBoard', function (result) {
+                if (result.rememberLastSelectedBoard) {
+                    ConfigStorage.get('selected_board', function (result) {
+                    if (result.selected_board) {
+                        var boardBuilds = builds[result.selected_board];
+                        $('select[name="board"]').val(boardBuilds ? result.selected_board : 0).trigger('change');
+                    }
+                    });
                 }
             });
         }
@@ -287,11 +292,15 @@ TABS.firmware_flasher.initialize = function (callback) {
             TABS.firmware_flasher.releases = releases;
             TABS.firmware_flasher.unifiedConfigs = unifiedConfigs;
 
-            ConfigStorage.get('selected_board', function (result) {
-                if (result.selected_board) {
-                    var boardReleases = TABS.firmware_flasher.unifiedConfigs[result.selected_board]
-                        || TABS.firmware_flasher.releases[result.selected_board];
-                    $('select[name="board"]').val(boardReleases ? result.selected_board : 0).trigger('change');
+            ConfigStorage.get('rememberLastSelectedBoard', function (result) {
+                if (result.rememberLastSelectedBoard) {
+                    ConfigStorage.get('selected_board', function (result) {
+                        if (result.selected_board) {
+                            var boardReleases = TABS.firmware_flasher.unifiedConfigs[result.selected_board]
+                                || TABS.firmware_flasher.releases[result.selected_board];
+                            $('select[name="board"]').val(boardReleases ? result.selected_board : 0).trigger('change');
+                        }
+                    });
                 }
             });
         }
@@ -473,7 +482,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             $("a.load_remote_file").addClass('disabled');
             var target = $(this).val();
 
-            if (!GUI.connect_lock) {
+            if (!GUI.connect_lock || self.boardDetectionInProgress) {
                 if (TABS.firmware_flasher.selectedBoard != target) {
                     // We're sure the board actually changed
                     if (self.isConfigLocal) {
@@ -482,7 +491,11 @@ TABS.firmware_flasher.initialize = function (callback) {
                         self.unifiedTarget = {};
                     }
                 }
-                ConfigStorage.set({'selected_board': target});
+                ConfigStorage.get('rememberLastSelectedBoard', function (result) {
+                    if (result.rememberLastSelectedBoard) {
+                        ConfigStorage.set({'selected_board': target});
+                    }
+                });
                 TABS.firmware_flasher.selectedBoard = target;
                 TABS.firmware_flasher.bareBoard = undefined;
                 console.log('board changed to', target);
@@ -691,12 +704,6 @@ TABS.firmware_flasher.initialize = function (callback) {
         const portPickerElement = $('div#port-picker #port');
         function flashFirmware(firmware) {
             var options = {};
-
-            var eraseAll = false;
-            if ($('input.erase_chip').is(':checked')) {
-                options.erase_chip = true;
-                eraseAll = true;
-            }
 
             if (!$('option:selected', portPickerElement).data().isDFU) {
                 if (String(portPickerElement.val()) !== '0') {
@@ -941,18 +948,138 @@ TABS.firmware_flasher.initialize = function (callback) {
                 }
             }
         });
+        
+        const detectBoardElement = $('a.detect-board');
 
-        portPickerElement.change(function () {
+        // Notably, the portPickerElement "change" will be triggered repeatedly as it is setup on a timer in the port_handler
+        portPickerElement.on("change", function () {
             if (!GUI.connect_lock) {
                 if ($('option:selected', this).data().isDFU) {
                     exitDfuElement.removeClass('disabled');
+                    detectBoardElement.toggleClass('disabled', true); // can't detect board in DFU mode.
                 } else {
                     $("a.load_remote_file").removeClass('disabled');
                     $("a.load_file").removeClass('disabled');
+                    detectBoardElement.toggleClass('disabled', false);
                     exitDfuElement.addClass('disabled');
                 }
             }
-        }).change();
+        });
+
+        let board_auto_detect = (function() {
+            let targetAvailable = false;
+            let mspHelper = null;
+            let detectTimer = null;
+        
+            function detect(port, baud) {
+                const isLoaded = TABS.firmware_flasher.releases ? Object.keys(TABS.firmware_flasher.releases).length > 0 : false;
+        
+                if (!isLoaded) {
+                    GUI.log(i18n.getMessage('firmwareFlasherNoBoardsLoaded'));
+                    return;
+                }
+        
+                if (serial.connected || serial.connectionId) {
+                    console.warn('Attempting to connect while there still is a connection', serial.connected, serial.connectionId, serial.openCanceled);
+                    serial.disconnect();
+                    return;
+                }
+
+                TABS.firmware_flasher.enableFlashing(false);
+                GUI.connect_lock = true;
+                self.boardDetectionInProgress = true;
+        
+                GUI.log(i18n.getMessage('firmwareFlasherBoardDetectionInProgress'));
+                detectTimer = setTimeout(function() {
+                    disconnect();
+                }, 5000); // Disconnect after 5 seconds, as board detection should happen by then.
+                serial.connect(port, {bitrate: baud}, onConnect);
+            }
+        
+            async function getBoardInfo() {
+                await MSP.promise(MSPCodes.MSP_BOARD_INFO);
+                handleMSPResponse();
+            }
+
+            function disconnect() {
+                serial.disconnect(onClose);
+                MSP.disconnect_cleanup();
+            }
+
+            function handleMSPResponse() {
+                const board = FC.CONFIG.boardName;
+        
+                if (board) {
+                    clearTimeout(detectTimer);
+                    const boardSelect = $('select[name="board"]');
+                    const boardSelectOptions = $('select[name="board"] option');
+                    const target = boardSelect.val();
+        
+                    boardSelectOptions.each((_, e) => {
+                        if ($(e).text() === board) {
+                            targetAvailable = true;
+                        }
+                    });
+        
+                    if (board !== target) {
+                        boardSelect.val(board).trigger('change');
+                    }
+        
+                    GUI.log(i18n.getMessage(targetAvailable ? 'firmwareFlasherBoardDetectionSucceeded' : 'firmwareFlasherBoardDetectionBoardNotFound', { boardName: board }));
+                    disconnect();
+                }
+            }
+        
+            function onConnect(openInfo) {
+                if (openInfo) {
+                    GUI.log(i18n.getMessage('serialPortOpened', serial.connectionType === 'serial' ? [serial.connectionId] : [openInfo.socketId]));
+                    
+                    serial.onReceive.addListener(function (info) { MSP.read(info); });
+
+                    mspHelper = new MspHelper();
+                    MSP.listen(mspHelper.process_data.bind(mspHelper));
+                    
+                    getBoardInfo();
+                } else {
+                    GUI.log(i18n.getMessage('serialPortOpenFail'));
+                }
+            }
+
+            function onClose(result) {
+                GUI.log(i18n.getMessage(result ? 'serialPortClosedOk' : 'serialPortClosedFail'));
+        
+                if (!targetAvailable) {
+                    GUI.log(i18n.getMessage('firmwareFlasherBoardDetectionFail'));
+                }
+        
+                MSP.clearListeners();
+                TABS.firmware_flasher.enableFlashing(true);
+                self.boardDetectionInProgress = false;
+                GUI.connect_lock = false;
+            }
+
+            return {
+                detect: detect,
+            };
+        })();
+
+        detectBoardElement.on('click', () => {
+            detectBoardElement.toggleClass('disabled', true);
+            if (!GUI.connect_lock) {
+                if (!$('option:selected', portPickerElement).data().isDFU) {
+                    if (String(portPickerElement.val()) !== '0') {
+                        const port = String(portPickerElement.val());
+                        let baud = 115200;
+                        if ($('input.flash_manual_baud').is(':checked')) {
+                            baud = parseInt($('#flash_manual_baud_rate').val());
+                        }
+                        board_auto_detect.detect(port, baud)
+                    } else {
+                        GUI.log(i18n.getMessage('firmwareFlasher'))
+                    }
+                }
+            }
+        });
 
         $('a.flash_firmware').click(function () {
             if (!$(this).hasClass('disabled')) {
@@ -964,6 +1091,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             exitDfuElement.addClass('disabled');
             $("a.load_remote_file").addClass('disabled');
             $("a.load_file").addClass('disabled');
+            detectBoardElement.toggleClass('disabled', true);
             if (!GUI.connect_lock) { // button disabled while flashing is in progress
                 if (self.parsed_hex) {
                     try {
