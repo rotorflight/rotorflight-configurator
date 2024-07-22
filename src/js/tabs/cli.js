@@ -337,9 +337,9 @@ TABS.cli.initialize = function (callback) {
                     break;
                 case 'm3'://remap F.PORT to SERVO 5
                     command +=
-                        "resource SERIAL_TX 2 NONE" +
-                        "resource SERVO 5 A02" +
-                        "timer A02 AF3" +
+                        "resource SERIAL_TX 2 NONE\n" +
+                        "resource SERVO 5 A02\n" +
+                        "timer A02 AF3\n" +
                         "mixer input " + ch + " -1000 1000 1000\n" +
                         "mixer rule " + n + " set " + ch + " S5 1000 0\n";
                     break;
