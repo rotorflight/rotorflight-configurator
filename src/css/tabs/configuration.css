@@ -1,4 +1,3 @@
-
 #tab-configuration-templates {
     display: none;
 }
@@ -7,51 +6,65 @@
     position: relative;
 }
 
-.tab-configuration input,
-.tab-configuration select {
-    border: 1px solid var(--subtleAccent);
-    height: 20px;
-    float: left;
-    margin-right: 15px;
-    border-radius: 3px;
+.tab-configuration .featuresMultiple {
+    border-collapse: collapse;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 0;
 }
 
 .tab-configuration table {
-    margin-bottom: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.tab-configuration table th,
+.tab-configuration table td {
+    padding: 5px;
+    text-align: left;
+}
+
+.tab-configuration table tr {
+    border-bottom: 1px dotted var(--superSubtleAccent);
+}
+
+.tab-configuration .select {
+    border-bottom: 1px dotted var(--superSubtleAccent);
+    margin-bottom: 5px;
+    padding-bottom: 5px;
     width: 100%;
     float: left;
 }
 
-.tab-configuration table,
-.tab-configuration table th,
-.tab-configuration table td {
-    padding: 0;
-    text-align: left;
+.tab-configuration input,
+.tab-configuration select {
+    border: 1px solid var(--subtleAccent);
+    height: 20px;
+    padding-left: 5px;
+    margin-right: 15px;
+    border-radius: 3px;
+    width: 100px;
+    float: left;
 }
 
-.tab-configuration table th {
-    padding: 3px;
-    border-bottom: 1px dotted var(--superSubtleAccent);
+.tab-configuration .checkbox_container {
+    height: 20px;
+    margin-right: 15px;
+    margin-left: 3px;
+    float: left;
 }
 
-.tab-configuration table td {
-    padding: 5px 3px;
-    border-bottom: 1px dotted var(--superSubtleAccent);
+.tab-configuration .features td:nth-child(1) {
+    width: 50px;
 }
 
-.tab-configuration table tr td:first-child {
-    text-align: left;
+.tab-configuration .features td:nth-child(2) {
+    width: 80px;
 }
 
-.tab-configuration table thead tr:first-child {
-    background-color: #ececec;
-}
+.tab-configuration .features td:nth-child(3) {
 
-.tab-configuration .featuresMultiple {
-    border-collapse: collapse;
-    margin-bottom: 5px;
-    margin-top: -5px;
-    padding: 0;
+    width: calc(100% - 130px);
 }
 
 .tab-configuration .serialPorts .portid {
@@ -68,167 +81,21 @@
 }
 
 .tab-configuration .serialPorts td:nth-child(1) {
-    width: 30%;
+    width: 120px;
 }
 
 .tab-configuration .serialPorts td:nth-child(2) {
-    width: 50%;
+    width: calc(100% - 200px);
 }
 
 .tab-configuration .serialPorts td:nth-child(3) {
-    width: 20%;
+    width: 80px;
 }
 
-.tab-configuration .serialPorts tr:last-child td {
-    border-bottom: 0;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
-
-.tab-configuration .serialPorts .identifier {
-    min-width: 50px;
-}
-
-.tab-configuration .serialPorts .function {
-    width: 95%;
-}
-
+.tab-configuration .serialPorts .identifier,
+.tab-configuration .serialPorts .function,
 .tab-configuration .serialPorts .baudrate {
-    min-width: 90px;
-    width: 95%;
-}
-
-.tab-configuration .number input {
-    width: 55px;
-    padding-left: 3px;
-    height: 20px;
-    line-height: 20px;
-    text-align: left;
-    border-radius: 3px;
-    margin-right: 11px;
-    font-size: 12px;
-    font-weight: normal;
-}
-
-.tab-configuration .number .disabled {
-    width: 48px;
-    padding: 0 5px;
-    background-color: #ececec;
-}
-
-.tab-configuration .number span {
-    margin-left: 0;
-}
-
-.tab-configuration .freelabel {
-    margin-left: 10px;
-    position: relative;
-}
-
-.tab-configuration input {
-    float: left;
-}
-
-.tab-configuration span {
-    margin: 0;
-}
-
-.tab-configuration .spacer_box {
-    padding-bottom: 10px;
-    float: left;
-    width: calc(100% - 20px);
-}
-
-.tab-configuration .number,
-.tab-configuration .select
-{
-    margin-bottom: 5px;
-    padding-bottom: 5px;
-    border-bottom: 1px dotted var(--superSubtleAccent);
     width: 100%;
-    float: left;
-    clear: left;
-}
-
-.tab-configuration .board_align_inputs,
-.tab-configuration .gyro_alignment_inputs {
-    margin-top: 3px;
-    margin-bottom: 5px;
-    padding-bottom: 5px;
-    width: 33.3%;
-    float: left;
-    white-space: nowrap;
-}
-
-.tab-configuration .board_align_inputs input {
-    width: 3.5em;
-    height: 20px;
-    line-height: 20px;
-    padding-left: 3px;
-}
-
-.tab-configuration .board_align_inputs label,
-.tab-configuration .gyro_alignment_inputs label {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.tab-configuration .number:last-child,
-.tab-configuration .select:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
-
-.tab-configuration .gui_box_titlebar {
-    margin-bottom: 0;
-}
-
-.tab-configuration thead {
-    display: none;
-}
-
-.tab-configuration .gui_box {
-    margin-bottom: 10px;
-    float: left;
-}
-
-.tab-configuration .system .gui_box {
-    float: left;
-}
-
-.tab-configuration .board .gui_box,
-.tab-configuration .acc .gui_box {
-    float: left;
-}
-
-.tab-configuration .gps .gui_box,
-.tab-configuration .other .gui_box {
-    float: left;
-    margin-bottom: 10px;
-}
-
-.tab-configuration .gps td:nth-child(2) {
-    width: 38px;
-}
-
-.tab-configuration .other tr:last-child td {
-    border-bottom: 0;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
-
-.tab-configuration .gui_box {
-    font-weight: bold;
-}
-
-.tab-configuration .gui_box span {
-    font-style: normal;
-    font-weight: normal;
-    line-height: 19px;
-    color: #4f4f4f;
-    font-size: 11px;
 }
 
 .tab-configuration .alignicon {
@@ -256,30 +123,9 @@
     background-position: center;
 }
 
-.tab-configuration .board select {
-    float: left;
-    width: fit-content;
-    max-width: 50%;
-    height: 20px;
-    margin-right: 5px;
-    border-radius:3px;
-}
-
-.tab-configuration .board_align_content,
-.tab-configuration .gyro_align_content {
-    width: 100%;
-    display: inline-block;
-    border-bottom: 1px dotted var(--superSubtleAccent);
-}
-
-.tab-configuration .sensoralignment span {
-    width: 100%;
-}
-
-.tab-configuration .gyroSyncDenom,
 .tab-configuration .pidProcessDenom,
 .tab-configuration .gyroFrequency {
-    width:90px;
+    width: 100px;
 }
 
 .tab-configuration .gyroFrequency {
@@ -307,6 +153,7 @@
     border-radius: 3px;
     border: 1px solid #e4e4e4;
 }
+
 .tab-configuration #interactive_block a.reset {
     position: absolute;
     display: block;
@@ -323,6 +170,7 @@
     background-color: #ececec;
     z-index: 100;
 }
+
 .tab-configuration #interactive_block a.reset:hover {
     background-color: #dedcdc;
 }
@@ -339,30 +187,4 @@
 .tab-configuration #canvas {
     width: 100% !important;
     height: 100% !important;
-}
-
-@media only screen and (max-width: 1055px) , only screen and (max-device-width: 1055px) {
-    .tab-configuration .gui_box span {
-        line-height: 17px;
-    }
-    .tab-configuration .system .gui_box {
-        float: left;
-    }
-    .tab-configuration .board .gui_box, .tab-configuration .acc .gui_box {
-        float: left;
-    }
-    .tab-configuration .gps .gui_box, .tab-configuration .other .gui_box {
-        float: left;
-    }
-}
-@media all and (max-width: 575px) {
-    .tab-configuration .system .gui_box {
-        min-height: auto;
-    }
-    .tab-configuration .gps td:nth-child(2) {
-        width: auto;
-    }
-    .dshotbeacon > td > div.select > div, .dshotbeacon select.dshotBeeperBeaconTone {
-        width: 100%;
-    }
 }

@@ -3,13 +3,64 @@
         <div class="note">
             <p i18n="cliInfo"></p>
         </div>
-        
+
         <div class="backdrop">
             <div class="window">
                 <div class="wrapper"></div>
             </div>
         </div>
         <textarea name="commands" i18n_placeholder="cliInputPlaceholder" rows="1" cols="0"></textarea>
+
+        <div class="grid-row">
+            <div class="gui_box grey">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="cliFlyDragonFlightControlQuickCommands"></div>
+                </div>
+                <div class="select">
+                    <span i18n="cliHardwareVersion"></span>
+                    <select class="version_cmd">
+                        <option value="m1">V2|V2.2[*]</option>
+                        <option value="m2">V1</option>
+                    </select>
+                </div>
+                <div class="select">
+                    <span i18n="cliRpmInputMode"></span>
+                    <select class="rpm_cmd">
+                        <option value="m1">RPM-E[*]</option>
+                        <option value="m2">RPM-S</option>
+                        <option value="m3">RPM-E & RPM-S</option>
+                    </select>
+                </div>
+                <div class="select">
+                    <span i18n="cliTailDriveMode"></span>
+                    <select class="tail_cmd">
+                        <option value="m1" i18n="cliVariablePitch"></option>
+                        <option value="m2" i18n="cliTailMotor"></option>
+                    </select>
+                </div>
+                <div class="select">
+                    <span i18n="cliInternalReceiverPowerSwitch"></span>
+                    <select class="elrs_cmd">
+                        <option value="m1" i18n="cliInternalReceiverPowerOn"></option>
+                        <option value="m2" i18n="cliInternalReceiverPowerOff"></option>
+                    </select>
+                </div>
+                <div class="select">
+                    <span i18n="cliRescuePowerChannel"></span>
+                    <select class="rescue_cmd">
+                        <option value="m1" i18n="cliRescuePowerDisabled"></option>
+                        <option value="m2">SBUS</option>
+                        <option value="m3">F.PORT</option>
+                    </select>
+                    <select class="ch_cmd">
+                        <option value="m1">CH10</option>
+                        <option value="m2">CH11</option>
+                        <option value="m3">CH12</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="content_toolbar xs-compressed">
@@ -24,6 +75,9 @@
         </div>
         <div class="btn save_btn">
             <a class="copy" href="#" i18n="cliCopyToClipboardBtn"></a>
+        </div>
+        <div class="btn send_btn">
+            <a class="send" href="#" i18n="cliSendQuickCommands"></a>
         </div>
     </div>
 

@@ -592,7 +592,6 @@ appdmg@^0.6.4:
     ds-store "^0.1.5"
     execa "^1.0.0"
     fs-temp "^1.0.0"
-    fs-xattr "^0.3.0"
     image-size "^0.7.4"
     is-my-json-valid "^2.20.0"
     minimist "^1.1.3"
@@ -2458,7 +2457,6 @@ ds-store@^0.1.5:
   integrity sha512-kY21M6Lz+76OS3bnCzjdsJSF7LBpLYGCVfavW8TgQD2XkcqIZ86W0y9qUDZu6fp7SIZzqosMDW2zi7zVFfv4hw==
   dependencies:
     bplist-creator "~0.0.3"
-    macos-alias "~0.2.5"
     tn1150 "^0.1.0"
 
 duplexer2@0.0.2:

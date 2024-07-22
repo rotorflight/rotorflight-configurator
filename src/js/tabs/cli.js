@@ -86,7 +86,7 @@ TABS.cli.initialize = function (callback) {
         self.history.add(outString.trim());
 
         const outputArray = outString.split("\n");
-        Promise.reduce(outputArray, function(delay, line, index) {
+        Promise.reduce(outputArray, function (delay, line, index) {
             return new Promise(function (resolve) {
                 GUI.timeout_add('CLI_send_slowly', function () {
                     let processingDelay = self.lineDelayMs;
@@ -121,20 +121,20 @@ TABS.cli.initialize = function (callback) {
         const textarea = $('.tab-cli textarea[name="commands"]');
 
         CliAutoComplete.initialize(textarea, self.sendLine.bind(self), writeToOutput);
-        $(CliAutoComplete).on('build:start', function() {
+        $(CliAutoComplete).on('build:start', function () {
             textarea
                 .val('')
                 .attr('placeholder', i18n.getMessage('cliInputPlaceholderBuilding'))
                 .prop('disabled', true);
         });
-        $(CliAutoComplete).on('build:stop', function() {
+        $(CliAutoComplete).on('build:stop', function () {
             textarea
                 .attr('placeholder', i18n.getMessage('cliInputPlaceholder'))
                 .prop('disabled', false)
                 .focus();
         });
 
-        $('.tab-cli .save').click(function() {
+        $('.tab-cli .save').click(function () {
             const prefix = 'cli';
             const suffix = 'txt';
 
@@ -144,7 +144,7 @@ TABS.cli.initialize = function (callback) {
                 description: suffix.toUpperCase() + ' files', extensions: [suffix],
             }];
 
-            chrome.fileSystem.chooseEntry({type: 'saveFile', suggestedName: filename, accepts: accepts}, function(entry) {
+            chrome.fileSystem.chooseEntry({ type: 'saveFile', suggestedName: filename, accepts: accepts }, function (entry) {
                 if (checkChromeRuntimeError()) {
                     return;
                 }
@@ -155,39 +155,39 @@ TABS.cli.initialize = function (callback) {
                 }
 
                 entry.createWriter(function (writer) {
-                    writer.onerror = function (){
+                    writer.onerror = function () {
                         console.error('Failed to write file');
                     };
 
                     writer.onwriteend = function () {
                         if (self.outputHistory.length > 0 && writer.length === 0) {
-                            writer.write(new Blob([self.outputHistory], {type: 'text/plain'}));
+                            writer.write(new Blob([self.outputHistory], { type: 'text/plain' }));
                         } else {
                             console.log('write complete');
                         }
                     };
 
                     writer.truncate(0);
-                }, function (){
+                }, function () {
                     console.error('Failed to get file writer');
                 });
             });
         });
 
-        $('.tab-cli .clear').click(function() {
+        $('.tab-cli .clear').click(function () {
             self.outputHistory = "";
             self.GUI.windowWrapper.empty();
         });
 
         if (Clipboard.available) {
-            self.GUI.copyButton.click(function() {
+            self.GUI.copyButton.click(function () {
                 copyToClipboard(self.outputHistory);
             });
         } else {
             self.GUI.copyButton.hide();
         }
 
-        $('.tab-cli .load').click(function() {
+        $('.tab-cli .load').click(function () {
             const accepts = [
                 {
                     description: 'Config files', extensions: ["txt", "config"],
@@ -197,7 +197,7 @@ TABS.cli.initialize = function (callback) {
                 },
             ];
 
-            chrome.fileSystem.chooseEntry({type: 'openFile', accepts: accepts}, function(entry) {
+            chrome.fileSystem.chooseEntry({ type: 'openFile', accepts: accepts }, function (entry) {
                 if (checkChromeRuntimeError()) {
                     return;
                 }
@@ -240,6 +240,119 @@ TABS.cli.initialize = function (callback) {
             });
         });
 
+        $('.tab-cli .send').click(function (e) {
+            e.preventDefault();
+
+            let selectedValue = "";
+            let command = "";
+            let rpm_s = "";
+            let n = "";
+            let ch = "";
+
+            selectedValue = $('.version_cmd').val();
+            switch (selectedValue) {
+                case 'm1'://V2|V2.2
+                    rpm_s += "A15";
+                    break;
+                case 'm2'://V1
+                    rpm_s += "A08";
+                    break;
+            }
+
+            selectedValue = $('.rpm_cmd').val();
+            switch (selectedValue) {
+                case 'm1'://RPM-E
+                    command =
+                        "resource FREQ 1 A01\n" +
+                        "resource FREQ 2 NONE\n";
+                    break;
+                case 'm2'://RPM-S
+                    command =
+                        "resource FREQ 1 " + rpm_s + "\n" +
+                        "resource FREQ 2 NONE\n";
+                    break;
+                case 'm3'://RPM-E & RPM-S
+                    command =
+                        "resource FREQ 1 A01\n" +
+                        "resource FREQ 2 " + rpm_s + "\n";
+                    break;
+            }
+
+            selectedValue = $('.tail_cmd').val();
+            switch (selectedValue) {
+                case 'm1'://Variable pitch
+                    command +=
+                        "resource MOTOR 2 NONE\n" +
+                        "resource SERVO 4 C09\n";
+                    break;
+                case 'm2'://Tail motor
+                    command +=
+                        "resource MOTOR 2 C09\n" +
+                        "resource SERVO 4 NONE\n";
+                    break;
+            }
+
+            selectedValue = $('.elrs_cmd').val();
+            switch (selectedValue) {
+                case 'm1'://Turn on the power
+                    command += "set pinio_config = 129,1,1,1\n";
+                    break;
+                case 'm2'://Turn off the power
+                    command += "set pinio_config = 1,1,1,1\n";
+                    break;
+            }
+
+            selectedValue = $('.ch_cmd').val();
+            switch (selectedValue) {
+                case 'm1':
+                    n = "10";
+                    ch = "CH10";
+                    break;
+                case 'm2':
+                    n = "11";
+                    ch = "CH11";
+                    break;
+                case 'm3':
+                    n = "12";
+                    ch = "CH12";
+                    break;
+            }
+            selectedValue = $('.rescue_cmd').val();
+            switch (selectedValue) {
+                case 'm1'://Default functionality
+                    command +=
+                        "resource SERIAL_RX 2 A03\n" +
+                        "resource SERIAL_TX 2 A02\n" +
+                        "timer A03 NONE\n" +
+                        "timer A02 NONE\n" +
+                        "resource SERVO 5 NONE\n"
+                    break;
+                case 'm2'://remap SBUS to SERVO 5
+                    command +=
+                        "resource SERIAL_RX 2 NONE\n" +
+                        "resource SERVO 5 A03\n" +
+                        "timer A03 AF3\n" +
+                        "mixer input " + ch + " -1000 1000 1000\n" +
+                        "mixer rule " + n + " set " + ch + " S5 1000 0\n";
+                    break;
+                case 'm3'://remap F.PORT to SERVO 5
+                    command +=
+                        "resource SERIAL_TX 2 NONE" +
+                        "resource SERVO 5 A02" +
+                        "timer A02 AF3" +
+                        "mixer input " + ch + " -1000 1000 1000\n" +
+                        "mixer rule " + n + " set " + ch + " S5 1000 0\n";
+                    break;
+            }
+
+            // send command
+            TABS.cli.send(command, function () { });
+            $(this).text('命令已发送');
+            setTimeout(() => {
+                TABS.cli.send("save\n", function () { });
+            }, 2000);
+        });
+
         // Tab key detection must be on keydown,
         // `keypress`/`keyup` happens too late, as `textarea` will have already lost focus.
         textarea.keydown(function (event) {
@@ -280,8 +393,8 @@ TABS.cli.initialize = function (callback) {
         });
 
         textarea.keyup(function (event) {
-            const keyUp = {38: true};
-            const keyDown = {40: true};
+            const keyUp = { 38: true };
+            const keyDown = { 40: true };
 
             if (CliAutoComplete.isOpen()) {
                 return; // disable history keys if autocomplete is open
@@ -303,7 +416,7 @@ TABS.cli.initialize = function (callback) {
             if (CONFIGURATOR.cliActive) {
                 const dialog = $('.dialogCLIExit')[0];
 
-                $('.cliExitBackBtn').click(function() {
+                $('.cliExitBackBtn').click(function () {
                     $('.cliExitBackBtn').off('click');
                     dialog.close();
                 });
@@ -331,7 +444,7 @@ TABS.cli.initialize = function (callback) {
     });
 };
 
-TABS.cli.adaptPhones = function() {
+TABS.cli.adaptPhones = function () {
     if ($(window).width() < 575) {
         const backdropHeight = $('.note').height() + 22 + 38;
         $('.backdrop').css('height', `calc(100% - ${backdropHeight}px)`);
@@ -344,7 +457,7 @@ TABS.cli.adaptPhones = function() {
 
 TABS.cli.history = {
     history: [],
-    index:  0,
+    index: 0,
 };
 
 TABS.cli.history.add = function (str) {

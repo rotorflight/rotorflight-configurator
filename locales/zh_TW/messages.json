@@ -3978,6 +3978,54 @@
         "message": "執行",
         "english": "Execute"
     },
+    "cliFlyDragonFlightControlQuickCommands": {
+        "message": "FlyDragon 飛控快捷命令",
+        "english": "FlyDragon FC Quick Commands"
+    },
+    "cliHardwareVersion": {
+        "message": "硬件版本",
+        "english": "Hardware version"
+    },
+    "cliRpmInputMode": {
+        "message": "RPM 輸入模式",
+        "english": "RPM Input mode"
+    },
+    "cliTailDriveMode": {
+        "message": "尾驅動模式",
+        "english": "Tail drive mode"
+    },
+    "cliVariablePitch": {
+        "message": "變距[*]",
+        "english": "Variable pitch[*]"
+    },
+    "cliTailMotor": {
+        "message": "尾電機",
+        "english": "Tail motor"
+    },
+    "cliInternalReceiverPowerSwitch": {
+        "message": "內部接收機電源開關",
+        "english": "Internal receiver power switch"
+    },
+    "cliInternalReceiverPowerOn": {
+        "message": "打開[*]",
+        "english": "On[*]"
+    },
+    "cliInternalReceiverPowerOff": {
+        "message": "關閉",
+        "english": "Off"
+    },
+    "cliRescuePowerChannel": {
+        "message": "救援電源通道",
+        "english": "Rescue power channel"
+    },
+    "cliRescuePowerDisabled": {
+        "message": "未啟用[*]",
+        "english": "Disabled[*]"
+    },
+    "cliSendQuickCommands": {
+        "message": "發送快捷命令",
+        "english": "Send quick commands"
+    },
     "dialogCLIExitTitle": {
         "message": "CLI命令列退出警告！",
         "english": "CLI Exit Warning!"

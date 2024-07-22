@@ -1757,7 +1757,7 @@
     "receiverTelemetrySensor_GOV_MODE": {
         "message": "Governor Mode"
     },
-     "receiverBars": {
+    "receiverBars": {
         "message": "Receiver Channels"
     },
     "receiverBarsHelp": {
@@ -3107,6 +3107,42 @@
     },
     "cliConfirmSnippetBtn": {
         "message": "Execute"
+    },
+    "cliFlyDragonFlightControlQuickCommands": {
+        "message": "FlyDragon FC Quick Commands"
+    },
+    "cliHardwareVersion": {
+        "message": "Hardware version"
+    },
+    "cliRpmInputMode": {
+        "message": "RPM Input mode"
+    },
+    "cliTailDriveMode": {
+        "message": "Tail drive mode"
+    },
+    "cliVariablePitch": {
+        "message": "Variable pitch[*]"
+    },
+    "cliTailMotor": {
+        "message": "Tail motor"
+    },
+    "cliInternalReceiverPowerSwitch": {
+        "message": "Internal receiver power switch"
+    },
+    "cliInternalReceiverPowerOn": {
+        "message": "On[*]"
+    },
+    "cliInternalReceiverPowerOff": {
+        "message": "Off"
+    },
+    "cliRescuePowerChannel": {
+        "message": "Rescue power channel"
+    },
+    "cliRescuePowerDisabled": {
+        "message": "Disabled[*]"
+    },
+    "cliSendQuickCommands": {
+        "message": "Send quick commands"
     },
     "dialogCLIExitTitle": {
         "message": "CLI Exit Warning!"

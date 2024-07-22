@@ -64,14 +64,14 @@ TABS.configuration.initialize = function (callback) {
     };
 
     const portTypes = {
-        DISABLED:   0,
-        MSP:        1,
-        GPS:        2,
-        TELEM:      3,
-        MAVLINK:    4,
-        BLACKBOX:   5,
-        CUSTOM:     6,
-        AUTO:       7,
+        DISABLED: 0,
+        MSP: 1,
+        GPS: 2,
+        TELEM: 3,
+        MAVLINK: 4,
+        BLACKBOX: 5,
+        CUSTOM: 6,
+        AUTO: 7,
     };
 
     const baudRateOptions = {};
@@ -146,18 +146,18 @@ TABS.configuration.initialize = function (callback) {
     ];
 
     const portFunctions = [
-        { id: 0,     excl: 0,       name: 'DISABLED',             type: portTypes.DISABLED },
-        { id: 1,     excl: 1,       name: 'MSP',                  type: portTypes.MSP },
-        { id: 2,     excl: 2,       name: 'GPS',                  type: portTypes.GPS },
-        { id: 64,    excl: 64,      name: 'RX_SERIAL',            type: portTypes.AUTO },
-        { id: 1024,  excl: 1024,    name: 'ESC_SENSOR',           type: portTypes.AUTO },
-        { id: 128,   excl: 128,     name: 'BLACKBOX',             type: portTypes.BLACKBOX },
-        { id: 4,     excl: 4668,    name: 'TELEMETRY_FRSKY',      type: portTypes.TELEM },
-        { id: 32,    excl: 4668,    name: 'TELEMETRY_SMARTPORT',  type: portTypes.TELEM },
-        { id: 4096,  excl: 4668,    name: 'TELEMETRY_IBUS',       type: portTypes.TELEM },
-        { id: 8,     excl: 4668,    name: 'TELEMETRY_HOTT',       type: portTypes.TELEM },
-        { id: 512,   excl: 4668,    name: 'TELEMETRY_MAVLINK',    type: portTypes.MAVLINK },
-        { id: 16,    excl: 4668,    name: 'TELEMETRY_LTM',        type: portTypes.TELEM },
+        { id: 0, excl: 0, name: 'DISABLED', type: portTypes.DISABLED },
+        { id: 1, excl: 1, name: 'MSP', type: portTypes.MSP },
+        { id: 2, excl: 2, name: 'GPS', type: portTypes.GPS },
+        { id: 64, excl: 64, name: 'RX_SERIAL', type: portTypes.AUTO },
+        { id: 1024, excl: 1024, name: 'ESC_SENSOR', type: portTypes.AUTO },
+        { id: 128, excl: 128, name: 'BLACKBOX', type: portTypes.BLACKBOX },
+        { id: 4, excl: 4668, name: 'TELEMETRY_FRSKY', type: portTypes.TELEM },
+        { id: 32, excl: 4668, name: 'TELEMETRY_SMARTPORT', type: portTypes.TELEM },
+        { id: 4096, excl: 4668, name: 'TELEMETRY_IBUS', type: portTypes.TELEM },
+        { id: 8, excl: 4668, name: 'TELEMETRY_HOTT', type: portTypes.TELEM },
+        { id: 512, excl: 4668, name: 'TELEMETRY_MAVLINK', type: portTypes.MAVLINK },
+        { id: 16, excl: 4668, name: 'TELEMETRY_LTM', type: portTypes.TELEM },
         //{ id: 2048,  excl: 10240,   name: 'TBS_SMARTAUDIO',       type: portTypes.AUTO },
         //{ id: 8192,  excl: 10240,   name: 'IRC_TRAMP',            type: portTypes.AUTO },
         //{ id: 16384, excl: 16384,   name: 'RUNCAM',               type: portTypes.AUTO },
@@ -293,15 +293,15 @@ TABS.configuration.initialize = function (callback) {
     function update_function_lists() {
         let usedFunctions = 0;
 
-        $('.tab-configuration .serialPorts .portConfiguration select.function').each(function() {
+        $('.tab-configuration .serialPorts .portConfiguration select.function').each(function () {
             const funcValue = $(this).val();
             usedFunctions |= get_port_excl(funcValue);
         });
 
-        $('.tab-configuration .serialPorts .portConfiguration select.function').each(function() {
+        $('.tab-configuration .serialPorts .portConfiguration select.function').each(function () {
             const funcValue = $(this).val();
             const exclFuncs = usedFunctions ^ get_port_excl(funcValue);
-            $('option', this).each(function() {
+            $('option', this).each(function () {
                 const option = $(this);
                 const optVal = option.val();
                 option.prop('disabled', optVal & exclFuncs);
@@ -412,7 +412,7 @@ TABS.configuration.initialize = function (callback) {
         const orientation_gyro_2_align_e = $('select.gyro_2_align');
 
         for (let i = 0; i < alignments.length; i++) {
-            orientation_mag_e.append(`<option value="${(i+1)}">${alignments[i]}</option>`);
+            orientation_mag_e.append(`<option value="${(i + 1)}">${alignments[i]}</option>`);
         }
 
         orientation_mag_e.val(FC.SENSOR_ALIGNMENT.align_mag);
@@ -423,9 +423,9 @@ TABS.configuration.initialize = function (callback) {
         });
 
         const GYRO_DETECTION_FLAGS = {
-            DETECTED_GYRO_1:      (1 << 0),
-            DETECTED_GYRO_2:      (1 << 1),
-            DETECTED_DUAL_GYROS:  (1 << 7),
+            DETECTED_GYRO_1: (1 << 0),
+            DETECTED_GYRO_2: (1 << 1),
+            DETECTED_DUAL_GYROS: (1 << 7),
         };
 
         const detected_gyro_1 = (FC.CONFIG.gyroDetectionFlags & GYRO_DETECTION_FLAGS.DETECTED_GYRO_1) != 0;
@@ -443,8 +443,8 @@ TABS.configuration.initialize = function (callback) {
         }
 
         for (let i = 0; i < alignments.length; i++) {
-            orientation_gyro_1_align_e.append(`<option value="${(i+1)}">${alignments[i]}</option>`);
-            orientation_gyro_2_align_e.append(`<option value="${(i+1)}">${alignments[i]}</option>`);
+            orientation_gyro_1_align_e.append(`<option value="${(i + 1)}">${alignments[i]}</option>`);
+            orientation_gyro_2_align_e.append(`<option value="${(i + 1)}">${alignments[i]}</option>`);
         }
 
         orientation_gyro_to_use_e.val(FC.SENSOR_CONFIG.gyro_to_use);
@@ -473,24 +473,24 @@ TABS.configuration.initialize = function (callback) {
         function addDenomOption(element, denom, baseFreq) {
             let denomDescription;
             if (baseFreq === 0) {
-                denomDescription = i18n.getMessage('configurationSpeedPidNoGyro', {'value' : denom});
+                denomDescription = i18n.getMessage('configurationSpeedPidNoGyro', { 'value': denom });
             } else {
-                denomDescription = i18n.getMessage('configurationKHzUnitLabel', { 'value' : (baseFreq / denom / 1000).toFixed(2)});
+                denomDescription = i18n.getMessage('configurationKHzUnitLabel', { 'value': (baseFreq / denom / 1000).toFixed(2) });
             }
             element.append(`<option value="${denom}">${denomDescription}</option>`);
         }
 
-         const updateGyroDenomReadOnly = function (gyroFrequency) {
-             let gyroContent;
-             if (gyroFrequency === 0) {
+        const updateGyroDenomReadOnly = function (gyroFrequency) {
+            let gyroContent;
+            if (gyroFrequency === 0) {
                 gyroContent = i18n.getMessage('configurationSpeedGyroNoGyro');
-             } else {
-                gyroContent = i18n.getMessage('configurationKHzUnitLabel', { 'value' : (gyroFrequency / 1000).toFixed(2)});
-             }
-             gyroTextElement.val(gyroContent);
-         };
+            } else {
+                gyroContent = i18n.getMessage('configurationKHzUnitLabel', { 'value': (gyroFrequency / 1000).toFixed(2) });
+            }
+            gyroTextElement.val(gyroContent);
+        };
 
-         const pidBaseFreq = FC.CONFIG.sampleRateHz;
+        const pidBaseFreq = FC.CONFIG.sampleRateHz;
 
         updateGyroDenomReadOnly(pidBaseFreq);
 
@@ -559,7 +559,7 @@ TABS.configuration.initialize = function (callback) {
             updateTabList(FC.FEATURE_CONFIG.features);
         });
 
-        $('input[id="accHardwareSwitch"]').change(function() {
+        $('input[id="accHardwareSwitch"]').change(function () {
             const checked = $(this).is(':checked');
             $('.accelNeeded').toggle(checked);
         }).change();
@@ -613,8 +613,8 @@ TABS.configuration.initModel = function () {
 
 TABS.configuration.renderModel = function () {
     const x = (-FC.SENSOR_DATA.kinematics[1]) * 0.017453292519943295,
-          y = (-FC.SENSOR_DATA.kinematics[2] - this.yaw_fix) * 0.017453292519943295,
-          z = (-FC.SENSOR_DATA.kinematics[0]) * 0.017453292519943295;
+        y = (-FC.SENSOR_DATA.kinematics[2] - this.yaw_fix) * 0.017453292519943295,
+        z = (-FC.SENSOR_DATA.kinematics[0]) * 0.017453292519943295;
 
     this.model.rotateTo(x, y, z);
 };
