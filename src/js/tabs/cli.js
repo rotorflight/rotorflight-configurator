@@ -347,7 +347,6 @@ TABS.cli.initialize = function (callback) {
 
             // send command
             TABS.cli.send(command, function () { });
-            $(this).text('命令已发送');
             setTimeout(() => {
                 TABS.cli.send("save\n", function () { });
             }, 2000);
