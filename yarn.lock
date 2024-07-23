@@ -3984,13 +3984,13 @@ gulp-util@^3.0.8:
     through2 "^2.0.0"
     vinyl "^0.5.0"
 
-gulp-xml-transformer@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/gulp-xml-transformer/-/gulp-xml-transformer-6.2.1.tgz#cf81299de2625aa49c81a41ce847e0f348753525"
-  integrity sha512-V60MLVoY6CKufJ7lkImW88MO3KybtW11vCQMVFUw+GJmqb/devimv+zs528aoklU8XXjarhuuGBqalOeFiAYuA==
+gulp-xml-transformer@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/gulp-xml-transformer/-/gulp-xml-transformer-7.0.0.tgz#94a7e6d07678d2be703f3fee104d6d0fd3f70113"
+  integrity sha512-dvpS7okUN9MfodhboGOU2P/K+9mVkcFDqLRr+EXipQ9PRgZxLpdyhf3ld036I2WrHt8bSoaYjXLLtfMj32CF+Q==
   dependencies:
     arrify "^3.0.0"
-    libxmljs2 "^0.31.0"
+    libxmljs2 "^0.32.0"
     plugin-error "^2.0.1"
     through2 "^4.0.2"
     value-or-function "^4.0.0"
@@ -5340,10 +5340,10 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-libxmljs2@^0.31.0:
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/libxmljs2/-/libxmljs2-0.31.0.tgz#0f7cf42453500843628d338f1e1b88d0bc20fa90"
-  integrity sha512-+o8y4lhmmf7zUA67watbLcAcxE0lkBkuatoIwgFkWTmuFTPEOZKunNpSjW6V7ONzAj8Ey1qVeR12q1JMU/sTlQ==
+libxmljs2@^0.32.0:
+  version "0.32.0"
+  resolved "https://registry.yarnpkg.com/libxmljs2/-/libxmljs2-0.32.0.tgz#408e35c54a5ad5e0366bc8299ba20ed35224d0d9"
+  integrity sha512-DuvKfSQZeUzw0A4UWZXfcBpr3VqlcJY1b3aw99PxTiX3T5t1rEO4gSpobNrP9S74LIhyDKaAs/lphuErV+n+7w==
   dependencies:
     "@mapbox/node-pre-gyp" "^1.0.10"
     bindings "~1.5.0"
