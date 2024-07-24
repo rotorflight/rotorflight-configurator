@@ -90,6 +90,7 @@ TABS.receiver = {
         { name: 'None',                 id: 0,   feature: null,           telemetry: 0,           visible: true, },
         { name: 'TBS CRSF',             id: 9,   feature: 'RX_SERIAL',    telemetry: 0x0010378F,  visible: true, },
         { name: 'Futaba S.BUS',         id: 2,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'Futaba S.BUS2',        id: 15,  feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'FrSky F.PORT',         id: 12,  feature: 'RX_SERIAL',    telemetry: 0xFFFFFFFF,  visible: true, },
         { name: 'Spektrum DSM/1024',    id: 0,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Spektrum DSM/2048',    id: 1,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
