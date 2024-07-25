@@ -26,7 +26,6 @@ const yarn = require("gulp-yarn");
 const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const jeditor = require("gulp-json-editor");
-const xmlTransformer = import("gulp-xml-transformer");
 const os = require('os');
 const git = require('gulp-git');
 const source = require('vinyl-source-stream');
@@ -923,7 +922,8 @@ function cordova_packagejson() {
         }))
         .pipe(gulp.dest(CORDOVA_DIST_DIR));
 }
-function cordova_configxml() {
+async function cordova_configxml() {
+    const xmlTransformer = (await import("gulp-xml-transformer")).default;
     return gulp.src([`${CORDOVA_DIST_DIR}config.xml`])
         .pipe(xmlTransformer([
             { path: '//xmlns:name', text: pkg.productName },
