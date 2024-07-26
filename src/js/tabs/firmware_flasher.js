@@ -39,17 +39,19 @@ TABS.firmware_flasher.initialize = function (callback) {
         FirmwareCache.onPutToCache(onFirmwareCacheUpdate);
         FirmwareCache.onRemoveFromCache(onFirmwareCacheUpdate);
 
-        function parse_hex(str, callback) {
-            // parsing hex in different thread
-            var worker = new Worker('./js/workers/hex_parser.js');
+        function parse_hex(str) {
+            return new Promise(r => {
+                // parsing hex in different thread
+                var worker = new Worker('./js/workers/hex_parser.js');
 
-            // "callback"
-            worker.onmessage = function (event) {
-                callback(event.data);
-            };
+                // "callback"
+                worker.onmessage = function (event) {
+                    r(event.data);
+                };
 
-            // send data/string over for processing
-            worker.postMessage(str);
+                // send data/string over for processing
+                worker.postMessage(str);
+            });
         }
 
         function show_loaded_hex(summary) {
@@ -91,7 +93,7 @@ TABS.firmware_flasher.initialize = function (callback) {
         function process_hex(data, summary) {
             self.intel_hex = data;
 
-            parse_hex(self.intel_hex, function (data) {
+            parse_hex(self.intel_hex).then(data => {
                 self.parsed_hex = data;
 
                 if (self.parsed_hex) {
@@ -801,71 +803,46 @@ TABS.firmware_flasher.initialize = function (callback) {
         });
 
         // UI Hooks
-        $('a.load_file').click(function () {
+        $('a.load_file').on('click', async function () {
             self.enableFlashing(false);
 
-            chrome.fileSystem.chooseEntry({
-                type: 'openFile',
-                accepts: [
-                    {
-                        description: 'target files',
-                        extensions: ['hex', 'config']
-                    }
-                ]
-            }, function (fileEntry) {
-                if (checkChromeRuntimeError()) {
-                    return;
-                }
-
-                // hide github info (if it exists)
-                $('div.git_info').slideUp();
-
-                chrome.fileSystem.getDisplayPath(fileEntry, function (path) {
-                    console.log('Loading file from: ' + path);
-
-                    fileEntry.file(function (file) {
-                        var reader = new FileReader();
-
-                        reader.onloadend = function(e) {
-                            if (e.total != 0 && e.total == e.loaded) {
-                                console.log('File loaded (' + e.loaded + ')');
-
-                                if (file.name.split('.').pop() === "hex") {
-                                    self.intel_hex = e.target.result;
-
-                                    parse_hex(self.intel_hex, function (data) {
-                                        self.parsed_hex = data;
-
-                                        if (self.parsed_hex) {
-                                            self.localFirmwareLoaded = true;
-
-                                            flashingMessageLocal();
-                                        } else {
-                                            self.flashingMessage(i18n.getMessage('firmwareFlasherHexCorrupted'), self.FLASH_MESSAGE_TYPES.INVALID);
-                                        }
-                                    });
-                                } else {
-                                    clearBufferedFirmware();
-
-                                    let config = cleanUnifiedConfigFile(e.target.result);
-                                    if (config !== null) {
-                                        const manufac = grabKeywordFromConfig(config, 'manufacturer_id', 'NONE');
-                                        const target = grabKeywordFromConfig(config, 'board_name', 'NONE');
-                                        config = self.injectDefaultDesign(config, 'BTFL');
-                                        config = self.injectTargetInfo(config, file.name, target, manufac, { commitHash: 'unknown', date: file.lastModifiedDate.toISOString() });
-                                        self.unifiedTarget.config = config;
-                                        self.unifiedTarget.fileName = file.name;
-                                        self.isConfigLocal = true;
-                                        flashingMessageLocal();
-                                    }
-                                }
-                            }
-                        };
-
-                        reader.readAsText(file);
-                    });
-                });
+            const [entry] = await showOpenFilePicker({
+                types: [
+                    { description: "Firmware/Target", accept: { "text/plain": [".hex", ".config"] } },
+                ],
             });
+            if (!entry) return;
+
+            $('div.git_info').slideUp();
+
+            const file = await entry.getFile();
+
+            if (file.name.endsWith(".hex")) {
+                self.intel_hex = await file.text();
+                self.parsed_hex = await parse_hex(self.intel_hex);
+
+                if (self.parsed_hex) {
+                    self.localFirmwareLoaded = true;
+
+                    flashingMessageLocal();
+                } else {
+                    self.flashingMessage(i18n.getMessage('firmwareFlasherHexCorrupted'), self.FLASH_MESSAGE_TYPES.INVALID);
+                }
+            } else {
+                clearBufferedFirmware();
+
+                let config = cleanUnifiedConfigFile(await file.text());
+                if (config !== null) {
+                    const manufac = grabKeywordFromConfig(config, 'manufacturer_id', 'NONE');
+                    const target = grabKeywordFromConfig(config, 'board_name', 'NONE');
+                    config = self.injectDefaultDesign(config, 'BTFL');
+                    config = self.injectTargetInfo(config, file.name, target, manufac, { commitHash: 'unknown', date: file.lastModifiedDate.toISOString() });
+                    self.unifiedTarget.config = config;
+                    self.unifiedTarget.fileName = file.name;
+                    self.isConfigLocal = true;
+                    flashingMessageLocal();
+                }
+            }
         });
 
         /**
@@ -1224,49 +1201,20 @@ TABS.firmware_flasher.flashingMessage = function(message, type) {
     }
     if (message != null) {
         progressLabel_e.html(message);
-        $('span.progressLabel a.save_firmware').click(function () {
+        $('span.progressLabel a.save_firmware').on('click', async function () {
             var summary = $('select[name="firmware_version"] option:selected').data('summary');
-            chrome.fileSystem.chooseEntry({type: 'saveFile', suggestedName: summary.file, accepts: [{description: 'HEX files', extensions: ['hex']}]}, function (fileEntry) {
-                if (checkChromeRuntimeError()) {
-                    return;
-                }
 
-                chrome.fileSystem.getDisplayPath(fileEntry, function (path) {
-                    console.log('Saving firmware to: ' + path);
-
-                    // check if file is writable
-                    chrome.fileSystem.isWritableEntry(fileEntry, function (isWritable) {
-                        if (isWritable) {
-                            var blob = new Blob([self.intel_hex], {type: 'text/plain'});
-
-                            fileEntry.createWriter(function (writer) {
-                                var truncated = false;
-
-                                writer.onerror = function (e) {
-                                    console.error(e);
-                                };
-
-                                writer.onwriteend = function() {
-                                    if (!truncated) {
-                                        // onwriteend will be fired again when truncation is finished
-                                        truncated = true;
-                                        writer.truncate(blob.size);
-
-                                        return;
-                                    }
-                                };
-
-                                writer.write(blob);
-                            }, function (e) {
-                                console.error(e);
-                            });
-                        } else {
-                            console.log('You don\'t have write permissions for this file, sorry.');
-                            GUI.log(i18n.getMessage('firmwareFlasherWritePermissions'));
-                        }
-                    });
+            try {
+                const fileHandle = await showSaveFilePicker({
+                    suggestedName: summary.file,
+                    types: [{ description: "HEX", accept: { "text/plain": ['.hex'] } }]
                 });
-            });
+                const writer = await fileHandle.createWritable();
+                await writer.write(new Blob([self.intel_hex], { type: 'text/plain' }));
+                await writer.close();
+            } catch (err) {
+                console.log('Error saving firmware file', err);
+            }
         });
     }
 

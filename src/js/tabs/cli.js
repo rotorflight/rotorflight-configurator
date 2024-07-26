@@ -134,44 +134,26 @@ TABS.cli.initialize = function (callback) {
                 .focus();
         });
 
-        $('.tab-cli .save').click(function() {
+        $('.tab-cli .save').on('click', async function() {
             const prefix = 'cli';
             const suffix = 'txt';
 
             const filename = generateFilename(prefix, suffix);
 
-            const accepts = [{
-                description: suffix.toUpperCase() + ' files', extensions: [suffix],
-            }];
-
-            chrome.fileSystem.chooseEntry({type: 'saveFile', suggestedName: filename, accepts: accepts}, function(entry) {
-                if (checkChromeRuntimeError()) {
-                    return;
-                }
-
-                if (!entry) {
-                    console.log('No file selected');
-                    return;
-                }
-
-                entry.createWriter(function (writer) {
-                    writer.onerror = function (){
-                        console.error('Failed to write file');
-                    };
-
-                    writer.onwriteend = function () {
-                        if (self.outputHistory.length > 0 && writer.length === 0) {
-                            writer.write(new Blob([self.outputHistory], {type: 'text/plain'}));
-                        } else {
-                            console.log('write complete');
-                        }
-                    };
-
-                    writer.truncate(0);
-                }, function (){
-                    console.error('Failed to get file writer');
+            try {
+                const fileHandle = await showSaveFilePicker({
+                    suggestedName: filename,
+                    types: [{
+                        description: `${suffix.toUpperCase()} files`,
+                        accept: { "text/plain": [`.${suffix}`] },
+                    }],
                 });
-            });
+                const writer = await fileHandle.createWritable();
+                await writer.write(new Blob([self.outputHistory], {type: 'text/plain'}));
+                await writer.close();
+            } catch (err) {
+                console.log('Failed to save config', err);
+            }
         });
 
         $('.tab-cli .clear').click(function() {
@@ -187,57 +169,47 @@ TABS.cli.initialize = function (callback) {
             self.GUI.copyButton.hide();
         }
 
-        $('.tab-cli .load').click(function() {
-            const accepts = [
-                {
-                    description: 'Config files', extensions: ["txt", "config"],
-                },
-                {
-                    description: 'All files',
-                },
-            ];
+        $('.tab-cli .load').on('click', async function() {
+            const previewArea = $("#snippetpreviewcontent textarea#preview");
 
-            chrome.fileSystem.chooseEntry({type: 'openFile', accepts: accepts}, function(entry) {
-                if (checkChromeRuntimeError()) {
-                    return;
+            function executeSnippet(fileName) {
+                const commands = previewArea.val();
+                executeCommands(commands);
+                self.GUI.snippetPreviewWindow.close();
+            }
+
+            function previewCommands(result, fileName) {
+                if (!self.GUI.snippetPreviewWindow) {
+                    self.GUI.snippetPreviewWindow = new jBox("Modal", {
+                        id: "snippetPreviewWindow",
+                        width: 'auto',
+                        height: 'auto',
+                        closeButton: 'title',
+                        animation: false,
+                        isolateScroll: false,
+                        title: i18n.getMessage("cliConfirmSnippetDialogTitle", { fileName: fileName }),
+                        content: $('#snippetpreviewcontent'),
+                        onCreated: () =>
+                            $("#snippetpreviewcontent a.confirm").on('click', () => executeSnippet(fileName))
+                        ,
+                    });
                 }
+                previewArea.val(result);
+                self.GUI.snippetPreviewWindow.open();
+            }
 
-                const previewArea = $("#snippetpreviewcontent textarea#preview");
-
-                function executeSnippet(fileName) {
-                    const commands = previewArea.val();
-                    executeCommands(commands);
-                    self.GUI.snippetPreviewWindow.close();
-                }
-
-                function previewCommands(result, fileName) {
-                    if (!self.GUI.snippetPreviewWindow) {
-                        self.GUI.snippetPreviewWindow = new jBox("Modal", {
-                            id: "snippetPreviewWindow",
-                            width: 'auto',
-                            height: 'auto',
-                            closeButton: 'title',
-                            animation: false,
-                            isolateScroll: false,
-                            title: i18n.getMessage("cliConfirmSnippetDialogTitle", { fileName: fileName }),
-                            content: $('#snippetpreviewcontent'),
-                            onCreated: () =>
-                                $("#snippetpreviewcontent a.confirm").click(() => executeSnippet(fileName))
-                            ,
-                        });
-                    }
-                    previewArea.val(result);
-                    self.GUI.snippetPreviewWindow.open();
-                }
-
-                entry.file((file) => {
-                    const reader = new FileReader();
-                    reader.onload =
-                        () => previewCommands(reader.result, file.name);
-                    reader.onerror = () => console.error(reader.error);
-                    reader.readAsText(file);
+            try {
+                const [entry] = await showOpenFilePicker({
+                    types: [
+                        { description: "Config files", accept: { "text/plain": [".txt", ".config"] } },
+                    ],
                 });
-            });
+                if (!entry) return;
+                const file = await entry.getFile();
+                previewCommands(await file.text(), file.name)
+            } catch (err) {
+                console.log("Failed to load config", err);
+            }
         });
 
         // Tab key detection must be on keydown,
