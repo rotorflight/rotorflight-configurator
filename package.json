@@ -4,7 +4,6 @@
   "description": "Crossplatform configuration tool for Rotorflight flight control system.",
   "version": "0.0.0",
   "main": "main.html",
-  "chromium-args": "--disable-features=nw2",
   "scripts": {
     "start": "run-script-os",
     "start:default": "NODE_ENV=development NW_PRE_ARGS=--load-extension='./node_modules/nw-vue-devtools-prebuilt/extension' gulp debug",
