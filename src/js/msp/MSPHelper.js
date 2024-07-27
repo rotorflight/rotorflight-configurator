@@ -66,6 +66,8 @@ function MspHelper() {
     self.SIGNATURE_LENGTH = 32;
 
     self.mspMultipleCache = [];
+
+    self.CRSF_TELEMETRY_SENSOR_LENGTH = 40;
 }
 
 MspHelper.prototype.process_data = function(dataHandler) {
@@ -904,6 +906,16 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.TELEMETRY_CONFIG.telemetry_inverted = data.readU8();
                 FC.TELEMETRY_CONFIG.telemetry_halfduplex = data.readU8();
                 FC.TELEMETRY_CONFIG.telemetry_sensors = data.readU32();
+                if (data.remaining() === 6 + self.CRSF_TELEMETRY_SENSOR_LENGTH) {
+                    FC.TELEMETRY_CONFIG.pin_swap = data.readU8();
+                    FC.TELEMETRY_CONFIG.crsf_telemetry_mode = data.readU8();
+                    FC.TELEMETRY_CONFIG.crsf_telemetry_rate = data.readU16();
+                    FC.TELEMETRY_CONFIG.crsf_telemetry_ratio = data.readU16();
+                    FC.TELEMETRY_CONFIG.crsf_telemetry_sensors = [];
+                    for (let i = 0; i < self.CRSF_TELEMETRY_SENSOR_LENGTH; i++) {
+                        FC.TELEMETRY_CONFIG.crsf_telemetry_sensors.push(data.readU8());
+                    }
+                }
                 break;
 
             case MSPCodes.MSP_ADVANCED_CONFIG:
@@ -1766,7 +1778,15 @@ MspHelper.prototype.crunch = function(code) {
         case MSPCodes.MSP_SET_TELEMETRY_CONFIG:
             buffer.push8(FC.TELEMETRY_CONFIG.telemetry_inverted)
                 .push8(FC.TELEMETRY_CONFIG.telemetry_halfduplex)
-                .push32(FC.TELEMETRY_CONFIG.telemetry_sensors);
+                .push32(FC.TELEMETRY_CONFIG.telemetry_sensors)
+                .push8(FC.TELEMETRY_CONFIG.pin_swap)
+                .push8(FC.TELEMETRY_CONFIG.crsf_telemetry_mode)
+                .push16(FC.TELEMETRY_CONFIG.crsf_telemetry_rate)
+                .push16(FC.TELEMETRY_CONFIG.crsf_telemetry_ratio)
+            for (let i = 0; i < self.CRSF_TELEMETRY_SENSOR_LENGTH; i++) {
+                buffer.push8(FC.TELEMETRY_CONFIG.crsf_telemetry_sensors[i] ?? 0);
+            }
+
             break;
 
         case MSPCodes.MSP_SET_TRANSPONDER_CONFIG:

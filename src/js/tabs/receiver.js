@@ -17,8 +17,6 @@ TABS.receiver = {
     rcArmThrottle: 1050,
     rcZeroThrottle: 1100,
     rcFullThrottle: 1900,
-    telemetryFeature: false,
-    telemetrySensors: 0,
     telemetryExtSensors: 0,
     axisLetters: ['A', 'E', 'R', 'C', 'T', '1', '2', '3'],
     axisNames: [
@@ -163,6 +161,302 @@ TABS.receiver = {
         { name: 'ADJUSTMENT',           id: 21, },
         { name: 'GOV_MODE',             id: 22, },
     ],
+    telemetry: {
+        enabled: false,
+        config: null,
+        DEFAULT_CRSF_TELEMETRY_RATE: 500,
+        DEFAULT_CRSF_TELEMETRY_RATIO: 4,
+        SENSORS: [
+            'NONE',
+
+            'HEARTBEAT',
+
+            'BATTERY',
+            'BATTERY_VOLTAGE',
+            'BATTERY_CURRENT',
+            'BATTERY_CONSUMPTION',
+            'BATTERY_CHARGE_LEVEL',
+            'BATTERY_CELL_COUNT',
+            'BATTERY_CELL_VOLTAGE',
+            'BATTERY_CELL_VOLTAGES',
+
+            'CONTROL',
+            'PITCH_CONTROL',
+            'ROLL_CONTROL',
+            'YAW_CONTROL',
+            'COLLECTIVE_CONTROL',
+            'THROTTLE_CONTROL',
+
+            'ESC1_DATA',
+            'ESC1_VOLTAGE',
+            'ESC1_CURRENT',
+            'ESC1_CAPACITY',
+            'ESC1_ERPM',
+            'ESC1_POWER',
+            'ESC1_THROTTLE',
+            'ESC1_TEMP1',
+            'ESC1_TEMP2',
+            'ESC1_BEC_VOLTAGE',
+            'ESC1_BEC_CURRENT',
+            'ESC1_STATUS',
+            'ESC1_MODEL',
+
+            'ESC2_DATA',
+            'ESC2_VOLTAGE',
+            'ESC2_CURRENT',
+            'ESC2_CAPACITY',
+            'ESC2_ERPM',
+            'ESC2_POWER',
+            'ESC2_THROTTLE',
+            'ESC2_TEMP1',
+            'ESC2_TEMP2',
+            'ESC2_BEC_VOLTAGE',
+            'ESC2_BEC_CURRENT',
+            'ESC2_STATUS',
+            'ESC2_MODEL',
+
+            'ESC_VOLTAGE',
+            'BEC_VOLTAGE',
+            'BUS_VOLTAGE',
+            'MCU_VOLTAGE',
+
+            'ESC_CURRENT',
+            'BEC_CURRENT',
+            'BUS_CURRENT',
+            'MCU_CURRENT',
+
+            'ESC_TEMP',
+            'BEC_TEMP',
+            'MCU_TEMP',
+            'AIR_TEMP',
+            'MOTOR_TEMP',
+            'BATTERY_TEMP',
+            'EXHAUST_TEMP',
+
+            'HEADING',
+            'ALTITUDE',
+            'VARIOMETER',
+
+            'HEADSPEED',
+            'TAILSPEED',
+            'MOTOR_RPM',
+            'TRANS_RPM',
+
+            'ATTITUDE',
+            'ATTITUDE_PITCH',
+            'ATTITUDE_ROLL',
+            'ATTITUDE_YAW',
+
+            'ACCEL',
+            'ACCEL_X',
+            'ACCEL_Y',
+            'ACCEL_Z',
+
+            'GPS',
+            'GPS_SATS',
+            'GPS_PDOP',
+            'GPS_HDOP',
+            'GPS_VDOP',
+            'GPS_COORD',
+            'GPS_ALTITUDE',
+            'GPS_HEADING',
+            'GPS_GROUNDSPEED',
+            'GPS_HOME_DISTANCE',
+            'GPS_HOME_DIRECTION',
+            'GPS_DATE_TIME',
+
+            'LOAD',
+            'CPU_LOAD',
+            'SYS_LOAD',
+            'RT_LOAD',
+
+            'MODEL_ID',
+            'FLIGHT_MODE',
+            'ARMING_FLAGS',
+            'ARMING_DISABLE_FLAGS',
+            'RESCUE_STATE',
+            'GOVERNOR_STATE',
+            'GOVERNOR_FLAGS',
+
+            'PID_PROFILE',
+            'RATES_PROFILE',
+            'BATTERY_PROFILE',
+            'LED_PROFILE',
+
+            'ADJFUNC',
+
+            'DEBUG_0',
+            'DEBUG_1',
+            'DEBUG_2',
+            'DEBUG_3',
+            'DEBUG_4',
+            'DEBUG_5',
+            'DEBUG_6',
+            'DEBUG_7',
+        ],
+        CRSF_CUSTOM_SENSORS: [
+            {
+                title: 'BATTERY',
+                sensors: [
+                    'BATTERY_VOLTAGE',
+                    'BATTERY_CURRENT',
+                    'BATTERY_CONSUMPTION',
+                    'BATTERY_CHARGE_LEVEL',
+                    'BATTERY_CELL_COUNT',
+                    'BATTERY_CELL_VOLTAGE',
+                ],
+            },
+            {
+                title: 'VOLTAGE',
+                sensors: [
+                    'ESC_VOLTAGE',
+                    'BEC_VOLTAGE',
+                    'BUS_VOLTAGE',
+                    'MCU_VOLTAGE',
+                ],
+            },
+            {
+                title: 'CURRENT',
+                sensors: [
+                    'ESC_CURRENT',
+                ],
+            },
+            {
+                title: 'TEMPERATURE',
+                sensors: [
+                    'ESC_TEMP',
+                    'BEC_TEMP',
+                    'MCU_TEMP',
+                ],
+            },
+            {
+                title: 'ESC1',
+                sensors: [
+                    'ESC1_VOLTAGE',
+                    'ESC1_CURRENT',
+                    'ESC1_CAPACITY',
+                    'ESC1_ERPM',
+                    'ESC1_POWER',
+                    'ESC1_THROTTLE',
+                    'ESC1_TEMP1',
+                    'ESC1_TEMP2',
+                    'ESC1_BEC_VOLTAGE',
+                    'ESC1_BEC_CURRENT',
+                    'ESC1_STATUS',
+                    'ESC1_MODEL',
+                ],
+            },
+            {
+                title: 'ESC2',
+                sensors: [
+                    'ESC2_VOLTAGE',
+                    'ESC2_CURRENT',
+                    'ESC2_CAPACITY',
+                    'ESC2_ERPM',
+                    'ESC2_POWER',
+                    'ESC2_THROTTLE',
+                    'ESC2_TEMP1',
+                    'ESC2_TEMP2',
+                    'ESC2_BEC_VOLTAGE',
+                    'ESC2_BEC_CURRENT',
+                    'ESC2_STATUS',
+                    'ESC2_MODEL',
+                ],
+            },
+            {
+                title: 'RPM',
+                sensors: [
+                    'HEADSPEED',
+                    'TAILSPEED',
+                ],
+            },
+            {
+                title: 'BARO',
+                sensors: [
+                    'ALTITUDE',
+                    'VARIOMETER',
+                ],
+            },
+            {
+                title: 'GYRO',
+                sensors: [
+                    'HEADING',
+                    'ATTITUDE',
+                    'ATTITUDE_PITCH',
+                    'ATTITUDE_ROLL',
+                    'ATTITUDE_YAW',
+                    'ACCEL_X',
+                    'ACCEL_Y',
+                    'ACCEL_Z',
+                ],
+            },
+            {
+                title: 'GPS',
+                sensors: [
+                    'GPS_SATS',
+                    'GPS_PDOP',
+                    'GPS_COORD',
+                    'GPS_ALTITUDE',
+                    'GPS_HEADING',
+                    'GPS_GROUNDSPEED',
+                    'GPS_HOME_DISTANCE',
+                    'GPS_HOME_DIRECTION',
+                ],
+            },
+            {
+                title: 'STATUS',
+                sensors: [
+                    'MODEL_ID',
+                    'FLIGHT_MODE',
+                    'ARMING_FLAGS',
+                    'ARMING_DISABLE_FLAGS',
+                    'RESCUE_STATE',
+                    'GOVERNOR_STATE',
+                    'ADJFUNC',
+                ],
+            },
+            {
+                title: 'PROFILE',
+                sensors: [
+                    'PID_PROFILE',
+                    'RATES_PROFILE',
+                    'LED_PROFILE',
+                ],
+            },
+            {
+                title: 'CONTROL',
+                sensors: [
+                    'PITCH_CONTROL',
+                    'ROLL_CONTROL',
+                    'YAW_CONTROL',
+                    'COLLECTIVE_CONTROL',
+                    'THROTTLE_CONTROL',
+                ],
+            },
+            {
+                title: 'SYSTEM',
+                sensors: [
+                    'HEARTBEAT',
+                    'CPU_LOAD',
+                    'SYS_LOAD',
+                    'RT_LOAD',
+                ],
+            },
+            {
+                title: 'DEBUG',
+                sensors: [
+                    'DEBUG_0',
+                    'DEBUG_1',
+                    'DEBUG_2',
+                    'DEBUG_3',
+                    'DEBUG_4',
+                    'DEBUG_5',
+                    'DEBUG_6',
+                    'DEBUG_7',
+                ],
+            },
+        ],
+    },
 };
 
 TABS.receiver.initialize = function (callback) {
@@ -388,7 +682,7 @@ TABS.receiver.initialize = function (callback) {
             const templ = $('#telemetrySensorTemplate tr');
             const table = $('.tab-receiver .telemetry_sensors table');
             for (const sensor of self.telemetrySensorList) {
-                const state = !!(self.telemetrySensors & (1 << sensor.id));
+                const state = !!(self.telemetry.config.telemetry_sensors & (1 << sensor.id));
                 const desc = i18n.getMessage(`receiverTelemetrySensor_${sensor.name}`);
                 const elem = templ.clone();
                 elem.attr('sensor', sensor.id);
@@ -396,21 +690,116 @@ TABS.receiver.initialize = function (callback) {
                 elem.find('input').prop('checked', state).change(function () {
                     const checked = $(this).is(':checked');
                     if (checked)
-                        self.telemetrySensors |= (1 << sensor.id);
+                        self.telemetry.config.telemetry_sensors |= (1 << sensor.id);
                     else
-                        self.telemetrySensors &= ~(1 << sensor.id);
+                        self.telemetry.config.telemetry_sensors &= ~(1 << sensor.id);
                 });
                 table.append(elem);
             }
         }
 
+        function updateCrsfTelemetrySettings() {
+            $('.tab-receiver .telemetry_setting').hide();
+            $('.tab-receiver .crsf-telemetry-setting').show();
+
+            const { config } = self.telemetry;
+            const isCustom = config.crsf_telemetry_mode === 1;
+
+            $('.tab-receiver .crsf-telemetry-sensors').toggle(isCustom);
+            $('.tab-receiver .telemetry_sensors').toggle(!isCustom);
+
+            $('.tab-receiver input[name="crsf-telemetry-mode"]')
+                .prop('checked', isCustom);
+
+            $('.tab-receiver input[name="crsf-telemetry-rate"]')
+                .val(config.crsf_telemetry_rate || self.telemetry.DEFAULT_CRSF_TELEMETRY_RATE)
+                .trigger('change');
+
+            $('.tab-receiver input[name="crsf-telemetry-ratio"]')
+                .val(config.crsf_telemetry_ratio || self.telemetry.DEFAULT_CRSF_TELEMETRY_RATIO)
+                .trigger('change');
+
+            if (isCustom) {
+                return updateCrsfTelemetrySensors();
+            }
+
+            updateTelemetrySensors();
+        }
+
+        function onCrsfSensorSelectChange() {
+            const value = $(this).val();
+            $(this).closest('li').siblings().each(function () {
+                const select = $(this).find('select');
+                if (select.val() === value) {
+                    select.val(0);
+                }
+            });
+        }
+
+        function updateCrsfTelemetrySensorsIndex() {
+            $('.tab-receiver .crsf-telemetry-sensors ul').children().each(function (i) {
+                $(this).find('.crsf-telemetry-index').text(i + 1);
+            });
+        }
+
+        function populateCrsfTelemtrySensors() {
+            const sensorSelect = $('#crsfTelemetrySensorTemplate li select');
+            sensorSelect.append(`<option value="0" selected>---</option>`);
+            for (const g of self.telemetry.CRSF_CUSTOM_SENSORS) {
+                const groupLabel = i18n.getMessage(`receiverTelemetryGroup_${g.title}`);
+                const group = $(`<optgroup label="${groupLabel}">`);
+                for (const sensorName of g.sensors) {
+                    const sensorId = self.telemetry.SENSORS.indexOf(sensorName);
+
+                    const escNum = sensorName.match(/^ESC(\d)/);
+                    let desc;
+                    if (escNum) {
+                        const prefix = `#${escNum[1]}`
+                        const message = i18n.getMessage(`receiverCrsfTelemetrySensor_${sensorName.replace(/^ESC\d/, 'ESC')}`);
+                        desc = `${prefix} ${message}`;
+                    } else {
+                        desc = i18n.getMessage(`receiverCrsfTelemetrySensor_${sensorName}`);
+                    }
+                    group.append(`<option value="${sensorId}">${desc}</option>`);
+                }
+                sensorSelect.append(group);
+            }
+
+            const dest = $('.tab-receiver .crsf-telemetry-sensors ul');
+            const templ = $('#crsfTelemetrySensorTemplate li');
+
+            for (let i = 0; i < mspHelper.CRSF_TELEMETRY_SENSOR_LENGTH; i++) {
+                const elem = templ.clone()
+                elem.find('select').on('change', onCrsfSensorSelectChange);
+                dest.append(elem);
+            }
+
+            updateCrsfTelemetrySensorsIndex();
+
+            dest.sortable({ update: function() {
+                updateCrsfTelemetrySensorsIndex();
+                self.saveButtons = true;
+                updateButtons(true);
+            }});
+        }
+        populateCrsfTelemtrySensors();
+
+        function updateCrsfTelemetrySensors() {
+            $('.tab-receiver .crsf-telemetry-sensors ul')
+                .children()
+                .each(function (i) {
+                    const sensorId = self.telemetry.config.crsf_telemetry_sensors[i];
+                    $(this).find('select').val(sensorId);
+                });
+        }
+
         function updateTelemetrySensors() {
-            const sensorList = self.telemetryFeature ?
+            const sensorList = self.telemetry.enabled ?
                 (self.telemetryExtSensors | (self.rxProto ? self.rxProto.telemetry : 0)) : 0;
             $('.tab-receiver .telemetry_setting').toggle(self.telemetryExtSensors != 0);
             $('.tab-receiver .telemetry_sensors').toggle(sensorList != 0);
             for (const sensor of self.telemetrySensorList) {
-                const state = !!(self.telemetrySensors & (1 << sensor.id));
+                const state = !!(self.telemetry.config.telemetry_sensors & (1 << sensor.id));
                 const visbl = !!(sensorList & (1 << sensor.id));
                 const elem = $(`.tab-receiver .telemetry_sensors tr[sensor="${sensor.id}"]`);
                 elem.toggle(visbl);
@@ -429,19 +818,52 @@ TABS.receiver.initialize = function (callback) {
             }
         }
 
-        self.telemetryFeature = FC.FEATURE_CONFIG.features.isEnabled('TELEMETRY');
-        self.telemetrySensors = FC.TELEMETRY_CONFIG.telemetry_sensors;
+        self.telemetry.enabled = FC.FEATURE_CONFIG.features.isEnabled('TELEMETRY');
+        self.telemetry.config = {
+            ...FC.TELEMETRY_CONFIG,
+        };
 
         updateExternalTelemetry();
         populateTelemetrySensors();
 
-        $('.tab-receiver input[name="telemetry_enabled"]').change(function () {
-            self.telemetryFeature = $(this).is(':checked');
-            FC.FEATURE_CONFIG.features.setFeature('TELEMETRY', self.telemetryFeature);
-            updateTelemetrySensors();
-        }).prop('checked', self.telemetryFeature).change();
+        function updateTelemetry() {
+            const isCrsf = self.telemetry.enabled && self.rxProto.name === "TBS CRSF";
 
-        rxProtoSelectElement.change(updateTelemetrySensors);
+            if (isCrsf) {
+                return updateCrsfTelemetrySettings();
+            }
+
+            $('.tab-receiver .crsf-telemetry-setting').hide();
+            $('.tab-receiver .crsf-telemetry-sensors').hide();
+
+            updateTelemetrySensors();
+        }
+
+        $('.tab-receiver input[name="telemetry_enabled"]')
+            .on('change', function () {
+                self.telemetry.enabled = $(this).is(':checked');
+                FC.FEATURE_CONFIG.features.setFeature('TELEMETRY', self.telemetry.enabled);
+                updateTelemetry();
+            })
+            .prop('checked', self.telemetry.enabled)
+            .trigger('change');
+
+
+        $('.tab-receiver input[name="crsf-telemetry-mode"]').on('change', function () {
+            self.telemetry.config.crsf_telemetry_mode = +$(this).is(':checked');
+            self.telemetry.config.crsf_telemetry_sensors.fill(0);
+            updateTelemetry();
+        });
+
+        $('.tab-receiver input[name="crsf-telemetry-rate"]').on('change', function() {
+            self.telemetry.config.crsf_telemetry_rate = getIntegerValue(this);
+        });
+
+        $('.tab-receiver input[name="crsf-telemetry-ratio"]').on('change', function() {
+            self.telemetry.config.crsf_telemetry_ratio = getIntegerValue(this);
+        });
+
+        rxProtoSelectElement.on('change', updateTelemetry);
 
 
     //// Channels Bars
@@ -732,7 +1154,16 @@ TABS.receiver.initialize = function (callback) {
 
             FC.RC_MAP = self.rcmap;
 
-            FC.TELEMETRY_CONFIG.telemetry_sensors = self.telemetrySensors;
+            $('.tab-receiver .crsf-telemetry-sensors .sensor-list')
+                .children()
+                .each(function(i) {
+                    const sensorId = Number($(this).find('select').val());
+                    self.telemetry.config.crsf_telemetry_sensors[i] = sensorId;
+                });
+            console.log(self.telemetry.config);
+            FC.TELEMETRY_CONFIG = {
+                ...self.telemetry.config,
+            };
         }
 
 
