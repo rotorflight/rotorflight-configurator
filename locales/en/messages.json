@@ -1688,6 +1688,15 @@
     "receiverTelemetryInverted": {
         "message": "Inverted Telemetry Signaling"
     },
+    "receiverCrsfTelemetryMode": {
+        "message": "Enable CRSF Custom Telemetry"
+    },
+    "receiverCrsfTelemetryRate": {
+        "message": "Telemetry Rate"
+    },
+    "receiverCrsfTelemetryRatio": {
+        "message": "Telemetry Ratio"
+    },
     "receiverTelemetrySensors": {
         "message": "Telemetry Sensors"
     },
@@ -1759,6 +1768,333 @@
     },
     "receiverTelemetrySensor_GOV_MODE": {
         "message": "Governor Mode"
+    },
+    "receiverTelemetryGroup_DEBUG": {
+        "message": "Debug"
+    },
+    "receiverTelemetryGroup_SYSTEM": {
+        "message": "System"
+    },
+    "receiverTelemetryGroup_GPS": {
+        "message": "GPS"
+    },
+    "receiverTelemetryGroup_CONTROL": {
+        "message": "Control"
+    },
+    "receiverTelemetryGroup_PROFILE": {
+        "message": "Profile"
+    },
+    "receiverTelemetryGroup_RPM": {
+        "message": "RPM"
+    },
+    "receiverTelemetryGroup_BATTERY": {
+        "message": "Battery"
+    },
+    "receiverTelemetryGroup_TEMPERATURE": {
+        "message": "Temperature"
+    },
+    "receiverTelemetryGroup_ESC1": {
+        "message": "ESC #1"
+    },
+    "receiverTelemetryGroup_ESC2": {
+        "message": "ESC #2"
+    },
+    "receiverTelemetryGroup_BARO": {
+        "message": "Barometer"
+    },
+    "receiverTelemetryGroup_GYRO": {
+        "message": "Gyro"
+    },
+    "receiverTelemetryGroup_STATUS": {
+        "message": "Status"
+    },
+    "receiverTelemetryGroup_CURRENT": {
+        "message": "Current"
+    },
+    "receiverTelemetryGroup_VOLTAGE": {
+        "message": "Voltage"
+    },
+    "receiverCrsfTelemetrySensor_HEARTBEAT": {
+        "message": "Heartbeat"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY": {
+        "message": "Battery"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_VOLTAGE": {
+        "message": "Battery Voltage"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CURRENT": {
+        "message": "Battery Current"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CONSUMPTION": {
+        "message": "Battery Consumption"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CHARGE_LEVEL": {
+        "message": "Battery Charge Level"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CELL_COUNT": {
+        "message": "Battery Cell Count"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGE": {
+        "message": "Battery Cell Voltage"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGES": {
+        "message": "Battery Cell Voltages"
+    },
+    "receiverCrsfTelemetrySensor_CONTROL": {
+        "message": "Control"
+    },
+    "receiverCrsfTelemetrySensor_PITCH_CONTROL": {
+        "message": "Pitch Control"
+    },
+    "receiverCrsfTelemetrySensor_ROLL_CONTROL": {
+        "message": "Roll Control"
+    },
+    "receiverCrsfTelemetrySensor_YAW_CONTROL": {
+        "message": "Yaw Control"
+    },
+    "receiverCrsfTelemetrySensor_COLLECTIVE_CONTROL": {
+        "message": "Collective Control"
+    },
+    "receiverCrsfTelemetrySensor_THROTTLE_CONTROL": {
+        "message": "Throttle Control"
+    },
+    "receiverCrsfTelemetrySensor_ESC_DATA": {
+        "message": "ESC Data"
+    },
+    "receiverCrsfTelemetrySensor_ESC_VOLTAGE": {
+        "message": "ESC Voltage"
+    },
+    "receiverCrsfTelemetrySensor_ESC_CURRENT": {
+        "message": "ESC Current"
+    },
+    "receiverCrsfTelemetrySensor_ESC_CAPACITY": {
+        "message": "ESC Capacity"
+    },
+    "receiverCrsfTelemetrySensor_ESC_ERPM": {
+        "message": "ESC ERPM"
+    },
+    "receiverCrsfTelemetrySensor_ESC_POWER": {
+        "message": "ESC Power"
+    },
+    "receiverCrsfTelemetrySensor_ESC_THROTTLE": {
+        "message": "ESC Throttle"
+    },
+    "receiverCrsfTelemetrySensor_ESC_TEMP1": {
+        "message": "ESC Temp 1"
+    },
+    "receiverCrsfTelemetrySensor_ESC_TEMP2": {
+        "message": "ESC Temp 2"
+    },
+    "receiverCrsfTelemetrySensor_ESC_BEC_VOLTAGE": {
+        "message": "ESC BEC Voltage"
+    },
+    "receiverCrsfTelemetrySensor_ESC_BEC_CURRENT": {
+        "message": "ESC BEC Current"
+    },
+    "receiverCrsfTelemetrySensor_ESC_STATUS": {
+        "message": "ESC Status"
+    },
+    "receiverCrsfTelemetrySensor_ESC_MODEL": {
+        "message": "ESC Model"
+    },
+    "receiverCrsfTelemetrySensor_ESC_VOLTAGE": {
+        "message": "ESC Voltage"
+    },
+    "receiverCrsfTelemetrySensor_BEC_VOLTAGE": {
+        "message": "BEC Voltage"
+    },
+    "receiverCrsfTelemetrySensor_BUS_VOLTAGE": {
+        "message": "Bus Voltage"
+    },
+    "receiverCrsfTelemetrySensor_MCU_VOLTAGE": {
+        "message": "MCU Voltage"
+    },
+    "receiverCrsfTelemetrySensor_ESC_CURRENT": {
+        "message": "ESC Current"
+    },
+    "receiverCrsfTelemetrySensor_BEC_CURRENT": {
+        "message": "BEC Current"
+    },
+    "receiverCrsfTelemetrySensor_BUS_CURRENT": {
+        "message": "Bus Current"
+    },
+    "receiverCrsfTelemetrySensor_MCU_CURRENT": {
+        "message": "MCU Current"
+    },
+    "receiverCrsfTelemetrySensor_ESC_TEMP": {
+        "message": "ESC Temp"
+    },
+    "receiverCrsfTelemetrySensor_BEC_TEMP": {
+        "message": "BEC Temp"
+    },
+    "receiverCrsfTelemetrySensor_MCU_TEMP": {
+        "message": "MCU Temp"
+    },
+    "receiverCrsfTelemetrySensor_AIR_TEMP": {
+        "message": "Air Temp"
+    },
+    "receiverCrsfTelemetrySensor_MOTOR_TEMP": {
+        "message": "Motor Temp"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_TEMP": {
+        "message": "Battery Temp"
+    },
+    "receiverCrsfTelemetrySensor_EXHAUST_TEMP": {
+        "message": "Exhaust Temp"
+    },
+    "receiverCrsfTelemetrySensor_HEADING": {
+        "message": "Heading"
+    },
+    "receiverCrsfTelemetrySensor_ALTITUDE": {
+        "message": "Altitude"
+    },
+    "receiverCrsfTelemetrySensor_VARIOMETER": {
+        "message": "Variometer"
+    },
+    "receiverCrsfTelemetrySensor_HEADSPEED": {
+        "message": "Headspeed"
+    },
+    "receiverCrsfTelemetrySensor_TAILSPEED": {
+        "message": "Tailspeed"
+    },
+    "receiverCrsfTelemetrySensor_MOTOR_RPM": {
+        "message": "Motor RPM"
+    },
+    "receiverCrsfTelemetrySensor_TRANS_RPM": {
+        "message": "Transmission RPM"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE": {
+        "message": "Attitude"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE_PITCH": {
+        "message": "Attitude Pitch"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE_ROLL": {
+        "message": "Attitude Roll"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE_YAW": {
+        "message": "Attitude Yaw"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL": {
+        "message": "Accelerometer"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL_X": {
+        "message": "Accelerometer X-axis"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL_Y": {
+        "message": "Accelerometer Y-axis"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL_Z": {
+        "message": "Accelerometer Z-axis"
+    },
+    "receiverCrsfTelemetrySensor_GPS": {
+        "message": "GPS"
+    },
+    "receiverCrsfTelemetrySensor_GPS_SATS": {
+        "message": "GPS Sats"
+    },
+    "receiverCrsfTelemetrySensor_GPS_PDOP": {
+        "message": "GPS PDOP"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HDOP": {
+        "message": "GPS HDOP"
+    },
+    "receiverCrsfTelemetrySensor_GPS_VDOP": {
+        "message": "GPS VDOP"
+    },
+    "receiverCrsfTelemetrySensor_GPS_COORD": {
+        "message": "GPS Coord"
+    },
+    "receiverCrsfTelemetrySensor_GPS_ALTITUDE": {
+        "message": "GPS Altitude"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HEADING": {
+        "message": "GPS Heading"
+    },
+    "receiverCrsfTelemetrySensor_GPS_GROUNDSPEED": {
+        "message": "GPS Groundspeed"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HOME_DISTANCE": {
+        "message": "GPS Home Distance"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HOME_DIRECTION": {
+        "message": "GPS Home Direction"
+    },
+    "receiverCrsfTelemetrySensor_GPS_DATE_TIME": {
+        "message": "GPS Date Time"
+    },
+    "receiverCrsfTelemetrySensor_LOAD": {
+        "message": "Load"
+    },
+    "receiverCrsfTelemetrySensor_CPU_LOAD": {
+        "message": "CPU Load"
+    },
+    "receiverCrsfTelemetrySensor_SYS_LOAD": {
+        "message": "SYS Load"
+    },
+    "receiverCrsfTelemetrySensor_RT_LOAD": {
+        "message": "RT Load"
+    },
+    "receiverCrsfTelemetrySensor_MODEL_ID": {
+        "message": "Model Id"
+    },
+    "receiverCrsfTelemetrySensor_FLIGHT_MODE": {
+        "message": "Flight Mode"
+    },
+    "receiverCrsfTelemetrySensor_ARMING_FLAGS": {
+        "message": "Arming Flags"
+    },
+    "receiverCrsfTelemetrySensor_ARMING_DISABLE_FLAGS": {
+        "message": "Arming Disable Flags"
+    },
+    "receiverCrsfTelemetrySensor_RESCUE_STATE": {
+        "message": "Rescue State"
+    },
+    "receiverCrsfTelemetrySensor_GOVERNOR_STATE": {
+        "message": "Governor State"
+    },
+    "receiverCrsfTelemetrySensor_GOVERNOR_FLAGS": {
+        "message": "Governor Flags"
+    },
+    "receiverCrsfTelemetrySensor_PID_PROFILE": {
+        "message": "PID Profile"
+    },
+    "receiverCrsfTelemetrySensor_RATES_PROFILE": {
+        "message": "Rates Profile"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_PROFILE": {
+        "message": "Battery Profile"
+    },
+    "receiverCrsfTelemetrySensor_LED_PROFILE": {
+        "message": "LED Profile"
+    },
+    "receiverCrsfTelemetrySensor_ADJFUNC": {
+        "message": "Adjustment Function"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_0": {
+        "message": "Debug 0"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_1": {
+        "message": "Debug 1"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_2": {
+        "message": "Debug 2"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_3": {
+        "message": "Debug 3"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_4": {
+        "message": "Debug 4"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_5": {
+        "message": "Debug 5"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_6": {
+        "message": "Debug 6"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_7": {
+        "message": "Debug 7"
     },
      "receiverBars": {
         "message": "Receiver Channels"
