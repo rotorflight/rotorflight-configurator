@@ -816,24 +816,25 @@ TABS.receiver.initialize = function (callback) {
                 .children()
                 .toArray()
 
-            const sensors = [];
-            for (const [i, item] of items.entries()) {
-                const sensorId = Number($(item).find('select').val());
-                if (sensorId > 0) sensors.push(sensorId);
-                $(item).find('.crsf-telemetry-index').text(i + 1);
+            const sensors = items.map(item => Number($(item).find('select').val()));
+
+            let lastFilledSlot = sensors.length - 1;
+            for (; lastFilledSlot >= 0; lastFilledSlot--) {
+                if (sensors[lastFilledSlot] > 0) break;
             }
 
-            let i = 0;
-            for (; i < sensors.length; i++) {
-                $(items[i]).show().find('select').val(sensors[i]);
-            }
+            let sensorCount = 1;
 
-            if (i < mspHelper.CRSF_TELEMETRY_SENSOR_LENGTH) {
-                $(items[i++]).show().find('select').val(0);
-            }
+            for (let i = 0; i < items.length; i++) {
+                $(items[i])
+                    .toggle(i <= lastFilledSlot + 1)
+                    .find('select')
+                    .val(sensors[i]);
 
-            for (; i < mspHelper.CRSF_TELEMETRY_SENSOR_LENGTH; i++) {
-                $(items[i]).hide().find('select').val(0);
+                $(items[i])
+                    .find('.crsf-telemetry-index')
+                    // ignore counting empty slots
+                    .text(sensors[i] > 0 ? sensorCount++ : '');
             }
         }
 
