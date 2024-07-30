@@ -698,101 +698,6 @@ TABS.receiver.initialize = function (callback) {
             }
         }
 
-        function updateCrsfTelemetrySettings() {
-            $('.tab-receiver .telemetry_setting').hide();
-            $('.tab-receiver .crsf-telemetry-setting').show();
-
-            const { config } = self.telemetry;
-            const isCustom = config.crsf_telemetry_mode === 1;
-
-            $('.tab-receiver .crsf-telemetry-sensors').toggle(isCustom);
-            $('.tab-receiver .telemetry_sensors').toggle(!isCustom);
-
-            $('.tab-receiver input[name="crsf-telemetry-mode"]')
-                .prop('checked', isCustom);
-
-            $('.tab-receiver input[name="crsf-telemetry-rate"]')
-                .val(config.crsf_telemetry_rate || self.telemetry.DEFAULT_CRSF_TELEMETRY_RATE)
-                .trigger('change');
-
-            $('.tab-receiver input[name="crsf-telemetry-ratio"]')
-                .val(config.crsf_telemetry_ratio || self.telemetry.DEFAULT_CRSF_TELEMETRY_RATIO)
-                .trigger('change');
-
-            if (isCustom) {
-                return updateCrsfTelemetrySensors();
-            }
-
-            updateTelemetrySensors();
-        }
-
-        function onCrsfSensorSelectChange() {
-            const value = $(this).val();
-            $(this).closest('li').siblings().each(function () {
-                const select = $(this).find('select');
-                if (select.val() === value) {
-                    select.val(0);
-                }
-            });
-        }
-
-        function updateCrsfTelemetrySensorsIndex() {
-            $('.tab-receiver .crsf-telemetry-sensors ul').children().each(function (i) {
-                $(this).find('.crsf-telemetry-index').text(i + 1);
-            });
-        }
-
-        function populateCrsfTelemtrySensors() {
-            const sensorSelect = $('#crsfTelemetrySensorTemplate li select');
-            sensorSelect.append(`<option value="0" selected>---</option>`);
-            for (const g of self.telemetry.CRSF_CUSTOM_SENSORS) {
-                const groupLabel = i18n.getMessage(`receiverTelemetryGroup_${g.title}`);
-                const group = $(`<optgroup label="${groupLabel}">`);
-                for (const sensorName of g.sensors) {
-                    const sensorId = self.telemetry.SENSORS.indexOf(sensorName);
-
-                    const escNum = sensorName.match(/^ESC(\d)/);
-                    let desc;
-                    if (escNum) {
-                        const prefix = `#${escNum[1]}`
-                        const message = i18n.getMessage(`receiverCrsfTelemetrySensor_${sensorName.replace(/^ESC\d/, 'ESC')}`);
-                        desc = `${prefix} ${message}`;
-                    } else {
-                        desc = i18n.getMessage(`receiverCrsfTelemetrySensor_${sensorName}`);
-                    }
-                    group.append(`<option value="${sensorId}">${desc}</option>`);
-                }
-                sensorSelect.append(group);
-            }
-
-            const dest = $('.tab-receiver .crsf-telemetry-sensors ul');
-            const templ = $('#crsfTelemetrySensorTemplate li');
-
-            for (let i = 0; i < mspHelper.CRSF_TELEMETRY_SENSOR_LENGTH; i++) {
-                const elem = templ.clone()
-                elem.find('select').on('change', onCrsfSensorSelectChange);
-                dest.append(elem);
-            }
-
-            updateCrsfTelemetrySensorsIndex();
-
-            dest.sortable({ update: function() {
-                updateCrsfTelemetrySensorsIndex();
-                self.saveButtons = true;
-                updateButtons(true);
-            }});
-        }
-        populateCrsfTelemtrySensors();
-
-        function updateCrsfTelemetrySensors() {
-            $('.tab-receiver .crsf-telemetry-sensors ul')
-                .children()
-                .each(function (i) {
-                    const sensorId = self.telemetry.config.crsf_telemetry_sensors[i];
-                    $(this).find('select').val(sensorId);
-                });
-        }
-
         function updateTelemetrySensors() {
             const sensorList = self.telemetry.enabled ?
                 (self.telemetryExtSensors | (self.rxProto ? self.rxProto.telemetry : 0)) : 0;
@@ -818,19 +723,125 @@ TABS.receiver.initialize = function (callback) {
             }
         }
 
-        self.telemetry.enabled = FC.FEATURE_CONFIG.features.isEnabled('TELEMETRY');
-        self.telemetry.config = {
-            ...FC.TELEMETRY_CONFIG,
-        };
+        function populateCrsfTelemetrySensors() {
+            // create sensor select
+            const sensorSelect = $('#crsfTelemetrySensorTemplate li select');
+            sensorSelect.append(`<option value="0" selected>---</option>`);
+            for (const g of self.telemetry.CRSF_CUSTOM_SENSORS) {
+                const groupLabel = i18n.getMessage(`receiverTelemetryGroup_${g.title}`);
+                const group = $(`<optgroup label="${groupLabel}">`);
+                for (const sensorName of g.sensors) {
+                    const sensorId = self.telemetry.SENSORS.indexOf(sensorName);
 
-        updateExternalTelemetry();
-        populateTelemetrySensors();
+                    const escNum = sensorName.match(/^ESC(\d)/);
+                    let desc;
+                    if (escNum) {
+                        const prefix = `#${escNum[1]}`
+                        const message = i18n.getMessage(`receiverCrsfTelemetrySensor_${sensorName.replace(/^ESC\d/, 'ESC')}`);
+                        desc = `${prefix} ${message}`;
+                    } else {
+                        desc = i18n.getMessage(`receiverCrsfTelemetrySensor_${sensorName}`);
+                    }
+                    group.append(`<option value="${sensorId}">${desc}</option>`);
+                }
+                sensorSelect.append(group);
+            }
+
+            // create sensor slot list
+            const dest = $('.tab-receiver .crsf-telemetry-sensors ul');
+            const templ = $('#crsfTelemetrySensorTemplate li');
+
+            for (let i = 0; i < mspHelper.CRSF_TELEMETRY_SENSOR_LENGTH; i++) {
+                const elem = templ.clone()
+                elem.find('select').on('change', function() {
+                    // Clear other slots using the newly selected value
+                    const value = $(this).val();
+                    $(this).closest('li').siblings().each(function () {
+                        const select = $(this).find('select');
+                        if (select.val() === value) {
+                            select.val(0);
+                        }
+                    });
+                    updateCrsfTelemetrySensors();
+                });
+
+                dest.append(elem);
+            }
+
+            dest.sortable({ update: function() {
+                updateCrsfTelemetrySensors();
+                self.saveButtons = true;
+                updateButtons(true);
+            }});
+            updateCrsfTelemetrySensors();
+        }
+
+        function updateCrsfTelemetry() {
+            $('.tab-receiver .telemetry_setting').hide();
+            $('.tab-receiver .crsf-telemetry-setting').show();
+
+            const { config } = self.telemetry;
+            const isCustom = config.crsf_telemetry_mode === 1;
+
+            $('.tab-receiver .crsf-telemetry-sensors').toggle(isCustom);
+            $('.tab-receiver .telemetry_sensors').toggle(!isCustom);
+
+            $('.tab-receiver input[name="crsf-telemetry-mode"]')
+                .prop('checked', isCustom);
+
+            $('.tab-receiver input[name="crsf-telemetry-rate"]')
+                .val(config.crsf_telemetry_rate || self.telemetry.DEFAULT_CRSF_TELEMETRY_RATE)
+                .trigger('change');
+
+            $('.tab-receiver input[name="crsf-telemetry-ratio"]')
+                .val(config.crsf_telemetry_ratio || self.telemetry.DEFAULT_CRSF_TELEMETRY_RATIO)
+                .trigger('change');
+
+            if (isCustom) {
+                $('.tab-receiver .crsf-telemetry-sensors ul')
+                    .children()
+                    .each(function (i) {
+                        const sensorId = self.telemetry.config.crsf_telemetry_sensors[i];
+                        $(this).find('select').val(sensorId);
+                    });
+
+                updateCrsfTelemetrySensors();
+            } else {
+                updateTelemetrySensors();
+            }
+        }
+
+        function updateCrsfTelemetrySensors() {
+            const items = $('.tab-receiver .crsf-telemetry-sensors ul')
+                .children()
+                .toArray()
+
+            const sensors = [];
+            for (const [i, item] of items.entries()) {
+                const sensorId = Number($(item).find('select').val());
+                if (sensorId > 0) sensors.push(sensorId);
+                $(item).find('.crsf-telemetry-index').text(i + 1);
+            }
+
+            let i = 0;
+            for (; i < sensors.length; i++) {
+                $(items[i]).show().find('select').val(sensors[i]);
+            }
+
+            if (i < mspHelper.CRSF_TELEMETRY_SENSOR_LENGTH) {
+                $(items[i++]).show().find('select').val(0);
+            }
+
+            for (; i < mspHelper.CRSF_TELEMETRY_SENSOR_LENGTH; i++) {
+                $(items[i]).hide().find('select').val(0);
+            }
+        }
 
         function updateTelemetry() {
             const isCrsf = self.telemetry.enabled && self.rxProto.name === "TBS CRSF";
 
             if (isCrsf) {
-                return updateCrsfTelemetrySettings();
+                return updateCrsfTelemetry();
             }
 
             $('.tab-receiver .crsf-telemetry-setting').hide();
@@ -838,6 +849,15 @@ TABS.receiver.initialize = function (callback) {
 
             updateTelemetrySensors();
         }
+
+        self.telemetry.enabled = FC.FEATURE_CONFIG.features.isEnabled('TELEMETRY');
+        self.telemetry.config = {
+            ...FC.TELEMETRY_CONFIG,
+        };
+
+        updateExternalTelemetry();
+        populateTelemetrySensors();
+        populateCrsfTelemetrySensors();
 
         $('.tab-receiver input[name="telemetry_enabled"]')
             .on('change', function () {
