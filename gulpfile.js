@@ -50,7 +50,7 @@ const NODE_ENV = process.env.NODE_ENV || 'production';
 let gitChangeSetId;
 
 const nwBuilderOptions = {
-    version: '0.62.2',
+    version: '0.89.0',
     files: `${DIST_DIR}**/*`,
     macIcns: './src/images/rf_icon.icns',
     macPlist: { 'CFBundleDisplayName': 'Rotorflight Configurator'},

@@ -174,3 +174,58 @@ jobs:
       with:
         name: rotorflight-configurator-win32-${{ env.GIT_VER }}
         path: rotorflight-configurator*
+
+
+  android:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.11
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: '.nvmrc'
+
+    - name: Install Java JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: '8'
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+      with:
+        cmdline-tools-version: 9123335
+        packages: 'tools platform-tools platforms;android-34'
+
+    - name: Set build variables
+      run: |
+        echo "GIT_VER=CI-${GITHUB_SHA:0:7}" >> ${GITHUB_ENV}
+        cat ${GITHUB_ENV}
+
+    - name: Update version number
+      run: make version SEMVER="0.0.1-${{ env.GIT_VER }}"
+
+    - name: Initialise build environment
+      run: yarn install
+
+    - name: Build release for Android
+      run: yarn gulp release --android
+
+    - name: Move artifacts
+      run: mv -v release/rotorflight-configurator* .
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: rotorflight-configurator-android-${{ env.GIT_VER }}
+        path: rotorflight-configurator*
+

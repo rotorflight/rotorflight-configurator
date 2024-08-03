@@ -588,51 +588,58 @@ TABS.blackbox.initialize = function (callback) {
             flash_update_summary(function() {
                 const maxBytes = FC.DATAFLASH.usedSize;
 
-                prepare_file(function(fileWriter) {
+                prepare_file().then(function(fileWriter) {
                     let nextAddress = 0;
                     let totalBytesCompressed = 0;
 
                     show_saving_dialog();
 
-                    function onChunkRead(chunkAddress, chunkDataView, bytesCompressed) {
-                        if (chunkDataView !== null) {
-                            // Did we receive any data?
-                            if (chunkDataView.byteLength > 0) {
-                                nextAddress += chunkDataView.byteLength;
-                                if (isNaN(bytesCompressed) || isNaN(totalBytesCompressed)) {
-                                    totalBytesCompressed = null;
-                                } else {
-                                    totalBytesCompressed += bytesCompressed;
-                                }
+                    async function dismiss() {
+                        await fileWriter.close();
+                        dismiss_saving_dialog();
+                    }
 
-                                $(".dataflash-saving progress").attr("value", nextAddress / maxBytes * 100);
+                    async function done() {
+                        await fileWriter.close();
+                        mark_saving_dialog_done(startTime, nextAddress, totalBytesCompressed);
+                    }
 
-                                const blob = new Blob([chunkDataView]);
-
-                                fileWriter.onwriteend = function(e) {
-                                    if (saveCancelled || nextAddress >= maxBytes) {
-                                        if (saveCancelled) {
-                                            dismiss_saving_dialog();
-                                        } else {
-                                            mark_saving_dialog_done(startTime, nextAddress, totalBytesCompressed);
-                                        }
-                                    } else {
-                                        if (!self.writeError) {
-                                            mspHelper.dataflashRead(nextAddress, self.blockSize, onChunkRead);
-                                        } else {
-                                            dismiss_saving_dialog();
-                                        }
-                                    }
-                                };
-
-                                fileWriter.write(blob);
-                            } else {
-                                // A zero-byte block indicates end-of-file, so we're done
-                                mark_saving_dialog_done(startTime, nextAddress, totalBytesCompressed);
-                            }
-                        } else {
-                            // There was an error with the received block (address didn't match the one we asked for), retry
+                    async function onChunkRead(_, chunkDataView, bytesCompressed) {
+                        if (!chunkDataView) {
+                            // There was an error with the received block, retry
                             mspHelper.dataflashRead(nextAddress, self.blockSize, onChunkRead);
+                            return;
+                        }
+
+                        if (chunkDataView.byteLength === 0) {
+                            // A zero-byte block indicates end-of-file, so we're done
+                            return await done();
+                        }
+
+                        // Did we receive any data?
+                        nextAddress += chunkDataView.byteLength;
+                        if (isNaN(bytesCompressed) || isNaN(totalBytesCompressed)) {
+                            totalBytesCompressed = null;
+                        } else {
+                            totalBytesCompressed += bytesCompressed;
+                        }
+
+                        $(".dataflash-saving progress").attr("value", nextAddress / maxBytes * 100);
+
+                        const blob = new Blob([chunkDataView]);
+                        try {
+                            await fileWriter.write(blob);
+
+                            if (saveCancelled) {
+                                await dismiss();
+                            } else if (nextAddress >= maxBytes) {
+                                await done();
+                            } else {
+                                mspHelper.dataflashRead(nextAddress, self.blockSize, onChunkRead);
+                            }
+                        } catch (err) {
+                            console.log(err);
+                            await dismiss();
                         }
                     }
 
@@ -644,44 +651,21 @@ TABS.blackbox.initialize = function (callback) {
         }
     }
 
-    function prepare_file(onComplete) {
-
+    async function prepare_file() {
         const prefix = 'BLACKBOX_LOG';
         const suffix = 'BBL';
 
         const filename = generateFilename(prefix, suffix);
 
-        chrome.fileSystem.chooseEntry({type: 'saveFile', suggestedName: filename,
-                accepts: [{description: suffix.toUpperCase() + ' files', extensions: [suffix]}]}, function(fileEntry) {
-            if (checkChromeRuntimeError()) {
-                if (chrome.runtime.lastError.message !== "User cancelled") {
-                    GUI.log(i18n.getMessage('dataflashFileWriteFailed'));
-                }
-                return;
-            }
-
-            // echo/console log path specified
-            chrome.fileSystem.getDisplayPath(fileEntry, function(path) {
-                console.log('Dataflash dump file path: ' + path);
+        try {
+            const fileHandle = await showSaveFilePicker({
+                suggestedName: filename,
+                types: [{ description: suffix, accept: { "application/octet-stream": [`.${suffix}`] } }]
             });
-
-            fileEntry.createWriter(function (fileWriter) {
-                fileWriter.onerror = function (e) {
-                    GUI.log('<strong><span class="message-negative">' + i18n.getMessage('error', { errorMessage: e.target.error.message }) + '</span class="message-negative></strong>');
-
-                    console.error(e);
-
-                    // stop logging if the procedure was/is still running
-                    self.writeError = true;
-                };
-
-                onComplete(fileWriter);
-            }, function (e) {
-                // File is not readable or does not exist!
-                console.error(e);
-                GUI.log(i18n.getMessage('dataflashFileWriteFailed'));
-            });
-        });
+            return await fileHandle.createWritable();
+        } catch (err) {
+            GUI.log(i18n.getMessage('dataflashFileWriteFailed'));
+        }
     }
 
     function ask_to_erase_flash() {
