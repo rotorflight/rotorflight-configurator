@@ -1697,6 +1697,15 @@
     "receiverCrsfTelemetryRatio": {
         "message": "Telemetry Ratio"
     },
+    "receiverHelpCrsfTelemetryMode": {
+        "message": "Enables the Custom Rotorflight telemetry with ELRS. Requires a Lua script in the Tx for decoding the sensors. Custom telemetry provides a plethora of sensors for helicopter use."
+    },
+    "receiverHelpCrsfTelemetryRate": {
+        "message": "Radio link packet rate for telemetry. Set this to the same value as the ELRS packet rate in the Tx."
+    },
+    "receiverHelpCrsfTelemetryRatio": {
+        "message": "Radio link packet ratio for telemetry. Set this to the same value as the ELRS telemetry ratio in the Tx."
+    },
     "receiverTelemetrySensors": {
         "message": "Telemetry Sensors"
     },
