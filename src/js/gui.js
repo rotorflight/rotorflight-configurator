@@ -380,7 +380,7 @@ GuiControl.prototype.set_zoom = function(zoom_level, show_box) {
 
     ConfigStorage.set({'zoomLevel': zoom_level});
 
-    $('body').css('zoom', percent).resize();
+    nw.Window.get().zoomLevel = zoom_level / 100;
     $('#zoom-percent').text(percent);
 
     if (show_box) {
