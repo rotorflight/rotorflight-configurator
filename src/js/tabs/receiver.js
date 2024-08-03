@@ -166,6 +166,7 @@ TABS.receiver = {
         config: null,
         DEFAULT_CRSF_TELEMETRY_RATE: 500,
         DEFAULT_CRSF_TELEMETRY_RATIO: 4,
+        CRSF_SENSOR_CONFLICTS: {},
         SENSORS: [
             'NONE',
 
@@ -375,13 +376,14 @@ TABS.receiver = {
                 title: 'GYRO',
                 sensors: [
                     'HEADING',
-                    'ATTITUDE',
-                    'ATTITUDE_PITCH',
-                    'ATTITUDE_ROLL',
-                    'ATTITUDE_YAW',
-                    'ACCEL_X',
-                    'ACCEL_Y',
-                    'ACCEL_Z',
+                    { sensor: 'ATTITUDE',       conflicts: ['ATTITUDE_PITCH', 'ATTITUDE_ROLL', 'ATTITUDE_YAW'] },
+                    { sensor: 'ATTITUDE_PITCH', conflicts: ['ATTITUDE'] },
+                    { sensor: 'ATTITUDE_ROLL',  conflicts: ['ATTITUDE'] },
+                    { sensor: 'ATTITUDE_YAW',   conflicts: ['ATTITUDE'] },
+                    { sensor: 'ACCEL',          conflicts: ['ACCEL_X', 'ACCEL_Y', 'ACCEL_Z'] },
+                    { sensor: 'ACCEL_X',        conflicts: ['ACCEL'] },
+                    { sensor: 'ACCEL_Y',        conflicts: ['ACCEL'] },
+                    { sensor: 'ACCEL_Z',        conflicts: ['ACCEL'] },
                 ],
             },
             {
@@ -420,11 +422,21 @@ TABS.receiver = {
             {
                 title: 'CONTROL',
                 sensors: [
-                    'PITCH_CONTROL',
-                    'ROLL_CONTROL',
-                    'YAW_CONTROL',
-                    'COLLECTIVE_CONTROL',
-                    'THROTTLE_CONTROL',
+                    {
+                      sensor: 'CONTROL',
+                      conflicts: [
+                        'PITCH_CONTROL',
+                        'ROLL_CONTROL',
+                        'YAW_CONTROL',
+                        'COLLECTIVE_CONTROL',
+                        'THROTTLE_CONTROL'
+                      ],
+                    },
+                    { sensor: 'PITCH_CONTROL',      conflicts: ['CONTROL'] },
+                    { sensor: 'ROLL_CONTROL',       conflicts: ['CONTROL'] },
+                    { sensor: 'YAW_CONTROL',        conflicts: ['CONTROL'] },
+                    { sensor: 'COLLECTIVE_CONTROL', conflicts: ['CONTROL'] },
+                    { sensor: 'THROTTLE_CONTROL',   conflicts: ['CONTROL'] },
                 ],
             },
             {
@@ -724,8 +736,14 @@ TABS.receiver.initialize = function (callback) {
             for (const g of self.telemetry.CRSF_CUSTOM_SENSORS) {
                 const groupLabel = i18n.getMessage(`receiverTelemetryGroup_${g.title}`);
                 const group = $(`<optgroup label="${groupLabel}">`);
-                for (const sensorName of g.sensors) {
+                for (const sensor of g.sensors) {
+                    const sensorName = sensor.sensor ?? sensor;
                     const sensorId = self.telemetry.SENSORS.indexOf(sensorName);
+
+                    if (sensor.conflicts) {
+                        self.telemetry.CRSF_SENSOR_CONFLICTS[sensorId] =
+                            sensor.conflicts.map(x => self.telemetry.SENSORS.indexOf(x));
+                    }
 
                     const escNum = sensorName.match(/^ESC(\d)/);
                     let desc;
@@ -748,17 +766,8 @@ TABS.receiver.initialize = function (callback) {
             for (let i = 0; i < mspHelper.CRSF_TELEMETRY_SENSOR_LENGTH; i++) {
                 const elem = templ.clone()
                 elem.find('select').on('change', function() {
-                    // Clear other slots using the newly selected value
-                    const value = $(this).val();
-                    $(this).closest('li').siblings().each(function () {
-                        const select = $(this).find('select');
-                        if (select.val() === value) {
-                            select.val(0);
-                        }
-                    });
                     updateCrsfTelemetrySensors();
                 });
-
                 dest.append(elem);
             }
 
@@ -823,7 +832,29 @@ TABS.receiver.initialize = function (callback) {
                 $(items[i])
                     .toggle(i <= lastFilledSlot + 1)
                     .find('select')
-                    .val(sensors[i]);
+                    .val(sensors[i])
+                    // disable options
+                    .find('option')
+                    .each(function () {
+                        let disable = false;
+                        const elem = $(this);
+                        const val = Number(elem.attr('value'));
+
+                        if (val === 0 || // enable the 'none' option
+                            val === sensors[i]) { // enable the currently selected option
+                            disable = false;
+                        } else if (sensors.includes(val)) { // disable selected options
+                            disable = true;
+                        } else { // disable conflicts with selected options
+                            for (const conflict of self.telemetry.CRSF_SENSOR_CONFLICTS[val] ?? []) {
+                                if (sensors.includes(conflict)) {
+                                    disable = true;
+                                    break;
+                                }
+                            }
+                        }
+                        elem.prop('disabled', disable);
+                    });
 
                 $(items[i])
                     .find('.crsf-telemetry-index')
