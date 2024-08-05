@@ -592,86 +592,77 @@ TABS.blackbox.initialize = function (callback) {
             }
 
             // Begin by refreshing the occupied size in case it changed while the tab was open
-            flash_update_summary(function() {
+            flash_update_summary(async function() {
                 const maxBytes = FC.DATAFLASH.usedSize;
 
-                prepare_file().then(function(fileWriter) {
-                    let nextAddress = 0;
-                    let totalBytesCompressed = 0;
+                const prefix = 'BLACKBOX_LOG';
+                const suffix = 'BBL';
 
-                    show_saving_dialog();
-
-                    async function dismiss() {
-                        await fileWriter.close();
-                        dismiss_saving_dialog();
-                    }
-
-                    async function done() {
-                        await fileWriter.close();
-                        mark_saving_dialog_done(startTime, nextAddress, totalBytesCompressed);
-                    }
-
-                    async function onChunkRead(_, chunkDataView, bytesCompressed) {
-                        if (!chunkDataView) {
-                            // There was an error with the received block, retry
-                            mspHelper.dataflashRead(nextAddress, self.blockSize, onChunkRead);
-                            return;
-                        }
-
-                        if (chunkDataView.byteLength === 0) {
-                            // A zero-byte block indicates end-of-file, so we're done
-                            return await done();
-                        }
-
-                        // Did we receive any data?
-                        nextAddress += chunkDataView.byteLength;
-                        if (isNaN(bytesCompressed) || isNaN(totalBytesCompressed)) {
-                            totalBytesCompressed = null;
-                        } else {
-                            totalBytesCompressed += bytesCompressed;
-                        }
-
-                        $(".dataflash-saving progress").attr("value", nextAddress / maxBytes * 100);
-
-                        const blob = new Blob([chunkDataView]);
-                        try {
-                            await fileWriter.write(blob);
-
-                            if (saveCancelled) {
-                                await dismiss();
-                            } else if (nextAddress >= maxBytes) {
-                                await done();
-                            } else {
-                                mspHelper.dataflashRead(nextAddress, self.blockSize, onChunkRead);
-                            }
-                        } catch (err) {
-                            console.log(err);
-                            await dismiss();
-                        }
-                    }
-
-                    const startTime = new Date().getTime();
-                    // Fetch the initial block
-                    mspHelper.dataflashRead(nextAddress, self.blockSize, onChunkRead);
+                const writer = await window.filesystem.getWriteStream({
+                    suggestedName: generateFilename(prefix, suffix),
+                    description: `${suffix.toUpperCase()} files`,
+                    extension: `.${suffix}`,
+                    mimeType: "application/octet-stream",
                 });
+
+                let nextAddress = 0;
+                let totalBytesCompressed = 0;
+
+                show_saving_dialog();
+
+                async function dismiss() {
+                    await writer.close();
+                    dismiss_saving_dialog();
+                }
+
+                async function done() {
+                    await writer.close();
+                    mark_saving_dialog_done(startTime, nextAddress, totalBytesCompressed);
+                }
+
+                async function onChunkRead(_, chunkDataView, bytesCompressed) {
+                    if (!chunkDataView) {
+                        // There was an error with the received block, retry
+                        mspHelper.dataflashRead(nextAddress, self.blockSize, onChunkRead);
+                        return;
+                    }
+
+                    if (chunkDataView.byteLength === 0) {
+                        // A zero-byte block indicates end-of-file, so we're done
+                        return await done();
+                    }
+
+                    // Did we receive any data?
+                    nextAddress += chunkDataView.byteLength;
+                    if (isNaN(bytesCompressed) || isNaN(totalBytesCompressed)) {
+                        totalBytesCompressed = null;
+                    } else {
+                        totalBytesCompressed += bytesCompressed;
+                    }
+
+                    $(".dataflash-saving progress").attr("value", nextAddress / maxBytes * 100);
+
+                    const blob = new Blob([chunkDataView]);
+                    try {
+                        await writer.write(blob);
+
+                        if (saveCancelled) {
+                            await dismiss();
+                        } else if (nextAddress >= maxBytes) {
+                            await done();
+                        } else {
+                            mspHelper.dataflashRead(nextAddress, self.blockSize, onChunkRead);
+                        }
+                    } catch (err) {
+                        console.log(err);
+                        await dismiss();
+                    }
+                }
+
+                const startTime = new Date().getTime();
+                // Fetch the initial block
+                mspHelper.dataflashRead(nextAddress, self.blockSize, onChunkRead);
             });
-        }
-    }
-
-    async function prepare_file() {
-        const prefix = 'BLACKBOX_LOG';
-        const suffix = 'BBL';
-
-        const filename = generateFilename(prefix, suffix);
-
-        try {
-            const fileHandle = await showSaveFilePicker({
-                suggestedName: filename,
-                types: [{ description: suffix, accept: { "application/octet-stream": [`.${suffix}`] } }]
-            });
-            return await fileHandle.createWritable();
-        } catch (err) {
-            GUI.log(i18n.getMessage('dataflashFileWriteFailed'));
         }
     }
 

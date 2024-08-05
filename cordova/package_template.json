@@ -20,6 +20,7 @@
     "cordova-plugin-dialogs": "^2.0.2",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-filechooser": "^1.2.0",
+    "cordova-plugin-filepath": "^1.6.0",
     "cordova-plugin-market": "^1.2.0",
     "cordova-plugin-permission": "^0.1.0",
     "cordova-plugin-splashscreen": "^5.0.3",
@@ -50,7 +51,8 @@
       "cordova-plugin-market": {},
       "bf-cordova-open-native-settings": {},
       "cordova-plugin-theme-detection": {},
-      "bf-cordova-plugin-appavailability": {}
+      "bf-cordova-plugin-appavailability": {},
+      "cordova-plugin-filepath": {}
     }
   }
 }
