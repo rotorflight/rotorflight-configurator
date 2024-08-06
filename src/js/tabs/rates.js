@@ -51,7 +51,7 @@ TABS.rates.initialize = function (callback) {
     load_data(load_html);
 
     function load_html() {
-        $('#content').load("./tabs/rates.html", process_html);
+        $('#content').load("/src/tabs/rates.html", process_html);
     }
 
     function load_data(callback) {
@@ -1123,6 +1123,6 @@ TABS.rates.changeRatesLogo = function() {
     const self = this;
 
     const image = self.RATES_TYPE_IMAGES[self.currentRatesType];
-    $('.rates_type img[id="ratesLogo"]').attr("src", "./images/rate_logos/" + image);
+    $('.rates_type img[id="ratesLogo"]').attr("src", "/images/rate_logos/" + image);
 };
 

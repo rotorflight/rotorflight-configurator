@@ -3,7 +3,7 @@
     <name>[INJECTED_BY_GULPFILE]</name>
     <description>[INJECTED_BY_GULPFILE]</description>
     <author href="https://www.rotorflight.org">[INJECTED_BY_GULPFILE]</author>
-    <content src="main_cordova.html"/>
+    <content src="/src/main_cordova.html"/>
     <access origin="*"/>
     <allow-intent href="http://*/*"/>
     <allow-intent href="https://*/*"/>

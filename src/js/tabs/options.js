@@ -2,7 +2,7 @@
 
 TABS.options = {};
 TABS.options.initialize = function (callback) {
-    $('#content').load("./tabs/options.html", function () {
+    $('#content').load("/src/tabs/options.html", function () {
         i18n.localizePage();
 
         //TABS.options.initPermanentExpertMode();

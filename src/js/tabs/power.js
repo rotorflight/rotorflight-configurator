@@ -33,7 +33,7 @@ TABS.power.initialize = function (callback) {
     load_data(load_html);
 
     function load_html() {
-        $('#content').load("./tabs/power.html", process_html);
+        $('#content').load("/src/tabs/power.html", process_html);
     }
 
     function load_data(callback) {

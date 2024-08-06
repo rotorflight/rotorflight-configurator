@@ -19,7 +19,7 @@
     background-color: rgba(0, 0, 0, 0.8);
     margin-top: 0;
     flex-grow: 1;
-    background-image: url("../../images/light-wide-1.svg");
+    background-image: url("/images/light-wide-1.svg");
     background-repeat: no-repeat;
     background-position: 50% 80%;
     background-size: 600px;

@@ -42,7 +42,7 @@ TABS.firmware_flasher.initialize = function (callback) {
         function parse_hex(str) {
             return new Promise(r => {
                 // parsing hex in different thread
-                var worker = new Worker('./js/workers/hex_parser.js');
+                var worker = new Worker('/src/js/workers/hex_parser.js');
 
                 // "callback"
                 worker.onmessage = function (event) {
@@ -1172,7 +1172,7 @@ TABS.firmware_flasher.initialize = function (callback) {
         GUI.content_ready(callback);
     }
 
-    $('#content').load("./tabs/firmware_flasher.html", onDocumentLoad);
+    $('#content').load("/src/tabs/firmware_flasher.html", onDocumentLoad);
 };
 
 TABS.firmware_flasher.cleanup = function (callback) {

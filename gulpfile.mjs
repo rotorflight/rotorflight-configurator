@@ -1,4 +1,6 @@
 import pkg from './package.json' with { type: 'json' };
+pkg.main = "src/main.html";
+delete pkg['node-remote'];
 
 import child_process from 'node:child_process';
 import fs from 'node:fs';
@@ -17,10 +19,9 @@ import buildRpm from 'rpm-builder';
 import { sync as commandExistsSync } from 'command-exists';
 import targz from 'targz';
 
-import * as rollup from 'rollup';
+import * as vite from 'vite';
 import gulp from 'gulp';
 import deb from 'gulp-debian';
-import git from 'gulp-git';
 import jeditor from 'gulp-json-editor';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';
@@ -33,11 +34,6 @@ const { cordova } = cordovaPkg;
 import browserify from 'browserify';
 import glob from 'glob';
 
-import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
-import alias from '@rollup/plugin-alias';
-import vue from 'rollup-plugin-vue';
-import rollupReplace from '@rollup/plugin-replace';
 import xmlTransformer from "gulp-xml-transformer";
 
 const DIST_DIR = './dist/';
@@ -48,11 +44,6 @@ const CORDOVA_DIR = './cordova/';
 const CORDOVA_DIST_DIR = './dist_cordova/';
 
 const LINUX_INSTALL_DIR = '/opt/rotorflight';
-
-const NODE_ENV = process.env.NODE_ENV || 'production';
-
-// Global variable to hold the change hash from when we get it, to when we use it.
-let gitChangeSetId;
 
 const nwBuilderOptions = {
     version: '0.89.0',
@@ -90,27 +81,47 @@ gulp.task('clean-cache', clean_cache);
 
 gulp.task('clean-cordova', clean_cordova);
 
-// Function definitions are processed before function calls.
-const getChangesetId = gulp.series(getHash, writeChangesetId);
-gulp.task('get-changeset-id', getChangesetId);
-
-// dist_yarn MUST be done after dist_src
-const distBuild = gulp.series(dist_src, dist_yarn, dist_locale, dist_libraries, dist_resources, dist_rollup, getChangesetId, gulp.series(cordova_dist()));
+const distBuild = gulp.series(
+    dist_vite,
+    dist_src,
+    dist_yarn,
+    gulp.series(cordova_dist()),
+);
 const distRebuild = gulp.series(clean_dist, distBuild);
 gulp.task('dist', distRebuild);
 
-const appsBuild = gulp.series(gulp.parallel(clean_apps, distRebuild), apps, gulp.series(cordova_apps()), gulp.parallel(listPostBuildTasks(APPS_DIR)));
+const appsBuild = gulp.series(
+    gulp.parallel(clean_apps, distRebuild),
+    apps,
+    gulp.series(cordova_apps()),
+    gulp.parallel(listPostBuildTasks(APPS_DIR)),
+);
 gulp.task('apps', appsBuild);
 
-const debugAppsBuild = gulp.series(gulp.parallel(clean_debug, distRebuild), debug, gulp.parallel(listPostBuildTasks(DEBUG_DIR)));
+const debugAppsBuild = gulp.series(
+    gulp.parallel(clean_debug, distRebuild),
+    debug,
+    gulp.parallel(listPostBuildTasks(DEBUG_DIR)),
+);
 
-const debugBuild = gulp.series(distBuild, debug, gulp.parallel(listPostBuildTasks(DEBUG_DIR)), start_debug);
+const debugBuild = gulp.series(
+    distBuild,
+    debug,
+    gulp.parallel(listPostBuildTasks(DEBUG_DIR)),
+    start_debug,
+);
 gulp.task('debug', debugBuild);
 
-const releaseBuild = gulp.series(gulp.parallel(clean_release, appsBuild), gulp.parallel(listReleaseTasks(APPS_DIR)));
+const releaseBuild = gulp.series(
+    gulp.parallel(clean_release, appsBuild),
+    gulp.parallel(listReleaseTasks(APPS_DIR)),
+);
 gulp.task('release', releaseBuild);
 
-const debugReleaseBuild = gulp.series(gulp.parallel(clean_release, debugAppsBuild), gulp.parallel(listReleaseTasks(DEBUG_DIR)));
+const debugReleaseBuild = gulp.series(
+    gulp.parallel(clean_release, debugAppsBuild),
+    gulp.parallel(listReleaseTasks(DEBUG_DIR)),
+);
 gulp.task('debug-release', debugReleaseBuild);
 
 gulp.task('default', debugBuild);
@@ -262,9 +273,9 @@ function clean_cache() {
 // run-sequence.
 function dist_src() {
     const distSources = [
-        './src/**/*',
-        '!./src/css/dropdown-lists/LICENSE',
-        '!./src/support/**',
+        './src/js/**/*',
+        './src/tabs/*',
+        '!./src/tabs/receiver_msp.html',
     ];
     const packageJson = new stream.Readable;
     packageJson.push(JSON.stringify(pkg,undefined,2));
@@ -272,7 +283,7 @@ function dist_src() {
 
     return packageJson
         .pipe(source('package.json'))
-        .pipe(gulp.src(distSources, { base: 'src' }))
+        .pipe(gulp.src(distSources, { base: '.' }))
         .pipe(gulp.src('yarn.lock'))
         .pipe(gulp.dest(DIST_DIR));
 }
@@ -286,59 +297,8 @@ function dist_yarn() {
         }));
 }
 
-function dist_locale() {
-    return gulp.src('./locales/**/*', { base: 'locales'})
-        .pipe(gulp.dest(`${DIST_DIR}locales`));
-}
-
-function dist_libraries() {
-    return gulp.src('./libraries/**/*', { base: '.'})
-        .pipe(gulp.dest(`${DIST_DIR}js`));
-}
-
-function dist_resources() {
-    return gulp.src(['./resources/**/*', '!./resources/osd/**/*.png'], { base: '.'})
-        .pipe(gulp.dest(DIST_DIR));
-}
-
-function dist_rollup() {
-
-    return rollup
-        .rollup({
-            input: {
-                // For any new file migrated to modules add the output path
-                // in dist on the left, on the right it's input file path.
-                // If all the things used by other files are importing
-                // it with `import/export` file doesn't have to be here.
-                // I will be picked up by rollup and bundled accordingly.
-                'components/init': 'src/components/init.js',
-                'js/main_cordova': 'src/js/main_cordova.js',
-            },
-            plugins: [
-                alias({
-                    entries: {
-                        vue: path.resolve(import.meta.dirname, 'node_modules/vue/dist/vue.esm.js'),
-                    },
-                }),
-                rollupReplace({
-                    'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-                }),
-                resolve(),
-                commonjs(),
-                vue(),
-            ],
-        })
-        .then(bundle =>
-            bundle.write({
-                format: 'esm',
-                // rollup is smart about how `name` is treated.
-                // so `input` you create file like `components/init`
-                // `[name]` will be replaced with it creating directories
-                // accordingly inside of `dist`
-                entryFileNames: '[name].js',
-                dir: DIST_DIR,
-            })
-        );
+function dist_vite() {
+  return vite.build();
 }
 
 // Create runable app directories in ./apps
@@ -531,29 +491,6 @@ function buildNWApps(platforms, flavor, dir, done) {
         console.log('No platform suitable for NW Build');
         done();
     }
-}
-
-function getHash(cb) {
-    git.revParse({args: '--short HEAD'}, function (err, hash) {
-        if (err) {
-            gitChangeSetId = 'unsupported';
-        } else {
-            gitChangeSetId = hash;
-        }
-        cb();
-    });
-}
-
-function writeChangesetId() {
-    const versionJson = new stream.Readable;
-    versionJson.push(JSON.stringify({
-        gitChangesetId: gitChangeSetId,
-        version: pkg.version,
-        }, undefined, 2));
-    versionJson.push(null);
-    return versionJson
-        .pipe(source('version.json'))
-        .pipe(gulp.dest(DIST_DIR));
 }
 
 function start_debug(done) {
@@ -886,11 +823,11 @@ function cordova_resources() {
         .pipe(gulp.dest(`${CORDOVA_DIST_DIR}resources/android/`));
 }
 function cordova_include_www() {
-    return gulp.src(`${CORDOVA_DIST_DIR}www/main.html`)
-        .pipe(replace('<!-- CORDOVA_INCLUDE js/cordova_chromeapi.js -->', '<script type="text/javascript" src="./js/cordova_chromeapi.js"></script>'))
-        .pipe(replace('<!-- CORDOVA_INCLUDE js/cordova_startup.js -->', '<script type="text/javascript" src="./js/cordova_startup.js"></script>'))
-        .pipe(replace('<!-- CORDOVA_INCLUDE cordova.js -->', '<script type="text/javascript" src="cordova.js"></script>'))
-        .pipe(gulp.dest(`${CORDOVA_DIST_DIR}www`));
+    return gulp.src(`${CORDOVA_DIST_DIR}www/src/main.html`)
+        .pipe(replace('<!-- CORDOVA_INCLUDE js/cordova_chromeapi.js -->', '<script type="text/javascript" src="/src/js/cordova_chromeapi.js"></script>'))
+        .pipe(replace('<!-- CORDOVA_INCLUDE js/cordova_startup.js -->', '<script type="text/javascript" src="/src/js/cordova_startup.js"></script>'))
+        .pipe(replace('<!-- CORDOVA_INCLUDE cordova.js -->', '<script type="text/javascript" src="/cordova.js"></script>'))
+        .pipe(gulp.dest(`${CORDOVA_DIST_DIR}www/src`));
 }
 function cordova_copy_src() {
     return gulp.src([`${CORDOVA_DIR}**`, `!${CORDOVA_DIR}config_template.xml`, `!${CORDOVA_DIR}package_template.json`])

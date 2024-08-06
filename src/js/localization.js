@@ -28,7 +28,7 @@ i18n.init = function(cb) {
                 defaultNS:['messages'],
                 fallbackLng: languageFallback,
                 backend: {
-                    loadPath: './locales/{{lng}}/{{ns}}.json',
+                    loadPath: '/locales/{{lng}}/{{ns}}.json',
                     parse: i18n.parseInputFile,
                 },
             },
