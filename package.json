@@ -68,7 +68,6 @@
     "object-hash": "^3.0.0",
     "select2": "^4.0.13",
     "semver-min": "^0.7.2",
-    "short-unique-id": "^4.4.4",
     "switchery-latest": "^0.8.2",
     "three": "^0.126.1",
     "universal-ga": "^1.2.0",
