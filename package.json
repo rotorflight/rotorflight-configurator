@@ -113,7 +113,6 @@
     "mocha": "^10.0.0",
     "node-gyp": "^10.2.0",
     "nw-builder": "^3.7.4",
-    "os": "^0.1.2",
     "postcss": "^8.4.14",
     "rollup": "^2.75.7",
     "rollup-plugin-vue": "^5.*.*",
