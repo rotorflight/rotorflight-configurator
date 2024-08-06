@@ -5056,6 +5056,11 @@ normalize-path@^3.0.0:
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
 
+nouislider@^7.0.0:
+  version "7.0.10"
+  resolved "https://registry.yarnpkg.com/nouislider/-/nouislider-7.0.10.tgz#c26b0f1d92e8a05aaa94baa15f83da8b28fea541"
+  integrity sha512-Tve4bnblQoZSaG79BKT3q9qmLqEJKCZXBIXJZFWaGEpqXwmizpJaIZpkty0dbRk1ucyM1/czpJRLJMSR35BmmQ==
+
 now-and-later@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/now-and-later/-/now-and-later-2.0.1.tgz#8e579c8685764a7cc02cb680380e94f43ccb1f7c"

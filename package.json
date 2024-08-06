@@ -50,6 +50,7 @@
     "lru_map": "^0.3.3",
     "marked": "^4.0.17",
     "multiple-select": "^1.5.2",
+    "nouislider": "^7.0.0",
     "select2": "^4.0.13",
     "semver-min": "^0.7.2",
     "switchery-latest": "^0.8.2",
