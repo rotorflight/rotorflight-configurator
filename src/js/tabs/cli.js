@@ -196,7 +196,7 @@ TABS.cli.initialize = function (callback) {
                     extensions: [".txt", ".config"],
                 });
                 if (!file) return;
-                previewCommands(file.content, file.name)
+                previewCommands(file.content, file.name);
             } catch (err) {
                 console.log("Failed to load config", err);
             }
