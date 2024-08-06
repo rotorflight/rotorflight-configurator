@@ -1,39 +1,44 @@
-'use strict';
+import pkg from './package.json' with { type: 'json' };
 
-const pkg = require('./package.json');
-// remove gulp-appdmg from the package.json we're going to write
-delete pkg.optionalDependencies['gulp-appdmg'];
+import child_process from 'node:child_process';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import stream from 'node:stream';
 
-const child_process = require('child_process');
-const fs = require('fs');
-const fse = require('fs-extra');
-const https = require('follow-redirects').https;
-const path = require('path');
+import fse from 'fs-extra';
+import followRedirects from 'follow-redirects';
+const { https } = followRedirects;
 
-const zip = require('gulp-zip');
-const del = require('del');
-const NwBuilder = require('nw-builder');
-const innoSetup = require('@quanle94/innosetup');
-const deb = require('gulp-debian');
-const buildRpm = require('rpm-builder');
-const commandExistsSync = require('command-exists').sync;
-const targz = require('targz');
+import del from 'del';
+import NwBuilder from 'nw-builder';
+import innoSetup from '@quanle94/innosetup';
+import buildRpm from 'rpm-builder';
+import { sync as commandExistsSync } from 'command-exists';
+import targz from 'targz';
 
-const gulp = require('gulp');
-const rollup = require('rollup');
-const concat = require('gulp-concat');
-const yarn = require("gulp-yarn");
-const rename = require('gulp-rename');
-const replace = require('gulp-replace');
-const jeditor = require("gulp-json-editor");
-const os = require('os');
-const git = require('gulp-git');
-const source = require('vinyl-source-stream');
-const stream = require('stream');
+import * as rollup from 'rollup';
+import gulp from 'gulp';
+import deb from 'gulp-debian';
+import git from 'gulp-git';
+import jeditor from 'gulp-json-editor';
+import rename from 'gulp-rename';
+import replace from 'gulp-replace';
+import yarn from 'gulp-yarn';
+import zip from 'gulp-zip';
+import source from 'vinyl-source-stream';
 
-const cordova = require("cordova-lib").cordova;
-const browserify = require('browserify');
-const glob = require('glob');
+import cordovaPkg from 'cordova-lib';
+const { cordova } = cordovaPkg;
+import browserify from 'browserify';
+import glob from 'glob';
+
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import alias from '@rollup/plugin-alias';
+import vue from 'rollup-plugin-vue';
+import rollupReplace from '@rollup/plugin-replace';
+import xmlTransformer from "gulp-xml-transformer";
 
 const DIST_DIR = './dist/';
 const APPS_DIR = './apps/';
@@ -297,11 +302,6 @@ function dist_resources() {
 }
 
 function dist_rollup() {
-    const commonjs = require('@rollup/plugin-commonjs');
-    const resolve = require('@rollup/plugin-node-resolve').default;
-    const alias = require('@rollup/plugin-alias');
-    const vue = require('rollup-plugin-vue');
-    const rollupReplace = require('@rollup/plugin-replace');
 
     return rollup
         .rollup({
@@ -317,7 +317,7 @@ function dist_rollup() {
             plugins: [
                 alias({
                     entries: {
-                        vue: require.resolve('vue/dist/vue.esm.js'),
+                        vue: path.resolve(import.meta.dirname, 'node_modules/vue/dist/vue.esm.js'),
                     },
                 }),
                 rollupReplace({
@@ -724,8 +724,8 @@ function getLinuxPackageArch(type, arch) {
     return packArch;
 }
 // Create distribution package for macOS platform
-function release_osx64(appDirectory) {
-    const appdmg = require('./gulp-appdmg');
+async function release_osx64(appDirectory) {
+    const appdmg = await import('./gulp-appdmg.mjs');
 
     // The appdmg does not generate the folder correctly, manually
     createDirIfNotExists(RELEASE_DIR);
@@ -741,7 +741,7 @@ function release_osx64(appDirectory) {
                     { 'x': 448, 'y': 342, 'type': 'link', 'path': '/Applications' },
                     { 'x': 192, 'y': 344, 'type': 'file', 'path': `${pkg.name}.app`, 'name': 'Rotorflight Configurator.app' },
                 ],
-                background: path.join(__dirname, 'assets/osx/dmg-background.png'),
+                background: path.join(import.meta.dirname, 'assets/osx/dmg-background.png'),
                 format: 'UDZO',
                 window: {
                     size: {
@@ -917,8 +917,7 @@ function cordova_packagejson() {
         }))
         .pipe(gulp.dest(CORDOVA_DIST_DIR));
 }
-async function cordova_configxml() {
-    const xmlTransformer = (await import("gulp-xml-transformer")).default;
+function cordova_configxml() {
     return gulp.src([`${CORDOVA_DIST_DIR}config.xml`])
         .pipe(xmlTransformer([
             { path: '//xmlns:name', text: pkg.productName },

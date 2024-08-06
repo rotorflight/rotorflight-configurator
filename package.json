@@ -12,8 +12,8 @@
     "release": "run-script-os",
     "release:default": "NODE_ENV=production gulp release",
     "release:windows": "set NODE_ENV=production&& gulp release",
-    "lint": "eslint --ext .js,.vue src gulpfile.js gulp-appdmg.js",
-    "lint:fix": "eslint --fix src gulpfile.js gulp-appdmg.js"
+    "lint": "eslint --ext .js,.vue src gulp-appdmg.mjs",
+    "lint:fix": "eslint --fix src gulp-appdmg.mjs"
   },
   "window": {
     "icon": "images/rf_icon.png",

@@ -1,12 +1,11 @@
-
-const appdmg = require('appdmg');
-const through = require('through2');
-const gutil = require('gulp-util');
+import appdmg from 'appdmg';
+import through from 'through2';
+import gutil from 'gulp-util';
 
 const PluginError = gutil.PluginError;
 const PLUGIN_NAME = 'gulp-appdmg';
 
-module.exports = function(options) {
+export default function(options) {
   const stream = through.obj(function(file, encoding, next) {
     next();
   }, function(callback) {
