@@ -429,14 +429,13 @@ TABS.receiver = {
                         'ROLL_CONTROL',
                         'YAW_CONTROL',
                         'COLLECTIVE_CONTROL',
-                        'THROTTLE_CONTROL'
                       ],
                     },
                     { sensor: 'PITCH_CONTROL',      conflicts: ['CONTROL'] },
                     { sensor: 'ROLL_CONTROL',       conflicts: ['CONTROL'] },
                     { sensor: 'YAW_CONTROL',        conflicts: ['CONTROL'] },
                     { sensor: 'COLLECTIVE_CONTROL', conflicts: ['CONTROL'] },
-                    { sensor: 'THROTTLE_CONTROL',   conflicts: ['CONTROL'] },
+                    'THROTTLE_CONTROL',
                 ],
             },
             {
