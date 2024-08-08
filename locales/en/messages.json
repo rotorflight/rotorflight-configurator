@@ -3237,6 +3237,15 @@
     "blackboxLog_temps": {
         "message": "Temperatures"
     },
+    "blackboxLog_esc": {
+        "message": "ESC"
+    },
+    "blackboxLog_bec": {
+        "message": "BEC"
+    },
+    "blackboxLog_esc2": {
+        "message": "ESC 2"
+    },
     "serialLoggingSupportedNote": {
         "message": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
     },
