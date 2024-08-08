@@ -14,7 +14,7 @@ const GuiControl = function () {
     this.connecting_to = false;
     this.connected_to = false;
     this.connect_lock = false;
-    this.zoom_level = 100;
+    this.zoom_level = 0;
     this.active_tab = null;
     this.current_tab = null;
     this.tab_switch_in_progress = false;
@@ -371,17 +371,19 @@ GuiControl.prototype.switchery = function() {
 
 GuiControl.prototype.set_zoom = function(zoom_level, show_box) {
 
-    if (zoom_level)
-        GUI.zoom_level = zoom_level;
-    else
+    if (zoom_level === undefined)
         zoom_level = GUI.zoom_level;
 
-    const percent = zoom_level + '%';
+    zoom_level = zoom_level.clamp(-10,10);
 
+    GUI.zoom_level = zoom_level;
     ConfigStorage.set({'zoomLevel': zoom_level});
 
-    nw.Window.get().zoomLevel = zoom_level / 100;
-    $('#zoom-percent').text(percent);
+    const windowZoomLevel = zoom_level / 2;  // Steps of 0.5
+    nw.Window.get().zoomLevel = windowZoomLevel;
+
+    const zoomPercent = Math.round(Math.pow(1.2, windowZoomLevel) * 100);
+    $('#zoom-percent').text(`${zoomPercent}%`);
 
     if (show_box) {
         $('#zoom-box').show();
