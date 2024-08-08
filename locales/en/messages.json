@@ -1851,7 +1851,7 @@
         "message": "Battery Cell Voltages"
     },
     "receiverCrsfTelemetrySensor_CONTROL": {
-        "message": "Control"
+        "message": "Control (hi-res)"
     },
     "receiverCrsfTelemetrySensor_PITCH_CONTROL": {
         "message": "Pitch Control"
@@ -1974,7 +1974,7 @@
         "message": "Transmission RPM"
     },
     "receiverCrsfTelemetrySensor_ATTITUDE": {
-        "message": "Attitude"
+        "message": "Attitude (hi-res)"
     },
     "receiverCrsfTelemetrySensor_ATTITUDE_PITCH": {
         "message": "Attitude Pitch"
@@ -1986,7 +1986,7 @@
         "message": "Attitude Yaw"
     },
     "receiverCrsfTelemetrySensor_ACCEL": {
-        "message": "Accelerometer"
+        "message": "Accelerometer (hi-res)"
     },
     "receiverCrsfTelemetrySensor_ACCEL_X": {
         "message": "Accelerometer X-axis"
