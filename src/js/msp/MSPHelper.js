@@ -64,6 +64,7 @@ function MspHelper() {
     };
 
     self.SIGNATURE_LENGTH = 32;
+    self.CRSF_TELEMETRY_SENSOR_LENGTH = 40;
 
     self.mspMultipleCache = [];
 }
@@ -912,6 +913,13 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.TELEMETRY_CONFIG.telemetry_sensors = data.readU32();
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
                     FC.TELEMETRY_CONFIG.telemetry_pinswap = data.readU8();
+                    FC.TELEMETRY_CONFIG.crsf_telemetry_mode = data.readU8();
+                    FC.TELEMETRY_CONFIG.crsf_telemetry_rate = data.readU16();
+                    FC.TELEMETRY_CONFIG.crsf_telemetry_ratio = data.readU16();
+                    FC.TELEMETRY_CONFIG.crsf_telemetry_sensors = [];
+                    for (let i = 0; i < self.CRSF_TELEMETRY_SENSOR_LENGTH; i++) {
+                        FC.TELEMETRY_CONFIG.crsf_telemetry_sensors.push(data.readU8());
+                    }
                 }
                 break;
 
@@ -1783,7 +1791,13 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.TELEMETRY_CONFIG.telemetry_halfduplex)
                 .push32(FC.TELEMETRY_CONFIG.telemetry_sensors);
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
-                buffer.push8(FC.TELEMETRY_CONFIG.telemetry_pinswap);
+                buffer.push8(FC.TELEMETRY_CONFIG.telemetry_pinswap)
+                      .push8(FC.TELEMETRY_CONFIG.crsf_telemetry_mode)
+                      .push16(FC.TELEMETRY_CONFIG.crsf_telemetry_rate)
+                      .push16(FC.TELEMETRY_CONFIG.crsf_telemetry_ratio);
+                for (let i = 0; i < self.CRSF_TELEMETRY_SENSOR_LENGTH; i++) {
+                    buffer.push8(FC.TELEMETRY_CONFIG.crsf_telemetry_sensors[i] ?? 0);
+                }
             }
             break;
 

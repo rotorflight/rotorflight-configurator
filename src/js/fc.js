@@ -687,6 +687,10 @@ const FC = {
             telemetry_halfduplex:           0,
             telemetry_sensors:              0,
             telemetry_pinswap:              0,
+            crsf_telemetry_mode:            0,
+            crsf_telemetry_rate:            0,
+            crsf_telemetry_ratio:           0,
+            crsf_telemetry_sensors:         [],
         };
 
         this.GPS_RESCUE = {
