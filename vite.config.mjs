@@ -14,6 +14,7 @@ const commitHash = child_process
 export default defineConfig({
   base: "./",
   build: {
+    outDir: "./bundle",
     rollupOptions: {
       input: {
         "src/main.html": "src/main.html",

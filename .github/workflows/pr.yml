@@ -42,16 +42,13 @@ jobs:
       run: make init
 
     - name: Build release for linux64
-      run: yarn gulp release --linux64
-
-    - name: Move artifacts
-      run: mv -v release/rotorflight-configurator* .
+      run: yarn gulp redist --platform linux --arch x86_64
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-linux-${{ env.GIT_VER }}
-        path: rotorflight-configurator*
+        path: redist/*
 
 
   macos:
@@ -88,16 +85,13 @@ jobs:
       run: make init
 
     - name: Build release for MacOS
-      run: yarn gulp release --osx64
-
-    - name: Move artifacts
-      run: mv release/rotorflight-configurator* .
+      run: yarn gulp redist --platform osx --arch x86_64
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-macos-${{ env.GIT_VER }}
-        path: rotorflight-configurator*
+        path: redist/*
 
 
   win64:
@@ -134,16 +128,13 @@ jobs:
       run: make init
 
     - name: Build release for windows
-      run: yarn gulp release --win64
-
-    - name: Move artifacts
-      run: move release/rotorflight-configurator* .
+      run: yarn gulp redist --platform win --arch x86_64
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-win64-${{ env.GIT_VER }}
-        path: rotorflight-configurator*
+        path: redist/*
 
 
   win32:
@@ -180,16 +171,13 @@ jobs:
       run: make init
 
     - name: Build release for windows
-      run: yarn gulp release --win32
-
-    - name: Move artifacts
-      run: move release/rotorflight-configurator* .
+      run: yarn gulp redist --platform win --arch x86
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-win32-${{ env.GIT_VER }}
-        path: rotorflight-configurator*
+        path: redist/*
 
 
   android:
@@ -238,14 +226,11 @@ jobs:
       run: make init
 
     - name: Build release for Android
-      run: yarn gulp release --android
-
-    - name: Move artifacts
-      run: mv -v release/rotorflight-configurator* .
+      run: yarn gulp redist --platform android
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-android-${{ env.GIT_VER }}
-        path: rotorflight-configurator*
+        path: redist/*
 
