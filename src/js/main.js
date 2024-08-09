@@ -268,9 +268,9 @@ function startProcess() {
 
         if (ev.ctrlKey) {
             if (ev.originalEvent.deltaY > 0)
-                zoom_level = Math.min(zoom_level + zoomStep, zoomMax);
+                zoom_level = Math.min(zoom_level - zoomStep, zoomMax);
             else
-                zoom_level = Math.max(zoom_level - zoomStep, zoomMin);
+                zoom_level = Math.max(zoom_level + zoomStep, zoomMin);
 
             GUI.set_zoom(zoom_level, true);
         }
