@@ -1634,6 +1634,9 @@
     "receiverSerialInverted": {
         "message": "Inverted Serial Signaling"
     },
+    "receiverSerialPinSwap": {
+        "message": "Pin Swap (Swap Rx and Tx pins)"
+    },
     "receiverStickCenter": {
         "message": "Stick Center"
     },
@@ -1687,6 +1690,9 @@
     },
     "receiverTelemetryInverted": {
         "message": "Inverted Telemetry Signaling"
+    },
+    "receiverTelemetryPinSwap": {
+        "message": "Telemetry Pin Swap (Swap Rx and Tx pins)"
     },
     "receiverCrsfTelemetryMode": {
         "message": "Enable CRSF Custom Telemetry"
