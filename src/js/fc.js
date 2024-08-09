@@ -338,6 +338,7 @@ const FC = {
             half_duplex:                0,
             update_hz:                  0,
             current_offset:             0,
+            pinswap:                    0,
         };
 
         this.SENSOR_DATA = {
@@ -659,6 +660,7 @@ const FC = {
             rxSpiProtocol:                0,
             rxSpiId:                      0,
             rxSpiRfChannelCount:          0,
+            serialrx_pinswap:             0,
         };
 
         this.RC_CONFIG = {
@@ -684,6 +686,7 @@ const FC = {
             telemetry_inverted:             0,
             telemetry_halfduplex:           0,
             telemetry_sensors:              0,
+            telemetry_pinswap:              0,
         };
 
         this.GPS_RESCUE = {
