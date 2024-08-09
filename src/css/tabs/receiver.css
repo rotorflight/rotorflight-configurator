@@ -6,10 +6,19 @@
     position: relative;
 }
 
-.tab-receiver input,
+.tab-receiver input {
+    width: 55px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 3px;
+    font-size: 1em;
+    text-align: left;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+}
+
 .tab-receiver select {
     height: 20px;
-    float: left;
     margin-right: 15px;
     border: 1px solid var(--subtleAccent);
     border-radius: 3px;
@@ -57,20 +66,6 @@
 
 
 /* SETTINGS */
-
-.tab-receiver .settings input,
-.tab-receiver .settings select {
-    width: 55px;
-    height: 20px;
-    line-height: 20px;
-    margin-right: 11px;
-    padding-left: 3px;
-    font-size: 12px;
-    font-weight: normal;
-    text-align: left;
-    border: 1px solid var(--subtleAccent);
-    border-radius: 3px;
-}
 
 .tab-receiver .settings_table {
     margin-bottom: 0;
@@ -368,6 +363,28 @@
     height: calc(100% - 10px);
 }
 
+.tab-receiver .sensor-list {
+    padding: 0;
+    margin: 0;
+}
+
+.tab-receiver .crsf-telemetry-sensors li {
+  margin: 10px 4px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.tab-receiver .crsf-telemetry-sensors select {
+  width: 200px;
+}
+
+.tab-receiver .crsf-telemetry-sensors .crsf-telemetry-index {
+    width: 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: right;
+}
 
 @media all and (max-width: 575px) {
     .tab-receiver .channels {
