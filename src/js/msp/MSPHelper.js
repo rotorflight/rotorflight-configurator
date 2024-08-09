@@ -485,6 +485,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.ESC_SENSOR_CONFIG.hw4_current_offset = data.readU16();
                 FC.ESC_SENSOR_CONFIG.hw4_current_gain = data.readU8();
                 FC.ESC_SENSOR_CONFIG.hw4_voltage_gain = data.readU8();
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+                    FC.ESC_SENSOR_CONFIG.pinswap = data.readU8();
+                }
                 break;
 
             case MSPCodes.MSP_SENSOR_ALIGNMENT:
@@ -876,6 +879,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.RX_CONFIG.rxSpiProtocol = data.readU8();
                 FC.RX_CONFIG.rxSpiId = data.readU32();
                 FC.RX_CONFIG.rxSpiRfChannelCount = data.readU8();
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+                    FC.RX_CONFIG.serialrx_pinswap = data.readU8();
+                }
                 break;
 
             case MSPCodes.MSP_FAILSAFE_CONFIG:
@@ -904,6 +910,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.TELEMETRY_CONFIG.telemetry_inverted = data.readU8();
                 FC.TELEMETRY_CONFIG.telemetry_halfduplex = data.readU8();
                 FC.TELEMETRY_CONFIG.telemetry_sensors = data.readU32();
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+                    FC.TELEMETRY_CONFIG.telemetry_pinswap = data.readU8();
+                }
                 break;
 
             case MSPCodes.MSP_ADVANCED_CONFIG:
@@ -1741,6 +1750,9 @@ MspHelper.prototype.crunch = function(code) {
                   .push16(FC.ESC_SENSOR_CONFIG.hw4_current_offset)
                   .push8(FC.ESC_SENSOR_CONFIG.hw4_current_gain)
                   .push8(FC.ESC_SENSOR_CONFIG.hw4_voltage_gain);
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+                buffer.push8(FC.ESC_SENSOR_CONFIG.pinswap);
+            }
             break;
 
         case MSPCodes.MSP_SET_RX_CONFIG:
@@ -1752,6 +1764,9 @@ MspHelper.prototype.crunch = function(code) {
                   .push8(FC.RX_CONFIG.rxSpiProtocol)
                   .push32(FC.RX_CONFIG.rxSpiId)
                   .push8(FC.RX_CONFIG.rxSpiRfChannelCount);
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+                buffer.push8(FC.RX_CONFIG.serialrx_pinswap);
+            }
             break;
 
         case MSPCodes.MSP_SET_FAILSAFE_CONFIG:
@@ -1767,6 +1782,9 @@ MspHelper.prototype.crunch = function(code) {
             buffer.push8(FC.TELEMETRY_CONFIG.telemetry_inverted)
                 .push8(FC.TELEMETRY_CONFIG.telemetry_halfduplex)
                 .push32(FC.TELEMETRY_CONFIG.telemetry_sensors);
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+                buffer.push8(FC.TELEMETRY_CONFIG.telemetry_pinswap);
+            }
             break;
 
         case MSPCodes.MSP_SET_TRANSPONDER_CONFIG:
