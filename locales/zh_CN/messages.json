@@ -3546,6 +3546,26 @@
         "message": "电机彻底停转的油门值，油门通道的信号需要小于该值，才允许解锁直升机",
         "english": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm."
     },
+    "motorsHelicopterModel": {
+        "message": "直升机型号",
+        "english": "Helicopter model"
+    },
+    "motorsPinion": {
+        "message": "电机齿轮",
+        "english": "Pinion"
+    },
+    "motorsMainGear": {
+        "message": "主齿轮",
+        "english": "Main gear"
+    },
+    "motorsTailGear": {
+        "message": "尾齿轮",
+        "english": "Tail gear"
+    },
+    "motorsTailDriveGear": {
+        "message": "尾驱齿轮",
+        "english": "Tail drive"
+    },
     "motorMainGearRatioIssueNote": {
         "message": "<span class=\"message-negative\">警告：</span> <i>主旋翼齿比</i> 设置为不正确的值。请检查!",
         "english": "<span class=\"message-negative\">Warning:</span> <i>Main Rotor Gear Ratio</i> is set to an incorrect value. Please check!"

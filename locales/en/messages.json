@@ -2784,6 +2784,21 @@
     "motorsThrottleMinimumCommandHelp": {
         "message": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm."
     },
+    "motorsHelicopterModel": {
+        "message": "Helicopter model"
+    },
+    "motorsPinion": {
+        "message": "Pinion"
+    },
+    "motorsMainGear": {
+        "message": "Main gear"
+    },
+    "motorsTailGear": {
+        "message": "Tail gear"
+    },
+    "motorsTailDriveGear": {
+        "message": "Tail drive"
+    },
     "motorMainGearRatioIssueNote": {
         "message": "<span class=\"message-negative\">Warning:</span> <i>Main Rotor Gear Ratio</i> is set to an incorrect value. Please check!"
     },

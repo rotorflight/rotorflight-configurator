@@ -70,7 +70,7 @@
                                 <div class="field inputPwmFreq">
                                     <label>
                                         <div class="field_box">
-                                            <input type="number" id="pwmFreq" min="50" max="8000" step="10"/>
+                                            <input type="number" id="pwmFreq" min="50" max="8000" step="10" />
                                         </div>
                                         <span class="freelabel" i18n="motorsUnsyncedPWMFreq"></span>
                                         <div class="helpicon cf_tip" i18n_title="motorsUnsyncedPWMFreqHelp"></div>
@@ -103,6 +103,56 @@
                                         <div class="helpicon cf_tip" i18n_title="motorsThrottleMaximumHelp"></div>
                                     </label>
                                 </div>
+                                <div class="field selectGearModle">
+                                    <label>
+                                        <div class="field_box">
+                                            <select id="gearModle">
+                                                <!-- list generated here -->
+                                            </select>
+                                        </div>
+                                        <span i18n="motorsHelicopterModel"></span>
+                                    </label>
+                                </div>
+                                <div class="field selectMotorGear">
+                                    <label>
+                                        <div class="field_box">
+                                            <select id="gearPinion">
+                                                <option value="1">1</option>
+                                            </select>
+                                        </div>
+                                        <span i18n="motorsPinion"></span>
+                                    </label>
+                                </div>
+                                <div class="field selectMainGear">
+                                    <label>
+                                        <div class="field_box">
+                                            <select id="gearMain">
+                                                <option value="1">1</option>
+                                            </select>
+                                        </div>
+                                        <span i18n="motorsMainGear"></span>
+                                    </label>
+                                </div>
+                                <div class="field selectTailGear">
+                                    <label>
+                                        <div class="field_box">
+                                            <select id="gearTail">
+                                                <option value="1">1</option>
+                                            </select>
+                                        </div>
+                                        <span i18n="motorsTailGear"></span>
+                                    </label>
+                                </div>
+                                <div class="field selectTailMainGear">
+                                    <label>
+                                        <div class="field_box">
+                                            <select id="gearTailDrive">
+                                                <option value="1">1</option>
+                                            </select>
+                                        </div>
+                                        <span i18n="motorsTailDriveGear"></span>
+                                    </label>
+                                </div>
                                 <div class="field mainGearRatio">
                                     <label>
                                         <div class="field_box">
@@ -128,7 +178,7 @@
                                 <div class="field motorPoles1">
                                     <label>
                                         <div class="field_box">
-                                            <input type="number" id="motorPoles1" min="2" max="255" step="2"/>
+                                            <input type="number" id="motorPoles1" min="2" max="255" step="2" />
                                         </div>
                                         <span i18n="motorsMotorPoles1Long"></span>
                                     </label>
@@ -137,7 +187,7 @@
                                 <div class="field motorPoles2">
                                     <label>
                                         <div class="field_box">
-                                            <input type="number" id="motorPoles2" min="2" max="255" step="2"/>
+                                            <input type="number" id="motorPoles2" min="2" max="255" step="2" />
                                         </div>
                                         <span i18n="motorsMotorPoles2Long"></span>
                                     </label>
@@ -146,7 +196,7 @@
                                 <div class="field motorPoles3">
                                     <label>
                                         <div class="field_box">
-                                            <input type="number" id="motorPoles3" min="2" max="255" step="2"/>
+                                            <input type="number" id="motorPoles3" min="2" max="255" step="2" />
                                         </div>
                                         <span i18n="motorsMotorPoles3Long"></span>
                                     </label>
@@ -155,7 +205,7 @@
                                 <div class="field motorPoles4">
                                     <label>
                                         <div class="field_box">
-                                            <input type="number" id="motorPoles4" min="2" max="255" step="2"/>
+                                            <input type="number" id="motorPoles4" min="2" max="255" step="2" />
                                         </div>
                                         <span i18n="motorsMotorPoles4Long"></span>
                                     </label>
@@ -554,4 +604,3 @@
     </div>
 
 </div>
-

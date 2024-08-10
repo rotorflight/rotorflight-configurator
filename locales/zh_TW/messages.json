@@ -3546,6 +3546,26 @@
         "message": "這是在馬達停止運轉時發送到電變/舵機的 PWM 值。這也同時是允許電變進入解鎖狀態的值。",
         "english": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm."
     },
+    "motorsHelicopterModel": {
+        "message": "直升機型號",
+        "english": "Helicopter model"
+    },
+    "motorsPinion": {
+        "message": "電機齒輪",
+        "english": "Pinion"
+    },
+    "motorsMainGear": {
+        "message": "主齒輪",
+        "english": "Main gear"
+    },
+    "motorsTailGear": {
+        "message": "尾齒輪",
+        "english": "Tail gear"
+    },
+    "motorsTailDriveGear": {
+        "message": "尾驅齒輪",
+        "english": "Tail drive"
+    },
     "motorMainGearRatioIssueNote": {
         "message": "<span class=\"message-negative\">警告：</span> <i>主旋翼齒比</i> 設定為不正確的值。請檢查!",
         "english": "<span class=\"message-negative\">Warning:</span> <i>Main Rotor Gear Ratio</i> is set to an incorrect value. Please check!"
