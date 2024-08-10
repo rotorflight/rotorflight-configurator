@@ -336,7 +336,6 @@ const FC = {
         this.ESC_SENSOR_CONFIG = {
             protocol:                   0,
             half_duplex:                0,
-            pinswap:                    0,
             update_hz:                  0,
             current_offset:             0,
             pinswap:                    0,
@@ -656,7 +655,6 @@ const FC = {
             serialrx_provider:            0,
             serialrx_inverted:            0,
             serialrx_halfduplex:          0,
-            serialrx_pinswap:             0,
             rx_pulse_min:                 0,
             rx_pulse_max:                 0,
             rxSpiProtocol:                0,
@@ -687,7 +685,6 @@ const FC = {
         this.TELEMETRY_CONFIG = {
             telemetry_inverted:             0,
             telemetry_halfduplex:           0,
-            telemetry_pinswap:              0,
             telemetry_sensors:              0,
             telemetry_pinswap:              0,
             crsf_telemetry_mode:            0,
