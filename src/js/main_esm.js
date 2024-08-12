@@ -1,4 +1,5 @@
 import { Features } from "@/js/Features.js";
+import { Mixer } from "@/js/Mixer.js";
 import { RPMFilter } from "@/js/RPMFilter.js";
 
 import "@/components/init.js";
@@ -13,5 +14,6 @@ CONFIGURATOR.gitChangesetId = __COMMIT_HASH__;
 
 Object.assign(globalThis, {
   Features,
+  Mixer,
   RPMFilter,
 });
