@@ -1,3 +1,5 @@
+import * as marked from 'marked';
+
 import { GitHubApi } from '@/js/GitHubApi.js';
 import { ReleaseChecker } from '@/js/release_checker.js';
 

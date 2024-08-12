@@ -29,9 +29,6 @@ importers:
       lru_map:
         specifier: ^0.3.3
         version: 0.3.3
-      marked:
-        specifier: ^15.0.3
-        version: 15.0.3
       multiple-select:
         specifier: ^1.5.2
         version: 1.7.0(jquery@3.7.1)
@@ -112,6 +109,9 @@ importers:
       i18next-http-backend:
         specifier: ^2.6.1
         version: 2.6.1(encoding@0.1.13)
+      marked:
+        specifier: ^15.0.3
+        version: 15.0.3
       minimist:
         specifier: ^1.2.8
         version: 1.2.8
