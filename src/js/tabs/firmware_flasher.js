@@ -1,3 +1,5 @@
+import * as marked from 'marked';
+
 const tab = {
     tabName: 'firmware_flasher',
     releases: null,
