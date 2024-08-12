@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.servos = {
 
     isDirty: false,

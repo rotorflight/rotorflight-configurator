@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.privacy_policy = {};
 
 TABS.privacy_policy.initialize = function (callback) {

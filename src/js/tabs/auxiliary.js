@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.auxiliary = {
     isDirty: false,
     PRIMARY_CHANNEL_COUNT: 5,

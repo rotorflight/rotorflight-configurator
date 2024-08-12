@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.rates = {
     isDirty: false,
     isChanged: false,

@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.cli = {
     lineDelayMs: 15,
     profileSwitchDelayMs: 100,

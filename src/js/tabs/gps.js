@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.gps = {
     isDirty: false,
 };

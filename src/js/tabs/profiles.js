@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.profiles = {
     isDirty: false,
     isChanged: false,

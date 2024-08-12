@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.status = {
     armingEnabled: true,
     yaw_fix: 0.0,

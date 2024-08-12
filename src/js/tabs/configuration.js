@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.configuration = {
     isDirty: false,
     yaw_fix: 0.0,

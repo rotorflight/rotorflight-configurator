@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.mixer = {
     isDirty: false,
     needSave: false,

@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.motors = {
     isDirty: false,
     isDshot: false,

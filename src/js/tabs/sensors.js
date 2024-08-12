@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.sensors = {
     armingEnabled: true,
 };

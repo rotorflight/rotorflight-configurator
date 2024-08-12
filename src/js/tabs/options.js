@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.options = {};
 TABS.options.initialize = function (callback) {
     $('#content').load("/src/tabs/options.html", function () {

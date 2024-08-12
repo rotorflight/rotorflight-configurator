@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.beepers = {
     isDirty: false,
 };

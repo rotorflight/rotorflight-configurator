@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.receiver = {
     isDirty: false,
     needReboot: false,

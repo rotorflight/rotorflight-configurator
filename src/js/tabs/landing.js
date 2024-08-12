@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.landing = {};
 TABS.landing.initialize = function (callback) {
   $('#content').load("/src/tabs/landing.html", function () {

@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.power = {
     isDirty: false,
     needReboot: false,

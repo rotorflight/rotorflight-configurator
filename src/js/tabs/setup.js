@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.setup = {};
 
 TABS.setup.initialize = function (callback) {

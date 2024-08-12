@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.gyro = {
     isDirty: false,
     rpmFilterDirty: false,

@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.failsafe = {
     isDirty: false,
 };

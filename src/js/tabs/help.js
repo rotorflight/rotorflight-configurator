@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.help = {};
 TABS.help.initialize = function (callback) {
     $('#content').load("/src/tabs/help.html", function () {

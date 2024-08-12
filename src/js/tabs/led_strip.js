@@ -1,5 +1,3 @@
-'use strict';
-
 TABS.led_strip = {
     isDirty: false,
     wireMode: false,
