@@ -116,6 +116,31 @@
                                 </tr>
                             </table>
                         </div>
+                        <div class="spacer_box crsf-telemetry-setting">
+                            <table class="settings_table">
+                                <tr>
+                                    <td><input type="checkbox" class="toggle" name="crsf-telemetry-mode"/></td>
+                                    <td>
+                                        <span i18n="receiverCrsfTelemetryMode"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpCrsfTelemetryMode"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" name="crsf-telemetry-rate" min="0" max="1000" /></td>
+                                    <td>
+                                        <span i18n="receiverCrsfTelemetryRate"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpCrsfTelemetryRate"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" name="crsf-telemetry-ratio" min="0" max="1000" /></td>
+                                    <td>
+                                        <span i18n="receiverCrsfTelemetryRatio"></span>
+                                        <div class="helpicon cf_tip" i18n_title="receiverHelpCrsfTelemetryRatio"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                         <div class="spacer_box top_border telemetry_setting">
                             <table class="settings_table">
                                 <tr>
@@ -140,6 +165,21 @@
                             <table class="settings_table">
                                 <!-- SENSORS HERE -->
                             </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="crsf-telemetry-sensors">
+                    <div class="gui_box grey">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title">
+                                <div i18n="receiverTelemetrySensors"></div>
+                            </div>
+                        </div>
+                        <div class="spacer_box">
+                            <ul class="sensor-list">
+                                <!-- CRSF SENSORS -->
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -248,4 +288,16 @@
                 <td><span class="sensorName"></span></td>
             </tr>
         </table>
+
+        <div id="crsfTelemetrySensorTemplate">
+            <li class="sensor-item">
+                <span class="crsf-telemetry-index"></span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="4" y="5" width="16" height="2" fill="currentColor"/>
+                  <rect x="4" y="11" width="16" height="2" fill="currentColor"/>
+                  <rect x="4" y="17" width="16" height="2" fill="currentColor"/>
+                </svg>
+                <select></select>
+            </li>
+        </div>
 </div>
