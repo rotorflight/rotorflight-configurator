@@ -90,7 +90,7 @@ const getChangesetId = gulp.series(getHash, writeChangesetId);
 gulp.task('get-changeset-id', getChangesetId);
 
 // dist_yarn MUST be done after dist_src
-const distBuild = gulp.series(dist_src, dist_changelog, dist_yarn, dist_locale, dist_libraries, dist_resources, dist_rollup, getChangesetId, gulp.series(cordova_dist()));
+const distBuild = gulp.series(dist_src, dist_yarn, dist_locale, dist_libraries, dist_resources, dist_rollup, getChangesetId, gulp.series(cordova_dist()));
 const distRebuild = gulp.series(clean_dist, distBuild);
 gulp.task('dist', distRebuild);
 
@@ -270,11 +270,6 @@ function dist_src() {
         .pipe(gulp.src(distSources, { base: 'src' }))
         .pipe(gulp.src('yarn.lock'))
         .pipe(gulp.dest(DIST_DIR));
-}
-
-function dist_changelog() {
-    return gulp.src('changelog.html')
-        .pipe(gulp.dest(`${DIST_DIR}tabs/`));
 }
 
 // This function relies on files from the dist_src function
