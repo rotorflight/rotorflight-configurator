@@ -88,10 +88,14 @@ TABS.blackbox = {
         "YAW_PRECOMP",
         "RESCUE",
         "RESCUE_ALTHOLD",
-        "UNKNOWN1",
-        "UNKNOWN2",
-        "UNKNOWN3",
-        "UNKNOWN4",
+        "CROSS_COUPLING",
+        "ERROR_DECAY",
+        "HS_OFFSET",
+        "HS_BLEED",
+        "USER1",
+        "USER2",
+        "USER3",
+        "USER4",
     ],
 
     DEBUG_AXIS: [
