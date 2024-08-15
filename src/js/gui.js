@@ -43,7 +43,6 @@ const GuiControl = function () {
         'beepers',
         'gps',
         'led_strip',
-        //'logging',
         'blackbox',
         'modes',
         'motors',

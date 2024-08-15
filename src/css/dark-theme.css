@@ -533,15 +533,6 @@ progress[value]::-webkit-progress-bar {
     border: none;
 }
 
-
-/* LOGGING TAB */
-
-.tab-logging .speed {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-
 /* MIXER TAB */
 
 .tab-mixer .gui_box span {
