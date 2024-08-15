@@ -788,28 +788,6 @@ progress[value]::-webkit-progress-bar {
     color: white;
 }
 
-
-/* PORTS TAB */
-
-.tab-ports input,
-.tab-ports select {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-.tab-ports table td:first-child {
-    border-left: none;
-}
-.tab-ports table td:last-child {
-    border-right: none;
-}
-
-.tab-ports .ports tr:last-child,
-.tab-ports .ports tr:last-child td {
-    border-bottom: none;
-}
-
-
 /* POWER TAB */
 
 .tab-power .number input {
