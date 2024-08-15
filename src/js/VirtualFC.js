@@ -110,8 +110,6 @@ const VirtualFC = {
 
         virtualFC.BLACKBOX.supported = true;
 
-        virtualFC.VTX_CONFIG.vtx_type = 1;
-
         virtualFC.BATTERY_CONFIG = {
             vbatmincellvoltage: 1,
             vbatmaxcellvoltage: 4,

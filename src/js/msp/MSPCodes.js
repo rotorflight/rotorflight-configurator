@@ -66,8 +66,8 @@ const MSPCodes = {
     MSP_SET_OSD_CONFIG:             85,
     MSP_OSD_CHAR_READ:              86,
     MSP_OSD_CHAR_WRITE:             87,
-    MSP_VTX_CONFIG:                 88,
-    MSP_SET_VTX_CONFIG:             89,
+//  MSP_VTX_CONFIG:                 88,
+//  MSP_SET_VTX_CONFIG:             89,
     MSP_ADVANCED_CONFIG:            90,
     MSP_SET_ADVANCED_CONFIG:        91,
     MSP_FILTER_CONFIG:              92,
@@ -113,8 +113,8 @@ const MSPCodes = {
 // Removed:   MSP_COMPASS_CONFIG:             133,
     MSP_GPS_RESCUE:                 135,
 
-    MSP_VTXTABLE_BAND:              137,
-    MSP_VTXTABLE_POWERLEVEL:        138,
+//  MSP_VTXTABLE_BAND:              137,
+//  MSP_VTXTABLE_POWERLEVEL:        138,
 
     MSP_MOTOR_TELEMETRY:            139,
 
@@ -177,8 +177,8 @@ const MSPCodes = {
 // Removed:    MSP_SET_COMPASS_CONFIG:         224,
     MSP_SET_GPS_RESCUE:             225,
 
-    MSP_SET_VTXTABLE_BAND:          227,
-    MSP_SET_VTXTABLE_POWERLEVEL:    228,
+//  MSP_SET_VTXTABLE_BAND:          227,
+//  MSP_SET_VTXTABLE_POWERLEVEL:    228,
 
     MSP_MULTIPLE_MSP:               230,
 
@@ -202,5 +202,5 @@ const MSPCodes = {
     MSP2_MOTOR_OUTPUT_REORDERING:       0x3001,
     MSP2_SET_MOTOR_OUTPUT_REORDERING:   0x3002,
     MSP2_SEND_DSHOT_COMMAND:            0x3003,
-    MSP2_GET_VTX_DEVICE_STATUS:         0x3004,
+//  MSP2_GET_VTX_DEVICE_STATUS:         0x3004,
 };

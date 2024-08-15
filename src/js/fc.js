@@ -177,10 +177,6 @@ const FC = {
     TUNING_SLIDERS: null,
     VOLTAGE_METERS: null,
     VOLTAGE_METER_CONFIGS: null,
-    VTXTABLE_BAND: null,
-    VTXTABLE_POWERLEVEL: null,
-    VTX_CONFIG: null,
-    VTX_DEVICE_STATUS: null,
 
     resetState () {
         // Using `Object.assign` instead of reassigning to
@@ -711,37 +707,6 @@ const FC = {
 
         this.RXFAIL_CONFIG = [];
 
-        this.VTX_CONFIG = {
-            vtx_type:                       0,
-            vtx_band:                       0,
-            vtx_channel:                    0,
-            vtx_power:                      0,
-            vtx_pit_mode:                   false,
-            vtx_frequency:                  0,
-            vtx_device_ready:               false,
-            vtx_low_power_disarm:           0,
-            vtx_pit_mode_frequency:         0,
-            vtx_table_available:            false,
-            vtx_table_bands:                0,
-            vtx_table_channels:             0,
-            vtx_table_powerlevels:          0,
-            vtx_table_clear:                false,
-        };
-
-        this.VTXTABLE_BAND = {
-            vtxtable_band_number:           0,
-            vtxtable_band_name:             '',
-            vtxtable_band_letter:           '',
-            vtxtable_band_is_factory_band:  false,
-            vtxtable_band_frequencies:      [],
-        };
-
-        this.VTXTABLE_POWERLEVEL = {
-            vtxtable_powerlevel_number:     0,
-            vtxtable_powerlevel_value:      0,
-            vtxtable_powerlevel_label:      0,
-        };
-
         this.MOTOR_OUTPUT_ORDER =           [];
 
         this.MULTIPLE_MSP = {
@@ -778,8 +743,6 @@ const FC = {
             dyn_notch_min_hz:                25,
             dyn_notch_max_hz:               245,
         };
-
-        this.VTX_DEVICE_STATUS = null;
 
         this.TUNING_SLIDERS = {
             slider_pids_mode:                   0,

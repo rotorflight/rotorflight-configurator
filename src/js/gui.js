@@ -54,7 +54,6 @@ const GuiControl = function () {
         'receiver',
         'sensors',
         'servos',
-        'vtx',
     ];
 
     this.allowedTabs = this.defaultAllowedTabsWhenDisconnected;
