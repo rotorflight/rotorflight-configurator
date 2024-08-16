@@ -661,9 +661,6 @@ TABS.receiver.initialize = function (callback) {
         const serialRxInvertedElement = $('input[name="serial_inverted"]');
         serialRxInvertedElement.change(function () {
             const inverted = $(this).is(':checked') ? 1 : 0;
-            if (FC.RX_CONFIG.serialrx_inverted !== inverted) {
-                updateButtons(true);
-            }
             FC.RX_CONFIG.serialrx_inverted = inverted;
         });
 
@@ -672,13 +669,18 @@ TABS.receiver.initialize = function (callback) {
         const serialRxHalfDuplexElement = $('input[name="serial_half_duplex"]');
         serialRxHalfDuplexElement.change(function () {
             const halfduplex = $(this).is(':checked') ? 1 : 0;
-            if (FC.RX_CONFIG.serialrx_halfduplex !== halfduplex) {
-                updateButtons(true);
-            }
             FC.RX_CONFIG.serialrx_halfduplex = halfduplex;
         });
 
         serialRxHalfDuplexElement.prop('checked', FC.RX_CONFIG.serialrx_halfduplex !== 0);
+
+        const serialRxPinswapElement = $('input[name="serial_pinswap"]');
+        serialRxPinswapElement.on("change", function () {
+            const pinswap = $(this).is(':checked') ? 1 : 0;
+            FC.RX_CONFIG.serialrx_pinswap = pinswap;
+        });
+
+        serialRxPinswapElement.prop('checked', FC.RX_CONFIG.serialrx_pinswap !== 0);
 
 
     //// Telemetry Options
@@ -909,6 +911,30 @@ TABS.receiver.initialize = function (callback) {
         });
 
         rxProtoSelectElement.on('change', updateTelemetry);
+
+        const telemetryInvertedElement = $('input[name="telemetry_inverted"]');
+        telemetryInvertedElement.on("change", function () {
+            const inverted = $(this).is(':checked') ? 1 : 0;
+            FC.TELEMETRY_CONFIG.telemetry_inverted = inverted;
+        });
+
+        telemetryInvertedElement.prop('checked', FC.TELEMETRY_CONFIG.telemetry_inverted !== 0);
+
+        const telemetryHalfDuplexElement = $('input[name="telemetry_half_duplex"]');
+        telemetryHalfDuplexElement.change(function () {
+            const halfduplex = $(this).is(':checked') ? 1 : 0;
+            FC.TELEMETRY_CONFIG.telemetry_halfduplex = halfduplex;
+        });
+
+        telemetryHalfDuplexElement.prop('checked', FC.TELEMETRY_CONFIG.telemetry_halfduplex !== 0);
+
+        const telemetryPinswapElement = $('input[name="telemetry_pinswap"]');
+        telemetryPinswapElement.on("change", function () {
+            const pinswap = $(this).is(':checked') ? 1 : 0;
+            FC.TELEMETRY_CONFIG.telemetry_pinswap = pinswap;
+        });
+
+        telemetryPinswapElement.prop('checked', FC.TELEMETRY_CONFIG.telemetry_pinswap !== 0);
 
 
     //// Channels Bars
@@ -1220,7 +1246,7 @@ TABS.receiver.initialize = function (callback) {
         self.initModelPreview();
         self.renderModel();
 
-        $('.content_wrapper').change(function () {
+        $('.content_wrapper').on("change", function () {
             self.saveButtons = true;
             updateButtons(true);
         });
