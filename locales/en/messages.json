@@ -3906,17 +3906,17 @@
     "firmwareFlasherBoardDetectionInProgress": {
         "message": "Auto-detecting board for connected device..."
     },
-    "dialogAutoDetectedInvalidBoardNameTitle": {
+    "dialogBoardDetectionMessageInvalidBoardNameTitle": {
         "message": "Invalid Board Name Detected"
     },
-    "dialogAutoDetectedInvalidBoardNameContent": {
-        "message": "Detected board: ($1) contains invalid characters, and no matching target was found. Attempt detection with corrected board name: ($2)?."
+    "dialogBoardDetectionMessageInvalidBoardNameContent": {
+        "message": "Board name: ($1) contains invalid characters -- using corrected board name: ($2)"
     },
-    "dialogAutoDetectedInvalidBoardNameAttemptRemap": {
-        "message": "Use Corrected Board Name"
+    "dialogBoardDetectionMessageInvalidBoardNameRecommendation": {
+        "message": "A full chip erase is recommended to correct the board name. Ensure you perform a full backup before performing a flash with full chip erase enabled."
     },
-    "dialogAutoDetectedInvalidBoardNameIgnore": {
-        "message": "Ignore Invalid Board Name"
+    "dialogBoardDetectionMessageAcknowledge": {
+        "message": "Acknowledge"
     },
     "ledStripHelp": {
         "message": "The flight controller can control colors and effects of individual LEDs on a strip.<br />Configure LEDs on the grid, configure wiring order then attach LEDs on your aircraft according to grid positions. LEDs without wire ordering number will not be saved.<br />Double-click on a color to edit the HSV values."

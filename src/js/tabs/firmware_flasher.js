@@ -989,72 +989,36 @@ TABS.firmware_flasher.initialize = function (callback) {
                 MSP.disconnect_cleanup();
             }
 
-            function dialogAutoDetectedInvalidBoard(board) {
-                const dialog = $('#dialogAutoDetectedInvalidBoardName')[0];
-                const newBoardName = board.replace('.', '_');
-
-                const boardSelect = $('select[name="board"]');
-                const boardSelectOptions = $('select[name="board"] option');
-    
-                boardSelectOptions.each((_, e) => {
-                    if ($(e).text() === newBoardName) {
-                        targetAvailable = true;
-                    }
-                });
-
-                if (!targetAvailable) {
-                    return
-                }
-            
-                function close() {
-                    $('#dialogAutoDetectedInvalidBoardNameAttemptRemap').off('click');
-                    $('#dialogAutoDetectedInvalidBoardNameIgnore').off('click');
-                    dialog.close();
-                }
-            
-                $('#dialogAutoDetectedInvalidBoardNameAttemptRemap').click(function() {
-                    boardSelect.val(newBoardName).trigger('change');
-                    close();
-                });
-
-                $('#dialogAutoDetectedInvalidBoardNameIgnore').click(function() {
-                    close();
-                });
-
-                $('#dialogAutoDetectedInvalidBoardNameContent').html(i18n.getMessage('dialogAutoDetectedInvalidBoardNameContent', [board, newBoardName]))
-                dialog.showModal();
-            };
-
             function handleMSPResponse() {
-                const board = FC.CONFIG.boardName;
+                let board = FC.CONFIG.boardName;
         
                 if (board) {
                     clearTimeout(detectTimer);
-                    disconnect();
-                    matchTarget(board)
-                }
-            }
 
-            function matchTarget(board) {
-                const boardSelect = $('select[name="board"]');
-                const boardSelectOptions = $('select[name="board"] option');
-                const target = boardSelect.val();
-    
-                boardSelectOptions.each((_, e) => {
-                    if ($(e).text() === board) {
-                        targetAvailable = true;
+                    if (board.includes(".")) {
+                        const newBoardName = board.replace('.', '_');
+                        GUI.log(i18n.getMessage('dialogBoardDetectionMessageInvalidBoardNameContent', [ board, newBoardName ] ));
+                        dialogBoardDetectionMessage(i18n.getMessage('dialogBoardDetectionMessageInvalidBoardNameTitle'), i18n.getMessage('dialogBoardDetectionMessageInvalidBoardNameContent', [ board, newBoardName ]).concat("<br />", i18n.getMessage('dialogBoardDetectionMessageInvalidBoardNameRecommendation')));
+                        board = newBoardName;
                     }
-                });
-    
-                if (targetAvailable && board !== target) {
-                    boardSelect.val(board).trigger('change');
-                }
 
-                if (!targetAvailable && board.includes(".")) {
-                    dialogAutoDetectedInvalidBoard(board)
+                    const boardSelect = $('select[name="board"]');
+                    const boardSelectOptions = $('select[name="board"] option');
+                    const target = boardSelect.val();
+        
+                    boardSelectOptions.each((_, e) => {
+                        if ($(e).text() === board) {
+                            targetAvailable = true;
+                        }
+                    });
+        
+                    if (targetAvailable && board !== target) {
+                        boardSelect.val(board).trigger('change');
+                    }
+                    
+                    GUI.log(i18n.getMessage(targetAvailable ? 'firmwareFlasherBoardDetectionSucceeded' : 'firmwareFlasherBoardDetectionBoardNotFound', { boardName: board }));
+                    disconnect();
                 }
-    
-                GUI.log(i18n.getMessage(targetAvailable ? 'firmwareFlasherBoardDetectionSucceeded' : 'firmwareFlasherBoardDetectionBoardNotFound', { boardName: board }));
             }
         
             function onConnect(openInfo) {
@@ -1069,6 +1033,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                     getBoardInfo();
                 } else {
                     GUI.log(i18n.getMessage('serialPortOpenFail'));
+                    dialogBoardDetectionMessage(i18n.getMessage('serialPortOpenFail'));
                 }
             }
 
@@ -1084,6 +1049,25 @@ TABS.firmware_flasher.initialize = function (callback) {
                 self.boardDetectionInProgress = false;
                 GUI.connect_lock = false;
             }
+
+            function dialogBoardDetectionMessage(title, message) {
+                const dialog = $('#dialogBoardDetectionMessage')[0];
+                
+                function close() {
+                    $('#dialogBoardDetectionMessageAcknowledge').off('click');
+                    dialog.close();
+                    $('#dialogBoardDetectionMessageTitle').html("")
+                    $('#dialogBoardDetectionMessageContent').html("")
+                }
+
+                $('#dialogBoardDetectionMessageAcknowledge').on("click", function() {
+                    close();
+                });
+
+                $('#dialogBoardDetectionMessageTitle').html(title)
+                $('#dialogBoardDetectionMessageContent').html(message)
+                dialog.showModal();
+            };
 
             return {
                 detect: detect,
