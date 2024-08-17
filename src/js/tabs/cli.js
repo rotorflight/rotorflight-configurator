@@ -138,19 +138,11 @@ TABS.cli.initialize = function (callback) {
             const prefix = 'cli';
             const suffix = 'txt';
 
-            const filename = generateFilename(prefix, suffix);
-
             try {
-                const fileHandle = await showSaveFilePicker({
-                    suggestedName: filename,
-                    types: [{
-                        description: `${suffix.toUpperCase()} files`,
-                        accept: { "text/plain": [`.${suffix}`] },
-                    }],
-                });
-                const writer = await fileHandle.createWritable();
-                await writer.write(new Blob([self.outputHistory], {type: 'text/plain'}));
-                await writer.close();
+              await window.filesystem.writeTextFile(self.outputHistory, {
+                  suggestedName: generateFilename(prefix, suffix),
+                  description: `${suffix.toUpperCase()} files`,
+              });
             } catch (err) {
                 console.log('Failed to save config', err);
             }
@@ -199,14 +191,12 @@ TABS.cli.initialize = function (callback) {
             }
 
             try {
-                const [entry] = await showOpenFilePicker({
-                    types: [
-                        { description: "Config files", accept: { "text/plain": [".txt", ".config"] } },
-                    ],
+                const file = await window.filesystem.readTextFile({
+                    description: "Config files",
+                    extensions: [".txt", ".config"],
                 });
-                if (!entry) return;
-                const file = await entry.getFile();
-                previewCommands(await file.text(), file.name)
+                if (!file) return;
+                previewCommands(file.content, file.name)
             } catch (err) {
                 console.log("Failed to load config", err);
             }

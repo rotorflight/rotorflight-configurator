@@ -812,19 +812,16 @@ TABS.firmware_flasher.initialize = function (callback) {
         $('a.load_file').on('click', async function () {
             self.enableFlashing(false);
 
-            const [entry] = await showOpenFilePicker({
-                types: [
-                    { description: "Firmware/Target", accept: { "text/plain": [".hex", ".config"] } },
-                ],
+            const file = await window.filesystem.readTextFile({
+                description: "Firmware/Target",
+                extensions: [".hex", ".config"],
             });
-            if (!entry) return;
+            if (!file) return;
 
             $('div.git_info').slideUp();
 
-            const file = await entry.getFile();
-
             if (file.name.endsWith(".hex")) {
-                self.intel_hex = await file.text();
+                self.intel_hex = file.content;
                 self.parsed_hex = await parse_hex(self.intel_hex);
 
                 if (self.parsed_hex) {
@@ -1239,13 +1236,10 @@ TABS.firmware_flasher.flashingMessage = function(message, type) {
             var summary = $('select[name="firmware_version"] option:selected').data('summary');
 
             try {
-                const fileHandle = await showSaveFilePicker({
+                await window.filesystem.writeTextFile(self.intel_hex, {
                     suggestedName: summary.file,
-                    types: [{ description: "HEX", accept: { "text/plain": ['.hex'] } }]
+                    description: 'Rotorflight Firmware (.hex)',
                 });
-                const writer = await fileHandle.createWritable();
-                await writer.write(new Blob([self.intel_hex], { type: 'text/plain' }));
-                await writer.close();
             } catch (err) {
                 console.log('Error saving firmware file', err);
             }

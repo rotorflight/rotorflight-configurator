@@ -660,6 +660,11 @@ cordova-plugin-filechooser@^1.2.0:
   resolved "https://registry.yarnpkg.com/cordova-plugin-filechooser/-/cordova-plugin-filechooser-1.2.0.tgz#3a3a3d9c5bef733076f1f6b59e465f60a0d96577"
   integrity sha512-ycL9ML3wlRQ8wfK7vCG8gobv1f3VIdO52m0LA9mPSzLblbu0AXJs89yCRxZB87+08/V96qBxrmkxMsMmVYu5wA==
 
+cordova-plugin-filepath@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-filepath/-/cordova-plugin-filepath-1.6.0.tgz#dc467c5f1f569a915774deed832fdbf5ab56386e"
+  integrity sha512-DwKuH5tXhZJImU/rHDzQhG3bY2ihAUw5QqdNllso96MZ9TQTAbFvKPLppuJwx21XxYS2g3uB9R17AXEEme+sKA==
+
 cordova-plugin-market@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/cordova-plugin-market/-/cordova-plugin-market-1.2.0.tgz#61e36428147e95402c64eaf86e317378ffdb274f"
