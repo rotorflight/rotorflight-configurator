@@ -217,7 +217,12 @@ TABS.profiles.initialize = function (callback) {
         // Cyclic Cross-Coupling
         $('.tab-profiles input[id="cyclicCrossCouplingGain"]').val(FC.PID_PROFILE.cyclicCrossCouplingGain);
         $('.tab-profiles input[id="cyclicCrossCouplingRatio"]').val(FC.PID_PROFILE.cyclicCrossCouplingRatio);
-        $('.tab-profiles input[id="cyclicCrossCouplingCutoff"]').val(FC.PID_PROFILE.cyclicCrossCouplingCutoff);
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+            $('.tab-profiles input[id="cyclicCrossCouplingCutoff"]')
+                .val((FC.PID_PROFILE.cyclicCrossCouplingCutoff / 10).toFixed(1));
+        } else {
+            $('.tab-profiles input[id="cyclicCrossCouplingCutoff"]').val(FC.PID_PROFILE.cyclicCrossCouplingCutoff);
+        }
         const cyclicCrossCouplingCheck = $('.tab-profiles input[id="cyclicCrossCoupling"]');
         cyclicCrossCouplingCheck.change(function() {
             const checked = $(this).is(':checked');
@@ -363,7 +368,10 @@ TABS.profiles.initialize = function (callback) {
             parseInt($('.tab-profiles input[id="cyclicCrossCouplingGain"]').val()) : 0;
 
         FC.PID_PROFILE.cyclicCrossCouplingRatio = parseInt($('.tab-profiles input[id="cyclicCrossCouplingRatio"]').val());
-        FC.PID_PROFILE.cyclicCrossCouplingCutoff = parseInt($('.tab-profiles input[id="cyclicCrossCouplingCutoff"]').val());
+        FC.PID_PROFILE.cyclicCrossCouplingCutoff = parseFloat($('.tab-profiles input[id="cyclicCrossCouplingCutoff"]').val());
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+            FC.PID_PROFILE.cyclicCrossCouplingCutoff *= 10;
+        }
 
         // Leveling modes
         FC.PID_PROFILE.acroTrainerGain = parseInt($('.tab-profiles input[id="acroTrainerGain"]').val());
@@ -559,6 +567,14 @@ TABS.profiles.initialize = function (callback) {
                 $('.tab-profiles .gov_settings .note').show();
             }
         });
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+            $('.tab-profiles input[id="cyclicCrossCouplingCutoff"]').attr({
+                step: 0.1,
+                min: 0.1,
+                max: 25,
+            });
+        }
 
         function get_status() {
             MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
