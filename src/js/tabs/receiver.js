@@ -864,8 +864,9 @@ TABS.receiver.initialize = function (callback) {
 
         function updateTelemetry() {
             const isCrsf = self.telemetry.enabled && self.rxProto.name === "TBS CRSF";
+            const SUPPORT_CRSF_CUSTOM_TELEM = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7);
 
-            if (isCrsf) {
+            if (isCrsf && SUPPORT_CRSF_CUSTOM_TELEM) {
                 return updateCrsfTelemetry();
             }
 
@@ -906,10 +907,6 @@ TABS.receiver.initialize = function (callback) {
         $('.tab-receiver input[name="crsf-telemetry-ratio"]').on('change', function() {
             self.telemetry.config.crsf_telemetry_ratio = getIntegerValue(this);
         });
-
-        const SUPPORT_ELRS_CUSTOM_TELEM = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7);
-        $('.tab-receiver .crsf-telemetry-setting').toggle(SUPPORT_ELRS_CUSTOM_TELEM);
-        $('.tab-receiver .crsf-telemetry-sensors').toggle(SUPPORT_ELRS_CUSTOM_TELEM);
 
         rxProtoSelectElement.on('change', updateTelemetry);
 
