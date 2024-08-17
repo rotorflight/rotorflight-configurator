@@ -707,6 +707,12 @@ TABS.firmware_flasher.initialize = function (callback) {
         function flashFirmware(firmware) {
             var options = {};
 
+            var eraseAll = false;
+            if ($('input.erase_chip').is(':checked')) {
+                options.erase_chip = true;
+                eraseAll = true;
+            }
+
             if (!$('option:selected', portPickerElement).data().isDFU) {
                 if (String(portPickerElement.val()) !== '0') {
                     const port = String(portPickerElement.val());
@@ -984,10 +990,18 @@ TABS.firmware_flasher.initialize = function (callback) {
             }
 
             function handleMSPResponse() {
-                const board = FC.CONFIG.boardName;
+                let board = FC.CONFIG.boardName;
         
                 if (board) {
                     clearTimeout(detectTimer);
+
+                    if (board.includes(".")) {
+                        const newBoardName = board.replace('.', '_');
+                        GUI.log(i18n.getMessage('dialogBoardDetectionMessageInvalidBoardNameContent', [ board, newBoardName ] ));
+                        dialogBoardDetectionMessage(i18n.getMessage('dialogBoardDetectionMessageInvalidBoardNameTitle'), i18n.getMessage('dialogBoardDetectionMessageInvalidBoardNameContent', [ board, newBoardName ]).concat("<br />", i18n.getMessage('dialogBoardDetectionMessageInvalidBoardNameRecommendation')));
+                        board = newBoardName;
+                    }
+
                     const boardSelect = $('select[name="board"]');
                     const boardSelectOptions = $('select[name="board"] option');
                     const target = boardSelect.val();
@@ -998,10 +1012,10 @@ TABS.firmware_flasher.initialize = function (callback) {
                         }
                     });
         
-                    if (board !== target) {
+                    if (targetAvailable && board !== target) {
                         boardSelect.val(board).trigger('change');
                     }
-        
+                    
                     GUI.log(i18n.getMessage(targetAvailable ? 'firmwareFlasherBoardDetectionSucceeded' : 'firmwareFlasherBoardDetectionBoardNotFound', { boardName: board }));
                     disconnect();
                 }
@@ -1019,6 +1033,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                     getBoardInfo();
                 } else {
                     GUI.log(i18n.getMessage('serialPortOpenFail'));
+                    dialogBoardDetectionMessage(i18n.getMessage('serialPortOpenFail'));
                 }
             }
 
@@ -1034,6 +1049,25 @@ TABS.firmware_flasher.initialize = function (callback) {
                 self.boardDetectionInProgress = false;
                 GUI.connect_lock = false;
             }
+
+            function dialogBoardDetectionMessage(title, message) {
+                const dialog = $('#dialogBoardDetectionMessage')[0];
+                
+                function close() {
+                    $('#dialogBoardDetectionMessageAcknowledge').off('click');
+                    dialog.close();
+                    $('#dialogBoardDetectionMessageTitle').html("")
+                    $('#dialogBoardDetectionMessageContent').html("")
+                }
+
+                $('#dialogBoardDetectionMessageAcknowledge').on("click", function() {
+                    close();
+                });
+
+                $('#dialogBoardDetectionMessageTitle').html(title)
+                $('#dialogBoardDetectionMessageContent').html(message)
+                dialog.showModal();
+            };
 
             return {
                 detect: detect,
