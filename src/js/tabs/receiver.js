@@ -935,6 +935,7 @@ TABS.receiver.initialize = function (callback) {
         });
 
         telemetryPinswapElement.prop('checked', FC.TELEMETRY_CONFIG.telemetry_pinswap !== 0);
+        telemetryPinswapElement.closest('tr').toggle(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7));
 
 
     //// Channels Bars
