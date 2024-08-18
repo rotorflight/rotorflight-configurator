@@ -110,31 +110,6 @@ TABS.blackbox = {
         "24", "25", "26", "27", "28", "29", "30", "31"
     ],
 
-    LOG_FIELDS: [
-        "command",
-        "setpoint",
-        "mixer",
-        "pid",
-        "attitude",
-        "gyroraw",
-        "gyro",
-        "acc",
-        "mag",
-        "alt",
-        "battery",
-        "rssi",
-        "gps",
-        "rpm",
-        "motors",
-        "servos",
-        "vbec",
-        "vbus",
-        "temps",
-        "esc",
-        "bec",
-        "esc2",
-    ],
-
     LOG_RATES: {
         8000: [ 8, 16, 32, 80, 160, 320, 800 ],
         4000: [ 4, 8, 16, 40, 80, 160, 400 ],
@@ -147,6 +122,38 @@ TABS.blackbox = {
            0: [ 1, 2, 4, 8, 16, 32, 64, 128, 256 ],
     },
 
+    LOG_FIELDS: [],
+    initLogFields() {
+        this.LOG_FIELDS = [
+            "command",
+            "setpoint",
+            "mixer",
+            "pid",
+            "attitude",
+            "gyroraw",
+            "gyro",
+            "acc",
+            "mag",
+            "alt",
+            "battery",
+            "rssi",
+            "gps",
+            "rpm",
+            "motors",
+            "servos",
+            "vbec",
+            "vbus",
+            "temps",
+        ];
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+            this.LOG_FIELDS.push(
+                "esc",
+                "bec",
+                "esc2",
+            );
+        }
+    },
 };
 
 TABS.blackbox.initialize = function (callback) {
@@ -332,6 +339,7 @@ TABS.blackbox.initialize = function (callback) {
     }
 
     function populateLogFlags() {
+        self.initLogFields();
         const logFlags = $('.tab-blackbox .blackboxLogFlags');
         $.each(self.LOG_FIELDS, function(index, value) {
             const checked = (FC.BLACKBOX.blackboxFields & (1 << index)) ? "checked" : "";
