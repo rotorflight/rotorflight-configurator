@@ -681,6 +681,7 @@ TABS.receiver.initialize = function (callback) {
         });
 
         serialRxPinswapElement.prop('checked', FC.RX_CONFIG.serialrx_pinswap !== 0);
+        serialRxPinswapElement.toggle(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7));
 
 
     //// Telemetry Options
