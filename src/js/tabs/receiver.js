@@ -865,10 +865,11 @@ TABS.receiver.initialize = function (callback) {
         }
 
         function updateTelemetry() {
+            const usingExternalTelem = !!self.telemetryExtSensors;
             const isCrsf = self.telemetry.enabled && self.rxProto.name === "TBS CRSF";
             const SUPPORT_CRSF_CUSTOM_TELEM = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7);
 
-            if (isCrsf && SUPPORT_CRSF_CUSTOM_TELEM) {
+            if (!usingExternalTelem && isCrsf && SUPPORT_CRSF_CUSTOM_TELEM) {
                 return updateCrsfTelemetry();
             }
 
