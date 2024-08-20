@@ -82,24 +82,28 @@ TABS.cli.initialize = function (callback) {
 
     const enterKeyCode = 13;
 
-    async function executeCommands(outString) {
+    function executeCommands(outString) {
         self.history.add(outString.trim());
 
         const outputArray = outString.split("\n");
-        let delay = 0;
-        for (let i = 0; i < outputArray.length; i++) {
-            let line = outputArray[i].trim();
-            const isLastCommand = outputArray.length === i + 1;
-            if (isLastCommand && self.cliBuffer) {
-                line = getCliCommand(line, self.cliBuffer);
-            }
-
-            await new Promise(resolve => setTimeout(resolve, delay));
-            await new Promise(resolve => self.sendLine(line, resolve));
-
-            const isProfileCommand = line.toLowerCase().startsWith('profile');
-            delay = isProfileCommand ? self.profileSwitchDelayMs : self.lineDelayMs;
-        }
+        Promise.reduce(outputArray, function(delay, line, index) {
+            return new Promise(function (resolve) {
+                GUI.timeout_add('CLI_send_slowly', function () {
+                    let processingDelay = self.lineDelayMs;
+                    line = line.trim();
+                    if (line.toLowerCase().startsWith('profile')) {
+                        processingDelay = self.profileSwitchDelayMs;
+                    }
+                    const isLastCommand = outputArray.length === index + 1;
+                    if (isLastCommand && self.cliBuffer) {
+                        line = getCliCommand(line, self.cliBuffer);
+                    }
+                    self.sendLine(line, function () {
+                        resolve(processingDelay);
+                    });
+                }, delay);
+            });
+        }, 0);
     }
 
     $('#content').load("./tabs/cli.html", function () {
