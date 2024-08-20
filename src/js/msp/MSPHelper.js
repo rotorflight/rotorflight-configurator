@@ -163,18 +163,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 }
                 break;
 
-            case MSPCodes.MSP2_GET_VTX_DEVICE_STATUS:
-                FC.VTX_DEVICE_STATUS = null;
-                const dataLength = data.byteLength;
-                if (dataLength > 0) {
-                    const vtxDeviceStatusData = new Uint8Array(dataLength);
-                    for (let i = 0; i < dataLength; i++) {
-                        vtxDeviceStatusData[i] = data.readU8();
-                    }
-                    FC.VTX_DEVICE_STATUS = vtxDeviceStatusFactory.createVtxDeviceStatus(vtxDeviceStatusData);
-                }
-                break;
-
             case MSPCodes.MSP_MOTOR_TELEMETRY:
                 const telemMotorCount = data.readU8();
                 for (let i = 0; i < telemMotorCount; i++) {
@@ -1324,65 +1312,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 console.log("Transponder config saved");
                 break;
 
-            case MSPCodes.MSP_VTX_CONFIG:
-
-                FC.VTX_CONFIG.vtx_type = data.readU8();
-                FC.VTX_CONFIG.vtx_band = data.readU8();
-                FC.VTX_CONFIG.vtx_channel = data.readU8();
-                FC.VTX_CONFIG.vtx_power = data.readU8();
-                FC.VTX_CONFIG.vtx_pit_mode = data.readU8() != 0;
-                FC.VTX_CONFIG.vtx_frequency = data.readU16();
-                FC.VTX_CONFIG.vtx_device_ready = data.readU8() != 0;
-                FC.VTX_CONFIG.vtx_low_power_disarm = data.readU8();
-                FC.VTX_CONFIG.vtx_pit_mode_frequency = data.readU16();
-                FC.VTX_CONFIG.vtx_table_available = data.readU8() != 0;
-                FC.VTX_CONFIG.vtx_table_bands = data.readU8();
-                FC.VTX_CONFIG.vtx_table_channels = data.readU8();
-                FC.VTX_CONFIG.vtx_table_powerlevels = data.readU8();
-                FC.VTX_CONFIG.vtx_table_clear = false;
-                break;
-
-            case MSPCodes.MSP_SET_VTX_CONFIG:
-                console.log("VTX config sent");
-                break;
-
-            case MSPCodes.MSP_VTXTABLE_BAND:
-                FC.VTXTABLE_BAND.vtxtable_band_number = data.readU8();
-
-                const bandNameLength = data.readU8();
-                FC.VTXTABLE_BAND.vtxtable_band_name = '';
-                for (let i = 0; i < bandNameLength; i++) {
-                    FC.VTXTABLE_BAND.vtxtable_band_name += String.fromCharCode(data.readU8());
-                }
-
-                FC.VTXTABLE_BAND.vtxtable_band_letter = String.fromCharCode(data.readU8());
-                FC.VTXTABLE_BAND.vtxtable_band_is_factory_band = data.readU8() != 0;
-
-                const bandFrequenciesLength = data.readU8();
-                FC.VTXTABLE_BAND.vtxtable_band_frequencies = [];
-                for (let i = 0; i < bandFrequenciesLength; i++) {
-                    FC.VTXTABLE_BAND.vtxtable_band_frequencies.push(data.readU16());
-                }
-
-                break;
-
-            case MSPCodes.MSP_SET_VTXTABLE_BAND:
-                console.log("VTX band sent");
-                break;
-
-            case MSPCodes.MSP_VTXTABLE_POWERLEVEL:
-
-                FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_number = data.readU8();
-                FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_value = data.readU16();
-
-                const powerLabelLength = data.readU8();
-                FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_label = '';
-                for (let i = 0; i < powerLabelLength; i++) {
-                    FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_label += String.fromCharCode(data.readU8());
-                }
-
-                break;
-
             case MSPCodes.MSP_SET_TUNING_SLIDERS:
                 console.log("Tuning Sliders data sent");
                 break;
@@ -1403,9 +1332,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
                 break;
 
-            case MSPCodes.MSP_SET_VTXTABLE_POWERLEVEL:
-                console.log("VTX powerlevel sent");
-                break;
             case MSPCodes.MSP_SET_MODE_RANGE:
                 console.log('Mode range saved');
                 break;
@@ -2025,48 +1951,6 @@ MspHelper.prototype.crunch = function(code) {
             const millis = timestamp % 1000;
             buffer.push32(secs);
             buffer.push16(millis);
-            break;
-
-        case MSPCodes.MSP_SET_VTX_CONFIG:
-            buffer.push16(FC.VTX_CONFIG.vtx_frequency)
-                  .push8(FC.VTX_CONFIG.vtx_power)
-                  .push8(FC.VTX_CONFIG.vtx_pit_mode ? 1 : 0)
-                  .push8(FC.VTX_CONFIG.vtx_low_power_disarm)
-                  .push16(FC.VTX_CONFIG.vtx_pit_mode_frequency)
-                  .push8(FC.VTX_CONFIG.vtx_band)
-                  .push8(FC.VTX_CONFIG.vtx_channel)
-                  .push16(FC.VTX_CONFIG.vtx_frequency)
-                  .push8(FC.VTX_CONFIG.vtx_table_bands)
-                  .push8(FC.VTX_CONFIG.vtx_table_channels)
-                  .push8(FC.VTX_CONFIG.vtx_table_powerlevels)
-                  .push8(FC.VTX_CONFIG.vtx_table_clear ? 1 : 0);
-            break;
-
-        case MSPCodes.MSP_SET_VTXTABLE_POWERLEVEL:
-            buffer.push8(FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_number)
-                  .push16(FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_value);
-            buffer.push8(FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_label.length);
-            for (let i = 0; i < FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_label.length; i++) {
-                buffer.push8(FC.VTXTABLE_POWERLEVEL.vtxtable_powerlevel_label.charCodeAt(i));
-            }
-            break;
-
-        case MSPCodes.MSP_SET_VTXTABLE_BAND:
-            buffer.push8(FC.VTXTABLE_BAND.vtxtable_band_number);
-            buffer.push8(FC.VTXTABLE_BAND.vtxtable_band_name.length);
-            for (let i = 0; i < FC.VTXTABLE_BAND.vtxtable_band_name.length; i++) {
-                buffer.push8(FC.VTXTABLE_BAND.vtxtable_band_name.charCodeAt(i));
-            }
-            if (FC.VTXTABLE_BAND.vtxtable_band_letter != '') {
-                buffer.push8(FC.VTXTABLE_BAND.vtxtable_band_letter.charCodeAt(0));
-            } else {
-                buffer.push8(' '.charCodeAt(0));
-            }
-            buffer.push8(FC.VTXTABLE_BAND.vtxtable_band_is_factory_band ? 1 : 0);
-            buffer.push8(FC.VTXTABLE_BAND.vtxtable_band_frequencies.length);
-            for (let i = 0; i < FC.VTXTABLE_BAND.vtxtable_band_frequencies.length; i++) {
-                buffer.push16(FC.VTXTABLE_BAND.vtxtable_band_frequencies[i]);
-            }
             break;
 
         case MSPCodes.MSP_MULTIPLE_MSP:

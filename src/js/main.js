@@ -461,8 +461,6 @@ function isExpertModeEnabled() {
 function updateTabList(features) {
     $('#tabs ul.mode-connected li.tab_gps').toggle(features.isEnabled('GPS'));
     $('#tabs ul.mode-connected li.tab_led_strip').toggle(features.isEnabled('LED_STRIP'));
-    $('#tabs ul.mode-connected li.tab_osd').toggle(features.isEnabled('OSD'));
-    $('#tabs ul.mode-connected li.tab_vtx').toggle(features.isEnabled('VTX'));
 }
 
 function zeroPad(value, width) {

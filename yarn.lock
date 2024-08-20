@@ -83,11 +83,6 @@
     wrap-ansi "^8.1.0"
     wrap-ansi-cjs "npm:wrap-ansi@^7.0.0"
 
-"@korzio/djv-draft-04@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@korzio/djv-draft-04/-/djv-draft-04-2.0.1.tgz#2984289426cac5ed622b26a58c3af8584aefbdfe"
-  integrity sha512-MeTVcNsfCIYxK6T7jW1sroC7dBAb4IfLmQe6RoCqlxHN5NFkzNpgdnBPR+/0D2wJDUJHM9s9NQv+ouhxKjvUjg==
-
 "@malept/cross-spawn-promise@^1.1.0":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@malept/cross-spawn-promise/-/cross-spawn-promise-1.1.1.tgz#504af200af6b98e198bce768bc1730c6936ae01d"
@@ -2552,13 +2547,6 @@ dir-glob@^3.0.1:
   integrity sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==
   dependencies:
     path-type "^4.0.0"
-
-djv@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/djv/-/djv-2.1.4.tgz#a6bde1a87184be4f10640184de76079c1423023f"
-  integrity sha512-giDn+BVbtLlwtkvtcsZjbjzpALHB77skiv3FIu6Wp8b5j8BunDcVJYH0cGUaexp6s0Sb7IkquXXjsLBJhXwQpA==
-  optionalDependencies:
-    "@korzio/djv-draft-04" "^2.0.1"
 
 doctrine@^3.0.0:
   version "3.0.0"

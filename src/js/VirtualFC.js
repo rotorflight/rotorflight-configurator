@@ -110,8 +110,6 @@ const VirtualFC = {
 
         virtualFC.BLACKBOX.supported = true;
 
-        virtualFC.VTX_CONFIG.vtx_type = 1;
-
         virtualFC.BATTERY_CONFIG = {
             vbatmincellvoltage: 1,
             vbatmaxcellvoltage: 4,
@@ -159,7 +157,7 @@ const VirtualFC = {
 
         // from https://github.com/betaflight/betaflight/blob/master/docs/Modes.md
         virtualFC.AUX_CONFIG = ["ARM","ANGLE","HORIZON","ANTI GRAVITY","MAG","HEADFREE","HEADADJ","CAMSTAB","PASSTHRU","BEEPERON","LEDLOW","CALIB",
-        "OSD","TELEMETRY","SERVO1","SERVO2","SERVO3","BLACKBOX","FAILSAFE","AIRMODE","3D","FPV ANGLE MIX","BLACKBOX ERASE","CAMERA CONTROL 1",
+        "TELEMETRY","SERVO1","SERVO2","SERVO3","BLACKBOX","FAILSAFE","AIRMODE","3D","FPV ANGLE MIX","BLACKBOX ERASE","CAMERA CONTROL 1",
         "CAMERA CONTROL 2","CAMERA CONTROL 3","FLIP OVER AFTER CRASH","BOXPREARM","BEEP GPS SATELLITE COUNT","VTX PIT MODE","USER1","USER2",
         "USER3","USER4","PID AUDIO","PARALYZE","GPS RESCUE","ACRO TRAINER","DISABLE VTX CONTROL","LAUNCH CONTROL"];
         FC.AUX_CONFIG_IDS = [0,1,2,4,5,6,7,8,12,13,15,17,19,20,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,39,40,41,42,43,44,45,46,47,48,49];
@@ -173,43 +171,5 @@ const VirtualFC = {
 
         // 11 1111 (pass bitchecks)
         virtualFC.CONFIG.activeSensors = 63;
-    },
-    setupVirtualOSD(){
-        const virtualOSD = OSD;
-
-        virtualOSD.data.video_system = 1;
-        virtualOSD.data.unit_mode = 1;
-
-        virtualOSD.virtualMode = {
-            itemPositions: Array.from({length: 60}),
-            statisticsState: [],
-            warningFlags: 0,
-            timerData: [],
-        };
-
-        virtualOSD.data.state = {
-            haveMax7456Configured: true,
-            haveOsdFeature: true,
-            haveMax7456FontDeviceConfigured: true,
-            isMax7456FontDeviceDetected: true,
-            haveSomeOsd: true,
-        };
-
-        virtualOSD.data.parameters = {
-            cameraFrameWidth: 30,
-            cameraFrameHeight: 30,
-        };
-
-        virtualOSD.data.osd_profiles = {
-            number: 3,
-            selected: 0,
-        };
-
-        virtualOSD.data.alarms = {
-            rssi: { display_name: i18n.getMessage('osdTimerAlarmOptionRssi'), value: 0 },
-            cap: { display_name: i18n.getMessage('osdTimerAlarmOptionCapacity'), value: 0 },
-            alt: { display_name: i18n.getMessage('osdTimerAlarmOptionAltitude'), value: 0 },
-            time: { display_name: 'Minutes', value: 0 },
-        };
     },
 };

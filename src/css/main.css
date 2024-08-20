@@ -1423,23 +1423,6 @@ li.active .ic_transponder {
     background-image: url(../images/icons/cf_icon_transponder_white.svg);
 }
 
-.ic_osd {
-    background-image: url(../images/icons/icon_osd.svg);
-    background-position-y: 4px;
-}
-
-.ic_osd:hover, li.active .ic_osd {
-    background-image: url(../images/icons/icon_osd_white.svg);
-}
-
-.ic_vtx {
-    background-image: url(../images/icons/cf_icon_vtx_grey.svg);
-}
-
-.ic_vtx:hover, li.active .ic_vtx {
-    background-image: url(../images/icons/cf_icon_vtx_white.svg);
-}
-
 .ic_power {
     background-image: url(../images/icons/cf_icon_power_grey.svg);
     background-position-y: 9px;
@@ -2280,8 +2263,6 @@ span.value {
 .tab-logging,
 .tab-mixer,
 .tab-motors,
-.tab-osd,
-.tab-ports,
 .tab-power,
 .tab-profiles,
 .tab-rates,
@@ -2289,8 +2270,7 @@ span.value {
 .tab-sensors,
 .tab-servos,
 .tab-setup,
-.tab-status,
-.tab-vtx {
+.tab-status {
     height: 100%;
     position: relative;
 }

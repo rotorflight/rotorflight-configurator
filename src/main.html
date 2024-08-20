@@ -26,14 +26,11 @@
     <link type="text/css" rel="stylesheet" href="./css/tabs/led_strip.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/sensors.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/cli.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/logging.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/blackbox.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/firmware_flasher.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/adjustments.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/auxiliary.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/failsafe.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/osd.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/vtx.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/power.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/privacy_policy.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/options.css" media="all"/>
@@ -57,7 +54,6 @@
     <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="./node_modules/jbox/dist/jBox.min.js"></script>
     <script type="text/javascript" src="./node_modules/jquery-ui-npm/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="./node_modules/djv/djv.js"></script>
     <script type="text/javascript" src="./js/libraries/d3.min.js"></script>
     <script type="text/javascript" src="./js/libraries/jquery.nouislider.all.min.js"></script>
     <script type="text/javascript" src="./node_modules/three/build/three.min.js"></script>
@@ -72,11 +68,6 @@
     <script type="text/javascript" src="./js/utils/common.js"></script>
     <script type="text/javascript" src="./js/utils/css.js"></script>
     <script type="text/javascript" src="./js/utils/window_watchers.js"></script>
-    <script type="text/javascript" src="./js/utils/VtxDeviceStatus/VtxDeviceStatusFactory.js"></script>
-    <script type="text/javascript" src="./js/utils/VtxDeviceStatus/VtxDeviceStatus.js"></script>
-    <script type="text/javascript" src="./js/utils/VtxDeviceStatus/TrampDeviceStatus.js"></script>
-    <script type="text/javascript" src="./js/utils/VtxDeviceStatus/SmartAudioDeviceStatus.js"></script>
-    <script type="text/javascript" src="./js/utils/VtxDeviceStatus/Rtc6705DeviceStatus.js"></script>
     <script type="text/javascript" src="./js/injected_methods.js"></script>
     <script type="text/javascript" src="./js/ConfigStorage.js"></script>
     <script type="text/javascript" src="./js/data_storage.js"></script>
@@ -110,7 +101,6 @@
     <script type="text/javascript" src="./js/tabs/landing.js"></script>
     <script type="text/javascript" src="./js/tabs/status.js"></script>
     <script type="text/javascript" src="./js/tabs/setup.js"></script>
-    <script type="text/javascript" src="./js/tabs/setup_osd.js"></script>
     <script type="text/javascript" src="./js/tabs/help.js"></script>
     <script type="text/javascript" src="./js/tabs/configuration.js"></script>
     <script type="text/javascript" src="./js/tabs/profiles.js"></script>
@@ -127,15 +117,11 @@
     <script type="text/javascript" src="./js/tabs/led_strip.js"></script>
     <script type="text/javascript" src="./js/tabs/sensors.js"></script>
     <script type="text/javascript" src="./js/tabs/cli.js"></script>
-    <script type="text/javascript" src="./js/tabs/logging.js"></script>
     <script type="text/javascript" src="./js/tabs/blackbox.js"></script>
     <script type="text/javascript" src="./js/FirmwareCache.js"></script>
     <script type="text/javascript" src="./js/tabs/firmware_flasher.js"></script>
     <script type="text/javascript" src="./js/tabs/failsafe.js"></script>
     <script type="text/javascript" src="./js/tabs/options.js"></script>
-    <script type="text/javascript" src="./js/LogoManager.js"></script>
-    <script type="text/javascript" src="./js/tabs/osd.js"></script>
-    <script type="text/javascript" src="./js/tabs/vtx.js"></script>
     <script type="text/javascript" src="./js/tabs/power.js"></script>
     <script type="text/javascript" src="./node_modules/jquery-textcomplete/dist/jquery.textcomplete.min.js"></script>
     <script type="text/javascript" src="./js/CliAutoComplete.js"></script>
@@ -307,7 +293,6 @@
             <div id="tabs">
                 <ul class="mode-disconnected">
                     <li class="tab_landing" id="tab_landing"><a href="#" i18n="tabLanding" class="tabicon ic_welcome" i18n_title="tabLanding"></a></li>
-                    <!--li class="tab_changelog"><a href="#" class="tabicon ic_help" i18n="tabChangelog"></a></li-->
                     <li class="tab_help" id="tab_help"><a href="#" i18n="tabHelp" class="tabicon ic_help" i18n_title="tabHelp"></a></li>
                     <li class="tab_options" id="tab_options"><a href="#" i18n="tabOptions" class="tabicon ic_config" i18n_title="tabOptions"></a></li>
                     <li class="tab_privacy_policy"><a href="#" class="tabicon ic_help" i18n="tabPrivacyPolicy"></a></li>
@@ -316,8 +301,6 @@
                 <ul class="mode-connected">
                     <li class="tab_status"><a href="#" i18n="tabStatus" class="tabicon ic_status" i18n_title="tabStatus"></a></li>
                     <li class="tab_setup"><a href="#" i18n="tabSetup" class="tabicon ic_setup" i18n_title="tabSetup"></a></li>
-                    <li class="tab_setup_osd"><a href="#" i18n="tabSetupOSD" class="tabicon ic_setup" i18n_title="tabSetupOSD"></a></li>
-                    <!--li class="tab_ports"><a href="#" i18n="tabPorts" class="tabicon ic_ports" i18n_title="tabPorts"></a></li-->
                     <li class="tab_configuration"><a href="#" i18n="tabConfiguration" class="tabicon ic_config" i18n_title="tabConfiguration"></a></li>
                     <li class="tab_receiver"><a href="#" i18n="tabReceiver" class="tabicon ic_rx" i18n_title="tabReceiver"></a></li>
                     <li class="tab_failsafe"><a href="#" i18n="tabFailsafe" class="tabicon ic_failsafe" i18n_title="tabFailsafe"></a></li>
@@ -333,10 +316,7 @@
                     <li class="tab_led_strip"><a href="#" i18n="tabLedStrip" class="tabicon ic_led" i18n_title="tabLedStrip"></a></li>
                     <li class="tab_beepers"><a href="#" i18n="tabBeepers" class="tabicon ic_beepers" i18n_title="tabBeepers"></a></li>
                     <li class="tab_gps"><a href="#" i18n="tabGPS" class="tabicon ic_gps" i18n_title="tabGPS"></a></li>
-                    <li class="tab_osd"><a href="#" i18n="tabOsd" class="tabicon ic_osd" i18n_title="tabOsd"></a></li>
-                    <li class="tab_vtx"><a href="#" i18n="tabVtx" class="tabicon ic_vtx" i18n_title="tabVtx"></a></li>
                     <li class="tab_sensors"><a href="#" i18n="tabRawSensorData" class="tabicon ic_sensors" i18n_title="tabRawSensorData"></a></li>
-                    <li class="tab_logging"><a href="#" i18n="tabLogging" class="tabicon ic_log" i18n_title="tabLogging"></a></li>
                     <li class="tab_blackbox"><a href="#" i18n="tabBlackbox" class="tabicon ic_data" i18n_title="tabBlackbox"></a></li>
                     <!-- spare icons
                     <li class=""><a href="#"class="tabicon ic_mission">Mission (spare icon)</a></li>

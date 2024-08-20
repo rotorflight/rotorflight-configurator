@@ -25,7 +25,6 @@ const GuiControl = function () {
 
     this.defaultAllowedTabsWhenDisconnected = [
         'landing',
-        'changelog',
         'firmware_flasher',
         'privacy_policy',
         'options',
@@ -35,7 +34,6 @@ const GuiControl = function () {
         'status',
         'setup',
         'failsafe',
-        'osd',
         'power',
         'adjustments',
         'auxiliary',
@@ -44,7 +42,6 @@ const GuiControl = function () {
         'beepers',
         'gps',
         'led_strip',
-        //'logging',
         'blackbox',
         'modes',
         'motors',
@@ -55,7 +52,6 @@ const GuiControl = function () {
         'receiver',
         'sensors',
         'servos',
-        'vtx',
     ];
 
     this.allowedTabs = this.defaultAllowedTabsWhenDisconnected;
