@@ -65,13 +65,10 @@
     "marked": "^4.0.17",
     "multiple-select": "^1.5.2",
     "nw-vue-devtools-prebuilt": "^0.0.10",
-    "object-hash": "^3.0.0",
     "select2": "^4.0.13",
     "semver-min": "^0.7.2",
-    "short-unique-id": "^4.4.4",
     "switchery-latest": "^0.8.2",
     "three": "^0.126.1",
-    "universal-ga": "^1.2.0",
     "vue": "2.6.14"
   },
   "devDependencies": {
@@ -114,7 +111,6 @@
     "mocha": "^10.0.0",
     "node-gyp": "^10.2.0",
     "nw-builder": "^3.7.4",
-    "os": "^0.1.2",
     "postcss": "^8.4.14",
     "rollup": "^2.75.7",
     "rollup-plugin-vue": "^5.*.*",
@@ -123,11 +119,9 @@
     "sinon": "^14.0.0",
     "sinon-chai": "^3.7.0",
     "targz": "^1.0.1",
-    "temp": "^0.9.4",
     "through2": "^4.0.2",
     "vinyl-source-stream": "^2.0.0",
-    "vue-template-compiler": "^2.6.12",
-    "yarn": "^1.22.17"
+    "vue-template-compiler": "^2.6.12"
   },
   "optionalDependencies": {
     "appdmg": "^0.6.4"
