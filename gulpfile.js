@@ -296,21 +296,25 @@ function removeItem(platforms, item) {
     }
 }
 
-function getRunDebugAppCommand(arch) {
+function getRunDebugAppCommand(platform, arch) {
 
     let command;
 
-    switch (arch) {
+    switch (platform) {
     case 'osx':
     case 'osx64':
         const pkgName = `${pkg.name}.app`;
-        command = `open ${path.join(DEBUG_DIR, pkg.name, arch, pkgName)}`;
+        command = `open ${path.join(DEBUG_DIR, pkg.name, platform + '-' + arch, pkgName)}`;
 
         break;
 
     case 'linux':
     case 'linux64':
     case 'linux32':
+        command = path.join(DEBUG_DIR, pkg.name, platform + '-' + arch, pkg.name);
+
+        break;
+
     case 'armv7':
         command = path.join(DEBUG_DIR, pkg.name, arch, pkg.name);
 
@@ -319,7 +323,7 @@ function getRunDebugAppCommand(arch) {
     case 'win':
     case 'win32':
     case 'win64':
-        command = path.join(DEBUG_DIR, pkg.name, arch, `${pkg.name}.exe`);
+        command = path.join(DEBUG_DIR, pkg.name, platform + '-' + arch, `${pkg.name}.exe`);
 
         break;
 
@@ -671,12 +675,13 @@ function writeChangesetId() {
 function start_debug(done) {
 
     const platforms = getPlatforms();
+    const archs = getArchs();
 
     if (platforms.length === 1) {
         if (platforms[0] === 'android') {
             cordova_debug();
         } else {
-            const run = getRunDebugAppCommand(platforms[0]);
+            const run = getRunDebugAppCommand(platforms[0], archs[0]);
             console.log(`Starting debug app (${run})...`);
             child_process.exec(run);
         }
