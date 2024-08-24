@@ -112,7 +112,7 @@ const debugAppsBuild = gulp.series(gulp.parallel(clean_debug, distRebuild), debu
 const debugBuild = gulp.series(distBuild, debug, gulp.parallel(listPostBuildTasks(DEBUG_DIR)), start_debug);
 gulp.task('debug', debugBuild);
 
-const releaseBuild = gulp.series(gulp.parallel(clean_release, appsBuild), gulp.series(listReleaseTasks(APPS_DIR)));
+const releaseBuild = gulp.series(gulp.parallel(clean_release, appsBuild), gulp.parallel(listReleaseTasks(APPS_DIR)));
 gulp.task('release', releaseBuild);
 
 const debugReleaseBuild = gulp.series(gulp.parallel(clean_release, debugAppsBuild), gulp.parallel(listReleaseTasks(DEBUG_DIR)));
@@ -128,17 +128,17 @@ function getAppInfo(platform) {
     switch(platform) {
         case 'win':
             return {
-                icon: './src/images/rf_icon.ico'
+                icon: './images/rf_icon.ico'
             };
         case 'linux':
             return {
                 terminal: false,
-                icon: './src/images/rf_icon.ico'
+                icon: './images/rf_icon.ico'
             };
         case 'osx':
             return {
                 versoin: pkg.version,
-                icon: './src/images/rf_icon.icns',
+                icon: './images/rf_icon.icns',
                 CFBundleDisplayName: 'Rotorflight Configurator',
                 CFBundleShortVersionString: pkg.version
             }
@@ -328,8 +328,8 @@ function getRunDebugAppCommand(arch) {
     return command;
 }
 
-function getReleaseFilename(platform, ext) {
-    return `${pkg.name}_${pkg.version}_${platform}.${ext}`;
+function getReleaseFilename(platform, arch, ext) {
+    return `${pkg.name}_${pkg.version}_${platform}_${arch}.${ext}`;
 }
 
 function clean_dist() {
@@ -616,17 +616,21 @@ async function buildNWApps(platforms, flavor, dir, done) {
             let archs = getArchs();
             for (let ai = 0; ai < archs.length; ++ai) {
                 console.log(`Building for ${platforms[pi]}/${archs[ai]}...`);
+
                 process.chdir(DIST_DIR);
+
                 let appInfo = getAppInfo(platforms[pi], archs[ai]);
+                let outputDir =path.join('..', dir, pkg.name, platforms[pi] + '-' + archs[ai]);
                 await nwbuild(Object.assign({
                     mode: 'build',
-                    outDir: path.join('..', dir),
-                    cache: path.join('..', 'cache'),
+                    outDir: outputDir,
+                    cacheDir: path.join('..', 'cache'),
                     platform: platforms[pi],
                     arch: archs[ai],
                     flavor: flavor,
                     app: appInfo
                 }, nwBuilderOptions));
+
                 process.chdir('..');
             }
             done();
@@ -710,9 +714,9 @@ function release_win(arch, appDirectory, done) {
 }
 
 // Create distribution package (zip) for windows and linux platforms
-function release_zip(arch, appDirectory) {
-    const src = path.join(appDirectory, pkg.name, arch, '**');
-    const output = getReleaseFilename(arch, 'zip');
+function release_zip(platform, arch, appDirectory) {
+    const src = path.join(appDirectory, pkg.name, platform + '-' + arch, '**');
+    const output = getReleaseFilename(platform, arch, 'zip');
     const base = path.join(appDirectory, pkg.name, arch);
 
     return compressFiles(src, base, output, 'Rotorflight Configurator');
@@ -728,7 +732,7 @@ function compressFiles(srcPath, basePath, outputFile, zipFolder) {
                .pipe(gulp.dest(RELEASE_DIR));
 }
 
-function release_deb(arch, appDirectory, done) {
+function release_deb(platform, arch, appDirectory, done) {
 
     // Check if dpkg-deb exists
     if (!commandExistsSync('dpkg-deb')) {
@@ -736,7 +740,7 @@ function release_deb(arch, appDirectory, done) {
         done();
     }
 
-    return gulp.src([path.join(appDirectory, pkg.name, arch, '*')])
+    return gulp.src([path.join(appDirectory, pkg.name, platform + '-' + arch, '*')])
         .pipe(deb({
             package: pkg.name,
             version: pkg.version,
@@ -761,7 +765,7 @@ function release_deb(arch, appDirectory, done) {
     }));
 }
 
-function release_rpm(arch, appDirectory, done) {
+function release_rpm(platform, arch, appDirectory, done) {
 
     // Check if dpkg-deb exists
     if (!commandExistsSync('rpmbuild')) {
@@ -784,7 +788,7 @@ function release_rpm(arch, appDirectory, done) {
             requires: 'libgconf-2-4',
             prefix: '/opt',
             files: [{
-                cwd: path.join(appDirectory, pkg.name, arch),
+                cwd: path.join(appDirectory, pkg.name, platform + '-' + arch),
                 src: '*',
                 dest: `${LINUX_INSTALL_DIR}/${pkg.name}`,
             }],
@@ -835,10 +839,11 @@ function release_osx64(appDirectory) {
     createDirIfNotExists(RELEASE_DIR);
 
     // The src pipe is not used
+    console.log("appdmg cwd:" + process.cwd());
     return gulp.src(['.'])
         .pipe(appdmg({
-            target: path.join(RELEASE_DIR, getReleaseFilename('macOS', 'dmg')),
-            basepath: path.join(appDirectory, pkg.name, 'osx64'),
+            target: path.join(RELEASE_DIR, getReleaseFilename('macOS', 'x64', 'dmg')),
+            basepath: path.join(appDirectory, pkg.name, 'osx-x64'),
             specification: {
                 title: 'Rotorflight Configurator',
                 contents: [
@@ -864,11 +869,14 @@ function release_osx_arm64(appDirectory) {
     // The appdmg does not generate the folder correctly, manually
     createDirIfNotExists(RELEASE_DIR);
 
+    let targetFile = path.join(RELEASE_DIR, getReleaseFilename('osx', 'arm64', 'dmg'));
+    let baseDir = path.join(appDirectory, pkg.name, 'osx-arm64');
+
     // The src pipe is not used
     return gulp.src(['.'])
         .pipe(appdmg({
-            target: path.join(RELEASE_DIR, getReleaseFilename('macOS', 'dmg')),
-            basepath: path.join(appDirectory, pkg.name, 'osx_arm64'),
+            target: targetFile,
+            basepath: baseDir,
             specification: {
                 title: 'Rotorflight Configurator',
                 contents: [
@@ -881,7 +889,7 @@ function release_osx_arm64(appDirectory) {
                     size: {
                         width: 638,
                         height: 479,
-                    },
+                    } 
                 },
             },
         })
@@ -905,59 +913,58 @@ function listReleaseTasks(appDirectory) {
 
     const releaseTasks = [];
 
-    if (platforms.indexOf('linux') !== -1 && archs.indexOf('x64' != -1)) {
+    if (platforms.indexOf('linux') !== -1 && archs.indexOf('x64') != -1) {
         releaseTasks.push(function release_linux64_zip() {
-            return release_zip('linux64', appDirectory);
+            return release_zip('linux', 'x64', appDirectory);
         });
         releaseTasks.push(function release_linux64_deb(done) {
-            return release_deb('linux64', appDirectory, done);
+            return release_deb('linux', 'x64', appDirectory, done);
         });
         releaseTasks.push(function release_linux64_rpm(done) {
-            return release_rpm('linux64', appDirectory, done);
+            return release_rpm('linux', 'x64', appDirectory, done);
         });
     }
 
-    if (platforms.indexOf('linux') !== -1 && archs.indexOf('ia32' != -1)) {
+    if (platforms.indexOf('linux') !== -1 && archs.indexOf('ia32') != -1) {
         releaseTasks.push(function release_linux32_zip() {
-            return release_zip('linux32', appDirectory);
+            return release_zip('linux', 'ia32', appDirectory);
         });
         releaseTasks.push(function release_linux32_deb(done) {
-            return release_deb('linux32', appDirectory, done);
+            return release_deb('linux', 'ia32', appDirectory, done);
         });
         releaseTasks.push(function release_linux32_rpm(done) {
-            return release_rpm('linux32', appDirectory, done);
+            return release_rpm('linux', 'ia32', appDirectory, done);
         });
     }
 
     if (platforms.indexOf('armv7') !== -1) {
         releaseTasks.push(function release_armv7_zip() {
-            return release_zip('armv7', appDirectory);
+            return release_zip('linux', 'armv7', appDirectory);
         });
     }
 
-    if (platforms.indexOf('osx') !== -1 && archs.indexOf('x64' != -1)) {
+    if (platforms.indexOf('osx') !== -1 && archs.indexOf('x64') != -1) {
         releaseTasks.push(function () {
             return release_osx64(appDirectory);
         });
     }
 
-    if (platforms.indexOf('osx') !== -1 && archs.indexOf('arm64' != -1)) {
+    if (platforms.indexOf('osx') !== -1 && archs.indexOf('arm64') != -1) {
         releaseTasks.push(function () {
             return release_osx_arm64(appDirectory);
         });
     }
 
 
-
-    if (platforms.indexOf('win') !== -1 && archs.indexOf('ia32' != -1)) {
+    if (platforms.indexOf('win') !== -1 && archs.indexOf('ia32') != -1) {
         releaseTasks.push(function release_win32(done) {
-            return release_win('win32', appDirectory, done);
+            return release_win('win', 'ia32', appDirectory, done);
         });
     }
 
-    if (platforms.indexOf('win') !== -1 && archs.indexOf('x64' != -1)) {
+    if (platforms.indexOf('win') !== -1 && archs.indexOf('x64') != -1) {
         releaseTasks.push(function release_win64(done) {
-            return release_win('win64', appDirectory, done);
+            return release_win('win', 'x64', appDirectory, done);
         });
     }
 
