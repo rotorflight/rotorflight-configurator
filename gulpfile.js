@@ -813,9 +813,11 @@ function getLinuxPackageArch(type, arch) {
     let packArch;
 
     switch (arch) {
+    case 'ia32':
     case 'linux32':
         packArch = 'i386';
         break;
+    case 'x64':
     case 'linux64':
         if (type === 'rpm') {
             packArch = 'x86_64';
