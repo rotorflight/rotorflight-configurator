@@ -37,7 +37,7 @@ jobs:
       run: yarn install
 
     - name: Build release for linux64
-      run: yarn gulp release --linux64
+      run: yarn gulp release --linux --x64
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
@@ -76,12 +76,51 @@ jobs:
       run: yarn install
 
     - name: Build release for MacOS
-      run: yarn gulp release --osx64
+      run: yarn gulp release --osx --x64
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-macos-release-${{ env.GIT_VER }}
+        path: release/rotorflight-configurator*
+
+
+  macos-arm64:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.11
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: '.nvmrc'
+
+    - name: Set build variables
+      run: |
+        echo "GIT_VER=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
+        cat ${GITHUB_ENV}
+
+    - name: Update version number
+      run: make version SEMVER=${{ env.GIT_VER }}
+
+    - name: Initialise build environment
+      run: yarn install
+
+    - name: Build release for MacOS
+      run: yarn gulp release --osx --arm64
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: rotorflight-configurator-macos-arm64-release-${{ env.GIT_VER }}
         path: release/rotorflight-configurator*
 
 
@@ -115,7 +154,7 @@ jobs:
       run: yarn install
 
     - name: Build release for windows
-      run: yarn gulp release --win64
+      run: yarn gulp release --win --x64
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
@@ -154,7 +193,7 @@ jobs:
       run: yarn install
 
     - name: Build release for windows
-      run: yarn gulp release --win32
+      run: yarn gulp release --win --ia32
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
@@ -218,7 +257,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    needs: [linux, macos, win64, win32, android]
+    needs: [linux, macos, macos-arm64, win64, win32, android]
 
     steps:
     - name: Check out repository

@@ -49,7 +49,7 @@ jobs:
         name: rotorflight-configurator-linux-${{ env.GIT_VER }}
         path: rotorflight-configurator*
 
-  macos-arm:
+  macos-arm64:
 
     runs-on: macos-latest
 
