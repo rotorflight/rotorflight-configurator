@@ -690,7 +690,7 @@ function release_win(arch, appDirectory, done) {
 
     // Extra parameters to replace inside the iss file
     parameters.push(`/Dversion=${pkg.version}`);
-    parameters.push(`/DarchName=${arch}`);
+    parameters.push(`/DarchName=win-${arch}`);
     parameters.push(`/DarchAllowed=${(arch === 'ia32') ? 'x86 x64' : 'x64'}`);
     parameters.push(`/DarchInstallIn64bit=${(arch === 'ia32') ? '' : 'x64'}`);
     parameters.push(`/DsourceFolder=${appDirectory}`);
