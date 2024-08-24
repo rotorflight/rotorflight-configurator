@@ -5,6 +5,7 @@ const pkg = require('./package.json');
 delete pkg.optionalDependencies['gulp-appdmg'];
 
 const child_process = require('child_process');
+const process = require('process');
 const fs = require('fs');
 const fse = require('fs-extra');
 const https = require('follow-redirects').https;
@@ -12,7 +13,15 @@ const path = require('path');
 
 const zip = require('gulp-zip');
 const del = require('del');
-const NwBuilder = require('nw-builder');
+let nwbuild;
+import("nw-builder")
+  .then((obj) => {
+    nwbuild = obj.default;
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
 const innoSetup = require('@quanle94/innosetup');
 const deb = require('gulp-debian');
 const buildRpm = require('rpm-builder');
@@ -51,10 +60,10 @@ let gitChangeSetId;
 
 const nwBuilderOptions = {
     version: '0.89.0',
-    files: `${DIST_DIR}**/*`,
-    macIcns: './src/images/rf_icon.icns',
-    macPlist: { 'CFBundleDisplayName': 'Rotorflight Configurator'},
-    winIco: './src/images/rf_icon.ico',
+    srcDir: '**/*',
+    //macIcns: './src/images/rf_icon.icns',
+    //macPlist: { 'CFBundleDisplayName': 'Rotorflight Configurator'},
+    //winIco: './src/images/rf_icon.ico',
     zip: false,
 };
 
@@ -66,6 +75,7 @@ let cordovaDependencies = true;
 //Pre tasks operations
 //-----------------
 const SELECTED_PLATFORMS = getInputPlatforms();
+const SELECTED_ARCHS = getInputArchs();
 
 //-----------------
 //Tasks
@@ -102,7 +112,7 @@ const debugAppsBuild = gulp.series(gulp.parallel(clean_debug, distRebuild), debu
 const debugBuild = gulp.series(distBuild, debug, gulp.parallel(listPostBuildTasks(DEBUG_DIR)), start_debug);
 gulp.task('debug', debugBuild);
 
-const releaseBuild = gulp.series(gulp.parallel(clean_release, appsBuild), gulp.parallel(listReleaseTasks(APPS_DIR)));
+const releaseBuild = gulp.series(gulp.parallel(clean_release, appsBuild), gulp.series(listReleaseTasks(APPS_DIR)));
 gulp.task('release', releaseBuild);
 
 const debugReleaseBuild = gulp.series(gulp.parallel(clean_release, debugAppsBuild), gulp.parallel(listReleaseTasks(DEBUG_DIR)));
@@ -114,12 +124,65 @@ gulp.task('default', debugBuild);
 // Helper functions
 // -----------------
 
+function getAppInfo(platform) {
+    switch(platform) {
+        case 'win':
+            return {
+                icon: './src/images/rf_icon.ico'
+            };
+        case 'linux':
+            return {
+                terminal: false,
+                icon: './src/images/rf_icon.ico'
+            };
+        case 'osx':
+            return {
+                versoin: pkg.version,
+                icon: './src/images/rf_icon.icns',
+                CFBundleDisplayName: 'Rotorflight Configurator',
+                CFBundleShortVersionString: pkg.version
+            }
+    }
+}
+
+function getInputArchs() {
+    const supportedArchs = ['ia32', 'x64', 'arm64'];
+    const archs = [];
+    const regEx = /--(\w+)/;
+
+    for (let i = 3; i < process.argv.length; i++) {
+        const arg = process.argv[i].match(regEx)[1];
+        if (supportedArchs.indexOf(arg) > -1) {
+            archs.push(arg);
+        }
+    }
+
+    if (archs.length === 0) {
+        const defaultArch = getDefaultArch();
+        if (supportedArchs.indexOf(defaultArch) > -1) {
+            archs.push(defaultArch);
+        } else {
+            console.error(`Your current arch (${os.platform()}) is not a supported build arch. Please specify arch to build for on the command line.`);
+            process.exit();
+        }
+    }
+
+    if (archs.length > 0) {
+        console.log(`Building for arch(s): ${archs}.`);
+    } else {
+        console.error('No suitable archs found.');
+        process.exit();
+    }
+
+    return archs;
+}
+
 // Get platform from commandline args
 // #
 // # gulp <task> [<platform>]+        Run only for platform(s) (with <platform> one of --linux64, --linux32, --armv7, --osx64, --win32, --win64, or --android)
 // #
 function getInputPlatforms() {
-    const supportedPlatforms = ['linux64', 'linux32', 'armv7', 'osx64', 'win32', 'win64', 'android'];
+    const supportedPlatforms = ['linux', 'win', 'armv7', 'osx', 'android'];
     const platforms = [];
     const regEx = /--(\w+)/;
 
@@ -133,6 +196,8 @@ function getInputPlatforms() {
         } else if (arg === 'skipdep') {
             console.log('ignoring cordova dependencies');
             cordovaDependencies = false;
+        } else if (arg == 'x64' || arg == 'ia32' || arg == 'arm64') {
+            continue;
         } else {
             console.log(`Unknown platform: ${arg}`);
             process.exit();
@@ -152,7 +217,7 @@ function getInputPlatforms() {
     if (platforms.length > 0) {
         console.log(`Building for platform(s): ${platforms}.`);
     } else {
-        console.error('No suitables platforms found.');
+        console.error('No suitable platforms found.');
         process.exit();
     }
 
@@ -164,15 +229,15 @@ function getDefaultPlatform() {
     let defaultPlatform;
     switch (os.platform()) {
     case 'darwin':
-        defaultPlatform = 'osx64';
+        defaultPlatform = 'osx';
 
         break;
     case 'linux':
-        defaultPlatform = 'linux64';
+        defaultPlatform = 'linux';
 
         break;
     case 'win32':
-        defaultPlatform = 'win64';
+        defaultPlatform = 'win';
 
         break;
 
@@ -184,9 +249,40 @@ function getDefaultPlatform() {
     return defaultPlatform;
 }
 
+// Gets the default arch to be used
+function getDefaultArch() {
+    let defaultArch;
+    switch (os.machine()) {
+    case 'arm64':
+    case 'aarch64':
+        defaultArch = 'arm64';
+
+        break;
+    case 'x86_64':
+        defaultArch = 'x64';
+
+        break;
+    case 'i686':
+    case 'i386':
+        defaultPlatform = 'ia32';
+
+        break;
+
+    default:
+        defaultPlatform = '';
+
+        break;
+    }
+    return defaultArch;
+}
+
 
 function getPlatforms() {
     return SELECTED_PLATFORMS.slice();
+}
+
+function getArchs() {
+    return SELECTED_ARCHS.slice();
 }
 
 function removeItem(platforms, item) {
@@ -201,12 +297,14 @@ function getRunDebugAppCommand(arch) {
     let command;
 
     switch (arch) {
+    case 'osx':
     case 'osx64':
         const pkgName = `${pkg.name}.app`;
         command = `open ${path.join(DEBUG_DIR, pkg.name, arch, pkgName)}`;
 
         break;
 
+    case 'linux':
     case 'linux64':
     case 'linux32':
     case 'armv7':
@@ -214,6 +312,7 @@ function getRunDebugAppCommand(arch) {
 
         break;
 
+    case 'win':
     case 'win32':
     case 'win64':
         command = path.join(DEBUG_DIR, pkg.name, arch, `${pkg.name}.exe`);
@@ -511,22 +610,27 @@ function buildNWAppsWrapper(platforms, flavor, dir, done) {
     }
 }
 
-function buildNWApps(platforms, flavor, dir, done) {
+async function buildNWApps(platforms, flavor, dir, done) {
     if (platforms.length > 0) {
-        const builder = new NwBuilder(Object.assign({
-            buildDir: dir,
-            platforms,
-            flavor,
-        }, nwBuilderOptions));
-        builder.on('log', console.log);
-        builder.build(function (err) {
-            if (err) {
-                console.log(`Error building NW apps: ${err}`);
-                clean_debug();
-                process.exit(1);
+        for (let pi = 0; pi < platforms.length; pi++) {
+            let archs = getArchs();
+            for (let ai = 0; ai < archs.length; ++ai) {
+                console.log(`Building for ${platforms[pi]}/${archs[ai]}...`);
+                process.chdir(DIST_DIR);
+                let appInfo = getAppInfo(platforms[pi], archs[ai]);
+                await nwbuild(Object.assign({
+                    mode: 'build',
+                    outDir: path.join('..', dir),
+                    cache: path.join('..', 'cache'),
+                    platform: platforms[pi],
+                    arch: archs[ai],
+                    flavor: flavor,
+                    app: appInfo
+                }, nwBuilderOptions));
+                process.chdir('..');
             }
             done();
-        });
+        }
     } else {
         console.log('No platform suitable for NW Build');
         done();
@@ -754,6 +858,36 @@ function release_osx64(appDirectory) {
     );
 }
 
+function release_osx_arm64(appDirectory) {
+    const appdmg = require('./gulp-appdmg');
+
+    // The appdmg does not generate the folder correctly, manually
+    createDirIfNotExists(RELEASE_DIR);
+
+    // The src pipe is not used
+    return gulp.src(['.'])
+        .pipe(appdmg({
+            target: path.join(RELEASE_DIR, getReleaseFilename('macOS', 'dmg')),
+            basepath: path.join(appDirectory, pkg.name, 'osx_arm64'),
+            specification: {
+                title: 'Rotorflight Configurator',
+                contents: [
+                    { 'x': 448, 'y': 342, 'type': 'link', 'path': '/Applications' },
+                    { 'x': 192, 'y': 344, 'type': 'file', 'path': `${pkg.name}.app`, 'name': 'Rotorflight Configurator.app' },
+                ],
+                background: path.join(__dirname, 'assets/osx/dmg-background.png'),
+                format: 'UDZO',
+                window: {
+                    size: {
+                        width: 638,
+                        height: 479,
+                    },
+                },
+            },
+        })
+    );
+}
+
 // Create the dir directory, with write permissions
 function createDirIfNotExists(dir) {
     fs.mkdir(dir, '0775', function(err) {
@@ -767,10 +901,11 @@ function createDirIfNotExists(dir) {
 function listReleaseTasks(appDirectory) {
 
     const platforms = getPlatforms();
+    const archs = getArchs();
 
     const releaseTasks = [];
 
-    if (platforms.indexOf('linux64') !== -1) {
+    if (platforms.indexOf('linux') !== -1 && archs.indexOf('x64' != -1)) {
         releaseTasks.push(function release_linux64_zip() {
             return release_zip('linux64', appDirectory);
         });
@@ -782,7 +917,7 @@ function listReleaseTasks(appDirectory) {
         });
     }
 
-    if (platforms.indexOf('linux32') !== -1) {
+    if (platforms.indexOf('linux') !== -1 && archs.indexOf('ia32' != -1)) {
         releaseTasks.push(function release_linux32_zip() {
             return release_zip('linux32', appDirectory);
         });
@@ -800,19 +935,27 @@ function listReleaseTasks(appDirectory) {
         });
     }
 
-    if (platforms.indexOf('osx64') !== -1) {
+    if (platforms.indexOf('osx') !== -1 && archs.indexOf('x64' != -1)) {
         releaseTasks.push(function () {
             return release_osx64(appDirectory);
         });
     }
 
-    if (platforms.indexOf('win32') !== -1) {
+    if (platforms.indexOf('osx') !== -1 && archs.indexOf('arm64' != -1)) {
+        releaseTasks.push(function () {
+            return release_osx_arm64(appDirectory);
+        });
+    }
+
+
+
+    if (platforms.indexOf('win') !== -1 && archs.indexOf('ia32' != -1)) {
         releaseTasks.push(function release_win32(done) {
             return release_win('win32', appDirectory, done);
         });
     }
 
-    if (platforms.indexOf('win64') !== -1) {
+    if (platforms.indexOf('win') !== -1 && archs.indexOf('x64' != -1)) {
         releaseTasks.push(function release_win64(done) {
             return release_win('win64', appDirectory, done);
         });

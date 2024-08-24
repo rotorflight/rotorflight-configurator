@@ -30,3 +30,7 @@ nbproject/
 # Eclipse
 .project
 .settings/
+
+# vi
+*~
+*.swp

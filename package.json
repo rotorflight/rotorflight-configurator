@@ -95,7 +95,7 @@
     "gulp-yarn": "^3.0.0",
     "gulp-zip": "^5.0.0",
     "node-gyp": "^10.2.0",
-    "nw-builder": "^3.7.4",
+    "nw-builder": "^4.9.0",
     "postcss": "^8.4.14",
     "rollup": "^2.75.7",
     "rollup-plugin-vue": "^5.*.*",
