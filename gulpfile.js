@@ -691,8 +691,8 @@ function release_win(arch, appDirectory, done) {
     // Extra parameters to replace inside the iss file
     parameters.push(`/Dversion=${pkg.version}`);
     parameters.push(`/DarchName=${arch}`);
-    parameters.push(`/DarchAllowed=${(arch === 'win32') ? 'x86 x64' : 'x64'}`);
-    parameters.push(`/DarchInstallIn64bit=${(arch === 'win32') ? '' : 'x64'}`);
+    parameters.push(`/DarchAllowed=${(arch === 'ia32') ? 'x86 x64' : 'x64'}`);
+    parameters.push(`/DarchInstallIn64bit=${(arch === 'ia32') ? '' : 'x64'}`);
     parameters.push(`/DsourceFolder=${appDirectory}`);
     parameters.push(`/DtargetFolder=${RELEASE_DIR}`);
 
@@ -960,13 +960,13 @@ function listReleaseTasks(appDirectory) {
 
     if (platforms.indexOf('win') !== -1 && archs.indexOf('ia32') != -1) {
         releaseTasks.push(function release_win32(done) {
-            return release_win('win', 'ia32', appDirectory, done);
+            return release_win('ia32', appDirectory, done);
         });
     }
 
     if (platforms.indexOf('win') !== -1 && archs.indexOf('x64') != -1) {
         releaseTasks.push(function release_win64(done) {
-            return release_win('win', 'x64', appDirectory, done);
+            return release_win('x64', appDirectory, done);
         });
     }
 
