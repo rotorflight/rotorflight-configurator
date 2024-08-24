@@ -145,6 +145,10 @@ function getAppInfo(platform) {
     }
 }
 
+// Get arch from commandline args
+// #
+// # gulp <task> [<platform>]+ [<arch>]+      Run only for platform(s) (with <platform> one of --x64, --ia32, or --arm64)
+// #
 function getInputArchs() {
     const supportedArchs = ['ia32', 'x64', 'arm64'];
     const archs = [];
@@ -179,7 +183,7 @@ function getInputArchs() {
 
 // Get platform from commandline args
 // #
-// # gulp <task> [<platform>]+        Run only for platform(s) (with <platform> one of --linux64, --linux32, --armv7, --osx64, --win32, --win64, or --android)
+// # gulp <task> [<platform>]+        Run only for platform(s) (with <platform> one of --linux, --armv7, --osx, --win, or --android)
 // #
 function getInputPlatforms() {
     const supportedPlatforms = ['linux', 'win', 'armv7', 'osx', 'android'];
