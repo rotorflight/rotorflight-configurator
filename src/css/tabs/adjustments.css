@@ -2,10 +2,6 @@
     display: none;
 }
 
-.noUi-target {
-    border-radius: 4px;
-}
-
 .tab-adjustments .adjustments {
     width: 100%;
     border-spacing: 0px;
@@ -189,6 +185,16 @@
     margin-bottom: 15px;
 }
 
+.tab-adjustments .noUi-connect,
+.tab-adjustments .noUi-origin {
+    -webkit-transition: transform 0ms;
+    transition: transform 0ms;
+}
+
+.tab-adjustments .noUi-horizontal .noUi-handle {
+    top: -7px;
+}
+
 .tab-adjustments .dec-slider {
     margin-top: 5px;
     margin-bottom: 35px;
@@ -210,37 +216,26 @@
     z-index: 1000;
 }
 
-.tab-adjustments .adjSliders .noUi-handle {
-    border-radius: 15px;
-    box-shadow: none;
-    width: 28px;
-    height: 28px;
-    left: -14px;
-    top: -7px;
-    padding-top: 2px;
-    vertical-align: middle;
-    font-family: monospace;
-    font-size: 18px;
+.tab-adjustments .handle-icon {
+    font-size: 9px;
+    line-height: 28px;
     text-align: center;
-    color: #999;
 }
 
 .tab-adjustments .adjSliders .noUi-marker-large {
-    height: 12px;
+    height: 10px;
 }
 
 .tab-adjustments .adjSliders .noUi-value-horizontal {
-    padding-top: 15px;
+    padding-top: 4px;
 }
 
-.tab-adjustments .adjSliders .noUi-handle:before,
-.tab-adjustments .adjSliders .noUi-handle:after {
+.tab-adjustments .adjSliders .handle-icon:before,
+.tab-adjustments .adjSliders .handle-icon:after,
+.tab-adjustments .adjSliders .handle-icon:before,
+.tab-adjustments .adjSliders .handle-icon:after {
     height: 6px;
-    width: 3px;
     top: 20px;
-    left: 11.5px;
-    border: 1px;
-    border-radius: 2px;
 }
 
 .tab-adjustments .adjSliders .marker {
