@@ -1,4 +1,5 @@
-TABS.rates = {
+const tab = {
+    tabName: 'rates',
     isDirty: false,
     isChanged: false,
     activeSubtab: null,
@@ -43,7 +44,7 @@ TABS.rates = {
     oldChannels: [ 0, 0, 0, 0, ],
 };
 
-TABS.rates.initialize = function (callback) {
+tab.initialize = function (callback) {
     const self = this;
 
     load_data(load_html);
@@ -453,7 +454,7 @@ TABS.rates.initialize = function (callback) {
     }
 };
 
-TABS.rates.convertToCollective = function (rate) {
+tab.convertToCollective = function (rate) {
     const self = this;
 
     switch (self.currentRatesType) {
@@ -472,7 +473,7 @@ TABS.rates.convertToCollective = function (rate) {
     return rate.toFixed(1);
 };
 
-TABS.rates.initRatesPreview = function () {
+tab.initRatesPreview = function () {
     this.keepRendering = true;
 
     this.model = new Model($('.rates_preview'), $('.rates_preview canvas'));
@@ -484,7 +485,7 @@ TABS.rates.initRatesPreview = function () {
     $(window).on('resize', $.proxy(this.updateRatesLabels, this));
 };
 
-TABS.rates.renderModel = function () {
+tab.renderModel = function () {
     const self = this;
 
     if (self.keepRendering) {
@@ -536,7 +537,7 @@ TABS.rates.renderModel = function () {
     }
 };
 
-TABS.rates.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     const self = this;
 
     if (self.model) {
@@ -552,7 +553,7 @@ TABS.rates.cleanup = function (callback) {
     callback?.();
 };
 
-TABS.rates.checkChannels = function() {
+tab.checkChannels = function() {
     const self = this;
 
     let changeDetected = false;
@@ -565,7 +566,7 @@ TABS.rates.checkChannels = function() {
     return changeDetected;
 };
 
-TABS.rates.updateRatesLabels = function() {
+tab.updateRatesLabels = function() {
     const self = this;
 
     if (self.rateCurve.maxAngularVel) {
@@ -751,7 +752,7 @@ TABS.rates.updateRatesLabels = function() {
     }
 };
 
-TABS.rates.changeRatesType = function(rateTypeID) {
+tab.changeRatesType = function(rateTypeID) {
     const self = this;
 
     const dialogRatesType = $('.dialogRatesType')[0];
@@ -775,7 +776,7 @@ TABS.rates.changeRatesType = function(rateTypeID) {
     }
 };
 
-TABS.rates.initRatesSystem = function() {
+tab.initRatesSystem = function() {
     const self = this;
 
     let rcRateDef, rcRateMax, rcRateMin, rcRateStep, rcRateDec;
@@ -1117,10 +1118,23 @@ TABS.rates.initRatesSystem = function() {
     $('.tab-rates input[name="coll_accel"]').val(self.currentRates.collective_accel_limit * 10);
 };
 
-TABS.rates.changeRatesLogo = function() {
+tab.changeRatesLogo = function() {
     const self = this;
 
     const image = self.RATES_TYPE_IMAGES[self.currentRatesType];
     $('.rates_type img[id="ratesLogo"]').attr("src", "/images/rate_logos/" + image);
 };
 
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

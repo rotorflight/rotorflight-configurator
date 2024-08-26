@@ -218,7 +218,6 @@ function startProcess() {
 
                     if (TABS[tabName] && !GUI.reboot_in_progress) {
                         const tabObj = TABS[tabName];
-                        tabObj.tabName = tabName;
                         GUI.active_tab = tabName;
                         GUI.current_tab = tabObj;
                         GUI.tab_switch_in_progress = true;

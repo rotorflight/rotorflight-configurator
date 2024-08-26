@@ -1,8 +1,9 @@
-TABS.gps = {
+const tab = {
+    tabName: 'gps',
     isDirty: false,
 };
 
-TABS.gps.initialize = function (callback) {
+tab.initialize = function (callback) {
     const self = this;
 
     load_data(load_html);
@@ -254,8 +255,22 @@ TABS.gps.initialize = function (callback) {
 
 };
 
-TABS.gps.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     this.isDirty = false;
 
     callback?.();
 };
+
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

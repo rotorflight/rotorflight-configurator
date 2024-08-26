@@ -1,4 +1,5 @@
-TABS.firmware_flasher = {
+const tab = {
+    tabName: 'firmware_flasher',
     releases: null,
     releaseChecker: new ReleaseChecker('firmware', 'https://api.github.com/repos/rotorflight/rotorflight-firmware/releases'),
     gitHubApi: new GitHubApi(),
@@ -11,7 +12,7 @@ TABS.firmware_flasher = {
     boardDetectionInProgress: false,
 };
 
-TABS.firmware_flasher.initialize = function (callback) {
+tab.initialize = function (callback) {
     var self = this;
 
     self.selectedBoard = undefined;
@@ -63,7 +64,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             } else {
                 $('div.release_info #manufacturerInfo').hide();
             }
-            $('div.release_info .target').text(TABS.firmware_flasher.selectedBoard);
+            $('div.release_info .target').text(tab.selectedBoard);
             $('div.release_info .name').text(summary.version).prop('href', summary.releaseUrl);
             $('div.release_info .date').text(summary.date);
             $('div.release_info .file').text(summary.file).prop('href', summary.url);
@@ -150,7 +151,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                     });
                 });
 
-            TABS.firmware_flasher.releases = builds;
+            tab.releases = builds;
 
             ConfigStorage.get('rememberLastSelectedBoard', function (result) {
                 if (result.rememberLastSelectedBoard) {
@@ -289,15 +290,15 @@ TABS.firmware_flasher.initialize = function (callback) {
                     const select_e = $(`<option value='${target}'>${target}</option>"`);
                     boards_e.append(select_e);
                 });
-            TABS.firmware_flasher.releases = releases;
-            TABS.firmware_flasher.unifiedConfigs = unifiedConfigs;
+            tab.releases = releases;
+            tab.unifiedConfigs = unifiedConfigs;
 
             ConfigStorage.get('rememberLastSelectedBoard', function (result) {
                 if (result.rememberLastSelectedBoard) {
                     ConfigStorage.get('selected_board', function (result) {
                         if (result.selected_board) {
-                            var boardReleases = TABS.firmware_flasher.unifiedConfigs[result.selected_board]
-                                || TABS.firmware_flasher.releases[result.selected_board];
+                            var boardReleases = tab.unifiedConfigs[result.selected_board]
+                            || tab.releases[result.selected_board];
                             $('select[name="board"]').val(boardReleases ? result.selected_board : 0).trigger('change');
                         }
                     });
@@ -349,7 +350,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             .append($(`<option value='0'>${i18n.getMessage("firmwareFlasherOptionLoading")}</option>`));
 
             if (!GUI.connect_lock) {
-                TABS.firmware_flasher.unifiedConfigs = {};
+                tab.unifiedConfigs = {};
                 buildTypes[build_type].loader();
             }
 
@@ -483,7 +484,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             var target = $(this).val();
 
             if (!GUI.connect_lock || self.boardDetectionInProgress) {
-                if (TABS.firmware_flasher.selectedBoard != target) {
+                if (tab.selectedBoard != target) {
                     // We're sure the board actually changed
                     if (self.isConfigLocal) {
                         console.log('Board changed, unloading local config');
@@ -496,8 +497,8 @@ TABS.firmware_flasher.initialize = function (callback) {
                         ConfigStorage.set({'selected_board': target});
                     }
                 });
-                TABS.firmware_flasher.selectedBoard = target;
-                TABS.firmware_flasher.bareBoard = undefined;
+                tab.selectedBoard = target;
+                tab.bareBoard = undefined;
                 console.log('board changed to', target);
 
                 self.flashingMessage(i18n.getMessage('firmwareFlasherLoadFirmwareFile'), self.FLASH_MESSAGE_TYPES.NEUTRAL)
@@ -537,21 +538,21 @@ TABS.firmware_flasher.initialize = function (callback) {
                     const builds = [];
 
                     const finishPopulatingBuilds = function () {
-                        if (TABS.firmware_flasher.releases[target]) {
-                            TABS.firmware_flasher.bareBoard = target;
-                            populateBuilds(builds, target, undefined, false, TABS.firmware_flasher.releases[target]);
+                        if (tab.releases[target]) {
+                            tab.bareBoard = target;
+                            populateBuilds(builds, target, undefined, false, tab.releases[target]);
                         }
 
                         populateVersions(versions_e, builds, target);
                     };
 
-                    if (TABS.firmware_flasher.unifiedConfigs[target]) {
+                    if (tab.unifiedConfigs[target]) {
                         const storageTag = 'unifiedConfigLast';
                         var expirationPeriod = 3600; // One of your earth hours.
                         var checkTime = Math.floor(Date.now() / 1000); // Lets deal in seconds.
                         chrome.storage.local.get(storageTag, function (result) {
                             let storageObj = result[storageTag];
-                            const unifiedConfigList = TABS.firmware_flasher.unifiedConfigs[target];
+                            const unifiedConfigList = tab.unifiedConfigs[target];
                             const manufacturerIds = Object.keys(unifiedConfigList);
                             const duplicateName = manufacturerIds.length > 1;
 
@@ -578,7 +579,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                                         let config = cleanUnifiedConfigFile(targetConfig);
                                         if (config !== null) {
                                             const bareBoard = grabBuildNameFromConfig(config);
-                                            TABS.firmware_flasher.bareBoard = bareBoard;
+                                            tab.bareBoard = bareBoard;
 
                                             self.gitHubApi.getFileLastCommitInfo('rotorflight/rotorflight-targets', 'master', unifiedConfig.path, function (commitInfo) {
                                                 config = self.injectDefaultDesign(config, 'BTFL');
@@ -595,7 +596,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                                                 };
                                                 chrome.storage.local.set(newStorageObj);
 
-                                                populateBuilds(builds, target, manufacturerId, duplicateName, TABS.firmware_flasher.releases[bareBoard], processNext);
+                                                populateBuilds(builds, target, manufacturerId, duplicateName, tab.releases[bareBoard], processNext);
                                             });
                                         } else {
                                             failLoading(unifiedConfig.download_url);
@@ -608,7 +609,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                                     const unifiedTarget = storageObj.unifiedTarget;
 
                                     const bareBoard = grabBuildNameFromConfig(unifiedTarget.config);
-                                    TABS.firmware_flasher.bareBoard = bareBoard;
+                                    tab.bareBoard = bareBoard;
 
                                     if (target === bareBoard) {
                                         self.unifiedTarget = {};
@@ -616,7 +617,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                                         self.unifiedTarget = unifiedTarget;
                                     }
 
-                                    populateBuilds(builds, target, manufacturerId, duplicateName, TABS.firmware_flasher.releases[bareBoard], processNext);
+                                    populateBuilds(builds, target, manufacturerId, duplicateName, tab.releases[bareBoard], processNext);
                                 }
                             };
 
@@ -950,7 +951,7 @@ TABS.firmware_flasher.initialize = function (callback) {
             let detectTimer = null;
 
             function detect(port, baud) {
-                const isLoaded = TABS.firmware_flasher.releases ? Object.keys(TABS.firmware_flasher.releases).length > 0 : false;
+                const isLoaded = tab.releases ? Object.keys(tab.releases).length > 0 : false;
 
                 if (!isLoaded) {
                     GUI.log(i18n.getMessage('firmwareFlasherNoBoardsLoaded'));
@@ -963,7 +964,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                     return;
                 }
 
-                TABS.firmware_flasher.enableFlashing(false);
+                tab.enableFlashing(false);
                 GUI.connect_lock = true;
                 self.boardDetectionInProgress = true;
 
@@ -1037,7 +1038,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                 }
 
                 MSP.clearListeners();
-                TABS.firmware_flasher.enableFlashing(true);
+                tab.enableFlashing(true);
                 self.boardDetectionInProgress = false;
                 GUI.connect_lock = false;
             }
@@ -1173,7 +1174,7 @@ TABS.firmware_flasher.initialize = function (callback) {
     $('#content').load("/src/tabs/firmware_flasher.html", onDocumentLoad);
 };
 
-TABS.firmware_flasher.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     PortHandler.flush_callbacks();
     FirmwareCache.unload();
 
@@ -1188,7 +1189,7 @@ TABS.firmware_flasher.cleanup = function (callback) {
     callback?.();
 };
 
-TABS.firmware_flasher.enableFlashing = function (enabled) {
+tab.enableFlashing = function (enabled) {
     var self = this;
 
     if (enabled) {
@@ -1198,12 +1199,12 @@ TABS.firmware_flasher.enableFlashing = function (enabled) {
     }
 };
 
-TABS.firmware_flasher.FLASH_MESSAGE_TYPES = {NEUTRAL : 'NEUTRAL',
-                                             VALID   : 'VALID',
-                                             INVALID : 'INVALID',
-                                             ACTION  : 'ACTION'};
+tab.FLASH_MESSAGE_TYPES = {NEUTRAL : 'NEUTRAL',
+                           VALID   : 'VALID',
+                           INVALID : 'INVALID',
+                           ACTION  : 'ACTION'};
 
-TABS.firmware_flasher.flashingMessage = function(message, type) {
+tab.flashingMessage = function(message, type) {
     let self = this;
 
     let progressLabel_e = $('span.progressLabel');
@@ -1244,13 +1245,13 @@ TABS.firmware_flasher.flashingMessage = function(message, type) {
     return self;
 };
 
-TABS.firmware_flasher.flashProgress = function(value) {
+tab.flashProgress = function(value) {
     $('.progress').val(value);
 
     return this;
 };
 
-TABS.firmware_flasher.injectDefaultDesign = function (targetConfig, boardDesign) {
+tab.injectDefaultDesign = function (targetConfig, boardDesign) {
     const designLineRegex = /board_design [A-Za-z0-9_+-]+\n/gm;
     const nameLineRegex = /board_name [A-Za-z0-9_+-]+\n/gm;
 
@@ -1267,7 +1268,7 @@ TABS.firmware_flasher.injectDefaultDesign = function (targetConfig, boardDesign)
     return targetConfig;
 };
 
-TABS.firmware_flasher.injectTargetInfo = function (targetConfig, configName, targetName, manufacturerId, commitInfo) {
+tab.injectTargetInfo = function (targetConfig, configName, targetName, manufacturerId, commitInfo) {
     const configLineRegex = /# config: manufacturer_id: .*\n/gm;
 
     targetConfig = targetConfig.replace(configLineRegex, '');
@@ -1286,3 +1287,17 @@ TABS.firmware_flasher.injectTargetInfo = function (targetConfig, configName, tar
 
     return newConfig;
 };
+
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

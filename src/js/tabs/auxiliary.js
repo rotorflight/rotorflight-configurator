@@ -1,9 +1,10 @@
-TABS.auxiliary = {
+const tab = {
+    tabName: 'auxiliary',
     isDirty: false,
     PRIMARY_CHANNEL_COUNT: 5,
 };
 
-TABS.auxiliary.initialize = function (callback) {
+tab.initialize = function (callback) {
     const self = this;
 
     load_data(load_html);
@@ -574,9 +575,22 @@ TABS.auxiliary.initialize = function (callback) {
     }
 };
 
-TABS.auxiliary.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     this.isDirty = false;
 
     callback?.();
 };
 
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

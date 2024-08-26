@@ -1,4 +1,5 @@
-TABS.gyro = {
+const tab = {
+    tabName: 'gyro',
     isDirty: false,
     rpmFilterDirty: false,
     rpmFilterType: 0,
@@ -19,7 +20,7 @@ TABS.gyro = {
     ],
 };
 
-TABS.gyro.initialize = function (callback) {
+tab.initialize = function (callback) {
     const self = this;
 
     const FILTER_DEFAULT = FC.getFilterDefaults();
@@ -551,8 +552,22 @@ TABS.gyro.initialize = function (callback) {
 };
 
 
-TABS.gyro.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     this.isDirty = false;
 
     callback?.();
 };
+
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

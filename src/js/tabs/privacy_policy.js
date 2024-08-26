@@ -1,6 +1,8 @@
-TABS.privacy_policy = {};
+const tab = {
+    tabName: 'privacy_policy',
+};
 
-TABS.privacy_policy.initialize = function (callback) {
+tab.initialize = function (callback) {
     const tabFile = `/src/tabs/privacy_policy.html`;
 
     $('#content').html('<div id="tab-static"><div id="tab-static-contents"></div>');
@@ -12,6 +14,20 @@ TABS.privacy_policy.initialize = function (callback) {
 
 };
 
-TABS.privacy_policy.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     callback?.();
 };
+
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

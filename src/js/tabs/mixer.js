@@ -1,4 +1,7 @@
-TABS.mixer = {
+import $ from 'jquery';
+
+const tab = {
+    tabName: 'mixer',
     isDirty: false,
     needSave: false,
     needReboot: false,
@@ -20,7 +23,7 @@ TABS.mixer = {
     ],
 };
 
-TABS.mixer.initialize = function (callback) {
+tab.initialize = function (callback) {
     const self = this;
 
     function setDirty() {
@@ -504,9 +507,22 @@ TABS.mixer.initialize = function (callback) {
     }
 };
 
-TABS.mixer.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     this.isDirty = false;
 
     callback?.();
 };
 
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

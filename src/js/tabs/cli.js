@@ -1,4 +1,5 @@
-TABS.cli = {
+const tab = {
+    tabName: 'cli',
     lineDelayMs: 15,
     profileSwitchDelayMs: 100,
     outputHistory: "",
@@ -47,7 +48,7 @@ function getCliCommand(command, cliBuffer) {
 
 function copyToClipboard(text) {
     function onCopySuccessful() {
-        const button = TABS.cli.GUI.copyButton;
+        const button = tab.GUI.copyButton;
         const origText = button.text();
         const origWidth = button.css("width");
         button.text(i18n.getMessage("cliCopySuccessful"));
@@ -71,7 +72,7 @@ function copyToClipboard(text) {
     Clipboard.writeText(text, onCopySuccessful, onCopyFailed);
 }
 
-TABS.cli.initialize = function (callback) {
+tab.initialize = function (callback) {
     const self = this;
 
     self.outputHistory = "";
@@ -104,7 +105,7 @@ TABS.cli.initialize = function (callback) {
         // translate to user-selected language
         i18n.localizePage();
 
-        TABS.cli.adaptPhones();
+        tab.adaptPhones();
 
         CONFIGURATOR.cliActive = true;
 
@@ -286,7 +287,7 @@ TABS.cli.initialize = function (callback) {
     });
 };
 
-TABS.cli.adaptPhones = function() {
+tab.adaptPhones = function() {
     if ($(window).width() < 575) {
         const backdropHeight = $('.note').height() + 22 + 38;
         $('.backdrop').css('height', `calc(100% - ${backdropHeight}px)`);
@@ -297,24 +298,24 @@ TABS.cli.adaptPhones = function() {
     }
 };
 
-TABS.cli.history = {
+tab.history = {
     history: [],
     index:  0,
 };
 
-TABS.cli.history.add = function (str) {
+tab.history.add = function (str) {
     this.history.push(str);
     this.index = this.history.length;
 };
 
-TABS.cli.history.prev = function () {
+tab.history.prev = function () {
     if (this.index > 0) {
         this.index -= 1;
     }
     return this.history[this.index];
 };
 
-TABS.cli.history.next = function () {
+tab.history.next = function () {
     if (this.index < this.history.length) {
         this.index += 1;
     }
@@ -326,7 +327,7 @@ const lineFeedCode = 10;
 const carriageReturnCode = 13;
 
 function writeToOutput(text) {
-    TABS.cli.GUI.windowWrapper.append(text);
+    tab.GUI.windowWrapper.append(text);
     const cliWindow = $('.tab-cli .window');
     cliWindow.scrollTop(cliWindow.prop("scrollHeight"));
 }
@@ -348,7 +349,7 @@ function setPrompt(text) {
     $('.tab-cli textarea').val(text);
 }
 
-TABS.cli.read = function (readInfo) {
+tab.read = function (readInfo) {
     /*  Some info about handling line feeds and carriage return
 
         line feed = LF = \n = 0x0A = 10
@@ -449,15 +450,15 @@ TABS.cli.read = function (readInfo) {
     }
 };
 
-TABS.cli.sendLine = function (line, callback) {
+tab.sendLine = function (line, callback) {
     this.send(line + '\n', callback);
 };
 
-TABS.cli.sendNativeAutoComplete = function (line, callback) {
+tab.sendNativeAutoComplete = function (line, callback) {
     this.send(line + '\t', callback);
 };
 
-TABS.cli.send = function (line, callback) {
+tab.send = function (line, callback) {
     const bufferOut = new ArrayBuffer(line.length);
     const bufView = new Uint8Array(bufferOut);
 
@@ -468,10 +469,10 @@ TABS.cli.send = function (line, callback) {
     serial.send(bufferOut, callback);
 };
 
-TABS.cli.cleanup = function (callback) {
-    if (TABS.cli.GUI.snippetPreviewWindow) {
-        TABS.cli.GUI.snippetPreviewWindow.destroy();
-        TABS.cli.GUI.snippetPreviewWindow = null;
+tab.cleanup = function (callback) {
+    if (tab.GUI.snippetPreviewWindow) {
+        tab.GUI.snippetPreviewWindow.destroy();
+        tab.GUI.snippetPreviewWindow = null;
     }
 
     if (!(CONFIGURATOR.connectionValid && CONFIGURATOR.cliValid && CONFIGURATOR.cliActive)) {
@@ -494,3 +495,17 @@ TABS.cli.cleanup = function (callback) {
     CliAutoComplete.cleanup();
     $(CliAutoComplete).off();
 };
+
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}
