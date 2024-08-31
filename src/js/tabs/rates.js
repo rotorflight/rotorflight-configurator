@@ -268,7 +268,7 @@ TABS.rates.initialize = function (callback) {
             $('.tab-rates .tab-container .' + element).on('click', function () {
                 if (index != self.currentRateProfile) {
                     self.isDirty = self.isChanged;
-                    GUI.tab_switch_allowed(() => activateRateProfile(index))
+                    GUI.tab_switch_allowed(() => activateRateProfile(index));
                 }
             });
         });
