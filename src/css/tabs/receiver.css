@@ -10,11 +10,15 @@
     width: 55px;
     height: 20px;
     line-height: 20px;
-    padding: 0 3px;
+    padding-left: 3px;
     font-size: 1em;
     text-align: left;
     border: 1px solid var(--subtleAccent);
     border-radius: 3px;
+}
+
+.tab-receiver input[type="number"] {
+    text-align: right;
 }
 
 .tab-receiver select {
