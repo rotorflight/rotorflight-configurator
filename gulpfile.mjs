@@ -725,7 +725,7 @@ function getLinuxPackageArch(type, arch) {
 }
 // Create distribution package for macOS platform
 async function release_osx64(appDirectory) {
-    const appdmg = await import('./gulp-appdmg.mjs');
+    const appdmg = (await import('./gulp-appdmg.mjs')).default;
 
     // The appdmg does not generate the folder correctly, manually
     createDirIfNotExists(RELEASE_DIR);
