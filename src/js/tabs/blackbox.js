@@ -609,7 +609,6 @@ TABS.blackbox.initialize = function (callback) {
                 const writer = await window.filesystem.getWriteStream({
                     suggestedName: generateFilename(prefix, suffix),
                     description: `${suffix.toUpperCase()} files`,
-                    extension: `.${suffix}`,
                     mimeType: "application/octet-stream",
                 });
 

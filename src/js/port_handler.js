@@ -62,7 +62,7 @@ PortHandler.check_usb_devices = function (callback) {
     chrome.usb.getDevices(usbDevices, function (result) {
 
         const dfuElement = self.portPickerElement.children("[value='DFU']");
-        if (result.length) {
+        if (result?.length) {
             if (!dfuElement.length) {
                 self.portPickerElement.empty();
                 let usbText;

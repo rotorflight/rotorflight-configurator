@@ -47,12 +47,13 @@ const cordova = {
 
   async _getFileEntry(opts) {
     const extension = getFileExtension(opts.suggestedName);
-    const folder = "Rotorflight configurator";
+    const folder = window.cordova.file.externalDataDirectory;
 
     const res = await new Promise((resolve) =>
       navigator.notification.prompt(
         i18n.getMessage("dialogFileNameDescription", {
-          folder: folder,
+          folder: folder.slice("file://".length),
+          interpolation: { escapeValue: false },
         }),
         resolve,
         i18n.getMessage("dialogFileNameTitle"),
@@ -69,16 +70,8 @@ const cordova = {
       fileName += `.${extension}`;
     }
 
-    const rootEntry = await new Promise((resolve, reject) =>
-      window.resolveLocalFileSystemURL(
-        window.cordova.file.externalRootDirectory,
-        resolve,
-        reject,
-      ),
-    );
-
     const directoryEntry = await new Promise((resolve, reject) =>
-      rootEntry.getDirectory(folder, { create: true }, resolve, reject),
+      window.resolveLocalFileSystemURL(folder, resolve, reject),
     );
 
     try {

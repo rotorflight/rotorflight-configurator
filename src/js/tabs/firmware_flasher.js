@@ -928,7 +928,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                 }
             }
         });
-        
+
         const detectBoardElement = $('a.detect-board');
 
         // Notably, the portPickerElement "change" will be triggered repeatedly as it is setup on a timer in the port_handler
@@ -950,15 +950,15 @@ TABS.firmware_flasher.initialize = function (callback) {
             let targetAvailable = false;
             let mspHelper = null;
             let detectTimer = null;
-        
+
             function detect(port, baud) {
                 const isLoaded = TABS.firmware_flasher.releases ? Object.keys(TABS.firmware_flasher.releases).length > 0 : false;
-        
+
                 if (!isLoaded) {
                     GUI.log(i18n.getMessage('firmwareFlasherNoBoardsLoaded'));
                     return;
                 }
-        
+
                 if (serial.connected || serial.connectionId) {
                     console.warn('Attempting to connect while there still is a connection', serial.connected, serial.connectionId, serial.openCanceled);
                     serial.disconnect();
@@ -968,14 +968,14 @@ TABS.firmware_flasher.initialize = function (callback) {
                 TABS.firmware_flasher.enableFlashing(false);
                 GUI.connect_lock = true;
                 self.boardDetectionInProgress = true;
-        
+
                 GUI.log(i18n.getMessage('firmwareFlasherBoardDetectionInProgress'));
                 detectTimer = setTimeout(function() {
                     disconnect();
                 }, 5000); // Disconnect after 5 seconds, as board detection should happen by then.
                 serial.connect(port, {bitrate: baud}, onConnect);
             }
-        
+
             async function getBoardInfo() {
                 await MSP.promise(MSPCodes.MSP_BOARD_INFO);
                 handleMSPResponse();
@@ -988,7 +988,6 @@ TABS.firmware_flasher.initialize = function (callback) {
 
             function handleMSPResponse() {
                 let board = FC.CONFIG.boardName;
-        
                 if (board) {
                     clearTimeout(detectTimer);
 
@@ -1002,31 +1001,29 @@ TABS.firmware_flasher.initialize = function (callback) {
                     const boardSelect = $('select[name="board"]');
                     const boardSelectOptions = $('select[name="board"] option');
                     const target = boardSelect.val();
-        
+
                     boardSelectOptions.each((_, e) => {
                         if ($(e).text() === board) {
                             targetAvailable = true;
                         }
                     });
-        
                     if (targetAvailable && board !== target) {
                         boardSelect.val(board).trigger('change');
                     }
-                    
                     GUI.log(i18n.getMessage(targetAvailable ? 'firmwareFlasherBoardDetectionSucceeded' : 'firmwareFlasherBoardDetectionBoardNotFound', { boardName: board }));
                     disconnect();
                 }
             }
-        
+
             function onConnect(openInfo) {
                 if (openInfo) {
                     GUI.log(i18n.getMessage('serialPortOpened', serial.connectionType === 'serial' ? [serial.connectionId] : [openInfo.socketId]));
-                    
+
                     serial.onReceive.addListener(function (info) { MSP.read(info); });
 
                     mspHelper = new MspHelper();
                     MSP.listen(mspHelper.process_data.bind(mspHelper));
-                    
+
                     getBoardInfo();
                 } else {
                     GUI.log(i18n.getMessage('serialPortOpenFail'));
@@ -1036,11 +1033,11 @@ TABS.firmware_flasher.initialize = function (callback) {
 
             function onClose(result) {
                 GUI.log(i18n.getMessage(result ? 'serialPortClosedOk' : 'serialPortClosedFail'));
-        
+
                 if (!targetAvailable) {
                     GUI.log(i18n.getMessage('firmwareFlasherBoardDetectionFail'));
                 }
-        
+
                 MSP.clearListeners();
                 TABS.firmware_flasher.enableFlashing(true);
                 self.boardDetectionInProgress = false;
@@ -1049,20 +1046,20 @@ TABS.firmware_flasher.initialize = function (callback) {
 
             function dialogBoardDetectionMessage(title, message) {
                 const dialog = $('#dialogBoardDetectionMessage')[0];
-                
+
                 function close() {
                     $('#dialogBoardDetectionMessageAcknowledge').off('click');
                     dialog.close();
-                    $('#dialogBoardDetectionMessageTitle').html("")
-                    $('#dialogBoardDetectionMessageContent').html("")
+                    $('#dialogBoardDetectionMessageTitle').html("");
+                    $('#dialogBoardDetectionMessageContent').html("");
                 }
 
                 $('#dialogBoardDetectionMessageAcknowledge').on("click", function() {
                     close();
                 });
 
-                $('#dialogBoardDetectionMessageTitle').html(title)
-                $('#dialogBoardDetectionMessageContent').html(message)
+                $('#dialogBoardDetectionMessageTitle').html(title);
+                $('#dialogBoardDetectionMessageContent').html(message);
                 dialog.showModal();
             };
 
@@ -1081,9 +1078,9 @@ TABS.firmware_flasher.initialize = function (callback) {
                         if ($('input.flash_manual_baud').is(':checked')) {
                             baud = parseInt($('#flash_manual_baud_rate').val());
                         }
-                        board_auto_detect.detect(port, baud)
+                        board_auto_detect.detect(port, baud);
                     } else {
-                        GUI.log(i18n.getMessage('firmwareFlasher'))
+                        GUI.log(i18n.getMessage('firmwareFlasher'));
                     }
                 }
             }
