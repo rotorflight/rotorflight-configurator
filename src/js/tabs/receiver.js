@@ -750,7 +750,7 @@ TABS.receiver.initialize = function (callback) {
                     const escNum = sensorName.match(/^ESC(\d)/);
                     let desc;
                     if (escNum) {
-                        const prefix = `#${escNum[1]}`
+                        const prefix = `#${escNum[1]}`;
                         const message = i18n.getMessage(`receiverCrsfTelemetrySensor_${sensorName.replace(/^ESC\d/, 'ESC')}`);
                         desc = `${prefix} ${message}`;
                     } else {
@@ -766,7 +766,7 @@ TABS.receiver.initialize = function (callback) {
             const templ = $('#crsfTelemetrySensorTemplate li');
 
             for (let i = 0; i < mspHelper.CRSF_TELEMETRY_SENSOR_LENGTH; i++) {
-                const elem = templ.clone()
+                const elem = templ.clone();
                 elem.find('select').on('change', function() {
                     updateCrsfTelemetrySensors();
                 });
@@ -819,7 +819,7 @@ TABS.receiver.initialize = function (callback) {
         function updateCrsfTelemetrySensors() {
             const items = $('.tab-receiver .crsf-telemetry-sensors ul')
                 .children()
-                .toArray()
+                .toArray();
 
             const sensors = items.map(item => Number($(item).find('select').val()));
 

@@ -12,8 +12,8 @@
     "release": "run-script-os",
     "release:default": "NODE_ENV=production gulp release",
     "release:windows": "set NODE_ENV=production&& gulp release",
-    "lint": "eslint --ext .js,.vue src gulpfile.js gulp-appdmg.js",
-    "lint:fix": "eslint --fix src gulpfile.js gulp-appdmg.js"
+    "lint": "eslint --ext .js,.vue src gulp-appdmg.mjs",
+    "lint:fix": "eslint --fix src gulp-appdmg.mjs"
   },
   "window": {
     "icon": "images/rf_icon.png",
@@ -49,7 +49,6 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@panter/vue-i18next": "^0.15.2",
-    "bluebird": "^3.7.2",
     "i18next": "^19.0.0",
     "i18next-xhr-backend": "^3.2.2",
     "inflection": "1.12.0",
@@ -66,7 +65,7 @@
     "semver-min": "^0.7.2",
     "switchery-latest": "^0.8.2",
     "three": "^0.126.1",
-    "vue": "2.6.14"
+    "vue": "^2.7.0"
   },
   "devDependencies": {
     "@quanle94/innosetup": "^6.0.2",
@@ -76,7 +75,7 @@
     "@rollup/plugin-replace": "^4.0.0",
     "browserify": "^17.0.0",
     "command-exists": "^1.2.9",
-    "cordova-lib": "^11.0.0",
+    "cordova-lib": "^12.0.0",
     "del": "^6.1.1",
     "eslint": "^8.18.0",
     "eslint-plugin-vue": "^7.3.0",
@@ -104,7 +103,7 @@
     "targz": "^1.0.1",
     "through2": "^4.0.2",
     "vinyl-source-stream": "^2.0.0",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.7.0"
   },
   "optionalDependencies": {
     "appdmg": "^0.6.4"
