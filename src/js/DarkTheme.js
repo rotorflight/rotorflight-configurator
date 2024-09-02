@@ -1,9 +1,5 @@
 'use strict';
 
-const css_dark = [
-    './css/dark-theme.css',
-];
-
 const DarkTheme = {
     configEnabled: undefined,
 };
@@ -60,9 +56,9 @@ DarkTheme.setConfig = function (result) {
 };
 
 DarkTheme.applyDark = function () {
-    css_dark.forEach((el) => $('link[href="' + el + '"]').prop('disabled', false));
+    document.documentElement.setAttribute('data-theme', 'dark');
 };
 
 DarkTheme.applyNormal = function () {
-    css_dark.forEach((el) => $('link[href="' + el + '"]').prop('disabled', true));
+    document.documentElement.setAttribute('data-theme', 'light');
 };

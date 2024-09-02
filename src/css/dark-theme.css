@@ -1,4 +1,4 @@
-:root {
+:root[data-theme=dark] {
     --accent: #0375b4;
     --darkAccent: #203647;
     --subtleAccent: #c0c0c0;
@@ -26,278 +26,278 @@
     --pushedButton-background: #595959;
 }
 
-.background_paper {
+html[data-theme=dark] .background_paper {
     background-image: url(../images/paper-dark.png);
 }
 
-body {
+html[data-theme=dark] body {
     color: white;
 }
 
-::backdrop {
+html[data-theme=dark] ::backdrop {
     background-image: none;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-#options-window {
+html[data-theme=dark] #options-window {
     background-color: #393b3a;
 }
 
-#content {
+html[data-theme=dark] #content {
     background-color: #393b3a;
 }
 
-#content.logopen {
+html[data-theme=dark] #content.logopen {
     background-color: #393b3a;
 }
 
-#status-bar {
+html[data-theme=dark] #status-bar {
     background-color: #414443;
 }
 
-#status-bar > * ~ * {
+html[data-theme=dark] #status-bar > * ~ * {
     border-left: 1px solid #9c9c9c;
 }
 
-dialog {
+html[data-theme=dark] dialog {
     background-color: #3a3d3c;
     color:white;
     border: 1px solid #ffbb2a;
 }
 
-.note {
+html[data-theme=dark] .note {
     background-color: #4e4e4e;
     border: 1px solid #df8c27;
     color: white;
 }
 
-.content_toolbar {
+html[data-theme=dark] .content_toolbar {
     background-color: #555857;
 }
 
-.gui_box {
+html[data-theme=dark] .gui_box {
     border: 1px solid #4d4d4d;
     background-color: #393b3a;
 }
 
-.gui_warning {
+html[data-theme=dark] .gui_warning {
     background: #414443;
 }
 
-.gui_note {
+html[data-theme=dark] .gui_note {
     background: #393b3a;
 }
 
-.grey {
+html[data-theme=dark] .grey {
     background-color: #414443
 }
 
-.gui_box_bottombar {
+html[data-theme=dark] .gui_box_bottombar {
     background-color: #393b3a;
 }
 
-.fixed_band {
+html[data-theme=dark] .fixed_band {
     background-color: #393b3a;
 }
 
-.small a {
+html[data-theme=dark] .small a {
     border: 1px solid #ffbb2a;
 }
 
-#quad-status_wrapper {
+html[data-theme=dark] #quad-status_wrapper {
     color: #393b3a;
 }
 
-button {
+html[data-theme=dark] button {
     border: 1px solid #ffbb2a;
     background-color: #ffbb2a;
     color: black;
 }
 
-.default_btn a.disabled {
+html[data-theme=dark] .default_btn a.disabled {
     background-color: #595959;
     border-color: #595959;
     color: black;
 }
 
-.helpicon {
+html[data-theme=dark] .helpicon {
     background-image: url(../images/icons/cf_icon_info_white.svg);
     opacity: 0.3;
 }
-.cf .helpicon {
+html[data-theme=dark] .cf .helpicon {
     background-image: url(../images/icons/cf_icon_info_grey.svg);
     opacity: 0.4;
 }
-.cf .helpicon:hover {
+html[data-theme=dark] .cf .helpicon:hover {
     background-image: url(../images/icons/cf_icon_info_grey.svg);
     opacity: 1;
 }
 
-.gui_box_titlebar .helpicon {
+html[data-theme=dark] .gui_box_titlebar .helpicon {
     background-image: url(../images/icons/cf_icon_info_grey.svg);
 }
 
-.subtitle .helpicon {
+html[data-theme=dark] .subtitle .helpicon {
     background-image: url(../images/icons/cf_icon_info_grey.svg);
 }
 
-.cf_table td {
+html[data-theme=dark] .cf_table td {
     border-style: solid;
 }
 
-.noboarder td {
+html[data-theme=dark] .noboarder td {
     border-style: unset;
 }
 
-.noUi-target {
+html[data-theme=dark] .noUi-target {
     border-color: var(--subtleAccent) !important;
 }
 
-.noUi-background {
+html[data-theme=dark] .noUi-background {
     background: #333 !important;
 }
 
-.noUi-handle {
+html[data-theme=dark] .noUi-handle {
     background: var(--sideBackground);
     border-color: var(--subtleAccent) !important;
 }
 
-.noUi-target[disabled="disabled"] {
+html[data-theme=dark] .noUi-target[disabled="disabled"] {
     border-color: #888 !important;
 }
 
-.noUi-target[disabled="disabled"] .noUi-connect {
+html[data-theme=dark] .noUi-target[disabled="disabled"] .noUi-connect {
     background: #555 !important;
 }
 
-.noUi-target[disabled="disabled"] .noUi-handle {
+html[data-theme=dark] .noUi-target[disabled="disabled"] .noUi-handle {
     border-color: #888 !important;
 }
 
-.noUi-target[disabled="disabled"] .noUi-handle:before,
-.noUi-target[disabled="disabled"] .noUi-handle:after {
+html[data-theme=dark] .noUi-target[disabled="disabled"] .noUi-handle:before,
+html[data-theme=dark] .noUi-target[disabled="disabled"] .noUi-handle:after {
     border-color: #888 !important;
     background: #888 !important;
 }
 
-.noUi-pips {
+html[data-theme=dark] .noUi-pips {
     color: var(--mutedText);
 }
 
-.jBox-container {
+html[data-theme=dark] .jBox-container {
     background: #393b3a;
     color:white;
 }
 
-.jBox-Modal .jBox-title,
-.jBox-Confirm .jBox-title {
+html[data-theme=dark] .jBox-Modal .jBox-title,
+html[data-theme=dark] .jBox-Confirm .jBox-title {
     background: #393b3a;
     border-bottom: 1px solid #9c9c9c;
     text-shadow: 0 1px 1px #ffffff;
     color: white;
 }
 
-.jBox-pointer:after {
+html[data-theme=dark] .jBox-pointer:after {
     background: #393b3a;
 }
 
-span.value {
+html[data-theme=dark] span.value {
     background-color: #202020;
 }
 
 
 /* TABS */
 
-#tabs li.active a {
+html[data-theme=dark] #tabs li.active a {
     color: #fff;
 }
 
 
 /* ADJUSTMENTS TAB */
 
-.tab-adjustments .adjustments {
+html[data-theme=dark] .tab-adjustments .adjustments {
     background-color: #454545;
 }
 
-.tab-adjustments .adjustments tbody:nth-child(odd) {
+html[data-theme=dark] .tab-adjustments .adjustments tbody:nth-child(odd) {
     background-color: #454545;
 }
 
-.tab-adjustments .adjustments tbody {
+html[data-theme=dark] .tab-adjustments .adjustments tbody {
     background-color: #4f5150;
 }
 
-.tab-adjustments .adjustments tbody tr td {
+html[data-theme=dark] .tab-adjustments .adjustments tbody tr td {
     border-color: var(--alternativeBackground);
 }
 
-.tab-adjustments .adjustments select {
+html[data-theme=dark] .tab-adjustments .adjustments select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-adjustments .adjustments input {
+html[data-theme=dark] .tab-adjustments .adjustments input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-adjustments .adjustmentBody .value-box {
+html[data-theme=dark] .tab-adjustments .adjustmentBody .value-box {
     background: #252525;
 }
 
 
 /* AUXILIARY TAB */
 
-.tab-auxiliary .toolbox {
+html[data-theme=dark] .tab-auxiliary .toolbox {
     color: white;
 }
 
-.tab-auxiliary .mode {
+html[data-theme=dark] .tab-auxiliary .mode {
     background-color: #393b3a;
 }
 
-.tab-auxiliary .mode .info {
+html[data-theme=dark] .tab-auxiliary .mode .info {
     border-bottom: 5px solid #393b3a;
     background-color: #9e9e9e;
     color: white;
 }
 
-.tab-auxiliary .ranges {
+html[data-theme=dark] .tab-auxiliary .ranges {
     border-bottom: 5px solid #393b3a;
     background-color: #676767;
 }
 
-.tab-auxiliary .range {
+html[data-theme=dark] .tab-auxiliary .range {
     background-color: #484848;
 }
 
-.tab-auxiliary .link {
+html[data-theme=dark] .tab-auxiliary .link {
     background-color: #484848;
 }
 
-.tab-auxiliary .range .channel,.logic,.linkedTo {
+html[data-theme=dark] .tab-auxiliary .range .channel,.logic,.linkedTo {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-auxiliary .buttons a {
+html[data-theme=dark] .tab-auxiliary .buttons a {
     background-color: #333333;
     color: white;
 }
 
-.tab-auxiliary .buttons a:hover {
+html[data-theme=dark] .tab-auxiliary .buttons a:hover {
     background-color: var(--hoverButton-background);
 }
 
 
 /* BEEPERS TAB */
 
-.tab-beepers .gui_box span {
+html[data-theme=dark] .tab-beepers .gui_box span {
     color: white;
 }
 
-.tab-beepers input,
-.tab-beepers select {
+html[data-theme=dark] .tab-beepers input,
+html[data-theme=dark] .tab-beepers select {
     background-color: #3a3a3a;
     color: white;
 }
@@ -307,39 +307,39 @@ span.value {
 
 
 /* AutoComplete */
-.cli-textcomplete-dropdown {
+html[data-theme=dark] .cli-textcomplete-dropdown {
     background-color: #393b3a;
 }
-.cli-textcomplete-dropdown a {
+html[data-theme=dark] .cli-textcomplete-dropdown a {
     color: white;
 }
-.cli-textcomplete-dropdown .active {
+html[data-theme=dark] .cli-textcomplete-dropdown .active {
     background-color: var(--quietHeader);
 }
 
 
 /* CONFIGURATION TAB */
 
-.tab-configuration .gui_box span {
+html[data-theme=dark] .tab-configuration .gui_box span {
     color: white;
 }
 
-.tab-configuration input,
-.tab-configuration select {
+html[data-theme=dark] .tab-configuration input,
+html[data-theme=dark] .tab-configuration select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-configuration #interactive_block {
+html[data-theme=dark] .tab-configuration #interactive_block {
     background-color: #393b3a;
 }
 
-.tab-configuration #interactive_block a.reset {
+html[data-theme=dark] .tab-configuration #interactive_block a.reset {
     color: white;
     background-color: #575757;
 }
 
-.tab-configuration #interactive_block a.reset:hover {
+html[data-theme=dark] .tab-configuration #interactive_block a.reset:hover {
     background-color: #393b3a;
 }
 
@@ -347,110 +347,110 @@ span.value {
 
 /* FAILSAFE TAB */
 
-.tab-failsafe .number input {
+html[data-theme=dark] .tab-failsafe .number input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-failsafe .number input:disabled {
+html[data-theme=dark] .tab-failsafe .number input:disabled {
     background-color: #393b3a;
     color: grey;
 }
 
-.tab-failsafe .radioarea {
+html[data-theme=dark] .tab-failsafe .radioarea {
     background-color: #393b3a;
 }
 
-.tab-failsafe .gui_box span {
+html[data-theme=dark] .tab-failsafe .gui_box span {
     color: white;
 }
 
-.tab-failsafe .stage1 select {
+html[data-theme=dark] .tab-failsafe .stage1 select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-failsafe .modename {
+html[data-theme=dark] .tab-failsafe .modename {
     background-color: #393b3a;
 }
 
-.tab-failsafe .switchMode {
+html[data-theme=dark] .tab-failsafe .switchMode {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-failsafe .pro1 {
+html[data-theme=dark] .tab-failsafe .pro1 {
     background-image: url(../images/icons/cf_failsafe_procedure1-dark.svg);
 }
 
-.tab-failsafe .pro2 {
+html[data-theme=dark] .tab-failsafe .pro2 {
     background-image: url(../images/icons/cf_failsafe_procedure2-dark.svg);
 }
 
-.tab-failsafe .pro4 {
+html[data-theme=dark] .tab-failsafe .pro4 {
     background-image: url(../images/icons/cf_failsafe_procedure4-dark.svg);
 }
 
 
 /* FIRMWARE FLASHER TAB */
 
-.btn .disabled {
+html[data-theme=dark] .btn .disabled {
     background-color: #393b3a;
 }
 
-.gui_note .gui_box_titlebar {
+html[data-theme=dark] .gui_note .gui_box_titlebar {
     color: black;
 }
 
-.tab-firmware_flasher .options select {
+html[data-theme=dark] .tab-firmware_flasher .options select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-firmware_flasher .options .description {
+html[data-theme=dark] .tab-firmware_flasher .options .description {
     color: #b9b9b9;
 }
 
-.tab-firmware_flasher .options .manual_baud_rate select {
+html[data-theme=dark] .tab-firmware_flasher .options .manual_baud_rate select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-firmware_flasher .release_info .target {
+html[data-theme=dark] .tab-firmware_flasher .release_info .target {
     color: #98ddff;
 }
 
-.tab-firmware_flasher .cf_table td {
+html[data-theme=dark] .tab-firmware_flasher .cf_table td {
     border-bottom: solid 1px #4f4f4f;
 }
 
 
 /* GPS TAB */
 
-.tab-gps .GPS_info .head,
-.tab-gps .GPS_signal_strength .head {
+html[data-theme=dark] .tab-gps .GPS_info .head,
+html[data-theme=dark] .tab-gps .GPS_signal_strength .head {
     background-color: #393b3a;
 }
 
-.tab-gps input,
-.tab-gps select {
+html[data-theme=dark] .tab-gps input,
+html[data-theme=dark] .tab-gps select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-gps #loadmap .controls {
+html[data-theme=dark] .tab-gps #loadmap .controls {
     background-color: #393b3a;
 }
 
-.tab-gps #loadmap .controls a {
+html[data-theme=dark] .tab-gps #loadmap .controls a {
     background-color: #393b3a;
 }
 
-.tab-gps #loadmap .controls a:hover {
+html[data-theme=dark] .tab-gps #loadmap .controls a:hover {
     background-color: var(--hoverButton-background);
 }
 
-.tab-gps #loadmap .controls a:active {
+html[data-theme=dark] .tab-gps #loadmap .controls a:active {
     background-color: #393b3a;
 }
 
@@ -460,333 +460,333 @@ progress[value]::-webkit-progress-bar {
 
 /* GYRO TAB */
 
-.tab-gyro .gui_box span {
+html[data-theme=dark] .tab-gyro .gui_box span {
     color: white;
 }
 
-.tab-gyro .subtitle {
+html[data-theme=dark] .tab-gyro .subtitle {
     color: #3a3a3a;
     background-color: #a0a0a0;
 }
 
-.tab-gyro input:disabled,
-.tab-gyro select:disabled {
+html[data-theme=dark] .tab-gyro input:disabled,
+html[data-theme=dark] .tab-gyro select:disabled {
     color: var(--superSubtleAccent);
 }
 
-.tab-gyro table input {
+html[data-theme=dark] .tab-gyro table input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-gyro table select {
+html[data-theme=dark] .tab-gyro table select {
     text-align-last: right;
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-gyro .bottomarea {
+html[data-theme=dark] .tab-gyro .bottomarea {
     background-color: #393b3a;
 }
 
 /* LANDING */
 
-.tab-landing .content_top {
+html[data-theme=dark] .tab-landing .content_top {
     background-color: #00000000;
 }
 
-.tab-landing .content_mid {
+html[data-theme=dark] .tab-landing .content_mid {
     background-color: #3e3e3e;
 }
 
-.tab-landing .logowrapper img {
+html[data-theme=dark] .tab-landing .logowrapper img {
     content:url(../images/cf_logo_white.svg);
 }
 
-.tab-landing .content_mid .text3 .wrap2 {
+html[data-theme=dark] .tab-landing .content_mid .text3 .wrap2 {
     background: #5f5f5f;
 }
 
 
 /* LED STRIP TAB */
 
-.tab-led-strip .section {
+html[data-theme=dark] .tab-led-strip .section {
     color: #c4c4c4;
 }
 
-.tab-led-strip .mainGrid {
+html[data-theme=dark] .tab-led-strip .mainGrid {
     background-color: #4e4e4e;
 }
 
-.tab-led-strip button {
+html[data-theme=dark] .tab-led-strip button {
     background-color: #6b6b6b;
     color: white;
 }
 
-.tab-led-strip button:hover {
+html[data-theme=dark] .tab-led-strip button:hover {
     border: 1px solid #ffffff;
     background-color: #393b3a;
 }
 
-.tab-led-strip .gridSections,
-.tab-led-strip .gridSections .block {
+html[data-theme=dark] .tab-led-strip .gridSections,
+html[data-theme=dark] .tab-led-strip .gridSections .block {
     border: none;
 }
 
 /* MIXER TAB */
 
-.tab-mixer .gui_box span {
+html[data-theme=dark] .tab-mixer .gui_box span {
     color: white;
 }
 
-.tab-mixer .subtitle {
+html[data-theme=dark] .tab-mixer .subtitle {
     color: #3a3a3a;
     background-color: #a0a0a0;
 }
 
-.tab-mixer input:disabled,
-.tab-mixer select:disabled {
+html[data-theme=dark] .tab-mixer input:disabled,
+html[data-theme=dark] .tab-mixer select:disabled {
     color: #595959;
 }
 
-.tab-mixer table input {
+html[data-theme=dark] .tab-mixer table input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-mixer table select {
+html[data-theme=dark] .tab-mixer table select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-mixer .bottomarea {
+html[data-theme=dark] .tab-mixer .bottomarea {
     background-color: #393b3a;
 }
 
-.tab-mixer .mixerOverrideTable tbody tr:nth-child(even) {
+html[data-theme=dark] .tab-mixer .mixerOverrideTable tbody tr:nth-child(even) {
     background-color: #3f3f3f;
 }
 
-.tab-mixer .mixerOverrideTable tbody tr:nth-child(odd) {
+html[data-theme=dark] .tab-mixer .mixerOverrideTable tbody tr:nth-child(odd) {
     background-color: #393939;
 }
 
 
 /* MOTORS TAB */
 
-.tab-motors .gui_box span {
+html[data-theme=dark] .tab-motors .gui_box span {
     color: white;
 }
 
-.tab-motors input,
-.tab-motors select {
+html[data-theme=dark] .tab-motors input,
+html[data-theme=dark] .tab-motors select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-motors text {
+html[data-theme=dark] .tab-motors text {
     fill: white;
 }
 
-.tab-motors .meter-bar {
+html[data-theme=dark] .tab-motors .meter-bar {
     background-color: #3a3a3a;
 }
 
-.tab-motors .meter-label {
+html[data-theme=dark] .tab-motors .meter-label {
     color: white;
 }
 
-.tab-motors .motorOverride tbody tr:nth-child(odd) {
+html[data-theme=dark] .tab-motors .motorOverride tbody tr:nth-child(odd) {
     background-color: #3f3f3f;
 }
 
-.tab-motors .motorOverride tbody tr:nth-child(even) {
+html[data-theme=dark] .tab-motors .motorOverride tbody tr:nth-child(even) {
     background-color: #393939;
 }
 
 
 /* BLACKBOX TAB */
 
-.tab-blackbox .regular-button.disabled {
+html[data-theme=dark] .tab-blackbox .regular-button.disabled {
     background-color: #393b3a;
 }
 
-.tab-blackbox .dataflash-contents,
-.tab-blackbox .sdcard-contents {
+html[data-theme=dark] .tab-blackbox .dataflash-contents,
+html[data-theme=dark] .tab-blackbox .sdcard-contents {
     background-color: #393b3a;
 }
 
-.tab-blackbox .dataflash-used,
-.tab-blackbox .sdcard-other {
+html[data-theme=dark] .tab-blackbox .dataflash-used,
+html[data-theme=dark] .tab-blackbox .sdcard-other {
     background-color: #848484;
 }
 
-.tab-blackbox progress::-webkit-progress-bar {
+html[data-theme=dark] .tab-blackbox progress::-webkit-progress-bar {
     background-color: #393b3a;
 }
 
-.tab-blackbox .blackboxRate select,
-.tab-blackbox .blackboxMode select,
-.tab-blackbox .blackboxDebugMode select,
-.tab-blackbox .blackboxDebugAxis select,
-.tab-blackbox .blackboxDevice select {
+html[data-theme=dark] .tab-blackbox .blackboxRate select,
+html[data-theme=dark] .tab-blackbox .blackboxMode select,
+html[data-theme=dark] .tab-blackbox .blackboxDebugMode select,
+html[data-theme=dark] .tab-blackbox .blackboxDebugAxis select,
+html[data-theme=dark] .tab-blackbox .blackboxDevice select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-blackbox .sdcard-icon {
+html[data-theme=dark] .tab-blackbox .sdcard-icon {
     background-color: #393b3a;
 }
 
 /* PROFILES TAB */
 
-.tab-profiles .tab-area {
+html[data-theme=dark] .tab-profiles .tab-area {
     background: #393b3a;
 }
 
-.tab-profiles .tab-container > div {
+html[data-theme=dark] .tab-profiles .tab-container > div {
     background-color: #535655;
     border-right: 1px solid #393b3a;
 }
 
-.tab-profiles input:disabled,
-.tab-profiles select:disabled {
+html[data-theme=dark] .tab-profiles input:disabled,
+html[data-theme=dark] .tab-profiles select:disabled {
     color: #595959;
 }
 
-.tab-profiles table input {
+html[data-theme=dark] .tab-profiles table input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-profiles table select {
+html[data-theme=dark] .tab-profiles table select {
     text-align-last: right;
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-profiles .settings_table .suboption select {
+html[data-theme=dark] .tab-profiles .settings_table .suboption select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-profiles .settings_table .suboption input {
+html[data-theme=dark] .tab-profiles .settings_table .suboption input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.xxx-tab-profiles .settings_table tr {
+html[data-theme=dark] .xxx-tab-profiles .settings_table tr {
     border-bottom: 1px solid #6b6b6b;
 }
 
-.tab-profiles .ROLL .axis_title {
+html[data-theme=dark] .tab-profiles .ROLL .axis_title {
     background-color: #A00000;
 }
 
-.tab-profiles .PITCH .axis_title {
+html[data-theme=dark] .tab-profiles .PITCH .axis_title {
     background-color: #00A000;
 }
 
-.tab-profiles .YAW .axis_title {
+html[data-theme=dark] .tab-profiles .YAW .axis_title {
     background-color: #0000A0;
 }
 
-.tab-profiles .gui_box span {
+html[data-theme=dark] .tab-profiles .gui_box span {
     color: white;
 }
 
-.tab-profiles .number input {
+html[data-theme=dark] .tab-profiles .number input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-profiles .bottomarea {
+html[data-theme=dark] .tab-profiles .bottomarea {
     background-color: #393b3a;
 }
 
-.tab-profiles .regular-button.disabled {
+html[data-theme=dark] .tab-profiles .regular-button.disabled {
     background-color: #393b3a;
 }
 
 
 /* RATES TAB */
 
-.tab-rates .tab-area {
+html[data-theme=dark] .tab-rates .tab-area {
     background: #393b3a;
 }
 
-.tab-rates .tab-container > div {
+html[data-theme=dark] .tab-rates .tab-container > div {
     background-color: #535655;
     border-right: 1px solid #393b3a;
 }
 
-.tab-rates select {
+html[data-theme=dark] .tab-rates select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-rates table input {
+html[data-theme=dark] .tab-rates table input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-rates table select {
+html[data-theme=dark] .tab-rates table select {
     text-align-last: right;
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-rates .cf tr {
+html[data-theme=dark] .tab-rates .cf tr {
     background-color: #414443;
 }
 
-.tab-rates .cf th {
+html[data-theme=dark] .tab-rates .cf th {
     background-color: var(--quietHeader);
     color: white;
 }
 
-.tab-rates .cf input {
+html[data-theme=dark] .tab-rates .cf input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-rates .cf select {
+html[data-theme=dark] .tab-rates .cf select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-rates .cf .rates_logo_bg {
+html[data-theme=dark] .tab-rates .cf .rates_logo_bg {
     background-color: #ffffff33;
 }
 
-.tab-rates .ROLL .axis_title {
+html[data-theme=dark] .tab-rates .ROLL .axis_title {
     background-color: #A00000;
 }
 
-.tab-rates .PITCH .axis_title {
+html[data-theme=dark] .tab-rates .PITCH .axis_title {
     background-color: #00A000;
 }
 
-.tab-rates .YAW .axis_title {
+html[data-theme=dark] .tab-rates .YAW .axis_title {
     background-color: #0000A0;
 }
 
-.tab-rates .COLLECTIVE .axis_title {
+html[data-theme=dark] .tab-rates .COLLECTIVE .axis_title {
     background-color: #C08000;
 }
 
-.tab-rates .gui_box span {
+html[data-theme=dark] .tab-rates .gui_box span {
     color: white;
 }
 
 /* POWER TAB */
 
-.tab-power .number input {
+html[data-theme=dark] .tab-power .number input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-power .battery-configuration select {
+html[data-theme=dark] .tab-power .battery-configuration select {
     background-color: #3a3a3a;
     color: white;
 }
@@ -794,185 +794,185 @@ progress[value]::-webkit-progress-bar {
 
 /* RECEIVER TAB */
 
-.tab-receiver .gui_box span {
+html[data-theme=dark] .tab-receiver .gui_box span {
     color: white;
 }
 
-.tab-receiver input,
-.tab-receiver select {
+html[data-theme=dark] .tab-receiver input,
+html[data-theme=dark] .tab-receiver select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-receiver .channels .bar {
+html[data-theme=dark] .tab-receiver .channels .bar {
     background-color: #393b3a;
 }
 
-.tab-receiver .channels .label1,
-.tab-receiver .channels .label2 {
+html[data-theme=dark] .tab-receiver .channels .label1,
+html[data-theme=dark] .tab-receiver .channels .label2 {
     color: white;
 }
 
-.tab-receiver .tunings {
+html[data-theme=dark] .tab-receiver .tunings {
     background-color: #393b3a;
 }
 
-.tab-receiver .tunings table td {
+html[data-theme=dark] .tab-receiver .tunings table td {
     background: #414443;
 }
 
-.tab-receiver .tunings table tr:nth-child(odd) {
+html[data-theme=dark] .tab-receiver .tunings table tr:nth-child(odd) {
     background-color: #393b3a;
 }
 
-.tab-receiver .tunings table input {
+html[data-theme=dark] .tab-receiver .tunings table input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-receiver .rssi_channel_wrapper {
+html[data-theme=dark] .tab-receiver .rssi_channel_wrapper {
     background-color: #414443;
     border-bottom: 1px solid #4d4d4d;
     border-right: 1px solid #4d4d4d;
 }
 
-.tab-receiver .rcmap_wrapper {
+html[data-theme=dark] .tab-receiver .rcmap_wrapper {
     background-color: #414443;
     border-left: 1px solid #4d4d4d;
     border-bottom: 1px solid #4d4d4d;
 }
 
-.tab-receiver .hybrid_element {
+html[data-theme=dark] .tab-receiver .hybrid_element {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
-.tab-receiver .hybrid_element input {
+html[data-theme=dark] .tab-receiver .hybrid_element input {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-receiver .plot_control {
+html[data-theme=dark] .tab-receiver .plot_control {
     background-color: #2f2f2f;
 }
 
-.tab-receiver text {
+html[data-theme=dark] .tab-receiver text {
     fill: white;
 }
 
 
 /* SENSORS TAB */
 
-.tab-sensors .plot_control {
+html[data-theme=dark] .tab-sensors .plot_control {
     background-color: #2f2f2f;
 }
 
-.tab-sensors .plot_control select {
+html[data-theme=dark] .tab-sensors .plot_control select {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-sensors text {
+html[data-theme=dark] .tab-sensors text {
     fill: white;
 }
 
 
 /* SERVOS TAB */
 
-.tab-servos .gui_box span {
+html[data-theme=dark] .tab-servos .gui_box span {
     color: white;
 }
 
-.tab-servos .servoConfig {
+html[data-theme=dark] .tab-servos .servoConfig {
     background-color: #393b3a;
     color: white;
 }
 
-.tab-servos .servoConfig td {
+html[data-theme=dark] .tab-servos .servoConfig td {
     border-color: #575757;
 }
 
-.tab-servos .servoConfig tbody tr {
+html[data-theme=dark] .tab-servos .servoConfig tbody tr {
     background-color: #414443;
 }
 
-.tab-servos .servoConfig tbody tr:nth-child(even) {
+html[data-theme=dark] .tab-servos .servoConfig tbody tr:nth-child(even) {
     background-color: #3f3f3f;
 }
 
-.tab-servos input[type="number"] {
+html[data-theme=dark] .tab-servos input[type="number"] {
     background-color: #3a3a3a;
     color: white;
 }
 
-.tab-servos .meter-bar {
+html[data-theme=dark] .tab-servos .meter-bar {
     background-color: #3a3a3a;
 }
 
-.tab-servos .meter-label {
+html[data-theme=dark] .tab-servos .meter-label {
     color: white;
 }
 
-.tab-servos .servoOverride tbody tr:nth-child(odd) {
+html[data-theme=dark] .tab-servos .servoOverride tbody tr:nth-child(odd) {
     background-color: #3f3f3f;
 }
 
-.tab-servos .servoOverride tbody tr:nth-child(even) {
+html[data-theme=dark] .tab-servos .servoOverride tbody tr:nth-child(even) {
     background-color: #393939;
 }
 
 
 /* STATUS TAB */
 
-.tab-status #interactive_block {
+html[data-theme=dark] .tab-status #interactive_block {
     background-color: #393b3a;
 }
 
-.tab-status .attitude_info {
+html[data-theme=dark] .tab-status .attitude_info {
     color: white;
 }
 
-.tab-status #interactive_block a.reset {
+html[data-theme=dark] .tab-status #interactive_block a.reset {
     color: white;
     background-color: #575757;
 }
 
-.tab-status #interactive_block a.reset:hover {
+html[data-theme=dark] .tab-status #interactive_block a.reset:hover {
     background-color: #393b3a;
 }
 
-.tab-status .bars .bar {
+html[data-theme=dark] .tab-status .bars .bar {
     background-color: #393b3a;
     border: 1px solid #c0c0c0;
 }
 
-.tab-status .bars .label1,
-.tab-status .bars .label2 {
+html[data-theme=dark] .tab-status .bars .label1,
+html[data-theme=dark] .tab-status .bars .label2 {
     color: white;
 }
 
 
 /* SELECT2 */
 
-.select2-container .select2-selection--single .select2-selection__rendered {
+html[data-theme=dark] .select2-container .select2-selection--single .select2-selection__rendered {
     background-color: #3a3a3a !important;
 }
 
-.select2-selection__arrow b {
+html[data-theme=dark] .select2-selection__arrow b {
     border-bottom: 1.5px solid white !important;
     border-right: 1.5px solid white !important;
 }
 
-.select2-search--dropdown {
+html[data-theme=dark] .select2-search--dropdown {
     background-color: #3a3a3a !important;
 }
 
-.select2-search--dropdown .select2-search__field {
+html[data-theme=dark] .select2-search--dropdown .select2-search__field {
     border: 1px solid var(--subtleAccent) !important;
     background-color: #3a3a3a !important;
     color: white !important;
 }
 
-.select2-results>.select2-results__options {
+html[data-theme=dark] .select2-results>.select2-results__options {
     background-color: #3a3a3a !important;
 }

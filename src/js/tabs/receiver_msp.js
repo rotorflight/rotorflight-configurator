@@ -1,9 +1,5 @@
 "use strict";
 
-const css_dark = [
-    '/css/dark-theme.css',
-];
-
 const CHANNEL_MIN_VALUE = 1000;
 const CHANNEL_MID_VALUE = 1500;
 const CHANNEL_MAX_VALUE = 2000;
@@ -46,9 +42,9 @@ const i18n = window.i18n;
 const watchers = {
     darkTheme: (val) => {
         if (val) {
-            applyDarkTheme();
+            DarkTheme.applyDark();
         } else {
-            applyNormalTheme();
+            DarkTheme.applyNormal();
         }
     }
 };
@@ -62,16 +58,6 @@ $(document).ready(function () {
 
     windowWatcherUtil.bindWatchers(window, watchers);
 });
-
-function applyDarkTheme()
-{
-    css_dark.forEach((el) => $('link[href="' + el + '"]').prop('disabled', false));
-}
-
-function applyNormalTheme()
-{
-    css_dark.forEach((el) => $('link[href="' + el + '"]').prop('disabled', true));
-}
 
 function localizeAxisNames()
 {
