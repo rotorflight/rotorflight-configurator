@@ -42,10 +42,10 @@ windowWatcherUtil.passValue = function(windows, key, val) {
            return;
         }
 
-        if (win.contentWindow.bindings) {
-            win.contentWindow.bindings[key] = val;
+        if (win.bindings) {
+            win.bindings[key] = val;
         } else {
-            win.contentWindow.bindings = {
+            win.bindings = {
                 [key]: val
             };
         }

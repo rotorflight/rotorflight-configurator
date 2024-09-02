@@ -26,15 +26,18 @@ DarkTheme.isDarkThemeEnabled = function (callback) {
 
 DarkTheme.apply = function() {
     const self = this;
-    this.isDarkThemeEnabled(function(isEnabled) {
+    this.isDarkThemeEnabled(async function(isEnabled) {
         if (isEnabled) {
             self.applyDark();
         } else {
             self.applyNormal();
         }
 
-        if (chrome.app.window !== undefined) {
-            windowWatcherUtil.passValue(chrome.app.window.get("receiver_msp"), 'darkTheme', isEnabled);
+        if (nw) {
+            const windows = await new Promise(resolve => nw.Window.getAll(resolve));
+            for (const win of windows) {
+                windowWatcherUtil.passValue(win.window, 'darkTheme', isEnabled);
+            }
         }
     });
 };

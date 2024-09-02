@@ -37,7 +37,7 @@ var sliderElems;
 var enableTX = false;
 
 // This is a hack to get the i18n var of the parent, but the localizePage not works
-const i18n = opener.i18n;
+const i18n = window.i18n;
 
 const watchers = {
     darkTheme: (val) => {
@@ -82,7 +82,7 @@ function transmitChannels()
         // Callback given to us by the window creator so we can have it send data over MSP for us:
         if (!window.setRawRx(channelValues)) {
             // MSP connection has gone away
-            chrome.app.window.current().close();
+            nw.Window.get().close();
         }
     }
 }
@@ -152,9 +152,8 @@ $(document).ready(function() {
         const shrinkHeight = $(".warning").height() + 25;
 
         $(".warning").slideUp("short", function() {
-            chrome.app.window.current().innerBounds.height -= shrinkHeight;
-            chrome.app.window.current().innerBounds.minHeight -= shrinkHeight;
-            chrome.app.window.current().innerBounds.maxHeight -= shrinkHeight;
+            const win = nw.Window.get();
+            win.resizeBy(0, -shrinkHeight);
         });
 
         enableTX = true;

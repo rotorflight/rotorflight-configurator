@@ -1167,17 +1167,16 @@ TABS.receiver.initialize = function (callback) {
             const windowWidth = 370;
             const windowHeight = 510;
 
-            chrome.app.window.create("/tabs/receiver_msp.html", {
+            nw.Window.open("/tabs/receiver_msp.html", {
                 id: "receiver_msp",
-                innerBounds: {
-                    width: windowWidth, height: windowHeight,
-                    minWidth: windowWidth, minHeight: windowHeight,
-                    maxWidth: windowWidth, maxHeight: windowHeight
-                },
-                alwaysOnTop: true
+                always_on_top: true,
+                max_width: windowWidth, max_height: windowHeight,
             }, function(createdWindow) {
+                createdWindow.resizeTo(windowWidth, windowHeight);
+                createdWindow.window.i18n = i18n;
+
                 // Give the window a callback it can use to send the channels (otherwise it can't see those objects)
-                createdWindow.contentWindow.setRawRx = function(channels) {
+                createdWindow.window.setRawRx = function(channels) {
                     if (CONFIGURATOR.connectionValid && GUI.active_tab != 'cli') {
                         const data = [];
                         FC.RC_MAP.forEach((axis, channel) => {
@@ -1191,7 +1190,7 @@ TABS.receiver.initialize = function (callback) {
                 };
 
                 DarkTheme.isDarkThemeEnabled(function(isEnabled) {
-                    windowWatcherUtil.passValue(createdWindow, 'darkTheme', isEnabled);
+                    windowWatcherUtil.passValue(createdWindow.window, 'darkTheme', isEnabled);
                 });
 
             });
