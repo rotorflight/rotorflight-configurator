@@ -30,6 +30,7 @@ TABS.motors = {
         "ZTW",
         "APD",
         "OpenYGE",
+        "FlyRotor",
         "Custom",
     ],
     govModes: [
