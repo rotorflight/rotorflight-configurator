@@ -14,6 +14,7 @@ all: apps
 
 init:
 	yarn install
+	@ln -s ../node_modules/@fortawesome/fontawesome-free/webfonts public/webfonts
 
 apps:
 	yarn gulp apps
