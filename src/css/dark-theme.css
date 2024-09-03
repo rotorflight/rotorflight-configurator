@@ -27,7 +27,7 @@
 }
 
 html[data-theme=dark] .background_paper {
-    background-image: url(../images/paper-dark.png);
+    background-image: url(/images/paper-dark.png);
 }
 
 html[data-theme=dark] body {
@@ -121,24 +121,24 @@ html[data-theme=dark] .default_btn a.disabled {
 }
 
 html[data-theme=dark] .helpicon {
-    background-image: url(../images/icons/cf_icon_info_white.svg);
+    background-image: url(/images/icons/cf_icon_info_white.svg);
     opacity: 0.3;
 }
 html[data-theme=dark] .cf .helpicon {
-    background-image: url(../images/icons/cf_icon_info_grey.svg);
+    background-image: url(/images/icons/cf_icon_info_grey.svg);
     opacity: 0.4;
 }
 html[data-theme=dark] .cf .helpicon:hover {
-    background-image: url(../images/icons/cf_icon_info_grey.svg);
+    background-image: url(/images/icons/cf_icon_info_grey.svg);
     opacity: 1;
 }
 
 html[data-theme=dark] .gui_box_titlebar .helpicon {
-    background-image: url(../images/icons/cf_icon_info_grey.svg);
+    background-image: url(/images/icons/cf_icon_info_grey.svg);
 }
 
 html[data-theme=dark] .subtitle .helpicon {
-    background-image: url(../images/icons/cf_icon_info_grey.svg);
+    background-image: url(/images/icons/cf_icon_info_grey.svg);
 }
 
 html[data-theme=dark] .cf_table td {
@@ -380,15 +380,15 @@ html[data-theme=dark] .tab-failsafe .switchMode {
 }
 
 html[data-theme=dark] .tab-failsafe .pro1 {
-    background-image: url(../images/icons/cf_failsafe_procedure1-dark.svg);
+    background-image: url(/images/icons/cf_failsafe_procedure1-dark.svg);
 }
 
 html[data-theme=dark] .tab-failsafe .pro2 {
-    background-image: url(../images/icons/cf_failsafe_procedure2-dark.svg);
+    background-image: url(/images/icons/cf_failsafe_procedure2-dark.svg);
 }
 
 html[data-theme=dark] .tab-failsafe .pro4 {
-    background-image: url(../images/icons/cf_failsafe_procedure4-dark.svg);
+    background-image: url(/images/icons/cf_failsafe_procedure4-dark.svg);
 }
 
 
@@ -500,7 +500,7 @@ html[data-theme=dark] .tab-landing .content_mid {
 }
 
 html[data-theme=dark] .tab-landing .logowrapper img {
-    content:url(../images/cf_logo_white.svg);
+    content:url(/images/cf_logo_white.svg);
 }
 
 html[data-theme=dark] .tab-landing .content_mid .text3 .wrap2 {

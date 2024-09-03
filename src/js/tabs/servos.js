@@ -41,7 +41,7 @@ TABS.servos.initialize = function (callback) {
     }
 
     function load_html() {
-        $('#content').load("./tabs/servos.html", process_html);
+        $('#content').load("/src/tabs/servos.html", process_html);
     }
 
     function process_html() {

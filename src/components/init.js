@@ -2,7 +2,7 @@
 // `i18n` helper to window and setting up `i18next`
 // in the future it should be pure. This means it should
 // explicitly export things used by other parts of the app.
-import '../js/localization.js';
+import '@/js/localization.js';
 import i18next from 'i18next';
 import Vue from "vue";
 import vueI18n from "./vueI18n.js";

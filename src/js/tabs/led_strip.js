@@ -36,7 +36,7 @@ TABS.led_strip.initialize = function (callback) {
     }
 
     function load_html() {
-        $('#content').load("./tabs/led_strip.html", process_html);
+        $('#content').load("/src/tabs/led_strip.html", process_html);
     }
 
     self.wireMode = false;

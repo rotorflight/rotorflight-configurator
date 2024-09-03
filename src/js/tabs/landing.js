@@ -2,7 +2,7 @@
 
 TABS.landing = {};
 TABS.landing.initialize = function (callback) {
-  $('#content').load("./tabs/landing.html", function () {
+  $('#content').load("/src/tabs/landing.html", function () {
     function showLang(newLang) {
       bottomSection = $('.languageSwitcher');
       bottomSection.find('a').each(function(index) {

@@ -57,7 +57,7 @@ const Model = function (wrapper, canvas) {
 
 Model.prototype.loadGLTF = function (model_file, callback) {
     const loader = new THREE.GLTFLoader();
-    loader.load('./resources/models/' + model_file + '.gltf', function (gltf) {
+    loader.load('/resources/models/' + model_file + '.gltf', function (gltf) {
         callback(gltf.scene);
     });
 };

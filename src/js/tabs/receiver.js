@@ -470,7 +470,7 @@ TABS.receiver.initialize = function (callback) {
     load_data(load_html);
 
     function load_html() {
-        $('#content').load("./tabs/receiver.html", process_html);
+        $('#content').load("/src/tabs/receiver.html", process_html);
     }
 
     function load_data(callback) {
@@ -1167,7 +1167,7 @@ TABS.receiver.initialize = function (callback) {
             const windowWidth = 370;
             const windowHeight = 510;
 
-            nw.Window.open("/tabs/receiver_msp.html", {
+            nw.Window.open("/src/tabs/receiver_msp.html", {
                 id: "receiver_msp",
                 always_on_top: true,
                 max_width: windowWidth, max_height: windowHeight,

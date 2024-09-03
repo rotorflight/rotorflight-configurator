@@ -80,7 +80,7 @@ TABS.motors.initialize = function (callback) {
     }
 
     function load_html() {
-        $('#content').load("./tabs/motors.html", process_html);
+        $('#content').load("/src/tabs/motors.html", process_html);
     }
 
     function process_html() {
