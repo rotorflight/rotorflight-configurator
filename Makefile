@@ -12,9 +12,18 @@ SEMVER ?= 0.0.0
 
 all: apps
 
-init:
+init: node_modules fontawesome
+
+.PHONY: node_modules
+node_modules:
 	yarn install
-	@ln -s ../node_modules/@fortawesome/fontawesome-free/webfonts public/webfonts
+
+.PHONY: fontawesome
+fontawesome:
+	mkdir -p public/fontawesome/css
+	mkdir -p public/fontawesome/webfonts
+	cp ./node_modules/@fortawesome/fontawesome-free/css/all.min.css public/fontawesome/css/all.min.css
+	cp ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid* public/fontawesome/webfonts
 
 apps:
 	yarn gulp apps
