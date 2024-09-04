@@ -12,14 +12,14 @@ SEMVER ?= 0.0.0
 
 all: apps
 
-init: node_modules fontawesome
-
-.PHONY: node_modules
-node_modules:
+init:
 	yarn install
+
+	$(MAKE) fontawesome
 
 .PHONY: fontawesome
 fontawesome:
+	rm -fr public/fontawesome
 	mkdir -p public/fontawesome/css
 	mkdir -p public/fontawesome/webfonts
 	cp ./node_modules/@fortawesome/fontawesome-free/css/all.min.css public/fontawesome/css/all.min.css
