@@ -14,7 +14,7 @@ debug/
 release/
 testresults/
 .eslintcache
-public/webfonts
+public/fontawesome
 
 # OSX
 .DS_store
