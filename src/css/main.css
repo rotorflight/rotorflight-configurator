@@ -1026,6 +1026,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 #tabs {
     font-size: 13px;
+    overflow-x: hidden;
 }
 
 .header-wrapper .mode-connected {
@@ -1055,11 +1056,10 @@ input[type="number"]::-webkit-inner-spin-button {
 #tabs li a {
     font-weight: normal;
     padding-left: 33px;
-    padding-top: 5px;
-    padding-bottom: 3px;
     background-color: transparent;
     color: #999999;
-    height: 23px;
+    height: 30px;
+    line-height: 30px;
     display: block;
     text-shadow: 0 1px rgba(0, 0, 0, 0.45);
     transition: none;
@@ -1098,7 +1098,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .tabicon {
     background-repeat: no-repeat;
     background-size: 15px;
-    background-position: 13px 7px;
+    background-position: 13px center;
 }
 
 @media only screen and (max-height: 750px) , only screen and (max-device-height: 750px) {
@@ -1110,18 +1110,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 @media only screen and (max-width: 1055px) , only screen and (max-device-width: 1055px) {
     #tabs li a {
-        font-weight: normal;
-        font-size: 12px;
-        padding-left: 60px;
-        padding-top: 6px;
-        padding-bottom: 2px;
-        content: "";
-        text-shadow: none;
-        transition: none;
-        /* following is just for a graceful degradation */
-        text-overflow: clip;
-        white-space: nowrap;
-        overflow: hidden;
+        font-size: 0;
     }
 
     .tab_container {
@@ -1441,8 +1430,7 @@ li.active .ic_transponder {
 }
 
 .ic_power {
-    background-image: url(../images/icons/cf_icon_power_grey.svg);
-    background-position-y: 9px;
+    background-image: url(/images/icons/cf_icon_power_grey.svg);
 }
 
 .ic_power:hover {
