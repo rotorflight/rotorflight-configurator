@@ -40,4 +40,8 @@ export default defineConfig({
     __APP_VERSION__: JSON.stringify(pkg.version),
     __COMMIT_HASH__: JSON.stringify(commitHash),
   },
+  server: {
+    port: 5077,
+    strictPort: true,
+  },
 });
