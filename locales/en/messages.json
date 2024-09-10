@@ -3069,6 +3069,12 @@
     "motorsEscTelemetryProtocolHelp": {
         "message": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC."
     },
+    "motorsEscTelemetryHalfDuplex": {
+        "message": "One-wire Communication (Half-Duplex)"
+    },
+    "motorsEscTelemetryPinswap": {
+        "message": "Pin Swap (Swap Rx and Tx pins)"
+    },
     "motorsUnsyncedPwm": {
         "message": "Unsyncronised ESC update"
     },
