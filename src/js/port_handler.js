@@ -40,10 +40,24 @@ PortHandler.check = function () {
     }, TIMEOUT_CHECK);
 };
 
+function portRecognized(portName, pathSelect) {
+    const OS = GUI.operating_system;
+    if (portName) {
+            const isWindows = (OS === 'Windows');
+            const isTty = pathSelect.includes('tty');
+            const deviceRecognized = portName.includes('STM') || portName.includes('CP210');
+            const legacyDeviceRecognized = portName.includes('usb');
+            if (isWindows && deviceRecognized || isTty && (deviceRecognized || legacyDeviceRecognized)) {
+                return true
+            }
+    }
+    return false
+}
+
 PortHandler.check_serial_devices = function () {
     const self = this;
 
-    serial.getDevices(function(currentPorts) {
+    serial.getDevices(portRecognized, function(currentPorts) {
 
         // auto-select port (only during initialization)
         if (!self.initialPorts) {
@@ -255,11 +269,7 @@ PortHandler.selectPort = function(ports) {
         const portName = ports[i].displayName;
         if (portName) {
             const pathSelect = ports[i].path;
-            const isWindows = (OS === 'Windows');
-            const isTty = pathSelect.includes('tty');
-            const deviceRecognized = portName.includes('STM') || portName.includes('CP210');
-            const legacyDeviceRecognized = portName.includes('usb');
-            if (isWindows && deviceRecognized || isTty && (deviceRecognized || legacyDeviceRecognized)) {
+            if (portRecognized(portName, pathSelect)) {
                 this.portPickerElement.val(pathSelect);
                 console.log(`Porthandler detected device ${portName} on port: ${pathSelect}`);
             }

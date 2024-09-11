@@ -152,6 +152,33 @@ function initializeSerialBackend() {
         });
     });
 
+    // show all ports
+    ConfigStorage.get('show_all_ports', function (result) {
+        if (result.show_all_ports === undefined || !result.show_all_ports) {
+            GUI.show_all_ports = false;
+            $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsDisabled'));
+            $('input.show_all_ports').prop('checked', false);
+        } else {
+            GUI.show_all_ports = true;
+            $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsEnabled'));
+            $('input.show_all_ports').prop('checked', true);
+        }
+
+        // bind UI hook to show all ports checkbox
+        $('input.show_all_ports').on("change", function () {
+            GUI.show_all_ports = $(this).is(':checked');
+
+            // update title/tooltip
+            if (GUI.show_all_ports) {
+                $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsEnabled'));
+            } else {
+                $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsDisabled'));
+            }
+
+            ConfigStorage.set({'show_all_ports': GUI.show_all_ports});
+        });
+    });
+
     PortHandler.initialize();
     PortUsage.initialize();
 }
