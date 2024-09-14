@@ -43,10 +43,13 @@ TABS.rates = {
     RATE_PROFILE_MASK: 128,
     rcChannels: [ 0, 0, 0, 0, ],
     oldChannels: [ 0, 0, 0, 0, ],
+    accelMultiplier: null,
 };
 
 TABS.rates.initialize = function (callback) {
     const self = this;
+
+    self.accelMultiplier = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7) ? 1 : 10;
 
     load_data(load_html);
 
@@ -119,10 +122,10 @@ TABS.rates.initialize = function (callback) {
         FC.RC_TUNING.collective_response_time = getIntegerValue('.tab-rates input[name="coll_response"]');
 
         // Rates acceleration limits
-        FC.RC_TUNING.roll_accel_limit = getIntegerValue('.tab-rates input[name="roll_accel"]', 0.1);
-        FC.RC_TUNING.pitch_accel_limit = getIntegerValue('.tab-rates input[name="pitch_accel"]', 0.1);
-        FC.RC_TUNING.yaw_accel_limit = getIntegerValue('.tab-rates input[name="yaw_accel"]', 0.1);
-        FC.RC_TUNING.collective_accel_limit = getIntegerValue('.tab-rates input[name="coll_accel"]', 0.1);
+        FC.RC_TUNING.roll_accel_limit = getIntegerValue('.tab-rates input[name="roll_accel"]', 1 / self.accelMultiplier);
+        FC.RC_TUNING.pitch_accel_limit = getIntegerValue('.tab-rates input[name="pitch_accel"]', 1 / self.accelMultiplier);
+        FC.RC_TUNING.yaw_accel_limit = getIntegerValue('.tab-rates input[name="yaw_accel"]', 1 / self.accelMultiplier);
+        FC.RC_TUNING.collective_accel_limit = getIntegerValue('.tab-rates input[name="coll_accel"]', 1 / self.accelMultiplier);
 
         // catch RC_tuning changes
         const roll_pitch_rate_e = $('.rates_setup input[name="roll_pitch_rate"]');
@@ -336,6 +339,17 @@ TABS.rates.initialize = function (callback) {
                     updateNeeded = false;
                 }
             }, 0);
+        }
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+            $('.tab-rates .rateDynamic .accel').append(' [ms]');
+
+            $('.tab-rates input[name="roll_accel"]').attr('step', 1).attr('max', 500);
+            $('.tab-rates input[name="pitch_accel"]').attr('step', 1).attr('max', 500);
+            $('.tab-rates input[name="yaw_accel"]').attr('step', 1).attr('max', 500);
+            $('.tab-rates input[name="coll_accel"]').attr('step', 1).attr('max', 500);
+        } else {
+            $('.tab-rates .rateDynamic .accel').append(' [°/s²]');
         }
 
         $('.rates_change').on('input change', updateRates).trigger('input');
@@ -1113,10 +1127,10 @@ TABS.rates.initRatesSystem = function() {
     $('.tab-rates input[name="yaw_response"]').val(self.currentRates.yaw_response_time);
     $('.tab-rates input[name="coll_response"]').val(self.currentRates.collective_response_time);
 
-    $('.tab-rates input[name="roll_accel"]').val(self.currentRates.roll_accel_limit * 10);
-    $('.tab-rates input[name="pitch_accel"]').val(self.currentRates.pitch_accel_limit * 10);
-    $('.tab-rates input[name="yaw_accel"]').val(self.currentRates.yaw_accel_limit * 10);
-    $('.tab-rates input[name="coll_accel"]').val(self.currentRates.collective_accel_limit * 10);
+    $('.tab-rates input[name="roll_accel"]').val(self.currentRates.roll_accel_limit * self.accelMultiplier);
+    $('.tab-rates input[name="pitch_accel"]').val(self.currentRates.pitch_accel_limit * self.accelMultiplier);
+    $('.tab-rates input[name="yaw_accel"]').val(self.currentRates.yaw_accel_limit * self.accelMultiplier);
+    $('.tab-rates input[name="coll_accel"]').val(self.currentRates.collective_accel_limit * self.accelMultiplier);
 };
 
 TABS.rates.changeRatesLogo = function() {

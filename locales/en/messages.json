@@ -4783,7 +4783,7 @@
         "message": "Dynamics"
     },
     "rateSetupAcceleration": {
-        "message": "Max Acceleration [°/s²]"
+        "message": "Max Acceleration"
     },
     "rateSetupResponse": {
         "message": "Response Time [ms]"

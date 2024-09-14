@@ -6962,8 +6962,8 @@
         "status": "New entry. Please translate!"
     },
     "rateSetupAcceleration": {
-        "message": "Max Acceleration [°/s²]",
-        "english": "Max Acceleration [°/s²]",
+        "message": "Max Acceleration",
+        "english": "Max Acceleration",
         "status": "New entry. Please translate!"
     },
     "rateSetupResponse": {

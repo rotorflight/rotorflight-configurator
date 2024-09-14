@@ -5658,8 +5658,8 @@
         "english": "Dynamics"
     },
     "rateSetupAcceleration": {
-        "message": "最大加速度 [°/s²]",
-        "english": "Max Acceleration [°/s²]"
+        "message": "最大加速度",
+        "english": "Max Acceleration"
     },
     "rateSetupResponse": {
         "message": "反應時間 [ms]",
