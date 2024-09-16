@@ -33,8 +33,8 @@ DarkTheme.apply = function() {
             self.applyNormal();
         }
 
-        if (nw) {
-            const windows = await new Promise(resolve => nw.Window.getAll(resolve));
+        if (GUI.isNWJS()) {
+            const windows = await new Promise(resolve => GUI.nwGui.Window.getAll(resolve));
             for (const win of windows) {
                 windowWatcherUtil.passValue(win.window, 'darkTheme', isEnabled);
             }
