@@ -15,7 +15,7 @@
 .tab-landing .content_top {
     height: 140px;
     padding: 20px;
-    background: #fff url(../../images/pattern.png);
+    background: #fff url(/images/pattern.png);
     background-size: 300px;
 }
 

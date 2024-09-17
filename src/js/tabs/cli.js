@@ -101,7 +101,7 @@ TABS.cli.initialize = function (callback) {
         }
     }
 
-    $('#content').load("./tabs/cli.html", function () {
+    $('#content').load("/src/tabs/cli.html", function () {
 
         // translate to user-selected language
         i18n.localizePage();

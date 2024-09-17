@@ -100,7 +100,7 @@
     display: none;
     text-align: center;
     padding-top: 0px;
-    background-image: url(../../images/loading-bars.svg);
+    background-image: url(/images/loading-bars.svg);
     background-position: center 50%;
     background-size: 10%;
     background-repeat: no-repeat;

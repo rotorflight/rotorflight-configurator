@@ -81,7 +81,7 @@ TABS.motors.initialize = function (callback) {
     }
 
     function load_html() {
-        $('#content').load("./tabs/motors.html", process_html);
+        $('#content').load("/src/tabs/motors.html", process_html);
     }
 
     function process_html() {
@@ -378,6 +378,28 @@ TABS.motors.initialize = function (callback) {
             telemProtocolSelect.append(`<option value="${index}" ${disabled}>${value}</option>`);
         });
         telemProtocolSelect.val(self.isEscSensorEnabled ? FC.ESC_SENSOR_CONFIG.protocol : 0);
+        telemProtocolSelect.on('change', function() {
+            FC.ESC_SENSOR_CONFIG.protocol = parseInt($(this).val());
+            FC.FEATURE_CONFIG.features.setFeature('ESC_SENSOR', FC.ESC_SENSOR_CONFIG.protocol  > 0);
+            self.isEscSensorEnabled = FC.FEATURE_CONFIG.features.isEnabled('ESC_SENSOR');
+
+            toggleTelemFields();
+        });
+
+        function toggleTelemFields() {
+            escTelemetryHalfDuplex.closest('.field').toggle(self.isEscSensorEnabled);
+
+            const showPinswap = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7) && self.isEscSensorEnabled;
+            escTelemetryPinswap.closest('.field').toggle(showPinswap);
+        }
+
+        const escTelemetryHalfDuplex = $('input[id="escTelemetryHalfDuplex"]');
+        escTelemetryHalfDuplex.prop('checked', !!FC.ESC_SENSOR_CONFIG.half_duplex);
+
+        const escTelemetryPinswap = $('input[id="escTelemetryPinswap"]');
+        escTelemetryPinswap.prop('checked', !!FC.ESC_SENSOR_CONFIG.pinswap);
+
+        toggleTelemFields();
 
         const govModeSelect = $('select[id="govMode"]');
         self.govModes.forEach(function(value,index) {
@@ -462,6 +484,9 @@ TABS.motors.initialize = function (callback) {
             const telemProto =  parseInt($('select[id="telemetryProtocol"]').val());
             FC.ESC_SENSOR_CONFIG.protocol = telemProto;
             FC.FEATURE_CONFIG.features.setFeature('ESC_SENSOR', telemProto > 0);
+
+            FC.ESC_SENSOR_CONFIG.half_duplex = +escTelemetryHalfDuplex.is(':checked');
+            FC.ESC_SENSOR_CONFIG.pinswap = +escTelemetryPinswap.is(':checked');
 
             const govMode = parseInt(govModeSelect.val());
             FC.GOVERNOR.gov_mode = govMode;

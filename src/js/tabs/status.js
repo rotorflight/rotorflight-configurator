@@ -73,7 +73,7 @@ TABS.status.initialize = function (callback) {
     load_data(load_html);
 
     function load_html() {
-        $('#content').load("./tabs/status.html", process_html);
+        $('#content').load("/src/tabs/status.html", process_html);
     }
 
     function load_data(callback) {
@@ -109,7 +109,7 @@ TABS.status.initialize = function (callback) {
         $('span.heading').text(i18n.getMessage('statusAttitude', [0]));
 
         // Flight instruments
-        const options = { size:90, showBox : false, img_directory: 'images/flightindicators/' };
+        const options = { size:90, showBox : false, img_directory: '/images/flightindicators/' };
         const attitude = $.flightIndicator('#attitude', 'attitude', options);
         const heading  = $.flightIndicator('#heading', 'heading', options);
         const altitude = $.flightIndicator('#altitude', 'altimeter', options);

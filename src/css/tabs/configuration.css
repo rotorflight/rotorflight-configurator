@@ -239,19 +239,19 @@
 }
 
 .tab-configuration .pitch {
-    background-image: url(../../images/icons/cf_icon_pitch.svg);
+    background-image: url(/images/icons/cf_icon_pitch.svg);
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .tab-configuration .yaw {
-    background-image: url(../../images/icons/cf_icon_yaw.svg);
+    background-image: url(/images/icons/cf_icon_yaw.svg);
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .tab-configuration .roll {
-    background-image: url(../../images/icons/cf_icon_roll.svg);
+    background-image: url(/images/icons/cf_icon_roll.svg);
     background-repeat: no-repeat;
     background-position: center;
 }

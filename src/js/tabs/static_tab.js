@@ -3,7 +3,7 @@
 TABS.privacy_policy = {};
 
 TABS.privacy_policy.initialize = function (callback) {
-    const tabFile = `./tabs/privacy_policy.html`;
+    const tabFile = `/src/tabs/privacy_policy.html`;
 
     $('#content').html('<div id="tab-static"><div id="tab-static-contents"></div>');
 

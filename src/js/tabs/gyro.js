@@ -29,7 +29,7 @@ TABS.gyro.initialize = function (callback) {
     load_data(load_html);
 
     function load_html() {
-        $('#content').load("./tabs/gyro.html", process_html);
+        $('#content').load("/src/tabs/gyro.html", process_html);
     }
 
     function load_data(callback) {

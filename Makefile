@@ -15,6 +15,16 @@ all: apps
 init:
 	yarn install
 
+	$(MAKE) fontawesome
+
+.PHONY: fontawesome
+fontawesome:
+	rm -fr public/fontawesome
+	mkdir -p public/fontawesome/css
+	mkdir -p public/fontawesome/webfonts
+	cp ./node_modules/@fortawesome/fontawesome-free/css/all.min.css public/fontawesome/css/all.min.css
+	cp ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid* public/fontawesome/webfonts
+
 apps:
 	yarn gulp apps
 

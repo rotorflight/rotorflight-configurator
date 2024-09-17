@@ -22,17 +22,12 @@ function useGlobalNodeFunctions() {
 }
 
 function appReady() {
-    $.getJSON('version.json', function(data) {
-        CONFIGURATOR.version = data.version;
-        CONFIGURATOR.gitChangesetId = data.gitChangesetId;
+    $('.connect_b a.connect').removeClass('disabled');
+    $('.firmware_b a.flash').removeClass('disabled');
 
-        $('.connect_b a.connect').removeClass('disabled');
-        $('.firmware_b a.flash').removeClass('disabled');
-
-        i18n.init(function() {
-            startProcess();
-            initializeSerialBackend();
-        });
+    i18n.init(function() {
+        startProcess();
+        initializeSerialBackend();
     });
 }
 

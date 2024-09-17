@@ -38,7 +38,7 @@ TABS.mixer.initialize = function (callback) {
     load_data(load_html);
 
     function load_html() {
-        $('#content').load("./tabs/mixer.html", process_html);
+        $('#content').load("/src/tabs/mixer.html", process_html);
     }
 
     function load_data(callback) {
