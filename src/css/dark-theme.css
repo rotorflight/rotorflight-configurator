@@ -55,7 +55,7 @@ html[data-theme=dark] #status-bar {
     background-color: #414443;
 }
 
-html[data-theme=dark] #status-bar > * ~ * {
+html[data-theme=dark] #status-bar > span + span {
     border-left: 1px solid #9c9c9c;
 }
 
