@@ -1,5 +1,5 @@
 import i18next from 'i18next';
-import i18nextXHRBackend from 'i18next-xhr-backend';
+import i18nextHttpBackend from 'i18next-http-backend';
 
 const i18n = {};
 
@@ -19,7 +19,7 @@ i18n.init = function(cb) {
     getStoredUserLocale(function(userLanguage) {
 
         i18next
-            .use(i18nextXHRBackend)
+            .use(i18nextHttpBackend)
             .init({
                 lng: userLanguage,
                 getAsync: false,
