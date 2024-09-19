@@ -37,16 +37,16 @@ jobs:
       run: make init
 
     - name: Build release for linux64
-      run: yarn gulp release --linux64
+      run: yarn gulp redist --platform linux --arch x86_64
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-linux-release-${{ env.GIT_VER }}
-        path: release/rotorflight-configurator*
+        path: redist/*
 
 
-  macos:
+  macos-x86_64:
 
     runs-on: macos-12
 
@@ -76,13 +76,52 @@ jobs:
       run: make init
 
     - name: Build release for MacOS
-      run: yarn gulp release --osx64
+      run: yarn gulp redist --platform osx --arch x86_64
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: rotorflight-configurator-macos-release-${{ env.GIT_VER }}
-        path: release/rotorflight-configurator*
+        name: rotorflight-configurator-macos-x86_64-release-${{ env.GIT_VER }}
+        path: redist/*
+
+
+  macos-arm64:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.11
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: '.nvmrc'
+
+    - name: Set build variables
+      run: |
+        echo "GIT_VER=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
+        cat ${GITHUB_ENV}
+
+    - name: Update version number
+      run: make version SEMVER=${{ env.GIT_VER }}
+
+    - name: Initialise build environment
+      run: make init
+
+    - name: Build release for MacOS
+      run: yarn gulp redist --platform osx --arch arm64
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: rotorflight-configurator-macos-arm64-release-${{ env.GIT_VER }}
+        path: redist/*
 
 
   win64:
@@ -115,13 +154,13 @@ jobs:
       run: make init
 
     - name: Build release for windows
-      run: yarn gulp release --win64
+      run: yarn gulp redist --platform win --arch x86_64
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-win64-release-${{ env.GIT_VER }}
-        path: release/rotorflight-configurator*
+        path: redist/*
 
 
   win32:
@@ -154,13 +193,13 @@ jobs:
       run: make init
 
     - name: Build release for windows
-      run: yarn gulp release --win32
+      run: yarn gulp redist --platform win --arch x86
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-win32-release-${{ env.GIT_VER }}
-        path: release/rotorflight-configurator*
+        path: redist/*
 
 
   android:
@@ -205,13 +244,13 @@ jobs:
       run: make init
 
     - name: Build release for Android
-      run: yarn gulp release --android
+      run: yarn gulp redist --platform android
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: rotorflight-configurator-android-release-${{ env.GIT_VER }}
-        path: release/rotorflight-configurator*
+        path: redist/*
 
 
   release:
