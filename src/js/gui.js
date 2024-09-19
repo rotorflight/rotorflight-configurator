@@ -62,16 +62,13 @@ const GuiControl = function () {
     this.zoomBoxTimeout = null;
 
     // Check the method of execution
-    this.nwGui = null;
-    try {
-        this.nwGui = require('nw.gui');
+    this.nwGui = globalThis.nw;
+    if (this.nwGui) {
         this.Mode = GUI_MODES.NWJS;
-    } catch (ex) {
-        if (typeof cordovaApp !== 'undefined') {
-            this.Mode = GUI_MODES.Cordova;
-        } else {
-            this.Mode = GUI_MODES.Other;
-        }
+    } else if (typeof cordovaApp !== 'undefined') {
+        this.Mode = GUI_MODES.Cordova;
+    } else {
+        this.Mode = GUI_MODES.Other;
     }
 };
 

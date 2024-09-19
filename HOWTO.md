@@ -1,43 +1,52 @@
-## Build Process
+## Setup
 
-### Setup
+1. Install Node.js `nvm install`
+2. Install yarn `npm install -g yarn`
+3. Install dependencies `make init`
 
-1. Change to the project folder
-2. Install Node.js: `nvm install`
-3. Install yarn: `npm install yarn -g`
-4. Install dependencies: `yarn install`
-5. Run `yarn start`
+## Development
 
+### Desktop
 
-### App build and release
+1. Start the dev server `make watch`
+2. Run `make dev`
 
-The tasks are defined in `gulpfile.js` and can be run with through yarn:
+**Note:** The NW.js SDK needs to be downloaded the first time `make dev` runs, and may take some time to complete.
+
+### Android
+
+Developing for Android requires JDK 11, gradle, and Android SDK 33.
+
+1. Start an Android emulator or connect a physical device with debugging enabled
+2. Set a version for the application `SEMVER=2.1.0-dev make version`
+3. Run `make android`
+4. Open `chrome://inspect/#devices` in a Chrome browser to debug
+
+## Building
+
+Tasks are defined in `gulpfile.mjs` and can be run with yarn.
+
 ```
-yarn gulp <taskname> [[platform] [platform] ...]
+yarn gulp <task> [--debug] [--platform <platform>] [--arch <arch>]
 ```
 
-List of possible values of `<task-name>`:
-* **dist** copies all the JS and CSS files in the `./dist` folder [2].
-* **apps** builds the apps in the `./apps` folder [1].
-* **debug** builds debug version of the apps in the `./debug` folder [1][3].
-* **release** zips up the apps into individual archives in the `./release` folder [1].
+**`<task>`**
 
-[1] Running this task on macOS or Linux requires Wine, since it's needed to set the icon for the Windows app (build for specific platform to avoid errors).
-[2] For Android platform, **dist** task will generate folders and files in the `./dist_cordova` folder.
-[3] For Android platform, you need to configure an emulator or to plug an Android device with USB debugging enabled
+- **`bundle`** bundles the source files into `./bundle`.
+- **`app`** builds the application in `./app`.
+- **`redist`** creates redistributable archives in `./redist`.
 
+**`--debug`** Outputs builds that can be debugged with Chrome DevTools or an Android debugger.
 
-#### Build or release app for one specific platform
+**`<platform>`** Defaults to the host platform.
 
-To build or release only for one specific platform you can append the plaform after the `task-name`.
-If no platform is provided, the build for the host platform is run.
+- linux
+- osx
+- win
+- android
 
-* **MacOS X** use `yarn gulp <task-name> --osx64`
-* **Linux** use `yarn gulp <task-name> --linux64`
-* **Windows** use `yarn gulp <task-name> --win64`
-* **Android** use `yarn gulp <task-name> --android`
+**`<arch>`** Defaults to the host architecture.
 
-**Note:** Support for cross-platform building is very limited due to the requirement for platform specific build tools. If in doubt, build on the target platform.
-
-You can also use multiple platforms e.g. `yarn gulp <taskname> --osx64 --linux64`. Other platforms like `--win64`, `--linux32` and `--armv7` can be used too, but they are not officially supported, so use them at your own risk.
-
+- x86
+- x86_64
+- arm64

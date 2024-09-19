@@ -1197,7 +1197,7 @@ TABS.receiver.initialize = function (callback) {
         });
 
         // Only show the MSP control sticks if the MSP Rx feature is enabled
-        self.stickButton = FC.FEATURE_CONFIG.features.isEnabled('RX_MSP');
+        self.stickButton = GUI.isNWJS() && FC.FEATURE_CONFIG.features.isEnabled('RX_MSP');
 
 
     //// Bind button
