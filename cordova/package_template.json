@@ -24,8 +24,10 @@
     "cordova-plugin-filepath": "^1.6.0",
     "cordova-plugin-market": "^1.2.0",
     "cordova-plugin-permission": "^0.1.0",
+    "cordova-plugin-screen-orientation": "^3.0.4",
     "cordova-plugin-theme-detection": "^1.3.0",
-    "cordova-plugin-usb-event": "^1.0.2"
+    "cordova-plugin-usb-event": "^1.0.2",
+    "es6-promise-plugin": "^4.2.2"
   },
   "cordova": {
     "platforms": [
