@@ -1,88 +1,41 @@
 <template>
   <div id="status-bar">
-    <PortUtilization
-      :usage-down="portUsageDown"
-      :usage-up="portUsageUp"
-    />
-    <ReadingStat
-      message="statusbar_packet_error"
-      :value="packetError"
-    />
-    <ReadingStat
-      message="statusbar_pid_cycle_time"
-      :value="pidCycleTime"
-    />
-    <ReadingStat
-      message="statusbar_gyro_cycle_time"
-      :value="gyroCycleTime"
-    />
-    <ReadingStat
-      message="statusbar_rt_load"
-      :value="rtLoad"
-      unit="%"
-    />
-    <ReadingStat
-      message="statusbar_cpu_load"
-      :value="cpuLoad"
-      unit="%"
-    />
-    <StatusBarVersion
-      :configurator-version="configuratorVersion"
-      :firmware-version="firmwareVersion"
-      :firmware-id="firmwareId"
-      :hardware-id="hardwareId"
-      :git-changeset-id="gitChangesetId"
-    />
+    <span>
+      {{ $t("statusbar_port_utilization") }}
+      <span class="fas fa-long-arrow-alt-down" />
+      {{ portUsageDown }}%
+      <span class="fas fa-long-arrow-alt-up" />
+      {{ portUsageUp }}%
+    </span>
+
+    <span>{{ $t("statusbar_packet_error") }} {{ packetError }}</span>
+    <span>{{ $t("statusbar_pid_cycle_time") }} {{ pidCycleTime }}</span>
+    <span>{{ $t("statusbar_gyro_cycle_time") }} {{ gyroCycleTime }}</span>
+    <span>{{ $t("statusbar_rt_load") }} {{ rtLoad }}%</span>
+    <span>{{ $t("statusbar_cpu_load") }} {{ cpuLoad }}%</span>
+
+    <div class="gap" />
+
+    <span v-if="firmwareVersion && firmwareId">
+      {{ $t("versionLabelFirmware") }}: {{ firmwareVersion }} {{ firmwareId }}
+    </span>
+    <span>{{ $t("versionLabelConfigurator") }}: {{ configuratorVersion }}</span>
   </div>
 </template>
 <script>
-import StatusBarVersion from "./StatusBarVersion.vue";
-import ReadingStat from "./ReadingStat.vue";
-import PortUtilization from "./PortUtilization.vue";
 
 export default {
-  components: {
-    PortUtilization,
-    ReadingStat,
-    StatusBarVersion,
-  },
-  props: {
-    portUsageDown: {
-      type: Number,
-    },
-    portUsageUp: {
-      type: Number,
-    },
-    packetError: {
-      type: Number,
-    },
-    pidCycleTime: {
-      type: Number,
-    },
-    gyroCycleTime: {
-      type: Number,
-    },
-    rtLoad: {
-      type: Number,
-    },
-    cpuLoad: {
-      type: Number,
-    },
-    configuratorVersion: {
-      type: String,
-    },
-    firmwareVersion: {
-      type: String,
-    },
-    firmwareId: {
-      type: String,
-    },
-    hardwareId: {
-      type: String,
-    },
-    gitChangesetId: {
-      type: String,
-    },
-  },
+  props: [
+    "portUsageDown",
+    "portUsageUp",
+    "packetError",
+    "pidCycleTime",
+    "gyroCycleTime",
+    "rtLoad",
+    "cpuLoad",
+    "configuratorVersion",
+    "firmwareVersion",
+    "firmwareId",
+  ],
 };
 </script>
