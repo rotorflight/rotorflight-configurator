@@ -1,7 +1,5 @@
-'use strict';
-
-TABS.servos = {
-
+const tab = {
+    tabName: 'servos',
     isDirty: false,
     needReboot: false,
 
@@ -12,7 +10,7 @@ TABS.servos = {
     FLAG_GEOCOR: 2,
 };
 
-TABS.servos.initialize = function (callback) {
+tab.initialize = function (callback) {
     const self = this;
 
     load_data(load_html);
@@ -348,13 +346,13 @@ TABS.servos.initialize = function (callback) {
     }
 };
 
-TABS.servos.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     this.isDirty = false;
 
     callback?.();
 };
 
-TABS.servos.cloneConfig = function (servos) {
+tab.cloneConfig = function (servos) {
     const clone = [];
 
     servos.forEach(function (item) {
@@ -363,3 +361,17 @@ TABS.servos.cloneConfig = function (servos) {
 
     return clone;
 };
+
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

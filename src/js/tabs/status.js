@@ -1,6 +1,5 @@
-'use strict';
-
-TABS.status = {
+const tab = {
+    tabName: 'status',
     armingEnabled: true,
     yaw_fix: 0.0,
     DISARM_FLAGS: [
@@ -67,7 +66,7 @@ TABS.status = {
     ],
 };
 
-TABS.status.initialize = function (callback) {
+tab.initialize = function (callback) {
     const self = this;
 
     load_data(load_html);
@@ -319,13 +318,13 @@ TABS.status.initialize = function (callback) {
 };
 
 
-TABS.status.initModel = function () {
+tab.initModel = function () {
     this.model = new Model($('.model-and-info #canvas_wrapper'), $('.model-and-info #canvas'));
 
     $(window).on('resize', $.proxy(this.model.resize, this.model));
 };
 
-TABS.status.renderModel = function () {
+tab.renderModel = function () {
     let x = (FC.SENSOR_DATA.kinematics[1] * -1.0) * 0.017453292519943295,
         y = ((FC.SENSOR_DATA.kinematics[2] * -1.0) - this.yaw_fix) * 0.017453292519943295,
         z = (FC.SENSOR_DATA.kinematics[0] * -1.0) * 0.017453292519943295;
@@ -333,7 +332,7 @@ TABS.status.renderModel = function () {
     this.model.rotateTo(x, y, z);
 };
 
-TABS.status.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     if (this.model) {
         $(window).off('resize', $.proxy(this.model.resize, this.model));
         this.model.dispose();
@@ -342,3 +341,16 @@ TABS.status.cleanup = function (callback) {
     callback?.();
 };
 
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

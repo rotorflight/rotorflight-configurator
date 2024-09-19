@@ -1,10 +1,9 @@
-'use strict';
-
-TABS.sensors = {
+const tab = {
+    tabName: 'sensors',
     armingEnabled: true,
 };
 
-TABS.sensors.initialize = function (callback) {
+tab.initialize = function (callback) {
 
     function initSensorData(){
         for (let i = 0; i < 3; i++) {
@@ -468,8 +467,22 @@ TABS.sensors.initialize = function (callback) {
     });
 };
 
-TABS.sensors.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     serial.emptyOutputBuffer();
 
     callback?.();
 };
+
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

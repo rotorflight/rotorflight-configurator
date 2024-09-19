@@ -1,13 +1,12 @@
-'use strict';
-
-TABS.led_strip = {
+const tab = {
+    tabName: 'led_strip',
     isDirty: false,
     wireMode: false,
     directions: ['n', 'e', 's', 'w', 'u', 'd']
 };
 
 
-TABS.led_strip.initialize = function (callback) {
+tab.initialize = function (callback) {
     const self = this;
 
     load_data(load_html);
@@ -1241,8 +1240,22 @@ TABS.led_strip.initialize = function (callback) {
     }
 };
 
-TABS.led_strip.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     this.isDirty = false;
 
     callback?.();
 };
+
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

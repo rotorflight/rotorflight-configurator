@@ -1,8 +1,7 @@
-'use strict';
-
 let sdcardTimer;
 
-TABS.blackbox = {
+const tab = {
+    tabName: 'blackbox',
     isDirty: false,
 
     blockSize: 128,
@@ -156,7 +155,7 @@ TABS.blackbox = {
     },
 };
 
-TABS.blackbox.initialize = function (callback) {
+tab.initialize = function (callback) {
     const self = this;
 
     let saveCancelled, eraseCancelled;
@@ -704,7 +703,7 @@ TABS.blackbox.initialize = function (callback) {
     }
 };
 
-TABS.blackbox.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     this.isDirty = false;
 
     if (sdcardTimer) {
@@ -715,9 +714,23 @@ TABS.blackbox.cleanup = function (callback) {
     callback?.();
 };
 
-TABS.blackbox.mscRebootFailedCallback = function () {
+tab.mscRebootFailedCallback = function () {
     $(".tab-blackbox")
         .toggleClass("msc-supported", false);
 
     showErrorDialog(i18n.getMessage('operationNotSupported'));
 };
+
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

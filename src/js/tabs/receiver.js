@@ -1,6 +1,5 @@
-'use strict';
-
-TABS.receiver = {
+const tab = {
+    tabName: 'receiver',
     isDirty: false,
     needReboot: false,
     bindButton: false,
@@ -464,7 +463,7 @@ TABS.receiver = {
     },
 };
 
-TABS.receiver.initialize = function (callback) {
+tab.initialize = function (callback) {
     const self = this;
 
     load_data(load_html);
@@ -1289,7 +1288,7 @@ TABS.receiver.initialize = function (callback) {
     }
 };
 
-TABS.receiver.initModelPreview = function () {
+tab.initModelPreview = function () {
     const self = this;
 
     self.model = new Model($('#canvas_wrapper'), $('#canvas'));
@@ -1353,7 +1352,7 @@ TABS.receiver.initModelPreview = function () {
     $(window).on('resize', $.proxy(self.model.resize, self.model));
 };
 
-TABS.receiver.renderModel = function () {
+tab.renderModel = function () {
     const self = this;
 
     if (self.keepRendering) {
@@ -1398,7 +1397,7 @@ TABS.receiver.renderModel = function () {
     }
 };
 
-TABS.receiver.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     $(window).off('resize', this.resize);
 
     this.keepRendering = false;
@@ -1412,3 +1411,17 @@ TABS.receiver.cleanup = function (callback) {
 
     callback?.();
 };
+
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

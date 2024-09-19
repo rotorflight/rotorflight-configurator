@@ -1,7 +1,7 @@
-'use strict';
-
-TABS.landing = {};
-TABS.landing.initialize = function (callback) {
+const tab = {
+    tabName: 'landing',
+};
+tab.initialize = function (callback) {
   $('#content').load("/src/tabs/landing.html", function () {
     function showLang(newLang) {
       bottomSection = $('.languageSwitcher');
@@ -44,6 +44,20 @@ TABS.landing.initialize = function (callback) {
 
 };
 
-TABS.landing.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     callback?.();
 };
+
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

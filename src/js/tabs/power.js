@@ -1,6 +1,5 @@
-'use strict';
-
-TABS.power = {
+const tab = {
+    tabName: 'power',
     isDirty: false,
     needReboot: false,
     voltageMeterCount: 0,
@@ -20,7 +19,7 @@ TABS.power = {
     ],
 };
 
-TABS.power.initialize = function (callback) {
+tab.initialize = function (callback) {
     const self = this;
 
     if (GUI.calibrationManager) {
@@ -484,7 +483,7 @@ TABS.power.initialize = function (callback) {
     }
 };
 
-TABS.power.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     GUI.calibrationManager?.destroy();
     GUI.calibrationManagerConfirmation?.destroy();
 
@@ -492,3 +491,17 @@ TABS.power.cleanup = function (callback) {
 
     callback?.();
 };
+
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

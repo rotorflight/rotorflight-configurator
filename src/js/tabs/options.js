@@ -1,28 +1,28 @@
-'use strict';
-
-TABS.options = {};
-TABS.options.initialize = function (callback) {
+const tab = {
+    tabName: 'options',
+};
+tab.initialize = function (callback) {
     $('#content').load("/src/tabs/options.html", function () {
         i18n.localizePage();
 
-        //TABS.options.initPermanentExpertMode();
-        TABS.options.initRememberLastTab();
-        TABS.options.initCheckForConfiguratorUnstableVersions();
-        TABS.options.initCliAutoComplete();
-        TABS.options.initAutoConnectConnectionTimeout();
-        TABS.options.initCordovaForceComputerUI();
-        TABS.options.initDarkTheme();
+        //tab.initPermanentExpertMode();
+        tab.initRememberLastTab();
+        tab.initCheckForConfiguratorUnstableVersions();
+        tab.initCliAutoComplete();
+        tab.initAutoConnectConnectionTimeout();
+        tab.initCordovaForceComputerUI();
+        tab.initDarkTheme();
 
         GUI.content_ready(callback);
     });
 };
 
-TABS.options.cleanup = function (callback) {
+tab.cleanup = function (callback) {
     callback?.();
 };
 
 /**
-TABS.options.initPermanentExpertMode = function () {
+tab.initPermanentExpertMode = function () {
     ConfigStorage.get('permanentExpertMode', function (result) {
         if (result.permanentExpertMode) {
             $('div.permanentExpertMode input').prop('checked', true);
@@ -39,7 +39,7 @@ TABS.options.initPermanentExpertMode = function () {
 };
 **/
 
-TABS.options.initRememberLastTab = function () {
+tab.initRememberLastTab = function () {
     ConfigStorage.get('rememberLastTab', function (result) {
         $('div.rememberLastTab input')
             .prop('checked', !!result.rememberLastTab)
@@ -48,7 +48,7 @@ TABS.options.initRememberLastTab = function () {
     });
 };
 
-TABS.options.rememberLastSelectedBoard = function () {
+tab.rememberLastSelectedBoard = function () {
     ConfigStorage.get('rememberLastSelectedBoard', function (result) {
         $('div.rememberLastSelectedBoard input')
             .prop('checked', !!result.rememberLastSelectedBoard)
@@ -57,7 +57,7 @@ TABS.options.rememberLastSelectedBoard = function () {
     });
 };
 
-TABS.options.initCheckForConfiguratorUnstableVersions = function () {
+tab.initCheckForConfiguratorUnstableVersions = function () {
     ConfigStorage.get('checkForConfiguratorUnstableVersions', function (result) {
         if (result.checkForConfiguratorUnstableVersions) {
             $('div.checkForConfiguratorUnstableVersions input').prop('checked', true);
@@ -73,7 +73,7 @@ TABS.options.initCheckForConfiguratorUnstableVersions = function () {
     });
 };
 
-TABS.options.initCliAutoComplete = function () {
+tab.initCliAutoComplete = function () {
     $('div.cliAutoComplete input')
         .prop('checked', CliAutoComplete.configEnabled)
         .change(function () {
@@ -84,7 +84,7 @@ TABS.options.initCliAutoComplete = function () {
         }).change();
 };
 
-TABS.options.initAutoConnectConnectionTimeout = function () {
+tab.initAutoConnectConnectionTimeout = function () {
     ConfigStorage.get('connectionTimeout', function (result) {
         if (result.connectionTimeout) {
             $('#connectionTimeoutSelect').val(result.connectionTimeout);
@@ -96,7 +96,7 @@ TABS.options.initAutoConnectConnectionTimeout = function () {
     });
 };
 
-TABS.options.initCordovaForceComputerUI = function () {
+tab.initCordovaForceComputerUI = function () {
     if (GUI.isCordova() && cordovaUI.canChangeUI) {
         ConfigStorage.get('cordovaForceComputerUI', function (result) {
             if (result.cordovaForceComputerUI) {
@@ -118,7 +118,7 @@ TABS.options.initCordovaForceComputerUI = function () {
     }
 };
 
-TABS.options.initDarkTheme = function () {
+tab.initDarkTheme = function () {
     $('#darkThemeSelect')
         .val(DarkTheme.configEnabled)
         .change(function () {
@@ -128,3 +128,17 @@ TABS.options.initDarkTheme = function () {
             setDarkTheme(value);
         }).change();
 };
+
+TABS[tab.tabName] = tab;
+
+if (import.meta.hot) {
+    import.meta.hot.accept((newModule) => {
+        if (newModule && GUI.active_tab === tab.tabName) {
+          TABS[tab.tabName].initialize();
+        }
+    });
+
+    import.meta.hot.dispose(() => {
+        tab.cleanup();
+    });
+}

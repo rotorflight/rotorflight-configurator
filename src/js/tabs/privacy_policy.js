@@ -1,11 +1,17 @@
 const tab = {
-    tabName: 'help',
+    tabName: 'privacy_policy',
 };
+
 tab.initialize = function (callback) {
-    $('#content').load("/src/tabs/help.html", function () {
+    const tabFile = `/src/tabs/privacy_policy.html`;
+
+    $('#content').html('<div id="tab-static"><div id="tab-static-contents"></div>');
+
+    $('#tab-static-contents').load(tabFile, function () {
         i18n.localizePage();
         GUI.content_ready(callback);
     });
+
 };
 
 tab.cleanup = function (callback) {
