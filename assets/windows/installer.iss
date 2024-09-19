@@ -15,7 +15,7 @@
 #define ExecutableFileName "rotorflight-configurator.exe"
 #define GroupName "Rotorflight"
 #define InstallerFileName "rotorflight-configurator-installer_" + version + "_" + archName
-#define SourcePath "..\..\" + sourceFolder + "\rotorflight-configurator\" + archName
+#define SourcePath "..\..\" + sourceFolder
 #define TargetFolderName "Rotorflight-Configurator"
 #define UpdatesUrl "https://github.com/rotorflight/rotorflight-configurator/releases"
 

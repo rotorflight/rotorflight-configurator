@@ -29,6 +29,7 @@ const tab = {
         "ZTW",
         "APD",
         "OpenYGE",
+        "FLYROTOR",
         "Custom",
     ],
     govModes: [
