@@ -1113,6 +1113,10 @@ input[type="number"]::-webkit-inner-spin-button {
         font-size: 0;
     }
 
+    .reveal #tabs li a {
+      font-size: 13px;
+    }
+
     .tab_container {
         width: 42px;
     }
