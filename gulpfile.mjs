@@ -1,941 +1,621 @@
-import pkg from './package.json' with { type: 'json' };
-pkg.main = "src/main.html";
-delete pkg['node-remote'];
+import assert from "node:assert/strict";
+import child_process from "node:child_process";
+import fs from "node:fs/promises";
+import stream from "node:stream";
 
-import child_process from 'node:child_process';
-import fs from 'node:fs';
-import os from 'node:os';
-import path from 'node:path';
-import stream from 'node:stream';
-
-import fse from 'fs-extra';
-import followRedirects from 'follow-redirects';
-const { https } = followRedirects;
-
-import del from 'del';
-import NwBuilder from 'nw-builder';
-import innoSetup from '@quanle94/innosetup';
-import buildRpm from 'rpm-builder';
-import { sync as commandExistsSync } from 'command-exists';
-import targz from 'targz';
-
-import * as vite from 'vite';
-import gulp from 'gulp';
-import deb from 'gulp-debian';
-import jeditor from 'gulp-json-editor';
-import rename from 'gulp-rename';
-import replace from 'gulp-replace';
-import yarn from 'gulp-yarn';
-import zip from 'gulp-zip';
-import source from 'vinyl-source-stream';
-
-import cordovaPkg from 'cordova-lib';
-const { cordova } = cordovaPkg;
-import browserify from 'browserify';
-import glob from 'glob';
-
+import innoSetup from "@quanle94/innosetup";
+import { sync as commandExistsSync } from "command-exists";
+import cordovaPkg from "cordova-lib";
+import { glob } from "glob";
+import gulp from "gulp";
+import deb from "gulp-debian";
+import jeditor from "gulp-json-editor";
+import rename from "gulp-rename";
+import replace from "gulp-replace";
 import xmlTransformer from "gulp-xml-transformer";
+import zip from "gulp-zip";
+import logger from "gulplog";
+import minimist from "minimist";
+import nwbuild from "nw-builder";
+import buildRpm from "rpm-builder";
+import source from "vinyl-source-stream";
+import * as vite from "vite";
 
-const DIST_DIR = './dist/';
-const APPS_DIR = './apps/';
-const DEBUG_DIR = './debug/';
-const RELEASE_DIR = './release/';
-const CORDOVA_DIR = './cordova/';
-const CORDOVA_DIST_DIR = './dist_cordova/';
+import pkg from "./package.json" with { type: "json" };
+pkg.main = "src/main.html";
+delete pkg["node-remote"];
 
-const LINUX_INSTALL_DIR = '/opt/rotorflight';
+const { cordova } = cordovaPkg;
 
-const nwBuilderOptions = {
-    version: '0.89.0',
-    files: `${DIST_DIR}**/*`,
-    macIcns: './src/images/rf_icon.icns',
-    macPlist: { 'CFBundleDisplayName': 'Rotorflight Configurator'},
-    winIco: './src/images/rf_icon.ico',
-    zip: false,
+const argv = minimist(process.argv.slice(2));
+
+const BUNDLE_DIR = "./bundle";
+const APP_DIR = "./app";
+const REDIST_DIR = "./redist";
+
+const LINUX_INSTALL_DIR = "/opt/rotorflight";
+
+const NWJS_CACHE_DIR = "nwjs_cache";
+const NWJS_VERSION = "0.89.0";
+const NWJS_ARCH = {
+  x86: "ia32",
+  x86_64: "x64",
+  arm64: "arm64",
 };
 
-const nwArmVersion = '0.27.6';
+const context = {};
+parseArgs();
 
-let cordovaDependencies = true;
+export const app = build_app();
+export const bundle = build_bundle();
+export const redist = build_redist();
+export const dev = run_dev();
 
-//-----------------
-//Pre tasks operations
-//-----------------
-const SELECTED_PLATFORMS = getInputPlatforms();
-
-//-----------------
-//Tasks
-//-----------------
-
-gulp.task('clean', gulp.parallel(clean_dist, clean_apps, clean_debug, clean_release, clean_cordova));
-
-gulp.task('clean-dist', clean_dist);
-
-gulp.task('clean-apps', clean_apps);
-
-gulp.task('clean-debug', clean_debug);
-
-gulp.task('clean-release', clean_release);
-
-gulp.task('clean-cache', clean_cache);
-
-gulp.task('clean-cordova', clean_cordova);
-
-const distBuild = gulp.series(
-    dist_vite,
-    dist_src,
-    dist_yarn,
-    gulp.series(cordova_dist()),
-);
-const distRebuild = gulp.series(clean_dist, distBuild);
-gulp.task('dist', distRebuild);
-
-const appsBuild = gulp.series(
-    gulp.parallel(clean_apps, distRebuild),
-    apps,
-    gulp.series(cordova_apps()),
-    gulp.parallel(listPostBuildTasks(APPS_DIR)),
-);
-gulp.task('apps', appsBuild);
-
-const debugAppsBuild = gulp.series(
-    gulp.parallel(clean_debug, distRebuild),
-    debug,
-    gulp.parallel(listPostBuildTasks(DEBUG_DIR)),
-);
-
-const debugBuild = gulp.series(
-    distBuild,
-    debug,
-    gulp.parallel(listPostBuildTasks(DEBUG_DIR)),
-    start_debug,
-);
-gulp.task('debug', debugBuild);
-
-const releaseBuild = gulp.series(
-    gulp.parallel(clean_release, appsBuild),
-    gulp.parallel(listReleaseTasks(APPS_DIR)),
-);
-gulp.task('release', releaseBuild);
-
-const debugReleaseBuild = gulp.series(
-    gulp.parallel(clean_release, debugAppsBuild),
-    gulp.parallel(listReleaseTasks(DEBUG_DIR)),
-);
-gulp.task('debug-release', debugReleaseBuild);
-
-gulp.task('default', debugBuild);
-
-// -----------------
-// Helper functions
-// -----------------
-
-// Get platform from commandline args
-// #
-// # gulp <task> [<platform>]+        Run only for platform(s) (with <platform> one of --linux64, --linux32, --armv7, --osx64, --win32, --win64, or --android)
-// #
-function getInputPlatforms() {
-    const supportedPlatforms = ['linux64', 'linux32', 'armv7', 'osx64', 'win32', 'win64', 'android'];
-    const platforms = [];
-    const regEx = /--(\w+)/;
-
-    for (let i = 3; i < process.argv.length; i++) {
-        const arg = process.argv[i].match(regEx)[1];
-        if (supportedPlatforms.indexOf(arg) > -1) {
-            platforms.push(arg);
-        } else if (arg === 'nowinicon') {
-            console.log('ignoring winIco');
-            delete nwBuilderOptions['winIco'];
-        } else if (arg === 'skipdep') {
-            console.log('ignoring cordova dependencies');
-            cordovaDependencies = false;
-        } else {
-            console.log(`Unknown platform: ${arg}`);
-            process.exit();
-        }
-    }
-
-    if (platforms.length === 0) {
-        const defaultPlatform = getDefaultPlatform();
-        if (supportedPlatforms.indexOf(defaultPlatform) > -1) {
-            platforms.push(defaultPlatform);
-        } else {
-            console.error(`Your current platform (${os.platform()}) is not a supported build platform. Please specify platform to build for on the command line.`);
-            process.exit();
-        }
-    }
-
-    if (platforms.length > 0) {
-        console.log(`Building for platform(s): ${platforms}.`);
-    } else {
-        console.error('No suitables platforms found.');
-        process.exit();
-    }
-
-    return platforms;
+function clean_app() {
+  return fs.rm(APP_DIR, { recursive: true, force: true });
 }
 
-// Gets the default platform to be used
-function getDefaultPlatform() {
-    let defaultPlatform;
-    switch (os.platform()) {
-    case 'darwin':
-        defaultPlatform = 'osx64';
-
-        break;
-    case 'linux':
-        defaultPlatform = 'linux64';
-
-        break;
-    case 'win32':
-        defaultPlatform = 'win64';
-
-        break;
-
-    default:
-        defaultPlatform = '';
-
-        break;
-    }
-    return defaultPlatform;
+function clean_bundle() {
+  return fs.rm(BUNDLE_DIR, { recursive: true, force: true });
 }
 
-
-function getPlatforms() {
-    return SELECTED_PLATFORMS.slice();
+function clean_redist() {
+  return fs.rm(REDIST_DIR, { recursive: true, force: true });
 }
 
-function removeItem(platforms, item) {
-    const index = platforms.indexOf(item);
-    if (index >= 0) {
-        platforms.splice(index, 1);
-    }
+function build_bundle() {
+  return gulp.series(clean_bundle, bundle_vite, bundle_src, bundle_deps);
 }
 
-function getRunDebugAppCommand(arch) {
-
-    let command;
-
-    switch (arch) {
-    case 'osx64':
-        const pkgName = `${pkg.name}.app`;
-        command = `open ${path.join(DEBUG_DIR, pkg.name, arch, pkgName)}`;
-
-        break;
-
-    case 'linux64':
-    case 'linux32':
-    case 'armv7':
-        command = path.join(DEBUG_DIR, pkg.name, arch, pkg.name);
-
-        break;
-
-    case 'win32':
-    case 'win64':
-        command = path.join(DEBUG_DIR, pkg.name, arch, `${pkg.name}.exe`);
-
-        break;
-
-    default:
-        command =  '';
-
-        break;
-    }
-
-    return command;
-}
-
-function getReleaseFilename(platform, ext) {
-    return `${pkg.name}_${pkg.version}_${platform}.${ext}`;
-}
-
-function clean_dist() {
-    return del([`${DIST_DIR}**`], { force: true });
-}
-
-function clean_apps() {
-    return del([`${APPS_DIR}**`], { force: true });
-}
-
-function clean_debug() {
-    return del([`${DEBUG_DIR}**`], { force: true });
-}
-
-function clean_release() {
-    return del([`${RELEASE_DIR}**`], { force: true });
-}
-
-function clean_cache() {
-    return del(['./cache/**'], { force: true });
-}
-
-// Real work for dist task. Done in another task to call it via
-// run-sequence.
-function dist_src() {
-    const distSources = [
-        './src/js/**/*',
-        './src/tabs/*',
-        '!./src/tabs/receiver_msp.html',
-    ];
-    const packageJson = new stream.Readable;
-    packageJson.push(JSON.stringify(pkg,undefined,2));
-    packageJson.push(null);
-
-    return packageJson
-        .pipe(source('package.json'))
-        .pipe(gulp.src(distSources, { base: '.' }))
-        .pipe(gulp.src('yarn.lock'))
-        .pipe(gulp.dest(DIST_DIR));
-}
-
-// This function relies on files from the dist_src function
-function dist_yarn() {
-    return gulp.src([`${DIST_DIR}package.json`, `${DIST_DIR}yarn.lock`])
-        .pipe(gulp.dest(DIST_DIR))
-        .pipe(yarn({
-            production: true,
-        }));
-}
-
-function dist_vite() {
+function bundle_vite() {
   return vite.build();
 }
 
-// Create runable app directories in ./apps
-function apps(done) {
-    const platforms = getPlatforms();
-    removeItem(platforms, 'android');
+function bundle_src() {
+  const distSources = [
+    "./src/js/**/*",
+    "./src/tabs/*",
+    "!./src/tabs/receiver_msp.html",
+  ];
+  const packageJson = new stream.Readable();
+  packageJson.push(JSON.stringify(pkg, undefined, 2));
+  packageJson.push(null);
 
-    buildNWAppsWrapper(platforms, 'normal', APPS_DIR, done);
+  return packageJson
+    .pipe(source("package.json"))
+    .pipe(gulp.src(distSources, { base: "." }))
+    .pipe(gulp.src("yarn.lock"))
+    .pipe(gulp.dest(BUNDLE_DIR));
 }
 
-function listPostBuildTasks(folder) {
-
-    const platforms = getPlatforms();
-
-    const postBuildTasks = [];
-
-    if (platforms.indexOf('linux32') !== -1) {
-        postBuildTasks.push(function post_build_linux32(done) {
-            return post_build('linux32', folder, done);
-        });
-    }
-
-    if (platforms.indexOf('linux64') !== -1) {
-        postBuildTasks.push(function post_build_linux64(done) {
-            return post_build('linux64', folder, done);
-        });
-    }
-
-    if (platforms.indexOf('armv7') !== -1) {
-        postBuildTasks.push(function post_build_armv7(done) {
-            return post_build('armv7', folder, done);
-        });
-    }
-
-    // We need to return at least one task, if not gulp will throw an error
-    if (postBuildTasks.length === 0) {
-        postBuildTasks.push(function post_build_none(done) {
-            done();
-        });
-    }
-    return postBuildTasks;
+function bundle_deps() {
+  return new Promise((resolve, reject) =>
+    child_process.exec(
+      "yarn install --prod --frozen-lockfile",
+      { cwd: BUNDLE_DIR },
+      (err) => (err ? reject(err) : resolve()),
+    ),
+  );
 }
 
-function post_build(arch, folder, done) {
+function helper_build_app_cordova() {
+  context.appdir = `${APP_DIR}/${context.target.platform}`;
 
-    if ((arch === 'linux32') || (arch === 'linux64')) {
-        // Copy Ubuntu launcher scripts to destination dir
-        const launcherDir = path.join(folder, pkg.name, arch);
-        console.log(`Copy Ubuntu launcher scripts to ${launcherDir}`);
-        return gulp.src('assets/linux/**')
-                   .pipe(gulp.dest(launcherDir));
-    }
-
-    if (arch === 'armv7') {
-        console.log('Moving ARMv7 build from "linux32" to "armv7" directory...');
-        fse.moveSync(path.join(folder, pkg.name, 'linux32'), path.join(folder, pkg.name, 'armv7'));
-    }
-
-    return done();
+  return gulp.series(
+    build_bundle(),
+    cordova_copy_www,
+    cordova_resources,
+    cordova_include_www,
+    cordova_copy_src,
+    cordova_rename_src_config,
+    cordova_rename_src_package,
+    cordova_packagejson,
+    cordova_configxml,
+    cordova_deps,
+    cordova_build,
+  );
 }
 
-// Create debug app directories in ./debug
-function debug(done) {
-    const platforms = getPlatforms();
-    removeItem(platforms, 'android');
+function build_app() {
+  const app_helper =
+    context.target.platform === "android"
+      ? helper_build_app_cordova
+      : helper_build_app_nwjs;
 
-    buildNWAppsWrapper(platforms, 'sdk', DEBUG_DIR, done);
+  return gulp.series(clean_app, app_helper());
 }
 
-function injectARMCache(flavor, callback) {
-    const flavorPostfix = `-${flavor}`;
-    const flavorDownloadPostfix = flavor !== 'normal' ? `-${flavor}` : '';
-    clean_cache().then(function() {
-        if (!fs.existsSync('./cache')) {
-            fs.mkdirSync('./cache');
-        }
-        fs.closeSync(fs.openSync('./cache/_ARMv7_IS_CACHED', 'w'));
-        const versionFolder = `./cache/${nwBuilderOptions.version}${flavorPostfix}`;
-        if (!fs.existsSync(versionFolder)) {
-            fs.mkdirSync(versionFolder);
-        }
-        const linux32Folder = `${versionFolder}/linux32`;
-        if (!fs.existsSync(linux32Folder)) {
-            fs.mkdirSync(linux32Folder);
-        }
-        const downloadedArchivePath = `${versionFolder}/nwjs${flavorPostfix}-v${nwArmVersion}-linux-arm.tar.gz`;
-        const downloadUrl = `https://github.com/LeonardLaszlo/nw.js-armv7-binaries/releases/download/v${nwArmVersion}/nwjs${flavorDownloadPostfix}-v${nwArmVersion}-linux-arm.tar.gz`;
-        if (fs.existsSync(downloadedArchivePath)) {
-            console.log('Prebuilt ARMv7 binaries found in /tmp');
-            downloadDone(flavorDownloadPostfix, downloadedArchivePath, versionFolder);
-        } else {
-            console.log(`Downloading prebuilt ARMv7 binaries from "${downloadUrl}"...`);
-            process.stdout.write('> Starting download...\r');
-            const armBuildBinary = fs.createWriteStream(downloadedArchivePath);
-            https.get(downloadUrl, function(res) {
-                const totalBytes = res.headers['content-length'];
-                let downloadedBytes = 0;
-                res.pipe(armBuildBinary);
-                res.on('data', function (chunk) {
-                    downloadedBytes += chunk.length;
-                    process.stdout.write(`> ${parseInt((downloadedBytes * 100) / totalBytes)}% done             \r`);
-                });
-                armBuildBinary.on('finish', function() {
-                    process.stdout.write('> 100% done             \n');
-                    armBuildBinary.close(function() {
-                        downloadDone(flavorDownloadPostfix, downloadedArchivePath, versionFolder);
-                    });
-                });
-            });
-        }
+function helper_build_app_nwjs() {
+  const tasks = [build_bundle(), build_app_nwjs];
+
+  switch (context.target.platform) {
+    case "linux":
+      tasks.push(build_nwjs_unix_permissions);
+      tasks.push(build_nwjs_linux_assets);
+      break;
+
+    case "osx":
+      tasks.push(build_nwjs_unix_permissions);
+      break;
+  }
+
+  return gulp.series(tasks);
+}
+
+function build_app_nwjs() {
+  const { platform, arch, flavor } = context.target;
+  context.appdir = `${APP_DIR}/${platform}_${arch}`;
+
+  const platformOpts = {
+    osx: {
+      icon: "./src/images/rf_icon.icns",
+      CFBundleDisplayName: "Rotorflight Configurator",
+    },
+    win: {
+      icon: "./src/images/rf_icon.ico",
+    },
+  };
+
+  return nwbuild({
+    platform,
+    arch: NWJS_ARCH[arch],
+    outDir: context.appdir,
+    flavor: flavor === "debug" ? "sdk" : "normal",
+    app: platformOpts[platform],
+    version: NWJS_VERSION,
+    cacheDir: NWJS_CACHE_DIR,
+    glob: false,
+    srcDir: BUNDLE_DIR,
+  });
+}
+
+function build_nwjs_linux_assets() {
+  return gulp.src("assets/linux/**").pipe(gulp.dest(context.appdir));
+}
+
+/**
+ * Nw.js archives do not have any permissions set for group and other.
+ * Apply the correct permissions.
+ */
+async function build_nwjs_unix_permissions() {
+  const ignore = [
+    // bundle - linux
+    `${context.appdir}/package.nw/**/*`,
+    // bundle - osx
+    `${context.appdir}/${pkg.name}.app/Contents/Resources/app.nw/**/*`,
+  ];
+
+  const dirs = await glob(`${context.appdir}/**/*/`, { ignore });
+  for (const dir of dirs) {
+    await fs.chmod(dir, 0o755);
+  }
+
+  const files = await glob(`${context.appdir}/**/*`, { nodir: true, ignore });
+  for (const file of files) {
+    let mode = 0o644;
+
+    const stats = await fs.stat(file);
+    if (stats.mode & fs.constants.S_IXUSR) {
+      mode |=
+        fs.constants.S_IXUSR | fs.constants.S_IXGRP | fs.constants.S_IXOTH;
+    }
+
+    await fs.chmod(file, mode);
+  }
+}
+
+function build_redist() {
+  return gulp.series(clean_redist, build_app(), helper_build_redist());
+}
+
+function helper_build_redist() {
+  switch (context.target.platform) {
+    case "linux":
+      return build_redist_linux();
+
+    case "osx":
+      return build_redist_osx;
+
+    case "win":
+      return build_redist_win;
+
+    case "android":
+      return build_redist_apk;
+
+    default:
+      return nop;
+  }
+}
+
+function build_redist_linux() {
+  return gulp.parallel(build_redist_zip, build_redist_deb, build_redist_rpm);
+}
+
+function build_redist_zip() {
+  const { platform, arch } = context.target;
+  const zipFile = `${pkg.name}_${pkg.version}_${platform}_${arch}.zip`;
+  const zipInteralDir = "Rotorflight Configurator";
+
+  return gulp
+    .src(`${context.appdir}/**`, { base: context.appdir })
+    .pipe(
+      rename(
+        (actualPath) =>
+          (actualPath.dirname = `${zipInteralDir}/${actualPath.dirname}`),
+      ),
+    )
+    .pipe(zip(zipFile))
+    .pipe(gulp.dest(REDIST_DIR));
+}
+
+function build_redist_deb(done) {
+  const { arch } = context.target;
+
+  if (!commandExistsSync("dpkg-deb")) {
+    logger.warn(
+      `dpkg-deb command not found, not generating deb package for ${arch}`,
+    );
+    done();
+  }
+
+  const archmap = {
+    x86: "i386",
+    x86_64: "amd64",
+    arm64: "arm64",
+  };
+
+  return gulp.src([`${context.appdir}/*`]).pipe(
+    deb({
+      package: pkg.name,
+      version: pkg.version,
+      section: "base",
+      priority: "optional",
+      architecture: archmap[arch],
+      maintainer: pkg.author,
+      description: pkg.description,
+      preinst: [`rm -rf ${LINUX_INSTALL_DIR}/${pkg.name}`],
+      postinst: [
+        `chown root:root ${LINUX_INSTALL_DIR}`,
+        `chown -R root:root ${LINUX_INSTALL_DIR}/${pkg.name}`,
+        `xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${pkg.name}/${pkg.name}.desktop`,
+      ],
+      prerm: [`xdg-desktop-menu uninstall ${pkg.name}.desktop`],
+      depends: "libgconf-2-4",
+      changelog: [],
+      _target: `${LINUX_INSTALL_DIR}/${pkg.name}`,
+      _out: REDIST_DIR,
+      _copyright: "assets/linux/copyright",
+      _clean: true,
+    }),
+  );
+}
+
+async function build_redist_rpm() {
+  const { arch } = context.target;
+
+  if (!commandExistsSync("rpmbuild")) {
+    console.warn(
+      `rpmbuild command not found, not generating rpm package for ${arch}`,
+    );
+    return;
+  }
+
+  await fs.mkdir(REDIST_DIR, { recursive: true });
+
+  const regex = /-/g;
+
+  const archmap = {
+    x86: "i386",
+    x86_64: "x86_64",
+    arm64: "aarch64",
+  };
+
+  const options = {
+    name: pkg.name,
+    version: pkg.version.replace(regex, "_"), // RPM does not like release candidate versions
+    buildArch: archmap[arch],
+    vendor: pkg.author,
+    summary: pkg.description,
+    license: "GNU General Public License v3.0",
+    requires: "libgconf-2-4",
+    prefix: "/opt",
+    files: [
+      {
+        cwd: context.appdir,
+        src: "*",
+        dest: `${LINUX_INSTALL_DIR}/${pkg.name}`,
+      },
+    ],
+    postInstallScript: [
+      `xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${pkg.name}/${pkg.name}.desktop`,
+    ],
+    preUninstallScript: [`xdg-desktop-menu uninstall ${pkg.name}.desktop`],
+    tempDir: `${REDIST_DIR}/tmp-rpm-build-${arch}`,
+    keepTemp: false,
+    verbose: false,
+    rpmDest: REDIST_DIR,
+    execOpts: { maxBuffer: 1024 * 1024 * 16 },
+  };
+
+  await new Promise((resolve, reject) =>
+    buildRpm(options, (err) => (err ? reject(err) : resolve())),
+  );
+}
+
+async function build_redist_osx() {
+  const appdmg = (await import("appdmg")).default;
+  await fs.mkdir(REDIST_DIR, { recursive: true });
+
+  const targetPath = `${REDIST_DIR}/${pkg.name}_${pkg.version}_macOS.dmg`;
+
+  await new Promise((resolve, reject) => {
+    const builder = appdmg({
+      target: targetPath,
+      basepath: context.appdir,
+      specification: {
+        title: "Rotorflight Configurator",
+        contents: [
+          { x: 448, y: 342, type: "link", path: "/Applications" },
+          {
+            x: 192,
+            y: 344,
+            type: "file",
+            path: `${pkg.name}.app`,
+            name: "Rotorflight Configurator.app",
+          },
+        ],
+        background: `${import.meta.dirname}/assets/osx/dmg-background.png`,
+        format: "UDZO",
+        window: {
+          size: {
+            width: 638,
+            height: 479,
+          },
+        },
+      },
     });
 
-    function downloadDone(flavorDownload, downloadedArchivePath, versionFolder) {
-        console.log('Injecting prebuilt ARMv7 binaries into Linux32 cache...');
-        targz.decompress({
-            src: downloadedArchivePath,
-            dest: versionFolder,
-        }, function(err) {
-            if (err) {
-                console.log(err);
-                clean_debug();
-                process.exit(1);
-            } else {
-                fs.rename(
-                    `${versionFolder}/nwjs${flavorDownload}-v${nwArmVersion}-linux-arm`,
-                    `${versionFolder}/linux32`,
-                    (renameErr) => {
-                        if (renameErr) {
-                            console.log(renameErr);
-                            clean_debug();
-                            process.exit(1);
-                        }
-                        callback();
-                    }
-                );
-            }
-        });
-    }
+    builder.on("progress", (info) =>
+      logger.info(
+        info.current +
+          "/" +
+          info.total +
+          " " +
+          info.type +
+          " " +
+          (info.title || info.status),
+      ),
+    );
+    builder.on("error", reject);
+    builder.on("finish", resolve);
+  });
 }
 
-function buildNWAppsWrapper(platforms, flavor, dir, done) {
-    function buildNWAppsCallback() {
-        buildNWApps(platforms, flavor, dir, done);
-    }
+function build_redist_win() {
+  const { arch } = context.target;
 
-    if (platforms.indexOf('armv7') !== -1) {
-        if (platforms.indexOf('linux32') !== -1) {
-            console.log('Cannot build ARMv7 and Linux32 versions at the same time!');
-            clean_debug();
-            process.exit(1);
-        }
-        removeItem(platforms, 'armv7');
-        platforms.push('linux32');
-
-        if (!fs.existsSync('./cache/_ARMv7_IS_CACHED', 'w')) {
-            console.log('Purging cache because it needs to be overwritten...');
-            clean_cache().then(() => {
-                injectARMCache(flavor, buildNWAppsCallback);
-            });
-        } else {
-            buildNWAppsCallback();
-        }
-    } else {
-        if (platforms.indexOf('linux32') !== -1 && fs.existsSync('./cache/_ARMv7_IS_CACHED')) {
-            console.log('Purging cache because it was previously overwritten...');
-            clean_cache().then(buildNWAppsCallback);
-        } else {
-            buildNWAppsCallback();
-        }
-    }
-}
-
-function buildNWApps(platforms, flavor, dir, done) {
-    if (platforms.length > 0) {
-        const builder = new NwBuilder(Object.assign({
-            buildDir: dir,
-            platforms,
-            flavor,
-        }, nwBuilderOptions));
-        builder.on('log', console.log);
-        builder.build(function (err) {
-            if (err) {
-                console.log(`Error building NW apps: ${err}`);
-                clean_debug();
-                process.exit(1);
-            }
-            done();
-        });
-    } else {
-        console.log('No platform suitable for NW Build');
-        done();
-    }
-}
-
-function start_debug(done) {
-
-    const platforms = getPlatforms();
-
-    if (platforms.length === 1) {
-        if (platforms[0] === 'android') {
-            cordova_debug();
-        } else {
-            const run = getRunDebugAppCommand(platforms[0]);
-            console.log(`Starting debug app (${run})...`);
-            child_process.exec(run);
-        }
-    } else {
-        console.log('More than one platform specified, not starting debug app');
-    }
-    done();
-}
-
-// Create installer package for windows platforms
-function release_win(arch, appDirectory, done) {
-
-    // Parameters passed to the installer script
-    const parameters = [];
-
+  const parameters = [
     // Extra parameters to replace inside the iss file
-    parameters.push(`/Dversion=${pkg.version}`);
-    parameters.push(`/DarchName=${arch}`);
-    parameters.push(`/DarchAllowed=${(arch === 'win32') ? 'x86 x64' : 'x64'}`);
-    parameters.push(`/DarchInstallIn64bit=${(arch === 'win32') ? '' : 'x64'}`);
-    parameters.push(`/DsourceFolder=${appDirectory}`);
-    parameters.push(`/DtargetFolder=${RELEASE_DIR}`);
+    `/Dversion=${pkg.version}`,
+    `/DarchName=${arch}`,
+    `/DarchAllowed=${arch === "win32" ? "x86 x64" : "x64"}`,
+    `/DarchInstallIn64bit=${arch === "ia32" ? "" : "x64"}`,
+    `/DsourceFolder=${context.appdir}`,
+    `/DtargetFolder=${REDIST_DIR}`,
 
     // Show only errors in console
-    parameters.push(`/Q`);
+    "/Q",
 
     // Script file to execute
-    parameters.push("assets/windows/installer.iss");
+    "assets/windows/installer.iss",
+  ];
 
-    innoSetup(parameters, {},
-    function(error) {
-        if (error != null) {
-            console.error(`Installer for platform ${arch} finished with error ${error}`);
-        } else {
-            console.log(`Installer for platform ${arch} finished`);
-        }
-        done();
-    });
+  return new Promise((resolve, reject) =>
+    innoSetup(parameters, {}, (err) => (err ? reject(err) : resolve())),
+  );
 }
 
-// Create distribution package (zip) for windows and linux platforms
-function release_zip(arch, appDirectory) {
-    const src = path.join(appDirectory, pkg.name, arch, '**');
-    const output = getReleaseFilename(arch, 'zip');
-    const base = path.join(appDirectory, pkg.name, arch);
+function run_dev() {
+  switch (context.target.platform) {
+    case "android":
+      return gulp.series(build_app(), run_dev_cordova);
 
-    return compressFiles(src, base, output, 'Rotorflight Configurator');
+    case "linux":
+    case "osx":
+    case "win":
+      return run_dev_nwjs;
+  }
 }
 
-// Compress files from srcPath, using basePath, to outputFile in the RELEASE_DIR
-function compressFiles(srcPath, basePath, outputFile, zipFolder) {
-    return gulp.src(srcPath, { base: basePath })
-               .pipe(rename(function(actualPath) {
-                   actualPath.dirname = path.join(zipFolder, actualPath.dirname);
-               }))
-               .pipe(zip(outputFile))
-               .pipe(gulp.dest(RELEASE_DIR));
+function run_dev_nwjs() {
+  const { platform, arch } = context.target;
+
+  return nwbuild({
+    mode: "run",
+    platform,
+    arch: NWJS_ARCH[arch],
+    flavor: "sdk",
+    version: NWJS_VERSION,
+    cacheDir: NWJS_CACHE_DIR,
+    glob: false,
+    srcDir: ".",
+  });
 }
 
-function release_deb(arch, appDirectory, done) {
-
-    // Check if dpkg-deb exists
-    if (!commandExistsSync('dpkg-deb')) {
-        console.warn(`dpkg-deb command not found, not generating deb package for ${arch}`);
-        done();
-    }
-
-    return gulp.src([path.join(appDirectory, pkg.name, arch, '*')])
-        .pipe(deb({
-            package: pkg.name,
-            version: pkg.version,
-            section: 'base',
-            priority: 'optional',
-            architecture: getLinuxPackageArch('deb', arch),
-            maintainer: pkg.author,
-            description: pkg.description,
-            preinst: [`rm -rf ${LINUX_INSTALL_DIR}/${pkg.name}`],
-            postinst: [
-                `chown root:root ${LINUX_INSTALL_DIR}`,
-                `chown -R root:root ${LINUX_INSTALL_DIR}/${pkg.name}`,
-                `xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${pkg.name}/${pkg.name}.desktop`,
-            ],
-            prerm: [`xdg-desktop-menu uninstall ${pkg.name}.desktop`],
-            depends: 'libgconf-2-4',
-            changelog: [],
-            _target: `${LINUX_INSTALL_DIR}/${pkg.name}`,
-            _out: RELEASE_DIR,
-            _copyright: 'assets/linux/copyright',
-            _clean: true,
-    }));
+function run_dev_cordova() {
+  return cordova.run();
 }
 
-function release_rpm(arch, appDirectory, done) {
-
-    // Check if dpkg-deb exists
-    if (!commandExistsSync('rpmbuild')) {
-        console.warn(`rpmbuild command not found, not generating rpm package for ${arch}`);
-        done();
-    }
-
-    // The buildRpm does not generate the folder correctly, manually
-    createDirIfNotExists(RELEASE_DIR);
-
-    const regex = /-/g;
-
-    const options = {
-            name: pkg.name,
-            version: pkg.version.replace(regex, '_'), // RPM does not like release candidate versions
-            buildArch: getLinuxPackageArch('rpm', arch),
-            vendor: pkg.author,
-            summary: pkg.description,
-            license: 'GNU General Public License v3.0',
-            requires: 'libgconf-2-4',
-            prefix: '/opt',
-            files: [{
-                cwd: path.join(appDirectory, pkg.name, arch),
-                src: '*',
-                dest: `${LINUX_INSTALL_DIR}/${pkg.name}`,
-            }],
-            postInstallScript: [`xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${pkg.name}/${pkg.name}.desktop`],
-            preUninstallScript: [`xdg-desktop-menu uninstall ${pkg.name}.desktop`],
-            tempDir: path.join(RELEASE_DIR, `tmp-rpm-build-${arch}`),
-            keepTemp: false,
-            verbose: false,
-            rpmDest: RELEASE_DIR,
-            execOpts: { maxBuffer: 1024 * 1024 * 16 },
-    };
-
-    buildRpm(options, function(err) {
-        if (err) {
-          console.error(`Error generating rpm package: ${err}`);
-        }
-        done();
-    });
-}
-
-function getLinuxPackageArch(type, arch) {
-    let packArch;
-
-    switch (arch) {
-    case 'linux32':
-        packArch = 'i386';
-        break;
-    case 'linux64':
-        if (type === 'rpm') {
-            packArch = 'x86_64';
-        } else {
-            packArch = 'amd64';
-        }
-        break;
-    default:
-        console.error(`Package error, arch: ${arch}`);
-        process.exit(1);
-        break;
-    }
-
-    return packArch;
-}
-// Create distribution package for macOS platform
-async function release_osx64(appDirectory) {
-    const appdmg = (await import('./gulp-appdmg.mjs')).default;
-
-    // The appdmg does not generate the folder correctly, manually
-    createDirIfNotExists(RELEASE_DIR);
-
-    // The src pipe is not used
-    return gulp.src(['.'])
-        .pipe(appdmg({
-            target: path.join(RELEASE_DIR, getReleaseFilename('macOS', 'dmg')),
-            basepath: path.join(appDirectory, pkg.name, 'osx64'),
-            specification: {
-                title: 'Rotorflight Configurator',
-                contents: [
-                    { 'x': 448, 'y': 342, 'type': 'link', 'path': '/Applications' },
-                    { 'x': 192, 'y': 344, 'type': 'file', 'path': `${pkg.name}.app`, 'name': 'Rotorflight Configurator.app' },
-                ],
-                background: path.join(import.meta.dirname, 'assets/osx/dmg-background.png'),
-                format: 'UDZO',
-                window: {
-                    size: {
-                        width: 638,
-                        height: 479,
-                    },
-                },
-            },
-        })
-    );
-}
-
-// Create the dir directory, with write permissions
-function createDirIfNotExists(dir) {
-    fs.mkdir(dir, '0775', function(err) {
-        if (err && err.code !== 'EEXIST') {
-            throw err;
-        }
-    });
-}
-
-// Create a list of the gulp tasks to execute for release
-function listReleaseTasks(appDirectory) {
-
-    const platforms = getPlatforms();
-
-    const releaseTasks = [];
-
-    if (platforms.indexOf('linux64') !== -1) {
-        releaseTasks.push(function release_linux64_zip() {
-            return release_zip('linux64', appDirectory);
-        });
-        releaseTasks.push(function release_linux64_deb(done) {
-            return release_deb('linux64', appDirectory, done);
-        });
-        releaseTasks.push(function release_linux64_rpm(done) {
-            return release_rpm('linux64', appDirectory, done);
-        });
-    }
-
-    if (platforms.indexOf('linux32') !== -1) {
-        releaseTasks.push(function release_linux32_zip() {
-            return release_zip('linux32', appDirectory);
-        });
-        releaseTasks.push(function release_linux32_deb(done) {
-            return release_deb('linux32', appDirectory, done);
-        });
-        releaseTasks.push(function release_linux32_rpm(done) {
-            return release_rpm('linux32', appDirectory, done);
-        });
-    }
-
-    if (platforms.indexOf('armv7') !== -1) {
-        releaseTasks.push(function release_armv7_zip() {
-            return release_zip('armv7', appDirectory);
-        });
-    }
-
-    if (platforms.indexOf('osx64') !== -1) {
-        releaseTasks.push(function () {
-            return release_osx64(appDirectory);
-        });
-    }
-
-    if (platforms.indexOf('win32') !== -1) {
-        releaseTasks.push(function release_win32(done) {
-            return release_win('win32', appDirectory, done);
-        });
-    }
-
-    if (platforms.indexOf('win64') !== -1) {
-        releaseTasks.push(function release_win64(done) {
-            return release_win('win64', appDirectory, done);
-        });
-    }
-
-    if (platforms.indexOf('android') !== -1) {
-        releaseTasks.push(function release_android() {
-            return cordova_release();
-        });
-    }
-
-    return releaseTasks;
-}
-
-// Cordova
-function cordova_dist() {
-    const distTasks = [];
-    const platforms = getPlatforms();
-    if (platforms.indexOf('android') !== -1) {
-        distTasks.push(clean_cordova);
-        distTasks.push(cordova_copy_www);
-        distTasks.push(cordova_resources);
-        distTasks.push(cordova_include_www);
-        distTasks.push(cordova_copy_src);
-        distTasks.push(cordova_rename_src_config);
-        distTasks.push(cordova_rename_src_package);
-        distTasks.push(cordova_packagejson);
-        distTasks.push(cordova_configxml);
-        distTasks.push(cordova_browserify);
-        distTasks.push(cordova_depedencies);
-        if (cordovaDependencies) {
-            distTasks.push(cordova_platforms);
-        }
-    } else {
-        distTasks.push(function cordova_dist_none(done) {
-            done();
-        });
-    }
-    return distTasks;
-}
-function cordova_apps() {
-    const appsTasks = [];
-    const platforms = getPlatforms();
-    if (platforms.indexOf('android') !== -1) {
-        appsTasks.push(cordova_build);
-    } else {
-        appsTasks.push(function cordova_dist_none(done) {
-            done();
-        });
-    }
-    return appsTasks;
-}
-
-
-function clean_cordova() {
-    const patterns = [];
-    if (cordovaDependencies) {
-        patterns.push(`${CORDOVA_DIST_DIR}**`);
-    } else {
-        patterns.push(`${CORDOVA_DIST_DIR}www/**`);
-        patterns.push(`${CORDOVA_DIST_DIR}resources/**`);
-    }
-    return del(patterns, { force: true });
-}
 function cordova_copy_www() {
-    return gulp.src(`${DIST_DIR}**`, { base: DIST_DIR })
-        .pipe(gulp.dest(`${CORDOVA_DIST_DIR}www/`));
+  return gulp
+    .src(`${BUNDLE_DIR}/**`, { base: BUNDLE_DIR })
+    .pipe(gulp.dest(`${context.appdir}/www/`));
 }
+
 function cordova_resources() {
-    return gulp.src('assets/android/**')
-        .pipe(gulp.dest(`${CORDOVA_DIST_DIR}resources/android/`));
+  return gulp
+    .src("assets/android/**")
+    .pipe(gulp.dest(`${context.appdir}/resources/android/`));
 }
+
 function cordova_include_www() {
-    return gulp.src(`${CORDOVA_DIST_DIR}www/src/main.html`)
-        .pipe(replace('<!-- CORDOVA_INCLUDE js/cordova_chromeapi.js -->', '<script type="text/javascript" src="/src/js/cordova_chromeapi.js"></script>'))
-        .pipe(replace('<!-- CORDOVA_INCLUDE js/cordova_startup.js -->', '<script type="text/javascript" src="/src/js/cordova_startup.js"></script>'))
-        .pipe(replace('<!-- CORDOVA_INCLUDE cordova.js -->', '<script type="text/javascript" src="/cordova.js"></script>'))
-        .pipe(gulp.dest(`${CORDOVA_DIST_DIR}www/src`));
+  return gulp
+    .src(`${context.appdir}/www/src/main.html`)
+    .pipe(
+      replace(
+        "<!-- CORDOVA_INCLUDE js/cordova_chromeapi.js -->",
+        '<script type="text/javascript" src="/src/js/cordova_chromeapi.js"></script>',
+      ),
+    )
+    .pipe(
+      replace(
+        "<!-- CORDOVA_INCLUDE js/cordova_startup.js -->",
+        '<script type="text/javascript" src="/src/js/cordova_startup.js"></script>',
+      ),
+    )
+    .pipe(
+      replace(
+        "<!-- CORDOVA_INCLUDE cordova.js -->",
+        '<script type="text/javascript" src="/cordova.js"></script>',
+      ),
+    )
+    .pipe(gulp.dest(`${context.appdir}/www/src/`));
 }
+
 function cordova_copy_src() {
-    return gulp.src([`${CORDOVA_DIR}**`, `!${CORDOVA_DIR}config_template.xml`, `!${CORDOVA_DIR}package_template.json`])
-        .pipe(gulp.dest(`${CORDOVA_DIST_DIR}`));
+  return gulp
+    .src([
+      `cordova/**`,
+      `!cordova/config_template.xml`,
+      `!cordova/package_template.json`,
+    ])
+    .pipe(gulp.dest(context.appdir));
 }
+
 function cordova_rename_src_config() {
-    return gulp.src(`${CORDOVA_DIR}config_template.xml`)
-        .pipe(rename('config.xml'))
-        .pipe(gulp.dest(`${CORDOVA_DIST_DIR}`));
+  return gulp
+    .src("cordova/config_template.xml")
+    .pipe(rename("config.xml"))
+    .pipe(gulp.dest(context.appdir));
 }
+
 function cordova_rename_src_package() {
-    return gulp.src(`${CORDOVA_DIR}package_template.json`)
-        .pipe(rename('package.json'))
-        .pipe(gulp.dest(`${CORDOVA_DIST_DIR}`));
+  return gulp
+    .src("cordova/package_template.json")
+    .pipe(rename("package.json"))
+    .pipe(gulp.dest(context.appdir));
 }
+
 function cordova_packagejson() {
-    return gulp.src(`${CORDOVA_DIST_DIR}package.json`)
-        .pipe(jeditor({
-            'name': pkg.name,
-            'description': pkg.description,
-            'version': pkg.version,
-            'author': pkg.author,
-            'license': pkg.license,
-        }))
-        .pipe(gulp.dest(CORDOVA_DIST_DIR));
+  return gulp
+    .src(`${context.appdir}/package.json`)
+    .pipe(
+      jeditor({
+        name: pkg.name,
+        description: pkg.description,
+        version: pkg.version,
+        author: pkg.author,
+        license: pkg.license,
+      }),
+    )
+    .pipe(gulp.dest(context.appdir));
 }
+
 function cordova_configxml() {
-    return gulp.src([`${CORDOVA_DIST_DIR}config.xml`])
-        .pipe(xmlTransformer([
-            { path: '//xmlns:name', text: pkg.productName },
-            { path: '//xmlns:description', text: pkg.description },
-            { path: '//xmlns:author', text: pkg.author },
-        ], 'http://www.w3.org/ns/widgets'))
-        .pipe(xmlTransformer([
-            { path: '.', attr: { 'version': pkg.version } },
-        ]))
-        .pipe(gulp.dest(CORDOVA_DIST_DIR));
+  return gulp
+    .src([`${context.appdir}/config.xml`])
+    .pipe(
+      xmlTransformer(
+        [
+          { path: "//xmlns:name", text: pkg.productName },
+          { path: "//xmlns:description", text: pkg.description },
+          { path: "//xmlns:author", text: pkg.author },
+        ],
+        "http://www.w3.org/ns/widgets",
+      ),
+    )
+    .pipe(xmlTransformer([{ path: ".", attr: { version: pkg.version } }]))
+    .pipe(gulp.dest(context.appdir));
 }
-function cordova_browserify(callback) {
-    const readFile = function(file) {
-        return new Promise(function(resolve) {
-            if (!file.includes("node_modules")) {
-                fs.readFile(file, 'utf8', async function (err,data) {
-                    if (data.match('require\\(.*\\)')) {
-                        await cordova_execbrowserify(file);
-                    }
-                    resolve();
-                });
-            } else {
-                resolve();
-            }
-        });
-    };
-    glob(`${CORDOVA_DIST_DIR}www/**/*.js`, {}, function (err, files) {
-        const readLoop = function() {
-            if (files.length === 0) {
-                callback();
-            } else {
-                const file = files.pop();
-                readFile(file).then(function() {
-                    readLoop();
-                });
-            }
-        };
-        readLoop();
+
+function cordova_deps() {
+  return new Promise((resolve, reject) =>
+    child_process.exec(
+      "yarn install --prod --frozen-lockfile",
+      { cwd: context.appdir },
+      (err) => (err ? reject(err) : resolve()),
+    ),
+  );
+}
+
+async function cordova_build() {
+  const cwd = process.cwd();
+  process.chdir(context.appdir);
+  try {
+    await cordova.platform("add", ["android"]);
+    await cordova.build({
+      platforms: ["android"],
+      options: {
+        release: context.target.flavor !== "debug",
+        buildConfig: "build.json",
+      },
     });
+  } finally {
+    process.chdir(cwd);
+  }
 }
-function cordova_execbrowserify(file) {
-    const filename = file.split('/').pop();
-    const destpath = file.replace(filename, '');
-    console.log(`Include required modules in ${file}`);
-    return browserify(file, { ignoreMissing: true })
-        .bundle()
-        .pipe(source(filename))
-        .pipe(gulp.dest(destpath));
+
+function build_redist_apk() {
+  const { flavor } = context.target;
+  const filename = `${pkg.name}_${pkg.version}_android.apk`;
+  return gulp
+    .src(
+      `${context.appdir}/platforms/android/app/build/outputs/apk/${flavor}/app-${flavor}.apk`,
+    )
+    .pipe(rename(filename))
+    .pipe(gulp.dest(REDIST_DIR));
 }
-gulp.task('test', cordova_browserify);
-function cordova_depedencies() {
-    process.chdir('dist_cordova');
-    return gulp.src(['./package.json', './yarn.lock'])
-        .pipe(gulp.dest('./'))
-        .pipe(yarn({
-            production: true,
-        }));
+
+function parseArgs() {
+  const platforms = ["linux", "osx", "win", "android"];
+  const arches = ["x86", "x86_64", "arm64"];
+
+  const target = {
+    platform: argv.platform ?? getHostPlatform(),
+    arch: argv.arch ?? getHostArch(),
+    flavor: argv.debug ? "debug" : "release",
+  };
+
+  if (target.platform) {
+    assert(
+      platforms.includes(target.platform),
+      `unsupported platform: ${target.platform}`,
+    );
+
+    if (target.platform === "android") {
+      target.arch = null;
+    } else {
+      assert(arches.includes(target.arch), `unsupported arch: ${target.arch}`);
+    }
+  }
+
+  context.target = target;
 }
-function cordova_platforms() {
-    return cordova.platform('add', ['android']);
+
+function getHostPlatform() {
+  return {
+    linux: "linux",
+    darwin: "osx",
+    win32: "win",
+  }[process.platform];
 }
-function cordova_debug() {
-    cordova.run();
+
+function getHostArch() {
+  return {
+    x64: "x86_64",
+    arm64: "arm64",
+    ia32: "x86",
+  }[process.arch];
 }
-function cordova_build(cb) {
-    cordova.build({
-        'platforms': ['android'],
-        'options': {
-            release: true,
-            buildConfig: 'build.json',
-        },
-    }).then(function() {
-        process.chdir('../');
-        cb();
-    });
-    console.log('APK will be generated at dist_cordova/platforms/android/app/build/outputs/apk/release/app-release.apk');
-}
-async function cordova_release() {
-    const filename = await getReleaseFilename('android', 'apk');
-    console.log(`Release APK : release/${filename}`);
-    return gulp.src(`${CORDOVA_DIST_DIR}platforms/android/app/build/outputs/apk/release/app-release.apk`)
-        .pipe(rename(filename))
-        .pipe(gulp.dest(RELEASE_DIR));
-}
+
+async function nop() {}

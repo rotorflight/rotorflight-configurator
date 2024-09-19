@@ -15,6 +15,10 @@ release/
 testresults/
 .eslintcache
 public/fontawesome
+app/
+bundle/
+redist/
+nwjs_cache/
 
 # OSX
 .DS_store
