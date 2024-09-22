@@ -1166,7 +1166,11 @@ tab.initialize = function (callback) {
             const windowWidth = 370;
             const windowHeight = 510;
 
-            nw.Window.open("/src/tabs/receiver_msp.html", {
+            // use a fully qualified url so nw doesn't look on the filesystem
+            // when using the vite dev server
+            const location = new URL(window.location.href);
+            location.pathname = "/src/tabs/receiver_msp.html";
+            nw.Window.open(location.toString(), {
                 id: "receiver_msp",
                 always_on_top: true,
                 max_width: windowWidth, max_height: windowHeight,
