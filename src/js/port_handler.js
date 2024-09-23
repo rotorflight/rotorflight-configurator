@@ -57,8 +57,10 @@ function portRecognized(portName, pathSelect) {
 PortHandler.check_serial_devices = function () {
     const self = this;
 
-    serial.getDevices(portRecognized, function(currentPorts) {
-
+    serial.getDevices(function(currentPorts) {
+        if (!GUI.show_all_ports) {
+            currentPorts = currentPorts.filter((p) => portRecognized(p.displayName, p.path))
+        }
         // auto-select port (only during initialization)
         if (!self.initialPorts) {
             currentPorts = self.updatePortSelect(currentPorts);

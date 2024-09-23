@@ -254,18 +254,16 @@ const serial = {
             self.openCanceled = true;
         }
     },
-    getDevices: function (validator, callback) {
+    getDevices: function (callback) {
         chrome.serial.getDevices(function (devices_array) {
             const devices = [];
             devices_array.forEach(function (device) {
-                if (!GUI.show_all_ports && !validator(device.displayName, device.path)) {
-                    return
-                }
                 devices.push({
-                    path: device.path,
-                    displayName: device.displayName,
-                });
+                              path: device.path,
+                              displayName: device.displayName,
+                             });
             });
+
             callback(devices);
         });
     },

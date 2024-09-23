@@ -176,6 +176,7 @@ function initializeSerialBackend() {
             }
 
             ConfigStorage.set({'show_all_ports': GUI.show_all_ports});
+            PortHandler.check();
         });
     });
 
