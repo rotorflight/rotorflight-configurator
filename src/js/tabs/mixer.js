@@ -208,7 +208,7 @@ tab.initialize = function (callback) {
         value = (check ? value : 0).toFixed(axis.fixed);
 
         mixerInput.val(value);
-        mixerSlider.noUiSlider.set(0);
+        mixerSlider.noUiSlider.set(value);
 
         mixerInput.prop('disabled', !check);
         mixerEnable.prop('checked', check);
