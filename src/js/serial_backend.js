@@ -176,11 +176,11 @@ function initializeSerialBackend() {
             }
 
             ConfigStorage.set({'show_all_ports': GUI.show_all_ports});
-            PortHandler.check();
+            PortHandler.showAllPorts(GUI.show_all_ports);
         });
     });
 
-    PortHandler.initialize();
+    PortHandler.initialize(GUI.show_all_ports);
     PortUsage.initialize();
 }
 
