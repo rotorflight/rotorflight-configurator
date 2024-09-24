@@ -316,7 +316,9 @@ tab.initialize = function (callback) {
             const checked = enableMotorOverrideSwitch.prop('checked');
             FC.CONFIG.motorOverrideEnabled = checked;
             $('.overridesEnabled').toggle(checked);
-            $('.motorOverrideSlider').get(0).noUiSlider.set(0);
+            $('.motorOverrideSlider').each(function() {
+                $(this).get(0).noUiSlider.set(0);
+            });
         });
 
         enableMotorOverrideSwitch.prop('checked', FC.CONFIG.motorOverrideEnabled);
