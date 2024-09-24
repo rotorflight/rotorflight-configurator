@@ -439,11 +439,18 @@ tab.initialize = function (callback) {
             adjConfig = self.FUNCTIONS[index];
             adjRange.dirty = true;
             adjRange.adjFunction = index;
-            valSliderConfig.range.min = adjConfig.min;
-            valSliderConfig.range.max = adjConfig.max;
-            valSliderConfig.pips.values = adjConfig.pips;
-            valSliderConfig.pips.density = density(adjConfig.min, adjConfig.max, adjConfig.ticks);
-            valSlider.get(0).noUiSlider.updateOptions(valSliderConfig, true);
+            valSlider.get(0).noUiSlider.updateOptions({
+                range: {
+                    min: adjConfig.min,
+                    max: adjConfig.max,
+                },
+                pips: {
+                    mode: 'values',
+                    values: adjConfig.pips,
+                    density: density(adjConfig.min, adjConfig.max, adjConfig.ticks),
+                    stepped: true,
+                },
+            }, true);
             if (adjConfig.id > 0 && adjRange.adjType == 1)
                 valSlider.find('.marker').show(self.toggle_speed);
 
