@@ -238,7 +238,7 @@ tab.initialize = function (callback) {
                 }
             });
 
-            motorSlider.on('change', function (values) {
+            motorSlider.on('update', function (values) {
                 FC.MOTOR_OVERRIDE[motorIndex] = Math.round(values[0] * 10);
                 mspHelper.sendMotorOverride(motorIndex);
             });
@@ -316,7 +316,7 @@ tab.initialize = function (callback) {
             const checked = enableMotorOverrideSwitch.prop('checked');
             FC.CONFIG.motorOverrideEnabled = checked;
             $('.overridesEnabled').toggle(checked);
-            $('.motorOverrideSlider').val(0).change();
+            $('.motorOverrideSlider').get(0).noUiSlider.set(0);
         });
 
         enableMotorOverrideSwitch.prop('checked', FC.CONFIG.motorOverrideEnabled);
