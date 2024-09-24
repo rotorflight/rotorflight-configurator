@@ -55,7 +55,7 @@ body {
     background-color: #414443;
 }
 
-#status-bar > * ~ * {
+#status-bar > span + span {
     border-left: 1px solid #9c9c9c;
 }
 
