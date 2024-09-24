@@ -152,33 +152,39 @@ function initializeSerialBackend() {
         });
     });
 
-    // show all ports
-    ConfigStorage.get('show_all_ports', function (result) {
-        if (result.show_all_ports === undefined || !result.show_all_ports) {
-            GUI.show_all_ports = false;
-            $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsDisabled'));
-            $('input.show_all_ports').prop('checked', false);
-        } else {
-            GUI.show_all_ports = true;
-            $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsEnabled'));
-            $('input.show_all_ports').prop('checked', true);
-        }
-
-        // bind UI hook to show all ports checkbox
-        $('input.show_all_ports').on("change", function () {
-            GUI.show_all_ports = $(this).is(':checked');
-
-            // update title/tooltip
-            if (GUI.show_all_ports) {
-                $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsEnabled'));
-            } else {
+    // Show all ports
+    if (GUI.operating_system === 'Android') {
+        // port filtering does not work on Android as port names do not get populated on Android
+        GUI.show_all_ports = true;
+        $('div #show-all-ports-switch').hide();
+    } else {
+        ConfigStorage.get('show_all_ports', function (result) {
+            if (result.show_all_ports === undefined || !result.show_all_ports) {
+                GUI.show_all_ports = false;
                 $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsDisabled'));
+                $('input.show_all_ports').prop('checked', false);
+            } else {
+                GUI.show_all_ports = true;
+                $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsEnabled'));
+                $('input.show_all_ports').prop('checked', true);
             }
 
-            ConfigStorage.set({'show_all_ports': GUI.show_all_ports});
-            PortHandler.showAllPorts(GUI.show_all_ports);
+            // bind UI hook to show all ports checkbox
+            $('input.show_all_ports').on("change", function () {
+                GUI.show_all_ports = $(this).is(':checked');
+
+                // update title/tooltip
+                if (GUI.show_all_ports) {
+                    $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsEnabled'));
+                } else {
+                    $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsDisabled'));
+                }
+
+                ConfigStorage.set({ 'show_all_ports': GUI.show_all_ports });
+                PortHandler.showAllPorts(GUI.show_all_ports);
+            });
         });
-    });
+    }
 
     PortHandler.initialize(GUI.show_all_ports);
     PortUsage.initialize();
