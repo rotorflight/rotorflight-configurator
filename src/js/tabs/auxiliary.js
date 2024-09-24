@@ -191,6 +191,7 @@ tab.initialize = function (callback) {
                 stepped: true
             },
         });
+        slider.on('change', setDirty);
 
         function updateLimits(values) {
             rangeElement.find('.lowerLimitValue').text(values[0]);
