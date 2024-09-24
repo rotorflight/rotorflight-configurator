@@ -10,7 +10,7 @@
     "lint:fix": "eslint --fix src"
   },
   "window": {
-    "icon": "images/rf_icon.png",
+    "icon": "public/images/rf_icon.png",
     "id": "main-window",
     "min_width": 1024,
     "min_height": 550,

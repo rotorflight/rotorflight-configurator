@@ -22,7 +22,9 @@ import source from "vinyl-source-stream";
 import * as vite from "vite";
 
 import pkg from "./package.json" with { type: "json" };
+// Replace dev mode paths
 pkg.main = "src/main.html";
+pkg.window.icon = "images/rf_icon.png";
 delete pkg["node-remote"];
 
 const { cordova } = cordovaPkg;
