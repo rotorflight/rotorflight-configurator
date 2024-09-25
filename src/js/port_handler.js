@@ -57,7 +57,10 @@ function portRecognized(portName, pathSelect) {
 
 PortHandler.showAllPorts = function(showAllPorts) {
     if (this.showingAllPorts != showAllPorts) {
-        // trigger an update of the serial devices that specifically updates the port selector and resets the initialPorts simultaneously, so as to not trigger an auto-connect when toggling
+        /**
+         * trigger an update of the serial devices that specifically updates the port selector and resets the initialPorts simultaneously,
+         * so as to not trigger an auto-connect when toggling
+         */
         this.initialPorts = false;
         this.showingAllPorts = showAllPorts;
     }
@@ -68,7 +71,7 @@ PortHandler.check_serial_devices = function () {
 
     serial.getDevices(function(currentPorts) {
         if (!self.showingAllPorts) {
-            currentPorts = currentPorts = currentPorts.filter((p) => portRecognized(p.displayName, p.path));
+            currentPorts = currentPorts.filter((p) => portRecognized(p.displayName, p.path));
         }
         // on initialization of the port selector (i.e. app startup or toggling whether to show all ports), only select a detected port, don't auto-connect
         if (!self.initialPorts) {
@@ -138,7 +141,8 @@ PortHandler.check_usb_devices = function (callback) {
 };
 
 /**
- * removePort removes ports if they disappear from the port list, and fires the disconnect through the connect button. It will also fire any registered port removal callbacks, then finally update the port selector.
+ * removePort removes ports if they disappear from the port list, and fires the disconnect through the connect button.
+ * It will also fire any registered port removal callbacks, then finally update the port selector.
  */
 PortHandler.removePort = function(currentPorts) {
     const self = this;
