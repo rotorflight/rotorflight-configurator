@@ -779,8 +779,8 @@ tab.changeRatesType = function(rateTypeID) {
 tab.initRatesSystem = function() {
     const self = this;
 
-    let rcRateDef, rcRateMax, rcRateMin, rcRateStep, rcRateDec;
-    let rateDef, rateMax, rateStep, rateDec;
+    let rcRateDef, rcRateYawDef, rcRateMax, rcRateMin, rcRateStep, rcRateDec;
+    let rateDef, rateYawDef, rateMax, rateStep, rateDec;
     let expoDef, expoMax, expoStep, expoDec;
     let rcColDef, rcColMax, rcColMin, rcColStep, rcColDec;
     let colDef, colMax, colStep, colDec;
@@ -856,21 +856,23 @@ tab.initRatesSystem = function() {
             rateLabel   = "rateSetupRateQuickRates";
             rcExpoLabel = "rateSetupRcExpoRaceflight";
             rcRateDec   = 0;
-            rcRateDef   = 360;
+            rcRateDef   = 180;
+            rcRateYawDef= 180;
             rcRateMax   = 1000;
             rcRateMin   = 10;
             rcRateStep  = 10;
             rateDec     = 0;
-            rateDef     = 360;
+            rateDef     = 240;
+            rateYawDef  = 400;
             rateMax     = 1000;
             rateStep    = 10;
             rcColDec    = 1;
-            rcColDef    = 12;
+            rcColDef    = 12.5;
             rcColMax    = 25;
             rcColMin    = 0;
             rcColStep   = 0.5;
             colDec      = 1;
-            colDef      = 12;
+            colDef      = 12.5;
             colMax      = 25;
             colStep     = 0.5;
             expoDec     = 2;
@@ -1038,10 +1040,10 @@ tab.initRatesSystem = function() {
     if (self.currentRatesType !== self.previousRatesType) {
         self.currentRates.roll_rate                 = rateDef;
         self.currentRates.pitch_rate                = rateDef;
-        self.currentRates.yaw_rate                  = rateDef;
+        self.currentRates.yaw_rate                  = rateYawDef ?? rateDef;
         self.currentRates.collective_rate           = colDef;
         self.currentRates.rc_rate                   = rcRateDef;
-        self.currentRates.rc_rate_yaw               = rcRateDef;
+        self.currentRates.rc_rate_yaw               = rcRateYawDef ?? rcRateDef;
         self.currentRates.rc_rate_pitch             = rcRateDef;
         self.currentRates.rc_rate_collective        = rcColDef;
         self.currentRates.rc_expo                   = expoDef;
