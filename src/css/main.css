@@ -283,7 +283,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #portsinput {
-    width: 220px;
+    width: 360px;
     margin-right: 15px;
 }
 
@@ -295,7 +295,7 @@ input[type="number"]::-webkit-inner-spin-button {
     float: right;
 }
 
-#auto-connect-switch {
+#auto-connect-switch, #show-all-ports-switch{
     width: 110px;
     float: left;
     margin-top: 4px;
@@ -309,7 +309,7 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-right: 2px;
 }
 
-#port-picker .auto_connect, .gray {
+#port-picker .auto_connect, #port-picker .show_all_ports, .gray {
     color: var(--subtleAccent);
 }
 
@@ -2468,68 +2468,6 @@ input {
 #dialogReportProblems-footer {
     margin-bottom: 10px;
 }
-
-/*
-   noUi slider stylings
-*/
-
-.noUi-target {
-    background: var(--alternativeBackground);
-    border-color: #999;
-    box-shadow: none;
-}
-
-.noUi-horizontal .noUi-handle {
-    background: var(--sideBackground);
-    border-color: #999;
-    border-radius: 15px;
-    box-shadow: none;
-    width: 28px;
-    height: 28px;
-    left: -14px;
-    top: -6px;
-}
-
-.noUi-handle:before,
-.noUi-handle:after {
-    border-color: #999;
-    background-color: #999;
-    height: 10px;
-    width: 4px;
-    top: 17px;
-    left: 11px;
-    border: 1px;
-    border-radius: 2px;
-}
-
-.noUi-background {
-    background: var(--alternativeBackground);
-    box-shadow: none;
-}
-
-.noUi-target .noUi-connect {
-    box-shadow: none;
-    background: var(--accent);
-}
-
-.noUi-target[disabled="disabled"] {
-    border-color: var(--subtleAccent) !important;
-}
-
-.noUi-target[disabled="disabled"] .noUi-connect {
-    background: var(--subtleAccent) !important;
-}
-
-.noUi-target[disabled="disabled"] .noUi-handle {
-    border-color: var(--subtleAccent) !important;
-}
-
-.noUi-target[disabled="disabled"] .noUi-handle:before,
-.noUi-target[disabled="disabled"] .noUi-handle:after {
-    border-color: var(--subtleAccent) !important;
-    background: var(--subtleAccent) !important;
-}
-
 
 
 /** Responsive grid **/

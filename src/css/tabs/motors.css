@@ -242,7 +242,7 @@
 }
 
 .tab-motors .motorOverrideSlider .noUi-pips .noUi-value-large {
-    padding-top: 15px;
+    padding-top: 4px;
 }
 
 @media all and (max-width: 575px) {

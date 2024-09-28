@@ -15,9 +15,18 @@
     padding: 10px 5px;
 }
 
-.tab-auxiliary .channel-slider .noUi-connect {
-    background: var(--accent);
-    border-radius: 3px;
+.tab-auxiliary .noUi-connect,
+.tab-auxiliary .noUi-origin {
+    -webkit-transition: transform 0ms;
+    transition: transform 0ms;
+}
+
+.tab-auxiliary .noUi-pips .noUi-marker-large {
+    height: 10px;
+}
+
+.tab-auxiliary .noUi-pips .noUi-value-large {
+    padding-top: 4px;
 }
 
 .tab-auxiliary .mode.on .info {

@@ -1,0 +1,85 @@
+.noUi-base {
+  background: var(--alternativeBackground);
+  border-color: #999;
+  box-shadow: none;
+}
+
+.noUi-horizontal .noUi-handle {
+  height: 28px;
+  width: 28px;
+  right: -14px;
+  border-radius: 14px;
+
+  background: var(--sideBackground);
+  border-color: #999;
+  box-shadow: none;
+}
+
+.noUi-connect,
+.noUi-origin {
+  -webkit-transition: transform 300ms;
+  transition: transform 300ms;
+}
+
+.noUi-handle:before,
+.noUi-handle:after {
+  background-color: #999;
+  height: 10px;
+  width: 2px;
+  top: 16px;
+  left: 12px;
+}
+
+.noUi-connect {
+  box-shadow: none;
+  background: var(--accent);
+}
+
+/* Disabled Theme */
+
+.noUi-target[disabled] {
+  border-color: var(--subtleAccent);
+}
+
+.noUi-target[disabled] .noUi-base {
+  background: var(--subtleAccent);
+}
+
+.noUi-target[disabled] .noUi-connect {
+  background: var(--subtleAccent);
+}
+
+.noUi-target[disabled] .noUi-handle {
+  background-color: var(--subtleAccent);
+}
+
+/* Dark Theme */
+
+html[data-theme="dark"] .noUi-pips {
+  color: var(--mutedText);
+}
+
+html[data-theme="dark"] .noUi-target,
+html[data-theme="dark"] .noUi-handle {
+  border-color: var(--subtleAccent);
+}
+
+/* Dark Disabled Theme */
+
+html[data-theme="dark"] .noUi-target[disabled] {
+  border-color: #888;
+}
+
+html[data-theme="dark"] .noUi-target[disabled] .noUi-base {
+  background: var(--alternativeBackground);
+}
+
+html[data-theme="dark"] .noUi-target[disabled] .noUi-handle {
+  background-color: #444;
+}
+
+html[data-theme="dark"] .noUi-target[disabled] .noUi-handle:before,
+html[data-theme="dark"] .noUi-target[disabled] .noUi-handle:after {
+  border-color: #888;
+  background: #888;
+}
