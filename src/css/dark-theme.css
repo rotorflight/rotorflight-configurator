@@ -149,41 +149,6 @@ html[data-theme=dark] .noboarder td {
     border-style: unset;
 }
 
-html[data-theme=dark] .noUi-target {
-    border-color: var(--subtleAccent) !important;
-}
-
-html[data-theme=dark] .noUi-background {
-    background: #333 !important;
-}
-
-html[data-theme=dark] .noUi-handle {
-    background: var(--sideBackground);
-    border-color: var(--subtleAccent) !important;
-}
-
-html[data-theme=dark] .noUi-target[disabled="disabled"] {
-    border-color: #888 !important;
-}
-
-html[data-theme=dark] .noUi-target[disabled="disabled"] .noUi-connect {
-    background: #555 !important;
-}
-
-html[data-theme=dark] .noUi-target[disabled="disabled"] .noUi-handle {
-    border-color: #888 !important;
-}
-
-html[data-theme=dark] .noUi-target[disabled="disabled"] .noUi-handle:before,
-html[data-theme=dark] .noUi-target[disabled="disabled"] .noUi-handle:after {
-    border-color: #888 !important;
-    background: #888 !important;
-}
-
-html[data-theme=dark] .noUi-pips {
-    color: var(--mutedText);
-}
-
 html[data-theme=dark] .jBox-container {
     background: #393b3a;
     color:white;

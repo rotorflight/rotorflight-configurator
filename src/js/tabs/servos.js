@@ -1,3 +1,6 @@
+import * as noUiSlider from 'nouislider';
+import wNumb from 'wnumb';
+
 const tab = {
     tabName: 'servos',
     isDirty: false,
@@ -132,14 +135,14 @@ tab.initialize = function (callback) {
         function process_override(servoIndex) {
 
             const servoOverride = $('#tab-servos-templates .servoOverrideTemplate tr').clone();
-            const servoSlider = servoOverride.find('.servoOverrideSlider');
             const servoEnable = servoOverride.find('.servoOverrideEnable input');
             const servoInput  = servoOverride.find('.servoOverrideInput input');
 
             servoOverride.attr('class', `servoOverride${servoIndex}`);
             servoOverride.find('.servoOverrideIndex').text(`#${servoIndex+1}`);
 
-            servoSlider.noUiSlider({
+            const servoSlider = noUiSlider.create(servoOverride.find('.servoOverrideSlider').get(0), {
+                exactInput: true,
                 range: {
                     'min': -90,
                     'max':  90,
@@ -147,41 +150,43 @@ tab.initialize = function (callback) {
                 start: 0,
                 step: 5,
                 behaviour: 'snap-drag',
+                pips: {
+                    mode: 'values',
+                    values: [ -80, -60, -40, -20, 0, 20, 40, 60, 80, ],
+                    density: 100 / ((80 + 80) / 5),
+                    stepped: true,
+                    format: wNumb({ decimals: 0 }),
+                },
             });
 
-            servoOverride.find('.pips-range').noUiSlider_pips({
-                mode: 'values',
-                values: [ -80, -60, -40, -20, 0, 20, 40, 60, 80, ],
-                density: 100 / ((80 + 80) / 5),
-                stepped: true,
-                format: wNumb({
-                    decimals: 0,
-                }),
-            });
+            function toggleServoSlider(enable) {
+                if (enable) servoSlider.enable();
+                else servoSlider.disable();
+            }
 
-            servoSlider.on('slide', function () {
-                servoInput.val(parseInt($(this).val()));
+            servoSlider.on('slide', function (values) {
+                servoInput.val(parseInt(values[0]));
             });
 
             servoSlider.on('change', function () {
-                servoInput.change();
+                servoInput.trigger('change');
             });
 
-            servoInput.change(function () {
+            servoInput.on('change', function () {
                 const value = getIntegerValue(this);
-                servoSlider.val(value);
+                servoSlider.set(value, true, true);
                 FC.SERVO_OVERRIDE[servoIndex] = Math.round(value * 1000 / 50);
                 mspHelper.sendServoOverride(servoIndex);
             });
 
-            servoEnable.change(function () {
+            servoEnable.on('change', function () {
                 const check = $(this).prop('checked');
                 const value = check ? 0 : self.OVERRIDE_OFF;
 
                 servoInput.val(0);
-                servoSlider.val(0);
+                servoSlider.set(0);
                 servoInput.prop('disabled', !check);
-                servoSlider.attr('disabled', !check);
+                toggleServoSlider(check);
 
                 FC.SERVO_OVERRIDE[servoIndex] = value;
                 mspHelper.sendServoOverride(servoIndex);
@@ -192,11 +197,11 @@ tab.initialize = function (callback) {
             const angle = check ? Math.round(value * 50 / 1000) : 0;
 
             servoInput.val(angle);
-            servoSlider.val(angle);
+            servoSlider.set(angle);
 
             servoInput.prop('disabled', !check);
-            servoSlider.attr('disabled', !check);
             servoEnable.prop('checked', check);
+            toggleServoSlider(check);
 
             $('.servoOverride tbody').append(servoOverride);
         }
