@@ -12,13 +12,15 @@ const PortHandler = new function () {
     this.port_detected_callbacks = [];
     this.port_removed_callbacks = [];
     this.dfu_available = false;
+    this.showingAllPorts = false;
 };
 
-PortHandler.initialize = function () {
+PortHandler.initialize = function (showAllPorts) {
     const portPickerElementSelector = "div#port-picker #port";
     this.portPickerElement = $(portPickerElementSelector);
     this.selectList = document.querySelector(portPickerElementSelector);
     this.initialWidth = this.selectList.offsetWidth + 12;
+    this.showingAllPorts = showAllPorts;
 
     // fill dropdown with version numbers
     generateVirtualApiVersions();
@@ -40,12 +42,38 @@ PortHandler.check = function () {
     }, TIMEOUT_CHECK);
 };
 
+function portRecognized(portName, pathSelect) {
+    if (portName) {
+            const isWindows = (GUI.operating_system === 'Windows');
+            const isTty = pathSelect.includes('tty');
+            const deviceRecognized = portName.includes('STM') || portName.includes('CP210');
+            const legacyDeviceRecognized = portName.includes('usb');
+            if (isWindows && deviceRecognized || isTty && (deviceRecognized || legacyDeviceRecognized)) {
+                return true;
+            }
+    }
+    return false;
+}
+
+PortHandler.showAllPorts = function(showAllPorts) {
+    if (this.showingAllPorts != showAllPorts) {
+        /**
+         * trigger an update of the serial devices that specifically updates the port selector and resets the initialPorts simultaneously,
+         * so as to not trigger an auto-connect when toggling
+         */
+        this.initialPorts = false;
+        this.showingAllPorts = showAllPorts;
+    }
+};
+
 PortHandler.check_serial_devices = function () {
     const self = this;
 
     serial.getDevices(function(currentPorts) {
-
-        // auto-select port (only during initialization)
+        if (!self.showingAllPorts) {
+            currentPorts = currentPorts.filter((p) => portRecognized(p.displayName, p.path));
+        }
+        // on initialization of the port selector (i.e. app startup or toggling whether to show all ports), only select a detected port, don't auto-connect
         if (!self.initialPorts) {
             currentPorts = self.updatePortSelect(currentPorts);
             self.selectPort(currentPorts);
@@ -112,6 +140,10 @@ PortHandler.check_usb_devices = function (callback) {
     });
 };
 
+/**
+ * removePort removes ports if they disappear from the port list, and fires the disconnect through the connect button.
+ * It will also fire any registered port removal callbacks, then finally update the port selector.
+ */
 PortHandler.removePort = function(currentPorts) {
     const self = this;
     const removePorts = self.array_difference(self.initialPorts, currentPorts);
@@ -149,6 +181,7 @@ PortHandler.removePort = function(currentPorts) {
     }
 };
 
+// detectPort accepts a port array and attempts to recognize a port and auto-connect to it (if enabled)
 PortHandler.detectPort = function(currentPorts) {
     const self = this;
     const newPorts = self.array_difference(currentPorts, self.initialPorts);
@@ -214,6 +247,9 @@ PortHandler.sortPorts = function(ports) {
     });
 };
 
+/**
+ * updatePortSelect accepts an array of ports and updates the portPickerElement with the given ports
+ */
 PortHandler.updatePortSelect = function (ports) {
     ports = this.sortPorts(ports);
     this.portPickerElement.empty();
@@ -249,17 +285,15 @@ PortHandler.updatePortSelect = function (ports) {
     return ports;
 };
 
+/**
+ * selectPort accepts an array of ports and selects a recognized port if one is found
+ */
 PortHandler.selectPort = function(ports) {
-    const OS = GUI.operating_system;
     for (let i = 0; i < ports.length; i++) {
         const portName = ports[i].displayName;
         if (portName) {
             const pathSelect = ports[i].path;
-            const isWindows = (OS === 'Windows');
-            const isTty = pathSelect.includes('tty');
-            const deviceRecognized = portName.includes('STM') || portName.includes('CP210');
-            const legacyDeviceRecognized = portName.includes('usb');
-            if (isWindows && deviceRecognized || isTty && (deviceRecognized || legacyDeviceRecognized)) {
+            if (portRecognized(portName, pathSelect)) {
                 this.portPickerElement.val(pathSelect);
                 console.log(`Porthandler detected device ${portName} on port: ${pathSelect}`);
             }

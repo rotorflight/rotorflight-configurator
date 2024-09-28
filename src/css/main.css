@@ -283,7 +283,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #portsinput {
-    width: 220px;
+    width: 360px;
     margin-right: 15px;
 }
 
@@ -295,7 +295,7 @@ input[type="number"]::-webkit-inner-spin-button {
     float: right;
 }
 
-#auto-connect-switch {
+#auto-connect-switch, #show-all-ports-switch{
     width: 110px;
     float: left;
     margin-top: 4px;
@@ -309,7 +309,7 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-right: 2px;
 }
 
-#port-picker .auto_connect, .gray {
+#port-picker .auto_connect, #port-picker .show_all_ports, .gray {
     color: var(--subtleAccent);
 }
 
