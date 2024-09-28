@@ -231,8 +231,6 @@
 }
 
 .tab-adjustments .adjSliders .handle-icon:before,
-.tab-adjustments .adjSliders .handle-icon:after,
-.tab-adjustments .adjSliders .handle-icon:before,
 .tab-adjustments .adjSliders .handle-icon:after {
     height: 6px;
     top: 20px;
