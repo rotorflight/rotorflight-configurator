@@ -126,7 +126,7 @@ TABS.mixer.initialize = function (callback) {
 
         const mixerOverride = $('#tab-mixer-templates .mixerOverrideTemplate tr').clone();
 
-        const mixerSlider = mixerOverride.find('.mixerOverrideSlider');
+        const mixerSlider = mixerOverride.find('.mixerOverrideSlider').get(0);
         const mixerEnable = mixerOverride.find('.mixerOverrideEnable input');
         const mixerInput  = mixerOverride.find('.mixerOverrideInput input');
 
@@ -146,7 +146,7 @@ TABS.mixer.initialize = function (callback) {
         mixerInput.attr('max', axis.max);
         mixerInput.attr('step', axis.step);
 
-        mixerSlider.noUiSlider({
+        noUiSlider.create(mixerSlider, {
             range: {
                 'min': axis.min,
                 'max': axis.max,
@@ -154,42 +154,44 @@ TABS.mixer.initialize = function (callback) {
             start: 0,
             step: axis.sliderstep,
             behaviour: 'snap-drag',
+            pips: {
+                mode: 'values',
+                values: axis.pipval,
+                density: 100 / ((axis.max - axis.min) / axis.pipstep),
+                stepped: true,
+                format: wNumb({ decimals: axis.pipfix }),
+            },
         });
 
-        mixerOverride.find('.pips-range').noUiSlider_pips({
-            mode: 'values',
-            values: axis.pipval,
-            density: 100 / ((axis.max - axis.min) / axis.pipstep),
-            stepped: true,
-            format: wNumb({
-                decimals: axis.pipfix,
-            }),
+        function toggleMixerSlider(enable) {
+            if (enable) mixerSlider.noUiSlider.enable();
+            else mixerSlider.noUiSlider.disable();
+        }
+
+        mixerSlider.noUiSlider.on('slide', function (values) {
+            mixerInput.val(parseFloat(values[0]).toFixed(axis.fixed));
         });
 
-        mixerSlider.on('slide', function () {
-            mixerInput.val(parseFloat($(this).val()).toFixed(axis.fixed));
+        mixerSlider.noUiSlider.on('change', function () {
+            mixerInput.trigger('change');
         });
 
-        mixerSlider.on('change', function () {
-            mixerInput.change();
-        });
-
-        mixerInput.change(function () {
+        mixerInput.on('change', function () {
             const value = parseFloat(getNumberInput($(this)));
-            mixerSlider.val(value);
+            mixerSlider.noUiSlider.set(value, true, true);
             FC.MIXER_OVERRIDE[inputIndex] = Math.round(value / axis.scale);
             mspHelper.sendMixerOverride(inputIndex);
         });
 
-        mixerEnable.change(function () {
+        mixerEnable.on('change', function () {
             const check = $(this).prop('checked');
             const value = check ? 0 : Mixer.OVERRIDE_OFF;
 
             mixerInput.val(0);
-            mixerSlider.val(0);
+            mixerSlider.noUiSlider.set(0);
 
             mixerInput.prop('disabled', !check);
-            mixerSlider.attr('disabled', !check);
+            toggleMixerSlider(check);
 
             FC.MIXER_OVERRIDE[inputIndex] = value;
             mspHelper.sendMixerOverride(inputIndex);
@@ -204,11 +206,11 @@ TABS.mixer.initialize = function (callback) {
         value = (check ? value : 0).toFixed(axis.fixed);
 
         mixerInput.val(value);
-        mixerSlider.val(value);
+        mixerSlider.noUiSlider.set(value);
 
         mixerInput.prop('disabled', !check);
-        mixerSlider.attr('disabled', !check);
         mixerEnable.prop('checked', check);
+        toggleMixerSlider(check);
 
         $('.mixerOverrideTable tbody').append(mixerOverride);
     }

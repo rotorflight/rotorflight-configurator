@@ -169,31 +169,36 @@ TABS.auxiliary.initialize = function (callback) {
             modeRanges.children().eq(0).find('.logic').show();
         }
 
-        $(rangeElement).find('.channel-slider').noUiSlider({
+        let sliderValues = [900, 1000, 1200, 1400, 1500, 1600, 1800, 2000, 2100];
+        if ($(window).width() < 575) {
+            sliderValues = [1000, 1200, 1400, 1600, 1800, 2000];
+        }
+
+        const slider = noUiSlider.create($(rangeElement).find('.channel-slider').get(0), {
             start: rangeValues,
             behaviour: 'snap-drag',
             margin: 25,
             step: 5,
             connect: true,
             range: channel_range,
-            format: wNumb({
-                decimals: 0,
-            })
+            format: wNumb({ decimals: 0 }),
+            pips: {
+                mode: 'values',
+                values: sliderValues,
+                density: 4,
+                stepped: true
+            },
         });
+        slider.on('change', setDirty);
 
-        const elementName =  '#mode-' + modeIndex + '-range-' + rangeIndex;
-        $(elementName + ' .channel-slider').Link('lower').to($(elementName + ' .lowerLimitValue'));
-        $(elementName + ' .channel-slider').Link('upper').to($(elementName + ' .upperLimitValue'));
-
-        let sliderValues = [900, 1000, 1200, 1400, 1500, 1600, 1800, 2000, 2100];
-        if ($(window).width() < 575) {
-            sliderValues = [1000, 1200, 1400, 1600, 1800, 2000];
+        function updateLimits(values) {
+            rangeElement.find('.lowerLimitValue').text(values[0]);
+            rangeElement.find('.upperLimitValue').text(values[1]);
         }
-        $(rangeElement).find(".pips-channel-range").noUiSlider_pips({
-            mode: 'values',
-            values: sliderValues,
-            density: 4,
-            stepped: true
+        updateLimits(rangeValues);
+
+        slider.on('slide', function(values) {
+            updateLimits(values);
         });
 
         $(rangeElement).find('.deleteRange').data('rangeElement', rangeElement);
@@ -274,14 +279,14 @@ TABS.auxiliary.initialize = function (callback) {
             const modeId = modeElement.data('id');
 
             $(modeElement).find('.range').each(function() {
-                const rangeValues = $(this).find('.channel-slider').val();
+                const rangeValues = $(this).find('.channel-slider').get(0).noUiSlider.get();
                 const modeRange = {
                     id: modeId,
                     auxChannelIndex: parseInt($(this).find('.channel').val()),
                     range: {
-                        start: rangeValues[0],
-                        end: rangeValues[1]
-                    }
+                        start: parseInt(rangeValues[0]),
+                        end: parseInt(rangeValues[1]),
+                    },
                 };
                 FC.MODE_RANGES.push(modeRange);
 

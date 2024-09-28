@@ -1,4 +1,3 @@
-"use strict";
 
 const css_dark = [
     '/css/dark-theme.css',
@@ -193,18 +192,19 @@ $(document).ready(function() {
     });
 
     $(".slider", sliderElems).each(function(sliderIndex) {
-        $(this)
-            .noUiSlider({
-                start: CHANNEL_MIN_VALUE,
-                range: {
-                    min: CHANNEL_MIN_VALUE,
-                    max: CHANNEL_MAX_VALUE
-                }
-            }).on('slide change set', function(e, value) {
-                value = Math.round(parseFloat(value));
-                channelValues[sliderIndex + 4] = value;
-                $(".tooltip", this).text(value);
-            });
+        const slider = noUiSlider.create($(this).get(0), {
+            start: CHANNEL_MIN_VALUE,
+            range: {
+                min: CHANNEL_MIN_VALUE,
+                max: CHANNEL_MAX_VALUE
+            }
+        });
+
+        slider.on('slide', (values) => {
+            const value = Math.round(parseFloat(values[0]));
+            channelValues[sliderIndex + 4] = value;
+            $(".tooltip", this).text(value);
+        });
 
         $(this).append('<div class="tooltip"></div>');
 
