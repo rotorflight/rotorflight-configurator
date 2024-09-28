@@ -11,6 +11,7 @@ const GUI_MODES = {
 
 const GuiControl = function () {
     this.auto_connect = false;
+    this.show_all_ports = false;
     this.connecting_to = false;
     this.connected_to = false;
     this.connect_lock = false;
