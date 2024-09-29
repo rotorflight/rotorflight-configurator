@@ -1,3 +1,35 @@
+# 2.1.0-20240929
+
+This is a _development snapshot_ of the Rotorflight 2.1 Configurator.
+
+## Notes
+
+This version is intended to be used for beta-testing only.
+It is not fully working nor stable, and should not be used by end-users.
+
+For more information, please join the Rotorflight Discord chat.
+
+## Downloads
+
+The download locations are:
+
+- [Rotorflight Configurator](https://github.com/rotorflight/rotorflight-configurator/releases/tag/snapshot/2.1.0-20240929)
+- [Rotorflight Blackbox](https://github.com/rotorflight/rotorflight-blackbox/releases/tag/snapshot/2.1.0-20240929)
+- [LUA Scripts for EdgeTx and OpenTx](https://github.com/rotorflight/rotorflight-lua-scripts/releases/tag/snapshot/2.1.0-20240929)
+- [LUA Scripts for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos/releases/tag/snapshot/2.1.0-20240929)
+
+
+## Changes
+
+- Improved sidebar style
+- Add ESC telemetry half-duplex and pin-swap toggles
+- Refactor bottom status bar
+- Hide Rates acceleration and response (until fixed)
+- Update nouislider
+
+
+***
+
 # 2.1.0-20240828
 
 This is a _development snapshot_ of the Rotorflight 2.1 Configurator.
