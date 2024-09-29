@@ -1108,7 +1108,7 @@
         "message": "Enable Software Serial ports"
     },
     "feature_GPS": {
-        "message": "GPS for navigation and telemetry"
+        "message": "GPS for telemetry"
     },
     "feature_SONAR": {
         "message": "Sonar altitude radar"
@@ -1169,6 +1169,15 @@
     },
     "configurationFeatures": {
         "message": "Features"
+    },
+    "featureTip_GPS": {
+        "message": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration."
+    },
+    "featureTip_LED_STRIP": {
+        "message": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration."
+    },
+    "featureTip_CMS": {
+        "message": "Enables firmware support for CMS."
     },
     "configurationSerialPorts": {
         "message": "Serial Ports"
