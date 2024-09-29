@@ -212,46 +212,44 @@ TABS.adjustments.initialize = function (callback) {
         const incSlider = adjBody.find('.inc-slider');
         const decSlider = adjBody.find('.dec-slider');
         const valSlider = adjBody.find('.val-slider');
-        const valPips = adjBody.find('.pips-value-range');
 
-        enaSlider.noUiSlider({
+        noUiSlider.create(enaSlider.get(0), {
             start: [ adjRange.enaRange.start, adjRange.enaRange.end ],
             behaviour: 'snap-drag',
             step: 5,
             connect: true,
             range: channelRange,
-            format: wNumb({
-                decimals: 0
-            })
+            format: wNumb({ decimals: 0 }),
+            pips: {
+                mode: 'values',
+                values: channelPips,
+                density: density(self.AUX_MIN, self.AUX_MAX, 50),
+                stepped: true,
+            },
         });
 
-        decSlider.noUiSlider({
+        noUiSlider.create(decSlider.get(0), {
             start: [ adjRange.adjRange1.start, adjRange.adjRange1.end ],
             behaviour: 'snap-drag',
             step: 5,
             connect: true,
             range: channelRange,
-            format: wNumb({
-                decimals: 0
-            })
+            format: wNumb({ decimals: 0 }),
+            pips: {
+                mode: 'values',
+                values: channelPips,
+                density: density(self.AUX_MIN, self.AUX_MAX, 50),
+                stepped: true,
+            },
         });
 
-        incSlider.noUiSlider({
+        noUiSlider.create(incSlider.get(0), {
             start: [ adjRange.adjRange2.start, adjRange.adjRange2.end ],
             behaviour: 'snap-drag',
             step: 5,
             connect: true,
             range: channelRange,
-            format: wNumb({
-                decimals: 0
-            })
-        });
-
-        adjBody.find(".pips-channel-range").noUiSlider_pips({
-            mode: 'values',
-            values: channelPips,
-            density: density(self.AUX_MIN, self.AUX_MAX, 50),
-            stepped: true
+            format: wNumb({ decimals: 0 }),
         });
 
         const valSliderConfig = {
@@ -263,19 +261,15 @@ TABS.adjustments.initialize = function (callback) {
                 'min': adjConfig.min,
                 'max': adjConfig.max,
             },
-            format: wNumb({
-                decimals: 0
-            })
+            format: wNumb({ decimals: 0 }),
+            pips: {
+                mode: 'values',
+                values: adjConfig.pips,
+                density: density(adjConfig.min, adjConfig.max, adjConfig.ticks),
+                stepped: true
+            },
         };
-        valSlider.noUiSlider(valSliderConfig);
-
-        const valPipsConfig = {
-            mode: 'values',
-            values: adjConfig.pips,
-            density: density(adjConfig.min, adjConfig.max, adjConfig.ticks),
-            stepped: true
-        };
-        valPips.noUiSlider_pips(valPipsConfig);
+        noUiSlider.create(valSlider.get(0), valSliderConfig);
 
         const enaChannelList = adjBody.find('select.enaChannel');
         enaChannelList.val(adjRange.enaChannel);
@@ -316,17 +310,18 @@ TABS.adjustments.initialize = function (callback) {
         function setEnaRange(min, max, noslide) {
             enaMinInput.attr('max',max).val(min);
             enaMaxInput.attr('min',min).val(max);
-            if (noslide !== true)
-                enaSlider.val([min,max]);
+            if (!noslide) {
+                enaSlider.get(0).noUiSlider.set([min,max]);
+            }
             adjRange.dirty = true;
             adjRange.enaRange.start = min;
             adjRange.enaRange.end = max;
         }
 
-        enaSlider.on('slide', function() {
-            const range = enaSlider.val();
-            const min = parseInt(range[0]);
-            const max = parseInt(range[1]);
+        enaSlider.get(0).noUiSlider.on('change', setDirty);
+        enaSlider.get(0).noUiSlider.on('slide', function(values) {
+            const min = parseInt(values[0]);
+            const max = parseInt(values[1]);
             setEnaRange(min,max,true);
         });
 
@@ -345,17 +340,18 @@ TABS.adjustments.initialize = function (callback) {
         function setDecRange(min, max, noslide) {
             decMinInput.attr('max',max).val(min);
             decMaxInput.attr('min',min).val(max);
-            if (noslide !== true)
-                decSlider.val([min,max]);
+            if (!noslide) {
+                decSlider.get(0).noUiSlider.set([min,max]);
+            }
             adjRange.dirty = true;
             adjRange.adjRange1.start = min;
             adjRange.adjRange1.end = max;
         }
 
-        decSlider.on('slide', function() {
-            const range = decSlider.val();
-            const min = parseInt(range[0]);
-            const max = parseInt(range[1]);
+        decSlider.get(0).noUiSlider.on('change', setDirty);
+        decSlider.get(0).noUiSlider.on('slide', function(values) {
+            const min = parseInt(values[0]);
+            const max = parseInt(values[1]);
             setDecRange(min,max,true);
         });
 
@@ -374,17 +370,18 @@ TABS.adjustments.initialize = function (callback) {
         function setIncRange(min, max, noslide) {
             incMinInput.attr('max',max).val(min);
             incMaxInput.attr('min',min).val(max);
-            if (noslide !== true)
-               incSlider.val([min,max]);
+            if (!noslide) {
+               incSlider.get(0).noUiSlider.set([min,max]);
+            }
             adjRange.dirty = true;
             adjRange.adjRange2.start = min;
             adjRange.adjRange2.end = max;
         }
 
-        incSlider.on('slide', function() {
-            const range = incSlider.val();
-            const min = parseInt(range[0]);
-            const max = parseInt(range[1]);
+        incSlider.get(0).noUiSlider.on('change', setDirty);
+        incSlider.get(0).noUiSlider.on('slide', function(values) {
+            const min = parseInt(values[0]);
+            const max = parseInt(values[1]);
             setIncRange(min,max,true);
         });
 
@@ -403,17 +400,18 @@ TABS.adjustments.initialize = function (callback) {
         function setValRange(min, max, noslide) {
             funcMinInput.attr('max',max).val(min);
             funcMaxInput.attr('min',min).val(max);
-            if (noslide !== true)
-                valSlider.val([min,max]);
+            if (!noslide) {
+                valSlider.get(0).noUiSlider.set([min,max]);
+            }
             adjRange.dirty = true;
             adjRange.adjMin = min;
             adjRange.adjMax = max;
         }
 
-        valSlider.on('slide', function() {
-            const range = valSlider.val();
-            const min = parseInt(range[0]);
-            const max = parseInt(range[1]);
+        valSlider.get(0).noUiSlider.on('change', setDirty);
+        valSlider.get(0).noUiSlider.on('slide', function(values) {
+            const min = parseInt(values[0]);
+            const max = parseInt(values[1]);
             setValRange(min,max,true);
         });
 
@@ -439,15 +437,21 @@ TABS.adjustments.initialize = function (callback) {
             adjConfig = self.FUNCTIONS[index];
             adjRange.dirty = true;
             adjRange.adjFunction = index;
-            valSliderConfig.range.min = adjConfig.min;
-            valSliderConfig.range.max = adjConfig.max;
-            valSlider.noUiSlider(valSliderConfig, true);
-            valSlider.prepend('<div class="marker valMarker" style="display:none;"></div>'); // Bug in noUiSlider
+            valSlider.get(0).noUiSlider.updateOptions({
+                range: {
+                    min: adjConfig.min,
+                    max: adjConfig.max,
+                },
+                pips: {
+                    mode: 'values',
+                    values: adjConfig.pips,
+                    density: density(adjConfig.min, adjConfig.max, adjConfig.ticks),
+                    stepped: true,
+                },
+            }, true);
             if (adjConfig.id > 0 && adjRange.adjType == 1)
                 valSlider.find('.marker').show(self.toggle_speed);
-            valPipsConfig.values = adjConfig.pips;
-            valPipsConfig.density = density(adjConfig.min, adjConfig.max, adjConfig.ticks);
-            valPips.noUiSlider_pips(valPipsConfig, true);
+
             funcMinInput.attr('min', adjConfig.min);
             funcMaxInput.attr('max', adjConfig.max);
             setValRange(adjConfig.min, adjConfig.max);
@@ -534,13 +538,34 @@ TABS.adjustments.initialize = function (callback) {
         function updateVisibility() {
             adjRange.adjType = parseInt(adjTypeElems.filter(':checked').val());
 
+            function toggleHandleIcons(show) {
+                if (show) {
+                    incSlider.find('.noUi-handle')
+                        .addClass('handle-icon')
+                        .find('.noUi-touch-area')
+                        .addClass(['fas', 'fa-plus']);
+                    decSlider.find('.noUi-handle')
+                        .addClass('handle-icon')
+                        .find('.noUi-touch-area')
+                        .addClass(['fas', 'fa-minus']);
+                } else {
+                    incSlider.find('.noUi-handle')
+                        .removeClass('handle-icon')
+                        .find('.noUi-touch-area')
+                        .removeClass(['fas', 'fa-plus']);
+                    decSlider.find('.noUi-handle')
+                        .removeClass('handle-icon')
+                        .find('.noUi-touch-area')
+                        .removeClass(['fas', 'fa-minus']);
+                }
+            }
+
             if (adjRange.adjType == 0) {
                 adjBody.find('.input-element').prop('disabled', true);
                 adjBody.find('.adj-slider').attr("disabled", "disabled");
                 adjBody.find('.value-box').text('-');
                 adjBody.find('.marker').hide(self.toggle_speed);
-                incSlider.find('.noUi-handle').text('');
-                decSlider.find('.noUi-handle').text('');
+                toggleHandleIcons(false);
                 if (adjRange.adjFunction != 0) {
                     adjFuncList.val(0).trigger('change');
                 }
@@ -557,8 +582,7 @@ TABS.adjustments.initialize = function (callback) {
                     adjBody.find('.enaMarker').show(self.toggle_speed);
                 else
                     adjBody.find('.enaMarker').hide(self.toggle_speed);
-                incSlider.find('.noUi-handle').text('');
-                decSlider.find('.noUi-handle').text('');
+                toggleHandleIcons(false);
                 if (adjRange.adjStep > 0)
                     funcStepInput.val(0).trigger('change');
             }
@@ -571,8 +595,7 @@ TABS.adjustments.initialize = function (callback) {
                     adjBody.find('.enaMarker').show(self.toggle_speed);
                 else
                     adjBody.find('.enaMarker').hide(self.toggle_speed);
-                incSlider.find('.noUi-handle').text('+');
-                decSlider.find('.noUi-handle').text('-');
+                toggleHandleIcons(true);
                 if (adjRange.adjStep == 0) {
                     funcStepInput.val(1).trigger('change');
                 }

@@ -149,41 +149,6 @@ button {
     border-style: unset;
 }
 
-.noUi-target {
-    border-color: var(--subtleAccent) !important;
-}
-
-.noUi-background {
-    background: #333 !important;
-}
-
-.noUi-handle {
-    background: var(--sideBackground);
-    border-color: var(--subtleAccent) !important;
-}
-
-.noUi-target[disabled="disabled"] {
-    border-color: #888 !important;
-}
-
-.noUi-target[disabled="disabled"] .noUi-connect {
-    background: #555 !important;
-}
-
-.noUi-target[disabled="disabled"] .noUi-handle {
-    border-color: #888 !important;
-}
-
-.noUi-target[disabled="disabled"] .noUi-handle:before,
-.noUi-target[disabled="disabled"] .noUi-handle:after {
-    border-color: #888 !important;
-    background: #888 !important;
-}
-
-.noUi-pips {
-    color: var(--mutedText);
-}
-
 .jBox-container {
     background: #393b3a;
     color:white;
@@ -1042,4 +1007,35 @@ progress[value]::-webkit-progress-bar {
 
 .select2-results>.select2-results__options {
     background-color: #3a3a3a !important;
+}
+
+/* nouislider theme */
+
+.noUi-pips {
+    color: var(--mutedText);
+}
+
+.noUi-target,
+.noUi-handle {
+    border-color: var(--subtleAccent);
+}
+
+/* nouislider disabled theme */
+
+.noUi-target[disabled] {
+    border-color: #888;
+}
+
+.noUi-target[disabled] .noUi-base {
+    background: var(--alternativeBackground);
+}
+
+.noUi-target[disabled] .noUi-handle {
+    background-color: #444;
+}
+
+.noUi-target[disabled] .noUi-handle:before,
+.noUi-target[disabled] .noUi-handle:after {
+    border-color: #888;
+    background: #888;
 }

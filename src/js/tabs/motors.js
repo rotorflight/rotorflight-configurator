@@ -216,38 +216,34 @@ TABS.motors.initialize = function (callback) {
             meterLabel(temp2Bar, '0&deg;C', '150&deg;C');
             meterLabel(errorBar, '0%', '100%');
 
-            const motorSlider = motorInfo.find('.motorOverrideSlider');
-
-            motorSlider.noUiSlider({
+            const motorSlider = noUiSlider.create(motorInfo.find('.motorOverrideSlider').get(0), {
                 range: {
                     'min': 0,
                     'max': 100,
                 },
                 start: 0,
                 step: 1,
-                behaviour: 'none',
+                behaviour: 'snap-drag',
+                pips: {
+                    mode: 'values',
+                    values: [ 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, ],
+                    density: 100 / ((0 + 100) / 5),
+                    stepped: true,
+                    format: wNumb({
+                        decimals: 0,
+                    }),
+                }
             });
 
-            motorInfo.find('.pips-range').noUiSlider_pips({
-                mode: 'values',
-                values: [ 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, ],
-                density: 100 / ((0 + 100) / 5),
-                stepped: true,
-                format: wNumb({
-                    decimals: 0,
-                }),
-            });
-
-            motorSlider.on('change', function () {
-                const value = $(this).val();
-                FC.MOTOR_OVERRIDE[motorIndex] = Math.round(value * 10);
+            motorSlider.on('update', function (values) {
+                FC.MOTOR_OVERRIDE[motorIndex] = Math.round(values[0] * 10);
                 mspHelper.sendMotorOverride(motorIndex);
             });
 
             const value = FC.MOTOR_OVERRIDE[motorIndex];
             const angle = Math.round(value / 10);
 
-            motorSlider.val(angle);
+            motorSlider.set(angle);
 
             FC.CONFIG.motorOverrideEnabled |= (value != 0);
 
@@ -317,7 +313,9 @@ TABS.motors.initialize = function (callback) {
             const checked = enableMotorOverrideSwitch.prop('checked');
             FC.CONFIG.motorOverrideEnabled = checked;
             $('.overridesEnabled').toggle(checked);
-            $('.motorOverrideSlider').val(0).change();
+            $('.motorOverrideSlider').each(function() {
+                $(this).get(0).noUiSlider?.set(0);
+            });
         });
 
         enableMotorOverrideSwitch.prop('checked', FC.CONFIG.motorOverrideEnabled);
