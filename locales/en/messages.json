@@ -1946,9 +1946,6 @@
     "receiverCrsfTelemetrySensor_ESC_MODEL": {
         "message": "ESC Model"
     },
-    "receiverCrsfTelemetrySensor_ESC_VOLTAGE": {
-        "message": "ESC Voltage"
-    },
     "receiverCrsfTelemetrySensor_BEC_VOLTAGE": {
         "message": "BEC Voltage"
     },
@@ -1957,9 +1954,6 @@
     },
     "receiverCrsfTelemetrySensor_MCU_VOLTAGE": {
         "message": "MCU Voltage"
-    },
-    "receiverCrsfTelemetrySensor_ESC_CURRENT": {
-        "message": "ESC Current"
     },
     "receiverCrsfTelemetrySensor_BEC_CURRENT": {
         "message": "BEC Current"
