@@ -30,18 +30,22 @@ fontawesome:
 version: ## Set application version to $SEMVER
 	sed -i -e 's/\("version":[ \t]*\)".*"/\1"$(SEMVER)"/' package.json
 
-.PHONY: watch
-watch: ## Run development server
+.PHONY: dev-server
+dev-server: ## Run development server
 	yarn vite
 
-.PHONY: dev
-dev: ## Run development client
+.PHONY: dev-client
+dev-client: ## Run development client
 	NW_PRE_ARGS=--load-extension='./node_modules/nw-vue-devtools-prebuilt/extension' \
-	yarn gulp dev
+	yarn gulp dev_client
+
+.PHONY: debug
+debug: ## Run debug build
+	yarn gulp debug
 
 .PHONY: android
 android: ## Run android debug build
-	yarn gulp dev --debug --platform android
+	yarn gulp debug --platform android
 
 .PHONY: clean
 clean: ##
