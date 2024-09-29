@@ -1099,7 +1099,7 @@
         "message": "Enable Software Serial ports"
     },
     "feature_GPS": {
-        "message": "GPS for navigation and telemetry"
+        "message": "GPS for telemetry"
     },
     "feature_SONAR": {
         "message": "Sonar altitude radar"
@@ -1160,6 +1160,15 @@
     },
     "configurationFeatures": {
         "message": "Features"
+    },
+    "featureTip_GPS": {
+        "message": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration."
+    },
+    "featureTip_LED_STRIP": {
+        "message": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration."
+    },
+    "featureTip_CMS": {
+        "message": "Enables firmware support for CMS."
     },
     "configurationSerialPorts": {
         "message": "Serial Ports"
@@ -1637,11 +1646,20 @@
     "receiverSerialHalfDuplex": {
         "message": "One-wire Communication (Half-Duplex)"
     },
+    "receiverSerialHalfDuplexHelp": {
+        "message": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2."
+    },
     "receiverSerialInverted": {
         "message": "Inverted Serial Signaling"
     },
+    "receiverSerialInvertedHelp": {
+        "message": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help."
+    },
     "receiverSerialPinSwap": {
-        "message": "Pin Swap (Swap Rx and Tx pins)"
+        "message": "Rx/Tx Pin Swap"
+    },
+    "receiverSerialPinSwapHelp": {
+        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
     },
     "receiverStickCenter": {
         "message": "Stick Center"
@@ -1677,13 +1695,13 @@
         "message": "Cyclic Deadband"
     },
     "receiverHelpCyclicDeadband": {
-        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle."
+        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle."
     },
     "receiverYawDeadband": {
         "message": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
+        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
     },
     "receiverTelemetrySettings": {
         "message": "Telemetry Settings"
@@ -1919,9 +1937,6 @@
     "receiverCrsfTelemetrySensor_ESC_MODEL": {
         "message": "ESC Model"
     },
-    "receiverCrsfTelemetrySensor_ESC_VOLTAGE": {
-        "message": "ESC Voltage"
-    },
     "receiverCrsfTelemetrySensor_BEC_VOLTAGE": {
         "message": "BEC Voltage"
     },
@@ -1930,9 +1945,6 @@
     },
     "receiverCrsfTelemetrySensor_MCU_VOLTAGE": {
         "message": "MCU Voltage"
-    },
-    "receiverCrsfTelemetrySensor_ESC_CURRENT": {
-        "message": "ESC Current"
     },
     "receiverCrsfTelemetrySensor_BEC_CURRENT": {
         "message": "BEC Current"
@@ -3073,13 +3085,19 @@
         "message": "ESC Telemetry protocol"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC."
+        "message": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab."
     },
     "motorsEscTelemetryHalfDuplex": {
         "message": "One-wire Communication (Half-Duplex)"
     },
+    "motorsEscTelemetryHalfDuplexHelp": {
+        "message": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scropion Tribunus)."
+    },
     "motorsEscTelemetryPinswap": {
-        "message": "Pin Swap (Swap Rx and Tx pins)"
+        "message": "Rx/Tx Pin Swap"
+    },
+    "motorsEscTelemetryPinswapHelp": {
+        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
     },
     "motorsUnsyncedPwm": {
         "message": "Unsyncronised ESC update"
@@ -3094,10 +3112,10 @@
         "message": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz."
     },
     "motorsDshotBidir": {
-        "message": "DShot RPM Telemetry"
+        "message": "Dshot RPM Telemetry"
     },
     "motorsDshotBidirHelp": {
-        "message": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32."
+        "message": "The ESC RPM is sent back to the FC with Dshot. Also known as bidirectional Dshot. <br>Note: Requires a compatible ESC, like AM32, Bluejay or BLHeli32 version 32.7 or higher."
     },
     "motorsRPMSensor": {
         "message": "RPM Sensor"
@@ -4954,7 +4972,7 @@
         "message": "Gyro RPM Notch Filter Banks"
     },
     "gyroRpmFilterHelp": {
-        "message": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
+        "message": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
     },
     "gyroRpmFilterMainRotorGroup": {
         "message": "Main Rotor Notch Filters"
