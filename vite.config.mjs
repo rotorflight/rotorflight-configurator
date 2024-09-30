@@ -21,6 +21,13 @@ export default defineConfig({
         "src/main_cordova.html": "src/main_cordova.html",
         "src/tabs/receiver_msp.html": "src/tabs/receiver_msp.html",
       },
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules/three")) {
+            return "vendor-three";
+          }
+        },
+      },
     },
   },
   plugins: [vue()],

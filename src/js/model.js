@@ -1,3 +1,6 @@
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
+
 // 3D model
 export const Model = function (wrapper, canvas) {
 
@@ -11,8 +14,7 @@ export const Model = function (wrapper, canvas) {
     // initialize render size for current canvas size
     this.renderer.setSize(this.wrapper.width() * 2, this.wrapper.height() * 2);
 
-    // Set output encoding for GLTF model format
-    this.renderer.outputEncoding = THREE.sRGBEncoding;
+    this.renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     // model file name
     var model_file = 'fallback';
@@ -54,7 +56,7 @@ export const Model = function (wrapper, canvas) {
 };
 
 Model.prototype.loadGLTF = function (model_file, callback) {
-    const loader = new THREE.GLTFLoader();
+    const loader = new GLTFLoader();
     loader.load('/resources/models/' + model_file + '.gltf', function (gltf) {
         callback(gltf.scene);
     });
