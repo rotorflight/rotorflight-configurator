@@ -35,8 +35,8 @@ export const Model = function (wrapper, canvas) {
     this.camera.position.z = 800;
 
     // some light
-    const light = new THREE.AmbientLight(0x404040);
-    const light2 = new THREE.DirectionalLight(new THREE.Color(1, 1, 1), 1.5);
+    const light = new THREE.AmbientLight(0x404040, 20);
+    const light2 = new THREE.DirectionalLight(new THREE.Color(1, 1, 1), 5);
     light2.position.set(0, 1, 0);
 
     // add camera, model, light to the foreground scene
