@@ -1,3 +1,5 @@
+import { Model } from "@/js/model.js";
+
 const tab = {
     tabName: 'receiver',
     isDirty: false,

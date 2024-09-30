@@ -1,7 +1,5 @@
-'use strict';
-
 // 3D model
-const Model = function (wrapper, canvas) {
+export const Model = function (wrapper, canvas) {
 
     const flip = (FC.MIXER_CONFIG.main_rotor_dir == 0);
 
