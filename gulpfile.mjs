@@ -421,7 +421,7 @@ function build_redist_win() {
 function run_dev_client() {
   switch (context.target.platform) {
     case "android":
-      throw Error("android dev client not supported");
+      return () => Promie.reject(Error("android dev client not supported"));
 
     case "linux":
     case "osx":
