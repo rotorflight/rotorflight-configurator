@@ -1,3 +1,7 @@
+import { Clock } from "three";
+
+import { Model } from "@/js/model.js";
+
 const tab = {
     tabName: 'rates',
     isDirty: false,
@@ -492,7 +496,7 @@ tab.renderModel = function () {
         requestAnimationFrame(self.renderModel.bind(self));
     }
     if (!self.clock) {
-        self.clock = new THREE.Clock();
+        self.clock = new Clock();
     }
 
     if (self.rcChannels[0] && self.rcChannels[1] && self.rcChannels[2]) {

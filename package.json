@@ -52,8 +52,7 @@
     "multiple-select": "^1.5.2",
     "select2": "^4.0.13",
     "semver-min": "^0.7.2",
-    "switchery-latest": "^0.8.2",
-    "three": "^0.126.1"
+    "switchery-latest": "^0.8.2"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
@@ -83,6 +82,7 @@
     "nw-vue-devtools-prebuilt": "^0.0.10",
     "postcss": "^8.4.14",
     "rpm-builder": "^1.2.1",
+    "three": "^0.169.0",
     "vinyl-source-stream": "^2.0.0",
     "vite": "^5.4.0",
     "vue": "^2.7.0",

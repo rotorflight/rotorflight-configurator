@@ -1,3 +1,7 @@
+import { Clock } from "three";
+
+import { Model } from "@/js/model.js";
+
 const tab = {
     tabName: 'receiver',
     isDirty: false,
@@ -1296,7 +1300,7 @@ tab.initModelPreview = function () {
     const self = this;
 
     self.model = new Model($('#canvas_wrapper'), $('#canvas'));
-    self.clock = new THREE.Clock();
+    self.clock = new Clock();
     self.rateCurve = new RateCurve2();
     self.keepRendering = true;
 

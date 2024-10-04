@@ -1,7 +1,8 @@
-'use strict';
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
 
 // 3D model
-const Model = function (wrapper, canvas) {
+export const Model = function (wrapper, canvas) {
 
     const flip = (FC.MIXER_CONFIG.main_rotor_dir == 0);
 
@@ -13,8 +14,7 @@ const Model = function (wrapper, canvas) {
     // initialize render size for current canvas size
     this.renderer.setSize(this.wrapper.width() * 2, this.wrapper.height() * 2);
 
-    // Set output encoding for GLTF model format
-    this.renderer.outputEncoding = THREE.sRGBEncoding;
+    this.renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     // model file name
     var model_file = 'fallback';
@@ -35,8 +35,8 @@ const Model = function (wrapper, canvas) {
     this.camera.position.z = 800;
 
     // some light
-    const light = new THREE.AmbientLight(0x404040);
-    const light2 = new THREE.DirectionalLight(new THREE.Color(1, 1, 1), 1.5);
+    const light = new THREE.AmbientLight(0x404040, 20);
+    const light2 = new THREE.DirectionalLight(new THREE.Color(1, 1, 1), 5);
     light2.position.set(0, 1, 0);
 
     // add camera, model, light to the foreground scene
@@ -56,7 +56,7 @@ const Model = function (wrapper, canvas) {
 };
 
 Model.prototype.loadGLTF = function (model_file, callback) {
-    const loader = new THREE.GLTFLoader();
+    const loader = new GLTFLoader();
     loader.load('/resources/models/' + model_file + '.gltf', function (gltf) {
         callback(gltf.scene);
     });
