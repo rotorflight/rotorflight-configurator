@@ -8,10 +8,10 @@
 
 ### Desktop
 
-1. Start the dev server `make watch`
-2. Run `make dev`
+1. Start the dev server `make dev-server`
+2. Run `make dev-client`
 
-**Note:** The NW.js SDK needs to be downloaded the first time `make dev` runs, and may take some time to complete.
+**Note:** The NW.js SDK needs to be downloaded the first time `make dev-client` runs, and may take some time to complete.
 
 ### Android
 

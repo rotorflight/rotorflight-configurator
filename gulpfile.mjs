@@ -51,7 +51,8 @@ parseArgs();
 export const app = build_app();
 export const bundle = build_bundle();
 export const redist = build_redist();
-export const dev = run_dev();
+export const dev_client = run_dev_client();
+export const debug = run_debug();
 
 function clean_app() {
   return fs.rm(APP_DIR, { recursive: true, force: true });
@@ -417,19 +418,58 @@ function build_redist_win() {
   );
 }
 
-function run_dev() {
+function run_dev_client() {
   switch (context.target.platform) {
     case "android":
-      return gulp.series(build_app(), run_dev_cordova);
+      return () => Promie.reject(Error("android dev client not supported"));
 
     case "linux":
     case "osx":
     case "win":
-      return run_dev_nwjs;
+      return run_nwjs_dev_client;
   }
 }
 
-function run_dev_nwjs() {
+function run_debug() {
+  context.target.flavor = "debug";
+  const tasks = [build_app()];
+  switch (context.target.platform) {
+    case "android":
+      tasks.push(run_debug_cordova);
+
+    case "linux":
+    case "osx":
+    case "win":
+      tasks.push(run_debug_nwjs);
+  }
+
+  return gulp.series(...tasks);
+}
+
+function run_debug_nwjs() {
+  const exe = getNwjsExePath(context.target.platform);
+  return new Promise((resolve, reject) =>
+    child_process.execFile(`${context.appdir}/${exe}`, (err) =>
+      err ? reject(err) : resolve(),
+    ),
+  );
+}
+
+function getNwjsExePath(platform) {
+  switch (platform) {
+    case "linux":
+      return pkg.name;
+    case "win":
+      return `${pkg.name}.exe`;
+    case "osx":
+      return `${pkg.name}.app/Contents/MacOS/nwjs`;
+
+    default:
+      throw new Error(`Unsupported NW.js platform: ${platform}`);
+  }
+}
+
+function run_nwjs_dev_client() {
   const { platform, arch } = context.target;
 
   return nwbuild({
@@ -444,7 +484,7 @@ function run_dev_nwjs() {
   });
 }
 
-function run_dev_cordova() {
+function run_debug_cordova() {
   return cordova.run();
 }
 
