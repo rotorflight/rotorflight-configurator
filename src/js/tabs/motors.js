@@ -33,7 +33,7 @@ const tab = {
         "APD",
         "OpenYGE",
         "FLYROTOR",
-        "Custom",
+        "Graupner",
     ],
     govModes: [
         "OFF",
