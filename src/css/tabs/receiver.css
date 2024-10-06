@@ -381,6 +381,7 @@
 
 .tab-receiver .crsf-telemetry-sensors select {
   width: 200px;
+  margin-right: 4px;
 }
 
 .tab-receiver .crsf-telemetry-sensors .crsf-telemetry-index {
