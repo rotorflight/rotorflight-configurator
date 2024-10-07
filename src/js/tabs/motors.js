@@ -31,7 +31,7 @@ TABS.motors = {
         "APD",
         "OpenYGE",
         "FLYROTOR",
-        "Custom",
+        "Graupner",
     ],
     govModes: [
         "OFF",
