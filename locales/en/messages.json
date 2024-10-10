@@ -1760,6 +1760,15 @@
     "receiverTelemetrySensor_USED_CAPACITY": {
         "message": "Used Battery Capacity"
     },
+    "receiverTelemetrySensor_BEC_VOLTAGE": {
+        "message": "BEC Voltage"
+    },
+    "receiverTelemetrySensor_HEADSPEED": {
+        "message": "Headspeed"
+    },
+    "receiverTelemetrySensor_TAILSPEED": {
+        "message": "Tailspeed"
+    },
     "receiverTelemetrySensor_TEMPERATURE": {
         "message": "FC Temperature"
     },
@@ -1816,6 +1825,21 @@
     },
     "receiverTelemetrySensor_GOV_MODE": {
         "message": "Governor Mode"
+    },
+    "receiverTelemetrySensor_ARMING_FLAGS": {
+        "message": "Arming Flags"
+    },
+    "receiverTelemetrySensor_PID_PROFILE": {
+        "message": "PID Profile"
+    },
+    "receiverTelemetrySensor_RATES_PROFILE": {
+        "message": "Rates Profile"
+    },
+    "receiverTelemetrySensor_THROTTLE_CONTROL": {
+        "message": "Throttle Control"
+    },
+    "receiverTelemetrySensor_MODEL_ID": {
+        "message": "Model Id"
     },
     "receiverTelemetryGroup_DEBUG": {
         "message": "Debug"
