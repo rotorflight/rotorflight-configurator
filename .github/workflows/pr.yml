@@ -21,10 +21,28 @@ jobs:
       with:
         python-version: 3.11
 
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+        run_install: false
+
     - name: Install Node.js
       uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
+
+    - name: Get pnpm store directory
+      shell: bash
+      run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+    - name: Setup pnpm cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.PNPM_STORE_PATH }}
+        key: ${{ github.job }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ github.job }}-pnpm-store-
 
     - name: Set build variables
       run: |
@@ -42,7 +60,7 @@ jobs:
       run: make init
 
     - name: Build release for linux64
-      run: yarn gulp redist --platform linux --arch x86_64
+      run: pnpm gulp redist --platform linux --arch x86_64
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
@@ -64,10 +82,28 @@ jobs:
       with:
         python-version: 3.11
 
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+        run_install: false
+
     - name: Install Node.js
       uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
+
+    - name: Get pnpm store directory
+      shell: bash
+      run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+    - name: Setup pnpm cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.PNPM_STORE_PATH }}
+        key: ${{ github.job }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ github.job }}-pnpm-store-
 
     - name: Set build variables
       run: |
@@ -85,7 +121,7 @@ jobs:
       run: make init
 
     - name: Build release for MacOS
-      run: yarn gulp redist --platform osx --arch x86_64
+      run: pnpm gulp redist --platform osx --arch x86_64
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
@@ -107,10 +143,28 @@ jobs:
       with:
         python-version: 3.11
 
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+        run_install: false
+
     - name: Install Node.js
       uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
+
+    - name: Get pnpm store directory
+      shell: bash
+      run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+    - name: Setup pnpm cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.PNPM_STORE_PATH }}
+        key: ${{ github.job }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ github.job }}-pnpm-store-
 
     - name: Set build variables
       run: |
@@ -128,7 +182,7 @@ jobs:
       run: make init
 
     - name: Build release for MacOS
-      run: yarn gulp redist --platform osx --arch arm64
+      run: pnpm gulp redist --platform osx --arch arm64
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
@@ -150,10 +204,28 @@ jobs:
       with:
         python-version: 3.11
 
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+        run_install: false
+
     - name: Install Node.js
       uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
+
+    - name: Get pnpm store directory
+      shell: bash
+      run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+    - name: Setup pnpm cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.PNPM_STORE_PATH }}
+        key: ${{ github.job }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ github.job }}-pnpm-store-
 
     - name: Set build variables
       run: |
@@ -171,7 +243,7 @@ jobs:
       run: make init
 
     - name: Build release for windows
-      run: yarn gulp redist --platform win --arch x86_64
+      run: pnpm gulp redist --platform win --arch x86_64
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
@@ -193,10 +265,28 @@ jobs:
       with:
         python-version: 3.11
 
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+        run_install: false
+
     - name: Install Node.js
       uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
+
+    - name: Get pnpm store directory
+      shell: bash
+      run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+    - name: Setup pnpm cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.PNPM_STORE_PATH }}
+        key: ${{ github.job }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ github.job }}-pnpm-store-
 
     - name: Set build variables
       run: |
@@ -214,7 +304,7 @@ jobs:
       run: make init
 
     - name: Build release for windows
-      run: yarn gulp redist --platform win --arch x86
+      run: pnpm gulp redist --platform win --arch x86
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
@@ -236,10 +326,28 @@ jobs:
       with:
         python-version: 3.11
 
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+        run_install: false
+
     - name: Install Node.js
       uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
+
+    - name: Get pnpm store directory
+      shell: bash
+      run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+    - name: Setup pnpm cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.PNPM_STORE_PATH }}
+        key: ${{ github.job }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml', 'cordova/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ github.job }}-pnpm-store-
 
     - name: Install Java JDK
       uses: actions/setup-java@v4
@@ -269,7 +377,7 @@ jobs:
       run: make init
 
     - name: Build release for Android
-      run: yarn gulp redist --platform android
+      run: pnpm gulp redist --platform android
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
