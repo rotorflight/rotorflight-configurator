@@ -1,7 +1,7 @@
 ## Setup
 
 1. Install Node.js `nvm install`
-2. Install yarn `npm install -g yarn`
+2. Install pnpm `npm install -g pnpm`
 3. Install dependencies `make init`
 
 ## Development
@@ -24,10 +24,10 @@ Developing for Android requires JDK 11, gradle, and Android SDK 33.
 
 ## Building
 
-Tasks are defined in `gulpfile.mjs` and can be run with yarn.
+Tasks are defined in `gulpfile.mjs` and can be run with pnpm.
 
 ```
-yarn gulp <task> [--debug] [--platform <platform>] [--arch <arch>]
+pnpm gulp <task> [--debug] [--platform <platform>] [--arch <arch>]
 ```
 
 **`<task>`**

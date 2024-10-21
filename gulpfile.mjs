@@ -87,14 +87,14 @@ function bundle_src() {
   return packageJson
     .pipe(source("package.json"))
     .pipe(gulp.src(distSources, { base: "." }))
-    .pipe(gulp.src("yarn.lock"))
+    .pipe(gulp.src("pnpm-lock.yaml"))
     .pipe(gulp.dest(BUNDLE_DIR));
 }
 
 function bundle_deps() {
   return new Promise((resolve, reject) =>
     child_process.exec(
-      "yarn install --prod --frozen-lockfile",
+      "pnpm install --prod --frozen-lockfile",
       { cwd: BUNDLE_DIR },
       (err) => (err ? reject(err) : resolve()),
     ),
@@ -490,7 +490,7 @@ function run_debug_cordova() {
 
 function cordova_copy_www() {
   return gulp
-    .src(`${BUNDLE_DIR}/**`, { base: BUNDLE_DIR })
+    .src(`${BUNDLE_DIR}/**`, { base: BUNDLE_DIR, follow: true })
     .pipe(gulp.dest(`${context.appdir}/www/`));
 }
 
@@ -583,7 +583,7 @@ function cordova_configxml() {
 function cordova_deps() {
   return new Promise((resolve, reject) =>
     child_process.exec(
-      "yarn install --prod --frozen-lockfile",
+      "pnpm install --prod --frozen-lockfile",
       { cwd: context.appdir },
       (err) => (err ? reject(err) : resolve()),
     ),
