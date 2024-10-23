@@ -2,8 +2,7 @@
 
 // 3D model
 const Model = function (wrapper, canvas) {
-
-    const flip = (FC.MIXER_CONFIG.main_rotor_dir == 0);
+    const clockwise = FC.MIXER_CONFIG.main_rotor_dir === 0;
 
     this.wrapper = wrapper;
     this.canvas = canvas;
@@ -16,17 +15,11 @@ const Model = function (wrapper, canvas) {
     // Set output encoding for GLTF model format
     this.renderer.outputEncoding = THREE.sRGBEncoding;
 
-    // model file name
-    var model_file = 'fallback';
-
     // setup scene
     this.scene = new THREE.Scene();
 
     // modelWrapper adds an extra axis of rotation to avoid gimbal lock with the euler angles
     this.modelWrapper = new THREE.Object3D();
-
-    // Flip left-right if needed
-    this.scale = new THREE.Vector3(flip ? -1 : 1, 1, 1);
 
     // stationary camera
     this.camera = new THREE.PerspectiveCamera(10, this.wrapper.width() / this.wrapper.height(), 1, 10000);
@@ -46,13 +39,12 @@ const Model = function (wrapper, canvas) {
     this.scene.add(this.modelWrapper);
 
     // Load model file, add to scene and render it
-    this.loadGLTF(model_file, (function (model) {
+    this.loadGLTF(`bell_${clockwise ? 'cw' : 'ccw'}`, (model) => {
         this.model = model;
-        this.model.scale.multiply(this.scale);
         this.modelWrapper.add(model);
         this.scene.add(this.modelWrapper);
         this.render();
-    }).bind(this));
+    });
 };
 
 Model.prototype.loadGLTF = function (model_file, callback) {
