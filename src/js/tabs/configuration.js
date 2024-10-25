@@ -38,7 +38,7 @@ TABS.configuration.initialize = function (callback) {
         {
             0: 'DSM Ⓓ',
             1: 'S.BUS',
-            2: 'Port Ⓕ',
+            2: 'Port Ⓖ',
             3: 'Port Ⓐ',
             4: 'Port Ⓔ',
             5: 'Port Ⓖ',
@@ -48,8 +48,8 @@ TABS.configuration.initialize = function (callback) {
             0: 'DSM Ⓓ',
             1: 'S.BUS',
             2: 'Port Ⓒ',
-            3: 'Port Ⓕ',
-            4: 'Port Ⓔ',
+            3: 'Port Ⓐ',
+            4: 'Int.Rx',
             5: 'Port Ⓑ',
         },
         'F7A4':
@@ -57,8 +57,62 @@ TABS.configuration.initialize = function (callback) {
             0: 'DSM Ⓓ',
             1: 'S.BUS',
             2: 'Port Ⓖ',
-            3: 'Port Ⓕ',
+            3: 'Port Ⓐ',
+            4: 'Int.Rx',
+            5: 'Port Ⓖ',
+        },
+        'F7B1':
+        {
+            0: 'S.BUS',
+            1: 'TELEM',
+            2: 'Port Ⓒ',
+            3: 'Port Ⓐ',
+            4: 'DSM Ⓓ',
+            5: 'Port Ⓑ',
+        },
+        'F7B2':
+        {
+            0: 'S.BUS',
+            1: 'TELEM',
+            2: 'Port Ⓖ',
+            3: 'Port Ⓐ',
+            4: 'DSM Ⓓ',
+            5: 'Port Ⓖ',
+        },
+        'F7B3':
+        {
+            0: 'S.BUS',
+            1: 'TELEM',
+            2: 'Port Ⓒ',
+            3: 'Port Ⓐ',
             4: 'Port Ⓔ',
+            5: 'Port Ⓑ',
+        },
+        'F7B4':
+        {
+            0: 'S.BUS',
+            1: 'TELEM',
+            2: 'Port Ⓖ',
+            3: 'Port Ⓐ',
+            4: 'Port Ⓔ',
+            5: 'Port Ⓖ',
+        },
+        'F7B5':
+        {
+            0: 'S.BUS',
+            1: 'TELEM',
+            2: 'Port Ⓒ',
+            3: 'Port Ⓐ',
+            4: 'Int.Rx',
+            5: 'Port Ⓑ',
+        },
+        'F7B6':
+        {
+            0: 'S.BUS',
+            1: 'TELEM',
+            2: 'Port Ⓖ',
+            3: 'Port Ⓐ',
+            4: 'Int.Rx',
             5: 'Port Ⓖ',
         },
     };
