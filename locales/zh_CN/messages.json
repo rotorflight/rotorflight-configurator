@@ -628,8 +628,13 @@
         "english": "No configuration received within <span class=\"message-negative\">10 seconds</span>, communication <span class=\"message-negative\">failed</span>"
     },
     "firmwareVersionNotSupported": {
-        "message": "<span class=\"message-negative\">不支持</span>该固件版本。请使用此版本配置器支持的固件版本。刷写前请使用 CLI 进行备份。CLI 备份/恢复步骤请参阅文档。<br />如果您不准备升级，也可以下载并使用旧版本的配置器。",
-        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
+        "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documentation.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
+        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documentation.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<span class=\"message-negative\">不支持</span>该固件版本。请使用此版本配置器支持的固件版本。刷写前请使用 CLI 进行备份。CLI 备份/恢复步骤请参阅文档。<br />如果您不准备升级，也可以下载并使用旧版本的配置器。",
+            "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
+        }
     },
     "firmwareTypeNotSupported": {
         "message": "<span class=\"message-negative\">不支持</span>非 Rotorflight 固件，只能使用 CLI 模式",
@@ -1313,8 +1318,13 @@
         "english": "Enable Software Serial ports"
     },
     "feature_GPS": {
-        "message": "启用 GPS 导航",
-        "english": "GPS for navigation and telemetry"
+        "message": "GPS for telemetry",
+        "english": "GPS for telemetry",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "启用 GPS 导航",
+            "english": "GPS for navigation and telemetry"
+        }
     },
     "feature_SONAR": {
         "message": "声呐高度雷达",
@@ -1395,6 +1405,21 @@
     "configurationFeatures": {
         "message": "功能",
         "english": "Features"
+    },
+    "featureTip_GPS": {
+        "message": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration.",
+        "english": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration.",
+        "status": "New entry. Please translate!"
+    },
+    "featureTip_LED_STRIP": {
+        "message": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration.",
+        "english": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration.",
+        "status": "New entry. Please translate!"
+    },
+    "featureTip_CMS": {
+        "message": "Enables firmware support for CMS.",
+        "english": "Enables firmware support for CMS.",
+        "status": "New entry. Please translate!"
     },
     "configurationSerialPorts": {
         "message": "串行端口",
@@ -1489,16 +1514,31 @@
         "english": "Accelerometer Trim"
     },
     "configurationAccelTrimsHelp": {
-        "message": "加速度计的微调提供了对水平的微调，这可以用来减少在自稳模式和救机时的漂移。",
-        "english": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue."
+        "message": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue.",
+        "english": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "加速度计的微调提供了对水平的微调，这可以用来减少在自稳模式和救机时的漂移。",
+            "english": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue."
+        }
     },
     "configurationAccelTrimRoll": {
         "message": "横滚微调",
         "english": "Accelerometer Roll Trim"
     },
+    "configurationAccelRollTrimHelp": {
+        "message": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right.",
+        "english": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right.",
+        "status": "New entry. Please translate!"
+    },
     "configurationAccelTrimPitch": {
         "message": "俯仰微调",
         "english": "Accelerometer Pitch Trim"
+    },
+    "configurationAccelPitchTrimHelp": {
+        "message": "Increase the value to correct drift to the rear. Decrease the value (or use negative values) to correct drift to the front.",
+        "english": "Increase the value to correct drift to the rear. Decrease the value (or use negative values) to correct drift to the front.",
+        "status": "New entry. Please translate!"
     },
     "escProtocolDisabledMessage": {
         "message": "<strong>注意：</strong> 若选择不被您的电调所支持的电调协议将导致<strong>连接电池后电调会立刻驱动电机旋转</strong>。出于这个原因，<strong>在更改电调协议后，连接电池之前，请确保您的螺旋桨已被卸下</strong>！",
@@ -2019,13 +2059,28 @@
         "message": "单线通信（半双工）",
         "english": "One-wire Communication (Half-Duplex)"
     },
+    "receiverSerialHalfDuplexHelp": {
+        "message": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2.",
+        "english": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2.",
+        "status": "New entry. Please translate!"
+    },
     "receiverSerialInverted": {
         "message": "反相串行信令",
         "english": "Inverted Serial Signaling"
     },
+    "receiverSerialInvertedHelp": {
+        "message": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help.",
+        "english": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help.",
+        "status": "New entry. Please translate!"
+    },
     "receiverSerialPinSwap": {
-        "message": "Pin Swap (Swap Rx and Tx pins)",
-        "english": "Pin Swap (Swap Rx and Tx pins)",
+        "message": "Rx/Tx Pin Swap",
+        "english": "Rx/Tx Pin Swap",
+        "status": "New entry. Please translate!"
+    },
+    "receiverSerialPinSwapHelp": {
+        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
+        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
         "status": "New entry. Please translate!"
     },
     "receiverStickCenter": {
@@ -2078,16 +2133,26 @@
         "english": "Cyclic Deadband"
     },
     "receiverHelpCyclicDeadband": {
-        "message": "这些值（单位为 µs）是 RC 输入在被视为非零之前的变化幅度。对于输出有抖动的遥控器，如果 RC 输入在空闲时跳动，该值可以增加。",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle."
+        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle.",
+        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "这些值（单位为 µs）是 RC 输入在被视为非零之前的变化幅度。对于输出有抖动的遥控器，如果 RC 输入在空闲时跳动，该值可以增加。",
+            "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle."
+        }
     },
     "receiverYawDeadband": {
         "message": "航向死区",
         "english": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "这些值（单位为 µs）是 RC 输入在被视为非零之前的变化幅度。对于输出有抖动的遥控器，如果 RC 输入在空闲时跳动，该值可以增加。<strong>这个设置只对航向生效</strong>",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
+        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
+        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "这些值（单位为 µs）是 RC 输入在被视为非零之前的变化幅度。对于输出有抖动的遥控器，如果 RC 输入在空闲时跳动，该值可以增加。<strong>这个设置只对航向生效</strong>",
+            "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
+        }
     },
     "receiverTelemetrySettings": {
         "message": "遥测设置",
@@ -2160,6 +2225,21 @@
         "message": "已消耗电量",
         "english": "Used Battery Capacity"
     },
+    "receiverTelemetrySensor_BEC_VOLTAGE": {
+        "message": "BEC Voltage",
+        "english": "BEC Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_HEADSPEED": {
+        "message": "Headspeed",
+        "english": "Headspeed",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_TAILSPEED": {
+        "message": "Tailspeed",
+        "english": "Tailspeed",
+        "status": "New entry. Please translate!"
+    },
     "receiverTelemetrySensor_TEMPERATURE": {
         "message": "飞控温度",
         "english": "FC Temperature"
@@ -2201,8 +2281,13 @@
         "english": "Vario"
     },
     "receiverTelemetrySensor_LAT_LONG": {
-        "message": "GPS 经纬度",
-        "english": "GPS Latitide & Longitude"
+        "message": "GPS Latitude & Longitude",
+        "english": "GPS Latitude & Longitude",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "GPS 经纬度",
+            "english": "GPS Latitide & Longitude"
+        }
     },
     "receiverTelemetrySensor_GROUND_SPEED": {
         "message": "GPS 地面速度",
@@ -2235,6 +2320,31 @@
     "receiverTelemetrySensor_GOV_MODE": {
         "message": "定速器模式",
         "english": "Governor Mode"
+    },
+    "receiverTelemetrySensor_ARMING_FLAGS": {
+        "message": "Arming Flags",
+        "english": "Arming Flags",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_PID_PROFILE": {
+        "message": "PID Profile",
+        "english": "PID Profile",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_RATES_PROFILE": {
+        "message": "Rates Profile",
+        "english": "Rates Profile",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_THROTTLE_CONTROL": {
+        "message": "Throttle Control",
+        "english": "Throttle Control",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_MODEL_ID": {
+        "message": "Model Id",
+        "english": "Model Id",
+        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_DEBUG": {
         "message": "Debug",
@@ -2776,8 +2886,13 @@
         "english": "Receiver Channels"
     },
     "receiverBarsHelp": {
-        "message": "精确显示接收机的原始遥控通道。请选择通道图，即每个遥控通道的相关功能。",
-        "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the corrent function for each RC channel."
+        "message": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel.",
+        "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "精确显示接收机的原始遥控通道。请选择通道图，即每个遥控通道的相关功能。",
+            "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the corrent function for each RC channel."
+        }
     },
     "receiverChannelOrder": {
         "message": "通道顺序预设",
@@ -2833,7 +2948,8 @@
     },
     "auxiliaryDisabled": {
         "message": "(已禁用)",
-        "english": "(DISABLED)"
+        "english": "(DISABLED)",
+        "description": "Text to add to the ARM mode (maybe others in the future) in the MODES TAB when it has been disabled for some external reason"
     },
     "auxiliaryAddRange": {
         "message": "添加范围",
@@ -3646,16 +3762,26 @@
         "english": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop"
     },
     "mixerTailRotorCenterTrim": {
-        "message": "尾旋翼中心点微调 [&deg;]",
-        "english": "Center trim for tail rotor [&deg;]"
+        "message": "Yaw center trim",
+        "english": "Yaw center trim",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "尾旋翼中心点微调 [&deg;]",
+            "english": "Center trim for tail rotor [&deg;]"
+        }
     },
     "mixerTailRotorCenterTrimHelp": {
         "message": "设置尾旋翼的0度螺距，使其在混控调试0度时，尾旋翼能够完全水平",
         "english": "Set tail rotor trim to achieve zero blade pitch with 0° yaw mixer override."
     },
     "mixerTailMotorCenterTrim": {
-        "message": "尾电机中心点微调 [%]",
-        "english": "Center trim for tail motor [%]"
+        "message": "Yaw center offset [%]",
+        "english": "Yaw center offset [%]",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "尾电机中心点微调 [%]",
+            "english": "Center trim for tail motor [%]"
+        }
     },
     "mixerTailMotorCenterTrimHelp": {
         "message": "微调0度航向指令时的尾电机油门值。",
@@ -4046,8 +4172,33 @@
         "english": "ESC Telemetry protocol"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "选择电调遥测协议。遥测是通过一根独立的连接线传送的。",
-        "english": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC."
+        "message": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab.",
+        "english": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "选择电调遥测协议。遥测是通过一根独立的连接线传送的。",
+            "english": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC."
+        }
+    },
+    "motorsEscTelemetryHalfDuplex": {
+        "message": "One-wire Communication (Half-Duplex)",
+        "english": "One-wire Communication (Half-Duplex)",
+        "status": "New entry. Please translate!"
+    },
+    "motorsEscTelemetryHalfDuplexHelp": {
+        "message": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scorpion Tribunus).",
+        "english": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scorpion Tribunus).",
+        "status": "New entry. Please translate!"
+    },
+    "motorsEscTelemetryPinswap": {
+        "message": "Rx/Tx Pin Swap",
+        "english": "Rx/Tx Pin Swap",
+        "status": "New entry. Please translate!"
+    },
+    "motorsEscTelemetryPinswapHelp": {
+        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
+        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
+        "status": "New entry. Please translate!"
     },
     "motorsUnsyncedPwm": {
         "message": "非同步电调刷新率",
@@ -4066,12 +4217,22 @@
         "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz."
     },
     "motorsDshotBidir": {
-        "message": "DShot 转速遥测",
-        "english": "DShot RPM Telemetry"
+        "message": "Dshot RPM Telemetry",
+        "english": "Dshot RPM Telemetry",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "DShot 转速遥测",
+            "english": "DShot RPM Telemetry"
+        }
     },
     "motorsDshotBidirHelp": {
-        "message": "通过DShot将转速发送回飞控<br>注：需要兼容的电调和固件，例如BLHeli32, Bluejay 或是 AM32.",
-        "english": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32."
+        "message": "The ESC RPM is sent back to the FC with Dshot. Also known as bidirectional Dshot. <br>Note: Requires a compatible ESC, like AM32, Bluejay or BLHeli32 version 32.7 or higher.",
+        "english": "The ESC RPM is sent back to the FC with Dshot. Also known as bidirectional Dshot. <br>Note: Requires a compatible ESC, like AM32, Bluejay or BLHeli32 version 32.7 or higher.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "通过DShot将转速发送回飞控<br>注：需要兼容的电调和固件，例如BLHeli32, Bluejay 或是 AM32.",
+            "english": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32."
+        }
     },
     "motorsRPMSensor": {
         "message": "转速传感器",
@@ -4242,8 +4403,13 @@
         "english": "Governor mode"
     },
     "govModeHelp": {
-        "message": "<strong>关闭：</strong> 定速器禁用，油门信号将直接从遥控器传送到电调。<br><br><strong>直通：</strong>定速器不控制转速，但提供缓启动和熄火重启的功能。<br><br><strong>标准：</strong> 转速由飞控定速器控制，类似于一个普通的电调定速功能。<br><br><strong>模式1：</strong> 与标准类似，但提供集体螺距与循环螺距的补偿（类似于遥控器中的油门曲线）<br><br><strong>模式2：</strong> 类似于模式1，但具有对电压骤降的补偿，该模式需要有足够快的电压回传才能使用。",
-        "english": "<strong>OFF:</strong> Govenor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
+        "message": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
+        "english": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<strong>关闭：</strong> 定速器禁用，油门信号将直接从遥控器传送到电调。<br><br><strong>直通：</strong>定速器不控制转速，但提供缓启动和熄火重启的功能。<br><br><strong>标准：</strong> 转速由飞控定速器控制，类似于一个普通的电调定速功能。<br><br><strong>模式1：</strong> 与标准类似，但提供集体螺距与循环螺距的补偿（类似于遥控器中的油门曲线）<br><br><strong>模式2：</strong> 类似于模式1，但具有对电压骤降的补偿，该模式需要有足够快的电压回传才能使用。",
+            "english": "<strong>OFF:</strong> Govenor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
+        }
     },
     "govHandoverThrottle": {
         "message": "接管油门 [%]",
@@ -6089,16 +6255,26 @@
         "english": "Leveling Gain"
     },
     "profilesRescueLevelGainHelp": {
-        "message": "启用救机后直升机回正的强度。",
-        "english": "Gain to determine how agressively the heli levels during rescue."
+        "message": "Gain to determine how aggressively the heli levels during rescue.",
+        "english": "Gain to determine how aggressively the heli levels during rescue.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "启用救机后直升机回正的强度。",
+            "english": "Gain to determine how agressively the heli levels during rescue."
+        }
     },
     "profilesRescueFlipGain": {
         "message": "翻正增益",
         "english": "Flip-to-Upright Gain"
     },
     "profilesRescueFlipGainHelp": {
-        "message": "救援过程中，直升机在执行翻正时的强度。",
-        "english": "Gain to determine how agressively the heli flips during inverted rescue."
+        "message": "Gain to determine how aggressively the heli flips during inverted rescue.",
+        "english": "Gain to determine how aggressively the heli flips during inverted rescue.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "救援过程中，直升机在执行翻正时的强度。",
+            "english": "Gain to determine how agressively the heli flips during inverted rescue."
+        }
     },
     "profilesRescueMaxRate": {
         "message": "最大回正速率 [&deg;/s]",
@@ -6433,8 +6609,13 @@
         "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance."
     },
     "gyroDynamicNotchMinHzHelp": {
-        "message": "将其设置为需要过滤的最低传入噪声频率。应低于主旋翼频率，但不低于 20Hz，相当于 1200rpm。",
-        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm."
+        "message": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is equivalent to 1200rpm.",
+        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is equivalent to 1200rpm.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "将其设置为需要过滤的最低传入噪声频率。应低于主旋翼频率，但不低于 20Hz，相当于 1200rpm。",
+            "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm."
+        }
     },
     "gyroDynamicNotchMaxHzHelp": {
         "message": "将其设置为需要过滤的最高传入噪声频率。如果滤波器频率为 1k，则应比最大尾旋翼频率高 10-20%，但不高于 250Hz。如果滤波器频率为 2k 或更高，则可使用 330-500 Hz，特别是对于电机直驱尾旋翼的小型直升机（范围越大，精度越低，性能越差）。",
@@ -6545,8 +6726,13 @@
         "english": "Gyro RPM Notch Filter Banks"
     },
     "gyroRpmFilterHelp": {
-        "message": "转速控制滤波是陀螺上的一组陷波滤波器，它利用转速遥测数据以外科手术般精准去除噪声。<br /><br /><b><span>重要</span>: 电调必须支持双向DShot协议，并且$t(tabmotors.com message)选项卡中的$t(configurationMotorPoles.message)的值必须正确才能使此过滤器工作。</b>",
-        "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
+        "message": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
+        "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "转速控制滤波是陀螺上的一组陷波滤波器，它利用转速遥测数据以外科手术般精准去除噪声。<br /><br /><b><span>重要</span>: 电调必须支持双向DShot协议，并且$t(tabmotors.com message)选项卡中的$t(configurationMotorPoles.message)的值必须正确才能使此过滤器工作。</b>",
+            "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
+        }
     },
     "gyroRpmFilterMainRotorGroup": {
         "message": "主旋翼陷波滤波器",
@@ -7220,7 +7406,7 @@
     "osdSetupSelectedProfileLabel": {
         "message": "当前：",
         "english": "Current:",
-        "description": "Label for the selection of the curren active OSD profile"
+        "description": "Label for the selection of the current active OSD profile"
     },
     "osdSetupPreviewSelectProfileElement": {
         "message": "OSD 配置文件 {{profileNumber}}",
@@ -7780,8 +7966,13 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementRemaningTimeEstimate": {
-        "message": "预计剩余电池飞行时间",
-        "english": "Estimate of flight time remaning"
+        "message": "Estimate of flight time remaining",
+        "english": "Estimate of flight time remaining",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "预计剩余电池飞行时间",
+            "english": "Estimate of flight time remaning"
+        }
     },
     "osdTextElementRtcDateTime": {
         "message": "RTC 日期和时间",
@@ -8528,8 +8719,13 @@
         "english": "Set the thresholds used for OSD elements with alarm states."
     },
     "osdSectionHelpStats": {
-        "message": "设置飞行结束上锁后屏幕上显示的统计信息",
-        "english": "Set the values dispalyed on the post flight statistics screen."
+        "message": "Set the values displayed on the post flight statistics screen.",
+        "english": "Set the values displayed on the post flight statistics screen.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "设置飞行结束上锁后屏幕上显示的统计信息",
+            "english": "Set the values dispalyed on the post flight statistics screen."
+        }
     },
     "osdSectionHelpWarnings": {
         "message": "显示或隐藏显示在警告区域的警告信息",
@@ -9268,8 +9464,13 @@
         "english": "Update from the Google Play Store"
     },
     "cordovaWebviewEnable": {
-        "message": "在设置中进入您的设备信息页面，点击构建版本数字10次以启用“开发者选项”。 在此之后，搜索并进入开发者选项，并选择 <b>{{app}}</b> 作为 webview 提供者。",
-        "english": "Go into the tab of informations about your device in the settings and tap 10 times on the build version number to enable 'Developper options'. After that, search and go in the developper options and select <b>{{app}}</b> as webview provider."
+        "message": "Go into the tab of information about your device in the settings and tap 10 times on the build version number to enable 'Developer options'. After that, search and go in the developer options and select <b>{{app}}</b> as webview provider.",
+        "english": "Go into the tab of information about your device in the settings and tap 10 times on the build version number to enable 'Developer options'. After that, search and go in the developer options and select <b>{{app}}</b> as webview provider.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "在设置中进入您的设备信息页面，点击构建版本数字10次以启用“开发者选项”。 在此之后，搜索并进入开发者选项，并选择 <b>{{app}}</b> 作为 webview 提供者。",
+            "english": "Go into the tab of informations about your device in the settings and tap 10 times on the build version number to enable 'Developper options'. After that, search and go in the developper options and select <b>{{app}}</b> as webview provider."
+        }
     },
     "cordovaWebviewEnableBtn": {
         "message": "打开设置",

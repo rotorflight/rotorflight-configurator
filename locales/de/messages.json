@@ -628,8 +628,13 @@
         "english": "No configuration received within <span class=\"message-negative\">10 seconds</span>, communication <span class=\"message-negative\">failed</span>"
     },
     "firmwareVersionNotSupported": {
-        "message": "Diese Firmware-Version wird <span class=\"message-negative\">nicht unterstützt</span>. Bitte verwende eine Firmware-Version, die von dieser Version des Konfigurators unterstützt wird. Verwende vor dem Flashen die Befehlszeilenschnittstelle zum Sichern. Das CLI-Sicherungs-/Wiederherstellungsverfahren findest du in der Dokumentation.<br />Alternativ kann eine alte Version des Konfigurators herunterladen und verwendet werden, wenn du nicht für ein Upgrade bereit bist.",
-        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
+        "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documentation.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
+        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documentation.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Diese Firmware-Version wird <span class=\"message-negative\">nicht unterstützt</span>. Bitte verwende eine Firmware-Version, die von dieser Version des Konfigurators unterstützt wird. Verwende vor dem Flashen die Befehlszeilenschnittstelle zum Sichern. Das CLI-Sicherungs-/Wiederherstellungsverfahren findest du in der Dokumentation.<br />Alternativ kann eine alte Version des Konfigurators herunterladen und verwendet werden, wenn du nicht für ein Upgrade bereit bist.",
+            "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
+        }
     },
     "firmwareTypeNotSupported": {
         "message": "Es handelt sich nicht um eine Rotorflight Firmware <span class=\"message-negative\">Nur CLI Modus wird unterstützt</span>",
@@ -1313,8 +1318,13 @@
         "english": "Enable Software Serial ports"
     },
     "feature_GPS": {
-        "message": "GPS für Navigation und Telemetrie",
-        "english": "GPS for navigation and telemetry"
+        "message": "GPS for telemetry",
+        "english": "GPS for telemetry",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "GPS für Navigation und Telemetrie",
+            "english": "GPS for navigation and telemetry"
+        }
     },
     "feature_SONAR": {
         "message": "Sonar Höhenmessung",
@@ -1395,6 +1405,21 @@
     "configurationFeatures": {
         "message": "Funktionen",
         "english": "Features"
+    },
+    "featureTip_GPS": {
+        "message": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration.",
+        "english": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration.",
+        "status": "New entry. Please translate!"
+    },
+    "featureTip_LED_STRIP": {
+        "message": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration.",
+        "english": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration.",
+        "status": "New entry. Please translate!"
+    },
+    "featureTip_CMS": {
+        "message": "Enables firmware support for CMS.",
+        "english": "Enables firmware support for CMS.",
+        "status": "New entry. Please translate!"
     },
     "configurationSerialPorts": {
         "message": "Serielle Schnittstellen",
@@ -1489,16 +1514,31 @@
         "english": "Accelerometer Trim"
     },
     "configurationAccelTrimsHelp": {
-        "message": "Die Beschleunigungssensor-Trimmung ermöglicht eine Feinabstimmung der Horizontalebene, um Drift bei stabilisierten Modi, wie z. B. Winkel oder Rettung, zu vermeiden.",
-        "english": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue."
+        "message": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue.",
+        "english": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Die Beschleunigungssensor-Trimmung ermöglicht eine Feinabstimmung der Horizontalebene, um Drift bei stabilisierten Modi, wie z. B. Winkel oder Rettung, zu vermeiden.",
+            "english": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue."
+        }
     },
     "configurationAccelTrimRoll": {
         "message": "Beschleunigungssensor Trimmung Roll",
         "english": "Accelerometer Roll Trim"
     },
+    "configurationAccelRollTrimHelp": {
+        "message": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right.",
+        "english": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right.",
+        "status": "New entry. Please translate!"
+    },
     "configurationAccelTrimPitch": {
         "message": "Beschleunigungssensor Trimmung Nick",
         "english": "Accelerometer Pitch Trim"
+    },
+    "configurationAccelPitchTrimHelp": {
+        "message": "Increase the value to correct drift to the rear. Decrease the value (or use negative values) to correct drift to the front.",
+        "english": "Increase the value to correct drift to the rear. Decrease the value (or use negative values) to correct drift to the front.",
+        "status": "New entry. Please translate!"
     },
     "escProtocolDisabledMessage": {
         "message": "<strong>Achtung:</strong> Wenn ein nicht vom ESC unterstütztes Motorausgabeprotokoll ausgewählt wurde, kann es dazu führen, dass <strong>die Motoren sich sofort drehen, sobald eine Batterie angeschlossen wird</strong>. Aus diesem Grund <strong>achte immer darauf, die Rotorblätter/Propeller zu entfernen nachdem du das Motorausgabeprotokoll gewechselt hast, bevor zum ersten Mal eine Batterie angeschlossen wird.</strong>.",
@@ -2019,13 +2059,28 @@
         "message": "One-wire Kommunikation (Halb-Duplex)",
         "english": "One-wire Communication (Half-Duplex)"
     },
+    "receiverSerialHalfDuplexHelp": {
+        "message": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2.",
+        "english": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2.",
+        "status": "New entry. Please translate!"
+    },
     "receiverSerialInverted": {
         "message": "Invertierte serielle Übertragung",
         "english": "Inverted Serial Signaling"
     },
+    "receiverSerialInvertedHelp": {
+        "message": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help.",
+        "english": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help.",
+        "status": "New entry. Please translate!"
+    },
     "receiverSerialPinSwap": {
-        "message": "Pin Swap (Swap Rx and Tx pins)",
-        "english": "Pin Swap (Swap Rx and Tx pins)",
+        "message": "Rx/Tx Pin Swap",
+        "english": "Rx/Tx Pin Swap",
+        "status": "New entry. Please translate!"
+    },
+    "receiverSerialPinSwapHelp": {
+        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
+        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
         "status": "New entry. Please translate!"
     },
     "receiverStickCenter": {
@@ -2073,16 +2128,26 @@
         "english": "Cyclic Deadband"
     },
     "receiverHelpCyclicDeadband": {
-        "message": "Dies sind Werte (in µs), um wie viel sich der RC-Eingang unterscheiden kann, bevor er als ungleich Null angesehen wird. Bei Sendern mit Zittern an den Ausgängen kann dieser Wert erhöht werden, wenn die RC-Eingänge im Ruhezustand schwanken.",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle."
+        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle.",
+        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Dies sind Werte (in µs), um wie viel sich der RC-Eingang unterscheiden kann, bevor er als ungleich Null angesehen wird. Bei Sendern mit Zittern an den Ausgängen kann dieser Wert erhöht werden, wenn die RC-Eingänge im Ruhezustand schwanken.",
+            "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle."
+        }
     },
     "receiverYawDeadband": {
         "message": "Heck Totzone",
         "english": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "Dies sind Werte (in µs), um die der RC-Eingang abweichen kann, bevor er als ungleich Null angesehen wird. Bei Sendern mit Zittern an den Ausgängen kann dieser Wert erhöht werden, wenn die RC-Eingänge im Ruhezustand schwanken. <strong>Diese Einstellung gilt nur für Heck.</strong>",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
+        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
+        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Dies sind Werte (in µs), um die der RC-Eingang abweichen kann, bevor er als ungleich Null angesehen wird. Bei Sendern mit Zittern an den Ausgängen kann dieser Wert erhöht werden, wenn die RC-Eingänge im Ruhezustand schwanken. <strong>Diese Einstellung gilt nur für Heck.</strong>",
+            "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
+        }
     },
     "receiverTelemetrySettings": {
         "message": "Telemetrie Einstellungen",
@@ -2155,6 +2220,21 @@
         "message": "Verwendete Batteriekapazität",
         "english": "Used Battery Capacity"
     },
+    "receiverTelemetrySensor_BEC_VOLTAGE": {
+        "message": "BEC Voltage",
+        "english": "BEC Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_HEADSPEED": {
+        "message": "Headspeed",
+        "english": "Headspeed",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_TAILSPEED": {
+        "message": "Tailspeed",
+        "english": "Tailspeed",
+        "status": "New entry. Please translate!"
+    },
     "receiverTelemetrySensor_TEMPERATURE": {
         "message": "FC Temperatur",
         "english": "FC Temperature"
@@ -2196,8 +2276,13 @@
         "english": "Vario"
     },
     "receiverTelemetrySensor_LAT_LONG": {
-        "message": "GPS-Breitengrad und Längengrad",
-        "english": "GPS Latitide & Longitude"
+        "message": "GPS Latitude & Longitude",
+        "english": "GPS Latitude & Longitude",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "GPS-Breitengrad und Längengrad",
+            "english": "GPS Latitide & Longitude"
+        }
     },
     "receiverTelemetrySensor_GROUND_SPEED": {
         "message": "GPS-Geschwindigkeit über Grund",
@@ -2230,6 +2315,31 @@
     "receiverTelemetrySensor_GOV_MODE": {
         "message": "Governor Modus",
         "english": "Governor Mode"
+    },
+    "receiverTelemetrySensor_ARMING_FLAGS": {
+        "message": "Arming Flags",
+        "english": "Arming Flags",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_PID_PROFILE": {
+        "message": "PID Profile",
+        "english": "PID Profile",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_RATES_PROFILE": {
+        "message": "Rates Profile",
+        "english": "Rates Profile",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_THROTTLE_CONTROL": {
+        "message": "Throttle Control",
+        "english": "Throttle Control",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_MODEL_ID": {
+        "message": "Model Id",
+        "english": "Model Id",
+        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_DEBUG": {
         "message": "Debug",
@@ -2771,8 +2881,13 @@
         "english": "Receiver Channels"
     },
     "receiverBarsHelp": {
-        "message": "Zeigt die rohen RC-Kanäle des Empfängers genau so an, wie sie empfangen werden. Bitte wähle die Kanalzuordnung, d.h. die korrekte Funktion für jeden RC-Kanal.",
-        "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the corrent function for each RC channel."
+        "message": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel.",
+        "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Zeigt die rohen RC-Kanäle des Empfängers genau so an, wie sie empfangen werden. Bitte wähle die Kanalzuordnung, d.h. die korrekte Funktion für jeden RC-Kanal.",
+            "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the corrent function for each RC channel."
+        }
     },
     "receiverChannelOrder": {
         "message": "Voreinstellung der Kanalreihenfolge",
@@ -2828,7 +2943,8 @@
     },
     "auxiliaryDisabled": {
         "message": "(DEAKTIVIERT)",
-        "english": "(DISABLED)"
+        "english": "(DISABLED)",
+        "description": "Text to add to the ARM mode (maybe others in the future) in the MODES TAB when it has been disabled for some external reason"
     },
     "auxiliaryAddRange": {
         "message": "Bereich hinzufügen",
@@ -3641,16 +3757,26 @@
         "english": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop"
     },
     "mixerTailRotorCenterTrim": {
-        "message": "Mittentrimmung des Heckrotors [&deg;]",
-        "english": "Center trim for tail rotor [&deg;]"
+        "message": "Yaw center trim",
+        "english": "Yaw center trim",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Mittentrimmung des Heckrotors [&deg;]",
+            "english": "Center trim for tail rotor [&deg;]"
+        }
     },
     "mixerTailRotorCenterTrimHelp": {
         "message": "Stelle die Heckrotor-Trimmung so ein, dass der Blattanstellwinkel Null beträgt und der Heckmischer 0° übersteuert wird.",
         "english": "Set tail rotor trim to achieve zero blade pitch with 0° yaw mixer override."
     },
     "mixerTailMotorCenterTrim": {
-        "message": "Mittentrimmung für Heckmotor [%]",
-        "english": "Center trim for tail motor [%]"
+        "message": "Yaw center offset [%]",
+        "english": "Yaw center offset [%]",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Mittentrimmung für Heckmotor [%]",
+            "english": "Center trim for tail motor [%]"
+        }
     },
     "mixerTailMotorCenterTrimHelp": {
         "message": "Gaswert des Heckmotors für den Null-Heck-Befehl einstellen.",
@@ -4041,8 +4167,33 @@
         "english": "ESC Telemetry protocol"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "Wähle dein ESC-Telemetrieprotokoll. Diese Daten werden über ein seperate Leitung vom ESC übertragen.",
-        "english": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC."
+        "message": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab.",
+        "english": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Wähle dein ESC-Telemetrieprotokoll. Diese Daten werden über ein seperate Leitung vom ESC übertragen.",
+            "english": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC."
+        }
+    },
+    "motorsEscTelemetryHalfDuplex": {
+        "message": "One-wire Communication (Half-Duplex)",
+        "english": "One-wire Communication (Half-Duplex)",
+        "status": "New entry. Please translate!"
+    },
+    "motorsEscTelemetryHalfDuplexHelp": {
+        "message": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scorpion Tribunus).",
+        "english": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scorpion Tribunus).",
+        "status": "New entry. Please translate!"
+    },
+    "motorsEscTelemetryPinswap": {
+        "message": "Rx/Tx Pin Swap",
+        "english": "Rx/Tx Pin Swap",
+        "status": "New entry. Please translate!"
+    },
+    "motorsEscTelemetryPinswapHelp": {
+        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
+        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
+        "status": "New entry. Please translate!"
     },
     "motorsUnsyncedPwm": {
         "message": "Unsynchronisiertes ESC-Update",
@@ -4061,12 +4212,22 @@
         "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz."
     },
     "motorsDshotBidir": {
-        "message": "DShot RPM Telemetrie",
-        "english": "DShot RPM Telemetry"
+        "message": "Dshot RPM Telemetry",
+        "english": "Dshot RPM Telemetry",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "DShot RPM Telemetrie",
+            "english": "DShot RPM Telemetry"
+        }
     },
     "motorsDshotBidirHelp": {
-        "message": "Schickt ESC RPM über DShot zurück an den FC. <br>Hinweis: Erfordert einen kompatiblen Regler, z.B. BLHeli32, Bluejay oder AM32.",
-        "english": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32."
+        "message": "The ESC RPM is sent back to the FC with Dshot. Also known as bidirectional Dshot. <br>Note: Requires a compatible ESC, like AM32, Bluejay or BLHeli32 version 32.7 or higher.",
+        "english": "The ESC RPM is sent back to the FC with Dshot. Also known as bidirectional Dshot. <br>Note: Requires a compatible ESC, like AM32, Bluejay or BLHeli32 version 32.7 or higher.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Schickt ESC RPM über DShot zurück an den FC. <br>Hinweis: Erfordert einen kompatiblen Regler, z.B. BLHeli32, Bluejay oder AM32.",
+            "english": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32."
+        }
     },
     "motorsRPMSensor": {
         "message": "RPM Sensor",
@@ -4237,8 +4398,13 @@
         "english": "Governor mode"
     },
     "govModeHelp": {
-        "message": "<strong>OFF:</strong> Der Governor ist deaktiviert und das Gassignal vom Sender wird an den ESC weitergegeben.<br><br><strong>PASSTHROUGH:</strong> Nur Langsamanlauf und Autorotationsabbruch, ansonsten wird das Gassignal vom Sender an den ESC weitergegeben.<br><br><strong>STANDARD:</strong> Die Motordrehzahl wird durch den FC gesteuert. Äquivalent zu einem typischen ESC Governor.<br><br><strong>MODE1:</strong> Wie STANDARD aber mit Kollektiver und Zyklischer Vorsteuerung (änderungen der Kollektive haben proaktiv einen Einfluss auf das Gassignal , wie bei einer Gaskurve im Sender).<br><br><strong>MODE2:</strong> Wie MODE1, aber mit proaktiver Kompensation für Spannungseinbrüche des Akkus. Benötigt schnelle Spannungsmessungen.",
-        "english": "<strong>OFF:</strong> Govenor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
+        "message": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
+        "english": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<strong>OFF:</strong> Der Governor ist deaktiviert und das Gassignal vom Sender wird an den ESC weitergegeben.<br><br><strong>PASSTHROUGH:</strong> Nur Langsamanlauf und Autorotationsabbruch, ansonsten wird das Gassignal vom Sender an den ESC weitergegeben.<br><br><strong>STANDARD:</strong> Die Motordrehzahl wird durch den FC gesteuert. Äquivalent zu einem typischen ESC Governor.<br><br><strong>MODE1:</strong> Wie STANDARD aber mit Kollektiver und Zyklischer Vorsteuerung (änderungen der Kollektive haben proaktiv einen Einfluss auf das Gassignal , wie bei einer Gaskurve im Sender).<br><br><strong>MODE2:</strong> Wie MODE1, aber mit proaktiver Kompensation für Spannungseinbrüche des Akkus. Benötigt schnelle Spannungsmessungen.",
+            "english": "<strong>OFF:</strong> Govenor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
+        }
     },
     "govHandoverThrottle": {
         "message": "Gaswert für Übergabe [%]",
@@ -6084,16 +6250,26 @@
         "english": "Leveling Gain"
     },
     "profilesRescueLevelGainHelp": {
-        "message": "Gain, um zu bestimmen, wie aggressiv der Heli während der Rettung gelevelt werden soll.",
-        "english": "Gain to determine how agressively the heli levels during rescue."
+        "message": "Gain to determine how aggressively the heli levels during rescue.",
+        "english": "Gain to determine how aggressively the heli levels during rescue.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Gain, um zu bestimmen, wie aggressiv der Heli während der Rettung gelevelt werden soll.",
+            "english": "Gain to determine how agressively the heli levels during rescue."
+        }
     },
     "profilesRescueFlipGain": {
         "message": "Flip-zur-Normallage Gain",
         "english": "Flip-to-Upright Gain"
     },
     "profilesRescueFlipGainHelp": {
-        "message": "Gain, um festzulegen, wie aggressiv der Heli bei der Rettung aus invertierter Lage in Normallage flippt.",
-        "english": "Gain to determine how agressively the heli flips during inverted rescue."
+        "message": "Gain to determine how aggressively the heli flips during inverted rescue.",
+        "english": "Gain to determine how aggressively the heli flips during inverted rescue.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Gain, um festzulegen, wie aggressiv der Heli bei der Rettung aus invertierter Lage in Normallage flippt.",
+            "english": "Gain to determine how agressively the heli flips during inverted rescue."
+        }
     },
     "profilesRescueMaxRate": {
         "message": "Maximale Leveling Rate [&deg;/s]",
@@ -6428,8 +6604,13 @@
         "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance."
     },
     "gyroDynamicNotchMinHzHelp": {
-        "message": "Stelle dies auf die niedrigste Frequenz des eingehenden Störsignals ein, die gefiltert werden soll. Sie sollte niedriger sein als die Hauptrotorfrequenz, aber nicht niedriger als 20 Hz, was 1200 U/min entspricht.",
-        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm."
+        "message": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is equivalent to 1200rpm.",
+        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is equivalent to 1200rpm.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Stelle dies auf die niedrigste Frequenz des eingehenden Störsignals ein, die gefiltert werden soll. Sie sollte niedriger sein als die Hauptrotorfrequenz, aber nicht niedriger als 20 Hz, was 1200 U/min entspricht.",
+            "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm."
+        }
     },
     "gyroDynamicNotchMaxHzHelp": {
         "message": "Stelle dies auf die höchste eingehende Störfrequenz ein, die gefiltert werden soll. Sollte 10-20% höher sein als die maximale Heckrotorfrequenz, aber nicht höher als 250Hz, wenn die Filterrate 1k beträgt. Wenn die Filterrate 2k oder höher ist, können 330-500 Hz verwendet werden, insbesondere für kleinere Helis mit motorisiertem Heck (ein höherer Bereich bedeutet weniger Präzision und geringere Leistung).",
@@ -6540,8 +6721,13 @@
         "english": "Gyro RPM Notch Filter Banks"
     },
     "gyroRpmFilterHelp": {
-        "message": "Bei der drehzahlgesteuerten Filterung handelt es sich um eine Reihe von Kerbfiltern auf dem Gyrosignal, die die Daten der Drehzahltelemetrie verwenden, um Störungen mit äußerster Präzision zu entfernen.<br /><br /><b><span class=\"message-positive\">WICHTIG</span>: Der ESC muss das bidirektionale DShot-Protokoll unterstützen oder ein Drehzahlsignal bereitstellen, und der Wert der $t(configurationMotorPoles.message) in the $t(tabMotors.message) Registerkarte muss korrekt sein, damit dieser Filter funktioniert.</b>",
-        "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
+        "message": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
+        "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Bei der drehzahlgesteuerten Filterung handelt es sich um eine Reihe von Kerbfiltern auf dem Gyrosignal, die die Daten der Drehzahltelemetrie verwenden, um Störungen mit äußerster Präzision zu entfernen.<br /><br /><b><span class=\"message-positive\">WICHTIG</span>: Der ESC muss das bidirektionale DShot-Protokoll unterstützen oder ein Drehzahlsignal bereitstellen, und der Wert der $t(configurationMotorPoles.message) in the $t(tabMotors.message) Registerkarte muss korrekt sein, damit dieser Filter funktioniert.</b>",
+            "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
+        }
     },
     "gyroRpmFilterMainRotorGroup": {
         "message": "Hauptrotor Kerbfilter",
@@ -7215,7 +7401,7 @@
     "osdSetupSelectedProfileLabel": {
         "message": "Aktuell:",
         "english": "Current:",
-        "description": "Label for the selection of the curren active OSD profile"
+        "description": "Label for the selection of the current active OSD profile"
     },
     "osdSetupPreviewSelectProfileElement": {
         "message": "OSD-Profil {{profileNumber}}",
@@ -7775,8 +7961,13 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementRemaningTimeEstimate": {
-        "message": "Errechnete verbleibende Flugzeit",
-        "english": "Estimate of flight time remaning"
+        "message": "Estimate of flight time remaining",
+        "english": "Estimate of flight time remaining",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Errechnete verbleibende Flugzeit",
+            "english": "Estimate of flight time remaning"
+        }
     },
     "osdTextElementRtcDateTime": {
         "message": "Echtzeit und Datum",
@@ -8523,8 +8714,13 @@
         "english": "Set the thresholds used for OSD elements with alarm states."
     },
     "osdSectionHelpStats": {
-        "message": "Werte die vor dem Flug angezeigt werden sollen",
-        "english": "Set the values dispalyed on the post flight statistics screen."
+        "message": "Set the values displayed on the post flight statistics screen.",
+        "english": "Set the values displayed on the post flight statistics screen.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Werte die vor dem Flug angezeigt werden sollen",
+            "english": "Set the values dispalyed on the post flight statistics screen."
+        }
     },
     "osdSectionHelpWarnings": {
         "message": "Warnungen aktivieren oder deaktivieren die angezeigt werden.",
@@ -9263,8 +9459,13 @@
         "english": "Update from the Google Play Store"
     },
     "cordovaWebviewEnable": {
-        "message": "Gehe in den Einstellungen auf die Registerkarte 'Informationen über Ihr Gerät' und tippe 10 Mal auf die Build-Versionsnummer, um 'Entwickleroptionen' zu aktivieren. Danach gehe in die Entwickleroptionen und wähle <b>{{app}}</b> als Webansicht-Anbieter aus.",
-        "english": "Go into the tab of informations about your device in the settings and tap 10 times on the build version number to enable 'Developper options'. After that, search and go in the developper options and select <b>{{app}}</b> as webview provider."
+        "message": "Go into the tab of information about your device in the settings and tap 10 times on the build version number to enable 'Developer options'. After that, search and go in the developer options and select <b>{{app}}</b> as webview provider.",
+        "english": "Go into the tab of information about your device in the settings and tap 10 times on the build version number to enable 'Developer options'. After that, search and go in the developer options and select <b>{{app}}</b> as webview provider.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Gehe in den Einstellungen auf die Registerkarte 'Informationen über Ihr Gerät' und tippe 10 Mal auf die Build-Versionsnummer, um 'Entwickleroptionen' zu aktivieren. Danach gehe in die Entwickleroptionen und wähle <b>{{app}}</b> als Webansicht-Anbieter aus.",
+            "english": "Go into the tab of informations about your device in the settings and tap 10 times on the build version number to enable 'Developper options'. After that, search and go in the developper options and select <b>{{app}}</b> as webview provider."
+        }
     },
     "cordovaWebviewEnableBtn": {
         "message": "Einstellungen öffnen",
