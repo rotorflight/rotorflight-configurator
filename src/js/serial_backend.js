@@ -528,7 +528,6 @@ function onConnect() {
     }).show();
 
     if (FC.CONFIG.flightControllerVersion !== '') {
-        FC.FEATURE_CONFIG.features = new Features(FC.CONFIG);
         FC.BEEPER_CONFIG.beepers = new Beepers(FC.CONFIG);
         FC.BEEPER_CONFIG.dshotBeaconConditions = new Beepers(FC.CONFIG, [ "RX_LOST", "RX_SET" ]);
 

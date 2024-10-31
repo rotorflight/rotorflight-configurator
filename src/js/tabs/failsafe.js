@@ -50,8 +50,6 @@ tab.initialize = function (callback) {
 
     function update_data() {
 
-        FC.FEATURE_CONFIG.features.updateData($('input[name="FAILSAFE"]'));
-
         FC.RX_CONFIG.rx_pulse_min = parseInt($('input[name="rx_pulse_min"]').val());
         FC.RX_CONFIG.rx_pulse_max = parseInt($('input[name="rx_pulse_max"]').val());
 
@@ -245,8 +243,6 @@ tab.initialize = function (callback) {
             channel_mode_array[i].val(FC.RXFAIL_CONFIG[i].mode);
             channel_mode_array[i].change();
         }
-
-        FC.FEATURE_CONFIG.features.generateElements($('.tab-failsafe .featuresNew'));
 
         $('tbody.rxFailsafe').hide();
         toggleStage2(true);
