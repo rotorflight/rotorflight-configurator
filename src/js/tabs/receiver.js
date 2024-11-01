@@ -909,11 +909,13 @@ tab.initialize = function (callback) {
             .prop('checked', self.telemetry.enabled)
             .trigger('change');
 
-        $('.tab-receiver input[name="crsf-telemetry-mode"]').on('change', function () {
-            self.telemetry.config.crsf_telemetry_mode = +$(this).is(':checked');
-            self.telemetry.config.crsf_telemetry_sensors.fill(0);
-            updateTelemetry();
-        });
+        $('.tab-receiver input[name="crsf-telemetry-mode"]')
+           .on('change', function () {
+              self.telemetry.config.crsf_telemetry_mode = +$(this).is(':checked');
+              self.telemetry.config.crsf_telemetry_sensors.fill(0);
+              updateTelemetry();
+            })
+            .prop('checked', self.telemetry.config.crsf_telemetry_mode);
 
         $('.tab-receiver input[name="crsf-telemetry-rate"]').on('change', function() {
             self.telemetry.config.crsf_telemetry_rate = getIntegerValue(this);
