@@ -361,6 +361,22 @@ tab.initialize = function (callback) {
         for (let i = 0; i < FC.CONFIG.motorCount; i++)
             $(`input[id="motorPoles${i+1}"]`).val(FC.MOTOR_CONFIG.motor_poles[i]);
 
+        const updateMainGearRatio = function() {
+            const ratioN = parseInt($('input[id="mainGearRatioN"]').val());
+            const ratioD = parseInt($('input[id="mainGearRatioD"]').val());
+            const haveValues = (ratioN > 0) && (ratioD > 0);
+            $('#main_gear_ratio_calculated').text(haveValues ? "(" + (ratioD / ratioN).toFixed(2) + ")" : '');
+        };
+        $('input[id="mainGearRatioN"]').change(updateMainGearRatio);
+        $('input[id="mainGearRatioD"]').change(updateMainGearRatio);
+        const updateTailGearRatio = function() {
+            const ratioN = parseInt($('input[id="tailGearRatioN"]').val());
+            const ratioD = parseInt($('input[id="tailGearRatioD"]').val());
+            const haveValues = (ratioN > 0) && (ratioD > 0);
+            $('#tail_gear_ratio_calculated').text(haveValues ? "(" + (ratioD / ratioN).toFixed(2) + ")" : '');
+        };
+        $('input[id="tailGearRatioN"]').change(updateTailGearRatio);
+        $('input[id="tailGearRatioD"]').change(updateTailGearRatio);
         $('input[id="mainGearRatioN"]').val(FC.MOTOR_CONFIG.main_rotor_gear_ratio[0]);
         $('input[id="mainGearRatioD"]').val(FC.MOTOR_CONFIG.main_rotor_gear_ratio[1]).change();
         $('input[id="tailGearRatioN"]').val(FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0]);
