@@ -1,150 +1,61 @@
-'use strict';
+export class Features {
+  static FLAGS = {
+    RX_PPM: 0,
+    RX_SERIAL: 3,
+    SOFTSERIAL: 6,
+    GPS: 7,
+    SONAR: 9,
+    TELEMETRY: 10,
+    RX_PARALLEL_PWM: 13,
+    RX_MSP: 14,
+    RSSI_ADC: 15,
+    LED_STRIP: 16,
+    DISPLAY: 17,
+    OSD: 18,
+    CMS: 19,
+    RX_SPI: 25,
+    GOVERNOR: 26,
+    ESC_SENSOR: 27,
+    FREQ_SENSOR: 28,
+    DYN_NOTCH: 29,
+    RPM_FILTER: 30,
+  };
 
-const Features = function (config) {
-    const self = this;
+  static GROUPS = {
+    RX_PROTO: ["RX_PPM", "RX_SERIAL", "RX_PARALLEL_PWM", "RX_MSP", "RX_SPI"],
+    OTHER: ["GPS", "LED_STRIP", "CMS"],
+    RSSI: ["RSSI_ADC"],
+  };
 
-    const features = [
-        { bit:  0,  group: 'RX_PROTO',     name: 'RX_PPM' },
-        { bit:  3,  group: 'RX_PROTO',     name: 'RX_SERIAL' },
-        { bit:  6,  group: 'HIDDEN',       name: 'SOFTSERIAL' },
-        { bit:  7,  group: 'OTHER',        name: 'GPS' },
-        { bit:  9,  group: 'HIDDEN',       name: 'SONAR' },
-        { bit: 10,  group: 'HIDDEN',       name: 'TELEMETRY' },
-        { bit: 13,  group: 'RX_PROTO',     name: 'RX_PARALLEL_PWM' },
-        { bit: 14,  group: 'RX_PROTO',     name: 'RX_MSP' },
-        { bit: 15,  group: 'RSSI',         name: 'RSSI_ADC' },
-        { bit: 16,  group: 'OTHER',        name: 'LED_STRIP' },
-        { bit: 17,  group: 'HIDDEN',       name: 'DISPLAY' },
-        { bit: 18,  group: 'HIDDEN',       name: 'OSD' },
-        { bit: 19,  group: 'OTHER',        name: 'CMS' },
-        { bit: 25,  group: 'RX_PROTO',     name: 'RX_SPI' },
-        { bit: 26,  group: 'HIDDEN',       name: 'GOVERNOR' },
-        { bit: 27,  group: 'HIDDEN',       name: 'ESC_SENSOR' },
-        { bit: 28,  group: 'HIDDEN',       name: 'FREQ_SENSOR' },
-        { bit: 29,  group: 'HIDDEN',       name: 'DYN_NOTCH' },
-        { bit: 30,  group: 'HIDDEN',       name: 'RPM_FILTER' }
-    ];
+  bitfield = 0;
 
-    self._features = features;
-    self._featureMask = 0;
-};
-
-Features.prototype.getMask = function () {
-    const self = this;
-
-    return self._featureMask;
-};
-
-Features.prototype.setMask = function (featureMask) {
-    const self = this;
-
-    self._featureMask = featureMask;
-};
-
-Features.prototype.isEnabled = function (featureName) {
-    const self = this;
-
-    for (let i = 0; i < self._features.length; i++) {
-        if (self._features[i].name === featureName && bit_check(self._featureMask, self._features[i].bit)) {
-            return true;
-        }
+  constructor() {
+    // allow each flag in the bitfield to be accessed as a regular property
+    for (const feature of Object.keys(Features.FLAGS)) {
+      Object.defineProperty(this, feature, {
+        get() {
+          return this.isEnabled(feature);
+        },
+        set(v) {
+          this.setFeature(feature, v);
+        },
+      });
     }
-    return false;
-};
+  }
 
-Features.prototype.setFeature = function (featureName, enabled) {
-    const self = this;
+  isEnabled(featureName) {
+    return bit_check(this.bitfield, Features.FLAGS[featureName]);
+  }
 
-    for (let i = 0; i < self._features.length; i++) {
-        if (self._features[i].name === featureName) {
-            const bit = self._features[i].bit;
-            if (enabled) {
-                self._featureMask = bit_set(self._featureMask, bit);
-            } else {
-                self._featureMask = bit_clear(self._featureMask, bit);
-            }
-        }
+  setFeature(featureName, enabled) {
+    this.bitfield = enabled
+      ? bit_set(this.bitfield, Features.FLAGS[featureName])
+      : bit_clear(this.bitfield, Features.FLAGS[featureName]);
+  }
+
+  setGroup(groupName, enabled) {
+    for (const featureName of Features.GROUPS[groupName]) {
+      this.setFeature(featureName, enabled);
     }
-};
-
-Features.prototype.setGroup = function (groupName, enabled) {
-    const self = this;
-
-    for (let i = 0; i < self._features.length; i++) {
-        if (self._features[i].group === groupName) {
-            const bit = self._features[i].bit;
-            if (enabled) {
-                self._featureMask = bit_set(self._featureMask, bit);
-            } else {
-                self._featureMask = bit_clear(self._featureMask, bit);
-            }
-        }
-    }
-};
-
-
-
-Features.prototype.findFeatureByBit = function (bit) {
-    const self = this;
-
-    for (const feature of self._features) {
-        if (feature.bit === bit) {
-            return feature;
-        }
-    }
-};
-
-Features.prototype.generateElements = function (featuresElements) {
-    const self = this;
-
-    const listElements = [];
-
-    for (let i = 0; i < self._features.length; i++) {
-        const featureName = self._features[i].name;
-        const featureBit = self._features[i].bit;
-        const newElements = [];
-
-        let feature_tip_html = '';
-        if (i18n.existsMessage('featureTip_' + featureName)) {
-            feature_tip_html = `<div class="helpicon cf_tip" i18n_title="featureTip_${featureName}"></div>`;
-        }
-
-        let element = `<tr>`;
-        element += `<td><input class="feature toggle" id="feature-${i}" name="${self._features[i].name}" title="${featureName}" type="checkbox"/></td>`;
-        element += `<td><div>${featureName}</div><span class="xs" i18n="feature_${featureName}"></span></td>`;
-        element += `<td><span class="sm-min" i18n="feature_${featureName}"></span>${feature_tip_html}</td>`;
-        element += `</tr>`;
-
-        const newElement = $(element);
-        const featureElement = newElement.find('input.feature');
-
-        featureElement.prop('checked', bit_check(self._featureMask, featureBit));
-        featureElement.data('bit', featureBit);
-
-        newElements.push(newElement);
-
-        featuresElements.each(function () {
-            if ($(this).hasClass(self._features[i].group)) {
-                $(this).append(newElements);
-            }
-        });
-    }
-
-    for (const element of listElements) {
-        const bit = parseInt(element.attr('value'));
-        const state = bit_check(self._featureMask, bit);
-        element.prop('selected', state);
-    }
-};
-
-Features.prototype.updateData = function (featureElement) {
-    const self = this;
-
-    const bit = featureElement.data('bit');
-
-    if (featureElement.is(':checked')) {
-        self._featureMask = bit_set(self._featureMask, bit);
-    } else {
-        self._featureMask = bit_clear(self._featureMask, bit);
-    }
-};
+  }
+}

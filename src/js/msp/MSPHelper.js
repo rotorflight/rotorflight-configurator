@@ -633,7 +633,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
 
             case MSPCodes.MSP_FEATURE_CONFIG:
-                FC.FEATURE_CONFIG.features.setMask(data.readU32());
+                FC.FEATURE_CONFIG.features.bitfield = data.readU32();
                 updateTabList(FC.FEATURE_CONFIG.features);
                 break;
 
@@ -1515,8 +1515,7 @@ MspHelper.prototype.crunch = function(code) {
 
     switch (code) {
         case MSPCodes.MSP_SET_FEATURE_CONFIG:
-            const featureMask = FC.FEATURE_CONFIG.features.getMask();
-            buffer.push32(featureMask);
+            buffer.push32(FC.FEATURE_CONFIG.features.bitfield);
             break;
 
         case MSPCodes.MSP_SET_BEEPER_CONFIG:

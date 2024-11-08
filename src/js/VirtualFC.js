@@ -10,9 +10,6 @@ const VirtualFC = {
         virtualFC.CONFIG.flightControllerVersion = "4.2.4";
         virtualFC.CONFIG.apiVersion = CONFIGURATOR.virtualApiVersion;
 
-        virtualFC.FEATURE_CONFIG.features = new Features(FC.CONFIG);
-        virtualFC.FEATURE_CONFIG.features.setMask(0);
-
         virtualFC.BEEPER_CONFIG.beepers = new Beepers(FC.CONFIG);
         virtualFC.BEEPER_CONFIG.dshotBeaconConditions = new Beepers(FC.CONFIG, [ "RX_LOST", "RX_SET" ]);
 
