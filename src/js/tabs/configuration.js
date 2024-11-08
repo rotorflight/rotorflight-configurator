@@ -432,7 +432,33 @@ tab.initialize = function (callback) {
         $('.tab-configuration').addClass('toolbar_hidden');
 
         const features_e = $('.tab-configuration .features');
-        FC.FEATURE_CONFIG.features.generateElements(features_e);
+        features_e.each(function () {
+          const element = $(this);
+
+          for (const groupName of Object.keys(Features.GROUPS)) {
+            if (!element.hasClass(groupName)) continue;
+
+            for (const featureName of Features.GROUPS[groupName]) {
+              let tipHtml = "";
+              if (i18n.existsMessage(`featureTip_${featureName}`)) {
+                tipHtml = `<div class="helpicon cf_tip" i18n_title="featureTip_${featureName}"></div>`;
+              }
+
+              const newElement = $(`<tr>
+                <td><input class="feature toggle" id="feature-${featureName}" name="${featureName}" title="${featureName}" type="checkbox"/></td>
+                <td><div>${featureName}</div><span class="xs" i18n="feature_${featureName}"></span></td>
+                <td><span class="sm-min" i18n="feature_${featureName}"></span>${tipHtml}</td>
+                </tr>`);
+
+              newElement
+                .find("input.feature")
+                .prop("checked", FC.FEATURE_CONFIG.features.isEnabled(featureName))
+                .data("featureName", featureName);
+
+              element.append(newElement);
+            }
+          }
+        });
 
         // translate to user-selected language
         i18n.localizePage();
@@ -610,7 +636,10 @@ tab.initialize = function (callback) {
 
         $('input.feature', features_e).change(function () {
             const element = $(this);
-            FC.FEATURE_CONFIG.features.updateData(element);
+            FC.FEATURE_CONFIG.features.setFeature(
+              element.data("featureName"),
+              element.is(":checked")
+            );
             updateTabList(FC.FEATURE_CONFIG.features);
         });
 
@@ -621,7 +650,10 @@ tab.initialize = function (callback) {
 
         $(features_e).filter('select').change(function () {
             const element = $(this);
-            FC.FEATURE_CONFIG.features.updateData(element);
+            FC.FEATURE_CONFIG.features.setFeature(
+              element.data("featureName"),
+              element.is(":checked")
+            );
             updateTabList(FC.FEATURE_CONFIG.features);
         });
 

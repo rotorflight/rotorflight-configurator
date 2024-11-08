@@ -86,11 +86,8 @@ tab.initialize = function (callback) {
 
         const outputArray = outString.split("\n");
         for (let i = 0, delay = 0; i < outputArray.length; i++) {
-            let line = outputArray[i].trim();
-            const isLastCommand = outputArray.length === i + 1;
-            if (isLastCommand && self.cliBuffer) {
-                line = getCliCommand(line, self.cliBuffer);
-            }
+            const line = outputArray[i].trim();
+            if (line.length === 0) continue;
 
             if (delay) await new Promise(resolve => setTimeout(resolve, delay));
             await new Promise(resolve => self.sendLine(line, resolve));
