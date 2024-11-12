@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import child_process from "node:child_process";
 import fs from "node:fs/promises";
+import path from "node:path";
 import stream from "node:stream";
 
 import innoSetup from "@quanle94/innosetup";
@@ -13,7 +14,6 @@ import jeditor from "gulp-json-editor";
 import rename from "gulp-rename";
 import replace from "gulp-replace";
 import xmlTransformer from "gulp-xml-transformer";
-import zip from "gulp-zip";
 import logger from "gulplog";
 import minimist from "minimist";
 import nwbuild from "nw-builder";
@@ -208,7 +208,16 @@ async function build_nwjs_unix_permissions() {
 }
 
 function build_redist() {
-  return gulp.series(clean_redist, build_app(), helper_build_redist());
+  return gulp.series(
+    clean_redist,
+    build_app(),
+    mkdir_redist,
+    helper_build_redist(),
+  );
+}
+
+function mkdir_redist() {
+  return fs.mkdir(REDIST_DIR, { recursive: true });
 }
 
 function helper_build_redist() {
@@ -231,24 +240,21 @@ function helper_build_redist() {
 }
 
 function build_redist_linux() {
-  return gulp.parallel(build_redist_zip, build_redist_deb, build_redist_rpm);
+  return gulp.parallel(build_redist_tar_xz, build_redist_deb, build_redist_rpm);
 }
 
-function build_redist_zip() {
+function build_redist_tar_xz() {
   const { platform, arch } = context.target;
-  const zipFile = `${pkg.name}_${pkg.version}_${platform}_${arch}.zip`;
-  const zipInteralDir = "Rotorflight Configurator";
 
-  return gulp
-    .src(`${context.appdir}/**`, { base: context.appdir })
-    .pipe(
-      rename(
-        (actualPath) =>
-          (actualPath.dirname = `${zipInteralDir}/${actualPath.dirname}`),
-      ),
-    )
-    .pipe(zip(zipFile))
-    .pipe(gulp.dest(REDIST_DIR));
+  const filename = `${pkg.name}_${pkg.version}_${platform}_${arch}.tar.xz`;
+  const output = `${path.relative(context.appdir, REDIST_DIR)}/${filename}`;
+  const command = `tar -cJf '${output}' --transform 's|^\./|rotorflight-configurator/|' .`;
+
+  return new Promise((resolve, reject) =>
+    child_process.exec(command, { cwd: context.appdir }, (err) =>
+      err ? reject(err) : resolve(),
+    ),
+  );
 }
 
 function build_redist_deb(done) {
@@ -259,6 +265,7 @@ function build_redist_deb(done) {
       `dpkg-deb command not found, not generating deb package for ${arch}`,
     );
     done();
+    return;
   }
 
   const archmap = {
@@ -303,8 +310,6 @@ async function build_redist_rpm() {
     return;
   }
 
-  await fs.mkdir(REDIST_DIR, { recursive: true });
-
   const regex = /-/g;
 
   const archmap = {
@@ -347,7 +352,6 @@ async function build_redist_rpm() {
 
 async function build_redist_osx() {
   const appdmg = (await import("appdmg")).default;
-  await fs.mkdir(REDIST_DIR, { recursive: true });
 
   const targetPath = `${REDIST_DIR}/${pkg.name}_${pkg.version}_macOS.dmg`;
 
