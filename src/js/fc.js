@@ -200,7 +200,7 @@ const FC = {
         };
 
         this.FEATURE_CONFIG = {
-            features:                   0,
+            features:                   new Features(),
         };
 
         this.BEEPER_CONFIG = {
