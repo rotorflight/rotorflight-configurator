@@ -2188,38 +2188,23 @@ MspHelper.prototype.sendRPMFilters = function(onCompleteCallback)
     send_next();
 };
 
-MspHelper.prototype.resetMotorOverrides = function(onCompleteCallback)
-{
-    for (let i=0; i<FC.MOTOR_OVERRIDE.length; i++)
+MspHelper.prototype.resetMotorOverrides = async function() {
+    for (let i = 0; i < FC.MOTOR_OVERRIDE.length; i++) {
         FC.MOTOR_OVERRIDE[i] = 0;
-
-    this.sendMotorOverrides(onCompleteCallback);
+        await this.sendMotorOverride(i);
+    }
 };
 
-MspHelper.prototype.sendMotorOverride = function(motorIndex, onCompleteCallback)
-{
+MspHelper.prototype.sendMotorOverride = function(motorIndex) {
     const value = FC.MOTOR_OVERRIDE[motorIndex];
     const buffer = [];
 
     buffer.push8(motorIndex)
           .push16(value);
 
-    MSP.send_message(MSPCodes.MSP_SET_MOTOR_OVERRIDE, buffer, false, onCompleteCallback);
-};
-
-MspHelper.prototype.sendMotorOverrides = function(onCompleteCallback)
-{
-    const self = this;
-    var index = 0;
-
-    function send_next() {
-        if (index < FC.MOTOR_OVERRIDE.length)
-            self.sendMotorOverride(index++, send_next);
-        else
-            if (onCompleteCallback) onCompleteCallback();
-    }
-
-    send_next();
+    return new Promise((resolve) =>
+      MSP.send_message(MSPCodes.MSP_SET_MOTOR_OVERRIDE, buffer, false, resolve)
+    );
 };
 
 MspHelper.prototype.resetServoOverrides = function(onCompleteCallback)
