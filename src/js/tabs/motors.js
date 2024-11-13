@@ -238,7 +238,7 @@ tab.initialize = function (callback) {
                 }
             });
 
-            motorSlider.on('update', function (values) {
+            motorSlider.on('slide', function (values) {
                 FC.MOTOR_OVERRIDE[motorIndex] = Math.round(values[0] * 10);
                 mspHelper.sendMotorOverride(motorIndex);
             });
@@ -557,20 +557,20 @@ tab.initialize = function (callback) {
     }
 };
 
-tab.toggleMotorOverride = function(enable) {
-    $('input[id="motorEnableOverrideSwitch"]').prop('checked', enable);
+tab.toggleMotorOverride = async function(enable) {
     FC.CONFIG.motorOverrideEnabled = enable;
+    $('input[id="motorEnableOverrideSwitch"]').prop('checked', enable);
     $('.overridesEnabled').toggle(enable);
     $('.motorOverrideSlider').each(function() {
         $(this).get(0).noUiSlider?.set(0);
     });
-}
+
+    await mspHelper.resetMotorOverrides();
+};
 
 tab.cleanup = function (callback) {
     this.isDirty = false;
-    this.toggleMotorOverride(false);
-
-    callback?.();
+    this.toggleMotorOverride(false).then(callback);
 };
 
 TABS[tab.tabName] = tab;
