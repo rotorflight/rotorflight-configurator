@@ -577,7 +577,7 @@ tab.initialize = function (callback) {
             });
         }
 
-        if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
             $('.tab-profiles tr.govMinThrottle').hide();
             $('.tab-profiles tr.govMaxThrottle').addClass('border');
         }
