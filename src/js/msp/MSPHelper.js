@@ -1052,7 +1052,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.GOVERNOR.gov_cyclic_ff_weight             = data.readU8();
                 FC.GOVERNOR.gov_collective_ff_weight         = data.readU8();
                 FC.GOVERNOR.gov_max_throttle                 = data.readU8();
-                FC.GOVERNOR.gov_min_throttle                 = data.readU8();
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+                    FC.GOVERNOR.gov_min_throttle             = data.readU8();
+                }
                 break;
 
             case MSPCodes.MSP_GOVERNOR_CONFIG:
@@ -1871,8 +1873,10 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.GOVERNOR.gov_yaw_ff_weight)
                 .push8(FC.GOVERNOR.gov_cyclic_ff_weight)
                 .push8(FC.GOVERNOR.gov_collective_ff_weight)
-                .push8(FC.GOVERNOR.gov_max_throttle)
-                .push8(FC.GOVERNOR.gov_min_throttle);
+                .push8(FC.GOVERNOR.gov_max_throttle);
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+                    buffer.push8(FC.GOVERNOR.gov_min_throttle);
+                }
            break;
 
         case MSPCodes.MSP_SET_GOVERNOR_CONFIG:
