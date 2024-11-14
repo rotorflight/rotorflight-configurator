@@ -1874,10 +1874,10 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.GOVERNOR.gov_cyclic_ff_weight)
                 .push8(FC.GOVERNOR.gov_collective_ff_weight)
                 .push8(FC.GOVERNOR.gov_max_throttle);
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
-                    buffer.push8(FC.GOVERNOR.gov_min_throttle);
-                }
-           break;
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+                buffer.push8(FC.GOVERNOR.gov_min_throttle);
+            }
+            break;
 
         case MSPCodes.MSP_SET_GOVERNOR_CONFIG:
             buffer.push8(FC.GOVERNOR.gov_mode)
