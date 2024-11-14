@@ -577,6 +577,11 @@ tab.initialize = function (callback) {
             });
         }
 
+        if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+            $('.tab-profiles tr.govMinThrottle').hide();
+            $('.tab-profiles tr.govMaxThrottle').addClass('border');
+        }
+
         function get_status() {
             MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
                 if (self.currentProfile != FC.CONFIG.profile && !dialogProfileChange.hasAttribute('open')) {
