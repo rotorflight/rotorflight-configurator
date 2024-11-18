@@ -3378,6 +3378,12 @@
     "govMaxThrottleHelp": {
         "message": "Maximum output throttle the governor is allowed to use."
     },
+    "govMinThrottle": {
+        "message": "Minimum Throttle"
+    },
+    "govMinThrottleHelp": {
+        "message": "Minimum output throttle the governor is allowed to use."
+    },
     "govMasterGain": {
         "message": "PID master gain"
     },

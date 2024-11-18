@@ -284,6 +284,7 @@ tab.initialize = function (callback) {
 
         $('.tab-profiles input[id="govHeadspeed"]').val(FC.GOVERNOR.gov_headspeed);
         $('.tab-profiles input[id="govMaxThrottle"]').val(FC.GOVERNOR.gov_max_throttle);
+        $('.tab-profiles input[id="govMinThrottle"]').val(FC.GOVERNOR.gov_min_throttle);
         $('.tab-profiles input[id="govMasterGain"]').val(FC.GOVERNOR.gov_gain);
         $('.tab-profiles input[id="govPGain"]').val(FC.GOVERNOR.gov_p_gain);
         $('.tab-profiles input[id="govIGain"]').val(FC.GOVERNOR.gov_i_gain);
@@ -422,6 +423,7 @@ tab.initialize = function (callback) {
         }
         if (self.isGovEnabled) {
             FC.GOVERNOR.gov_max_throttle = parseInt($('.tab-profiles input[id="govMaxThrottle"]').val());
+            FC.GOVERNOR.gov_min_throttle = parseInt($('.tab-profiles input[id="govMinThrottle"]').val());
         }
     }
 
@@ -573,6 +575,11 @@ tab.initialize = function (callback) {
                 min: 0.1,
                 max: 25,
             });
+        }
+
+        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+            $('.tab-profiles tr.govMinThrottle').hide();
+            $('.tab-profiles tr.govMaxThrottle').addClass('border');
         }
 
         function get_status() {
