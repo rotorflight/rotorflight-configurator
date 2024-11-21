@@ -2197,6 +2197,10 @@ MspHelper.prototype.resetMotorOverrides = async function() {
 };
 
 MspHelper.prototype.sendMotorOverride = function(motorIndex) {
+    if (!serial.connected) {
+      return;
+    }
+
     const value = FC.MOTOR_OVERRIDE[motorIndex];
     const buffer = [];
 
