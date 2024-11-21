@@ -97,7 +97,7 @@ const tab = {
         { name: 'Spektrum DSM/2048',    id: 1,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Spektrum DSM/SRXL',    id: 10,  feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Spektrum DSM/SRXL2',   id: 13,  feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
-        { name: 'ImmersionRC GHOST',    id: 14,  feature: 'RX_SERIAL',    telemetry: 0x007FFFFF,  visible: true, },
+        { name: 'ImmersionRC GHOST',    id: 14,  feature: 'RX_SERIAL',    telemetry: 0x00003607,  visible: true, },
         { name: 'Graupner SUMD',        id: 3,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Graupner SUMH',        id: 4,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Flysky IBUS',          id: 7,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
