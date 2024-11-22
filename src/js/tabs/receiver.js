@@ -97,7 +97,7 @@ const tab = {
         { name: 'Spektrum DSM/2048',    id: 1,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Spektrum DSM/SRXL',    id: 10,  feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Spektrum DSM/SRXL2',   id: 13,  feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
-        { name: 'ImmersionRC GHOST',    id: 14,  feature: 'RX_SERIAL',    telemetry: 0xFFFFFFFF,  visible: true, },
+        { name: 'ImmersionRC GHOST',    id: 14,  feature: 'RX_SERIAL',    telemetry: 0x00003607,  visible: true, },
         { name: 'Graupner SUMD',        id: 3,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Graupner SUMH',        id: 4,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Flysky IBUS',          id: 7,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
@@ -132,12 +132,12 @@ const tab = {
         { name: 'CUSTOM',               id: 11,  feature: 'RX_SERIAL',       telemetry: 0,           visible: false, },
     ],
     telemetryProtoSensors: [
-        { name: 'FrSky Hub',            id: 4,     sensors: 0xFFFFFFFF },
+        { name: 'FrSky Hub',            id: 4,     sensors: 0x007FFFFF },
         { name: 'FrSky S.Port',         id: 32,    sensors: 0xFFFFFFFF },
-        { name: 'FlySky iBUS',          id: 4096,  sensors: 0xFFFFFFFF },
-        { name: 'Graupner HoTT',        id: 8,     sensors: 0xFFFFFFFF },
-        { name: 'MAVLink',              id: 512,   sensors: 0xFFFFFFFF },
-        { name: 'LTM',                  id: 16,    sensors: 0xFFFFFFFF },
+        { name: 'FlySky iBUS',          id: 4096,  sensors: 0x007FFFFF },
+        { name: 'Graupner HoTT',        id: 8,     sensors: 0x007FFFFF },
+        { name: 'MAVLink',              id: 512,   sensors: 0x007FFFFF },
+        { name: 'LTM',                  id: 16,    sensors: 0x007FFFFF },
     ],
     telemetrySensorList: [
         { name: 'MODE',                 id:  3, },
@@ -477,6 +477,14 @@ const tab = {
 
 tab.initialize = function (callback) {
     const self = this;
+
+    if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+        this.telemetryProtoSensors.find((x) => x.name === 'FrSky S.Port').sensors = 0x007FFFFF;
+        this.rxProtocols.find((x) => x.name === 'FrSky F.PORT').telemetry = 0x007FFFFF;
+    } else {
+        this.telemetryProtoSensors.find((x) => x.name === 'FrSky S.Port').sensors = 0xFFFFFFFF;
+        this.rxProtocols.find((x) => x.name === 'FrSky F.PORT').telemetry = 0xFFFFFFFF;
+    }
 
     load_data(load_html);
 
