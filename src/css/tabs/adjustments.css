@@ -68,7 +68,7 @@
 }
 
 .tab-adjustments .adjustmentBody td.adjType {
-    width: 75px;
+    width: 90px;
     height: 50px;
     padding: 15px;
     border-right: 1px solid var(--boxBackground);
