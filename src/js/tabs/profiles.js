@@ -579,7 +579,10 @@ tab.initialize = function (callback) {
 
         if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
             $('.tab-profiles tr.govMinThrottle').hide();
-            $('.tab-profiles tr.govMaxThrottle').addClass('border');
+
+            if(self.isGovActive) {
+                $('.tab-profiles tr.govMaxThrottle').addClass('border');
+            }
         }
 
         function get_status() {
