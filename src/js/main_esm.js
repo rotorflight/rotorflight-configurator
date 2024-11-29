@@ -16,6 +16,7 @@ import { PortUsage } from "@/js/port_usage.js";
 import { STM32 } from "@/js/protocols/stm32.js";
 import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
 import { ReleaseChecker } from "@/js/release_checker.js";
+import { serial } from "@/js/serial.js";
 
 import "@/components/init.js";
 import "@/js/filesystem.js";
@@ -48,6 +49,7 @@ Object.assign(globalThis, {
   ReleaseChecker,
   STM32,
   STM32DFU,
+  serial,
   usbDevices,
 });
 
