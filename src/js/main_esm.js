@@ -26,6 +26,7 @@ import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
 import { ReleaseChecker } from "@/js/release_checker.js";
 import { serial } from "@/js/serial.js";
 import * as serialBackend from "@/js/serial_backend.js";
+import * as utilsCommon from "@/js/utils/common.js";
 
 import "@/components/init.js";
 import "@/js/filesystem.js";
@@ -43,6 +44,7 @@ Object.assign(globalThis, {
   ...backupRestore,
   ...defaultHuffmanTree,
   ...serialBackend,
+  ...utilsCommon,
   Beepers,
   Clipboard,
   ConfigInserter,
