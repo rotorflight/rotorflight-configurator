@@ -4,8 +4,9 @@ import { Mixer } from "@/js/Mixer.js";
 import { RPMFilter } from "@/js/RPMFilter.js";
 import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
 import { GuiControl } from "@/js/gui.js";
-import { STM32 } from '@/js/protocols/stm32.js';
-import { STM32DFU } from '@/js/protocols/stm32usbdfu.js';
+import { PortUsage } from "@/js/port_usage.js";
+import { STM32 } from "@/js/protocols/stm32.js";
+import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
 
 import "@/components/init.js";
 import "@/js/filesystem.js";
@@ -23,6 +24,7 @@ Object.assign(globalThis, {
   ConfigStorage,
   Features,
   Mixer,
+  PortUsage,
   RPMFilter,
   RateCurve,
   RateCurve2,
