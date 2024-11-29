@@ -7,6 +7,7 @@ import { FirmwareCache } from "@/js/FirmwareCache.js";
 import { Mixer } from "@/js/Mixer.js";
 import { RPMFilter } from "@/js/RPMFilter.js";
 import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
+import { FC } from "@/js/fc.js";
 import { GuiControl } from "@/js/gui.js";
 import { PortUsage } from "@/js/port_usage.js";
 import { STM32 } from "@/js/protocols/stm32.js";
@@ -29,6 +30,7 @@ Object.assign(globalThis, {
   ConfigInserter,
   ConfigStorage,
   DarkTheme,
+  FC,
   Features,
   FirmwareCache,
   Mixer,
