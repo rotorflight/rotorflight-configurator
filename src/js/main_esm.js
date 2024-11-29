@@ -1,3 +1,4 @@
+import { ConfigStorage } from "@/js/ConfigStorage.js";
 import { Features } from "@/js/Features.js";
 import { Mixer } from "@/js/Mixer.js";
 import { RPMFilter } from "@/js/RPMFilter.js";
@@ -19,6 +20,7 @@ CONFIGURATOR.gitChangesetId = __COMMIT_HASH__;
 globalThis.GUI = new GuiControl();
 
 Object.assign(globalThis, {
+  ConfigStorage,
   Features,
   Mixer,
   RPMFilter,
@@ -26,7 +28,6 @@ Object.assign(globalThis, {
   RateCurve2,
   STM32,
   STM32DFU,
-
 });
 
 if (GUI.isNWJS()) {
