@@ -1,6 +1,4 @@
-'use strict';
-
-const MSP = {
+export const MSP = {
     symbols: {
         BEGIN: '$'.charCodeAt(0),
         PROTO_V1: 'M'.charCodeAt(0),
