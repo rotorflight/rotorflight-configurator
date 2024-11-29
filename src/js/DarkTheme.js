@@ -1,6 +1,4 @@
-'use strict';
-
-const DarkTheme = {
+export const DarkTheme = {
     configEnabled: undefined,
 };
 

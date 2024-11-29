@@ -1,4 +1,5 @@
 import { ConfigStorage } from "@/js/ConfigStorage.js";
+import { DarkTheme } from "@/js/DarkTheme.js";
 import { Features } from "@/js/Features.js";
 import { Mixer } from "@/js/Mixer.js";
 import { RPMFilter } from "@/js/RPMFilter.js";
@@ -22,6 +23,7 @@ globalThis.GUI = new GuiControl();
 
 Object.assign(globalThis, {
   ConfigStorage,
+  DarkTheme,
   Features,
   Mixer,
   PortUsage,
