@@ -1,3 +1,4 @@
+import { Beepers } from "@/js/Beepers.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
 import { ConfigStorage } from "@/js/ConfigStorage.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
@@ -24,6 +25,7 @@ CONFIGURATOR.gitChangesetId = __COMMIT_HASH__;
 globalThis.GUI = new GuiControl();
 
 Object.assign(globalThis, {
+  Beepers,
   ConfigInserter,
   ConfigStorage,
   DarkTheme,
