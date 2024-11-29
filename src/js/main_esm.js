@@ -9,6 +9,7 @@ import { RPMFilter } from "@/js/RPMFilter.js";
 import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
 import { FC } from "@/js/fc.js";
 import { GuiControl } from "@/js/gui.js";
+import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { PortUsage } from "@/js/port_usage.js";
 import { STM32 } from "@/js/protocols/stm32.js";
 import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
@@ -34,12 +35,14 @@ Object.assign(globalThis, {
   Features,
   FirmwareCache,
   Mixer,
+  PortHandler,
   PortUsage,
   RPMFilter,
   RateCurve,
   RateCurve2,
   STM32,
   STM32DFU,
+  usbDevices,
 });
 
 if (GUI.isNWJS()) {
