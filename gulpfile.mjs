@@ -75,11 +75,7 @@ function bundle_vite() {
 }
 
 function bundle_src() {
-  const distSources = [
-    "./src/js/**/*",
-    "./src/tabs/*",
-    "!./src/tabs/receiver_msp.html",
-  ];
+  const distSources = ["./src/tabs/*", "!./src/tabs/receiver_msp.html"];
   const packageJson = new stream.Readable();
   packageJson.push(JSON.stringify(pkg, undefined, 2));
   packageJson.push(null);
