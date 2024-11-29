@@ -8,6 +8,7 @@ import { FirmwareCache } from "@/js/FirmwareCache.js";
 import { Mixer } from "@/js/Mixer.js";
 import { RPMFilter } from "@/js/RPMFilter.js";
 import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
+import * as backupRestore from "@/js/backup_restore.js";
 import { FC } from "@/js/fc.js";
 import { GuiControl } from "@/js/gui.js";
 import { getTabHelpURL } from "@/js/help.js";
@@ -36,6 +37,7 @@ CONFIGURATOR.gitChangesetId = __COMMIT_HASH__;
 globalThis.GUI = new GuiControl();
 
 Object.assign(globalThis, {
+  ...backupRestore,
   ...serialBackend,
   Beepers,
   Clipboard,
