@@ -1,3 +1,5 @@
+import { HUFFMAN_EOF } from "./huffman.js";
+
 export const defaultHuffmanTree = [
     { value: 0x00, codeLen: 2, code: 0x0003 },  //  11
     { value: 0x01, codeLen: 3, code: 0x0005 },  //  101

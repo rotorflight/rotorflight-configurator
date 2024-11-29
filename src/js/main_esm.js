@@ -13,6 +13,7 @@ import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
 import { FC } from "@/js/fc.js";
 import { GuiControl } from "@/js/gui.js";
 import { getTabHelpURL } from "@/js/help.js";
+import { huffmanDecodeBuf } from "@/js/huffman.js";
 import { MSP } from "@/js/msp.js";
 import { MSPCodes } from "@/js/msp/MSPCodes";
 import { MspHelper } from "@/js/msp/MSPHelper.js";
@@ -63,6 +64,7 @@ Object.assign(globalThis, {
   STM32DFU,
   UI_PHONES,
   getTabHelpURL,
+  huffmanDecodeBuf,
   serial,
   usbDevices,
 });
