@@ -2,6 +2,7 @@ import { ConfigInserter } from "@/js/ConfigInserter.js";
 import { ConfigStorage } from "@/js/ConfigStorage.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
 import { Features } from "@/js/Features.js";
+import { FirmwareCache } from "@/js/FirmwareCache.js";
 import { Mixer } from "@/js/Mixer.js";
 import { RPMFilter } from "@/js/RPMFilter.js";
 import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
@@ -27,6 +28,7 @@ Object.assign(globalThis, {
   ConfigStorage,
   DarkTheme,
   Features,
+  FirmwareCache,
   Mixer,
   PortUsage,
   RPMFilter,
