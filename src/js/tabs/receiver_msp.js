@@ -2,6 +2,7 @@ import * as noUiSlider from 'nouislider';
 import "nouislider/dist/nouislider.css";
 
 import { DarkTheme } from '@/js/DarkTheme.js';
+import { windowWatcherUtil } from '@/js/utils/window_watchers.js';
 
 import "@/css/slider.css";
 
