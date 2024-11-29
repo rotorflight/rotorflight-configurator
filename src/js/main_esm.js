@@ -1,4 +1,5 @@
 import { Beepers } from "@/js/Beepers.js";
+import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import { Clipboard } from "@/js/Clipboard.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
 import { ConfigStorage } from "@/js/ConfigStorage.js";
@@ -46,6 +47,7 @@ Object.assign(globalThis, {
   ...serialBackend,
   ...utilsCommon,
   Beepers,
+  CliAutoComplete,
   Clipboard,
   ConfigInserter,
   ConfigStorage,
