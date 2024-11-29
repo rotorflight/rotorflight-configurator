@@ -11,6 +11,7 @@ import { RPMFilter } from "@/js/RPMFilter.js";
 import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
 import { VirtualFC } from "@/js/VirtualFC.js";
 import * as backupRestore from "@/js/backup_restore.js";
+import * as dataStorage from "@/js/data_storage.js";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
 import { FC } from "@/js/fc.js";
 import { GuiControl } from "@/js/gui.js";
@@ -37,13 +38,11 @@ import "@/js/tabs/index.js";
 import "nouislider/dist/nouislider.css";
 import "@/css/slider.css";
 
-CONFIGURATOR.version = __APP_VERSION__;
-CONFIGURATOR.gitChangesetId = __COMMIT_HASH__;
-
 globalThis.GUI = new GuiControl();
 
 Object.assign(globalThis, {
   ...backupRestore,
+  ...dataStorage,
   ...defaultHuffmanTree,
   ...serialBackend,
   ...utilsCommon,
@@ -75,6 +74,9 @@ Object.assign(globalThis, {
   serial,
   usbDevices,
 });
+
+CONFIGURATOR.version = __APP_VERSION__;
+CONFIGURATOR.gitChangesetId = __COMMIT_HASH__;
 
 if (GUI.isNWJS()) {
   Clipboard._configureClipboardAsNwJs(GUI.nwGui);
