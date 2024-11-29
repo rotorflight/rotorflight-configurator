@@ -2,6 +2,7 @@ import { Features } from "@/js/Features.js";
 import { Mixer } from "@/js/Mixer.js";
 import { RPMFilter } from "@/js/RPMFilter.js";
 import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
+import { STM32 } from '@/js/protocols/stm32.js';
 import { STM32DFU } from '@/js/protocols/stm32usbdfu.js';
 
 import "@/components/init.js";
@@ -20,5 +21,6 @@ Object.assign(globalThis, {
   RPMFilter,
   RateCurve,
   RateCurve2,
+  STM32,
   STM32DFU,
 });

@@ -5,8 +5,6 @@
 
     popular choices - 921600, 460800, 256000, 230400, 153600, 128000, 115200, 57600, 38400, 28800, 19200
 */
-'use strict';
-
 var STM32_protocol = function () {
     this.baud = null;
     this.options = {};
@@ -830,4 +828,4 @@ STM32_protocol.prototype.cleanup = function () {
 };
 
 // initialize object
-var STM32 = new STM32_protocol();
+export const STM32 = new STM32_protocol();
