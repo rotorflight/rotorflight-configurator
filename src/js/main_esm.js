@@ -31,6 +31,7 @@ import * as utilsCommon from "@/js/utils/common.js";
 
 import "@/components/init.js";
 import "@/js/filesystem.js";
+import "@/js/injected_methods.js";
 import "@/js/tabs/index.js";
 
 import "nouislider/dist/nouislider.css";
