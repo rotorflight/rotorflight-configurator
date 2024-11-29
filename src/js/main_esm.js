@@ -1,3 +1,4 @@
+import { ConfigInserter } from "@/js/ConfigInserter.js";
 import { ConfigStorage } from "@/js/ConfigStorage.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
 import { Features } from "@/js/Features.js";
@@ -22,6 +23,7 @@ CONFIGURATOR.gitChangesetId = __COMMIT_HASH__;
 globalThis.GUI = new GuiControl();
 
 Object.assign(globalThis, {
+  ConfigInserter,
   ConfigStorage,
   DarkTheme,
   Features,

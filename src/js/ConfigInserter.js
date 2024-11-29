@@ -1,6 +1,4 @@
-'use strict';
-
-const ConfigInserter = function () {
+export const ConfigInserter = function () {
 };
 
 const CUSTOM_DEFAULTS_POINTER_ADDRESS = 0x08002800;
