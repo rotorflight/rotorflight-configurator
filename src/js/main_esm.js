@@ -8,6 +8,7 @@ import { FirmwareCache } from "@/js/FirmwareCache.js";
 import { Mixer } from "@/js/Mixer.js";
 import { RPMFilter } from "@/js/RPMFilter.js";
 import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
+import { VirtualFC } from "@/js/VirtualFC.js";
 import * as backupRestore from "@/js/backup_restore.js";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
 import { FC } from "@/js/fc.js";
@@ -63,6 +64,7 @@ Object.assign(globalThis, {
   STM32,
   STM32DFU,
   UI_PHONES,
+  VirtualFC,
   getTabHelpURL,
   huffmanDecodeBuf,
   serial,
