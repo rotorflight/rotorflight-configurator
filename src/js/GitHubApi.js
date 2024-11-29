@@ -1,6 +1,4 @@
-'use strict';
-
-const GitHubApi = function ()
+export const GitHubApi = function ()
 {
     const self = this;
 

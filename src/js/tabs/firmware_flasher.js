@@ -1,3 +1,5 @@
+import { GitHubApi } from '@/js/GitHubApi.js';
+
 const tab = {
     tabName: 'firmware_flasher',
     releases: null,
