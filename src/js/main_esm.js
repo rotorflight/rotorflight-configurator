@@ -13,6 +13,7 @@ import { getTabHelpURL } from "@/js/help.js";
 import { MSP } from "@/js/msp.js";
 import { MSPCodes } from "@/js/msp/MSPCodes";
 import { MspHelper } from "@/js/msp/MSPHelper.js";
+import { UI_PHONES } from "@/js/phones_ui.js";
 import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { PortUsage } from "@/js/port_usage.js";
 import { STM32 } from "@/js/protocols/stm32.js";
@@ -52,6 +53,7 @@ Object.assign(globalThis, {
   ReleaseChecker,
   STM32,
   STM32DFU,
+  UI_PHONES,
   getTabHelpURL,
   serial,
   usbDevices,
