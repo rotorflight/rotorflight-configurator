@@ -1,9 +1,6 @@
-'use strict';
-
-let mspHelper;
 let connectionTimestamp;
 
-function initializeSerialBackend() {
+export function initializeSerialBackend() {
     GUI.updateManualPortVisibility = function(){
         const selected_port = $('div#port-picker #port option:selected');
         if (selected_port.data().isManual) {
@@ -97,7 +94,7 @@ function initializeSerialBackend() {
                         finishClose(toggleStatus);
                     }
 
-                    mspHelper.setArmingEnabled(true, onFinishCallback);
+                    globalThis.mspHelper.setArmingEnabled(true, onFinishCallback);
                 }
             }
        }
@@ -280,8 +277,8 @@ function onOpen(openInfo) {
         setConnectionTimeout();
         FC.resetState();
 
-        mspHelper = new MspHelper();
-        MSP.listen(mspHelper.process_data.bind(mspHelper));
+        globalThis.mspHelper = new MspHelper();
+        MSP.listen(globalThis.mspHelper.process_data.bind(globalThis.mspHelper));
         console.log(`Requesting configuration data`);
 
         MSP.send_message(MSPCodes.MSP_API_VERSION, false, false, function () {
@@ -345,7 +342,7 @@ function onOpenVirtual() {
 
     CONFIGURATOR.connectionValid = true;
 
-    mspHelper = new MspHelper();
+    globalThis.mspHelper = new MspHelper();
 
     VirtualFC.setVirtualConfig();
 
@@ -376,7 +373,7 @@ function processBoardInfo() {
         const dialog = $('#dialogResetToCustomDefaults')[0];
 
         $('#dialogResetToCustomDefaults-acceptbtn').click(function() {
-            MSP.send_message(MSPCodes.MSP_RESET_CONF, [ mspHelper.RESET_TYPES.CUSTOM_DEFAULTS ], false);
+            MSP.send_message(MSPCodes.MSP_RESET_CONF, [ globalThis.mspHelper.RESET_TYPES.CUSTOM_DEFAULTS ], false);
             dialog.close();
             GUI.timeout_add('disconnect', function () {
                 $('div.connect_controls a.connect').click();
@@ -467,7 +464,7 @@ function processName() {
 }
 
 function setRtc() {
-    MSP.send_message(MSPCodes.MSP_SET_RTC, mspHelper.crunch(MSPCodes.MSP_SET_RTC), false, function () {
+    MSP.send_message(MSPCodes.MSP_SET_RTC, globalThis.mspHelper.crunch(MSPCodes.MSP_SET_RTC), false, function () {
         GUI.log(i18n.getMessage('realTimeClockSet'));
         finishOpen();
     });
@@ -583,7 +580,7 @@ function onClosed(result) {
     CONFIGURATOR.cliActive = false;
 }
 
-function read_serial(info) {
+export function read_serial(info) {
     if (!CONFIGURATOR.cliActive) {
         MSP.read(info);
     } else if (CONFIGURATOR.cliActive) {
@@ -591,7 +588,7 @@ function read_serial(info) {
     }
 }
 
-function sensor_status(sensors_detected) {
+export function sensor_status(sensors_detected) {
     // initialize variable (if it wasn't)
     if (!sensor_status.previous_sensors_detected) {
         sensor_status.previous_sensors_detected = -1; // Otherwise first iteration will not be run if sensors_detected == 0
@@ -657,7 +654,7 @@ function sensor_status(sensors_detected) {
     }
 }
 
-function have_sensor(sensors_detected, sensor_code) {
+export function have_sensor(sensors_detected, sensor_code) {
     switch(sensor_code) {
         case 'acc':
             return bit_check(sensors_detected, 0);
@@ -751,19 +748,19 @@ function specificByte(num, pos) {
     return 0x000000FF & (num >> (8 * pos));
 }
 
-function bit_check(num, bit) {
+export function bit_check(num, bit) {
     return ((num >> bit) % 2 != 0);
 }
 
-function bit_set(num, bit) {
+export function bit_set(num, bit) {
     return num | 1 << bit;
 }
 
-function bit_clear(num, bit) {
+export function bit_clear(num, bit) {
     return num & ~(1 << bit);
 }
 
-function update_dataflash_global() {
+export function update_dataflash_global() {
     function formatFilesize(bytes) {
         if (bytes < 1024) {
             return bytes + "B";
@@ -806,7 +803,7 @@ function update_dataflash_global() {
      }
 }
 
-function reinitialiseConnection(callback) {
+export function reinitialiseConnection(callback) {
     GUI.reboot_in_progress = true;
 
     callback?.();

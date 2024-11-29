@@ -20,6 +20,7 @@ import { STM32 } from "@/js/protocols/stm32.js";
 import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
 import { ReleaseChecker } from "@/js/release_checker.js";
 import { serial } from "@/js/serial.js";
+import * as serialBackend from "@/js/serial_backend.js";
 
 import "@/components/init.js";
 import "@/js/filesystem.js";
@@ -34,6 +35,7 @@ CONFIGURATOR.gitChangesetId = __COMMIT_HASH__;
 globalThis.GUI = new GuiControl();
 
 Object.assign(globalThis, {
+  ...serialBackend,
   Beepers,
   ConfigInserter,
   ConfigStorage,
