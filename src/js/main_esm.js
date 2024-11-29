@@ -15,6 +15,7 @@ import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { PortUsage } from "@/js/port_usage.js";
 import { STM32 } from "@/js/protocols/stm32.js";
 import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
+import { ReleaseChecker } from "@/js/release_checker.js";
 
 import "@/components/init.js";
 import "@/js/filesystem.js";
@@ -44,6 +45,7 @@ Object.assign(globalThis, {
   RPMFilter,
   RateCurve,
   RateCurve2,
+  ReleaseChecker,
   STM32,
   STM32DFU,
   usbDevices,
