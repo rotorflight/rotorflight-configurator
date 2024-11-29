@@ -1,10 +1,8 @@
-'use strict';
-
 /**
  * Encapsulates the Clipboard logic, depending on web or nw
  *
  */
-const Clipboard = {
+export const Clipboard = {
     _nwClipboard: null,
     available : null,
     readAvailable : null,

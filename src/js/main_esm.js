@@ -1,4 +1,5 @@
 import { Beepers } from "@/js/Beepers.js";
+import { Clipboard } from "@/js/Clipboard.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
 import { ConfigStorage } from "@/js/ConfigStorage.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
@@ -37,6 +38,7 @@ globalThis.GUI = new GuiControl();
 Object.assign(globalThis, {
   ...serialBackend,
   Beepers,
+  Clipboard,
   ConfigInserter,
   ConfigStorage,
   DarkTheme,
