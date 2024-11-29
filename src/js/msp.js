@@ -53,6 +53,12 @@ export const MSP = {
 
     JUMBO_FRAME_SIZE_LIMIT:     255,
 
+    SDCARD_STATE_NOT_PRESENT: 0,
+    SDCARD_STATE_FATAL:       1,
+    SDCARD_STATE_CARD_INIT:   2,
+    SDCARD_STATE_FS_INIT:     3,
+    SDCARD_STATE_READY:       4,
+
     read: function (readInfo) {
         if (CONFIGURATOR.virtualMode) {
             return;

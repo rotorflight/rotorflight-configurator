@@ -1,13 +1,10 @@
-'use strict';
-
-
 // Used for LED_STRIP
 const ledDirectionLetters    = ['n', 'e', 's', 'w', 'u', 'd'];      // in LSB bit order
 const ledFunctionLetters     = ['i', 'w', 'f', 'a', 't', 'r', 'c', 'g', 's', 'b', 'l']; // in LSB bit order
 const ledBaseFunctionLetters = ['c', 'f', 'a', 'l', 's', 'g', 'r']; // in LSB bit
 const ledOverlayLetters      = ['t', 'o', 'b', 'v', 'i', 'w', 'k', 'd']; // in LSB bit
 
-function MspHelper() {
+export function MspHelper() {
     const self = this;
 
     // 0 based index, must be identical to 'baudRates' in 'src/main/io/serial.c' in rotorflight
@@ -2571,9 +2568,3 @@ MspHelper.prototype.setArmingEnabled = function(doEnable, onCompleteCallback)
         onCompleteCallback?.();
     }
 };
-
-MSP.SDCARD_STATE_NOT_PRESENT = 0; //TODO, move these to better place
-MSP.SDCARD_STATE_FATAL       = 1;
-MSP.SDCARD_STATE_CARD_INIT   = 2;
-MSP.SDCARD_STATE_FS_INIT     = 3;
-MSP.SDCARD_STATE_READY       = 4;

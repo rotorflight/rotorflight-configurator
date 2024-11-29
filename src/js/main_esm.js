@@ -10,6 +10,7 @@ import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
 import { FC } from "@/js/fc.js";
 import { GuiControl } from "@/js/gui.js";
 import { MSP } from "@/js/msp.js";
+import { MspHelper } from "@/js/msp/MSPHelper.js";
 import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { PortUsage } from "@/js/port_usage.js";
 import { STM32 } from "@/js/protocols/stm32.js";
@@ -37,6 +38,7 @@ Object.assign(globalThis, {
   FirmwareCache,
   MSP,
   Mixer,
+  MspHelper,
   PortHandler,
   PortUsage,
   RPMFilter,
