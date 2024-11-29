@@ -1,5 +1,7 @@
 'use strict';
 
+globalThis.TABS = {};
+
 $(document).ready(function () {
 
     useGlobalNodeFunctions();

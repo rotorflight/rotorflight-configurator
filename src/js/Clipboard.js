@@ -91,11 +91,3 @@ Clipboard._configureClipboardAsOther = function() {
         onError('Clipboard not available');
     };
 };
-
-if (GUI.isNWJS()){
-    Clipboard._configureClipboardAsNwJs(GUI.nwGui);
-} else if (GUI.isCordova()) {
-    Clipboard._configureClipboardAsCordova();
-} else {
-    Clipboard._configureClipboardAsOther();
-}

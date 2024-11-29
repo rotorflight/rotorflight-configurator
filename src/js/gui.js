@@ -1,15 +1,10 @@
-
-'use strict';
-
-window.TABS = {}; // filled by individual tab js file
-
 const GUI_MODES = {
     NWJS: "NW.js",
     Cordova: "Cordova",
     Other: "Other",
 };
 
-const GuiControl = function () {
+export const GuiControl = function () {
     this.auto_connect = false;
     this.show_all_ports = false;
     this.connecting_to = false;
@@ -463,6 +458,3 @@ GuiControl.prototype.isCordova = function () {
 GuiControl.prototype.isOther = function () {
   return this.Mode === GUI_MODES.Other;
 };
-
-// initialize object into GUI variable
-window.GUI = new GuiControl();
