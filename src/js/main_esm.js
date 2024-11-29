@@ -9,6 +9,7 @@ import { RPMFilter } from "@/js/RPMFilter.js";
 import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
 import { FC } from "@/js/fc.js";
 import { GuiControl } from "@/js/gui.js";
+import { getTabHelpURL } from "@/js/help.js";
 import { MSP } from "@/js/msp.js";
 import { MSPCodes } from "@/js/msp/MSPCodes";
 import { MspHelper } from "@/js/msp/MSPHelper.js";
@@ -51,6 +52,7 @@ Object.assign(globalThis, {
   ReleaseChecker,
   STM32,
   STM32DFU,
+  getTabHelpURL,
   serial,
   usbDevices,
 });
