@@ -8,10 +8,9 @@
 
 ### Desktop
 
-1. Start the dev server `make dev-server`
-2. Run `make dev-client`
+1. Run from source with `pnpm start`
 
-**Note:** The NW.js SDK needs to be downloaded the first time `make dev-client` runs, and may take some time to complete.
+**Note:** The NW.js SDK needs to be downloaded the first time the configurator is started, and may take some time to complete.
 
 ### Android
 
