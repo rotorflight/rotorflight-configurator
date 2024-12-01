@@ -412,6 +412,7 @@ tab.initialize = function (callback) {
         // Governor settings
         if (self.isGovActive) {
             FC.GOVERNOR.gov_headspeed = parseInt($('.tab-profiles input[id="govHeadspeed"]').val());
+            FC.GOVERNOR.gov_min_throttle = parseInt($('.tab-profiles input[id="govMinThrottle"]').val());
             FC.GOVERNOR.gov_gain = parseInt($('.tab-profiles input[id="govMasterGain"]').val());
             FC.GOVERNOR.gov_p_gain = parseInt($('.tab-profiles input[id="govPGain"]').val());
             FC.GOVERNOR.gov_i_gain = parseInt($('.tab-profiles input[id="govIGain"]').val());
@@ -423,7 +424,6 @@ tab.initialize = function (callback) {
         }
         if (self.isGovEnabled) {
             FC.GOVERNOR.gov_max_throttle = parseInt($('.tab-profiles input[id="govMaxThrottle"]').val());
-            FC.GOVERNOR.gov_min_throttle = parseInt($('.tab-profiles input[id="govMinThrottle"]').val());
         }
     }
 
@@ -579,7 +579,10 @@ tab.initialize = function (callback) {
 
         if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
             $('.tab-profiles tr.govMinThrottle').hide();
-            $('.tab-profiles tr.govMaxThrottle').addClass('border');
+
+            if(self.isGovActive) {
+                $('.tab-profiles tr.govMaxThrottle').addClass('border');
+            }
         }
 
         function get_status() {
