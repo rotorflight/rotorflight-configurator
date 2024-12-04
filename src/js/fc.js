@@ -609,6 +609,7 @@ const FC = {
             gov_startup_time:               0,
             gov_startup_time:               0,
             gov_spoolup_time:               0,
+            gov_spoolup_min_throttle:       0,
             gov_tracking_time:              0,
             gov_recovery_time:              0,
             gov_zero_throttle_timeout:      0,
