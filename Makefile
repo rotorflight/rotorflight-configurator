@@ -49,7 +49,15 @@ android: ## Run android debug build
 
 .PHONY: clean
 clean: ##
-	rm -fr bundle app redist
+	rm -fr app bundle redist
+
+.PHONY: realclean
+realclean: clean
+	rm -fr nwjs_cache
+
+.PHONY: distclean
+distclean: realclean
+	rm -fr node_modules
 
 # ========================================
 # HELP
