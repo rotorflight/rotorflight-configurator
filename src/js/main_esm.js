@@ -41,6 +41,8 @@ import "@/css/slider.css";
 
 globalThis.GUI = new GuiControl();
 
+// TODO: Remove these items from the global namespace.
+// Import them directly where they are needed.
 Object.assign(globalThis, {
   ...backupRestore,
   ...dataStorage,
