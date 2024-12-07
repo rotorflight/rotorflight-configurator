@@ -346,13 +346,18 @@ const MSP = {
             obj.timer = setInterval(function () {
                 console.log(`MSP data request timed-out: ${code} direction: ${MSP.message_direction} tab: ${GUI.active_tab}`);
 
-                // cancel request if serial is disconnected
-                if (!serial.connected) {
-                    console.log('Serial disconnected, cancelling MSP request');
+                // cancel request if MSP communication is not possible
+                if (!serial.connected || CONFIGURATOR.cliActive) {
+                    console.log('Cancelling MSP request');
+
                     const i = MSP.callbacks.findIndex(obj);
                     MSP.callbacks.splice(i, 1)
                     clearInterval(obj.timer);
-                    obj.callback?.();
+
+                    if (doCallbackOnError) {
+                      obj.callback?.();
+                    }
+
                     return;
                 }
 
