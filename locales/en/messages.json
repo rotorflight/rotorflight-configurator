@@ -1507,6 +1507,9 @@
     "portsFunction_FRSKY_OSD": {
         "message": "OSD: FrSky"
     },
+    "portsFunction_SBUS_OUT": {
+        "message": "S.BUS Output"
+    },
     "portsFunction_CUSTOM": {
         "message": "Custom"
     },
