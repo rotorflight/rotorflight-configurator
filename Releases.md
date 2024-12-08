@@ -1,3 +1,73 @@
+# 2.1.0-RC2
+
+This is the second _Release Candidate_ of the Rotorflight 2.1 Configurator.
+
+**NOTE** The final 2.1.0 Configurator will be released _after_ a few release candidates. Please don't use RCs once the final release is out.
+
+## Downloads
+
+The download locations are:
+
+- [Rotorflight Configurator](https://github.com/rotorflight/rotorflight-configurator/releases/tag/release/2.1.0-RC2)
+- [Rotorflight Blackbox](https://github.com/rotorflight/rotorflight-blackbox/releases/tag/release/2.1.0-RC2)
+- [Lua Scripts for EdgeTx and OpenTx](https://github.com/rotorflight/rotorflight-lua-scripts/releases/tag/release/2.1.0-RC2)
+- [Lua Scripts for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos/releases/tag/release/2.1.0-RC2)
+- [Lua Suite for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos-suite/releases/tag/release/2.1.0-RC2)
+
+## Notes
+
+- Rotorflight setup instructions can be found on the RF website [www.rotorflight.org](https://www.rotorflight.org/).
+
+- RF 2.1 *is* backward compatible with RF 2.0. You *can* load your configuration dump from RF 2.0 into 2.1.
+
+- If updating from RF1, please setup your helicopter from scratch. Follow the instructions on the website!
+
+- As always, please double check your configuration on the bench before flying!
+
+## Changes from 2.0.0
+
+- Custom CRSF/ELRS telemetry support
+- Add FBUS and F.Port2 receiver protocols
+- Add SBUS Output to serial ports
+- Add new SmartPort sensors
+- Automatic board detection in Firmware Flasher
+- Stay backwards compatible with RF 2.0
+- Cyclic Cross-Coupling refactored
+- Add ACC trim adjustments
+- Add ESC log options to Blackbox
+- Add support for SBUS2
+- Add support for UART Tx/Rx Pinswap
+- Add ESC telemetry half-duplex and pin-swap toggles
+- Add support for Graupner and FlyRotor ESC telemetry
+- Improved ctrl-mouse zoom
+- Improved sidebar style
+- Refactor bottom status bar
+- Hide Rates acceleration and response (until fixed)
+- Disable motor override when leaving the Motors tab
+- Display final gear ratio with decimals
+- Update slider implementation (nouislider)
+- Update Reference design port allocations
+- Update Bell 206 3D model with RF brand
+- Update RPM filter Q range to 1.5-10.0
+- Update default rates to match firmware
+- Fix many spelling mistakes
+- Add various tooltips
+
+## Changes from 2.1.0-RC1
+
+- Add SBUS Output to serial ports
+- FBUS and F.Port2 receiver protocols
+- Cancel MSP request retry if serial has disconnected
+- Restrict telemetry sensors to supported protocol
+- Display final gear ratio with decimals
+- Fix texture bleed on Bell 3D mode
+- Wait for motor override disable before leaving motor page
+- Fix CRSF custom telemetry toggle showing wrong state
+- Translations updated
+
+
+***
+
 # 2.1.0-RC1
 
 This is the first _Release Candidate_ of the Rotorflight 2.1 Configurator.
