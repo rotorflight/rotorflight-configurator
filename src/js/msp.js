@@ -346,6 +346,21 @@ const MSP = {
             obj.timer = setInterval(function () {
                 console.log(`MSP data request timed-out: ${code} direction: ${MSP.message_direction} tab: ${GUI.active_tab}`);
 
+                // cancel request if MSP communication is not possible
+                if (!serial.connected || CONFIGURATOR.cliActive) {
+                    console.log('Cancelling MSP request');
+
+                    const i = MSP.callbacks.findIndex(obj);
+                    MSP.callbacks.splice(i, 1)
+                    clearInterval(obj.timer);
+
+                    if (doCallbackOnError) {
+                      obj.callback?.();
+                    }
+
+                    return;
+                }
+
                 serial.send(bufferOut, false);
             }, 2500); // we should be able to define timeout in the future
         }
