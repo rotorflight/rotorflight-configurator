@@ -90,6 +90,8 @@ TABS.receiver = {
         { name: 'Futaba S.BUS',         id: 2,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Futaba S.BUS2',        id: 15,  feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'FrSky F.PORT',         id: 12,  feature: 'RX_SERIAL',    telemetry: 0xFFFFFFFF,  visible: true, },
+        { name: 'FrSky F.PORT2',        id: 16,  feature: 'RX_SERIAL',    telemetry: 0xFFFFFFFF,  visible: true, },
+        { name: 'FrSky FBUS',           id: 17,  feature: 'RX_SERIAL',    telemetry: 0xFFFFFFFF,  visible: true, },
         { name: 'Spektrum DSM/1024',    id: 0,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Spektrum DSM/2048',    id: 1,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Spektrum DSM/SRXL',    id: 10,  feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
@@ -478,9 +480,15 @@ TABS.receiver.initialize = function (callback) {
     if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
         this.telemetryProtoSensors.find((x) => x.name === 'FrSky S.Port').sensors = 0x007FFFFF;
         this.rxProtocols.find((x) => x.name === 'FrSky F.PORT').telemetry = 0x007FFFFF;
+
+        this.rxProtocols.find((x) => x.name === 'FrSky F.PORT2').visible = false;
+        this.rxProtocols.find((x) => x.name === 'FrSky FBUS').visible = false;
     } else {
         this.telemetryProtoSensors.find((x) => x.name === 'FrSky S.Port').sensors = 0xFFFFFFFF;
         this.rxProtocols.find((x) => x.name === 'FrSky F.PORT').telemetry = 0xFFFFFFFF;
+
+        this.rxProtocols.find((x) => x.name === 'FrSky F.PORT2').visible = true;
+        this.rxProtocols.find((x) => x.name === 'FrSky FBUS').visible = true;
     }
 
     load_data(load_html);
