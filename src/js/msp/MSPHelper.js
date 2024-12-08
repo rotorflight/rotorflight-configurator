@@ -2203,7 +2203,7 @@ MspHelper.prototype.sendMotorOverride = function(motorIndex) {
           .push16(value);
 
     return new Promise((resolve) =>
-      MSP.send_message(MSPCodes.MSP_SET_MOTOR_OVERRIDE, buffer, false, resolve)
+      MSP.send_message(MSPCodes.MSP_SET_MOTOR_OVERRIDE, buffer, false, resolve, true)
     );
 };
 
