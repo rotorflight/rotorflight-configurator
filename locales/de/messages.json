@@ -260,7 +260,7 @@
         "english": "Barometer"
     },
     "sensorStatusBaroShort": {
-        "message": "Baro.",
+        "message": "Baro",
         "english": "Baro",
         "description": "Text of the image in the top sensors icons. Please keep it short."
     },
@@ -375,7 +375,7 @@
         "english": "Configuration"
     },
     "tabPorts": {
-        "message": "Serielle Schnittstellen",
+        "message": "Serielle Anschlüsse",
         "english": "Serial Ports"
     },
     "tabBeepers": {
@@ -431,7 +431,7 @@
         "english": "Mixer"
     },
     "tabLedStrip": {
-        "message": "LED-Leiste",
+        "message": "LED-Bänder",
         "english": "LED Strip"
     },
     "tabRawSensorData": {
@@ -680,7 +680,7 @@
         "english": "<b>GitHub query for $1 releases failed, using cached information. Reason: <code>$2</code></b>"
     },
     "releaseCheckCached": {
-        "message": "Nutze zwischengespeicherte Versions-Informationen für $1 Versionen.",
+        "message": "Nutze zwischengespeicherte Versions-Informationen für $1 Veröffentlichungen.",
         "english": "Using cached release information for $1 releases."
     },
     "releaseCheckNoInfo": {
@@ -1296,7 +1296,7 @@
         "english": "Enable the mixer input override feature in the Mixers tab. Using mixer override WILL force the flight controls to arbitrary positions."
     },
     "feature_RX_PPM": {
-        "message": "PPM Empfängereingang",
+        "message": "PPM Empfänger-Eingang",
         "english": "PPM RX input"
     },
     "feature_INFLIGHT_ACC_CAL": {
@@ -1304,11 +1304,11 @@
         "english": "In-flight level calibration"
     },
     "feature_RX_SERIAL": {
-        "message": "Serieller Empfängereingang",
+        "message": "Serieller Empfänger-Eingang",
         "english": "Serial RX input"
     },
     "feature_SOFTSERIAL": {
-        "message": "Software-basierte serielle Schnittstellen aktivieren",
+        "message": "Software-basierte serielle Anschlüsse aktivieren",
         "english": "Enable Software Serial ports"
     },
     "feature_GPS": {
@@ -1328,19 +1328,19 @@
         "english": "PWM RX input channels"
     },
     "feature_RX_MSP": {
-        "message": "MSP Empfängereingang",
+        "message": "MSP Empfänger-Eingang",
         "english": "MSP RX input"
     },
     "feature_RSSI_ADC": {
-        "message": "Analoger RSSI Eingang",
+        "message": "Analoger RSSI-Eingang",
         "english": "Analog RSSI input"
     },
     "feature_LED_STRIP": {
-        "message": "RGB LED-Leistenunterstützung",
+        "message": "RGB LED-Band-Unterstützung",
         "english": "RGB LED Strip support"
     },
     "feature_DISPLAY": {
-        "message": "OLED Displayunterstützung",
+        "message": "OLED Display-Unterstützung",
         "english": "OLED Display support"
     },
     "feature_OSD": {
@@ -1368,7 +1368,7 @@
         "english": "RPM signal input support"
     },
     "feature_VTX": {
-        "message": "Video Sender",
+        "message": "Video-Sender",
         "english": "Video Transmitter"
     },
     "feature_DYN_NOTCH": {
@@ -1396,11 +1396,11 @@
         "english": "Features"
     },
     "featureTip_GPS": {
-        "message": "Ermöglicht die Unterstützung der GPS-Telemetrie. Fügt die Registerkarte <i> GPS </i> für die Konfiguration hinzu.",
+        "message": "Ermöglicht die Unterstützung der GPS-Telemetrie. Fügt die Registerkarte <i> GPS </i> für die spezifische Konfiguration hinzu.",
         "english": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration."
     },
     "featureTip_LED_STRIP": {
-        "message": "Ermöglicht die Unterstützung für WS2811/2812 LED-Streifen. Fügt die Registerkarte <i> LED Strip </i> für die Konfiguration hinzu.",
+        "message": "Ermöglicht die Unterstützung für WS2811/2812 LED-Bänder. Fügt die Registerkarte <i> LED-Bänder </i> für die spezifische Konfiguration hinzu.",
         "english": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration."
     },
     "featureTip_CMS": {
@@ -1408,7 +1408,7 @@
         "english": "Enables firmware support for CMS."
     },
     "configurationSerialPorts": {
-        "message": "Serielle Schnittstellen",
+        "message": "Serielle Anschlüsse",
         "english": "Serial Ports"
     },
     "configurationSerialPortsHelp": {
@@ -1456,7 +1456,7 @@
         "english": "GYRO Alignment"
     },
     "configurationSensorGyroToUse": {
-        "message": "GYRO/ACCEL",
+        "message": "Gyro/Beschl.",
         "english": "GYRO/ACCEL"
     },
     "configurationSensorGyroToUseNotFound": {
@@ -1476,15 +1476,15 @@
         "english": "Both"
     },
     "configurationSensorAlignmentGyro1": {
-        "message": "Erster GYRO",
+        "message": "Erster Gyro",
         "english": "First GYRO"
     },
     "configurationSensorAlignmentGyro2": {
-        "message": "Zweiter GYRO",
+        "message": "Zweiter Gyro",
         "english": "Second GYRO"
     },
     "configurationSensorAlignmentAcc": {
-        "message": "ACCEL Ausrichtung",
+        "message": "Ausrichtung Beschl.-Sensor",
         "english": "ACCEL Alignment"
     },
     "configurationSensorAlignmentMag": {
@@ -1632,7 +1632,7 @@
         "english": "Beep a special tone when arming the FC and GPS does not have fix"
     },
     "configurationSystem": {
-        "message": "Systemkonfiguration",
+        "message": "System-Konfiguration",
         "english": "System configuration"
     },
     "configurationLoopTime": {
@@ -1675,7 +1675,7 @@
         "english": "Auto Baud"
     },
     "configurationGPSAutoConfig": {
-        "message": "Auto Konfig",
+        "message": "Automatische Konfiguration",
         "english": "Auto Config"
     },
     "configurationGPSGalileo": {
@@ -1715,7 +1715,7 @@
         "english": "OK"
     },
     "portsIdentifier": {
-        "message": "Identifikator",
+        "message": "Kennung",
         "english": "Identifier"
     },
     "portsConfiguration": {
@@ -1727,11 +1727,11 @@
         "english": "Serial Rx"
     },
     "portsSensorIn": {
-        "message": "Sensor Eingang",
+        "message": "Sensor-Eingang",
         "english": "Sensor Input"
     },
     "portsTelemetryOut": {
-        "message": "Telemetrie Ausgabe",
+        "message": "Telemetrie-Ausgabe",
         "english": "Telemetry Output"
     },
     "portsPeripherals": {
@@ -1815,7 +1815,7 @@
         "english": "Serial Rx"
     },
     "portsFunction_BLACKBOX": {
-        "message": "Blackbox-Flugschreiber",
+        "message": "Blackbox-Logging",
         "english": "Blackbox Logging"
     },
     "portsFunction_TBS_SMARTAUDIO": {
@@ -1841,6 +1841,10 @@
     "portsFunction_FRSKY_OSD": {
         "message": "OSD: FrSky",
         "english": "OSD: FrSky"
+    },
+    "portsFunction_SBUS_OUT": {
+        "message": "S.BUS-Ausgabe",
+        "english": "S.BUS Output"
     },
     "portsFunction_CUSTOM": {
         "message": "Benutzerdefiniert",
@@ -2019,15 +2023,15 @@
         "english": "Loaded Profile: <strong class=\"message-positive\">$1</strong>"
     },
     "receiverSelection": {
-        "message": "Empfängertyp",
+        "message": "Empfänger-Typ",
         "english": "Receiver Type"
     },
     "receiverSettings": {
-        "message": "Empfänger Einstellungen",
+        "message": "Empfänger-Einstellungen",
         "english": "Receiver Settings"
     },
     "receiverProtocol": {
-        "message": "Empfänger Protokoll",
+        "message": "Empfänger-Protokoll",
         "english": "Receiver Protocol"
     },
     "receiverHelpProtocol": {
@@ -2363,7 +2367,7 @@
         "english": "Battery Current"
     },
     "receiverCrsfTelemetrySensor_BATTERY_CONSUMPTION": {
-        "message": "Akkukapazitäts-Verbrauch",
+        "message": "Akku-Kapazitätsverbrauch",
         "english": "Battery Consumption"
     },
     "receiverCrsfTelemetrySensor_BATTERY_CHARGE_LEVEL": {
@@ -2387,23 +2391,23 @@
         "english": "Control (hi-res)"
     },
     "receiverCrsfTelemetrySensor_PITCH_CONTROL": {
-        "message": "Nick Steuerung",
+        "message": "Nick-Steuerung",
         "english": "Pitch Control"
     },
     "receiverCrsfTelemetrySensor_ROLL_CONTROL": {
-        "message": "Roll Steuerung",
+        "message": "Roll-Steuerung",
         "english": "Roll Control"
     },
     "receiverCrsfTelemetrySensor_YAW_CONTROL": {
-        "message": "Gier Steuerung",
+        "message": "Heck-Steuerung",
         "english": "Yaw Control"
     },
     "receiverCrsfTelemetrySensor_COLLECTIVE_CONTROL": {
-        "message": "Pitch Steuerung",
+        "message": "Pitch-Steuerung",
         "english": "Collective Control"
     },
     "receiverCrsfTelemetrySensor_THROTTLE_CONTROL": {
-        "message": "Motor Steuerung",
+        "message": "Motor-Steuerung",
         "english": "Throttle Control"
     },
     "receiverCrsfTelemetrySensor_ESC_DATA": {
@@ -2423,7 +2427,7 @@
         "english": "ESC Capacity"
     },
     "receiverCrsfTelemetrySensor_ESC_ERPM": {
-        "message": "ESC ERPM",
+        "message": "ESC-ERPM",
         "english": "ESC ERPM"
     },
     "receiverCrsfTelemetrySensor_ESC_POWER": {
@@ -2435,11 +2439,11 @@
         "english": "ESC Throttle"
     },
     "receiverCrsfTelemetrySensor_ESC_TEMP1": {
-        "message": "ESC Temp 1",
+        "message": "ESC-Temp 1",
         "english": "ESC Temp 1"
     },
     "receiverCrsfTelemetrySensor_ESC_TEMP2": {
-        "message": "ESC Temp 2",
+        "message": "ESC-Temp 2",
         "english": "ESC Temp 2"
     },
     "receiverCrsfTelemetrySensor_ESC_BEC_VOLTAGE": {
@@ -2511,7 +2515,7 @@
         "english": "Exhaust Temp"
     },
     "receiverCrsfTelemetrySensor_HEADING": {
-        "message": "Überschrift",
+        "message": "Richtung",
         "english": "Heading"
     },
     "receiverCrsfTelemetrySensor_ALTITUDE": {
@@ -3340,7 +3344,7 @@
         "english": "Clockwise"
     },
     "mixerCounterClockwise": {
-        "message": "Gegen den Uhrzeigersinn",
+        "message": "Gegen Uhrzeigersinn",
         "english": "Counter-Clockwise"
     },
     "mixerSwashType": {
@@ -3456,7 +3460,7 @@
         "english": "Total blade pitch limit [&deg;]"
     },
     "mixerTotalPitchLimitHelp": {
-        "message": "Maximaler Betrag der gesamten zyklischen + kollektiven Blattverstellung.",
+        "message": "Maximaler Betrag der gesamten Blattverstellung (zyklisch + kollektiv).",
         "english": "Maximum amount of total cyclic + collective blade pitch."
     },
     "mixerCyclicLimit": {
@@ -3520,7 +3524,7 @@
         "english": "<strong>Variable pitch:</strong> Variable pitch tail controlled by a tail servo (Servo#4). <br><strong>Motorised:</strong> The tail has a separate motor (Motor#2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode (experimental)."
     },
     "mixerTailVariablePitch": {
-        "message": "kollektive Blattverstellung",
+        "message": "Kollektive Blattverstellung",
         "english": "Variable pitch"
     },
     "mixerTailMotorized": {
@@ -3588,7 +3592,7 @@
         "english": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop"
     },
     "mixerTailRotorCenterTrim": {
-        "message": "Trimmung Heckrotor Mittelstellung",
+        "message": "Trimmung Heckrotor-Mittelstellung",
         "english": "Yaw center trim"
     },
     "mixerTailRotorCenterTrimHelp": {
@@ -3968,7 +3972,7 @@
         "english": "Qty"
     },
     "motorsEscProtocol": {
-        "message": "ESC Throttle-Protokoll",
+        "message": "ESC Gaskanal-Protokoll",
         "english": "ESC Throttle protocol"
     },
     "motorsEscProtocolHelp": {
@@ -4032,11 +4036,11 @@
         "english": "The ESC RPM is sent back to the FC with Dshot. Also known as bidirectional Dshot. <br>Note: Requires a compatible ESC, like AM32, Bluejay or BLHeli32 version 32.7 or higher."
     },
     "motorsRPMSensor": {
-        "message": "RPM-Sensor",
+        "message": "Drehzahl-Sensor",
         "english": "RPM Sensor"
     },
     "motorsRPMSensorHelp": {
-        "message": "Verwende den RPM Sensor Eingang für Motor RPM. Du kannst entweder ein RPM Signal vom Regler oder eins von einem externen RPM Sensor verwenden.",
+        "message": "Verwende den RPM-Sensor-Eingang für die Motor-Drehzahl. Du kannst entweder ein RPM-Signal vom Regler oder eins von einem externen RPM-Sensor verwenden.",
         "english": "Use the RPM Sensor input for motor RPM. You can connect an RPM signal from the ESC, or from an external RPM Sensor dongle."
     },
     "motorsMainRotorGearRatio": {
@@ -4092,7 +4096,7 @@
         "english": "This PWM value is sent to the ESC/servo at full throttle."
     },
     "motorsThrottleMinimumCommand": {
-        "message": "PWM-Wert für Motor-Stop-Gas",
+        "message": "PWM-Wert für Motor-Stop Gas",
         "english": "Motor Stop Throttle PWM value"
     },
     "motorsThrottleMinimumCommandHelp": {
@@ -4192,7 +4196,7 @@
         "english": "Governor Settings"
     },
     "govConfigurationNote": {
-        "message": "<strong>Hinweis:</strong> Die Einstellungen des Drehzahlreglers sind sowohl global als auch profilspezifisch. Siehe Tab 'Profile'.",
+        "message": "<strong>Hinweis:</strong> Die Einstellungen des Drehzahlreglers sind sowohl global als auch profilspezifisch. Siehe Registerkarte 'Profile'.",
         "english": "<strong>Note:</strong> Governor has both global and profile parameters. Please see the Profiles tab for profile specific parameters."
     },
     "govMode": {
@@ -4204,7 +4208,7 @@
         "english": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
     },
     "govHandoverThrottle": {
-        "message": "Gaswert für Übergabe [%]",
+        "message": "Gaswert bei Übergabe [%]",
         "english": "Handover throttle [%]"
     },
     "govHandoverThrottleHelp": {
@@ -4212,47 +4216,47 @@
         "english": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level."
     },
     "govStartupTime": {
-        "message": "Anlaufzeit",
+        "message": "Anlauf-Zeit",
         "english": "Startup time"
     },
     "govStartupTimeHelp": {
-        "message": "Zeitkonstante für langsames Anfahren, in Sekunden, die die Zeit von Null bis zur vollen Drehzahl angibt.",
+        "message": "Zeit für langsames Anlaufen in Sekunden, gemessen von Null bis zur vollen Drehzahl.",
         "english": "Time constant for slow startup, in seconds, measuring the time from zero to full headspeed."
     },
     "govSpoolupTime": {
-        "message": "Spoolup-Zeit",
+        "message": "Hochlauf-Zeit",
         "english": "Spoolup time"
     },
     "govSpoolupTimeHelp": {
-        "message": "Zeitkonstante für Sanftanlauf in Sekunden, von Null bis zur vollen Rotordrehzahl.",
+        "message": "Zeit für langsames Hochlaufen in Sekunden, gemessen von Null bis zur vollen Drehzahl.",
         "english": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govTrackingTime": {
-        "message": "Drehzahlwechselzeit",
+        "message": "Drehzahlwechsel-Zeit",
         "english": "Tracking time"
     },
     "govTrackingTimeHelp": {
-        "message": "Verzögerung bei Veränderung der Drehzahlvorwahl, von 0 bis zur vollen Rotordrehzahl.",
+        "message": "Übergangszeit bei Veränderung der Drehzahlvorgabe, gemessen von Null bis zur vollen Drehzahl.",
         "english": "Time constant for headspeed changes, in seconds, measuring the time from zero to full headspeed."
     },
     "govRecoveryTime": {
-        "message": "Wiederherstellungszeit",
+        "message": "Wiederherstellungs-Zeit",
         "english": "Recovery time"
     },
     "govRecoveryTimeHelp": {
-        "message": "Verzögerung bei Wiederherstellung, in Sekunden, von 0 bis zur vollen Rotordrehzahl.",
+        "message": "Zeit bei erneutem Hochlauf in Sekunden, gemessen von Null bis zur vollen Drehzahl.",
         "english": "Time constant for recovery spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govAutoBailoutTime": {
-        "message": "Autorotation Abbruch Zeit",
+        "message": "Hochlauf-Zeit nach Autorotations-Abbruch",
         "english": "Autorotation bailout time"
     },
     "govAutoBailoutTimeHelp": {
-        "message": "Verzögerung im Falle eines Autorotationsabbruchs, in Sekunden, von 0 bis zur vollen Rotordrehzahl.",
+        "message": "Hochlauf-Zeit im Falle eines Autorotationsabbruchs in Sekunden, gemessen von Null bis zur vollen Drehzahl.",
         "english": "Time constant for autorotation bailout spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govAutoTimeout": {
-        "message": "Autorotation Time-out",
+        "message": "Autorotation Time-Out",
         "english": "Autorotation timeout"
     },
     "govAutoTimeoutHelp": {
@@ -4260,7 +4264,7 @@
         "english": "Timeout for ending autorotation and moving to normal IDLE."
     },
     "govAutoMinEntryTime": {
-        "message": "Autorotation minimale Startzeit",
+        "message": "Autorotation minimale Flugzeit",
         "english": "Autorotation minimum entry time"
     },
     "govAutoMinEntryTimeHelp": {
@@ -4268,31 +4272,31 @@
         "english": "Minimum flight time before autorotation can be engaged."
     },
     "govZeroThrottleTimeout": {
-        "message": "Null Gas Wartezeit",
+        "message": "Wartezeit bei fehlendem Gassignal",
         "english": "Zero Throttle timeout"
     },
     "govZeroThrottleTimeoutHelp": {
-        "message": "Wartezeit bei fehlendem (Null-) Gassignal, bevor der Drehzahlregler abgeschaltet wird. Wenn das Gassignal innerhalb dieser Zeitspanne zurückkehrt, führt der Regler eine Wiederanlaufphase durch.",
+        "message": "Wartezeit bei fehlendem (Null) Gassignal, bevor der Drehzahlregler abgeschaltet wird. Wenn das Gassignal innerhalb dieser Zeitspanne zurückkehrt, führt der Regler eine Wiederanlaufphase durch.",
         "english": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup."
     },
     "govLostHeadspeedTimeout": {
-        "message": "Überschreiten des Zeitlimits für das Kopfdrehzahlsignal",
+        "message": "Wartezeit bei fehlendem Drehzahlsignal",
         "english": "Headspeed signal timeout"
     },
     "govLostHeadspeedTimeoutHelp": {
-        "message": "Zeitüberschreitung für das Ausbleiben des Drehzahlsignals vor dem Herunterfahren des Reglers. Kehrt das Drehzahlsignal innerhalb dieser Zeitspanne zurück, führt der Regler ein Wiederanlaufen des Motors durch.",
+        "message": "Zeitspanne für das Ausbleiben des Drehzahlsignals vor dem Herunterfahren des Reglers. Kehrt das Drehzahlsignal innerhalb dieser Zeitspanne zurück, führt der Regler ein Wiederanlaufen des Motors durch.",
         "english": "Timeout for missing headspeed signal, before spooling down. If the RPM signal returns within this timeout, the governor will perform a recovery spoolup."
     },
     "govHeadspeedFilterHz": {
-        "message": "Grenzfrequenz des Kopfdrehzahlfilters [Hz]",
+        "message": "Grenzfrequenz des Drehzahl-Filters [Hz]",
         "english": "Headspeed filter cutoff [Hz]"
     },
     "govHeadspeedFilterHzHelp": {
-        "message": "Grenzfrequenz für den Tiefpassfilters für die Kopfdrehzahl.",
+        "message": "Grenzfrequenz des Drehzahl-Tiefpassfilters.",
         "english": "Cutoff for the headspeed lowpass filter."
     },
     "govVoltageFilterHz": {
-        "message": "Grenzfrequenz des Akku-Spannungsfilters [Hz]",
+        "message": "Grenzfrequenz des Akkuspannungs-Filters [Hz]",
         "english": "Battery voltage filter cutoff [Hz]"
     },
     "govVoltageFilterHzHelp": {
@@ -4300,15 +4304,15 @@
         "english": "Cutoff for the battery voltage lowpass filter."
     },
     "govTTAFilterHz": {
-        "message": "TTA Bandbreite [Hz]",
+        "message": "TTA-Bandbreite [Hz]",
         "english": "TTA Bandwidth [Hz]"
     },
     "govTTAFilterHzHelp": {
-        "message": "Grenzfrequenz für den TTA-Tiefpassfilter.",
+        "message": "Grenzfrequenz des Tiefpassfilters für den Heck-Drehmoment-Assistent (TTA).",
         "english": "Cutoff for the TTA lowpass filter."
     },
     "govFFFilterHz": {
-        "message": "Vorsteuerung Bandbreite [Hz]",
+        "message": "Bandbreite Vorsteuerung [Hz]",
         "english": "Precomp Bandwidth [Hz]"
     },
     "govFFFilterHzHelp": {
@@ -4376,19 +4380,19 @@
         "english": "Collective/Cyclic feedforward gain. Usually 0..100"
     },
     "govTTAGain": {
-        "message": "Tail Torque Assist (TTA) Gain",
+        "message": "Gain Heck-Drehmoment-Assistent (TTA)",
         "english": "Tail Torque Assist (TTA) gain"
     },
     "govTTAGainHelp": {
-        "message": "Tail Torque Assist Gain. Dieses Gain steuert die Drehzahlerhöhung bei Heckeingaben in negative Richtung, z.B. wenn ein Motorheck unter seine Leerlaufdrehzahl fällt, und somit der Hauptmotor die Steuerung des Hecks nach links übernimmt. Üblicherweise 50..150",
+        "message": "Stärke des Heck Drehmoment-Assistenten. Dieses Gain steuert die Hauptrotor-Drehzahlerhöhung bei Heckeingaben in negative Richtung, z.B. wenn ein Motorheck unter seine Leerlaufdrehzahl fällt, und somit der Hauptmotor die Steuerung des Hecks nach links übernimmt. Üblicherweise 50..150",
         "english": "Tail Torque Assist strength (gain). This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 50..150"
     },
     "govTTALimit": {
-        "message": "Tail Torque Assist (TTA) Limit [%]",
+        "message": "Limit Heck-Drehmoment-Assistent (TTA) [%]",
         "english": "Tail Torque Assist (TTA) limit [%]"
     },
     "govTTALimitHelp": {
-        "message": "Tail Torque Assist maximale Drehzahlerhöhung. Hier wird eingestellt, wie weit die TTA Drehzahl die maximal eingestellte Drehzahl überschreiten kann. Üblicherweise 20..50%.",
+        "message": "Maximale Hauptrotor-Drehzahlerhöhung des Heck Drehmoment-Assistenten. Hier wird eingestellt, wie weit die TTA-Drehzahl die maximal eingestellte Drehzahl überschreiten kann. Üblicherweise 20..50%.",
         "english": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%."
     },
     "govYawPrecomp": {
@@ -4480,7 +4484,7 @@
         "english": "Debug"
     },
     "cliInfo": {
-        "message": "<strong>Hinweis:</strong> Beim Verlassen des CLI Tab oder beim Drücken der Taste \"trennen\" wird <strong>automatisch</strong>  <strong>beenden</strong> an das Board gesendet.  Mit der neuesten Firmware wird sie dadurch <strong>neu gestartet</strong> und nicht gespeicherte Änderungen gehen <strong>verloren</strong>. <p><strong><span class=\"message-negative\">Warnung:</span></strong> Einige CLI Befehle können dazu führen, dass willkürliche Signale an die Motoren geschickt werden. Dadurch können Motoren hochdrehen, wenn ein Akku angeschlossen ist. Daher wird dringend empfohlen sicherzustellen, dass <strong> kein Akku angeschlossen ist, bevor du Befehle ins CLI eingibst</strong>.",
+        "message": "<strong>Hinweis:</strong> Beim Verlassen der CLI-Registerkarte oder beim Drücken der Taste \"trennen\" wird <strong>automatisch</strong>  <strong>beenden</strong> an das Board gesendet.  Mit der neuesten Firmware wird sie dadurch <strong>neu gestartet</strong> und nicht gespeicherte Änderungen gehen <strong>verloren</strong>. <p><strong><span class=\"message-negative\">Warnung:</span></strong> Einige CLI Befehle können dazu führen, dass willkürliche Signale an die Motoren geschickt werden. Dadurch können Motoren hochdrehen, wenn ein Akku angeschlossen ist. Daher wird dringend empfohlen sicherzustellen, dass <strong> kein Akku angeschlossen ist, bevor du Befehle ins CLI eingibst</strong>.",
         "english": "<strong>Note:</strong> Leaving CLI tab or pressing Disconnect will <strong>automatically</strong> send \"<strong>exit</strong>\" to the board.  With the latest firmware this will make the controller <strong>restart</strong> and unsaved changes will be <strong>lost</strong>.<p><strong><span class=\"message-negative\">Warning:</span></strong> Some commands in CLI can result in arbitrary signals being sent on the motor output pins. This can cause motors to spin up if a battery is connected. Therefore it is highly recommended to make sure that <strong>no battery is connected before entering commands in CLI</strong>."
     },
     "cliInputPlaceholder": {
@@ -4544,7 +4548,7 @@
         "english": "Go Back"
     },
     "loggingNote": {
-        "message": "Daten werden <span class=\"message-negative\">nur </span> in diesem Tab geloggt. Wenn der Tab geschlossen wird, wird das Loggen <span class=\"message-negative\">abgebrochen</span> und die Anwendung geht in den normalen Modus zurück.",
+        "message": "Daten werden <span class=\"message-negative\">nur </span> in dieser Registerkarte geloggt. Wenn die Registerkarte geschlossen wird, wird das Loggen <span class=\"message-negative\">abgebrochen</span> und die Anwendung geht in den normalen Modus zurück.",
         "english": "Data will be logged in this tab <span class=\"message-negative\">only</span>, leaving the tab will <span class=\"message-negative\">cancel</span> logging and application will return to its normal <strong>\"configurator\"</strong> state.<br /> You are free to select the global update period, data will be written into the log file every <strong>1</strong> second for performance reasons."
     },
     "loggingSamplesSaved": {
@@ -4608,7 +4612,7 @@
         "english": "No Logging"
     },
     "blackboxLoggingFlash": {
-        "message": "Speicherchip auf dem Board (Flashmemory)",
+        "message": "Speicher-Chip des Boards",
         "english": "Onboard Flash"
     },
     "blackboxLoggingSdCard": {
@@ -4616,7 +4620,7 @@
         "english": "SD Card"
     },
     "blackboxLoggingSerial": {
-        "message": "Serieller Port",
+        "message": "Serieller Anschluss",
         "english": "Serial Port"
     },
     "blackboxOptions": {
@@ -4712,7 +4716,7 @@
         "english": "ESC 2"
     },
     "serialLoggingSupportedNote": {
-        "message": "Das Speichern der Flugdaten (Logs) ist auf einem externen Gerät (z.B. OpenLager) mittels seriellem Port möglich. Dazu bitte den Anschluss im \"Anschlüsse Tab\" konfigurieren.",
+        "message": "Das Speichern der Flugdaten (Logs) ist auf einem externen Gerät (z.B. OpenLager) mittels seriellem Port möglich. Dazu den Anschluss in der Registerkarte 'Anschlüsse' konfigurieren.",
         "english": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
     },
     "sdcardNote": {
@@ -4748,7 +4752,7 @@
         "english": "Dataflash requires firmware &gt;= 1.8.0."
     },
     "dataflashButtonSaveFile": {
-        "message": "Speichern (Datei)",
+        "message": "Speichern in Datei",
         "english": "Save to file"
     },
     "dataflashSavetoFileNote": {
@@ -4916,7 +4920,7 @@
         "english": "Flash on connect"
     },
     "firmwareFlasherFlashOnConnectDescription": {
-        "message": "Flight-Controller automatisch Flashen (Auslösung durch Erkennung eines neuen seriellen Ports).",
+        "message": "Flight-Controller automatisch Flashen (Auslösung durch Erkennung eines neuen seriellen Anschlusses).",
         "english": "Attempt to flash the board automatically (triggered by newly detected serial port)."
     },
     "firmwareFlasherFullChipErase": {
@@ -5065,7 +5069,7 @@
         "english": "<b>No firmware selected to load</b>"
     },
     "firmwareFlasherNoValidPort": {
-        "message": "<span class=\"message-negative\">Bitte gültigen seriellen Port auswählen</span>",
+        "message": "<span class=\"message-negative\">Bitte gültigen seriellen Anschluss auswählen</span>",
         "english": "<span class=\"message-negative\">Please select valid serial port</span>"
     },
     "firmwareFlasherWritePermissions": {
@@ -5139,7 +5143,7 @@
         "english": "Acknowledge"
     },
     "ledStripHelp": {
-        "message": "Der Flight-Controller kann Farben und Effekte von LED-Leisten steuern.<br />Konfiguriere die LEDs, sowie die Verkabelungreihenfolge auf dem Raster und bringe die LEDs entsprechend an.<br/>Doppelklick auf die Farben erlaubt das Anpassen der HSV-Werte.",
+        "message": "Der Flight-Controller kann Farben und Effekte von LED-Bändern steuern.<br />Konfiguriere die LEDs sowie die Verkabelungreihenfolge auf dem Raster und bringe die LEDs entsprechend an.<br/>Ein Doppelklick auf die Farben erlaubt das Anpassen der HSV-Werte.",
         "english": "The flight controller can control colors and effects of individual LEDs on a strip.<br />Configure LEDs on the grid, configure wiring order then attach LEDs on your aircraft according to grid positions. LEDs without wire ordering number will not be saved.<br />Double-click on a color to edit the HSV values."
     },
     "ledStripColorSetupTitle": {
@@ -5202,11 +5206,11 @@
         "english": "Blink tempo (BPM)"
     },
     "ledStripGlobalFlickerRate": {
-        "message": "Flickerrate",
+        "message": "Flacker-Rate",
         "english": "Flicker rate"
     },
     "ledStripGlobalFadeRate": {
-        "message": "Überblendrate",
+        "message": "Überblend-Rate",
         "english": "Fade rate"
     },
     "ledStripGlobalBrightness": {
@@ -5214,11 +5218,11 @@
         "english": "Overall brightness"
     },
     "ledStripFlickerOverlay": {
-        "message": "Flickern",
+        "message": "Flackern",
         "english": "Flicker"
     },
     "ledStripFadeOverlay": {
-        "message": "Überblendung zur Farbe Alt (im Profil Status Alt)",
+        "message": "Überblendung zur Farbe Alt (im Profil-Status Alt)",
         "english": "Fade to alt color (in profile Status Alt)"
     },
     "ledStripVtxOverlay": {
@@ -5226,7 +5230,7 @@
         "english": "VTX (uses vtx frequency to assign color)"
     },
     "ledStripFunctionSection": {
-        "message": "LED Funktionen",
+        "message": "LED-Funktionen",
         "english": "LED Functions"
     },
     "ledStripFunctionTitle": {
@@ -5249,7 +5253,7 @@
         "description": "One of the modes of the Led Strip"
     },
     "ledStripFunctionArmOption": {
-        "message": "Arm Zustand",
+        "message": "Arm-Zustand",
         "english": "Arm State",
         "description": "One of the modes of the Led Strip"
     },
@@ -5387,7 +5391,7 @@
         "description": "One of the modes in Color Mode in Led Strip"
     },
     "ledStripWiring": {
-        "message": "LED-Steifen Verkabelung",
+        "message": "LED-Bänder Verkabelung",
         "english": "LED Strip Wiring",
         "description": "One of the modes in Led Strip"
     },
@@ -5412,12 +5416,12 @@
         "description": "Message in the wiring modes in Led Strip"
     },
     "ledStripGlobalSettings": {
-        "message": "Globale Einstellungen für LED-Streifen",
+        "message": "Globale Einstellungen für LED-Bänder",
         "english": "LED Strip Global Settings",
         "description": "The Led Strip global settings, like profile etc"
     },
     "ledStripVtxFunction": {
-        "message": "Larson Scanner",
+        "message": "Larson-Scanner",
         "english": "Larson scanner"
     },
     "ledStripBlinkTitle": {
@@ -5745,7 +5749,7 @@
         "english": "Piro Compensation"
     },
     "profilesErrorRotationHelp": {
-        "message": "Dreht den aktuellen Roll- und Pitch- Fehlervektor um die Hochachse, wenn sich das Modell um diese dreht. Dies verbessert die Steuerbarkeit in Pirouetten und ermöglicht es dem pirouettierenden Modell, ohne Eingriff des Piloten in einer geraden Linie zu fliegen.",
+        "message": "Dreht den aktuellen Roll- und Pitch-Fehlervektor um die Hochachse, wenn sich das Modell um diese dreht. Dies verbessert die Steuerbarkeit in Pirouetten und ermöglicht es dem pirouettierenden Modell, ohne Eingriff des Piloten in einer geraden Linie zu fliegen.",
         "english": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This improves piro control and helps the model to travel in a straight line while pirouetting."
     },
     "profilesItermRelax": {
@@ -5921,15 +5925,15 @@
         "english": "Yaw Precomp Cutoff [Hz]"
     },
     "profilesYawPrecompCutoffHelp": {
-        "message": "Grenzfrequenz für alle Arten der Heckvorkomsensation",
+        "message": "Grenzfrequenz für alle Arten der Heck-Vorkompensation",
         "english": "Frequency limit for all yaw precompensation actions"
     },
     "profilesYawFFCyclicGain": {
-        "message": "Gain zyklische Vorsteuerung",
+        "message": "Gain Zyklische Vorsteuerung",
         "english": "Cyclic Feedforward Gain"
     },
     "profilesYawFFCyclicGainHelp": {
-        "message": "Wert für zyklische Vorsteuerung (Feedforward), die auf das Heck wirkt",
+        "message": "Stärke der zyklischen Vorsteuerung (Feedforward), die auf das Heck wirkt",
         "english": "Gain value for cyclic feedforward mixed into yaw"
     },
     "profilesYawFFCollectiveGain": {
@@ -5937,7 +5941,7 @@
         "english": "Collective Feedforward Gain"
     },
     "profilesYawFFCollectiveGainHelp": {
-        "message": "Wert für Kollektiv-Pitch Vorsteuerung (Feedforward), die auf das Heck wirkt",
+        "message": "Stärke der Kollektiv-Pitch Vorsteuerung (Feedforward), die auf das Heck wirkt",
         "english": "Gain value for collective feedforward mixed into yaw"
     },
     "profilesYawFFImpulseGain": {
@@ -5945,7 +5949,7 @@
         "english": "Collective Impulse Feedforward Gain"
     },
     "profilesYawFFImpulseGainHelp": {
-        "message": "Wert für Kollektiv-Pitch Impulsvorsteuerung (Impulse Feedforward), die auf das Heck wirkt",
+        "message": "Stärke der Kollektiv-Pitch Impulsvorsteuerung (Impulse Feedforward), die auf das Heck wirkt",
         "english": "Gain value for collective impulse feedforward mixed into yaw"
     },
     "profilesyawFFImpulseDecay": {
@@ -5957,7 +5961,7 @@
         "english": "Decay time for collective impulse feedforward mixed into yaw"
     },
     "profilesPitchFFCollective": {
-        "message": "Kollektiv Pitch zu Nick Kompensation",
+        "message": "Kollektiv-Pitch zu Nick Kompensation",
         "english": "Collective to Pitch Compensation"
     },
     "profilesPitchFFCollectiveHelp": {
@@ -5973,11 +5977,11 @@
         "english": "Amount of collective mixed into the elevator control."
     },
     "profilesCyclicCrossCoupling": {
-        "message": "Zyklische Kreuzkopplung-Kompensation",
+        "message": "Zyklische Kreuzkopplungs-Kompensation",
         "english": "Cyclic Cross-Coupling"
     },
     "profilesCyclicCrossCouplingHelp": {
-        "message": "Die zyklische Kreuzkopplung-Kompensation reduziert das physikalisch bedingte Wackeln (Schaukeln) um die Rollachse bei schnellen Nickeingaben.",
+        "message": "Die zyklische Kreuzkopplungs-Kompensation reduziert das physikalisch bedingte Wackeln (Schaukeln) um die Rollachse bei schnellen Nickeingaben.",
         "english": "Cyclic Cross-Coupling compensation removes the aileron (roll) wobble when only elevator is applied."
     },
     "profilesCyclicCrossCouplingGain": {
@@ -5985,7 +5989,7 @@
         "english": "Cross-Coupling Gain"
     },
     "profilesCyclicCrossCouplingGainHelp": {
-        "message": "Stärke der Kreuzkopplung-Kompensation, die bei Nickeingaben auf Roll wirkt.",
+        "message": "Stärke der Kreuzkopplungs-Kompensation, die bei Nickeingaben auf Roll wirkt.",
         "english": "Amount of compensation applied for Pitch-to-Roll decoupling."
     },
     "profilesCyclicCrossCouplingRatio": {
@@ -6001,7 +6005,7 @@
         "english": "Cross-Coupling Cutoff Frequency [Hz]"
     },
     "profilesCyclicCrossCouplingCutoffHelp": {
-        "message": "Grenzfrequenz für die Kreuzkopplung-Kompensation. Je höher der Wert, desto schneller klingt die Kompensationswirkung ab.",
+        "message": "Grenzfrequenz für die Kreuzkopplungs-Kompensation. Je höher der Wert, desto schneller klingt die Kompensationswirkung ab.",
         "english": "Frequency limit for the compensation. Higher value will make the compensation action faster."
     },
     "profilesRescueSettings": {
@@ -6761,11 +6765,11 @@
         "english": "Failsafe only"
     },
     "failsafeKillSwitchItem": {
-        "message": "Failsafe \"Kill Switch\" (Einstellungen im Modes Tab)",
+        "message": "Failsafe \"Kill Switch\" (Einstellungen in der Modi Registerkarte)",
         "english": "Failsafe Kill Switch (setup Failsafe in Modes Tab)"
     },
     "failsafeKillSwitchHelp": {
-        "message": "Aktiviere diese Option, um den Failsafe Schalter (Modes Tab) als \"Kill Schalter\" zu benutzen. Der Schalter überschreibt dann alle Failsafe Einstellungen. <strong>Hinweis:</strong> Wenn der Schalter aktiv ist, wird ein Arming nicht möglich sein.",
+        "message": "Aktiviere diese Option, um den Failsafe Schalter (Modi Registerkarte) als \"Kill Schalter\" zu benutzen. Der Schalter überschreibt dann alle Failsafe Einstellungen. <strong>Hinweis:</strong> Wenn der Schalter aktiv ist, wird ein Arming nicht möglich sein.",
         "english": "Set this option to make the failsafe switch (Modes Tab) act as a direct kill switch, bypassing the selected failsafe procedure. <strong>Note:</strong> Arming is blocked with the failsafe kill switch in the ON position"
     },
     "failsafeSwitchTitle": {
@@ -7679,7 +7683,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementNumericalVario": {
-        "message": "Numerische Angabe der vertikalen Geschwindigkeit (in feet oder Metern, je nach Systemeinstellung)",
+        "message": "Numerische Angabe der vertikalen Geschwindigkeit (in Feet oder Metern, je nach Systemeinstellung)",
         "english": "Numerical readout of vertical speed (in either feet or metre based on unit system setting)"
     },
     "osdTextElementCompassBar": {
@@ -7688,7 +7692,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCompassBar": {
-        "message": "Grafischer Kompass, welcher die aktuelle Richtung zeigt",
+        "message": "Grafischer Kompass, welcher die aktuelle Richtung anzeigt",
         "english": "Graphical compass bar showing current heading"
     },
     "osdTextElementWarnings": {
@@ -7706,16 +7710,16 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementEscTemperature": {
-        "message": "Regler Temperatur (über Regler Telemetrie)",
+        "message": "ESC-Temperatur (über ESC-Telemetrie)",
         "english": "Temperature reported by ESC telemetry"
     },
     "osdTextElementEscRpm": {
-        "message": "ESC Drehzahl",
+        "message": "ESC-Drehzahl",
         "english": "ESC RPM",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementEscRpm": {
-        "message": "Motordrehzahl (über Regler Telemetrie)",
+        "message": "Motordrehzahl (über ESC-Telemetrie)",
         "english": "RPM reported by ESC telemetry"
     },
     "osdTextElementRemaningTimeEstimate": {
@@ -7742,7 +7746,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementAdjustmentRange": {
-        "message": "Currently active adjustment range setting and value",
+        "message": "Derzeit aktive Einstellbereichs-Einstellung und Wert",
         "english": "Currently active adjustment range setting and value"
     },
     "osdTextElementTimer1": {
@@ -7760,25 +7764,25 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementTimer2": {
-        "message": "Zeigt den Inhalt von Timer 2",
+        "message": "Zeigt den Wert von Timer 2",
         "english": "Shows the value of timer 2"
     },
     "osdTextElementCoreTemperature": {
-        "message": "Kerntemperatur",
+        "message": "Kern-Temperatur",
         "english": "Core temperature",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCoreTemperature": {
-        "message": "Temperatur des STM32 MCU Kerns",
+        "message": "Temperatur des STM32 MCU-Kerns",
         "english": "Temperature of the STM32 MCU core"
     },
     "osdTextAntiGravity": {
-        "message": "Anti Gravity",
+        "message": "Anti-Schwerkraft",
         "english": "Anti gravity",
         "description": "One of the elements of the OSD"
     },
     "osdDescAntiGravity": {
-        "message": "Aktiviert eine Anzeige, wenn Anti Gravity aktiv ist",
+        "message": "Aktiviert eine Anzeige, wenn Anti-Schwerkraft aktiv ist",
         "english": "Enables an indicator when the anti gravity is active"
     },
     "osdTextGForce": {
@@ -7796,7 +7800,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementMotorDiag": {
-        "message": "Diagramm der Ausgabe jeden Motors anzeigen",
+        "message": "Zeigt Diagramm der Ausgabe jedes Motors",
         "english": "Shows a graph of the output of each motor"
     },
     "osdTextElementLogStatus": {
@@ -7805,7 +7809,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementLogStatus": {
-        "message": "Blackbox Nummer und Warnungen",
+        "message": "Blackbox-Nummer und -Warnungen",
         "english": "Blackbox number and warnings"
     },
     "osdTextElementFlipArrow": {
@@ -7823,7 +7827,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementLinkQuality": {
-        "message": "Alternativer auf \"Frame-Verlust\" basierender Indikator für die Link-Qualität - mit Vorsicht verwenden",
+        "message": "Alternativer auf \"Frame-Verlust\" basierender Indikator für die Verbindungs-Qualität - mit Vorsicht verwenden",
         "english": "Alternative indicator for 'link quality' based on frame loss - use with caution"
     },
     "osdTextElementFlightDist": {
@@ -7863,16 +7867,16 @@
         "english": "Display name as set by the \"display_name\" cli command"
     },
     "osdTextElementEscRpmFreq": {
-        "message": "ESC RPM Frequenz",
+        "message": "ESC Motordrehzahl",
         "english": "ESC RPM frequency",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementEscRpmFreq": {
-        "message": "Motordrehzahl (über Regler Telemetrie)",
+        "message": "Motordrehzahl (über ESC Telemetrie)",
         "english": "RPM frequency reported by ESC telemetry"
     },
     "osdTextElementRateProfileName": {
-        "message": "Profil: Raten Profilname",
+        "message": "Profil: Drehraten-Profilname",
         "english": "Profile: rate profile name",
         "description": "One of the elements of the OSD"
     },
@@ -7881,7 +7885,7 @@
         "english": "Shows the current rate profile name"
     },
     "osdTextElementPidProfileName": {
-        "message": "Profil: PID Profilname",
+        "message": "Profil: PID-Profilname",
         "english": "Profile: PID profile name",
         "description": "One of the elements of the OSD"
     },
@@ -7890,16 +7894,16 @@
         "english": "Shows the current PID profile name"
     },
     "osdTextElementOsdProfileName": {
-        "message": "Profil: OSD Profilname",
+        "message": "Profil: OSD-Profilname",
         "english": "Profile: OSD profile name",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementOsdProfileName": {
-        "message": "OSD Profilname welcher in den CLI Variablen \"osd_profile_1_name\", \"osd_profile_2_name\" und \"osd_profile_3_name\" gesetzt wurde",
+        "message": "OSD-Profilname, welcher in den CLI Variablen \"osd_profile_1_name\", \"osd_profile_2_name\" und \"osd_profile_3_name\" gesetzt wurde",
         "english": "OSD profile name as set in the \"osd_profile_1_name\", \"osd_profile_2_name\" and \"osd_profile_3_name\" CLI variables"
     },
     "osdTextElementRssiDbmValue": {
-        "message": "RSSI dBm Wert",
+        "message": "RSSI dBm-Wert",
         "english": "RSSI dBm value",
         "description": "One of the elements of the OSD"
     },
@@ -7917,7 +7921,7 @@
         "english": "Display at most 4 channels values. The channels must be specified with the CLI variable 'osd_rcchannels'"
     },
     "osdTextElementCameraFrame": {
-        "message": "Kamera Frame",
+        "message": "Kamera-Rahmen",
         "english": "Camera frame",
         "description": "One of the elements of the OSD"
     },
@@ -7998,12 +8002,12 @@
         "english": "Maximum recorded current draw"
     },
     "osdTextStatUsedMah": {
-        "message": "genutzte Akkuleistung in mAh",
+        "message": "genutzte Akku-Kapazität in mAh",
         "english": "Battery mAh used",
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatUsedMah": {
-        "message": "Genutzte Akku Kapazität",
+        "message": "Genutzte Akku-Kapazität",
         "english": "Battery capacity used"
     },
     "osdTextStatMaxAltitude": {
@@ -8021,11 +8025,11 @@
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatBlackbox": {
-        "message": "Prozentuale Belegung des Blackbox Speichers",
+        "message": "Prozentuale Belegung des Blackbox-Speichers",
         "english": "Percentage of total blackbox use"
     },
     "osdTextStatEndBattery": {
-        "message": "Akkuspannung Ende",
+        "message": "Akkuspannung Flugende",
         "english": "Battery voltage end",
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
@@ -8039,7 +8043,7 @@
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatFlyTime": {
-        "message": "Absolute Zeit seit dem das Fluggerät Strom hat",
+        "message": "Absolute Zeit, seit dem das Fluggerät bestromt wurde",
         "english": "Total time craft has been armed on current power cycle"
     },
     "osdTextStatArmedTime": {
@@ -8057,7 +8061,7 @@
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatMaxDistance": {
-        "message": "Maximale Entfernung vom Home Punkt",
+        "message": "Maximale Entfernung von der Startposition",
         "english": "Maximum distance from home location"
     },
     "osdTextStatBlackboxLogNumber": {
@@ -8066,7 +8070,7 @@
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatBlackboxLogNumber": {
-        "message": "Blackbox Log-Nummer dieses Fluges",
+        "message": "Blackbox Log-Nummer dieses Flugs",
         "english": "Log number for this flights Blackbox log"
     },
     "osdTextStatTimer1": {
@@ -8111,7 +8115,7 @@
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatGForce": {
-        "message": "Maximal einwirkende G-Kräfte auf das Fluggerät",
+        "message": "Maximal einwirkende G-Kraft auf das Fluggerät",
         "english": "Max G-Force experienced by the craft"
     },
     "osdTextStatEscTemperature": {
@@ -8120,7 +8124,7 @@
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatEscTemperature": {
-        "message": "Max. ESC Temperatur",
+        "message": "Max. ESC-Temperatur",
         "english": "Max ESC temperature"
     },
     "osdTextStatEscRpm": {
@@ -8129,7 +8133,7 @@
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatEscRpm": {
-        "message": "Max Umdrehungen/min",
+        "message": "Max. ESC Drehzahl",
         "english": "Max ESC RPM"
     },
     "osdTextStatMinLinkQuality": {
@@ -8147,11 +8151,11 @@
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatFlightDistance": {
-        "message": "insgesamt zurückgelegte Strecke während des Fluges",
+        "message": "Insgesamt zurückgelegte Strecke während des Fluges",
         "english": "Total distance travelled during the flight"
     },
     "osdTextStatMaxFFT": {
-        "message": "FFT Maximum",
+        "message": "FFT-Maximum",
         "english": "FFT maximum",
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
@@ -8165,7 +8169,7 @@
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatTotalFlights": {
-        "message": "Gesamtanzahl Flüge",
+        "message": "Gesamtanzahl der Flüge",
         "english": "Total number of flights"
     },
     "osdTextStatTotalFlightTime": {
@@ -8187,12 +8191,12 @@
         "english": "Total distance traveled"
     },
     "osdTextStatMinRssiDbm": {
-        "message": "RSSI dBm Minimum",
+        "message": "RSSI dBm-Minimum",
         "english": "RSSI dBm minimum",
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatMinRssiDbm": {
-        "message": "Minimaler RSSI dBm Wert",
+        "message": "Minimaler RSSI dBm-Wert",
         "english": "Minimum RSSI dBm value"
     },
     "osdTextStatUnknown": {
@@ -8230,7 +8234,7 @@
         "description": "One of the options for the source timer. This options shows the amount of time has passed since the battery was plugged"
     },
     "osdTimerSourceOptionTotalArmedTime": {
-        "message": "gesamte gearmte Zeit",
+        "message": "Gesamte gearmte Zeit",
         "english": "Total armed time",
         "description": "One of the options for the source timer. This options shows the amount of time the craft was armed since the battery was plugged"
     },
@@ -8240,7 +8244,7 @@
         "description": "One of the options for the source timer. This options shows the amount of time the craft was armed the latest time"
     },
     "osdTimerSourceOptionOnArmTime": {
-        "message": "An/gearmte Zeit",
+        "message": "An/Gearmte Zeit",
         "english": "On/Armed time",
         "description": "One of the options for the source timer. This option shows On time when craft is disarmed, and Armed time when armed"
     },
@@ -8258,7 +8262,7 @@
         "description": "Selectable option for the precision of the timer in the OSD"
     },
     "osdTimerPrecisionOptionHundredth": {
-        "message": "Hunderstel",
+        "message": "Hundertstel",
         "english": "Hundredth",
         "description": "Selectable option for the precision of the timer in the OSD"
     },
@@ -8272,7 +8276,7 @@
         "english": "Alarm:"
     },
     "osdTimerAlarmTooltip": {
-        "message": "Setze den Alarmwert der Stoppuhr in Minuten. Sobald die Zeit überschritten ist, blinkt das dazugehörige OSD Element",
+        "message": "Wähle den Alarmwert der Stoppuhr in Minuten. Sobald die Zeit überschritten ist, blinkt das dazugehörige OSD-Element",
         "english": "Select the timer alarm threshold in minutes, when the time exceeds this value the OSD element will blink, setting this to 0 disables the alarm"
     },
     "osdTimerAlarmOptionRssi": {
@@ -8354,7 +8358,7 @@
         "english": "Enumerates a list with the ESCs/motors that are failing (RPM or temperature are out of the configured threshold)"
     },
     "osdWarningTextCoreTemperature": {
-        "message": "Kerntemperatur",
+        "message": "Kern-Temperatur",
         "english": "Core temperature",
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
@@ -8381,12 +8385,12 @@
         "english": "Warns when failsafe occurs"
     },
     "osdWarningTextLaunchControl": {
-        "message": "Launch control",
+        "message": "Start-Steuerung",
         "english": "Launch control",
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningLaunchControl": {
-        "message": "Warnung, wenn Launch Control-Modus aktiviert ist",
+        "message": "Warnung, wenn Start-Steuerung-Modus aktiviert ist",
         "english": "Warns when Launch Control mode is activated"
     },
     "osdWarningTextGpsRescueUnavailable": {
@@ -8395,7 +8399,7 @@
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningGpsRescueUnavailable": {
-        "message": "Warnung, wenn GPS Rescue nicht verfügbar ist und nicht aktiviert werden kann",
+        "message": "Warnung, wenn GPS-Rettung nicht verfügbar ist und auch nicht aktiviert werden kann",
         "english": "Warns when GPS Rescue is not available and cannot be activated"
     },
     "osdWarningTextGpsRescueDisabled": {
@@ -8404,7 +8408,7 @@
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningGpsRescueDisabled": {
-        "message": "Warnung, wenn GPS Rescue deaktiviert ist",
+        "message": "Warnung, wenn GPS-Rettung deaktiviert ist",
         "english": "Warns when GPS Rescue is disabled"
     },
     "osdWarningTextRSSI": {
@@ -8431,7 +8435,7 @@
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningRssiDbm": {
-        "message": "Warnung, wenn der RSSI dBm Wert unter den der Alarmeinstellung fällt",
+        "message": "Warnung, wenn der RSSI dBm-Wert unter den der Alarmeinstellung fällt",
         "english": "Warns when RSSI dBm value is below alarm setting"
     },
     "osdWarningTextOverCap": {
@@ -8440,7 +8444,7 @@
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningOverCap": {
-        "message": "Warnt, wenn die verbrauchten mAh das konfigurierte Kapazitätslimit überschreitet",
+        "message": "Warnt, wenn die verbrauchten mAh das eingestellte Kapazitätslimit überschreiten",
         "english": "Warns when the consumed mAh exceeds the configured capacity limit"
     },
     "osdWarningTextUnknown": {
@@ -8452,7 +8456,7 @@
         "english": "Unknown warning (details to be added in a future release)"
     },
     "osdSectionHelpElements": {
-        "message": "OSD Elemente aktivieren oder deaktivieren",
+        "message": "OSD-Elemente aktivieren oder deaktivieren",
         "english": "Enable or disable OSD elements."
     },
     "osdSectionHelpVideoMode": {
@@ -8460,15 +8464,15 @@
         "english": "Set the expected video mode of the camera (typically this can be left on AUTO, if you have difficulties then set this to match the camera output)."
     },
     "osdSectionHelpUnits": {
-        "message": "Setzt das Einheiten-System für numerische Datenanzeige.",
+        "message": "Setzt das Einheiten-System für numerische Datenanzeigen.",
         "english": "Sets the unit system used for numeric readouts."
     },
     "osdSectionHelpTimers": {
-        "message": "Flugtimer Konfiguration.",
+        "message": "Flugtimer-Konfiguration.",
         "english": "Configure flight timers."
     },
     "osdSectionHelpAlarms": {
-        "message": "Schwellwert für OSD Elemente im Alarmstatus.",
+        "message": "Schwellwert für OSD-Elemente mit Alarmstatus.",
         "english": "Set the thresholds used for OSD elements with alarm states."
     },
     "osdSectionHelpStats": {
@@ -8476,11 +8480,11 @@
         "english": "Set the values displayed on the post flight statistics screen."
     },
     "osdSectionHelpWarnings": {
-        "message": "Warnungen aktivieren oder deaktivieren die angezeigt werden.",
+        "message": "Warnungen aktivieren oder deaktivieren, die angezeigt werden sollen.",
         "english": "Enable or disable warnings that are shown on the WARNINGS element."
     },
     "osdSettingsSaved": {
-        "message": "OSD Einstellungen gespeichert",
+        "message": "OSD-Einstellungen gespeichert",
         "english": "OSD settings saved"
     },
     "osdWritePermissions": {
@@ -8532,7 +8536,7 @@
         "description": "Title for the actual mode header of the VTX"
     },
     "vtxActualState": {
-        "message": "aktuelle Werte",
+        "message": "Aktuelle Werte",
         "english": "Current Values",
         "description": "Title for the actual values header of the VTX"
     },
@@ -8662,7 +8666,7 @@
         "description": "Help text for the pit mode field of the VTX tab"
     },
     "vtxLowPowerDisarm": {
-        "message": "Disarm mit wenig VTX Leistung",
+        "message": "Disarm mit wenig VTX-Leistung",
         "english": "Low Power Disarm",
         "description": "Text of one of the fields of the VTX tab"
     },
@@ -8687,7 +8691,7 @@
         "description": "One of the options for the Low Power Disarm mode of the VTX"
     },
     "vtxTable": {
-        "message": "VTX Tabelle",
+        "message": "VTX-Tabelle",
         "english": "VTX Table",
         "description": "Text of the header of the VTX Table element in the VTX tab"
     },
@@ -8830,7 +8834,7 @@
         "english": "Failsafe Mode"
     },
     "mainHelpLink": {
-        "message": "Serial Link Status",
+        "message": "Serieller Verbindungs-Status",
         "english": "Serial Link Status"
     },
     "configurationGyroSyncDenom": {
@@ -8842,7 +8846,7 @@
         "english": "PID loop frequency"
     },
     "configurationPidProcessDenomHelp": {
-        "message": "Die maximale Frequenz für den PID-Regelkreis wird durch die CPU-Leistung begrenzt. Die CPU-Auslastung sollte bei der gewählten Schleifengeschwindigkeit 70 % nicht überschreiten.",
+        "message": "Die maximale Frequenz für den PID-Regelkreis wird durch die CPU-Leistung begrenzt. Die CPU-Auslastung sollte bei der gewählten Regelkreis-Frequenz 70% nicht überschreiten.",
         "english": "The maximum frequency for the PID loop is limited by the CPU processing power. The Realtime Load should not exceed 70% with the selected loop speed."
     },
     "configurationGyroUse32kHz": {
@@ -8854,11 +8858,11 @@
         "english": "32 kHz gyro update frequency is only possible if the gyro chip supports it (currently MPU6500, MPU9250, and ICM20xxx if connected over SPI). If in doubt, consult the specification for your board."
     },
     "configurationAccHardware": {
-        "message": "Beschleunigungs-Sensor",
+        "message": "Beschleunigungs-Sensoren",
         "english": "Accelerometer"
     },
     "configurationAccHardwareHelp": {
-        "message": "Aktiviert den Beschleunigungs-Sensor. Dies ist für alle Stabilisierungsmodi erforderlich: Winkel, Horizont, Acro-Trainer und Rettung.",
+        "message": "Aktiviert die Beschleunigungs-Sensoren. Diese Aktivierung ist für alle Stabilisierungs-Funktionen erforderlich: Winkel, Horizont, Acro-Trainer und Rettung.",
         "english": "Enables the Accelerometer. This is required for all stabilisation modes: Angle, Horizon, Acro Trainer and Rescue."
     },
     "configurationBaroHardware": {
@@ -8886,7 +8890,7 @@
         "english": "Craft name"
     },
     "blackboxMode": {
-        "message": "Logging-Mode",
+        "message": "Logging-Modus",
         "english": "Logging mode"
     },
     "blackboxModeHelp": {
@@ -8914,7 +8918,7 @@
         "english": "Logging device"
     },
     "blackboxDeviceHelp": {
-        "message": "<strong>Keine Aufzeichnung:</strong> Deaktiviert die Datenaufzeichnung.<br><strong>Integrierter Speicher:</strong> Schreibt den Log auf den integrierten Speicherchip (falls vorhanden).<br><strong>SD Karte:</strong> Schreibt den Log auf die eingesteckte SD-Karte (falls verfügbar).<br><strong>Serieller Anschluss:</strong> Schreibt den Log auf ein externes Logger-Gerät (z. B. Open Lager), das an einen seriellen Anschluss angeschlossen ist. Der serielle Anschluss muss im Abschnitt 'Konfiguration' auf der Registerkarte  <strong>Serielle Ports</strong> konfiguriert werden.",
+        "message": "<strong>Kein Logging:</strong> Deaktiviert die Datenaufzeichnung.<br><strong>Speicher-Chip des Boards:</strong> Schreibt den Log auf den integrierten Speicherchip (falls vorhanden).<br><strong>SD-Karte:</strong> Schreibt den Log auf die eingesteckte SD-Karte (falls vorhanden).<br><strong>Serieller Anschluss:</strong> Schreibt den Log auf ein externes Logger-Gerät (z. B. Open Lager), das an einen seriellen Anschluss angeschlossen ist. Der serielle Anschluss muss im Abschnitt 'Konfiguration' auf der Registerkarte  <strong>Serielle Anschlüsse</strong> konfiguriert werden.",
         "english": "<strong>No Logging:</strong> Disable logging.<br><br><strong>Onboard Flash:</strong> Log to the onboard flash chip (if available).<br><br><strong>SD Card:</strong> Log to the onboard SD card (if available).<br><br><strong>Serial Port:</strong> Log to an external logger device (e.g OpenLager) connected to a serial port. The serial port must to be configured to 'Blackbox Logging' on the <strong>Configuration</strong> tab."
     },
     "blackboxRateOfLogging": {
@@ -8946,7 +8950,7 @@
         "english": "Debug axis"
     },
     "blackboxDebugAxisHelp": {
-        "message": "Auswahl welche <i>Achse</i> debuggt werden soll. Gilt für einige der Debug-Modi.",
+        "message": "Auswahl, welche <i>Achse</i> debuggt werden soll. Gilt für einige der Debug-Modi.",
         "english": "Choose which <i>axis</i> is being debugged. Applies to some of the debug modes."
     },
     "blackboxSerialLogger": {
@@ -8970,11 +8974,11 @@
         "english": "Mass Storage Mode"
     },
     "blackboxMscNote": {
-        "message": "Neustart im <strong>Massenspeichergeräte (MSC)</strong>-Modus. Sobald dieser Modus aktiviert ist, wird der integrierte Flash-Speicher oder die SD-Karte des Flight-Controllers von deinem Computer als Speichergerät erkannt und du kannst deine Logdateien herunterladen. Trenne die Verbindung zum Flight-Controller und starte ihn neu, um den Massenspeicher-Modus zu verlassen.",
+        "message": "Neustart im <strong>Massenspeicher (MSC)</strong>-Modus. Sobald dieser Modus aktiviert ist, wird der integrierte Flash-Speicher oder die SD-Karte des Flight-Controllers von deinem Computer als Speichergerät erkannt und du kannst deine Log-Dateien herunterladen. Trenne die Verbindung zum Flight-Controller und starte ihn neu, um den Massenspeicher-Modus zu verlassen.",
         "english": "Reboot into <strong>mass storage device (MSC)</strong> mode. Once activated, the onboard flash or SD card on your flight controller will be recognised as a storage device by your computer, and allow you to download your log files. Eject and power cycle your flight controller to leave mass storage device mode."
     },
     "blackboxRebootMscText": {
-        "message": "Aktivieren des Massenspeichergeräte-Modus",
+        "message": "Aktivieren des Massenspeicher-Modus",
         "english": "Activate Mass Storage Device Mode"
     },
     "blackboxMscNotReady": {
@@ -8986,7 +8990,7 @@
         "english": "Confirm"
     },
     "dialogConfirmResetNote": {
-        "message": "WARNUNG: Sicher, dass ALLE Einstellungen auf die Standardwerte zurückgesetzt werden sollen?",
+        "message": "WARNUNG: Bist du sicher, dass ALLE Einstellungen auf die Standardwerte zurückgesetzt werden sollen?",
         "english": "WARNING: Are you sure you want to reset ALL settings to default?"
     },
     "dialogConfirmResetConfirm": {
@@ -9082,7 +9086,7 @@
         "english": "MSP OVERRIDE"
     },
     "mode STICK COMMANDS DISABLE": {
-        "message": "STICK BEFEHLE DEAKTIVIEREN",
+        "message": "KNÜPPEL-BEFEHLE DEAKTIVIEREN",
         "english": "STICK COMMANDS DISABLE"
     },
     "mode BEEPER MUTE": {
@@ -9094,11 +9098,11 @@
         "english": "RESCUE"
     },
     "flashTab": {
-        "message": "Firmware aktualisieren",
+        "message": "Firmware Aktualisieren",
         "english": "Update Firmware"
     },
     "cliAutoComplete": {
-        "message": "Erweiterte CLI Autovervollständigung",
+        "message": "Erweiterte CLI-Autovervollständigung",
         "english": "Advanced CLI AutoComplete"
     },
     "darkTheme": {
