@@ -170,7 +170,6 @@ function startProcess() {
             const tabRequiresConnection = $(self).parent().hasClass('mode-connected');
 
             var tabName = tabClass.substring(4);
-            var tabText = $(self).text();
 
             if (GUI.connect_lock) { // tab switching disabled while operation is in progress
                 GUI.log(i18n.getMessage('tabSwitchWaitForOperation'));
@@ -184,7 +183,7 @@ function startProcess() {
 
             GUI.tab_switch_allowed(function () {
 
-                if (GUI.allowedTabs.indexOf(tabName) < 0 && tabText === "Firmware Flasher") {
+                if (GUI.allowedTabs.indexOf(tabName) < 0 && tabName === "firmware_flasher") {
                     if (GUI.connected_to || GUI.connecting_to) {
                         $('a.connect').click();
                     } else {
