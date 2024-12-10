@@ -1,6 +1,6 @@
-'use strict';
+import { windowWatcherUtil } from '@/js/utils/window_watchers.js';
 
-const DarkTheme = {
+export const DarkTheme = {
     configEnabled: undefined,
 };
 

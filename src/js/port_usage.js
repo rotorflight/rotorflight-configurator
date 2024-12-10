@@ -1,6 +1,4 @@
-'use strict';
-
-const PortUsage = {
+export const PortUsage = {
     previous_received:  0,
     previous_sent:      0,
     port_usage_down:    0,

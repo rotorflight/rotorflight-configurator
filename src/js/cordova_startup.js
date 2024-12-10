@@ -1,6 +1,4 @@
-'use strict';
-
-const cordovaUI = {
+export const cordovaUI = {
     uiZoom: 1,
     canChangeUI: true,
     init: async function() {
@@ -48,7 +46,7 @@ const cordovaUI = {
     },
 };
 
-const cordovaApp = {
+export const cordovaApp = {
     initialize: function() {
         this.bindEvents();
     },
@@ -63,5 +61,3 @@ const cordovaApp = {
         appReady();
     },
 };
-
-cordovaApp.initialize();

@@ -1,6 +1,4 @@
-'use strict';
-
-var ReleaseChecker = function (releaseName, releaseUrl) {
+export const ReleaseChecker = function (releaseName, releaseUrl) {
     var self = this;
 
     self._releaseName = releaseName;

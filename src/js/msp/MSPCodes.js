@@ -1,7 +1,5 @@
-'use strict';
-
 //MSPCodes needs to be re-integrated inside MSP object
-const MSPCodes = {
+export const MSPCodes = {
     MSP_API_VERSION:                1,
     MSP_FC_VARIANT:                 2,
     MSP_FC_VERSION:                 3,

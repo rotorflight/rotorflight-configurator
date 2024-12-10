@@ -1,8 +1,6 @@
-'use strict';
-
 // code below is highly experimental, although it runs fine on latest firmware
 // the data inside nested objects needs to be verified if deep copy works properly
-function configuration_backup(callback) {
+export function configuration_backup(callback) {
     let activeProfile = null;
 
     let version = CONFIGURATOR.version;
@@ -271,7 +269,7 @@ function configuration_backup(callback) {
 
 }
 
-function configuration_restore(callback) {
+export function configuration_restore(callback) {
     let chosenFileEntry = null;
 
     const accepts = [{

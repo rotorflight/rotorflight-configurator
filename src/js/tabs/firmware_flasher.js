@@ -1,3 +1,6 @@
+import { GitHubApi } from '@/js/GitHubApi.js';
+import { ReleaseChecker } from '@/js/release_checker.js';
+
 const tab = {
     tabName: 'firmware_flasher',
     releases: null,

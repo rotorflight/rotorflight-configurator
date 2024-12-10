@@ -1,6 +1,4 @@
-'use strict';
-
-const RPMFilter = {
+export const RPMFilter = {
 
     DISABLED:   0,
     BASIC:      1,

@@ -1,6 +1,4 @@
-'use strict';
-
-class Beepers {
+export class Beepers {
     constructor(config, supportedConditions) {
         const self = this;
 

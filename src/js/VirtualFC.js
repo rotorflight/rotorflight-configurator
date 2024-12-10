@@ -1,6 +1,4 @@
-'use strict';
-
-const VirtualFC = {
+export const VirtualFC = {
     // these values are manufactured to unlock all the functionality of the configurator, they dont represent actual hardware
     setVirtualConfig() {
         const virtualFC = FC;

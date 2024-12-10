@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Caching of previously downloaded firmwares and release descriptions
  *
@@ -30,7 +28,7 @@
 /**
  * Manages caching of downloaded firmware files
  */
-let FirmwareCache = (function () {
+export const FirmwareCache = (function () {
 
     let onPutToCacheCallback,
         onRemoveFromCacheCallback;

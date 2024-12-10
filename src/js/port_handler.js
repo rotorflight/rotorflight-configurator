@@ -1,13 +1,11 @@
-'use strict';
-
 const TIMEOUT_CHECK = 500 ; // With 250 it seems that it produces a memory leak and slowdown in some versions, reason unknown
 
-const usbDevices = { filters: [
+export const usbDevices = { filters: [
     {'vendorId': 1155, 'productId': 57105},
     {'vendorId': 10473, 'productId': 393},
 ] };
 
-const PortHandler = new function () {
+export const PortHandler = new function () {
     this.initialPorts = false;
     this.port_detected_callbacks = [];
     this.port_removed_callbacks = [];

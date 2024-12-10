@@ -26,7 +26,7 @@ const tabHelpURLs = {
     tabCli:             'https://www.rotorflight.org/docs/Tutorial-Setup/CLI',
 };
 
-function getTabHelpURL(tabName)
+export function getTabHelpURL(tabName)
 {
     if (tabName && tabHelpURLs[tabName])
         return tabHelpURLs[tabName];

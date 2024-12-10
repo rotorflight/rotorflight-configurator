@@ -1,6 +1,7 @@
 import { Clock } from "three";
 
 import { Model } from "@/js/model.js";
+import { windowWatcherUtil } from '@/js/utils/window_watchers.js';
 
 const tab = {
     tabName: 'receiver',

@@ -1,5 +1,3 @@
-'use strict';
-
 const INITIAL_CONFIG = {
     apiVersion:                       "0.0.0",
     flightControllerIdentifier:       '',
@@ -78,7 +76,7 @@ const INITIAL_BATTERY_STATE = {
     chargeLevel:                0,
 };
 
-const FC = {
+export const FC = {
 
     // define all the global variables that are uses to hold FC state
     // the default state must be defined inside the resetState() method

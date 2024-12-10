@@ -1,6 +1,4 @@
-'use strict';
-
-const MSPConnectorImpl = function () {
+export const MSPConnectorImpl = function () {
     this.baud = undefined;
     this.port = undefined;
     this.onConnectCallback = undefined;

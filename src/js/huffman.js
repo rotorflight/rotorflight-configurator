@@ -1,8 +1,6 @@
-'use strict';
+export const HUFFMAN_EOF = -1;
 
-const HUFFMAN_EOF = -1;
-
-function huffmanDecodeBuf(inBuf, inBufCharacterCount, huffmanTree, huffmanLenIndex) {
+export function huffmanDecodeBuf(inBuf, inBufCharacterCount, huffmanTree, huffmanLenIndex) {
     let code = 0;
     let codeLen = 0;
     let testBit = 0x80;
