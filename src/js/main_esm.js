@@ -82,10 +82,18 @@ Object.assign(globalThis, {
 CONFIGURATOR.version = __APP_VERSION__;
 CONFIGURATOR.gitChangesetId = __COMMIT_HASH__;
 
-if (GUI.isNWJS()) {
+if (__BACKEND__ === "nwjs") {
   Clipboard._configureClipboardAsNwJs(GUI.nwGui);
-} else if (GUI.isCordova()) {
+}
+
+if (__BACKEND__ === "cordova") {
+  const chromeapi = await import("@/js/cordova_chromeapi.js");
+  const startup = await import("@/js/cordova_startup.js");
+  Object.assign(globalThis, {
+    ...chromeapi,
+    ...startup,
+  });
+
   Clipboard._configureClipboardAsCordova();
-} else {
-  Clipboard._configureClipboardAsOther();
+  cordovaApp.initialize();
 }

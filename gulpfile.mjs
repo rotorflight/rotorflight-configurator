@@ -71,7 +71,8 @@ function build_bundle() {
 }
 
 function bundle_vite() {
-  return vite.build();
+  const backend = context.target.platform === "android" ? "cordova" : "nwjs";
+  return vite.build({ define: { __BACKEND__: JSON.stringify(backend) } });
 }
 
 function bundle_src() {
@@ -503,18 +504,6 @@ function cordova_resources() {
 function cordova_include_www() {
   return gulp
     .src(`${context.appdir}/www/src/main.html`)
-    .pipe(
-      replace(
-        "<!-- CORDOVA_INCLUDE js/cordova_chromeapi.js -->",
-        '<script type="text/javascript" src="/src/js/cordova_chromeapi.js"></script>',
-      ),
-    )
-    .pipe(
-      replace(
-        "<!-- CORDOVA_INCLUDE js/cordova_startup.js -->",
-        '<script type="text/javascript" src="/src/js/cordova_startup.js"></script>',
-      ),
-    )
     .pipe(
       replace(
         "<!-- CORDOVA_INCLUDE cordova.js -->",
