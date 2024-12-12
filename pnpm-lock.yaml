@@ -29,9 +29,6 @@ importers:
       lru_map:
         specifier: ^0.3.3
         version: 0.3.3
-      marked:
-        specifier: ^4.0.17
-        version: 4.3.0
       multiple-select:
         specifier: ^1.5.2
         version: 1.7.0(jquery@3.7.1)
@@ -112,6 +109,9 @@ importers:
       i18next-http-backend:
         specifier: ^2.6.1
         version: 2.6.1(encoding@0.1.13)
+      marked:
+        specifier: ^15.0.3
+        version: 15.0.3
       minimist:
         specifier: ^1.2.8
         version: 1.2.8
@@ -2765,9 +2765,9 @@ packages:
     resolution: {integrity: sha512-4y7uGv8bd2WdM9vpQsiQNo41Ln1NvhvDRuVt0k2JZQ+ezN2uaQes7lZeZ+QQUHOLQAtDaBJ+7wCbi+ab/KFs+w==}
     engines: {node: '>=0.10.0'}
 
-  marked@4.3.0:
-    resolution: {integrity: sha512-PRsaiG84bK+AMvxziE/lCFss8juXjNaWzVbN5tXAm4XjeaS9NAHhop+PjQxz2A9h8Q4M/xGmzP8vqNwy6JeK0A==}
-    engines: {node: '>= 12'}
+  marked@15.0.3:
+    resolution: {integrity: sha512-Ai0cepvl2NHnTcO9jYDtcOEtVBNVYR31XnEA3BndO7f5As1wzpcOceSUM8FDkNLJNIODcLpDTWay/qQhqbuMvg==}
+    engines: {node: '>= 18'}
     hasBin: true
 
   matchdep@2.0.0:
@@ -7412,7 +7412,7 @@ snapshots:
     dependencies:
       object-visit: 1.0.1
 
-  marked@4.3.0: {}
+  marked@15.0.3: {}
 
   matchdep@2.0.0:
     dependencies:
