@@ -1,5 +1,3 @@
-'use strict';
-
 function microtime() {
     return new Date().getTime() / 1000;
 }
@@ -10,7 +8,7 @@ function millitime() {
 
 const DEGREE_TO_RADIAN_RATIO = Math.PI / 180;
 
-function degToRad(degrees) {
+export function degToRad(degrees) {
     return degrees * DEGREE_TO_RADIAN_RATIO;
 }
 
@@ -35,7 +33,7 @@ function bytesToSize(bytes) {
  *  checkChromeRuntimeError() has to be called after each chrome API call
  */
 
- function checkChromeRuntimeError() {
+export function checkChromeRuntimeError() {
     if (chrome.runtime.lastError) {
         console.error(`Chrome API Error: ${chrome.runtime.lastError.message}.\n Traced ${(new Error).stack}`);
         return true;
@@ -54,7 +52,7 @@ const majorFirmwareVersions = {
     '1.31': '3.1.0',
 };
 
-function generateVirtualApiVersions() {
+export function generateVirtualApiVersions() {
     const firmwareVersionDropdown = document.getElementById('firmware-version-dropdown');
     const max = semver.minor(CONFIGURATOR.API_VERSION_MAX_SUPPORTED);
 
@@ -74,7 +72,7 @@ function generateVirtualApiVersions() {
     }
 }
 
-function getTextWidth(text) {
+export function getTextWidth(text) {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
 

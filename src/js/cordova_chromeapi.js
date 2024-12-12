@@ -1,5 +1,3 @@
-'use strict';
-
 const chromeCallbackWithError = function(message, callback) {
     let err;
     if (typeof message === 'string') {
@@ -44,7 +42,7 @@ const removeItemOfAnArray = async function (array, item) {
 };
 
 
-const chromeapiSerial = {
+export const chromeapiSerial = {
     logHeader: 'SERIAL (adapted from Cordova): ',
     connection: {
         connectionId: 1, // Only one connection possible
@@ -256,7 +254,7 @@ const chromeapiSerial = {
     },
 };
 
-const cordovaChromeapi = {
+export const cordovaChromeapi = {
     init: function(callback) {
         chrome.serial = chromeapiSerial;
         if (callback) {

@@ -1,12 +1,10 @@
-'use strict';
-
 /**
  * Encapsulates the AutoComplete logic
  *
  * Uses: https://github.com/yuku/jquery-textcomplete
  * Check out the docs at https://github.com/yuku/jquery-textcomplete/tree/v1/doc
  */
-const CliAutoComplete = {
+export const CliAutoComplete = {
     configEnabled: false,
     builder: { state: 'reset', numFails: 0 },
 };

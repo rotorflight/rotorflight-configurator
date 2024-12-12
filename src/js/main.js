@@ -1,4 +1,4 @@
-'use strict';
+globalThis.TABS = {};
 
 $(document).ready(function () {
 
@@ -21,7 +21,7 @@ function useGlobalNodeFunctions() {
     }
 }
 
-function appReady() {
+export function appReady() {
     $('.connect_b a.connect').removeClass('disabled');
     $('.firmware_b a.flash').removeClass('disabled');
 
@@ -99,7 +99,7 @@ function closeHandler() {
 }
 
 //Process to execute to real start the app
-function startProcess() {
+export function startProcess() {
     // translate to user-selected language
     i18n.localizePage();
 
@@ -379,11 +379,11 @@ function startProcess() {
     }
 }
 
-function setDarkTheme(enabled) {
+export function setDarkTheme(enabled) {
     DarkTheme.setConfig(enabled);
 }
 
-function checkForConfiguratorUpdates() {
+export function checkForConfiguratorUpdates() {
     const releaseChecker = new ReleaseChecker('configurator', 'https://api.github.com/repos/rotorflight/rotorflight-configurator/releases');
 
     releaseChecker.loadReleaseData(notifyOutdatedVersion);
@@ -451,7 +451,7 @@ function isExpertModeEnabled() {
 }
 **/
 
-function updateTabList(features) {
+export function updateTabList(features) {
     $('#tabs ul.mode-connected li.tab_gps').toggle(features.isEnabled('GPS'));
     $('#tabs ul.mode-connected li.tab_led_strip').toggle(features.isEnabled('LED_STRIP'));
 }
@@ -467,7 +467,7 @@ function zeroPad(value, width) {
     return valuePadded;
 }
 
-function getNumberInput(query) {
+export function getNumberInput(query) {
     const elem = $(query);
     const step = parseFloat(elem.prop('step')) || 1;
     const min = parseFloat(elem.prop('min'));
@@ -498,19 +498,19 @@ function getNumberInput(query) {
     return val;
 }
 
-function getIntegerValue(query, scale=1) {
+export function getIntegerValue(query, scale=1) {
     return Math.round(getNumberInput(query) * scale);
 }
 
-function getFloatValue(query, scale=1) {
+export function getFloatValue(query, scale=1) {
     return getNumberInput(query) * scale;
 }
 
-function deep_copy(obj) {
+export function deep_copy(obj) {
     return JSON.parse(JSON.stringify(obj));
 }
 
-function generateFilename(prefix, suffix) {
+export function generateFilename(prefix, suffix) {
     const date = new Date();
     let filename = prefix;
 
@@ -530,7 +530,7 @@ function generateFilename(prefix, suffix) {
     return `${filename}.${suffix}`;
 }
 
-function showErrorDialog(message) {
+export function showErrorDialog(message) {
    const dialog = $('.dialogError')[0];
 
     $('.dialogError-content').html(message);
@@ -554,7 +554,7 @@ function showDialogDynFiltersChange() {
     }
 }
 
-function showTabExitDialog(tab, callback) {
+export function showTabExitDialog(tab, callback) {
     const dialog = $('.dialogTabExit')[0];
 
     function close() {

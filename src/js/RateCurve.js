@@ -1,10 +1,8 @@
-'use strict';
-
 const minRc = 1000;
 const midRc = 1500;
 const maxRc = 2000;
 
-const RateCurve = function (useLegacyCurve) {
+export const RateCurve = function (useLegacyCurve) {
     this.useLegacyCurve = useLegacyCurve;
     this.maxAngularVel = null;
 
@@ -209,7 +207,7 @@ RateCurve.prototype.draw = function (rate, rcRate, rcExpo, superExpoActive, dead
 
 
 
-const RateCurve2 = function () {
+export const RateCurve2 = function () {
     this.maxAngularVel = null;
 
     this.constrain = function (value, min, max) {

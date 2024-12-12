@@ -1,3 +1,5 @@
+import { MSPConnectorImpl } from '@/js/msp/MSPConnector.js';
+
 /*
     STM32 F103 serial bus seems to properly initialize with quite a huge auto-baud range
     From 921600 down to 1200, i don't recommend getting any lower then that
@@ -5,8 +7,6 @@
 
     popular choices - 921600, 460800, 256000, 230400, 153600, 128000, 115200, 57600, 38400, 28800, 19200
 */
-'use strict';
-
 var STM32_protocol = function () {
     this.baud = null;
     this.options = {};
@@ -830,4 +830,4 @@ STM32_protocol.prototype.cleanup = function () {
 };
 
 // initialize object
-var STM32 = new STM32_protocol();
+export const STM32 = new STM32_protocol();

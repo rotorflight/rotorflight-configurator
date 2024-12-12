@@ -1,6 +1,4 @@
-'use strict';
-
-const serial = {
+export const serial = {
     connected:      false,
     connectionId:   false,
     openCanceled:   false,

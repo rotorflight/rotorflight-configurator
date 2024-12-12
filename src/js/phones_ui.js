@@ -1,6 +1,4 @@
-'use strict';
-
-const UI_PHONES = {
+export const UI_PHONES = {
     background: '#background',
     tabContainer: '.tab_container',
     tabContentContainer: '#tab-content-container',

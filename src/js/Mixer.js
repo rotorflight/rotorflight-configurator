@@ -1,6 +1,4 @@
-'use strict';
-
-const Mixer = {
+export const Mixer = {
 
     inputNames: [
         'mixerInputNone',

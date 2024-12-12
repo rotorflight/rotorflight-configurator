@@ -71,15 +71,12 @@ function build_bundle() {
 }
 
 function bundle_vite() {
-  return vite.build();
+  const backend = context.target.platform === "android" ? "cordova" : "nwjs";
+  return vite.build({ define: { __BACKEND__: JSON.stringify(backend) } });
 }
 
 function bundle_src() {
-  const distSources = [
-    "./src/js/**/*",
-    "./src/tabs/*",
-    "!./src/tabs/receiver_msp.html",
-  ];
+  const distSources = ["./src/tabs/*", "!./src/tabs/receiver_msp.html"];
   const packageJson = new stream.Readable();
   packageJson.push(JSON.stringify(pkg, undefined, 2));
   packageJson.push(null);
@@ -507,18 +504,6 @@ function cordova_resources() {
 function cordova_include_www() {
   return gulp
     .src(`${context.appdir}/www/src/main.html`)
-    .pipe(
-      replace(
-        "<!-- CORDOVA_INCLUDE js/cordova_chromeapi.js -->",
-        '<script type="text/javascript" src="/src/js/cordova_chromeapi.js"></script>',
-      ),
-    )
-    .pipe(
-      replace(
-        "<!-- CORDOVA_INCLUDE js/cordova_startup.js -->",
-        '<script type="text/javascript" src="/src/js/cordova_startup.js"></script>',
-      ),
-    )
     .pipe(
       replace(
         "<!-- CORDOVA_INCLUDE cordova.js -->",
