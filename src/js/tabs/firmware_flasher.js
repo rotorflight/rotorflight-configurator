@@ -975,6 +975,7 @@ tab.initialize = function (callback) {
 
                 GUI.log(i18n.getMessage('firmwareFlasherBoardDetectionInProgress'));
                 detectTimer = setTimeout(function() {
+                    GUI.log(i18n.getMessage('firmwareFlasherBoardDetectionFail'));
                     disconnect();
                 }, 5000); // Disconnect after 5 seconds, as board detection should happen by then.
                 serial.connect(port, {bitrate: baud}, onConnect);
@@ -988,6 +989,9 @@ tab.initialize = function (callback) {
             function disconnect() {
                 serial.disconnect(onClose);
                 MSP.disconnect_cleanup();
+                tab.enableFlashing(true);
+                self.boardDetectionInProgress = false;
+                GUI.connect_lock = false;
             }
 
             function handleMSPResponse() {
@@ -1030,8 +1034,9 @@ tab.initialize = function (callback) {
 
                     getBoardInfo();
                 } else {
-                    GUI.log(i18n.getMessage('serialPortOpenFail'));
-                    dialogBoardDetectionMessage(i18n.getMessage('serialPortOpenFail'));
+                    clearTimeout(detectTimer);
+                    GUI.log(i18n.getMessage('firmwareFlasherBoardDetectionFail') + ": " + i18n.getMessage('serialPortOpenFail'));
+                    disconnect();
                 }
             }
 
@@ -1043,9 +1048,6 @@ tab.initialize = function (callback) {
                 }
 
                 MSP.clearListeners();
-                tab.enableFlashing(true);
-                self.boardDetectionInProgress = false;
-                GUI.connect_lock = false;
             }
 
             function dialogBoardDetectionMessage(title, message) {
