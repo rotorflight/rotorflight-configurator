@@ -485,12 +485,14 @@ tab.initialize = function (callback) {
         this.telemetryProtoSensors.find((x) => x.name === 'FrSky S.Port').sensors = 0x007FFFFF;
         this.rxProtocols.find((x) => x.name === 'FrSky F.PORT').telemetry = 0x007FFFFF;
 
+        this.rxProtocols.find((x) => x.name === 'Futaba S.BUS2').visible = false;
         this.rxProtocols.find((x) => x.name === 'FrSky F.PORT2').visible = false;
         this.rxProtocols.find((x) => x.name === 'FrSky FBUS').visible = false;
     } else {
         this.telemetryProtoSensors.find((x) => x.name === 'FrSky S.Port').sensors = 0xFFFFFFFF;
         this.rxProtocols.find((x) => x.name === 'FrSky F.PORT').telemetry = 0xFFFFFFFF;
 
+        this.rxProtocols.find((x) => x.name === 'Futaba S.BUS2').visible = true;
         this.rxProtocols.find((x) => x.name === 'FrSky F.PORT2').visible = true;
         this.rxProtocols.find((x) => x.name === 'FrSky FBUS').visible = true;
     }
