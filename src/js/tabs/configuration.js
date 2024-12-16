@@ -478,78 +478,6 @@ tab.initialize = function (callback) {
             }
         }
 
-        const alignments = [
-            'CW 0°',
-            'CW 90°',
-            'CW 180°',
-            'CW 270°',
-            'CW 0° flip',
-            'CW 90° flip',
-            'CW 180° flip',
-            'CW 270° flip',
-            'Custom',
-        ];
-
-        const orientation_mag_e = $('select.magalign');
-        const orientation_gyro_to_use_e = $('select.gyro_to_use');
-        const orientation_gyro_1_align_e = $('select.gyro_1_align');
-        const orientation_gyro_2_align_e = $('select.gyro_2_align');
-
-        for (let i = 0; i < alignments.length; i++) {
-            orientation_mag_e.append(`<option value="${(i+1)}">${alignments[i]}</option>`);
-        }
-
-        orientation_mag_e.val(FC.SENSOR_ALIGNMENT.align_mag);
-
-        orientation_mag_e.change(function () {
-            let value = parseInt($(this).val());
-            FC.SENSOR_ALIGNMENT.align_mag = value;
-        });
-
-        const GYRO_DETECTION_FLAGS = {
-            DETECTED_GYRO_1:      (1 << 0),
-            DETECTED_GYRO_2:      (1 << 1),
-            DETECTED_DUAL_GYROS:  (1 << 7),
-        };
-
-        const detected_gyro_1 = (FC.CONFIG.gyroDetectionFlags & GYRO_DETECTION_FLAGS.DETECTED_GYRO_1) != 0;
-        const detected_gyro_2 = (FC.CONFIG.gyroDetectionFlags & GYRO_DETECTION_FLAGS.DETECTED_GYRO_2) != 0;
-        const detected_dual_gyros = (FC.CONFIG.gyroDetectionFlags & GYRO_DETECTION_FLAGS.DETECTED_DUAL_GYROS) != 0;
-
-        if (detected_gyro_1) {
-            orientation_gyro_to_use_e.append(`<option value="0">${i18n.getMessage('configurationSensorGyroToUseFirst')}</option>`);
-        }
-        if (detected_gyro_2) {
-            orientation_gyro_to_use_e.append(`<option value="1">${i18n.getMessage('configurationSensorGyroToUseSecond')}</option>`);
-        }
-        if (detected_dual_gyros) {
-            orientation_gyro_to_use_e.append(`<option value="2">${i18n.getMessage('configurationSensorGyroToUseBoth')}</option>`);
-        }
-
-        for (let i = 0; i < alignments.length; i++) {
-            orientation_gyro_1_align_e.append(`<option value="${(i+1)}">${alignments[i]}</option>`);
-            orientation_gyro_2_align_e.append(`<option value="${(i+1)}">${alignments[i]}</option>`);
-        }
-
-        orientation_gyro_to_use_e.val(FC.SENSOR_CONFIG.gyro_to_use);
-        orientation_gyro_1_align_e.val(FC.SENSOR_ALIGNMENT.gyro_1_align);
-        orientation_gyro_2_align_e.val(FC.SENSOR_ALIGNMENT.gyro_2_align);
-
-        $('.gyro_alignment_inputs_first').toggle(detected_gyro_1);
-        $('.gyro_alignment_inputs_second').toggle(detected_gyro_2);
-        $('.gyro_alignment_inputs_selection').toggle(detected_gyro_1 || detected_gyro_2);
-        $('.gyro_alignment_inputs_notfound').toggle(!detected_gyro_1 && !detected_gyro_2);
-
-        orientation_gyro_1_align_e.change(function () {
-            let value = parseInt($(this).val());
-            FC.SENSOR_ALIGNMENT.gyro_1_align = value;
-        });
-
-        orientation_gyro_2_align_e.change(function () {
-            let value = parseInt($(this).val());
-            FC.SENSOR_ALIGNMENT.gyro_2_align = value;
-        });
-
         // Gyro and PID update
         const gyroTextElement = $('input.gyroFrequency');
         const pidSelectElement = $('select.pidProcessDenom');
@@ -629,8 +557,6 @@ tab.initialize = function (callback) {
 
             FC.CONFIG.accelerometerTrims[1] = parseInt($('input[name="roll"]').val());
             FC.CONFIG.accelerometerTrims[0] = parseInt($('input[name="pitch"]').val());
-
-            FC.SENSOR_CONFIG.gyro_to_use = parseInt(orientation_gyro_to_use_e.val());
 
             FC.ADVANCED_CONFIG.pid_process_denom = parseInt(pidSelectElement.val());
         }
