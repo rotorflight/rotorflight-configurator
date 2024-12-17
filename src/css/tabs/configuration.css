@@ -150,11 +150,7 @@
     clear: left;
 }
 
-.tab-configuration .board_align_inputs,
-.tab-configuration .gyro_alignment_inputs {
-    margin-top: 3px;
-    margin-bottom: 5px;
-    padding-bottom: 5px;
+.tab-configuration .board_align_inputs {
     width: 33.3%;
     float: left;
     white-space: nowrap;
@@ -167,8 +163,7 @@
     padding-left: 3px;
 }
 
-.tab-configuration .board_align_inputs label,
-.tab-configuration .gyro_alignment_inputs label {
+.tab-configuration .board_align_inputs label {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -265,15 +260,15 @@
     border-radius:3px;
 }
 
-.tab-configuration .board_align_content,
-.tab-configuration .gyro_align_content {
+.tab-configuration .board_align_content {
     width: 100%;
     display: inline-block;
     border-bottom: 1px dotted var(--superSubtleAccent);
+    padding-bottom: 8px;
 }
 
-.tab-configuration .sensoralignment span {
-    width: 100%;
+.tab-configuration .sensor_align_content {
+    margin-top: 4px;
 }
 
 .tab-configuration .gyroSyncDenom,
