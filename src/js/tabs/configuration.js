@@ -478,6 +478,31 @@ tab.initialize = function (callback) {
             }
         }
 
+        const alignments = [
+            'CW 0°',
+            'CW 90°',
+            'CW 180°',
+            'CW 270°',
+            'CW 0° flip',
+            'CW 90° flip',
+            'CW 180° flip',
+            'CW 270° flip',
+            'Custom',
+        ];
+
+        const orientation_mag_e = $('select.magalign');
+
+        for (let i = 0; i < alignments.length; i++) {
+            orientation_mag_e.append(`<option value="${(i+1)}">${alignments[i]}</option>`);
+        }
+
+        orientation_mag_e.val(FC.SENSOR_ALIGNMENT.align_mag);
+
+        orientation_mag_e.change(function () {
+            let value = parseInt($(this).val());
+            FC.SENSOR_ALIGNMENT.align_mag = value;
+        });
+
         // Gyro and PID update
         const gyroTextElement = $('input.gyroFrequency');
         const pidSelectElement = $('select.pidProcessDenom');

@@ -263,6 +263,12 @@
 .tab-configuration .board_align_content {
     width: 100%;
     display: inline-block;
+    border-bottom: 1px dotted var(--superSubtleAccent);
+    padding-bottom: 8px;
+}
+
+.tab-configuration .sensor_align_content {
+    margin-top: 4px;
 }
 
 .tab-configuration .gyroSyncDenom,
