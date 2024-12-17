@@ -1,3 +1,45 @@
+# 2.1.0-RC3
+
+This is the third _Release Candidate_ of the Rotorflight 2.1 Configurator.
+
+**NOTE** The final 2.1.0 Configurator will be released _after_ a few release candidates. Please don't use RCs once the final release is out.
+
+## Downloads
+
+The download locations are:
+
+- [Rotorflight Configurator](https://github.com/rotorflight/rotorflight-configurator/releases/tag/release/2.1.0-RC3)
+
+The other components are not updated this time. Please use RC2 instead:
+
+- [Rotorflight Blackbox](https://github.com/rotorflight/rotorflight-blackbox/releases/tag/release/2.1.0-RC2)
+- [Lua Scripts for EdgeTx and OpenTx](https://github.com/rotorflight/rotorflight-lua-scripts/releases/tag/release/2.1.0-RC2)
+- [Lua Scripts for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos/releases/tag/release/2.1.0-RC2)
+- [Lua Suite for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos-suite/releases/tag/release/2.1.0-RC2)
+
+## Notes
+
+- Rotorflight setup instructions can be found on the RF website [www.rotorflight.org](https://www.rotorflight.org/).
+
+- RF 2.1 *is* backward compatible with RF 2.0. You *can* load your configuration dump from RF 2.0 into 2.1.
+
+- If updating from RF1, please setup your helicopter from scratch. Follow the instructions on the website!
+
+- As always, please double check your configuration on the bench before flying!
+
+## Changes from 2.1.0-RC2
+
+- Fix Board detection getting stuck in Flasher
+- Fix Motors tab stalling at FC Disconnect
+- Add a warning on a wrong tail calibraton value
+- SBUS2 protocol hidden with 4.3.0 firmware
+- Gyro chip orientation fields removed
+- Help link fixed in Firmware Flasher
+- German translation updated
+
+
+***
+
 # 2.1.0-RC2
 
 This is the second _Release Candidate_ of the Rotorflight 2.1 Configurator.
