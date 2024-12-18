@@ -166,7 +166,7 @@
         "english": "There are <b>unsaved changes</b> in the current Tab."
     },
     "dialogTabExitSave": {
-        "message": "Änderungen speichern",
+        "message": "Änderungen Speichern",
         "english": "Save Changes"
     },
     "dialogTabExitRevert": {
@@ -291,11 +291,11 @@
         "english": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version."
     },
     "configuratorUpdateNotice": {
-        "message": "Es wird eine veraltete Version des <b>Rotorflight Configurator</b> verwendet.<br>$t(configuratorUpdateHelp.message)",
+        "message": "Es wird eine veraltete Version des <b>Rotorflight-Konfigurators</b> verwendet.<br>$t(configuratorUpdateHelp.message)",
         "english": "You are using an outdated version of the <b>Rotorflight Configurator</b>.<br>$t(configuratorUpdateHelp.message)"
     },
     "configuratorUpdateHelp": {
-        "message": "Die Verwendung einer neueren Version der Firmware mit einer veralteten Version des Konfigurators bedeutet, dass die Änderung einiger Einstellungen zu einer <strong>beschädigten Firmware-Konfiguration und einem nicht funktionierenden Modell</strong> führt. Darüber hinaus können einige Funktionen nur per CLI geändert werden.<br><strong>Rotorflight Configurator version <b>$1</b> steht online zum Download zur Verfügung</strong>, siehe <a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">diese Seite</a> um die neueste Version mit Korrekturen und Verbesserungen herunterzuladen und zu installieren.<br> Bitte Konfigurator-Fenster vor dem Update schließen.",
+        "message": "Die Verwendung einer neueren Version der Firmware mit einer veralteten Version des Konfigurators bedeutet, dass die Änderung einiger Einstellungen zu einer <strong>beschädigten Firmware-Konfiguration und einem nicht funktionierenden Modell</strong> führt. Darüber hinaus können einige Funktionen nur per CLI geändert werden.<br><strong>Der Rotorflight-Konfigurator version <b>$1</b> steht online zum Download zur Verfügung</strong>, siehe <a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">diese Seite</a> um die neueste Version mit Korrekturen und Verbesserungen herunterzuladen und zu installieren.<br> Bitte Konfigurator-Fenster vor dem Update schließen.",
         "english": "Using a newer version of the firmware with an outdated version of Configurator means that changing some settings will result in a <strong>corrupted firmware configuration and a non-working craft</strong>. Furthermore, some features of the firmware will only be configurable in CLI.<br><strong>Rotorflight Configurator version <b>$1</b> is available for download online</strong>, please visit <a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">this page</a> to download and install the latest version with fixes and improvements.<br>Please close the configurator window before updating."
     },
     "configuratorUpdateWebsite": {
@@ -307,15 +307,15 @@
         "english": "Device - <span class=\"message-negative\">Rebooting</span>"
     },
     "deviceRebooting_flashBootloader": {
-        "message": "Gerät - <span class=\"message-negative\">Starte neu im FLASH BOOTLOADER</span>",
+        "message": "Gerät - <span class=\"message-negative\">Starte neu im FLASH-BOOTLOADER</span>",
         "english": "Device - <span class=\"message-negative\">Rebooting to FLASH BOOTLOADER</span>"
     },
     "deviceRebooting_romBootloader": {
-        "message": "Gerät - <span class=\"message-negative\">Starte neu im ROM BOOTLOADER</span>",
+        "message": "Gerät - <span class=\"message-negative\">Starte neu im ROM-BOOTLOADER</span>",
         "english": "Device - <span class=\"message-negative\">Rebooting to ROM BOOTLOADER</span>"
     },
     "backupFileIncompatible": {
-        "message": "Die Backupdatei wurde mit einer älteren Version erstellt und ist leider nicht mit dem neuen Konfigurator kompatibel. Das tut uns leid :(",
+        "message": "Die Backupdatei wurde mit einer älteren Version erstellt und ist leider nicht mit dem neuen Konfigurator kompatibel.",
         "english": "Backup file provided was generated for previous version of the configurator and is incompatible with this version of configurator. Sorry"
     },
     "backupFileUnmigratable": {
@@ -459,11 +459,11 @@
         "english": "Modes"
     },
     "logActionHide": {
-        "message": "Log verbergen",
+        "message": "Log Verbergen",
         "english": "Hide Log"
     },
     "logActionShow": {
-        "message": "Log zeigen",
+        "message": "Log Zeigen",
         "english": "Show Log"
     },
     "serialErrorFrameError": {
@@ -519,7 +519,7 @@
         "english": "Are <strong>udev rules</strong> installed correctly? See docs for instructions"
     },
     "stm32UsbDfuNotFound": {
-        "message": "USB DFU nicht gefunden",
+        "message": "USB-DFU nicht gefunden",
         "english": "USB DFU not found"
     },
     "stm32RebootingToBootloader": {
@@ -688,7 +688,7 @@
         "english": "No release information available for $1."
     },
     "tabSwitchConnectionRequired": {
-        "message": "Bitte vor dem Zugriff auf die Registerkarten ein Gerät <strong>verbinden</strong>",
+        "message": "Bitte vor dem Zugriff auf die Registerkarten ein Gerät <strong>verbinden</strong>.",
         "english": "You need to <strong>connect</strong> before you can view any of the tabs."
     },
     "tabSwitchWaitForOperation": {
@@ -921,11 +921,11 @@
         "english": "<a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Wiki</a>"
     },
     "statusButtonResetZaxis": {
-        "message": "Z Achse zurücksetzen, Abweichung: 0 Grad",
+        "message": "Z-Achse zurücksetzen. Abweichung: 0 Grad",
         "english": "Reset Z axis, offset: 0 deg"
     },
     "statusButtonResetZaxisValue": {
-        "message": "Z Achse zurücksetzen, Abweichung: $1 Grad",
+        "message": "Z-Achse zurücksetzen. Abweichung: $1 Grad",
         "english": "Reset Z axis, offset: $1 deg"
     },
     "statusBatteryHead": {
@@ -1124,7 +1124,7 @@
         "english": "<strong class=\"message-negative\">WARNING!</strong> <strong>ARMING is ENABLED.</strong> Never fly the craft with the Configurator connected!</strong>"
     },
     "statusEnableArming": {
-        "message": "Arming aktivieren:",
+        "message": "Arming Aktivieren:",
         "english": "Enable Arming:"
     },
     "statusInstrumentsHead": {
@@ -1148,7 +1148,7 @@
         "english": "<span class=\"configConfigured\">CONFIGURED</span>"
     },
     "initialSetupButtonCalibrateAccel": {
-        "message": "Beschleunigungs-Sensor kalibieren",
+        "message": "Beschleunigungs-Sensor Kalibrieren",
         "english": "Calibrate Accelerometer"
     },
     "initialSetupCalibrateAccelText": {
@@ -1156,7 +1156,7 @@
         "english": "Place board or frame on <strong>leveled</strong> surface, proceed with calibration, ensure platform is not moving during calibration period"
     },
     "initialSetupButtonCalibrateMag": {
-        "message": "Kompass kalibrieren",
+        "message": "Kompass Kalibrieren",
         "english": "Calibrate Magnetometer"
     },
     "initialSetupCalibrateMagText": {
@@ -1168,7 +1168,7 @@
         "english": "Calibrating..."
     },
     "initialSetupButtonResetSettings": {
-        "message": "Einstellungen zurücksetzen",
+        "message": "Einstellungen Zurücksetzen",
         "english": "Reset Settings"
     },
     "initialSetupResetSettingsText": {
@@ -1176,7 +1176,7 @@
         "english": "Restore settings to <strong>default</strong>"
     },
     "initialSetupButtonSaveSettings": {
-        "message": "Einstellungen speichern",
+        "message": "Einstellungen Speichern",
         "english": "Save Settings"
     },
     "initialSetupSaveSettingsText": {
@@ -1192,7 +1192,7 @@
         "english": "Restore"
     },
     "initialSetupButtonRebootBootloader": {
-        "message": "Boot Loader / DFU",
+        "message": "Boot-Loader / DFU",
         "english": "Boot Loader / DFU"
     },
     "initialSetupBackupRestoreText": {
@@ -1272,7 +1272,7 @@
         "english": "Enable arming the craft with the transmitter while the Configurator is connected. Arming your craft will allow the motors to spool up."
     },
     "initialSetupEnableMotorOverride": {
-        "message": "<strong>Motor-Übersteuerung aktivieren</strong>",
+        "message": "<strong>Motor-Übersteuerung Aktivieren</strong>",
         "english": "<strong>Enable Motor Override</strong>"
     },
     "initialSetupEnableMotorOverrideText": {
@@ -1280,7 +1280,7 @@
         "english": "Enable the motor override feature in the Motors tab. Using motor override WILL SPOOL UP the motors!"
     },
     "initialSetupEnableServoOverride": {
-        "message": "<strong>Servoausgabe überschreiben</strong>",
+        "message": "<strong>Servoausgabe Überschreiben</strong>",
         "english": "<strong>Enable Servo Override</strong>"
     },
     "initialSetupEnableServoOverrideText": {
@@ -1308,7 +1308,7 @@
         "english": "Serial RX input"
     },
     "feature_SOFTSERIAL": {
-        "message": "Software-basierte serielle Anschlüsse aktivieren",
+        "message": "Softwarebasierte serielle Anschlüsse aktivieren",
         "english": "Enable Software Serial ports"
     },
     "feature_GPS": {
@@ -1320,7 +1320,7 @@
         "english": "Sonar altitude radar"
     },
     "feature_TELEMETRY": {
-        "message": "Sendertelemetrie",
+        "message": "Sender-Telemetrie",
         "english": "Transmitter telemetry"
     },
     "feature_RX_PARALLEL_PWM": {
@@ -1344,7 +1344,7 @@
         "english": "OLED Display support"
     },
     "feature_OSD": {
-        "message": "On Screen Display",
+        "message": "Bildschirm-Anzeige",
         "english": "On Screen Display"
     },
     "feature_CMS": {
@@ -1352,7 +1352,7 @@
         "english": "Configuration Menu System"
     },
     "feature_RX_SPI": {
-        "message": "SPI Empfänger",
+        "message": "SPI-Empfänger Hilfe",
         "english": "SPI RX support"
     },
     "feature_GOVERNOR": {
@@ -1424,7 +1424,7 @@
         "english": "RSSI is a measurement of signal strength and is very handy so you know when your aircraft is going out of range or if it is suffering RF interference."
     },
     "configurationEscFeatures": {
-        "message": "ESC/Motor Funktionen",
+        "message": "ESC/Motor-Einstellungen",
         "english": "ESC/Motor Features"
     },
     "configurationFeaturesHelp": {
@@ -1703,11 +1703,11 @@
         "english": "EEPROM <span class=\"message-positive\">saved</span>"
     },
     "dialogDynFiltersChangeTitle": {
-        "message": "Dynamische Kerbfilter Werte geändert",
+        "message": "Dynamische Kerbfilter-Werte geändert",
         "english": "Dynamic Notch values change"
     },
     "dialogDynFiltersChangeNote": {
-        "message": "<span class=\"message-negative\"><b>WARNUNG: Einige Werte des Dynamic Notch wurden auf die Standardwerte zurückgesetzt</b></span> da die RPM Filterung verändert wurde.<br> Bitte vor dem Fliegen prüfen.",
+        "message": "<span class=\"message-negative\"><b>WARNUNG: Einige Werte des Dynamischen Kerbfilters wurden auf die Standardwerte zurückgesetzt</b></span> da die RPM Filterung verändert wurde.<br> Bitte vor dem Fliegen prüfen.",
         "english": "<span class=\"message-negative\"><b>WARNING: Some dynamic notch values have been changed to default values</b></span> because the RPM filtering has been activated/deactivated.<br> Please, check before flying."
     },
     "dialogDynFiltersConfirm": {
@@ -1863,7 +1863,7 @@
         "english": "Disabled"
     },
     "dialogCopyProfileText": {
-        "message": "Kopiere aktuelle Profileinstellungen nach",
+        "message": "Kopiere aktuelle Profil-Einstellungen nach",
         "english": "Copy values from the current profile to"
     },
     "dialogCopyRateProfileText": {
@@ -1871,7 +1871,7 @@
         "english": "Copy values from the current rateprofile to"
     },
     "dialogCopyProfileTitle": {
-        "message": "Kopiere Profileinstellungen",
+        "message": "Kopiere Profil-Einstellungen",
         "english": "Copy Profile Values"
     },
     "dialogCopyProfileNote": {
@@ -1887,7 +1887,7 @@
         "english": "Cancel"
     },
     "dialogResetProfileTitle": {
-        "message": "Profilwerte zurücksetzen",
+        "message": "Profilwerte Zurücksetzen",
         "english": "Reset Profile Values"
     },
     "dialogResetProfileNote": {
@@ -1971,7 +1971,7 @@
         "english": "Proportional"
     },
     "profilesProportionalHelp": {
-        "message": "Bestimmt die Stärke, wie eng das Flugmodell der vorgegebenen Drehrate (dem Sollwert) folgt und äußere Einflüsse korrigiert.<br /><br />Höhere Werte (Gains) sorgen für eine bessere Steuerfolgsamkeit, können aber zu Schwingungen führen, wenn sie im Verhältnis zum Differential-Anteil (D-Anteil) zu hoch sind. Stelle dir den P-Anteil als die Federung in einem Auto vor.",
+        "message": "Bestimmt die Stärke, wie eng das Flugmodell der vorgegebenen Drehrate (dem Sollwert) folgt und äußere Einflüsse korrigiert.<br /><br />Höhere Werte sorgen für eine bessere Steuerfolgsamkeit, können aber zu Schwingungen führen, wenn sie im Verhältnis zum Differential-Anteil (D-Anteil) zu hoch sind. Stelle dir den P-Anteil als die Federung in einem Auto vor.",
         "english": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint) and corrects for external influences.<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the derivative (D-gain). Think of the P-term as the spring on a car.",
         "description": "Proportional Term helpicon message on PID table titlebar"
     },
@@ -1980,7 +1980,7 @@
         "english": "Integral"
     },
     "profilesIntegralHelp": {
-        "message": "Bestimmt die Stärke, wie eng das Flugmodell der vorgegebenen Drehrate folgt.<br>Ähnlich wie Proportional, aber für anhaltende Abweichungen des Flugmodells vom Sollwert der Drehrate, sowie anhaltenden äußeren Einflüssen, wie z.B. gleichmäßiger Wind oder Schwerpunktabweichungen.<br><br>Höhere Gains bieten eine bessere Steuerfolgsamkeit (z.B. bei konstanten Flips oder Rollen), bewirken aber auch, dass das Modell nun auch bei sehr schnellen Steuereingaben dem Sollwert folgt, was dazu führen kann, dass es nach dem Loslassen des Knüppels weiter rotiert. <br>Ist der I-Anteil im Verhältnis zum D-Anteil extrem hoch, kann dies Schwingungen verursachen.",
+        "message": "Bestimmt die Stärke, wie eng das Flugmodell der vorgegebenen Drehrate folgt.<br>Ähnlich wie Proportional, aber für anhaltende Abweichungen des Flugmodells vom Sollwert der Drehrate, sowie anhaltenden äußeren Einflüssen, wie z.B. gleichmäßiger Wind oder Schwerpunktabweichungen.<br><br>Höhere Werte bieten eine bessere Steuerfolgsamkeit (z.B. bei konstanten Flips oder Rollen), bewirken aber auch, dass das Modell nun auch bei sehr schnellen Steuereingaben dem Sollwert folgt, was dazu führen kann, dass es nach dem Loslassen des Knüppels weiter rotiert. <br>Ist der I-Anteil im Verhältnis zum D-Anteil extrem hoch, kann dies Schwingungen verursachen.",
         "english": "Controls the strength of how tightly the machine holds the overall rotation rate setpoint.<br>Similar to Proportional, but for longer biases on the craft from the rotation rate setpoint, as well as persistent outside influence, for example steady wind or CG offsets.<br /><br />Higher gains provide tighter tracking of the setpoint (i.e. in constant flips and rolls), but can lead to the craft now being able to follow the setpoint on extremely quick inputs, which can lead to it continuing to rotate after the stick is released. <br>If extremely high in proportion to the D-term, can cause oscillations.",
         "description": "Integral Term helpicon message on PID table titlebar"
     },
@@ -1989,7 +1989,7 @@
         "english": "Derivative"
     },
     "profilesDerivativeHelp": {
-        "message": "Bestimmt die Stärke der Dämpfung des Flugmodells bei jeglicher Winkelbeschleunigung, ob gesteuert oder durch äußere Einflüsse. Wenn die Knüppel bewegt werden, dämpft der D-Anteil die Modell-Bewegung, um ein Überschwingen zu vermeiden. Bei äußeren Einflüssen (Verwirbelungen oder Windböen) dämpft der D-Anteil die resultierende Unruhe des Modells.<br><br>Höhere Gains bieten mehr Dämpfung und reduzieren mögliches Überschwingen bei hohen P-Anteilen.<br>Der D-Anteil ist jedoch SEHR empfindlich für hochfrequente Gyro-Vibrationen (Rauschen | verstärkt sich um Faktor 10 bis 100).<br><br>Hochfrequenzrauschen, welches den Regelkreis erreicht, kann heiße Servos verursachen oder Servos zerstören, wenn das D-Gain zu hoch ist oder das Gyro-Rauschen nicht ausreichend gefiltert wird (siehe Gyro-Registerkarte).<br><br>Der D-Anteil ist vergleichbar mit dem Stoßdämpfer im Auto, aber mit der negativen Eigenschaft, hochfrequentes Rauschen zu verstärken.",
+        "message": "Bestimmt die Stärke der Dämpfung des Flugmodells bei jeglicher Winkelbeschleunigung, ob gesteuert oder durch äußere Einflüsse. Wenn die Knüppel bewegt werden, dämpft der D-Anteil die Modell-Bewegung, um ein Überschwingen zu vermeiden. Bei äußeren Einflüssen (Verwirbelungen oder Windböen) dämpft der D-Anteil die resultierende Unruhe des Modells.<br><br>Höhere Werte bieten mehr Dämpfung und reduzieren mögliches Überschwingen bei hohen P-Anteilen.<br>Der D-Anteil ist jedoch SEHR empfindlich für hochfrequente Gyro-Vibrationen (Rauschen | verstärkt sich um Faktor 10 bis 100).<br><br>Hochfrequenzrauschen, welches den Regelkreis erreicht, kann heiße Servos verursachen oder Servos zerstören, wenn das D-Gain zu hoch ist oder das Gyro-Rauschen nicht ausreichend gefiltert wird (siehe Gyro-Registerkarte).<br><br>Der D-Anteil ist vergleichbar mit dem Stoßdämpfer im Auto, aber mit der negativen Eigenschaft, hochfrequentes Rauschen zu verstärken.",
         "english": "Controls the strength of damping ANY angular acceleration of the craft, whether from stick inputs or external influences. For stick inputs, the D-term damps the movement to prevent overshooting. For an outside influence (vorticity or wind gust) the D-term damps the disturbance.<br /><br />Higher gains provide more damping and reduce possible overshoot from high P-terms.<br>However, the D-term is VERY sensitive to high frequency gyro vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise in the control loop can cause excessive servo heat and burn out servos if the gyro noise is not filtered properly (see Gyro tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the inherent negative property of magnifying high frequency gyro noise.",
         "description": "Derivative Term helpicon message on PID table titlebar"
     },
@@ -1998,7 +1998,7 @@
         "english": "Feedforward"
     },
     "profilesFeedforwardHelp": {
-        "message": "Dies ist ein zusätzlicher unterstützender Anteil basierend auf den Knüppeleingaben. Die Vorsteuerung (FF) unterstützt den P-Anteil anhand der Knüppelbewegungen, reagiert jedoch nicht auf Bewegungen des Modells.<br><br>Der FF-Anteil unterstützt auf der Grundlage des vorgegebenen Sollwerts (Grad/sek). <br><br>Höhere Werte (Gains) führen zu einer schärferen Reaktion auf die Knüppeleingabe.<br>Zu hohe Werte können zum Überschwingen führen, sowie zum Zurückschlagen am Ende von Steuereingaben.<br>Zu niedrige Werte oder '0' führen zu einer langsameren und trägen Reaktion auf Steuereingaben, sowie zu einem Nachdrehen des Modells nach Steuereigaben.",
+        "message": "Dies ist ein zusätzlicher unterstützender Anteil basierend auf den Knüppeleingaben. Die Vorsteuerung (FF) unterstützt den P-Anteil anhand der Knüppelbewegungen, reagiert jedoch nicht auf Bewegungen des Modells.<br><br>Der FF-Anteil unterstützt auf der Grundlage des vorgegebenen Sollwerts (Grad/sek). <br><br>Höhere Werte führen zu einer schärferen Reaktion auf die Knüppeleingabe.<br>Zu hohe Werte können zum Überschwingen führen, sowie zum Zurückschlagen am Ende von Steuereingaben.<br>Zu niedrige Werte oder '0' führen zu einer langsameren und trägen Reaktion auf Steuereingaben, sowie zu einem Nachdrehen des Modells nach Steuereigaben.",
         "english": "This is an additional pushing term based on stick input. FF helps the P-term push the craft for commanded stick moves, does not react to any helicopter movements though.<br /><br />The FF-term pushes based on the difference between the commanded Setpoint (deg/sec). <br /><br />Higher values (gains) will result in a sharper response to stick input.<br>Too high of values may result in overshoot, as well as strikeback at the end of control inputs.<br>Too low or zero (0) values will result in a slow and delayed response to stick inputs, as well as continued rotation after the stick is released.",
         "description": "Feedforward Term helpicon message on PID table titlebar"
     },
@@ -2007,15 +2007,15 @@
         "english": "Boost"
     },
     "profilesBoostHelp": {
-        "message": "Boost ist eine zusätzliche Verstärkung der Vorsteuerung, basierend auf dem Differentialanteil des Sollwertes. Eine Erhöhung von Boost ermöglicht es, die Reaktion des Modells zu verschärfen, ohne dabei die Nachteile eines hohen P- oder Vorsteuer-Werts in Kauf nehmen zu müssen.",
+        "message": "Boost ist eine zusätzliche Verstärkung der Vorsteuerung, basierend auf dem Differentialanteil des Sollwertes. Eine Erhöhung von Boost ermöglicht es, die Reaktion des Modells zu verschärfen, ohne dabei die Nachteile eines hohen P- oder Vorsteuerungs-Werts in Kauf nehmen zu müssen.",
         "english": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without he drawbacks of high Proportional or Feedforward gains."
     },
     "profilesCopyProfile": {
-        "message": "Profil kopieren",
+        "message": "Profil Kopieren",
         "english": "Copy profile"
     },
     "profilesResetProfile": {
-        "message": "Auf Standardwerte zurücksetzen",
+        "message": "Auf Standardwerte Zurücksetzen",
         "english": "Reset to defaults"
     },
     "profilesActivateProfile": {
@@ -2187,7 +2187,7 @@
         "english": "BEC Voltage"
     },
     "receiverTelemetrySensor_HEADSPEED": {
-        "message": "Hauptrotor-Drehzahl",
+        "message": "Rotordrehzahl",
         "english": "Headspeed"
     },
     "receiverTelemetrySensor_TAILSPEED": {
@@ -2311,7 +2311,7 @@
         "english": "Profile"
     },
     "receiverTelemetryGroup_RPM": {
-        "message": "Hauptrotor-Drehzahl",
+        "message": "RPM",
         "english": "RPM"
     },
     "receiverTelemetryGroup_BATTERY": {
@@ -2527,7 +2527,7 @@
         "english": "Variometer"
     },
     "receiverCrsfTelemetrySensor_HEADSPEED": {
-        "message": "Hauptrotor-Drehzahl",
+        "message": "Rotordrehzahl",
         "english": "Headspeed"
     },
     "receiverCrsfTelemetrySensor_TAILSPEED": {
@@ -3100,7 +3100,7 @@
         "english": "Horizon Level Gain"
     },
     "adjustmentsFunctionAcroTrainerGain": {
-        "message": "Acro Trainer Gain",
+        "message": "Acro-Trainer Gain",
         "english": "Acro Trainer Gain"
     },
     "adjustmentsFunctionGovernorGain": {
@@ -3180,7 +3180,7 @@
         "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
     },
     "servoConfiguration": {
-        "message": "Servo Einstellungen",
+        "message": "Servo-Einstellungen",
         "english": "Servo Configuration"
     },
     "servoNumber": {
@@ -3200,7 +3200,7 @@
         "english": "Min"
     },
     "servoMinHelp": {
-        "message": "Tiefster Stellwert (minimale Impulsbreite) in µs. Diese Einstellung verändert den zulässigen negativen Servoweg. Er dient dazu, ein Anschlagen des Servoarms am negativen Endanschlag zu vermeiden.",
+        "message": "Tiefster Stellwert (minimale Impulsbreite) in µs. Diese Einstellung begrenzt den zulässigen negativen Servoweg. Sie dient dazu, ein Anschlagen des Servoarms zu verhindern.",
         "english": "Lowest point of travel (minimum pulse width). This setting changes the allowed negative servo throw. It is used for avoiding servo arm binding at the negative travel extreme."
     },
     "servoMax": {
@@ -3208,7 +3208,7 @@
         "english": "Max"
     },
     "servoMaxHelp": {
-        "message": "Höchster Stellwert (maximale Impulsbreite) in µs. Diese Einstellung verändert den zulässigen positiven Servoweg. Er dient dazu, ein Anschlagen des Servoarms am positiven Endanschlag zu vermeiden.",
+        "message": "Höchster Stellwert (maximale Impulsbreite) in µs. Diese Einstellung begrenzt den zulässigen positiven Servoweg. Sie dient dazu, ein Anschlagen des Servoarms zu verhindern.",
         "english": "Highest point of travel (maximum pulse width). This setting changes the allowed positive servo throw. It is used for avoiding servo arm binding at the positive travel extreme."
     },
     "servoScaleNeg": {
@@ -3216,7 +3216,7 @@
         "english": "Scale neg"
     },
     "servoScaleNegHelp": {
-        "message": "Skalierungsfaktor für die negative Seite. Typischerweise 500µs für normale (1520µs) Servos und 250µs für Schmalband-Servos (760µs). Die Änderung dieser Einstellung gegenüber der Standardeinstellung dient der Korrektur einer eventuellen Nichtlinearität wischen negativem und positivem Ausschlag.",
+        "message": "Skalierungsfaktor für die negative Seite. Typischerweise 500µs für normale (1520µs) Servos und 250µs für Schmalband-Servos (760µs). Die Änderung dieser Einstellung gegenüber der Standardeinstellung dient der Korrektur einer eventuellen Nichtlinearität zwischen negativem und positivem Ausschlag.",
         "english": "Scaling factor on the negative side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws."
     },
     "servoScalePos": {
@@ -3232,7 +3232,7 @@
         "english": "Rate [Hz]"
     },
     "servoRateHelp": {
-        "message": "PWM-Aktualisierungsrate in Hz. Für analoge Servos muss der Wert auf 50 Hz eingestellt werden, da höhere Werte zu Schäden führen können. Für Digitalservos sind Werte von 100Hz bis 560Hz typisch. Bitte prüfe das Servo-Datenblatt.<br><b>Hinweis:</b> Wähle <i>Speichern und neu starten</i>, um die Aktualisierungsrate tatsächlich zu ändern, da die Frequenz beim Booten initialisiert wird.",
+        "message": "PWM-Aktualisierungs-Frequenz in Hz. Für analoge Servos muss der Wert auf 50 Hz eingestellt werden, da höhere Werte zu Schäden führen können. Für Digitalservos sind Werte von 100Hz bis 560Hz typisch. Bitte prüfe das Servo-Datenblatt.<br><b>Hinweis:</b> Wähle <i>Speichern und neu starten</i>, um die Aktualisierungs-Frequenz tatsächlich zu ändern, da die Frequenz beim Booten initialisiert wird.",
         "english": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time."
     },
     "servoSpeed": {
@@ -3328,7 +3328,7 @@
         "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!"
     },
     "mixerMainRotorSettings": {
-        "message": "Hauptrotor Einstellungen",
+        "message": "Hauptrotor-Einstellungen",
         "english": "Main Rotor Settings"
     },
     "mixerMainRotorDirection": {
@@ -3436,7 +3436,7 @@
         "english": "Cyclic calibration [%]"
     },
     "mixerCyclicCalibrationHelp": {
-        "message": "Anpassung der zyklischen Verstärkung an die mechanische Verstärkung im Kopfdesign.",
+        "message": "Stelle die zyklische Verstärkung so ein, dass sie zu der mechanischen Verstärkung des Kopfdesigns passt.",
         "english": "Adjust the cyclic gain to match the mechanical gain in the head design."
     },
     "mixerCollectiveCalibration": {
@@ -3444,7 +3444,7 @@
         "english": "Collective calibration [%]"
     },
     "mixerCollectiveCalibrationHelp": {
-        "message": "Anpassung der kollektiven Verstärkung an die mechanische Verstärkung im Kopfdesign.",
+        "message": "Stelle die kollektive Verstärkung so ein, dass sie zu der mechanischen Verstärkung des Kopfdesigns passt.",
         "english": "Adjust the collective gain to match the mechanical gain in the head design."
     },
     "mixerCollectiveGeoCorrection": {
@@ -3456,7 +3456,7 @@
         "english": "Adjust until the collective positive and negative deflections are equal."
     },
     "mixerTotalPitchLimit": {
-        "message": "Limit für Gesamtblattverstellung [&deg;]",
+        "message": "Limit für Gesamt-Blattverstellung [&deg;]",
         "english": "Total blade pitch limit [&deg;]"
     },
     "mixerTotalPitchLimitHelp": {
@@ -3464,7 +3464,7 @@
         "english": "Maximum amount of total cyclic + collective blade pitch."
     },
     "mixerCyclicLimit": {
-        "message": "Limit für zyklische Blattverstellung [&deg;]",
+        "message": "Limit für Zyklische Blattverstellung [&deg;]",
         "english": "Cyclic blade pitch limit [&deg;]"
     },
     "mixerCyclicLimitHelp": {
@@ -3472,7 +3472,7 @@
         "english": "Maximum amount of cyclic blade pitch."
     },
     "mixerCollectiveLimit": {
-        "message": "Limit für kollektive Blattverstellung [&deg;]",
+        "message": "Limit für Kollektiv-Pitch Blattverstellung [&deg;]",
         "english": "Collective blade pitch limit [&deg;]"
     },
     "mixerCollectiveLimitHelp": {
@@ -3488,11 +3488,11 @@
         "english": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum."
     },
     "mixerSwashPhase": {
-        "message": "Taumelscheiben-Phasenwinkel [&deg;]",
+        "message": "Virtuelle Taumelscheiben-Drehung [&deg;]",
         "english": "Swashplate phase angle [&deg;]"
     },
     "mixerSwashPhaseHelp": {
-        "message": "Der Phasenversatz für die Steuerung der Taumelscheibe.",
+        "message": "Winkelversatz bei der Ansteuerung der Taumelscheibe.",
         "english": "The phase offset for the swashplate controls."
     },
     "mixerSwashRollTrim": {
@@ -3512,7 +3512,7 @@
         "english": "Trim for swashplate linkages. Use only if the linkages are not adjustable."
     },
     "mixerTailRotorSettings": {
-        "message": "Heckrotor Einstellungen",
+        "message": "Heckrotor-Einstellungen",
         "english": "Tail Rotor Settings"
     },
     "mixerTailRotorMode": {
@@ -3520,7 +3520,7 @@
         "english": "Tail rotor type"
     },
     "mixerTailRotorModeHelp": {
-        "message": "<strong>Heck mit kollektiver Blattverstellung:</strong> Heck mit veränderbarer kollektiver Blattverstellung über das Heckservo (Servo#4). <br><strong>Motorisiert:</strong> Die Hecksteuerung erfolgt mittels eigenem Motor (Motor#2).<br><strong>Bi-directional:</strong> Motorisiertes Heck mit Drehrichtungsumkehr (experimentell).",
+        "message": "<strong>Heck mit kollektiver Blattverstellung:</strong> Heck mit variabler Blattverstellung über das Heckservo (Servo#4). <br><strong>Motorisiert:</strong> Die Hecksteuerung erfolgt mittels eigenem Motor (Motor#2).<br><strong>Bi-directional:</strong> Motorisiertes Heck mit Drehrichtungsumkehr (experimentell).",
         "english": "<strong>Variable pitch:</strong> Variable pitch tail controlled by a tail servo (Servo#4). <br><strong>Motorised:</strong> The tail has a separate motor (Motor#2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode (experimental)."
     },
     "mixerTailVariablePitch": {
@@ -3544,11 +3544,11 @@
         "english": "Depending on the tail rotor direction and ESC/servo configuration, the yaw direction may be reversed."
     },
     "mixerTailRotorCalibration": {
-        "message": "Heck-Kalibrierung [%]",
+        "message": "Heck Kalibrierung [%]",
         "english": "Yaw calibration [%]"
     },
     "mixerTailRotorCalibrationHelp": {
-        "message": "Stelle die Heckverstärkung so ein, dass sie der mechanischen Verstärkung entspricht. Normalerweise ca. 50-150% für servogetriebene Heckrotoren, kann aber bei motorisierten Heckrotoren stark abweichen.",
+        "message": "Stelle die Heckverstärkung so ein, dass sie zu der mechanischen Verstärkung passt. Normalerweise ca. 50-150% für servogetriebene Heckrotoren, kann aber bei motorisierten Heckrotoren stark abweichen.",
         "english": "Adjust the yaw gain to match the mechanical gain. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors."
     },
     "mixerTailRotorMinYaw": {
@@ -3992,7 +3992,7 @@
         "english": "ESC Telemetry protocol"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "ESC-Telemetrieprotokoll. Schließe das Telemetriekabel vom ESC an den Flight-Controller an. Wähle in der Konfigurations-Registerkarte aus, welche UART für die ESC-Telemetrie verwendet werden soll.",
+        "message": "ESC-Telemetrieprotokoll. Schließe das Telemetriekabel vom ESC an den Flight-Controller an. Wähle in der Konfigurations-Registerkarte aus, welcher Anschlus (UART) für die ESC-Telemetrie verwendet werden soll.",
         "english": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab."
     },
     "motorsEscTelemetryHalfDuplex": {
@@ -4000,7 +4000,7 @@
         "english": "One-wire Communication (Half-Duplex)"
     },
     "motorsEscTelemetryHalfDuplexHelp": {
-        "message": "Der Tx-Anschluss wird sowohl für das Senden als auch für das Empfangen verwendet. Halb-Duplex ist erforderlich für die Vorwärtsprogrammierung von unterstützten ESCs (z. B. Hobbywing Platinum V5 oder Scorpion Tribunus).",
+        "message": "Der Tx-Anschluss wird sowohl für das Senden als auch für das Empfangen verwendet. Halb-Duplex ist erforderlich für die Vorwärts-Programmierung von unterstützten ESCs (z. B. Hobbywing Platinum V5 oder Scorpion Tribunus).",
         "english": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scorpion Tribunus)."
     },
     "motorsEscTelemetryPinswap": {
@@ -4024,7 +4024,7 @@
         "english": "ESC update frequency"
     },
     "motorsUnsyncedPWMFreqHelp": {
-        "message": "ESC-PWM-Aktualisierungsfrequenz in Hz. Dies ist die Häufigkeit, mit der der Gaswert an den ESC gesendet wird. Normalerweise zwischen 50Hz und 250Hz. Die meisten modernen ESCs vertragen 250Hz.",
+        "message": "ESC-PWM-Aktualisierungs-Frequenz in Hz. Dies ist die Häufigkeit, mit der der Gaswert an den ESC gesendet wird. Normalerweise zwischen 50Hz und 250Hz. Die meisten modernen ESCs vertragen 250Hz.",
         "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz."
     },
     "motorsDshotBidir": {
@@ -4152,11 +4152,11 @@
         "english": "RPM:"
     },
     "motorHeadspeed": {
-        "message": "Hauptrotordrehzahl:",
+        "message": "Rotordrehzahl:",
         "english": "Headspeed:"
     },
     "motorTailspeed": {
-        "message": "Heckrotordrehzahl:",
+        "message": "Heckrotor-Drehzahl:",
         "english": "Tailspeed:"
     },
     "motorVoltage": {
@@ -4188,11 +4188,11 @@
         "english": "Enable"
     },
     "govFeatures": {
-        "message": "Drehzahlregler Funktionen",
+        "message": "Drehzahlregler-Einstellungen",
         "english": "Governor Features"
     },
     "govProfile": {
-        "message": "Drehzahregler Einstellungen",
+        "message": "Drehzahregler-Einstellungen",
         "english": "Governor Settings"
     },
     "govConfigurationNote": {
@@ -4212,7 +4212,7 @@
         "english": "Handover throttle [%]"
     },
     "govHandoverThrottleHelp": {
-        "message": "Die Gassignal Schwelle, über welcher der Drehzahlregler aktiviert wird. Unterhalb dieser Schwelle wird das Gas-Eingangssignal an den ESC weitergegeben - über dieser Schwelle ist der Drehzahlregler aktiviert und das Gas-Eingangssignal wird für die Berechnung der Ziel-Rotordrehzahl verwendet. Der Motor muss in der Lage sein, unter dieser Schwelle anzulaufen.",
+        "message": "Die Gassignal Schwelle, über welcher der Drehzahlregler aktiviert wird. Unterhalb dieser Schwelle wird das Gas-Eingangssignal an den ESC weitergegeben - über dieser Schwelle ist der Drehzahlregler aktiviert und das Gas-Eingangssignal wird für die Berechnung der Soll-Rotordrehzahl verwendet. Der Motor muss in der Lage sein, unter dieser Schwelle anzulaufen.",
         "english": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level."
     },
     "govStartupTime": {
@@ -4320,11 +4320,11 @@
         "english": "Cutoff for the cyclic/collective precompensation lowpass filter."
     },
     "govHeadspeed": {
-        "message": "Maximale Rotordrehzahl",
+        "message": "Maximale Rotordrehzahl [U/min]",
         "english": "Full headspeed"
     },
     "govHeadspeedHelp": {
-        "message": "Hauptrotor-Solldrehzahl des Drehzahlreglers: Maximale Rotordrehzahl * Gas(%).",
+        "message": "Berechnung: Hauptrotor-Solldrehzahl des Drehzahlreglers = Maximale Rotordrehzahl * Gas(%).",
         "english": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input."
     },
     "govHeadspeedNote": {
@@ -4332,7 +4332,7 @@
         "english": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning."
     },
     "govMaxThrottle": {
-        "message": "Maximaler Gaswert",
+        "message": "Maximaler Gaswert [%]",
         "english": "Maximum Throttle"
     },
     "govMaxThrottleHelp": {
@@ -4372,7 +4372,7 @@
         "english": "PID loop D-term gain. Usually 0..100"
     },
     "govFGain": {
-        "message": "Vorsteuerungs-Gain",
+        "message": "Gain Vorsteuerung",
         "english": "Feedforward gain"
     },
     "govFGainHelp": {
@@ -4384,7 +4384,7 @@
         "english": "Tail Torque Assist (TTA) gain"
     },
     "govTTAGainHelp": {
-        "message": "Stärke des Heck Drehmoment-Assistenten. Dieser Wert bestimmt die Hauptrotor-Drehzahlerhöhung bei Heckeingaben in negative Richtung, z.B. wenn ein Motorheck unter seine Leerlaufdrehzahl fällt, und somit der Hauptmotor die Steuerung des Hecks nach links übernimmt. Üblicherweise 50..150.",
+        "message": "Stärke des Heck Drehmoment-Assistenten. Dieser Wert bestimmt die Rotordrehzahl-Erhöhung bei Heckeingaben in negative Richtung, z.B. wenn ein Motorheck unter seine Leerlaufdrehzahl fällt, und somit der Hauptmotor die Steuerung des Hecks nach links übernimmt. Üblicherweise 50..150.",
         "english": "Tail Torque Assist strength (gain). This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 50..150"
     },
     "govTTALimit": {
@@ -4392,7 +4392,7 @@
         "english": "Tail Torque Assist (TTA) limit [%]"
     },
     "govTTALimitHelp": {
-        "message": "Maximale Hauptrotor-Drehzahlerhöhung des Heck Drehmoment-Assistenten. Hier wird eingestellt, wie weit die TTA-Drehzahl die maximal eingestellte Drehzahl überschreiten kann. Üblicherweise 20..50%.",
+        "message": "Maximale Rotordrehzahl-Erhöhung des Heck Drehmoment-Assistenten. Hier wird eingestellt, wie weit die TTA-Drehzahl die maximal eingestellte Drehzahl überschreiten kann. Üblicherweise 20..50%.",
         "english": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%."
     },
     "govYawPrecomp": {
@@ -4844,11 +4844,11 @@
         "english": "Version:"
     },
     "firmwareFlasherReleaseVersionUrl": {
-        "message": "Bitte Download-Seite besuchen",
+        "message": "Bitte Download-Seite besuchen.",
         "english": "Visit release page."
     },
     "firmwareFlasherReleaseNotes": {
-        "message": "Update Änderungen:",
+        "message": "Update-Änderungen:",
         "english": "Release notes:"
     },
     "firmwareFlasherReleaseDate": {
@@ -4880,15 +4880,15 @@
         "english": "Download manually."
     },
     "firmwareFlasherTargetWarning": {
-        "message": "<span class=\"message-negative\">WICHTIG:</span> Verwende unbedingt die passende Firmware für deinen Flight-Controller. Die Verwendung einer falschen Firmware kann <span class=\"message-negative\">unangenehme</span> Folgen haben.",
+        "message": "<span class=\"message-negative\">WICHTIG:</span> Verwende unbedingt die passende Firmware für deinen Flight-Controller. Das Flashen einer falschen Firmware kann <span class=\"message-negative\">unangenehme</span> Folgen haben.",
         "english": "<span class=\"message-negative\">IMPORTANT</span>: Ensure you flash a file appropriate for your target.  Flashing a binary for the wrong target can cause <span class=\"message-negative\">bad</span> things to happen."
     },
     "firmwareFlasherLoadFirmwareFile": {
-        "message": "Bitte lade eine Firmware-Datei",
+        "message": "Bitte lade eine Firmware-Datei.",
         "english": "Please load firmware file"
     },
     "firmwareFlasherLoadedConfig": {
-        "message": "Ziel geladen, bitte Firmware-Datei laden",
+        "message": "Ziel geladen, bitte Firmware-Datei laden.",
         "english": "Loaded target, please load firmware file"
     },
     "firmwareFlasherNoReboot": {
@@ -5032,7 +5032,7 @@
         "english": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "Bei Verbindungsabbruch: <ul><li>Ausschalten</li><li>'Keine Reboot-Sequenz' und 'Chip vollständig löschen' aktivieren</li><li>Flight-Controller mit gedrückter Boot-Taste oder Boot-Brücke per USB verbinden</li><li>Power LED leuchtet (kein Blinken)</li><li> Installiere alle STM32-Treiber und Zadig, falls benötigt (siehe <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> Abschnitt des Handbuchs)</li><li>Konfigurator schließen, dann Konfigurator neu starten</li><li>BOOT-Taste loslassen, falls dein Flight-Controller eine hat</li><li>Flashen mit korrekter Firmware (mit manueller Baudrate, falls im Handbuch des Flight-Controllers angegeben).</li><li>Ausschalten</li><li>Boot-Brücke entfernen</li><li>Einschalten (Aktivitäts-LED sollte blinken)</li><li>Wie gewohnt anschließen</li></ul>",
+        "message": "Bei Verbindungsabbruch zum Board: <ul><li>Ausschalten</li><li>'Keine Reboot-Sequenz' und 'Chip vollständig löschen' aktivieren</li><li>Flight-Controller mit gedrückter Boot-Taste oder Boot-Brücke per USB verbinden</li><li>Power LED leuchtet (kein Blinken)</li><li> Installiere alle STM32-Treiber und Zadig, falls benötigt (siehe <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> Abschnitt des Handbuchs)</li><li>Konfigurator schließen, dann Konfigurator neu starten</li><li>BOOT-Taste loslassen, falls dein Flight-Controller eine hat</li><li>Flashen mit korrekter Firmware (mit manueller Baudrate, falls im Handbuch des Flight-Controllers angegeben).</li><li>Ausschalten</li><li>Boot-Brücke entfernen</li><li>Einschalten (Aktivitäts-LED sollte blinken)</li><li>Wie gewohnt anschließen</li></ul>",
         "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
     },
     "firmwareFlasherFirmwareNotLoaded": {
@@ -5665,15 +5665,15 @@
         "english": "Hard limit for the angle error in the PID loop. The absolute error and thus the I-term will never go above these limits."
     },
     "profilesErrorLimitRoll": {
-        "message": "Fehlergrenze für die Roll-Achse [&deg;]",
+        "message": "Fehlergrenze Roll-Achse [&deg;]",
         "english": "Error Limit for Roll Axis [&deg;]"
     },
     "profilesErrorLimitPitch": {
-        "message": "Fehlergrenze für die Nick-Achse [&deg;]",
+        "message": "Fehlergrenze Nick-Achse [&deg;]",
         "english": "Error Limit for Pitch Axis [&deg;]"
     },
     "profilesErrorLimitYaw": {
-        "message": "Fehlergrenze für die Hoch-Achse (Heck) [&deg;]",
+        "message": "Fehlergrenze Hoch-Achse (Heck) [&deg;]",
         "english": "Error Limit for Yaw Axis [&deg;]"
     },
     "profilesOffsetLimitHelp": {
@@ -5681,11 +5681,11 @@
         "english": "Hard limit for the High Speed Integral offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits."
     },
     "profilesOffsetLimitRoll": {
-        "message": "HSI Offset-Limit für die Roll-Achse [&deg;]",
+        "message": "HSI Offset-Limit Roll-Achse [&deg;]",
         "english": "HSI Offset Limit for Roll Axis [&deg;]"
     },
     "profilesOffsetLimitPitch": {
-        "message": "HSI Offset-Limit für die Nick-Achse [&deg;]",
+        "message": "HSI Offset-Limit Nick-Achse [&deg;]",
         "english": "HSI Offset Limit for Pitch Axis [&deg;]"
     },
     "profilesOffsetGainHelp": {
@@ -5693,15 +5693,15 @@
         "english": "Gain for the High Speed Integral Offset term (Integral for high speed flight), which is only active at large collective angles. This term of the control loop provides angular stability and safe control following at high speeds, as well as attitude stability on large changes of the collective pitch angle of the rotor disk, which would lead to rapid diving and unwanted attitude changes without HSI. Too low values cause the model to become unstable at high speeds, as well as slow reaction and large attitude changes on collective pitch changes. Too large values can cause oscillation and restlessness at large collective pitch angles. For testing of the lower bounds of the parameter, fly in a straight line <strong> AT SAFE ALTITUDE</strong>, only briefly pull the collective into the negative range and observe the model's reaction. Should the model dive, increase the HSI Offset Gain. For testing the upper bounds of the parameter, give short jabs of elevator and aileron in a high collective vertical climb and observe the model's behavior. If the model swings, wobbles or exerts restlessness after releasing the stick, decrease the HSI Offset Gain."
     },
     "profilesOffsetGainRoll": {
-        "message": "HSI Offset-Gain für die Roll-Achse",
+        "message": "HSI Offset-Gain Roll-Achse",
         "english": "HSI Offset Gain for Roll Axis"
     },
     "profilesOffsetGainPitch": {
-        "message": "HSI Offset-Gain für die Nick-Achse",
+        "message": "HSI Offset-Gain Nick-Achse",
         "english": "HSI Offset Gain for Pitch Axis"
     },
     "profilesErrorDecayGround": {
-        "message": "Entladungszeit des Fehlers am Boden",
+        "message": "Abklingzeit des Fehlers am Boden",
         "english": "Ground Error Decay"
     },
     "profilesErrorDecayTimeGroundHelp": {
@@ -5709,7 +5709,7 @@
         "english": "Bleeds off the current controller error when the craft is not airborne. This helps preventing the craft from tipping over on the ground."
     },
     "profilesErrorDecayTime": {
-        "message": "Entladungszeit [s]",
+        "message": "Abklingzeit [s]",
         "english": "Decay Time [s]"
     },
     "profilesErrorDecayTimeCyclic": {
@@ -5725,7 +5725,7 @@
         "english": "Error Decay maximum rate [&deg;/s]"
     },
     "profilesErrorDecayLimitCyclicHelp": {
-        "message": "Maximale Abkling-Ggeschwindigkeit für den akkumulierten zyklischen Fehler (I-Anteil).",
+        "message": "Maximale Abkling-Geschwindigkeit für den akkumulierten zyklischen Fehler (I-Anteil).",
         "english": "Maximum bleed-off speed for the accumulated cyclic error (I-term)."
     },
     "profilesErrorDecayTimeYaw": {
@@ -5741,7 +5741,7 @@
         "english": "Error Decay maximum rate [&deg;/s]"
     },
     "profilesErrorDecayLimitYawHelp": {
-        "message": "Maximale Abkling-Ggeschwindigkeit für den akkumulierten Gier-Fehler (I-Anteil).",
+        "message": "Maximale Abkling-Geschwindigkeit für den akkumulierten Gier-Fehler (I-Anteil).",
         "english": "Maximum bleed-off speed for the accumulated yaw error (I-term)."
     },
     "profilesErrorRotation": {
@@ -5761,7 +5761,7 @@
         "english": "Limits the accumulation of I-term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements."
     },
     "profilesItermRelaxType": {
-        "message": "I-Anteil-Relax Zuweisung",
+        "message": "I-Anteil-Relax: Achszuweisung",
         "english": "I-term Relax Type"
     },
     "profilesItermRelaxTypeHelp": {
@@ -5789,7 +5789,7 @@
         "english": "Cutoff Point for Yaw"
     },
     "profilesItermRelaxCutoffHelp": {
-        "message": "Verhindert Zurückschlagen nach schnellen Steuereingaben. Höhere Werte verbessern die Präzision bei hohen Drehraten.<br>15-30 für kleine Helis, 10-15 für mittelgroße Helis, weniger als 10 für große Helis (>600er).",
+        "message": "Kleinere Werte unterdrücken das Zurückschlagen nach Steuereingaben, höhere Werte verbessern die Präzision bei hohen Drehraten.<br>15-30 für kleine Helis, 10-15 für mittelgroße Helis, weniger als 10 für große Helis (>600er).",
         "english": "Lower values suppress bounce-back after movements, high values increase high-rate turn precision.<br>Set to 15-30 for small helis, 10-15 for mid-size, and less than 10 for large."
     },
     "profilesPidBandwidth": {
@@ -5813,7 +5813,7 @@
         "english": "Yaw Bandwidth"
     },
     "profilesDtermCutoffHelp": {
-        "message": "D-Anteil Grenzfrequenz in Hz",
+        "message": "Differenzial-Anteil Grenzfrequenz in Hz",
         "english": "D-term Cutoff Frequency in Hz"
     },
     "profilesDtermCutoffRoll": {
@@ -5829,7 +5829,7 @@
         "english": "Yaw D-term Cutoff"
     },
     "profilesBtermCutoffHelp": {
-        "message": "B-Anteil Grenzfrequenz in Hz",
+        "message": "Boost-Anteil Grenzfrequenz in Hz",
         "english": "B-term Cutoff Frequency in Hz"
     },
     "profilesBtermCutoffRoll": {
@@ -5853,7 +5853,7 @@
         "english": "Acro Trainer gain"
     },
     "profilesAcroTrainerGainHelp": {
-        "message": "Acro-Trainer-Gain. Der Acro-Trainer-Modus ist nicht selbstlevelnd, begrenzt aber den maximalen Nick-/Rollwinkel. Dies bestimmt, wie aggressiv der Hubschrauber im Acro-Trainer-Modus auf den maximalen Winkel zurücksteuert (falls dieser überschritten wird)",
+        "message": "Der Acro-Trainer-Modus ist nicht selbstlevelnd, begrenzt aber den maximalen Nick- und Rollwinkel. Der Gain-Wert bestimmt, wie aggressiv der Hubschrauber im Acro-Trainer-Modus auf den maximalen Winkel zurücksteuert (falls dieser überschritten wird).",
         "english": "Acro Trainer gain. Acro trainer Mode is not self leveling but does limit the maximum pitch/roll angle. This determines how aggressively the helicopter tilts back to the maximum angle (if exceeded) while in Acro Trainer Mode"
     },
     "profilesAcroTrainerLimit": {
@@ -5861,15 +5861,15 @@
         "english": "Acro Trainer angle limit"
     },
     "profilesAcroTrainerLimitHelp": {
-        "message": "Acro-Trainer-Winkelbegrenzung. Der Acro Trainer-Modus levelt sich nicht selbst (wie der Winkel- oder Horizont-Modus); er begrenzt jedoch den maximalen Winkel, um den sich der Hubschrauber um die Nick/Rollachse neigt",
+        "message": "Der Acro Trainer-Modus levelt sich nicht selbst (wie der Winkel- oder Horizont-Modus); er begrenzt jedoch den maximalen Winkel, um den sich der Hubschrauber um die Nick-/Rollachse neigt.",
         "english": "Acro Trainer angle limit. Acro Trainer mode does not self level (like Angle or Horizon Modes); however, it does limit the maximum angle the helicopter will pitch/roll to"
     },
     "profilesAngleModeGain": {
-        "message": "Leveling Gain im Winkel-Modus",
+        "message": "Leveling-Gain im Winkel-Modus",
         "english": "Angle Mode leveling gain"
     },
     "profilesAngleModeGainHelp": {
-        "message": "Leveling-Gain für den Winkel-Modus. Bestimmt, wie aggressiv der Hubschrauber im Winkel-Modus zurück in die Waagerechte gebracht wird.",
+        "message": "Der Wert legt fest, wie aggressiv der Hubschrauber im Winkel-Modus zurück in die Waagrechte gebracht wird.",
         "english": "Angle Mode leveling gain. This determines how aggressively the helicopter tilts back to level while in Angle Mode"
     },
     "profilesAngleModeLimit": {
@@ -5877,23 +5877,23 @@
         "english": "Angle Mode maximum angle"
     },
     "profilesAngleModeLimitHelp": {
-        "message": "Maximal möglicher Winkel im Winkel-Modus. Der Hubschrauber ist auf diesen Winkel begrenzt, wenn er sich im Winkel-Modus befindet",
+        "message": "Der Hubschrauber ist auf diesen maximalen Winkel begrenzt, wenn er sich im Winkel-Modus befindet.",
         "english": "Angle Mode maximum angle. Helicopter is limited to this angle when in Angle mode"
     },
     "profilesHorizonModeGain": {
-        "message": "Leveling Gain im Horizontal-Modus",
+        "message": "Leveling-Gain im Horizontal-Modus",
         "english": "Horizon Mode leveling gain"
     },
     "profilesHorizonModeGainHelp": {
-        "message": "Leveling Gain im Horizontal-Modus. Legt fest, wie stark der Hubschrauber im Horizontal-Modus zurück in die Horizontale kippt",
+        "message": "Der Wert legt fest, wie aggressiv der Hubschrauber im Horizontal-Modus zurück in die Waagrechte gebracht wird.",
         "english": "Horizon Mode leveling gain. This determines how aggressively the helicopter tilts back to level while in Horizon Mode"
     },
     "profilesMainRotorSettings": {
-        "message": "Hauptrotor Einstellungen",
+        "message": "Hauptrotor-Einstellungen",
         "english": "Main Rotor Settings"
     },
     "profilesTailRotorSettings": {
-        "message": "Heckrotor Einstellungen",
+        "message": "Heckrotor-Einstellungen",
         "english": "Tail Rotor Settings"
     },
     "profilesYawCenterOffset": {
@@ -5901,11 +5901,11 @@
         "english": "Center Offset"
     },
     "profilesYawCenterOffsetHelp": {
-        "message": "Offset der Mittelstellung für Heckmotor oder Servo",
+        "message": "Offset der Mittelstellung für Heckmotor oder Servo.",
         "english": "Center Offset for tail motor or servo"
     },
     "profilesYawStopGainCW": {
-        "message": "Stop-Gain Heck für die Drehung im Uhrzeigersinn",
+        "message": "Stop-Gain für die Drehung im Uhrzeigersinn",
         "english": "CW Yaw Stop Gain"
     },
     "profilesYawStopGainCWHelp": {
@@ -5913,7 +5913,7 @@
         "english": "Stop gain (PD) for clock-wise rotation. Typical range 50..200."
     },
     "profilesYawStopGainCCW": {
-        "message": "Stop-Gain Heck für die Drehung gegen den Uhrzeigersinn",
+        "message": "Stop-Gain für die Drehung gegen den Uhrzeigersinn",
         "english": "CCW Yaw Stop Gain"
     },
     "profilesYawStopGainCCWHelp": {
@@ -5921,11 +5921,11 @@
         "english": "Stop gain (PD) for counter clock-wise rotation. Typical range 50..200."
     },
     "profilesYawPrecompCutoff": {
-        "message": "Grenzfrequenz Heck [Hz]",
+        "message": "Grenzfrequenz Vorsteuerung Heck [Hz]",
         "english": "Yaw Precomp Cutoff [Hz]"
     },
     "profilesYawPrecompCutoffHelp": {
-        "message": "Grenzfrequenz für alle Arten der Heck-Vorkompensation",
+        "message": "Grenzfrequenz für alle Arten der Heck-Vorkompensation.",
         "english": "Frequency limit for all yaw precompensation actions"
     },
     "profilesYawFFCyclicGain": {
@@ -5933,7 +5933,7 @@
         "english": "Cyclic Feedforward Gain"
     },
     "profilesYawFFCyclicGainHelp": {
-        "message": "Stärke der zyklischen Vorsteuerung (Feedforward), die auf das Heck wirkt",
+        "message": "Stärke der zyklischen Vorsteuerung (Feedforward), die auf das Heck wirkt.",
         "english": "Gain value for cyclic feedforward mixed into yaw"
     },
     "profilesYawFFCollectiveGain": {
@@ -5941,7 +5941,7 @@
         "english": "Collective Feedforward Gain"
     },
     "profilesYawFFCollectiveGainHelp": {
-        "message": "Stärke der Kollektiv-Pitch Vorsteuerung (Feedforward), die auf das Heck wirkt",
+        "message": "Stärke der Kollektiv-Pitch Vorsteuerung (Feedforward), die auf das Heck wirkt.",
         "english": "Gain value for collective feedforward mixed into yaw"
     },
     "profilesYawFFImpulseGain": {
@@ -5949,15 +5949,15 @@
         "english": "Collective Impulse Feedforward Gain"
     },
     "profilesYawFFImpulseGainHelp": {
-        "message": "Stärke der Kollektiv-Pitch Impulsvorsteuerung (Impulse Feedforward), die auf das Heck wirkt",
+        "message": "Stärke der Kollektiv-Pitch Impulsvorsteuerung (Impulse Feedforward), die auf das Heck wirkt.",
         "english": "Gain value for collective impulse feedforward mixed into yaw"
     },
     "profilesyawFFImpulseDecay": {
-        "message": "Entladungszeit Kollektiv-Pitch Impulsvorsteuerung",
+        "message": "Abklingzeit Kollektiv-Pitch Impulsvorsteuerung [s]",
         "english": "Collective Impulse Feedforward Decay time"
     },
     "profilesyawFFImpulseDecayHelp": {
-        "message": "Abklingzeit für die kollektive Impulsvorsteuerung, die auf das Heck wirkt",
+        "message": "Entladungszeit für die Kollektiv-Pitch Impulsvorsteuerung, die auf das Heck wirkt.",
         "english": "Decay time for collective impulse feedforward mixed into yaw"
     },
     "profilesPitchFFCollective": {
@@ -5965,7 +5965,7 @@
         "english": "Collective to Pitch Compensation"
     },
     "profilesPitchFFCollectiveHelp": {
-        "message": "Kompensation der Nicktendenz bei kollektiven Pitcheingaben",
+        "message": "Kompensation der Nicktendenz (Aufbäumen) bei Kollektiv-Pitch-Eingaben",
         "english": "Compensation for the pitching up tendency in collective pitch pumps."
     },
     "profilesPitchFFCollectiveGain": {
@@ -6009,7 +6009,7 @@
         "english": "Frequency limit for the compensation. Higher value will make the compensation action faster."
     },
     "profilesRescueSettings": {
-        "message": "Rettung Einstellungen",
+        "message": "Rettungs-Einstellungen",
         "english": "Rescue Settings"
     },
     "profilesRescueEnable": {
@@ -6021,7 +6021,7 @@
         "english": "Flip to upright"
     },
     "profilesRescueFlipModeHelp": {
-        "message": "Wenn die Rettung aktiviert wird, während der Heli auf dem Rücken liegt, wird er entweder in die Normalfluglage gedreht (umdrehen), oder er bleibt in Rückenlage (nicht umdrehen).",
+        "message": "Wenn die Rettung aktiviert wird, während der Heli auf dem Rücken liegt, wird er entweder in die Normalfluglage gedreht (Umdrehen), oder er bleibt in Rückenlage (Nicht Umdrehen).",
         "english": "If rescue is activated while inverted, flip to upright - or remain inverted"
     },
     "profilesRescueFlipModeDisable": {
@@ -6033,7 +6033,7 @@
         "english": "Flip"
     },
     "profilesRescueLevelGain": {
-        "message": "Gain bei Rettung-Lagestabilisierung",
+        "message": "Gain bei Rettungs-Lagestabilisierung",
         "english": "Leveling Gain"
     },
     "profilesRescueLevelGainHelp": {
@@ -6069,7 +6069,7 @@
         "english": "Pull-up Collective [%]"
     },
     "profilesRescuePullupCollectiveHelp": {
-        "message": "Kollektiv-Pitch für den Pull-Up Steigflug.",
+        "message": "Kollektiv-Pitch für die erste Phase des Rettungssteigflugs.",
         "english": "Collective value for pull-up climb."
     },
     "profilesRescuePullupTime": {
@@ -6077,7 +6077,7 @@
         "english": "Pull-up Time [s]"
     },
     "profilesRescuePullupTimeHelp": {
-        "message": "Dauer des Pull-Up Rettungssteigflugs. Wenn die Rettung aktiviert ist, wird der Hubschrauber für diese Zeitspanne einen erhöhten Kollektiv-Pitch für den Steigflug anwenden, bevor er in die Flip- oder Steigflugphase übergeht.",
+        "message": "Dauer der ersten Phase des Rettungssteigflugs. Wenn die Rettung aktiviert ist, wird der Hubschrauber für diese Zeitspanne einen erhöhten Kollektiv-Pitch für den Steigflug anwenden, bevor er in die Flip- oder die zweite Steigflugphase übergeht.",
         "english": "Rescue pull-up time. When Rescue activated Helicopter will apply pull-up collective for this time period before moving to flip or climb stage."
     },
     "profilesRescueClimbCollective": {
@@ -6165,7 +6165,7 @@
         "english": "Maximum Collective to apply for altitude control"
     },
     "rateSetupCopyRateProfile": {
-        "message": "Profil kopieren",
+        "message": "Profil Kopieren",
         "english": "Copy rateprofile"
     },
     "rateSetupActivateProfile": {
@@ -6317,7 +6317,7 @@
         "english": "Gyro Lowpass 2 Filter Type"
     },
     "gyroLowpassFilterHelp": {
-        "message": "Die Gyro Tiefpassfilter werden verwendet, um überschüssige Störungen im Gyro-Signal zu ignorieren. Zwei Filter können verwendet werden, entweder 1. oder 2. Ordnung. Der erste Filter ist dynamisch, er kann seine Grenzfrequenz mit der Hauptrotordrehzahl anpassen. Die Min- und Max-Werte definieren den Bereich, in dem die Filterung platziert wird. Bei der Verwendung von RPM-Filtern oder Dynamischen Kerbfiltern wird ein extra Filter um 100Hz benötigt. Ohne diese werden 2 Filter zweiter Ordnung benötigt.",
+        "message": "Die Gyro Tiefpassfilter werden verwendet, um überschüssige Störungen im Gyro-Signal zu ignorieren. Zwei Filter können verwendet werden, entweder 1. oder 2. Ordnung. Der erste Filter ist dynamisch, er kann seine Grenzfrequenz mit der Rotordrehzahl anpassen. Die Min- und Max-Werte definieren den Bereich, in dem die Filterung platziert wird. Bei der Verwendung von RPM-Filtern oder Dynamischen Kerbfiltern wird ein extra Filter um 100Hz benötigt. Ohne diese werden 2 Filter zweiter Ordnung benötigt.",
         "english": "The Gyro Lowpass Filters are used for cutting off excess noise in the gyro signal. Two filters can be used, either 1<sup>st</sup> or 2<sup>nd</sup> order. The first filter can be dynamic, changing its cutoff frequency with the main rotor RPM. The minimum and maximum are limiting the dynamic range. With RPM Filters or Dynamic Notch Filters, one extra filter is needed around 100Hz. Without them, two second order filters are required."
     },
     "gyroNotchFiltersGroup": {
@@ -6349,11 +6349,11 @@
         "english": "Dynamic Notch Filter"
     },
     "gyroDynamicNotchFilterSettings": {
-        "message": "Einstellungen des Dynamischen Gyro-Kerbfilters",
+        "message": "Gyro Dynamischer-Kerbfilter Einstellungen",
         "english": "Gyro Dynamic Notch Filter Settings"
     },
     "gyroDynamicNotchFilterHelp": {
-        "message": "Der Dynamische Kerbfilter verfolgt die Peak-Rauschfrequenzen im Gyrosignal und platziert Kerbfilter auf diesen Frequenzen.",
+        "message": "Der Dynamische Kerbfilter verfolgt die Rauschfrequenz-Spitzen im Gyrosignal und platziert Kerbfilter auf diesen Frequenzen.",
         "english": "Dynamic Notch Filter tracks peak noise frequencies in the gyro signal and places notch filters at those frequencies automatically."
     },
     "gyroDynamicNotchCount": {
@@ -7073,7 +7073,7 @@
         "english": "Calibrated Current Scale:"
     },
     "powerBatteryHead": {
-        "message": "Flug-Akku",
+        "message": "Akku",
         "english": "Battery"
     },
     "powerStateHead": {
@@ -7231,7 +7231,7 @@
         "english": "Post Flight Statistics"
     },
     "osdSetupVtxTitle": {
-        "message": "VTX Einstellungen",
+        "message": "VTX-Einstellungen",
         "english": "VTX Settings"
     },
     "osdSetupCraftNameTitle": {
@@ -7332,7 +7332,7 @@
         "english": "Reset OSD to default"
     },
     "osdSetupButtonReset": {
-        "message": "Einstellungen zurücksetzen",
+        "message": "Einstellungen Zurücksetzen",
         "english": "Reset Settings"
     },
     "osdTextElementMainBattVoltage": {
