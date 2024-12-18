@@ -218,6 +218,8 @@ TABS.mixer.initialize = function (callback) {
     function data_to_form() {
 
         $('.tab-mixer .note').hide();
+        $('.tab-mixer .mixerMotorisedTailCalibrationNote .note').show();
+        $('.tab-mixer .mixerMotorisedTailCalibrationNote').hide();
 
         self.origMixerConfig = Mixer.cloneConfig(FC.MIXER_CONFIG);
         self.origMixerInputs = Mixer.cloneInputs(FC.MIXER_INPUTS);
@@ -336,8 +338,10 @@ TABS.mixer.initialize = function (callback) {
                 $('#mixerTailMotorCenterTrim').val((FC.MIXER_CONFIG.tail_center_trim * 0.1).toFixed(1));
                 $('.mixerOverrideAxis .mixerTailMotor').addClass('mixerOverrideActive');
                 $('.mixerOverrideAxis .mixerTailRotor').removeClass('mixerOverrideActive');
-                if (change)
+                if (change) {
                     $('.mixerTailMotor .mixerOverrideEnable input').change();
+                    $('#mixerTailRotorCalibration').val(100).change();
+                }
             }
             else {
                 const yawMin = FC.MIXER_INPUTS[3].min * -24/1000;
@@ -347,11 +351,20 @@ TABS.mixer.initialize = function (callback) {
                 $('#mixerTailRotorCenterTrim').val((FC.MIXER_CONFIG.tail_center_trim * 24/1000).toFixed(1));
                 $('.mixerOverrideAxis .mixerTailRotor').addClass('mixerOverrideActive');
                 $('.mixerOverrideAxis .mixerTailMotor').removeClass('mixerOverrideActive');
-                if (change)
+                if (change) {
                     $('.mixerTailRotor .mixerOverrideEnable input').change();
+                    $('#mixerTailRotorCalibration').val(25).change();
+                }
             }
 
             $('.mixerBidirNote').toggle(mode == 2);
+            updateYawCalibrationNote();
+        }
+
+        function updateYawCalibrationNote() {
+            const motorised = FC.MIXER_CONFIG.tail_rotor_mode > 0;
+            const showNote = motorised && getFloatValue('#mixerTailRotorCalibration') !== 100;
+            $('.tab-mixer .mixerMotorisedTailCalibrationNote').toggle(showNote);
         }
 
         $('#mixerTailRotorMode').change(function () {
@@ -362,7 +375,10 @@ TABS.mixer.initialize = function (callback) {
         setTailRotorMode(FC.MIXER_CONFIG.tail_rotor_mode, false);
 
         $('#mixerTailRotorDirection').val(yawDir).change();
-        $('#mixerTailRotorCalibration').val(yawRate).change();
+        $('#mixerTailRotorCalibration')
+            .on('change', updateYawCalibrationNote)
+            .val(yawRate)
+            .change();
         $('#mixerTailMotorIdle').val(FC.MIXER_CONFIG.tail_motor_idle / 10).change();
 
         $('.tab-mixer .mixerReboot').change(function() {

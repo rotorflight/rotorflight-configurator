@@ -234,6 +234,10 @@
     margin-bottom: 0.5em;
 }
 
+.tab-mixer .mixerMotorisedTailCalibrationNote .note {
+    margin: 4px 0 0;
+}
+
 @media all and (max-width: 575px) {
     .tab-mixer dialog {
         width: calc(100% - 2em);
