@@ -2622,6 +2622,9 @@
     "mixerRebootNote": {
         "message": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!"
     },
+    "mixerMotorisedTailCalibrationNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing."
+    },
     "mixerMainRotorSettings": {
         "message": "Main Rotor Settings"
     },
