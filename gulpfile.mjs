@@ -13,7 +13,6 @@ import deb from "gulp-debian";
 import jeditor from "gulp-json-editor";
 import rename from "gulp-rename";
 import replace from "gulp-replace";
-import xmlTransformer from "gulp-xml-transformer";
 import logger from "gulplog";
 import minimist from "minimist";
 import nwbuild from "nw-builder";
@@ -555,17 +554,10 @@ function cordova_packagejson() {
 function cordova_configxml() {
   return gulp
     .src([`${context.appdir}/config.xml`])
-    .pipe(
-      xmlTransformer(
-        [
-          { path: "//xmlns:name", text: pkg.productName },
-          { path: "//xmlns:description", text: pkg.description },
-          { path: "//xmlns:author", text: pkg.author },
-        ],
-        "http://www.w3.org/ns/widgets",
-      ),
-    )
-    .pipe(xmlTransformer([{ path: ".", attr: { version: pkg.version } }]))
+    .pipe(replace("{{name}}", pkg.productName))
+    .pipe(replace("{{description}}", pkg.description))
+    .pipe(replace("{{author}}", pkg.author))
+    .pipe(replace("{{version}}", pkg.version))
     .pipe(gulp.dest(context.appdir));
 }
 
