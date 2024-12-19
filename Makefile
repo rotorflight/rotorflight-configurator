@@ -16,7 +16,7 @@ SEMVER            ?= 0.0.0
 .PHONY: init
 init: ## Install development dependencies
 	pnpm install --frozen-lockfile
-	$(MAKE) fontawesome
+	"$(MAKE)" fontawesome
 
 .PHONY: fontawesome
 fontawesome:
