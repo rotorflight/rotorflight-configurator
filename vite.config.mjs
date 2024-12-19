@@ -45,9 +45,6 @@ export default defineConfig({
     },
   },
   define: {
-    "process.env.NODE_ENV": JSON.stringify(
-      process.env.NODE_ENV || "production",
-    ),
     __APP_VERSION__: JSON.stringify(pkg.version),
     __BACKEND__: JSON.stringify("nwjs"),
     __COMMIT_HASH__: JSON.stringify(commitHash),
