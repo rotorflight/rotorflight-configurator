@@ -359,7 +359,7 @@ jobs:
       uses: android-actions/setup-android@v3
       with:
         cmdline-tools-version: 9123335
-        packages: 'tools platform-tools platforms;android-34'
+        packages: 'tools platform-tools platforms;android-33 build-tools;33.0.2'
 
     - name: Set build variables
       run: |
