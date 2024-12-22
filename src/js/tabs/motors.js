@@ -1,4 +1,5 @@
 import * as noUiSlider from 'nouislider';
+import semver from "semver";
 import wNumb from 'wnumb';
 
 const tab = {

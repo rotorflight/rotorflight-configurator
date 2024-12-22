@@ -36,7 +36,6 @@ dev-server: ## Run development server
 
 .PHONY: dev-client
 dev-client: ## Run development client
-	NW_PRE_ARGS=--load-extension='./node_modules/nw-vue-devtools-prebuilt/extension' \
 	pnpm gulp dev_client
 
 .PHONY: debug

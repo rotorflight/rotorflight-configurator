@@ -29,11 +29,6 @@ i18next.on('initialized', function() {
 
     console.log("i18n initialized, starting Vue framework");
 
-    if (process.env.NODE_ENV === 'development') {
-        console.log("Development mode enabled, installing Vue tools");
-        Vue.config.devtools = true;
-    }
-
     const app = new Vue({
         i18n: vueI18n,
         el: '#main-wrapper',

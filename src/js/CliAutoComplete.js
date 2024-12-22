@@ -1,3 +1,5 @@
+import semver from "semver";
+
 /**
  * Encapsulates the AutoComplete logic
  *

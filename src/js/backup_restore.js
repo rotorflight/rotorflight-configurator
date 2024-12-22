@@ -1,3 +1,5 @@
+import semver from "semver";
+
 // code below is highly experimental, although it runs fine on latest firmware
 // the data inside nested objects needs to be verified if deep copy works properly
 export function configuration_backup(callback) {

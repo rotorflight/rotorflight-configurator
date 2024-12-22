@@ -1,4 +1,5 @@
 import * as marked from 'marked';
+import semver from "semver";
 
 import { GitHubApi } from '@/js/GitHubApi.js';
 import { ReleaseChecker } from '@/js/release_checker.js';
@@ -46,7 +47,7 @@ tab.initialize = function (callback) {
         function parse_hex(str) {
             return new Promise(r => {
                 // parsing hex in different thread
-                var worker = new Worker('/src/js/workers/hex_parser.js');
+                var worker = new Worker(new URL('@/js/workers/hex_parser.js', import.meta.url));
 
                 // "callback"
                 worker.onmessage = function (event) {
