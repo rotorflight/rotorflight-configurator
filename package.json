@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "eslint --fix src",
-    "start": "concurrently --kill-others 'pnpm vite' 'NW_PRE_ARGS=--load-extension=./node_modules/nw-vue-devtools-prebuilt/extension pnpm gulp dev_client'"
+    "start": "concurrently --kill-others 'pnpm vite' 'pnpm gulp dev_client'"
   },
   "window": {
     "icon": "public/images/rf_icon.png",
@@ -80,7 +80,6 @@
     "node-gyp": "^10.2.0",
     "nouislider": "^15.8.1",
     "nw-builder": "4.9.0",
-    "nw-vue-devtools-prebuilt": "^0.0.10",
     "postcss": "^8.4.14",
     "rpm-builder": "^1.2.1",
     "three": "^0.169.0",
