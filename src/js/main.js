@@ -1,3 +1,5 @@
+import semver from "semver";
+
 globalThis.TABS = {};
 
 $(document).ready(function () {

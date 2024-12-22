@@ -1,3 +1,4 @@
+import semver from "semver";
 import { Clock } from "three";
 
 import { Model } from "@/js/model.js";

@@ -1,3 +1,5 @@
+import semver from "semver";
+
 import { Model } from "@/js/model.js";
 
 const tab = {
