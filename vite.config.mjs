@@ -4,7 +4,7 @@ import child_process from "node:child_process";
 import path from "node:path";
 
 import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue2";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
 
 const commitHash = child_process
   .execSync("git rev-parse --short HEAD")
@@ -34,14 +34,10 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vue()],
+  plugins: [svelte()],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),
-      vue: path.resolve(
-        import.meta.dirname,
-        "node_modules/vue/dist/vue.esm.js",
-      ),
     },
   },
   define: {

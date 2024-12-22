@@ -1,12 +1,7 @@
 import i18next from 'i18next';
 import i18nextHttpBackend from 'i18next-http-backend';
 
-const i18n = {};
-
-/*
- * Wrapper around the i18n system
- */
-window.i18n = i18n;
+export const i18n = {};
 
 //const languagesAvailables = [ 'de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'nl', 'pl', 'pt', 'pt_BR', 'zh_CN', 'zh_TW', ];
 const languagesAvailables = [ 'de', 'en', 'fr', 'nl', 'zh_CN', 'zh_TW', ];
@@ -244,5 +239,3 @@ i18n.addResources = function(bundle) {
     const ns = takeFirst(i18next.options.defaultNS);
     i18next.addResourceBundle(lang, ns, bundle, true, true);
 };
-
-export { i18n };

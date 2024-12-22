@@ -1,4 +1,5 @@
 import { MSPConnectorImpl } from '@/js/msp/MSPConnector.js';
+import { portUsage } from "@/js/port_usage.svelte.js";
 
 /*
     STM32 F103 serial bus seems to properly initialize with quite a huge auto-baud range
@@ -796,7 +797,7 @@ STM32_protocol.prototype.upload_procedure = function (step) {
 };
 
 STM32_protocol.prototype.cleanup = function () {
-    PortUsage.reset();
+    portUsage.reset();
 
     // unlocking connect button
     GUI.connect_lock = false;

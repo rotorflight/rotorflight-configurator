@@ -694,7 +694,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 
-.battery-legend {
+#battery-legend {
     display: inline;
     position: relative;
     top: -2px;
@@ -1024,6 +1024,14 @@ input[type="number"]::-webkit-inner-spin-button {
     overflow: auto;
 }
 
+#logo-desktop {
+    display: block;
+}
+
+#logo-mobile {
+    display: none;
+}
+
 #tabs {
     font-size: 13px;
     overflow-x: hidden;
@@ -1124,6 +1132,14 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /** Tabs (phones) **/
 @media all and (max-width: 575px) {
+    #logo-desktop {
+        display: none;
+    }
+
+    #logo-mobile {
+        display: block;
+    }
+
     .tab_container {
         position: fixed;
         z-index: 2000;
@@ -1511,26 +1527,8 @@ li.active .ic_mission {
 /** Status bar **/
 #status-bar {
     position: fixed;
-    display: flex;
-    flex-wrap: wrap;
     bottom: 0;
     width: 100%;
-    height: 20px;
-    line-height: 20px;
-    border-top: 1px solid #7d7d79;
-    background-color: #bfbeb5;
-}
-
-#status-bar .gap {
-    flex-grow: 1;
-}
-
-#status-bar > span {
-    padding: 0 12px;
-}
-
-#status-bar > span + span {
-    border-left: 1px solid #7d7d79;
 }
 
 /** Status bar (phones) **/

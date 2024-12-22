@@ -1,3 +1,5 @@
+import { mount } from "svelte";
+
 import { Beepers } from "@/js/Beepers.js";
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import { Clipboard } from "@/js/Clipboard.js";
@@ -13,17 +15,18 @@ import { VirtualFC } from "@/js/VirtualFC.js";
 import * as backupRestore from "@/js/backup_restore.js";
 import * as dataStorage from "@/js/data_storage.js";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
-import { FC } from "@/js/fc.js";
+import { FC } from "@/js/fc.svelte.js";
 import { GuiControl } from "@/js/gui.js";
 import { getTabHelpURL } from "@/js/help.js";
 import { huffmanDecodeBuf } from "@/js/huffman.js";
+import { i18n } from "@/js/localization.js";
 import * as main from "@/js/main.js";
-import { MSP } from "@/js/msp.js";
+import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes";
 import { MspHelper } from "@/js/msp/MSPHelper.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
 import { PortHandler, usbDevices } from "@/js/port_handler.js";
-import { PortUsage } from "@/js/port_usage.js";
+import { portUsage } from "@/js/port_usage.svelte.js";
 import { STM32 } from "@/js/protocols/stm32.js";
 import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
 import { ReleaseChecker } from "@/js/release_checker.js";
@@ -31,13 +34,16 @@ import { serial } from "@/js/serial.js";
 import * as serialBackend from "@/js/serial_backend.js";
 import * as utilsCommon from "@/js/utils/common.js";
 
-import "@/components/init.js";
 import "@/js/filesystem.js";
 import "@/js/injected_methods.js";
 import "@/js/tabs/index.js";
 
 import "nouislider/dist/nouislider.css";
 import "@/css/slider.css";
+
+import BatteryLegend from "@/components/BatteryLegend.svelte";
+import Logo from "@/components/Logo.svelte";
+import StatusBar from "@/components/StatusBar.svelte";
 
 globalThis.GUI = new GuiControl();
 
@@ -64,7 +70,6 @@ Object.assign(globalThis, {
   Mixer,
   MspHelper,
   PortHandler,
-  PortUsage,
   RPMFilter,
   RateCurve,
   RateCurve2,
@@ -75,12 +80,19 @@ Object.assign(globalThis, {
   VirtualFC,
   getTabHelpURL,
   huffmanDecodeBuf,
+  i18n,
+  portUsage,
   serial,
   usbDevices,
 });
 
 CONFIGURATOR.version = __APP_VERSION__;
 CONFIGURATOR.gitChangesetId = __COMMIT_HASH__;
+
+mount(BatteryLegend, { target: document.querySelector("#battery-legend") });
+mount(StatusBar, { target: document.querySelector("#status-bar") });
+mount(Logo, { target: document.querySelector("#logo-desktop") });
+mount(Logo, { target: document.querySelector("#logo-mobile") });
 
 if (__BACKEND__ === "nwjs") {
   Clipboard._configureClipboardAsNwJs(GUI.nwGui);
