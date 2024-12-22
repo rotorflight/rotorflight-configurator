@@ -1,3 +1,5 @@
+import semver from "semver";
+
 const tab = {
     tabName: 'profiles',
     isDirty: false,

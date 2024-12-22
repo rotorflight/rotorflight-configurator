@@ -1,4 +1,5 @@
 import * as marked from 'marked';
+import semver from "semver";
 
 import { GitHubApi } from '@/js/GitHubApi.js';
 import { ReleaseChecker } from '@/js/release_checker.js';

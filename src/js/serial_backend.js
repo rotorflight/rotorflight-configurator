@@ -1,3 +1,5 @@
+import semver from "semver";
+
 let connectionTimestamp;
 
 export function initializeSerialBackend() {
