@@ -1,10 +1,10 @@
 import semver from "semver";
 
-function microtime() {
+export function microtime() {
     return new Date().getTime() / 1000;
 }
 
-function millitime() {
+export function millitime() {
     return new Date().getTime();
 }
 
@@ -14,7 +14,7 @@ export function degToRad(degrees) {
     return degrees * DEGREE_TO_RADIAN_RATIO;
 }
 
-function bytesToSize(bytes) {
+export function bytesToSize(bytes) {
 
     let outputBytes;
 

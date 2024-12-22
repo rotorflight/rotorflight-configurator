@@ -545,7 +545,6 @@ export const FC = {
             absoluteControlGain:        0,
             throttleBoost:              0,
             levelAngleStrength:         0,
-            levelAngleLimit:            0,
             horizonLevelStrength:       0,
             acroTrainerAngleLimit:      0,
             acroTrainerLimit:           0,
@@ -604,7 +603,6 @@ export const FC = {
 
         this.GOVERNOR = {
             gov_mode:                       0,
-            gov_startup_time:               0,
             gov_startup_time:               0,
             gov_spoolup_time:               0,
             gov_tracking_time:              0,
@@ -760,10 +758,6 @@ export const FC = {
     },
 
     getSerialRxTypes: () => {
-        const apiVersion = FC.CONFIG.apiVersion;
-        const flightControllerIdentifier = FC.CONFIG.flightControllerIdentifier;
-        const flightControllerVersion = FC.CONFIG.flightControllerVersion;
-
         // defaults
         const serialRxTypes = [
             'SPEKTRUM1024',

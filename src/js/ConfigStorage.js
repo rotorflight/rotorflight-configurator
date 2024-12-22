@@ -8,7 +8,7 @@ export const ConfigStorage = {
             key.forEach(function (element) {
                 try {
                     obj = {...obj, ...JSON.parse(window.localStorage.getItem(element))};
-                } catch (e) {
+                } catch {
                     // is okay
                 }
             });
@@ -19,7 +19,7 @@ export const ConfigStorage = {
                 let obj = {};
                 try {
                     obj = JSON.parse(keyValue);
-                } catch (e) {
+                } catch {
                     // It's fine if we fail that parse
                 }
                 callback(obj);
