@@ -6,8 +6,8 @@
   "main": "http://localhost:5077/src/main.html",
   "node-remote": "http://localhost:*",
   "scripts": {
-    "lint": "eslint --ext .js,.vue src",
-    "lint:fix": "eslint --fix src",
+    "lint": "eslint src \"./*.mjs\"",
+    "lint:fix": "eslint --fix src \"./*.mjs\"",
     "start": "concurrently --kill-others 'pnpm vite' 'pnpm gulp dev_client'"
   },
   "window": {
@@ -52,6 +52,7 @@
     "switchery-latest": "^0.8.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@panter/vue-i18next": "^0.15.2",
     "@quanle94/innosetup": "^6.0.2",
@@ -60,9 +61,9 @@
     "concurrently": "^9.1.0",
     "cordova-lib": "^12.0.0",
     "d3": "^7.9.0",
-    "eslint": "^8.18.0",
-    "eslint-plugin-vue": "^7.3.0",
+    "eslint": "^9.17.0",
     "glob": "^11.0.0",
+    "globals": "^15.14.0",
     "gulp": "^4.0.2",
     "gulp-concat": "~2.6.1",
     "gulp-debian": "^0.1.9",
