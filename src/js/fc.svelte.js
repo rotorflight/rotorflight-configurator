@@ -76,7 +76,7 @@ const INITIAL_BATTERY_STATE = {
     chargeLevel:                0,
 };
 
-export const FC = {
+export const FC = $state({
 
     // define all the global variables that are uses to hold FC state
     // the default state must be defined inside the resetState() method
@@ -873,4 +873,4 @@ export const FC = {
             50, 50,  0,  0,
         ];
     },
-};
+});

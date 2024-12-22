@@ -42,7 +42,7 @@
 
     <link type="text/css" rel="stylesheet" href="/src/css/dark-theme.css" media="all" />
 
-    <script type="module" src="/src/js/main_esm.js"></script>
+    <script type="module" src="/src/js/main.svelte.js"></script>
     <script type="text/javascript" src="/node_modules/lru_map/lru.js"></script>
     <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/node_modules/jbox/dist/jBox.min.js"></script>
@@ -65,12 +65,7 @@
         <div id="menu_btn">
             <em class="fas fa-bars"></em>
         </div>
-        <betaflight-logo
-            :configurator-version="CONFIGURATOR.version"
-            :firmware-version="FC.CONFIG.buildVersion"
-            :firmware-id="FC.CONFIG.flightControllerIdentifier"
-            :hardware-id="FC.CONFIG.hardwareName"
-        ></betaflight-logo>
+        <div id="logo-desktop"></div>
         <div id="port-picker">
             <div id="port-override-option">
                 <label for="port-override">
@@ -132,10 +127,7 @@
                         <div class="battery-status"></div>
                     </div>
                 </div>
-                <battery-legend
-                    :voltage="FC.BATTERY_STATE.voltage"
-                    :cellcount="FC.BATTERY_STATE.cellCount"
-                ></battery-legend>
+                <div id="battery-legend"></div>
                 <div class="bottomStatusIcons">
                     <div class="armedicon cf_tip" i18n_title="mainHelpArmed"></div>
                     <div class="failsafeicon cf_tip" i18n_title="mainHelpFailsafe"></div>
@@ -206,12 +198,7 @@
     </div>
     <div id="tab-content-container">
         <div class="tab_container">
-            <betaflight-logo
-                :configurator-version="CONFIGURATOR.version"
-                :firmware-version="FC.CONFIG.buildVersion"
-                :firmware-id="FC.CONFIG.flightControllerIdentifier"
-                :hardware-id="FC.CONFIG.hardwareName"
-            ></betaflight-logo>
+            <div id="logo-mobile"></div>
             <div id="tabs">
                 <ul class="mode-disconnected">
                     <li class="tab_landing" id="tab_landing"><a href="#" i18n="tabLanding" class="tabicon ic_welcome" i18n_title="tabLanding"></a></li>
@@ -257,18 +244,7 @@
         </div>
         <div id="content"></div>
     </div>
-    <status-bar
-            :port-usage-down="PortUsage.port_usage_down"
-            :port-usage-up="PortUsage.port_usage_up"
-            :packet-error="MSP.packet_error"
-            :pid-cycle-time="FC.CONFIG.pidCycleTime"
-            :gyro-cycle-time="FC.CONFIG.gyroCycleTime"
-            :rt-load="FC.CONFIG.rtLoad"
-            :cpu-load="FC.CONFIG.cpuLoad"
-            :configurator-version="CONFIGURATOR.version"
-            :firmware-version="FC.CONFIG.buildVersion"
-            :firmware-id="FC.CONFIG.flightControllerIdentifier"
-    ></status-bar>
+    <div id="status-bar"></div>
     <div id="cache">
         <div class="data-loading">
             <p>Waiting for data ...</p>
