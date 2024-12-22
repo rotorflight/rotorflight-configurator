@@ -1,5 +1,3 @@
-'use strict';
-
 // input = string
 // result = if hex file is valid, result is an object
 //          if hex file wasn't valid (crc check failed on any of the lines), result will be false
