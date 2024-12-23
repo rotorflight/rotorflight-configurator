@@ -654,7 +654,6 @@ function release_deb(arch, appDirectory, done) {
                 `xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${pkg.name}/${pkg.name}.desktop`,
             ],
             prerm: [`xdg-desktop-menu uninstall ${pkg.name}.desktop`],
-            depends: 'libgconf-2-4',
             changelog: [],
             _target: `${LINUX_INSTALL_DIR}/${pkg.name}`,
             _out: RELEASE_DIR,
@@ -683,7 +682,6 @@ function release_rpm(arch, appDirectory, done) {
             vendor: pkg.author,
             summary: pkg.description,
             license: 'GNU General Public License v3.0',
-            requires: 'libgconf-2-4',
             prefix: '/opt',
             files: [{
                 cwd: path.join(appDirectory, pkg.name, arch),
