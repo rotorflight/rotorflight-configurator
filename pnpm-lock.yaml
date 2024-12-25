@@ -103,9 +103,6 @@ importers:
       minimist:
         specifier: ^1.2.8
         version: 1.2.8
-      node-gyp:
-        specifier: ^10.2.0
-        version: 10.2.0
       nouislider:
         specifier: ^15.8.1
         version: 15.8.1
