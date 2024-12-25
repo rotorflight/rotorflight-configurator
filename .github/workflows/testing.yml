@@ -44,6 +44,9 @@ jobs:
     - name: ESLint
       run: pnpm lint
 
+    - name: Prettier
+      run: pnpm exec prettier --check .
+
   linux:
 
     runs-on: ubuntu-latest
