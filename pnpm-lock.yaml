@@ -121,6 +121,9 @@ importers:
       postcss:
         specifier: ^8.4.14
         version: 8.4.47
+      prettier:
+        specifier: ^3.4.2
+        version: 3.4.2
       rpm-builder:
         specifier: ^1.2.1
         version: 1.2.1
@@ -3330,6 +3333,11 @@ packages:
   prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
+    hasBin: true
+
+  prettier@3.4.2:
+    resolution: {integrity: sha512-e9MewbtFo+Fevyuxn/4rrcDAaq0IYxPGLvObpQjiZBMAzB9IGmzlnG9RZy3FFas+eBMu2vA0CszMeduow5dIuQ==}
+    engines: {node: '>=14'}
     hasBin: true
 
   pretty-hrtime@1.0.3:
@@ -7911,6 +7919,8 @@ snapshots:
 
   prettier@2.8.8:
     optional: true
+
+  prettier@3.4.2: {}
 
   pretty-hrtime@1.0.3: {}
 

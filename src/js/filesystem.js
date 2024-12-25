@@ -29,7 +29,7 @@ const cordova = {
       const content = await new Promise((resolve, reject) => {
         var reader = new FileReader();
 
-        reader.onload = function() {
+        reader.onload = function () {
           resolve(this.result);
         };
 
@@ -104,7 +104,9 @@ const cordova = {
       const entry = await this._getFileEntry(opts);
       if (!entry) return;
 
-      const writer = await new Promise((resolve) => entry.createWriter(resolve));
+      const writer = await new Promise((resolve) =>
+        entry.createWriter(resolve),
+      );
 
       let resolve = null;
       let reject = null;
@@ -177,7 +179,9 @@ const web = {
         types: [
           {
             description: opts.description,
-            accept: { [opts.mimeType]: `.${getFileExtension(opts.suggestedName)}` },
+            accept: {
+              [opts.mimeType]: `.${getFileExtension(opts.suggestedName)}`,
+            },
           },
         ],
       });
@@ -188,7 +192,10 @@ const web = {
   },
 
   async writeTextFile(text, opts) {
-    const writer = await this.getWriteStream({ ...opts, mimeType: "text/plain" });
+    const writer = await this.getWriteStream({
+      ...opts,
+      mimeType: "text/plain",
+    });
     if (!writer) return;
 
     try {

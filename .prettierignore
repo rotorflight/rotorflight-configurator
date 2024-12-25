@@ -1,0 +1,12 @@
+# Ignore all files
+
+*
+
+# Only format allowed files
+
+!/*.mjs
+
+!/src/**/
+!/src/js/Features.js
+!/src/js/main_esm.js
+!/src/js/filesystem.js
