@@ -1,4 +1,5 @@
-import { readTextFile, writeTextFile } from '@/js/filesystem.js';
+import * as clipboard from "@/js/clipboard.js";
+import * as filesystem from '@/js/filesystem.js';
 
 const tab = {
     tabName: 'cli',
@@ -48,8 +49,9 @@ function getCliCommand(command, cliBuffer) {
     return commandWithBackSpaces(command, buffer, noOfCharsToDelete);
 }
 
-function copyToClipboard(text) {
-    function onCopySuccessful() {
+async function copyToClipboard(text) {
+    try {
+        await clipboard.writeText(text);
         const button = tab.GUI.copyButton;
         const origText = button.text();
         const origWidth = button.css("width");
@@ -65,13 +67,9 @@ function copyToClipboard(text) {
                 textAlign: "",
             });
         }, 1500);
+    } catch (err) {
+        console.warn(err);
     }
-
-    function onCopyFailed(ex) {
-        console.warn(ex);
-    }
-
-    Clipboard.writeText(text, onCopySuccessful, onCopyFailed);
 }
 
 tab.initialize = function (callback) {
@@ -132,7 +130,7 @@ tab.initialize = function (callback) {
             const suffix = 'txt';
 
             try {
-              await writeTextFile(self.outputHistory, {
+              await filesystem.writeTextFile(self.outputHistory, {
                   suggestedName: generateFilename(prefix, suffix),
                   description: `${suffix.toUpperCase()} files`,
               });
@@ -146,13 +144,9 @@ tab.initialize = function (callback) {
             self.GUI.windowWrapper.empty();
         });
 
-        if (Clipboard.available) {
-            self.GUI.copyButton.click(function() {
-                copyToClipboard(self.outputHistory);
-            });
-        } else {
-            self.GUI.copyButton.hide();
-        }
+        self.GUI.copyButton.click(function() {
+            copyToClipboard(self.outputHistory);
+        });
 
         $('.tab-cli .load').on('click', async function() {
             const previewArea = $("#snippetpreviewcontent textarea#preview");
@@ -184,7 +178,7 @@ tab.initialize = function (callback) {
             }
 
             try {
-                const file = await readTextFile({
+                const file = await filesystem.readTextFile({
                     description: "Config files",
                     extensions: [".txt", ".config"],
                 });
