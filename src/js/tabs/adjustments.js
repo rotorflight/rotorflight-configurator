@@ -146,7 +146,7 @@ tab.initialize = function (callback) {
         return 100 / ((max - min) / width);
     }
 
-    function calcAdjValue(adjRange, adjConfig) {
+    function calcAdjValue(adjRange) {
         const result = { active: false, value: 0, string: '-' };
         if (adjRange.adjType == 1) {
             if (adjRange.enaChannel == self.ALWAYS_ON_CH || isWithin(adjRange.enaChannelPos, adjRange.enaRange)) {

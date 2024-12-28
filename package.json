@@ -6,9 +6,10 @@
   "main": "http://localhost:5077/src/main.html",
   "node-remote": "http://localhost:*",
   "scripts": {
-    "lint": "eslint --ext .js,.vue src",
-    "lint:fix": "eslint --fix src",
-    "start": "concurrently --kill-others 'pnpm vite' 'pnpm gulp dev_client'"
+    "lint": "eslint src \"./*.mjs\"",
+    "lint:fix": "eslint --fix src \"./*.mjs\"",
+    "start": "concurrently --kill-others 'pnpm vite' 'pnpm gulp dev_client'",
+    "prepare": "husky || true"
   },
   "window": {
     "icon": "public/images/rf_icon.png",
@@ -52,6 +53,7 @@
     "switchery-latest": "^0.8.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@panter/vue-i18next": "^0.15.2",
     "@quanle94/innosetup": "^6.0.2",
@@ -60,9 +62,9 @@
     "concurrently": "^9.1.0",
     "cordova-lib": "^12.0.0",
     "d3": "^7.9.0",
-    "eslint": "^8.18.0",
-    "eslint-plugin-vue": "^7.3.0",
+    "eslint": "^9.17.0",
     "glob": "^11.0.0",
+    "globals": "^15.14.0",
     "gulp": "^4.0.2",
     "gulp-concat": "~2.6.1",
     "gulp-debian": "^0.1.9",
@@ -70,13 +72,16 @@
     "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.1.3",
     "gulplog": "^2.2.0",
+    "husky": "^9.1.7",
     "i18next": "^23.15.1",
     "i18next-http-backend": "^2.6.1",
+    "lint-staged": "^15.2.11",
     "marked": "^15.0.3",
     "minimist": "^1.2.8",
     "nouislider": "^15.8.1",
     "nw-builder": "4.9.0",
     "postcss": "^8.4.14",
+    "prettier": "^3.4.2",
     "rpm-builder": "^1.2.1",
     "semver": "^7.6.3",
     "three": "^0.169.0",
