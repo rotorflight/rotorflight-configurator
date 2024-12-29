@@ -1018,6 +1018,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.FILTER_CONFIG.dyn_notch_q = data.readU8();
                 FC.FILTER_CONFIG.dyn_notch_min_hz = data.readU16();
                 FC.FILTER_CONFIG.dyn_notch_max_hz = data.readU16();
+                if (data.remaining() >= 2) {
+                    FC.FILTER_CONFIG.rpm_preset = data.readU8();
+                    FC.FILTER_CONFIG.rpm_min_hz = data.readU8();
+                }
                 break;
             }
 
@@ -1033,6 +1037,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                         });
                     }
                 }
+                break;
+            }
+
+            case MSPCodes.MSP_RPM_FILTER_V2: {
                 break;
             }
 
@@ -1966,7 +1974,10 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.FILTER_CONFIG.dyn_notch_count)
                 .push8(FC.FILTER_CONFIG.dyn_notch_q)
                 .push16(FC.FILTER_CONFIG.dyn_notch_min_hz)
-                .push16(FC.FILTER_CONFIG.dyn_notch_max_hz);
+                .push16(FC.FILTER_CONFIG.dyn_notch_max_hz)
+                .push8(FC.FILTER_CONFIG.rpm_preset)
+                .push8(FC.FILTER_CONFIG.rpm_min_hz);
+
             break;
         }
 
@@ -2242,33 +2253,42 @@ MspHelper.prototype.dataflashRead = function(address, blockSize, onDataCallback)
     }, true);
 };
 
-MspHelper.prototype.sendRPMFilter = function(filterIndex, onCompleteCallback)
+MspHelper.prototype.sendRPMFilters = async function()
 {
-    const CONFIG = FC.RPM_FILTER_CONFIG[filterIndex];
-    const buffer = [];
+    for (let i = 0; i < FC.RPM_FILTER_CONFIG.length; i++) {
+        const notch = FC.RPM_FILTER_CONFIG[i];
+        const buffer = [];
 
-    buffer.push8(filterIndex)
-          .push8(CONFIG.rpm_source)
-          .push16(CONFIG.rpm_ratio)
-          .push16(CONFIG.rpm_limit)
-          .push8(CONFIG.notch_q);
+        buffer.push8(i)
+              .push8(notch.rpm_source)
+              .push16(notch.rpm_ratio)
+              .push16(notch.rpm_limit)
+              .push8(notch.notch_q);
 
-    MSP.send_message(MSPCodes.MSP_SET_RPM_FILTER, buffer, false, onCompleteCallback);
+        await MSP.promise(MSPCodes.MSP_SET_RPM_FILTER, buffer);
+    }
 };
 
-MspHelper.prototype.sendRPMFilters = function(onCompleteCallback)
+MspHelper.prototype.sendRPMFiltersV2 = async function()
 {
-    const self = this;
-    var index = 0;
+    for (let axisIndex = 0; axisIndex < FC.RPM_FILTER_CONFIG_V2.length; axisIndex++) {
+        const axis = FC.RPM_FILTER_CONFIG[axisIndex];
+        const buffer = [];
 
-    function send_next() {
-        if (index < FC.RPM_FILTER_CONFIG.length)
-            self.sendRPMFilter(index++, send_next);
-        else
-            if (onCompleteCallback) onCompleteCallback();
+        buffer.push8(axisIndex);
+
+        for (let notchIndex = 0; notchIndex < axis.length; notchIndex++) {
+            const notch = axis[notchIndex];
+
+            buffer.push8(notch.rpm_source)
+            .push16(notch.notch_center)
+            .push8(notch.notch_q);
+        }
+
+        await MSP.promise(MSPCodes.MSP_SET_RPM_FILTER_V2, buffer);
     }
 
-    send_next();
+    return;
 };
 
 MspHelper.prototype.resetMotorOverrides = async function() {
@@ -2763,4 +2783,28 @@ MspHelper.prototype.setArmingEnabled = function(doEnable, onCompleteCallback)
     else {
         onCompleteCallback?.();
     }
+};
+
+MspHelper.prototype.requestRpmFilterBanks = async function()
+{
+    const banks = [];
+    for (let i = 0; i < 3; i++) {
+        const bank = [];
+        banks.push(bank);
+        const { data } = await MSP.promise(MSPCodes.MSP_RPM_FILTER_V2, [i]);
+
+        if (data.byteLength % 4 !== 0) {
+            return;
+        }
+
+        while (data.remaining()) {
+            bank.push({
+                rpm_source: data.readU8(),
+                notch_center: data.read16(),
+                notch_q: data.readU8(),
+            });
+        }
+    }
+
+    FC.RPM_FILTER_CONFIG_V2 = banks;
 };

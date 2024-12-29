@@ -1,0 +1,73 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+select,
+input {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 2px;
+
+  &:focus {
+    outline: none;
+  }
+
+  :global(html[data-theme="light"]) & {
+    color: var(--color-neutral-900);
+    background: var(--color-neutral-50);
+    border-color: var(--color-neutral-400);
+
+    &:focus {
+      border-color: var(--color-accent-500);
+    }
+
+    &:disabled {
+      color: var(--color-neutral-500);
+      background: var(--color-neutral-200);
+    }
+  }
+
+  :global(html[data-theme="dark"]) & {
+    color: var(--color-neutral-100);
+    background: var(--color-neutral-800);
+    border-color: var(--color-neutral-700);
+
+    &:focus {
+      border-color: var(--color-accent-400);
+    }
+
+    &:disabled {
+      color: var(--color-neutral-500);
+      background: var(--color-neutral-700);
+    }
+  }
+}
+
+input {
+  line-height: 1.5rem;
+
+  &[type="number"] {
+    text-align: right;
+    padding-right: 0;
+    width: 80px;
+  }
+}
+
+select {
+  height: 1.5rem;
+  min-width: 120px;
+}
+
+@media only screen and (max-width: 480px) {
+  select,
+  input {
+    height: 2rem;
+    line-height: 2rem;
+  }
+
+  input {
+    font-size: 1rem !important;
+  }
+}

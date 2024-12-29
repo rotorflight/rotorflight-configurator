@@ -1,8 +1,12 @@
+import semver from "semver";
+import { mount } from "svelte";
+
+import RpmFilter from "@/components/gyro/RpmFilter.svelte";
+
 const tab = {
     tabName: 'gyro',
     isDirty: false,
     rpmFilterDirty: false,
-    rpmFilterType: 0,
     FILTER_TYPE_NAMES: [
         { id: 1, name: "1ˢᵗ order", visible: true },
         { id: 2, name: "2ⁿᵈ order", visible: true },
@@ -14,10 +18,6 @@ const tab = {
         { id: 8, name: "Bessel", visible: false },
         { id: 9, name: "Damped", visible: false },
     ],
-    RPM_FILTER_TYPES: [
-        { id: 1, name: "SINGLE", visible: true },
-        { id: 2, name: "DOUBLE", visible: true },
-    ],
 };
 
 tab.initialize = function (callback) {
@@ -25,55 +25,45 @@ tab.initialize = function (callback) {
 
     const FILTER_DEFAULT = FC.getFilterDefaults();
 
-    load_data(load_html);
+    load_data().then(load_html);
 
     function load_html() {
         $('#content').load("/src/tabs/gyro.html", process_html);
     }
 
-    function load_data(callback) {
-        MSP.promise(MSPCodes.MSP_STATUS)
-            .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
-            .then(() => MSP.promise(MSPCodes.MSP_FILTER_CONFIG))
-            .then(() => MSP.promise(MSPCodes.MSP_MOTOR_CONFIG))
-            .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
-            .then(() => MSP.promise(MSPCodes.MSP_RPM_FILTER))
-            .then(callback);
+    async function load_data() {
+        await MSP.promise(MSPCodes.MSP_STATUS);
+        await MSP.promise(MSPCodes.MSP_FEATURE_CONFIG);
+        await MSP.promise(MSPCodes.MSP_FILTER_CONFIG);
+        await MSP.promise(MSPCodes.MSP_MOTOR_CONFIG);
+        await MSP.promise(MSPCodes.MSP_MIXER_CONFIG);
+
+        if (semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)) {
+            await mspHelper.requestRpmFilterBanks();
+        } else {
+            await MSP.promise(MSPCodes.MSP_RPM_FILTER);
+        }
     }
 
-    function save_data(callback) {
-        function save_rpm_filter() {
-            if (self.rpmFilterDirty)
-                mspHelper.sendRPMFilters(save_gyro_filter);
-            else
-                save_gyro_filter();
+    async function save_data() {
+        await MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG));
+        await MSP.promise(MSPCodes.MSP_SET_FILTER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FILTER_CONFIG));
+        if (self.rpmFilterDirty) {
+            if (semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)) {
+                await mspHelper.sendRPMFiltersV2();
+            } else {
+                await mspHelper.sendRPMFilters();
+            }
         }
-        function save_gyro_filter() {
-            Promise.resolve(true)
-                .then(() => MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG)))
-                .then(() => MSP.promise(MSPCodes.MSP_SET_FILTER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FILTER_CONFIG)))
-                .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
-                .then(() => {
-                    GUI.log(i18n.getMessage('eepromSaved'));
-                    MSP.send_message(MSPCodes.MSP_SET_REBOOT);
-                    GUI.log(i18n.getMessage('deviceRebooting'));
-                    reinitialiseConnection(callback);
-                });
-        }
-        save_rpm_filter();
+
+        await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
+        GUI.log(i18n.getMessage('eepromSaved'));
+        MSP.send_message(MSPCodes.MSP_SET_REBOOT);
+        GUI.log(i18n.getMessage('deviceRebooting'));
+        reinitialiseConnection(callback);
     };
 
     function data_to_form() {
-
-        function populateSelectorClass(name, values) {
-            $('select.' + name).each(function () {
-                const select = $(this);
-                values.forEach(function(iter) {
-                    if (iter.visible)
-                        select.append('<option value="' + iter.id + '">' + iter.name + '</option>');
-                });
-            });
-        }
 
         function populateSelectorName(name, values, current) {
             const select = $(`select[name="${name}"]`);
@@ -232,145 +222,6 @@ tab.initialize = function (callback) {
         })
         .prop('checked', FC.FEATURE_CONFIG.features.isEnabled('DYN_NOTCH'))
         .change();
-
-
-    //// RPM Filter Config
-
-        populateSelectorClass('rpmFilterTypes', self.RPM_FILTER_TYPES);
-
-        const rpmFeatureEnabled = FC.FEATURE_CONFIG.features.isEnabled('RPM_FILTER');
-        const rpmFilterEnabled = rpmFeatureEnabled && self.rpmFilter.type != RPMFilter.DISABLED;
-
-        self.rpmFilterType = self.rpmFilter.type;
-
-        $('select[id="gyroRpmFilterSetupType"] option[value="3"]').attr('hidden', self.rpmFilterType != RPMFilter.CUSTOM);
-
-        const enableElem = $('input[id="gyroRpmFilterEnable"]');
-        const typeElem = $('select[id="gyroRpmFilterSetupType"]');
-
-        function rpmFilterVisibility() {
-            const typeval = self.rpmFilterType;
-            const enabled = enableElem.is(':checked');
-            const advanced = enabled && (typeval == RPMFilter.ADVANCED);
-            const custom = (typeval == RPMFilter.CUSTOM);
-            $('.rpm_filter_settings').toggle(advanced);
-            $('.rpm_filter_notches').toggle(advanced);
-            $('.rpm_filter_active').attr('disabled', !enabled);
-            $('.gyroRpmFilterConfigNoteRow').toggle(enabled);
-            $('.gyroRpmFilterCustomNoteRow').toggle(custom);
-        }
-
-        $('.dialogGyroReset-acceptbtn').click(function() {
-            $('.dialogGyroReset')[0].close();
-            self.rpmFilterType = typeElem.val();
-            rpmFilterVisibility();
-        });
-        $('.dialogGyroReset-revertbtn').click(function() {
-            $('.dialogGyroReset')[0].close();
-            typeElem.val(self.rpmFilterType);
-            rpmFilterVisibility();
-        });
-
-        enableElem.change(function () {
-            const enabled = enableElem.is(':checked');
-            if (enabled && self.rpmFilterType == RPMFilter.DISABLED)
-                typeElem.val(RPMFilter.ADVANCED).change();
-            rpmFilterVisibility();
-        });
-
-        enableElem.prop('checked', rpmFilterEnabled).change();
-
-        typeElem.change(function () {
-            const typeval = typeElem.val();
-            if (self.rpmFilterType == RPMFilter.CUSTOM && typeval != RPMFilter.CUSTOM)
-                $('.dialogGyroReset')[0].showModal();
-            else
-                self.rpmFilterType = typeval;
-            rpmFilterVisibility();
-        });
-
-        typeElem.val(self.rpmFilter.type);
-
-        let mainMinRPM = (self.rpmFilter.mainRotor[0].rpm_limit > 50) ?
-                         self.rpmFilter.mainRotor[0].rpm_limit : 1000;
-
-        let tailMinRPM = (self.rpmFilter.tailRotor[0].rpm_limit > 50) ?
-                         self.rpmFilter.tailRotor[0].rpm_limit : 2000;
-
-        $('input[id="gyroRpmFilterMainRotorMinRPM"]').val(mainMinRPM);
-        $('input[id="gyroRpmFilterTailRotorMinRPM"]').val(tailMinRPM);
-
-        const mainMotorGroupActive =
-            (FC.MOTOR_CONFIG.main_rotor_gear_ratio[0] != 1 || FC.MOTOR_CONFIG.main_rotor_gear_ratio[1] != 1);
-        const tailMotorGroupActive = (FC.MIXER_CONFIG.tail_rotor_mode > 0 &&
-            (FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0] != 1 || FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1] != 1));
-
-        $('.gyroRpmFilterMainMotorGroup').toggle(mainMotorGroupActive);
-        $('.gyroRpmFilterTailMotorGroup').toggle(tailMotorGroupActive);
-
-        function process_single_notch(rotor, harm, conf, active=true) {
-            const switchy = $(`input[id="gyroRpmFilter${rotor}S${harm}"]`);
-            const quality = $(`input[id="gyroRpmFilter${rotor}Q${harm}"]`);
-
-            if (active) {
-                switchy.change(function() {
-                    const checked = $(this).is(':checked');
-                    quality.attr('disabled', !checked);
-                });
-                quality.val(conf.notch_q).change();
-                switchy.prop('checked', conf.count > 0).change();
-            }
-            else {
-                switchy.prop('checked', false);
-                quality.val(0);
-            }
-        }
-
-        function process_double_notch(rotor, harm, conf, active=true) {
-            const switchy = $(`input[id="gyroRpmFilter${rotor}S${harm}"]`);
-            const quality = $(`input[id="gyroRpmFilter${rotor}Q${harm}"]`);
-            const notschy = $(`select[id="gyroRpmFilter${rotor}N${harm}"]`);
-
-            if (active) {
-                switchy.change(function() {
-                    const checked = $(this).is(':checked');
-                    quality.attr('disabled', !checked);
-                    notschy.attr('disabled', !checked);
-                    if (!checked) {
-                        notschy.val(0);
-                    } else {
-                        if (conf.count)
-                            notschy.val(conf.count);
-                        else
-                            notschy.val(1);
-                    }
-                });
-                quality.val(conf.notch_q).change();
-                switchy.prop('checked', conf.count > 0).change();
-            }
-            else {
-                switchy.prop('checked', false);
-                notschy.val(0);
-                quality.val(0);
-            }
-        }
-
-        process_double_notch('MainRotor', 1, self.rpmFilter.mainRotor[0]);
-        process_double_notch('MainRotor', 2, self.rpmFilter.mainRotor[1]);
-        process_single_notch('MainRotor', 3, self.rpmFilter.mainRotor[2]);
-        process_single_notch('MainRotor', 4, self.rpmFilter.mainRotor[3]);
-        process_single_notch('MainRotor', 5, self.rpmFilter.mainRotor[4]);
-        process_single_notch('MainRotor', 6, self.rpmFilter.mainRotor[5]);
-        process_single_notch('MainRotor', 7, self.rpmFilter.mainRotor[6]);
-        process_single_notch('MainRotor', 8, self.rpmFilter.mainRotor[7]);
-
-        process_double_notch('TailRotor', 1, self.rpmFilter.tailRotor[0]);
-        process_double_notch('TailRotor', 2, self.rpmFilter.tailRotor[1]);
-        process_single_notch('TailRotor', 3, self.rpmFilter.tailRotor[2]);
-        process_single_notch('TailRotor', 4, self.rpmFilter.tailRotor[3]);
-
-        process_single_notch('MainMotor', 1, self.rpmFilter.mainMotor[0], mainMotorGroupActive);
-        process_single_notch('TailMotor', 1, self.rpmFilter.tailMotor[0], tailMotorGroupActive);
     }
 
     function form_to_data() {
@@ -426,82 +277,28 @@ tab.initialize = function (callback) {
         const dynNotchEnabled = $('input[id="dynamicNotchEnabled"]').is(':checked') &&
             FC.FILTER_CONFIG.dyn_notch_count > 0;
         FC.FEATURE_CONFIG.features.setFeature('DYN_NOTCH', dynNotchEnabled);
-
-
-    //// RPM Filter Config
-
-        const rpmFilterEnabled = $('input[id="gyroRpmFilterEnable"]').is(':checked');
-
-        FC.FEATURE_CONFIG.features.setFeature('RPM_FILTER', rpmFilterEnabled);
-
-        self.rpmFilter.type = rpmFilterEnabled ? self.rpmFilterType : RPMFilter.DISABLED;
-
-        if (self.rpmFilter.type == RPMFilter.ADVANCED) {
-
-            const mainRotorMinRPM = parseInt($('input[id="gyroRpmFilterMainRotorMinRPM"]').val());
-            for (let i=0; i<RPMFilter.MAIN_ROTOR_HARMONICS; i++) {
-                self.rpmFilter.mainRotor[i].rpm_limit = mainRotorMinRPM;
-            }
-            self.rpmFilter.mainMotor[0].rpm_limit = mainRotorMinRPM;
-
-            const tailRotorMinRPM = parseInt($('input[id="gyroRpmFilterTailRotorMinRPM"]').val());
-            for (let i=0; i<RPMFilter.TAIL_ROTOR_HARMONICS; i++) {
-                self.rpmFilter.tailRotor[i].rpm_limit = tailRotorMinRPM;
-            }
-            self.rpmFilter.tailMotor[0].rpm_limit = tailRotorMinRPM;
-
-            function access_double_notch(rotor, harm, conf) {
-                const switchy = $(`input[id="gyroRpmFilter${rotor}S${harm}"]`);
-                const quality = $(`input[id="gyroRpmFilter${rotor}Q${harm}"]`);
-                const notschy = $(`select[id="gyroRpmFilter${rotor}N${harm}"]`);
-                if (switchy.is(':checked')) {
-                    conf.notch_q = parseFloat(quality.val());
-                    conf.count = parseInt(notschy.val());
-                } else {
-                    conf.count = 0;
-                }
-            }
-            function access_single_notch(rotor, harm, conf) {
-                const switchy = $(`input[id="gyroRpmFilter${rotor}S${harm}"]`);
-                const quality = $(`input[id="gyroRpmFilter${rotor}Q${harm}"]`);
-                if (switchy.is(':checked')) {
-                    conf.notch_q = parseFloat(quality.val());
-                    conf.count = 1;
-                } else {
-                    conf.count = 0;
-                }
-            }
-
-            access_double_notch('MainRotor', 1, self.rpmFilter.mainRotor[0]);
-            access_double_notch('MainRotor', 2, self.rpmFilter.mainRotor[1]);
-            access_single_notch('MainRotor', 3, self.rpmFilter.mainRotor[2]);
-            access_single_notch('MainRotor', 4, self.rpmFilter.mainRotor[3]);
-            access_single_notch('MainRotor', 5, self.rpmFilter.mainRotor[4]);
-            access_single_notch('MainRotor', 6, self.rpmFilter.mainRotor[5]);
-            access_single_notch('MainRotor', 7, self.rpmFilter.mainRotor[6]);
-            access_single_notch('MainRotor', 8, self.rpmFilter.mainRotor[7]);
-
-            access_double_notch('TailRotor', 1, self.rpmFilter.tailRotor[0]);
-            access_double_notch('TailRotor', 2, self.rpmFilter.tailRotor[1]);
-            access_single_notch('TailRotor', 3, self.rpmFilter.tailRotor[2]);
-            access_single_notch('TailRotor', 4, self.rpmFilter.tailRotor[3]);
-
-            access_single_notch('MainMotor', 1, self.rpmFilter.mainMotor[0]);
-            access_single_notch('TailMotor', 1, self.rpmFilter.tailMotor[0]);
-
-            FC.RPM_FILTER_CONFIG = RPMFilter.generateConfig(self.rpmFilter);
-            self.rpmFilterDirty = true;
-        }
     }
 
     function process_html() {
+        mount(RpmFilter, {
+            target: document.querySelector("#rpm-filter"),
+            props: {
+                onRpmNotchUpdate: (dirty) => {
+                    self.rpmFilterDirty = dirty;
+                    if (dirty) {
+                      setDirty();
+                    }
+                },
+                onRpmSettingsUpdate: (changed) => {
+                    if (changed) {
+                        setDirty();
+                    }
+                },
+            },
+        });
 
         // translate to user-selected language
         i18n.localizePage();
-
-        // Load RPM filter configuration
-        self.rpmFilter = RPMFilter.parseConfig(FC.RPM_FILTER_CONFIG);
-        self.rpmFilterDirty = false;
 
         // UI Hooks
         data_to_form();
@@ -525,9 +322,9 @@ tab.initialize = function (callback) {
             setDirty();
         });
 
-        self.save = function (callback) {
+        self.save = async function () {
             form_to_data();
-            save_data(callback);
+            await save_data();
         };
 
         self.revert = function (callback) {
@@ -535,7 +332,7 @@ tab.initialize = function (callback) {
         };
 
         $('a.save').click(function () {
-            self.save(() => GUI.tab_switch_reload());
+            self.save().then(() => GUI.tab_switch_reload());
         });
 
         $('a.revert').click(function () {
@@ -549,6 +346,7 @@ tab.initialize = function (callback) {
 
 tab.cleanup = function (callback) {
     this.isDirty = false;
+    this.rpmFilterDirty = false;
 
     callback?.();
 };

@@ -4984,10 +4984,10 @@
         "message": "Custom"
     },
     "gyroRpmFilterConfigNote": {
-        "message": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable."
+        "message": "RPM Filtering requires a realtime RPM source, either from DShot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable."
     },
     "gyroRpmFilterCustomNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings."
+        "message": "Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings."
     },
     "gyroRpmFilterVibrationLevel": {
         "message": "Vibration Level"
@@ -5001,44 +5001,62 @@
     "gyroRpmFilterVibrationHigh": {
         "message": "High"
     },
+    "gyroRpmFilterMinRPMGroup": {
+        "message": "Minimum RPM"
+    },
+    "gyroRpmFilterMinRPMGroupHelp": {
+        "message": "The minimum RPM that the RPM filter notches can operate."
+    },
     "gyroRpmFilterMainRotorMinRPM": {
-        "message": "Main Rotor Minimum Filtered RPM"
+        "message": "Main Rotor"
     },
     "gyroRpmFilterMainRotorMinRPMHelp": {
         "message": "Minimum Main Rotor RPM accepted by the filters"
     },
     "gyroRpmFilterTailRotorMinRPM": {
-        "message": "Tail Rotor Minimum Filtered RPM"
+        "message": "Tail Rotor"
     },
     "gyroRpmFilterTailRotorMinRPMHelp": {
         "message": "Minimum Tail Rotor RPM accepted by the filters"
     },
+    "gyroRpmFilterMinFreqHelp": {
+        "message": "The minimum frequency that the RPM filter notches can operate. Set this value slightly below the freqency of the minimum headspeed."
+    },
     "gyroRpmFilterBanks": {
-        "message": "Gyro RPM Notch Filter Banks"
+        "message": "RPM Filter Notches"
     },
     "gyroRpmFilterHelp": {
         "message": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
     },
     "gyroRpmFilterMainRotorGroup": {
-        "message": "Main Rotor Notch Filters"
+        "message": "Main Rotor"
     },
     "gyroRpmFilterMainRotorHelp": {
         "message": "RPM controlled filters for the main rotor harmonics"
     },
     "gyroRpmFilterTailRotorGroup": {
-        "message": "Tail Rotor Notch Filters"
+        "message": "Tail Rotor"
     },
     "gyroRpmFilterTailRotorHelp": {
         "message": "RPM controlled filters for the tail rotor harmonics"
     },
+    "gyroRpmFilterMotorGroup": {
+        "message": "Motors"
+    },
     "gyroRpmFilterMainMotorGroup": {
         "message": "Main Motor Notch Filters"
+    },
+    "gyroRpmFilterMainMotorQ": {
+        "message": "Main Motor Notch Q"
     },
     "gyroRpmFilterMainMotorHelp": {
         "message": "RPM controlled filters for the main motor harmonics"
     },
     "gyroRpmFilterTailMotorGroup": {
         "message": "Tail Motor Notch Filters"
+    },
+    "gyroRpmFilterTailMotorQ": {
+        "message": "Tail Motor Notch Q"
     },
     "gyroRpmFilterTailMotorHelp": {
         "message": "RPM controlled filters for the tail motor harmonics"
