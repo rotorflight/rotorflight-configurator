@@ -1,4 +1,4 @@
-export const MSP = {
+export const MSP = $state({
     symbols: {
         BEGIN: '$'.charCodeAt(0),
         PROTO_V1: 'M'.charCodeAt(0),
@@ -355,7 +355,7 @@ export const MSP = {
                     console.log('Cancelling MSP request');
 
                     const i = MSP.callbacks.findIndex(obj);
-                    MSP.callbacks.splice(i, 1)
+                    MSP.callbacks.splice(i, 1);
                     clearInterval(obj.timer);
 
                     if (doCallbackOnError) {
@@ -409,4 +409,4 @@ export const MSP = {
 
         this.callbacks_cleanup();
     }
-};
+});

@@ -364,7 +364,7 @@ tab.initialize = function (callback) {
         const dialogCopyProfile = $('.dialogCopyProfile')[0];
         const selectRateProfile = $('.selectRateProfile');
 
-        $.each(self.TAB_NAMES, function(key, value) {
+        $.each(self.TAB_NAMES, function(key) {
             if (key != self.currentRateProfile) {
                 const tabIndex = key + 1;
                 selectRateProfile.append(new Option(i18n.getMessage(`rateSetupSubTab${tabIndex}`), key));

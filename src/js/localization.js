@@ -1,12 +1,7 @@
 import i18next from 'i18next';
 import i18nextHttpBackend from 'i18next-http-backend';
 
-const i18n = {};
-
-/*
- * Wrapper around the i18n system
- */
-window.i18n = i18n;
+export const i18n = {};
 
 //const languagesAvailables = [ 'de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'nl', 'pl', 'pt', 'pt_BR', 'zh_CN', 'zh_TW', ];
 const languagesAvailables = [ 'de', 'en', 'fr', 'nl', 'zh_CN', 'zh_TW', ];
@@ -62,7 +57,7 @@ i18n.parseInputFile = function(data) {
     const dataChrome = data.replace(REGEXP_CHROME, '{{$1}}');
 
     // Remove the .message of the nesting $t(xxxxx.message) -> $t(xxxxx)
-    const REGEXP_NESTING = /\$t\(([^\)]*).message\)/g;
+    const REGEXP_NESTING = /\$t\(([^)]*).message\)/g;
     const dataNesting = dataChrome.replace(REGEXP_NESTING, '$t($1)');
 
     // Move the .message of the json object to root xxxxx.message -> xxxxx
@@ -244,5 +239,3 @@ i18n.addResources = function(bundle) {
     const ns = takeFirst(i18next.options.defaultNS);
     i18next.addResourceBundle(lang, ns, bundle, true, true);
 };
-
-export { i18n };

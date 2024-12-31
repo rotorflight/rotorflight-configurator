@@ -1,6 +1,6 @@
 import semver from "semver";
 
-let connectionTimestamp;
+import { portUsage } from "@/js/port_usage.svelte.js";
 
 export function initializeSerialBackend() {
     GUI.updateManualPortVisibility = function(){
@@ -35,7 +35,7 @@ export function initializeSerialBackend() {
         $('#port-override').val(data.portOverride);
     });
 
-    $('div#port-picker #port').change(function (target) {
+    $('div#port-picker #port').change(function () {
         GUI.updateManualPortVisibility();
     });
 
@@ -186,7 +186,6 @@ export function initializeSerialBackend() {
     }
 
     PortHandler.initialize(GUI.show_all_ports);
-    PortUsage.initialize();
 }
 
 function finishClose(finishedCallback) {
@@ -196,16 +195,13 @@ function finishClose(finishedCallback) {
 
     const wasConnected = CONFIGURATOR.connectionValid;
 
-    if (connectionTimestamp) {
-        const connectedTime = Date.now() - connectionTimestamp;
-    }
     // close reset to custom defaults dialog
     $('#dialogResetToCustomDefaults')[0].close();
 
     serial.disconnect(onClosed);
 
     MSP.disconnect_cleanup();
-    PortUsage.reset();
+    portUsage.reset();
     // To trigger the UI updates by Vue reset the state.
     FC.resetState();
 
@@ -451,7 +447,6 @@ function processUid() {
     MSP.send_message(MSPCodes.MSP_UID, false, false, function () {
         const UID = FC.CONFIG.uid[0].toString(16) + FC.CONFIG.uid[1].toString(16) + FC.CONFIG.uid[2].toString(16);
 
-        connectionTimestamp = Date.now();
         GUI.log(i18n.getMessage('uniqueDeviceIdReceived', [UID]));
 
         processName();
@@ -507,7 +502,7 @@ function onConnect() {
 
     // show only appropriate tabs
     $('#tabs ul.mode-connected li').hide();
-    $('#tabs ul.mode-connected li').filter(function (index) {
+    $('#tabs ul.mode-connected li').filter(function () {
         const classes = $(this).attr("class").split(/\s+/);
         let found = false;
         $.each(GUI.allowedTabs, (_index, value) => {
@@ -746,7 +741,7 @@ function update_live_status() {
     startLiveDataRefreshTimer();
 }
 
-function specificByte(num, pos) {
+export function specificByte(num, pos) {
     return 0x000000FF & (num >> (8 * pos));
 }
 

@@ -144,7 +144,7 @@ tab.initialize = function (callback) {
             var selectTargets = [];
             Object.keys(builds)
                 .sort()
-                .forEach(function(target, i) {
+                .forEach(function(target) {
                     var descriptors = builds[target];
                     descriptors.forEach(function(descriptor){
                         if($.inArray(target, selectTargets) == -1) {
@@ -230,7 +230,7 @@ tab.initialize = function (callback) {
                     let storageObj = result[storageTag];
                     if(!storageObj || !storageObj.lastUpdate || checkTime - storageObj.lastUpdate > expirationPeriod) {
                         console.log('go get', unifiedSource);
-                        $.get(unifiedSource, function(data, textStatus, jqXHR) {
+                        $.get(unifiedSource, function(data) {
                             // Cache the information for later use.
                             let newStorageObj = {};
                             let newDataObj = {};
@@ -240,7 +240,7 @@ tab.initialize = function (callback) {
                             chrome.storage.local.set(newStorageObj);
 
                             parseUnifiedBuilds(data, builds);
-                        }).fail(xhr => {
+                        }).fail(() => {
                             console.log('failed to get new', unifiedSource, 'cached data', Math.floor((checkTime - storageObj.lastUpdate) / 60), 'mins old');
                             parseUnifiedBuilds(storageObj.data, builds);
                         });
@@ -287,12 +287,9 @@ tab.initialize = function (callback) {
 
             versions_e.empty()
                 .append($(`<option value='0'>${i18n.getMessage("firmwareFlasherOptionLabelSelectFirmwareVersion")}</option>`));
-            var selectTargets = [];
             Object.keys(items)
                 .sort()
-                .forEach(function(target, i) {
-                    let item = items[target];
-
+                .forEach(function(target) {
                     const select_e = $(`<option value='${target}'>${target}</option>"`);
                     boards_e.append(select_e);
                 });
@@ -607,7 +604,7 @@ tab.initialize = function (callback) {
                                         } else {
                                             failLoading(unifiedConfig.download_url);
                                         }
-                                    }).fail(xhr => {
+                                    }).fail(() => {
                                         failLoading(unifiedConfig.download_url);
                                     });
                                 } else {
@@ -712,10 +709,8 @@ tab.initialize = function (callback) {
         function flashFirmware(firmware) {
             var options = {};
 
-            var eraseAll = false;
             if ($('input.erase_chip').is(':checked')) {
                 options.erase_chip = true;
-                eraseAll = true;
             }
 
             if (!$('option:selected', portPickerElement).data().isDFU) {
@@ -886,7 +881,7 @@ tab.initialize = function (callback) {
             }
         });
 
-        $('a.load_remote_file').click(function (evt) {
+        $('a.load_remote_file').click(function () {
             self.enableFlashing(false);
             self.localFirmwareLoaded = false;
 
@@ -1198,8 +1193,6 @@ tab.cleanup = function (callback) {
 };
 
 tab.enableFlashing = function (enabled) {
-    var self = this;
-
     if (enabled) {
         $('a.flash_firmware').removeClass('disabled');
     } else {

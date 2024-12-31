@@ -178,7 +178,7 @@ $(document).ready(function() {
         gimbalElem.on('click', function(event) {
             handleGimbalMouseDrag(gimbalElem, gimbalIndex, event);
         });
-        gimbalElem.on('dblclick', function(event) {
+        gimbalElem.on('dblclick', function() {
             resetGimbal(gimbalElem, gimbalIndex);
         });
     });
