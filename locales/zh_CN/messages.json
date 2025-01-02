@@ -873,8 +873,8 @@
         "english": "Rotorflight documentation is available in release notes and website.<br /><br />"
     },
     "defaultDocumentation1": {
-        "message": "Rotorflight官网的教程是很棒的入门指南，你可以在<a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">这里</a>找到。",
-        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        "message": "Rotorflight官网的教程是很棒的入门指南，你可以在<a href=\"https://www.rotorflight.org/docs/2.1.0\" target=\"_blank\" rel=\"noopener noreferrer\">这里</a>找到。",
+        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.1.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultDocumentation2": {
         "message": "官网的最新公告动态会发布在 <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">这里</a>。",
@@ -977,8 +977,8 @@
         "english": "Arming Allowed"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "无法解锁的故障排查列表，将鼠标悬停在上面可以看到详细说明，你也可以参考官网的 <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">禁止解锁标志</a> 来了解更多信息。",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
+        "message": "无法解锁的故障排查列表，将鼠标悬停在上面可以看到详细说明，你也可以参考官网的 <a href=\"https://www.rotorflight.org/docs/2.1.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">禁止解锁标志</a> 来了解更多信息。",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.1.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
     },
     "statusArmingDisableFlagsTooltipNO_GYRO": {
         "message": "未检测到陀螺仪",
@@ -5028,8 +5028,8 @@
         "english": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "如果与飞控板失去通信，请按照以下步骤恢复通信： <ul><li>断开电源</li><li>启用无序列重启以及全盘擦除</li><li>按下或短接BOOT按钮</li><li>接通电源（如果操作正确，活动 LED 指示灯不会闪烁）。</li><li>如果需要请安装所有 STM32 驱动 以及 Zadig (参见手册中的 <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB 刷写</a> 部分)。</li><li>关闭并重启配置器</li><li>如果飞控板有 BOOT 按钮，此时松开 BOOT 按钮</li><li>使用正确的固件刷写（如果 FC 手册有规定，请使用手动波特率）。</li><li>断开电源</li><li>移除 BOOT 跳线</li><li>接通电源（活动 LED 应闪烁）。</li><li>正常连接</li></ul>",
-        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
+        "message": "如果与飞控板失去通信，请按照以下步骤恢复通信： <ul><li>断开电源</li><li>启用无序列重启以及全盘擦除</li><li>按下或短接BOOT按钮</li><li>接通电源（如果操作正确，活动 LED 指示灯不会闪烁）。</li><li>如果需要请安装所有 STM32 驱动 以及 Zadig (参见手册中的 <a href=\"https://www.rotorflight.org/docs/2.1.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB 刷写</a> 部分)。</li><li>关闭并重启配置器</li><li>如果飞控板有 BOOT 按钮，此时松开 BOOT 按钮</li><li>使用正确的固件刷写（如果 FC 手册有规定，请使用手动波特率）。</li><li>断开电源</li><li>移除 BOOT 跳线</li><li>接通电源（活动 LED 应闪烁）。</li><li>正常连接</li></ul>",
+        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.1.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
     },
     "firmwareFlasherFirmwareNotLoaded": {
         "message": "没有加载固件",
