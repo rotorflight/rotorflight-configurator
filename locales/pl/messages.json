@@ -1159,8 +1159,8 @@
         "status": "Reused translation. Please check!"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
+        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.1.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.1.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
         "status": "Reused translation. Please check!",
         "previous": {
             "message": "Lista flag wskazuje dlaczego uzbrojenie jest obecnie niedozwolone. Ustaw kursor myszki na fladze aby uzyskać więcej informacji. Lub (odwiedź stronę internetową gdźie znajdźiesz informacje na temat sekwencji uzbrajania oraz poznasz podstawowe zasady bezpieczeństwa).",

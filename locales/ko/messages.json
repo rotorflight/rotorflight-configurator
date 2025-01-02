@@ -1162,8 +1162,8 @@
         "status": "Reused translation. Please check!"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
+        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.1.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.1.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
         "status": "Reused translation. Please check!",
         "previous": {
             "message": "플래그 목록은 왜 아밍이 현재 허용되지 않는지를 나타냅니다. 플래그 위에 마우스를 대거나, 더 많은 정보에 대해 위키('Arming Sequence & Safety' 페이지) 를 참조하세요.",

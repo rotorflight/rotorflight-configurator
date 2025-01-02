@@ -977,8 +977,8 @@
         "english": "Arming Allowed"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "无法解锁的故障排查列表，将鼠标悬停在上面可以看到详细说明，你也可以参考官网的 <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">禁止解锁标志</a> 来了解更多信息。",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
+        "message": "无法解锁的故障排查列表，将鼠标悬停在上面可以看到详细说明，你也可以参考官网的 <a href=\"https://www.rotorflight.org/docs/2.1.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">禁止解锁标志</a> 来了解更多信息。",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.1.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
     },
     "statusArmingDisableFlagsTooltipNO_GYRO": {
         "message": "未检测到陀螺仪",
