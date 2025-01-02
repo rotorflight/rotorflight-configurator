@@ -2737,6 +2737,14 @@
     "cliLoadFromFileBtn": {
         "message": "Load from file"
     },
+    "cliSaveSettingsBtn": {
+        "message": "Save Settings",
+        "english": "Save Settings"
+    },
+    "cliExitBtn": {
+        "message": "Exit",
+        "english": "Exit"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"
     },

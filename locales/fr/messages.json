@@ -3966,6 +3966,16 @@
         "message": "Charger à partir du fichier",
         "english": "Load from file"
     },
+    "cliSaveSettingsBtn": {
+        "message": "Save Settings",
+        "english": "Save Settings",
+        "status": "New entry. Please translate!"
+    },
+    "cliExitBtn": {
+        "message": "Exit",
+        "english": "Exit",
+        "status": "New entry. Please translate!"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "Fichier chargé <strong>{{fileName}}</strong>. Vérifier les commandes chargées",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"

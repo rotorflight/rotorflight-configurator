@@ -3966,6 +3966,14 @@
         "message": "從檔案載入",
         "english": "Load from file"
     },
+    "cliSaveSettingsBtn": {
+        "message": "保存設置",
+        "english": "Save Settings"
+    },
+    "cliExitBtn": {
+        "message": "退出",
+        "english": "Exit"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "已載入檔案<strong>{{fileName}}</strong>。查看已載入的指令",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"

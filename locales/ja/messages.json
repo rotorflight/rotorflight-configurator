@@ -4991,6 +4991,16 @@
         "message": "ファイルからロード",
         "english": "Load from file"
     },
+    "cliSaveSettingsBtn": {
+        "message": "Save Settings",
+        "english": "Save Settings",
+        "status": "New entry. Please translate!"
+    },
+    "cliExitBtn": {
+        "message": "Exit",
+        "english": "Exit",
+        "status": "New entry. Please translate!"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "ファイル <strong>{{fileName}}</strong> をロードしました。ロードされたコマンドをレビューします。",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"

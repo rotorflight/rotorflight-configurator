@@ -3966,6 +3966,16 @@
         "message": "Aus Datei laden",
         "english": "Load from file"
     },
+    "cliSaveSettingsBtn": {
+        "message": "Save Settings",
+        "english": "Save Settings",
+        "status": "New entry. Please translate!"
+    },
+    "cliExitBtn": {
+        "message": "Exit",
+        "english": "Exit",
+        "status": "New entry. Please translate!"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "Datei <strong>{{fileName}}</strong> geladen. Überprüfe die geladenen Befehle",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"

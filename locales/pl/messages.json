@@ -4967,6 +4967,16 @@
         "message": "Wczytaj plik",
         "english": "Load from file"
     },
+    "cliSaveSettingsBtn": {
+        "message": "Save Settings",
+        "english": "Save Settings",
+        "status": "New entry. Please translate!"
+    },
+    "cliExitBtn": {
+        "message": "Exit",
+        "english": "Exit",
+        "status": "New entry. Please translate!"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "Wczytano plik <strong> {{fileName}} </strong>. Przejrzyj wczytane polecenia",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"
