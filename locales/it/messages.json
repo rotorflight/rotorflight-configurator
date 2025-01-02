@@ -4991,6 +4991,16 @@
         "message": "Carica da file",
         "english": "Load from file"
     },
+    "cliSaveSettingsBtn": {
+        "message": "Save Settings",
+        "english": "Save Settings",
+        "status": "New entry. Please translate!"
+    },
+    "cliExitBtn": {
+        "message": "Exit",
+        "english": "Exit",
+        "status": "New entry. Please translate!"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "File <strong>{{fileName}}</strong> caricato. Controlla i comandi caricati",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"
