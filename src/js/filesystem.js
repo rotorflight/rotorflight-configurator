@@ -10,7 +10,7 @@ function getFileExtension(fileName) {
 }
 
 const cordova = {
-  async readTextFile(_opts) {
+  async readTextFile() {
     try {
       const uri = await new Promise((resolve, reject) =>
         window.fileChooser.open({ mime: "text/plain" }, resolve, reject),
@@ -92,7 +92,7 @@ const cordova = {
       } else {
         console.log("Canceled: file already exists");
       }
-    } catch (err) {
+    } catch {
       return await new Promise((resolve, reject) =>
         directoryEntry.getFile(fileName, { create: true }, resolve, reject),
       );

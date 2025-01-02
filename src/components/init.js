@@ -29,7 +29,7 @@ i18next.on('initialized', function() {
 
     console.log("i18n initialized, starting Vue framework");
 
-    const app = new Vue({
+    new Vue({
         i18n: vueI18n,
         el: '#main-wrapper',
         components: {

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 // 3D model
 export const Model = function (wrapper, canvas) {

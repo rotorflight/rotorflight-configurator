@@ -148,14 +148,15 @@ CliAutoComplete.builderParseLine = function(line) {
         }
     } else {
         switch (builder.state) {
-            case 'parse-help':
+            case 'parse-help': {
                 const matchHelp = line.match(/^(\w+)/);
                 if (matchHelp) {
                     cache.commands.push(matchHelp[1]);
                 }
                 break;
+            }
 
-            case 'parse-dump':
+            case 'parse-dump': {
                 const matchDump = line.match(/^resource\s+(\w+)/i);
                 if (matchDump) {
                     const r = matchDump[1].toUpperCase(); // should alread be upper, but to be sure, since we depend on that later
@@ -167,8 +168,9 @@ CliAutoComplete.builderParseLine = function(line) {
                     }
                 }
                 break;
+            }
 
-            case 'parse-get':
+            case 'parse-get': {
                 const matchGet = line.match(/^(\w+)\s*=/);
                 if (matchGet) {
                     // setting name
@@ -187,13 +189,15 @@ CliAutoComplete.builderParseLine = function(line) {
                     }
                 }
                 break;
+            }
 
-            case 'parse-mixer list':
+            case 'parse-mixer list': {
                 const matchMixer = line.match(/:(.+)/);
                 if (matchMixer) {
                     cache.mixers = ['list'].concat(matchMixer[1].trim().split(/\s+/));
                 }
                 break;
+            }
         }
     }
 };

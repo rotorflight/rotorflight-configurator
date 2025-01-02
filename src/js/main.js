@@ -544,18 +544,6 @@ export function showErrorDialog(message) {
     dialog.showModal();
 }
 
-function showDialogDynFiltersChange() {
-    const dialogDynFiltersChange = $('.dialogDynFiltersChange')[0];
-
-    if (!dialogDynFiltersChange.hasAttribute('open')) {
-        dialogDynFiltersChange.showModal();
-
-        $('.dialogDynFiltersChange-confirmbtn').click(function() {
-            dialogDynFiltersChange.close();
-        });
-    }
-}
-
 export function showTabExitDialog(tab, callback) {
     const dialog = $('.dialogTabExit')[0];
 

@@ -155,7 +155,7 @@ tab.initialize = function (callback) {
         $('.tab-cli .load').on('click', async function() {
             const previewArea = $("#snippetpreviewcontent textarea#preview");
 
-            function executeSnippet(fileName) {
+            function executeSnippet() {
                 const commands = previewArea.val();
                 executeCommands(commands);
                 self.GUI.snippetPreviewWindow.close();
