@@ -879,8 +879,8 @@
         "english": "Rotorflight documentation is available in release notes and website.<br /><br />"
     },
     "defaultDocumentation1": {
-        "message": "Le didacticiel du site Web Rotorflight est une excellente ressource d'informations. Vous pouvez le trouver <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.",
-        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        "message": "Le didacticiel du site Web Rotorflight est une excellente ressource d'informations. Vous pouvez le trouver <a href=\"https://www.rotorflight.org/docs/2.1.0\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a>.",
+        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.1.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultDocumentation2": {
         "message": "Les dernières nouvelles peuvent être lues sur la page Annonces du site Web, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">ici</une>.",
