@@ -1863,6 +1863,11 @@
         "message": "OSD: FrSky",
         "english": "OSD: FrSky"
     },
+    "portsFunction_SBUS_OUT": {
+        "message": "S.BUS Output",
+        "english": "S.BUS Output",
+        "status": "New entry. Please translate!"
+    },
     "portsFunction_CUSTOM": {
         "message": "Sur mesure",
         "english": "Custom"
@@ -3496,6 +3501,11 @@
     "mixerRebootNote": {
         "message": "<span class=\"message-negative\">Avertissement:</span> Certains paramètres nécessitent un redémarrage du système pour prendre effet !",
         "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!"
+    },
+    "mixerMotorisedTailCalibrationNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
+        "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
+        "status": "New entry. Please translate!"
     },
     "mixerMainRotorSettings": {
         "message": "Paramètres du rotor principal",
