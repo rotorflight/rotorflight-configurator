@@ -869,8 +869,8 @@
         "english": "Rotorflight documentation is available in release notes and website.<br /><br />"
     },
     "defaultDocumentation1": {
-        "message": "Die Anleitung auf der Rotorflight-Website ist eine hervorragende Informationsquelle, siehe <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a>.",
-        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        "message": "Die Anleitung auf der Rotorflight-Website ist eine hervorragende Informationsquelle, siehe <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a>.",
+        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultDocumentation2": {
         "message": "Die aktuellsten Nachrichten können auf der Seite Ankündigungen der Website nachgelesen werden, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a>.",
@@ -973,8 +973,8 @@
         "english": "Arming Allowed"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "Liste der Gründe, welche das 'Arming' momentan verhindern. Für nähere Informationen den Mauszeiger über die Meldung bewegen oder lese die Anleitung auf der Webseite <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> für mehr infos",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
+        "message": "Liste der Gründe, welche das 'Arming' momentan verhindern. Für nähere Informationen den Mauszeiger über die Meldung bewegen oder lese die Anleitung auf der Webseite <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> für mehr infos",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
     },
     "statusArmingDisableFlagsTooltipNO_GYRO": {
         "message": "Kein Gyro-Sensor erkannt",
@@ -4463,8 +4463,8 @@
         "english": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "Bei Verbindungsabbruch: <ul><li>Ausschalten</li><li>'No reboot sequence' und 'Full chip erase' aktivieren.</li><li>FC mit gedrücktem Boot Button per USB verbinden</li><li> Es leuchtet nur die Power LED (kein blinken).</li><li> Die korrekten STM32 Treiber werden benötigt (siehe <a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Konfigurator schließen, Konfigurator neu starten.</li><li>BOOT-Taste loslassen, falls Ihr FC eine hat.</li><li>Flashen mit korrekter Firmware (mit manueller Baudrate, falls im Handbuch des FC angegeben).</li><li>Power off.</li><li>BOOT-Brücke entfernen.</li><li>Einschalten (Aktivitäts-LED sollte blinken).</li><li>Normal anschließen.</li></ul>",
-        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
+        "message": "Bei Verbindungsabbruch: <ul><li>Ausschalten</li><li>'No reboot sequence' und 'Full chip erase' aktivieren.</li><li>FC mit gedrücktem Boot Button per USB verbinden</li><li> Es leuchtet nur die Power LED (kein blinken).</li><li> Die korrekten STM32 Treiber werden benötigt (siehe <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Konfigurator schließen, Konfigurator neu starten.</li><li>BOOT-Taste loslassen, falls Ihr FC eine hat.</li><li>Flashen mit korrekter Firmware (mit manueller Baudrate, falls im Handbuch des FC angegeben).</li><li>Power off.</li><li>BOOT-Brücke entfernen.</li><li>Einschalten (Aktivitäts-LED sollte blinken).</li><li>Normal anschließen.</li></ul>",
+        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
     },
     "firmwareFlasherFirmwareNotLoaded": {
         "message": "Firmware nicht geladen",
