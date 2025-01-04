@@ -1,3 +1,74 @@
+# 2.1.0
+
+This is the _the Official Release_ of the Rotorflight 2.1.0 Configurator.
+
+**NOTE** The firmware for RF 2.1 uses version number 4.4.x.
+
+## Downloads
+
+The download locations are:
+
+- [Rotorflight Configurator](https://github.com/rotorflight/rotorflight-configurator/releases/tag/release/2.1.0)
+- [Rotorflight Blackbox](https://github.com/rotorflight/rotorflight-blackbox/releases/tag/release/2.1.0)
+- [Lua Scripts for EdgeTx and OpenTx](https://github.com/rotorflight/rotorflight-lua-scripts/releases/tag/release/2.1.0)
+- [Lua Scripts for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos/releases/tag/release/2.1.0)
+- [Lua Suite for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos-suite/releases/tag/release/2.1.0)
+
+## Notes
+
+- Rotorflight setup instructions can be found on the RF website [www.rotorflight.org](https://www.rotorflight.org/).
+
+- RF 2.1 *is* backward compatible with RF 2.0. You *can* load your configuration _dump_ from RF 2.0 into 2.1.
+
+- If updating from RF1, please setup your helicopter from scratch. Follow the instructions on the website!
+
+- As always, please double check your configuration on the bench before flying!
+
+## Support
+
+The main source of Rotorflight information and instructions is now the [website](https://www.rotorflight.org/).
+
+Rotorflight has a strong presence on the Discord platform - you can join us [here](https://discord.gg/FyfMF4RwSA/).
+Discord is the primary location for support, questions and discussions. The developers are all active there,
+and so are the manufacturers of RF Flight Controllers. Many pro pilots are also there.
+This is a great place to ask for advice or discuss any complicated problems or even new ideas.
+
+There is also a [Rotorflight Facebook Group](https://www.facebook.com/groups/876445460825093) for hanging out with other Rotorflight pilots.
+
+## Changes from 2.0.0
+
+- Custom CRSF/ELRS telemetry support
+- Add FrSky FBUS and F.Port2 receiver protocols
+- Add Futaba SBUS2 supprot
+- Add SBUS Output support
+- Add new SmartPort sensors
+- Automatic board detection in Firmware Flasher
+- Cyclic Cross-Coupling refactored
+- Add ACC trim adjustments
+- Add ESC log options to Blackbox
+- Add support for UART Tx/Rx Pinswap
+- Add ESC telemetry half-duplex and pin-swap toggles
+- Add support for Graupner and FlyRotor ESC telemetry
+- Improved ctrl-mouse zoom
+- Improved sidebar style
+- Refactor bottom status bar
+- Display final gear ratio
+- Hide Rates acceleration and response (until fixed)
+- Disable motor override when leaving the Motors tab
+- Display final gear ratio with decimals
+- Update slider implementation (nouislider)
+- Update Reference design port allocations
+- Update Bell 206 3D model with RF brand
+- Update RPM filter Q range to 1.5-10.0
+- Update default rates to match firmware
+- Remove gyro chip orientation fields
+- Fix many spelling mistakes
+- Add various tooltips
+- Stay backwards compatible with RF 2.0
+
+
+***
+
 # 2.1.0-RC3
 
 This is the third _Release Candidate_ of the Rotorflight 2.1 Configurator.
