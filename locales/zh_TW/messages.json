@@ -210,7 +210,7 @@
         "english": "Opt out of the anonymised collection of statistics data"
     },
     "connectionTimeout": {
-        "message": "設定連接超時臨限值以允許更長時間的初始化或重新啟動",
+        "message": "設定連接逾時臨限值以允許更長時間的初始化或重新啟動",
         "english": "Set connection timeout to allow longer initialisation on device plugin or reboot",
         "description": "Change timeout on auto-connect and reboot so the bus has more time to initialize after being detected by the system"
     },
@@ -531,7 +531,7 @@
         "english": "Rebooting device to bootloader: FAILED"
     },
     "stm32TimedOut": {
-        "message": "STM32 - 超時，燒錄失敗",
+        "message": "STM32 - 逾時，燒錄失敗",
         "english": "STM32 - timed out, programming: FAILED"
     },
     "stm32WrongResponse": {
@@ -1843,9 +1843,8 @@
         "english": "OSD: FrSky"
     },
     "portsFunction_SBUS_OUT": {
-        "message": "S.BUS Output",
-        "english": "S.BUS Output",
-        "status": "New entry. Please translate!"
+        "message": "S.BUS 輸出",
+        "english": "S.BUS Output"
     },
     "portsFunction_CUSTOM": {
         "message": "自訂",
@@ -2432,7 +2431,7 @@
         "english": "ESC ERPM"
     },
     "receiverCrsfTelemetrySensor_ESC_POWER": {
-        "message": "ESC Power（電變電源）",
+        "message": "ESC Power（電變即時油門輸出）",
         "english": "ESC Power"
     },
     "receiverCrsfTelemetrySensor_ESC_THROTTLE": {
@@ -3329,9 +3328,8 @@
         "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!"
     },
     "mixerMotorisedTailCalibrationNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
-        "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
-        "status": "New entry. Please translate!"
+        "message": "<span class=\"message-negative\">警告：</span> 使用馬達直驅尾旋翼時航向校準應設為100%。除非您知道自己在做什麼，否則請勿更改此數值。",
+        "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing."
     },
     "mixerMainRotorSettings": {
         "message": "主旋翼設定",
@@ -4210,7 +4208,7 @@
         "english": "Governor mode"
     },
     "govModeHelp": {
-        "message": "<strong>關閉：</strong> 定速器關閉，油門信號將直接從遙控器傳送到電變。<br><br><strong>直通：</strong>定速器不控制轉速，但提供緩啟動和熄火重新啟動的功能。<br><br><strong>標準：</strong> 轉速由飛控定速器控制，類似於一個普通的電變定速功能。<br><br><strong>模式1：</strong> 與標準類似，但提供集體螺距與循環螺距的補償（類似於遙控器中的油門曲線）<br><br><strong>模式2：</strong> 類似於模式1，但具有對電壓驟降的補償，該模式需要有足夠快的電壓回傳才能使用。",
+        "message": "<strong>關閉：</strong> 定速器關閉，油門信號將直接從遙控器傳送到電變。<br><br><strong>直通：</strong>定速器不控制轉速，但提供緩啟動和熄火降落的功能。<br><br><strong>標準：</strong> 轉速由飛控定速器控制，類似於一個普通的電變定速功能。<br><br><strong>模式1：</strong> 與標準類似，但提供集體螺距與循環螺距的補償（類似於遙控器中的油門曲線）<br><br><strong>模式2：</strong> 類似於模式1，但具有對電壓驟降的補償，該模式需要有足夠快的電壓回傳才能使用。",
         "english": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
     },
     "govHandoverThrottle": {
@@ -4250,23 +4248,23 @@
         "english": "Recovery time"
     },
     "govRecoveryTimeHelp": {
-        "message": "恢復二階啟動的時間常數，以秒為單位，測量從零到全速的時間。",
+        "message": "恢復緩提速的時間常數，以秒為單位，測量從零到全速的時間。",
         "english": "Time constant for recovery spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govAutoBailoutTime": {
-        "message": "熄火重新啟動保護時間 [秒]",
+        "message": "熄火降落保護時間 [秒]",
         "english": "Autorotation bailout time"
     },
     "govAutoBailoutTimeHelp": {
-        "message": "熄火重新啟動保護的時間常數（秒），測量主旋翼從零到全速的時間。",
+        "message": "熄火降落保護的時間常數（秒），測量主旋翼從零到全速的時間。",
         "english": "Time constant for autorotation bailout spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govAutoTimeout": {
-        "message": "熄火重新啟動超時 [秒]",
+        "message": "熄火降落逾時 [秒]",
         "english": "Autorotation timeout"
     },
     "govAutoTimeoutHelp": {
-        "message": "結束熄火降落並進入正常IDLE狀態的超時時間。",
+        "message": "結束熄火降落並進入正常IDLE狀態的逾時時間。",
         "english": "Timeout for ending autorotation and moving to normal IDLE."
     },
     "govAutoMinEntryTime": {
@@ -4278,15 +4276,15 @@
         "english": "Minimum flight time before autorotation can be engaged."
     },
     "govZeroThrottleTimeout": {
-        "message": "零油門超時 [秒]",
+        "message": "零油門逾時 [秒]",
         "english": "Zero Throttle timeout"
     },
     "govZeroThrottleTimeoutHelp": {
-        "message": "在關閉定速器之前，遺失(零)油門信號的超時時間。如果在此時間內恢復油門信號，定速器將執行恢復 Spoolup 啟動。",
+        "message": "在關閉定速器之前，遺失(零)油門信號的逾時時間。如果在此時間內恢復油門信號，定速器將執行恢復 Spoolup 啟動。",
         "english": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup."
     },
     "govLostHeadspeedTimeout": {
-        "message": "主旋翼轉速信號超時 [秒]",
+        "message": "主旋翼轉速信號逾時 [秒]",
         "english": "Headspeed signal timeout"
     },
     "govLostHeadspeedTimeoutHelp": {
@@ -6123,7 +6121,7 @@
         "english": "Flip Fail Time [s]"
     },
     "profilesRescueFlipTimeHelp": {
-        "message": "翻正失敗超時。當在救機過程中，直升機將嘗試翻正，但在規定時間內沒有成功翻正時，將會終止救機",
+        "message": "翻正失敗逾時。當在救機過程中，直升機將嘗試翻正，但在規定時間內沒有成功翻正時，將會終止救機",
         "english": "Timeout for flip failure. If the helicopter is in rescue and is trying to flip to upright and does not do with the Rescue Flip Time, rescue will be aborted"
     },
     "profilesRescueAltHold": {

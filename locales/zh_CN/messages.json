@@ -1843,9 +1843,8 @@
         "english": "OSD: FrSky"
     },
     "portsFunction_SBUS_OUT": {
-        "message": "S.BUS Output",
-        "english": "S.BUS Output",
-        "status": "New entry. Please translate!"
+        "message": "S.BUS 输出",
+        "english": "S.BUS Output"
     },
     "portsFunction_CUSTOM": {
         "message": "自定义",
@@ -2372,11 +2371,11 @@
         "english": "Battery Consumption"
     },
     "receiverCrsfTelemetrySensor_BATTERY_CHARGE_LEVEL": {
-        "message": "Battery Charge Level（电量百分比)",
+        "message": "Battery Charge Level（电量百分比）",
         "english": "Battery Charge Level"
     },
     "receiverCrsfTelemetrySensor_BATTERY_CELL_COUNT": {
-        "message": "Battery Cell Count（电芯S数）",
+        "message": "Battery Cell Count（电芯节数）",
         "english": "Battery Cell Count"
     },
     "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGE": {
@@ -2388,7 +2387,7 @@
         "english": "Battery Cell Voltages"
     },
     "receiverCrsfTelemetrySensor_CONTROL": {
-        "message": "Battery Cell Voltages（遥控器通道值（高精度））",
+        "message": "Control (hi-res)（高解析度遙控器通道）",
         "english": "Control (hi-res)"
     },
     "receiverCrsfTelemetrySensor_PITCH_CONTROL": {
@@ -2408,7 +2407,7 @@
         "english": "Collective Control"
     },
     "receiverCrsfTelemetrySensor_THROTTLE_CONTROL": {
-        "message": "Throttle Control(油门通道值)",
+        "message": "Throttle Control（油门通道值）",
         "english": "Throttle Control"
     },
     "receiverCrsfTelemetrySensor_ESC_DATA": {
@@ -2428,11 +2427,11 @@
         "english": "ESC Capacity"
     },
     "receiverCrsfTelemetrySensor_ESC_ERPM": {
-        "message": "ESC ERPM电调ERPM（电气转速）",
+        "message": "ESC ERPM（电调电气转速）",
         "english": "ESC ERPM"
     },
     "receiverCrsfTelemetrySensor_ESC_POWER": {
-        "message": "ESC Power（电调电源）",
+        "message": "ESC Power（电调实时油门）",
         "english": "ESC Power"
     },
     "receiverCrsfTelemetrySensor_ESC_THROTTLE": {
@@ -2440,11 +2439,11 @@
         "english": "ESC Throttle"
     },
     "receiverCrsfTelemetrySensor_ESC_TEMP1": {
-        "message": "ESC Temp 1（电调1号温度传感器）",
+        "message": "ESC Temp 1（电调温度传感器1）",
         "english": "ESC Temp 1"
     },
     "receiverCrsfTelemetrySensor_ESC_TEMP2": {
-        "message": "ESC Temp 2（电调2号温度传感器）",
+        "message": "ESC Temp 2（电调温度传感器2）",
         "english": "ESC Temp 2"
     },
     "receiverCrsfTelemetrySensor_ESC_BEC_VOLTAGE": {
@@ -2464,59 +2463,59 @@
         "english": "ESC Model"
     },
     "receiverCrsfTelemetrySensor_BEC_VOLTAGE": {
-        "message": "BEC Voltage(BEC电压)",
+        "message": "BEC Voltage（BEC电压）",
         "english": "BEC Voltage"
     },
     "receiverCrsfTelemetrySensor_BUS_VOLTAGE": {
-        "message": "Bus Voltage(总线电压)",
+        "message": "Bus Voltage（总线电压）",
         "english": "Bus Voltage"
     },
     "receiverCrsfTelemetrySensor_MCU_VOLTAGE": {
-        "message": "MCU Voltage(主控电压)",
+        "message": "MCU Voltage（主控电压）",
         "english": "MCU Voltage"
     },
     "receiverCrsfTelemetrySensor_BEC_CURRENT": {
-        "message": "BEC Current(BEC电流)",
+        "message": "BEC Current（BEC电流）",
         "english": "BEC Current"
     },
     "receiverCrsfTelemetrySensor_BUS_CURRENT": {
-        "message": "Bus Current(总线电流)",
+        "message": "Bus Current（总线电流）",
         "english": "Bus Current"
     },
     "receiverCrsfTelemetrySensor_MCU_CURRENT": {
-        "message": "MCU Current(主控电流)",
+        "message": "MCU Current（主控电流）",
         "english": "MCU Current"
     },
     "receiverCrsfTelemetrySensor_ESC_TEMP": {
-        "message": "ESC Temp(电调温度)",
+        "message": "ESC Temp（电调温度）",
         "english": "ESC Temp"
     },
     "receiverCrsfTelemetrySensor_BEC_TEMP": {
-        "message": "BEC Temp(BEC温度)",
+        "message": "BEC Temp（BEC温度）",
         "english": "BEC Temp"
     },
     "receiverCrsfTelemetrySensor_MCU_TEMP": {
-        "message": "MCU Temp(主控温度)",
+        "message": "MCU Temp（主控温度）",
         "english": "MCU Temp"
     },
     "receiverCrsfTelemetrySensor_AIR_TEMP": {
-        "message": "Air Temp(气温)",
+        "message": "Air Temp（气温）",
         "english": "Air Temp"
     },
     "receiverCrsfTelemetrySensor_MOTOR_TEMP": {
-        "message": "Motor Temp(电机温度)",
+        "message": "Motor Temp（电机温度）",
         "english": "Motor Temp"
     },
     "receiverCrsfTelemetrySensor_BATTERY_TEMP": {
-        "message": "Battery Temp(电池温度)",
+        "message": "Battery Temp（电池温度）",
         "english": "Battery Temp"
     },
     "receiverCrsfTelemetrySensor_EXHAUST_TEMP": {
-        "message": "Exhaust Temp(排气温度)",
+        "message": "Exhaust Temp（排气温度）",
         "english": "Exhaust Temp"
     },
     "receiverCrsfTelemetrySensor_HEADING": {
-        "message": "Heading(朝向）",
+        "message": "Heading（朝向）",
         "english": "Heading"
     },
     "receiverCrsfTelemetrySensor_ALTITUDE": {
@@ -2620,103 +2619,103 @@
         "english": "GPS Home Direction"
     },
     "receiverCrsfTelemetrySensor_GPS_DATE_TIME": {
-        "message": "GPS Date Time（GPS 日期时间)",
+        "message": "GPS Date Time（GPS 日期时间）",
         "english": "GPS Date Time"
     },
     "receiverCrsfTelemetrySensor_LOAD": {
-        "message": "Load（负载)",
+        "message": "Load（负载）",
         "english": "Load"
     },
     "receiverCrsfTelemetrySensor_CPU_LOAD": {
-        "message": "CPU Load（处理器负载)",
+        "message": "CPU Load（处理器负载）",
         "english": "CPU Load"
     },
     "receiverCrsfTelemetrySensor_SYS_LOAD": {
-        "message": "SYS Load（系统负载)",
+        "message": "SYS Load（系统负载）",
         "english": "SYS Load"
     },
     "receiverCrsfTelemetrySensor_RT_LOAD": {
-        "message": "RT Load（实时负载)",
+        "message": "RT Load（实时负载）",
         "english": "RT Load"
     },
     "receiverCrsfTelemetrySensor_MODEL_ID": {
-        "message": "Model Id（模型ID)",
+        "message": "Model Id（模型ID）",
         "english": "Model Id"
     },
     "receiverCrsfTelemetrySensor_FLIGHT_MODE": {
-        "message": "Flight Mode（飞行模式)",
+        "message": "Flight Mode（飞行模式）",
         "english": "Flight Mode"
     },
     "receiverCrsfTelemetrySensor_ARMING_FLAGS": {
-        "message": "Arming Flags（解锁标志)",
+        "message": "Arming Flags（解锁标志）",
         "english": "Arming Flags"
     },
     "receiverCrsfTelemetrySensor_ARMING_DISABLE_FLAGS": {
-        "message": "Arming Disable Flags（禁止解锁标志)",
+        "message": "Arming Disable Flags（禁止解锁标志）",
         "english": "Arming Disable Flags"
     },
     "receiverCrsfTelemetrySensor_RESCUE_STATE": {
-        "message": "Rescue State（救机状态)",
+        "message": "Rescue State（救机状态）",
         "english": "Rescue State"
     },
     "receiverCrsfTelemetrySensor_GOVERNOR_STATE": {
-        "message": "Governor State（定速器状态)",
+        "message": "Governor State（定速器状态）",
         "english": "Governor State"
     },
     "receiverCrsfTelemetrySensor_GOVERNOR_FLAGS": {
-        "message": "Governor Flags（定速器标志)",
+        "message": "Governor Flags（定速器标志）",
         "english": "Governor Flags"
     },
     "receiverCrsfTelemetrySensor_PID_PROFILE": {
-        "message": "PID Profile（PID参数)",
+        "message": "PID Profile（PID参数）",
         "english": "PID Profile"
     },
     "receiverCrsfTelemetrySensor_RATES_PROFILE": {
-        "message": "Rates ProfileRates Profile（速率参数)",
+        "message": "Rates ProfileRates Profile（速率参数）",
         "english": "Rates Profile"
     },
     "receiverCrsfTelemetrySensor_BATTERY_PROFILE": {
-        "message": "Battery ProfileBattery Profile（电池参数)",
+        "message": "Battery ProfileBattery Profile（电池参数）",
         "english": "Battery Profile"
     },
     "receiverCrsfTelemetrySensor_LED_PROFILE": {
-        "message": "LED Profile（LED参数)",
+        "message": "LED Profile（LED参数）",
         "english": "LED Profile"
     },
     "receiverCrsfTelemetrySensor_ADJFUNC": {
-        "message": "Adjustment Function（快捷调整功能)",
+        "message": "Adjustment Function（快捷调整功能）",
         "english": "Adjustment Function"
     },
     "receiverCrsfTelemetrySensor_DEBUG_0": {
-        "message": "Debug 0（调试 0)",
+        "message": "Debug 0（调试 0）",
         "english": "Debug 0"
     },
     "receiverCrsfTelemetrySensor_DEBUG_1": {
-        "message": "Debug 1（调试 1)",
+        "message": "Debug 1（调试 1）",
         "english": "Debug 1"
     },
     "receiverCrsfTelemetrySensor_DEBUG_2": {
-        "message": "Debug 2（调试 2)",
+        "message": "Debug 2（调试 2）",
         "english": "Debug 2"
     },
     "receiverCrsfTelemetrySensor_DEBUG_3": {
-        "message": "Debug 3（调试 3)",
+        "message": "Debug 3（调试 3）",
         "english": "Debug 3"
     },
     "receiverCrsfTelemetrySensor_DEBUG_4": {
-        "message": "Debug 4（调试 4)",
+        "message": "Debug 4（调试 4）",
         "english": "Debug 4"
     },
     "receiverCrsfTelemetrySensor_DEBUG_5": {
-        "message": "Debug 5（调试 5)",
+        "message": "Debug 5（调试 5）",
         "english": "Debug 5"
     },
     "receiverCrsfTelemetrySensor_DEBUG_6": {
-        "message": "Debug 6（调试 6)",
+        "message": "Debug 6（调试 6）",
         "english": "Debug 6"
     },
     "receiverCrsfTelemetrySensor_DEBUG_7": {
-        "message": "Debug 7(调试 7)",
+        "message": "Debug 7（调试 7）",
         "english": "Debug 7"
     },
     "receiverBars": {
@@ -3329,9 +3328,8 @@
         "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!"
     },
     "mixerMotorisedTailCalibrationNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
-        "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
-        "status": "New entry. Please translate!"
+        "message": "<span class=\"message-negative\">警告：</span> 使用尾电机时，偏航校准应为 100%。除非您知道自己在做什么，否则请不要更改此值。",
+        "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing."
     },
     "mixerMainRotorSettings": {
         "message": "主旋翼设置",

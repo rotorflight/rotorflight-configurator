@@ -2291,7 +2291,7 @@
         "english": "Model Id"
     },
     "receiverTelemetryGroup_DEBUG": {
-        "message": "Fehlersuche",
+        "message": "Debug",
         "english": "Debug"
     },
     "receiverTelemetryGroup_SYSTEM": {
@@ -3200,7 +3200,7 @@
         "english": "Min"
     },
     "servoMinHelp": {
-        "message": "Tiefster Stellwert (minimale Impulsbreite) in µs. Diese Einstellung begrenzt den zulässigen negativen Servoweg. Sie dient dazu, ein Anschlagen des Servoarms zu verhindern.",
+        "message": "Tiefster Stellwert (minimale Impulsbreite) in µs. Diese Einstellung begrenzt den zulässigen negativen Servoweg. Sie dient dazu, ein mechanisches Anschlagen zu verhindern.",
         "english": "Lowest point of travel (minimum pulse width). This setting changes the allowed negative servo throw. It is used for avoiding servo arm binding at the negative travel extreme."
     },
     "servoMax": {
@@ -3208,7 +3208,7 @@
         "english": "Max"
     },
     "servoMaxHelp": {
-        "message": "Höchster Stellwert (maximale Impulsbreite) in µs. Diese Einstellung begrenzt den zulässigen positiven Servoweg. Sie dient dazu, ein Anschlagen des Servoarms zu verhindern.",
+        "message": "Höchster Stellwert (maximale Impulsbreite) in µs. Diese Einstellung begrenzt den zulässigen positiven Servoweg. Sie dient dazu, ein mechanisches Anschlagen zu verhindern.",
         "english": "Highest point of travel (maximum pulse width). This setting changes the allowed positive servo throw. It is used for avoiding servo arm binding at the positive travel extreme."
     },
     "servoScaleNeg": {
@@ -3232,7 +3232,7 @@
         "english": "Rate [Hz]"
     },
     "servoRateHelp": {
-        "message": "PWM-Aktualisierungs-Frequenz in Hz. Für analoge Servos muss der Wert auf 50 Hz eingestellt werden, da höhere Werte zu Schäden führen können. Für Digitalservos sind Werte von 100Hz bis 560Hz typisch. Bitte prüfe das Servo-Datenblatt.<br><b>Hinweis:</b> Wähle <i>Speichern und neu starten</i>, um die Aktualisierungs-Frequenz tatsächlich zu ändern, da die Frequenz beim Booten initialisiert wird.",
+        "message": "PWM-Aktualisierungs-Frequenz in Hz. Für analoge Servos muss der Wert auf 50 Hz eingestellt werden, da höhere Werte zu Schäden führen können. Für Digitalservos sind Werte von 100Hz bis 560Hz typisch. Bitte prüfe das Servo-Datenblatt.<br><b>Hinweis:</b> Wähle <i>Speichern und Neustart</i>, damit die Änderungen wirksam werden, da die Frequenz beim Booten initialisiert wird.",
         "english": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time."
     },
     "servoSpeed": {
@@ -3256,7 +3256,7 @@
         "english": "Geo cor"
     },
     "servoGeometryCorrectionHelp": {
-        "message": "Aktiviert die <i>Geometrie-Korrektur</i> zur Linearisierung der Servo-Drehbewegung. Nicht mit Linearservos verwenden.",
+        "message": "Aktiviert die <i>Geometrie-Korrektur</i> zur Linearisierung der Servo-Drehbewegung. Nicht mit Linear-Servos verwenden.",
         "english": "Enable <i>Geometry Correction</i> for correcting the rotational geometry at the servo movement extremes. Do not use with linear servos."
     },
     "servoSignal": {
@@ -3264,7 +3264,7 @@
         "english": "PWM Signal"
     },
     "servoRateRebootNote": {
-        "message": "<span class=\"message-negative\">Warnung:</span> Änderungen des Parameters <i>Servo Rate</i> erfordern einen Systemneustart, bevor sie wirksam werden!",
+        "message": "<span class=\"message-negative\">Warnung:</span> Änderungen der Servo-<i>Frequenz</i> erfordern einen System-Neustart, bevor sie wirksam werden!",
         "english": "<span class=\"message-negative\">Warning:</span> Changes to the <i>Servo Rate</i> parameter require System Reboot before taking affect!"
     },
     "servoUnusualLimitsWarning": {
@@ -3272,15 +3272,15 @@
         "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!"
     },
     "servoUnusualScalesWarning": {
-        "message": "<span class=\"message-negative\">Warnung:</span> Die Servo <i>Skalierung</i> ist auf ungewöhnliche Werte eingestellt. Bitte überprüfen!",
+        "message": "<span class=\"message-negative\">Warnung:</span> Die Servo-<i>Mitte oder Skalierung</i> ist auf ungewöhnliche Werte eingestellt. Bitte prüfen!",
         "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Scales</i> are set to unusual values. Please check!"
     },
     "servoUnusualRatesWarning": {
-        "message": "<span class=\"message-negative\">Warnung:</span> Die Servo-<i>Raten</i> sind auf ungewöhnliche Werte eingestellt. Bitte prüfen!!",
+        "message": "<span class=\"message-negative\">Warnung:</span> Die Servo-<i>Frequenzen</i> sind auf ungewöhnliche Werte eingestellt. Bitte prüfen!",
         "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!"
     },
     "servoUnusualGeometryCorrection": {
-        "message": "<span class=\"message-negative\">Warnung:</span> Die <i>Geometriekorrektur</i> ist nicht für alle Servos gleich. Bitte prüfen!",
+        "message": "<span class=\"message-negative\">Warnung:</span> Die <i>Geometrie-Korrektur</i> ist nicht für alle Servos gleich. Bitte prüfen!",
         "english": "<span class=\"message-negative\">Warning:</span> The <i>Geometry correction</i> is not equal for all servos. Please check!"
     },
     "servoOverride": {
@@ -3328,9 +3328,8 @@
         "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!"
     },
     "mixerMotorisedTailCalibrationNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
-        "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
-        "status": "New entry. Please translate!"
+        "message": "<span class=\"message-negative\">Warnung:</span> Bei einem motorisierten Heck sollte die Heck-Kalibrierung 100% betragen. Ändere diesen Wert nur, wenn du dir ganz sicher bist.",
+        "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing."
     },
     "mixerMainRotorSettings": {
         "message": "Hauptrotor-Einstellungen",
@@ -3513,7 +3512,7 @@
         "english": "Collective trim [%]"
     },
     "mixerSwashTrimHelp": {
-        "message": "Trimmung für Taumelscheibenanlenkungen. Nur verwenden, wenn die Anlenkungen nicht einstellbar sind.",
+        "message": "Trimmung für Taumelscheiben-Anlenkungen. Nur verwenden, wenn die Anlenkungen nicht einstellbar sind.",
         "english": "Trim for swashplate linkages. Use only if the linkages are not adjustable."
     },
     "mixerTailRotorSettings": {
@@ -3553,7 +3552,7 @@
         "english": "Yaw calibration [%]"
     },
     "mixerTailRotorCalibrationHelp": {
-        "message": "Stelle die Heckverstärkung so ein, dass sie zu der mechanischen Verstärkung passt. Normalerweise ca. 50-150% für servogetriebene Heckrotoren, kann aber bei motorisierten Heckrotoren stark abweichen.",
+        "message": "Stelle die Heckverstärkung so ein, dass sie zu der mechanischen Verstärkung passt. Normalerweise ca. 50-150% für mit einem Servo angesteuerte Heckrotoren, kann aber bei motorisierten Heckrotoren deutlich abweichen.",
         "english": "Adjust the yaw gain to match the mechanical gain. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors."
     },
     "mixerTailRotorMinYaw": {
@@ -4541,7 +4540,7 @@
         "english": "Execute"
     },
     "dialogCLIExitTitle": {
-        "message": "CLI-Beendigungswarnung!",
+        "message": "CLI-Beendigungs-Warnung!",
         "english": "CLI Exit Warning!"
     },
     "dialogCLIExitNote": {
@@ -4581,7 +4580,7 @@
         "english": "Leave Logging / Disconnect"
     },
     "loggingErrorNotConnected": {
-        "message": "<strong>Verbindung</strong> nötig",
+        "message": "<strong>Verbindung</strong> notwendig",
         "english": "You need to <strong>connect</strong> first"
     },
     "loggingErrorLogFile": {
@@ -4601,7 +4600,7 @@
         "english": "Your flight controller's firmware does not support Blackbox logging."
     },
     "blackboxMaybeSupported": {
-        "message": "Die Firmware des Flight-Controllers ist zu alt, um diese Registerkarte zu unterstützen, oder die Blackbox-Funktion ist auf der Registerkarte Konfiguration deaktiviert",
+        "message": "Die Firmware des Flight-Controllers ist zu alt, um diese Registerkarte zu unterstützen, oder die Blackbox-Funktion ist auf der Registerkarte Konfiguration deaktiviert.",
         "english": "Your flight controller's firmware is too old to support this tab, or the Blackbox feature is disabled on the Configuration tab."
     },
     "blackboxConfiguration": {
@@ -4621,7 +4620,7 @@
         "english": "Onboard Flash"
     },
     "blackboxLoggingSdCard": {
-        "message": "SD Karte",
+        "message": "SD-Karte",
         "english": "SD Card"
     },
     "blackboxLoggingSerial": {
@@ -4633,7 +4632,7 @@
         "english": "Blackbox Logging Options"
     },
     "blackboxLog_command": {
-        "message": "Steuerbefehl",
+        "message": "Befehl",
         "english": "Command"
     },
     "blackboxLog_setpoint": {
@@ -4777,7 +4776,7 @@
         "english": "Confirm dataflash erase"
     },
     "dataflashConfirmEraseNote": {
-        "message": "Dadurch werden alle Blackbox-Logs oder andere im Flashspeicher enthaltenen Daten gelöscht. Es kann bis zu 20 Sekunden dauern. Bist du dir sicher?",
+        "message": "Dadurch werden alle Blackbox-Logs oder andere im Flash-Speicher enthaltenen Daten gelöscht. Es kann bis zu 20 Sekunden dauern. Bist du dir sicher?",
         "english": "This will erase any Blackbox logs or other data contained in the dataflash. It should take about 20 seconds, are you sure?"
     },
     "dataflashSavingTitle": {
@@ -4789,7 +4788,7 @@
         "english": "Saving could take several minutes, please wait."
     },
     "dataflashSavingNoteAfter": {
-        "message": "Speichern abgeschlossen! Bitte \"ok\" drücken, um fortzufahren.",
+        "message": "Speichern abgeschlossen! Bitte \"Ok\" drücken, um fortzufahren.",
         "english": "Save completed! Press \"Ok\" to continue."
     },
     "dataflashButtonSaveCancel": {
@@ -5037,7 +5036,7 @@
         "english": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "Bei Verbindungsabbruch zum Board: <ul><li>Ausschalten</li><li>'Keine Reboot-Sequenz' und 'Chip vollständig löschen' aktivieren</li><li>Flight-Controller mit gedrückter Boot-Taste oder Boot-Brücke per USB verbinden</li><li>Power LED leuchtet (kein Blinken)</li><li> Installiere alle STM32-Treiber und Zadig, falls benötigt (siehe <a href=\"https://www.rotorflight.org/docs/2.1.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> Abschnitt des Handbuchs)</li><li>Konfigurator schließen, dann Konfigurator neu starten</li><li>BOOT-Taste loslassen, falls dein Flight-Controller eine hat</li><li>Flashen mit korrekter Firmware (mit manueller Baudrate, falls im Handbuch des Flight-Controllers angegeben).</li><li>Ausschalten</li><li>Boot-Brücke entfernen</li><li>Einschalten (Aktivitäts-LED sollte blinken)</li><li>Wie gewohnt anschließen</li></ul>",
+        "message": "Bei Verbindungsabbruch zum Board: <ul><li>Ausschalten</li><li>'Keine Reboot-Sequenz' und 'Chip vollständig löschen' aktivieren</li><li>Flight-Controller mit gedrückter Boot-Taste oder Boot-Brücke per USB verbinden</li><li>Power LED leuchtet (kein Blinken)</li><li> Installiere alle STM32-Treiber und Zadig, falls benötigt (siehe <a href=\"https://www.rotorflight.org/docs/2.1.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> Abschnitt des Handbuchs)</li><li>Konfigurator schließen, dann Konfigurator neu starten</li><li>BOOT-Taste loslassen, falls dein Flight-Controller eine hat</li><li>Flashen mit korrekter Firmware (mit manueller Baudrate, falls im Handbuch des Flight-Controllers angegeben)</li><li>Ausschalten</li><li>Boot-Brücke entfernen</li><li>Einschalten (Aktivitäts-LED sollte blinken)</li><li>Wie gewohnt anschließen</li></ul>",
         "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.1.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
     },
     "firmwareFlasherFirmwareNotLoaded": {
@@ -5682,7 +5681,7 @@
         "english": "Error Limit for Yaw Axis [&deg;]"
     },
     "profilesOffsetLimitHelp": {
-        "message": "Hartes Limit für den High-Speed-Integral Offset-Winkel (Versatz-Winkel) im PID-Regelkreis. Der absolute HSI-Offset, und damit der HSI-Anteil, werden diese Grenzen nie überschreiten.",
+        "message": "Hartes Limit für den High-Speed-Integral Offset-Winkel (Versatz-Winkel) im PID-Regelkreis. Der absolute HSI-Offset, und damit der HSI-Anteil, wird diese Grenzen nie überschreiten.",
         "english": "Hard limit for the High Speed Integral offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits."
     },
     "profilesOffsetLimitRoll": {
@@ -6606,7 +6605,7 @@
         "english": "Valid Pulse Range Settings"
     },
     "failsafePulsrangeHelp": {
-        "message": "Pulse kürzer als das Minimum oder länger als das Maximum sorgen dafür, dass der Kanal in einen Rückfall-Modus geht und die Rückfalleinstellungen greifen.",
+        "message": "Pulse kürzer als das Minimum oder länger als das Maximum sind ungültig und sorgen dafür, dass die AUX-Kanäle auf die individuellen Rückfall-Einstellungen gehen oder für die Flugkanäle ein Failsafe Stufe 1 ausgelöst wird.",
         "english": "Pulses shorter than minimum or longer than maximum are invalid and will trigger application of individual channel fallback settings for AUX channels or entering stage 1 for flightchannels"
     },
     "failsafeRxMinUsecItem": {
@@ -6622,7 +6621,7 @@
         "english": "Channel Fallback Settings"
     },
     "failsafeChannelFallbackSettingsHelp": {
-        "message": "Im Fall eines Stufe 1 Failsafe werden diese Einstellungen den AUX Kanälen zugewiesen. <strong>Hinweis:</strong> Werte werden im Abstand von 5us gesetzt, kleinere Einstellungen werden vernachlässigt.",
+        "message": "Diese Einstellungen werden auf ungültige einzelne AUX-Kanäle oder auf alle Kanäle beim Eintritt in Failsafe Stufe 1 angewendet. <strong>Hinweis:</strong> Die Werte werden in Schritten von 5µs gespeichert, weshalb kürzere Abstände vernachlässigt werden.",
         "english": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 5µs, so smaller changes may be ignored."
     },
     "failsafeChannelFallbackSettingsAuto": {
@@ -6630,7 +6629,7 @@
         "english": "<strong>Auto</strong> means Roll, Pitch and Yaw to center and Throttle low. <strong>Hold</strong> means maintain the last good value received"
     },
     "failsafeChannelFallbackSettingsHold": {
-        "message": "<strong>Halten</strong> heißt, dass der letzte gültige Wert gehalten wird.<strong>Einstellen</strong> heißt, dass der hier gesetzte Wert verwendet wird.",
+        "message": "<strong>Halten</strong> heißt, dass der letzte gültige Wert gehalten wird. <strong>Einstellen</strong> bedeutet, dass der hier vorgegebene Wert verwendet wird.",
         "english": "<strong>Hold</strong> means maintain the last good value received. <strong>Set</strong> means the value given here will be used"
     },
     "failsafeChannelFallbackOptionAuto": {
@@ -6786,7 +6785,7 @@
         "english": "Failsafe Switch Action"
     },
     "failsafeSwitchModeHelp": {
-        "message": "Diese Option bestimmt, was geschieht, wenn Failsafe über einen AUX Schalter aktiviert wurde:<br/><strong>Stufe 1</strong> aktiviert Failsafe Stufe 1. Dies ist nützlich, wenn du das Signalverlust Failsafe Verhalten testen möchtest.<br/><strong>Stufe 2</strong> überspringt Stufe 1 und aktiviert das Stufe 2 Verfahren sofort<br/><strong>Kill</strong> disarmed sofort (dein Fluggerät wird abstürzen)",
+        "message": "Diese Option bestimmt, was geschieht, wenn Failsafe über einen AUX Schalter aktiviert wurde:<br/><strong>Stufe 1</strong> aktiviert Failsafe Stufe 1. Dies ist nützlich, wenn du das Failsafe-Verhalten bei Signalverlust testen möchtest.<br/><strong>Stufe 2</strong> überspringt Stufe 1 und aktiviert das Stufe 2 Verfahren sofort<br/><strong>Kill</strong> disarmed sofort (dein Fluggerät wird abstürzen)",
         "english": "This option determines what happens when Failsafe is activated through AUX switch:<br/><strong>Stage 1</strong> activates Stage 1 failsafe. This is useful if you want to simulate the exact signal loss failsafe behavior.<br/><strong>Stage 2</strong> skips Stage 1 and activates the Stage 2 procedure immediately<br/><strong>Kill</strong> disarms instantly (your craft will crash)"
     },
     "failsafeSwitchOptionStage1": {

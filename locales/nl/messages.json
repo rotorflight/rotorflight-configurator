@@ -1844,8 +1844,7 @@
     },
     "portsFunction_SBUS_OUT": {
         "message": "S.BUS Output",
-        "english": "S.BUS Output",
-        "status": "New entry. Please translate!"
+        "english": "S.BUS Output"
     },
     "portsFunction_CUSTOM": {
         "message": "Aangepast",
@@ -3329,9 +3328,8 @@
         "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!"
     },
     "mixerMotorisedTailCalibrationNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
-        "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
-        "status": "New entry. Please translate!"
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> Yaw-calibratie moet 100% zijn bij gebruik van een gemotoriseerde staart. Verander deze waarde niet, tenzij je precies weet wat je doet.",
+        "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing."
     },
     "mixerMainRotorSettings": {
         "message": "Instellingen hoofdrotor",
@@ -3410,19 +3408,19 @@
         "english": "Reverse"
     },
     "mixerElevatorDirection": {
-        "message": "Pitch besturingsrichting",
+        "message": "Elevator besturingsrichting",
         "english": "Elevator Control Direction"
     },
     "mixerElevatorDirectionHelp": {
-        "message": "Afhankelijk van de positie van de pitch-servo (elevator) en het ontwerp van de rotorkop, kan de richting worden omgekeerd.",
+        "message": "Afhankelijk van de positie van de elevator-servo en het ontwerp van de rotorkop, kan de richting worden omgekeerd.",
         "english": "Depending on the elevator servo position and the head design, the direction may be reversed."
     },
     "mixerAileronDirection": {
-        "message": "Roll besturingsrichting",
+        "message": "Aileron besturingsrichting",
         "english": "Aileron Control Direction"
     },
     "mixerAileronDirectionHelp": {
-        "message": "Afhankelijk van de positie van de roll-servo's (aileron) en het ontwerp van de rotorkop, kan de richting worden omgekeerd.",
+        "message": "Afhankelijk van de positie van de aileron-servo's (rol) en het ontwerp van de rotorkop, kan de richting worden omgekeerd.",
         "english": "Depending on the aileron servo position and the head design, the direction may be reversed."
     },
     "mixerCollectiveDirection": {
