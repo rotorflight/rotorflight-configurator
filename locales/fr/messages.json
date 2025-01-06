@@ -3966,6 +3966,11 @@
         "message": "Charger à partir du fichier",
         "english": "Load from file"
     },
+    "cliDumpAllBtn": {
+        "message": "Backup",
+        "english": "Backup",
+        "status": "New entry. Please translate!"
+    },
     "cliSaveSettingsBtn": {
         "message": "Save Settings",
         "english": "Save Settings",
