@@ -198,9 +198,6 @@ tab.initialize = function (callback) {
             setTimeout(() => {
                 TABS.cli.send("dump all\n", function () { });
             }, 300);
-            setTimeout(() => {
-                $('.tab-cli .save').trigger('click');
-            }, 6000);
         });
 
         $('.tab-cli .exit').click(function() {
