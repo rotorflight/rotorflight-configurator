@@ -105,13 +105,45 @@
     border: 1px solid var(--subtleAccent);
     border-radius: 5px;
     background: white;
-    min-height: 187px;
     font-size: 11px;
 }
 
 .tab-landing .content_mid .wrap2 p {
     margin-top: 1em;
     margin-bottom: 1em;
+}
+
+.tab-landing .content_mid .btn-grad {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    margin-top: 20px;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: 0.5s;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: Helvetica;
+    cursor: pointer;
+    background-size: 200% auto;
+}
+
+.tab-landing .content_mid .btn-grad {
+    background-image: linear-gradient(
+      to right,
+      #000000 0%,
+      hsl(202, 50%, 25%),
+      100%,
+      #000000 100%
+    );
+}
+
+.tab-landing .content_mid .btn-grad:hover {
+    background-position: right center;
+    color: #fff;
 }
 
 .tab-landing .content_mid .qrcode {
