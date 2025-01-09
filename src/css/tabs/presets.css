@@ -1,0 +1,858 @@
+
+.tab-presets {
+  height: 100%;
+  border: none;
+}
+
+.tab-presets input,
+.tab-presets select {
+  border: 1px solid var(--subtleAccent);
+  padding-left: 3px;
+  border-radius: 3px;
+}
+
+.tab-presets .content_wrapper {
+  height: calc(100% - 30px - 3ex);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.tab-presets p {
+  padding: 0;
+  border: 0 dotted hsl(0, 0%, 24%);;
+}
+.tab-presets .presets_warnings {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.tab-presets .top_panel_spacer {
+  width: 0px;
+  display: inline;
+  border: 1px #f1f1f1;
+  border-style: none none none solid;
+  height: 60%;
+  margin-right: 10px;
+  float: right;
+}
+.tab-presets .tab_title {
+  padding: 20px 20px 0px 20px;
+}
+.tab-presets .tab_title .presets_top_bar_button_panel .regular-button {
+  margin-bottom: 0px;
+  margin-top: 0px;
+  line-height: 17px;
+  font-size: 10px;
+  border-radius: 3px;
+}
+.tab-presets .ms-choice {
+  background-color: #3a3a3a !important;
+  color: white !important;
+  border: 1px solid var(--subtleAccent);
+  border-radius: 3px;
+}
+.tab-presets .ms-choice > div.icon-close {
+  font-size: 16px;
+}
+.tab-presets .ms-choice > div.icon-close:hover::before {
+  color: #888888;
+}
+
+/* CLI stuff start  */
+.tab-presets .backdrop {
+  border: 1px solid var(--subtleAccent);
+  background-color: rgba(0, 0, 0, 0.8);
+  margin-top: 0;
+  flex-grow: 1;
+  background-image: url("/images/light-wide-1.svg");
+  background-repeat: no-repeat;
+  background-position: 50% 80%;
+  background-size: 600px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.80);
+  width: auto;
+  height: 600px;
+}
+
+.tab-presets .window {
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-family: monospace;
+    color: white;
+    box-sizing: border-box;
+    float: left;
+}
+.tab-presets .window .wrapper, .tab-presets .window .wrapper > * {
+  user-select: text;
+}
+
+.tab-presets textarea[name='commands'] {
+  -webkit-box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  width: 100%;
+  margin-top: 5px;
+  height: 100px;
+  line-height: 20px;
+  padding-left: 5px;
+  border: 1px solid var(--subtleAccent);
+  border-radius: 5px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  resize: none;
+}
+
+.tab-presets .presets_cli_dialog_warning {
+  font-size: 1.2em;
+  margin-bottom: 8px;
+}
+.tab-presets #content-watermark {
+  z-index: 0;
+}
+.tab-presets .window .wrapper {
+  white-space: pre-wrap;
+  height: 0px;
+}
+.tab-presets .window .error_message {
+  color: red;
+  font-weight: bold;
+}
+.tab-presets .save {
+  color: white;
+}
+
+.tab-presets .presets_apply_progress_dialog_progress_bar {
+  width: 100%;
+  height: 20px;
+  margin-top: 12px;
+}
+
+#presets_cli_dialog {
+  width: 900px;
+  padding: 24px;
+}
+#presets_cli_dialog .regular-button {
+  margin-bottom: 0px;
+  margin-left: 12px;
+  margin-right: 0px;
+  float: right;
+}
+
+.tab-presets .presets_cli_content_wrapper {
+  flex-direction: column;
+  display: flex;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+/* end CLI box */
+
+/* multiple-select */
+.tab-presets .ms-drop {
+  z-index: 2001;
+}
+.tab-presets .ms-drop input[type="radio"] {
+  margin-top: 0.1rem !important;
+}
+.tab-presets .cf_doc_version_bt {
+  margin-top: 20px;
+}
+/* end multiple-select */
+#presets_content_wrapper {
+  padding: 0px;
+  position: relative;
+}
+.presets_top_bar_pannel {
+  margin-left: auto;
+}
+.presets_title_text {
+  display: inline-block;
+}
+.presets_top_bar_button_panel {
+  display: inline;
+}
+.presets_warning_backup {
+  display: grid;
+  grid-template-columns: 1fr fit-content(300px);
+}
+.presets_warning_backup_text {
+  padding-right: 24px;
+}
+.presets_warning_backup_button_hide {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  line-height: 17px;
+  font-size: 10px;
+  height: 17px;
+}
+.presetsWikiButton {
+  margin-right: 0px;
+}
+#presets_list {
+  padding: 0px 0px 20px 0px;
+  height: calc(100% - 180px);
+  display: grid;
+  grid-gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+}
+#presets_list:last-child::after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: "&nbsp;";
+  clear: both;
+  height: 0;
+}
+#preset_list_wrapper {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+#presets_global_loading {
+  padding: 0px 20px 20px 20px;
+  display: none;
+  width: 50%;
+  height: 50%;
+  margin: auto;
+}
+#presets_global_loading_error {
+  padding: 0px 20px 20px 20px;
+  display: none;
+}
+#presets_main_content {
+  display: none;
+}
+.presets_filter_select {
+  width: 100%;
+  background-color: #3a3a3a;
+  color: var(--defaultText);
+}
+.presets_filter_select_nonempty {
+  border-color: #FFBB00 !important;
+  border-width: 2px !important;
+}
+.presets_search_settings {
+  position: sticky;
+  top: 0px;
+  background-color: var(--backgroundColor); 
+  z-index: 10;
+}
+.ms-drop {
+  background-color: #3a3a3a !important;
+  color: var(--defaultText) !important;
+}
+.ms-drop input[type="checkbox"] {
+  margin-top: 0.1rem !important;
+}
+.presets_text_input {
+  border: 1px solid hsl(0, 0%, 24%);
+  border-radius: 3px;
+  background-color: #3a3a3a;
+  color: var(--defaultText);
+}
+#presets_filter_text {
+  height: 26px;
+  flex: 1;
+  padding-left: 5px;
+}
+#presets_search_hint {
+  float: left;
+  width: 28px;
+  height: 28px;
+  margin-right: 12px;
+  background-repeat: no-repeat;
+  background-image: url(../../../images/icons/cf_icon_search_orange.svg);
+}
+#presets_search_bar_wrapper {
+  display: flex;
+  padding: 2ex 20px 2ex 20px;
+}
+.presets_filter_table_header {
+  background: var(--quietHeader);
+  color: var(--defaultText);
+  border-radius: 4px;
+  font-weight: normal;
+  text-align: left;
+  padding: 4px 4px 4px 6px;
+}
+.presets_filter_table_value {
+  background-color: hsl(0, 0%, 15%);
+  width: 100%;
+}
+#presets_detailed_dialog {
+  width: 70%;
+  height: 820px;
+  padding: 12px 12px 0px 12px;
+}
+#presets_sources_dialog {
+  width: 600px;
+  height: 520px;
+}
+#presets_apply_progress_dialog {
+  width: 300px;
+  padding: 24px;
+}
+.presets_filter_table_wrapper {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  padding: 0px 20px 0px 20px;
+}
+.presets_filter_table_wrapper .freelabel {
+  display: inline-block;
+  padding: 4px 0 4px 0;
+}
+#presets_list_no_found {
+  font-size: 1.5em;
+}
+#presets_list_too_many_found {
+  font-size: 1.5em;
+}
+.presets_secondary_top_bar_panel_buttons {
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-bottom: 8px;
+}
+.presets_secondary_top_bar_panel_buttons .regular-button {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  line-height: 17px;
+  font-size: 10px;
+  border-radius: 3px;
+}
+@media only screen and (max-width: 1055px) {
+  .tab-presets .content_wrapper {
+    height: calc(100% - 87px);
+  }
+  .tab-presets .content_toolbar {
+    margin-top: 5px;
+  }
+  .presets_search_settings {
+    position: static;
+    top: unset;
+  }
+}
+@media only screen and (max-device-width: 1055px) {
+  .tab-presets .content_wrapper {
+    height: calc(100% - 87px);
+  }
+  .tab-presets .content_toolbar {
+    margin-top: 5px;
+  }
+  .presets_search_settings {
+    position: static;
+    top: unset;
+  }
+}
+@media all and (max-width: 575px) {
+  .tab-presets .content_wrapper {
+    height: calc(100% - 51px);
+  }
+  .tab-presets .tab_title {
+    padding: 20px 10px 10px 10px;
+  }
+  .tab-presets .backdrop {
+    background-size: 100%;
+  }
+  .tab-presets .presets_warnings {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  #presets_list {
+    grid-template-columns: 100%;
+  }
+  #preset_list_wrapper {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .presets_search_settings {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  #presets_search_bar_wrapper {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 1ex;
+  }
+  .presets_filter_row {
+    display: table-row;
+  }
+  .presets_filter_table_wrapper {
+    display: table;
+    border-spacing: 6px;
+    margin-right: -6px;
+    margin-left: -6px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .presets_filter_table_header {
+    display: table-cell;
+    background-color: unset;
+    border-right: unset;
+  }
+  .presets_filter_table_value {
+    display: table-cell;
+  }
+  #presets_cli_dialog {
+    padding: 12px;
+  }
+  #presets_cli_dialog .btn {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+  }
+  #presets_apply_progress_dialog {
+    padding: 12px;
+  }
+  #presets_cli {
+    height: calc(100% - 121px);
+  }
+  #presets_cli_background {
+    height: 100%;
+  }
+  .presets_warning_backup {
+    display: block;
+    grid-template-columns: 1fr fit-content(300px);
+  }
+  .presets_warning_backup_text {
+    padding-right: 24px;
+    margin-bottom: 6px;
+  }
+}
+
+
+/* Start detailed dialog panel */
+
+.preset_dialog_title_panel {
+  padding-bottom: .5ex;
+  margin-bottom: 2ex;
+}
+
+#presets_detailed_dialog {
+  padding: 0px; /* main.css defines a padding of 1em but we want to turn this off so the title/footer bar looks nice */
+} 
+
+#preset_dialog_properties {
+  padding: 0px 0px 0px 20px;
+}
+
+.preset_dialog_scrollable {
+  bottom: 51px;
+  width: 100%;
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#presets_detailed_dialog .content_toolbar {
+  position: absolute;
+  bottom: 0; /* lock footer to the bottom of the dialog */
+}
+
+#preset_dialog_content_wrapper .preset_panel_title {
+  padding-bottom: 0.5ex;
+  border-bottom: 1px solid #FFBB00;
+  margin-bottom: 2ex;
+}
+
+#preset_dialog_content_wrapper .ms-choice > span.placeholder {
+  color: var(--defaultText);
+}
+
+#preset_dialog_content_wrapper .left-panel {
+  position: absolute;
+  left: 0px;
+  padding-left: 20px;
+}
+
+.presets-detailed-dialog-property-table {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.presets-detailed-dialog-property-table td {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.presets-detailed-dialog-property-table-first-col {
+  width: 150px;
+}
+
+.preset_dialog_text {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-top: 12px;
+  overflow-y: scroll;
+  height: 560px;
+  font-size: 110%;
+  white-space: pre-line;
+  user-select: text;
+}
+
+#preset_dialog_text_cli {
+  -webkit-box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border: 1px solid var(--subtleAccent);
+  border-radius: 5px;
+  margin-right: 16px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#preset_dialog_html_description {
+  white-space: normal;
+}
+
+#preset_dialog_html_description h1 {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 24px;
+  padding-top: 10px;
+  padding-bottom: 3px;
+}
+
+#preset_dialog_html_description h2 {
+  font-weight: 300;
+  font-size: 16px;
+}
+
+#preset_dialog_html_description h3 {
+  padding-top: 5px;
+  padding-bottom: 0px;
+  font-weight: 200;
+  font-size: 12px;
+}
+
+#preset_dialog_html_description h4 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-weight: 200;
+  font-size: 10px;
+}
+
+#preset_dialog_html_description ul {
+  padding-left: 25px;
+}
+
+#preset_dialog_html_description ul li {
+  padding-left: 12px;
+  list-style-type: disclosure-closed;
+}
+
+#preset_dialog_html_description ol li {
+  padding-left: 12px;
+  list-style-type: decimal;
+}
+
+#preset_options_panel {
+  height: 20px;
+}
+
+#preset_options_panel .ms-choice {
+  border-color: #FFBB00;
+  border-width: 2px;
+}
+#preset_options_panel > span {
+  line-height: 20px;
+}
+#preset_dialog_loading {
+  height: 600px;
+}
+#preset_options_select {
+  width: 80%;
+}
+#preset_options_label {
+  width: 100px;
+  display: inline-block;
+}
+#presets_detailed_dialog .content_toolbar {
+  margin-left: auto;
+  margin-right: -12px;
+}
+#presets_detailed_dialog .content_toolbar .btn {
+  display: contents;
+}
+#presets_detailed_dialog .ms-drop ul > li.hide-radio:focus {
+  background: none !important;
+}
+.ms-drop ul > li.hide-radio:hover {
+  background: none !important;
+}
+
+@media all and (max-width: 575px) {
+  .preset_dialog_text {
+    height: unset;
+    padding-bottom: 100px;
+  }
+
+  #preset_dialog_content_wrapper .content_toolbar {
+    position: fixed;
+  }
+
+  #presets_detailed_dialog .content_toolbar {
+    position: fixed;
+    padding-bottom: 8px;
+  }
+  #presets_detailed_dialog .btn {
+    margin-left: 0px;
+    width: 100%;
+  }
+  #presets_detailed_dialog .btn .left-panel {
+    margin-left: 12px;
+    margin-bottom: 12px;
+    padding-left: 0px;
+  }
+  #presets_detailed_dialog .btn .left-panel .regular-button {
+    float: none;
+    display: inline-block;
+  }
+  #presets_detailed_dialog .mainButton {
+    margin-top: 40px;
+  }
+  #preset_options_panel {
+    height: 26px;
+    margin-top: 6px;
+    grid-template-columns: 100px 1fr;
+    display: grid;
+  }
+  #preset_options_select {
+    width: 100%;
+  }
+
+  .preset_dialog_scrollable {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 51px;
+    height: unset;
+}
+}
+
+/* Preset Detailed Dialog End */
+
+/* Preset Title Panel Start */
+
+.preset_panel {
+  padding: 0px; /* main.css defines a padding of 1em but we want to turn this off so the title/footer bar looks nice */
+  color: var(--defaultText);
+  position: relative;
+}
+
+.preset_panel_wrapper {
+  padding: 0px 20px 20px 20px; /* turn the padding back on */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.preset_panel_title {
+  display: inline-block;
+  margin-bottom: 1ex;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: calc(100% - 60px);
+}
+
+.preset_panel_star {
+  background-image: url(../../../images/icons/star_orange.svg);
+  width: 25px;
+  height: 25px;
+  background-size: cover;
+  border-radius: 5px;
+  padding: 5px;
+  background-origin: content-box;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+.preset_panel_rotorflight_official {
+  background-image: url(../../../images/icons/cf_icon_heli.svg);
+  width: 25px;
+  height: 25px;
+  background-size: cover;
+  border-radius: 5px;
+  padding: 5px;
+  background-origin: content-box;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 20px;
+  top: 0px;
+}
+
+.preset_panel_category {
+  font-weight: bold;
+}
+
+.preset_panel_official {
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  display: inline-block;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.preset_panel_status_official {
+  background-color: green;
+}
+
+.preset_panel_status_community {
+  background-color: yellow;
+}
+
+.preset_panel_status_experimental {
+  background-color: red;
+}
+
+.preset_panel_versions_text {
+  font-weight: bold;
+}
+
+.preset_panel_keywords_text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.preset_panel_source_text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.preset_panel_table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.preset_panel_table td{
+  overflow: hidden;
+  height: 24px;
+  width: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.preset_panel_table td:nth-child(1){
+  width: 100px;
+}
+
+/* End Preset Title Panel  */
+
+/*  Start Preset Source Panel  */
+.presets_source_panel {
+  /* background-color: var(--backgroundColor); */
+  border: 1px solid var(--subtleAccent);
+  padding: 1.5ex;
+  box-shadow: 2px 2px 5px rgba(92, 92, 92, 0.25);
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.presets_source_panel_not_selected {
+  cursor: pointer;
+}
+
+.presets_source_panel_selected {
+  cursor: unset;
+}
+
+.presets_source_panel_not_selected:hover {
+  background-color: var(--darkAccent);
+  box-shadow: 2px 2px 5px rgba(92, 92, 92, 0.5);
+}
+
+.presets_source_panel_editing_table {
+  display: table;
+  width: 100%;
+  border-spacing: 6px;
+}
+
+.presets_source_panel_editing_row {
+  display: table-row;
+}
+
+.presets_source_panel_editing_field_label {
+  display: table-cell;
+  white-space: pre;
+  padding-right: 10px;
+  min-width: 100px;
+}
+
+.presets_source_panel_editing_field_edit {
+  display: table-cell;
+  width: 100%;
+  padding-right: 10px;
+}
+
+.presets_source_panel_editing_row .standard_input {
+  width: 100%;
+  margin-right: 12px;
+}
+
+.presets_source_panel_no_editing_name {
+  font-size: 130%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.presets_source_panel_no_editing_selected {
+  background-image: url(../../../images/icons/cf_icon_check_orange.svg);
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.presets_source_panel_reset, .presets_source_panel_save, .presets_source_panel_delete {
+  float: right;
+}
+
+.presets_sources_dialog_title_panel {
+  padding-bottom: .5ex;
+  margin-bottom: 2ex;
+}
+
+#presets_sources_dialog {
+  padding: 0px; /* main.css defines a padding of 1em but we want to turn this off so the title/footer bar looks nice */
+}
+
+.presets_sources_dialog_scrollable {
+  position: absolute;
+  bottom: 51px;
+  padding: 20px 20px 51px 20px; /* main.css turn the padding back on */
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 350px;
+}
+
+#presets_sources_dialog .content_toolbar {
+  position: absolute;
+  bottom: 0; /* lock footer to the bottom of the dialog */
+}
+
+@media all and (max-width: 575px) {
+  #presets_sources_dialog_content_wrapper .content_toolbar {
+      position: fixed;
+  }
+
+  .presets_sources_dialog_scrollable {
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-bottom: 51px;
+      height: unset;
+  }
+}
+
+/* End Presets Source Panel */

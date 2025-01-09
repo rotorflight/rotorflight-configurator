@@ -275,7 +275,6 @@ export const serial = {
     send: function (data, callback) {
         const self = this;
         self.outputBuffer.push({'data': data, 'callback': callback});
-
         function _send() {
             // store inside separate variables in case array gets destroyed
             const _data = self.outputBuffer[0].data;
