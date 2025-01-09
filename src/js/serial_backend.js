@@ -286,7 +286,8 @@ function onOpen(openInfo) {
         MSP.send_message(MSPCodes.MSP_API_VERSION, false, false, function () {
             GUI.log(i18n.getMessage('apiVersionReceived', [FC.CONFIG.apiVersion]));
 
-            if (semver.gte(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MIN_SUPPORTED) &&
+            if (semver.valid(FC.CONFIG.apiVersion) && 
+                semver.gte(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MIN_SUPPORTED) &&
                 semver.lte(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MAX_SUPPORTED)) {
                 MSP.send_message(MSPCodes.MSP_FC_VARIANT, false, false, function () {
                     if (FC.CONFIG.flightControllerIdentifier === 'RTFL') {
@@ -294,9 +295,22 @@ function onOpen(openInfo) {
                             MSP.send_message(MSPCodes.MSP_BUILD_INFO, false, false, function () {
                                 GUI.log(i18n.getMessage('firmwareInfoReceived', [FC.CONFIG.flightControllerIdentifier, FC.CONFIG.buildVersion]));
                                 GUI.log(i18n.getMessage('buildInfoReceived', [FC.CONFIG.buildRevision, FC.CONFIG.buildInfo]));
-                                if (semver.gte(FC.CONFIG.buildVersion, CONFIGURATOR.FW_VERSION_MIN_SUPPORTED) &&
+                                if (semver.valid(FC.CONFIG.buildVersion) &&
+                                    semver.gte(FC.CONFIG.buildVersion, CONFIGURATOR.FW_VERSION_MIN_SUPPORTED) &&
                                     semver.lte(FC.CONFIG.buildVersion, CONFIGURATOR.FW_VERSION_MAX_SUPPORTED)) {
                                         MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, processBoardInfo);
+                                } 
+                                else if (!semver.valid(FC.CONFIG.buildVersion)) {
+                                    let msg = i18n.getMessage('firmwareVersionInvalid', [FC.CONFIG.buildVersion]);
+                                    GUI.log(msg);
+                                    const dialog = $('.dialogConnectWarning')[0];
+                                    $('.dialogConnectWarning-content').html(msg);
+                                    $('.dialogConnectWarning-closebtn').click(function() {
+                                        dialog.close();
+                                    });
+                                    dialog.showModal();
+                                    console.log('Invalid build version [ ' + FC.CONFIG.buildVersion + '] detected, disconnecting');
+                                    $('div.connect_controls a.connect').click(); // disconnect
                                 }
                                 else {
                                     const dialog = $('.dialogConnectWarning')[0];
@@ -319,6 +333,18 @@ function onOpen(openInfo) {
                         connectCli();
                     }
                 });
+            }
+            else if (!semver.valid(FC.CONFIG.apiVersion)) {
+                let msg = i18n.getMessage('apiVersionInvalid', [FC.CONFIG.apiVersion]);
+                GUI.log(msg);
+                const dialog = $('.dialogConnectWarning')[0];
+                $('.dialogConnectWarning-content').html(msg);
+                $('.dialogConnectWarning-closebtn').click(function() {
+                    dialog.close();
+                });
+                dialog.showModal();
+                console.log('Invalid API version [ ' + FC.CONFIG.apiVersion + '] detected, disconnecting');
+                $('div.connect_controls a.connect').click(); // disconnect
             }
             else {
                 const dialog = $('.dialogConnectWarning')[0];
