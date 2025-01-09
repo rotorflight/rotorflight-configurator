@@ -596,6 +596,9 @@
     "firmwareTypeNotSupported": {
         "message": "Non - Rotorflight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode."
     },
+    "firmwareVersionInvalid": {
+        "message": "Firmware version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator."
+    },
     "resetToCustomDefaultsDialog": {
         "message": "There are custom defaults for this board available.<br />Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?"
     },
@@ -647,6 +650,9 @@
     },
     "apiVersionReceived": {
         "message": "MSP API version: <strong>$1</strong>"
+    },
+    "apiVersionInvalid": {
+        "message": "MSP API version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator."
     },
     "uniqueDeviceIdReceived": {
         "message": "Unique device ID: <strong>0x$1</strong>"
