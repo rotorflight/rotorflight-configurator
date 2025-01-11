@@ -140,6 +140,11 @@
         "message": "Auto-Conectar",
         "english": "Auto-Connect"
     },
+    "showAllPorts": {
+        "message": "Show All Ports",
+        "english": "Show All Ports",
+        "status": "New entry. Please translate!"
+    },
     "close": {
         "message": "Cerrar",
         "english": "Close"
@@ -206,6 +211,16 @@
         "message": "Auto-Conectar: Desactivado - El usuario debe elegir el puerto serie correcto y pulsar \"Conectar\" por si mismo",
         "english": "Auto-Connect: Disabled - User needs to select the correct serial port and click \"Connect\" button on its own"
     },
+    "showAllPortsEnabled": {
+        "message": "Show All Ports: Enabled - Configurator lists all possible ports",
+        "english": "Show All Ports: Enabled - Configurator lists all possible ports",
+        "status": "New entry. Please translate!"
+    },
+    "showAllPortsDisabled": {
+        "message": "Show All Ports: Disabled - Configurator will only list recognized ports",
+        "english": "Show All Ports: Disabled - Configurator will only list recognized ports",
+        "status": "New entry. Please translate!"
+    },
     "zoomBoxText": {
         "message": "Zoom:",
         "english": "Zoom:",
@@ -222,6 +237,11 @@
     "rememberLastTab": {
         "message": "Recordar última pestaña al conectar",
         "english": "Reopen last tab on connect"
+    },
+    "rememberLastSelectedBoard": {
+        "message": "Remember last selected board in firmware flasher",
+        "english": "Remember last selected board in firmware flasher",
+        "status": "New entry. Please translate!"
     },
     "analyticsOptOut": {
         "message": "No participar en la recogida anónima de datos estadísticos",
@@ -684,8 +704,8 @@
         "english": "No configuration received within <span class=\"message-negative\">10 seconds</span>, communication <span class=\"message-negative\">failed</span>"
     },
     "firmwareVersionNotSupported": {
-        "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
-        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
+        "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documentation.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
+        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documentation.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Esta versión de firmware <span class=\"message-negative\">no está soportada</span>. Por favor actualiza a un firmware con soporte para el api versión <strong>$1</strong> o superior. Usa CLI para realizar un copia de seguridad antes de la instalación. El proceso de copia/restauración usando CLI está en la documentación.<br />Como alternativa puedes descargar y usar una versión anterior del configurador si no estás listo para actualizar.",
@@ -993,8 +1013,8 @@
         }
     },
     "defaultDocumentation1": {
-        "message": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
-        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
+        "message": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
+        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
         "status": "Auto-converted translation. Please check!",
         "previous": {
             "message": "La wiki de Betaflight es un gran recurso de información, puedes encontrarla <a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">aquí</a>.",
@@ -1157,8 +1177,8 @@
         "status": "Reused translation. Please check!"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
+        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
         "status": "Reused translation. Please check!",
         "previous": {
             "message": "Lista de banderas indicando el por qué armar actualmente no está permitido. Pase el ratón sobre la bandera o consulte la Wiki (página 'Arming Sequence & Safety') para obtener más información.",
@@ -1589,9 +1609,14 @@
         "status": "New entry. Please translate!"
     },
     "feature_GPS": {
-        "message": "GPS para navegación y telemetría",
-        "english": "GPS for navigation and telemetry",
-        "status": "Reused translation. Please check!"
+        "message": "GPS for telemetry",
+        "english": "GPS for telemetry",
+        "status": "Reused translation. Please check!",
+        "previous": {
+            "message": "GPS para navegación y telemetría",
+            "english": "GPS for navigation and telemetry",
+            "status": "Reused translation. Please check!"
+        }
     },
     "feature_SONAR": {
         "message": "Sonar altitude radar",
@@ -1699,6 +1724,21 @@
             "english": "Other Features"
         }
     },
+    "featureTip_GPS": {
+        "message": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration.",
+        "english": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration.",
+        "status": "New entry. Please translate!"
+    },
+    "featureTip_LED_STRIP": {
+        "message": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration.",
+        "english": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration.",
+        "status": "New entry. Please translate!"
+    },
+    "featureTip_CMS": {
+        "message": "Enables firmware support for CMS.",
+        "english": "Enables firmware support for CMS.",
+        "status": "New entry. Please translate!"
+    },
     "configurationSerialPorts": {
         "message": "Serial Ports",
         "english": "Serial Ports",
@@ -1805,17 +1845,27 @@
         "english": "Accelerometer Trim"
     },
     "configurationAccelTrimsHelp": {
-        "message": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue.",
-        "english": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue.",
+        "message": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue.",
+        "english": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue.",
         "status": "New entry. Please translate!"
     },
     "configurationAccelTrimRoll": {
         "message": "Trimado Roll Acelerómetro",
         "english": "Accelerometer Roll Trim"
     },
+    "configurationAccelRollTrimHelp": {
+        "message": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right.",
+        "english": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right.",
+        "status": "New entry. Please translate!"
+    },
     "configurationAccelTrimPitch": {
         "message": "Trimado Pitch Acelerómetro",
         "english": "Accelerometer Pitch Trim"
+    },
+    "configurationAccelPitchTrimHelp": {
+        "message": "Increase the value to correct drift to the rear. Decrease the value (or use negative values) to correct drift to the front.",
+        "english": "Increase the value to correct drift to the rear. Decrease the value (or use negative values) to correct drift to the front.",
+        "status": "New entry. Please translate!"
     },
     "escProtocolDisabledMessage": {
         "message": "<strong>Atención:</strong> Seleccionar un protocolo de salida de motor que no es compatible con tus ESCs puede llevar a los <strong>ESCs a girar tan pronto como una batería esté conectada</strong>. Por esta razón, <strong>asegúrate siempre de quitar las hélices antes de conectar una batería por primera vez después de cambiar el protocolo de salida de motor</strong>.",
@@ -2282,6 +2332,11 @@
             "english": "OSD (FrSky Protocol)"
         }
     },
+    "portsFunction_SBUS_OUT": {
+        "message": "S.BUS Output",
+        "english": "S.BUS Output",
+        "status": "New entry. Please translate!"
+    },
     "portsFunction_CUSTOM": {
         "message": "Custom",
         "english": "Custom",
@@ -2535,9 +2590,29 @@
         "english": "One-wire Communication (Half-Duplex)",
         "status": "New entry. Please translate!"
     },
+    "receiverSerialHalfDuplexHelp": {
+        "message": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2.",
+        "english": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2.",
+        "status": "New entry. Please translate!"
+    },
     "receiverSerialInverted": {
         "message": "Inverted Serial Signaling",
         "english": "Inverted Serial Signaling",
+        "status": "New entry. Please translate!"
+    },
+    "receiverSerialInvertedHelp": {
+        "message": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help.",
+        "english": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help.",
+        "status": "New entry. Please translate!"
+    },
+    "receiverSerialPinSwap": {
+        "message": "Rx/Tx Pin Swap",
+        "english": "Rx/Tx Pin Swap",
+        "status": "New entry. Please translate!"
+    },
+    "receiverSerialPinSwapHelp": {
+        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
+        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
         "status": "New entry. Please translate!"
     },
     "receiverStickCenter": {
@@ -2564,8 +2639,8 @@
         "status": "New entry. Please translate!"
     },
     "receiverArmingThrottle": {
-        "message": "Throttle Channel value for arming",
-        "english": "Throttle Channel value for arming",
+        "message": "Throttle Channel limit for arming",
+        "english": "Throttle Channel limit for arming",
         "status": "New entry. Please translate!"
     },
     "receiverHelpArmingThrottle": {
@@ -2599,8 +2674,8 @@
         "status": "New entry. Please translate!"
     },
     "receiverHelpCyclicDeadband": {
-        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle.",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle.",
+        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle.",
+        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle.",
         "status": "New entry. Please translate!"
     },
     "receiverYawDeadband": {
@@ -2608,8 +2683,8 @@
         "english": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
+        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
+        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Esto son valores (en us) de cuanto debe ser diferente una entrada RC antes de que sea considerada válida. Para transmisores con inestabilidad en las salidas, este valor puede ser incrementado si las entradas de rc se mueven estando en reposo. <strong>Este ajuste es sólo para el Yaw.</strong>",
@@ -2636,6 +2711,41 @@
         "english": "Inverted Telemetry Signaling",
         "status": "New entry. Please translate!"
     },
+    "receiverTelemetryPinSwap": {
+        "message": "Telemetry Pin Swap (Swap Rx and Tx pins)",
+        "english": "Telemetry Pin Swap (Swap Rx and Tx pins)",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetryMode": {
+        "message": "Enable CRSF Custom Telemetry",
+        "english": "Enable CRSF Custom Telemetry",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetryRate": {
+        "message": "Telemetry Rate",
+        "english": "Telemetry Rate",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetryRatio": {
+        "message": "Telemetry Ratio",
+        "english": "Telemetry Ratio",
+        "status": "New entry. Please translate!"
+    },
+    "receiverHelpCrsfTelemetryMode": {
+        "message": "Enables the Custom Rotorflight telemetry with ELRS. Requires a Lua script in the Tx for decoding the sensors. Custom telemetry provides a plethora of sensors for helicopter use.",
+        "english": "Enables the Custom Rotorflight telemetry with ELRS. Requires a Lua script in the Tx for decoding the sensors. Custom telemetry provides a plethora of sensors for helicopter use.",
+        "status": "New entry. Please translate!"
+    },
+    "receiverHelpCrsfTelemetryRate": {
+        "message": "Radio link packet rate for telemetry. Set this to the same value as the ELRS packet rate in the Tx.",
+        "english": "Radio link packet rate for telemetry. Set this to the same value as the ELRS packet rate in the Tx.",
+        "status": "New entry. Please translate!"
+    },
+    "receiverHelpCrsfTelemetryRatio": {
+        "message": "Radio link packet ratio for telemetry. Set this to the same value as the ELRS telemetry ratio in the Tx.",
+        "english": "Radio link packet ratio for telemetry. Set this to the same value as the ELRS telemetry ratio in the Tx.",
+        "status": "New entry. Please translate!"
+    },
     "receiverTelemetrySensors": {
         "message": "Telemetry Sensors",
         "english": "Telemetry Sensors",
@@ -2659,6 +2769,21 @@
     "receiverTelemetrySensor_USED_CAPACITY": {
         "message": "Used Battery Capacity",
         "english": "Used Battery Capacity",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_BEC_VOLTAGE": {
+        "message": "BEC Voltage",
+        "english": "BEC Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_HEADSPEED": {
+        "message": "Headspeed",
+        "english": "Headspeed",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_TAILSPEED": {
+        "message": "Tailspeed",
+        "english": "Tailspeed",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_TEMPERATURE": {
@@ -2712,8 +2837,8 @@
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_LAT_LONG": {
-        "message": "GPS Latitide & Longitude",
-        "english": "GPS Latitide & Longitude",
+        "message": "GPS Latitude & Longitude",
+        "english": "GPS Latitude & Longitude",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GROUND_SPEED": {
@@ -2756,14 +2881,574 @@
         "english": "Governor Mode",
         "status": "New entry. Please translate!"
     },
+    "receiverTelemetrySensor_ARMING_FLAGS": {
+        "message": "Arming Flags",
+        "english": "Arming Flags",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_PID_PROFILE": {
+        "message": "PID Profile",
+        "english": "PID Profile",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_RATES_PROFILE": {
+        "message": "Rates Profile",
+        "english": "Rates Profile",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_THROTTLE_CONTROL": {
+        "message": "Throttle Control",
+        "english": "Throttle Control",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensor_MODEL_ID": {
+        "message": "Model Id",
+        "english": "Model Id",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_DEBUG": {
+        "message": "Debug",
+        "english": "Debug",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_SYSTEM": {
+        "message": "System",
+        "english": "System",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_GPS": {
+        "message": "GPS",
+        "english": "GPS",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_CONTROL": {
+        "message": "Control",
+        "english": "Control",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_PROFILE": {
+        "message": "Profile",
+        "english": "Profile",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_RPM": {
+        "message": "RPM",
+        "english": "RPM",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_BATTERY": {
+        "message": "Battery",
+        "english": "Battery",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_TEMPERATURE": {
+        "message": "Temperature",
+        "english": "Temperature",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_ESC1": {
+        "message": "ESC #1",
+        "english": "ESC #1",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_ESC2": {
+        "message": "ESC #2",
+        "english": "ESC #2",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_BARO": {
+        "message": "Barometer",
+        "english": "Barometer",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_GYRO": {
+        "message": "Gyro",
+        "english": "Gyro",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_STATUS": {
+        "message": "Status",
+        "english": "Status",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_CURRENT": {
+        "message": "Current",
+        "english": "Current",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetryGroup_VOLTAGE": {
+        "message": "Voltage",
+        "english": "Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_HEARTBEAT": {
+        "message": "Heartbeat",
+        "english": "Heartbeat",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY": {
+        "message": "Battery",
+        "english": "Battery",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_VOLTAGE": {
+        "message": "Battery Voltage",
+        "english": "Battery Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CURRENT": {
+        "message": "Battery Current",
+        "english": "Battery Current",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CONSUMPTION": {
+        "message": "Battery Consumption",
+        "english": "Battery Consumption",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CHARGE_LEVEL": {
+        "message": "Battery Charge Level",
+        "english": "Battery Charge Level",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CELL_COUNT": {
+        "message": "Battery Cell Count",
+        "english": "Battery Cell Count",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGE": {
+        "message": "Battery Cell Voltage",
+        "english": "Battery Cell Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGES": {
+        "message": "Battery Cell Voltages",
+        "english": "Battery Cell Voltages",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_CONTROL": {
+        "message": "Control (hi-res)",
+        "english": "Control (hi-res)",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_PITCH_CONTROL": {
+        "message": "Pitch Control",
+        "english": "Pitch Control",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ROLL_CONTROL": {
+        "message": "Roll Control",
+        "english": "Roll Control",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_YAW_CONTROL": {
+        "message": "Yaw Control",
+        "english": "Yaw Control",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_COLLECTIVE_CONTROL": {
+        "message": "Collective Control",
+        "english": "Collective Control",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_THROTTLE_CONTROL": {
+        "message": "Throttle Control",
+        "english": "Throttle Control",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_DATA": {
+        "message": "ESC Data",
+        "english": "ESC Data",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_VOLTAGE": {
+        "message": "ESC Voltage",
+        "english": "ESC Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_CURRENT": {
+        "message": "ESC Current",
+        "english": "ESC Current",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_CAPACITY": {
+        "message": "ESC Capacity",
+        "english": "ESC Capacity",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_ERPM": {
+        "message": "ESC ERPM",
+        "english": "ESC ERPM",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_POWER": {
+        "message": "ESC Power",
+        "english": "ESC Power",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_THROTTLE": {
+        "message": "ESC Throttle",
+        "english": "ESC Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_TEMP1": {
+        "message": "ESC Temp 1",
+        "english": "ESC Temp 1",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_TEMP2": {
+        "message": "ESC Temp 2",
+        "english": "ESC Temp 2",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_BEC_VOLTAGE": {
+        "message": "ESC BEC Voltage",
+        "english": "ESC BEC Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_BEC_CURRENT": {
+        "message": "ESC BEC Current",
+        "english": "ESC BEC Current",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_STATUS": {
+        "message": "ESC Status",
+        "english": "ESC Status",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_MODEL": {
+        "message": "ESC Model",
+        "english": "ESC Model",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BEC_VOLTAGE": {
+        "message": "BEC Voltage",
+        "english": "BEC Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BUS_VOLTAGE": {
+        "message": "Bus Voltage",
+        "english": "Bus Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_MCU_VOLTAGE": {
+        "message": "MCU Voltage",
+        "english": "MCU Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BEC_CURRENT": {
+        "message": "BEC Current",
+        "english": "BEC Current",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BUS_CURRENT": {
+        "message": "Bus Current",
+        "english": "Bus Current",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_MCU_CURRENT": {
+        "message": "MCU Current",
+        "english": "MCU Current",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ESC_TEMP": {
+        "message": "ESC Temp",
+        "english": "ESC Temp",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BEC_TEMP": {
+        "message": "BEC Temp",
+        "english": "BEC Temp",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_MCU_TEMP": {
+        "message": "MCU Temp",
+        "english": "MCU Temp",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_AIR_TEMP": {
+        "message": "Air Temp",
+        "english": "Air Temp",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_MOTOR_TEMP": {
+        "message": "Motor Temp",
+        "english": "Motor Temp",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_TEMP": {
+        "message": "Battery Temp",
+        "english": "Battery Temp",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_EXHAUST_TEMP": {
+        "message": "Exhaust Temp",
+        "english": "Exhaust Temp",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_HEADING": {
+        "message": "Heading",
+        "english": "Heading",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ALTITUDE": {
+        "message": "Altitude",
+        "english": "Altitude",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_VARIOMETER": {
+        "message": "Variometer",
+        "english": "Variometer",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_HEADSPEED": {
+        "message": "Headspeed",
+        "english": "Headspeed",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_TAILSPEED": {
+        "message": "Tailspeed",
+        "english": "Tailspeed",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_MOTOR_RPM": {
+        "message": "Motor RPM",
+        "english": "Motor RPM",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_TRANS_RPM": {
+        "message": "Transmission RPM",
+        "english": "Transmission RPM",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE": {
+        "message": "Attitude (hi-res)",
+        "english": "Attitude (hi-res)",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE_PITCH": {
+        "message": "Attitude Pitch",
+        "english": "Attitude Pitch",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE_ROLL": {
+        "message": "Attitude Roll",
+        "english": "Attitude Roll",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE_YAW": {
+        "message": "Attitude Yaw",
+        "english": "Attitude Yaw",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL": {
+        "message": "Accelerometer (hi-res)",
+        "english": "Accelerometer (hi-res)",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL_X": {
+        "message": "Accelerometer X-axis",
+        "english": "Accelerometer X-axis",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL_Y": {
+        "message": "Accelerometer Y-axis",
+        "english": "Accelerometer Y-axis",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL_Z": {
+        "message": "Accelerometer Z-axis",
+        "english": "Accelerometer Z-axis",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GPS": {
+        "message": "GPS",
+        "english": "GPS",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GPS_SATS": {
+        "message": "GPS Sats",
+        "english": "GPS Sats",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GPS_PDOP": {
+        "message": "GPS PDOP",
+        "english": "GPS PDOP",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HDOP": {
+        "message": "GPS HDOP",
+        "english": "GPS HDOP",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GPS_VDOP": {
+        "message": "GPS VDOP",
+        "english": "GPS VDOP",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GPS_COORD": {
+        "message": "GPS Coord",
+        "english": "GPS Coord",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GPS_ALTITUDE": {
+        "message": "GPS Altitude",
+        "english": "GPS Altitude",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HEADING": {
+        "message": "GPS Heading",
+        "english": "GPS Heading",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GPS_GROUNDSPEED": {
+        "message": "GPS Groundspeed",
+        "english": "GPS Groundspeed",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HOME_DISTANCE": {
+        "message": "GPS Home Distance",
+        "english": "GPS Home Distance",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HOME_DIRECTION": {
+        "message": "GPS Home Direction",
+        "english": "GPS Home Direction",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GPS_DATE_TIME": {
+        "message": "GPS Date Time",
+        "english": "GPS Date Time",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_LOAD": {
+        "message": "Load",
+        "english": "Load",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_CPU_LOAD": {
+        "message": "CPU Load",
+        "english": "CPU Load",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_SYS_LOAD": {
+        "message": "SYS Load",
+        "english": "SYS Load",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_RT_LOAD": {
+        "message": "RT Load",
+        "english": "RT Load",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_MODEL_ID": {
+        "message": "Model Id",
+        "english": "Model Id",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_FLIGHT_MODE": {
+        "message": "Flight Mode",
+        "english": "Flight Mode",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ARMING_FLAGS": {
+        "message": "Arming Flags",
+        "english": "Arming Flags",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ARMING_DISABLE_FLAGS": {
+        "message": "Arming Disable Flags",
+        "english": "Arming Disable Flags",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_RESCUE_STATE": {
+        "message": "Rescue State",
+        "english": "Rescue State",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GOVERNOR_STATE": {
+        "message": "Governor State",
+        "english": "Governor State",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_GOVERNOR_FLAGS": {
+        "message": "Governor Flags",
+        "english": "Governor Flags",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_PID_PROFILE": {
+        "message": "PID Profile",
+        "english": "PID Profile",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_RATES_PROFILE": {
+        "message": "Rates Profile",
+        "english": "Rates Profile",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_PROFILE": {
+        "message": "Battery Profile",
+        "english": "Battery Profile",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_LED_PROFILE": {
+        "message": "LED Profile",
+        "english": "LED Profile",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_ADJFUNC": {
+        "message": "Adjustment Function",
+        "english": "Adjustment Function",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_0": {
+        "message": "Debug 0",
+        "english": "Debug 0",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_1": {
+        "message": "Debug 1",
+        "english": "Debug 1",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_2": {
+        "message": "Debug 2",
+        "english": "Debug 2",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_3": {
+        "message": "Debug 3",
+        "english": "Debug 3",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_4": {
+        "message": "Debug 4",
+        "english": "Debug 4",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_5": {
+        "message": "Debug 5",
+        "english": "Debug 5",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_6": {
+        "message": "Debug 6",
+        "english": "Debug 6",
+        "status": "New entry. Please translate!"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_7": {
+        "message": "Debug 7",
+        "english": "Debug 7",
+        "status": "New entry. Please translate!"
+    },
     "receiverBars": {
         "message": "Receiver Channels",
         "english": "Receiver Channels",
         "status": "New entry. Please translate!"
     },
     "receiverBarsHelp": {
-        "message": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the corrent function for each RC channel.",
-        "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the corrent function for each RC channel.",
+        "message": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel.",
+        "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel.",
         "status": "New entry. Please translate!"
     },
     "receiverChannelOrder": {
@@ -2827,7 +3512,8 @@
     },
     "auxiliaryDisabled": {
         "message": "(DESACTIVADO)",
-        "english": "(DISABLED)"
+        "english": "(DISABLED)",
+        "description": "Text to add to the ARM mode (maybe others in the future) in the MODES TAB when it has been disabled for some external reason"
     },
     "auxiliaryAddRange": {
         "message": "Añadir Rango",
@@ -3297,6 +3983,16 @@
         "english": "Cross Coupling Cutoff",
         "status": "New entry. Please translate!"
     },
+    "adjustmentsFunctionAccTrimPitch": {
+        "message": "Accelerometer Pitch Trim",
+        "english": "Accelerometer Pitch Trim",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionAccTrimRoll": {
+        "message": "Accelerometer Roll Trim",
+        "english": "Accelerometer Roll Trim",
+        "status": "New entry. Please translate!"
+    },
     "servoHelp": {
         "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
         "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
@@ -3490,6 +4186,11 @@
     "mixerRebootNote": {
         "message": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!",
         "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!",
+        "status": "New entry. Please translate!"
+    },
+    "mixerMotorisedTailCalibrationNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
+        "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
         "status": "New entry. Please translate!"
     },
     "mixerMainRotorSettings": {
@@ -3823,8 +4524,8 @@
         "status": "New entry. Please translate!"
     },
     "mixerTailRotorCenterTrim": {
-        "message": "Center trim for tail rotor [&deg;]",
-        "english": "Center trim for tail rotor [&deg;]",
+        "message": "Yaw center trim",
+        "english": "Yaw center trim",
         "status": "New entry. Please translate!"
     },
     "mixerTailRotorCenterTrimHelp": {
@@ -3833,8 +4534,8 @@
         "status": "New entry. Please translate!"
     },
     "mixerTailMotorCenterTrim": {
-        "message": "Center trim for tail motor [%]",
-        "english": "Center trim for tail motor [%]",
+        "message": "Yaw center offset [%]",
+        "english": "Yaw center offset [%]",
         "status": "New entry. Please translate!"
     },
     "mixerTailMotorCenterTrimHelp": {
@@ -4338,8 +5039,28 @@
         "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC.",
-        "english": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC.",
+        "message": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab.",
+        "english": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab.",
+        "status": "New entry. Please translate!"
+    },
+    "motorsEscTelemetryHalfDuplex": {
+        "message": "One-wire Communication (Half-Duplex)",
+        "english": "One-wire Communication (Half-Duplex)",
+        "status": "New entry. Please translate!"
+    },
+    "motorsEscTelemetryHalfDuplexHelp": {
+        "message": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scorpion Tribunus).",
+        "english": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scorpion Tribunus).",
+        "status": "New entry. Please translate!"
+    },
+    "motorsEscTelemetryPinswap": {
+        "message": "Rx/Tx Pin Swap",
+        "english": "Rx/Tx Pin Swap",
+        "status": "New entry. Please translate!"
+    },
+    "motorsEscTelemetryPinswapHelp": {
+        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
+        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
         "status": "New entry. Please translate!"
     },
     "motorsUnsyncedPwm": {
@@ -4383,8 +5104,8 @@
         }
     },
     "motorsDshotBidir": {
-        "message": "DShot RPM Telemetry",
-        "english": "DShot RPM Telemetry",
+        "message": "Dshot RPM Telemetry",
+        "english": "Dshot RPM Telemetry",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Bidirectional DShot",
@@ -4393,8 +5114,8 @@
         }
     },
     "motorsDshotBidirHelp": {
-        "message": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32.",
-        "english": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32.",
+        "message": "The ESC RPM is sent back to the FC with Dshot. Also known as bidirectional Dshot. <br>Note: Requires a compatible ESC, like AM32, Bluejay or BLHeli32 version 32.7 or higher.",
+        "english": "The ESC RPM is sent back to the FC with Dshot. Also known as bidirectional Dshot. <br>Note: Requires a compatible ESC, like AM32, Bluejay or BLHeli32 version 32.7 or higher.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32 or BLHeli_S when flashed to Bluejay firmware.",
@@ -4613,8 +5334,8 @@
         "status": "New entry. Please translate!"
     },
     "govModeHelp": {
-        "message": "<strong>OFF:</strong> Govenor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
-        "english": "<strong>OFF:</strong> Govenor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
+        "message": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
+        "english": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
         "status": "New entry. Please translate!"
     },
     "govHandoverThrottle": {
@@ -4780,6 +5501,16 @@
     "govMaxThrottleHelp": {
         "message": "Maximum output throttle the governor is allowed to use.",
         "english": "Maximum output throttle the governor is allowed to use.",
+        "status": "New entry. Please translate!"
+    },
+    "govMinThrottle": {
+        "message": "Minimum Throttle",
+        "english": "Minimum Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "govMinThrottleHelp": {
+        "message": "Minimum output throttle the governor is allowed to use.",
+        "english": "Minimum output throttle the governor is allowed to use.",
         "status": "New entry. Please translate!"
     },
     "govMasterGain": {
@@ -5194,6 +5925,21 @@
         "english": "Temperatures",
         "status": "New entry. Please translate!"
     },
+    "blackboxLog_esc": {
+        "message": "ESC",
+        "english": "ESC",
+        "status": "New entry. Please translate!"
+    },
+    "blackboxLog_bec": {
+        "message": "BEC",
+        "english": "BEC",
+        "status": "New entry. Please translate!"
+    },
+    "blackboxLog_esc2": {
+        "message": "ESC 2",
+        "english": "ESC 2",
+        "status": "New entry. Please translate!"
+    },
     "serialLoggingSupportedNote": {
         "message": "Puedes registrar en un dispositivo externo (como un OpenLager) usando un puerto serie. Configura el puerto en el apartado Puertos.",
         "english": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
@@ -5552,12 +6298,12 @@
         "english": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>",
-        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>",
+        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>",
+        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>",
         "status": "Modified entry. Please translate!",
         "previous": {
-            "message": "Si has perdido la comunicación con tu placa sigue estos pasos para restaurar la comunicación: <ul><li>Apagar.</li><li>Activar 'No reiniciar', activar 'Borrado completo del chip'.</li><li>Unir los pins BOOT o pulsar el botón BOOT.</li><li>Encender (el LED de actividad NO parpadeará si se hace correctamente).</li><li>Instalar todos los drivers para STM32 y Zadig si es necesario (ver sección <a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">Instalación por USB</a> del manual).</li><li>Cerrar el Configurator, reiniciar el Configurator.</li><li>Soltar botón BOOT si tu FC tiene uno.</li><li>Instalar el firmware correcto (configurando la velocidad de transmisión si viene especificada en el manual de tu FC).</li><li>Apagar.</li><li>Liberar pins BOOT.</li><li>Encender (el LED de actividad debe parpadear).</li><li>Conectar normalmente.</li></ul>",
-            "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of Betaflight manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
+            "message": "Si has perdido la comunicación con tu placa sigue estos pasos para restaurar la comunicación: <ul><li>Apagar.</li><li>Activar 'No reiniciar', activar 'Borrado completo del chip'.</li><li>Unir los pins BOOT o pulsar el botón BOOT.</li><li>Encender (el LED de actividad NO parpadeará si se hace correctamente).</li><li>Instalar todos los drivers para STM32 y Zadig si es necesario (ver sección <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">Instalación por USB</a> del manual).</li><li>Cerrar el Configurator, reiniciar el Configurator.</li><li>Soltar botón BOOT si tu FC tiene uno.</li><li>Instalar el firmware correcto (configurando la velocidad de transmisión si viene especificada en el manual de tu FC).</li><li>Apagar.</li><li>Liberar pins BOOT.</li><li>Encender (el LED de actividad debe parpadear).</li><li>Conectar normalmente.</li></ul>",
+            "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of Betaflight manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
         }
     },
     "firmwareFlasherFirmwareNotLoaded": {
@@ -5635,6 +6381,63 @@
     "firmwareFlasherPreviousDevice": {
         "message": "Detectado: <strong>$1</strong> - dispositivo anterior todavía en instalación, por favor vuelve a conectar para volver a intentarlo",
         "english": "Detected: <strong>$1</strong> - previous device still flashing, please replug to try again"
+    },
+    "firmwareFlasherNoBoardsLoaded": {
+        "message": "No boards loaded",
+        "english": "No boards loaded",
+        "status": "New entry. Please translate!"
+    },
+    "firmwareFlasherBoardDetectionButton": {
+        "message": "Detect",
+        "english": "Detect",
+        "status": "New entry. Please translate!"
+    },
+    "firmwareFlasherBoardDetectionSucceeded": {
+        "message": "Detected board: <strong>{{boardName}}</strong>",
+        "english": "Detected board: <strong>{{boardName}}</strong>",
+        "status": "New entry. Please translate!",
+        "description": "Board detection was successful!"
+    },
+    "firmwareFlasherBoardDetectionFail": {
+        "message": "Unable to detect board for connected device",
+        "english": "Unable to detect board for connected device",
+        "status": "New entry. Please translate!"
+    },
+    "firmwareFlasherBoardDetectionBoardNotFound": {
+        "message": "Detected board: <strong>{{boardName}}</strong>, but no matching target found.",
+        "english": "Detected board: <strong>{{boardName}}</strong>, but no matching target found.",
+        "status": "New entry. Please translate!",
+        "description": "Board detection was successful, but there was no matching target available."
+    },
+    "firmwareFlasherBoardDetectionDescriptionHint": {
+        "message": "Detect only works when not in DFU mode and when MSP communication is working. Sometimes you have to retry a few times or even reconnect USB. Try connecting as normal first as you could have forgotten to apply custom defaults. Please reboot after flashing - replug your USB.",
+        "english": "Detect only works when not in DFU mode and when MSP communication is working. Sometimes you have to retry a few times or even reconnect USB. Try connecting as normal first as you could have forgotten to apply custom defaults. Please reboot after flashing - replug your USB.",
+        "status": "New entry. Please translate!"
+    },
+    "firmwareFlasherBoardDetectionInProgress": {
+        "message": "Auto-detecting board for connected device...",
+        "english": "Auto-detecting board for connected device...",
+        "status": "New entry. Please translate!"
+    },
+    "dialogBoardDetectionMessageInvalidBoardNameTitle": {
+        "message": "Invalid Board Name Detected",
+        "english": "Invalid Board Name Detected",
+        "status": "New entry. Please translate!"
+    },
+    "dialogBoardDetectionMessageInvalidBoardNameContent": {
+        "message": "Board name: ($1) contains invalid characters -- using corrected board name: ($2)",
+        "english": "Board name: ($1) contains invalid characters -- using corrected board name: ($2)",
+        "status": "New entry. Please translate!"
+    },
+    "dialogBoardDetectionMessageInvalidBoardNameRecommendation": {
+        "message": "A full chip erase is recommended to correct the board name. Ensure you perform a full backup before performing a flash with full chip erase enabled.",
+        "english": "A full chip erase is recommended to correct the board name. Ensure you perform a full backup before performing a flash with full chip erase enabled.",
+        "status": "New entry. Please translate!"
+    },
+    "dialogBoardDetectionMessageAcknowledge": {
+        "message": "Acknowledge",
+        "english": "Acknowledge",
+        "status": "New entry. Please translate!"
     },
     "ledStripHelp": {
         "message": "El controlador de vuelo puede controlar colores y efectos de LEDs individuales de una tira.<br />Configura LEDs en la rejilla, configura el orden del cableado y añade LEDs a tu aeronave de acuerdo a las posiciones de la rejilla. LEDs sin número de orden de cableado no se guardarán.<br />Doble-pulsación en un color para editar los valores HSV.",
@@ -6667,8 +7470,8 @@
         "status": "New entry. Please translate!"
     },
     "profilesRescueLevelGainHelp": {
-        "message": "Gain to determine how agressively the heli levels during rescue.",
-        "english": "Gain to determine how agressively the heli levels during rescue.",
+        "message": "Gain to determine how aggressively the heli levels during rescue.",
+        "english": "Gain to determine how aggressively the heli levels during rescue.",
         "status": "New entry. Please translate!"
     },
     "profilesRescueFlipGain": {
@@ -6677,8 +7480,8 @@
         "status": "New entry. Please translate!"
     },
     "profilesRescueFlipGainHelp": {
-        "message": "Gain to determine how agressively the heli flips during inverted rescue.",
-        "english": "Gain to determine how agressively the heli flips during inverted rescue.",
+        "message": "Gain to determine how aggressively the heli flips during inverted rescue.",
+        "english": "Gain to determine how aggressively the heli flips during inverted rescue.",
         "status": "New entry. Please translate!"
     },
     "profilesRescueMaxRate": {
@@ -7117,8 +7920,8 @@
         }
     },
     "gyroDynamicNotchMinHzHelp": {
-        "message": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm.",
-        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm.",
+        "message": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is equivalent to 1200rpm.",
+        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is equivalent to 1200rpm.",
         "status": "Modified entry. Please translate!",
         "previous": {
             "message": "Ajusta esto a la frecuencia mínima que necesita ser controlada por el filtro notch dinámico.",
@@ -7267,8 +8070,8 @@
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterHelp": {
-        "message": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
-        "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
+        "message": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
+        "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterMainRotorGroup": {
@@ -8129,7 +8932,7 @@
     "osdSetupSelectedProfileLabel": {
         "message": "Actual:",
         "english": "Current:",
-        "description": "Label for the selection of the curren active OSD profile"
+        "description": "Label for the selection of the current active OSD profile"
     },
     "osdSetupPreviewSelectProfileElement": {
         "message": "Perfil OSD {{profileNumber}}",
@@ -8689,8 +9492,13 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementRemaningTimeEstimate": {
-        "message": "Tiempo estimado de vuelo restante",
-        "english": "Estimate of flight time remaning"
+        "message": "Estimate of flight time remaining",
+        "english": "Estimate of flight time remaining",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Tiempo estimado de vuelo restante",
+            "english": "Estimate of flight time remaning"
+        }
     },
     "osdTextElementRtcDateTime": {
         "message": "RTC: fecha y hora",
@@ -9437,8 +10245,13 @@
         "english": "Set the thresholds used for OSD elements with alarm states."
     },
     "osdSectionHelpStats": {
-        "message": "Ajusta los valores mostrados en la pantalla de estadísticas post vuelo.",
-        "english": "Set the values dispalyed on the post flight statistics screen."
+        "message": "Set the values displayed on the post flight statistics screen.",
+        "english": "Set the values displayed on the post flight statistics screen.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Ajusta los valores mostrados en la pantalla de estadísticas post vuelo.",
+            "english": "Set the values dispalyed on the post flight statistics screen."
+        }
     },
     "osdSectionHelpWarnings": {
         "message": "Activa o desactiva avisos mostrados en el elemento AVISOS.",
@@ -10254,8 +11067,13 @@
         "english": "Update from the Google Play Store"
     },
     "cordovaWebviewEnable": {
-        "message": "Ve a la pestaña de información acerca de tu dispositivo en los ajustes y pulsa 10 veces en el número de compilación para activar las 'Opciones para desarrolladores'. Después de esto, busca en las opciones para desarrolladores y selecciona <b>{{app}}</b> como implementación de webview.",
-        "english": "Go into the tab of informations about your device in the settings and tap 10 times on the build version number to enable 'Developper options'. After that, search and go in the developper options and select <b>{{app}}</b> as webview provider."
+        "message": "Go into the tab of information about your device in the settings and tap 10 times on the build version number to enable 'Developer options'. After that, search and go in the developer options and select <b>{{app}}</b> as webview provider.",
+        "english": "Go into the tab of information about your device in the settings and tap 10 times on the build version number to enable 'Developer options'. After that, search and go in the developer options and select <b>{{app}}</b> as webview provider.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Ve a la pestaña de información acerca de tu dispositivo en los ajustes y pulsa 10 veces en el número de compilación para activar las 'Opciones para desarrolladores'. Después de esto, busca en las opciones para desarrolladores y selecciona <b>{{app}}</b> como implementación de webview.",
+            "english": "Go into the tab of informations about your device in the settings and tap 10 times on the build version number to enable 'Developper options'. After that, search and go in the developper options and select <b>{{app}}</b> as webview provider."
+        }
     },
     "cordovaWebviewEnableBtn": {
         "message": "Abrir configuración",

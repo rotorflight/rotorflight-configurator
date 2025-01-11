@@ -129,6 +129,11 @@
         "message": "自動連接",
         "english": "Auto-Connect"
     },
+    "showAllPorts": {
+        "message": "Show All Ports",
+        "english": "Show All Ports",
+        "status": "New entry. Please translate!"
+    },
     "close": {
         "message": "關閉",
         "english": "Close"
@@ -185,6 +190,16 @@
         "message": "自動連接: 關閉 - 用戶需要選擇正確的串列埠, 然後單擊 \"連接\" 按鈕。",
         "english": "Auto-Connect: Disabled - User needs to select the correct serial port and click \"Connect\" button on its own"
     },
+    "showAllPortsEnabled": {
+        "message": "Show All Ports: Enabled - Configurator lists all possible ports",
+        "english": "Show All Ports: Enabled - Configurator lists all possible ports",
+        "status": "New entry. Please translate!"
+    },
+    "showAllPortsDisabled": {
+        "message": "Show All Ports: Disabled - Configurator will only list recognized ports",
+        "english": "Show All Ports: Disabled - Configurator will only list recognized ports",
+        "status": "New entry. Please translate!"
+    },
     "zoomBoxText": {
         "message": "縮放：",
         "english": "Zoom:"
@@ -201,12 +216,16 @@
         "message": "連接後重新打開最後使用的選項頁",
         "english": "Reopen last tab on connect"
     },
+    "rememberLastSelectedBoard": {
+        "message": "在韌體燒錄工具中記住最後一次選擇的飛控板",
+        "english": "Remember last selected board in firmware flasher"
+    },
     "analyticsOptOut": {
         "message": "退出匿名的統計數據收集",
         "english": "Opt out of the anonymised collection of statistics data"
     },
     "connectionTimeout": {
-        "message": "設定連接超時臨限值以允許更長時間的初始化或重新啟動",
+        "message": "設定連接逾時臨限值以允許更長時間的初始化或重新啟動",
         "english": "Set connection timeout to allow longer initialisation on device plugin or reboot",
         "description": "Change timeout on auto-connect and reboot so the bus has more time to initialize after being detected by the system"
     },
@@ -527,7 +546,7 @@
         "english": "Rebooting device to bootloader: FAILED"
     },
     "stm32TimedOut": {
-        "message": "STM32 - 超時，燒錄失敗",
+        "message": "STM32 - 逾時，燒錄失敗",
         "english": "STM32 - timed out, programming: FAILED"
     },
     "stm32WrongResponse": {
@@ -624,7 +643,7 @@
     },
     "firmwareVersionNotSupported": {
         "message": "<span class=\"message-negative\">不支援</span>該韌體版本。請使用此版本設定器支援的韌體版本。刷寫前請使用 CLI 進行備份。CLI 備份/還原步驟請參閱檔案。<br />如果您不準備升級，也可以下載並使用舊版本的設定器。",
-        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
+        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documentation.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
     },
     "firmwareTypeNotSupported": {
         "message": "<span class=\"message-negative\">不支援</span>非 Rotorflight 韌體，只能使用 CLI 模式",
@@ -869,8 +888,8 @@
         "english": "Rotorflight documentation is available in release notes and website.<br /><br />"
     },
     "defaultDocumentation1": {
-        "message": "Rotorflight 網站上的教學是絕佳的資源，你可以在<a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">這裡</a>找到。",
-        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        "message": "Rotorflight 網站上的教學是絕佳的資源，你可以在<a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">這裡</a>找到。",
+        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultDocumentation2": {
         "message": "最新消息可以在網站上的公告頁面<a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">這裡</a>閱讀。",
@@ -973,8 +992,8 @@
         "english": "Arming Allowed"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "禁止解鎖的原因列表。將滑鼠停留在旗標上或參考網站教學中的<a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a>章節以獲得更多資訊。",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
+        "message": "禁止解鎖的原因列表。將滑鼠停留在旗標上或參考網站教學中的<a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a>章節以獲得更多資訊。",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
     },
     "statusArmingDisableFlagsTooltipNO_GYRO": {
         "message": "未偵測到陀螺儀",
@@ -1308,8 +1327,8 @@
         "english": "Enable Software Serial ports"
     },
     "feature_GPS": {
-        "message": "啟用 GPS 導航",
-        "english": "GPS for navigation and telemetry"
+        "message": "GPS 遙測",
+        "english": "GPS for telemetry"
     },
     "feature_SONAR": {
         "message": "聲納高度雷達",
@@ -1390,6 +1409,18 @@
     "configurationFeatures": {
         "message": "功能",
         "english": "Features"
+    },
+    "featureTip_GPS": {
+        "message": "啟用 GPS 遙測支援。在設定器中加入 <i>GPS</i> 頁面。",
+        "english": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration."
+    },
+    "featureTip_LED_STRIP": {
+        "message": "啟用 WS2811/2812 LED 燈條支援。在設定器中加入 <i>LED 燈條</i> 頁面。",
+        "english": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration."
+    },
+    "featureTip_CMS": {
+        "message": "啟用 CMS 韌體支援。",
+        "english": "Enables firmware support for CMS."
     },
     "configurationSerialPorts": {
         "message": "串列埠",
@@ -1484,16 +1515,24 @@
         "english": "Accelerometer Trim"
     },
     "configurationAccelTrimsHelp": {
-        "message": "加速度計的微調提供了對水平的微調，這可以用來減少在自穩模式和救機時的飄移。",
-        "english": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue."
+        "message": "加速度計微調會調整水平以修正自穩、半自穩和救援等穩定模式下的漂移。",
+        "english": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue."
     },
     "configurationAccelTrimRoll": {
         "message": "加速度計橫滾微調",
         "english": "Accelerometer Roll Trim"
     },
+    "configurationAccelRollTrimHelp": {
+        "message": "將數值增加以校正向左的漂移。減少數值（或使用負值）以校正向右的漂移。",
+        "english": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right."
+    },
     "configurationAccelTrimPitch": {
         "message": "加速度計俯仰微調",
         "english": "Accelerometer Pitch Trim"
+    },
+    "configurationAccelPitchTrimHelp": {
+        "message": "將數值增加以校正向後的漂移。減少數值（或使用負值）以校正向前的漂移。",
+        "english": "Increase the value to correct drift to the rear. Decrease the value (or use negative values) to correct drift to the front."
     },
     "escProtocolDisabledMessage": {
         "message": "<strong>注意：</strong> 若選擇不被您的電變所支援的電變協定將導致<strong>連接電池後電變會立刻驅動馬達旋轉</strong>。出於這個原因，<strong>在修改電變協定後，連接電池之前，請確保您的螺旋槳已被卸下</strong>！",
@@ -1818,6 +1857,10 @@
         "message": "OSD: FrSky",
         "english": "OSD: FrSky"
     },
+    "portsFunction_SBUS_OUT": {
+        "message": "S.BUS 輸出",
+        "english": "S.BUS Output"
+    },
     "portsFunction_CUSTOM": {
         "message": "自訂",
         "english": "Custom"
@@ -2014,9 +2057,25 @@
         "message": "單線通信（半雙工）",
         "english": "One-wire Communication (Half-Duplex)"
     },
+    "receiverSerialHalfDuplexHelp": {
+        "message": "使用 TX 接腳進行發送和接收。SBUS2、F.PORT、SRXL 和 SRXL2 需使用此功能。",
+        "english": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2."
+    },
     "receiverSerialInverted": {
         "message": "反相串列信令",
         "english": "Inverted Serial Signaling"
+    },
+    "receiverSerialInvertedHelp": {
+        "message": "反轉來自於接收機的反向信號。S.BUS、F.PORT 和其他協議等需使用此功能。注意：此選項在 F4 MCUs 上不支援，請參閱說明。",
+        "english": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help."
+    },
+    "receiverSerialPinSwap": {
+        "message": "Rx/Tx 接腳交換",
+        "english": "Rx/Tx Pin Swap"
+    },
+    "receiverSerialPinSwapHelp": {
+        "message": "將 Rx 和 Tx 接腳交換。注意：此選項在 F4 MCUs 上不支援，請參閱說明。",
+        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
     },
     "receiverStickCenter": {
         "message": "搖桿中心點",
@@ -2035,8 +2094,8 @@
         "english": "The maximum value (in µs) for stick deflection from the center, for RPY."
     },
     "receiverArmingThrottle": {
-        "message": "解鎖油門通道值",
-        "english": "Throttle Channel value for arming"
+        "message": "解鎖油門通道上限",
+        "english": "Throttle Channel limit for arming"
     },
     "receiverHelpArmingThrottle": {
         "message": "允許解鎖的通道值（以µs為單位）",
@@ -2063,16 +2122,16 @@
         "english": "Cyclic Deadband"
     },
     "receiverHelpCyclicDeadband": {
-        "message": "這些值（單位為 µs）是 RC 輸入在被視為非零之前的變化幅度。對於輸出有抖動的遙控器，如果 RC 輸入在空閒時跳動，該值可以增加。",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle."
+        "message": "這些值（單位為 µs）是 RC 輸入在被視為非零之前的變化幅度。對於輸出有抖動的遙控器，如果 RC 輸入在閒置時跳動可以增加這個設定值。",
+        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle."
     },
     "receiverYawDeadband": {
         "message": "航向死區",
         "english": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "這些值（單位為 µs）是 RC 輸入在被視為非零之前的變化幅度。對於輸出有抖動的遙控器，如果 RC 輸入在空閒時跳動，該值可以增加。<strong>這個設定只對航向生效</strong>",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
+        "message": "這些值（單位為 µs）是 RC 輸入在被視為非零之前的變化幅度。對於輸出有抖動的遙控器，如果 RC 輸入在閒置時跳動可以增加這個設定值。<strong>這個設定只對航向生效</strong>",
+        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
     },
     "receiverTelemetrySettings": {
         "message": "遙測設定",
@@ -2090,6 +2149,34 @@
         "message": "反向遙測信號",
         "english": "Inverted Telemetry Signaling"
     },
+    "receiverTelemetryPinSwap": {
+        "message": "遙測接腳交換 （交換 Rx 和 Tx 接腳）",
+        "english": "Telemetry Pin Swap (Swap Rx and Tx pins)"
+    },
+    "receiverCrsfTelemetryMode": {
+        "message": "啟用 CRSF 自訂遙測",
+        "english": "Enable CRSF Custom Telemetry"
+    },
+    "receiverCrsfTelemetryRate": {
+        "message": "遙測速率",
+        "english": "Telemetry Rate"
+    },
+    "receiverCrsfTelemetryRatio": {
+        "message": "遙測比率",
+        "english": "Telemetry Ratio"
+    },
+    "receiverHelpCrsfTelemetryMode": {
+        "message": "啟用 Rotorflight ELRS 自訂遙測。需要在發送器 (Tx) 中使用 Lua 腳本來解析感測器。自訂遙測為直升機提供了豐富的感測器資料。",
+        "english": "Enables the Custom Rotorflight telemetry with ELRS. Requires a Lua script in the Tx for decoding the sensors. Custom telemetry provides a plethora of sensors for helicopter use."
+    },
+    "receiverHelpCrsfTelemetryRate": {
+        "message": "用於遙測的遙控連線封包速率。將此設定為與 Tx 中 ELRS 封包速率相同的值。",
+        "english": "Radio link packet rate for telemetry. Set this to the same value as the ELRS packet rate in the Tx."
+    },
+    "receiverHelpCrsfTelemetryRatio": {
+        "message": "用於遙測的遙控連線封包比率。將此設定為與 Tx 中 ELRS 遙測比率相同的值。",
+        "english": "Radio link packet ratio for telemetry. Set this to the same value as the ELRS telemetry ratio in the Tx."
+    },
     "receiverTelemetrySensors": {
         "message": "遙測感測器",
         "english": "Telemetry Sensors"
@@ -2103,12 +2190,24 @@
         "english": "Battery Current"
     },
     "receiverTelemetrySensor_FUEL_LEVEL": {
-        "message": "電池電量級別",
+        "message": "電池電量",
         "english": "Battery Charge Level"
     },
     "receiverTelemetrySensor_USED_CAPACITY": {
         "message": "已消耗電量",
         "english": "Used Battery Capacity"
+    },
+    "receiverTelemetrySensor_BEC_VOLTAGE": {
+        "message": "BEC 電壓",
+        "english": "BEC Voltage"
+    },
+    "receiverTelemetrySensor_HEADSPEED": {
+        "message": "主旋翼轉速",
+        "english": "Headspeed"
+    },
+    "receiverTelemetrySensor_TAILSPEED": {
+        "message": "尾旋翼轉速",
+        "english": "Tailspeed"
     },
     "receiverTelemetrySensor_TEMPERATURE": {
         "message": "飛控溫度",
@@ -2152,7 +2251,7 @@
     },
     "receiverTelemetrySensor_LAT_LONG": {
         "message": "GPS 經緯度",
-        "english": "GPS Latitide & Longitude"
+        "english": "GPS Latitude & Longitude"
     },
     "receiverTelemetrySensor_GROUND_SPEED": {
         "message": "GPS 地面速度",
@@ -2186,13 +2285,461 @@
         "message": "定速器模式",
         "english": "Governor Mode"
     },
+    "receiverTelemetrySensor_ARMING_FLAGS": {
+        "message": "解鎖旗標",
+        "english": "Arming Flags"
+    },
+    "receiverTelemetrySensor_PID_PROFILE": {
+        "message": "PID 設定檔",
+        "english": "PID Profile"
+    },
+    "receiverTelemetrySensor_RATES_PROFILE": {
+        "message": "速率設定檔",
+        "english": "Rates Profile"
+    },
+    "receiverTelemetrySensor_THROTTLE_CONTROL": {
+        "message": "油門控制",
+        "english": "Throttle Control"
+    },
+    "receiverTelemetrySensor_MODEL_ID": {
+        "message": "模型 ID",
+        "english": "Model Id"
+    },
+    "receiverTelemetryGroup_DEBUG": {
+        "message": "除錯",
+        "english": "Debug"
+    },
+    "receiverTelemetryGroup_SYSTEM": {
+        "message": "系統",
+        "english": "System"
+    },
+    "receiverTelemetryGroup_GPS": {
+        "message": "GPS",
+        "english": "GPS"
+    },
+    "receiverTelemetryGroup_CONTROL": {
+        "message": "控制",
+        "english": "Control"
+    },
+    "receiverTelemetryGroup_PROFILE": {
+        "message": "設定檔",
+        "english": "Profile"
+    },
+    "receiverTelemetryGroup_RPM": {
+        "message": "轉速",
+        "english": "RPM"
+    },
+    "receiverTelemetryGroup_BATTERY": {
+        "message": "電池",
+        "english": "Battery"
+    },
+    "receiverTelemetryGroup_TEMPERATURE": {
+        "message": "溫度",
+        "english": "Temperature"
+    },
+    "receiverTelemetryGroup_ESC1": {
+        "message": "電變 #1",
+        "english": "ESC #1"
+    },
+    "receiverTelemetryGroup_ESC2": {
+        "message": "電變 #2",
+        "english": "ESC #2"
+    },
+    "receiverTelemetryGroup_BARO": {
+        "message": "氣壓計",
+        "english": "Barometer"
+    },
+    "receiverTelemetryGroup_GYRO": {
+        "message": "陀螺儀",
+        "english": "Gyro"
+    },
+    "receiverTelemetryGroup_STATUS": {
+        "message": "狀態",
+        "english": "Status"
+    },
+    "receiverTelemetryGroup_CURRENT": {
+        "message": "電流",
+        "english": "Current"
+    },
+    "receiverTelemetryGroup_VOLTAGE": {
+        "message": "電壓",
+        "english": "Voltage"
+    },
+    "receiverCrsfTelemetrySensor_HEARTBEAT": {
+        "message": "心跳",
+        "english": "Heartbeat"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY": {
+        "message": "Battery（電池）",
+        "english": "Battery"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_VOLTAGE": {
+        "message": "Battery Voltage（電池電壓）",
+        "english": "Battery Voltage"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CURRENT": {
+        "message": "Battery Current（電池電流）",
+        "english": "Battery Current"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CONSUMPTION": {
+        "message": "Battery Consumption（電池耗電量）",
+        "english": "Battery Consumption"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CHARGE_LEVEL": {
+        "message": "Battery Charge Level（電池電量）",
+        "english": "Battery Charge Level"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CELL_COUNT": {
+        "message": "Battery Cell Count（電池芯數量）",
+        "english": "Battery Cell Count"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGE": {
+        "message": "Battery Cell Voltage（電池單芯電壓）",
+        "english": "Battery Cell Voltage"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGES": {
+        "message": "Battery Cell Voltages（電池每芯電壓）",
+        "english": "Battery Cell Voltages"
+    },
+    "receiverCrsfTelemetrySensor_CONTROL": {
+        "message": "Control (hi-res)（高解析度遙控器通道）",
+        "english": "Control (hi-res)"
+    },
+    "receiverCrsfTelemetrySensor_PITCH_CONTROL": {
+        "message": "Pitch Control（俯仰通道）",
+        "english": "Pitch Control"
+    },
+    "receiverCrsfTelemetrySensor_ROLL_CONTROL": {
+        "message": "Roll Control（橫滾通道）",
+        "english": "Roll Control"
+    },
+    "receiverCrsfTelemetrySensor_YAW_CONTROL": {
+        "message": "Yaw Control（航向通道）",
+        "english": "Yaw Control"
+    },
+    "receiverCrsfTelemetrySensor_COLLECTIVE_CONTROL": {
+        "message": "Collective Control（集體螺距通道）",
+        "english": "Collective Control"
+    },
+    "receiverCrsfTelemetrySensor_THROTTLE_CONTROL": {
+        "message": "Throttle Control（油門通道）",
+        "english": "Throttle Control"
+    },
+    "receiverCrsfTelemetrySensor_ESC_DATA": {
+        "message": "ESC Data（電變資料）",
+        "english": "ESC Data"
+    },
+    "receiverCrsfTelemetrySensor_ESC_VOLTAGE": {
+        "message": "ESC Voltage（電變電壓）",
+        "english": "ESC Voltage"
+    },
+    "receiverCrsfTelemetrySensor_ESC_CURRENT": {
+        "message": "ESC Current（電變電流）",
+        "english": "ESC Current"
+    },
+    "receiverCrsfTelemetrySensor_ESC_CAPACITY": {
+        "message": "ESC Capacity（電變電量）",
+        "english": "ESC Capacity"
+    },
+    "receiverCrsfTelemetrySensor_ESC_ERPM": {
+        "message": "ESC ERPM（電變電子轉速）",
+        "english": "ESC ERPM"
+    },
+    "receiverCrsfTelemetrySensor_ESC_POWER": {
+        "message": "ESC Power（電變即時油門輸出）",
+        "english": "ESC Power"
+    },
+    "receiverCrsfTelemetrySensor_ESC_THROTTLE": {
+        "message": "ESC Throttle（電變油門）",
+        "english": "ESC Throttle"
+    },
+    "receiverCrsfTelemetrySensor_ESC_TEMP1": {
+        "message": "ESC Temp 1（電變溫度1）",
+        "english": "ESC Temp 1"
+    },
+    "receiverCrsfTelemetrySensor_ESC_TEMP2": {
+        "message": "ESC Temp 2（電變溫度2）",
+        "english": "ESC Temp 2"
+    },
+    "receiverCrsfTelemetrySensor_ESC_BEC_VOLTAGE": {
+        "message": "ESC BEC Voltage（電變 BEC 電壓）",
+        "english": "ESC BEC Voltage"
+    },
+    "receiverCrsfTelemetrySensor_ESC_BEC_CURRENT": {
+        "message": "ESC BEC Current（電變 BEC 電流）",
+        "english": "ESC BEC Current"
+    },
+    "receiverCrsfTelemetrySensor_ESC_STATUS": {
+        "message": "ESC Status（電變狀態）",
+        "english": "ESC Status"
+    },
+    "receiverCrsfTelemetrySensor_ESC_MODEL": {
+        "message": "ESC Model（電變型號）",
+        "english": "ESC Model"
+    },
+    "receiverCrsfTelemetrySensor_BEC_VOLTAGE": {
+        "message": "BEC Voltage（BEC 電壓）",
+        "english": "BEC Voltage"
+    },
+    "receiverCrsfTelemetrySensor_BUS_VOLTAGE": {
+        "message": "Bus Voltage（匯流排電壓）",
+        "english": "Bus Voltage"
+    },
+    "receiverCrsfTelemetrySensor_MCU_VOLTAGE": {
+        "message": "MCU Voltage（微控制器電壓）",
+        "english": "MCU Voltage"
+    },
+    "receiverCrsfTelemetrySensor_BEC_CURRENT": {
+        "message": "BEC Current（BEC 電流）",
+        "english": "BEC Current"
+    },
+    "receiverCrsfTelemetrySensor_BUS_CURRENT": {
+        "message": "Bus Current（匯流排電流）",
+        "english": "Bus Current"
+    },
+    "receiverCrsfTelemetrySensor_MCU_CURRENT": {
+        "message": "MCU Current（微控制器電流）",
+        "english": "MCU Current"
+    },
+    "receiverCrsfTelemetrySensor_ESC_TEMP": {
+        "message": "ESC Temp（電變溫度）",
+        "english": "ESC Temp"
+    },
+    "receiverCrsfTelemetrySensor_BEC_TEMP": {
+        "message": "BEC Temp（BEC 溫度）",
+        "english": "BEC Temp"
+    },
+    "receiverCrsfTelemetrySensor_MCU_TEMP": {
+        "message": "MCU Temp（微控制器溫度）",
+        "english": "MCU Temp"
+    },
+    "receiverCrsfTelemetrySensor_AIR_TEMP": {
+        "message": "Air Temp（氣溫）",
+        "english": "Air Temp"
+    },
+    "receiverCrsfTelemetrySensor_MOTOR_TEMP": {
+        "message": "Motor Temp（馬達溫度）",
+        "english": "Motor Temp"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_TEMP": {
+        "message": "Battery Temp（電池溫度）",
+        "english": "Battery Temp"
+    },
+    "receiverCrsfTelemetrySensor_EXHAUST_TEMP": {
+        "message": "Exhaust Temp（排氣溫度）",
+        "english": "Exhaust Temp"
+    },
+    "receiverCrsfTelemetrySensor_HEADING": {
+        "message": "Heading（航向）",
+        "english": "Heading"
+    },
+    "receiverCrsfTelemetrySensor_ALTITUDE": {
+        "message": "Altitude（高度）",
+        "english": "Altitude"
+    },
+    "receiverCrsfTelemetrySensor_VARIOMETER": {
+        "message": "Variometer（爬升率指示器）",
+        "english": "Variometer"
+    },
+    "receiverCrsfTelemetrySensor_HEADSPEED": {
+        "message": "Headspeed（主旋翼轉速）",
+        "english": "Headspeed"
+    },
+    "receiverCrsfTelemetrySensor_TAILSPEED": {
+        "message": "Tailspeed（尾旋翼轉速）",
+        "english": "Tailspeed"
+    },
+    "receiverCrsfTelemetrySensor_MOTOR_RPM": {
+        "message": "Motor RPM（馬達轉速）",
+        "english": "Motor RPM"
+    },
+    "receiverCrsfTelemetrySensor_TRANS_RPM": {
+        "message": "Transmission RPM（傳動轉速）",
+        "english": "Transmission RPM"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE": {
+        "message": "Attitude (hi-res)（高解析度姿態）",
+        "english": "Attitude (hi-res)"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE_PITCH": {
+        "message": "Attitude Pitch（俯仰姿態）",
+        "english": "Attitude Pitch"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE_ROLL": {
+        "message": "Attitude Roll（橫滾姿態）",
+        "english": "Attitude Roll"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE_YAW": {
+        "message": "Attitude Yaw（航向姿態）",
+        "english": "Attitude Yaw"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL": {
+        "message": "Accelerometer (hi-res)（高解析度加速度計）",
+        "english": "Accelerometer (hi-res)"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL_X": {
+        "message": "Accelerometer X-axis（加速度計 X-軸）",
+        "english": "Accelerometer X-axis"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL_Y": {
+        "message": "Accelerometer Y-axis（加速度計 Y-軸）",
+        "english": "Accelerometer Y-axis"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL_Z": {
+        "message": "Accelerometer Z-axis（加速度計 Z-軸）",
+        "english": "Accelerometer Z-axis"
+    },
+    "receiverCrsfTelemetrySensor_GPS": {
+        "message": "GPS",
+        "english": "GPS"
+    },
+    "receiverCrsfTelemetrySensor_GPS_SATS": {
+        "message": "GPS Sats（GPS 衛星數）",
+        "english": "GPS Sats"
+    },
+    "receiverCrsfTelemetrySensor_GPS_PDOP": {
+        "message": "GPS PDOP（GPS 位置精密值強弱度）",
+        "english": "GPS PDOP"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HDOP": {
+        "message": "GPS HDOP（GPS 水平座標精密值強弱度）",
+        "english": "GPS HDOP"
+    },
+    "receiverCrsfTelemetrySensor_GPS_VDOP": {
+        "message": "GPS VDOP（GPS 垂直座標精密值強弱度）",
+        "english": "GPS VDOP"
+    },
+    "receiverCrsfTelemetrySensor_GPS_COORD": {
+        "message": "GPS Coord（GPS 座標）",
+        "english": "GPS Coord"
+    },
+    "receiverCrsfTelemetrySensor_GPS_ALTITUDE": {
+        "message": "GPS Altitude（GPS 高度）",
+        "english": "GPS Altitude"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HEADING": {
+        "message": "GPS Heading（GPS 航向）",
+        "english": "GPS Heading"
+    },
+    "receiverCrsfTelemetrySensor_GPS_GROUNDSPEED": {
+        "message": "GPS Groundspeed（GPS 地面速度）",
+        "english": "GPS Groundspeed"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HOME_DISTANCE": {
+        "message": "GPS Home Distance（GPS 起飛點距離）",
+        "english": "GPS Home Distance"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HOME_DIRECTION": {
+        "message": "GPS Home Direction（GPS 起飛點方向）",
+        "english": "GPS Home Direction"
+    },
+    "receiverCrsfTelemetrySensor_GPS_DATE_TIME": {
+        "message": "GPS Date Time（GPS 日期時間）",
+        "english": "GPS Date Time"
+    },
+    "receiverCrsfTelemetrySensor_LOAD": {
+        "message": "Load（負載）",
+        "english": "Load"
+    },
+    "receiverCrsfTelemetrySensor_CPU_LOAD": {
+        "message": "CPU Load（處理器負載）",
+        "english": "CPU Load"
+    },
+    "receiverCrsfTelemetrySensor_SYS_LOAD": {
+        "message": "SYS Load（系統負載）",
+        "english": "SYS Load"
+    },
+    "receiverCrsfTelemetrySensor_RT_LOAD": {
+        "message": "RT Load（即時負載）",
+        "english": "RT Load"
+    },
+    "receiverCrsfTelemetrySensor_MODEL_ID": {
+        "message": "Model Id（模型 ID）",
+        "english": "Model Id"
+    },
+    "receiverCrsfTelemetrySensor_FLIGHT_MODE": {
+        "message": "Flight Mode（飛行模式）",
+        "english": "Flight Mode"
+    },
+    "receiverCrsfTelemetrySensor_ARMING_FLAGS": {
+        "message": "Arming Flags（解鎖旗標）",
+        "english": "Arming Flags"
+    },
+    "receiverCrsfTelemetrySensor_ARMING_DISABLE_FLAGS": {
+        "message": "Arming Disable Flags（禁止解鎖旗標）",
+        "english": "Arming Disable Flags"
+    },
+    "receiverCrsfTelemetrySensor_RESCUE_STATE": {
+        "message": "Rescue State（救機狀態）",
+        "english": "Rescue State"
+    },
+    "receiverCrsfTelemetrySensor_GOVERNOR_STATE": {
+        "message": "Governor State（定速狀態）",
+        "english": "Governor State"
+    },
+    "receiverCrsfTelemetrySensor_GOVERNOR_FLAGS": {
+        "message": "Governor Flags（定速旗標）",
+        "english": "Governor Flags"
+    },
+    "receiverCrsfTelemetrySensor_PID_PROFILE": {
+        "message": "PID Profile（PID 設定檔）",
+        "english": "PID Profile"
+    },
+    "receiverCrsfTelemetrySensor_RATES_PROFILE": {
+        "message": "Rates Profile（速率設定檔）",
+        "english": "Rates Profile"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_PROFILE": {
+        "message": "Battery Profile（電池設定檔）",
+        "english": "Battery Profile"
+    },
+    "receiverCrsfTelemetrySensor_LED_PROFILE": {
+        "message": "LED Profile（LED 設定檔）",
+        "english": "LED Profile"
+    },
+    "receiverCrsfTelemetrySensor_ADJFUNC": {
+        "message": "Adjustment Function（調整功能）",
+        "english": "Adjustment Function"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_0": {
+        "message": "Debug 0（除錯 0）",
+        "english": "Debug 0"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_1": {
+        "message": "Debug 1（除錯 1）",
+        "english": "Debug 1"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_2": {
+        "message": "Debug 2（除錯 2）",
+        "english": "Debug 2"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_3": {
+        "message": "Debug 3（除錯 3）",
+        "english": "Debug 3"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_4": {
+        "message": "Debug 4（除錯 4）",
+        "english": "Debug 4"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_5": {
+        "message": "Debug 5（除錯 5）",
+        "english": "Debug 5"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_6": {
+        "message": "Debug 6（除錯 6）",
+        "english": "Debug 6"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_7": {
+        "message": "Debug 7（除錯 7）",
+        "english": "Debug 7"
+    },
     "receiverBars": {
         "message": "接收機通道",
         "english": "Receiver Channels"
     },
     "receiverBarsHelp": {
         "message": "精確顯示接收機的原始遙控通道。請選擇通道圖，即每個遙控通道的相關功能。",
-        "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the corrent function for each RC channel."
+        "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel."
     },
     "receiverChannelOrder": {
         "message": "通道順序預設",
@@ -2248,7 +2795,8 @@
     },
     "auxiliaryDisabled": {
         "message": "(已關閉)",
-        "english": "(DISABLED)"
+        "english": "(DISABLED)",
+        "description": "Text to add to the ARM mode (maybe others in the future) in the MODES TAB when it has been disabled for some external reason"
     },
     "auxiliaryAddRange": {
         "message": "添加範圍",
@@ -2634,6 +3182,14 @@
         "message": "循環交叉耦合截止",
         "english": "Cross Coupling Cutoff"
     },
+    "adjustmentsFunctionAccTrimPitch": {
+        "message": "加速度計俯仰微調",
+        "english": "Accelerometer Pitch Trim"
+    },
+    "adjustmentsFunctionAccTrimRoll": {
+        "message": "加速度計橫滾微調",
+        "english": "Accelerometer Roll Trim"
+    },
     "servoHelp": {
         "message": "舵機101<ul><li>首先檢查舵機方向。例如，透過給予一些集體螺距來檢查循環舵機系統。反向舵機，如果需要。</li><li>透過啟動<i>舵機覆寫</i>和調節<i>中心點</i>來調平舵機臂。舵機臂在此位置應垂直於主軸。</li><li>調整<i>縮放</i>使舵機角度正確。指定角度為30°;在<i>舵機覆寫</i>下的舵機。舵機現在應該移動到30度。如果小於，則增加該舵機的<i>縮放</i>。如果更多，就減少。</li><li>您可以透過調整<i>最小值</i>或<i>最大值</i>來限制或擴展舵機運動範圍。只有在出現機械問題時才這樣做，比如舵機干涉。使用混控限制橫滾/俯仰/集體螺距</li></ul>",
         "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
@@ -2683,7 +3239,7 @@
         "english": "Scale pos"
     },
     "servoScalePosHelp": {
-        "message": "負方向的縮放係數。 對於寬頻（1520µs）舵機，通常為 500µs；對於窄頻（760µs）舵機，通常為 250µs。修改這個值可以用於糾正舵機在正負方向的非線性。",
+        "message": "正方向的縮放係數。 對於寬頻（1520µs）舵機，通常為 500µs；對於窄頻（760µs）舵機，通常為 250µs。修改這個值可以用於糾正舵機在正負方向的非線性。",
         "english": "Scaling factor on the positive side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws."
     },
     "servoRate": {
@@ -2785,6 +3341,10 @@
     "mixerRebootNote": {
         "message": "<span class=\"message-negative\">警告：</span> 某些設定需要重新啟動後才會生效！",
         "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!"
+    },
+    "mixerMotorisedTailCalibrationNote": {
+        "message": "<span class=\"message-negative\">警告：</span> 使用馬達直驅尾旋翼時航向校準應設為100%。除非您知道自己在做什麼，否則請勿更改此數值。",
+        "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing."
     },
     "mixerMainRotorSettings": {
         "message": "主旋翼設定",
@@ -3051,16 +3611,16 @@
         "english": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop"
     },
     "mixerTailRotorCenterTrim": {
-        "message": "尾旋翼中心點微調 [&deg;]",
-        "english": "Center trim for tail rotor [&deg;]"
+        "message": "航向中心點微調",
+        "english": "Yaw center trim"
     },
     "mixerTailRotorCenterTrimHelp": {
         "message": "設定尾旋翼微調值以達到航向混控覆寫0°時尾槳亦為零螺距。",
         "english": "Set tail rotor trim to achieve zero blade pitch with 0° yaw mixer override."
     },
     "mixerTailMotorCenterTrim": {
-        "message": "尾馬達中心點微調 [%]",
-        "english": "Center trim for tail motor [%]"
+        "message": "航向中心點偏移量 [%]",
+        "english": "Yaw center offset [%]"
     },
     "mixerTailMotorCenterTrimHelp": {
         "message": "微調0度航向指令時的尾馬達油門值。",
@@ -3451,8 +4011,24 @@
         "english": "ESC Telemetry protocol"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "選擇電變遙測協定。遙測是通過一根獨立的連接線傳送的。",
-        "english": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC."
+        "message": "選擇你的電變遙測協議。將電變遙測線由電變連接到飛控上。在<i>配置</i>頁面中將對應的串列埠設定為電變遙測",
+        "english": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab."
+    },
+    "motorsEscTelemetryHalfDuplex": {
+        "message": "單線通信（半雙工）",
+        "english": "One-wire Communication (Half-Duplex)"
+    },
+    "motorsEscTelemetryHalfDuplexHelp": {
+        "message": "使用 TX 接腳進行發送和接收。特定支援由遙控器上調整參數的電變（如：Hobbywing Platinum V5 或 Scorpion Tribunus）需使用此功能。",
+        "english": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scorpion Tribunus)."
+    },
+    "motorsEscTelemetryPinswap": {
+        "message": "Rx/Tx 接腳交換",
+        "english": "Rx/Tx Pin Swap"
+    },
+    "motorsEscTelemetryPinswapHelp": {
+        "message": "將 Rx 和 Tx 接腳交換。注意：此選項在 F4 MCUs 上不支援，請參閱說明。",
+        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
     },
     "motorsUnsyncedPwm": {
         "message": "非同步電變刷新率",
@@ -3471,12 +4047,12 @@
         "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz."
     },
     "motorsDshotBidir": {
-        "message": "DShot 轉速遙測",
-        "english": "DShot RPM Telemetry"
+        "message": "Dshot 轉速遙測",
+        "english": "Dshot RPM Telemetry"
     },
     "motorsDshotBidirHelp": {
-        "message": "透過DShot將轉速發送回飛控<br>註：需要相容的電變和韌體，例如BLHeli32, Bluejay 或是 AM32.",
-        "english": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32."
+        "message": "透過Dhot將轉速發送回飛控。也被稱為雙向Dshot。<br>註：需要相容的電變和韌體，如 AM32, Bluejay 或是 BLHeli32 32.7 與以上的版本。",
+        "english": "The ESC RPM is sent back to the FC with Dshot. Also known as bidirectional Dshot. <br>Note: Requires a compatible ESC, like AM32, Bluejay or BLHeli32 version 32.7 or higher."
     },
     "motorsRPMSensor": {
         "message": "轉速感測器",
@@ -3527,7 +4103,7 @@
         "english": "0% Throttle PWM value"
     },
     "motorsThrottleMinimumHelp": {
-        "message": "這是在低油門(怠速但不會動)時發送到電變/舵機的 PWM 值。",
+        "message": "這是在低油門(內燃機怠速)時發送到電變/舵機的 PWM 值。",
         "english": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE)."
     },
     "motorsThrottleMaximum": {
@@ -3647,8 +4223,8 @@
         "english": "Governor mode"
     },
     "govModeHelp": {
-        "message": "<strong>關閉：</strong> 定速器關閉，油門信號將直接從遙控器傳送到電變。<br><br><strong>直通：</strong>定速器不控制轉速，但提供緩啟動和熄火重新啟動的功能。<br><br><strong>標準：</strong> 轉速由飛控定速器控制，類似於一個普通的電變定速功能。<br><br><strong>模式1：</strong> 與標準類似，但提供集體螺距與循環螺距的補償（類似於遙控器中的油門曲線）<br><br><strong>模式2：</strong> 類似於模式1，但具有對電壓驟降的補償，該模式需要有足夠快的電壓回傳才能使用。",
-        "english": "<strong>OFF:</strong> Govenor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
+        "message": "<strong>關閉：</strong> 定速器關閉，油門信號將直接從遙控器傳送到電變。<br><br><strong>直通：</strong>定速器不控制轉速，但提供緩啟動和熄火降落的功能。<br><br><strong>標準：</strong> 轉速由飛控定速器控制，類似於一個普通的電變定速功能。<br><br><strong>模式1：</strong> 與標準類似，但提供集體螺距與循環螺距的補償（類似於遙控器中的油門曲線）<br><br><strong>模式2：</strong> 類似於模式1，但具有對電壓驟降的補償，該模式需要有足夠快的電壓回傳才能使用。",
+        "english": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
     },
     "govHandoverThrottle": {
         "message": "接管油門 [%]",
@@ -3659,19 +4235,19 @@
         "english": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level."
     },
     "govStartupTime": {
-        "message": "一階緩啟動時間 [秒]",
+        "message": "緩啟動時間 [秒]",
         "english": "Startup time"
     },
     "govStartupTimeHelp": {
-        "message": "無有效轉速時的緩啟動的時間常數，以秒為單位，測量主旋翼從零到全速的時間。",
+        "message": "無轉速訊號階段的緩啟動時間常數，以秒為單位，測量主旋翼從零到全速的時間。",
         "english": "Time constant for slow startup, in seconds, measuring the time from zero to full headspeed."
     },
     "govSpoolupTime": {
-        "message": "二階緩啟動時間 [秒]",
+        "message": "緩提速時間 [秒]",
         "english": "Spoolup time"
     },
     "govSpoolupTimeHelp": {
-        "message": "有有效轉速時的緩啟動的時間常數，以秒為單位，測量主旋翼從零到全速的時間。",
+        "message": "有轉速訊號階段的緩提速時間常數，以秒為單位，測量主旋翼從零到全速的時間。",
         "english": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govTrackingTime": {
@@ -3687,23 +4263,23 @@
         "english": "Recovery time"
     },
     "govRecoveryTimeHelp": {
-        "message": "恢復二階啟動的時間常數，以秒為單位，測量從零到全速的時間。",
+        "message": "恢復緩提速的時間常數，以秒為單位，測量從零到全速的時間。",
         "english": "Time constant for recovery spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govAutoBailoutTime": {
-        "message": "熄火重新啟動保護時間 [秒]",
+        "message": "熄火降落保護時間 [秒]",
         "english": "Autorotation bailout time"
     },
     "govAutoBailoutTimeHelp": {
-        "message": "熄火重新啟動保護的時間常數（秒），測量主旋翼從零到全速的時間。",
+        "message": "熄火降落保護的時間常數（秒），測量主旋翼從零到全速的時間。",
         "english": "Time constant for autorotation bailout spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govAutoTimeout": {
-        "message": "熄火重新啟動超時 [秒]",
+        "message": "熄火降落逾時 [秒]",
         "english": "Autorotation timeout"
     },
     "govAutoTimeoutHelp": {
-        "message": "結束熄火降落並進入正常IDLE狀態的超時時間。",
+        "message": "結束熄火降落並進入正常IDLE狀態的逾時時間。",
         "english": "Timeout for ending autorotation and moving to normal IDLE."
     },
     "govAutoMinEntryTime": {
@@ -3715,15 +4291,15 @@
         "english": "Minimum flight time before autorotation can be engaged."
     },
     "govZeroThrottleTimeout": {
-        "message": "零油門超時 [秒]",
+        "message": "零油門逾時 [秒]",
         "english": "Zero Throttle timeout"
     },
     "govZeroThrottleTimeoutHelp": {
-        "message": "在關閉定速器之前，遺失(零)油門信號的超時時間。如果在此時間內恢復油門信號，定速器將執行恢復 Spoolup 啟動。",
+        "message": "在關閉定速器之前，遺失(零)油門信號的逾時時間。如果在此時間內恢復油門信號，定速器將執行恢復 Spoolup 啟動。",
         "english": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup."
     },
     "govLostHeadspeedTimeout": {
-        "message": "主旋翼轉速信號超時 [秒]",
+        "message": "主旋翼轉速信號逾時 [秒]",
         "english": "Headspeed signal timeout"
     },
     "govLostHeadspeedTimeoutHelp": {
@@ -3781,6 +4357,16 @@
     "govMaxThrottleHelp": {
         "message": "定速器允許輸出的最大油門量",
         "english": "Maximum output throttle the governor is allowed to use."
+    },
+    "govMinThrottle": {
+        "message": "Minimum Throttle",
+        "english": "Minimum Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "govMinThrottleHelp": {
+        "message": "Minimum output throttle the governor is allowed to use.",
+        "english": "Minimum output throttle the governor is allowed to use.",
+        "status": "New entry. Please translate!"
     },
     "govMasterGain": {
         "message": "主 PID 增益",
@@ -4146,6 +4732,18 @@
         "message": "溫度",
         "english": "Temperatures"
     },
+    "blackboxLog_esc": {
+        "message": "電變",
+        "english": "ESC"
+    },
+    "blackboxLog_bec": {
+        "message": "BEC",
+        "english": "BEC"
+    },
+    "blackboxLog_esc2": {
+        "message": "電變 2",
+        "english": "ESC 2"
+    },
     "serialLoggingSupportedNote": {
         "message": "你可以使用串列埠外接記錄設備來記錄日誌（例如 OpenLager）。需要在串列埠設定頁設定相應的串列埠。",
         "english": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
@@ -4463,8 +5061,8 @@
         "english": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "如果與飛控板失去通信，請按照以下步驟恢復通信： <ul><li>斷開電源</li><li>啟用無重新啟動流程以及完全抹除</li><li>按下或短路BOOT按鈕</li><li>接通電源（如果操作正確，活動 LED 指示燈不會閃爍）。</li><li>如果需要請安裝所有 STM32 驅動 以及 Zadig (參見手冊中的 <a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB 刷寫</a> 部分)。</li><li>關閉並重新啟動設定器</li><li>如果飛控板有 BOOT 按鈕，此時鬆開 BOOT 按鈕</li><li>使用正確的韌體刷寫（如果 FC 手冊有規定，請使用手動鮑率）。</li><li>斷開電源</li><li>移除 BOOT 跳線</li><li>接通電源（活動 LED 應閃爍）。</li><li>正常連接</li></ul>",
-        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
+        "message": "如果與飛控板失去通信，請按照以下步驟恢復通信： <ul><li>斷開電源</li><li>啟用無重新啟動流程以及完全抹除</li><li>按下或短路BOOT按鈕</li><li>接通電源（如果操作正確，活動 LED 指示燈不會閃爍）。</li><li>如果需要請安裝所有 STM32 驅動 以及 Zadig (參見手冊中的 <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB 刷寫</a> 部分)。</li><li>關閉並重新啟動設定器</li><li>如果飛控板有 BOOT 按鈕，此時鬆開 BOOT 按鈕</li><li>使用正確的韌體刷寫（如果 FC 手冊有規定，請使用手動鮑率）。</li><li>斷開電源</li><li>移除 BOOT 跳線</li><li>接通電源（活動 LED 應閃爍）。</li><li>正常連接</li></ul>",
+        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
     },
     "firmwareFlasherFirmwareNotLoaded": {
         "message": "沒有載入韌體",
@@ -4526,6 +5124,52 @@
     "firmwareFlasherPreviousDevice": {
         "message": "偵測到：<strong>$1</strong> - 仍在燒錄前一個設備，請稍後重新插入再試一次。",
         "english": "Detected: <strong>$1</strong> - previous device still flashing, please replug to try again"
+    },
+    "firmwareFlasherNoBoardsLoaded": {
+        "message": "沒有載入任何飛控板",
+        "english": "No boards loaded"
+    },
+    "firmwareFlasherBoardDetectionButton": {
+        "message": "偵測",
+        "english": "Detect"
+    },
+    "firmwareFlasherBoardDetectionSucceeded": {
+        "message": "偵測到飛控板：<strong>{{boardName}}</strong>",
+        "english": "Detected board: <strong>{{boardName}}</strong>",
+        "description": "Board detection was successful!"
+    },
+    "firmwareFlasherBoardDetectionFail": {
+        "message": "已連接的裝置無法偵測",
+        "english": "Unable to detect board for connected device"
+    },
+    "firmwareFlasherBoardDetectionBoardNotFound": {
+        "message": "偵測到飛控板：<strong>{{boardName}}</strong>，但沒有找到對應的設定。",
+        "english": "Detected board: <strong>{{boardName}}</strong>, but no matching target found.",
+        "description": "Board detection was successful, but there was no matching target available."
+    },
+    "firmwareFlasherBoardDetectionDescriptionHint": {
+        "message": "只有在 MSP 連線正常且不是在 DFU 韌體升級模式下才可使用偵測功能。有時須多重新連線幾次或重新連接 USB 線。燒錄韌體後請重啟或重新連接你的飛控。",
+        "english": "Detect only works when not in DFU mode and when MSP communication is working. Sometimes you have to retry a few times or even reconnect USB. Try connecting as normal first as you could have forgotten to apply custom defaults. Please reboot after flashing - replug your USB."
+    },
+    "firmwareFlasherBoardDetectionInProgress": {
+        "message": "自動偵測已連接的裝置...",
+        "english": "Auto-detecting board for connected device..."
+    },
+    "dialogBoardDetectionMessageInvalidBoardNameTitle": {
+        "message": "偵測到無效的飛控板名稱",
+        "english": "Invalid Board Name Detected"
+    },
+    "dialogBoardDetectionMessageInvalidBoardNameContent": {
+        "message": "飛控板名稱：($1) 包含無效字元 -- 使用修正後的飛控板名稱：($2)",
+        "english": "Board name: ($1) contains invalid characters -- using corrected board name: ($2)"
+    },
+    "dialogBoardDetectionMessageInvalidBoardNameRecommendation": {
+        "message": "建議使用設定全部抹除功能來修正飛控板名稱。使用全部抹除前請確認已做好完整備份。",
+        "english": "A full chip erase is recommended to correct the board name. Ensure you perform a full backup before performing a flash with full chip erase enabled."
+    },
+    "dialogBoardDetectionMessageAcknowledge": {
+        "message": "確認",
+        "english": "Acknowledge"
     },
     "ledStripHelp": {
         "message": "飛控可以控制 LED 燈條上的每一個燈珠的顏色和效果。<br />設定燈珠的位置，連線的順序，然後按位置將燈條接入。沒有設定過接線順序的燈珠設定不會被儲存。<br />在一個顏色上雙擊可編輯 HSV 值。",
@@ -5423,15 +6067,15 @@
     },
     "profilesRescueLevelGainHelp": {
         "message": "啟用救機後直升機回正的強度。",
-        "english": "Gain to determine how agressively the heli levels during rescue."
+        "english": "Gain to determine how aggressively the heli levels during rescue."
     },
     "profilesRescueFlipGain": {
         "message": "翻正增益",
         "english": "Flip-to-Upright Gain"
     },
     "profilesRescueFlipGainHelp": {
-        "message": "救援過程中，直升機在執行翻正時的強度。",
-        "english": "Gain to determine how agressively the heli flips during inverted rescue."
+        "message": "反向救機過程中，直升機在執行翻正時的強度。",
+        "english": "Gain to determine how aggressively the heli flips during inverted rescue."
     },
     "profilesRescueMaxRate": {
         "message": "最大回正速率 [&deg;/s]",
@@ -5502,7 +6146,7 @@
         "english": "Flip Fail Time [s]"
     },
     "profilesRescueFlipTimeHelp": {
-        "message": "翻正失敗超時。當在救機過程中，直升機將嘗試翻正，但在規定時間內沒有成功翻正時，將會終止救機",
+        "message": "翻正失敗逾時。當在救機過程中，直升機將嘗試翻正，但在規定時間內沒有成功翻正時，將會終止救機",
         "english": "Timeout for flip failure. If the helicopter is in rescue and is trying to flip to upright and does not do with the Rescue Flip Time, rescue will be aborted"
     },
     "profilesRescueAltHold": {
@@ -5554,35 +6198,35 @@
         "english": "Copy rateprofile"
     },
     "rateSetupActivateProfile": {
-        "message": "已載入設定檔: <strong class=\"message-positive\">$1</strong>",
+        "message": "已載入速率設定檔: <strong class=\"message-positive\">$1</strong>",
         "english": "Loaded Rate Profile: <strong class=\"message-positive\">$1</strong>"
     },
     "rateSetupSubTab": {
-        "message": "速率參數 #$1",
+        "message": "速率設定檔 #$1",
         "english": "Rate Profile #$1"
     },
     "rateSetupSubTab1": {
-        "message": "速率參數 #1",
+        "message": "速率設定檔 #1",
         "english": "Rate Profile #1"
     },
     "rateSetupSubTab2": {
-        "message": "速率參數 #2",
+        "message": "速率設定檔 #2",
         "english": "Rate Profile #2"
     },
     "rateSetupSubTab3": {
-        "message": "速率參數 #3",
+        "message": "速率設定檔 #3",
         "english": "Rate Profile #3"
     },
     "rateSetupSubTab4": {
-        "message": "速率參數 #4",
+        "message": "速率設定檔 #4",
         "english": "Rate Profile #4"
     },
     "rateSetupSubTab5": {
-        "message": "速率參數 #5",
+        "message": "速率設定檔 #5",
         "english": "Rate Profile #5"
     },
     "rateSetupSubTab6": {
-        "message": "速率參數 #6",
+        "message": "速率設定檔 #6",
         "english": "Rate Profile #6"
     },
     "rateSetupRates": {
@@ -5767,7 +6411,7 @@
     },
     "gyroDynamicNotchMinHzHelp": {
         "message": "將其設定為需要過濾的最低傳入噪聲頻率。應低於主旋翼頻率，但不低於 20Hz，相當於 1200rpm。",
-        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm."
+        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is equivalent to 1200rpm."
     },
     "gyroDynamicNotchMaxHzHelp": {
         "message": "將其設定為需要過濾的最高傳入噪聲頻率。如果濾波器頻率為 1k，則應比最大尾旋翼頻率高 10-20%，但不高於 250Hz。如果濾波器頻率為 2k 或更高，則可使用 330-500 Hz，特別是對於馬達直驅尾旋翼的小型直升機（範圍越大，精度越低，性能越差）。",
@@ -5878,8 +6522,8 @@
         "english": "Gyro RPM Notch Filter Banks"
     },
     "gyroRpmFilterHelp": {
-        "message": "轉速控制濾波是陀螺上的一組陷波濾波器，它利用轉速遙測數據以外科手術般精準去除噪聲。<br /><br /><b><span>重要</span>: 電變必須支援雙向DShot協定，並且$t(tabmotors.com message)頁面中的$t(configurationMotorPoles.message)的值必須正確才能使此過濾器工作。</b>",
-        "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
+        "message": "轉速控制濾波是陀螺上的一組陷波濾波器，它利用轉速遙測數據以外科手術般精準去除噪聲。<br /><br /><b><span>重要</span>: 電變必須支援雙向Dshot協定，並且$t(tabmotors.com message)頁面中的$t(configurationMotorPoles.message)的值必須正確才能使此過濾器工作。</b>",
+        "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
     },
     "gyroRpmFilterMainRotorGroup": {
         "message": "主旋翼陷波濾波器",
@@ -6553,7 +7197,7 @@
     "osdSetupSelectedProfileLabel": {
         "message": "目前：",
         "english": "Current:",
-        "description": "Label for the selection of the curren active OSD profile"
+        "description": "Label for the selection of the current active OSD profile"
     },
     "osdSetupPreviewSelectProfileElement": {
         "message": "OSD 設定檔 {{profileNumber}}",
@@ -7113,8 +7757,8 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementRemaningTimeEstimate": {
-        "message": "預計剩餘電池飛行時間",
-        "english": "Estimate of flight time remaning"
+        "message": "預估剩餘飛行時間",
+        "english": "Estimate of flight time remaining"
     },
     "osdTextElementRtcDateTime": {
         "message": "RTC 日期和時間",
@@ -7862,7 +8506,7 @@
     },
     "osdSectionHelpStats": {
         "message": "設定飛行結束上鎖後螢幕上顯示的統計資訊",
-        "english": "Set the values dispalyed on the post flight statistics screen."
+        "english": "Set the values displayed on the post flight statistics screen."
     },
     "osdSectionHelpWarnings": {
         "message": "顯示或隱藏顯示在警告區域的警告資訊",
@@ -8602,7 +9246,7 @@
     },
     "cordovaWebviewEnable": {
         "message": "在設定中進入您的設備資訊頁面，點擊構建版本數字10次以啟用“開發者選項”。 在此之後，搜尋並進入開發者選項，並選擇 <b>{{app}}</b> 作為 webview 提供者。",
-        "english": "Go into the tab of informations about your device in the settings and tap 10 times on the build version number to enable 'Developper options'. After that, search and go in the developper options and select <b>{{app}}</b> as webview provider."
+        "english": "Go into the tab of information about your device in the settings and tap 10 times on the build version number to enable 'Developer options'. After that, search and go in the developer options and select <b>{{app}}</b> as webview provider."
     },
     "cordovaWebviewEnableBtn": {
         "message": "打開設定",
