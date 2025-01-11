@@ -291,20 +291,14 @@
 }
 
 @media all and (max-width: 575px) {
-    .tab-profiles .content_wrapper_header {
-        flex-wrap: wrap;
-    }
-
-    .tab-profiles .pid_table,
-    .tab-profiles .copybtn,
-    .tab-profiles .resetbtn,
-    .tab-profiles .show {
-        width: calc(50% - 5px);
-    }
-
     .tab-profiles .content_wrapper_header_btns {
         display: flex;
-        flex-wrap: wrap;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .tab-profiles .content_wrapper_header_btns > * a {
+        padding: 16px;
     }
 
     .tab-profiles .tab-container > div {
