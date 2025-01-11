@@ -351,7 +351,7 @@ export const MSP = $state({
                 console.log(`MSP data request timed-out: ${code} direction: ${MSP.message_direction} tab: ${GUI.active_tab}`);
 
                 // cancel request if MSP communication is not possible
-                if (!serial.connected || CONFIGURATOR.cliActive) {
+                if (!serial.connected || CONFIGURATOR.cliEngineActive) {
                     console.log('Cancelling MSP request');
 
                     const i = MSP.callbacks.findIndex(obj);
