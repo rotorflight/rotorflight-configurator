@@ -4991,21 +4991,6 @@
         "message": "파일로부터 불러오기",
         "english": "Load from file"
     },
-    "cliDumpAllBtn": {
-        "message": "Backup",
-        "english": "Backup",
-        "status": "New entry. Please translate!"
-    },
-    "cliSaveSettingsBtn": {
-        "message": "Save Settings",
-        "english": "Save Settings",
-        "status": "New entry. Please translate!"
-    },
-    "cliExitBtn": {
-        "message": "Exit",
-        "english": "Exit",
-        "status": "New entry. Please translate!"
-    },
     "cliConfirmSnippetDialogTitle": {
         "message": "파일 <strong>{{fileName}}</strong> 로드됨. 로드된 명령어를 검토하세요.",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"
