@@ -81,6 +81,7 @@
     "nouislider": "^15.8.1",
     "nw-builder": "4.9.0",
     "postcss": "^8.4.14",
+    "prettier": "^3.4.2",
     "rpm-builder": "^1.2.1",
     "semver": "^7.6.3",
     "three": "^0.169.0",
