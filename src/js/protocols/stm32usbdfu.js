@@ -247,7 +247,6 @@ STM32DFU_protocol.prototype.getInterfaceDescriptors = function (interfaceNum, ca
 
 
 STM32DFU_protocol.prototype.getInterfaceDescriptor = function (_interface, callback) {
-    var self = this;
     chrome.usb.controlTransfer(this.handle, {
         'direction':    'in',
         'recipient':    'device',
@@ -281,7 +280,6 @@ STM32DFU_protocol.prototype.getInterfaceDescriptor = function (_interface, callb
 };
 
 STM32DFU_protocol.prototype.getFunctionalDescriptor = function (_interface, callback) {
-    var self = this;
     chrome.usb.controlTransfer(this.handle, {
         'direction':    'in',
         'recipient':    'interface',
@@ -408,7 +406,7 @@ STM32DFU_protocol.prototype.getChipInfo = function (_interface, callback) {
             };
         return memory;
     };
-    var chipInfo = descriptors.map(parseDescriptor).reduce(function(o, v, i) {
+    var chipInfo = descriptors.map(parseDescriptor).reduce(function(o, v) {
         o[v.type.toLowerCase().replace(' ', '_')] = v;
         return o;
     }, {});
@@ -417,8 +415,6 @@ STM32DFU_protocol.prototype.getChipInfo = function (_interface, callback) {
 };
 
 STM32DFU_protocol.prototype.controlTransfer = function (direction, request, value, _interface, length, data, callback, _timeout) {
-    var self = this;
-
     // timeout support was added in chrome v43
     var timeout;
     if (typeof _timeout === "undefined") {
@@ -448,13 +444,14 @@ STM32DFU_protocol.prototype.controlTransfer = function (direction, request, valu
             callback(buf, result.resultCode);
         });
     } else {
+        let arrayBuf;
         // length is ignored
         if (data) {
-            var arrayBuf = new ArrayBuffer(data.length);
+            arrayBuf = new ArrayBuffer(data.length);
             var arrayBufView = new Uint8Array(arrayBuf);
             arrayBufView.set(data);
         } else {
-            var arrayBuf = new ArrayBuffer(0);
+            arrayBuf = new ArrayBuffer(0);
         }
 
         chrome.usb.controlTransfer(this.handle, {
@@ -550,7 +547,7 @@ STM32DFU_protocol.prototype.upload_procedure = function (step) {
     var self = this;
 
     switch (step) {
-        case 0:
+        case 0: {
             self.getChipInfo(0, function (chipInfo, resultCode) {
                 if (resultCode != 0 || typeof chipInfo === "undefined") {
                     console.log('Failed to detect chip info, resultCode: ' + resultCode);
@@ -613,7 +610,9 @@ STM32DFU_protocol.prototype.upload_procedure = function (step) {
                 }
             });
             break;
-        case 1:
+        }
+
+        case 1: {
             if (typeof self.chipInfo.option_bytes === "undefined") {
                 console.log('Failed to detect option bytes');
                 self.cleanup();
@@ -751,11 +750,13 @@ STM32DFU_protocol.prototype.upload_procedure = function (step) {
             self.loadAddress(self.chipInfo.option_bytes.start_address, initReadOB, false);
             });
             break;
-        case 2:
+        }
+
+        case 2: {
             // erase
                 // find out which pages to erase
                 var erase_pages = [];
-                for (var i = 0; i < self.flash_layout.sectors.length; i++) {
+                for (let i = 0; i < self.flash_layout.sectors.length; i++) {
                     for (var j = 0; j < self.flash_layout.sectors[i].num_pages; j++) {
                         if (self.options.erase_chip) {
                             // full chip erase
@@ -770,7 +771,7 @@ STM32DFU_protocol.prototype.upload_procedure = function (step) {
                             var ends_in_page = end_address >= page_start && end_address <= page_end;
                             var spans_page = self.hex.data[k].address < page_start && end_address > page_end;
                             if (starts_in_page || ends_in_page || spans_page) {
-                                var idx = erase_pages.findIndex(function (element, index, array) {
+                                var idx = erase_pages.findIndex(function (element) {
                                     return element.sector == i && element.page == j;
                                 });
                                 if (idx == -1)
@@ -866,20 +867,21 @@ STM32DFU_protocol.prototype.upload_procedure = function (step) {
                 // start
                 erase_page();
             break;
+        }
 
-        case 4:
+        case 4: {
             // upload
             // we dont need to clear the state as we are already using DFU_DNLOAD
             console.log('Writing data ...');
             TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32Flashing'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
 
-            var blocks = self.hex.data.length - 1;
+            let blocks = self.hex.data.length - 1;
             var flashing_block = 0;
-            var address = self.hex.data[flashing_block].address;
+            let address = self.hex.data[flashing_block].address;
 
             var bytes_flashed = 0;
             var bytes_flashed_total = 0; // used for progress bar
-            var wBlockNum = 2; // required by DFU
+            let wBlockNum = 2; // required by DFU
 
             var write = function () {
                 if (bytes_flashed < self.hex.data[flashing_block].bytes) {
@@ -940,21 +942,23 @@ STM32DFU_protocol.prototype.upload_procedure = function (step) {
             self.loadAddress(address, write);
 
             break;
-        case 5:
+        }
+
+        case 5: {
             // verify
             console.log('Verifying data ...');
             TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32Verifying'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
 
-            var blocks = self.hex.data.length - 1;
+            let blocks = self.hex.data.length - 1;
             var reading_block = 0;
-            var address = self.hex.data[reading_block].address;
+            let address = self.hex.data[reading_block].address;
 
             var bytes_verified = 0;
             var bytes_verified_total = 0; // used for progress bar
-            var wBlockNum = 2; // required by DFU
+            let wBlockNum = 2; // required by DFU
 
             // initialize arrays
-            for (var i = 0; i <= blocks; i++) {
+            for (let i = 0; i <= blocks; i++) {
                 self.verify_hex.push([]);
             }
 
@@ -969,8 +973,8 @@ STM32DFU_protocol.prototype.upload_procedure = function (step) {
                 if (bytes_verified < self.hex.data[reading_block].bytes) {
                     var bytes_to_read = ((bytes_verified + self.transferSize) <= self.hex.data[reading_block].bytes) ? self.transferSize : (self.hex.data[reading_block].bytes - bytes_verified);
 
-                    self.controlTransfer('in', self.request.UPLOAD, wBlockNum++, 0, bytes_to_read, 0, function (data, code) {
-                        for (var i = 0; i < data.length; i++) {
+                    self.controlTransfer('in', self.request.UPLOAD, wBlockNum++, 0, bytes_to_read, 0, function (data) {
+                        for (let i = 0; i < data.length; i++) {
                             self.verify_hex[reading_block].push(data[i]);
                         }
 
@@ -1002,7 +1006,7 @@ STM32DFU_protocol.prototype.upload_procedure = function (step) {
                         // all blocks read, verify
 
                         var verify = true;
-                        for (var i = 0; i <= blocks; i++) {
+                        for (let i = 0; i <= blocks; i++) {
                             verify = self.verify_flash(self.hex.data[i].data, self.verify_hex[i]);
 
                             if (!verify) break;
@@ -1027,6 +1031,7 @@ STM32DFU_protocol.prototype.upload_procedure = function (step) {
                 }
             };
             break;
+        }
     }
 };
 
@@ -1047,7 +1052,7 @@ STM32DFU_protocol.prototype.leave = function () {
         self.loadAddress(address, function () {
             // 'downloading' 0 bytes to the program start address followed by a GETSTATUS is used to trigger DFU exit on STM32
             self.controlTransfer('out', self.request.DNLOAD, 0, 0, 0, 0, function () {
-                self.controlTransfer('in', self.request.GETSTATUS, 0, 0, 6, 0, function (data) {
+                self.controlTransfer('in', self.request.GETSTATUS, 0, 0, 6, 0, function () {
                     self.cleanup();
                 });
             });

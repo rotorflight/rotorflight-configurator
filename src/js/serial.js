@@ -15,7 +15,7 @@ export const serial = {
 
     connect: function (path, options, callback) {
         const self = this;
-        const testUrl = path.match(/^tcp:\/\/([A-Za-z0-9\.-]+)(?:\:(\d+))?$/);
+        const testUrl = path.match(/^tcp:\/\/([A-Za-z0-9.-]+)(?::(\d+))?$/);
         if (testUrl) {
             self.connectTcp(testUrl[1], testUrl[2], options, callback);
         } else if (path === 'virtual') {
@@ -131,7 +131,7 @@ export const serial = {
                     }, 150);
                 } else if (self.openCanceled) {
                     // connection didn't open and sequence was canceled, so we will do nothing
-                    console.log(`${self.connectionType}: connection didn\'t open and request was canceled`);
+                    console.log(`${self.connectionType}: connection didn't open and request was canceled`);
                     self.openCanceled = false;
                 } else {
                     console.log(`${self.connectionType}: failed to open serial port`);

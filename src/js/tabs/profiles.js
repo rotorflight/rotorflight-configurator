@@ -502,7 +502,7 @@ tab.initialize = function (callback) {
         const dialogCopyProfile = $('.dialogCopyProfile')[0];
         const selectProfile = $('.selectProfile');
 
-        $.each(self.tabNames, function(key, value) {
+        $.each(self.tabNames, function(key) {
             if (key != FC.CONFIG.profile) {
                 const tabIndex = key + 1;
                 selectProfile.append(new Option(i18n.getMessage(`profilesSubTab${tabIndex}`), key));

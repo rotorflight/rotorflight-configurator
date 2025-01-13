@@ -88,12 +88,13 @@ function processMapEvents(e) {
             mapView.setZoom(mapView.getZoom() - 1);
             break;
 
-        case 'center':
+        case 'center': {
             iconFeature.setStyle(iconStyle);
             const center = ol.proj.fromLonLat([e.data.lon, e.data.lat]);
             mapView.setCenter(center);
             iconGeometry.setCoordinates(center);
             break;
+        }
 
         case 'nofix':
             iconFeature.setStyle(iconStyleNoFix);

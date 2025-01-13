@@ -3,8 +3,6 @@ const tab = {
 };
 
 tab.initialize = function (callback) {
-    const self = this;
-
     load_data(load_html);
 
     function load_data(callback) {

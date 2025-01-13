@@ -129,6 +129,11 @@
         "message": "Automatisch verbinden",
         "english": "Auto-Connect"
     },
+    "showAllPorts": {
+        "message": "Show All Ports",
+        "english": "Show All Ports",
+        "status": "New entry. Please translate!"
+    },
     "close": {
         "message": "Sluiten",
         "english": "Close"
@@ -185,6 +190,16 @@
         "message": "Automatisch verbinden: Uitgeschakeld - Gebruiker moet de poort selecteren en zelf \"Verbinden\" klikken",
         "english": "Auto-Connect: Disabled - User needs to select the correct serial port and click \"Connect\" button on its own"
     },
+    "showAllPortsEnabled": {
+        "message": "Show All Ports: Enabled - Configurator lists all possible ports",
+        "english": "Show All Ports: Enabled - Configurator lists all possible ports",
+        "status": "New entry. Please translate!"
+    },
+    "showAllPortsDisabled": {
+        "message": "Show All Ports: Disabled - Configurator will only list recognized ports",
+        "english": "Show All Ports: Disabled - Configurator will only list recognized ports",
+        "status": "New entry. Please translate!"
+    },
     "zoomBoxText": {
         "message": "Inzoomen:",
         "english": "Zoom:"
@@ -200,6 +215,10 @@
     "rememberLastTab": {
         "message": "Laatste tab automatisch heropenen bij verbinding",
         "english": "Reopen last tab on connect"
+    },
+    "rememberLastSelectedBoard": {
+        "message": "Onthoud het laatst geselecteerde bord in firmware flasher",
+        "english": "Remember last selected board in firmware flasher"
     },
     "analyticsOptOut": {
         "message": "Meld af voor het anoniem verzamelen van gegevens voor statistieken",
@@ -624,7 +643,7 @@
     },
     "firmwareVersionNotSupported": {
         "message": "Deze firmware-versie wordt <span class=\"message-negative\">niet ondersteund</span>. Gebruik een firmware-versie die ondersteund wordt door deze versie van de Configurator. Gebruik de CLI om een backup te maken voor het flashen. De CLI backup/restore-procedure staat beschreven in de documentie.<br />Als je nog nog klaar bent om te upgraden, gebruik dan een oude versie van de Configurator.",
-        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
+        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documentation.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
     },
     "firmwareTypeNotSupported": {
         "message": "Niet-Rotorflight firmware wordt <span class=\"message-negative\">niet ondersteund</span>, behalve in CLI modus.",
@@ -869,8 +888,8 @@
         "english": "Rotorflight documentation is available in release notes and website.<br /><br />"
     },
     "defaultDocumentation1": {
-        "message": "De Rotorflight Tutorial is een geweldige bron van informatie, je kunt deze <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> vinden.",
-        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/Tutorial-Quickstart/Introduction\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        "message": "De Rotorflight Tutorial is een geweldige bron van informatie, je kunt deze <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> vinden.",
+        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultDocumentation2": {
         "message": "Het laatste nieuws is te lezen op de website Announcements pagina, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a>.",
@@ -973,8 +992,8 @@
         "english": "Arming Allowed"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "Lijst van vlaggen die aangeven waarom arming op dit moment niet is toegestaan. Beweeg de muis over de vlag of raadpleeg de website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> voor meer informatie.",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/Tutorial-Setup/Modes#arm\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
+        "message": "Lijst van vlaggen die aangeven waarom arming op dit moment niet is toegestaan. Beweeg de muis over de vlag of raadpleeg de website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> voor meer informatie.",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
     },
     "statusArmingDisableFlagsTooltipNO_GYRO": {
         "message": "Geen gyroscoop sensor gevonden",
@@ -1092,7 +1111,7 @@
         "description": "Message that pops up to describe the REBOOT_REQ arming disable flag"
     },
     "statusArmingDisableFlagsTooltipDSHOT_BITBANG": {
-        "message": "Bitbanged DSHOT werkt niet goed en de motoren kunnen niet worden gecontroleerd. Waarschijnlijk veroorzaakt door een timer conflict met andere functies ingeschakeld op de vluchtcontroller.",
+        "message": "Bitbanged Dshot werkt niet goed en de motoren kunnen niet worden aangestuurd. Waarschijnlijk veroorzaakt door een timer conflict met andere functies ingeschakeld op de vluchtcontroller.",
         "english": "Bitbanged DSHOT is not working properly and the motors can't be controlled. Likely caused by a timer conflict with other features enabled on the flight controller.",
         "description": "Message that pops up to describe the DSHOT_BITBANG arming disable flag"
     },
@@ -1308,8 +1327,8 @@
         "english": "Enable Software Serial ports"
     },
     "feature_GPS": {
-        "message": "GPS voor navigatie en telemetrie",
-        "english": "GPS for navigation and telemetry"
+        "message": "GPS voor telemetrie",
+        "english": "GPS for telemetry"
     },
     "feature_SONAR": {
         "message": "Sonar hoogte radar",
@@ -1390,6 +1409,18 @@
     "configurationFeatures": {
         "message": "Eigenschappen",
         "english": "Features"
+    },
+    "featureTip_GPS": {
+        "message": "Maakt ondersteuning voor GPS-telemetrie mogelijk. Voegt het tabblad <i>GPS</i> toe voor de configuratie.",
+        "english": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration."
+    },
+    "featureTip_LED_STRIP": {
+        "message": "Maakt ondersteuning voor WS2811/2812 LED-strips mogelijk. Voegt het tabblad <i>LED Strip</i> toe voor de configuratie.",
+        "english": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration."
+    },
+    "featureTip_CMS": {
+        "message": "Maakt firmware-ondersteuning voor CMS mogelijk.",
+        "english": "Enables firmware support for CMS."
     },
     "configurationSerialPorts": {
         "message": "Seriële poorten",
@@ -1484,16 +1515,24 @@
         "english": "Accelerometer Trim"
     },
     "configurationAccelTrimsHelp": {
-        "message": "De versnellingsmeter-trim biedt fijnafstelling voor het horizonniveau, wat kan worden gebruikt om de drift te verminderen tijdens gestabiliseerde modi, zoals Angle of Rescue.",
-        "english": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue."
+        "message": "Versnellingsmeter-trims passen de horizon aan om drift in gestabiliseerde modi te corrigeren, zoals Angle, Horizon en Rescue.",
+        "english": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue."
     },
     "configurationAccelTrimRoll": {
         "message": "Versnellingsmeter roll-trim",
         "english": "Accelerometer Roll Trim"
     },
+    "configurationAccelRollTrimHelp": {
+        "message": "Verhoog de waarde om drift naar links te corrigeren. Verlaag de waarde (of gebruik negatieve waarden) om drift naar rechts te corrigeren.",
+        "english": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right."
+    },
     "configurationAccelTrimPitch": {
         "message": "Versnellingsmeter pitch-trim",
         "english": "Accelerometer Pitch Trim"
+    },
+    "configurationAccelPitchTrimHelp": {
+        "message": "Verhoog de waarde om drift naar achteren te corrigeren. Verlaag de waarde (of gebruik negatieve waarden) om drift naar voren te corrigeren.",
+        "english": "Increase the value to correct drift to the rear. Decrease the value (or use negative values) to correct drift to the front."
     },
     "escProtocolDisabledMessage": {
         "message": "<strong>Waarschuwing:</strong> Het selecteren van een motor-uitgang protocol dat niet wordt ondersteund door je ESC's kan leiden tot <strong>ESC's die beginnen te draaien zodra een batterij is aangesloten</strong>. Zorg er om die reden <strong>altijd voor dat je alle propellors verwijdert als je de eerste keer een accu verbindt na het wijzigen van het motor output protocol</strong>.",
@@ -1580,7 +1619,7 @@
         "english": "Beeps sounded while stick held in disarm position"
     },
     "beeper_ARMED": {
-        "message": "Waarschuwing piep wanneer de vluchtcontroller is gearmd met de motoren inactief (herhaald totdat de vluchtcontroller is gedisarmd of het gas omhoog gaat)",
+        "message": "Waarschuwing piep wanneer de vluchtcontroller is gearmd met de motoren inactief (herhaald totdat de vluchtcontroller is gedisarmd of het throttle-signaal omhoog gaat)",
         "english": "Warning beeps when board is armed with motors off when idle (repeats until board is disarmed or throttle is increased)"
     },
     "beeper_SYSTEM_INIT": {
@@ -1818,6 +1857,10 @@
         "message": "OSD: FrSky",
         "english": "OSD: FrSky"
     },
+    "portsFunction_SBUS_OUT": {
+        "message": "S.BUS Output",
+        "english": "S.BUS Output"
+    },
     "portsFunction_CUSTOM": {
         "message": "Aangepast",
         "english": "Custom"
@@ -2014,9 +2057,25 @@
         "message": "Eén-draads communicatie (half-duplex)",
         "english": "One-wire Communication (Half-Duplex)"
     },
+    "receiverSerialHalfDuplexHelp": {
+        "message": "Gebruik de TX-pin voor zowel verzenden als ontvangen. Vereist voor SBUS2, F.Port, SRXL en SRXL2.",
+        "english": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2."
+    },
     "receiverSerialInverted": {
         "message": "Geïnverteerd serieel signaal",
         "english": "Inverted Serial Signaling"
+    },
+    "receiverSerialInvertedHelp": {
+        "message": "Verwijdert het omgekeerde signaal van de ontvanger. Vereist voor onder andere S.Bus en F.Port. Opmerking: deze optie wordt niet ondersteund door F4 MCU's, zie help.",
+        "english": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help."
+    },
+    "receiverSerialPinSwap": {
+        "message": "RX/TX pin swap",
+        "english": "Rx/Tx Pin Swap"
+    },
+    "receiverSerialPinSwapHelp": {
+        "message": "Verwisselt de RX- en TX-pinnen. Opmerking: deze optie wordt niet ondersteund op F4 MCU's, zie help.",
+        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
     },
     "receiverStickCenter": {
         "message": "Stick midden",
@@ -2047,7 +2106,7 @@
         "english": "Throttle Channel value for 0% throttle"
     },
     "receiverHelpZeroThrottle": {
-        "message": "De kanaalwaarde (in µs) voor het gaskanaal om als 0% te worden beschouwd.",
+        "message": "De kanaalwaarde (in µs) voor het throttle-kanaal om als 0% te worden beschouwd.",
         "english": "The channel value (in µs) for the throttle channel to be considered 0%"
     },
     "receiverFullThrottle": {
@@ -2055,7 +2114,7 @@
         "english": "Throttle Channel value for 100% throttle"
     },
     "receiverHelpFullThrottle": {
-        "message": "De kanaalwaarde (in µs) voor het gaskanaal om als 100% te worden beschouwd.",
+        "message": "De kanaalwaarde (in µs) voor het throttle-kanaal om als 100% te worden beschouwd.",
         "english": "The channel value (in µs) for the throttle channel to be considered 100%"
     },
     "receiverCyclicDeadband": {
@@ -2063,16 +2122,16 @@
         "english": "Cyclic Deadband"
     },
     "receiverHelpCyclicDeadband": {
-        "message": "Dit zijn waarden (in µs) waarmee het RC-ingangssignaal kan verschillen voordat het als niet-nul wordt beschouwd. Voor zenders met jitter op de uitgangen kan deze waarde worden verhoogd als de RC-ingangen schokken vertonen tijdens het inactief zijn.",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle."
+        "message": "Dit zijn waarden (in µs) waarmee het RC-ingangssignaal kan verschillen voordat het als niet-nul wordt beschouwd. Voor zenders met jitter op de uitgangen kan deze waarde worden verhoogd als de RC-ingangen tijdens stilstand lichte bewegingen vertonen.",
+        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle."
     },
     "receiverYawDeadband": {
         "message": "Yaw deadband",
         "english": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "Dit zijn waarden (in µs) waarmee het RC-ingangssignaal kan verschillen voordat het als niet-nul wordt beschouwd. Voor zenders met jitter op de uitgangen kan deze waarde worden verhoogd als de RC-ingangen schokken vertonen tijdens het inactief zijn.<strong>Deze instelling is alleen voor Yaw.</strong>",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
+        "message": "Dit zijn waarden (in µs) waarmee het RC-ingangssignaal kan verschillen voordat het als niet-nul wordt beschouwd. Voor zenders met jitter op de uitgangen kan deze waarde worden verhoogd als de RC-ingangen tijdens stilstand lichte bewegingen vertonen. <strong>Deze instelling is alleen voor Yaw.</strong>",
+        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
     },
     "receiverTelemetrySettings": {
         "message": "Telemetrie instellingen",
@@ -2089,6 +2148,34 @@
     "receiverTelemetryInverted": {
         "message": "Geïnverteerd telemetriesignaal",
         "english": "Inverted Telemetry Signaling"
+    },
+    "receiverTelemetryPinSwap": {
+        "message": "Telemetrie pin swap (swap rx en tx pins)",
+        "english": "Telemetry Pin Swap (Swap Rx and Tx pins)"
+    },
+    "receiverCrsfTelemetryMode": {
+        "message": "Schakel CRSF aangepaste telemetrie in",
+        "english": "Enable CRSF Custom Telemetry"
+    },
+    "receiverCrsfTelemetryRate": {
+        "message": "Telemetriesnelheid",
+        "english": "Telemetry Rate"
+    },
+    "receiverCrsfTelemetryRatio": {
+        "message": "Telemetrieverhouding",
+        "english": "Telemetry Ratio"
+    },
+    "receiverHelpCrsfTelemetryMode": {
+        "message": "Schakelt de aangepaste Rotorflight-telemetrie met ELRS in. Vereist een Lua-script in de TX voor het decoderen van de sensoren. Aangepaste telemetrie biedt een overvloed aan sensoren voor helikopters.",
+        "english": "Enables the Custom Rotorflight telemetry with ELRS. Requires a Lua script in the Tx for decoding the sensors. Custom telemetry provides a plethora of sensors for helicopter use."
+    },
+    "receiverHelpCrsfTelemetryRate": {
+        "message": "Radiolinkpakketsnelheid voor telemetrie. Stel dit in op dezelfde waarde als de ELRS-pakketsnelheid op de TX.",
+        "english": "Radio link packet rate for telemetry. Set this to the same value as the ELRS packet rate in the Tx."
+    },
+    "receiverHelpCrsfTelemetryRatio": {
+        "message": "Radiolinkpakketverhouding voor telemetrie. Stel dit in op dezelfde waarde als de ELRS-telemetrieverhouding op de TX.",
+        "english": "Radio link packet ratio for telemetry. Set this to the same value as the ELRS telemetry ratio in the Tx."
     },
     "receiverTelemetrySensors": {
         "message": "Telemetrie sensoren",
@@ -2109,6 +2196,18 @@
     "receiverTelemetrySensor_USED_CAPACITY": {
         "message": "Gebruikte batterijcapaciteit",
         "english": "Used Battery Capacity"
+    },
+    "receiverTelemetrySensor_BEC_VOLTAGE": {
+        "message": "BEC-spanning",
+        "english": "BEC Voltage"
+    },
+    "receiverTelemetrySensor_HEADSPEED": {
+        "message": "Hoofdrotortoerental",
+        "english": "Headspeed"
+    },
+    "receiverTelemetrySensor_TAILSPEED": {
+        "message": "Staartrotortoerental",
+        "english": "Tailspeed"
     },
     "receiverTelemetrySensor_TEMPERATURE": {
         "message": "FC temperatuur",
@@ -2152,7 +2251,7 @@
     },
     "receiverTelemetrySensor_LAT_LONG": {
         "message": "GPS breedte- en lengtegraad",
-        "english": "GPS Latitide & Longitude"
+        "english": "GPS Latitude & Longitude"
     },
     "receiverTelemetrySensor_GROUND_SPEED": {
         "message": "GPS grondsnelheid",
@@ -2186,13 +2285,461 @@
         "message": "Governor mode",
         "english": "Governor Mode"
     },
+    "receiverTelemetrySensor_ARMING_FLAGS": {
+        "message": "Arming vlaggen",
+        "english": "Arming Flags"
+    },
+    "receiverTelemetrySensor_PID_PROFILE": {
+        "message": "PID-profiel",
+        "english": "PID Profile"
+    },
+    "receiverTelemetrySensor_RATES_PROFILE": {
+        "message": "Rotatiesnelheidsprofiel",
+        "english": "Rates Profile"
+    },
+    "receiverTelemetrySensor_THROTTLE_CONTROL": {
+        "message": "Throttle controle",
+        "english": "Throttle Control"
+    },
+    "receiverTelemetrySensor_MODEL_ID": {
+        "message": "Model ID",
+        "english": "Model Id"
+    },
+    "receiverTelemetryGroup_DEBUG": {
+        "message": "Debug",
+        "english": "Debug"
+    },
+    "receiverTelemetryGroup_SYSTEM": {
+        "message": "Systeem",
+        "english": "System"
+    },
+    "receiverTelemetryGroup_GPS": {
+        "message": "GPS",
+        "english": "GPS"
+    },
+    "receiverTelemetryGroup_CONTROL": {
+        "message": "Controle",
+        "english": "Control"
+    },
+    "receiverTelemetryGroup_PROFILE": {
+        "message": "Profiel",
+        "english": "Profile"
+    },
+    "receiverTelemetryGroup_RPM": {
+        "message": "RPM",
+        "english": "RPM"
+    },
+    "receiverTelemetryGroup_BATTERY": {
+        "message": "Batterij",
+        "english": "Battery"
+    },
+    "receiverTelemetryGroup_TEMPERATURE": {
+        "message": "Temperatuur",
+        "english": "Temperature"
+    },
+    "receiverTelemetryGroup_ESC1": {
+        "message": "ESC #1",
+        "english": "ESC #1"
+    },
+    "receiverTelemetryGroup_ESC2": {
+        "message": "ESC #2",
+        "english": "ESC #2"
+    },
+    "receiverTelemetryGroup_BARO": {
+        "message": "Barometer",
+        "english": "Barometer"
+    },
+    "receiverTelemetryGroup_GYRO": {
+        "message": "Gyro",
+        "english": "Gyro"
+    },
+    "receiverTelemetryGroup_STATUS": {
+        "message": "Status",
+        "english": "Status"
+    },
+    "receiverTelemetryGroup_CURRENT": {
+        "message": "Stroom",
+        "english": "Current"
+    },
+    "receiverTelemetryGroup_VOLTAGE": {
+        "message": "Spanning",
+        "english": "Voltage"
+    },
+    "receiverCrsfTelemetrySensor_HEARTBEAT": {
+        "message": "Hartslag",
+        "english": "Heartbeat"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY": {
+        "message": "Batterij",
+        "english": "Battery"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_VOLTAGE": {
+        "message": "Batterijspanning",
+        "english": "Battery Voltage"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CURRENT": {
+        "message": "Batterijstroom",
+        "english": "Battery Current"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CONSUMPTION": {
+        "message": "Batterijverbruik",
+        "english": "Battery Consumption"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CHARGE_LEVEL": {
+        "message": "Batterij laadniveau",
+        "english": "Battery Charge Level"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CELL_COUNT": {
+        "message": "Aantal batterijcellen",
+        "english": "Battery Cell Count"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGE": {
+        "message": "Batterijcelspanning",
+        "english": "Battery Cell Voltage"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGES": {
+        "message": "Batterijcelspanningen",
+        "english": "Battery Cell Voltages"
+    },
+    "receiverCrsfTelemetrySensor_CONTROL": {
+        "message": "Controle (hi-Res)",
+        "english": "Control (hi-res)"
+    },
+    "receiverCrsfTelemetrySensor_PITCH_CONTROL": {
+        "message": "Pitch-besturing",
+        "english": "Pitch Control"
+    },
+    "receiverCrsfTelemetrySensor_ROLL_CONTROL": {
+        "message": "Roll-besturing",
+        "english": "Roll Control"
+    },
+    "receiverCrsfTelemetrySensor_YAW_CONTROL": {
+        "message": "Yaw-besturing",
+        "english": "Yaw Control"
+    },
+    "receiverCrsfTelemetrySensor_COLLECTIVE_CONTROL": {
+        "message": "Collectieve controle",
+        "english": "Collective Control"
+    },
+    "receiverCrsfTelemetrySensor_THROTTLE_CONTROL": {
+        "message": "Throttle controle",
+        "english": "Throttle Control"
+    },
+    "receiverCrsfTelemetrySensor_ESC_DATA": {
+        "message": "ESC-gegevens",
+        "english": "ESC Data"
+    },
+    "receiverCrsfTelemetrySensor_ESC_VOLTAGE": {
+        "message": "ESC-spanning",
+        "english": "ESC Voltage"
+    },
+    "receiverCrsfTelemetrySensor_ESC_CURRENT": {
+        "message": "ESC-stroom",
+        "english": "ESC Current"
+    },
+    "receiverCrsfTelemetrySensor_ESC_CAPACITY": {
+        "message": "ESC-capaciteit",
+        "english": "ESC Capacity"
+    },
+    "receiverCrsfTelemetrySensor_ESC_ERPM": {
+        "message": "ESC ERPM",
+        "english": "ESC ERPM"
+    },
+    "receiverCrsfTelemetrySensor_ESC_POWER": {
+        "message": "ESC Power",
+        "english": "ESC Power"
+    },
+    "receiverCrsfTelemetrySensor_ESC_THROTTLE": {
+        "message": "ESC-throttle",
+        "english": "ESC Throttle"
+    },
+    "receiverCrsfTelemetrySensor_ESC_TEMP1": {
+        "message": "ESC-temp 1",
+        "english": "ESC Temp 1"
+    },
+    "receiverCrsfTelemetrySensor_ESC_TEMP2": {
+        "message": "ESC-temp 2",
+        "english": "ESC Temp 2"
+    },
+    "receiverCrsfTelemetrySensor_ESC_BEC_VOLTAGE": {
+        "message": "ESC BEC-spanning",
+        "english": "ESC BEC Voltage"
+    },
+    "receiverCrsfTelemetrySensor_ESC_BEC_CURRENT": {
+        "message": "ESC BEC-stroom",
+        "english": "ESC BEC Current"
+    },
+    "receiverCrsfTelemetrySensor_ESC_STATUS": {
+        "message": "ESC-status",
+        "english": "ESC Status"
+    },
+    "receiverCrsfTelemetrySensor_ESC_MODEL": {
+        "message": "ESC-model",
+        "english": "ESC Model"
+    },
+    "receiverCrsfTelemetrySensor_BEC_VOLTAGE": {
+        "message": "BEC-spanning",
+        "english": "BEC Voltage"
+    },
+    "receiverCrsfTelemetrySensor_BUS_VOLTAGE": {
+        "message": "Busspanning",
+        "english": "Bus Voltage"
+    },
+    "receiverCrsfTelemetrySensor_MCU_VOLTAGE": {
+        "message": "MCU-spanning",
+        "english": "MCU Voltage"
+    },
+    "receiverCrsfTelemetrySensor_BEC_CURRENT": {
+        "message": "BEC-stroom",
+        "english": "BEC Current"
+    },
+    "receiverCrsfTelemetrySensor_BUS_CURRENT": {
+        "message": "Busstroom",
+        "english": "Bus Current"
+    },
+    "receiverCrsfTelemetrySensor_MCU_CURRENT": {
+        "message": "MCU-stroom",
+        "english": "MCU Current"
+    },
+    "receiverCrsfTelemetrySensor_ESC_TEMP": {
+        "message": "ESC-temp",
+        "english": "ESC Temp"
+    },
+    "receiverCrsfTelemetrySensor_BEC_TEMP": {
+        "message": "BEC-temp",
+        "english": "BEC Temp"
+    },
+    "receiverCrsfTelemetrySensor_MCU_TEMP": {
+        "message": "MCU-temp",
+        "english": "MCU Temp"
+    },
+    "receiverCrsfTelemetrySensor_AIR_TEMP": {
+        "message": "Luchttemperatuur",
+        "english": "Air Temp"
+    },
+    "receiverCrsfTelemetrySensor_MOTOR_TEMP": {
+        "message": "Motortemperatuur",
+        "english": "Motor Temp"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_TEMP": {
+        "message": "Batterijtemperatuur",
+        "english": "Battery Temp"
+    },
+    "receiverCrsfTelemetrySensor_EXHAUST_TEMP": {
+        "message": "Uitlaattemperatuur",
+        "english": "Exhaust Temp"
+    },
+    "receiverCrsfTelemetrySensor_HEADING": {
+        "message": "Richting",
+        "english": "Heading"
+    },
+    "receiverCrsfTelemetrySensor_ALTITUDE": {
+        "message": "Hoogte",
+        "english": "Altitude"
+    },
+    "receiverCrsfTelemetrySensor_VARIOMETER": {
+        "message": "Variometer",
+        "english": "Variometer"
+    },
+    "receiverCrsfTelemetrySensor_HEADSPEED": {
+        "message": "Headspeed",
+        "english": "Headspeed"
+    },
+    "receiverCrsfTelemetrySensor_TAILSPEED": {
+        "message": "Staartrotortoerental",
+        "english": "Tailspeed"
+    },
+    "receiverCrsfTelemetrySensor_MOTOR_RPM": {
+        "message": "Motor RPM",
+        "english": "Motor RPM"
+    },
+    "receiverCrsfTelemetrySensor_TRANS_RPM": {
+        "message": "Transmissie RPM",
+        "english": "Transmission RPM"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE": {
+        "message": "Houding (hi-res)",
+        "english": "Attitude (hi-res)"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE_PITCH": {
+        "message": "Houding pitch",
+        "english": "Attitude Pitch"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE_ROLL": {
+        "message": "Houding roll",
+        "english": "Attitude Roll"
+    },
+    "receiverCrsfTelemetrySensor_ATTITUDE_YAW": {
+        "message": "Houding yaw",
+        "english": "Attitude Yaw"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL": {
+        "message": "Versnellingsmeter (hi-res)",
+        "english": "Accelerometer (hi-res)"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL_X": {
+        "message": "Versnellingsmeter X-as",
+        "english": "Accelerometer X-axis"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL_Y": {
+        "message": "Versnellingsmeter Y-as",
+        "english": "Accelerometer Y-axis"
+    },
+    "receiverCrsfTelemetrySensor_ACCEL_Z": {
+        "message": "Versnellingsmeter Z-as",
+        "english": "Accelerometer Z-axis"
+    },
+    "receiverCrsfTelemetrySensor_GPS": {
+        "message": "GPS",
+        "english": "GPS"
+    },
+    "receiverCrsfTelemetrySensor_GPS_SATS": {
+        "message": "GPS Sats",
+        "english": "GPS Sats"
+    },
+    "receiverCrsfTelemetrySensor_GPS_PDOP": {
+        "message": "GPS PDOP",
+        "english": "GPS PDOP"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HDOP": {
+        "message": "GPS HDOP",
+        "english": "GPS HDOP"
+    },
+    "receiverCrsfTelemetrySensor_GPS_VDOP": {
+        "message": "GPS VDOP",
+        "english": "GPS VDOP"
+    },
+    "receiverCrsfTelemetrySensor_GPS_COORD": {
+        "message": "GPS Coord",
+        "english": "GPS Coord"
+    },
+    "receiverCrsfTelemetrySensor_GPS_ALTITUDE": {
+        "message": "GPS-hoogte",
+        "english": "GPS Altitude"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HEADING": {
+        "message": "GPS-richting",
+        "english": "GPS Heading"
+    },
+    "receiverCrsfTelemetrySensor_GPS_GROUNDSPEED": {
+        "message": "GPS-grondsnelheid",
+        "english": "GPS Groundspeed"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HOME_DISTANCE": {
+        "message": "GPS home afstand",
+        "english": "GPS Home Distance"
+    },
+    "receiverCrsfTelemetrySensor_GPS_HOME_DIRECTION": {
+        "message": "GPS home richting",
+        "english": "GPS Home Direction"
+    },
+    "receiverCrsfTelemetrySensor_GPS_DATE_TIME": {
+        "message": "GPS datum/tijd",
+        "english": "GPS Date Time"
+    },
+    "receiverCrsfTelemetrySensor_LOAD": {
+        "message": "Belasting",
+        "english": "Load"
+    },
+    "receiverCrsfTelemetrySensor_CPU_LOAD": {
+        "message": "CPU-belasting",
+        "english": "CPU Load"
+    },
+    "receiverCrsfTelemetrySensor_SYS_LOAD": {
+        "message": "Systeem-belasting",
+        "english": "SYS Load"
+    },
+    "receiverCrsfTelemetrySensor_RT_LOAD": {
+        "message": "Realtime-belasting",
+        "english": "RT Load"
+    },
+    "receiverCrsfTelemetrySensor_MODEL_ID": {
+        "message": "Model ID",
+        "english": "Model Id"
+    },
+    "receiverCrsfTelemetrySensor_FLIGHT_MODE": {
+        "message": "Vluchtmodus",
+        "english": "Flight Mode"
+    },
+    "receiverCrsfTelemetrySensor_ARMING_FLAGS": {
+        "message": "Arming-vlaggen",
+        "english": "Arming Flags"
+    },
+    "receiverCrsfTelemetrySensor_ARMING_DISABLE_FLAGS": {
+        "message": "Arming Disable vlaggen",
+        "english": "Arming Disable Flags"
+    },
+    "receiverCrsfTelemetrySensor_RESCUE_STATE": {
+        "message": "Rescue-status",
+        "english": "Rescue State"
+    },
+    "receiverCrsfTelemetrySensor_GOVERNOR_STATE": {
+        "message": "Governor-status",
+        "english": "Governor State"
+    },
+    "receiverCrsfTelemetrySensor_GOVERNOR_FLAGS": {
+        "message": "Governor vlaggen",
+        "english": "Governor Flags"
+    },
+    "receiverCrsfTelemetrySensor_PID_PROFILE": {
+        "message": "PID-profiel",
+        "english": "PID Profile"
+    },
+    "receiverCrsfTelemetrySensor_RATES_PROFILE": {
+        "message": "Rotatiesnelheidsprofiel",
+        "english": "Rates Profile"
+    },
+    "receiverCrsfTelemetrySensor_BATTERY_PROFILE": {
+        "message": "Batterijprofiel",
+        "english": "Battery Profile"
+    },
+    "receiverCrsfTelemetrySensor_LED_PROFILE": {
+        "message": "LED -profiel",
+        "english": "LED Profile"
+    },
+    "receiverCrsfTelemetrySensor_ADJFUNC": {
+        "message": "Aanpassingsfunctie",
+        "english": "Adjustment Function"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_0": {
+        "message": "Debug 0",
+        "english": "Debug 0"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_1": {
+        "message": "Debug 1",
+        "english": "Debug 1"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_2": {
+        "message": "Debug 2",
+        "english": "Debug 2"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_3": {
+        "message": "Debug 3",
+        "english": "Debug 3"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_4": {
+        "message": "Debug 4",
+        "english": "Debug 4"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_5": {
+        "message": "Debug 5",
+        "english": "Debug 5"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_6": {
+        "message": "Debug 6",
+        "english": "Debug 6"
+    },
+    "receiverCrsfTelemetrySensor_DEBUG_7": {
+        "message": "Debug 7",
+        "english": "Debug 7"
+    },
     "receiverBars": {
         "message": "Ontvangerkanalen",
         "english": "Receiver Channels"
     },
     "receiverBarsHelp": {
         "message": "Toont de ruwe RC-kanalen van de ontvanger precies zoals ze worden ontvangen. Selecteer alsjeblieft de kanaal-mapping, oftewel de juiste functie voor elk RC-kanaal.",
-        "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the corrent function for each RC channel."
+        "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel."
     },
     "receiverChannelOrder": {
         "message": "Voorkeursinstelling kanaalvolgorde",
@@ -2248,7 +2795,8 @@
     },
     "auxiliaryDisabled": {
         "message": "(UITGESCHAKELD)",
-        "english": "(DISABLED)"
+        "english": "(DISABLED)",
+        "description": "Text to add to the ARM mode (maybe others in the future) in the MODES TAB when it has been disabled for some external reason"
     },
     "auxiliaryAddRange": {
         "message": "Voeg bereik toe",
@@ -2634,6 +3182,14 @@
         "message": "Kruiskoppeling afsnijfrequentie",
         "english": "Cross Coupling Cutoff"
     },
+    "adjustmentsFunctionAccTrimPitch": {
+        "message": "Versnellingsmeter pitch trim",
+        "english": "Accelerometer Pitch Trim"
+    },
+    "adjustmentsFunctionAccTrimRoll": {
+        "message": "Versnellingsmeter roll trim",
+        "english": "Accelerometer Roll Trim"
+    },
     "servoHelp": {
         "message": "Servo 101<ul><li>Controleer eerst de servo richtingen. Controleer cyclische servo's door bijvoorbeeld wat collective te geven. Keer de servo's om indien nodig.</li><li>Nivelleer de servoarmen door <i> Servo Override</i> in te schakelen en <i>Center</i> aan te passen. De servoarm moet loodrecht op de hoofdas staan in deze positie.</li><li>Stel <i>Scale</i> af zodat de servohoeken correct zijn. Specificeer een hoek van 30&deg; voor een servo onder <i>Servo Override</i>. De servo moet nu naar 30&deg; bewegen. Als het minder is, verhoog dan de <i>Scale</i> voor die servo. Als het meer is, verlaag het dan.</li><li>Je kunt het bewegingsbereik van de servo beperken of uitbreiden door <i>Min</i> of <i>Max</i> aan te passen. Doe dit alleen als er een mechanisch probleem is, zoals een servo die vastloopt. Gebruik de mixer om roll/pitch/collective te beperken.</li></ul>",
         "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
@@ -2786,6 +3342,10 @@
         "message": "<span class=\"message-negative\">Waarschuwing:</span> Sommige instellingen vereisen een systeemherstart om van kracht te worden!",
         "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!"
     },
+    "mixerMotorisedTailCalibrationNote": {
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> Yaw-calibratie moet 100% zijn bij gebruik van een gemotoriseerde staart. Verander deze waarde niet, tenzij je precies weet wat je doet.",
+        "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing."
+    },
     "mixerMainRotorSettings": {
         "message": "Instellingen hoofdrotor",
         "english": "Main Rotor Settings"
@@ -2863,19 +3423,19 @@
         "english": "Reverse"
     },
     "mixerElevatorDirection": {
-        "message": "Pitch besturingsrichting",
+        "message": "Elevator besturingsrichting",
         "english": "Elevator Control Direction"
     },
     "mixerElevatorDirectionHelp": {
-        "message": "Afhankelijk van de positie van de pitch-servo (elevator) en het ontwerp van de rotorkop, kan de richting worden omgekeerd.",
+        "message": "Afhankelijk van de positie van de elevator-servo en het ontwerp van de rotorkop, kan de richting worden omgekeerd.",
         "english": "Depending on the elevator servo position and the head design, the direction may be reversed."
     },
     "mixerAileronDirection": {
-        "message": "Roll besturingsrichting",
+        "message": "Aileron besturingsrichting",
         "english": "Aileron Control Direction"
     },
     "mixerAileronDirectionHelp": {
-        "message": "Afhankelijk van de positie van de roll-servo's (aileron) en het ontwerp van de rotorkop, kan de richting worden omgekeerd.",
+        "message": "Afhankelijk van de positie van de aileron-servo's (rol) en het ontwerp van de rotorkop, kan de richting worden omgekeerd.",
         "english": "Depending on the aileron servo position and the head design, the direction may be reversed."
     },
     "mixerCollectiveDirection": {
@@ -3051,16 +3611,16 @@
         "english": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop"
     },
     "mixerTailRotorCenterTrim": {
-        "message": "Staartrotor midden-trim [&deg;]",
-        "english": "Center trim for tail rotor [&deg;]"
+        "message": "Yaw center trim",
+        "english": "Yaw center trim"
     },
     "mixerTailRotorCenterTrimHelp": {
         "message": "Stel de trim van de staartrotor in om nul bladhoek te bereiken met 0° yaw-mixeroverheersing.",
         "english": "Set tail rotor trim to achieve zero blade pitch with 0° yaw mixer override."
     },
     "mixerTailMotorCenterTrim": {
-        "message": "Staartmotor midden-trim [%]",
-        "english": "Center trim for tail motor [%]"
+        "message": "Yaw center offset [%]",
+        "english": "Yaw center offset [%]"
     },
     "mixerTailMotorCenterTrimHelp": {
         "message": "Stel de staartmotor throttle-waarde in voor nul giercommando.",
@@ -3095,7 +3655,7 @@
         "english": "<strong>Enable Mixer Override</strong>"
     },
     "mixerOverrideEnableSwitchText": {
-        "message": "Mixer Override dwingt de mixer-inputs naar willekeurige posities voor instellingsdoeleinden. De override-waarden worden niet opgeslagen en zullen bij het opnieuw opstarten worden gereset.",
+        "message": "Mixer Override dwingt de mixer-inputs naar willekeurige posities voor instellingsdoeleinden. De override-waarden worden niet opgeslagen en zullen na een herstart worden gereset.",
         "english": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "mixerOverrideEnable": {
@@ -3435,7 +3995,7 @@
         "english": "ESC Throttle protocol"
     },
     "motorsEscProtocolHelp": {
-        "message": "Selecteer je ESC-protocol.<br>Traditionele helikopter-ESCs gebruiken PWM. Drone-ESCs kunnen andere protocollen gebruiken, zoals DSHOT. <br>Zorg ervoor dat het protocol wordt ondersteund door je ESC.",
+        "message": "Selecteer je ESC-protocol.<br>Traditionele helikopter-ESCs gebruiken PWM. Drone-ESCs kunnen andere protocollen gebruiken, zoals Dshot. <br>Zorg ervoor dat het protocol wordt ondersteund door je ESC.",
         "english": "Select your ESC protocol.<br>Traditional helicopter ESCs use PWM. Drone ESCs may use other protocols, like DSHOT. <br>Make sure the protocol is supported by your ESC."
     },
     "motorsEscProtocolDisabled": {
@@ -3451,8 +4011,24 @@
         "english": "ESC Telemetry protocol"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "Kies jouw ESC-telemetrie protocol. De telemetrie wordt verzonden via een aparte draad vanaf de ESC.",
-        "english": "Select your ESC Telemetry protocol. The telemetry is transmitted via a separate wire from the ESC."
+        "message": "Je ESC Telemetrieprotocol. Sluit de telemetriedraad van de ESC aan op je FC. Geef aan welke UART je moet gebruiken voor ESC Telemetrie in het tabblad <i>Configuratie</i>",
+        "english": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab."
+    },
+    "motorsEscTelemetryHalfDuplex": {
+        "message": "Eéndraadscommunicatie (half-duplex)",
+        "english": "One-wire Communication (Half-Duplex)"
+    },
+    "motorsEscTelemetryHalfDuplexHelp": {
+        "message": "Gebruik de TX-pin voor zowel verzenden als ontvangen. Vereist voor forward programming van ondersteunde ESC's (bijv. Hobbywing Platinum V5 of Scorpion Tribunus).",
+        "english": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scorpion Tribunus)."
+    },
+    "motorsEscTelemetryPinswap": {
+        "message": "RX/TX pin swap",
+        "english": "Rx/Tx Pin Swap"
+    },
+    "motorsEscTelemetryPinswapHelp": {
+        "message": "Verwisselt de RX- en TX-pinnen. Opmerking: deze optie wordt niet ondersteund op F4 MCU's, zie help.",
+        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
     },
     "motorsUnsyncedPwm": {
         "message": "Ongesynchroniseerde ESC update",
@@ -3467,16 +4043,16 @@
         "english": "ESC update frequency"
     },
     "motorsUnsyncedPWMFreqHelp": {
-        "message": "ESC PWM update frequentie in Hz. Dit is hoe vaak de gashendelwaarde naar de ESC wordt verzonden. Meestal tussen 50Hz en 250Hz. De meeste moderne ESC's werken goed met 250Hz.",
+        "message": "ESC PWM update frequentie in Hz. Dit is hoe vaak het throttle-signaal naar de ESC wordt verzonden. Meestal tussen 50Hz en 250Hz. De meeste moderne ESC's werken goed met 250Hz.",
         "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz."
     },
     "motorsDshotBidir": {
-        "message": "DSHOT RPM telemetrie",
-        "english": "DShot RPM Telemetry"
+        "message": "Dshot RPM Telemetrie",
+        "english": "Dshot RPM Telemetry"
     },
     "motorsDshotBidirHelp": {
-        "message": "De ESC RPM wordt naar de FC teruggestuurd m.b.v. bi-directional DSHOT. <br>Let op: vereist een compatibele ESC, zoals BLHeli32, Bluejay of AM32.",
-        "english": "The ESC RPM is sent back to the FC with DShot. <br>Note: Requires a compatible ESC, like BLHeli32, Bluejay or AM32."
+        "message": "De ESC RPM wordt teruggestuurd naar de FC met Dshot. Ook bekend als bidirectionele Dshot.<br> Opmerking: vereist een compatibele ESC, zoals AM32, Bluejay of BLHeli32 versie 32.7 of hoger.",
+        "english": "The ESC RPM is sent back to the FC with Dshot. Also known as bidirectional Dshot. <br>Note: Requires a compatible ESC, like AM32, Bluejay or BLHeli32 version 32.7 or higher."
     },
     "motorsRPMSensor": {
         "message": "RPM sensor",
@@ -3619,7 +4195,7 @@
         "english": "Errors:"
     },
     "motorOverrideNote": {
-        "message": "<strong>Let op:</strong> Met throttle override kan de throttle op willekeurige waarden worden gezet voor setup- en testdoeleinden. Deze waarden worden niet opgeslagen en worden bij herstart gereset.<br/><br/><strong class=\"message-negative\">THROTTLE OVERRIDE ZAL DE MOTOREN DOEN OPSTARTEN!</strong>",
+        "message": "<strong>Let op:</strong> Met throttle override kan de throttle op willekeurige waarden worden gezet voor setup- en testdoeleinden. Deze waarden worden niet opgeslagen en worden bij een herstart gereset.<br/><br/><strong class=\"message-negative\">THROTTLE OVERRIDE ZAL DE MOTOREN DOEN OPSTARTEN!</strong>",
         "english": "<strong>Note.</strong> Throttle Override forces the output throttle to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset in reboot.<br/><br/><strong class=\"message-negative\">MOTOR THROTTLE OVERRIDE WILL MAKE THE MOTORS TO SPOOL UP!</strong>"
     },
     "motorOverrideTitle": {
@@ -3639,7 +4215,7 @@
         "english": "Governor Settings"
     },
     "govConfigurationNote": {
-        "message": "<strong>Opmerking:</strong> Governor heeft algemene- en profielparameters. Zie het tabblad Profielen voor specifieke parameters.",
+        "message": "<strong>Opmerking:</strong> De governor heeft algemene- en profielparameters. Zie het tabblad Profielen voor specifieke parameters.",
         "english": "<strong>Note:</strong> Governor has both global and profile parameters. Please see the Profiles tab for profile specific parameters."
     },
     "govMode": {
@@ -3647,8 +4223,8 @@
         "english": "Governor mode"
     },
     "govModeHelp": {
-        "message": "<strong>OFF:</strong> Govenor is uitgeschakeld en de throttle van de TX wordt doorgegeven aan de ESC.<br><br><strong>PASSTHROUGH:</strong> throttle van de TX, met langzame opstart en autorotatiecontrole.<br><br><strong>STANDARD:</strong> Motorsnelheid wordt gecontroleerd door de FC. Equivalent aan een typische ESC-governor.<br><br><strong>MODE1:</strong> Zoals STANDARD maar met collectieve en cyclische precompensatie (d.w.z. collectieve veranderingen veranderen proactief throttle, net zoals een throttle curve in de TX).<br><br><strong>MODE2:</strong> Zoals MODE1, maar met proactieve compensatie van de batterijspanningsdaling. Vereist snelle spanningsmeting.",
-        "english": "<strong>OFF:</strong> Govenor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
+        "message": "<strong>OFF:</strong> Governor is uitgeschakeld en het throttle-signaal van de TX wordt doorgegeven aan de ESC. <br><br><strong>PASSTHROUGH:</strong> Throttle-signaal van de TX, met langzame spoolup en autorotatiecontrole. <br><br><strong>STANDARD:</strong> Motornelheid wordt geregeld door de FC. Gelijk aan een typische ESC-governor. <br><br><strong>MODE1:</strong> Zoals standaard maar met collectieve en cyclische voorcompensatie (d.w.z. collectieve wijzigingen veranderen proactief de throttle, net als een throttle-curve op een TX).<br><br><strong>MODE2:</strong> Als MODE1, maar met proactieve compensatie voor spanningsdaling van de batterij. Vereist een snelle spanningsmeting.",
+        "english": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
     },
     "govHandoverThrottle": {
         "message": "Overdracht-throttle [%]",
@@ -3781,6 +4357,16 @@
     "govMaxThrottleHelp": {
         "message": "Maximale output throttle die de governor mag gebruiken.",
         "english": "Maximum output throttle the governor is allowed to use."
+    },
+    "govMinThrottle": {
+        "message": "Minimum Throttle",
+        "english": "Minimum Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "govMinThrottleHelp": {
+        "message": "Minimum output throttle the governor is allowed to use.",
+        "english": "Minimum output throttle the governor is allowed to use.",
+        "status": "New entry. Please translate!"
     },
     "govMasterGain": {
         "message": "PID master gain",
@@ -4146,6 +4732,18 @@
         "message": "Temperaturen",
         "english": "Temperatures"
     },
+    "blackboxLog_esc": {
+        "message": "ESC",
+        "english": "ESC"
+    },
+    "blackboxLog_bec": {
+        "message": "BEC",
+        "english": "BEC"
+    },
+    "blackboxLog_esc2": {
+        "message": "ESC 2",
+        "english": "ESC 2"
+    },
     "serialLoggingSupportedNote": {
         "message": "Je kan loggen naar een extern logapparaat (zoals een OpenLager) door een seriële poort te gebruiken. Configureer de poort op het tabblad Seriële poorten.",
         "english": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
@@ -4463,8 +5061,8 @@
         "english": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "Als je de communicatie met je board bent verloren, volg dan deze stappen om de communicatie te herstellen: <ul><li>Uitschakelen</li><li> Schakel 'Geen herstart nodig' in, schakel 'Volledige chip wissen' in.</li><li>Sluit de BOOT-pinnen kort of houd de BOOT-knop ingedrukt.</li><li>Inschakelen (activiteits-LED knippert NIET indien correct gedaan).</li><li>Installeer alle STM32-stuurprogramma's en Zadig indien nodig (zie <a href = \"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> sectie van de Betaflight-handleiding).</li><li>Sluit de Configurator, herstart de Configurator.</li><li>Laat de BOOT-knop los.</li><li>Flash met de juiste firmware (gebruik handmatige baudrate indien dit gespecificeerd in de handleiding van je FC).</li><li>Uitschakelen.</li><li>BOOT-jumper verwijderen.</li><li> Inschakelen (activiteits-LED moet knipperen).</li><li>Maak normaal verbinding.</li></ul>",
-        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
+        "message": "Als je de communicatie met je board bent verloren, volg dan deze stappen om de communicatie te herstellen: <ul><li>Uitschakelen</li><li> Schakel 'Geen herstart nodig' in, schakel 'Volledige chip wissen' in.</li><li>Sluit de BOOT-pinnen kort of houd de BOOT-knop ingedrukt.</li><li>Inschakelen (activiteits-LED knippert NIET indien correct gedaan).</li><li>Installeer alle STM32-stuurprogramma's en Zadig indien nodig (zie <a href = \"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\" target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> sectie van de Betaflight-handleiding).</li><li>Sluit de Configurator, herstart de Configurator.</li><li>Laat de BOOT-knop los.</li><li>Flash met de juiste firmware (gebruik handmatige baudrate indien dit gespecificeerd in de handleiding van je FC).</li><li>Uitschakelen.</li><li>BOOT-jumper verwijderen.</li><li> Inschakelen (activiteits-LED moet knipperen).</li><li>Maak normaal verbinding.</li></ul>",
+        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
     },
     "firmwareFlasherFirmwareNotLoaded": {
         "message": "Firmware niet geladen",
@@ -4526,6 +5124,52 @@
     "firmwareFlasherPreviousDevice": {
         "message": "Gedetecteerd: <strong>$1</strong> - vorig apparaat is nog aan het flashen, gelieve opnieuw te koppelen en het opnieuw te proberen",
         "english": "Detected: <strong>$1</strong> - previous device still flashing, please replug to try again"
+    },
+    "firmwareFlasherNoBoardsLoaded": {
+        "message": "Geen borden geladen",
+        "english": "No boards loaded"
+    },
+    "firmwareFlasherBoardDetectionButton": {
+        "message": "Detecteren",
+        "english": "Detect"
+    },
+    "firmwareFlasherBoardDetectionSucceeded": {
+        "message": "Gedetecteerd bord: <strong>{{boardName}}</strong>",
+        "english": "Detected board: <strong>{{boardName}}</strong>",
+        "description": "Board detection was successful!"
+    },
+    "firmwareFlasherBoardDetectionFail": {
+        "message": "Kan geen bord detecteren voor het aangesloten apparaat",
+        "english": "Unable to detect board for connected device"
+    },
+    "firmwareFlasherBoardDetectionBoardNotFound": {
+        "message": "Gedetecteerd bord: <strong>{{boardName}}</strong>, maar geen bijpassend doel gevonden.",
+        "english": "Detected board: <strong>{{boardName}}</strong>, but no matching target found.",
+        "description": "Board detection was successful, but there was no matching target available."
+    },
+    "firmwareFlasherBoardDetectionDescriptionHint": {
+        "message": "Detecteren werkt alleen wanneer je niet in DFU-modus zit en wanneer MSP-communicatie werkt. Soms moet je het een paar keer proberen of de USB opnieuw aansluiten. Probeer eerst normaal verbinding te maken, want je hebt mogelijk vergeten om de aangepaste standaardinstellingen toe te passen. Herstart na het flashen door USB opnieuw aan te sluiten.",
+        "english": "Detect only works when not in DFU mode and when MSP communication is working. Sometimes you have to retry a few times or even reconnect USB. Try connecting as normal first as you could have forgotten to apply custom defaults. Please reboot after flashing - replug your USB."
+    },
+    "firmwareFlasherBoardDetectionInProgress": {
+        "message": "Auto-detecteren bord voor aangesloten apparaat ...",
+        "english": "Auto-detecting board for connected device..."
+    },
+    "dialogBoardDetectionMessageInvalidBoardNameTitle": {
+        "message": "Ongeldige bordnaam gedetecteerd",
+        "english": "Invalid Board Name Detected"
+    },
+    "dialogBoardDetectionMessageInvalidBoardNameContent": {
+        "message": "Bordnaam ($1) bevat ongeldige tekens -- gecorrigeerde bordnaam ($2) wordt nu gebruikt",
+        "english": "Board name: ($1) contains invalid characters -- using corrected board name: ($2)"
+    },
+    "dialogBoardDetectionMessageInvalidBoardNameRecommendation": {
+        "message": "Het volledig wissen van de chip wordt aanbevolen om de bordnaam te corrigeren. Maak eerst een volledige backup voor het flashen met volledige chip wissen ingeschakeld.",
+        "english": "A full chip erase is recommended to correct the board name. Ensure you perform a full backup before performing a flash with full chip erase enabled."
+    },
+    "dialogBoardDetectionMessageAcknowledge": {
+        "message": "Bevestigen",
+        "english": "Acknowledge"
     },
     "ledStripHelp": {
         "message": "De vluchtcontroller kan de kleuren en effecten van individuele LED's op een strip regelen.<br />Configureer allereerst de LED's op het raster. Configureer daarna de bedradingsvolgorde en bevestig vervolgens de LED's op je quad op basis van de rasterposities. LED's zonder een draadnummer worden niet opgeslagen.<br/>Dubbelklik op een kleur om de HSV-waarden te bewerken.",
@@ -5422,8 +6066,8 @@
         "english": "Leveling Gain"
     },
     "profilesRescueLevelGainHelp": {
-        "message": "Gain om te bepalen hoe agressief de helikopter niveleert tijdens rescue.",
-        "english": "Gain to determine how agressively the heli levels during rescue."
+        "message": "Gain om te bepalen hoe agressief de helikopter nivelleert tijdens rescue.",
+        "english": "Gain to determine how aggressively the heli levels during rescue."
     },
     "profilesRescueFlipGain": {
         "message": "Gain voor omdraaien naar rechtop",
@@ -5431,7 +6075,7 @@
     },
     "profilesRescueFlipGainHelp": {
         "message": "Gain om te bepalen hoe agressief de helikopter kantelt tijdens omgekeerde rescue.",
-        "english": "Gain to determine how agressively the heli flips during inverted rescue."
+        "english": "Gain to determine how aggressively the heli flips during inverted rescue."
     },
     "profilesRescueMaxRate": {
         "message": "Maximale nivelleringssnelheid [&deg;/s]",
@@ -5702,7 +6346,7 @@
         "english": "Gyro Lowpass 2 Filter Type"
     },
     "gyroLowpassFilterHelp": {
-        "message": "De gyro laagdoorlaatfilters worden gebruikt om overtollig geluid in het gyro-signaal te filteren. Twee filters kunnen worden gebruikt, ofwel van 1<sup>e</sup> orde, ofwel van 2<sup>e</sup> orde. Het eerste filter kan dynamisch zijn en verandert zijn afsnijfrequentie met het hoofdrotortoerental. Het minimum en maximum beperken het dynamische bereik. Met RPM-filters of Dynamische Notch-filters is één extra filter nodig rond 100Hz. Zonder hen zijn twee filters van de tweede orde vereist.",
+        "message": "De gyro laagdoorlaatfilters worden gebruikt om overtollige ruis in het gyro-signaal te filteren. Twee filters kunnen worden gebruikt, ofwel van 1<sup>e</sup> orde, ofwel van 2<sup>e</sup> orde. Het eerste filter kan dynamisch zijn en verandert zijn afsnijfrequentie met het hoofdrotortoerental. Het minimum en maximum beperken het dynamische bereik. Met RPM-filters of Dynamische Notch-filters is één extra filter nodig rond 100Hz. Zonder hen zijn twee filters van de tweede orde vereist.",
         "english": "The Gyro Lowpass Filters are used for cutting off excess noise in the gyro signal. Two filters can be used, either 1<sup>st</sup> or 2<sup>nd</sup> order. The first filter can be dynamic, changing its cutoff frequency with the main rotor RPM. The minimum and maximum are limiting the dynamic range. With RPM Filters or Dynamic Notch Filters, one extra filter is needed around 100Hz. Without them, two second order filters are required."
     },
     "gyroNotchFiltersGroup": {
@@ -5767,7 +6411,7 @@
     },
     "gyroDynamicNotchMinHzHelp": {
         "message": "Stel dit in op de laagste binnenkomende ruisfrequentie die moet worden gefilterd. Het moet lager zijn dan de hoofdrotorfrequentie, maar niet lager dan 20 Hz, wat overeenkomt met 1200 RPM.",
-        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is eqivalent to 1200rpm."
+        "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is equivalent to 1200rpm."
     },
     "gyroDynamicNotchMaxHzHelp": {
         "message": "Stel dit in op de hoogste binnenkomende ruisfrequentie die moet worden gefilterd. Het moet 10-20% hoger zijn dan de maximale staartrotorfrequentie, maar niet hoger dan 250 Hz, als de filterfrequentie 1 kHz is. Als de filterfrequentie 2 kHz of hoger is, dan kan 330-500 Hz worden gebruikt, vooral voor kleinere helikopters met een gemotoriseerde staart (een hoger bereik betekent minder precisie en lagere prestaties).",
@@ -5834,7 +6478,7 @@
         "english": "Custom"
     },
     "gyroRpmFilterConfigNote": {
-        "message": "<b>Waarschuwing:</b> RPM notch filter vereist een betrouwbaar motortoerental, ofwel van DSHOT RPM-telemetrie of een RPM-sensor. ESC-telemetrie is niet geschikt.",
+        "message": "<b>Waarschuwing:</b> RPM notch filter vereist een betrouwbaar motortoerental, ofwel van Dshot RPM-telemetrie of een RPM-sensor. ESC-telemetrie is niet geschikt.",
         "english": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable."
     },
     "gyroRpmFilterCustomNote": {
@@ -5878,8 +6522,8 @@
         "english": "Gyro RPM Notch Filter Banks"
     },
     "gyroRpmFilterHelp": {
-        "message": "RPM-gestuurde filtering is een reeks notch-filters op de gyro die de RPM-telemetriegegevens gebruiken om ruis met chirurgische precisie te verwijderen.<br /><br /><b><span class=\"message-positive\">BELANGRIJK</span>: De ESC moet het Bidirectionele DSHOT-protocol ondersteunen en de waarde van de $t(configurationMotorPoles.message) in het $t(tabMotors.message) tabblad moet correct zijn voor deze filter om te werken.</b>",
-        "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional DShot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
+        "message": "RPM-gestuurde filtering is een reeks notch-filters op de gyro die de RPM-telemetriegegevens gebruiken om ruis met chirurgische precisie te verwijderen.<br /><br /><b><span class=\"message-positive\">BELANGRIJK</span>: De ESC moet het Bidirectionele Dshot-protocol ondersteunen en de waarde van de $t(configurationMotorPoles.message) in het $t(tabMotors.message) tabblad moet correct zijn voor deze filter om te werken.</b>",
+        "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
     },
     "gyroRpmFilterMainRotorGroup": {
         "message": "Hoofdrotor notch filters",
@@ -6042,7 +6686,7 @@
         "english": "Failsafe Throttle Low Delay [s]"
     },
     "failsafeThrottleLowHelp": {
-        "message": "Schakel de heli gewoon uit in plaats van de geselecteerde failsafe-procedure uit te voeren wanneer de gashendel gedurende deze tijd laag stond",
+        "message": "Schakel de heli gewoon uit in plaats van de geselecteerde failsafe-procedure uit te voeren wanneer de throttle-stick gedurende deze tijd laag stond",
         "english": "Just disarm the craft instead of executing the selected failsafe procedure when the throttle was low for this amount of time"
     },
     "failsafeThrottleItem": {
@@ -6553,7 +7197,7 @@
     "osdSetupSelectedProfileLabel": {
         "message": "Huidig:",
         "english": "Current:",
-        "description": "Label for the selection of the curren active OSD profile"
+        "description": "Label for the selection of the current active OSD profile"
     },
     "osdSetupPreviewSelectProfileElement": {
         "message": "OSD Profiel {{profileNumber}}",
@@ -7114,7 +7758,7 @@
     },
     "osdDescElementRemaningTimeEstimate": {
         "message": "Geschate resterende vluchttijd",
-        "english": "Estimate of flight time remaning"
+        "english": "Estimate of flight time remaining"
     },
     "osdTextElementRtcDateTime": {
         "message": "RTC datum en tijd",
@@ -7862,7 +8506,7 @@
     },
     "osdSectionHelpStats": {
         "message": "Stel de waarden in die zichtbaar zijn op het post-flight statistieken scherm.",
-        "english": "Set the values dispalyed on the post flight statistics screen."
+        "english": "Set the values displayed on the post flight statistics screen."
     },
     "osdSectionHelpWarnings": {
         "message": "Schakel waarschuwingen in of uit die worden weergegeven op het WAARSCHUWINGEN-element.",
@@ -8602,7 +9246,7 @@
     },
     "cordovaWebviewEnable": {
         "message": "Ga naar het tabblad met informatie over je apparaat in de instellingen en tik 10 keer op het buildversienummer om de 'Developer-opties' in te schakelen. Zoek daarna naar de ontwikkelaaropties en selecteer <b>{{app}}</b> als webviewprovider.",
-        "english": "Go into the tab of informations about your device in the settings and tap 10 times on the build version number to enable 'Developper options'. After that, search and go in the developper options and select <b>{{app}}</b> as webview provider."
+        "english": "Go into the tab of information about your device in the settings and tap 10 times on the build version number to enable 'Developer options'. After that, search and go in the developer options and select <b>{{app}}</b> as webview provider."
     },
     "cordovaWebviewEnableBtn": {
         "message": "Instellingen openen",

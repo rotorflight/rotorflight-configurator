@@ -244,7 +244,7 @@ function build_redist_tar_xz() {
 
   const filename = `${pkg.name}_${pkg.version}_${platform}_${arch}.tar.xz`;
   const output = `${path.relative(context.appdir, REDIST_DIR)}/${filename}`;
-  const command = `tar -cJf '${output}' --transform 's|^\./|rotorflight-configurator/|' .`;
+  const command = `tar -cJf '${output}' --transform 's|^\\./|rotorflight-configurator/|' .`;
 
   return new Promise((resolve, reject) =>
     child_process.exec(command, { cwd: context.appdir }, (err) =>
@@ -434,11 +434,13 @@ function run_debug() {
   switch (context.target.platform) {
     case "android":
       tasks.push(run_debug_cordova);
+      break;
 
     case "linux":
     case "osx":
     case "win":
       tasks.push(run_debug_nwjs);
+      break;
   }
 
   return gulp.series(...tasks);

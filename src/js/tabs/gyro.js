@@ -438,11 +438,6 @@ tab.initialize = function (callback) {
 
         if (self.rpmFilter.type == RPMFilter.ADVANCED) {
 
-            const mainMotorGroupActive =
-                (FC.MOTOR_CONFIG.main_rotor_gear_ratio[0] != 1 || FC.MOTOR_CONFIG.main_rotor_gear_ratio[1] != 1);
-            const tailMotorGroupActive = (FC.MIXER_CONFIG.tail_rotor_mode > 0 &&
-                (FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0] != 1 || FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1] != 1));
-
             const mainRotorMinRPM = parseInt($('input[id="gyroRpmFilterMainRotorMinRPM"]').val());
             for (let i=0; i<RPMFilter.MAIN_ROTOR_HARMONICS; i++) {
                 self.rpmFilter.mainRotor[i].rpm_limit = mainRotorMinRPM;
