@@ -3528,10 +3528,6 @@
     "cliLoadFromFileBtn": {
         "message": "Load from file"
     },
-    "cliDumpAllBtn": {
-        "message": "Backup",
-        "english": "Backup"
-    },
     "cliSaveSettingsBtn": {
         "message": "Save Settings",
         "english": "Save Settings"

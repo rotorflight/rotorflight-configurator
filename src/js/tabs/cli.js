@@ -193,13 +193,6 @@ tab.initialize = function (callback) {
             }
         });
 
-        $('.tab-cli .dumpAll').click(function() {
-            $('.tab-cli .clear').trigger('click');
-            setTimeout(() => {
-                TABS.cli.send("dump all\n", function () { });
-            }, 300);
-        });
-
         $('.tab-cli .exit').click(function() {
             TABS.cli.send("exit\n", function () { });
         });

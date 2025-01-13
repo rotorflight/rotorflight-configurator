@@ -4552,10 +4552,6 @@
         "message": "从文件加载",
         "english": "Load from file"
     },
-    "cliDumpAllBtn": {
-        "message": "备份",
-        "english": "Backup"
-    },
     "cliSaveSettingsBtn": {
         "message": "保存设置",
         "english": "Save Settings"
