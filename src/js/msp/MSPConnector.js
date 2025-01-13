@@ -18,7 +18,7 @@ MSPConnectorImpl.prototype.connect = function (port, baud, onConnectCallback, on
     serial.connect(self.port, {bitrate: self.baud}, function (openInfo) {
         if (openInfo) {
             const disconnectAndCleanup = function() {
-                serial.disconnect(function(result) {
+                serial.disconnect(function() {
                     console.log('Disconnected');
 
                     MSP.clearListeners();

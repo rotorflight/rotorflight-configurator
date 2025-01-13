@@ -512,34 +512,24 @@ tab.initialize = function (callback) {
             $('a.blackboxRebootMsc').removeClass('disabled');
         }
 
-        let loggingStatus;
         switch (FC.SDCARD.state) {
             case MSP.SDCARD_STATE_NOT_PRESENT:
                 $(".sdcard-status").text(i18n.getMessage('sdcardStatusNoCard'));
-                loggingStatus = 'SdCard: NotPresent';
             break;
             case MSP.SDCARD_STATE_FATAL:
                 $(".sdcard-status").html(i18n.getMessage('sdcardStatusReboot'));
-                loggingStatus = 'SdCard: Error';
             break;
             case MSP.SDCARD_STATE_READY:
                 $(".sdcard-status").text(i18n.getMessage('sdcardStatusReady'));
-                loggingStatus = 'SdCard: Ready';
             break;
             case MSP.SDCARD_STATE_CARD_INIT:
                 $(".sdcard-status").text(i18n.getMessage('sdcardStatusStarting'));
-                loggingStatus = 'SdCard: Init';
             break;
             case MSP.SDCARD_STATE_FS_INIT:
                 $(".sdcard-status").text(i18n.getMessage('sdcardStatusFileSystem'));
-                loggingStatus = 'SdCard: FsInit';
             break;
             default:
                 $(".sdcard-status").text(i18n.getMessage('sdcardStatusUnknown',[FC.SDCARD.state]));
-        }
-
-        if (dataflashPresent && FC.SDCARD.state === MSP.SDCARD_STATE_NOT_PRESENT) {
-            loggingStatus = 'Dataflash';
         }
 
         if (FC.SDCARD.supported && !sdcardTimer) {

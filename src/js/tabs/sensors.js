@@ -237,8 +237,6 @@ tab.initialize = function (callback) {
             ConfigStorage.set({'graphs_enabled': _checkboxes});
         });
 
-        let altitudeHint_e = $('.tab-sensors #sensorsAltitudeHint');
-
         // Always start with default/empty sensor data array, clean slate all
         initSensorData();
 

@@ -48,7 +48,6 @@ tab.initialize = function (callback) {
 
         // Dshot Beeper
         const dshotBeeper_e = $('.tab-beepers .dshotbeeper');
-        const dshotBeacon_e = $('.tab-beepers .dshotbeacon');
         const dshotBeeperBeaconTone = $('select.dshotBeeperBeaconTone');
         const dshotBeaconCondition_e = $('tbody.dshotBeaconConditions');
 

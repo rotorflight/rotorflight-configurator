@@ -110,8 +110,6 @@ export const RPMFilter = {
 
     findNotchAt : function(bank, source, ratio)
     {
-        const self = this;
-
         for (let i=0; i<bank.length; i++) {
             if (bank[i].rpm_source == source && bank[i].rpm_ratio == ratio)
                 return i;
@@ -122,8 +120,6 @@ export const RPMFilter = {
 
     findNotchBetween : function(bank, source, ratioLow, ratioHigh)
     {
-        const self = this;
-
         for (let i=0; i<bank.length; i++) {
             if (bank[i].rpm_source == source && bank[i].rpm_ratio >= ratioLow && bank[i].rpm_ratio <= ratioHigh)
                 return i;

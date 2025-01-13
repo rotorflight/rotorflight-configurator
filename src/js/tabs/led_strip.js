@@ -231,7 +231,7 @@ tab.initialize = function (callback) {
         const colorDefineSliders = $('.colorDefineSliders');
 
         // Color Buttons
-        $('.colors').on('click', 'button', function(e) {
+        $('.colors').on('click', 'button', function() {
             const that = this;
             const colorButtons = $(this).parent().find('button');
 
@@ -269,7 +269,7 @@ tab.initialize = function (callback) {
             mspHelper.sendLedStripConfig();
         });
 
-        $('.colors').on('contextmenu', 'button', function(e) {
+        $('.colors').on('contextmenu', 'button', function() {
             if (selectedModeColor) return;
 
             const that = this;
@@ -603,7 +603,6 @@ tab.initialize = function (callback) {
         $('.blinkbit').change(function(e) {
             if (!e.originalEvent) return;
             // user-triggered event
-            const that = $(this).find('input');
             if ($('.ui-selected').length > 0) {
                 let blinkPatternClass = $('.ui-selected').attr('class').split(' ').filter(s => s.startsWith('blinkpattern-'));
                 if (blinkPatternClass.length > 0) {
@@ -623,7 +622,6 @@ tab.initialize = function (callback) {
         $('#blinkPause').change(function(e) {
             if (!e.originalEvent) return;
             // user-triggered event
-            const that = $(this).find('input');
             if ($('.ui-selected').length > 0) {
                 let blinkPauseClass = $('.ui-selected').attr('class').split(' ').filter(s => s.startsWith('blinkpause-'));
                 if (blinkPauseClass.length > 0) {
@@ -638,31 +636,31 @@ tab.initialize = function (callback) {
         });
 
         $('#ledStripProfile').val(FC.LED_STRIP_CONFIG.ledstrip_profile);
-        $('#ledStripProfile').change(function(e) {
+        $('#ledStripProfile').change(function() {
             FC.LED_STRIP_CONFIG.ledstrip_profile = $('#ledStripProfile').val();
             mspHelper.sendLedStripSettings();
         });
 
         $('#globalBlinkRate').val(msToBpm(FC.LED_STRIP_CONFIG.ledstrip_blink_period_ms));
-        $('#globalBlinkRate').change(function(e) {
+        $('#globalBlinkRate').change(function() {
             FC.LED_STRIP_CONFIG.ledstrip_blink_period_ms = bpmToMs($('#globalBlinkRate').val());
             mspHelper.sendLedStripSettings();
         });
 
         $('#globalFlickerRate').val(FC.LED_STRIP_CONFIG.ledstrip_flicker_rate);
-        $('#globalFlickerRate').change(function(e) {
+        $('#globalFlickerRate').change(function() {
             FC.LED_STRIP_CONFIG.ledstrip_flicker_rate = $('#globalFlickerRate').val();
             mspHelper.sendLedStripSettings();
         });
 
         $('#globalFadeRate').val(FC.LED_STRIP_CONFIG.ledstrip_fade_rate);
-        $('#globalFadeRate').change(function(e) {
+        $('#globalFadeRate').change(function() {
             FC.LED_STRIP_CONFIG.ledstrip_fade_rate = $('#globalFadeRate').val();
             mspHelper.sendLedStripSettings();
         });
 
         $('#globalBrightness').val(FC.LED_STRIP_CONFIG.ledstrip_brightness);
-        $('#globalBrightness').change(function(e) {
+        $('#globalBrightness').change(function() {
             FC.LED_STRIP_CONFIG.ledstrip_brightness = $('#globalBrightness').val();
             mspHelper.sendLedStripSettings();
         });

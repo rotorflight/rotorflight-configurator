@@ -107,36 +107,6 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
             });
         };
 
-        var legacyRebootAndFlash = function() {
-            serial.connect(self.port, {bitrate: self.options.reboot_baud}, function (openInfo) {
-                if (!openInfo) {
-                    GUI.connect_lock = false;
-                    GUI.log(i18n.getMessage('serialPortOpenFail'));
-                    return;
-                }
-
-                console.log('Using legacy reboot method');
-
-                console.log('Sending ascii "R" to reboot');
-                var bufferOut = new ArrayBuffer(1);
-                var bufferView = new Uint8Array(bufferOut);
-
-                bufferView[0] = 0x52;
-
-                serial.send(bufferOut, function () {
-                    serial.disconnect(function (disconnectionResult) {
-                        if (disconnectionResult) {
-                            // delay to allow board to boot in bootloader mode
-                            // required to detect if a DFU device appears
-                            setTimeout(startFlashing, 1000);
-                        } else {
-                            GUI.connect_lock = false;
-                        }
-                    });
-                });
-            });
-        };
-
         var onConnectHandler = function () {
 
             GUI.log(i18n.getMessage('apiVersionReceived', [FC.CONFIG.apiVersion]));
@@ -239,7 +209,7 @@ STM32_protocol.prototype.initialize = function () {
 // this method should be executed every 1 ms via interval timer
 STM32_protocol.prototype.read = function (readInfo) {
     // routine that fills the buffer
-    var data = new Uint8Array(readInfo.data);
+    let data = new Uint8Array(readInfo.data);
 
     for (var i = 0; i < data.length; i++) {
         this.receive_buffer.push(data[i]);
@@ -247,7 +217,7 @@ STM32_protocol.prototype.read = function (readInfo) {
 
     // routine that fetches data from buffer if statement is true
     if (this.receive_buffer.length >= this.bytes_to_read && this.bytes_to_read != 0) {
-        var data = this.receive_buffer.slice(0, this.bytes_to_read); // bytes requested
+        data = this.receive_buffer.slice(0, this.bytes_to_read); // bytes requested
         this.receive_buffer.splice(0, this.bytes_to_read); // remove read bytes
 
         this.bytes_to_read = 0; // reset trigger
@@ -292,15 +262,13 @@ STM32_protocol.prototype.send = function (bytes_to_send, bytes_to_read, callback
     this.receive_buffer = [];
 
     // send over the actual data
-    serial.send(bufferOut, function (writeInfo) {});
+    serial.send(bufferOut, function () {});
 };
 
 // val = single byte to be verified
 // data = response of n bytes from mcu (array)
 // result = true/false
 STM32_protocol.prototype.verify_response = function (val, data) {
-    var self = this;
-
     if (val != data[0]) {
         var message = 'STM32 Communication failed, wrong response, expected: ' + val + ' (0x' + val.toString(16) + ') received: ' + data[0] + ' (0x' + data[0].toString(16) + ')';
         console.error(message);
@@ -414,7 +382,7 @@ STM32_protocol.prototype.upload_procedure = function (step) {
     var self = this;
 
     switch (step) {
-        case 1:
+        case 1: {
             // initialize serial interface on the MCU side, auto baud rate settings
             TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32ContactingBootloader'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
 
@@ -451,7 +419,9 @@ STM32_protocol.prototype.upload_procedure = function (step) {
                 }
             }, 250, true);
             break;
-        case 2:
+        }
+
+        case 2: {
             // get version of the bootloader and supported commands
             self.send([self.command.get, 0xFF], 2, function (data) { // 0x00 ^ 0xFF
                 if (self.verify_response(self.status.ACK, data)) {
@@ -466,7 +436,9 @@ STM32_protocol.prototype.upload_procedure = function (step) {
                 }
             });
             break;
-        case 3:
+        }
+
+        case 3: {
             // get ID (device signature)
             self.send([self.command.get_ID, 0xFD], 2, function (data) { // 0x01 ^ 0xFF
                 if (self.verify_response(self.status.ACK, data)) {
@@ -485,13 +457,15 @@ STM32_protocol.prototype.upload_procedure = function (step) {
                 }
             });
             break;
-        case 4:
+        }
+
+        case 4: {
             // erase memory
 
             if (self.useExtendedErase) {
                 if (self.options.erase_chip) {
 
-                    var message = 'Executing global chip erase (via extended erase)';
+                    let message = 'Executing global chip erase (via extended erase)';
                     console.log(message);
                     TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32GlobalEraseExtended'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
 
@@ -507,7 +481,7 @@ STM32_protocol.prototype.upload_procedure = function (step) {
                     });
 
                 } else {
-                    var message = 'Executing local erase (via extended erase)';
+                    let message = 'Executing local erase (via extended erase)';
                     console.log(message);
                     TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32LocalEraseExtended'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
 
@@ -559,7 +533,7 @@ STM32_protocol.prototype.upload_procedure = function (step) {
             }
 
             if (self.options.erase_chip) {
-                var message = 'Executing global chip erase' ;
+                let message = 'Executing global chip erase' ;
                 console.log(message);
                 TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32GlobalErase'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
 
@@ -575,7 +549,7 @@ STM32_protocol.prototype.upload_procedure = function (step) {
                     }
                 });
             } else {
-                var message = 'Executing local erase';
+                let message = 'Executing local erase';
                 console.log(message);
                 TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32LocalErase'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
 
@@ -607,12 +581,14 @@ STM32_protocol.prototype.upload_procedure = function (step) {
                 });
             }
             break;
-        case 5:
+        }
+
+        case 5: {
             // upload
             console.log('Writing data ...');
             TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32Flashing'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
 
-            var blocks = self.hex.data.length - 1,
+            let blocks = self.hex.data.length - 1,
                 flashing_block = 0,
                 address = self.hex.data[flashing_block].address,
                 bytes_flashed = 0,
@@ -682,12 +658,14 @@ STM32_protocol.prototype.upload_procedure = function (step) {
             // start writing
             write();
             break;
-        case 6:
+        }
+
+        case 6: {
             // verify
             console.log('Verifying data ...');
             TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32Verifying'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
 
-            var blocks = self.hex.data.length - 1,
+            let blocks = self.hex.data.length - 1,
                 reading_block = 0,
                 address = self.hex.data[reading_block].address,
                 bytes_verified = 0,
@@ -777,7 +755,9 @@ STM32_protocol.prototype.upload_procedure = function (step) {
             // start reading
             reading();
             break;
-        case 7:
+        }
+
+        case 7: {
             // go
             // memory address = 4 bytes, 1st high byte, 4th low byte, 5th byte = checksum XOR(byte 1, byte 2, byte 3, byte 4)
             console.log('Sending GO command: 0x8000000');
@@ -797,7 +777,9 @@ STM32_protocol.prototype.upload_procedure = function (step) {
                 }
             });
             break;
-        case 99:
+        }
+
+        case 99: {
             // disconnect
             GUI.interval_remove('STM32_timeout'); // stop STM32 timeout timer (everything is finished now)
 
@@ -809,6 +791,7 @@ STM32_protocol.prototype.upload_procedure = function (step) {
             }
 
             break;
+        }
     }
 };
 

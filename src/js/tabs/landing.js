@@ -5,7 +5,7 @@ tab.initialize = function (callback) {
   $('#content').load("/src/tabs/landing.html", function () {
     function showLang(newLang) {
       bottomSection = $('.languageSwitcher');
-      bottomSection.find('a').each(function(index) {
+      bottomSection.find('a').each(function() {
         const element = $(this);
         const languageSelected = element.attr('lang');
         if (newLang == languageSelected) {
@@ -23,7 +23,7 @@ tab.initialize = function (callback) {
     languagesAvailables.forEach(function(element) {
       bottomSection.append(' <a href="#" lang="' + element + '" i18n="language_' + element + '"></a>');
     });
-    bottomSection.find('a').each(function(index) {
+    bottomSection.find('a').each(function() {
       let element = $(this);
       element.click(function(){
         element = $(this);
