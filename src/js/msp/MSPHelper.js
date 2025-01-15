@@ -2272,7 +2272,7 @@ MspHelper.prototype.sendRPMFilters = async function()
 MspHelper.prototype.sendRPMFiltersV2 = async function()
 {
     for (let axisIndex = 0; axisIndex < FC.RPM_FILTER_CONFIG_V2.length; axisIndex++) {
-        const axis = FC.RPM_FILTER_CONFIG[axisIndex];
+        const axis = FC.RPM_FILTER_CONFIG_V2[axisIndex];
         const buffer = [];
 
         buffer.push8(axisIndex);
