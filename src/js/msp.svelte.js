@@ -1,4 +1,4 @@
-export const MSP = {
+export const MSP = $state({
     symbols: {
         BEGIN: '$'.charCodeAt(0),
         PROTO_V1: 'M'.charCodeAt(0),
@@ -409,4 +409,4 @@ export const MSP = {
 
         this.callbacks_cleanup();
     }
-};
+});

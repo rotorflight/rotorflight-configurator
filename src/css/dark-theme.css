@@ -51,14 +51,6 @@ html[data-theme=dark] #content.logopen {
     background-color: #393b3a;
 }
 
-html[data-theme=dark] #status-bar {
-    background-color: #414443;
-}
-
-html[data-theme=dark] #status-bar > span + span {
-    border-left: 1px solid #9c9c9c;
-}
-
 html[data-theme=dark] dialog {
     background-color: #3a3d3c;
     color:white;

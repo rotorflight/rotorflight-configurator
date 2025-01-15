@@ -1,5 +1,7 @@
 import semver from "semver";
 
+import { portUsage } from "@/js/port_usage.svelte.js";
+
 export function initializeSerialBackend() {
     GUI.updateManualPortVisibility = function(){
         const selected_port = $('div#port-picker #port option:selected');
@@ -184,7 +186,6 @@ export function initializeSerialBackend() {
     }
 
     PortHandler.initialize(GUI.show_all_ports);
-    PortUsage.initialize();
 }
 
 function finishClose(finishedCallback) {
@@ -200,7 +201,7 @@ function finishClose(finishedCallback) {
     serial.disconnect(onClosed);
 
     MSP.disconnect_cleanup();
-    PortUsage.reset();
+    portUsage.reset();
     // To trigger the UI updates by Vue reset the state.
     FC.resetState();
 

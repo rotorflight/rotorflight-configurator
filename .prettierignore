@@ -8,5 +8,9 @@
 
 !/src/**/
 !/src/js/Features.js
-!/src/js/main_esm.js
 !/src/js/filesystem.js
+!/src/js/main.svelte.js
+!/src/js/port_usage.js
+
+!*.scss
+!*.svelte
