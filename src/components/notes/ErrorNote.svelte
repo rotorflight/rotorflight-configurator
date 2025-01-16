@@ -4,36 +4,25 @@
 </script>
 
 <div class="container">
-  <div class="icon fas fa-times-circle"></div>
+  <div class="header">
+    <div class="fas fa-times-circle"></div>
+    <b>{$i18n.t("errorTitle")}</b>
+  </div>
   <div>
-    <b>{$i18n.t("errorTitle")}: </b>
-    <span>
-      {@render children?.()}
-    </span>
+    {@render children?.()}
   </div>
 </div>
 
 <style lang="scss">
   .container {
-    display: grid;
-    grid-template-columns: 32px 1fr;
-    align-items: start;
     border-radius: 2px;
-    padding: 8px 8px 8px 0;
+    padding: 8px 16px;
     margin: 8px 0;
-
-    .icon {
-      margin: 4px auto;
-
-      :global(html[data-theme="light"]) & {
-        color: var(--color-red-900);
-      }
-    }
 
     :global(html[data-theme="light"]) & {
       color: var(--color-red-900);
       background: var(--color-red-100);
-      border: 1px solid var(--color-red-900);
+      border: 1px solid var(--color-red-200);
       font-weight: 600;
     }
 
@@ -42,5 +31,12 @@
       background: var(--color-neutral-800);
       border-left: 3px solid var(--color-red-500);
     }
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
   }
 </style>

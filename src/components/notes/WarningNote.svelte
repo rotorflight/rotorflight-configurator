@@ -4,28 +4,20 @@
 </script>
 
 <div class="container">
-  <div class="icon fas fa-exclamation-triangle"></div>
+  <div class="header">
+    <div class="fas fa-exclamation-triangle"></div>
+    <b>{$i18n.t("warningTitle")}</b>
+  </div>
   <div>
-    <b>{$i18n.t("warningTitle")}: </b>
-    <span>
-      {@render children?.()}
-    </span>
+    {@render children?.()}
   </div>
 </div>
 
 <style lang="scss">
   .container {
-    display: grid;
-    grid-template-columns: 32px 1fr;
-    align-items: start;
     border-radius: 2px;
-    padding: 8px 8px 8px 0;
+    padding: 8px 16px;
     margin: 8px 0;
-
-    .icon {
-      color: var(--color-yellow-500);
-      margin: 4px auto;
-    }
 
     :global(html[data-theme="light"]) & {
       color: var(--color-yellow-900);
@@ -39,5 +31,12 @@
       background: var(--color-neutral-800);
       border-left: 3px solid var(--color-yellow-500);
     }
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
   }
 </style>
