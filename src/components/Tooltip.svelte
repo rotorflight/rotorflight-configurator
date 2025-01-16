@@ -10,7 +10,7 @@
   {#if attrs}
     <div class="attrs">
       {#each attrs as attr}
-        <p><b>{attr.name}:</b> {attr.value}</p>
+        <p><b>{$i18n.t(attr.name)}:</b> {attr.value}</p>
       {/each}
     </div>
   {/if}

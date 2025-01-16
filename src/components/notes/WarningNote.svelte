@@ -1,11 +1,12 @@
 <script>
+  import { i18n } from "@/js/i18n.js";
   let { children } = $props();
 </script>
 
 <div class="container">
   <div class="icon fas fa-exclamation-triangle"></div>
   <div>
-    <b>Warning: </b>
+    <b>{$i18n.t("warningTitle")}: </b>
     <span>
       {@render children?.()}
     </span>

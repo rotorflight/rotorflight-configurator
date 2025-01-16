@@ -1,11 +1,12 @@
 <script>
+  import { i18n } from "@/js/i18n.js";
   let { children } = $props();
 </script>
 
 <div class="container">
   <div class="icon fas fa-times-circle"></div>
   <div>
-    <b>Error: </b>
+    <b>{$i18n.t("errorTitle")}: </b>
     <span>
       {@render children?.()}
     </span>

@@ -17,7 +17,12 @@
     generateRpmFilterConfig2,
   } from "./filter_config.js";
 
-  const filterStrengths = ["Custom", "Low", "Normal", "High"];
+  const filterStrengths = [
+    "gyroRpmFilterPresetCustom",
+    "gyroRpmFilterPresetLow",
+    "gyroRpmFilterPresetMedium",
+    "gyroRpmFilterPresetHigh",
+  ];
 
   const { onRpmSettingsUpdate, onRpmNotchUpdate } = $props();
 
@@ -86,16 +91,24 @@
 </script>
 
 <div class="container">
-  <div class="header">RPM Filter</div>
+  <div class="header">
+    {$i18n.t("gyroRpmFilterSettings")}
+  </div>
   <div class="settings">
-    <WarningNote>
-      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-      {@html $i18n.t("gyroRpmFilterConfigNote")}
-    </WarningNote>
+    <div class="summary">
+      <p>
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $i18n.t("gyroRpmFilterHelp")}
+      </p>
+      <WarningNote>
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $i18n.t("gyroRpmFilterConfigNote")}
+      </WarningNote>
+    </div>
 
     <div class="row">
       <label>
-        <span>Enable</span>
+        <span>{$i18n.t("genericEnable")}</span>
         <Switch bind:checked={FC.FEATURE_CONFIG.features.RPM_FILTER} />
       </label>
     </div>
@@ -104,16 +117,14 @@
       {#if semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)}
         <div class="row">
           <label>
-            <span>Strength</span>
+            <span>{$i18n.t("gyroRpmFilterPreset")}</span>
             <HoverTooltip>
               {#snippet tooltip()}
-                <Tooltip
-                  help="some help message about the filter strength options"
-                />
+                <Tooltip help="gyroRpmFilterPresetHelp" />
               {/snippet}
               <select bind:value={FC.FILTER_CONFIG.rpm_preset}>
                 {#each filterStrengths as strength, index}
-                  <option value={index}>{strength}</option>
+                  <option value={index}>{$i18n.t(strength)}</option>
                 {/each}
               </select>
             </HoverTooltip>
@@ -121,12 +132,12 @@
         </div>
         <div class="row">
           <label>
-            <span>Minimum Frequency (Hz)</span>
+            <span>{$i18n.t("gyroRpmFilterMinFreq")} [Hz]</span>
             <HoverTooltip>
               {#snippet tooltip()}
                 <Tooltip
-                  help="some help message about minimum hz"
-                  attrs={[{ name: "Default", value: "20Hz" }]}
+                  help="gyroRpmFilterMinFreqHelp"
+                  attrs={[{ name: "genericDefault", value: "20Hz" }]}
                 />
               {/snippet}
               <input
@@ -219,6 +230,20 @@
     font-weight: 600;
     grid-column: 1 / -1;
     margin-top: 8px;
+  }
+
+  .summary {
+    margin: 8px 0;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+
+    :global(html[data-theme="light"]) & {
+      border-bottom-color: var(--color-neutral-400);
+    }
+
+    :global(html[data-theme="dark"]) & {
+      border-bottom-color: var(--color-neutral-700);
+    }
   }
 
   @media only screen and (max-width: 480px) {

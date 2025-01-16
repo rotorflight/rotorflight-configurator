@@ -23,7 +23,7 @@
     }
 
     :global(html[data-theme="light"]) &:hover .icon {
-      color: var(--color-neutral-500);
+      color: hsl(40, 100%, 50%);
     }
 
     :global(html[data-theme="dark"]) &:hover .icon {
@@ -36,7 +36,7 @@
     padding: 2px;
 
     :global(html[data-theme="light"]) & {
-      color: var(--color-neutral-700);
+      color: var(--color-neutral-500);
     }
 
     :global(html[data-theme="dark"]) & {

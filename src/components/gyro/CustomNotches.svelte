@@ -10,9 +10,9 @@
   let axis = $state(0);
 
   const axisProps = [
-    { label: "Roll", color: "var(--color-roll)" },
-    { label: "Pitch", color: "var(--color-pitch)" },
-    { label: "Yaw", color: "var(--color-yaw)" },
+    { label: "titleRoll", color: "var(--color-roll)" },
+    { label: "titlePitch", color: "var(--color-pitch)" },
+    { label: "titleYaw", color: "var(--color-yaw)" },
   ];
 
   let axisColor = $derived.by(() => {
@@ -46,6 +46,8 @@
       (FC.MOTOR_CONFIG.tail_rotor_gear_ratio[0] != 1 ||
         FC.MOTOR_CONFIG.tail_rotor_gear_ratio[1] != 1),
   );
+
+  const MAX_NOTCH_COUNT = 16;
 </script>
 
 {#snippet notch(label, source, notchTypeLabel)}
@@ -57,9 +59,9 @@
         bind:value={notches.banks[axis][source].type}
         disabled={!notches.banks[axis][source].enabled}
       >
-        <option value={1}>SINGLE</option>
-        <option value={2}>DOUBLE</option>
-        <option value={3}>TRIPLE</option>
+        <option value={1}>{$i18n.t("gyroRpmFilterNotchTypeSingle")}</option>
+        <option value={2}>{$i18n.t("gyroRpmFilterNotchTypeDouble")}</option>
+        <option value={3}>{$i18n.t("gyroRpmFilterNotchTypeTriple")}</option>
       </select>
     </label>
   {/snippet}
@@ -109,17 +111,18 @@
             onclick={() => (axis = i)}
             style:background={axisProp.color}
           >
-            {axisProp.label}
+            {$i18n.t(axisProp.label)}
           </button>
         {/each}
       </ul>
     {/if}
   </div>
 
-  {#if notchCount > 16}
+  {#if notchCount > MAX_NOTCH_COUNT}
     <ErrorNote>
-      A maximum of 16 notches can be enabled on each axis.<br />Notches:
-      {notchCount} / 16
+      {$i18n.t("gyroRpmFilterNotchCountWarn")}
+      <br />
+      <b>{notchCount} / {MAX_NOTCH_COUNT}</b>
     </ErrorNote>
   {/if}
   {#if notches}
@@ -162,7 +165,7 @@
       {@html $i18n.t("gyroRpmFilterCustomNote")}
     </WarningNote>
     <button class="reset-btn" onclick={onResetNotches}>
-      Reset Custom Notches
+      {$i18n.t("gyroRpmFilterNotchResetBtn")}
     </button>
   {/if}
 </div>
