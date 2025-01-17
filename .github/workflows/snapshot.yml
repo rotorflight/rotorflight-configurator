@@ -365,7 +365,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    needs: [linux, macos, win64, win32, android]
+    needs: [android]
 
     steps:
     - name: Check out repository
