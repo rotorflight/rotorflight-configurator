@@ -17,9 +17,6 @@ export const cordovaUI = {
         if (length < 1024) {
             self.uiZoom = length/1024;
         }
-        if (screenWidth > 575 && screenHeight > 575) {
-            self.canChangeUI = false;
-        }
         ConfigStorage.get('cordovaForceComputerUI', function (result) {
             if (result.cordovaForceComputerUI === undefined) {
                 if ((orientation === 'landscape' && screenHeight <= 575)
