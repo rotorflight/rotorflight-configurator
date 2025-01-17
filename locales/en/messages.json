@@ -4999,7 +4999,7 @@
         "message": "Strength"
     },
     "gyroRpmFilterPresetHelp": {
-        "message": "Set the strength of the <i>RPM Filter</i>. Medium is suitable for most applications."
+        "message": "Higher strength removes more vibrations, but introduces more delay."
     },
     "gyroRpmFilterPresetCustom": {
         "message": "Custom"
@@ -5017,7 +5017,7 @@
         "message": "Minimum Frequency"
     },
     "gyroRpmFilterMinFreqHelp": {
-        "message": "The minimum frequency that the <i>RPM Filter</i> can operate."
+        "message": "Set slightly below the frequency of the main rotor at the lowest flying RPM."
     },
     "gyroRpmFilterMinRPMGroup": {
         "message": "Minimum RPM"
@@ -5041,7 +5041,7 @@
         "message": "RPM Filter Notches"
     },
     "gyroRpmFilterHelp": {
-        "message": "The <i>RPM Filter</i> creates a series of notch filters targeting the harmonic frequencies of the main and tail rotors. Real-time RPM data is used to adjust the notches, removing gyro noise with surgical precision."
+        "message": "Every rotating part on a helicopter generates vibrations, which can significantly affect the performance of the flight control loops. The <i>RPM Filter</i> utilizes the motor's RPM signal and the model's gear ratios to precisely eliminate these vibrations from the gyro's output, enabling the control loops to operate on the true motion of the aircraft. This method introduces substantially less delay than traditional vibration filtering, enhancing overall flight performance."
     },
     "gyroRpmFilterMainRotorGroup": {
         "message": "Main Rotor"

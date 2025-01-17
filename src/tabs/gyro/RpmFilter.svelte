@@ -1,21 +1,12 @@
 <script>
   import semver from "semver";
-  import { onMount } from "svelte";
-  import diff from "microdiff";
   import { i18n } from "@/js/i18n.js";
-  import Switch from "@/components/Switch.svelte";
-  import { FC } from "@/js/fc.svelte.js";
-  import CustomNotches from "./CustomNotches.svelte";
+  import HelpIcon from "@/components/HelpIcon.svelte";
   import HoverTooltip from "@/components/HoverTooltip.svelte";
+  import NumberInput from "@/components/NumberInput.svelte";
+  import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
   import WarningNote from "@/components/notes/WarningNote.svelte";
-  import HelpIcon from "@/components/HelpIcon.svelte";
-  import {
-    parseRpmFilterConfig1,
-    parseRpmFilterConfig2,
-    generateRpmFilterConfig1,
-    generateRpmFilterConfig2,
-  } from "./filter_config.js";
 
   const filterStrengths = [
     "gyroRpmFilterPresetCustom",
@@ -24,70 +15,7 @@
     "gyroRpmFilterPresetHigh",
   ];
 
-  const { onRpmSettingsUpdate, onRpmNotchUpdate } = $props();
-
-  let notches = $state(null);
-  let enabled = $derived(FC.FEATURE_CONFIG.features.RPM_FILTER);
-  let custom = $derived.by(() => {
-    if (semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)) {
-      return enabled && FC.FILTER_CONFIG.rpm_preset === 0;
-    }
-
-    return enabled;
-  });
-
-  let initialState;
-  let initialNotchState;
-
-  function parseNotches() {
-    if (semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)) {
-      notches = parseRpmFilterConfig2($state.snapshot(FC.RPM_FILTER_CONFIG_V2));
-    } else {
-      notches = parseRpmFilterConfig1($state.snapshot(FC.RPM_FILTER_CONFIG));
-    }
-  }
-
-  onMount(() => {
-    parseNotches();
-    initialNotchState = $state.snapshot(notches);
-    initialState = $state.snapshot({
-      config: FC.FILTER_CONFIG,
-      features: FC.FEATURE_CONFIG.features.bitfield,
-    });
-  });
-
-  $effect(() => {
-    if (!notches) {
-      return;
-    }
-
-    const currentState = $state.snapshot(notches);
-    if (currentState) {
-      const changed = diff(initialNotchState, currentState).length > 0;
-      onRpmNotchUpdate(changed);
-    }
-
-    if (semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)) {
-      FC.RPM_FILTER_CONFIG_V2 = generateRpmFilterConfig2(notches);
-    } else {
-      FC.RPM_FILTER_CONFIG = generateRpmFilterConfig1(notches);
-    }
-  });
-
-  $effect(() => {
-    onRpmSettingsUpdate(
-      diff(initialState, {
-        config: FC.FILTER_CONFIG,
-        features: FC.FEATURE_CONFIG.features.bitfield,
-      }).length > 0,
-    );
-  });
-
-  function onResetNotches() {
-    FC.RPM_FILTER_CONFIG = [];
-    FC.RPM_FILTER_CONFIG_V2 = [{}, {}, {}];
-    parseNotches();
-  }
+  let { FC = $bindable(), notches = $bindable() } = $props();
 </script>
 
 <div class="container">
@@ -107,32 +35,52 @@
     </div>
 
     <div class="row">
-      <label>
+      <label for="rpm-filter-enable">
         <span>{$i18n.t("genericEnable")}</span>
-        <Switch bind:checked={FC.FEATURE_CONFIG.features.RPM_FILTER} />
       </label>
+      <div class="input">
+        <Switch
+          id="rpm-filter-enable"
+          bind:checked={FC.FEATURE_CONFIG.features.RPM_FILTER}
+        />
+      </div>
     </div>
 
-    {#if enabled}
+    {#if FC.FEATURE_CONFIG.features.RPM_FILTER}
       {#if semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)}
         <div class="row">
-          <label>
+          <label for="rpm-filter-preset">
             <span>{$i18n.t("gyroRpmFilterPreset")}</span>
+          </label>
+          <div class="input">
             <HoverTooltip>
               {#snippet tooltip()}
-                <Tooltip help="gyroRpmFilterPresetHelp" />
+                <Tooltip
+                  help="gyroRpmFilterPresetHelp"
+                  attrs={[
+                    {
+                      name: "genericDefault",
+                      value: $i18n.t("gyroRpmFilterPresetMedium"),
+                    },
+                  ]}
+                />
               {/snippet}
-              <select bind:value={FC.FILTER_CONFIG.rpm_preset}>
+              <select
+                id="rpm-filter-preset"
+                bind:value={FC.FILTER_CONFIG.rpm_preset}
+              >
                 {#each filterStrengths as strength, index}
                   <option value={index}>{$i18n.t(strength)}</option>
                 {/each}
               </select>
             </HoverTooltip>
-          </label>
+          </div>
         </div>
         <div class="row">
-          <label>
+          <label for="rpm-filter-min-freq">
             <span>{$i18n.t("gyroRpmFilterMinFreq")} [Hz]</span>
+          </label>
+          <div class="input">
             <HoverTooltip>
               {#snippet tooltip()}
                 <Tooltip
@@ -140,13 +88,15 @@
                   attrs={[{ name: "genericDefault", value: "20Hz" }]}
                 />
               {/snippet}
-              <input
-                type="number"
-                min="0"
+              <NumberInput
+                id="rpm-filter-min-freq"
+                min="1"
+                max="100"
+                suffix="Hz"
                 bind:value={FC.FILTER_CONFIG.rpm_min_hz}
               />
             </HoverTooltip>
-          </label>
+          </div>
         </div>
       {:else if notches}
         <div class="group-heading">
@@ -156,34 +106,37 @@
           </HelpIcon>
         </div>
         <div class="row">
-          <label>
+          <label for="rpm-filter-rpm-limit-main">
             <span>{$i18n.t("gyroRpmFilterMainRotorMinRPM")}</span>
-            <input type="number" min="0" bind:value={notches.rpmLimitMain} />
           </label>
+          <div class="input">
+            <NumberInput
+              id="rpm-filter-rpm-limit-main"
+              min="0"
+              max="10000"
+              bind:value={notches.rpmLimitMain}
+            />
+          </div>
         </div>
         <div class="row">
-          <label>
+          <label for="rpm-filter-rpm-limit-tail">
             <span>{$i18n.t("gyroRpmFilterTailRotorMinRPM")}</span>
-            <input type="number" min="0" bind:value={notches.rpmLimitTail} />
           </label>
+          <div class="input">
+            <NumberInput
+              id="rpm-filter-rpm-limit-tail"
+              min="0"
+              max="10000"
+              bind:value={notches.rpmLimitTail}
+            />
+          </div>
         </div>
       {/if}
     {/if}
   </div>
 </div>
 
-{#if custom}
-  <div class="notch-container">
-    <CustomNotches {FC} {onResetNotches} bind:notches />
-  </div>
-{/if}
-
 <style lang="scss">
-  .notch-container {
-    float: left;
-    width: 100%;
-  }
-
   .container {
     margin-bottom: 1rem;
     width: 100%;
@@ -218,11 +171,11 @@
       flex-grow: 1;
       align-items: center;
       padding: 4px 0;
-
-      :global(> *:first-child) {
-        flex-grow: 1;
-      }
     }
+  }
+
+  .input {
+    max-width: 120px;
   }
 
   .group-heading {

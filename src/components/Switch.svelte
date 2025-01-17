@@ -1,9 +1,9 @@
 <script>
-  let { checked = $bindable() } = $props();
+  let { id, checked = $bindable() } = $props();
 </script>
 
 <label class="container">
-  <input type="checkbox" bind:checked />
+  <input {id} type="checkbox" bind:checked />
   <span class="slider"></span>
 </label>
 

@@ -4,6 +4,7 @@
   import Switch from "@/components/Switch.svelte";
   import ErrorNote from "@/components/notes/ErrorNote.svelte";
   import WarningNote from "@/components/notes/WarningNote.svelte";
+  import NumberInput from "@/components/NumberInput.svelte";
 
   let { FC, notches = $bindable(), onResetNotches } = $props();
 
@@ -52,10 +53,13 @@
 
 {#snippet notch(label, source, notchTypeLabel)}
   {#snippet notchType()}
-    <label>
+    <label for={`notch-type-${source}`}>
       <!-- eslint-disable-next-line svelte/no-at-html-tags -->
       <span>{@html $i18n.t(notchTypeLabel)}</span>
+    </label>
+    <div class="input">
       <select
+        id={`notch-type-${source}`}
         bind:value={notches.banks[axis][source].type}
         disabled={!notches.banks[axis][source].enabled}
       >
@@ -63,39 +67,45 @@
         <option value={2}>{$i18n.t("gyroRpmFilterNotchTypeDouble")}</option>
         <option value={3}>{$i18n.t("gyroRpmFilterNotchTypeTriple")}</option>
       </select>
-    </label>
+    </div>
   {/snippet}
 
   {#snippet notchQ()}
-    <label>
+    <label for={`notch-q-${source}`}>
       <!-- eslint-disable-next-line svelte/no-at-html-tags -->
       <span>{@html $i18n.t(label)}</span>
-      <input
-        type="number"
+    </label>
+    <div class="input">
+      <NumberInput
+        id={`notch-q-${source}`}
         bind:value={notches.banks[axis][source].value}
         disabled={!notches.banks[axis][source].enabled}
         min="1.5"
-        max="10.0"
+        max="10"
         step="0.1"
       />
-    </label>
+    </div>
   {/snippet}
 
-  <div class="notch">
+  <div class="notch-wrapper">
     <Switch
       bind:checked={notches.banks[axis][source].enabled}
       --color-switch={axisColor}
     />
-    {#if notchTypeLabel}
-      {@render notchType()}
-    {:else}
-      {@render notchQ()}
-    {/if}
+    <div class="notch">
+      {#if notchTypeLabel}
+        {@render notchType()}
+      {:else}
+        {@render notchQ()}
+      {/if}
+    </div>
   </div>
   {#if notchTypeLabel}
-    <div class="notch group">
+    <div class="notch-wrapper group">
       <div></div>
-      {@render notchQ()}
+      <div class="notch">
+        {@render notchQ()}
+      </div>
     </div>
   {/if}
 {/snippet}
@@ -126,7 +136,7 @@
     </ErrorNote>
   {/if}
   {#if notches}
-    <div class="notch-wrapper">
+    <div class="notch-list">
       {#if showMainMotor || showTailMotor}
         <div class="notch-group-heading">
           {$i18n.t("gyroRpmFilterMotorGroup")}
@@ -187,11 +197,20 @@
     }
   }
 
-  .notch-wrapper {
+  .notch {
+    display: flex;
+    width: 100%;
+
+    label {
+      flex-grow: 1;
+    }
+  }
+
+  .notch-list {
     display: grid;
     grid-template-columns: auto 1fr;
 
-    .notch {
+    .notch-wrapper {
       display: grid;
       grid-template-columns: subgrid;
       grid-column: 1 / -1;
@@ -270,6 +289,14 @@
     }
   }
 
+  .input {
+    max-width: 120px;
+
+    > * {
+      width: 120px;
+    }
+  }
+
   .reset-btn {
     border-radius: 2px;
     border: none;
@@ -318,11 +345,11 @@
       }
     }
 
-    .notch {
+    .notch-wrapper {
       height: 3rem;
     }
 
-    .notch + .notch:not(.group) {
+    .notch-wrapper + .notch-wrapper:not(.group) {
       border-top-width: 1px;
       border-top-style: solid;
 

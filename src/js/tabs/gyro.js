@@ -1,7 +1,7 @@
 import semver from "semver";
 import { mount } from "svelte";
 
-import RpmFilter from "@/components/gyro/RpmFilter.svelte";
+import Gyro from "@/tabs/gyro/Gyro.svelte";
 
 const tab = {
     tabName: 'gyro',
@@ -280,7 +280,7 @@ tab.initialize = function (callback) {
     }
 
     function process_html() {
-        mount(RpmFilter, {
+        mount(Gyro, {
             target: document.querySelector("#rpm-filter"),
             props: {
                 onRpmNotchUpdate: (dirty) => {

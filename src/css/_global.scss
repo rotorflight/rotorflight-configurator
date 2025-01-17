@@ -17,7 +17,7 @@ input {
   :global(html[data-theme="light"]) & {
     color: var(--color-neutral-900);
     background: var(--color-neutral-50);
-    border-color: var(--color-neutral-400);
+    border-color: var(--color-neutral-300);
 
     &:focus {
       border-color: var(--color-accent-500);
@@ -58,6 +58,7 @@ input {
 select {
   height: 1.5rem;
   min-width: 120px;
+  padding: 0 4px;
 }
 
 @media only screen and (max-width: 480px) {

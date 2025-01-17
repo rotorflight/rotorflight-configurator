@@ -187,6 +187,14 @@ export function generateRpmFilterConfig1(config) {
     }
   }
 
+  if (result.length > NOTCH_COUNT) {
+    return null;
+  }
+
+  for (let i = bank.length; i < NOTCH_COUNT; i++) {
+    result.push({ rpm_source: 0, rpm_ratio: 0, rpm_limit: 0, notch_q: 0 });
+  }
+
   return result;
 }
 
@@ -367,6 +375,10 @@ export function generateRpmFilterConfig2(config) {
           break;
         }
       }
+    }
+
+    if (bank.length > NOTCH_COUNT) {
+      return null;
     }
 
     for (let i = bank.length; i < NOTCH_COUNT; i++) {
