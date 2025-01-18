@@ -53,16 +53,20 @@
 
     const currentState = $state.snapshot(notches);
 
+    let config;
     if (semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)) {
-      FC.RPM_FILTER_CONFIG_V2 = generateRpmFilterConfig2(notches);
+      config = generateRpmFilterConfig2(notches);
+      FC.RPM_FILTER_CONFIG_V2 = config;
     } else {
-      FC.RPM_FILTER_CONFIG = generateRpmFilterConfig1(notches);
+      config = generateRpmFilterConfig1(notches);
+      FC.RPM_FILTER_CONFIG = config;
     }
 
     if (currentState) {
       const changed =
         !initialNotchState || diff(initialNotchState, currentState).length > 0;
-      onRpmNotchUpdate(changed);
+      const valid = !!config;
+      onRpmNotchUpdate(changed, valid);
     }
   });
 

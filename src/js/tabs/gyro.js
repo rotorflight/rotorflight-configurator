@@ -283,11 +283,18 @@ tab.initialize = function (callback) {
         mount(Gyro, {
             target: document.querySelector("#rpm-filter"),
             props: {
-                onRpmNotchUpdate: (dirty) => {
+                onRpmNotchUpdate: (dirty, valid) => {
                     self.rpmFilterDirty = dirty;
                     if (dirty) {
-                      setDirty();
+                        setDirty();
+
+                        if (!valid) {
+                            $('button.save').prop('disabled', true);
+                            return;
+                        }
                     }
+
+                    $('button.save').prop('disabled', false);
                 },
                 onRpmSettingsUpdate: (changed) => {
                     if (changed) {
@@ -331,7 +338,7 @@ tab.initialize = function (callback) {
             callback?.();
         };
 
-        $('a.save').click(function () {
+        $('button.save').click(function () {
             self.save().then(() => GUI.tab_switch_reload());
         });
 
