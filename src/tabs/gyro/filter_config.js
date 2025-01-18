@@ -191,7 +191,7 @@ export function generateRpmFilterConfig1(config) {
     return null;
   }
 
-  for (let i = bank.length; i < NOTCH_COUNT; i++) {
+  for (let i = result.length; i < NOTCH_COUNT; i++) {
     result.push({ rpm_source: 0, rpm_ratio: 0, rpm_limit: 0, notch_q: 0 });
   }
 

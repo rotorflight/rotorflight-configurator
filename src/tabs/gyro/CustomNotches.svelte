@@ -65,7 +65,9 @@
       >
         <option value={1}>{$i18n.t("gyroRpmFilterNotchTypeSingle")}</option>
         <option value={2}>{$i18n.t("gyroRpmFilterNotchTypeDouble")}</option>
-        <option value={3}>{$i18n.t("gyroRpmFilterNotchTypeTriple")}</option>
+        {#if semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)}
+          <option value={3}>{$i18n.t("gyroRpmFilterNotchTypeTriple")}</option>
+        {/if}
       </select>
     </div>
   {/snippet}

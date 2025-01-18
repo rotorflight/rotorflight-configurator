@@ -5023,7 +5023,7 @@
         "message": "Minimum RPM"
     },
     "gyroRpmFilterMinRPMGroupHelp": {
-        "message": "The minimum RPM that the <i>RPM Filter</i> can operate."
+        "message": "Set slightly below the lowest flying RPM."
     },
     "gyroRpmFilterMainRotorMinRPM": {
         "message": "Main Rotor"
