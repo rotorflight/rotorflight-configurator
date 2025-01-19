@@ -12,6 +12,7 @@
 !/src/js/main.svelte.js
 !/src/js/port_usage.js
 !/src/tabs/gyro/filter_config.js
+!/src/tabs/receiver/**/*.js
 
 !*.scss
 !*.svelte

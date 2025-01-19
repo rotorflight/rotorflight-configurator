@@ -2153,15 +2153,15 @@
         "message": "Telemetrie-Anschluss-Tausch (Tausch von RX und TX)",
         "english": "Telemetry Pin Swap (Swap Rx and Tx pins)"
     },
-    "receiverCrsfTelemetryMode": {
+    "receiverTelemetryMode": {
         "message": "Benutzerdefinierte CRSF-Telemetrie",
         "english": "Enable CRSF Custom Telemetry"
     },
-    "receiverCrsfTelemetryRate": {
+    "receiverTelemetryRate": {
         "message": "Telemetrie-Rate (Telemetry Rate)",
         "english": "Telemetry Rate"
     },
-    "receiverCrsfTelemetryRatio": {
+    "receiverTelemetryRatio": {
         "message": "Telemetrie-Verhältnis (Telemetry Ratio)",
         "english": "Telemetry Ratio"
     },
@@ -2365,371 +2365,371 @@
         "message": "Spannung",
         "english": "Voltage"
     },
-    "receiverCrsfTelemetrySensor_HEARTBEAT": {
+    "receiverTelemetrySensor_HEARTBEAT": {
         "message": "Herzschlag",
         "english": "Heartbeat"
     },
-    "receiverCrsfTelemetrySensor_BATTERY": {
+    "receiverTelemetrySensor_BATTERY": {
         "message": "Akku",
         "english": "Battery"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_VOLTAGE": {
+    "receiverTelemetrySensor_BATTERY_VOLTAGE": {
         "message": "Akku-Spannung",
         "english": "Battery Voltage"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CURRENT": {
+    "receiverTelemetrySensor_BATTERY_CURRENT": {
         "message": "Akku-Strom",
         "english": "Battery Current"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CONSUMPTION": {
+    "receiverTelemetrySensor_BATTERY_CONSUMPTION": {
         "message": "Akku-Kapazitätsverbrauch",
         "english": "Battery Consumption"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CHARGE_LEVEL": {
+    "receiverTelemetrySensor_BATTERY_CHARGE_LEVEL": {
         "message": "Akku-Ladezustand",
         "english": "Battery Charge Level"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CELL_COUNT": {
+    "receiverTelemetrySensor_BATTERY_CELL_COUNT": {
         "message": "Anzahl der Akkuzellen",
         "english": "Battery Cell Count"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGE": {
+    "receiverTelemetrySensor_BATTERY_CELL_VOLTAGE": {
         "message": "Akkuzellen-Spannung",
         "english": "Battery Cell Voltage"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGES": {
+    "receiverTelemetrySensor_BATTERY_CELL_VOLTAGES": {
         "message": "Akkuzellen-Spannungen",
         "english": "Battery Cell Voltages"
     },
-    "receiverCrsfTelemetrySensor_CONTROL": {
+    "receiverTelemetrySensor_CONTROL": {
         "message": "Steuerung (hochauflösend)",
         "english": "Control (hi-res)"
     },
-    "receiverCrsfTelemetrySensor_PITCH_CONTROL": {
+    "receiverTelemetrySensor_PITCH_CONTROL": {
         "message": "Nick-Steuerung",
         "english": "Pitch Control"
     },
-    "receiverCrsfTelemetrySensor_ROLL_CONTROL": {
+    "receiverTelemetrySensor_ROLL_CONTROL": {
         "message": "Roll-Steuerung",
         "english": "Roll Control"
     },
-    "receiverCrsfTelemetrySensor_YAW_CONTROL": {
+    "receiverTelemetrySensor_YAW_CONTROL": {
         "message": "Heck-Steuerung",
         "english": "Yaw Control"
     },
-    "receiverCrsfTelemetrySensor_COLLECTIVE_CONTROL": {
+    "receiverTelemetrySensor_COLLECTIVE_CONTROL": {
         "message": "Kollektiv-Pitch-Steuerung",
         "english": "Collective Control"
     },
-    "receiverCrsfTelemetrySensor_THROTTLE_CONTROL": {
+    "receiverTelemetrySensor_THROTTLE_CONTROL": {
         "message": "Motor-Steuerung",
         "english": "Throttle Control"
     },
-    "receiverCrsfTelemetrySensor_ESC_DATA": {
+    "receiverTelemetrySensor_ESC_DATA": {
         "message": "ESC-Daten",
         "english": "ESC Data"
     },
-    "receiverCrsfTelemetrySensor_ESC_VOLTAGE": {
+    "receiverTelemetrySensor_ESC_VOLTAGE": {
         "message": "ESC-Spannung",
         "english": "ESC Voltage"
     },
-    "receiverCrsfTelemetrySensor_ESC_CURRENT": {
+    "receiverTelemetrySensor_ESC_CURRENT": {
         "message": "ESC-Strom",
         "english": "ESC Current"
     },
-    "receiverCrsfTelemetrySensor_ESC_CAPACITY": {
+    "receiverTelemetrySensor_ESC_CAPACITY": {
         "message": "ESC-Kapazität",
         "english": "ESC Capacity"
     },
-    "receiverCrsfTelemetrySensor_ESC_ERPM": {
+    "receiverTelemetrySensor_ESC_ERPM": {
         "message": "ESC-ERPM",
         "english": "ESC ERPM"
     },
-    "receiverCrsfTelemetrySensor_ESC_POWER": {
+    "receiverTelemetrySensor_ESC_POWER": {
         "message": "ESC-Leistung",
         "english": "ESC Power"
     },
-    "receiverCrsfTelemetrySensor_ESC_THROTTLE": {
+    "receiverTelemetrySensor_ESC_THROTTLE": {
         "message": "ESC-Motoransteuerung",
         "english": "ESC Throttle"
     },
-    "receiverCrsfTelemetrySensor_ESC_TEMP1": {
+    "receiverTelemetrySensor_ESC_TEMP1": {
         "message": "ESC-Temp 1",
         "english": "ESC Temp 1"
     },
-    "receiverCrsfTelemetrySensor_ESC_TEMP2": {
+    "receiverTelemetrySensor_ESC_TEMP2": {
         "message": "ESC-Temp 2",
         "english": "ESC Temp 2"
     },
-    "receiverCrsfTelemetrySensor_ESC_BEC_VOLTAGE": {
+    "receiverTelemetrySensor_ESC_BEC_VOLTAGE": {
         "message": "ESC BEC-Spannung",
         "english": "ESC BEC Voltage"
     },
-    "receiverCrsfTelemetrySensor_ESC_BEC_CURRENT": {
+    "receiverTelemetrySensor_ESC_BEC_CURRENT": {
         "message": "ESC BEC-Strom",
         "english": "ESC BEC Current"
     },
-    "receiverCrsfTelemetrySensor_ESC_STATUS": {
+    "receiverTelemetrySensor_ESC_STATUS": {
         "message": "ESC-Status",
         "english": "ESC Status"
     },
-    "receiverCrsfTelemetrySensor_ESC_MODEL": {
+    "receiverTelemetrySensor_ESC_MODEL": {
         "message": "ESC-Modell",
         "english": "ESC Model"
     },
-    "receiverCrsfTelemetrySensor_BEC_VOLTAGE": {
+    "receiverTelemetrySensor_BEC_VOLTAGE": {
         "message": "BEC-Spannung",
         "english": "BEC Voltage"
     },
-    "receiverCrsfTelemetrySensor_BUS_VOLTAGE": {
+    "receiverTelemetrySensor_BUS_VOLTAGE": {
         "message": "Bus-Spannung",
         "english": "Bus Voltage"
     },
-    "receiverCrsfTelemetrySensor_MCU_VOLTAGE": {
+    "receiverTelemetrySensor_MCU_VOLTAGE": {
         "message": "MCU-Spannung",
         "english": "MCU Voltage"
     },
-    "receiverCrsfTelemetrySensor_BEC_CURRENT": {
+    "receiverTelemetrySensor_BEC_CURRENT": {
         "message": "BEC-Strom",
         "english": "BEC Current"
     },
-    "receiverCrsfTelemetrySensor_BUS_CURRENT": {
+    "receiverTelemetrySensor_BUS_CURRENT": {
         "message": "Bus-Strom",
         "english": "Bus Current"
     },
-    "receiverCrsfTelemetrySensor_MCU_CURRENT": {
+    "receiverTelemetrySensor_MCU_CURRENT": {
         "message": "MCU-Strom",
         "english": "MCU Current"
     },
-    "receiverCrsfTelemetrySensor_ESC_TEMP": {
+    "receiverTelemetrySensor_ESC_TEMP": {
         "message": "ESC-Temperatur",
         "english": "ESC Temp"
     },
-    "receiverCrsfTelemetrySensor_BEC_TEMP": {
+    "receiverTelemetrySensor_BEC_TEMP": {
         "message": "BEC-Temperatur",
         "english": "BEC Temp"
     },
-    "receiverCrsfTelemetrySensor_MCU_TEMP": {
+    "receiverTelemetrySensor_MCU_TEMP": {
         "message": "MCU-Tempetatur",
         "english": "MCU Temp"
     },
-    "receiverCrsfTelemetrySensor_AIR_TEMP": {
+    "receiverTelemetrySensor_AIR_TEMP": {
         "message": "Lufttemperatur",
         "english": "Air Temp"
     },
-    "receiverCrsfTelemetrySensor_MOTOR_TEMP": {
+    "receiverTelemetrySensor_MOTOR_TEMP": {
         "message": "Motor-Temperatur",
         "english": "Motor Temp"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_TEMP": {
+    "receiverTelemetrySensor_BATTERY_TEMP": {
         "message": "Akku-Temperatur",
         "english": "Battery Temp"
     },
-    "receiverCrsfTelemetrySensor_EXHAUST_TEMP": {
+    "receiverTelemetrySensor_EXHAUST_TEMP": {
         "message": "Auspuff-Temperatur",
         "english": "Exhaust Temp"
     },
-    "receiverCrsfTelemetrySensor_HEADING": {
+    "receiverTelemetrySensor_HEADING": {
         "message": "Richtung",
         "english": "Heading"
     },
-    "receiverCrsfTelemetrySensor_ALTITUDE": {
+    "receiverTelemetrySensor_ALTITUDE": {
         "message": "Höhe",
         "english": "Altitude"
     },
-    "receiverCrsfTelemetrySensor_VARIOMETER": {
+    "receiverTelemetrySensor_VARIOMETER": {
         "message": "Variometer",
         "english": "Variometer"
     },
-    "receiverCrsfTelemetrySensor_HEADSPEED": {
+    "receiverTelemetrySensor_HEADSPEED": {
         "message": "Rotordrehzahl",
         "english": "Headspeed"
     },
-    "receiverCrsfTelemetrySensor_TAILSPEED": {
+    "receiverTelemetrySensor_TAILSPEED": {
         "message": "Heckrotor-Drehzahl",
         "english": "Tailspeed"
     },
-    "receiverCrsfTelemetrySensor_MOTOR_RPM": {
+    "receiverTelemetrySensor_MOTOR_RPM": {
         "message": "Motor-Drehzahl",
         "english": "Motor RPM"
     },
-    "receiverCrsfTelemetrySensor_TRANS_RPM": {
+    "receiverTelemetrySensor_TRANS_RPM": {
         "message": "Übertragungsdrehzahl",
         "english": "Transmission RPM"
     },
-    "receiverCrsfTelemetrySensor_ATTITUDE": {
+    "receiverTelemetrySensor_ATTITUDE": {
         "message": "Fluglage (hochauflösend)",
         "english": "Attitude (hi-res)"
     },
-    "receiverCrsfTelemetrySensor_ATTITUDE_PITCH": {
+    "receiverTelemetrySensor_ATTITUDE_PITCH": {
         "message": "Fluglage Nick",
         "english": "Attitude Pitch"
     },
-    "receiverCrsfTelemetrySensor_ATTITUDE_ROLL": {
+    "receiverTelemetrySensor_ATTITUDE_ROLL": {
         "message": "Fluglage Roll",
         "english": "Attitude Roll"
     },
-    "receiverCrsfTelemetrySensor_ATTITUDE_YAW": {
+    "receiverTelemetrySensor_ATTITUDE_YAW": {
         "message": "Fluglage Heck",
         "english": "Attitude Yaw"
     },
-    "receiverCrsfTelemetrySensor_ACCEL": {
+    "receiverTelemetrySensor_ACCEL": {
         "message": "Beschleunigungs-Sensor (hochauflösend)",
         "english": "Accelerometer (hi-res)"
     },
-    "receiverCrsfTelemetrySensor_ACCEL_X": {
+    "receiverTelemetrySensor_ACCEL_X": {
         "message": "Beschleunigungs-Sensor X-Achse",
         "english": "Accelerometer X-axis"
     },
-    "receiverCrsfTelemetrySensor_ACCEL_Y": {
+    "receiverTelemetrySensor_ACCEL_Y": {
         "message": "Beschleunigungs-Sensor Y-Achse",
         "english": "Accelerometer Y-axis"
     },
-    "receiverCrsfTelemetrySensor_ACCEL_Z": {
+    "receiverTelemetrySensor_ACCEL_Z": {
         "message": "Beschleunigungs-Sensor Z-Achse",
         "english": "Accelerometer Z-axis"
     },
-    "receiverCrsfTelemetrySensor_GPS": {
+    "receiverTelemetrySensor_GPS": {
         "message": "GPS",
         "english": "GPS"
     },
-    "receiverCrsfTelemetrySensor_GPS_SATS": {
+    "receiverTelemetrySensor_GPS_SATS": {
         "message": "GPS-SATs",
         "english": "GPS Sats"
     },
-    "receiverCrsfTelemetrySensor_GPS_PDOP": {
+    "receiverTelemetrySensor_GPS_PDOP": {
         "message": "GPS-PDOP",
         "english": "GPS PDOP"
     },
-    "receiverCrsfTelemetrySensor_GPS_HDOP": {
+    "receiverTelemetrySensor_GPS_HDOP": {
         "message": "GPS-HDOP",
         "english": "GPS HDOP"
     },
-    "receiverCrsfTelemetrySensor_GPS_VDOP": {
+    "receiverTelemetrySensor_GPS_VDOP": {
         "message": "GPS-VDOP",
         "english": "GPS VDOP"
     },
-    "receiverCrsfTelemetrySensor_GPS_COORD": {
+    "receiverTelemetrySensor_GPS_COORD": {
         "message": "GPS-Koordinaten",
         "english": "GPS Coord"
     },
-    "receiverCrsfTelemetrySensor_GPS_ALTITUDE": {
+    "receiverTelemetrySensor_GPS_ALTITUDE": {
         "message": "GPS-Höhe",
         "english": "GPS Altitude"
     },
-    "receiverCrsfTelemetrySensor_GPS_HEADING": {
+    "receiverTelemetrySensor_GPS_HEADING": {
         "message": "GPS-Richtung",
         "english": "GPS Heading"
     },
-    "receiverCrsfTelemetrySensor_GPS_GROUNDSPEED": {
+    "receiverTelemetrySensor_GPS_GROUNDSPEED": {
         "message": "GPS-Geschw. über Grund",
         "english": "GPS Groundspeed"
     },
-    "receiverCrsfTelemetrySensor_GPS_HOME_DISTANCE": {
+    "receiverTelemetrySensor_GPS_HOME_DISTANCE": {
         "message": "GPS Home-Distanz",
         "english": "GPS Home Distance"
     },
-    "receiverCrsfTelemetrySensor_GPS_HOME_DIRECTION": {
+    "receiverTelemetrySensor_GPS_HOME_DIRECTION": {
         "message": "GPS Home-Richtung",
         "english": "GPS Home Direction"
     },
-    "receiverCrsfTelemetrySensor_GPS_DATE_TIME": {
+    "receiverTelemetrySensor_GPS_DATE_TIME": {
         "message": "GPS Datum und Uhrzeit",
         "english": "GPS Date Time"
     },
-    "receiverCrsfTelemetrySensor_LOAD": {
+    "receiverTelemetrySensor_LOAD": {
         "message": "Last",
         "english": "Load"
     },
-    "receiverCrsfTelemetrySensor_CPU_LOAD": {
+    "receiverTelemetrySensor_CPU_LOAD": {
         "message": "CPU-Last",
         "english": "CPU Load"
     },
-    "receiverCrsfTelemetrySensor_SYS_LOAD": {
+    "receiverTelemetrySensor_SYS_LOAD": {
         "message": "System-Last",
         "english": "SYS Load"
     },
-    "receiverCrsfTelemetrySensor_RT_LOAD": {
+    "receiverTelemetrySensor_RT_LOAD": {
         "message": "RT-Last",
         "english": "RT Load"
     },
-    "receiverCrsfTelemetrySensor_MODEL_ID": {
+    "receiverTelemetrySensor_MODEL_ID": {
         "message": "Modell Id",
         "english": "Model Id"
     },
-    "receiverCrsfTelemetrySensor_FLIGHT_MODE": {
+    "receiverTelemetrySensor_FLIGHT_MODE": {
         "message": "Flug-Modus",
         "english": "Flight Mode"
     },
-    "receiverCrsfTelemetrySensor_ARMING_FLAGS": {
+    "receiverTelemetrySensor_ARMING_FLAGS": {
         "message": "Arming-Anzeigen (Scharfschaltung)",
         "english": "Arming Flags"
     },
-    "receiverCrsfTelemetrySensor_ARMING_DISABLE_FLAGS": {
+    "receiverTelemetrySensor_ARMING_DISABLE_FLAGS": {
         "message": "Arming Deaktivierungs-Anzeigen",
         "english": "Arming Disable Flags"
     },
-    "receiverCrsfTelemetrySensor_RESCUE_STATE": {
+    "receiverTelemetrySensor_RESCUE_STATE": {
         "message": "Rettungs-Status",
         "english": "Rescue State"
     },
-    "receiverCrsfTelemetrySensor_GOVERNOR_STATE": {
+    "receiverTelemetrySensor_GOVERNOR_STATE": {
         "message": "Drehzahlregler-Status",
         "english": "Governor State"
     },
-    "receiverCrsfTelemetrySensor_GOVERNOR_FLAGS": {
+    "receiverTelemetrySensor_GOVERNOR_FLAGS": {
         "message": "Drehzahlregler-Anzeigen",
         "english": "Governor Flags"
     },
-    "receiverCrsfTelemetrySensor_PID_PROFILE": {
+    "receiverTelemetrySensor_PID_PROFILE": {
         "message": "PID-Profil",
         "english": "PID Profile"
     },
-    "receiverCrsfTelemetrySensor_RATES_PROFILE": {
+    "receiverTelemetrySensor_RATES_PROFILE": {
         "message": "Drehraten-Profil",
         "english": "Rates Profile"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_PROFILE": {
+    "receiverTelemetrySensor_BATTERY_PROFILE": {
         "message": "Akku-Profil",
         "english": "Battery Profile"
     },
-    "receiverCrsfTelemetrySensor_LED_PROFILE": {
+    "receiverTelemetrySensor_LED_PROFILE": {
         "message": "LED-Profil",
         "english": "LED Profile"
     },
-    "receiverCrsfTelemetrySensor_ADJFUNC": {
+    "receiverTelemetrySensor_ADJFUNC": {
         "message": "Einstellfunktion",
         "english": "Adjustment Function"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_0": {
+    "receiverTelemetrySensor_DEBUG_0": {
         "message": "Debug 0",
         "english": "Debug 0"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_1": {
+    "receiverTelemetrySensor_DEBUG_1": {
         "message": "Debug 1",
         "english": "Debug 1"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_2": {
+    "receiverTelemetrySensor_DEBUG_2": {
         "message": "Debug 2",
         "english": "Debug 2"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_3": {
+    "receiverTelemetrySensor_DEBUG_3": {
         "message": "Debug 3",
         "english": "Debug 3"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_4": {
+    "receiverTelemetrySensor_DEBUG_4": {
         "message": "Debug 4",
         "english": "Debug 4"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_5": {
+    "receiverTelemetrySensor_DEBUG_5": {
         "message": "Debug 5",
         "english": "Debug 5"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_6": {
+    "receiverTelemetrySensor_DEBUG_6": {
         "message": "Debug 6",
         "english": "Debug 6"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_7": {
+    "receiverTelemetrySensor_DEBUG_7": {
         "message": "DEBUG 7",
         "english": "Debug 7"
     },
