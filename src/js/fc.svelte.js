@@ -691,7 +691,7 @@ export const FC = $state({
             crsf_telemetry_mode:            0,
             crsf_telemetry_rate:            0,
             crsf_telemetry_ratio:           0,
-            crsf_telemetry_sensors:         [],
+            telemetry_sensors_list:         [],
         };
 
         this.GPS_RESCUE = {

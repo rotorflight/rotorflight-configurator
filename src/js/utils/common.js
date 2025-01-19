@@ -83,3 +83,15 @@ export function getTextWidth(text) {
     return Math.ceil(context.measureText(text).width);
 }
 
+/**
+  * @template {string} T
+  * @param {...T} values
+  * @returns {{ [K in T]: Symbol }}
+  */
+export function createEnum(...values) {
+  const obj = Object.create(null);
+  for (const value of values) {
+    obj[value] = Symbol(value);
+  }
+  return Object.freeze(obj);
+}
