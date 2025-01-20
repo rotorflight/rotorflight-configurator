@@ -47,7 +47,7 @@
     </div>
 
     {#if FC.FEATURE_CONFIG.features.RPM_FILTER}
-      {#if semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)}
+      {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)}
         <div class="row">
           <label for="rpm-filter-preset">
             <span>{$i18n.t("gyroRpmFilterPreset")}</span>

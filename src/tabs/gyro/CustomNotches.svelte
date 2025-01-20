@@ -65,7 +65,7 @@
       >
         <option value={1}>{$i18n.t("gyroRpmFilterNotchTypeSingle")}</option>
         <option value={2}>{$i18n.t("gyroRpmFilterNotchTypeDouble")}</option>
-        {#if semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)}
+        {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)}
           <option value={3}>{$i18n.t("gyroRpmFilterNotchTypeTriple")}</option>
         {/if}
       </select>
@@ -115,7 +115,7 @@
 <div class="container">
   <div class="header" style:border-color={axisColor}>
     <span class="title">{$i18n.t("gyroRpmFilterBanks")}</span>
-    {#if notches && semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)}
+    {#if notches && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)}
       <ul>
         {#each axisProps as axisProp, i}
           <button

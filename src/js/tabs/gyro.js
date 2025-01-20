@@ -38,7 +38,7 @@ tab.initialize = function (callback) {
         await MSP.promise(MSPCodes.MSP_MOTOR_CONFIG);
         await MSP.promise(MSPCodes.MSP_MIXER_CONFIG);
 
-        if (semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)) {
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
             await mspHelper.requestRpmFilterBanks();
         } else {
             await MSP.promise(MSPCodes.MSP_RPM_FILTER);
@@ -49,7 +49,7 @@ tab.initialize = function (callback) {
         await MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG));
         await MSP.promise(MSPCodes.MSP_SET_FILTER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FILTER_CONFIG));
         if (self.rpmFilterDirty) {
-            if (semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)) {
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                 await mspHelper.sendRPMFiltersV2();
             } else {
                 await mspHelper.sendRPMFilters();

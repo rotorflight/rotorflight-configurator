@@ -19,7 +19,7 @@
   let notches = $state(null);
   let enabled = $derived(FC.FEATURE_CONFIG.features.RPM_FILTER);
   let custom = $derived.by(() => {
-    if (semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)) {
+    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
       return enabled && FC.FILTER_CONFIG.rpm_preset === 0;
     }
 
@@ -30,7 +30,7 @@
   let initialNotchState;
 
   function parseNotches() {
-    if (semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)) {
+    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
       notches = parseRpmFilterConfig2($state.snapshot(FC.RPM_FILTER_CONFIG_V2));
     } else {
       notches = parseRpmFilterConfig1($state.snapshot(FC.RPM_FILTER_CONFIG));
@@ -54,7 +54,7 @@
     const currentState = $state.snapshot(notches);
 
     let config;
-    if (semver.gte(FC.CONFIG.buildVersion, FW_VERSION_4_5_0)) {
+    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
       config = generateRpmFilterConfig2(notches);
       FC.RPM_FILTER_CONFIG_V2 = config;
     } else {
