@@ -6913,6 +6913,18 @@
     "blackboxDebugAxisHelp": {
         "message": "Choose which <i>axis</i> is being debugged. Applies to some of the debug modes."
     },
+    "blackboxInitialErase": {
+        "message": "MiB dataflash initial erase"
+    },
+    "blackboxInitialEraseHelp": {
+        "message": "When start recording, FC will try to erase partially until there is specified amount of free space. Note: depending on the dataflash, the initial erase may take a significant amount of time and recording will only start after that. Set 0 to disable this feature."
+    },
+    "blackboxRollingErase": {
+        "message": "Dataflash Rolling Erase"
+    },
+    "blackboxRollingEraseHelp": {
+        "message": "Overwrite old recording when dataflash is full. Note: if your dataflash erase is too slow, you will see data gaps in your log file."
+    },
     "blackboxSerialLogger": {
         "message": "Outboard serial logging device"
     },

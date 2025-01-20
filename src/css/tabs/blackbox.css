@@ -262,6 +262,8 @@
 .tab-blackbox .blackboxMode select,
 .tab-blackbox .blackboxDebugMode select,
 .tab-blackbox .blackboxDebugAxis select,
+.tab-blackbox .blackboxInitialErase input,
+.tab-blackbox .blackboxRollingErase > span:nth-of-type(1),
 .tab-blackbox .blackboxDevice select {
     float: left;
     width: 180px;
@@ -269,6 +271,19 @@
     margin: 0 15px 8px 0;
     border: 1px solid var(--subtleAccent);
     border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.tab-blackbox .blackboxRollingErase > span:nth-of-type(1) {
+    border: 0px;
+}
+
+.tab-blackbox .blackboxInitialErase input {
+    text-align: right;
+}
+
+.tab-blackbox .blackboxRollingErase > span:nth-of-type(1) > span {
+    float: right;
 }
 
 .tab-blackbox .blackboxDebugMode {
@@ -285,10 +300,18 @@
     border-radius: 3px;
 }
 
+.tab-blackbox .blackboxInitialErase {
+    border-top: 1px dotted var(--superSubtleAccent);
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
 .tab-blackbox .blackboxRate span,
 .tab-blackbox .blackboxMode span,
 .tab-blackbox .blackboxDebugMode span,
 .tab-blackbox .blackboxDebugAxis span,
+.tab-blackbox .blackboxInitialErase span,
+.tab-blackbox .blackboxRollingErase span:nth-of-type(2),
 .tab-blackbox .blackboxDevice span {
     line-height: 20px;
 }
@@ -361,6 +384,8 @@
     .tab-blackbox .blackboxMode select,
     .tab-blackbox .blackboxDebugMode select,
     .tab-blackbox .blackboxDebugAxis select,
+    .tab-blackbox .blackboxInitialErase input,
+    .tab-blackbox .blackboxRollingErase span,
     .tab-blackbox .blackboxDevice select {
         width: 120px;
     }

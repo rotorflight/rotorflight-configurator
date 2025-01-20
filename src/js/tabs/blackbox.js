@@ -244,12 +244,16 @@ tab.initialize = function (callback) {
         const RatesSelect = $(".tab-blackbox .blackboxRate select");
         const debugModeSelect = $(".tab-blackbox .blackboxDebugMode select");
         const debugAxisSelect = $(".tab-blackbox .blackboxDebugAxis select");
+        const initialEraseInput = $(".tab-blackbox .blackboxInitialErase input");
+        const rollingEraseCheckbox = $(".tab-blackbox .blackboxRollingErase input");
 
         populateDevices(deviceSelect);
         populateMode(modeSelect);
         populateLoggingRates(RatesSelect);
         populateDebugModes(debugModeSelect);
         populateDebugAxis(debugAxisSelect);
+        populateInitialErase(initialEraseInput);
+        populateRolingErase(rollingEraseCheckbox);
         populateLogFlags();
 
         function toggleLogging() {
@@ -266,6 +270,13 @@ tab.initialize = function (callback) {
                 $("div.blackboxMode").hide();
                 $("div.blackboxRate").hide();
                 $("div.blackboxFlags").hide();
+            }
+            if (deviceSelect.val() == 1) {
+                $("div.blackboxInitialErase").show();
+                $("div.blackboxRollingErase").show();
+            } else {
+                $("div.blackboxInitialErase").hide();
+                $("div.blackboxRollingErase").hide();
             }
         }
 
@@ -297,6 +308,8 @@ tab.initialize = function (callback) {
             FC.BLACKBOX.blackboxDenom = parseInt(RatesSelect.val(), 10);
             FC.DEBUG_CONFIG.debugMode = parseInt(debugModeSelect.val(), 10);
             FC.DEBUG_CONFIG.debugAxis = parseInt(debugAxisSelect.val(), 10);
+            FC.BLACKBOX.blackboxInitialEraseKiB = parseInt(initialEraseInput.val(), 10) * 1024;
+            FC.BLACKBOX.blackboxRollingErase = rollingEraseCheckbox.prop('checked')? 1 : 0;
         }
 
         if (FC.BLACKBOX.supported) {
@@ -444,6 +457,16 @@ tab.initialize = function (callback) {
         });
 
         debugAxisSelect.val(FC.DEBUG_CONFIG.debugAxis);
+    }
+
+    function populateInitialErase(initialEraseInput) {
+        initialEraseInput.prop("disabled", semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_8));
+        initialEraseInput.val(Math.round(FC.BLACKBOX.blackboxInitialEraseKiB / 1024));
+    }
+
+    function populateRolingErase(rollingEraseCheckbox) {
+        rollingEraseCheckbox.prop("disabled", semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_8)).change();
+        rollingEraseCheckbox.prop('checked', !!FC.BLACKBOX.blackboxRollingErase).change();
     }
 
     function formatFilesizeKilobytes(kilobytes) {
