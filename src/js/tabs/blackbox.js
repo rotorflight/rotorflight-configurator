@@ -252,9 +252,11 @@ tab.initialize = function (callback) {
         populateLoggingRates(RatesSelect);
         populateDebugModes(debugModeSelect);
         populateDebugAxis(debugAxisSelect);
-        populateInitialErase(initialEraseInput);
-        populateRolingErase(rollingEraseCheckbox);
         populateLogFlags();
+
+        initialEraseInput.val(Math.round(FC.BLACKBOX.blackboxInitialEraseKiB / 1024));
+        initialEraseInput.prop("max", Math.min(64, FC.DATAFLASH.totalSize / 1024 / 1024) - 1);
+        rollingEraseCheckbox.prop('checked', !!FC.BLACKBOX.blackboxRollingErase).change();
 
         function toggleLogging() {
             if (deviceSelect.val() != 0) {
@@ -271,7 +273,7 @@ tab.initialize = function (callback) {
                 $("div.blackboxRate").hide();
                 $("div.blackboxFlags").hide();
             }
-            if (deviceSelect.val() == 1) {
+            if (deviceSelect.val() == 1 && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                 $("div.blackboxInitialErase").show();
                 $("div.blackboxRollingErase").show();
             } else {
@@ -457,16 +459,6 @@ tab.initialize = function (callback) {
         });
 
         debugAxisSelect.val(FC.DEBUG_CONFIG.debugAxis);
-    }
-
-    function populateInitialErase(initialEraseInput) {
-        initialEraseInput.prop("disabled", semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_8));
-        initialEraseInput.val(Math.round(FC.BLACKBOX.blackboxInitialEraseKiB / 1024));
-    }
-
-    function populateRolingErase(rollingEraseCheckbox) {
-        rollingEraseCheckbox.prop("disabled", semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_8)).change();
-        rollingEraseCheckbox.prop('checked', !!FC.BLACKBOX.blackboxRollingErase).change();
     }
 
     function formatFilesizeKilobytes(kilobytes) {
