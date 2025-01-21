@@ -10767,26 +10767,6 @@
         "english": "Choose which <i>axis</i> is being debugged. Applies to some of the debug modes.",
         "status": "New entry. Please translate!"
     },
-    "blackboxInitialErase": {
-        "message": "MiB dataflash initial erase",
-        "english": "MiB dataflash initial erase",
-        "status": "New entry. Please translate!"
-    },
-    "blackboxInitialEraseHelp": {
-        "message": "When start recording, FC will try to erase partially until there is specified amount of free space. Note: depending on the dataflash, the initial erase may take a significant amount of time and recording will only start after that. Set 0 to disable this feature.",
-        "english": "When start recording, FC will try to erase partially until there is specified amount of free space. Note: depending on the dataflash, the initial erase may take a significant amount of time and recording will only start after that. Set 0 to disable this feature.",
-        "status": "New entry. Please translate!"
-    },
-    "blackboxRollingErase": {
-        "message": "Dataflash Rolling Erase",
-        "english": "Dataflash Rolling Erase",
-        "status": "New entry. Please translate!"
-    },
-    "blackboxRollingEraseHelp": {
-        "message": "Overwrite old recording when dataflash is full. Note: if your dataflash erase is too slow, you will see data gaps in your log file.",
-        "english": "Overwrite old recording when dataflash is full. Note: if your dataflash erase is too slow, you will see data gaps in your log file.",
-        "status": "New entry. Please translate!"
-    },
     "blackboxSerialLogger": {
         "message": "Dispositivo seriale esterno per la registrazione",
         "english": "Outboard serial logging device",

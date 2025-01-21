@@ -309,7 +309,7 @@ tab.initialize = function (callback) {
             FC.DEBUG_CONFIG.debugMode = parseInt(debugModeSelect.val(), 10);
             FC.DEBUG_CONFIG.debugAxis = parseInt(debugAxisSelect.val(), 10);
             FC.BLACKBOX.blackboxInitialEraseKiB = parseInt(initialEraseInput.val(), 10) * 1024;
-            FC.BLACKBOX.blackboxRollingErase = rollingEraseCheckbox.prop('checked')? 1 : 0;
+            FC.BLACKBOX.blackboxRollingErase = Number(rollingEraseCheckbox.prop('checked'));
         }
 
         if (FC.BLACKBOX.supported) {

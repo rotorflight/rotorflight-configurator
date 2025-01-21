@@ -1395,9 +1395,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                     FC.BLACKBOX.blackboxInitialEraseKiB = data.readU16();
                     FC.BLACKBOX.blackboxRollingErase = data.readU8();
-                } else {
-                    FC.BLACKBOX.blackboxInitialEraseKiB = 0;
-                    FC.BLACKBOX.blackboxRollingErase = 0;
                 }
                 break;
             }
@@ -2131,7 +2128,6 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.BLACKBOX.blackboxMode)
                 .push16(FC.BLACKBOX.blackboxDenom)
                 .push32(FC.BLACKBOX.blackboxFields);
-
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                 buffer.push16(FC.BLACKBOX.blackboxInitialEraseKiB)
                     .push8(FC.BLACKBOX.blackboxRollingErase);
