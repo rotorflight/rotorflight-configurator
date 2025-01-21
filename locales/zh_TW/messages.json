@@ -3658,29 +3658,9 @@
         "message": "混控覆寫功能可將混控輸入強制設定到任意位置，以便進行校準。覆寫值不會儲存，會在重新啟動時重設。",
         "english": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
-    "mixerPassthroughEnableSwitch": {
-        "message": "<strong>Enable Mixer Passthrough</strong>",
-        "english": "<strong>Enable Mixer Passthrough</strong>",
-        "status": "New entry. Please translate!"
-    },
-    "mixerPassthroughEnableSwitchText": {
-        "message": "Mixer Passthrough allows you to control the mixer directly from TX. This mode will be reset in reboot.",
-        "english": "Mixer Passthrough allows you to control the mixer directly from TX. This mode will be reset in reboot.",
-        "status": "New entry. Please translate!"
-    },
     "mixerOverrideEnable": {
-        "message": "Override",
-        "english": "Override",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "啟用",
-            "english": "Enable"
-        }
-    },
-    "mixerPassthroughEnable": {
-        "message": "Passthrough",
-        "english": "Passthrough",
-        "status": "New entry. Please translate!"
+        "message": "啟用",
+        "english": "Enable"
     },
     "mixerOverrideValue": {
         "message": "值 [度]",

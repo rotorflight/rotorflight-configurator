@@ -3844,29 +3844,9 @@
         "message": "Mixer Override force les entrées du mélangeur à des positions arbitraires à des fins de configuration. Les valeurs de remplacement ne sont pas enregistrées et seront réinitialisées au redémarrage.",
         "english": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
-    "mixerPassthroughEnableSwitch": {
-        "message": "<strong>Enable Mixer Passthrough</strong>",
-        "english": "<strong>Enable Mixer Passthrough</strong>",
-        "status": "New entry. Please translate!"
-    },
-    "mixerPassthroughEnableSwitchText": {
-        "message": "Mixer Passthrough allows you to control the mixer directly from TX. This mode will be reset in reboot.",
-        "english": "Mixer Passthrough allows you to control the mixer directly from TX. This mode will be reset in reboot.",
-        "status": "New entry. Please translate!"
-    },
     "mixerOverrideEnable": {
-        "message": "Override",
-        "english": "Override",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Activer",
-            "english": "Enable"
-        }
-    },
-    "mixerPassthroughEnable": {
-        "message": "Passthrough",
-        "english": "Passthrough",
-        "status": "New entry. Please translate!"
+        "message": "Activer",
+        "english": "Enable"
     },
     "mixerOverrideValue": {
         "message": "Valeur",
