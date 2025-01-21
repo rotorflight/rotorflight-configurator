@@ -255,7 +255,7 @@ tab.initialize = function (callback) {
         populateLogFlags();
 
         initialEraseInput.val(Math.round(FC.BLACKBOX.blackboxInitialEraseKiB / 1024));
-        initialEraseInput.prop("max", Math.min(64, FC.DATAFLASH.totalSize / 1024 / 1024) - 1);
+        initialEraseInput.prop("max", Math.min(64, FC.DATAFLASH.totalSize / 1024 / 1024));
         rollingEraseCheckbox.prop('checked', !!FC.BLACKBOX.blackboxRollingErase).change();
 
         function toggleLogging() {
@@ -310,7 +310,7 @@ tab.initialize = function (callback) {
             FC.BLACKBOX.blackboxDenom = parseInt(RatesSelect.val(), 10);
             FC.DEBUG_CONFIG.debugMode = parseInt(debugModeSelect.val(), 10);
             FC.DEBUG_CONFIG.debugAxis = parseInt(debugAxisSelect.val(), 10);
-            FC.BLACKBOX.blackboxInitialEraseKiB = parseInt(initialEraseInput.val(), 10) * 1024;
+            FC.BLACKBOX.blackboxInitialEraseKiB = Math.min(0xFFFF, parseInt(initialEraseInput.val(), 10) * 1024);
             FC.BLACKBOX.blackboxRollingErase = Number(rollingEraseCheckbox.prop('checked'));
         }
 
