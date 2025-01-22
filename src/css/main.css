@@ -1711,6 +1711,8 @@ span.value {
     border-top: 1px solid var(--subtleAccent);
 }
 
+html[data-theme="dark"] .content_toolbar button,
+.content_toolbar button,
 .content_toolbar .btn a {
     /*  common styles for content toolbar buttons */
     margin-top: 0;
@@ -1732,11 +1734,22 @@ span.value {
     user-select: none;
 }
 
+html[data-theme="dark"] .content_toolbar button:disabled,
+.content_toolbar button:disabled {
+    color: #444;
+    background-color: #999;
+    pointer-events: none;
+}
+
+html[data-theme="dark"] .content_toolbar button:hover,
+.content_toolbar button,
 .content_toolbar .btn a:hover {
     background-color: var(--hoverButton-background);
     border-color: var(--hoverButton-border);
 }
 
+html[data-theme="dark"] .content_toolbar button:active,
+.content_toolbar button:active,
 .content_toolbar .btn a:active {
     background-color: var(--pushedButton-background);
     border-color: var(--pushedButton-border);

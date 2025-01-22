@@ -128,6 +128,8 @@ export const MSPCodes = {
     MSP_SET_GOVERNOR_PROFILE:       149,
     MSP_LED_STRIP_SETTINGS:         150,
     MSP_SET_LED_STRIP_SETTINGS:     151,
+    MSP_RPM_FILTER_V2:              154,
+    MSP_SET_RPM_FILTER_V2:          155,
 
     MSP_UID:                        160,
     MSP_GPS_SV_INFO:                164,

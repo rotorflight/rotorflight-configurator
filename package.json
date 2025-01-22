@@ -54,6 +54,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@floating-ui/dom": "^1.6.13",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@quanle94/innosetup": "^6.0.2",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
@@ -77,6 +78,7 @@
     "i18next-http-backend": "^2.6.1",
     "lint-staged": "^15.2.11",
     "marked": "^15.0.3",
+    "microdiff": "^1.5.0",
     "minimist": "^1.2.8",
     "nouislider": "^15.8.1",
     "nw-builder": "4.9.0",
