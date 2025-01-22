@@ -2149,7 +2149,8 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_RTC: {
             const now = new Date();
-            const timestamp = now.getTime();
+            const utc_timestamp = now.getTime();
+            const timestamp = utc_timestamp + now.getTimezoneOffset() * 60000;
             const secs = timestamp / 1000;
             const millis = timestamp % 1000;
             buffer.push32(secs);
