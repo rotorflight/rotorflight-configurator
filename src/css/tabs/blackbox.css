@@ -385,7 +385,7 @@
     .tab-blackbox .blackboxDebugMode select,
     .tab-blackbox .blackboxDebugAxis select,
     .tab-blackbox .blackboxInitialErase input,
-    .tab-blackbox .blackboxRollingErase span,
+    .tab-blackbox .blackboxRollingErase > span:nth-of-type(1),
     .tab-blackbox .blackboxDevice select {
         width: 120px;
     }
