@@ -6913,6 +6913,18 @@
     "blackboxDebugAxisHelp": {
         "message": "Choose which <i>axis</i> is being debugged. Applies to some of the debug modes."
     },
+    "blackboxInitialErase": {
+        "message": "Initial erase"
+    },
+    "blackboxInitialEraseHelp": {
+        "message": "Ensures a minimum amount of free space when recording starts, erasing old logs if necessary. Set to 0 to disable this feature.<br><br><b>Note:</b> Logging starts after erasing completes. This may take a significant amount of time with some flash chips."
+    },
+    "blackboxRollingErase": {
+        "message": "Rolling erase"
+    },
+    "blackboxRollingEraseHelp": {
+        "message": "Overwrite old logs when the storage is full.<br><br><b>Note:</b> Logs may contain gaps if the flash chip is slow to erase."
+    },
     "blackboxSerialLogger": {
         "message": "Outboard serial logging device"
     },
