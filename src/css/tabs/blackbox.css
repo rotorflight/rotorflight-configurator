@@ -307,9 +307,6 @@
 .tab-blackbox .blackboxDevice span {
     line-height: 20px;
 }
-.tab-blackbox .blackboxDebugModeText {
-    margin-left: 7px !important;
-}
 
 .tab-blackbox .blackboxFlags .gui_box {
     height: calc(100% - 12px);
