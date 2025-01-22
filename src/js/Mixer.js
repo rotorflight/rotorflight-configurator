@@ -84,6 +84,7 @@ export const Mixer = {
     OVERRIDE_MIN: -2500,
     OVERRIDE_MAX:  2500,
     OVERRIDE_OFF:  2501,
+    OVERRIDE_PASSTHROUGH:  2502,
 
 
     //// Functions
@@ -177,7 +178,14 @@ export const Mixer = {
 
     overrideEnabled : function (value)
     {
-        const enabled = (value >= Mixer.OVERRIDE_MIN && value <= Mixer.OVERRIDE_MAX);
+        const enabled = ((value >= Mixer.OVERRIDE_MIN && value <= Mixer.OVERRIDE_MAX) || value == Mixer.OVERRIDE_PASSTHROUGH);
+
+        return enabled;
+    },
+
+    passthroughEnabled : function (value)
+    {
+        const enabled = (value == Mixer.OVERRIDE_PASSTHROUGH);
 
         return enabled;
     },

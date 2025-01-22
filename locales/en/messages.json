@@ -2859,8 +2859,17 @@
     "mixerOverrideEnableSwitchText": {
         "message": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
+    "mixerPassthroughEnableSwitch": {
+        "message": "<strong>Enable Mixer Passthrough</strong>"
+    },
+    "mixerPassthroughEnableSwitchText": {
+        "message": "Mixer Passthrough allows you to control the mixer directly from TX. This mode will be reset in reboot."
+    },
     "mixerOverrideEnable": {
-        "message": "Enable"
+        "message": "Override"
+    },
+    "mixerPassthroughEnable": {
+        "message": "Passthrough"
     },
     "mixerOverrideValue": {
         "message": "Value"

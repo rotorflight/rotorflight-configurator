@@ -169,10 +169,15 @@
 
 .tab-mixer .mixerOverrideTable td:nth-child(3) {
     width: 80px;
-    text-align: left;
+    text-align: center;
 }
 
 .tab-mixer .mixerOverrideTable td:nth-child(4) {
+    width: 80px;
+    text-align: left;
+}
+
+.tab-mixer .mixerOverrideTable td:nth-child(5) {
     height: 75px;
     padding: 2px 20px 2px 20px;
     text-align: left;

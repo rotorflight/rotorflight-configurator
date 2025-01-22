@@ -447,6 +447,8 @@
                                 <tr>
                                     <td><input type="checkbox" id="mixerOverrideEnableSwitch" class="toggle" /></td>
                                     <td><span i18n="mixerOverrideEnableSwitch"></span></td>
+                                    <td class="mixerPassthroughVisible"><input type="checkbox" id="mixerPassthroughEnableSwitch" class="toggle" /></td>
+                                    <td class="mixerPassthroughVisible"><span i18n="mixerPassthroughEnableSwitch"></span></td>
                                     <td><span class="description" i18n="mixerOverrideEnableSwitchText"></span></td>
                                 </tr>
                             </table>
@@ -457,6 +459,7 @@
                                     <tr class="trhead">
                                         <th i18n="mixerInputName"></th>
                                         <th i18n="mixerOverrideEnable"></th>
+                                        <th class="mixerPassthroughVisible" i18n="mixerPassthroughEnable"></th>
                                         <th i18n="mixerOverrideValue"></th>
                                         <th i18n="mixerOverrideSlider"></th>
                                     </tr>
@@ -545,6 +548,11 @@
                 <td><span class="mixerOverrideName"></span></td>
                 <td>
                     <div class="mixerOverrideEnable">
+                        <input type="checkbox" class="toggle"/>
+                    </div>
+                </td>
+                <td class="mixerPassthroughVisible">
+                    <div class="mixerPassthroughEnable">
                         <input type="checkbox" class="toggle"/>
                     </div>
                 </td>
