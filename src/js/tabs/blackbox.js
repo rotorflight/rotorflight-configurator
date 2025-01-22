@@ -448,6 +448,7 @@ tab.initialize = function (callback) {
                     }
                 });
             },
+            width: 'style',
         });
     }
 

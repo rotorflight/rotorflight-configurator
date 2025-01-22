@@ -260,7 +260,7 @@
 
 .tab-blackbox .blackboxRate select,
 .tab-blackbox .blackboxMode select,
-.tab-blackbox .blackboxDebugMode select,
+.tab-blackbox .blackboxDebugMode .select2,
 .tab-blackbox .blackboxDebugAxis select,
 .tab-blackbox .blackboxInitialErase input,
 .tab-blackbox .blackboxRollingErase > span:nth-of-type(1),
@@ -290,14 +290,6 @@
     border-top: 1px dotted var(--superSubtleAccent);
     margin-top: 10px;
     padding-top: 10px;
-}
-
-.tab-blackbox .blackboxDebugMode .select2 {
-    float: left;
-    height: 20px;
-    margin: 0 8px 8px 0;
-    border: 1px solid var(--subtleAccent);
-    border-radius: 3px;
 }
 
 .tab-blackbox .blackboxInitialErase {
@@ -382,7 +374,7 @@
 @media all and (max-width: 575px) {
     .tab-blackbox .blackboxRate select,
     .tab-blackbox .blackboxMode select,
-    .tab-blackbox .blackboxDebugMode select,
+    .tab-blackbox .blackboxDebugMode .select2,
     .tab-blackbox .blackboxDebugAxis select,
     .tab-blackbox .blackboxInitialErase input,
     .tab-blackbox .blackboxRollingErase > span:nth-of-type(1),
