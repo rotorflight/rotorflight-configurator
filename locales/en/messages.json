@@ -4623,6 +4623,18 @@
     "profilesyawFFImpulseDecayHelp": {
         "message": "Decay time for collective impulse feedforward mixed into yaw"
     },
+    "profilesYawInertiaPrecompGain": {
+        "message": "Inertia Precomp Gain"
+    },
+    "profilesYawInertiaPrecompGainHelp": {
+        "message": "TODO"
+    },
+    "profilesYawInertiaPrecompCutoff": {
+        "message": "Inertia Precomp Cutoff"
+    },
+    "profilesYawInertiaPrecompCutoffHelp": {
+        "message": "TODO"
+    },
     "profilesPitchFFCollective": {
         "message": "Collective to Pitch Compensation"
     },
