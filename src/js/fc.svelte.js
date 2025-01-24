@@ -599,6 +599,8 @@ export const FC = $state({
             rescueMaxCollective:        0,
             rescueMaxRate:              0,
             rescueMaxAccel:             0,
+            yaw_inertia_precomp_gain:   0,
+            yaw_inertia_precomp_cutoff: 0,
         };
 
         this.GOVERNOR = {
