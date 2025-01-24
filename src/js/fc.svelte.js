@@ -765,6 +765,7 @@ export const FC = $state({
             'SBUS',
             'SUMD',
             'SUMH',
+            'XBUS_MODE_A',
             'XBUS_MODE_B',
             'XBUS_MODE_B_RJ01',
             'IBUS',
