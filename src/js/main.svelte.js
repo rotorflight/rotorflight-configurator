@@ -6,10 +6,9 @@ import { Clipboard } from "@/js/Clipboard.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
 import { ConfigStorage } from "@/js/ConfigStorage.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
-import { Features } from "@/js/Features.js";
+import { Features } from "@/js/features.svelte.js";
 import { FirmwareCache } from "@/js/FirmwareCache.js";
 import { Mixer } from "@/js/Mixer.js";
-import { RPMFilter } from "@/js/RPMFilter.js";
 import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
 import { VirtualFC } from "@/js/VirtualFC.js";
 import * as backupRestore from "@/js/backup_restore.js";
@@ -40,6 +39,7 @@ import "@/js/tabs/index.js";
 
 import "nouislider/dist/nouislider.css";
 import "@/css/slider.css";
+import "@/css/app.css";
 
 import BatteryLegend from "@/components/BatteryLegend.svelte";
 import Logo from "@/components/Logo.svelte";
@@ -70,7 +70,6 @@ Object.assign(globalThis, {
   Mixer,
   MspHelper,
   PortHandler,
-  RPMFilter,
   RateCurve,
   RateCurve2,
   ReleaseChecker,

@@ -129,6 +129,7 @@ export const FC = $state({
     FEATURE_CONFIG: null,
     FILTER_CONFIG: null,
     RPM_FILTER_CONFIG: null,
+    RPM_FILTER_CONFIG_V2: null,
     GOVERNOR: null,
     GPS_CONFIG: null,
     GPS_DATA: null,
@@ -491,9 +492,12 @@ export const FC = $state({
             dyn_notch_q:                0,
             dyn_notch_min_hz:           0,
             dyn_notch_max_hz:           0,
+            rpm_preset:                 0,
+            rpm_min_hz:                 0,
         };
 
         this.RPM_FILTER_CONFIG = [];
+        this.RPM_FILTER_CONFIG_V2 = [];
 
         this.PID_PROFILE = {
             rollPitchItermIgnoreRate:   0,
