@@ -173,7 +173,6 @@ TABS.receiver = {
     ],
     telemetry: {
         enabled: false,
-        config: null,
         DEFAULT_CRSF_TELEMETRY_RATE: 500,
         DEFAULT_CRSF_TELEMETRY_RATIO: 4,
         CRSF_SENSOR_CONFLICTS: {},
@@ -716,7 +715,7 @@ TABS.receiver.initialize = function (callback) {
             const templ = $('#telemetrySensorTemplate tr');
             const table = $('.tab-receiver .telemetry_sensors table');
             for (const sensor of self.telemetrySensorList) {
-                const state = !!(self.telemetry.config.telemetry_sensors & (1 << sensor.id));
+                const state = !!(FC.TELEMETRY_CONFIG.telemetry_sensors & (1 << sensor.id));
                 const desc = i18n.getMessage(`receiverTelemetrySensor_${sensor.name}`);
                 const elem = templ.clone();
                 elem.attr('sensor', sensor.id);
@@ -724,9 +723,9 @@ TABS.receiver.initialize = function (callback) {
                 elem.find('input').prop('checked', state).change(function () {
                     const checked = $(this).is(':checked');
                     if (checked)
-                        self.telemetry.config.telemetry_sensors |= (1 << sensor.id);
+                        FC.TELEMETRY_CONFIG.telemetry_sensors |= (1 << sensor.id);
                     else
-                        self.telemetry.config.telemetry_sensors &= ~(1 << sensor.id);
+                        FC.TELEMETRY_CONFIG.telemetry_sensors &= ~(1 << sensor.id);
                 });
                 table.append(elem);
             }
@@ -738,7 +737,7 @@ TABS.receiver.initialize = function (callback) {
             $('.tab-receiver .telemetry_setting').toggle(self.telemetryExtSensors != 0);
             $('.tab-receiver .telemetry_sensors').toggle(sensorList != 0);
             for (const sensor of self.telemetrySensorList) {
-                const state = !!(self.telemetry.config.telemetry_sensors & (1 << sensor.id));
+                const state = !!(FC.TELEMETRY_CONFIG.telemetry_sensors & (1 << sensor.id));
                 const visbl = !!(sensorList & (1 << sensor.id));
                 const elem = $(`.tab-receiver .telemetry_sensors tr[sensor="${sensor.id}"]`);
                 elem.toggle(visbl);
@@ -811,8 +810,7 @@ TABS.receiver.initialize = function (callback) {
             $('.tab-receiver .telemetry_setting').hide();
             $('.tab-receiver .crsf-telemetry-setting').show();
 
-            const { config } = self.telemetry;
-            const isCustom = config.crsf_telemetry_mode === 1;
+            const isCustom = FC.TELEMETRY_CONFIG.crsf_telemetry_mode === 1;
 
             $('.tab-receiver .crsf-telemetry-sensors').toggle(isCustom);
             $('.tab-receiver .telemetry_sensors').toggle(!isCustom);
@@ -821,18 +819,18 @@ TABS.receiver.initialize = function (callback) {
                 .prop('checked', isCustom);
 
             $('.tab-receiver input[name="crsf-telemetry-rate"]')
-                .val(config.crsf_telemetry_rate || self.telemetry.DEFAULT_CRSF_TELEMETRY_RATE)
+                .val(FC.TELEMETRY_CONFIG.crsf_telemetry_rate || self.telemetry.DEFAULT_CRSF_TELEMETRY_RATE)
                 .trigger('change');
 
             $('.tab-receiver input[name="crsf-telemetry-ratio"]')
-                .val(config.crsf_telemetry_ratio || self.telemetry.DEFAULT_CRSF_TELEMETRY_RATIO)
+                .val(FC.TELEMETRY_CONFIG.crsf_telemetry_ratio || self.telemetry.DEFAULT_CRSF_TELEMETRY_RATIO)
                 .trigger('change');
 
             if (isCustom) {
                 $('.tab-receiver .crsf-telemetry-sensors ul')
                     .children()
                     .each(function (i) {
-                        const sensorId = self.telemetry.config.crsf_telemetry_sensors[i];
+                        const sensorId = FC.TELEMETRY_CONFIG.crsf_telemetry_sensors[i];
                         $(this).find('select').val(sensorId);
                     });
 
@@ -907,9 +905,6 @@ TABS.receiver.initialize = function (callback) {
         }
 
         self.telemetry.enabled = FC.FEATURE_CONFIG.features.isEnabled('TELEMETRY');
-        self.telemetry.config = {
-            ...FC.TELEMETRY_CONFIG,
-        };
 
         updateExternalTelemetry();
         populateTelemetrySensors();
@@ -926,18 +921,18 @@ TABS.receiver.initialize = function (callback) {
 
         $('.tab-receiver input[name="crsf-telemetry-mode"]')
            .on('change', function () {
-              self.telemetry.config.crsf_telemetry_mode = +$(this).is(':checked');
-              self.telemetry.config.crsf_telemetry_sensors.fill(0);
+              FC.TELEMETRY_CONFIG.crsf_telemetry_mode = +$(this).is(':checked');
+              FC.TELEMETRY_CONFIG.crsf_telemetry_sensors.fill(0);
               updateTelemetry();
             })
-            .prop('checked', self.telemetry.config.crsf_telemetry_mode);
+            .prop('checked', FC.TELEMETRY_CONFIG.crsf_telemetry_mode);
 
         $('.tab-receiver input[name="crsf-telemetry-rate"]').on('change', function() {
-            self.telemetry.config.crsf_telemetry_rate = getIntegerValue(this);
+            FC.TELEMETRY_CONFIG.crsf_telemetry_rate = getIntegerValue(this);
         });
 
         $('.tab-receiver input[name="crsf-telemetry-ratio"]').on('change', function() {
-            self.telemetry.config.crsf_telemetry_ratio = getIntegerValue(this);
+            FC.TELEMETRY_CONFIG.crsf_telemetry_ratio = getIntegerValue(this);
         });
 
         rxProtoSelectElement.on('change', updateTelemetry);
@@ -1260,11 +1255,8 @@ TABS.receiver.initialize = function (callback) {
                 .children()
                 .each(function(i) {
                     const sensorId = Number($(this).find('select').val());
-                    self.telemetry.config.crsf_telemetry_sensors[i] = sensorId;
+                    FC.TELEMETRY_CONFIG.crsf_telemetry_sensors[i] = sensorId;
                 });
-            FC.TELEMETRY_CONFIG = {
-                ...self.telemetry.config,
-            };
         }
 
 
