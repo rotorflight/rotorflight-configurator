@@ -135,3 +135,7 @@
         border-radius: unset;
     }
 }
+
+.tab-gyro #rpm-filter {
+  display: contents;
+}
