@@ -205,7 +205,7 @@ tab.initialize = function (callback) {
         $('.tab-profiles input[id="yawFFImpulseGain"]').val(FC.PID_PROFILE.yawFFImpulseGain);
         $('.tab-profiles input[id="yawFFImpulseDecay"]').val(FC.PID_PROFILE.yawFFImpulseDecay);
         $('.tab-profiles input[id="yaw_inertia_precomp_gain"]').val(FC.PID_PROFILE.yaw_inertia_precomp_gain);
-        $('.tab-profiles input[id="yaw_inertia_precomp_cutoff"]').val(FC.PID_PROFILE.yaw_inertia_precomp_cutoff);
+        $('.tab-profiles input[id="yaw_inertia_precomp_cutoff"]').val(FC.PID_PROFILE.yaw_inertia_precomp_cutoff / 10);
 
         // Collective-to-Pitch
         $('.tab-profiles input[id="pitchFFCollectiveGain"]').val(FC.PID_PROFILE.pitchFFCollectiveGain);
@@ -363,7 +363,7 @@ tab.initialize = function (callback) {
         FC.PID_PROFILE.yawFFImpulseGain = $('.tab-profiles input[id="yawFFImpulseGain"]').val();
         FC.PID_PROFILE.yawFFImpulseDecay = $('.tab-profiles input[id="yawFFImpulseDecay"]').val();
         FC.PID_PROFILE.yaw_inertia_precomp_gain = $('.tab-profiles input[id="yaw_inertia_precomp_gain"]').val();
-        FC.PID_PROFILE.yaw_inertia_precomp_cutoff = $('.tab-profiles input[id="yaw_inertia_precomp_cutoff"]').val();
+        FC.PID_PROFILE.yaw_inertia_precomp_cutoff = $('.tab-profiles input[id="yaw_inertia_precomp_cutoff"]').val() * 10;
 
         // Collective-to-Pitch
         FC.PID_PROFILE.pitchFFCollectiveGain =  $('.tab-profiles input[id="pitchFFCollective"]').is(':checked') ?
