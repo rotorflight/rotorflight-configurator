@@ -220,6 +220,8 @@ export const FC = $state({
             blade_pitch_limit:          0,
             coll_rpm_correction:        0,
             coll_geo_correction:        0,
+            coll_tilt_correction_pos:   0,
+            coll_tilt_correction_neg:   0,
         };
 
         this.MIXER_INPUTS =             [];

@@ -2757,6 +2757,15 @@
     "mixerSwashPhaseHelp": {
         "message": "The phase offset for the swashplate controls."
     },
+    "mixerCollectiveTiltCorrectionPos": {
+        "message": "Positive Collective Tilt Correction [%]"
+    },
+    "mixerCollectiveTiltCorrectionNeg": {
+        "message": "Negative Collective Tilt Correction [%]"
+    },
+    "mixerCollectiveTiltCorrectionHelp": {
+        "message": "These two values are to compensate collective dropping caused by cyclic input. At full positive collective or full negative collective, increase the corresponding value until the fish eye ball doesn't move downward when increasing cyclic input."
+    },
     "mixerSwashRollTrim": {
         "message": "Roll trim [%]"
     },
