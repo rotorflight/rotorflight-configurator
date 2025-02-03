@@ -694,6 +694,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MIXER_CONFIG.swash_trim[2] = data.read16();
                 FC.MIXER_CONFIG.coll_rpm_correction = data.readU8();
                 FC.MIXER_CONFIG.coll_geo_correction = data.read8();
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
+                    FC.MIXER_CONFIG.coll_tilt_correction_pos = data.read8();
+                    FC.MIXER_CONFIG.coll_tilt_correction_neg = data.read8();
+                }
                 break;
             }
 
@@ -1712,6 +1716,10 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.MIXER_CONFIG.swash_trim[2])
                 .push8(FC.MIXER_CONFIG.coll_rpm_correction)
                 .push8(FC.MIXER_CONFIG.coll_geo_correction);
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
+                buffer.push8(FC.MIXER_CONFIG.coll_tilt_correction_pos)
+                    .push8(FC.MIXER_CONFIG.coll_tilt_correction_neg);
+            }
             break;
         }
 

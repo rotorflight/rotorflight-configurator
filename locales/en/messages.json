@@ -2757,6 +2757,15 @@
     "mixerSwashPhaseHelp": {
         "message": "The phase offset for the swashplate controls."
     },
+    "mixerCollectiveTiltCorrectionPos": {
+        "message": "Positive Collective Tilt Correction"
+    },
+    "mixerCollectiveTiltCorrectionNeg": {
+        "message": "Negative Collective Tilt Correction"
+    },
+    "mixerCollectiveTiltCorrectionHelp": {
+        "message": "Corrects cyclic to collective swashplate interaction.<br /><br />At full positive and negative collective pitch, adjust the corresponding values until the swashplate pivot ball remains stationary when increasing cyclic input."
+    },
     "mixerSwashRollTrim": {
         "message": "Roll trim [%]"
     },

@@ -385,6 +385,13 @@ tab.initialize = function (callback) {
         $('#mixerCyclicLimit').val(cyclicMax).change();
         $('#mixerTotalPitchLimit').val(totalMax).change();
 
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
+            $('#mixerCollectiveTiltCorrectionPos').val(FC.MIXER_CONFIG.coll_tilt_correction_pos).change();
+            $('#mixerCollectiveTiltCorrectionNeg').val(FC.MIXER_CONFIG.coll_tilt_correction_neg).change();
+        } else {
+            $('.mixerCollectiveTiltCorrection').hide();
+        }
+
         function setTailRotorMode(mode, change) {
 
             FC.MIXER_CONFIG.tail_rotor_mode = mode;
@@ -468,6 +475,8 @@ tab.initialize = function (callback) {
             FC.MIXER_CONFIG.tail_rotor_mode = getIntegerValue('#mixerTailRotorMode');
             FC.MIXER_CONFIG.tail_motor_idle = getIntegerValue('#mixerTailMotorIdle', 10);
             FC.MIXER_CONFIG.coll_geo_correction = getIntegerValue('#mixerCollectiveGeoCorrection', 5);
+            FC.MIXER_CONFIG.coll_tilt_correction_pos = getIntegerValue('#mixerCollectiveTiltCorrectionPos');
+            FC.MIXER_CONFIG.coll_tilt_correction_neg = getIntegerValue('#mixerCollectiveTiltCorrectionNeg');
 
             if (FC.MIXER_CONFIG.tail_rotor_mode > 0)
                 FC.MIXER_CONFIG.tail_center_trim = getIntegerValue('#mixerTailMotorCenterTrim', 10);
