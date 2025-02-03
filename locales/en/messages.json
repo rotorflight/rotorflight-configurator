@@ -4629,6 +4629,18 @@
     "profilesyawFFImpulseDecayHelp": {
         "message": "Decay time for collective impulse feedforward mixed into yaw"
     },
+    "profilesYawInertiaPrecompGain": {
+        "message": "Inertia Precomp Gain"
+    },
+    "profilesYawInertiaPrecompGainHelp": {
+        "message": "The strength of the main rotor's inertia. Larger values result in more precomp being applied to the yaw control."
+    },
+    "profilesYawInertiaPrecompCutoff": {
+        "message": "Inertia Precomp Cutoff"
+    },
+    "profilesYawInertiaPrecompCutoffHelp": {
+        "message": "Derivative cutoff frequency for inertia precomp. Larger values result in a sharper application of precomp."
+    },
     "profilesPitchFFCollective": {
         "message": "Collective to Pitch Compensation"
     },

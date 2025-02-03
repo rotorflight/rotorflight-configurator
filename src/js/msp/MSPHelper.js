@@ -1117,6 +1117,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.PID_PROFILE.btermCutoffRoll               = data.readU8();
                 FC.PID_PROFILE.btermCutoffPitch              = data.readU8();
                 FC.PID_PROFILE.btermCutoffYaw                = data.readU8();
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
+                    FC.PID_PROFILE.yaw_inertia_precomp_gain  = data.readU8();
+                    FC.PID_PROFILE.yaw_inertia_precomp_cutoff= data.readU8();
+                }
                 break;
             }
 
@@ -2033,6 +2037,10 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.PID_PROFILE.btermCutoffRoll)
                 .push8(FC.PID_PROFILE.btermCutoffPitch)
                 .push8(FC.PID_PROFILE.btermCutoffYaw);
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
+                buffer.push8(FC.PID_PROFILE.yaw_inertia_precomp_gain)
+                    .push8(FC.PID_PROFILE.yaw_inertia_precomp_cutoff);
+            }
             break;
         }
 
