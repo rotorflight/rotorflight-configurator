@@ -87,6 +87,7 @@
     "rpm-builder": "^1.2.1",
     "sass-embedded": "^1.83.1",
     "semver": "^7.6.3",
+    "sortablejs": "^1.15.6",
     "svelte": "^5.17.3",
     "svelte-i18next": "^2.2.2",
     "three": "^0.169.0",

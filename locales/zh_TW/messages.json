@@ -2153,15 +2153,15 @@
         "message": "遙測接腳交換 （交換 Rx 和 Tx 接腳）",
         "english": "Telemetry Pin Swap (Swap Rx and Tx pins)"
     },
-    "receiverCrsfTelemetryMode": {
+    "receiverTelemetryMode": {
         "message": "啟用 CRSF 自訂遙測",
         "english": "Enable CRSF Custom Telemetry"
     },
-    "receiverCrsfTelemetryRate": {
+    "receiverTelemetryRate": {
         "message": "遙測速率",
         "english": "Telemetry Rate"
     },
-    "receiverCrsfTelemetryRatio": {
+    "receiverTelemetryRatio": {
         "message": "遙測比率",
         "english": "Telemetry Ratio"
     },
@@ -2365,371 +2365,371 @@
         "message": "電壓",
         "english": "Voltage"
     },
-    "receiverCrsfTelemetrySensor_HEARTBEAT": {
+    "receiverTelemetrySensor_HEARTBEAT": {
         "message": "心跳",
         "english": "Heartbeat"
     },
-    "receiverCrsfTelemetrySensor_BATTERY": {
+    "receiverTelemetrySensor_BATTERY": {
         "message": "Battery（電池）",
         "english": "Battery"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_VOLTAGE": {
+    "receiverTelemetrySensor_BATTERY_VOLTAGE": {
         "message": "Battery Voltage（電池電壓）",
         "english": "Battery Voltage"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CURRENT": {
+    "receiverTelemetrySensor_BATTERY_CURRENT": {
         "message": "Battery Current（電池電流）",
         "english": "Battery Current"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CONSUMPTION": {
+    "receiverTelemetrySensor_BATTERY_CONSUMPTION": {
         "message": "Battery Consumption（電池耗電量）",
         "english": "Battery Consumption"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CHARGE_LEVEL": {
+    "receiverTelemetrySensor_BATTERY_CHARGE_LEVEL": {
         "message": "Battery Charge Level（電池電量）",
         "english": "Battery Charge Level"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CELL_COUNT": {
+    "receiverTelemetrySensor_BATTERY_CELL_COUNT": {
         "message": "Battery Cell Count（電池芯數量）",
         "english": "Battery Cell Count"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGE": {
+    "receiverTelemetrySensor_BATTERY_CELL_VOLTAGE": {
         "message": "Battery Cell Voltage（電池單芯電壓）",
         "english": "Battery Cell Voltage"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGES": {
+    "receiverTelemetrySensor_BATTERY_CELL_VOLTAGES": {
         "message": "Battery Cell Voltages（電池每芯電壓）",
         "english": "Battery Cell Voltages"
     },
-    "receiverCrsfTelemetrySensor_CONTROL": {
+    "receiverTelemetrySensor_CONTROL": {
         "message": "Control (hi-res)（高解析度遙控器通道）",
         "english": "Control (hi-res)"
     },
-    "receiverCrsfTelemetrySensor_PITCH_CONTROL": {
+    "receiverTelemetrySensor_PITCH_CONTROL": {
         "message": "Pitch Control（俯仰通道）",
         "english": "Pitch Control"
     },
-    "receiverCrsfTelemetrySensor_ROLL_CONTROL": {
+    "receiverTelemetrySensor_ROLL_CONTROL": {
         "message": "Roll Control（橫滾通道）",
         "english": "Roll Control"
     },
-    "receiverCrsfTelemetrySensor_YAW_CONTROL": {
+    "receiverTelemetrySensor_YAW_CONTROL": {
         "message": "Yaw Control（航向通道）",
         "english": "Yaw Control"
     },
-    "receiverCrsfTelemetrySensor_COLLECTIVE_CONTROL": {
+    "receiverTelemetrySensor_COLLECTIVE_CONTROL": {
         "message": "Collective Control（集體螺距通道）",
         "english": "Collective Control"
     },
-    "receiverCrsfTelemetrySensor_THROTTLE_CONTROL": {
+    "receiverTelemetrySensor_THROTTLE_CONTROL": {
         "message": "Throttle Control（油門通道）",
         "english": "Throttle Control"
     },
-    "receiverCrsfTelemetrySensor_ESC_DATA": {
+    "receiverTelemetrySensor_ESC_DATA": {
         "message": "ESC Data（電變資料）",
         "english": "ESC Data"
     },
-    "receiverCrsfTelemetrySensor_ESC_VOLTAGE": {
+    "receiverTelemetrySensor_ESC_VOLTAGE": {
         "message": "ESC Voltage（電變電壓）",
         "english": "ESC Voltage"
     },
-    "receiverCrsfTelemetrySensor_ESC_CURRENT": {
+    "receiverTelemetrySensor_ESC_CURRENT": {
         "message": "ESC Current（電變電流）",
         "english": "ESC Current"
     },
-    "receiverCrsfTelemetrySensor_ESC_CAPACITY": {
+    "receiverTelemetrySensor_ESC_CAPACITY": {
         "message": "ESC Capacity（電變電量）",
         "english": "ESC Capacity"
     },
-    "receiverCrsfTelemetrySensor_ESC_ERPM": {
+    "receiverTelemetrySensor_ESC_ERPM": {
         "message": "ESC ERPM（電變電子轉速）",
         "english": "ESC ERPM"
     },
-    "receiverCrsfTelemetrySensor_ESC_POWER": {
+    "receiverTelemetrySensor_ESC_POWER": {
         "message": "ESC Power（電變即時油門輸出）",
         "english": "ESC Power"
     },
-    "receiverCrsfTelemetrySensor_ESC_THROTTLE": {
+    "receiverTelemetrySensor_ESC_THROTTLE": {
         "message": "ESC Throttle（電變油門）",
         "english": "ESC Throttle"
     },
-    "receiverCrsfTelemetrySensor_ESC_TEMP1": {
+    "receiverTelemetrySensor_ESC_TEMP1": {
         "message": "ESC Temp 1（電變溫度1）",
         "english": "ESC Temp 1"
     },
-    "receiverCrsfTelemetrySensor_ESC_TEMP2": {
+    "receiverTelemetrySensor_ESC_TEMP2": {
         "message": "ESC Temp 2（電變溫度2）",
         "english": "ESC Temp 2"
     },
-    "receiverCrsfTelemetrySensor_ESC_BEC_VOLTAGE": {
+    "receiverTelemetrySensor_ESC_BEC_VOLTAGE": {
         "message": "ESC BEC Voltage（電變 BEC 電壓）",
         "english": "ESC BEC Voltage"
     },
-    "receiverCrsfTelemetrySensor_ESC_BEC_CURRENT": {
+    "receiverTelemetrySensor_ESC_BEC_CURRENT": {
         "message": "ESC BEC Current（電變 BEC 電流）",
         "english": "ESC BEC Current"
     },
-    "receiverCrsfTelemetrySensor_ESC_STATUS": {
+    "receiverTelemetrySensor_ESC_STATUS": {
         "message": "ESC Status（電變狀態）",
         "english": "ESC Status"
     },
-    "receiverCrsfTelemetrySensor_ESC_MODEL": {
+    "receiverTelemetrySensor_ESC_MODEL": {
         "message": "ESC Model（電變型號）",
         "english": "ESC Model"
     },
-    "receiverCrsfTelemetrySensor_BEC_VOLTAGE": {
+    "receiverTelemetrySensor_BEC_VOLTAGE": {
         "message": "BEC Voltage（BEC 電壓）",
         "english": "BEC Voltage"
     },
-    "receiverCrsfTelemetrySensor_BUS_VOLTAGE": {
+    "receiverTelemetrySensor_BUS_VOLTAGE": {
         "message": "Bus Voltage（匯流排電壓）",
         "english": "Bus Voltage"
     },
-    "receiverCrsfTelemetrySensor_MCU_VOLTAGE": {
+    "receiverTelemetrySensor_MCU_VOLTAGE": {
         "message": "MCU Voltage（微控制器電壓）",
         "english": "MCU Voltage"
     },
-    "receiverCrsfTelemetrySensor_BEC_CURRENT": {
+    "receiverTelemetrySensor_BEC_CURRENT": {
         "message": "BEC Current（BEC 電流）",
         "english": "BEC Current"
     },
-    "receiverCrsfTelemetrySensor_BUS_CURRENT": {
+    "receiverTelemetrySensor_BUS_CURRENT": {
         "message": "Bus Current（匯流排電流）",
         "english": "Bus Current"
     },
-    "receiverCrsfTelemetrySensor_MCU_CURRENT": {
+    "receiverTelemetrySensor_MCU_CURRENT": {
         "message": "MCU Current（微控制器電流）",
         "english": "MCU Current"
     },
-    "receiverCrsfTelemetrySensor_ESC_TEMP": {
+    "receiverTelemetrySensor_ESC_TEMP": {
         "message": "ESC Temp（電變溫度）",
         "english": "ESC Temp"
     },
-    "receiverCrsfTelemetrySensor_BEC_TEMP": {
+    "receiverTelemetrySensor_BEC_TEMP": {
         "message": "BEC Temp（BEC 溫度）",
         "english": "BEC Temp"
     },
-    "receiverCrsfTelemetrySensor_MCU_TEMP": {
+    "receiverTelemetrySensor_MCU_TEMP": {
         "message": "MCU Temp（微控制器溫度）",
         "english": "MCU Temp"
     },
-    "receiverCrsfTelemetrySensor_AIR_TEMP": {
+    "receiverTelemetrySensor_AIR_TEMP": {
         "message": "Air Temp（氣溫）",
         "english": "Air Temp"
     },
-    "receiverCrsfTelemetrySensor_MOTOR_TEMP": {
+    "receiverTelemetrySensor_MOTOR_TEMP": {
         "message": "Motor Temp（馬達溫度）",
         "english": "Motor Temp"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_TEMP": {
+    "receiverTelemetrySensor_BATTERY_TEMP": {
         "message": "Battery Temp（電池溫度）",
         "english": "Battery Temp"
     },
-    "receiverCrsfTelemetrySensor_EXHAUST_TEMP": {
+    "receiverTelemetrySensor_EXHAUST_TEMP": {
         "message": "Exhaust Temp（排氣溫度）",
         "english": "Exhaust Temp"
     },
-    "receiverCrsfTelemetrySensor_HEADING": {
+    "receiverTelemetrySensor_HEADING": {
         "message": "Heading（航向）",
         "english": "Heading"
     },
-    "receiverCrsfTelemetrySensor_ALTITUDE": {
+    "receiverTelemetrySensor_ALTITUDE": {
         "message": "Altitude（高度）",
         "english": "Altitude"
     },
-    "receiverCrsfTelemetrySensor_VARIOMETER": {
+    "receiverTelemetrySensor_VARIOMETER": {
         "message": "Variometer（爬升率指示器）",
         "english": "Variometer"
     },
-    "receiverCrsfTelemetrySensor_HEADSPEED": {
+    "receiverTelemetrySensor_HEADSPEED": {
         "message": "Headspeed（主旋翼轉速）",
         "english": "Headspeed"
     },
-    "receiverCrsfTelemetrySensor_TAILSPEED": {
+    "receiverTelemetrySensor_TAILSPEED": {
         "message": "Tailspeed（尾旋翼轉速）",
         "english": "Tailspeed"
     },
-    "receiverCrsfTelemetrySensor_MOTOR_RPM": {
+    "receiverTelemetrySensor_MOTOR_RPM": {
         "message": "Motor RPM（馬達轉速）",
         "english": "Motor RPM"
     },
-    "receiverCrsfTelemetrySensor_TRANS_RPM": {
+    "receiverTelemetrySensor_TRANS_RPM": {
         "message": "Transmission RPM（傳動轉速）",
         "english": "Transmission RPM"
     },
-    "receiverCrsfTelemetrySensor_ATTITUDE": {
+    "receiverTelemetrySensor_ATTITUDE": {
         "message": "Attitude (hi-res)（高解析度姿態）",
         "english": "Attitude (hi-res)"
     },
-    "receiverCrsfTelemetrySensor_ATTITUDE_PITCH": {
+    "receiverTelemetrySensor_ATTITUDE_PITCH": {
         "message": "Attitude Pitch（俯仰姿態）",
         "english": "Attitude Pitch"
     },
-    "receiverCrsfTelemetrySensor_ATTITUDE_ROLL": {
+    "receiverTelemetrySensor_ATTITUDE_ROLL": {
         "message": "Attitude Roll（橫滾姿態）",
         "english": "Attitude Roll"
     },
-    "receiverCrsfTelemetrySensor_ATTITUDE_YAW": {
+    "receiverTelemetrySensor_ATTITUDE_YAW": {
         "message": "Attitude Yaw（航向姿態）",
         "english": "Attitude Yaw"
     },
-    "receiverCrsfTelemetrySensor_ACCEL": {
+    "receiverTelemetrySensor_ACCEL": {
         "message": "Accelerometer (hi-res)（高解析度加速度計）",
         "english": "Accelerometer (hi-res)"
     },
-    "receiverCrsfTelemetrySensor_ACCEL_X": {
+    "receiverTelemetrySensor_ACCEL_X": {
         "message": "Accelerometer X-axis（加速度計 X-軸）",
         "english": "Accelerometer X-axis"
     },
-    "receiverCrsfTelemetrySensor_ACCEL_Y": {
+    "receiverTelemetrySensor_ACCEL_Y": {
         "message": "Accelerometer Y-axis（加速度計 Y-軸）",
         "english": "Accelerometer Y-axis"
     },
-    "receiverCrsfTelemetrySensor_ACCEL_Z": {
+    "receiverTelemetrySensor_ACCEL_Z": {
         "message": "Accelerometer Z-axis（加速度計 Z-軸）",
         "english": "Accelerometer Z-axis"
     },
-    "receiverCrsfTelemetrySensor_GPS": {
+    "receiverTelemetrySensor_GPS": {
         "message": "GPS",
         "english": "GPS"
     },
-    "receiverCrsfTelemetrySensor_GPS_SATS": {
+    "receiverTelemetrySensor_GPS_SATS": {
         "message": "GPS Sats（GPS 衛星數）",
         "english": "GPS Sats"
     },
-    "receiverCrsfTelemetrySensor_GPS_PDOP": {
+    "receiverTelemetrySensor_GPS_PDOP": {
         "message": "GPS PDOP（GPS 位置精密值強弱度）",
         "english": "GPS PDOP"
     },
-    "receiverCrsfTelemetrySensor_GPS_HDOP": {
+    "receiverTelemetrySensor_GPS_HDOP": {
         "message": "GPS HDOP（GPS 水平座標精密值強弱度）",
         "english": "GPS HDOP"
     },
-    "receiverCrsfTelemetrySensor_GPS_VDOP": {
+    "receiverTelemetrySensor_GPS_VDOP": {
         "message": "GPS VDOP（GPS 垂直座標精密值強弱度）",
         "english": "GPS VDOP"
     },
-    "receiverCrsfTelemetrySensor_GPS_COORD": {
+    "receiverTelemetrySensor_GPS_COORD": {
         "message": "GPS Coord（GPS 座標）",
         "english": "GPS Coord"
     },
-    "receiverCrsfTelemetrySensor_GPS_ALTITUDE": {
+    "receiverTelemetrySensor_GPS_ALTITUDE": {
         "message": "GPS Altitude（GPS 高度）",
         "english": "GPS Altitude"
     },
-    "receiverCrsfTelemetrySensor_GPS_HEADING": {
+    "receiverTelemetrySensor_GPS_HEADING": {
         "message": "GPS Heading（GPS 航向）",
         "english": "GPS Heading"
     },
-    "receiverCrsfTelemetrySensor_GPS_GROUNDSPEED": {
+    "receiverTelemetrySensor_GPS_GROUNDSPEED": {
         "message": "GPS Groundspeed（GPS 地面速度）",
         "english": "GPS Groundspeed"
     },
-    "receiverCrsfTelemetrySensor_GPS_HOME_DISTANCE": {
+    "receiverTelemetrySensor_GPS_HOME_DISTANCE": {
         "message": "GPS Home Distance（GPS 起飛點距離）",
         "english": "GPS Home Distance"
     },
-    "receiverCrsfTelemetrySensor_GPS_HOME_DIRECTION": {
+    "receiverTelemetrySensor_GPS_HOME_DIRECTION": {
         "message": "GPS Home Direction（GPS 起飛點方向）",
         "english": "GPS Home Direction"
     },
-    "receiverCrsfTelemetrySensor_GPS_DATE_TIME": {
+    "receiverTelemetrySensor_GPS_DATE_TIME": {
         "message": "GPS Date Time（GPS 日期時間）",
         "english": "GPS Date Time"
     },
-    "receiverCrsfTelemetrySensor_LOAD": {
+    "receiverTelemetrySensor_LOAD": {
         "message": "Load（負載）",
         "english": "Load"
     },
-    "receiverCrsfTelemetrySensor_CPU_LOAD": {
+    "receiverTelemetrySensor_CPU_LOAD": {
         "message": "CPU Load（處理器負載）",
         "english": "CPU Load"
     },
-    "receiverCrsfTelemetrySensor_SYS_LOAD": {
+    "receiverTelemetrySensor_SYS_LOAD": {
         "message": "SYS Load（系統負載）",
         "english": "SYS Load"
     },
-    "receiverCrsfTelemetrySensor_RT_LOAD": {
+    "receiverTelemetrySensor_RT_LOAD": {
         "message": "RT Load（即時負載）",
         "english": "RT Load"
     },
-    "receiverCrsfTelemetrySensor_MODEL_ID": {
+    "receiverTelemetrySensor_MODEL_ID": {
         "message": "Model Id（模型 ID）",
         "english": "Model Id"
     },
-    "receiverCrsfTelemetrySensor_FLIGHT_MODE": {
+    "receiverTelemetrySensor_FLIGHT_MODE": {
         "message": "Flight Mode（飛行模式）",
         "english": "Flight Mode"
     },
-    "receiverCrsfTelemetrySensor_ARMING_FLAGS": {
+    "receiverTelemetrySensor_ARMING_FLAGS": {
         "message": "Arming Flags（解鎖旗標）",
         "english": "Arming Flags"
     },
-    "receiverCrsfTelemetrySensor_ARMING_DISABLE_FLAGS": {
+    "receiverTelemetrySensor_ARMING_DISABLE_FLAGS": {
         "message": "Arming Disable Flags（禁止解鎖旗標）",
         "english": "Arming Disable Flags"
     },
-    "receiverCrsfTelemetrySensor_RESCUE_STATE": {
+    "receiverTelemetrySensor_RESCUE_STATE": {
         "message": "Rescue State（救機狀態）",
         "english": "Rescue State"
     },
-    "receiverCrsfTelemetrySensor_GOVERNOR_STATE": {
+    "receiverTelemetrySensor_GOVERNOR_STATE": {
         "message": "Governor State（定速狀態）",
         "english": "Governor State"
     },
-    "receiverCrsfTelemetrySensor_GOVERNOR_FLAGS": {
+    "receiverTelemetrySensor_GOVERNOR_FLAGS": {
         "message": "Governor Flags（定速旗標）",
         "english": "Governor Flags"
     },
-    "receiverCrsfTelemetrySensor_PID_PROFILE": {
+    "receiverTelemetrySensor_PID_PROFILE": {
         "message": "PID Profile（PID 設定檔）",
         "english": "PID Profile"
     },
-    "receiverCrsfTelemetrySensor_RATES_PROFILE": {
+    "receiverTelemetrySensor_RATES_PROFILE": {
         "message": "Rates Profile（速率設定檔）",
         "english": "Rates Profile"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_PROFILE": {
+    "receiverTelemetrySensor_BATTERY_PROFILE": {
         "message": "Battery Profile（電池設定檔）",
         "english": "Battery Profile"
     },
-    "receiverCrsfTelemetrySensor_LED_PROFILE": {
+    "receiverTelemetrySensor_LED_PROFILE": {
         "message": "LED Profile（LED 設定檔）",
         "english": "LED Profile"
     },
-    "receiverCrsfTelemetrySensor_ADJFUNC": {
+    "receiverTelemetrySensor_ADJFUNC": {
         "message": "Adjustment Function（調整功能）",
         "english": "Adjustment Function"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_0": {
+    "receiverTelemetrySensor_DEBUG_0": {
         "message": "Debug 0（除錯 0）",
         "english": "Debug 0"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_1": {
+    "receiverTelemetrySensor_DEBUG_1": {
         "message": "Debug 1（除錯 1）",
         "english": "Debug 1"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_2": {
+    "receiverTelemetrySensor_DEBUG_2": {
         "message": "Debug 2（除錯 2）",
         "english": "Debug 2"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_3": {
+    "receiverTelemetrySensor_DEBUG_3": {
         "message": "Debug 3（除錯 3）",
         "english": "Debug 3"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_4": {
+    "receiverTelemetrySensor_DEBUG_4": {
         "message": "Debug 4（除錯 4）",
         "english": "Debug 4"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_5": {
+    "receiverTelemetrySensor_DEBUG_5": {
         "message": "Debug 5（除錯 5）",
         "english": "Debug 5"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_6": {
+    "receiverTelemetrySensor_DEBUG_6": {
         "message": "Debug 6（除錯 6）",
         "english": "Debug 6"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_7": {
+    "receiverTelemetrySensor_DEBUG_7": {
         "message": "Debug 7（除錯 7）",
         "english": "Debug 7"
     },
