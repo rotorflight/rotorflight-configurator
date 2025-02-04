@@ -204,6 +204,8 @@ tab.initialize = function (callback) {
         $('.tab-profiles input[id="yawFFCollectiveGain"]').val(FC.PID_PROFILE.yawFFCollectiveGain);
         $('.tab-profiles input[id="yawFFImpulseGain"]').val(FC.PID_PROFILE.yawFFImpulseGain);
         $('.tab-profiles input[id="yawFFImpulseDecay"]').val(FC.PID_PROFILE.yawFFImpulseDecay);
+        $('.tab-profiles input[id="yaw_inertia_precomp_gain"]').val(FC.PID_PROFILE.yaw_inertia_precomp_gain);
+        $('.tab-profiles input[id="yaw_inertia_precomp_cutoff"]').val(FC.PID_PROFILE.yaw_inertia_precomp_cutoff / 10);
 
         // Collective-to-Pitch
         $('.tab-profiles input[id="pitchFFCollectiveGain"]').val(FC.PID_PROFILE.pitchFFCollectiveGain);
@@ -360,6 +362,8 @@ tab.initialize = function (callback) {
         FC.PID_PROFILE.yawFFCollectiveGain = $('.tab-profiles input[id="yawFFCollectiveGain"]').val();
         FC.PID_PROFILE.yawFFImpulseGain = $('.tab-profiles input[id="yawFFImpulseGain"]').val();
         FC.PID_PROFILE.yawFFImpulseDecay = $('.tab-profiles input[id="yawFFImpulseDecay"]').val();
+        FC.PID_PROFILE.yaw_inertia_precomp_gain = $('.tab-profiles input[id="yaw_inertia_precomp_gain"]').val();
+        FC.PID_PROFILE.yaw_inertia_precomp_cutoff = $('.tab-profiles input[id="yaw_inertia_precomp_cutoff"]').val() * 10;
 
         // Collective-to-Pitch
         FC.PID_PROFILE.pitchFFCollectiveGain =  $('.tab-profiles input[id="pitchFFCollective"]').is(':checked') ?
@@ -585,6 +589,18 @@ tab.initialize = function (callback) {
             if(self.isGovActive) {
                 $('.tab-profiles tr.govMaxThrottle').addClass('border');
             }
+        }
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
+            $('.tab-profiles tr.yawFFImpulseGain').hide();
+            $('.tab-profiles tr.yawFFImpulseDecay').hide();
+            $('.tab-profiles tr.yaw_inertia_precomp_gain').show();
+            $('.tab-profiles tr.yaw_inertia_precomp_cutoff').show();
+        } else {
+            $('.tab-profiles tr.yawFFImpulseGain').show();
+            $('.tab-profiles tr.yawFFImpulseDecay').show();
+            $('.tab-profiles tr.yaw_inertia_precomp_gain').hide();
+            $('.tab-profiles tr.yaw_inertia_precomp_cutoff').hide();
         }
 
         function get_status() {

@@ -19,6 +19,12 @@
     "auto": {
         "message": "Auto"
     },
+    "genericEnable": {
+        "message": "Enable"
+    },
+    "genericDefault": {
+        "message": "Default"
+    },
     "axisROLL": {
         "message": "ROLL",
         "description": "Roll axis in capital letters"
@@ -2751,6 +2757,15 @@
     "mixerSwashPhaseHelp": {
         "message": "The phase offset for the swashplate controls."
     },
+    "mixerCollectiveTiltCorrectionPos": {
+        "message": "Positive Collective Tilt Correction"
+    },
+    "mixerCollectiveTiltCorrectionNeg": {
+        "message": "Negative Collective Tilt Correction"
+    },
+    "mixerCollectiveTiltCorrectionHelp": {
+        "message": "Corrects cyclic to collective swashplate interaction.<br /><br />At full positive and negative collective pitch, adjust the corresponding values until the swashplate pivot ball remains stationary when increasing cyclic input."
+    },
     "mixerSwashRollTrim": {
         "message": "Roll trim [%]"
     },
@@ -2857,10 +2872,16 @@
         "message": "<strong>Enable Mixer Override</strong>"
     },
     "mixerOverrideEnableSwitchText": {
-        "message": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
+        "message": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. If Passthrough is enabled, the positions are controlled by your TX. The override values are not saved, and will be reset in reboot."
+    },
+    "mixerPassthroughEnableSwitch": {
+        "message": "<strong>Enable Mixer Passthrough</strong>"
     },
     "mixerOverrideEnable": {
-        "message": "Enable"
+        "message": "Override"
+    },
+    "mixerPassthroughEnable": {
+        "message": "Passthrough"
     },
     "mixerOverrideValue": {
         "message": "Value"
@@ -4617,6 +4638,18 @@
     "profilesyawFFImpulseDecayHelp": {
         "message": "Decay time for collective impulse feedforward mixed into yaw"
     },
+    "profilesYawInertiaPrecompGain": {
+        "message": "Inertia Precomp Gain"
+    },
+    "profilesYawInertiaPrecompGainHelp": {
+        "message": "The strength of the main rotor's inertia. Larger values result in more precomp being applied to the yaw control."
+    },
+    "profilesYawInertiaPrecompCutoff": {
+        "message": "Inertia Precomp Cutoff"
+    },
+    "profilesYawInertiaPrecompCutoffHelp": {
+        "message": "Derivative cutoff frequency for inertia precomp. Larger values result in a sharper application of precomp."
+    },
     "profilesPitchFFCollective": {
         "message": "Collective to Pitch Compensation"
     },
@@ -4969,7 +5002,7 @@
         "message": "D Term Notch Filter Cutoff Frequency [Hz]"
     },
     "gyroRpmFilterSettings": {
-        "message": "Gyro RPM Notch Filter Settings"
+        "message": "RPM Filter"
     },
     "gyroRpmFilterSetup": {
         "message": "Setup Type"
@@ -4984,61 +5017,88 @@
         "message": "Custom"
     },
     "gyroRpmFilterConfigNote": {
-        "message": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable."
+        "message": "The <i>RPM Filter</i> requires a real-time RPM source, either from an RPM Sensor or Bidirectional DShot. ESC telemetry is not suitable."
     },
     "gyroRpmFilterCustomNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings."
+        "message": "Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings."
     },
-    "gyroRpmFilterVibrationLevel": {
-        "message": "Vibration Level"
+    "gyroRpmFilterPreset": {
+        "message": "Strength"
     },
-    "gyroRpmFilterVibrationLow": {
+    "gyroRpmFilterPresetHelp": {
+        "message": "Higher strength removes more vibrations, but introduces more delay."
+    },
+    "gyroRpmFilterPresetCustom": {
+        "message": "Custom"
+    },
+    "gyroRpmFilterPresetLow": {
         "message": "Low"
     },
-    "gyroRpmFilterVibrationMedium": {
+    "gyroRpmFilterPresetMedium": {
         "message": "Medium"
     },
-    "gyroRpmFilterVibrationHigh": {
+    "gyroRpmFilterPresetHigh": {
         "message": "High"
     },
+    "gyroRpmFilterMinFreq": {
+        "message": "Minimum Frequency"
+    },
+    "gyroRpmFilterMinFreqHelp": {
+        "message": "Set slightly below the frequency of the main rotor at the lowest flying RPM."
+    },
+    "gyroRpmFilterMinRPMGroup": {
+        "message": "Minimum RPM"
+    },
+    "gyroRpmFilterMinRPMGroupHelp": {
+        "message": "Set slightly below the lowest flying RPM."
+    },
     "gyroRpmFilterMainRotorMinRPM": {
-        "message": "Main Rotor Minimum Filtered RPM"
+        "message": "Main Rotor"
     },
     "gyroRpmFilterMainRotorMinRPMHelp": {
         "message": "Minimum Main Rotor RPM accepted by the filters"
     },
     "gyroRpmFilterTailRotorMinRPM": {
-        "message": "Tail Rotor Minimum Filtered RPM"
+        "message": "Tail Rotor"
     },
     "gyroRpmFilterTailRotorMinRPMHelp": {
         "message": "Minimum Tail Rotor RPM accepted by the filters"
     },
     "gyroRpmFilterBanks": {
-        "message": "Gyro RPM Notch Filter Banks"
+        "message": "RPM Filter Notches"
     },
     "gyroRpmFilterHelp": {
-        "message": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
+        "message": "Every rotating part on a helicopter generates vibrations, which can significantly affect the performance of the flight control loops. The <i>RPM Filter</i> utilizes the motor's RPM signal and the model's gear ratios to precisely eliminate these vibrations from the gyro's output, enabling the control loops to operate on the true motion of the aircraft. This method introduces substantially less delay than traditional vibration filtering, enhancing overall flight performance."
     },
     "gyroRpmFilterMainRotorGroup": {
-        "message": "Main Rotor Notch Filters"
+        "message": "Main Rotor"
     },
     "gyroRpmFilterMainRotorHelp": {
         "message": "RPM controlled filters for the main rotor harmonics"
     },
     "gyroRpmFilterTailRotorGroup": {
-        "message": "Tail Rotor Notch Filters"
+        "message": "Tail Rotor"
     },
     "gyroRpmFilterTailRotorHelp": {
         "message": "RPM controlled filters for the tail rotor harmonics"
     },
+    "gyroRpmFilterMotorGroup": {
+        "message": "Motors"
+    },
     "gyroRpmFilterMainMotorGroup": {
         "message": "Main Motor Notch Filters"
+    },
+    "gyroRpmFilterMainMotorQ": {
+        "message": "Main Motor Notch Q"
     },
     "gyroRpmFilterMainMotorHelp": {
         "message": "RPM controlled filters for the main motor harmonics"
     },
     "gyroRpmFilterTailMotorGroup": {
         "message": "Tail Motor Notch Filters"
+    },
+    "gyroRpmFilterTailMotorQ": {
+        "message": "Tail Motor Notch Q"
     },
     "gyroRpmFilterTailMotorHelp": {
         "message": "RPM controlled filters for the tail motor harmonics"
@@ -5078,6 +5138,21 @@
     },
     "gyroRpmFilterQ8": {
         "message": "8<sup>th</sup> Harmonic Notch Q"
+    },
+    "gyroRpmFilterNotchTypeSingle": {
+        "message": "SINGLE"
+    },
+    "gyroRpmFilterNotchTypeDouble": {
+        "message": "DOUBLE"
+    },
+    "gyroRpmFilterNotchTypeTriple": {
+        "message": "TRIPLE"
+    },
+    "gyroRpmFilterNotchCountWarn": {
+        "message": "A maximum of 16 notches can be enabled."
+    },
+    "gyroRpmFilterNotchResetBtn": {
+        "message": "Reset Custom Notches"
     },
     "dialogGyroResetTitle": {
         "message": "<span class=\"message-negative\">Warning:</span> RPM Filter Reset"
@@ -6912,6 +6987,18 @@
     },
     "blackboxDebugAxisHelp": {
         "message": "Choose which <i>axis</i> is being debugged. Applies to some of the debug modes."
+    },
+    "blackboxInitialErase": {
+        "message": "Initial erase"
+    },
+    "blackboxInitialEraseHelp": {
+        "message": "Ensures a minimum amount of free space when recording starts, erasing old logs if necessary. Set to 0 to disable this feature.<br><br><b>Note:</b> Logging starts after erasing completes. This may take a significant amount of time with some flash chips."
+    },
+    "blackboxRollingErase": {
+        "message": "Rolling erase"
+    },
+    "blackboxRollingEraseHelp": {
+        "message": "Overwrite old logs when the storage is full.<br><br><b>Note:</b> Logs may contain gaps if the flash chip is slow to erase."
     },
     "blackboxSerialLogger": {
         "message": "Outboard serial logging device"

@@ -586,6 +586,7 @@ html[data-theme=dark] .tab-blackbox .blackboxRate select,
 html[data-theme=dark] .tab-blackbox .blackboxMode select,
 html[data-theme=dark] .tab-blackbox .blackboxDebugMode select,
 html[data-theme=dark] .tab-blackbox .blackboxDebugAxis select,
+html[data-theme=dark] .tab-blackbox .blackboxInitialErase input,
 html[data-theme=dark] .tab-blackbox .blackboxDevice select {
     background-color: #3a3a3a;
     color: white;
