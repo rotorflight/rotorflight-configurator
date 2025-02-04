@@ -1411,6 +1411,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                     FC.BLACKBOX.blackboxInitialEraseKiB = data.readU16();
                     FC.BLACKBOX.blackboxRollingErase = data.readU8();
+                    FC.BLACKBOX.blackboxGracefulPeriod = data.readU8();
                 }
                 break;
             }
@@ -2157,7 +2158,8 @@ MspHelper.prototype.crunch = function(code) {
                 .push32(FC.BLACKBOX.blackboxFields);
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                 buffer.push16(FC.BLACKBOX.blackboxInitialEraseKiB)
-                    .push8(FC.BLACKBOX.blackboxRollingErase);
+                    .push8(FC.BLACKBOX.blackboxRollingErase)
+                    .push8(FC.BLACKBOX.blackboxGracefulPeriod);
             }
             break;
         }

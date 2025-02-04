@@ -6973,6 +6973,12 @@
     "blackboxRateCustom": {
         "message": "Custom"
     },
+    "blackboxGracefulPeriod": {
+        "message": "Logging graceful period"
+    },
+    "blackboxGracefulPeriodHelp": {
+        "message": "Keep logging for a few extra seconds after disarming to capture crash data."
+    },
     "blackboxDebugMode": {
         "message": "Debug mode"
     },
