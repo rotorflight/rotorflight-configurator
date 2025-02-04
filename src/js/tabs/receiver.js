@@ -105,7 +105,8 @@ const tab = {
         { name: 'Graupner SUMD',        id: 3,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Graupner SUMH',        id: 4,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Flysky IBUS',          id: 7,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
-        { name: 'JR XBUS',              id: 5,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'JR XBUS Mode A',       id: 18,  feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
+        { name: 'JR XBUS Mode B',       id: 5,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'JR XBUS/RJ01',         id: 6,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'Jeti EXBUS',           id: 8,   feature: 'RX_SERIAL',    telemetry: 0,           visible: true, },
         { name: 'CPPM',                 id: 0,   feature: 'RX_PPM',       telemetry: 0,           visible: true, },
@@ -481,7 +482,9 @@ const tab = {
 tab.initialize = function (callback) {
     const self = this;
 
-    if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+    if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
+        this.rxProtocols.find((x) => x.name === 'JR XBUS Mode A').visible = false;
+    } else if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
         this.telemetryProtoSensors.find((x) => x.name === 'FrSky S.Port').sensors = 0x007FFFFF;
         this.rxProtocols.find((x) => x.name === 'FrSky F.PORT').telemetry = 0x007FFFFF;
 
