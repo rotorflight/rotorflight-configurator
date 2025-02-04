@@ -279,51 +279,42 @@ function onOpen(openInfo) {
         MSP.listen(globalThis.mspHelper.process_data.bind(globalThis.mspHelper));
         console.log(`Requesting configuration data`);
 
+        // Gather version data and validate to ensure compatibility
         MSP.send_message(MSPCodes.MSP_API_VERSION, false, false, function () {
             GUI.log(i18n.getMessage('apiVersionReceived', [FC.CONFIG.apiVersion]));
 
-            if (semver.gte(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MIN_SUPPORTED) &&
-                semver.lte(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MAX_SUPPORTED)) {
-                MSP.send_message(MSPCodes.MSP_FC_VARIANT, false, false, function () {
-                    if (FC.CONFIG.flightControllerIdentifier === 'RTFL') {
-                        MSP.send_message(MSPCodes.MSP_FC_VERSION, false, false, function () {
-                            MSP.send_message(MSPCodes.MSP_BUILD_INFO, false, false, function () {
-                                GUI.log(i18n.getMessage('firmwareInfoReceived', [FC.CONFIG.flightControllerIdentifier, FC.CONFIG.buildVersion]));
-                                GUI.log(i18n.getMessage('buildInfoReceived', [FC.CONFIG.buildRevision, FC.CONFIG.buildInfo]));
-                                if (semver.gte(FC.CONFIG.buildVersion, CONFIGURATOR.FW_VERSION_MIN_SUPPORTED) &&
-                                    semver.lte(FC.CONFIG.buildVersion, CONFIGURATOR.FW_VERSION_MAX_SUPPORTED)) {
-                                        MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, processBoardInfo);
-                                }
-                                else {
-                                    const dialog = $('.dialogConnectWarning')[0];
-                                    $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareVersionNotSupported', [CONFIGURATOR.API_VERSION_ACCEPTED, CONFIGURATOR.FW_VERSION_MIN_SUPPORTED, CONFIGURATOR.FW_VERSION_MAX_SUPPORTED]));
-                                    $('.dialogConnectWarning-closebtn').click(function() {
-                                        dialog.close();
-                                    });
-                                    dialog.showModal();
+            const { API_VERSION_MIN_SUPPORTED, API_VERSION_MAX_SUPPORTED, FW_VERSION_MIN_SUPPORTED, FW_VERSION_MAX_SUPPORTED, API_VERSION_ACCEPTED } = CONFIGURATOR;
+            const { apiVersion } = FC.CONFIG;
+            
+            if (!semver.valid(apiVersion)) {
+                showConnectWarningDialogAndDisconnect('apiVersionInvalid', apiVersion);
+            } else if (!semver.gte(apiVersion, API_VERSION_MIN_SUPPORTED) || !semver.lte(apiVersion, API_VERSION_MAX_SUPPORTED)) {
+                showConnectWarningDialog('firmwareVersionNotSupported', API_VERSION_ACCEPTED, FW_VERSION_MIN_SUPPORTED, FW_VERSION_MAX_SUPPORTED);
+                connectCli();
+            } else {
+                MSP.send_message(MSPCodes.MSP_FC_VARIANT, false, false, () => {
+                    const { flightControllerIdentifier } = FC.CONFIG;
+                    if (flightControllerIdentifier === 'RTFL') {
+                        MSP.send_message(MSPCodes.MSP_FC_VERSION, false, false, () => {
+                            MSP.send_message(MSPCodes.MSP_BUILD_INFO, false, false, () => {
+                                const { buildVersion, buildRevision, buildInfo } = FC.CONFIG;
+                                GUI.log(i18n.getMessage('firmwareInfoReceived', [flightControllerIdentifier, buildVersion]));
+                                GUI.log(i18n.getMessage('buildInfoReceived', [buildRevision, buildInfo]));
+                                if (!semver.valid(buildVersion)) {
+                                    showConnectWarningDialogAndDisconnect('firmwareVersionInvalid', buildVersion);
+                                } else if (!semver.gte(buildVersion, FW_VERSION_MIN_SUPPORTED) || !semver.lte(buildVersion, FW_VERSION_MAX_SUPPORTED)) {
+                                    showConnectWarningDialog('firmwareVersionNotSupported', API_VERSION_ACCEPTED, FW_VERSION_MIN_SUPPORTED, FW_VERSION_MAX_SUPPORTED);
                                     connectCli();
+                                } else {
+                                    MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, processBoardInfo);
                                 }
                             });
                         });
                     } else {
-                        const dialog = $('.dialogConnectWarning')[0];
-                        $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareTypeNotSupported'));
-                        $('.dialogConnectWarning-closebtn').click(function() {
-                            dialog.close();
-                        });
-                        dialog.showModal();
+                        showConnectWarningDialog('firmwareTypeNotSupported');
                         connectCli();
                     }
                 });
-            }
-            else {
-                const dialog = $('.dialogConnectWarning')[0];
-                $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareVersionNotSupported', [CONFIGURATOR.API_VERSION_ACCEPTED, CONFIGURATOR.FW_VERSION_MIN_SUPPORTED, CONFIGURATOR.FW_VERSION_MAX_SUPPORTED]));
-                $('.dialogConnectWarning-closebtn').click(function() {
-                    dialog.close();
-                });
-                dialog.showModal();
-                connectCli();
             }
         });
     }
@@ -332,6 +323,20 @@ function onOpen(openInfo) {
         console.log('Failed to open serial port');
         abortConnect();
     }
+}
+
+function showConnectWarningDialogAndDisconnect(messageKey, ...params) {
+    showConnectWarningDialog(messageKey, ...params);
+    $('div.connect_controls a.connect').trigger("click"); // trigger disconnect
+}
+
+function showConnectWarningDialog(messageKey, ...params) {
+    let msg = i18n.getMessage(messageKey, params);
+    GUI.log(msg);
+    const dialog = $('.dialogConnectWarning')[0];
+    $('.dialogConnectWarning-content').html(msg);
+    $('.dialogConnectWarning-closebtn').on("click", function() { dialog.close(); });
+    dialog.showModal();
 }
 
 function onOpenVirtual() {
