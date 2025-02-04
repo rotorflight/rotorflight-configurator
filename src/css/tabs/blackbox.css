@@ -260,6 +260,7 @@
 
 .tab-blackbox .blackboxRate select,
 .tab-blackbox .blackboxMode select,
+.tab-blackbox .blackboxGracefulPeriod input,
 .tab-blackbox .blackboxDebugMode .select2,
 .tab-blackbox .blackboxDebugAxis select,
 .tab-blackbox .blackboxInitialErase input,
@@ -278,6 +279,7 @@
     border: 0px;
 }
 
+.tab-blackbox .blackboxGracefulPeriod input,
 .tab-blackbox .blackboxInitialErase input {
     text-align: right;
 }
@@ -302,6 +304,7 @@
 .tab-blackbox .blackboxMode span,
 .tab-blackbox .blackboxDebugMode span,
 .tab-blackbox .blackboxDebugAxis span,
+.tab-blackbox .blackboxGracefulPeriod span,
 .tab-blackbox .blackboxInitialErase span,
 .tab-blackbox .blackboxRollingErase span:nth-of-type(2),
 .tab-blackbox .blackboxDevice span {
@@ -371,6 +374,7 @@
 @media all and (max-width: 575px) {
     .tab-blackbox .blackboxRate select,
     .tab-blackbox .blackboxMode select,
+    .tab-blackbox .blackboxGracefulPeriod input,
     .tab-blackbox .blackboxDebugMode .select2,
     .tab-blackbox .blackboxDebugAxis select,
     .tab-blackbox .blackboxInitialErase input,
