@@ -246,7 +246,7 @@ function resetConnectionTimeout() {
     GUI.timeout_remove('connecting');
 }
 
-function onOpen(openInfo) {
+async function onOpen(openInfo) {
     if (openInfo) {
         CONFIGURATOR.virtualMode = false;
 
@@ -279,45 +279,44 @@ function onOpen(openInfo) {
         console.log(`Requesting configuration data`);
 
         // Gather version data and validate to ensure compatibility
-        MSP.promise(MSPCodes.MSP_API_VERSION, false).then(() => {
+        try {
+            await MSP.promise(MSPCodes.MSP_API_VERSION, false);
             const { API_VERSION_MIN_SUPPORTED, API_VERSION_MAX_SUPPORTED } = CONFIGURATOR;
             const { apiVersion } = FC.CONFIG;
 
             GUI.log(i18n.getMessage('apiVersionReceived', [apiVersion]));
-            
+
             if (!semver.valid(apiVersion)) {
-                return showConnectWarningDialogAndDisconnect('apiVersionInvalid', apiVersion);
+                throw showConnectWarningDialogAndDisconnect('apiVersionInvalid', apiVersion);
             } else if (!semver.gte(apiVersion, API_VERSION_MIN_SUPPORTED) || !semver.lte(apiVersion, API_VERSION_MAX_SUPPORTED)) {
-                return showConnectWarningDialogAndConnectCli('firmwareVersionNotSupported');
+                throw showConnectWarningDialogAndConnectCli('firmwareVersionNotSupported');
             }
-            return MSP.promise(MSPCodes.MSP_FC_VARIANT, false);
-        })
-        .then(() => {
+            await MSP.promise(MSPCodes.MSP_FC_VARIANT, false);
+
             const { flightControllerIdentifier } = FC.CONFIG;
             if (flightControllerIdentifier !== 'RTFL') {
-                return showConnectWarningDialogAndConnectCli('firmwareTypeNotSupported');
+                throw showConnectWarningDialogAndConnectCli('firmwareTypeNotSupported');
             }
-            return MSP.promise(MSPCodes.MSP_FC_VERSION, false);
-        })
-        .then(() => MSP.promise(MSPCodes.MSP_BUILD_INFO, false))
-        .then(() => {
-                const { FW_VERSION_MIN_SUPPORTED, FW_VERSION_MAX_SUPPORTED } = CONFIGURATOR;
-                const { buildVersion, buildRevision, buildInfo, flightControllerIdentifier } = FC.CONFIG;
+            await MSP.promise(MSPCodes.MSP_FC_VERSION, false);
 
-                GUI.log(i18n.getMessage('firmwareInfoReceived', [flightControllerIdentifier, buildVersion]));
-                GUI.log(i18n.getMessage('buildInfoReceived', [buildRevision, buildInfo]));
-                if (!semver.valid(buildVersion)) {
-                    return showConnectWarningDialogAndDisconnect('firmwareVersionInvalid', buildVersion);
-                } else if (!semver.gte(buildVersion, FW_VERSION_MIN_SUPPORTED) || !semver.lte(buildVersion, FW_VERSION_MAX_SUPPORTED)) {
-                    return showConnectWarningDialogAndConnectCli('firmwareVersionNotSupported');
-                }
-                return MSP.promise(MSPCodes.MSP_BOARD_INFO, false);
-        })
-        .then(processBoardInfo)
-        .catch((error) => {
+            await MSP.promise(MSPCodes.MSP_BUILD_INFO, false);
+            const { FW_VERSION_MIN_SUPPORTED, FW_VERSION_MAX_SUPPORTED } = CONFIGURATOR;
+            const { buildVersion, buildRevision, buildInfo } = FC.CONFIG;
+
+            GUI.log(i18n.getMessage('firmwareInfoReceived', [flightControllerIdentifier, buildVersion]));
+            GUI.log(i18n.getMessage('buildInfoReceived', [buildRevision, buildInfo]));
+            if (!semver.valid(buildVersion)) {
+                throw showConnectWarningDialogAndDisconnect('firmwareVersionInvalid', buildVersion);
+            } else if (!semver.gte(buildVersion, FW_VERSION_MIN_SUPPORTED) || !semver.lte(buildVersion, FW_VERSION_MAX_SUPPORTED)) {
+                throw showConnectWarningDialogAndConnectCli('firmwareVersionNotSupported');
+            }
+
+            await MSP.promise(MSPCodes.MSP_BOARD_INFO, false);
+            await processBoardInfo();
+        } catch (error) {
             console.error("Error during connection:", error);
             GUI.log(error);
-        });
+        }
     }
     else {
         GUI.log(i18n.getMessage('serialPortOpenFail'));
@@ -329,13 +328,13 @@ function onOpen(openInfo) {
 function showConnectWarningDialogAndConnectCli(messageKey, ...params) {
     const msg = showConnectWarningDialog(messageKey, params);
     connectCli();
-    return Promise.reject(msg);
+    return msg;
 }
 
 function showConnectWarningDialogAndDisconnect(messageKey, ...params) {
     const msg = showConnectWarningDialog(messageKey, params);
     $('div.connect_controls a.connect').trigger("click"); // trigger disconnect
-    return Promise.reject(msg);
+    return msg;
 }
 
 function showConnectWarningDialog(messageKey, ...params) {
