@@ -76,6 +76,8 @@
 
 .tab-adjustments .adjustmentBody .adjTypeOption {
     padding: 3px 0;
+    display: flex;
+    align-items: center;
 }
 
 .tab-adjustments .adjustmentBody .adjTypeOptonInput {
@@ -84,8 +86,6 @@
 }
 
 .tab-adjustments .adjustmentBody .adjTypeOptionLabel {
-    vertical-align: middle;
-    display: inline-block;
     padding: 0 5px;
 }
 
