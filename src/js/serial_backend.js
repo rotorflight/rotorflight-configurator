@@ -382,34 +382,31 @@ function processBoardInfo() {
         bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.HAS_CUSTOM_DEFAULTS)) {
         const dialog = $('#dialogResetToCustomDefaults')[0];
 
-        $('#dialogResetToCustomDefaults-acceptbtn').off("click").on("click", () => {
-            return MSP.promise(MSPCodes.MSP_RESET_CONF, [globalThis.mspHelper.RESET_TYPES.CUSTOM_DEFAULTS])
-                .finally(() => {
-                    $('#dialogResetToCustomDefaults-acceptbtn').off("click");
-                    $('#dialogResetToCustomDefaults-cancelbtn').off("click");
-                    dialog.close();
-                    GUI.timeout_add('disconnect', function () {
-                        $('div.connect_controls a.connect').trigger("click");
-                    }, 0);
-                });
+        $('#dialogResetToCustomDefaults-acceptbtn').off("click").on("click", async () => {
+            $('#dialogResetToCustomDefaults-acceptbtn').off("click");
+            $('#dialogResetToCustomDefaults-cancelbtn').off("click");
+            dialog.close();
+            await MSP.promise(MSPCodes.MSP_RESET_CONF, [globalThis.mspHelper.RESET_TYPES.CUSTOM_DEFAULTS]);
+            GUI.timeout_add('disconnect', function () {
+                $('div.connect_controls a.connect').trigger("click");
+            }, 0);
         });
 
-        return new Promise((resolve) => {
-            $('#dialogResetToCustomDefaults-cancelbtn').off("click").on("click", () => {
-                $('#dialogResetToCustomDefaults-acceptbtn').off("click");
-                $('#dialogResetToCustomDefaults-cancelbtn').off("click");
-                dialog.close();
-                setConnectionTimeout();
-                resolve();
-            });
-            resetConnectionTimeout();
-            dialog.showModal();
-        }).then(() => checkReportProblems()); // Only call `checkReportProblems` in the promise chain if cancel is selected.
+        $('#dialogResetToCustomDefaults-cancelbtn').off("click").on("click", () => {
+            $('#dialogResetToCustomDefaults-acceptbtn').off("click");
+            $('#dialogResetToCustomDefaults-cancelbtn').off("click");
+            dialog.close();
+            setConnectionTimeout();
+            checkReportProblems();
+        });
+        resetConnectionTimeout();
+        dialog.showModal();
+        return;
     }
-    return checkReportProblems();
+    checkReportProblems();
 }
 
-function checkReportProblems() {
+async function checkReportProblems() {
     const problemItemTemplate = $('#dialogReportProblems-listItemTemplate');
 
     function checkReportProblem(problemName, problemDialogList) {
@@ -420,71 +417,65 @@ function checkReportProblems() {
         return false;
     }
 
-    return MSP.promise(MSPCodes.MSP_STATUS, false)
-        .then(() => {
-            let needsProblemReportingDialog = false;
-            const problemDialogList = $('#dialogReportProblems-list');
-            problemDialogList.empty();
+    await MSP.promise(MSPCodes.MSP_STATUS, false);
 
-            if (semver.gt(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MAX_SUPPORTED)) {
-                const problemName = 'API_VERSION_MAX_SUPPORTED';
-                problemItemTemplate.clone().html(i18n.getMessage(`reportProblemsDialog${problemName}`,
-                    [CONFIGURATOR.latestVersion, CONFIGURATOR.latestVersionReleaseUrl, CONFIGURATOR.version, FC.CONFIG.buildVersion])).appendTo(problemDialogList);
-                needsProblemReportingDialog = true;
-            }
+    let needsProblemReportingDialog = false;
+    const problemDialogList = $('#dialogReportProblems-list');
+    problemDialogList.empty();
 
-            if (FC.CONFIG.configurationState == FC.CONFIGURATION_STATES.DEFAULTS_BARE &&
-                bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.SUPPORTS_CUSTOM_DEFAULTS) &&
-                !bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.HAS_CUSTOM_DEFAULTS)) {
-                const problemName = 'UNIFIED_FIRMWARE_WITHOUT_DEFAULTS';
-                problemItemTemplate.clone().html(i18n.getMessage(`reportProblemsDialog${problemName}`)).appendTo(problemDialogList);
-                needsProblemReportingDialog = true;
-            }
+    if (semver.gt(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MAX_SUPPORTED)) {
+        const problemName = 'API_VERSION_MAX_SUPPORTED';
+        problemItemTemplate.clone().html(i18n.getMessage(`reportProblemsDialog${problemName}`,
+            [CONFIGURATOR.latestVersion, CONFIGURATOR.latestVersionReleaseUrl, CONFIGURATOR.version, FC.CONFIG.buildVersion])).appendTo(problemDialogList);
+        needsProblemReportingDialog = true;
+    }
 
-            //needsProblemReportingDialog = checkReportProblem('MOTOR_PROTOCOL_DISABLED', problemDialogList) || needsProblemReportingDialog;
+    if (FC.CONFIG.configurationState == FC.CONFIGURATION_STATES.DEFAULTS_BARE &&
+        bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.SUPPORTS_CUSTOM_DEFAULTS) &&
+        !bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.HAS_CUSTOM_DEFAULTS)) {
+        const problemName = 'UNIFIED_FIRMWARE_WITHOUT_DEFAULTS';
+        problemItemTemplate.clone().html(i18n.getMessage(`reportProblemsDialog${problemName}`)).appendTo(problemDialogList);
+        needsProblemReportingDialog = true;
+    }
 
-            if (have_sensor(FC.CONFIG.activeSensors, 'acc')) {
-                needsProblemReportingDialog = checkReportProblem('ACC_NEEDS_CALIBRATION', problemDialogList) || needsProblemReportingDialog;
-            }
+    //needsProblemReportingDialog = checkReportProblem('MOTOR_PROTOCOL_DISABLED', problemDialogList) || needsProblemReportingDialog;
 
-            if (needsProblemReportingDialog) {
-                const problemDialog = $('#dialogReportProblems')[0];
-                $('#dialogReportProblems-closebtn').off("click").on("click", () => {
-                    $('#dialogReportProblems-closebtn').off("click");
-                    problemDialog.close();
-                });
-                problemDialog.showModal();
-                $('#dialogReportProblems').scrollTop(0);
-                $('#dialogReportProblems-closebtn').trigger("focus");
-            }
+    if (have_sensor(FC.CONFIG.activeSensors, 'acc')) {
+        needsProblemReportingDialog = checkReportProblem('ACC_NEEDS_CALIBRATION', problemDialogList) || needsProblemReportingDialog;
+    }
 
-            return processUid();
+    if (needsProblemReportingDialog) {
+        const problemDialog = $('#dialogReportProblems')[0];
+        $('#dialogReportProblems-closebtn').off("click").on("click", () => {
+            $('#dialogReportProblems-closebtn').off("click");
+            problemDialog.close();
         });
+        problemDialog.showModal();
+        $('#dialogReportProblems').scrollTop(0);
+        $('#dialogReportProblems-closebtn').trigger("focus");
+    }
+
+    processUid();
 }
 
-function processUid() {
-    return MSP.promise(MSPCodes.MSP_UID, false)
-        .then(() => {
-            const UID = FC.CONFIG.uid[0].toString(16) + FC.CONFIG.uid[1].toString(16) + FC.CONFIG.uid[2].toString(16);
-            GUI.log(i18n.getMessage('uniqueDeviceIdReceived', [UID]));
-            return processName();
-        });
+async function processUid() {
+    await MSP.promise(MSPCodes.MSP_UID, false);
+
+    const UID = FC.CONFIG.uid[0].toString(16) + FC.CONFIG.uid[1].toString(16) + FC.CONFIG.uid[2].toString(16);
+    GUI.log(i18n.getMessage('uniqueDeviceIdReceived', [UID]));
+    processName();
 }
 
-function processName() {
-    return MSP.promise(MSPCodes.MSP_NAME, false)
-        .then(() => {
-            GUI.log(i18n.getMessage('craftNameReceived', [FC.CONFIG.name]));
-            return setRtc();
-        });
+async function processName() {
+    await MSP.promise(MSPCodes.MSP_NAME, false);
+    GUI.log(i18n.getMessage('craftNameReceived', [FC.CONFIG.name]));
+    setRtc();
 }
 
-function setRtc() {
-    return MSP.promise(MSPCodes.MSP_SET_RTC, globalThis.mspHelper.crunch(MSPCodes.MSP_SET_RTC))
-        .then(() => {
-            GUI.log(i18n.getMessage('realTimeClockSet'));
-            return finishOpen();
-        });
+async function setRtc() {
+    await MSP.promise(MSPCodes.MSP_SET_RTC, globalThis.mspHelper.crunch(MSPCodes.MSP_SET_RTC));
+    GUI.log(i18n.getMessage('realTimeClockSet'));
+    finishOpen();
 }
 
 function finishOpen() {
