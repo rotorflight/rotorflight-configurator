@@ -312,7 +312,7 @@ async function onOpen(openInfo) {
             }
 
             await MSP.promise(MSPCodes.MSP_BOARD_INFO, false);
-            await processBoardInfo();
+            processBoardInfo();
         } catch (error) {
             console.error("Error during connection:", error);
             GUI.log(error);
