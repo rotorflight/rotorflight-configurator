@@ -35,6 +35,7 @@ const tab = {
         "OpenYGE",
         "FLYROTOR",
         "Graupner",
+        "XDFLY",
     ],
     govModes: [
         "OFF",
