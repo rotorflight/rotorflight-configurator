@@ -27,10 +27,11 @@
       {
         "name": "map",
         "accessible_resources": [
-          "tabs/map.html",
-          "js/tabs/map.js",
-          "/js/libraries/openlayers/ol.css",
-          "/js/libraries/openlayers/ol.js",
+          "/src/tabs/map.html",
+          "/assets/src/tabs/map.html.js",
+          "/assets/modulepreload-polyfill.js",
+          "/libraries/openlayers/ol.css",
+          "/libraries/openlayers/ol.js",
           "/images/icons/cf_icon_position.png",
           "/images/icons/cf_icon_position_nofix.png"
         ]
