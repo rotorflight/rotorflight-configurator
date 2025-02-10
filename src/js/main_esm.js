@@ -87,13 +87,15 @@ if (__BACKEND__ === "nwjs") {
 }
 
 if (__BACKEND__ === "cordova") {
-  const chromeapi = await import("@/js/cordova_chromeapi.js");
-  const startup = await import("@/js/cordova_startup.js");
-  Object.assign(globalThis, {
-    ...chromeapi,
-    ...startup,
-  });
+  (async () => {
+    const chromeapi = await import("@/js/cordova_chromeapi.js");
+    const startup = await import("@/js/cordova_startup.js");
+    Object.assign(globalThis, {
+      ...chromeapi,
+      ...startup,
+    });
 
-  Clipboard._configureClipboardAsCordova();
-  cordovaApp.initialize();
+    Clipboard._configureClipboardAsCordova();
+    cordovaApp.initialize();
+  })();
 }
