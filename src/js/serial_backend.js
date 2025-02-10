@@ -27,7 +27,7 @@ export function initializeSerialBackend() {
 
     GUI.updateManualPortVisibility();
 
-    $('#port-override').change(function () {
+    $('#port-override').on("change", function() {
         ConfigStorage.set({'portOverride': $('#port-override').val()});
     });
 
@@ -35,11 +35,11 @@ export function initializeSerialBackend() {
         $('#port-override').val(data.portOverride);
     });
 
-    $('div#port-picker #port').change(function () {
+    $('div#port-picker #port').on("change", function() {
         GUI.updateManualPortVisibility();
     });
 
-    $('div.connect_controls a.connect').click(function () {
+    $('div.connect_controls a.connect').on("click", function() {
         if (GUI.connect_lock != true) { // GUI control overrides the user control
 
             const thisElement = $(this);
@@ -80,7 +80,6 @@ export function initializeSerialBackend() {
                     } else {
                         serial.connect(portName, {bitrate: selected_baud}, onOpen);
                     }
-
                     toggleStatus();
                 } else {
                     if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
@@ -102,13 +101,13 @@ export function initializeSerialBackend() {
        }
     });
 
-    $('div.open_firmware_flasher a.flash').click(function () {
+    $('div.open_firmware_flasher a.flash').on("click", function() {
         if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
             $('div#flashbutton a.flash_state').removeClass('active');
             $('div#flashbutton a.flash').removeClass('active');
-            $('#tabs ul.mode-disconnected .tab_landing a').click();
+            $('#tabs ul.mode-disconnected .tab_landing a').trigger("click");
         } else {
-            $('#tabs ul.mode-disconnected .tab_firmware_flasher a').click();
+            $('#tabs ul.mode-disconnected .tab_firmware_flasher a').trigger("click");
             $('div#flashbutton a.flash_state').addClass('active');
             $('div#flashbutton a.flash').addClass('active');
         }
@@ -210,7 +209,7 @@ function finishClose(finishedCallback) {
     GUI.allowedTabs = GUI.defaultAllowedTabsWhenDisconnected.slice();
 
     // close problems dialog
-    $('#dialogReportProblems-closebtn').click();
+    $('#dialogReportProblems-closebtn').trigger("click");
 
     // unlock port select & baud
     $('div#port-picker #port').prop('disabled', false);
@@ -228,7 +227,7 @@ function finishClose(finishedCallback) {
         $('#content').empty();
     }
 
-    $('#tabs .tab_landing a').click();
+    $('#tabs .tab_landing a').trigger("click");
 
     finishedCallback();
 }
@@ -238,7 +237,7 @@ function setConnectionTimeout() {
     GUI.timeout_add('connecting', function () {
         if (!CONFIGURATOR.connectionValid) {
             GUI.log(i18n.getMessage('noConfigurationReceived'));
-            $('div.connect_controls a.connect').click(); // disconnect
+            $('div.connect_controls a.connect').trigger("click"); // disconnect
         }
     }, 10000);
 }
@@ -247,7 +246,7 @@ function resetConnectionTimeout() {
     GUI.timeout_remove('connecting');
 }
 
-function onOpen(openInfo) {
+async function onOpen(openInfo) {
     if (openInfo) {
         CONFIGURATOR.virtualMode = false;
 
@@ -279,59 +278,72 @@ function onOpen(openInfo) {
         MSP.listen(globalThis.mspHelper.process_data.bind(globalThis.mspHelper));
         console.log(`Requesting configuration data`);
 
-        MSP.send_message(MSPCodes.MSP_API_VERSION, false, false, function () {
-            GUI.log(i18n.getMessage('apiVersionReceived', [FC.CONFIG.apiVersion]));
+        // Gather version data and validate to ensure compatibility
+        try {
+            await MSP.promise(MSPCodes.MSP_API_VERSION, false);
+            const { API_VERSION_MIN_SUPPORTED, API_VERSION_MAX_SUPPORTED } = CONFIGURATOR;
+            const { apiVersion } = FC.CONFIG;
 
-            if (semver.gte(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MIN_SUPPORTED) &&
-                semver.lte(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MAX_SUPPORTED)) {
-                MSP.send_message(MSPCodes.MSP_FC_VARIANT, false, false, function () {
-                    if (FC.CONFIG.flightControllerIdentifier === 'RTFL') {
-                        MSP.send_message(MSPCodes.MSP_FC_VERSION, false, false, function () {
-                            MSP.send_message(MSPCodes.MSP_BUILD_INFO, false, false, function () {
-                                GUI.log(i18n.getMessage('firmwareInfoReceived', [FC.CONFIG.flightControllerIdentifier, FC.CONFIG.buildVersion]));
-                                GUI.log(i18n.getMessage('buildInfoReceived', [FC.CONFIG.buildRevision, FC.CONFIG.buildInfo]));
-                                if (semver.gte(FC.CONFIG.buildVersion, CONFIGURATOR.FW_VERSION_MIN_SUPPORTED) &&
-                                    semver.lte(FC.CONFIG.buildVersion, CONFIGURATOR.FW_VERSION_MAX_SUPPORTED)) {
-                                        MSP.send_message(MSPCodes.MSP_BOARD_INFO, false, false, processBoardInfo);
-                                }
-                                else {
-                                    const dialog = $('.dialogConnectWarning')[0];
-                                    $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareVersionNotSupported', [CONFIGURATOR.API_VERSION_ACCEPTED, CONFIGURATOR.FW_VERSION_MIN_SUPPORTED, CONFIGURATOR.FW_VERSION_MAX_SUPPORTED]));
-                                    $('.dialogConnectWarning-closebtn').click(function() {
-                                        dialog.close();
-                                    });
-                                    dialog.showModal();
-                                    connectCli();
-                                }
-                            });
-                        });
-                    } else {
-                        const dialog = $('.dialogConnectWarning')[0];
-                        $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareTypeNotSupported'));
-                        $('.dialogConnectWarning-closebtn').click(function() {
-                            dialog.close();
-                        });
-                        dialog.showModal();
-                        connectCli();
-                    }
-                });
+            GUI.log(i18n.getMessage('apiVersionReceived', [apiVersion]));
+
+            if (!semver.valid(apiVersion)) {
+                throw showConnectWarningDialogAndDisconnect('apiVersionInvalid', apiVersion);
+            } else if (!semver.gte(apiVersion, API_VERSION_MIN_SUPPORTED) || !semver.lte(apiVersion, API_VERSION_MAX_SUPPORTED)) {
+                throw showConnectWarningDialogAndConnectCli('firmwareVersionNotSupported');
             }
-            else {
-                const dialog = $('.dialogConnectWarning')[0];
-                $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareVersionNotSupported', [CONFIGURATOR.API_VERSION_ACCEPTED, CONFIGURATOR.FW_VERSION_MIN_SUPPORTED, CONFIGURATOR.FW_VERSION_MAX_SUPPORTED]));
-                $('.dialogConnectWarning-closebtn').click(function() {
-                    dialog.close();
-                });
-                dialog.showModal();
-                connectCli();
+            await MSP.promise(MSPCodes.MSP_FC_VARIANT, false);
+
+            const { flightControllerIdentifier } = FC.CONFIG;
+            if (flightControllerIdentifier !== 'RTFL') {
+                throw showConnectWarningDialogAndConnectCli('firmwareTypeNotSupported');
             }
-        });
+            await MSP.promise(MSPCodes.MSP_FC_VERSION, false);
+
+            await MSP.promise(MSPCodes.MSP_BUILD_INFO, false);
+            const { FW_VERSION_MIN_SUPPORTED, FW_VERSION_MAX_SUPPORTED } = CONFIGURATOR;
+            const { buildVersion, buildRevision, buildInfo } = FC.CONFIG;
+
+            GUI.log(i18n.getMessage('firmwareInfoReceived', [flightControllerIdentifier, buildVersion]));
+            GUI.log(i18n.getMessage('buildInfoReceived', [buildRevision, buildInfo]));
+            if (!semver.valid(buildVersion)) {
+                throw showConnectWarningDialogAndDisconnect('firmwareVersionInvalid', buildVersion);
+            } else if (!semver.gte(buildVersion, FW_VERSION_MIN_SUPPORTED) || !semver.lte(buildVersion, FW_VERSION_MAX_SUPPORTED)) {
+                throw showConnectWarningDialogAndConnectCli('firmwareVersionNotSupported');
+            }
+
+            await MSP.promise(MSPCodes.MSP_BOARD_INFO, false);
+            processBoardInfo();
+        } catch (error) {
+            console.error("Error during connection:", error);
+            GUI.log(error);
+        }
     }
     else {
         GUI.log(i18n.getMessage('serialPortOpenFail'));
         console.log('Failed to open serial port');
         abortConnect();
     }
+}
+
+function showConnectWarningDialogAndConnectCli(messageKey, ...params) {
+    const msg = showConnectWarningDialog(messageKey, params);
+    connectCli();
+    return msg;
+}
+
+function showConnectWarningDialogAndDisconnect(messageKey, ...params) {
+    const msg = showConnectWarningDialog(messageKey, params);
+    $('div.connect_controls a.connect').trigger("click"); // trigger disconnect
+    return msg;
+}
+
+function showConnectWarningDialog(messageKey, ...params) {
+    const msg = i18n.getMessage(messageKey, params);
+    const dialog = $('.dialogConnectWarning')[0];
+    $('.dialogConnectWarning-content').html(msg);
+    $('.dialogConnectWarning-closebtn').on("click", function() { dialog.close(); });
+    dialog.showModal();
+    return msg;
 }
 
 function onOpenVirtual() {
@@ -370,29 +382,31 @@ function processBoardInfo() {
         bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.HAS_CUSTOM_DEFAULTS)) {
         const dialog = $('#dialogResetToCustomDefaults')[0];
 
-        $('#dialogResetToCustomDefaults-acceptbtn').click(function() {
-            MSP.send_message(MSPCodes.MSP_RESET_CONF, [ globalThis.mspHelper.RESET_TYPES.CUSTOM_DEFAULTS ], false);
+        $('#dialogResetToCustomDefaults-acceptbtn').off("click").on("click", async () => {
+            $('#dialogResetToCustomDefaults-acceptbtn').off("click");
+            $('#dialogResetToCustomDefaults-cancelbtn').off("click");
             dialog.close();
+            await MSP.promise(MSPCodes.MSP_RESET_CONF, [globalThis.mspHelper.RESET_TYPES.CUSTOM_DEFAULTS]);
             GUI.timeout_add('disconnect', function () {
-                $('div.connect_controls a.connect').click();
+                $('div.connect_controls a.connect').trigger("click");
             }, 0);
         });
 
-        $('#dialogResetToCustomDefaults-cancelbtn').click(function() {
+        $('#dialogResetToCustomDefaults-cancelbtn').off("click").on("click", () => {
+            $('#dialogResetToCustomDefaults-acceptbtn').off("click");
+            $('#dialogResetToCustomDefaults-cancelbtn').off("click");
             dialog.close();
             setConnectionTimeout();
             checkReportProblems();
         });
-
         resetConnectionTimeout();
         dialog.showModal();
+        return;
     }
-    else {
-        checkReportProblems();
-    }
+    checkReportProblems();
 }
 
-function checkReportProblems() {
+async function checkReportProblems() {
     const problemItemTemplate = $('#dialogReportProblems-listItemTemplate');
 
     function checkReportProblem(problemName, problemDialogList) {
@@ -403,68 +417,65 @@ function checkReportProblems() {
         return false;
     }
 
-    MSP.send_message(MSPCodes.MSP_STATUS, false, false, function () {
-        let needsProblemReportingDialog = false;
-        const problemDialogList = $('#dialogReportProblems-list');
-        problemDialogList.empty();
+    await MSP.promise(MSPCodes.MSP_STATUS, false);
 
-        if (semver.gt(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MAX_SUPPORTED)) {
-            const problemName = 'API_VERSION_MAX_SUPPORTED';
-            problemItemTemplate.clone().html(i18n.getMessage(`reportProblemsDialog${problemName}`,
-                [CONFIGURATOR.latestVersion, CONFIGURATOR.latestVersionReleaseUrl, CONFIGURATOR.version, FC.CONFIG.buildVersion])).appendTo(problemDialogList);
-            needsProblemReportingDialog |= true;
-        }
+    let needsProblemReportingDialog = false;
+    const problemDialogList = $('#dialogReportProblems-list');
+    problemDialogList.empty();
 
-        if (FC.CONFIG.configurationState == FC.CONFIGURATION_STATES.DEFAULTS_BARE &&
-            bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.SUPPORTS_CUSTOM_DEFAULTS) &&
-            !bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.HAS_CUSTOM_DEFAULTS)) {
-                const problemName = 'UNIFIED_FIRMWARE_WITHOUT_DEFAULTS';
-                problemItemTemplate.clone().html(i18n.getMessage(`reportProblemsDialog${problemName}`)).appendTo(problemDialogList);
-                needsProblemReportingDialog |= true;
-        }
+    if (semver.gt(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MAX_SUPPORTED)) {
+        const problemName = 'API_VERSION_MAX_SUPPORTED';
+        problemItemTemplate.clone().html(i18n.getMessage(`reportProblemsDialog${problemName}`,
+            [CONFIGURATOR.latestVersion, CONFIGURATOR.latestVersionReleaseUrl, CONFIGURATOR.version, FC.CONFIG.buildVersion])).appendTo(problemDialogList);
+        needsProblemReportingDialog = true;
+    }
 
-        //needsProblemReportingDialog = checkReportProblem('MOTOR_PROTOCOL_DISABLED', problemDialogList) || needsProblemReportingDialog;
+    if (FC.CONFIG.configurationState == FC.CONFIGURATION_STATES.DEFAULTS_BARE &&
+        bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.SUPPORTS_CUSTOM_DEFAULTS) &&
+        !bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.HAS_CUSTOM_DEFAULTS)) {
+        const problemName = 'UNIFIED_FIRMWARE_WITHOUT_DEFAULTS';
+        problemItemTemplate.clone().html(i18n.getMessage(`reportProblemsDialog${problemName}`)).appendTo(problemDialogList);
+        needsProblemReportingDialog = true;
+    }
 
-        if (have_sensor(FC.CONFIG.activeSensors, 'acc')) {
-            needsProblemReportingDialog = checkReportProblem('ACC_NEEDS_CALIBRATION', problemDialogList) || needsProblemReportingDialog;
-        }
+    //needsProblemReportingDialog = checkReportProblem('MOTOR_PROTOCOL_DISABLED', problemDialogList) || needsProblemReportingDialog;
 
-        if (needsProblemReportingDialog) {
-            const problemDialog = $('#dialogReportProblems')[0];
-            $('#dialogReportProblems-closebtn').click(function() {
-                problemDialog.close();
-            });
-            problemDialog.showModal();
-            $('#dialogReportProblems').scrollTop(0);
-            $('#dialogReportProblems-closebtn').focus();
-        }
+    if (have_sensor(FC.CONFIG.activeSensors, 'acc')) {
+        needsProblemReportingDialog = checkReportProblem('ACC_NEEDS_CALIBRATION', problemDialogList) || needsProblemReportingDialog;
+    }
 
-        processUid();
-    });
+    if (needsProblemReportingDialog) {
+        const problemDialog = $('#dialogReportProblems')[0];
+        $('#dialogReportProblems-closebtn').off("click").on("click", () => {
+            $('#dialogReportProblems-closebtn').off("click");
+            problemDialog.close();
+        });
+        problemDialog.showModal();
+        $('#dialogReportProblems').scrollTop(0);
+        $('#dialogReportProblems-closebtn').trigger("focus");
+    }
+
+    processUid();
 }
 
-function processUid() {
-    MSP.send_message(MSPCodes.MSP_UID, false, false, function () {
-        const UID = FC.CONFIG.uid[0].toString(16) + FC.CONFIG.uid[1].toString(16) + FC.CONFIG.uid[2].toString(16);
+async function processUid() {
+    await MSP.promise(MSPCodes.MSP_UID, false);
 
-        GUI.log(i18n.getMessage('uniqueDeviceIdReceived', [UID]));
-
-        processName();
-    });
+    const UID = FC.CONFIG.uid[0].toString(16) + FC.CONFIG.uid[1].toString(16) + FC.CONFIG.uid[2].toString(16);
+    GUI.log(i18n.getMessage('uniqueDeviceIdReceived', [UID]));
+    processName();
 }
 
-function processName() {
-    MSP.send_message(MSPCodes.MSP_NAME, false, false, function () {
-        GUI.log(i18n.getMessage('craftNameReceived', [FC.CONFIG.name]));
-        setRtc();
-    });
+async function processName() {
+    await MSP.promise(MSPCodes.MSP_NAME, false);
+    GUI.log(i18n.getMessage('craftNameReceived', [FC.CONFIG.name]));
+    setRtc();
 }
 
-function setRtc() {
-    MSP.send_message(MSPCodes.MSP_SET_RTC, globalThis.mspHelper.crunch(MSPCodes.MSP_SET_RTC), false, function () {
-        GUI.log(i18n.getMessage('realTimeClockSet'));
-        finishOpen();
-    });
+async function setRtc() {
+    await MSP.promise(MSPCodes.MSP_SET_RTC, globalThis.mspHelper.crunch(MSPCodes.MSP_SET_RTC));
+    GUI.log(i18n.getMessage('realTimeClockSet'));
+    finishOpen();
 }
 
 function finishOpen() {
@@ -485,10 +496,11 @@ function connectCli() {
     CONFIGURATOR.connectionValid = true; // making it possible to open the CLI tab
     GUI.allowedTabs = ['cli'];
     onConnect();
-    $('#tabs .tab_cli a').click();
+    $('#tabs .tab_cli a').trigger("click");
 }
 
 function onConnect() {
+    console.log("On connnection");
     if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
         $('div#flashbutton a.flash_state').removeClass('active');
         $('div#flashbutton a.flash').removeClass('active');
@@ -527,10 +539,10 @@ function onConnect() {
 
         $('#tabs ul.mode-connected').show();
 
-        MSP.send_message(MSPCodes.MSP_FEATURE_CONFIG, false, false);
-        MSP.send_message(MSPCodes.MSP_BATTERY_CONFIG, false, false);
-        MSP.send_message(MSPCodes.MSP_STATUS, false, false);
-        MSP.send_message(MSPCodes.MSP_DATAFLASH_SUMMARY, false, false);
+        MSP.promise(MSPCodes.MSP_FEATURE_CONFIG, false)
+            .then(() => MSP.promise(MSPCodes.MSP_BATTERY_CONFIG, false))
+            .then(() => MSP.promise(MSPCodes.MSP_STATUS, false))
+            .then(() => MSP.promise(MSPCodes.MSP_DATAFLASH_SUMMARY, false));
 
         if (FC.CONFIG.boardType == 0 || FC.CONFIG.boardType == 2) {
             startLiveDataRefreshTimer();
@@ -683,9 +695,11 @@ function update_live_status() {
     });
 
     if (GUI.active_tab != 'cli') {
-        MSP.send_message(MSPCodes.MSP_BOXNAMES, false, false);
-        MSP.send_message(MSPCodes.MSP_STATUS, false, false);
-        MSP.send_message(MSPCodes.MSP_BATTERY_STATE, false, false);
+        MSP.promise(MSPCodes.MSP_BOXNAMES, false).then(() => {
+            return MSP.promise(MSPCodes.MSP_STATUS, false);
+        }).then(() => {
+            return MSP.promise(MSPCodes.MSP_BATTERY_STATE, false);
+        });
     }
 
     for (let i = 0; i < FC.AUX_CONFIG.length; i++) {
