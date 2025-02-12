@@ -65,9 +65,13 @@
 
   // find active rx protocol
   let rxProtoIndex = $derived.by(() => {
-    for (let i = 0; i < RX_PROTOCOLS.length; i++) {
+    if (!rxFeature) {
+      return 0;
+    }
+
+    for (let i = 1; i < RX_PROTOCOLS.length; i++) {
       const proto = RX_PROTOCOLS[i];
-      if (proto.feature && proto.feature !== rxFeature) {
+      if (proto.feature !== rxFeature) {
         continue;
       }
 
@@ -78,7 +82,7 @@
         continue;
       }
 
-      if (rxFeature === "RX_SPI" && item.id !== FC.RX_CONFIG.rxSpiProtocol) {
+      if (rxFeature === "RX_SPI" && proto.id !== FC.RX_CONFIG.rxSpiProtocol) {
         continue;
       }
 
