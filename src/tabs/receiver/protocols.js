@@ -190,7 +190,7 @@ export const RX_PROTOCOLS = [
     id: 18,
     feature: "RX_SERIAL",
     get hide() {
-      return semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8);
+      return semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_8);
     },
   },
   {
