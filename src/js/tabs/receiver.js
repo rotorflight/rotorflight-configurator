@@ -1,4 +1,4 @@
-import { mount } from "svelte";
+import { mount, unmount } from "svelte";
 import { Clock } from "three";
 
 import { Model } from "@/js/model.js";
@@ -7,6 +7,7 @@ import Receiver from "@/tabs/receiver/Receiver.svelte";
 
 const tab = {
     tabName: 'receiver',
+    svelteComponent: null,
     isDirty: false,
     needReboot: false,
     bindButton: false,
@@ -130,7 +131,7 @@ tab.initialize = function (callback) {
     }
 
     function process_html() {
-        mount(Receiver, {
+        self.svelteComponent = mount(Receiver, {
             target: document.querySelector("#svelte-receiver"),
             props: {
                 onchange: () => {
@@ -616,6 +617,11 @@ tab.renderModel = function () {
 };
 
 tab.cleanup = function (callback) {
+    if (this.svelteComponent) {
+        unmount(this.svelteComponent);
+        this.svelteComponent = null;
+    }
+
     $(window).off('resize', this.resize);
 
     this.keepRendering = false;
