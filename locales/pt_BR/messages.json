@@ -2695,17 +2695,17 @@
         "english": "Telemetry Pin Swap (Swap Rx and Tx pins)",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetryMode": {
+    "receiverTelemetryMode": {
         "message": "Enable CRSF Custom Telemetry",
         "english": "Enable CRSF Custom Telemetry",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetryRate": {
+    "receiverTelemetryRate": {
         "message": "Telemetry Rate",
         "english": "Telemetry Rate",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetryRatio": {
+    "receiverTelemetryRatio": {
         "message": "Telemetry Ratio",
         "english": "Telemetry Ratio",
         "status": "New entry. Please translate!"
@@ -2960,462 +2960,462 @@
         "english": "Voltage",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_HEARTBEAT": {
+    "receiverTelemetrySensor_HEARTBEAT": {
         "message": "Heartbeat",
         "english": "Heartbeat",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BATTERY": {
+    "receiverTelemetrySensor_BATTERY": {
         "message": "Battery",
         "english": "Battery",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_VOLTAGE": {
+    "receiverTelemetrySensor_BATTERY_VOLTAGE": {
         "message": "Battery Voltage",
         "english": "Battery Voltage",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CURRENT": {
+    "receiverTelemetrySensor_BATTERY_CURRENT": {
         "message": "Battery Current",
         "english": "Battery Current",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CONSUMPTION": {
+    "receiverTelemetrySensor_BATTERY_CONSUMPTION": {
         "message": "Battery Consumption",
         "english": "Battery Consumption",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CHARGE_LEVEL": {
+    "receiverTelemetrySensor_BATTERY_CHARGE_LEVEL": {
         "message": "Battery Charge Level",
         "english": "Battery Charge Level",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CELL_COUNT": {
+    "receiverTelemetrySensor_BATTERY_CELL_COUNT": {
         "message": "Battery Cell Count",
         "english": "Battery Cell Count",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGE": {
+    "receiverTelemetrySensor_BATTERY_CELL_VOLTAGE": {
         "message": "Battery Cell Voltage",
         "english": "Battery Cell Voltage",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_CELL_VOLTAGES": {
+    "receiverTelemetrySensor_BATTERY_CELL_VOLTAGES": {
         "message": "Battery Cell Voltages",
         "english": "Battery Cell Voltages",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_CONTROL": {
+    "receiverTelemetrySensor_CONTROL": {
         "message": "Control (hi-res)",
         "english": "Control (hi-res)",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_PITCH_CONTROL": {
+    "receiverTelemetrySensor_PITCH_CONTROL": {
         "message": "Pitch Control",
         "english": "Pitch Control",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ROLL_CONTROL": {
+    "receiverTelemetrySensor_ROLL_CONTROL": {
         "message": "Roll Control",
         "english": "Roll Control",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_YAW_CONTROL": {
+    "receiverTelemetrySensor_YAW_CONTROL": {
         "message": "Yaw Control",
         "english": "Yaw Control",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_COLLECTIVE_CONTROL": {
+    "receiverTelemetrySensor_COLLECTIVE_CONTROL": {
         "message": "Collective Control",
         "english": "Collective Control",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_THROTTLE_CONTROL": {
+    "receiverTelemetrySensor_THROTTLE_CONTROL": {
         "message": "Throttle Control",
         "english": "Throttle Control",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_DATA": {
+    "receiverTelemetrySensor_ESC_DATA": {
         "message": "ESC Data",
         "english": "ESC Data",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_VOLTAGE": {
+    "receiverTelemetrySensor_ESC_VOLTAGE": {
         "message": "ESC Voltage",
         "english": "ESC Voltage",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_CURRENT": {
+    "receiverTelemetrySensor_ESC_CURRENT": {
         "message": "ESC Current",
         "english": "ESC Current",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_CAPACITY": {
+    "receiverTelemetrySensor_ESC_CAPACITY": {
         "message": "ESC Capacity",
         "english": "ESC Capacity",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_ERPM": {
+    "receiverTelemetrySensor_ESC_ERPM": {
         "message": "ESC ERPM",
         "english": "ESC ERPM",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_POWER": {
+    "receiverTelemetrySensor_ESC_POWER": {
         "message": "ESC Power",
         "english": "ESC Power",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_THROTTLE": {
+    "receiverTelemetrySensor_ESC_THROTTLE": {
         "message": "ESC Throttle",
         "english": "ESC Throttle",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_TEMP1": {
+    "receiverTelemetrySensor_ESC_TEMP1": {
         "message": "ESC Temp 1",
         "english": "ESC Temp 1",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_TEMP2": {
+    "receiverTelemetrySensor_ESC_TEMP2": {
         "message": "ESC Temp 2",
         "english": "ESC Temp 2",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_BEC_VOLTAGE": {
+    "receiverTelemetrySensor_ESC_BEC_VOLTAGE": {
         "message": "ESC BEC Voltage",
         "english": "ESC BEC Voltage",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_BEC_CURRENT": {
+    "receiverTelemetrySensor_ESC_BEC_CURRENT": {
         "message": "ESC BEC Current",
         "english": "ESC BEC Current",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_STATUS": {
+    "receiverTelemetrySensor_ESC_STATUS": {
         "message": "ESC Status",
         "english": "ESC Status",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_MODEL": {
+    "receiverTelemetrySensor_ESC_MODEL": {
         "message": "ESC Model",
         "english": "ESC Model",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BEC_VOLTAGE": {
+    "receiverTelemetrySensor_BEC_VOLTAGE": {
         "message": "BEC Voltage",
         "english": "BEC Voltage",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BUS_VOLTAGE": {
+    "receiverTelemetrySensor_BUS_VOLTAGE": {
         "message": "Bus Voltage",
         "english": "Bus Voltage",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_MCU_VOLTAGE": {
+    "receiverTelemetrySensor_MCU_VOLTAGE": {
         "message": "MCU Voltage",
         "english": "MCU Voltage",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BEC_CURRENT": {
+    "receiverTelemetrySensor_BEC_CURRENT": {
         "message": "BEC Current",
         "english": "BEC Current",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BUS_CURRENT": {
+    "receiverTelemetrySensor_BUS_CURRENT": {
         "message": "Bus Current",
         "english": "Bus Current",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_MCU_CURRENT": {
+    "receiverTelemetrySensor_MCU_CURRENT": {
         "message": "MCU Current",
         "english": "MCU Current",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ESC_TEMP": {
+    "receiverTelemetrySensor_ESC_TEMP": {
         "message": "ESC Temp",
         "english": "ESC Temp",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BEC_TEMP": {
+    "receiverTelemetrySensor_BEC_TEMP": {
         "message": "BEC Temp",
         "english": "BEC Temp",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_MCU_TEMP": {
+    "receiverTelemetrySensor_MCU_TEMP": {
         "message": "MCU Temp",
         "english": "MCU Temp",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_AIR_TEMP": {
+    "receiverTelemetrySensor_AIR_TEMP": {
         "message": "Air Temp",
         "english": "Air Temp",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_MOTOR_TEMP": {
+    "receiverTelemetrySensor_MOTOR_TEMP": {
         "message": "Motor Temp",
         "english": "Motor Temp",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_TEMP": {
+    "receiverTelemetrySensor_BATTERY_TEMP": {
         "message": "Battery Temp",
         "english": "Battery Temp",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_EXHAUST_TEMP": {
+    "receiverTelemetrySensor_EXHAUST_TEMP": {
         "message": "Exhaust Temp",
         "english": "Exhaust Temp",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_HEADING": {
+    "receiverTelemetrySensor_HEADING": {
         "message": "Heading",
         "english": "Heading",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ALTITUDE": {
+    "receiverTelemetrySensor_ALTITUDE": {
         "message": "Altitude",
         "english": "Altitude",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_VARIOMETER": {
+    "receiverTelemetrySensor_VARIOMETER": {
         "message": "Variometer",
         "english": "Variometer",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_HEADSPEED": {
+    "receiverTelemetrySensor_HEADSPEED": {
         "message": "Headspeed",
         "english": "Headspeed",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_TAILSPEED": {
+    "receiverTelemetrySensor_TAILSPEED": {
         "message": "Tailspeed",
         "english": "Tailspeed",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_MOTOR_RPM": {
+    "receiverTelemetrySensor_MOTOR_RPM": {
         "message": "Motor RPM",
         "english": "Motor RPM",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_TRANS_RPM": {
+    "receiverTelemetrySensor_TRANS_RPM": {
         "message": "Transmission RPM",
         "english": "Transmission RPM",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ATTITUDE": {
+    "receiverTelemetrySensor_ATTITUDE": {
         "message": "Attitude (hi-res)",
         "english": "Attitude (hi-res)",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ATTITUDE_PITCH": {
+    "receiverTelemetrySensor_ATTITUDE_PITCH": {
         "message": "Attitude Pitch",
         "english": "Attitude Pitch",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ATTITUDE_ROLL": {
+    "receiverTelemetrySensor_ATTITUDE_ROLL": {
         "message": "Attitude Roll",
         "english": "Attitude Roll",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ATTITUDE_YAW": {
+    "receiverTelemetrySensor_ATTITUDE_YAW": {
         "message": "Attitude Yaw",
         "english": "Attitude Yaw",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ACCEL": {
+    "receiverTelemetrySensor_ACCEL": {
         "message": "Accelerometer (hi-res)",
         "english": "Accelerometer (hi-res)",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ACCEL_X": {
+    "receiverTelemetrySensor_ACCEL_X": {
         "message": "Accelerometer X-axis",
         "english": "Accelerometer X-axis",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ACCEL_Y": {
+    "receiverTelemetrySensor_ACCEL_Y": {
         "message": "Accelerometer Y-axis",
         "english": "Accelerometer Y-axis",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ACCEL_Z": {
+    "receiverTelemetrySensor_ACCEL_Z": {
         "message": "Accelerometer Z-axis",
         "english": "Accelerometer Z-axis",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GPS": {
+    "receiverTelemetrySensor_GPS": {
         "message": "GPS",
         "english": "GPS",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GPS_SATS": {
+    "receiverTelemetrySensor_GPS_SATS": {
         "message": "GPS Sats",
         "english": "GPS Sats",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GPS_PDOP": {
+    "receiverTelemetrySensor_GPS_PDOP": {
         "message": "GPS PDOP",
         "english": "GPS PDOP",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GPS_HDOP": {
+    "receiverTelemetrySensor_GPS_HDOP": {
         "message": "GPS HDOP",
         "english": "GPS HDOP",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GPS_VDOP": {
+    "receiverTelemetrySensor_GPS_VDOP": {
         "message": "GPS VDOP",
         "english": "GPS VDOP",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GPS_COORD": {
+    "receiverTelemetrySensor_GPS_COORD": {
         "message": "GPS Coord",
         "english": "GPS Coord",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GPS_ALTITUDE": {
+    "receiverTelemetrySensor_GPS_ALTITUDE": {
         "message": "GPS Altitude",
         "english": "GPS Altitude",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GPS_HEADING": {
+    "receiverTelemetrySensor_GPS_HEADING": {
         "message": "GPS Heading",
         "english": "GPS Heading",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GPS_GROUNDSPEED": {
+    "receiverTelemetrySensor_GPS_GROUNDSPEED": {
         "message": "GPS Groundspeed",
         "english": "GPS Groundspeed",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GPS_HOME_DISTANCE": {
+    "receiverTelemetrySensor_GPS_HOME_DISTANCE": {
         "message": "GPS Home Distance",
         "english": "GPS Home Distance",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GPS_HOME_DIRECTION": {
+    "receiverTelemetrySensor_GPS_HOME_DIRECTION": {
         "message": "GPS Home Direction",
         "english": "GPS Home Direction",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GPS_DATE_TIME": {
+    "receiverTelemetrySensor_GPS_DATE_TIME": {
         "message": "GPS Date Time",
         "english": "GPS Date Time",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_LOAD": {
+    "receiverTelemetrySensor_LOAD": {
         "message": "Load",
         "english": "Load",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_CPU_LOAD": {
+    "receiverTelemetrySensor_CPU_LOAD": {
         "message": "CPU Load",
         "english": "CPU Load",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_SYS_LOAD": {
+    "receiverTelemetrySensor_SYS_LOAD": {
         "message": "SYS Load",
         "english": "SYS Load",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_RT_LOAD": {
+    "receiverTelemetrySensor_RT_LOAD": {
         "message": "RT Load",
         "english": "RT Load",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_MODEL_ID": {
+    "receiverTelemetrySensor_MODEL_ID": {
         "message": "Model Id",
         "english": "Model Id",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_FLIGHT_MODE": {
+    "receiverTelemetrySensor_FLIGHT_MODE": {
         "message": "Flight Mode",
         "english": "Flight Mode",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ARMING_FLAGS": {
+    "receiverTelemetrySensor_ARMING_FLAGS": {
         "message": "Arming Flags",
         "english": "Arming Flags",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ARMING_DISABLE_FLAGS": {
+    "receiverTelemetrySensor_ARMING_DISABLE_FLAGS": {
         "message": "Arming Disable Flags",
         "english": "Arming Disable Flags",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_RESCUE_STATE": {
+    "receiverTelemetrySensor_RESCUE_STATE": {
         "message": "Rescue State",
         "english": "Rescue State",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GOVERNOR_STATE": {
+    "receiverTelemetrySensor_GOVERNOR_STATE": {
         "message": "Governor State",
         "english": "Governor State",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_GOVERNOR_FLAGS": {
+    "receiverTelemetrySensor_GOVERNOR_FLAGS": {
         "message": "Governor Flags",
         "english": "Governor Flags",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_PID_PROFILE": {
+    "receiverTelemetrySensor_PID_PROFILE": {
         "message": "PID Profile",
         "english": "PID Profile",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_RATES_PROFILE": {
+    "receiverTelemetrySensor_RATES_PROFILE": {
         "message": "Rates Profile",
         "english": "Rates Profile",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_BATTERY_PROFILE": {
+    "receiverTelemetrySensor_BATTERY_PROFILE": {
         "message": "Battery Profile",
         "english": "Battery Profile",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_LED_PROFILE": {
+    "receiverTelemetrySensor_LED_PROFILE": {
         "message": "LED Profile",
         "english": "LED Profile",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_ADJFUNC": {
+    "receiverTelemetrySensor_ADJFUNC": {
         "message": "Adjustment Function",
         "english": "Adjustment Function",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_0": {
+    "receiverTelemetrySensor_DEBUG_0": {
         "message": "Debug 0",
         "english": "Debug 0",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_1": {
+    "receiverTelemetrySensor_DEBUG_1": {
         "message": "Debug 1",
         "english": "Debug 1",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_2": {
+    "receiverTelemetrySensor_DEBUG_2": {
         "message": "Debug 2",
         "english": "Debug 2",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_3": {
+    "receiverTelemetrySensor_DEBUG_3": {
         "message": "Debug 3",
         "english": "Debug 3",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_4": {
+    "receiverTelemetrySensor_DEBUG_4": {
         "message": "Debug 4",
         "english": "Debug 4",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_5": {
+    "receiverTelemetrySensor_DEBUG_5": {
         "message": "Debug 5",
         "english": "Debug 5",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_6": {
+    "receiverTelemetrySensor_DEBUG_6": {
         "message": "Debug 6",
         "english": "Debug 6",
         "status": "New entry. Please translate!"
     },
-    "receiverCrsfTelemetrySensor_DEBUG_7": {
+    "receiverTelemetrySensor_DEBUG_7": {
         "message": "Debug 7",
         "english": "Debug 7",
         "status": "New entry. Please translate!"

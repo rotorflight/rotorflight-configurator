@@ -15,6 +15,13 @@ export default [
     rules: {
       semi: "error",
       "no-prototype-builtins": "off",
+      "no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
 
       // TODO: The codebase makes extensive use of globals. This rule should be
       // enabled and remaining globals explicitly defined.
