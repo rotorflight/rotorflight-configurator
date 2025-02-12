@@ -220,5 +220,9 @@
         flex-grow: 1;
       }
     }
+
+    .handle {
+      width: 48px;
+    }
   }
 </style>
