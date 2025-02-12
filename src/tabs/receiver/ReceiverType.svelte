@@ -49,8 +49,9 @@
             <option
               value={i}
               disabled={proto.feature === "RX_SERIAL" && !hasSerialRxPort}
-              >{proto.name}</option
             >
+              {proto.name}
+            </option>
           {/if}
         {/each}
       </select>
