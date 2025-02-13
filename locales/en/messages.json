@@ -6985,6 +6985,12 @@
     "blackboxRateCustom": {
         "message": "Custom"
     },
+    "blackboxGracePeriod": {
+        "message": "Disarm grace period"
+    },
+    "blackboxGracePeriodHelp": {
+        "message": "Continues logging briefly after disarming, useful for capturing crash data. Set to 0 to disable."
+    },
     "blackboxDebugMode": {
         "message": "Debug mode"
     },

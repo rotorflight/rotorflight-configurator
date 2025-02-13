@@ -450,6 +450,9 @@ export const FC = $state({
             blackboxMode:               0,
             blackboxDenom:              0,
             blackboxFields:             0,
+            blackboxInitialEraseKiB:    0,
+            blackboxRollingErase:       0,
+            blackboxGracePeriod:        0,
         };
 
         this.TRANSPONDER = {
