@@ -246,7 +246,7 @@ tab.initialize = function (callback) {
         const debugAxisSelect = $(".tab-blackbox .blackboxDebugAxis select");
         const initialEraseInput = $(".tab-blackbox .blackboxInitialErase input");
         const rollingEraseCheckbox = $(".tab-blackbox .blackboxRollingErase input");
-        const gracefulPeriod = $(".tab-blackbox .blackboxGracefulPeriod input");
+        const gracePeriod = $(".tab-blackbox .blackboxGracePeriod input");
 
         populateDevices(deviceSelect);
         populateMode(modeSelect);
@@ -254,7 +254,7 @@ tab.initialize = function (callback) {
         populateDebugModes(debugModeSelect);
         populateDebugAxis(debugAxisSelect);
         populateLogFlags();
-        gracefulPeriod.val(FC.BLACKBOX.blackboxGracefulPeriod);
+        gracePeriod.val(FC.BLACKBOX.blackboxGracePeriod);
 
         initialEraseInput.val(Math.round(FC.BLACKBOX.blackboxInitialEraseKiB / 1024));
         initialEraseInput.prop("max", Math.min(64, FC.DATAFLASH.totalSize / 1024 / 1024));
@@ -266,22 +266,26 @@ tab.initialize = function (callback) {
                 if (modeSelect.val() != 0) {
                     $("div.blackboxRate").show();
                     $("div.blackboxFlags").show();
-                    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
-                        $("div.blackboxGracefulPeriod").show();
-                    } else {
-                        $("div.blackboxGracefulPeriod").hide();
-                    }
                 } else {
                     $("div.blackboxRate").hide();
                     $("div.blackboxFlags").hide();
-                    $("div.blackboxGracefulPeriod").hide();
                 }
             } else {
                 $("div.blackboxMode").hide();
                 $("div.blackboxRate").hide();
                 $("div.blackboxFlags").hide();
-                $("div.blackboxGracefulPeriod").hide();
             }
+
+            // GracePeriod logic
+            if (deviceSelect.val() != 0
+                && (modeSelect.val() == 1 || modeSelect.val() == 2)
+                && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
+                $("div.blackboxGracePeriod").show();
+            } else {
+                $("div.blackboxGracePeriod").hide();
+            }
+
+            // InitialErase and RollingErase logic
             if (deviceSelect.val() == 1 && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                 $("div.blackboxInitialErase").show();
                 $("div.blackboxRollingErase").show();
@@ -321,7 +325,7 @@ tab.initialize = function (callback) {
             FC.DEBUG_CONFIG.debugAxis = parseInt(debugAxisSelect.val(), 10);
             FC.BLACKBOX.blackboxInitialEraseKiB = Math.min(0xFFFF, parseInt(initialEraseInput.val(), 10) * 1024);
             FC.BLACKBOX.blackboxRollingErase = Number(rollingEraseCheckbox.prop('checked'));
-            FC.BLACKBOX.blackboxGracefulPeriod = parseInt(gracefulPeriod.val(), 10);
+            FC.BLACKBOX.blackboxGracePeriod = parseInt(gracePeriod.val(), 10);
         }
 
         if (FC.BLACKBOX.supported) {

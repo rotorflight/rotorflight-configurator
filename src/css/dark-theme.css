@@ -584,7 +584,7 @@ html[data-theme=dark] .tab-blackbox progress::-webkit-progress-bar {
 
 html[data-theme=dark] .tab-blackbox .blackboxRate select,
 html[data-theme=dark] .tab-blackbox .blackboxMode select,
-html[data-theme=dark] .tab-blackbox .blackboxGracefulPeriod input,
+html[data-theme=dark] .tab-blackbox .blackboxGracePeriod input,
 html[data-theme=dark] .tab-blackbox .blackboxDebugMode select,
 html[data-theme=dark] .tab-blackbox .blackboxDebugAxis select,
 html[data-theme=dark] .tab-blackbox .blackboxInitialErase input,
