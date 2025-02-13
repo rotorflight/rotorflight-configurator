@@ -51,14 +51,6 @@ html[data-theme=dark] #content.logopen {
     background-color: #393b3a;
 }
 
-html[data-theme=dark] #status-bar {
-    background-color: #414443;
-}
-
-html[data-theme=dark] #status-bar > span + span {
-    border-left: 1px solid #9c9c9c;
-}
-
 html[data-theme=dark] dialog {
     background-color: #3a3d3c;
     color:white;
@@ -592,8 +584,10 @@ html[data-theme=dark] .tab-blackbox progress::-webkit-progress-bar {
 
 html[data-theme=dark] .tab-blackbox .blackboxRate select,
 html[data-theme=dark] .tab-blackbox .blackboxMode select,
+html[data-theme=dark] .tab-blackbox .blackboxGracePeriod input,
 html[data-theme=dark] .tab-blackbox .blackboxDebugMode select,
 html[data-theme=dark] .tab-blackbox .blackboxDebugAxis select,
+html[data-theme=dark] .tab-blackbox .blackboxInitialErase input,
 html[data-theme=dark] .tab-blackbox .blackboxDevice select {
     background-color: #3a3a3a;
     color: white;
@@ -612,6 +606,10 @@ html[data-theme=dark] .tab-profiles .tab-area {
 html[data-theme=dark] .tab-profiles .tab-container > div {
     background-color: #535655;
     border-right: 1px solid #393b3a;
+}
+
+html[data-theme=dark] .tab-profiles .tab-container > div.active {
+    background-color: var(--accent);
 }
 
 html[data-theme=dark] .tab-profiles input:disabled,
@@ -683,6 +681,10 @@ html[data-theme=dark] .tab-rates .tab-area {
 html[data-theme=dark] .tab-rates .tab-container > div {
     background-color: #535655;
     border-right: 1px solid #393b3a;
+}
+
+html[data-theme=dark] .tab-rates .tab-container > div.active {
+    background-color: var(--accent);
 }
 
 html[data-theme=dark] .tab-rates select {

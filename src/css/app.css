@@ -1,0 +1,100 @@
+:root {
+  --animation-speed: 0.2s ease;
+}
+
+html[data-theme="light"] {
+  --val-neutral-hue: 220;
+  --val-neutral-sat: 5%;
+
+  --color-yellow-100: hsl(50, 100%, 92%);
+  --color-yellow-900: hsl(45, 100%, 30%);
+
+  --color-red-100: hsl(4, 100%, 92%);
+  --color-red-200: hsl(4, 100%, 80%);
+  --color-red-900: hsl(4, 100%, 30%);
+
+  --color-accent-100: hsl(202, 100%, 10%);
+  --color-accent-200: hsl(202, 100%, 20%);
+  --color-accent-300: hsl(202, 100%, 30%);
+  --color-accent-400: hsl(202, 100%, 40%);
+  --color-accent-500: hsl(202, 100%, 50%);
+  --color-accent-600: hsl(202, 100%, 60%);
+  --color-accent-700: hsl(202, 100%, 70%);
+  --color-accent-800: hsl(202, 100%, 80%);
+  --color-accent-900: hsl(202, 100%, 90%);
+
+  --color-neutral-50: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 98%);
+  --color-neutral-100: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 97%);
+  --color-neutral-200: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 92%);
+  --color-neutral-300: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 85%);
+  --color-neutral-400: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 70%);
+  --color-neutral-500: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 50%);
+  --color-neutral-600: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 30%);
+  --color-neutral-700: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 15%);
+  --color-neutral-800: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 8%);
+  --color-neutral-900: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 3%);
+  --color-neutral-950: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 2%);
+
+  --color-switch: var(--color-accent-500);
+  --color-switch-secondary: var(--color-neutral-300);
+  --color-switch-handle: var(--color-neutral-50);
+  --color-switch-handle-secondary: var(--color-neutral-50);
+
+  --color-roll: hsl(2, 62%, 60%);
+  --color-pitch: hsl(122, 62%, 60%);
+  --color-yaw: hsl(242, 62%, 60%);
+}
+
+html[data-theme="dark"] {
+  --val-neutral-hue: 248;
+  --val-neutral-sat: 5%;
+
+  --color-yellow-100: hsl(45, 100%, 90%);
+  --color-yellow-500: hsl(45, 60%, 55%);
+  --color-yellow-900: hsl(45, 100%, 30%);
+
+  --color-red-100: hsl(4, 100%, 30%);
+  --color-red-500: hsl(4, 60%, 55%);
+  --color-red-900: hsl(4, 100%, 30%);
+
+  --color-accent-100: hsl(202, 100%, 10%);
+  --color-accent-200: hsl(202, 100%, 20%);
+  --color-accent-300: hsl(202, 100%, 30%);
+  --color-accent-400: hsl(202, 100%, 40%);
+  --color-accent-500: hsl(202, 100%, 50%);
+  --color-accent-600: hsl(202, 100%, 60%);
+  --color-accent-700: hsl(202, 100%, 70%);
+  --color-accent-800: hsl(202, 100%, 80%);
+  --color-accent-900: hsl(202, 100%, 90%);
+
+  --color-neutral-950:  hsl(var(--val-neutral-hue), var(--val-neutral-sat), 5%);
+  --color-neutral-900: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 10%);
+  --color-neutral-800: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 20%);
+  --color-neutral-700: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 30%);
+  --color-neutral-600: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 40%);
+  --color-neutral-500: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 50%);
+  --color-neutral-400: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 60%);
+  --color-neutral-300: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 70%);
+  --color-neutral-200: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 80%);
+  --color-neutral-100: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 90%);
+  --color-neutral-50: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 95%);
+
+  --color-switch: var(--color-accent-400);
+  --color-switch-secondary: var(--color-neutral-500);
+  --color-switch-handle: var(--color-neutral-100);
+  --color-switch-handle-secondary: var(--color-neutral-100);
+
+  --color-roll: hsl(2, 48%, 45%);
+  --color-pitch: hsl(122, 48%, 40%);
+  --color-yaw: hsl(242, 48%, 55%);
+}
+
+@media only screen and (max-width: 480px) {
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}

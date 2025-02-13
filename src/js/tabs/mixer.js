@@ -1,4 +1,5 @@
 import * as noUiSlider from 'nouislider';
+import semver from 'semver';
 import wNumb from 'wnumb';
 
 const tab = {
@@ -130,6 +131,7 @@ tab.initialize = function (callback) {
 
         const mixerSlider = mixerOverride.find('.mixerOverrideSlider').get(0);
         const mixerEnable = mixerOverride.find('.mixerOverrideEnable input');
+        const mixerPassthrough = mixerOverride.find('.mixerPassthroughEnable input');
         const mixerInput  = mixerOverride.find('.mixerOverrideInput input');
 
         const inputIndex = axis.axis;
@@ -178,41 +180,83 @@ tab.initialize = function (callback) {
             mixerInput.trigger('change');
         });
 
+        function updateMixerOverride() {
+            const override = mixerEnable.prop('checked');
+            const passthrough = mixerPassthrough.prop('checked');
+            let value = Mixer.OVERRIDE_OFF;
+
+            if (override) {
+                if (passthrough) {
+                    value = Mixer.OVERRIDE_PASSTHROUGH;
+                } else {
+                    value = Math.round(parseFloat(getNumberInput(mixerInput)) / axis.scale);
+                }
+            }
+
+            console.log("mixerOverride axis " + inputIndex + " value " + value);
+
+            FC.MIXER_OVERRIDE[inputIndex] = value;
+            mspHelper.sendMixerOverride(inputIndex);
+        }
+
         mixerInput.on('change', function () {
             const value = parseFloat(getNumberInput($(this)));
             mixerSlider.noUiSlider.set(value, true, true);
-            FC.MIXER_OVERRIDE[inputIndex] = Math.round(value / axis.scale);
-            mspHelper.sendMixerOverride(inputIndex);
+            updateMixerOverride();
         });
 
         mixerEnable.on('change', function () {
-            const check = $(this).prop('checked');
-            const value = check ? 0 : Mixer.OVERRIDE_OFF;
+            const override = $(this).prop('checked');
+            const passthrough = mixerPassthrough.prop('checked');
+            const mutable = override && !passthrough;
 
             mixerInput.val(0);
             mixerSlider.noUiSlider.set(0);
 
-            mixerInput.prop('disabled', !check);
-            toggleMixerSlider(check);
+            mixerInput.prop('disabled', !mutable);
+            toggleMixerSlider(mutable);
 
-            FC.MIXER_OVERRIDE[inputIndex] = value;
-            mspHelper.sendMixerOverride(inputIndex);
+            if (!override && mixerPassthrough.prop('checked')) {
+                mixerPassthrough.prop('checked', false).change();
+            }
+
+            updateMixerOverride();
+        });
+
+        mixerPassthrough.on('change', function () {
+            const override = mixerEnable.prop('checked');
+            const passthrough = $(this).prop('checked');
+            const mutable = override && !passthrough;
+
+            if (passthrough && !mixerEnable.prop('checked')) {
+                mixerEnable.prop('checked', true).change();
+            }
+
+            mixerInput.prop('disabled', !mutable);
+            toggleMixerSlider(mutable);
+
+            updateMixerOverride();
         });
 
         let value = FC.MIXER_OVERRIDE[inputIndex];
-        let check = Mixer.overrideEnabled(value);
+        const override = Mixer.overrideEnabled(value);
+        FC.CONFIG.mixerOverrideEnabled |= override;
 
-        FC.CONFIG.mixerOverrideEnabled |= check;
+        const passthrough = Mixer.passthroughEnabled(value);
+        FC.CONFIG.mixerPassthroughEnabled |= passthrough;
+
+        const mutable = override && !passthrough;
 
         value *= axis.scale;
-        value = (check ? value : 0).toFixed(axis.fixed);
+        value = (mutable ? value : 0).toFixed(axis.fixed);
 
         mixerInput.val(value);
         mixerSlider.noUiSlider.set(value);
 
-        mixerInput.prop('disabled', !check);
-        mixerEnable.prop('checked', check);
-        toggleMixerSlider(check);
+        mixerInput.prop('disabled', !mutable);
+        mixerEnable.prop('checked', override);
+        mixerPassthrough.prop('checked', passthrough);
+        toggleMixerSlider(mutable);
 
         $('.mixerOverrideTable tbody').append(mixerOverride);
     }
@@ -245,14 +289,38 @@ tab.initialize = function (callback) {
         const enableOverrideSwitch = $('#mixerOverrideEnableSwitch');
         enableOverrideSwitch.prop('checked', FC.CONFIG.mixerOverrideEnabled);
 
+        const enablePassthroughSwitch = $('#mixerPassthroughEnableSwitch');
+        enablePassthroughSwitch.prop('checked', FC.CONFIG.mixerPassthroughEnabled);
+
+        // disable mixer passthrough option
+        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
+            $('.mixerPassthroughVisible').hide();
+        }
+
         enableOverrideSwitch.change(function () {
             const checked = enableOverrideSwitch.prop('checked');
             FC.CONFIG.mixerOverrideEnabled = checked;
+
+            if (!checked) {
+                enablePassthroughSwitch.prop('checked', false).change();
+            }
+
             $('.mixerOverrideAxis').toggle(!!checked);
             $('.mixerOverrideActive .mixerOverrideEnable input').prop('checked', checked).change();
         });
 
         $('.mixerOverrideAxis').toggle(!!FC.CONFIG.mixerOverrideEnabled);
+
+        enablePassthroughSwitch.change(function () {
+            const checked = enablePassthroughSwitch.prop('checked');
+            FC.CONFIG.mixerPassthroughEnabled = checked;
+
+            if (checked) {
+                enableOverrideSwitch.prop('checked', true).change();
+            }
+
+            $('.mixerOverrideActive .mixerPassthroughEnable input').prop('checked', checked).change();
+        });
 
         self.customConfig = false;
 
@@ -316,6 +384,13 @@ tab.initialize = function (callback) {
         $('#mixerCollectiveLimit').val(collectiveMax).change();
         $('#mixerCyclicLimit').val(cyclicMax).change();
         $('#mixerTotalPitchLimit').val(totalMax).change();
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
+            $('#mixerCollectiveTiltCorrectionPos').val(FC.MIXER_CONFIG.coll_tilt_correction_pos).change();
+            $('#mixerCollectiveTiltCorrectionNeg').val(FC.MIXER_CONFIG.coll_tilt_correction_neg).change();
+        } else {
+            $('.mixerCollectiveTiltCorrection').hide();
+        }
 
         function setTailRotorMode(mode, change) {
 
@@ -400,6 +475,8 @@ tab.initialize = function (callback) {
             FC.MIXER_CONFIG.tail_rotor_mode = getIntegerValue('#mixerTailRotorMode');
             FC.MIXER_CONFIG.tail_motor_idle = getIntegerValue('#mixerTailMotorIdle', 10);
             FC.MIXER_CONFIG.coll_geo_correction = getIntegerValue('#mixerCollectiveGeoCorrection', 5);
+            FC.MIXER_CONFIG.coll_tilt_correction_pos = getIntegerValue('#mixerCollectiveTiltCorrectionPos');
+            FC.MIXER_CONFIG.coll_tilt_correction_neg = getIntegerValue('#mixerCollectiveTiltCorrectionNeg');
 
             if (FC.MIXER_CONFIG.tail_rotor_mode > 0)
                 FC.MIXER_CONFIG.tail_center_trim = getIntegerValue('#mixerTailMotorCenterTrim', 10);

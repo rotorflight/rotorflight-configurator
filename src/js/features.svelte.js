@@ -27,7 +27,7 @@ export class Features {
     RSSI: ["RSSI_ADC"],
   };
 
-  bitfield = 0;
+  bitfield = $state(0);
 
   constructor() {
     // allow each flag in the bitfield to be accessed as a regular property

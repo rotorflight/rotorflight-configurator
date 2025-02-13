@@ -210,6 +210,31 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <tr class="mixerCollectiveTiltCorrection border">
+                                    <td>
+                                        <div class="configCol1 mixerConfig">
+                                            <input type="number" id="mixerCollectiveTiltCorrectionPos" min="-100" max="100" step="1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerCollectiveTiltCorrectionPos"></span><span> [%]</span>
+                                            <div class="helpicon cf_tip" i18n_title="mixerCollectiveTiltCorrectionHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="mixerCollectiveTiltCorrection">
+                                    <td>
+                                        <div class="configCol1 mixerConfig">
+                                            <input type="number" id="mixerCollectiveTiltCorrectionNeg" min="-100" max="100" step="1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerCollectiveTiltCorrectionNeg"></span><span> [%]</span>
+                                        </div>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -447,6 +472,8 @@
                                 <tr>
                                     <td><input type="checkbox" id="mixerOverrideEnableSwitch" class="toggle" /></td>
                                     <td><span i18n="mixerOverrideEnableSwitch"></span></td>
+                                    <td class="mixerPassthroughVisible"><input type="checkbox" id="mixerPassthroughEnableSwitch" class="toggle" /></td>
+                                    <td class="mixerPassthroughVisible"><span i18n="mixerPassthroughEnableSwitch"></span></td>
                                     <td><span class="description" i18n="mixerOverrideEnableSwitchText"></span></td>
                                 </tr>
                             </table>
@@ -457,6 +484,7 @@
                                     <tr class="trhead">
                                         <th i18n="mixerInputName"></th>
                                         <th i18n="mixerOverrideEnable"></th>
+                                        <th class="mixerPassthroughVisible" i18n="mixerPassthroughEnable"></th>
                                         <th i18n="mixerOverrideValue"></th>
                                         <th i18n="mixerOverrideSlider"></th>
                                     </tr>
@@ -545,6 +573,11 @@
                 <td><span class="mixerOverrideName"></span></td>
                 <td>
                     <div class="mixerOverrideEnable">
+                        <input type="checkbox" class="toggle"/>
+                    </div>
+                </td>
+                <td class="mixerPassthroughVisible">
+                    <div class="mixerPassthroughEnable">
                         <input type="checkbox" class="toggle"/>
                     </div>
                 </td>

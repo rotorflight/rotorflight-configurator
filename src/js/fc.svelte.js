@@ -76,7 +76,7 @@ const INITIAL_BATTERY_STATE = {
     chargeLevel:                0,
 };
 
-export const FC = {
+export const FC = $state({
 
     // define all the global variables that are uses to hold FC state
     // the default state must be defined inside the resetState() method
@@ -129,6 +129,7 @@ export const FC = {
     FEATURE_CONFIG: null,
     FILTER_CONFIG: null,
     RPM_FILTER_CONFIG: null,
+    RPM_FILTER_CONFIG_V2: null,
     GOVERNOR: null,
     GPS_CONFIG: null,
     GPS_DATA: null,
@@ -219,6 +220,8 @@ export const FC = {
             blade_pitch_limit:          0,
             coll_rpm_correction:        0,
             coll_geo_correction:        0,
+            coll_tilt_correction_pos:   0,
+            coll_tilt_correction_neg:   0,
         };
 
         this.MIXER_INPUTS =             [];
@@ -447,6 +450,9 @@ export const FC = {
             blackboxMode:               0,
             blackboxDenom:              0,
             blackboxFields:             0,
+            blackboxInitialEraseKiB:    0,
+            blackboxRollingErase:       0,
+            blackboxGracePeriod:        0,
         };
 
         this.TRANSPONDER = {
@@ -491,9 +497,12 @@ export const FC = {
             dyn_notch_q:                0,
             dyn_notch_min_hz:           0,
             dyn_notch_max_hz:           0,
+            rpm_preset:                 0,
+            rpm_min_hz:                 0,
         };
 
         this.RPM_FILTER_CONFIG = [];
+        this.RPM_FILTER_CONFIG_V2 = [];
 
         this.PID_PROFILE = {
             rollPitchItermIgnoreRate:   0,
@@ -599,6 +608,8 @@ export const FC = {
             rescueMaxCollective:        0,
             rescueMaxRate:              0,
             rescueMaxAccel:             0,
+            yaw_inertia_precomp_gain:   0,
+            yaw_inertia_precomp_cutoff: 0,
         };
 
         this.GOVERNOR = {
@@ -683,7 +694,7 @@ export const FC = {
             crsf_telemetry_mode:            0,
             crsf_telemetry_rate:            0,
             crsf_telemetry_ratio:           0,
-            crsf_telemetry_sensors:         [],
+            telemetry_sensors_list:         [],
         };
 
         this.GPS_RESCUE = {
@@ -873,4 +884,4 @@ export const FC = {
             50, 50,  0,  0,
         ];
     },
-};
+});

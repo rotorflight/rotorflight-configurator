@@ -260,8 +260,11 @@
 
 .tab-blackbox .blackboxRate select,
 .tab-blackbox .blackboxMode select,
-.tab-blackbox .blackboxDebugMode select,
+.tab-blackbox .blackboxGracePeriod input,
+.tab-blackbox .blackboxDebugMode .select2,
 .tab-blackbox .blackboxDebugAxis select,
+.tab-blackbox .blackboxInitialErase input,
+.tab-blackbox .blackboxRollingErase > span:nth-of-type(1),
 .tab-blackbox .blackboxDevice select {
     float: left;
     width: 180px;
@@ -269,6 +272,20 @@
     margin: 0 15px 8px 0;
     border: 1px solid var(--subtleAccent);
     border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.tab-blackbox .blackboxRollingErase > span:nth-of-type(1) {
+    border: 0px;
+}
+
+.tab-blackbox .blackboxGracePeriod input,
+.tab-blackbox .blackboxInitialErase input {
+    text-align: right;
+}
+
+.tab-blackbox .blackboxRollingErase > span:nth-of-type(1) > span {
+    float: right;
 }
 
 .tab-blackbox .blackboxDebugMode {
@@ -277,23 +294,21 @@
     padding-top: 10px;
 }
 
-.tab-blackbox .blackboxDebugMode .select2 {
-    float: left;
-    height: 20px;
-    margin: 0 8px 8px 0;
-    border: 1px solid var(--subtleAccent);
-    border-radius: 3px;
+.tab-blackbox .blackboxInitialErase {
+    border-top: 1px dotted var(--superSubtleAccent);
+    margin-top: 10px;
+    padding-top: 10px;
 }
 
 .tab-blackbox .blackboxRate span,
 .tab-blackbox .blackboxMode span,
 .tab-blackbox .blackboxDebugMode span,
 .tab-blackbox .blackboxDebugAxis span,
+.tab-blackbox .blackboxGracePeriod span,
+.tab-blackbox .blackboxInitialErase span,
+.tab-blackbox .blackboxRollingErase span:nth-of-type(2),
 .tab-blackbox .blackboxDevice span {
     line-height: 20px;
-}
-.tab-blackbox .blackboxDebugModeText {
-    margin-left: 7px !important;
 }
 
 .tab-blackbox .blackboxFlags .gui_box {
@@ -359,8 +374,11 @@
 @media all and (max-width: 575px) {
     .tab-blackbox .blackboxRate select,
     .tab-blackbox .blackboxMode select,
-    .tab-blackbox .blackboxDebugMode select,
+    .tab-blackbox .blackboxGracePeriod input,
+    .tab-blackbox .blackboxDebugMode .select2,
     .tab-blackbox .blackboxDebugAxis select,
+    .tab-blackbox .blackboxInitialErase input,
+    .tab-blackbox .blackboxRollingErase > span:nth-of-type(1),
     .tab-blackbox .blackboxDevice select {
         width: 120px;
     }
