@@ -450,6 +450,9 @@ export const FC = $state({
             blackboxMode:               0,
             blackboxDenom:              0,
             blackboxFields:             0,
+            blackboxInitialEraseKiB:    0,
+            blackboxRollingErase:       0,
+            blackboxGracePeriod:        0,
         };
 
         this.TRANSPONDER = {
@@ -691,7 +694,7 @@ export const FC = $state({
             crsf_telemetry_mode:            0,
             crsf_telemetry_rate:            0,
             crsf_telemetry_ratio:           0,
-            crsf_telemetry_sensors:         [],
+            telemetry_sensors_list:         [],
         };
 
         this.GPS_RESCUE = {

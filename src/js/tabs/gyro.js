@@ -1,10 +1,11 @@
 import semver from "semver";
-import { mount } from "svelte";
+import { mount, unmount } from "svelte";
 
 import Gyro from "@/tabs/gyro/Gyro.svelte";
 
 const tab = {
     tabName: 'gyro',
+    svelteComponent: null,
     isDirty: false,
     rpmFilterDirty: false,
     FILTER_TYPE_NAMES: [
@@ -280,7 +281,7 @@ tab.initialize = function (callback) {
     }
 
     function process_html() {
-        mount(Gyro, {
+        self.svelteComponent = mount(Gyro, {
             target: document.querySelector("#rpm-filter"),
             props: {
                 onRpmNotchUpdate: (dirty, valid) => {
@@ -352,6 +353,11 @@ tab.initialize = function (callback) {
 
 
 tab.cleanup = function (callback) {
+    if (this.svelteComponent) {
+        unmount(this.svelteComponent);
+        this.svelteComponent = null;
+    }
+
     this.isDirty = false;
     this.rpmFilterDirty = false;
 

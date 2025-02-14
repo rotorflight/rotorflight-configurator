@@ -992,10 +992,12 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.TELEMETRY_CONFIG.crsf_telemetry_mode = data.readU8();
                     FC.TELEMETRY_CONFIG.crsf_telemetry_rate = data.readU16();
                     FC.TELEMETRY_CONFIG.crsf_telemetry_ratio = data.readU16();
-                    FC.TELEMETRY_CONFIG.crsf_telemetry_sensors = [];
+
+                    const telemetry_sensors_list = [];
                     for (let i = 0; i < self.CRSF_TELEMETRY_SENSOR_LENGTH; i++) {
-                        FC.TELEMETRY_CONFIG.crsf_telemetry_sensors.push(data.readU8());
+                        telemetry_sensors_list.push(data.readU8());
                     }
+                    FC.TELEMETRY_CONFIG.telemetry_sensors_list = telemetry_sensors_list;
                 }
                 break;
             }
@@ -1411,6 +1413,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                     FC.BLACKBOX.blackboxInitialEraseKiB = data.readU16();
                     FC.BLACKBOX.blackboxRollingErase = data.readU8();
+                    FC.BLACKBOX.blackboxGracePeriod = data.readU8();
                 }
                 break;
             }
@@ -1920,7 +1923,7 @@ MspHelper.prototype.crunch = function(code) {
                       .push16(FC.TELEMETRY_CONFIG.crsf_telemetry_rate)
                       .push16(FC.TELEMETRY_CONFIG.crsf_telemetry_ratio);
                 for (let i = 0; i < self.CRSF_TELEMETRY_SENSOR_LENGTH; i++) {
-                    buffer.push8(FC.TELEMETRY_CONFIG.crsf_telemetry_sensors[i] ?? 0);
+                    buffer.push8(FC.TELEMETRY_CONFIG.telemetry_sensors_list[i] ?? 0);
                 }
             }
             break;
@@ -2157,7 +2160,8 @@ MspHelper.prototype.crunch = function(code) {
                 .push32(FC.BLACKBOX.blackboxFields);
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                 buffer.push16(FC.BLACKBOX.blackboxInitialEraseKiB)
-                    .push8(FC.BLACKBOX.blackboxRollingErase);
+                    .push8(FC.BLACKBOX.blackboxRollingErase)
+                    .push8(FC.BLACKBOX.blackboxGracePeriod);
             }
             break;
         }

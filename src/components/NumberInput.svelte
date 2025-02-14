@@ -222,7 +222,7 @@
 <style lang="scss">
   @mixin light {
     color: var(--color-neutral-900);
-    background-color: var(--color-neutral-050);
+    background-color: var(--color-neutral-50);
     border-color: var(--color-neutral-300);
   }
 
@@ -244,6 +244,7 @@
 
   .container {
     display: flex;
+    max-width: 120px;
   }
 
   input {
