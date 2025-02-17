@@ -158,12 +158,14 @@ export const RX_PROTOCOLS = [
     get telemetry() {
       if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
         return {
+          proto: "ghst",
           type: TelemetryType.UNORDERED_LIST,
           sensors: GHOST_SENSORS,
         };
       }
 
       return {
+        proto: "ghst",
         type: TelemetryType.BITFIELD,
         mask: 0x00003607,
       };

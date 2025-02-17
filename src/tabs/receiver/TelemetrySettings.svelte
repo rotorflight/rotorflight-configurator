@@ -8,7 +8,7 @@
   import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
 
-  let { FC = $bindable(), telemetry } = $props();
+  let { FC = $bindable(), telemetry, resetTelemetry } = $props();
 </script>
 
 <Section label="receiverTelemetrySettings">
@@ -56,8 +56,9 @@
             bind:checked={
               () => FC.TELEMETRY_CONFIG.crsf_telemetry_mode,
               (v) => {
+                const currentProto = telemetry;
                 FC.TELEMETRY_CONFIG.crsf_telemetry_mode = v;
-                FC.TELEMETRY_CONFIG.telemetry_sensors_list.fill(0);
+                resetTelemetry(currentProto);
               }
             }
           />
