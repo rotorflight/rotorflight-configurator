@@ -46,7 +46,7 @@
       </SubSection>
     {/if}
     {#if !telemetry.external && telemetry.proto === "crsf" && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)}
-      <SubSection label="CRSF">
+      <SubSection label="receiverTelemetrySettingsSectionCRSF">
         <Field id="telmetry-crsf-custom" label="receiverCrsfTelemetryMode">
           {#snippet tooltip()}
             <Tooltip help="receiverHelpCrsfTelemetryMode" />

@@ -1658,6 +1658,9 @@
     "receiverSelection": {
         "message": "Receiver Type"
     },
+    "receiverSelectionSectionSignaling": {
+        "message": "Signaling"
+    },
     "receiverSettings": {
         "message": "Receiver Settings"
     },
@@ -1729,6 +1732,9 @@
     },
     "receiverTelemetrySettings": {
         "message": "Telemetry Settings"
+    },
+    "receiverTelemetrySettingsSectionCRSF": {
+        "message": "CRSF"
     },
     "receiverTelemetryEnabled": {
         "message": "Enable Telemetry"

@@ -58,7 +58,7 @@
     </Field>
   </SubSection>
   {#if RX_PROTOCOLS[rxProtoIndex]?.feature === "RX_SERIAL"}
-    <SubSection label="Signaling">
+    <SubSection label="receiverSelectionSectionSignaling">
       <Field id="receiver-serialrx-inverted" label="receiverSerialInverted">
         {#snippet tooltip()}
           <Tooltip help="receiverSerialInvertedHelp" />
