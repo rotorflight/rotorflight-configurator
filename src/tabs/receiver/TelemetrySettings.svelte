@@ -22,7 +22,7 @@
   </SubSection>
   {#if FC.FEATURE_CONFIG.features.TELEMETRY}
     {#if telemetry.external}
-      <SubSection label="Signaling">
+      <SubSection label="receiverTelemetrySettingsSectionSignaling">
         <Field id="telemetry-inverted" label="receiverTelemetryInverted">
           <Switch
             id="telemetry-inverted"
