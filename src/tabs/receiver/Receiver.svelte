@@ -96,26 +96,31 @@
 
   const telemetryCache = {};
   function resetTelemetry(fromProto) {
-    if (!telemetryCache[fromProto.type]) {
-      telemetryCache[fromProto.type] = {};
+    if (fromProto && fromProto.type !== TelemetryType.TOGGLE) {
+      if (!telemetryCache[fromProto.type]) {
+        telemetryCache[fromProto.type] = {};
+      }
+
+      // cache current telemetry
+      telemetryCache[fromProto.type][fromProto.proto] = {
+        telemetry_sensors: FC.TELEMETRY_CONFIG.telemetry_sensors,
+        telemetry_sensors_list: $state.snapshot(
+          FC.TELEMETRY_CONFIG.telemetry_sensors_list,
+        ),
+      };
     }
 
-    // cache current telemetry
-    telemetryCache[fromProto.type][fromProto.proto] = {
-      telemetry_sensors: FC.TELEMETRY_CONFIG.telemetry_sensors,
-      telemetry_sensors_list: $state.snapshot(
-        FC.TELEMETRY_CONFIG.telemetry_sensors_list,
-      ),
-    };
-
-    // load cached telemetry
-    const cachedTelemetry = telemetryCache[telemetry.type]?.[telemetry.proto];
-    if (cachedTelemetry) {
-      Object.assign(FC.TELEMETRY_CONFIG, cachedTelemetry);
-    } else {
-      FC.TELEMETRY_CONFIG.telemetry_sensors = 0;
-      FC.TELEMETRY_CONFIG.telemetry_sensors_list = [];
+    if (telemetry && telemetry.type !== TelemetryType.TOGGLE) {
+      // load cached telemetry
+      const cachedTelemetry = telemetryCache[telemetry.type]?.[telemetry.proto];
+      if (cachedTelemetry) {
+        Object.assign(FC.TELEMETRY_CONFIG, cachedTelemetry);
+        return;
+      }
     }
+
+    FC.TELEMETRY_CONFIG.telemetry_sensors = 0;
+    FC.TELEMETRY_CONFIG.telemetry_sensors_list = [];
   }
 
   function setRxProto(i) {
@@ -133,7 +138,7 @@
       FC.RX_CONFIG.rxSpiProtocol = newRxProto.id;
     }
 
-    if (currentProto.telemetry && !usingExtTelem) {
+    if (!usingExtTelem) {
       resetTelemetry(currentProto.telemetry);
     }
   }
