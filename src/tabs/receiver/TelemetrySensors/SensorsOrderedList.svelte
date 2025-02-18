@@ -149,7 +149,11 @@
             {/each}
           {/snippet}
           {#if optgroup.title}
-            <optgroup label={optgroup.title}>{@render opts()} </optgroup>
+            <optgroup
+              label={$i18n.t(`receiverTelemetryGroup_${optgroup.title}`)}
+            >
+              {@render opts()}
+            </optgroup>
           {:else}
             {@render opts()}
           {/if}
