@@ -1,6 +1,6 @@
 <script>
   import { i18n } from "@/js/i18n.js";
-  let { children } = $props();
+  let { children, message } = $props();
 </script>
 
 <div class="container">
@@ -22,7 +22,7 @@
   .container {
     border-radius: 2px;
     padding: 8px 16px;
-    margin: 0 4px;
+    margin: 4px;
 
     :global(html[data-theme="light"]) & {
       color: var(--color-red-900);
