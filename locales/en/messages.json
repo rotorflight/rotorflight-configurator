@@ -1733,6 +1733,9 @@
     "receiverTelemetrySettings": {
         "message": "Telemetry Settings"
     },
+    "receiverTelemetrySettingsSectionSignaling": {
+        "message": "Signaling"
+    },
     "receiverTelemetrySettingsSectionCRSF": {
         "message": "CRSF"
     },

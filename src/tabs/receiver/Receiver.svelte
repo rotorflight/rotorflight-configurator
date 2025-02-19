@@ -93,13 +93,62 @@
   let rxProto = $derived(RX_PROTOCOLS[rxProtoIndex]);
 
   let telemetry = $derived(extTelemProto?.telemetry ?? rxProto?.telemetry);
+
+  const telemetryCache = {};
+  function resetTelemetry(fromProto) {
+    if (fromProto && fromProto.type !== TelemetryType.TOGGLE) {
+      if (!telemetryCache[fromProto.type]) {
+        telemetryCache[fromProto.type] = {};
+      }
+
+      // cache current telemetry
+      telemetryCache[fromProto.type][fromProto.proto] = {
+        telemetry_sensors: FC.TELEMETRY_CONFIG.telemetry_sensors,
+        telemetry_sensors_list: $state.snapshot(
+          FC.TELEMETRY_CONFIG.telemetry_sensors_list,
+        ),
+      };
+    }
+
+    if (telemetry && telemetry.type !== TelemetryType.TOGGLE) {
+      // load cached telemetry
+      const cachedTelemetry = telemetryCache[telemetry.type]?.[telemetry.proto];
+      if (cachedTelemetry) {
+        Object.assign(FC.TELEMETRY_CONFIG, cachedTelemetry);
+        return;
+      }
+    }
+
+    FC.TELEMETRY_CONFIG.telemetry_sensors = 0;
+    FC.TELEMETRY_CONFIG.telemetry_sensors_list = [];
+  }
+
+  function setRxProto(i) {
+    const usingExtTelem = !!extTelemProto;
+    const currentProto = rxProto;
+    const newRxProto = RX_PROTOCOLS[i];
+    FC.FEATURE_CONFIG.features.setGroup("RX_PROTO", false);
+    if (newRxProto.feature) {
+      FC.FEATURE_CONFIG.features.setFeature(newRxProto.feature, true);
+    }
+
+    if (newRxProto.feature === "RX_SERIAL") {
+      FC.RX_CONFIG.serialrx_provider = newRxProto.id;
+    } else if (newRxProto.feature === "RX_SPI") {
+      FC.RX_CONFIG.rxSpiProtocol = newRxProto.id;
+    }
+
+    if (!usingExtTelem) {
+      resetTelemetry(currentProto.telemetry);
+    }
+  }
 </script>
 
 <div class="container">
-  <ReceiverType {FC} {rxProtoIndex} {hasSerialRxPort} {extTelemProto} />
+  <ReceiverType {FC} {rxProtoIndex} {hasSerialRxPort} {setRxProto} />
   <ReceiverSettings {FC} />
   {#if telemetry}
-    <TelemetrySettings {FC} {telemetry} />
+    <TelemetrySettings {FC} {telemetry} {resetTelemetry} />
     {#if FC.FEATURE_CONFIG.features.TELEMETRY && telemetry.type !== TelemetryType.TOGGLE}
       <TelemetrySensors {FC} {telemetry} />
     {/if}

@@ -8,7 +8,7 @@
   import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
 
-  let { FC = $bindable(), telemetry } = $props();
+  let { FC = $bindable(), telemetry, resetTelemetry } = $props();
 </script>
 
 <Section label="receiverTelemetrySettings">
@@ -22,7 +22,7 @@
   </SubSection>
   {#if FC.FEATURE_CONFIG.features.TELEMETRY}
     {#if telemetry.external}
-      <SubSection label="Signaling">
+      <SubSection label="receiverTelemetrySettingsSectionSignaling">
         <Field id="telemetry-inverted" label="receiverTelemetryInverted">
           <Switch
             id="telemetry-inverted"
@@ -56,8 +56,9 @@
             bind:checked={
               () => FC.TELEMETRY_CONFIG.crsf_telemetry_mode,
               (v) => {
+                const currentProto = telemetry;
                 FC.TELEMETRY_CONFIG.crsf_telemetry_mode = v;
-                FC.TELEMETRY_CONFIG.telemetry_sensors_list.fill(0);
+                resetTelemetry(currentProto);
               }
             }
           />
