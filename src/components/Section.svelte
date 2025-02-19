@@ -2,7 +2,7 @@
   import { slide } from "svelte/transition";
   import { i18n } from "@/js/i18n.js";
 
-  let { children, label, summary } = $props();
+  let { children, label, summary, header } = $props();
 
   let showSummary = $state(false);
 
@@ -12,18 +12,22 @@
 </script>
 
 <div class="container">
-  <div class="header">
-    <span class="title">{$i18n.t(label)}</span>
-    {#if summary}
-      <div class="grow"></div>
-      <button
-        aria-label="help"
-        onclick={toggleSummary}
-        class={["icon", "fas", "fa-question-circle", showSummary && "active"]}
-      >
-      </button>
-    {/if}
-  </div>
+  {#if header}
+    {@render header()}
+  {:else}
+    <div class="header">
+      <span class="title">{$i18n.t(label)}</span>
+      {#if summary}
+        <div class="grow"></div>
+        <button
+          aria-label="help"
+          onclick={toggleSummary}
+          class={["icon", "fas", "fa-question-circle", showSummary && "active"]}
+        >
+        </button>
+      {/if}
+    </div>
+  {/if}
   {#if showSummary && typeof summary === "string"}
     <div class="summary" transition:slide>
       <p>

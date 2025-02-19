@@ -1775,6 +1775,15 @@
     "receiverTelemetrySensors": {
         "message": "Telemetry Sensors"
     },
+    "receiverTelemetrySensorsSelect": {
+        "message": "Select"
+    },
+    "receiverTelemetrySensorsSort": {
+        "message": "Sort"
+    },
+    "receiverTelemetrySensorsExceededWarning": {
+        "message": "A maximum of 40 sensors can be enabled."
+    },
     "receiverTelemetrySensor_VOLTAGE": {
         "message": "Battery Voltage"
     },

@@ -1,10 +1,10 @@
 <script>
-  let { id, checked = $bindable() } = $props();
+  let { id, checked = $bindable(), disabled = false } = $props();
 </script>
 
 <label class="container">
-  <input {id} type="checkbox" bind:checked />
-  <span class="slider"></span>
+  <input {id} type="checkbox" bind:checked {disabled} />
+  <span class={["slider", disabled && "disabled"]}></span>
 </label>
 
 <style lang="scss">
@@ -46,6 +46,14 @@
     background-color: var(--color-switch-secondary);
     border-radius: 8px;
     transition: var(--animation-speed);
+
+    &.disabled {
+      background-color: var(--color-switch-disabled);
+
+      &::before {
+        background-color: var(--color-switch-handle-disabled);
+      }
+    }
 
     &::before {
       position: absolute;
