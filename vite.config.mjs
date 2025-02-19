@@ -21,8 +21,12 @@ export default defineConfig({
         "src/main.html": "src/main.html",
         "src/main_cordova.html": "src/main_cordova.html",
         "src/tabs/receiver_msp.html": "src/tabs/receiver_msp.html",
+        "src/tabs/map.html": "src/tabs/map.html",
       },
       output: {
+        entryFileNames: `assets/[name].js`,
+        chunkFileNames: `assets/[name].js`,
+        assetFileNames: `assets/[name].[ext]`,
         manualChunks(id) {
           if (id.includes("node_modules/d3")) {
             return "vendor-d3";
