@@ -33,7 +33,6 @@ import { serial } from "@/js/serial.js";
 import * as serialBackend from "@/js/serial_backend.js";
 import * as utilsCommon from "@/js/utils/common.js";
 
-import "@/js/filesystem.js";
 import "@/js/injected_methods.js";
 import "@/js/tabs/index.js";
 

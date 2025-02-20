@@ -1,51 +1,76 @@
-const IS_CORDOVA = !!window.cordova;
-
-function getFileNameFromUrl(url) {
-  return url.pathname.substring(url.pathname.lastIndexOf("/") + 1);
-}
+export let readTextFile;
+export let getWriteStream;
+export let writeTextFile;
 
 function getFileExtension(fileName) {
   const re = /(?:\.([^.]+))?$/;
   return re.exec(fileName)[1];
 }
 
-const cordova = {
-  async readTextFile() {
+if (__BACKEND__ === "nwjs") {
+  // https://fs.spec.whatwg.org/
+  // https://wicg.github.io/file-system-access/
+
+  readTextFile = async (opts) => {
     try {
-      const uri = await new Promise((resolve, reject) =>
-        window.fileChooser.open({ mime: "text/plain" }, resolve, reject),
-      );
-      const actualPath = await new Promise((resolve, reject) =>
-        window.FilePath.resolveNativePath(uri, resolve, reject),
-      );
-      const filename = getFileNameFromUrl(new URL(actualPath));
-      const entry = await new Promise((resolve, reject) =>
-        window.resolveLocalFileSystemURL(uri, resolve, reject),
-      );
-      const file = await new Promise((resolve, reject) =>
-        entry.file(resolve, reject),
-      );
-
-      const content = await new Promise((resolve, reject) => {
-        var reader = new FileReader();
-
-        reader.onload = function () {
-          resolve(this.result);
-        };
-
-        reader.onerror = reject;
-        reader.onabort = reject;
-
-        reader.readAsText(file);
+      const [handle] = await showOpenFilePicker({
+        types: [
+          {
+            description: opts.description,
+            accept: { "text/plain": opts.extensions },
+          },
+        ],
       });
+      if (!handle) return;
 
-      return { name: filename, content };
+      const file = await handle.getFile();
+      return { name: file.name, content: await file.text() };
     } catch (err) {
       console.log(err);
     }
-  },
+  };
 
-  async _getFileEntry(opts) {
+  getWriteStream = async (opts) => {
+    try {
+      const handle = await showSaveFilePicker({
+        suggestedName: opts.suggestedName,
+        types: [
+          {
+            description: opts.description,
+            accept: {
+              [opts.mimeType]: `.${getFileExtension(opts.suggestedName)}`,
+            },
+          },
+        ],
+      });
+      return await handle.createWritable();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  writeTextFile = async (text, opts) => {
+    const writer = await getWriteStream({
+      ...opts,
+      mimeType: "text/plain",
+    });
+    if (!writer) return;
+
+    try {
+      await writer.write(new Blob([text], { type: "text/plain" }));
+      await writer.close();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+if (__BACKEND__ === "cordova") {
+  function getFileNameFromUrl(url) {
+    return url.pathname.substring(url.pathname.lastIndexOf("/") + 1);
+  }
+
+  async function getFileEntry(opts) {
     const extension = getFileExtension(opts.suggestedName);
     const folder = window.cordova.file.externalDataDirectory;
 
@@ -97,11 +122,46 @@ const cordova = {
         directoryEntry.getFile(fileName, { create: true }, resolve, reject),
       );
     }
-  },
+  }
 
-  async getWriteStream(opts) {
+  readTextFile = async () => {
     try {
-      const entry = await this._getFileEntry(opts);
+      const uri = await new Promise((resolve, reject) =>
+        window.fileChooser.open({ mime: "text/plain" }, resolve, reject),
+      );
+      const actualPath = await new Promise((resolve, reject) =>
+        window.FilePath.resolveNativePath(uri, resolve, reject),
+      );
+      const filename = getFileNameFromUrl(new URL(actualPath));
+      const entry = await new Promise((resolve, reject) =>
+        window.resolveLocalFileSystemURL(uri, resolve, reject),
+      );
+      const file = await new Promise((resolve, reject) =>
+        entry.file(resolve, reject),
+      );
+
+      const content = await new Promise((resolve, reject) => {
+        var reader = new FileReader();
+
+        reader.onload = function () {
+          resolve(this.result);
+        };
+
+        reader.onerror = reject;
+        reader.onabort = reject;
+
+        reader.readAsText(file);
+      });
+
+      return { name: filename, content };
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  getWriteStream = async (opts) => {
+    try {
+      const entry = await getFileEntry(opts);
       if (!entry) return;
 
       const writer = await new Promise((resolve) =>
@@ -132,10 +192,10 @@ const cordova = {
     } catch (err) {
       console.log(err);
     }
-  },
+  };
 
-  async writeTextFile(text, opts) {
-    const writer = await this.getWriteStream(opts);
+  writeTextFile = async (text, opts) => {
+    const writer = await getWriteStream(opts);
     if (!writer) return;
 
     try {
@@ -147,64 +207,5 @@ const cordova = {
     } catch (err) {
       console.log(err);
     }
-  },
-};
-
-// https://fs.spec.whatwg.org/
-// https://wicg.github.io/file-system-access/
-const web = {
-  async readTextFile(opts) {
-    try {
-      const [handle] = await showOpenFilePicker({
-        types: [
-          {
-            description: opts.description,
-            accept: { "text/plain": opts.extensions },
-          },
-        ],
-      });
-      if (!handle) return;
-
-      const file = await handle.getFile();
-      return { name: file.name, content: await file.text() };
-    } catch (err) {
-      console.log(err);
-    }
-  },
-
-  async getWriteStream(opts) {
-    try {
-      const handle = await showSaveFilePicker({
-        suggestedName: opts.suggestedName,
-        types: [
-          {
-            description: opts.description,
-            accept: {
-              [opts.mimeType]: `.${getFileExtension(opts.suggestedName)}`,
-            },
-          },
-        ],
-      });
-      return await handle.createWritable();
-    } catch (err) {
-      console.log(err);
-    }
-  },
-
-  async writeTextFile(text, opts) {
-    const writer = await this.getWriteStream({
-      ...opts,
-      mimeType: "text/plain",
-    });
-    if (!writer) return;
-
-    try {
-      await writer.write(new Blob([text], { type: "text/plain" }));
-      await writer.close();
-    } catch (err) {
-      console.log(err);
-    }
-  },
-};
-
-window.filesystem = IS_CORDOVA ? cordova : web;
+  };
+}
