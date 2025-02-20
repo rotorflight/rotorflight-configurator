@@ -37,7 +37,7 @@ const REDIST_DIR = "./redist";
 const LINUX_INSTALL_DIR = "/opt/rotorflight";
 
 const NWJS_CACHE_DIR = "nwjs_cache";
-const NWJS_VERSION = "0.95.0";
+const NWJS_VERSION = "0.96.0";
 const NWJS_ARCH = {
   x86: "ia32",
   x86_64: "x64",
