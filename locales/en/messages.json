@@ -888,6 +888,9 @@
         "message": "Governor can't function without an RPM signal",
         "description": "Message that pops up to describe the GOVERNOR arming disable flag"
     },
+    "statusArmingDisableFlagsTooltipRPM_SIGNAL": {
+        "message": "A fast rpm source has not been configured"
+    },
     "statusArmingDisableFlagsTooltipCRASH": {
         "message": "Disarmed via crash detection",
         "description": "Message that pops up to describe the CRASH arming disable flag"
