@@ -1,6 +1,7 @@
 import * as marked from 'marked';
 import semver from "semver";
 
+import { readTextFile, writeTextFile } from '@/js/filesystem.js';
 import { GitHubApi } from '@/js/GitHubApi.js';
 import { ReleaseChecker } from '@/js/release_checker.js';
 
@@ -812,7 +813,7 @@ tab.initialize = function (callback) {
         $('a.load_file').on('click', async function () {
             self.enableFlashing(false);
 
-            const file = await window.filesystem.readTextFile({
+            const file = await readTextFile({
                 description: "Firmware/Target",
                 extensions: [".hex", ".config"],
             });
@@ -1233,7 +1234,7 @@ tab.flashingMessage = function(message, type) {
             var summary = $('select[name="firmware_version"] option:selected').data('summary');
 
             try {
-                await window.filesystem.writeTextFile(self.intel_hex, {
+                await writeTextFile(self.intel_hex, {
                     suggestedName: summary.file,
                     description: 'Rotorflight Firmware (.hex)',
                 });
