@@ -109,3 +109,9 @@ if (__BACKEND__ === "cordova") {
     cordovaApp.initialize();
   })();
 }
+
+if (import.meta.hot) {
+  import.meta.hot.on("vite:beforeFullReload", () => {
+    serial.disconnect();
+  });
+}
