@@ -1,3 +1,13 @@
+# 2.1.1
+
+This is a maintenance release containing minor bug fixes.
+
+## Changes from 2.1.0
+
+- Fix external telemetry signalling settings not saving
+
+***
+
 # 2.1.0
 
 This is the _the Official Release_ of the Rotorflight 2.1.0 Configurator.
