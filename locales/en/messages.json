@@ -3345,6 +3345,12 @@
     "govSpoolupTimeHelp": {
         "message": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
     },
+    "govSpoolupMinThrottle": {
+        "message": "Spoolup minimum throttle"
+    },
+    "govSpoolupMinThrottleHelp": {
+        "message": "Minimum throttle to be used during spoolup. For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%."
+    },
     "govTrackingTime": {
         "message": "Tracking time"
     },
