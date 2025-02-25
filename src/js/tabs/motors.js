@@ -20,6 +20,7 @@ const tab = {
         "DSHOT300",
         "DSHOT600",
         "PROSHOT",
+        "CASTLE",
         "DISABLED",
     ],
     telemetryProtocols: [
@@ -393,16 +394,17 @@ tab.initialize = function (callback) {
         telemProtocolSelect.val(self.isEscSensorEnabled ? FC.ESC_SENSOR_CONFIG.protocol : 0);
         telemProtocolSelect.on('change', function() {
             FC.ESC_SENSOR_CONFIG.protocol = parseInt($(this).val());
-            FC.FEATURE_CONFIG.features.setFeature('ESC_SENSOR', FC.ESC_SENSOR_CONFIG.protocol  > 0);
+            FC.FEATURE_CONFIG.features.setFeature('ESC_SENSOR', FC.ESC_SENSOR_CONFIG.protocol > 0 || FC.MOTOR_CONFIG.motor_pwm_protocol == 9 /* CASTLE */);
             self.isEscSensorEnabled = FC.FEATURE_CONFIG.features.isEnabled('ESC_SENSOR');
 
             toggleTelemFields();
         });
 
         function toggleTelemFields() {
-            escTelemetryHalfDuplex.closest('.field').toggle(self.isEscSensorEnabled);
+	    let escSensorHasPort = self.isEscSensorEnabled && FC.ESC_SENSOR_CONFIG.protocol > 0;
+            escTelemetryHalfDuplex.closest('.field').toggle(escSensorHasPort);
 
-            const showPinswap = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7) && self.isEscSensorEnabled;
+            const showPinswap = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7) && escSensorHasPort;
             escTelemetryPinswap.closest('.field').toggle(showPinswap);
         }
 
@@ -439,13 +441,14 @@ tab.initialize = function (callback) {
 
             const protocolNum = parseInt(escProtocolSelect.val());
 
-            self.isProtoEnabled = (protocolNum < 9) && (FC.CONFIG.motorCount > 0);
+            self.isProtoEnabled = (protocolNum < 10) && (FC.CONFIG.motorCount > 0);
             self.isDshot = (protocolNum >= 5 && protocolNum < 9);
+	    self.isCastleLink = protocolNum == 9
 
             $('.mincommand').toggle(self.isProtoEnabled && !self.isDshot);
             $('.minthrottle').toggle(self.isProtoEnabled && !self.isDshot);
             $('.maxthrottle').toggle(self.isProtoEnabled && !self.isDshot);
-            $('.unsyncedPwm').toggle(self.isProtoEnabled && !self.isDshot && protocolNum != 0);
+            $('.unsyncedPwm').toggle(self.isProtoEnabled && !self.isDshot && protocolNum != 0 && !self.isCastleLink);
             $('.inputPwmFreq').toggle(self.isProtoEnabled && !self.isDshot);
             $('.dshotBidir').toggle(self.isProtoEnabled && self.isDshot);
             $('.rpmSensor').toggle(self.isProtoEnabled);
@@ -496,7 +499,7 @@ tab.initialize = function (callback) {
 
             const telemProto =  parseInt($('select[id="telemetryProtocol"]').val());
             FC.ESC_SENSOR_CONFIG.protocol = telemProto;
-            FC.FEATURE_CONFIG.features.setFeature('ESC_SENSOR', telemProto > 0);
+            FC.FEATURE_CONFIG.features.setFeature('ESC_SENSOR', telemProto > 0 || FC.MOTOR_CONFIG.motor_pwm_protocol == 9 /* CASTLE */);
 
             FC.ESC_SENSOR_CONFIG.half_duplex = +escTelemetryHalfDuplex.is(':checked');
             FC.ESC_SENSOR_CONFIG.pinswap = +escTelemetryPinswap.is(':checked');
