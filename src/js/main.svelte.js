@@ -111,7 +111,12 @@ if (__BACKEND__ === "cordova") {
 }
 
 if (import.meta.hot) {
-  import.meta.hot.on("vite:beforeFullReload", () => {
+  import.meta.hot.on("vite:beforeFullReload", (event) => {
+    if (event.path?.endsWith(".html") && event.path !== "/src/main.html") {
+      return;
+    }
+
+    console.log("vite disconnecting serial");
     serial.disconnect();
   });
 }
