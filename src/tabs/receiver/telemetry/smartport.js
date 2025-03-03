@@ -41,6 +41,8 @@ export const SMARTPORT_SENSORS = [
       { name: "ESC1_TEMP2" },
       { name: "ESC1_BEC_VOLTAGE" },
       { name: "ESC1_BEC_CURRENT" },
+      { name: "ESC1_STATUS" },
+      { name: "ESC1_MODEL" },
     ],
   },
   {
@@ -51,6 +53,7 @@ export const SMARTPORT_SENSORS = [
       { name: "ESC2_CAPACITY" },
       { name: "ESC2_ERPM" },
       { name: "ESC2_TEMP1" },
+      { name: "ESC2_MODEL" },
     ],
   },
   {
