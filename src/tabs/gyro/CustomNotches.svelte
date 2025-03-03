@@ -1,10 +1,12 @@
 <script>
   import semver from "semver";
   import { i18n } from "@/js/i18n.js";
-  import Switch from "@/components/Switch.svelte";
   import ErrorNote from "@/components/notes/ErrorNote.svelte";
   import WarningNote from "@/components/notes/WarningNote.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
+  import ToggleFieldGroup from "@/components/ToggleFieldGroup.svelte";
+  import Field from "@/components/Field.svelte";
+  import SubSection from "@/components/SubSection.svelte";
 
   let { FC, notches = $bindable(), onResetNotches } = $props();
 
@@ -53,11 +55,7 @@
 
 {#snippet notch(label, source, notchTypeLabel)}
   {#snippet notchType()}
-    <label for={`notch-type-${source}`}>
-      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-      <span>{@html $i18n.t(notchTypeLabel)}</span>
-    </label>
-    <div class="input">
+    <Field id={`notch-type-${source}`} label={notchTypeLabel}>
       <select
         id={`notch-type-${source}`}
         bind:value={notches.banks[axis][source].type}
@@ -69,15 +67,11 @@
           <option value={3}>{$i18n.t("gyroRpmFilterNotchTypeTriple")}</option>
         {/if}
       </select>
-    </div>
+    </Field>
   {/snippet}
 
   {#snippet notchQ()}
-    <label for={`notch-q-${source}`}>
-      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-      <span>{@html $i18n.t(label)}</span>
-    </label>
-    <div class="input">
+    <Field id={`notch-q-${source}`} {label}>
       <NumberInput
         id={`notch-q-${source}`}
         bind:value={notches.banks[axis][source].value}
@@ -86,30 +80,18 @@
         max="10"
         step="0.1"
       />
-    </div>
+    </Field>
   {/snippet}
 
-  <div class="notch-wrapper">
-    <Switch
-      bind:checked={notches.banks[axis][source].enabled}
-      --color-switch={axisColor}
-    />
-    <div class="notch">
-      {#if notchTypeLabel}
-        {@render notchType()}
-      {:else}
-        {@render notchQ()}
-      {/if}
-    </div>
-  </div>
-  {#if notchTypeLabel}
-    <div class="notch-wrapper group">
-      <div></div>
-      <div class="notch">
-        {@render notchQ()}
-      </div>
-    </div>
-  {/if}
+  <ToggleFieldGroup
+    bind:enabled={notches.banks[axis][source].enabled}
+    --color-switch={axisColor}
+  >
+    {#if notchTypeLabel}
+      {@render notchType()}
+    {/if}
+    {@render notchQ()}
+  </ToggleFieldGroup>
 {/snippet}
 
 <div class="container">
@@ -130,63 +112,65 @@
     {/if}
   </div>
 
-  {#if notchCount > MAX_NOTCH_COUNT}
-    <ErrorNote>
-      {$i18n.t("gyroRpmFilterNotchCountWarn")}
-      <br />
-      <b>{notchCount} / {MAX_NOTCH_COUNT}</b>
-    </ErrorNote>
-  {/if}
-  {#if notches}
-    <div class="notch-list">
-      {#if showMainMotor || showTailMotor}
-        <div class="notch-group-heading">
-          {$i18n.t("gyroRpmFilterMotorGroup")}
-        </div>
-        {#if showMainMotor}
-          {@render notch("gyroRpmFilterMainMotorQ", 10)}
+  <div class="content">
+    {#if notchCount > MAX_NOTCH_COUNT}
+      <ErrorNote>
+        {$i18n.t("gyroRpmFilterNotchCountWarn")}
+        <br />
+        <b>{notchCount} / {MAX_NOTCH_COUNT}</b>
+      </ErrorNote>
+    {/if}
+    {#if notches}
+      <div>
+        {#if showMainMotor || showTailMotor}
+          <SubSection label="gyroRpmFilterMotorGroup">
+            {#if showMainMotor}
+              {@render notch("gyroRpmFilterMainMotorQ", 10)}
+            {/if}
+            {#if showTailMotor}
+              {@render notch("gyroRpmFilterTailMotorQ", 20)}
+            {/if}
+          </SubSection>
         {/if}
-        {#if showTailMotor}
-          {@render notch("gyroRpmFilterTailMotorQ", 20)}
-        {/if}
-      {/if}
 
-      <div class="notch-group-heading">
-        {$i18n.t("gyroRpmFilterMainRotorGroup")}
-      </div>
-      {@render notch("gyroRpmFilterQ1", 11, "gyroRpmFilterH1")}
-      {@render notch("gyroRpmFilterQ2", 12, "gyroRpmFilterH2")}
-      {@render notch("gyroRpmFilterQ3", 13)}
-      {@render notch("gyroRpmFilterQ4", 14)}
-      {@render notch("gyroRpmFilterQ5", 15)}
-      {@render notch("gyroRpmFilterQ6", 16)}
-      {@render notch("gyroRpmFilterQ7", 17)}
-      {@render notch("gyroRpmFilterQ8", 18)}
+        <SubSection label="gyroRpmFilterMainRotorGroup">
+          {@render notch("gyroRpmFilterQ1", 11, "gyroRpmFilterH1")}
+          {@render notch("gyroRpmFilterQ2", 12, "gyroRpmFilterH2")}
+          {@render notch("gyroRpmFilterQ3", 13)}
+          {@render notch("gyroRpmFilterQ4", 14)}
+          {@render notch("gyroRpmFilterQ5", 15)}
+          {@render notch("gyroRpmFilterQ6", 16)}
+          {@render notch("gyroRpmFilterQ7", 17)}
+          {@render notch("gyroRpmFilterQ8", 18)}
+        </SubSection>
 
-      <div class="notch-group-heading">
-        {$i18n.t("gyroRpmFilterTailRotorGroup")}
+        <SubSection label="gyroRpmFilterTailRotorGroup">
+          {@render notch("gyroRpmFilterQ1", 21, "gyroRpmFilterH1")}
+          {@render notch("gyroRpmFilterQ2", 22, "gyroRpmFilterH2")}
+          {@render notch("gyroRpmFilterQ3", 23)}
+          {@render notch("gyroRpmFilterQ4", 24)}
+        </SubSection>
       </div>
-      {@render notch("gyroRpmFilterQ1", 21, "gyroRpmFilterH1")}
-      {@render notch("gyroRpmFilterQ2", 22, "gyroRpmFilterH2")}
-      {@render notch("gyroRpmFilterQ3", 23)}
-      {@render notch("gyroRpmFilterQ4", 24)}
-    </div>
-  {:else}
-    <WarningNote>
-      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-      {@html $i18n.t("gyroRpmFilterCustomNote")}
-    </WarningNote>
-    <button class="reset-btn" onclick={onResetNotches}>
-      {$i18n.t("gyroRpmFilterNotchResetBtn")}
-    </button>
-  {/if}
+    {:else}
+      <WarningNote>
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $i18n.t("gyroRpmFilterCustomNote")}
+      </WarningNote>
+      <button class="reset-btn" onclick={onResetNotches}>
+        {$i18n.t("gyroRpmFilterNotchResetBtn")}
+      </button>
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
   .container {
-    margin-top: 8px;
     display: flex;
     flex-direction: column;
+
+    :global(html[data-theme="light"]) & {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
   }
 
   .notch-group-heading {
@@ -208,19 +192,6 @@
     }
   }
 
-  .notch-list {
-    display: grid;
-    grid-template-columns: auto 1fr;
-
-    .notch-wrapper {
-      display: grid;
-      grid-template-columns: subgrid;
-      grid-column: 1 / -1;
-      align-items: center;
-      min-height: 2rem;
-    }
-  }
-
   label {
     display: flex;
     align-items: center;
@@ -235,6 +206,7 @@
     flex-grow: 1;
     font-size: 1rem;
     font-weight: 600;
+    padding: 8px;
   }
 
   .header {
@@ -243,22 +215,24 @@
     flex-wrap: wrap;
     border-bottom-width: 2px;
     border-style: solid;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 
     :global(html[data-theme="light"]) & {
       color: var(--color-neutral-900);
-      border-bottom-color: var(--color-neutral-300);
+      background-color: var(--color-neutral-100);
     }
 
     :global(html[data-theme="dark"]) & {
       color: var(--color-neutral-100);
-      border-bottom-color: var(--color-neutral-600);
+      background-color: var(--color-neutral-900);
     }
   }
 
   .header ul {
     display: flex;
     transition: var(--animation-speed);
-    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 
     & > :first-child {
@@ -288,6 +262,20 @@
 
     :global(html[data-theme="light"]) & {
       color: var(--color-neutral-100);
+    }
+  }
+
+  .content {
+    padding: 8px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+    :global(html[data-theme="light"]) & {
+      background-color: var(--color-neutral-100);
+    }
+
+    :global(html[data-theme="dark"]) & {
+      background-color: var(--color-neutral-900);
     }
   }
 
@@ -336,15 +324,36 @@
   @media only screen and (max-width: 480px) {
     .header {
       border-bottom-width: 6px;
+      padding-top: 16px;
+
+      :global(html[data-theme="light"]) & {
+        background: none;
+      }
+
+      :global(html[data-theme="dark"]) & {
+        background: none;
+      }
     }
 
     .header ul {
       width: 100%;
 
+      & > :first-child {
+        border-top-left-radius: 0;
+      }
+
+      & > :last-child {
+        border-top-right-radius: 0;
+      }
+
       button {
         width: calc(100% / 3);
         line-height: 2rem;
       }
+    }
+
+    .title {
+      padding: 8px;
     }
 
     .notch-wrapper {

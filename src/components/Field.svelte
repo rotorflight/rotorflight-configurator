@@ -2,12 +2,18 @@
   import { i18n } from "@/js/i18n.js";
   import HoverTooltip from "@/components/HoverTooltip.svelte";
 
-  let { id, children, label, tooltip } = $props();
+  let { id, children, label, tooltip, unit } = $props();
 </script>
 
 <div class="container">
   <label for={id}>
-    {$i18n.t(label)}
+    <span>
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+      {@html $i18n.t(label)}
+    </span>
+    {#if unit}
+      <span class="units"> [{unit}]</span>
+    {/if}
   </label>
   <div class="control">
     {#if tooltip}
@@ -24,22 +30,29 @@
   .container {
     display: flex;
     align-items: center;
-    min-height: 2rem;
     padding: 0 4px;
+    min-height: 2rem;
+    border-radius: 2px;
   }
 
   label {
+    display: flex;
     flex-grow: 1;
-    padding: 4px 0;
+    align-items: center;
+    align-self: stretch;
   }
 
   .control {
     max-width: 200px;
   }
 
+  .units {
+    margin-left: 8px;
+  }
+
   @media only screen and (max-width: 480px) {
     .container {
-      height: 3rem;
+      min-height: 3rem;
       padding: 0;
     }
   }
@@ -51,7 +64,7 @@
       }
 
       :global(html[data-theme="dark"]) & {
-        background-color: var(--color-neutral-700);
+        background-color: var(--color-neutral-800);
       }
     }
   }

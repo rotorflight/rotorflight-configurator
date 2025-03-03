@@ -1,10 +1,12 @@
 <script>
+  import { slide } from "svelte/transition";
+
   import { i18n } from "@/js/i18n.js";
 
   let { children, label } = $props();
 </script>
 
-<div class="container">
+<div class="container" transition:slide>
   {#if label}
     <div class="header">
       {$i18n.t(label)}
@@ -14,10 +16,6 @@
 </div>
 
 <style lang="scss">
-  .container {
-    margin-top: 8px;
-  }
-
   .header {
     font-weight: 900;
     padding: 4px 4px;
