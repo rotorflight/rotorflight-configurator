@@ -46,9 +46,9 @@
 
   .header {
     display: flex;
+    height: 32px;
     font-size: 1rem;
-    font-weight: 600;
-    font-weight: 600;
+    font-weight: 400;
     border-bottom-width: 1px;
     border-style: solid;
     align-items: center;
@@ -85,6 +85,10 @@
 
     :global(html[data-theme="dark"]) & {
       background-color: var(--color-neutral-900);
+    }
+
+    > :global(*) + :global(*) {
+      margin-top: 8px;
     }
   }
 
@@ -166,8 +170,8 @@
       padding: 8px;
     }
 
-    .content {
-      gap: 16px;
+    .content > :global(*) + :global(*) {
+      margin-top: 16px;
     }
 
     .icon {

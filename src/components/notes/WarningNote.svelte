@@ -22,7 +22,6 @@
   .container {
     border-radius: 2px;
     padding: 8px 16px;
-    margin: 4px 0;
 
     :global(html[data-theme="light"]) & {
       color: var(--color-yellow-900);

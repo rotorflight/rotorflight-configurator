@@ -9,7 +9,12 @@
     <b>{$i18n.t("errorTitle")}</b>
   </div>
   <div>
-    {@render children?.()}
+    {#if children}
+      {@render children()}
+    {:else if typeof message === "string"}
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+      {@html $i18n.t(message)}
+    {/if}
   </div>
 </div>
 
@@ -17,7 +22,6 @@
   .container {
     border-radius: 2px;
     padding: 8px 16px;
-    margin: 8px 0;
 
     :global(html[data-theme="light"]) & {
       color: var(--color-red-900);
