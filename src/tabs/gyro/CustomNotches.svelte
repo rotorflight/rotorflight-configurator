@@ -121,36 +121,34 @@
       </ErrorNote>
     {/if}
     {#if notches}
-      <div>
-        {#if showMainMotor || showTailMotor}
-          <SubSection label="gyroRpmFilterMotorGroup">
-            {#if showMainMotor}
-              {@render notch("gyroRpmFilterMainMotorQ", 10)}
-            {/if}
-            {#if showTailMotor}
-              {@render notch("gyroRpmFilterTailMotorQ", 20)}
-            {/if}
-          </SubSection>
-        {/if}
-
-        <SubSection label="gyroRpmFilterMainRotorGroup">
-          {@render notch("gyroRpmFilterQ1", 11, "gyroRpmFilterH1")}
-          {@render notch("gyroRpmFilterQ2", 12, "gyroRpmFilterH2")}
-          {@render notch("gyroRpmFilterQ3", 13)}
-          {@render notch("gyroRpmFilterQ4", 14)}
-          {@render notch("gyroRpmFilterQ5", 15)}
-          {@render notch("gyroRpmFilterQ6", 16)}
-          {@render notch("gyroRpmFilterQ7", 17)}
-          {@render notch("gyroRpmFilterQ8", 18)}
+      {#if showMainMotor || showTailMotor}
+        <SubSection label="gyroRpmFilterMotorGroup">
+          {#if showMainMotor}
+            {@render notch("gyroRpmFilterMainMotorQ", 10)}
+          {/if}
+          {#if showTailMotor}
+            {@render notch("gyroRpmFilterTailMotorQ", 20)}
+          {/if}
         </SubSection>
+      {/if}
 
-        <SubSection label="gyroRpmFilterTailRotorGroup">
-          {@render notch("gyroRpmFilterQ1", 21, "gyroRpmFilterH1")}
-          {@render notch("gyroRpmFilterQ2", 22, "gyroRpmFilterH2")}
-          {@render notch("gyroRpmFilterQ3", 23)}
-          {@render notch("gyroRpmFilterQ4", 24)}
-        </SubSection>
-      </div>
+      <SubSection label="gyroRpmFilterMainRotorGroup">
+        {@render notch("gyroRpmFilterQ1", 11, "gyroRpmFilterH1")}
+        {@render notch("gyroRpmFilterQ2", 12, "gyroRpmFilterH2")}
+        {@render notch("gyroRpmFilterQ3", 13)}
+        {@render notch("gyroRpmFilterQ4", 14)}
+        {@render notch("gyroRpmFilterQ5", 15)}
+        {@render notch("gyroRpmFilterQ6", 16)}
+        {@render notch("gyroRpmFilterQ7", 17)}
+        {@render notch("gyroRpmFilterQ8", 18)}
+      </SubSection>
+
+      <SubSection label="gyroRpmFilterTailRotorGroup">
+        {@render notch("gyroRpmFilterQ1", 21, "gyroRpmFilterH1")}
+        {@render notch("gyroRpmFilterQ2", 22, "gyroRpmFilterH2")}
+        {@render notch("gyroRpmFilterQ3", 23)}
+        {@render notch("gyroRpmFilterQ4", 24)}
+      </SubSection>
     {:else}
       <WarningNote>
         <!-- eslint-disable-next-line svelte/no-at-html-tags -->
@@ -234,6 +232,7 @@
     transition: var(--animation-speed);
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+    align-self: stretch;
 
     & > :first-child {
       border-top-left-radius: 4px;
@@ -266,6 +265,9 @@
   }
 
   .content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     padding: 8px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;

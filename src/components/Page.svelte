@@ -52,12 +52,12 @@
   }
 
   .content {
-    margin: 16px;
+    margin: var(--section-gap);
     border-top-left-radius: 32px;
   }
 
   .header {
-    padding: 4px 16px;
+    padding: 4px var(--section-gap);
     display: flex;
     gap: 8px;
     align-items: center;

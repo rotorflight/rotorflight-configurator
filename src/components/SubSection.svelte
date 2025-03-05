@@ -18,12 +18,18 @@
 <style lang="scss">
   .header {
     font-weight: 900;
-    padding: 4px 4px;
+    padding: 4px;
   }
 
   @media only screen and (max-width: 480px) {
     .content > :global(*) + :global(*) {
-      border-top: 1px solid var(--color-neutral-600);
+      :global(html[data-theme="light"]) & {
+        border-top: 1px solid var(--color-neutral-400);
+      }
+
+      :global(html[data-theme="dark"]) & {
+        border-top: 1px solid var(--color-neutral-600);
+      }
     }
 
     .header {

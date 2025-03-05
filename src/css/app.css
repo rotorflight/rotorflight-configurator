@@ -1,5 +1,7 @@
 :root {
   --animation-speed: 0.2s ease;
+  --section-gap: 16px;
+  --section-padding: 8px;
 }
 
 ::-webkit-scrollbar {
@@ -117,6 +119,11 @@ html[data-theme="dark"] {
 }
 
 @media only screen and (max-width: 480px) {
+  :root {
+    --animation-speed: 0.2s ease;
+    --section-gap: 8px;
+  }
+
   ::-webkit-scrollbar {
     width: 0px;
   }

@@ -166,14 +166,14 @@
   .content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    column-gap: 16px;
-    row-gap: 16px;
+    column-gap: var(--section-gap);
+    row-gap: var(--section-gap);
   }
 
   .column {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--section-gap);
   }
 
   button {
