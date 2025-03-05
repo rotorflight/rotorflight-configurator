@@ -6,6 +6,10 @@ const tab = {
   tabName: "gyro",
   svelteComponent: null,
 
+  get isDirty() {
+    return this.svelteComponent?.isDirty();
+  },
+
   initialize(callback) {
     const target = document.querySelector("#content");
     target.innerHTML = "";
@@ -20,6 +24,19 @@ const tab = {
       this.svelteComponent = null;
     }
 
+    callback?.();
+  },
+
+  save(callback) {
+    if (this.svelteComponent) {
+      this.svelteComponent.onSave().finally(callback);
+    } else {
+      callback?.();
+    }
+  },
+
+  revert(callback) {
+    this.svelteComponent?.onRevert();
     callback?.();
   },
 };

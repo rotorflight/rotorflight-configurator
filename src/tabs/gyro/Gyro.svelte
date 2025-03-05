@@ -79,7 +79,7 @@
     loading = false;
   });
 
-  async function onSave() {
+  export async function onSave() {
     await MSP.promise(
       MSPCodes.MSP_SET_FEATURE_CONFIG,
       mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG),
@@ -115,7 +115,7 @@
     }
   });
 
-  function onRevert() {
+  export function onRevert() {
     Object.assign(FC.RPM_FILTER_CONFIG, initialState.RPM_FILTER_CONFIG);
     Object.assign(FC.RPM_FILTER_CONFIG_V2, initialState.RPM_FILTER_CONFIG_V2);
     Object.assign(FC.FILTER_CONFIG, initialState.FILTER_CONFIG);
@@ -130,6 +130,10 @@
 
   function onClickHelp() {
     window.open(getTabHelpURL("tabGyro"), "_system");
+  }
+
+  export function isDirty() {
+    return changes.length > 0;
   }
 </script>
 
