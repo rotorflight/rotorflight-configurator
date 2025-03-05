@@ -23,6 +23,7 @@
   } from "./filter_config.js";
 
   let loading = $state(true);
+  let initialState;
 
   function snapshotState() {
     return $state.snapshot({
@@ -51,8 +52,6 @@
 
     return enabled;
   });
-
-  let initialState;
 
   function parseNotches() {
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
@@ -120,6 +119,7 @@
     Object.assign(FC.RPM_FILTER_CONFIG, initialState.RPM_FILTER_CONFIG);
     Object.assign(FC.RPM_FILTER_CONFIG_V2, initialState.RPM_FILTER_CONFIG_V2);
     Object.assign(FC.FILTER_CONFIG, initialState.FILTER_CONFIG);
+    FC.FEATURE_CONFIG.features.bitfield = initialState.features;
   }
 
   function onResetNotches() {
