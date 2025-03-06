@@ -116,6 +116,8 @@
     margin: 0;
     font-size: 1rem;
 
+    -webkit-tap-highlight-color: transparent;
+
     :global(html[data-theme="light"]) & {
       color: var(--color-neutral-400);
     }
@@ -170,8 +172,13 @@
       padding: 8px;
     }
 
-    .content > :global(*) + :global(*) {
-      margin-top: 16px;
+    .content {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
+      & > :global(*) + :global(*) {
+        margin-top: 16px;
+      }
     }
 
     .icon {
