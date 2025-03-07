@@ -167,6 +167,10 @@
 </Page>
 
 <style lang="scss">
+  h1 {
+    font-weight: 600;
+  }
+
   .content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));

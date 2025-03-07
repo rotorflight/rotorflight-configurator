@@ -10,6 +10,7 @@
 
   let { FC, notches = $bindable(), onResetNotches } = $props();
 
+  let multiAxis = $derived(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8));
   let axis = $state(0);
 
   const axisProps = [
@@ -95,9 +96,12 @@
 {/snippet}
 
 <div class="container">
-  <div class="header" style:border-color={axisColor}>
+  <div
+    class={["header", multiAxis && "multi-axis"]}
+    style:border-color={axisColor}
+  >
     <span class="title">{$i18n.t("gyroRpmFilterBanks")}</span>
-    {#if notches && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)}
+    {#if notches && multiAxis}
       <ul>
         {#each axisProps as axisProp, i}
           <button
@@ -203,7 +207,7 @@
   .title {
     flex-grow: 1;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 400;
     padding: 8px;
   }
 
@@ -211,7 +215,7 @@
     display: flex;
     align-items: end;
     flex-wrap: wrap;
-    border-bottom-width: 2px;
+    border-bottom-width: 1px;
     border-style: solid;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -219,11 +223,13 @@
     :global(html[data-theme="light"]) & {
       color: var(--color-neutral-900);
       background-color: var(--color-neutral-100);
+      border-color: var(--color-neutral-400);
     }
 
     :global(html[data-theme="dark"]) & {
       color: var(--color-neutral-100);
       background-color: var(--color-neutral-900);
+      border-color: var(--color-neutral-600);
     }
   }
 
@@ -324,8 +330,11 @@
   }
 
   @media only screen and (max-width: 480px) {
-    .header {
+    .multi-axis {
       border-bottom-width: 6px;
+    }
+
+    .header {
       padding-top: 16px;
 
       :global(html[data-theme="light"]) & {

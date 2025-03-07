@@ -57,7 +57,7 @@
   }
 
   .header {
-    padding: 4px var(--section-gap);
+    padding: 8px var(--section-gap);
     display: flex;
     gap: 8px;
     align-items: center;
