@@ -888,6 +888,9 @@
         "message": "Governor can't function without an RPM signal",
         "description": "Message that pops up to describe the GOVERNOR arming disable flag"
     },
+    "statusArmingDisableFlagsTooltipRPM_SIGNAL": {
+        "message": "A fast rpm source has not been configured"
+    },
     "statusArmingDisableFlagsTooltipCRASH": {
         "message": "Disarmed via crash detection",
         "description": "Message that pops up to describe the CRASH arming disable flag"
@@ -3344,6 +3347,12 @@
     },
     "govSpoolupTimeHelp": {
         "message": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
+    },
+    "govSpoolupMinThrottle": {
+        "message": "Spoolup minimum throttle"
+    },
+    "govSpoolupMinThrottleHelp": {
+        "message": "Minimum throttle to be used during spoolup. For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%."
     },
     "govTrackingTime": {
         "message": "Tracking time"
