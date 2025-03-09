@@ -1,5 +1,7 @@
 import semver from "semver";
 
+import * as filesystem from "@/js/filesystem.js";
+
 let sdcardTimer;
 
 const tab = {
@@ -627,11 +629,15 @@ tab.initialize = function (callback) {
                 const prefix = 'BLACKBOX_LOG';
                 const suffix = 'BBL';
 
-                const writer = await window.filesystem.getWriteStream({
+                const writer = await filesystem.getWriteStream({
                     suggestedName: generateFilename(prefix, suffix),
                     description: `${suffix.toUpperCase()} files`,
                     mimeType: "application/octet-stream",
                 });
+
+                if (!writer) {
+                    return;
+                }
 
                 let nextAddress = 0;
                 let totalBytesCompressed = 0;

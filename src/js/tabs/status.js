@@ -1,37 +1,11 @@
+import semver from "semver";
+
 import { Model } from "@/js/model.js";
 
 const tab = {
     tabName: 'status',
     armingEnabled: true,
     yaw_fix: 0.0,
-    DISARM_FLAGS: [
-        'NO_GYRO',
-        'FAILSAFE',
-        'RX_FAILSAFE',
-        'BAD_RX_RECOVERY',
-        'BOXFAILSAFE',
-        'GOVERNOR',
-        'CRASH',
-        'THROTTLE',
-        'ANGLE',
-        'BOOT_GRACE_TIME',
-        'NOPREARM',
-        'LOAD',
-        'CALIBRATING',
-        'CLI',
-        'CMS_MENU',
-        'BST',
-        'MSP',
-        'PARALYZE',
-        'GPS',
-        'RESC',
-        'RPMFILTER',
-        'REBOOT_REQ',
-        'DSHOT_BITBANG',
-        'ACC_CALIB',
-        'MOTOR_PROTO',
-        'ARM_SWITCH'
-    ],
     axisNames: [
         { value: 0, text: 'controlAxisRoll' },
         { value: 1, text: 'controlAxisPitch' },
@@ -66,6 +40,37 @@ const tab = {
         { value: 30, text: 'controlAxisAux26' },
         { value: 31, text: 'controlAxisAux27' },
     ],
+};
+
+tab.getDisarmFlags = function () {
+    return [
+        'NO_GYRO',
+        'FAILSAFE',
+        'RX_FAILSAFE',
+        'BAD_RX_RECOVERY',
+        'BOXFAILSAFE',
+        'GOVERNOR',
+        semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8) ? 'RPM_SIGNAL' : 'CRASH',
+        'THROTTLE',
+        'ANGLE',
+        'BOOT_GRACE_TIME',
+        'NOPREARM',
+        'LOAD',
+        'CALIBRATING',
+        'CLI',
+        'CMS_MENU',
+        'BST',
+        'MSP',
+        'PARALYZE',
+        'GPS',
+        'RESC',
+        'RPMFILTER',
+        'REBOOT_REQ',
+        'DSHOT_BITBANG',
+        'ACC_CALIB',
+        'MOTOR_PROTO',
+        'ARM_SWITCH'
+    ];
 };
 
 tab.initialize = function (callback) {
@@ -159,12 +164,13 @@ tab.initialize = function (callback) {
             $('.arm-danger-row').hide();
 
             // Arming disabled flags
+            const flags = self.getDisarmFlags();
             for (let i = 0; i < FC.CONFIG.armingDisableCount; i++) {
                 // All the known elements
-                if (i < self.DISARM_FLAGS.length) {
+                if (i < flags.length) {
                     arming_disable_flags_e.append('<div id="statusArmingDisableFlags' + i + '" class="cf_tip disarm-flag" title="' +
-                        i18n.getMessage('statusArmingDisableFlagsTooltip' + self.DISARM_FLAGS[i]) +
-                        '" style="display: none;">' + self.DISARM_FLAGS[i] + '</div>');
+                        i18n.getMessage('statusArmingDisableFlagsTooltip' + flags[i]) +
+                        '" style="display: none;">' + flags[i] + '</div>');
                 }
                 // Unknown disarm flags
                 else {

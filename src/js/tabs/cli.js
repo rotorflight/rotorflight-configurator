@@ -1,3 +1,5 @@
+import { readTextFile, writeTextFile } from '@/js/filesystem.js';
+
 const tab = {
     tabName: 'cli',
     lineDelayMs: 15,
@@ -130,7 +132,7 @@ tab.initialize = function (callback) {
             const suffix = 'txt';
 
             try {
-              await window.filesystem.writeTextFile(self.outputHistory, {
+              await writeTextFile(self.outputHistory, {
                   suggestedName: generateFilename(prefix, suffix),
                   description: `${suffix.toUpperCase()} files`,
               });
@@ -182,7 +184,7 @@ tab.initialize = function (callback) {
             }
 
             try {
-                const file = await window.filesystem.readTextFile({
+                const file = await readTextFile({
                     description: "Config files",
                     extensions: [".txt", ".config"],
                 });

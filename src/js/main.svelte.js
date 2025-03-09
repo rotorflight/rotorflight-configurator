@@ -33,7 +33,6 @@ import { serial } from "@/js/serial.js";
 import * as serialBackend from "@/js/serial_backend.js";
 import * as utilsCommon from "@/js/utils/common.js";
 
-import "@/js/filesystem.js";
 import "@/js/injected_methods.js";
 import "@/js/tabs/index.js";
 
@@ -109,4 +108,15 @@ if (__BACKEND__ === "cordova") {
     Clipboard._configureClipboardAsCordova();
     cordovaApp.initialize();
   })();
+}
+
+if (import.meta.hot) {
+  import.meta.hot.on("vite:beforeFullReload", (event) => {
+    if (event.path?.endsWith(".html") && event.path !== "/src/main.html") {
+      return;
+    }
+
+    console.log("vite disconnecting serial");
+    serial.disconnect();
+  });
 }
