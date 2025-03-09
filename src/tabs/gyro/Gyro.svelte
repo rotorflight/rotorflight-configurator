@@ -13,7 +13,7 @@
   import LowpassFilter from "./LowpassFilter.svelte";
   import Page from "@/components/Page.svelte";
   import RpmFilter from "./RpmFilter.svelte";
-  import StaticFilter from "./StaticFilter.svelte";
+  import NotchFilter from "./NotchFilter.svelte";
 
   import {
     parseRpmFilterConfig1,
@@ -152,7 +152,7 @@
   <div class="content">
     <div class="column">
       <LowpassFilter {FC} />
-      <StaticFilter {FC} />
+      <NotchFilter {FC} />
       <DynamicFilter {FC} />
     </div>
     <div class="column">

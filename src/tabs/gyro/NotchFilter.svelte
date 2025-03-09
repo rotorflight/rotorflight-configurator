@@ -10,11 +10,11 @@
   const defaultValues = FC.getFilterDefaults();
   const previousValues = {};
 
-  let static1Enable = $derived(
+  let notch1Enable = $derived(
     FC.FILTER_CONFIG.gyro_notch_hz > 0 &&
       FC.FILTER_CONFIG.gyro_notch_cutoff > 0,
   );
-  let static2Enable = $derived(
+  let notch2Enable = $derived(
     FC.FILTER_CONFIG.gyro_notch2_hz > 0 &&
       FC.FILTER_CONFIG.gyro_notch2_cutoff > 0,
   );
@@ -24,7 +24,7 @@
       FC.FILTER_CONFIG[name] || previousValues[name] || defaultValues[name];
   }
 
-  function toggleStatic1(enable) {
+  function toggleNotch1(enable) {
     if (enable) {
       loadValue("gyro_notch_hz");
       loadValue("gyro_notch_cutoff");
@@ -37,7 +37,7 @@
     }
   }
 
-  function toggleStatic2(enable) {
+  function toggleNotch2(enable) {
     if (enable) {
       loadValue("gyro_notch2_hz");
       loadValue("gyro_notch2_cutoff");
@@ -51,35 +51,35 @@
   }
 </script>
 
-<Section label="gyroStaticFilterHeading" summary="gyroStaticFilterHelp">
-  <SubSection label="gyroStaticFilter1">
-    <Field id="static-filter-1-enable" label="genericEnable">
+<Section label="gyroNotchFilterHeading" summary="gyroNotchFilterHelp">
+  <SubSection label="gyroNotchFilter1">
+    <Field id="notch-filter-1-enable" label="genericEnable">
       <Switch
-        id="static-filter-1-enable"
-        bind:checked={() => static1Enable, toggleStatic1}
+        id="notch-filter-1-enable"
+        bind:checked={() => notch1Enable, toggleNotch1}
       />
     </Field>
-    {#if static1Enable}
+    {#if notch1Enable}
       <SubSection>
         <Field
-          id="static-filter-1-center"
-          label="gyroStaticFilterFrequency"
+          id="notch-filter-1-center"
+          label="gyroNotchFilterFrequency"
           unit="Hz"
         >
           <NumberInput
-            id="static-filter-1-center"
+            id="notch-filter-1-center"
             min="0"
             max="1000"
             bind:value={FC.FILTER_CONFIG.gyro_notch_hz}
           />
         </Field>
         <Field
-          id="static-filter-1-cutoff"
-          label="gyroStaticFilterCutoff"
+          id="notch-filter-1-cutoff"
+          label="gyroNotchFilterCutoff"
           unit="Hz"
         >
           <NumberInput
-            id="static-filter-1-cutoff"
+            id="notch-filter-1-cutoff"
             min="0"
             max="1000"
             bind:value={FC.FILTER_CONFIG.gyro_notch_cutoff}
@@ -88,34 +88,34 @@
       </SubSection>
     {/if}
   </SubSection>
-  <SubSection label="gyroStaticFilter2">
-    <Field id="static-filter-2-enable" label="genericEnable">
+  <SubSection label="gyroNotchFilter2">
+    <Field id="notch-filter-2-enable" label="genericEnable">
       <Switch
-        id="static-filter-2-enable"
-        bind:checked={() => static2Enable, toggleStatic2}
+        id="notch-filter-2-enable"
+        bind:checked={() => notch2Enable, toggleNotch2}
       />
     </Field>
-    {#if static2Enable}
+    {#if notch2Enable}
       <SubSection>
         <Field
-          id="static-filter-2-center"
-          label="gyroStaticFilterFrequency"
+          id="notch-filter-2-center"
+          label="gyroNotchFilterFrequency"
           unit="Hz"
         >
           <NumberInput
-            id="static-filter-2-center"
+            id="notch-filter-2-center"
             min="0"
             max="1000"
             bind:value={FC.FILTER_CONFIG.gyro_notch2_hz}
           />
         </Field>
         <Field
-          id="static-filter-2-cutoff"
-          label="gyroStaticFilterCutoff"
+          id="notch-filter-2-cutoff"
+          label="gyroNotchFilterCutoff"
           unit="Hz"
         >
           <NumberInput
-            id="static-filter-2-cutoff"
+            id="notch-filter-2-cutoff"
             min="0"
             max="1000"
             bind:value={FC.FILTER_CONFIG.gyro_notch2_cutoff}

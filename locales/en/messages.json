@@ -4953,22 +4953,22 @@
     "gyroLowpassDynMaxFrequency": {
         "message": "Max Cutoff Frequency"
     },
-    "gyroStaticFilterHeading": {
-        "message": "Static Filter"
+    "gyroNotchFilterHeading": {
+        "message": "Notch Filter"
     },
-    "gyroStaticFilterHelp": {
+    "gyroNotchFilterHelp": {
         "message": "The Notch Filters are used for filtering out additional resonances. Each filter has a Center and a Cutoff. The Center Frequency is the center of the filter and the Cutoff Frequency is where filter starts. For example with cutoff of 160 and center of 260, it means the range is 160-360Hz with most attenuation around the center."
     },
-    "gyroStaticFilter1": {
-        "message": "Static Filter 1"
+    "gyroNotchFilter1": {
+        "message": "Notch Filter 1"
     },
-    "gyroStaticFilter2": {
-        "message": "Static Filter 2"
+    "gyroNotchFilter2": {
+        "message": "Notch Filter 2"
     },
-    "gyroStaticFilterFrequency": {
+    "gyroNotchFilterFrequency": {
         "message": "Center Frequency"
     },
-    "gyroStaticFilterCutoff": {
+    "gyroNotchFilterCutoff": {
         "message": "Cutoff Frequency"
     },
     "gyroDynamicFilterHeading": {
