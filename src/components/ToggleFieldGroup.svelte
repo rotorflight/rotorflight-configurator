@@ -23,6 +23,7 @@
     display: flex;
     align-items: center;
     height: 2rem;
+    margin-left: 4px;
   }
 
   .content {

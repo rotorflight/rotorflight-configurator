@@ -34,7 +34,6 @@
 
     .header {
       font-weight: 900;
-      padding: 4px 0;
     }
   }
 </style>

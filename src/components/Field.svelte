@@ -53,7 +53,6 @@
   @media only screen and (max-width: 480px) {
     .container {
       min-height: 3rem;
-      padding: 0;
     }
   }
 

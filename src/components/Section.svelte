@@ -69,11 +69,11 @@
   }
 
   .title {
-    padding-left: 12px;
+    padding-left: 8px;
   }
 
   .content {
-    padding: 8px;
+    padding: 8px 4px;
     display: flex;
     flex-direction: column;
     border-bottom-left-radius: 4px;
@@ -93,7 +93,7 @@
   }
 
   .summary {
-    padding: 8px 12px;
+    padding: 8px;
     padding-bottom: 0;
 
     :global(html[data-theme="light"]) & {
@@ -112,7 +112,7 @@
   .icon {
     background: none;
     border: none;
-    padding: 8px 12px;
+    padding: 8px;
     margin: 0;
     font-size: 1rem;
 
@@ -164,10 +164,6 @@
       }
     }
 
-    .title {
-      padding-left: 8px;
-    }
-
     .summary {
       padding: 8px;
     }
@@ -182,7 +178,8 @@
     }
 
     .icon {
-      padding: 8px 16px;
+      padding: 8px;
+      padding-left: 16px;
     }
   }
 </style>

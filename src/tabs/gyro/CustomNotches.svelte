@@ -274,7 +274,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 8px;
+    padding: 8px 4px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
 
