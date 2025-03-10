@@ -2,7 +2,6 @@ import { mount } from "svelte";
 
 import { Beepers } from "@/js/Beepers.js";
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
-import { Clipboard } from "@/js/Clipboard.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
 import { ConfigStorage } from "@/js/ConfigStorage.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
@@ -57,7 +56,6 @@ Object.assign(globalThis, {
   ...utilsCommon,
   Beepers,
   CliAutoComplete,
-  Clipboard,
   ConfigInserter,
   ConfigStorage,
   DarkTheme,
@@ -92,10 +90,6 @@ mount(StatusBar, { target: document.querySelector("#status-bar") });
 mount(Logo, { target: document.querySelector("#logo-desktop") });
 mount(Logo, { target: document.querySelector("#logo-mobile") });
 
-if (__BACKEND__ === "nwjs") {
-  Clipboard._configureClipboardAsNwJs(GUI.nwGui);
-}
-
 if (__BACKEND__ === "cordova") {
   (async () => {
     const chromeapi = await import("@/js/cordova_chromeapi.js");
@@ -105,7 +99,6 @@ if (__BACKEND__ === "cordova") {
       ...startup,
     });
 
-    Clipboard._configureClipboardAsCordova();
     cordovaApp.initialize();
   })();
 }
