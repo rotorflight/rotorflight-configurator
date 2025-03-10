@@ -8,6 +8,7 @@
 
 !/src/**/
 !/src/css/app.css
+!/src/js/clipboard.js
 !/src/js/features.svelte.js
 !/src/js/filesystem.js
 !/src/js/main.svelte.js
