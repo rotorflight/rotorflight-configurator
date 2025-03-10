@@ -7,11 +7,13 @@
 !/*.mjs
 
 !/src/**/
+!/src/css/app.css
 !/src/js/clipboard.js
 !/src/js/features.svelte.js
 !/src/js/filesystem.js
 !/src/js/main.svelte.js
 !/src/js/port_usage.js
+!/src/js/tabs/gyro.js
 !/src/tabs/gyro/filter_config.js
 !/src/tabs/receiver/**/*.js
 

@@ -1,6 +1,6 @@
 <script>
   import { i18n } from "@/js/i18n.js";
-  let { children } = $props();
+  let { children, message } = $props();
 </script>
 
 <div class="container">
@@ -9,7 +9,12 @@
     <b>{$i18n.t("warningTitle")}</b>
   </div>
   <div>
-    {@render children?.()}
+    {#if children}
+      {@render children()}
+    {:else if typeof message === "string"}
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+      {@html $i18n.t(message)}
+    {/if}
   </div>
 </div>
 
@@ -17,7 +22,7 @@
   .container {
     border-radius: 2px;
     padding: 8px 16px;
-    margin: 8px 0;
+    margin: 0 4px;
 
     :global(html[data-theme="light"]) & {
       color: var(--color-yellow-900);
