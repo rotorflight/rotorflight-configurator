@@ -444,7 +444,7 @@ tab.initialize = function (callback) {
 
             self.isProtoEnabled = (protocolNum < 10) && (FC.CONFIG.motorCount > 0);
             self.isDshot = (protocolNum >= 5 && protocolNum < 9);
-	    self.isCastleLink = protocolNum == 9
+	    self.isCastleLink = protocolNum == 9;
 
             $('.mincommand').toggle(self.isProtoEnabled && !self.isDshot);
             $('.minthrottle').toggle(self.isProtoEnabled && !self.isDshot);
