@@ -1,4 +1,4 @@
-import { reinitialiseConnection } from "./serial_backend";
+import { reinitialiseConnection } from "@/js/serial_backend.js";
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import { CONFIGURATOR } from "@/js/data_storage.js";
 
