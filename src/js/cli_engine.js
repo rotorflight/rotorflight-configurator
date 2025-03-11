@@ -1,5 +1,5 @@
 import { reinitialiseConnection } from "./serial_backend";
-import { CliAutoComplete } from "./CliAutoComplete";
+import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import { CONFIGURATOR } from "@/js/data_storage.js";
 
 const CHAR_CODE_BACKSPACE = 8;
