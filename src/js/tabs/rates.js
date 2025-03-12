@@ -292,53 +292,50 @@ tab.initialize = function (callback) {
         rcCurveElement.height = 1000;
 
         function updateRates (event) {
-
-            setTimeout(function () { // let global validation trigger and adjust the values first
-                if (event) {
-                    const targetElement = $(event.target);
-                    let targetValue = getFloatValue(targetElement);
-                    if (self.currentRates.hasOwnProperty(targetElement.attr('name'))) {
-                        self.currentRates[targetElement.attr('name')] = targetValue;
-                        updateNeeded = true;
-                    }
-                    if (targetElement.attr('id') === 'ratesType') {
-                        self.changeRatesType(targetValue);
-                        updateNeeded = true;
-                    }
-                } else {
+            if (event) {
+                const targetElement = $(event.target);
+                let targetValue = getFloatValue(targetElement);
+                if (self.currentRates.hasOwnProperty(targetElement.attr('name'))) {
+                    self.currentRates[targetElement.attr('name')] = targetValue;
                     updateNeeded = true;
                 }
-
-                if (updateNeeded) {
-                    const curveHeight = rcCurveElement.height;
-                    const curveWidth = rcCurveElement.width;
-                    const lineScale = curveContext.canvas.width / curveContext.canvas.clientWidth;
-
-                    curveContext.clearRect(0, 0, curveWidth, curveHeight);
-
-                    maxAngularVel = Math.max(
-                        printMaxAngularVel(self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, self.maxAngularVelRollElement),
-                        printMaxAngularVel(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, self.maxAngularVelPitchElement),
-                        printMaxAngularVel(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, self.maxAngularVelYawElement));
-
-                    // make maxAngularVel multiple of 200°/s so that the auto-scale doesn't keep changing for small changes of the maximum curve
-                    maxAngularVel = self.rateCurve.setMaxAngularVel(maxAngularVel);
-
-                    drawAxes(curveContext, curveWidth, curveHeight);
-
-                    curveContext.lineWidth = 2 * lineScale;
-                    drawCurve(self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, '#ff0000', -6, curveContext);
-                    drawCurve(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -2, curveContext);
-                    drawCurve(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 2, curveContext);
-
-                    self.maxCollectiveAngle = printMaxAngularVel(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngleElement, true);
-                    drawCurve(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, '#ffbb00', 6, curveContext);
-
-                    self.updateRatesLabels();
-
-                    updateNeeded = false;
+                if (targetElement.attr('id') === 'ratesType') {
+                    self.changeRatesType(targetValue);
+                    updateNeeded = true;
                 }
-            }, 0);
+            } else {
+                updateNeeded = true;
+            }
+
+            if (updateNeeded) {
+                const curveHeight = rcCurveElement.height;
+                const curveWidth = rcCurveElement.width;
+                const lineScale = curveContext.canvas.width / curveContext.canvas.clientWidth;
+
+                curveContext.clearRect(0, 0, curveWidth, curveHeight);
+
+                maxAngularVel = Math.max(
+                    printMaxAngularVel(self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, self.maxAngularVelRollElement),
+                    printMaxAngularVel(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, self.maxAngularVelPitchElement),
+                    printMaxAngularVel(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, self.maxAngularVelYawElement));
+
+                // make maxAngularVel multiple of 200°/s so that the auto-scale doesn't keep changing for small changes of the maximum curve
+                maxAngularVel = self.rateCurve.setMaxAngularVel(maxAngularVel);
+
+                drawAxes(curveContext, curveWidth, curveHeight);
+
+                curveContext.lineWidth = 2 * lineScale;
+                drawCurve(self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, '#ff0000', -6, curveContext);
+                drawCurve(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -2, curveContext);
+                drawCurve(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 2, curveContext);
+
+                self.maxCollectiveAngle = printMaxAngularVel(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngleElement, true);
+                drawCurve(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, '#ffbb00', 6, curveContext);
+
+                self.updateRatesLabels();
+
+                updateNeeded = false;
+            }
         }
 
         $('.rates_change').on('input change', updateRates).trigger('input');

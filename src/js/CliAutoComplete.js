@@ -40,7 +40,7 @@ CliAutoComplete.setEnabled = function(enable) {
     if (this.configEnabled !== enable) {
         this.configEnabled = enable;
 
-        if (CONFIGURATOR.cliActive && CONFIGURATOR.cliValid) {
+        if (CONFIGURATOR.cliEngineActive && CONFIGURATOR.cliEngineValid) {
             // cli is already open
             if (this.isEnabled()) {
                 this.builderStart();
