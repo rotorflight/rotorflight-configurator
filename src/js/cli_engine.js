@@ -82,17 +82,17 @@ export default class CliEngine {
     const self = this;
     CliAutoComplete.initialize(
       this.#GUI.textarea,
-      this.sendLine,
-      this.writeToOutput,
+      this.sendLine.bind(this),
+      this.writeToOutput.bind(this),
     );
     $(CliAutoComplete).on("build:start", function () {
-      self.#GUI._textarea
+      self.#GUI.textarea
         .val("")
         .attr("placeholder", i18n.getMessage("cliInputPlaceholderBuilding"))
         .prop("disabled", true);
     });
     $(CliAutoComplete).on("build:stop", function () {
-      self.#GUI._textarea
+      self.#GUI.textarea
         .attr("placeholder", i18n.getMessage("cliInputPlaceholder"))
         .prop("disabled", false)
         .focus();
@@ -266,21 +266,20 @@ export default class CliEngine {
 
   // writeToOutput is a function used to write text to the window wrapper -- while primarily used by the CliEngine, it is also used by CliAutoComplete.
   writeToOutput(text) {
-    if (this.#cliAutoComplete && this.#cliAutoComplete.isBuilding()) {
-      this.#cliAutoComplete.builderParseLine(text);
-      return; // suppress output if the autocomplete is building state
-    }
-
     this.#GUI.windowWrapper.append(text);
     this.#GUI.window.scrollTop(this.#GUI.window.prop("scrollHeight"));
   }
 
   #writeLineToOutput(text) {
-    if (text.startsWith("###ERROR")) {
-      this.writeToOutput(`<span class="error_message">${text}</span><br>`);
-      this.#cliErrorsCount++;
+    if (this.#cliAutoComplete && this.#cliAutoComplete.isBuilding()) {
+      this.#cliAutoComplete.builderParseLine(text);
     } else {
-      this.writeToOutput(`${text}<br>`);
+      if (text.startsWith("###ERROR")) {
+        this.writeToOutput(`<span class="error_message">${text}</span><br>`);
+        this.#cliErrorsCount++;
+      } else {
+        this.writeToOutput(`${text}<br>`);
+      }
     }
     this.#responseCallback?.();
   }

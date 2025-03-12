@@ -106,10 +106,9 @@ tab.initialize = function (callback) {
                     });
                 }
 
-                let parsedLines = result.split('\n').map(line => {
+                const parsedLines = result.split('\n').map(line => {
                     const lowerLine = line.toLowerCase().trim();
                     if (
-                        lowerLine.startsWith('save') ||
                         lowerLine.startsWith('dump') ||
                         lowerLine.startsWith('diff') ||
                         lowerLine.startsWith('exit')
@@ -120,7 +119,6 @@ tab.initialize = function (callback) {
                     }
                 }).join('\n');
                 previewArea.val(parsedLines);
-                console.log('Previewing commands:', parsedLines);
                 self.GUI.snippetPreviewWindow.open();
             }
 
