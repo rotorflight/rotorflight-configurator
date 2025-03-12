@@ -7,6 +7,7 @@
 !/*.mjs
 
 !/src/**/
+!/src/js/cli_engine.js
 !/src/js/clipboard.js
 !/src/js/features.svelte.js
 !/src/js/filesystem.js

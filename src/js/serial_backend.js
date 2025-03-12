@@ -585,15 +585,20 @@ function onClosed(result) {
     MSP.clearListeners();
 
     CONFIGURATOR.connectionValid = false;
-    CONFIGURATOR.cliValid = false;
-    CONFIGURATOR.cliActive = false;
+    CONFIGURATOR.cliEngineValid = false;
+    CONFIGURATOR.cliEngineActive = false;
+    CONFIGURATOR.cliTab = "";
 }
 
 export function read_serial(info) {
-    if (!CONFIGURATOR.cliActive) {
+    if (!CONFIGURATOR.cliEngineActive) {
         MSP.read(info);
-    } else if (CONFIGURATOR.cliActive) {
-        TABS.cli.read(info);
+    } else {
+        switch(CONFIGURATOR.cliTab) {
+            case 'cli':
+                TABS.cli.read(info);
+                break;
+        }
     }
 }
 
