@@ -23,7 +23,7 @@ export function appReady() {
     $('.connect_b a.connect').removeClass('disabled');
     $('.firmware_b a.flash').removeClass('disabled');
 
-    i18n.init(function() {
+    i18n.init().then(function() {
         startProcess();
         initializeSerialBackend();
     });

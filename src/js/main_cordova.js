@@ -229,7 +229,7 @@ const cordovaApp = {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     onDeviceReady: function() {
-        i18n.init(function() {
+        i18n.init().then(function() {
             i18n.localizePage();
             WEBVIEW.exec();
         });
