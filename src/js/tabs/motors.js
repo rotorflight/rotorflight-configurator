@@ -466,7 +466,7 @@ tab.initialize = function (callback) {
             const govMode = parseInt(govModeSelect.val());
             $('.govEnabled').toggle(govMode > 0);
             $('input[id="govSpoolupMinThrottle"]').closest('.field')
-                .toggle(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8));
+                .toggle(govMode > 0 && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8));
         }
 
         govModeSelect.change(updateVisibility);
