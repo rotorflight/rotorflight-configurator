@@ -11,6 +11,11 @@ const languageFallback = { 'default': ['en'], };
  * Functions that depend on the i18n framework
  */
 i18n.init = function(cb) {
+    if (i18next.isInitialized) {
+      cb?.();
+      return;
+    }
+
     getStoredUserLocale(function(userLanguage) {
 
         i18next
