@@ -10,40 +10,35 @@ const languageFallback = { 'default': ['en'], };
 /**
  * Functions that depend on the i18n framework
  */
-i18n.init = function(cb) {
-    getStoredUserLocale(function(userLanguage) {
+i18n.init = async function() {
+    if (i18next.isInitialized) {
+        return;
+    }
 
-        i18next
-            .use(i18nextHttpBackend)
-            .init({
-                lng: userLanguage,
-                getAsync: false,
-                debug: true,
-                ns: ['messages'],
-                defaultNS:['messages'],
-                fallbackLng: languageFallback,
-                backend: {
-                    loadPath: '/locales/{{lng}}/{{ns}}.json',
-                    parse: i18n.parseInputFile,
-                },
+    try {
+        const userLanguage = await getStoredUserLocale();
+        await i18next.use(i18nextHttpBackend).init({
+            lng: userLanguage,
+            getAsync: false,
+            debug: true,
+            ns: ["messages"],
+            defaultNS: ["messages"],
+            fallbackLng: languageFallback,
+            backend: {
+                loadPath: "/locales/{{lng}}/{{ns}}.json",
+                parse: i18n.parseInputFile,
             },
-            function(err) {
-                if (err !== undefined) {
-                    console.error(`Error loading i18n: ${err}`);
-                } else {
-                    console.log('i18n system loaded');
-                    const detectedLanguage = i18n.getMessage(`language_${getValidLocale("DEFAULT")}`);
-                    i18n.addResources({"detectedLanguage": detectedLanguage });
-                    i18next.on('languageChanged', function () {
-                        i18n.localizePage(true);
-                    });
-                }
-                if (cb !== undefined) {
-                    cb();
-                }
-            });
-    });
+        });
 
+        console.log('i18n system loaded');
+        const detectedLanguage = i18n.getMessage(`language_${getValidLocale("DEFAULT")}`);
+        i18n.addResources({"detectedLanguage": detectedLanguage });
+        i18next.on('languageChanged', function () {
+            i18n.localizePage(true);
+        });
+    } catch(err) {
+        console.error(`Error loading i18n: ${err}`);
+    }
 };
 
 /**
@@ -184,23 +179,25 @@ i18n.localizePage = function(forceReTranslate) {
  * Reads the chrome config, if DEFAULT or there is no config stored,
  * returns the current locale to the callback
  */
-function getStoredUserLocale(cb) {
-    if (typeof ConfigStorage !== 'undefined') {
-        ConfigStorage.get('userLanguageSelect', function (result) {
-            let userLanguage = 'DEFAULT';
-            if (result.userLanguageSelect) {
-                userLanguage = result.userLanguageSelect;
-            }
-            i18n.selectedLanguage = userLanguage;
+function getStoredUserLocale() {
+    return new Promise((resolve) => {
+        if (ConfigStorage) {
+            ConfigStorage.get('userLanguageSelect', function (result) {
+                let userLanguage = 'DEFAULT';
+                if (result.userLanguageSelect) {
+                    userLanguage = result.userLanguageSelect;
+                }
+                i18n.selectedLanguage = userLanguage;
 
-            userLanguage = getValidLocale(userLanguage);
+                userLanguage = getValidLocale(userLanguage);
 
-            cb(userLanguage);
-        });
-    } else {
-        const userLanguage = getValidLocale('DEFAULT');
-        cb(userLanguage);
-    }
+                resolve(userLanguage);
+            });
+        } else {
+            const userLanguage = getValidLocale('DEFAULT');
+            resolve(userLanguage);
+        }
+    });
 }
 
 function getValidLocale(userLocale) {
