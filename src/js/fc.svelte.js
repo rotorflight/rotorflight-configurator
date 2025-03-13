@@ -860,7 +860,7 @@ export const FC = $state({
     },
 
     getFilterDefaults() {
-        const versionFilterDefaults = this.DEFAULT;
+        const versionFilterDefaults = $state.snapshot(this.DEFAULT);
 
         versionFilterDefaults.gyro_lowpass_hz = 125;
         versionFilterDefaults.gyro_lowpass_dyn_min_hz = 50;
