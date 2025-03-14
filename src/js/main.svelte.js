@@ -2,7 +2,6 @@ import { mount } from "svelte";
 
 import { Beepers } from "@/js/Beepers.js";
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
-import { Clipboard } from "@/js/Clipboard.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
 import { ConfigStorage } from "@/js/ConfigStorage.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
@@ -33,7 +32,6 @@ import { serial } from "@/js/serial.js";
 import * as serialBackend from "@/js/serial_backend.js";
 import * as utilsCommon from "@/js/utils/common.js";
 
-import "@/js/filesystem.js";
 import "@/js/injected_methods.js";
 import "@/js/tabs/index.js";
 
@@ -58,7 +56,6 @@ Object.assign(globalThis, {
   ...utilsCommon,
   Beepers,
   CliAutoComplete,
-  Clipboard,
   ConfigInserter,
   ConfigStorage,
   DarkTheme,
@@ -93,10 +90,6 @@ mount(StatusBar, { target: document.querySelector("#status-bar") });
 mount(Logo, { target: document.querySelector("#logo-desktop") });
 mount(Logo, { target: document.querySelector("#logo-mobile") });
 
-if (__BACKEND__ === "nwjs") {
-  Clipboard._configureClipboardAsNwJs(GUI.nwGui);
-}
-
 if (__BACKEND__ === "cordova") {
   (async () => {
     const chromeapi = await import("@/js/cordova_chromeapi.js");
@@ -106,7 +99,17 @@ if (__BACKEND__ === "cordova") {
       ...startup,
     });
 
-    Clipboard._configureClipboardAsCordova();
     cordovaApp.initialize();
   })();
+}
+
+if (import.meta.hot) {
+  import.meta.hot.on("vite:beforeFullReload", (event) => {
+    if (event.path?.endsWith(".html") && event.path !== "/src/main.html") {
+      return;
+    }
+
+    console.log("vite disconnecting serial");
+    serial.disconnect();
+  });
 }

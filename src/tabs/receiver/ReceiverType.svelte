@@ -12,7 +12,7 @@
     FC = $bindable(),
     rxProtoIndex,
     hasSerialRxPort,
-    extTelemProto,
+    setRxProto,
   } = $props();
 </script>
 
@@ -21,27 +21,7 @@
     <Field id="receiver-protocol" label="receiverProtocol">
       <select
         id="receiver-protocol"
-        bind:value={
-          () => rxProtoIndex,
-          (i) => {
-            const rxProto = RX_PROTOCOLS[i];
-            FC.FEATURE_CONFIG.features.setGroup("RX_PROTO", false);
-            if (rxProto.feature) {
-              FC.FEATURE_CONFIG.features.setFeature(rxProto.feature, true);
-            }
-
-            if (rxProto.feature === "RX_SERIAL") {
-              FC.RX_CONFIG.serialrx_provider = rxProto.id;
-            } else if (rxProto.feature === "RX_SPI") {
-              FC.RX_CONFIG.rxSpiProtocol = rxProto.id;
-            }
-
-            if (!extTelemProto) {
-              FC.TELEMETRY_CONFIG.telemetry_sensors = 0;
-              FC.TELEMETRY_CONFIG.telemetry_sensors_list.fill(0);
-            }
-          }
-        }
+        bind:value={() => rxProtoIndex, setRxProto}
       >
         {#each RX_PROTOCOLS as proto, i}
           <!-- always show selected protocol -->
@@ -58,7 +38,7 @@
     </Field>
   </SubSection>
   {#if RX_PROTOCOLS[rxProtoIndex]?.feature === "RX_SERIAL"}
-    <SubSection label="Signaling">
+    <SubSection label="receiverSelectionSectionSignaling">
       <Field id="receiver-serialrx-inverted" label="receiverSerialInverted">
         {#snippet tooltip()}
           <Tooltip help="receiverSerialInvertedHelp" />

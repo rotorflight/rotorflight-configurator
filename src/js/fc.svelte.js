@@ -616,6 +616,7 @@ export const FC = $state({
             gov_mode:                       0,
             gov_startup_time:               0,
             gov_spoolup_time:               0,
+            gov_spoolup_min_throttle:       0,
             gov_tracking_time:              0,
             gov_recovery_time:              0,
             gov_zero_throttle_timeout:      0,
@@ -859,7 +860,7 @@ export const FC = $state({
     },
 
     getFilterDefaults() {
-        const versionFilterDefaults = this.DEFAULT;
+        const versionFilterDefaults = $state.snapshot(this.DEFAULT);
 
         versionFilterDefaults.gyro_lowpass_hz = 125;
         versionFilterDefaults.gyro_lowpass_dyn_min_hz = 50;

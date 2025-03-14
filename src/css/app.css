@@ -1,5 +1,15 @@
 :root {
   --animation-speed: 0.2s ease;
+  --section-gap: 16px;
+  --section-padding: 8px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
 }
 
 html[data-theme="light"] {
@@ -7,6 +17,7 @@ html[data-theme="light"] {
   --val-neutral-sat: 5%;
 
   --color-yellow-100: hsl(50, 100%, 92%);
+  --color-yellow-500: hsl(45, 90%, 50%);
   --color-yellow-900: hsl(45, 100%, 30%);
 
   --color-red-100: hsl(4, 100%, 92%);
@@ -43,6 +54,15 @@ html[data-theme="light"] {
   --color-roll: hsl(2, 62%, 60%);
   --color-pitch: hsl(122, 62%, 60%);
   --color-yaw: hsl(242, 62%, 60%);
+
+  ::-webkit-scrollbar-corner,
+  ::-webkit-scrollbar {
+    /*background: var(--color-neutral-600);*/
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-neutral-400);
+  }
 }
 
 html[data-theme="dark"] {
@@ -67,7 +87,7 @@ html[data-theme="dark"] {
   --color-accent-800: hsl(202, 100%, 80%);
   --color-accent-900: hsl(202, 100%, 90%);
 
-  --color-neutral-950:  hsl(var(--val-neutral-hue), var(--val-neutral-sat), 5%);
+  --color-neutral-950: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 5%);
   --color-neutral-900: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 10%);
   --color-neutral-800: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 20%);
   --color-neutral-700: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 30%);
@@ -87,9 +107,23 @@ html[data-theme="dark"] {
   --color-roll: hsl(2, 48%, 45%);
   --color-pitch: hsl(122, 48%, 40%);
   --color-yaw: hsl(242, 48%, 55%);
+
+  ::-webkit-scrollbar-corner,
+  ::-webkit-scrollbar {
+    background: var(--color-neutral-950);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-neutral-700);
+  }
 }
 
 @media only screen and (max-width: 480px) {
+  :root {
+    --animation-speed: 0.2s ease;
+    --section-gap: 8px;
+  }
+
   ::-webkit-scrollbar {
     width: 0px;
   }

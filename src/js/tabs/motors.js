@@ -424,6 +424,7 @@ tab.initialize = function (callback) {
         $('input[id="govHandoverThrottle"]').val(FC.GOVERNOR.gov_handover_throttle).change();
         $('input[id="govStartupTime"]').val(FC.GOVERNOR.gov_startup_time / 10).change();
         $('input[id="govSpoolupTime"]').val(FC.GOVERNOR.gov_spoolup_time / 10).change();
+        $('input[id="govSpoolupMinThrottle"]').val(FC.GOVERNOR.gov_spoolup_min_throttle).change();
         $('input[id="govTrackingTime"]').val(FC.GOVERNOR.gov_tracking_time / 10).change();
         $('input[id="govRecoveryTime"]').val(FC.GOVERNOR.gov_recovery_time / 10).change();
         $('input[id="govAutoBailoutTime"]').val(FC.GOVERNOR.gov_autorotation_bailout_time / 10).change();
@@ -465,6 +466,8 @@ tab.initialize = function (callback) {
 
             const govMode = parseInt(govModeSelect.val());
             $('.govEnabled').toggle(govMode > 0);
+            $('input[id="govSpoolupMinThrottle"]').closest('.field')
+                .toggle(govMode > 0 && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8));
         }
 
         govModeSelect.change(updateVisibility);
@@ -510,6 +513,7 @@ tab.initialize = function (callback) {
                 FC.GOVERNOR.gov_handover_throttle = parseInt($('input[id="govHandoverThrottle"]').val());
                 FC.GOVERNOR.gov_startup_time = Math.round(parseFloat($('input[id="govStartupTime"]').val()) * 10);
                 FC.GOVERNOR.gov_spoolup_time = Math.round(parseFloat($('input[id="govSpoolupTime"]').val()) * 10);
+                FC.GOVERNOR.gov_spoolup_min_throttle = getIntegerValue('input[id="govSpoolupMinThrottle"]');
                 FC.GOVERNOR.gov_tracking_time = Math.round(parseFloat($('input[id="govTrackingTime"]').val()) * 10);
                 FC.GOVERNOR.gov_recovery_time = Math.round(parseFloat($('input[id="govRecoveryTime"]').val()) * 10);
                 FC.GOVERNOR.gov_autorotation_bailout_time = Math.round(parseFloat($('input[id="govAutoBailoutTime"]').val()) * 10);

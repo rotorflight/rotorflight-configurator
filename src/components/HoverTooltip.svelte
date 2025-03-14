@@ -108,7 +108,7 @@
     :global(html[data-theme="dark"]) & {
       background: var(--color-neutral-800);
       border-color: var(--color-accent-400);
-      color: var(--color-neutral-100);
+      color: var(--color-neutral-50);
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
     }
   }

@@ -415,37 +415,6 @@ progress[value]::-webkit-progress-bar {
     background-color: #393b3a;
 }
 
-/* GYRO TAB */
-
-html[data-theme=dark] .tab-gyro .gui_box span {
-    color: white;
-}
-
-html[data-theme=dark] .tab-gyro .subtitle {
-    color: #3a3a3a;
-    background-color: #a0a0a0;
-}
-
-html[data-theme=dark] .tab-gyro input:disabled,
-html[data-theme=dark] .tab-gyro select:disabled {
-    color: var(--superSubtleAccent);
-}
-
-html[data-theme=dark] .tab-gyro table input {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-gyro table select {
-    text-align-last: right;
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-gyro .bottomarea {
-    background-color: #393b3a;
-}
-
 /* LANDING */
 
 html[data-theme=dark] .tab-landing .content_top {

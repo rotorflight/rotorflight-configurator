@@ -32,15 +32,12 @@ const chromeCallbackWithSuccess = function(argument, callback) {
     }
 };
 
-const removeItemOfAnArray = async function (array, item) {
-    for (let i = (array.length - 1); i >= 0; i--) {
-        if (array[i] === item) {
-            return array.splice(i, 1);
-        }
+function removeItemOfAnArray(array, item) {
+    const index = array.lastIndexOf(item);
+    if (index !== -1) {
+        array.splice(index, 1);
     }
-    return array;
 };
-
 
 export const chromeapiSerial = {
     logHeader: 'SERIAL (adapted from Cordova): ',
@@ -227,14 +224,16 @@ export const chromeapiSerial = {
         addListener: function(functionReference) {
             this.listeners.push(functionReference);
         },
-        removeListener: async function(functionReference) {
-            this.listeners = await removeItemOfAnArray(this.listeners, functionReference);
+        removeListener: function(functionReference) {
+            removeItemOfAnArray(this.listeners, functionReference);
         },
         receiveData: function(data) {
-            if (data.data.byteLength > 0) {
-                for (let i = (this.listeners.length - 1); i >= 0; i--) {
-                    this.listeners[i](data);
-                }
+            if (data.data.byteLength === 0) {
+                return;
+            }
+
+            for (const listener of this.listeners) {
+                listener(data);
             }
         },
     },
@@ -243,12 +242,12 @@ export const chromeapiSerial = {
         addListener: function(functionReference) {
             this.listeners.push(functionReference);
         },
-        removeListener: async function(functionReference) {
-            this.listeners = await removeItemOfAnArray(this.listeners, functionReference);
+        removeListener: function(functionReference) {
+            removeItemOfAnArray(this.listeners, functionReference);
         },
         receiveError: function(error) {
-            for (let i = (this.listeners.length - 1); i >= 0; i--) {
-                this.listeners[i](error);
+            for (const listener of this.listeners) {
+                listener(error);
             }
         },
     },
