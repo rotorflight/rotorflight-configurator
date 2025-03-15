@@ -3258,6 +3258,24 @@
     "motorTailGearRatioIssueNote": {
         "message": "<span class=\"message-negative\">Warning:</span> <i>Tail Rotor Gear Ratio</i> is set to an incorrect value. Please check!"
     },
+    "motorsVoltageCorrection": {
+        "message": "Voltage Correction"
+    },
+    "motorsVoltageCorrectionHelp": {
+        "message": "Adjusts the Voltage reported by the ESC's telemetry."
+    },
+    "motorsCurrentCorrection": {
+        "message": "Current Correction"
+    },
+    "motorsCurrentCorrectionHelp": {
+        "message": "Adjusts the Current reported by the ESC's telemetry."
+    },
+    "motorsConsumptionCorrection": {
+        "message": "Consumption Correction"
+    },
+    "motorsConsumptionCorrectionHelp": {
+        "message": "Adjusts the Consumption reported by the ESC's telemetry."
+    },
     "motorRotorSpeeds": {
         "message": "Rotor Speed"
     },

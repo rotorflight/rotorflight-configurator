@@ -404,6 +404,11 @@ tab.initialize = function (callback) {
 
             const showPinswap = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7) && self.isEscSensorEnabled;
             escTelemetryPinswap.closest('.field').toggle(showPinswap);
+
+            const showCorrection = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8) && self.isEscSensorEnabled;
+            $('.voltage-correction').toggle(showCorrection);
+            $('.current-correction').toggle(showCorrection);
+            $('.consumption-correction').toggle(showCorrection);
         }
 
         const escTelemetryHalfDuplex = $('input[id="escTelemetryHalfDuplex"]');
@@ -411,6 +416,10 @@ tab.initialize = function (callback) {
 
         const escTelemetryPinswap = $('input[id="escTelemetryPinswap"]');
         escTelemetryPinswap.prop('checked', !!FC.ESC_SENSOR_CONFIG.pinswap);
+
+        $('input[id="voltage-correction"]').val(FC.ESC_SENSOR_CONFIG.voltage_correction);
+        $('input[id="current-correction"]').val(FC.ESC_SENSOR_CONFIG.current_correction);
+        $('input[id="consumption-correction"]').val(FC.ESC_SENSOR_CONFIG.consumption_correction);
 
         toggleTelemFields();
 
@@ -503,6 +512,9 @@ tab.initialize = function (callback) {
 
             FC.ESC_SENSOR_CONFIG.half_duplex = +escTelemetryHalfDuplex.is(':checked');
             FC.ESC_SENSOR_CONFIG.pinswap = +escTelemetryPinswap.is(':checked');
+            FC.ESC_SENSOR_CONFIG.voltage_correction = getIntegerValue('input[id="voltage-correction"]');
+            FC.ESC_SENSOR_CONFIG.current_correction = getIntegerValue('input[id="current-correction"]');
+            FC.ESC_SENSOR_CONFIG.consumption_correction = getIntegerValue('input[id="consumption-correction"]');
 
             const govMode = parseInt(govModeSelect.val());
             FC.GOVERNOR.gov_mode = govMode;
