@@ -661,7 +661,7 @@ html[data-theme=dark] .tab-rates select {
     color: white;
 }
 
-html[data-theme=dark] .tab-rates table input {
+html[data-theme=dark] .tab-rates input {
     background-color: #3a3a3a;
     color: white;
 }

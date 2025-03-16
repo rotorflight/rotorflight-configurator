@@ -308,6 +308,15 @@ export const FC = $state({
             pitch_accel_limit:          0,
             yaw_accel_limit:            0,
             collective_accel_limit:     0,
+
+            roll_setpoint_boost_gain:   0,
+            roll_setpoint_boost_cutoff: 0,
+            pitch_setpoint_boost_gain:  0,
+            pitch_setpoint_boost_cutoff:0,
+            yaw_setpoint_boost_gain:    0,
+            yaw_setpoint_boost_cutoff:  0,
+            collective_setpoint_boost_gain:   0,
+            collective_setpoint_boost_cutoff: 0,
         };
 
         this.AUX_CONFIG =               [];
