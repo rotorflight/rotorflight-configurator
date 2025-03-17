@@ -1,4 +1,5 @@
 import * as noUiSlider from 'nouislider';
+import semver from 'semver';
 import wNumb from 'wnumb';
 
 const tab = {
@@ -12,7 +13,15 @@ const tab = {
 
     PRIMARY_CHANNEL_COUNT: 5,
 
-    FUNCTIONS: [
+    callback_stack: [],
+
+    toggle_speed: 300,
+};
+
+function getFunctions() {
+    const gte12_8 = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8);
+
+    return [
         { id: 0,    name: 'None',                       min: 0,     max: 100,    ticks: 10,   pips: [ 0, 20, 40, 60, 80, 100 ] },
         { id: 1,    name: 'RateProfile',                min: 1,     max: 6,      ticks: 0.25, pips: [ 1, 2, 3, 4, 5, 6 ] },
         { id: 2,    name: 'PIDProfile',                 min: 1,     max: 6,      ticks: 0.25, pips: [ 1, 2, 3, 4, 5, 6 ] },
@@ -43,8 +52,8 @@ const tab = {
         { id: 27,   name: 'YawCCWStopGain',             min: 25,    max: 250,    ticks: 10,   pips: [ 50, 100, 150, 200, 250 ] },
         { id: 28,   name: 'YawCyclicFF',                min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
         { id: 29,   name: 'YawCollectiveFF',            min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
-        { id: 30,   name: 'YawCollectiveDyn',           min: -125,  max: 125,    ticks: 10,   pips: [ -100, -50, 0, 50, 100 ] },
-        { id: 31,   name: 'YawCollectiveDecay',         min: 1,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
+        { id: 30,   name: 'YawCollectiveDyn',           min: -125,  max: 125,    ticks: 10,   pips: [ -100, -50, 0, 50, 100 ], hide: gte12_8 },
+        { id: 31,   name: 'YawCollectiveDecay',         min: 1,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: gte12_8 },
         { id: 32,   name: 'PitchCollectiveFF',          min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
         { id: 33,   name: 'PitchGyroCutoff',            min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
         { id: 34,   name: 'RollGyroCutoff',             min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
@@ -79,14 +88,10 @@ const tab = {
         { id: 63,   name: 'CrossCouplingCutoff',        min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
         { id: 64,   name: 'AccTrimPitch',               min: -300,  max: 300,    ticks: 10,   pips: [ -300, -200, -100, 0, 100, 200, 300 ] },
         { id: 65,   name: 'AccTrimRoll',                min: -300,  max: 300,    ticks: 10,   pips: [ -300, -200, -100, 0, 100, 200, 300 ] },
-        { id: 66,   name: 'YawInertiaPrecompGain',      min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
-        { id: 67,   name: 'YawInertiaPrecompCutoff',    min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
-    ],
-
-    callback_stack: [],
-
-    toggle_speed: 300,
-};
+        { id: 66,   name: 'YawInertiaPrecompGain',      min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
+        { id: 67,   name: 'YawInertiaPrecompCutoff',    min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
+    ];
+}
 
 tab.initialize = function (callback) {
     const self = this;
@@ -655,6 +660,9 @@ tab.initialize = function (callback) {
         const selectFunction = $('#tab-adjustments-templates .adjustmentBody select.function');
         self.FUNCTIONS.forEach(function(fun, index) {
             const opt = new Option(i18n.getMessage('adjustmentsFunction' + fun.name), index);
+            if (fun.hide) {
+                opt.style.display = "none";
+            }
             selectFunction.append(opt);
         });
 
@@ -705,6 +713,7 @@ tab.initialize = function (callback) {
     }
 
     function process_html() {
+        self.FUNCTIONS = getFunctions();
 
         // translate to user-selected language
         i18n.localizePage();
