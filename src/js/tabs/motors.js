@@ -5,23 +5,8 @@ import wNumb from 'wnumb';
 const tab = {
     tabName: 'motors',
     isDirty: false,
-    isDshot: false,
-    isProtoEnabled: false,
-    isEscSensorEnabled: false,
     isFreqSensorEnabled: false,
     isGovEnabled: false,
-    escProtocols: [
-        "PWM",
-        "ONESHOT125",
-        "ONESHOT42",
-        "MULTISHOT",
-        "BRUSHED",
-        "DSHOT150",
-        "DSHOT300",
-        "DSHOT600",
-        "PROSHOT",
-        "DISABLED",
-    ],
     telemetryProtocols: [
         "Disabled",
         "BLHeli32",
@@ -43,7 +28,26 @@ const tab = {
         "MODE1",
         "MODE2",
     ],
- };
+    get isEscSensorEnabled() {
+        return FC.FEATURE_CONFIG.features.ESC_SENSOR;
+    },
+};
+
+function getEscProtocols() {
+    return [
+        "PWM",
+        "ONESHOT125",
+        "ONESHOT42",
+        "MULTISHOT",
+        "BRUSHED",
+        "DSHOT150",
+        "DSHOT300",
+        "DSHOT600",
+        "PROSHOT",
+        ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8) ? ["CASTLE"] : []),
+        "DISABLED",
+    ];
+}
 
 tab.initialize = function (callback) {
     const self = this;
@@ -107,8 +111,8 @@ tab.initialize = function (callback) {
         }
 
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR');
-        self.isEscSensorEnabled = FC.FEATURE_CONFIG.features.isEnabled('ESC_SENSOR');
         self.isFreqSensorEnabled = FC.FEATURE_CONFIG.features.isEnabled('FREQ_SENSOR');
+        self.escProtocols = getEscProtocols();
 
         let infoUpdateList = [];
 
@@ -391,25 +395,7 @@ tab.initialize = function (callback) {
             telemProtocolSelect.append(`<option value="${index}" ${disabled}>${value}</option>`);
         });
         telemProtocolSelect.val(self.isEscSensorEnabled ? FC.ESC_SENSOR_CONFIG.protocol : 0);
-        telemProtocolSelect.on('change', function() {
-            FC.ESC_SENSOR_CONFIG.protocol = parseInt($(this).val());
-            FC.FEATURE_CONFIG.features.setFeature('ESC_SENSOR', FC.ESC_SENSOR_CONFIG.protocol  > 0);
-            self.isEscSensorEnabled = FC.FEATURE_CONFIG.features.isEnabled('ESC_SENSOR');
-
-            toggleTelemFields();
-        });
-
-        function toggleTelemFields() {
-            escTelemetryHalfDuplex.closest('.field').toggle(self.isEscSensorEnabled);
-
-            const showPinswap = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7) && self.isEscSensorEnabled;
-            escTelemetryPinswap.closest('.field').toggle(showPinswap);
-
-            const showCorrection = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8) && self.isEscSensorEnabled;
-            $('.voltage-correction').toggle(showCorrection);
-            $('.current-correction').toggle(showCorrection);
-            $('.consumption-correction').toggle(showCorrection);
-        }
+        telemProtocolSelect.on('change', updateVisibility);
 
         const escTelemetryHalfDuplex = $('input[id="escTelemetryHalfDuplex"]');
         escTelemetryHalfDuplex.prop('checked', !!FC.ESC_SENSOR_CONFIG.half_duplex);
@@ -420,8 +406,6 @@ tab.initialize = function (callback) {
         $('input[id="voltage-correction"]').val(FC.ESC_SENSOR_CONFIG.voltage_correction);
         $('input[id="current-correction"]').val(FC.ESC_SENSOR_CONFIG.current_correction);
         $('input[id="consumption-correction"]').val(FC.ESC_SENSOR_CONFIG.consumption_correction);
-
-        toggleTelemFields();
 
         const govModeSelect = $('select[id="govMode"]');
         self.govModes.forEach(function(value,index) {
@@ -446,31 +430,55 @@ tab.initialize = function (callback) {
         $('input[id="govFFFilterHz"]').val(FC.GOVERNOR.gov_ff_filter).change();
 
         function updateVisibility() {
+            const throttleProto = parseInt(escProtocolSelect.val());
+            const isEnabled =
+                throttleProto < self.escProtocols.length - 1 &&
+                FC.CONFIG.motorCount > 0;
+            const isPwm = throttleProto === 0;
+            const isDshot = throttleProto >= 5 && throttleProto <= 8;
+            const isCastleLink = self.escProtocols[throttleProto] === "CASTLE";
 
-            const protocolNum = parseInt(escProtocolSelect.val());
+            const telemProto = parseInt(telemProtocolSelect.val());
+            const hasTelemPort = telemProto > 0;
+            FC.ESC_SENSOR_CONFIG.protocol = isCastleLink ? 0 : telemProto;
+            FC.FEATURE_CONFIG.features.ESC_SENSOR = telemProto > 0 || isCastleLink;
 
-            self.isProtoEnabled = (protocolNum < 9) && (FC.CONFIG.motorCount > 0);
-            self.isDshot = (protocolNum >= 5 && protocolNum < 9);
+            $('.selectEscTelemetryProtocol').toggle(!isCastleLink);
+            $('.mincommand').toggle(isEnabled && !isDshot);
+            $('.minthrottle').toggle(isEnabled && !isDshot);
+            $('.maxthrottle').toggle(isEnabled && !isDshot);
+            $('.unsyncedPwm').toggle(isEnabled && !isPwm && !isDshot && !isCastleLink);
+            $('.inputPwmFreq').toggle(isEnabled && !isDshot);
+            $('.dshotBidir').toggle(isEnabled && isDshot);
+            $('.rpmSensor').toggle(isEnabled);
+            $('.mainGearRatio').toggle(isEnabled);
+            $('.tailGearRatio').toggle(isEnabled);
 
-            $('.mincommand').toggle(self.isProtoEnabled && !self.isDshot);
-            $('.minthrottle').toggle(self.isProtoEnabled && !self.isDshot);
-            $('.maxthrottle').toggle(self.isProtoEnabled && !self.isDshot);
-            $('.unsyncedPwm').toggle(self.isProtoEnabled && !self.isDshot && protocolNum != 0);
-            $('.inputPwmFreq').toggle(self.isProtoEnabled && !self.isDshot);
-            $('.dshotBidir').toggle(self.isProtoEnabled && self.isDshot);
-            $('.rpmSensor').toggle(self.isProtoEnabled);
-            $('.mainGearRatio').toggle(self.isProtoEnabled);
-            $('.tailGearRatio').toggle(self.isProtoEnabled);
-
-            $('input[id="pwmFreq"]').prop('disabled', !(pwmUnsyncSwitch.is(':checked') || protocolNum == 0));
+            $('input[id="pwmFreq"]').prop('disabled', !(pwmUnsyncSwitch.is(':checked') || isPwm));
 
             for (let i = 0; i < 4; i++) {
-                $(`.motorPoles${i+1}`).toggle(self.isProtoEnabled && FC.CONFIG.motorCount > i);
-                $(`.motorInfo${i}`).toggle(self.isProtoEnabled && FC.CONFIG.motorCount > i);
+                $(`.motorPoles${i+1}`).toggle(isEnabled && FC.CONFIG.motorCount > i);
+                $(`.motorInfo${i}`).toggle(isEnabled && FC.CONFIG.motorCount > i);
             }
 
-            $('#escProtocolDisabled').toggle(!self.isProtoEnabled);
-            $('.tab-motors .overrides').toggle(self.isProtoEnabled);
+            escTelemetryHalfDuplex.closest('.field').toggle(self.isEscSensorEnabled && hasTelemPort);
+            escTelemetryPinswap
+                .closest('.field')
+                .toggle(
+                    semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7) &&
+                    self.isEscSensorEnabled &&
+                    hasTelemPort
+                );
+
+            const showCorrection =
+                semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8) &&
+                self.isEscSensorEnabled;
+            $('.voltage-correction').toggle(showCorrection);
+            $('.current-correction').toggle(showCorrection);
+            $('.consumption-correction').toggle(showCorrection);
+
+            $('#escProtocolDisabled').toggle(!isEnabled);
+            $('.tab-motors .overrides').toggle(isEnabled);
 
             const govMode = parseInt(govModeSelect.val());
             $('.govEnabled').toggle(govMode > 0);
