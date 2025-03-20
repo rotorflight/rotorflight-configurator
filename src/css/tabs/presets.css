@@ -700,11 +700,11 @@
 }
 
 .preset_panel_status_official {
-  background-color: green;
+  background-color: #0071C0;
 }
 
 .preset_panel_status_community {
-  background-color: yellow;
+  background-color: rgb(30, 0, 161);
 }
 
 .preset_panel_status_experimental {
