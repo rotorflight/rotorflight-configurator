@@ -174,7 +174,7 @@ export default class PresetPanel
         this.#dom.sourceRepository = this.#dom.divWrapper.find('.preset_panel_source_text');
         this.#dom.sourceRepositoryRow = this.#dom.divWrapper.find('.preset_panel_source_row');
         this.#dom.versions = this.#dom.divWrapper.find('.preset_panel_versions_text');
-        this.#dom.boards = this.#dom.divWrapper.find('preset_panel_boards_text');
+        this.#dom.boards = this.#dom.divWrapper.find('.preset_panel_boards_text');
         this.#dom.boardsRow = this.#dom.divWrapper.find('.preset_panel_boards_row');
         this.#dom.statusOfficial = this.#dom.divWrapper.find('.preset_panel_status_official');
         this.#dom.statusCommunity = this.#dom.divWrapper.find('.preset_panel_status_community');
