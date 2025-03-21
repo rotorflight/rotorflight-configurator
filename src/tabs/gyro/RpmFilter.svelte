@@ -36,38 +36,43 @@
     </Field>
 
     {#if enabled && multiAxis}
-      <Field id="rpm-filter-preset" label="gyroRpmFilterPreset">
-        {#snippet tooltip()}
-          <Tooltip
-            help="gyroRpmFilterPresetHelp"
-            attrs={[
-              {
-                name: "genericDefault",
-                value: $i18n.t("gyroRpmFilterPresetMedium"),
-              },
-            ]}
+      <SubSection>
+        <Field id="rpm-filter-preset" label="gyroRpmFilterPreset">
+          {#snippet tooltip()}
+            <Tooltip
+              help="gyroRpmFilterPresetHelp"
+              attrs={[
+                {
+                  name: "genericDefault",
+                  value: $i18n.t("gyroRpmFilterPresetMedium"),
+                },
+              ]}
+            />
+          {/snippet}
+          <select
+            id="rpm-filter-preset"
+            bind:value={FC.FILTER_CONFIG.rpm_preset}
+          >
+            {#each filterStrengths as strength, index}
+              <option value={index}>{$i18n.t(strength)}</option>
+            {/each}
+          </select>
+        </Field>
+        <Field id="rpm-filter-min-freq" label="gyroRpmFilterMinFreq" unit="Hz">
+          {#snippet tooltip()}
+            <Tooltip
+              help="gyroRpmFilterMinFreqHelp"
+              attrs={[{ name: "genericDefault", value: "20Hz" }]}
+            />
+          {/snippet}
+          <NumberInput
+            id="rpm-filter-min-freq"
+            min="1"
+            max="100"
+            bind:value={FC.FILTER_CONFIG.rpm_min_hz}
           />
-        {/snippet}
-        <select id="rpm-filter-preset" bind:value={FC.FILTER_CONFIG.rpm_preset}>
-          {#each filterStrengths as strength, index}
-            <option value={index}>{$i18n.t(strength)}</option>
-          {/each}
-        </select>
-      </Field>
-      <Field id="rpm-filter-min-freq" label="gyroRpmFilterMinFreq" unit="Hz">
-        {#snippet tooltip()}
-          <Tooltip
-            help="gyroRpmFilterMinFreqHelp"
-            attrs={[{ name: "genericDefault", value: "20Hz" }]}
-          />
-        {/snippet}
-        <NumberInput
-          id="rpm-filter-min-freq"
-          min="1"
-          max="100"
-          bind:value={FC.FILTER_CONFIG.rpm_min_hz}
-        />
-      </Field>
+        </Field>
+      </SubSection>
     {/if}
   </SubSection>
 
