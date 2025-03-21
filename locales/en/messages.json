@@ -4938,6 +4938,12 @@
     "rateSetupResponse": {
         "message": "Response Time [ms]"
     },
+    "rateSetpointBoostGain": {
+        "message": "Setpoint Boost Gain"
+    },
+    "rateSetpointBoostCutoff": {
+        "message": "Setpoint Boost Cutoff"
+    },
     "gyroFilterSettings": {
         "message": "Gyro Filter Settings"
     },

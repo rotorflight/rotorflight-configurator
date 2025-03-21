@@ -361,6 +361,18 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.RC_TUNING.collective_rate = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.collective_response_time = data.readU8();
                 FC.RC_TUNING.collective_accel_limit = data.readU16();
+
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
+                    FC.RC_TUNING.roll_setpoint_boost_gain = data.readU8();
+                    FC.RC_TUNING.roll_setpoint_boost_cutoff = data.readU8();
+                    FC.RC_TUNING.pitch_setpoint_boost_gain = data.readU8();
+                    FC.RC_TUNING.pitch_setpoint_boost_cutoff = data.readU8();
+                    FC.RC_TUNING.yaw_setpoint_boost_gain = data.readU8();
+                    FC.RC_TUNING.yaw_setpoint_boost_cutoff = data.readU8();
+                    FC.RC_TUNING.collective_setpoint_boost_gain = data.readU8();
+                    FC.RC_TUNING.collective_setpoint_boost_cutoff = data.readU8();
+                }
+
                 break;
             }
 
@@ -1778,6 +1790,17 @@ MspHelper.prototype.crunch = function(code) {
                   .push8(Math.round(FC.RC_TUNING.collective_rate * 100))
                   .push8(FC.RC_TUNING.collective_response_time)
                   .push16(FC.RC_TUNING.collective_accel_limit);
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
+               buffer.push8(FC.RC_TUNING.roll_setpoint_boost_gain)
+                     .push8(FC.RC_TUNING.roll_setpoint_boost_cutoff)
+                     .push8(FC.RC_TUNING.pitch_setpoint_boost_gain)
+                     .push8(FC.RC_TUNING.pitch_setpoint_boost_cutoff)
+                     .push8(FC.RC_TUNING.yaw_setpoint_boost_gain)
+                     .push8(FC.RC_TUNING.yaw_setpoint_boost_cutoff)
+                     .push8(FC.RC_TUNING.collective_setpoint_boost_gain)
+                     .push8(FC.RC_TUNING.collective_setpoint_boost_cutoff);
+            }
+
             break;
         }
 

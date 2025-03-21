@@ -1,8 +1,10 @@
 <div class="tab-rates toolbar_fixed_bottom">
     <div class="content_wrapper">
-        <div class="tab_title" i18n="tabRates"></div>
-        <div class="cf_doc_version_bt">
-            <a id="button-documentation"></a>
+        <div class="page-header">
+            <div class="tab_title" i18n="tabRates"></div>
+            <div class="cf_doc_version_bt">
+                <a id="button-documentation"></a>
+            </div>
         </div>
 
         <div class="content_wrapper_header">
@@ -169,49 +171,40 @@
                 <div class="cf_column">
 
                     <div class="gui_box rateDynamic grey spacer_left">
-                        <table>
-                            <tr class="rates_titlebar">
-                                <th class="name" i18n="rateSetupDynamic"></th>
-                                <th class="smooth" i18n="rateSetupResponse"></th>
-                                <th class="accel" i18n="rateSetupAcceleration"></th>
-                            </tr>
-                            <tr class="ROLL">
-                                <td class="axis_title" i18n="axisROLL">ROLL</td>
-                                <td class="rc_response">
-                                    <input type="number" class="smooth_input" name="roll_response" step="1" min="0" max="250" />
-                                </td>
-                                <td class="rc_accel">
-                                    <input type="number" class="accel_input" name="roll_accel" step="10" min="0" max="500000" />
-                                </td>
-                            </tr>
-                            <tr class="PITCH">
-                                <td class="axis_title" i18n="axisPITCH">PITCH</td>
-                                <td class="rc_response">
-                                    <input type="number" class="smooth_input" name="pitch_response" step="1" min="0" max="250" />
-                                </td>
-                                <td class="rc_accel">
-                                    <input type="number" class="accel_input" name="pitch_accel" step="10" min="0" max="500000" />
-                                </td>
-                            </tr>
-                            <tr class="YAW">
-                                <td class="axis_title" i18n="axisYAW">YAW</td>
-                                <td class="rc_response">
-                                    <input type="number" class="smooth_input" name="yaw_response" step="1" min="0" max="250" />
-                                </td>
-                                <td class="rc_accel">
-                                    <input type="number" class="accel_input" name="yaw_accel" step="10" min="0" max="500000" />
-                                </td>
-                            </tr>
-                            <tr class="COLLECTIVE">
-                                <td class="axis_title" i18n="axisCOLLECTIVE">COLLECTIVE</td>
-                                <td class="rc_response">
-                                    <input type="number" class="smooth_input" name="coll_response" step="1" min="0" max="250" />
-                                </td>
-                                <td class="rc_accel">
-                                    <input type="number" class="accel_input" name="coll_accel" step="10" min="0" max="500000" />
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="grid-container">
+                            <div class="title">
+                                <div class="header" i18n="Dynamics"></div>
+                                <div class="axis-title ROLL" i18n="axisROLL"></div>
+                                <div class="axis-title PITCH" i18n="axisPITCH"></div>
+                                <div class="axis-title YAW" i18n="axisYAW"></div>
+                                <div class="axis-title COLLECTIVE" i18n="axisCOLLECTIVE"></div>
+                            </div>
+
+                            <div class="group">
+                                <div i18n="rateSetupResponse"></div>
+                                <input type="number" name="roll_response" step="1" min="0" max="250" />
+                                <input type="number" name="pitch_response" step="1" min="0" max="250" />
+                                <input type="number" name="yaw_response" step="1" min="0" max="250" />
+                                <input type="number" name="coll_response" step="1" min="0" max="250" />
+                            </div>
+
+                            <div class="group setpoint-boost">
+                                <div i18n="rateSetpointBoostGain"></div>
+                                <input id="setpoint-boost-gain-roll" type="number" step="1" min="0" max="250" />
+                                <input id="setpoint-boost-gain-pitch" type="number" step="1" min="0" max="250" />
+                                <input id="setpoint-boost-gain-yaw" type="number" step="1" min="0" max="250" />
+                                <input id="setpoint-boost-gain-collective" type="number" step="1" min="0" max="250" />
+
+                                <div>
+                                    <span i18n="rateSetpointBoostCutoff"></span>
+                                    <span> [Hz]</span>
+                                </div>
+                                <input id="setpoint-boost-cutoff-roll" type="number" step="0.1" min="0" max="25" />
+                                <input id="setpoint-boost-cutoff-pitch" type="number" step="0.1" min="0" max="25" />
+                                <input id="setpoint-boost-cutoff-yaw" type="number" step="0.1" min="0" max="25" />
+                                <input id="setpoint-boost-cutoff-collective" type="number" step="0.1" min="0" max="25" />
+                            </div>
+                        </div>
                     </div>
 
                     <div class="gui_box ratePreview grey spacer_left">

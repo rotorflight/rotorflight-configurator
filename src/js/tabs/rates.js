@@ -1,3 +1,4 @@
+import semver from "semver";
 import { Clock } from "three";
 
 import { Model } from "@/js/model.js";
@@ -126,6 +127,15 @@ tab.initialize = function (callback) {
         FC.RC_TUNING.pitch_accel_limit = getIntegerValue('.tab-rates input[name="pitch_accel"]', 0.1);
         FC.RC_TUNING.yaw_accel_limit = getIntegerValue('.tab-rates input[name="yaw_accel"]', 0.1);
         FC.RC_TUNING.collective_accel_limit = getIntegerValue('.tab-rates input[name="coll_accel"]', 0.1);
+
+        FC.RC_TUNING.roll_setpoint_boost_gain = getIntegerValue('#setpoint-boost-gain-roll');
+        FC.RC_TUNING.pitch_setpoint_boost_gain = getIntegerValue('#setpoint-boost-gain-pitch');
+        FC.RC_TUNING.yaw_setpoint_boost_gain = getIntegerValue('#setpoint-boost-gain-yaw');
+        FC.RC_TUNING.collective_setpoint_boost_gain = getIntegerValue('#setpoint-boost-gain-collective');
+        FC.RC_TUNING.roll_setpoint_boost_cutoff = getIntegerValue('#setpoint-boost-cutoff-roll');
+        FC.RC_TUNING.pitch_setpoint_boost_cutoff = getIntegerValue('#setpoint-boost-cutoff-pitch');
+        FC.RC_TUNING.yaw_setpoint_boost_cutoff = getIntegerValue('#setpoint-boost-cutoff-yaw');
+        FC.RC_TUNING.collective_setpoint_boost_cutoff = getIntegerValue('#setpoint-boost-cutoff-collective');
 
         // catch RC_tuning changes
         const roll_pitch_rate_e = $('.rates_setup input[name="roll_pitch_rate"]');
@@ -275,6 +285,8 @@ tab.initialize = function (callback) {
                 }
             });
         });
+
+        $('.rateDynamic .group.setpoint-boost').toggle(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8));
 
         // Getting the DOM elements for curve display
         const rcCurveElement = $('.rate_curve canvas#rate_curve_layer0').get(0);
@@ -1006,6 +1018,14 @@ tab.initRatesSystem = function() {
         pitch_accel_limit:          FC.RC_TUNING.pitch_accel_limit,
         yaw_accel_limit:            FC.RC_TUNING.yaw_accel_limit,
         collective_accel_limit:     FC.RC_TUNING.collective_accel_limit,
+        roll_setpoint_boost_gain: FC.RC_TUNING.roll_setpoint_boost_gain,
+        roll_setpoint_boost_cutoff: FC.RC_TUNING.roll_setpoint_boost_cutoff,
+        pitch_setpoint_boost_gain: FC.RC_TUNING.pitch_setpoint_boost_gain,
+        pitch_setpoint_boost_cutoff: FC.RC_TUNING.pitch_setpoint_boost_cutoff,
+        yaw_setpoint_boost_gain: FC.RC_TUNING.yaw_setpoint_boost_gain,
+        yaw_setpoint_boost_cutoff: FC.RC_TUNING.yaw_setpoint_boost_cutoff,
+        collective_setpoint_boost_gain: FC.RC_TUNING.collective_setpoint_boost_gain,
+        collective_setpoint_boost_cutoff: FC.RC_TUNING.collective_setpoint_boost_cutoff,
     };
 
     switch (self.currentRatesType) {
@@ -1129,6 +1149,15 @@ tab.initRatesSystem = function() {
     $('.tab-rates input[name="pitch_accel"]').val(self.currentRates.pitch_accel_limit * 10);
     $('.tab-rates input[name="yaw_accel"]').val(self.currentRates.yaw_accel_limit * 10);
     $('.tab-rates input[name="coll_accel"]').val(self.currentRates.collective_accel_limit * 10);
+
+    $('#setpoint-boost-gain-roll').val(self.currentRates.roll_setpoint_boost_gain);
+    $('#setpoint-boost-gain-pitch').val(self.currentRates.pitch_setpoint_boost_gain);
+    $('#setpoint-boost-gain-yaw').val(self.currentRates.yaw_setpoint_boost_gain);
+    $('#setpoint-boost-gain-collective').val(self.currentRates.collective_setpoint_boost_gain);
+    $('#setpoint-boost-cutoff-roll').val(self.currentRates.roll_setpoint_boost_cutoff);
+    $('#setpoint-boost-cutoff-pitch').val(self.currentRates.pitch_setpoint_boost_cutoff);
+    $('#setpoint-boost-cutoff-yaw').val(self.currentRates.yaw_setpoint_boost_cutoff);
+    $('#setpoint-boost-cutoff-collective').val(self.currentRates.collective_setpoint_boost_cutoff);
 };
 
 tab.changeRatesLogo = function() {
