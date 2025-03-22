@@ -432,9 +432,12 @@ function run_dev_client() {
   }
 }
 
-function run_debug() {
+async function set_debug_flavor() {
   context.target.flavor = "debug";
-  const tasks = [build_app()];
+}
+
+function run_debug() {
+  const tasks = [set_debug_flavor, build_app()];
   switch (context.target.platform) {
     case "android":
       tasks.push(run_debug_cordova);
