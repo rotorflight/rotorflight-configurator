@@ -345,6 +345,16 @@ jobs:
         echo "GIT_VER=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
         cat ${GITHUB_ENV}
 
+    - name: Restore Signing Keystore
+      env:
+        KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE }}
+      run: echo "$KEYSTORE_FILE" | base64 -d > cordova/release.jks
+
+    - name: Restore Release Config
+      env:
+        BUILD_JSON: ${{ secrets.ANDROID_RELEASE_CONFIG }}
+      run: echo "$BUILD_JSON" > cordova/build.json
+
     - name: Update version number
       run: make version SEMVER=${{ env.GIT_VER }}
 
