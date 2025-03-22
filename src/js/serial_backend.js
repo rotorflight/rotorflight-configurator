@@ -598,6 +598,9 @@ export function read_serial(info) {
             case 'cli':
                 TABS.cli.read(info);
                 break;
+            case 'presets':
+                TABS.presets.read(info);
+                break;
         }
     }
 }
@@ -699,7 +702,7 @@ function update_live_status() {
        display: 'inline-block'
     });
 
-    if (GUI.active_tab != 'cli') {
+    if (GUI.active_tab != 'cli' && GUI.active_tab != 'presets') {
         MSP.promise(MSPCodes.MSP_BOXNAMES, false).then(() => {
             return MSP.promise(MSPCodes.MSP_STATUS, false);
         }).then(() => {
