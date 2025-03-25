@@ -90,6 +90,10 @@ function getFunctions() {
         { id: 65,   name: 'AccTrimRoll',                min: -300,  max: 300,    ticks: 10,   pips: [ -300, -200, -100, 0, 100, 200, 300 ] },
         { id: 66,   name: 'YawInertiaPrecompGain',      min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
         { id: 67,   name: 'YawInertiaPrecompCutoff',    min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
+        { id: 68,   name: 'PitchSetpointBoostGain',     min: 0,     max: 255,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
+        { id: 69,   name: 'RollSetpointBoostGain',      min: 0,     max: 255,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
+        { id: 70,   name: 'YawSetpointBoostGain',       min: 0,     max: 255,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
+        { id: 71,   name: 'CollectiveSetpointBoostGain',min: 0,     max: 255,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
     ];
 }
 
