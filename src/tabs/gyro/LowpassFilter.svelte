@@ -1,4 +1,6 @@
 <script>
+  import { slide } from "svelte/transition";
+
   import Switch from "@/components/Switch.svelte";
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
@@ -112,58 +114,66 @@
       />
     </Field>
     {#if lowpass1Enabled}
-      <SubSection>
-        <Field id="gyro-lowpass-1-type" label="gyroLowpassType">
-          <select
-            id="gyro-lowpass-1-type"
-            bind:value={FC.FILTER_CONFIG.gyro_lowpass_type}
-          >
-            {@render filterOpts(FC.FILTER_CONFIG.gyro_lowpass_type)}
-          </select>
-        </Field>
-        <Field id="gyro-lowpass-1-freq" label="gyroLowpassFrequency" unit="Hz">
-          <NumberInput
+      <div transition:slide>
+        <SubSection>
+          <Field id="gyro-lowpass-1-type" label="gyroLowpassType">
+            <select
+              id="gyro-lowpass-1-type"
+              bind:value={FC.FILTER_CONFIG.gyro_lowpass_type}
+            >
+              {@render filterOpts(FC.FILTER_CONFIG.gyro_lowpass_type)}
+            </select>
+          </Field>
+          <Field
             id="gyro-lowpass-1-freq"
-            min="0"
-            max="1000"
-            bind:value={FC.FILTER_CONFIG.gyro_lowpass_hz}
-          />
-        </Field>
-        <Field id="gyro-lowpass-1-dyn" label="gyroLowpassDynamicCutoff">
-          <Switch
-            id="gyro-lowpass-1-dyn"
-            bind:checked={() => lowpass1DynEnabled, toggleLowpass1Dyn}
-          />
-        </Field>
-        {#if lowpass1DynEnabled}
-          <SubSection>
-            <Field
-              id="gyro-dyn-lowpass-min-freq"
-              label="gyroLowpassDynMinFrequency"
-              unit="Hz"
-            >
-              <NumberInput
-                id="gyro-dyn-lowpass-min-freq"
-                min="0"
-                max="1000"
-                bind:value={FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz}
-              />
-            </Field>
-            <Field
-              id="gyro-dyn-lowpass-max-freq"
-              label="gyroLowpassDynMaxFrequency"
-              unit="Hz"
-            >
-              <NumberInput
-                id="gyro-dyn-lowpass-max-freq"
-                min="0"
-                max="1000"
-                bind:value={FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz}
-              />
-            </Field>
-          </SubSection>
-        {/if}
-      </SubSection>
+            label="gyroLowpassFrequency"
+            unit="Hz"
+          >
+            <NumberInput
+              id="gyro-lowpass-1-freq"
+              min="0"
+              max="1000"
+              bind:value={FC.FILTER_CONFIG.gyro_lowpass_hz}
+            />
+          </Field>
+          <Field id="gyro-lowpass-1-dyn" label="gyroLowpassDynamicCutoff">
+            <Switch
+              id="gyro-lowpass-1-dyn"
+              bind:checked={() => lowpass1DynEnabled, toggleLowpass1Dyn}
+            />
+          </Field>
+          {#if lowpass1DynEnabled}
+            <div transition:slide>
+              <SubSection>
+                <Field
+                  id="gyro-dyn-lowpass-min-freq"
+                  label="gyroLowpassDynMinFrequency"
+                  unit="Hz"
+                >
+                  <NumberInput
+                    id="gyro-dyn-lowpass-min-freq"
+                    min="0"
+                    max="1000"
+                    bind:value={FC.FILTER_CONFIG.gyro_lowpass_dyn_min_hz}
+                  />
+                </Field>
+                <Field
+                  id="gyro-dyn-lowpass-max-freq"
+                  label="gyroLowpassDynMaxFrequency"
+                  unit="Hz"
+                >
+                  <NumberInput
+                    id="gyro-dyn-lowpass-max-freq"
+                    min="0"
+                    max="1000"
+                    bind:value={FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz}
+                  />
+                </Field>
+              </SubSection>
+            </div>
+          {/if}
+        </SubSection>
+      </div>
     {/if}
   </SubSection>
   <SubSection label="gyroLowpassFilter2">
@@ -174,24 +184,30 @@
       />
     </Field>
     {#if lowpass2Enabled}
-      <SubSection>
-        <Field id="gyro-lowpass-2-type" label="gyroLowpassType">
-          <select
-            id="gyro-lowpass-2-type"
-            bind:value={FC.FILTER_CONFIG.gyro_lowpass2_type}
-          >
-            {@render filterOpts(FC.FILTER_CONFIG.gyro_lowpass2_type)}
-          </select>
-        </Field>
-        <Field id="gyro-lowpass-2-freq" label="gyroLowpassFrequency" unit="Hz">
-          <NumberInput
+      <div transition:slide>
+        <SubSection>
+          <Field id="gyro-lowpass-2-type" label="gyroLowpassType">
+            <select
+              id="gyro-lowpass-2-type"
+              bind:value={FC.FILTER_CONFIG.gyro_lowpass2_type}
+            >
+              {@render filterOpts(FC.FILTER_CONFIG.gyro_lowpass2_type)}
+            </select>
+          </Field>
+          <Field
             id="gyro-lowpass-2-freq"
-            min="0"
-            max="1000"
-            bind:value={FC.FILTER_CONFIG.gyro_lowpass2_hz}
-          />
-        </Field>
-      </SubSection>
+            label="gyroLowpassFrequency"
+            unit="Hz"
+          >
+            <NumberInput
+              id="gyro-lowpass-2-freq"
+              min="0"
+              max="1000"
+              bind:value={FC.FILTER_CONFIG.gyro_lowpass2_hz}
+            />
+          </Field>
+        </SubSection>
+      </div>
     {/if}
   </SubSection>
 </Section>

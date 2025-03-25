@@ -1,5 +1,6 @@
 <script>
   import semver from "semver";
+  import { slide } from "svelte/transition";
   import { API_VERSION_12_7 } from "@/js/data_storage.js";
   import Switch from "@/components/Switch.svelte";
   import Field from "@/components/Field.svelte";
@@ -38,37 +39,42 @@
     </Field>
   </SubSection>
   {#if RX_PROTOCOLS[rxProtoIndex]?.feature === "RX_SERIAL"}
-    <SubSection label="receiverSelectionSectionSignaling">
-      <Field id="receiver-serialrx-inverted" label="receiverSerialInverted">
-        {#snippet tooltip()}
-          <Tooltip help="receiverSerialInvertedHelp" />
-        {/snippet}
-        <Switch
-          id="receiver-serialrx-inverted"
-          bind:checked={FC.RX_CONFIG.serialrx_inverted}
-        />
-      </Field>
-      <Field id="receiver-serialrx-halfduplex" label="receiverSerialHalfDuplex">
-        {#snippet tooltip()}
-          <Tooltip help="receiverSerialHalfDuplexHelp" />
-        {/snippet}
-        <Switch
-          id="receiver-serialrx-halfduplex"
-          bind:checked={FC.RX_CONFIG.serialrx_halfduplex}
-        />
-      </Field>
-      {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)}
-        <Field id="receiver-serialrx-pinswap" label="receiverSerialPinSwap">
+    <div transition:slide>
+      <SubSection label="receiverSelectionSectionSignaling">
+        <Field id="receiver-serialrx-inverted" label="receiverSerialInverted">
           {#snippet tooltip()}
-            <Tooltip help="receiverSerialPinSwapHelp" />
+            <Tooltip help="receiverSerialInvertedHelp" />
           {/snippet}
           <Switch
-            id="receiver-serialrx-pinswap"
-            bind:checked={FC.RX_CONFIG.serialrx_pinswap}
+            id="receiver-serialrx-inverted"
+            bind:checked={FC.RX_CONFIG.serialrx_inverted}
           />
         </Field>
-      {/if}
-    </SubSection>
+        <Field
+          id="receiver-serialrx-halfduplex"
+          label="receiverSerialHalfDuplex"
+        >
+          {#snippet tooltip()}
+            <Tooltip help="receiverSerialHalfDuplexHelp" />
+          {/snippet}
+          <Switch
+            id="receiver-serialrx-halfduplex"
+            bind:checked={FC.RX_CONFIG.serialrx_halfduplex}
+          />
+        </Field>
+        {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)}
+          <Field id="receiver-serialrx-pinswap" label="receiverSerialPinSwap">
+            {#snippet tooltip()}
+              <Tooltip help="receiverSerialPinSwapHelp" />
+            {/snippet}
+            <Switch
+              id="receiver-serialrx-pinswap"
+              bind:checked={FC.RX_CONFIG.serialrx_pinswap}
+            />
+          </Field>
+        {/if}
+      </SubSection>
+    </div>
   {/if}
 </Section>
 

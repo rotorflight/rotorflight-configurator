@@ -1,4 +1,6 @@
 <script>
+  import { slide } from "svelte/transition";
+
   import Switch from "@/components/Switch.svelte";
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
@@ -60,32 +62,34 @@
       />
     </Field>
     {#if notch1Enable}
-      <SubSection>
-        <Field
-          id="notch-filter-1-center"
-          label="gyroNotchFilterFrequency"
-          unit="Hz"
-        >
-          <NumberInput
+      <div transition:slide>
+        <SubSection>
+          <Field
             id="notch-filter-1-center"
-            min="0"
-            max="1000"
-            bind:value={FC.FILTER_CONFIG.gyro_notch_hz}
-          />
-        </Field>
-        <Field
-          id="notch-filter-1-cutoff"
-          label="gyroNotchFilterCutoff"
-          unit="Hz"
-        >
-          <NumberInput
+            label="gyroNotchFilterFrequency"
+            unit="Hz"
+          >
+            <NumberInput
+              id="notch-filter-1-center"
+              min="0"
+              max="1000"
+              bind:value={FC.FILTER_CONFIG.gyro_notch_hz}
+            />
+          </Field>
+          <Field
             id="notch-filter-1-cutoff"
-            min="0"
-            max="1000"
-            bind:value={FC.FILTER_CONFIG.gyro_notch_cutoff}
-          />
-        </Field>
-      </SubSection>
+            label="gyroNotchFilterCutoff"
+            unit="Hz"
+          >
+            <NumberInput
+              id="notch-filter-1-cutoff"
+              min="0"
+              max="1000"
+              bind:value={FC.FILTER_CONFIG.gyro_notch_cutoff}
+            />
+          </Field>
+        </SubSection>
+      </div>
     {/if}
   </SubSection>
   <SubSection label="gyroNotchFilter2">
@@ -96,32 +100,34 @@
       />
     </Field>
     {#if notch2Enable}
-      <SubSection>
-        <Field
-          id="notch-filter-2-center"
-          label="gyroNotchFilterFrequency"
-          unit="Hz"
-        >
-          <NumberInput
+      <div transition:slide>
+        <SubSection>
+          <Field
             id="notch-filter-2-center"
-            min="0"
-            max="1000"
-            bind:value={FC.FILTER_CONFIG.gyro_notch2_hz}
-          />
-        </Field>
-        <Field
-          id="notch-filter-2-cutoff"
-          label="gyroNotchFilterCutoff"
-          unit="Hz"
-        >
-          <NumberInput
+            label="gyroNotchFilterFrequency"
+            unit="Hz"
+          >
+            <NumberInput
+              id="notch-filter-2-center"
+              min="0"
+              max="1000"
+              bind:value={FC.FILTER_CONFIG.gyro_notch2_hz}
+            />
+          </Field>
+          <Field
             id="notch-filter-2-cutoff"
-            min="0"
-            max="1000"
-            bind:value={FC.FILTER_CONFIG.gyro_notch2_cutoff}
-          />
-        </Field>
-      </SubSection>
+            label="gyroNotchFilterCutoff"
+            unit="Hz"
+          >
+            <NumberInput
+              id="notch-filter-2-cutoff"
+              min="0"
+              max="1000"
+              bind:value={FC.FILTER_CONFIG.gyro_notch2_cutoff}
+            />
+          </Field>
+        </SubSection>
+      </div>
     {/if}
   </SubSection>
 </Section>

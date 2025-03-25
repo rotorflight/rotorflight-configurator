@@ -1,12 +1,10 @@
 <script>
-  import { slide } from "svelte/transition";
-
   import { i18n } from "@/js/i18n.js";
 
   let { children, label } = $props();
 </script>
 
-<div class="container" transition:slide>
+<div class="container">
   {#if label}
     <div class="header">
       {$i18n.t(label)}
