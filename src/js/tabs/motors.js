@@ -516,9 +516,10 @@ tab.initialize = function (callback) {
             const rpmSensorEnabled = rpmSensorSwitch.is(':checked');
             FC.FEATURE_CONFIG.features.setFeature('FREQ_SENSOR', rpmSensorEnabled);
 
+            const isCastleLink = self.escProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol] === "CASTLE";
             const telemProto =  parseInt($('select[id="telemetryProtocol"]').val());
-            FC.ESC_SENSOR_CONFIG.protocol = telemProto;
-            FC.FEATURE_CONFIG.features.setFeature('ESC_SENSOR', telemProto > 0);
+            FC.ESC_SENSOR_CONFIG.protocol = isCastleLink ? 0 : telemProto;
+            FC.FEATURE_CONFIG.features.ESC_SENSOR = telemProto > 0 || isCastleLink;
 
             FC.ESC_SENSOR_CONFIG.half_duplex = +escTelemetryHalfDuplex.is(':checked');
             FC.ESC_SENSOR_CONFIG.pinswap = +escTelemetryPinswap.is(':checked');
