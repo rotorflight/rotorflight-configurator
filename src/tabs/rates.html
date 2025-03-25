@@ -204,6 +204,29 @@
                                 <input id="setpoint-boost-cutoff-yaw" type="number" step="0.1" min="0" max="25" />
                                 <input id="setpoint-boost-cutoff-collective" type="number" step="0.1" min="0" max="25" />
                             </div>
+
+                            <div class="group yaw-deadband">
+                                <div i18n="rateYawDynamicCeilingGain"></div>
+                                <div></div>
+                                <div></div>
+                                <input id="yaw-dynamic-ceiling-gain" type="number" step="1" min="0" max="250" />
+                                <div></div>
+
+                                <div i18n="rateYawDynamicDeadbandGain"></div>
+                                <div></div>
+                                <div></div>
+                                <input id="yaw-dynamic-deadband-gain" type="number" step="1" min="0" max="250" />
+                                <div></div>
+
+                                <div>
+                                    <span i18n="rateYawDynamicDeadbandFilter"></span>
+                                    <span> [Hz]</span>
+                                </div>
+                                <div></div>
+                                <div></div>
+                                <input id="yaw-dynamic-deadband-filter" type="number" step="0.1" min="0" max="25" />
+                                <div></div>
+                            </div>
                         </div>
                     </div>
 

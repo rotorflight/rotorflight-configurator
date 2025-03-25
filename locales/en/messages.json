@@ -4965,6 +4965,15 @@
     "rateSetpointBoostCutoff": {
         "message": "Setpoint Boost Cutoff"
     },
+    "rateYawDynamicCeilingGain": {
+        "message": "Dynamic Ceiling Gain"
+    },
+    "rateYawDynamicDeadbandGain": {
+        "message": "Dynamic Deadband Gain"
+    },
+    "rateYawDynamicDeadbandFilter": {
+        "message": "Dynamic Deadband Filter"
+    },
     "gyroFilterSettings": {
         "message": "Gyro Filter Settings"
     },
