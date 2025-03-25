@@ -1,5 +1,6 @@
 <script>
   import semver from "semver";
+  import { slide } from "svelte/transition";
 
   import { i18n } from "@/js/i18n.js";
 
@@ -36,83 +37,91 @@
     </Field>
 
     {#if enabled && multiAxis}
-      <SubSection>
-        <Field id="rpm-filter-preset" label="gyroRpmFilterPreset">
-          {#snippet tooltip()}
-            <Tooltip
-              help="gyroRpmFilterPresetHelp"
-              attrs={[
-                {
-                  name: "genericDefault",
-                  value: $i18n.t("gyroRpmFilterPresetMedium"),
-                },
-              ]}
-            />
-          {/snippet}
-          <select
-            id="rpm-filter-preset"
-            bind:value={FC.FILTER_CONFIG.rpm_preset}
-          >
-            {#each filterStrengths as strength, index}
-              <option value={index}>{$i18n.t(strength)}</option>
-            {/each}
-          </select>
-        </Field>
-        <Field id="rpm-filter-min-freq" label="gyroRpmFilterMinFreq" unit="Hz">
-          {#snippet tooltip()}
-            <Tooltip
-              help="gyroRpmFilterMinFreqHelp"
-              attrs={[{ name: "genericDefault", value: "20Hz" }]}
-            />
-          {/snippet}
-          <NumberInput
+      <div transition:slide>
+        <SubSection>
+          <Field id="rpm-filter-preset" label="gyroRpmFilterPreset">
+            {#snippet tooltip()}
+              <Tooltip
+                help="gyroRpmFilterPresetHelp"
+                attrs={[
+                  {
+                    name: "genericDefault",
+                    value: $i18n.t("gyroRpmFilterPresetMedium"),
+                  },
+                ]}
+              />
+            {/snippet}
+            <select
+              id="rpm-filter-preset"
+              bind:value={FC.FILTER_CONFIG.rpm_preset}
+            >
+              {#each filterStrengths as strength, index}
+                <option value={index}>{$i18n.t(strength)}</option>
+              {/each}
+            </select>
+          </Field>
+          <Field
             id="rpm-filter-min-freq"
-            min="1"
-            max="100"
-            bind:value={FC.FILTER_CONFIG.rpm_min_hz}
-          />
-        </Field>
-      </SubSection>
+            label="gyroRpmFilterMinFreq"
+            unit="Hz"
+          >
+            {#snippet tooltip()}
+              <Tooltip
+                help="gyroRpmFilterMinFreqHelp"
+                attrs={[{ name: "genericDefault", value: "20Hz" }]}
+              />
+            {/snippet}
+            <NumberInput
+              id="rpm-filter-min-freq"
+              min="1"
+              max="100"
+              bind:value={FC.FILTER_CONFIG.rpm_min_hz}
+            />
+          </Field>
+        </SubSection>
+      </div>
     {/if}
   </SubSection>
 
   {#if enabled && !multiAxis}
-    <SubSection label="gyroRpmFilterMinRPMGroup">
-      <Field
-        id="rpm-filter-rpm-limit-main"
-        label="gyroRpmFilterMainRotorMinRPM"
-      >
-        {#snippet tooltip()}
-          <Tooltip
-            help="gyroRpmFilterMinRPMGroupHelp"
-            attrs={[{ name: "genericDefault", value: "1000 RPM" }]}
-          />
-        {/snippet}
-        <NumberInput
+    <div transition:slide>
+      <SubSection label="gyroRpmFilterMinRPMGroup">
+        <Field
           id="rpm-filter-rpm-limit-main"
-          min="0"
-          max="10000"
-          bind:value={notches.rpmLimitMain}
-        />
-      </Field>
-      <Field
-        id="rpm-filter-rpm-limit-tail"
-        label="gyroRpmFilterTailRotorMinRPM"
-      >
-        {#snippet tooltip()}
-          <Tooltip
-            help="gyroRpmFilterMinRPMGroupHelp"
-            attrs={[{ name: "genericDefault", value: "2000 RPM" }]}
+          label="gyroRpmFilterMainRotorMinRPM"
+        >
+          {#snippet tooltip()}
+            <Tooltip
+              help="gyroRpmFilterMinRPMGroupHelp"
+              attrs={[{ name: "genericDefault", value: "1000 RPM" }]}
+            />
+          {/snippet}
+          <NumberInput
+            id="rpm-filter-rpm-limit-main"
+            min="0"
+            max="10000"
+            bind:value={notches.rpmLimitMain}
           />
-        {/snippet}
-        <NumberInput
+        </Field>
+        <Field
           id="rpm-filter-rpm-limit-tail"
-          min="0"
-          max="10000"
-          bind:value={notches.rpmLimitTail}
-        />
-      </Field>
-    </SubSection>
+          label="gyroRpmFilterTailRotorMinRPM"
+        >
+          {#snippet tooltip()}
+            <Tooltip
+              help="gyroRpmFilterMinRPMGroupHelp"
+              attrs={[{ name: "genericDefault", value: "2000 RPM" }]}
+            />
+          {/snippet}
+          <NumberInput
+            id="rpm-filter-rpm-limit-tail"
+            min="0"
+            max="10000"
+            bind:value={notches.rpmLimitTail}
+          />
+        </Field>
+      </SubSection>
+    </div>
   {/if}
 </Section>
 
