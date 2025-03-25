@@ -20,6 +20,7 @@ const tab = {
         "OpenYGE",
         "FLYROTOR",
         "Graupner",
+        "XDFLY",
     ],
     govModes: [
         "OFF",
@@ -391,7 +392,8 @@ tab.initialize = function (callback) {
 
         const telemProtocolSelect = $('select[id="telemetryProtocol"]');
         self.telemetryProtocols.forEach(function(value,index) {
-            const disabled = (index > 0 && !self.telemetrySerialPort) ? 'disabled' : '';
+            const disabled = (value == "XDFLY" && !semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) ||
+                        (index > 0 && !self.telemetrySerialPort) ? 'disabled' : '';
             telemProtocolSelect.append(`<option value="${index}" ${disabled}>${value}</option>`);
         });
         telemProtocolSelect.val(self.isEscSensorEnabled ? FC.ESC_SENSOR_CONFIG.protocol : 0);
