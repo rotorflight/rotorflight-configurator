@@ -1097,6 +1097,17 @@ tab.initRatesSystem = function() {
         self.currentRates.pitch_accel_limit         = 0;
         self.currentRates.yaw_accel_limit           = 0;
         self.currentRates.collective_accel_limit    = 0;
+        self.currentRates.roll_setpoint_boost_gain         = 0;
+        self.currentRates.roll_setpoint_boost_cutoff       = 15;
+        self.currentRates.pitch_setpoint_boost_gain        = 0;
+        self.currentRates.pitch_setpoint_boost_cutoff      = 15;
+        self.currentRates.yaw_setpoint_boost_gain          = 0;
+        self.currentRates.yaw_setpoint_boost_cutoff        = 90;
+        self.currentRates.collective_setpoint_boost_gain   = 0;
+        self.currentRates.collective_setpoint_boost_cutoff = 15;
+        self.currentRates.yaw_dynamic_ceiling_gain         = 30;
+        self.currentRates.yaw_dynamic_deadband_gain        = 30;
+        self.currentRates.yaw_dynamic_deadband_filter      = 60;
     }
 
     const rcRateLabel_e = $('.rates_setup .rates_titlebar .rc_rate');
