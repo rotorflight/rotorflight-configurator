@@ -137,6 +137,10 @@ tab.initialize = function (callback) {
         FC.RC_TUNING.yaw_setpoint_boost_cutoff = getIntegerValue('#setpoint-boost-cutoff-yaw');
         FC.RC_TUNING.collective_setpoint_boost_cutoff = getIntegerValue('#setpoint-boost-cutoff-collective');
 
+        FC.RC_TUNING.yaw_dynamic_ceiling_gain = getIntegerValue('#yaw-dynamic-ceiling-gain');
+        FC.RC_TUNING.yaw_dynamic_deadband_gain = getIntegerValue('#yaw-dynamic-deadband-gain');
+        FC.RC_TUNING.yaw_dynamic_deadband_filter = getIntegerValue('#yaw-dynamic-deadband-filter', 10);
+
         // catch RC_tuning changes
         const roll_pitch_rate_e = $('.rates_setup input[name="roll_pitch_rate"]');
         const pitch_rate_e = $('.rates_setup input[name="pitch_rate"]');
@@ -286,7 +290,8 @@ tab.initialize = function (callback) {
             });
         });
 
-        $('.rateDynamic .group.setpoint-boost').toggle(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8));
+        $('.rateDynamic .group.setpoint-boost, .rateDynamic .group.yaw-deadband')
+            .toggle(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8));
 
         // Getting the DOM elements for curve display
         const rcCurveElement = $('.rate_curve canvas#rate_curve_layer0').get(0);
@@ -1018,14 +1023,17 @@ tab.initRatesSystem = function() {
         pitch_accel_limit:          FC.RC_TUNING.pitch_accel_limit,
         yaw_accel_limit:            FC.RC_TUNING.yaw_accel_limit,
         collective_accel_limit:     FC.RC_TUNING.collective_accel_limit,
-        roll_setpoint_boost_gain: FC.RC_TUNING.roll_setpoint_boost_gain,
-        roll_setpoint_boost_cutoff: FC.RC_TUNING.roll_setpoint_boost_cutoff,
-        pitch_setpoint_boost_gain: FC.RC_TUNING.pitch_setpoint_boost_gain,
-        pitch_setpoint_boost_cutoff: FC.RC_TUNING.pitch_setpoint_boost_cutoff,
-        yaw_setpoint_boost_gain: FC.RC_TUNING.yaw_setpoint_boost_gain,
-        yaw_setpoint_boost_cutoff: FC.RC_TUNING.yaw_setpoint_boost_cutoff,
-        collective_setpoint_boost_gain: FC.RC_TUNING.collective_setpoint_boost_gain,
+        roll_setpoint_boost_gain:         FC.RC_TUNING.roll_setpoint_boost_gain,
+        roll_setpoint_boost_cutoff:       FC.RC_TUNING.roll_setpoint_boost_cutoff,
+        pitch_setpoint_boost_gain:        FC.RC_TUNING.pitch_setpoint_boost_gain,
+        pitch_setpoint_boost_cutoff:      FC.RC_TUNING.pitch_setpoint_boost_cutoff,
+        yaw_setpoint_boost_gain:          FC.RC_TUNING.yaw_setpoint_boost_gain,
+        yaw_setpoint_boost_cutoff:        FC.RC_TUNING.yaw_setpoint_boost_cutoff,
+        collective_setpoint_boost_gain:   FC.RC_TUNING.collective_setpoint_boost_gain,
         collective_setpoint_boost_cutoff: FC.RC_TUNING.collective_setpoint_boost_cutoff,
+        yaw_dynamic_ceiling_gain:         FC.RC_TUNING.yaw_dynamic_ceiling_gain,
+        yaw_dynamic_deadband_gain:        FC.RC_TUNING.yaw_dynamic_deadband_gain,
+        yaw_dynamic_deadband_filter:      FC.RC_TUNING.yaw_dynamic_deadband_filter,
     };
 
     switch (self.currentRatesType) {
@@ -1158,6 +1166,10 @@ tab.initRatesSystem = function() {
     $('#setpoint-boost-cutoff-pitch').val(self.currentRates.pitch_setpoint_boost_cutoff);
     $('#setpoint-boost-cutoff-yaw').val(self.currentRates.yaw_setpoint_boost_cutoff);
     $('#setpoint-boost-cutoff-collective').val(self.currentRates.collective_setpoint_boost_cutoff);
+
+    $('#yaw-dynamic-ceiling-gain').val(self.currentRates.yaw_dynamic_ceiling_gain);
+    $('#yaw-dynamic-deadband-gain').val(self.currentRates.yaw_dynamic_deadband_gain);
+    $('#yaw-dynamic-deadband-filter').val((self.currentRates.yaw_dynamic_deadband_filter / 10).toFixed(1));
 };
 
 tab.changeRatesLogo = function() {

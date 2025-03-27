@@ -317,6 +317,10 @@ export const FC = $state({
             yaw_setpoint_boost_cutoff:  0,
             collective_setpoint_boost_gain:   0,
             collective_setpoint_boost_cutoff: 0,
+
+            yaw_dynamic_ceiling_gain:   0,
+            yaw_dynamic_deadband_gain:  0,
+            yaw_dynamic_deadband_filter:0,
         };
 
         this.AUX_CONFIG =               [];

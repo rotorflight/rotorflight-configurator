@@ -173,7 +173,7 @@
                     <div class="gui_box rateDynamic grey spacer_left">
                         <div class="grid-container">
                             <div class="title">
-                                <div class="header" i18n="Dynamics"></div>
+                                <div class="header" i18n="rateSetupDynamic"></div>
                                 <div class="axis-title ROLL" i18n="axisROLL"></div>
                                 <div class="axis-title PITCH" i18n="axisPITCH"></div>
                                 <div class="axis-title YAW" i18n="axisYAW"></div>
@@ -203,6 +203,29 @@
                                 <input id="setpoint-boost-cutoff-pitch" type="number" step="1" min="0" max="250" />
                                 <input id="setpoint-boost-cutoff-yaw" type="number" step="1" min="0" max="250" />
                                 <input id="setpoint-boost-cutoff-collective" type="number" step="1" min="0" max="250" />
+                            </div>
+
+                            <div class="group yaw-deadband">
+                                <div i18n="rateYawDynamicCeilingGain"></div>
+                                <div></div>
+                                <div></div>
+                                <input id="yaw-dynamic-ceiling-gain" type="number" step="1" min="0" max="250" />
+                                <div></div>
+
+                                <div i18n="rateYawDynamicDeadbandGain"></div>
+                                <div></div>
+                                <div></div>
+                                <input id="yaw-dynamic-deadband-gain" type="number" step="1" min="0" max="250" />
+                                <div></div>
+
+                                <div>
+                                    <span i18n="rateYawDynamicDeadbandFilter"></span>
+                                    <span> [Hz]</span>
+                                </div>
+                                <div></div>
+                                <div></div>
+                                <input id="yaw-dynamic-deadband-filter" type="number" step="0.1" min="0" max="25" />
+                                <div></div>
                             </div>
                         </div>
                     </div>

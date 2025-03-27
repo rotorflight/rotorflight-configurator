@@ -94,6 +94,9 @@ function getFunctions() {
         { id: 69,   name: 'RollSetpointBoostGain',      min: 0,     max: 255,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
         { id: 70,   name: 'YawSetpointBoostGain',       min: 0,     max: 255,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
         { id: 71,   name: 'CollectiveSetpointBoostGain',min: 0,     max: 255,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
+        { id: 72,   name: 'YawDynCeilingGain',          min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
+        { id: 73,   name: 'YawDynDeadbandGain',         min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
+        { id: 74,   name: 'YawDynDeadbandFilter',       min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
     ];
 }
 

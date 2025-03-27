@@ -371,6 +371,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.RC_TUNING.yaw_setpoint_boost_cutoff = data.readU8();
                     FC.RC_TUNING.collective_setpoint_boost_gain = data.readU8();
                     FC.RC_TUNING.collective_setpoint_boost_cutoff = data.readU8();
+
+                    FC.RC_TUNING.yaw_dynamic_ceiling_gain = data.readU8();
+                    FC.RC_TUNING.yaw_dynamic_deadband_gain = data.readU8();
+                    FC.RC_TUNING.yaw_dynamic_deadband_filter = data.readU8();
                 }
 
                 break;
@@ -1798,7 +1802,10 @@ MspHelper.prototype.crunch = function(code) {
                      .push8(FC.RC_TUNING.yaw_setpoint_boost_gain)
                      .push8(FC.RC_TUNING.yaw_setpoint_boost_cutoff)
                      .push8(FC.RC_TUNING.collective_setpoint_boost_gain)
-                     .push8(FC.RC_TUNING.collective_setpoint_boost_cutoff);
+                     .push8(FC.RC_TUNING.collective_setpoint_boost_cutoff)
+                     .push8(FC.RC_TUNING.yaw_dynamic_ceiling_gain)
+                     .push8(FC.RC_TUNING.yaw_dynamic_deadband_gain)
+                     .push8(FC.RC_TUNING.yaw_dynamic_deadband_filter);
             }
 
             break;
