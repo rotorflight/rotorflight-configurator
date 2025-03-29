@@ -645,6 +645,12 @@ html[data-theme="dark"] .tab-rates .rateDynamic .group {
     background-color: var(--color-collective);
 }
 
+.tab-rates .row-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 @media all and (max-width: 575px) {
     .tab-rates .content_wrapper {
         padding: 8px 0;
