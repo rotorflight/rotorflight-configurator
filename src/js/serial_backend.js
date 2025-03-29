@@ -455,7 +455,10 @@ async function checkReportProblems() {
         $('#dialogReportProblems-closebtn').trigger("focus");
     }
 
-    processUid();
+    await processUid();
+    await processName();
+    await setRtc();
+    finishOpen();
 }
 
 async function processUid() {
@@ -463,19 +466,16 @@ async function processUid() {
 
     const UID = FC.CONFIG.uid[0].toString(16) + FC.CONFIG.uid[1].toString(16) + FC.CONFIG.uid[2].toString(16);
     GUI.log(i18n.getMessage('uniqueDeviceIdReceived', [UID]));
-    processName();
 }
 
 async function processName() {
     await MSP.promise(MSPCodes.MSP_NAME, false);
     GUI.log(i18n.getMessage('craftNameReceived', [FC.CONFIG.name]));
-    setRtc();
 }
 
 async function setRtc() {
     await MSP.promise(MSPCodes.MSP_SET_RTC, globalThis.mspHelper.crunch(MSPCodes.MSP_SET_RTC));
     GUI.log(i18n.getMessage('realTimeClockSet'));
-    finishOpen();
 }
 
 function finishOpen() {
@@ -499,7 +499,7 @@ function connectCli() {
     $('#tabs .tab_cli a').trigger("click");
 }
 
-function onConnect() {
+async function onConnect() {
     console.log("On connnection");
     if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
         $('div#flashbutton a.flash_state').removeClass('active');
@@ -539,10 +539,11 @@ function onConnect() {
 
         $('#tabs ul.mode-connected').show();
 
-        MSP.promise(MSPCodes.MSP_FEATURE_CONFIG, false)
-            .then(() => MSP.promise(MSPCodes.MSP_BATTERY_CONFIG, false))
-            .then(() => MSP.promise(MSPCodes.MSP_STATUS, false))
-            .then(() => MSP.promise(MSPCodes.MSP_DATAFLASH_SUMMARY, false));
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        await MSP.promise(MSPCodes.MSP_FEATURE_CONFIG, false);
+        await MSP.promise(MSPCodes.MSP_BATTERY_CONFIG, false);
+        await MSP.promise(MSPCodes.MSP_STATUS, false);
+        await MSP.promise(MSPCodes.MSP_DATAFLASH_SUMMARY, false);
 
         if (FC.CONFIG.boardType == 0 || FC.CONFIG.boardType == 2) {
             startLiveDataRefreshTimer();
