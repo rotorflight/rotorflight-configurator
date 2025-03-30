@@ -14,7 +14,9 @@
 !/src/js/filesystem.js
 !/src/js/main.svelte.js
 !/src/js/port_usage.js
+!/src/js/presets/**/*.js
 !/src/js/tabs/gyro.js
+!/src/js/tabs/presets.js
 !/src/tabs/gyro/filter_config.js
 !/src/tabs/receiver/**/*.js
 
