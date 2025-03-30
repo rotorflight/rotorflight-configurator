@@ -7500,6 +7500,9 @@
         "message": "Add New Source",
         "description": "A button to show preset sources dialog"
     },
+    "presetsSourcesDialogConfirm": {
+        "message": "OK"
+    },
     "presetsSourcesDialogDefaultSourceName": {
         "message": "New Custom Preset Source",
         "description": "A default preset source (repo) name"
@@ -7581,5 +7584,8 @@
     },
     "presetEdit": {
         "message": "Edit"
+    },
+    "presetsDontShowAgain": {
+        "message": "Don't show again"
     }
 }

@@ -228,10 +228,7 @@ class PresetsTab {
                 await self.activateCli();
                 self.#dom.progressDialogProgressBar.show();
                 self.#dom.progressDialogProgressBar.val(0);
-                self.setupCliDialogAndShow({
-                    title: i18n.getMessage("presetsApplyingPresets"),
-                    buttonCancelCallback: null,
-                });
+                self.setupCliDialogAndShow(i18n.getMessage("presetsApplyingPresets"));
                 const commands = previewArea.val();
                 self.snippetPreviewWindow.close();
 
@@ -368,22 +365,11 @@ class PresetsTab {
         }
     };
 
-    setupCliDialogAndShow(cliDialogSettings) {
-        // cliDialogSettings:
-        // title, showCancelButton, buttonCancelCallback
+    setupCliDialogAndShow(dialogTitle) {
         const title = $("#presets_cli_dialog_title");
 
-        title.html(cliDialogSettings.title);
+        title.html(dialogTitle);
         title.show();
-        if (cliDialogSettings.showCancelButton) {
-            this.domButtonCliCancel.toggle(!!cliDialogSettings.buttonCancelCallback);
-            this.domButtonCliCancel.off("click");
-
-            this.domButtonCliCancel.on("click", () => {
-                this.domDialogWait[0].close();
-                cliDialogSettings.buttonCancelCallback?.();
-            });
-        }
         $('#presets_cli_command_input').toggle(false);
         this.#dom.dialogCli[0].showModal();
         return this.#dom.dialogCli[0];
@@ -450,29 +436,7 @@ class PresetsTab {
         });
     };
 
-    async onSaveBackupClick(backupType) {
-        let waitingDialogTitle = "";
-
-        switch (backupType) {
-            case "diff":
-                waitingDialogTitle = i18n.getMessage("backupDiffAll");
-                break;
-            case "dump":
-                waitingDialogTitle = i18n.getMessage("backupDumpAll");
-                break;
-        }
-
-        const waitingDialog = this.setupCliDialogAndShow(
-            {
-                title: waitingDialogTitle,
-                buttonCancelCallback: null
-            });
-
-        await this.activateCli();
-
-        await this.performBackup(backupType);
-
-
+    async handleBackupDialogSaveClick(backupType) {
         const prefix = 'backup_' + backupType;
         const suffix = '.txt';
         try {
@@ -480,13 +444,55 @@ class PresetsTab {
                 suggestedName: generateFilename(prefix, suffix),
                 description: `${suffix.toUpperCase()} files`,
             });
+            this.#dom.dialogCli[0].close();
         } catch (err) {
             console.error('Failed to save backup', err);
             alert(i18n.getMessage("backupFailedToSave"));
+            this.#dom.dialogCli[0].close();
+        }
+    }
+
+    async onSaveBackupClick(backupType) {
+        let backupCliDialogTitle = "";
+
+        switch (backupType) {
+            case "diff":
+                backupCliDialogTitle = i18n.getMessage("backupDiffAll");
+                break;
+            case "dump":
+                backupCliDialogTitle = i18n.getMessage("backupDumpAll");
+                break;
         }
 
-        waitingDialog.close();
-        await new Promise((resolve) => this.#cliEngine.sendLine("exit", resolve));
+        this.setupCliDialogAndShow(backupCliDialogTitle);
+        this.#dom.buttonCliSave.off("click");
+        this.#dom.buttonCliSave.on("click", this.handleBackupDialogSaveClick.bind(this, backupType));
+        this.#dom.buttonCliSave.toggleClass("disabled", true);
+        this.#dom.buttonCliSave.show();
+
+        this.#dom.buttonCliExit.off("click");
+        this.#dom.buttonCliExit.on("click", () => {
+            this.#dom.dialogCli[0].close();
+        });
+        this.#dom.buttonCliExit.toggleClass("disabled", true);
+        this.#dom.buttonCliExit.show();
+
+        await this.activateCli();
+        await this.performBackup(backupType);
+
+        this.#dom.buttonCliSave.toggleClass("disabled", false);
+        this.#dom.buttonCliExit.toggleClass("disabled", false);
+
+        this.#dom.dialogCli.on("close", () => {
+            this.#cliEngine.sendLine("exit");
+            this.disconnectCliMakeSure();
+            this.#dom.dialogCliWarning.hide();
+            this.#dom.buttonCliSave.hide();
+            this.#dom.buttonCliExit.hide();
+            this.#dom.dialogCli.off("close");
+            this.#dom.buttonCliSave.off("click");
+            this.#dom.buttonCliExit.off("click");
+        });
     };
 
     performBackup(backupType) {
