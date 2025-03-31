@@ -1,3 +1,27 @@
+#presets_detailed_dialog {
+  padding: 0;
+  max-height: 70%;
+  height: 100%;
+  min-width: 70%;
+}
+
+#presets_detailed_dialog .dialog-content {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+}
+
+#presets_sources_dialog_content_wrapper {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+}
+
+.tab-presets #presets_sources_dialog_content {
+  padding: 20px;
+  overflow-y: auto;
+}
+
 .tab-presets {
   height: 100%;
   border: none;
@@ -12,7 +36,7 @@
 
 .tab-presets .content_wrapper {
   height: calc(100% - 30px - 3ex);
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 .tab-presets p {
@@ -24,23 +48,21 @@
   padding-right: 20px;
 }
 .tab-presets .top_panel_spacer {
-  width: 0px;
-  display: inline;
-  border: 1px #f1f1f1;
-  border-style: none none none solid;
-  height: 60%;
-  margin-right: 10px;
-  float: right;
+  border-left: 1px solid #f1f1f1;
+  height: 16px;
 }
 .tab-presets .tab_title {
-  padding: 20px 20px 0px 20px;
+  display: flex;
+  align-items: end;
+  padding: 14px 20px 4px 20px;
 }
 .tab-presets .tab_title .presets_top_bar_button_panel .regular-button {
-  margin-bottom: 0px;
-  margin-top: 0px;
-  line-height: 17px;
+  margin: 0;
+  padding: 0 8px;
   font-size: 10px;
   border-radius: 3px;
+  height: 20px;
+  line-height: 20px;
 }
 .tab-presets .ms-choice {
   background-color: #3a3a3a !important;
@@ -166,10 +188,16 @@
   margin-left: auto;
 }
 .presets_title_text {
-  display: inline-block;
+  flex-grow: 1;
+  margin-right: 8px;
 }
+
 .presets_top_bar_button_panel {
-  display: inline;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: end;
+  gap: 8px;
 }
 .presets_warning_backup {
   display: grid;
@@ -279,11 +307,7 @@
   background-color: hsl(0, 0%, 15%);
   width: 100%;
 }
-#presets_detailed_dialog {
-  width: 70%;
-  height: 820px;
-  padding: 12px 12px 0px 12px;
-}
+
 #presets_sources_dialog {
   width: 600px;
   height: 520px;
@@ -418,6 +442,10 @@
     padding-right: 24px;
     margin-bottom: 6px;
   }
+
+  .tab-presets .top_panel_spacer {
+    display: none;
+  }
 }
 
 /* Start detailed dialog panel */
@@ -427,25 +455,9 @@
   margin-bottom: 2ex;
 }
 
-#presets_detailed_dialog {
-  padding: 0px; /* main.css defines a padding of 1em but we want to turn this off so the title/footer bar looks nice */
-}
-
-#preset_dialog_properties {
-  padding: 0px 0px 0px 20px;
-}
-
-.preset_dialog_scrollable {
-  bottom: 51px;
-  width: 100%;
-  position: absolute;
+#preset_dialog_content_wrapper {
   overflow-y: auto;
-  overflow-x: hidden;
-}
-
-#presets_detailed_dialog .content_toolbar {
-  position: absolute;
-  bottom: 0; /* lock footer to the bottom of the dialog */
+  padding: 0 20px;
 }
 
 #preset_dialog_content_wrapper .preset_panel_title {
@@ -481,11 +493,7 @@
 }
 
 .preset_dialog_text {
-  padding-top: 6px;
-  padding-bottom: 6px;
-  margin-top: 12px;
-  overflow-y: scroll;
-  height: 560px;
+  margin: 12px 0;
   font-size: 110%;
   white-space: pre-line;
   user-select: text;
@@ -560,7 +568,6 @@
   line-height: 20px;
 }
 #preset_dialog_loading {
-  height: 600px;
 }
 #preset_options_select {
   width: 80%;
@@ -569,10 +576,17 @@
   width: 100px;
   display: inline-block;
 }
+
 #presets_detailed_dialog .content_toolbar {
-  margin-left: auto;
-  margin-right: -12px;
+  display: flex;
+  padding-left: 15px;
+  width: initial;
 }
+
+#presets_detailed_dialog .content_toolbar .grow {
+  flex-grow: 1;
+}
+
 #presets_detailed_dialog .content_toolbar .btn {
   display: contents;
 }
@@ -584,35 +598,11 @@
 }
 
 @media all and (max-width: 575px) {
-  .preset_dialog_text {
-    height: unset;
-    padding-bottom: 100px;
+  #presets_detailed_dialog {
+    max-height: 100%;
+    margin: 16px;
   }
 
-  #preset_dialog_content_wrapper .content_toolbar {
-    position: fixed;
-  }
-
-  #presets_detailed_dialog .content_toolbar {
-    position: fixed;
-    padding-bottom: 8px;
-  }
-  #presets_detailed_dialog .btn {
-    margin-left: 0px;
-    width: 100%;
-  }
-  #presets_detailed_dialog .btn .left-panel {
-    margin-left: 12px;
-    margin-bottom: 12px;
-    padding-left: 0px;
-  }
-  #presets_detailed_dialog .btn .left-panel .regular-button {
-    float: none;
-    display: inline-block;
-  }
-  #presets_detailed_dialog .mainButton {
-    margin-top: 40px;
-  }
   #preset_options_panel {
     height: 26px;
     margin-top: 6px;
@@ -621,13 +611,6 @@
   }
   #preset_options_select {
     width: 100%;
-  }
-
-  .preset_dialog_scrollable {
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding-bottom: 51px;
-    height: unset;
   }
 }
 
@@ -822,38 +805,9 @@
 
 .presets_sources_dialog_title_panel {
   padding-bottom: 0.5ex;
-  margin-bottom: 2ex;
+  margin-bottom: 0;
 }
 
 #presets_sources_dialog {
   padding: 0px; /* main.css defines a padding of 1em but we want to turn this off so the title/footer bar looks nice */
 }
-
-.presets_sources_dialog_scrollable {
-  position: absolute;
-  bottom: 51px;
-  padding: 20px 20px 51px 20px; /* main.css turn the padding back on */
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 350px;
-}
-
-#presets_sources_dialog .content_toolbar {
-  position: absolute;
-  bottom: 0; /* lock footer to the bottom of the dialog */
-}
-
-@media all and (max-width: 575px) {
-  #presets_sources_dialog_content_wrapper .content_toolbar {
-    position: fixed;
-  }
-
-  .presets_sources_dialog_scrollable {
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding-bottom: 51px;
-    height: unset;
-  }
-}
-
-/* End Presets Source Panel */
