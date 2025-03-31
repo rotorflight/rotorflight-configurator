@@ -815,8 +815,9 @@ class PresetsTab {
     });
   }
 
-  #updateSearchResults() {
+  async #updateSearchResults() {
     if (!this.freezeSearch) {
+      this.freezeSearch = true;
       const searchParams = {
         categories: this.#dom.selectCategory.multipleSelect(
           "getSelects",
@@ -836,7 +837,8 @@ class PresetsTab {
       searchParams.authors = searchParams.authors.map((str) =>
         str.toLowerCase(),
       );
-      this.#displayPresets(this.#searchPresets(searchParams));
+      await this.#displayPresets(this.#searchPresets(searchParams));
+      this.freezeSearch = false;
     }
   }
 
@@ -909,6 +911,7 @@ class PresetsTab {
   }
 
   #searchPresets(searchParams, hash = "") {
+    console.log("Searching presets with parameters: ", searchParams);
     const matchingPresets = [];
     const presetsViewLinkHashTable = [];
     const seenHashes = new Set();
@@ -928,6 +931,8 @@ class PresetsTab {
         }
       }
     }
+
+    console.log("Presets found: ", matchingPresets);
 
     matchingPresets.sort((a, b) =>
       this.#presetSearchPriorityComparer(presetsViewLinkHashTable, a[0], b[0]),
