@@ -25,6 +25,8 @@
 .tab-presets {
   height: 100%;
   border: none;
+  display: grid;
+  grid-template-rows: 1fr auto;
 }
 
 .tab-presets input,
@@ -35,7 +37,7 @@
 }
 
 .tab-presets .content_wrapper {
-  height: calc(100% - 30px - 3ex);
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -55,6 +57,7 @@
   display: flex;
   align-items: end;
   padding: 14px 20px 4px 20px;
+  min-height: min-content;
 }
 .tab-presets .tab_title .presets_top_bar_button_panel .regular-button {
   margin: 0;
@@ -345,12 +348,6 @@
   border-radius: 3px;
 }
 @media only screen and (max-width: 1055px) {
-  .tab-presets .content_wrapper {
-    height: calc(100% - 87px);
-  }
-  .tab-presets .content_toolbar {
-    margin-top: 5px;
-  }
   .presets_search_settings {
     position: static;
     top: unset;
@@ -360,20 +357,14 @@
   .tab-presets .content_wrapper {
     height: calc(100% - 87px);
   }
-  .tab-presets .content_toolbar {
-    margin-top: 5px;
-  }
   .presets_search_settings {
     position: static;
     top: unset;
   }
 }
 @media all and (max-width: 575px) {
-  .tab-presets .content_wrapper {
-    height: calc(100% - 51px);
-  }
   .tab-presets .tab_title {
-    padding: 20px 10px 10px 10px;
+    padding: 10px 10px 4px 10px;
   }
   .tab-presets .backdrop {
     background-size: 100%;
@@ -453,6 +444,10 @@
 .preset_dialog_title_panel {
   padding-bottom: 0.5ex;
   margin-bottom: 2ex;
+}
+
+#preset_dialog_content {
+  height: 100%;
 }
 
 #preset_dialog_content_wrapper {
