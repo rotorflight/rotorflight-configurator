@@ -229,12 +229,12 @@ export default class PresetPanel {
     if (this.#presetTracker.find(this.#viewLink)) {
       this.#dom.star.css(
         "background-image",
-        "url('../../../images/icons/star_orange.svg')",
+        "url('../../../images/icons/star_rf_blue.svg')",
       );
     } else if (starMouseHover) {
       this.#dom.star.css(
         "background-image",
-        "url('../../../images/icons/star_orange_stroke.svg')",
+        "url('../../../images/icons/star_rf_blue_stroke.svg')",
       );
     } else {
       this.#dom.star.css(

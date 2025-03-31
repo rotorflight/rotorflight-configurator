@@ -292,7 +292,7 @@
   height: 28px;
   margin-right: 12px;
   background-repeat: no-repeat;
-  background-image: url(../../../images/icons/cf_icon_search_orange.svg);
+  background-image: url(../../../images/icons/cf_icon_search_rf_blue.svg);
 }
 #presets_search_bar_wrapper {
   display: flex;
@@ -635,7 +635,7 @@
 }
 
 .preset_panel_star {
-  background-image: url(../../../images/icons/star_orange.svg);
+  background-image: url(../../../images/icons/star_rf_blue.svg);
   width: 25px;
   height: 25px;
   background-size: cover;
@@ -782,7 +782,7 @@
 }
 
 .presets_source_panel_no_editing_selected {
-  background-image: url(../../../images/icons/cf_icon_check_orange.svg);
+  background-image: url(../../../images/icons/cf_icon_check_rf_blue.svg);
   width: 30px;
   height: 30px;
   display: inline-block;
