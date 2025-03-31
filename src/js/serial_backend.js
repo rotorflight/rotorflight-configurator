@@ -485,8 +485,6 @@ function finishOpen() {
 
     if (GUI.isCordova()) {
         UI_PHONES.reset();
-    } else {
-        GUI.allowedTabs.push('presets'); // Presets is only allowed when not using Cordova for now.
     }
 
     onConnect();

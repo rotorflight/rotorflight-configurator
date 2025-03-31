@@ -48,6 +48,7 @@ export const GuiControl = function () {
         'receiver',
         'sensors',
         'servos',
+        'presets',
     ];
 
     this.allowedTabs = this.defaultAllowedTabsWhenDisconnected;
