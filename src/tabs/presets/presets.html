@@ -1,137 +1,236 @@
 <div class="tab-presets">
-    <div class="content_wrapper" id="presets_content_wrapper">
-        <div class="tab_title">
-            <div i18n="tabPresets" class="presets_title_text"></div>
-            <div class="presets_top_bar_button_panel">
-                <a href="#" class="presets_sources_show tool regular-button right" i18n="presetSources"></a>
-                <div class="top_panel_spacer visible-on-desktop-only"></div>
-                <a href="#" class="backup_load visible-on-desktop-only tool regular-button right" i18n="backupLoad"></a>
-                <a href="#" class="backup_diff_all visible-on-desktop-only tool regular-button right"
-                    i18n="backupDiffAll"></a>
-                <a href="#" class="backup_dump_all visible-on-desktop-only tool regular-button right"
-                    i18n="backupDumpAll"></a>
-            </div>
-        </div>
-        <div class="presets_warnings">
-            <div class="note presets_warning_not_official_source" i18n="presetsWarningNotOfficialSource"></div>
-            <div class="note presets_failed_to_load_repositories"></div>
-            <div class="note presets_warning_backup">
-                <div class="presets_warning_backup_text" i18n="presetsWarningBackup"></div>
-                <a href="#" id="" class="tool regular-button presets_warning_backup_button_hide"
-                    i18n="presetsDontShowAgain"></a>
-            </div>
-        </div>
-        <div id="presets_global_loading" class="data-loading">
-        </div>
-        <div id="presets_global_loading_error">
-            <h3 i18n="presetsLoadError"></h3>
-            <a href="#" id="presets_reload" class="tool regular-button" i18n="presetsReload"></a>
-        </div>
-        <div id="presets_main_content">
-            <div class="presets_search_settings">
-                <div class="presets_filter_table_wrapper">
-                    <div class="presets_filter_row">
-                        <div class="presets_filter_table_header" i18n="presetsFilterCategory"></div>
-                        <div class="presets_filter_table_value">
-                            <select multiple="multiple" class="presets_filter_select"
-                                id="presets_filter_category"></select>
-                        </div>
-                    </div>
-                    <div class="presets_filter_row">
-                        <div class="presets_filter_table_header" i18n="presetsFilterKeyword"></div>
-                        <div class="presets_filter_table_value">
-                            <select multiple="multiple" class="presets_filter_select"
-                                id="presets_filter_keyword"></select>
-                        </div>
-                    </div>
-                    <div class="presets_filter_row">
-                        <div class="presets_filter_table_header" i18n="presetsFilterAuthor"></div>
-                        <div class="presets_filter_table_value">
-                            <select multiple="multiple" class="presets_filter_select"
-                                id="presets_filter_author"></select>
-                        </div>
-                    </div>
-                    <div class="presets_filter_row">
-                        <div class="presets_filter_table_header" i18n="presetsFilterFirmware"></div>
-                        <div class="presets_filter_table_value">
-                            <select multiple="multiple" class="presets_filter_select"
-                                id="presets_filter_firmware_version"></select>
-                        </div>
-                    </div>
-                    <div class="presets_filter_row">
-                        <div class="presets_filter_table_header" i18n="presetsFilterStatus"></div>
-                        <div class="presets_filter_table_value">
-                            <select multiple="multiple" class="presets_filter_select"
-                                id="presets_filter_status"></select>
-                        </div>
-                    </div>
-                </div>
-                <div id="presets_search_bar_wrapper">
-                    <div id="presets_search_hint">
-                    </div>
-                    <input type="text" class="presets_text_input" id="presets_filter_text" />
-                </div>
-            </div>
-            <div id="preset_list_wrapper">
-                <div id="presets_list_no_found" i18n="presetsNoPresetsFound"></div>
-                <div id="presets_list"></div>
-                <div id="presets_list_too_many_found" i18n="presetsTooManyPresetsFound"></div>
-            </div>
-        </div>
+  <div class="content_wrapper" id="presets_content_wrapper">
+    <div class="tab_title">
+      <div i18n="tabPresets" class="presets_title_text"></div>
+      <div class="presets_top_bar_button_panel">
+        <a
+          href="#"
+          class="presets_sources_show tool regular-button right"
+          i18n="presetSources"
+        ></a>
+        <div class="top_panel_spacer visible-on-desktop-only"></div>
+        <a
+          href="#"
+          class="backup_load visible-on-desktop-only tool regular-button right"
+          i18n="backupLoad"
+        ></a>
+        <a
+          href="#"
+          class="backup_diff_all visible-on-desktop-only tool regular-button right"
+          i18n="backupDiffAll"
+        ></a>
+        <a
+          href="#"
+          class="backup_dump_all visible-on-desktop-only tool regular-button right"
+          i18n="backupDumpAll"
+        ></a>
+      </div>
     </div>
-
-    <div class="content_toolbar toolbar_fixed_bottom">
-        <div class="btn">
-            <a href="#" id="presets_review_button" class="tool regular-button" i18n="presetsButtonReview"></a>
-            <a href="#" id="presets_reset_button" class="tool regular-button" i18n="presetsButtonReset"></a>
-        </div>
+    <div class="presets_warnings">
+      <div
+        class="note presets_warning_not_official_source"
+        i18n="presetsWarningNotOfficialSource"
+      ></div>
+      <div class="note presets_failed_to_load_repositories"></div>
+      <div class="note presets_warning_backup">
+        <div
+          class="presets_warning_backup_text"
+          i18n="presetsWarningBackup"
+        ></div>
+        <a
+          href="#"
+          id=""
+          class="tool regular-button presets_warning_backup_button_hide"
+          i18n="presetsDontShowAgain"
+        ></a>
+      </div>
     </div>
-
-    <dialog id="presets_detailed_dialog">
-    </dialog>
-    <dialog id="presets_sources_dialog">
-    </dialog>
-    <dialog id="presets_wait_dialog">
-        <div class="data-loading"></div>
-        <h3 id="dialogWaitTitle"></h3>
-        <div class="buttons">
-            <a href="#" class="dialogWait-cancelButton regular-button" i18n="cancel"></a>
-        </div>
-    </dialog>
-
-    <dialog id="presets_cli_dialog">
-        <div class="presets_cli_content_wrapper">
-            <div class="presets_cli_errors_dialog_warning" i18n="presetsCliErrorsWarning" style="display:none;"></div>
-            <h3 id="presets_cli_dialog_title"></h3>
-            <div id="presets_cli">
-                <div class="backdrop">
-                    <div class="window">
-                        <div class="wrapper"></div>
-                    </div>
-                </div>
-                <textarea id="presets_cli_command_input" name="commands" i18n_placeholder="cliInputPlaceholder" rows="1"
-                    cols="0"></textarea>
-            </div>
-            <progress class="presets_apply_progress_dialog_progress_bar" value="0" max="100"
-                style="display:none;"></progress>
-            <div class="btn">
-                <a href="#" id="presets_cli_save_button" class="tool regular-button" i18n="presetsCliSaveButton"
-                    style="display:none;"></a>
-                <a href="#" id="presets_cli_exit_button" class="tool regular-button" i18n="presetsCliExitButton"
-                    style="display:none;"></a>
-            </div>
-        </div>
-    </dialog>
-
-    <div id="svelte_components"></div>
-
-    <div id="snippetpreviewcontent" style="display: none">
-        <div class="note">
-            <p i18n="cliConfirmSnippetNote"></p>
-        </div>
-        <textarea id="preview" cols="120" rows="20"></textarea>
-        <div class="default_btn">
-            <a class="confirm" href="#" i18n="cliConfirmSnippetBtn"></a>
-        </div>
+    <div id="presets_global_loading" class="data-loading"></div>
+    <div id="presets_global_loading_error">
+      <h3 i18n="presetsLoadError"></h3>
+      <a
+        href="#"
+        id="presets_reload"
+        class="tool regular-button"
+        i18n="presetsReload"
+      ></a>
     </div>
+    <div id="presets_main_content">
+      <div class="presets_search_settings">
+        <div class="presets_filter_table_wrapper">
+          <div class="presets_filter_row">
+            <div
+              class="presets_filter_table_header"
+              i18n="presetsFilterCategory"
+            ></div>
+            <div class="presets_filter_table_value">
+              <select
+                multiple="multiple"
+                class="presets_filter_select"
+                id="presets_filter_category"
+              ></select>
+            </div>
+          </div>
+          <div class="presets_filter_row">
+            <div
+              class="presets_filter_table_header"
+              i18n="presetsFilterKeyword"
+            ></div>
+            <div class="presets_filter_table_value">
+              <select
+                multiple="multiple"
+                class="presets_filter_select"
+                id="presets_filter_keyword"
+              ></select>
+            </div>
+          </div>
+          <div class="presets_filter_row">
+            <div
+              class="presets_filter_table_header"
+              i18n="presetsFilterAuthor"
+            ></div>
+            <div class="presets_filter_table_value">
+              <select
+                multiple="multiple"
+                class="presets_filter_select"
+                id="presets_filter_author"
+              ></select>
+            </div>
+          </div>
+          <div class="presets_filter_row">
+            <div
+              class="presets_filter_table_header"
+              i18n="presetsFilterFirmware"
+            ></div>
+            <div class="presets_filter_table_value">
+              <select
+                multiple="multiple"
+                class="presets_filter_select"
+                id="presets_filter_firmware_version"
+              ></select>
+            </div>
+          </div>
+          <div class="presets_filter_row">
+            <div
+              class="presets_filter_table_header"
+              i18n="presetsFilterStatus"
+            ></div>
+            <div class="presets_filter_table_value">
+              <select
+                multiple="multiple"
+                class="presets_filter_select"
+                id="presets_filter_status"
+              ></select>
+            </div>
+          </div>
+        </div>
+        <div id="presets_search_bar_wrapper">
+          <div id="presets_search_hint"></div>
+          <input
+            type="text"
+            class="presets_text_input"
+            id="presets_filter_text"
+          />
+        </div>
+      </div>
+      <div id="preset_list_wrapper">
+        <div id="presets_list_no_found" i18n="presetsNoPresetsFound"></div>
+        <div id="presets_list"></div>
+        <div
+          id="presets_list_too_many_found"
+          i18n="presetsTooManyPresetsFound"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content_toolbar toolbar_fixed_bottom">
+    <div class="btn">
+      <a
+        href="#"
+        id="presets_review_button"
+        class="tool regular-button"
+        i18n="presetsButtonReview"
+      ></a>
+      <a
+        href="#"
+        id="presets_reset_button"
+        class="tool regular-button"
+        i18n="presetsButtonReset"
+      ></a>
+    </div>
+  </div>
+
+  <dialog id="presets_detailed_dialog"></dialog>
+  <dialog id="presets_sources_dialog"></dialog>
+  <dialog id="presets_wait_dialog">
+    <div class="data-loading"></div>
+    <h3 id="dialogWaitTitle"></h3>
+    <div class="buttons">
+      <a
+        href="#"
+        class="dialogWait-cancelButton regular-button"
+        i18n="cancel"
+      ></a>
+    </div>
+  </dialog>
+
+  <dialog id="presets_cli_dialog">
+    <div class="presets_cli_content_wrapper">
+      <div
+        class="presets_cli_errors_dialog_warning"
+        i18n="presetsCliErrorsWarning"
+        style="display: none"
+      ></div>
+      <h3 id="presets_cli_dialog_title"></h3>
+      <div id="presets_cli">
+        <div class="backdrop">
+          <div class="window">
+            <div class="wrapper"></div>
+          </div>
+        </div>
+        <textarea
+          id="presets_cli_command_input"
+          name="commands"
+          i18n_placeholder="cliInputPlaceholder"
+          rows="1"
+          cols="0"
+        ></textarea>
+      </div>
+      <progress
+        class="presets_apply_progress_dialog_progress_bar"
+        value="0"
+        max="100"
+        style="display: none"
+      ></progress>
+      <div class="btn">
+        <a
+          href="#"
+          id="presets_cli_save_button"
+          class="tool regular-button"
+          i18n="presetsCliSaveButton"
+          style="display: none"
+        ></a>
+        <a
+          href="#"
+          id="presets_cli_exit_button"
+          class="tool regular-button"
+          i18n="presetsCliExitButton"
+          style="display: none"
+        ></a>
+      </div>
+    </div>
+  </dialog>
+
+  <div id="svelte_components"></div>
+
+  <div id="snippetpreviewcontent" style="display: none">
+    <div class="note">
+      <p i18n="cliConfirmSnippetNote"></p>
+    </div>
+    <textarea id="preview" cols="120" rows="20"></textarea>
+    <div class="default_btn">
+      <a class="confirm" href="#" i18n="cliConfirmSnippetBtn"></a>
+    </div>
+  </div>
 </div>

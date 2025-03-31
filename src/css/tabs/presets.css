@@ -1,4 +1,3 @@
-
 .tab-presets {
   height: 100%;
   border: none;
@@ -18,7 +17,7 @@
 }
 .tab-presets p {
   padding: 0;
-  border: 0 dotted hsl(0, 0%, 24%);;
+  border: 0 dotted hsl(0, 0%, 24%);
 }
 .tab-presets .presets_warnings {
   padding-left: 20px;
@@ -67,27 +66,28 @@
   background-position: 50% 80%;
   background-size: 600px;
   border-radius: 5px;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.80);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
   width: auto;
   height: 600px;
 }
 
 .tab-presets .window {
-    height: 100%;
-    width: 100%;
-    padding: 5px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    font-family: monospace;
-    color: white;
-    box-sizing: border-box;
-    float: left;
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-family: monospace;
+  color: white;
+  box-sizing: border-box;
+  float: left;
 }
-.tab-presets .window .wrapper, .tab-presets .window .wrapper > * {
+.tab-presets .window .wrapper,
+.tab-presets .window .wrapper > * {
   user-select: text;
 }
 
-.tab-presets textarea[name='commands'] {
+.tab-presets textarea[name="commands"] {
   -webkit-box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
@@ -228,13 +228,13 @@
   color: var(--defaultText);
 }
 .presets_filter_select_nonempty {
-  border-color: #FFBB00 !important;
+  border-color: #ffbb00 !important;
   border-width: 2px !important;
 }
 .presets_search_settings {
   position: sticky;
   top: 0px;
-  background-color: var(--backgroundColor); 
+  background-color: var(--backgroundColor);
   z-index: 10;
 }
 .ms-drop {
@@ -420,17 +420,16 @@
   }
 }
 
-
 /* Start detailed dialog panel */
 
 .preset_dialog_title_panel {
-  padding-bottom: .5ex;
+  padding-bottom: 0.5ex;
   margin-bottom: 2ex;
 }
 
 #presets_detailed_dialog {
   padding: 0px; /* main.css defines a padding of 1em but we want to turn this off so the title/footer bar looks nice */
-} 
+}
 
 #preset_dialog_properties {
   padding: 0px 0px 0px 20px;
@@ -451,7 +450,7 @@
 
 #preset_dialog_content_wrapper .preset_panel_title {
   padding-bottom: 0.5ex;
-  border-bottom: 1px solid #FFBB00;
+  border-bottom: 1px solid #ffbb00;
   margin-bottom: 2ex;
 }
 
@@ -554,7 +553,7 @@
 }
 
 #preset_options_panel .ms-choice {
-  border-color: #FFBB00;
+  border-color: #ffbb00;
   border-width: 2px;
 }
 #preset_options_panel > span {
@@ -629,7 +628,7 @@
     overflow-x: hidden;
     padding-bottom: 51px;
     height: unset;
-}
+  }
 }
 
 /* Preset Detailed Dialog End */
@@ -700,7 +699,7 @@
 }
 
 .preset_panel_status_official {
-  background-color: #0071C0;
+  background-color: #0071c0;
 }
 
 .preset_panel_status_community {
@@ -733,7 +732,7 @@
   border-collapse: collapse;
 }
 
-.preset_panel_table td{
+.preset_panel_table td {
   overflow: hidden;
   height: 24px;
   width: auto;
@@ -741,7 +740,7 @@
   white-space: nowrap;
 }
 
-.preset_panel_table td:nth-child(1){
+.preset_panel_table td:nth-child(1) {
   width: 100px;
 }
 
@@ -815,12 +814,14 @@
   vertical-align: middle;
 }
 
-.presets_source_panel_reset, .presets_source_panel_save, .presets_source_panel_delete {
+.presets_source_panel_reset,
+.presets_source_panel_save,
+.presets_source_panel_delete {
   float: right;
 }
 
 .presets_sources_dialog_title_panel {
-  padding-bottom: .5ex;
+  padding-bottom: 0.5ex;
   margin-bottom: 2ex;
 }
 
@@ -844,14 +845,14 @@
 
 @media all and (max-width: 575px) {
   #presets_sources_dialog_content_wrapper .content_toolbar {
-      position: fixed;
+    position: fixed;
   }
 
   .presets_sources_dialog_scrollable {
-      overflow-y: auto;
-      overflow-x: hidden;
-      padding-bottom: 51px;
-      height: unset;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 51px;
+    height: unset;
   }
 }
 
