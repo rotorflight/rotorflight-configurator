@@ -24,4 +24,3 @@ import "./sensors.js";
 import "./servos.js";
 import "./setup.js";
 import "./status.js";
-import 'multiple-select';
