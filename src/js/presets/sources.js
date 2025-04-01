@@ -141,8 +141,8 @@ export default class Sources {
   #officialSourceMetadata() {
     const officialSource = new Metadata(
       "Rotorflight Official Presets",
-      "https://github.com/Oats87/rotorflight-presets",
-      "master",
+      "https://github.com/rotorflight/rotorflight-presets",
+      "presets-v1",
     );
     officialSource.official = true;
     officialSource.active = true;
