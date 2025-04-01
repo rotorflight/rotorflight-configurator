@@ -113,15 +113,21 @@ export default class Sources {
    * Loads existing sources from storage and initializes them
    */
   async #initializeSources() {
-    let sourceMetadata = [];
-    ConfigStorage.get("PresetsSourcesMetadata", function (result) {
-      if (result.PresetSourcesMetadata) {
-        sourceMetadata = result.PresetSourcesMetadata;
-      }
-    });
-    sourceMetadata.unshift(this.#officialSourceMetadata());
-    for (let i = 0; i < sourceMetadata.length; i++) {
-      await this.#newSource(sourceMetadata[i]);
+    await this.#newSource(this.#officialSourceMetadata());
+
+    const { PresetsSourcesMetadata } = await new Promise((resolve) =>
+      ConfigStorage.get("PresetsSourcesMetadata", resolve),
+    );
+
+    for (const sourceConfig of PresetsSourcesMetadata ?? []) {
+      const source = new Metadata(
+        sourceConfig.name,
+        sourceConfig.url,
+        sourceConfig.branch,
+      );
+      source.official = sourceConfig.official;
+      source.active = sourceConfig.active;
+      await this.#newSource(source);
     }
   }
 
