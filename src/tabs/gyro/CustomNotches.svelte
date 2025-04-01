@@ -209,6 +209,8 @@
     font-size: 1rem;
     font-weight: 400;
     padding: 8px;
+
+    font-weight: 600;
   }
 
   .header {
@@ -230,6 +232,9 @@
       color: var(--color-neutral-100);
       background-color: var(--color-neutral-900);
       border-color: var(--color-neutral-600);
+
+      color: white;
+      background-color: var(--quietHeader);
     }
   }
 
@@ -284,6 +289,8 @@
 
     :global(html[data-theme="dark"]) & {
       background-color: var(--color-neutral-900);
+
+      background-color: hsl(160, 2%, 26%);
     }
   }
 

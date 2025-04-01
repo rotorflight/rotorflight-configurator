@@ -64,6 +64,8 @@
 
       :global(html[data-theme="dark"]) & {
         background-color: var(--color-neutral-800);
+
+        background-color: hsl(160, 2%, 36%);
       }
     }
   }

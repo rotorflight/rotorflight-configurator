@@ -110,6 +110,8 @@
       border-color: var(--color-accent-400);
       color: var(--color-neutral-50);
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
+
+      background-color: hsl(160, 2%, 26%);
     }
   }
 
@@ -137,6 +139,8 @@
 
       :global(html[data-theme="dark"]) & {
         border-right: 7px solid var(--color-neutral-800);
+
+        border-right: 7px solid hsl(160, 2%, 26%);
       }
     }
   }

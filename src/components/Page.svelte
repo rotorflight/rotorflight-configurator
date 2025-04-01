@@ -41,6 +41,8 @@
     :global(html[data-theme="dark"]) & {
       color: var(--color-neutral-50);
       background: var(--color-neutral-950);
+
+      background-color: #393b3a;
     }
   }
 
@@ -70,6 +72,8 @@
 
     :global(html[data-theme="dark"]) & {
       background: var(--color-neutral-900);
+
+      background-color: #393b3a;
     }
   }
 
@@ -110,6 +114,8 @@
     :global(html[data-theme="dark"]) & {
       background: var(--color-neutral-700);
       border-top: 1px solid var(--color-neutral-500);
+
+      background-color: hsl(160, 2%, 34%);
     }
   }
 
