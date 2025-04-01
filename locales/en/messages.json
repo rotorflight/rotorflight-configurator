@@ -7527,6 +7527,15 @@
         "message": "Delete",
         "description": "Presets tab, sources dialog, button to delete selected source"
     },
+    "presetsSourcesDialogGithubBranch": {
+        "message": "Github Branch"
+    },
+    "presetsSourcesDialogURL": {
+        "message": "URL"
+    },
+    "presetsSourcesDialogName": {
+        "message": "Name"
+    },
     "reviewPresetsDialogTitle": {
         "message": "Review Selected Presets"
     },

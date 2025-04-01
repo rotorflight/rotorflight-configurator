@@ -759,7 +759,6 @@
 
 .presets_source_panel_editing_field_label {
   display: table-cell;
-  white-space: pre;
   padding-right: 10px;
   min-width: 100px;
 }
