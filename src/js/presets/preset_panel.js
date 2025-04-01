@@ -334,12 +334,16 @@ export default class PresetPanel {
 
     this.#dom.keywords.text(this.#presetData.keywords?.join("; "));
     this.#dom.keywords.prop("title", this.#presetData.keywords?.join("; "));
-    this.#dom.statusOfficial.toggle(this.#presetData.status === "OFFICIAL");
+
+    const officialSource = this.#presetSource.metadata.official;
+    this.#dom.statusOfficial.toggle(
+      officialSource && this.#presetData.status === "OFFICIAL",
+    );
     this.#dom.statusCommunity.toggle(this.#presetData.status === "COMMUNITY");
     this.#dom.statusExperimental.toggle(
       this.#presetData.status === "EXPERIMENTAL",
     );
-    this.#dom.officialSourceIcon.toggle(this.#presetSource.metadata.official);
+    this.#dom.officialSourceIcon.hide();
 
     this.setPicked(this.#presetSelectedForApply);
 
