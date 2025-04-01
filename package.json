@@ -50,7 +50,6 @@
     "jquery-touchswipe": "^1.6.19",
     "jquery-ui-npm": "^1.12.0",
     "lru_map": "^0.3.3",
-    "multiple-select": "^1.7.0",
     "switchery-latest": "^0.8.2"
   },
   "devDependencies": {
@@ -82,13 +81,13 @@
     "marked": "^15.0.3",
     "microdiff": "^1.5.0",
     "minimist": "^1.2.8",
+    "multiple-select": "^1.7.0",
     "nouislider": "^15.8.1",
     "nw-builder": "4.9.0",
     "prettier": "^3.4.2",
     "prettier-plugin-svelte": "^3.3.3",
     "rpm-builder": "^1.2.1",
     "sass-embedded": "^1.83.1",
-    "select2": "4.0.13",
     "semver": "^7.6.3",
     "sortablejs": "^1.15.6",
     "svelte": "^5.17.3",
