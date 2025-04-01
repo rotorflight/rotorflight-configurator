@@ -80,6 +80,16 @@
   color: #888888;
 }
 
+.tab-presets .preset_panel .tab_title {
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.tab-presets .preset_panel .preset_panel_title {
+  flex-grow: 1;
+}
+
 /* CLI stuff start  */
 .tab-presets .backdrop {
   border: 1px solid var(--subtleAccent);
@@ -626,26 +636,21 @@
 }
 
 .preset_panel_title {
-  display: inline-block;
-  margin-bottom: 1ex;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  width: calc(100% - 60px);
 }
 
 .preset_panel_star {
   background-image: url(../../../images/icons/star_rf_blue.svg);
   width: 25px;
+  min-width: 25px;
   height: 25px;
   background-size: cover;
   border-radius: 5px;
   padding: 5px;
   background-origin: content-box;
   background-repeat: no-repeat;
-  position: absolute;
-  right: 0px;
-  top: 0px;
 }
 
 .preset_panel_rotorflight_official {
