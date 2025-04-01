@@ -352,7 +352,7 @@ export class Source {
    */
   #onDeleteButtonClick() {
     this.#dom.divWrapper.remove();
-    this.#callbacks.sourceChanged?.(this);
+    this.#callbacks.sourceChanged?.({ remove: true });
   }
 
   /**
@@ -361,7 +361,7 @@ export class Source {
   async #onActivateButtonClick() {
     this.#onSaveButtonClick();
     this.active = true;
-    this.#callbacks.sourceChanged?.(this);
+    this.#callbacks.sourceChanged?.();
   }
 
   /**
@@ -370,7 +370,7 @@ export class Source {
   #onDeactivateButtonClick() {
     this.#onSaveButtonClick();
     this.active = false;
-    this.#callbacks.sourceChanged?.(this);
+    this.#callbacks.sourceChanged?.();
   }
 
   /**

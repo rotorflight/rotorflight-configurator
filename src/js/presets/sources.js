@@ -176,8 +176,13 @@ export default class Sources {
     this.#panelCounter++;
 
     if (!metadata.official) {
-      source.sourceChangedCallback =
-        this.#saveSourcesMetadataToStorage.bind(this);
+      source.sourceChangedCallback = (opts) => {
+        if (opts?.remove) {
+          this.#sourcePanels.splice(this.#sourcePanels.indexOf(source), 1);
+        }
+
+        this.#saveSourcesMetadataToStorage();
+      };
     }
 
     await source.loadPanel();
