@@ -26,6 +26,9 @@ importers:
       lru_map:
         specifier: ^0.3.3
         version: 0.3.3
+      select2:
+        specifier: ^4.0.13
+        version: 4.0.13
       switchery-latest:
         specifier: ^0.8.2
         version: 0.8.2
@@ -3944,6 +3947,9 @@ packages:
 
   sax@1.4.1:
     resolution: {integrity: sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==}
+
+  select2@4.0.13:
+    resolution: {integrity: sha512-1JeB87s6oN/TDxQQYCvS5EFoQyvV6eYMZZ0AeA4tdFDYWN3BAGZ8npr17UBFddU0lgAt3H0yjX3X6/ekOj1yjw==}
 
   semver-greatest-satisfied-range@1.1.0:
     resolution: {integrity: sha512-Ny/iyOzSSa8M5ML46IAx3iXc6tfOsYU2R4AXi2UpHk60Zrgyq6eqPj/xiOfS0rRl/iiQ/rdJkVjw/5cdUyCntQ==}
@@ -8869,6 +8875,8 @@ snapshots:
 
   sax@1.4.1:
     optional: true
+
+  select2@4.0.13: {}
 
   semver-greatest-satisfied-range@1.1.0:
     dependencies:
