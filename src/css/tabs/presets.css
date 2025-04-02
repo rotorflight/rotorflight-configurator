@@ -377,9 +377,6 @@
   }
 }
 @media only screen and (max-device-width: 1055px) {
-  .tab-presets .content_wrapper {
-    height: calc(100% - 87px);
-  }
   .presets_search_settings {
     position: static;
     top: unset;
