@@ -24,6 +24,7 @@
     --pushedButton-fontColor: #000000;
     --pushedButton-border: #ffbb00;
     --pushedButton-background: #595959;
+    --backgroundColor: #393b3a;
 }
 
 html[data-theme=dark] .background_paper {
@@ -150,7 +151,6 @@ html[data-theme=dark] .jBox-Modal .jBox-title,
 html[data-theme=dark] .jBox-Confirm .jBox-title {
     background: #393b3a;
     border-bottom: 1px solid #9c9c9c;
-    text-shadow: 0 1px 1px #ffffff;
     color: white;
 }
 
@@ -911,4 +911,12 @@ html[data-theme=dark] .select2-search--dropdown .select2-search__field {
 
 html[data-theme=dark] .select2-results>.select2-results__options {
     background-color: #3a3a3a !important;
+}
+
+/* PRESETS TAB */
+
+html[data-theme=dark] .tab-presets input,
+html[data-theme=dark] .tab-presets select {
+    background-color: #3a3a3a;
+    color: white;
 }

@@ -1,3 +1,4 @@
+import "multiple-select";
 import { mount } from "svelte";
 
 import { Beepers } from "@/js/Beepers.js";
@@ -35,6 +36,7 @@ import * as utilsCommon from "@/js/utils/common.js";
 import "@/js/injected_methods.js";
 import "@/js/tabs/index.js";
 
+import "multiple-select/dist/multiple-select.css";
 import "nouislider/dist/nouislider.css";
 import "@/css/slider.css";
 import "@/css/app.css";

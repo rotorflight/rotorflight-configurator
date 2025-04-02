@@ -48,6 +48,7 @@ export const GuiControl = function () {
         'receiver',
         'sensors',
         'servos',
+        'presets',
     ];
 
     this.allowedTabs = this.defaultAllowedTabsWhenDisconnected;
@@ -457,4 +458,19 @@ GuiControl.prototype.isCordova = function () {
   };
 GuiControl.prototype.isOther = function () {
   return this.Mode === GUI_MODES.Other;
+};
+
+GuiControl.prototype.escapeHtml = function (unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+};
+
+GuiControl.prototype.addLinksTargetBlank = function (element) {
+    element.find('a').each(function () {
+        $(this).attr('target', '_blank');
+    });
 };

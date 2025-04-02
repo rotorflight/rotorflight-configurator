@@ -76,7 +76,7 @@ function bundle_vite() {
 
 function bundle_src() {
   const distSources = [
-    "./src/tabs/*",
+    "./src/tabs/**/*.html",
     "!./src/tabs/map.html",
     "!./src/tabs/receiver_msp.html",
   ];

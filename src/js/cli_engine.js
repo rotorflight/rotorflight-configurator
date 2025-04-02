@@ -198,7 +198,7 @@ export default class CliEngine {
   // executeCommands splits (on \n) the given output string into an array of strings and returns a promise that resolves after all of the commands have been sent.
   async executeCommands(commandString) {
     const commandArray = commandString.split("\n");
-    this.executeCommandsArray(commandArray);
+    await this.executeCommandsArray(commandArray);
   }
 
   // executeCommandsArray
