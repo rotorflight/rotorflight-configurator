@@ -1,3 +1,4 @@
+import * as config from "@/js/config.js";
 import { Source, Metadata } from "@/js/presets/source/source.js";
 
 // PresetsSources contains the sources for presets and the corresponding dialog
@@ -115,11 +116,7 @@ export default class Sources {
   async #initializeSources() {
     await this.#newSource(this.#officialSourceMetadata());
 
-    const { PresetsSourcesMetadata } = await new Promise((resolve) =>
-      ConfigStorage.get("PresetsSourcesMetadata", resolve),
-    );
-
-    for (const sourceConfig of PresetsSourcesMetadata ?? []) {
+    for (const sourceConfig of config.get("PresetsSourcesMetadata") ?? []) {
       const source = new Metadata(
         sourceConfig.name,
         sourceConfig.url,
@@ -135,9 +132,7 @@ export default class Sources {
    * Saves the metadata of the sources to storage
    */
   #saveSourcesMetadataToStorage() {
-    ConfigStorage.set({
-      PresetsSourcesMetadata: this.#collectSourcesMetadata(),
-    });
+    config.set({ PresetsSourcesMetadata: this.#collectSourcesMetadata() });
   }
 
   /**

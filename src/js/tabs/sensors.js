@@ -1,5 +1,7 @@
 import * as d3 from "d3";
 
+import * as config from "@/js/config.js";
+
 const tab = {
     tabName: 'sensors',
     armingEnabled: true,
@@ -234,7 +236,7 @@ tab.initialize = function (callback) {
 
             $('.tab-sensors .rate select:first').change();
 
-            ConfigStorage.set({'graphs_enabled': _checkboxes});
+            config.set({'graphs_enabled': _checkboxes});
         });
 
         // Always start with default/empty sensor data array, clean slate all
@@ -312,7 +314,7 @@ tab.initialize = function (callback) {
             const fastest = d3.min([rates.gyro, rates.accel, rates.mag]);
 
             // store current/latest refresh rates in the storage
-            ConfigStorage.set({'sensor_settings': {'rates': rates, 'scales': scales}});
+            config.set({'sensor_settings': {'rates': rates, 'scales': scales}});
 
             // re-initialize domains with new scales
             gyroHelpers = initGraphHelpers('#gyro', samples_gyro_i, [-scales.gyro, scales.gyro]);
@@ -419,40 +421,39 @@ tab.initialize = function (callback) {
             }
         });
 
-        ConfigStorage.get('sensor_settings', function (result) {
-            // set refresh speeds according to configuration saved in storage
-            if (result.sensor_settings) {
-                $('.tab-sensors select[name="gyro_refresh_rate"]').val(result.sensor_settings.rates.gyro);
-                $('.tab-sensors select[name="gyro_scale"]').val(result.sensor_settings.scales.gyro);
+        const sensor_settings = config.get('sensor_settings');
+        // set refresh speeds according to configuration saved in storage
+        if (sensor_settings) {
+            $('.tab-sensors select[name="gyro_refresh_rate"]').val(sensor_settings.rates.gyro);
+            $('.tab-sensors select[name="gyro_scale"]').val(sensor_settings.scales.gyro);
 
-                $('.tab-sensors select[name="accel_refresh_rate"]').val(result.sensor_settings.rates.accel);
-                $('.tab-sensors select[name="accel_scale"]').val(result.sensor_settings.scales.accel);
+            $('.tab-sensors select[name="accel_refresh_rate"]').val(sensor_settings.rates.accel);
+            $('.tab-sensors select[name="accel_scale"]').val(sensor_settings.scales.accel);
 
-                $('.tab-sensors select[name="mag_refresh_rate"]').val(result.sensor_settings.rates.mag);
-                $('.tab-sensors select[name="mag_scale"]').val(result.sensor_settings.scales.mag);
+            $('.tab-sensors select[name="mag_refresh_rate"]').val(sensor_settings.rates.mag);
+            $('.tab-sensors select[name="mag_scale"]').val(sensor_settings.scales.mag);
 
-                $('.tab-sensors select[name="altitude_refresh_rate"]').val(result.sensor_settings.rates.altitude);
-                $('.tab-sensors select[name="sonar_refresh_rate"]').val(result.sensor_settings.rates.sonar);
+            $('.tab-sensors select[name="altitude_refresh_rate"]').val(sensor_settings.rates.altitude);
+            $('.tab-sensors select[name="sonar_refresh_rate"]').val(sensor_settings.rates.sonar);
 
-                $('.tab-sensors select[name="debug_refresh_rate"]').val(result.sensor_settings.rates.debug);
+            $('.tab-sensors select[name="debug_refresh_rate"]').val(sensor_settings.rates.debug);
 
-                // start polling data by triggering refresh rate change event
-                $('.tab-sensors .rate select:first').change();
-            } else {
-                // start polling immediatly (as there is no configuration saved in the storage)
-                $('.tab-sensors .rate select:first').change();
+            // start polling data by triggering refresh rate change event
+            $('.tab-sensors .rate select:first').change();
+        } else {
+            // start polling immediatly (as there is no configuration saved in the storage)
+            $('.tab-sensors .rate select:first').change();
+        }
+
+        const graphs_enabled = config.get('graphs_enabled');
+        if (graphs_enabled) {
+            const _checkboxes = $('.tab-sensors .info .checkboxes input');
+            for (let i = 0; i < graphs_enabled.length; i++) {
+                _checkboxes.eq(i).not(':disabled').prop('checked', graphs_enabled[i]).change();
             }
-            ConfigStorage.get('graphs_enabled', function (resultGraphs) {
-                if (resultGraphs.graphs_enabled) {
-                    const _checkboxes = $('.tab-sensors .info .checkboxes input');
-                    for (let i = 0; i < resultGraphs.graphs_enabled.length; i++) {
-                        _checkboxes.eq(i).not(':disabled').prop('checked', resultGraphs.graphs_enabled[i]).change();
-                    }
-                } else {
-                    $('.tab-sensors .info input:lt(4):not(:disabled)').prop('checked', true).change();
-                }
-            });
-        });
+        } else {
+            $('.tab-sensors .info input:lt(4):not(:disabled)').prop('checked', true).change();
+        }
 
         // status data pulled via separate timer with static speed
         GUI.interval_add('status_pull', function status_pull() {

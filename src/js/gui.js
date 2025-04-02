@@ -1,3 +1,5 @@
+import * as config from '@/js/config.js';
+
 const GUI_MODES = {
     NWJS: "NW.js",
     Cordova: "Cordova",
@@ -368,7 +370,7 @@ GuiControl.prototype.set_zoom = function(zoom_level, show_box) {
 
     const percent = zoom_level + '%';
 
-    ConfigStorage.set({'zoomLevel': zoom_level});
+    config.set({'zoomLevel': zoom_level});
 
     nw.Window.get().zoomLevel = Math.log(zoom_level / 100) / Math.log(1.2);
     $('#zoom-percent').text(percent);
@@ -434,19 +436,15 @@ GuiControl.prototype.content_ready = function (callback) {
 };
 
 GuiControl.prototype.saveDefaultTab = function(tabName) {
-    ConfigStorage.set(
-        { lastTab: tabName },
-    );
+    config.set({ lastTab: tabName });
 };
 
 GuiControl.prototype.selectDefaultTabWhenConnected = function() {
-    ConfigStorage.get(['rememberLastTab', 'lastTab'], function (result) {
-        if (result.rememberLastTab && result.lastTab) {
-            $(`#tabs ul.mode-connected .tab_${result.lastTab} a`).click();
-        } else {
-            $('#tabs ul.mode-connected .tab_status a').click();
-        }
-    });
+    if (config.get('rememberLastTab') && config.get('lastTab')) {
+        $(`#tabs ul.mode-connected .tab_${result.lastTab} a`).click();
+    } else {
+        $('#tabs ul.mode-connected .tab_status a').click();
+    }
 };
 
 GuiControl.prototype.isNWJS = function () {

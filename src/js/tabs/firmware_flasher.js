@@ -1,6 +1,7 @@
 import * as marked from 'marked';
 import semver from "semver";
 
+import * as config from '@/js/config.js';
 import { readTextFile, writeTextFile } from '@/js/filesystem.js';
 import { GitHubApi } from '@/js/GitHubApi.js';
 import { ReleaseChecker } from '@/js/release_checker.js';
@@ -160,16 +161,11 @@ tab.initialize = function (callback) {
 
             tab.releases = builds;
 
-            ConfigStorage.get('rememberLastSelectedBoard', function (result) {
-                if (result.rememberLastSelectedBoard) {
-                    ConfigStorage.get('selected_board', function (result) {
-                    if (result.selected_board) {
-                        var boardBuilds = builds[result.selected_board];
-                        $('select[name="board"]').val(boardBuilds ? result.selected_board : 0).trigger('change');
-                    }
-                    });
-                }
-            });
+            if (config.get('rememberLastSelectedBoard')) {
+                const selected_board = config.get('selected_board');
+                const boardBuilds = builds[selected_board];
+                $('select[name="board"]').val(boardBuilds ? selected_board : 0).trigger('change');
+            }
         }
 
         function processBoardOptions(releaseData, buildLevel) {
@@ -297,17 +293,13 @@ tab.initialize = function (callback) {
             tab.releases = releases;
             tab.unifiedConfigs = unifiedConfigs;
 
-            ConfigStorage.get('rememberLastSelectedBoard', function (result) {
-                if (result.rememberLastSelectedBoard) {
-                    ConfigStorage.get('selected_board', function (result) {
-                        if (result.selected_board) {
-                            var boardReleases = tab.unifiedConfigs[result.selected_board]
-                            || tab.releases[result.selected_board];
-                            $('select[name="board"]').val(boardReleases ? result.selected_board : 0).trigger('change');
-                        }
-                    });
+            if (config.get('rememberLastSelectedBoard')) {
+                const selected_board = config.get('selected_board');
+                if (selected_board) {
+                    const boardReleases = tab.unifiedConfigs[selected_board] || tab.releases[selected_board];
+                    $('select[name="board"]').val(boardReleases ? selected_board : 0).trigger('change');
                 }
-            });
+            }
         }
 
         var buildTypes = [
@@ -496,11 +488,9 @@ tab.initialize = function (callback) {
                         self.unifiedTarget = {};
                     }
                 }
-                ConfigStorage.get('rememberLastSelectedBoard', function (result) {
-                    if (result.rememberLastSelectedBoard) {
-                        ConfigStorage.set({'selected_board': target});
-                    }
-                });
+                if (config.get('rememberLastSelectedBoard')) {
+                    config.set({'selected_board': target});
+                }
                 tab.selectedBoard = target;
                 tab.bareBoard = undefined;
                 console.log('board changed to', target);
@@ -739,75 +729,57 @@ tab.initialize = function (callback) {
             }
         }
 
-        ConfigStorage.get('erase_chip', function (result) {
-            if (result.erase_chip) {
-                $('input.erase_chip').prop('checked', true);
-            } else {
-                $('input.erase_chip').prop('checked', false);
-            }
-
-            $('input.erase_chip').change(function () {
-                ConfigStorage.set({'erase_chip': $(this).is(':checked')});
+        $('input.erase_chip')
+            .prop('checked', !!config.get('erase_chip'))
+            .change(function () {
+                config.set({'erase_chip': $(this).is(':checked')});
             }).change();
-        });
+
 
         chrome.storage.local.get('selected_build_type', function (result) {
             // ensure default build type is selected
             buildType_e.val(result.selected_build_type || 0).trigger('change');
         });
 
-        ConfigStorage.get('no_reboot_sequence', function (result) {
-            if (result.no_reboot_sequence) {
-                $('input.updating').prop('checked', true);
+
+        if (config.get('no_reboot_sequence')) {
+            $('input.updating').prop('checked', true);
+            $('.flash_on_connect_wrapper').show();
+        } else {
+            $('input.updating').prop('checked', false);
+        }
+
+        // bind UI hook so the status is saved on change
+        $('input.updating').change(function() {
+            var status = $(this).is(':checked');
+
+            if (status) {
                 $('.flash_on_connect_wrapper').show();
             } else {
-                $('input.updating').prop('checked', false);
+                $('input.flash_on_connect').prop('checked', false).change();
+                $('.flash_on_connect_wrapper').hide();
             }
 
-            // bind UI hook so the status is saved on change
-            $('input.updating').change(function() {
+            config.set({'no_reboot_sequence': status});
+        });
+
+        $('input.updating').trigger('change');
+
+        $('input.flash_manual_baud')
+            .prop('checked', !!config.get('flash_manual_baud'))
+            .on('change', function() {
                 var status = $(this).is(':checked');
+                config.set({'flash_manual_baud': status});
+            })
+            .trigger('change');
 
-                if (status) {
-                    $('.flash_on_connect_wrapper').show();
-                } else {
-                    $('input.flash_on_connect').prop('checked', false).change();
-                    $('.flash_on_connect_wrapper').hide();
-                }
-
-                ConfigStorage.set({'no_reboot_sequence': status});
-            });
-
-            $('input.updating').change();
-        });
-
-        ConfigStorage.get('flash_manual_baud', function (result) {
-            if (result.flash_manual_baud) {
-                $('input.flash_manual_baud').prop('checked', true);
-            } else {
-                $('input.flash_manual_baud').prop('checked', false);
-            }
-
-            // bind UI hook so the status is saved on change
-            $('input.flash_manual_baud').change(function() {
-                var status = $(this).is(':checked');
-                ConfigStorage.set({'flash_manual_baud': status});
-            });
-
-            $('input.flash_manual_baud').change();
-        });
-
-        ConfigStorage.get('flash_manual_baud_rate', function (result) {
-            $('#flash_manual_baud_rate').val(result.flash_manual_baud_rate);
-
-            // bind UI hook so the status is saved on change
-            $('#flash_manual_baud_rate').change(function() {
-                var baud = parseInt($('#flash_manual_baud_rate').val());
-                ConfigStorage.set({'flash_manual_baud_rate': baud});
-            });
-
-            $('input.flash_manual_baud_rate').change();
-        });
+        $('#flash_manual_baud_rate')
+            .val(config.get('flash_manual_baud_rate'))
+            .on('change', function() {
+                var baud = parseInt($(this).val());
+                config.set({'flash_manual_baud_rate': baud});
+            })
+            .trigger('change');
 
         // UI Hooks
         $('a.load_file').on('click', async function () {
