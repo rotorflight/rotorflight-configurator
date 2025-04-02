@@ -1808,9 +1808,6 @@
     "receiverTelemetrySensor_ROLL": {
         "message": "Roll angle (attitude)"
     },
-    "receiverTelemetrySensor_HEADING": {
-        "message": "Heading"
-    },
     "receiverTelemetrySensor_ACC_X": {
         "message": "Accelerometer X-axis"
     },
@@ -1835,9 +1832,6 @@
     "receiverTelemetrySensor_DISTANCE": {
         "message": "GPS Distance"
     },
-    "receiverTelemetrySensor_ESC_CURRENT": {
-        "message": "ESC Current"
-    },
     "receiverTelemetrySensor_ESC_VOLTAGE": {
         "message": "ESC Voltage"
     },
@@ -1855,9 +1849,6 @@
     },
     "receiverTelemetrySensor_ARMING_FLAGS": {
         "message": "Arming Flags"
-    },
-    "receiverTelemetrySensor_PID_PROFILE": {
-        "message": "PID Profile"
     },
     "receiverTelemetrySensor_RATES_PROFILE": {
         "message": "Rates Profile"
@@ -1955,14 +1946,8 @@
     "receiverTelemetrySensor_COLLECTIVE_CONTROL": {
         "message": "Collective Control"
     },
-    "receiverTelemetrySensor_THROTTLE_CONTROL": {
-        "message": "Throttle Control"
-    },
     "receiverTelemetrySensor_ESC_DATA": {
         "message": "ESC Data"
-    },
-    "receiverTelemetrySensor_ESC_VOLTAGE": {
-        "message": "ESC Voltage"
     },
     "receiverTelemetrySensor_ESC_CURRENT": {
         "message": "ESC Current"
@@ -1996,9 +1981,6 @@
     },
     "receiverTelemetrySensor_ESC_MODEL": {
         "message": "ESC Model"
-    },
-    "receiverTelemetrySensor_BEC_VOLTAGE": {
-        "message": "BEC Voltage"
     },
     "receiverTelemetrySensor_BUS_VOLTAGE": {
         "message": "Bus Voltage"
@@ -2039,17 +2021,8 @@
     "receiverTelemetrySensor_HEADING": {
         "message": "Heading"
     },
-    "receiverTelemetrySensor_ALTITUDE": {
-        "message": "Altitude"
-    },
     "receiverTelemetrySensor_VARIOMETER": {
         "message": "Variometer"
-    },
-    "receiverTelemetrySensor_HEADSPEED": {
-        "message": "Headspeed"
-    },
-    "receiverTelemetrySensor_TAILSPEED": {
-        "message": "Tailspeed"
     },
     "receiverTelemetrySensor_MOTOR_RPM": {
         "message": "Motor RPM"
@@ -2129,14 +2102,8 @@
     "receiverTelemetrySensor_RT_LOAD": {
         "message": "RT Load"
     },
-    "receiverTelemetrySensor_MODEL_ID": {
-        "message": "Model Id"
-    },
     "receiverTelemetrySensor_FLIGHT_MODE": {
         "message": "Flight Mode"
-    },
-    "receiverTelemetrySensor_ARMING_FLAGS": {
-        "message": "Arming Flags"
     },
     "receiverTelemetrySensor_ARMING_DISABLE_FLAGS": {
         "message": "Arming Disable Flags"
@@ -2152,9 +2119,6 @@
     },
     "receiverTelemetrySensor_PID_PROFILE": {
         "message": "PID Profile"
-    },
-    "receiverTelemetrySensor_RATES_PROFILE": {
-        "message": "Rates Profile"
     },
     "receiverTelemetrySensor_BATTERY_PROFILE": {
         "message": "Battery Profile"
