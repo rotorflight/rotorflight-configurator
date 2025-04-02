@@ -351,7 +351,7 @@ async function build_redist_rpm() {
 async function build_redist_osx() {
   const appdmg = (await import("appdmg")).default;
 
-  const targetPath = `${REDIST_DIR}/${pkg.name}_${pkg.version}_macOS.dmg`;
+  const targetPath = `${REDIST_DIR}/${pkg.name}_${pkg.version}_macos_${context.target.arch}.dmg`;
 
   await new Promise((resolve, reject) => {
     const builder = appdmg({
