@@ -104,7 +104,6 @@
   border-radius: 5px;
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
   width: auto;
-  height: 600px;
 }
 
 .tab-presets .window {
@@ -164,9 +163,17 @@
   margin-top: 12px;
 }
 
+#presets_cli {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-top: 8px;
+}
+
 #presets_cli_dialog {
   width: 900px;
-  padding: 24px;
+  padding: 12px 24px;
+  height: 70%;
 }
 #presets_cli_dialog .regular-button {
   margin-bottom: 0px;
@@ -176,10 +183,15 @@
 }
 
 .tab-presets .presets_cli_content_wrapper {
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: minmax(0, 1fr);
+  height: 100%;
+}
+
+.tab-presets .presets_cli_content_wrapper .content {
   display: flex;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  flex-direction: column;
 }
 /* end CLI box */
 
@@ -422,16 +434,8 @@
   #presets_cli_dialog {
     padding: 12px;
   }
-  #presets_cli_dialog .btn {
-    position: fixed;
-    right: 12px;
-    bottom: 12px;
-  }
   #presets_apply_progress_dialog {
     padding: 12px;
-  }
-  #presets_cli {
-    height: calc(100% - 121px);
   }
   #presets_cli_background {
     height: 100%;

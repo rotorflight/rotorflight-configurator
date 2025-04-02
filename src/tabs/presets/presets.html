@@ -177,32 +177,34 @@
 
   <dialog id="presets_cli_dialog">
     <div class="presets_cli_content_wrapper">
-      <div
-        class="presets_cli_errors_dialog_warning"
-        i18n="presetsCliErrorsWarning"
-        style="display: none"
-      ></div>
-      <h3 id="presets_cli_dialog_title"></h3>
-      <div id="presets_cli">
-        <div class="backdrop">
-          <div class="window">
-            <div class="wrapper"></div>
+      <div class="content">
+        <div
+          class="presets_cli_errors_dialog_warning"
+          i18n="presetsCliErrorsWarning"
+          style="display: none"
+        ></div>
+        <h3 id="presets_cli_dialog_title"></h3>
+        <div id="presets_cli">
+          <div class="backdrop">
+            <div class="window">
+              <div class="wrapper"></div>
+            </div>
           </div>
+          <textarea
+            id="presets_cli_command_input"
+            name="commands"
+            i18n_placeholder="cliInputPlaceholder"
+            rows="1"
+            cols="0"
+          ></textarea>
         </div>
-        <textarea
-          id="presets_cli_command_input"
-          name="commands"
-          i18n_placeholder="cliInputPlaceholder"
-          rows="1"
-          cols="0"
-        ></textarea>
+        <progress
+          class="presets_apply_progress_dialog_progress_bar"
+          value="0"
+          max="100"
+          style="display: none"
+        ></progress>
       </div>
-      <progress
-        class="presets_apply_progress_dialog_progress_bar"
-        value="0"
-        max="100"
-        style="display: none"
-      ></progress>
       <div class="btn">
         <a
           href="#"

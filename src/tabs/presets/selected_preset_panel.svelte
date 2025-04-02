@@ -11,21 +11,18 @@
 
 <div class="preset_review_panel">
   <div>
-    <div class="preset_name">
-      <div class="buttons">
-        {presetInstance.presetData.title}
-
-        <button
-          onclick={() => onDeletePresetInstance(index)}
-          class="button regular-button"
-          >{$i18n.t("presetsSourcesDialogDeleteSource")}</button
-        >
-        <button
-          onclick={() =>
-            onEditPresetInstance(presetInstance, onEditPresetComplete)}
-          class="button regular-button">{$i18n.t("presetEdit")}</button
-        >
-      </div>
+    <div class="header">
+      <span class="title">{presetInstance.presetData.title}</span>
+      <button
+        onclick={() =>
+          onEditPresetInstance(presetInstance, onEditPresetComplete)}
+        class="button regular-button">{$i18n.t("presetEdit")}</button
+      >
+      <button
+        onclick={() => onDeletePresetInstance(index)}
+        class="button regular-button"
+        >{$i18n.t("presetsSourcesDialogDeleteSource")}</button
+      >
     </div>
     <div>
       <strong>{$i18n.t("presetAuthor")}</strong>
@@ -52,11 +49,11 @@
     margin-bottom: 6px;
   }
 
-  .preset_name {
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     font-size: 130%;
-    width: 100%;
-    display: inline-block;
-    vertical-align: middle;
     border-bottom: 1px solid var(--accent);
     line-height: 28px;
     height: 36px;
@@ -64,17 +61,16 @@
     margin-bottom: 5px;
   }
 
-  .buttons {
-    display: inline;
-    position: static;
-    margin-top: 0px;
-    padding-bottom: 5px;
+  .title {
+    flex-grow: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .button {
-    float: right;
-    margin-top: 0px;
-    margin-left: 10px;
-    margin-right: 0px;
+    height: 24px;
+    line-height: 24px;
+    margin: 0;
   }
 </style>

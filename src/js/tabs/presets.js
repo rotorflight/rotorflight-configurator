@@ -1161,11 +1161,6 @@ class PresetsTab {
   }
 
   adaptPhones() {
-    if ($(window).width() < 575) {
-      const backdropHeight = $(".note").height() + 22 + 38;
-      $(".backdrop").css("height", `calc(100% - ${backdropHeight}px)`);
-    }
-
     if (GUI.isCordova()) {
       UI_PHONES.initToolbar();
     }

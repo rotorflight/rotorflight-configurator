@@ -151,7 +151,6 @@ html[data-theme=dark] .jBox-Modal .jBox-title,
 html[data-theme=dark] .jBox-Confirm .jBox-title {
     background: #393b3a;
     border-bottom: 1px solid #9c9c9c;
-    text-shadow: 0 1px 1px #ffffff;
     color: white;
 }
 
