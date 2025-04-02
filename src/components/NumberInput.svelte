@@ -235,11 +235,18 @@
     color: var(--color-neutral-100);
     background-color: var(--color-neutral-800);
     border-color: var(--color-neutral-700);
+
+    color: hsl(160, 2%, 95%);
+    border-color: hsl(160, 2%, 35%);
+    background-color: hsl(160, 2%, 20%);
   }
 
   @mixin dark-disabled {
     color: var(--color-neutral-500);
     background-color: var(--color-neutral-700);
+
+    color: hsl(160, 2%, 55%);
+    background-color: hsl(160, 2%, 30%);
   }
 
   .container {

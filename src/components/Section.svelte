@@ -59,12 +59,19 @@
       color: var(--color-neutral-900);
       background-color: var(--color-neutral-100);
       border-bottom-color: var(--color-neutral-400);
+
+      color: white;
+      background-color: var(--quietHeader);
     }
 
     :global(html[data-theme="dark"]) & {
       color: var(--color-neutral-100);
       background-color: var(--color-neutral-900);
       border-bottom-color: var(--color-neutral-600);
+
+      color: white;
+      font-weight: 600;
+      background-color: var(--quietHeader);
     }
   }
 
@@ -81,10 +88,16 @@
 
     :global(html[data-theme="light"]) & {
       background-color: var(--color-neutral-100);
+
+      border-color: #ccc;
+      border-style: solid;
+      border-width: 0 1px 1px;
     }
 
     :global(html[data-theme="dark"]) & {
       background-color: var(--color-neutral-900);
+
+      background-color: hsl(160, 2%, 26%);
     }
 
     > :global(*) + :global(*) {
@@ -98,10 +111,16 @@
 
     :global(html[data-theme="light"]) & {
       background-color: var(--color-neutral-100);
+
+      border-color: #ccc;
+      border-style: solid;
+      border-width: 0 1px;
     }
 
     :global(html[data-theme="dark"]) & {
       background-color: var(--color-neutral-900);
+
+      background-color: hsl(160, 2%, 26%);
     }
   }
 
@@ -157,6 +176,8 @@
 
       :global(html[data-theme="light"]) & {
         background: none;
+
+        color: var(--color-neutral-800);
       }
 
       :global(html[data-theme="dark"]) & {

@@ -35,6 +35,8 @@
       color: var(--color-red-500);
       background: var(--color-neutral-800);
       border-left: 3px solid var(--color-red-500);
+
+      background-color: hsl(160, 2%, 15%);
     }
   }
 
