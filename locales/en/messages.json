@@ -4974,6 +4974,18 @@
     "rateYawDynamicDeadbandFilter": {
         "message": "Dynamic Deadband Filter"
     },
+    "rateSetupResponseHelp": {
+        "message": "Smooths stick inputs. Larger values result in more smoothing."
+    },
+    "rateSetpointBoostGainHelp": {
+        "message": "Boosts stick inputs for a snappier feel."
+    },
+    "rateYawDynamicCeilingGainHelp": {
+        "message": "Reduces stick travel required for maximum setpoint while rapidly approaching extremes."
+    },
+    "rateYawDynamicDeadbandGainHelp": {
+        "message": "Increases stick deadband while rapidly approaching center."
+    },
     "gyroFilterSettings": {
         "message": "Gyro Filter Settings"
     },

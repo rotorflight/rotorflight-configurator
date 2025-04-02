@@ -181,7 +181,10 @@
                             </div>
 
                             <div class="group">
-                                <div i18n="rateSetupResponse"></div>
+                                <div class="row-label">
+                                    <div i18n="rateSetupResponse"></div>
+                                    <div class="helpicon cf_tip" i18n_title="rateSetupResponseHelp"></div>
+                                </div>
                                 <input type="number" name="roll_response" step="1" min="0" max="250" />
                                 <input type="number" name="pitch_response" step="1" min="0" max="250" />
                                 <input type="number" name="yaw_response" step="1" min="0" max="250" />
@@ -189,15 +192,20 @@
                             </div>
 
                             <div class="group setpoint-boost">
-                                <div i18n="rateSetpointBoostGain"></div>
+                                <div class="row-label">
+                                    <div i18n="rateSetpointBoostGain"></div>
+                                    <div class="helpicon cf_tip" i18n_title="rateSetpointBoostGainHelp"></div>
+                                </div>
                                 <input id="setpoint-boost-gain-roll" type="number" step="1" min="0" max="250" />
                                 <input id="setpoint-boost-gain-pitch" type="number" step="1" min="0" max="250" />
                                 <input id="setpoint-boost-gain-yaw" type="number" step="1" min="0" max="250" />
                                 <input id="setpoint-boost-gain-collective" type="number" step="1" min="0" max="250" />
 
-                                <div>
-                                    <span i18n="rateSetpointBoostCutoff"></span>
-                                    <span> [Hz]</span>
+                                <div class="row-label">
+                                    <div>
+                                        <span i18n="rateSetpointBoostCutoff"></span>
+                                        <span> [Hz]</span>
+                                    </div>
                                 </div>
                                 <input id="setpoint-boost-cutoff-roll" type="number" step="1" min="0" max="250" />
                                 <input id="setpoint-boost-cutoff-pitch" type="number" step="1" min="0" max="250" />
@@ -206,21 +214,29 @@
                             </div>
 
                             <div class="group yaw-deadband">
-                                <div i18n="rateYawDynamicCeilingGain"></div>
+                                <div class="row-label">
+                                    <div i18n="rateYawDynamicCeilingGain"></div>
+                                    <div class="helpicon cf_tip" i18n_title="rateYawDynamicCeilingGainHelp"></div>
+                                </div>
                                 <div></div>
                                 <div></div>
                                 <input id="yaw-dynamic-ceiling-gain" type="number" step="1" min="0" max="250" />
                                 <div></div>
 
-                                <div i18n="rateYawDynamicDeadbandGain"></div>
+                                <div class="row-label">
+                                    <div i18n="rateYawDynamicDeadbandGain"></div>
+                                    <div class="helpicon cf_tip" i18n_title="rateYawDynamicDeadbandGainHelp"></div>
+                                </div>
                                 <div></div>
                                 <div></div>
                                 <input id="yaw-dynamic-deadband-gain" type="number" step="1" min="0" max="250" />
                                 <div></div>
 
-                                <div>
-                                    <span i18n="rateYawDynamicDeadbandFilter"></span>
-                                    <span> [Hz]</span>
+                                <div class="row-label">
+                                    <div>
+                                        <span i18n="rateYawDynamicDeadbandFilter"></span>
+                                        <span> [Hz]</span>
+                                    </div>
                                 </div>
                                 <div></div>
                                 <div></div>
