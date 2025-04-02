@@ -24,6 +24,16 @@
         "message": "자동",
         "english": "Auto"
     },
+    "genericEnable": {
+        "message": "Enable",
+        "english": "Enable",
+        "status": "New entry. Please translate!"
+    },
+    "genericDefault": {
+        "message": "Default",
+        "english": "Default",
+        "status": "New entry. Please translate!"
+    },
     "axisROLL": {
         "message": "ROLL",
         "english": "ROLL",
@@ -721,6 +731,11 @@
             "english": "Non - Betaflight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode."
         }
     },
+    "firmwareVersionInvalid": {
+        "message": "Firmware version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator.",
+        "english": "Firmware version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator.",
+        "status": "New entry. Please translate!"
+    },
     "resetToCustomDefaultsDialog": {
         "message": "There are custom defaults for this board available.<br />Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?",
         "english": "There are custom defaults for this board available.<br />Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?",
@@ -806,6 +821,11 @@
             "message": "MultiWii API 버전: <strong>$1</strong>",
             "english": "MultiWii API version: <strong>$1</strong>"
         }
+    },
+    "apiVersionInvalid": {
+        "message": "MSP API version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator.",
+        "english": "MSP API version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator.",
+        "status": "New entry. Please translate!"
     },
     "uniqueDeviceIdReceived": {
         "message": "고유 기기 ID: <strong>0x$1</strong>",
@@ -1221,6 +1241,11 @@
         "english": "Governor can't function without an RPM signal",
         "status": "New entry. Please translate!",
         "description": "Message that pops up to describe the GOVERNOR arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipRPM_SIGNAL": {
+        "message": "A fast rpm source has not been configured",
+        "english": "A fast rpm source has not been configured",
+        "status": "New entry. Please translate!"
     },
     "statusArmingDisableFlagsTooltipCRASH": {
         "message": "충돌 감지를 통해 디스아밍됨",
@@ -2570,6 +2595,11 @@
         "english": "Receiver Type",
         "status": "New entry. Please translate!"
     },
+    "receiverSelectionSectionSignaling": {
+        "message": "Signaling",
+        "english": "Signaling",
+        "status": "New entry. Please translate!"
+    },
     "receiverSettings": {
         "message": "Receiver Settings",
         "english": "Receiver Settings",
@@ -2696,6 +2726,16 @@
         "english": "Telemetry Settings",
         "status": "Reused translation. Please check!"
     },
+    "receiverTelemetrySettingsSectionSignaling": {
+        "message": "Signaling",
+        "english": "Signaling",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySettingsSectionCRSF": {
+        "message": "CRSF",
+        "english": "CRSF",
+        "status": "New entry. Please translate!"
+    },
     "receiverTelemetryEnabled": {
         "message": "Enable Telemetry",
         "english": "Enable Telemetry",
@@ -2716,19 +2756,19 @@
         "english": "Telemetry Pin Swap (Swap Rx and Tx pins)",
         "status": "New entry. Please translate!"
     },
-    "receiverTelemetryMode": {
-        "message": "Enable CRSF Custom Telemetry",
-        "english": "Enable CRSF Custom Telemetry",
+    "receiverCrsfTelemetryMode": {
+        "message": "Custom Telemetry",
+        "english": "Custom Telemetry",
         "status": "New entry. Please translate!"
     },
-    "receiverTelemetryRate": {
-        "message": "Telemetry Rate",
-        "english": "Telemetry Rate",
+    "receiverCrsfTelemetryRate": {
+        "message": "Telemetry Packet Rate",
+        "english": "Telemetry Packet Rate",
         "status": "New entry. Please translate!"
     },
-    "receiverTelemetryRatio": {
-        "message": "Telemetry Ratio",
-        "english": "Telemetry Ratio",
+    "receiverCrsfTelemetryRatio": {
+        "message": "Telemetry Packet Ratio",
+        "english": "Telemetry Packet Ratio",
         "status": "New entry. Please translate!"
     },
     "receiverHelpCrsfTelemetryMode": {
@@ -2806,11 +2846,6 @@
         "english": "Roll angle (attitude)",
         "status": "New entry. Please translate!"
     },
-    "receiverTelemetrySensor_HEADING": {
-        "message": "Heading",
-        "english": "Heading",
-        "status": "New entry. Please translate!"
-    },
     "receiverTelemetrySensor_ACC_X": {
         "message": "Accelerometer X-axis",
         "english": "Accelerometer X-axis",
@@ -2851,11 +2886,6 @@
         "english": "GPS Distance",
         "status": "New entry. Please translate!"
     },
-    "receiverTelemetrySensor_ESC_CURRENT": {
-        "message": "ESC Current",
-        "english": "ESC Current",
-        "status": "New entry. Please translate!"
-    },
     "receiverTelemetrySensor_ESC_VOLTAGE": {
         "message": "ESC Voltage",
         "english": "ESC Voltage",
@@ -2884,11 +2914,6 @@
     "receiverTelemetrySensor_ARMING_FLAGS": {
         "message": "Arming Flags",
         "english": "Arming Flags",
-        "status": "New entry. Please translate!"
-    },
-    "receiverTelemetrySensor_PID_PROFILE": {
-        "message": "PID Profile",
-        "english": "PID Profile",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_RATES_PROFILE": {
@@ -3051,19 +3076,9 @@
         "english": "Collective Control",
         "status": "New entry. Please translate!"
     },
-    "receiverTelemetrySensor_THROTTLE_CONTROL": {
-        "message": "Throttle Control",
-        "english": "Throttle Control",
-        "status": "New entry. Please translate!"
-    },
     "receiverTelemetrySensor_ESC_DATA": {
         "message": "ESC Data",
         "english": "ESC Data",
-        "status": "New entry. Please translate!"
-    },
-    "receiverTelemetrySensor_ESC_VOLTAGE": {
-        "message": "ESC Voltage",
-        "english": "ESC Voltage",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_CURRENT": {
@@ -3119,11 +3134,6 @@
     "receiverTelemetrySensor_ESC_MODEL": {
         "message": "ESC Model",
         "english": "ESC Model",
-        "status": "New entry. Please translate!"
-    },
-    "receiverTelemetrySensor_BEC_VOLTAGE": {
-        "message": "BEC Voltage",
-        "english": "BEC Voltage",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BUS_VOLTAGE": {
@@ -3191,24 +3201,9 @@
         "english": "Heading",
         "status": "New entry. Please translate!"
     },
-    "receiverTelemetrySensor_ALTITUDE": {
-        "message": "Altitude",
-        "english": "Altitude",
-        "status": "New entry. Please translate!"
-    },
     "receiverTelemetrySensor_VARIOMETER": {
         "message": "Variometer",
         "english": "Variometer",
-        "status": "New entry. Please translate!"
-    },
-    "receiverTelemetrySensor_HEADSPEED": {
-        "message": "Headspeed",
-        "english": "Headspeed",
-        "status": "New entry. Please translate!"
-    },
-    "receiverTelemetrySensor_TAILSPEED": {
-        "message": "Tailspeed",
-        "english": "Tailspeed",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_MOTOR_RPM": {
@@ -3341,19 +3336,9 @@
         "english": "RT Load",
         "status": "New entry. Please translate!"
     },
-    "receiverTelemetrySensor_MODEL_ID": {
-        "message": "Model Id",
-        "english": "Model Id",
-        "status": "New entry. Please translate!"
-    },
     "receiverTelemetrySensor_FLIGHT_MODE": {
         "message": "Flight Mode",
         "english": "Flight Mode",
-        "status": "New entry. Please translate!"
-    },
-    "receiverTelemetrySensor_ARMING_FLAGS": {
-        "message": "Arming Flags",
-        "english": "Arming Flags",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ARMING_DISABLE_FLAGS": {
@@ -3379,11 +3364,6 @@
     "receiverTelemetrySensor_PID_PROFILE": {
         "message": "PID Profile",
         "english": "PID Profile",
-        "status": "New entry. Please translate!"
-    },
-    "receiverTelemetrySensor_RATES_PROFILE": {
-        "message": "Rates Profile",
-        "english": "Rates Profile",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BATTERY_PROFILE": {
@@ -3993,6 +3973,51 @@
         "english": "Accelerometer Roll Trim",
         "status": "New entry. Please translate!"
     },
+    "adjustmentsFunctionYawInertiaPrecompGain": {
+        "message": "Yaw Inertia Precomp Gain",
+        "english": "Yaw Inertia Precomp Gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionYawInertiaPrecompCutoff": {
+        "message": "Yaw Inertia Precomp Cutoff",
+        "english": "Yaw Inertia Precomp Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionPitchSetpointBoostGain": {
+        "message": "Pitch Setpoint Boost Gain",
+        "english": "Pitch Setpoint Boost Gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionRollSetpointBoostGain": {
+        "message": "Roll Setpoint Boost Gain",
+        "english": "Roll Setpoint Boost Gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionYawSetpointBoostGain": {
+        "message": "Yaw Setpoint Boost Gain",
+        "english": "Yaw Setpoint Boost Gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionCollectiveSetpointBoostGain": {
+        "message": "Collective Setpoint Boost Gain",
+        "english": "Collective Setpoint Boost Gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionYawDynCeilingGain": {
+        "message": "Yaw Dynamic Ceiling Gain",
+        "english": "Yaw Dynamic Ceiling Gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionYawDynDeadbandGain": {
+        "message": "Yaw Dynamic Deadband Gain",
+        "english": "Yaw Dynamic Deadband Gain",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionYawDynDeadbandFilter": {
+        "message": "Yaw Dynamic Deadband Filter",
+        "english": "Yaw Dynamic Deadband Filter",
+        "status": "New entry. Please translate!"
+    },
     "servoHelp": {
         "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
         "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
@@ -4403,6 +4428,21 @@
         "english": "The phase offset for the swashplate controls.",
         "status": "New entry. Please translate!"
     },
+    "mixerCollectiveTiltCorrectionPos": {
+        "message": "Positive Collective Tilt Correction",
+        "english": "Positive Collective Tilt Correction",
+        "status": "New entry. Please translate!"
+    },
+    "mixerCollectiveTiltCorrectionNeg": {
+        "message": "Negative Collective Tilt Correction",
+        "english": "Negative Collective Tilt Correction",
+        "status": "New entry. Please translate!"
+    },
+    "mixerCollectiveTiltCorrectionHelp": {
+        "message": "Corrects cyclic to collective swashplate interaction.<br /><br />At full positive and negative collective pitch, adjust the corresponding values until the swashplate pivot ball remains stationary when increasing cyclic input.",
+        "english": "Corrects cyclic to collective swashplate interaction.<br /><br />At full positive and negative collective pitch, adjust the corresponding values until the swashplate pivot ball remains stationary when increasing cyclic input.",
+        "status": "New entry. Please translate!"
+    },
     "mixerSwashRollTrim": {
         "message": "Roll trim [%]",
         "english": "Roll trim [%]",
@@ -4579,13 +4619,23 @@
         "status": "New entry. Please translate!"
     },
     "mixerOverrideEnableSwitchText": {
-        "message": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot.",
-        "english": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot.",
+        "message": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. If Passthrough is enabled, the positions are controlled by your TX. The override values are not saved, and will be reset in reboot.",
+        "english": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. If Passthrough is enabled, the positions are controlled by your TX. The override values are not saved, and will be reset in reboot.",
+        "status": "New entry. Please translate!"
+    },
+    "mixerPassthroughEnableSwitch": {
+        "message": "<strong>Enable Mixer Passthrough</strong>",
+        "english": "<strong>Enable Mixer Passthrough</strong>",
         "status": "New entry. Please translate!"
     },
     "mixerOverrideEnable": {
-        "message": "Enable",
-        "english": "Enable",
+        "message": "Override",
+        "english": "Override",
+        "status": "New entry. Please translate!"
+    },
+    "mixerPassthroughEnable": {
+        "message": "Passthrough",
+        "english": "Passthrough",
         "status": "New entry. Please translate!"
     },
     "mixerOverrideValue": {
@@ -5218,6 +5268,36 @@
         "english": "<span class=\"message-negative\">Warning:</span> <i>Tail Rotor Gear Ratio</i> is set to an incorrect value. Please check!",
         "status": "New entry. Please translate!"
     },
+    "motorsVoltageCorrection": {
+        "message": "Voltage Correction",
+        "english": "Voltage Correction",
+        "status": "New entry. Please translate!"
+    },
+    "motorsVoltageCorrectionHelp": {
+        "message": "Adjusts the Voltage reported by the ESC's telemetry.",
+        "english": "Adjusts the Voltage reported by the ESC's telemetry.",
+        "status": "New entry. Please translate!"
+    },
+    "motorsCurrentCorrection": {
+        "message": "Current Correction",
+        "english": "Current Correction",
+        "status": "New entry. Please translate!"
+    },
+    "motorsCurrentCorrectionHelp": {
+        "message": "Adjusts the Current reported by the ESC's telemetry.",
+        "english": "Adjusts the Current reported by the ESC's telemetry.",
+        "status": "New entry. Please translate!"
+    },
+    "motorsConsumptionCorrection": {
+        "message": "Consumption Correction",
+        "english": "Consumption Correction",
+        "status": "New entry. Please translate!"
+    },
+    "motorsConsumptionCorrectionHelp": {
+        "message": "Adjusts the Consumption reported by the ESC's telemetry.",
+        "english": "Adjusts the Consumption reported by the ESC's telemetry.",
+        "status": "New entry. Please translate!"
+    },
     "motorRotorSpeeds": {
         "message": "Rotor Speed",
         "english": "Rotor Speed",
@@ -5366,6 +5446,16 @@
     "govSpoolupTimeHelp": {
         "message": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed.",
         "english": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed.",
+        "status": "New entry. Please translate!"
+    },
+    "govSpoolupMinThrottle": {
+        "message": "Spoolup minimum throttle",
+        "english": "Spoolup minimum throttle",
+        "status": "New entry. Please translate!"
+    },
+    "govSpoolupMinThrottleHelp": {
+        "message": "Minimum throttle to be used during spoolup. For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%.",
+        "english": "Minimum throttle to be used during spoolup. For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%.",
         "status": "New entry. Please translate!"
     },
     "govTrackingTime": {
@@ -7369,6 +7459,26 @@
         "english": "Decay time for collective impulse feedforward mixed into yaw",
         "status": "New entry. Please translate!"
     },
+    "profilesYawInertiaPrecompGain": {
+        "message": "Inertia Precomp Gain",
+        "english": "Inertia Precomp Gain",
+        "status": "New entry. Please translate!"
+    },
+    "profilesYawInertiaPrecompGainHelp": {
+        "message": "The strength of the main rotor's inertia. Larger values result in more precomp being applied to the yaw control.",
+        "english": "The strength of the main rotor's inertia. Larger values result in more precomp being applied to the yaw control.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesYawInertiaPrecompCutoff": {
+        "message": "Inertia Precomp Cutoff",
+        "english": "Inertia Precomp Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "profilesYawInertiaPrecompCutoffHelp": {
+        "message": "Derivative cutoff frequency for inertia precomp. Larger values result in a sharper application of precomp.",
+        "english": "Derivative cutoff frequency for inertia precomp. Larger values result in a sharper application of precomp.",
+        "status": "New entry. Please translate!"
+    },
     "profilesPitchFFCollective": {
         "message": "Collective to Pitch Compensation",
         "english": "Collective to Pitch Compensation",
@@ -7774,6 +7884,51 @@
         "english": "Response Time [ms]",
         "status": "New entry. Please translate!"
     },
+    "rateSetpointBoostGain": {
+        "message": "Setpoint Boost Gain",
+        "english": "Setpoint Boost Gain",
+        "status": "New entry. Please translate!"
+    },
+    "rateSetpointBoostCutoff": {
+        "message": "Setpoint Boost Cutoff",
+        "english": "Setpoint Boost Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "rateYawDynamicCeilingGain": {
+        "message": "Dynamic Ceiling Gain",
+        "english": "Dynamic Ceiling Gain",
+        "status": "New entry. Please translate!"
+    },
+    "rateYawDynamicDeadbandGain": {
+        "message": "Dynamic Deadband Gain",
+        "english": "Dynamic Deadband Gain",
+        "status": "New entry. Please translate!"
+    },
+    "rateYawDynamicDeadbandFilter": {
+        "message": "Dynamic Deadband Filter",
+        "english": "Dynamic Deadband Filter",
+        "status": "New entry. Please translate!"
+    },
+    "rateSetupResponseHelp": {
+        "message": "Smooths stick inputs. Larger values result in more smoothing.",
+        "english": "Smooths stick inputs. Larger values result in more smoothing.",
+        "status": "New entry. Please translate!"
+    },
+    "rateSetpointBoostGainHelp": {
+        "message": "Boosts stick inputs for a snappier feel.",
+        "english": "Boosts stick inputs for a snappier feel.",
+        "status": "New entry. Please translate!"
+    },
+    "rateYawDynamicCeilingGainHelp": {
+        "message": "Reduces stick travel required for maximum setpoint while rapidly approaching extremes.",
+        "english": "Reduces stick travel required for maximum setpoint while rapidly approaching extremes.",
+        "status": "New entry. Please translate!"
+    },
+    "rateYawDynamicDeadbandGainHelp": {
+        "message": "Increases stick deadband while rapidly approaching center.",
+        "english": "Increases stick deadband while rapidly approaching center.",
+        "status": "New entry. Please translate!"
+    },
     "gyroFilterSettings": {
         "message": "Gyro Filter Settings",
         "english": "Gyro Filter Settings",
@@ -7784,39 +7939,9 @@
         "english": "Gyro D-term Filter Settings",
         "status": "New entry. Please translate!"
     },
-    "gyroLowpassFiltersGroup": {
-        "message": "자이로 저역통과 필터",
-        "english": "Gyro Lowpass Filters",
-        "status": "Reused translation. Please check!"
-    },
-    "gyroLowpassFrequency": {
-        "message": "Gyro Lowpass 1 Cutoff Frequency [Hz]",
-        "english": "Gyro Lowpass 1 Cutoff Frequency [Hz]",
-        "status": "New entry. Please translate!"
-    },
-    "gyroLowpassType": {
-        "message": "자이로 저역통과 1 필터 형식",
-        "english": "Gyro Lowpass 1 Filter Type",
-        "status": "Reused translation. Please check!"
-    },
-    "gyroLowpassDynMinFrequency": {
-        "message": "Gyro Lowpass 1 Dynamic Min Cutoff Frequency [Hz]",
-        "english": "Gyro Lowpass 1 Dynamic Min Cutoff Frequency [Hz]",
-        "status": "New entry. Please translate!"
-    },
-    "gyroLowpassDynMaxFrequency": {
-        "message": "Gyro Lowpass 1 Dynamic Max Cutoff Frequency [Hz]",
-        "english": "Gyro Lowpass 1 Dynamic Max Cutoff Frequency [Hz]",
-        "status": "New entry. Please translate!"
-    },
-    "gyroLowpass2Frequency": {
-        "message": "Gyro Lowpass 2 Cutoff Frequency [Hz]",
-        "english": "Gyro Lowpass 2 Cutoff Frequency [Hz]",
-        "status": "New entry. Please translate!"
-    },
-    "gyroLowpass2Type": {
-        "message": "Gyro Lowpass 2 Filter Type",
-        "english": "Gyro Lowpass 2 Filter Type",
+    "gyroLowpassFilterHeading": {
+        "message": "Lowpass Filter",
+        "english": "Lowpass Filter",
         "status": "New entry. Please translate!"
     },
     "gyroLowpassFilterHelp": {
@@ -7824,29 +7949,49 @@
         "english": "The Gyro Lowpass Filters are used for cutting off excess noise in the gyro signal. Two filters can be used, either 1<sup>st</sup> or 2<sup>nd</sup> order. The first filter can be dynamic, changing its cutoff frequency with the main rotor RPM. The minimum and maximum are limiting the dynamic range. With RPM Filters or Dynamic Notch Filters, one extra filter is needed around 100Hz. Without them, two second order filters are required.",
         "status": "New entry. Please translate!"
     },
-    "gyroNotchFiltersGroup": {
-        "message": "자이로 노치 필터",
-        "english": "Gyro Notch Filters",
-        "status": "Reused translation. Please check!"
-    },
-    "gyroNotch1Frequency": {
-        "message": "Gyro Notch Filter 1 Center Frequency [Hz]",
-        "english": "Gyro Notch Filter 1 Center Frequency [Hz]",
+    "gyroLowpassFilter1": {
+        "message": "Lowpass Filter 1",
+        "english": "Lowpass Filter 1",
         "status": "New entry. Please translate!"
     },
-    "gyroNotch2Frequency": {
-        "message": "Gyro Notch Filter 2 Center Frequency [Hz]",
-        "english": "Gyro Notch Filter 2 Center Frequency [Hz]",
+    "gyroLowpassFilter2": {
+        "message": "Lowpass Filter 2",
+        "english": "Lowpass Filter 2",
         "status": "New entry. Please translate!"
     },
-    "gyroNotch1Cutoff": {
-        "message": "Gyro Notch Filter 1 Cutoff Frequency [Hz]",
-        "english": "Gyro Notch Filter 1 Cutoff Frequency [Hz]",
+    "gyroLowpassType": {
+        "message": "Filter Type",
+        "english": "Filter Type",
+        "status": "Reused translation. Please check!",
+        "previous": {
+            "message": "자이로 저역통과 1 필터 형식",
+            "english": "Gyro Lowpass 1 Filter Type",
+            "status": "Reused translation. Please check!"
+        }
+    },
+    "gyroLowpassFrequency": {
+        "message": "Cutoff Frequency",
+        "english": "Cutoff Frequency",
         "status": "New entry. Please translate!"
     },
-    "gyroNotch2Cutoff": {
-        "message": "Gyro Notch Filter 2 Cutoff Frequency [Hz]",
-        "english": "Gyro Notch Filter 2 Cutoff Frequency [Hz]",
+    "gyroLowpassDynamicCutoff": {
+        "message": "Dynamic Cutoff",
+        "english": "Dynamic Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "gyroLowpassDynMinFrequency": {
+        "message": "Min Cutoff Frequency",
+        "english": "Min Cutoff Frequency",
+        "status": "New entry. Please translate!"
+    },
+    "gyroLowpassDynMaxFrequency": {
+        "message": "Max Cutoff Frequency",
+        "english": "Max Cutoff Frequency",
+        "status": "New entry. Please translate!"
+    },
+    "gyroNotchFilterHeading": {
+        "message": "Notch Filter",
+        "english": "Notch Filter",
         "status": "New entry. Please translate!"
     },
     "gyroNotchFilterHelp": {
@@ -7854,59 +7999,49 @@
         "english": "The Notch Filters are used for filtering out additional resonances. Each filter has a Center and a Cutoff. The Center Frequency is the center of the filter and the Cutoff Frequency is where filter starts. For example with cutoff of 160 and center of 260, it means the range is 160-360Hz with most attenuation around the center.",
         "status": "New entry. Please translate!"
     },
-    "gyroDynamicNotchFilterGroup": {
-        "message": "다이나믹 노치 필터",
-        "english": "Dynamic Notch Filter",
-        "status": "Reused translation. Please check!"
-    },
-    "gyroDynamicNotchFilterSettings": {
-        "message": "Gyro Dynamic Notch Filter Settings",
-        "english": "Gyro Dynamic Notch Filter Settings",
+    "gyroNotchFilter1": {
+        "message": "Notch Filter 1",
+        "english": "Notch Filter 1",
         "status": "New entry. Please translate!"
     },
-    "gyroDynamicNotchFilterHelp": {
+    "gyroNotchFilter2": {
+        "message": "Notch Filter 2",
+        "english": "Notch Filter 2",
+        "status": "New entry. Please translate!"
+    },
+    "gyroNotchFilterFrequency": {
+        "message": "Center Frequency",
+        "english": "Center Frequency",
+        "status": "New entry. Please translate!"
+    },
+    "gyroNotchFilterCutoff": {
+        "message": "Cutoff Frequency",
+        "english": "Cutoff Frequency",
+        "status": "New entry. Please translate!"
+    },
+    "gyroDynamicFilterHeading": {
+        "message": "Dynamic Filter",
+        "english": "Dynamic Filter",
+        "status": "New entry. Please translate!"
+    },
+    "gyroDynamicFilterHelp": {
         "message": "Dynamic Notch Filter tracks peak noise frequencies in the gyro signal and places notch filters at those frequencies automatically.",
         "english": "Dynamic Notch Filter tracks peak noise frequencies in the gyro signal and places notch filters at those frequencies automatically.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Dynamic Notch Filter tracks peak motors noise frequency and places one or two notch filters with their center at that frequency.",
-            "english": "Dynamic Notch Filter tracks peak motors noise frequency and places one or two notch filters with their center at that frequency.",
-            "status": "New entry. Please translate!"
-        }
+        "status": "Reused translation. Please check!"
     },
     "gyroDynamicNotchCount": {
-        "message": "Dynamic Notch Count",
-        "english": "Dynamic Notch Count",
+        "message": "Notch Count",
+        "english": "Notch Count",
         "status": "New entry. Please translate!"
-    },
-    "gyroDynamicNotchQ": {
-        "message": "Dynamic Notch Q",
-        "english": "Dynamic Notch Q",
-        "status": "New entry. Please translate!"
-    },
-    "gyroDynamicNotchMinHz": {
-        "message": "Dynamic Notch Minimum Frequency",
-        "english": "Dynamic Notch Minimum Frequency",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Dynamic Notch Min Hz",
-            "english": "Dynamic Notch Min Hz",
-            "status": "New entry. Please translate!"
-        }
-    },
-    "gyroDynamicNotchMaxHz": {
-        "message": "Dynamic Notch Maximum Frequency",
-        "english": "Dynamic Notch Maximum Frequency",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Dynamic Notch Max Hz",
-            "english": "Dynamic Notch Max Hz",
-            "status": "New entry. Please translate!"
-        }
     },
     "gyroDynamicNotchCountHelp": {
         "message": "Select the number of dynamic notch filters. If used standalone without the RPM filters, 4-6 is recommended. With the RPM filters, 2-4 is recommended.",
         "english": "Select the number of dynamic notch filters. If used standalone without the RPM filters, 4-6 is recommended. With the RPM filters, 2-4 is recommended.",
+        "status": "New entry. Please translate!"
+    },
+    "gyroDynamicNotchQ": {
+        "message": "Notch Q",
+        "english": "Notch Q",
         "status": "New entry. Please translate!"
     },
     "gyroDynamicNotchQHelp": {
@@ -7919,6 +8054,16 @@
             "status": "Reused translation. Please check!"
         }
     },
+    "gyroDynamicNotchMinHz": {
+        "message": "Notch Minimum Frequency",
+        "english": "Notch Minimum Frequency",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Dynamic Notch Min Hz",
+            "english": "Dynamic Notch Min Hz",
+            "status": "New entry. Please translate!"
+        }
+    },
     "gyroDynamicNotchMinHzHelp": {
         "message": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is equivalent to 1200rpm.",
         "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is equivalent to 1200rpm.",
@@ -7927,6 +8072,16 @@
             "message": "다이나믹 노치로 제어하는데 필요한 최저 유입 노이즈 주파수로 설정하세요.",
             "english": "Set this to the lowest incoming noise frequency that is needed to be controlled by the dynamic notch.",
             "status": "Reused translation. Please check!"
+        }
+    },
+    "gyroDynamicNotchMaxHz": {
+        "message": "Notch Maximum Frequency",
+        "english": "Notch Maximum Frequency",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Dynamic Notch Max Hz",
+            "english": "Dynamic Notch Max Hz",
+            "status": "New entry. Please translate!"
         }
     },
     "gyroDynamicNotchMaxHzHelp": {
@@ -7990,8 +8145,8 @@
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterSettings": {
-        "message": "Gyro RPM Notch Filter Settings",
-        "english": "Gyro RPM Notch Filter Settings",
+        "message": "RPM Filter",
+        "english": "RPM Filter",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterSetup": {
@@ -8015,38 +8170,68 @@
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterConfigNote": {
-        "message": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable.",
-        "english": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable.",
+        "message": "The <i>RPM Filter</i> requires a real-time RPM source, either from an RPM Sensor or Bidirectional DShot. ESC telemetry is not suitable.",
+        "english": "The <i>RPM Filter</i> requires a real-time RPM source, either from an RPM Sensor or Bidirectional DShot. ESC telemetry is not suitable.",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterCustomNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings.",
-        "english": "<span class=\"message-negative\">Warning:</span> Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings.",
+        "message": "Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings.",
+        "english": "Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings.",
         "status": "New entry. Please translate!"
     },
-    "gyroRpmFilterVibrationLevel": {
-        "message": "Vibration Level",
-        "english": "Vibration Level",
+    "gyroRpmFilterPreset": {
+        "message": "Strength",
+        "english": "Strength",
         "status": "New entry. Please translate!"
     },
-    "gyroRpmFilterVibrationLow": {
+    "gyroRpmFilterPresetHelp": {
+        "message": "Higher strength removes more vibrations, but introduces more delay.",
+        "english": "Higher strength removes more vibrations, but introduces more delay.",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterPresetCustom": {
+        "message": "Custom",
+        "english": "Custom",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterPresetLow": {
         "message": "낮음",
         "english": "Low",
         "status": "Reused translation. Please check!"
     },
-    "gyroRpmFilterVibrationMedium": {
+    "gyroRpmFilterPresetMedium": {
         "message": "Medium",
         "english": "Medium",
-        "status": "New entry. Please translate!"
+        "status": "Reused translation. Please check!"
     },
-    "gyroRpmFilterVibrationHigh": {
+    "gyroRpmFilterPresetHigh": {
         "message": "높음",
         "english": "High",
         "status": "Reused translation. Please check!"
     },
+    "gyroRpmFilterMinFreq": {
+        "message": "Minimum Frequency",
+        "english": "Minimum Frequency",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterMinFreqHelp": {
+        "message": "Set slightly below the frequency of the main rotor at the lowest flying RPM.",
+        "english": "Set slightly below the frequency of the main rotor at the lowest flying RPM.",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterMinRPMGroup": {
+        "message": "Minimum RPM",
+        "english": "Minimum RPM",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterMinRPMGroupHelp": {
+        "message": "Set slightly below the lowest flying RPM.",
+        "english": "Set slightly below the lowest flying RPM.",
+        "status": "New entry. Please translate!"
+    },
     "gyroRpmFilterMainRotorMinRPM": {
-        "message": "Main Rotor Minimum Filtered RPM",
-        "english": "Main Rotor Minimum Filtered RPM",
+        "message": "Main Rotor",
+        "english": "Main Rotor",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterMainRotorMinRPMHelp": {
@@ -8055,8 +8240,8 @@
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterTailRotorMinRPM": {
-        "message": "Tail Rotor Minimum Filtered RPM",
-        "english": "Tail Rotor Minimum Filtered RPM",
+        "message": "Tail Rotor",
+        "english": "Tail Rotor",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterTailRotorMinRPMHelp": {
@@ -8065,18 +8250,18 @@
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterBanks": {
-        "message": "Gyro RPM Notch Filter Banks",
-        "english": "Gyro RPM Notch Filter Banks",
+        "message": "RPM Filter Notches",
+        "english": "RPM Filter Notches",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterHelp": {
-        "message": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
-        "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
+        "message": "Every rotating part on a helicopter generates vibrations, which can significantly affect the performance of the flight control loops. The <i>RPM Filter</i> utilizes the motor's RPM signal and the model's gear ratios to precisely eliminate these vibrations from the gyro's output, enabling the control loops to operate on the true motion of the aircraft. This method introduces substantially less delay than traditional vibration filtering, enhancing overall flight performance.",
+        "english": "Every rotating part on a helicopter generates vibrations, which can significantly affect the performance of the flight control loops. The <i>RPM Filter</i> utilizes the motor's RPM signal and the model's gear ratios to precisely eliminate these vibrations from the gyro's output, enabling the control loops to operate on the true motion of the aircraft. This method introduces substantially less delay than traditional vibration filtering, enhancing overall flight performance.",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterMainRotorGroup": {
-        "message": "Main Rotor Notch Filters",
-        "english": "Main Rotor Notch Filters",
+        "message": "Main Rotor",
+        "english": "Main Rotor",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterMainRotorHelp": {
@@ -8085,8 +8270,8 @@
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterTailRotorGroup": {
-        "message": "Tail Rotor Notch Filters",
-        "english": "Tail Rotor Notch Filters",
+        "message": "Tail Rotor",
+        "english": "Tail Rotor",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterTailRotorHelp": {
@@ -8094,9 +8279,19 @@
         "english": "RPM controlled filters for the tail rotor harmonics",
         "status": "New entry. Please translate!"
     },
+    "gyroRpmFilterMotorGroup": {
+        "message": "Motors",
+        "english": "Motors",
+        "status": "New entry. Please translate!"
+    },
     "gyroRpmFilterMainMotorGroup": {
         "message": "Main Motor Notch Filters",
         "english": "Main Motor Notch Filters",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterMainMotorQ": {
+        "message": "Main Motor Notch Q",
+        "english": "Main Motor Notch Q",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterMainMotorHelp": {
@@ -8107,6 +8302,11 @@
     "gyroRpmFilterTailMotorGroup": {
         "message": "Tail Motor Notch Filters",
         "english": "Tail Motor Notch Filters",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterTailMotorQ": {
+        "message": "Tail Motor Notch Q",
+        "english": "Tail Motor Notch Q",
         "status": "New entry. Please translate!"
     },
     "gyroRpmFilterTailMotorHelp": {
@@ -8172,6 +8372,31 @@
     "gyroRpmFilterQ8": {
         "message": "8<sup>th</sup> Harmonic Notch Q",
         "english": "8<sup>th</sup> Harmonic Notch Q",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterNotchTypeSingle": {
+        "message": "SINGLE",
+        "english": "SINGLE",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterNotchTypeDouble": {
+        "message": "DOUBLE",
+        "english": "DOUBLE",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterNotchTypeTriple": {
+        "message": "TRIPLE",
+        "english": "TRIPLE",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterNotchCountWarn": {
+        "message": "A maximum of 16 notches can be enabled.",
+        "english": "A maximum of 16 notches can be enabled.",
+        "status": "New entry. Please translate!"
+    },
+    "gyroRpmFilterNotchResetBtn": {
+        "message": "Reset Custom Notches",
+        "english": "Reset Custom Notches",
         "status": "New entry. Please translate!"
     },
     "dialogGyroResetTitle": {
@@ -10742,6 +10967,16 @@
         "english": "Custom",
         "status": "New entry. Please translate!"
     },
+    "blackboxGracePeriod": {
+        "message": "Disarm grace period",
+        "english": "Disarm grace period",
+        "status": "New entry. Please translate!"
+    },
+    "blackboxGracePeriodHelp": {
+        "message": "Continues logging briefly after disarming, useful for capturing crash data. Set to 0 to disable.",
+        "english": "Continues logging briefly after disarming, useful for capturing crash data. Set to 0 to disable.",
+        "status": "New entry. Please translate!"
+    },
     "blackboxDebugMode": {
         "message": "Debug mode",
         "english": "Debug mode",
@@ -10765,6 +11000,26 @@
     "blackboxDebugAxisHelp": {
         "message": "Choose which <i>axis</i> is being debugged. Applies to some of the debug modes.",
         "english": "Choose which <i>axis</i> is being debugged. Applies to some of the debug modes.",
+        "status": "New entry. Please translate!"
+    },
+    "blackboxInitialErase": {
+        "message": "Initial erase",
+        "english": "Initial erase",
+        "status": "New entry. Please translate!"
+    },
+    "blackboxInitialEraseHelp": {
+        "message": "Ensures a minimum amount of free space when recording starts, erasing old logs if necessary. Set to 0 to disable this feature.<br><br><b>Note:</b> Logging starts after erasing completes. This may take a significant amount of time with some flash chips.",
+        "english": "Ensures a minimum amount of free space when recording starts, erasing old logs if necessary. Set to 0 to disable this feature.<br><br><b>Note:</b> Logging starts after erasing completes. This may take a significant amount of time with some flash chips.",
+        "status": "New entry. Please translate!"
+    },
+    "blackboxRollingErase": {
+        "message": "Rolling erase",
+        "english": "Rolling erase",
+        "status": "New entry. Please translate!"
+    },
+    "blackboxRollingEraseHelp": {
+        "message": "Overwrite old logs when the storage is full.<br><br><b>Note:</b> Logs may contain gaps if the flash chip is slow to erase.",
+        "english": "Overwrite old logs when the storage is full.<br><br><b>Note:</b> Logs may contain gaps if the flash chip is slow to erase.",
         "status": "New entry. Please translate!"
     },
     "blackboxSerialLogger": {
@@ -11094,5 +11349,450 @@
     "cordovaExitAppMessage": {
         "message": "정말 컨피규레이터를 종료하시겠습니까?",
         "english": "Do you really want to close the configurator?"
+    },
+    "dropDownSelectAll": {
+        "message": "[Select/deselect all]",
+        "english": "[Select/deselect all]",
+        "status": "New entry. Please translate!",
+        "description": "Select all item in the drop down/multiple select"
+    },
+    "dropDownFilterDisabled": {
+        "message": "Select...",
+        "english": "Select...",
+        "status": "New entry. Please translate!",
+        "description": "Text indicating nothing is selected in the drop down/multiple select (filter disabled)"
+    },
+    "dropDownAll": {
+        "message": "All",
+        "english": "All",
+        "status": "New entry. Please translate!",
+        "description": "Text indicating everything is selected in the drop down/multiple select"
+    },
+    "tabPresets": {
+        "message": "Presets",
+        "english": "Presets",
+        "status": "New entry. Please translate!",
+        "description": "Presets tab title"
+    },
+    "presetsReload": {
+        "message": "Reload",
+        "english": "Reload",
+        "status": "New entry. Please translate!",
+        "description": "Text on the reload button that appears when there in an error loading presets index"
+    },
+    "presetCategory": {
+        "message": "Category:",
+        "english": "Category:",
+        "status": "New entry. Please translate!"
+    },
+    "presetAuthor": {
+        "message": "Author:",
+        "english": "Author:",
+        "status": "New entry. Please translate!",
+        "description": "Hint text in the preset dialog"
+    },
+    "presetSelectedOptions": {
+        "message": "Selected Options:",
+        "english": "Selected Options:",
+        "status": "New entry. Please translate!"
+    },
+    "presetKeywords": {
+        "message": "Keywords:",
+        "english": "Keywords:",
+        "status": "New entry. Please translate!",
+        "description": "Hint text in the preset dialog"
+    },
+    "presetSource": {
+        "message": "Source:",
+        "english": "Source:",
+        "status": "New entry. Please translate!",
+        "description": "Text prefixing user defined name of the preset repository containing a preset"
+    },
+    "presetVersions": {
+        "message": "Firmware:",
+        "english": "Firmware:",
+        "status": "New entry. Please translate!",
+        "description": "Hint text in the preset dialog"
+    },
+    "presetBoards": {
+        "message": "Boards:",
+        "english": "Boards:",
+        "status": "New entry. Please translate!",
+        "description": "Hint text in the preset dialog"
+    },
+    "presetsOfficial": {
+        "message": "Official",
+        "english": "Official",
+        "status": "New entry. Please translate!",
+        "description": "Hint text in the preset dialog indication preset is official"
+    },
+    "presetsCommunity": {
+        "message": "Community",
+        "english": "Community",
+        "status": "New entry. Please translate!",
+        "description": "Hint text in the preset dialog indication preset is from the community"
+    },
+    "presetsExperimental": {
+        "message": "Experimental",
+        "english": "Experimental",
+        "status": "New entry. Please translate!",
+        "description": "Hint text in the preset dialog indication preset is experimental"
+    },
+    "presetsApply": {
+        "message": "Select",
+        "english": "Select",
+        "status": "New entry. Please translate!",
+        "description": "Button to pick a preset"
+    },
+    "presetsViewOnline": {
+        "message": "View Source",
+        "english": "View Source",
+        "status": "New entry. Please translate!",
+        "description": "Link text for opening preset file online"
+    },
+    "presetsOpenDiscussion": {
+        "message": "Discussion",
+        "english": "Discussion",
+        "status": "New entry. Please translate!",
+        "description": "Link text for opening preset discussion"
+    },
+    "presetsShowCli": {
+        "message": "Show CLI",
+        "english": "Show CLI",
+        "status": "New entry. Please translate!",
+        "description": "Button to show CLI code of a preset"
+    },
+    "presetsHideCli": {
+        "message": "Hide CLI",
+        "english": "Hide CLI",
+        "status": "New entry. Please translate!",
+        "description": "Button to hide CLI code of a preset"
+    },
+    "presetOptions": {
+        "message": "Options",
+        "english": "Options",
+        "status": "New entry. Please translate!",
+        "description": "Text label for Options drop down select"
+    },
+    "presetsFilterCategory": {
+        "message": "Categories",
+        "english": "Categories",
+        "status": "New entry. Please translate!",
+        "description": "UI filter name"
+    },
+    "presetsFilterKeyword": {
+        "message": "Keywords",
+        "english": "Keywords",
+        "status": "New entry. Please translate!",
+        "description": "UI filter name"
+    },
+    "presetsFilterAuthor": {
+        "message": "Authors",
+        "english": "Authors",
+        "status": "New entry. Please translate!",
+        "description": "UI filter name"
+    },
+    "presetsFilterFirmware": {
+        "message": "Firmware Filter",
+        "english": "Firmware Filter",
+        "status": "New entry. Please translate!",
+        "description": "UI filter name"
+    },
+    "presetsFilterStatus": {
+        "message": "Status",
+        "english": "Status",
+        "status": "New entry. Please translate!",
+        "description": "UI filter name - official/community/experimental"
+    },
+    "presetsLoadError": {
+        "message": "Error loading presets from the internet",
+        "english": "Error loading presets from the internet",
+        "status": "New entry. Please translate!",
+        "description": "Error report when failed to load presets index or a specific preset"
+    },
+    "presetsButtonReview": {
+        "message": "Review Selected Presets",
+        "english": "Review Selected Presets",
+        "status": "New entry. Please translate!"
+    },
+    "presetsButtonReviewCLI": {
+        "message": "Review CLI",
+        "english": "Review CLI",
+        "status": "New entry. Please translate!"
+    },
+    "presetsButtonApply": {
+        "message": "Execute Presets",
+        "english": "Execute Presets",
+        "status": "New entry. Please translate!"
+    },
+    "presetsButtonReset": {
+        "message": "Reset",
+        "english": "Reset",
+        "status": "New entry. Please translate!"
+    },
+    "presetsApplyingPresets": {
+        "message": "Applying configuration...",
+        "english": "Applying configuration...",
+        "status": "New entry. Please translate!",
+        "description": "First label in the progress dialog when applying configuration (presets or user config)"
+    },
+    "presetsPleaseWait": {
+        "message": "Please wait.",
+        "english": "Please wait.",
+        "status": "New entry. Please translate!",
+        "description": "Second label in the progress dialog when applying presets"
+    },
+    "presetsCliErrorsWarning": {
+        "message": "<span class='message-negative'>WARNING!</span><br/>Configuration has been applied with CLI errors.",
+        "english": "<span class='message-negative'>WARNING!</span><br/>Configuration has been applied with CLI errors.",
+        "status": "New entry. Please translate!",
+        "description": "Text to show when there are CLI errors after applying presets or user configuration"
+    },
+    "presetsCliSaveButton": {
+        "message": "Save and Reboot",
+        "english": "Save and Reboot",
+        "status": "New entry. Please translate!",
+        "description": "save Button"
+    },
+    "presetsCliExitButton": {
+        "message": "Cancel and Reboot",
+        "english": "Cancel and Reboot",
+        "status": "New entry. Please translate!",
+        "description": "Reboot Button"
+    },
+    "presetsWarningDialogTitle": {
+        "message": "WARNING!",
+        "english": "WARNING!",
+        "status": "New entry. Please translate!",
+        "description": "Warning title in the warning dialog in the presets"
+    },
+    "presetsWarningDialogYesButton": {
+        "message": "Acknowledge",
+        "english": "Acknowledge",
+        "status": "New entry. Please translate!",
+        "description": "Agree button in the presets warning dialog"
+    },
+    "presetsWarningDialogNoButton": {
+        "message": "Cancel",
+        "english": "Cancel",
+        "status": "New entry. Please translate!",
+        "description": "Cancel button in the presets warning dialog"
+    },
+    "presetsWiki": {
+        "message": "Presets Wiki",
+        "english": "Presets Wiki",
+        "status": "New entry. Please translate!",
+        "description": "Button to open Presets Wiki link"
+    },
+    "backupDiffAll": {
+        "message": "Save Differential Backup (diff all)",
+        "english": "Save Differential Backup (diff all)",
+        "status": "New entry. Please translate!",
+        "description": "Button to backup differential configuration to a file"
+    },
+    "backupDumpAll": {
+        "message": "Save Full Backup (dump all)",
+        "english": "Save Full Backup (dump all)",
+        "status": "New entry. Please translate!",
+        "description": "Button to backup a dump all of the configuration to a file"
+    },
+    "backupLoad": {
+        "message": "Load Backup",
+        "english": "Load Backup",
+        "status": "New entry. Please translate!",
+        "description": "Button to load backup from a file"
+    },
+    "backupWaitDialogTitleSavingDiffAll": {
+        "message": "Saving diff all from the flight controller",
+        "english": "Saving diff all from the flight controller",
+        "status": "New entry. Please translate!",
+        "description": "Title for the waiting dialog when saving diff all into a file"
+    },
+    "backupWaitDialogTitleSavingDumpAll": {
+        "message": "Saving dump all from the flight controller",
+        "english": "Saving dump all from the flight controller",
+        "status": "New entry. Please translate!",
+        "description": "Title for the waiting dialog when saving dump all into a file"
+    },
+    "backupWaitDialogTitleLoadBackup": {
+        "message": "Loading backup onto the flight controller",
+        "english": "Loading backup onto the flight controller",
+        "status": "New entry. Please translate!",
+        "description": "Title for the waiting dialog when loading dump all into a file"
+    },
+    "backupWaitDialogMessageErrorSavingBackup": {
+        "message": "Error occurred while saving current configuration",
+        "english": "Error occurred while saving current configuration",
+        "status": "New entry. Please translate!",
+        "description": "Message appears on presets tab when saving current diff all into a file has failed"
+    },
+    "presetSources": {
+        "message": "Preset Sources...",
+        "english": "Preset Sources...",
+        "status": "New entry. Please translate!",
+        "description": "A button to show preset sources dialog"
+    },
+    "presetsSourcesDialogTitle": {
+        "message": "Preset Sources",
+        "english": "Preset Sources",
+        "status": "New entry. Please translate!",
+        "description": "A button to show preset sources dialog"
+    },
+    "presetsSourcesDialogAddNew": {
+        "message": "Add New Source",
+        "english": "Add New Source",
+        "status": "New entry. Please translate!",
+        "description": "A button to show preset sources dialog"
+    },
+    "presetsSourcesDialogConfirm": {
+        "message": "OK",
+        "english": "OK",
+        "status": "New entry. Please translate!"
+    },
+    "presetsSourcesDialogDefaultSourceName": {
+        "message": "New Custom Preset Source",
+        "english": "New Custom Preset Source",
+        "status": "New entry. Please translate!",
+        "description": "A default preset source (repo) name"
+    },
+    "presetsSourcesDialogSaveSource": {
+        "message": "Save",
+        "english": "Save",
+        "status": "New entry. Please translate!",
+        "description": "Presets tab, sources dialog, button to save new or editable source"
+    },
+    "presetsSourcesDialogResetSource": {
+        "message": "Revert",
+        "english": "Revert",
+        "status": "New entry. Please translate!",
+        "description": "Presets tab, sources dialog, button to revert source after modifications"
+    },
+    "presetsSourcesDialogMakeSourceActive": {
+        "message": "Activate",
+        "english": "Activate",
+        "status": "New entry. Please translate!",
+        "description": "Presets tab, sources dialog, button to make selected source active"
+    },
+    "presetsSourcesDialogMakeSourceDisable": {
+        "message": "Disable",
+        "english": "Disable",
+        "status": "New entry. Please translate!",
+        "description": "Presets tab, sources dialog, button to make selected source disabled"
+    },
+    "presetsSourcesDialogDeleteSource": {
+        "message": "Delete",
+        "english": "Delete",
+        "status": "New entry. Please translate!",
+        "description": "Presets tab, sources dialog, button to delete selected source"
+    },
+    "presetsSourcesDialogGithubBranch": {
+        "message": "Github Branch",
+        "english": "Github Branch",
+        "status": "New entry. Please translate!"
+    },
+    "presetsSourcesDialogURL": {
+        "message": "URL",
+        "english": "URL",
+        "status": "New entry. Please translate!"
+    },
+    "presetsSourcesDialogName": {
+        "message": "Name",
+        "english": "Name",
+        "status": "New entry. Please translate!"
+    },
+    "reviewPresetsDialogTitle": {
+        "message": "Review Selected Presets",
+        "english": "Review Selected Presets",
+        "status": "New entry. Please translate!"
+    },
+    "presetsWarningNotOfficialSource": {
+        "message": "<span class=\"message-negative\">WARNING!</span> A third party preset source is selected.",
+        "english": "<span class=\"message-negative\">WARNING!</span> A third party preset source is selected.",
+        "status": "New entry. Please translate!",
+        "description": "Warning message that shows up when a third party preset source is selected"
+    },
+    "presetsFailedToLoadRepositories": {
+        "message": "<span class=\"message-negative\">WARNING!</span> Failed to load following repositories: <b>{{repos}}</b>",
+        "english": "<span class=\"message-negative\">WARNING!</span> Failed to load following repositories: <b>{{repos}}</b>",
+        "status": "New entry. Please translate!",
+        "description": "Warning message that shows up when we fail to load some repositories"
+    },
+    "presetsWarningBackup": {
+        "message": "Please make sure you backup your current configuration ('$t(backupDiffAll.message)' button or via CLI if the button is disabled) <strong>before</strong> picking and applying presets. Otherwise there is no way to return to previous configuration after applying presets.",
+        "english": "Please make sure you backup your current configuration ('$t(backupDiffAll.message)' button or via CLI if the button is disabled) <strong>before</strong> picking and applying presets. Otherwise there is no way to return to previous configuration after applying presets.",
+        "status": "New entry. Please translate!",
+        "description": "Warning message that shows up at the top of the presets tab"
+    },
+    "presets_sources_dialog_warning": {
+        "message": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources will break your drone configuration and can potentially harm your devices.",
+        "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources will break your drone configuration and can potentially harm your devices.",
+        "status": "New entry. Please translate!",
+        "description": "Warning message that shows up at the top of the preset sources dialog"
+    },
+    "presetsWarningWrongVersionConfirmation": {
+        "message": "Picked preset requires firmware version $1. Current firmware version is $2",
+        "english": "Picked preset requires firmware version $1. Current firmware version is $2",
+        "status": "New entry. Please translate!",
+        "description": "Warning message that shows up at the top of the preset sources dialog"
+    },
+    "presetsSearchPlaceholder": {
+        "message": "Example: \"OMPHOBBY M5\", or \"OMPHOBBY M7\"",
+        "english": "Example: \"OMPHOBBY M5\", or \"OMPHOBBY M7\"",
+        "status": "New entry. Please translate!"
+    },
+    "presetsNoPresetsFound": {
+        "message": "No presets found for the given search parameters",
+        "english": "No presets found for the given search parameters",
+        "status": "New entry. Please translate!",
+        "description": "Message that apprears on presets tab if no presets were found"
+    },
+    "presetsTooManyPresetsFound": {
+        "message": "Reached the maximum limit of the shown presets number",
+        "english": "Reached the maximum limit of the shown presets number",
+        "status": "New entry. Please translate!",
+        "description": "Message that apprears on presets tab if too many presets found"
+    },
+    "presetOptionsPlaceholder": {
+        "message": "ATTENTION! Review the list of options",
+        "english": "ATTENTION! Review the list of options",
+        "status": "New entry. Please translate!",
+        "description": "Placeholder for the options list dropdown"
+    },
+    "presetsVersionMismatch": {
+        "message": "Preset source version mismatch.<br/>Required version: {{versionRequired}}<br/>Preset source version: {{versionSource}}<br/>Using this preset source could be dangerous.<br/>Do you want to continue?",
+        "english": "Preset source version mismatch.<br/>Required version: {{versionRequired}}<br/>Preset source version: {{versionSource}}<br/>Using this preset source could be dangerous.<br/>Do you want to continue?",
+        "status": "New entry. Please translate!",
+        "description": "Placeholder for the options list dropdown"
+    },
+    "presetsReviewOptionsWarning": {
+        "message": "Please review the list of options before picking this preset.",
+        "english": "Please review the list of options before picking this preset.",
+        "status": "New entry. Please translate!",
+        "description": "Dialog text to prompt user to review options for the preset"
+    },
+    "presetsReviewBeforeApply": {
+        "message": "Please review all of the selected presets in the list below. The presets CLI will be applied in the order they are listed. Ensure you have taken a backup of your current configuration before applying the presets.",
+        "english": "Please review all of the selected presets in the list below. The presets CLI will be applied in the order they are listed. Ensure you have taken a backup of your current configuration before applying the presets.",
+        "status": "New entry. Please translate!"
+    },
+    "backupFailedToSave": {
+        "message": "Something went wrong when trying to save the backup file.",
+        "english": "Something went wrong when trying to save the backup file.",
+        "status": "New entry. Please translate!"
+    },
+    "presetsCliConfirmationDialogTitle": {
+        "message": "Review The Rendered Presets CLI Commands",
+        "english": "Review The Rendered Presets CLI Commands",
+        "status": "New entry. Please translate!"
+    },
+    "presetEdit": {
+        "message": "Edit",
+        "english": "Edit",
+        "status": "New entry. Please translate!"
+    },
+    "presetsDontShowAgain": {
+        "message": "Don't show again",
+        "english": "Don't show again",
+        "status": "New entry. Please translate!"
     }
 }
