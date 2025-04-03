@@ -38,7 +38,23 @@ export default defineConfig({
       },
     },
   },
-  plugins: [svelte()],
+  plugins: [
+    svelte(),
+    {
+      name: "locale-watch",
+      configureServer(server) {
+        server.watcher.on("change", (file) => {
+          const relative = path.relative(server.config.root, file);
+          const match = relative.match(
+            /^public\/locales\/(.+)\/messages.json$/,
+          );
+          if (match) {
+            server.ws.send("locale-change", match[1]);
+          }
+        });
+      },
+    },
+  ],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),
