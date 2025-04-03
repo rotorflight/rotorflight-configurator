@@ -54,15 +54,15 @@ export const dev_client = run_dev_client();
 export const debug = run_debug();
 
 function clean_app() {
-  return fs.rm(APP_DIR, { recursive: true, force: true });
+  return runAsync(fs.rm(APP_DIR, { recursive: true, force: true }));
 }
 
 function clean_bundle() {
-  return fs.rm(BUNDLE_DIR, { recursive: true, force: true });
+  return runAsync(fs.rm(BUNDLE_DIR, { recursive: true, force: true }));
 }
 
 function clean_redist() {
-  return fs.rm(REDIST_DIR, { recursive: true, force: true });
+  return runAsync(fs.rm(REDIST_DIR, { recursive: true, force: true }));
 }
 
 function build_bundle() {
@@ -71,7 +71,9 @@ function build_bundle() {
 
 function bundle_vite() {
   const backend = context.target.platform === "android" ? "cordova" : "nwjs";
-  return vite.build({ define: { __BACKEND__: JSON.stringify(backend) } });
+  return runAsync(
+    vite.build({ define: { __BACKEND__: JSON.stringify(backend) } }),
+  );
 }
 
 function bundle_src() {
@@ -92,11 +94,13 @@ function bundle_src() {
 }
 
 function bundle_deps() {
-  return new Promise((resolve, reject) =>
-    child_process.exec(
-      "pnpm install --prod --frozen-lockfile",
-      { cwd: BUNDLE_DIR },
-      (err) => (err ? reject(err) : resolve()),
+  return runAsync(
+    new Promise((resolve, reject) =>
+      child_process.exec(
+        "pnpm install --prod --frozen-lockfile",
+        { cwd: BUNDLE_DIR },
+        (err) => (err ? reject(err) : resolve()),
+      ),
     ),
   );
 }
@@ -159,17 +163,19 @@ function build_app_nwjs() {
     },
   };
 
-  return nwbuild({
-    platform,
-    arch: NWJS_ARCH[arch],
-    outDir: context.appdir,
-    flavor: flavor === "debug" ? "sdk" : "normal",
-    app: platformOpts[platform],
-    version: NWJS_VERSION,
-    cacheDir: NWJS_CACHE_DIR,
-    glob: false,
-    srcDir: BUNDLE_DIR,
-  });
+  return runAsync(
+    nwbuild({
+      platform,
+      arch: NWJS_ARCH[arch],
+      outDir: context.appdir,
+      flavor: flavor === "debug" ? "sdk" : "normal",
+      app: platformOpts[platform],
+      version: NWJS_VERSION,
+      cacheDir: NWJS_CACHE_DIR,
+      glob: false,
+      srcDir: BUNDLE_DIR,
+    }),
+  );
 }
 
 function build_nwjs_linux_assets() {
@@ -181,30 +187,32 @@ function build_nwjs_linux_assets() {
  * Apply the correct permissions.
  */
 async function build_nwjs_unix_permissions() {
-  const ignore = [
-    // bundle - linux
-    `${context.appdir}/package.nw/**/*`,
-    // bundle - osx
-    `${context.appdir}/${pkg.name}.app/Contents/Resources/app.nw/**/*`,
-  ];
+  return runAsync(async () => {
+    const ignore = [
+      // bundle - linux
+      `${context.appdir}/package.nw/**/*`,
+      // bundle - osx
+      `${context.appdir}/${pkg.name}.app/Contents/Resources/app.nw/**/*`,
+    ];
 
-  const dirs = await glob(`${context.appdir}/**/*/`, { ignore });
-  for (const dir of dirs) {
-    await fs.chmod(dir, 0o755);
-  }
-
-  const files = await glob(`${context.appdir}/**/*`, { nodir: true, ignore });
-  for (const file of files) {
-    let mode = 0o644;
-
-    const stats = await fs.stat(file);
-    if (stats.mode & fs.constants.S_IXUSR) {
-      mode |=
-        fs.constants.S_IXUSR | fs.constants.S_IXGRP | fs.constants.S_IXOTH;
+    const dirs = await glob(`${context.appdir}/**/*/`, { ignore });
+    for (const dir of dirs) {
+      await fs.chmod(dir, 0o755);
     }
 
-    await fs.chmod(file, mode);
-  }
+    const files = await glob(`${context.appdir}/**/*`, { nodir: true, ignore });
+    for (const file of files) {
+      let mode = 0o644;
+
+      const stats = await fs.stat(file);
+      if (stats.mode & fs.constants.S_IXUSR) {
+        mode |=
+          fs.constants.S_IXUSR | fs.constants.S_IXGRP | fs.constants.S_IXOTH;
+      }
+
+      await fs.chmod(file, mode);
+    }
+  });
 }
 
 function build_redist() {
@@ -217,7 +225,7 @@ function build_redist() {
 }
 
 function mkdir_redist() {
-  return fs.mkdir(REDIST_DIR, { recursive: true });
+  return runAsync(fs.mkdir(REDIST_DIR, { recursive: true }));
 }
 
 function helper_build_redist() {
@@ -250,9 +258,11 @@ function build_redist_tar_xz() {
   const output = `${path.relative(context.appdir, REDIST_DIR)}/${filename}`;
   const command = `tar -cJf '${output}' --transform 's|^\\./|rotorflight-configurator/|' .`;
 
-  return new Promise((resolve, reject) =>
-    child_process.exec(command, { cwd: context.appdir }, (err) =>
-      err ? reject(err) : resolve(),
+  return runAsync(
+    new Promise((resolve, reject) =>
+      child_process.exec(command, { cwd: context.appdir }, (err) =>
+        err ? reject(err) : resolve(),
+      ),
     ),
   );
 }
@@ -299,7 +309,7 @@ function build_redist_deb(done) {
   );
 }
 
-async function build_redist_rpm() {
+function build_redist_rpm() {
   const { arch } = context.target;
 
   if (!commandExistsSync("rpmbuild")) {
@@ -343,56 +353,60 @@ async function build_redist_rpm() {
     execOpts: { maxBuffer: 1024 * 1024 * 16 },
   };
 
-  await new Promise((resolve, reject) =>
-    buildRpm(options, (err) => (err ? reject(err) : resolve())),
+  return runAsync(
+    new Promise((resolve, reject) =>
+      buildRpm(options, (err) => (err ? reject(err) : resolve())),
+    ),
   );
 }
 
-async function build_redist_osx() {
-  const appdmg = (await import("appdmg")).default;
+function build_redist_osx() {
+  return runAsync(async () => {
+    const appdmg = (await import("appdmg")).default;
 
-  const targetPath = `${REDIST_DIR}/${pkg.name}_${pkg.version}_macos_${context.target.arch}.dmg`;
+    const targetPath = `${REDIST_DIR}/${pkg.name}_${pkg.version}_macos_${context.target.arch}.dmg`;
 
-  await new Promise((resolve, reject) => {
-    const builder = appdmg({
-      target: targetPath,
-      basepath: context.appdir,
-      specification: {
-        title: "Rotorflight Configurator",
-        contents: [
-          { x: 448, y: 342, type: "link", path: "/Applications" },
-          {
-            x: 192,
-            y: 344,
-            type: "file",
-            path: `${pkg.name}.app`,
-            name: "Rotorflight Configurator.app",
-          },
-        ],
-        background: `${import.meta.dirname}/assets/osx/dmg-background.png`,
-        format: "UDZO",
-        window: {
-          size: {
-            width: 638,
-            height: 479,
+    await new Promise((resolve, reject) => {
+      const builder = appdmg({
+        target: targetPath,
+        basepath: context.appdir,
+        specification: {
+          title: "Rotorflight Configurator",
+          contents: [
+            { x: 448, y: 342, type: "link", path: "/Applications" },
+            {
+              x: 192,
+              y: 344,
+              type: "file",
+              path: `${pkg.name}.app`,
+              name: "Rotorflight Configurator.app",
+            },
+          ],
+          background: `${import.meta.dirname}/assets/osx/dmg-background.png`,
+          format: "UDZO",
+          window: {
+            size: {
+              width: 638,
+              height: 479,
+            },
           },
         },
-      },
-    });
+      });
 
-    builder.on("progress", (info) =>
-      logger.info(
-        info.current +
-          "/" +
-          info.total +
-          " " +
-          info.type +
-          " " +
-          (info.title || info.status),
-      ),
-    );
-    builder.on("error", reject);
-    builder.on("finish", resolve);
+      builder.on("progress", (info) =>
+        logger.info(
+          info.current +
+            "/" +
+            info.total +
+            " " +
+            info.type +
+            " " +
+            (info.title || info.status),
+        ),
+      );
+      builder.on("error", reject);
+      builder.on("finish", resolve);
+    });
   });
 }
 
@@ -415,15 +429,18 @@ function build_redist_win() {
     "assets/windows/installer.iss",
   ];
 
-  return new Promise((resolve, reject) =>
-    innoSetup(parameters, {}, (err) => (err ? reject(err) : resolve())),
+  return runAsync(
+    new Promise((resolve, reject) =>
+      innoSetup(parameters, {}, (err) => (err ? reject(err) : resolve())),
+    ),
   );
 }
 
 function run_dev_client() {
   switch (context.target.platform) {
     case "android":
-      return () => Promie.reject(Error("android dev client not supported"));
+      return () =>
+        runAsync(Promie.reject(Error("android dev client not supported")));
 
     case "linux":
     case "osx":
@@ -479,20 +496,22 @@ function getNwjsExePath(platform) {
 function run_nwjs_dev_client() {
   const { platform, arch } = context.target;
 
-  return nwbuild({
-    mode: "run",
-    platform,
-    arch: NWJS_ARCH[arch],
-    flavor: "sdk",
-    version: NWJS_VERSION,
-    cacheDir: NWJS_CACHE_DIR,
-    glob: false,
-    srcDir: ".",
-  });
+  return runAsync(
+    nwbuild({
+      mode: "run",
+      platform,
+      arch: NWJS_ARCH[arch],
+      flavor: "sdk",
+      version: NWJS_VERSION,
+      cacheDir: NWJS_CACHE_DIR,
+      glob: false,
+      srcDir: ".",
+    }),
+  );
 }
 
 function run_debug_cordova() {
-  return cordova.run();
+  return runAsync(cordova.run());
 }
 
 function cordova_copy_www() {
@@ -569,30 +588,34 @@ function cordova_configxml() {
 }
 
 function cordova_deps() {
-  return new Promise((resolve, reject) =>
-    child_process.exec(
-      "pnpm install --prod --frozen-lockfile",
-      { cwd: context.appdir },
-      (err) => (err ? reject(err) : resolve()),
+  return runAsync(
+    new Promise((resolve, reject) =>
+      child_process.exec(
+        "pnpm install --prod --frozen-lockfile",
+        { cwd: context.appdir },
+        (err) => (err ? reject(err) : resolve()),
+      ),
     ),
   );
 }
 
-async function cordova_build() {
-  const cwd = process.cwd();
-  process.chdir(context.appdir);
-  try {
-    await cordova.platform("add", ["android"]);
-    await cordova.build({
-      platforms: ["android"],
-      options: {
-        release: context.target.flavor !== "debug",
-        buildConfig: "build.json",
-      },
-    });
-  } finally {
-    process.chdir(cwd);
-  }
+function cordova_build() {
+  return runAsync(async () => {
+    const cwd = process.cwd();
+    process.chdir(context.appdir);
+    try {
+      await cordova.platform("add", ["android"]);
+      await cordova.build({
+        platforms: ["android"],
+        options: {
+          release: context.target.flavor !== "debug",
+          buildConfig: "build.json",
+        },
+      });
+    } finally {
+      process.chdir(cwd);
+    }
+  });
 }
 
 function build_redist_apk() {
@@ -649,3 +672,12 @@ function getHostArch() {
 }
 
 async function nop() {}
+
+async function runAsync(fn) {
+  try {
+    await (typeof fn === "function" ? fn() : fn);
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
