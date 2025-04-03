@@ -236,3 +236,14 @@ i18n.addResources = function(bundle) {
     const ns = takeFirst(i18next.options.defaultNS);
     i18next.addResourceBundle(lang, ns, bundle, true, true);
 };
+
+if (import.meta.hot) {
+    import.meta.hot.on("locale-change", async (locale) => {
+        console.log("vite updating locale", locale);
+        await i18next.reloadResources(locale);
+
+        if (i18next.language === locale) {
+            await i18next.changeLanguage(locale);
+        }
+    });
+}
