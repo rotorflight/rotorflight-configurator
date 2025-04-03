@@ -12,6 +12,7 @@ tab.initialize = function (callback) {
         tab.initAutoConnectConnectionTimeout();
         tab.initCordovaForceComputerUI();
         tab.initDarkTheme();
+        tab.rememberLastSelectedBoard();
 
         GUI.content_ready(callback);
     });
