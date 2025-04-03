@@ -4,6 +4,7 @@
  */
 
 import CliEngine from "@/js/cli_engine.js";
+import * as config from "@/js/config.js";
 import * as filesystem from "@/js/filesystem.js";
 import PresetInstance from "@/js/presets/source/preset_instance.js";
 import PresetDialog from "@/js/presets/preset_dialog.js";
@@ -443,21 +444,13 @@ class PresetsTab {
 
   onButtonHideBackupWarningClick() {
     this.#dom.warningBackup.toggle(false);
-    ConfigStorage.set({ showPresetsWarningBackup: false });
+    config.set({ showPresetsWarningBackup: false });
   }
 
   setupBackupWarning() {
-    let showPresetsWarningBackup = false;
-    ConfigStorage.get("showPresetsWarningBackup", function (result) {
-      if (result.showPresetsWarningBackup) {
-        showPresetsWarningBackup = true;
-      } else if (showPresetsWarningBackup === undefined) {
-        showPresetsWarningBackup = true;
-      }
-    });
-
-    const warningVisible = !!showPresetsWarningBackup;
-    this.#dom.warningBackup.toggle(warningVisible);
+    this.#dom.warningBackup.toggle(
+      config.get("showPresetsWarningBackup") ?? true,
+    );
   }
 
   onPresetSourcesShowClick() {

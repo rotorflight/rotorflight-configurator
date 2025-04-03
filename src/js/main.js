@@ -1,5 +1,7 @@
 import semver from "semver";
 
+import * as config from "@/js/config.js";
+
 globalThis.TABS = {};
 
 if (__BACKEND__ === "nwjs") {
@@ -237,11 +239,10 @@ export function startProcess() {
 
     $('#tabs ul.mode-disconnected li a:first').click();
 
-    ConfigStorage.get('zoomLevel', function (result) {
-        if (result.zoomLevel) {
-            GUI.set_zoom(result.zoomLevel, false);
-        }
-    });
+    const zoomLevel = config.get('zoomLevel');
+    if (zoomLevel) {
+        GUI.set_zoom(zoomLevel, false);
+    }
 
     $(document).on('wheel', function (ev) {
         const zoomMin = 50;
@@ -301,14 +302,14 @@ export function startProcess() {
             $("#log").removeClass('active');
             $("#tab-content-container").removeClass('logopen');
             $("#scrollicon").removeClass('active');
-            ConfigStorage.set({'logopen': false});
+            config.set({'logopen': false});
 
             state = false;
         } else {
             $("#log").addClass('active');
             $("#tab-content-container").addClass('logopen');
             $("#scrollicon").addClass('active');
-            ConfigStorage.set({'logopen': true});
+            config.set({'logopen': true});
 
             state = true;
         }
@@ -316,11 +317,9 @@ export function startProcess() {
         $(this).data('state', state);
     });
 
-    ConfigStorage.get('logopen', function (result) {
-        if (result.logopen) {
-            $("#showlog").trigger('click');
-        }
-    });
+    if (config.get('logopen')) {
+        $("#showlog").trigger('click');
+    }
 
 /**
     ConfigStorage.get('permanentExpertMode', function (result) {
@@ -340,18 +339,10 @@ export function startProcess() {
     });
 **/
 
-    ConfigStorage.get('cliAutoComplete', function (result) {
-        CliAutoComplete.setEnabled(typeof result.cliAutoComplete == 'undefined' || result.cliAutoComplete); // On by default
-    });
+    CliAutoComplete.setEnabled(config.get('cliAutoComplete') ?? true);
 
-    ConfigStorage.get('darkTheme', function (result) {
-        if (result.darkTheme === undefined || typeof result.darkTheme !== "number") {
-            // sets dark theme to auto if not manually changed
-            setDarkTheme(2);
-        } else {
-            setDarkTheme(result.darkTheme);
-        }
-    });
+    setDarkTheme(config.get('darkTheme') ?? 2);
+
     if (GUI.isCordova()) {
         let darkMode = false;
         const checkDarkMode = function() {
@@ -381,59 +372,53 @@ export function checkForConfiguratorUpdates() {
 }
 
 function notifyOutdatedVersion(releaseData) {
-    ConfigStorage.get('checkForConfiguratorUnstableVersions', function (result) {
-        let showUnstableReleases = false;
-        if (result.checkForConfiguratorUnstableVersions) {
-            showUnstableReleases = true;
-        }
-
-        const versions = releaseData.filter(function (version) {
-            var versionFromTagExpression = /release\/(.*)/;
-            var match = versionFromTagExpression.exec(version.tag_name);
-            if (match) {
-                version.release = semver.valid(match[1]);
-                if (version.release && (!semver.prerelease(version.release) || showUnstableReleases)) {
-                    return version;
-                }
+    const versions = releaseData.filter(function (version) {
+        var versionFromTagExpression = /release\/(.*)/;
+        var match = versionFromTagExpression.exec(version.tag_name);
+        if (match) {
+            version.release = semver.valid(match[1]);
+            if (version.release && (!semver.prerelease(version.release)
+                || config.get('checkForConfiguratorUnstableVersions'))) {
+                return version;
             }
-            return null;
-        }).sort(function (v1, v2) {
-            return semver.compare(v2.release, v1.release);
+        }
+        return null;
+    }).sort(function (v1, v2) {
+        return semver.compare(v2.release, v1.release);
+    });
+
+    if (versions.length > 0) {
+        CONFIGURATOR.latestVersion = versions[0].release;
+        CONFIGURATOR.latestVersionReleaseUrl = versions[0].html_url;
+        console.log(`Latest Configurator version is ${CONFIGURATOR.latestVersion}`);
+    }
+
+    function configuratorVersionDialog(message, releaseUrl)
+    {
+        const dialog = $('.dialogConfiguratorUpdate')[0];
+
+        $('.dialogConfiguratorUpdate-content').html(message);
+
+        $('.dialogConfiguratorUpdate-closebtn').click(function() {
+            dialog.close();
         });
 
-        if (versions.length > 0) {
-            CONFIGURATOR.latestVersion = versions[0].release;
-            CONFIGURATOR.latestVersionReleaseUrl = versions[0].html_url;
-            console.log(`Latest Configurator version is ${CONFIGURATOR.latestVersion}`);
-        }
+        $('.dialogConfiguratorUpdate-websitebtn').click(function() {
+            dialog.close();
+            window.open(releaseUrl, '_blank');
+        });
 
-        function configuratorVersionDialog(message, releaseUrl)
-        {
-            const dialog = $('.dialogConfiguratorUpdate')[0];
+        dialog.showModal();
+    }
 
-            $('.dialogConfiguratorUpdate-content').html(message);
-
-            $('.dialogConfiguratorUpdate-closebtn').click(function() {
-                dialog.close();
-            });
-
-            $('.dialogConfiguratorUpdate-websitebtn').click(function() {
-                dialog.close();
-                window.open(releaseUrl, '_blank');
-            });
-
-            dialog.showModal();
-        }
-
-        if (CONFIGURATOR.version.startsWith("0.0.0")) {
-            const message = i18n.getMessage('configuratorDevelopmentNotice');
-            configuratorVersionDialog(message, CONFIGURATOR.allReleasesUrl);
-        }
-        else if (semver.lt(CONFIGURATOR.version, CONFIGURATOR.latestVersion)) {
-            const message = i18n.getMessage('configuratorUpdateNotice', [CONFIGURATOR.latestVersion, CONFIGURATOR.latestVersionReleaseUrl]);
-            configuratorVersionDialog(message, CONFIGURATOR.latestVersionReleaseUrl);
-        }
-    });
+    if (CONFIGURATOR.version.startsWith("0.0.0")) {
+        const message = i18n.getMessage('configuratorDevelopmentNotice');
+        configuratorVersionDialog(message, CONFIGURATOR.allReleasesUrl);
+    }
+    else if (semver.lt(CONFIGURATOR.version, CONFIGURATOR.latestVersion)) {
+        const message = i18n.getMessage('configuratorUpdateNotice', [CONFIGURATOR.latestVersion, CONFIGURATOR.latestVersionReleaseUrl]);
+        configuratorVersionDialog(message, CONFIGURATOR.latestVersionReleaseUrl);
+    }
 }
 
 /**

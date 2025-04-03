@@ -1,6 +1,8 @@
 import * as noUiSlider from 'nouislider';
 import wNumb from 'wnumb';
 
+import * as config from '@/js/config.js';
+
 const tab = {
     tabName: 'auxiliary',
     isDirty: false,
@@ -534,16 +536,14 @@ tab.initialize = function (callback) {
         }
 
         let hideUnusedModes = false;
-        ConfigStorage.get('hideUnusedModes', function (result) {
-            $("input#switch-toggle-unused")
-                .change(function() {
-                    hideUnusedModes = $(this).prop("checked");
-                    ConfigStorage.set({ hideUnusedModes: hideUnusedModes });
-                    update_ui();
-                })
-                .prop("checked", !!result.hideUnusedModes)
-                .change();
-        });
+        $("input#switch-toggle-unused")
+            .on('change', function() {
+                hideUnusedModes = $(this).prop("checked");
+                config.set({ hideUnusedModes });
+                update_ui();
+            })
+            .prop("checked", !!config.get('hideUnusedModes'))
+            .trigger('change');
 
         self.save = function (callback) {
             formToData();
