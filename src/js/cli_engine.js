@@ -163,11 +163,11 @@ export default class CliEngine {
         return; // disable history keys if autocomplete is open
       }
 
-      if (event.key == "Up") {
+      if (event.key === "ArrowUp") {
         this.#GUI.textarea.val(this.#history.prev());
       }
 
-      if (event.key == "Down") {
+      if (event.key === "ArrowDown") {
         this.#GUI.textarea.val(this.#history.next());
       }
     });
