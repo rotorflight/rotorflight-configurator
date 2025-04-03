@@ -440,8 +440,9 @@ GuiControl.prototype.saveDefaultTab = function(tabName) {
 };
 
 GuiControl.prototype.selectDefaultTabWhenConnected = function() {
-    if (config.get('rememberLastTab') && config.get('lastTab')) {
-        $(`#tabs ul.mode-connected .tab_${result.lastTab} a`).click();
+    const lastTab = config.get('lastTab');
+    if (config.get('rememberLastTab') && lastTab) {
+        $(`#tabs ul.mode-connected .tab_${lastTab} a`).click();
     } else {
         $('#tabs ul.mode-connected .tab_status a').click();
     }
