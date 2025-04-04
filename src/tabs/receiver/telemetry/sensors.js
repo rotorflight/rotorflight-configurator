@@ -126,3 +126,8 @@ export const TELEMETRY_SENSORS = {
   DEBUG_6: 106,
   DEBUG_7: 107,
 };
+
+// create reverse mapping
+for (const [k, v] of Object.entries(TELEMETRY_SENSORS)) {
+  TELEMETRY_SENSORS[v] = k;
+}
