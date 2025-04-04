@@ -118,6 +118,60 @@ tab.initialize = function (callback) {
             4: 'Int.Rx',
             5: 'Port Ⓖ',
         },
+        'F7C1':
+        {
+            0: 'S.BUS',
+            1: 'TELEM',
+            2: 'Port Ⓒ',
+            3: 'Port Ⓐ',
+            4: 'DSM Ⓓ',
+            5: 'Port Ⓑ',
+        },
+        'F7C2':
+        {
+            0: 'S.BUS',
+            1: 'TELEM',
+            2: 'Port Ⓖ',
+            3: 'Port Ⓐ',
+            4: 'DSM Ⓓ',
+            5: 'Port Ⓖ',
+        },
+        'F7C3':
+        {
+            0: 'S.BUS',
+            1: 'TELEM',
+            2: 'Port Ⓒ',
+            3: 'Port Ⓐ',
+            4: 'Port Ⓔ',
+            5: 'Port Ⓑ',
+        },
+        'F7C4':
+        {
+            0: 'S.BUS',
+            1: 'TELEM',
+            2: 'Port Ⓖ',
+            3: 'Port Ⓐ',
+            4: 'Port Ⓔ',
+            5: 'Port Ⓖ',
+        },
+        'F7C5':
+        {
+            0: 'S.BUS',
+            1: 'TELEM',
+            2: 'Port Ⓒ',
+            3: 'Port Ⓐ',
+            4: 'Int.Rx',
+            5: 'Port Ⓑ',
+        },
+        'F7C6':
+        {
+            0: 'S.BUS',
+            1: 'TELEM',
+            2: 'Port Ⓖ',
+            3: 'Port Ⓐ',
+            4: 'Int.Rx',
+            5: 'Port Ⓖ',
+        },
     };
 
     const portTypes = {
