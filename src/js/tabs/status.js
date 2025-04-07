@@ -296,24 +296,24 @@ tab.initialize = function (callback) {
 
         function updateArming(active) {
             FC.CONFIG.enableArmingFlag = active;
+            enableArmingSwitch.prop('checked', active);
             mspHelper.setArmingEnabled(active);
         }
 
-        enableArmingSwitch.change(function () {
+        enableArmingSwitch.on('change', function () {
             if (enableArmingSwitch.prop('checked')) {
                 dialogConfirmArming.showModal();
-            }
-            else {
+            } else {
                 updateArming(false);
             }
         });
 
-        $('.dialogConfirmArming-cancelbtn').click(function() {
+        $('.dialogConfirmArming-cancelbtn').on('click', function() {
             dialogConfirmArming.close();
-            enableArmingSwitch.prop('checked', false).change();
+            updateArming(false);
         });
 
-        $('.dialogConfirmArming-confirmbtn').click(function() {
+        $('.dialogConfirmArming-confirmbtn').on('click', function() {
             dialogConfirmArming.close();
             updateArming(true);
         });
