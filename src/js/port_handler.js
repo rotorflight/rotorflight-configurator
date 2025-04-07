@@ -1,3 +1,5 @@
+import * as config from '@/js/config.js';
+
 const TIMEOUT_CHECK = 500 ; // With 250 it seems that it produces a memory leak and slowdown in some versions, reason unknown
 
 export const usbDevices = { filters: [
@@ -189,31 +191,24 @@ PortHandler.detectPort = function(currentPorts) {
         currentPorts = self.updatePortSelect(currentPorts);
         console.log(`PortHandler - Found: ${JSON.stringify(newPorts)}`);
 
-        ConfigStorage.get('last_used_port', function (result) {
-            if (result.last_used_port) {
-                if (result.last_used_port.includes('tcp')) {
-                    self.portPickerElement.val('manual');
-                } else if (newPorts.length === 1) {
-                    self.portPickerElement.val(newPorts[0].path);
-                } else if (newPorts.length > 1) {
-                    self.selectPort(currentPorts);
-                }
+        const last_used_port = config.get('last_used_port');
+        if (last_used_port) {
+            if (last_used_port.includes('tcp')) {
+                self.portPickerElement.val('manual');
+            } else if (newPorts.length === 1) {
+                self.portPickerElement.val(newPorts[0].path);
+            } else if (newPorts.length > 1) {
+                self.selectPort(currentPorts);
             }
-        });
+        }
 
         // auto-connect if enabled
         if (GUI.auto_connect && !GUI.connecting_to && !GUI.connected_to) {
             // start connect procedure. We need firmware flasher protection over here
             if (GUI.active_tab !== 'firmware_flasher') {
-                let connectionTimeout = 100;
-                ConfigStorage.get('connectionTimeout', function (result) {
-                    if (result.connectionTimeout) {
-                        connectionTimeout = result.connectionTimeout;
-                    }
-                    GUI.timeout_add('auto-connect_timeout', function () {
-                        $('div#header_btns a.connect').click();
-                    }, connectionTimeout); // timeout so bus have time to initialize after being detected by the system
-                });
+                GUI.timeout_add('auto-connect_timeout', function () {
+                    $('div#header_btns a.connect').click();
+                }, config.get('connectionTimeout') ?? 100); // timeout so bus have time to initialize after being detected by the system
             }
         }
         // trigger callbacks

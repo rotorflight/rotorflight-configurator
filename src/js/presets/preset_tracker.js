@@ -1,6 +1,9 @@
 /**
  * @typedef {import('@/js/presets/source/preset_instance.js').default} PresetInstance
  */
+
+import * as config from "@/js/config.js";
+
 const MAX_TRACKED_PRESETS_COUNT = 50;
 
 export class TrackedPreset {
@@ -36,17 +39,11 @@ export default class PresetTracker {
   }
 
   #loadFromStorage() {
-    this.#trackedPresets = [];
-    const self = this;
-    ConfigStorage.get("TrackedPresets", function (result) {
-      if (result.TrackedPresets) {
-        self.#trackedPresets = result.TrackedPresets;
-      }
-    });
+    this.#trackedPresets = config.get("TrackedPresets") ?? [];
   }
 
   #saveToStorage() {
-    ConfigStorage.set({ TrackedPresets: this.#trackedPresets });
+    config.set({ TrackedPresets: this.#trackedPresets });
   }
 
   /**

@@ -4,7 +4,6 @@ import { mount } from "svelte";
 import { Beepers } from "@/js/Beepers.js";
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
-import { ConfigStorage } from "@/js/ConfigStorage.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
 import { Features } from "@/js/features.svelte.js";
 import { FirmwareCache } from "@/js/FirmwareCache.js";
@@ -59,7 +58,6 @@ Object.assign(globalThis, {
   Beepers,
   CliAutoComplete,
   ConfigInserter,
-  ConfigStorage,
   DarkTheme,
   FC,
   Features,

@@ -1,5 +1,6 @@
 import semver from "semver";
 
+import * as config from "@/js/config.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
 
 export function initializeSerialBackend() {
@@ -28,12 +29,10 @@ export function initializeSerialBackend() {
     GUI.updateManualPortVisibility();
 
     $('#port-override').on("change", function() {
-        ConfigStorage.set({'portOverride': $('#port-override').val()});
+        config.set({'portOverride': $('#port-override').val()});
     });
 
-    ConfigStorage.get('portOverride', function (data) {
-        $('#port-override').val(data.portOverride);
-    });
+    $('#port-override').val(config.get('portOverride'));
 
     $('div#port-picker #port').on("change", function() {
         GUI.updateManualPortVisibility();
@@ -114,40 +113,38 @@ export function initializeSerialBackend() {
     });
 
     // auto-connect
-    ConfigStorage.get('auto_connect', function (result) {
-        if (result.auto_connect === undefined || result.auto_connect) {
-            // default or enabled by user
-            GUI.auto_connect = true;
+    if (config.get('auto_connect') ?? true) {
+        // default or enabled by user
+        GUI.auto_connect = true;
 
-            $('input.auto_connect').prop('checked', true);
+        $('input.auto_connect').prop('checked', true);
+        $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectEnabled'));
+
+        $('select#baud').val(115200).prop('disabled', true);
+    } else {
+        // disabled by user
+        GUI.auto_connect = false;
+
+        $('input.auto_connect').prop('checked', false);
+        $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectDisabled'));
+    }
+
+    // bind UI hook to auto-connect checkbos
+    $('input.auto_connect').change(function () {
+        GUI.auto_connect = $(this).is(':checked');
+
+        // update title/tooltip
+        if (GUI.auto_connect) {
             $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectEnabled'));
 
             $('select#baud').val(115200).prop('disabled', true);
         } else {
-            // disabled by user
-            GUI.auto_connect = false;
-
-            $('input.auto_connect').prop('checked', false);
             $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectDisabled'));
+
+            if (!GUI.connected_to && !GUI.connecting_to) $('select#baud').prop('disabled', false);
         }
 
-        // bind UI hook to auto-connect checkbos
-        $('input.auto_connect').change(function () {
-            GUI.auto_connect = $(this).is(':checked');
-
-            // update title/tooltip
-            if (GUI.auto_connect) {
-                $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectEnabled'));
-
-                $('select#baud').val(115200).prop('disabled', true);
-            } else {
-                $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectDisabled'));
-
-                if (!GUI.connected_to && !GUI.connecting_to) $('select#baud').prop('disabled', false);
-            }
-
-            ConfigStorage.set({'auto_connect': GUI.auto_connect});
-        });
+        config.set({'auto_connect': GUI.auto_connect});
     });
 
     // Show all ports
@@ -156,31 +153,29 @@ export function initializeSerialBackend() {
         GUI.show_all_ports = true;
         $('div #show-all-ports-switch').hide();
     } else {
-        ConfigStorage.get('show_all_ports', function (result) {
-            if (result.show_all_ports === undefined || !result.show_all_ports) {
-                GUI.show_all_ports = false;
-                $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsDisabled'));
-                $('input.show_all_ports').prop('checked', false);
-            } else {
-                GUI.show_all_ports = true;
+        if (!config.get('show_all_ports')) {
+            GUI.show_all_ports = false;
+            $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsDisabled'));
+            $('input.show_all_ports').prop('checked', false);
+        } else {
+            GUI.show_all_ports = true;
+            $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsEnabled'));
+            $('input.show_all_ports').prop('checked', true);
+        }
+
+        // bind UI hook to show all ports checkbox
+        $('input.show_all_ports').on("change", function () {
+            GUI.show_all_ports = $(this).is(':checked');
+
+            // update title/tooltip
+            if (GUI.show_all_ports) {
                 $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsEnabled'));
-                $('input.show_all_ports').prop('checked', true);
+            } else {
+                $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsDisabled'));
             }
 
-            // bind UI hook to show all ports checkbox
-            $('input.show_all_ports').on("change", function () {
-                GUI.show_all_ports = $(this).is(':checked');
-
-                // update title/tooltip
-                if (GUI.show_all_ports) {
-                    $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsEnabled'));
-                } else {
-                    $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsDisabled'));
-                }
-
-                ConfigStorage.set({ 'show_all_ports': GUI.show_all_ports });
-                PortHandler.showAllPorts(GUI.show_all_ports);
-            });
+            config.set({ 'show_all_ports': GUI.show_all_ports });
+            PortHandler.showAllPorts(GUI.show_all_ports);
         });
     }
 
@@ -257,18 +252,8 @@ async function onOpen(openInfo) {
         GUI.connecting_to = false;
         GUI.log(i18n.getMessage('serialPortOpened', serial.connectionType === 'serial' ? [serial.connectionId] : [openInfo.socketId]));
 
-        // save selected port with chrome.storage if the port differs
-        ConfigStorage.get('last_used_port', function (result) {
-            if (result.last_used_port) {
-                if (result.last_used_port !== GUI.connected_to) {
-                    // last used port doesn't match the one found in local db, we will store the new one
-                    ConfigStorage.set({'last_used_port': GUI.connected_to});
-                }
-            } else {
-                // variable isn't stored yet, saving
-                ConfigStorage.set({'last_used_port': GUI.connected_to});
-            }
-        });
+        // save selected port if the port differs
+        config.set({'last_used_port': GUI.connected_to});
 
         serial.onReceive.addListener(read_serial);
         setConnectionTimeout();

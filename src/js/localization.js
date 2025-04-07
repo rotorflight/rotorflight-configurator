@@ -1,6 +1,8 @@
 import i18next from 'i18next';
 import i18nextHttpBackend from 'i18next-http-backend';
 
+import * as config from "@/js/config.js";
+
 export const i18n = {};
 
 //const languagesAvailables = [ 'de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'nl', 'pl', 'pt', 'pt_BR', 'zh_CN', 'zh_TW', ];
@@ -16,7 +18,7 @@ i18n.init = async function() {
     }
 
     try {
-        const userLanguage = await getStoredUserLocale();
+        const userLanguage = getStoredUserLocale();
         await i18next.use(i18nextHttpBackend).init({
             lng: userLanguage,
             getAsync: false,
@@ -69,9 +71,7 @@ i18n.parseInputFile = function(data) {
 };
 
 i18n.changeLanguage = function(languageSelected) {
-    if (typeof ConfigStorage !== 'undefined') {
-        ConfigStorage.set({'userLanguageSelect': languageSelected});
-    }
+    config.set({'userLanguageSelect': languageSelected});
     i18next.changeLanguage(getValidLocale(languageSelected));
     i18n.selectedLanguage = languageSelected;
     GUI.log(i18n.getMessage('language_changed'));
@@ -180,24 +180,8 @@ i18n.localizePage = function(forceReTranslate) {
  * returns the current locale to the callback
  */
 function getStoredUserLocale() {
-    return new Promise((resolve) => {
-        if (ConfigStorage) {
-            ConfigStorage.get('userLanguageSelect', function (result) {
-                let userLanguage = 'DEFAULT';
-                if (result.userLanguageSelect) {
-                    userLanguage = result.userLanguageSelect;
-                }
-                i18n.selectedLanguage = userLanguage;
-
-                userLanguage = getValidLocale(userLanguage);
-
-                resolve(userLanguage);
-            });
-        } else {
-            const userLanguage = getValidLocale('DEFAULT');
-            resolve(userLanguage);
-        }
-    });
+    i18n.selectedLanguage = config.get('userLanguageSelect') ?? 'DEFAULT';
+    return getValidLocale(i18n.selectedLanguage);
 }
 
 function getValidLocale(userLocale) {
