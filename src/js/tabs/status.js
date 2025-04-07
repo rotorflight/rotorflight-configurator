@@ -209,7 +209,8 @@ tab.initialize = function (callback) {
         const barElems = [];
 
         for (let i = 0; i < numBars; i++) {
-            const ch = FC.RC_MAP[i] ?? i;
+            const axis = FC.RC_MAP.indexOf(i);
+            const ch = axis !== -1 ? axis : i;
             const name = i18n.getMessage(self.axisNames[ch].text);
             const elem = addChannelBar(barContainer, name);
             barElems.push(elem);
@@ -232,7 +233,8 @@ tab.initialize = function (callback) {
 
         function update_rc_channels() {
             for (let i = 0; i < numChs; i++) {
-                const ch = FC.RC_MAP[i] ?? i;
+                const axis = FC.RC_MAP.indexOf(i);
+                const ch = axis !== -1 ? axis : i;
                 const width = ((FC.RC.channels[ch] - barScaleMin) / (barScaleMax - barScaleMin) * 100).clamp(0, 100) + '%';
                 const label = (FC.RC.channels[ch]).toFixed(0);
                 let rabel = '';
