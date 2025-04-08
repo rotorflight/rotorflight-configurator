@@ -3,7 +3,7 @@ const TAIL_ROTOR_SOURCE = [20, 21, 22, 23, 24];
 const RPM_SOURCE = [...MAIN_ROTOR_SOURCE, ...TAIL_ROTOR_SOURCE];
 const MULTI_NOTCH_SOURCE = [11, 12, 21, 22];
 const DEFAULT_Q = 2.5;
-const NOTCH_COUNT = 16;
+export const NOTCH_COUNT = 16;
 const DOUBLE_NOTCH_OFFSET = 1; // 1%
 const TRIPLE_NOTCH_OFFSET = 2; // 2%
 const MIN_Q = 15;
@@ -185,10 +185,6 @@ export function generateRpmFilterConfig1(config) {
         break;
       }
     }
-  }
-
-  if (result.length > NOTCH_COUNT) {
-    return null;
   }
 
   for (let i = result.length; i < NOTCH_COUNT; i++) {
@@ -375,10 +371,6 @@ export function generateRpmFilterConfig2(config) {
           break;
         }
       }
-    }
-
-    if (bank.length > NOTCH_COUNT) {
-      return null;
     }
 
     for (let i = bank.length; i < NOTCH_COUNT; i++) {
