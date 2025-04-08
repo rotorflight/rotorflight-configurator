@@ -52,6 +52,9 @@ importers:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.3
         version: 5.0.3(svelte@5.17.3)(vite@6.0.7(@types/node@22.7.4)(less@4.2.0)(sass-embedded@1.83.1)(yaml@2.6.1))
+      archiver:
+        specifier: ^7.0.1
+        version: 7.0.1
       command-exists:
         specifier: ^1.2.9
         version: 1.2.9
