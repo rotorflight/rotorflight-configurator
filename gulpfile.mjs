@@ -248,7 +248,7 @@ function build_redist_tar_xz() {
 
   const filename = `${pkg.name}_${pkg.version}_${platform}_${arch}.tar.xz`;
   const output = `${path.relative(context.appdir, REDIST_DIR)}/${filename}`;
-  const command = `tar -cJf '${output}' --transform 's|^\\./|rotorflight-configurator/|' .`;
+  const command = `tar -cJf '${output}' --transform 's|^\\./|rotorflight-configurator-${pkg.version}/|' .`;
 
   return new Promise((resolve, reject) =>
     child_process.exec(command, { cwd: context.appdir }, (err) =>
