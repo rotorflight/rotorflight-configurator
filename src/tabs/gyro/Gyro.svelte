@@ -20,6 +20,7 @@
     parseRpmFilterConfig2,
     generateRpmFilterConfig1,
     generateRpmFilterConfig2,
+    NOTCH_COUNT,
   } from "./filter_config.js";
 
   let loading = $state(true);
@@ -42,6 +43,19 @@
     return diff(initialState, snapshotState());
   });
   let showToolbar = $derived(!loading && changes.length > 0);
+  let disableSave = $derived.by(() => {
+    if (FC.RPM_FILTER_CONFIG.length > NOTCH_COUNT) {
+      return true;
+    }
+
+    for (const bank of FC.RPM_FILTER_CONFIG_V2) {
+      if (bank.length > NOTCH_COUNT) {
+        return true;
+      }
+    }
+
+    return false;
+  });
 
   let notches = $state(null);
   let enabled = $derived(FC.FEATURE_CONFIG.features.RPM_FILTER);
@@ -120,11 +134,12 @@
     Object.assign(FC.RPM_FILTER_CONFIG_V2, initialState.RPM_FILTER_CONFIG_V2);
     Object.assign(FC.FILTER_CONFIG, initialState.FILTER_CONFIG);
     FC.FEATURE_CONFIG.features.bitfield = initialState.features;
+    parseNotches();
   }
 
   function onResetNotches() {
     FC.RPM_FILTER_CONFIG = [];
-    FC.RPM_FILTER_CONFIG_V2 = [{}, {}, {}];
+    FC.RPM_FILTER_CONFIG_V2 = [[], [], []];
     parseNotches();
   }
 
@@ -145,7 +160,9 @@
 
 {#snippet toolbar()}
   <button onclick={onRevert}>{$i18n.t("buttonRevert")}</button>
-  <button onclick={onSave}>{$i18n.t("buttonSaveReboot")}</button>
+  <button disabled={disableSave} onclick={onSave}>
+    {$i18n.t("buttonSaveReboot")}
+  </button>
 {/snippet}
 
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
@@ -201,6 +218,12 @@
       &:active {
         background-color: var(--color-neutral-400);
       }
+
+      &:disabled {
+        color: var(--color-neutral-500);
+        background-color: var(--color-neutral-200);
+        cursor: not-allowed;
+      }
     }
 
     :global(html[data-theme="dark"]) & {
@@ -214,6 +237,12 @@
 
       &:active {
         background-color: var(--color-neutral-400);
+      }
+
+      &:disabled {
+        color: var(--color-neutral-700);
+        background-color: var(--color-neutral-500);
+        cursor: not-allowed;
       }
     }
   }
