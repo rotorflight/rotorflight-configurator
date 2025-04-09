@@ -50,6 +50,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    gap: 8px;
   }
 
   .sensor-count {
