@@ -25,11 +25,9 @@
   };
 
   let totalCount = $derived(fields.items.length);
-
-  let width = $state();
 </script>
 
-<div class="container" bind:clientWidth={width}>
+<div class="container">
   {#if totalCount > MAX_SENSORS}
     <ErrorNote>
       <span>{$i18n.t("receiverTelemetrySensorsExceededWarning")}</span>
