@@ -226,6 +226,9 @@
       color: var(--color-neutral-900);
       background-color: var(--color-neutral-100);
       border-color: var(--color-neutral-400);
+
+      color: white;
+      background-color: var(--quietHeader);
     }
 
     :global(html[data-theme="dark"]) & {

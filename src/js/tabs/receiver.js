@@ -161,6 +161,12 @@ tab.initialize = function (callback) {
         const revertBtn = $('.revert_btn');
 
         function updateButtons(reboot) {
+            let enableSave = true;
+
+            if (FC.TELEMETRY_CONFIG.telemetry_sensors_list.length > 40) {
+                enableSave = false;
+            }
+
             if (reboot)
                 self.needReboot = true;
             if (self.saveButtons)
@@ -169,9 +175,10 @@ tab.initialize = function (callback) {
                 $('.tab-receiver').removeClass('toolbar_hidden');
                 bindBtn.toggle(self.bindButton);
                 stickBtn.toggle(self.stickButton);
-                saveBtn.toggle(!self.needReboot && self.saveButtons);
-                rebootBtn.toggle(self.needReboot && self.saveButtons);
+                saveBtn.toggle(!self.needReboot && self.saveButtons && enableSave);
+                rebootBtn.toggle(self.needReboot && self.saveButtons && enableSave);
                 revertBtn.toggle(self.saveButtons);
+                $('.disabled_save_reboot_btn').toggle(self.saveButtons && !enableSave);
             }
         }
 
