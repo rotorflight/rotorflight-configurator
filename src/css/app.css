@@ -101,8 +101,10 @@ html[data-theme="dark"] {
 
   --color-switch: var(--color-accent-400);
   --color-switch-secondary: var(--color-neutral-500);
+  --color-switch-disabled: var(--color-neutral-700);
   --color-switch-handle: var(--color-neutral-100);
   --color-switch-handle-secondary: var(--color-neutral-100);
+  --color-switch-handle-disabled: var(--color-neutral-500);
 
   --color-roll: hsl(2, 48%, 45%);
   --color-pitch: hsl(122, 48%, 40%);
