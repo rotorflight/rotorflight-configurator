@@ -30,57 +30,47 @@
         "description": "Roll axis in capital letters"
     },
     "axisPITCH": {
-        "message": "PITCH",
+        "message": "PROFUNDIDAD",
         "english": "PITCH",
-        "status": "New entry. Please translate!",
         "description": "Pitch axis in capital letters"
     },
     "axisYAW": {
-        "message": "YAW",
+        "message": "DIRECCIÓN",
         "english": "YAW",
-        "status": "New entry. Please translate!",
         "description": "Yaw axis in capital letters"
     },
     "axisCOLLECTIVE": {
-        "message": "COLLECTIVE",
+        "message": "COLECTIVO",
         "english": "COLLECTIVE",
-        "status": "New entry. Please translate!",
         "description": "Collective in capital letters"
     },
     "titleRoll": {
-        "message": "Roll",
+        "message": "Alabeo",
         "english": "Roll",
-        "status": "New entry. Please translate!"
     },
     "titlePitch": {
-        "message": "Pitch",
+        "message": "Profundidad",
         "english": "Pitch",
-        "status": "New entry. Please translate!"
     },
     "titleYaw": {
-        "message": "Yaw",
+        "message": "Dirección",
         "english": "Yaw",
-        "status": "New entry. Please translate!"
     },
     "titleCollective": {
-        "message": "Collective",
+        "message": "Colectivo",
         "english": "Collective",
-        "status": "New entry. Please translate!"
     },
     "titleHeading": {
-        "message": "Heading",
+        "message": "Rumbo",
         "english": "Heading",
-        "status": "New entry. Please translate!"
     },
     "titleAltitude": {
-        "message": "Altitude",
+        "message": "Altitud",
         "english": "Altitude",
-        "status": "New entry. Please translate!"
     },
     "titleAttitude": {
-        "message": "Attitude",
+        "message": "Actitud",
         "english": "Attitude",
-        "status": "New entry. Please translate!"
     },
     "error": {
         "message": "Error: {{errorMessage}}",
@@ -140,9 +130,8 @@
         "english": "Auto-Connect"
     },
     "showAllPorts": {
-        "message": "Show All Ports",
+        "message": "Mostrar todos los Puertos",
         "english": "Show All Ports",
-        "status": "New entry. Please translate!"
     },
     "close": {
         "message": "Cerrar",
@@ -155,52 +144,42 @@
     "buttonSave": {
         "message": "Guardar",
         "english": "Save",
-        "status": "Reused translation. Please check!"
     },
     "buttonSaveReboot": {
         "message": "Guardar y Reiniciar",
         "english": "Save and Reboot",
-        "status": "Reused translation. Please check!"
     },
     "buttonRevert": {
-        "message": "Revert",
+        "message": "Revertir",
         "english": "Revert",
-        "status": "New entry. Please translate!"
     },
     "buttonHelp": {
-        "message": "Help",
+        "message": "Ayuda",
         "english": "Help",
-        "status": "New entry. Please translate!"
     },
     "eepromSaved": {
         "message": "EEPROM <span class=\"message-positive\">guardada</span>",
         "english": "EEPROM <span class=\"message-positive\">saved</span>",
-        "status": "Reused translation. Please check!"
     },
     "dialogTabExitTitle": {
-        "message": "<span class=\"message-negative\">WARNING:</span> Unsaved Changes",
+        "message": "<span class=\"message-negative\">WARNING:</span> Cambios no guardados",
         "english": "<span class=\"message-negative\">WARNING:</span> Unsaved Changes",
-        "status": "New entry. Please translate!"
     },
     "dialogTabExitNote": {
-        "message": "There are <b>unsaved changes</b> in the current Tab.",
+        "message": "Hay cambios no guardados <b>unsaved changes</b> en la pestaña actual.",
         "english": "There are <b>unsaved changes</b> in the current Tab.",
-        "status": "New entry. Please translate!"
     },
     "dialogTabExitSave": {
-        "message": "Save Changes",
+        "message": "Guardar cambios",
         "english": "Save Changes",
-        "status": "New entry. Please translate!"
     },
     "dialogTabExitRevert": {
-        "message": "Ignore Changes",
+        "message": "Ignorar Cambios",
         "english": "Ignore Changes",
-        "status": "New entry. Please translate!"
     },
     "dialogTabExitCancel": {
-        "message": "Go Back",
+        "message": "Retroceder",
         "english": "Go Back",
-        "status": "New entry. Please translate!"
     },
     "autoConnectEnabled": {
         "message": "Auto-Conectar: Activado - El configurador intenta conectar automáticamente cuando detecta un nuevo puerto",
@@ -211,22 +190,19 @@
         "english": "Auto-Connect: Disabled - User needs to select the correct serial port and click \"Connect\" button on its own"
     },
     "showAllPortsEnabled": {
-        "message": "Show All Ports: Enabled - Configurator lists all possible ports",
+        "message": "Mostrar todos los puertos: Habilitado - Configurator muestra todos los puertos posibles",
         "english": "Show All Ports: Enabled - Configurator lists all possible ports",
-        "status": "New entry. Please translate!"
     },
     "showAllPortsDisabled": {
-        "message": "Show All Ports: Disabled - Configurator will only list recognized ports",
+        "message": "Mostrar todos los puertos: Deshabilitado - Configurator sólo mostrará los puertos reconocidos",
         "english": "Show All Ports: Disabled - Configurator will only list recognized ports",
-        "status": "New entry. Please translate!"
     },
     "zoomBoxText": {
-        "message": "Zoom:",
+        "message": "Ampliar:",
         "english": "Zoom:",
-        "status": "New entry. Please translate!"
     },
     "expertMode": {
-        "message": "Modo Experto",
+        "message": "Activar Gestor de Arranque / DFU",
         "english": "Enable Expert Mode"
     },
     "permanentExpertMode": {
@@ -238,9 +214,8 @@
         "english": "Reopen last tab on connect"
     },
     "rememberLastSelectedBoard": {
-        "message": "Remember last selected board in firmware flasher",
+        "message": "Recordar la última placa usada en firmware flasher",
         "english": "Remember last selected board in firmware flasher",
-        "status": "New entry. Please translate!"
     },
     "analyticsOptOut": {
         "message": "No participar en la recogida anónima de datos estadísticos",
@@ -252,7 +227,7 @@
         "description": "Change timeout on auto-connect and reboot so the bus has more time to initialize after being detected by the system"
     },
     "cordovaForceComputerUI": {
-        "message": "Usar interfaz para ordenador en lugar de la de teléfono",
+        "message": "Usar interfaz del ordenador en lugar de la del teléfono",
         "english": "Use computers interface instead of phones interface"
     },
     "sensorDataFlashNotFound": {
@@ -266,7 +241,7 @@
         "description": "Text of the dataflash image in the header of the page."
     },
     "sensorStatusGyro": {
-        "message": "Giroscopio",
+        "message": "Giroscopo",
         "english": "Gyroscope"
     },
     "sensorStatusGyroShort": {
@@ -324,27 +299,16 @@
         "english": "Show update notifications for unstable versions of the configurator"
     },
     "configuratorDevelopmentNotice": {
-        "message": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version.",
+        "message": "Está usando una <b>versión de desarrollo</b> del <b>Rotorflight Configurator</b>.<br> Considere usar una configuración estable, a menos que tenga una buena razón para usar una versión en desarrollo.",
         "english": "You are using a <b>development version</b> of the <b>Rotorflight Configurator</b>.<br> Please consider using a released version, unless you have a good reason for using an unreleased development version.",
-        "status": "New entry. Please translate!"
     },
     "configuratorUpdateNotice": {
-        "message": "Estás utilizando una versión desactualizada de <b>Rotorflight Configurator</b>.<br>$t(configuratorUpdateHelp.message)",
+        "message": "Está utilizando una versión desactualizada de <b>Rotorflight Configurator</b>.<br>$t(configuratorUpdateHelp.message)",
         "english": "You are using an outdated version of the <b>Rotorflight Configurator</b>.<br>$t(configuratorUpdateHelp.message)",
-        "status": "Auto-converted translation. Please check!",
-        "previous": {
-            "message": "Estás utilizando una versión desactualizada de <b>Betaflight Configurator</b>.<br>$t(configuratorUpdateHelp.message)",
-            "english": "You are using an outdated version of the <b>Betaflight Configurator</b>.<br>$t(configuratorUpdateHelp.message)"
-        }
     },
     "configuratorUpdateHelp": {
-        "message": "Utilizar una versión más reciente del firmware con una versión desactualizada del Configurator implica que al cambiar algunos ajustes puede dar como resultado una <strong>configuración corrupta del firmware y una aeronave no funcional</strong>. Además, algunas características del firmware sólo serán configurables a través del CLI.<br><strong>Rotorflight Configurator versión <b>$1</b> está disponible para descargar en línea</strong>, por favor visita <a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">esta página</a> para descargar e instalar la última versión con correcciones y mejoras.<br>Por favor, cierra la ventana del configurador antes de actualizar.",
+        "message": "Utilizar una versión más reciente del firmware con una versión desactualizada del Configurator implica que cambiar algunos ajustes puede resultar en una <strong>configuración corrupta del firmware y una aeronave no funcional</strong>. Además, algunas características del firmware sólo serán configurables a través del CLI.<br><strong>Rotorflight Configurator versión <b>$1</b> está disponible para descargar en línea</strong>, por favor visita <a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">esta página</a> para descargar e instalar la última versión con correcciones y mejoras.<br>Por favor, cierra la ventana del configurador antes de actualizar.",
         "english": "Using a newer version of the firmware with an outdated version of Configurator means that changing some settings will result in a <strong>corrupted firmware configuration and a non-working craft</strong>. Furthermore, some features of the firmware will only be configurable in CLI.<br><strong>Rotorflight Configurator version <b>$1</b> is available for download online</strong>, please visit <a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">this page</a> to download and install the latest version with fixes and improvements.<br>Please close the configurator window before updating.",
-        "status": "Auto-converted translation. Please check!",
-        "previous": {
-            "message": "Utilizar una versión más reciente del firmware con una versión desactualizada del Configurator implica que al cambiar algunos ajustes puede dar como resultado una <strong>configuración corrupta del firmware y una aeronave no funcional</strong>. Además, algunas características del firmware sólo serán configurables a través del CLI.<br><strong>Betaflight Configurator versión <b>$1</b> está disponible para descargar en línea</strong>, por favor visita <a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">esta página</a> para descargar e instalar la última versión con correcciones y mejoras.<br>Por favor, cierra la ventana del configurador antes de actualizar.",
-            "english": "Using a newer version of the firmware with an outdated version of Configurator means that changing some settings will result in a <strong>corrupted firmware configuration and a non-working craft</strong>. Furthermore, some features of the firmware will only be configurable in CLI.<br><strong>Betaflight Configurator version <b>$1</b> is available for download online</strong>, please visit <a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">this page</a> to download and install the latest version with fixes and improvements.<br>Please close the configurator window before updating."
-        }
     },
     "configuratorUpdateWebsite": {
         "message": "Ir a la Web de Versiones",
@@ -355,11 +319,11 @@
         "english": "Device - <span class=\"message-negative\">Rebooting</span>"
     },
     "deviceRebooting_flashBootloader": {
-        "message": "Dispositivo - <span class=\"message-negative\">Reiniciando a GESTOR DE ARRANQUE EN FLASH</span>",
+        "message": "Dispositivo - <span class=\"message-negative\">Reiniciando a BOOTLOADER EN FLASH</span>",
         "english": "Device - <span class=\"message-negative\">Rebooting to FLASH BOOTLOADER</span>"
     },
     "deviceRebooting_romBootloader": {
-        "message": "Dispositivo - <span class=\"message-negative\">Reiniciando a GESTOR DE ARRANQUE EN ROM</span>",
+        "message": "Dispositivo - <span class=\"message-negative\">Reiniciando a BOOTLOADER EN ROM</span>",
         "english": "Device - <span class=\"message-negative\">Rebooting to ROM BOOTLOADER</span>"
     },
     "backupFileIncompatible": {
@@ -379,7 +343,7 @@
         "english": "Migrated configuration to configurator: $1"
     },
     "configMigrationSuccessful": {
-        "message": "Migración de configuración completada, migraciones aplicadas: $1",
+        "message": "Migración de configuración completa, migraciones aplicadas: $1",
         "english": "Configuration migration complete, migrations applied: $1"
     },
     "tabFirmwareFlasher": {
@@ -409,7 +373,6 @@
     "tabStatus": {
         "message": "Estado",
         "english": "Status",
-        "status": "Reused translation. Please check!"
     },
     "tabSetup": {
         "message": "Ajuste",
@@ -424,33 +387,24 @@
         "english": "Configuration"
     },
     "tabPorts": {
-        "message": "Serial Ports",
+        "message": "Puertos Serie",
         "english": "Serial Ports",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Puertos",
-            "english": "Ports"
-        }
     },
     "tabBeepers": {
-        "message": "Beepers",
+        "message": "Pitidos",
         "english": "Beepers",
-        "status": "New entry. Please translate!"
     },
     "tabProfiles": {
-        "message": "Profiles",
+        "message": "Perfiles",
         "english": "Profiles",
-        "status": "New entry. Please translate!"
     },
     "tabRates": {
-        "message": "Rates",
+        "message": "Recorridos",
         "english": "Rates",
-        "status": "New entry. Please translate!"
     },
     "tabGyro": {
         "message": "Giro",
         "english": "Gyro",
-        "status": "Reused translation. Please check!"
     },
     "tabReceiver": {
         "message": "Receptor",
@@ -469,22 +423,12 @@
         "english": "OSD"
     },
     "tabVtx": {
-        "message": "Video Tx",
+        "message": "Tx vídeo",
         "english": "Video Tx",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Transmisor de Video",
-            "english": "Video Transmitter"
-        }
     },
     "tabPower": {
-        "message": "Power",
+        "message": "Energía",
         "english": "Power",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Energía y Batería",
-            "english": "Power & Battery"
-        }
     },
     "tabGPS": {
         "message": "GPS",
@@ -493,12 +437,10 @@
     "tabMotors": {
         "message": "Motores",
         "english": "Motors",
-        "status": "Reused translation. Please check!"
     },
     "tabMixer": {
-        "message": "Mezclador",
+        "message": "Mezclas",
         "english": "Mixer",
-        "status": "Reused translation. Please check!"
     },
     "tabLedStrip": {
         "message": "Tiras LED",
@@ -513,18 +455,12 @@
         "english": "CLI"
     },
     "tabLogging": {
-        "message": "Logging",
+        "message": "Registrando",
         "english": "Logging",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Registro Conectado",
-            "english": "Tethered Logging"
-        }
     },
     "tabBlackbox": {
         "message": "Caja Negra",
         "english": "Blackbox",
-        "status": "Reused translation. Please check!"
     },
     "tabAdjustments": {
         "message": "Correcciones",
@@ -579,7 +515,7 @@
         "english": "USB device <span class=\"message-positive\">successfully</span> opened with ID: $1"
     },
     "usbDeviceOpenFail": {
-        "message": "¡<span class=\"message-negative\">Error</span> al abrir el dispositivo USB!",
+        "message": "<span class=\"message-negative\">¡Error</span> al abrir el dispositivo USB!",
         "english": "<span class=\"message-negative\">Failed</span> to open USB device!"
     },
     "usbDeviceClosed": {
@@ -599,11 +535,11 @@
         "english": "USB DFU not found"
     },
     "stm32RebootingToBootloader": {
-        "message": "Iniciando reinicio a gestor de arranque...",
+        "message": "Iniciando arranque con bootloader...",
         "english": "Initiating reboot to bootloader ..."
     },
     "stm32RebootingToBootloaderFailed": {
-        "message": "Reiniciando dispositivo a gestor de arranque: FALLIDO",
+        "message": "Reiniciando dispositivo a Bootloader: FALLIDO",
         "english": "Rebooting device to bootloader: FAILED"
     },
     "stm32TimedOut": {
@@ -611,19 +547,19 @@
         "english": "STM32 - timed out, programming: FAILED"
     },
     "stm32WrongResponse": {
-        "message": "Comunicación con STM32 fallida, mala respuesta, esperado: $1 (0x$2) recibido: $3 (0x$4)",
+        "message": "Comunicación con STM32 ha fallado, mala respuesta, esperado: $1 (0x$2) recibido: $3 (0x$4)",
         "english": "STM32 Communication failed, wrong response, expected: $1 (0x$2) received: $3 (0x$4)"
     },
     "stm32ContactingBootloader": {
-        "message": "Contactando con el gestor de arranque ...",
+        "message": "Contactando con el bootloader ...",
         "english": "Contacting bootloader ..."
     },
     "stm32ContactingBootloaderFailed": {
-        "message": "Error en la comunicación con el gestor de arranque",
+        "message": "Error en la comunicación con el bootloader",
         "english": "Communication with bootloader failed"
     },
     "stm32ResponseBootloaderFailed": {
-        "message": "Sin respuesta del gestor de arranque, programación: FALLIDA",
+        "message": "Sin respuesta del bootloader, programación: FALLIDA",
         "english": "No response from the bootloader, programming: FAILED"
     },
     "stm32GlobalEraseExtended": {
@@ -667,7 +603,7 @@
         "english": "Programming: FAILED"
     },
     "stm32AddressLoadFailed": {
-        "message": "Error al cargar dirección de sector con bytes de opciones. Probablemente protegido contra lectura.",
+        "message": "Error al cargar dirección de sector con bytes de opciones. Probablemente debido a proteción contra lectura.",
         "english": "Address load for option bytes sector failed. Very likely due to read protection."
     },
     "stm32AddressLoadUnknown": {
@@ -703,70 +639,48 @@
         "english": "No configuration received within <span class=\"message-negative\">10 seconds</span>, communication <span class=\"message-negative\">failed</span>"
     },
     "firmwareVersionNotSupported": {
-        "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documentation.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
+        "message": "Esta versión de firmware no está <span class=\"message-negative\">soportada</span>. Use una versión de firmware que esté soportada por esta versión del Configurator. Use CLI para haver una copi de seguridad antes de programar. El procedimiento de hacer copia de seguridad/restaurar a través de CLI está en la documentación.<br />Como alternativa, descargue y use una versión anterior del configurator, si no está listo para actualizar.",
         "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documentation.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Esta versión de firmware <span class=\"message-negative\">no está soportada</span>. Por favor actualiza a un firmware con soporte para el api versión <strong>$1</strong> o superior. Usa CLI para realizar un copia de seguridad antes de la instalación. El proceso de copia/restauración usando CLI está en la documentación.<br />Como alternativa puedes descargar y usar una versión anterior del configurador si no estás listo para actualizar.",
-            "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please upgrade to firmware that supports api version <strong>$1</strong> or higher. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
-        }
     },
     "firmwareTypeNotSupported": {
-        "message": "No-Rotorflight firmware <span class=\"message-negative\"> no soportado</span>, excepto modo CLI.",
+        "message": "Este firmware que no es de No-Rotorflight firmware <span class=\"message-negative\"> no está soportado</span>, excepto en modo CLI.",
         "english": "Non - Rotorflight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode.",
-        "status": "Auto-converted translation. Please check!",
-        "previous": {
-            "message": "No-Betaflight firmware <span class=\"message-negative\"> no soportado</span>, excepto modo CLI.",
-            "english": "Non - Betaflight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode."
-        }
     },
     "resetToCustomDefaultsDialog": {
-        "message": "There are custom defaults for this board available.<br />Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?",
+        "message": "Existen valores por defecto personalizados para esta placa.<br />Normalmente, una placa no funcionará correctamente a menos que se activen los valores por defecto personalizados.<br />¿Quiere aplicarlos para esta placa?",
         "english": "There are custom defaults for this board available.<br />Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Hay valores por defecto personalizados disponibles para esta placa. Normalmente, una placa no funcionará correctamente a menos que se apliquen valores por defecto personalizados.<br />¿Quieres aplicar los valores por defecto personalizados para esta placa?",
-            "english": "There are custom defaults for this board available. Normally, a board will not work properly unless custom defaults are applied.<br />Do you want to apply the custom defaults for this board?"
-        }
     },
     "resetToCustomDefaultsAccept": {
         "message": "Aplicar Valores Personalizados",
         "english": "Apply Custom Defaults"
     },
     "reportProblemsDialogHeader": {
-        "message": "Se detectaron los siguientes <strong>problemas con tu configuración</strong>:",
+        "message": "Se detectaron los siguientes <strong>problemas con su configuración</strong>:",
         "english": "The following <strong>problems with your configuration</strong> were detected:"
     },
     "reportProblemsDialogFooter": {
-        "message": "Por favor, <strong>soluciona estos problemas antes de intentar volar tu aeronave</strong>.",
+        "message": "Por favor, <strong>solucione estos problemas antes de intentar volar su aeronave</strong>.",
         "english": "Please <strong>fix these problems before attempting to fly your craft</strong>."
     },
     "reportProblemsDialogAPI_VERSION_MAX_SUPPORTED": {
-        "message": "<strong>la versión del configurador que estás utilizando ($3) es más antigua que el firmware que estás usando ($4)</strong>.<br>$t(configuratorUpdateHelp.message)",
+        "message": "<strong>La versión del configurador que estás utilizando ($3) es más antigua que el firmware que estás usando ($4)</strong>.<br>$t(configuratorUpdateHelp.message)",
         "english": "<strong>the version of configurator that you are using ($3) is older than the firmware you are using ($4)</strong>.<br>$t(configuratorUpdateHelp.message)"
     },
     "reportProblemsDialogUNIFIED_FIRMWARE_WITHOUT_DEFAULTS": {
-        "message": "<strong>Unified firmware type is flashed without custom defaults.</strong><br>Please configure the board manually via the CLI.",
+        "message": "<strong>Este tipo de firmware unificado está programado sin los valores personalizados por defecto.</strong><br>Por favor, configure la placa manualmente a través del CLI.",
         "english": "<strong>Unified firmware type is flashed without custom defaults.</strong><br>Please configure the board manually via the CLI.",
-        "status": "New entry. Please translate!"
     },
     "reportProblemsDialogMOTOR_PROTOCOL_DISABLED": {
-        "message": "<strong>there is no motor output protocol selected</strong>.<br>Please select a motor output protocol appropriate for your ESCs in '$t(configurationEscFeatures.message)' on the '$t(tabMotors.message)' tab.<br>$t(escProtocolDisabledMessage.message)",
+        "message": "<strong>No hay ningún protocolo de salida seleccionado para el motor</strong>.<br>Por favor, seleccione el protocolo de salida del motor apropiado para sus ESCs en '$t(configurationEscFeatures.message)' dsde '$t(tabMotors.message)' tab.<br>$t(escProtocolDisabledMessage.message)",
         "english": "<strong>there is no motor output protocol selected</strong>.<br>Please select a motor output protocol appropriate for your ESCs in '$t(configurationEscFeatures.message)' on the '$t(tabMotors.message)' tab.<br>$t(escProtocolDisabledMessage.message)",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<strong>no hay ningún protocolo de salida de motor seleccionado</strong>.<br>Por favor, selecciona un protocolo de salida de motor apropiado para tus ESCs en '$t(configurationEscFeatures.message)' en la pestaña '$t(tabMotorTesting.message)'.<br> $t(escProtocolDisabledMessage.message)",
-            "english": "<strong>there is no motor output protocol selected</strong>.<br>Please select a motor output protocol appropriate for your ESCs in '$t(configurationEscFeatures.message)' on the '$t(tabMotorTesting.message)' tab.<br>$t(escProtocolDisabledMessage.message)"
-        }
     },
     "reportProblemsDialogACC_NEEDS_CALIBRATION": {
-        "message": "<strong>el acelerómetro está habilitado pero no está calibrado</strong>.<br>Si tienes intención de utilizar el acelerómetro, sigue las instrucciones para '$t(initialSetupButtonCalibrateAccel.message)' en la pestaña '$t(tabSetup.message)'. Si hay alguna función que requiera que el acelerómetro (modos de nivelado automático, GPS rescate, . .) esté activado, el armado de la aeronave se desactivará hasta que el acelerómetro haya sido calibrado.<br>Si no vas a utilizar el acelerómetro, se recomienda deshabilitarlo en '$t(configurationSystem.message)' en la pestaña '$t(tabConfiguration.message)'.",
+        "message": "<strong>el acelerómetro está habilitado pero no está calibrado</strong>.<br>Si tiene intención de utilizar el acelerómetro, siga las instrucciones para hacerlo '$t(initialSetupButtonCalibrateAccel.message)' en la pestaña '$t(tabSetup.message)'. Si hay alguna función que requiera que el acelerómetro (modos de nivelado automático, GPS rescate, . .) esté activo, el armado de la aeronave se desactivará hasta que el acelerómetro haya sido calibrado.<br>Si no vas a utilizar el acelerómetro, se recomienda deshabilitarlo en '$t(configurationSystem.message)' en la pestaña '$t(tabConfiguration.message)'.",
         "english": "<strong>the accelerometer is enabled but it is not calibrated</strong>.<br>If you plan to use the accelerometer, please follow the instructions for '$t(initialSetupButtonCalibrateAccel.message)' on the '$t(tabSetup.message)' tab. If any function that requires the accelerometer (auto level modes, GPS rescue, ...) is enabled, arming of the craft will be disabled until the accelerometer has been calibrated.<br>If you are not planning on using the accelerometer it is recommended that you disable it in '$t(configurationSystem.message)' on the '$t(tabConfiguration.message)' tab."
     },
     "infoVersions": {
-        "message": "Running - OS: <strong>{{operatingSystem}}</strong>, Configurator: <strong>{{configuratorVersion}}</strong>",
+        "message": "OS - ACTUAL: <strong>{{operatingSystem}}</strong>, Configurator: <strong>{{configuratorVersion}}</strong>",
         "english": "Running - OS: <strong>{{operatingSystem}}</strong>, Configurator: <strong>{{configuratorVersion}}</strong>",
-        "status": "New entry. Please translate!",
         "description": "Message that appears in the GUI log panel indicating operating system and Configurator version"
     },
     "releaseCheckLoaded": {
@@ -778,7 +692,7 @@
         "english": "<b>GitHub query for $1 releases failed, using cached information. Reason: <code>$2</code></b>"
     },
     "releaseCheckCached": {
-        "message": "Usando información cacheada de versiones del $1.",
+        "message": "Usando información almacenada de versiones del $1.",
         "english": "Using cached release information for $1 releases."
     },
     "releaseCheckNoInfo": {
@@ -798,13 +712,8 @@
         "english": "Firmware Version: <strong>$1</strong>"
     },
     "apiVersionReceived": {
-        "message": "MSP API version: <strong>$1</strong>",
+        "message": "Versión del MSP API: <strong>$1</strong>",
         "english": "MSP API version: <strong>$1</strong>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "MultiWii API versión: <strong>$1</strong>",
-            "english": "MultiWii API version: <strong>$1</strong>"
-        }
     },
     "uniqueDeviceIdReceived": {
         "message": "ID único de dispositivo: <strong>0x$1</strong>",
@@ -815,9 +724,8 @@
         "english": "Craft name: <strong>$1</strong>"
     },
     "realTimeClockSet": {
-        "message": "Real-Time Clock set",
+        "message": "Ajuste del reloj en tiempo real RTC",
         "english": "Real-Time Clock set",
-        "status": "New entry. Please translate!"
     },
     "armingDisabled": {
         "message": "<strong>Armado Desactivado</strong>",
@@ -832,21 +740,15 @@
         "english": "Board: <strong>$1</strong>, version: <strong>$2</strong>"
     },
     "buildInfoReceived": {
-        "message": "Revision: <strong>$1</strong> released on: <strong>$2</strong>",
+        "message": "Revisión: <strong>$1</strong> lanzada el: <strong>$2</strong>",
         "english": "Revision: <strong>$1</strong> released on: <strong>$2</strong>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Ejecutando firmware publicado el: <strong>$1</strong>",
-            "english": "Running firmware released on: <strong>$1</strong>"
-        }
     },
     "firmwareInfoReceived": {
-        "message": "Firmware: <strong>$1</strong> version: <strong>$2</strong>",
+        "message": "Firmware: <strong>$1</strong> versión: <strong>$2</strong>",
         "english": "Firmware: <strong>$1</strong> version: <strong>$2</strong>",
-        "status": "New entry. Please translate!"
     },
     "versionLabelTarget": {
-        "message": "Placa",
+        "message": "Destino",
         "english": "Target"
     },
     "versionLabelFirmware": {
@@ -878,27 +780,23 @@
         "description": "Packet error text shown in the status bar"
     },
     "statusbar_pid_cycle_time": {
-        "message": "PID Cycle Time:",
+        "message": "Tiempo del ciclo PID:",
         "english": "PID Cycle Time:",
-        "status": "New entry. Please translate!",
         "description": "PID cycle time text shown in the status bar"
     },
     "statusbar_gyro_cycle_time": {
-        "message": "Gyro Cycle Time:",
+        "message": "Tiemppo de ciclado del Giro:",
         "english": "Gyro Cycle Time:",
-        "status": "New entry. Please translate!",
         "description": "Gyro cycle time text shown in the status bar"
     },
     "statusbar_sys_load": {
-        "message": "System Load:",
+        "message": "Carga del Sistema:",
         "english": "System Load:",
-        "status": "New entry. Please translate!",
         "description": "System load text shown in the status bar"
     },
     "statusbar_rt_load": {
-        "message": "Realtime Load:",
+        "message": "Carga en tiempo real:",
         "english": "Realtime Load:",
-        "status": "New entry. Please translate!",
         "description": "Realtime CPU load text shown in the status bar"
     },
     "statusbar_cpu_load": {
@@ -907,7 +805,7 @@
         "description": "CPU load text shown in the status bar"
     },
     "dfu_erased_kilobytes": {
-        "message": "Borrados $1 kB de flash <span class=\"message-positive\">correctamente</span>",
+        "message": "Borrados $1 kB de flash <span class=\"message-positive\">correcto</span>",
         "english": "Erased $1 kB of flash <span class=\"message-positive\">successfully</span>"
     },
     "dfu_device_flash_info": {
@@ -915,7 +813,7 @@
         "english": "Detected device with total flash size $1 KiB"
     },
     "dfu_error_image_size": {
-        "message": "<span class=\"message-negative\">Error</span>: ¡La imagen proporcionada es mayor que la flash disponible en el chip! Imagen: $1 KiB, límite = $2 KiB",
+        "message": "<span class=\"message-negative\">Error</span>: ¡La imagen proporcionada es mayor que la memoria disponible en el chip! Imagen: $1 KiB, límite = $2 KiB",
         "english": "<span class=\"message-negative\">Error</span>: Supplied image is larger then flash available on the chip! Image: $1 KiB, limit = $2 KiB"
     },
     "eeprom_saved_ok": {
@@ -923,76 +821,55 @@
         "english": "EEPROM <span class=\"message-positive\">saved</span>"
     },
     "defaultWelcomeIntro": {
-        "message": "Bienvenido a <strong>Rotorflight - Configurator</strong>, una utilidad diseñada para simplificar el actualizar, configurar y ajustar tu controlador de vuelo.",
+        "message": "Bienvenido a <strong>Rotorflight - Configurator</strong>, una utilidad diseñada para simplificar la actualización, configuración y ajustes de su controlador de vuelo.",
         "english": "Welcome to <strong>Rotorflight - Configurator</strong>, a utility designed to simplify updating, configuring and tuning of your flight controller.",
-        "status": "Auto-converted translation. Please check!",
-        "previous": {
-            "message": "Bienvenido a <strong>Betaflight - Configurator</strong>, una utilidad diseñada para simplificar el actualizar, configurar y ajustar tu controlador de vuelo.",
-            "english": "Welcome to <strong>Betaflight - Configurator</strong>, a utility designed to simplify updating, configuring and tuning of your flight controller."
-        }
     },
     "defaultDownloadsHead": {
-        "message": "Downloads",
+        "message": "Descargas",
         "english": "Downloads",
-        "status": "New entry. Please translate!"
     },
     "defaultDownloadsText": {
-        "message": "The latest Rotorflight software downloads are available here:<br /><ul><li><a href=\"https://github.com/rotorflight/rotorflight-configurator/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Configurator</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Blackbox Log Viewer</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for EdgeTx & OpenTx</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for FrSky Ethos</a></li></ul>Rotorflight is <b>Open Source</b> software. The source code is available in <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>.",
+        "message": "Las descargas más recientes del software de Rotorflight están disponibles aquí:<br /><ul><li><a href=\"https://github.com/rotorflight/rotorflight-configurator/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Configurator</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Visor de Caja Negra para Rotorflight</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts para EdgeTx & OpenTx</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts para FrSky Ethos</a></li></ul>Rotorflight es <b>un software </b> de fuentes abiertas. El código fuente está disponible en <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>.",
         "english": "The latest Rotorflight software downloads are available here:<br /><ul><li><a href=\"https://github.com/rotorflight/rotorflight-configurator/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Configurator</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-blackbox/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Blackbox Log Viewer</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for EdgeTx & OpenTx</a></li><li><a href=\"https://github.com/rotorflight/rotorflight-lua-ethos/releases\" target=\"_blank\" rel=\"noopener noreferrer\">LUA Scripts for FrSky Ethos</a></li></ul>Rotorflight is <b>Open Source</b> software. The source code is available in <a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>.",
-        "status": "New entry. Please translate!"
     },
     "defaultCommunityHead": {
-        "message": "Community",
+        "message": "Comunidad",
         "english": "Community",
-        "status": "New entry. Please translate!"
     },
     "defaultCommunityText": {
-        "message": "Rotorflight has an active online community of normal users, pro-pilots, and developers.",
+        "message": "Rotorflight dispone de una comunidad activa online para usuarios normales, pilotos profesionales, y desarrolladores.",
         "english": "Rotorflight has an active online community of normal users, pro-pilots, and developers.",
-        "status": "New entry. Please translate!"
-    },
     "defaultWebsiteText": {
-        "message": "<a href=\"https://www.rotorflight.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight website</a> is the first stop for instructions, manuals, and information.",
+        "message": "<a href=\"https://www.rotorflight.org/\" target=\"_blank\" rel=\"noopener noreferrer\">La página web de Rotorflight</a> es el primer lugar a ir para instrucciones, manuales, e información.",
         "english": "<a href=\"https://www.rotorflight.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight website</a> is the first stop for instructions, manuals, and information.",
-        "status": "New entry. Please translate!"
     },
     "defaultDiscordText": {
-        "message": "<a href=\"https://discord.gg/FyfMF4RwSA/\" target=\"_blank\" rel=\"noopener noreferrer\">Discord</a> is the official place for online support and discussions.",
+        "message": "<a href=\"https://discord.gg/FyfMF4RwSA/\" target=\"_blank\" rel=\"noopener noreferrer\">Discord</a> es el sitio oficial para soporte online support y discusiones.",
         "english": "<a href=\"https://discord.gg/FyfMF4RwSA/\" target=\"_blank\" rel=\"noopener noreferrer\">Discord</a> is the official place for online support and discussions.",
-        "status": "New entry. Please translate!"
     },
     "defaultFacebookText": {
-        "message": "<a href=\"https://www.facebook.com/groups/rotorflight\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a> is a good place for hanging out with other RF pilots.",
+        "message": "<a href=\"https://www.facebook.com/groups/rotorflight\" target=\"_blank\" rel=\"noopener noreferrer\">El grupo de Facebook</a> es un buen sitio para compartir experiencias con otros pilotos que usan RF.",
         "english": "<a href=\"https://www.facebook.com/groups/rotorflight\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a> is a good place for hanging out with other RF pilots.",
-        "status": "New entry. Please translate!"
     },
     "defaultContributingHead": {
         "message": "Contribuir",
         "english": "Contributing"
     },
     "defaultContributingText": {
-        "message": "Rotorflight is a open-source community project. Anybody can join in and help to make it better, including:<br /><ul><li>helping other users on Rotorflight Discord or other online forums</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">reporting</a> bugs and issues, and suggesting improvements</li><li>testing new software versions, new features and fixes; and providing feedback</li><li>participating in discussions on new features</li><li>create or update content on <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">our Website</a></li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the software development - fixing bugs, implementing new features and improvements</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain an existing translation</li></ul>",
+        "message": "Rotorflight es un proyecto comunitario de fuentes abiertas. Cualquiera puede participar y ayudar a hacerlo mejor, incluyendo:<br /><ul><li>ayuda a otros usuarios sobre Rotorflight, Discord, u otros foros online</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">reportar</a> errores y problemas, y sugerir mejoras</li><li>probar nuevas versiones de software, nuevas características y arreglos; y proporcionar feedback</li><li>participar en discusiones sobre nuevas características</li><li>crear o actualizar contenidos en <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">nuestro Website</a></li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">contribuyendo</a> al desarrollo de software - arreglo de problemas, implementar nuevas características y mejoras</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">traduciendo</a> Rotorflight Configurator a nuevos idiomas, o ayudando a manteneruna traducción existente</li></ul>",
         "english": "Rotorflight is a open-source community project. Anybody can join in and help to make it better, including:<br /><ul><li>helping other users on Rotorflight Discord or other online forums</li><li><a href=\"https://github.com/rotorflight?tab=repositories\" target=\"_blank\" rel=\"noopener noreferrer\">reporting</a> bugs and issues, and suggesting improvements</li><li>testing new software versions, new features and fixes; and providing feedback</li><li>participating in discussions on new features</li><li>create or update content on <a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">our Website</a></li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro\" target=\"_blank\" rel=\"noopener noreferrer\">contributing</a> to the software development - fixing bugs, implementing new features and improvements</li><li><a href=\"https://www.rotorflight.org/docs/Contributing/intro#translations\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Rotorflight Configurator into a new language, or helping to maintain an existing translation</li></ul>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Si quieres ayudar a hacer Betaflight incluso mejor puedes hacerlo de diferentes maneras, incluyendo:<br /><ul><li>usando tu conocimiento de Betaflight para crear o actualizar contenido en <a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">nuestra wiki</a>, o respondiendo preguntas de otros usuarios en foros online;</li><li><a href=\"https://github.com/betaflight/betaflight/blob/master/docs/development/Development.md\" target=\"_blank\" rel=\"noopener noreferrer\">contribuyendo con código</a> al firmware y al configurador - nuevas funcionalidades, correcciones, mejoras;</li><li>probando <a href=\"https://github.com/Betaflight/betaflight/pulls\" target=\"_blank\" rel=\"noopener noreferrer\">nuevas funcionalidades y correcciones</a> y comentando resultados;</li><li>ayudando a otros usuario con los problemas que reportan en <a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">nuestro registro de incidencias</a>, y participando en las discusiones sobre peticiones de nuevas funcionalidades;</li><li><a href=\"https://github.com/betaflight/betaflight/tree/master/README.md#Translators\" target=\"_blank\" rel=\"noopener noreferrer\">traduciendo</a> Betaflight Configurator a un nuevo idioma, o ayudando a mantener las traducciones existentes.</li></ul>",
-            "english": "If you would like to help make Betaflight even better you can help in many ways, including:<br /><ul><li>using your knowledge of Betaflight to create or update content on <a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">our Wiki</a>, or answering other users' questions in online forums;</li><li><a href=\"https://github.com/betaflight/betaflight/blob/master/docs/development/Development.md\" target=\"_blank\" rel=\"noopener noreferrer\">contributing code</a> to the firmware and Configurator - new features, fixes, improvements;</li><li>testing <a href=\"https://github.com/Betaflight/betaflight/pulls\" target=\"_blank\" rel=\"noopener noreferrer\">new features and fixes</a> and providing feedback;</li><li>helping other users solve the problems they report in <a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">our issue tracker</a>, and participating in discussions on feature requests;</li><li><a href=\"https://github.com/betaflight/betaflight/tree/master/README.md#Translators\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Betaflight Configurator into a new language, or helping to maintain the existing translations.</li></ul>"
-        }
     },
     "defaultDonateHead": {
-        "message": "Supporting Rotorflight",
+        "message": "Apoyando a Rotorflight",
         "english": "Supporting Rotorflight",
-        "status": "New entry. Please translate!"
     },
     "defaultDonateText": {
-        "message": "<p>Rotorflight is <i>open source software</i> and is available <i>free of charge</i>, without warranty.</p><p>If you find Rotorflight useful, please consider <b>supporting</b> the development by donating to the Rotorflight Project.</p>",
+        "message": "<p>Rotorflight es <i>un software de fuentes abiertas</i> y está disponible <i>libre de cargos</i>, sin garantías.</p><p>Si encuentra que Rotorflight es útil, considere <b>apoyar</b> el desarrollo haciendo una donación al Proyecto Rotorflight.</p>",
         "english": "<p>Rotorflight is <i>open source software</i> and is available <i>free of charge</i>, without warranty.</p><p>If you find Rotorflight useful, please consider <b>supporting</b> the development by donating to the Rotorflight Project.</p>",
-        "status": "New entry. Please translate!"
     },
     "defaultDonateTooltip": {
-        "message": "Donate to the Rotorflight Project",
+        "message": "Done al Proyecto Rotorflight",
         "english": "Donate to the Rotorflight Project",
-        "status": "New entry. Please translate!"
     },
     "defaultChangelogHead": {
         "message": "Configurator - Novedades",
@@ -1003,36 +880,20 @@
         "english": "Documentation / Manual"
     },
     "defaultDocumentation": {
-        "message": "Rotorflight documentation is available in release notes and website.<br /><br />",
+        "message": "La documentación de Rotorflight está disponible en las notas de las versiones y en el sitio web.<br /><br />",
         "english": "Rotorflight documentation is available in release notes and website.<br /><br />",
-        "status": "Auto-converted translation. Please check!",
-        "previous": {
-            "message": "La documentación de Betaflight está disponible en las notas de la versión y en la wiki.<br /><br />",
-            "english": "Betaflight documentation is available in release notes and wiki.<br /><br />"
-        }
     },
     "defaultDocumentation1": {
-        "message": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
+        "message": "El tutorial de Rotorflight de nuestro sitio web es un excelente recurso  de información, al que se puede acceder <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">aquí</a>.",
         "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
-        "status": "Auto-converted translation. Please check!",
-        "previous": {
-            "message": "La wiki de Betaflight es un gran recurso de información, puedes encontrarla <a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">aquí</a>.",
-            "english": "The Betaflight wiki is a great resource for information, it can be found <a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
-        }
     },
     "defaultDocumentation2": {
-        "message": "The latest news can be read at the Website Announcements page, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
+        "message": "Las noticias más recientes se pueden leer en la página de anuncios de nuestro sitio web, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">aquí</a>.",
         "english": "The latest news can be read at the Website Announcements page, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Las notas de la versión del firmware pueden leerse en la página de versiones de GitHub, <a href=\"https://github.com/Betaflight/Betaflight/releases\" target=\"_blank\" rel=\"noopener noreferrer\">aquí</a>.",
-            "english": "The release notes for the firmware can be read at GitHub releases page, <a href=\"https://github.com/Betaflight/Betaflight/releases\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
-        }
     },
     "defaultDocumentation3": {
-        "message": "The release notes for the firmware can be read at GitHub releases page, <a href=\"https://github.com/rotorflight/rotorflight-firmware/releases\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
+        "message": "Las notas de las versiones de firmware se pueden leer en la página de GitHub de las versiones, <a href=\"https://github.com/rotorflight/rotorflight-firmware/releases\" target=\"_blank\" rel=\"noopener noreferrer\">aquí</a>.",
         "english": "The release notes for the firmware can be read at GitHub releases page, <a href=\"https://github.com/rotorflight/rotorflight-firmware/releases\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
-        "status": "New entry. Please translate!"
     },
     "defaultSupportHead": {
         "message": "Soporte",
@@ -1043,374 +904,266 @@
         "english": "Support Sources"
     },
     "defaultSupportSubline2": {
-        "message": "Betaflight Information",
+        "message": "Información de Betaflight",
         "english": "Betaflight Information",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Desarrollador",
-            "english": "Developer"
-        }
     },
     "defaultSupport": {
-        "message": "For support please search the forums and website first or contact your vendor.<br /><br />",
+        "message": "Para recibir soporte, por favor busque primero en los foros y páginas web, o contacte con el vendedor de su equipo.<br /><br />",
         "english": "For support please search the forums and website first or contact your vendor.<br /><br />",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Para soporte por favor busca primero en los foros y en la wiki o contacta con tu vendedor.<br /><br />",
-            "english": "For support please search the forums and wiki first or contact your vendor.<br /><br />"
-        }
     },
     "defaultSupport1": {
-        "message": "<a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Website</a>",
+        "message": "<a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">Sitio web de Rotorflight</a>",
         "english": "<a href=\"https://www.rotorflight.org\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight Website</a>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<a href=\"http://www.rcgroups.com/forums/showthread.php?t=2464844&page=1\" target=\"_blank\" rel=\"noopener noreferrer\">Hilo de RC Groups</a>",
-            "english": "<a href=\"http://www.rcgroups.com/forums/showthread.php?t=2464844&page=1\" target=\"_blank\" rel=\"noopener noreferrer\">RC Groups thread</a>"
-        }
     },
     "defaultSupport2": {
-        "message": "<a href=\"http://www.rcgroups.com/forums/showthread.php?t=4000345\" target=\"_blank\" rel=\"noopener noreferrer\">RC Groups Rotorflight thread</a>",
+        "message": "<a href=\"http://www.rcgroups.com/forums/showthread.php?t=4000345\" target=\"_blank\" rel=\"noopener noreferrer\">Hilo de RC Groups sobre Rotorflight</a>",
         "english": "<a href=\"http://www.rcgroups.com/forums/showthread.php?t=4000345\" target=\"_blank\" rel=\"noopener noreferrer\">RC Groups Rotorflight thread</a>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<a href=\"http://betaflight.info\" target=\"_blank\" rel=\"noopener noreferrer\">Wiki de Betaflight</a>",
-            "english": "<a href=\"http://betaflight.info\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Wiki</a>"
-        }
     },
     "defaultSupport3": {
-        "message": "<a href=\"https://discord.com/invite/FyfMF4RwSA\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight discussion on Discord</a>",
+        "message": "<a href=\"https://discord.com/invite/FyfMF4RwSA\" target=\"_blank\" rel=\"noopener noreferrer\">Discusiones sobre Rotorflight en Discord</a>",
         "english": "<a href=\"https://discord.com/invite/FyfMF4RwSA\" target=\"_blank\" rel=\"noopener noreferrer\">Rotorflight discussion on Discord</a>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8nT4jjsE4VENEmwu9x8zDiE\" target=\"_blank\" rel=\"noopener noreferrer\">Vídeos de Joshua Bardwell para Betaflight 4.3</a>",
-            "english": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8nT4jjsE4VENEmwu9x8zDiE\" target=\"_blank\" rel=\"noopener noreferrer\">Joshua Bardwell Betaflight 4.3 Videos</a>"
-        }
     },
     "defaultSupport4": {
-        "message": "<a href=\"https://betaflight.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Website</a>",
+        "message": "<a href=\"https://betaflight.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Sitio web de Betaflight</a>",
         "english": "<a href=\"https://betaflight.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Website</a>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<a href=\"https://github.com/Betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>",
-            "english": "<a href=\"https://github.com/Betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>"
-        }
     },
     "defaultSupport5": {
-        "message": "<a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Wiki</a>",
+        "message": "<a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Wiki de Betaflight</a>",
         "english": "<a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Wiki</a>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<a href=\"https://slack.betaflight.com\" target=\"_blank\" rel=\"noopener noreferrer\">Desarrolladores de Betaflight en Slack</a>",
-            "english": "<a href=\"https://slack.betaflight.com\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight devs on slack</a>"
-        }
     },
     "statusButtonResetZaxis": {
         "message": "Reiniciar eje Z, desplazamiento: 0 grad",
         "english": "Reset Z axis, offset: 0 deg",
-        "status": "Reused translation. Please check!"
     },
     "statusButtonResetZaxisValue": {
         "message": "Reiniciar eje Z, desplazamiento: $1 grad",
         "english": "Reset Z axis, offset: $1 deg",
-        "status": "Reused translation. Please check!"
     },
     "statusBatteryHead": {
         "message": "Batería",
         "english": "Battery",
-        "status": "Reused translation. Please check!"
     },
     "statusInfoHead": {
         "message": "Info",
         "english": "Info",
-        "status": "Reused translation. Please check!"
     },
     "statusReceiverHead": {
         "message": "Receptor",
         "english": "Receiver",
-        "status": "Reused translation. Please check!"
     },
     "statusBattery": {
         "message": "Voltaje:",
         "english": "Voltage:",
-        "status": "Reused translation. Please check!"
     },
     "statusDrawn": {
-        "message": "Capacity:",
+        "message": "Capacidad:",
         "english": "Capacity:",
-        "status": "New entry. Please translate!"
     },
     "statusDrawing": {
-        "message": "Current:",
+        "message": "Amperaje:",
         "english": "Current:",
-        "status": "New entry. Please translate!"
     },
     "statusChargeLevel": {
-        "message": "Charge level:",
+        "message": "Nivel de carga:",
         "english": "Charge level:",
-        "status": "New entry. Please translate!"
     },
     "statusCraftName": {
-        "message": "Craft Name:",
+        "message": "Nombre de aeronave:",
         "english": "Craft Name:",
-        "status": "New entry. Please translate!"
     },
     "statusBoardName": {
-        "message": "Board:",
+        "message": "Placa:",
         "english": "Board:",
-        "status": "New entry. Please translate!"
     },
     "statusTargetName": {
         "message": "Firmware:",
         "english": "Firmware:",
-        "status": "Reused translation. Please check!"
     },
     "statusArmingDisableFlags": {
-        "message": "Banderas Armado Desactivado:",
+        "message": "Banderas Desactivación de Armado:",
         "english": "Arming Disable Flags:",
-        "status": "Reused translation. Please check!"
     },
     "statusArmingAllowed": {
         "message": "Armado Permitido",
         "english": "Arming Allowed",
-        "status": "Reused translation. Please check!"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
+        "message": "Lista de avisos que indican por qué el armado no se puede permitir. Ponga el ratón sobre el aviso o acuda al tutorial de nuestro sitio web <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> para más info.",
         "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
-        "status": "Reused translation. Please check!",
-        "previous": {
-            "message": "Lista de banderas indicando el por qué armar actualmente no está permitido. Pase el ratón sobre la bandera o consulte la Wiki (página 'Arming Sequence & Safety') para obtener más información.",
-            "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Wiki ('Arming Sequence & Safety' page) for more info.",
-            "status": "Reused translation. Please check!"
-        }
     },
     "statusArmingDisableFlagsTooltipNO_GYRO": {
         "message": "Giro no detectado",
         "english": "A gyro was not detected",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the NO_GYRO arming disable flag"
     },
     "statusArmingDisableFlagsTooltipFAILSAFE": {
         "message": "El Modo de seguridad está activo",
         "english": "Failsafe is active",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the FAILSAFE arming disable flag"
     },
     "statusArmingDisableFlagsTooltipRX_FAILSAFE": {
         "message": "No se ha detectado una señal válida del receptor",
         "english": "No valid receiver signal is detected",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the RX_FAILSAFE arming disable flag"
     },
     "statusArmingDisableFlagsTooltipBAD_RX_RECOVERY": {
-        "message": "Tu receptor se acaba de recuperar de un Modo de Seguridad pero el interruptor de armado está activado",
+        "message": "Su receptor se acaba de recuperar de un Modo de Seguridad pero el interruptor de armado está activado",
         "english": "Your receiver has just recovered from receiver failsafe but the arm switch is on",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the BAD_RX_RECOVERY arming disable flag"
     },
     "statusArmingDisableFlagsTooltipBOXFAILSAFE": {
         "message": "El interruptor 'FAILSAFE' estaba activado",
         "english": "The 'FAILSAFE' switch was activated",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the BOXFAILSAFE arming disable flag"
     },
     "statusArmingDisableFlagsTooltipGOVERNOR": {
-        "message": "Governor can't function without an RPM signal",
+        "message": "El Governor no puede funcionar sin una señal de RPM",
         "english": "Governor can't function without an RPM signal",
-        "status": "New entry. Please translate!",
         "description": "Message that pops up to describe the GOVERNOR arming disable flag"
     },
     "statusArmingDisableFlagsTooltipCRASH": {
         "message": "Desarmado por detección de colisión",
         "english": "Disarmed via crash detection",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the CRASH arming disable flag"
     },
     "statusArmingDisableFlagsTooltipTHROTTLE": {
         "message": "El canal del acelerador está demasiado alto",
         "english": "Throttle channel is too high",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the THROTTLE arming disable flag"
     },
     "statusArmingDisableFlagsTooltipANGLE": {
         "message": "La aeronave no está (suficientemente) nivelada",
         "english": "Craft is not level (enough)",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the ANGLE arming disable flag"
     },
     "statusArmingDisableFlagsTooltipBOOT_GRACE_TIME": {
         "message": "Armado demasiado pronto después del encendido",
         "english": "Arming too soon after power on",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the BOOT_GRACE_TIME arming disable flag"
     },
     "statusArmingDisableFlagsTooltipNOPREARM": {
         "message": "El interruptor PREARM no está activado o no ha sido desactivado después de desarmar",
         "english": "Prearm switch is not activated or prearm has not been toggled after disarm",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the NOPREARM arming disable flag"
     },
     "statusArmingDisableFlagsTooltipLOAD": {
         "message": "La carga del sistema es demasiado alta para un vuelo seguro",
         "english": "System load is too high for safe flight",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the LOAD arming disable flag"
     },
     "statusArmingDisableFlagsTooltipCALIBRATING": {
         "message": "La calibración de los sensores está todavía en marcha",
         "english": "Sensor calibration is still ongoing",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the CALIBRATING arming disable flag"
     },
     "statusArmingDisableFlagsTooltipCLI": {
-        "message": "Está activo el CLI",
+        "message": "El CLI está ",
         "english": "CLI is active",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the CLI arming disable flag"
     },
     "statusArmingDisableFlagsTooltipCMS_MENU": {
-        "message": "CMS (menú de configuración) está Activado - sobre OSD u otra pantalla -",
+        "message": "CMS (menú de configuración) está ya Activado - sobre OSD u otra pantalla -",
         "english": "CMS (config menu) is Active - over OSD or other display -",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the CMS_MENU arming disable flag"
     },
     "statusArmingDisableFlagsTooltipOSD_MENU": {
         "message": "El menú OSD está activado",
         "english": "OSD menu is active",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the OSD_MENU arming disable flag"
     },
     "statusArmingDisableFlagsTooltipBST": {
         "message": "Un dispositivo de Telemetría Black Sheep (TBS Core Pro por ejemplo) desarmó y está evitando el armado",
         "english": "A Black Sheep Telemetry device (TBS Core Pro for example) disarmed and is preventing arming",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the BST arming disable flag"
     },
     "statusArmingDisableFlagsTooltipMSP": {
-        "message": "MSP connection is active, probably with this Rotorflight Configurator",
+        "message": "La conexión MSP está activa, probablemente a través del Rotorflight Configurator",
         "english": "MSP connection is active, probably with this Rotorflight Configurator",
-        "status": "New entry. Please translate!",
         "description": "Message that pops up to describe the MSP arming disable flag"
     },
     "statusArmingDisableFlagsTooltipPARALYZE": {
         "message": "El modo PARALYZE ha sido activado",
         "english": "Paralyze mode has been activated",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the PARALYZE arming disable flag"
     },
     "statusArmingDisableFlagsTooltipGPS": {
-        "message": "El modo GPS Rescate está configurado pero el número de satélites requeridos no ha sido fijado",
+        "message": "El modo GPS Rescate está configurado pero el número de satélites requeridos no se ha fijado",
         "english": "GPS rescue mode is configured but required number of satellites has not been fixed",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the GPS arming disable flag"
     },
     "statusArmingDisableFlagsTooltipRESC": {
         "message": "El interruptor GPS RESCUE está activado",
         "english": "The 'GPS Rescue' switch was activated",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the RESC arming disable flag"
     },
     "statusArmingDisableFlagsTooltipRPMFILTER": {
-        "message": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailble",
+        "message": "El filtrado basado en RPM está habilitado, pero la señal de RPM no está configurada o no está disponible",
         "english": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailble",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the RPMFILTER arming disable flag",
-        "previous": {
-            "message": "El filtro basado en RPM está activado pero uno o más ESCs no están proporcionando telemetría DSHOT válida. Comprueba que los ESCs son compatibles y tienen el firmware necesario instalado para soportar telemetría bidireccional DSHOT.",
-            "english": "RPM-based filtering is enabled but one or more ESC's are not supplying valid DSHOT telemetry. Check that the ESC's are capable of and have the required firmware installed to support bidirectional DSHOT telemetry.",
-            "status": "Reused translation. Please check!",
-            "description": "Message that pops up to describe the RPMFILTER arming disable flag"
-        }
     },
     "statusArmingDisableFlagsTooltipREBOOT_REQ": {
         "message": "Un cambio en la configuración requiere reiniciar",
         "english": "A configuration change requires a reboot",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the REBOOT_REQ arming disable flag"
     },
     "statusArmingDisableFlagsTooltipDSHOT_BITBANG": {
-        "message": "Bitbanging DSHOT no está funcionando correctamente y los motores no pueden ser controlados. Probablemente causado por algún conflicto en un timer con otras funcionalidades activadas del controlador de vuelo.",
+        "message": "Bitbanging DSHOT no está funcionando correctamente y los motores no pueden controlarse. Probablemente a causa de algún conflicto en un crono con otras funcionalidades activadas en el controlador de vuelo.",
         "english": "Bitbanged DSHOT is not working properly and the motors can't be controlled. Likely caused by a timer conflict with other features enabled on the flight controller.",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the DSHOT_BITBANG arming disable flag"
     },
     "statusArmingDisableFlagsTooltipACC_CALIB": {
         "message": "El acelerómetro no ha sido calibrado y hay funcionalidades que lo necesitan. Calibra el acelerómetro.",
         "english": "The accelerometer has not been calibrated and features are enabled that rely on it. Calibrate the accelerometer.",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the ACC_CALIB arming disable flag"
     },
     "statusArmingDisableFlagsTooltipMOTOR_PROTO": {
-        "message": "There is no motor throttle protocol selected",
+        "message": "No se ha seleccionado algún protocolo de la palanca del motor",
         "english": "There is no motor throttle protocol selected",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag",
-        "previous": {
-            "message": "No hay ningún protocolo de salida del motor seleccionado",
-            "english": "There is no motor output protocol selected",
-            "status": "Reused translation. Please check!",
-            "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
-        }
     },
     "statusArmingDisableFlagsTooltipARM_SWITCH": {
-        "message": "Arm switch is activated while other arming disable conditions are active",
+        "message": "Se ha activado el interruptor de armado mientras otras condiciones de desarmado están activas",
         "english": "Arm switch is activated while other arming disable conditions are active",
-        "status": "Reused translation. Please check!",
         "description": "Message that pops up to describe the ARM_SWITCH arming disable flag",
-        "previous": {
-            "message": "Una de las otras banderas de desarmado estaba activa al armar",
-            "english": "One of the others disarm flags is active when arming",
-            "status": "Reused translation. Please check!",
-            "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
-        }
     },
     "statusArmingHead": {
-        "message": "Arming",
+        "message": "Armando",
         "english": "Arming",
-        "status": "New entry. Please translate!"
     },
     "statusArmingDanger": {
-        "message": "<strong class=\"message-negative\">WARNING!</strong> <strong>ARMING is ENABLED.</strong> Never fly the craft with the Configurator connected!</strong>",
+        "message": "<strong class=\"message-negative\">WARNING!</strong> <strong>ARMADO está HABILITADO.</strong> ¡Nunca vuele la aeronave con el Configurator conectado!</strong>",
         "english": "<strong class=\"message-negative\">WARNING!</strong> <strong>ARMING is ENABLED.</strong> Never fly the craft with the Configurator connected!</strong>",
-        "status": "New entry. Please translate!"
     },
     "statusEnableArming": {
-        "message": "Enable Arming:",
+        "message": "Habilitar Armado:",
         "english": "Enable Arming:",
-        "status": "New entry. Please translate!"
     },
     "statusInstrumentsHead": {
         "message": "Instrumentos",
         "english": "Instruments",
-        "status": "Reused translation. Please check!"
     },
     "statusAttitude": {
         "message": "$1 grad",
         "english": "$1 deg",
-        "status": "Reused translation. Please check!"
     },
     "statusConfigBare": {
         "message": "<span class=\"configBare\">BARE</span>",
         "english": "<span class=\"configBare\">BARE</span>",
-        "status": "New entry. Please translate!"
     },
     "statusConfigDefaults": {
-        "message": "<span class=\"configDefaults\">DEFAULTS</span>",
+        "message": "<span class=\"configDefaults\">POR DEFECTO</span>",
         "english": "<span class=\"configDefaults\">DEFAULTS</span>",
-        "status": "New entry. Please translate!"
     },
     "statusConfigConfigured": {
-        "message": "<span class=\"configConfigured\">CONFIGURED</span>",
+        "message": "<span class=\"configConfigured\">CONFIGURADO</span>",
         "english": "<span class=\"configConfigured\">CONFIGURED</span>",
-        "status": "New entry. Please translate!"
     },
     "initialSetupButtonCalibrateAccel": {
         "message": "Calibrar Acelerómetro",
         "english": "Calibrate Accelerometer"
     },
     "initialSetupCalibrateAccelText": {
-        "message": "Sitúa la placa o chasis en una superficie <strong>nivelada</strong>, ejecuta la calibración, asegúrate de que la plataforma no se mueve durante el período de calibración",
+        "message": "Sitúe la placa o el chasis en una superficie <strong>nivelada</strong>, ejecute la calibración, asegúrese de que la plataforma no se mueve durante el período de calibración",
         "english": "Place board or frame on <strong>leveled</strong> surface, proceed with calibration, ensure platform is not moving during calibration period"
     },
     "initialSetupButtonCalibrateMag": {
@@ -1418,7 +1171,7 @@
         "english": "Calibrate Magnetometer"
     },
     "initialSetupCalibrateMagText": {
-        "message": "Mueve el multirotor al menos <strong>360</strong> grados en todos los ejes de rotación, dispones de 30 segundos para realizar esta tarea",
+        "message": "Mueva el multirotor al menos <strong>360</strong> grados en todos los ejes de rotación, dispone de 30 segundos para realizar esta tarea",
         "english": "Move multirotor at least <strong>360</strong> degrees on all axis of rotation, you have 30 seconds to perform this task"
     },
     "initialSetupButtonCalibratingText": {
@@ -1428,77 +1181,54 @@
     "initialSetupButtonResetSettings": {
         "message": "Borrar Configuración",
         "english": "Reset Settings",
-        "status": "Reused translation. Please check!"
     },
     "initialSetupResetSettingsText": {
-        "message": "Restaurar configuración por <strong>defecto</strong>",
+        "message": "Restaurar configuración a <strong>defecto</strong>",
         "english": "Restore settings to <strong>default</strong>",
-        "status": "Reused translation. Please check!"
     },
     "initialSetupButtonSaveSettings": {
-        "message": "Save Settings",
+        "message": "Guardar ajustes",
         "english": "Save Settings",
-        "status": "New entry. Please translate!"
     },
     "initialSetupSaveSettingsText": {
-        "message": "Save settings into <strong>EEPROM</strong>.",
+        "message": "Guardarajustes en <strong>EEPROM</strong>.",
         "english": "Save settings into <strong>EEPROM</strong>.",
-        "status": "New entry. Please translate!"
     },
     "initialSetupButtonBackup": {
-        "message": "Backup",
+        "message": "Copia de seguridad",
         "english": "Backup",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Copia de seguridad JSON",
-            "english": "Backup JSON"
-        }
     },
     "initialSetupButtonRestore": {
-        "message": "Restore",
+        "message": "Restaurar",
         "english": "Restore",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Restaurar JSON",
-            "english": "Restore JSON"
-        }
     },
     "initialSetupButtonRebootBootloader": {
         "message": "Boot Loader / DFU",
         "english": "Boot Loader / DFU",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Activar Gestor de Arranque / DFU",
-            "english": "Activate Boot Loader / DFU"
-        }
     },
     "initialSetupBackupRestoreText": {
-        "message": "Realiza una <strong>Copia de Seguridad</strong> de tu configuración por si tienes problemas. La configuración del <strong>CLI</strong> <span class=\"message-negative\">no</span> está incluida - usa el comando ' diff all' en CLI para esto.",
+        "message": "Realice una <strong>Copia de Seguridad</strong> de su configuración por si tiene problemas. La configuración del <strong>CLI</strong> <span class=\"message-negative\">no</span> está incluida - use el comando ' diff all' en CLI para esto.",
         "english": "<strong>Backup</strong> your configuration in case of an accident, <strong>CLI</strong> settings are <span class=\"message-negative\">not</span> included - use the command 'diff all' in CLI for this."
     },
     "initialSetupRebootBootloaderText": {
-        "message": "Reinicia en modo <strong>gestor de arranque / DFU</strong>.",
+        "message": "Reinicie en modo <strong>bootloader / DFU</strong>.",
         "english": "Reboot into <strong>boot loader / DFU</strong> mode."
     },
     "initialSetupButtonMassStorage": {
         "message": "Modo de Almacenamiento Masivo",
         "english": "Mass Storage Mode",
-        "status": "Reused translation. Please check!"
     },
     "initialSetupButtonMassStorageText": {
-        "message": "Reboot into <strong>Mass Storage</strong> mode (MSC).",
+        "message": "Reinicie en modo de <strong>Almacenamiento masivo</strong> (MSC).",
         "english": "Reboot into <strong>Mass Storage</strong> mode (MSC).",
-        "status": "New entry. Please translate!"
     },
     "initialSetupButtonReboot": {
-        "message": "System Reboot",
+        "message": "Reinicio del Sistema",
         "english": "System Reboot",
-        "status": "New entry. Please translate!"
     },
     "initialSetupButtonRebootText": {
-        "message": "Reboot and reinitialize the system.",
+        "message": "Rearranque y reinicie el sistema.",
         "english": "Reboot and reinitialize the system.",
-        "status": "New entry. Please translate!"
     },
     "initialSetupBackupSuccess": {
         "message": "Copia de seguridad guardada <span class=\"message-positive\">correctamente</span>",
@@ -1533,174 +1263,135 @@
         "english": "Settings restored to <strong>default</strong>"
     },
     "initialSetupSettingsSaved": {
-        "message": "All settings saved in EEPROM.",
+        "message": "Todos los ajustes guardados en la EEPROM.",
         "english": "All settings saved in EEPROM.",
-        "status": "New entry. Please translate!"
     },
     "initialSetupDangerText": {
-        "message": "<strong>Note:</strong> In order to prevent injury <strong>remove ALL rotor blades</strong> before enabling any arming features.<strong class=\"message-negative\"><strong class=\"message-negative\"><br/>NEVER FLY YOUR CRAFT WITH THE CONFIGURATOR CONNECTED!</strong>",
+        "message": "<strong>Note:</strong> Para prevenir accidentes <strong>quite TODAS las hélices de los rotores</strong> antes de activar cualquier característica de armado.<strong class=\"message-negative\"><strong class=\"message-negative\"><br/>NUNCA VUELE SU AERONAVE CON EL CONFIGURATOR CONECTADO!</strong>",
         "english": "<strong>Note:</strong> In order to prevent injury <strong>remove ALL rotor blades</strong> before enabling any arming features.<strong class=\"message-negative\"><strong class=\"message-negative\"><br/>NEVER FLY YOUR CRAFT WITH THE CONFIGURATOR CONNECTED!</strong>",
-        "status": "New entry. Please translate!"
     },
     "initialSetupDangerTitle": {
-        "message": "Arming and Override",
+        "message": "Armado y Override",
         "english": "Arming and Override",
-        "status": "New entry. Please translate!"
     },
     "initialSetupEnableArming": {
-        "message": "<strong>Enable Arming</strong>",
+        "message": "<strong>Habilitar Armado</strong>",
         "english": "<strong>Enable Arming</strong>",
-        "status": "New entry. Please translate!"
     },
     "initialSetupEnableArmingText": {
-        "message": "Enable arming the craft with the transmitter while the Configurator is connected. Arming your craft will allow the motors to spool up.",
+        "message": "Habilitar el armado con el transmisor de la aeronave mientras el Configurator está conectado. Armar su aeronave permitirá que los motores aceleren.",
         "english": "Enable arming the craft with the transmitter while the Configurator is connected. Arming your craft will allow the motors to spool up.",
-        "status": "New entry. Please translate!"
     },
     "initialSetupEnableMotorOverride": {
-        "message": "<strong>Enable Motor Override</strong>",
+        "message": "<strong>Habilitar Override del motor</strong>",
         "english": "<strong>Enable Motor Override</strong>",
-        "status": "New entry. Please translate!"
     },
     "initialSetupEnableMotorOverrideText": {
-        "message": "Enable the motor override feature in the Motors tab. Using motor override WILL SPOOL UP the motors!",
+        "message": "Habilite la característica de Override de los motore en la pestaña de Motor. Usar el Override del motor ¡hará que los motores SE MUEVAN!",
         "english": "Enable the motor override feature in the Motors tab. Using motor override WILL SPOOL UP the motors!",
-        "status": "New entry. Please translate!"
     },
     "initialSetupEnableServoOverride": {
-        "message": "<strong>Enable Servo Override</strong>",
+        "message": "<strong>Habilitar el Override del Servo</strong>",
         "english": "<strong>Enable Servo Override</strong>",
-        "status": "New entry. Please translate!"
     },
     "initialSetupEnableServoOverrideText": {
-        "message": "Enable the servo override feature in the Servos tab. Using servo override WILL move the servos to arbitrary positions.",
+        "message": "Habilitar la característica de Override de los servos en la pestaña de Servos. Isar Override del servo hará que los servos SE MUEVAN a posiciones arbitrarias.",
         "english": "Enable the servo override feature in the Servos tab. Using servo override WILL move the servos to arbitrary positions.",
-        "status": "New entry. Please translate!"
     },
     "initialSetupEnableMixerOverride": {
-        "message": "<strong>Enable Mixer Override</strong>",
+        "message": "<strong>Habilitar Override de Mezclas</strong>",
         "english": "<strong>Enable Mixer Override</strong>",
-        "status": "New entry. Please translate!"
     },
     "initialSetupEnableMixerOverrideText": {
-        "message": "Enable the mixer input override feature in the Mixers tab. Using mixer override WILL force the flight controls to arbitrary positions.",
+        "message": "Habilitar la característica de Override de las Mezclas en la pestaña de Mezclas. Usar el Override de las Mezclas FORZARÁ al controlador de vuelo a posiciones arbitrarias.",
         "english": "Enable the mixer input override feature in the Mixers tab. Using mixer override WILL force the flight controls to arbitrary positions.",
-        "status": "New entry. Please translate!"
     },
     "feature_RX_PPM": {
-        "message": "PPM RX input",
+        "message": "Entradas PPM del RX",
         "english": "PPM RX input",
-        "status": "Reused translation. Please check!"
     },
     "feature_INFLIGHT_ACC_CAL": {
         "message": "Calibración del nivelado en vuelo",
         "english": "In-flight level calibration",
-        "status": "Reused translation. Please check!"
     },
     "feature_RX_SERIAL": {
-        "message": "Serial RX input",
+        "message": "Entrada Serie del RX",
         "english": "Serial RX input",
-        "status": "New entry. Please translate!"
     },
     "feature_SOFTSERIAL": {
-        "message": "Enable Software Serial ports",
+        "message": "Habilitar por software los puertos sereie",
         "english": "Enable Software Serial ports",
-        "status": "New entry. Please translate!"
     },
     "feature_GPS": {
-        "message": "GPS for telemetry",
+        "message": "GPS para telemetría",
         "english": "GPS for telemetry",
-        "status": "Reused translation. Please check!",
-        "previous": {
-            "message": "GPS para navegación y telemetría",
-            "english": "GPS for navigation and telemetry",
-            "status": "Reused translation. Please check!"
-        }
     },
     "feature_SONAR": {
-        "message": "Sonar altitude radar",
+        "message": "Radar altímetro sonar",
         "english": "Sonar altitude radar",
-        "status": "New entry. Please translate!"
     },
     "feature_TELEMETRY": {
-        "message": "Transmitter telemetry",
+        "message": "Telemetría del transmisor",
         "english": "Transmitter telemetry",
-        "status": "New entry. Please translate!"
     },
     "feature_RX_PARALLEL_PWM": {
-        "message": "PWM RX input channels",
+        "message": "Canales de entrada PWM del RX",
         "english": "PWM RX input channels",
-        "status": "New entry. Please translate!"
     },
     "feature_RX_MSP": {
-        "message": "MSP RX input",
+        "message": "Entrada MSP del RX",
         "english": "MSP RX input",
-        "status": "New entry. Please translate!"
     },
     "feature_RSSI_ADC": {
         "message": "Entrada RSSI analógica",
         "english": "Analog RSSI input",
-        "status": "Reused translation. Please check!"
     },
     "feature_LED_STRIP": {
-        "message": "RGB LED Strip support",
+        "message": "Soporte de tiras LED RGB",
         "english": "RGB LED Strip support",
-        "status": "New entry. Please translate!"
     },
     "feature_DISPLAY": {
-        "message": "OLED Display support",
+        "message": "Soporte de la pantalla OLED",
         "english": "OLED Display support",
-        "status": "New entry. Please translate!"
     },
     "feature_OSD": {
         "message": "Visualización en Pantalla",
         "english": "On Screen Display",
-        "status": "Reused translation. Please check!"
     },
     "feature_CMS": {
-        "message": "Configuration Menu System",
+        "message": "Menú de configuración del sistema",
         "english": "Configuration Menu System",
-        "status": "New entry. Please translate!"
     },
     "feature_RX_SPI": {
-        "message": "SPI RX support",
+        "message": "Soporte SPI del RX",
         "english": "SPI RX support",
-        "status": "Reused translation. Please check!"
     },
     "feature_GOVERNOR": {
-        "message": "Headspeed governor",
+        "message": "Regulador de velocidad del cabezal",
         "english": "Headspeed governor",
-        "status": "New entry. Please translate!"
     },
     "feature_ESC_SENSOR": {
-        "message": "ESC Telemetry support",
+        "message": "Soporte de telemetría del ESC",
         "english": "ESC Telemetry support",
-        "status": "New entry. Please translate!"
     },
     "feature_FREQ_SENSOR": {
-        "message": "RPM signal input support",
+        "message": "Soporte de la señal de entrada de las RPM",
         "english": "RPM signal input support",
-        "status": "New entry. Please translate!"
     },
     "feature_VTX": {
         "message": "Transmisor de Vídeo",
         "english": "Video Transmitter",
-        "status": "Reused translation. Please check!"
     },
     "feature_DYN_NOTCH": {
-        "message": "Dynamic Notch filtering",
+        "message": "Filtrado dinámico de picos",
         "english": "Dynamic Notch filtering",
-        "status": "New entry. Please translate!"
     },
     "feature_RPM_FILTER": {
-        "message": "RPM controlled notch filtering",
+        "message": "Filtrado de picos controlado por RPM",
         "english": "RPM controlled notch filtering",
-        "status": "Modified entry. Please translate!",
         "previous": {
-            "message": "RPM controlled gyro notch filtering",
+            "message": "Filtrado de picos controlado por RPM del Giro",
             "english": "RPM controlled gyro notch filtering",
-            "status": "New entry. Please translate!"
-        }
     },
     "configurationFeatureEnabled": {
         "message": "Activado",
@@ -1715,84 +1406,64 @@
         "english": "Description"
     },
     "configurationFeatures": {
-        "message": "Features",
+        "message": "Funcionalidades",
         "english": "Features",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Otras Funcionalidades",
-            "english": "Other Features"
         }
     },
     "featureTip_GPS": {
-        "message": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration.",
+        "message": "Habilita el soporte de Telemetría del GPS. Añade la <i>GPS</i> pestaña para su configuración.",
         "english": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration.",
-        "status": "New entry. Please translate!"
     },
     "featureTip_LED_STRIP": {
-        "message": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration.",
+        "message": "Habilita soporte para tiras LED WS2811/2812 LEDs. Añade la pestaña <i>Tiras LED</i> para su configuración.",
         "english": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration.",
-        "status": "New entry. Please translate!"
     },
     "featureTip_CMS": {
-        "message": "Enables firmware support for CMS.",
+        "message": "Habilita el soporte del firmware para CMS.",
         "english": "Enables firmware support for CMS.",
-        "status": "New entry. Please translate!"
     },
     "configurationSerialPorts": {
-        "message": "Serial Ports",
+        "message": "Puertos Serie",
         "english": "Serial Ports",
-        "status": "New entry. Please translate!"
     },
     "configurationSerialPortsHelp": {
-        "message": "Select function and speed for each serial port (UART).",
+        "message": "Seleccionar función y velocidad para cada puerto serie (UART).",
         "english": "Select function and speed for each serial port (UART).",
-        "status": "New entry. Please translate!"
     },
     "configurationRSSI": {
         "message": "RSSI (Fuerza de la Señal)",
         "english": "RSSI (Signal Strength)"
     },
     "configurationRSSIHelp": {
-        "message": "RSSI es una medida de la fuerza de la señal y es muy útil para saber que la aeronave está saliendo de rango o hay interferencias de RF.",
+        "message": "RSSI es una medida de la fuerza de la señal y es muy útil para saber que la aeronave está saliendo de alcance o hay interferencias de RF.",
         "english": "RSSI is a measurement of signal strength and is very handy so you know when your aircraft is going out of range or if it is suffering RF interference."
     },
     "configurationEscFeatures": {
-        "message": "Funcionalides ESC/Motor",
+        "message": "Funcionalidades ESC/Motor",
         "english": "ESC/Motor Features"
     },
     "configurationFeaturesHelp": {
-        "message": "<strong>Note:</strong> Not all features are supported by all flight controllers. If you enable a specific feature, and it is disabled after you hit 'Save and Reboot', it means that this feature is not supported.",
+        "message": "<strong>Nota:</strong> No todas las características están soportadas en todos los controladores de vuelo. Si habilita una característica específica, y está deshabilitada después de seleccionar 'Guardar y reiniciar', significa que esta característica no está soportada.",
         "english": "<strong>Note:</strong> Not all features are supported by all flight controllers. If you enable a specific feature, and it is disabled after you hit 'Save and Reboot', it means that this feature is not supported.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<strong>Nota:</strong> No todas las combinaciones de funcionalidades son válidas. Cuando el firmware del controlador de vuelo detecta combinaciones de funcionalidades inválidas las funcionalidades conflictivas serán desactivadas.<br /><strong>Nota:</strong> Configura los puertos serie <span class=\"message-negative\">antes</span> de activar las funcionalidades que utilizarán dichos puertos.",
-            "english": "<strong>Note:</strong> Not all combinations of features are valid.  When the flight controller firmware detects invalid feature combinations conflicting features will be disabled.<br /><strong>Note:</strong> Configure serial ports <span class=\"message-negative\">before</span> enabling the features that will use the ports."
-        }
     },
     "configurationBoardAlignment": {
         "message": "Alineación de Placa y Sensores",
         "english": "Board and Sensor Alignment"
     },
     "configurationBoardAlignmentHelp": {
-        "message": "Arbitrary board rotation allows mounting the FC sideways / upside down / rotated etc. When using external sensors, use the sensor alignments to define sensor position independent from the board orientation.",
+        "message": "Una rotación arbitraria de la placa permite montar el FC de lado/boca abajo/ rotado, etc. Cuando se usen sensores externos, use los alineamientos del sensor para definir la posición del sensor independientemente de la orientación de la placa.",
         "english": "Arbitrary board rotation allows mounting the FC sideways / upside down / rotated etc. When using external sensors, use the sensor alignments to define sensor position independent from the board orientation.",
-        "status": "Reused translation. Please check!",
-        "previous": {
-            "message": "Rotación arbitraria de la placa en grados, para permitir montaje de lado / boca abajo / rotada etc. Al ejecutar sensores externos, usa la alineación del sensor (Giro, Acc, Mag) para definir la posición del sensor independientemente de la orientación de la placa. ",
-            "english": "Arbitrary board rotation in degrees, to allow mounting it sideways / upside down / rotated etc. When running external sensors, use the sensor alignments (Gyro, Acc, Mag) to define sensor position independent from board orientation. ",
-            "status": "Reused translation. Please check!"
-        }
     },
     "configurationBoardAlignmentRoll": {
-        "message": "Grados Roll",
+        "message": "Grados Alabeo",
         "english": "Roll Degrees"
     },
     "configurationBoardAlignmentPitch": {
-        "message": "Grados Pitch",
+        "message": "Grados Profundidad",
         "english": "Pitch Degrees"
     },
     "configurationBoardAlignmentYaw": {
-        "message": "Grados Yaw",
+        "message": "Grados Dirección",
         "english": "Yaw Degrees"
     },
     "configurationSensorAlignmentGyro": {
@@ -1844,177 +1515,133 @@
         "english": "Accelerometer Trim"
     },
     "configurationAccelTrimsHelp": {
-        "message": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue.",
+        "message": "El trimado del acelerómetro ajusta la deriva correcta de los modos estabilizados, como son Angulo, Horizonte, and Rescate.",
         "english": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue.",
-        "status": "New entry. Please translate!"
     },
     "configurationAccelTrimRoll": {
         "message": "Trimado Roll Acelerómetro",
         "english": "Accelerometer Roll Trim"
     },
     "configurationAccelRollTrimHelp": {
-        "message": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right.",
+        "message": "Incrementar el valor para corregir la deriva a la izquierda. Disminuir el valor (o usar valores negativos) para corregir la deriva a la derecha.",
         "english": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right.",
-        "status": "New entry. Please translate!"
     },
     "configurationAccelTrimPitch": {
         "message": "Trimado Pitch Acelerómetro",
         "english": "Accelerometer Pitch Trim"
     },
     "configurationAccelPitchTrimHelp": {
-        "message": "Increase the value to correct drift to the rear. Decrease the value (or use negative values) to correct drift to the front.",
+        "message": "Incrementar el valor para corregir la deriva hacia atrás. Disminuir el valor (o usar valores negativos) para corregir la deriva hacia adelante.",
         "english": "Increase the value to correct drift to the rear. Decrease the value (or use negative values) to correct drift to the front.",
-        "status": "New entry. Please translate!"
     },
     "escProtocolDisabledMessage": {
-        "message": "<strong>Atención:</strong> Seleccionar un protocolo de salida de motor que no es compatible con tus ESCs puede llevar a los <strong>ESCs a girar tan pronto como una batería esté conectada</strong>. Por esta razón, <strong>asegúrate siempre de quitar las hélices antes de conectar una batería por primera vez después de cambiar el protocolo de salida de motor</strong>.",
+        "message": "<strong>Atención:</strong> Seleccionar un protocolo de salida de motor que no es compatible con tus ESCs puede llevar a los <strong>ESCs a girar tan pronto como una batería esté conectada</strong>. Por esta razón, <strong>asegúrese siempre de quitar las hélices antes de conectar una batería por primera vez después de cambiar el protocolo de salida del motor</strong>.",
         "english": "<strong>Caution:</strong> Selecting a motor output protocol that is not supported by your ESCs can lead to the <strong>ESCs spinning up as soon as a battery is connected</strong>. For this reason, <strong>always make sure to remove the props before connecting a battery for the first time after changing the motor output protocol</strong>."
     },
     "configurationDshotBeeper": {
-        "message": "ESC Beacon Configuration",
+        "message": "Configuración de la Baliza del ESC",
         "english": "ESC Beacon Configuration",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Configuración de Baliza Dshot",
-            "english": "Dshot Beacon Configuration"
-        }
     },
     "configurationDshotBeaconTone": {
-        "message": "Dshot Beacon Tone",
+        "message": "Tono de la baliza Dshot",
         "english": "Dshot Beacon Tone",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Tono de la Baliza",
-            "english": "Beacon Tone"
-        }
     },
     "configurationDshotBeaconHelp": {
-        "message": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. If arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength.",
+        "message": "La baliza Dshot utiliza los ESCs y los motores para producir sonidos. Esto significa que la baliza Dshot no se puede usar cuando los motores están girando. Si se intenta el armado mientras la baliza Dshot está activa, habrá una demora de 2 segundos después del último tono de la baliza antes de que la aeronave se arme. Esto se hace para prevenir que la funcionalidad de la baliza interfieracon las órdenes del Dshot cuando se esté armando.<br/><strong>Precaución:</strong> Desde el momento en que la baliza esté activada y recibiendo corriente a través de los motores, puede generarse un calor excesivo que puede dañar los motores y / o ESCs si la fuerza de la baliza se ajusta demasiado alta. Use el configurador BLHeli o la Suite BLHeli para ajustar y probar la fuerza de la baliza.",
         "english": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. If arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength.",
         "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "La baliza Dshot usa los ESCs y motores para producir sonido. Esto implica que la baliza Dshot no puede ser usada cuando los motores están girando. En Betaflight 3.4 y posterior, cuando se intenta armar mientras la baliza Dshot está activa, hay una pausa de 2 segundos después del último tono de la baliza Dshot antes de realizar el armado. Esto se hace así para evitar que la funcionalidad de baliza Dshot interfiera con los comandos Dshot que se envían al armar.<br/><strong>Atención:</strong> Como la baliza Dshot envía corriente a los motores mientras está activa, puede producir un exceso de calor y dañar los motores y / o los ESCs si la fuerza de la baliza está configurada muy alta. Usa BLHeli Configurator o BLHeli Suite para ajustar y testear la fuerza de la baliza.",
-            "english": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. In Betaflight 3.4 and newer, when arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength."
-        }
     },
     "configurationBeeper": {
-        "message": "Buzzer Configuration",
+        "message": "Configuración del zumbido",
         "english": "Buzzer Configuration",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Configuración de Avisos Acústicos",
-            "english": "Beeper Configuration"
-        }
     },
     "configurationBeeperHelp": {
-        "message": "Enable or disable when to sound the Buzzer",
+        "message": "Habilita o deshabilita cuando suena elZumbido",
         "english": "Enable or disable when to sound the Buzzer",
-        "status": "New entry. Please translate!"
     },
     "beeper_GYRO_CALIBRATED": {
         "message": "Pita cuando el giro ha sido calibrado",
         "english": "Beeps when gyro has been calibrated",
-        "status": "Reused translation. Please check!"
     },
     "beeper_RX_LOST": {
         "message": "Pita cuando el TX está apagado o se ha perdido la señal (repite hasta que TX correcto)",
         "english": "Beeps when TX is turned off or signal lost (repeat until TX is okay)",
-        "status": "Reused translation. Please check!"
     },
     "beeper_RX_LOST_LANDING": {
         "message": "Pita SOS cuando está armado y el TX está apagado o se ha perdido la señal (aterrizaje/desarmado automáticos)",
         "english": "Beeps SOS when armed and TX is turned off or signal lost (autolanding/autodisarm)",
-        "status": "Reused translation. Please check!"
     },
     "beeper_DISARMING": {
         "message": "Pita al desarmar el controlador de vuelo",
         "english": "Beep when disarming the flightcontroller",
-        "status": "Reused translation. Please check!"
     },
     "beeper_ARMING": {
         "message": "Pita al armar el controlador de vuelo",
         "english": "Beep when arming the flightcontroller",
-        "status": "Reused translation. Please check!"
     },
     "beeper_ARMING_GPS_FIX": {
-        "message": "Beep a special tone when arming the FC and GPS has fix",
+        "message": "Pita con un tono especial cuando se arma el FC y el GPS está fijado",
         "english": "Beep a special tone when arming the FC and GPS has fix",
-        "status": "New entry. Please translate!"
     },
     "beeper_BAT_CRIT_LOW": {
         "message": "Pitidos de aviso más largos cuando la batería está crítica (repite)",
         "english": "Longer warning beeps when battery is critically low (repeats)",
-        "status": "Reused translation. Please check!"
     },
     "beeper_BAT_LOW": {
         "message": "Pitidos de aviso cuando la batería está baja (repite)",
         "english": "Warning beeps when battery is getting low (repeats)",
-        "status": "Reused translation. Please check!"
     },
     "beeper_GPS_STATUS": {
         "message": "Usa el número de pitidos para indicar cuantos satélites se han encontrado",
         "english": "Use the number of beeps to indicate how many GPS satellites were found",
-        "status": "Reused translation. Please check!"
     },
     "beeper_RX_SET": {
         "message": "Pita cuando un canal aux se ha configurado para pitar",
         "english": "Beeps when aux channel is set for beep",
-        "status": "Reused translation. Please check!"
     },
     "beeper_ACC_CALIBRATION": {
-        "message": "Confirmación de calibración de acelerómetro en vuelo completada",
+        "message": "Confirmación en vuelo de que la calibración del acelerómetro se ha completado",
         "english": "Accelerometer inflight calibration completed confirmation",
-        "status": "Reused translation. Please check!"
     },
     "beeper_ACC_CALIBRATION_FAIL": {
         "message": "Error al calibrar acelerómetro en vuelo",
         "english": "Accelerometer inflight calibration failed",
-        "status": "Reused translation. Please check!"
     },
     "beeper_READY_BEEP": {
         "message": "Suena un tono cuando el GPS está fijado y disponible",
         "english": "Ring a tone when GPS is locked and ready",
-        "status": "Reused translation. Please check!"
     },
     "beeper_MULTI_BEEPS": {
         "message": "",
         "english": "",
-        "status": "Reused translation. Please check!"
     },
     "beeper_DISARM_REPEAT": {
         "message": "Suenan pitidos mientras la palanca está en posición desarmado",
         "english": "Beeps sounded while stick held in disarm position",
-        "status": "Reused translation. Please check!"
     },
     "beeper_ARMED": {
-        "message": "Pitidos de aviso cuando la placa está armada y configurada para no girar motores al armar (se repite hasta que la placa se desarma o se incrementa el acelerador)",
+        "message": "Pitidos de aviso cuando la placa está armada y configurada para no girar los motores al armar (se repite hasta que la placa se desarma o se incrementa el acelerador)",
         "english": "Warning beeps when board is armed with motors off when idle (repeats until board is disarmed or throttle is increased)",
-        "status": "Reused translation. Please check!"
     },
     "beeper_SYSTEM_INIT": {
         "message": "Pitidos de inicialización cuando la placa se enciende",
         "english": "Initialisation beeps when board is powered on",
-        "status": "Reused translation. Please check!"
     },
     "beeper_USB": {
-        "message": "Pita cuando el controlador de vuelo se alimenta desde el USB. Desactiva esto si no quieres pitidos en tu banco de trabajo",
+        "message": "Pita cuando el controlador de vuelo se alimenta desde el USB. Desactive esta opción si no quiere pitidos en mientras trabaja en su casa.",
         "english": "Beep when flight controller is powered from USB. Turn this off if you don't want the beeper to be on when on the workbench",
-        "status": "Reused translation. Please check!"
     },
     "beeper_BLACKBOX_ERASE": {
-        "message": "Pita cuando el borrado de la caja negra finaliza",
+        "message": "Pita cuando el borrado de la caja negra se finaliza",
         "english": "Beep when blackbox erase completes",
-        "status": "Reused translation. Please check!"
     },
     "beeper_CAM_CONNECTION_OPEN": {
         "message": "Pita cuando se entra en el control de cámara de 5 teclas",
         "english": "Beep when the 5 key camera control is entered",
-        "status": "Reused translation. Please check!"
     },
     "beeper_CAM_CONNECTION_CLOSE": {
         "message": "Pita cuando se sale del control de cámara de 5 teclas",
         "english": "Beep when the 5 key camera control is exited",
-        "status": "Reused translation. Please check!"
     },
     "beeper_ARMING_GPS_NO_FIX": {
         "message": "Beep a special tone when arming the FC and GPS does not have fix",
