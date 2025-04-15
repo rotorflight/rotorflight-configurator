@@ -468,7 +468,7 @@ class PresetsTab {
 
   async handleBackupDialogSaveClick(backupType) {
     const prefix = "backup_" + backupType;
-    const suffix = ".txt";
+    const suffix = "txt";
     try {
       await filesystem.writeTextFile(this.#cliEngine.outputHistory, {
         suggestedName: generateFilename(prefix, suffix),
