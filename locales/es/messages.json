@@ -25,9 +25,8 @@
         "english": "Auto"
     },
     "axisROLL": {
-        "message": "ROLL",
+        "message": "ALABEO",
         "english": "ROLL",
-        "status": "New entry. Please translate!",
         "description": "Roll axis in capital letters"
     },
     "axisPITCH": {
