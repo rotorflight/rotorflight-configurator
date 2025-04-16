@@ -3172,11 +3172,11 @@
         "english": "Accelerometer Roll Trim"
     },
     "adjustmentsFunctionYawInertiaPrecompGain": {
-        "message": "Gain Hauptrotorträgheits-Vorsteuerung für Heck",
+        "message": "Gain Hauptrotorträgheit-Vorsteuerung für Heck",
         "english": "Yaw Inertia Precomp Gain"
     },
     "adjustmentsFunctionYawInertiaPrecompCutoff": {
-        "message": "Grenzfrequenz Hauptrotorträgheits-Vorsteuerung für Heck",
+        "message": "Grenzfrequenz Hauptrotorträgheit-Vorsteuerung für Heck",
         "english": "Yaw Inertia Precomp Cutoff"
     },
     "adjustmentsFunctionPitchSetpointBoostGain": {
@@ -3532,11 +3532,11 @@
         "english": "The phase offset for the swashplate controls."
     },
     "mixerCollectiveTiltCorrectionPos": {
-        "message": "Neigungs-Korrektur bei positiv Kollektiv-Pitch",
+        "message": "Neigungs-Korrektur bei positivem Kollektiv-Pitch",
         "english": "Positive Collective Tilt Correction"
     },
     "mixerCollectiveTiltCorrectionNeg": {
-        "message": "Neigungs-Korrektur bei negaiv Kollektiv-Pitch",
+        "message": "Neigungs-Korrektur bei negaivem Kollektiv-Pitch",
         "english": "Negative Collective Tilt Correction"
     },
     "mixerCollectiveTiltCorrectionHelp": {
@@ -6057,7 +6057,7 @@
         "english": "Decay time for collective impulse feedforward mixed into yaw"
     },
     "profilesYawInertiaPrecompGain": {
-        "message": "Gain Hauptrotorträgheits-Vorsteuerung",
+        "message": "Gain Hauptrotorträgheit-Vorsteuerung",
         "english": "Inertia Precomp Gain"
     },
     "profilesYawInertiaPrecompGainHelp": {
@@ -6065,11 +6065,11 @@
         "english": "The strength of the main rotor's inertia. Larger values result in more precomp being applied to the yaw control."
     },
     "profilesYawInertiaPrecompCutoff": {
-        "message": "Grenzfrequenz Hauptrotorträgheits-Vorsteuerung",
+        "message": "Grenzfrequenz Hauptrotorträgheit-Vorsteuerung",
         "english": "Inertia Precomp Cutoff"
     },
     "profilesYawInertiaPrecompCutoffHelp": {
-        "message": "Grenzfrequenz für die Hauptrotorträgheits-Vorsteuerung. Größere Werte führen zu einer schärferen Vorsteuerung.",
+        "message": "Grenzfrequenz für die Hauptrotorträgheit-Vorsteuerung. Größere Werte führen zu einer schärferen Vorsteuerung.",
         "english": "Derivative cutoff frequency for inertia precomp. Larger values result in a sharper application of precomp."
     },
     "profilesPitchFFCollective": {
@@ -6441,7 +6441,7 @@
         "english": "Lowpass Filter"
     },
     "gyroLowpassFilterHelp": {
-        "message": "Die Gyro-Tiefpassfilter werden verwendet, um starke Störungen im Gyro-Signal zu eliminieren. Zwei Filter können verwendet werden, entweder 1. oder 2. Ordnung. Der erste Filter ist dynamisch, er kann seine Grenzfrequenz der Rotordrehzahl anpassen. Die Min- und Max-Werte limitieren den dynamischen Bereich. Bei der Verwendung von RPM-Filtern oder Dynamischen Kerbfiltern wird ein extra Filter um die 100Hz benötigt. Ohne diese werden zwei Filter 2. Ordnung benötigt.",
+        "message": "Die Gyro-Tiefpassfilter werden verwendet, um starke Störungen des Gyro-Signals zu eliminieren. Es können zwei Filer-Typen ausgewählt werden, entweder Filter erster oder zweiter Ordnung. Der erste Tiefpass-Filter ist dynamisch, er kann seine Grenzfrequenz der Rotordrehzahl anpassen. Die Min- und Max-Werte limitieren den dynamischen Bereich. Bei der Verwendung von RPM-Filtern oder Dynamischen Kerbfiltern wird ein extra Tiefpass-Filter um die 100Hz benötigt. Ohne diese werden zwei Tielpass-Filter zweiter Ordnung benötigt.",
         "english": "The Gyro Lowpass Filters are used for cutting off excess noise in the gyro signal. Two filters can be used, either 1<sup>st</sup> or 2<sup>nd</sup> order. The first filter can be dynamic, changing its cutoff frequency with the main rotor RPM. The minimum and maximum are limiting the dynamic range. With RPM Filters or Dynamic Notch Filters, one extra filter is needed around 100Hz. Without them, two second order filters are required."
     },
     "gyroLowpassFilter1": {
@@ -6477,7 +6477,7 @@
         "english": "Notch Filter"
     },
     "gyroNotchFilterHelp": {
-        "message": "Die Kerbfilter (Notchfilter) werden verwendet, um weitere Resonanzen herauszufiltern. Jeder Filter hat eine Mitten- und Grenzfrequenz. Die Mittenfrequenz ist die Mitte des Filters und die Grenzfrequenz ist der Bereich, wo der Kerbfilter beginnt. Bei einer Grenzfrequenz von z. B. 160 Hz und einer Mittenfrequenz von 260 Hz bedeutet dies, dass der Filter-Bereich zwischen 160 und 360 Hz liegt, wobei die größten Dämpfung um die Mittenfrequenz erfolgt.",
+        "message": "Die Kerbfilter werden verwendet, um weitere Resonanzen herauszufiltern. Jeder Filter hat eine Mitten- und Grenzfrequenz. Die Mittenfrequenz ist die Mitte des Filters, und die Grenzfrequenz ist der Bereich, wo der Kerbfilter beginnt. Bei einer Grenzfrequenz von z. B. 160 Hz und einer Mittenfrequenz von 260 Hz bedeutet dies, dass der Filter-Bereich zwischen 160 Hz und 360 Hz liegt, wobei die größte Dämpfung im Bereich der Mittenfrequenz erfolgt.",
         "english": "The Notch Filters are used for filtering out additional resonances. Each filter has a Center and a Cutoff. The Center Frequency is the center of the filter and the Cutoff Frequency is where filter starts. For example with cutoff of 160 and center of 260, it means the range is 160-360Hz with most attenuation around the center."
     },
     "gyroNotchFilter1": {
@@ -6665,7 +6665,7 @@
         "english": "RPM Filter Notches"
     },
     "gyroRpmFilterHelp": {
-        "message": "Jedes rotierende Teil eines Hubschraubers erzeugt Vibrationen, welche die Leistung der Regelkreise erheblich beeinträchtigen können. Die <i>RPM-Kerbfilter</i> nutzen das Drehzahlsignal des Motors und die Getriebeübersetzungen des Modells, um diese Vibrationen präzise aus dem Gyrosignal zu eliminieren, so dass die Regelkreise mit der tatsächlichen Bewegung des Helis arbeiten können. Diese Methode führt zu einer wesentlich geringeren Verzögerung als die herkömmliche Vibrationsfilterung und verbessert die Gesamtflugleistung.",
+        "message": "Jedes rotierende Teil eines Hubschraubers erzeugt Vibrationen, welche die Leistung der Regelkreise erheblich beeinträchtigen können. Die <i>RPM-Kerbfilter</i> nutzen das Drehzahlsignal des Motors und die Getriebeübersetzungen, um diese Vibrationen präzise aus dem Gyrosignal zu eliminieren, so dass die Regelkreise mit der tatsächlichen Bewegung des Helis arbeiten können. Diese Methode führt zu einer wesentlich geringeren Verzögerung als die herkömmliche Vibrationsfilterung und verbessert die Gesamtflugleistung.",
         "english": "Every rotating part on a helicopter generates vibrations, which can significantly affect the performance of the flight control loops. The <i>RPM Filter</i> utilizes the motor's RPM signal and the model's gear ratios to precisely eliminate these vibrations from the gyro's output, enabling the control loops to operate on the true motion of the aircraft. This method introduces substantially less delay than traditional vibration filtering, enhancing overall flight performance."
     },
     "gyroRpmFilterMainRotorGroup": {
@@ -9483,7 +9483,7 @@
         "description": "Text indicating everything is selected in the drop down/multiple select"
     },
     "tabPresets": {
-        "message": "Voreinstellungen",
+        "message": "Parametersätze (Presets)",
         "english": "Presets",
         "description": "Presets tab title"
     },
@@ -9596,20 +9596,20 @@
         "description": "UI filter name - official/community/experimental"
     },
     "presetsLoadError": {
-        "message": "Fehler beim Laden von Voreinstellungen aus dem Internet",
+        "message": "Fehler beim Laden der Presets aus dem Internet",
         "english": "Error loading presets from the internet",
         "description": "Error report when failed to load presets index or a specific preset"
     },
     "presetsButtonReview": {
-        "message": "Ausgewählte Voreinstellungen Überprüfen",
+        "message": "Ausgewählte Presets Überprüfen",
         "english": "Review Selected Presets"
     },
     "presetsButtonReviewCLI": {
-        "message": "Überprüfe CLI",
+        "message": "CLI Überprüfen",
         "english": "Review CLI"
     },
     "presetsButtonApply": {
-        "message": "Voreinstellungen Ausführen",
+        "message": "Presets Übernehmen",
         "english": "Execute Presets"
     },
     "presetsButtonReset": {
@@ -9627,7 +9627,7 @@
         "description": "Second label in the progress dialog when applying presets"
     },
     "presetsCliErrorsWarning": {
-        "message": "<span class='message-negative'>WARNUNG!</span><br/>Die Konfiguration wurde mit CLI-Fehlern angewendet.",
+        "message": "<span class='message-negative'>WARNUNG!</span><br/>Die Konfiguration wurde mit CLI-Fehlern übernommen.",
         "english": "<span class='message-negative'>WARNING!</span><br/>Configuration has been applied with CLI errors.",
         "description": "Text to show when there are CLI errors after applying presets or user configuration"
     },
@@ -9657,7 +9657,7 @@
         "description": "Cancel button in the presets warning dialog"
     },
     "presetsWiki": {
-        "message": "Voreinstellungen Wiki",
+        "message": "Presets-Wiki",
         "english": "Presets Wiki",
         "description": "Button to open Presets Wiki link"
     },
@@ -9677,12 +9677,12 @@
         "description": "Button to load backup from a file"
     },
     "backupWaitDialogTitleSavingDiffAll": {
-        "message": "Speichere diff all vom Flight-Controller",
+        "message": "Speichere 'diff all' vom Flight-Controller",
         "english": "Saving diff all from the flight controller",
         "description": "Title for the waiting dialog when saving diff all into a file"
     },
     "backupWaitDialogTitleSavingDumpAll": {
-        "message": "Speichere dump all vom Flight-Controller",
+        "message": "Speichere 'dump all' vom Flight-Controller",
         "english": "Saving dump all from the flight controller",
         "description": "Title for the waiting dialog when saving dump all into a file"
     },
@@ -9697,12 +9697,12 @@
         "description": "Message appears on presets tab when saving current diff all into a file has failed"
     },
     "presetSources": {
-        "message": "Quellen mit Voreinstellungen ...",
+        "message": "Quellen mit Presets ...",
         "english": "Preset Sources...",
         "description": "A button to show preset sources dialog"
     },
     "presetsSourcesDialogTitle": {
-        "message": "Voreinstellungs-Quellen",
+        "message": "Preset-Quellen",
         "english": "Preset Sources",
         "description": "A button to show preset sources dialog"
     },
@@ -9716,7 +9716,7 @@
         "english": "OK"
     },
     "presetsSourcesDialogDefaultSourceName": {
-        "message": "Neue benutzerdefinierte Voreinstellungs-Quelle",
+        "message": "Neue Benutzerdefinierte Preset-Quelle",
         "english": "New Custom Preset Source",
         "description": "A default preset source (repo) name"
     },
@@ -9746,7 +9746,7 @@
         "description": "Presets tab, sources dialog, button to delete selected source"
     },
     "presetsSourcesDialogGithubBranch": {
-        "message": "Github Branch",
+        "message": "Github-Branch",
         "english": "Github Branch"
     },
     "presetsSourcesDialogURL": {
@@ -9758,31 +9758,31 @@
         "english": "Name"
     },
     "reviewPresetsDialogTitle": {
-        "message": "Ausgewählte Voreinstellungen Überprüfen",
+        "message": "Ausgewählte Presets Überprüfen",
         "english": "Review Selected Presets"
     },
     "presetsWarningNotOfficialSource": {
-        "message": "<span class=\"message-negative\">WARNUNG!</span> Eine Voreinstellungs-Quelle eines Drittanbieters ist ausgewählt.",
+        "message": "<span class=\"message-negative\">WARNUNG!</span> Eine Preset-Quelle eines Drittanbieters ist ausgewählt.",
         "english": "<span class=\"message-negative\">WARNING!</span> A third party preset source is selected.",
         "description": "Warning message that shows up when a third party preset source is selected"
     },
     "presetsFailedToLoadRepositories": {
-        "message": "<span class=\"message-negative\">WARNUNG!</span> Folgende Repositories konnten nicht geladen werden: <b>{{repos}}</b>",
+        "message": "<span class=\"message-negative\">WARNUNG!</span> Folgende Quellen konnten nicht geladen werden: <b>{{repos}}</b>",
         "english": "<span class=\"message-negative\">WARNING!</span> Failed to load following repositories: <b>{{repos}}</b>",
         "description": "Warning message that shows up when we fail to load some repositories"
     },
     "presetsWarningBackup": {
-        "message": "Bitte sicherstellen, dass die aktuelle Konfiguration gesichert wird ('$t(backupDiffAll.message)' Schaltfläche oder über CLI, wenn die Schaltfläche deaktiviert ist), <strong>bevor</strong> Voreinstellungen ausgewählt und angewendet werden. Andernfalls gibt es keine Möglichkeit, nach der Anwendung von Voreinstellungen zur vorherigen Konfiguration zurückzukehren.",
+        "message": "Bitte sicherstellen, dass die aktuelle Konfiguration gesichert wird ('$t(backupDiffAll.message)' Schaltfläche oder über CLI, wenn die Schaltfläche deaktiviert ist), <strong>bevor</strong> Presets ausgewählt und angewendet werden. Andernfalls gibt es keine Möglichkeit, nach der Übernahme von Presets zur vorherigen Konfiguration zurückzukehren.",
         "english": "Please make sure you backup your current configuration ('$t(backupDiffAll.message)' button or via CLI if the button is disabled) <strong>before</strong> picking and applying presets. Otherwise there is no way to return to previous configuration after applying presets.",
         "description": "Warning message that shows up at the top of the presets tab"
     },
     "presets_sources_dialog_warning": {
-        "message": "<span class=\"message-negative\">WARNUNG!</span> Die Verwendung von Voreinstellungs-Quellen von Drittanbietern könnte gefährlich sein.<br/>Bitte sicherstellen, dass nur vertrauenswürdige Quellen hinzugefügt und verwendet werden. Böswillige oder fehlerhafte Voreinstellungs-Quellen können die Konfiguration zerstören und sogar Geräte beschädigen.",
+        "message": "<span class=\"message-negative\">WARNUNG!</span> Die Verwendung von Preset-Quellen von Drittanbietern könnte gefährlich sein.<br/>Bitte sicherstellen, dass nur vertrauenswürdige Quellen hinzugefügt und verwendet werden. Böswillige oder fehlerhafte Preset-Quellen können die Konfiguration zerstören oder Komponenten beschädigen.",
         "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources will break your drone configuration and can potentially harm your devices.",
         "description": "Warning message that shows up at the top of the preset sources dialog"
     },
     "presetsWarningWrongVersionConfirmation": {
-        "message": "Ausgewählte Voreinstellung benötigt Firmware-Version $1. Aktuelle Firmware-Version ist $2",
+        "message": "Ausgewähltes Preset benötigt Firmware-Version $1. Aktuelle Firmware-Version ist $2",
         "english": "Picked preset requires firmware version $1. Current firmware version is $2",
         "description": "Warning message that shows up at the top of the preset sources dialog"
     },
@@ -9791,12 +9791,12 @@
         "english": "Example: \"OMPHOBBY M5\", or \"OMPHOBBY M7\""
     },
     "presetsNoPresetsFound": {
-        "message": "Keine Voreinstellungen für die angegebenen Suchparameter gefunden",
+        "message": "Keine Presets für die angegebenen Suchparameter gefunden",
         "english": "No presets found for the given search parameters",
         "description": "Message that apprears on presets tab if no presets were found"
     },
     "presetsTooManyPresetsFound": {
-        "message": "Die maximale Anzahl der angezeigten Voreinstellungen wurde erreicht",
+        "message": "Die maximale Anzahl der anzeigbaren Presets wurde erreicht",
         "english": "Reached the maximum limit of the shown presets number",
         "description": "Message that apprears on presets tab if too many presets found"
     },
@@ -9806,17 +9806,17 @@
         "description": "Placeholder for the options list dropdown"
     },
     "presetsVersionMismatch": {
-        "message": "Version der Voreinstellungs-Quelle stimmt nicht überein.<br/>Benötigte Version: {{versionRequired}}<br/>Version der Voreinstellungs-Quelle: {{versionSource}}<br/>Das Benutzen dieser Voreinstellungs-Quelle könnte gefährlich sein.<br/>Dennoch fortfahren?",
+        "message": "Version der Preset-Quelle stimmt nicht überein.<br/>Benötigte Version: {{versionRequired}}<br/>Version der Preset-Quelle: {{versionSource}}<br/>Das Benutzen dieser Preset-Quelle könnte gefährlich sein.<br/>Dennoch fortfahren?",
         "english": "Preset source version mismatch.<br/>Required version: {{versionRequired}}<br/>Preset source version: {{versionSource}}<br/>Using this preset source could be dangerous.<br/>Do you want to continue?",
         "description": "Placeholder for the options list dropdown"
     },
     "presetsReviewOptionsWarning": {
-        "message": "Bitte die Liste der Optionen prüfen, bevor diese Voreinstellung gewählt wird.",
+        "message": "Bitte die Liste der Optionen prüfen, bevor dieses Preset gewählt wird.",
         "english": "Please review the list of options before picking this preset.",
         "description": "Dialog text to prompt user to review options for the preset"
     },
     "presetsReviewBeforeApply": {
-        "message": "Bitte alle ausgewählten Voreinstellungen in der folgenden Liste überprüfen. Die CLI Voreinstellungen werden in der Reihenfolge der Auflistung angewendet. Bitte sicherstellen, dass eine Sicherungskopie der aktuellen Konfiguration erstellt wurde, bevor die Voreinstellungen angewendet werden.",
+        "message": "Bitte alle ausgewählten Presets in der folgenden Liste überprüfen. Die Presets CLI-Befehle werden in der Reihenfolge der Auflistung angewendet. Bitte sicherstellen, dass eine Sicherungskopie der aktuellen Konfiguration erstellt wurde, bevor die Presets übernommen werden.",
         "english": "Please review all of the selected presets in the list below. The presets CLI will be applied in the order they are listed. Ensure you have taken a backup of your current configuration before applying the presets."
     },
     "backupFailedToSave": {
@@ -9824,7 +9824,7 @@
         "english": "Something went wrong when trying to save the backup file."
     },
     "presetsCliConfirmationDialogTitle": {
-        "message": "Überprüfung der gerenderten Voreinstellungs-CLI-Befehle",
+        "message": "Gerenderte Presets-CLI-Befehle überprüfen",
         "english": "Review The Rendered Presets CLI Commands"
     },
     "presetEdit": {
