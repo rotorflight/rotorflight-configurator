@@ -1984,7 +1984,7 @@
         "english": "Proportional",
     },
     "profilesProportionalHelp": {
-        "message": "Controla la manera de con cuanta precisión la máquina sigue el movimiento de las palancas (los puntos de ajuste) y corrige las influencias externas.<br /><br />Valores más altos (ganancias) proporcionan seguimiento más preciso, pero pueden sobrepasarse si está demasiado alta en proporción a la ganancia derivativa (D-gain). Piense que el P-term es como un muelle en un coche.",
+        "message": "Controla la precisión con la que se sigue el movimiento de las palancas (los puntos de ajuste) y corrige las influencias externas.<br /><br />Valores más altos (ganancias) proporcionan seguimiento más preciso, pero pueden sobrepasarse si está demasiado alta en proporción a la ganancia derivativa (D-gain). Piense que el P-term es como un muelle en un coche.",
         "english": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint) and corrects for external influences.<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the derivative (D-gain). Think of the P-term as the spring on a car.",
         "description": "Proportional Term helpicon message on PID table titlebar"
     },
@@ -1993,7 +1993,7 @@
         "english": "Integral",
     },
     "profilesIntegralHelp": {
-        "message": "Controla con cuanta precisión la máquina mantiene el seguimiento de toda la rotación de los movimientos en los setpoint.<br>Similar a Proporcional, pero para biases más largos en el avión desde los regimenes de rotación de los setpoint, además de las influencias exteriores persistentes. Por ejemplo, viento continuado o desajustes del CG.<br /><br />Mayores ganancias proporcionan mayor precisión en el seguimiento del setpoint (i.e. en volteretas y giros constantes) pero pueden llevar a que la aeronave sea ahora capaz de seguir ajustada con entradas extremadamente rápidas, que pueden llevar a que continue rotando después de soltar la palanca. <br>Si es extremadamente alta en proporción al D-term, puede causar oscilaciones.",
+        "message": "Controla a precisión con la que se mantiene el seguimiento de todas las rotaciones y los movimientos en los setpoint.<br>Similar a Proporcional, pero para biases más largos en el avión desde los regimenes de rotación de los setpoint, además de las influencias exteriores persistentes. Por ejemplo, viento continuado o desajustes del CG.<br /><br />Mayores ganancias proporcionan mayor precisión en el seguimiento del setpoint (i.e. en volteretas y giros constantes) pero pueden llevar a que la aeronave sea ahora capaz de seguir ajustada con entradas extremadamente rápidas, que pueden llevar a que continue rotando después de soltar la palanca. <br>Si es extremadamente alta en proporción al D-term, puede causar oscilaciones.",
         "english": "Controls the strength of how tightly the machine holds the overall rotation rate setpoint.<br>Similar to Proportional, but for longer biases on the craft from the rotation rate setpoint, as well as persistent outside influence, for example steady wind or CG offsets.<br /><br />Higher gains provide tighter tracking of the setpoint (i.e. in constant flips and rolls), but can lead to the craft now being able to follow the setpoint on extremely quick inputs, which can lead to it continuing to rotate after the stick is released. <br>If extremely high in proportion to the D-term, can cause oscillations.",
         "description": "Integral Term helpicon message on PID table titlebar"
     },
@@ -2002,192 +2002,150 @@
         "english": "Derivative",
     },
     "profilesDerivativeHelp": {
-        "message": "Controls the strength of damping ANY angular acceleration of the craft, whether from stick inputs or external influences. For stick inputs, the D-term damps the movement to prevent overshooting. For an outside influence (vorticity or wind gust) the D-term damps the disturbance.<br /><br />Higher gains provide more damping and reduce possible overshoot from high P-terms.<br>However, the D-term is VERY sensitive to high frequency gyro vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise in the control loop can cause excessive servo heat and burn out servos if the gyro noise is not filtered properly (see Gyro tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the inherent negative property of magnifying high frequency gyro noise.",
+        "message": "Controla la cantidad de amortiguación de cualquier aceleración angular de la aeronave, tanto desde las entradas de las palancas como de las influencias externas. En las entradas de las palancas, Los D-term amortigua los movimientos para prevenir excesos. En las influencias externas (vórtices o rachas de viento) los D-term amortiguan las perturbaciones.<br /><br />El aumento de la ganancia proporciona mayor amortiguación y reduce los posibles excesos que puedas producir los altos P-terms.<br>Sin embargo, el D-term es MUY sensible a las altas frecuencias de las vibraciones del Giro (ruido | magnifica desde 10x a 100x).<br /><br />El ruido de alta frecuencia en el ciclo de control puede causar un calor excesivo en los servos que incluso los puede quemar si el ruido giroscópico no se filtra apropiadamente (vea la pestaña Giro).<br /><br />Piense en el D-term como los amortiguadores de su coche, pero con la inherente propiedad negativa de magnificar el ruido giroscópico de alta frecuencia.",
         "english": "Controls the strength of damping ANY angular acceleration of the craft, whether from stick inputs or external influences. For stick inputs, the D-term damps the movement to prevent overshooting. For an outside influence (vorticity or wind gust) the D-term damps the disturbance.<br /><br />Higher gains provide more damping and reduce possible overshoot from high P-terms.<br>However, the D-term is VERY sensitive to high frequency gyro vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise in the control loop can cause excessive servo heat and burn out servos if the gyro noise is not filtered properly (see Gyro tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the inherent negative property of magnifying high frequency gyro noise.",
-        "status": "New entry. Please translate!",
         "description": "Derivative Term helpicon message on PID table titlebar"
     },
     "profilesFeedforward": {
-        "message": "Feedforward",
+        "message": "Avance",
         "english": "Feedforward",
-        "status": "New entry. Please translate!"
     },
     "profilesFeedforwardHelp": {
-        "message": "This is an additional pushing term based on stick input. FF helps the P-term push the craft for commanded stick moves, does not react to any helicopter movements though.<br /><br />The FF-term pushes based on the difference between the commanded Setpoint (deg/sec). <br /><br />Higher values (gains) will result in a sharper response to stick input.<br>Too high of values may result in overshoot, as well as strikeback at the end of control inputs.<br>Too low or zero (0) values will result in a slow and delayed response to stick inputs, as well as continued rotation after the stick is released.",
+        "message": "Este término implica empuje adicional basado en las entradas de las palancas. Avance (FF) ayudaal P-term a acelerar la aereonave con los movimientos de las palancas, aunque no reacciona a ningún movimiento del helicóptero.<br /><br />El empuje del FF-term está basado en la diferencia entre los puntos de ajuste de los mandos (grados/seg). <br /><br />Valores más altos (gananacias) resultarán en una respuesta más precisa a los movimientos de las palancas.<br>Valores muy altos pueden resultar en excesos, además de efectos contrarios al final de los recorridos de las palancas.<br>Valores demasiado bajos o cero (0) pueden producirán respuestas lentas y retrasos en las respuestas a los movimientos de las palancas, además de que la rotación continue después de soltar las palancas.",
         "english": "This is an additional pushing term based on stick input. FF helps the P-term push the craft for commanded stick moves, does not react to any helicopter movements though.<br /><br />The FF-term pushes based on the difference between the commanded Setpoint (deg/sec). <br /><br />Higher values (gains) will result in a sharper response to stick input.<br>Too high of values may result in overshoot, as well as strikeback at the end of control inputs.<br>Too low or zero (0) values will result in a slow and delayed response to stick inputs, as well as continued rotation after the stick is released.",
-        "status": "New entry. Please translate!",
         "description": "Feedforward Term helpicon message on PID table titlebar"
     },
     "profilesBoost": {
-        "message": "Boost",
+        "message": "Impulso",
         "english": "Boost",
-        "status": "New entry. Please translate!"
     },
     "profilesBoostHelp": {
-        "message": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without he drawbacks of high Proportional or Feedforward gains.",
+        "message": "Este empuje adicional en el avance, se basa en una derivada de los puntos de ajuste. Un incremento del Impulso puede hacer más afiladas las respuestas del modelo, sin los efectos contrarios de las ganancias Proporcionales o del Avance (Feedforward).",
         "english": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without he drawbacks of high Proportional or Feedforward gains.",
-        "status": "New entry. Please translate!"
     },
     "profilesCopyProfile": {
         "message": "Copiar perfil",
         "english": "Copy profile",
-        "status": "Reused translation. Please check!"
     },
     "profilesResetProfile": {
-        "message": "Reset to defaults",
+        "message": "Reajustar a valores por defecto",
         "english": "Reset to defaults",
-        "status": "New entry. Please translate!"
     },
     "profilesActivateProfile": {
         "message": "Cargado Perfil: <strong class=\"message-positive\">$1</strong>",
         "english": "Loaded Profile: <strong class=\"message-positive\">$1</strong>",
-        "status": "Reused translation. Please check!"
     },
     "receiverSelection": {
-        "message": "Receiver Type",
+        "message": "Tipo de Receptor",
         "english": "Receiver Type",
-        "status": "New entry. Please translate!"
     },
     "receiverSettings": {
-        "message": "Receiver Settings",
+        "message": "Ajustes del Receptor",
         "english": "Receiver Settings",
-        "status": "New entry. Please translate!"
     },
     "receiverProtocol": {
-        "message": "Receiver Protocol",
+        "message": "Protocolo del Receptor",
         "english": "Receiver Protocol",
-        "status": "New entry. Please translate!"
     },
     "receiverHelpProtocol": {
-        "message": "Select the protocol that the receiver is using",
+        "message": "Seleccione el protocolo que usa el receptor",
         "english": "Select the protocol that the receiver is using",
-        "status": "New entry. Please translate!"
     },
     "receiverSerialHalfDuplex": {
-        "message": "One-wire Communication (Half-Duplex)",
+        "message": "Comunicación por un solo cable (Half-Duplex)",
         "english": "One-wire Communication (Half-Duplex)",
-        "status": "New entry. Please translate!"
     },
     "receiverSerialHalfDuplexHelp": {
-        "message": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2.",
+        "message": "Use los pines del Tx tanto para enviar como para recibir. Necesarios para SBUS2, F.PORT, SRXL y SRXL2.",
         "english": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2.",
-        "status": "New entry. Please translate!"
     },
     "receiverSerialInverted": {
-        "message": "Inverted Serial Signaling",
+        "message": "Señales Serie invertidas",
         "english": "Inverted Serial Signaling",
-        "status": "New entry. Please translate!"
     },
     "receiverSerialInvertedHelp": {
-        "message": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help.",
+        "message": "Restaura las señales invertidas del receptor. Requerido por el S.BUS y F.PORT, entre otros. Nota: esta opción NO està suportada en F4 MCUs, vea la ayuda.",
         "english": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help.",
-        "status": "New entry. Please translate!"
     },
     "receiverSerialPinSwap": {
-        "message": "Rx/Tx Pin Swap",
+        "message": "Cambio de pines de Rx/Tx",
         "english": "Rx/Tx Pin Swap",
-        "status": "New entry. Please translate!"
     },
     "receiverSerialPinSwapHelp": {
-        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
+        "message": "Intercambia los pines del Rx y del Tx. Nota: Esta opción NO está soportada en F4 MCUs, vea la ayuda.",
         "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
-        "status": "New entry. Please translate!"
     },
     "receiverStickCenter": {
-        "message": "Palanca Centro",
+        "message": "Centro de la Palanca",
         "english": "Stick Center"
     },
     "receiverHelpStickCenter": {
-        "message": "The value of stick (channel) center in µs. Usually 1500µs or 1520µs.",
+        "message": "El valor del centro de la palanca (canal) se mide en µs. Normalmente 1500µs o 1520µs.",
         "english": "The value of stick (channel) center in µs. Usually 1500µs or 1520µs.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "El valor (en us) usado para determinar si una palanca esta centrada (MID_RC).",
-            "english": "The value (in us) used to determine if a stick is centered (MID_RC)."
-        }
     },
     "receiverStickDeflection": {
-        "message": "Stick Maximum Travel",
+        "message": "Máximo recorrido de la palanca",
         "english": "Stick Maximum Travel",
-        "status": "New entry. Please translate!"
     },
     "receiverHelpStickDeflection": {
-        "message": "The maximum value (in µs) for stick deflection from the center, for RPY.",
+        "message": "Es el valor máximo (en µs) de las deflexiones de la palanca desde el centro, para RPY.",
         "english": "The maximum value (in µs) for stick deflection from the center, for RPY.",
-        "status": "New entry. Please translate!"
     },
     "receiverArmingThrottle": {
-        "message": "Throttle Channel limit for arming",
+        "message": "Límite para armadodel canal de motor",
         "english": "Throttle Channel limit for arming",
-        "status": "New entry. Please translate!"
     },
     "receiverHelpArmingThrottle": {
-        "message": "The channel value (in µs) under which arming is allowed",
+        "message": "El valor del canal (en µs) bajo el cual se permite el armado",
         "english": "The channel value (in µs) under which arming is allowed",
-        "status": "New entry. Please translate!"
     },
     "receiverZeroThrottle": {
-        "message": "Throttle Channel value for 0% throttle",
+        "message": "Valor del canal del motor para 0% de motor",
         "english": "Throttle Channel value for 0% throttle",
-        "status": "New entry. Please translate!"
     },
     "receiverHelpZeroThrottle": {
-        "message": "The channel value (in µs) for the throttle channel to be considered 0%",
+        "message": "El valor del canal (en µs) para que el canal de motor se considere como 0%",
         "english": "The channel value (in µs) for the throttle channel to be considered 0%",
-        "status": "New entry. Please translate!"
     },
     "receiverFullThrottle": {
-        "message": "Throttle Channel value for 100% throttle",
+        "message": "Valor del canal del motor para 100% de motor",
         "english": "Throttle Channel value for 100% throttle",
-        "status": "New entry. Please translate!"
     },
     "receiverHelpFullThrottle": {
-        "message": "The channel value (in µs) for the throttle channel to be considered 100%",
+        "message": "El valor del canal (en µs) para que el motor se considere que está al 100%",
         "english": "The channel value (in µs) for the throttle channel to be considered 100%",
-        "status": "New entry. Please translate!"
     },
     "receiverCyclicDeadband": {
-        "message": "Cyclic Deadband",
+        "message": "Banda muerta del Cíclico",
         "english": "Cyclic Deadband",
-        "status": "New entry. Please translate!"
     },
     "receiverHelpCyclicDeadband": {
-        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle.",
+        "message": "Son los valores (en µs) en los que las entradas de la emisora se diferencien para que sean consideradas como fuera del cero. Para transmisores con temblores en las salidas, este valor se puede incrementar si los valores de la radio vibran al ralentí.",
         "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle.",
-        "status": "New entry. Please translate!"
     },
     "receiverYawDeadband": {
-        "message": "Banda muerta Yaw",
+        "message": "Banda muerta Dirección",
         "english": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
+        "message": "Son los valores (en µs) en los que las entradas de la emisora se diferencian para que sean consideradas como fuera del cero. Pra transmisores con temblores en las salidas, este valor se puede incrementar si los valores de la radio vibran al ralentí. <strong>Este ajuste es sólo para Dirección.</strong>",
         "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Esto son valores (en us) de cuanto debe ser diferente una entrada RC antes de que sea considerada válida. Para transmisores con inestabilidad en las salidas, este valor puede ser incrementado si las entradas de rc se mueven estando en reposo. <strong>Este ajuste es sólo para el Yaw.</strong>",
-            "english": "These are values (in us) by how much RC input can be different before it's considered valid. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
-        }
     },
     "receiverTelemetrySettings": {
-        "message": "Telemetry Settings",
+        "message": "Ajustes de Telemetría",
         "english": "Telemetry Settings",
-        "status": "Reused translation. Please check!"
     },
     "receiverTelemetryEnabled": {
-        "message": "Enable Telemetry",
+        "message": "Habilitar Telemetría",
         "english": "Enable Telemetry",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryHalfDuplex": {
-        "message": "One-wire Telemetry Communication",
+        "message": "Comunicación de Telemetría por un solo cable",
         "english": "One-wire Telemetry Communication",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryInverted": {
-        "message": "Inverted Telemetry Signaling",
+        "message": "Señales invertidas de Telemetría",
         "english": "Inverted Telemetry Signaling",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryPinSwap": {
         "message": "Telemetry Pin Swap (Swap Rx and Tx pins)",
