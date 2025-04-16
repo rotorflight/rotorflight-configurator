@@ -1389,9 +1389,6 @@
     "feature_RPM_FILTER": {
         "message": "Filtrado de picos controlado por RPM",
         "english": "RPM controlled notch filtering",
-        "previous": {
-            "message": "Filtrado de picos controlado por RPM del Giro",
-            "english": "RPM controlled gyro notch filtering",
     },
     "configurationFeatureEnabled": {
         "message": "Activado",
@@ -1644,16 +1641,15 @@
         "english": "Beep when the 5 key camera control is exited",
     },
     "beeper_ARMING_GPS_NO_FIX": {
-        "message": "Beep a special tone when arming the FC and GPS does not have fix",
+        "message": "Pita un tono especial cuando se arma el FC y el GPS no tiene un fijo",
         "english": "Beep a special tone when arming the FC and GPS does not have fix",
-        "status": "New entry. Please translate!"
     },
     "configurationSystem": {
         "message": "Configuración de sistema",
         "english": "System configuration"
     },
     "configurationLoopTime": {
-        "message": "Tiempo de Ciclo del Controlador de Vuelo",
+        "message": "Tiempo de Ciclado del Controlador de Vuelo",
         "english": "Flight Controller Loop Time"
     },
     "configurationSpeedGyroNoGyro": {
@@ -1672,13 +1668,8 @@
         "description": "Value for some options that show the speed of gyro, pid, etc. in kHz"
     },
     "configurationGPS": {
-        "message": "Settings",
+        "message": "Ajustes",
         "english": "Settings",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "GPS",
-            "english": "GPS"
-        }
     },
     "configurationGPSProtocol": {
         "message": "Protocolo",
@@ -1706,15 +1697,9 @@
         "description": "Option to use Galileo in the GPS configuration"
     },
     "configurationGPSGalileoHelp": {
-        "message": "When enabled, this removes the QZSS system (Japanese) and replaces it for the Galileo system (European).",
+        "message": "Cuando se activa, se quita el sistema QZSS (Japonés) y se reemplaza por el sistema Galileo (Europeo).",
         "english": "When enabled, this removes the QZSS system (Japanese) and replaces it for the Galileo system (European).",
-        "status": "Modified entry. Please translate!",
         "description": "Help text for the option to use Galileo in the GPS configuration",
-        "previous": {
-            "message": "Cuando se activa, el módulo GPS también usará el sistema de satélites Galileo, con lo cual habrá normalmente más satélites fijados. En Betaflight 4.2.x o anterior, también deshabilita el sistema de aumento QZSS.",
-            "english": "When enabled, the GPS module will also track the Galileo satellite system, usually resulting in more locked satellites. On Betaflight 4.2.x or earlier, it also disables the QZSS augmentation system.",
-            "description": "Help text for the option to use Galileo in the GPS configuration"
-        }
     },
     "configurationGPSHomeOnce": {
         "message": "Establecer Punto Origen sólo una vez",
@@ -1731,22 +1716,16 @@
         "english": "EEPROM <span class=\"message-positive\">saved</span>"
     },
     "dialogDynFiltersChangeTitle": {
-        "message": "Cambio en valores de Notch Dinámico",
+        "message": "Cambio en valores de Pico Dinámico",
         "english": "Dynamic Notch values change"
     },
     "dialogDynFiltersChangeNote": {
-        "message": "<span class=\"message-negative\"><b>WARNING: Some dynamic notch values have been changed to default values</b></span> because the RPM filtering has been activated/deactivated.<br> Please, check before flying.",
+        "message": "<span class=\"message-negative\"><b>PRECAUCIÓN: Algunos valores de pico dinámico se han cambiado a los valores por defecto</b></span> porque el filtrado RPM se ha activado/deactivado.<br> Por favor, compruebe antes de volar.",
         "english": "<span class=\"message-negative\"><b>WARNING: Some dynamic notch values have been changed to default values</b></span> because the RPM filtering has been activated/deactivated.<br> Please, check before flying.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\"><b>ATENCIÓN: Este cambio activará/desactivará el filtro RPM, aumentando/disminuyendo el retardo/efectividad del filtro.</b></span><br><br>¿Restablecer los filtros notch dinámicos a los valores recomendados?",
-            "english": "<span class=\"message-negative\"><b>WARNING: This change will enable/disable RPM filtering, increasing/decreasing filter delay/effectiveness.</b></span><br><br>Reset the dynamic notch filters to recommended values?"
-        }
     },
     "dialogDynFiltersConfirm": {
         "message": "Aceptar",
         "english": "OK",
-        "status": "Reused translation. Please check!"
     },
     "portsIdentifier": {
         "message": "Identificador",
@@ -1773,7 +1752,7 @@
         "english": "Peripherals"
     },
     "portsHelp": {
-        "message": "<strong>Nota:</strong> no todas las combinaciones son válidas. Cuando el controlador de vuelo detecta esto la configuración del puerto serie es reiniciada.",
+        "message": "<strong>Nota:</strong> no todas las combinaciones son válidas. Cuando el controlador de vuelo detecta esto la configuración del puerto serie será reiniciada.",
         "english": "<strong>Note:</strong> not all combinations are valid.  When the flight controller firmware detects this the serial port configuration will be reset."
     },
     "portsVtxTableNotSet": {
@@ -1781,7 +1760,7 @@
         "english": "<span class=\"message-negative\">WARNING:</span> The VTX table has not been set up correctly and without it VTX control will not be possible. Please set up the VTX table in $t(tabVtx.message) tab."
     },
     "portsMSPHelp": {
-        "message": "<strong>Nota:</strong> <span class=\"message-negative\">NO</span> desactives MSP en el primer puerto serie a menos que sepas lo que estás haciendo. Puede que tengas que reinstalar y borrar la configuración si lo haces.",
+        "message": "<strong>Nota:</strong> <span class=\"message-negative\">NO</span> desactive MSP en el primer puerto serie a menos que sepa lo que estás haciendo. Puede que tenga que reinstalar y borrar la configuración si lo haces.",
         "english": "<strong>Note:</strong> Do <span class=\"message-negative\">NOT</span> disable MSP on the first serial port unless you know what you are doing.  You may have to reflash and erase your configuration if you do."
     },
     "portsTelemetryDisabled": {
@@ -1791,7 +1770,6 @@
     "portsFunction_DISABLED": {
         "message": "Desactivado",
         "english": "Disabled",
-        "status": "Reused translation. Please check!"
     },
     "portsFunction_MSP": {
         "message": "MSP",
@@ -1802,147 +1780,71 @@
         "english": "GPS"
     },
     "portsFunction_TELEMETRY_FRSKY": {
-        "message": "Telemetry: FrSky Hub",
+        "message": "Telemetría: Hub FrSky",
         "english": "Telemetry: FrSky Hub",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "FrSky",
-            "english": "FrSky"
-        }
     },
     "portsFunction_TELEMETRY_HOTT": {
-        "message": "Telemetry: Graupner HoTT",
+        "message": "Telemetría: HoTT Graupner",
         "english": "Telemetry: Graupner HoTT",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "HoTT",
-            "english": "HoTT"
-        }
     },
     "portsFunction_TELEMETRY_LTM": {
-        "message": "Telemetry: LTM",
+        "message": "Telemetría: LTM",
         "english": "Telemetry: LTM",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "LTM",
-            "english": "LTM"
-        }
     },
     "portsFunction_TELEMETRY_MAVLINK": {
-        "message": "Telemetry: MAVLink",
+        "message": "Telemetría: MAVLink",
         "english": "Telemetry: MAVLink",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "MAVLink",
-            "english": "MAVLink"
-        }
     },
     "portsFunction_TELEMETRY_MSP": {
-        "message": "Telemetry: MSP",
+        "message": "Telemetría: MSP",
         "english": "Telemetry: MSP",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "MSP",
-            "english": "MSP"
-        }
     },
     "portsFunction_TELEMETRY_SMARTPORT": {
-        "message": "Telemetry: FrSky SmartPort",
+        "message": "Telemetría: Smartport FrSky",
         "english": "Telemetry: FrSky SmartPort",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "SmartPort",
-            "english": "SmartPort"
-        }
     },
     "portsFunction_TELEMETRY_IBUS": {
-        "message": "Telemetry: FlySky iBUS",
+        "message": "Telemetría: iBus FlySky",
         "english": "Telemetry: FlySky iBUS",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "iBUS",
-            "english": "iBUS"
-        }
     },
     "portsFunction_TELEMETRY_JETIXBUS": {
-        "message": "Telemetry: JETI Xbus",
+        "message": "Telemetría: Xbus JETI",
         "english": "Telemetry: JETI Xbus",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "JETIXBUS",
-            "english": "JETIXBUS"
-        }
     },
     "portsFunction_TELEMETRY_CRSF": {
-        "message": "Telemetry: TBS CRSF",
+        "message": "Telemetría: TBS CRSF",
         "english": "Telemetry: TBS CRSF",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "CRSF",
-            "english": "CRSF"
-        }
     },
     "portsFunction_TELEMETRY_SRXL": {
-        "message": "Telemetry: Spektrum SRXL",
+        "message": "Telemetría: SRXL Spektrum",
         "english": "Telemetry: Spektrum SRXL",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "SRXL",
-            "english": "SRXL"
-        }
     },
     "portsFunction_ESC_SENSOR": {
-        "message": "ESC Telemetry",
+        "message": "Telemetría ESC",
         "english": "ESC Telemetry",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "ESC",
-            "english": "ESC"
-        }
     },
     "portsFunction_RX_SERIAL": {
-        "message": "Serial Rx",
+        "message": "Serie del Rx",
         "english": "Serial Rx",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "RX Serie",
-            "english": "Serial RX"
-        }
     },
     "portsFunction_BLACKBOX": {
-        "message": "Blackbox Logging",
+        "message": "Grabando la Caja negra",
         "english": "Blackbox Logging",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Grabadora de Caja Negra",
-            "english": "Blackbox logging"
-        }
     },
     "portsFunction_TBS_SMARTAUDIO": {
         "message": "VTX: TBS SmartAudio",
         "english": "VTX: TBS SmartAudio",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "VTX (TBS SmartAudio)",
-            "english": "VTX (TBS SmartAudio)"
-        }
     },
     "portsFunction_IRC_TRAMP": {
         "message": "VTX: IRC Tramp",
         "english": "VTX: IRC Tramp",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "VTX (IRC Tramp)",
-            "english": "VTX (IRC Tramp)"
-        }
     },
     "portsFunction_RUNCAM": {
-        "message": "Camera: RunCam",
+        "message": "Cámara: RunCam",
         "english": "Camera: RunCam",
-        "status": "New entry. Please translate!"
     },
     "portsFunction_RUNCAM_DEVICE_CONTROL": {
-        "message": "Cámara (RunCam Protocol)",
+        "message": "Cámara (Protocolo RunCam)",
         "english": "Camera (RunCam Protocol)"
     },
     "portsFunction_LIDAR_TF": {
@@ -1952,67 +1854,42 @@
     "portsFunction_FRSKY_OSD": {
         "message": "OSD: FrSky",
         "english": "OSD: FrSky",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "OSD (Protocolo FrSky)",
-            "english": "OSD (FrSky Protocol)"
-        }
     },
     "portsFunction_SBUS_OUT": {
-        "message": "S.BUS Output",
+        "message": "Salida S.BUS",
         "english": "S.BUS Output",
-        "status": "New entry. Please translate!"
     },
     "portsFunction_CUSTOM": {
-        "message": "Custom",
+        "message": "Personalizado",
         "english": "Custom",
-        "status": "New entry. Please translate!"
     },
     "baudrate_AUTO": {
         "message": "Auto",
         "english": "Auto",
-        "status": "New entry. Please translate!"
     },
     "baudrate_CUSTOM": {
-        "message": "Custom",
+        "message": "Personalizado",
         "english": "Custom",
-        "status": "New entry. Please translate!"
     },
     "baudrate_DISABLED": {
-        "message": "Disabled",
+        "message": "Deshabilitado",
         "english": "Disabled",
-        "status": "New entry. Please translate!"
     },
     "dialogCopyProfileText": {
-        "message": "Copy values from the current profile to",
+        "message": "Copia los valores desde el perfil actual a",
         "english": "Copy values from the current profile to",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Copiar valores del perfil actual al",
-            "english": "Copy values from current profile to"
-        }
     },
     "dialogCopyRateProfileText": {
-        "message": "Copy values from the current rateprofile to",
+        "message": "Copa los valores desde el perfil actual de giro a",
         "english": "Copy values from the current rateprofile to",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Copiar valores del perfil de tasas actual al",
-            "english": "Copy values from current rateprofile to"
-        }
     },
     "dialogCopyProfileTitle": {
-        "message": "Copiar Valores del Perfil",
+        "message": "Copia Valores del Perfil",
         "english": "Copy Profile Values"
     },
     "dialogCopyProfileNote": {
-        "message": "All values on the destination profile will be overwritten.<br>This operation can not be reverted.",
+        "message": "Todos los valores del perfil de destino se reescribirán.<br>Esta operación no se puede revertir.",
         "english": "All values on the destination profile will be overwritten.<br>This operation can not be reverted.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Todos los valores del perfil destino serán borrados y sobrescritos",
-            "english": "All values on the destination profile will be wiped and overwritten"
-        }
     },
     "dialogCopyProfileConfirm": {
         "message": "Copiar",
@@ -2023,131 +1900,106 @@
         "english": "Cancel"
     },
     "dialogResetProfileTitle": {
-        "message": "Reset Profile Values",
+        "message": "Reajustar los valores del perfil",
         "english": "Reset Profile Values",
-        "status": "New entry. Please translate!"
     },
     "dialogResetProfileNote": {
-        "message": "All values on the current profile will be reset to defaults.<br>This operation can not be reverted.",
+        "message": "Todos los valores del perfil actual serán reajustados a los valores por defecto.<br>Esta operación no se puede revertir.",
         "english": "All values on the current profile will be reset to defaults.<br>This operation can not be reverted.",
-        "status": "New entry. Please translate!"
     },
     "dialogResetRateProfileNote": {
-        "message": "All values on the current profile will be reset to defaults.",
+        "message": "Todos los valores del perfil actual se reajustarán a los valores por defecto.",
         "english": "All values on the current profile will be reset to defaults.",
-        "status": "New entry. Please translate!"
     },
     "dialogResetProfileConfirm": {
         "message": "Reiniciar",
         "english": "Reset",
-        "status": "Reused translation. Please check!"
     },
     "dialogResetProfileClose": {
         "message": "Cancelar",
         "english": "Cancel",
-        "status": "Reused translation. Please check!"
     },
     "dialogProfileChangeTitle": {
-        "message": "<span class=\"message-negative\">Warning:</span> Profile Changed",
+        "message": "<span class=\"message-negative\">AVISO:</span> Perfil cambiado",
         "english": "<span class=\"message-negative\">Warning:</span> Profile Changed",
-        "status": "New entry. Please translate!"
     },
     "dialogProfileChangeNote": {
-        "message": "The active profile was changed before changes were saved. All changes are <b>lost</b>.",
+        "message": "El perfil activo se ha cambiado antes de que los cambios fueran guardados. Todos los cambios <b>se han perdido</b>.",
         "english": "The active profile was changed before changes were saved. All changes are <b>lost</b>.",
-        "status": "New entry. Please translate!"
     },
     "dialogProfileChangeConfirm": {
         "message": "Aceptar",
         "english": "OK",
-        "status": "Reused translation. Please check!"
     },
     "profilesSubTab1": {
-        "message": "Profile #1",
+        "message": "Perfil #1",
         "english": "Profile #1",
-        "status": "New entry. Please translate!"
     },
     "profilesSubTab2": {
-        "message": "Profile #2",
+        "message": "Perfil #2",
         "english": "Profile #2",
-        "status": "New entry. Please translate!"
     },
     "profilesSubTab3": {
-        "message": "Profile #3",
+        "message": "Perfil #3",
         "english": "Profile #3",
-        "status": "New entry. Please translate!"
     },
     "profilesSubTab4": {
-        "message": "Profile #4",
+        "message": "Perfil #4",
         "english": "Profile #4",
-        "status": "New entry. Please translate!"
     },
     "profilesSubTab5": {
-        "message": "Profile #5",
+        "message": "Perfil #5",
         "english": "Profile #5",
-        "status": "New entry. Please translate!"
     },
     "profilesSubTab6": {
-        "message": "Profile #6",
+        "message": "Perfil #6",
         "english": "Profile #6",
-        "status": "New entry. Please translate!"
     },
     "profilesPIDModeZeroWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>Passthrough Mode</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
+        "message": "<span class=\"message-negative\">AVISO:</span> El PID Controlado está en <b>Modo Passthrough</b>.<br>Por favor, use el <b>CLI</b> para cambiar los ajustes del PID.",
         "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>Passthrough Mode</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
-        "status": "New entry. Please translate!"
     },
     "profilesPIDModeOneWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 1</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
+        "message": "<span class=\"message-negative\">AVISO:</span> El PID Controlado está en el modo <b>Legacy PID 1</b>.<br>Por favor, use el <b>CLI</b> para cambiar los ajustes del PID.",
         "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 1</b>.<br>Please use the <b>CLI</b> to change the PID settings.",
-        "status": "New entry. Please translate!"
     },
     "profilesPIDModeTwoWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>.",
+        "message": "<span class=\"message-negative\">AVISO:</span> El PID Controlado está en el modo <b>Legacy PID 2</b>.",
         "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>.",
-        "status": "New entry. Please translate!"
     },
     "profilesPIDModeThreeWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b> with HSI.",
+        "message": "<span class=\"message-negative\">AVISO:</span> El PID Controlado está en el nuevo modo <b>PID 3</b> con HSI.",
         "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b> with HSI.",
-        "status": "New entry. Please translate!"
     },
     "profilesPIDModeCustomWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings.",
+        "message": "<span class=\"message-negative\">AVISO:</span> El controlador del PID se ha configurado manualmente con parámetros que no se pueden mostrar aquí.<br>Por favor, use el <b>CLI</b> para cambiar los ajustes del PID.",
         "english": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings.",
-        "status": "Reused translation. Please check!"
     },
     "profilesPIDGains": {
-        "message": "Axis",
+        "message": "Eje",
         "english": "Axis",
-        "status": "New entry. Please translate!"
     },
     "profilesProportional": {
-        "message": "Proportional",
+        "message": "Proporcional",
         "english": "Proportional",
-        "status": "New entry. Please translate!"
     },
     "profilesProportionalHelp": {
-        "message": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint) and corrects for external influences.<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the derivative (D-gain). Think of the P-term as the spring on a car.",
+        "message": "Controla la manera de con cuanta precisión la máquina sigue el movimiento de las palancas (los puntos de ajuste) y corrige las influencias externas.<br /><br />Valores más altos (ganancias) proporcionan seguimiento más preciso, pero pueden sobrepasarse si está demasiado alta en proporción a la ganancia derivativa (D-gain). Piense que el P-term es como un muelle en un coche.",
         "english": "Controls the strength of how tightly the machine tracks the sticks (the Setpoint) and corrects for external influences.<br /><br />Higher value (gains) provide tighter tracking, but can cause overshoot if too high in proportion to the derivative (D-gain). Think of the P-term as the spring on a car.",
-        "status": "New entry. Please translate!",
         "description": "Proportional Term helpicon message on PID table titlebar"
     },
     "profilesIntegral": {
         "message": "Integral",
         "english": "Integral",
-        "status": "New entry. Please translate!"
     },
     "profilesIntegralHelp": {
-        "message": "Controls the strength of how tightly the machine holds the overall rotation rate setpoint.<br>Similar to Proportional, but for longer biases on the craft from the rotation rate setpoint, as well as persistent outside influence, for example steady wind or CG offsets.<br /><br />Higher gains provide tighter tracking of the setpoint (i.e. in constant flips and rolls), but can lead to the craft now being able to follow the setpoint on extremely quick inputs, which can lead to it continuing to rotate after the stick is released. <br>If extremely high in proportion to the D-term, can cause oscillations.",
+        "message": "Controla con cuanta precisión la máquina mantiene el seguimiento de toda la rotación de los movimientos en los setpoint.<br>Similar a Proporcional, pero para biases más largos en el avión desde los regimenes de rotación de los setpoint, además de las influencias exteriores persistentes. Por ejemplo, viento continuado o desajustes del CG.<br /><br />Mayores ganancias proporcionan mayor precisión en el seguimiento del setpoint (i.e. en volteretas y giros constantes) pero pueden llevar a que la aeronave sea ahora capaz de seguir ajustada con entradas extremadamente rápidas, que pueden llevar a que continue rotando después de soltar la palanca. <br>Si es extremadamente alta en proporción al D-term, puede causar oscilaciones.",
         "english": "Controls the strength of how tightly the machine holds the overall rotation rate setpoint.<br>Similar to Proportional, but for longer biases on the craft from the rotation rate setpoint, as well as persistent outside influence, for example steady wind or CG offsets.<br /><br />Higher gains provide tighter tracking of the setpoint (i.e. in constant flips and rolls), but can lead to the craft now being able to follow the setpoint on extremely quick inputs, which can lead to it continuing to rotate after the stick is released. <br>If extremely high in proportion to the D-term, can cause oscillations.",
-        "status": "New entry. Please translate!",
         "description": "Integral Term helpicon message on PID table titlebar"
     },
     "profilesDerivative": {
         "message": "Derivativo (D)",
         "english": "Derivative",
-        "status": "Reused translation. Please check!"
     },
     "profilesDerivativeHelp": {
         "message": "Controls the strength of damping ANY angular acceleration of the craft, whether from stick inputs or external influences. For stick inputs, the D-term damps the movement to prevent overshooting. For an outside influence (vorticity or wind gust) the D-term damps the disturbance.<br /><br />Higher gains provide more damping and reduce possible overshoot from high P-terms.<br>However, the D-term is VERY sensitive to high frequency gyro vibrations (noise | magnifies by 10x to 100x).<br /><br />High frequency noise in the control loop can cause excessive servo heat and burn out servos if the gyro noise is not filtered properly (see Gyro tab).<br /><br />Think of the D-term as the shock absorber on your car, but with the inherent negative property of magnifying high frequency gyro noise.",
