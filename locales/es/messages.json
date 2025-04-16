@@ -2148,758 +2148,608 @@
         "english": "Inverted Telemetry Signaling",
     },
     "receiverTelemetryPinSwap": {
-        "message": "Telemetry Pin Swap (Swap Rx and Tx pins)",
+        "message": "Intercambio de pines de Telemetría (Intercambia los pines del Rx y del Tx)",
         "english": "Telemetry Pin Swap (Swap Rx and Tx pins)",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryMode": {
-        "message": "Enable CRSF Custom Telemetry",
+        "message": "Habilita Telemetría personalizada de CRSF",
         "english": "Enable CRSF Custom Telemetry",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryRate": {
-        "message": "Telemetry Rate",
+        "message": "Velocidad Telemetría",
         "english": "Telemetry Rate",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryRatio": {
-        "message": "Telemetry Ratio",
+        "message": "Ratio de Telemetría",
         "english": "Telemetry Ratio",
-        "status": "New entry. Please translate!"
     },
     "receiverHelpCrsfTelemetryMode": {
-        "message": "Enables the Custom Rotorflight telemetry with ELRS. Requires a Lua script in the Tx for decoding the sensors. Custom telemetry provides a plethora of sensors for helicopter use.",
+        "message": "Habilita la telemetría personalizada de Rotorflight con ELRS. Requiere un script Lua script en el Tx para decodificar los sensores. La telemetría personalizada proporciona una gran cantidad de sensores para uso en helicópteros.",
         "english": "Enables the Custom Rotorflight telemetry with ELRS. Requires a Lua script in the Tx for decoding the sensors. Custom telemetry provides a plethora of sensors for helicopter use.",
-        "status": "New entry. Please translate!"
     },
     "receiverHelpCrsfTelemetryRate": {
-        "message": "Radio link packet rate for telemetry. Set this to the same value as the ELRS packet rate in the Tx.",
+        "message": "Régimen de transmisión de paquetes para telemetría. Ajuste este valor al mismo que se use con los paquetes de telemetría ELRS en el Tx.",
         "english": "Radio link packet rate for telemetry. Set this to the same value as the ELRS packet rate in the Tx.",
-        "status": "New entry. Please translate!"
     },
     "receiverHelpCrsfTelemetryRatio": {
-        "message": "Radio link packet ratio for telemetry. Set this to the same value as the ELRS telemetry ratio in the Tx.",
+        "message": "Régimen de transmisión de paquetes para telemetría. Ajuste este valor al mismo que se use con los paquetes de telemetría ELRS en el Tx.",
         "english": "Radio link packet ratio for telemetry. Set this to the same value as the ELRS telemetry ratio in the Tx.",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensors": {
-        "message": "Telemetry Sensors",
+        "message": "Telemetría de Sensores",
         "english": "Telemetry Sensors",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_VOLTAGE": {
-        "message": "Battery Voltage",
+        "message": "Voltaje de Batería",
         "english": "Battery Voltage",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_CURRENT": {
-        "message": "Battery Current",
+        "message": "Amperaje de Batería",
         "english": "Battery Current",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_FUEL_LEVEL": {
-        "message": "Battery Charge Level",
+        "message": "Nivel Carga Batería",
         "english": "Battery Charge Level",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_USED_CAPACITY": {
-        "message": "Used Battery Capacity",
+        "message": "Capacidad usada de Batería",
         "english": "Used Battery Capacity",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BEC_VOLTAGE": {
-        "message": "BEC Voltage",
+        "message": "Voltaje del BEC",
         "english": "BEC Voltage",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_HEADSPEED": {
-        "message": "Headspeed",
+        "message": "Velocidad de la cabeza",
         "english": "Headspeed",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_TAILSPEED": {
-        "message": "Tailspeed",
+        "message": "Velocidad de la Cola",
         "english": "Tailspeed",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_TEMPERATURE": {
-        "message": "FC Temperature",
+        "message": "Temperatura del FC",
         "english": "FC Temperature",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_MODE": {
-        "message": "Flight Mode",
+        "message": "Modo de vuelo",
         "english": "Flight Mode",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_PITCH": {
-        "message": "Pitch angle (attitude)",
+        "message": "Angulo en ataque (actitud)",
         "english": "Pitch angle (attitude)",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ROLL": {
-        "message": "Roll angle (attitude)",
+        "message": "Ángulo de alabeo (actitud)",
         "english": "Roll angle (attitude)",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_HEADING": {
-        "message": "Heading",
+        "message": "Rumbo",
         "english": "Heading",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ACC_X": {
-        "message": "Accelerometer X-axis",
+        "message": "Eje-X de Acelerómetro",
         "english": "Accelerometer X-axis",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ACC_Y": {
-        "message": "Accelerometer Y-axis",
+        "message": "Eje-Y de Acelerómetro",
         "english": "Accelerometer Y-axis",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ACC_Z": {
-        "message": "Accelerometer Z-axis",
+        "message": "Eje-Z de Acelerómetro",
         "english": "Accelerometer Z-axis",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ALTITUDE": {
-        "message": "Altitude",
+        "message": "Altitud",
         "english": "Altitude",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_VARIO": {
         "message": "Vario",
         "english": "Vario",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_LAT_LONG": {
-        "message": "GPS Latitude & Longitude",
+        "message": "Latitud & Longitud GPS",
         "english": "GPS Latitude & Longitude",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GROUND_SPEED": {
-        "message": "GPS Ground Speed",
+        "message": "Velocidad sobre suelo GPS",
         "english": "GPS Ground Speed",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_DISTANCE": {
-        "message": "GPS Distance",
+        "message": "Distancia GPS",
         "english": "GPS Distance",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_CURRENT": {
-        "message": "ESC Current",
+        "message": "Amperaje del ESC",
         "english": "ESC Current",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_VOLTAGE": {
-        "message": "ESC Voltage",
+        "message": "Voltaje del ESC",
         "english": "ESC Voltage",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_RPM": {
-        "message": "ESC RPM",
+        "message": "RPM del ESC",
         "english": "ESC RPM",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_TEMPERATURE": {
-        "message": "ESC Temperature",
+        "message": "Temperatura del ESC",
         "english": "ESC Temperature",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ADJUSTMENT": {
-        "message": "Adjustment Function",
+        "message": "Función de ajuste",
         "english": "Adjustment Function",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GOV_MODE": {
-        "message": "Governor Mode",
+        "message": "Modo del regulador",
         "english": "Governor Mode",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ARMING_FLAGS": {
-        "message": "Arming Flags",
+        "message": "Banderas de Armado",
         "english": "Arming Flags",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_PID_PROFILE": {
-        "message": "PID Profile",
+        "message": "Perfil PID",
         "english": "PID Profile",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_RATES_PROFILE": {
-        "message": "Rates Profile",
+        "message": "Perfil de Rates",
         "english": "Rates Profile",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_THROTTLE_CONTROL": {
-        "message": "Throttle Control",
+        "message": "Control de motor",
         "english": "Throttle Control",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_MODEL_ID": {
-        "message": "Model Id",
+        "message": "ID del Modelo",
         "english": "Model Id",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_DEBUG": {
-        "message": "Debug",
+        "message": "Depurar",
         "english": "Debug",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_SYSTEM": {
-        "message": "System",
+        "message": "Sistema",
         "english": "System",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_GPS": {
         "message": "GPS",
         "english": "GPS",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_CONTROL": {
         "message": "Control",
         "english": "Control",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_PROFILE": {
-        "message": "Profile",
+        "message": "Perfil",
         "english": "Profile",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_RPM": {
         "message": "RPM",
         "english": "RPM",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_BATTERY": {
-        "message": "Battery",
+        "message": "Batería",
         "english": "Battery",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_TEMPERATURE": {
-        "message": "Temperature",
+        "message": "Temperatura",
         "english": "Temperature",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_ESC1": {
         "message": "ESC #1",
         "english": "ESC #1",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_ESC2": {
         "message": "ESC #2",
         "english": "ESC #2",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_BARO": {
-        "message": "Barometer",
+        "message": "Bariómetro",
         "english": "Barometer",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_GYRO": {
-        "message": "Gyro",
+        "message": "Giro",
         "english": "Gyro",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_STATUS": {
-        "message": "Status",
+        "message": "Estado",
         "english": "Status",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_CURRENT": {
-        "message": "Current",
+        "message": "Amperaje",
         "english": "Current",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetryGroup_VOLTAGE": {
-        "message": "Voltage",
+        "message": "Voltaje",
         "english": "Voltage",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_HEARTBEAT": {
-        "message": "Heartbeat",
+        "message": "Pulsación",
         "english": "Heartbeat",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BATTERY": {
-        "message": "Battery",
+        "message": "Batería",
         "english": "Battery",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BATTERY_VOLTAGE": {
-        "message": "Battery Voltage",
+        "message": "Voltaje de Batería",
         "english": "Battery Voltage",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BATTERY_CURRENT": {
-        "message": "Battery Current",
+        "message": "Amperaje de Batería",
         "english": "Battery Current",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BATTERY_CONSUMPTION": {
-        "message": "Battery Consumption",
+        "message": "Consumo de Batería",
         "english": "Battery Consumption",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BATTERY_CHARGE_LEVEL": {
-        "message": "Battery Charge Level",
+        "message": "Nivel Carga de Batería",
         "english": "Battery Charge Level",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BATTERY_CELL_COUNT": {
-        "message": "Battery Cell Count",
+        "message": "Número Celdas Batería",
         "english": "Battery Cell Count",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BATTERY_CELL_VOLTAGE": {
-        "message": "Battery Cell Voltage",
+        "message": "Voltaje de Celdas de Batería",
         "english": "Battery Cell Voltage",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BATTERY_CELL_VOLTAGES": {
-        "message": "Battery Cell Voltages",
+        "message": "Voltajes de celdas de Batería",
         "english": "Battery Cell Voltages",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_CONTROL": {
-        "message": "Control (hi-res)",
+        "message": "Control (alta-res)",
         "english": "Control (hi-res)",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_PITCH_CONTROL": {
-        "message": "Pitch Control",
+        "message": "Control profundidad",
         "english": "Pitch Control",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ROLL_CONTROL": {
-        "message": "Roll Control",
+        "message": "Control Alabeo",
         "english": "Roll Control",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_YAW_CONTROL": {
-        "message": "Yaw Control",
+        "message": "Control Dirección",
         "english": "Yaw Control",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_COLLECTIVE_CONTROL": {
-        "message": "Collective Control",
+        "message": "Control del Colectio",
         "english": "Collective Control",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_THROTTLE_CONTROL": {
-        "message": "Throttle Control",
+        "message": "Control del motor",
         "english": "Throttle Control",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_DATA": {
-        "message": "ESC Data",
+        "message": "Datos ESC",
         "english": "ESC Data",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_VOLTAGE": {
-        "message": "ESC Voltage",
+        "message": "Voltaje del ESC",
         "english": "ESC Voltage",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_CURRENT": {
-        "message": "ESC Current",
+        "message": "Amperaje del ESC",
         "english": "ESC Current",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_CAPACITY": {
-        "message": "ESC Capacity",
+        "message": "Capacidad del ESC",
         "english": "ESC Capacity",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_ERPM": {
-        "message": "ESC ERPM",
+        "message": "ERPM del ESC",
         "english": "ESC ERPM",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_POWER": {
-        "message": "ESC Power",
+        "message": "Potencia del ESC",
         "english": "ESC Power",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_THROTTLE": {
-        "message": "ESC Throttle",
+        "message": "Motor del ESC",
         "english": "ESC Throttle",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_TEMP1": {
-        "message": "ESC Temp 1",
+        "message": "Temp 1 del ESC",
         "english": "ESC Temp 1",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_TEMP2": {
-        "message": "ESC Temp 2",
+        "message": "Temp 2 del ESC",
         "english": "ESC Temp 2",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_BEC_VOLTAGE": {
-        "message": "ESC BEC Voltage",
+        "message": "Voltaje del BEC del ESC",
         "english": "ESC BEC Voltage",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_BEC_CURRENT": {
-        "message": "ESC BEC Current",
+        "message": "Amperaje del BEC del ESC",
         "english": "ESC BEC Current",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_STATUS": {
-        "message": "ESC Status",
+        "message": "Estado del ESC",
         "english": "ESC Status",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_MODEL": {
-        "message": "ESC Model",
+        "message": "Modelo de ESC",
         "english": "ESC Model",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BEC_VOLTAGE": {
-        "message": "BEC Voltage",
+        "message": "Voltaje del BEC"
         "english": "BEC Voltage",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BUS_VOLTAGE": {
-        "message": "Bus Voltage",
+        "message": "Voltaje del Bus",
         "english": "Bus Voltage",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_MCU_VOLTAGE": {
-        "message": "MCU Voltage",
+        "message": "Voltaje del MCU",
         "english": "MCU Voltage",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BEC_CURRENT": {
-        "message": "BEC Current",
+        "message": "Amperaje del BEC",
         "english": "BEC Current",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BUS_CURRENT": {
-        "message": "Bus Current",
+        "message": "Amperaje del Bus",
         "english": "Bus Current",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_MCU_CURRENT": {
-        "message": "MCU Current",
+        "message": "Amperaje del MCU",
         "english": "MCU Current",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ESC_TEMP": {
-        "message": "ESC Temp",
+        "message": "Temperatura del ESC",
         "english": "ESC Temp",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BEC_TEMP": {
-        "message": "BEC Temp",
+        "message": "Temperatura del BEC",
         "english": "BEC Temp",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_MCU_TEMP": {
-        "message": "MCU Temp",
+        "message": "Temperatura del MCU",
         "english": "MCU Temp",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_AIR_TEMP": {
-        "message": "Air Temp",
+        "message": "Temperatura del Aire",
         "english": "Air Temp",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_MOTOR_TEMP": {
-        "message": "Motor Temp",
+        "message": "Temperatura del Motor",
         "english": "Motor Temp",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BATTERY_TEMP": {
-        "message": "Battery Temp",
+        "message": "Temperatura de Batería",
         "english": "Battery Temp",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_EXHAUST_TEMP": {
-        "message": "Exhaust Temp",
+        "message": "Temperatura del escape",
         "english": "Exhaust Temp",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_HEADING": {
-        "message": "Heading",
+        "message": "Rumbo",
         "english": "Heading",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ALTITUDE": {
-        "message": "Altitude",
+        "message": "Altitud",
         "english": "Altitude",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_VARIOMETER": {
-        "message": "Variometer",
+        "message": "Variómetro",
         "english": "Variometer",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_HEADSPEED": {
-        "message": "Headspeed",
+        "message": "Velocidad de la cabeza",
         "english": "Headspeed",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_TAILSPEED": {
-        "message": "Tailspeed",
+        "message": "Velocidad de la cola",
         "english": "Tailspeed",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_MOTOR_RPM": {
-        "message": "Motor RPM",
+        "message": "RPM del motor",
         "english": "Motor RPM",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_TRANS_RPM": {
-        "message": "Transmission RPM",
+        "message": "RPM de la Transmisión",
         "english": "Transmission RPM",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ATTITUDE": {
-        "message": "Attitude (hi-res)",
+        "message": "Actitud (alta-res)",
         "english": "Attitude (hi-res)",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ATTITUDE_PITCH": {
-        "message": "Attitude Pitch",
+        "message": "Actitud Profundidad",
         "english": "Attitude Pitch",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ATTITUDE_ROLL": {
-        "message": "Attitude Roll",
+        "message": "Actitud Alabeo",
         "english": "Attitude Roll",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ATTITUDE_YAW": {
-        "message": "Attitude Yaw",
+        "message": "Actitud Dirección",
         "english": "Attitude Yaw",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ACCEL": {
-        "message": "Accelerometer (hi-res)",
+        "message": "Acelerómetro (alta-res)",
         "english": "Accelerometer (hi-res)",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ACCEL_X": {
-        "message": "Accelerometer X-axis",
+        "message": "Eje-X Acelerómetro",
         "english": "Accelerometer X-axis",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ACCEL_Y": {
-        "message": "Accelerometer Y-axis",
+        "message": "Eje-Y Acelerómetro",
         "english": "Accelerometer Y-axis",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ACCEL_Z": {
-        "message": "Accelerometer Z-axis",
+        "message": "Eje-Z Acelerómetro",
         "english": "Accelerometer Z-axis",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS": {
         "message": "GPS",
         "english": "GPS",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS_SATS": {
-        "message": "GPS Sats",
+        "message": "Satélites GPS",
         "english": "GPS Sats",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS_PDOP": {
         "message": "GPS PDOP",
         "english": "GPS PDOP",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS_HDOP": {
         "message": "GPS HDOP",
         "english": "GPS HDOP",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS_VDOP": {
         "message": "GPS VDOP",
         "english": "GPS VDOP",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS_COORD": {
-        "message": "GPS Coord",
+        "message": "Coordenadas GPS",
         "english": "GPS Coord",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS_ALTITUDE": {
-        "message": "GPS Altitude",
+        "message": "Altitud GPS",
         "english": "GPS Altitude",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS_HEADING": {
-        "message": "GPS Heading",
+        "message": "Rumbo GPS",
         "english": "GPS Heading",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS_GROUNDSPEED": {
-        "message": "GPS Groundspeed",
+        "message": "Velocidad sobre el suelo GPS",
         "english": "GPS Groundspeed",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS_HOME_DISTANCE": {
-        "message": "GPS Home Distance",
+        "message": "Distancia a casa GPS",
         "english": "GPS Home Distance",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS_HOME_DIRECTION": {
-        "message": "GPS Home Direction",
+        "message": "Dirección a casa GPS",
         "english": "GPS Home Direction",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS_DATE_TIME": {
-        "message": "GPS Date Time",
+        "message": "Fecha/Hora GPS",
         "english": "GPS Date Time",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_LOAD": {
-        "message": "Load",
+        "message": "Carga",
         "english": "Load",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_CPU_LOAD": {
-        "message": "CPU Load",
+        "message": "Carga CPU",
         "english": "CPU Load",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_SYS_LOAD": {
-        "message": "SYS Load",
+        "message": "Carga Sistema",
         "english": "SYS Load",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_RT_LOAD": {
-        "message": "RT Load",
+        "message": "Carga RT",
         "english": "RT Load",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_MODEL_ID": {
-        "message": "Model Id",
+        "message": "ID del Modelo",
         "english": "Model Id",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_FLIGHT_MODE": {
-        "message": "Flight Mode",
+        "message": "Modo de vuelo",
         "english": "Flight Mode",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ARMING_FLAGS": {
-        "message": "Arming Flags",
+        "message": "Banderas de Armado",
         "english": "Arming Flags",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ARMING_DISABLE_FLAGS": {
-        "message": "Arming Disable Flags",
+        "message": "Banderas de deshabilitado del armado",
         "english": "Arming Disable Flags",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_RESCUE_STATE": {
-        "message": "Rescue State",
+        "message": "Estado del Rescate",
         "english": "Rescue State",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GOVERNOR_STATE": {
-        "message": "Governor State",
+        "message": "Estado del regulador",
         "english": "Governor State",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GOVERNOR_FLAGS": {
-        "message": "Governor Flags",
+        "message": "Banderas del regulador",
         "english": "Governor Flags",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_PID_PROFILE": {
-        "message": "PID Profile",
+        "message": "Perfil del PID",
         "english": "PID Profile",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_RATES_PROFILE": {
-        "message": "Rates Profile",
+        "message": "Perfil de Rates",
         "english": "Rates Profile",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BATTERY_PROFILE": {
-        "message": "Battery Profile",
+        "message": "perfil de Batería",
         "english": "Battery Profile",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_LED_PROFILE": {
-        "message": "LED Profile",
+        "message": "Perfil LED",
         "english": "LED Profile",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_ADJFUNC": {
-        "message": "Adjustment Function",
+        "message": "Función de ajuste",
         "english": "Adjustment Function",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_DEBUG_0": {
-        "message": "Debug 0",
+        "message": "Depuración 0",
         "english": "Debug 0",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_DEBUG_1": {
-        "message": "Debug 1",
+        "message": "Depuración 1",
         "english": "Debug 1",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_DEBUG_2": {
-        "message": "Debug 2",
+        "message": "Depuración 2",
         "english": "Debug 2",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_DEBUG_3": {
-        "message": "Debug 3",
+        "message": "Depuración 3",
         "english": "Debug 3",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_DEBUG_4": {
-        "message": "Debug 4",
+        "message": "Depuración 4",
         "english": "Debug 4",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_DEBUG_5": {
-        "message": "Debug 5",
+        "message": "Depuración 5",
         "english": "Debug 5",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_DEBUG_6": {
-        "message": "Debug 6",
+        "message": "Depuración 6",
         "english": "Debug 6",
-        "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_DEBUG_7": {
-        "message": "Debug 7",
+        "message": "Depuración 7",
         "english": "Debug 7",
-        "status": "New entry. Please translate!"
     },
     "receiverBars": {
-        "message": "Receiver Channels",
+        "message": "Canales del Receptor",
         "english": "Receiver Channels",
-        "status": "New entry. Please translate!"
     },
     "receiverBarsHelp": {
-        "message": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel.",
+        "message": "Muestra el valor crudo de los canales del RC desde el receptor exactamente de la manera en que son recibidos. Por favor, seleccione el mapa del canal, por ejemplo la función actual para cada canal RC.",
         "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel.",
-        "status": "New entry. Please translate!"
     },
     "receiverChannelOrder": {
-        "message": "Channel Order Preset",
+        "message": "Preselección orden de canales",
         "english": "Channel Order Preset",
-        "status": "New entry. Please translate!"
     },
     "receiverChannelDefaultOption": {
         "message": "Predeterminado",
         "english": "Default"
     },
     "receiverHelpChannelOrder": {
-        "message": "Select one of the presets from the dropdown menu, or enter your own channel order.",
+        "message": "Seleccione una de las preselecciones desde el menú desplegable, o introduzca su propio orden de canales.",
         "english": "Select one of the presets from the dropdown menu, or enter your own channel order.",
-        "status": "New entry. Please translate!"
     },
     "receiverButtonBind": {
         "message": "Enlazar Receptor",
@@ -2918,20 +2768,15 @@
         "english": "Preview"
     },
     "receiverMspWarningText": {
-        "message": "These sticks allow Rotorflight to be armed and tested without a transmitter or receiver being present. However, <strong>this feature is not intended for flight and rotor blades must not be attached.</strong><br /><br />This feature does not guarantee reliable control of your craft. <strong>Serious injury is likely to result if rotor blades are left on.</strong>",
+        "message": "estas palancas le permiten a Rotorflight armarse y probarse sin que esté presente un transmisor o un receptor. Sin embargo, <strong>esta característica no está pensada para volar y las palas del rotor no deberían estar montadas.</strong><br /><br />Esta característica no garantiza un control fiable de su aeronave. <strong>Pueden sufrirse heridas graves si las palas del rotor se dejan puestas.</strong>",
         "english": "These sticks allow Rotorflight to be armed and tested without a transmitter or receiver being present. However, <strong>this feature is not intended for flight and rotor blades must not be attached.</strong><br /><br />This feature does not guarantee reliable control of your craft. <strong>Serious injury is likely to result if rotor blades are left on.</strong>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Estos controles permiten armar y probar Betaflight sin que haya un transmisor o receptor presente. Sin embargo, <strong>esta característica no está diseñada para el vuelo y las hélices no deben estar puestas.</strong> <br /><br />Esta funcionalidad no garantiza un control fiable de la aeronave. <strong>Pueden producirse lesiones graves si se dejan las hélices puestas.</strong>",
-            "english": "These sticks allow Betaflight to be armed and tested without a transmitter or receiver being present. However, <strong>this feature is not intended for flight and propellers must not be attached.</strong><br /><br />This feature does not guarantee reliable control of your craft. <strong>Serious injury is likely to result if propellers are left on.</strong>"
-        }
     },
     "receiverMspEnableButton": {
         "message": "Activar controles",
         "english": "Enable controls"
     },
     "auxiliaryHelp": {
-        "message": "Configura aquí los modos usando una combinación de rangos y/o enlaces con otros modos (enlaces sólo para Betaflight 4.0 y posterior). Usa <strong>rangos</strong> para definir los interruptores en tu emisora y la asignación al modo correspondiente. Un canal receptor que dé una lectura entre un rango mínimo/máximo activará el modo. Usa un <strong>enlace</strong> para activar un modo cuando otro modo está activado. <strong>Excepciones:</strong> modo ARMAR no puede ser enlazado hacia o desde otro modo, los modos no pueden ser enlazados con otros modos que tengan configurados enlaces (enlaces encadenados). Múltiples rangos/enlaces pueden ser utilizados para activar cualquier modo. Si hay más de un rango/enlace definido para un modo, cada uno de ellos puede ser configurado como <strong>Y</strong> o como <strong>O</strong>. Un modo será activado cuando:<br />-TODOS los rangos/enlaces <strong>Y</strong> están activos; O<br />- al menos uno de los rangos/enlaces <strong>O</strong> está activo.<br /><br />Recuerda guardar tus ajustes pulsando el botón Guardar.",
+        "message": "Configura aquí los modos usando una combinación de rangos y/o enlaces con otros modos (enlaces sólo para Betaflight 4.0 y posterior). Use <strong>rangos</strong> para definir los interruptores en su emisora y la asignación al modo correspondiente. Un canal del receptor que dé una lectura entre un rango mínimo/máximo activará el modo. Usa un <strong>enlace</strong> para activar un modo cuando otro modo esté activado. <strong>Excepciones:</strong> modo ARMAR no puede ser enlazado hacia o desde otro modo, los modos no pueden ser enlazados con otros modos que tengan configurados enlaces (enlaces encadenados). Múltiples rangos/enlaces pueden usarse para activar cualquier modo. Si hay más de un rango/enlace definido para un modo, cada uno de ellos puede configurarse como <strong>Y</strong> o como <strong>O</strong>. Un modo será activado cuando:<br />-TODOS los rangos/enlaces <strong>Y</strong> están activos; O<br />- al menos uno de los rangos/enlaces <strong>O</strong> está activo.<br /><br />Recuerda guardar tus ajustes pulsando el botón Guardar.",
         "english": "Configure modes here using a combination of ranges and/or links to other modes (links supported on BF 4.0 and later). Use <strong>ranges</strong> to define the switches on your transmitter and corresponding mode assignments. A receiver channel that gives a reading between a range min/max will activate the mode. Use a <strong>link</strong> to activate a mode when another mode is activated. <strong>Exceptions:</strong> ARM cannot be linked to or from another mode, modes cannot be linked to other modes that are configured with a link (chained links). Multiple ranges/links can be used to activate any mode. If there is more than one range/link defined for a mode, each of them can be set to <strong>AND</strong> or <strong>OR</strong>. A mode will be activated when:<br />- ALL <strong>AND</strong> ranges/links are active; OR<br />- at least one <strong>OR</strong> range/link is active.<br /><br />Remember to save your settings using the Save button."
     },
     "auxiliaryToggleUnused": {
@@ -2960,9 +2805,8 @@
         "english": "Add Link"
     },
     "auxiliaryAlwaysChannelSelect": {
-        "message": "ALWAYS",
+        "message": "SIEMPRE",
         "english": "ALWAYS",
-        "status": "New entry. Please translate!"
     },
     "auxiliaryAutoChannelSelect": {
         "message": "AUTO",
@@ -2977,11 +2821,11 @@
         "english": "AND"
     },
     "adjustmentsHelp": {
-        "message": "Configura interruptores para correcciones. Mira el apartado 'in-flight adjustments' del manual para detalles. Las correcciones realizadas no se guardan automáticamente.",
+        "message": "Configure interruptores para correcciones. Mire el apartado 'in-flight adjustments' del manual para detalles. Las correcciones realizadas no se guardan automáticamente.",
         "english": "Configure adjustment switches. See the 'in-flight adjustments' section of the manual for details. The changes that adjustment functions make are not saved automatically."
     },
     "adjustmentSlotsHelp": {
-        "message": "Hay 4 ranuras. Cada interruptor usado para hacer correcciones concurrentemente requiere el uso exclusivo de una ranura.",
+        "message": "Hay 4 ranuras. Cada interruptor usado para hacer correcciones concurrentes requiere el uso exclusivo de una ranura.",
         "english": "There are 4 slots. Each switch used to concurrently make adjustments requires exclusive use of a slot."
     },
     "adjustmentsExamples": {
@@ -2989,87 +2833,72 @@
         "english": "Examples:"
     },
     "adjustmentsExample1": {
-        "message": "Usa un interruptor de tres posiciones en AUX1 para elegir entre Pitch/Roll de P, I y D y otro interruptor de tres posiciones en AUX2 para incrementar o decrementar el valor al mover arriba o abajo.",
+        "message": "Use un interruptor de tres posiciones en AUX1 para elegir entre Pitch/Roll de P, I y D y otro interruptor de tres posiciones en AUX2 para incrementar o disminuir el valor al moverse arriba o abajo.",
         "english": "Use a three position switch on AUX1 to select between Pitch/Roll P, I and D and another three position switch on AUX2 to increase or decrease the value when held up or down."
     },
     "adjustmentsExample2": {
-        "message": "Usa un interruptor de tres posiciones en AUX4 para activar la Selección de Perfil de Tasas a través del mismo interruptor de tres posiciones en el mismo canal.",
+        "message": "Use un interruptor de tres posiciones en AUX4 para activar la Selección de Perfil de Tasas a través del mismo interruptor de tres posiciones en el mismo canal.",
         "english": "Use a three position switch on AUX4 to select enable Rate Profile Selection via the same three position switch on the same channel."
     },
     "adjustmentsColumnMode": {
-        "message": "Mode",
+        "message": "Modo",
         "english": "Mode",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsColumnChannels": {
-        "message": "Channels",
+        "message": "Canales",
         "english": "Channels",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsColumnSliders": {
-        "message": "Range Sliders",
+        "message": "Slider de Rango",
         "english": "Range Sliders",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsColumnRanges": {
-        "message": "Value Ranges",
+        "message": "Valores de Rangos",
         "english": "Value Ranges",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsTypeOff": {
-        "message": "Off",
+        "message": "Apagado",
         "english": "Off",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsTypeMapped": {
-        "message": "Mapped",
+        "message": "Mapeado",
         "english": "Mapped",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsTypeStepped": {
-        "message": "Stepped",
+        "message": "escalonado",
         "english": "Stepped",
-        "status": "New entry. Please translate!"
     },
     "adjustmentEnableChannel": {
-        "message": "Enable Channel",
+        "message": "Habilitar Canal",
         "english": "Enable Channel",
-        "status": "New entry. Please translate!"
     },
     "adjustmentValueChannel": {
-        "message": "Value Channel",
+        "message": "Canal con valor",
         "english": "Value Channel",
-        "status": "New entry. Please translate!"
     },
     "adjustmentFunctionValue": {
-        "message": "Value",
+        "message": "Valor",
         "english": "Value",
-        "status": "New entry. Please translate!"
     },
     "adjustmentRangeEnable": {
-        "message": "Ena:",
+        "message": "Hab:",
         "english": "Ena:",
-        "status": "New entry. Please translate!"
     },
     "adjustmentRangeInc": {
         "message": "Inc:",
         "english": "Inc:",
-        "status": "New entry. Please translate!"
     },
     "adjustmentRangeDec": {
         "message": "Dec:",
         "english": "Dec:",
-        "status": "New entry. Please translate!"
     },
     "adjustmentRangeValue": {
-        "message": "Value:",
+        "message": "Valor:",
         "english": "Value:",
-        "status": "New entry. Please translate!"
     },
     "adjustmentRangeStep": {
-        "message": "Step:",
+        "message": "Paso:",
         "english": "Step:",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsMin": {
         "message": "Mín",
@@ -3080,154 +2909,124 @@
         "english": "Max"
     },
     "adjustmentsRange": {
-        "message": "Active",
+        "message": "Activo",
         "english": "Active",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsRangeInc": {
-        "message": "Increase",
+        "message": "Incrementar",
         "english": "Increase",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsRangeDec": {
-        "message": "Decrease",
+        "message": "Disminuir",
         "english": "Decrease",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsRangeScale": {
-        "message": "Scale",
+        "message": "Escalar",
         "english": "Scale",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionNone": {
         "message": "Sin cambios",
         "english": "No changes",
-        "status": "Reused translation. Please check!"
     },
     "adjustmentsFunctionRateProfile": {
         "message": "Selección de Perfil de Tasas",
         "english": "Rate Profile Selection",
-        "status": "Reused translation. Please check!"
     },
     "adjustmentsFunctionPIDProfile": {
-        "message": "Profile Selection",
+        "message": "Selección de Perfil",
         "english": "Profile Selection",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionLEDProfile": {
         "message": "Selección de Perfil LED",
         "english": "LED Profile Selection",
-        "status": "Reused translation. Please check!"
     },
     "adjustmentsFunctionOSDProfile": {
         "message": "Selección de Perfil OSD",
         "english": "OSD Profile Selection",
-        "status": "Reused translation. Please check!"
     },
     "adjustmentsFunctionPitchRate": {
-        "message": "Tasa de Pitch",
+        "message": "Tasa de Profundidad",
         "english": "Pitch Rate",
-        "status": "Reused translation. Please check!"
     },
     "adjustmentsFunctionRollRate": {
-        "message": "Tasa de Roll",
+        "message": "Tasa de Alabeo",
         "english": "Roll Rate",
-        "status": "Reused translation. Please check!"
     },
     "adjustmentsFunctionYawRate": {
-        "message": "Yaw Rate",
+        "message": "Tasa de Dirección",
         "english": "Yaw Rate",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionPitchRCRate": {
-        "message": "Pitch RC Rate",
+        "message": "Rate de Profundidad RC",
         "english": "Pitch RC Rate",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRollRCRate": {
-        "message": "Roll RC Rate",
+        "message": "Rate de Alabeo RC",
         "english": "Roll RC Rate",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawRCRate": {
-        "message": "Yaw RC Rate",
+        "message": "Rate de Dirección RC",
         "english": "Yaw RC Rate",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionPitchRCExpo": {
-        "message": "Pitch RC Expo",
+        "message": "Profundidad RC",
         "english": "Pitch RC Expo",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRollRCExpo": {
-        "message": "Roll RC Expo",
+        "message": "Alabeo RC Expo",
         "english": "Roll RC Expo",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawRCExpo": {
-        "message": "Yaw RC Expo",
+        "message": "Dirección RC Expo",
         "english": "Yaw RC Expo",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionPitchP": {
-        "message": "Pitch P-gain",
+        "message": "P-gain en Profundidad",
         "english": "Pitch P-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionPitchI": {
-        "message": "Pitch I-gain",
+        "message": "I-gain en Profundidad",
         "english": "Pitch I-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionPitchD": {
-        "message": "Pitch D-gain",
+        "message": "D-gain en Profundidad",
         "english": "Pitch D-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionPitchF": {
-        "message": "Pitch F-gain",
+        "message": "F-gain en Profundidad",
         "english": "Pitch F-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRollP": {
-        "message": "Roll P-gain",
+        "message": "P-gain en Alabeo",
         "english": "Roll P-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRollI": {
-        "message": "Roll I-gain",
+        "message": "I-gain en Alabeo",
         "english": "Roll I-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRollD": {
-        "message": "Roll D-gain",
+        "message": "D-gain en Alabeo",
         "english": "Roll D-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRollF": {
-        "message": "Roll F-gain",
+        "message": "F-gain en alabeo",
         "english": "Roll F-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawP": {
-        "message": "Yaw P-gain",
+        "message": "P-gain en Dirección",
         "english": "Yaw P-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawI": {
-        "message": "Yaw I-gain",
+        "message": "I-gain en Dirección",
         "english": "Yaw I-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawD": {
-        "message": "Yaw D-gain",
+        "message": "D-gain en Dirección",
         "english": "Yaw D-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawF": {
-        "message": "Yaw F-gain",
+        "message": "F-gain en Dirección",
         "english": "Yaw F-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawCWStopGain": {
         "message": "Yaw CW Stop Gain",
