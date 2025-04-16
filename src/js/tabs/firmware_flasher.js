@@ -835,12 +835,21 @@ tab.initialize = function (callback) {
             } else {
                 clearBufferedFirmware();
 
-                let config = cleanUnifiedConfigFile(await file.text());
+                let config = cleanUnifiedConfigFile(file.content);
                 if (config !== null) {
                     const manufac = grabKeywordFromConfig(config, 'manufacturer_id', 'NONE');
                     const target = grabKeywordFromConfig(config, 'board_name', 'NONE');
                     config = self.injectDefaultDesign(config, 'BTFL');
-                    config = self.injectTargetInfo(config, file.name, target, manufac, { commitHash: 'unknown', date: file.lastModifiedDate.toISOString() });
+                    config = self.injectTargetInfo(
+                        config,
+                        file.name,
+                        target,
+                        manufac,
+                        {
+                            commitHash: 'unknown',
+                            date: file.lastModified?.toISOString() ?? new Date().toISOString(),
+                        },
+                    );
                     self.unifiedTarget.config = config;
                     self.unifiedTarget.fileName = file.name;
                     self.isConfigLocal = true;

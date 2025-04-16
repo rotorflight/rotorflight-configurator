@@ -24,7 +24,11 @@ if (__BACKEND__ === "nwjs") {
       if (!handle) return;
 
       const file = await handle.getFile();
-      return { name: file.name, content: await file.text() };
+      return {
+        name: file.name,
+        content: await file.text(),
+        lastModified: file.lastModifiedDate,
+      };
     } catch (err) {
       console.log(err);
     }
