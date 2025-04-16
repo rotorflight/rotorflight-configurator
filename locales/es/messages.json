@@ -30,12 +30,12 @@
         "description": "Roll axis in capital letters"
     },
     "axisPITCH": {
-        "message": "PROFUNDIDAD",
+        "message": "PASO",
         "english": "PITCH",
         "description": "Pitch axis in capital letters"
     },
     "axisYAW": {
-        "message": "DIRECCIÓN",
+        "message": "GUIÑADA",
         "english": "YAW",
         "description": "Yaw axis in capital letters"
     },
@@ -49,11 +49,11 @@
         "english": "Roll",
     },
     "titlePitch": {
-        "message": "Profundidad",
+        "message": "Paso",
         "english": "Pitch",
     },
     "titleYaw": {
-        "message": "Dirección",
+        "message": "Guiñada",
         "english": "Yaw",
     },
     "titleCollective": {
@@ -1367,7 +1367,7 @@
         "english": "SPI RX support",
     },
     "feature_GOVERNOR": {
-        "message": "Regulador de velocidad del cabezal",
+        "message": "Governor de velocidad del cabezal",
         "english": "Headspeed governor",
     },
     "feature_ESC_SENSOR": {
@@ -1456,11 +1456,11 @@
         "english": "Roll Degrees"
     },
     "configurationBoardAlignmentPitch": {
-        "message": "Grados Profundidad",
+        "message": "Grados ",
         "english": "Pitch Degrees"
     },
     "configurationBoardAlignmentYaw": {
-        "message": "Grados Dirección",
+        "message": "Grados Guiñada",
         "english": "Yaw Degrees"
     },
     "configurationSensorAlignmentGyro": {
@@ -2124,11 +2124,11 @@
         "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle.",
     },
     "receiverYawDeadband": {
-        "message": "Banda muerta Dirección",
+        "message": "Banda muerta Guiñada",
         "english": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "Son los valores (en µs) en los que las entradas de la emisora se diferencian para que sean consideradas como fuera del cero. Pra transmisores con temblores en las salidas, este valor se puede incrementar si los valores de la radio vibran al ralentí. <strong>Este ajuste es sólo para Dirección.</strong>",
+        "message": "Son los valores (en µs) en los que las entradas de la emisora se diferencian para que sean consideradas como fuera del cero. Pra transmisores con temblores en las salidas, este valor se puede incrementar si los valores de la radio vibran al ralentí. <strong>Este ajuste es sólo para Guiñada.</strong>",
         "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
     },
     "receiverTelemetrySettings": {
@@ -2280,7 +2280,7 @@
         "english": "Adjustment Function",
     },
     "receiverTelemetrySensor_GOV_MODE": {
-        "message": "Modo del regulador",
+        "message": "Modo del Governor",
         "english": "Governor Mode",
     },
     "receiverTelemetrySensor_ARMING_FLAGS": {
@@ -2404,7 +2404,7 @@
         "english": "Control (hi-res)",
     },
     "receiverTelemetrySensor_PITCH_CONTROL": {
-        "message": "Control profundidad",
+        "message": "Control Paso",
         "english": "Pitch Control",
     },
     "receiverTelemetrySensor_ROLL_CONTROL": {
@@ -2412,7 +2412,7 @@
         "english": "Roll Control",
     },
     "receiverTelemetrySensor_YAW_CONTROL": {
-        "message": "Control Dirección",
+        "message": "Control Guiñada",
         "english": "Yaw Control",
     },
     "receiverTelemetrySensor_COLLECTIVE_CONTROL": {
@@ -2560,7 +2560,7 @@
         "english": "Attitude (hi-res)",
     },
     "receiverTelemetrySensor_ATTITUDE_PITCH": {
-        "message": "Actitud Profundidad",
+        "message": "Actitud del Paso",
         "english": "Attitude Pitch",
     },
     "receiverTelemetrySensor_ATTITUDE_ROLL": {
@@ -2568,7 +2568,7 @@
         "english": "Attitude Roll",
     },
     "receiverTelemetrySensor_ATTITUDE_YAW": {
-        "message": "Actitud Dirección",
+        "message": "Actitud Guiñada",
         "english": "Attitude Yaw",
     },
     "receiverTelemetrySensor_ACCEL": {
@@ -2672,11 +2672,11 @@
         "english": "Rescue State",
     },
     "receiverTelemetrySensor_GOVERNOR_STATE": {
-        "message": "Estado del regulador",
+        "message": "Estado del Governor",
         "english": "Governor State",
     },
     "receiverTelemetrySensor_GOVERNOR_FLAGS": {
-        "message": "Banderas del regulador",
+        "message": "Banderas del ",
         "english": "Governor Flags",
     },
     "receiverTelemetrySensor_PID_PROFILE": {
@@ -2945,7 +2945,7 @@
         "english": "OSD Profile Selection",
     },
     "adjustmentsFunctionPitchRate": {
-        "message": "Tasa de Profundidad",
+        "message": "Rate Profile #5",
         "english": "Pitch Rate",
     },
     "adjustmentsFunctionRollRate": {
@@ -2953,11 +2953,11 @@
         "english": "Roll Rate",
     },
     "adjustmentsFunctionYawRate": {
-        "message": "Tasa de Dirección",
+        "message": "Tasa de Guiñada",
         "english": "Yaw Rate",
     },
     "adjustmentsFunctionPitchRCRate": {
-        "message": "Rate de Profundidad RC",
+        "message": "Rate de Paso RC",
         "english": "Pitch RC Rate",
     },
     "adjustmentsFunctionRollRCRate": {
@@ -2965,11 +2965,11 @@
         "english": "Roll RC Rate",
     },
     "adjustmentsFunctionYawRCRate": {
-        "message": "Rate de Dirección RC",
+        "message": "Rate de Guiñada RC",
         "english": "Yaw RC Rate",
     },
     "adjustmentsFunctionPitchRCExpo": {
-        "message": "Profundidad RC",
+        "message": "Paso RC Expo",
         "english": "Pitch RC Expo",
     },
     "adjustmentsFunctionRollRCExpo": {
@@ -2981,19 +2981,19 @@
         "english": "Yaw RC Expo",
     },
     "adjustmentsFunctionPitchP": {
-        "message": "P-gain en Profundidad",
+        "message": "P-gain en Paso",
         "english": "Pitch P-gain",
     },
     "adjustmentsFunctionPitchI": {
-        "message": "I-gain en Profundidad",
+        "message": "I-gain en Paso",
         "english": "Pitch I-gain",
     },
     "adjustmentsFunctionPitchD": {
-        "message": "D-gain en Profundidad",
+        "message": "D-gain en Paso",
         "english": "Pitch D-gain",
     },
     "adjustmentsFunctionPitchF": {
-        "message": "F-gain en Profundidad",
+        "message": "F-gain en Paso",
         "english": "Pitch F-gain",
     },
     "adjustmentsFunctionRollP": {
@@ -3013,240 +3013,197 @@
         "english": "Roll F-gain",
     },
     "adjustmentsFunctionYawP": {
-        "message": "P-gain en Dirección",
+        "message": "P-gain en Guiñada",
         "english": "Yaw P-gain",
     },
     "adjustmentsFunctionYawI": {
-        "message": "I-gain en Dirección",
+        "message": "I-gain en Guiñada",
         "english": "Yaw I-gain",
     },
     "adjustmentsFunctionYawD": {
-        "message": "D-gain en Dirección",
+        "message": "D-gain en Guiñada",
         "english": "Yaw D-gain",
     },
     "adjustmentsFunctionYawF": {
-        "message": "F-gain en Dirección",
+        "message": "F-gain en Guiñada",
         "english": "Yaw F-gain",
     },
     "adjustmentsFunctionYawCWStopGain": {
-        "message": "Yaw CW Stop Gain",
+        "message": "Ganancia de paro en Guiñada sentido horario",
         "english": "Yaw CW Stop Gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawCCWStopGain": {
-        "message": "Yaw CCW Stop Gain",
+        "message": "Ganancia de paro en Guiñada sentido anti-horario",
         "english": "Yaw CCW Stop Gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawCyclicFF": {
-        "message": "Yaw Cyclic Precomp",
+        "message": "Precompensado del Ciclico en Guiñada",
         "english": "Yaw Cyclic Precomp",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawCollectiveFF": {
-        "message": "Yaw Collective Precomp",
+        "message": "Precompensado del Colectivo en Guiñada",
         "english": "Yaw Collective Precomp",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawCollectiveDyn": {
-        "message": "Yaw Collective Impulse FF",
+        "message": "Impulso FF del Colectivo en Guiñada",
         "english": "Yaw Collective Impulse FF",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawCollectiveDecay": {
-        "message": "Yaw Collective Impulse FF Decay",
+        "message": "Guiñada del Colectivo cuando el Impulso FF decae",
         "english": "Yaw Collective Impulse FF Decay",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionPitchCollectiveFF": {
-        "message": "Pitch Collective Precomp",
+        "message": "Precompensado del Paso del Colectivo",
         "english": "Pitch Collective Precomp",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionPitchGyroCutoff": {
-        "message": "Pitch Gyro Cutoff",
+        "message": "Corte del Paso en el Giro",
         "english": "Pitch Gyro Cutoff",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRollGyroCutoff": {
-        "message": "Roll Gyro Cutoff",
+        "message": "Corte de alabeo en el Giro",
         "english": "Roll Gyro Cutoff",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawGyroCutoff": {
-        "message": "Yaw Gyro Cutoff",
+        "message": "Corte de Guiñada en el Giro",
         "english": "Yaw Gyro Cutoff",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionPitchDtermCutoff": {
-        "message": "Pitch D-term Cutoff",
+        "message": "Corte del Paso D-term",
         "english": "Pitch D-term Cutoff",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRollDtermCutoff": {
-        "message": "Roll D-term Cutoff",
+        "message": "Corte de Alabeo D-term",
         "english": "Roll D-term Cutoff",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawDtermCutoff": {
-        "message": "Yaw D-term Cutoff",
+        "message": "Corte de Guiñada D-term",
         "english": "Yaw D-term Cutoff",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRescueClimbCollective": {
-        "message": "Rescue Climb Collective",
+        "message": "Subida de rescate del Colectivo",
         "english": "Rescue Climb Collective",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRescueHoverCollective": {
-        "message": "Rescue Hover Collective",
+        "message": "Estacionario de rescate del Colectivo",
         "english": "Rescue Hover Collective",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRescueHoverAltitude": {
-        "message": "Rescue Hover Altitude",
+        "message": "Estacionario de Rescate Altitud",
         "english": "Rescue Hover Altitude",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRescueAltP": {
-        "message": "Rescue Altitude P-gain",
+        "message": "Rescate en Altitud P-gain",
         "english": "Rescue Altitude P-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRescueAltI": {
-        "message": "Rescue Altitude I-gain",
+        "message": "Rescate en Altitud I-gain",
         "english": "Rescue Altitude I-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRescueAltD": {
-        "message": "Rescue Altitude D-gain",
+        "message": "Rescate en Altitud D-gain",
         "english": "Rescue Altitude D-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionAngleLevelGain": {
-        "message": "Angle Level Gain",
+        "message": "Ganancia del ángulo a nivel",
         "english": "Angle Level Gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionHorizonLevelGain": {
-        "message": "Horizon Level Gain",
+        "message": "Ganancia nivelado Horizontal",
         "english": "Horizon Level Gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionAcroTrainerGain": {
-        "message": "Acro Trainer Gain",
+        "message": "Ganancia Entrenador Acro",
         "english": "Acro Trainer Gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionGovernorGain": {
-        "message": "Governor PID-gain",
+        "message": "Ganancia-PID del Governor",
         "english": "Governor PID-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionGovernorP": {
-        "message": "Governor P-gain",
+        "message": "Ganancia-P del Governor",
         "english": "Governor P-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionGovernorI": {
-        "message": "Governor I-gain",
+        "message": "Ganancia-I del Governor",
         "english": "Governor I-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionGovernorD": {
-        "message": "Governor D-gain",
+        "message": "Ganancia-D del Governor",
         "english": "Governor D-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionGovernorF": {
-        "message": "Governor F-gain",
+        "message": "Ganancia-F del Governor",
         "english": "Governor F-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionGovernorTTA": {
-        "message": "Governor TTA-gain",
+        "message": "Ganancia TTA del Governor",
         "english": "Governor TTA-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionGovernorCyclicFF": {
-        "message": "Governor Cyclic Precomp",
+        "message": "Preompensado del Governor del Cíclico",
         "english": "Governor Cyclic Precomp",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionGovernorCollectiveFF": {
-        "message": "Governor Collective Precomp",
+        "message": "Precompensado del Governor del Colectivo",
         "english": "Governor Collective Precomp",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionPitchB": {
-        "message": "Pitch B-gain",
+        "message": "Ganancia-B del Paso",
         "english": "Pitch B-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRollB": {
-        "message": "Roll B-gain",
+        "message": "Ganancia-B en Alabeo",
         "english": "Roll B-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionYawB": {
-        "message": "Yaw B-gain",
+        "message": "Ganancia-B en Guiñada",
         "english": "Yaw B-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionPitchO": {
-        "message": "Pitch O-gain",
+        "message": "Ganancia-O del Paso",
         "english": "Pitch O-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionRollO": {
-        "message": "Roll O-gain",
+        "message": "Ganancia-O en Alabeo",
         "english": "Roll O-gain",
         "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionCrossCouplingGain": {
-        "message": "Cross Coupling Gain",
+        "message": "Ganancia del acoplamiento Cruzado",
         "english": "Cross Coupling Gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionCrossCouplingRatio": {
-        "message": "Cross Coupling Ratio",
+        "message": "Ratio del Acoplamiento Cruzado",
         "english": "Cross Coupling Ratio",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionCrossCouplingCutoff": {
-        "message": "Cross Coupling Cutoff",
+        "message": "Corte del Acoplamiento Cruzado",
         "english": "Cross Coupling Cutoff",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionAccTrimPitch": {
-        "message": "Accelerometer Pitch Trim",
+        "message": "Trimado del Paso en Acelerómetro",
         "english": "Accelerometer Pitch Trim",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionAccTrimRoll": {
-        "message": "Accelerometer Roll Trim",
+        "message": "Trimado del Alabeo en Acelerómetro",
         "english": "Accelerometer Roll Trim",
-        "status": "New entry. Please translate!"
     },
     "servoHelp": {
-        "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
+        "message": "Servo 101<ul><li>Primera comprobación de las direcciones del servo. Compruebe los servos del cíclico aplicando algo de colectivo, por ejemplo. Revierta los servos si es necesario.</li><li>Nivele los brazos de los servos habilitando <i> sobrepasar el movimiento de los servos</i> ajustando <i>el centro</i>. El brazo del servo debería estar perpendicular al eje principal en esta position.</li><li>Ajuste <i>la escala</i> de froma que los ángulos sean correctos. Especifique un ángulo de 30& grados; para un servo en condiciones <i>de Override</i>. El servo debería ahora moverse hasta 30& grados;. Si se mueve menos, incremente la <i>escala</i> para ese servo. Si es más, disminuyalo.</li><li>Puede limitar o extender el rando de movimiento del servo movement adjustando el valor <i>Min</i> or <i>Máx</i>. Haga esto sólo si hay algún problema mecánico, como doblado del reenvío. Use laas mezclas para limitar el giro/paso/colectivo.</li></ul>",
         "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
-        "status": "New entry. Please translate!"
     },
     "servoConfiguration": {
-        "message": "Servo Configuration",
+        "message": "Configuración del Servo",
         "english": "Servo Configuration",
-        "status": "New entry. Please translate!"
     },
     "servoNumber": {
         "message": "Servo",
         "english": "Servo",
-        "status": "New entry. Please translate!"
     },
     "servoMid": {
-        "message": "Center",
+        "message": "Centro",
         "english": "Center",
-        "status": "New entry. Please translate!"
     },
     "servoMidHelp": {
         "message": "Center position in µs. The servo arm should be level in this position.",
@@ -8673,7 +8630,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementNumericalHeading": {
-        "message": "Lectura numérica de la dirección actual en grados",
+        "message": "Lectura numérica del rumbo actual en grados",
         "english": "Numerical readout of current heading in degrees"
     },
     "osdTextElementNumericalVario": {
@@ -8691,7 +8648,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCompassBar": {
-        "message": "Barra gráfica con una brújula mostrando la dirección actual",
+        "message": "Barra gráfica con una brújula mostrando el rumbo actual",
         "english": "Graphical compass bar showing current heading"
     },
     "osdTextElementWarnings": {
@@ -10302,13 +10259,8 @@
         "english": "Update from the Google Play Store"
     },
     "cordovaWebviewEnable": {
-        "message": "Go into the tab of information about your device in the settings and tap 10 times on the build version number to enable 'Developer options'. After that, search and go in the developer options and select <b>{{app}}</b> as webview provider.",
+        "message": "Vaya a la pestaña de información acerca de su dispositivo en los ajustes y toque 10 veces en el número de serie de la versión para habilitar las 'opciones de desarrollador'. Después, busque y vaya entre esas opciones de desarrollador y seleccionela <b>{{app}}</b> como implementación de webview.",
         "english": "Go into the tab of information about your device in the settings and tap 10 times on the build version number to enable 'Developer options'. After that, search and go in the developer options and select <b>{{app}}</b> as webview provider.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Ve a la pestaña de información acerca de tu dispositivo en los ajustes y pulsa 10 veces en el número de compilación para activar las 'Opciones para desarrolladores'. Después de esto, busca en las opciones para desarrolladores y selecciona <b>{{app}}</b> como implementación de webview.",
-            "english": "Go into the tab of informations about your device in the settings and tap 10 times on the build version number to enable 'Developper options'. After that, search and go in the developper options and select <b>{{app}}</b> as webview provider."
-        }
     },
     "cordovaWebviewEnableBtn": {
         "message": "Abrir configuración",
