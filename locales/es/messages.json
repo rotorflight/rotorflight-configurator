@@ -3646,360 +3646,287 @@
         "english": "Mixer Override",
     },
     "mixerOverrideHelp": {
-        "message": "This feature is used for setting up the rotor and is part of the <strong>Mixer Calibration</strong> process. When the bypass enable is active the mixer can be commanded to the requested positions directly.",
+        "message": "Esta característica se usa para ajustar el rotor y es parte de la <strong>calibración de las mezclas</strong> proceso. Cuando este activo el bypass, la mezcla sepuede mandar directamente a la posición deseada.",
         "english": "This feature is used for setting up the rotor and is part of the <strong>Mixer Calibration</strong> process. When the bypass enable is active the mixer can be commanded to the requested positions directly.",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideEnableSwitch": {
-        "message": "<strong>Enable Mixer Override</strong>",
+        "message": "<strong>Habilira Override de mezclas</strong>",
         "english": "<strong>Enable Mixer Override</strong>",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideEnableSwitchText": {
-        "message": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot.",
+        "message": "El Override de mezclas fuerza a las entradas de mezclas a posiciones arbitrarias para propósito de ajuster. Los valores de override no se guardan, y se resetearán al arranque.",
         "english": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot.",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideEnable": {
-        "message": "Enable",
+        "message": "Habilitar",
         "english": "Enable",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideValue": {
-        "message": "Value",
+        "message": "Valor",
         "english": "Value",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideSlider": {
         "message": "",
         "english": "",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideSliderLeftLabel1": {
-        "message": "Left",
+        "message": "Izquierda",
         "english": "Left",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideSliderRightLabel1": {
-        "message": "Right",
+        "message": "Derecha",
         "english": "Right",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideSliderLeftLabel2": {
-        "message": "Backward",
+        "message": "Atrás",
         "english": "Backward",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideSliderRightLabel2": {
-        "message": "Forward",
+        "message": "Adelante",
         "english": "Forward",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideSliderLeftLabel3": {
-        "message": "CW",
+        "message": "Horario",
         "english": "CW",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideSliderRightLabel3": {
-        "message": "CCW",
+        "message": "Anti-horario",
         "english": "CCW",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideSliderLeftLabel4": {
-        "message": "Down",
+        "message": "Abajo",
         "english": "Down",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideSliderRightLabel4": {
-        "message": "Up",
+        "message": "Arriba",
         "english": "Up",
-        "status": "New entry. Please translate!"
     },
     "mixerRuleNOP": {
         "message": "-",
         "english": "-",
-        "status": "New entry. Please translate!"
     },
     "mixerRuleSet": {
-        "message": "Set",
+        "message": "Ajustar",
         "english": "Set",
-        "status": "New entry. Please translate!"
     },
     "mixerRuleAdd": {
-        "message": "Add",
+        "message": "Añadir",
         "english": "Add",
-        "status": "New entry. Please translate!"
     },
     "mixerRuleMul": {
         "message": "Mul",
         "english": "Mul",
-        "status": "New entry. Please translate!"
     },
     "mixerInputName": {
         "message": "Control",
         "english": "Control",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRate": {
-        "message": "Scaling",
+        "message": "Escalado",
         "english": "Scaling",
-        "status": "New entry. Please translate!"
     },
     "mixerInputMin": {
-        "message": "Minimum",
+        "message": "Mínimo",
         "english": "Minimum",
-        "status": "New entry. Please translate!"
     },
     "mixerInputMax": {
-        "message": "Maximum",
+        "message": "Máximo",
         "english": "Maximum",
-        "status": "New entry. Please translate!"
     },
     "mixerInputNone": {
         "message": "-",
         "english": "-",
-        "status": "New entry. Please translate!"
     },
     "mixerInputStabilizedRoll": {
-        "message": "Roll",
+        "message": "Control Alabeo",
         "english": "Roll",
-        "status": "New entry. Please translate!"
     },
     "mixerInputStabilizedPitch": {
-        "message": "Pitch",
+        "message": "Paso",
         "english": "Pitch",
-        "status": "New entry. Please translate!"
     },
     "mixerInputStabilizedYaw": {
-        "message": "Yaw",
+        "message": "Guiñada",
         "english": "Yaw",
-        "status": "New entry. Please translate!"
     },
     "mixerInputStabilizedCollective": {
-        "message": "Collective",
+        "message": "Colectivo",
         "english": "Collective",
-        "status": "New entry. Please translate!"
     },
     "mixerInputStabilizedThrottle": {
         "message": "Acelerador",
         "english": "Throttle",
-        "status": "Reused translation. Please check!"
     },
     "mixerInputRCCommandRoll": {
-        "message": "Commanded Roll",
+        "message": "Alabeo mandado",
         "english": "Commanded Roll",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCCommandPitch": {
-        "message": "Commanded Pitch",
+        "message": "Paso mandado",
         "english": "Commanded Pitch",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCCommandYaw": {
-        "message": "Commanded Yaw",
+        "message": "Guiñada mandada",
         "english": "Commanded Yaw",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCCommandCollective": {
-        "message": "Commanded Collective",
+        "message": "Colectivo mandado",
         "english": "Commanded Collective",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCCommandThrottle": {
-        "message": "Commanded Throttle",
+        "message": "Acelerador mandado",
         "english": "Commanded Throttle",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannelRoll": {
-        "message": "RC Channel Roll",
+        "message": "Canal RC Alabeo",
         "english": "RC Channel Roll",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannelPitch": {
-        "message": "RC Channel Pitch",
+        "message": "Canal RC Paso",
         "english": "RC Channel Pitch",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannelYaw": {
-        "message": "RC Channel Yaw",
+        "message": "Canal RC Guiñada",
         "english": "RC Channel Yaw",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannelCollective": {
-        "message": "RC Channel Collective",
+        "message": "Canal RC Colectivo",
         "english": "RC Channel Collective",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannelThrottle": {
-        "message": "RC Channel Throttle",
+        "message": "Canal RC Acelerador",
         "english": "RC Channel Throttle",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannelAux1": {
-        "message": "RC Channel AUX1",
+        "message": "Canal RC AUX1",
         "english": "RC Channel AUX1",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannelAux2": {
-        "message": "RC Channel AUX2",
+        "message": "Canal RC AUX2",
         "english": "RC Channel AUX2",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannelAux3": {
-        "message": "RC Channel AUX3",
+        "message": "Canal RC AUX3",
         "english": "RC Channel AUX3",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannel9": {
-        "message": "RC Channel #9",
+        "message": "Canal RC #9",
         "english": "RC Channel #9",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannel10": {
-        "message": "RC Channel #10",
+        "message": "Canal RC #10",
         "english": "RC Channel #10",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannel11": {
-        "message": "RC Channel #11",
+        "message": "Canal RC #11",
         "english": "RC Channel #11",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannel12": {
-        "message": "RC Channel #12",
+        "message": "Canal RC #12",
         "english": "RC Channel #12",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannel13": {
-        "message": "RC Channel #13",
+        "message": "Canal RC #13",
         "english": "RC Channel #13",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannel14": {
-        "message": "RC Channel #14",
+        "message": "Canal RC #14",
         "english": "RC Channel #14",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannel15": {
-        "message": "RC Channel #15",
+        "message": "Canal RC #15",
         "english": "RC Channel #15",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannel16": {
-        "message": "RC Channel #16",
+        "message": "Canal RC #16",
         "english": "RC Channel #16",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannel17": {
-        "message": "RC Channel #17",
+        "message": "Canal RC #17",
         "english": "RC Channel #17",
-        "status": "New entry. Please translate!"
     },
     "mixerInputRCChannel18": {
-        "message": "RC Channel #18",
+        "message": "Canal RC #18",
         "english": "RC Channel #18",
-        "status": "New entry. Please translate!"
     },
     "mixerOutputNone": {
         "message": "-",
         "english": "-",
-        "status": "New entry. Please translate!"
     },
     "mixerOutputServo1": {
         "message": "Servo #1",
         "english": "Servo #1",
-        "status": "New entry. Please translate!"
     },
     "mixerOutputServo2": {
         "message": "Servo #2",
         "english": "Servo #2",
-        "status": "New entry. Please translate!"
     },
     "mixerOutputServo3": {
         "message": "Servo #3",
         "english": "Servo #3",
-        "status": "New entry. Please translate!"
     },
     "mixerOutputServo4": {
         "message": "Servo #4",
         "english": "Servo #4",
-        "status": "New entry. Please translate!"
     },
     "mixerOutputServo5": {
         "message": "Servo #5",
         "english": "Servo #5",
-        "status": "New entry. Please translate!"
     },
     "mixerOutputServo6": {
         "message": "Servo #6",
         "english": "Servo #6",
-        "status": "New entry. Please translate!"
     },
     "mixerOutputServo7": {
         "message": "Servo #7",
         "english": "Servo #7",
-        "status": "New entry. Please translate!"
     },
     "mixerOutputServo8": {
         "message": "Servo #8",
         "english": "Servo #8",
-        "status": "New entry. Please translate!"
     },
     "mixerOutputMotor1": {
         "message": "Motor #1",
         "english": "Motor #1",
-        "status": "New entry. Please translate!"
     },
     "mixerOutputMotor2": {
         "message": "Motor #2",
         "english": "Motor #2",
-        "status": "New entry. Please translate!"
     },
     "mixerOutputMotor3": {
         "message": "Motor #3",
         "english": "Motor #3",
-        "status": "New entry. Please translate!"
     },
     "mixerOutputMotor4": {
         "message": "Motor #4",
         "english": "Motor #4",
-        "status": "New entry. Please translate!"
     },
     "dialogMixerResetTitle": {
-        "message": "<span class=\"message-negative\">WARNING: Mixer Reset</span>",
+        "message": "<span class=\"message-negative\">PRECUCIÓN: Restauración de mezclas</span>",
         "english": "<span class=\"message-negative\">WARNING: Mixer Reset</span>",
-        "status": "New entry. Please translate!"
     },
     "dialogMixerResetNote": {
-        "message": "Selecting a pre-defined Swashplate type will reset any custom Mixer rules to defaults.",
+        "message": "Seleccionar un tipo predefinido de plato del cíclico hara que se restaure cualquier regla personalizada de mezclas a los valores por defecto.",
         "english": "Selecting a pre-defined Swashplate type will reset any custom Mixer rules to defaults.",
-        "status": "New entry. Please translate!"
     },
     "dialogMixerResetAccept": {
-        "message": "Accept",
+        "message": "Aceptar",
         "english": "Accept",
-        "status": "New entry. Please translate!"
     },
     "dialogMixerResetRevert": {
-        "message": "Revert",
+        "message": "Invertir",
         "english": "Revert",
-        "status": "New entry. Please translate!"
     },
     "gpsHead": {
-        "message": "Status",
+        "message": "Estado",
         "english": "Status",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "GPS",
-            "english": "GPS"
-        }
     },
     "gpsMapHead": {
         "message": "Localización GPS actual",
         "english": "Current GPS location"
     },
     "gpsMapMessage1": {
-        "message": "Por favor verifica tu conexión a internet",
+        "message": "Por favor verifique su conexión a internet",
         "english": "Please check your internet connection"
     },
     "gps3dFix": {
@@ -4007,32 +3934,20 @@
         "english": "3D Fix:"
     },
     "gpsFixYes": {
-        "message": "<span class=\"gpsFixTrue\">Fix</span>",
+        "message": "<span class=\"gpsFixTrue\">Fijo</span>",
         "english": "<span class=\"gpsFixTrue\">Fix</span>",
-        "status": "New entry. Please translate!"
     },
     "gpsFixNo": {
-        "message": "<span class=\"gpsFixFalse\">No Fix</span>",
+        "message": "<span class=\"gpsFixFalse\">Sin Fijo</span>",
         "english": "<span class=\"gpsFixFalse\">No Fix</span>",
-        "status": "New entry. Please translate!"
     },
     "gpsFixTrue": {
-        "message": "<span class=\"gpsFixTrue\">True</span>",
+        "message": "<span class=\"gpsFixTrue\">Verdadero</span>",
         "english": "<span class=\"gpsFixTrue\">True</span>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"fixtrue\">Verdadero</span>",
-            "english": "<span class=\"fixtrue\">True</span>"
-        }
     },
     "gpsFixFalse": {
-        "message": "<span class=\"gpsFixFalse\">False</span>",
+        "message": "<span class=\"gpsFixFalse\">Falso</span>",
         "english": "<span class=\"gpsFixFalse\">False</span>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"fixfalse\">Falso</span>",
-            "english": "<span class=\"fixfalse\">False</span>"
-        }
     },
     "gpsAltitude": {
         "message": "Altitud:",
@@ -4059,196 +3974,135 @@
         "english": "Dist to Home:"
     },
     "gpsSignalStrHead": {
-        "message": "Signal Strength",
+        "message": "Fortaleza de señal",
         "english": "Signal Strength",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Fuerza Señal GPS",
-            "english": "GPS Signal Strength"
-        }
     },
     "gpsSignalStr": {
         "message": "Fuerza de la Señal",
-        "english": "Signal Strength"
     },
     "gpsSignalSatId": {
         "message": "ID Sat",
         "english": "Sat ID"
     },
     "gpsSignalQty": {
-        "message": "Qty",
+        "message": "Cantidad",
         "english": "Qty",
-        "status": "New entry. Please translate!"
     },
     "motorsEscProtocol": {
-        "message": "ESC Throttle protocol",
+        "message": "Protocolo de aceleración del ESC",
         "english": "ESC Throttle protocol",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Protocolo ESC/Motor",
-            "english": "ESC/Motor protocol",
-            "status": "Reused translation. Please check!"
-        }
     },
     "motorsEscProtocolHelp": {
-        "message": "Select your ESC protocol.<br>Traditional helicopter ESCs use PWM. Drone ESCs may use other protocols, like DSHOT. <br>Make sure the protocol is supported by your ESC.",
+        "message": "Seleccione el protocolo de su ESC.<br>ESC Tradicional de helicópteros usan PWM. ESCs de drones pueden usar otros protocolos, como DSHOT. <br>Asegúrese de que protocolo está soportado por su ESC.",
         "english": "Select your ESC protocol.<br>Traditional helicopter ESCs use PWM. Drone ESCs may use other protocols, like DSHOT. <br>Make sure the protocol is supported by your ESC.",
-        "status": "New entry. Please translate!"
     },
     "motorsEscProtocolDisabled": {
-        "message": "Please select a protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)",
+        "message": "Por favor, seleccione un protocolo apropriade a sus ESCs. $t(escProtocolDisabledMessage.message)",
         "english": "Please select a protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Por favor, selecciona un protocolo de salida de motor apropiado para tus ESCs. $t(escProtocolDisabledMessage.message)",
-            "english": "Please select a motor output protocol appropriate for your ESCs. $t(escProtocolDisabledMessage.message)",
-            "status": "Reused translation. Please check!"
-        }
     },
     "motorsEscTelemetry": {
-        "message": "ESC Telemetry",
+        "message": "Telemetría ESC",
         "english": "ESC Telemetry",
-        "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryProtocol": {
-        "message": "ESC Telemetry protocol",
+        "message": "Protocolo Telemetría ESC",
         "english": "ESC Telemetry protocol",
-        "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab.",
+        "message": "Su protocolo de telemetría del ESC. Conecte el cable de telemetría desde el ESC a su FC. Especifique cual UART se va a usar para la telemetría del ESC en la <i>pestaña de Configuración</i>.",
         "english": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab.",
-        "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryHalfDuplex": {
-        "message": "One-wire Communication (Half-Duplex)",
+        "message": "Comunicación de un hilo (Half-Duplex)",
         "english": "One-wire Communication (Half-Duplex)",
-        "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryHalfDuplexHelp": {
-        "message": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scorpion Tribunus).",
+        "message": "Use el pin del Tx para transmitir y recibir. Requerido para enviar programación a los ESC suportados (e.g. Hobbywing Platinum V5 o Scorpion Tribunus).",
         "english": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scorpion Tribunus).",
-        "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryPinswap": {
-        "message": "Rx/Tx Pin Swap",
+        "message": "Intercambio pines Rx/Tx",
         "english": "Rx/Tx Pin Swap",
-        "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryPinswapHelp": {
-        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
+        "message": "Intercambia los pines del Rx y del Tx. Nota: esta opción NO está suportada en F4 MCUs, vea la ayuda.",
         "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
-        "status": "New entry. Please translate!"
     },
     "motorsUnsyncedPwm": {
-        "message": "Unsyncronised ESC update",
+        "message": "Actualización no sincronizada del ESC",
         "english": "Unsyncronised ESC update",
-        "status": "Modified entry. Please translate!",
         "previous": {
-            "message": "Unsyncronised Motor PWM",
+            "message": "Motor PWM no sincronizada",
             "english": "Unsyncronised Motor PWM",
-            "status": "New entry. Please translate!"
         }
     },
     "motorsUnsyncedPwmHelp": {
-        "message": "ESC PWM is running unsyncronised, separate from the PID loop, at the specified frequency.",
+        "message": "El PWM del ESC está funcionando sin sincronización, separarlo del ciclo del PID, a la frecuencia especificada.",
         "english": "ESC PWM is running unsyncronised, separate from the PID loop, at the specified frequency.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Motor PWM is running at the specified speed, without being syncronised to the PID loop",
-            "english": "Motor PWM is running at the specified speed, without being syncronised to the PID loop",
-            "status": "New entry. Please translate!"
-        }
     },
     "motorsUnsyncedPWMFreq": {
-        "message": "ESC update frequency",
+        "message": "Frecuencia de actualización del ESC",
         "english": "ESC update frequency",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Motor PWM frecuencia",
-            "english": "Motor PWM frequency",
-            "status": "Reused translation. Please check!"
-        }
     },
     "motorsUnsyncedPWMFreqHelp": {
-        "message": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz.",
+        "message": "La frecuencia de actualización del PWM del ESC está Hz. Es cuan a menudo el valor del acelerador se envía al ESC. Usualmente entre 50Hz y 250Hz. Los ESCs más modernos trabajan bien con 250Hz.",
         "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz.",
-        "status": "Modified entry. Please translate!",
         "previous": {
-            "message": "Motor PWM update frequency, when running unsyncronised.",
+            "message": "Frecuencia de actualización del PWM del Motor, cuando funciona sin sincronización.",
             "english": "Motor PWM update frequency, when running unsyncronised.",
-            "status": "New entry. Please translate!"
         }
     },
     "motorsDshotBidir": {
-        "message": "Dshot RPM Telemetry",
+        "message": "Telemetría Dshot RPM",
         "english": "Dshot RPM Telemetry",
-        "status": "Modified entry. Please translate!",
         "previous": {
-            "message": "Bidirectional DShot",
+            "message": "DShot Bidireccional",
             "english": "Bidirectional DShot",
-            "status": "New entry. Please translate!"
         }
     },
     "motorsDshotBidirHelp": {
-        "message": "The ESC RPM is sent back to the FC with Dshot. Also known as bidirectional Dshot. <br>Note: Requires a compatible ESC, like AM32, Bluejay or BLHeli32 version 32.7 or higher.",
+        "message": "Las RPM del ESC se envían hacia el FC por Dshot. También conocido como Dshot bidireccional. <br>Nota: Requiere un ESC compatible, como el AM32, Bluejay o BLHeli32 version 32.7 o superiorr.",
         "english": "The ESC RPM is sent back to the FC with Dshot. Also known as bidirectional Dshot. <br>Note: Requires a compatible ESC, like AM32, Bluejay or BLHeli32 version 32.7 or higher.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32 or BLHeli_S when flashed to Bluejay firmware.",
-            "english": "Sends ESC telemetry data back to the FC via DShot signaling. Required by RPM Filtering and Governor. <br> <br>Note: Requires a compatible ESC with appropriate firmware, eg. BLHeli32 or BLHeli_S when flashed to Bluejay firmware.",
-            "status": "New entry. Please translate!"
-        }
     },
     "motorsRPMSensor": {
-        "message": "RPM Sensor",
+        "message": "Sensor RPM",
         "english": "RPM Sensor",
-        "status": "New entry. Please translate!"
     },
     "motorsRPMSensorHelp": {
-        "message": "Use the RPM Sensor input for motor RPM. You can connect an RPM signal from the ESC, or from an external RPM Sensor dongle.",
+        "message": "Use la entrada del Sensor de RPM para detectar las RPM del motor. Puede conectar una señal RPM desde el ESC, o desde un sensor externo de RPM añadido.",
         "english": "Use the RPM Sensor input for motor RPM. You can connect an RPM signal from the ESC, or from an external RPM Sensor dongle.",
-        "status": "New entry. Please translate!"
     },
     "motorsMainRotorGearRatio": {
-        "message": "Main Rotor Gear Ratio",
+        "message": "Ratio de la transmisión del Rotor Principal",
         "english": "Main Rotor Gear Ratio",
-        "status": "New entry. Please translate!"
     },
     "motorsMainRotorGearRatioHelp": {
-        "message": "Gear ratio between the motor and the main rotor.<br>Use <span class=\"value\">motor pinion</span> : <span class=\"value\">main gear</span> tooth count.",
+        "message": "El ratio de la transmisión entre el motor y el rotor principal.<br>Use <span class=\"value\">el número de diente </span> : <span class=\"value\">main gear</span> del piñón.",
         "english": "Gear ratio between the motor and the main rotor.<br>Use <span class=\"value\">motor pinion</span> : <span class=\"value\">main gear</span> tooth count.",
-        "status": "New entry. Please translate!"
     },
     "motorsTailRotorGearRatio": {
-        "message": "Tail Rotor Gear Ratio",
+        "message": "Rato de la transmisión del Rotor de cola",
         "english": "Tail Rotor Gear Ratio",
-        "status": "New entry. Please translate!"
     },
     "motorsTailRotorGearRatioHelp": {
-        "message": "Gear ratio between the tail rotor and the main rotor. Use <span class=\"value\">tail gear</span> : <span class=\"value\">autorotation gear</span> tooth count for Torque Tube, or <span class=\"value\">tail pulley</span> : <span class=\"value\">front pulley</span> for a belt tail. For a direct drive tail, use <span class=\"value\">1</span> : <span class=\"value\">1</span>",
+        "message": "El ratio de la transmisión entre el rotor de cola y el rotor principal. Use<span class=\"value\">el número de dientes</span> : <span class=\"value\">de la transmición de la cola</span> y la de autorotación para Torque Tube, o <span class=\"value\">polea de cola</span> : <span class=\"value\">o pole frontal</span> para una cola con transmisión. Para una cola con drive directo, use <span class=\"value\">1</span> : <span class=\"value\">1</span>",
         "english": "Gear ratio between the tail rotor and the main rotor. Use <span class=\"value\">tail gear</span> : <span class=\"value\">autorotation gear</span> tooth count for Torque Tube, or <span class=\"value\">tail pulley</span> : <span class=\"value\">front pulley</span> for a belt tail. For a direct drive tail, use <span class=\"value\">1</span> : <span class=\"value\">1</span>",
-        "status": "New entry. Please translate!"
     },
     "motorsMotorPoles1Long": {
-        "message": "Main Motor pole count",
+        "message": "Contador eje motor Motor principal",
         "english": "Main Motor pole count",
-        "status": "New entry. Please translate!"
     },
     "motorsMotorPoles2Long": {
-        "message": "Tail Motor pole count",
+        "message": "Contador eje del Motor de cola",
         "english": "Tail Motor pole count",
-        "status": "New entry. Please translate!"
     },
     "motorsMotorPoles3Long": {
-        "message": "Motor M3 pole count",
+        "message": "Contador eje Motor M3",
         "english": "Motor M3 pole count",
-        "status": "New entry. Please translate!"
     },
     "motorsMotorPoles4Long": {
-        "message": "Motor M4 pole count",
+        "message": "Contador eje Motor M4",
         "english": "Motor M4 pole count",
-        "status": "New entry. Please translate!"
     },
     "motorsMotorPolesHelp": {
         "message": "The <i>pole count</i> is the number of magnets on the motor bell. The manual should give this number. Or you can count the magnets. Do NOT count the stators with the copper wire windings.",
