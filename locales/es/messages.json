@@ -9614,74 +9614,60 @@
         "status": "New entry. Please translate!"
     },
     "blackboxRateCustom": {
-        "message": "Custom",
+        "message": "Personalizado",
         "english": "Custom",
-        "status": "New entry. Please translate!"
     },
     "blackboxDebugMode": {
-        "message": "Debug mode",
+        "message": "Modo Depuración",
         "english": "Debug mode",
-        "status": "New entry. Please translate!"
     },
     "blackboxDebugModeHelp": {
-        "message": "Choose what <i>extra</i> data is being logged. If enabled, eight extra debug items are added to the Blackbox Log.",
+        "message": "Elija cuales <i>datos</i> extra se están registrando. Si se activa, ocho elementos extra de depuración se añaden al registro de la caja negra.",
         "english": "Choose what <i>extra</i> data is being logged. If enabled, eight extra debug items are added to the Blackbox Log.",
-        "status": "New entry. Please translate!"
     },
     "blackboxDebugModeUnknown": {
         "message": "DESCONOCIDO",
         "english": "UNKNOWN",
-        "status": "Reused translation. Please check!"
     },
     "blackboxDebugAxis": {
-        "message": "Debug axis",
+        "message": "Eje Depurado",
         "english": "Debug axis",
-        "status": "New entry. Please translate!"
     },
     "blackboxDebugAxisHelp": {
-        "message": "Choose which <i>axis</i> is being debugged. Applies to some of the debug modes.",
+        "message": "Elija cual <i>eje</i> esta siendo depurado. Aplica a algunos de los modos de depuración.",
         "english": "Choose which <i>axis</i> is being debugged. Applies to some of the debug modes.",
-        "status": "New entry. Please translate!"
     },
     "blackboxSerialLogger": {
-        "message": "Dispositivo de registro externo",
+        "message": "Dispositivo serie de registro externo",
         "english": "Outboard serial logging device",
-        "status": "Reused translation. Please check!"
     },
     "blackboxFlashLogger": {
         "message": "Memoria Flash Integrada",
         "english": "Onboard dataflash chip",
-        "status": "Reused translation. Please check!"
     },
     "blackboxSDCardLogger": {
         "message": "Tarjeta SD de la controladora",
         "english": "Onboard SD card",
-        "status": "Reused translation. Please check!"
     },
     "blackboxEraseInProgress": {
         "message": "Borrado en progreso, por favor espera...",
         "english": "Erase in progress, please wait...",
-        "status": "Reused translation. Please check!"
     },
     "blackboxMsc": {
         "message": "Modo de Almacenamiento Masivo",
         "english": "Mass Storage Mode",
-        "status": "Reused translation. Please check!"
     },
     "blackboxMscNote": {
         "message": "Reinicia en modo de <strong>dispositivo de almacenamiento masivo (MSC)</strong>. Una vez activado, la memoria integrada o la tarjeta SD de tu controlador de vuelo será reconocida como dispositivo de almacenamiento por tu ordenador, y te permitirá descargar tus archivos de registro. Expulsa y apaga y enciende de nuevo tu controlador de vuelo para abandonar el modo de dispositivo de almacenamiento masivo.",
         "english": "Reboot into <strong>mass storage device (MSC)</strong> mode. Once activated, the onboard flash or SD card on your flight controller will be recognised as a storage device by your computer, and allow you to download your log files. Eject and power cycle your flight controller to leave mass storage device mode.",
-        "status": "Reused translation. Please check!"
     },
     "blackboxRebootMscText": {
         "message": "Activar Modo de Dispositivo de Almacenamiento Masivo",
         "english": "Activate Mass Storage Device Mode",
-        "status": "Reused translation. Please check!"
     },
     "blackboxMscNotReady": {
-        "message": "El modo de almacenamiento masivo no puede ser activado porque el dispositivo de almacenamiento no está disponible.",
+        "message": "El modo de almacenamiento masivo no puede activarse porque el dispositivo de almacenamiento no está listo.",
         "english": "Mass storage mode can not be activated because the storage device is not ready.",
-        "status": "Reused translation. Please check!"
     },
     "dialogConfirmResetTitle": {
         "message": "Confirmar",
@@ -9700,124 +9686,100 @@
         "english": "Cancel"
     },
     "dialogConfirmArmingTitle": {
-        "message": "Confirm Arming",
+        "message": "Confirmar Armado",
         "english": "Confirm Arming",
-        "status": "New entry. Please translate!"
     },
     "dialogConfirmArmingNote": {
-        "message": "WARNING: Are you sure you want to <strong>enable arming</strong> while the Configurator is connected?",
+        "message": "PRECUCIÓN: ¿Está seguro de querer activar la<strong>activación del armado</strong> mientras Configurator está conectado?",
         "english": "WARNING: Are you sure you want to <strong>enable arming</strong> while the Configurator is connected?",
-        "status": "New entry. Please translate!"
     },
     "dialogConfirmArmingConfirm": {
-        "message": "Enable",
+        "message": "Activar",
         "english": "Enable",
-        "status": "New entry. Please translate!"
     },
     "dialogConfirmArmingClose": {
         "message": "Cancelar",
         "english": "Cancel",
-        "status": "Reused translation. Please check!"
     },
     "mode ARM": {
         "message": "ARM",
         "english": "ARM",
-        "status": "New entry. Please translate!"
     },
     "mode ANGLE": {
-        "message": "ANGLE",
+        "message": "ÁNGULO",
         "english": "ANGLE",
-        "status": "New entry. Please translate!"
     },
     "mode HORIZON": {
-        "message": "HORIZON",
+        "message": "HORIZONTE",
         "english": "HORIZON",
-        "status": "New entry. Please translate!"
     },
     "mode ALTHOLD": {
-        "message": "ALTHOLD",
+        "message": "MANT. ALTURA",
         "english": "ALTHOLD",
-        "status": "New entry. Please translate!"
     },
     "mode BEEPER": {
-        "message": "BEEPER",
+        "message": "PITIDOS",
         "english": "BEEPER",
-        "status": "New entry. Please translate!"
     },
     "mode LEDLOW": {
-        "message": "LEDLOW",
+        "message": "LED BAJO",
         "english": "LEDLOW",
-        "status": "New entry. Please translate!"
     },
     "mode CALIB": {
         "message": "CALIB",
         "english": "CALIB",
-        "status": "New entry. Please translate!"
     },
     "mode OSD DISABLE": {
-        "message": "OSD DISABLE",
+        "message": "DESACTIVAR OSD",
         "english": "OSD DISABLE",
-        "status": "New entry. Please translate!"
     },
     "mode TELEMETRY": {
-        "message": "TELEMETRY",
+        "message": "TELEMETRÍA",
         "english": "TELEMETRY",
-        "status": "New entry. Please translate!"
     },
     "mode BLACKBOX": {
-        "message": "BLACKBOX",
+        "message": "CAJA NEGRA",
         "english": "BLACKBOX",
-        "status": "New entry. Please translate!"
     },
     "mode FAILSAFE": {
         "message": "FAILSAFE",
         "english": "FAILSAFE",
-        "status": "New entry. Please translate!"
     },
     "mode BLACKBOX ERASE": {
-        "message": "BLACKBOX ERASE",
+        "message": "BORRADO CAJA NEGRA",
         "english": "BLACKBOX ERASE",
-        "status": "New entry. Please translate!"
     },
     "mode PREARM": {
-        "message": "PREARM",
+        "message": "PREARMADO",
         "english": "PREARM",
-        "status": "New entry. Please translate!"
     },
     "mode PARALYZE": {
-        "message": "PARALYZE",
+        "message": "PARALIZAR",
         "english": "PARALYZE",
-        "status": "New entry. Please translate!"
     },
     "mode GPS RESCUE": {
-        "message": "GPS RESCUE",
+        "message": "RESCATE GPS",
         "english": "GPS RESCUE",
-        "status": "New entry. Please translate!"
     },
     "mode TRAINER": {
-        "message": "TRAINER",
+        "message": "ENTRENADOR",
         "english": "TRAINER",
-        "status": "New entry. Please translate!"
     },
     "mode MSP OVERRIDE": {
-        "message": "MSP OVERRIDE",
+        "message": "OVERRIDE MSP",
         "english": "MSP OVERRIDE",
-        "status": "New entry. Please translate!"
     },
     "mode STICK COMMANDS DISABLE": {
-        "message": "STICK COMMANDS DISABLE",
+        "message": "DESACTIVAR ORDENES DE PALANCA",
         "english": "STICK COMMANDS DISABLE",
-        "status": "New entry. Please translate!"
     },
     "mode BEEPER MUTE": {
-        "message": "BEEPER MUTE",
+        "message": "SILENCIAR PITIDOS",
         "english": "BEEPER MUTE",
-        "status": "New entry. Please translate!"
     },
     "mode RESCUE": {
-        "message": "RESCUE",
+        "message": "RESCATE",
         "english": "RESCUE",
-        "status": "New entry. Please translate!"
     },
     "flashTab": {
         "message": "Actualizar Firmware",
@@ -9878,13 +9840,8 @@
         "english": "File name"
     },
     "dialogFileNameDescription": {
-        "message": "The file will be saved in the '{{folder}}' folder in your internal storage.",
+        "message": "El archivo se guardará en '{{folder}}' carpeta en su almacenamiento interno.",
         "english": "The file will be saved in the '{{folder}}' folder in your internal storage.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "El archivo se guardará en la carpeta 'Android/data/betaflight-configurator/{{folder}}' en tu almacenamiento interno.",
-            "english": "The file will be saved in the 'Android/data/betaflight-configurator/{{folder}}' folder in your internal storage."
-        }
     },
     "dialogFileAlreadyExistsTitle": {
         "message": "¡Este archivo ya existe!",
