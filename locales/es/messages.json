@@ -3301,249 +3301,201 @@
         "english": "Servo Override",
     },
     "servoOverrideHelp": {
-        "message": "Select the servo to be controlled and then move the slider to move the servo arm to the commanded angle.",
+        "message": "Seleccione el servo a controlar y mueva el slider para que el brazo esté en el ángulo correcto.",
         "english": "Select the servo to be controlled and then move the slider to move the servo arm to the commanded angle.",
-        "status": "New entry. Please translate!"
     },
     "servoEnableOverrideLabel": {
-        "message": "<strong>Enable servo override</strong>",
+        "message": "<strong>Habilitar servo override</strong>",
         "english": "<strong>Enable servo override</strong>",
-        "status": "New entry. Please translate!"
     },
     "servoEnableOverrideText": {
-        "message": " <i>Servo override</i> forces the servos to a arbitrary positions for setup purposes. The override values are not saved, and will be reset after a reboot.",
+        "message": " <i>Servo override</i> fuerza a los servos a ponerse en posiciones arbitrarias para propósitos de ajuste. Los valores de override no se guardan, y el servo se reinicia al rearrancar.",
         "english": " <i>Servo override</i> forces the servos to a arbitrary positions for setup purposes. The override values are not saved, and will be reset after a reboot.",
-        "status": "New entry. Please translate!"
     },
     "servoOverrideEnable": {
-        "message": "Enable",
+        "message": "habilitar",
         "english": "Enable",
-        "status": "New entry. Please translate!"
     },
     "servoOverrideAngle": {
         "message": "Ángulo",
         "english": "Angle",
-        "status": "Reused translation. Please check!"
     },
     "servoOverrideSlider": {
         "message": "",
         "english": "",
-        "status": "New entry. Please translate!"
     },
     "mixerCustomNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with a <strong>custom setup</strong> that can't be presented in the GUI. Any configuration changes must be done in the CLI, with the <code>mixer</code> command.",
-        "english": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with a <strong>custom setup</strong> that can't be presented in the GUI. Any configuration changes must be done in the CLI, with the <code>mixer</code> command.",
-        "status": "New entry. Please translate!"
+        "message": "<span class=\"message-negative\">Aviso:</span> Las Mezclas se configuran con un <strong>ajuste personalizado</strong> que no se puede presentar en el GUI. Cualquier cambio de configuración debe hacerse en el CLI, con los <code>ajustes</code> de la mezcla.",
+        "english": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with a <strong>custom setup</strong> that can't be presented in the GUI. Any configuration changes must be done in the CLI, con los <code>ajustes</code> de la mezcla.",
     },
     "mixerRulesNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with <strong>custom</strong> rules. Any rule changes must be done in the CLI, with the <code>mixer rule</code> command.",
+        "message": "<span class=\"message-negative\">Aviso:</span> Las Mezclas están configuradas con <strong>reglas</strong> personalizadas. Los cambios de reglas deben hacerse en el CLI, con los  <code>mixer rule</code> command.",
         "english": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with <strong>custom</strong> rules. Any rule changes must be done in the CLI, with the <code>mixer rule</code> command.",
-        "status": "New entry. Please translate!"
     },
     "mixerBidirNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> <i>Bidirectional tail motor</i> is an experimental feature that requires additional settings in the CLI.",
+        "message": "<span class=\"message-negative\">Aviso:</span> <i>Motor de cola Bidireccional</i> consiste en una característica experimental que requiere ajustes adicionales en el CLI.",
         "english": "<span class=\"message-negative\">Warning:</span> <i>Bidirectional tail motor</i> is an experimental feature that requires additional settings in the CLI.",
-        "status": "New entry. Please translate!"
     },
     "mixerRebootNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!",
+        "message": "<span class=\"message-negative\">Aviso:</span> Algunos ajustes requieren que el sistema se rearranque para que tengan efecto",
         "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!",
-        "status": "New entry. Please translate!"
     },
     "mixerMotorisedTailCalibrationNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
+        "message": "<span class=\"message-negative\">Aviso:</span> La calibración de Guiñada debe estar al 100% cuando se usa una cola motorizada. No cambie este valor a menos que sepa lo que está haciendo.",
         "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing.",
-        "status": "New entry. Please translate!"
     },
     "mixerMainRotorSettings": {
-        "message": "Main Rotor Settings",
+        "message": "Ajustes Rotor Principal",
         "english": "Main Rotor Settings",
-        "status": "New entry. Please translate!"
     },
     "mixerMainRotorDirection": {
-        "message": "Main Rotor Direction",
+        "message": "Dirección Rotor Principal",
         "english": "Main Rotor Direction",
-        "status": "New entry. Please translate!"
     },
     "mixerMainRotorDirectionHelp": {
-        "message": "Looking from the top of the helicopter, what direction is the main rotor turning? For the majority of helicopters this is clockwise.",
+        "message": "Mirando desde la parte de arriba del helicóptero, ¿hacia cual dirección gira el rotor? Para la mayoría de los helicópteross es sentido horario.",
         "english": "Looking from the top of the helicopter, what direction is the main rotor turning? For the majority of helicopters this is clockwise.",
-        "status": "New entry. Please translate!"
     },
     "mixerClockwise": {
-        "message": "Clockwise",
+        "message": "Horario",
         "english": "Clockwise",
-        "status": "New entry. Please translate!"
     },
     "mixerCounterClockwise": {
-        "message": "Counter-Clockwise",
+        "message": "Anti-Horario",
         "english": "Counter-Clockwise",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashType": {
-        "message": "Swashplate Type",
+        "message": "Tipo de Plato Cíclico",
         "english": "Swashplate Type",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashTypeHelp": {
-        "message": "<strong>None:</strong> The mixer is disabled. Custom mixing rules must be set in the CLI. <br><br><strong>Direct:</strong> No mixing, controls are passed through the mixer unchanged for external mixing.<br><br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For cyclic-pitch helicopters with three swashplate servos, at 120&deg;, 135&deg;, or 140&deg; angle.<br><br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos at 90&deg; angle, either in L or V configuration.",
+        "message": "<strong>None:</strong> La mezcla está inactiva. Las reglas personalizadas de las mezclas se deben ajustar en el CLI. <br><br><strong>Direct:</strong> Si no hay mezclas, los controles no se cambian al pasar por ellas para un mezclado externo.<br><br><strong>CCPM:</strong> Mezclas para el Paso de Cíclico-Colectivo. Para helicópteros con Paso-cíclico con tres servos en el plato cíclico, con ángulos de 120&deg;, 135&deg;, or 140&deg; .<br><br><strong>FPM:</strong> Mezclas de Paso Fixjo. Para helicópteros de Paso-Fijo con dos servos en el plato cíclico tendrán ángulos de 90&deg; sea en configuración L o V.",
         "english": "<strong>None:</strong> The mixer is disabled. Custom mixing rules must be set in the CLI. <br><br><strong>Direct:</strong> No mixing, controls are passed through the mixer unchanged for external mixing.<br><br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For cyclic-pitch helicopters with three swashplate servos, at 120&deg;, 135&deg;, or 140&deg; angle.<br><br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos at 90&deg; angle, either in L or V configuration.",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashType0": {
         "message": "Ninguno",
         "english": "None",
-        "status": "Reused translation. Please check!"
     },
     "mixerSwashType1": {
-        "message": "Direct",
+        "message": "Directo",
         "english": "Direct",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashType2": {
         "message": "CCPM 120&deg;",
         "english": "CCPM 120&deg;",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashType3": {
         "message": "CCPM 135&deg;",
         "english": "CCPM 135&deg;",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashType4": {
         "message": "CCPM 140&deg;",
         "english": "CCPM 140&deg;",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashType5": {
         "message": "FPM 90&deg; L",
         "english": "FPM 90&deg; L",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashType6": {
         "message": "FPM 90&deg; V",
         "english": "FPM 90&deg; V",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashType7": {
         "message": "",
         "english": "",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashType8": {
         "message": "",
         "english": "",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashType9": {
         "message": "",
         "english": "",
-        "status": "New entry. Please translate!"
     },
     "mixerDirectionNormal": {
         "message": "Normal",
         "english": "Normal",
-        "status": "Reused translation. Please check!"
     },
     "mixerDirectionReverse": {
         "message": "Invertir",
         "english": "Reverse",
-        "status": "Reused translation. Please check!"
     },
     "mixerElevatorDirection": {
-        "message": "Elevator Control Direction",
+        "message": "Dirección de Control Elevador",
         "english": "Elevator Control Direction",
-        "status": "New entry. Please translate!"
     },
     "mixerElevatorDirectionHelp": {
-        "message": "Depending on the elevator servo position and the head design, the direction may be reversed.",
+        "message": "Dependiendo de la posición del servo del elevador y el diseño de la cabeza, la dirección puede invertirse.",
         "english": "Depending on the elevator servo position and the head design, the direction may be reversed.",
-        "status": "New entry. Please translate!"
     },
     "mixerAileronDirection": {
-        "message": "Aileron Control Direction",
+        "message": "Dirección de Control Alerones",
         "english": "Aileron Control Direction",
-        "status": "New entry. Please translate!"
     },
     "mixerAileronDirectionHelp": {
-        "message": "Depending on the aileron servo position and the head design, the direction may be reversed.",
+        "message": "Dependiendo de la posición del servo de alerones y el diseño de la cabeza, la dirección puede invertirse.",
         "english": "Depending on the aileron servo position and the head design, the direction may be reversed.",
         "status": "New entry. Please translate!"
     },
     "mixerCollectiveDirection": {
-        "message": "Collective Control Direction",
+        "message": "Dirección de Control Colectivo",
         "english": "Collective Control Direction",
-        "status": "New entry. Please translate!"
     },
     "mixerCollectiveDirectionHelp": {
-        "message": "Depending on the blade grip control arm position, the collective direction may be reversed. Usually trailing edge control has reversed direction.",
+        "message": "Dependiendo de la posición de control del brazo de apriete de la pala, la dirección del colectivo puede invertirse. Normalmente, el control del borde trasero tiene dirección invertida.",
         "english": "Depending on the blade grip control arm position, the collective direction may be reversed. Usually trailing edge control has reversed direction.",
-        "status": "New entry. Please translate!"
     },
     "mixerGeometrySettings": {
-        "message": "Main Rotor Geometry",
+        "message": "Geometría Rotor Principal",
         "english": "Main Rotor Geometry",
-        "status": "New entry. Please translate!"
     },
     "mixerCyclicCalibration": {
-        "message": "Cyclic calibration [%]",
+        "message": "Calibración Cíclico [%]",
         "english": "Cyclic calibration [%]",
-        "status": "New entry. Please translate!"
     },
     "mixerCyclicCalibrationHelp": {
-        "message": "Adjust the cyclic gain to match the mechanical gain in the head design.",
+        "message": "Ajuste la ganancia del cíclico para igualarla con la ganancia mecánica en el diseño de la cabeza.",
         "english": "Adjust the cyclic gain to match the mechanical gain in the head design.",
-        "status": "New entry. Please translate!"
     },
     "mixerCollectiveCalibration": {
-        "message": "Collective calibration [%]",
+        "message": "Calibración Colectivo [%]",
         "english": "Collective calibration [%]",
-        "status": "New entry. Please translate!"
     },
     "mixerCollectiveCalibrationHelp": {
-        "message": "Adjust the collective gain to match the mechanical gain in the head design.",
+        "message": "Ajuste la ganancia del colectivo para igualar la ganancia mecánica en el diseño de la cabeza.",
         "english": "Adjust the collective gain to match the mechanical gain in the head design.",
-        "status": "New entry. Please translate!"
     },
     "mixerCollectiveGeoCorrection": {
-        "message": "Collective Geometry Correction [%]",
+        "message": "Corrección Geométrica del Colectivo [%]",
         "english": "Collective Geometry Correction [%]",
-        "status": "New entry. Please translate!"
     },
     "mixerCollectiveGeoCorrectionHelp": {
-        "message": "Adjust until the collective positive and negative deflections are equal.",
+        "message": "Ajuste hasta que las deflexiones positiva y negativa del colectivo sean iguales.",
         "english": "Adjust until the collective positive and negative deflections are equal.",
-        "status": "New entry. Please translate!"
     },
     "mixerTotalPitchLimit": {
-        "message": "Total blade pitch limit [&deg;]",
+        "message": "Límite de Paso Total de la pala [&deg;]",
         "english": "Total blade pitch limit [&deg;]",
-        "status": "New entry. Please translate!"
     },
     "mixerTotalPitchLimitHelp": {
-        "message": "Maximum amount of total cyclic + collective blade pitch.",
+        "message": "Cantidad Máxima total del Paso de la Pala en cíclico + colectivo.",
         "english": "Maximum amount of total cyclic + collective blade pitch.",
-        "status": "New entry. Please translate!"
     },
     "mixerCyclicLimit": {
-        "message": "Cyclic blade pitch limit [&deg;]",
+        "message": "Límite de Paso de la Pala en Cíclico [&deg;]",
         "english": "Cyclic blade pitch limit [&deg;]",
-        "status": "New entry. Please translate!"
     },
     "mixerCyclicLimitHelp": {
-        "message": "Maximum amount of cyclic blade pitch.",
+        "message": "Cantidad Máxima de Paso de la Pala en cíclico.",
         "english": "Maximum amount of cyclic blade pitch.",
-        "status": "New entry. Please translate!"
     },
     "mixerCollectiveLimit": {
-        "message": "Collective blade pitch limit [&deg;]",
+        "message": "Límite de Paso de la Pala en Colectivo [&deg;]",
         "english": "Collective blade pitch limit [&deg;]",
-        "status": "New entry. Please translate!"
     },
     "mixerCollectiveLimitHelp": {
-        "message": "Maximum amount of collective blade pitch.",
+        "message": "Cantidad máxima de Paso de la Pala en colectio.",
         "english": "Maximum amount of collective blade pitch.",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashRing": {
         "message": "Swashring",
