@@ -3500,92 +3500,74 @@
     "mixerSwashRing": {
         "message": "Swashring",
         "english": "Swashring",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashRingHelp": {
-        "message": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum.",
+        "message": "El swashring limita el ángulo máximo que el plato del cíclico puede alcanzar para prevenir excesos. Los ejes del Paso y alabeo deben configurarse individualmente (via entradas de mezclas y escalado) a los ángulos de paso deseados (sin excesos). Si de alguna manera se manda el máximo de Paso y Alabeo <strong>al mismo tiempo</strong>, el Swashplate deberá deflexionar a un águlo más alto que cada uno de los ejes individuales. Esto puede resultar que el plato del Cíclico se doble en el eje principal.<br><br>Incrementar el valor de Swashring limitará el ángulo máximo del plato cuando el Paso y el Alabeo sean máximos.",
         "english": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum.",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashPhase": {
-        "message": "Swashplate phase angle [&deg;]",
+        "message": "Ángulo de fase del plato del cíclico [&deg;]",
         "english": "Swashplate phase angle [&deg;]",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashPhaseHelp": {
-        "message": "The phase offset for the swashplate controls.",
+        "message": "El desplazamiento de fase para los controles del plato del cíclico.",
         "english": "The phase offset for the swashplate controls.",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashRollTrim": {
-        "message": "Roll trim [%]",
+        "message": "Compensador en Alabeo [%]",
         "english": "Roll trim [%]",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashPitchTrim": {
-        "message": "Pitch trim [%]",
+        "message": "Compensador de Paso [%]",
         "english": "Pitch trim [%]",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashCollectiveTrim": {
-        "message": "Collective trim [%]",
+        "message": "Compensador de Colectivo [%]",
         "english": "Collective trim [%]",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashTrimHelp": {
-        "message": "Trim for swashplate linkages. Use only if the linkages are not adjustable.",
+        "message": "Compensador de enlaces del plato del colectivo. Uselo sólo si los enlaces no son ajustables.",
         "english": "Trim for swashplate linkages. Use only if the linkages are not adjustable.",
-        "status": "New entry. Please translate!"
     },
     "mixerTailRotorSettings": {
-        "message": "Tail Rotor Settings",
+        "message": "Ajustes del Rotor de Cola",
         "english": "Tail Rotor Settings",
-        "status": "New entry. Please translate!"
     },
     "mixerTailRotorMode": {
-        "message": "Tail rotor type",
+        "message": "Tipo de Rotor de Cola",
         "english": "Tail rotor type",
-        "status": "New entry. Please translate!"
     },
     "mixerTailRotorModeHelp": {
-        "message": "<strong>Variable pitch:</strong> Variable pitch tail controlled by a tail servo (Servo#4). <br><strong>Motorised:</strong> The tail has a separate motor (Motor#2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode (experimental).",
+        "message": "<strong>Paso variable:</strong> Cola de paso variable controlada por un servo de cola (Servo#4). <br><strong>Motorizado:</strong> La cola tiene un motor separado (Motor#2) para controlar la guiñada.<br><strong>Bi-direccional:</strong> Colas motorizadas operando en modo bi-direccional (experimental).",
         "english": "<strong>Variable pitch:</strong> Variable pitch tail controlled by a tail servo (Servo#4). <br><strong>Motorised:</strong> The tail has a separate motor (Motor#2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode (experimental).",
-        "status": "New entry. Please translate!"
     },
     "mixerTailVariablePitch": {
-        "message": "Variable pitch",
+        "message": "Paso Variable",
         "english": "Variable pitch",
-        "status": "New entry. Please translate!"
     },
     "mixerTailMotorized": {
-        "message": "Motorised",
+        "message": "Motorizada",
         "english": "Motorised",
-        "status": "New entry. Please translate!"
     },
     "mixerTailBidirectional": {
-        "message": "Bidirectional",
+        "message": "Bidireccional",
         "english": "Bidirectional",
-        "status": "New entry. Please translate!"
     },
     "mixerTailRotorDirection": {
-        "message": "Yaw Control Direction",
+        "message": "Control Dirección Guiñada",
         "english": "Yaw Control Direction",
-        "status": "New entry. Please translate!"
     },
     "mixerTailRotorDirectionHelp": {
-        "message": "Depending on the tail rotor direction and ESC/servo configuration, the yaw direction may be reversed.",
+        "message": "Dependiendo dela dirección del rotor de cola y de la configuración ESC/servo, la direción de guiñada se puede invertir.",
         "english": "Depending on the tail rotor direction and ESC/servo configuration, the yaw direction may be reversed.",
-        "status": "New entry. Please translate!"
     },
     "mixerTailRotorCalibration": {
-        "message": "Yaw calibration [%]",
+        "message": "Calibración de Guiñada [%]",
         "english": "Yaw calibration [%]",
-        "status": "New entry. Please translate!"
     },
     "mixerTailRotorCalibrationHelp": {
-        "message": "Adjust the yaw gain to match the mechanical gain. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors.",
+        "message": "Ajusta la ganancia de la guiñada para igualar la ganancia mecánica. Usualmente alrededor de 50-150% para servos de cola, pero puede ser totalmente distinto para colas con rotores motorizados.",
         "english": "Adjust the yaw gain to match the mechanical gain. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors.",
-        "status": "New entry. Please translate!"
     },
     "mixerTailRotorMinYaw": {
         "message": "CW Yaw Blade Angle Limit",
