@@ -3213,119 +3213,92 @@
         "english": "Min",
     },
     "servoMinHelp": {
-        "message": "Lowest point of travel (minimum pulse width). This setting changes the allowed negative servo throw. It is used for avoiding servo arm binding at the negative travel extreme.",
+        "message": "Punto más bajo de recorrido (mínimo ancho de pulse). Este ajuste cambia el movimiento negativo permitido del servo. Se usa para evitar que el brazo del servo se doble en los extremos negativos del movimiento.",
         "english": "Lowest point of travel (minimum pulse width). This setting changes the allowed negative servo throw. It is used for avoiding servo arm binding at the negative travel extreme.",
-        "status": "New entry. Please translate!"
     },
     "servoMax": {
-        "message": "Max",
+        "message": "Máx",
         "english": "Max",
-        "status": "New entry. Please translate!"
     },
     "servoMaxHelp": {
-        "message": "Highest point of travel (maximum pulse width). This setting changes the allowed positive servo throw. It is used for avoiding servo arm binding at the positive travel extreme.",
+        "message": "Punto más alto del recorrido (máximo ancho de pulso). Este ajuste cambia el movimiento positivo permitido del servo. Se usa para evitar que el brazo del servo se doble en los extremos positivos del movimiento..",
         "english": "Highest point of travel (maximum pulse width). This setting changes the allowed positive servo throw. It is used for avoiding servo arm binding at the positive travel extreme.",
-        "status": "New entry. Please translate!"
     },
     "servoScaleNeg": {
-        "message": "Scale neg",
+        "message": "Escalado neg",
         "english": "Scale neg",
-        "status": "New entry. Please translate!"
     },
     "servoScaleNegHelp": {
-        "message": "Scaling factor on the negative side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws.",
+        "message": "Factor de escalado en el lado negativo. Tipicamente 500µs para servos normales (1520µs) y 250µs para servos de banda estrecha (760µs). Alterar estos ajustes desde los valores por defecto se usa para corregir cualquier desalineación entre los desplazamientos negativo y positivo.",
         "english": "Scaling factor on the negative side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws.",
-        "status": "New entry. Please translate!"
     },
     "servoScalePos": {
-        "message": "Scale pos",
+        "message": "Ecalado pos",
         "english": "Scale pos",
-        "status": "New entry. Please translate!"
     },
     "servoScalePosHelp": {
-        "message": "Scaling factor on the positive side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws.",
+        "message": "Factor de escalado en el lado positivo. Tipicamente 500µs para servos normales (1520µs) y 250µs para servos de banda estrecha (760µs). Alterar estos ajustes desde los valores por defecto se usa para corregir cualquier desalineación entre los desplazamientos negativo y positivo.",
         "english": "Scaling factor on the positive side. Typically 500µs for normal (1520µs) servos, and 250µs for narrow band (760µs) servos. Altering this setting from the default is used for correcting any nonlinearity between the negative and positive throws.",
-        "status": "New entry. Please translate!"
     },
     "servoRate": {
         "message": "Rate [Hz]",
         "english": "Rate [Hz]",
-        "status": "New entry. Please translate!"
     },
     "servoRateHelp": {
-        "message": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time.",
+        "message": "Régimen de actualiación del PWM en Hz. Para servos analógicos, se ajusta a 50Hz, ya que valores más altos pueden dañarlo. Para servos digitales, valores entre 100Hz hasta 560Hz son los típicos. Compruebe los datos técnicos del servo.<br><b>Nota</b>: Seleccione <i>Guardara y reiniciar</i> para cambiar realmente la tasa de actualización, ya que solo se inicializa en el momento del arranqueas.",
         "english": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time.",
-        "status": "New entry. Please translate!"
     },
     "servoSpeed": {
-        "message": "Speed [ms]",
+        "message": "Velocidad [ms]",
         "english": "Speed [ms]",
-        "status": "New entry. Please translate!"
     },
     "servoSpeedHelp": {
-        "message": "Limits the servo motion speed. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed for 60&deg; rotation.",
+        "message": "Limita la velocidad de movimiento del servo. Puede usarse, por ejemplo, en los trenes retráctiles. Un valor 0 significa no limitación. Valores entre 1-60000 milisegundos especifican ei tiempo necesario para 60&grad; rotación.",
         "english": "Limits the servo motion speed. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed for 60&deg; rotation.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 50&deg;.",
-            "english": "Limits the motion speed of the servo. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed to rotate the servo 50&deg;.",
-            "status": "New entry. Please translate!"
-        }
     },
     "servoReverse": {
         "message": "Invertir",
         "english": "Reverse",
-        "status": "Reused translation. Please check!"
     },
     "servoReverseHelp": {
-        "message": "Reverse the servo if it's not moving in the right direction.",
+        "message": "Invierta el servo si no semueve en la dirección correcta.",
         "english": "Reverse the servo if it's not moving in the right direction.",
-        "status": "New entry. Please translate!"
     },
     "servoGeometryCorrection": {
-        "message": "Geo cor",
+        "message": "Corr. Geom.",
         "english": "Geo cor",
-        "status": "New entry. Please translate!"
     },
     "servoGeometryCorrectionHelp": {
-        "message": "Enable <i>Geometry Correction</i> for correcting the rotational geometry at the servo movement extremes. Do not use with linear servos.",
+        "message": "Habilita <i>la correción geométrica</i> para corregir la geometría rotatoria de los extremos del movimiento del servo. No lo use con servos lineales.",
         "english": "Enable <i>Geometry Correction</i> for correcting the rotational geometry at the servo movement extremes. Do not use with linear servos.",
-        "status": "New entry. Please translate!"
     },
     "servoSignal": {
-        "message": "PWM Signal",
+        "message": "Señal PWM",
         "english": "PWM Signal",
-        "status": "New entry. Please translate!"
     },
     "servoRateRebootNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Changes to the <i>Servo Rate</i> parameter require System Reboot before taking affect!",
+        "message": "<span class=\"message-negative\">AVISO:</span> ¡Los cambios en los parámetros <i>del Rate de servo</i> requiren que el sistema se reinicie antes de que tengan efecto!",
         "english": "<span class=\"message-negative\">Warning:</span> Changes to the <i>Servo Rate</i> parameter require System Reboot before taking affect!",
-        "status": "New entry. Please translate!"
     },
     "servoUnusualLimitsWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!",
+        "message": "<span class=\"message-negative\">Aviso:</span> Los límites <i>del servo</i> están ajustados a valores no usuales. Por favor, ¡compruébelo!",
         "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!",
-        "status": "New entry. Please translate!"
     },
     "servoUnusualScalesWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Scales</i> are set to unusual values. Please check!",
+        "message": "<span class=\"message-negative\">Aviso:</span> El escalado <i>del servo</i> están ajustados a valores no usuales. Por favor, ¡Compruébelo!",
         "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Scales</i> are set to unusual values. Please check!",
-        "status": "New entry. Please translate!"
     },
     "servoUnusualRatesWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!",
+        "message": "<span class=\"message-negative\">Aviso:</span> Los rates <i>del servo</i> están ajustados a valores no usuales. Por favor, ¡Compruébelo!",
         "english": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!",
-        "status": "New entry. Please translate!"
     },
     "servoUnusualGeometryCorrection": {
-        "message": "<span class=\"message-negative\">Warning:</span> The <i>Geometry correction</i> is not equal for all servos. Please check!",
+        "message": "<span class=\"message-negative\">Aviso:</span> La <i>corrección Geométrica</i> no es igual en todos los servos. Por favor, ¡Compruébelo!",
         "english": "<span class=\"message-negative\">Warning:</span> The <i>Geometry correction</i> is not equal for all servos. Please check!",
-        "status": "New entry. Please translate!"
     },
     "servoOverride": {
         "message": "Servo Override",
         "english": "Servo Override",
-        "status": "New entry. Please translate!"
     },
     "servoOverrideHelp": {
         "message": "Select the servo to be controlled and then move the slider to move the servo arm to the commanded angle.",
