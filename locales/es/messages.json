@@ -3570,99 +3570,80 @@
         "english": "Adjust the yaw gain to match the mechanical gain. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors.",
     },
     "mixerTailRotorMinYaw": {
-        "message": "CW Yaw Blade Angle Limit",
+        "message": "Límite ángulo Pala Guiñada horaria",
         "english": "CW Yaw Blade Angle Limit",
-        "status": "New entry. Please translate!"
     },
     "mixerTailRotorMinYawHelp": {
-        "message": "An angle limit for clockwise yaw.",
+        "message": "Un límite de ángulo Guiñada horaria.",
         "english": "An angle limit for clockwise yaw.",
-        "status": "New entry. Please translate!"
     },
     "mixerTailRotorMaxYaw": {
-        "message": "CCW Yaw Blade Angle Limit",
+        "message": "Límite ángulo de pala Guiñada anti-horaria",
         "english": "CCW Yaw Blade Angle Limit",
-        "status": "New entry. Please translate!"
     },
     "mixerTailRotorMaxYawHelp": {
-        "message": "An angle limit for counter-clockwise yaw.",
+        "message": "Un límite de ángulo para Guiñada anti-horaria.",
         "english": "An angle limit for counter-clockwise yaw.",
-        "status": "New entry. Please translate!"
     },
     "mixerTailMotorMinYaw": {
-        "message": "CW yaw limit [%]",
+        "message": "Limite Guiñada horaria [%]",
         "english": "CW yaw limit [%]",
-        "status": "New entry. Please translate!"
     },
     "mixerTailMotorMinYawHelp": {
-        "message": "A limit for clockwise yaw.",
+        "message": "Un límite para Guiñada horaria.",
         "english": "A limit for clockwise yaw.",
-        "status": "New entry. Please translate!"
     },
     "mixerTailMotorMaxYaw": {
-        "message": "CCW yaw limit [%]",
+        "message": "Limite Guiñada anti-horaria [%]",
         "english": "CCW yaw limit [%]",
-        "status": "New entry. Please translate!"
     },
     "mixerTailMotorMaxYawHelp": {
-        "message": "A limit for counter-clockwise yaw.",
+        "message": "Un límite para Guiñada anti-horaria.",
         "english": "A limit for counter-clockwise yaw.",
-        "status": "New entry. Please translate!"
     },
     "mixerTailMotorIdle": {
-        "message": "Motor idle throttle [%]",
+        "message": "Motor palanca ralenti [%]",
         "english": "Motor idle throttle [%]",
-        "status": "New entry. Please translate!"
     },
     "mixerTailMotorIdleHelp": {
-        "message": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop",
+        "message": "Es la mínimua señal de motor que se envía al motor de cola. Debe ajustarse justo lo suficiente hacia arriba para que el motor no se pare",
         "english": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop",
-        "status": "New entry. Please translate!"
     },
     "mixerTailRotorCenterTrim": {
-        "message": "Yaw center trim",
+        "message": "Trim de centro de Guiñada",
         "english": "Yaw center trim",
-        "status": "New entry. Please translate!"
     },
     "mixerTailRotorCenterTrimHelp": {
-        "message": "Set tail rotor trim to achieve zero blade pitch with 0° yaw mixer override.",
+        "message": "Ajusta el trim del rotor de cola para conseguir cero en el paso de la palacon 0° de mezcla en override de guiñada.",
         "english": "Set tail rotor trim to achieve zero blade pitch with 0° yaw mixer override.",
-        "status": "New entry. Please translate!"
     },
     "mixerTailMotorCenterTrim": {
-        "message": "Yaw center offset [%]",
+        "message": "Desplazamiento del centro de Guiñada [%]",
         "english": "Yaw center offset [%]",
-        "status": "New entry. Please translate!"
     },
     "mixerTailMotorCenterTrimHelp": {
-        "message": "Set tail motor throttle value for zero yaw command.",
+        "message": "Ajusta el valor de la palanca del motor de cola a cero de mando en guiñada.",
         "english": "Set tail motor throttle value for zero yaw command.",
-        "status": "New entry. Please translate!"
     },
     "mixerSwashLinkTrim": {
-        "message": "Swashplate Trims",
+        "message": "Trims del Plato del Cíclico",
         "english": "Swashplate Trims",
-        "status": "New entry. Please translate!"
     },
     "mixerInputChannels": {
-        "message": "Mixer Control Inputs",
+        "message": "Control de entradas de mezclas",
         "english": "Mixer Control Inputs",
-        "status": "New entry. Please translate!"
     },
     "mixerInputChannelsHelp": {
-        "message": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle.",
+        "message": "<strong>¡Nota! Este es el lugar correcto para limitar sus controles</strong><br><br>En rate de entradas de las mezclas se usa para ajustar el factor de escalado para igualar los ajustes mecánicos de la cabeza. Como cadarotor de la cabezaes distinto, se necesitarán valores de escalado también diferentes para cada ajuste. <br><strong>Control:</strong> Esta columna contiene cada una de las funciones estabilizadas de control. <br><strong>Mínimo:</strong> Ajusta el ángulo mínimo que desea alcance la pala cuando se actúe. <br><strong>Máximo:</strong> Ajusta el ángulo máximo que desea alcance la pala cuando se actúe. <br><strong>Escalado:</strong> Incrementa o disminuye el valor de escalado hasta que las palas del helicóptero se igualen con el ángulo mandado. <br><br><strong>Proceso de Calibrado de la entrada de mezcla</strong><br><strong>Paso 1: </strong>Actualiza el override de las mezclas con el selector en la pestaña 'SYSTEM'. La entrada del override de las mezclas no será visible en esta página. <br><strong>Paso 2: </strong>Habilita el bypass en el Control que se ha de calibrar. <br><strong>Paso 3: </strong>Ajusta el override de las mezclas a un ángulo (digamos 10 grados). <br><strong>Paso 4: </strong>Mide el ángulo actual de la pala.<br><strong>Paso 5: </strong>Ajusta el escalado de forma que el ángulo físico de la pala se igualala con el ángulo mandado.",
         "english": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle.",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideNote": {
-        "message": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot.",
+        "message": "<strong>Nota.</strong> El Override de las mezclas fuerza las entradas de las mezclas a posiciones arbitrarias con propósitos de ajuste. Los valores de override no se guardan, y se resetaan al reiniciar.",
         "english": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot.",
-        "status": "New entry. Please translate!"
     },
     "mixerOverride": {
-        "message": "Mixer Override",
+        "message": "Override de mezclas",
         "english": "Mixer Override",
-        "status": "New entry. Please translate!"
     },
     "mixerOverrideHelp": {
         "message": "This feature is used for setting up the rotor and is part of the <strong>Mixer Calibration</strong> process. When the bypass enable is active the mixer can be commanded to the requested positions directly.",
