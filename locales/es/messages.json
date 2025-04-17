@@ -3167,7 +3167,6 @@
     "adjustmentsFunctionRollO": {
         "message": "Ganancia-O en Alabeo",
         "english": "Roll O-gain",
-        "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionCrossCouplingGain": {
         "message": "Ganancia del acoplamiento Cruzado",
@@ -3206,14 +3205,12 @@
         "english": "Center",
     },
     "servoMidHelp": {
-        "message": "Center position in µs. The servo arm should be level in this position.",
+        "message": "Posición central en µs. El brazo del servo debería estar nivelado en esta posición.",
         "english": "Center position in µs. The servo arm should be level in this position.",
-        "status": "New entry. Please translate!"
     },
     "servoMin": {
         "message": "Min",
         "english": "Min",
-        "status": "New entry. Please translate!"
     },
     "servoMinHelp": {
         "message": "Lowest point of travel (minimum pulse width). This setting changes the allowed negative servo throw. It is used for avoiding servo arm binding at the negative travel extreme.",
