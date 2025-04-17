@@ -4031,10 +4031,6 @@
     "motorsUnsyncedPwm": {
         "message": "Actualización no sincronizada del ESC",
         "english": "Unsyncronised ESC update",
-        "previous": {
-            "message": "Motor PWM no sincronizada",
-            "english": "Unsyncronised Motor PWM",
-        }
     },
     "motorsUnsyncedPwmHelp": {
         "message": "El PWM del ESC está funcionando sin sincronización, separarlo del ciclo del PID, a la frecuencia especificada.",
@@ -4047,18 +4043,10 @@
     "motorsUnsyncedPWMFreqHelp": {
         "message": "La frecuencia de actualización del PWM del ESC está Hz. Es cuan a menudo el valor del acelerador se envía al ESC. Usualmente entre 50Hz y 250Hz. Los ESCs más modernos trabajan bien con 250Hz.",
         "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz.",
-        "previous": {
-            "message": "Frecuencia de actualización del PWM del Motor, cuando funciona sin sincronización.",
-            "english": "Motor PWM update frequency, when running unsyncronised.",
-        }
     },
     "motorsDshotBidir": {
         "message": "Telemetría Dshot RPM",
         "english": "Dshot RPM Telemetry",
-        "previous": {
-            "message": "DShot Bidireccional",
-            "english": "Bidirectional DShot",
-        }
     },
     "motorsDshotBidirHelp": {
         "message": "Las RPM del ESC se envían hacia el FC por Dshot. También conocido como Dshot bidireccional. <br>Nota: Requiere un ESC compatible, como el AM32, Bluejay o BLHeli32 version 32.7 o superiorr.",
@@ -4105,219 +4093,176 @@
         "english": "Motor M4 pole count",
     },
     "motorsMotorPolesHelp": {
-        "message": "The <i>pole count</i> is the number of magnets on the motor bell. The manual should give this number. Or you can count the magnets. Do NOT count the stators with the copper wire windings.",
+        "message": "El <i>contador del eje</i> es el número de imanes en la campana del motor. El manual debería darle ese número. O puede contar los imanes. NOT cuento los estatores con los hilos de cobre enrollados.",
         "english": "The <i>pole count</i> is the number of magnets on the motor bell. The manual should give this number. Or you can count the magnets. Do NOT count the stators with the copper wire windings.",
-        "status": "New entry. Please translate!"
     },
     "motorsThrottleMinimum": {
-        "message": "0% Throttle PWM value",
+        "message": "0% valor PWM del acelerador",
         "english": "0% Throttle PWM value",
-        "status": "New entry. Please translate!"
     },
     "motorsThrottleMinimumHelp": {
-        "message": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE).",
+        "message": "Este valor PWM se envía al ESC/servo con baja aceleración (acelerador al ralentí con ICE).",
         "english": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE).",
-        "status": "New entry. Please translate!"
     },
     "motorsThrottleMaximum": {
-        "message": "100% Throttle PWM value",
+        "message": "100% valor PWM del acelerador",
         "english": "100% Throttle PWM value",
-        "status": "New entry. Please translate!"
     },
     "motorsThrottleMaximumHelp": {
-        "message": "This PWM value is sent to the ESC/servo at full throttle.",
+        "message": "Este valor PWM se envía al ESC/servo con acelerador máximo.",
         "english": "This PWM value is sent to the ESC/servo at full throttle.",
-        "status": "New entry. Please translate!"
     },
     "motorsThrottleMinimumCommand": {
-        "message": "Motor Stop Throttle PWM value",
+        "message": "Valor PWM con el acelerador del motor parado",
         "english": "Motor Stop Throttle PWM value",
-        "status": "New entry. Please translate!"
     },
     "motorsThrottleMinimumCommandHelp": {
-        "message": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm.",
+        "message": "Este valor PWM se envía al ESC/servo cuando el motor está parado. Este valor también permite armar el ESC.",
         "english": "This PWM value is sent to the ESC/servo when the motor is stopped. This is also a value that allows the ESC to arm.",
-        "status": "New entry. Please translate!"
     },
     "motorMainGearRatioIssueNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> <i>Main Rotor Gear Ratio</i> is set to an incorrect value. Please check!",
+        "message": "<span class=\"message-negative\">Precaución:</span> <i>Ratio del engranaje del rotor principal</i> está ajustado a valores incorrectos. Por favor, ¡Compruebelos!",
         "english": "<span class=\"message-negative\">Warning:</span> <i>Main Rotor Gear Ratio</i> is set to an incorrect value. Please check!",
-        "status": "New entry. Please translate!"
     },
     "motorTailGearRatioIssueNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> <i>Tail Rotor Gear Ratio</i> is set to an incorrect value. Please check!",
+        "message": "<span class=\"message-negative\">Precaución:</span> <i>Ratio del engranaje del motor de cola</i> está ajustado a valores incorrectos. Por favor ¡Compruebelos!",
         "english": "<span class=\"message-negative\">Warning:</span> <i>Tail Rotor Gear Ratio</i> is set to an incorrect value. Please check!",
-        "status": "New entry. Please translate!"
     },
     "motorRotorSpeeds": {
-        "message": "Rotor Speed",
+        "message": "Velocidad del Rotor",
         "english": "Rotor Speed",
-        "status": "New entry. Please translate!"
     },
     "motorMainRotorSpeed": {
-        "message": "Main Rotor",
+        "message": "Rotor Principal",
         "english": "Main Rotor",
-        "status": "New entry. Please translate!"
     },
     "motorTailRotorSpeed": {
-        "message": "Tail Rotor",
+        "message": "Rotor de cola",
         "english": "Tail Rotor",
-        "status": "New entry. Please translate!"
     },
     "motorInfo1": {
-        "message": "Motor #1 - Main Motor",
+        "message": "Motor #1 - Motor principal",
         "english": "Motor #1 - Main Motor",
-        "status": "New entry. Please translate!"
     },
     "motorInfo2": {
-        "message": "Motor #2 - Tail Motor",
+        "message": "Motor #2 - Motor de cola",
         "english": "Motor #2 - Tail Motor",
-        "status": "New entry. Please translate!"
     },
     "motorInfo3": {
         "message": "Motor #3",
         "english": "Motor #3",
-        "status": "New entry. Please translate!"
     },
     "motorInfo4": {
         "message": "Motor #4",
         "english": "Motor #4",
-        "status": "New entry. Please translate!"
     },
     "motorOverride": {
         "message": "Override",
         "english": "Override",
-        "status": "New entry. Please translate!"
     },
     "motorThrottle": {
-        "message": "Throttle:",
+        "message": "Acelerador:",
         "english": "Throttle:",
-        "status": "New entry. Please translate!"
     },
     "motorRPM": {
         "message": "RPM:",
         "english": "RPM:",
-        "status": "New entry. Please translate!"
     },
     "motorHeadspeed": {
-        "message": "Headspeed:",
+        "message": "Velocidad de la cabez:",
         "english": "Headspeed:",
-        "status": "New entry. Please translate!"
     },
     "motorTailspeed": {
-        "message": "Tailspeed:",
+        "message": "Velocidad de cola:",
         "english": "Tailspeed:",
-        "status": "New entry. Please translate!"
     },
     "motorVoltage": {
         "message": "Voltaje:",
         "english": "Voltage:",
-        "status": "Reused translation. Please check!"
     },
     "motorCurrent": {
-        "message": "Current:",
+        "message": "Amperaje:",
         "english": "Current:",
-        "status": "New entry. Please translate!"
     },
     "motorTemperature": {
         "message": "Temp:",
         "english": "Temp:",
-        "status": "New entry. Please translate!"
     },
     "motorDshotError": {
-        "message": "Errors:",
+        "message": "Errores:",
         "english": "Errors:",
-        "status": "New entry. Please translate!"
     },
     "motorOverrideNote": {
-        "message": "<strong>Note.</strong> Throttle Override forces the output throttle to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset in reboot.<br/><br/><strong class=\"message-negative\">MOTOR THROTTLE OVERRIDE WILL MAKE THE MOTORS TO SPOOL UP!</strong>",
+        "message": "<strong>Nota.</strong> Override del acelerador fuerza la salida del acelerador a un valor arbitrario para propósito de ajustes y pruebas. Los valores de override no se guardan, y serán reseteados al arranque.<br/><br/><strong class=\"message-negative\">¡EL OVERRIDE DEL ACELERADOR DEL MOTOR HARÁ QUE LOS MOTORES ACELEREN!</strong>",
         "english": "<strong>Note.</strong> Throttle Override forces the output throttle to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset in reboot.<br/><br/><strong class=\"message-negative\">MOTOR THROTTLE OVERRIDE WILL MAKE THE MOTORS TO SPOOL UP!</strong>",
-        "status": "New entry. Please translate!"
     },
     "motorOverrideTitle": {
-        "message": "Throttle Override",
+        "message": "Override acelerador",
         "english": "Throttle Override",
-        "status": "New entry. Please translate!"
     },
     "motorOverrideEnable": {
-        "message": "Enable",
+        "message": "Activar",
         "english": "Enable",
-        "status": "New entry. Please translate!"
     },
     "govFeatures": {
-        "message": "Governor Features",
+        "message": "Características del Governor",
         "english": "Governor Features",
-        "status": "New entry. Please translate!"
     },
     "govProfile": {
-        "message": "Governor Settings",
+        "message": "Ajustes del Governor",
         "english": "Governor Settings",
-        "status": "New entry. Please translate!"
     },
     "govConfigurationNote": {
-        "message": "<strong>Note:</strong> Governor has both global and profile parameters. Please see the Profiles tab for profile specific parameters.",
+        "message": "<strong>Nota:</strong> El Governor tiene parámetros y perfiles globales. Por favor, vaya a la pestaña de Perfiles para parámetros específicos de los perfiles.",
         "english": "<strong>Note:</strong> Governor has both global and profile parameters. Please see the Profiles tab for profile specific parameters.",
-        "status": "New entry. Please translate!"
     },
     "govMode": {
-        "message": "Governor mode",
+        "message": "Modo de Governor",
         "english": "Governor mode",
-        "status": "New entry. Please translate!"
     },
     "govModeHelp": {
-        "message": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
+        "message": "<strong>OFF:</strong> El Governor está desaactivado y el acelerador del Tx se pasa a través del ESC.<br><br><strong>PASO A TRAVÉS:</strong> El paso a través del acelerador desde el Tx, con baja aceleracción y control de autorotación.<br><br><strong>ESTANDAR:</strong> La velocidad del Motor está controlada por el FC. Equivalente a un típico regulador de ESC.<br><br><strong>MODO1:</strong> Como STANDARD pero con precompensado del colectivo y del Cíclico (i.e. cambios del colectivo cambiarán proactivamente el acelerador, justo como una curva de aceleración en el Tx).<br><br><strong>MODE2:</strong> Como MODO1, pero con compensación proactiva ante bajadas del voltaje de la batería. Requiere medidas rápidas del voltaje.",
         "english": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
-        "status": "New entry. Please translate!"
     },
     "govHandoverThrottle": {
-        "message": "Handover throttle [%]",
+        "message": "Traspaso de acelerador [%]",
         "english": "Handover throttle [%]",
-        "status": "New entry. Please translate!"
     },
     "govHandoverThrottleHelp": {
-        "message": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level.",
+        "message": "El nivel del acelerador por encima del cual se activa el governor. Por debajo de este nivel, las entradas del acelerador pasand directamente al ESC - por encima de este nivel, el governor se activa y los movimientos del acelerador se usan para calcular la velocidad deseada de la cabeza. El motor debe ser capaz de iniciarse por debajo de este nivel de acelerador.",
         "english": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level.",
-        "status": "New entry. Please translate!"
     },
     "govStartupTime": {
-        "message": "Startup time",
+        "message": "Tiempo de arranque",
         "english": "Startup time",
-        "status": "New entry. Please translate!"
     },
     "govStartupTimeHelp": {
-        "message": "Time constant for slow startup, in seconds, measuring the time from zero to full headspeed.",
+        "message": "Tiempo constante para un arranque lento, en segundos, medido el tiempo desde cero hasta velocidad total de la cabeza.",
         "english": "Time constant for slow startup, in seconds, measuring the time from zero to full headspeed.",
-        "status": "New entry. Please translate!"
     },
     "govSpoolupTime": {
-        "message": "Spoolup time",
+        "message": "Tiempo de aceleración de la cola",
         "english": "Spoolup time",
-        "status": "New entry. Please translate!"
     },
     "govSpoolupTimeHelp": {
-        "message": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed.",
+        "message": "Tiempo constante para una aceleración lenta de la cola, en segundos, medido el tiempo desde cero hasta velocidad total de la cabeza.",
         "english": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed.",
-        "status": "New entry. Please translate!"
     },
     "govTrackingTime": {
-        "message": "Tracking time",
+        "message": "Tiempo de seguimiento",
         "english": "Tracking time",
-        "status": "New entry. Please translate!"
     },
     "govTrackingTimeHelp": {
-        "message": "Time constant for headspeed changes, in seconds, measuring the time from zero to full headspeed.",
+        "message": "Tiempo constante para cambios en la velocidad de la cabeza, en segundos, medido el tiempo desde cero hasta velocidad total de la cabeza.",
         "english": "Time constant for headspeed changes, in seconds, measuring the time from zero to full headspeed.",
-        "status": "New entry. Please translate!"
     },
     "govRecoveryTime": {
-        "message": "Recovery time",
+        "message": "Tiempo de Recuperación",
         "english": "Recovery time",
-        "status": "New entry. Please translate!"
     },
     "govRecoveryTimeHelp": {
-        "message": "Time constant for recovery spoolup, in seconds, measuring the time from zero to full headspeed.",
+        "message": "Tiempo constante para recuperar la aceleración de la cola, en segundos, medido eltiempo desde cero hasta velocidad total de la cabeza.",
         "english": "Time constant for recovery spoolup, in seconds, measuring the time from zero to full headspeed.",
-        "status": "New entry. Please translate!"
     },
     "govAutoBailoutTime": {
         "message": "Autorotation bailout time",
