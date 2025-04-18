@@ -2211,21 +2211,18 @@
         "english": "Telemetry Sensors"
     },
     "receiverTelemetrySensorsSelect": {
-        "message": "Select",
-        "english": "Select",
-        "status": "New entry. Please translate!"
-    },
-    "receiverTelemetrySensorsSort": {
-        "message": "Sort",
-        "english": "Sort",
-        "status": "New entry. Please translate!"
-    },
-    "receiverTelemetrySensorsExceededWarning": {
-        "message": "A maximum of {{max}} sensors can be enabled.",
-        "english": "A maximum of {{max}} sensors can be enabled.",
-        "status": "New entry. Please translate!"
-    },
-    "receiverTelemetrySensor_VOLTAGE": {
+      "message": "Selecteren",
+      "english": "Select"
+  },
+  "receiverTelemetrySensorsSort": {
+      "message": "Sorteren",
+      "english": "Sort"
+  },
+  "receiverTelemetrySensorsExceededWarning": {
+      "message": "Een maximum van {{max}} sensoren kan worden ingeschakeld.",
+      "english": "A maximum of {{max}} sensors can be enabled."
+  },
+  "receiverTelemetrySensor_VOLTAGE": {
         "message": "Batterijspanning",
         "english": "Battery Voltage"
     },
