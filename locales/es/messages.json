@@ -5701,124 +5701,99 @@
         "english": "Error Limit for Yaw Axis [&deg;]",
     },
     "profilesOffsetLimitHelp": {
-        "message": "Hard limit for the High Speed Integral offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits.",
+        "message": "Límiote duro para el ángulo de desplazamiento integral de alta velocidad en el ciclo del PID. El desplazamiento absoluto y por consiguiente el O-term nunca pasarán esos límites.",
         "english": "Hard limit for the High Speed Integral offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits.",
-        "status": "New entry. Please translate!"
     },
     "profilesOffsetLimitRoll": {
-        "message": "HSI Offset Limit for Roll Axis [&deg;]",
+        "message": "Límite desplazamiento del HSI para eje Alabeo [&deg;]",
         "english": "HSI Offset Limit for Roll Axis [&deg;]",
-        "status": "New entry. Please translate!"
     },
     "profilesOffsetLimitPitch": {
-        "message": "HSI Offset Limit for Pitch Axis [&deg;]",
+        "message": "Límite desplazamiento HSI para eje Paso [&deg;]",
         "english": "HSI Offset Limit for Pitch Axis [&deg;]",
-        "status": "New entry. Please translate!"
     },
     "profilesOffsetGainHelp": {
-        "message": "Gain for the High Speed Integral Offset term (Integral for high speed flight), which is only active at large collective angles. This term of the control loop provides angular stability and safe control following at high speeds, as well as attitude stability on large changes of the collective pitch angle of the rotor disk, which would lead to rapid diving and unwanted attitude changes without HSI. Too low values cause the model to become unstable at high speeds, as well as slow reaction and large attitude changes on collective pitch changes. Too large values can cause oscillation and restlessness at large collective pitch angles. For testing of the lower bounds of the parameter, fly in a straight line <strong> AT SAFE ALTITUDE</strong>, only briefly pull the collective into the negative range and observe the model's reaction. Should the model dive, increase the HSI Offset Gain. For testing the upper bounds of the parameter, give short jabs of elevator and aileron in a high collective vertical climb and observe the model's behavior. If the model swings, wobbles or exerts restlessness after releasing the stick, decrease the HSI Offset Gain.",
+        "message": "Ganancia para el término desplazamiento integral de alta velocidad term (Integral para vuelo en alta velocidad) que estará solo activo aángulos grandes del colectivo. Este térmmino del ciclo de control proporciona estabilidad angular y control seguro cuando se eestá a alta velocidad, además de estabilidad en la actitud con grandes cambios del ángulo del Paso en el colectivo en el disco del rotor, que llevará a un picado rápido y cambios no deseados de actitud sin HSI. Valores demasiado bajos harán que el modelo se vuelva inestablea a grandes velocidades, además de reaccionar lentamente y efectuar grandes cambios de actitud cuando el paso del colectivo cambie. Valores demasiado grandess puede causar oscilaciones e imperdonables situaciones con ángulos de paso grandes en el colectivo. Para pruebas en la parte inferios del parámetro, vuele en líena recta <strong> A UNA ALTURA SEGURA</strong>, solo tire brevemente del colectivo en un margen negativo y observe la reacción del modelo. Si el modelo pica, incremente la ganancia del desplazamiento del HSI. Para probar la parte superior del parámetro, dé cortos golpes al elevador y al alerón en una subida vertical muy alta y observe el comportamiento del modelo. Si el modelo pendula, se tambalea o continua permanece inquietp después de soltar la palanca, disminuya la ganancia del desplazamiento del HSI.",
         "english": "Gain for the High Speed Integral Offset term (Integral for high speed flight), which is only active at large collective angles. This term of the control loop provides angular stability and safe control following at high speeds, as well as attitude stability on large changes of the collective pitch angle of the rotor disk, which would lead to rapid diving and unwanted attitude changes without HSI. Too low values cause the model to become unstable at high speeds, as well as slow reaction and large attitude changes on collective pitch changes. Too large values can cause oscillation and restlessness at large collective pitch angles. For testing of the lower bounds of the parameter, fly in a straight line <strong> AT SAFE ALTITUDE</strong>, only briefly pull the collective into the negative range and observe the model's reaction. Should the model dive, increase the HSI Offset Gain. For testing the upper bounds of the parameter, give short jabs of elevator and aileron in a high collective vertical climb and observe the model's behavior. If the model swings, wobbles or exerts restlessness after releasing the stick, decrease the HSI Offset Gain.",
-        "status": "New entry. Please translate!"
     },
     "profilesOffsetGainRoll": {
-        "message": "HSI Offset Gain for Roll Axis",
+        "message": "Ganancia del desplazamiento del HSI para eje Alabeo",
         "english": "HSI Offset Gain for Roll Axis",
-        "status": "New entry. Please translate!"
     },
     "profilesOffsetGainPitch": {
-        "message": "HSI Offset Gain for Pitch Axis",
+        "message": "Ganancia del desplazamiento del HSI para eje Paso",
         "english": "HSI Offset Gain for Pitch Axis",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorDecayGround": {
-        "message": "Ground Error Decay",
+        "message": "Decaimiento por error en tierra",
         "english": "Ground Error Decay",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorDecayTimeGroundHelp": {
-        "message": "Bleeds off the current controller error when the craft is not airborne. This helps preventing the craft from tipping over on the ground.",
+        "message": "Desangra el error actual del controlador cuando la aeronave no está en vuelo. Ayuda a prevenir que la aeronave se vuelque en el suelo.",
         "english": "Bleeds off the current controller error when the craft is not airborne. This helps preventing the craft from tipping over on the ground.",
-        "status": "Reused translation. Please check!"
     },
     "profilesErrorDecayTime": {
-        "message": "Decay Time [s]",
+        "message": "Tiempo de decaimiento [s]",
         "english": "Decay Time [s]",
-        "status": "Modified entry. Please translate!",
         "previous": {
-            "message": "Decay Time",
+            "message": "Tiempo de Decaimiento",
             "english": "Decay Time",
-            "status": "New entry. Please translate!"
-        }
     },
     "profilesErrorDecayTimeCyclic": {
-        "message": "Error Decay time [s]",
+        "message": "Error del tiempo de decaimiento [s]",
         "english": "Error Decay time [s]",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorDecayTimeCyclicHelp": {
-        "message": "Time constant for bleeding off the accumulated cyclic error (I-term). Longer decay time makes hovering more stable, but may reduce 3D performance.",
+        "message": "Tiempo constante para sangrar el error acumulativo del cíclico (I-term). Un mayor tiempo de decaimiento hace el estacionario más estable, peropuede reducir las prestaciones en 3D.",
         "english": "Time constant for bleeding off the accumulated cyclic error (I-term). Longer decay time makes hovering more stable, but may reduce 3D performance.",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorDecayLimitCyclic": {
-        "message": "Error Decay maximum rate [&deg;/s]",
+        "message": "Rate Máximo del Error de decaimiento en Cíclico [&deg;/s]",
         "english": "Error Decay maximum rate [&deg;/s]",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorDecayLimitCyclicHelp": {
-        "message": "Maximum bleed-off speed for the accumulated cyclic error (I-term).",
+        "message": "Velocidad máxima de sangrado para el eeror acumulado en el cíclico (I-term).",
         "english": "Maximum bleed-off speed for the accumulated cyclic error (I-term).",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorDecayTimeYaw": {
-        "message": "Error Decay time [s]",
+        "message": "Error en el tiempo de Decaimiento en Guiñada [s]",
         "english": "Error Decay time [s]",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorDecayTimeYawHelp": {
-        "message": "Time constant for bleeding off the accumulated yaw error (I-term).",
+        "message": "Tiempo constante para el sangrado del error acumulativo en guiñada (I-term).",
         "english": "Time constant for bleeding off the accumulated yaw error (I-term).",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorDecayLimitYaw": {
-        "message": "Error Decay maximum rate [&deg;/s]",
+        "message": "Máximo rate para Error de Decaimiento Guiñada [&deg;/s]",
         "english": "Error Decay maximum rate [&deg;/s]",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorDecayLimitYawHelp": {
-        "message": "Maximum bleed-off speed for the accumulated yaw error (I-term).",
+        "message": "Velocidad Máxima de sangrado para el error acumulado en Guiñada (I-term).",
         "english": "Maximum bleed-off speed for the accumulated yaw error (I-term).",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorRotation": {
-        "message": "Piro Compensation",
+        "message": "Piro Compensación",
         "english": "Piro Compensation",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorRotationHelp": {
-        "message": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This improves piro control and helps the model to travel in a straight line while pirouetting.",
+        "message": "Rota los términos de los errores en Alabeo y Paso alrededor de la guiñada cuando la aeronave rota. Mejora el piro control y ayuda al modelo a moverse en línea recta mientras hace piruetas.",
         "english": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This improves piro control and helps the model to travel in a straight line while pirouetting.",
-        "status": "New entry. Please translate!"
     },
     "profilesItermRelax": {
-        "message": "I-Term Relax",
+        "message": "Relajación I-Term",
         "english": "I-Term Relax",
-        "status": "New entry. Please translate!"
     },
     "profilesItermRelaxHelp": {
-        "message": "Limits the accumulation of I-term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements.",
+        "message": "Limita la acumulación en el I-term cuando suceden movimientos rápidos. Ayuda en la reducción de rebotes al final de los toneles y otros movimientos rápidos.",
         "english": "Limits the accumulation of I-term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements.",
-        "status": "New entry. Please translate!"
     },
     "profilesItermRelaxType": {
-        "message": "I-term Relax Type",
+        "message": "Tipo de relajación I-term",
         "english": "I-term Relax Type",
-        "status": "New entry. Please translate!"
     },
     "profilesItermRelaxTypeHelp": {
-        "message": "Choose the axes in which this is active. <br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw.",
+        "message": "Elija los ejes en los que quiera activaralo. <br><strong>RP:</strong> Alabeo, Paso <br><strong>RPY:</strong> Alabeo, Paso, Guiñada.",
         "english": "Choose the axes in which this is active. <br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw.",
-        "status": "New entry. Please translate!"
     },
     "profilesItermRelaxTypeOptionRP": {
         "message": "RP",
@@ -5829,99 +5804,80 @@
         "english": "RPY",
     },
     "profilesItermRelaxCutoffRoll": {
-        "message": "Cutoff Point for Roll",
+        "message": "Punto de corte para Alabeo",
         "english": "Cutoff Point for Roll",
-        "status": "New entry. Please translate!"
     },
     "profilesItermRelaxCutoffPitch": {
-        "message": "Cutoff Point for Pitch",
+        "message": "Punto de corte para Paso",
         "english": "Cutoff Point for Pitch",
-        "status": "New entry. Please translate!"
     },
     "profilesItermRelaxCutoffYaw": {
-        "message": "Cutoff Point for Yaw",
+        "message": "Punto de corte para Guiñada",
         "english": "Cutoff Point for Yaw",
-        "status": "New entry. Please translate!"
     },
     "profilesItermRelaxCutoffHelp": {
-        "message": "Lower values suppress bounce-back after movements, high values increase high-rate turn precision.<br>Set to 15-30 for small helis, 10-15 for mid-size, and less than 10 for large.",
+        "message": "Los valores bajos suprimen los rebotes después de los movimiento, valores altos incrementan la precisión de virajes fuertes.<br>Ajustelo a 15-30 para helis pequeños, 10-15 para tamaño mediano, y menos de 10 para grandes.",
         "english": "Lower values suppress bounce-back after movements, high values increase high-rate turn precision.<br>Set to 15-30 for small helis, 10-15 for mid-size, and less than 10 for large.",
-        "status": "New entry. Please translate!"
     },
     "profilesPidBandwidth": {
-        "message": "PID Controller Bandwidth",
+        "message": "Ancho de banda controlador PID",
         "english": "PID Controller Bandwidth",
-        "status": "New entry. Please translate!"
     },
     "profilesGyroCutoffHelp": {
-        "message": "PID Loop overall bandwidth in Hz",
+        "message": "Ancho de banda del ciclo PID en Hz",
         "english": "PID Loop overall bandwidth in Hz",
-        "status": "New entry. Please translate!"
     },
     "profilesGyroCutoffRoll": {
-        "message": "Roll Bandwidth",
+        "message": "Ancho de banda en Alabeo",
         "english": "Roll Bandwidth",
-        "status": "New entry. Please translate!"
     },
     "profilesGyroCutoffPitch": {
-        "message": "Pitch Bandwidth",
+        "message": "Ancho de banda en Paso",
         "english": "Pitch Bandwidth",
-        "status": "New entry. Please translate!"
     },
     "profilesGyroCutoffYaw": {
-        "message": "Yaw Bandwidth",
+        "message": "Ancho de banda en Guiñada",
         "english": "Yaw Bandwidth",
-        "status": "New entry. Please translate!"
     },
     "profilesDtermCutoffHelp": {
-        "message": "D-term Cutoff Frequency in Hz",
+        "message": "Frecuencia de corte D-term en Hz",
         "english": "D-term Cutoff Frequency in Hz",
-        "status": "New entry. Please translate!"
     },
     "profilesDtermCutoffRoll": {
-        "message": "Roll D-term Cutoff",
+        "message": "Frecuencia de corte D-term Alabeo",
         "english": "Roll D-term Cutoff",
-        "status": "New entry. Please translate!"
     },
     "profilesDtermCutoffPitch": {
-        "message": "Pitch D-term Cutoff",
+        "message": "Frecuencia de corte D-term Paso",
         "english": "Pitch D-term Cutoff",
-        "status": "New entry. Please translate!"
     },
     "profilesDtermCutoffYaw": {
-        "message": "Yaw D-term Cutoff",
+        "message": "Frecuencia de corte D-term Guiñada",
         "english": "Yaw D-term Cutoff",
-        "status": "New entry. Please translate!"
     },
     "profilesBtermCutoffHelp": {
-        "message": "B-term Cutoff Frequency in Hz",
+        "message": "Frecuencia de corte B-term en Hz",
         "english": "B-term Cutoff Frequency in Hz",
-        "status": "New entry. Please translate!"
     },
     "profilesBtermCutoffRoll": {
-        "message": "Roll B-term Cutoff",
+        "message": "Frecuencia de corte B-term en Alabeo",
         "english": "Roll B-term Cutoff",
-        "status": "New entry. Please translate!"
     },
     "profilesBtermCutoffPitch": {
-        "message": "Pitch B-term Cutoff",
+        "message": "Frecuencia de corte B-term en Paso",
         "english": "Pitch B-term Cutoff",
-        "status": "New entry. Please translate!"
     },
     "profilesBtermCutoffYaw": {
-        "message": "Yaw B-term Cutoff",
+        "message": "Frecuencia de corte B-term en Guiñada",
         "english": "Yaw B-term Cutoff",
-        "status": "New entry. Please translate!"
     },
     "profilesLevelingSettings": {
-        "message": "Auto-leveling Settings",
+        "message": "Ajustes de Auto-nivelado",
         "english": "Auto-leveling Settings",
-        "status": "New entry. Please translate!"
     },
     "profilesAcroTrainerGain": {
-        "message": "Acro Trainer gain",
+        "message": "Ganancia Entrenador Acro",
         "english": "Acro Trainer gain",
-        "status": "New entry. Please translate!"
     },
     "profilesAcroTrainerGainHelp": {
         "message": "Acro Trainer gain. Acro trainer Mode is not self leveling but does limit the maximum pitch/roll angle. This determines how aggressively the helicopter tilts back to the maximum angle (if exceeded) while in Acro Trainer Mode",
