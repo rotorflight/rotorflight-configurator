@@ -8890,13 +8890,8 @@
         "english": "Set the thresholds used for OSD elements with alarm states."
     },
     "osdSectionHelpStats": {
-        "message": "Set the values displayed on the post flight statistics screen.",
+        "message": "Ajusta los valores mostrados en la pantalla de estadísticas post vuelo.",
         "english": "Set the values displayed on the post flight statistics screen.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Ajusta los valores mostrados en la pantalla de estadísticas post vuelo.",
-            "english": "Set the values dispalyed on the post flight statistics screen."
-        }
     },
     "osdSectionHelpWarnings": {
         "message": "Activa o desactiva avisos mostrados en el elemento AVISOS.",
@@ -9271,13 +9266,8 @@
         "english": "PID loop frequency"
     },
     "configurationPidProcessDenomHelp": {
-        "message": "The maximum frequency for the PID loop is limited by the CPU processing power. The Realtime Load should not exceed 70% with the selected loop speed.",
+        "message": "La frecuenci máxima para el ciclo del PID está limitada por la potencia de proceso de la CPU. La carga del Realtime no debería exceder el 70% con la velocidad de ciclo seleccionada.",
         "english": "The maximum frequency for the PID loop is limited by the CPU processing power. The Realtime Load should not exceed 70% with the selected loop speed.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "La máxima frecuencia del ciclo de PID está limitada por la máxima frecuencia en la que las actualizaciones pueden ser enviadas según el ESC / protocolo de motor elegidos.",
-            "english": "The maximum frequency for the PID loop is limited by the maximum frequency that updates can be sent by the chosen ESC / motor protocol."
-        }
     },
     "configurationGyroUse32kHz": {
         "message": "Activar modo de muestreo del giro de 32kHz",
@@ -9297,13 +9287,8 @@
         "status": "New entry. Please translate!"
     },
     "configurationBaroHardware": {
-        "message": "Barometer",
+        "message": "Barómetro",
         "english": "Barometer",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Barómetro (si está soportado)",
-            "english": "Barometer (if supported)"
-        }
     },
     "configurationBaroHardwareHelp": {
         "message": "Enables the Barometer (if available). Altitude is currently not used in Flight Control. It is informative only, available via the Telemetry.",
@@ -9311,12 +9296,8 @@
         "status": "New entry. Please translate!"
     },
     "configurationMagHardware": {
-        "message": "Magnetometer",
+        "message": "Magnetómeter",
         "english": "Magnetometer",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Magnetómetro (si está soportado)",
-            "english": "Magnetometer (if supported)"
         }
     },
     "configurationMagHardwareHelp": {
@@ -9333,9 +9314,8 @@
         "english": "Craft name"
     },
     "blackboxMode": {
-        "message": "Logging mode",
+        "message": "Modo registro",
         "english": "Logging mode",
-        "status": "New entry. Please translate!"
     },
     "blackboxModeHelp": {
         "message": "<strong>OFF:</strong> Disable logging.<br><br><strong>NORMAL:</strong> Enable logging when both ARMED and BLACKBOX switch are active.<br><br><strong>ARMED:</strong> Enable logging when ARMED.<br><br><strong>SWITCH:</strong> Enable logging when BLACKBOX switch is active.",
@@ -9345,27 +9325,22 @@
     "blackboxModeOff": {
         "message": "Apagado",
         "english": "Off",
-        "status": "Reused translation. Please check!"
     },
     "blackboxModeNormal": {
         "message": "Normal",
         "english": "Normal",
-        "status": "Reused translation. Please check!"
     },
     "blackboxModeArmed": {
-        "message": "Armed",
+        "message": "Armado",
         "english": "Armed",
-        "status": "New entry. Please translate!"
     },
     "blackboxModeSwitch": {
-        "message": "Switch",
+        "message": "Interruptor",
         "english": "Switch",
-        "status": "New entry. Please translate!"
     },
     "blackboxDevice": {
-        "message": "Logging device",
+        "message": "Dispositivo de registro",
         "english": "Logging device",
-        "status": "New entry. Please translate!"
     },
     "blackboxDeviceHelp": {
         "message": "<strong>No Logging:</strong> Disable logging.<br><br><strong>Onboard Flash:</strong> Log to the onboard flash chip (if available).<br><br><strong>SD Card:</strong> Log to the onboard SD card (if available).<br><br><strong>Serial Port:</strong> Log to an external logger device (e.g OpenLager) connected to a serial port. The serial port must to be configured to 'Blackbox Logging' on the <strong>Configuration</strong> tab.",
@@ -9373,9 +9348,8 @@
         "status": "New entry. Please translate!"
     },
     "blackboxRateOfLogging": {
-        "message": "Logging rate",
+        "message": "Rate de registro",
         "english": "Logging rate",
-        "status": "New entry. Please translate!"
     },
     "blackboxRateOfLoggingHelp": {
         "message": "The log data is saved to the log device with this rate. For logging to an external device, lower speed may be required.",
