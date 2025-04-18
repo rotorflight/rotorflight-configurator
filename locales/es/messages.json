@@ -5823,12 +5823,10 @@
     "profilesItermRelaxTypeOptionRP": {
         "message": "RP",
         "english": "RP",
-        "status": "Reused translation. Please check!"
     },
     "profilesItermRelaxTypeOptionRPY": {
         "message": "RPY",
         "english": "RPY",
-        "status": "Reused translation. Please check!"
     },
     "profilesItermRelaxCutoffRoll": {
         "message": "Cutoff Point for Roll",
