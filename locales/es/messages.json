@@ -4265,229 +4265,184 @@
         "english": "Time constant for recovery spoolup, in seconds, measuring the time from zero to full headspeed.",
     },
     "govAutoBailoutTime": {
-        "message": "Autorotation bailout time",
+        "message": "Tiempo para Autorotación de rescate",
         "english": "Autorotation bailout time",
-        "status": "New entry. Please translate!"
     },
     "govAutoBailoutTimeHelp": {
-        "message": "Time constant for autorotation bailout spoolup, in seconds, measuring the time from zero to full headspeed.",
+        "message": "Tiempo constante para aceleración de rescate por autorotación, en segundos, medido el tiempo desde cero hasta velocidad total de la cabeza.",
         "english": "Time constant for autorotation bailout spoolup, in seconds, measuring the time from zero to full headspeed.",
-        "status": "New entry. Please translate!"
     },
     "govAutoTimeout": {
-        "message": "Autorotation timeout",
+        "message": "tiempo  de espera de Autorotation",
         "english": "Autorotation timeout",
-        "status": "New entry. Please translate!"
     },
     "govAutoTimeoutHelp": {
-        "message": "Timeout for ending autorotation and moving to normal IDLE.",
+        "message": "Tiempo de espera para acabar autorotación y volver a RALENTÍ normal.",
         "english": "Timeout for ending autorotation and moving to normal IDLE.",
-        "status": "New entry. Please translate!"
     },
     "govAutoMinEntryTime": {
-        "message": "Autorotation minimum entry time",
+        "message": "Tiempo mínimo de entrada en Autorotación",
         "english": "Autorotation minimum entry time",
-        "status": "New entry. Please translate!"
     },
     "govAutoMinEntryTimeHelp": {
-        "message": "Minimum flight time before autorotation can be engaged.",
+        "message": "Mínimo tiempo de vuelo antes de poder enganchar autorotación.",
         "english": "Minimum flight time before autorotation can be engaged.",
-        "status": "New entry. Please translate!"
     },
     "govZeroThrottleTimeout": {
-        "message": "Zero Throttle timeout",
+        "message": "Tiempo de espera para acelerador en cero",
         "english": "Zero Throttle timeout",
-        "status": "New entry. Please translate!"
     },
     "govZeroThrottleTimeoutHelp": {
-        "message": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup.",
+        "message": "Tiempo de espera para perder (cero) la señal del acelerador, antes de apagar el governor. Si la señal del acelerador reaparece en este tiempo, el governor realizará una caceleración de recuperación.",
         "english": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup.",
-        "status": "New entry. Please translate!"
     },
     "govLostHeadspeedTimeout": {
-        "message": "Headspeed signal timeout",
+        "message": "Tiempo de espera para la señal de velocidad de la cabez",
         "english": "Headspeed signal timeout",
-        "status": "New entry. Please translate!"
     },
     "govLostHeadspeedTimeoutHelp": {
-        "message": "Timeout for missing headspeed signal, before spooling down. If the RPM signal returns within this timeout, the governor will perform a recovery spoolup.",
+        "message": "Tiempo de espera para perder la señal de velocidad de la cabeza, antes de decelerar. Si la señal de las RPM regresa en ese tiempo, el governor realizará una aceleración de recuperación.",
         "english": "Timeout for missing headspeed signal, before spooling down. If the RPM signal returns within this timeout, the governor will perform a recovery spoolup.",
-        "status": "New entry. Please translate!"
     },
     "govHeadspeedFilterHz": {
-        "message": "Headspeed filter cutoff [Hz]",
+        "message": "Corte del filtro de velocidad de la cabez [Hz]",
         "english": "Headspeed filter cutoff [Hz]",
-        "status": "New entry. Please translate!"
     },
     "govHeadspeedFilterHzHelp": {
-        "message": "Cutoff for the headspeed lowpass filter.",
+        "message": "Corte del filtro de paso bajo de velocidad de la cabeza.",
         "english": "Cutoff for the headspeed lowpass filter.",
-        "status": "New entry. Please translate!"
     },
     "govVoltageFilterHz": {
-        "message": "Battery voltage filter cutoff [Hz]",
+        "message": "Corte del filtro de voltaje de batería [Hz]",
         "english": "Battery voltage filter cutoff [Hz]",
-        "status": "New entry. Please translate!"
     },
     "govVoltageFilterHzHelp": {
-        "message": "Cutoff for the battery voltage lowpass filter.",
+        "message": "Cote del fltro de paso bajo del voltaje de la batería.",
         "english": "Cutoff for the battery voltage lowpass filter.",
-        "status": "New entry. Please translate!"
     },
     "govTTAFilterHz": {
-        "message": "TTA Bandwidth [Hz]",
+        "message": "Ancho de banda TTA [Hz]",
         "english": "TTA Bandwidth [Hz]",
-        "status": "New entry. Please translate!"
     },
     "govTTAFilterHzHelp": {
-        "message": "Cutoff for the TTA lowpass filter.",
+        "message": "Corte del filtro de paso bajo TTA.",
         "english": "Cutoff for the TTA lowpass filter.",
-        "status": "New entry. Please translate!"
     },
     "govFFFilterHz": {
-        "message": "Precomp Bandwidth [Hz]",
+        "message": "Ancho de banda de Precompensado [Hz]",
         "english": "Precomp Bandwidth [Hz]",
-        "status": "New entry. Please translate!"
     },
     "govFFFilterHzHelp": {
-        "message": "Cutoff for the cyclic/collective precompensation lowpass filter.",
+        "message": "Corte del filtro de paso bajo de precompensación del cíclico/colectivo.",
         "english": "Cutoff for the cyclic/collective precompensation lowpass filter.",
-        "status": "New entry. Please translate!"
     },
     "govHeadspeed": {
-        "message": "Full headspeed",
+        "message": "Velocidad total de la cabeza",
         "english": "Full headspeed",
-        "status": "New entry. Please translate!"
     },
     "govHeadspeedHelp": {
-        "message": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input.",
+        "message": "La velocidad final de la cabeza en el governor de calcula multiplicando la velocidad total de la cabeza por la entrada del acelerador.",
         "english": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input.",
-        "status": "New entry. Please translate!"
     },
     "govHeadspeedNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning.",
+        "message": "<span class=\"message-negative\">Precaución:</span> El cambio de velocidad de la cabeza afectsrá el ajuste del PID. Si ya ha ajustado la ganacia del controlador del PID, probablemente tendra que volver a hacerlo.",
         "english": "<span class=\"message-negative\">Warning:</span> Changing the headspeed will affect the PID tuning. If you have already tuned the PID Controller Gains, it is likely you will need to repeat the tuning.",
-        "status": "New entry. Please translate!"
     },
     "govMaxThrottle": {
-        "message": "Maximum Throttle",
+        "message": "Acelerador Máximo",
         "english": "Maximum Throttle",
-        "status": "New entry. Please translate!"
     },
     "govMaxThrottleHelp": {
-        "message": "Maximum output throttle the governor is allowed to use.",
+        "message": "La salida máxima del acelerador que se permite al Governor usar.",
         "english": "Maximum output throttle the governor is allowed to use.",
-        "status": "New entry. Please translate!"
     },
     "govMinThrottle": {
-        "message": "Minimum Throttle",
+        "message": "Acelerador Mínimo",
         "english": "Minimum Throttle",
-        "status": "New entry. Please translate!"
     },
     "govMinThrottleHelp": {
-        "message": "Minimum output throttle the governor is allowed to use.",
+        "message": "La salida mínima mínima del acelerador que se permite al governor usar.",
         "english": "Minimum output throttle the governor is allowed to use.",
-        "status": "New entry. Please translate!"
     },
     "govMasterGain": {
-        "message": "PID master gain",
+        "message": "Ganancia principal PID",
         "english": "PID master gain",
-        "status": "New entry. Please translate!"
     },
     "govMasterGainHelp": {
-        "message": "Master PID loop gain. Usually 10..100",
+        "message": "Ganancia principal del ciclo del PID. Normalmente 10..100",
         "english": "Master PID loop gain. Usually 10..100",
-        "status": "New entry. Please translate!"
     },
     "govPGain": {
-        "message": "P-gain",
+        "message": "Ganancia-P",
         "english": "P-gain",
-        "status": "New entry. Please translate!"
     },
     "govPGainHelp": {
-        "message": "PID loop P-term gain. Usually 10..100",
+        "message": "Ganancia P-term del ciclo del PID. Normalmente 10..100",
         "english": "PID loop P-term gain. Usually 10..100",
-        "status": "New entry. Please translate!"
     },
     "govIGain": {
-        "message": "I-gain",
+        "message": "Ganancia-I del Governor"
         "english": "I-gain",
-        "status": "New entry. Please translate!"
     },
     "govIGainHelp": {
-        "message": "PID loop I-term gain. Usually 10..100",
+        "message": "Ganancia I-term del ciclo del PID. Normalmente 10..100",
         "english": "PID loop I-term gain. Usually 10..100",
-        "status": "New entry. Please translate!"
     },
     "govDGain": {
-        "message": "D-gain",
+        "message": "Ganancia-D",
         "english": "D-gain",
-        "status": "New entry. Please translate!"
     },
     "govDGainHelp": {
-        "message": "PID loop D-term gain. Usually 0..100",
+        "message": "Ganancia D-term del ciclo del PID. Normalmente 0..100",
         "english": "PID loop D-term gain. Usually 0..100",
-        "status": "New entry. Please translate!"
     },
     "govFGain": {
-        "message": "Feedforward gain",
+        "message": "Ganancia de avance",
         "english": "Feedforward gain",
-        "status": "New entry. Please translate!"
     },
     "govFGainHelp": {
-        "message": "Collective/Cyclic feedforward gain. Usually 0..100",
+        "message": "Ganancia de avance Colectivo/Cíclico. Normalmente 0..100",
         "english": "Collective/Cyclic feedforward gain. Usually 0..100",
-        "status": "New entry. Please translate!"
     },
     "govTTAGain": {
-        "message": "Tail Torque Assist (TTA) gain",
+        "message": "Ganancia del assitente del Torque de Cola (TTA)",
         "english": "Tail Torque Assist (TTA) gain",
-        "status": "New entry. Please translate!"
     },
     "govTTAGainHelp": {
-        "message": "Tail Torque Assist strength (gain). This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 50..150",
+        "message": "Fortaleza del asistente del Torque de Cola (ganancia). Es la ganancia aplicada a incrementar el contro de la velocidad de la cola en dirección negativa (e.g. Colas Motorizadas a menor velocidad de ralentí). Normalmente 50..150",
         "english": "Tail Torque Assist strength (gain). This is a gain applied to increase the headspeed to control the tail in the negative direction (e.g. Motorised tail less than idle speed). Usually 50..150",
-        "status": "New entry. Please translate!"
     },
     "govTTALimit": {
-        "message": "Tail Torque Assist (TTA) limit [%]",
+        "message": "Límite del asistente del Torque decola (TTA) [%]",
         "english": "Tail Torque Assist (TTA) limit [%]",
-        "status": "New entry. Please translate!"
     },
     "govTTALimitHelp": {
-        "message": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%.",
+        "message": "Incremento máximo de velocidad del Asistente de Torque de cola. Ajusta un límite superior de la cantidad de velocidad que la cabeza puede subir sobre la velocidad total permitida. Normalmente 20..50%.",
         "english": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%.",
-        "status": "New entry. Please translate!"
     },
     "govYawPrecomp": {
-        "message": "Yaw precompensation",
+        "message": "Precompensado de Guiñada",
         "english": "Yaw precompensation",
-        "status": "New entry. Please translate!"
     },
     "govYawPrecompHelp": {
-        "message": "Yaw precompensation weight. Determines how much Yaw is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100",
+        "message": "Peso del precompensado de guiñada. Determina cuanta Guiñada se mezcla en el avance. Ayuda al governor a mintener proactivamente la velocidad de la cabez. Normalmente 20..100",
         "english": "Yaw precompensation weight. Determines how much Yaw is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100",
-        "status": "New entry. Please translate!"
     },
     "govCyclicPrecomp": {
-        "message": "Cyclic precompensation",
+        "message": "Precompensado del Cíclico",
         "english": "Cyclic precompensation",
-        "status": "New entry. Please translate!"
     },
     "govCyclicPrecompHelp": {
-        "message": "Cyclic precompensation weight. Determines how much cyclic is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100",
+        "message": "Peso del precompensado del Cíclico. Determina cuanto cíclicco se mezcla con el Avance. Ayuda al governor a mantener proactivamente la velocidad de la cabeza. Normalmente 20..100",
         "english": "Cyclic precompensation weight. Determines how much cyclic is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100",
-        "status": "New entry. Please translate!"
     },
     "govCollectivePrecomp": {
-        "message": "Collective precompensation",
+        "message": "Precompensado del Colectivo",
         "english": "Collective precompensation",
-        "status": "New entry. Please translate!"
     },
     "govCollectivePrecompHelp": {
-        "message": "Collective precompensation weight. Determines how much collective is mixed into the feedfoward. This helps the governor to maintain the headspeed proactively. Usually 20..100",
+        "message": "Peso del precompensado del colectivo. Determina cuanto colectivo se mezcla con el Avance. Ayuda al governor a mantener proactivamente la velocidad de la cabez. Normalmente 20..100",
         "english": "Collective precompensation weight. Determines how much collective is mixed into the feedfoward. This helps the governor to maintain the headspeed proactively. Usually 20..100",
-        "status": "New entry. Please translate!"
     },
     "sensorsInfo": {
         "message": "Ten en mente que usar períodos rápidos de actualización y dibujar múltiples gráficas al mismo tiempo consume muchos recursos y agotará tu batería más rápido si usas un portátil.<br />Te recomendamos dibujar sólo las gráficas de los sensores en los que estés interesado y usar tiempos de actualización razonables.",
@@ -4502,7 +4457,7 @@
         "english": "Scale:"
     },
     "sensorsGyroSelect": {
-        "message": "Giroscopio",
+        "message": "Giróscopo",
         "english": "Gyroscope"
     },
     "sensorsAccelSelect": {
@@ -4526,7 +4481,7 @@
         "english": "Debug"
     },
     "sensorsGyroTitle": {
-        "message": "Giroscopio - grad/s",
+        "message": "Giróscopo - grad/s",
         "english": "Gyroscope - deg/s"
     },
     "sensorsAccelTitle": {
@@ -4558,16 +4513,11 @@
         "english": "<strong>Note:</strong> Leaving CLI tab or pressing Disconnect will <strong>automatically</strong> send \"<strong>exit</strong>\" to the board.  With the latest firmware this will make the controller <strong>restart</strong> and unsaved changes will be <strong>lost</strong>.<p><strong><span class=\"message-negative\">Warning:</span></strong> Some commands in CLI can result in arbitrary signals being sent on the motor output pins. This can cause motors to spin up if a battery is connected. Therefore it is highly recommended to make sure that <strong>no battery is connected before entering commands in CLI</strong>."
     },
     "cliInputPlaceholder": {
-        "message": "Write your command here.",
+        "message": "Escriba su instrucción aquí.",
         "english": "Write your command here.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Escribe tu comando aquí. Pulsa Tab para AutoCompletar.",
-            "english": "Write your command here. Press Tab for AutoComplete."
-        }
     },
     "cliInputPlaceholderBuilding": {
-        "message": "Espera mientras se construye la caché de AutoCompletar...",
+        "message": "Espere mientras se construye la caché de AutoCompletar...",
         "english": "Please wait while building AutoComplete cache ..."
     },
     "cliEnter": {
@@ -4611,19 +4561,16 @@
         "english": "Execute"
     },
     "dialogCLIExitTitle": {
-        "message": "CLI Exit Warning!",
+        "message": "¡Aviso! al salir del CLI!",
         "english": "CLI Exit Warning!",
-        "status": "New entry. Please translate!"
     },
     "dialogCLIExitNote": {
-        "message": "Type <code>save</code> to save changes and exit CLI.<br><br>Type <code>exit</code> to discard changes and exit CLI.",
+        "message": "Escriba <code>guardar</code> para guardar los cambios y salir del CLI.<br><br>Escriba <code>exit</code> para decartar cambios y salir del CLI.",
         "english": "Type <code>save</code> to save changes and exit CLI.<br><br>Type <code>exit</code> to discard changes and exit CLI.",
-        "status": "New entry. Please translate!"
     },
     "dialogCLIExitButton": {
-        "message": "Go Back",
+        "message": "Retroceder",
         "english": "Go Back",
-        "status": "New entry. Please translate!"
     },
     "loggingNote": {
         "message": "Los datos se registran <span class=\"message-negative\">sólamente</span> en este apartado, abandonar el apartado <span class=\"message-negative\">cancelará</span> el registro y la aplicación volverá al estado normal del <strong>\"configurator\"</strong>.<br /> Puedes elegir cualquier período de actualización global, los datos se almacenarán en el archivo de log cada <strong>1</strong> segundo por razones de rendimiento.",
@@ -4654,27 +4601,27 @@
         "english": "Leave Logging / Disconnect"
     },
     "loggingErrorNotConnected": {
-        "message": "Necesitas <strong>conectar</strong> primero",
+        "message": "Necesita <strong>conectar</strong> primero",
         "english": "You need to <strong>connect</strong> first"
     },
     "loggingErrorLogFile": {
-        "message": "Elige archivo de registro",
+        "message": "Elija archivo de registro",
         "english": "Please select log file"
     },
     "loggingErrorOneProperty": {
-        "message": "Selecciona al menos una propiedad para registrar",
+        "message": "Seleccione al menos una propiedad para registrar",
         "english": "Please select at least one property to log"
     },
     "loggingAutomaticallyRetained": {
-        "message": "Cargado automáticamente archivo previo de registro: <strong>$1</strong>",
+        "message": "Archivo previo cargado automáticamente: <strong>$1</strong>",
         "english": "Automatically loaded previous log file: <strong>$1</strong>"
     },
     "blackboxNotSupported": {
-        "message": "El firmware de tu controlador de vuelo no soporta el registro de Caja Negra.",
+        "message": "El firmware de su controlador de vuelo no soporta el registro de Caja Negra.",
         "english": "Your flight controller's firmware does not support Blackbox logging."
     },
     "blackboxMaybeSupported": {
-        "message": "El firmware de tu controlador de vuelo es demasiado antiguo para soportar este apartado, o la funcionalidad Caja Negra está desactivada en el apartado Configuración.",
+        "message": "El firmware de su controlador de vuelo es demasiado antiguo para soportar este apartado, o la funcionalidad Caja Negra está desactivada en el apartado Configuración.",
         "english": "Your flight controller's firmware is too old to support this tab, or the Blackbox feature is disabled on the Configuration tab."
     },
     "blackboxConfiguration": {
@@ -4702,126 +4649,103 @@
         "english": "Serial Port"
     },
     "blackboxOptions": {
-        "message": "Blackbox Logging Options",
+        "message": "Opciones del registro de Caja Negra",
         "english": "Blackbox Logging Options",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_command": {
-        "message": "Command",
+        "message": "Orden",
         "english": "Command",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_setpoint": {
         "message": "Valor objetivo",
         "english": "Setpoint",
-        "status": "Reused translation. Please check!"
     },
     "blackboxLog_mixer": {
-        "message": "Mezclador",
+        "message": "Mezclas",
         "english": "Mixer",
-        "status": "Reused translation. Please check!"
     },
     "blackboxLog_attitude": {
-        "message": "Attitude",
+        "message": "Actitud",
         "english": "Attitude",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_pid": {
         "message": "PID",
         "english": "PID",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_gyroraw": {
-        "message": "Raw Gyro",
+        "message": "Guiñada del Giro",
         "english": "Raw Gyro",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_gyro": {
         "message": "Giro",
         "english": "Gyro",
-        "status": "Reused translation. Please check!"
     },
     "blackboxLog_acc": {
-        "message": "Accelerometer",
+        "message": "Acelerómetro",
         "english": "Accelerometer",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_mag": {
         "message": "Magnetómetro",
         "english": "Magnetometer",
-        "status": "Reused translation. Please check!"
     },
     "blackboxLog_alt": {
-        "message": "Altimeter",
+        "message": "Altímetro",
         "english": "Altimeter",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_battery": {
         "message": "Batería",
         "english": "Battery",
-        "status": "Reused translation. Please check!"
     },
     "blackboxLog_rssi": {
         "message": "RSSI",
         "english": "RSSI",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_rpm": {
         "message": "RPM",
         "english": "RPM",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_motors": {
         "message": "Motores",
         "english": "Motors",
-        "status": "Reused translation. Please check!"
     },
     "blackboxLog_servos": {
         "message": "Servos",
         "english": "Servos",
-        "status": "Reused translation. Please check!"
     },
     "blackboxLog_gps": {
         "message": "GPS",
         "english": "GPS",
-        "status": "Reused translation. Please check!"
     },
     "blackboxLog_vbec": {
-        "message": "BEC Voltage",
+        "message": "Voltaje BEC",
         "english": "BEC Voltage",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_vbus": {
-        "message": "+5V Voltage",
+        "message": "Voltaje +5V",
         "english": "+5V Voltage",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_temps": {
-        "message": "Temperatures",
+        "message": "Temperaturas",
         "english": "Temperatures",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_esc": {
         "message": "ESC",
         "english": "ESC",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_bec": {
         "message": "BEC",
         "english": "BEC",
-        "status": "New entry. Please translate!"
     },
     "blackboxLog_esc2": {
         "message": "ESC 2",
         "english": "ESC 2",
-        "status": "New entry. Please translate!"
     },
     "serialLoggingSupportedNote": {
-        "message": "Puedes registrar en un dispositivo externo (como un OpenLager) usando un puerto serie. Configura el puerto en el apartado Puertos.",
+        "message": "Puede registrar en un dispositivo externo (como un OpenLager) usando un puerto serie. Configure el puerto en el apartado Puertos.",
         "english": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
     },
     "sdcardNote": {
-        "message": "Puedes grabar registros de vuelo en la tarjeta SD de tu controlador de vuelo.",
+        "message": "Puede grabar registros de vuelo en la tarjeta SD de su controlador de vuelo.",
         "english": "Flight logs can be recorded to your flight controller's onboard SD card slot."
     },
     "dataflashUsedSpace": {
@@ -4837,15 +4761,15 @@
         "english": "Unavailable space"
     },
     "dataflashLogsSpace": {
-        "message": "Espacio libre para logs",
+        "message": "Espacio libre para registros",
         "english": "Free space for logs"
     },
     "dataflashNote": {
-        "message": "Puedes grabar registros de vuelo en la memoria flash integrada de tu controlador de vuelo.",
+        "message": "Puede grabar registros de vuelo en la memoria flash integrada de su controlador de vuelo.",
         "english": "Flight logs can be recorded to your flight controller's onboard dataflash chip."
     },
     "dataflashNotPresentNote": {
-        "message": "Tu controlador de vuelo no tiene un chip de memoria flash integrada disponible.",
+        "message": "Su controlador de vuelo no tiene un chip de memoria flash integrada disponible.",
         "english": "Your flight controller does not have a compatible dataflash chip available."
     },
     "dataflashFirmwareUpgradeRequired": {
@@ -4853,42 +4777,27 @@
         "english": "Dataflash requires firmware &gt;= 1.8.0."
     },
     "dataflashButtonSaveFile": {
-        "message": "Save to file",
+        "message": "Guardar a archivo",
         "english": "Save to file",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Guardar flash a archivo...",
-            "english": "Save flash to file..."
-        }
     },
     "dataflashSavetoFileNote": {
         "message": "Guardar directamente la flash en archivo es lento e inherentemente propenso a error / corrupción de archivo.<br>En algunos casos funcionará para archivos pequeños, pero esto no está soportado y las peticiones de soporte se cerrarán sin comentarios - utiliza el modo de Almacenamiento Masivo en su lugar.",
         "english": "Directly saving flash to file is slow and inherently prone to error / file corruption.<br>In some cases it will work for small files, but this is not supported and support requests for it will be closed without comment - use Mass Storage mode instead."
     },
     "dataflashSaveFileDepreciationHint": {
-        "message": "This method is slow, because the MSP connection itself has fundamental limitations for file transfer. The recommended method is to use '<b>$t(blackboxRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files.",
+        "message": "TEste método es lento, ya que la conexión MSP tiene limitaciones fundamentales para transferir archivos. El método recomendado es usar '<b>$t(blackboxRebootMscText.message)</b>' (abajo) para activar el modo de almacenamiento masivo, y acceder a su controladora de vuelo como dispositivo de almacenamiento para descargar los archivos de registro.",
         "english": "This method is slow, because the MSP connection itself has fundamental limitations for file transfer. The recommended method is to use '<b>$t(blackboxRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Este método es lento e inherentemente propenso a error / corrupción del archivo, porque la conexión MSP en sí misma tiene intrínsecas, limitaciones fundamentales que no la hacen adecuada para la transferencia de archivos. Puede que funcione para pequeños archivos de registro. No crees peticiones de soporte si las transferencias de archivos fallan al guardarse usando este método. El método recomendado es utilizar '<b>$t(onboardLoggingRebootMscText.message)</b>' (debajo) para activar el Modo de Almacenamiento Masivo y acceder a tu controlador de vuelo como un dispositivo de almacenamiento para descargar los archivos de registro.",
-            "english": "This method is slow and inherently prone to error / file corruption, because the MSP connection itself has intrinsic, fundamental limitations that make it unsuitable for file transfers. It may work for small log files only. Do not create support requests if file transfers fail when saved using this method. The recommended method is to use '<b>$t(onboardLoggingRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files."
-        }
     },
     "dataflashButtonErase": {
-        "message": "Erase",
+        "message": "Borrar",
         "english": "Erase",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Borrar flash",
-            "english": "Erase flash"
-        }
     },
     "dataflashConfirmEraseTitle": {
         "message": "Confirmar borrado de memoria flash",
         "english": "Confirm dataflash erase"
     },
     "dataflashConfirmEraseNote": {
-        "message": "Esto eliminará cualquier registro de Caja Negra u otros datos contenidos en la memoria flash. Debería durar unos 20 segundos ¿estás seguro?",
+        "message": "Eliminará cualquier registro de Caja Negra u otros datos contenidos en la memoria flash. Debería durar unos 20 segundos ¿Está seguro?",
         "english": "This will erase any Blackbox logs or other data contained in the dataflash. It should take about 20 seconds, are you sure?"
     },
     "dataflashSavingTitle": {
@@ -4900,7 +4809,7 @@
         "english": "Saving could take several minutes, please wait."
     },
     "dataflashSavingNoteAfter": {
-        "message": "¡Guardado finalizado! Pulsa \"Aceptar\" para continuar.",
+        "message": "¡Guardado finalizado! Pulse \"Aceptar\" para continuar.",
         "english": "Save completed! Press \"Ok\" to continue."
     },
     "dataflashButtonSaveCancel": {
@@ -4928,7 +4837,7 @@
         "english": "No card inserted"
     },
     "sdcardStatusReboot": {
-        "message": "Error fatal<br>Reinicia para reintentar",
+        "message": "Error fatal<br>Reinicie para reintentar",
         "english": "Fatal error<br>Reboot to retry"
     },
     "sdcardStatusReady": {
@@ -4996,15 +4905,15 @@
         "english": "Download manually."
     },
     "firmwareFlasherTargetWarning": {
-        "message": "<span class=\"message-negative\">IMPORTANTE</span>: Asegúrate de que instalas un archivo apropiado para tu placa. Instalar un binario incorrecto para la placa puede provocar que sucedan cosas <span class=\"message-negative\">malas</span>.",
+        "message": "<span class=\"message-negative\">IMPORTANTE</span>: Asegúrese de que instala un archivo apropiado para su placa. Instalar un binario incorrecto para la placa puede provocar que sucedan cosas <span class=\"message-negative\">malas</span>.",
         "english": "<span class=\"message-negative\">IMPORTANT</span>: Ensure you flash a file appropriate for your target.  Flashing a binary for the wrong target can cause <span class=\"message-negative\">bad</span> things to happen."
     },
     "firmwareFlasherLoadFirmwareFile": {
-        "message": "Por favor, carga el archivo con el firmware",
+        "message": "Por favor, cargue el archivo con el firmware",
         "english": "Please load firmware file"
     },
     "firmwareFlasherLoadedConfig": {
-        "message": "Cargada placa, por favor carga el archivo de firmware",
+        "message": "Cargada placa, por favor cargue el archivo de firmware",
         "english": "Loaded target, please load firmware file"
     },
     "firmwareFlasherNoReboot": {
@@ -5012,33 +4921,23 @@
         "english": "No reboot sequence"
     },
     "firmwareFlasherOnlineSelectBuildType": {
-        "message": "Selecciona el tipo de versión para ver las placas disponibles.",
+        "message": "Seleccione el tipo de versión para ver las placas disponibles.",
         "english": "Select build type to see available boards."
     },
     "firmwareFlasherOnlineSelectBoardDescription": {
-        "message": "Select your board to see available online firmware releases - Select the correct firmware appropriate for your board.",
+        "message": "Seleccione su placa para ver las versiones de firmware disponibles online - Seleccione el firmware correcto apropriado para su placa.",
         "english": "Select your board to see available online firmware releases - Select the correct firmware appropriate for your board.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Selecciona o auto-detecta tu placa para ver las versiones de firmware disponibles - Elige el firmware adecuado para tu placa.",
-            "english": "Select or auto-detect your board to see available online firmware releases - Select the correct firmware appropriate for your board."
-        }
     },
     "firmwareFlasherOnlineSelectBoardHint": {
-        "message": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (G4, F4, F7, H7). To make the different boards work with the same firmware, a separate configuration file is flashed alongside the firmware.<br>The Configurator supports this transparently in one flashing step.",
+        "message": "El concepto de destinos unificados significa que el mismo archivo .hex del firmware se puede usar en todas las placasque usen el mismo MCU (G4, F4, F7, H7). Para hacer que tarjetas diferentes funcionen con el mismo firmware, un archivo separado se carga junto al firmware.<br>El Configurator soporta transparentemente esto con un sólo paso.",
         "english": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (G4, F4, F7, H7). To make the different boards work with the same firmware, a separate configuration file is flashed alongside the firmware.<br>The Configurator supports this transparently in one flashing step.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Empezando en Betaflight 4.1, se ha incluido soporte para <strong>Placas Unificadas</strong>. El concepto de Placas Unificadas implica que el mismo archivo .hex de firmware puede utilizarse en todas las placas que usen la misma MCU (F4, F7). Para conseguir que diferentes placas funcionen con el mismo firmware, se proporciona un archivo de configuración específico cuando se instala una Placa Unificada.<br />Esta versión de Betaflight Configurator soporta la instalación de Placas Unificadas junto a la respectiva configuración específica de la placa en un sólo paso. Los diferentes tipos de firmware que están disponibles para cada placa se muestran en el desplegado como sigue:<br /><br /><strong>&lt;nombre de placa&gt;</strong> o <br><strong>&lt;nombre de placa&gt; (Obsoleto)</strong>:<br />Placa NO Unificada, o versión pre-4.1 del firmware para Placas Unificadas.<br /><br /><strong>&lt;nombre de placa&gt; (&lt;id de fabricante&gt;)</strong>:<br>(id de fabricante de 4 caracteres)<br>Placa Unificada.<br /><br /><strong>Por favor, utiliza Placas Unificadas siempre que sea posible.</strong>Si encuentras problemas usando la Placa Unificada, por favor abre una <a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">incidencia</a> y utiliza la la placa no unificada hasta que la incidencia sea resuelta.",
-            "english": "Starting with Betaflight 4.1, Betaflight is introducing support for <strong>Unified Targets</strong>. The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (F4, F7). To make the different boards work with the same firmware, a specific configuration file is deployed alongside the firmware when a Unified Target is flashed.<br>This version of Betaflight configurator supports flashing of Unified Targets with the respective board specific configurations in one step. The different firmware types that are available for each board are shown in the drop-down as follows:<br /><br /><strong>&lt;board name&gt;</strong> or<br><strong>&lt;board name&gt; (Legacy)</strong>:<br>non-unified target, or pre-4.1 versions of the firmware for Unified Targets.<br /><br /><strong>&lt;board name&gt; (&lt;manufacturer id&gt;)</strong>:<br>(4 character manufacturer id)<br>Unified Target.<br /><br /><strong>Please use Unified Targets where available.</strong> If you encounter problems using a Unified Target, please open an <a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">issue</a> and then use the non-unified target until the issue has been resolved."
-        }
     },
     "firmwareFlasherOnlineSelectFirmwareVersionDescription": {
-        "message": "Elige la versión de firmware para tu placa.",
+        "message": "Elija la versión de firmware para su placa.",
         "english": "Select firmware version for your board."
     },
     "firmwareFlasherNoRebootDescription": {
-        "message": "Activar si tu FC está en modo boot. Por ej. si arrancaste el FC con los pins del gestor de arranque unidos o mientras pulsabas el botón BOOT.",
+        "message": "Activar si su FC está en modo boot. Por ej. si arrancó el FC con los pines del bootloader unidos o mientras pulsaba el botón BOOT.",
         "english": "Enable if your FC is in boot mode. i.e. if you powered on your FC with the bootloader pins jumped or whilst holding your FC's BOOT button."
     },
     "firmwareFlasherFlashOnConnect": {
@@ -5078,42 +4977,31 @@
         "english": "Loading ..."
     },
     "firmwareFlasherOptionLabelBuildTypeRelease": {
-        "message": "Releases",
+        "message": "Versiones",
         "english": "Releases",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Versiones Finales",
-            "english": "Release"
-        }
     },
     "firmwareFlasherOptionLabelBuildTypePreRelease": {
-        "message": "Releases and Pre-releases",
+        "message": "Versiones and Pre-lanzamientos",
         "english": "Releases and Pre-releases",
-        "status": "New entry. Please translate!"
     },
     "firmwareFlasherOptionLabelBuildTypeDevelopment": {
-        "message": "All Releases and Snapshots",
+        "message": "Todas las versiones y and Snapshots",
         "english": "All Releases and Snapshots",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Desarrollo",
-            "english": "Development"
-        }
     },
     "firmwareFlasherOptionLabelSelectFirmware": {
-        "message": "Elige un Firmware / Placa",
+        "message": "Elija un Firmware / Placa",
         "english": "Choose a Firmware / Board"
     },
     "firmwareFlasherOptionLabelSelectBoard": {
-        "message": "Elige una Placa",
+        "message": "Elija una Placa",
         "english": "Choose a Board"
     },
     "firmwareFlasherOptionLabelSelectFirmwareVersion": {
-        "message": "Elige una versión de Firmware",
+        "message": "Elija una versión de Firmware",
         "english": "Choose a Firmware version"
     },
     "firmwareFlasherOptionLabelSelectFirmwareVersionFor": {
-        "message": "Elije una versión de Firmware para",
+        "message": "Elija una versión de Firmware para",
         "english": "Choose a Firmware version for"
     },
     "firmwareFlasherButtonLoadLocal": {
@@ -5161,48 +5049,29 @@
         "english": "Message:"
     },
     "firmwareFlasherWarningText": {
-        "message": "Please do <span class=\"message-negative\">ONLY</span> flash <strong>Rotorflight</strong> or <strong>Betaflight</strong> hardware with this firmware flasher.<br /><br /><strong>Note: </strong>STM32 bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note: </strong><span class=\"message-negative\">Auto-Connect</span> is always disabled while you are inside firmware flasher.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your FC</strong> first, try rebooting, upgrade drivers.<br /><strong>Note:</strong> When flashing boards that have directly connected USB sockets (most newer boards) ensure you have read the USB Flashing section of the manual and have the correct software and drivers installed",
+        "message": "Por favor <span class=\"message-negative\">SÓLO</span> cargue <strong>Rotorflight</strong> o <strong>Betaflight</strong> hardware con este cargador de firmware.<br /><br /><strong>Nota: </strong>El STM32 bootloader se almacena en ROM, y no puede bloquearse.<br /><strong>Nota: </strong><span class=\"message-negative\">Auto-Conectar</span> está siempre deshabilitado mientras está usando el cargador de firmware.<br /><strong>Note: </strong>Asegúerese de tener un backup; algunas actualizaciones/downgrades borrarán su configuración.<br /><strong>Nota:</strong> Si tiene problemas cargandolo <strong>intente desconectar todos los cables de su FC</strong> primero, trate rearrancar, actualice drivers.<br /><strong>Nota:</strong> Cuando actualice placas que tengan conectados enchufes USB (la mayoría de las nuevas) asegúrese de que haya leído la sección USB Flashing del manual y que tiene el software y los drivers correctos instalados",
         "english": "Please do <span class=\"message-negative\">ONLY</span> flash <strong>Rotorflight</strong> or <strong>Betaflight</strong> hardware with this firmware flasher.<br /><br /><strong>Note: </strong>STM32 bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note: </strong><span class=\"message-negative\">Auto-Connect</span> is always disabled while you are inside firmware flasher.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your FC</strong> first, try rebooting, upgrade drivers.<br /><strong>Note:</strong> When flashing boards that have directly connected USB sockets (most newer boards) ensure you have read the USB Flashing section of the manual and have the correct software and drivers installed",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Por favor <span class=\"message-negative\">no</span> intentes usar este instalador de firmware en hardware <strong>no-Betaflight</strong>.<br /><span class=\"message-negative\">No</span> <strong>desconectes</strong> la placa o <strong>apagues</strong> tu ordenador mientras se está instalando.<br /><br /><strong>Nota: </strong>El gestor de arranque del STM32 está almacenado en ROM, por lo que no puede quedarse inutilizado.<br /><strong>Nota: </strong><span class=\"message-negative\">Auto-Conectar</span> siempre está desactivado mientras estés dentro del instalador de firmware.<br /><strong>Nota: </strong>Asegúrate de que tienes una copia de seguridad; algunas actualizaciones borrarán tu configuración.<br /><strong>Nota:</strong> Si tienes problemas al instalar <strong>intenta desconectar todos los cable de tu FC</strong> primero, intenta reiniciar, actualizar drivers.<br /><strong>Nota:</strong> Al instalar en placas que tienen directamente conectados puertos USB (la mayoría de placas nuevas) asegúrate de que has leído la sección de Instalación por USB del manual de Betaflight y tienes el software y drivers correctos instalados.",
-            "english": "Please do <span class=\"message-negative\">not</span> try to flash <strong>non-Betaflight</strong> hardware with this firmware flasher.<br />Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>STM32 bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note: </strong><span class=\"message-negative\">Auto-Connect</span> is always disabled while you are inside firmware flasher.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your FC</strong> first, try rebooting, upgrade drivers.<br /><strong>Note:</strong> When flashing boards that have directly connected USB sockets (most newer boards) ensure you have read the USB Flashing section of the Betaflight manual and have the correct software and drivers installed"
-        }
     },
     "firmwareFlasherRecoveryHead": {
         "message": "<strong>Recuperación / Pérdida de comunicación</strong>",
         "english": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>",
+        "message": "Si ha perdido comunicación con su placa, siga estos pasos para recuperarla: <ul><li>Apague todo</li><li>Habilite 'No secuencia de rearranque', habilite 'borrado total del chip'.</li><li>Puentee los pines de BOOT o mantenga pulsado el botón de BOOT.</li><li>Encienda la placa (El LED de actividad NO parpadeará si se hace correctamente).</li><li>Instale todos los drivers STM32 y Zadig si se requiere (vea <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">carga con </a> sección del manual).</li><li>Cierre configurator, Reinicie Configurator.</li><li>Suelte el boton BOOT si su FC tien uno.</li><li>Cargue el firmware correcto (usando baud rate manual si se especifica en el manual de su FC).</li><li>Apague todo.</li><li>Retire el puente BOOT.</li><li>Encienda (El LED de actividad depería parpadear).</li><li>Conecte normalmente.</li></ul>",
         "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Si has perdido la comunicación con tu placa sigue estos pasos para restaurar la comunicación: <ul><li>Apagar.</li><li>Activar 'No reiniciar', activar 'Borrado completo del chip'.</li><li>Unir los pins BOOT o pulsar el botón BOOT.</li><li>Encender (el LED de actividad NO parpadeará si se hace correctamente).</li><li>Instalar todos los drivers para STM32 y Zadig si es necesario (ver sección <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">Instalación por USB</a> del manual).</li><li>Cerrar el Configurator, reiniciar el Configurator.</li><li>Soltar botón BOOT si tu FC tiene uno.</li><li>Instalar el firmware correcto (configurando la velocidad de transmisión si viene especificada en el manual de tu FC).</li><li>Apagar.</li><li>Liberar pins BOOT.</li><li>Encender (el LED de actividad debe parpadear).</li><li>Conectar normalmente.</li></ul>",
-            "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of Betaflight manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
-        }
     },
     "firmwareFlasherFirmwareNotLoaded": {
         "message": "Firmware no cargado",
         "english": "Firmware not loaded"
     },
     "firmwareFlasherFirmwareLocalLoaded": {
-        "message": "Loaded Local Firmware: ($1 bytes)",
+        "message": "Cargado FirmwareLocal: ($1 bytes)",
         "english": "Loaded Local Firmware: ($1 bytes)",
         "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Cargado Firmware Local {{filename}} ({{bytes}} bytes)",
-            "english": "Loaded Local Firmware: {{filename}} ({{bytes}} bytes)"
-        }
     },
     "firmwareFlasherFirmwareOnlineLoaded": {
-        "message": "Loaded Online Firmware: ($1 bytes)",
+        "message": "Cargado Firmware online: ($1 bytes)",
         "english": "Loaded Online Firmware: ($1 bytes)",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Cargado Firmware Internet {{filename}} ({{bytes}} bytes)",
-            "english": "Loaded Online Firmware: {{filename}} ({{bytes}} bytes)"
-        }
     },
     "firmwareFlasherHexCorrupted": {
         "message": "El archivo HEX parece estar corrupto",
@@ -5226,11 +5095,11 @@
         "english": "<b>No firmware selected to load</b>"
     },
     "firmwareFlasherNoValidPort": {
-        "message": "<span class=\"message-negative\">Por favor selecciona un puerto serie válido</span>",
+        "message": "<span class=\"message-negative\">Por favor seleccione un puerto serie válido</span>",
         "english": "<span class=\"message-negative\">Please select valid serial port</span>"
     },
     "firmwareFlasherWritePermissions": {
-        "message": "No tienes <span class=\"message-negative\">permisos de escritura</span> para este archivo",
+        "message": "No tiene <span class=\"message-negative\">permisos de escritura</span> para este archivo",
         "english": "You don't have <span class=\"message-negative\">write permissions</span> for this file"
     },
     "firmwareFlasherFlashTrigger": {
@@ -5238,16 +5107,11 @@
         "english": "Detected: <strong>$1</strong> - triggering flash on connect"
     },
     "unstableFirmwareAcknoledgementDialog": {
-        "message": "You are about to flash a <strong>development build of the firmware</strong>. These builds are a work-in-progress, and any of the following can be the case:<strong><ul><li>the firmware does not work at all;</li><li>the firmware is not flyable;</li><li>there are safety issues with the firmware, for example flyaways</li><li>the firmware can cause the flight controller to become unresponsive, or damaged</li></ul></strong>If you proceed with flashing this firmware, <strong>you are assuming full responsibility for the risk of any of the above happening</strong>. Furthermore you acknowledge that it is necessary to perform <strong>thorough bench tests with rotor blades removed</strong> before any attempts to fly this firmware.",
+        "message": "Va a cargar <strong>una versión de desarrollo del firmware</strong>. Estos firmwares tienen trabajos en curso, y puede suceder lo siguiente:<strong><ul><li>el firmware no funciona en absoluto;</li><li>El firmware no es volable;</li><li>Existen asuntos de seguridad con el firmware, por ejemplo pérdidas de control</li><li>el firmware puede hacer que el controlador de vuelo no reesponda, o esté dañado</li></ul></strong>Si carga este firmware, <strong>está asumiendo total responsabilidad de cualquiera de los riesgos anteriores</strong>. Además reconoce que es necesario realizar <strong>pruebas exhaustivas en el suelo con las palas del rotor desmontadas</strong> antes de intentar volar con este firmware.",
         "english": "You are about to flash a <strong>development build of the firmware</strong>. These builds are a work-in-progress, and any of the following can be the case:<strong><ul><li>the firmware does not work at all;</li><li>the firmware is not flyable;</li><li>there are safety issues with the firmware, for example flyaways</li><li>the firmware can cause the flight controller to become unresponsive, or damaged</li></ul></strong>If you proceed with flashing this firmware, <strong>you are assuming full responsibility for the risk of any of the above happening</strong>. Furthermore you acknowledge that it is necessary to perform <strong>thorough bench tests with rotor blades removed</strong> before any attempts to fly this firmware.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Estás a punto de instalar una <strong>versión en desarrollo del firmware</strong>. Estas versiones son un trabajo en curso, y puede que suceda cualquiera de estas situaciones:<strong><ul><li>el firmware no funcione en absoluto;</li><li>el firmware no sea volable;</li><li>haya problemas de seguridad con el firmware, por ejemplo que se vaya volando;</li><li>el firmware puede causar que la controladora no responda, o quede dañada;</li></ul></strong>Si decides instalar este firmware, <strong>estás asumiendo toda la responsabilidad por el riesgo de que cualquiera de las situaciones anteriores suceda</strong>. Además reconoces que es necesario realizar <strong>pruebas completas de banco sin hélices</strong> antes de cualquier intento de volar este firmware.",
-            "english": "You are about to flash a <strong>development build of the firmware</strong>. These builds are a work in progress, and any of the following can be the case:<strong><ul><li>the firmware does not work at all;</li><li>the firmware is not flyable;</li><li>there are safety issues with the firmware, for example flyaways</li><li>the firmware can cause the flight controller to become unresponsive, or damaged</li></ul></strong>If you proceed with flashing this firmware, <strong>you are assuming full responsibility for the risk of any of the above happening</strong>. Furthermore you acknowledge that it is necessary to perform <strong>thorough bench tests with props off</strong> before any attempts to fly this firmware."
-        }
     },
     "unstableFirmwareAcknoledgementAcknowledge": {
-        "message": "He leído lo anterior y <strong>asumo toda la responsabilidad<strong> de instalar firmware inestable",
+        "message": "Ha leído lo anterior y <strong>asume toda la responsabilidad<strong> de instalar firmware inestable",
         "english": "I have read the above and <strong>I assume full responsibility<strong> for flashing unstable firmware"
     },
     "unstableFirmwareAcknoledgementFlash": {
@@ -5255,65 +5119,54 @@
         "english": "Flash"
     },
     "firmwareFlasherPreviousDevice": {
-        "message": "Detectado: <strong>$1</strong> - dispositivo anterior todavía en instalación, por favor vuelve a conectar para volver a intentarlo",
+        "message": "Detectado: <strong>$1</strong> - dispositivo anterior todavía en instalación, por favor vuelva a conectar para volver a intentarlo",
         "english": "Detected: <strong>$1</strong> - previous device still flashing, please replug to try again"
     },
     "firmwareFlasherNoBoardsLoaded": {
-        "message": "No boards loaded",
+        "message": "Ninguan placa cargada",
         "english": "No boards loaded",
-        "status": "New entry. Please translate!"
     },
     "firmwareFlasherBoardDetectionButton": {
-        "message": "Detect",
+        "message": "Detectar",
         "english": "Detect",
-        "status": "New entry. Please translate!"
     },
     "firmwareFlasherBoardDetectionSucceeded": {
-        "message": "Detected board: <strong>{{boardName}}</strong>",
+        "message": "Placa Detectada: <strong>{{boardName}}</strong>",
         "english": "Detected board: <strong>{{boardName}}</strong>",
-        "status": "New entry. Please translate!",
         "description": "Board detection was successful!"
     },
     "firmwareFlasherBoardDetectionFail": {
-        "message": "Unable to detect board for connected device",
+        "message": "Incapaz de detectar una placa para el dispositivo conectado",
         "english": "Unable to detect board for connected device",
-        "status": "New entry. Please translate!"
     },
     "firmwareFlasherBoardDetectionBoardNotFound": {
-        "message": "Detected board: <strong>{{boardName}}</strong>, but no matching target found.",
+        "message": "Placa Detectada: <strong>{{boardName}}</strong>, pero no es igual al blanco encontrado.",
         "english": "Detected board: <strong>{{boardName}}</strong>, but no matching target found.",
-        "status": "New entry. Please translate!",
         "description": "Board detection was successful, but there was no matching target available."
     },
     "firmwareFlasherBoardDetectionDescriptionHint": {
-        "message": "Detect only works when not in DFU mode and when MSP communication is working. Sometimes you have to retry a few times or even reconnect USB. Try connecting as normal first as you could have forgotten to apply custom defaults. Please reboot after flashing - replug your USB.",
+        "message": "Detectar solo funciona cuando  no se está en modo DFU y cuando la comunicación MSP trabaja correctamente. Algunas veces tendrá que reintentar varias veces o incluso reconectar el USB. Intente primero conectar normalmente como si se hubiera olvidado de aplicar los valores por defecto personalizados. Por favor, rearranque después de cargarlo - reconecte su USB.",
         "english": "Detect only works when not in DFU mode and when MSP communication is working. Sometimes you have to retry a few times or even reconnect USB. Try connecting as normal first as you could have forgotten to apply custom defaults. Please reboot after flashing - replug your USB.",
-        "status": "New entry. Please translate!"
     },
     "firmwareFlasherBoardDetectionInProgress": {
-        "message": "Auto-detecting board for connected device...",
+        "message": "Auto-detectando placa para el dispositivo conectado...",
         "english": "Auto-detecting board for connected device...",
-        "status": "New entry. Please translate!"
     },
     "dialogBoardDetectionMessageInvalidBoardNameTitle": {
-        "message": "Invalid Board Name Detected",
+        "message": "Detectado nombre inválido de placa",
         "english": "Invalid Board Name Detected",
-        "status": "New entry. Please translate!"
     },
     "dialogBoardDetectionMessageInvalidBoardNameContent": {
-        "message": "Board name: ($1) contains invalid characters -- using corrected board name: ($2)",
+        "message": "Nombre de placa: ($1) contiene caracteres inválidos -- usando nombre correcto de placa: ($2)",
         "english": "Board name: ($1) contains invalid characters -- using corrected board name: ($2)",
-        "status": "New entry. Please translate!"
     },
     "dialogBoardDetectionMessageInvalidBoardNameRecommendation": {
-        "message": "A full chip erase is recommended to correct the board name. Ensure you perform a full backup before performing a flash with full chip erase enabled.",
+        "message": "Se recomienda un borrado completo del chip para corregir el nombre de la placa. Asegúrese de realizar un backup completo antes de realizar una carga con borrado completo del chip.",
         "english": "A full chip erase is recommended to correct the board name. Ensure you perform a full backup before performing a flash with full chip erase enabled.",
-        "status": "New entry. Please translate!"
     },
     "dialogBoardDetectionMessageAcknowledge": {
-        "message": "Acknowledge",
+        "message": "Confirme",
         "english": "Acknowledge",
-        "status": "New entry. Please translate!"
     },
     "ledStripHelp": {
         "message": "El controlador de vuelo puede controlar colores y efectos de LEDs individuales de una tira.<br />Configura LEDs en la rejilla, configura el orden del cableado y añade LEDs a tu aeronave de acuerdo a las posiciones de la rejilla. LEDs sin número de orden de cableado no se guardarán.<br />Doble-pulsación en un color para editar los valores HSV.",
@@ -5357,57 +5210,46 @@
     "ledStripProfileTitle": {
         "message": "Perfil",
         "english": "Profile",
-        "status": "Reused translation. Please check!"
     },
     "ledStripProfileRaceOption": {
-        "message": "Race",
+        "message": "Carrera",
         "english": "Race",
-        "status": "New entry. Please translate!"
     },
     "ledStripProfileBeaconOption": {
-        "message": "Beacon",
+        "message": "Baliza",
         "english": "Beacon",
-        "status": "New entry. Please translate!"
     },
     "ledStripProfileStatusOption": {
         "message": "Estado",
         "english": "Status",
-        "status": "Reused translation. Please check!"
     },
     "ledStripProfileStatusAltOption": {
-        "message": "Status Alt",
+        "message": "Estado Alt",
         "english": "Status Alt",
-        "status": "New entry. Please translate!"
     },
     "ledStripGlobalBlinkRate": {
-        "message": "Blink tempo (BPM)",
+        "message": "Tempo de parpadeo (BPM)",
         "english": "Blink tempo (BPM)",
-        "status": "New entry. Please translate!"
     },
     "ledStripGlobalFlickerRate": {
-        "message": "Flicker rate",
+        "message": "Rate Profile #$1",
         "english": "Flicker rate",
-        "status": "New entry. Please translate!"
     },
     "ledStripGlobalFadeRate": {
-        "message": "Fade rate",
+        "message": "Ritmo de desvanecimiento",
         "english": "Fade rate",
-        "status": "New entry. Please translate!"
     },
     "ledStripGlobalBrightness": {
-        "message": "Overall brightness",
+        "message": "Brillo máximo",
         "english": "Overall brightness",
-        "status": "New entry. Please translate!"
     },
     "ledStripFlickerOverlay": {
-        "message": "Flicker",
+        "message": "Parpadeo",
         "english": "Flicker",
-        "status": "New entry. Please translate!"
     },
     "ledStripFadeOverlay": {
-        "message": "Fade to alt color (in profile Status Alt)",
+        "message": "Devanecer a color alternativo (en estado alt del perfil)",
         "english": "Fade to alt color (in profile Status Alt)",
-        "status": "New entry. Please translate!"
     },
     "ledStripVtxOverlay": {
         "message": "VTX (usa la frecuencia VTX para asignar color)",
@@ -5432,9 +5274,8 @@
         "description": "One of the modes of the Led Strip"
     },
     "ledStripFunctionModesOption": {
-        "message": "Modos y Orientación",
+        "message": "Modos &amp y Orientación",
         "english": "Modes &amp; Orientation",
-        "description": "One of the modes of the Led Strip"
     },
     "ledStripFunctionArmOption": {
         "message": "Estado de Armado",
@@ -5444,7 +5285,6 @@
     "ledStripFunctionBatteryOption": {
         "message": "Batería",
         "english": "Battery",
-        "description": "One of the modes of the Led Strip"
     },
     "ledStripFunctionRSSIOption": {
         "message": "RSSI",
@@ -5475,17 +5315,17 @@
         "description": "One of the modes in Color Mode in Led Strip"
     },
     "ledStripModeColorsModeHeadfree": {
-        "message": "Headfree",
+        "message": "Cabeza libre",
         "english": "Headfree",
         "description": "One of the modes in Color Mode in Led Strip"
     },
     "ledStripModeColorsModeHorizon": {
-        "message": "Horizon",
+        "message": "Horizonte",
         "english": "Horizon",
         "description": "One of the modes in Color Mode in Led Strip"
     },
     "ledStripModeColorsModeAngle": {
-        "message": "Angle",
+        "message": "Ángulo",
         "english": "Angle",
         "description": "One of the modes in Color Mode in Led Strip"
     },
@@ -5530,9 +5370,8 @@
         "description": "Down direction in Color Mode in Led Strip"
     },
     "ledStripModesColorTitle": {
-        "message": "LED Orientation, Color (left click) and Alt Color (right click)",
+        "message": "Prientación LED, Color (click izquierdo) y Color Alt (click derecho)",
         "english": "LED Orientation, Color (left click) and Alt Color (right click)",
-        "status": "New entry. Please translate!",
         "description": "One of the modes in Color Mode in Led Strip"
     },
     "ledStripModesSpecialColorsTitle": {
@@ -5566,12 +5405,12 @@
         "description": "One of the modes in Color Mode in Led Strip"
     },
     "ledStripModeColorsModeGPSNoLock": {
-        "message": "GPS: no fijad",
+        "message": "GPS: no fijo",
         "english": "GPS: no lock",
         "description": "One of the modes in Color Mode in Led Strip"
     },
     "ledStripModeColorsModeGPSLocked": {
-        "message": "GPS: fijados",
+        "message": "GPS: fijos",
         "english": "GPS: locked",
         "description": "One of the modes in Color Mode in Led Strip"
     },
@@ -5601,9 +5440,8 @@
         "description": "Message in the wiring modes in Led Strip"
     },
     "ledStripGlobalSettings": {
-        "message": "LED Strip Global Settings",
+        "message": "Ajustes globales tira LED",
         "english": "LED Strip Global Settings",
-        "status": "New entry. Please translate!",
         "description": "The Led Strip global settings, like profile etc"
     },
     "ledStripVtxFunction": {
@@ -5623,9 +5461,8 @@
         "english": "Blink on landing"
     },
     "ledStripBlinkPause": {
-        "message": "Pause",
+        "message": "Pausa",
         "english": "Pause",
-        "status": "New entry. Please translate!"
     },
     "ledStripOverlayTitle": {
         "message": "Superposición",
@@ -5696,21 +5533,20 @@
         "english": "deep pink"
     },
     "controlAxisRoll": {
-        "message": "Roll [A]",
+        "message": "Alabeo [A]",
         "english": "Roll [A]"
     },
     "controlAxisPitch": {
-        "message": "Pitch [E]",
+        "message": "Paso [E]",
         "english": "Pitch [E]"
     },
     "controlAxisYaw": {
-        "message": "Yaw [R]",
+        "message": "Guiñada [R]",
         "english": "Yaw [R]"
     },
     "controlAxisCollective": {
-        "message": "Coll [C]",
+        "message": "Colect [C]",
         "english": "Coll [C]",
-        "status": "New entry. Please translate!"
     },
     "controlAxisThrottle": {
         "message": "Acelera. [T]",
@@ -5719,7 +5555,6 @@
     "controlAxisThr": {
         "message": "Acelerador",
         "english": "Throttle",
-        "status": "Reused translation. Please check!"
     },
     "controlAxisAux1": {
         "message": "AUX 1",
@@ -5788,102 +5623,82 @@
     "controlAxisAux17": {
         "message": "AUX 17",
         "english": "AUX 17",
-        "status": "New entry. Please translate!"
     },
     "controlAxisAux18": {
         "message": "AUX 18",
         "english": "AUX 18",
-        "status": "New entry. Please translate!"
     },
     "controlAxisAux19": {
         "message": "AUX 19",
         "english": "AUX 19",
-        "status": "New entry. Please translate!"
     },
     "controlAxisAux20": {
         "message": "AUX 20",
         "english": "AUX 20",
-        "status": "New entry. Please translate!"
     },
     "controlAxisAux21": {
         "message": "AUX 21",
         "english": "AUX 21",
-        "status": "New entry. Please translate!"
     },
     "controlAxisAux22": {
         "message": "AUX 22",
         "english": "AUX 22",
-        "status": "New entry. Please translate!"
     },
     "controlAxisAux23": {
         "message": "AUX 23",
         "english": "AUX 23",
-        "status": "New entry. Please translate!"
     },
     "controlAxisAux24": {
         "message": "AUX 24",
         "english": "AUX 24",
-        "status": "New entry. Please translate!"
     },
     "controlAxisAux25": {
         "message": "AUX 25",
         "english": "AUX 25",
-        "status": "New entry. Please translate!"
     },
     "controlAxisAux26": {
         "message": "AUX 26",
         "english": "AUX 26",
-        "status": "New entry. Please translate!"
     },
     "controlAxisAux27": {
         "message": "AUX 27",
         "english": "AUX 27",
-        "status": "New entry. Please translate!"
     },
     "rssiOptionAUTO": {
         "message": "AUTO",
         "english": "AUTO",
-        "status": "New entry. Please translate!"
     },
     "rssiOptionADC": {
         "message": "ADC",
         "english": "ADC",
-        "status": "New entry. Please translate!"
     },
     "profilesPidGains": {
-        "message": "PID Controller Gains",
+        "message": "Ganancia controlador PID",
         "english": "PID Controller Gains",
-        "status": "New entry. Please translate!"
     },
     "profilesPidSettings": {
         "message": "Ajustes del Controlador PID",
         "english": "PID Controller Settings",
-        "status": "Reused translation. Please check!"
     },
     "profilesErrorLimit": {
-        "message": "Cumulative Error Limits",
+        "message": "Límite acumulativo de Error",
         "english": "Cumulative Error Limits",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorLimitHelp": {
-        "message": "Hard limit for the angle error in the PID loop. The absolute error and thus the I-term will never go above these limits.",
+        "message": "Límite físico del error en ángulo en el ciclo PID. El error absoluto y consecuentemente el I-term nunca irá por encima de estos límites.",
         "english": "Hard limit for the angle error in the PID loop. The absolute error and thus the I-term will never go above these limits.",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorLimitRoll": {
-        "message": "Error Limit for Roll Axis [&deg;]",
+        "message": "Limite de error para eje de Alabeo [&deg;]",
         "english": "Error Limit for Roll Axis [&deg;]",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorLimitPitch": {
-        "message": "Error Limit for Pitch Axis [&deg;]",
+        "message": "Límite de Error para Eje de Paso [&deg;]",
         "english": "Error Limit for Pitch Axis [&deg;]",
-        "status": "New entry. Please translate!"
     },
     "profilesErrorLimitYaw": {
-        "message": "Error Limit for Yaw Axis [&deg;]",
+        "message": "Límite de Error para Eje de Guiñada [&deg;]",
         "english": "Error Limit for Yaw Axis [&deg;]",
-        "status": "New entry. Please translate!"
     },
     "profilesOffsetLimitHelp": {
         "message": "Hard limit for the High Speed Integral offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits.",
