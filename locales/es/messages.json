@@ -6524,129 +6524,100 @@
         "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>",
     },
     "gyroRpmFilterMainRotorGroup": {
-        "message": "Main Rotor Notch Filters",
+        "message": "Filtros de pico del rotor principal",
         "english": "Main Rotor Notch Filters",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterMainRotorHelp": {
-        "message": "RPM controlled filters for the main rotor harmonics",
+        "message": "Filtros controlados por RPM para los harmónicos del rotor principal",
         "english": "RPM controlled filters for the main rotor harmonics",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterTailRotorGroup": {
-        "message": "Tail Rotor Notch Filters",
+        "message": "Filtros de pico del rotor de cola",
         "english": "Tail Rotor Notch Filters",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterTailRotorHelp": {
-        "message": "RPM controlled filters for the tail rotor harmonics",
+        "message": "Filtros controlados por RPM para harmónicos del rotor de cola",
         "english": "RPM controlled filters for the tail rotor harmonics",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterMainMotorGroup": {
-        "message": "Main Motor Notch Filters",
+        "message": "Filtros de pico del motor principal",
         "english": "Main Motor Notch Filters",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterMainMotorHelp": {
-        "message": "RPM controlled filters for the main motor harmonics",
+        "message": "Filtros controlados por RPM para harmónicos del motor principal",
         "english": "RPM controlled filters for the main motor harmonics",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterTailMotorGroup": {
-        "message": "Tail Motor Notch Filters",
+        "message": "Filtros de pico motor de cola",
         "english": "Tail Motor Notch Filters",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterTailMotorHelp": {
-        "message": "RPM controlled filters for the tail motor harmonics",
+        "message": "Filtros controlados por RPM para harmónicos del motor de cola",
         "english": "RPM controlled filters for the tail motor harmonics",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterH1": {
-        "message": "Fundamental Frequency Notch type",
+        "message": "Tipo de frecuencia de pico fundamental",
         "english": "Fundamental Frequency Notch type",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterQ1": {
-        "message": "Fundamental Frequency Notch Q",
+        "message": "Frecuencia de pico Q fundamental",
         "english": "Fundamental Frequency Notch Q",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterH2": {
-        "message": "2<sup>nd</sup> Harmonic Notch Type",
+        "message": "2<sup>nd</sup> Tipo de harmónico de pico",
         "english": "2<sup>nd</sup> Harmonic Notch Type",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterQ2": {
-        "message": "2<sup>nd</sup> Harmonic Notch Q",
-        "english": "2<sup>nd</sup> Harmonic Notch Q",
-        "status": "New entry. Please translate!"
+        "message": "2<sup>nd</sup> Harmónico de pico Q",
+        "english": "2<sup>nd</sup> Harmonic Notch Q"
     },
     "gyroRpmFilterH3": {
-        "message": "3<sup>rd</sup> Harmonic Notch Type",
+        "message": "3<sup>rd</sup> Tipo de Harmónic de pico",
         "english": "3<sup>rd</sup> Harmonic Notch Type",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterQ3": {
-        "message": "3<sup>rd</sup> Harmonic Notch Q",
+        "message": "3<sup>rd</sup> Harmónico de pico Q",
         "english": "3<sup>rd</sup> Harmonic Notch Q",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterH4": {
-        "message": "4<sup>th</sup> Harmonic Notch Type",
+        "message": "4<sup>th</sup> Tipo de Harmónico de pico",
         "english": "4<sup>th</sup> Harmonic Notch Type",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterQ4": {
-        "message": "4<sup>th</sup> Harmonic Notch Q",
+        "message": "4<sup>th</sup> Harmónico de pico Q",
         "english": "4<sup>th</sup> Harmonic Notch Q",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterQ5": {
-        "message": "5<sup>th</sup> Harmonic Notch Q",
+        "message": "5<sup>th</sup> Harmónico de pico Q",
         "english": "5<sup>th</sup> Harmonic Notch Q",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterQ6": {
-        "message": "6<sup>th</sup> Harmonic Notch Q",
+        "message": "6<sup>th</sup> Harmónico de pico Q",
         "english": "6<sup>th</sup> Harmonic Notch Q",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterQ7": {
-        "message": "7<sup>th</sup> Harmonic Notch Q",
+        "message": "7<sup>th</sup> Harmónico de pico Q",
         "english": "7<sup>th</sup> Harmonic Notch Q",
-        "status": "New entry. Please translate!"
     },
     "gyroRpmFilterQ8": {
-        "message": "8<sup>th</sup> Harmonic Notch Q",
+        "message": "8<sup>th</sup> Harmónico de pico Q",
         "english": "8<sup>th</sup> Harmonic Notch Q",
-        "status": "New entry. Please translate!"
     },
     "dialogGyroResetTitle": {
-        "message": "<span class=\"message-negative\">Warning:</span> RPM Filter Reset",
+        "message": "<span class=\"message-negative\">Aviso:</span> Reseteo del filtro RPM",
         "english": "<span class=\"message-negative\">Warning:</span> RPM Filter Reset",
-        "status": "New entry. Please translate!"
     },
     "dialogGyroResetNote": {
-        "message": "Changing the Setup Type will reset any custom RPM filter settings to defaults.",
+        "message": "Cambiar la configuración tipo también restablecerá todos ajustes personalizados de los filtros de RPM a valores por defecto.",
         "english": "Changing the Setup Type will reset any custom RPM filter settings to defaults.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Enabling RPM Filter Setup will reset any custom RPM filter settings to defaults.",
-            "english": "Enabling RPM Filter Setup will reset any custom RPM filter settings to defaults.",
-            "status": "New entry. Please translate!"
-        }
     },
     "dialogGyroResetAccept": {
-        "message": "Accept",
+        "message": "Aceptar",
         "english": "Accept",
-        "status": "New entry. Please translate!"
     },
     "dialogGyroResetRevert": {
-        "message": "Revert",
+        "message": "Invertir",
         "english": "Revert",
-        "status": "New entry. Please translate!"
     },
     "failsafeFeaturesHelpNew": {
         "message": "El Modo de Seguridad tiene dos etapas. <strong>Etapa 1</strong> se ejecuta cuando un canal de vuelo tiene una longitud de pulso no válida, el receptor informa de Modo de Seguridad o no hay señal del receptor, se aplican ajustes de seguridad a <span class=\"message-negative\">todos los canales</span> y se proporciona una pequeña cantidad de tiempo para permitir recuperar el estado. <strong>Etapa 2</strong> se ejecuta cuando la condición de error dura más que el tiempo configurado de guarda mientras la aeronave esté <span class=\"message-negative\">armada</span>, todos los canales se mantienen en el ajuste de seguridad a menos que se las reglas se modifiquen en el procedimiento elegido. <br /><strong>Nota:</strong> Antes de entrar en Etapa 1, se aplican ajustes de seguridad también a los canales AUX individuales que tienen pulsos inválidos.",
@@ -6673,13 +6644,8 @@
         "english": "Channel Fallback Settings"
     },
     "failsafeChannelFallbackSettingsHelp": {
-        "message": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 5µs, so smaller changes may be ignored.",
+        "message": "Estos ajustes se aplican a canales AUX inválidos individuales o a todos los canales que entren en estapa 1. <strong>Nota:</strong> los valores se guardan en bloques de 5µs, por lo que los cambios más pequeños serán ignorados.",
         "english": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 5µs, so smaller changes may be ignored.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Estos ajustes se aplican a canales individuales AUX inválidos o a todos los canales cuando se entra en etapa 1. <strong>Nota:</strong> los valores se guardan en pasos de 25usec, por lo que los cambios pequeños desaparecen",
-            "english": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 25usec, so small changes disappear"
-        }
     },
     "failsafeChannelFallbackSettingsAuto": {
         "message": "<strong>Auto</strong> significa Roll, Pitch y Yaw centrados y Acelerador bajo. <strong>Mantener</strong> significa mantener el ultimo valor bueno recibido",
@@ -6692,43 +6658,30 @@
     "failsafeChannelFallbackOptionAuto": {
         "message": "Auto",
         "english": "Auto",
-        "status": "Reused translation. Please check!"
     },
     "failsafeChannelFallbackOptionHold": {
-        "message": "Hold",
+        "message": "Mantener",
         "english": "Hold",
-        "status": "New entry. Please translate!"
     },
     "failsafeChannelFallbackOptionSet": {
-        "message": "Set",
+        "message": "Ajustar",
         "english": "Set",
-        "status": "New entry. Please translate!"
     },
     "failsafeStageTwoSettingsTitle": {
         "message": "Etapa 2 - Ajustes",
         "english": "Stage 2 - Settings"
     },
     "failsafeDelayItem": {
-        "message": "Guard time for stage 2 activation after signal lost [s]",
+        "message": "Tiempo de Guarda para activación de la etapa 2 después deperder la señal [s]",
         "english": "Guard time for stage 2 activation after signal lost [s]",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Tiempo de guarda para activación de etapa 2 después de perder la señal [segundos]",
-            "english": "Guard time for stage 2 activation after signal lost [seconds]"
-        }
     },
     "failsafeDelayHelp": {
         "message": "Tiempo a esperar en etapa 1 para recuperación",
         "english": "Time for stage 1 to wait for recovery"
     },
     "failsafeThrottleLowItem": {
-        "message": "Failsafe Throttle Low Delay [s]",
+        "message": "Retardo bajo de la seguridad del acelerados [s]",
         "english": "Failsafe Throttle Low Delay [s]",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Retardo Acelerador Bajo Modo de Seguridad [segundos]",
-            "english": "Failsafe Throttle Low Delay [seconds]"
-        }
     },
     "failsafeThrottleLowHelp": {
         "message": "Simplemente desarma la aeronave en lugar de ejecutar el proceso de modo de seguridad seleccionado cuando el acelerador está al mínimo durante este tiempo",
@@ -6739,13 +6692,8 @@
         "english": "Throttle value used while landing"
     },
     "failsafeOffDelayItem": {
-        "message": "Delay for turning off the Motors during Failsafe [s]",
+        "message": "Retraso para apagar los motores durante el modo de seguridad [s]",
         "english": "Delay for turning off the Motors during Failsafe [s]",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Retardo para apagar los motores durante el Modo de Seguridad [segundos]",
-            "english": "Delay for turning off the Motors during Failsafe [seconds]"
-        }
     },
     "failsafeOffDelayHelp": {
         "message": "Tiempo para permanecer en modo aterrizaje, hasta que los motores se apaguen y se desarmen",
@@ -6764,7 +6712,7 @@
         "english": "Drop"
     },
     "failsafeProcedureItemSelect4": {
-        "message": "GPS Rescate",
+        "message": "Rescate GPS",
         "english": "GPS Rescue"
     },
     "failsafeGpsRescueItemAngle": {
@@ -6792,7 +6740,7 @@
         "english": "Throttle maximum"
     },
     "failsafeGpsRescueItemThrottleHover": {
-        "message": "Acelerador flotar",
+        "message": "Acelerador estacionario",
         "english": "Throttle hover"
     },
     "failsafeGpsRescueItemAscendRate": {
@@ -6808,7 +6756,7 @@
         "english": "Minimum satellites"
     },
     "failsafeGpsRescueItemAllowArmingWithoutFix": {
-        "message": "Permitir armar sin satélites fijados - <span class=\"message-negative\">ADVERTENCIA: el GPS Rescate no estará disponible</span>",
+        "message": "Permitir armar sin satélites fijados - <span class=\"message-negative\">ADVERTENCIA: el Rescate GPS no estará disponible</span>",
         "english": "Allow arming without fix - <span class=\"message-negative\">WARNING: the GPS Rescue will not be available</span>"
     },
     "failsafeGpsRescueItemAltitudeMode": {
@@ -6844,7 +6792,7 @@
         "english": "Failsafe only"
     },
     "failsafeKillSwitchItem": {
-        "message": "Interruptor para Modo de Seguridad (FAILSAFE en apartado Modos)",
+        "message": "Interruptor para Modo de Seguridad (FAILSAFE en pestaña Modos)",
         "english": "Failsafe Kill Switch (setup Failsafe in Modes Tab)"
     },
     "failsafeKillSwitchHelp": {
@@ -6852,13 +6800,8 @@
         "english": "Set this option to make the failsafe switch (Modes Tab) act as a direct kill switch, bypassing the selected failsafe procedure. <strong>Note:</strong> Arming is blocked with the failsafe kill switch in the ON position"
     },
     "failsafeSwitchTitle": {
-        "message": "Failsafe Test Switch",
+        "message": "Interruptor de prueba del modo de seguridad",
         "english": "Failsafe Test Switch",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Interruptor Modo de Seguridad",
-            "english": "Failsafe Switch"
-        }
     },
     "failsafeSwitchModeItem": {
         "message": "Acción Interruptor Modo de Seguridad",
@@ -6881,95 +6824,56 @@
         "english": "Kill"
     },
     "powerBatteryVoltageMeterSource": {
-        "message": "Battery Voltage Source",
+        "message": "Fuente de voltaje de Batería",
         "english": "Battery Voltage Source",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Origen del Sensor de Voltaje",
-            "english": "Voltage Meter Source"
-        }
     },
     "powerBatteryVoltageMeterTypeNone": {
         "message": "Ninguno",
         "english": "None"
     },
     "powerBatteryVoltageMeterTypeAdc": {
-        "message": "Battery ADC",
+        "message": "ADC de Batería",
         "english": "Battery ADC",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "ADC Integrado",
-            "english": "Onboard ADC"
-        }
     },
     "powerBatteryVoltageMeterTypeEsc": {
-        "message": "ESC Telemetry",
+        "message": "Telemetría ESC",
         "english": "ESC Telemetry",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Sensor ESC",
-            "english": "ESC Sensor"
-        }
     },
     "powerBatteryCurrentMeterSource": {
-        "message": "Battery Current Source",
+        "message": "Fuente actual de Batería",
         "english": "Battery Current Source",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Origen del Sensor de Corriente",
-            "english": "Current Meter Source"
-        }
     },
     "powerBatteryCurrentMeterTypeNone": {
         "message": "Ninguno",
         "english": "None"
     },
     "powerBatteryCurrentMeterTypeAdc": {
-        "message": "Battery ADC",
+        "message": "Voltaje de Celdas de Batería"
         "english": "Battery ADC",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "ADC Integrado",
-            "english": "Onboard ADC"
-        }
     },
     "powerBatteryCurrentMeterTypeEsc": {
-        "message": "ESC Telemetry",
+        "message": "Telemetría ESC",
         "english": "ESC Telemetry",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Sensor ESC",
-            "english": "ESC Sensor"
-        }
     },
     "powerBatteryCurrentMeterTypeMsp": {
-        "message": "MSP Sensor",
+        "message": "Sensor MSP",
         "english": "MSP Sensor",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Sensor MSP/OSD Esclavo",
-            "english": "MSP Sensor/OSD Slave"
-        }
     },
     "powerBatteryMinimumCellVoltage": {
         "message": "Mínimo Voltaje por Celda",
         "english": "Minimum Cell Voltage",
-        "status": "Reused translation. Please check!"
     },
     "powerBatteryMaximumCellVoltage": {
         "message": "Máximo Voltaje por Celda",
         "english": "Maximum Cell Voltage",
-        "status": "Reused translation. Please check!"
     },
     "powerBatteryFullCellVoltage": {
-        "message": "Full Cell Voltage",
+        "message": "Voltaje total de celda",
         "english": "Full Cell Voltage",
-        "status": "New entry. Please translate!"
     },
     "powerBatteryWarningCellVoltage": {
         "message": "Aviso Voltaje por Celda",
         "english": "Warning Cell Voltage",
-        "status": "Reused translation. Please check!"
     },
     "powerCalibrationManagerButton": {
         "message": "Calibración",
@@ -6984,31 +6888,16 @@
         "english": "To calibrate, use a multimeter to measure the actual voltage / current draw on your craft (with a battery plugged in), and enter the values below. Then, with the same battery still plugged in, click [Calibrate]."
     },
     "powerCalibrationManagerNote": {
-        "message": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove rotor blades before plugging in a battery!</strong>",
+        "message": "<strong>Nota:</strong> Antes de calibrar la escala, asegúrese de que el y el multiplicador del voltaje y el desplazamiento del amperaje estén ajustados correctamente.<br>Dejando estos valores en 0 no se aplicará calibración.</br><strong>Recuerde desmontar las palar del rotor antes de conectar una batería!</strong>",
         "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove rotor blades before plugging in a battery!</strong>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<strong>Nota:</strong> Antes de calibrar la escala asegúrate de que el divisor y el multiplicador para el voltaje y el desplazamiento para la corriente sean correctos.<br>Dejando estos valores a 0 no se efectuará ninguna calibración.</br><strong>¡Recuerda quitar las hélices antes de enchufar una batería!</strong>",
-            "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for amperage is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove propellers before plugging in a battery!</strong>"
-        }
     },
     "powerCalibrationManagerWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and current meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or current are reading a value above 0. Otherwise you will not be able to calibrate using this tool.",
+        "message": "<span class=\"message-negative\">AVISO:</span> La batería <span class=\"message-negative\">no está conectada</span> o las fuentes de medida de voltaje y amperaje no están <span class=\"message-negative\">ajustadas correctamente.</span> Asegúrese de que el voltaje y/o amperajer muestren un valor por encima de 0. De lo contrario, nunca será de calibrar con esta herramienta.",
         "english": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and current meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or current are reading a value above 0. Otherwise you will not be able to calibrate using this tool.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">Atención:</span> La batería <span class=\"message-negative\">no está enchufada</span> o el origen de los sensores de voltaje y corriente <span class=\"message-negative\">no están configurados correctamente.</span> Asegúrate de que el voltaje y/o corriente marcan un valor sobre 0. The otro modo no podrás usar esta herramienta para calibrar.",
-            "english": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and amperage meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or amperage are reading a value above 0. Otherwise you will not be able to calibrate using this tool."
-        }
     },
     "powerCalibrationManagerSourceNote": {
-        "message": "<span class=\"message-negative\">Warning:</span> Voltage and/or current meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate.",
+        "message": "<span class=\"message-negative\">Aviso:</span> Las fuentes de medida de Voltaje y/o amperaje <strong>se han cambiado pero no guardado.</strong> Por favor, introduzca las fuentes correctas de medida y guardels antes de intentar calibrar.",
         "english": "<span class=\"message-negative\">Warning:</span> Voltage and/or current meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">Atención:</span> Los orígenes de los sensores de voltaje y/o corriente <strong>han cambiado pero no han sido salvados.</strong> Por favor configura los orígenes de los sensores correctamente y guárdalo antes de intentar calibrar.",
-            "english": "<span class=\"message-negative\">Warning:</span> Voltage and/or amperage meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate."
-        }
     },
     "powerCalibrationManagerConfirmationTitle": {
         "message": "Confirmación de Asistente de Calibración",
@@ -7031,13 +6920,8 @@
         "english": "New calibrated scales are shown here. <br>Applying them will set the scales but <strong>will not save them.</strong></br> <br>After saving make sure that the new voltage and current are correct.</br>"
     },
     "powerVoltageHead": {
-        "message": "Voltage Meters",
+        "message": "Medidores de Voltaje",
         "english": "Voltage Meters",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Medidor de Voltaje",
-            "english": "Voltage Meter"
-        }
     },
     "powerVoltageValue": {
         "message": "$1 V",
@@ -7048,7 +6932,7 @@
         "english": "Measured Voltage"
     },
     "powerVoltageCalibratedScale": {
-        "message": "Escala de Voltaje Calibrada:",
+        "message": "Escala calibrada de Voltaje:",
         "english": "Calibrated Voltage Scale:"
     },
     "powerVoltageId10": {
@@ -7058,152 +6942,110 @@
     "powerVoltageId20": {
         "message": "BEC",
         "english": "BEC",
-        "status": "Modified entry. Please translate!"
     },
     "powerVoltageId30": {
         "message": "5V",
         "english": "5V",
-        "status": "Modified entry. Please translate!"
     },
     "powerVoltageId40": {
         "message": "EXT",
         "english": "EXT",
-        "status": "Modified entry. Please translate!"
     },
     "powerVoltageId50": {
         "message": "MCU",
         "english": "MCU",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "ESC Combinado",
-            "english": "ESC Combined"
-        }
     },
     "powerVoltageId100": {
         "message": "ESC Combinado",
         "english": "ESC Combined",
-        "status": "Reused translation. Please check!"
     },
     "powerVoltageId101": {
         "message": "ESC 1",
         "english": "ESC 1",
-        "status": "New entry. Please translate!"
     },
     "powerVoltageId102": {
         "message": "ESC 2",
         "english": "ESC 2",
-        "status": "New entry. Please translate!"
     },
     "powerVoltageId103": {
         "message": "ESC 3",
         "english": "ESC 3",
-        "status": "New entry. Please translate!"
     },
     "powerVoltageId104": {
         "message": "ESC 4",
         "english": "ESC 4",
-        "status": "New entry. Please translate!"
     },
     "powerVoltageId200": {
         "message": "Celda 1",
         "english": "Cell 1",
-        "status": "Reused translation. Please check!"
     },
     "powerVoltageId201": {
         "message": "Celda 2",
         "english": "Cell 2",
-        "status": "Reused translation. Please check!"
     },
     "powerVoltageId202": {
         "message": "Celda 3",
         "english": "Cell 3",
-        "status": "Reused translation. Please check!"
     },
     "powerVoltageId203": {
         "message": "Celda 4",
         "english": "Cell 4",
-        "status": "Reused translation. Please check!"
     },
     "powerVoltageId204": {
         "message": "Celda 5",
         "english": "Cell 5",
-        "status": "Reused translation. Please check!"
     },
     "powerVoltageId205": {
         "message": "Celda 6",
         "english": "Cell 6",
-        "status": "Reused translation. Please check!"
     },
     "powerVoltageId206": {
         "message": "Cell 7",
         "english": "Cell 7",
-        "status": "New entry. Please translate!"
     },
     "powerVoltageId207": {
         "message": "Cell 8",
         "english": "Cell 8",
-        "status": "New entry. Please translate!"
     },
     "powerVoltageId208": {
         "message": "Cell 9",
         "english": "Cell 9",
-        "status": "New entry. Please translate!"
     },
     "powerVoltageId209": {
         "message": "Cell 10",
         "english": "Cell 10",
-        "status": "New entry. Please translate!"
     },
     "powerVoltageId210": {
         "message": "Cell 11",
         "english": "Cell 11",
-        "status": "New entry. Please translate!"
     },
     "powerVoltageId211": {
         "message": "Cell 12",
         "english": "Cell 12",
-        "status": "New entry. Please translate!"
     },
     "powerVoltageId212": {
         "message": "Cell 13",
         "english": "Cell 13",
-        "status": "New entry. Please translate!"
     },
     "powerVoltageId214": {
         "message": "Cell 14",
         "english": "Cell 14",
-        "status": "New entry. Please translate!"
     },
     "powerVoltageScale": {
         "message": "Escala",
         "english": "Scale"
     },
     "powerVoltageDivider": {
-        "message": "Divider",
+        "message": "Divisor",
         "english": "Divider",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Valor Divisor",
-            "english": "Divider Value"
-        }
     },
     "powerVoltageMultiplier": {
-        "message": "Multiplier",
+        "message": "Multiplicador",
         "english": "Multiplier",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Valor Multiplicador",
-            "english": "Multiplier Value"
-        }
     },
     "powerAmperageHead": {
-        "message": "Current Meters",
+        "message": "Medidores de amperaje",
         "english": "Current Meters",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Medidor de Amperaje",
-            "english": "Amperage Meter"
-        }
     },
     "powerAmperageValue": {
         "message": "$1 A",
@@ -7216,27 +7058,22 @@
     "powerAmperageId100": {
         "message": "ESC Combinado",
         "english": "ESC Combined",
-        "status": "Reused translation. Please check!"
     },
     "powerAmperageId101": {
         "message": "ESC 1",
         "english": "ESC 1",
-        "status": "New entry. Please translate!"
     },
     "powerAmperageId102": {
         "message": "ESC 2",
         "english": "ESC 2",
-        "status": "New entry. Please translate!"
     },
     "powerAmperageId103": {
         "message": "ESC 3",
         "english": "ESC 3",
-        "status": "New entry. Please translate!"
     },
     "powerAmperageId104": {
         "message": "ESC 4",
         "english": "ESC 4",
-        "status": "New entry. Please translate!"
     },
     "powerMahValue": {
         "message": "$1 mAh",
@@ -7245,7 +7082,6 @@
     "powerChargeLevel": {
         "message": "$1 %",
         "english": "$1 %",
-        "status": "New entry. Please translate!"
     },
     "powerAmperageScale": {
         "message": "Escala [1/10 mV/A]",
@@ -7256,22 +7092,12 @@
         "english": "Offset [mA]"
     },
     "powerAmperageCalibration": {
-        "message": "Measured Current",
+        "message": "Amperaje Medido",
         "english": "Measured Current",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Corriente Medida",
-            "english": "Measured Amperage"
-        }
     },
     "powerAmperageCalibratedScale": {
-        "message": "Calibrated Current Scale:",
+        "message": "Escala calibrada de amperaje:",
         "english": "Calibrated Current Scale:",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Escala de Corriente Calibrada:",
-            "english": "Calibrated Amperage Scale:"
-        }
     },
     "powerBatteryHead": {
         "message": "Batería",
@@ -7302,39 +7128,27 @@
         "english": "mAh used"
     },
     "powerBatteryChargeLevel": {
-        "message": "Charge level",
+        "message": "Nivel de carga",
         "english": "Charge level",
-        "status": "New entry. Please translate!"
     },
     "powerBatteryAmperage": {
-        "message": "Current",
+        "message": "Amperaje",
         "english": "Current",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Amperaje",
-            "english": "Amperage"
-        }
     },
     "powerBatteryCapacity": {
-        "message": "Capacity [mAh]",
+        "message": "Capacidad [mAh]",
         "english": "Capacity [mAh]",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Capacidad (mAh)",
-            "english": "Capacity (mAh)"
-        }
     },
     "powerBatteryCellCount": {
-        "message": "Cell count",
+        "message": "Número de Celdas",
         "english": "Cell count",
-        "status": "New entry. Please translate!"
     },
     "osdSetupTitle": {
         "message": "OSD",
         "english": "OSD"
     },
     "osdSetupNoOsdChipDetectWarning": {
-        "message": "<span class=\"message-negative\"><b>ADVERTENCIA:</b></span> No se detectó ningún chip OSD. Algunos controladores de vuelo no alimentarán correctamente el chip OSD a menos que se conecte a la batería. Por favor, conecta la batería antes de conectar el USB (¡SIN HELICES!).",
+        "message": "<span class=\"message-negative\"><b>ADVERTENCIA:</b></span> No se detectó ningún chip OSD. Algunos controladores de vuelo no alimentarán correctamente el chip OSD a menos que se conecte a la batería. Por favor, conecte la batería antes de conectar el USB (¡SIN HELICES!).",
         "english": "<span class=\"message-negative\"><b>WARNING:</b></span> No OSD chip was detected. Some flight controllers will not properly power the OSD chip unless connected to battery power. Please connect the battery before connecting the USB (PROPS REMOVED!)."
     },
     "osdSetupPreviewHelp": {
@@ -7342,11 +7156,11 @@
         "english": "<strong>Note:</strong> OSD preview may not show the actual font that is installed on the flight controller. The layout of individual elements may look different when older versions of the firmware are used - please check the look through your goggles before flying."
     },
     "osdSetupUnsupportedNote1": {
-        "message": "Tu controlador de vuelo no está respondiendo a los comandos OSD. Esto probablemente significa que no tiene un OSD Betaflight integrado.",
+        "message": "Su controlador de vuelo no está respondiendo a los comandos OSD. Esto significa probablemente que no tiene un OSD Betaflight integrado.",
         "english": "Your flight controller isn't responding to OSD commands. This probably means that it does not have an integrated BetaFlight OSD."
     },
     "osdSetupUnsupportedNote2": {
-        "message": "Ten en cuenta que algunos controladores de vuelo tienen un <a href=\"https://www.youtube.com/watch?v=ikKH_6SQ-Tk\" target=\"_blank\" rel=\"noopener noreferrer\">MinimOSD</a> integrado que puede ser flasheado y configurado con <a href=\"https://github.com/ShikOfTheRa/scarab-osd/releases/latest\" target='_blank'>scarab-osd</a>, sin embargo el MinimOSD no puede ser configurado desde esta interfaz.",
+        "message": "Tenga en cuenta que algunos controladores de vuelo tienen un <a href=\"https://www.youtube.com/watch?v=ikKH_6SQ-Tk\" target=\"_blank\" rel=\"noopener noreferrer\">MinimOSD</a> integrado que puede ser flasheado y configurado con <a href=\"https://github.com/ShikOfTheRa/scarab-osd/releases/latest\" target='_blank'>scarab-osd</a>, sin embargo el MinimOSD no puede configurarse desde esta interfaz.",
         "english": "Note that some flight controllers have an onboard <a href=\"https://www.youtube.com/watch?v=ikKH_6SQ-Tk\" target=\"_blank\" rel=\"noopener noreferrer\">MinimOSD</a> that can be flashed and configured with <a href=\"https://github.com/ShikOfTheRa/scarab-osd/releases/latest\" target='_blank'>scarab-osd</a>, however the MinimOSD cannot be configured through this interface."
     },
     "osdSetupProfilesTitle": {
@@ -7369,7 +7183,7 @@
         "description": "Label of the selector for the OSD Profile in the preview. KEEP IT SHORT!!!"
     },
     "osdSetupPreviewForTitle": {
-        "message": "Cambiar aquí el perfil o la fuente NO cambiará el perfil o la fuente en el controlador de vuelo, sólo afecta a la ventana de vista previa. Si deseas cambiarlo, debes usar la opción '$t(osdSetupSelectedProfileTitle.message)' o el botón '$t(osdSetupFontManager.message)' respectivamente.",
+        "message": "Cambiar aquí el perfil o la fuente NO cambiará el perfil o la fuente en el controlador de vuelo, sólo afecta a la ventana de vista previa. Si desea cambiarlo, debe usar la opción '$t(osdSetupSelectedProfileTitle.message)' o el botón '$t(osdSetupFontManager.message)' respectivamente.",
         "english": "Changing here the profile or the font will NOT change the profile or the font in the flight controller, only affects the preview window. If you want to change it, you must use the '$t(osdSetupSelectedProfileTitle.message)' option or the '$t(osdSetupFontManager.message)' button respectively.",
         "description": "Help content for the OSD profile and font PREVIEW"
     },
@@ -7432,7 +7246,7 @@
         "description": "Option for the units system used in the OSD"
     },
     "osdSetupTimersTitle": {
-        "message": "Temporizadores",
+        "message": "Cronómetros",
         "english": "Timers"
     },
     "osdSetupAlarmsTitle": {
@@ -7481,7 +7295,7 @@
         "english": "Boot logo:"
     },
     "osdSetupCustomLogoOpenImageButton": {
-        "message": "Seleccionar imagen personalizada&hellip;",
+        "message": "Seleccionar imagen personalizada image&hellip;",
         "english": "Select custom image&hellip;"
     },
     "osdSetupCustomLogoInfoTitle": {
@@ -7493,11 +7307,11 @@
         "english": "Size must be $t(logoWidthPx)×$t(logoHeightPx) pixels"
     },
     "osdSetupCustomLogoInfoColorMap": {
-        "message": "Debe contener píxeles verdes, blancos y negros",
+        "message": "Debe contener píxeles verdes, negros y blancos",
         "english": "Must contain green, black and white pixels"
     },
     "osdSetupCustomLogoInfoUploadHint": {
-        "message": "Pulse <b>$t(osdSetupUploadFont.message)</b> para persistir logo personalizado",
+        "message": "Pulse <b>$t(osdSetupUploadFont.message)</b> para logo persistente personalizado",
         "english": "Click <b>$t(osdSetupUploadFont.message)</b> to persist custom logo"
     },
     "osdSetupCustomLogoImageSizeError": {
@@ -7558,7 +7372,7 @@
         "english": "Instantaneous main battery voltage (flashes when below alarm threshold)"
     },
     "osdTextElementRssiValue": {
-        "message": "RSSI: valor",
+        "message": "Valor RSSI",
         "english": "RSSI value",
         "description": "One of the elements of the OSD"
     },
@@ -7567,16 +7381,16 @@
         "english": "Instantaneous RSSI value (flashes when below alarm threshold)"
     },
     "osdTextElementTimer": {
-        "message": "Temporizador",
+        "message": "Cronómetro",
         "english": "Timer",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementTimer": {
-        "message": "Un temporizador de vuelo",
+        "message": "Un crono de vuelo",
         "english": "A flight timer"
     },
     "osdTextElementThrottlePosition": {
-        "message": "Acelerador: posición",
+        "message": "Posición del Acelerador",
         "english": "Throttle position",
         "description": "One of the elements of the OSD"
     },
@@ -7585,7 +7399,7 @@
         "english": "Current throttle channel value"
     },
     "osdTextElementCpuLoad": {
-        "message": "CPU: carga",
+        "message": "Carga de CPU",
         "english": "CPU load",
         "description": "One of the elements of the OSD"
     },
@@ -7594,7 +7408,7 @@
         "english": "Current CPU load"
     },
     "osdTextElementVtxChannel": {
-        "message": "VTX: canal",
+        "message": "Canal VTX",
         "english": "VTX channel",
         "description": "One of the elements of the OSD"
     },
@@ -7603,7 +7417,7 @@
         "english": "Current VTX channel and power"
     },
     "osdTextElementVoltageWarning": {
-        "message": "Batería: aviso de voltaje",
+        "message": "Aviso de voltaje de Batería",
         "english": "Battery voltage warning",
         "description": "One of the elements of the OSD"
     },
@@ -7657,12 +7471,12 @@
         "english": "Sidebars around artificial horizon indicator"
     },
     "osdTextElementCurrentDraw": {
-        "message": "Batería: corriente instantánea",
+        "message": "Batería: bajada de amperaje",
         "english": "Battery current draw",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCurrentDraw": {
-        "message": "Consumo instantáneo de corriente de la batería",
+        "message": "Bajada instantánea del amperaje de la batería",
         "english": "Instantaneous battery current draw"
     },
     "osdTextElementMahDrawn": {
@@ -7765,30 +7579,30 @@
         "english": "Debug variables"
     },
     "osdTextElementPIDRoll": {
-        "message": "PID: roll",
+        "message": "PID: Alabeo",
         "english": "PID roll",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementPIDRoll": {
-        "message": "Valores PID del eje roll",
+        "message": "Valores PID del eje Alabeo",
         "english": "Roll axis PID gains"
     },
     "osdTextElementPIDPitch": {
-        "message": "PID: pitch",
+        "message": "PID: paso",
         "english": "PID pitch",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementPIDPitch": {
-        "message": "Valores PID del eje pitch",
+        "message": "Valores PID del eje paso",
         "english": "Pitch axis PID gains"
     },
     "osdTextElementPIDYaw": {
-        "message": "PID: yaw",
+        "message": "PID: guiñada",
         "english": "PID yaw",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementPIDYaw": {
-        "message": "Valores PID del eje yaw",
+        "message": "Valores PID del eje guiñada",
         "english": "Yaw axis PID gains"
     },
     "osdTextElementPower": {
@@ -7828,21 +7642,21 @@
         "english": "Average cell voltage (main battery voltage / cell count)"
     },
     "osdTextElementPitchAngle": {
-        "message": "Ángulo: pitch",
+        "message": "Ángulo: paso",
         "english": "Angle: pitch",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementPitchAngle": {
-        "message": "Ángulo numérico del pitch en grados",
+        "message": "Ángulo numérico del paso en grados",
         "english": "Numerical pitch angle in degrees"
     },
     "osdTextElementRollAngle": {
-        "message": "Ángulo: roll",
+        "message": "Ángulo: Alabeo",
         "english": "Angle: roll",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementRollAngle": {
-        "message": "Ángulo numérico del roll en grados",
+        "message": "Ángulo numérico del alabeo en grados",
         "english": "Numerical roll angle in degrees"
     },
     "osdTextElementMainBattUsage": {
@@ -7855,7 +7669,7 @@
         "english": "Graphical representation of battery capacity usage"
     },
     "osdTextElementArmedTime": {
-        "message": "Temporizador: tiempo armado",
+        "message": "Crono: tiempo armado",
         "english": "Timer: armed time",
         "description": "One of the elements of the OSD"
     },
@@ -7936,18 +7750,13 @@
         "english": "RPM reported by ESC telemetry"
     },
     "osdTextElementRemaningTimeEstimate": {
-        "message": "Temporizador: tiempo restante estimado",
+        "message": "Crono: tiempo restante estimado",
         "english": "Timer: remaining time estimate",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementRemaningTimeEstimate": {
-        "message": "Estimate of flight time remaining",
+        "message": "Estimación de tiempo de vuelo remanente",
         "english": "Estimate of flight time remaining",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Tiempo estimado de vuelo restante",
-            "english": "Estimate of flight time remaning"
-        }
     },
     "osdTextElementRtcDateTime": {
         "message": "RTC: fecha y hora",
@@ -7955,7 +7764,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementRtcDateTime": {
-        "message": "Fecha / Hora en tiempo real",
+        "message": "Fecha / Hora del reloj de tiempo real",
         "english": "Real time clock date / time"
     },
     "osdTextElementAdjustmentRange": {
@@ -7964,25 +7773,25 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementAdjustmentRange": {
-        "message": "Rango y valor del elemento y ajuste activo actualmente",
+        "message": "Rango y valor del ajuste activo actualmente",
         "english": "Currently active adjustment range setting and value"
     },
     "osdTextElementTimer1": {
-        "message": "Temporizador: 1",
+        "message": "Crono: 1",
         "english": "Timer 1",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementTimer1": {
-        "message": "Muestra el valor del temporizador 1",
+        "message": "Muestra el valor del crono 1",
         "english": "Shows the value of timer 1"
     },
     "osdTextElementTimer2": {
-        "message": "Temporizador: 2",
+        "message": "Crono: 2",
         "english": "Timer 2",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementTimer2": {
-        "message": "Muestra el valor del temporizador 2",
+        "message": "Muestra el valor del crono 2",
         "english": "Shows the value of timer 2"
     },
     "osdTextElementCoreTemperature": {
@@ -8022,7 +7831,7 @@
         "english": "Shows a graph of the output of each motor"
     },
     "osdTextElementLogStatus": {
-        "message": "Caja negra: estado",
+        "message": "Caja negra: estado grabación",
         "english": "Blackbox log status",
         "description": "One of the elements of the OSD"
     },
@@ -8031,12 +7840,12 @@
         "english": "Blackbox number and warnings"
     },
     "osdTextElementFlipArrow": {
-        "message": "Boca abajo después de choque: flecha",
+        "message": "Boca arriba después de accidente: flecha",
         "english": "Flip after crash arrow",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementFlipArrow": {
-        "message": "Flecha que indica que lado tiene los motores arriba en modo tortuga",
+        "message": "Flecha que indica que lado tienen los motores arriba en modo tortuga",
         "english": "Arrow showing which side motors are up in turtle mode"
     },
     "osdTextElementLinkQuality": {
@@ -8157,7 +7966,7 @@
         "english": "Instantaneous battery consumption in mAh/distance.  (Requires valid GPS fix)"
     },
     "osdTextTotalFlights": {
-        "message": "Vuelo: número total",
+        "message": "Vuelos: número total",
         "english": "Total flights",
         "description": "One of the elements of the OSD"
     },
@@ -8211,12 +8020,12 @@
         "english": "Minimum recorded RSSI"
     },
     "osdTextStatMaxCurrent": {
-        "message": "Batería: corriente máxima",
+        "message": "Batería: consumo máximo sw amperaje",
         "english": "Battery current draw maximum",
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatMaxCurrent": {
-        "message": "Máxima corriente consumida registrada",
+        "message": "Máxim amperaje registrado",
         "english": "Maximum recorded current draw"
     },
     "osdTextStatUsedMah": {
@@ -8292,21 +8101,21 @@
         "english": "Log number for this flights Blackbox log"
     },
     "osdTextStatTimer1": {
-        "message": "Temporizador: 1",
+        "message": "Crono: 1",
         "english": "Timer 1",
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatTimer1": {
-        "message": "Valor del temporizador 1 en el momento del desarme",
+        "message": "Valor del crono 1 en el momento del desarme",
         "english": "Value of timer 1 at time of disarming"
     },
     "osdTextStatTimer2": {
-        "message": "Temporizador: 2",
+        "message": "Crono: 2",
         "english": "Timer 2",
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatTimer2": {
-        "message": "Valor del temporizador 2 en el momento del desarme",
+        "message": "Valor del crono 2 en el momento del desarme",
         "english": "Value of timer 2 at time of disarming"
     },
     "osdTextStatRtcDateTime": {
@@ -8351,7 +8160,7 @@
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatEscRpm": {
-        "message": "Máx. RPM ESC",
+        "message": "ESC: Máx. RPM",
         "english": "Max ESC RPM"
     },
     "osdTextStatMinLinkQuality": {
@@ -8443,7 +8252,7 @@
         "english": "Source:"
     },
     "osdTimerSourceTooltip": {
-        "message": "Elige el origen del temporizador, esto controla la duración/evento que este temporizador mide.",
+        "message": "Elija el origen del crono. Controla la duración/evento que este crono mide.",
         "english": "Select the timer source, this controls the duration/event that the timer measures"
     },
     "osdTimerSourceOptionOnTime": {
@@ -8471,7 +8280,7 @@
         "english": "Precision:"
     },
     "osdTimerPrecisionTooltip": {
-        "message": "Elige la precisión del temporizador, esto controla la precisión con la que el tiempo es reportado",
+        "message": "Elige la precisión del temporizador. Controla la precisión con la que el tiempo es reportado",
         "english": "Select the timer precision, this controls to what precision the time is reported in"
     },
     "osdTimerPrecisionOptionSecond": {
@@ -8545,7 +8354,7 @@
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningBatteryCritical": {
-        "message": "Alerta cuando el voltaje de la batería cae por debajo del voltaje por celda medio mínimo",
+        "message": "Alerta cuando el voltaje de la batería cae por debajo del voltaje medio mínimo por celda",
         "english": "Alerts when the battery voltage falls below the minimum average cell voltage"
     },
     "osdWarningTextVisualBeeper": {
@@ -8563,7 +8372,7 @@
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningCrashFlipMode": {
-        "message": "Avisa cuando el modo boca abajo después de choque está activado",
+        "message": "Avisa cuando el modo boca abajo después de un choque está activado",
         "english": "Warns when flip over after crash mode is activated"
     },
     "osdWarningTextEscFail": {
@@ -8576,7 +8385,7 @@
         "english": "Enumerates a list with the ESCs/motors that are failing (RPM or temperature are out of the configured threshold)"
     },
     "osdWarningTextCoreTemperature": {
-        "message": "CPU: temperatura del núcleo",
+        "message": "MPU: temperatura del núcleo",
         "english": "Core temperature",
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
@@ -8585,7 +8394,7 @@
         "english": "Warns when MCU core temperature exceeds a configured threshold"
     },
     "osdWarningTextRcSmoothingFailure": {
-        "message": "Suavizado RC: error",
+        "message": "Fallo del Suavizado RC",
         "english": "RC Smoothing failure",
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
@@ -8612,21 +8421,21 @@
         "english": "Warns when Launch Control mode is activated"
     },
     "osdWarningTextGpsRescueUnavailable": {
-        "message": "GPS Rescate: no disponible",
+        "message": "Rescate GPS no disponible",
         "english": "GPS Rescue unavailable",
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningGpsRescueUnavailable": {
-        "message": "Avisa cuando el GPS Rescate no está disponible y no puede ser activado",
+        "message": "Avisa cuando el Rescate GPS no está disponible y no puede ser activado",
         "english": "Warns when GPS Rescue is not available and cannot be activated"
     },
     "osdWarningTextGpsRescueDisabled": {
-        "message": "GPS Rescate: desactivado",
+        "message": "El modo GPS Rescate está configurado pero el número de satélites requeridos no se ha fijado"
         "english": "GPS Rescue disabled",
         "description": "One of the warnings that can be selected to be shown in the OSD"
     },
     "osdWarningGpsRescueDisabled": {
-        "message": "Avisa cuando el GPS Rescate está desactivado",
+        "message": "Avisa cuando el Rescate GPS está desactivado",
         "english": "Warns when GPS Rescue is disabled"
     },
     "osdWarningTextRSSI": {
@@ -8678,7 +8487,7 @@
         "english": "Enable or disable OSD elements."
     },
     "osdSectionHelpVideoMode": {
-        "message": "Ajusta el modo de vídeo esperado de la cámara (habitualmente puede dejarse como AUTO, si tienes problemas entonces ajusta el valor a la salida de tu cámara).",
+        "message": "Ajusta el modo de vídeo esperado de la cámara (habitualmente puede dejarse como AUTO, si tiene problemas entonces ajuste el valor a la salida de su cámara).",
         "english": "Set the expected video mode of the camera (typically this can be left on AUTO, if you have difficulties then set this to match the camera output)."
     },
     "osdSectionHelpUnits": {
@@ -8686,7 +8495,7 @@
         "english": "Sets the unit system used for numeric readouts."
     },
     "osdSectionHelpTimers": {
-        "message": "Configura temporizadores de vuelo.",
+        "message": "Configura cronos de vuelo.",
         "english": "Configure flight timers."
     },
     "osdSectionHelpAlarms": {
@@ -8706,7 +8515,7 @@
         "english": "OSD settings saved"
     },
     "osdWritePermissions": {
-        "message": "No tienes <span class=\"message-negative\">permisos de escritura</span> para este archivo",
+        "message": "No tiene <span class=\"message-negative\">permisos de escritura</span> para este archivo",
         "english": "You don't have <span class=\"message-negative\">write permissions</span> for this file"
     },
     "osdButtonSaved": {
@@ -8714,27 +8523,27 @@
         "english": "Saved"
     },
     "vtxHelp": {
-        "message": "Aquí puedes configurar los valores para tu Transmisor de Video (VTX). Puedes ver y cambiar los valores para la transmisión, incluyendo las Tablas VTX, si el controlador de vuelo y el VTX lo soportan.<br>Para configurar tu VTX sigue los siguientes pasos:<br>1. Ve a <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight/wiki/VTX-tables\">esta página</a>;<br>2. Encuentra el archivo de configuración VTX apropiado para tu país y tu modelo de VTX y descárgalo;<br>3. Pulsa abajo en '$t(vtxButtonLoadFile.message)', selecciona el archivo de configuración VTX, cárgalo;<br>4. Verifica que los ajustes son correctos;<br>5. Pulsa '$t(vtxButtonSave.message)' para almacenar los valores VTX en el controlador de vuelo.<br>6. Opcionalmente, pulsa '$t(vtxButtonSaveLua.message)' para guardar un archivo lua de configuración que puedes usar con los scripts lua de Betaflight (más información <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">aquí</a>.)",
+        "message": "Aquí puede configurar los valores para su Transmisor de Video (VTX). Puede ver y cambiar los valores para la transmisión, incluyendo las Tablas VTX, si el controlador de vuelo y el VTX lo soportan.<br>Para configurar su VTX siga los siguientes pasos:<br>1. Vaya a <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight/wiki/VTX-tables\">esta página</a>;<br>2. Encuentre el archivo de configuración VTX apropiado para su país y su modelo de VTX y descárguelo;<br>3. Pulse abajo en '$t(vtxButtonLoadFile.message)', seleccione el archivo de configuración VTX, cárguelo;<br>4. Verifique que los ajustes son correctos;<br>5. Pulse '$t(vtxButtonSave.message)' para almacenar los valores VTX en el controlador de vuelo.<br>6. Opcionalmente, pulse '$t(vtxButtonSaveLua.message)' para guardar un archivo lua de configuración que puede usar con los scripts lua de Betaflight (más información <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">aquí</a>.)",
         "english": "Here you can configure the values for your Video Transmitter (VTX). You can view and change the transmission values, including the VTX Tables, if the flight controller and the VTX support it.<br>To set up your VTX use the following steps:<br>1. Go to <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight/wiki/VTX-tables\">this</a> page;<br>2. Find the appropriate VTX configuration file for your country and your VTX model and download it;<br>3. Click '$t(vtxButtonLoadFile.message)' below, select the VTX configuration file, load it;<br>4. Verify that the settings are correct;<br>5. Click '$t(vtxButtonSave.message)' to store the VTX settings on the flight controller.<br>6. Optionally click '$t(vtxButtonSaveLua.message)' to save a lua configuration file you can use with the betaflight lua scripts (See more <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">here</a>.)",
         "description": "Introduction message in the VTX tab"
     },
     "vtxMessageNotSupported": {
-        "message": "<span class=\"message-negative\">Atención:</span> Tu VTX no está configurado o no está soportado. Por lo tanto no puedes modificar los valores del VTX desde aquí. Esto sólo sería posible si el controlador de vuelo está conectado al VTX usando algún tipo de protocolo como Tramp o SmartAudio y está correctamente configurado en la pestaña $t(tabPorts.message) si fuera necesario.",
+        "message": "<span class=\"message-negative\">Atención:</span> Su VTX no está configurado o no está soportado. Por lo tanto no puede modificar los valores del VTX desde aquí. Esto sólo sería posible si el controlador de vuelo está conectado al VTX usando algún tipo de protocolo como Tramp o SmartAudio y está correctamente configurado en la pestaña $t(tabPorts.message) si fuera necesario.",
         "english": "<span class=\"message-negative\">Attention:</span> Your VTX is not configured or not supported. So you can't modify the VTX values from here. This will only be possible if the flight controller is attached to the VTX using some protocol like Tramp or SmartAudio and is correctly configured in the $t(tabPorts.message) tab if needed.",
         "description": "Message to show when the VTX is not supported in the VTX tab"
     },
     "vtxMessageTableNotConfigured": {
-        "message": "<span class=\"message-negative\">Atención:</span> Necesitas configurar y guardar PRIMERO la Tabla VTX de abajo antes de que puedas hacer uso de los campos de $t(vtxSelectedMode.message).",
+        "message": "<span class=\"message-negative\">Atención:</span> Necesita configurar y guardar PRIMERO la Tabla VTX de abajo antes de que pueda hacer uso de los campos de $t(vtxSelectedMode.message).",
         "english": "<span class=\"message-negative\">Attention:</span> You need to configure and save FIRST the VTX Table at the bottom before you can make use of the $t(vtxSelectedMode.message) fields.",
         "description": "Message to show when the VTX is not supported in the VTX tab"
     },
     "vtxMessageFactoryBandsNotSupported": {
-        "message": "<span class=\"message-negative\">Atención:</span> El tipo de VTX seleccionado no es compatible con la configuración de 'fábrica' para las bandas, pero algunas de las bandas tienen esta configuración. Pulsa en '$t(vtxButtonSave.message)' para solucionar esto.",
+        "message": "<span class=\"message-negative\">Atención:</span> El tipo de VTX seleccionado no es compatible con la configuración de 'fábrica' para las bandas, pero algunas de las bandas tienen esta configuración. Pulse en '$t(vtxButtonSave.message)' para solucionar esto.",
         "english": "<span class=\"message-negative\">Attention:</span> The selected VTX type does not support the 'factory' setting for bands, but some of your bands have this setting. Click '$t(vtxButtonSave.message)' to fix this.",
         "description": "Message to show when the configured VTX type does not support factory bands, but one or more of the configured bands are of this type"
     },
     "vtxMessageVerifyTable": {
-        "message": "<span class=\"message-negative\">Atención:</span> Los valores de la tabla VTX han sido cargados, pero aún no se han enviado al controlador de vuelo. Debes verificar y modificar los valores para asegurarte de que son válidos y legales en tu país y luego pulsar el botón $t(vtxButtonSave.message) para enviarlos en el controlador de vuelo.",
+        "message": "<span class=\"message-negative\">Atención:</span> Los valores de la tabla VTX han sido cargados, pero aún no se han enviado al controlador de vuelo. Debe verificar y modificar los valores para asegurarse de que son válidos y legales en su país y luego pulsar el botón $t(vtxButtonSave.message) para almacenarlos en el controlador de vuelo.",
         "english": "<span class=\"message-negative\">Attention:</span> The values of the VTX Table have been loaded, but not yet stored on the flight controller. You must verify and modify the values to be sure that they are valid and legal in your country and then press the $t(vtxButtonSave.message) button to store them on the flight controller.",
         "description": "Message to show when the VTX Table has been loaded from a external source"
     },
@@ -8744,7 +8553,7 @@
         "description": "Text of one of the fields of the VTX tab"
     },
     "vtxFrequencyChannelHelp": {
-        "message": "Si lo activas, la aplicación te permitirá seleccionar una frecuencia en lugar de la habitual banda/canal. Para que esto funcione tu VTX debe soportar esta funcionalidad.",
+        "message": "Si lo activa, la aplicación le permitirá seleccionar una frecuencia en lugar de la habitual banda/canal. Para que esto funcione su VTX debe soportar esta funcionalidad.",
         "english": "If you enable this, the Configurator will let you select a frequency in place of the habitual band/channel. For this to work your VTX must support this feature.",
         "description": "Help text for the frequency or channel select field of the VTX tab"
     },
@@ -8794,7 +8603,7 @@
         "description": "Text of one of the fields of the VTX tab"
     },
     "vtxBandHelp": {
-        "message": "Aquí puedes seleccionar la banda para tu VTX",
+        "message": "Aquí puede seleccionar la banda para su VTX",
         "english": "You can select here the band for your VTX",
         "description": "Help text for the band field of the VTX tab"
     },
@@ -8834,7 +8643,7 @@
         "description": "Text of one of the fields of the VTX tab"
     },
     "vtxChannelHelp": {
-        "message": "Aquí puedes seleccionar el canal para tu VTX",
+        "message": "Aquí puede seleccionar el canal para su VTX",
         "english": "You can select here the channel for your VTX",
         "description": "Help text for the channel field of the VTX tab"
     },
@@ -8844,7 +8653,7 @@
         "description": "Text of one of the fields of the VTX tab"
     },
     "vtxFrequencyHelp": {
-        "message": "Aquí puedes seleccionar la frecuencia para tu VTX",
+        "message": "Aquí puede seleccionar la frecuencia para su VTX",
         "english": "You can select here the frequency for your VTX if it is supported",
         "description": "Help text for the frequency field of the VTX tab"
     },
@@ -8919,12 +8728,12 @@
         "description": "Text of one of the fields of the VTX Table element in the VTX tab"
     },
     "vtxTablePowerLevelsHelp": {
-        "message": "Esto define el número de niveles de potencia soportados por tu VTX",
+        "message": "Define el número de niveles de potencia soportados por su VTX",
         "english": "This defines the number of power levels supported by your VTX",
         "description": "Help for the number of power levels field of the VTX Table element in the VTX tab"
     },
     "vtxTablePowerLevelsTableHelp": {
-        "message": "Esta tabla representa los diferentes valores de potencia que pueden ser usados por el VTX. Están divididos en dos:<br><b>$t(vtxTablePowerLevelsValue.message):</b> cada nivel de potencia requiere un valor que define el fabricante del hardware. Pregunta a tu fabricante por el valor correcto o consulta la wiki de Betaflight sobre Tablas VTX para obtener algunos ejemplos.<br><b>$t(vtxTablePowerLevelsLabel.message):</b> puedes poner aquí la etiqueta que quieras para cada nivel de potencia. Pueden ser números (25, 200, 600, 1.2), letras (OFF, MIN, MAX) o una mezcla de ambos.<br /><br />Debes configurar <b>sólo</b> los niveles de potencia que son legales en tu país.",
+        "message": "Esta tabla representa los diferentes valores de potencia que pueden ser usados por el VTX. Están divididos en dos:<br><b>$t(vtxTablePowerLevelsValue.message):</b> cada nivel de potencia requiere un valor que define el fabricante del hardware. Pregunte a su fabricante por el valor correcto o consulte la wiki de Betaflight sobre Tablas VTX para obtener algunos ejemplos.<br><b>$t(vtxTablePowerLevelsLabel.message):</b> puede poner aquí la etiqueta que quiera para cada nivel de potencia. Pueden ser números (25, 200, 600, 1.2), letras (OFF, MIN, MAX) o una mezcla de ambos.<br /><br />Debe configurar <b>sólo</b> los niveles de potencia que son legales en su país.",
         "english": "This table represents the different values of power that can be used for the VTX. They are divided into two: <br><b>- $t(vtxTablePowerLevelsValue.message):</b> each power level requires a value that is defined by the hardware manufacturer. Ask your manufacturer for the correct value or consult the Betaflight wiki of VTX Tables to grab some samples. <br><b>- $t(vtxTablePowerLevelsLabel.message):</b> you can put here the label you want for each power level value. It can be numbers (25, 200, 600, 1.2), letters (OFF, MIN, MAX) or a mix of them. <br /><br />You must configure <b>only</b> the power levels that are legal at your country.",
         "description": "Help for the table of power levels (value-label) that appears in the VTX tab"
     },
@@ -8949,7 +8758,7 @@
         "description": "Text of one of the fields of the VTX Table element in the VTX tab"
     },
     "vtxTableBandsChannelsHelp": {
-        "message": "Esto define el número de bandas y el número de canales por banda que deseas para tu VTX.",
+        "message": "Define el número de bandas y el número de canales por banda que desea para su VTX.",
         "english": "This defines the number of bands and the number of channels by band that you want for your VTX.",
         "description": "Help for the number of bands and channels field of the VTX Table element in the VTX tab"
     },
@@ -8964,12 +8773,12 @@
         "description": "Text of one of the titles of the VTX Table element in the VTX tab"
     },
     "vtxTableBandTitleFactory": {
-        "message": "Fábrica",
+        "message": "Fabricante",
         "english": "Factory",
         "description": "Text of one of the titles of the VTX Table element in the VTX tab"
     },
     "vtxTableBandsChannelsTableHelp": {
-        "message": "Esta tabla representa todas las frecuencias que pueden ser utilizadas por tu VTX. Puedes tener diferentes bandas y por cada banda debes configurar:<br><b>- $t(vtxTableBandTitleName.message):</b> Nombre que quieres asignar a esa banda, como BOSCAM_A, FATSHARK o RACEBAND.<br><b>- $t(vtxTableBandTitleLetter.message):</b> Letra corta que referencia a la banda.<br><b>- $t(vtxTableBandTitleFactory.message):</b> Esto indica que es una banda de fábrica. Si se activa Betaflight sólo envía al VTX una banda y un número de canal. El VTX usará su tabla de frecuencias preconfigurada y las frecuencias configuradas aquí sólo se utilizarán para mostrar el valor en el OSD y en otros lugares. Si no está activado, entonces Betaflight enviará al VTX la frecuencia real configurada aquí.<br><b>- Frecuencias:</b> Frecuencias para esta banda.<br /><br />Recuerda que no todas las frecuencias son legales en tu país. Debes poner un valor de <b>cero</b> en cada índice de frecuencia que no estés autorizado a utilizar para desactivarlo.",
+        "message": "Esta tabla representa todas las frecuencias que pueden ser utilizadas por su VTX. Puede tener diferentes bandas y por cada banda debe configurar:<br><b>- $t(vtxTableBandTitleName.message):</b> Nombre que quiere asignar a esa banda, como BOSCAM_A, FATSHARK o RACEBAND.<br><b>- $t(vtxTableBandTitleLetter.message):</b> Letra corta que referencia a la banda.<br><b>- $t(vtxTableBandTitleFactory.message):</b> Esto indica que es una banda de fábrica. Si se activa Betaflight sólo envía al VTX una banda y un número de canal. El VTX usará su tabla de frecuencias preconfigurada y las frecuencias configuradas aquí sólo se utilizarán para mostrar el valor en el OSD y en otros lugares. Si no está activado, entonces Betaflight enviará al VTX la frecuencia real configurada aquí.<br><b>- Frecuencias:</b> Frecuencias para esta banda.<br /><br />Recuerde que no todas las frecuencias son legales en su país. Debe poner un valor de <b>cero</b> en cada índice de frecuencia que no esté autorizado a utilizar para desactivarlo.",
         "english": "This table represents all the frequencies that can be used for your VTX. You can have several bands and for each band you must configure:<br><b>- $t(vtxTableBandTitleName.message):</b> Name that you want to assign to this band, like BOSCAM_A, FATSHARK or RACEBAND.<br><b>- $t(vtxTableBandTitleLetter.message):</b> Short letter that references the band.<br><b>- $t(vtxTableBandTitleFactory.message):</b> This indicates if it is a factory band. If enabled Betaflight sends to the VTX a band and channel number. The VTX will then use its built-in frequency table and the frequencies configured here are only to show the value in the OSD and other places. If it is not enabled, then Betaflight will send to the VTX the real frequency configured here.<br><b>- Frequencies:</b> Frequencies for this band.<br /><br />Remember that not all frequencies are legal at your country. You must put a value of <b>zero</b> to each frequency index that you are not allowed to use to disable it.",
         "description": "Help for the table of bands-channels that appears in the VTX tab"
     },
@@ -9014,15 +8823,8 @@
         "description": "Save Lua script button in the VTX tab"
     },
     "vtxLuaFileHelp": {
-        "message": "The '$t(vtxButtonSaveLua.message)' button will allow you to save a <i>craftname</i>.lua file containing the vtx table configuration that can be used with the betaflight lua scripts. (See more <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">here</a>.)",
+        "message": "El botón '$t(vtxButtonSaveLua.message)' le permitirá guardar un archivo Lua <i>craftname</i>. conteniendo la configuración de la tabla vtx que puede usarse con los scrpts lua de betaflight. (Vea más <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">aquí</a>.)",
         "english": "The '$t(vtxButtonSaveLua.message)' button will allow you to save a <i>craftname</i>.lua file containing the vtx table configuration that can be used with the betaflight lua scripts. (See more <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">here</a>.)",
-        "status": "Modified entry. Please translate!",
-        "description": "Tooltip message for the Save Lua script button in the VTX tab",
-        "previous": {
-            "message": "El botón '$t(vtxButtonSaveLua.message)' te permitirá guardar un archivo <i>mcuid</i>.lua que contiene la configuración de la tabla VTX que puede ser usada con los <a href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight TX Lua Scripts</a>.<br><br>A partir de la versión 1.6.0 se puede usar el archivo tal cual, pero para versiones anteriores de los scripts debería ser renombrado para que coincida con el nombre del modelo en el TX.",
-            "english": "The '$t(vtxButtonSaveLua.message)' button will allow you to save a <i>mcuid</i>.lua file containing the VTX table configuration that can be used with the <a href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight TX Lua Scripts</a>.<br><br>Version 1.6.0 and above can use the file as is, but for older versions of the scripts it should be renamed to match the modelname on the TX.",
-            "description": "Tooltip message for the Save Lua script button in the VTX tab"
-        }
     },
     "vtxButtonLoadFile": {
         "message": "Cargar desde archivo",
@@ -9070,7 +8872,7 @@
         "english": "PID loop frequency"
     },
     "configurationPidProcessDenomHelp": {
-        "message": "La frecuenci máxima para el ciclo del PID está limitada por la potencia de proceso de la CPU. La carga del Realtime no debería exceder el 70% con la velocidad de ciclo seleccionada.",
+        "message": "La frecuencia máxima para el ciclo del PID está limitada por la potencia de proceso de la CPU. La carga del Realtime no debería exceder el 70% con la velocidad de ciclo seleccionada.",
         "english": "The maximum frequency for the PID loop is limited by the CPU processing power. The Realtime Load should not exceed 70% with the selected loop speed.",
     },
     "configurationGyroUse32kHz": {
@@ -9086,28 +8888,25 @@
         "english": "Accelerometer"
     },
     "configurationAccHardwareHelp": {
-        "message": "Enables the Accelerometer. This is required for all stabilisation modes: Angle, Horizon, Acro Trainer and Rescue.",
+        "message": "Activa el Acelerómetro. Requerido para todos los modos de estabilización: Ángulo, Horizon, Entrenador Acro y Rescate.",
         "english": "Enables the Accelerometer. This is required for all stabilisation modes: Angle, Horizon, Acro Trainer and Rescue.",
-        "status": "New entry. Please translate!"
     },
     "configurationBaroHardware": {
         "message": "Barómetro",
         "english": "Barometer",
     },
     "configurationBaroHardwareHelp": {
-        "message": "Enables the Barometer (if available). Altitude is currently not used in Flight Control. It is informative only, available via the Telemetry.",
+        "message": "Activa el barómetro (si disponible). La Altitud no se usa actualmente en el Control del Vuelo. Es sólo informativa, disponible vía telemetría.",
         "english": "Enables the Barometer (if available). Altitude is currently not used in Flight Control. It is informative only, available via the Telemetry.",
-        "status": "New entry. Please translate!"
     },
     "configurationMagHardware": {
-        "message": "Magnetómeter",
+        "message": "Magnetómetro",
         "english": "Magnetometer",
         }
     },
     "configurationMagHardwareHelp": {
-        "message": "Enables the Magnetometer (if available). Compass direction is currently not used in Flight Control. It is informative only, available via the Telemetry.",
+        "message": "Activa Magnetómetro (Si disponible). La dirección de brújula no se usa actualmente en el control de vuelo. Es sólo informativa, disponible vía Telemetrí.",
         "english": "Enables the Magnetometer (if available). Compass direction is currently not used in Flight Control. It is informative only, available via the Telemetry.",
-        "status": "New entry. Please translate!"
     },
     "configurationPersonalization": {
         "message": "Personalización",
@@ -9122,9 +8921,8 @@
         "english": "Logging mode",
     },
     "blackboxModeHelp": {
-        "message": "<strong>OFF:</strong> Disable logging.<br><br><strong>NORMAL:</strong> Enable logging when both ARMED and BLACKBOX switch are active.<br><br><strong>ARMED:</strong> Enable logging when ARMED.<br><br><strong>SWITCH:</strong> Enable logging when BLACKBOX switch is active.",
+        "message": "<strong>OFF:</strong> Deshabilita los registros.<br><br><strong>NORMAL:</strong> Activa el registr0 vcuando se está ARMADO y el interruptor de la CAJA NEGRA se ha activado.<br><br><strong>ARMED:</strong> Habilita el registro cuando ARMADO.<br><br><strong>SWITCH:</strong> Habilita el registro cuando el interruptor de la CAJA NEGRA se ha activado.",
         "english": "<strong>OFF:</strong> Disable logging.<br><br><strong>NORMAL:</strong> Enable logging when both ARMED and BLACKBOX switch are active.<br><br><strong>ARMED:</strong> Enable logging when ARMED.<br><br><strong>SWITCH:</strong> Enable logging when BLACKBOX switch is active.",
-        "status": "New entry. Please translate!"
     },
     "blackboxModeOff": {
         "message": "Apagado",
@@ -9147,18 +8945,16 @@
         "english": "Logging device",
     },
     "blackboxDeviceHelp": {
-        "message": "<strong>No Logging:</strong> Disable logging.<br><br><strong>Onboard Flash:</strong> Log to the onboard flash chip (if available).<br><br><strong>SD Card:</strong> Log to the onboard SD card (if available).<br><br><strong>Serial Port:</strong> Log to an external logger device (e.g OpenLager) connected to a serial port. The serial port must to be configured to 'Blackbox Logging' on the <strong>Configuration</strong> tab.",
+        "message": "<strong>Sin registro:</strong> Desactiva el registro.<br><br><strong>Flash de a bordo:</strong> Registra en el chip de memoria de a bordo (si disponible).<br><br><strong>SD Card:</strong> Registra en la tarjeta SD de a bordo (si disponible).<br><br><strong>Puerto serie:</strong> Registra en un grabador conectado a puerto serie externo (i.e OpenLager). El puerto serie debe configurarse como 'Registro de caja negra' en la <strong>pestaña de Configuración</strong>.",
         "english": "<strong>No Logging:</strong> Disable logging.<br><br><strong>Onboard Flash:</strong> Log to the onboard flash chip (if available).<br><br><strong>SD Card:</strong> Log to the onboard SD card (if available).<br><br><strong>Serial Port:</strong> Log to an external logger device (e.g OpenLager) connected to a serial port. The serial port must to be configured to 'Blackbox Logging' on the <strong>Configuration</strong> tab.",
-        "status": "New entry. Please translate!"
     },
     "blackboxRateOfLogging": {
         "message": "Rate de registro",
         "english": "Logging rate",
     },
     "blackboxRateOfLoggingHelp": {
-        "message": "The log data is saved to the log device with this rate. For logging to an external device, lower speed may be required.",
+        "message": "Los datos registrados se guardan en un dispositivo de registro con este régimen. Para registro en dispositivos externos, pueden ser necesarias velocidades más bajas.",
         "english": "The log data is saved to the log device with this rate. For logging to an external device, lower speed may be required.",
-        "status": "New entry. Please translate!"
     },
     "blackboxRateCustom": {
         "message": "Personalizado",
@@ -9345,7 +9141,7 @@
         "english": "Rates type change"
     },
     "dialogRatesTypeNote": {
-        "message": "<span class=\"message-negative\"><b>ATENCIÓN: Estás cambiando el tipo de tasas.</b></span>Si cambias el tipo de tasas tus tasas se resetearán a una curva por defecto.",
+        "message": "<span class=\"message-negative\"><b>ATENCIÓN: Está cambiando el tipo de tasas.</b></span>Si cambia esto sus tasas se resetearán a una curva por defecto.",
         "english": "<span class=\"message-negative\"><b>WARNING: You are changing the rates type.</b></span> If you change the rates type your rates will be set to a default curve."
     },
     "dialogRatesTypeConfirm": {
@@ -9407,15 +9203,15 @@
         "english": "Incompatible webview"
     },
     "cordovaWebviewTroubleshootingMsg": {
-        "message": "Debes actualizar el webview de tu dispositivo para poder usar el configurador.",
+        "message": "Debe actualizar el webview de su dispositivo para poder usar el configurador.",
         "english": "You must update your device's webview in order to use the configurator."
     },
     "cordovaWebviewTroubleshootingMsg2": {
-        "message": "La siguiente herramienta está diseñada para ayudarte a instalar un nuevo webview o a actualizar el webview ya instalado.",
+        "message": "La siguiente herramienta está diseñada para ayudarle a instalar un nuevo webview o a actualizar el webview ya instalado.",
         "english": "The tool below is intended to help you to install a new webview or to update an already installed webview."
     },
     "cordovaAvailableWebviews": {
-        "message": "Aplicaciones webview disponibles en tu dispositivo",
+        "message": "Aplicaciones webview disponibles en su dispositivo",
         "english": "Available webview applications on your device"
     },
     "cordovaWebviewInstall": {
@@ -9427,7 +9223,7 @@
         "english": "Install from the Google Play Store"
     },
     "cordovaWebviewUninstall": {
-        "message": "Desinstalar la aplicación <b>{{app}}</b> puede ayudar a solucionar este problema de compatibilidad. Si no eres capaz de desinstalarla, intenta desactivarla desde los ajustes de la aplicación.",
+        "message": "Desinstalar la aplicación <b>{{app}}</b> puede ayudar a solucionar este problema de compatibilidad. Si no es capaz de desinstalarla, intentaedesactivarla desde los ajustes de la aplicación.",
         "english": "Uninstalling the <b>{{app}}</b> app can resolve this compatibility issue. If you are not able to uninstall it, try to disable it from the settings app."
     },
     "cordovaWebviewUninstallBtn1": {
