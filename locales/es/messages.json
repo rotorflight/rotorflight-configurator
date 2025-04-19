@@ -5735,9 +5735,6 @@
     "profilesErrorDecayTime": {
         "message": "Tiempo de decaimiento [s]",
         "english": "Decay Time [s]",
-        "previous": {
-            "message": "Tiempo de Decaimiento",
-            "english": "Decay Time",
     },
     "profilesErrorDecayTimeCyclic": {
         "message": "Error del tiempo de decaimiento [s]",
