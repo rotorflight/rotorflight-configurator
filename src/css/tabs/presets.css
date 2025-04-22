@@ -668,6 +668,10 @@ html[data-theme="dark"] .tab-presets .ms-drop {
   background-repeat: no-repeat;
 }
 
+.preset_panel_category {
+  font-weight: bold;
+}
+
 .preset_panel_keywords_text {
   white-space: nowrap;
   overflow: hidden;
