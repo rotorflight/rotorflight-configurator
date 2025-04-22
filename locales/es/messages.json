@@ -30,7 +30,7 @@
         "description": "Roll axis in capital letters"
     },
     "axisPITCH": {
-        "message": "PASO",
+        "message": "CABECEO",
         "english": "PITCH",
         "description": "Pitch axis in capital letters"
     },
@@ -49,7 +49,7 @@
         "english": "Roll"
     },
     "titlePitch": {
-        "message": "Paso",
+        "message": "Cabeceo",
         "english": "Pitch"
     },
     "titleYaw": {
@@ -2404,7 +2404,7 @@
         "english": "Control (hi-res)"
     },
     "receiverTelemetrySensor_PITCH_CONTROL": {
-        "message": "Control Paso",
+        "message": "Control Cabeceo",
         "english": "Pitch Control"
     },
     "receiverTelemetrySensor_ROLL_CONTROL": {
@@ -2560,7 +2560,7 @@
         "english": "Attitude (hi-res)"
     },
     "receiverTelemetrySensor_ATTITUDE_PITCH": {
-        "message": "Actitud del Paso",
+        "message": "Actitud de Cabeceo",
         "english": "Attitude Pitch"
     },
     "receiverTelemetrySensor_ATTITUDE_ROLL": {
@@ -2957,7 +2957,7 @@
         "english": "Yaw Rate"
     },
     "adjustmentsFunctionPitchRCRate": {
-        "message": "Rate de Paso RC",
+        "message": "Rate de Cabeceo RC",
         "english": "Pitch RC Rate"
     },
     "adjustmentsFunctionRollRCRate": {
@@ -2969,7 +2969,7 @@
         "english": "Yaw RC Rate"
     },
     "adjustmentsFunctionPitchRCExpo": {
-        "message": "Paso RC Expo",
+        "message": "Cabeceo RC Expo",
         "english": "Pitch RC Expo"
     },
     "adjustmentsFunctionRollRCExpo": {
@@ -2981,19 +2981,19 @@
         "english": "Yaw RC Expo"
     },
     "adjustmentsFunctionPitchP": {
-        "message": "P-gain en Paso",
+        "message": "P-gain en Cabeceo",
         "english": "Pitch P-gain"
     },
     "adjustmentsFunctionPitchI": {
-        "message": "I-gain en Paso",
+        "message": "I-gain en Cabeceo",
         "english": "Pitch I-gain"
     },
     "adjustmentsFunctionPitchD": {
-        "message": "D-gain en Paso",
+        "message": "D-gain en Cabeceo",
         "english": "Pitch D-gain"
     },
     "adjustmentsFunctionPitchF": {
-        "message": "F-gain en Paso",
+        "message": "F-gain en Cabeceo",
         "english": "Pitch F-gain"
     },
     "adjustmentsFunctionRollP": {
@@ -3053,11 +3053,11 @@
         "english": "Yaw Collective Impulse FF Decay"
     },
     "adjustmentsFunctionPitchCollectiveFF": {
-        "message": "Precompensado del Paso del Colectivo",
+        "message": "Precompensado del Cabeceo del Colectivo",
         "english": "Pitch Collective Precomp"
     },
     "adjustmentsFunctionPitchGyroCutoff": {
-        "message": "Corte del Paso en el Giro",
+        "message": "Corte del Cabeceo en el Giro",
         "english": "Pitch Gyro Cutoff"
     },
     "adjustmentsFunctionRollGyroCutoff": {
@@ -3069,7 +3069,7 @@
         "english": "Yaw Gyro Cutoff"
     },
     "adjustmentsFunctionPitchDtermCutoff": {
-        "message": "Corte del Paso D-term",
+        "message": "Corte del Cabeceo D-term",
         "english": "Pitch D-term Cutoff"
     },
     "adjustmentsFunctionRollDtermCutoff": {
@@ -3149,7 +3149,7 @@
         "english": "Governor Collective Precomp"
     },
     "adjustmentsFunctionPitchB": {
-        "message": "Ganancia-B del Paso",
+        "message": "Ganancia-B del Cabeceo",
         "english": "Pitch B-gain"
     },
     "adjustmentsFunctionRollB": {
@@ -3161,7 +3161,7 @@
         "english": "Yaw B-gain"
     },
     "adjustmentsFunctionPitchO": {
-        "message": "Ganancia-O del Paso",
+        "message": "Ganancia-O del Cabeceo",
         "english": "Pitch O-gain"
     },
     "adjustmentsFunctionRollO": {
@@ -3181,7 +3181,7 @@
         "english": "Cross Coupling Cutoff"
     },
     "adjustmentsFunctionAccTrimPitch": {
-        "message": "Trimado del Paso en Acelerómetro",
+        "message": "Trimado del Cabeceo en Acelerómetro",
         "english": "Accelerometer Pitch Trim"
     },
     "adjustmentsFunctionAccTrimRoll": {
@@ -3189,7 +3189,7 @@
         "english": "Accelerometer Roll Trim"
     },
     "servoHelp": {
-        "message": "Servo 101<ul><li>Primera comprobación de las direcciones del servo. Compruebe los servos del cíclico aplicando algo de colectivo, por ejemplo. Revierta los servos si es necesario.</li><li>Nivele los brazos de los servos habilitando <i> sobrepasar el movimiento de los servos</i> ajustando <i>el centro</i>. El brazo del servo debería estar perpendicular al eje principal en esta position.</li><li>Ajuste <i>la escala</i> de froma que los ángulos sean correctos. Especifique un ángulo de 30& grados; para un servo en condiciones <i>de Override</i>. El servo debería ahora moverse hasta 30& grados;. Si se mueve menos, incremente la <i>escala</i> para ese servo. Si es más, disminuyalo.</li><li>Puede limitar o extender el rando de movimiento del servo movement adjustando el valor <i>Min</i> or <i>Máx</i>. Haga esto sólo si hay algún problema mecánico, como doblado del reenvío. Use laas mezclas para limitar el giro/paso/colectivo.</li></ul>",
+        "message": "Servo 101<ul><li>Primera comprobación de las direcciones del servo. Compruebe los servos del cíclico aplicando algo de colectivo, por ejemplo. Revierta los servos si es necesario.</li><li>Nivele los brazos de los servos habilitando <i> sobrepasar el movimiento de los servos</i> ajustando <i>el centro</i>. El brazo del servo debería estar perpendicular al eje principal en esta position.</li><li>Ajuste <i>la escala</i> de froma que los ángulos sean correctos. Especifique un ángulo de 30& grados; para un servo en condiciones <i>de Override</i>. El servo debería ahora moverse hasta 30& grados;. Si se mueve menos, incremente la <i>escala</i> para ese servo. Si es más, disminuyalo.</li><li>Puede limitar o extender el rando de movimiento del servo movement adjustando el valor <i>Min</i> or <i>Máx</i>. Haga esto sólo si hay algún problema mecánico, como doblado del reenvío. Use laas mezclas para limitar el giro/Cabeceo/colectivo.</li></ul>",
         "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
     },
     "servoConfiguration": {
@@ -3369,7 +3369,7 @@
         "english": "Swashplate Type"
     },
     "mixerSwashTypeHelp": {
-        "message": "<strong>None:</strong> La mezcla está inactiva. Las reglas personalizadas de las mezclas se deben ajustar en el CLI. <br><br><strong>Direct:</strong> Si no hay mezclas, los controles no se cambian al pasar por ellas para un mezclado externo.<br><br><strong>CCPM:</strong> Mezclas para el Paso de Cíclico-Colectivo. Para helicópteros con Paso-cíclico con tres servos en el plato cíclico, con ángulos de 120&deg;, 135&deg;, or 140&deg; .<br><br><strong>FPM:</strong> Mezclas de Paso Fixjo. Para helicópteros de Paso-Fijo con dos servos en el plato cíclico tendrán ángulos de 90&deg; sea en configuración L o V.",
+        "message": "<strong>None:</strong> La mezcla está inactiva. Las reglas personalizadas de las mezclas se deben ajustar en el CLI. <br><br><strong>Direct:</strong> Si no hay mezclas, los controles no se cambian al pasar por ellas para un mezclado externo.<br><br><strong>CCPM:</strong> Mezclas para el Cabeceo de Cíclico-Colectivo. Para helicópteros con Cabeceo-cíclico con tres servos en el plato cíclico, con ángulos de 120&deg;, 135&deg;, or 140&deg; .<br><br><strong>FPM:</strong> Mezclas de Cabeceo Fixjo. Para helicópteros de Paso-Fijo con dos servos en el plato cíclico tendrán ángulos de 90&deg; sea en configuración L o V.",
         "english": "<strong>None:</strong> The mixer is disabled. Custom mixing rules must be set in the CLI. <br><br><strong>Direct:</strong> No mixing, controls are passed through the mixer unchanged for external mixing.<br><br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For cyclic-pitch helicopters with three swashplate servos, at 120&deg;, 135&deg;, or 140&deg; angle.<br><br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos at 90&deg; angle, either in L or V configuration."
     },
     "mixerSwashType0": {
@@ -3501,7 +3501,7 @@
         "english": "Swashring"
     },
     "mixerSwashRingHelp": {
-        "message": "El swashring limita el ángulo máximo que el plato del cíclico puede alcanzar para prevenir excesos. Los ejes del Paso y alabeo deben configurarse individualmente (via entradas de mezclas y escalado) a los ángulos de paso deseados (sin excesos). Si de alguna manera se manda el máximo de Paso y Alabeo <strong>al mismo tiempo</strong>, el Swashplate deberá deflexionar a un águlo más alto que cada uno de los ejes individuales. Esto puede resultar que el plato del Cíclico se doble en el eje principal.<br><br>Incrementar el valor de Swashring limitará el ángulo máximo del plato cuando el Paso y el Alabeo sean máximos.",
+        "message": "El swashring limita el ángulo máximo que el plato del cíclico puede alcanzar para prevenir excesos. Los ejes del Cabeceo y alabeo deben configurarse individualmente (via entradas de mezclas y escalado) a los ángulos de Cabeceo deseados (sin excesos). Si de alguna manera se manda el máximo de Cabeceo y Alabeo <strong>al mismo tiempo</strong>, el Swashplate deberá deflexionar a un águlo más alto que cada uno de los ejes individuales. Esto puede resultar que el plato del Cíclico se doble en el eje principal.<br><br>Incrementar el valor de Swashring limitará el ángulo máximo del plato cuando el Cabeceo y el Alabeo sean máximos.",
         "english": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum."
     },
     "mixerSwashPhase": {
@@ -3517,7 +3517,7 @@
         "english": "Roll trim [%]"
     },
     "mixerSwashPitchTrim": {
-        "message": "Compensador de Paso [%]",
+        "message": "Compensador de Cabeceo [%]",
         "english": "Pitch trim [%]"
     },
     "mixerSwashCollectiveTrim": {
@@ -3613,7 +3613,7 @@
         "english": "Yaw center trim"
     },
     "mixerTailRotorCenterTrimHelp": {
-        "message": "Ajusta el trim del rotor de cola para conseguir cero en el paso de la palacon 0° de mezcla en override de guiñada.",
+        "message": "Ajusta el trim del rotor de cola para conseguir cero en el paso de la pala con 0° de mezcla en override de Dirección.",
         "english": "Set tail rotor trim to achieve zero blade pitch with 0° yaw mixer override."
     },
     "mixerTailMotorCenterTrim": {
@@ -3741,7 +3741,7 @@
         "english": "Roll"
     },
     "mixerInputStabilizedPitch": {
-        "message": "Paso",
+        "message": "Cabeceo",
         "english": "Pitch"
     },
     "mixerInputStabilizedYaw": {
@@ -3761,7 +3761,7 @@
         "english": "Commanded Roll"
     },
     "mixerInputRCCommandPitch": {
-        "message": "Paso mandado",
+        "message": "Cabeceo mandado",
         "english": "Commanded Pitch"
     },
     "mixerInputRCCommandYaw": {
@@ -3781,7 +3781,7 @@
         "english": "RC Channel Roll"
     },
     "mixerInputRCChannelPitch": {
-        "message": "Canal RC Paso",
+        "message": "Canal RC Cabeceo",
         "english": "RC Channel Pitch"
     },
     "mixerInputRCChannelYaw": {
@@ -4929,7 +4929,7 @@
         "english": "Select your board to see available online firmware releases - Select the correct firmware appropriate for your board."
     },
     "firmwareFlasherOnlineSelectBoardHint": {
-        "message": "El concepto de destinos unificados significa que el mismo archivo .hex del firmware se puede usar en todas las placasque usen el mismo MCU (G4, F4, F7, H7). Para hacer que tarjetas diferentes funcionen con el mismo firmware, un archivo separado se carga junto al firmware.<br>El Configurator soporta transparentemente esto con un sólo paso.",
+        "message": "El concepto de destinos unificados significa que el mismo archivo .hex del firmware se puede usar en todas las placasque usen el mismo MCU (G4, F4, F7, H7). Para hacer que tarjetas diferentes funcionen con el mismo firmware, un archivo separado se carga junto al firmware.<br>El Configurator soporta transparentemente esto con un paso instantáneo.",
         "english": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (G4, F4, F7, H7). To make the different boards work with the same firmware, a separate configuration file is flashed alongside the firmware.<br>The Configurator supports this transparently in one flashing step."
     },
     "firmwareFlasherOnlineSelectFirmwareVersionDescription": {
@@ -5537,7 +5537,7 @@
         "english": "Roll [A]"
     },
     "controlAxisPitch": {
-        "message": "Paso [E]",
+        "message": "Cabeceo [E]",
         "english": "Pitch [E]"
     },
     "controlAxisYaw": {
@@ -5693,7 +5693,7 @@
         "english": "Error Limit for Roll Axis [&deg;]"
     },
     "profilesErrorLimitPitch": {
-        "message": "Límite de Error para Eje de Paso [&deg;]",
+        "message": "Límite de Error para Eje de Cabeceo [&deg;]",
         "english": "Error Limit for Pitch Axis [&deg;]"
     },
     "profilesErrorLimitYaw": {
@@ -5709,11 +5709,11 @@
         "english": "HSI Offset Limit for Roll Axis [&deg;]"
     },
     "profilesOffsetLimitPitch": {
-        "message": "Límite desplazamiento HSI para eje Paso [&deg;]",
+        "message": "Límite desplazamiento HSI para eje Cabeceo [&deg;]",
         "english": "HSI Offset Limit for Pitch Axis [&deg;]"
     },
     "profilesOffsetGainHelp": {
-        "message": "Ganancia para el término desplazamiento integral de alta velocidad term (Integral para vuelo en alta velocidad) que estará solo activo aángulos grandes del colectivo. Este térmmino del ciclo de control proporciona estabilidad angular y control seguro cuando se eestá a alta velocidad, además de estabilidad en la actitud con grandes cambios del ángulo del Paso en el colectivo en el disco del rotor, que llevará a un picado rápido y cambios no deseados de actitud sin HSI. Valores demasiado bajos harán que el modelo se vuelva inestablea a grandes velocidades, además de reaccionar lentamente y efectuar grandes cambios de actitud cuando el paso del colectivo cambie. Valores demasiado grandess puede causar oscilaciones e imperdonables situaciones con ángulos de paso grandes en el colectivo. Para pruebas en la parte inferios del parámetro, vuele en líena recta <strong> A UNA ALTURA SEGURA</strong>, solo tire brevemente del colectivo en un margen negativo y observe la reacción del modelo. Si el modelo pica, incremente la ganancia del desplazamiento del HSI. Para probar la parte superior del parámetro, dé cortos golpes al elevador y al alerón en una subida vertical muy alta y observe el comportamiento del modelo. Si el modelo pendula, se tambalea o continua permanece inquietp después de soltar la palanca, disminuya la ganancia del desplazamiento del HSI.",
+        "message": "Ganancia para el término desplazamiento integral de alta velocidad term (Integral para vuelo en alta velocidad) que estará solo activo aángulos grandes del colectivo. Este térmmino del ciclo de control proporciona estabilidad angular y control seguro cuando se eestá a alta velocidad, además de estabilidad en la actitud con grandes cambios del ángulo del Paso en el colectivo y cabeceo en el disco del rotor, que llevará a un picado rápido y cambios no deseados de actitud sin HSI. Valores demasiado bajos harán que el modelo se vuelva inestablea a grandes velocidades, además de reaccionar lentamente y efectuar grandes cambios de actitud cuando el Cabeceo del colectivo cambie. Valores demasiado grandess puede causar oscilaciones e imperdonables situaciones con ángulos de grandes de Cabeceo en el colectivo. Para pruebas en la parte inferios del parámetro, vuele en líena recta <strong> A UNA ALTURA SEGURA</strong>, solo tire brevemente del colectivo en un margen negativo y observe la reacción del modelo. Si el modelo pica, incremente la ganancia del desplazamiento del HSI. Para probar la parte superior del parámetro, dé cortos golpes al elevador y al alerón en una subida vertical muy alta y observe el comportamiento del modelo. Si el modelo pendula, se tambalea o continua permanece inquietp después de soltar la palanca, disminuya la ganancia del desplazamiento del HSI.",
         "english": "Gain for the High Speed Integral Offset term (Integral for high speed flight), which is only active at large collective angles. This term of the control loop provides angular stability and safe control following at high speeds, as well as attitude stability on large changes of the collective pitch angle of the rotor disk, which would lead to rapid diving and unwanted attitude changes without HSI. Too low values cause the model to become unstable at high speeds, as well as slow reaction and large attitude changes on collective pitch changes. Too large values can cause oscillation and restlessness at large collective pitch angles. For testing of the lower bounds of the parameter, fly in a straight line <strong> AT SAFE ALTITUDE</strong>, only briefly pull the collective into the negative range and observe the model's reaction. Should the model dive, increase the HSI Offset Gain. For testing the upper bounds of the parameter, give short jabs of elevator and aileron in a high collective vertical climb and observe the model's behavior. If the model swings, wobbles or exerts restlessness after releasing the stick, decrease the HSI Offset Gain."
     },
     "profilesOffsetGainRoll": {
@@ -5721,7 +5721,7 @@
         "english": "HSI Offset Gain for Roll Axis"
     },
     "profilesOffsetGainPitch": {
-        "message": "Ganancia del desplazamiento del HSI para eje Paso",
+        "message": "Ganancia del desplazamiento del HSI para eje Cabeceo",
         "english": "HSI Offset Gain for Pitch Axis"
     },
     "profilesErrorDecayGround": {
@@ -5773,7 +5773,7 @@
         "english": "Piro Compensation"
     },
     "profilesErrorRotationHelp": {
-        "message": "Rota los términos de los errores en Alabeo y Paso alrededor de la Dirección cuando la aeronave rota. Mejora el piro control y ayuda al modelo a moverse en línea recta mientras hace piruetas.",
+        "message": "Rota los términos de los errores en Alabeo y Cabeceo alrededor de la Dirección cuando la aeronave rota. Mejora el piro control y ayuda al modelo a moverse en línea recta mientras hace piruetas.",
         "english": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This improves piro control and helps the model to travel in a straight line while pirouetting."
     },
     "profilesItermRelax": {
@@ -5789,7 +5789,7 @@
         "english": "I-term Relax Type"
     },
     "profilesItermRelaxTypeHelp": {
-        "message": "Elija los ejes en los que quiera activaralo. <br><strong>RP:</strong> Alabeo, Paso <br><strong>RPY:</strong> Alabeo, Paso, Guiñada.",
+        "message": "Elija los ejes en los que quiera activaralo. <br><strong>RP:</strong> Alabeo, Cabeceo <br><strong>RPY:</strong> Alabeo, Cabeceo, Dirección.",
         "english": "Choose the axes in which this is active. <br><strong>RP:</strong> Roll, Pitch <br><strong>RPY:</strong> Roll, Pitch, Yaw."
     },
     "profilesItermRelaxTypeOptionRP": {
@@ -5805,7 +5805,7 @@
         "english": "Cutoff Point for Roll"
     },
     "profilesItermRelaxCutoffPitch": {
-        "message": "Punto de corte para Paso",
+        "message": "Punto de corte para Cabeceo",
         "english": "Cutoff Point for Pitch"
     },
     "profilesItermRelaxCutoffYaw": {
@@ -5829,7 +5829,7 @@
         "english": "Roll Bandwidth"
     },
     "profilesGyroCutoffPitch": {
-        "message": "Ancho de banda en Paso",
+        "message": "Ancho de banda en Cabeceo",
         "english": "Pitch Bandwidth"
     },
     "profilesGyroCutoffYaw": {
@@ -5845,7 +5845,7 @@
         "english": "Roll D-term Cutoff"
     },
     "profilesDtermCutoffPitch": {
-        "message": "Frecuencia de corte D-term Paso",
+        "message": "Frecuencia de corte D-term Cabeceo",
         "english": "Pitch D-term Cutoff"
     },
     "profilesDtermCutoffYaw": {
@@ -5861,7 +5861,7 @@
         "english": "Roll B-term Cutoff"
     },
     "profilesBtermCutoffPitch": {
-        "message": "Frecuencia de corte B-term en Paso",
+        "message": "Frecuencia de corte B-term en Cabeceo",
         "english": "Pitch B-term Cutoff"
     },
     "profilesBtermCutoffYaw": {
@@ -5877,7 +5877,7 @@
         "english": "Acro Trainer gain"
     },
     "profilesAcroTrainerGainHelp": {
-        "message": "Ganancia entrenador Acro. El Modo de entrenamiento Acro no está autonivelado pero limita el ángulo máximo en Paso/Alabeo. Dtermina con cuanta agresividad el helicóptero se inclina de vuelta al ángulo máximo (si excedido) mientras se está en Modo Entrenador Acro.",
+        "message": "Ganancia entrenador Acro. El Modo de entrenamiento Acro no está autonivelado pero limita el ángulo máximo en Cabeceo/Alabeo. Dtermina con cuanta agresividad el helicóptero se inclina de vuelta al ángulo máximo (si excedido) mientras se está en Modo Entrenador Acro.",
         "english": "Acro Trainer gain. Acro trainer Mode is not self leveling but does limit the maximum pitch/roll angle. This determines how aggressively the helicopter tilts back to the maximum angle (if exceeded) while in Acro Trainer Mode"
     },
     "profilesAcroTrainerLimit": {
@@ -5885,7 +5885,7 @@
         "english": "Acro Trainer angle limit"
     },
     "profilesAcroTrainerLimitHelp": {
-        "message": "Límite del ángulo del entrenador Acro. El modo entrenador Acro no se auto nivela (como en los modos de Ángulo o Horizon); Sin embargo, también limita el ángulo máximo que el helicóptero tendrá en paso/alabeo",
+        "message": "Límite del ángulo del entrenador Acro. El modo entrenador Acro no se auto nivela (como en los modos de Ángulo o Horizon); Sin embargo, también limita el ángulo máximo que el helicóptero tendrá en Cabeceo/alabeo",
         "english": "Acro Trainer angle limit. Acro Trainer mode does not self level (like Angle or Horizon Modes); however, it does limit the maximum angle the helicopter will pitch/roll to"
     },
     "profilesAngleModeGain": {
@@ -5985,11 +5985,11 @@
         "english": "Decay time for collective impulse feedforward mixed into yaw"
     },
     "profilesPitchFFCollective": {
-        "message": "Compensación Colectivo a Paso",
+        "message": "Compensación Colectivo a Cabeceo",
         "english": "Collective to Pitch Compensation"
     },
     "profilesPitchFFCollectiveHelp": {
-        "message": "Compensación de la tendencia a aumentar el paso cuando se hacen movimientos en vaivén del colectivo.",
+        "message": "Compensación de la tendencia a aumentar el Cabeceo cuando se hacen movimientos en vaivén del colectivo.",
         "english": "Compensation for the pitching up tendency in collective pitch pumps."
     },
     "profilesPitchFFCollectiveGain": {
@@ -6013,7 +6013,7 @@
         "english": "Cross-Coupling Gain"
     },
     "profilesCyclicCrossCouplingGainHelp": {
-        "message": "Cantidad de compensación aplicada para desacoplar Paso-a-Alabeo.",
+        "message": "Cantidad de compensación aplicada para desacoplar Cabeceo-a-Alabeo.",
         "english": "Amount of compensation applied for Pitch-to-Roll decoupling."
     },
     "profilesCyclicCrossCouplingRatio": {
@@ -6021,7 +6021,7 @@
         "english": "Cross-Coupling Ratio [%]"
     },
     "profilesCyclicCrossCouplingRatioHelp": {
-        "message": "Cantidad de compensación necesaria de Alabeo-a-Paso, vs. Paso-a-Alabeo.",
+        "message": "Cantidad de compensación necesaria de Alabeo-a-Cabeceo, vs. Cabeceo-a-Alabeo.",
         "english": "Amount of Roll-to-Pitch compensation needed, vs. Pitch-to-Roll."
     },
     "profilesCyclicCrossCouplingCutoff": {
@@ -6077,7 +6077,7 @@
         "english": "Max Levelling Rate [&deg;/s]"
     },
     "profilesRescueMaxRateHelp": {
-        "message": "Limita el rate de Alabeo/Paso en rescate. Los helicópteros grandes pueden necesitar menores regímenes de rotación.",
+        "message": "Limita el rate de Alabeo/Cabeceo en rescate. Los helicópteros grandes pueden necesitar menores regímenes de rotación.",
         "english": "Limit rescue roll/pitch rate. Larger helicopters may need slower rotation rates."
     },
     "profilesRescueMaxAccel": {
@@ -6085,7 +6085,7 @@
         "english": "Max Leveling Acceleration [&deg;/s²]"
     },
     "profilesRescueMaxAccelHelp": {
-        "message": "Limita con cuanta rapidez el helicóptero acelera hacia un alabeo/paso. Los helicópteros grandes pueden necesitar aceleraciones más lentas.",
+        "message": "Limita con cuanta rapidez el helicóptero acelera hacia un alabeo/cabeceo. Los helicópteros grandes pueden necesitar aceleraciones más lentas.",
         "english": "Limit how fast the helicopter accelerates into a roll/pitch. Larger helicopters may need slower acceleration."
     },
     "profilesRescuePullupCollective": {
@@ -7585,12 +7585,12 @@
         "english": "Roll axis PID gains"
     },
     "osdTextElementPIDPitch": {
-        "message": "PID: paso",
+        "message": "PID: Cabeceo",
         "english": "PID pitch",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementPIDPitch": {
-        "message": "Valores PID del eje paso",
+        "message": "Valores PID del eje Cabeceo",
         "english": "Pitch axis PID gains"
     },
     "osdTextElementPIDYaw": {
@@ -7639,12 +7639,12 @@
         "english": "Average cell voltage (main battery voltage / cell count)"
     },
     "osdTextElementPitchAngle": {
-        "message": "Ángulo: paso",
+        "message": "Ángulo: Cabeceo",
         "english": "Angle: pitch",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementPitchAngle": {
-        "message": "Ángulo numérico del paso en grados",
+        "message": "Ángulo numérico del Cabeceo en grados",
         "english": "Numerical pitch angle in degrees"
     },
     "osdTextElementRollAngle": {
