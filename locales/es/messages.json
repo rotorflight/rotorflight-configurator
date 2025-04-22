@@ -227,7 +227,7 @@
         "description": "Change timeout on auto-connect and reboot so the bus has more time to initialize after being detected by the system"
     },
     "cordovaForceComputerUI": {
-        "message": "Usar interfaz del ordenador en lugar de la del teléfono",
+        "message": "Usar interfaz del PC en lugar de la del teléfono",
         "english": "Use computers interface instead of phones interface"
     },
     "sensorDataFlashNotFound": {
@@ -8997,7 +8997,7 @@
         "english": "Mass Storage Mode"
     },
     "blackboxMscNote": {
-        "message": "Reinicia en modo de <strong>dispositivo de almacenamiento masivo (MSC)</strong>. Una vez activado, la memoria integrada o la tarjeta SD de tu controlador de vuelo será reconocida como dispositivo de almacenamiento por tu ordenador, y te permitirá descargar tus archivos de registro. Expulsa y apaga y enciende de nuevo tu controlador de vuelo para abandonar el modo de dispositivo de almacenamiento masivo.",
+        "message": "Reinicia en modo de <strong>dispositivo de almacenamiento masivo (MSC)</strong>. Una vez activado, la memoria integrada o la tarjeta SD de tu controlador de vuelo será reconocida como dispositivo de almacenamiento por tu PC, y te permitirá descargar tus archivos de registro. Expulsa y apaga y enciende de nuevo tu controlador de vuelo para abandonar el modo de dispositivo de almacenamiento masivo.",
         "english": "Reboot into <strong>mass storage device (MSC)</strong> mode. Once activated, the onboard flash or SD card on your flight controller will be recognised as a storage device by your computer, and allow you to download your log files. Eject and power cycle your flight controller to leave mass storage device mode."
     },
     "blackboxRebootMscText": {
