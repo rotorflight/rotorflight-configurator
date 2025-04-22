@@ -35,7 +35,7 @@
         "description": "Pitch axis in capital letters"
     },
     "axisYAW": {
-        "message": "GUIÑADA",
+        "message": "DIRECCIÓN",
         "english": "YAW",
         "description": "Yaw axis in capital letters"
     },
@@ -53,7 +53,7 @@
         "english": "Pitch"
     },
     "titleYaw": {
-        "message": "Guiñada",
+        "message": "Dirección",
         "english": "Yaw"
     },
     "titleCollective": {
@@ -1460,7 +1460,7 @@
         "english": "Pitch Degrees"
     },
     "configurationBoardAlignmentYaw": {
-        "message": "Grados Guiñada",
+        "message": "Grados Dirección",
         "english": "Yaw Degrees"
     },
     "configurationSensorAlignmentGyro": {
@@ -2124,11 +2124,11 @@
         "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle."
     },
     "receiverYawDeadband": {
-        "message": "Banda muerta Guiñada",
+        "message": "Banda muerta Dirección",
         "english": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "Son los valores (en µs) en los que las entradas de la emisora se diferencian para que sean consideradas como fuera del cero. Pra transmisores con temblores en las salidas, este valor se puede incrementar si los valores de la radio vibran al ralentí. <strong>Este ajuste es sólo para Guiñada.</strong>",
+        "message": "Son los valores (en µs) en los que las entradas de la emisora se diferencian para que sean consideradas como fuera del cero. Pra transmisores con temblores en las salidas, este valor se puede incrementar si los valores de la radio vibran al ralentí. <strong>Este ajuste es sólo para Dirección.</strong>",
         "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
     },
     "receiverTelemetrySettings": {
@@ -2412,7 +2412,7 @@
         "english": "Roll Control"
     },
     "receiverTelemetrySensor_YAW_CONTROL": {
-        "message": "Control Guiñada",
+        "message": "Control Dirección",
         "english": "Yaw Control"
     },
     "receiverTelemetrySensor_COLLECTIVE_CONTROL": {
@@ -2568,7 +2568,7 @@
         "english": "Attitude Roll"
     },
     "receiverTelemetrySensor_ATTITUDE_YAW": {
-        "message": "Actitud Guiñada",
+        "message": "Actitud Dirección",
         "english": "Attitude Yaw"
     },
     "receiverTelemetrySensor_ACCEL": {
@@ -2953,7 +2953,7 @@
         "english": "Roll Rate"
     },
     "adjustmentsFunctionYawRate": {
-        "message": "Tasa de Guiñada",
+        "message": "Tasa de Dirección",
         "english": "Yaw Rate"
     },
     "adjustmentsFunctionPitchRCRate": {
@@ -2965,7 +2965,7 @@
         "english": "Roll RC Rate"
     },
     "adjustmentsFunctionYawRCRate": {
-        "message": "Rate de Guiñada RC",
+        "message": "Rate de Dirección RC",
         "english": "Yaw RC Rate"
     },
     "adjustmentsFunctionPitchRCExpo": {
@@ -3013,43 +3013,43 @@
         "english": "Roll F-gain"
     },
     "adjustmentsFunctionYawP": {
-        "message": "P-gain en Guiñada",
+        "message": "P-gain en Dirección",
         "english": "Yaw P-gain"
     },
     "adjustmentsFunctionYawI": {
-        "message": "I-gain en Guiñada",
+        "message": "I-gain en Dirección",
         "english": "Yaw I-gain"
     },
     "adjustmentsFunctionYawD": {
-        "message": "D-gain en Guiñada",
+        "message": "D-gain en Dirección",
         "english": "Yaw D-gain"
     },
     "adjustmentsFunctionYawF": {
-        "message": "F-gain en Guiñada",
+        "message": "F-gain en Dirección",
         "english": "Yaw F-gain"
     },
     "adjustmentsFunctionYawCWStopGain": {
-        "message": "Ganancia de paro en Guiñada sentido horario",
+        "message": "Ganancia de paro en Dirección sentido horario",
         "english": "Yaw CW Stop Gain"
     },
     "adjustmentsFunctionYawCCWStopGain": {
-        "message": "Ganancia de paro en Guiñada sentido anti-horario",
+        "message": "Ganancia de paro en Dirección sentido anti-horario",
         "english": "Yaw CCW Stop Gain"
     },
     "adjustmentsFunctionYawCyclicFF": {
-        "message": "Precompensado del Ciclico en Guiñada",
+        "message": "Precompensado del Ciclico en Dirección",
         "english": "Yaw Cyclic Precomp"
     },
     "adjustmentsFunctionYawCollectiveFF": {
-        "message": "Precompensado del Colectivo en Guiñada",
+        "message": "Precompensado del Colectivo en Dirección",
         "english": "Yaw Collective Precomp"
     },
     "adjustmentsFunctionYawCollectiveDyn": {
-        "message": "Impulso FF del Colectivo en Guiñada",
+        "message": "Impulso FF del Colectivo en Dirección",
         "english": "Yaw Collective Impulse FF"
     },
     "adjustmentsFunctionYawCollectiveDecay": {
-        "message": "Guiñada del Colectivo cuando el Impulso FF decae",
+        "message": "Dirección del Colectivo cuando el Impulso FF decae",
         "english": "Yaw Collective Impulse FF Decay"
     },
     "adjustmentsFunctionPitchCollectiveFF": {
@@ -3065,7 +3065,7 @@
         "english": "Roll Gyro Cutoff"
     },
     "adjustmentsFunctionYawGyroCutoff": {
-        "message": "Corte de Guiñada en el Giro",
+        "message": "Corte de Dirección en el Giro",
         "english": "Yaw Gyro Cutoff"
     },
     "adjustmentsFunctionPitchDtermCutoff": {
@@ -3077,7 +3077,7 @@
         "english": "Roll D-term Cutoff"
     },
     "adjustmentsFunctionYawDtermCutoff": {
-        "message": "Corte de Guiñada D-term",
+        "message": "Corte de Dirección D-term",
         "english": "Yaw D-term Cutoff"
     },
     "adjustmentsFunctionRescueClimbCollective": {
@@ -3157,7 +3157,7 @@
         "english": "Roll B-gain"
     },
     "adjustmentsFunctionYawB": {
-        "message": "Ganancia-B en Guiñada",
+        "message": "Ganancia-B en Dirección",
         "english": "Yaw B-gain"
     },
     "adjustmentsFunctionPitchO": {
@@ -3341,7 +3341,7 @@
         "english": "<span class=\"message-negative\">Warning:</span> Some settings require System Reboot to take affect!"
     },
     "mixerMotorisedTailCalibrationNote": {
-        "message": "<span class=\"message-negative\">Aviso:</span> La calibración de Guiñada debe estar al 100% cuando se usa una cola motorizada. No cambie este valor a menos que sepa lo que está haciendo.",
+        "message": "<span class=\"message-negative\">Aviso:</span> La calibración de Dirección debe estar al 100% cuando se usa una cola motorizada. No cambie este valor a menos que sepa lo que está haciendo.",
         "english": "<span class=\"message-negative\">Warning:</span> Yaw calibration should be 100% when using a motorised tail. Do not change this value unless you know what you are doing."
     },
     "mixerMainRotorSettings": {
@@ -3537,7 +3537,7 @@
         "english": "Tail rotor type"
     },
     "mixerTailRotorModeHelp": {
-        "message": "<strong>Paso variable:</strong> Cola de paso variable controlada por un servo de cola (Servo#4). <br><strong>Motorizado:</strong> La cola tiene un motor separado (Motor#2) para controlar la guiñada.<br><strong>Bi-direccional:</strong> Colas motorizadas operando en modo bi-direccional (experimental).",
+        "message": "<strong>Paso variable:</strong> Cola de paso variable controlada por un servo de cola (Servo#4). <br><strong>Motorizado:</strong> La cola tiene un motor separado (Motor#2) para controlar la Dirección.<br><strong>Bi-direccional:</strong> Colas motorizadas operando en modo bi-direccional (experimental).",
         "english": "<strong>Variable pitch:</strong> Variable pitch tail controlled by a tail servo (Servo#4). <br><strong>Motorised:</strong> The tail has a separate motor (Motor#2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode (experimental)."
     },
     "mixerTailVariablePitch": {
@@ -3553,51 +3553,51 @@
         "english": "Bidirectional"
     },
     "mixerTailRotorDirection": {
-        "message": "Control Dirección Guiñada",
+        "message": "Control sentido de la Dirección",
         "english": "Yaw Control Direction"
     },
     "mixerTailRotorDirectionHelp": {
-        "message": "Dependiendo dela dirección del rotor de cola y de la configuración ESC/servo, la direción de guiñada se puede invertir.",
+        "message": "Dependiendo dela dirección del rotor de cola y de la configuración ESC/servo, el sentido de la direción se puede invertir.",
         "english": "Depending on the tail rotor direction and ESC/servo configuration, the yaw direction may be reversed."
     },
     "mixerTailRotorCalibration": {
-        "message": "Calibración de Guiñada [%]",
+        "message": "Calibración de dirección [%]",
         "english": "Yaw calibration [%]"
     },
     "mixerTailRotorCalibrationHelp": {
-        "message": "Ajusta la ganancia de la guiñada para igualar la ganancia mecánica. Usualmente alrededor de 50-150% para servos de cola, pero puede ser totalmente distinto para colas con rotores motorizados.",
+        "message": "Ajusta la ganancia de la dirección para igualar la ganancia mecánica. Usualmente alrededor de 50-150% para servos de cola, pero puede ser totalmente distinto para colas con rotores motorizados.",
         "english": "Adjust the yaw gain to match the mechanical gain. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors."
     },
     "mixerTailRotorMinYaw": {
-        "message": "Límite ángulo Pala Guiñada horaria",
+        "message": "Límite ángulo Pala Dirección horaria",
         "english": "CW Yaw Blade Angle Limit"
     },
     "mixerTailRotorMinYawHelp": {
-        "message": "Un límite de ángulo Guiñada horaria.",
+        "message": "Un límite de ángulo Dirección horaria.",
         "english": "An angle limit for clockwise yaw."
     },
     "mixerTailRotorMaxYaw": {
-        "message": "Límite ángulo de pala Guiñada anti-horaria",
+        "message": "Límite ángulo de pala Dirección anti-horaria",
         "english": "CCW Yaw Blade Angle Limit"
     },
     "mixerTailRotorMaxYawHelp": {
-        "message": "Un límite de ángulo para Guiñada anti-horaria.",
+        "message": "Un límite de ángulo para  anti-horaria.",
         "english": "An angle limit for counter-clockwise yaw."
     },
     "mixerTailMotorMinYaw": {
-        "message": "Limite Guiñada horaria [%]",
+        "message": "Limite Dirección horaria [%]",
         "english": "CW yaw limit [%]"
     },
     "mixerTailMotorMinYawHelp": {
-        "message": "Un límite para Guiñada horaria.",
+        "message": "Un límite para Dirección horaria.",
         "english": "A limit for clockwise yaw."
     },
     "mixerTailMotorMaxYaw": {
-        "message": "Limite Guiñada anti-horaria [%]",
+        "message": "Limite Dirección anti-horaria [%]",
         "english": "CCW yaw limit [%]"
     },
     "mixerTailMotorMaxYawHelp": {
-        "message": "Un límite para Guiñada anti-horaria.",
+        "message": "Un límite para Dirección anti-horaria.",
         "english": "A limit for counter-clockwise yaw."
     },
     "mixerTailMotorIdle": {
@@ -3609,7 +3609,7 @@
         "english": "This is the minimum throttle signal sent to the tail motor. This should be set just high enough that the motor does not stop"
     },
     "mixerTailRotorCenterTrim": {
-        "message": "Trim de centro de Guiñada",
+        "message": "Trim de centro de Dirección",
         "english": "Yaw center trim"
     },
     "mixerTailRotorCenterTrimHelp": {
@@ -3617,11 +3617,11 @@
         "english": "Set tail rotor trim to achieve zero blade pitch with 0° yaw mixer override."
     },
     "mixerTailMotorCenterTrim": {
-        "message": "Desplazamiento del centro de Guiñada [%]",
+        "message": "Desplazamiento del centro de Dirección [%]",
         "english": "Yaw center offset [%]"
     },
     "mixerTailMotorCenterTrimHelp": {
-        "message": "Ajusta el valor de la palanca del motor de cola a cero de mando en guiñada.",
+        "message": "Ajusta el valor de la palanca del motor de cola a cero de mando en Dirección.",
         "english": "Set tail motor throttle value for zero yaw command."
     },
     "mixerSwashLinkTrim": {
@@ -3745,7 +3745,7 @@
         "english": "Pitch"
     },
     "mixerInputStabilizedYaw": {
-        "message": "Guiñada",
+        "message": "Dirección",
         "english": "Yaw"
     },
     "mixerInputStabilizedCollective": {
@@ -3765,7 +3765,7 @@
         "english": "Commanded Pitch"
     },
     "mixerInputRCCommandYaw": {
-        "message": "Guiñada mandada",
+        "message": "Dirección mandada",
         "english": "Commanded Yaw"
     },
     "mixerInputRCCommandCollective": {
@@ -3785,7 +3785,7 @@
         "english": "RC Channel Pitch"
     },
     "mixerInputRCChannelYaw": {
-        "message": "Canal RC Guiñada",
+        "message": "Canal RC Dirección",
         "english": "RC Channel Yaw"
     },
     "mixerInputRCChannelCollective": {
@@ -4421,11 +4421,11 @@
         "english": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%."
     },
     "govYawPrecomp": {
-        "message": "Precompensado de Guiñada",
+        "message": "Precompensado de ",
         "english": "Yaw precompensation"
     },
     "govYawPrecompHelp": {
-        "message": "Peso del precompensado de guiñada. Determina cuanta Guiñada se mezcla en el avance. Ayuda al governor a mintener proactivamente la velocidad de la cabez. Normalmente 20..100",
+        "message": "Peso del precompensado de Dirección. Determina cuanta Dirección se mezcla en el avance. Ayuda al governor a mintener proactivamente la velocidad de la cabez. Normalmente 20..100",
         "english": "Yaw precompensation weight. Determines how much Yaw is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
     "govCyclicPrecomp": {
@@ -4673,7 +4673,7 @@
         "english": "PID"
     },
     "blackboxLog_gyroraw": {
-        "message": "Guiñada del Giro",
+        "message": "Dirección del Giro",
         "english": "Raw Gyro"
     },
     "blackboxLog_gyro": {
@@ -5541,7 +5541,7 @@
         "english": "Pitch [E]"
     },
     "controlAxisYaw": {
-        "message": "Guiñada [R]",
+        "message": "Dirección [R]",
         "english": "Yaw [R]"
     },
     "controlAxisCollective": {
@@ -5697,7 +5697,7 @@
         "english": "Error Limit for Pitch Axis [&deg;]"
     },
     "profilesErrorLimitYaw": {
-        "message": "Límite de Error para Eje de Guiñada [&deg;]",
+        "message": "Límite de Error para Eje de  [&deg;]",
         "english": "Error Limit for Yaw Axis [&deg;]"
     },
     "profilesOffsetLimitHelp": {
@@ -5753,19 +5753,19 @@
         "english": "Maximum bleed-off speed for the accumulated cyclic error (I-term)."
     },
     "profilesErrorDecayTimeYaw": {
-        "message": "Error en el tiempo de Decaimiento en Guiñada [s]",
+        "message": "Error en el tiempo de Decaimiento en Dirección [s]",
         "english": "Error Decay time [s]"
     },
     "profilesErrorDecayTimeYawHelp": {
-        "message": "Tiempo constante para el sangrado del error acumulativo en guiñada (I-term).",
+        "message": "Tiempo constante para el sangrado del error acumulativo en Dirección (I-term).",
         "english": "Time constant for bleeding off the accumulated yaw error (I-term)."
     },
     "profilesErrorDecayLimitYaw": {
-        "message": "Máximo rate para Error de Decaimiento Guiñada [&deg;/s]",
+        "message": "Máximo rate para Error de Decaimiento Dirección [&deg;/s]",
         "english": "Error Decay maximum rate [&deg;/s]"
     },
     "profilesErrorDecayLimitYawHelp": {
-        "message": "Velocidad Máxima de sangrado para el error acumulado en Guiñada (I-term).",
+        "message": "Velocidad Máxima de sangrado para el error acumulado en Dirección (I-term).",
         "english": "Maximum bleed-off speed for the accumulated yaw error (I-term)."
     },
     "profilesErrorRotation": {
@@ -5773,7 +5773,7 @@
         "english": "Piro Compensation"
     },
     "profilesErrorRotationHelp": {
-        "message": "Rota los términos de los errores en Alabeo y Paso alrededor de la guiñada cuando la aeronave rota. Mejora el piro control y ayuda al modelo a moverse en línea recta mientras hace piruetas.",
+        "message": "Rota los términos de los errores en Alabeo y Paso alrededor de la Dirección cuando la aeronave rota. Mejora el piro control y ayuda al modelo a moverse en línea recta mientras hace piruetas.",
         "english": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This improves piro control and helps the model to travel in a straight line while pirouetting."
     },
     "profilesItermRelax": {
@@ -5809,7 +5809,7 @@
         "english": "Cutoff Point for Pitch"
     },
     "profilesItermRelaxCutoffYaw": {
-        "message": "Punto de corte para Guiñada",
+        "message": "Punto de corte para Dirección",
         "english": "Cutoff Point for Yaw"
     },
     "profilesItermRelaxCutoffHelp": {
@@ -5833,7 +5833,7 @@
         "english": "Pitch Bandwidth"
     },
     "profilesGyroCutoffYaw": {
-        "message": "Ancho de banda en Guiñada",
+        "message": "Ancho de banda en ",
         "english": "Yaw Bandwidth"
     },
     "profilesDtermCutoffHelp": {
@@ -5849,7 +5849,7 @@
         "english": "Pitch D-term Cutoff"
     },
     "profilesDtermCutoffYaw": {
-        "message": "Frecuencia de corte D-term Guiñada",
+        "message": "Frecuencia de corte D-term Dirección",
         "english": "Yaw D-term Cutoff"
     },
     "profilesBtermCutoffHelp": {
@@ -5865,7 +5865,7 @@
         "english": "Pitch B-term Cutoff"
     },
     "profilesBtermCutoffYaw": {
-        "message": "Frecuencia de corte B-term en Guiñada",
+        "message": "Frecuencia de corte B-term en Dirección",
         "english": "Yaw B-term Cutoff"
     },
     "profilesLevelingSettings": {
@@ -5929,7 +5929,7 @@
         "english": "Center Offset for tail motor or servo"
     },
     "profilesYawStopGainCW": {
-        "message": "Ganancia de paro guiñada horaria",
+        "message": "Ganancia de paro Dirección horaria",
         "english": "CW Yaw Stop Gain"
     },
     "profilesYawStopGainCWHelp": {
@@ -5937,7 +5937,7 @@
         "english": "Stop gain (PD) for clock-wise rotation. Typical range 50..200."
     },
     "profilesYawStopGainCCW": {
-        "message": "Ganancia de paro Guiñada anti-horaria",
+        "message": "Ganancia de paro Dirección anti-horaria",
         "english": "CCW Yaw Stop Gain"
     },
     "profilesYawStopGainCCWHelp": {
@@ -5945,11 +5945,11 @@
         "english": "Stop gain (PD) for counter clock-wise rotation. Typical range 50..200."
     },
     "profilesYawPrecompCutoff": {
-        "message": "Corte de Precompensado en Guiñada [Hz]",
+        "message": "Corte de Precompensado en Dirección [Hz]",
         "english": "Yaw Precomp Cutoff [Hz]"
     },
     "profilesYawPrecompCutoffHelp": {
-        "message": "Límite de frecuencia para todas las acciones de precompensado en guiñada",
+        "message": "Límite de frecuencia para todas las acciones de precompensado en ",
         "english": "Frequency limit for all yaw precompensation actions"
     },
     "profilesYawFFCyclicGain": {
@@ -5957,7 +5957,7 @@
         "english": "Cyclic Feedforward Gain"
     },
     "profilesYawFFCyclicGainHelp": {
-        "message": "Valor de la ganancia del avance del cíclico que se mezcla con la guiñada",
+        "message": "Valor de la ganancia del avance del cíclico que se mezcla con la Dirección",
         "english": "Gain value for cyclic feedforward mixed into yaw"
     },
     "profilesYawFFCollectiveGain": {
@@ -5965,7 +5965,7 @@
         "english": "Collective Feedforward Gain"
     },
     "profilesYawFFCollectiveGainHelp": {
-        "message": "Valor de la ganancia del avance del colectivo que se mezcla con la guiñada",
+        "message": "Valor de la ganancia del avance del colectivo que se mezcla con la Dirección",
         "english": "Gain value for collective feedforward mixed into yaw"
     },
     "profilesYawFFImpulseGain": {
@@ -5973,7 +5973,7 @@
         "english": "Collective Impulse Feedforward Gain"
     },
     "profilesYawFFImpulseGainHelp": {
-        "message": "Valor de la ganancia del impulso del avance del colectivo que se mezcla con la guiñada",
+        "message": "Valor de la ganancia del impulso del avance del colectivo que se mezcla con la Dirección",
         "english": "Gain value for collective impulse feedforward mixed into yaw"
     },
     "profilesyawFFImpulseDecay": {
@@ -5981,7 +5981,7 @@
         "english": "Collective Impulse Feedforward Decay time"
     },
     "profilesyawFFImpulseDecayHelp": {
-        "message": "Tiempo de decaimiento del impulso de avance del colectivo que se mezcla con la guiñada",
+        "message": "Tiempo de decaimiento del impulso de avance del colectivo que se mezcla con la Dirección",
         "english": "Decay time for collective impulse feedforward mixed into yaw"
     },
     "profilesPitchFFCollective": {
@@ -7594,12 +7594,12 @@
         "english": "Pitch axis PID gains"
     },
     "osdTextElementPIDYaw": {
-        "message": "PID: guiñada",
+        "message": "PID: Dirección",
         "english": "PID yaw",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementPIDYaw": {
-        "message": "Valores PID del eje guiñada",
+        "message": "Valores PID del eje Dirección",
         "english": "Yaw axis PID gains"
     },
     "osdTextElementPower": {
