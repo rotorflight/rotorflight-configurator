@@ -130,9 +130,8 @@
         "english": "Auto-Connect"
     },
     "showAllPorts": {
-        "message": "Show All Ports",
-        "english": "Show All Ports",
-        "status": "New entry. Please translate!"
+        "message": "Tous les Ports",
+        "english": "Show All Ports"  
     },
     "close": {
         "message": "Fermer",
