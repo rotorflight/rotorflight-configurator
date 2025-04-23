@@ -2055,28 +2055,24 @@
         "english": "One-wire Communication (Half-Duplex)"
     },
     "receiverSerialHalfDuplexHelp": {
-        "message": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2.",
-        "english": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2.",
-        "status": "New entry. Please translate!"
+        "message": "Utilisez la broche Tx à la fois pour l’émission et la réception. Requis pour SBUS2, F.PORT, SRXL et SRXL2.",
+        "english": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2."
     },
     "receiverSerialInverted": {
         "message": "Signalisation série inversée",
         "english": "Inverted Serial Signaling"
     },
     "receiverSerialInvertedHelp": {
-        "message": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help.",
-        "english": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help.",
-        "status": "New entry. Please translate!"
+        "message": "Désinverse le signal inversé provenant du récepteur. Requis pour S.BUS et F.PORT, entre autres. Remarque : cette option n’est PAS prise en charge sur les MCU F4, voir l’aide.",
+        "english": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help."
     },
     "receiverSerialPinSwap": {
-        "message": "Rx/Tx Pin Swap",
-        "english": "Rx/Tx Pin Swap",
-        "status": "New entry. Please translate!"
+        "message": "Échange des broches Rx/Tx",
+        "english": "Rx/Tx Pin Swap"
     },
     "receiverSerialPinSwapHelp": {
-        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
-        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
-        "status": "New entry. Please translate!"
+        "message": "Inverse les broches Rx et Tx. Remarque : cette option n’est PAS prise en charge sur les MCU F4, voir l’aide.",
+        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
     },
     "receiverStickCenter": {
         "message": "Manche au neutre",
@@ -2095,13 +2091,8 @@
         "english": "The maximum value (in µs) for stick deflection from the center, for RPY."
     },
     "receiverArmingThrottle": {
-        "message": "Throttle Channel limit for arming",
-        "english": "Throttle Channel limit for arming",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Valeur du canal de commande des gazs pour l'armement",
-            "english": "Throttle Channel value for arming"
-        }
+        "message": "Valeur du canal de commande des gaz pour l'armement",
+        "english": "Throttle Channel limit for arming"
     },
     "receiverHelpArmingThrottle": {
         "message": "La valeur du canal (en µs) sous laquelle l'armement est autorisé",
@@ -2128,26 +2119,16 @@
         "english": "Cyclic Deadband"
     },
     "receiverHelpCyclicDeadband": {
-        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle.",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Il s'agit de valeurs (en µs) selon lesquelles l'entrée RC peut être différente avant d'être considérée comme non nulle. Pour les émetteurs avec une gigue sur les sorties, cette valeur peut être augmentée si les entrées RC tremblent lorsqu'elles sont inactives.",
-            "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle."
-        }
+        "message": "Ce sont les valeurs (en µs) de tolérance avant qu’une entrée RC soit considérée comme non nulle. Pour les émetteurs avec du jitter en sortie, cette valeur peut être augmentée si les entrées RC bougent à l’arrêt.",
+        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle."
     },
     "receiverYawDeadband": {
         "message": "Bande neutre Yaw",
         "english": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Il s'agit de valeurs (en µs) selon lesquelles l'entrée RC peut être différente avant d'être considérée comme non nulle. Pour les émetteurs avec une gigue sur les sorties, cette valeur peut être augmentée si les entrées RC tremblent lorsqu'elles sont inactives. <strong>Ce paramètre concerne uniquement le lacet.</strong>",
-            "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if rc inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
-        }
+        "message": "Ce sont les valeurs (en µs) de tolérance avant qu’une entrée RC soit considérée comme non nulle. Pour les émetteurs avec du jitter en sortie, cette valeur peut être augmentée si les entrées RC bougent à l’arrêt. <strong>Ce réglage concerne uniquement le lacet.</strong>",
+        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
     },
     "receiverTelemetrySettings": {
         "message": "Paramètres de télémétrie",
@@ -2166,39 +2147,32 @@
         "english": "Inverted Telemetry Signaling"
     },
     "receiverTelemetryPinSwap": {
-        "message": "Telemetry Pin Swap (Swap Rx and Tx pins)",
-        "english": "Telemetry Pin Swap (Swap Rx and Tx pins)",
-        "status": "New entry. Please translate!"
+        "message": "Échange de broches pour la télémétrie (inverser les broches Rx et Tx)",
+        "english": "Telemetry Pin Swap (Swap Rx and Tx pins)"
     },
     "receiverTelemetryMode": {
-        "message": "Enable CRSF Custom Telemetry",
-        "english": "Enable CRSF Custom Telemetry",
-        "status": "New entry. Please translate!"
+        "message": "Activer la télémétrie personnalisée CRSF",
+        "english": "Enable CRSF Custom Telemetry"
     },
     "receiverTelemetryRate": {
-        "message": "Telemetry Rate",
-        "english": "Telemetry Rate",
-        "status": "New entry. Please translate!"
+        "message": "Fréquence de télémétrie",
+        "english": "Telemetry Rate"
     },
     "receiverTelemetryRatio": {
-        "message": "Telemetry Ratio",
-        "english": "Telemetry Ratio",
-        "status": "New entry. Please translate!"
+        "message": "Ratio de télémétrie",
+        "english": "Telemetry Ratio"
     },
     "receiverHelpCrsfTelemetryMode": {
-        "message": "Enables the Custom Rotorflight telemetry with ELRS. Requires a Lua script in the Tx for decoding the sensors. Custom telemetry provides a plethora of sensors for helicopter use.",
-        "english": "Enables the Custom Rotorflight telemetry with ELRS. Requires a Lua script in the Tx for decoding the sensors. Custom telemetry provides a plethora of sensors for helicopter use.",
-        "status": "New entry. Please translate!"
+        "message": "Active la télémétrie personnalisée Rotorflight avec ELRS. Nécessite un script Lua dans l’émetteur pour le décodage des capteurs. La télémétrie personnalisée fournit une multitude de capteurs pour l’usage en hélicoptère.",
+        "english": "Enables the Custom Rotorflight telemetry with ELRS. Requires a Lua script in the Tx for decoding the sensors. Custom telemetry provides a plethora of sensors for helicopter use."
     },
     "receiverHelpCrsfTelemetryRate": {
-        "message": "Radio link packet rate for telemetry. Set this to the same value as the ELRS packet rate in the Tx.",
-        "english": "Radio link packet rate for telemetry. Set this to the same value as the ELRS packet rate in the Tx.",
-        "status": "New entry. Please translate!"
+        "message": "Taux de paquets de la radio pour la télémétrie. Réglez-le sur la même valeur que le taux de paquets ELRS dans l’émetteur.",
+        "english": "Radio link packet rate for telemetry. Set this to the same value as the ELRS packet rate in the Tx."
     },
     "receiverHelpCrsfTelemetryRatio": {
-        "message": "Radio link packet ratio for telemetry. Set this to the same value as the ELRS telemetry ratio in the Tx.",
-        "english": "Radio link packet ratio for telemetry. Set this to the same value as the ELRS telemetry ratio in the Tx.",
-        "status": "New entry. Please translate!"
+        "message": "Ratio de paquets de la radio pour la télémétrie. Réglez-le sur la même valeur que le ratio de télémétrie ELRS dans l’émetteur.",
+        "english": "Radio link packet ratio for telemetry. Set this to the same value as the ELRS telemetry ratio in the Tx."
     },
     "receiverTelemetrySensors": {
         "message": "Capteurs de télémétrie",
@@ -2221,19 +2195,16 @@
         "english": "Used Battery Capacity"
     },
     "receiverTelemetrySensor_BEC_VOLTAGE": {
-        "message": "BEC Voltage",
-        "english": "BEC Voltage",
-        "status": "New entry. Please translate!"
+        "message": "Courant du BEC",
+        "english": "BEC Voltage"
     },
     "receiverTelemetrySensor_HEADSPEED": {
-        "message": "Headspeed",
-        "english": "Headspeed",
-        "status": "New entry. Please translate!"
+        "message": "Tours du Rotor",
+        "english": "Headspeed"
     },
     "receiverTelemetrySensor_TAILSPEED": {
-        "message": "Tailspeed",
-        "english": "Tailspeed",
-        "status": "New entry. Please translate!"
+        "message": "Tours de l'Anticouple",
+        "english": "Tailspeed"
     },
     "receiverTelemetrySensor_TEMPERATURE": {
         "message": "Température contröleur de vol",
@@ -2276,13 +2247,8 @@
         "english": "Vario"
     },
     "receiverTelemetrySensor_LAT_LONG": {
-        "message": "GPS Latitude & Longitude",
-        "english": "GPS Latitude & Longitude",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "GPS Latitude et Longitude",
-            "english": "GPS Latitide & Longitude"
-        }
+        "message": "Latitude et longitude GPS",
+        "english": "GPS Latitude & Longitude"
     },
     "receiverTelemetrySensor_GROUND_SPEED": {
         "message": "Vitesse au sol GPS",
@@ -2317,224 +2283,181 @@
         "english": "Governor Mode"
     },
     "receiverTelemetrySensor_ARMING_FLAGS": {
-        "message": "Arming Flags",
-        "english": "Arming Flags",
-        "status": "New entry. Please translate!"
+        "message": "Indicateurs d’armement",
+        "english": "Arming Flags"
     },
     "receiverTelemetrySensor_PID_PROFILE": {
-        "message": "PID Profile",
-        "english": "PID Profile",
-        "status": "New entry. Please translate!"
+        "message": "Profil PID",
+        "english": "PID Profile"
     },
     "receiverTelemetrySensor_RATES_PROFILE": {
-        "message": "Rates Profile",
-        "english": "Rates Profile",
-        "status": "New entry. Please translate!"
+        "message": "Profil de vitesses",
+        "english": "Rates Profile"
     },
     "receiverTelemetrySensor_THROTTLE_CONTROL": {
-        "message": "Throttle Control",
-        "english": "Throttle Control",
-        "status": "New entry. Please translate!"
+        "message": "Contrôle des gaz",
+        "english": "Throttle Control"
     },
     "receiverTelemetrySensor_MODEL_ID": {
-        "message": "Model Id",
-        "english": "Model Id",
-        "status": "New entry. Please translate!"
+        "message": "ID du modèle",
+        "english": "Model Id"
     },
     "receiverTelemetryGroup_DEBUG": {
-        "message": "Debug",
-        "english": "Debug",
-        "status": "New entry. Please translate!"
+        "message": "Débogage",
+        "english": "Debug"
     },
     "receiverTelemetryGroup_SYSTEM": {
-        "message": "System",
-        "english": "System",
-        "status": "New entry. Please translate!"
+        "message": "Système",
+        "english": "System"
     },
     "receiverTelemetryGroup_GPS": {
         "message": "GPS",
-        "english": "GPS",
-        "status": "New entry. Please translate!"
+        "english": "GPS"
     },
     "receiverTelemetryGroup_CONTROL": {
-        "message": "Control",
-        "english": "Control",
-        "status": "New entry. Please translate!"
+        "message": "Contrôle",
+        "english": "Control"
     },
     "receiverTelemetryGroup_PROFILE": {
-        "message": "Profile",
-        "english": "Profile",
-        "status": "New entry. Please translate!"
+        "message": "Profil",
+        "english": "Profile"
     },
     "receiverTelemetryGroup_RPM": {
-        "message": "RPM",
-        "english": "RPM",
-        "status": "New entry. Please translate!"
+        "message": "Tours par minute",
+        "english": "RPM"
     },
     "receiverTelemetryGroup_BATTERY": {
-        "message": "Battery",
-        "english": "Battery",
-        "status": "New entry. Please translate!"
+        "message": "Batterie",
+        "english": "Battery"
     },
     "receiverTelemetryGroup_TEMPERATURE": {
-        "message": "Temperature",
-        "english": "Temperature",
-        "status": "New entry. Please translate!"
+        "message": "Température",
+        "english": "Temperature"
     },
     "receiverTelemetryGroup_ESC1": {
-        "message": "ESC #1",
-        "english": "ESC #1",
-        "status": "New entry. Please translate!"
+        "message": "ESC n°1",
+        "english": "ESC #1"
     },
     "receiverTelemetryGroup_ESC2": {
-        "message": "ESC #2",
-        "english": "ESC #2",
-        "status": "New entry. Please translate!"
+        "message": "ESC n°2",
+        "english": "ESC #2"
     },
     "receiverTelemetryGroup_BARO": {
-        "message": "Barometer",
-        "english": "Barometer",
-        "status": "New entry. Please translate!"
+        "message": "Baromètre",
+        "english": "Barometer"
     },
     "receiverTelemetryGroup_GYRO": {
-        "message": "Gyro",
-        "english": "Gyro",
-        "status": "New entry. Please translate!"
+        "message": "Gyroscope",
+        "english": "Gyro"
     },
     "receiverTelemetryGroup_STATUS": {
-        "message": "Status",
-        "english": "Status",
-        "status": "New entry. Please translate!"
+        "message": "Statut",
+        "english": "Status"
     },
     "receiverTelemetryGroup_CURRENT": {
-        "message": "Current",
-        "english": "Current",
-        "status": "New entry. Please translate!"
+        "message": "Courant",
+        "english": "Current"
     },
     "receiverTelemetryGroup_VOLTAGE": {
-        "message": "Voltage",
-        "english": "Voltage",
-        "status": "New entry. Please translate!"
+        "message": "Tension",
+        "english": "Voltage"
     },
     "receiverTelemetrySensor_HEARTBEAT": {
-        "message": "Heartbeat",
-        "english": "Heartbeat",
-        "status": "New entry. Please translate!"
+        "message": "Battement",
+        "english": "Heartbeat"
     },
     "receiverTelemetrySensor_BATTERY": {
-        "message": "Battery",
-        "english": "Battery",
-        "status": "New entry. Please translate!"
+        "message": "Batterie",
+        "english": "Battery"
     },
     "receiverTelemetrySensor_BATTERY_VOLTAGE": {
-        "message": "Battery Voltage",
+        "message": "Tension Batterie",
         "english": "Battery Voltage",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_BATTERY_CURRENT": {
-        "message": "Battery Current",
-        "english": "Battery Current",
-        "status": "New entry. Please translate!"
+        "message": "Courant Batterie",
+        "english": "Battery Current"
     },
     "receiverTelemetrySensor_BATTERY_CONSUMPTION": {
-        "message": "Battery Consumption",
-        "english": "Battery Consumption",
-        "status": "New entry. Please translate!"
+        "message": "Consommation Batterie",
+        "english": "Battery Consumption"
     },
     "receiverTelemetrySensor_BATTERY_CHARGE_LEVEL": {
-        "message": "Battery Charge Level",
-        "english": "Battery Charge Level",
-        "status": "New entry. Please translate!"
+        "message": "Niveau de charge de la batterie",
+        "english": "Battery Charge Level"
     },
     "receiverTelemetrySensor_BATTERY_CELL_COUNT": {
-        "message": "Battery Cell Count",
-        "english": "Battery Cell Count",
-        "status": "New entry. Please translate!"
+        "message": "Nombre de cellules de la batterie",
+        "english": "Battery Cell Count"
     },
     "receiverTelemetrySensor_BATTERY_CELL_VOLTAGE": {
-        "message": "Battery Cell Voltage",
-        "english": "Battery Cell Voltage",
-        "status": "New entry. Please translate!"
+        "message": "Tension des cellules de la batterie",
+        "english": "Battery Cell Voltage"
     },
     "receiverTelemetrySensor_BATTERY_CELL_VOLTAGES": {
-        "message": "Battery Cell Voltages",
-        "english": "Battery Cell Voltages",
-        "status": "New entry. Please translate!"
+        "message": "Tensions des cellules de la batterie",
+        "english": "Battery Cell Voltages"
     },
     "receiverTelemetrySensor_CONTROL": {
-        "message": "Control (hi-res)",
-        "english": "Control (hi-res)",
-        "status": "New entry. Please translate!"
+        "message": "Contrôle (haute résolution)",
+        "english": "Control (hi-res)"
     },
     "receiverTelemetrySensor_PITCH_CONTROL": {
-        "message": "Pitch Control",
-        "english": "Pitch Control",
-        "status": "New entry. Please translate!"
+        "message": "Contrôle du tangage",
+        "english": "Pitch Control"
     },
     "receiverTelemetrySensor_ROLL_CONTROL": {
-        "message": "Roll Control",
-        "english": "Roll Control",
-        "status": "New entry. Please translate!"
+        "message": "Contrôle du roulis",
+        "english": "Roll Control"
     },
     "receiverTelemetrySensor_YAW_CONTROL": {
-        "message": "Yaw Control",
-        "english": "Yaw Control",
-        "status": "New entry. Please translate!"
+        "message": "Contrôle du Lacet",
+        "english": "Yaw Control"
     },
     "receiverTelemetrySensor_COLLECTIVE_CONTROL": {
-        "message": "Collective Control",
-        "english": "Collective Control",
-        "status": "New entry. Please translate!"
+        "message": "Contrôle du collectif",
+        "english": "Collective Control"
     },
     "receiverTelemetrySensor_THROTTLE_CONTROL": {
-        "message": "Throttle Control",
-        "english": "Throttle Control",
-        "status": "New entry. Please translate!"
+        "message": "Contrôle du gaz",
+        "english": "Throttle Control"
     },
     "receiverTelemetrySensor_ESC_DATA": {
-        "message": "ESC Data",
-        "english": "ESC Data",
-        "status": "New entry. Please translate!"
+        "message": "Données ESC",
+        "english": "ESC Data"
     },
     "receiverTelemetrySensor_ESC_VOLTAGE": {
-        "message": "ESC Voltage",
-        "english": "ESC Voltage",
-        "status": "New entry. Please translate!"
+        "message": "Tension ESC",
+        "english": "ESC Voltage"
     },
     "receiverTelemetrySensor_ESC_CURRENT": {
-        "message": "ESC Current",
-        "english": "ESC Current",
-        "status": "New entry. Please translate!"
+        "message": "Courant ESC",
+        "english": "ESC Current"
     },
     "receiverTelemetrySensor_ESC_CAPACITY": {
-        "message": "ESC Capacity",
-        "english": "ESC Capacity",
-        "status": "New entry. Please translate!"
+        "message": "Capacité ESC",
+        "english": "ESC Capacity"
     },
     "receiverTelemetrySensor_ESC_ERPM": {
-        "message": "ESC ERPM",
-        "english": "ESC ERPM",
-        "status": "New entry. Please translate!"
+        "message": "ESC E-RPM",
+        "english": "ESC ERPM"
     },
     "receiverTelemetrySensor_ESC_POWER": {
-        "message": "ESC Power",
-        "english": "ESC Power",
-        "status": "New entry. Please translate!"
+        "message": "Puissance ESC",
+        "english": "ESC Power"
     },
     "receiverTelemetrySensor_ESC_THROTTLE": {
-        "message": "ESC Throttle",
-        "english": "ESC Throttle",
-        "status": "New entry. Please translate!"
+        "message": "Gaz ESC",
+        "english": "ESC Throttle"
     },
     "receiverTelemetrySensor_ESC_TEMP1": {
-        "message": "ESC Temp 1",
-        "english": "ESC Temp 1",
-        "status": "New entry. Please translate!"
+        "message": "Température ESC n°1",
+        "english": "ESC Temp 1"
     },
     "receiverTelemetrySensor_ESC_TEMP2": {
-        "message": "ESC Temp 2",
-        "english": "ESC Temp 2",
-        "status": "New entry. Please translate!"
+        "message": "Température ESC n°2",
+        "english": "ESC Temp 2"
     },
     "receiverTelemetrySensor_ESC_BEC_VOLTAGE": {
         "message": "ESC BEC Voltage",
