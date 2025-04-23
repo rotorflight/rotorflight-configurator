@@ -166,7 +166,7 @@
         "english": "<span class=\"message-negative\">WARNING:</span> Unsaved Changes"
     },
     "dialogTabExitNote": {
-        "message": "Hay cambios no guardados <b>unsaved changes</b> en la pestaña actual.",
+        "message": "Hay cambios no guardados <b>cambios no guardados</b> en la pestaña actual.",
         "english": "There are <b>unsaved changes</b> in the current Tab."
     },
     "dialogTabExitSave": {
@@ -218,7 +218,7 @@
         "english": "Remember last selected board in firmware flasher"
     },
     "analyticsOptOut": {
-        "message": "No participar en la recogida anónima de datos estadísticos",
+        "message": "No participar en la recolección anónima de datos estadísticos",
         "english": "Opt out of the anonymised collection of statistics data"
     },
     "connectionTimeout": {
@@ -227,7 +227,7 @@
         "description": "Change timeout on auto-connect and reboot so the bus has more time to initialize after being detected by the system"
     },
     "cordovaForceComputerUI": {
-        "message": "Usar interfaz del PC en lugar de la del teléfono",
+        "message": "Usar interfaz de PC en lugar de la del teléfono",
         "english": "Use computers interface instead of phones interface"
     },
     "sensorDataFlashNotFound": {
@@ -241,7 +241,7 @@
         "description": "Text of the dataflash image in the header of the page."
     },
     "sensorStatusGyro": {
-        "message": "Giroscopo",
+        "message": "Giroscopio",
         "english": "Gyroscope"
     },
     "sensorStatusGyroShort": {
@@ -700,7 +700,7 @@
         "english": "No release information available for $1."
     },
     "tabSwitchConnectionRequired": {
-        "message": "Necesitas <strong>conectar</strong> antes de que puedas ver cualquiera de los apartados.",
+        "message": "Necesitas <strong>conectar</strong> antes de que puedas ver cualquiera de los menús.",
         "english": "You need to <strong>connect</strong> before you can view any of the tabs."
     },
     "tabSwitchWaitForOperation": {
@@ -2821,7 +2821,7 @@
         "english": "AND"
     },
     "adjustmentsHelp": {
-        "message": "Configure interruptores para correcciones. Mire el apartado 'in-flight adjustments' del manual para detalles. Las correcciones realizadas no se guardan automáticamente.",
+        "message": "Configure interruptores para correcciones. Mire el capítulo 'in-flight adjustments' del manual para detalles. Las correcciones realizadas no se guardan automáticamente.",
         "english": "Configure adjustment switches. See the 'in-flight adjustments' section of the manual for details. The changes that adjustment functions make are not saved automatically."
     },
     "adjustmentSlotsHelp": {
@@ -4573,7 +4573,7 @@
         "english": "Go Back"
     },
     "loggingNote": {
-        "message": "Los datos se registran <span class=\"message-negative\">sólamente</span> en este apartado, abandonar el apartado <span class=\"message-negative\">cancelará</span> el registro y la aplicación volverá al estado normal del <strong>\"configurator\"</strong>.<br /> Puedes elegir cualquier período de actualización global, los datos se almacenarán en el archivo de log cada <strong>1</strong> segundo por razones de rendimiento.",
+        "message": "Los datos se registran <span class=\"message-negative\">sólamente</span> en este menú, abandonar el menú <span class=\"message-negative\">cancelará</span> el registro y la aplicación volverá al estado normal del <strong>\"configurator\"</strong>.<br /> Puedes elegir cualquier período de actualización global, los datos se almacenarán en el archivo de log cada <strong>1</strong> segundo por razones de rendimiento.",
         "english": "Data will be logged in this tab <span class=\"message-negative\">only</span>, leaving the tab will <span class=\"message-negative\">cancel</span> logging and application will return to its normal <strong>\"configurator\"</strong> state.<br /> You are free to select the global update period, data will be written into the log file every <strong>1</strong> second for performance reasons."
     },
     "loggingSamplesSaved": {
@@ -4605,7 +4605,7 @@
         "english": "You need to <strong>connect</strong> first"
     },
     "loggingErrorLogFile": {
-        "message": "Elija archivo de registro",
+        "message": "Seleccione archivo de registro",
         "english": "Please select log file"
     },
     "loggingErrorOneProperty": {
@@ -4621,7 +4621,7 @@
         "english": "Your flight controller's firmware does not support Blackbox logging."
     },
     "blackboxMaybeSupported": {
-        "message": "El firmware de su controlador de vuelo es demasiado antiguo para soportar este apartado, o la funcionalidad Caja Negra está desactivada en el apartado Configuración.",
+        "message": "El firmware de su controlador de vuelo es demasiado antiguo para soportar esta función, o la funcionalidad Caja Negra está desactivada en la pestaña de configuración.",
         "english": "Your flight controller's firmware is too old to support this tab, or the Blackbox feature is disabled on the Configuration tab."
     },
     "blackboxConfiguration": {
@@ -4741,11 +4741,11 @@
         "english": "ESC 2"
     },
     "serialLoggingSupportedNote": {
-        "message": "Puede registrar en un dispositivo externo (como un OpenLager) usando un puerto serie. Configure el puerto en el apartado Puertos.",
+        "message": "Puede registrar en un dispositivo externo (como un OpenLager) usando un puerto serie. Configure el puerto en el menú Puertos.",
         "english": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
     },
     "sdcardNote": {
-        "message": "Puede grabar registros de vuelo en la tarjeta SD de su controlador de vuelo.",
+        "message": "Puede grabar los logs de vuelo en la tarjeta SD de su controlador de vuelo.",
         "english": "Flight logs can be recorded to your flight controller's onboard SD card slot."
     },
     "dataflashUsedSpace": {
@@ -4761,11 +4761,11 @@
         "english": "Unavailable space"
     },
     "dataflashLogsSpace": {
-        "message": "Espacio libre para registros",
+        "message": "Espacio libre para los logs",
         "english": "Free space for logs"
     },
     "dataflashNote": {
-        "message": "Puede grabar registros de vuelo en la memoria flash integrada de su controlador de vuelo.",
+        "message": "Puede grabar logs de vuelo en la memoria flash integrada de su controlador de vuelo.",
         "english": "Flight logs can be recorded to your flight controller's onboard dataflash chip."
     },
     "dataflashNotPresentNote": {
@@ -4785,7 +4785,7 @@
         "english": "Directly saving flash to file is slow and inherently prone to error / file corruption.<br>In some cases it will work for small files, but this is not supported and support requests for it will be closed without comment - use Mass Storage mode instead."
     },
     "dataflashSaveFileDepreciationHint": {
-        "message": "TEste método es lento, ya que la conexión MSP tiene limitaciones fundamentales para transferir archivos. El método recomendado es usar '<b>$t(blackboxRebootMscText.message)</b>' (abajo) para activar el modo de almacenamiento masivo, y acceder a su controladora de vuelo como dispositivo de almacenamiento para descargar los archivos de registro.",
+        "message": "Este método es lento, ya que la conexión MSP tiene limitaciones fundamentales para transferir archivos. El método recomendado es usar '<b>$t(blackboxRebootMscText.message)</b>' (abajo) para activar el modo de almacenamiento masivo, y acceder a su controladora de vuelo como dispositivo de almacenamiento para descargar los archivos de registro.",
         "english": "This method is slow, because the MSP connection itself has fundamental limitations for file transfer. The recommended method is to use '<b>$t(blackboxRebootMscText.message)</b>' (below) to activate the Mass Storage Mode, and access your flight controller as a storage device to download the log files."
     },
     "dataflashButtonErase": {
@@ -4797,7 +4797,7 @@
         "english": "Confirm dataflash erase"
     },
     "dataflashConfirmEraseNote": {
-        "message": "Eliminará cualquier registro de Caja Negra u otros datos contenidos en la memoria flash. Debería durar unos 20 segundos ¿Está seguro?",
+        "message": "Eliminará cualquier registro de Caja Negra u otros datos contenidos en la memoria flash. Debería tardar unos 20 segundos ¿Está seguro?",
         "english": "This will erase any Blackbox logs or other data contained in the dataflash. It should take about 20 seconds, are you sure?"
     },
     "dataflashSavingTitle": {
@@ -4913,7 +4913,7 @@
         "english": "Please load firmware file"
     },
     "firmwareFlasherLoadedConfig": {
-        "message": "Cargada placa, por favor cargue el archivo de firmware",
+        "message": "Placa cargada, por favor cargue el archivo de firmware",
         "english": "Loaded target, please load firmware file"
     },
     "firmwareFlasherNoReboot": {
@@ -4925,11 +4925,11 @@
         "english": "Select build type to see available boards."
     },
     "firmwareFlasherOnlineSelectBoardDescription": {
-        "message": "Seleccione su placa para ver las versiones de firmware disponibles online - Seleccione el firmware correcto apropriado para su placa.",
+        "message": "Seleccione su placa para ver las versiones de firmware disponibles online - Seleccione el firmware apropriado para su placa.",
         "english": "Select your board to see available online firmware releases - Select the correct firmware appropriate for your board."
     },
     "firmwareFlasherOnlineSelectBoardHint": {
-        "message": "El concepto de destinos unificados significa que el mismo archivo .hex del firmware se puede usar en todas las placasque usen el mismo MCU (G4, F4, F7, H7). Para hacer que tarjetas diferentes funcionen con el mismo firmware, un archivo separado se carga junto al firmware.<br>El Configurator soporta transparentemente esto con un paso instantáneo.",
+        "message": "El concepto de destinos unificados significa que el mismo archivo .hex del firmware se puede usar en todas las placas que usen el mismo MCU (G4, F4, F7, H7). Para hacer que tarjetas diferentes funcionen con el mismo firmware, un archivo separado se carga junto al firmware.<br>Configurator soporta transparentemente esto con un paso instantáneo.",
         "english": "The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (G4, F4, F7, H7). To make the different boards work with the same firmware, a separate configuration file is flashed alongside the firmware.<br>The Configurator supports this transparently in one flashing step."
     },
     "firmwareFlasherOnlineSelectFirmwareVersionDescription": {
@@ -4981,11 +4981,11 @@
         "english": "Releases"
     },
     "firmwareFlasherOptionLabelBuildTypePreRelease": {
-        "message": "Versiones and Pre-lanzamientos",
+        "message": "Versiones y Pre-lanzamiento",
         "english": "Releases and Pre-releases"
     },
     "firmwareFlasherOptionLabelBuildTypeDevelopment": {
-        "message": "Todas las versiones y and Snapshots",
+        "message": "Todas las versiones y Snapshots",
         "english": "All Releases and Snapshots"
     },
     "firmwareFlasherOptionLabelSelectFirmware": {
@@ -5057,7 +5057,7 @@
         "english": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "Si ha perdido comunicación con su placa, siga estos pasos para recuperarla: <ul><li>Apague todo</li><li>Habilite 'No secuencia de rearranque', habilite 'borrado total del chip'.</li><li>Puentee los pines de BOOT o mantenga pulsado el botón de BOOT.</li><li>Encienda la placa (El LED de actividad NO parpadeará si se hace correctamente).</li><li>Instale todos los drivers STM32 y Zadig si se requiere (vea <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">carga con </a> sección del manual).</li><li>Cierre configurator, Reinicie Configurator.</li><li>Suelte el boton BOOT si su FC tien uno.</li><li>Cargue el firmware correcto (usando baud rate manual si se especifica en el manual de su FC).</li><li>Apague todo.</li><li>Retire el puente BOOT.</li><li>Encienda (El LED de actividad depería parpadear).</li><li>Conecte normalmente.</li></ul>",
+        "message": "Si ha perdido comunicación con su placa, siga estos pasos para recuperarla: <ul><li>Apague todo</li><li>Habilite 'Sin secuencia de rearranque', habilite 'borrado total del chip'.</li><li>Puentee los pines de BOOT o mantenga pulsado el botón de BOOT.</li><li>Encienda la placa (El LED de actividad NO parpadeará si se hace correctamente).</li><li>Instale todos los drivers STM32 y Zadig si se requiere (vea <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">carga con </a> sección del manual).</li><li>Cierre Configurator, Reinicie Configurator.</li><li>Suelte el boton BOOT si su FC tiene uno.</li><li>Cargue el firmware correcto (usando baud rate manual si se especifica en el manual de su FC).</li><li>Apague todo.</li><li>Retire el puente BOOT.</li><li>Encienda (El LED de actividad depería parpadear).</li><li>Conecte normalmente.</li></ul>",
         "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
     },
     "firmwareFlasherFirmwareNotLoaded": {
@@ -5065,7 +5065,7 @@
         "english": "Firmware not loaded"
     },
     "firmwareFlasherFirmwareLocalLoaded": {
-        "message": "Cargado FirmwareLocal: ($1 bytes)",
+        "message": "Cargado Firmware Local: ($1 bytes)",
         "english": "Loaded Local Firmware: ($1 bytes)",
         "status": "Modified entry. Please translate!"
     },
@@ -5107,7 +5107,7 @@
         "english": "Detected: <strong>$1</strong> - triggering flash on connect"
     },
     "unstableFirmwareAcknoledgementDialog": {
-        "message": "Va a cargar <strong>una versión de desarrollo del firmware</strong>. Estos firmwares tienen trabajos en curso, y puede suceder lo siguiente:<strong><ul><li>el firmware no funciona en absoluto;</li><li>El firmware no es volable;</li><li>Existen asuntos de seguridad con el firmware, por ejemplo pérdidas de control</li><li>el firmware puede hacer que el controlador de vuelo no reesponda, o esté dañado</li></ul></strong>Si carga este firmware, <strong>está asumiendo total responsabilidad de cualquiera de los riesgos anteriores</strong>. Además reconoce que es necesario realizar <strong>pruebas exhaustivas en el suelo con las palas del rotor desmontadas</strong> antes de intentar volar con este firmware.",
+        "message": "Va a cargar <strong>una versión de desarrollo del firmware</strong>. Estos firmwares son trabajos en curso, y puede suceder lo siguiente:<strong><ul><li>el firmware no funciona en absoluto;</li><li>El firmware no es volable;</li><li>Existen asuntos de seguridad con el firmware, por ejemplo pérdidas de control</li><li>el firmware puede hacer que el controlador de vuelo no reesponda, o esté dañado</li></ul></strong>Si carga este firmware, <strong>está asumiendo total responsabilidad de cualquiera de los riesgos anteriores</strong>. Además reconoce que es necesario realizar <strong>pruebas exhaustivas en el suelo con las palas del rotor desmontadas</strong> antes de intentar volar con este firmware.",
         "english": "You are about to flash a <strong>development build of the firmware</strong>. These builds are a work-in-progress, and any of the following can be the case:<strong><ul><li>the firmware does not work at all;</li><li>the firmware is not flyable;</li><li>there are safety issues with the firmware, for example flyaways</li><li>the firmware can cause the flight controller to become unresponsive, or damaged</li></ul></strong>If you proceed with flashing this firmware, <strong>you are assuming full responsibility for the risk of any of the above happening</strong>. Furthermore you acknowledge that it is necessary to perform <strong>thorough bench tests with rotor blades removed</strong> before any attempts to fly this firmware."
     },
     "unstableFirmwareAcknoledgementAcknowledge": {
@@ -5123,7 +5123,7 @@
         "english": "Detected: <strong>$1</strong> - previous device still flashing, please replug to try again"
     },
     "firmwareFlasherNoBoardsLoaded": {
-        "message": "Ninguan placa cargada",
+        "message": "Ninguna placa cargada",
         "english": "No boards loaded"
     },
     "firmwareFlasherBoardDetectionButton": {
@@ -5140,7 +5140,7 @@
         "english": "Unable to detect board for connected device"
     },
     "firmwareFlasherBoardDetectionBoardNotFound": {
-        "message": "Placa Detectada: <strong>{{boardName}}</strong>, pero no es igual al blanco encontrado.",
+        "message": "Placa Detectada: <strong>{{boardName}}</strong>, pero no hay firmware compatible.",
         "english": "Detected board: <strong>{{boardName}}</strong>, but no matching target found.",
         "description": "Board detection was successful, but there was no matching target available."
     },
@@ -5198,12 +5198,12 @@
         "description": "In the LED STRIP, text next the counter of leds remaining"
     },
     "ledStripClearSelectedButton": {
-        "message": "Bor. seleccionado",
+        "message": "Borrar selec.",
         "english": "Clear selected",
         "description": "In the LED STRIP, clear selected leds"
     },
     "ledStripClearAllButton": {
-        "message": "Bor. TODO",
+        "message": "Borrar TODO",
         "english": "Clear ALL",
         "description": "In the LED STRIP, clear all leds"
     },
@@ -5274,7 +5274,7 @@
         "description": "One of the modes of the Led Strip"
     },
     "ledStripFunctionModesOption": {
-        "message": "Modos &amp y Orientación",
+        "message": "Modos &amp; Orientación",
         "english": "Modes &amp; Orientation"
     },
     "ledStripFunctionArmOption": {
@@ -5370,7 +5370,7 @@
         "description": "Down direction in Color Mode in Led Strip"
     },
     "ledStripModesColorTitle": {
-        "message": "Prientación LED, Color (click izquierdo) y Color Alt (click derecho)",
+        "message": "Orientación LED, Color (click izquierdo) y Color Alt (click derecho)",
         "english": "LED Orientation, Color (left click) and Alt Color (right click)",
         "description": "One of the modes in Color Mode in Led Strip"
     },
@@ -5685,7 +5685,7 @@
         "english": "Cumulative Error Limits"
     },
     "profilesErrorLimitHelp": {
-        "message": "Límite físico del error en ángulo en el ciclo PID. El error absoluto y consecuentemente el I-term nunca irá por encima de estos límites.",
+        "message": "Límite físico del error en ángulo en el ciclo PID. El error absoluto y consecuentemente el I-term nunca superará estos límites.",
         "english": "Hard limit for the angle error in the PID loop. The absolute error and thus the I-term will never go above these limits."
     },
     "profilesErrorLimitRoll": {
@@ -5697,11 +5697,11 @@
         "english": "Error Limit for Pitch Axis [&deg;]"
     },
     "profilesErrorLimitYaw": {
-        "message": "Límite de Error para Eje de  [&deg;]",
+        "message": "Límite de Error para Eje de Dirección [&deg;]",
         "english": "Error Limit for Yaw Axis [&deg;]"
     },
     "profilesOffsetLimitHelp": {
-        "message": "Límite duro para el ángulo de desplazamiento integral de alta velocidad en el ciclo del PID. El desplazamiento absoluto y por consiguiente el O-term nunca pasarán esos límites.",
+        "message": "Límite duro para el ángulo de desplazamiento integral de alta velocidad en el ciclo del PID. El desplazamiento absoluto y por consiguiente el O-term nunca superarán esos límites.",
         "english": "Hard limit for the High Speed Integral offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits."
     },
     "profilesOffsetLimitRoll": {
@@ -5713,7 +5713,7 @@
         "english": "HSI Offset Limit for Pitch Axis [&deg;]"
     },
     "profilesOffsetGainHelp": {
-        "message": "Ganancia para el término desplazamiento integral de alta velocidad term (Integral para vuelo en alta velocidad) que estará solo activo aángulos grandes del colectivo. Este térmmino del ciclo de control proporciona estabilidad angular y control seguro cuando se eestá a alta velocidad, además de estabilidad en la actitud con grandes cambios del ángulo del Paso en el colectivo y cabeceo en el disco del rotor, que llevará a un picado rápido y cambios no deseados de actitud sin HSI. Valores demasiado bajos harán que el modelo se vuelva inestablea a grandes velocidades, además de reaccionar lentamente y efectuar grandes cambios de actitud cuando el Cabeceo del colectivo cambie. Valores demasiado grandess puede causar oscilaciones e imperdonables situaciones con ángulos de grandes de Cabeceo en el colectivo. Para pruebas en la parte inferios del parámetro, vuele en líena recta <strong> A UNA ALTURA SEGURA</strong>, solo tire brevemente del colectivo en un margen negativo y observe la reacción del modelo. Si el modelo pica, incremente la ganancia del desplazamiento del HSI. Para probar la parte superior del parámetro, dé cortos golpes al elevador y al alerón en una subida vertical muy alta y observe el comportamiento del modelo. Si el modelo pendula, se tambalea o continua permanece inquietp después de soltar la palanca, disminuya la ganancia del desplazamiento del HSI.",
+        "message": "Ganancia para el término desplazamiento integral de alta velocidad (Integral para vuelo en alta velocidad) que estará solo activo a grandes ángulos del colectivo. Este térmmino del ciclo de control proporciona estabilidad angular y control seguro cuando se eestá a alta velocidad, además de estabilidad en la actitud con grandes cambios del ángulo del Paso en el colectivo y cabeceo en el disco del rotor, que llevará a un picado rápido y cambios no deseados de actitud sin HSI. Valores demasiado bajos harán que el modelo se vuelva inestablea a grandes velocidades, además de reaccionar lentamente y efectuar grandes cambios de actitud cuando el Cabeceo del colectivo cambie. Valores demasiado grandes pueden causar oscilaciones e imperdonables situaciones con ángulos grandes de Cabeceo en el colectivo. Para pruebas en la parte inferios del parámetro, vuele en líena recta <strong> A UNA ALTURA SEGURA</strong>, solo tire brevemente del colectivo en un margen negativo y observe la reacción del modelo. Si el modelo pica, incremente la ganancia del desplazamiento del HSI. Para probar la parte superior del parámetro, dé cortos golpes al elevador y al alerón en una subida vertical muy alta y observe el comportamiento del modelo. Si el modelo pendula, se tambalea o continua permaneciendo inestable después de soltar la palanca, disminuya la ganancia del desplazamiento del HSI.",
         "english": "Gain for the High Speed Integral Offset term (Integral for high speed flight), which is only active at large collective angles. This term of the control loop provides angular stability and safe control following at high speeds, as well as attitude stability on large changes of the collective pitch angle of the rotor disk, which would lead to rapid diving and unwanted attitude changes without HSI. Too low values cause the model to become unstable at high speeds, as well as slow reaction and large attitude changes on collective pitch changes. Too large values can cause oscillation and restlessness at large collective pitch angles. For testing of the lower bounds of the parameter, fly in a straight line <strong> AT SAFE ALTITUDE</strong>, only briefly pull the collective into the negative range and observe the model's reaction. Should the model dive, increase the HSI Offset Gain. For testing the upper bounds of the parameter, give short jabs of elevator and aileron in a high collective vertical climb and observe the model's behavior. If the model swings, wobbles or exerts restlessness after releasing the stick, decrease the HSI Offset Gain."
     },
     "profilesOffsetGainRoll": {
@@ -5729,7 +5729,7 @@
         "english": "Ground Error Decay"
     },
     "profilesErrorDecayTimeGroundHelp": {
-        "message": "Desangra el error actual del controlador cuando la aeronave no está en vuelo. Ayuda a prevenir que la aeronave se vuelque en el suelo.",
+        "message": "Distiende el error actual del controlador cuando la aeronave no está en vuelo. Ayuda a prevenir que la aeronave se vuelque en el suelo.",
         "english": "Bleeds off the current controller error when the craft is not airborne. This helps preventing the craft from tipping over on the ground."
     },
     "profilesErrorDecayTime": {
@@ -5741,7 +5741,7 @@
         "english": "Error Decay time [s]"
     },
     "profilesErrorDecayTimeCyclicHelp": {
-        "message": "Tiempo constante para sangrar el error acumulativo del cíclico (I-term). Un mayor tiempo de decaimiento hace el estacionario más estable, peropuede reducir las prestaciones en 3D.",
+        "message": "Tiempo constante para distendir el error acumulativo del cíclico (I-term). Un mayor tiempo de decaimiento hace el estacionario más estable, pero puede reducir las prestaciones en 3D.",
         "english": "Time constant for bleeding off the accumulated cyclic error (I-term). Longer decay time makes hovering more stable, but may reduce 3D performance."
     },
     "profilesErrorDecayLimitCyclic": {
@@ -6793,7 +6793,7 @@
         "english": "Failsafe Kill Switch (setup Failsafe in Modes Tab)"
     },
     "failsafeKillSwitchHelp": {
-        "message": "Ajustar esta opción para usar un interruptor de modo de seguridad o FAILSAFE (apartado Modos). Actúa como un conmutador directo, saltando el procedimiento del modo de seguridad seleccionado. <strong>Nota:</strong> El armado está bloqueado cuando el modo de seguridad está en la posición ENCENDIDO",
+        "message": "Ajustar esta opción para usar un interruptor de modo de seguridad o FAILSAFE (menú Modos). Actúa como un conmutador directo, saltando el procedimiento del modo de seguridad seleccionado. <strong>Nota:</strong> El armado está bloqueado cuando el modo de seguridad está en la posición ENCENDIDO",
         "english": "Set this option to make the failsafe switch (Modes Tab) act as a direct kill switch, bypassing the selected failsafe procedure. <strong>Note:</strong> Arming is blocked with the failsafe kill switch in the ON position"
     },
     "failsafeSwitchTitle": {
@@ -6857,11 +6857,11 @@
         "english": "MSP Sensor"
     },
     "powerBatteryMinimumCellVoltage": {
-        "message": "Mínimo Voltaje por Celda",
+        "message": "Voltaje mínimo por Celda",
         "english": "Minimum Cell Voltage"
     },
     "powerBatteryMaximumCellVoltage": {
-        "message": "Máximo Voltaje por Celda",
+        "message": "Voltaje Máximo por Celda",
         "english": "Maximum Cell Voltage"
     },
     "powerBatteryFullCellVoltage": {
@@ -6885,15 +6885,15 @@
         "english": "To calibrate, use a multimeter to measure the actual voltage / current draw on your craft (with a battery plugged in), and enter the values below. Then, with the same battery still plugged in, click [Calibrate]."
     },
     "powerCalibrationManagerNote": {
-        "message": "<strong>Nota:</strong> Antes de calibrar la escala, asegúrese de que el y el multiplicador del voltaje y el desplazamiento del amperaje estén ajustados correctamente.<br>Dejando estos valores en 0 no se aplicará calibración.</br><strong>Recuerde desmontar las palar del rotor antes de conectar una batería!</strong>",
+        "message": "<strong>Nota:</strong> Antes de calibrar la escala, asegúrese de que el divisor y el multiplicador del voltaje y el desplazamiento del amperaje estén ajustados correctamente.<br>Dejando estos valores en 0 no se aplicará calibración.</br><strong>Recuerde desmontar las palas del rotor antes de conectar una batería!</strong>",
         "english": "<strong>Note:</strong> Before calibrating the scale make sure that divider and multiplier for voltage and offset for current is set properly.<br>Leaving the values at 0 will not apply calibration.</br><strong>Remember to remove rotor blades before plugging in a battery!</strong>"
     },
     "powerCalibrationManagerWarning": {
-        "message": "<span class=\"message-negative\">AVISO:</span> La batería <span class=\"message-negative\">no está conectada</span> o las fuentes de medida de voltaje y amperaje no están <span class=\"message-negative\">ajustadas correctamente.</span> Asegúrese de que el voltaje y/o amperajer muestren un valor por encima de 0. De lo contrario, nunca será de calibrar con esta herramienta.",
+        "message": "<span class=\"message-negative\">AVISO:</span> La batería <span class=\"message-negative\">no está conectada</span> o las fuentes de medida de voltaje y amperaje no están <span class=\"message-negative\">ajustadas correctamente.</span> Asegúrese de que el voltaje y/o amperaje muestren un valor por encima de 0. De lo contrario, nunca se podrá calibrar con esta herramienta.",
         "english": "<span class=\"message-negative\">Warning:</span> The battery <span class=\"message-negative\">is not plugged in</span> or voltage and current meter sources are <span class=\"message-negative\">not set properly.</span> Make sure that the voltage and/or current are reading a value above 0. Otherwise you will not be able to calibrate using this tool."
     },
     "powerCalibrationManagerSourceNote": {
-        "message": "<span class=\"message-negative\">Aviso:</span> Las fuentes de medida de Voltaje y/o amperaje <strong>se han cambiado pero no guardado.</strong> Por favor, introduzca las fuentes correctas de medida y guardels antes de intentar calibrar.",
+        "message": "<span class=\"message-negative\">Aviso:</span> Las fuentes de medida de Voltaje y/o amperaje <strong>se han cambiado pero no guardado.</strong> Por favor, introduzca las fuentes correctas de medida y guárdelas antes de intentar calibrar.",
         "english": "<span class=\"message-negative\">Warning:</span> Voltage and/or current meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate."
     },
     "powerCalibrationManagerConfirmationTitle": {
@@ -6997,35 +6997,35 @@
         "english": "Cell 6"
     },
     "powerVoltageId206": {
-        "message": "Cell 7",
+        "message": "Celda 7",
         "english": "Cell 7"
     },
     "powerVoltageId207": {
-        "message": "Cell 8",
+        "message": "Celda 8",
         "english": "Cell 8"
     },
     "powerVoltageId208": {
-        "message": "Cell 9",
+        "message": "Celda 9",
         "english": "Cell 9"
     },
     "powerVoltageId209": {
-        "message": "Cell 10",
+        "message": "Celda 10",
         "english": "Cell 10"
     },
     "powerVoltageId210": {
-        "message": "Cell 11",
+        "message": "Celda 11",
         "english": "Cell 11"
     },
     "powerVoltageId211": {
-        "message": "Cell 12",
+        "message": "Celda 12",
         "english": "Cell 12"
     },
     "powerVoltageId212": {
-        "message": "Cell 13",
+        "message": "Celda 13",
         "english": "Cell 13"
     },
     "powerVoltageId214": {
-        "message": "Cell 14",
+        "message": "Celda 14",
         "english": "Cell 14"
     },
     "powerVoltageScale": {
@@ -7292,7 +7292,7 @@
         "english": "Boot logo:"
     },
     "osdSetupCustomLogoOpenImageButton": {
-        "message": "Seleccionar imagen personalizada image&hellip;",
+        "message": "Seleccionar imagen personalizada &hellip;",
         "english": "Select custom image&hellip;"
     },
     "osdSetupCustomLogoInfoTitle": {
@@ -7360,7 +7360,7 @@
         "english": "Reset Settings"
     },
     "osdTextElementMainBattVoltage": {
-        "message": "Batería: voltaje",
+        "message": "Voltaje Batería",
         "english": "Battery voltage",
         "description": "One of the elements of the OSD"
     },
@@ -7383,7 +7383,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementTimer": {
-        "message": "Un crono de vuelo",
+        "message": "Temporizador de vuelo",
         "english": "A flight timer"
     },
     "osdTextElementThrottlePosition": {
@@ -7396,12 +7396,12 @@
         "english": "Current throttle channel value"
     },
     "osdTextElementCpuLoad": {
-        "message": "Carga de CPU",
+        "message": "Carga del CPU",
         "english": "CPU load",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCpuLoad": {
-        "message": "Carga actual de CPU",
+        "message": "Carga actual del CPU",
         "english": "Current CPU load"
     },
     "osdTextElementVtxChannel": {
@@ -7468,12 +7468,12 @@
         "english": "Sidebars around artificial horizon indicator"
     },
     "osdTextElementCurrentDraw": {
-        "message": "Batería: bajada de amperaje",
+        "message": "Consumo de corriente (amperaje)",
         "english": "Battery current draw",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCurrentDraw": {
-        "message": "Bajada instantánea del amperaje de la batería",
+        "message": "Consumo instantáneo de la batería (amperaje)",
         "english": "Instantaneous battery current draw"
     },
     "osdTextElementMahDrawn": {
@@ -7491,7 +7491,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCraftName": {
-        "message": "Nombre de la aeronave tal como está en el apartado Configuración",
+        "message": "Nombre de la aeronave tal como está en el menú Configuración",
         "english": "Craft name as set in Configuration tab"
     },
     "osdTextElementAltitude": {
@@ -7689,7 +7689,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementHomeDistance": {
-        "message": "Distancia hacia la posición casa (en pies o en metros basada en el ajuste de unidades del sistema)",
+        "message": "Distancia hasta la posición casa (en pies o en metros basada en el ajuste de unidades del sistema)",
         "english": "Distance to home position (in either feet or metre based on unit system setting)"
     },
     "osdTextElementNumericalHeading": {
@@ -7860,7 +7860,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementFlightDist": {
-        "message": "Distancia volada durante este vuelo.",
+        "message": "Distancia recorrida durante este vuelo.",
         "english": "Distance flown during this flight."
     },
     "osdTextElementStickOverlayLeft": {
@@ -7950,7 +7950,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCameraFrame": {
-        "message": "Agrega un elemento de contorno ajustable diseñado para representar el campo de visión de la cámara HD del piloto para encuadre visual.<br /><br />Puedes ajustar la anchura y la altura en CLI con 'osd_camera_frame_width' y 'osd_camera_frame_height'",
+        "message": "Agrega un elemento de contorno ajustable diseñado para representar el campo de visión de la cámara HD del piloto para encuadre visual.<br /><br />Puedes ajustar el ancho y la altura en CLI con 'osd_camera_frame_width' y 'osd_camera_frame_height'",
         "english": "Adds an adjustable outline element designed to represent the field of view of the pilot's HD camera for visual framing.<br /><br />You can adjust the width and height in CLI with 'osd_camera_frame_width' and 'osd_camera_frame_height'"
     },
     "osdTextElementEfficiency": {
@@ -7972,12 +7972,12 @@
         "english": "Approximate total number of flights"
     },
     "osdTextElementUpDownReference": {
-        "message": "Horizontes artificial: referencia arriba (Pitch 90 grad)/Abajo (Pitch -90 grad)",
+        "message": "Horizonte artificial: referencia arriba (Cabeceo 90 grad)/Abajo (Cabeceo -90 grad)",
         "english": "Up (Pitch 90 deg)/Down (Pitch -90 deg) Reference",
         "description": "OSD Symbol to show when pitch is approaching vertical (90 deg, U) and D for nose down (-90 deg, D)"
     },
     "osdDescUpDownReference": {
-        "message": "Símbolo OSD que muestra cuando el pitch se acerca a la vertical (90 grad, U) y hacia abajo (-90 deg, D)",
+        "message": "Símbolo OSD que muestra cuando el cabeceo se acerca a la vertical (90 grad, U) y hacia abajo (-90 deg, D)",
         "english": "OSD Symbol to show when pitch is approaching vertical (90 deg, U) and D for nose down (-90 deg, D)"
     },
     "osdTextElementUnknown": {
@@ -8017,12 +8017,12 @@
         "english": "Minimum recorded RSSI"
     },
     "osdTextStatMaxCurrent": {
-        "message": "Batería: consumo máximo sw amperaje",
+        "message": "Batería: consumo máximo (amperaje)",
         "english": "Battery current draw maximum",
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatMaxCurrent": {
-        "message": "Máxim amperaje registrado",
+        "message": "Máximo amperaje registrado",
         "english": "Maximum recorded current draw"
     },
     "osdTextStatUsedMah": {
@@ -8121,7 +8121,7 @@
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatRtcDateTime": {
-        "message": "Fecha y hora desde el reloj de tiempo real",
+        "message": "Fecha y hora del reloj de tiempo real",
         "english": "Date and time from real time clock"
     },
     "osdTextStatBattery": {
@@ -8815,12 +8815,12 @@
         "description": "Save to file button in the VTX tab"
     },
     "vtxButtonSaveLua": {
-        "message": "Guardar Scrip Lua",
+        "message": "Guardar Script Lua",
         "english": "Save Lua Script",
         "description": "Save Lua script button in the VTX tab"
     },
     "vtxLuaFileHelp": {
-        "message": "El botón '$t(vtxButtonSaveLua.message)' le permitirá guardar un archivo Lua <i>craftname</i>. conteniendo la configuración de la tabla vtx que puede usarse con los scrpts lua de betaflight. (Vea más <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">aquí</a>.)",
+        "message": "El botón '$t(vtxButtonSaveLua.message)' le permitirá guardar un archivo Lua <i>craftname</i>. conteniendo la configuración de la tabla vtx que puede usarse con los scripts lua de betaflight. (Vea más <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">aquí</a>.)",
         "english": "The '$t(vtxButtonSaveLua.message)' button will allow you to save a <i>craftname</i>.lua file containing the vtx table configuration that can be used with the betaflight lua scripts. (See more <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">here</a>.)"
     },
     "vtxButtonLoadFile": {
@@ -8885,7 +8885,7 @@
         "english": "Accelerometer"
     },
     "configurationAccHardwareHelp": {
-        "message": "Activa el Acelerómetro. Requerido para todos los modos de estabilización: Ángulo, Horizon, Entrenador Acro y Rescate.",
+        "message": "Activa el Acelerómetro. Requerido para todos los modos de estabilización: Ángulo, Horizonte, Entrenador Acro y Rescate.",
         "english": "Enables the Accelerometer. This is required for all stabilisation modes: Angle, Horizon, Acro Trainer and Rescue."
     },
     "configurationBaroHardware": {
@@ -8901,7 +8901,7 @@
         "english": "Magnetometer"
     },
     "configurationMagHardwareHelp": {
-        "message": "Activa Magnetómetro (Si disponible). La dirección de brújula no se usa actualmente en el control de vuelo. Es sólo informativa, disponible vía Telemetrí.",
+        "message": "Activa Magnetómetro (Si disponible). La dirección de brújula no se usa actualmente en el control de vuelo. Es sólo informativa, disponible vía Telemetría.",
         "english": "Enables the Magnetometer (if available). Compass direction is currently not used in Flight Control. It is informative only, available via the Telemetry."
     },
     "configurationPersonalization": {
@@ -8917,7 +8917,7 @@
         "english": "Logging mode"
     },
     "blackboxModeHelp": {
-        "message": "<strong>OFF:</strong> Deshabilita los registros.<br><br><strong>NORMAL:</strong> Activa el registr0 vcuando se está ARMADO y el interruptor de la CAJA NEGRA se ha activado.<br><br><strong>ARMED:</strong> Habilita el registro cuando ARMADO.<br><br><strong>SWITCH:</strong> Habilita el registro cuando el interruptor de la CAJA NEGRA se ha activado.",
+        "message": "<strong>OFF:</strong> Deshabilita los registros.<br><br><strong>NORMAL:</strong> Activa el registro cuando se está ARMADO y el interruptor de la CAJA NEGRA se ha activado.<br><br><strong>ARMED:</strong> Habilita el registro cuando ARMADO.<br><br><strong>SWITCH:</strong> Habilita el registro cuando el interruptor de la CAJA NEGRA se ha activado.",
         "english": "<strong>OFF:</strong> Disable logging.<br><br><strong>NORMAL:</strong> Enable logging when both ARMED and BLACKBOX switch are active.<br><br><strong>ARMED:</strong> Enable logging when ARMED.<br><br><strong>SWITCH:</strong> Enable logging when BLACKBOX switch is active."
     },
     "blackboxModeOff": {
@@ -8945,7 +8945,7 @@
         "english": "<strong>No Logging:</strong> Disable logging.<br><br><strong>Onboard Flash:</strong> Log to the onboard flash chip (if available).<br><br><strong>SD Card:</strong> Log to the onboard SD card (if available).<br><br><strong>Serial Port:</strong> Log to an external logger device (e.g OpenLager) connected to a serial port. The serial port must to be configured to 'Blackbox Logging' on the <strong>Configuration</strong> tab."
     },
     "blackboxRateOfLogging": {
-        "message": "Rate de registro",
+        "message": "Tasa de registro",
         "english": "Logging rate"
     },
     "blackboxRateOfLoggingHelp": {
@@ -9029,7 +9029,7 @@
         "english": "Confirm Arming"
     },
     "dialogConfirmArmingNote": {
-        "message": "PRECUCIÓN: ¿Está seguro de querer activar la<strong>activación del armado</strong> mientras Configurator está conectado?",
+        "message": "ADVERTENCIA: ¿Está seguro de querer activar la<strong>activación del armado</strong> mientras Configurator está conectado?",
         "english": "WARNING: Are you sure you want to <strong>enable arming</strong> while the Configurator is connected?"
     },
     "dialogConfirmArmingConfirm": {
@@ -9105,7 +9105,7 @@
         "english": "TRAINER"
     },
     "mode MSP OVERRIDE": {
-        "message": "OVERRIDE MSP",
+        "message": "INVALIDAR MSP",
         "english": "MSP OVERRIDE"
     },
     "mode STICK COMMANDS DISABLE": {
@@ -9155,7 +9155,7 @@
         "description": "One of the options selectable for the GPS SBAS system"
     },
     "gpsSbasNorthAmericanWAAS": {
-        "message": "WAAS Norte Americano",
+        "message": "WAAS Norteamericano",
         "english": "North American WAAS",
         "description": "One of the options selectable for the GPS SBAS system"
     },
@@ -9219,7 +9219,7 @@
         "english": "Install from the Google Play Store"
     },
     "cordovaWebviewUninstall": {
-        "message": "Desinstalar la aplicación <b>{{app}}</b> puede ayudar a solucionar este problema de compatibilidad. Si no es capaz de desinstalarla, intentaedesactivarla desde los ajustes de la aplicación.",
+        "message": "Desinstalar la aplicación <b>{{app}}</b> puede ayudar a solucionar este problema de compatibilidad. Si no es capaz de desinstalarla, intente desactivarla desde los ajustes de la aplicación.",
         "english": "Uninstalling the <b>{{app}}</b> app can resolve this compatibility issue. If you are not able to uninstall it, try to disable it from the settings app."
     },
     "cordovaWebviewUninstallBtn1": {
@@ -9239,7 +9239,7 @@
         "english": "Update from the Google Play Store"
     },
     "cordovaWebviewEnable": {
-        "message": "Vaya a la pestaña de información acerca de su dispositivo en los ajustes y toque 10 veces en el número de serie de la versión para habilitar las 'opciones de desarrollador'. Después, busque y vaya entre esas opciones de desarrollador y seleccionela <b>{{app}}</b> como implementación de webview.",
+        "message": "Vaya a la pestaña de información acerca de su dispositivo en los ajustes y toque 10 veces en el número de serie de la versión para habilitar las 'opciones de desarrollador'. Después, busque entre esas opciones de desarrollador y selecciónela <b>{{app}}</b> como implementación de webview.",
         "english": "Go into the tab of information about your device in the settings and tap 10 times on the build version number to enable 'Developer options'. After that, search and go in the developer options and select <b>{{app}}</b> as webview provider."
     },
     "cordovaWebviewEnableBtn": {
