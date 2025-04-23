@@ -98,7 +98,7 @@ function bundle_deps() {
   return runAsync(
     new Promise((resolve, reject) =>
       child_process.exec(
-        "pnpm install --prod --frozen-lockfile",
+        "pnpm install --prod --frozen-lockfile --node-linker=hoisted",
         { cwd: BUNDLE_DIR },
         (err) => (err ? reject(err) : resolve()),
       ),
@@ -607,7 +607,7 @@ function cordova_deps() {
   return runAsync(
     new Promise((resolve, reject) =>
       child_process.exec(
-        "pnpm install --prod --frozen-lockfile",
+        "pnpm install --prod --frozen-lockfile --node-linker=hoisted",
         { cwd: context.appdir },
         (err) => (err ? reject(err) : resolve()),
       ),
