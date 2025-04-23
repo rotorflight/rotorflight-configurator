@@ -230,7 +230,7 @@
         "english": "Opt out of the anonymised collection of statistics data"
     },
     "connectionTimeout": {
-        "message": "Zeitüberschreitung bei der Verbindung, um eine längere Initialisierung nach Geräte-Einstecken oder Neustart zu ermöglichen",
+        "message": "Zeitüberschreitung beim Verbindungsaufbau, um eine längere Initialisierung nach Geräte-Einstecken oder Neustart zu ermöglichen",
         "english": "Set connection timeout to allow longer initialisation on device plugin or reboot",
         "description": "Change timeout on auto-connect and reboot so the bus has more time to initialize after being detected by the system"
     },
@@ -1264,11 +1264,11 @@
         "english": "Save"
     },
     "initialSetupAccelCalibStarted": {
-        "message": "Beschleunigungs-Sensor Kalibrierung gestartet",
+        "message": "Kalibrierung des Beschleunigungs-Sensors gestartet",
         "english": "Accelerometer calibration started"
     },
     "initialSetupAccelCalibEnded": {
-        "message": "Beschleunigungs-Sensor Kalibrierung <span class=\"message-positive\">abgeschlossen</span>",
+        "message": "Kalibrierung des Beschleunigungs-Sensors <span class=\"message-positive\">abgeschlossen</span>",
         "english": "Accelerometer calibration <span class=\"message-positive\">finished</span>"
     },
     "initialSetupMagCalibStarted": {
@@ -1632,7 +1632,7 @@
         "english": ""
     },
     "beeper_DISARM_REPEAT": {
-        "message": "Piept, solange der Stick in Disarm-Position gehalten wird.",
+        "message": "Piept, solange der Knüppel in Disarm-Position gehalten wird.",
         "english": "Beeps sounded while stick held in disarm position"
     },
     "beeper_ARMED": {
@@ -1660,7 +1660,7 @@
         "english": "Beep when the 5 key camera control is exited"
     },
     "beeper_ARMING_GPS_NO_FIX": {
-        "message": "Piept einen speziellen Ton falls gearmt ist und keine GPS-Verbindung besteht",
+        "message": "Piept einen speziellen Ton falls gearmt ist und keine GPS-Verbindung besteht.",
         "english": "Beep a special tone when arming the FC and GPS does not have fix"
     },
     "configurationSystem": {
@@ -2219,7 +2219,7 @@
         "english": "Sort"
     },
     "receiverTelemetrySensorsExceededWarning": {
-        "message": "Es können maximal {{max}} Sensoren aktiviert werden.",
+        "message": "Es können maximal {{max}} Telemetrie-Signale aktiviert werden.",
         "english": "A maximum of {{max}} sensors canenbe enabled."
     },
     "receiverTelemetrySensor_VOLTAGE": {
@@ -3244,7 +3244,7 @@
         "english": "Min"
     },
     "servoMinHelp": {
-        "message": "Tiefster Stellwert (minimale Impulsbreite) in µs. Diese Einstellung begrenzt den zulässigen negativen Servoweg. Sie dient dazu, ein mechanisches Anschlagen zu verhindern.",
+        "message": "Tiefster Stellwert (minimale Pulsbreite) in µs. Diese Einstellung begrenzt den zulässigen negativen Servoweg. Sie dient dazu, ein mechanisches Anschlagen zu verhindern.",
         "english": "Lowest point of travel (minimum pulse width). This setting changes the allowed negative servo throw. It is used for avoiding servo arm binding at the negative travel extreme."
     },
     "servoMax": {
@@ -3252,7 +3252,7 @@
         "english": "Max"
     },
     "servoMaxHelp": {
-        "message": "Höchster Stellwert (maximale Impulsbreite) in µs. Diese Einstellung begrenzt den zulässigen positiven Servoweg. Sie dient dazu, ein mechanisches Anschlagen zu verhindern.",
+        "message": "Höchster Stellwert (maximale Pulsbreite) in µs. Diese Einstellung begrenzt den zulässigen positiven Servoweg. Sie dient dazu, ein mechanisches Anschlagen zu verhindern.",
         "english": "Highest point of travel (maximum pulse width). This setting changes the allowed positive servo throw. It is used for avoiding servo arm binding at the positive travel extreme."
     },
     "servoScaleNeg": {
@@ -3328,11 +3328,11 @@
         "english": "<span class=\"message-negative\">Warning:</span> The <i>Geometry correction</i> is not equal for all servos. Please check!"
     },
     "servoOverride": {
-        "message": "Servos direkt ansteuern",
+        "message": "Servos Direkt Ansteuern",
         "english": "Servo Override"
     },
     "servoOverrideHelp": {
-        "message": "Wähle das Servo aus, das überschrieben werden soll und bewege dann den Schieberegler, um den Servoarm in die gewünschte Winkelposition zu bewegen.",
+        "message": "Wähle das Servo aus, das angesteuert werden soll und bewege dann den Schieberegler, um den Servoarm in die gewünschte Winkelposition zu bewegen.",
         "english": "Select the servo to be controlled and then move the slider to move the servo arm to the commanded angle."
     },
     "servoEnableOverrideLabel": {
@@ -3696,7 +3696,7 @@
         "english": "<strong>Enable Mixer Override</strong>"
     },
     "mixerOverrideEnableSwitchText": {
-        "message": "Für Einstellungs-Zwecke werden mit 'Mischer-Übersschreiben' die Mixer-Eingänge in die eingestellten Positionen gezwungen. Wenn 'Mischer-Durchleiten' aktiviert ist, werden die Funktionen vom Sender gesteuert. Die überschriebenen Werte werden nicht gespeichert und bei einem Neustart zurückgesetzt.",
+        "message": "Für Einstellungs-Zwecke werden mit 'Mischer-Übersschreiben' die Mixer-Eingänge in beliebig vorgebbare Positionen gezwungen. Wenn 'Mischer-Durchleiten' aktiviert ist, werden die Funktionen vom Sender gesteuert. Die überschriebenen Werte werden nicht gespeichert und bei einem Neustart zurückgesetzt.",
         "english": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. If Passthrough is enabled, the positions are controlled by your TX. The override values are not saved, and will be reset in reboot."
     },
     "mixerPassthroughEnableSwitch": {
@@ -4204,7 +4204,7 @@
         "english": "Adjusts the Consumption reported by the ESC's telemetry."
     },
     "motorRotorSpeeds": {
-        "message": "Rotor Drehzahlen",
+        "message": "Rotor-Drehzahlen",
         "english": "Rotor Speed"
     },
     "motorMainRotorSpeed": {
@@ -4268,11 +4268,11 @@
         "english": "Errors:"
     },
     "motorOverrideNote": {
-        "message": "<strong>Hinweis:</strong> Mit der Motor-Übersteuerung wird der Gas PWM-Wert zu Einstellungs- und Testzwecken auf einen frei wählbaren Wert gesetzt. Die Übersteuerungswerte werden nicht gespeichert und werden beim Neustart zurückgesetzt.<br/><br/><strong class=\"message-negative\">DIE MOTOR-ÜBERSTEUERUNG FÜHRT DAZU, DASS DIE MOTOREN HOCHLAUFEN!</strong>",
+        "message": "<strong>Hinweis:</strong> Mit der Motor-Übersteuerung wird der Gas PWM-Wert zu Einstellungs- und Testzwecken auf einen frei wählbaren Wert gesetzt. Die Übersteuerungswerte werden nicht gespeichert und werden beim Neustart zurückgesetzt.<br/><br/><strong class=\"message-negative\">DIE MOTOR-ÜBERSTEUERUNG FÜHRT DAZU, DASS DIE MOTOREN ANLAUFEN!</strong>",
         "english": "<strong>Note.</strong> Throttle Override forces the output throttle to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset in reboot.<br/><br/><strong class=\"message-negative\">MOTOR THROTTLE OVERRIDE WILL MAKE THE MOTORS TO SPOOL UP!</strong>"
     },
     "motorOverrideTitle": {
-        "message": "Motor Übersteuerung",
+        "message": "Motor-Übersteuerung",
         "english": "Throttle Override"
     },
     "motorOverrideEnable": {
@@ -4288,7 +4288,7 @@
         "english": "Governor Settings"
     },
     "govConfigurationNote": {
-        "message": "<strong>Hinweis:</strong> Die Einstellungen des Drehzahlreglers sind sowohl global als auch profilspezifisch. Die profilspez. Einstellungen sind in der Registerkarte 'Profile'.",
+        "message": "<strong>Hinweis:</strong> Die Einstellungen des Drehzahlreglers sind sowohl global als auch profilspezifisch. Die profilspez. Einstellungen befinden sich in der Registerkarte 'Profile'.",
         "english": "<strong>Note:</strong> Governor has both global and profile parameters. Please see the Profiles tab for profile specific parameters."
     },
     "govMode": {
@@ -4484,7 +4484,7 @@
         "english": "Feedforward gain"
     },
     "govFGainHelp": {
-        "message": "Stärke der Vorsteuerung für Kollektiv-Pitch/Zyklisch. Üblicherweise 0..100.",
+        "message": "Stärke der Vorsteuerung für Kollektiv-Pitch und Zyklisch. Üblicherweise 0..100.",
         "english": "Collective/Cyclic feedforward gain. Usually 0..100"
     },
     "govTTAGain": {
@@ -4592,7 +4592,7 @@
         "english": "Debug"
     },
     "cliInfo": {
-        "message": "<strong>Hinweis:</strong> Beim Verlassen der CLI-Registerkarte oder beim Drücken der Taste \"Trennen\" wird <strong>Automatisch</strong>  <strong>Beenden</strong> an den Flight-Controller gesendet. Mit der neuesten Firmware wird dieser dadurch <strong>neu gestartet</strong> und nicht gespeicherte Änderungen gehen <strong>verloren</strong>. <p><strong><span class=\"message-negative\">Warnung:</span></strong> Einige CLI-Befehle können dazu führen, dass willkürliche Signale an die ESCs gesendet werden. Dadurch könnten die Motoren hochdrehen, wenn ein Akku angeschlossen ist. <strong>Bevor Befehle ins CLI eingegeben werden muss unbedingt sichergestellt werden, dass kein Akku angeschlossen ist.</strong>",
+        "message": "<strong>Hinweis:</strong> Beim Verlassen der CLI-Registerkarte oder beim Klicken des Feldes \"Trennen\" wird <strong>Automatisch</strong>  <strong>Beenden</strong> an den Flight-Controller gesendet. Mit der neuesten Firmware wird dieser dadurch <strong>neu gestartet</strong> und nicht gespeicherte Änderungen gehen <strong>verloren</strong>. <p><strong><span class=\"message-negative\">Warnung:</span></strong> Einige CLI-Befehle können dazu führen, dass willkürliche Signale an die ESCs gesendet werden. Dadurch könnten die Motoren anlaufen, wenn ein Akku angeschlossen ist. <strong>Bevor Befehle ins CLI eingegeben werden muss unbedingt sichergestellt werden, dass kein Akku angeschlossen ist.</strong>",
         "english": "<strong>Note:</strong> Leaving CLI tab or pressing Disconnect will <strong>automatically</strong> send \"<strong>exit</strong>\" to the board.  With the latest firmware this will make the controller <strong>restart</strong> and unsaved changes will be <strong>lost</strong>.<p><strong><span class=\"message-negative\">Warning:</span></strong> Some commands in CLI can result in arbitrary signals being sent on the motor output pins. This can cause motors to spin up if a battery is connected. Therefore it is highly recommended to make sure that <strong>no battery is connected before entering commands in CLI</strong>."
     },
     "cliInputPlaceholder": {
@@ -4636,7 +4636,7 @@
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"
     },
     "cliConfirmSnippetNote": {
-        "message": "<strong>Hinweis</strong>: Du kannst Befehle vor der Ausführung überprüfen und bearbeiten.",
+        "message": "<strong>Hinweis</strong>: Die CLI-Befehle können vor der Ausführung überprüft und bearbeit werden.",
         "english": "<strong>Note</strong>: You can review and edit commands before execution."
     },
     "cliConfirmSnippetBtn": {
@@ -5140,7 +5140,7 @@
         "english": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "Bei Verbindungsabbruch zum Board: <ul><li>Ausschalten</li><li>'Keine Reboot-Sequenz' und 'Chip vollständig löschen' aktivieren</li><li>Flight-Controller mit gedrückter Boot-Taste oder Boot-Brücke per USB verbinden</li><li>Power LED leuchtet (kein Blinken)</li><li> Alle STM32-Treiber und Zadig, falls benötigt, installieren (siehe <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> Abschnitt des Handbuchs)</li><li>Konfigurator schließen, dann Konfigurator neu starten</li><li>BOOT-Taste loslassen, falls der Flight-Controller eine hat</li><li>Flashen mit korrekter Firmware (mit manueller Baudrate, falls im Handbuch des Flight-Controllers angegeben)</li><li>Ausschalten</li><li>Boot-Brücke entfernen</li><li>Einschalten (Aktivitäts-LED sollte blinken)</li><li>Wie gewohnt anschließen</li></ul>",
+        "message": "Bei Verbindungsabbruch zum Board: <ul><li>Ausschalten</li><li>'Keine Reboot-Sequenz' und 'Chip vollständig löschen' aktivieren</li><li>Flight-Controller mit gedrückter Boot-Taste oder Boot-Brücke per USB verbinden</li><li>Power LED leuchtet (kein Blinken)</li><li> Alle STM32-Treiber und Zadig, falls benötigt, installieren (siehe <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> Abschnitt des Handbuchs)</li><li>Konfigurator schließen, dann Konfigurator neu starten</li><li>Boot-Taste loslassen, falls der Flight-Controller eine hat</li><li>Flashen mit korrekter Firmware (mit manueller Baudrate, falls im Handbuch des Flight-Controllers angegeben)</li><li>Ausschalten</li><li>Boot-Brücke entfernen</li><li>Einschalten (Aktivitäts-LED sollte blinken)</li><li>Wie gewohnt anschließen</li></ul>",
         "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
     },
     "firmwareFlasherFirmwareNotLoaded": {
@@ -6337,7 +6337,7 @@
         "english": "Rates Type"
     },
     "rateSetupRatesTypeTip": {
-        "message": "Das Ändern des Drehraten-Typs verändert die Kurven und die Art und Weise, wie du sie einstellen kannst.",
+        "message": "Das Ändern des Drehraten-Typs verändert die Kurven und die Art und Weise, wie sie eingestellt werden können.",
         "english": "Changing rates type will change the rates curve and the way you can set it"
     },
     "rateSetupRate": {
@@ -6377,7 +6377,7 @@
         "english": "Center Sensitivity"
     },
     "rateSetupMaxVel": {
-        "message": "Maximale Drehrate [°/s]",
+        "message": "Max. Winkelgeschw. [°/s]",
         "english": "Max Vel [°/s]"
     },
     "rateSetupRatesCurve": {
@@ -6529,7 +6529,7 @@
         "english": "Notch Q"
     },
     "gyroDynamicNotchQHelp": {
-        "message": "Der Q-Faktor bestimmt, wie breit die dynamischen Kerben sind. Ein höherer Wert macht sie schmaler und präziser, ein niedrigerer Wert macht sie breiter und umfassender. Empfohlen werden Werte zwischen 2,0 und 4,0. Ein Wert unter 2,0 erhöht die Filter-Verzögerung erheblich und kann die  Flugleistung verschlechtern.",
+        "message": "Der Q-Faktor bestimmt, wie breit die dynamischen Kerben sind. Ein höherer Wert macht sie schmaler und präziser, ein niedrigerer Wert macht sie breiter und umfassender. Empfohlen werden Werte zwischen 2,0 und 4,0. Ein Wert unter 2,0 erhöht die Signal-Verzögerung erheblich und kann die  Flugleistung verschlechtern.",
         "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance."
     },
     "gyroDynamicNotchMinHz": {
@@ -6621,7 +6621,7 @@
         "english": "Strength"
     },
     "gyroRpmFilterPresetHelp": {
-        "message": "Eine höhere Stärke beseitigt mehr Vibrationen, führt aber zu einer größeren Filter-Verzögerung.",
+        "message": "Eine höhere Stärke beseitigt mehr Vibrationen, führt aber zu einer größeren Signal-Verzögerung.",
         "english": "Higher strength removes more vibrations, but introduces more delay."
     },
     "gyroRpmFilterPresetCustom": {
@@ -6677,7 +6677,7 @@
         "english": "RPM Filter Notches"
     },
     "gyroRpmFilterHelp": {
-        "message": "Jedes rotierende Teil eines Hubschraubers erzeugt Vibrationen, welche die Leistung der Regelkreise erheblich beeinträchtigen können. Die <i>RPM-Kerbfilter</i> nutzen das Drehzahlsignal des Motors und die Getriebeübersetzungen, um diese Vibrationen präzise aus dem Gyrosignal zu eliminieren, so dass die Regelkreise mit der tatsächlichen Bewegung des Helis arbeiten können. Diese Methode führt zu einer wesentlich geringeren Filter-Verzögerung als die herkömmliche Vibrationsfilterung und verbessert die Gesamtflugleistung.",
+        "message": "Jedes rotierende Teil eines Hubschraubers erzeugt Vibrationen, welche die Leistung der Regelkreise erheblich beeinträchtigen können. Die <i>RPM-Kerbfilter</i> nutzen das Drehzahlsignal des Motors und die Getriebeübersetzungen, um diese Vibrationen präzise aus dem Gyrosignal zu eliminieren, so dass die Regelkreise mit der tatsächlichen Bewegung des Helis arbeiten können. Diese Methode führt zu einer wesentlich geringeren Signal-Verzögerung als die herkömmliche Vibrationsfilterung und verbessert die Gesamtflugleistung.",
         "english": "Every rotating part on a helicopter generates vibrations, which can significantly affect the performance of the flight control loops. The <i>RPM Filter</i> utilizes the motor's RPM signal and the model's gear ratios to precisely eliminate these vibrations from the gyro's output, enabling the control loops to operate on the true motion of the aircraft. This method introduces substantially less delay than traditional vibration filtering, enhancing overall flight performance."
     },
     "gyroRpmFilterMainRotorGroup": {
@@ -6809,7 +6809,7 @@
         "english": "Revert"
     },
     "failsafeFeaturesHelpNew": {
-        "message": "Es gibt ein zweistufiges Failsafe System. <strong>Stufe 1</strong> tritt dann ein, wenn die Impulslänge des Empfängers nicht stimmt, der Empfänger einen Failsafe übermittelt oder kein Signal mehr empfangen wird. Die Kanal Rückfalleinstellungen werden dann <span class=\"message-negative\">für alle</span> Kanäle gesetzt und ein kurzes Zeitfenster wird geöffnet um eine erneute Verbindung zu ermöglichen. <strong>Stufe 2</strong> tritt dann ein, wenn das Signal für eine längere Zeit weg ist während das Modell <span class=\"message-negative\">gearmt</span> ist. Alle Kanäle werden mit den hier gesetzten Einstellungen überschrieben.<br /><strong>Hinweis:</strong> Im Gegensatz zu Stufe 1 werden hier auch Werte für Kanäle überschrieben die ungültige Daten empfangen.",
+        "message": "Es gibt ein zweistufiges Failsafe System. <strong>Stufe 1</strong> tritt dann ein, wenn die Pulslänge des Empfängers nicht stimmt, der Empfänger einen Failsafe übermittelt oder kein Signal mehr empfangen wird. Die Kanal Rückfalleinstellungen werden dann <span class=\"message-negative\">für alle</span> Kanäle gesetzt und ein kurzes Zeitfenster wird geöffnet um eine erneute Verbindung zu ermöglichen. <strong>Stufe 2</strong> tritt dann ein, wenn das Signal für eine längere Zeit weg ist während das Modell <span class=\"message-negative\">gearmt</span> ist. Alle Kanäle werden mit den hier gesetzten Einstellungen überschrieben.<br /><strong>Hinweis:</strong> Im Gegensatz zu Stufe 1 werden hier auch Werte für Kanäle überschrieben die ungültige Daten empfangen.",
         "english": "Failsafe has two stages. <strong>Stage 1</strong> is entered when a flightchannel has an invalid pulse length, the receiver reports failsafe mode or there is no signal from the receiver at all, the channel fallback settings are applied to <span class=\"message-negative\">all channels</span> and a short amount of time is provided to allow for recovery. <strong>Stage 2</strong> is entered when the error condition takes longer than the configured guard time while the craft is <span class=\"message-negative\">armed</span>, all channels will remain at the applied channel fallback setting unless overruled by the chosen procedure. <br /><strong>Note:</strong> Prior to entering stage 1, channel fallback settings are also applied to individual AUX channels that have invalid pulses."
     },
     "failsafePulsrangeTitle": {
@@ -6821,11 +6821,11 @@
         "english": "Pulses shorter than minimum or longer than maximum are invalid and will trigger application of individual channel fallback settings for AUX channels or entering stage 1 for flightchannels"
     },
     "failsafeRxMinUsecItem": {
-        "message": "Minimale Länge",
+        "message": "Minimale Pulslänge",
         "english": "Minimum length"
     },
     "failsafeRxMaxUsecItem": {
-        "message": "Maximale Länge",
+        "message": "Maximale Pulslänge",
         "english": "Maximum length"
     },
     "failsafeChannelFallbackSettingsTitle": {
@@ -9078,7 +9078,7 @@
         "english": "Accelerometer"
     },
     "configurationAccHardwareHelp": {
-        "message": "Aktiviert die Beschleunigungs-Sensoren. Diese Aktivierung ist für alle Stabilisierungs-Funktionen erforderlich: Winkel, Horizont, Acro-Trainer und Rettung.",
+        "message": "Aktiviert den Beschleunigungs-Sensor. Diese Aktivierung ist für alle Stabilisierungs-Funktionen erforderlich: Winkel, Horizont, Acro-Trainer und Rettung.",
         "english": "Enables the Accelerometer. This is required for all stabilisation modes: Angle, Horizon, Acro Trainer and Rescue."
     },
     "configurationBaroHardware": {
@@ -9134,7 +9134,7 @@
         "english": "Logging device"
     },
     "blackboxDeviceHelp": {
-        "message": "<strong>Kein Logging:</strong> Deaktiviert die Datenaufzeichnung.<br><strong>Speicher-Chip des Boards:</strong> Schreibt den Log auf den integrierten Speicherchip (falls vorhanden).<br><strong>SD-Karte:</strong> Schreibt den Log auf die eingesteckte SD-Karte (falls vorhanden).<br><strong>Serieller Anschluss:</strong> Schreibt den Log auf ein externes Logger-Gerät (z. B. Open Lager), das an einen seriellen Anschluss angeschlossen ist. Der serielle Anschluss muss im Abschnitt 'Konfiguration' auf der Registerkarte  <strong>Serielle Anschlüsse</strong> konfiguriert werden.",
+        "message": "<strong>Kein Logging:</strong> Deaktiviert die Datenaufzeichnung.<br><strong>Speicher-Chip des Boards:</strong> Schreibt den Log auf den integrierten Speicherchip (falls vorhanden).<br><strong>SD-Karte:</strong> Schreibt den Log auf die eingesteckte SD-Karte (falls vorhanden).<br><strong>Serieller Anschluss:</strong> Schreibt den Log auf ein externes Logger-Gerät (z. B. Open Lager), das an einen seriellen Anschluss angeschlossen ist. Dieser serielle Anschluss muss im Abschnitt 'Konfiguration' auf der Registerkarte  <strong>Konfiguration</strong> unter 'Serielle Anschlüsse' konfiguriert werden.",
         "english": "<strong>No Logging:</strong> Disable logging.<br><br><strong>Onboard Flash:</strong> Log to the onboard flash chip (if available).<br><br><strong>SD Card:</strong> Log to the onboard SD card (if available).<br><br><strong>Serial Port:</strong> Log to an external logger device (e.g OpenLager) connected to a serial port. The serial port must to be configured to 'Blackbox Logging' on the <strong>Configuration</strong> tab."
     },
     "blackboxRateOfLogging": {
@@ -9354,7 +9354,7 @@
         "english": "Rates type change"
     },
     "dialogRatesTypeNote": {
-        "message": "<span class=\"message-negative\"><b>WARNING: Du änderst den Drehraten-Typ.</b></span> Nach dem Ändern des Drehraten-Typs werden deine Werte auf Standardeinstellungen gesetzt.",
+        "message": "<span class=\"message-negative\"><b>WARNING: Der Drehraten-Typ wird gewechselt.</b></span> Nach dem Ändern des Drehraten-Typs werden die Werte auf Standardeinstellungen gesetzt.",
         "english": "<span class=\"message-negative\"><b>WARNING: You are changing the rates type.</b></span> If you change the rates type your rates will be set to a default curve."
     },
     "dialogRatesTypeConfirm": {
@@ -9836,7 +9836,7 @@
         "english": "Something went wrong when trying to save the backup file."
     },
     "presetsCliConfirmationDialogTitle": {
-        "message": "Gerenderte Presets-CLI-Befehle überprüfen",
+        "message": "Erstellte CLI-Befehle überprüfen",
         "english": "Review The Rendered Presets CLI Commands"
     },
     "presetEdit": {
