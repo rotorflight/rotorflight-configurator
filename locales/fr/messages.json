@@ -130,7 +130,7 @@
         "english": "Auto-Connect"
     },
     "showAllPorts": {
-        "message": "Tous les Ports",
+        "message": "Afficher tous les Ports",
         "english": "Show All Ports"  
     },
     "close": {
@@ -190,14 +190,12 @@
         "english": "Auto-Connect: Disabled - User needs to select the correct serial port and click \"Connect\" button on its own"
     },
     "showAllPortsEnabled": {
-        "message": "Show All Ports: Enabled - Configurator lists all possible ports",
-        "english": "Show All Ports: Enabled - Configurator lists all possible ports",
-        "status": "New entry. Please translate!"
+        "message": "Afficher tous les ports : Activé – Le configurateur affiche tous les ports possibles",
+        "english": "Show All Ports: Enabled - Configurator lists all possible ports"
     },
     "showAllPortsDisabled": {
-        "message": "Show All Ports: Disabled - Configurator will only list recognized ports",
-        "english": "Show All Ports: Disabled - Configurator will only list recognized ports",
-        "status": "New entry. Please translate!"
+        "message": "Afficher tous les ports : Désactivé – Le configurateur n’affichera que les ports reconnus",
+        "english": "Show All Ports: Disabled - Configurator will only list recognized ports"
     },
     "zoomBoxText": {
         "message": "Zoom:",
@@ -216,9 +214,8 @@
         "english": "Reopen last tab on connect"
     },
     "rememberLastSelectedBoard": {
-        "message": "Remember last selected board in firmware flasher",
-        "english": "Remember last selected board in firmware flasher",
-        "status": "New entry. Please translate!"
+        "message": "Se souvenir de la dernière carte sélectionnée dans le programme de flashage du firmware",
+        "english": "Remember last selected board in firmware flasher"
     },
     "analyticsOptOut": {
         "message": "Ne pas participer à la collecte anonymes de données statistiques",
@@ -642,13 +639,8 @@
         "english": "No configuration received within <span class=\"message-negative\">10 seconds</span>, communication <span class=\"message-negative\">failed</span>"
     },
     "firmwareVersionNotSupported": {
-        "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documentation.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
-        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documentation.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Cette version du microprogramme n'est <span class=\"message-negative\">pas prise en charge</span>. Veuillez utiliser une version du microprogramme prise en charge par cette version du configurateur. Utilisez l'interface de ligne de commande (CLI) pour la sauvegarde avant de flasher. La procédure de sauvegarde/restauration CLI est dans la documentation.<br />Vous pouvez également télécharger et utiliser une ancienne version du configurateur si vous n'êtes pas prêt à effectuer la mise à niveau.",
-            "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
-        }
+        "message": "Cette version du microprogramme est <span class=\"message-negative\">non prise en charge</span>. Veuillez utiliser une version du firmware compatible avec cette version du Configurateur. Utilisez le CLI pour faire une sauvegarde avant le flash. La procédure de sauvegarde/restauration via CLI est dans la documentation.<br />Vous pouvez aussi télécharger et utiliser une ancienne version du configurateur si vous n'êtes pas prêt à faire la mise à jour.",
+        "english": "This firmware version is <span class=\"message-negative\">not supported</span>. Please use a firmware version that is supported by this version of the Configurator. Use CLI for backup before flashing. CLI backup/restore procedure is in the documentation.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
     },
     "firmwareTypeNotSupported": {
         "message": "Les microprogrammes autres que Rotorflight <span class=\"message-negative\">ne sont pas supportés</span>, à part en mode interface de ligne de commande (CLI).",
@@ -1332,13 +1324,8 @@
         "english": "Enable Software Serial ports"
     },
     "feature_GPS": {
-        "message": "GPS for telemetry",
-        "english": "GPS for telemetry",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "GPS pour la navigation et la télémétrie",
-            "english": "GPS for navigation and telemetry"
-        }
+        "message": "GPS pour la télémétrie",
+        "english": "GPS for telemetry"
     },
     "feature_SONAR": {
         "message": "Radar d'altitude sonar",
@@ -1421,19 +1408,16 @@
         "english": "Features"
     },
     "featureTip_GPS": {
-        "message": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration.",
-        "english": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration.",
-        "status": "New entry. Please translate!"
+        "message": "Active la prise en charge de la télémétrie GPS. Ajoute l'onglet <i>GPS</i> pour la configuration.",
+        "english": "Enables support for GPS telemetry. Adds the <i>GPS</i> tab for configuration."
     },
     "featureTip_LED_STRIP": {
-        "message": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration.",
-        "english": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration.",
-        "status": "New entry. Please translate!"
+        "message": "Active la prise en charge des bandes LED WS2811/2812. Ajoute l'onglet <i>LED Strip</i> pour la configuration.",
+        "english": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration."
     },
     "featureTip_CMS": {
-        "message": "Enables firmware support for CMS.",
-        "english": "Enables firmware support for CMS.",
-        "status": "New entry. Please translate!"
+        "message": "Active la prise en charge du CMS par le firmware.",
+        "english": "Enables firmware support for CMS."
     },
     "configurationSerialPorts": {
         "message": "Ports série",
@@ -1528,31 +1512,24 @@
         "english": "Accelerometer Trim"
     },
     "configurationAccelTrimsHelp": {
-        "message": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue.",
-        "english": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Les trims de l'accéléromètre permettent un réglage précis du niveau de l'horizon, qui peut être utilisé pour réduire la dérive en mode stabilisé, tel que Angle ou Sauvetage.",
-            "english": "The Accelerometer Trims provide fine tuning to the horizon level, which can be used to decrease drift while in stabilized modes, such as Angle or Rescue."
-        }
+        "message": "Les réglages de l’accéléromètre ajustent l’horizon pour corriger la dérive en modes stabilisés comme Angle, Horizon et Rescue.",
+        "english": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue."
     },
     "configurationAccelTrimRoll": {
         "message": "Correction de l'accéléromètre sur le Roll",
         "english": "Accelerometer Roll Trim"
     },
     "configurationAccelRollTrimHelp": {
-        "message": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right.",
-        "english": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right.",
-        "status": "New entry. Please translate!"
+        "message": "Augmentez la valeur pour corriger une dérive vers la gauche. Diminuez la valeur (ou utilisez des valeurs négatives) pour corriger une dérive vers la droite.",
+        "english": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right."
     },
     "configurationAccelTrimPitch": {
         "message": "Correction de l'accéléromètre sur le Pitch",
         "english": "Accelerometer Pitch Trim"
     },
     "configurationAccelPitchTrimHelp": {
-        "message": "Increase the value to correct drift to the rear. Decrease the value (or use negative values) to correct drift to the front.",
-        "english": "Increase the value to correct drift to the rear. Decrease the value (or use negative values) to correct drift to the front.",
-        "status": "New entry. Please translate!"
+        "message": "Augmentez la valeur pour corriger une dérive vers l’arrière. Diminuez la valeur (ou utilisez des valeurs négatives) pour corriger une dérive vers l’avant.",
+        "english": "Increase the value to correct drift to the rear. Decrease the value (or use negative values) to correct drift to the front."
     },
     "escProtocolDisabledMessage": {
         "message": "<strong>Attention:</strong> La sélection d'un protocole qui n'est pas supporté par vos ESC peut conduire à des <strong>ESC qui demandent aux moteurs de tourner dès qu'une batterie est connectée</strong>. Pour cette raison, <strong>assurez-vous toujours de retirer les hélices avant de connecter une batterie pour la première fois après avoir changé le protocole de sortie du moteur</strong>.",
@@ -1671,7 +1648,7 @@
         "english": "System configuration"
     },
     "configurationLoopTime": {
-        "message": "Loop time du contrôleur de vol",
+        "message": "Temps de la Boucle du contrôleur de vol",
         "english": "Flight Controller Loop Time"
     },
     "configurationSpeedGyroNoGyro": {
@@ -1878,9 +1855,8 @@
         "english": "OSD: FrSky"
     },
     "portsFunction_SBUS_OUT": {
-        "message": "S.BUS Output",
-        "english": "S.BUS Output",
-        "status": "New entry. Please translate!"
+        "message": "Sortie S.BUS",
+        "english": "S.BUS Output"
     },
     "portsFunction_CUSTOM": {
         "message": "Sur mesure",
