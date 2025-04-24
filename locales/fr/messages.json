@@ -2372,8 +2372,7 @@
     },
     "receiverTelemetrySensor_BATTERY_VOLTAGE": {
         "message": "Tension Batterie",
-        "english": "Battery Voltage",
-        "status": "New entry. Please translate!"
+        "english": "Battery Voltage"
     },
     "receiverTelemetrySensor_BATTERY_CURRENT": {
         "message": "Courant Batterie",
@@ -2460,74 +2459,60 @@
         "english": "ESC Temp 2"
     },
     "receiverTelemetrySensor_ESC_BEC_VOLTAGE": {
-        "message": "ESC BEC Voltage",
-        "english": "ESC BEC Voltage",
-        "status": "New entry. Please translate!"
+        "message": "Tension BEC de l’ESC",
+        "english": "ESC BEC Voltage"
     },
     "receiverTelemetrySensor_ESC_BEC_CURRENT": {
-        "message": "ESC BEC Current",
-        "english": "ESC BEC Current",
-        "status": "New entry. Please translate!"
+        "message": "Courant BEC de l’ESC",
+        "english": "ESC BEC Current"
     },
     "receiverTelemetrySensor_ESC_STATUS": {
-        "message": "ESC Status",
-        "english": "ESC Status",
-        "status": "New entry. Please translate!"
+        "message": "Statut ESC",
+        "english": "ESC Status"
     },
     "receiverTelemetrySensor_ESC_MODEL": {
-        "message": "ESC Model",
-        "english": "ESC Model",
-        "status": "New entry. Please translate!"
+        "message": "Modèle de l'ESC",
+        "english": "ESC Model"
     },
     "receiverTelemetrySensor_BEC_VOLTAGE": {
-        "message": "BEC Voltage",
-        "english": "BEC Voltage",
-        "status": "New entry. Please translate!"
+        "message": "Tension BEC",
+        "english": "BEC Voltage"
     },
     "receiverTelemetrySensor_BUS_VOLTAGE": {
-        "message": "Bus Voltage",
-        "english": "Bus Voltage",
-        "status": "New entry. Please translate!"
+        "message": "Tension du Bus",
+        "english": "Bus Voltage"
     },
     "receiverTelemetrySensor_MCU_VOLTAGE": {
-        "message": "MCU Voltage",
-        "english": "MCU Voltage",
-        "status": "New entry. Please translate!"
+        "message": "Tension du Microprocesseur",
+        "english": "MCU Voltage"
     },
     "receiverTelemetrySensor_BEC_CURRENT": {
-        "message": "BEC Current",
-        "english": "BEC Current",
-        "status": "New entry. Please translate!"
+        "message": "Courant BEC",
+        "english": "BEC Current"
     },
     "receiverTelemetrySensor_BUS_CURRENT": {
-        "message": "Bus Current",
-        "english": "Bus Current",
-        "status": "New entry. Please translate!"
+        "message": "Courant du Bus",
+        "english": "Bus Current"
     },
     "receiverTelemetrySensor_MCU_CURRENT": {
-        "message": "MCU Current",
-        "english": "MCU Current",
-        "status": "New entry. Please translate!"
+        "message": "Courant du Microprocesseur",
+        "english": "MCU Current"
     },
     "receiverTelemetrySensor_ESC_TEMP": {
-        "message": "ESC Temp",
-        "english": "ESC Temp",
-        "status": "New entry. Please translate!"
+        "message": "Température de l'ESC",
+        "english": "ESC Temp"
     },
     "receiverTelemetrySensor_BEC_TEMP": {
-        "message": "BEC Temp",
-        "english": "BEC Temp",
-        "status": "New entry. Please translate!"
+        "message": "Température du BEC",
+        "english": "BEC Temp"
     },
     "receiverTelemetrySensor_MCU_TEMP": {
-        "message": "MCU Temp",
-        "english": "MCU Temp",
-        "status": "New entry. Please translate!"
+        "message": "Température du Microprocesseur",
+        "english": "MCU Temp"
     },
     "receiverTelemetrySensor_AIR_TEMP": {
-        "message": "Air Temp",
-        "english": "Air Temp",
-        "status": "New entry. Please translate!"
+        "message": "Température de l'Air"
+        "english": "Air Temp"
     },
     "receiverTelemetrySensor_MOTOR_TEMP": {
         "message": "Motor Temp",
