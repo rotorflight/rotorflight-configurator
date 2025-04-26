@@ -26,13 +26,11 @@
     },
     "genericEnable": {
         "message": "Habilitar",
-        "english": "Enable",
-        "status": "New entry. Please translate!"
+        "english": "Enable"
     },
     "genericDefault": {
         "message": "Predeterminado",
-        "english": "Default",
-        "status": "New entry. Please translate!"
+        "english": "Default"
     },
     "axisROLL": {
         "message": "ALABEO",
