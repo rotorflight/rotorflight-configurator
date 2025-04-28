@@ -80,7 +80,7 @@
 .tab-profiles .gui_box_titlebar {
     font-size: 12px;
     font-weight: normal;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
 }
 
 .tab-profiles .pid_gains .gui_box_titlebar {
@@ -124,14 +124,20 @@
 
 
 .tab-profiles .pid_table tr.pid_titlebar th {
-    color: var(--quietText);
-    background-color: var(--button-background);
     text-align: left;
     font-size: 11px;
     font-weight: normal;
     line-height: 16px;
     height: 22px;
-    border-top: 1px solid var(--boxBackground);
+}
+
+html[data-theme="light"] .tab-profiles .pid_table tr.pid_titlebar th {
+    background-color: hsl(160, 2%, 76%);
+}
+
+html[data-theme="dark"] .tab-profiles .pid_table tr.pid_titlebar th {
+    color: white;
+    background-color: hsl(160, 2%, 40%);
 }
 
 .tab-profiles .pid_table td.pid_data {
