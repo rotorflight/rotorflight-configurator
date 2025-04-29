@@ -97,6 +97,7 @@ function getFunctions() {
         { id: 72,   name: 'YawDynCeilingGain',          min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
         { id: 73,   name: 'YawDynDeadbandGain',         min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
         { id: 74,   name: 'YawDynDeadbandFilter',       min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
+        { id: 75,   name: 'YawPrecompCutoff',           min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
     ];
 }
 
