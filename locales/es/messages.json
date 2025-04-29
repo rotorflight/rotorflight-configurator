@@ -9182,7 +9182,7 @@
         "english": "Initial erase"
     },
     "blackboxInitialEraseHelp": {
-        "message": "Asegura una cantidad mínima de espacio libre cuando empieza la grabación, borrando logs anteriores si fuera necesario. Ajústelo a 0 para deshabilitar esta característica.<br><br><b>Nota:</b> El registro empieza cuando se completa el borrado. Puede llevar una cantidad significativa de tiempo con alguno chips de memoria.",
+        "message": "Asegura una cantidad mínima de espacio libre cuando empieza la grabación, borrando logs anteriores si fuera necesario. Ajústelo a 0 para deshabilitar esta característica.<br><br><b>Nota:</b> El registro empieza cuando se completa el borrado. Puede llevar una cantidad significativa de tiempo con algunos chips de memoria.",
         "english": "Ensures a minimum amount of free space when recording starts, erasing old logs if necessary. Set to 0 to disable this feature.<br><br><b>Note:</b> Logging starts after erasing completes. This may take a significant amount of time with some flash chips."
     },
     "blackboxRollingErase": {
@@ -9246,7 +9246,7 @@
         "english": "Confirm Arming"
     },
     "dialogConfirmArmingNote": {
-        "message": "ADVERTENCIA: ¿Está seguro de querer activar la<strong>activación del armado</strong> mientras Configurator está conectado?",
+        "message": "ADVERTENCIA: ¿Está seguro de querer activar el<strong>armado</strong> mientras Configurator está conectado?",
         "english": "WARNING: Are you sure you want to <strong>enable arming</strong> while the Configurator is connected?"
     },
     "dialogConfirmArmingConfirm": {
@@ -9258,7 +9258,7 @@
         "english": "Cancel"
     },
     "mode ARM": {
-        "message": "ARM",
+        "message": "ARMAR",
         "english": "ARM"
     },
     "mode ANGLE": {
@@ -9274,7 +9274,7 @@
         "english": "ALTHOLD"
     },
     "mode BEEPER": {
-        "message": "PITIDOS",
+        "message": "BEEPER",
         "english": "BEEPER"
     },
     "mode LEDLOW": {
@@ -9330,7 +9330,7 @@
         "english": "STICK COMMANDS DISABLE"
     },
     "mode BEEPER MUTE": {
-        "message": "SILENCIAR PITIDOS",
+        "message": "SILENCIAR BEEPER",
         "english": "BEEPER MUTE"
     },
     "mode RESCUE": {
@@ -9396,7 +9396,7 @@
         "english": "File name"
     },
     "dialogFileNameDescription": {
-        "message": "El archivo se guardará en '{{folder}}' carpeta en su almacenamiento interno.",
+        "message": "El archivo se guardará en '{{folder}}' la carpeta de almacenamiento interno.",
         "english": "The file will be saved in the '{{folder}}' folder in your internal storage."
     },
     "dialogFileAlreadyExistsTitle": {
@@ -9436,15 +9436,15 @@
         "english": "Install from the Google Play Store"
     },
     "cordovaWebviewUninstall": {
-        "message": "Desinstalar la aplicación <b>{{app}}</b> puede ayudar a solucionar este problema de compatibilidad. Si no es capaz de desinstalarla, intente desactivarla desde los ajustes de la aplicación.",
+        "message": "Desinstalar la aplicación <b>{{app}}</b> puede ayudar a solucionar este problema de compatibilidad. Si no logra desinstalarla, intente desactivarla desde los ajustes de la aplicación.",
         "english": "Uninstalling the <b>{{app}}</b> app can resolve this compatibility issue. If you are not able to uninstall it, try to disable it from the settings app."
     },
     "cordovaWebviewUninstallBtn1": {
-        "message": "Desinstalar de Google Play Store",
+        "message": "Desinstalar desde Google Play Store",
         "english": "Uninstall from the Google Play Store"
     },
     "cordovaWebviewUninstallBtn2": {
-        "message": "Desinstalar / desactivar desde los ajustes",
+        "message": "Desinstalar / desactivar desde ajustes",
         "english": "Uninstall / disable from the settings"
     },
     "cordovaWebviewUpdate": {
@@ -9452,7 +9452,7 @@
         "english": "Updating the <b>{{app}}</b> app can resolve this compatibility issue."
     },
     "cordovaWebviewUpdateBtn": {
-        "message": "Actualizar desde el Google Play Store",
+        "message": "Actualizar desde Google Play Store",
         "english": "Update from the Google Play Store"
     },
     "cordovaWebviewEnable": {
@@ -9495,7 +9495,7 @@
         "description": "Text indicating everything is selected in the drop down/multiple select"
     },
     "tabPresets": {
-        "message": "Preseleccionar",
+        "message": "Preselecciones",
         "english": "Presets",
         "description": "Presets tab title"
     },
@@ -9644,12 +9644,12 @@
         "description": "Text to show when there are CLI errors after applying presets or user configuration"
     },
     "presetsCliSaveButton": {
-        "message": "Guardar y reinicializar",
+        "message": "Guardar y reiniciar",
         "english": "Save and Reboot",
         "description": "save Button"
     },
     "presetsCliExitButton": {
-        "message": "Cancelar y reinicializar",
+        "message": "Cancelar y reiniciar",
         "english": "Cancel and Reboot",
         "description": "Reboot Button"
     },
@@ -9674,12 +9674,12 @@
         "description": "Button to open Presets Wiki link"
     },
     "backupDiffAll": {
-        "message": "Guardar Backup diferencial (dif todo)",
+        "message": "Guardar Backup diferencial (dif all)",
         "english": "Save Differential Backup (diff all)",
         "description": "Button to backup differential configuration to a file"
     },
     "backupDumpAll": {
-        "message": "Guardar Backup completo (descargar todo)",
+        "message": "Guardar Backup completo (dump all)",
         "english": "Save Full Backup (dump all)",
         "description": "Button to backup a dump all of the configuration to a file"
     },
@@ -9784,7 +9784,7 @@
         "description": "Warning message that shows up when we fail to load some repositories"
     },
     "presetsWarningBackup": {
-        "message": "Por favor, asegúrese de hacer backup de su configuración actual ('$t(backupDiffAll.message)' botón o via CLI si el botón está deshabilitado) <strong>antes</strong> de elegir y aplicar los preajustes. De otra manera, no habrá posibilidad de volver a la configuración previa después de aplciar los preajustes.",
+        "message": "Por favor, asegúrese de hacer backup de su botón de configuración actual ('$t(backupDiffAll.message)' o via CLI si el botón está deshabilitado) <strong>antes</strong> de elegir y aplicar los preajustes. De otra manera, no habrá posibilidad de volver a la configuración previa después de aplciar los preajustes.",
         "english": "Please make sure you backup your current configuration ('$t(backupDiffAll.message)' button or via CLI if the button is disabled) <strong>before</strong> picking and applying presets. Otherwise there is no way to return to previous configuration after applying presets.",
         "description": "Warning message that shows up at the top of the presets tab"
     },
@@ -9818,7 +9818,7 @@
         "description": "Placeholder for the options list dropdown"
     },
     "presetsVersionMismatch": {
-        "message": "Desajuste en la versión de fuentes de preajustes.<br/>Versión requerida: {{versionRequired}}<br/>Versión fuente de preajustes: {{versionSource}}<br/>Usar esta fuente de preajustes puede ser peligroso.<br/>¿Quiere continuar?",
+        "message": "Incompatibilidad en la versión de fuentes de preajustes.<br/>Versión requerida: {{versionRequired}}<br/>Versión fuente de preajustes: {{versionSource}}<br/>Usar esta fuente de preajustes puede ser peligroso.<br/>¿Quiere continuar?",
         "english": "Preset source version mismatch.<br/>Required version: {{versionRequired}}<br/>Preset source version: {{versionSource}}<br/>Using this preset source could be dangerous.<br/>Do you want to continue?",
         "description": "Placeholder for the options list dropdown"
     },
@@ -9828,7 +9828,7 @@
         "description": "Dialog text to prompt user to review options for the preset"
     },
     "presetsReviewBeforeApply": {
-        "message": "Por favor, revise todos los preajustes seleccionados en el listado de abajo. Los preajustes del CLI serán aplicados en el orden en que están listados. Asegúrese de haber hecho un backup de su configuración actual antes de aplicar los preajustese.",
+        "message": "Por favor, revise todos los preajustes seleccionados en el listado de abajo. Los preajustes del CLI serán aplicados en el orden en que están listados. Asegúrese de haber hecho un backup de su configuración actual antes de aplicar los preajustes.",
         "english": "Please review all of the selected presets in the list below. The presets CLI will be applied in the order they are listed. Ensure you have taken a backup of your current configuration before applying the presets."
     },
     "backupFailedToSave": {
