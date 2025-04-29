@@ -871,7 +871,7 @@ class PresetsTab {
         preset[0],
         preset[1],
         true,
-        this.#sourcesDialog.isThirdPartyActive,
+        true,
         this.#presetSelected(preset[0], preset[1]),
         null,
         this.#presetTracker,
