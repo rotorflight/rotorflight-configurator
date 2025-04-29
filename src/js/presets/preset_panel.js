@@ -71,19 +71,7 @@ export default class PresetPanel {
     /**
      * @type {HTMLSpanElement}
      */
-    statusOfficial: null,
-    /**
-     * @type {HTMLSpanElement}
-     */
-    statusCommunity: null,
-    /**
-     * @type {HTMLSpanElement}
-     */
-    statusExperimental: null,
-    /**
-     * @type {HTMLSpanElement}
-     */
-    officialSourceIcon: null,
+    status: null,
   };
 
   #callbacks = {
@@ -191,18 +179,7 @@ export default class PresetPanel {
     );
     this.#dom.boards = this.#dom.divWrapper.find(".preset_panel_boards_text");
     this.#dom.boardsRow = this.#dom.divWrapper.find(".preset_panel_boards_row");
-    this.#dom.statusOfficial = this.#dom.divWrapper.find(
-      ".preset_panel_status_official",
-    );
-    this.#dom.statusCommunity = this.#dom.divWrapper.find(
-      ".preset_panel_status_community",
-    );
-    this.#dom.statusExperimental = this.#dom.divWrapper.find(
-      ".preset_panel_status_experimental",
-    );
-    this.#dom.officialSourceIcon = this.#dom.divWrapper.find(
-      ".preset_panel_rotorflight_official",
-    );
+    this.#dom.status = this.#dom.divWrapper.find(".preset_panel_status");
   }
 
   #updateHoverEffects() {
@@ -335,15 +312,7 @@ export default class PresetPanel {
     this.#dom.keywords.text(this.#presetData.keywords?.join("; "));
     this.#dom.keywords.prop("title", this.#presetData.keywords?.join("; "));
 
-    const officialSource = this.#presetSource.metadata.official;
-    this.#dom.statusOfficial.toggle(
-      officialSource && this.#presetData.status === "OFFICIAL",
-    );
-    this.#dom.statusCommunity.toggle(this.#presetData.status === "COMMUNITY");
-    this.#dom.statusExperimental.toggle(
-      this.#presetData.status === "EXPERIMENTAL",
-    );
-    this.#dom.officialSourceIcon.hide();
+    this.#dom.status.text(this.#presetData.status);
 
     this.setPicked(this.#presetSelectedForApply);
 
