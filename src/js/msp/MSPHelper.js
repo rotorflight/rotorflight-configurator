@@ -2817,7 +2817,7 @@ MspHelper.prototype.serialPortFunctionsToMask = function(functions)
     return mask;
 };
 
-MspHelper.prototype.sendRxFailChannel = function(index, onCompleteCallback)
+MspHelper.prototype.sendRxFailChannel = async function(index)
 {
     const rxFail = FC.RXFAIL_CONFIG[index];
     const buffer = [];
@@ -2826,22 +2826,14 @@ MspHelper.prototype.sendRxFailChannel = function(index, onCompleteCallback)
           .push8(rxFail.mode)
           .push16(rxFail.value);
 
-    MSP.send_message(MSPCodes.MSP_SET_RXFAIL_CONFIG, buffer, false, onCompleteCallback);
+    await MSP.promise(MSPCodes.MSP_SET_RXFAIL_CONFIG, buffer);
 };
 
-MspHelper.prototype.sendRxFailConfig = function(onCompleteCallback)
+MspHelper.prototype.sendRxFailConfig = async function()
 {
-    const self = this;
-    var index = 0;
-
-    function send_next() {
-        if (index < FC.RXFAIL_CONFIG.length)
-            self.sendRxFailChannel(index++, send_next);
-        else
-            if (onCompleteCallback) onCompleteCallback();
+    for (let i = 0; i < FC.RXFAIL_CONFIG.length; i++) {
+      await this.sendRxFailChannel(i);
     }
-
-    send_next();
 };
 
 MspHelper.prototype.setArmingEnabled = function(doEnable, onCompleteCallback)
