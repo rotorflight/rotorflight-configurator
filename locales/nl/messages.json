@@ -2211,18 +2211,18 @@
         "english": "Telemetry Sensors"
     },
     "receiverTelemetrySensorsSelect": {
-      "message": "Selecteren",
-      "english": "Select"
-  },
-  "receiverTelemetrySensorsSort": {
-      "message": "Sorteren",
-      "english": "Sort"
-  },
-  "receiverTelemetrySensorsExceededWarning": {
-      "message": "Een maximum van {{max}} sensoren kan worden ingeschakeld.",
-      "english": "A maximum of {{max}} sensors can be enabled."
-  },
-  "receiverTelemetrySensor_VOLTAGE": {
+        "message": "Selecteren",
+        "english": "Select"
+    },
+    "receiverTelemetrySensorsSort": {
+        "message": "Sorteren",
+        "english": "Sort"
+    },
+    "receiverTelemetrySensorsExceededWarning": {
+        "message": "Een maximum van {{max}} sensoren kan worden ingeschakeld.",
+        "english": "A maximum of {{max}} sensors can be enabled."
+    },
+    "receiverTelemetrySensor_VOLTAGE": {
         "message": "Batterijspanning",
         "english": "Battery Voltage"
     },
@@ -3218,6 +3218,11 @@
     "adjustmentsFunctionYawDynDeadbandFilter": {
         "message": "Yaw dynamische deadband filter",
         "english": "Yaw Dynamic Deadband Filter"
+    },
+    "adjustmentsFunctionYawPrecompCutoff": {
+        "message": "Yaw Precomp Cutoff",
+        "english": "Yaw Precomp Cutoff",
+        "status": "New entry. Please translate!"
     },
     "servoHelp": {
         "message": "Servo 101<ul><li>Controleer eerst de servo richtingen. Controleer cyclische servo's door bijvoorbeeld wat collective te geven. Keer de servo's om indien nodig.</li><li>Nivelleer de servoarmen door <i> Servo Override</i> in te schakelen en <i>Center</i> aan te passen. De servoarm moet loodrecht op de hoofdas staan in deze positie.</li><li>Stel <i>Scale</i> af zodat de servohoeken correct zijn. Specificeer een hoek van 30&deg; voor een servo onder <i>Servo Override</i>. De servo moet nu naar 30&deg; bewegen. Als het minder is, verhoog dan de <i>Scale</i> voor die servo. Als het meer is, verlaag het dan.</li><li>Je kunt het bewegingsbereik van de servo beperken of uitbreiden door <i>Min</i> of <i>Max</i> aan te passen. Doe dit alleen als er een mechanisch probleem is, zoals een servo die vastloopt. Gebruik de mixer om roll/pitch/collective te beperken.</li></ul>",
@@ -9789,9 +9794,15 @@
         "description": "Warning message that shows up at the top of the presets tab"
     },
     "presets_sources_dialog_warning": {
-        "message": "<span class=\"message-negative\">WAARSCHUWING!</span> Het gebruik van preset bronnen van derden kan gevaarlijk zijn.<br/>Zorg ervoor dat je alleen betrouwbare bronnen toevoegt en gebruikt. Kwaadaardige of slechte preset bronnen zullen je configuratie beschadigen en kunnen potentieel je apparaten schaden.",
-        "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources will break your drone configuration and can potentially harm your devices.",
-        "description": "Warning message that shows up at the top of the preset sources dialog"
+        "message": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources can break your helicopter configuration and potentially harm your devices.",
+        "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources can break your helicopter configuration and potentially harm your devices.",
+        "status": "Modified entry. Please translate!",
+        "description": "Warning message that shows up at the top of the preset sources dialog",
+        "previous": {
+            "message": "<span class=\"message-negative\">WAARSCHUWING!</span> Het gebruik van preset bronnen van derden kan gevaarlijk zijn.<br/>Zorg ervoor dat je alleen betrouwbare bronnen toevoegt en gebruikt. Kwaadaardige of slechte preset bronnen zullen je configuratie beschadigen en kunnen potentieel je apparaten schaden.",
+            "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources will break your drone configuration and can potentially harm your devices.",
+            "description": "Warning message that shows up at the top of the preset sources dialog"
+        }
     },
     "presetsWarningWrongVersionConfirmation": {
         "message": "Gekozen preset vereist firmware versie $1. Huidige firmware versie is $2",

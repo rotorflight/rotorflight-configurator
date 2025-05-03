@@ -2210,6 +2210,21 @@
         "message": "遥测传感器",
         "english": "Telemetry Sensors"
     },
+    "receiverTelemetrySensorsSelect": {
+        "message": "Select",
+        "english": "Select",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensorsSort": {
+        "message": "Sort",
+        "english": "Sort",
+        "status": "New entry. Please translate!"
+    },
+    "receiverTelemetrySensorsExceededWarning": {
+        "message": "A maximum of {{max}} sensors can be enabled.",
+        "english": "A maximum of {{max}} sensors can be enabled.",
+        "status": "New entry. Please translate!"
+    },
     "receiverTelemetrySensor_VOLTAGE": {
         "message": "电池电压",
         "english": "Battery Voltage"
@@ -3206,6 +3221,11 @@
     "adjustmentsFunctionYawDynDeadbandFilter": {
         "message": "航向动态死区滤波器",
         "english": "Yaw Dynamic Deadband Filter"
+    },
+    "adjustmentsFunctionYawPrecompCutoff": {
+        "message": "Yaw Precomp Cutoff",
+        "english": "Yaw Precomp Cutoff",
+        "status": "New entry. Please translate!"
     },
     "servoHelp": {
         "message": "舵机101<ul><li>首先检查舵机方向。例如，通过给予一些集体螺距来检查循环舵机系统。反向舵机，如果需要。</li><li>通过启动<i>舵机调试</i>和调节<i>中心点</i>来调平舵机臂。舵机臂在此位置应垂直于主轴。</li><li>调整<i>缩放</i>使舵机角度正确。指定角度为30°;在<i>舵机调试</i>下的舵机。舵机现在应该移动到30度。如果小于，则增加该舵机的<i>缩放</i>。如果更多，就减少。</li><li>您可以通过调整<i>最小值</i>或<i>最大值</i>来限制或扩展舵机运动范围。只有在出现机械问题时才这样做，比如舵机干涉。使用混控限制横滚/俯仰/集体螺距</li></ul>",
@@ -6517,8 +6537,13 @@
         "english": "Notch Q"
     },
     "gyroDynamicNotchQHelp": {
-        "message": "Q因子调整了动态陷波滤波器的宽度。更高的值将使其变得更窄，较低的值将使其变得更宽。 建议设置为2.0 至 4.0 ，低于2.0将会明显增加延迟并影响飞行性能。",
-        "english": "TheQfactor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance."
+        "message": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance.",
+        "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Q因子调整了动态陷波滤波器的宽度。更高的值将使其变得更窄，较低的值将使其变得更宽。 建议设置为2.0 至 4.0 ，低于2.0将会明显增加延迟并影响飞行性能。",
+            "english": "TheQfactor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance."
+        }
     },
     "gyroDynamicNotchMinHz": {
         "message": "陷波器最小频率",
@@ -9469,23 +9494,28 @@
     },
     "dropDownSelectAll": {
         "message": "[全选/取消全选]",
-        "english": "[Select/deselect all]"
+        "english": "[Select/deselect all]",
+        "description": "Select all item in the drop down/multiple select"
     },
     "dropDownFilterDisabled": {
         "message": "请选择...",
-        "english": "Select..."
+        "english": "Select...",
+        "description": "Text indicating nothing is selected in the drop down/multiple select (filter disabled)"
     },
     "dropDownAll": {
         "message": "所有",
-        "english": "All"
+        "english": "All",
+        "description": "Text indicating everything is selected in the drop down/multiple select"
     },
     "tabPresets": {
         "message": "预设",
-        "english": "Presets"
+        "english": "Presets",
+        "description": "Presets tab title"
     },
     "presetsReload": {
         "message": "重新加载",
-        "english": "Reload"
+        "english": "Reload",
+        "description": "Text on the reload button that appears when there in an error loading presets index"
     },
     "presetCategory": {
         "message": "类别：",
@@ -9493,7 +9523,8 @@
     },
     "presetAuthor": {
         "message": "作者：",
-        "english": "Author:"
+        "english": "Author:",
+        "description": "Hint text in the preset dialog"
     },
     "presetSelectedOptions": {
         "message": "选项：",
@@ -9501,79 +9532,98 @@
     },
     "presetKeywords": {
         "message": "关键词：",
-        "english": "Keywords:"
+        "english": "Keywords:",
+        "description": "Hint text in the preset dialog"
     },
     "presetSource": {
         "message": "来源：",
-        "english": "Source:"
+        "english": "Source:",
+        "description": "Text prefixing user defined name of the preset repository containing a preset"
     },
     "presetVersions": {
         "message": "固件：",
-        "english": "Firmware:"
+        "english": "Firmware:",
+        "description": "Hint text in the preset dialog"
     },
     "presetBoards": {
         "message": "飞控板：",
-        "english": "Boards:"
+        "english": "Boards:",
+        "description": "Hint text in the preset dialog"
     },
     "presetsOfficial": {
         "message": "官方",
-        "english": "Official"
+        "english": "Official",
+        "description": "Hint text in the preset dialog indication preset is official"
     },
     "presetsCommunity": {
         "message": "社区",
-        "english": "Community"
+        "english": "Community",
+        "description": "Hint text in the preset dialog indication preset is from the community"
     },
     "presetsExperimental": {
         "message": "实验性",
-        "english": "Experimental"
+        "english": "Experimental",
+        "description": "Hint text in the preset dialog indication preset is experimental"
     },
     "presetsApply": {
         "message": "选择",
-        "english": "Select"
+        "english": "Select",
+        "description": "Button to pick a preset"
     },
     "presetsViewOnline": {
         "message": "显示来源",
-        "english": "View Source"
+        "english": "View Source",
+        "description": "Link text for opening preset file online"
     },
     "presetsOpenDiscussion": {
         "message": "讨论",
-        "english": "Discussion"
+        "english": "Discussion",
+        "description": "Link text for opening preset discussion"
     },
     "presetsShowCli": {
         "message": "显示命令（CLI）",
-        "english": "Show CLI"
+        "english": "Show CLI",
+        "description": "Button to show CLI code of a preset"
     },
     "presetsHideCli": {
         "message": "隐藏命令（CLI）",
-        "english": "Hide CLI"
+        "english": "Hide CLI",
+        "description": "Button to hide CLI code of a preset"
     },
     "presetOptions": {
         "message": "选项",
-        "english": "Options"
+        "english": "Options",
+        "description": "Text label for Options drop down select"
     },
     "presetsFilterCategory": {
         "message": "类别",
-        "english": "Categories"
+        "english": "Categories",
+        "description": "UI filter name"
     },
     "presetsFilterKeyword": {
         "message": "关键词",
-        "english": "Keywords"
+        "english": "Keywords",
+        "description": "UI filter name"
     },
     "presetsFilterAuthor": {
         "message": "作者",
-        "english": "Authors"
+        "english": "Authors",
+        "description": "UI filter name"
     },
     "presetsFilterFirmware": {
         "message": "版本过滤",
-        "english": "Firmware Filter"
+        "english": "Firmware Filter",
+        "description": "UI filter name"
     },
     "presetsFilterStatus": {
         "message": "状态",
-        "english": "Status"
+        "english": "Status",
+        "description": "UI filter name - official/community/experimental"
     },
     "presetsLoadError": {
         "message": "从网络加载预设时出错",
-        "english": "Error loading presets from the internet"
+        "english": "Error loading presets from the internet",
+        "description": "Error report when failed to load presets index or a specific preset"
     },
     "presetsButtonReview": {
         "message": "查看已选的预设",
@@ -9593,79 +9643,98 @@
     },
     "presetsApplyingPresets": {
         "message": "应用配置中...",
-        "english": "Applying configuration..."
+        "english": "Applying configuration...",
+        "description": "First label in the progress dialog when applying configuration (presets or user config)"
     },
     "presetsPleaseWait": {
         "message": "请稍等",
-        "english": "Please wait."
+        "english": "Please wait.",
+        "description": "Second label in the progress dialog when applying presets"
     },
     "presetsCliErrorsWarning": {
         "message": "<span class='message-negative'>警告！</span><br/>配置已应用，但遇到了命令（CLI)报错。",
-        "english": "<span class='message-negative'>WARNING!</span><br/>Configuration has been applied with CLI errors."
+        "english": "<span class='message-negative'>WARNING!</span><br/>Configuration has been applied with CLI errors.",
+        "description": "Text to show when there are CLI errors after applying presets or user configuration"
     },
     "presetsCliSaveButton": {
         "message": "导出",
-        "english": "Save and Reboot"
+        "english": "Save and Reboot",
+        "description": "save Button"
     },
     "presetsCliExitButton": {
         "message": "关闭",
-        "english": "Cancel and Reboot"
+        "english": "Cancel and Reboot",
+        "description": "Reboot Button"
     },
     "presetsWarningDialogTitle": {
         "message": "警告！",
-        "english": "WARNING!"
+        "english": "WARNING!",
+        "description": "Warning title in the warning dialog in the presets"
     },
     "presetsWarningDialogYesButton": {
         "message": "确认",
-        "english": "Acknowledge"
+        "english": "Acknowledge",
+        "description": "Agree button in the presets warning dialog"
     },
     "presetsWarningDialogNoButton": {
         "message": "关闭",
-        "english": "Cancel"
+        "english": "Cancel",
+        "description": "Cancel button in the presets warning dialog"
     },
     "presetsWiki": {
         "message": "预设的Wiki",
-        "english": "Presets Wiki"
+        "english": "Presets Wiki",
+        "description": "Button to open Presets Wiki link"
     },
     "backupDiffAll": {
         "message": "保存差异备份 (diff all)",
-        "english": "Save Differential Backup (diff all)"
+        "english": "Save Differential Backup (diff all)",
+        "description": "Button to backup differential configuration to a file"
     },
     "backupDumpAll": {
         "message": "保存全量备份 (dump all)",
-        "english": "Save Full Backup (dump all)"
+        "english": "Save Full Backup (dump all)",
+        "description": "Button to backup a dump all of the configuration to a file"
     },
     "backupLoad": {
         "message": "载入备份",
-        "english": "Load Backup"
+        "english": "Load Backup",
+        "description": "Button to load backup from a file"
     },
     "backupWaitDialogTitleSavingDiffAll": {
         "message": "正在从飞控导出差异备份",
-        "english": "Saving diff all from the flight controller"
+        "english": "Saving diff all from the flight controller",
+        "description": "Title for the waiting dialog when saving diff all into a file"
     },
     "backupWaitDialogTitleSavingDumpAll": {
         "message": "正在从飞控导出全量备份",
-        "english": "Saving dump all from the flight controller"
+        "english": "Saving dump all from the flight controller",
+        "description": "Title for the waiting dialog when saving dump all into a file"
     },
     "backupWaitDialogTitleLoadBackup": {
         "message": "正在将备份导入飞控",
-        "english": "Loading backup onto the flight controller"
+        "english": "Loading backup onto the flight controller",
+        "description": "Title for the waiting dialog when loading dump all into a file"
     },
     "backupWaitDialogMessageErrorSavingBackup": {
         "message": "保存当前配置时出现了问题",
-        "english": "Error occurred while saving current configuration"
+        "english": "Error occurred while saving current configuration",
+        "description": "Message appears on presets tab when saving current diff all into a file has failed"
     },
     "presetSources": {
         "message": "预设来源...",
-        "english": "Preset Sources..."
+        "english": "Preset Sources...",
+        "description": "A button to show preset sources dialog"
     },
     "presetsSourcesDialogTitle": {
         "message": "预设来源",
-        "english": "Preset Sources"
+        "english": "Preset Sources",
+        "description": "A button to show preset sources dialog"
     },
     "presetsSourcesDialogAddNew": {
         "message": "添加新来源",
-        "english": "Add New Source"
+        "english": "Add New Source",
+        "description": "A button to show preset sources dialog"
     },
     "presetsSourcesDialogConfirm": {
         "message": "OK",
@@ -9673,27 +9742,33 @@
     },
     "presetsSourcesDialogDefaultSourceName": {
         "message": "新建自定义预设来源",
-        "english": "New Custom Preset Source"
+        "english": "New Custom Preset Source",
+        "description": "A default preset source (repo) name"
     },
     "presetsSourcesDialogSaveSource": {
         "message": "保存",
-        "english": "Save"
+        "english": "Save",
+        "description": "Presets tab, sources dialog, button to save new or editable source"
     },
     "presetsSourcesDialogResetSource": {
         "message": "恢复",
-        "english": "Revert"
+        "english": "Revert",
+        "description": "Presets tab, sources dialog, button to revert source after modifications"
     },
     "presetsSourcesDialogMakeSourceActive": {
         "message": "激活",
-        "english": "Activate"
+        "english": "Activate",
+        "description": "Presets tab, sources dialog, button to make selected source active"
     },
     "presetsSourcesDialogMakeSourceDisable": {
         "message": "禁用",
-        "english": "Disable"
+        "english": "Disable",
+        "description": "Presets tab, sources dialog, button to make selected source disabled"
     },
     "presetsSourcesDialogDeleteSource": {
         "message": "删除",
-        "english": "Delete"
+        "english": "Delete",
+        "description": "Presets tab, sources dialog, button to delete selected source"
     },
     "presetsSourcesDialogGithubBranch": {
         "message": "Github 分支",
@@ -9713,23 +9788,33 @@
     },
     "presetsWarningNotOfficialSource": {
         "message": "<span class=\"message-negative\">警告！</span> 已选择第三方的预设",
-        "english": "<span class=\"message-negative\">WARNING!</span> A third party preset source is selected."
+        "english": "<span class=\"message-negative\">WARNING!</span> A third party preset source is selected.",
+        "description": "Warning message that shows up when a third party preset source is selected"
     },
     "presetsFailedToLoadRepositories": {
         "message": "<span class=\"message-negative\">警告！</span> 以下存储库加载失败： <b>{{repos}}</b>",
-        "english": "<span class=\"message-negative\">WARNING!</span> Failed to load following repositories: <b>{{repos}}</b>"
+        "english": "<span class=\"message-negative\">WARNING!</span> Failed to load following repositories: <b>{{repos}}</b>",
+        "description": "Warning message that shows up when we fail to load some repositories"
     },
     "presetsWarningBackup": {
         "message": "请务必在应用预设前对你的配置进行备份（点击'$t(backupDiffAll.message)'按钮或者使用命令进行备份），否则在预设生效后，你将无法恢复到之前的配置！",
-        "english": "Please make sure you backup your current configuration ('$t(backupDiffAll.message)' button or via CLI if the button is disabled) <strong>before</strong> picking and applying presets. Otherwise there is no way to return to previous configuration after applying presets."
+        "english": "Please make sure you backup your current configuration ('$t(backupDiffAll.message)' button or via CLI if the button is disabled) <strong>before</strong> picking and applying presets. Otherwise there is no way to return to previous configuration after applying presets.",
+        "description": "Warning message that shows up at the top of the presets tab"
     },
     "presets_sources_dialog_warning": {
-        "message": "<span class=\"message-negative\">警告！</span> 使用第三方预设源可能存在危险。<br/>确保你仅添加和使用可信赖的来源。恶意或不良的预设源会破坏你的飞控配置，并且有可能对你的设备造成损害。",
-        "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources will break your drone configuration and can potentially harm your devices."
+        "message": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources can break your helicopter configuration and potentially harm your devices.",
+        "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources can break your helicopter configuration and potentially harm your devices.",
+        "status": "Modified entry. Please translate!",
+        "description": "Warning message that shows up at the top of the preset sources dialog",
+        "previous": {
+            "message": "<span class=\"message-negative\">警告！</span> 使用第三方预设源可能存在危险。<br/>确保你仅添加和使用可信赖的来源。恶意或不良的预设源会破坏你的飞控配置，并且有可能对你的设备造成损害。",
+            "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources will break your drone configuration and can potentially harm your devices."
+        }
     },
     "presetsWarningWrongVersionConfirmation": {
         "message": "所选的预设需要固件版本为$1 。当前的固件版本是$2 。 ",
-        "english": "Picked preset requires firmware version $1. Current firmware version is $2"
+        "english": "Picked preset requires firmware version $1. Current firmware version is $2",
+        "description": "Warning message that shows up at the top of the preset sources dialog"
     },
     "presetsSearchPlaceholder": {
         "message": "举个例子： \"OMPHOBBY M5\", 或 \"OMPHOBBY M7\"",
@@ -9737,23 +9822,28 @@
     },
     "presetsNoPresetsFound": {
         "message": "没有找到符合条件的预设",
-        "english": "No presets found for the given search parameters"
+        "english": "No presets found for the given search parameters",
+        "description": "Message that apprears on presets tab if no presets were found"
     },
     "presetsTooManyPresetsFound": {
         "message": "已达到所显示的预设数量的最大限制",
-        "english": "Reached the maximum limit of the shown presets number"
+        "english": "Reached the maximum limit of the shown presets number",
+        "description": "Message that apprears on presets tab if too many presets found"
     },
     "presetOptionsPlaceholder": {
         "message": "注意！请查看选项列表",
-        "english": "ATTENTION! Review the list of options"
+        "english": "ATTENTION! Review the list of options",
+        "description": "Placeholder for the options list dropdown"
     },
     "presetsVersionMismatch": {
         "message": "预设版本跟你的飞控不匹配！<br/>所需版本： {{versionRequired}}<br/>预设源版本： {{versionSource}}<br/>使用此预设源可能存在危险。<br/>你是否想要继续？",
-        "english": "Preset source version mismatch.<br/>Required version: {{versionRequired}}<br/>Preset source version: {{versionSource}}<br/>Using this preset source could be dangerous.<br/>Do you want to continue?"
+        "english": "Preset source version mismatch.<br/>Required version: {{versionRequired}}<br/>Preset source version: {{versionSource}}<br/>Using this preset source could be dangerous.<br/>Do you want to continue?",
+        "description": "Placeholder for the options list dropdown"
     },
     "presetsReviewOptionsWarning": {
         "message": "在选择此预设之前，请先查看选项列表。",
-        "english": "Please review the list of options before picking this preset."
+        "english": "Please review the list of options before picking this preset.",
+        "description": "Dialog text to prompt user to review options for the preset"
     },
     "presetsReviewBeforeApply": {
         "message": "请查看以下列表中所有已选择的预设。预设的命令（CLI）将按照列表中的顺序依次应用。在应用这些预设之前，请确保你已经对当前配置进行了备份。",

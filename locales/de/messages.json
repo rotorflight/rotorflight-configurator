@@ -2220,7 +2220,7 @@
     },
     "receiverTelemetrySensorsExceededWarning": {
         "message": "Es können maximal {{max}} Telemetrie-Signale aktiviert werden.",
-        "english": "A maximum of {{max}} sensors canenbe enabled."
+        "english": "A maximum of {{max}} sensors can be enabled."
     },
     "receiverTelemetrySensor_VOLTAGE": {
         "message": "Akku-Spannung",
@@ -3218,6 +3218,11 @@
     "adjustmentsFunctionYawDynDeadbandFilter": {
         "message": "Filter Dynamische Totzone für Heck",
         "english": "Yaw Dynamic Deadband Filter"
+    },
+    "adjustmentsFunctionYawPrecompCutoff": {
+        "message": "Yaw Precomp Cutoff",
+        "english": "Yaw Precomp Cutoff",
+        "status": "New entry. Please translate!"
     },
     "servoHelp": {
         "message": "Servo 101<ul><li>Überprüfe zunächst die Servorichtungen. Prüfe die Taumelscheibenservos, indem z.B. etwas kollektiv Pitch gegeben wird. Bei Bedarf die Servorichtung umkehren.</li><li>Justieren der Servoarme durch Aktivieren der <i> Servo-Übersteuerung</i> und Einstellen der <i>Mitte</i>. Die Servoarme sollten in dieser Position 90° zur Hauptwelle stehen.</li><li>Einstellen der <i>Skalierung</i> damit die Servowinkel korrekt sind. Gib einen Winkel von 30&deg; für ein Servo unter <i>Servo-Übersteuerung</i> an. Das Servo sollte sich nun um 30&deg; bewegen. Wenn es sich um einen geringeren Winkel bewegt, erhöhe die <i>Skalierung</i> für dieses Servo. Wenn der Winkel größer ist, verringere sie.</li><li>Du kannst den Bewegungsbereich des Servos durch anpassen von <i>Min</i> oder <i>Max</i> begrenzen oder erweitern. Verwende diese Einstellung nur, wenn ein mechanisches Problem vorliegt, z.B. wenn ein Servo blockiert. Verwende den Mischer um Roll/Nick/Kollektiv Pitch zu begrenzen.</li></ul>",
@@ -9789,9 +9794,15 @@
         "description": "Warning message that shows up at the top of the presets tab"
     },
     "presets_sources_dialog_warning": {
-        "message": "<span class=\"message-negative\">WARNUNG!</span> Die Verwendung von Preset-Quellen von Drittanbietern könnte gefährlich sein.<br/>Bitte sicherstellen, dass nur vertrauenswürdige Quellen hinzugefügt und verwendet werden. Böswillige oder fehlerhafte Presets können die Konfiguration zerstören oder Komponenten beschädigen.",
-        "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources will break your drone configuration and can potentially harm your devices.",
-        "description": "Warning message that shows up at the top of the preset sources dialog"
+        "message": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources can break your helicopter configuration and potentially harm your devices.",
+        "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources can break your helicopter configuration and potentially harm your devices.",
+        "status": "Modified entry. Please translate!",
+        "description": "Warning message that shows up at the top of the preset sources dialog",
+        "previous": {
+            "message": "<span class=\"message-negative\">WARNUNG!</span> Die Verwendung von Preset-Quellen von Drittanbietern könnte gefährlich sein.<br/>Bitte sicherstellen, dass nur vertrauenswürdige Quellen hinzugefügt und verwendet werden. Böswillige oder fehlerhafte Presets können die Konfiguration zerstören oder Komponenten beschädigen.",
+            "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources will break your drone configuration and can potentially harm your devices.",
+            "description": "Warning message that shows up at the top of the preset sources dialog"
+        }
     },
     "presetsWarningWrongVersionConfirmation": {
         "message": "Ausgewähltes Preset benötigt Firmware-Version $1. Aktuelle Firmware-Version ist $2",
