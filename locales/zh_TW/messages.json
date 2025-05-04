@@ -25,14 +25,12 @@
         "english": "Auto"
     },
     "genericEnable": {
-        "message": "Enable",
-        "english": "Enable",
-        "status": "New entry. Please translate!"
+        "message": "啟用",
+        "english": "Enable"
     },
     "genericDefault": {
-        "message": "Default",
-        "english": "Default",
-        "status": "New entry. Please translate!"
+        "message": "預設",
+        "english": "Default"
     },
     "axisROLL": {
         "message": "橫滾",
@@ -140,9 +138,8 @@
         "english": "Auto-Connect"
     },
     "showAllPorts": {
-        "message": "Show All Ports",
-        "english": "Show All Ports",
-        "status": "New entry. Please translate!"
+        "message": "顯示所有連接埠",
+        "english": "Show All Ports"
     },
     "close": {
         "message": "關閉",
@@ -201,14 +198,12 @@
         "english": "Auto-Connect: Disabled - User needs to select the correct serial port and click \"Connect\" button on its own"
     },
     "showAllPortsEnabled": {
-        "message": "Show All Ports: Enabled - Configurator lists all possible ports",
-        "english": "Show All Ports: Enabled - Configurator lists all possible ports",
-        "status": "New entry. Please translate!"
+        "message": "顯示所有連接埠：開啟 - 設定器會列出所有可能的連接埠",
+        "english": "Show All Ports: Enabled - Configurator lists all possible ports"
     },
     "showAllPortsDisabled": {
-        "message": "Show All Ports: Disabled - Configurator will only list recognized ports",
-        "english": "Show All Ports: Disabled - Configurator will only list recognized ports",
-        "status": "New entry. Please translate!"
+        "message": "顯示所有連接埠：關閉 - 設定器只會列出已識別的連接埠",
+        "english": "Show All Ports: Disabled - Configurator will only list recognized ports"
     },
     "zoomBoxText": {
         "message": "縮放：",
@@ -660,9 +655,8 @@
         "english": "Non - Rotorflight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode."
     },
     "firmwareVersionInvalid": {
-        "message": "Firmware version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator.",
-        "english": "Firmware version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator.",
-        "status": "New entry. Please translate!"
+        "message": "韌體版本： [$1] 是 <span class=\"message-negative\">無效的</span>。請使用此版設定器支援的韌體版本。",
+        "english": "Firmware version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator."
     },
     "resetToCustomDefaultsDialog": {
         "message": "有適用於此飛控板的自訂預設設定。通常來說，只有在套用了自訂預設設定之後飛控板才能正常工作。<br />您是否要為此飛控板套用自訂預設設定？",
@@ -734,9 +728,8 @@
         "english": "MSP API version: <strong>$1</strong>"
     },
     "apiVersionInvalid": {
-        "message": "MSP API version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator.",
-        "english": "MSP API version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator.",
-        "status": "New entry. Please translate!"
+        "message": "MSP 介面版本： [$1] 是 <span class=\"message-negative\">無效的</span>。請使用此版設定器支援的韌體版本。",
+        "english": "MSP API version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator."
     },
     "uniqueDeviceIdReceived": {
         "message": "唯一設備 ID: <strong>0x$1</strong>",
@@ -1046,9 +1039,8 @@
         "description": "Message that pops up to describe the GOVERNOR arming disable flag"
     },
     "statusArmingDisableFlagsTooltipRPM_SIGNAL": {
-        "message": "A fast rpm source has not been configured",
-        "english": "A fast rpm source has not been configured",
-        "status": "New entry. Please translate!"
+        "message": "未設定高速的轉速訊號來源",
+        "english": "A fast rpm source has not been configured"
     },
     "statusArmingDisableFlagsTooltipCRASH": {
         "message": "偵測到墜機事故",
@@ -2067,9 +2059,8 @@
         "english": "Receiver Type"
     },
     "receiverSelectionSectionSignaling": {
-        "message": "Signaling",
-        "english": "Signaling",
-        "status": "New entry. Please translate!"
+        "message": "訊號傳輸",
+        "english": "Signaling"
     },
     "receiverSettings": {
         "message": "接收機設定",
@@ -2168,14 +2159,12 @@
         "english": "Telemetry Settings"
     },
     "receiverTelemetrySettingsSectionSignaling": {
-        "message": "Signaling",
-        "english": "Signaling",
-        "status": "New entry. Please translate!"
+        "message": "訊號傳輸",
+        "english": "Signaling"
     },
     "receiverTelemetrySettingsSectionCRSF": {
         "message": "CRSF",
-        "english": "CRSF",
-        "status": "New entry. Please translate!"
+        "english": "CRSF"
     },
     "receiverTelemetryEnabled": {
         "message": "啟用遙測",
@@ -2194,19 +2183,16 @@
         "english": "Telemetry Pin Swap (Swap Rx and Tx pins)"
     },
     "receiverCrsfTelemetryMode": {
-        "message": "Custom Telemetry",
-        "english": "Custom Telemetry",
-        "status": "New entry. Please translate!"
+        "message": "自訂遙測",
+        "english": "Custom Telemetry"
     },
     "receiverCrsfTelemetryRate": {
-        "message": "Telemetry Packet Rate",
-        "english": "Telemetry Packet Rate",
-        "status": "New entry. Please translate!"
+        "message": "遙測封包速率",
+        "english": "Telemetry Packet Rate"
     },
     "receiverCrsfTelemetryRatio": {
-        "message": "Telemetry Packet Ratio",
-        "english": "Telemetry Packet Ratio",
-        "status": "New entry. Please translate!"
+        "message": "遙測封包比例",
+        "english": "Telemetry Packet Ratio"
     },
     "receiverHelpCrsfTelemetryMode": {
         "message": "啟用 Rotorflight ELRS 自訂遙測。需要在發送器 (Tx) 中使用 Lua 腳本來解析感測器。自訂遙測為直升機提供了豐富的感測器資料。",
@@ -2225,19 +2211,16 @@
         "english": "Telemetry Sensors"
     },
     "receiverTelemetrySensorsSelect": {
-        "message": "Select",
-        "english": "Select",
-        "status": "New entry. Please translate!"
+        "message": "選擇",
+        "english": "Select"
     },
     "receiverTelemetrySensorsSort": {
-        "message": "Sort",
-        "english": "Sort",
-        "status": "New entry. Please translate!"
+        "message": "排序",
+        "english": "Sort"
     },
     "receiverTelemetrySensorsExceededWarning": {
-        "message": "A maximum of {{max}} sensors can be enabled.",
-        "english": "A maximum of {{max}} sensors can be enabled.",
-        "status": "New entry. Please translate!"
+        "message": "最多可啟用 {{max}} 個感測器。",
+        "english": "A maximum of {{max}} sensors can be enabled."
     },
     "receiverTelemetrySensor_VOLTAGE": {
         "message": "電池電壓",
@@ -3201,49 +3184,40 @@
         "english": "Accelerometer Roll Trim"
     },
     "adjustmentsFunctionYawInertiaPrecompGain": {
-        "message": "Yaw Inertia Precomp Gain",
-        "english": "Yaw Inertia Precomp Gain",
-        "status": "New entry. Please translate!"
+        "message": "航向慣性預補償增益",
+        "english": "Yaw Inertia Precomp Gain"
     },
     "adjustmentsFunctionYawInertiaPrecompCutoff": {
-        "message": "Yaw Inertia Precomp Cutoff",
-        "english": "Yaw Inertia Precomp Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "航向慣性預補償截止",
+        "english": "Yaw Inertia Precomp Cutoff"
     },
     "adjustmentsFunctionPitchSetpointBoostGain": {
-        "message": "Pitch Setpoint Boost Gain",
-        "english": "Pitch Setpoint Boost Gain",
-        "status": "New entry. Please translate!"
+        "message": "俯仰設定點增壓增益",
+        "english": "Pitch Setpoint Boost Gain"
     },
     "adjustmentsFunctionRollSetpointBoostGain": {
-        "message": "Roll Setpoint Boost Gain",
-        "english": "Roll Setpoint Boost Gain",
-        "status": "New entry. Please translate!"
+        "message": "橫滾設定點增壓增益",
+        "english": "Roll Setpoint Boost Gain"
     },
     "adjustmentsFunctionYawSetpointBoostGain": {
-        "message": "Yaw Setpoint Boost Gain",
-        "english": "Yaw Setpoint Boost Gain",
-        "status": "New entry. Please translate!"
+        "message": "航向設定點增壓增益",
+        "english": "Yaw Setpoint Boost Gain"
     },
     "adjustmentsFunctionCollectiveSetpointBoostGain": {
-        "message": "Collective Setpoint Boost Gain",
-        "english": "Collective Setpoint Boost Gain",
-        "status": "New entry. Please translate!"
+        "message": "集體螺距設定點增壓增益",
+        "english": "Collective Setpoint Boost Gain"
     },
     "adjustmentsFunctionYawDynCeilingGain": {
-        "message": "Yaw Dynamic Ceiling Gain",
-        "english": "Yaw Dynamic Ceiling Gain",
-        "status": "New entry. Please translate!"
+        "message": "航向動態上限增益",
+        "english": "Yaw Dynamic Ceiling Gain"
     },
     "adjustmentsFunctionYawDynDeadbandGain": {
-        "message": "Yaw Dynamic Deadband Gain",
-        "english": "Yaw Dynamic Deadband Gain",
-        "status": "New entry. Please translate!"
+        "message": "航向動態死區增益",
+        "english": "Yaw Dynamic Deadband Gain"
     },
     "adjustmentsFunctionYawDynDeadbandFilter": {
-        "message": "Yaw Dynamic Deadband Filter",
-        "english": "Yaw Dynamic Deadband Filter",
-        "status": "New entry. Please translate!"
+        "message": "航向動態死區濾波器",
+        "english": "Yaw Dynamic Deadband Filter"
     },
     "adjustmentsFunctionYawPrecompCutoff": {
         "message": "Yaw Precomp Cutoff",
@@ -3575,19 +3549,16 @@
         "english": "The phase offset for the swashplate controls."
     },
     "mixerCollectiveTiltCorrectionPos": {
-        "message": "Positive Collective Tilt Correction",
-        "english": "Positive Collective Tilt Correction",
-        "status": "New entry. Please translate!"
+        "message": "正螺距傾斜校正",
+        "english": "Positive Collective Tilt Correction"
     },
     "mixerCollectiveTiltCorrectionNeg": {
-        "message": "Negative Collective Tilt Correction",
-        "english": "Negative Collective Tilt Correction",
-        "status": "New entry. Please translate!"
+        "message": "負螺距傾斜校正",
+        "english": "Negative Collective Tilt Correction"
     },
     "mixerCollectiveTiltCorrectionHelp": {
-        "message": "Corrects cyclic to collective swashplate interaction.<br /><br />At full positive and negative collective pitch, adjust the corresponding values until the swashplate pivot ball remains stationary when increasing cyclic input.",
-        "english": "Corrects cyclic to collective swashplate interaction.<br /><br />At full positive and negative collective pitch, adjust the corresponding values until the swashplate pivot ball remains stationary when increasing cyclic input.",
-        "status": "New entry. Please translate!"
+        "message": "修正循環螺距與集體螺距在十字盤上的交互影響。<br /><br />在最大與最小集體螺距時，調整對應設定值直到十字盤魚眼軸承在增加循環螺距時依然維持靜止。",
+        "english": "Corrects cyclic to collective swashplate interaction.<br /><br />At full positive and negative collective pitch, adjust the corresponding values until the swashplate pivot ball remains stationary when increasing cyclic input."
     },
     "mixerSwashRollTrim": {
         "message": "橫滾微調 [%]",
@@ -3730,32 +3701,20 @@
         "english": "<strong>Enable Mixer Override</strong>"
     },
     "mixerOverrideEnableSwitchText": {
-        "message": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. If Passthrough is enabled, the positions are controlled by your TX. The override values are not saved, and will be reset in reboot.",
-        "english": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. If Passthrough is enabled, the positions are controlled by your TX. The override values are not saved, and will be reset in reboot.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "混控覆寫功能可將混控輸入強制設定到任意位置，以便進行校準。覆寫值不會儲存，會在重新啟動時重設。",
-            "english": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
-        }
+        "message": "混控覆寫功能可將混控輸入強制設定到任意位置，以便進行校準。若啟用直通則可由發射器直接控制。覆寫值不會儲存，會在重新啟動時重設。",
+        "english": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. If Passthrough is enabled, the positions are controlled by your TX. The override values are not saved, and will be reset in reboot."
     },
     "mixerPassthroughEnableSwitch": {
-        "message": "<strong>Enable Mixer Passthrough</strong>",
-        "english": "<strong>Enable Mixer Passthrough</strong>",
-        "status": "New entry. Please translate!"
+        "message": "<strong>啟用混控直通</strong>",
+        "english": "<strong>Enable Mixer Passthrough</strong>"
     },
     "mixerOverrideEnable": {
-        "message": "Override",
-        "english": "Override",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "啟用",
-            "english": "Enable"
-        }
+        "message": "啟用覆寫",
+        "english": "Override"
     },
     "mixerPassthroughEnable": {
-        "message": "Passthrough",
-        "english": "Passthrough",
-        "status": "New entry. Please translate!"
+        "message": "直通",
+        "english": "Passthrough"
     },
     "mixerOverrideValue": {
         "message": "值 [度]",
@@ -4226,34 +4185,28 @@
         "english": "<span class=\"message-negative\">Warning:</span> <i>Tail Rotor Gear Ratio</i> is set to an incorrect value. Please check!"
     },
     "motorsVoltageCorrection": {
-        "message": "Voltage Correction",
-        "english": "Voltage Correction",
-        "status": "New entry. Please translate!"
+        "message": "電壓校正",
+        "english": "Voltage Correction"
     },
     "motorsVoltageCorrectionHelp": {
-        "message": "Adjusts the Voltage reported by the ESC's telemetry.",
-        "english": "Adjusts the Voltage reported by the ESC's telemetry.",
-        "status": "New entry. Please translate!"
+        "message": "調整電變遙測回報的電壓值。",
+        "english": "Adjusts the Voltage reported by the ESC's telemetry."
     },
     "motorsCurrentCorrection": {
-        "message": "Current Correction",
-        "english": "Current Correction",
-        "status": "New entry. Please translate!"
+        "message": "電流校正",
+        "english": "Current Correction"
     },
     "motorsCurrentCorrectionHelp": {
-        "message": "Adjusts the Current reported by the ESC's telemetry.",
-        "english": "Adjusts the Current reported by the ESC's telemetry.",
-        "status": "New entry. Please translate!"
+        "message": "調整電變遙測回報的電流值。",
+        "english": "Adjusts the Current reported by the ESC's telemetry."
     },
     "motorsConsumptionCorrection": {
-        "message": "Consumption Correction",
-        "english": "Consumption Correction",
-        "status": "New entry. Please translate!"
+        "message": "耗電量校正",
+        "english": "Consumption Correction"
     },
     "motorsConsumptionCorrectionHelp": {
-        "message": "Adjusts the Consumption reported by the ESC's telemetry.",
-        "english": "Adjusts the Consumption reported by the ESC's telemetry.",
-        "status": "New entry. Please translate!"
+        "message": "調整電變遙測回報的耗電量。",
+        "english": "Adjusts the Consumption reported by the ESC's telemetry."
     },
     "motorRotorSpeeds": {
         "message": "旋翼轉速",
@@ -4376,14 +4329,12 @@
         "english": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govSpoolupMinThrottle": {
-        "message": "Spoolup minimum throttle",
-        "english": "Spoolup minimum throttle",
-        "status": "New entry. Please translate!"
+        "message": "緩提速最小油門",
+        "english": "Spoolup minimum throttle"
     },
     "govSpoolupMinThrottleHelp": {
-        "message": "Minimum throttle to be used during spoolup. For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%.",
-        "english": "Minimum throttle to be used during spoolup. For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%.",
-        "status": "New entry. Please translate!"
+        "message": "緩提速過程中所使用的最小油門。對於電動馬達預設值是 5%；對於內燃機則應該設定為 10-15%，讓離合器開始接合以獲得平順的啟動。",
+        "english": "Minimum throttle to be used during spoolup. For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%."
     },
     "govTrackingTime": {
         "message": "跟蹤時間 [秒]",
@@ -4490,18 +4441,16 @@
         "english": "Maximum Throttle"
     },
     "govMaxThrottleHelp": {
-        "message": "定速器允許輸出的最大油門量",
+        "message": "定速器允許輸出的最大油門量。",
         "english": "Maximum output throttle the governor is allowed to use."
     },
     "govMinThrottle": {
-        "message": "Minimum Throttle",
-        "english": "Minimum Throttle",
-        "status": "New entry. Please translate!"
+        "message": "最小油門",
+        "english": "Minimum Throttle"
     },
     "govMinThrottleHelp": {
-        "message": "Minimum output throttle the governor is allowed to use.",
-        "english": "Minimum output throttle the governor is allowed to use.",
-        "status": "New entry. Please translate!"
+        "message": "定速器允許輸出的最小油門量。",
+        "english": "Minimum output throttle the governor is allowed to use."
     },
     "govMasterGain": {
         "message": "主 PID 增益",
@@ -6125,24 +6074,20 @@
         "english": "Decay time for collective impulse feedforward mixed into yaw"
     },
     "profilesYawInertiaPrecompGain": {
-        "message": "Inertia Precomp Gain",
-        "english": "Inertia Precomp Gain",
-        "status": "New entry. Please translate!"
+        "message": "慣性預補償增益",
+        "english": "Inertia Precomp Gain"
     },
     "profilesYawInertiaPrecompGainHelp": {
-        "message": "The strength of the main rotor's inertia. Larger values result in more precomp being applied to the yaw control.",
-        "english": "The strength of the main rotor's inertia. Larger values result in more precomp being applied to the yaw control.",
-        "status": "New entry. Please translate!"
+        "message": "主旋翼慣性的強度。數值越大航向控制的預補償越大。",
+        "english": "The strength of the main rotor's inertia. Larger values result in more precomp being applied to the yaw control."
     },
     "profilesYawInertiaPrecompCutoff": {
-        "message": "Inertia Precomp Cutoff",
-        "english": "Inertia Precomp Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "慣性預補償截止",
+        "english": "Inertia Precomp Cutoff"
     },
     "profilesYawInertiaPrecompCutoffHelp": {
-        "message": "Derivative cutoff frequency for inertia precomp. Larger values result in a sharper application of precomp.",
-        "english": "Derivative cutoff frequency for inertia precomp. Larger values result in a sharper application of precomp.",
-        "status": "New entry. Please translate!"
+        "message": "慣性預補償的微分截止頻率。數值越大前置補償的反應越迅速銳利。",
+        "english": "Derivative cutoff frequency for inertia precomp. Larger values result in a sharper application of precomp."
     },
     "profilesPitchFFCollective": {
         "message": "集體螺距-俯仰預補償",
@@ -6465,49 +6410,40 @@
         "english": "Response Time [ms]"
     },
     "rateSetpointBoostGain": {
-        "message": "Setpoint Boost Gain",
-        "english": "Setpoint Boost Gain",
-        "status": "New entry. Please translate!"
+        "message": "設定點增壓增益",
+        "english": "Setpoint Boost Gain"
     },
     "rateSetpointBoostCutoff": {
-        "message": "Setpoint Boost Cutoff",
-        "english": "Setpoint Boost Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "設定點增壓截止",
+        "english": "Setpoint Boost Cutoff"
     },
     "rateYawDynamicCeilingGain": {
-        "message": "Dynamic Ceiling Gain",
-        "english": "Dynamic Ceiling Gain",
-        "status": "New entry. Please translate!"
+        "message": "動態上限增益",
+        "english": "Dynamic Ceiling Gain"
     },
     "rateYawDynamicDeadbandGain": {
-        "message": "Dynamic Deadband Gain",
-        "english": "Dynamic Deadband Gain",
-        "status": "New entry. Please translate!"
+        "message": "動態死區增益",
+        "english": "Dynamic Deadband Gain"
     },
     "rateYawDynamicDeadbandFilter": {
-        "message": "Dynamic Deadband Filter",
-        "english": "Dynamic Deadband Filter",
-        "status": "New entry. Please translate!"
+        "message": "動態死區濾波",
+        "english": "Dynamic Deadband Filter"
     },
     "rateSetupResponseHelp": {
-        "message": "Smooths stick inputs. Larger values result in more smoothing.",
-        "english": "Smooths stick inputs. Larger values result in more smoothing.",
-        "status": "New entry. Please translate!"
+        "message": "搖桿輸入平滑化。數值越大，平滑效果越明顯。",
+        "english": "Smooths stick inputs. Larger values result in more smoothing."
     },
     "rateSetpointBoostGainHelp": {
-        "message": "Boosts stick inputs for a snappier feel.",
-        "english": "Boosts stick inputs for a snappier feel.",
-        "status": "New entry. Please translate!"
+        "message": "搖桿輸入增壓，讓操控感更靈敏俐落。",
+        "english": "Boosts stick inputs for a snappier feel."
     },
     "rateYawDynamicCeilingGainHelp": {
-        "message": "Reduces stick travel required for maximum setpoint while rapidly approaching extremes.",
-        "english": "Reduces stick travel required for maximum setpoint while rapidly approaching extremes.",
-        "status": "New entry. Please translate!"
+        "message": "在迅速接近極限時，減少達到最大設定點所需的搖桿行程。",
+        "english": "Reduces stick travel required for maximum setpoint while rapidly approaching extremes."
     },
     "rateYawDynamicDeadbandGainHelp": {
-        "message": "Increases stick deadband while rapidly approaching center.",
-        "english": "Increases stick deadband while rapidly approaching center.",
-        "status": "New entry. Please translate!"
+        "message": "在迅速接近中立點時，增加搖桿的死區範圍。",
+        "english": "Increases stick deadband while rapidly approaching center."
     },
     "gyroFilterSettings": {
         "message": "陀螺儀濾波設定",
@@ -6518,151 +6454,100 @@
         "english": "Gyro D-term Filter Settings"
     },
     "gyroLowpassFilterHeading": {
-        "message": "Lowpass Filter",
-        "english": "Lowpass Filter",
-        "status": "New entry. Please translate!"
+        "message": "低通濾波器",
+        "english": "Lowpass Filter"
     },
     "gyroLowpassFilterHelp": {
         "message": "陀螺儀低通濾波器用於消除陀螺儀信號中多餘的噪聲。  可使用兩個濾波器，一階或二階均可。  第一個濾波器可以是動態的，隨主旋翼轉速改變其截止頻率。  最小和最大值限制了動態範圍。  使用轉速濾波器或動態陷波濾波器時，需要在 100Hz 左右增加一個濾波器。  如果沒有這些濾波器，則需要兩個二階濾波器。",
         "english": "The Gyro Lowpass Filters are used for cutting off excess noise in the gyro signal. Two filters can be used, either 1<sup>st</sup> or 2<sup>nd</sup> order. The first filter can be dynamic, changing its cutoff frequency with the main rotor RPM. The minimum and maximum are limiting the dynamic range. With RPM Filters or Dynamic Notch Filters, one extra filter is needed around 100Hz. Without them, two second order filters are required."
     },
     "gyroLowpassFilter1": {
-        "message": "Lowpass Filter 1",
-        "english": "Lowpass Filter 1",
-        "status": "New entry. Please translate!"
+        "message": "低通濾波器 1",
+        "english": "Lowpass Filter 1"
     },
     "gyroLowpassFilter2": {
-        "message": "Lowpass Filter 2",
-        "english": "Lowpass Filter 2",
-        "status": "New entry. Please translate!"
+        "message": "低通濾波器 2",
+        "english": "Lowpass Filter 2"
     },
     "gyroLowpassType": {
-        "message": "Filter Type",
-        "english": "Filter Type",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "陀螺儀低通濾波器 1 類型",
-            "english": "Gyro Lowpass 1 Filter Type"
-        }
+        "message": "濾波器類型",
+        "english": "Filter Type"
     },
     "gyroLowpassFrequency": {
-        "message": "Cutoff Frequency",
-        "english": "Cutoff Frequency",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "陀螺儀低通濾波器 1 截止頻率 [Hz]",
-            "english": "Gyro Lowpass 1 Cutoff Frequency [Hz]"
-        }
+        "message": "截止頻率",
+        "english": "Cutoff Frequency"
     },
     "gyroLowpassDynamicCutoff": {
-        "message": "Dynamic Cutoff",
-        "english": "Dynamic Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "動態截止",
+        "english": "Dynamic Cutoff"
     },
     "gyroLowpassDynMinFrequency": {
-        "message": "Min Cutoff Frequency",
-        "english": "Min Cutoff Frequency",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "陀螺儀低通濾波器 1 動態濾波器最小截止頻率 [Hz]",
-            "english": "Gyro Lowpass 1 Dynamic Min Cutoff Frequency [Hz]"
-        }
+        "message": "最小截止頻率",
+        "english": "Min Cutoff Frequency"
     },
     "gyroLowpassDynMaxFrequency": {
-        "message": "Max Cutoff Frequency",
-        "english": "Max Cutoff Frequency",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "陀螺儀低通濾波器 1 動態濾波器最大截止頻率 [Hz]",
-            "english": "Gyro Lowpass 1 Dynamic Max Cutoff Frequency [Hz]"
-        }
+        "message": "最大截止頻率",
+        "english": "Max Cutoff Frequency"
     },
     "gyroNotchFilterHeading": {
-        "message": "Notch Filter",
-        "english": "Notch Filter",
-        "status": "New entry. Please translate!"
+        "message": "陷波濾波器",
+        "english": "Notch Filter"
     },
     "gyroNotchFilterHelp": {
         "message": "陷波濾波器用於濾除額外的共振。每個濾波器都有一個中心和一個截止。中心頻率是濾波器的中心，截止頻率是濾波器開始的位置。例如，截止頻率為160，中心頻率為260，這意味著範圍為160- 360hz，中心附近衰減最多。",
         "english": "The Notch Filters are used for filtering out additional resonances. Each filter has a Center and a Cutoff. The Center Frequency is the center of the filter and the Cutoff Frequency is where filter starts. For example with cutoff of 160 and center of 260, it means the range is 160-360Hz with most attenuation around the center."
     },
     "gyroNotchFilter1": {
-        "message": "Notch Filter 1",
-        "english": "Notch Filter 1",
-        "status": "New entry. Please translate!"
+        "message": "陷波濾波器 1",
+        "english": "Notch Filter 1"
     },
     "gyroNotchFilter2": {
-        "message": "Notch Filter 2",
-        "english": "Notch Filter 2",
-        "status": "New entry. Please translate!"
+        "message": "陷波濾波器 2",
+        "english": "Notch Filter 2"
     },
     "gyroNotchFilterFrequency": {
-        "message": "Center Frequency",
-        "english": "Center Frequency",
-        "status": "New entry. Please translate!"
+        "message": "中心頻率",
+        "english": "Center Frequency"
     },
     "gyroNotchFilterCutoff": {
-        "message": "Cutoff Frequency",
-        "english": "Cutoff Frequency",
-        "status": "New entry. Please translate!"
+        "message": "截止頻率",
+        "english": "Cutoff Frequency"
     },
     "gyroDynamicFilterHeading": {
-        "message": "Dynamic Filter",
-        "english": "Dynamic Filter",
-        "status": "New entry. Please translate!"
+        "message": "動態濾波器",
+        "english": "Dynamic Filter"
     },
     "gyroDynamicFilterHelp": {
-        "message": "動態陷波器將會自動識別陀螺儀信號中的峰值噪聲頻率，並將濾波器作用於該頻率上。",
-        "english": "Dynamic Notch Filter tracks peak noise frequencies in the gyro signal and places notch filters at those frequencies automatically.",
-        "status": "Reused translation. Please check!"
+        "message": "動態陷波濾波器會追蹤陀螺儀訊號中的尖峰雜訊頻率，並自動在那些頻率上設置陷波濾波器以進行抑制。",
+        "english": "Dynamic Notch Filter tracks peak noise frequencies in the gyro signal and places notch filters at those frequencies automatically."
     },
     "gyroDynamicNotchCount": {
-        "message": "Notch Count",
-        "english": "Notch Count",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "動態陷波器數量",
-            "english": "Dynamic Notch Count"
-        }
+        "message": "陷波數量",
+        "english": "Notch Count"
     },
     "gyroDynamicNotchCountHelp": {
         "message": "選擇動態陷波濾波器的數量, 如果不帶 RPM 濾波器答單獨使用，建議使用 4-6個。使用 RPM 濾波器時，建議使用 2-4個。",
         "english": "Select the number of dynamic notch filters. If used standalone without the RPM filters, 4-6 is recommended. With the RPM filters, 2-4 is recommended."
     },
     "gyroDynamicNotchQ": {
-        "message": "Notch Q",
-        "english": "Notch Q",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "動態陷波器 Q 因子",
-            "english": "Dynamic Notch Q"
-        }
+        "message": "陷波 Q 值",
+        "english": "Notch Q"
     },
     "gyroDynamicNotchQHelp": {
-        "message": "Q因子調整了動態陷波濾波器的寬度。更高的值將使其變得更窄，較低的值將使其變得更寬。 建議設定為2.0 至 4.0 ，低於2.0將會明顯增加延遲並影響飛行性能。",
+        "message": "Q 值調整了動態陷波濾波器的寬度。更高的值將使其變得更窄，較低的值將使其變得更寬。 建議設定為2.0 至 4.0 ，低於2.0將會明顯增加延遲並影響飛行性能。",
         "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance."
     },
     "gyroDynamicNotchMinHz": {
-        "message": "Notch Minimum Frequency",
-        "english": "Notch Minimum Frequency",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "動態陷波器最小頻率",
-            "english": "Dynamic Notch Minimum Frequency"
-        }
+        "message": "陷波最小頻率",
+        "english": "Notch Minimum Frequency"
     },
     "gyroDynamicNotchMinHzHelp": {
         "message": "將其設定為需要過濾的最低傳入噪聲頻率。應低於主旋翼頻率，但不低於 20Hz，相當於 1200rpm。",
         "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is equivalent to 1200rpm."
     },
     "gyroDynamicNotchMaxHz": {
-        "message": "Notch Maximum Frequency",
-        "english": "Notch Maximum Frequency",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "動態陷波器最大頻率",
-            "english": "Dynamic Notch Maximum Frequency"
-        }
+        "message": "陷波最大頻率",
+        "english": "Notch Maximum Frequency"
     },
     "gyroDynamicNotchMaxHzHelp": {
         "message": "將其設定為需要過濾的最高傳入噪聲頻率。如果濾波器頻率為 1k，則應比最大尾旋翼頻率高 10-20%，但不高於 250Hz。如果濾波器頻率為 2k 或更高，則可使用 330-500 Hz，特別是對於馬達直驅尾旋翼的小型直升機（範圍越大，精度越低，性能越差）。",
@@ -6709,13 +6594,8 @@
         "english": "D Term Notch Filter Cutoff Frequency [Hz]"
     },
     "gyroRpmFilterSettings": {
-        "message": "RPM Filter",
-        "english": "RPM Filter",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "陀螺儀轉速陷波濾波器設定",
-            "english": "Gyro RPM Notch Filter Settings"
-        }
+        "message": "轉速濾波器",
+        "english": "RPM Filter"
     },
     "gyroRpmFilterSetup": {
         "message": "設定類型",
@@ -6734,156 +6614,104 @@
         "english": "Custom"
     },
     "gyroRpmFilterConfigNote": {
-        "message": "The <i>RPM Filter</i> requires a real-time RPM source, either from an RPM Sensor or Bidirectional DShot. ESC telemetry is not suitable.",
-        "english": "The <i>RPM Filter</i> requires a real-time RPM source, either from an RPM Sensor or Bidirectional DShot. ESC telemetry is not suitable.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<b>警告：</b> RPM濾波器要求通過Dshot遙測或RPM回傳線獲得精確的馬達轉速。電變遙測獲得的轉速不適合使用。",
-            "english": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable."
-        }
+        "message": "<i>轉速濾波器</i>需要即時的轉速來源，可以是來自轉速感應器或雙向 DShot 的訊號。電變的遙測資料並不適合使用。",
+        "english": "The <i>RPM Filter</i> requires a real-time RPM source, either from an RPM Sensor or Bidirectional DShot. ESC telemetry is not suitable."
     },
     "gyroRpmFilterCustomNote": {
-        "message": "Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings.",
-        "english": "Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">警告：</span>自訂轉速濾波器使用中.<br>請使用CLI進行RPM濾波器設定。",
-            "english": "<span class=\"message-negative\">Warning:</span> Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings."
-        }
+        "message": "自訂轉速陷波濾波器使用中。<br>請使用CLI指令修改轉速濾波器設定。",
+        "english": "Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings."
     },
     "gyroRpmFilterPreset": {
-        "message": "Strength",
-        "english": "Strength",
-        "status": "New entry. Please translate!"
+        "message": "強度",
+        "english": "Strength"
     },
     "gyroRpmFilterPresetHelp": {
-        "message": "Higher strength removes more vibrations, but introduces more delay.",
-        "english": "Higher strength removes more vibrations, but introduces more delay.",
-        "status": "New entry. Please translate!"
+        "message": "較高的強度可以去除更多的振動，但會帶來更多的延遲。",
+        "english": "Higher strength removes more vibrations, but introduces more delay."
     },
     "gyroRpmFilterPresetCustom": {
-        "message": "Custom",
-        "english": "Custom",
-        "status": "New entry. Please translate!"
+        "message": "自訂",
+        "english": "Custom"
     },
     "gyroRpmFilterPresetLow": {
         "message": "低",
-        "english": "Low",
-        "status": "Reused translation. Please check!"
+        "english": "Low"
     },
     "gyroRpmFilterPresetMedium": {
         "message": "中",
-        "english": "Medium",
-        "status": "Reused translation. Please check!"
+        "english": "Medium"
     },
     "gyroRpmFilterPresetHigh": {
         "message": "高",
-        "english": "High",
-        "status": "Reused translation. Please check!"
+        "english": "High"
     },
     "gyroRpmFilterMinFreq": {
-        "message": "Minimum Frequency",
-        "english": "Minimum Frequency",
-        "status": "New entry. Please translate!"
+        "message": "最小頻率",
+        "english": "Minimum Frequency"
     },
     "gyroRpmFilterMinFreqHelp": {
-        "message": "Set slightly below the frequency of the main rotor at the lowest flying RPM.",
-        "english": "Set slightly below the frequency of the main rotor at the lowest flying RPM.",
-        "status": "New entry. Please translate!"
+        "message": "請讓設定值稍微低於主旋翼在最低飛行轉速時的頻率。",
+        "english": "Set slightly below the frequency of the main rotor at the lowest flying RPM."
     },
     "gyroRpmFilterMinRPMGroup": {
-        "message": "Minimum RPM",
-        "english": "Minimum RPM",
-        "status": "New entry. Please translate!"
+        "message": "最小轉速",
+        "english": "Minimum RPM"
     },
     "gyroRpmFilterMinRPMGroupHelp": {
-        "message": "Set slightly below the lowest flying RPM.",
-        "english": "Set slightly below the lowest flying RPM.",
-        "status": "New entry. Please translate!"
+        "message": "請讓設定值稍微低於最低飛行轉速。",
+        "english": "Set slightly below the lowest flying RPM."
     },
     "gyroRpmFilterMainRotorMinRPM": {
-        "message": "Main Rotor",
-        "english": "Main Rotor",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "主旋翼最小過濾轉速",
-            "english": "Main Rotor Minimum Filtered RPM"
-        }
+        "message": "主旋翼",
+        "english": "Main Rotor"
     },
     "gyroRpmFilterMainRotorMinRPMHelp": {
         "message": "濾波器接受的最小主旋翼轉速",
         "english": "Minimum Main Rotor RPM accepted by the filters"
     },
     "gyroRpmFilterTailRotorMinRPM": {
-        "message": "Tail Rotor",
-        "english": "Tail Rotor",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "尾旋翼最小過濾轉速",
-            "english": "Tail Rotor Minimum Filtered RPM"
-        }
+        "message": "尾旋翼",
+        "english": "Tail Rotor"
     },
     "gyroRpmFilterTailRotorMinRPMHelp": {
         "message": "濾波器接受的最小尾旋翼轉速",
         "english": "Minimum Tail Rotor RPM accepted by the filters"
     },
     "gyroRpmFilterBanks": {
-        "message": "RPM Filter Notches",
-        "english": "RPM Filter Notches",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "陀螺儀轉速濾波器組",
-            "english": "Gyro RPM Notch Filter Banks"
-        }
+        "message": "轉速濾波器陷波",
+        "english": "RPM Filter Notches"
     },
     "gyroRpmFilterHelp": {
-        "message": "Every rotating part on a helicopter generates vibrations, which can significantly affect the performance of the flight control loops. The <i>RPM Filter</i> utilizes the motor's RPM signal and the model's gear ratios to precisely eliminate these vibrations from the gyro's output, enabling the control loops to operate on the true motion of the aircraft. This method introduces substantially less delay than traditional vibration filtering, enhancing overall flight performance.",
-        "english": "Every rotating part on a helicopter generates vibrations, which can significantly affect the performance of the flight control loops. The <i>RPM Filter</i> utilizes the motor's RPM signal and the model's gear ratios to precisely eliminate these vibrations from the gyro's output, enabling the control loops to operate on the true motion of the aircraft. This method introduces substantially less delay than traditional vibration filtering, enhancing overall flight performance.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "轉速控制濾波是陀螺上的一組陷波濾波器，它利用轉速遙測數據以外科手術般精準去除噪聲。<br /><br /><b><span>重要</span>: 電變必須支援雙向Dshot協定，並且$t(tabmotors.com message)頁面中的$t(configurationMotorPoles.message)的值必須正確才能使此過濾器工作。</b>",
-            "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
-        }
+        "message": "直升機上每個旋轉的零件都會產生振動，這些振動可能會對飛控的性能造成顯著影響。<i>轉速濾波器</i>利用馬達的轉速訊號以及模型的齒輪比，精確地消除這些振動對陀螺儀輸出的影響，讓控制迴路能夠基於飛機的真實運動進行運作。這種方法相比傳統的振動濾波，能夠帶來更少的延遲，進而提升整體飛行性能。",
+        "english": "Every rotating part on a helicopter generates vibrations, which can significantly affect the performance of the flight control loops. The <i>RPM Filter</i> utilizes the motor's RPM signal and the model's gear ratios to precisely eliminate these vibrations from the gyro's output, enabling the control loops to operate on the true motion of the aircraft. This method introduces substantially less delay than traditional vibration filtering, enhancing overall flight performance."
     },
     "gyroRpmFilterMainRotorGroup": {
-        "message": "Main Rotor",
-        "english": "Main Rotor",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "主旋翼陷波濾波器",
-            "english": "Main Rotor Notch Filters"
-        }
+        "message": "主旋翼",
+        "english": "Main Rotor"
     },
     "gyroRpmFilterMainRotorHelp": {
         "message": "針對主旋翼諧波的轉速控制濾波器",
         "english": "RPM controlled filters for the main rotor harmonics"
     },
     "gyroRpmFilterTailRotorGroup": {
-        "message": "Tail Rotor",
-        "english": "Tail Rotor",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "尾旋翼陷波濾波器",
-            "english": "Tail Rotor Notch Filters"
-        }
+        "message": "尾旋翼",
+        "english": "Tail Rotor"
     },
     "gyroRpmFilterTailRotorHelp": {
         "message": "針對尾旋翼諧波的轉速控制濾波器",
         "english": "RPM controlled filters for the tail rotor harmonics"
     },
     "gyroRpmFilterMotorGroup": {
-        "message": "Motors",
-        "english": "Motors",
-        "status": "New entry. Please translate!"
+        "message": "馬達",
+        "english": "Motors"
     },
     "gyroRpmFilterMainMotorGroup": {
         "message": "主馬達陷波濾波器",
         "english": "Main Motor Notch Filters"
     },
     "gyroRpmFilterMainMotorQ": {
-        "message": "Main Motor Notch Q",
-        "english": "Main Motor Notch Q",
-        "status": "New entry. Please translate!"
+        "message": "主馬達陷波 Q 值",
+        "english": "Main Motor Notch Q"
     },
     "gyroRpmFilterMainMotorHelp": {
         "message": "針對主馬達諧波的轉速控制濾波器",
@@ -6894,9 +6722,8 @@
         "english": "Tail Motor Notch Filters"
     },
     "gyroRpmFilterTailMotorQ": {
-        "message": "Tail Motor Notch Q",
-        "english": "Tail Motor Notch Q",
-        "status": "New entry. Please translate!"
+        "message": "尾馬達陷波 Q 值",
+        "english": "Tail Motor Notch Q"
     },
     "gyroRpmFilterTailMotorHelp": {
         "message": "針對尾馬達諧波的轉速控制濾波器",
@@ -6907,7 +6734,7 @@
         "english": "Fundamental Frequency Notch type"
     },
     "gyroRpmFilterQ1": {
-        "message": "基頻陷波 Q 因子",
+        "message": "基頻陷波 Q 值",
         "english": "Fundamental Frequency Notch Q"
     },
     "gyroRpmFilterH2": {
@@ -6915,7 +6742,7 @@
         "english": "2<sup>nd</sup> Harmonic Notch Type"
     },
     "gyroRpmFilterQ2": {
-        "message": "2<sup>nd</sup> 諧波陷波 Q 因子",
+        "message": "2<sup>nd</sup> 諧波陷波 Q 值",
         "english": "2<sup>nd</sup> Harmonic Notch Q"
     },
     "gyroRpmFilterH3": {
@@ -6923,7 +6750,7 @@
         "english": "3<sup>rd</sup> Harmonic Notch Type"
     },
     "gyroRpmFilterQ3": {
-        "message": "3<sup>rd</sup> 諧波陷波 Q 因子",
+        "message": "3<sup>rd</sup> 諧波陷波 Q 值",
         "english": "3<sup>rd</sup> Harmonic Notch Q"
     },
     "gyroRpmFilterH4": {
@@ -6931,49 +6758,44 @@
         "english": "4<sup>th</sup> Harmonic Notch Type"
     },
     "gyroRpmFilterQ4": {
-        "message": "4<sup>th</sup> 諧波陷波 Q 因子",
+        "message": "4<sup>th</sup> 諧波陷波 Q 值",
         "english": "4<sup>th</sup> Harmonic Notch Q"
     },
     "gyroRpmFilterQ5": {
-        "message": "5<sup>th</sup> 諧波陷波 Q 因子",
+        "message": "5<sup>th</sup> 諧波陷波 Q 值",
         "english": "5<sup>th</sup> Harmonic Notch Q"
     },
     "gyroRpmFilterQ6": {
-        "message": "6<sup>th</sup> 諧波陷波 Q 因子",
+        "message": "6<sup>th</sup> 諧波陷波 Q 值",
         "english": "6<sup>th</sup> Harmonic Notch Q"
     },
     "gyroRpmFilterQ7": {
-        "message": "7<sup>th</sup> 諧波陷波 Q 因子",
+        "message": "7<sup>th</sup> 諧波陷波 Q 值",
         "english": "7<sup>th</sup> Harmonic Notch Q"
     },
     "gyroRpmFilterQ8": {
-        "message": "8<sup>th</sup> 諧波陷波 Q 因子",
+        "message": "8<sup>th</sup> 諧波陷波 Q 值",
         "english": "8<sup>th</sup> Harmonic Notch Q"
     },
     "gyroRpmFilterNotchTypeSingle": {
-        "message": "SINGLE",
-        "english": "SINGLE",
-        "status": "New entry. Please translate!"
+        "message": "單一",
+        "english": "SINGLE"
     },
     "gyroRpmFilterNotchTypeDouble": {
-        "message": "DOUBLE",
-        "english": "DOUBLE",
-        "status": "New entry. Please translate!"
+        "message": "雙重",
+        "english": "DOUBLE"
     },
     "gyroRpmFilterNotchTypeTriple": {
-        "message": "TRIPLE",
-        "english": "TRIPLE",
-        "status": "New entry. Please translate!"
+        "message": "三重",
+        "english": "TRIPLE"
     },
     "gyroRpmFilterNotchCountWarn": {
-        "message": "A maximum of 16 notches can be enabled.",
-        "english": "A maximum of 16 notches can be enabled.",
-        "status": "New entry. Please translate!"
+        "message": "最多可以啟用 16 個陷波濾波器。",
+        "english": "A maximum of 16 notches can be enabled."
     },
     "gyroRpmFilterNotchResetBtn": {
-        "message": "Reset Custom Notches",
-        "english": "Reset Custom Notches",
-        "status": "New entry. Please translate!"
+        "message": "重設自訂陷波",
+        "english": "Reset Custom Notches"
     },
     "dialogGyroResetTitle": {
         "message": "<span class=\"message-negative\">警告:</span> 轉速濾波器重設",
@@ -9333,14 +9155,12 @@
         "english": "Custom"
     },
     "blackboxGracePeriod": {
-        "message": "Disarm grace period",
-        "english": "Disarm grace period",
-        "status": "New entry. Please translate!"
+        "message": "鎖定寬限期",
+        "english": "Disarm grace period"
     },
     "blackboxGracePeriodHelp": {
-        "message": "Continues logging briefly after disarming, useful for capturing crash data. Set to 0 to disable.",
-        "english": "Continues logging briefly after disarming, useful for capturing crash data. Set to 0 to disable.",
-        "status": "New entry. Please translate!"
+        "message": "鎖定後會繼續短暫地記錄數據，對於捕捉墜機數據很有用。設為 0 可停用此功能。",
+        "english": "Continues logging briefly after disarming, useful for capturing crash data. Set to 0 to disable."
     },
     "blackboxDebugMode": {
         "message": "除錯模式",
@@ -9363,24 +9183,20 @@
         "english": "Choose which <i>axis</i> is being debugged. Applies to some of the debug modes."
     },
     "blackboxInitialErase": {
-        "message": "Initial erase",
-        "english": "Initial erase",
-        "status": "New entry. Please translate!"
+        "message": "初始抹除",
+        "english": "Initial erase"
     },
     "blackboxInitialEraseHelp": {
-        "message": "Ensures a minimum amount of free space when recording starts, erasing old logs if necessary. Set to 0 to disable this feature.<br><br><b>Note:</b> Logging starts after erasing completes. This may take a significant amount of time with some flash chips.",
-        "english": "Ensures a minimum amount of free space when recording starts, erasing old logs if necessary. Set to 0 to disable this feature.<br><br><b>Note:</b> Logging starts after erasing completes. This may take a significant amount of time with some flash chips.",
-        "status": "New entry. Please translate!"
+        "message": "確保錄製開始時有最小的空間，如果需要，會抹除舊的紀錄。設為 0 可停用此功能。<br><br><b>注意：</b>抹除完成後才開始紀錄。某些快閃晶片可能需要較長的時間才能完成抹除。",
+        "english": "Ensures a minimum amount of free space when recording starts, erasing old logs if necessary. Set to 0 to disable this feature.<br><br><b>Note:</b> Logging starts after erasing completes. This may take a significant amount of time with some flash chips."
     },
     "blackboxRollingErase": {
-        "message": "Rolling erase",
-        "english": "Rolling erase",
-        "status": "New entry. Please translate!"
+        "message": "滾動抹除",
+        "english": "Rolling erase"
     },
     "blackboxRollingEraseHelp": {
-        "message": "Overwrite old logs when the storage is full.<br><br><b>Note:</b> Logs may contain gaps if the flash chip is slow to erase.",
-        "english": "Overwrite old logs when the storage is full.<br><br><b>Note:</b> Logs may contain gaps if the flash chip is slow to erase.",
-        "status": "New entry. Please translate!"
+        "message": "當儲存空間滿時會覆寫舊的紀錄。<br><br><b>注意：</b>如果閃存晶片抹除速度較慢，紀錄可能會有間斷。",
+        "english": "Overwrite old logs when the storage is full.<br><br><b>Note:</b> Logs may contain gaps if the flash chip is slow to erase."
     },
     "blackboxSerialLogger": {
         "message": "外接串列埠日誌記錄設備",
@@ -9669,448 +9485,377 @@
         "english": "Do you really want to close the configurator?"
     },
     "dropDownSelectAll": {
-        "message": "[Select/deselect all]",
+        "message": "[全選/取消全選]",
         "english": "[Select/deselect all]",
-        "status": "New entry. Please translate!",
         "description": "Select all item in the drop down/multiple select"
     },
     "dropDownFilterDisabled": {
-        "message": "Select...",
+        "message": "選擇...",
         "english": "Select...",
-        "status": "New entry. Please translate!",
         "description": "Text indicating nothing is selected in the drop down/multiple select (filter disabled)"
     },
     "dropDownAll": {
-        "message": "All",
+        "message": "全選",
         "english": "All",
-        "status": "New entry. Please translate!",
         "description": "Text indicating everything is selected in the drop down/multiple select"
     },
     "tabPresets": {
-        "message": "Presets",
+        "message": "預設值",
         "english": "Presets",
-        "status": "New entry. Please translate!",
         "description": "Presets tab title"
     },
     "presetsReload": {
-        "message": "Reload",
+        "message": "重新載入",
         "english": "Reload",
-        "status": "New entry. Please translate!",
         "description": "Text on the reload button that appears when there in an error loading presets index"
     },
     "presetCategory": {
-        "message": "Category:",
-        "english": "Category:",
-        "status": "New entry. Please translate!"
+        "message": "目錄：",
+        "english": "Category:"
     },
     "presetAuthor": {
-        "message": "Author:",
+        "message": "作者：",
         "english": "Author:",
-        "status": "New entry. Please translate!",
         "description": "Hint text in the preset dialog"
     },
     "presetSelectedOptions": {
-        "message": "Selected Options:",
-        "english": "Selected Options:",
-        "status": "New entry. Please translate!"
+        "message": "選取的選項：",
+        "english": "Selected Options:"
     },
     "presetKeywords": {
-        "message": "Keywords:",
+        "message": "關鍵字：",
         "english": "Keywords:",
-        "status": "New entry. Please translate!",
         "description": "Hint text in the preset dialog"
     },
     "presetSource": {
-        "message": "Source:",
+        "message": "來源：",
         "english": "Source:",
-        "status": "New entry. Please translate!",
         "description": "Text prefixing user defined name of the preset repository containing a preset"
     },
     "presetVersions": {
-        "message": "Firmware:",
+        "message": "韌體：",
         "english": "Firmware:",
-        "status": "New entry. Please translate!",
         "description": "Hint text in the preset dialog"
     },
     "presetBoards": {
-        "message": "Boards:",
+        "message": "飛控板：",
         "english": "Boards:",
-        "status": "New entry. Please translate!",
         "description": "Hint text in the preset dialog"
     },
     "presetsOfficial": {
-        "message": "Official",
+        "message": "官方",
         "english": "Official",
-        "status": "New entry. Please translate!",
         "description": "Hint text in the preset dialog indication preset is official"
     },
     "presetsCommunity": {
-        "message": "Community",
+        "message": "社群",
         "english": "Community",
-        "status": "New entry. Please translate!",
         "description": "Hint text in the preset dialog indication preset is from the community"
     },
     "presetsExperimental": {
-        "message": "Experimental",
+        "message": "實驗性",
         "english": "Experimental",
-        "status": "New entry. Please translate!",
         "description": "Hint text in the preset dialog indication preset is experimental"
     },
     "presetsApply": {
-        "message": "Select",
+        "message": "選擇",
         "english": "Select",
-        "status": "New entry. Please translate!",
         "description": "Button to pick a preset"
     },
     "presetsViewOnline": {
-        "message": "View Source",
+        "message": "顯示來源",
         "english": "View Source",
-        "status": "New entry. Please translate!",
         "description": "Link text for opening preset file online"
     },
     "presetsOpenDiscussion": {
-        "message": "Discussion",
+        "message": "討論",
         "english": "Discussion",
-        "status": "New entry. Please translate!",
         "description": "Link text for opening preset discussion"
     },
     "presetsShowCli": {
-        "message": "Show CLI",
+        "message": "顯示 CLI",
         "english": "Show CLI",
-        "status": "New entry. Please translate!",
         "description": "Button to show CLI code of a preset"
     },
     "presetsHideCli": {
-        "message": "Hide CLI",
+        "message": "隱藏 CLI",
         "english": "Hide CLI",
-        "status": "New entry. Please translate!",
         "description": "Button to hide CLI code of a preset"
     },
     "presetOptions": {
-        "message": "Options",
+        "message": "選項",
         "english": "Options",
-        "status": "New entry. Please translate!",
         "description": "Text label for Options drop down select"
     },
     "presetsFilterCategory": {
-        "message": "Categories",
+        "message": "目錄",
         "english": "Categories",
-        "status": "New entry. Please translate!",
         "description": "UI filter name"
     },
     "presetsFilterKeyword": {
-        "message": "Keywords",
+        "message": "關鍵字",
         "english": "Keywords",
-        "status": "New entry. Please translate!",
         "description": "UI filter name"
     },
     "presetsFilterAuthor": {
-        "message": "Authors",
+        "message": "作者",
         "english": "Authors",
-        "status": "New entry. Please translate!",
         "description": "UI filter name"
     },
     "presetsFilterFirmware": {
-        "message": "Firmware Filter",
+        "message": "韌體過濾器",
         "english": "Firmware Filter",
-        "status": "New entry. Please translate!",
         "description": "UI filter name"
     },
     "presetsFilterStatus": {
-        "message": "Status",
+        "message": "狀態",
         "english": "Status",
-        "status": "New entry. Please translate!",
         "description": "UI filter name - official/community/experimental"
     },
     "presetsLoadError": {
-        "message": "Error loading presets from the internet",
+        "message": "從網路載入預設值時發生錯誤",
         "english": "Error loading presets from the internet",
-        "status": "New entry. Please translate!",
         "description": "Error report when failed to load presets index or a specific preset"
     },
     "presetsButtonReview": {
-        "message": "Review Selected Presets",
-        "english": "Review Selected Presets",
-        "status": "New entry. Please translate!"
+        "message": "檢視選取的預設值",
+        "english": "Review Selected Presets"
     },
     "presetsButtonReviewCLI": {
-        "message": "Review CLI",
-        "english": "Review CLI",
-        "status": "New entry. Please translate!"
+        "message": "檢視 CLI",
+        "english": "Review CLI"
     },
     "presetsButtonApply": {
-        "message": "Execute Presets",
-        "english": "Execute Presets",
-        "status": "New entry. Please translate!"
+        "message": "套用預設值",
+        "english": "Execute Presets"
     },
     "presetsButtonReset": {
-        "message": "Reset",
-        "english": "Reset",
-        "status": "New entry. Please translate!"
+        "message": "重置",
+        "english": "Reset"
     },
     "presetsApplyingPresets": {
-        "message": "Applying configuration...",
+        "message": "套用設定值中...",
         "english": "Applying configuration...",
-        "status": "New entry. Please translate!",
         "description": "First label in the progress dialog when applying configuration (presets or user config)"
     },
     "presetsPleaseWait": {
-        "message": "Please wait.",
+        "message": "請稍後。",
         "english": "Please wait.",
-        "status": "New entry. Please translate!",
         "description": "Second label in the progress dialog when applying presets"
     },
     "presetsCliErrorsWarning": {
-        "message": "<span class='message-negative'>WARNING!</span><br/>Configuration has been applied with CLI errors.",
+        "message": "<span class='message-negative'>警告！</span><br/>設定值已套用，但出現 CLI 錯誤。",
         "english": "<span class='message-negative'>WARNING!</span><br/>Configuration has been applied with CLI errors.",
-        "status": "New entry. Please translate!",
         "description": "Text to show when there are CLI errors after applying presets or user configuration"
     },
     "presetsCliSaveButton": {
-        "message": "Save and Reboot",
+        "message": "儲存並重啟",
         "english": "Save and Reboot",
-        "status": "New entry. Please translate!",
         "description": "save Button"
     },
     "presetsCliExitButton": {
-        "message": "Cancel and Reboot",
+        "message": "取消並重啟",
         "english": "Cancel and Reboot",
-        "status": "New entry. Please translate!",
         "description": "Reboot Button"
     },
     "presetsWarningDialogTitle": {
-        "message": "WARNING!",
+        "message": "警告！",
         "english": "WARNING!",
-        "status": "New entry. Please translate!",
         "description": "Warning title in the warning dialog in the presets"
     },
     "presetsWarningDialogYesButton": {
-        "message": "Acknowledge",
+        "message": "確認",
         "english": "Acknowledge",
-        "status": "New entry. Please translate!",
         "description": "Agree button in the presets warning dialog"
     },
     "presetsWarningDialogNoButton": {
-        "message": "Cancel",
+        "message": "取消",
         "english": "Cancel",
-        "status": "New entry. Please translate!",
         "description": "Cancel button in the presets warning dialog"
     },
     "presetsWiki": {
-        "message": "Presets Wiki",
+        "message": "預設值 Wiki",
         "english": "Presets Wiki",
-        "status": "New entry. Please translate!",
         "description": "Button to open Presets Wiki link"
     },
     "backupDiffAll": {
-        "message": "Save Differential Backup (diff all)",
+        "message": "儲存差異備份 (diff all)",
         "english": "Save Differential Backup (diff all)",
-        "status": "New entry. Please translate!",
         "description": "Button to backup differential configuration to a file"
     },
     "backupDumpAll": {
-        "message": "Save Full Backup (dump all)",
+        "message": "儲存完整備份 (dump all)",
         "english": "Save Full Backup (dump all)",
-        "status": "New entry. Please translate!",
         "description": "Button to backup a dump all of the configuration to a file"
     },
     "backupLoad": {
-        "message": "Load Backup",
+        "message": "讀取備份",
         "english": "Load Backup",
-        "status": "New entry. Please translate!",
         "description": "Button to load backup from a file"
     },
     "backupWaitDialogTitleSavingDiffAll": {
-        "message": "Saving diff all from the flight controller",
+        "message": "正在從飛控儲存差異備份",
         "english": "Saving diff all from the flight controller",
-        "status": "New entry. Please translate!",
         "description": "Title for the waiting dialog when saving diff all into a file"
     },
     "backupWaitDialogTitleSavingDumpAll": {
-        "message": "Saving dump all from the flight controller",
+        "message": "正在從飛控儲存完整備份",
         "english": "Saving dump all from the flight controller",
-        "status": "New entry. Please translate!",
         "description": "Title for the waiting dialog when saving dump all into a file"
     },
     "backupWaitDialogTitleLoadBackup": {
-        "message": "Loading backup onto the flight controller",
+        "message": "正在將備份載入到飛控",
         "english": "Loading backup onto the flight controller",
-        "status": "New entry. Please translate!",
         "description": "Title for the waiting dialog when loading dump all into a file"
     },
     "backupWaitDialogMessageErrorSavingBackup": {
-        "message": "Error occurred while saving current configuration",
+        "message": "儲存當前設定時發生錯誤",
         "english": "Error occurred while saving current configuration",
-        "status": "New entry. Please translate!",
         "description": "Message appears on presets tab when saving current diff all into a file has failed"
     },
     "presetSources": {
-        "message": "Preset Sources...",
+        "message": "預設值來源...",
         "english": "Preset Sources...",
-        "status": "New entry. Please translate!",
         "description": "A button to show preset sources dialog"
     },
     "presetsSourcesDialogTitle": {
-        "message": "Preset Sources",
+        "message": "預設值來源",
         "english": "Preset Sources",
-        "status": "New entry. Please translate!",
         "description": "A button to show preset sources dialog"
     },
     "presetsSourcesDialogAddNew": {
-        "message": "Add New Source",
+        "message": "增加新來源",
         "english": "Add New Source",
-        "status": "New entry. Please translate!",
         "description": "A button to show preset sources dialog"
     },
     "presetsSourcesDialogConfirm": {
         "message": "OK",
-        "english": "OK",
-        "status": "New entry. Please translate!"
+        "english": "OK"
     },
     "presetsSourcesDialogDefaultSourceName": {
-        "message": "New Custom Preset Source",
+        "message": "新增自訂預設值來源",
         "english": "New Custom Preset Source",
-        "status": "New entry. Please translate!",
         "description": "A default preset source (repo) name"
     },
     "presetsSourcesDialogSaveSource": {
-        "message": "Save",
+        "message": "儲存",
         "english": "Save",
-        "status": "New entry. Please translate!",
         "description": "Presets tab, sources dialog, button to save new or editable source"
     },
     "presetsSourcesDialogResetSource": {
-        "message": "Revert",
+        "message": "復原",
         "english": "Revert",
-        "status": "New entry. Please translate!",
         "description": "Presets tab, sources dialog, button to revert source after modifications"
     },
     "presetsSourcesDialogMakeSourceActive": {
-        "message": "Activate",
+        "message": "啟用",
         "english": "Activate",
-        "status": "New entry. Please translate!",
         "description": "Presets tab, sources dialog, button to make selected source active"
     },
     "presetsSourcesDialogMakeSourceDisable": {
-        "message": "Disable",
+        "message": "關閉",
         "english": "Disable",
-        "status": "New entry. Please translate!",
         "description": "Presets tab, sources dialog, button to make selected source disabled"
     },
     "presetsSourcesDialogDeleteSource": {
-        "message": "Delete",
+        "message": "刪除",
         "english": "Delete",
-        "status": "New entry. Please translate!",
         "description": "Presets tab, sources dialog, button to delete selected source"
     },
     "presetsSourcesDialogGithubBranch": {
-        "message": "Github Branch",
-        "english": "Github Branch",
-        "status": "New entry. Please translate!"
+        "message": "Github 分支",
+        "english": "Github Branch"
     },
     "presetsSourcesDialogURL": {
         "message": "URL",
-        "english": "URL",
-        "status": "New entry. Please translate!"
+        "english": "URL"
     },
     "presetsSourcesDialogName": {
-        "message": "Name",
-        "english": "Name",
-        "status": "New entry. Please translate!"
+        "message": "名稱",
+        "english": "Name"
     },
     "reviewPresetsDialogTitle": {
-        "message": "Review Selected Presets",
-        "english": "Review Selected Presets",
-        "status": "New entry. Please translate!"
+        "message": "查看已選預設值",
+        "english": "Review Selected Presets"
     },
     "presetsWarningNotOfficialSource": {
-        "message": "<span class=\"message-negative\">WARNING!</span> A third party preset source is selected.",
+        "message": "<span class=\"message-negative\">警告！</span>已選擇第三方預設值來源。",
         "english": "<span class=\"message-negative\">WARNING!</span> A third party preset source is selected.",
-        "status": "New entry. Please translate!",
         "description": "Warning message that shows up when a third party preset source is selected"
     },
     "presetsFailedToLoadRepositories": {
-        "message": "<span class=\"message-negative\">WARNING!</span> Failed to load following repositories: <b>{{repos}}</b>",
+        "message": "<span class=\"message-negative\">警告！</span>無法載入以下儲存庫：<b>{{repos}}</b>",
         "english": "<span class=\"message-negative\">WARNING!</span> Failed to load following repositories: <b>{{repos}}</b>",
-        "status": "New entry. Please translate!",
         "description": "Warning message that shows up when we fail to load some repositories"
     },
     "presetsWarningBackup": {
-        "message": "Please make sure you backup your current configuration ('$t(backupDiffAll.message)' button or via CLI if the button is disabled) <strong>before</strong> picking and applying presets. Otherwise there is no way to return to previous configuration after applying presets.",
+        "message": "請確保在選擇並套用預設值之前，先備份當前設定（可透過「$t(backupDiffAll.message)」按鈕或如果按鈕無法使用，則透過 CLI 進行備份）。<strong>否則</strong>，在套用預設值後將無法回到先前的設定。",
         "english": "Please make sure you backup your current configuration ('$t(backupDiffAll.message)' button or via CLI if the button is disabled) <strong>before</strong> picking and applying presets. Otherwise there is no way to return to previous configuration after applying presets.",
-        "status": "New entry. Please translate!",
         "description": "Warning message that shows up at the top of the presets tab"
     },
     "presets_sources_dialog_warning": {
         "message": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources can break your helicopter configuration and potentially harm your devices.",
         "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources can break your helicopter configuration and potentially harm your devices.",
-        "status": "New entry. Please translate!",
-        "description": "Warning message that shows up at the top of the preset sources dialog"
+        "status": "Modified entry. Please translate!",
+        "description": "Warning message that shows up at the top of the preset sources dialog",
+        "previous": {
+            "message": "<span class=\"message-negative\">警告！</span> 使用第三方預設值來源可能是危險的。<br/>請確保只新增並使用受信任的來源。惡意或不良的預設值來源可能會破壞您的飛行器設定，並且有可能對您的設備造成損害。",
+            "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources will break your drone configuration and can potentially harm your devices.",
+            "description": "Warning message that shows up at the top of the preset sources dialog"
+        }
     },
     "presetsWarningWrongVersionConfirmation": {
-        "message": "Picked preset requires firmware version $1. Current firmware version is $2",
+        "message": "選取的預設值需要 $1 韌體版本。當前韌體版本為 $2",
         "english": "Picked preset requires firmware version $1. Current firmware version is $2",
-        "status": "New entry. Please translate!",
         "description": "Warning message that shows up at the top of the preset sources dialog"
     },
     "presetsSearchPlaceholder": {
-        "message": "Example: \"OMPHOBBY M5\", or \"OMPHOBBY M7\"",
-        "english": "Example: \"OMPHOBBY M5\", or \"OMPHOBBY M7\"",
-        "status": "New entry. Please translate!"
+        "message": "例如： \"OMPHOBBY M5\"，或 \"OMPHOBBY M7\"",
+        "english": "Example: \"OMPHOBBY M5\", or \"OMPHOBBY M7\""
     },
     "presetsNoPresetsFound": {
-        "message": "No presets found for the given search parameters",
+        "message": "未找到符合搜尋條件的預設值",
         "english": "No presets found for the given search parameters",
-        "status": "New entry. Please translate!",
         "description": "Message that apprears on presets tab if no presets were found"
     },
     "presetsTooManyPresetsFound": {
-        "message": "Reached the maximum limit of the shown presets number",
+        "message": "已達到顯示預設值的最大數量限制",
         "english": "Reached the maximum limit of the shown presets number",
-        "status": "New entry. Please translate!",
         "description": "Message that apprears on presets tab if too many presets found"
     },
     "presetOptionsPlaceholder": {
-        "message": "ATTENTION! Review the list of options",
+        "message": "注意！請檢視選項清單",
         "english": "ATTENTION! Review the list of options",
-        "status": "New entry. Please translate!",
         "description": "Placeholder for the options list dropdown"
     },
     "presetsVersionMismatch": {
-        "message": "Preset source version mismatch.<br/>Required version: {{versionRequired}}<br/>Preset source version: {{versionSource}}<br/>Using this preset source could be dangerous.<br/>Do you want to continue?",
+        "message": "預設值來源版本不符。<br/>所需版本：{{versionRequired}}<br/>預設值來源版本：{{versionSource}}<br/>使用此預設值來源可能是危險的。<br/>您是否要繼續？",
         "english": "Preset source version mismatch.<br/>Required version: {{versionRequired}}<br/>Preset source version: {{versionSource}}<br/>Using this preset source could be dangerous.<br/>Do you want to continue?",
-        "status": "New entry. Please translate!",
         "description": "Placeholder for the options list dropdown"
     },
     "presetsReviewOptionsWarning": {
-        "message": "Please review the list of options before picking this preset.",
+        "message": "請在選擇此預設值之前檢視選項清單。",
         "english": "Please review the list of options before picking this preset.",
-        "status": "New entry. Please translate!",
         "description": "Dialog text to prompt user to review options for the preset"
     },
     "presetsReviewBeforeApply": {
-        "message": "Please review all of the selected presets in the list below. The presets CLI will be applied in the order they are listed. Ensure you have taken a backup of your current configuration before applying the presets.",
-        "english": "Please review all of the selected presets in the list below. The presets CLI will be applied in the order they are listed. Ensure you have taken a backup of your current configuration before applying the presets.",
-        "status": "New entry. Please translate!"
+        "message": "請檢視下方清單中所有選取的預設值。預設值的 CLI 將依照清單中的順序套用。在套用預設值之前，請確保您已備份當前設定。",
+        "english": "Please review all of the selected presets in the list below. The presets CLI will be applied in the order they are listed. Ensure you have taken a backup of your current configuration before applying the presets."
     },
     "backupFailedToSave": {
-        "message": "Something went wrong when trying to save the backup file.",
-        "english": "Something went wrong when trying to save the backup file.",
-        "status": "New entry. Please translate!"
+        "message": "嘗試儲存備份檔案時發生錯誤。",
+        "english": "Something went wrong when trying to save the backup file."
     },
     "presetsCliConfirmationDialogTitle": {
-        "message": "Review The Rendered Presets CLI Commands",
-        "english": "Review The Rendered Presets CLI Commands",
-        "status": "New entry. Please translate!"
+        "message": "檢視已呈現的預設值 CLI 指令",
+        "english": "Review The Rendered Presets CLI Commands"
     },
     "presetEdit": {
-        "message": "Edit",
-        "english": "Edit",
-        "status": "New entry. Please translate!"
+        "message": "編輯",
+        "english": "Edit"
     },
     "presetsDontShowAgain": {
-        "message": "Don't show again",
-        "english": "Don't show again",
-        "status": "New entry. Please translate!"
+        "message": "不再顯示",
+        "english": "Don't show again"
     }
 }
