@@ -3220,9 +3220,8 @@
         "english": "Yaw Dynamic Deadband Filter"
     },
     "adjustmentsFunctionYawPrecompCutoff": {
-        "message": "Yaw Precomp Cutoff",
-        "english": "Yaw Precomp Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "航向預補償截止",
+        "english": "Yaw Precomp Cutoff"
     },
     "servoHelp": {
         "message": "舵機101<ul><li>首先檢查舵機方向。例如，透過給予一些集體螺距來檢查循環舵機系統。反向舵機，如果需要。</li><li>透過啟動<i>舵機覆寫</i>和調節<i>中心點</i>來調平舵機臂。舵機臂在此位置應垂直於主軸。</li><li>調整<i>縮放</i>使舵機角度正確。指定角度為30°;在<i>舵機覆寫</i>下的舵機。舵機現在應該移動到30度。如果小於，則增加該舵機的<i>縮放</i>。如果更多，就減少。</li><li>您可以透過調整<i>最小值</i>或<i>最大值</i>來限制或擴展舵機運動範圍。只有在出現機械問題時才這樣做，比如舵機干涉。使用混控限制橫滾/俯仰/集體螺距</li></ul>",
@@ -9794,15 +9793,9 @@
         "description": "Warning message that shows up at the top of the presets tab"
     },
     "presets_sources_dialog_warning": {
-        "message": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources can break your helicopter configuration and potentially harm your devices.",
+        "message": "<span class=\"message-negative\">警告！</span> 使用第三方預設值來源可能是危險的。<br/>請務必只新增並使用受信任的來源。惡意或不良的預設值來源可能會破壞您的直升機設定，甚至可能對您的裝置造成損害。",
         "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources can break your helicopter configuration and potentially harm your devices.",
-        "status": "Modified entry. Please translate!",
-        "description": "Warning message that shows up at the top of the preset sources dialog",
-        "previous": {
-            "message": "<span class=\"message-negative\">警告！</span> 使用第三方預設值來源可能是危險的。<br/>請確保只新增並使用受信任的來源。惡意或不良的預設值來源可能會破壞您的飛行器設定，並且有可能對您的設備造成損害。",
-            "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources will break your drone configuration and can potentially harm your devices.",
-            "description": "Warning message that shows up at the top of the preset sources dialog"
-        }
+        "description": "Warning message that shows up at the top of the preset sources dialog"
     },
     "presetsWarningWrongVersionConfirmation": {
         "message": "選取的預設值需要 $1 韌體版本。當前韌體版本為 $2",
