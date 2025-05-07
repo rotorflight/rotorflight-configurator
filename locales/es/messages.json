@@ -3220,9 +3220,8 @@
         "english": "Yaw Dynamic Deadband Filter"
     },
     "adjustmentsFunctionYawPrecompCutoff": {
-        "message": "Yaw Precomp Cutoff",
-        "english": "Yaw Precomp Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "Corte Precomp Dirección",
+        "english": "Yaw Precomp Cutoff"
     },
     "servoHelp": {
         "message": "Servo 101<ul><li>Primera comprobación de las direcciones del servo. Compruebe los servos del cíclico aplicando algo de colectivo, por ejemplo. Revierta los servos si es necesario.</li><li>Nivele los brazos de los servos habilitando <i> sobrepasar el movimiento de los servos</i> ajustando <i>el centro</i>. El brazo del servo debería estar perpendicular al eje principal en esta position.</li><li>Ajuste <i>la escala</i> de froma que los ángulos sean correctos. Especifique un ángulo de 30&deg; para un servo en condiciones <i>de Override</i>. El servo debería ahora moverse hasta 30&deg;. Si se mueve menos, incremente la <i>escala</i> para ese servo. Si es más, disminuyala.</li><li>Puede limitar o extender el rango de movimiento del servo adjustando el valor <i>Min</i> o <i>Máx</i>. Haga esto sólo si hay algún problema mecánico, como doblado del brazo. Use las mezclas para limitar el Alabeo/Cabeceo/Colectivo.</li></ul>",
