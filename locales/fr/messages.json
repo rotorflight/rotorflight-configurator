@@ -3220,9 +3220,8 @@
         "english": "Yaw Dynamic Deadband Filter"
     },
     "adjustmentsFunctionYawPrecompCutoff": {
-        "message": "Yaw Precomp Cutoff",
-        "english": "Yaw Precomp Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "Seuil de coupure de la précompensation du lacet",
+        "english": "Yaw Precomp Cutoff"
     },
     "servoHelp": {
         "message": "Servo 101<ul><li>Vérifiez d'abord les directions du servo. Vérifiez les servos cycliques en donnant du collectif par exemple. Inversez les servos si nécessaire.</li><li>Mettez à niveau les bras de servo en activant <i>Servo Override</i> et en ajustant le <i>Centre</i>. Le bras du servo doit être perpendiculaire à l'arbre principal dans cette position.</li><li>Ajustez l'<i>échelle</i> pour que les angles du servo soient corrects. Spécifiez un angle de 30&deg; pour un servo sous <i>Servo Override</i>. Le servo devrait maintenant se déplacer à 30&deg;. Si c'est moins, augmentez l'<i>Échelle</i> pour ce servo. Si c'est plus, diminuez-le.</li><li>Vous pouvez limiter ou étendre la plage de mouvement du servo en ajustant <i>Min</i> ou <i>Max</i>. Ne faites cela que s'il y a un problème mécanique, comme une liaison de servo. Utilisez le mélangeur pour limiter le roulis/le tangage/le collectif.</li></ul>",
@@ -3973,7 +3972,7 @@
         "english": "Revert"
     },
     "gpsHead": {
-        "message": "Status",
+        "message": "Statut",
         "english": "Status"
     },
     "gpsMapHead": {
@@ -4041,7 +4040,7 @@
         "english": "Sat ID"
     },
     "gpsSignalQty": {
-        "message": "Qté",
+        "message": "Nombre de satellites",
         "english": "Qty"
     },
     "motorsEscProtocol": {
@@ -5311,7 +5310,7 @@
         "english": "Status"
     },
     "ledStripProfileStatusAltOption": {
-        "message": "Status Alt",
+        "message": "Status Alternatif",
         "english": "Status Alt"
     },
     "ledStripGlobalBlinkRate": {
