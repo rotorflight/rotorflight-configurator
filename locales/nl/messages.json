@@ -9794,7 +9794,8 @@
     },
     "presets_sources_dialog_warning": {
         "message": "<span class=\"message-negative\">WAARSCHUWING!</span> Het gebruik van presets van derden kan gevaarlijk zijn.<br/>Zorg ervoor dat je alleen vertrouwde bronnen toevoegt en gebruikt. Kwaadaardige of slecht samengestelde bronnen kunnen je helikopterconfiguratie verstoren en mogelijk je apparaten beschadigen.",
-        "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources can break your helicopter configuration and potentially harm your devices."
+        "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources can break your helicopter configuration and potentially harm your devices.",
+        "description": "Warning message that shows up at the top of the preset sources dialog"
     },
     "presetsWarningWrongVersionConfirmation": {
         "message": "Gekozen preset vereist firmware versie $1. Huidige firmware versie is $2",
