@@ -44,9 +44,11 @@ html[data-theme="light"] .tab-auxiliary .mode.on .info {
     color: white;
 }
 
-.tab-auxiliary .mode.disabled .info {
+html[data-theme="light"] .tab-auxiliary .mode.disabled .info,
+html[data-theme="dark"] .tab-auxiliary .mode.disabled .info {
     background: var(--error);
-    color: var(--quietText);}
+    color: var(--quietText);
+}
 
 #tab-auxiliary-templates {
     display: none;
