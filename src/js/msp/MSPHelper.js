@@ -2862,6 +2862,10 @@ MspHelper.prototype.setArmingEnabled = function(doEnable, onCompleteCallback)
 
 MspHelper.prototype.requestRpmFilterBanks = async function()
 {
+    if (CONFIGURATOR.virtualMode) {
+      return;
+    }
+
     const banks = [];
     for (let i = 0; i < 3; i++) {
         const bank = [];

@@ -106,11 +106,13 @@ PortHandler.check_usb_devices = function (callback) {
                     data: {isDFU: true},
                 }));
 
-                //self.portPickerElement.append($('<option/>', {
-                //    value: 'virtual',
-                //    text: i18n.getMessage('portsSelectVirtual'),
-                //    data: {isVirtual: true},
-                //}));
+                if (import.meta.env.DEV) {
+                    self.portPickerElement.append($('<option/>', {
+                       value: 'virtual',
+                       text: i18n.getMessage('portsSelectVirtual'),
+                       data: {isVirtual: true},
+                    }));
+                }
 
                 self.portPickerElement.append($('<option/>', {
                     value: 'manual',
@@ -262,11 +264,13 @@ PortHandler.updatePortSelect = function (ports) {
         }));
     }
 
-    //this.portPickerElement.append($("<option/>", {
-    //    value: 'virtual',
-    //    text: i18n.getMessage('portsSelectVirtual'),
-    //    data: {isVirtual: true},
-    //}));
+    if (import.meta.env.DEV) {
+        this.portPickerElement.append($("<option/>", {
+           value: 'virtual',
+           text: i18n.getMessage('portsSelectVirtual'),
+           data: {isVirtual: true},
+        }));
+    }
 
     this.portPickerElement.append($("<option/>", {
         value: 'manual',
