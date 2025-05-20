@@ -1,3 +1,28 @@
+# 2.2.0-RC5
+
+This is the fifth _Release Candidate_ of the Rotorflight 2.2 Configurator.
+
+**NOTE** The final 2.2.0 Configurator will be released _after_ a few release candidates. Please don't use RCs once the final release is out.
+
+## Changes from 2.2.0-RC4
+
+- Fix mode active indicator not always showing with dark theme
+
+## Changes from 2.1.x
+
+- Support for [Rotorflight Firmware 4.5.0](https://github.com/rotorflight/rotorflight-firmware/releases/tag/release/4.5.0-RC5)
+- Presets system for quickly applying CLI snippets
+- Android build
+- MacOS build for Apple silicon
+
+**Important:** The Apple silicon build is not notarized by Apple. It is neccessary to run the following command before installing. **NOTE:** Replace `/path/to` with the actual path to the file.
+
+```sh
+xattr -cr "/path/to/rotorflight-configurator_2.2.0-RC5_macos_arm64.dmg"
+```
+
+***
+
 # 2.2.0-RC4
 
 This is the fourth _Release Candidate_ of the Rotorflight 2.2 Configurator.
