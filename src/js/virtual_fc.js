@@ -34,11 +34,13 @@ export function applyVirtualConfig() {
   for (let i = 0; i < FC.SERVO_CONFIG.length; i++) {
     FC.SERVO_CONFIG[i] = {
       mid: 1500,
-      min: -500,
-      max: 500,
-      rate: 500,
-      trim: 0,
+      min: -700,
+      max: 700,
+      rneg: 500,
+      rpos: 500,
+      rate: 333,
       speed: 0,
+      flags: 0,
     };
   }
 
@@ -219,6 +221,7 @@ export function applyVirtualConfig() {
 
   FC.PID_PROFILE.pid_mode = 3;
   FC.RC_TUNING.rates_type = 4;
+  FC.CONFIG.servoCount = 4;
 }
 
 if (import.meta.hot) {
