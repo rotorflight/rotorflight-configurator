@@ -29,7 +29,7 @@
       <div class="review_presets_dialog_scrollable">
         <div class="note">{$i18n.t("presetsReviewBeforeApply")}</div>
         <div class="review_presets_dialog_presets">
-          {#each presetInstances as presetInstance, index}
+          {#each presetInstances as presetInstance, index (index)}
             <SelectedPresetPanel
               {presetInstance}
               {index}

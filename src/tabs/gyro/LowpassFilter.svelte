@@ -98,7 +98,7 @@
 </script>
 
 {#snippet filterOpts(value)}
-  {#each FILTER_TYPES as filterType}
+  {#each FILTER_TYPES as filterType (filterType.id)}
     {#if filterType.visible || filterType.id === value}
       <option value={filterType.id}>{filterType.name}</option>
     {/if}

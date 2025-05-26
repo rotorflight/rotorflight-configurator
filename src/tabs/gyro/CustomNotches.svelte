@@ -103,7 +103,7 @@
     <span class="title">{$i18n.t("gyroRpmFilterBanks")}</span>
     {#if notches && multiAxis}
       <ul>
-        {#each axisProps as axisProp, i}
+        {#each axisProps as axisProp, i (axisProp)}
           <button
             class:active={axis === i}
             onclick={() => (axis = i)}

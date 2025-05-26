@@ -24,7 +24,7 @@
         id="receiver-protocol"
         bind:value={() => rxProtoIndex, setRxProto}
       >
-        {#each RX_PROTOCOLS as proto, i}
+        {#each RX_PROTOCOLS as proto, i (proto.name)}
           <!-- always show selected protocol -->
           {#if !proto.hide || rxProtoIndex === i}
             <option

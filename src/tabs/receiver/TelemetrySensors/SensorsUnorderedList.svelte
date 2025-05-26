@@ -8,9 +8,9 @@
   let selected = $derived(value.filter((x) => x > 0));
 </script>
 
-{#each sensors as group}
+{#each sensors as group, i (i)}
   {#if group.title}{/if}
-  {#each group.sensors as sensor}
+  {#each group.sensors as sensor (sensor.name)}
     <Field
       id={`telemetry-sensor-${sensor.name}`}
       label={`receiverTelemetrySensor_${sensor.name}`}

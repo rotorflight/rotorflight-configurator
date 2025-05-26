@@ -55,7 +55,7 @@
               id="rpm-filter-preset"
               bind:value={FC.FILTER_CONFIG.rpm_preset}
             >
-              {#each filterStrengths as strength, index}
+              {#each filterStrengths as strength, index (strength)}
                 <option value={index}>{$i18n.t(strength)}</option>
               {/each}
             </select>

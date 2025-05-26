@@ -9,7 +9,7 @@
   {@html $i18n.t(help)}
   {#if attrs}
     <div class="attrs">
-      {#each attrs as attr}
+      {#each attrs as attr (attr.name)}
         <p><b>{$i18n.t(attr.name)}:</b> {attr.value}</p>
       {/each}
     </div>

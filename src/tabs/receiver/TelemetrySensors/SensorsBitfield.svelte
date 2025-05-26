@@ -39,7 +39,7 @@
   ];
 </script>
 
-{#each sensors as sensor}
+{#each sensors as sensor (sensor.id)}
   {#if bit_check(mask, sensor.id)}
     <Field
       id={`telemetry-sensor-${sensor.name}`}
