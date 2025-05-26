@@ -648,14 +648,6 @@ export function sensor_status(sensors_detected) {
         $('.gps', eSensorStatus).removeClass('on');
         $('.gpsicon', eSensorStatus).removeClass('active');
     }
-
-    if (have_sensor(sensors_detected, 'sonar')) {
-        $('.sonar', eSensorStatus).addClass('on');
-        $('.sonaricon', eSensorStatus).addClass('active');
-    } else {
-        $('.sonar', eSensorStatus).removeClass('on');
-        $('.sonaricon', eSensorStatus).removeClass('active');
-    }
 }
 
 export function have_sensor(sensors_detected, sensor_code) {
