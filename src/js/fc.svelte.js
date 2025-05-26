@@ -15,7 +15,7 @@ const INITIAL_CONFIG = {
     mode:                             0,
     motorCount:                       0,
     servoCount:                       0,
-    numProfiles:                      3,
+    numProfiles:                      6,
     profile:                          0,
     numRateProfile:                   6,
     rateProfile:                      0,
