@@ -414,7 +414,7 @@
     }
 }
 
-@media only screen and (max-width: 1055px) , only screen and (max-device-width: 1055px) {
+@media only screen and (max-width: 1100px) , only screen and (max-device-width: 1100px) {
     .tab-receiver .gui_box span {
         line-height: 17px;
     }

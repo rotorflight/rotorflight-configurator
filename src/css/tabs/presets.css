@@ -406,13 +406,13 @@ html[data-theme="dark"] .tab-presets .ms-drop {
   font-size: 10px;
   border-radius: 3px;
 }
-@media only screen and (max-width: 1055px) {
+@media only screen and (max-width: 1100px) {
   .presets_search_settings {
     position: static;
     top: unset;
   }
 }
-@media only screen and (max-device-width: 1055px) {
+@media only screen and (max-device-width: 1100px) {
   .presets_search_settings {
     position: static;
     top: unset;

@@ -90,7 +90,7 @@
     color: white;
 }
 
-@media only screen and (max-width: 1055px) , only screen and (max-device-width: 1055px) {
+@media only screen and (max-width: 1100px) , only screen and (max-device-width: 1100px) {
     .tab-cli .content_wrapper {
         height: calc(100% - 87px);
     }
