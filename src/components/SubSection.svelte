@@ -15,8 +15,20 @@
 
 <style lang="scss">
   .header {
+    padding-bottom: 2px;
+    margin: 4px;
+
     font-weight: 900;
-    padding: 4px;
+
+    :global(html[data-theme="light"]) & {
+      color: var(--color-neutral-700);
+      border-bottom: 1px solid var(--color-neutral-400);
+    }
+
+    :global(html[data-theme="dark"]) & {
+      color: var(--color-neutral-200);
+      border-bottom: 1px solid var(--color-neutral-700);
+    }
   }
 
   @media only screen and (max-width: 480px) {
@@ -26,12 +38,8 @@
       }
 
       :global(html[data-theme="dark"]) & {
-        border-top: 1px solid var(--color-neutral-600);
+        border-top: 1px solid var(--color-neutral-700);
       }
-    }
-
-    .header {
-      font-weight: 900;
     }
   }
 </style>

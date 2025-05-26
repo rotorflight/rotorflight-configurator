@@ -107,8 +107,6 @@
   }
 
   .content {
-    padding: 0 4px;
-
     > :global(*) + :global(*) {
       :global(html[data-theme="light"]) & {
         border-top: 1px solid var(--color-neutral-400);

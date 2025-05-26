@@ -73,3 +73,40 @@ select {
     font-size: 1rem !important;
   }
 }
+
+%section-header {
+  display: flex;
+  height: 32px;
+  font-size: 1rem;
+  font-weight: 400;
+  align-items: center;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+
+  :global(html[data-theme="light"]) & {
+    color: var(--color-neutral-100);
+    background-color: var(--color-neutral-600);
+  }
+
+  :global(html[data-theme="dark"]) & {
+    color: var(--color-neutral-100);
+    background-color: var(--color-neutral-800);
+  }
+
+  @media only screen and (max-width: 480px) {
+    margin-top: 16px;
+    border-bottom-width: 1px;
+    border-style: solid;
+
+    :global(html[data-theme="light"]) & {
+      color: var(--color-neutral-900);
+      background: none;
+      border-bottom-color: var(--color-neutral-400);
+    }
+
+    :global(html[data-theme="dark"]) & {
+      background: none;
+      border-bottom-color: var(--color-neutral-700);
+    }
+  }
+}

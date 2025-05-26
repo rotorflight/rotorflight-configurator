@@ -65,10 +65,6 @@
 </ul>
 
 <style lang="scss">
-  ul {
-    padding: 0 4px;
-  }
-
   .index {
     margin: 0 8px;
     min-width: 16px;
@@ -78,6 +74,10 @@
 
   .name {
     flex-grow: 1;
+  }
+
+  ul {
+    margin: 4px;
   }
 
   li {

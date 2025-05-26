@@ -49,27 +49,7 @@
   }
 
   .header {
-    display: flex;
-    height: 32px;
-    font-size: 1rem;
-    font-weight: 400;
-    border-bottom-width: 1px;
-    border-style: solid;
-    align-items: center;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-
-    :global(html[data-theme="light"]) & {
-      color: var(--color-neutral-900);
-      background-color: var(--color-neutral-100);
-      border-bottom-color: var(--color-neutral-400);
-    }
-
-    :global(html[data-theme="dark"]) & {
-      color: var(--color-neutral-100);
-      background-color: var(--color-neutral-900);
-      border-bottom-color: var(--color-neutral-600);
-    }
+    @extend %section-header;
   }
 
   .title {
@@ -77,7 +57,7 @@
   }
 
   .content {
-    padding: 8px 4px;
+    padding: 4px;
     display: flex;
     flex-direction: column;
     border-bottom-left-radius: 4px;
@@ -92,13 +72,12 @@
     }
 
     > :global(*) + :global(*) {
-      margin-top: 8px;
+      margin-top: 12px;
     }
   }
 
   .summary {
     padding: 8px;
-    padding-bottom: 0;
 
     :global(html[data-theme="light"]) & {
       background-color: var(--color-neutral-100);
@@ -154,18 +133,6 @@
   @media only screen and (max-width: 480px) {
     .container {
       border-radius: 0px;
-    }
-
-    .header {
-      margin-top: 16px;
-
-      :global(html[data-theme="light"]) & {
-        background: none;
-      }
-
-      :global(html[data-theme="dark"]) & {
-        background: none;
-      }
     }
 
     .summary {
