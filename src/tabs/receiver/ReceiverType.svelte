@@ -1,7 +1,9 @@
 <script>
   import semver from "semver";
   import { slide } from "svelte/transition";
+
   import { API_VERSION_12_7 } from "@/js/configurator.svelte.js";
+  import { FC } from "@/js/fc.svelte.js";
   import Switch from "@/components/Switch.svelte";
   import Field from "@/components/Field.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
@@ -9,12 +11,7 @@
   import Section from "@/components/Section.svelte";
   import { RX_PROTOCOLS } from "./protocols.js";
 
-  let {
-    FC = $bindable(),
-    rxProtoIndex,
-    hasSerialRxPort,
-    setRxProto,
-  } = $props();
+  let { rxProtoIndex, hasSerialRxPort, setRxProto } = $props();
 </script>
 
 <Section label="receiverSelection">

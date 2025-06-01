@@ -1,7 +1,9 @@
 <script>
   import semver from "semver";
   import { slide } from "svelte/transition";
+
   import { API_VERSION_12_7 } from "@/js/configurator.svelte.js";
+  import { FC } from "@/js/fc.svelte.js";
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
@@ -9,7 +11,7 @@
   import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
 
-  let { FC = $bindable(), telemetry, resetTelemetry } = $props();
+  let { telemetry, resetTelemetry } = $props();
   let enabled = $derived(FC.FEATURE_CONFIG.features.TELEMETRY);
   let crsfSettings = $derived(
     telemetry.proto === "crsf" &&
@@ -60,10 +62,10 @@
           <Switch
             id="telmetry-crsf-custom"
             bind:checked={
-              () => FC.TELEMETRY_CONFIG.crsf_telemetry_mode,
+              () => Boolean(FC.TELEMETRY_CONFIG.crsf_telemetry_mode),
               (v) => {
                 const currentProto = telemetry;
-                FC.TELEMETRY_CONFIG.crsf_telemetry_mode = v;
+                FC.TELEMETRY_CONFIG.crsf_telemetry_mode = Number(v);
                 resetTelemetry(currentProto);
               }
             }
@@ -72,6 +74,7 @@
         <Field
           id="telemetry-crsf-packet-rate"
           label="receiverCrsfTelemetryRate"
+          unit="Hz"
         >
           {#snippet tooltip()}
             <Tooltip help="receiverHelpCrsfTelemetryRate" />

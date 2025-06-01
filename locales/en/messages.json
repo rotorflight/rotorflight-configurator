@@ -1668,13 +1668,16 @@
         "message": "Loaded Profile: <strong class=\"message-positive\">$1</strong>"
     },
     "receiverSelection": {
-        "message": "Receiver Type"
+        "message": "Protocol"
     },
     "receiverSelectionSectionSignaling": {
         "message": "Signaling"
     },
     "receiverSettings": {
-        "message": "Receiver Settings"
+        "message": "Channel Range"
+    },
+    "receiverSettingsThrottleChannel": {
+        "message": "Throttle Channel"
     },
     "receiverProtocol": {
         "message": "Receiver Protocol"
@@ -1683,67 +1686,67 @@
         "message": "Select the protocol that the receiver is using"
     },
     "receiverSerialHalfDuplex": {
-        "message": "One-wire Communication (Half-Duplex)"
+        "message": "Half-Duplex"
     },
     "receiverSerialHalfDuplexHelp": {
         "message": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2."
     },
     "receiverSerialInverted": {
-        "message": "Inverted Serial Signaling"
+        "message": "Inverted"
     },
     "receiverSerialInvertedHelp": {
-        "message": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help."
+        "message": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others.<br><b>Note:</b> This option is NOT supported on F4 MCUs, see help."
     },
     "receiverSerialPinSwap": {
-        "message": "Rx/Tx Pin Swap"
+        "message": "Pin Swap"
     },
     "receiverSerialPinSwapHelp": {
-        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
+        "message": "Swaps the Rx and Tx pins.<br><b>Note:</b> This option is NOT supported on F4 MCUs, see help."
     },
     "receiverStickCenter": {
         "message": "Stick Center"
     },
     "receiverHelpStickCenter": {
-        "message": "The value of stick (channel) center in µs. Usually 1500µs or 1520µs."
+        "message": "The channel value when the stick is centered. Usually 1500µs or 1520µs."
     },
     "receiverStickDeflection": {
-        "message": "Stick Maximum Travel"
+        "message": "Stick Travel"
     },
     "receiverHelpStickDeflection": {
-        "message": "The maximum value (in µs) for stick deflection from the center, for RPY."
+        "message": "The maximum value for stick deflection from the center."
     },
     "receiverArmingThrottle": {
-        "message": "Throttle Channel limit for arming"
+        "message": "Arm Limit"
     },
     "receiverHelpArmingThrottle": {
-        "message": "The channel value (in µs) under which arming is allowed"
+        "message": "The flight controller can only be armed while the the throttle channel is below this value."
     },
     "receiverZeroThrottle": {
-        "message": "Throttle Channel value for 0% throttle"
+        "message": "Min Throttle - 0%"
     },
     "receiverHelpZeroThrottle": {
-        "message": "The channel value (in µs) for the throttle channel to be considered 0%"
+        "message": "The throttle channel value where throttle is considered 0%."
     },
     "receiverFullThrottle": {
-        "message": "Throttle Channel value for 100% throttle"
+        "message": "Max Throttle - 100%"
     },
     "receiverHelpFullThrottle": {
-        "message": "The channel value (in µs) for the throttle channel to be considered 100%"
+        "message": "The throttle channel value where throttle is considered 100%."
     },
     "receiverCyclicDeadband": {
         "message": "Cyclic Deadband"
     },
     "receiverHelpCyclicDeadband": {
-        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle."
+        "message": "How far the roll and pitch channel values must move from center before it's considered an input."
     },
     "receiverYawDeadband": {
         "message": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
+        "message": "How far the yaw channel value must move from center before it's considered an input."
     },
     "receiverTelemetrySettings": {
-        "message": "Telemetry Settings"
+        "message": "Telemetry"
     },
     "receiverTelemetrySettingsSectionSignaling": {
         "message": "Signaling"
@@ -1755,13 +1758,13 @@
         "message": "Enable Telemetry"
     },
     "receiverTelemetryHalfDuplex": {
-        "message": "One-wire Telemetry Communication"
+        "message": "Half-Duplex"
     },
     "receiverTelemetryInverted": {
-        "message": "Inverted Telemetry Signaling"
+        "message": "Inverted"
     },
     "receiverTelemetryPinSwap": {
-        "message": "Telemetry Pin Swap (Swap Rx and Tx pins)"
+        "message": "Pin Swap"
     },
     "receiverCrsfTelemetryMode": {
         "message": "Custom Telemetry"
@@ -2178,10 +2181,7 @@
         "message": "Temperature"
     },
     "receiverBars": {
-        "message": "Receiver Channels"
-    },
-    "receiverBarsHelp": {
-        "message": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel."
+        "message": "Channel Assignment"
     },
     "receiverChannelOrder": {
         "message": "Channel Order Preset"
@@ -2209,6 +2209,9 @@
     },
     "receiverMspEnableButton": {
         "message": "Enable controls"
+    },
+    "resetModelPreviewOrientation": {
+        "message": "Reset"
     },
     "auxiliaryHelp": {
         "message": "Configure modes here using a combination of ranges and/or links to other modes (links supported on BF 4.0 and later). Use <strong>ranges</strong> to define the switches on your transmitter and corresponding mode assignments. A receiver channel that gives a reading between a range min/max will activate the mode. Use a <strong>link</strong> to activate a mode when another mode is activated. <strong>Exceptions:</strong> ARM cannot be linked to or from another mode, modes cannot be linked to other modes that are configured with a link (chained links). Multiple ranges/links can be used to activate any mode. If there is more than one range/link defined for a mode, each of them can be set to <strong>AND</strong> or <strong>OR</strong>. A mode will be activated when:<br />- ALL <strong>AND</strong> ranges/links are active; OR<br />- at least one <strong>OR</strong> range/link is active.<br /><br />Remember to save your settings using the Save button."
@@ -4375,19 +4378,19 @@
         "message": "deep pink"
     },
     "controlAxisRoll": {
-        "message": "Roll [A]"
+        "message": "Roll"
     },
     "controlAxisPitch": {
-        "message": "Pitch [E]"
+        "message": "Pitch"
     },
     "controlAxisYaw": {
-        "message": "Yaw [R]"
+        "message": "Yaw"
     },
     "controlAxisCollective": {
-        "message": "Coll [C]"
+        "message": "Collective"
     },
     "controlAxisThrottle": {
-        "message": "Throttle [T]"
+        "message": "Throttle"
     },
     "controlAxisThr": {
         "message": "Throttle"
