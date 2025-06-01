@@ -2,6 +2,7 @@ import semver from "semver";
 
 import * as config from "@/js/config.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
+import { applyVirtualConfig } from "@/js/virtual_fc.js";
 
 export function initializeSerialBackend() {
     GUI.updateManualPortVisibility = function(){
@@ -339,7 +340,7 @@ function onOpenVirtual() {
 
     globalThis.mspHelper = new MspHelper();
 
-    VirtualFC.setVirtualConfig();
+    applyVirtualConfig();
 
     processBoardInfo();
 
@@ -809,7 +810,9 @@ export function update_dataflash_global() {
 }
 
 export function reinitialiseConnection(callback) {
-    GUI.reboot_in_progress = true;
+    if (!CONFIGURATOR.virtualMode) {
+        GUI.reboot_in_progress = true;
+    }
 
     callback?.();
 }
