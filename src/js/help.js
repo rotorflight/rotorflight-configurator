@@ -8,6 +8,7 @@ const tabHelpURLs = {
     tabStatus:          'https://www.rotorflight.org/docs/2.2.0/configurator/tabs/status',
     tabSetup:           'https://www.rotorflight.org/docs/2.2.0/configurator/tabs/setup',
     tabConfiguration:   'https://www.rotorflight.org/docs/2.2.0/configurator/tabs/configuration',
+    tabPresets:         'https://www.rotorflight.org/docs/2.2.0/configurator/tabs/presets',
     tabReceiver:        'https://www.rotorflight.org/docs/2.2.0/configurator/tabs/receiver',
     tabFailsafe:        'https://www.rotorflight.org/docs/2.2.0/configurator/tabs/failsafe',
     tabPower:           'https://www.rotorflight.org/docs/2.2.0/configurator/tabs/power',
