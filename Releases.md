@@ -1,3 +1,36 @@
+# 2.2.0
+
+This is the _Official Release_ of the Rotorflight 2.2.0 Configurator.
+
+## Downloads
+
+- [Rotorflight Configurator](https://github.com/rotorflight/rotorflight-configurator/releases/tag/release/2.2.0)
+- [Rotorflight Blackbox](https://github.com/rotorflight/rotorflight-blackbox/releases/tag/release/2.2.0)
+- [Lua Scripts for EdgeTx and OpenTx](https://github.com/rotorflight/rotorflight-lua-scripts/releases/tag/release/2.2.0)
+- [Lua Scripts for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos/releases/tag/release/2.2.0)
+- [Lua Suite for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos-suite/releases/tag/release/2.2.0)
+
+## Instructions
+
+Rotorflight setup instructions can be found at [www.rotorflight.org](https://www.rotorflight.org/).
+
+## Changes from 2.1.1
+
+- Support for [Rotorflight Firmware 4.5.0](https://github.com/rotorflight/rotorflight-firmware/releases/tag/release/4.5.0)
+- Presets system for quickly applying CLI snippets
+- Android build
+- MacOS build for Apple silicon
+- Windows portable zip redistributable
+- Spanish language
+
+**Important:** The Apple silicon build is not notarized by Apple. It is neccessary to run the following command before installing. **NOTE:** Replace `/path/to` with the actual path to the file.
+
+```sh
+xattr -cr "/path/to/rotorflight-configurator_2.2.0_macos_arm64.dmg"
+```
+
+***
+
 # 2.2.0-RC5
 
 This is the fifth _Release Candidate_ of the Rotorflight 2.2 Configurator.
