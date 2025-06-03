@@ -24,6 +24,14 @@
         "message": "Automatisch",
         "english": "Auto"
     },
+    "genericEnable": {
+        "message": "Inschakelen",
+        "english": "Enable"
+    },
+    "genericDefault": {
+        "message": "Standaard",
+        "english": "Default"
+    },
     "axisROLL": {
         "message": "ROLL",
         "english": "ROLL",
@@ -130,9 +138,8 @@
         "english": "Auto-Connect"
     },
     "showAllPorts": {
-        "message": "Show All Ports",
-        "english": "Show All Ports",
-        "status": "New entry. Please translate!"
+        "message": "Alle poorten tonen",
+        "english": "Show All Ports"
     },
     "close": {
         "message": "Sluiten",
@@ -191,14 +198,12 @@
         "english": "Auto-Connect: Disabled - User needs to select the correct serial port and click \"Connect\" button on its own"
     },
     "showAllPortsEnabled": {
-        "message": "Show All Ports: Enabled - Configurator lists all possible ports",
-        "english": "Show All Ports: Enabled - Configurator lists all possible ports",
-        "status": "New entry. Please translate!"
+        "message": "Alle poorten tonen: Ingeschakeld - de Configurator toont alle mogelijke poorten",
+        "english": "Show All Ports: Enabled - Configurator lists all possible ports"
     },
     "showAllPortsDisabled": {
-        "message": "Show All Ports: Disabled - Configurator will only list recognized ports",
-        "english": "Show All Ports: Disabled - Configurator will only list recognized ports",
-        "status": "New entry. Please translate!"
+        "message": "Alle poorten tonen: Uitgeschakeld - de Configurator toont alleen herkende poorten",
+        "english": "Show All Ports: Disabled - Configurator will only list recognized ports"
     },
     "zoomBoxText": {
         "message": "Inzoomen:",
@@ -566,19 +571,19 @@
         "english": "No response from the bootloader, programming: FAILED"
     },
     "stm32GlobalEraseExtended": {
-        "message": "Gehele chip data aan het verwijderen (via uitgebreide verwijdering) ...",
+        "message": "Gehele chip data aan het wissen (via uitgebreid wissen) ...",
         "english": "Executing global chip erase (via extended erase) ..."
     },
     "stm32LocalEraseExtended": {
-        "message": "Lokale verwijdering aan het uitvoeren (via uitgebreide verwijdering) ...",
+        "message": "Lokaal wissen aan het uitvoeren (via uitgebreid wissen) ...",
         "english": "Executing local erase (via extended erase) ..."
     },
     "stm32GlobalErase": {
-        "message": "Gehele chip data verwijdering aan het uitvoeren ...",
+        "message": "Gehele chip data wissen aan het uitvoeren ...",
         "english": "Executing global chip erase ..."
     },
     "stm32LocalErase": {
-        "message": "Lokale verwijdering aan het uitvoeren ...",
+        "message": "Lokaal wissen aan het uitvoeren ...",
         "english": "Executing local erase ..."
     },
     "stm32InvalidHex": {
@@ -586,7 +591,7 @@
         "english": "Invalid hex"
     },
     "stm32Erase": {
-        "message": "Verwijderen ...",
+        "message": "Wissen ...",
         "english": "Erasing ..."
     },
     "stm32Flashing": {
@@ -648,6 +653,10 @@
     "firmwareTypeNotSupported": {
         "message": "Niet-Rotorflight firmware wordt <span class=\"message-negative\">niet ondersteund</span>, behalve in CLI modus.",
         "english": "Non - Rotorflight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode."
+    },
+    "firmwareVersionInvalid": {
+        "message": "Firmware versie: [$1] is <span class=\"message-negative\">ongeldig</span>. Gebruik een firmware versie die wordt ondersteund door deze versie van de Configurator.",
+        "english": "Firmware version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator."
     },
     "resetToCustomDefaultsDialog": {
         "message": "Er zijn aangepaste standaardwaarden beschikbaar voor dit bord.<br />Een bord zal in het algemeen niet correct werken tenzij aangepaste standaardwaarden worden toegepast.<br />Wil je aangepaste standaardwaarden toepassen voor dit bord?",
@@ -718,8 +727,12 @@
         "message": "MSP API-versie: <strong>$1</strong>",
         "english": "MSP API version: <strong>$1</strong>"
     },
+    "apiVersionInvalid": {
+        "message": "MSP API versie: [$1] is <span class=\"message-negative\">ongeldig</span>. Gebruik een firmware versie die wordt ondersteund door deze versie van de Configurator.",
+        "english": "MSP API version: [$1] is <span class=\"message-negative\">invalid</span>. Please use a firmware version that is supported by this version of the Configurator."
+    },
     "uniqueDeviceIdReceived": {
-        "message": "Unieke appaart-ID: <strong>0x$1</strong>",
+        "message": "Uniek apparaat-ID: <strong>0x$1</strong>",
         "english": "Unique device ID: <strong>0x$1</strong>"
     },
     "craftNameReceived": {
@@ -1024,6 +1037,10 @@
         "message": "De governor werkt niet zonder RPM signaal",
         "english": "Governor can't function without an RPM signal",
         "description": "Message that pops up to describe the GOVERNOR arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipRPM_SIGNAL": {
+        "message": "Een snelle RPM bron is niet geconfigureerd",
+        "english": "A fast rpm source has not been configured"
     },
     "statusArmingDisableFlagsTooltipCRASH": {
         "message": "Uitgeschakeld via crash detectie",
@@ -2041,6 +2058,10 @@
         "message": "Type ontvanger",
         "english": "Receiver Type"
     },
+    "receiverSelectionSectionSignaling": {
+        "message": "Signalering",
+        "english": "Signaling"
+    },
     "receiverSettings": {
         "message": "Ontvanger instellingen",
         "english": "Receiver Settings"
@@ -2137,6 +2158,14 @@
         "message": "Telemetrie instellingen",
         "english": "Telemetry Settings"
     },
+    "receiverTelemetrySettingsSectionSignaling": {
+        "message": "Signalering",
+        "english": "Signaling"
+    },
+    "receiverTelemetrySettingsSectionCRSF": {
+        "message": "CRSF",
+        "english": "CRSF"
+    },
     "receiverTelemetryEnabled": {
         "message": "Telemetrie inschakelen",
         "english": "Enable Telemetry"
@@ -2153,17 +2182,17 @@
         "message": "Telemetrie pin swap (swap rx en tx pins)",
         "english": "Telemetry Pin Swap (Swap Rx and Tx pins)"
     },
-    "receiverTelemetryMode": {
-        "message": "Schakel CRSF aangepaste telemetrie in",
-        "english": "Enable CRSF Custom Telemetry"
+    "receiverCrsfTelemetryMode": {
+        "message": "Aangepaste telemetrie",
+        "english": "Custom Telemetry"
     },
-    "receiverTelemetryRate": {
-        "message": "Telemetriesnelheid",
-        "english": "Telemetry Rate"
+    "receiverCrsfTelemetryRate": {
+        "message": "Telemetrie pakket snelheid",
+        "english": "Telemetry Packet Rate"
     },
-    "receiverTelemetryRatio": {
-        "message": "Telemetrieverhouding",
-        "english": "Telemetry Ratio"
+    "receiverCrsfTelemetryRatio": {
+        "message": "Telemetrie pakket verhouding",
+        "english": "Telemetry Packet Ratio"
     },
     "receiverHelpCrsfTelemetryMode": {
         "message": "Schakelt de aangepaste Rotorflight-telemetrie met ELRS in. Vereist een Lua-script in de TX voor het decoderen van de sensoren. Aangepaste telemetrie biedt een overvloed aan sensoren voor helikopters.",
@@ -2180,6 +2209,18 @@
     "receiverTelemetrySensors": {
         "message": "Telemetrie sensoren",
         "english": "Telemetry Sensors"
+    },
+    "receiverTelemetrySensorsSelect": {
+        "message": "Selecteren",
+        "english": "Select"
+    },
+    "receiverTelemetrySensorsSort": {
+        "message": "Sorteren",
+        "english": "Sort"
+    },
+    "receiverTelemetrySensorsExceededWarning": {
+        "message": "Een maximum van {{max}} sensoren kan worden ingeschakeld.",
+        "english": "A maximum of {{max}} sensors can be enabled."
     },
     "receiverTelemetrySensor_VOLTAGE": {
         "message": "Batterijspanning",
@@ -2202,7 +2243,7 @@
         "english": "BEC Voltage"
     },
     "receiverTelemetrySensor_HEADSPEED": {
-        "message": "Hoofdrotortoerental",
+        "message": "Headspeed",
         "english": "Headspeed"
     },
     "receiverTelemetrySensor_TAILSPEED": {
@@ -2224,10 +2265,6 @@
     "receiverTelemetrySensor_ROLL": {
         "message": "Roll-hoek (houding)",
         "english": "Roll angle (attitude)"
-    },
-    "receiverTelemetrySensor_HEADING": {
-        "message": "Koers",
-        "english": "Heading"
     },
     "receiverTelemetrySensor_ACC_X": {
         "message": "Versnellingsmeter X-as",
@@ -2261,12 +2298,8 @@
         "message": "GPS afstand",
         "english": "GPS Distance"
     },
-    "receiverTelemetrySensor_ESC_CURRENT": {
-        "message": "ESC stroom",
-        "english": "ESC Current"
-    },
     "receiverTelemetrySensor_ESC_VOLTAGE": {
-        "message": "ESC spanning",
+        "message": "ESC-spanning",
         "english": "ESC Voltage"
     },
     "receiverTelemetrySensor_ESC_RPM": {
@@ -2286,12 +2319,8 @@
         "english": "Governor Mode"
     },
     "receiverTelemetrySensor_ARMING_FLAGS": {
-        "message": "Arming vlaggen",
+        "message": "Arming-vlaggen",
         "english": "Arming Flags"
-    },
-    "receiverTelemetrySensor_PID_PROFILE": {
-        "message": "PID-profiel",
-        "english": "PID Profile"
     },
     "receiverTelemetrySensor_RATES_PROFILE": {
         "message": "Rotatiesnelheidsprofiel",
@@ -2421,17 +2450,9 @@
         "message": "Collectieve controle",
         "english": "Collective Control"
     },
-    "receiverTelemetrySensor_THROTTLE_CONTROL": {
-        "message": "Throttle controle",
-        "english": "Throttle Control"
-    },
     "receiverTelemetrySensor_ESC_DATA": {
         "message": "ESC-gegevens",
         "english": "ESC Data"
-    },
-    "receiverTelemetrySensor_ESC_VOLTAGE": {
-        "message": "ESC-spanning",
-        "english": "ESC Voltage"
     },
     "receiverTelemetrySensor_ESC_CURRENT": {
         "message": "ESC-stroom",
@@ -2476,10 +2497,6 @@
     "receiverTelemetrySensor_ESC_MODEL": {
         "message": "ESC-model",
         "english": "ESC Model"
-    },
-    "receiverTelemetrySensor_BEC_VOLTAGE": {
-        "message": "BEC-spanning",
-        "english": "BEC Voltage"
     },
     "receiverTelemetrySensor_BUS_VOLTAGE": {
         "message": "Busspanning",
@@ -2533,21 +2550,9 @@
         "message": "Richting",
         "english": "Heading"
     },
-    "receiverTelemetrySensor_ALTITUDE": {
-        "message": "Hoogte",
-        "english": "Altitude"
-    },
     "receiverTelemetrySensor_VARIOMETER": {
         "message": "Variometer",
         "english": "Variometer"
-    },
-    "receiverTelemetrySensor_HEADSPEED": {
-        "message": "Headspeed",
-        "english": "Headspeed"
-    },
-    "receiverTelemetrySensor_TAILSPEED": {
-        "message": "Staartrotortoerental",
-        "english": "Tailspeed"
     },
     "receiverTelemetrySensor_MOTOR_RPM": {
         "message": "Motor RPM",
@@ -2653,17 +2658,9 @@
         "message": "Realtime-belasting",
         "english": "RT Load"
     },
-    "receiverTelemetrySensor_MODEL_ID": {
-        "message": "Model ID",
-        "english": "Model Id"
-    },
     "receiverTelemetrySensor_FLIGHT_MODE": {
         "message": "Vluchtmodus",
         "english": "Flight Mode"
-    },
-    "receiverTelemetrySensor_ARMING_FLAGS": {
-        "message": "Arming-vlaggen",
-        "english": "Arming Flags"
     },
     "receiverTelemetrySensor_ARMING_DISABLE_FLAGS": {
         "message": "Arming Disable vlaggen",
@@ -2684,10 +2681,6 @@
     "receiverTelemetrySensor_PID_PROFILE": {
         "message": "PID-profiel",
         "english": "PID Profile"
-    },
-    "receiverTelemetrySensor_RATES_PROFILE": {
-        "message": "Rotatiesnelheidsprofiel",
-        "english": "Rates Profile"
     },
     "receiverTelemetrySensor_BATTERY_PROFILE": {
         "message": "Batterijprofiel",
@@ -3190,6 +3183,46 @@
         "message": "Versnellingsmeter roll trim",
         "english": "Accelerometer Roll Trim"
     },
+    "adjustmentsFunctionYawInertiaPrecompGain": {
+        "message": "Yaw inertie precomp gain",
+        "english": "Yaw Inertia Precomp Gain"
+    },
+    "adjustmentsFunctionYawInertiaPrecompCutoff": {
+        "message": "Yaw inertie precomp afsnijfrequentie",
+        "english": "Yaw Inertia Precomp Cutoff"
+    },
+    "adjustmentsFunctionPitchSetpointBoostGain": {
+        "message": "Pitch setpoint boost gain",
+        "english": "Pitch Setpoint Boost Gain"
+    },
+    "adjustmentsFunctionRollSetpointBoostGain": {
+        "message": "Roll setpoint boost gain",
+        "english": "Roll Setpoint Boost Gain"
+    },
+    "adjustmentsFunctionYawSetpointBoostGain": {
+        "message": "Yaw setpoint boost gain",
+        "english": "Yaw Setpoint Boost Gain"
+    },
+    "adjustmentsFunctionCollectiveSetpointBoostGain": {
+        "message": "Collectieve setpoint boost gain",
+        "english": "Collective Setpoint Boost Gain"
+    },
+    "adjustmentsFunctionYawDynCeilingGain": {
+        "message": "Yaw dynamische bovengrens gain",
+        "english": "Yaw Dynamic Ceiling Gain"
+    },
+    "adjustmentsFunctionYawDynDeadbandGain": {
+        "message": "Yaw dynamische deadband gain",
+        "english": "Yaw Dynamic Deadband Gain"
+    },
+    "adjustmentsFunctionYawDynDeadbandFilter": {
+        "message": "Yaw dynamische deadband filter",
+        "english": "Yaw Dynamic Deadband Filter"
+    },
+    "adjustmentsFunctionYawPrecompCutoff": {
+        "message": "Yaw precomp afsnijfrequentie",
+        "english": "Yaw Precomp Cutoff"
+    },
     "servoHelp": {
         "message": "Servo 101<ul><li>Controleer eerst de servo richtingen. Controleer cyclische servo's door bijvoorbeeld wat collective te geven. Keer de servo's om indien nodig.</li><li>Nivelleer de servoarmen door <i> Servo Override</i> in te schakelen en <i>Center</i> aan te passen. De servoarm moet loodrecht op de hoofdas staan in deze positie.</li><li>Stel <i>Scale</i> af zodat de servohoeken correct zijn. Specificeer een hoek van 30&deg; voor een servo onder <i>Servo Override</i>. De servo moet nu naar 30&deg; bewegen. Als het minder is, verhoog dan de <i>Scale</i> voor die servo. Als het meer is, verlaag het dan.</li><li>Je kunt het bewegingsbereik van de servo beperken of uitbreiden door <i>Min</i> of <i>Max</i> aan te passen. Doe dit alleen als er een mechanisch probleem is, zoals een servo die vastloopt. Gebruik de mixer om roll/pitch/collective te beperken.</li></ul>",
         "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
@@ -3514,6 +3547,18 @@
         "message": "De faseverschuiving voor de tuimelschijf.",
         "english": "The phase offset for the swashplate controls."
     },
+    "mixerCollectiveTiltCorrectionPos": {
+        "message": "Positieve collectieve kantelcorrectie",
+        "english": "Positive Collective Tilt Correction"
+    },
+    "mixerCollectiveTiltCorrectionNeg": {
+        "message": "Negatieve collectieve kantelcorrectie",
+        "english": "Negative Collective Tilt Correction"
+    },
+    "mixerCollectiveTiltCorrectionHelp": {
+        "message": "Corrigeert de interactie tussen cyclische en collectieve tuimelschijf.<br /><br />Bij volledige positieve en negatieve collectieve pitch, pas de corresponderende waarden aan totdat de tuimelschijf-draaipunt stationair blijft bij het verhogen van cyclische input.",
+        "english": "Corrects cyclic to collective swashplate interaction.<br /><br />At full positive and negative collective pitch, adjust the corresponding values until the swashplate pivot ball remains stationary when increasing cyclic input."
+    },
     "mixerSwashRollTrim": {
         "message": "Roll trim [%]",
         "english": "Roll trim [%]"
@@ -3655,12 +3700,20 @@
         "english": "<strong>Enable Mixer Override</strong>"
     },
     "mixerOverrideEnableSwitchText": {
-        "message": "Mixer Override dwingt de mixer-inputs naar willekeurige posities voor instellingsdoeleinden. De override-waarden worden niet opgeslagen en zullen na een herstart worden gereset.",
-        "english": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
+        "message": "Mixer Override dwingt de mixer-ingangen naar willekeurige posities voor instel-doeleinden. Als Passthrough is ingeschakeld, worden de posities bepaald door je zender. De override-waarden worden niet opgeslagen en worden bij een herstart teruggezet.",
+        "english": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. If Passthrough is enabled, the positions are controlled by your TX. The override values are not saved, and will be reset in reboot."
+    },
+    "mixerPassthroughEnableSwitch": {
+        "message": "<strong>Mixer passthrough inschakelen</strong>",
+        "english": "<strong>Enable Mixer Passthrough</strong>"
     },
     "mixerOverrideEnable": {
-        "message": "Inschakelen",
-        "english": "Enable"
+        "message": "Override",
+        "english": "Override"
+    },
+    "mixerPassthroughEnable": {
+        "message": "Passthrough",
+        "english": "Passthrough"
     },
     "mixerOverrideValue": {
         "message": "Waarde",
@@ -4047,7 +4100,7 @@
         "english": "ESC PWM update frequency in Hz. This is how often the throttle value is sent to the ESC. Usually between 50Hz and 250Hz. Most modern ESCs work fine with 250Hz."
     },
     "motorsDshotBidir": {
-        "message": "Dshot RPM Telemetrie",
+        "message": "Dshot RPM telemetrie",
         "english": "Dshot RPM Telemetry"
     },
     "motorsDshotBidirHelp": {
@@ -4129,6 +4182,30 @@
     "motorTailGearRatioIssueNote": {
         "message": "<span class=\"message-negative\">Waarschuwing:</span> De <i>staartrotor tandwielverhouding</i> is ingesteld op een onjuiste waarde. S.v.p. controleren!",
         "english": "<span class=\"message-negative\">Warning:</span> <i>Tail Rotor Gear Ratio</i> is set to an incorrect value. Please check!"
+    },
+    "motorsVoltageCorrection": {
+        "message": "Spanningscorrectie",
+        "english": "Voltage Correction"
+    },
+    "motorsVoltageCorrectionHelp": {
+        "message": "Past de spanning aan die door de ESC-telemetrie wordt gerapporteerd.",
+        "english": "Adjusts the Voltage reported by the ESC's telemetry."
+    },
+    "motorsCurrentCorrection": {
+        "message": "Stroomcorrectie",
+        "english": "Current Correction"
+    },
+    "motorsCurrentCorrectionHelp": {
+        "message": "Past de stroomsterkte aan die door de ESC-telemetrie wordt gerapporteerd.",
+        "english": "Adjusts the Current reported by the ESC's telemetry."
+    },
+    "motorsConsumptionCorrection": {
+        "message": "Verbruikscorrectie",
+        "english": "Consumption Correction"
+    },
+    "motorsConsumptionCorrectionHelp": {
+        "message": "Past het verbruik aan dat door de ESC-telemetrie wordt gerapporteerd.",
+        "english": "Adjusts the Consumption reported by the ESC's telemetry."
     },
     "motorRotorSpeeds": {
         "message": "Rotorsnelheid",
@@ -4250,6 +4327,14 @@
         "message": "Tijdsconstante voor langzame spoolup, in seconden, de tijd meten van nul naar het volledige rotortoerental.",
         "english": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
     },
+    "govSpoolupMinThrottle": {
+        "message": "Spoolup minimale throttle",
+        "english": "Spoolup minimum throttle"
+    },
+    "govSpoolupMinThrottleHelp": {
+        "message": "Minimale throttle te gebruiken tijdens spoolup. Voor elektrische motoren is de standaard 5%, voor nitro moet dit worden ingesteld zodat de koppeling begint te grijpen voor een soepele spoolup 10-15%.",
+        "english": "Minimum throttle to be used during spoolup. For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%."
+    },
     "govTrackingTime": {
         "message": "Tracking tijd",
         "english": "Tracking time"
@@ -4359,14 +4444,12 @@
         "english": "Maximum output throttle the governor is allowed to use."
     },
     "govMinThrottle": {
-        "message": "Minimum Throttle",
-        "english": "Minimum Throttle",
-        "status": "New entry. Please translate!"
+        "message": "Minimale throttle",
+        "english": "Minimum Throttle"
     },
     "govMinThrottleHelp": {
-        "message": "Minimum output throttle the governor is allowed to use.",
-        "english": "Minimum output throttle the governor is allowed to use.",
-        "status": "New entry. Please translate!"
+        "message": "Minimale throttle-output die de governor mag gebruiken.",
+        "english": "Minimum output throttle the governor is allowed to use."
     },
     "govMasterGain": {
         "message": "PID master gain",
@@ -5021,7 +5104,7 @@
         "english": "Downloading..."
     },
     "firmwareFlasherExitDfu": {
-        "message": "Verlaat DFU modus",
+        "message": "DFU modus verlaten",
         "english": "Exit DFU Mode"
     },
     "firmwareFlasherFlashFirmware": {
@@ -5894,7 +5977,7 @@
         "english": "Acro Trainer angle limit. Acro Trainer mode does not self level (like Angle or Horizon Modes); however, it does limit the maximum angle the helicopter will pitch/roll to"
     },
     "profilesAngleModeGain": {
-        "message": "Angle Modus leveling gain",
+        "message": "Angle modus leveling gain",
         "english": "Angle Mode leveling gain"
     },
     "profilesAngleModeGainHelp": {
@@ -5988,6 +6071,22 @@
     "profilesyawFFImpulseDecayHelp": {
         "message": "Vervaltijd voor collectieve impuls-feedforward gemengd in yaw",
         "english": "Decay time for collective impulse feedforward mixed into yaw"
+    },
+    "profilesYawInertiaPrecompGain": {
+        "message": "Inertie precomp gain",
+        "english": "Inertia Precomp Gain"
+    },
+    "profilesYawInertiaPrecompGainHelp": {
+        "message": "De sterkte van de inertie van de hoofdrotor. Grotere waarden resulteren in meer precomp die wordt toegepast op de yaw besturing.",
+        "english": "The strength of the main rotor's inertia. Larger values result in more precomp being applied to the yaw control."
+    },
+    "profilesYawInertiaPrecompCutoff": {
+        "message": "Inertie precomp afsnijfrequentie",
+        "english": "Inertia Precomp Cutoff"
+    },
+    "profilesYawInertiaPrecompCutoffHelp": {
+        "message": "Afgeleide afsnijfrequentie voor inertie precomp. Grotere waarden resulteren in een scherpere toepassing van precomp.",
+        "english": "Derivative cutoff frequency for inertia precomp. Larger values result in a sharper application of precomp."
     },
     "profilesPitchFFCollective": {
         "message": "Compensatie van collective naar pitch",
@@ -6309,6 +6408,42 @@
         "message": "Reactietijd [ms]",
         "english": "Response Time [ms]"
     },
+    "rateSetpointBoostGain": {
+        "message": "Setpoint boost gain",
+        "english": "Setpoint Boost Gain"
+    },
+    "rateSetpointBoostCutoff": {
+        "message": "Setpoint boost afsnijfrequentie",
+        "english": "Setpoint Boost Cutoff"
+    },
+    "rateYawDynamicCeilingGain": {
+        "message": "Dynamische bovengrens gain",
+        "english": "Dynamic Ceiling Gain"
+    },
+    "rateYawDynamicDeadbandGain": {
+        "message": "Dynamische deadband gain",
+        "english": "Dynamic Deadband Gain"
+    },
+    "rateYawDynamicDeadbandFilter": {
+        "message": "Dynamische deadband filter",
+        "english": "Dynamic Deadband Filter"
+    },
+    "rateSetupResponseHelp": {
+        "message": "Maakt stick-input vloeiender. Grotere waarden resulteren in vloeiender bewegingen.",
+        "english": "Smooths stick inputs. Larger values result in more smoothing."
+    },
+    "rateSetpointBoostGainHelp": {
+        "message": "Versterkt stick-input voor een snellere respons.",
+        "english": "Boosts stick inputs for a snappier feel."
+    },
+    "rateYawDynamicCeilingGainHelp": {
+        "message": "Vermindert de benodigde stick-beweging voor maximale setpoint bij snel naderen van uitersten.",
+        "english": "Reduces stick travel required for maximum setpoint while rapidly approaching extremes."
+    },
+    "rateYawDynamicDeadbandGainHelp": {
+        "message": "Verhoogt stick-deadband bij het snel naderen van het middenpunt.",
+        "english": "Increases stick deadband while rapidly approaching center."
+    },
     "gyroFilterSettings": {
         "message": "Gyro filterinstellingen",
         "english": "Gyro Filter Settings"
@@ -6317,101 +6452,101 @@
         "message": "Gyro D-term filterinstellingen",
         "english": "Gyro D-term Filter Settings"
     },
-    "gyroLowpassFiltersGroup": {
-        "message": "Gyro laagdoorlaatfilters",
-        "english": "Gyro Lowpass Filters"
-    },
-    "gyroLowpassFrequency": {
-        "message": "Gyro laagdoorlaat 1 afsnijfrequentie [Hz]",
-        "english": "Gyro Lowpass 1 Cutoff Frequency [Hz]"
-    },
-    "gyroLowpassType": {
-        "message": "Gyro laagdoorlaat 1 filtertype",
-        "english": "Gyro Lowpass 1 Filter Type"
-    },
-    "gyroLowpassDynMinFrequency": {
-        "message": "Gyro laagdoorlaat 1 dynamische min afsnijfrequentie [Hz]",
-        "english": "Gyro Lowpass 1 Dynamic Min Cutoff Frequency [Hz]"
-    },
-    "gyroLowpassDynMaxFrequency": {
-        "message": "Gyro laagdoorlaat 1 dynamische max afsnijfrequentie [Hz]",
-        "english": "Gyro Lowpass 1 Dynamic Max Cutoff Frequency [Hz]"
-    },
-    "gyroLowpass2Frequency": {
-        "message": "Gyro laagdoorlaat 2 afsnijfrequentie [Hz]",
-        "english": "Gyro Lowpass 2 Cutoff Frequency [Hz]"
-    },
-    "gyroLowpass2Type": {
-        "message": "Gyro laagdoorlaat 2-filtertype",
-        "english": "Gyro Lowpass 2 Filter Type"
+    "gyroLowpassFilterHeading": {
+        "message": "Laagdoorlaatfilter",
+        "english": "Lowpass Filter"
     },
     "gyroLowpassFilterHelp": {
         "message": "De gyro laagdoorlaatfilters worden gebruikt om overtollige ruis in het gyro-signaal te filteren. Twee filters kunnen worden gebruikt, ofwel van 1<sup>e</sup> orde, ofwel van 2<sup>e</sup> orde. Het eerste filter kan dynamisch zijn en verandert zijn afsnijfrequentie met het hoofdrotortoerental. Het minimum en maximum beperken het dynamische bereik. Met RPM-filters of Dynamische Notch-filters is één extra filter nodig rond 100Hz. Zonder hen zijn twee filters van de tweede orde vereist.",
         "english": "The Gyro Lowpass Filters are used for cutting off excess noise in the gyro signal. Two filters can be used, either 1<sup>st</sup> or 2<sup>nd</sup> order. The first filter can be dynamic, changing its cutoff frequency with the main rotor RPM. The minimum and maximum are limiting the dynamic range. With RPM Filters or Dynamic Notch Filters, one extra filter is needed around 100Hz. Without them, two second order filters are required."
     },
-    "gyroNotchFiltersGroup": {
-        "message": "Gyro notch filters",
-        "english": "Gyro Notch Filters"
+    "gyroLowpassFilter1": {
+        "message": "Laagdoorlaatfilter 1",
+        "english": "Lowpass Filter 1"
     },
-    "gyroNotch1Frequency": {
-        "message": "Gyro notch filter 1 middenfrequentie [Hz]",
-        "english": "Gyro Notch Filter 1 Center Frequency [Hz]"
+    "gyroLowpassFilter2": {
+        "message": "Laagdoorlaatfilter 2",
+        "english": "Lowpass Filter 2"
     },
-    "gyroNotch2Frequency": {
-        "message": "Gyro notch filter 2 middenfrequentie [Hz]",
-        "english": "Gyro Notch Filter 2 Center Frequency [Hz]"
+    "gyroLowpassType": {
+        "message": "Filter type",
+        "english": "Filter Type"
     },
-    "gyroNotch1Cutoff": {
-        "message": "Gyro notch filter 1 afsnijfrequentie [Hz]",
-        "english": "Gyro Notch Filter 1 Cutoff Frequency [Hz]"
+    "gyroLowpassFrequency": {
+        "message": "Afsnijfrequentie",
+        "english": "Cutoff Frequency"
     },
-    "gyroNotch2Cutoff": {
-        "message": "Gyro notch filter 2 afsnijfrequentie [Hz]",
-        "english": "Gyro Notch Filter 2 Cutoff Frequency [Hz]"
+    "gyroLowpassDynamicCutoff": {
+        "message": "Dynamische afsnijfrequentie",
+        "english": "Dynamic Cutoff"
+    },
+    "gyroLowpassDynMinFrequency": {
+        "message": "Min afsnijfrequentie",
+        "english": "Min Cutoff Frequency"
+    },
+    "gyroLowpassDynMaxFrequency": {
+        "message": "Max afsnijfrequentie",
+        "english": "Max Cutoff Frequency"
+    },
+    "gyroNotchFilterHeading": {
+        "message": "Notch filter",
+        "english": "Notch Filter"
     },
     "gyroNotchFilterHelp": {
         "message": "De notch-filters worden gebruikt om extra resonanties te filteren. Elk filter heeft een midden en een afsnijding. De middenfrequentie is het midden van het filter en de afsnijfrequentie is waar het filter begint. Bijvoorbeeld, met een afsnijding van 160 en een midden van 260, betekent dit dat het bereik 160-360Hz is met de meeste demping rond het midden.",
         "english": "The Notch Filters are used for filtering out additional resonances. Each filter has a Center and a Cutoff. The Center Frequency is the center of the filter and the Cutoff Frequency is where filter starts. For example with cutoff of 160 and center of 260, it means the range is 160-360Hz with most attenuation around the center."
     },
-    "gyroDynamicNotchFilterGroup": {
-        "message": "Dynamisch notch filter",
-        "english": "Dynamic Notch Filter"
+    "gyroNotchFilter1": {
+        "message": "Notch filter 1",
+        "english": "Notch Filter 1"
     },
-    "gyroDynamicNotchFilterSettings": {
-        "message": "Gyro dynamische notch filter instellingen",
-        "english": "Gyro Dynamic Notch Filter Settings"
+    "gyroNotchFilter2": {
+        "message": "Notch filter 2",
+        "english": "Notch Filter 2"
     },
-    "gyroDynamicNotchFilterHelp": {
+    "gyroNotchFilterFrequency": {
+        "message": "Centrale frequentie",
+        "english": "Center Frequency"
+    },
+    "gyroNotchFilterCutoff": {
+        "message": "Afsnijfrequentie",
+        "english": "Cutoff Frequency"
+    },
+    "gyroDynamicFilterHeading": {
+        "message": "Dynamische filter",
+        "english": "Dynamic Filter"
+    },
+    "gyroDynamicFilterHelp": {
         "message": "Het dynamische notch-filter volgt de piekruisfrequenties in het gyro-signaal en plaatst automatisch notch-filters op die frequenties.",
         "english": "Dynamic Notch Filter tracks peak noise frequencies in the gyro signal and places notch filters at those frequencies automatically."
     },
     "gyroDynamicNotchCount": {
-        "message": "Aantal dynamische notch-filters",
-        "english": "Dynamic Notch Count"
-    },
-    "gyroDynamicNotchQ": {
-        "message": "Dynamische notch Q",
-        "english": "Dynamic Notch Q"
-    },
-    "gyroDynamicNotchMinHz": {
-        "message": "Dynamische notch minimumfrequentie",
-        "english": "Dynamic Notch Minimum Frequency"
-    },
-    "gyroDynamicNotchMaxHz": {
-        "message": "Dynamische notch maximumrequentie",
-        "english": "Dynamic Notch Maximum Frequency"
+        "message": "Aantal notch-filters",
+        "english": "Notch Count"
     },
     "gyroDynamicNotchCountHelp": {
         "message": "Selecteer het aantal dynamische notch-filters. Als ze op zichzelf worden gebruikt zonder de RPM-filters, wordt 4-6 aanbevolen. Met de RPM-filters wordt 2-4 aanbevolen.",
         "english": "Select the number of dynamic notch filters. If used standalone without the RPM filters, 4-6 is recommended. With the RPM filters, 2-4 is recommended."
     },
+    "gyroDynamicNotchQ": {
+        "message": "Notch Q",
+        "english": "Notch Q"
+    },
     "gyroDynamicNotchQHelp": {
         "message": "De Q-factor past aan hoe breed de dynamische notch-filters zijn. Een hogere waarde maakt het smaller en selectiever, en een lagere waarde maakt het breder en algemener. Waarden tussen 2.0 en 4.0 worden aanbevolen. Een waarde lager dan 2.0 zal de filtervertraging aanzienlijk verhogen en kan de vluchtprestaties verslechteren.",
         "english": "The Q factor adjusts how wide the dynamic notch filters are. A higher value makes it narrower and more selective, and a lower value makes it wider and broader. Values between 2.0 and 4.0 are recommended. A value lower than 2.0 will greatly increase filter delay and may degrade flight performance."
     },
+    "gyroDynamicNotchMinHz": {
+        "message": "Notch minimumfrequentie",
+        "english": "Notch Minimum Frequency"
+    },
     "gyroDynamicNotchMinHzHelp": {
         "message": "Stel dit in op de laagste binnenkomende ruisfrequentie die moet worden gefilterd. Het moet lager zijn dan de hoofdrotorfrequentie, maar niet lager dan 20 Hz, wat overeenkomt met 1200 RPM.",
         "english": "Set this to the lowest incoming noise frequency that is needed to be filtered. Should be lower than main rotor frequency, but no lower that 20Hz, which is equivalent to 1200rpm."
+    },
+    "gyroDynamicNotchMaxHz": {
+        "message": "Notch maximumfrequentie",
+        "english": "Notch Maximum Frequency"
     },
     "gyroDynamicNotchMaxHzHelp": {
         "message": "Stel dit in op de hoogste binnenkomende ruisfrequentie die moet worden gefilterd. Het moet 10-20% hoger zijn dan de maximale staartrotorfrequentie, maar niet hoger dan 250 Hz, als de filterfrequentie 1 kHz is. Als de filterfrequentie 2 kHz of hoger is, dan kan 330-500 Hz worden gebruikt, vooral voor kleinere helikopters met een gemotoriseerde staart (een hoger bereik betekent minder precisie en lagere prestaties).",
@@ -6458,8 +6593,8 @@
         "english": "D Term Notch Filter Cutoff Frequency [Hz]"
     },
     "gyroRpmFilterSettings": {
-        "message": "Gyro RPM notch filterinstellingen",
-        "english": "Gyro RPM Notch Filter Settings"
+        "message": "RPM filter",
+        "english": "RPM Filter"
     },
     "gyroRpmFilterSetup": {
         "message": "Type installatie",
@@ -6478,72 +6613,104 @@
         "english": "Custom"
     },
     "gyroRpmFilterConfigNote": {
-        "message": "<b>Waarschuwing:</b> RPM notch filter vereist een betrouwbaar motortoerental, ofwel van Dshot RPM-telemetrie of een RPM-sensor. ESC-telemetrie is niet geschikt.",
-        "english": "<b>Warning:</b> RPM Notch Filter requires a reliable motor RPM, either from Dshot RPM telemetry or an RPM Sensor. ESC telemetry is not suitable."
+        "message": "De <i>RPM-filter</i> vereist een real-time RPM-bron, afkomstig van een RPM-sensor of bidirectionele Dshot. Telemetrie van de ESC is hiervoor niet geschikt.",
+        "english": "The <i>RPM Filter</i> requires a real-time RPM source, either from an RPM Sensor or Bidirectional DShot. ESC telemetry is not suitable."
     },
     "gyroRpmFilterCustomNote": {
-        "message": "<span class=\"message-negative\">Waarschuwing:</span> Aangepaste RPM filterconfiguratie is in gebruik.<br>Gebruik de CLI om de RPM filterinstellingen te wijzigen.",
-        "english": "<span class=\"message-negative\">Warning:</span> Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings."
+        "message": "Aangepaste configuratie voor de RPM-filter is actief.<br>Gebruik de CLI om de instellingen van het RPM-filter te wijzigen.",
+        "english": "Custom RPM Notch Filter configuration is in use.<br>Please use the CLI to change the RPM Filter settings."
     },
-    "gyroRpmFilterVibrationLevel": {
-        "message": "Trillingsniveau",
-        "english": "Vibration Level"
+    "gyroRpmFilterPreset": {
+        "message": "Sterkte",
+        "english": "Strength"
     },
-    "gyroRpmFilterVibrationLow": {
+    "gyroRpmFilterPresetHelp": {
+        "message": "Hogere sterkte verwijdert meer vibraties, maar introduceert meer vertraging.",
+        "english": "Higher strength removes more vibrations, but introduces more delay."
+    },
+    "gyroRpmFilterPresetCustom": {
+        "message": "Aangepast",
+        "english": "Custom"
+    },
+    "gyroRpmFilterPresetLow": {
         "message": "Laag",
         "english": "Low"
     },
-    "gyroRpmFilterVibrationMedium": {
-        "message": "Middelgroot",
+    "gyroRpmFilterPresetMedium": {
+        "message": "Gemiddeld",
         "english": "Medium"
     },
-    "gyroRpmFilterVibrationHigh": {
+    "gyroRpmFilterPresetHigh": {
         "message": "Hoog",
         "english": "High"
     },
+    "gyroRpmFilterMinFreq": {
+        "message": "Minimale frequentie",
+        "english": "Minimum Frequency"
+    },
+    "gyroRpmFilterMinFreqHelp": {
+        "message": "Stel iets lager in dan de frequentie van de hoofdrotor bij het laagste vliegtoerental.",
+        "english": "Set slightly below the frequency of the main rotor at the lowest flying RPM."
+    },
+    "gyroRpmFilterMinRPMGroup": {
+        "message": "Minimale RPM",
+        "english": "Minimum RPM"
+    },
+    "gyroRpmFilterMinRPMGroupHelp": {
+        "message": "Stel iets lager in dan het laagste vliegtoerental.",
+        "english": "Set slightly below the lowest flying RPM."
+    },
     "gyroRpmFilterMainRotorMinRPM": {
-        "message": "Hoofdrotor minimum RPM voor filters",
-        "english": "Main Rotor Minimum Filtered RPM"
+        "message": "Hoofdrotor",
+        "english": "Main Rotor"
     },
     "gyroRpmFilterMainRotorMinRPMHelp": {
         "message": "Minimum door de filtersaanvaarde hoofdrotor-RPM",
         "english": "Minimum Main Rotor RPM accepted by the filters"
     },
     "gyroRpmFilterTailRotorMinRPM": {
-        "message": "Staartrotor minimum RPM voor filters",
-        "english": "Tail Rotor Minimum Filtered RPM"
+        "message": "Staartrotor",
+        "english": "Tail Rotor"
     },
     "gyroRpmFilterTailRotorMinRPMHelp": {
         "message": "Minimum door de filters aanvaarde staartrotor-RPM",
         "english": "Minimum Tail Rotor RPM accepted by the filters"
     },
     "gyroRpmFilterBanks": {
-        "message": "Gyro RPM notch filterbanken",
-        "english": "Gyro RPM Notch Filter Banks"
+        "message": "RPM filter notches",
+        "english": "RPM Filter Notches"
     },
     "gyroRpmFilterHelp": {
-        "message": "RPM-gestuurde filtering is een reeks notch-filters op de gyro die de RPM-telemetriegegevens gebruiken om ruis met chirurgische precisie te verwijderen.<br /><br /><b><span class=\"message-positive\">BELANGRIJK</span>: De ESC moet het Bidirectionele Dshot-protocol ondersteunen en de waarde van de $t(configurationMotorPoles.message) in het $t(tabMotors.message) tabblad moet correct zijn voor deze filter om te werken.</b>",
-        "english": "RPM controlled filtering is a bank of notch filters on gyro which use the RPM telemetry data to remove noise with surgical precision.<br /><br /><b><span class=\"message-positive\">IMPORTANT</span>: The ESC must support the Bidirectional Dshot protocol and the value of the $t(configurationMotorPoles.message) in the $t(tabMotors.message) tab must be correct for this filter to work.</b>"
+        "message": "Elk roterend onderdeel van een helikopter veroorzaakt trillingen, die de werking van de vliegregelkring aanzienlijk kunnen beïnvloeden. Het <i>RPM-filter</i> maakt gebruik van het toerentalsignaal van de motor en de overbrengingsverhoudingen van het model om deze trillingen nauwkeurig uit het gyro-signaal te filteren. Hierdoor kunnen de regel-lussen reageren op de werkelijke beweging van het toestel. Deze methode veroorzaakt aanzienlijk minder vertraging dan traditionele trillingfilters, wat de algehele vliegprestaties ten goede komt.",
+        "english": "Every rotating part on a helicopter generates vibrations, which can significantly affect the performance of the flight control loops. The <i>RPM Filter</i> utilizes the motor's RPM signal and the model's gear ratios to precisely eliminate these vibrations from the gyro's output, enabling the control loops to operate on the true motion of the aircraft. This method introduces substantially less delay than traditional vibration filtering, enhancing overall flight performance."
     },
     "gyroRpmFilterMainRotorGroup": {
-        "message": "Hoofdrotor notch filters",
-        "english": "Main Rotor Notch Filters"
+        "message": "Hoofdrotor",
+        "english": "Main Rotor"
     },
     "gyroRpmFilterMainRotorHelp": {
         "message": "RPM-gestuurde filters voor de harmonischen van de hoofdrotor",
         "english": "RPM controlled filters for the main rotor harmonics"
     },
     "gyroRpmFilterTailRotorGroup": {
-        "message": "Staartrotor notch filters",
-        "english": "Tail Rotor Notch Filters"
+        "message": "Staartrotor",
+        "english": "Tail Rotor"
     },
     "gyroRpmFilterTailRotorHelp": {
         "message": "RPM-gestuurde filters voor de harmonischen van de staartrotor",
         "english": "RPM controlled filters for the tail rotor harmonics"
     },
+    "gyroRpmFilterMotorGroup": {
+        "message": "Motoren",
+        "english": "Motors"
+    },
     "gyroRpmFilterMainMotorGroup": {
         "message": "Hoofdmotor notch filters",
         "english": "Main Motor Notch Filters"
+    },
+    "gyroRpmFilterMainMotorQ": {
+        "message": "Hoofdmotor notch Q",
+        "english": "Main Motor Notch Q"
     },
     "gyroRpmFilterMainMotorHelp": {
         "message": "RPM-gestuurde filters voor de harmonischen van de hoofdmotor",
@@ -6552,6 +6719,10 @@
     "gyroRpmFilterTailMotorGroup": {
         "message": "Staartmotor notch filters",
         "english": "Tail Motor Notch Filters"
+    },
+    "gyroRpmFilterTailMotorQ": {
+        "message": "Staartmotor notch Q",
+        "english": "Tail Motor Notch Q"
     },
     "gyroRpmFilterTailMotorHelp": {
         "message": "RPM-gestuurde filters voor de harmonischen van de staartmotor",
@@ -6604,6 +6775,26 @@
     "gyroRpmFilterQ8": {
         "message": "8<sup>e</sup> harmonische notch Q",
         "english": "8<sup>th</sup> Harmonic Notch Q"
+    },
+    "gyroRpmFilterNotchTypeSingle": {
+        "message": "ENKEL",
+        "english": "SINGLE"
+    },
+    "gyroRpmFilterNotchTypeDouble": {
+        "message": "DUBBEL",
+        "english": "DOUBLE"
+    },
+    "gyroRpmFilterNotchTypeTriple": {
+        "message": "DRIEVOUDIG",
+        "english": "TRIPLE"
+    },
+    "gyroRpmFilterNotchCountWarn": {
+        "message": "Er kunnen maximaal 16 notches worden ingeschakeld.",
+        "english": "A maximum of 16 notches can be enabled."
+    },
+    "gyroRpmFilterNotchResetBtn": {
+        "message": "Aangepaste notches resetten",
+        "english": "Reset Custom Notches"
     },
     "dialogGyroResetTitle": {
         "message": "<span class=\"message-negative\">Waarschuwing:</span> RPM filter reset",
@@ -8962,6 +9153,14 @@
         "message": "Aangepast",
         "english": "Custom"
     },
+    "blackboxGracePeriod": {
+        "message": "Disarm gratieperiode",
+        "english": "Disarm grace period"
+    },
+    "blackboxGracePeriodHelp": {
+        "message": "Zet logging kort voort na disarming, handig voor het vastleggen van crashgegevens. Stel in op 0 om uit te schakelen.",
+        "english": "Continues logging briefly after disarming, useful for capturing crash data. Set to 0 to disable."
+    },
     "blackboxDebugMode": {
         "message": "Debug modus",
         "english": "Debug mode"
@@ -8981,6 +9180,22 @@
     "blackboxDebugAxisHelp": {
         "message": "Kies welke <i>as</i> wordt ge-debuged. Dit geldt voor sommige van de debug-modi.",
         "english": "Choose which <i>axis</i> is being debugged. Applies to some of the debug modes."
+    },
+    "blackboxInitialErase": {
+        "message": "Initieel wissen",
+        "english": "Initial erase"
+    },
+    "blackboxInitialEraseHelp": {
+        "message": "Zorgt voor een minimale hoeveelheid vrije ruimte wanneer de opname begint, waarbij oude logs indien nodig worden gewist. Stel in op 0 om deze functie uit te schakelen.<br><br><b>Opmerking:</b> Logging begint nadat het wissen is voltooid. Dit kan bij sommige flashchips veel tijd in beslag nemen.",
+        "english": "Ensures a minimum amount of free space when recording starts, erasing old logs if necessary. Set to 0 to disable this feature.<br><br><b>Note:</b> Logging starts after erasing completes. This may take a significant amount of time with some flash chips."
+    },
+    "blackboxRollingErase": {
+        "message": "Doorlopend wissen",
+        "english": "Rolling erase"
+    },
+    "blackboxRollingEraseHelp": {
+        "message": "Overschrijf oude logs wanneer de opslag vol is.<br><br><b>Opmerking:</b> Logs kunnen hiaten bevatten als de flashchip traag is met wissen.",
+        "english": "Overwrite old logs when the storage is full.<br><br><b>Note:</b> Logs may contain gaps if the flash chip is slow to erase."
     },
     "blackboxSerialLogger": {
         "message": "Extern serieel logapparaat",
@@ -9267,5 +9482,373 @@
     "cordovaExitAppMessage": {
         "message": "Wilt je de Configurator echt sluiten?",
         "english": "Do you really want to close the configurator?"
+    },
+    "dropDownSelectAll": {
+        "message": "[Alles selecteren/deselecteren]",
+        "english": "[Select/deselect all]",
+        "description": "Select all item in the drop down/multiple select"
+    },
+    "dropDownFilterDisabled": {
+        "message": "Selecteer...",
+        "english": "Select...",
+        "description": "Text indicating nothing is selected in the drop down/multiple select (filter disabled)"
+    },
+    "dropDownAll": {
+        "message": "Alles",
+        "english": "All",
+        "description": "Text indicating everything is selected in the drop down/multiple select"
+    },
+    "tabPresets": {
+        "message": "Presets",
+        "english": "Presets",
+        "description": "Presets tab title"
+    },
+    "presetsReload": {
+        "message": "Herladen",
+        "english": "Reload",
+        "description": "Text on the reload button that appears when there in an error loading presets index"
+    },
+    "presetCategory": {
+        "message": "Categorie:",
+        "english": "Category:"
+    },
+    "presetAuthor": {
+        "message": "Auteur:",
+        "english": "Author:",
+        "description": "Hint text in the preset dialog"
+    },
+    "presetSelectedOptions": {
+        "message": "Geselecteerde opties:",
+        "english": "Selected Options:"
+    },
+    "presetKeywords": {
+        "message": "Sleutelwoorden:",
+        "english": "Keywords:",
+        "description": "Hint text in the preset dialog"
+    },
+    "presetSource": {
+        "message": "Bron:",
+        "english": "Source:",
+        "description": "Text prefixing user defined name of the preset repository containing a preset"
+    },
+    "presetVersions": {
+        "message": "Firmware:",
+        "english": "Firmware:",
+        "description": "Hint text in the preset dialog"
+    },
+    "presetBoards": {
+        "message": "Boards:",
+        "english": "Boards:",
+        "description": "Hint text in the preset dialog"
+    },
+    "presetsOfficial": {
+        "message": "Officieel",
+        "english": "Official",
+        "description": "Hint text in the preset dialog indication preset is official"
+    },
+    "presetsCommunity": {
+        "message": "Community",
+        "english": "Community",
+        "description": "Hint text in the preset dialog indication preset is from the community"
+    },
+    "presetsExperimental": {
+        "message": "Experimenteel",
+        "english": "Experimental",
+        "description": "Hint text in the preset dialog indication preset is experimental"
+    },
+    "presetsApply": {
+        "message": "Selecteren",
+        "english": "Select",
+        "description": "Button to pick a preset"
+    },
+    "presetsViewOnline": {
+        "message": "Broncode bekijken",
+        "english": "View Source",
+        "description": "Link text for opening preset file online"
+    },
+    "presetsOpenDiscussion": {
+        "message": "Discussie",
+        "english": "Discussion",
+        "description": "Link text for opening preset discussion"
+    },
+    "presetsShowCli": {
+        "message": "CLI tonen",
+        "english": "Show CLI",
+        "description": "Button to show CLI code of a preset"
+    },
+    "presetsHideCli": {
+        "message": "CLI verbergen",
+        "english": "Hide CLI",
+        "description": "Button to hide CLI code of a preset"
+    },
+    "presetOptions": {
+        "message": "Opties",
+        "english": "Options",
+        "description": "Text label for Options drop down select"
+    },
+    "presetsFilterCategory": {
+        "message": "Categorieën",
+        "english": "Categories",
+        "description": "UI filter name"
+    },
+    "presetsFilterKeyword": {
+        "message": "Sleutelwoorden",
+        "english": "Keywords",
+        "description": "UI filter name"
+    },
+    "presetsFilterAuthor": {
+        "message": "Auteurs",
+        "english": "Authors",
+        "description": "UI filter name"
+    },
+    "presetsFilterFirmware": {
+        "message": "Firmware filter",
+        "english": "Firmware Filter",
+        "description": "UI filter name"
+    },
+    "presetsFilterStatus": {
+        "message": "Status",
+        "english": "Status",
+        "description": "UI filter name - official/community/experimental"
+    },
+    "presetsLoadError": {
+        "message": "Fout bij laden van presets vanaf internet",
+        "english": "Error loading presets from the internet",
+        "description": "Error report when failed to load presets index or a specific preset"
+    },
+    "presetsButtonReview": {
+        "message": "Geselecteerde presets bekijken",
+        "english": "Review Selected Presets"
+    },
+    "presetsButtonReviewCLI": {
+        "message": "CLI bekijken",
+        "english": "Review CLI"
+    },
+    "presetsButtonApply": {
+        "message": "Presets uitvoeren",
+        "english": "Execute Presets"
+    },
+    "presetsButtonReset": {
+        "message": "Reset",
+        "english": "Reset"
+    },
+    "presetsApplyingPresets": {
+        "message": "Configuratie toepassen...",
+        "english": "Applying configuration...",
+        "description": "First label in the progress dialog when applying configuration (presets or user config)"
+    },
+    "presetsPleaseWait": {
+        "message": "Momentje...",
+        "english": "Please wait.",
+        "description": "Second label in the progress dialog when applying presets"
+    },
+    "presetsCliErrorsWarning": {
+        "message": "<span class='message-negative'>WAARSCHUWING!</span><br/>Configuratie is toegepast met CLI-fouten.",
+        "english": "<span class='message-negative'>WARNING!</span><br/>Configuration has been applied with CLI errors.",
+        "description": "Text to show when there are CLI errors after applying presets or user configuration"
+    },
+    "presetsCliSaveButton": {
+        "message": "Opslaan en herstarten",
+        "english": "Save and Reboot",
+        "description": "save Button"
+    },
+    "presetsCliExitButton": {
+        "message": "Annuleren en herstarten",
+        "english": "Cancel and Reboot",
+        "description": "Reboot Button"
+    },
+    "presetsWarningDialogTitle": {
+        "message": "WAARSCHUWING!",
+        "english": "WARNING!",
+        "description": "Warning title in the warning dialog in the presets"
+    },
+    "presetsWarningDialogYesButton": {
+        "message": "Bevestigen",
+        "english": "Acknowledge",
+        "description": "Agree button in the presets warning dialog"
+    },
+    "presetsWarningDialogNoButton": {
+        "message": "Annuleren",
+        "english": "Cancel",
+        "description": "Cancel button in the presets warning dialog"
+    },
+    "presetsWiki": {
+        "message": "Presets Wiki",
+        "english": "Presets Wiki",
+        "description": "Button to open Presets Wiki link"
+    },
+    "backupDiffAll": {
+        "message": "Differentiële backup opslaan (diff all)",
+        "english": "Save Differential Backup (diff all)",
+        "description": "Button to backup differential configuration to a file"
+    },
+    "backupDumpAll": {
+        "message": "Volledige backup opslaan (dump all)",
+        "english": "Save Full Backup (dump all)",
+        "description": "Button to backup a dump all of the configuration to a file"
+    },
+    "backupLoad": {
+        "message": "Backup laden",
+        "english": "Load Backup",
+        "description": "Button to load backup from a file"
+    },
+    "backupWaitDialogTitleSavingDiffAll": {
+        "message": "Diff all van de flight controller opslaan",
+        "english": "Saving diff all from the flight controller",
+        "description": "Title for the waiting dialog when saving diff all into a file"
+    },
+    "backupWaitDialogTitleSavingDumpAll": {
+        "message": "Dump all van de flight controller opslaan",
+        "english": "Saving dump all from the flight controller",
+        "description": "Title for the waiting dialog when saving dump all into a file"
+    },
+    "backupWaitDialogTitleLoadBackup": {
+        "message": "Backup naar de flight controller laden",
+        "english": "Loading backup onto the flight controller",
+        "description": "Title for the waiting dialog when loading dump all into a file"
+    },
+    "backupWaitDialogMessageErrorSavingBackup": {
+        "message": "Fout opgetreden bij het opslaan van de huidige configuratie",
+        "english": "Error occurred while saving current configuration",
+        "description": "Message appears on presets tab when saving current diff all into a file has failed"
+    },
+    "presetSources": {
+        "message": "Preset bronnen...",
+        "english": "Preset Sources...",
+        "description": "A button to show preset sources dialog"
+    },
+    "presetsSourcesDialogTitle": {
+        "message": "Preset bronnen",
+        "english": "Preset Sources",
+        "description": "A button to show preset sources dialog"
+    },
+    "presetsSourcesDialogAddNew": {
+        "message": "Nieuwe bron toevoegen",
+        "english": "Add New Source",
+        "description": "A button to show preset sources dialog"
+    },
+    "presetsSourcesDialogConfirm": {
+        "message": "OK",
+        "english": "OK"
+    },
+    "presetsSourcesDialogDefaultSourceName": {
+        "message": "Nieuwe aangepaste preset bron",
+        "english": "New Custom Preset Source",
+        "description": "A default preset source (repo) name"
+    },
+    "presetsSourcesDialogSaveSource": {
+        "message": "Opslaan",
+        "english": "Save",
+        "description": "Presets tab, sources dialog, button to save new or editable source"
+    },
+    "presetsSourcesDialogResetSource": {
+        "message": "Terugdraaien",
+        "english": "Revert",
+        "description": "Presets tab, sources dialog, button to revert source after modifications"
+    },
+    "presetsSourcesDialogMakeSourceActive": {
+        "message": "Activeren",
+        "english": "Activate",
+        "description": "Presets tab, sources dialog, button to make selected source active"
+    },
+    "presetsSourcesDialogMakeSourceDisable": {
+        "message": "Uitschakelen",
+        "english": "Disable",
+        "description": "Presets tab, sources dialog, button to make selected source disabled"
+    },
+    "presetsSourcesDialogDeleteSource": {
+        "message": "Verwijderen",
+        "english": "Delete",
+        "description": "Presets tab, sources dialog, button to delete selected source"
+    },
+    "presetsSourcesDialogGithubBranch": {
+        "message": "Github branch",
+        "english": "Github Branch"
+    },
+    "presetsSourcesDialogURL": {
+        "message": "URL",
+        "english": "URL"
+    },
+    "presetsSourcesDialogName": {
+        "message": "Naam",
+        "english": "Name"
+    },
+    "reviewPresetsDialogTitle": {
+        "message": "Geselecteerde presets bekijken",
+        "english": "Review Selected Presets"
+    },
+    "presetsWarningNotOfficialSource": {
+        "message": "<span class=\"message-negative\">WAARSCHUWING!</span> Een derde partij preset bron is geselecteerd.",
+        "english": "<span class=\"message-negative\">WARNING!</span> A third party preset source is selected.",
+        "description": "Warning message that shows up when a third party preset source is selected"
+    },
+    "presetsFailedToLoadRepositories": {
+        "message": "<span class=\"message-negative\">WAARSCHUWING!</span> Kon de volgende repositories niet laden: <b>{{repos}}</b>",
+        "english": "<span class=\"message-negative\">WARNING!</span> Failed to load following repositories: <b>{{repos}}</b>",
+        "description": "Warning message that shows up when we fail to load some repositories"
+    },
+    "presetsWarningBackup": {
+        "message": "Zorg ervoor dat je een backup maakt van je huidige configuratie (knop '$t(backupDiffAll.message)' of via CLI als de knop is uitgeschakeld) <strong>voor</strong> het kiezen en toepassen van presets. Anders is er geen manier om terug te keren naar de vorige configuratie na het toepassen van presets.",
+        "english": "Please make sure you backup your current configuration ('$t(backupDiffAll.message)' button or via CLI if the button is disabled) <strong>before</strong> picking and applying presets. Otherwise there is no way to return to previous configuration after applying presets.",
+        "description": "Warning message that shows up at the top of the presets tab"
+    },
+    "presets_sources_dialog_warning": {
+        "message": "<span class=\"message-negative\">WAARSCHUWING!</span> Het gebruik van presets van derden kan gevaarlijk zijn.<br/>Zorg ervoor dat je alleen vertrouwde bronnen toevoegt en gebruikt. Kwaadaardige of slecht samengestelde bronnen kunnen je helikopterconfiguratie verstoren en mogelijk je apparaten beschadigen.",
+        "english": "<span class=\"message-negative\">WARNING!</span> Using third party preset sources could be dangerous.<br/>Make sure you add and use only trusted sources. Malicious or bad preset sources can break your helicopter configuration and potentially harm your devices.",
+        "description": "Warning message that shows up at the top of the preset sources dialog"
+    },
+    "presetsWarningWrongVersionConfirmation": {
+        "message": "Gekozen preset vereist firmware versie $1. Huidige firmware versie is $2",
+        "english": "Picked preset requires firmware version $1. Current firmware version is $2",
+        "description": "Warning message that shows up at the top of the preset sources dialog"
+    },
+    "presetsSearchPlaceholder": {
+        "message": "Bijvoorbeeld: \"OMPHOBBY M5\", of \"OMPHOBBY M7\"",
+        "english": "Example: \"OMPHOBBY M5\", or \"OMPHOBBY M7\""
+    },
+    "presetsNoPresetsFound": {
+        "message": "Geen presets gevonden voor de opgegeven zoekcriteria",
+        "english": "No presets found for the given search parameters",
+        "description": "Message that apprears on presets tab if no presets were found"
+    },
+    "presetsTooManyPresetsFound": {
+        "message": "Maximum limiet van het aantal weergegeven presets bereikt",
+        "english": "Reached the maximum limit of the shown presets number",
+        "description": "Message that apprears on presets tab if too many presets found"
+    },
+    "presetOptionsPlaceholder": {
+        "message": "LET OP! Bekijk de lijst met opties",
+        "english": "ATTENTION! Review the list of options",
+        "description": "Placeholder for the options list dropdown"
+    },
+    "presetsVersionMismatch": {
+        "message": "Versie van preset bron komt niet overeen.<br/>Vereiste versie: {{versionRequired}}<br/>Preset bron versie: {{versionSource}}<br/>Het gebruik van deze preset bron kan gevaarlijk zijn.<br/>Wil je doorgaan?",
+        "english": "Preset source version mismatch.<br/>Required version: {{versionRequired}}<br/>Preset source version: {{versionSource}}<br/>Using this preset source could be dangerous.<br/>Do you want to continue?",
+        "description": "Placeholder for the options list dropdown"
+    },
+    "presetsReviewOptionsWarning": {
+        "message": "Bekijk de lijst met opties voordat je deze preset kiest.",
+        "english": "Please review the list of options before picking this preset.",
+        "description": "Dialog text to prompt user to review options for the preset"
+    },
+    "presetsReviewBeforeApply": {
+        "message": "Bekijk alle geselecteerde presets in de onderstaande lijst. De presets CLI zal worden toegepast in de volgorde waarin ze zijn vermeld. Zorg ervoor dat je een backup hebt gemaakt van je huidige configuratie voordat je de presets toepast.",
+        "english": "Please review all of the selected presets in the list below. The presets CLI will be applied in the order they are listed. Ensure you have taken a backup of your current configuration before applying the presets."
+    },
+    "backupFailedToSave": {
+        "message": "Er is iets misgegaan bij het opslaan van het backup bestand.",
+        "english": "Something went wrong when trying to save the backup file."
+    },
+    "presetsCliConfirmationDialogTitle": {
+        "message": "Bekijk de gegenereerde presets CLI commando's",
+        "english": "Review The Rendered Presets CLI Commands"
+    },
+    "presetEdit": {
+        "message": "Bewerken",
+        "english": "Edit"
+    },
+    "presetsDontShowAgain": {
+        "message": "Niet meer tonen",
+        "english": "Don't show again"
     }
 }
