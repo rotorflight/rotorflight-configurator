@@ -114,8 +114,18 @@ html[data-theme="dark"] .tab-presets .ms-drop {
   color: #888888;
 }
 
+.tab-presets .preset_panel .header {
+  display: flex;
+  padding: 4px 8px;
+  align-items: center;
+  border-bottom: 1px solid var(--accent);
+  margin-bottom: 8px;
+}
+
 .tab-presets .preset_panel .preset_panel_title {
   flex-grow: 1;
+  font-size: 20px;
+  padding: 0;
 }
 
 /* CLI stuff start  */
@@ -481,16 +491,14 @@ html[data-theme="dark"] .tab-presets .ms-drop {
 
 .preset_dialog_title_panel {
   padding-bottom: 0.5ex;
-  margin-bottom: 2ex;
 }
 
 #preset_dialog_content {
-  height: 100%;
+  padding: 16px;
 }
 
 #preset_dialog_content_wrapper {
   overflow-y: auto;
-  padding: 0 20px;
 }
 
 #preset_dialog_content_wrapper .preset_panel_title {
@@ -587,10 +595,6 @@ html[data-theme="dark"] .tab-presets .ms-drop {
 #preset_dialog_html_description ol li {
   padding-left: 12px;
   list-style-type: decimal;
-}
-
-#preset_options_panel {
-  height: 20px;
 }
 
 #preset_options_panel .ms-choice {
