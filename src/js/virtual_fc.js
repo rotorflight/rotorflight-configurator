@@ -7,6 +7,98 @@ export function applyVirtualConfig() {
   FC.CONFIG.apiVersion = CONFIGURATOR.virtualApiVersion;
   FC.CONFIG.motorCount = 1;
 
+  // Configuration
+  FC.SERIAL_CONFIG.ports = new Array(6);
+  FC.SERIAL_CONFIG.ports[0] = {
+    identifier: 20,
+    auxChannelIndex: 0,
+    functions: ["MSP"],
+    msp_baudrate: 115200,
+    gps_baudrate: 57600,
+    telemetry_baudrate: "AUTO",
+    blackbox_baudrate: 115200,
+  };
+
+  for (let i = 1; i < FC.SERIAL_CONFIG.ports.length; i++) {
+    FC.SERIAL_CONFIG.ports[i] = {
+      identifier: i - 1,
+      auxChannelIndex: 0,
+      functions: [],
+      msp_baudrate: 115200,
+      gps_baudrate: 57600,
+      telemetry_baudrate: "AUTO",
+      blackbox_baudrate: 115200,
+    };
+  }
+
+  FC.SERIAL_CONFIG.ports[1].functionMask = 64; // RX_SERIAL
+  FC.SERIAL_CONFIG.ports[2].functionMask = 1024; // ESC_SENSOR
+  FC.SERIAL_CONFIG.ports[3].functionMask = 2; // GPS
+
+  // Receiver
+  FC.FEATURE_CONFIG.features.RX_SERIAL = true;
+  FC.FEATURE_CONFIG.features.TELEMETRY = true;
+  Object.assign(FC.RX_CONFIG, {
+    serialrx_provider: 9, // CRSF
+  });
+
+  Object.assign(FC.RC_CONFIG, {
+    rc_center: 1500,
+    rc_deflection: 510,
+    rc_arm_throttle: 1000,
+    rc_min_throttle: 1070,
+    rc_max_throttle: 2000,
+    rc_deadband: 2,
+    rc_yaw_deadband: 2,
+  });
+
+  Object.assign(FC.ANALOG, {
+    rssi: 700,
+  });
+
+  FC.RC_MAP = [0, 1, 3, 2, 5, 4, 6, 7];
+
+  Object.assign(FC.TELEMETRY_CONFIG, {
+    crsf_telemetry_mode: 1,
+    crsf_telemetry_rate: 500,
+    crsf_telemetry_ratio: 8,
+    telemetry_sensors_list: [4, 5, 6, 7, 8],
+  });
+
+  FC.RC = {
+    channels: new Array(16).fill(1500),
+    active_channels: 16,
+  };
+
+  FC.RX_CHANNELS = new Array(16).fill(1500);
+
+  // Failsafe
+  Object.assign(FC.RX_CONFIG, {
+    rx_pulse_min: 885,
+    rx_pulse_max: 2115,
+  });
+
+  for (let i = 0; i < 16; i++) {
+    FC.RXFAIL_CONFIG[i] = {
+      mode: i < 5 ? 0 : 1,
+      value: 1500,
+    };
+  }
+
+  // Gyro
+  FC.FEATURE_CONFIG.features.DYN_NOTCH = true;
+  FC.FEATURE_CONFIG.features.RPM_FILTER = true;
+
+  Object.assign(FC.FILTER_CONFIG, {
+    dyn_notch_count: 6,
+    dyn_notch_q: 20,
+    dyn_notch_min_hz: 50,
+    dyn_notch_max_hz: 200,
+
+    rpm_preset: 2,
+    rpm_min_hz: 20,
+  });
+
   FC.BEEPER_CONFIG.beepers = new Beepers(FC.CONFIG);
   FC.BEEPER_CONFIG.dshotBeaconConditions = new Beepers(FC.CONFIG, [
     "RX_LOST",
@@ -68,29 +160,6 @@ export function applyVirtualConfig() {
     };
   }
 
-  FC.SERIAL_CONFIG.ports = new Array(6);
-  FC.SERIAL_CONFIG.ports[0] = {
-    identifier: 20,
-    auxChannelIndex: 0,
-    functions: ["MSP"],
-    msp_baudrate: 115200,
-    gps_baudrate: 57600,
-    telemetry_baudrate: "AUTO",
-    blackbox_baudrate: 115200,
-  };
-
-  for (let i = 1; i < FC.SERIAL_CONFIG.ports.length; i++) {
-    FC.SERIAL_CONFIG.ports[i] = {
-      identifier: i - 1,
-      auxChannelIndex: 0,
-      functions: [],
-      msp_baudrate: 115200,
-      gps_baudrate: 57600,
-      telemetry_baudrate: "AUTO",
-      blackbox_baudrate: 115200,
-    };
-  }
-
   FC.LED_STRIP = new Array(256);
   for (let i = 0; i < FC.LED_STRIP.length; i++) {
     FC.LED_STRIP[i] = {
@@ -103,12 +172,11 @@ export function applyVirtualConfig() {
     };
   }
 
-  FC.ANALOG = {
+  Object.assign(FC.ANALOG, {
     voltage: 12,
     mAhdrawn: 1200,
-    rssi: 100,
     amperage: 3,
-  };
+  });
 
   FC.CONFIG.sampleRateHz = 12000;
   FC.ADVANCED_CONFIG.pid_process_denom = 2;
@@ -152,14 +220,6 @@ export function applyVirtualConfig() {
     mag_hardware: 1,
   };
 
-  FC.RC = {
-    channels: new Array(16),
-    active_channels: 16,
-  };
-  for (let i = 0; i < FC.RC.channels.length; i++) {
-    FC.RC.channels[i] = 1500;
-  }
-
   FC.AUX_CONFIG = [
     // ARM flag
     "ARM",
@@ -200,13 +260,6 @@ export function applyVirtualConfig() {
     0, 1, 2, 4, 5, 6, 7, 8, 12, 13, 15, 17, 19, 20, 23, 24, 25, 26, 27, 28, 29,
     30, 31, 32, 33, 34, 35, 36, 37, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
   ];
-
-  for (let i = 0; i < 16; i++) {
-    FC.RXFAIL_CONFIG[i] = {
-      mode: 1,
-      value: 1500,
-    };
-  }
 
   // 11 1111 (pass bitchecks)
   FC.CONFIG.activeSensors = 63;
