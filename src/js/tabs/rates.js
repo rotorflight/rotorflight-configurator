@@ -494,12 +494,17 @@ tab.convertToCollective = function (rate) {
 tab.initRatesPreview = function () {
     this.keepRendering = true;
 
-    this.model = new Model($('.rates_preview'), $('.rates_preview canvas'));
+    try {
+        this.model = new Model($('.rates_preview'), $('.rates_preview canvas'));
+        $('.rates_preview .webgl-error').hide();
+        $('.tab-rates .tab-container .tab').on('click', $.proxy(this.model.resize, this.model));
+        $(window).on('resize', $.proxy(this.model.resize, this.model));
+    } catch (err) {
+        console.log("Error initialising model", err);
+        $('.rates_preview .webgl-error').show();
+    }
 
-    $('.tab-rates .tab-container .tab').on('click', $.proxy(this.model.resize, this.model));
     $('.tab-rates .tab-container .tab').on('click', $.proxy(this.updateRatesLabels, this));
-
-    $(window).on('resize', $.proxy(this.model.resize, this.model));
     $(window).on('resize', $.proxy(this.updateRatesLabels, this));
 };
 
@@ -547,7 +552,7 @@ tab.renderModel = function () {
             self.currentRates.yaw_rate_limit
         );
 
-        self.model.rotateBy(-degToRad(pitch), -degToRad(yaw), -degToRad(roll));
+        self.model?.rotateBy(-degToRad(pitch), -degToRad(yaw), -degToRad(roll));
 
         if (self.checkChannels()) {
             self.updateRatesLabels();
