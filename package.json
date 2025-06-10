@@ -41,7 +41,7 @@
   "author": "The Rotorflight open source project.",
   "license": "GPL-3.0",
   "engines": {
-    "node": "22.x"
+    "node": "24.x"
   },
   "dependencies": {
     "jbox": "^1.3.3",
