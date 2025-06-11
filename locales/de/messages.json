@@ -4444,7 +4444,7 @@
         "english": "Maximum output throttle the governor is allowed to use."
     },
     "govMinThrottle": {
-        "message": "Maximaler Gaswert [%]",
+        "message": "Minimaler Gaswert [%]",
         "english": "Minimum Throttle"
     },
     "govMinThrottleHelp": {
