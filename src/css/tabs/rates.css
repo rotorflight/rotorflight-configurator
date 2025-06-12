@@ -438,6 +438,17 @@
     background-size: 100%;
 }
 
+.tab-rates .rates_preview .webgl-error {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--mutedText);
+    font-size: 16px;
+    font-weight: 600;
+}
+
 .tab-rates #canvas {
     width: 100% !important;
     height: 100% !important;

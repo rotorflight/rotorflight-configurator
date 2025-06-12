@@ -336,6 +336,17 @@
     height: 100% !important;
 }
 
+.tab-configuration #canvas_wrapper .webgl-error {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--mutedText);
+    font-size: 16px;
+    font-weight: 600;
+}
+
 @media only screen and (max-width: 1055px) , only screen and (max-device-width: 1055px) {
     .tab-configuration .gui_box span {
         line-height: 17px;

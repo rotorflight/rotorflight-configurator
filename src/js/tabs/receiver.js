@@ -517,7 +517,15 @@ tab.initialize = function (callback) {
 tab.initModelPreview = function () {
     const self = this;
 
-    self.model = new Model($('#canvas_wrapper'), $('#canvas'));
+    try {
+        self.model = new Model($('#canvas_wrapper'), $('#canvas'));
+        $(window).on('resize', $.proxy(self.model.resize, self.model));
+        $('#canvas_wrapper .webgl-error').hide();
+    } catch (err) {
+        console.log("Error initialising model", err);
+        $('#canvas_wrapper .webgl-error').show();
+    }
+
     self.clock = new Clock();
     self.rateCurve = new RateCurve2();
     self.keepRendering = true;
@@ -574,8 +582,6 @@ tab.initModelPreview = function () {
         default:
             break;
     }
-
-    $(window).on('resize', $.proxy(self.model.resize, self.model));
 };
 
 tab.renderModel = function () {
@@ -619,7 +625,7 @@ tab.renderModel = function () {
             self.currentRates.yaw_rate_limit
         );
 
-        self.model.rotateBy(-degToRad(pitch), -degToRad(yaw), -degToRad(roll));
+        self.model?.rotateBy(-degToRad(pitch), -degToRad(yaw), -degToRad(roll));
     }
 };
 
