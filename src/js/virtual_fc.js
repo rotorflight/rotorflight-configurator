@@ -71,6 +71,7 @@ export function applyVirtualConfig() {
   };
 
   FC.RX_CHANNELS = new Array(16).fill(1500);
+  FC.RC_COMMAND = new Array(16).fill(0);
 
   // Failsafe
   Object.assign(FC.RX_CONFIG, {
@@ -148,6 +149,37 @@ export function applyVirtualConfig() {
     invalidPercent: [500],
   });
 
+  // Blackbox
+  Object.assign(FC.BLACKBOX, {
+    blackboxDevice: 1,
+    blackboxMode: 2,
+    supported: true,
+    blackboxGracePeriod: 5,
+    blackboxDenom: 2,
+    blackboxRollingErase: 1,
+  });
+
+  Object.assign(FC.DATAFLASH, {
+    ready: true,
+    supported: true,
+    sectors: 1024,
+    totalSize: 128 * 1024 * 1024,
+    usedSize: 12 * 1024 * 1024,
+  });
+
+  Object.assign(FC.SDCARD, {
+    supported: false,
+    state: 1,
+    freeSizeKB: 1024,
+    totalSizeKB: 2048,
+  });
+
+  Object.assign(FC.DEBUG_CONFIG, {
+    debugMode: 0,
+    debugAxis: 0,
+    debugModeCount: 83,
+  });
+
   FC.BEEPER_CONFIG.beepers = new Beepers(FC.CONFIG);
   FC.BEEPER_CONFIG.dshotBeaconConditions = new Beepers(FC.CONFIG, [
     "RX_LOST",
@@ -212,10 +244,8 @@ export function applyVirtualConfig() {
     amperage: 3,
   });
 
-  FC.CONFIG.sampleRateHz = 12000;
+  FC.CONFIG.sampleRateHz = 4000;
   FC.ADVANCED_CONFIG.pid_process_denom = 2;
-
-  FC.BLACKBOX.supported = true;
 
   FC.BATTERY_CONFIG = {
     vbatmincellvoltage: 1,
@@ -231,21 +261,6 @@ export function applyVirtualConfig() {
     voltage: 20,
     mAhDrawn: 1000,
     amperage: 3,
-  };
-
-  FC.DATAFLASH = {
-    ready: true,
-    supported: true,
-    sectors: 1024,
-    totalSize: 40000,
-    usedSize: 10000,
-  };
-
-  FC.SDCARD = {
-    supported: true,
-    state: 1,
-    freeSizeKB: 1024,
-    totalSizeKB: 2048,
   };
 
   FC.SENSOR_CONFIG = {
