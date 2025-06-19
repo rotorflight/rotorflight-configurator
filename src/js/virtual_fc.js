@@ -3,9 +3,18 @@ import { FC } from "@/js/fc.svelte.js";
 export function applyVirtualConfig() {
   FC.resetState();
 
-  FC.CONFIG.flightControllerVersion = "4.5.0";
-  FC.CONFIG.apiVersion = CONFIGURATOR.virtualApiVersion;
-  FC.CONFIG.motorCount = 1;
+  Object.assign(FC.CONFIG, {
+    flightControllerVersion: "4.5.0",
+    apiVersion: CONFIGURATOR.virtualApiVersion,
+    motorCount: 1,
+    servoCount: 4,
+    sampleRateHz: 4000,
+    activeSensors: 63, // activate all sensors
+  });
+
+  Object.assign(FC.ADVANCED_CONFIG, {
+    pid_process_denom: 2,
+  });
 
   // Configuration
   FC.SERIAL_CONFIG.ports = new Array(6);
@@ -244,9 +253,6 @@ export function applyVirtualConfig() {
     amperage: 3,
   });
 
-  FC.CONFIG.sampleRateHz = 4000;
-  FC.ADVANCED_CONFIG.pid_process_denom = 2;
-
   FC.BATTERY_CONFIG = {
     vbatmincellvoltage: 1,
     vbatmaxcellvoltage: 4,
@@ -310,9 +316,6 @@ export function applyVirtualConfig() {
     30, 31, 32, 33, 34, 35, 36, 37, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
   ];
 
-  // 11 1111 (pass bitchecks)
-  FC.CONFIG.activeSensors = 63;
-
   FC.MIXER_INPUTS = [
     { rate: 0, min: 0, max: 0 },
     { rate: 0, min: 0, max: 0 },
@@ -323,7 +326,6 @@ export function applyVirtualConfig() {
 
   FC.PID_PROFILE.pid_mode = 3;
   FC.RC_TUNING.rates_type = 4;
-  FC.CONFIG.servoCount = 4;
 }
 
 if (import.meta.hot) {
