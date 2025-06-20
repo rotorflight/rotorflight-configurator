@@ -4,6 +4,10 @@
   import { FC } from "@/js/fc.svelte.js";
   import { MSP } from "@/js/msp.svelte.js";
   import { CONFIGURATOR } from "@/js/data_storage.js";
+
+  let showFwVersion = $derived(
+    FC.CONFIG.buildVersion && FC.CONFIG.flightControllerIdentifier,
+  );
 </script>
 
 <div class="container">
@@ -22,7 +26,7 @@
 
   <div class="grow"></div>
 
-  {#if FC.CONFIG.buildVersion && FC.CONFIG.flightControllerIdentifier}
+  {#if showFwVersion}
     <span>
       {$i18n.t("versionLabelFirmware")}
       {FC.CONFIG.buildVersion}
