@@ -99,6 +99,55 @@ export function applyVirtualConfig() {
     rpm_min_hz: 20,
   });
 
+  // Motors
+  FC.MOTOR_DATA = new Array(8);
+  Object.assign(FC.MOTOR_CONFIG, {
+    mincommand: 1000,
+    minthrottle: 1070,
+    maxthrottle: 2000,
+    motor_pwm_protocol: 0,
+    motor_pwm_rate: 250,
+    motor_poles: [8, 8, 8, 8],
+    motor_rpm_lpf: [0, 0, 0, 0],
+    use_dshot_telemetry: false,
+    use_unsynced_pwm: false,
+    main_rotor_gear_ratio: [1, 9],
+    tail_rotor_gear_ratio: [1, 5],
+  });
+
+  FC.FEATURE_CONFIG.features.ESC_SENSOR = true;
+  FC.FEATURE_CONFIG.features.FREQ_SENSOR = true;
+  Object.assign(FC.ESC_SENSOR_CONFIG, {
+    protocol: 1,
+  });
+
+  Object.assign(FC.GOVERNOR, {
+    gov_mode: 3,
+    gov_handover_throttle: 20,
+    gov_zero_throttle_timeout: 30,
+    gov_lost_headspeed_timeout: 10,
+    gov_startup_time: 200,
+    gov_spoolup_time: 100,
+    gov_tracking_time: 20,
+    gov_recovery_time: 20,
+    gov_autorotation_timeout: 0,
+    gov_autorotation_bailout_time: 0,
+    gov_autorotation_min_entry_time: 50,
+    gov_rpm_filter: 10,
+    gov_pwr_filter: 5,
+    gov_tta_filter: 0,
+    gov_ff_filter: 10,
+  });
+
+  Object.assign(FC.MOTOR_TELEMETRY_DATA, {
+    rpm: [10_000],
+    voltage: [11_000],
+    current: [15_000],
+    temperature: [250],
+    temperature2: [250],
+    invalidPercent: [500],
+  });
+
   FC.BEEPER_CONFIG.beepers = new Beepers(FC.CONFIG);
   FC.BEEPER_CONFIG.dshotBeaconConditions = new Beepers(FC.CONFIG, [
     "RX_LOST",
@@ -106,21 +155,6 @@ export function applyVirtualConfig() {
   ]);
 
   FC.MIXER_CONFIG.mixer = 3;
-
-  FC.MOTOR_DATA = new Array(8);
-  FC.MOTOR_CONFIG = {
-    mincommand: 0,
-    minthrottle: 0,
-    maxthrottle: 0,
-    motor_pwm_protocol: 0,
-    motor_pwm_rate: 250,
-    motor_poles: [8, 8, 8, 8],
-    motor_rpm_lpf: [0, 0, 0, 0],
-    use_dshot_telemetry: false,
-    use_unsynced_pwm: false,
-    main_rotor_gear_ratio: [1, 1],
-    tail_rotor_gear_ratio: [1, 1],
-  };
 
   FC.SERVO_CONFIG = new Array(8);
   for (let i = 0; i < FC.SERVO_CONFIG.length; i++) {
