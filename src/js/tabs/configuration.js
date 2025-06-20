@@ -703,9 +703,14 @@ tab.initialize = function (callback) {
 };
 
 tab.initModel = function () {
-    this.model = new Model($('.model-and-info #canvas_wrapper'), $('.model-and-info #canvas'));
-
-    $(window).on('resize', $.proxy(this.model.resize, this.model));
+    try {
+        this.model = new Model($('.model-and-info #canvas_wrapper'), $('.model-and-info #canvas'));
+        $('#canvas_wrapper .webgl-error').hide();
+        $(window).on('resize', $.proxy(this.model.resize, this.model));
+    } catch (err) {
+        console.log("Error initialising model", err);
+        $('#canvas_wrapper .webgl-error').show();
+    }
 };
 
 tab.renderModel = function () {
@@ -713,7 +718,7 @@ tab.renderModel = function () {
           y = (-FC.SENSOR_DATA.kinematics[2] - this.yaw_fix) * 0.017453292519943295,
           z = (-FC.SENSOR_DATA.kinematics[0]) * 0.017453292519943295;
 
-    this.model.rotateTo(x, y, z);
+    this.model?.rotateTo(x, y, z);
 };
 
 tab.cleanup = function (callback) {

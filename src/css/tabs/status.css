@@ -53,6 +53,17 @@
     border-radius: 5px;
 }
 
+.tab-status #canvas_wrapper .webgl-error {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--mutedText);
+    font-size: 16px;
+    font-weight: 600;
+}
+
 .tab-status #canvas {
     width: 100% !important;
     height: 100% !important;
