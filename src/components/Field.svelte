@@ -12,7 +12,7 @@
       {@html $i18n.t(label)}
     </span>
     {#if unit}
-      <span class="units"> [{unit}]</span>
+      <span class="units">[ {unit} ]</span>
     {/if}
   </label>
   <div class="control">
@@ -48,6 +48,14 @@
 
   .units {
     margin-left: 8px;
+
+    :global(html[data-theme="light"]) & {
+      color: hsl(20, 80%, 30%);
+    }
+
+    :global(html[data-theme="dark"]) & {
+      color: hsl(20, 50%, 70%);
+    }
   }
 
   @media only screen and (max-width: 480px) {
