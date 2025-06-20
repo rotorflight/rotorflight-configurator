@@ -523,7 +523,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.ESC_SENSOR_CONFIG.hw4_current_gain = data.readU8();
                 FC.ESC_SENSOR_CONFIG.hw4_voltage_gain = data.readU8();
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
-                    FC.ESC_SENSOR_CONFIG.pinswap = data.readU8();
+                    FC.ESC_SENSOR_CONFIG.pinswap = Boolean(data.readU8());
                 }
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                     FC.ESC_SENSOR_CONFIG.voltage_correction = data.read8();
@@ -1921,7 +1921,7 @@ MspHelper.prototype.crunch = function(code) {
                   .push8(FC.ESC_SENSOR_CONFIG.hw4_current_gain)
                   .push8(FC.ESC_SENSOR_CONFIG.hw4_voltage_gain);
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
-                buffer.push8(FC.ESC_SENSOR_CONFIG.pinswap);
+                buffer.push8(Number(FC.ESC_SENSOR_CONFIG.pinswap));
             }
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                 buffer.push8(FC.ESC_SENSOR_CONFIG.voltage_correction)

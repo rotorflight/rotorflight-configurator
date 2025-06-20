@@ -42,10 +42,6 @@
     align-self: stretch;
   }
 
-  .control {
-    max-width: 200px;
-  }
-
   .units {
     margin-left: 8px;
 

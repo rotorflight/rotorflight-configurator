@@ -18,9 +18,11 @@
 !/src/js/port_usage.js
 !/src/js/presets/**/*
 !/src/js/tabs/gyro.js
+!/src/js/tabs/motors.js
 !/src/js/tabs/presets.js
 !/src/js/virtual_fc.js
 !/src/tabs/gyro/filter_config.js
+!/src/tabs/motors/**/*.js
 !/src/tabs/presets/**/*
 !/src/tabs/receiver/**/*.js
 

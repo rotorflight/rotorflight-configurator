@@ -138,6 +138,7 @@ export function applyVirtualConfig() {
   Object.assign(FC.GOVERNOR, {
     gov_mode: 3,
     gov_handover_throttle: 20,
+    gov_spoolup_min_throttle: 5,
     gov_zero_throttle_timeout: 30,
     gov_lost_headspeed_timeout: 10,
     gov_startup_time: 200,
