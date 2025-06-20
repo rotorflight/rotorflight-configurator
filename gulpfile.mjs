@@ -433,8 +433,8 @@ function build_redist_exe() {
     // Extra parameters to replace inside the iss file
     `/Dversion=${pkg.version}`,
     `/DarchName=${arch}`,
-    `/DarchAllowed=${arch === "win32" ? "x86 x64" : "x64"}`,
-    `/DarchInstallIn64bit=${arch === "ia32" ? "" : "x64"}`,
+    `/DarchAllowed=${arch === "x86" ? "x86 x64" : "x64"}`,
+    `/DarchInstallIn64bit=${arch === "x86" ? "" : "x64"}`,
     `/DsourceFolder=${context.appdir}`,
     `/DtargetFolder=${REDIST_DIR}`,
 
