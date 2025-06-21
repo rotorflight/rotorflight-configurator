@@ -32,10 +32,6 @@ importers:
       switchery-latest:
         specifier: ^0.8.2
         version: 0.8.2
-    optionalDependencies:
-      appdmg:
-        specifier: ^0.6.4
-        version: 0.6.6
     devDependencies:
       '@eslint/js':
         specifier: ^9.17.0
@@ -158,8 +154,8 @@ importers:
         specifier: ^2.2.2
         version: 2.2.2(i18next@23.15.1)(svelte@5.17.3)
       three:
-        specifier: ^0.169.0
-        version: 0.169.0
+        specifier: <0.163.0
+        version: 0.162.0
       vinyl-source-stream:
         specifier: ^2.0.0
         version: 2.0.0
@@ -169,6 +165,10 @@ importers:
       wnumb:
         specifier: ^1.2.0
         version: 1.2.0
+    optionalDependencies:
+      appdmg:
+        specifier: ^0.6.4
+        version: 0.6.6
 
 packages:
 
@@ -4301,8 +4301,8 @@ packages:
     resolution: {integrity: sha512-mk82dS8eRABNbeVJrEiN5/UMSCliINAuz8mkUwH4SwslkNP//gbEzlWNS5au0z5Dpx40SQxzqZevZkn+WYJ9Dw==}
     engines: {node: '>=8'}
 
-  three@0.169.0:
-    resolution: {integrity: sha512-Ed906MA3dR4TS5riErd4QBsRGPcx+HBDX2O5yYE5GqJeFQTPU+M56Va/f/Oph9X7uZo3W3o4l2ZhBZ6f6qUv0w==}
+  three@0.162.0:
+    resolution: {integrity: sha512-xfCYj4RnlozReCmUd+XQzj6/5OjDNHBy5nT6rVwrOKGENAvpXe2z1jL+DZYaMu4/9pNsjH/4Os/VvS9IrH7IOQ==}
 
   through2-filter@3.0.0:
     resolution: {integrity: sha512-jaRjI2WxN3W1V8/FMZ9HKIBXixtiqs3SQSX4/YGIiP3gL6djW48VoZq9tDqeCWs3MT8YY5wb/zli8VW8snY1CA==}
@@ -9269,7 +9269,7 @@ snapshots:
 
   textextensions@3.3.0: {}
 
-  three@0.169.0: {}
+  three@0.162.0: {}
 
   through2-filter@3.0.0:
     dependencies:
