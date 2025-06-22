@@ -139,7 +139,7 @@
     }
 
     .handle {
-      padding: 0 16px;
+      padding: 0 28px;
     }
   }
 </style>
