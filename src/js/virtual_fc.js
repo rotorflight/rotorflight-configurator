@@ -4,7 +4,10 @@ export function applyVirtualConfig() {
   FC.resetState();
 
   Object.assign(FC.CONFIG, {
-    flightControllerVersion: "4.5.0",
+    targetName: "VirtualFC",
+    buildVersion: CONFIGURATOR.virtualFwVersion,
+    flightControllerVersion: CONFIGURATOR.virtualFwVersion,
+    flightControllerIdentifier: "RTFL",
     apiVersion: CONFIGURATOR.virtualApiVersion,
     motorCount: 1,
     servoCount: 4,
