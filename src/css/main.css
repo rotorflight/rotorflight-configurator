@@ -1069,7 +1069,6 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 30px;
     line-height: 30px;
     display: block;
-    text-shadow: 0 1px rgba(0, 0, 0, 0.45);
     transition: none;
     border-top: solid 1px rgba(255, 255, 255, 0.05);
     /* following is just for a graceful degradation */
@@ -1094,8 +1093,6 @@ input[type="number"]::-webkit-inner-spin-button {
     background-color: var(--accent);
     color: #000;
     transition: none;
-    text-shadow: 0 1px rgba(255, 255, 255, 0.45);
-
 }
 
 #tabs li.active a:hover {
