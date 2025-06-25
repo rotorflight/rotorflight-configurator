@@ -5,6 +5,7 @@ export function applyVirtualConfig() {
 
   Object.assign(FC.CONFIG, {
     targetName: "VirtualFC",
+    name: "VirtualFC",
     buildVersion: CONFIGURATOR.virtualFwVersion,
     flightControllerVersion: CONFIGURATOR.virtualFwVersion,
     flightControllerIdentifier: "RTFL",
