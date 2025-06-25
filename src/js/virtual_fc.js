@@ -176,7 +176,7 @@ export function applyVirtualConfig() {
     supported: true,
     sectors: 1024,
     totalSize: 128 * 1024 * 1024,
-    usedSize: 12 * 1024 * 1024,
+    usedSize: 64 * 1024 * 1024,
   });
 
   Object.assign(FC.SDCARD, {
