@@ -1,4 +1,6 @@
-export const MSP = $state({
+let packet_error = $state(0);
+
+export const MSP = {
     symbols: {
         BEGIN: '$'.charCodeAt(0),
         PROTO_V1: 'M'.charCodeAt(0),
@@ -45,7 +47,7 @@ export const MSP = $state({
     crcError:                   false,
 
     callbacks:                  [],
-    packet_error:               0,
+    packet_error,
     unsupported:                0,
 
     last_received_timestamp:   null,
@@ -409,4 +411,4 @@ export const MSP = $state({
 
         this.callbacks_cleanup();
     }
-});
+};
