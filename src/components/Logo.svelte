@@ -1,5 +1,8 @@
 <script>
+  import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
+
+  let hardwareName = $derived(FC.getHardwareName());
 </script>
 
 <div class="logo">
@@ -13,9 +16,9 @@
         {FC.CONFIG.flightControllerIdentifier}
       </span>
     {/if}
-    {#if FC.CONFIG.hardwareName}
+    {#if hardwareName}
       <span>
-        {$i18n.t("versionLabelTarget")}: {FC.CONFIG.hardwareName}
+        {$i18n.t("versionLabelTarget")}: {hardwareName}
       </span>
     {/if}
   </div>
