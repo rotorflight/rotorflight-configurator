@@ -16,12 +16,13 @@ export const API_VERSION_1_44 = '1.44.0';
 export const API_VERSION_12_6 = '12.6.0';
 export const API_VERSION_12_7 = '12.7.0';
 export const API_VERSION_12_8 = '12.8.0';
+export const API_VERSION_12_9 = '12.9.0';
 
 export const API_VERSION_RTFL_MIN = API_VERSION_12_6;
-export const API_VERSION_RTFL_MAX = API_VERSION_12_8;
+export const API_VERSION_RTFL_MAX = API_VERSION_12_9;
 
 export const FW_VERSION_RTFL_MIN = '4.3.0-0';
-export const FW_VERSION_RTFL_MAX = '4.5.99';
+export const FW_VERSION_RTFL_MAX = '4.6.99';
 
 export const CONFIGURATOR = {
     // all versions are specified and compared using semantic versioning http://semver.org/
