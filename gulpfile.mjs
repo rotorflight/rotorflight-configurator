@@ -44,6 +44,7 @@ const NWJS_ARCH = {
   x86_64: "x64",
   arm64: "arm64",
 };
+const NWJS_VERSION_MANIFEST = "https://nwjs.io/versions.json";
 
 const context = {};
 parseArgs();
@@ -175,6 +176,7 @@ function build_app_nwjs() {
       cacheDir: NWJS_CACHE_DIR,
       glob: false,
       srcDir: BUNDLE_DIR,
+      manifestUrl: NWJS_VERSION_MANIFEST,
     }),
   );
 }
@@ -522,6 +524,7 @@ function run_nwjs_dev_client() {
       cacheDir: NWJS_CACHE_DIR,
       glob: false,
       srcDir: ".",
+      manifestUrl: NWJS_VERSION_MANIFEST,
     }),
   );
 }
