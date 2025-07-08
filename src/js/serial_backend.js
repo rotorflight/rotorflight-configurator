@@ -75,6 +75,7 @@ export function initializeSerialBackend() {
                     if (selectedPort.data().isVirtual) {
                         CONFIGURATOR.virtualMode = true;
                         CONFIGURATOR.virtualApiVersion = $('#firmware-version-dropdown :selected').val();
+                        CONFIGURATOR.virtualFwVersion = $('#firmware-version-dropdown :selected').data('fw');
 
                         serial.connect('virtual', {}, onOpenVirtual);
                     } else {
