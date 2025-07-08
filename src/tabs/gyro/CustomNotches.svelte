@@ -100,7 +100,7 @@
     class={["header", multiAxis && "multi-axis"]}
     style:border-color={axisColor}
   >
-    <span class="title">{$i18n.t("gyroRpmFilterBanks")}</span>
+    <div class="title">{$i18n.t("gyroRpmFilterBanks")}</div>
     {#if notches && multiAxis}
       <ul>
         {#each axisProps as axisProp, i (axisProp)}
@@ -212,25 +212,7 @@
   }
 
   .header {
-    display: flex;
-    align-items: end;
-    flex-wrap: wrap;
-    border-bottom-width: 1px;
-    border-style: solid;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-
-    :global(html[data-theme="light"]) & {
-      color: var(--color-neutral-900);
-      background-color: var(--color-neutral-100);
-      border-color: var(--color-neutral-400);
-    }
-
-    :global(html[data-theme="dark"]) & {
-      color: var(--color-neutral-100);
-      background-color: var(--color-neutral-900);
-      border-color: var(--color-neutral-600);
-    }
+    @extend %section-header;
   }
 
   .header ul {
@@ -335,15 +317,8 @@
     }
 
     .header {
-      padding-top: 16px;
-
-      :global(html[data-theme="light"]) & {
-        background: none;
-      }
-
-      :global(html[data-theme="dark"]) & {
-        background: none;
-      }
+      display: block;
+      height: initial;
     }
 
     .header ul {
@@ -361,10 +336,6 @@
         width: calc(100% / 3);
         line-height: 2rem;
       }
-    }
-
-    .title {
-      padding: 8px;
     }
 
     .notch-wrapper {

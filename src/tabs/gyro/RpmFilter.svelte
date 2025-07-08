@@ -26,7 +26,9 @@
 </script>
 
 <Section label="gyroRpmFilterSettings" summary="gyroRpmFilterHelp">
-  <WarningNote message="gyroRpmFilterConfigNote" />
+  <div class="warning-container">
+    <WarningNote message="gyroRpmFilterConfigNote" />
+  </div>
 
   <SubSection>
     <Field id="rpm-filter-enable" label="genericEnable">
@@ -166,6 +168,10 @@
     font-weight: 600;
     grid-column: 1 / -1;
     margin-top: 8px;
+  }
+
+  .warning-container {
+    margin-top: 4px;
   }
 
   @media only screen and (max-width: 480px) {
