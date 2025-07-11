@@ -83,3 +83,373 @@ html[data-theme="dark"] .noUi-target[disabled] .noUi-handle:after {
   border-color: #888;
   background: #888;
 }
+
+
+/* SVELTE THEME */
+
+.svelte-slide-target,
+.svelte-slide-target * {
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -ms-touch-action: none;
+  touch-action: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.svelte-slide-target {
+  position: relative;
+}
+.svelte-slide-base,
+.svelte-slide-connects {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+/* Wrapper for all connect elements.
+ */
+.svelte-slide-connects {
+  overflow: hidden;
+  z-index: 0;
+}
+.svelte-slide-connect,
+.svelte-slide-origin {
+  will-change: transform;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  -ms-transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  -webkit-transform-style: preserve-3d;
+  transform-origin: 0 0;
+  transform-style: flat;
+}
+/* Offset direction
+ */
+.svelte-slide-txt-dir-rtl.svelte-slide-horizontal .svelte-slide-origin {
+  left: 0;
+  right: auto;
+}
+/* Give origins 0 height/width so they don't interfere with clicking the
+ * connect elements.
+ */
+.svelte-slide-vertical .svelte-slide-origin {
+  top: -100%;
+  width: 0;
+}
+.svelte-slide-horizontal .svelte-slide-origin {
+  height: 0;
+}
+.svelte-slide-handle {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+}
+.svelte-slide-touch-area {
+  height: 100%;
+  width: 100%;
+}
+.svelte-slide-state-tap .svelte-slide-connect,
+.svelte-slide-state-tap .svelte-slide-origin {
+  -webkit-transition: transform 0.3s;
+  transition: transform 0.3s;
+}
+.svelte-slide-state-drag * {
+  cursor: inherit !important;
+}
+/* Slider size and handle placement;
+ */
+.svelte-slide-horizontal {
+  height: 18px;
+}
+.svelte-slide-horizontal .svelte-slide-handle {
+  width: 34px;
+  height: 28px;
+  right: -17px;
+  top: -6px;
+}
+.svelte-slide-vertical {
+  width: 18px;
+}
+.svelte-slide-vertical .svelte-slide-handle {
+  width: 28px;
+  height: 34px;
+  right: -6px;
+  bottom: -17px;
+}
+.svelte-slide-txt-dir-rtl.svelte-slide-horizontal .svelte-slide-handle {
+  left: -17px;
+  right: auto;
+}
+/* Styling;
+ * Giving the connect element a border radius causes issues with using transform: scale
+ */
+.svelte-slide-target {
+  background: #fafafa;
+  border-radius: 2px;
+  border: 1px solid #d3d3d3;
+  box-shadow:
+    inset 0 1px 1px #f0f0f0,
+    0 3px 6px -5px #bbb;
+}
+.svelte-slide-connect {
+  background: #3fb8af;
+}
+/* Handles and cursors;
+ */
+.svelte-slide-draggable {
+  cursor: ew-resize;
+}
+.svelte-slide-vertical .svelte-slide-draggable {
+  cursor: ns-resize;
+}
+.svelte-slide-handle {
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  background: #fff;
+  cursor: default;
+  box-shadow:
+    inset 0 0 1px #fff,
+    inset 0 1px 7px #ebebeb,
+    0 3px 6px -3px #bbb;
+}
+.svelte-slide-active {
+  box-shadow:
+    inset 0 0 1px #fff,
+    inset 0 1px 7px #ddd,
+    0 3px 6px -3px #bbb;
+}
+/* Handle stripes;
+ */
+.svelte-slide-handle:before,
+.svelte-slide-handle:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 14px;
+  width: 1px;
+  background: #e8e7e6;
+  left: 14px;
+  top: 6px;
+}
+.svelte-slide-handle:after {
+  left: 17px;
+}
+.svelte-slide-vertical .svelte-slide-handle:before,
+.svelte-slide-vertical .svelte-slide-handle:after {
+  width: 14px;
+  height: 1px;
+  left: 6px;
+  top: 14px;
+}
+.svelte-slide-vertical .svelte-slide-handle:after {
+  top: 17px;
+}
+/* Disabled state;
+ */
+[disabled] .svelte-slide-connect {
+  background: #b8b8b8;
+}
+[disabled].svelte-slide-target,
+[disabled].svelte-slide-handle,
+[disabled] .svelte-slide-handle {
+  cursor: not-allowed;
+}
+/* Base;
+ *
+ */
+.svelte-slide-pips,
+.svelte-slide-pips * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.svelte-slide-pips {
+  position: absolute;
+  color: #999;
+}
+/* Values;
+ *
+ */
+.svelte-slide-value {
+  position: absolute;
+  white-space: nowrap;
+  text-align: center;
+}
+.svelte-slide-value-sub {
+  color: #ccc;
+  font-size: 10px;
+}
+/* Markings;
+ *
+ */
+.svelte-slide-marker {
+  position: absolute;
+  background: #ccc;
+}
+.svelte-slide-marker-sub {
+  background: #aaa;
+}
+.svelte-slide-marker-large {
+  background: #aaa;
+}
+/* Horizontal layout;
+ *
+ */
+.svelte-slide-pips-horizontal {
+  padding: 10px 0;
+  height: 80px;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+.svelte-slide-value-horizontal {
+  -webkit-transform: translate(-50%, 50%);
+  transform: translate(-50%, 50%);
+}
+.svelte-slide-rtl .svelte-slide-value-horizontal {
+  -webkit-transform: translate(50%, 50%);
+  transform: translate(50%, 50%);
+}
+.svelte-slide-marker-horizontal.svelte-slide-marker {
+  margin-left: -1px;
+  width: 2px;
+  height: 5px;
+}
+.svelte-slide-marker-horizontal.svelte-slide-marker-sub {
+  height: 10px;
+}
+.svelte-slide-marker-horizontal.svelte-slide-marker-large {
+  height: 15px;
+}
+/* Vertical layout;
+ *
+ */
+.svelte-slide-pips-vertical {
+  padding: 0 10px;
+  height: 100%;
+  top: 0;
+  left: 100%;
+}
+.svelte-slide-value-vertical {
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  padding-left: 25px;
+}
+.svelte-slide-rtl .svelte-slide-value-vertical {
+  -webkit-transform: translate(0, 50%);
+  transform: translate(0, 50%);
+}
+.svelte-slide-marker-vertical.svelte-slide-marker {
+  width: 5px;
+  height: 2px;
+  margin-top: -1px;
+}
+.svelte-slide-marker-vertical.svelte-slide-marker-sub {
+  width: 10px;
+}
+.svelte-slide-marker-vertical.svelte-slide-marker-large {
+  width: 15px;
+}
+.svelte-slide-tooltip {
+  display: block;
+  position: absolute;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  background: #fff;
+  color: #000;
+  padding: 5px;
+  text-align: center;
+  white-space: nowrap;
+}
+.svelte-slide-horizontal .svelte-slide-tooltip {
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  left: 50%;
+  bottom: 120%;
+}
+.svelte-slide-vertical .svelte-slide-tooltip {
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  top: 50%;
+  right: 120%;
+}
+.svelte-slide-horizontal .svelte-slide-origin > .svelte-slide-tooltip {
+  -webkit-transform: translate(50%, 0);
+  transform: translate(50%, 0);
+  left: auto;
+  bottom: 10px;
+}
+.svelte-slide-vertical .svelte-slide-origin > .svelte-slide-tooltip {
+  -webkit-transform: translate(0, -18px);
+  transform: translate(0, -18px);
+  top: auto;
+  right: 28px;
+}
+
+.svelte-slide-base {
+  background: var(--color-slider-background);
+}
+
+.svelte-slide-target {
+  border: 1px solid var(--color-slider-border);
+  box-shadow: none;
+}
+
+.svelte-slide-horizontal .svelte-slide-handle {
+  height: 28px;
+  width: 28px;
+  right: -14px;
+  border-radius: 14px;
+
+  background: var(--color-slider-handle-background);
+  border: 1px solid var(--color-slider-handle-border);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 5px;
+}
+
+.svelte-slide-connect,
+.svelte-slide-origin {
+  // -webkit-transition: transform 200ms;
+  // transition: transform 200ms;
+}
+
+.svelte-slide-handle:before,
+.svelte-slide-handle:after {
+  background: var(--color-slider-foreground);
+  height: 10px;
+  width: 2px;
+  top: 16px;
+  left: 12px;
+}
+
+.svelte-slide-pips-horizontal {
+  padding: 5px 0 0 0;
+  color: var(--color-slider-foreground);
+}
+
+.svelte-slide-marker-horizontal.svelte-slide-marker-large {
+  height: 10px;
+}
+
+.svelte-slide-value-horizontal {
+  margin-top: 5px;
+  color: var(--color-slider-text);
+}
+
+.svelte-slide-marker {
+  background: var(--color-slider-foreground);
+}
+
+.svelte-slide-marker-large {
+  background: var(--color-slider-foreground);
+}
+
+.svelte-slide-connect {
+  background: var(--color-slider-connect);
+}

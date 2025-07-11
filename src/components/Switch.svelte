@@ -1,9 +1,15 @@
 <script>
-  let { id, checked = $bindable(), disabled = false } = $props();
+  let { id, checked = $bindable(), onchange, disabled = false } = $props();
 </script>
 
 <label class="container">
-  <input {id} type="checkbox" bind:checked {disabled} />
+  <input
+    {id}
+    type="checkbox"
+    bind:checked
+    {disabled}
+    onchange={(e) => onchange?.(e)}
+  />
   <span class={["slider", disabled && "disabled"]}></span>
 </label>
 
