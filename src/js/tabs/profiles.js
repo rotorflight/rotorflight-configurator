@@ -124,12 +124,15 @@ tab.initialize = function (callback) {
         else if (FC.PID_PROFILE.pid_mode == 3) {
             //show_warning('profilesPIDModeThreeWarning');
         }
-        else if (FC.PID_PROFILE.pid_mode > 3) {
+        else if (FC.PID_PROFILE.pid_mode == 4) {
+            show_warning('profilesPIDModeFourWarning');
+        }
+        else if (FC.PID_PROFILE.pid_mode > 4) {
             show_warning('profilesPIDModeCustomWarning');
             $('.tab-profiles .pid_config').hide();
         }
 
-        $('.tab-profiles .HSI').toggle(FC.PID_PROFILE.pid_mode == 3);
+        $('.tab-profiles .HSI').toggle(FC.PID_PROFILE.pid_mode >= 3);
 
         $('.tab-profiles input[id="gyroCutoffRoll"]').val(FC.PID_PROFILE.gyroCutoffRoll).change();
         $('.tab-profiles input[id="gyroCutoffPitch"]').val(FC.PID_PROFILE.gyroCutoffPitch).change();

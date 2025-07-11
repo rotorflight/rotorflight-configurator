@@ -1607,7 +1607,10 @@
         "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>."
     },
     "profilesPIDModeThreeWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b> with HSI."
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>PID Mode 3</b>."
+    },
+    "profilesPIDModeFourWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the experimental <b>PID Mode 4</b>."
     },
     "profilesPIDModeCustomWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The PID Controller is configured manually with parameters that can't be expressed here.<br>Please use the <b>CLI</b> to change the PID settings."
