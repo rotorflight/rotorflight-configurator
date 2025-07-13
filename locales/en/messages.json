@@ -3331,7 +3331,7 @@
         "message": "Current"
     },
     "motorTemperature": {
-        "message": "Temp"
+        "message": "Temp {{number}}"
     },
     "motorDshotError": {
         "message": "DShot RPM Error Rate"

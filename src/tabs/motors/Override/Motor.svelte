@@ -161,13 +161,13 @@
         value={(100 * current) / currentMax}
       />
       <Meter
-        title={$i18n.t("motorTemperature")}
+        title={$i18n.t("motorTemperature", { number: 1 })}
         rightLabel={`${temp1Max} °C`}
         leftLabel={`${temp1.toFixed(1)} °C`}
         value={(100 * temp1) / temp1Max}
       />
       <Meter
-        title={$i18n.t("motorTemperature")}
+        title={$i18n.t("motorTemperature", { number: 2 })}
         rightLabel={`${temp2Max} °C`}
         leftLabel={`${temp2.toFixed(1)} °C`}
         value={(100 * temp2) / temp2Max}
