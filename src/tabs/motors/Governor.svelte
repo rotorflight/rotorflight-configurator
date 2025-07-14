@@ -36,7 +36,9 @@
     });
   }
 
-  let enabled = $derived(FC.GOVERNOR.gov_mode > 0);
+  let enabled = $derived(
+    FC.FEATURE_CONFIG.features.GOVERNOR && FC.GOVERNOR.gov_mode > 0,
+  );
 </script>
 
 <Section label="govFeatures">
@@ -49,7 +51,17 @@
       {#snippet tooltip()}
         <Tooltip help="govModeHelp" />
       {/snippet}
-      <select id="gov-mode" bind:value={FC.GOVERNOR.gov_mode}>
+      <select
+        id="gov-mode"
+        bind:value={
+          () =>
+            FC.FEATURE_CONFIG.features.GOVERNOR ? FC.GOVERNOR.gov_mode : 0,
+          (v) => {
+            FC.GOVERNOR.gov_mode = v;
+            FC.FEATURE_CONFIG.features.GOVERNOR = v > 0;
+          }
+        }
+      >
         {#each govModes as mode, index (mode)}
           <option value={index}>{mode}</option>
         {/each}
