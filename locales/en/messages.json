@@ -3387,6 +3387,9 @@
     "govModeHelp": {
         "message": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
     },
+    "govModeHelp2": {
+        "message": "<strong>OFF:</strong> TODO<br><br><strong>EXTERNAL:</strong> TODO<br><br><strong>ELECTRIC:</strong> TODO<br><br><strong>NITRO:</strong> TODO"
+    },
     "govHandoverThrottle": {
         "message": "Handover Throttle"
     },
@@ -3447,6 +3450,12 @@
     "govZeroThrottleTimeoutHelp": {
         "message": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup."
     },
+    "govThrottleHoldTimeout": {
+        "message": "Throttle Hold Timeout"
+    },
+    "govThrottleHoldTimeoutHelp": {
+        "message": "TODO"
+    },
     "govLostHeadspeedTimeout": {
         "message": "Headspeed Signal Timeout"
     },
@@ -3476,6 +3485,12 @@
     },
     "govFFFilterHzHelp": {
         "message": "Cutoff for the cyclic/collective precompensation lowpass filter."
+    },
+    "govDCutoff": {
+        "message": "D-Term Cutoff"
+    },
+    "govDCutoffHelp": {
+        "message": "TODO"
     },
     "govHeadspeed": {
         "message": "Full headspeed"

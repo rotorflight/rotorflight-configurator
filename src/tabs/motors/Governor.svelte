@@ -3,7 +3,10 @@
   import { slide } from "svelte/transition";
 
   import { FC } from "@/js/fc.svelte.js";
-  import { API_VERSION_12_8 } from "@/js/configurator.svelte.js";
+  import {
+    API_VERSION_12_8,
+    API_VERSION_12_9,
+  } from "@/js/configurator.svelte.js";
 
   import Field from "@/components/Field.svelte";
   import InfoNote from "@/components/notes/InfoNote.svelte";
@@ -12,7 +15,13 @@
   import SubSection from "@/components/SubSection.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
 
-  const govModes = ["OFF", "PASSTHROUGH", "STANDARD", "MODE1", "MODE2"];
+  let govModes = $derived.by(() => {
+    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+      return ["OFF", "EXTERNAL", "ELECTRIC", "NITRO"];
+    }
+
+    return ["OFF", "PASSTHROUGH", "STANDARD", "MODE1", "MODE2"];
+  });
 
   const fields = {};
   for (const field of [
@@ -25,6 +34,8 @@
     "gov_autorotation_min_entry_time",
     "gov_zero_throttle_timeout",
     "gov_lost_headspeed_timeout",
+    "gov_throttle_hold_timeout",
+    "gov_d_cutoff",
   ]) {
     Object.defineProperty(fields, field, {
       get() {
@@ -51,7 +62,11 @@
   <SubSection>
     <Field id="gov-mode" label="govMode">
       {#snippet tooltip()}
-        <Tooltip help="govModeHelp" />
+        <Tooltip
+          help={semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)
+            ? "govModeHelp2"
+            : "govModeHelp"}
+        />
       {/snippet}
       <select
         id="gov-mode"
@@ -93,7 +108,7 @@
               bind:value={FC.GOVERNOR.gov_handover_throttle}
             />
           </Field>
-          {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)}
+          {#if semver.eq(FC.CONFIG.apiVersion, API_VERSION_12_8)}
             <Field
               id="gov-spoolup-min-throttle"
               label="govSpoolupMinThrottle"
@@ -116,50 +131,75 @@
               />
             </Field>
           {/if}
-          <Field
-            id="gov-zero-throttle-timeout"
-            label="govZeroThrottleTimeout"
-            unit="s"
-          >
-            {#snippet tooltip()}
-              <Tooltip
-                help="govZeroThrottleTimeoutHelp"
-                attrs={[
-                  { name: "genericDefault", value: "3s" },
-                  { name: "genericRange", value: "0s - 10s" },
-                ]}
-              />
-            {/snippet}
-            <NumberInput
+          {#if semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+            <Field
               id="gov-zero-throttle-timeout"
-              min="0"
-              max="10"
-              step="0.1"
-              bind:value={fields.gov_zero_throttle_timeout}
-            />
-          </Field>
-          <Field
-            id="gov-lost-headspeed-timeout"
-            label="govLostHeadspeedTimeout"
-            unit="s"
-          >
-            {#snippet tooltip()}
-              <Tooltip
-                help="govLostHeadspeedTimeoutHelp"
-                attrs={[
-                  { name: "genericDefault", value: "1s" },
-                  { name: "genericRange", value: "0s - 10s" },
-                ]}
+              label="govZeroThrottleTimeout"
+              unit="s"
+            >
+              {#snippet tooltip()}
+                <Tooltip
+                  help="govZeroThrottleTimeoutHelp"
+                  attrs={[
+                    { name: "genericDefault", value: "3s" },
+                    { name: "genericRange", value: "0s - 10s" },
+                  ]}
+                />
+              {/snippet}
+              <NumberInput
+                id="gov-zero-throttle-timeout"
+                min="0"
+                max="10"
+                step="0.1"
+                bind:value={fields.gov_zero_throttle_timeout}
               />
-            {/snippet}
-            <NumberInput
+            </Field>
+            <Field
               id="gov-lost-headspeed-timeout"
-              min="0"
-              max="10"
-              step="0.1"
-              bind:value={fields.gov_lost_headspeed_timeout}
-            />
-          </Field>
+              label="govLostHeadspeedTimeout"
+              unit="s"
+            >
+              {#snippet tooltip()}
+                <Tooltip
+                  help="govLostHeadspeedTimeoutHelp"
+                  attrs={[
+                    { name: "genericDefault", value: "1s" },
+                    { name: "genericRange", value: "0s - 10s" },
+                  ]}
+                />
+              {/snippet}
+              <NumberInput
+                id="gov-lost-headspeed-timeout"
+                min="0"
+                max="10"
+                step="0.1"
+                bind:value={fields.gov_lost_headspeed_timeout}
+              />
+            </Field>
+          {:else}
+            <Field
+              id="gov-throttle-hold-timeout"
+              label="govThrottleHoldTimeout"
+              unit="s"
+            >
+              {#snippet tooltip()}
+                <Tooltip
+                  help="govThrottleHoldTimeoutHelp"
+                  attrs={[
+                    { name: "genericDefault", value: "5s" },
+                    { name: "genericRange", value: "0s - 25s" },
+                  ]}
+                />
+              {/snippet}
+              <NumberInput
+                id="gov-throttle-hold-timeout"
+                min="0"
+                max="25"
+                step="0.1"
+                bind:value={fields.gov_throttle_hold_timeout}
+              />
+            </Field>
+          {/if}
         </SubSection>
       </div>
     {/if}
@@ -242,71 +282,76 @@
             bind:value={fields.gov_recovery_time}
           />
         </Field>
-        <Field id="gov-auto-bailout-time" label="govAutoBailoutTime" unit="s">
-          {#snippet tooltip()}
-            <Tooltip
-              help="govAutoBailoutTimeHelp"
-              attrs={[
-                { name: "genericDefault", value: "0s" },
-                { name: "genericRange", value: "0s - 10s" },
-              ]}
+        {#if semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+          <Field id="gov-auto-bailout-time" label="govAutoBailoutTime" unit="s">
+            {#snippet tooltip()}
+              <Tooltip
+                help="govAutoBailoutTimeHelp"
+                attrs={[
+                  { name: "genericDefault", value: "0s" },
+                  { name: "genericRange", value: "0s - 10s" },
+                ]}
+              />
+            {/snippet}
+
+            <NumberInput
+              id="gov-auto-bailout-time"
+              min="0"
+              max="10"
+              step="0.1"
+              bind:value={fields.gov_autorotation_bailout_time}
             />
-          {/snippet}
-          <NumberInput
-            id="gov-auto-bailout-time"
-            min="0"
-            max="10"
-            step="0.1"
-            bind:value={fields.gov_autorotation_bailout_time}
-          />
-        </Field>
+          </Field>
+        {/if}
       </SubSection>
     </div>
-    <div transition:slide>
-      <SubSection label="govSectionAutorotation">
-        <Field id="gov-auto-timeout" label="govAutoTimeout" unit="s">
-          {#snippet tooltip()}
-            <Tooltip
-              help="govAutoTimeoutHelp"
-              attrs={[
-                { name: "genericDefault", value: "0s" },
-                { name: "genericRange", value: "0s - 60s" },
-              ]}
+    {#if semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+      <div transition:slide>
+        <SubSection label="govSectionAutorotation">
+          <Field id="gov-auto-timeout" label="govAutoTimeout" unit="s">
+            {#snippet tooltip()}
+              <Tooltip
+                help="govAutoTimeoutHelp"
+                attrs={[
+                  { name: "genericDefault", value: "0s" },
+                  { name: "genericRange", value: "0s - 60s" },
+                ]}
+              />
+            {/snippet}
+            <NumberInput
+              id="gov-auto-timeout"
+              type="number"
+              min="0"
+              max="60"
+              step="0.1"
+              bind:value={fields.gov_autorotation_timeout}
             />
-          {/snippet}
-          <NumberInput
-            id="gov-auto-timeout"
-            type="number"
-            min="0"
-            max="60"
-            step="0.1"
-            bind:value={fields.gov_autorotation_timeout}
-          />
-        </Field>
-        <Field
-          id="gov-auto-min-entry-time"
-          label="govAutoMinEntryTime"
-          unit="s"
-        >
-          {#snippet tooltip()}
-            <Tooltip
-              help="govAutoMinEntryTimeHelp"
-              attrs={[
-                { name: "genericDefault", value: "5s" },
-                { name: "genericRange", value: "0s - 60s" },
-              ]}
-            />
-          {/snippet}
-          <NumberInput
+          </Field>
+          <Field
             id="gov-auto-min-entry-time"
-            min="0"
-            max="60"
-            step="0.1"
-            bind:value={fields.gov_autorotation_min_entry_time}
-          />
-        </Field>
-      </SubSection>
-    </div>
+            label="govAutoMinEntryTime"
+            unit="s"
+          >
+            {#snippet tooltip()}
+              <Tooltip
+                help="govAutoMinEntryTimeHelp"
+                attrs={[
+                  { name: "genericDefault", value: "5s" },
+                  { name: "genericRange", value: "0s - 60s" },
+                ]}
+              />
+            {/snippet}
+            <NumberInput
+              id="gov-auto-min-entry-time"
+              min="0"
+              max="60"
+              step="0.1"
+              bind:value={fields.gov_autorotation_min_entry_time}
+            />
+          </Field>
+        </SubSection>
+      </div>
+    {/if}
     <div transition:slide>
       <SubSection label="govSectionFilters">
         <Field id="gov-headspeed-filter" label="govHeadspeedFilterHz" unit="Hz">
@@ -377,6 +422,26 @@
             bind:value={FC.GOVERNOR.gov_ff_filter}
           />
         </Field>
+        {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+          <Field id="gov-d-cutoff" label="govDCutoff" unit="Hz">
+            {#snippet tooltip()}
+              <Tooltip
+                help="govDCutoffHelp"
+                attrs={[
+                  { name: "genericDefault", value: "5Hz" },
+                  { name: "genericRange", value: "0Hz - 25Hz" },
+                ]}
+              />
+            {/snippet}
+            <NumberInput
+              id="gov-d-cutoff"
+              min="0"
+              max="25"
+              step="0.1"
+              bind:value={fields.gov_d_cutoff}
+            />
+          </Field>
+        {/if}
       </SubSection>
     </div>
   {/if}
