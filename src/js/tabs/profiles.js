@@ -411,6 +411,11 @@ tab.initialize = function (callback) {
     function process_html() {
         self.svelteComponent = mount(Governor, {
             target: document.querySelector("#svelte-gov-settings"),
+            props: {
+                onchange: () => {
+                    setChanged();
+                }
+            }
         });
 
         // translate to user-selected language

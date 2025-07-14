@@ -1,5 +1,7 @@
 <script>
+  import diff from "microdiff";
   import semver from "semver";
+  import { onMount } from "svelte";
 
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
@@ -20,6 +22,26 @@
     "SUSPEND",
     "BYPASS",
   ];
+
+  let { onchange } = $props();
+  let initialState;
+
+  function snapshotState() {
+    return $state.snapshot({
+      GOVERNOR: FC.GOVERNOR,
+    });
+  }
+
+  onMount(() => {
+    initialState = snapshotState();
+  });
+
+  $effect(() => {
+    const changes = diff(initialState, snapshotState());
+    if (changes.length > 0) {
+      onchange?.();
+    }
+  });
 </script>
 
 <Section label="govProfile">
