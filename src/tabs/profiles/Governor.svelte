@@ -97,6 +97,42 @@
         />
       </Field>
     {/if}
+    {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+      <Field id="gov-idle-throttle" label="govIdleThrottle" unit="%">
+        {#snippet tooltip()}
+          <Tooltip
+            help="govIdleThrottleHelp"
+            attrs={[
+              { name: "genericDefault", value: "0%" },
+              { name: "genericRange", value: "0% - 100%" },
+            ]}
+          />
+        {/snippet}
+        <NumberInput
+          id="gov-idle-throttle"
+          min="0"
+          max="100"
+          bind:value={FC.GOVERNOR.gov_idle_throttle}
+        />
+      </Field>
+      <Field id="gov-auto-throttle" label="govAutoThrottle" unit="%">
+        {#snippet tooltip()}
+          <Tooltip
+            help="govAutoThrottleHelp"
+            attrs={[
+              { name: "genericDefault", value: "0%" },
+              { name: "genericRange", value: "0% - 100%" },
+            ]}
+          />
+        {/snippet}
+        <NumberInput
+          id="gov-auto-throttle"
+          min="0"
+          max="100"
+          bind:value={FC.GOVERNOR.gov_auto_throttle}
+        />
+      </Field>
+    {/if}
   </SubSection>
   <SubSection label="PIDS">
     <Field id="gov-master-gain" label="govMasterGain">
@@ -239,42 +275,6 @@
     </Field>
   </SubSection>
   {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
-    <SubSection>
-      <Field id="gov-idle-throttle" label="govIdleThrottle" unit="%">
-        {#snippet tooltip()}
-          <Tooltip
-            help="govIdleThrottleHelp"
-            attrs={[
-              { name: "genericDefault", value: "0%" },
-              { name: "genericRange", value: "0% - 100%" },
-            ]}
-          />
-        {/snippet}
-        <NumberInput
-          id="gov-idle-throttle"
-          min="0"
-          max="100"
-          bind:value={FC.GOVERNOR.gov_idle_throttle}
-        />
-      </Field>
-      <Field id="gov-auto-throttle" label="govAutoThrottle" unit="%">
-        {#snippet tooltip()}
-          <Tooltip
-            help="govAutoThrottleHelp"
-            attrs={[
-              { name: "genericDefault", value: "0%" },
-              { name: "genericRange", value: "0% - 100%" },
-            ]}
-          />
-        {/snippet}
-        <NumberInput
-          id="gov-auto-throttle"
-          min="0"
-          max="100"
-          bind:value={FC.GOVERNOR.gov_auto_throttle}
-        />
-      </Field>
-    </SubSection>
     <SubSection label="flags">
       {#each flags as flag, i (flag)}
         <Field id={`gov-flag-${flag}`} label={`govFlag_${flag}`}>
