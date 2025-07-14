@@ -20,6 +20,7 @@ const tab = {
 
 function getFunctions() {
     const gte12_8 = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8);
+    const gte12_9 = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9);
 
     return [
         { id: 0,    name: 'None',                       min: 0,     max: 100,    ticks: 10,   pips: [ 0, 20, 40, 60, 80, 100 ] },
@@ -98,6 +99,8 @@ function getFunctions() {
         { id: 73,   name: 'YawDynDeadbandGain',         min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
         { id: 74,   name: 'YawDynDeadbandFilter',       min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
         { id: 75,   name: 'YawPrecompCutoff',           min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_8 },
+        { id: 76,   name: 'GovIdleThrottle',            min: 0,     max: 100,    ticks: 5,    pips: [ 0, 20, 40, 60, 80, 100 ], hide: !gte12_9 },
+        { id: 77,   name: 'GovAutoThrottle',            min: 0,     max: 100,    ticks: 5,    pips: [ 0, 20, 40, 60, 80, 100 ], hide: !gte12_9 },
     ];
 }
 
