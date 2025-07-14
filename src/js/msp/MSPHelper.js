@@ -1189,6 +1189,11 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
                     FC.GOVERNOR.gov_min_throttle             = data.readU8();
                 }
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                    FC.GOVERNOR.gov_idle_throttle            = data.readU8();
+                    FC.GOVERNOR.gov_auto_throttle            = data.readU8();
+                    FC.GOVERNOR.gov_flags                    = data.readU16();
+                }
                 break;
             }
 
@@ -1198,7 +1203,11 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.GOVERNOR.gov_spoolup_time                 = data.readU16();
                 FC.GOVERNOR.gov_tracking_time                = data.readU16();
                 FC.GOVERNOR.gov_recovery_time                = data.readU16();
-                FC.GOVERNOR.gov_zero_throttle_timeout        = data.readU16();
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                    FC.GOVERNOR.gov_throttle_hold_timeout    = data.readU16();
+                } else {
+                    FC.GOVERNOR.gov_zero_throttle_timeout    = data.readU16();
+                }
                 FC.GOVERNOR.gov_lost_headspeed_timeout       = data.readU16();
                 FC.GOVERNOR.gov_autorotation_timeout         = data.readU16();
                 FC.GOVERNOR.gov_autorotation_bailout_time    = data.readU16();
@@ -1210,6 +1219,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.GOVERNOR.gov_ff_filter                    = data.readU8();
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                     FC.GOVERNOR.gov_spoolup_min_throttle     = data.readU8();
+                }
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                    FC.GOVERNOR.gov_d_cutoff                 = data.readU8();
                 }
                 break;
             }
@@ -2136,6 +2148,11 @@ MspHelper.prototype.crunch = function(code) {
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
                 buffer.push8(FC.GOVERNOR.gov_min_throttle);
             }
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                buffer.push8(FC.GOVERNOR.gov_idle_throttle)
+                    .push8(FC.GOVERNOR.gov_auto_throttle)
+                    .push16(FC.GOVERNOR.gov_flags);
+            }
             break;
         }
 
@@ -2144,9 +2161,13 @@ MspHelper.prototype.crunch = function(code) {
                 .push16(FC.GOVERNOR.gov_startup_time)
                 .push16(FC.GOVERNOR.gov_spoolup_time)
                 .push16(FC.GOVERNOR.gov_tracking_time)
-                .push16(FC.GOVERNOR.gov_recovery_time)
-                .push16(FC.GOVERNOR.gov_zero_throttle_timeout)
-                .push16(FC.GOVERNOR.gov_lost_headspeed_timeout)
+                .push16(FC.GOVERNOR.gov_recovery_time);
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                buffer.push16(FC.GOVERNOR.gov_throttle_hold_timeout);
+            } else {
+                buffer.push16(FC.GOVERNOR.gov_zero_throttle_timeout);
+            }
+            buffer.push16(FC.GOVERNOR.gov_lost_headspeed_timeout)
                 .push16(FC.GOVERNOR.gov_autorotation_timeout)
                 .push16(FC.GOVERNOR.gov_autorotation_bailout_time)
                 .push16(FC.GOVERNOR.gov_autorotation_min_entry_time)
@@ -2157,6 +2178,9 @@ MspHelper.prototype.crunch = function(code) {
                 .push8(FC.GOVERNOR.gov_ff_filter);
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                 buffer.push8(FC.GOVERNOR.gov_spoolup_min_throttle);
+            }
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                buffer.push8(FC.GOVERNOR.gov_d_cutoff);
             }
             break;
         }

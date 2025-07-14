@@ -617,6 +617,11 @@ class FlightController {
       gov_rpm_filter:                 0,
       gov_tta_filter:                 0,
       gov_ff_filter:                  0,
+      gov_throttle_hold_timeout:      0,
+      gov_d_cutoff:                   0,
+      gov_idle_throttle:              0,
+      gov_auto_throttle:              0,
+      gov_flags:                      0,
     };
 
     this.SENSOR_CONFIG = {
