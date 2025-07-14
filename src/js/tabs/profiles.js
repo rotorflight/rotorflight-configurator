@@ -1,4 +1,6 @@
 import semver from "semver";
+import { mount, unmount } from "svelte";
+import Governor from "@/tabs/profiles/Governor.svelte";
 
 import {
     API_VERSION_12_7,
@@ -8,13 +10,13 @@ import {
 
 const tab = {
     tabName: 'profiles',
+    svelteComponent: null,
     isDirty: false,
     isChanged: false,
     activeSubtab: null,
     savedProfile: null,
     currentProfile: null,
     isGovEnabled: false,
-    isGovActive: false,
     isPIDDefault: false,
     tabNames: [
         'profile1',
@@ -295,27 +297,14 @@ tab.initialize = function (callback) {
         $('.tab-profiles input[id="rescueMaxCollective"]').val(FC.PID_PROFILE.rescueMaxCollective / 10).change();
 
         // Governor settings
-        self.isGovActive = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR') && (FC.GOVERNOR.gov_mode > 1);
         self.isGovEnabled = FC.FEATURE_CONFIG.features.isEnabled('GOVERNOR') && (FC.GOVERNOR.gov_mode > 0);
 
-        $('.tab-profiles input[id="govHeadspeed"]').val(FC.GOVERNOR.gov_headspeed);
-        $('.tab-profiles input[id="govMaxThrottle"]').val(FC.GOVERNOR.gov_max_throttle);
-        $('.tab-profiles input[id="govMinThrottle"]').val(FC.GOVERNOR.gov_min_throttle);
-        $('.tab-profiles input[id="govMasterGain"]').val(FC.GOVERNOR.gov_gain);
-        $('.tab-profiles input[id="govPGain"]').val(FC.GOVERNOR.gov_p_gain);
-        $('.tab-profiles input[id="govIGain"]').val(FC.GOVERNOR.gov_i_gain);
-        $('.tab-profiles input[id="govDGain"]').val(FC.GOVERNOR.gov_d_gain);
-        $('.tab-profiles input[id="govFGain"]').val(FC.GOVERNOR.gov_f_gain);
         $('.tab-profiles input[id="govTTAGain"]').val(FC.GOVERNOR.gov_tta_gain);
         $('.tab-profiles input[id="govTTALimit"]').val(FC.GOVERNOR.gov_tta_limit);
-        $('.tab-profiles input[id="govYawPrecomp"]').val(FC.GOVERNOR.gov_yaw_ff_weight);
-        $('.tab-profiles input[id="govCyclicPrecomp"]').val(FC.GOVERNOR.gov_cyclic_ff_weight);
-        $('.tab-profiles input[id="govCollectivePrecomp"]').val(FC.GOVERNOR.gov_collective_ff_weight);
 
         $('.tab-profiles .govTTAGain').toggle(self.isGovEnabled);
         $('.tab-profiles .govTTALimit').toggle(self.isGovEnabled);
-        $('.tab-profiles .gov_settings').toggle(self.isGovEnabled);
-        $('.tab-profiles .gov_settings .govActive').toggle(self.isGovActive);
+        $('.tab-profiles #svelte-gov-settings').toggle(self.isGovEnabled);
     }
 
     function form_to_data() {
@@ -426,26 +415,12 @@ tab.initialize = function (callback) {
             FC.GOVERNOR.gov_tta_gain = parseInt($('.tab-profiles input[id="govTTAGain"]').val());
             FC.GOVERNOR.gov_tta_limit = parseInt($('.tab-profiles input[id="govTTALimit"]').val());
         }
-
-        // Governor settings
-        if (self.isGovActive) {
-            FC.GOVERNOR.gov_headspeed = parseInt($('.tab-profiles input[id="govHeadspeed"]').val());
-            FC.GOVERNOR.gov_min_throttle = parseInt($('.tab-profiles input[id="govMinThrottle"]').val());
-            FC.GOVERNOR.gov_gain = parseInt($('.tab-profiles input[id="govMasterGain"]').val());
-            FC.GOVERNOR.gov_p_gain = parseInt($('.tab-profiles input[id="govPGain"]').val());
-            FC.GOVERNOR.gov_i_gain = parseInt($('.tab-profiles input[id="govIGain"]').val());
-            FC.GOVERNOR.gov_d_gain = parseInt($('.tab-profiles input[id="govDGain"]').val());
-            FC.GOVERNOR.gov_f_gain = parseInt($('.tab-profiles input[id="govFGain"]').val());
-            FC.GOVERNOR.gov_yaw_ff_weight = parseInt($('.tab-profiles input[id="govYawPrecomp"]').val());
-            FC.GOVERNOR.gov_cyclic_ff_weight = parseInt($('.tab-profiles input[id="govCyclicPrecomp"]').val());
-            FC.GOVERNOR.gov_collective_ff_weight = parseInt($('.tab-profiles input[id="govCollectivePrecomp"]').val());
-        }
-        if (self.isGovEnabled) {
-            FC.GOVERNOR.gov_max_throttle = parseInt($('.tab-profiles input[id="govMaxThrottle"]').val());
-        }
     }
 
     function process_html() {
+        self.svelteComponent = mount(Governor, {
+            target: document.querySelector("#svelte-gov-settings"),
+        });
 
         // translate to user-selected language
         i18n.localizePage();
@@ -580,27 +555,12 @@ tab.initialize = function (callback) {
             setChanged();
         });
 
-        $('.tab-profiles input[id="govHeadspeed"]').change(function () {
-            const value = parseInt($(this).val());
-            if (!self.isPIDDefault && value != FC.GOVERNOR.gov_headspeed) {
-                $('.tab-profiles .gov_settings .note').show();
-            }
-        });
-
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
             $('.tab-profiles input[id="cyclicCrossCouplingCutoff"]').attr({
                 step: 0.1,
                 min: 0.1,
                 max: 25,
             });
-        }
-
-        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
-            $('.tab-profiles tr.govMinThrottle').hide();
-
-            if(self.isGovActive) {
-                $('.tab-profiles tr.govMaxThrottle').addClass('border');
-            }
         }
 
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
@@ -636,6 +596,11 @@ tab.initialize = function (callback) {
 
 
 tab.cleanup = function (callback) {
+    if (this.svelteComponent) {
+        unmount(this.svelteComponent);
+        this.svelteComponent = null;
+    }
+
     this.isDirty = false;
 
     callback?.();
