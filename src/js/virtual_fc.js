@@ -138,6 +138,7 @@ export function applyVirtualConfig() {
   Object.assign(FC.GOVERNOR, {
     gov_mode: 3,
     gov_handover_throttle: 20,
+    gov_spoolup_min_throttle: 5,
     gov_zero_throttle_timeout: 30,
     gov_lost_headspeed_timeout: 10,
     gov_startup_time: 200,
@@ -151,6 +152,8 @@ export function applyVirtualConfig() {
     gov_pwr_filter: 5,
     gov_tta_filter: 0,
     gov_ff_filter: 10,
+    gov_throttle_hold_timeout: 50,
+    gov_d_cutoff: 50,
   });
 
   Object.assign(FC.MOTOR_TELEMETRY_DATA, {

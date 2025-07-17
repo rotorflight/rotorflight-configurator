@@ -298,13 +298,13 @@ class FlightController {
 
     this.ESC_SENSOR_CONFIG = {
       protocol:                   0,
-      half_duplex:                0,
+      half_duplex:                false,
       update_hz:                  0,
       current_offset:             0,
       hw4_current_offset:         0,
       hw4_current_gain:           0,
       hw4_voltage_gain:           0,
-      pinswap:                    0,
+      pinswap:                    false,
       voltage_correction:         0,
       current_correction:         0,
       consumption_correction:     0,
@@ -614,6 +614,11 @@ class FlightController {
       gov_rpm_filter:                 0,
       gov_tta_filter:                 0,
       gov_ff_filter:                  0,
+      gov_throttle_hold_timeout:      0,
+      gov_d_cutoff:                   0,
+      gov_idle_throttle:              0,
+      gov_auto_throttle:              0,
+      gov_flags:                      0,
     };
 
     this.SENSOR_CONFIG = {

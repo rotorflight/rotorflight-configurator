@@ -5,8 +5,8 @@
 
 <div class="container">
   <div class="header">
-    <div class="fas fa-exclamation-triangle"></div>
-    <b>{$i18n.t("warningTitle")}</b>
+    <div class="fas fa-sticky-note"></div>
+    <b>{$i18n.t("noteTitle")}</b>
   </div>
   <div>
     {#if children}
@@ -25,16 +25,16 @@
     margin: 4px;
 
     :global(html[data-theme="light"]) & {
-      color: var(--color-yellow-900);
-      background: var(--color-yellow-100);
-      border: 1px solid var(--color-yellow-900);
+      color: hsl(205, 60%, 25%);
+      background: hsl(205, 80%, 95%);
+      border: 1px solid hsl(205, 60%, 25%);
       font-weight: 600;
     }
 
     :global(html[data-theme="dark"]) & {
-      color: var(--color-yellow-500);
+      color: hsl(210, 90%, 70%);
       background: var(--color-neutral-800);
-      border-left: 3px solid var(--color-yellow-500);
+      border-left: 3px solid hsl(200, 90%, 70%);
     }
   }
 
