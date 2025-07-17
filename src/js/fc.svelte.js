@@ -12,7 +12,7 @@ class FlightController {
   BEEPER_CONFIG = $state();
   BLACKBOX = $state();
   BOARD_ALIGNMENT_CONFIG = $state();
-  CONFIG = $state({});
+  CONFIG = $state();
   COPY_PROFILE = $state();
   CURRENT_METERS = $state();
   CURRENT_METER_CONFIGS = $state();
@@ -49,12 +49,15 @@ class FlightController {
   PID_NAMES = $state();
   PID_PROFILE = $state();
   RC = $state();
+  RC_COMMAND = $state();
+  RC_CONFIG = $state();
   RC_MAP = $state();
   RC_TUNING = $state();
   RPM_FILTER_CONFIG = $state();
   RPM_FILTER_CONFIG_V2 = $state();
   RSSI_CONFIG = $state();
   RXFAIL_CONFIG = $state();
+  RX_CHANNELS = $state();
   RX_CONFIG = $state();
   SDCARD = $state();
   SENSOR_ALIGNMENT = $state();
