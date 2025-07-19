@@ -72,7 +72,7 @@
       <NumberInput
         id="receiver-cyclic-deadband"
         min="0"
-        max="100"
+        max="32"
         bind:value={FC.RC_CONFIG.rc_deadband}
       />
     </Field>
