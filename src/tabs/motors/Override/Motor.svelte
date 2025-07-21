@@ -1,8 +1,10 @@
 <script>
-  import { onDestroy } from "svelte";
+  import semver from "semver";
+  import { onMount, onDestroy } from "svelte";
 
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
+  import { API_VERSION_12_9 } from "@/js/data_storage.js";
 
   import Section from "@/components/Section.svelte";
   import Meter from "@/components/Meter.svelte";
@@ -96,7 +98,7 @@
     }
   });
 
-  // Limit how frequently the motor override can be updated
+  // Limit how frequently the throttle position can be updated
   let timeoutId;
   function updateThrottle() {
     if (!timeoutId) {
@@ -107,7 +109,17 @@
     }
   }
 
+  let overrideIntervalId;
+  onMount(() => {
+    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+      overrideIntervalId = setInterval(() => {
+        mspHelper.sendMotorOverride(index);
+      }, 250);
+    }
+  });
+
   onDestroy(() => {
+    clearInterval(overrideIntervalId);
     clearTimeout(timeoutId);
     timeoutId = null;
   });
