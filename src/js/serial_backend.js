@@ -39,7 +39,7 @@ export function initializeSerialBackend() {
         GUI.updateManualPortVisibility();
     });
 
-    $('div.connect_controls a.connect').on("click", function() {
+    $('div.connect_controls a.connect').on("click", async function() {
         if (GUI.connect_lock != true) { // GUI control overrides the user control
 
             const thisElement = $(this);
@@ -89,14 +89,12 @@ export function initializeSerialBackend() {
                     }
                     GUI.timeout_kill_all();
                     GUI.interval_kill_all();
-                    GUI.tab_switch_cleanup();
+                    await new Promise((resolve) => GUI.tab_switch_cleanup(resolve));
                     GUI.tab_switch_in_progress = false;
 
-                    function onFinishCallback() {
-                        finishClose(toggleStatus);
-                    }
+                    await new Promise((resolve) => globalThis.mspHelper.setArmingEnabled(true, resolve));
 
-                    globalThis.mspHelper.setArmingEnabled(true, onFinishCallback);
+                    finishClose(toggleStatus);
                 }
             }
        }
