@@ -36,6 +36,7 @@
     "gov_lost_headspeed_timeout",
     "gov_throttle_hold_timeout",
     "gov_d_cutoff",
+    "gov_spooldown_time",
   ]) {
     Object.defineProperty(fields, field, {
       get() {
@@ -244,7 +245,24 @@
             bind:value={fields.gov_spoolup_time}
           />
         </Field>
-
+        <Field id="gov-spooldown-time" label="govSpooldownTime" unit="s">
+          {#snippet tooltip()}
+            <Tooltip
+              help="govSpooldownTimeHelp"
+              attrs={[
+                { name: "genericDefault", value: "3s" },
+                { name: "genericRange", value: "0s - 25s" },
+              ]}
+            />
+          {/snippet}
+          <NumberInput
+            id="gov-spooldown-time"
+            min="0"
+            max="25"
+            step="0.1"
+            bind:value={fields.gov_spooldown_time}
+          />
+        </Field>
         <Field id="gov-tracking-time" label="govTrackingTime" unit="s">
           {#snippet tooltip()}
             <Tooltip

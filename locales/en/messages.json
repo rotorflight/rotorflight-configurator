@@ -3408,6 +3408,12 @@
     "govSpoolupTimeHelp": {
         "message": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
     },
+    "govSpooldownTime": {
+        "message": "Spooldown Time"
+    },
+    "govSpooldownTimeHelp": {
+        "message": "TODO"
+    },
     "govSpoolupMinThrottle": {
         "message": "Spoolup Minimum Throttle"
     },
@@ -3512,6 +3518,24 @@
     },
     "govMinThrottleHelp": {
         "message": "Minimum output throttle the governor is allowed to use."
+    },
+    "govIdleThrottle": {
+        "message": "Idle Throttle"
+    },
+    "govIdleThrottleHelp": {
+        "message": "TODO"
+    },
+    "govAutoThrottle": {
+        "message": "Auto Throttle"
+    },
+    "govAutoThrottleHelp": {
+        "message": "TODO"
+    },
+    "govFallbackDrop": {
+        "message": "Throttle Fallback Drop"
+    },
+    "govFallbackDropHelp": {
+        "message": "TODO"
     },
     "govMasterGain": {
         "message": "PID master gain"
