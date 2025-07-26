@@ -3499,7 +3499,7 @@
         "message": "TODO"
     },
     "govHeadspeed": {
-        "message": "Full headspeed"
+        "message": "Full Headspeed"
     },
     "govHeadspeedHelp": {
         "message": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input."
@@ -3538,7 +3538,7 @@
         "message": "TODO"
     },
     "govMasterGain": {
-        "message": "PID master gain"
+        "message": "Master Gain"
     },
     "govMasterGainHelp": {
         "message": "Master PID loop gain. Usually 10..100"
@@ -3562,7 +3562,7 @@
         "message": "PID loop D-term gain. Usually 0..100"
     },
     "govFGain": {
-        "message": "Feedforward gain"
+        "message": "Feedforward Gain"
     },
     "govFGainHelp": {
         "message": "Collective/Cyclic feedforward gain. Usually 0..100"
@@ -3580,22 +3580,61 @@
         "message": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%."
     },
     "govYawPrecomp": {
-        "message": "Yaw precompensation"
+        "message": "Yaw"
     },
     "govYawPrecompHelp": {
         "message": "Yaw precompensation weight. Determines how much Yaw is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
     "govCyclicPrecomp": {
-        "message": "Cyclic precompensation"
+        "message": "Cyclic"
     },
     "govCyclicPrecompHelp": {
         "message": "Cyclic precompensation weight. Determines how much cyclic is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
     "govCollectivePrecomp": {
-        "message": "Collective precompensation"
+        "message": "Collective"
     },
     "govCollectivePrecompHelp": {
         "message": "Collective precompensation weight. Determines how much collective is mixed into the feedfoward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
+    },
+    "profileGovPIDSection": {
+        "message": "PID"
+    },
+    "profileGovPrecompSection": {
+        "message": "Precompensation"
+    },
+    "profileGovFlagsSection": {
+        "message": "Flags"
+    },
+    "govFlag_3POS_THROTTLE": {
+        "message": "3POS_THROTTLE"
+    },
+    "govFlag_TX_THROTTLE_CURVE": {
+        "message": "TX_THROTTLE_CURVE"
+    },
+    "govFlag_FALLBACK_PRECOMP": {
+        "message": "FALLBACK_PRECOMP"
+    },
+    "govFlag_VOLTAGE_COMP": {
+        "message": "VOLTAGE_COMP"
+    },
+    "govFlag_PID_SPOOLUP": {
+        "message": "PID_SPOOLUP"
+    },
+    "govFlag_HS_ADJUSTMENT": {
+        "message": "HS_ADJUSTMENT"
+    },
+    "govFlag_DYN_MIN_THROTTLE": {
+        "message": "DYN_MIN_THROTTLE"
+    },
+    "govFlag_AUTOROTATION": {
+        "message": "AUTOROTATION"
+    },
+    "govFlag_SUSPEND": {
+        "message": "SUSPEND"
+    },
+    "govFlag_BYPASS": {
+        "message": "BYPASS"
     },
     "sensorsInfo": {
         "message": "Keep in mind that using fast update periods and rendering multiple graphs at the same time is resource heavy and will burn your battery quicker if you use a laptop.<br />We recommend to only render graphs for sensors you are interested in while using reasonable update periods."

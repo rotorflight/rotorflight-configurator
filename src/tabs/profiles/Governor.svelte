@@ -151,7 +151,7 @@
       </Field>
     {/if}
   </SubSection>
-  <SubSection label="PIDS">
+  <SubSection label="profileGovPIDSection">
     <Field id="gov-master-gain" label="govMasterGain">
       {#snippet tooltip()}
         <Tooltip
@@ -238,22 +238,22 @@
       />
     </Field>
   </SubSection>
-  <SubSection label="Precompensation">
-    <Field id="gov-yaw-precomp" label="govYawPrecomp">
+  <SubSection label="profileGovPrecompSection">
+    <Field id="gov-collective-precomp" label="govCollectivePrecomp">
       {#snippet tooltip()}
         <Tooltip
-          help="govYawPrecompHelp"
+          help="govCollectivePrecompHelp"
           attrs={[
-            { name: "genericDefault", value: "10" },
+            { name: "genericDefault", value: "50" },
             { name: "genericRange", value: "0 - 250" },
           ]}
         />
       {/snippet}
       <NumberInput
-        id="gov-yaw-precomp"
+        id="gov-collective-precomp"
         min="0"
         max="250"
-        bind:value={FC.GOVERNOR.gov_yaw_ff_weight}
+        bind:value={FC.GOVERNOR.gov_collective_ff_weight}
       />
     </Field>
     <Field id="gov-cyclic-precomp" label="govCyclicPrecomp">
@@ -273,26 +273,26 @@
         bind:value={FC.GOVERNOR.gov_cyclic_ff_weight}
       />
     </Field>
-    <Field id="gov-collective-precomp" label="govCollectivePrecomp">
+    <Field id="gov-yaw-precomp" label="govYawPrecomp">
       {#snippet tooltip()}
         <Tooltip
-          help="govCollectivePrecompHelp"
+          help="govYawPrecompHelp"
           attrs={[
-            { name: "genericDefault", value: "50" },
+            { name: "genericDefault", value: "10" },
             { name: "genericRange", value: "0 - 250" },
           ]}
         />
       {/snippet}
       <NumberInput
-        id="gov-collective-precomp"
+        id="gov-yaw-precomp"
         min="0"
         max="250"
-        bind:value={FC.GOVERNOR.gov_collective_ff_weight}
+        bind:value={FC.GOVERNOR.gov_yaw_ff_weight}
       />
     </Field>
   </SubSection>
   {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
-    <SubSection label="flags">
+    <SubSection label="profileGovFlagsSection">
       {#each flags as flag, i (flag)}
         <Field id={`gov-flag-${flag}`} label={`govFlag_${flag}`}>
           {#snippet tooltip()}
