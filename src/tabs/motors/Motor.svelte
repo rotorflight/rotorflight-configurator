@@ -1,6 +1,7 @@
 <script>
   import semver from "semver";
   import { onMount, onDestroy } from "svelte";
+  import { slide } from "svelte/transition";
 
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
@@ -10,11 +11,11 @@
   import Meter from "@/components/Meter.svelte";
   import Slider from "@/components/Slider.svelte";
 
-  import motorState from "../state.svelte.js";
+  import motorState from "./state.svelte.js";
 
   let { index } = $props();
 
-  let slider;
+  let slider = $state();
 
   let width = $state(0);
   let mobile = $derived(width <= 480);
@@ -47,7 +48,7 @@
   });
 
   $effect(() => {
-    slider.update(sliderOpts);
+    slider?.update(sliderOpts);
   });
 
   let throttle = $derived.by(() => {
@@ -131,28 +132,38 @@
   {#snippet header()}
     <div class="header">
       <span>Motor #{index + 1}</span>
-      <span>-</span>
-      <span>{FC.MOTOR_OVERRIDE[index] * 0.1}%</span>
+      {#if motorState.overrideEnabled}
+        <span>-</span>
+        <span>{FC.MOTOR_OVERRIDE[index] * 0.1}%</span>
+      {/if}
     </div>
   {/snippet}
-  <div class="slider-container">
-    <Slider
-      bind:this={slider}
-      bind:value={
-        () => FC.MOTOR_OVERRIDE[index] * 0.1,
-        (v) => (FC.MOTOR_OVERRIDE[index] = v * 10)
-      }
-      onchange={updateThrottle}
-      opts={sliderOpts}
-    />
-  </div>
+  {#if motorState.overrideEnabled}
+    <div transition:slide>
+      <div class="slider-container">
+        <Slider
+          bind:this={slider}
+          bind:value={
+            () => FC.MOTOR_OVERRIDE[index] * 0.1,
+            (v) => (FC.MOTOR_OVERRIDE[index] = v * 10)
+          }
+          onchange={updateThrottle}
+          opts={sliderOpts}
+        />
+      </div>
+    </div>
+  {/if}
   <div class="bars-container">
-    <Meter
-      title={$i18n.t("motorThrottle")}
-      rightLabel="100%"
-      leftLabel={`${throttle}%`}
-      value={throttle}
-    />
+    {#if motorState.overrideEnabled}
+      <div transition:slide>
+        <Meter
+          title={$i18n.t("motorThrottle")}
+          rightLabel="100%"
+          leftLabel={`${throttle}%`}
+          value={throttle}
+        />
+      </div>
+    {/if}
     <Meter
       title={$i18n.t("motorRPM")}
       rightLabel={`${rpmMax.toLocaleString()} RPM`}

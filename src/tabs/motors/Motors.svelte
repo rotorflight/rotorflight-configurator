@@ -1,6 +1,6 @@
 <script>
   import diff from "microdiff";
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
 
   import { i18n } from "@/js/i18n.js";
   import { FC } from "@/js/fc.svelte.js";
@@ -13,12 +13,14 @@
   import RPM from "./RPM.svelte";
   import Telemetry from "./Telemetry.svelte";
   import Governor from "./Governor.svelte";
+  import Motor from "./Motor.svelte";
   import RotorSpeed from "./RotorSpeed.svelte";
-  import Override from "./Override/Override.svelte";
+  import Override from "./Override.svelte";
   import motorState from "./state.svelte.js";
 
   let loading = $state(true);
   let initialState;
+  let pollerInterval;
 
   let isEnabled = $derived(
     motorState.throttleEnabled && FC.CONFIG.motorCount > 0,
@@ -63,6 +65,16 @@
 
     initialState = snapshotState();
     loading = false;
+
+    pollerInterval = setInterval(async () => {
+      await MSP.promise(MSPCodes.MSP_MOTOR);
+      await MSP.promise(MSPCodes.MSP_MOTOR_TELEMETRY);
+      await MSP.promise(MSPCodes.MSP_BATTERY_STATE);
+    }, 50);
+  });
+
+  onDestroy(() => {
+    clearInterval(pollerInterval);
   });
 
   $effect(() => {
@@ -141,6 +153,9 @@
           <RotorSpeed />
         {/if}
         <Override />
+        {#each { length: FC.CONFIG.motorCount } as _, i (i)}
+          <Motor index={i} />
+        {/each}
       {/if}
     </div>
   </div>
