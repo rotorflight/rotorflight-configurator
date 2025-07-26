@@ -132,6 +132,23 @@
           bind:value={FC.GOVERNOR.gov_auto_throttle}
         />
       </Field>
+      <Field id="gov-fallback-drop" label="govFallbackDrop" unit="%">
+        {#snippet tooltip()}
+          <Tooltip
+            help="govFallbackDropHelp"
+            attrs={[
+              { name: "genericDefault", value: "10%" },
+              { name: "genericRange", value: "0% - 50%" },
+            ]}
+          />
+        {/snippet}
+        <NumberInput
+          id="gov-fallback-drop"
+          min="0"
+          max="50"
+          bind:value={FC.GOVERNOR.gov_fallback_drop}
+        />
+      </Field>
     {/if}
   </SubSection>
   <SubSection label="PIDS">
