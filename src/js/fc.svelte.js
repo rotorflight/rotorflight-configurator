@@ -622,6 +622,8 @@ class FlightController {
       gov_idle_throttle:              0,
       gov_auto_throttle:              0,
       gov_flags:                      0,
+      gov_fallback_drop:              0,
+      gov_spooldown_time:             0,
     };
 
     this.SENSOR_CONFIG = {
