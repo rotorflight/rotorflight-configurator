@@ -94,20 +94,39 @@
             unit="%"
           >
             {#snippet tooltip()}
-              <Tooltip
-                help="govHandoverThrottleHelp"
-                attrs={[
-                  { name: "genericDefault", value: "20%" },
-                  { name: "genericRange", value: "10% - 50%" },
-                ]}
-              />
+              {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+                <Tooltip
+                  help="govHandoverThrottleHelp"
+                  attrs={[
+                    { name: "genericDefault", value: "20%" },
+                    { name: "genericRange", value: "0% - 100%" },
+                  ]}
+                />
+              {:else}
+                <Tooltip
+                  help="govHandoverThrottleHelp"
+                  attrs={[
+                    { name: "genericDefault", value: "20%" },
+                    { name: "genericRange", value: "10% - 50%" },
+                  ]}
+                />
+              {/if}
             {/snippet}
-            <NumberInput
-              id="gov-handover-throttle"
-              min="10"
-              max="50"
-              bind:value={FC.GOVERNOR.gov_handover_throttle}
-            />
+            {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+              <NumberInput
+                id="gov-handover-throttle"
+                min="0"
+                max="100"
+                bind:value={FC.GOVERNOR.gov_handover_throttle}
+              />
+            {:else}
+              <NumberInput
+                id="gov-handover-throttle"
+                min="10"
+                max="50"
+                bind:value={FC.GOVERNOR.gov_handover_throttle}
+              />
+            {/if}
           </Field>
           {#if semver.eq(FC.CONFIG.apiVersion, API_VERSION_12_8)}
             <Field
