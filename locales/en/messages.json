@@ -2171,6 +2171,12 @@
     "receiverTelemetrySensor_DEBUG_7": {
         "message": "Debug 7"
     },
+    "receiverTelemetrySensor_RPM": {
+        "message": "RPM"
+    },
+    "receiverTelemetrySensor_TEMP": {
+        "message": "Temperature"
+    },
     "receiverBars": {
         "message": "Receiver Channels"
     },

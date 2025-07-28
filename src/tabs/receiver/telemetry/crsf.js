@@ -1,14 +1,23 @@
-export const NATIVE_CRSF_SENSORS = [
-  {
-    sensors: [
-      { name: "FLIGHT_MODE" },
-      { name: "BATTERY" },
-      { name: "ATTITUDE" },
-      { name: "ALTITUDE" },
-      { name: "GPS" },
-    ],
-  },
-];
+import semver from "semver";
+
+import { API_VERSION_12_9 } from "@/js/data_storage.js";
+
+export function getNativeCrsfSensors() {
+  return [
+    {
+      sensors: [
+        { name: "FLIGHT_MODE" },
+        { name: "BATTERY" },
+        { name: "ATTITUDE" },
+        { name: "ALTITUDE" },
+        { name: "GPS" },
+        ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)
+          ? [{ name: "RPM" }, { name: "TEMP" }]
+          : []),
+      ],
+    },
+  ];
+}
 
 export const CUSTOM_CRSF_SENSORS = [
   {

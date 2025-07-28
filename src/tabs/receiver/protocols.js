@@ -2,7 +2,7 @@ import semver from "semver";
 import { API_VERSION_12_7, API_VERSION_12_8 } from "@/js/data_storage.js";
 import { FC } from "@/js/fc.svelte";
 import { createEnum } from "@/js/utils/common.js";
-import { CUSTOM_CRSF_SENSORS, NATIVE_CRSF_SENSORS } from "./telemetry/crsf.js";
+import { CUSTOM_CRSF_SENSORS, getNativeCrsfSensors } from "./telemetry/crsf.js";
 import { SMARTPORT_SENSORS } from "./telemetry/smartport.js";
 import { GHOST_SENSORS } from "./telemetry/ghost.js";
 import { HUB_SENSORS } from "./telemetry/frsky_hub.js";
@@ -27,7 +27,7 @@ function getCrsfTelemetry() {
     return {
       proto: "crsf",
       type: TelemetryType.UNORDERED_LIST,
-      sensors: NATIVE_CRSF_SENSORS,
+      sensors: getNativeCrsfSensors(),
     };
   }
 
