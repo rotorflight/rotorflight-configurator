@@ -1,4 +1,8 @@
 <script>
+  import semver from "semver";
+
+  import { API_VERSION_12_9 } from "@/js/data_storage.js";
+
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
@@ -69,12 +73,21 @@
       {#snippet tooltip()}
         <Tooltip help="receiverHelpCyclicDeadband" />
       {/snippet}
-      <NumberInput
-        id="receiver-cyclic-deadband"
-        min="0"
-        max="32"
-        bind:value={FC.RC_CONFIG.rc_deadband}
-      />
+      {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+        <NumberInput
+          id="receiver-cyclic-deadband"
+          min="0"
+          max="100"
+          bind:value={FC.RC_CONFIG.rc_deadband}
+        />
+      {:else}
+        <NumberInput
+          id="receiver-cyclic-deadband"
+          min="0"
+          max="32"
+          bind:value={FC.RC_CONFIG.rc_deadband}
+        />
+      {/if}
     </Field>
     <Field id="receiver-yaw-deadband" label="receiverYawDeadband">
       {#snippet tooltip()}
