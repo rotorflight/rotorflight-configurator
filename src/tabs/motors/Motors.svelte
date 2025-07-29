@@ -1,6 +1,7 @@
 <script>
   import diff from "microdiff";
   import { onMount, onDestroy } from "svelte";
+  import { slide } from "svelte/transition";
 
   import { i18n } from "@/js/i18n.js";
   import { FC } from "@/js/fc.svelte.js";
@@ -139,22 +140,34 @@
 
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
   <div class="content">
-    <div class="column">
+    <div>
       <Throttle />
       {#if isEnabled}
-        <Telemetry />
-        <RPM />
-        <Governor />
+        <div transition:slide>
+          <Telemetry />
+        </div>
+        <div transition:slide>
+          <RPM />
+        </div>
+        <div transition:slide>
+          <Governor />
+        </div>
       {/if}
     </div>
-    <div class="column">
+    <div>
       {#if isEnabled}
         {#if rpmAvailable}
-          <RotorSpeed />
+          <div transition:slide|global>
+            <RotorSpeed />
+          </div>
         {/if}
-        <Override />
+        <div transition:slide>
+          <Override />
+        </div>
         {#each { length: FC.CONFIG.motorCount } as _, i (i)}
-          <Motor index={i} />
+          <div transition:slide|global>
+            <Motor index={i} />
+          </div>
         {/each}
       {/if}
     </div>
@@ -166,13 +179,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     column-gap: var(--section-gap);
-    row-gap: var(--section-gap);
-  }
-
-  .column {
-    display: flex;
-    flex-direction: column;
-    gap: var(--section-gap);
   }
 
   .fallback-group {

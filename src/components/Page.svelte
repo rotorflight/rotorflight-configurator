@@ -52,7 +52,7 @@
   }
 
   .content {
-    margin: var(--section-gap);
+    margin: 0 var(--section-gap) var(--section-gap);
     border-top-left-radius: 32px;
   }
 

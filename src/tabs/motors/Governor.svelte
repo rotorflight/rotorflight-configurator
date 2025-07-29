@@ -43,7 +43,9 @@
 
 <Section label="govFeatures">
   {#if enabled}
-    <InfoNote message="govConfigurationNote" />
+    <div transition:slide>
+      <InfoNote message="govConfigurationNote" />
+    </div>
   {/if}
 
   <SubSection>

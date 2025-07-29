@@ -153,65 +153,80 @@
       </div>
     </div>
   {/if}
-  <div class="bars-container">
+  <div>
     {#if motorState.overrideEnabled}
       <div transition:slide>
-        <Meter
-          title={$i18n.t("motorThrottle")}
-          rightLabel="100%"
-          leftLabel={`${throttle}%`}
-          value={throttle}
-        />
+        <div class="bar">
+          <Meter
+            title={$i18n.t("motorThrottle")}
+            rightLabel="100%"
+            leftLabel={`${throttle}%`}
+            value={throttle}
+          />
+        </div>
       </div>
     {/if}
-    <Meter
-      title={$i18n.t("motorRPM")}
-      rightLabel={`${rpmMax.toLocaleString()} RPM`}
-      leftLabel={`${rpm.toLocaleString()} RPM`}
-      value={(100 * rpm) / rpmMax}
-    />
+    <div class="bar">
+      <Meter
+        title={$i18n.t("motorRPM")}
+        rightLabel={`${rpmMax.toLocaleString()} RPM`}
+        leftLabel={`${rpm.toLocaleString()} RPM`}
+        value={(100 * rpm) / rpmMax}
+      />
+    </div>
     {#if motorState.telemEnabled}
-      <Meter
-        title={$i18n.t("motorVoltage")}
-        rightLabel={`${voltageMax} V`}
-        leftLabel={`${voltage.toFixed(2)} V`}
-        value={(100 * voltage) / voltageMax}
-      />
-      <Meter
-        title={$i18n.t("motorCurrent")}
-        rightLabel={`${currentMax} A`}
-        leftLabel={`${current.toFixed(2)} A`}
-        value={(100 * current) / currentMax}
-      />
-      <Meter
-        title={$i18n.t("motorTemperature", { number: 1 })}
-        rightLabel={`${temp1Max} °C`}
-        leftLabel={`${temp1.toFixed(1)} °C`}
-        value={(100 * temp1) / temp1Max}
-      />
-      <Meter
-        title={$i18n.t("motorTemperature", { number: 2 })}
-        rightLabel={`${temp2Max} °C`}
-        leftLabel={`${temp2.toFixed(1)} °C`}
-        value={(100 * temp2) / temp2Max}
-      />
+      <div transition:slide>
+        <div class="bar">
+          <Meter
+            title={$i18n.t("motorVoltage")}
+            rightLabel={`${voltageMax} V`}
+            leftLabel={`${voltage.toFixed(2)} V`}
+            value={(100 * voltage) / voltageMax}
+          />
+        </div>
+        <div class="bar">
+          <Meter
+            title={$i18n.t("motorCurrent")}
+            rightLabel={`${currentMax} A`}
+            leftLabel={`${current.toFixed(2)} A`}
+            value={(100 * current) / currentMax}
+          />
+        </div>
+        <div class="bar">
+          <Meter
+            title={$i18n.t("motorTemperature", { number: 1 })}
+            rightLabel={`${temp1Max} °C`}
+            leftLabel={`${temp1.toFixed(1)} °C`}
+            value={(100 * temp1) / temp1Max}
+          />
+        </div>
+        <div class="bar">
+          <Meter
+            title={$i18n.t("motorTemperature", { number: 2 })}
+            rightLabel={`${temp2Max} °C`}
+            leftLabel={`${temp2.toFixed(1)} °C`}
+            value={(100 * temp2) / temp2Max}
+          />
+        </div>
+      </div>
     {/if}
     {#if FC.ESC_SENSOR_CONFIG.use_dshot_telemetry}
-      <Meter
-        title={$i18n.t("motorDshotError")}
-        rightLabel="100%"
-        leftLabel={`${errors.toFixed(2)}%`}
-        value={errors}
-      />
+      <div transition:slide>
+        <div class="bar">
+          <Meter
+            title={$i18n.t("motorDshotError")}
+            rightLabel="100%"
+            leftLabel={`${errors.toFixed(2)}%`}
+            value={errors}
+          />
+        </div>
+      </div>
     {/if}
   </div>
 </Section>
 
 <style lang="scss">
-  .bars-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  .bar {
     padding: 4px;
   }
 

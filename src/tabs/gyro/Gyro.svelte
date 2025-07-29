@@ -167,12 +167,12 @@
 
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
   <div class="content">
-    <div class="column">
+    <div>
       <LowpassFilter {FC} />
       <NotchFilter {FC} />
       <DynamicFilter {FC} />
     </div>
-    <div class="column">
+    <div>
       <RpmFilter {FC} {notches} />
       {#if custom}
         <div transition:slide>
@@ -192,13 +192,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     column-gap: var(--section-gap);
-    row-gap: var(--section-gap);
-  }
-
-  .column {
-    display: flex;
-    flex-direction: column;
-    gap: var(--section-gap);
   }
 
   button {
@@ -214,10 +207,6 @@
     .content {
       grid-template-columns: 1fr;
       row-gap: 0;
-    }
-
-    .column {
-      gap: 0;
     }
   }
 

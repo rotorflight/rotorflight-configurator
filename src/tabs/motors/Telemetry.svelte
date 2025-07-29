@@ -17,21 +17,23 @@
 
 <Section label="motorsEscTelemetry">
   {#if !motorState.isCastleLink}
-    <SubSection>
-      <Field id="esc-telemetry-protocol" label="motorsEscTelemetryProtocol">
-        {#snippet tooltip()}
-          <Tooltip help="motorsEscTelemetryProtocolHelp" />
-        {/snippet}
-        <select
-          id="esc-telemetry-protocol"
-          bind:value={FC.ESC_SENSOR_CONFIG.protocol}
-        >
-          {#each motorState.telemetryProtocols as proto, index (proto)}
-            <option value={index}>{proto}</option>
-          {/each}
-        </select>
-      </Field>
-    </SubSection>
+    <div transition:slide>
+      <SubSection>
+        <Field id="esc-telemetry-protocol" label="motorsEscTelemetryProtocol">
+          {#snippet tooltip()}
+            <Tooltip help="motorsEscTelemetryProtocolHelp" />
+          {/snippet}
+          <select
+            id="esc-telemetry-protocol"
+            bind:value={FC.ESC_SENSOR_CONFIG.protocol}
+          >
+            {#each motorState.telemetryProtocols as proto, index (proto)}
+              <option value={index}>{proto}</option>
+            {/each}
+          </select>
+        </Field>
+      </SubSection>
+    </div>
   {/if}
   {#if motorState.telemEnabled && motorState.hasTelemPort}
     <div transition:slide>

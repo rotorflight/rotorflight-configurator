@@ -1,6 +1,8 @@
 <script>
   import diff from "microdiff";
   import { onMount } from "svelte";
+  import { slide } from "svelte/transition";
+
   import { FC } from "@/js/fc.svelte.js";
   import { Features } from "@/js/features.svelte";
   import ReceiverSettings from "./ReceiverSettings.svelte";
@@ -148,17 +150,19 @@
   <ReceiverType {FC} {rxProtoIndex} {hasSerialRxPort} {setRxProto} />
   <ReceiverSettings {FC} />
   {#if telemetry}
-    <TelemetrySettings {FC} {telemetry} {resetTelemetry} />
+    <div transition:slide>
+      <TelemetrySettings {FC} {telemetry} {resetTelemetry} />
+    </div>
     {#if FC.FEATURE_CONFIG.features.TELEMETRY && telemetry.type !== TelemetryType.TOGGLE}
-      <TelemetrySensors {FC} {telemetry} />
+      <div transition:slide|global>
+        <TelemetrySensors {FC} {telemetry} />
+      </div>
     {/if}
   {/if}
 </div>
 
 <style lang="scss">
   .container {
-    > :global(*) + :global(*) {
-      margin-top: 24px;
-    }
+    margin-top: -16px;
   }
 </style>
