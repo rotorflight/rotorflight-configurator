@@ -1,6 +1,7 @@
 import semver from "semver";
 
 import * as config from "@/js/config.js";
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 
 globalThis.TABS = {};
 
@@ -321,23 +322,13 @@ export function startProcess() {
         $("#showlog").trigger('click');
     }
 
-/**
-    ConfigStorage.get('permanentExpertMode', function (result) {
-        const expertModeCheckbox = 'input[name="expertModeCheckbox"]';
-        if (result.permanentExpertMode) {
-            $(expertModeCheckbox).prop('checked', true);
-        }
-
-        $(expertModeCheckbox).change(function () {
-            const checked = $(this).is(':checked');
-
-            if (FC.FEATURE_CONFIG && FC.FEATURE_CONFIG.features !== 0) {
-                updateTabList(FC.FEATURE_CONFIG.features);
-            }
-
-        }).change();
-    });
-**/
+    CONFIGURATOR.expertMode = config.get('expertMode') ?? false;
+    $('#expert-mode input')
+        .on('change', function () {
+            CONFIGURATOR.expertMode = this.checked;
+            config.set('expertMode', this.checked);
+        })
+        .val(CONFIGURATOR.expertMode);
 
     CliAutoComplete.setEnabled(config.get('cliAutoComplete') ?? true);
 

@@ -30,4 +30,5 @@ export const CONFIGURATOR = $state({
     "https://github.com/rotorflight/rotorflight-configurator/releases",
   allReleasesUrl:
     "https://github.com/rotorflight/rotorflight-configurator/releases",
+  expertMode: false,
 });
