@@ -1,6 +1,6 @@
 import semver from "semver";
 
-import { API_VERSION_12_9 } from "@/js/data_storage.js";
+import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
 
 export function getNativeCrsfSensors() {
   return [

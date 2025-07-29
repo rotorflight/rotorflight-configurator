@@ -3,7 +3,7 @@
   import { slide } from "svelte/transition";
 
   import { FC } from "@/js/fc.svelte.js";
-  import { API_VERSION_12_8 } from "@/js/data_storage";
+  import { API_VERSION_12_8 } from "@/js/configurator.svelte.js";
 
   import Field from "@/components/Field.svelte";
   import InfoNote from "@/components/notes/InfoNote.svelte";
