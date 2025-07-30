@@ -326,9 +326,9 @@ export function startProcess() {
     $('#expert-mode input')
         .on('change', function () {
             CONFIGURATOR.expertMode = this.checked;
-            config.set('expertMode', this.checked);
+            config.set({'expertMode': this.checked});
         })
-        .val(CONFIGURATOR.expertMode);
+        .prop('checked', CONFIGURATOR.expertMode);
 
     CliAutoComplete.setEnabled(config.get('cliAutoComplete') ?? true);
 
@@ -411,12 +411,6 @@ function notifyOutdatedVersion(releaseData) {
         configuratorVersionDialog(message, CONFIGURATOR.latestVersionReleaseUrl);
     }
 }
-
-/**
-function isExpertModeEnabled() {
-    return $('input[name="expertModeCheckbox"]').is(':checked');
-}
-**/
 
 export function updateTabList(features) {
     $('#tabs ul.mode-connected li.tab_gps').toggle(features.isEnabled('GPS'));
