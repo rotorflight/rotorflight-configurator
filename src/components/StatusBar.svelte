@@ -3,7 +3,7 @@
   import { portUsage } from "@/js/port_usage.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { MSP } from "@/js/msp.svelte.js";
-  import { CONFIGURATOR } from "@/js/data_storage.js";
+  import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 
   let showFwVersion = $derived(
     FC.CONFIG.buildVersion && FC.CONFIG.flightControllerIdentifier,

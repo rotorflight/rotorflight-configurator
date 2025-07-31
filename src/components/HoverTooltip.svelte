@@ -12,7 +12,13 @@
   let arrowElement;
   let tooltipElement;
 
+  function onmouseleave() {
+    tooltipElement.hidePopover();
+  }
+
   async function onmouseover() {
+    tooltipElement.showPopover();
+
     const { x, y, placement, middlewareData } = await computePosition(
       element,
       tooltipElement,
@@ -64,32 +70,43 @@
   }
 </script>
 
-<!-- eslint-disable-next-line svelte/valid-compile -->
-<div class="container" bind:this={element} {onmouseover}>
+<div class="container" bind:this={element} {onmouseover} {onmouseleave}>
   {@render children?.()}
-  <div class="tooltip" role="tooltip" bind:this={tooltipElement}>
+  <div class="tooltip" role="tooltip" bind:this={tooltipElement} popover>
     {@render tooltip?.()}
     <div class="tooltip-arrow" bind:this={arrowElement}></div>
   </div>
 </div>
 
 <style lang="scss">
+  [popover] {
+    overflow: visible;
+    animation: fadeIn 0.2s ease-out;
+
+    &::backdrop {
+      display: none;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   .container {
     position: relative;
     width: fit-content;
-
-    &:hover .tooltip {
-      display: block;
-    }
   }
 
   .tooltip {
     width: max-content;
-    position: absolute;
+    position: relative;
     max-width: 240px;
     padding: 8px;
-    display: none;
-    z-index: 2000;
     text-wrap: wrap;
     font-size: 12px;
     font-weight: 400;

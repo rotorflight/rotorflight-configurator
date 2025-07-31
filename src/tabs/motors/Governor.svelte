@@ -3,7 +3,10 @@
   import { slide } from "svelte/transition";
 
   import { FC } from "@/js/fc.svelte.js";
-  import { API_VERSION_12_8, API_VERSION_12_9 } from "@/js/data_storage.js";
+  import {
+    API_VERSION_12_8,
+    API_VERSION_12_9,
+  } from "@/js/configurator.svelte.js";
 
   import Field from "@/components/Field.svelte";
   import InfoNote from "@/components/notes/InfoNote.svelte";
@@ -52,7 +55,9 @@
 
 <Section label="govFeatures">
   {#if enabled}
-    <InfoNote message="govConfigurationNote" />
+    <div transition:slide>
+      <InfoNote message="govConfigurationNote" />
+    </div>
   {/if}
 
   <SubSection>

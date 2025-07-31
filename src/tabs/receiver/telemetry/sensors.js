@@ -125,6 +125,9 @@ export const TELEMETRY_SENSORS = {
   DEBUG_5: 105,
   DEBUG_6: 106,
   DEBUG_7: 107,
+
+  RPM: 108,
+  TEMP: 109,
 };
 
 // create reverse mapping

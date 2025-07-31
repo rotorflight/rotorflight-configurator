@@ -1,7 +1,7 @@
 <script>
   import semver from "semver";
   import { slide } from "svelte/transition";
-  import { API_VERSION_12_7 } from "@/js/data_storage.js";
+  import { API_VERSION_12_7 } from "@/js/configurator.svelte.js";
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";

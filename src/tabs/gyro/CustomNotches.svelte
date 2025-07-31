@@ -95,77 +95,83 @@
   </ToggleFieldGroup>
 {/snippet}
 
-<div class="container">
-  <div
-    class={["header", multiAxis && "multi-axis"]}
-    style:border-color={axisColor}
-  >
-    <div class="title">{$i18n.t("gyroRpmFilterBanks")}</div>
-    {#if notches && multiAxis}
-      <ul>
-        {#each axisProps as axisProp, i (axisProp)}
-          <button
-            class:active={axis === i}
-            onclick={() => (axis = i)}
-            style:background={axisProp.color}
-          >
-            {$i18n.t(axisProp.label)}
-          </button>
-        {/each}
-      </ul>
-    {/if}
-  </div>
-
-  <div class="content">
-    {#if notchCount > MAX_NOTCH_COUNT}
-      <ErrorNote>
-        {$i18n.t("gyroRpmFilterNotchCountWarn")}
-        <br />
-        <b>{notchCount} / {MAX_NOTCH_COUNT}</b>
-      </ErrorNote>
-    {/if}
-    {#if notches}
-      {#if showMainMotor || showTailMotor}
-        <SubSection label="gyroRpmFilterMotorGroup">
-          {#if showMainMotor}
-            {@render notch("gyroRpmFilterMainMotorQ", 10)}
-          {/if}
-          {#if showTailMotor}
-            {@render notch("gyroRpmFilterTailMotorQ", 20)}
-          {/if}
-        </SubSection>
+<div class="wrapper">
+  <div class="container">
+    <div
+      class={["header", multiAxis && "multi-axis"]}
+      style:border-color={axisColor}
+    >
+      <div class="title">{$i18n.t("gyroRpmFilterBanks")}</div>
+      {#if notches && multiAxis}
+        <ul>
+          {#each axisProps as axisProp, i (axisProp)}
+            <button
+              class:active={axis === i}
+              onclick={() => (axis = i)}
+              style:background={axisProp.color}
+            >
+              {$i18n.t(axisProp.label)}
+            </button>
+          {/each}
+        </ul>
       {/if}
+    </div>
 
-      <SubSection label="gyroRpmFilterMainRotorGroup">
-        {@render notch("gyroRpmFilterQ1", 11, "gyroRpmFilterH1")}
-        {@render notch("gyroRpmFilterQ2", 12, "gyroRpmFilterH2")}
-        {@render notch("gyroRpmFilterQ3", 13)}
-        {@render notch("gyroRpmFilterQ4", 14)}
-        {@render notch("gyroRpmFilterQ5", 15)}
-        {@render notch("gyroRpmFilterQ6", 16)}
-        {@render notch("gyroRpmFilterQ7", 17)}
-        {@render notch("gyroRpmFilterQ8", 18)}
-      </SubSection>
+    <div class="content">
+      {#if notchCount > MAX_NOTCH_COUNT}
+        <ErrorNote>
+          {$i18n.t("gyroRpmFilterNotchCountWarn")}
+          <br />
+          <b>{notchCount} / {MAX_NOTCH_COUNT}</b>
+        </ErrorNote>
+      {/if}
+      {#if notches}
+        {#if showMainMotor || showTailMotor}
+          <SubSection label="gyroRpmFilterMotorGroup">
+            {#if showMainMotor}
+              {@render notch("gyroRpmFilterMainMotorQ", 10)}
+            {/if}
+            {#if showTailMotor}
+              {@render notch("gyroRpmFilterTailMotorQ", 20)}
+            {/if}
+          </SubSection>
+        {/if}
 
-      <SubSection label="gyroRpmFilterTailRotorGroup">
-        {@render notch("gyroRpmFilterQ1", 21, "gyroRpmFilterH1")}
-        {@render notch("gyroRpmFilterQ2", 22, "gyroRpmFilterH2")}
-        {@render notch("gyroRpmFilterQ3", 23)}
-        {@render notch("gyroRpmFilterQ4", 24)}
-      </SubSection>
-    {:else}
-      <WarningNote>
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        {@html $i18n.t("gyroRpmFilterCustomNote")}
-      </WarningNote>
-      <button class="reset-btn" onclick={onResetNotches}>
-        {$i18n.t("gyroRpmFilterNotchResetBtn")}
-      </button>
-    {/if}
+        <SubSection label="gyroRpmFilterMainRotorGroup">
+          {@render notch("gyroRpmFilterQ1", 11, "gyroRpmFilterH1")}
+          {@render notch("gyroRpmFilterQ2", 12, "gyroRpmFilterH2")}
+          {@render notch("gyroRpmFilterQ3", 13)}
+          {@render notch("gyroRpmFilterQ4", 14)}
+          {@render notch("gyroRpmFilterQ5", 15)}
+          {@render notch("gyroRpmFilterQ6", 16)}
+          {@render notch("gyroRpmFilterQ7", 17)}
+          {@render notch("gyroRpmFilterQ8", 18)}
+        </SubSection>
+
+        <SubSection label="gyroRpmFilterTailRotorGroup">
+          {@render notch("gyroRpmFilterQ1", 21, "gyroRpmFilterH1")}
+          {@render notch("gyroRpmFilterQ2", 22, "gyroRpmFilterH2")}
+          {@render notch("gyroRpmFilterQ3", 23)}
+          {@render notch("gyroRpmFilterQ4", 24)}
+        </SubSection>
+      {:else}
+        <WarningNote>
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+          {@html $i18n.t("gyroRpmFilterCustomNote")}
+        </WarningNote>
+        <button class="reset-btn" onclick={onResetNotches}>
+          {$i18n.t("gyroRpmFilterNotchResetBtn")}
+        </button>
+      {/if}
+    </div>
   </div>
 </div>
 
 <style lang="scss">
+  .wrapper {
+    padding-top: var(--section-gap);
+  }
+
   .container {
     display: flex;
     flex-direction: column;

@@ -3,7 +3,7 @@
   import { slide } from "svelte/transition";
 
   import { FC } from "@/js/fc.svelte.js";
-  import { API_VERSION_12_7, API_VERSION_12_8 } from "@/js/data_storage";
+  import { API_VERSION_12_7, API_VERSION_12_8 } from "@/js/configurator.svelte";
 
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
@@ -17,21 +17,23 @@
 
 <Section label="motorsEscTelemetry">
   {#if !motorState.isCastleLink}
-    <SubSection>
-      <Field id="esc-telemetry-protocol" label="motorsEscTelemetryProtocol">
-        {#snippet tooltip()}
-          <Tooltip help="motorsEscTelemetryProtocolHelp" />
-        {/snippet}
-        <select
-          id="esc-telemetry-protocol"
-          bind:value={FC.ESC_SENSOR_CONFIG.protocol}
-        >
-          {#each motorState.telemetryProtocols as proto, index (proto)}
-            <option value={index}>{proto}</option>
-          {/each}
-        </select>
-      </Field>
-    </SubSection>
+    <div transition:slide>
+      <SubSection>
+        <Field id="esc-telemetry-protocol" label="motorsEscTelemetryProtocol">
+          {#snippet tooltip()}
+            <Tooltip help="motorsEscTelemetryProtocolHelp" />
+          {/snippet}
+          <select
+            id="esc-telemetry-protocol"
+            bind:value={FC.ESC_SENSOR_CONFIG.protocol}
+          >
+            {#each motorState.telemetryProtocols as proto, index (proto)}
+              <option value={index}>{proto}</option>
+            {/each}
+          </select>
+        </Field>
+      </SubSection>
+    </div>
   {/if}
   {#if motorState.telemEnabled && motorState.hasTelemPort}
     <div transition:slide>

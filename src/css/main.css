@@ -652,13 +652,9 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-top:2px;
 }
 
-#expertMode {
-    color: var(--subtleAccent);
-    margin-top: 27px;
-    width:125px;
-    float: right;
-    margin-right: 0;
-    line-height: 12px;
+#expert-mode {
+    margin-top: 25px;
+    width: 90px;
 }
 
 /* Battery element styling*/

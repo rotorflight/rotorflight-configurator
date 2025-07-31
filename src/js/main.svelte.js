@@ -10,7 +10,7 @@ import { FirmwareCache } from "@/js/FirmwareCache.js";
 import { Mixer } from "@/js/Mixer.js";
 import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
 import * as backupRestore from "@/js/backup_restore.js";
-import * as dataStorage from "@/js/data_storage.js";
+import * as configurator from "@/js/configurator.svelte.js";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GuiControl } from "@/js/gui.js";
@@ -49,7 +49,7 @@ globalThis.GUI = new GuiControl();
 // Import them directly where they are needed.
 Object.assign(globalThis, {
   ...backupRestore,
-  ...dataStorage,
+  ...configurator,
   ...defaultHuffmanTree,
   ...main,
   ...serialBackend,
@@ -79,9 +79,6 @@ Object.assign(globalThis, {
   serial,
   usbDevices,
 });
-
-CONFIGURATOR.version = __APP_VERSION__;
-CONFIGURATOR.gitChangesetId = __COMMIT_HASH__;
 
 mount(BatteryLegend, { target: document.querySelector("#battery-legend") });
 mount(StatusBar, { target: document.querySelector("#status-bar") });

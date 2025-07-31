@@ -11,37 +11,50 @@
   }
 </script>
 
-<div class="container">
-  {#if header}
-    {@render header()}
-  {:else}
-    <div class="header">
-      <span class="title">{$i18n.t(label)}</span>
-      {#if summary}
-        <div class="grow"></div>
-        <button
-          aria-label="help"
-          onclick={toggleSummary}
-          class={["icon", "fas", "fa-question-circle", showSummary && "active"]}
-        >
-        </button>
-      {/if}
+<div class="wrapper">
+  <div class="container">
+    {#if header}
+      {@render header()}
+    {:else}
+      <div class="header">
+        <span class="title">{$i18n.t(label)}</span>
+        {#if summary}
+          <div class="grow"></div>
+          <button
+            aria-label="help"
+            onclick={toggleSummary}
+            class={[
+              "icon",
+              "fas",
+              "fa-question-circle",
+              showSummary && "active",
+            ]}
+          >
+          </button>
+        {/if}
+      </div>
+    {/if}
+    {#if showSummary && typeof summary === "string"}
+      <div class="summary" transition:slide>
+        <p>
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+          {@html $i18n.t(summary)}
+        </p>
+      </div>
+    {/if}
+    <div class="content">
+      <div class="content-wrapper">
+        {@render children?.()}
+      </div>
     </div>
-  {/if}
-  {#if showSummary && typeof summary === "string"}
-    <div class="summary" transition:slide>
-      <p>
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        {@html $i18n.t(summary)}
-      </p>
-    </div>
-  {/if}
-  <div class="content">
-    {@render children?.()}
   </div>
 </div>
 
 <style lang="scss">
+  .wrapper {
+    padding-top: var(--section-gap);
+  }
+
   .container {
     :global(html[data-theme="light"]) & {
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -58,10 +71,9 @@
 
   .content {
     padding: 4px;
-    display: flex;
-    flex-direction: column;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+    overflow: hidden;
 
     :global(html[data-theme="light"]) & {
       background-color: var(--color-neutral-100);
@@ -70,9 +82,15 @@
     :global(html[data-theme="dark"]) & {
       background-color: var(--color-neutral-900);
     }
+  }
 
-    > :global(*) + :global(*) {
-      margin-top: 12px;
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: -12px;
+
+    > :global(*) {
+      margin-bottom: 12px;
     }
   }
 
@@ -142,9 +160,13 @@
     .content {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
+    }
 
-      & > :global(*) + :global(*) {
-        margin-top: 16px;
+    .content-wrapper {
+      margin-bottom: -16px;
+
+      > :global(*) {
+        margin-bottom: 16px;
       }
     }
 
