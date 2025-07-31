@@ -2550,6 +2550,12 @@
     "adjustmentsFunctionYawPrecompCutoff": {
         "message": "Yaw Precomp Cutoff"
     },
+    "adjustmentsFunctionGovIdleThrottle": {
+        "message": "Governor Idle Throttle"
+    },
+    "adjustmentsFunctionGovAutoThrottle": {
+        "message": "Governor Auto Throttle"
+    },
     "servoHelp": {
         "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
     },
@@ -3375,6 +3381,9 @@
     "govModeHelp": {
         "message": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
     },
+    "govModeHelp2": {
+        "message": "<strong>OFF:</strong> TODO<br><br><strong>EXTERNAL:</strong> TODO<br><br><strong>ELECTRIC:</strong> TODO<br><br><strong>NITRO:</strong> TODO"
+    },
     "govHandoverThrottle": {
         "message": "Handover Throttle"
     },
@@ -3392,6 +3401,12 @@
     },
     "govSpoolupTimeHelp": {
         "message": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
+    },
+    "govSpooldownTime": {
+        "message": "Spooldown Time"
+    },
+    "govSpooldownTimeHelp": {
+        "message": "TODO"
     },
     "govSpoolupMinThrottle": {
         "message": "Spoolup Minimum Throttle"
@@ -3435,6 +3450,12 @@
     "govZeroThrottleTimeoutHelp": {
         "message": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup."
     },
+    "govThrottleHoldTimeout": {
+        "message": "Throttle Hold Timeout"
+    },
+    "govThrottleHoldTimeoutHelp": {
+        "message": "TODO"
+    },
     "govLostHeadspeedTimeout": {
         "message": "Headspeed Signal Timeout"
     },
@@ -3465,8 +3486,14 @@
     "govFFFilterHzHelp": {
         "message": "Cutoff for the cyclic/collective precompensation lowpass filter."
     },
+    "govDCutoff": {
+        "message": "D-Term Cutoff"
+    },
+    "govDCutoffHelp": {
+        "message": "TODO"
+    },
     "govHeadspeed": {
-        "message": "Full headspeed"
+        "message": "Full Headspeed"
     },
     "govHeadspeedHelp": {
         "message": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input."
@@ -3486,8 +3513,26 @@
     "govMinThrottleHelp": {
         "message": "Minimum output throttle the governor is allowed to use."
     },
+    "govIdleThrottle": {
+        "message": "Idle Throttle"
+    },
+    "govIdleThrottleHelp": {
+        "message": "TODO"
+    },
+    "govAutoThrottle": {
+        "message": "Auto Throttle"
+    },
+    "govAutoThrottleHelp": {
+        "message": "TODO"
+    },
+    "govFallbackDrop": {
+        "message": "Throttle Fallback Drop"
+    },
+    "govFallbackDropHelp": {
+        "message": "TODO"
+    },
     "govMasterGain": {
-        "message": "PID master gain"
+        "message": "Master Gain"
     },
     "govMasterGainHelp": {
         "message": "Master PID loop gain. Usually 10..100"
@@ -3511,7 +3556,7 @@
         "message": "PID loop D-term gain. Usually 0..100"
     },
     "govFGain": {
-        "message": "Feedforward gain"
+        "message": "Feedforward Gain"
     },
     "govFGainHelp": {
         "message": "Collective/Cyclic feedforward gain. Usually 0..100"
@@ -3529,22 +3574,64 @@
         "message": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%."
     },
     "govYawPrecomp": {
-        "message": "Yaw precompensation"
+        "message": "Yaw"
     },
     "govYawPrecompHelp": {
         "message": "Yaw precompensation weight. Determines how much Yaw is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
     "govCyclicPrecomp": {
-        "message": "Cyclic precompensation"
+        "message": "Cyclic"
     },
     "govCyclicPrecompHelp": {
         "message": "Cyclic precompensation weight. Determines how much cyclic is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
     "govCollectivePrecomp": {
-        "message": "Collective precompensation"
+        "message": "Collective"
     },
     "govCollectivePrecompHelp": {
         "message": "Collective precompensation weight. Determines how much collective is mixed into the feedfoward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
+    },
+    "profileGovPIDSection": {
+        "message": "PID"
+    },
+    "profileGovPrecompSection": {
+        "message": "Precompensation"
+    },
+    "profileGovFlagsSection": {
+        "message": "Flags"
+    },
+    "govFlag_3POS_THROTTLE": {
+        "message": "3POS_THROTTLE"
+    },
+    "govFlag_FC_THROTTLE_CURVE": {
+        "message": "FC_THROTTLE_CURVE"
+    },
+    "govFlag_TX_PRECOMP_CURVE": {
+        "message": "TX_PRECOMP_CURVE"
+    },
+    "govFlag_FALLBACK_PRECOMP": {
+        "message": "FALLBACK_PRECOMP"
+    },
+    "govFlag_VOLTAGE_COMP": {
+        "message": "VOLTAGE_COMP"
+    },
+    "govFlag_PID_SPOOLUP": {
+        "message": "PID_SPOOLUP"
+    },
+    "govFlag_HS_ADJUSTMENT": {
+        "message": "HS_ADJUSTMENT"
+    },
+    "govFlag_DYN_MIN_THROTTLE": {
+        "message": "DYN_MIN_THROTTLE"
+    },
+    "govFlag_AUTOROTATION": {
+        "message": "AUTOROTATION"
+    },
+    "govFlag_SUSPEND": {
+        "message": "SUSPEND"
+    },
+    "govFlag_BYPASS": {
+        "message": "BYPASS"
     },
     "sensorsInfo": {
         "message": "Keep in mind that using fast update periods and rendering multiple graphs at the same time is resource heavy and will burn your battery quicker if you use a laptop.<br />We recommend to only render graphs for sensors you are interested in while using reasonable update periods."
