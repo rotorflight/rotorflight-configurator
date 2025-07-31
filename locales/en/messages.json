@@ -3609,8 +3609,11 @@
     "govFlag_3POS_THROTTLE": {
         "message": "3POS_THROTTLE"
     },
-    "govFlag_TX_THROTTLE_CURVE": {
-        "message": "TX_THROTTLE_CURVE"
+    "govFlag_FC_THROTTLE_CURVE": {
+        "message": "FC_THROTTLE_CURVE"
+    },
+    "govFlag_TX_PRECOMP_CURVE": {
+        "message": "TX_PRECOMP_CURVE"
     },
     "govFlag_FALLBACK_PRECOMP": {
         "message": "FALLBACK_PRECOMP"

@@ -270,54 +270,95 @@
               help="govSpooldownTimeHelp"
               attrs={[
                 { name: "genericDefault", value: "3s" },
-                { name: "genericRange", value: "0s - 25s" },
+                { name: "genericRange", value: "0s - 60s" },
               ]}
             />
           {/snippet}
           <NumberInput
             id="gov-spooldown-time"
             min="0"
-            max="25"
+            max="60"
             step="0.1"
             bind:value={fields.gov_spooldown_time}
           />
         </Field>
         <Field id="gov-tracking-time" label="govTrackingTime" unit="s">
           {#snippet tooltip()}
-            <Tooltip
-              help="govTrackingTimeHelp"
-              attrs={[
-                { name: "genericDefault", value: "2s" },
-                { name: "genericRange", value: "0s - 10s" },
-              ]}
-            />
+            {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+              <Tooltip
+                help="govTrackingTimeHelp"
+                attrs={[
+                  { name: "genericDefault", value: "5s" },
+                  { name: "genericRange", value: "0s - 60s" },
+                ]}
+              />
+            {:else}
+              <Tooltip
+                help="govTrackingTimeHelp"
+                attrs={[
+                  { name: "genericDefault", value: "2s" },
+                  { name: "genericRange", value: "0s - 10s" },
+                ]}
+              />
+            {/if}
           {/snippet}
-          <NumberInput
-            id="gov-tracking-time"
-            min="0"
-            max="10"
-            step="0.1"
-            bind:value={fields.gov_tracking_time}
-          />
+
+          {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+            <NumberInput
+              id="gov-tracking-time"
+              min="0"
+              max="60"
+              step="0.1"
+              bind:value={fields.gov_tracking_time}
+            />
+          {:else}
+            <NumberInput
+              id="gov-tracking-time"
+              min="0"
+              max="10"
+              step="0.1"
+              bind:value={fields.gov_tracking_time}
+            />
+          {/if}
         </Field>
 
         <Field id="gov-recovery-time" label="govRecoveryTime" unit="s">
           {#snippet tooltip()}
-            <Tooltip
-              help="govRecoveryTimeHelp"
-              attrs={[
-                { name: "genericDefault", value: "2s" },
-                { name: "genericRange", value: "0s - 10s" },
-              ]}
-            />
+            {#if semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+              <Tooltip
+                help="govRecoveryTimeHelp"
+                attrs={[
+                  { name: "genericDefault", value: "2s" },
+                  { name: "genericRange", value: "0s - 60s" },
+                ]}
+              />
+            {:else}
+              <Tooltip
+                help="govRecoveryTimeHelp"
+                attrs={[
+                  { name: "genericDefault", value: "2s" },
+                  { name: "genericRange", value: "0s - 10s" },
+                ]}
+              />
+            {/if}
           {/snippet}
-          <NumberInput
-            id="gov-recovery-time"
-            min="0"
-            max="10"
-            step="0.1"
-            bind:value={fields.gov_recovery_time}
-          />
+          {#if semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+            <NumberInput
+              id="gov-recovery-time"
+              min="0"
+              max="60"
+              step="0.1"
+              bind:value={fields.gov_recovery_time}
+            />
+          {:else}
+            <NumberInput
+              id="gov-recovery-time"
+              min="0"
+              max="10"
+              step="0.1"
+              bind:value={fields.gov_recovery_time}
+            />
+          {/if}
         </Field>
         {#if semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)}
           <Field id="gov-auto-bailout-time" label="govAutoBailoutTime" unit="s">

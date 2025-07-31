@@ -12,7 +12,8 @@
 
   const flags = [
     "3POS_THROTTLE",
-    "TX_THROTTLE_CURVE",
+    "FC_THROTTLE_CURVE",
+    "TX_PRECOMP_CURVE",
     "FALLBACK_PRECOMP",
     "VOLTAGE_COMP",
     "PID_SPOOLUP",
