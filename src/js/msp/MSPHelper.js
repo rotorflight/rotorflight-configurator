@@ -1223,7 +1223,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 }
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
                     FC.GOVERNOR.gov_d_cutoff                 = data.readU8();
-                    FC.GOVERNOR.gov_spooldown_time           = data.readU8();
+                    FC.GOVERNOR.gov_spooldown_time           = data.readU16();
                 }
                 break;
             }
@@ -2184,7 +2184,7 @@ MspHelper.prototype.crunch = function(code) {
             }
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
                 buffer.push8(FC.GOVERNOR.gov_d_cutoff)
-                    .push8(FC.GOVERNOR.gov_spooldown_time);
+                    .push16(FC.GOVERNOR.gov_spooldown_time);
             }
             break;
         }
