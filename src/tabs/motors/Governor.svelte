@@ -23,6 +23,8 @@
     return ["OFF", "PASSTHROUGH", "STANDARD", "MODE1", "MODE2"];
   });
 
+  const throttleTypes = ["NORMAL", "OFF_ON", "OFF_IDLE_ON"];
+
   const fields = {};
   for (const field of [
     "gov_startup_time",
@@ -35,7 +37,7 @@
     "gov_zero_throttle_timeout",
     "gov_lost_headspeed_timeout",
     "gov_throttle_hold_timeout",
-    "gov_d_cutoff",
+    "gov_d_filter",
     "gov_spooldown_time",
   ]) {
     Object.defineProperty(fields, field, {
@@ -88,6 +90,55 @@
     {#if enabled}
       <div transition:slide>
         <SubSection>
+          {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+            <Field id="gov-throttle-type" label="govThrottleType">
+              {#snippet tooltip()}
+                <Tooltip help="govThrottleTypeHelp" />
+              {/snippet}
+              <select
+                id="gov-throttle-type"
+                bind:value={FC.GOVERNOR.gov_throttle_type}
+              >
+                {#each throttleTypes as mode, index (mode)}
+                  <option value={index}>{mode}</option>
+                {/each}
+              </select>
+            </Field>
+            <Field id="gov-idle-collective" label="govIdleCollective" unit="%">
+              {#snippet tooltip()}
+                <Tooltip
+                  help="govIdleCollectiveHelp"
+                  attrs={[
+                    { name: "genericDefault", value: "-95%" },
+                    { name: "genericRange", value: "-100% - 100%" },
+                  ]}
+                />
+              {/snippet}
+              <NumberInput
+                id="gov-idle-collective"
+                min="-100"
+                max="100"
+                bind:value={FC.GOVERNOR.gov_idle_collective}
+              />
+            </Field>
+            <Field id="gov-wot-collective" label="govWotCollective" unit="%">
+              {#snippet tooltip()}
+                <Tooltip
+                  help="govIdleWotHelp"
+                  attrs={[
+                    { name: "genericDefault", value: "-10%" },
+                    { name: "genericRange", value: "-100% - 100%" },
+                  ]}
+                />
+              {/snippet}
+              <NumberInput
+                id="gov-idle-collective"
+                min="-100"
+                max="100"
+                bind:value={FC.GOVERNOR.gov_wot_collective}
+              />
+            </Field>
+          {/if}
           <Field
             id="gov-handover-throttle"
             label="govHandoverThrottle"
@@ -516,7 +567,7 @@
               min="0"
               max="25"
               step="0.1"
-              bind:value={fields.gov_d_cutoff}
+              bind:value={fields.gov_d_filter}
             />
           </Field>
         {/if}

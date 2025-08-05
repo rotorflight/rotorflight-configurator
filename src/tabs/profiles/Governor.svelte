@@ -11,7 +11,6 @@
   import Tooltip from "@/components/Tooltip.svelte";
 
   const flags = [
-    "3POS_THROTTLE",
     "FC_THROTTLE_CURVE",
     "TX_PRECOMP_CURVE",
     "FALLBACK_PRECOMP",
