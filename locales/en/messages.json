@@ -3390,6 +3390,24 @@
     "govModeHelp2": {
         "message": "<strong>OFF:</strong> TODO<br><br><strong>EXTERNAL:</strong> TODO<br><br><strong>ELECTRIC:</strong> TODO<br><br><strong>NITRO:</strong> TODO"
     },
+    "govThrottleType": {
+        "message": "Throttle Type"
+    },
+    "govThrottleTypeHelp": {
+        "message": "TODO"
+    },
+    "govIdleCollective": {
+        "message": "Idle Collective"
+    },
+    "govIdleCollectiveHelp": {
+        "message": "TODO"
+    },
+    "govWotCollective": {
+        "message": "WOT Collective"
+    },
+    "govWotCollectiveHelp": {
+        "message": "TODO"
+    },
     "govHandoverThrottle": {
         "message": "Handover Throttle"
     },
@@ -3605,9 +3623,6 @@
     },
     "profileGovFlagsSection": {
         "message": "Flags"
-    },
-    "govFlag_3POS_THROTTLE": {
-        "message": "3POS_THROTTLE"
     },
     "govFlag_FC_THROTTLE_CURVE": {
         "message": "FC_THROTTLE_CURVE"

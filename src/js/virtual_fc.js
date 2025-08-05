@@ -153,8 +153,10 @@ export function applyVirtualConfig() {
     gov_tta_filter: 0,
     gov_ff_filter: 10,
     gov_throttle_hold_timeout: 50,
-    gov_d_cutoff: 50,
+    gov_d_filter: 50,
     gov_spooldown_time: 30,
+    gov_idle_collective: -95,
+    gov_wot_collective: -10,
   });
 
   Object.assign(FC.MOTOR_TELEMETRY_DATA, {
