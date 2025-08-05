@@ -1222,8 +1222,11 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.GOVERNOR.gov_spoolup_min_throttle     = data.readU8();
                 }
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
-                    FC.GOVERNOR.gov_d_cutoff                 = data.readU8();
+                    FC.GOVERNOR.gov_d_filter                 = data.readU8();
                     FC.GOVERNOR.gov_spooldown_time           = data.readU16();
+                    FC.GOVERNOR.gov_throttle_type            = data.readU8();
+                    FC.GOVERNOR.gov_idle_collective          = data.read8();
+                    FC.GOVERNOR.gov_wot_collective           = data.read8();
                 }
                 break;
             }
@@ -2183,8 +2186,11 @@ MspHelper.prototype.crunch = function(code) {
                 buffer.push8(FC.GOVERNOR.gov_spoolup_min_throttle);
             }
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
-                buffer.push8(FC.GOVERNOR.gov_d_cutoff)
-                    .push16(FC.GOVERNOR.gov_spooldown_time);
+                buffer.push8(FC.GOVERNOR.gov_d_filter)
+                    .push16(FC.GOVERNOR.gov_spooldown_time)
+                    .push8(FC.GOVERNOR.gov_throttle_type)
+                    .push8(FC.GOVERNOR.gov_idle_collective)
+                    .push8(FC.GOVERNOR.gov_wot_collective);
             }
             break;
         }
