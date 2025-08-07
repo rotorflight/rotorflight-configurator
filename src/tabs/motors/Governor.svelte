@@ -124,7 +124,7 @@
             <Field id="gov-wot-collective" label="govWotCollective" unit="%">
               {#snippet tooltip()}
                 <Tooltip
-                  help="govIdleWotHelp"
+                  help="govWotCollectiveHelp"
                   attrs={[
                     { name: "genericDefault", value: "-10%" },
                     { name: "genericRange", value: "-100% - 100%" },
