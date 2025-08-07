@@ -30,7 +30,7 @@
   let rpmAvailable = $derived(
     FC.FEATURE_CONFIG.features.FREQ_SENSOR ||
       FC.FEATURE_CONFIG.features.ESC_SENSOR ||
-      (motorState.isDshot && FC.ESC_SENSOR_CONFIG.use_dshot_telemetry),
+      (motorState.isDshot && FC.MOTOR_CONFIG.use_dshot_telemetry),
   );
 
   function snapshotState() {

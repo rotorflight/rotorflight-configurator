@@ -1,6 +1,6 @@
 <script>
   import semver from "semver";
-  import { onMount, onDestroy } from "svelte";
+  import { onDestroy } from "svelte";
   import { slide } from "svelte/transition";
 
   import { FC } from "@/js/fc.svelte.js";
@@ -111,11 +111,21 @@
   }
 
   let overrideIntervalId;
-  onMount(() => {
-    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
-      overrideIntervalId = setInterval(() => {
-        mspHelper.sendMotorOverride(index);
-      }, 250);
+  $effect(() => {
+    if (motorState.overrideEnabled) {
+      if (
+        semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) &&
+        !overrideIntervalId
+      ) {
+        overrideIntervalId = setInterval(() => {
+          mspHelper.sendMotorOverride(index);
+        }, 250);
+      }
+    } else {
+      clearInterval(overrideIntervalId);
+      overrideIntervalId = null;
+      clearTimeout(timeoutId);
+      timeoutId = null;
     }
   });
 
@@ -210,7 +220,7 @@
         </div>
       </div>
     {/if}
-    {#if FC.ESC_SENSOR_CONFIG.use_dshot_telemetry}
+    {#if FC.MOTOR_CONFIG.use_dshot_telemetry}
       <div transition:slide>
         <div class="bar">
           <Meter
