@@ -33,7 +33,7 @@
           {/snippet}
           <Switch
             id="dshot-bidir"
-            bind:checked={FC.ESC_SENSOR_CONFIG.use_dshot_telemetry}
+            bind:checked={FC.MOTOR_CONFIG.use_dshot_telemetry}
           />
         </Field>
       </div>

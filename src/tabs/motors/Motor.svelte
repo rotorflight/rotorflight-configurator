@@ -220,7 +220,7 @@
         </div>
       </div>
     {/if}
-    {#if FC.ESC_SENSOR_CONFIG.use_dshot_telemetry}
+    {#if FC.MOTOR_CONFIG.use_dshot_telemetry}
       <div transition:slide>
         <div class="bar">
           <Meter
