@@ -332,13 +332,13 @@ jobs:
       uses: actions/setup-java@v4
       with:
         distribution: temurin
-        java-version: '11'
+        java-version: '17'
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
       with:
-        cmdline-tools-version: 9123335
-        packages: 'tools platform-tools platforms;android-33 build-tools;33.0.2'
+        cmdline-tools-version: 13114758
+        packages: 'tools platform-tools platforms;android-35 build-tools;35.0.0'
 
     - name: Set build variables
       run: |
