@@ -516,7 +516,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_ESC_SENSOR_CONFIG: {
                 FC.ESC_SENSOR_CONFIG.protocol = data.readU8();
-                FC.ESC_SENSOR_CONFIG.half_duplex = data.readU8();
+                FC.ESC_SENSOR_CONFIG.half_duplex = Boolean(data.readU8());
                 FC.ESC_SENSOR_CONFIG.update_hz = data.readU16();
                 FC.ESC_SENSOR_CONFIG.current_offset = data.readU16();
                 FC.ESC_SENSOR_CONFIG.hw4_current_offset = data.readU16();
@@ -1914,7 +1914,7 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_ESC_SENSOR_CONFIG: {
             buffer.push8(FC.ESC_SENSOR_CONFIG.protocol)
-                  .push8(FC.ESC_SENSOR_CONFIG.half_duplex)
+                  .push8(Number(FC.ESC_SENSOR_CONFIG.half_duplex))
                   .push16(FC.ESC_SENSOR_CONFIG.update_hz)
                   .push16(FC.ESC_SENSOR_CONFIG.current_offset)
                   .push16(FC.ESC_SENSOR_CONFIG.hw4_current_offset)
