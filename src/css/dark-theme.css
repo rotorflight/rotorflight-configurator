@@ -301,54 +301,6 @@ html[data-theme=dark] .tab-configuration #interactive_block a.reset:hover {
 }
 
 
-
-/* FAILSAFE TAB */
-
-html[data-theme=dark] .tab-failsafe .number input {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-failsafe .number input:disabled {
-    background-color: #393b3a;
-    color: grey;
-}
-
-html[data-theme=dark] .tab-failsafe .radioarea {
-    background-color: #393b3a;
-}
-
-html[data-theme=dark] .tab-failsafe .gui_box span {
-    color: white;
-}
-
-html[data-theme=dark] .tab-failsafe .stage1 select {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-failsafe .modename {
-    background-color: #393b3a;
-}
-
-html[data-theme=dark] .tab-failsafe .switchMode {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-failsafe .pro1 {
-    background-image: url(/images/icons/cf_failsafe_procedure1-dark.svg);
-}
-
-html[data-theme=dark] .tab-failsafe .pro2 {
-    background-image: url(/images/icons/cf_failsafe_procedure2-dark.svg);
-}
-
-html[data-theme=dark] .tab-failsafe .pro4 {
-    background-image: url(/images/icons/cf_failsafe_procedure4-dark.svg);
-}
-
-
 /* FIRMWARE FLASHER TAB */
 
 html[data-theme=dark] .btn .disabled {
@@ -692,75 +644,6 @@ html[data-theme=dark] .tab-power .number input {
 html[data-theme=dark] .tab-power .battery-configuration select {
     background-color: #3a3a3a;
     color: white;
-}
-
-
-/* RECEIVER TAB */
-
-html[data-theme=dark] .tab-receiver .gui_box span {
-    color: white;
-}
-
-html[data-theme=dark] .tab-receiver input,
-html[data-theme=dark] .tab-receiver select {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-receiver .channels .bar {
-    background-color: #393b3a;
-}
-
-html[data-theme=dark] .tab-receiver .channels .label1,
-html[data-theme=dark] .tab-receiver .channels .label2 {
-    color: white;
-}
-
-html[data-theme=dark] .tab-receiver .tunings {
-    background-color: #393b3a;
-}
-
-html[data-theme=dark] .tab-receiver .tunings table td {
-    background: #414443;
-}
-
-html[data-theme=dark] .tab-receiver .tunings table tr:nth-child(odd) {
-    background-color: #393b3a;
-}
-
-html[data-theme=dark] .tab-receiver .tunings table input {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-receiver .rssi_channel_wrapper {
-    background-color: #414443;
-    border-bottom: 1px solid #4d4d4d;
-    border-right: 1px solid #4d4d4d;
-}
-
-html[data-theme=dark] .tab-receiver .rcmap_wrapper {
-    background-color: #414443;
-    border-left: 1px solid #4d4d4d;
-    border-bottom: 1px solid #4d4d4d;
-}
-
-html[data-theme=dark] .tab-receiver .hybrid_element {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-html[data-theme=dark] .tab-receiver .hybrid_element input {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-receiver .plot_control {
-    background-color: #2f2f2f;
-}
-
-html[data-theme=dark] .tab-receiver text {
-    fill: white;
 }
 
 
