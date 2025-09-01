@@ -18,10 +18,13 @@
 !/src/js/main.svelte.js
 !/src/js/port_usage.js
 !/src/js/presets/**/*
+!/src/js/remote_command.svelte.js
+!/src/js/setpoint.svelte.js
 !/src/js/tabs/failsafe.js
 !/src/js/tabs/gyro.js
 !/src/js/tabs/motors.js
 !/src/js/tabs/presets.js
+!/src/js/tabs/receiver.js
 !/src/js/virtual_fc.js
 !/src/tabs/gyro/filter_config.js
 !/src/tabs/motors/**/*.js
