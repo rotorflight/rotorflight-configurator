@@ -46,7 +46,6 @@ export async function handleConnectClick() {
                 } else {
                     serial.connect(portName, {bitrate: selected_baud}, onOpen);
                 }
-                toggleStatus();
             } else {
                 if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
                     $('div#flashbutton a.flash_state').removeClass('active');
@@ -59,8 +58,10 @@ export async function handleConnectClick() {
 
                 await new Promise((resolve) => globalThis.mspHelper.setArmingEnabled(true, resolve));
 
-                finishClose(toggleStatus);
+                finishClose();
             }
+
+            toggleStatus();
         }
    }
 }
@@ -186,7 +187,7 @@ export function initializeSerialBackend() {
     PortHandler.initialize(GUI.show_all_ports);
 }
 
-function finishClose(finishedCallback) {
+function finishClose() {
     if (GUI.isCordova()) {
         UI_PHONES.reset();
     }
@@ -227,8 +228,6 @@ function finishClose(finishedCallback) {
     }
 
     $('#tabs .tab_landing a').trigger("click");
-
-    finishedCallback();
 }
 
 function setConnectionTimeout() {
