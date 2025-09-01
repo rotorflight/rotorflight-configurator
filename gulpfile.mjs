@@ -20,6 +20,7 @@ import nwbuild from "nw-builder";
 import buildRpm from "rpm-builder";
 import source from "vinyl-source-stream";
 import * as vite from "vite";
+import { VitePWA } from "vite-plugin-pwa";
 
 import pkg from "./package.json" with { type: "json" };
 // Replace dev mode paths
@@ -71,10 +72,21 @@ function build_bundle() {
   return gulp.series(clean_bundle, bundle_vite, bundle_src, bundle_deps);
 }
 
+function platform_backend() {
+  return (
+    {
+      android: "cordova",
+      pwa: "browser",
+    }[context.target.platform] || "nwjs"
+  );
+}
+
 function bundle_vite() {
-  const backend = context.target.platform === "android" ? "cordova" : "nwjs";
   return runAsync(
-    vite.build({ define: { __BACKEND__: JSON.stringify(backend) } }),
+    vite.build({
+      define: { __BACKEND__: JSON.stringify(platform_backend()) },
+      ...(context.vite_options || {}),
+    }),
   );
 }
 
@@ -107,48 +119,90 @@ function bundle_deps() {
   );
 }
 
-function helper_build_app_cordova() {
-  context.appdir = `${APP_DIR}/${context.target.platform}`;
+function build_app_browser() {
+  return async () => {};
+}
 
-  return gulp.series(
-    build_bundle(),
-    cordova_copy_www,
-    cordova_resources,
-    cordova_include_www,
-    cordova_copy_src,
-    cordova_rename_src_config,
-    cordova_rename_src_package,
-    cordova_packagejson,
-    cordova_configxml,
-    cordova_deps,
-    cordova_build,
-  );
+function pwa_vite_options() {
+  return {
+    build: {
+      target: "esnext",
+    },
+    plugins: [
+      VitePWA({
+        workbox: {
+          globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
+        },
+        registerType: "autoUpdate",
+        manifest: {
+          background_color: "#ffffff",
+          theme_color: "#7E1F86",
+          start_url: "/src/main.html",
+          display: "standalone",
+          icons: [
+            {
+              src: "/images/rf_icon.png",
+              sizes: "256x256",
+              type: "image/png",
+              purpose: "maskable any",
+            },
+          ],
+        },
+      }),
+    ],
+  };
+}
+
+function backend_build_helpers(backend) {
+  return {
+    browser: function helper_build_app_browser() {
+      context.vite_options = pwa_vite_options();
+      const tasks = [build_bundle(), build_app_browser()];
+
+      return gulp.series(tasks);
+    },
+
+    cordova: function helper_build_app_cordova() {
+      context.appdir = `${APP_DIR}/${context.target.platform}`;
+
+      return gulp.series(
+        build_bundle(),
+        cordova_copy_www,
+        cordova_resources,
+        cordova_include_www,
+        cordova_copy_src,
+        cordova_rename_src_config,
+        cordova_rename_src_package,
+        cordova_packagejson,
+        cordova_configxml,
+        cordova_deps,
+        cordova_build,
+      );
+    },
+
+    nwjs: function helper_build_app_nwjs() {
+      const tasks = [build_bundle(), build_app_nwjs];
+
+      switch (context.target.platform) {
+        case "linux":
+          tasks.push(build_nwjs_unix_permissions);
+          tasks.push(build_nwjs_linux_assets);
+          break;
+
+        case "osx":
+          tasks.push(build_nwjs_unix_permissions);
+          break;
+      }
+
+      return gulp.series(tasks);
+    },
+  }[backend];
 }
 
 function build_app() {
-  const app_helper =
-    context.target.platform === "android"
-      ? helper_build_app_cordova
-      : helper_build_app_nwjs;
-
-  return gulp.series(clean_app, app_helper());
-}
-
-function helper_build_app_nwjs() {
-  const tasks = [build_bundle(), build_app_nwjs];
-
-  switch (context.target.platform) {
-    case "linux":
-      tasks.push(build_nwjs_unix_permissions);
-      tasks.push(build_nwjs_linux_assets);
-      break;
-
-    case "osx":
-      tasks.push(build_nwjs_unix_permissions);
-      break;
-  }
-
-  return gulp.series(tasks);
+  const build_helper = backend_build_helpers(platform_backend());
+  assert(build_helper, `no build helper for backend ${platform_backend()}`);
+  return gulp.series(clean_app, build_helper());
 }
 
 function build_app_nwjs() {
@@ -219,12 +273,12 @@ async function build_nwjs_unix_permissions() {
 }
 
 function build_redist() {
-  return gulp.series(
-    clean_redist,
-    build_app(),
-    mkdir_redist,
-    helper_build_redist(),
+  const redist_helper = helper_build_redist();
+  assert(
+    redist_helper,
+    `no redist helper for platform ${context.target.platform}`,
   );
+  return gulp.series(clean_redist, build_app(), mkdir_redist, redist_helper());
 }
 
 function mkdir_redist() {
@@ -237,17 +291,24 @@ function helper_build_redist() {
       return build_redist_linux();
 
     case "osx":
-      return build_redist_osx;
+      return build_redist_osx();
 
     case "win":
       return build_redist_win();
 
     case "android":
-      return build_redist_apk;
+      return build_redist_apk();
+
+    case "pwa":
+      return build_redist_pwa();
 
     default:
-      return nop;
+      return () => {};
   }
+}
+
+function build_redist_pwa() {
+  return () => () => Promise.reject(new Error("Not implemented"));
 }
 
 function build_redist_linux() {
@@ -364,53 +425,54 @@ function build_redist_rpm() {
 }
 
 function build_redist_osx() {
-  return runAsync(async () => {
-    const appdmg = (await import("appdmg")).default;
+  return () =>
+    runAsync(async () => {
+      const appdmg = (await import("appdmg")).default;
 
-    const targetPath = `${REDIST_DIR}/${pkg.name}_${pkg.version}_macos_${context.target.arch}.dmg`;
+      const targetPath = `${REDIST_DIR}/${pkg.name}_${pkg.version}_macos_${context.target.arch}.dmg`;
 
-    await new Promise((resolve, reject) => {
-      const builder = appdmg({
-        target: targetPath,
-        basepath: context.appdir,
-        specification: {
-          title: "Rotorflight Configurator",
-          contents: [
-            { x: 448, y: 342, type: "link", path: "/Applications" },
-            {
-              x: 192,
-              y: 344,
-              type: "file",
-              path: `${pkg.name}.app`,
-              name: "Rotorflight Configurator.app",
-            },
-          ],
-          background: `${import.meta.dirname}/assets/osx/dmg-background.png`,
-          format: "UDZO",
-          window: {
-            size: {
-              width: 638,
-              height: 479,
+      await new Promise((resolve, reject) => {
+        const builder = appdmg({
+          target: targetPath,
+          basepath: context.appdir,
+          specification: {
+            title: "Rotorflight Configurator",
+            contents: [
+              { x: 448, y: 342, type: "link", path: "/Applications" },
+              {
+                x: 192,
+                y: 344,
+                type: "file",
+                path: `${pkg.name}.app`,
+                name: "Rotorflight Configurator.app",
+              },
+            ],
+            background: `${import.meta.dirname}/assets/osx/dmg-background.png`,
+            format: "UDZO",
+            window: {
+              size: {
+                width: 638,
+                height: 479,
+              },
             },
           },
-        },
-      });
+        });
 
-      builder.on("progress", (info) =>
-        logger.info(
-          info.current +
-            "/" +
-            info.total +
-            " " +
-            info.type +
-            " " +
-            (info.title || info.status),
-        ),
-      );
-      builder.on("error", reject);
-      builder.on("finish", resolve);
+        builder.on("progress", (info) =>
+          logger.info(
+            info.current +
+              "/" +
+              info.total +
+              " " +
+              info.type +
+              " " +
+              (info.title || info.status),
+          ),
+        );
+        builder.on("error", reject);
+        builder.on("finish", resolve);
+      });
     });
-  });
 }
 
 function build_redist_win() {
@@ -458,12 +520,15 @@ function run_dev_client() {
   switch (context.target.platform) {
     case "android":
       return () =>
-        runAsync(Promie.reject(Error("android dev client not supported")));
+        runAsync(Promise.reject(Error("android dev client not supported")));
 
     case "linux":
     case "osx":
     case "win":
       return run_nwjs_dev_client;
+
+    case "pwa":
+      return run_browser_dev_client;
   }
 }
 
@@ -471,29 +536,32 @@ async function set_debug_flavor() {
   context.target.flavor = "debug";
 }
 
-function run_debug() {
-  const tasks = [set_debug_flavor, build_app()];
-  switch (context.target.platform) {
-    case "android":
-      tasks.push(run_debug_cordova);
-      break;
+function backend_debug_tasks(backend) {
+  return {
+    nwjs: function run_debug_nwjs() {
+      const exe = getNwjsExePath(context.target.platform);
+      return new Promise((resolve, reject) =>
+        child_process.execFile(`${context.appdir}/${exe}`, (err) =>
+          err ? reject(err) : resolve(),
+        ),
+      );
+    },
 
-    case "linux":
-    case "osx":
-    case "win":
-      tasks.push(run_debug_nwjs);
-      break;
-  }
+    cordova: function run_debug_cordova() {
+      return runAsync(cordova.run());
+    },
 
-  return gulp.series(...tasks);
+    browser: function run_debug_browser() {
+      throw new Error("Not implemented yet");
+    },
+  }[backend];
 }
 
-function run_debug_nwjs() {
-  const exe = getNwjsExePath(context.target.platform);
-  return new Promise((resolve, reject) =>
-    child_process.execFile(`${context.appdir}/${exe}`, (err) =>
-      err ? reject(err) : resolve(),
-    ),
+function run_debug() {
+  return gulp.series(
+    set_debug_flavor,
+    build_app(),
+    backend_debug_tasks(platform_backend()),
   );
 }
 
@@ -509,6 +577,20 @@ function getNwjsExePath(platform) {
     default:
       throw new Error(`Unsupported NW.js platform: ${platform}`);
   }
+}
+
+async function run_browser_dev_client() {
+  const server = await vite.createServer({
+    ...pwa_vite_options(),
+    define: { __BACKEND__: JSON.stringify("browser") },
+    server: {
+      port: 1337,
+    },
+  });
+  await server.listen();
+
+  server.printUrls();
+  server.bindCLIShortcuts({ print: true });
 }
 
 function run_nwjs_dev_client() {
@@ -527,10 +609,6 @@ function run_nwjs_dev_client() {
       manifestUrl: NWJS_VERSION_MANIFEST,
     }),
   );
-}
-
-function run_debug_cordova() {
-  return runAsync(cordova.run());
 }
 
 function cordova_copy_www() {
@@ -640,16 +718,17 @@ function cordova_build() {
 function build_redist_apk() {
   const { flavor } = context.target;
   const filename = `${pkg.name}_${pkg.version}_android.apk`;
-  return gulp
-    .src(
-      `${context.appdir}/platforms/android/app/build/outputs/apk/${flavor}/app-${flavor}.apk`,
-    )
-    .pipe(rename(filename))
-    .pipe(gulp.dest(REDIST_DIR));
+  return () =>
+    gulp
+      .src(
+        `${context.appdir}/platforms/android/app/build/outputs/apk/${flavor}/app-${flavor}.apk`,
+      )
+      .pipe(rename(filename))
+      .pipe(gulp.dest(REDIST_DIR));
 }
 
 function parseArgs() {
-  const platforms = ["linux", "osx", "win", "android"];
+  const platforms = ["linux", "osx", "win", "android", "pwa"];
   const arches = ["x86", "x86_64", "arm64"];
 
   const target = {
@@ -664,7 +743,7 @@ function parseArgs() {
       `unsupported platform: ${target.platform}`,
     );
 
-    if (target.platform === "android") {
+    if (["android", "pwa"].includes(target.platform)) {
       target.arch = null;
     } else {
       assert(arches.includes(target.arch), `unsupported arch: ${target.arch}`);
@@ -689,8 +768,6 @@ function getHostArch() {
     ia32: "x86",
   }[process.arch];
 }
-
-async function nop() {}
 
 async function runAsync(fn) {
   try {
