@@ -11,7 +11,7 @@
 
   import ModelPreview from "./ModelPreview.svelte";
   import Page from "@/components/Page.svelte";
-  import ReceiverSettings from "./ReceiverSettings.svelte";
+  import ChannelRange from "./ChannelRange.svelte";
   import ReceiverType from "./ReceiverType.svelte";
   import TelemetrySettings from "./TelemetrySettings.svelte";
   import TelemetrySensors from "./TelemetrySensors/TelemetrySensors.svelte";
@@ -305,7 +305,7 @@
   <div class="content">
     <div>
       <ReceiverType {rxProtoIndex} {hasSerialRxPort} {setRxProto} />
-      <ReceiverSettings />
+      <ChannelRange />
       {#if telemetry}
         <div transition:slide>
           <TelemetrySettings {telemetry} {resetTelemetry} />

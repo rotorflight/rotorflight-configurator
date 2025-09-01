@@ -1727,11 +1727,17 @@
     "receiverHelpZeroThrottle": {
         "message": "The throttle channel value where throttle is considered 0%."
     },
+    "receiverHelpZeroThrottle2": {
+        "message": "<p>The throttle channel value where throttle is considered 0%. Set to 0 to set automatically.</p><p><b>Note:</b> The throttle channel must be able to move atleast 10µs below this value to signal throttle off and allow arming.</p>"
+    },
     "receiverFullThrottle": {
         "message": "Max Throttle - 100%"
     },
     "receiverHelpFullThrottle": {
         "message": "The throttle channel value where throttle is considered 100%."
+    },
+    "receiverHelpFullThrottle2": {
+        "message": "The throttle channel value where throttle is considered 100%. Set to 0 to set automatically."
     },
     "receiverCyclicDeadband": {
         "message": "Cyclic Deadband"
