@@ -5272,22 +5272,22 @@
         "message": "Failsafe has two stages. <strong>Stage 1</strong> is entered when a flightchannel has an invalid pulse length, the receiver reports failsafe mode or there is no signal from the receiver at all, the channel fallback settings are applied to <span class=\"message-negative\">all channels</span> and a short amount of time is provided to allow for recovery. <strong>Stage 2</strong> is entered when the error condition takes longer than the configured guard time while the craft is <span class=\"message-negative\">armed</span>, all channels will remain at the applied channel fallback setting unless overruled by the chosen procedure. <br /><strong>Note:</strong> Prior to entering stage 1, channel fallback settings are also applied to individual AUX channels that have invalid pulses."
     },
     "failsafePulsrangeTitle": {
-        "message": "Valid Pulse Range Settings"
+        "message": "Pulse Width Limit"
     },
     "failsafePulsrangeHelp": {
-        "message": "Pulses shorter than minimum or longer than maximum are invalid and will trigger application of individual channel fallback settings for AUX channels or entering stage 1 for flightchannels"
+        "message": "Configure the minimum and maximum valid pulse width. Channels outside this range will enter failsafe."
     },
     "failsafeRxMinUsecItem": {
-        "message": "Minimum length"
+        "message": "Minimum Pulse Width"
     },
     "failsafeRxMaxUsecItem": {
-        "message": "Maximum length"
+        "message": "Maximum Pulse Width"
     },
     "failsafeChannelFallbackSettingsTitle": {
-        "message": "Channel Fallback Settings"
+        "message": "Channel Fallback"
     },
     "failsafeChannelFallbackSettingsHelp": {
-        "message": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 5µs, so smaller changes may be ignored."
+        "message": "Configure the failsafe behavior of each channel.<br><strong>Auto:</strong> Sets channel to a safe value. Center for Roll, Pitch, Yaw, Collective. Low for Throttle.<br><strong>Hold:</strong> Holds channel at the last known position.<br><strong>Set:</strong> Sets channel to the specified value [μs]."
     },
     "failsafeChannelFallbackSettingsAuto": {
         "message": "<strong>Auto</strong> means Roll, Pitch and Yaw to center and Throttle low. <strong>Hold</strong> means maintain the last good value received"
