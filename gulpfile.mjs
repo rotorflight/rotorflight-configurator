@@ -24,7 +24,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 import pkg from "./package.json" with { type: "json" };
 // Replace dev mode paths
-pkg.main = "src/main.html";
+pkg.main = "index.html";
 pkg.window.icon = "images/rf_icon.png";
 delete pkg["node-remote"];
 
@@ -135,9 +135,9 @@ function pwa_vite_options() {
         },
         registerType: "autoUpdate",
         manifest: {
-          background_color: "#ffffff",
-          theme_color: "#7E1F86",
-          start_url: "/src/main.html",
+          background_color: "#2e2e2e",
+          theme_color: "#4da8da",
+          start_url: "/",
           display: "standalone",
           icons: [
             {
@@ -625,14 +625,14 @@ function cordova_resources() {
 
 function cordova_include_www() {
   return gulp
-    .src(`${context.appdir}/www/src/main.html`)
+    .src(`${context.appdir}/www/index.html`)
     .pipe(
       replace(
         "<!-- CORDOVA_INCLUDE cordova.js -->",
         '<script type="text/javascript" src="/cordova.js"></script>',
       ),
     )
-    .pipe(gulp.dest(`${context.appdir}/www/src/`));
+    .pipe(gulp.dest(`${context.appdir}/www/`));
 }
 
 function cordova_copy_src() {
