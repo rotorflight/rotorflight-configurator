@@ -5278,16 +5278,16 @@
         "message": "Configure the minimum and maximum valid pulse width. Channels outside this range will enter failsafe."
     },
     "failsafeRxMinUsecItem": {
-        "message": "Minimum pulse width"
+        "message": "Minimum Pulse Width"
     },
     "failsafeRxMaxUsecItem": {
-        "message": "Maximum pulse width"
+        "message": "Maximum Pulse Width"
     },
     "failsafeChannelFallbackSettingsTitle": {
         "message": "Channel Fallback"
     },
     "failsafeChannelFallbackSettingsHelp": {
-        "message": "Configure the failsafe behavior of each channel.<br /><strong>Auto:</strong> Sets channel to a safe value. Center for Roll, Pitch, Yaw, Collective. Low for Throttle.<br /><strong>Hold:</strong> Holds channel at the last known position.<br /><strong>Set:</strong> Sets channel to the specified value [μs]."
+        "message": "Configure the failsafe behavior of each channel.<br><strong>Auto:</strong> Sets channel to a safe value. Center for Roll, Pitch, Yaw, Collective. Low for Throttle.<br><strong>Hold:</strong> Holds channel at the last known position.<br><strong>Set:</strong> Sets channel to the specified value [μs]."
     },
     "failsafeChannelFallbackSettingsAuto": {
         "message": "<strong>Auto</strong> means Roll, Pitch and Yaw to center and Throttle low. <strong>Hold</strong> means maintain the last good value received"
