@@ -1,144 +1,162 @@
-const sheader = "SERIAL (adapted from WebSerial):";
-function slog(message, ...values) {
-    console.log(sheader+message, ...values);
-}
+export const serial = (function() {
+    let reading = false, // Read cancel flag
+        connectedPort,   // Currently connected device
+        reader,          // Reader for current device
+        writer;          // Writer to current device
 
-function swarn(message, ...values) {
-    console.warn(sheader+message, ...values);
-}
+    const ports = [];    // Available port list
 
-function serror(message, ...values) {
-    console.error(sheader+message, ...values);
-}
+    // EventEmitter-like event sources used by chrome.serial
+    const onReceive = Eventer();
+    const onReceiveError = Eventer();
 
-async function* streamAsyncIterable(reader, keepReadingFlag) {
-    try {
-        while (keepReadingFlag()) {
-            try {
-                const { done, value } = await reader.read();
-                if (done) {
+    // Current connection properties
+    let connprops = {
+        connectionId: 1, // Only one connection possible
+        paused: false,
+        persistent: false,
+        name,
+        bufferSize: 4096,
+        receiveTimeout: 0,
+        sendTimeout: 0,
+        bitrate: 9600,
+        dataBits: 'eight',
+        parityBit: 'no',
+        stopBits: 'one',
+        ctsFlowControl: false,
+    };
+
+    const sheader = "SERIAL (adapted from WebSerial):";
+    
+    function slog(message, ...values) {
+        console.log(sheader+message, ...values);
+    }
+
+    function swarn(message, ...values) {
+        console.warn(sheader+message, ...values);
+    }
+
+    function serror(message, ...values) {
+        console.error(sheader+message, ...values);
+    }
+
+    function Eventer() {
+        const listeners = [];
+
+        return {
+            addListener: function(functionReference) {
+                listeners.push(functionReference);
+            },
+            removeListener: function(functionReference) {
+                listeners.slice(listeners.indexOf(functionReference), 1);
+            },
+            receiveData: function(data) {
+                if (data.byteLength === 0) {
                     return;
                 }
-                yield value;
-            } catch (error) {
-                swarn("Read error in streamAsyncIterable:", error);
-                break;
-            }
-        }
-    } finally {
-        // Only release the lock if we still have the reader and it hasn't been released
+
+                for (const listener of listeners) {
+                    listener({ data });
+                }
+            },
+        };
+    }
+
+    async function* streamAsyncIterable(reader, keepReadingFlag) {
         try {
-            // Always attempt once; spec allows releasing even if the stream
-            // is already closed.  `locked` is the boolean we can trust.
-            if (reader?.locked) {
-                reader.releaseLock();
+            while (keepReadingFlag()) {
+                try {
+                    const { done, value } = await reader.read();
+                    if (done) {
+                        return;
+                    }
+                    yield value;
+                } catch (error) {
+                    swarn("Read error in streamAsyncIterable:", error);
+                    break;
+                }
             }
-        } catch (error) {
-            swarn("Error releasing reader lock:", error);
+        } finally {
+            // Only release the lock if we still have the reader and it hasn't been released
+            try {
+                // Always attempt once; spec allows releasing even if the stream
+                // is already closed.  `locked` is the boolean we can trust.
+                if (reader?.locked) {
+                    reader.releaseLock();
+                }
+            } catch (error) {
+                swarn("Error releasing reader lock:", error);
+            }
         }
     }
-}
 
-const serialDevices = [
-    { usbVendorId: 1027, usbProductId: 24577 }, // FT232R USB UART
-    { usbVendorId: 1155, usbProductId: 12886 }, // STM32 in HID mode
-    { usbVendorId: 1155, usbProductId: 14158 }, // 0483:374e STM Electronics STLink Virtual COM Port (NUCLEO boards)
-    { usbVendorId: 1155, usbProductId: 22336 }, // STM Electronics Virtual COM Port
-    { usbVendorId: 4292, usbProductId: 60000 }, // CP210x
-    { usbVendorId: 4292, usbProductId: 60001 }, // CP210x
-    { usbVendorId: 4292, usbProductId: 60002 }, // CP210x
-    { usbVendorId: 10473, usbProductId: 394 }, // GD32 VCP
-    { usbVendorId: 11836, usbProductId: 22336 }, // AT32 VCP
-    { usbVendorId: 12619, usbProductId: 22336 }, // APM32 VCP
-    { usbVendorId: 11914, usbProductId: 9 }, // Raspberry Pi Pico VCP
-];
+    const serialDevices = [
+        { usbVendorId: 1027, usbProductId: 24577 }, // FT232R USB UART
+        { usbVendorId: 1155, usbProductId: 12886 }, // STM32 in HID mode
+        { usbVendorId: 1155, usbProductId: 14158 }, // 0483:374e STM Electronics STLink Virtual COM Port (NUCLEO boards)
+        { usbVendorId: 1155, usbProductId: 22336 }, // STM Electronics Virtual COM Port
+        { usbVendorId: 4292, usbProductId: 60000 }, // CP210x
+        { usbVendorId: 4292, usbProductId: 60001 }, // CP210x
+        { usbVendorId: 4292, usbProductId: 60002 }, // CP210x
+        { usbVendorId: 10473, usbProductId: 394 }, // GD32 VCP
+        { usbVendorId: 11836, usbProductId: 22336 }, // AT32 VCP
+        { usbVendorId: 12619, usbProductId: 22336 }, // APM32 VCP
+        { usbVendorId: 11914, usbProductId: 9 }, // Raspberry Pi Pico VCP
+    ];
 
-const vendorIdNames = {
-    1027: "FTDI",
-    1155: "STM Electronics",
-    4292: "Silicon Labs",
-    11836: "AT32",
-    12619: "Geehy Semiconductor",
-    11914: "Raspberry Pi Pico",
-};
-
-const ports = [];
-
-function createPort(port) {
-    const portInfo = port.getInfo();
-    const displayName = 
-        vendorIdNames[portInfo.usbVendorId] || 
-        `VID:${portInfo.usbVendorId} PID:${portInfo.usbProductId}`;
-
-    slog("creating port desc", portInfo);
-
-    return {
-        path: `${portInfo.usbVendorId}/${portInfo.usbProductId}`,
-        displayName: `Rotorflight ${displayName}`,
-        vendorId: portInfo.usbVendorId,
-        productId: portInfo.usbProductId,
-        port: port,
+    const vendorIdNames = {
+        1027: "FTDI",
+        1155: "STM Electronics",
+        4292: "Silicon Labs",
+        11836: "AT32",
+        12619: "Geehy Semiconductor",
+        11914: "Raspberry Pi Pico",
     };
-};
 
-async function loadDevices() {
-    const gotports = await navigator.serial.getPorts();
-    ports.push(...gotports.map((port) => createPort(port)));
-};
+    function createPort(port) {
+        const portInfo = port.getInfo();
+        const displayName = 
+            vendorIdNames[portInfo.usbVendorId] || 
+            `VID:${portInfo.usbVendorId} PID:${portInfo.usbProductId}`;
 
-// Cache the initial set of devices and then maintain it with events
-navigator.serial.addEventListener('connect', event => {
-    slog(`webserial port connected: ${event.target}`);
-    ports.push(createPort(event.target));
-});
+        slog("creating port desc", portInfo);
 
-navigator.serial.addEventListener('disconnect', event => {
-    slog(`webserial port disconnected: ${event.target}`);
-    ports.splice(ports.indexOf(event.target), 1);
-});
-
-loadDevices();
-
-let connprops = {
-    connectionId: 1, // Only one connection possible
-    paused: false,
-    persistent: false,
-    name,
-    bufferSize: 4096,
-    receiveTimeout: 0,
-    sendTimeout: 0,
-    bitrate: 9600,
-    dataBits: 'eight',
-    parityBit: 'no',
-    stopBits: 'one',
-    ctsFlowControl: false,
-};
-
-let connectedPort;
-
-function translateSerialConnectionOptions() {
-    const dataBits = connprops.dataBits === 'seven' ? 7 : 8;
-    const stopBits = connprops.stopBits === 'two' ? 2 : 1;
-    const parityBit = connprops.parityBit === 'no' ? 'none' : connprops.parityBit;
-    return {
-        baudRate: connprops.bitrate,
-        dataBits: dataBits,
-        stopBits: stopBits,
-        parity: parityBit,
-        bufferSize: connprops.bufferSize,
+        return {
+            path: `${portInfo.usbVendorId}/${portInfo.usbProductId}`,
+            displayName: `Rotorflight ${displayName}`,
+            vendorId: portInfo.usbVendorId,
+            productId: portInfo.usbProductId,
+            port: port,
+        };
     };
-};
 
-export const serial = {
-    getDriver: function(vid, pid) {
+    async function loadDevices() {
+        const gotports = await navigator.serial.getPorts();
+        ports.push(...gotports.map((port) => createPort(port)));
+    };
+
+    function translateSerialConnectionOptions() {
+        const dataBits = connprops.dataBits === 'seven' ? 7 : 8;
+        const stopBits = connprops.stopBits === 'two' ? 2 : 1;
+        const parityBit = connprops.parityBit === 'no' ? 'none' : connprops.parityBit;
+        return {
+            baudRate: connprops.bitrate,
+            dataBits: dataBits,
+            stopBits: stopBits,
+            parity: parityBit,
+            bufferSize: connprops.bufferSize,
+        };
+    };
+
+    function getDriver(vid, pid) {
         if (vid === 4292 && pid === 60000) {
             return 'Cp21xxSerialDriver'; //for Silabs CP2102 and all other CP210x
         }  else {
             return 'CdcAcmSerialDriver';
         }
-    },
+    }
 
-    requestPermission: async function(showAll = false) {
+    async function requestPermission(showAll = false) {
         let newPermissionPort = null;
 
         try {
@@ -157,21 +175,29 @@ export const serial = {
         }
 
         return newPermissionPort;
-    },
+    }
 
-    // Chrome serial API methods
-    getDevices: function(callback) {
+    function getDevices(callback) {
         try {
             callback?.(ports);
         } catch (error) {
             swarn(`getDevices callback error ${error}`);
         }
-    },
+    }
 
-    reading: false,
-    reader: null,
-    writer: null,
-    connect: async function(path, options, callback) {
+    async function readLoop() {
+        try {
+            for await (let value of streamAsyncIterable(reader, () => reading)) {
+                onReceive.receiveData(value);
+            }
+        } catch (error) {
+            serror("Error reading:", error);
+            disconnect();
+            onReceiveError.receiveError({ error: "device_lost" });
+        }
+    }
+
+    async function connect(path, options, callback) {
         connprops = { ...connprops, ...options };
 
         const { port } = ports.find(p => p.path === path);
@@ -183,10 +209,10 @@ export const serial = {
                 await port.open(wsoptions);
                 connectedPort = port;
 
-                this.reader = port.readable.getReader();
-                this.writer = port.writable.getWriter();
-                this.reading = true;
-                this.readLoop();
+                reader = port.readable.getReader();
+                writer = port.writable.getWriter();
+                reading = true;
+                readLoop();
                 
                 callback?.({...connprops});
             } catch (error) {
@@ -196,74 +222,11 @@ export const serial = {
             serror("could not find port by path", path);
             callback();
         }
-    },
+    }
 
-    readLoop: async function() {
+    async function send(connectionId, data, callback) {
         try {
-            for await (let value of streamAsyncIterable(this.reader, () => this.reading)) {
-                this.onReceive.receiveData(value);
-            }
-        } catch (error) {
-            serror("Error reading:", error);
-            this.disconnect();
-            this.onReceiveError.receiveError({ error: "device_lost" });
-        }
-    },
-
-    disconnect: async function(connectionId, callback) {
-        if (!connectedPort) {
-            callback?.(true);
-            return;
-        }
-
-        const port = connectedPort;
-        this.reading = false;
-
-        // Cancel reader first if it exists - this doesn't release the lock
-        if (this.reader) {
-            try {
-                await this.reader.cancel();
-            } catch (e) {
-                swarn("Reader cancel error (can be ignored):", e);
-            }
-        }
-
-        // Don't try to release the reader lock - streamAsyncIterable will handle it
-        this.reader = null;
-
-        // Release writer lock if it exists
-        if (this.writer) {
-            try {
-                this.writer.releaseLock();
-            } catch (e) {
-                swarn("Writer release error (can be ignored):", e);
-            }
-            this.writer = null;
-        }
-
-        try {
-            await port.close();
-            connectedPort = null;
-            callback?.(true);
-        } catch (error) {
-            serror("error disconnecting", error);
-            callback?.(false);
-        }
-    },
-
-    // TODO: Chrome serial methods
-    setPaused: function(connectionId, paused, callback) {
-        this.connection.paused = paused; // Change connectionInfo but don't pause the connection
-        callback?.();
-    },
-
-    getInfo: function(callback) {
-        callback?.({...connprops});
-    },
-
-    send: async function(connectionId, data, callback) {
-        try {
-            await this.writer.write(data);
+            await writer.write(data);
             callback?.({ bytesSent: data.byteLength });
         } catch (error) {
             serror("error writing", error);
@@ -285,46 +248,91 @@ export const serial = {
             chromeCallbackWithError(`SERIAL (adapted from Cordova): ${error}`, callback(info));
         });
         */
-    },
-    // update: function() { },
-    // getConnections: function() { },
-    // flush: function() { },
-    // setBreak: function() { },
-    // clearBreak: function() { },
+    }
 
-    onReceive: {
-        listeners: [],
-        addListener: function(functionReference) {
-            this.listeners.push(functionReference);
-        },
-        removeListener: function(functionReference) {
-            this.listeners.slice(this.listeners.indexOf(functionReference), 1);
-        },
-        receiveData: function(data) {
-            if (data.byteLength === 0) {
-                return;
-            }
+    async function disconnect(connectionId, callback) {
+        if (!connectedPort) {
+            callback?.(true);
+            return;
+        }
 
-            for (const listener of this.listeners) {
-                listener({ data });
+        const port = connectedPort;
+        reading = false;
+
+        // Cancel reader first if it exists - this doesn't release the lock
+        if (reader) {
+            try {
+                await reader.cancel();
+            } catch (e) {
+                swarn("Reader cancel error (can be ignored):", e);
             }
-        },
-    },
-    onReceiveError: {
-        listeners: [],
-        addListener: function(functionReference) {
-            this.listeners.push(functionReference);
-        },
-        removeListener: function(functionReference) {
-            this.listeners.slice(this.listeners.indexOf(functionReference), 1);
-        },
-        receiveError: function(error) {
-            for (const listener of this.listeners) {
-                listener(error);
+        }
+
+        // Don't try to release the reader lock - streamAsyncIterable will handle it
+        reader = null;
+
+        // Release writer lock if it exists
+        if (writer) {
+            try {
+                writer.releaseLock();
+            } catch (e) {
+                swarn("Writer release error (can be ignored):", e);
             }
+            writer = null;
+        }
+
+        try {
+            await port.close();
+            connectedPort = null;
+            callback?.(true);
+        } catch (error) {
+            serror("error disconnecting", error);
+            callback?.(false);
+        }
+    }
+
+    // Cache the initial set of devices and then maintain it with events
+    navigator.serial.addEventListener('connect', event => {
+        slog(`webserial port connected: ${event.target}`);
+        ports.push(createPort(event.target));
+    });
+
+    navigator.serial.addEventListener('disconnect', event => {
+        slog(`webserial port disconnected: ${event.target}`);
+        ports.splice(ports.indexOf(event.target), 1);
+    });
+
+    loadDevices();
+    
+    return {
+        getDriver,
+        requestPermission,
+
+        // Chrome serial API methods
+        getDevices,
+        connect,
+        send,
+        disconnect,
+        onReceive,
+        onReceiveError,
+
+        // TODO: Chrome serial methods
+        setPaused: function(connectionId, paused, callback) {
+            connprops.paused = paused; // Change connectionInfo but don't pause the connection
+            callback?.();
         },
-    },
-};
+
+        getInfo: function(callback) {
+            callback?.({...connprops});
+        },
+        // update: function() { },
+        // getConnections: function() { },
+        // flush: function() { },
+        // setBreak: function() { },
+        // clearBreak: function() { },
+
+    };
+}());
 
 export const runtime = {
     lastError: undefined,

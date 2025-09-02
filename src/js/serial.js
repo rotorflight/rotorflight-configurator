@@ -229,7 +229,7 @@ export const serial = {
                     });
                 }
 
-                const disconnectFn = (self.connectionType === 'serial') ? (...args) => chrome.serial.disconnect(...args) : (...args) => chrome.sockets.tcp.close(...args);
+                const disconnectFn = (self.connectionType === 'serial') ? chrome.serial.disconnect : chrome.sockets.tcp.close;
                 disconnectFn(self.connectionId, function (result) {
                     checkChromeRuntimeError();
 
@@ -288,7 +288,7 @@ export const serial = {
                 return;
             }
 
-            const sendFn = (self.connectionType === 'serial') ? (...args) => chrome.serial.send(...args) : (...args) => chrome.sockets.tcp.send(...args);
+            const sendFn = (self.connectionType === 'serial') ? chrome.serial.send : chrome.sockets.tcp.send;
             sendFn(self.connectionId, _data, function (sendInfo) {
                 checkChromeRuntimeError();
 
