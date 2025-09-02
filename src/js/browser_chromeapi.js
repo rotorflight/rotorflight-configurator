@@ -48,7 +48,9 @@ export const serial = (function() {
                 listeners.push(functionReference);
             },
             removeListener: function(functionReference) {
-                listeners.slice(listeners.indexOf(functionReference), 1);
+                const listener = listeners.indexOf(functionReference);
+                if (listener >= 0)
+                    listeners.splice(listener, 1);
             },
             receiveData: function(data) {
                 if (data.byteLength === 0) {
