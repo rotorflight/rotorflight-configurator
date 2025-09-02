@@ -144,6 +144,7 @@ export function startProcess() {
     // our view is reactive to model changes
     // updateTopBarVersion();
 
+    // TODO: Implement PWA update UI
     if (GUI.isInstalled()) {
         checkForConfiguratorUpdates();
     }

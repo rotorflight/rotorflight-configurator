@@ -32,7 +32,8 @@ PortHandler.initialize = function (showAllPorts) {
 PortHandler.check = function () {
     const self = this;
 
-    self.check_usb_devices();
+    // TODO: Implement webusb
+    GUI.isBrowser() || self.check_usb_devices();
     self.check_serial_devices();
 
     GUI.updateManualPortVisibility();
@@ -42,7 +43,7 @@ PortHandler.check = function () {
     }, TIMEOUT_CHECK);
 };
 
-function portRecognized(portName, pathSelect) {
+function portRecognized({portName, pathSelect}) {
     if (portName) {
             const isWindows = (GUI.operating_system === 'Windows');
             const isTty = pathSelect.includes('tty');
@@ -71,7 +72,7 @@ PortHandler.check_serial_devices = function () {
 
     serial.getDevices(function(currentPorts) {
         if (!self.showingAllPorts) {
-            currentPorts = currentPorts.filter((p) => portRecognized(p.displayName, p.path));
+            currentPorts = currentPorts.filter(portRecognized);
         }
         // on initialization of the port selector (i.e. app startup or toggling whether to show all ports), only select a detected port, don't auto-connect
         if (!self.initialPorts) {
@@ -277,6 +278,14 @@ PortHandler.updatePortSelect = function (ports) {
         text: i18n.getMessage('portsSelectManual'),
         data: {isManual: true},
     }));
+
+    if (GUI.isBrowser()) {
+        this.portPickerElement.append($("<option/>", {
+            value: 'serialPermission',
+            text: i18n.getMessage('portsSelectPermission'),
+            data: {isManual: false, requestPermission: "serial"},
+        }));
+    };
 
     this.setPortsInputWidth();
     return ports;

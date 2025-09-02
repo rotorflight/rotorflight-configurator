@@ -99,6 +99,15 @@ export function initializeSerialBackend() {
 
     $('div#port-picker #port').on("change", function() {
         GUI.updateManualPortVisibility();
+
+        var optionSelected = $("option:selected", this);
+        const reqPermType = optionSelected.data().requestPermission;
+        if (reqPermType) {
+            serial.requestPermission(reqPermType, GUI.show_all_ports);
+            $(this).val($(this).data("current"));
+        } else {
+            $(this).data("current", $(this).val());
+        }
     });
 
     $('div.connect_controls a.connect').on("click", function () {

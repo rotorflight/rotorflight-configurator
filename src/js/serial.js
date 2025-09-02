@@ -229,7 +229,7 @@ export const serial = {
                     });
                 }
 
-                const disconnectFn = (self.connectionType === 'serial') ? chrome.serial.disconnect : chrome.sockets.tcp.close;
+                const disconnectFn = (self.connectionType === 'serial') ? (...args) => chrome.serial.disconnect(...args) : (...args) => chrome.sockets.tcp.close(...args);
                 disconnectFn(self.connectionId, function (result) {
                     checkChromeRuntimeError();
 
@@ -255,17 +255,14 @@ export const serial = {
             self.openCanceled = true;
         }
     },
+    requestPermission: function(type, showAll) {
+        if (type == "serial") {
+            chrome.serial.requestPermission(showAll);
+        }
+    },
     getDevices: function (callback) {
-        chrome.serial.getDevices(function (devices_array) {
-            const devices = [];
-            devices_array.forEach(function (device) {
-                devices.push({
-                              path: device.path,
-                              displayName: device.displayName,
-                             });
-            });
-
-            callback(devices);
+        chrome.serial.getDevices(function (devices) {
+            callback(devices.map(({ path, displayName }) => ({ path, displayName })));
         });
     },
     getInfo: function (callback) {
@@ -291,7 +288,7 @@ export const serial = {
                 return;
             }
 
-            const sendFn = (self.connectionType === 'serial') ? chrome.serial.send : chrome.sockets.tcp.send;
+            const sendFn = (self.connectionType === 'serial') ? (...args) => chrome.serial.send(...args) : (...args) => chrome.sockets.tcp.send(...args);
             sendFn(self.connectionId, _data, function (sendInfo) {
                 checkChromeRuntimeError();
 

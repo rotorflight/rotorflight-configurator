@@ -462,6 +462,9 @@ GuiControl.prototype.isCordova = function () {
 GuiControl.prototype.isOther = function () {
     return this.Mode === GUI_MODES.Other;
 };
+GuiControl.prototype.isBrowser = function () {
+    return this.Mode === GUI_MODES.Browser;
+};
 GuiControl.prototype.isInstalled = function () {
     return [GUI_MODES.NWJS, GUI_MODES.Cordova].includes(this.Mode);
 };
