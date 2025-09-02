@@ -97,13 +97,13 @@ export function initializeSerialBackend() {
 
     $('#port-override').val(config.get('portOverride'));
 
-    $('div#port-picker #port').on("change", function() {
+    $('div#port-picker #port').on("change", async function() {
         GUI.updateManualPortVisibility();
 
         var optionSelected = $("option:selected", this);
         const reqPermType = optionSelected.data().requestPermission;
         if (reqPermType) {
-            serial.requestPermission(reqPermType, GUI.show_all_ports);
+            await serial.requestPermission(reqPermType, GUI.show_all_ports);
             $(this).val($(this).data("current"));
         } else {
             $(this).data("current", $(this).val());

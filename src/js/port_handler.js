@@ -305,6 +305,7 @@ PortHandler.selectPort = function(ports) {
             }
         }
     }
+    this.portPickerElement.data("current", this.portPickerElement.val());
 };
 
 PortHandler.setPortsInputWidth = function() {
