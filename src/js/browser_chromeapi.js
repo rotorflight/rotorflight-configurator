@@ -1,14 +1,14 @@
 export const serial = (function() {
     let reading = false, // Read cancel flag
-        connectedPort,   // Currently connected device
+        openedPort,      // Currently opened device
         reader,          // Reader for current device
         writer;          // Writer to current device
 
     const ports = [];    // Available port list
 
     // EventEmitter-like event sources used by chrome.serial
-    const onReceive = Eventer();
-    const onReceiveError = Eventer();
+    const onReceive = Eventer("receive");
+    const onReceiveError = Eventer("recieve errors");
 
     // Current connection properties
     let connprops = {
@@ -40,7 +40,7 @@ export const serial = (function() {
         console.error(sheader+message, ...values);
     }
 
-    function Eventer() {
+    function Eventer(name) {
         const listeners = [];
 
         return {
@@ -51,8 +51,10 @@ export const serial = (function() {
                 const listener = listeners.indexOf(functionReference);
                 if (listener >= 0)
                     listeners.splice(listener, 1);
+                else
+                    serror(`Asked to remove an unknown listener for ${name}`, functionReference);
             },
-            receiveData: function(data) {
+            raiseEvent: function(data) {
                 if (data.byteLength === 0) {
                     return;
                 }
@@ -132,11 +134,9 @@ export const serial = (function() {
         };
     };
 
-    async function loadDevices() {
-        const gotports = await navigator.serial.getPorts();
-        ports.push(...gotports.map((port) => createPort(port)));
-    };
-
+    /**
+     * Translates chrome.serial connection options to webserial
+     */
     function translateSerialConnectionOptions() {
         const dataBits = connprops.dataBits === 'seven' ? 7 : 8;
         const stopBits = connprops.stopBits === 'two' ? 2 : 1;
@@ -190,12 +190,12 @@ export const serial = (function() {
     async function readLoop() {
         try {
             for await (let value of streamAsyncIterable(reader, () => reading)) {
-                onReceive.receiveData(value);
+                onReceive.raiseEvent(value);
             }
         } catch (error) {
-            serror("Error reading:", error);
+            serror("receive listener errored in read loop, disconnecting:", error);
             disconnect();
-            onReceiveError.receiveError({ error: "device_lost" });
+            onReceiveError.raiseEvent({ error: "device_lost" });
         }
     }
 
@@ -206,10 +206,10 @@ export const serial = (function() {
         if (port) {
             try {
                 const wsoptions = translateSerialConnectionOptions();
-                slog("connecting to port with options", port, wsoptions);
+                slog("opening port with options", port, wsoptions);
 
                 await port.open(wsoptions);
-                connectedPort = port;
+                openedPort = port;
 
                 reader = port.readable.getReader();
                 writer = port.writable.getWriter();
@@ -234,31 +234,15 @@ export const serial = (function() {
             serror("error writing", error);
             callback?.({ bytesSent: 0, error });
         }
-
-        /*
-        const string = Array.prototype.map.call(new Uint8Array(data), x => (`00${x.toString(16)}`).slice(-2)).join('');
-        cordova_serial.writeHex(string, function () {
-            chromeCallbackWithSuccess({
-                bytesSent: string.length >> 1,
-            }, callback);
-        }, function(error) {
-            const info = {
-                bytesSent: 0,
-                error: 'undefined',
-            };
-            chrome.serial.onReceiveError.receiveError(info);
-            chromeCallbackWithError(`SERIAL (adapted from Cordova): ${error}`, callback(info));
-        });
-        */
     }
 
     async function disconnect(connectionId, callback) {
-        if (!connectedPort) {
+        if (!openedPort) {
             callback?.(true);
             return;
         }
 
-        const port = connectedPort;
+        const port = openedPort;
         reading = false;
 
         // Cancel reader first if it exists - this doesn't release the lock
@@ -284,16 +268,18 @@ export const serial = (function() {
         }
 
         try {
+            openedPort = null;
             await port.close();
-            connectedPort = null;
-            callback?.(true);
         } catch (error) {
-            serror("error disconnecting", error);
-            callback?.(false);
+            serror("error during close", error);
         }
+
+        callback?.(true);
     }
 
     // Cache the initial set of devices and then maintain it with events
+    // The "connect" and "disconnect" terms here refer to USB device attachment
+    // and not opening/closing communication with the device.
     navigator.serial.addEventListener('connect', event => {
         slog(`webserial port connected: ${event.target}`);
         ports.push(createPort(event.target));
@@ -302,9 +288,19 @@ export const serial = (function() {
     navigator.serial.addEventListener('disconnect', event => {
         slog(`webserial port disconnected: ${event.target}`);
         ports.splice(ports.indexOf(event.target), 1);
+
+        // If the port is open, notify listeners and clear the connection state
+        onReceiveError.raiseEvent({ error: "device_lost" });
+        reading = false;
+        reader = null;
+        writer = null;
+        openedPort = null;
     });
 
-    loadDevices();
+    (async function loadDevices() {
+        const gotports = await navigator.serial.getPorts();
+        ports.push(...gotports.map((port) => createPort(port)));
+    }());
     
     return {
         getDriver,
@@ -318,7 +314,6 @@ export const serial = (function() {
         onReceive,
         onReceiveError,
 
-        // TODO: Chrome serial methods
         setPaused: function(connectionId, paused, callback) {
             connprops.paused = paused; // Change connectionInfo but don't pause the connection
             callback?.();
@@ -332,7 +327,6 @@ export const serial = (function() {
         // flush: function() { },
         // setBreak: function() { },
         // clearBreak: function() { },
-
     };
 }());
 
