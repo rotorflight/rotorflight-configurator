@@ -516,7 +516,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_ESC_SENSOR_CONFIG: {
                 FC.ESC_SENSOR_CONFIG.protocol = data.readU8();
-                FC.ESC_SENSOR_CONFIG.half_duplex = data.readU8();
+                FC.ESC_SENSOR_CONFIG.half_duplex = Boolean(data.readU8());
                 FC.ESC_SENSOR_CONFIG.update_hz = data.readU16();
                 FC.ESC_SENSOR_CONFIG.current_offset = data.readU16();
                 FC.ESC_SENSOR_CONFIG.hw4_current_offset = data.readU16();
@@ -1931,7 +1931,7 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_ESC_SENSOR_CONFIG: {
             buffer.push8(FC.ESC_SENSOR_CONFIG.protocol)
-                  .push8(FC.ESC_SENSOR_CONFIG.half_duplex)
+                  .push8(Number(FC.ESC_SENSOR_CONFIG.half_duplex))
                   .push16(FC.ESC_SENSOR_CONFIG.update_hz)
                   .push16(FC.ESC_SENSOR_CONFIG.current_offset)
                   .push16(FC.ESC_SENSOR_CONFIG.hw4_current_offset)
@@ -2851,7 +2851,7 @@ MspHelper.prototype.serialPortFunctionsToMask = function(functions)
     return mask;
 };
 
-MspHelper.prototype.sendRxFailChannel = function(index, onCompleteCallback)
+MspHelper.prototype.sendRxFailChannel = async function(index)
 {
     const rxFail = FC.RXFAIL_CONFIG[index];
     const buffer = [];
@@ -2860,22 +2860,14 @@ MspHelper.prototype.sendRxFailChannel = function(index, onCompleteCallback)
           .push8(rxFail.mode)
           .push16(rxFail.value);
 
-    MSP.send_message(MSPCodes.MSP_SET_RXFAIL_CONFIG, buffer, false, onCompleteCallback);
+    await MSP.promise(MSPCodes.MSP_SET_RXFAIL_CONFIG, buffer);
 };
 
-MspHelper.prototype.sendRxFailConfig = function(onCompleteCallback)
+MspHelper.prototype.sendRxFailConfig = async function()
 {
-    const self = this;
-    var index = 0;
-
-    function send_next() {
-        if (index < FC.RXFAIL_CONFIG.length)
-            self.sendRxFailChannel(index++, send_next);
-        else
-            if (onCompleteCallback) onCompleteCallback();
+    for (let i = 0; i < FC.RXFAIL_CONFIG.length; i++) {
+      await this.sendRxFailChannel(i);
     }
-
-    send_next();
 };
 
 MspHelper.prototype.setArmingEnabled = function(doEnable, onCompleteCallback)

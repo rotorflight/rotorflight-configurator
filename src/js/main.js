@@ -2,6 +2,7 @@ import semver from "semver";
 
 import * as config from "@/js/config.js";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { handleConnectClick } from "@/js/serial_backend.js";
 
 globalThis.TABS = {};
 
@@ -175,11 +176,11 @@ export function startProcess() {
                 return;
             }
 
-            GUI.tab_switch_allowed(function () {
+            GUI.tab_switch_allowed(async function () {
 
                 if (GUI.allowedTabs.indexOf(tabName) < 0 && tabName === "firmware_flasher") {
                     if (GUI.connected_to || GUI.connecting_to) {
-                        $('a.connect').click();
+                        await handleConnectClick.call($('a.connect'));
                     } else {
                         self.disconnect();
                     }

@@ -4,6 +4,68 @@ import * as config from "@/js/config.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
 import { applyVirtualConfig } from "@/js/virtual_fc.js";
 
+export async function handleConnectClick() {
+    if (GUI.connect_lock != true) { // GUI control overrides the user control
+
+        const thisElement = $(this);
+        const clicks = thisElement.data('clicks');
+
+        const toggleStatus = function() {
+            thisElement.data("clicks", !clicks);
+        };
+
+        GUI.configuration_loaded = false;
+
+        const selected_baud = parseInt($('div#port-picker #baud').val());
+        const selectedPort = $('div#port-picker #port option:selected');
+
+        let portName;
+        if (selectedPort.data().isManual) {
+            portName = $('#port-override').val();
+        } else {
+            portName = String($('div#port-picker #port').val());
+        }
+
+        if (selectedPort.data().isDFU) {
+            $('select#baud').hide();
+        } else if (portName !== '0') {
+            if (!clicks) {
+                console.log(`${serial.connectionType}: connecting to: ${portName}`);
+                GUI.connecting_to = portName;
+
+                // lock port select & baud while we are connecting / connected
+                $('div#port-picker #port, div#port-picker #baud, div#port-picker #delay').prop('disabled', true);
+                $('div.connect_controls div.connect_state').text(i18n.getMessage('connecting'));
+
+                if (selectedPort.data().isVirtual) {
+                    CONFIGURATOR.virtualMode = true;
+                    CONFIGURATOR.virtualApiVersion = $('#firmware-version-dropdown :selected').val();
+                    CONFIGURATOR.virtualFwVersion = $('#firmware-version-dropdown :selected').data('fw');
+
+                    serial.connect('virtual', {}, onOpenVirtual);
+                } else {
+                    serial.connect(portName, {bitrate: selected_baud}, onOpen);
+                }
+            } else {
+                if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
+                    $('div#flashbutton a.flash_state').removeClass('active');
+                    $('div#flashbutton a.flash').removeClass('active');
+                }
+                GUI.timeout_kill_all();
+                GUI.interval_kill_all();
+                await new Promise((resolve) => GUI.tab_switch_cleanup(resolve));
+                GUI.tab_switch_in_progress = false;
+
+                await new Promise((resolve) => globalThis.mspHelper.setArmingEnabled(true, resolve));
+
+                finishClose();
+            }
+
+            toggleStatus();
+        }
+   }
+}
+
 export function initializeSerialBackend() {
     GUI.updateManualPortVisibility = function(){
         const selected_port = $('div#port-picker #port option:selected');
@@ -39,65 +101,8 @@ export function initializeSerialBackend() {
         GUI.updateManualPortVisibility();
     });
 
-    $('div.connect_controls a.connect').on("click", async function() {
-        if (GUI.connect_lock != true) { // GUI control overrides the user control
-
-            const thisElement = $(this);
-            const clicks = thisElement.data('clicks');
-
-            const toggleStatus = function() {
-                thisElement.data("clicks", !clicks);
-            };
-
-            GUI.configuration_loaded = false;
-
-            const selected_baud = parseInt($('div#port-picker #baud').val());
-            const selectedPort = $('div#port-picker #port option:selected');
-
-            let portName;
-            if (selectedPort.data().isManual) {
-                portName = $('#port-override').val();
-            } else {
-                portName = String($('div#port-picker #port').val());
-            }
-
-            if (selectedPort.data().isDFU) {
-                $('select#baud').hide();
-            } else if (portName !== '0') {
-                if (!clicks) {
-                    console.log(`${serial.connectionType}: connecting to: ${portName}`);
-                    GUI.connecting_to = portName;
-
-                    // lock port select & baud while we are connecting / connected
-                    $('div#port-picker #port, div#port-picker #baud, div#port-picker #delay').prop('disabled', true);
-                    $('div.connect_controls div.connect_state').text(i18n.getMessage('connecting'));
-
-                    if (selectedPort.data().isVirtual) {
-                        CONFIGURATOR.virtualMode = true;
-                        CONFIGURATOR.virtualApiVersion = $('#firmware-version-dropdown :selected').val();
-                        CONFIGURATOR.virtualFwVersion = $('#firmware-version-dropdown :selected').data('fw');
-
-                        serial.connect('virtual', {}, onOpenVirtual);
-                    } else {
-                        serial.connect(portName, {bitrate: selected_baud}, onOpen);
-                    }
-                    toggleStatus();
-                } else {
-                    if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
-                        $('div#flashbutton a.flash_state').removeClass('active');
-                        $('div#flashbutton a.flash').removeClass('active');
-                    }
-                    GUI.timeout_kill_all();
-                    GUI.interval_kill_all();
-                    await new Promise((resolve) => GUI.tab_switch_cleanup(resolve));
-                    GUI.tab_switch_in_progress = false;
-
-                    await new Promise((resolve) => globalThis.mspHelper.setArmingEnabled(true, resolve));
-
-                    finishClose(toggleStatus);
-                }
-            }
-       }
+    $('div.connect_controls a.connect').on("click", function () {
+      handleConnectClick.call(this);
     });
 
     $('div.open_firmware_flasher a.flash').on("click", function() {
@@ -182,7 +187,7 @@ export function initializeSerialBackend() {
     PortHandler.initialize(GUI.show_all_ports);
 }
 
-function finishClose(finishedCallback) {
+function finishClose() {
     if (GUI.isCordova()) {
         UI_PHONES.reset();
     }
@@ -223,8 +228,6 @@ function finishClose(finishedCallback) {
     }
 
     $('#tabs .tab_landing a').trigger("click");
-
-    finishedCallback();
 }
 
 function setConnectionTimeout() {

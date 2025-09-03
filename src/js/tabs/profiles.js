@@ -2,6 +2,12 @@ import semver from "semver";
 import { mount, unmount } from "svelte";
 import Governor from "@/tabs/profiles/Governor.svelte";
 
+import {
+    API_VERSION_12_7,
+    API_VERSION_12_8,
+    API_VERSION_12_9,
+} from "@/js/configurator.svelte.js";
+
 const tab = {
     tabName: 'profiles',
     svelteComponent: null,
@@ -162,7 +168,10 @@ tab.initialize = function (callback) {
         $('.tab-profiles input[id="offsetGainPitch"]').val(FC.PIDS[1][5]).change();
 
         // Error rotation
-        $('.tab-profiles input[id="errorRotation"]').prop('checked', FC.PID_PROFILE.error_rotation !== 0);
+        $('.tab-profiles input[id="errorRotation"]')
+            .prop('checked', FC.PID_PROFILE.error_rotation !== 0)
+            .closest('tr')
+            .toggle(semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9));
 
         // Error decays
         $('.tab-profiles input[id="errorDecayTimeGround"]').val(FC.PID_PROFILE.error_decay_time_ground / 10);
