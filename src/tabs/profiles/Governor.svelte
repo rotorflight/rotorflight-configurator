@@ -98,40 +98,6 @@
       </Field>
     {/if}
     {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
-      <Field id="gov-idle-throttle" label="govIdleThrottle" unit="%">
-        {#snippet tooltip()}
-          <Tooltip
-            help="govIdleThrottleHelp"
-            attrs={[
-              { name: "genericDefault", value: "0%" },
-              { name: "genericRange", value: "0% - 100%" },
-            ]}
-          />
-        {/snippet}
-        <NumberInput
-          id="gov-idle-throttle"
-          min="0"
-          max="100"
-          bind:value={FC.GOVERNOR.gov_idle_throttle}
-        />
-      </Field>
-      <Field id="gov-auto-throttle" label="govAutoThrottle" unit="%">
-        {#snippet tooltip()}
-          <Tooltip
-            help="govAutoThrottleHelp"
-            attrs={[
-              { name: "genericDefault", value: "0%" },
-              { name: "genericRange", value: "0% - 100%" },
-            ]}
-          />
-        {/snippet}
-        <NumberInput
-          id="gov-auto-throttle"
-          min="0"
-          max="100"
-          bind:value={FC.GOVERNOR.gov_auto_throttle}
-        />
-      </Field>
       <Field id="gov-fallback-drop" label="govFallbackDrop" unit="%">
         {#snippet tooltip()}
           <Tooltip

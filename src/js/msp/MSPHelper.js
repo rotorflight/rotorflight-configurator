@@ -1190,8 +1190,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.GOVERNOR.gov_min_throttle             = data.readU8();
                 }
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
-                    FC.GOVERNOR.gov_idle_throttle            = data.readU8();
-                    FC.GOVERNOR.gov_auto_throttle            = data.readU8();
                     FC.GOVERNOR.gov_fallback_drop            = data.readU8();
                     FC.GOVERNOR.gov_flags                    = data.readU16();
                 }
@@ -1227,6 +1225,8 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.GOVERNOR.gov_throttle_type            = data.readU8();
                     FC.GOVERNOR.gov_idle_collective          = data.read8();
                     FC.GOVERNOR.gov_wot_collective           = data.read8();
+                    FC.GOVERNOR.gov_idle_throttle            = data.readU8();
+                    FC.GOVERNOR.gov_auto_throttle            = data.readU8();
                 }
                 break;
             }
@@ -2154,9 +2154,7 @@ MspHelper.prototype.crunch = function(code) {
                 buffer.push8(FC.GOVERNOR.gov_min_throttle);
             }
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
-                buffer.push8(FC.GOVERNOR.gov_idle_throttle)
-                    .push8(FC.GOVERNOR.gov_auto_throttle)
-                    .push8(FC.GOVERNOR.gov_fallback_drop)
+                buffer.push8(FC.GOVERNOR.gov_fallback_drop)
                     .push16(FC.GOVERNOR.gov_flags);
             }
             break;
@@ -2190,7 +2188,9 @@ MspHelper.prototype.crunch = function(code) {
                     .push16(FC.GOVERNOR.gov_spooldown_time)
                     .push8(FC.GOVERNOR.gov_throttle_type)
                     .push8(FC.GOVERNOR.gov_idle_collective)
-                    .push8(FC.GOVERNOR.gov_wot_collective);
+                    .push8(FC.GOVERNOR.gov_wot_collective)
+                    .push8(FC.GOVERNOR.gov_idle_throttle)
+                    .push8(FC.GOVERNOR.gov_auto_throttle);
             }
             break;
         }
