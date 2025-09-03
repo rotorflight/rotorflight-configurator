@@ -101,9 +101,9 @@ export function initializeSerialBackend() {
         GUI.updateManualPortVisibility();
 
         var optionSelected = $("option:selected", this);
-        const reqPermType = optionSelected.data().requestPermission;
-        if (reqPermType) {
-            await serial.requestPermission(reqPermType, GUI.show_all_ports);
+        const reqPermFunc = optionSelected.data().requestPermission;
+        if (reqPermFunc) {
+            reqPermFunc(GUI.show_all_ports);
             $(this).val($(this).data("current"));
         } else {
             $(this).data("current", $(this).val());

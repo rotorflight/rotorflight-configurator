@@ -255,11 +255,6 @@ export const serial = {
             self.openCanceled = true;
         }
     },
-    requestPermission: function(type, showAll) {
-        if (type == "serial") {
-            chrome.serial.requestPermission(showAll);
-        }
-    },
     getDevices: function (callback) {
         chrome.serial.getDevices(function (devices) {
             callback(devices.map(({ path, displayName }) => ({ path, displayName })));

@@ -92,18 +92,23 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
 
         var startFlashing = function() {
             // refresh device list
-            PortHandler.check_usb_devices(function(dfu_available) {
+            PortHandler.check_usb_devices(async function(dfu_available) {
                 if(dfu_available) {
                     STM32DFU.connect(usbDevices, hex, options);
                 } else {
-                    serial.connect(self.port, {bitrate: self.baud, parityBit: 'even', stopBits: 'one'}, function (openInfo) {
-                        if (openInfo) {
-                            self.initialize();
-                        } else {
-                            GUI.connect_lock = false;
-                            GUI.log(i18n.getMessage('serialPortOpenFail'));
-                        }
-                    });
+                    // In the browser we might need to pop a permission dialog
+                    if(GUI.isBrowser && await chrome.usb.requestPermission(usbDevices)) {
+                        STM32DFU.connect(usbDevices, hex, options);
+                    } else {
+                        serial.connect(self.port, {bitrate: self.baud, parityBit: 'even', stopBits: 'one'}, function (openInfo) {
+                            if (openInfo) {
+                                self.initialize();
+                            } else {
+                                GUI.connect_lock = false;
+                                GUI.log(i18n.getMessage('serialPortOpenFail'));
+                            }
+                        });
+                    }
                 }
             });
         };

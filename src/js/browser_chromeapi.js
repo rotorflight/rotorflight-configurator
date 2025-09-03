@@ -1,3 +1,180 @@
+export const usb = (function() {
+    let zdevice;
+    let wudev;
+
+    const uheader = "SERIAL (adapted from WebSerial):";
+    function ulog(message, ...values) {
+        console.log(uheader+message, ...values);
+    }
+
+    function uwarn(message, ...values) {
+        console.warn(uheader+message, ...values);
+    }
+
+    function uerror(message, ...values) {
+        console.error(uheader+message, ...values);
+    }
+
+    function chromeErrCB(error, cb, param) {
+        chrome.runtime.lastError = error;
+        try {
+            cb?.(param);
+        } catch (error) {
+            uerror("error calling chrome callback", error);
+        } finally {
+            chrome.runtime.lastError = null;
+        }
+    }
+
+    function createDevice(device) {
+        return {
+            path: `usb_${device.serialNumber}`,
+            productName: device.productName,
+            vendorId: device.manufacturerName,
+            productId: device.productName,
+            device: new Date() / 1000,
+        };
+    }
+
+    function getDevices(_filterList, callback) {
+        callback?.(zdevice ? [zdevice] : []);
+    }
+
+    async function openDevice(device, callback) {
+        try {
+            await wudev.open();
+            callback?.({
+                handle: device.device,
+                productId: device.productId,
+                vendorId: device.vendorId
+            });
+        } catch (error) {
+            chromeErrCB(error, callback);
+        }
+    }
+
+    async function closeDevice(_handle, callback) {
+        try {
+            await wudev.close();
+            callback?.();
+        } catch (error) {
+            chromeErrCB(error, callback);
+        }
+    }
+
+    async function resetDevice(_handle, callback) {
+        try {
+            await wudev.reset();
+            callback?.();
+        } catch (error) {
+            chromeErrCB(error, callback);
+        }
+    }
+
+    async function claimInterface(_handle, ifaceNum, callback) {
+        try {
+            await wudev.claimInterface(ifaceNum);
+            callback?.();
+        } catch (error) {
+            chromeErrCB(error, callback);
+        }
+    }
+
+    async function releaseInterface(_handle, ifaceNum, callback) {
+        try {
+            await wudev.releaseInterface(ifaceNum);
+            callback?.();
+        } catch (error) {
+            chromeErrCB(error, callback);
+        }
+    }
+
+    async function getConfiguration(_handle, callback) {
+        try {
+            if (wudev.configuration === null) {
+                await wudev.getConfiguration(1);
+            }
+            callback?.(wudev.configuration);
+        } catch (error) {
+            chromeErrCB(error, callback);
+        }
+    }
+
+    async function controlTransfer(_handle, xferinfo, callback) {
+        try {
+            const setup = (({ requestType, recipient, request, value, index }) =>
+                ({ requestType, recipient, request, value, index })) (xferinfo);
+
+            if (xferinfo.direction === "out") {
+                const data = xferinfo.data ? xferinfo.data : new ArrayBuffer(0);
+                const result = await wudev.controlTransferOut(setup, data);
+                callback?.({ data: undefined, resultCode: result.resultCode });
+            } else {
+                const result = await wudev.controlTransferIn(setup, xferinfo.length);
+                if (result.status === "ok") {
+                    callback?.({ data: result.data.buffer, resultCode: result.resultCode });
+                } else {
+                    uwarn("Error status from control transfer in", result);
+                    chromeErrCB(new Error(result.status), callback, { resultCode: 1 });
+                }
+            }
+        } catch (error) {
+            uerror("Controltransfer error", error);
+            chromeErrCB(error, callback, { resultCode: 1 });
+        }
+    }
+
+    async function requestPermission(filterList) {
+        try {
+            const userSelectedPort = await navigator.usb.requestDevice(filterList);
+            ulog("User selected USB device from permissions:", userSelectedPort);
+            ulog(
+                `WebUSB Version: ${userSelectedPort.deviceVersionMajor}.${userSelectedPort.deviceVersionMinor}.${userSelectedPort.deviceVersionSubminor}`,
+            );
+
+            wudev = userSelectedPort;
+            zdevice = createDevice(wudev);
+            return zdevice;
+        } catch (error) {
+            uerror("User didn't select any USB device when requesting permission:", error);
+        }
+    };
+
+    navigator.usb.addEventListener("connect", (e) => {
+        if (!zdevice) {
+            wudev = e.device;
+            zdevice = createDevice(wudev);
+        };
+    });
+
+    navigator.usb.addEventListener("disconnect", () => {
+        loadDevice();
+    });
+
+    async function loadDevice() {
+        wudev = zdevice = null;
+        const devices = await navigator.usb.getDevices();
+        if (devices.length > 0) {
+            wudev = devices[0];
+            zdevice = createDevice(wudev);
+        }
+    }
+
+    loadDevice();
+
+    return {
+        requestPermission,
+        getDevices,
+        openDevice,
+        closeDevice,
+        resetDevice,
+        claimInterface,
+        releaseInterface,
+        getConfiguration,
+        controlTransfer,
+    };
+}());
+
 export const serial = (function() {
     let reading = false, // Read cancel flag
         openedPort,      // Currently opened device
@@ -329,7 +506,6 @@ export const serial = (function() {
         // clearBreak: function() { },
     };
 }());
-
 export const runtime = {
     lastError: undefined,
 };

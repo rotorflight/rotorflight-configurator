@@ -7,7 +7,7 @@ function getFileExtension(fileName) {
   return re.exec(fileName)[1];
 }
 
-if (__BACKEND__ === "nwjs") {
+if (__BACKEND__ === "nwjs" || __BACKEND__ === "browser") {
   // https://fs.spec.whatwg.org/
   // https://wicg.github.io/file-system-access/
 

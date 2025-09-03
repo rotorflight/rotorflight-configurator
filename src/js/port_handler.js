@@ -32,8 +32,7 @@ PortHandler.initialize = function (showAllPorts) {
 PortHandler.check = function () {
     const self = this;
 
-    // TODO: Implement webusb
-    GUI.isBrowser() || self.check_usb_devices();
+    self.check_usb_devices();
     self.check_serial_devices();
 
     GUI.updateManualPortVisibility();
@@ -283,7 +282,12 @@ PortHandler.updatePortSelect = function (ports) {
         this.portPickerElement.append($("<option/>", {
             value: 'serialPermission',
             text: i18n.getMessage('portsSelectPermission'),
-            data: {isManual: false, requestPermission: "serial"},
+            data: {isManual: false, requestPermission: showAll => chrome.serial.requestPermission(showAll) },
+        }));
+        this.portPickerElement.append($("<option/>", {
+            value: 'usbPermission',
+            text: i18n.getMessage('portsSelectPermissionDFU'),
+            data: {isManual: false, requestPermission: () => chrome.usb.requestPermission(usbDevices)},
         }));
     };
 
