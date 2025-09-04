@@ -135,7 +135,8 @@ function pwa_vite_options() {
         },
         registerType: "autoUpdate",
         manifest: {
-          short_name: pkg.productName,
+          name: pkg.productName,
+          short_name: "RotFliConfig",
           background_color: "#2e2e2e",
           theme_color: "#4da8da",
           start_url: "/",
