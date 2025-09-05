@@ -280,7 +280,7 @@ function build_redist() {
     redist_helper,
     `no redist helper for platform ${context.target.platform}`,
   );
-  return gulp.series(clean_redist, build_app(), mkdir_redist, redist_helper());
+  return gulp.series(clean_redist, build_app(), mkdir_redist, redist_helper);
 }
 
 function mkdir_redist() {
