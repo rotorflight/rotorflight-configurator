@@ -214,34 +214,45 @@ STM32DFU_protocol.prototype.getInterfaceDescriptors = function (interfaceNum, ca
             return;
         }
 
-    var interfaceID = 0;
-    var descriptorStringArray = [];
-    var getDescriptorString = function () {
-        if(interfaceID < config.interfaces.length) {
-            self.getInterfaceDescriptor(interfaceID, function (descriptor, resultCode) {
-                if (resultCode) {
-                    callback([], resultCode);
-                    return;
-                }
-                interfaceID++;
-                self.getString(descriptor.iInterface, function (descriptorString, resultCode) {
+        let interfaceCount = config.interfaces.length,
+            descriptorCount;
+        if (interfaceCount === 0) {
+            callback(0, 1); // no interfaces
+        } else if (GUI.isBrowser && interfaceCount === 1) {
+            // This alternation is because WebUSB fixes chrome.usb's descriptor issues
+            descriptorCount = config.interfaces[0].alternates.length;
+        } else if (interfaceCount > 1) {
+            descriptorCount = interfaceCount;
+        }
+
+        var interfaceID = 0;
+        var descriptorStringArray = [];
+        var getDescriptorString = function () {
+            if(interfaceID < descriptorCount) {
+                self.getInterfaceDescriptor(interfaceID, function (descriptor, resultCode) {
                     if (resultCode) {
                         callback([], resultCode);
                         return;
                     }
-                    if (descriptor.bInterfaceNumber == interfaceNum) {
-                        descriptorStringArray.push(descriptorString);
-                    }
-                    getDescriptorString();
+                    interfaceID++;
+                    self.getString(descriptor.iInterface, function (descriptorString, resultCode) {
+                        if (resultCode) {
+                            callback([], resultCode);
+                            return;
+                        }
+                        if (descriptor.bInterfaceNumber == interfaceNum) {
+                            descriptorStringArray.push(descriptorString);
+                        }
+                        getDescriptorString();
+                    });
                 });
-            });
-        } else {
-            //console.log(descriptorStringArray);
-            callback(descriptorStringArray, 0);
-            return;
-        }
-    };
-    getDescriptorString();
+            } else {
+                //console.log(descriptorStringArray);
+                callback(descriptorStringArray, 0);
+                return;
+            }
+        };
+        getDescriptorString();
     });
 };
 
@@ -406,6 +417,7 @@ STM32DFU_protocol.prototype.getChipInfo = function (_interface, callback) {
             };
         return memory;
     };
+
     var chipInfo = descriptors.map(parseDescriptor).reduce(function(o, v) {
         o[v.type.toLowerCase().replace(' ', '_')] = v;
         return o;
@@ -616,6 +628,7 @@ STM32DFU_protocol.prototype.upload_procedure = function (step) {
             if (typeof self.chipInfo.option_bytes === "undefined") {
                 console.log('Failed to detect option bytes');
                 self.cleanup();
+                return;
             }
 
             var unprotect = function() {

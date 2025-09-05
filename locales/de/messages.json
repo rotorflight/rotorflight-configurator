@@ -125,6 +125,18 @@
         "english": "Virtual Mode (Experimental)",
         "description": "Configure a Virtual Flight Controller without the need of a physical FC."
     },
+    "portsSelectPermission": {
+        "message": "--- Ich kann mein USB-Gerät nicht finden ---",
+        "description": "Option in the port selection dropdown to allow the user to give permissions to the system to access the device."
+    },
+    "portsSelectPermissionBluetooth": {
+        "message": "--- Ich kann mein Bluetooth-Gerät nicht finden. ---",
+        "description": "Option in the port selection dropdown to allow the user to give permissions to the system to access a Bluetooth device."
+    },
+    "portsSelectPermissionDFU": {
+        "message": "--- Ich kann mein USB-Gerät nicht finden ---",
+        "description": "Option in the port selection dropdown to allow the user to give permissions to the system to access a DFU device."
+    },
     "virtualMSPVersion": {
         "message": "Virtuelle Firmware-Version",
         "english": "Virtual Firmware Version"

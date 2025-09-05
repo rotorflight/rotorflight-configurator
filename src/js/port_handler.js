@@ -42,7 +42,7 @@ PortHandler.check = function () {
     }, TIMEOUT_CHECK);
 };
 
-function portRecognized(portName, pathSelect) {
+function portRecognized({portName, pathSelect}) {
     if (portName) {
             const isWindows = (GUI.operating_system === 'Windows');
             const isTty = pathSelect.includes('tty');
@@ -70,8 +70,8 @@ PortHandler.check_serial_devices = function () {
     const self = this;
 
     serial.getDevices(function(currentPorts) {
-        if (!self.showingAllPorts) {
-            currentPorts = currentPorts.filter((p) => portRecognized(p.displayName, p.path));
+        if (!GUI.isBrowser && !self.showingAllPorts) {
+            currentPorts = currentPorts.filter(portRecognized);
         }
         // on initialization of the port selector (i.e. app startup or toggling whether to show all ports), only select a detected port, don't auto-connect
         if (!self.initialPorts) {
@@ -278,6 +278,19 @@ PortHandler.updatePortSelect = function (ports) {
         data: {isManual: true},
     }));
 
+    if (GUI.isBrowser()) {
+        this.portPickerElement.append($("<option/>", {
+            value: 'serialPermission',
+            text: i18n.getMessage('portsSelectPermission'),
+            data: {isManual: false, requestPermission: showAll => chrome.serial.requestPermission(showAll) },
+        }));
+        this.portPickerElement.append($("<option/>", {
+            value: 'usbPermission',
+            text: i18n.getMessage('portsSelectPermissionDFU'),
+            data: {isManual: false, requestPermission: () => chrome.usb.requestPermission(usbDevices)},
+        }));
+    };
+
     this.setPortsInputWidth();
     return ports;
 };
@@ -296,6 +309,7 @@ PortHandler.selectPort = function(ports) {
             }
         }
     }
+    this.portPickerElement.data("current", this.portPickerElement.val());
 };
 
 PortHandler.setPortsInputWidth = function() {
