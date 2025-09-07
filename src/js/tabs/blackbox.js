@@ -1,5 +1,10 @@
 import semver from "semver";
 
+import {
+    API_VERSION_12_7,
+    API_VERSION_12_8,
+    API_VERSION_12_9,
+} from "@/js/configurator.svelte.js";
 import * as filesystem from "@/js/filesystem.js";
 
 let sdcardTimer;
@@ -154,6 +159,12 @@ const tab = {
                 "esc",
                 "bec",
                 "esc2",
+            );
+        }
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+            this.LOG_FIELDS.push(
+                "governor",
             );
         }
     },

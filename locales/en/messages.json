@@ -3876,6 +3876,9 @@
     "blackboxLog_esc2": {
         "message": "ESC 2"
     },
+    "blackboxLog_governor": {
+        "message": "Governor"
+    },
     "serialLoggingSupportedNote": {
         "message": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
     },
