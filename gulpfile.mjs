@@ -167,13 +167,15 @@ function backend_build_helpers(backend) {
   return {
     browser: function helper_build_app_browser() {
       return series(
-        build_bundle(), 
+        build_bundle(),
         parallel(
-          () => src(`${BUNDLE_DIR}/**`, { base: BUNDLE_DIR, follow: true })
-            .pipe(dest(`${APP_DIR}/`)),
-          () => src("assets/gh-pages/**", { dot: true })
-            .pipe(dest(`${APP_DIR}/`))
-        )
+          () =>
+            src(`${BUNDLE_DIR}/**`, { base: BUNDLE_DIR, follow: true }).pipe(
+              dest(`${APP_DIR}/`),
+            ),
+          () =>
+            src("assets/gh-pages/**", { dot: true }).pipe(dest(`${APP_DIR}/`)),
+        ),
       );
     },
 
