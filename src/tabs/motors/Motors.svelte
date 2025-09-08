@@ -156,19 +156,21 @@
     </div>
     <div>
       {#if isEnabled}
-        {#if rpmAvailable}
-          <div transition:slide|global>
-            <RotorSpeed />
-          </div>
-        {/if}
+        <div transition:slide>
+          {#if rpmAvailable}
+            <div transition:slide>
+              <RotorSpeed />
+            </div>
+          {/if}
+        </div>
         <div transition:slide>
           <Override />
         </div>
-        {#each { length: FC.CONFIG.motorCount } as _, i (i)}
-          <div transition:slide|global>
+        <div transition:slide>
+          {#each { length: FC.CONFIG.motorCount } as _, i (i)}
             <Motor index={i} />
-          </div>
-        {/each}
+          {/each}
+        </div>
       {/if}
     </div>
   </div>

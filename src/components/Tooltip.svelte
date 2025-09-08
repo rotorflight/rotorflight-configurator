@@ -38,4 +38,10 @@
     font-weight: 600;
     padding-right: 8px;
   }
+
+  .message {
+    :global(p) + :global(p) {
+      margin-top: 6px;
+    }
+  }
 </style>
