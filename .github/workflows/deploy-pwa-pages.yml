@@ -63,7 +63,7 @@ jobs:
         run: make init
   
       - name: Build PWA bundle
-        run: pnpm gulp bundle --platform pwa
+        run: pnpm gulp app --platform pwa
       
       - name: Upload bundle artifact
         id: deployment
