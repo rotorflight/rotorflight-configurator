@@ -97,6 +97,7 @@
           packages = with pkgs; [
             nodejs_24
             nodejs_24.pkgs.pnpm
+            nodejs_24.pkgs.gulp-cli
             nixpatchbins
           ];
 

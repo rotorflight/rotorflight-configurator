@@ -22,6 +22,8 @@ import source from "vinyl-source-stream";
 import * as vite from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
+const { parallel, series, src, dest } = gulp;
+
 import pkg from "./package.json" with { type: "json" };
 // Replace dev mode paths
 pkg.main = "index.html";
@@ -84,8 +86,7 @@ function platform_backend() {
 function bundle_vite() {
   return runAsync(
     vite.build({
-      define: { __BACKEND__: JSON.stringify(platform_backend()) },
-      ...(context.vite_options || {}),
+      ...vite_options(),
     }),
   );
 }
@@ -119,49 +120,61 @@ function bundle_deps() {
   );
 }
 
-function build_app_browser() {
-  return async () => {};
-}
-
-function pwa_vite_options() {
-  return {
-    build: {
-      target: "esnext",
-    },
-    plugins: [
-      VitePWA({
-        workbox: {
-          globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
-        },
-        registerType: "autoUpdate",
-        manifest: {
-          name: pkg.productName,
-          short_name: "RotFliConfig",
-          background_color: "#2e2e2e",
-          theme_color: "#4da8da",
-          start_url: "/",
-          display: "standalone",
-          icons: [
-            {
-              src: "/images/rf_icon.png",
-              sizes: "256x256",
-              type: "image/png",
-              purpose: "maskable any",
-            },
-          ],
-        },
-      }),
-    ],
+function vite_options() {
+  const common = {
+    define: { __BACKEND__: JSON.stringify(platform_backend()) },
   };
+
+  switch (context.target.platform) {
+    default:
+      return common;
+
+    case "pwa":
+      return {
+        ...common,
+        build: {
+          target: "esnext",
+        },
+        plugins: [
+          VitePWA({
+            workbox: {
+              globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
+            },
+            registerType: "autoUpdate",
+            manifest: {
+              name: pkg.productName,
+              short_name: "RotFliConfig",
+              background_color: "#2e2e2e",
+              theme_color: "#4da8da",
+              start_url: "/",
+              display: "standalone",
+              icons: [
+                {
+                  src: "/images/rf_icon.png",
+                  sizes: "256x256",
+                  type: "image/png",
+                  purpose: "maskable any",
+                },
+              ],
+            },
+          }),
+        ],
+      };
+  }
 }
 
 function backend_build_helpers(backend) {
   return {
     browser: function helper_build_app_browser() {
-      context.vite_options = pwa_vite_options();
-      const tasks = [build_bundle(), build_app_browser()];
-
-      return gulp.series(tasks);
+      return series(
+        build_bundle(), 
+        parallel(
+          () => src(`${BUNDLE_DIR}/**`, { base: BUNDLE_DIR, follow: true })
+            .pipe(dest(`${APP_DIR}/`)),
+          () => src("assets/gh-pages/**", { dot: true })
+            .pipe(dest(`${APP_DIR}/`))
+        )
+      );
     },
 
     cordova: function helper_build_app_cordova() {
@@ -583,8 +596,7 @@ function getNwjsExePath(platform) {
 
 async function run_browser_dev_client() {
   const server = await vite.createServer({
-    ...pwa_vite_options(),
-    define: { __BACKEND__: JSON.stringify("browser") },
+    ...vite_options(),
     server: {
       port: 1337,
     },
