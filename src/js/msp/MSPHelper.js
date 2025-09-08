@@ -967,15 +967,15 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_RX_CONFIG: {
                 FC.RX_CONFIG.serialrx_provider = data.readU8();
-                FC.RX_CONFIG.serialrx_inverted = data.readU8();
-                FC.RX_CONFIG.serialrx_halfduplex = data.readU8();
+                FC.RX_CONFIG.serialrx_inverted = Boolean(data.readU8());
+                FC.RX_CONFIG.serialrx_halfduplex = Boolean(data.readU8());
                 FC.RX_CONFIG.rx_pulse_min = data.readU16();
                 FC.RX_CONFIG.rx_pulse_max = data.readU16();
                 FC.RX_CONFIG.rxSpiProtocol = data.readU8();
                 FC.RX_CONFIG.rxSpiId = data.readU32();
                 FC.RX_CONFIG.rxSpiRfChannelCount = data.readU8();
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
-                    FC.RX_CONFIG.serialrx_pinswap = data.readU8();
+                    FC.RX_CONFIG.serialrx_pinswap = Boolean(data.readU8());
                 }
                 break;
             }
@@ -1005,11 +1005,11 @@ MspHelper.prototype.process_data = function(dataHandler) {
             }
 
             case MSPCodes.MSP_TELEMETRY_CONFIG: {
-                FC.TELEMETRY_CONFIG.telemetry_inverted = data.readU8();
-                FC.TELEMETRY_CONFIG.telemetry_halfduplex = data.readU8();
+                FC.TELEMETRY_CONFIG.telemetry_inverted = Boolean(data.readU8());
+                FC.TELEMETRY_CONFIG.telemetry_halfduplex = Boolean(data.readU8());
                 FC.TELEMETRY_CONFIG.telemetry_sensors = data.readU32();
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
-                    FC.TELEMETRY_CONFIG.telemetry_pinswap = data.readU8();
+                    FC.TELEMETRY_CONFIG.telemetry_pinswap = Boolean(data.readU8());
                     FC.TELEMETRY_CONFIG.crsf_telemetry_mode = data.readU8();
                     FC.TELEMETRY_CONFIG.crsf_telemetry_rate = data.readU16();
                     FC.TELEMETRY_CONFIG.crsf_telemetry_ratio = data.readU16();
@@ -1933,15 +1933,15 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_RX_CONFIG: {
             buffer.push8(FC.RX_CONFIG.serialrx_provider)
-                  .push8(FC.RX_CONFIG.serialrx_inverted)
-                  .push8(FC.RX_CONFIG.serialrx_halfduplex)
+                  .push8(Number(FC.RX_CONFIG.serialrx_inverted))
+                  .push8(Number(FC.RX_CONFIG.serialrx_halfduplex))
                   .push16(FC.RX_CONFIG.rx_pulse_min)
                   .push16(FC.RX_CONFIG.rx_pulse_max)
                   .push8(FC.RX_CONFIG.rxSpiProtocol)
                   .push32(FC.RX_CONFIG.rxSpiId)
                   .push8(FC.RX_CONFIG.rxSpiRfChannelCount);
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
-                buffer.push8(FC.RX_CONFIG.serialrx_pinswap);
+                buffer.push8(Number(FC.RX_CONFIG.serialrx_pinswap));
             }
             break;
         }
@@ -1957,11 +1957,11 @@ MspHelper.prototype.crunch = function(code) {
         }
 
         case MSPCodes.MSP_SET_TELEMETRY_CONFIG: {
-            buffer.push8(FC.TELEMETRY_CONFIG.telemetry_inverted)
-                .push8(FC.TELEMETRY_CONFIG.telemetry_halfduplex)
+            buffer.push8(Number(FC.TELEMETRY_CONFIG.telemetry_inverted))
+                .push8(Number(FC.TELEMETRY_CONFIG.telemetry_halfduplex))
                 .push32(FC.TELEMETRY_CONFIG.telemetry_sensors);
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
-                buffer.push8(FC.TELEMETRY_CONFIG.telemetry_pinswap)
+                buffer.push8(Number(FC.TELEMETRY_CONFIG.telemetry_pinswap))
                       .push8(FC.TELEMETRY_CONFIG.crsf_telemetry_mode)
                       .push16(FC.TELEMETRY_CONFIG.crsf_telemetry_rate)
                       .push16(FC.TELEMETRY_CONFIG.crsf_telemetry_ratio);
@@ -2270,13 +2270,19 @@ MspHelper.prototype.crunch = function(code) {
  * Channels is an array of 16-bit unsigned integer channel values to be sent. 8 channels is probably the maximum.
  */
 MspHelper.prototype.setRawRx = function(channels) {
-    const buffer = [];
+    if (CONFIGURATOR.virtualMode) {
+        for (let i = 0; i < channels.length; i++) {
+            FC.RX_CHANNELS[i] = channels[i];
+        }
+    } else {
+        const buffer = [];
 
-    for (let i = 0; i < channels.length; i++) {
-        buffer.push16(channels[i]);
+        for (let i = 0; i < channels.length; i++) {
+            buffer.push16(channels[i]);
+        }
+
+        MSP.send_message(MSPCodes.MSP_SET_RAW_RC, buffer, false);
     }
-
-    MSP.send_message(MSPCodes.MSP_SET_RAW_RC, buffer, false);
 };
 
 /**
