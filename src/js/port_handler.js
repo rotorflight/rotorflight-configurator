@@ -42,12 +42,12 @@ PortHandler.check = function () {
     }, TIMEOUT_CHECK);
 };
 
-function portRecognized({portName, pathSelect}) {
-    if (portName) {
+function portRecognized({displayName, path}) {
+    if (displayName) {
             const isWindows = (GUI.operating_system === 'Windows');
-            const isTty = pathSelect.includes('tty');
-            const deviceRecognized = portName.includes('STM') || portName.includes('CP210');
-            const legacyDeviceRecognized = portName.includes('usb');
+            const isTty = path.includes('tty');
+            const deviceRecognized = displayName.includes('STM') || displayName.includes('CP210');
+            const legacyDeviceRecognized = displayName.includes('usb');
             if (isWindows && deviceRecognized || isTty && (deviceRecognized || legacyDeviceRecognized)) {
                 return true;
             }
@@ -300,12 +300,11 @@ PortHandler.updatePortSelect = function (ports) {
  */
 PortHandler.selectPort = function(ports) {
     for (let i = 0; i < ports.length; i++) {
-        const portName = ports[i].displayName;
-        if (portName) {
-            const pathSelect = ports[i].path;
-            if (portRecognized(portName, pathSelect)) {
-                this.portPickerElement.val(pathSelect);
-                console.log(`Porthandler detected device ${portName} on port: ${pathSelect}`);
+        const {displayName, path} = ports[i];
+        if (displayName) {
+            if (portRecognized({displayName, path})) {
+                this.portPickerElement.val(path);
+                console.log(`Porthandler detected device ${displayName} on port: ${path}`);
             }
         }
     }
