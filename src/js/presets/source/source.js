@@ -218,7 +218,10 @@ export class Source {
     console.log("loading the source panel " + this.#domId);
     await new Promise((resolve) => {
       console.log("Loading source panel HTML " + this.#domId);
-      this.#dom.divWrapper.load("./tabs/presets/source_panel.html", resolve);
+      this.#dom.divWrapper.load(
+        "./src/tabs/presets/source_panel.html",
+        resolve,
+      );
     });
     this.#prepareDom();
 
@@ -307,7 +310,9 @@ export class Source {
    * Shows the branch field if the URL is a GitHub repository.
    */
   #displayBranchFieldIfGithub() {
-    const isGithubUrl = GithubUtil.isUrlGithubRepo(this.#dom.editUrl.val());
+    const isGithubUrl = GithubUtil.isUrlGithubRepo(
+      this.#dom.editUrl.val() ?? "",
+    );
     this.#dom.divGithubBranch.toggle(isGithubUrl);
   }
 
@@ -435,8 +440,7 @@ export class Source {
     this.#dom.editUrl.on("input", () => this.#onInputChange());
     this.#dom.editGitHubBranch.on("input", () => this.#onInputChange());
 
-    const isGithubUrl = GithubUtil.isUrlGithubRepo(this.#dom.editUrl.val());
-    this.#dom.divGithubBranch.toggle(isGithubUrl);
+    this.#displayBranchFieldIfGithub();
 
     if (this.#metadata.official) {
       this.#dom.buttonSave.toggle(false);
