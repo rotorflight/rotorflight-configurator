@@ -218,7 +218,7 @@ STM32DFU_protocol.prototype.getInterfaceDescriptors = function (interfaceNum, ca
             descriptorCount;
         if (interfaceCount === 0) {
             callback(0, 1); // no interfaces
-        } else if (GUI.isBrowser && interfaceCount === 1) {
+        } else if (GUI.isBrowser() && interfaceCount === 1) {
             // This alternation is because WebUSB fixes chrome.usb's descriptor issues
             descriptorCount = config.interfaces[0].alternates.length;
         } else if (interfaceCount > 1) {

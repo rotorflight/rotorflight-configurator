@@ -70,7 +70,7 @@ PortHandler.check_serial_devices = function () {
     const self = this;
 
     serial.getDevices(function(currentPorts) {
-        if (!GUI.isBrowser && !self.showingAllPorts) {
+        if (!GUI.isBrowser() && !self.showingAllPorts) {
             currentPorts = currentPorts.filter(portRecognized);
         }
         // on initialization of the port selector (i.e. app startup or toggling whether to show all ports), only select a detected port, don't auto-connect

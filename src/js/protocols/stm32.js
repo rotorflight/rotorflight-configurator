@@ -97,7 +97,7 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
                     STM32DFU.connect(usbDevices, hex, options);
                 } else {
                     // In the browser we might need to pop a permission dialog
-                    if(GUI.isBrowser && await chrome.usb.requestPermission(usbDevices)) {
+                    if(GUI.isBrowser() && await chrome.usb.requestPermission(usbDevices)) {
                         STM32DFU.connect(usbDevices, hex, options);
                     } else {
                         serial.connect(self.port, {bitrate: self.baud, parityBit: 'even', stopBits: 'one'}, function (openInfo) {
