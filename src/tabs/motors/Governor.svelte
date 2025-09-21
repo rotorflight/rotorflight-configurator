@@ -23,7 +23,7 @@
     return ["OFF", "PASSTHROUGH", "STANDARD", "MODE1", "MODE2"];
   });
 
-  const throttleTypes = ["NORMAL", "OFF_ON", "OFF_IDLE_ON", "IDLE_AUTO_ON"];
+  const throttleTypes = ["NORMAL", "OFF_ON", "OFF_IDLE_ON", "OFF_IDLE_AUTO_ON"];
 
   const fields = {};
   for (const field of [
