@@ -443,6 +443,16 @@ tab.initialize = function (callback) {
         }
 
         function update_ui() {
+            function isArmSwitchActive() {
+                if (FC.CONFIG.armingDisableCount > 0) {
+                    // check the highest bit of the armingDisableFlags. This will be the ARMING_DISABLED_ARMSWITCH flag.
+                    const armSwitchMask = 1 << (FC.CONFIG.armingDisableCount - 1);
+                    return (FC.CONFIG.armingDisableFlags & armSwitchMask) > 0;
+                }
+
+                return false;
+            }
+
             let hasUsedMode = false;
             for (let i = 0; i < FC.AUX_CONFIG.length; i++) {
                 let modeElement = $('#mode-' + i);
@@ -452,7 +462,7 @@ tab.initialize = function (callback) {
                     continue;
                 }
 
-                if (bit_check(FC.CONFIG.mode, i)) {
+                if (bit_check(FC.CONFIG.mode, i) || (i == 0 && isArmSwitchActive())) {
                     $('.mode .name').eq(i).data('modeElement').addClass('on').removeClass('off').removeClass('disabled');
 
                     // ARM mode is a special case
@@ -460,32 +470,7 @@ tab.initialize = function (callback) {
                         $('.mode .name').eq(i).html(FC.AUX_CONFIG[i]);
                     }
                 } else {
-
-                    //ARM mode is a special case
-                    if (i == 0) {
-                        let armSwitchActive = false;
-
-                        if (FC.CONFIG.armingDisableCount > 0) {
-                            // check the highest bit of the armingDisableFlags. This will be the ARMING_DISABLED_ARMSWITCH flag.
-                            const armSwitchMask = 1 << (FC.CONFIG.armingDisableCount - 1);
-                            if ((FC.CONFIG.armingDisableFlags & armSwitchMask) > 0) {
-                                armSwitchActive = true;
-                            }
-                        }
-
-                        // If the ARMING_DISABLED_ARMSWITCH flag is set then that means that arming is disabled
-                        // and the arm switch is in a valid arming range. Highlight the mode in red to indicate
-                        // that arming is disabled.
-                        if (armSwitchActive) {
-                            $('.mode .name').eq(i).data('modeElement').removeClass('on').removeClass('off').addClass('disabled');
-                            $('.mode .name').eq(i).html(FC.AUX_CONFIG[i] + '<br>' + i18n.getMessage('auxiliaryDisabled'));
-                        } else {
-                            $('.mode .name').eq(i).data('modeElement').removeClass('on').removeClass('disabled').addClass('off');
-                            $('.mode .name').eq(i).html(FC.AUX_CONFIG[i]);
-                        }
-                    } else {
-                        $('.mode .name').eq(i).data('modeElement').removeClass('on').removeClass('disabled').addClass('off');
-                    }
+                    $('.mode .name').eq(i).data('modeElement').removeClass('on').removeClass('disabled').addClass('off');
                 }
                 hasUsedMode = true;
             }
