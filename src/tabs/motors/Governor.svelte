@@ -110,14 +110,15 @@
                   help="govIdleThrottleHelp"
                   attrs={[
                     { name: "genericDefault", value: "0%" },
-                    { name: "genericRange", value: "0% - 100%" },
+                    { name: "genericRange", value: "0% - 25%" },
                   ]}
                 />
               {/snippet}
               <NumberInput
                 id="gov-idle-throttle"
                 min="0"
-                max="100"
+                max="25"
+                step="0.1"
                 bind:value={FC.GOVERNOR.gov_idle_throttle}
               />
             </Field>
@@ -127,14 +128,15 @@
                   help="govAutoThrottleHelp"
                   attrs={[
                     { name: "genericDefault", value: "0%" },
-                    { name: "genericRange", value: "0% - 100%" },
+                    { name: "genericRange", value: "0% - 25%" },
                   ]}
                 />
               {/snippet}
               <NumberInput
                 id="gov-auto-throttle"
                 min="0"
-                max="100"
+                max="25"
+                step="0.1"
                 bind:value={FC.GOVERNOR.gov_auto_throttle}
               />
             </Field>
