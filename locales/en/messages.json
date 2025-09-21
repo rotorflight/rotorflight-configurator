@@ -3394,7 +3394,7 @@
         "message": "Throttle Type"
     },
     "govThrottleTypeHelp": {
-        "message": "TODO"
+        "message": "<p><b>NORMAL:</b> TODO</p><p><b>OFF_ON:</b> TODO</p><p><b>OFF_IDLE_ON:</b> TODO</p><p><b>OFF_IDLE_AUTO_ON:</b> TODO</p>"
     },
     "govIdleCollective": {
         "message": "Idle Collective"
