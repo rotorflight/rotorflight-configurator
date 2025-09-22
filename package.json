@@ -3,13 +3,14 @@
   "productName": "Rotorflight Configurator",
   "description": "Crossplatform configuration tool for Rotorflight flight control system.",
   "version": "0.0.0",
-  "main": "http://localhost:5077/src/main.html",
+  "main": "http://localhost:5077/",
   "node-remote": "http://localhost:*",
   "scripts": {
     "lint": "eslint src \"./*.mjs\"",
     "lint:fix": "eslint --fix src \"./*.mjs\"",
     "start": "concurrently --kill-others 'pnpm vite' 'pnpm gulp dev_client'",
-    "prepare": "husky || true"
+    "prepare": "husky || true",
+    "postinstall": "nixpatchbins || true"
   },
   "window": {
     "icon": "public/images/rf_icon.png",
@@ -97,7 +98,9 @@
     "three": "<0.163.0",
     "vinyl-source-stream": "^2.0.0",
     "vite": "^7.0.0",
-    "wnumb": "^1.2.0"
+    "vite-plugin-pwa": "^1.0.3",
+    "wnumb": "^1.2.0",
+    "workbox-window": "^7.3.0"
   },
   "optionalDependencies": {
     "appdmg": "^0.6.4"

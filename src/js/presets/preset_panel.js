@@ -223,7 +223,7 @@ export default class PresetPanel {
 
   load() {
     return new Promise((resolve) => {
-      this.#dom.divWrapper.load("./tabs/presets/preset_panel.html", () => {
+      this.#dom.divWrapper.load("./src/tabs/presets/preset_panel.html", () => {
         this.#setupHtml();
         resolve();
       });
