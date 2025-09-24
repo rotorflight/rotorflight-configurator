@@ -617,6 +617,16 @@ class FlightController {
       gov_rpm_filter:                 0,
       gov_tta_filter:                 0,
       gov_ff_filter:                  0,
+      gov_throttle_hold_timeout:      0,
+      gov_d_filter:                   0,
+      gov_idle_throttle:              0,
+      gov_auto_throttle:              0,
+      gov_flags:                      0,
+      gov_fallback_drop:              0,
+      gov_spooldown_time:             0,
+      gov_throttle_type:              0,
+      gov_idle_collective:            0,
+      gov_wot_collective:             0,
     };
 
     this.SENSOR_CONFIG = {
@@ -633,14 +643,14 @@ class FlightController {
 
     this.RX_CONFIG = {
       serialrx_provider:            0,
-      serialrx_inverted:            0,
-      serialrx_halfduplex:          0,
+      serialrx_inverted:            false,
+      serialrx_halfduplex:          false,
       rx_pulse_min:                 0,
       rx_pulse_max:                 0,
       rxSpiProtocol:                0,
       rxSpiId:                      0,
       rxSpiRfChannelCount:          0,
-      serialrx_pinswap:             0,
+      serialrx_pinswap:             false,
     };
 
     this.RC_CONFIG = {
@@ -663,10 +673,10 @@ class FlightController {
     };
 
     this.TELEMETRY_CONFIG = {
-      telemetry_inverted:             0,
-      telemetry_halfduplex:           0,
+      telemetry_inverted:             false,
+      telemetry_halfduplex:           false,
       telemetry_sensors:              0,
-      telemetry_pinswap:              0,
+      telemetry_pinswap:              false,
       crsf_telemetry_mode:            0,
       crsf_telemetry_rate:            0,
       crsf_telemetry_ratio:           0,
