@@ -43,5 +43,11 @@
     :global(p) + :global(p) {
       margin-top: 6px;
     }
+
+    :global(code) {
+      background: none;
+      padding: 0;
+      margin: 0;
+    }
   }
 </style>
