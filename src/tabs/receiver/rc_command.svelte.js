@@ -78,12 +78,17 @@ export const RC_COMMAND = {
     );
   },
   get throttle() {
-    return getProportional(
-      CHANNELS.THROTTLE,
-      0,
-      FC.RC_CONFIG.rc_min_throttle,
-      FC.RC_CONFIG.rc_max_throttle - FC.RC_CONFIG.rc_min_throttle,
-    );
+    let min = FC.RC_CONFIG.rc_min_throttle;
+    if (min === 0) {
+      min = FC.RC_CONFIG.rc_center - FC.RC_CONFIG.rc_deflection * 0.9;
+    }
+
+    let max = FC.RC_CONFIG.rc_max_throttle;
+    if (max === 0) {
+      max = FC.RC_CONFIG.rc_center + FC.RC_CONFIG.rc_deflection * 0.9;
+    }
+
+    return getProportional(CHANNELS.THROTTLE, 0, min, max - min);
   },
 
   aux: [],
