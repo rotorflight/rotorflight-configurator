@@ -121,11 +121,11 @@
     }
 
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
-      const config = generateRpmFilterConfig2(notches);
-      FC.RPM_FILTER_CONFIG_V2 = config;
+      if (custom) {
+        FC.RPM_FILTER_CONFIG_V2 = generateRpmFilterConfig2(notches);
+      }
     } else {
-      const config = generateRpmFilterConfig1(notches);
-      FC.RPM_FILTER_CONFIG = config;
+      FC.RPM_FILTER_CONFIG = generateRpmFilterConfig1(notches);
     }
   });
 
