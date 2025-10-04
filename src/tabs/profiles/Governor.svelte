@@ -2,6 +2,9 @@
   import diff from "microdiff";
   import semver from "semver";
   import { onMount } from "svelte";
+  import { slide } from "svelte/transition";
+
+  import { FC } from "@/js/fc.svelte.js";
 
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
@@ -10,7 +13,9 @@
   import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
 
-  const flags = [
+  let govActive = $derived(FC.GOVERNOR.gov_mode > 1);
+
+  const flagNames = [
     "FC_THROTTLE_CURVE",
     "TX_PRECOMP_CURVE",
     "FALLBACK_PRECOMP",
@@ -22,6 +27,25 @@
     "SUSPEND",
     "BYPASS",
   ];
+
+  const flags = {};
+  for (const [index, name] of flagNames.entries()) {
+    Object.defineProperty(flags, name, {
+      get() {
+        return bit_check(FC.GOVERNOR.gov_flags, index);
+      },
+      set(v) {
+        FC.GOVERNOR.gov_flags = (v ? bit_set : bit_clear)(
+          FC.GOVERNOR.gov_flags,
+          index,
+        );
+      },
+    });
+  }
+
+  /* Holds current flag state when enabling bypass, so it can be restored when
+   * bypass is disabled */
+  let preBypassFlags = 0;
 
   let { onchange } = $props();
   let initialState;
@@ -46,21 +70,23 @@
 
 <Section label="govProfile">
   <SubSection>
-    <Field id="gov-headspeed" label="govHeadspeed" unit="rpm">
-      {#snippet tooltip()}
-        <Tooltip
-          help="govHeadspeedHelp"
-          attrs={[{ name: "genericRange", value: "100rpm - 50,000rpm" }]}
+    {#if govActive}
+      <Field id="gov-headspeed" label="govHeadspeed" unit="rpm">
+        {#snippet tooltip()}
+          <Tooltip
+            help="govHeadspeedHelp"
+            attrs={[{ name: "genericRange", value: "100rpm - 50,000rpm" }]}
+          />
+        {/snippet}
+        <NumberInput
+          id="gov-headspeed"
+          min="100"
+          max="50000"
+          step="10"
+          bind:value={FC.GOVERNOR.gov_headspeed}
         />
-      {/snippet}
-      <NumberInput
-        id="gov-headspeed"
-        min="100"
-        max="50000"
-        step="10"
-        bind:value={FC.GOVERNOR.gov_headspeed}
-      />
-    </Field>
+      </Field>
+    {/if}
     <Field id="gov-max-throttle" label="govMaxThrottle" unit="%">
       {#snippet tooltip()}
         <Tooltip
@@ -78,7 +104,7 @@
         bind:value={FC.GOVERNOR.gov_max_throttle}
       />
     </Field>
-    {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)}
+    {#if govActive && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)}
       <Field id="gov-min-throttle" label="govMinThrottle" unit="%">
         {#snippet tooltip()}
           <Tooltip
@@ -97,7 +123,7 @@
         />
       </Field>
     {/if}
-    {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+    {#if govActive && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
       <Field id="gov-fallback-drop" label="govFallbackDrop" unit="%">
         {#snippet tooltip()}
           <Tooltip
@@ -117,167 +143,283 @@
       </Field>
     {/if}
   </SubSection>
-  <SubSection label="profileGovPIDSection">
-    <Field id="gov-master-gain" label="govMasterGain">
-      {#snippet tooltip()}
-        <Tooltip
-          help="govMasterGainHelp"
-          attrs={[
-            { name: "genericDefault", value: "40" },
-            { name: "genericRange", value: "0 - 250" },
-          ]}
+  {#if govActive}
+    <SubSection label="profileGovPIDSection">
+      <Field id="gov-master-gain" label="govMasterGain">
+        {#snippet tooltip()}
+          <Tooltip
+            help="govMasterGainHelp"
+            attrs={[
+              { name: "genericDefault", value: "40" },
+              { name: "genericRange", value: "0 - 250" },
+            ]}
+          />
+        {/snippet}
+        <NumberInput
+          id="gov-master-gain"
+          min="0"
+          max="250"
+          bind:value={FC.GOVERNOR.gov_gain}
         />
-      {/snippet}
-      <NumberInput
-        id="gov-master-gain"
-        min="0"
-        max="250"
-        bind:value={FC.GOVERNOR.gov_gain}
-      />
-    </Field>
-    <Field id="gov-p-gain" label="govPGain">
-      {#snippet tooltip()}
-        <Tooltip
-          help="govPGainHelp"
-          attrs={[
-            { name: "genericDefault", value: "40" },
-            { name: "genericRange", value: "0 - 250" },
-          ]}
+      </Field>
+      <Field id="gov-p-gain" label="govPGain">
+        {#snippet tooltip()}
+          <Tooltip
+            help="govPGainHelp"
+            attrs={[
+              { name: "genericDefault", value: "40" },
+              { name: "genericRange", value: "0 - 250" },
+            ]}
+          />
+        {/snippet}
+        <NumberInput
+          id="gov-p-gain"
+          min="0"
+          max="250"
+          bind:value={FC.GOVERNOR.gov_p_gain}
         />
-      {/snippet}
-      <NumberInput
-        id="gov-p-gain"
-        min="0"
-        max="250"
-        bind:value={FC.GOVERNOR.gov_p_gain}
-      />
-    </Field>
-    <Field id="gov-i-gain" label="govIGain">
-      {#snippet tooltip()}
-        <Tooltip
-          help="govIGainHelp"
-          attrs={[
-            { name: "genericDefault", value: "50" },
-            { name: "genericRange", value: "0 - 250" },
-          ]}
+      </Field>
+      <Field id="gov-i-gain" label="govIGain">
+        {#snippet tooltip()}
+          <Tooltip
+            help="govIGainHelp"
+            attrs={[
+              { name: "genericDefault", value: "50" },
+              { name: "genericRange", value: "0 - 250" },
+            ]}
+          />
+        {/snippet}
+        <NumberInput
+          id="gov-i-gain"
+          min="0"
+          max="250"
+          bind:value={FC.GOVERNOR.gov_i_gain}
         />
-      {/snippet}
-      <NumberInput
-        id="gov-i-gain"
-        min="0"
-        max="250"
-        bind:value={FC.GOVERNOR.gov_i_gain}
-      />
-    </Field>
-    <Field id="gov-d-gain" label="govDGain">
-      {#snippet tooltip()}
-        <Tooltip
-          help="govDGainHelp"
-          attrs={[
-            { name: "genericDefault", value: "0" },
-            { name: "genericRange", value: "0 - 250" },
-          ]}
+      </Field>
+      <Field id="gov-d-gain" label="govDGain">
+        {#snippet tooltip()}
+          <Tooltip
+            help="govDGainHelp"
+            attrs={[
+              { name: "genericDefault", value: "0" },
+              { name: "genericRange", value: "0 - 250" },
+            ]}
+          />
+        {/snippet}
+        <NumberInput
+          id="gov-d-gain"
+          min="0"
+          max="250"
+          bind:value={FC.GOVERNOR.gov_d_gain}
         />
-      {/snippet}
-      <NumberInput
-        id="gov-d-gain"
-        min="0"
-        max="250"
-        bind:value={FC.GOVERNOR.gov_d_gain}
-      />
-    </Field>
-    <Field id="gov-f-gain" label="govFGain">
-      {#snippet tooltip()}
-        <Tooltip
-          help="govFGainHelp"
-          attrs={[
-            { name: "genericDefault", value: "10" },
-            { name: "genericRange", value: "0 - 250" },
-          ]}
+      </Field>
+      <Field id="gov-f-gain" label="govFGain">
+        {#snippet tooltip()}
+          <Tooltip
+            help="govFGainHelp"
+            attrs={[
+              { name: "genericDefault", value: "10" },
+              { name: "genericRange", value: "0 - 250" },
+            ]}
+          />
+        {/snippet}
+        <NumberInput
+          id="gov-f-gain"
+          min="0"
+          max="250"
+          bind:value={FC.GOVERNOR.gov_f_gain}
+          disabled={flags.TX_PRECOMP_CURVE}
         />
-      {/snippet}
-      <NumberInput
-        id="gov-f-gain"
-        min="0"
-        max="250"
-        bind:value={FC.GOVERNOR.gov_f_gain}
-      />
-    </Field>
-  </SubSection>
-  <SubSection label="profileGovPrecompSection">
-    <Field id="gov-collective-precomp" label="govCollectivePrecomp">
-      {#snippet tooltip()}
-        <Tooltip
-          help="govCollectivePrecompHelp"
-          attrs={[
-            { name: "genericDefault", value: "50" },
-            { name: "genericRange", value: "0 - 250" },
-          ]}
+      </Field>
+    </SubSection>
+    <SubSection label="profileGovPrecompSection">
+      <Field id="gov-collective-precomp" label="govCollectivePrecomp">
+        {#snippet tooltip()}
+          <Tooltip
+            help="govCollectivePrecompHelp"
+            attrs={[
+              { name: "genericDefault", value: "50" },
+              { name: "genericRange", value: "0 - 250" },
+            ]}
+          />
+        {/snippet}
+        <NumberInput
+          id="gov-collective-precomp"
+          min="0"
+          max="250"
+          bind:value={FC.GOVERNOR.gov_collective_ff_weight}
+          disabled={flags.TX_PRECOMP_CURVE}
         />
-      {/snippet}
-      <NumberInput
-        id="gov-collective-precomp"
-        min="0"
-        max="250"
-        bind:value={FC.GOVERNOR.gov_collective_ff_weight}
-      />
-    </Field>
-    <Field id="gov-cyclic-precomp" label="govCyclicPrecomp">
-      {#snippet tooltip()}
-        <Tooltip
-          help="govCyclicPrecompHelp"
-          attrs={[
-            { name: "genericDefault", value: "10" },
-            { name: "genericRange", value: "0 - 250" },
-          ]}
+      </Field>
+      <Field id="gov-cyclic-precomp" label="govCyclicPrecomp">
+        {#snippet tooltip()}
+          <Tooltip
+            help="govCyclicPrecompHelp"
+            attrs={[
+              { name: "genericDefault", value: "10" },
+              { name: "genericRange", value: "0 - 250" },
+            ]}
+          />
+        {/snippet}
+        <NumberInput
+          id="gov-cyclic-precomp"
+          min="0"
+          max="250"
+          bind:value={FC.GOVERNOR.gov_cyclic_ff_weight}
+          disabled={flags.TX_PRECOMP_CURVE}
         />
-      {/snippet}
-      <NumberInput
-        id="gov-cyclic-precomp"
-        min="0"
-        max="250"
-        bind:value={FC.GOVERNOR.gov_cyclic_ff_weight}
-      />
-    </Field>
-    <Field id="gov-yaw-precomp" label="govYawPrecomp">
-      {#snippet tooltip()}
-        <Tooltip
-          help="govYawPrecompHelp"
-          attrs={[
-            { name: "genericDefault", value: "10" },
-            { name: "genericRange", value: "0 - 250" },
-          ]}
+      </Field>
+      <Field id="gov-yaw-precomp" label="govYawPrecomp">
+        {#snippet tooltip()}
+          <Tooltip
+            help="govYawPrecompHelp"
+            attrs={[
+              { name: "genericDefault", value: "10" },
+              { name: "genericRange", value: "0 - 250" },
+            ]}
+          />
+        {/snippet}
+        <NumberInput
+          id="gov-yaw-precomp"
+          min="0"
+          max="250"
+          bind:value={FC.GOVERNOR.gov_yaw_ff_weight}
+          disabled={flags.TX_PRECOMP_CURVE}
         />
-      {/snippet}
-      <NumberInput
-        id="gov-yaw-precomp"
-        min="0"
-        max="250"
-        bind:value={FC.GOVERNOR.gov_yaw_ff_weight}
-      />
-    </Field>
-  </SubSection>
+      </Field>
+    </SubSection>
+  {/if}
   {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
     <SubSection label="profileGovFlagsSection">
-      {#each flags as flag, i (flag)}
-        <Field id={`gov-flag-${flag}`} label={`govFlag_${flag}`}>
+      {#if FC.GOVERNOR.gov_throttle_type !== 0}
+        <Field
+          id="gov-flag-FC_THROTTLE_CURVE"
+          label="govFlag_FC_THROTTLE_CURVE"
+        >
           {#snippet tooltip()}
-            <Tooltip help={`govFlagHelp_${flag}`} />
+            <Tooltip help="govFlagHelp_FC_THROTTLE_CURVE" />
           {/snippet}
           <Switch
-            id={`gov-flag-${flag}`}
-            bind:checked={
-              () => bit_check(FC.GOVERNOR.gov_flags, i),
-              (v) => {
-                FC.GOVERNOR.gov_flags = (v ? bit_set : bit_clear)(
-                  FC.GOVERNOR.gov_flags,
-                  i,
-                );
-              }
-            }
+            id="gov-flag-FC_THROTTLE_CURVE"
+            bind:checked={flags.FC_THROTTLE_CURVE}
           />
         </Field>
-      {/each}
+      {:else if govActive}
+        <Field id="gov-flag-TX_PRECOMP_CURVE" label="govFlag_TX_PRECOMP_CURVE">
+          {#snippet tooltip()}
+            <Tooltip help="govFlagHelp_TX_PRECOMP_CURVE" />
+          {/snippet}
+          <Switch
+            id="gov-flag-TX_PRECOMP_CURVE"
+            bind:checked={flags.TX_PRECOMP_CURVE}
+            }
+            disabled={flags.BYPASS || flags.HS_ADJUSTMENT || flags.PID_SPOOLUP}
+          />
+        </Field>
+        <Field id="gov-flag-HS_ADJUSTMENT" label="govFlag_HS_ADJUSTMENT">
+          {#snippet tooltip()}
+            <Tooltip help="govFlagHelp_HS_ADJUSTMENT" />
+          {/snippet}
+          <Switch
+            id="gov-flag-HS_ADJUSTMENT"
+            bind:checked={flags.HS_ADJUSTMENT}
+            disabled={flags.BYPASS || flags.TX_PRECOMP_CURVE}
+          />
+        </Field>
+      {/if}
+      {#if govActive}
+        <Field id="gov-flag-FALLBACK_PRECOMP" label="govFlag_FALLBACK_PRECOMP">
+          {#snippet tooltip()}
+            <Tooltip help="govFlagHelp_FALLBACK_PRECOMP" />
+          {/snippet}
+          <Switch
+            id="gov-flag-FALLBACK_PRECOMP"
+            bind:checked={flags.FALLBACK_PRECOMP}
+            disabled={flags.BYPASS || flags.TX_PRECOMP_CURVE}
+          />
+        </Field>
+        <Field id="gov-flag-PID_SPOOLUP" label="govFlag_PID_SPOOLUP">
+          {#snippet tooltip()}
+            <Tooltip help="govFlagHelp_PID_SPOOLUP" />
+          {/snippet}
+          <Switch
+            id="gov-flag-PID_SPOOLUP"
+            bind:checked={flags.PID_SPOOLUP}
+            disabled={flags.BYPASS || flags.TX_PRECOMP_CURVE}
+          />
+        </Field>
+      {/if}
+      {#if FC.GOVERNOR.gov_mode === 2}
+        <Field id="gov-flag-VOLTAGE_COMP" label="govFlag_VOLTAGE_COMP">
+          {#snippet tooltip()}
+            <Tooltip help="govFlagHelp_VOLTAGE_COMP" />
+          {/snippet}
+          <Switch
+            id="gov-flag-VOLTAGE_COMP"
+            bind:checked={flags.VOLTAGE_COMP}
+            disabled={flags.BYPASS ||
+              FC.BATTERY_CONFIG.voltageMeterSource !== 1}
+          />
+        </Field>
+        <Field id="gov-flag-DYN_MIN_THROTTLE" label="govFlag_DYN_MIN_THROTTLE">
+          {#snippet tooltip()}
+            <Tooltip help="govFlagHelp_DYN_MIN_THROTTLE" />
+          {/snippet}
+          <Switch
+            id="gov-flag-DYN_MIN_THROTTLE"
+            bind:checked={flags.DYN_MIN_THROTTLE}
+            disabled={flags.BYPASS}
+          />
+        </Field>
+      {/if}
+      <Field id="gov-flag-AUTOROTATION" label="govFlag_AUTOROTATION">
+        {#snippet tooltip()}
+          <Tooltip help="govFlagHelp_AUTOROTATION" />
+        {/snippet}
+        <Switch
+          id="gov-flag-AUTOROTATION"
+          bind:checked={flags.AUTOROTATION}
+          disabled={flags.BYPASS}
+        />
+      </Field>
+      {#if govActive}
+        <div transition:slide>
+          <Field id="gov-flag-SUSPEND" label="govFlag_SUSPEND">
+            {#snippet tooltip()}
+              <Tooltip help="govFlagHelp_SUSPEND" />
+            {/snippet}
+            <Switch id="gov-flag-SUSPEND" bind:checked={flags.SUSPEND} />
+          </Field>
+        </div>
+      {/if}
+      <Field id="gov-flag-BYPASS" label="govFlag_BYPASS">
+        {#snippet tooltip()}
+          <Tooltip help="govFlagHelp_BYPASS" />
+        {/snippet}
+        <Switch
+          id="gov-flag-BYPASS"
+          bind:checked={
+            () => flags.BYPASS,
+            (v) => {
+              if (v) {
+                preBypassFlags = FC.GOVERNOR.gov_flags;
+
+                flags.TX_PRECOMP_CURVE = false;
+                flags.FALLBACK_PRECOMP = false;
+                flags.VOLTAGE_COMP = false;
+                flags.PID_SPOOLUP = false;
+                flags.HS_ADJUSTMENT = false;
+                flags.DYN_MIN_THROTTLE = false;
+                flags.AUTOROTATION = false;
+              } else {
+                FC.GOVERNOR.gov_flags = preBypassFlags;
+              }
+
+              flags.BYPASS = v;
+            }
+          }
+        />
+      </Field>
     </SubSection>
   {/if}
 </Section>

@@ -64,6 +64,7 @@ tab.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_GOVERNOR_PROFILE))
             .then(() => MSP.promise(MSPCodes.MSP_GOVERNOR_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_SENSOR_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_BATTERY_CONFIG))
             .then(callback);
     }
 
