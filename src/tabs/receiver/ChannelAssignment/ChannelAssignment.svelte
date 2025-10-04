@@ -100,7 +100,9 @@
     <div class="channel-group">
       {#each { length: FC.RC_MAP.length } as _, i (i)}
         <span class="channel-index">{i + 1}</span>
-        <select bind:value={() => FC.RC_MAP[i], (x) => swapAssignment(i, x)}>
+        <select
+          bind:value={() => FC.RC_MAP.indexOf(i), (x) => swapAssignment(i, x)}
+        >
           {#each channelNames.slice(0, FC.RC_MAP.length) as channel, i (i)}
             <option value={i}>{$i18n.t(channel)}</option>
           {/each}

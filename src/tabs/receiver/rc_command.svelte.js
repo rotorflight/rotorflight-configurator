@@ -27,7 +27,7 @@ function applyDeadband(deflection, deadband) {
 }
 
 function getProportional(channel, deadband, center, range) {
-  const mappedChannel = FC.RC_MAP.indexOf(channel);
+  const mappedChannel = FC.RC_MAP[channel];
   const raw = FC.RX_CHANNELS[mappedChannel];
   if (!raw) {
     return null;
@@ -94,7 +94,7 @@ for (let i = 0; i < MAX_AUX_COUNT; i++) {
     get pwm() {
       let mappedChannel = i;
       if (i < FC.RC_MAP.length - 5) {
-        mappedChannel = FC.RC_MAP.indexOf(i + 5);
+        mappedChannel = FC.RC_MAP[i + 5];
       }
 
       const raw = FC.RX_CHANNELS[mappedChannel];

@@ -12,9 +12,7 @@
 
   let hue = $derived((channel * 20).toString());
 
-  let axis = $derived(
-    channel < FC.RC_MAP.length ? FC.RC_MAP.indexOf(channel) : channel,
-  );
+  let axis = $derived(FC.RC_MAP.indexOf(channel));
 
   let width = $derived(
     ((100 * (FC.RX_CHANNELS[channel] - min)) / (max - min)).clamp(0, 100),
