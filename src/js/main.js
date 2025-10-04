@@ -404,8 +404,10 @@ function notifyOutdatedVersion(releaseData) {
     }
 
     if (CONFIGURATOR.version.startsWith("0.0.0")) {
-        const message = i18n.getMessage('configuratorDevelopmentNotice');
-        configuratorVersionDialog(message, CONFIGURATOR.allReleasesUrl);
+        if (!import.meta.env.DEV) {
+            const message = i18n.getMessage('configuratorDevelopmentNotice');
+            configuratorVersionDialog(message, CONFIGURATOR.allReleasesUrl);
+        }
     }
     else if (semver.lt(CONFIGURATOR.version, CONFIGURATOR.latestVersion)) {
         const message = i18n.getMessage('configuratorUpdateNotice', [CONFIGURATOR.latestVersion, CONFIGURATOR.latestVersionReleaseUrl]);
