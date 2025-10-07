@@ -3,6 +3,7 @@
   import { slide } from "svelte/transition";
 
   import { i18n } from "@/js/i18n.js";
+  import motorState from "../motors/state.svelte.js";
 
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
@@ -23,12 +24,19 @@
 
   let enabled = $derived(FC.FEATURE_CONFIG.features.RPM_FILTER);
   let multiAxis = $derived(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8));
+
+  let fastRpm = $derived(
+    FC.FEATURE_CONFIG.features.FREQ_SENSOR ||
+      (motorState.isDshot && FC.MOTOR_CONFIG.use_dshot_telemetry),
+  );
 </script>
 
 <Section label="gyroRpmFilterSettings" summary="gyroRpmFilterHelp">
-  <div class="warning-container">
-    <WarningNote message="gyroRpmFilterConfigNote" />
-  </div>
+  {#if !fastRpm}
+    <div class="warning-container">
+      <WarningNote message="gyroRpmFilterConfigNote" />
+    </div>
+  {/if}
 
   <SubSection>
     <Field id="rpm-filter-enable" label="genericEnable">
