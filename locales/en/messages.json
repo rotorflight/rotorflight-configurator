@@ -3631,7 +3631,7 @@
         "message": "FC Throttle Curve"
     },
     "govFlag_TX_PRECOMP_CURVE": {
-        "message": "External Throttle Curve"
+        "message": "Tx Throttle V-Curve"
     },
     "govFlag_FALLBACK_PRECOMP": {
         "message": "Fallback Precompensation"
@@ -3661,7 +3661,7 @@
         "message": "<p>Use the collective input to determine the throttle level.</p><p><strong>Note:</strong> The collective to throttle curve is defined in the <i>Motors</i> ➜ <i>Governor</i> ➜ <i>Throttle Curve</i> section.</p>"
     },
     "govFlagHelp_TX_PRECOMP_CURVE": {
-        "message": "<p>Combine a throttle curve with the governors PID controller.</p><p>The input throttle is used as the base throttle level. Governor precompensation is disabled, and should be handled by the transmitter."
+        "message": "<p>Combine a throttle curve with the governor's PID controller.</p><p>The input throttle is used as the base throttle level. Governor precompensation is disabled, and should be handled by the transmitter."
     },
     "govFlagHelp_FALLBACK_PRECOMP": {
         "message": "Enable precompensation while in the <code>FALLBACK</code> state."
