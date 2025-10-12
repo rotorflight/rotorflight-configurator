@@ -138,6 +138,18 @@
         "english": "Virtual Mode (Experimental)",
         "description": "Configure a Virtual Flight Controller without the need of a physical FC."
     },
+    "portsSelectPermission": {
+        "message": "--- USB 장치를 찾을 수 없습니다 ---",
+        "description": "Option in the port selection dropdown to allow the user to give permissions to the system to access the device."
+    },
+    "portsSelectPermissionBluetooth": {
+        "message": "--- 블루투스 장치를 찾을 수 없습니다---",
+        "description": "Option in the port selection dropdown to allow the user to give permissions to the system to access a Bluetooth device."
+    },
+    "portsSelectPermissionDFU": {
+        "message": "--- 내 DFU 장치를 찾을 수 없습니다 ---",
+        "description": "Option in the port selection dropdown to allow the user to give permissions to the system to access a DFU device."
+    },
     "virtualMSPVersion": {
         "message": "가상 펌웨어 버전",
         "english": "Virtual Firmware Version"

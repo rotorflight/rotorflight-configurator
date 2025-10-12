@@ -164,7 +164,7 @@ export default class PresetDialog {
    */
   initialize() {
     return new Promise((resolve) => {
-      this.#dom.dialog.load("./tabs/presets/preset_dialog.html", () => {
+      this.#dom.dialog.load("./src/tabs/presets/preset_dialog.html", () => {
         this.#readDom();
         resolve();
       });

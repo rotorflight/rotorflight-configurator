@@ -43,6 +43,7 @@ pnpm gulp <task> [--debug] [--platform <platform>] [--arch <arch>]
 - osx
 - win
 - android
+- pwa
 
 **`<arch>`** Defaults to the host architecture.
 

@@ -97,8 +97,17 @@ export function initializeSerialBackend() {
 
     $('#port-override').val(config.get('portOverride'));
 
-    $('div#port-picker #port').on("change", function() {
+    $('div#port-picker #port').on("change", async function() {
         GUI.updateManualPortVisibility();
+
+        var optionSelected = $("option:selected", this);
+        const reqPermFunc = optionSelected.data().requestPermission;
+        if (reqPermFunc) {
+            reqPermFunc(GUI.show_all_ports);
+            $(this).val($(this).data("current"));
+        } else {
+            $(this).data("current", $(this).val());
+        }
     });
 
     $('div.connect_controls a.connect').on("click", function () {

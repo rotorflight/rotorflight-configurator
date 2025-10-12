@@ -13,6 +13,10 @@ if (__BACKEND__ === "nwjs") {
   });
 }
 
+if (__BACKEND__ === "browser") {
+    jQuery(appReady);
+}
+
 function useGlobalNodeFunctions() {
     // The global functions of Node continue working on background. This is good to continue flashing,
     // for example, when the window is minimized
@@ -140,7 +144,8 @@ export function startProcess() {
     // our view is reactive to model changes
     // updateTopBarVersion();
 
-    if (!GUI.isOther()) {
+    // TODO: Implement PWA update UI
+    if (GUI.isInstalled()) {
         checkForConfiguratorUpdates();
     }
 

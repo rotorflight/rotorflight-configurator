@@ -3,6 +3,7 @@ import * as config from '@/js/config.js';
 const GUI_MODES = {
     NWJS: "NW.js",
     Cordova: "Cordova",
+    Browser: "Browser",
     Other: "Other",
 };
 
@@ -61,6 +62,10 @@ export const GuiControl = function () {
     this.zoomBoxTimeout = null;
 
     // Check the method of execution
+    if (__BACKEND__ === "browser") {
+        this.Mode = GUI_MODES.Browser;
+    }
+
     if (__BACKEND__ === "nwjs") {
         this.nwGui = globalThis.nw;
         this.Mode = GUI_MODES.NWJS;
@@ -449,14 +454,19 @@ GuiControl.prototype.selectDefaultTabWhenConnected = function() {
 };
 
 GuiControl.prototype.isNWJS = function () {
-  return this.Mode === GUI_MODES.NWJS;
+    return this.Mode === GUI_MODES.NWJS;
 };
-
 GuiControl.prototype.isCordova = function () {
     return this.Mode === GUI_MODES.Cordova;
-  };
+};
 GuiControl.prototype.isOther = function () {
-  return this.Mode === GUI_MODES.Other;
+    return this.Mode === GUI_MODES.Other;
+};
+GuiControl.prototype.isBrowser = function () {
+    return this.Mode === GUI_MODES.Browser;
+};
+GuiControl.prototype.isInstalled = function () {
+    return [GUI_MODES.NWJS, GUI_MODES.Cordova].includes(this.Mode);
 };
 
 GuiControl.prototype.escapeHtml = function (unsafe) {

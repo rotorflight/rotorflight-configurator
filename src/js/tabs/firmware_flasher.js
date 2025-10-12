@@ -187,11 +187,15 @@ tab.initialize = function (callback) {
                     const target = match[5];
                     const date = new Date(release.published_at);
                     const formattedDate = ("0" + date.getDate()).slice(-2) + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear() + " " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
+                    // On browser we need to use a proxy to get release assets
+                    const url = GUI.isBrowser()
+                        ? asset.browser_download_url.replace('github.com', 'rotorflight-releases-proxy.josh-eea.workers.dev')
+                        : asset.browser_download_url;
                     const descriptor = {
                         "releaseUrl": release.html_url,
                         "name"      : version,
                         "version"   : version,
-                        "url"       : asset.browser_download_url,
+                        url,
                         "file"      : asset.name,
                         "target"    : target,
                         "date"      : formattedDate,

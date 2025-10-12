@@ -205,7 +205,7 @@ const WEBVIEW = {
         self.majorChromeVersion = self.chromeVersion.split('.')[0];
         if (self.majorChromeVersion >= REQUIRED_WEBVIEW_VERSION) {
             navigator.splashscreen.show();
-            document.location.href = '/src/main.html';
+            document.location.href = '/index.html';
         } else {
             navigator.splashscreen.hide();
             self.checkInstalledApps(function() {

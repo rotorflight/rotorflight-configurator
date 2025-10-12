@@ -98,9 +98,21 @@ if (__BACKEND__ === "cordova") {
   })();
 }
 
+if (__BACKEND__ === "browser") {
+  (async () => {
+    const chrome = await import("@/js/browser_chromeapi.js");
+    Object.assign(globalThis, {
+      chrome,
+    });
+  })();
+}
+
 if (import.meta.hot) {
   import.meta.hot.on("vite:beforeFullReload", (event) => {
-    if (event.path?.endsWith(".html") && event.path !== "/src/main.html") {
+    if (
+      (event.path?.endsWith(".html") && event.path !== "/index.html") ||
+      event.path === "/"
+    ) {
       return;
     }
 

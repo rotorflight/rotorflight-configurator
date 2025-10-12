@@ -18,7 +18,7 @@ export default defineConfig({
     outDir: "./bundle",
     rollupOptions: {
       input: {
-        "src/main.html": "src/main.html",
+        index: "index.html",
         "src/main_cordova.html": "src/main_cordova.html",
         "src/tabs/receiver_msp.html": "src/tabs/receiver_msp.html",
         "src/tabs/map.html": "src/tabs/map.html",
