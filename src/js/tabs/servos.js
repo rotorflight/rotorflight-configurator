@@ -262,27 +262,28 @@ tab.initialize = function (callback) {
 
         function update_servo_bars() {
 
-            let rangeMin, rangeMax;
-
             for (let i = 0; i < FC.SERVO_CONFIG.length; i++) {
                 const servoValue = FC.SERVO_DATA[i];
+                const cfg = FC.SERVO_CONFIG[i];
 
-                if (FC.SERVO_CONFIG[i].mid <= 860) {
-                    // 760us pulse servos
-                    rangeMin = 375;
-                    rangeMax = 1145;
-                } else if (FC.SERVO_CONFIG[i].mid <= 1060) {
-                    // 960us
-                    rangeMin = 460;
-                    rangeMax = 1460;
+                // Compute absolute endpoints around the configured center
+                const absMin = cfg.mid + (cfg.min ?? 0);
+                const absMax = cfg.mid + (cfg.max ?? 0);
+                const center = cfg.mid;
+
+                // Protect against invalid or zero spans
+                const leftSpan  = Math.max(1, center - Math.min(center, absMin));
+                const rightSpan = Math.max(1, Math.max(center, absMax) - center);
+
+                let percnt;
+                if (servoValue <= center) {
+                    // Map [absMin..center] to [0..50]
+                    percnt = 50 * (servoValue - Math.min(center, absMin)) / leftSpan;
                 } else {
-                    // 1520us
-                    rangeMin = 750;
-                    rangeMax = 2250;
+                    // Map (center..absMax] to (50..100]
+                    percnt = 50 + 50 * (servoValue - center) / rightSpan;
                 }
 
-                const range  = rangeMax - rangeMin;
-                const percnt = 100 * (servoValue - rangeMin) / range;
                 const length = percnt.clamp(0, 100);
                 const margin = 100 - length;
 
