@@ -5808,6 +5808,10 @@
         "message": "Wczytaj plik",
         "english": "Load from file"
     },
+    "cliSaveConfigBtn": {
+        "message": "Zapisz Konfigurację",
+        "english": "Save Configuration"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "Wczytano plik <strong> {{fileName}} </strong>. Przejrzyj wczytane polecenia",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"

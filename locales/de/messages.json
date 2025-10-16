@@ -4635,6 +4635,10 @@
         "message": "Aus Datei Laden",
         "english": "Load from file"
     },
+    "cliSaveConfigBtn": {
+        "message": "Konfiguration Speichern",
+        "english": "Save Configuration"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "Datei <strong>{{fileName}}</strong> geladen. Überprüfe die geladenen Befehle",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"

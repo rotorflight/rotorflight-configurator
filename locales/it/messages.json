@@ -5832,6 +5832,10 @@
         "message": "Carica da file",
         "english": "Load from file"
     },
+    "cliSaveConfigBtn": {
+        "message": "Salva Configurazione",
+        "english": "Save Configuration"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "File <strong>{{fileName}}</strong> caricato. Controlla i comandi caricati",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"
