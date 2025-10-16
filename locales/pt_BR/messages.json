@@ -5811,6 +5811,10 @@
         "message": "Carregar do arquivo",
         "english": "Load from file"
     },
+    "cliSaveConfigBtn": {
+        "message": "Salvar Configuração",
+        "english": "Save Configuration"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "O arquivo <strong>{{fileName}}</strong> foi carregado. Revise os comandos",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"

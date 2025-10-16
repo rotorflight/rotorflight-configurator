@@ -5832,6 +5832,10 @@
         "message": "파일로부터 불러오기",
         "english": "Load from file"
     },
+    "cliSaveConfigBtn": {
+        "message": "설정 저장",
+        "english": "Save Configuration"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "파일 <strong>{{fileName}}</strong> 로드됨. 로드된 명령어를 검토하세요.",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"

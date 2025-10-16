@@ -1668,16 +1668,13 @@
         "message": "Loaded Profile: <strong class=\"message-positive\">$1</strong>"
     },
     "receiverSelection": {
-        "message": "Protocol"
+        "message": "Receiver Type"
     },
     "receiverSelectionSectionSignaling": {
         "message": "Signaling"
     },
     "receiverSettings": {
-        "message": "Channel Range"
-    },
-    "receiverSettingsThrottleChannel": {
-        "message": "Throttle Channel"
+        "message": "Receiver Settings"
     },
     "receiverProtocol": {
         "message": "Receiver Protocol"
@@ -1686,73 +1683,67 @@
         "message": "Select the protocol that the receiver is using"
     },
     "receiverSerialHalfDuplex": {
-        "message": "Half-Duplex"
+        "message": "One-wire Communication (Half-Duplex)"
     },
     "receiverSerialHalfDuplexHelp": {
         "message": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2."
     },
     "receiverSerialInverted": {
-        "message": "Inverted"
+        "message": "Inverted Serial Signaling"
     },
     "receiverSerialInvertedHelp": {
-        "message": "<p>Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
+        "message": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help."
     },
     "receiverSerialPinSwap": {
-        "message": "Pin Swap"
+        "message": "Rx/Tx Pin Swap"
     },
     "receiverSerialPinSwapHelp": {
-        "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
+        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
     },
     "receiverStickCenter": {
         "message": "Stick Center"
     },
     "receiverHelpStickCenter": {
-        "message": "The channel value when the stick is centered. Usually 1500µs or 1520µs."
+        "message": "The value of stick (channel) center in µs. Usually 1500µs or 1520µs."
     },
     "receiverStickDeflection": {
-        "message": "Stick Travel"
+        "message": "Stick Maximum Travel"
     },
     "receiverHelpStickDeflection": {
-        "message": "The maximum value for stick deflection from the center."
+        "message": "The maximum value (in µs) for stick deflection from the center, for RPY."
     },
     "receiverArmingThrottle": {
-        "message": "Arm Limit"
+        "message": "Throttle Channel limit for arming"
     },
     "receiverHelpArmingThrottle": {
-        "message": "The flight controller can only be armed while the the throttle channel is below this value."
+        "message": "The channel value (in µs) under which arming is allowed"
     },
     "receiverZeroThrottle": {
-        "message": "Min Throttle - 0%"
+        "message": "Throttle Channel value for 0% throttle"
     },
     "receiverHelpZeroThrottle": {
-        "message": "The throttle channel value where throttle is considered 0%."
-    },
-    "receiverHelpZeroThrottle2": {
-        "message": "<p>The throttle channel value where throttle is considered 0%. Set to 0 to set automatically.</p><p><strong>Note:</strong> The throttle channel must be able to move atleast 10µs below this value to signal throttle off and allow arming.</p>"
+        "message": "The channel value (in µs) for the throttle channel to be considered 0%"
     },
     "receiverFullThrottle": {
-        "message": "Max Throttle - 100%"
+        "message": "Throttle Channel value for 100% throttle"
     },
     "receiverHelpFullThrottle": {
-        "message": "The throttle channel value where throttle is considered 100%."
-    },
-    "receiverHelpFullThrottle2": {
-        "message": "The throttle channel value where throttle is considered 100%. Set to 0 to set automatically."
+        "message": "The channel value (in µs) for the throttle channel to be considered 100%"
     },
     "receiverCyclicDeadband": {
         "message": "Cyclic Deadband"
     },
     "receiverHelpCyclicDeadband": {
-        "message": "How far the roll and pitch channel values must move from center before it's considered an input."
+        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle."
     },
     "receiverYawDeadband": {
         "message": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "How far the yaw channel value must move from center before it's considered an input."
+        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
     },
     "receiverTelemetrySettings": {
-        "message": "Telemetry"
+        "message": "Telemetry Settings"
     },
     "receiverTelemetrySettingsSectionSignaling": {
         "message": "Signaling"
@@ -1764,13 +1755,13 @@
         "message": "Enable Telemetry"
     },
     "receiverTelemetryHalfDuplex": {
-        "message": "Half-Duplex"
+        "message": "One-wire Telemetry Communication"
     },
     "receiverTelemetryInverted": {
-        "message": "Inverted"
+        "message": "Inverted Telemetry Signaling"
     },
     "receiverTelemetryPinSwap": {
-        "message": "Pin Swap"
+        "message": "Telemetry Pin Swap (Swap Rx and Tx pins)"
     },
     "receiverCrsfTelemetryMode": {
         "message": "Custom Telemetry"
@@ -2187,13 +2178,19 @@
         "message": "Temperature"
     },
     "receiverBars": {
-        "message": "Channel Assignment"
+        "message": "Receiver Channels"
+    },
+    "receiverBarsHelp": {
+        "message": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel."
     },
     "receiverChannelOrder": {
-        "message": "Apply Preset"
+        "message": "Channel Order Preset"
     },
-    "receiverChannelOrderPresetPlaceholder": {
-        "message": "Select a preset..."
+    "receiverChannelDefaultOption": {
+        "message": "Default"
+    },
+    "receiverHelpChannelOrder": {
+        "message": "Select one of the presets from the dropdown menu, or enter your own channel order."
     },
     "receiverButtonBind": {
         "message": "Bind Receiver"
@@ -2212,9 +2209,6 @@
     },
     "receiverMspEnableButton": {
         "message": "Enable controls"
-    },
-    "resetModelPreviewOrientation": {
-        "message": "Reset"
     },
     "auxiliaryHelp": {
         "message": "Configure modes here using a combination of ranges and/or links to other modes (links supported on BF 4.0 and later). Use <strong>ranges</strong> to define the switches on your transmitter and corresponding mode assignments. A receiver channel that gives a reading between a range min/max will activate the mode. Use a <strong>link</strong> to activate a mode when another mode is activated. <strong>Exceptions:</strong> ARM cannot be linked to or from another mode, modes cannot be linked to other modes that are configured with a link (chained links). Multiple ranges/links can be used to activate any mode. If there is more than one range/link defined for a mode, each of them can be set to <strong>AND</strong> or <strong>OR</strong>. A mode will be activated when:<br />- ALL <strong>AND</strong> ranges/links are active; OR<br />- at least one <strong>OR</strong> range/link is active.<br /><br />Remember to save your settings using the Save button."
@@ -2555,12 +2549,6 @@
     },
     "adjustmentsFunctionYawPrecompCutoff": {
         "message": "Yaw Precomp Cutoff"
-    },
-    "adjustmentsFunctionGovIdleThrottle": {
-        "message": "Governor Idle Throttle"
-    },
-    "adjustmentsFunctionGovAutoThrottle": {
-        "message": "Governor Auto Throttle"
     },
     "servoHelp": {
         "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
@@ -3366,9 +3354,6 @@
     "govFeatures": {
         "message": "Governor"
     },
-    "govSectionThrottleCurve": {
-        "message": "Throttle Curve"
-    },
     "govSectionRampTime": {
         "message": "Ramp Time"
     },
@@ -3388,28 +3373,7 @@
         "message": "Governor Mode"
     },
     "govModeHelp": {
-        "message": "<p><strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.</p><p><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.</p><p><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.</p><p><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).</p><p><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.</p>"
-    },
-    "govModeHelp2": {
-        "message": "<p><strong>OFF:</strong> The governor is disabled.</p><p><strong>EXTERNAL:</strong> Rotorflight handles slow spoolup and bailout recovery. Headspeed stabilisation is left to an external governor or throttle curve.</p><p><strong>ELECTRIC:</strong> Governor suitable for electric motors.</p><p><strong>NITRO:</strong> Governor suitable for internal combustion engines.</p>"
-    },
-    "govThrottleType": {
-        "message": "Throttle Type"
-    },
-    "govThrottleTypeHelp": {
-        "message": "<p><strong>NORMAL:</strong> Normal throttle channel </p><p><strong>OFF_ON:</strong> Throttle channel has two positions (two-way switch) </p><p><strong>OFF_IDLE_ON:</strong> Throttle channel has three positions (three-way switch) </p><p><strong>OFF_IDLE_AUTO_ON:</strong> Throttle channel has four positions (three-way switch & TC) </p>"
-    },
-    "govIdleCollective": {
-        "message": "Collective ➜ Idle Throttle"
-    },
-    "govIdleCollectiveHelp": {
-        "message": "<p>Idle throttle is applied while collective is below this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active."
-    },
-    "govWotCollective": {
-        "message": "Collective ➜ Full Throttle"
-    },
-    "govWotCollectiveHelp": {
-        "message": "<p>Full throttle is applied while collective is above this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active."
+        "message": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
     },
     "govHandoverThrottle": {
         "message": "Handover Throttle"
@@ -3428,12 +3392,6 @@
     },
     "govSpoolupTimeHelp": {
         "message": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
-    },
-    "govSpooldownTime": {
-        "message": "Spooldown Time"
-    },
-    "govSpooldownTimeHelp": {
-        "message": "Time constant for spooldown, in seconds, measuring the time from full headspeed to zero."
     },
     "govSpoolupMinThrottle": {
         "message": "Spoolup Minimum Throttle"
@@ -3477,12 +3435,6 @@
     "govZeroThrottleTimeoutHelp": {
         "message": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup."
     },
-    "govThrottleHoldTimeout": {
-        "message": "Throttle Hold Timeout"
-    },
-    "govThrottleHoldTimeoutHelp": {
-        "message": "The timeout for <code>THROTTLE_HOLD</code> state."
-    },
     "govLostHeadspeedTimeout": {
         "message": "Headspeed Signal Timeout"
     },
@@ -3513,14 +3465,8 @@
     "govFFFilterHzHelp": {
         "message": "Cutoff for the cyclic/collective precompensation lowpass filter."
     },
-    "govDCutoff": {
-        "message": "D-Term Cutoff"
-    },
-    "govDCutoffHelp": {
-        "message": "Cutoff frequency for the governor D-term filter."
-    },
     "govHeadspeed": {
-        "message": "Full Headspeed"
+        "message": "Full headspeed"
     },
     "govHeadspeedHelp": {
         "message": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input."
@@ -3540,26 +3486,8 @@
     "govMinThrottleHelp": {
         "message": "Minimum output throttle the governor is allowed to use."
     },
-    "govIdleThrottle": {
-        "message": "Idle Throttle"
-    },
-    "govIdleThrottleHelp": {
-        "message": "The minimum output throttle in the IDLE state."
-    },
-    "govAutoThrottle": {
-        "message": "Auto Throttle"
-    },
-    "govAutoThrottleHelp": {
-        "message": "The minimum output throttle in the AUTOROTATION state."
-    },
-    "govFallbackDrop": {
-        "message": "Throttle Fallback Drop"
-    },
-    "govFallbackDropHelp": {
-        "message": "Reduce the current motor output by this value in the event the RPM signal is lost."
-    },
     "govMasterGain": {
-        "message": "Master Gain"
+        "message": "PID master gain"
     },
     "govMasterGainHelp": {
         "message": "Master PID loop gain. Usually 10..100"
@@ -3583,7 +3511,7 @@
         "message": "PID loop D-term gain. Usually 0..100"
     },
     "govFGain": {
-        "message": "Feedforward Gain"
+        "message": "Feedforward gain"
     },
     "govFGainHelp": {
         "message": "Collective/Cyclic feedforward gain. Usually 0..100"
@@ -3601,91 +3529,22 @@
         "message": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%."
     },
     "govYawPrecomp": {
-        "message": "Yaw"
+        "message": "Yaw precompensation"
     },
     "govYawPrecompHelp": {
         "message": "Yaw precompensation weight. Determines how much Yaw is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
     "govCyclicPrecomp": {
-        "message": "Cyclic"
+        "message": "Cyclic precompensation"
     },
     "govCyclicPrecompHelp": {
         "message": "Cyclic precompensation weight. Determines how much cyclic is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
     "govCollectivePrecomp": {
-        "message": "Collective"
+        "message": "Collective precompensation"
     },
     "govCollectivePrecompHelp": {
         "message": "Collective precompensation weight. Determines how much collective is mixed into the feedfoward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
-    },
-    "profileGovPIDSection": {
-        "message": "PID"
-    },
-    "profileGovPrecompSection": {
-        "message": "Precompensation"
-    },
-    "profileGovFlagsSection": {
-        "message": "Behaviour"
-    },
-    "govFlag_FC_THROTTLE_CURVE": {
-        "message": "FC Throttle Curve"
-    },
-    "govFlag_TX_PRECOMP_CURVE": {
-        "message": "Tx Throttle V-Curve"
-    },
-    "govFlag_FALLBACK_PRECOMP": {
-        "message": "Fallback Precompensation"
-    },
-    "govFlag_VOLTAGE_COMP": {
-        "message": "Voltage Compensation"
-    },
-    "govFlag_PID_SPOOLUP": {
-        "message": "Governed Spoolup"
-    },
-    "govFlag_HS_ADJUSTMENT": {
-        "message": "Headspeed Adjustment"
-    },
-    "govFlag_DYN_MIN_THROTTLE": {
-        "message": "Dynamic Minimum Throttle"
-    },
-    "govFlag_AUTOROTATION": {
-        "message": "Autorotation"
-    },
-    "govFlag_SUSPEND": {
-        "message": "Suspend"
-    },
-    "govFlag_BYPASS": {
-        "message": "Bypass"
-    },
-    "govFlagHelp_FC_THROTTLE_CURVE": {
-        "message": "<p>Use the collective input to determine the throttle level.</p><p><strong>Note:</strong> The collective to throttle curve is defined in the <i>Motors</i> ➜ <i>Governor</i> ➜ <i>Throttle Curve</i> section.</p>"
-    },
-    "govFlagHelp_TX_PRECOMP_CURVE": {
-        "message": "<p>Combine a throttle curve with the governor's PID controller.</p><p>The input throttle is used as the base throttle level. Governor precompensation is disabled, and should be handled by the transmitter."
-    },
-    "govFlagHelp_FALLBACK_PRECOMP": {
-        "message": "Enable precompensation while in the <code>FALLBACK</code> state."
-    },
-    "govFlagHelp_VOLTAGE_COMP": {
-        "message": "<p>Enable battery voltage sag compensation.</p><p><strong>Note:</strong> This setting requires <i>Battery ADC</i> to be used as the <i>Battery Voltage Source</i>. This setting can be found on the <i>Power</i> tab.</p>"
-    },
-    "govFlagHelp_PID_SPOOLUP": {
-        "message": "Enable the governors PID controller during spoolup."
-    },
-    "govFlagHelp_HS_ADJUSTMENT": {
-        "message": "<p>Adjust the target headspeed using the throttle channel.</p><p>When enabled, the target headspeed is calculated by multiplying the <i>Full Headspeed</i> by the input throttle.</p>"
-    },
-    "govFlagHelp_DYN_MIN_THROTTLE": {
-        "message": "Prevent the motor output from dropping drastically during an over-speed."
-    },
-    "govFlagHelp_AUTOROTATION": {
-        "message": "Allow the <code>AUTOROTATION</code> state in this profile."
-    },
-    "govFlagHelp_SUSPEND": {
-        "message": "Disable the PID controller, allowing precompensation to be tuned in isolation."
-    },
-    "govFlagHelp_BYPASS": {
-        "message": "Bypass all governor functionality."
     },
     "sensorsInfo": {
         "message": "Keep in mind that using fast update periods and rendering multiple graphs at the same time is resource heavy and will burn your battery quicker if you use a laptop.<br />We recommend to only render graphs for sensors you are interested in while using reasonable update periods."
@@ -3764,6 +3623,9 @@
     },
     "cliLoadFromFileBtn": {
         "message": "Load from file"
+    },
+    "cliSaveConfigBtn": {
+        "message": "Save Configuration"
     },
     "cliConfirmSnippetDialogTitle": {
         "message": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"
@@ -3908,9 +3770,6 @@
     },
     "blackboxLog_esc2": {
         "message": "ESC 2"
-    },
-    "blackboxLog_governor": {
-        "message": "Governor"
     },
     "serialLoggingSupportedNote": {
         "message": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
@@ -4519,19 +4378,19 @@
         "message": "deep pink"
     },
     "controlAxisRoll": {
-        "message": "Roll"
+        "message": "Roll [A]"
     },
     "controlAxisPitch": {
-        "message": "Pitch"
+        "message": "Pitch [E]"
     },
     "controlAxisYaw": {
-        "message": "Yaw"
+        "message": "Yaw [R]"
     },
     "controlAxisCollective": {
-        "message": "Collective"
+        "message": "Coll [C]"
     },
     "controlAxisThrottle": {
-        "message": "Throttle"
+        "message": "Throttle [T]"
     },
     "controlAxisThr": {
         "message": "Throttle"
