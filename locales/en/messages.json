@@ -3388,10 +3388,10 @@
         "message": "Governor Mode"
     },
     "govModeHelp": {
-        "message": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
+        "message": "<p><strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.</p><p><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.</p><p><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.</p><p><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).</p><p><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.</p>"
     },
     "govModeHelp2": {
-        "message": "<p><strong>OFF:</strong> The governor is disabled.</p><p><strong>EXTERNAL:</strong> Rotorflight handles slow spoolup and bailout recovery. Headspeed stabilisation is left to an external governor or throttle curves.</p><p><strong>ELECTRIC:</strong> Governor suitable for electric motors.</p><p><strong>NITRO:</strong> Governor suitable for internal combustion engines.</p>"
+        "message": "<p><strong>OFF:</strong> The governor is disabled.</p><p><strong>EXTERNAL:</strong> Rotorflight handles slow spoolup and bailout recovery. Headspeed stabilisation is left to an external governor or throttle curve.</p><p><strong>ELECTRIC:</strong> Governor suitable for electric motors.</p><p><strong>NITRO:</strong> Governor suitable for internal combustion engines.</p>"
     },
     "govThrottleType": {
         "message": "Throttle Type"
