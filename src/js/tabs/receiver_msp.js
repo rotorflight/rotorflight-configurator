@@ -43,7 +43,7 @@ var sliderElems;
 var enableTX = false;
 
 // This is a hack to get the i18n var of the parent, but the localizePage not works
-const i18n = window.i18n;
+const i18n = window.opener.i18n;
 
 const watchers = {
     darkTheme: (val) => {

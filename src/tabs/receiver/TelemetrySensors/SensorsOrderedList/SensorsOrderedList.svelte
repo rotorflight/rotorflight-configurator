@@ -29,15 +29,17 @@
 
 <div class="container">
   {#if totalCount > MAX_SENSORS}
-    <ErrorNote>
-      <span>
-        {$i18n.t("receiverTelemetrySensorsExceededWarning", {
-          max: MAX_SENSORS,
-        })}
-      </span>
-      <br />
-      <span class="sensor-count">{totalCount} / {MAX_SENSORS}</span>
-    </ErrorNote>
+    <div class="error-container">
+      <ErrorNote>
+        <span>
+          {$i18n.t("receiverTelemetrySensorsExceededWarning", {
+            max: MAX_SENSORS,
+          })}
+        </span>
+        <br />
+        <span class="sensor-count">{totalCount} / {MAX_SENSORS}</span>
+      </ErrorNote>
+    </div>
   {/if}
 
   {#if view === 0}
@@ -57,5 +59,9 @@
 
   .sensor-count {
     font-weight: 800;
+  }
+
+  .error-container {
+    margin-top: 4px;
   }
 </style>

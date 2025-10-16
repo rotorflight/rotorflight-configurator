@@ -38,7 +38,7 @@
     }
 
     :global(html[data-theme="dark"]) & {
-      background-color: var(--color-neutral-700);
+      background-color: var(--color-neutral-800);
     }
   }
 
@@ -49,8 +49,14 @@
       }
 
       :global(html[data-theme="dark"]) & {
-        background-color: var(--color-neutral-800);
+        background-color: var(--color-neutral-700);
       }
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .summary {
+      height: 3rem;
     }
   }
 </style>
