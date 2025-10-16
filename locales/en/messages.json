@@ -1695,13 +1695,13 @@
         "message": "Inverted"
     },
     "receiverSerialInvertedHelp": {
-        "message": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others.<br><b>Note:</b> This option is NOT supported on F4 MCUs, see help."
+        "message": "<p>Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
     "receiverSerialPinSwap": {
         "message": "Pin Swap"
     },
     "receiverSerialPinSwapHelp": {
-        "message": "Swaps the Rx and Tx pins.<br><b>Note:</b> This option is NOT supported on F4 MCUs, see help."
+        "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
     "receiverStickCenter": {
         "message": "Stick Center"
@@ -1728,7 +1728,7 @@
         "message": "The throttle channel value where throttle is considered 0%."
     },
     "receiverHelpZeroThrottle2": {
-        "message": "<p>The throttle channel value where throttle is considered 0%. Set to 0 to set automatically.</p><p><b>Note:</b> The throttle channel must be able to move atleast 10µs below this value to signal throttle off and allow arming.</p>"
+        "message": "<p>The throttle channel value where throttle is considered 0%. Set to 0 to set automatically.</p><p><strong>Note:</strong> The throttle channel must be able to move atleast 10µs below this value to signal throttle off and allow arming.</p>"
     },
     "receiverFullThrottle": {
         "message": "Max Throttle - 100%"
