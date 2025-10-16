@@ -39,14 +39,24 @@
     padding-right: 8px;
   }
 
+  :global(html[data-theme="light"]) .message :global(code) {
+    color: var(--color-neutral-800);
+    background-color: var(--color-neutral-300);
+  }
+
+  :global(html[data-theme="dark"]) .message :global(code) {
+    color: var(--color-neutral-900);
+    background-color: var(--color-neutral-400);
+  }
+
   .message {
     :global(p) + :global(p) {
       margin-top: 6px;
     }
 
     :global(code) {
-      background: none;
-      padding: 0;
+      border-radius: 2px;
+      padding: 1px 4px;
       margin: 0;
     }
   }
