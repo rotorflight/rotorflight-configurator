@@ -2190,13 +2190,10 @@
         "message": "Channel Assignment"
     },
     "receiverChannelOrder": {
-        "message": "Channel Order Preset"
+        "message": "Apply Preset"
     },
-    "receiverChannelDefaultOption": {
-        "message": "Default"
-    },
-    "receiverHelpChannelOrder": {
-        "message": "Select one of the presets from the dropdown menu, or enter your own channel order."
+    "receiverChannelOrderPresetPlaceholder": {
+        "message": "Select a preset..."
     },
     "receiverButtonBind": {
         "message": "Bind Receiver"

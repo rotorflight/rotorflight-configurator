@@ -110,9 +110,11 @@
 
 <Section label="receiverBars">
   <SubSection>
-    <Field label="Apply Preset">
+    <Field label="receiverChannelOrder">
       <select onchange={applyPreset}>
-        <option value="" disabled selected>Select a preset...</option>
+        <option value="" disabled selected>
+          {$i18n.t("receiverChannelOrderPresetPlaceholder")}
+        </option>
         {#each presets as preset, i (preset.label)}
           <option value={i}>{preset.label}</option>
         {/each}
