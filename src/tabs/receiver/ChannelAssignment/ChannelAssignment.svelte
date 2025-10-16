@@ -2,10 +2,11 @@
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
+  import ChannelBar from "./ChannelBar.svelte";
+  import Field from "@/components/Field.svelte";
+  import Meter from "@/components/Meter.svelte";
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
-  import ChannelBar from "./ChannelBar.svelte";
-  import Meter from "@/components/Meter.svelte";
 
   const channelNames = [
     "controlAxisRoll",
@@ -74,6 +75,18 @@
     { value: 32, text: "controlAxisAux27" },
   ];
 
+  const presets = [
+    { label: "ELRS", map: [0, 1, 3, 2, 5, 4, 6, 7] },
+    { label: "FrSky", map: [0, 1, 3, 4, 2, 5, 6, 7] },
+    { label: "Futaba / Hitec", map: [0, 1, 3, 5, 2, 4, 6, 7] },
+    { label: "Spektrum / Graupner / JR", map: [1, 2, 3, 5, 0, 4, 6, 7] },
+  ];
+
+  function applyPreset(e) {
+    const preset = presets[Number(e.target.value)];
+    FC.RC_MAP = [...preset.map];
+  }
+
   function swapAssignment(a, b) {
     const current = FC.RC_MAP[a];
     FC.RC_MAP[FC.RC_MAP.indexOf(b)] = current;
@@ -96,6 +109,19 @@
 </script>
 
 <Section label="receiverBars">
+  <SubSection>
+    <Field label="Apply Preset">
+      <select onchange={applyPreset}>
+        <option value="" disabled selected>Select a preset...</option>
+        {#each presets as preset, i (preset.label)}
+          <option value={i}>{preset.label}</option>
+        {/each}
+      </select>
+    </Field>
+  </SubSection>
+
+  <div class="divider"></div>
+
   <SubSection>
     <div class="channel-group">
       {#each { length: FC.RC_MAP.length } as _, i (i)}
@@ -164,6 +190,18 @@
     align-items: center;
     grid-column: 1/-1;
     grid-template-columns: subgrid;
+  }
+
+  .divider {
+    margin: 0px 2px 16px 2px;
+
+    :global(html[data-theme="light"]) & {
+      border-bottom: 1px solid var(--color-neutral-400);
+    }
+
+    :global(html[data-theme="dark"]) & {
+      border-bottom: 1px solid var(--color-neutral-700);
+    }
   }
 
   @media only screen and (max-width: 480px) {
