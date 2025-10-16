@@ -54,6 +54,8 @@
     transition: var(--animation-speed);
 
     &.disabled {
+      cursor: not-allowed;
+
       background-color: var(--color-switch-disabled);
 
       &::before {

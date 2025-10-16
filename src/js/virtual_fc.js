@@ -130,6 +130,7 @@ export function applyVirtualConfig() {
 
   FC.FEATURE_CONFIG.features.ESC_SENSOR = true;
   FC.FEATURE_CONFIG.features.FREQ_SENSOR = true;
+  FC.FEATURE_CONFIG.features.GOVERNOR = true;
   Object.assign(FC.ESC_SENSOR_CONFIG, {
     protocol: 1,
   });
@@ -151,6 +152,11 @@ export function applyVirtualConfig() {
     gov_pwr_filter: 5,
     gov_tta_filter: 0,
     gov_ff_filter: 10,
+    gov_throttle_hold_timeout: 50,
+    gov_d_filter: 50,
+    gov_spooldown_time: 30,
+    gov_idle_collective: -95,
+    gov_wot_collective: -10,
   });
 
   Object.assign(FC.MOTOR_TELEMETRY_DATA, {

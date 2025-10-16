@@ -252,6 +252,9 @@
     border-width: 1px;
     border-style: solid;
     width: 100%;
+    transition:
+      background-color var(--animation-speed),
+      color var(--animation-speed);
 
     text-align: right;
     line-height: 1.5rem;
@@ -289,6 +292,10 @@
     height: 1.5rem;
     width: 1.5rem;
     font-size: 0.5rem;
+
+    transition:
+      background-color var(--animation-speed),
+      color var(--animation-speed);
 
     -webkit-tap-highlight-color: transparent;
 

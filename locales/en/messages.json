@@ -2556,6 +2556,12 @@
     "adjustmentsFunctionYawPrecompCutoff": {
         "message": "Yaw Precomp Cutoff"
     },
+    "adjustmentsFunctionGovIdleThrottle": {
+        "message": "Governor Idle Throttle"
+    },
+    "adjustmentsFunctionGovAutoThrottle": {
+        "message": "Governor Auto Throttle"
+    },
     "servoHelp": {
         "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
     },
@@ -3360,6 +3366,9 @@
     "govFeatures": {
         "message": "Governor"
     },
+    "govSectionThrottleCurve": {
+        "message": "Throttle Curve"
+    },
     "govSectionRampTime": {
         "message": "Ramp Time"
     },
@@ -3379,7 +3388,28 @@
         "message": "Governor Mode"
     },
     "govModeHelp": {
-        "message": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
+        "message": "<p><strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.</p><p><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.</p><p><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.</p><p><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).</p><p><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.</p>"
+    },
+    "govModeHelp2": {
+        "message": "<p><strong>OFF:</strong> The governor is disabled.</p><p><strong>EXTERNAL:</strong> Rotorflight handles slow spoolup and bailout recovery. Headspeed stabilisation is left to an external governor or throttle curve.</p><p><strong>ELECTRIC:</strong> Governor suitable for electric motors.</p><p><strong>NITRO:</strong> Governor suitable for internal combustion engines.</p>"
+    },
+    "govThrottleType": {
+        "message": "Throttle Type"
+    },
+    "govThrottleTypeHelp": {
+        "message": "<p><strong>NORMAL:</strong> Normal throttle channel </p><p><strong>OFF_ON:</strong> Throttle channel has two positions (two-way switch) </p><p><strong>OFF_IDLE_ON:</strong> Throttle channel has three positions (three-way switch) </p><p><strong>OFF_IDLE_AUTO_ON:</strong> Throttle channel has four positions (three-way switch & TC) </p>"
+    },
+    "govIdleCollective": {
+        "message": "Collective ➜ Idle Throttle"
+    },
+    "govIdleCollectiveHelp": {
+        "message": "<p>Idle throttle is applied while collective is below this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active."
+    },
+    "govWotCollective": {
+        "message": "Collective ➜ Full Throttle"
+    },
+    "govWotCollectiveHelp": {
+        "message": "<p>Full throttle is applied while collective is above this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active."
     },
     "govHandoverThrottle": {
         "message": "Handover Throttle"
@@ -3398,6 +3428,12 @@
     },
     "govSpoolupTimeHelp": {
         "message": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
+    },
+    "govSpooldownTime": {
+        "message": "Spooldown Time"
+    },
+    "govSpooldownTimeHelp": {
+        "message": "Time constant for spooldown, in seconds, measuring the time from full headspeed to zero."
     },
     "govSpoolupMinThrottle": {
         "message": "Spoolup Minimum Throttle"
@@ -3441,6 +3477,12 @@
     "govZeroThrottleTimeoutHelp": {
         "message": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup."
     },
+    "govThrottleHoldTimeout": {
+        "message": "Throttle Hold Timeout"
+    },
+    "govThrottleHoldTimeoutHelp": {
+        "message": "The timeout for <code>THROTTLE_HOLD</code> state."
+    },
     "govLostHeadspeedTimeout": {
         "message": "Headspeed Signal Timeout"
     },
@@ -3471,8 +3513,14 @@
     "govFFFilterHzHelp": {
         "message": "Cutoff for the cyclic/collective precompensation lowpass filter."
     },
+    "govDCutoff": {
+        "message": "D-Term Cutoff"
+    },
+    "govDCutoffHelp": {
+        "message": "Cutoff frequency for the governor D-term filter."
+    },
     "govHeadspeed": {
-        "message": "Full headspeed"
+        "message": "Full Headspeed"
     },
     "govHeadspeedHelp": {
         "message": "The governor target headspeed is calculated by multiplying the full headspeed with the throttle input."
@@ -3492,8 +3540,26 @@
     "govMinThrottleHelp": {
         "message": "Minimum output throttle the governor is allowed to use."
     },
+    "govIdleThrottle": {
+        "message": "Idle Throttle"
+    },
+    "govIdleThrottleHelp": {
+        "message": "The minimum output throttle in the IDLE state."
+    },
+    "govAutoThrottle": {
+        "message": "Auto Throttle"
+    },
+    "govAutoThrottleHelp": {
+        "message": "The minimum output throttle in the AUTOROTATION state."
+    },
+    "govFallbackDrop": {
+        "message": "Throttle Fallback Drop"
+    },
+    "govFallbackDropHelp": {
+        "message": "Reduce the current motor output by this value in the event the RPM signal is lost."
+    },
     "govMasterGain": {
-        "message": "PID master gain"
+        "message": "Master Gain"
     },
     "govMasterGainHelp": {
         "message": "Master PID loop gain. Usually 10..100"
@@ -3517,7 +3583,7 @@
         "message": "PID loop D-term gain. Usually 0..100"
     },
     "govFGain": {
-        "message": "Feedforward gain"
+        "message": "Feedforward Gain"
     },
     "govFGainHelp": {
         "message": "Collective/Cyclic feedforward gain. Usually 0..100"
@@ -3535,22 +3601,91 @@
         "message": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%."
     },
     "govYawPrecomp": {
-        "message": "Yaw precompensation"
+        "message": "Yaw"
     },
     "govYawPrecompHelp": {
         "message": "Yaw precompensation weight. Determines how much Yaw is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
     "govCyclicPrecomp": {
-        "message": "Cyclic precompensation"
+        "message": "Cyclic"
     },
     "govCyclicPrecompHelp": {
         "message": "Cyclic precompensation weight. Determines how much cyclic is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
     "govCollectivePrecomp": {
-        "message": "Collective precompensation"
+        "message": "Collective"
     },
     "govCollectivePrecompHelp": {
         "message": "Collective precompensation weight. Determines how much collective is mixed into the feedfoward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
+    },
+    "profileGovPIDSection": {
+        "message": "PID"
+    },
+    "profileGovPrecompSection": {
+        "message": "Precompensation"
+    },
+    "profileGovFlagsSection": {
+        "message": "Behaviour"
+    },
+    "govFlag_FC_THROTTLE_CURVE": {
+        "message": "FC Throttle Curve"
+    },
+    "govFlag_TX_PRECOMP_CURVE": {
+        "message": "Tx Throttle V-Curve"
+    },
+    "govFlag_FALLBACK_PRECOMP": {
+        "message": "Fallback Precompensation"
+    },
+    "govFlag_VOLTAGE_COMP": {
+        "message": "Voltage Compensation"
+    },
+    "govFlag_PID_SPOOLUP": {
+        "message": "Governed Spoolup"
+    },
+    "govFlag_HS_ADJUSTMENT": {
+        "message": "Headspeed Adjustment"
+    },
+    "govFlag_DYN_MIN_THROTTLE": {
+        "message": "Dynamic Minimum Throttle"
+    },
+    "govFlag_AUTOROTATION": {
+        "message": "Autorotation"
+    },
+    "govFlag_SUSPEND": {
+        "message": "Suspend"
+    },
+    "govFlag_BYPASS": {
+        "message": "Bypass"
+    },
+    "govFlagHelp_FC_THROTTLE_CURVE": {
+        "message": "<p>Use the collective input to determine the throttle level.</p><p><strong>Note:</strong> The collective to throttle curve is defined in the <i>Motors</i> ➜ <i>Governor</i> ➜ <i>Throttle Curve</i> section.</p>"
+    },
+    "govFlagHelp_TX_PRECOMP_CURVE": {
+        "message": "<p>Combine a throttle curve with the governor's PID controller.</p><p>The input throttle is used as the base throttle level. Governor precompensation is disabled, and should be handled by the transmitter."
+    },
+    "govFlagHelp_FALLBACK_PRECOMP": {
+        "message": "Enable precompensation while in the <code>FALLBACK</code> state."
+    },
+    "govFlagHelp_VOLTAGE_COMP": {
+        "message": "<p>Enable battery voltage sag compensation.</p><p><strong>Note:</strong> This setting requires <i>Battery ADC</i> to be used as the <i>Battery Voltage Source</i>. This setting can be found on the <i>Power</i> tab.</p>"
+    },
+    "govFlagHelp_PID_SPOOLUP": {
+        "message": "Enable the governors PID controller during spoolup."
+    },
+    "govFlagHelp_HS_ADJUSTMENT": {
+        "message": "<p>Adjust the target headspeed using the throttle channel.</p><p>When enabled, the target headspeed is calculated by multiplying the <i>Full Headspeed</i> by the input throttle.</p>"
+    },
+    "govFlagHelp_DYN_MIN_THROTTLE": {
+        "message": "Prevent the motor output from dropping drastically during an over-speed."
+    },
+    "govFlagHelp_AUTOROTATION": {
+        "message": "Allow the <code>AUTOROTATION</code> state in this profile."
+    },
+    "govFlagHelp_SUSPEND": {
+        "message": "Disable the PID controller, allowing precompensation to be tuned in isolation."
+    },
+    "govFlagHelp_BYPASS": {
+        "message": "Bypass all governor functionality."
     },
     "sensorsInfo": {
         "message": "Keep in mind that using fast update periods and rendering multiple graphs at the same time is resource heavy and will burn your battery quicker if you use a laptop.<br />We recommend to only render graphs for sensors you are interested in while using reasonable update periods."
@@ -3773,6 +3908,9 @@
     },
     "blackboxLog_esc2": {
         "message": "ESC 2"
+    },
+    "blackboxLog_governor": {
+        "message": "Governor"
     },
     "serialLoggingSupportedNote": {
         "message": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
