@@ -2047,6 +2047,14 @@ html[data-theme="dark"] .content_toolbar button:active,
     border-color: var(--pushedButton-border);
 }
 
+/* Visual feedback for keyboard shortcut save action */
+.keyboard-shortcut-pressed {
+    background-color: var(--pushedbutton-background) !important;
+    border-color: var(--pushedButton-border) !important;
+    transform: scale(0.95);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 /* Different buttons */
 .default_btn {
     width: 100%;
