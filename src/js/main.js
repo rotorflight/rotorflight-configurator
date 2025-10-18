@@ -294,6 +294,76 @@ export function startProcess() {
         element.val(value);
     });
 
+    // Global keyboard shortcut for save functionality (Cmd+S on Mac, Ctrl+S on Windows)
+    // Use capture phase to ensure this runs before other event handlers
+    document.addEventListener('keydown', function (e) {
+        // Check for Cmd+S (Mac) or Ctrl+S (Windows/Linux)
+        // Use both keyCode (legacy) and key (modern) for better compatibility
+        const isSaveShortcut = (e.metaKey || e.ctrlKey) && (e.keyCode === 83 || e.key === 's' || e.key === 'S');
+        
+        if (isSaveShortcut) {
+            const activeElement = document.activeElement;
+            
+            // Only prevent the shortcut if the user is actively typing in a text input or textarea
+            // Allow the shortcut to work when focused on number inputs, checkboxes, or other non-text inputs
+            const isTextInput = activeElement && (
+                (activeElement.tagName === 'INPUT' && activeElement.type === 'text') ||
+                (activeElement.tagName === 'TEXTAREA') ||
+                (activeElement.contentEditable === 'true') ||
+                (activeElement.isContentEditable)
+            );
+            
+            if (isTextInput) {
+                return; // Let text inputs handle the key normally
+            }
+            
+            // Prevent browser's default save dialog and stop event propagation
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // First, check if the unsaved changes dialog is open - prioritize this
+            const tabExitDialog = $('.dialogTabExit')[0];
+            const tabExitSaveBtn = $('.tabExitSaveBtn');
+            
+            if (tabExitDialog && tabExitDialog.open && tabExitSaveBtn.is(':visible')) {
+                // Add visual feedback by temporarily adding pressed state
+                tabExitSaveBtn.addClass('keyboard-shortcut-pressed');
+                setTimeout(() => tabExitSaveBtn.removeClass('keyboard-shortcut-pressed'), 200);
+                tabExitSaveBtn.click();
+            }
+            else {
+                // Check for traditional HTML tab save buttons (anchor elements)
+                const saveButton = $('.content_toolbar .save_btn a.save');
+                const rebootButton = $('.content_toolbar .reboot_btn a.reboot');
+                
+                // Check for Svelte component save buttons (button elements with onclick handlers)
+                const svelteSaveButton = $('button[onclick*="onSave"]:visible:not([disabled])');
+                
+                // Check if traditional save button is visible and not disabled
+                if (saveButton.is(':visible') && !saveButton.hasClass('disabled')) {
+                    // Add visual feedback by temporarily adding pressed state
+                    saveButton.addClass('keyboard-shortcut-pressed');
+                    setTimeout(() => saveButton.removeClass('keyboard-shortcut-pressed'), 200);
+                    saveButton.click();
+                }
+                // Check if traditional reboot button is visible and not disabled (for save and reboot)
+                else if (rebootButton.is(':visible') && !rebootButton.hasClass('disabled')) {
+                    // Add visual feedback by temporarily adding pressed state
+                    rebootButton.addClass('keyboard-shortcut-pressed');
+                    setTimeout(() => rebootButton.removeClass('keyboard-shortcut-pressed'), 200);
+                    rebootButton.click();
+                }
+                // Check if Svelte save button is visible and not disabled
+                else if (svelteSaveButton.length > 0) {
+                    // Add visual feedback by temporarily adding pressed state
+                    svelteSaveButton.addClass('keyboard-shortcut-pressed');
+                    setTimeout(() => svelteSaveButton.removeClass('keyboard-shortcut-pressed'), 200);
+                    svelteSaveButton[0].click();
+                }
+            }
+        }
+    }, true); // Use capture phase (true) to ensure this runs first
+
     $("#showlog").on('click', function () {
         let state = $(this).data('state');
         if (state) {
