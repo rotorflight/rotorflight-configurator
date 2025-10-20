@@ -80,6 +80,7 @@
 
   .units {
     margin-left: 8px;
+    min-width: fit-content;
 
     :global(html[data-theme="light"]) & {
       color: hsl(20, 80%, 30%);
