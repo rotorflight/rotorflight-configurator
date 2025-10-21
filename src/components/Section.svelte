@@ -56,9 +56,7 @@
   }
 
   .container {
-    :global(html[data-theme="light"]) & {
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+    @extend %section-shadow;
   }
 
   .header {
@@ -74,14 +72,7 @@
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     overflow: hidden;
-
-    :global(html[data-theme="light"]) & {
-      background-color: var(--color-neutral-100);
-    }
-
-    :global(html[data-theme="dark"]) & {
-      background-color: var(--color-neutral-900);
-    }
+    background-color: var(--color-surface);
   }
 
   .content-wrapper {
@@ -96,14 +87,7 @@
 
   .summary {
     padding: 8px;
-
-    :global(html[data-theme="light"]) & {
-      background-color: var(--color-neutral-100);
-    }
-
-    :global(html[data-theme="dark"]) & {
-      background-color: var(--color-neutral-900);
-    }
+    background-color: var(--color-surface);
   }
 
   .grow {

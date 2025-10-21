@@ -220,28 +220,6 @@
 </div>
 
 <style lang="scss">
-  @mixin light {
-    color: var(--color-neutral-900);
-    background-color: var(--color-neutral-50);
-    border-color: var(--color-neutral-300);
-  }
-
-  @mixin light-disabled {
-    color: var(--color-neutral-500);
-    background-color: var(--color-neutral-200);
-  }
-
-  @mixin dark {
-    color: var(--color-neutral-100);
-    background-color: var(--color-neutral-800);
-    border-color: var(--color-neutral-700);
-  }
-
-  @mixin dark-disabled {
-    color: var(--color-neutral-500);
-    background-color: var(--color-neutral-700);
-  }
-
   .container {
     display: flex;
     max-width: 120px;
@@ -249,8 +227,6 @@
 
   input {
     padding: 0 8px;
-    border-width: 1px;
-    border-style: solid;
     width: 100%;
     transition:
       background-color var(--animation-speed),
@@ -263,34 +239,22 @@
     outline: none;
     border-radius: 0;
 
-    :global(html[data-theme="light"]) & {
-      @include light;
-    }
-
-    :global(html[data-theme="dark"]) & {
-      @include dark;
-    }
-
     &:disabled {
       pointer-events: none;
-
-      :global(html[data-theme="light"]) & {
-        @include light-disabled;
-      }
-
-      :global(html[data-theme="dark"]) & {
-        @include dark-disabled;
-      }
     }
   }
 
   .inc,
   .dec {
+    @extend %button;
+
+    padding: 0;
     border-radius: 0;
     border-width: 1px;
     border-style: solid;
     height: 1.5rem;
     width: 1.5rem;
+    min-width: 1.5rem;
     font-size: 0.5rem;
 
     transition:
@@ -299,34 +263,25 @@
 
     -webkit-tap-highlight-color: transparent;
 
-    :global(html[data-theme="light"]) & {
-      @include light;
-    }
-
-    :global(html[data-theme="dark"]) & {
-      @include dark;
-    }
-
-    &:active {
-      :global(html[data-theme="light"]) & {
-        background-color: var(--color-neutral-300);
-      }
-
-      :global(html[data-theme="dark"]) & {
-        background-color: var(--color-neutral-600);
-      }
-    }
+    color: var(--color-text);
+    background-color: var(--color-input-bg);
+    border-color: var(--color-border-soft);
 
     &:disabled {
       pointer-events: none;
 
-      :global(html[data-theme="light"]) & {
-        @include light-disabled;
-      }
+      color: var(--color-text-disabled);
+      background-color: var(--color-input-bg-disabled);
+    }
 
-      :global(html[data-theme="dark"]) & {
-        @include dark-disabled;
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--color-input-bg-hover);
       }
+    }
+
+    &:active {
+      background-color: var(--color-input-bg-active);
     }
   }
 
@@ -343,13 +298,7 @@
   }
 
   .container input:focus {
-    :global(html[data-theme="light"]) & {
-      border-color: var(--color-accent-500);
-    }
-
-    :global(html[data-theme="dark"]) & {
-      border-color: var(--color-accent-400);
-    }
+    border-color: var(--color-border-accent);
   }
 
   @media only screen and (max-width: 480px) {
@@ -365,31 +314,6 @@
       height: 2rem;
       width: 2rem;
       min-width: 2rem;
-    }
-  }
-
-  @media (hover: hover) {
-    .inc,
-    .dec {
-      &:hover {
-        :global(html[data-theme="light"]) & {
-          background-color: var(--color-neutral-200);
-        }
-
-        :global(html[data-theme="dark"]) & {
-          background-color: var(--color-neutral-700);
-        }
-      }
-
-      &:active {
-        :global(html[data-theme="light"]) & {
-          background-color: var(--color-neutral-300);
-        }
-
-        :global(html[data-theme="dark"]) & {
-          background-color: var(--color-neutral-600);
-        }
-      }
     }
   }
 </style>

@@ -109,7 +109,7 @@
   .content {
     > :global(*) + :global(*) {
       :global(html[data-theme="light"]) & {
-        border-top: 1px solid var(--color-neutral-400);
+        border-top: 1px solid var(--color-border-soft);
       }
 
       :global(html[data-theme="dark"]) & {
@@ -124,12 +124,6 @@
 
   .title,
   .count {
-    :global(html[data-theme="light"]) & {
-      color: var(--color-neutral-800);
-    }
-
-    :global(html[data-theme="dark"]) & {
-      color: var(--color-neutral-100);
-    }
+    color: var(--color-text-soft);
   }
 </style>

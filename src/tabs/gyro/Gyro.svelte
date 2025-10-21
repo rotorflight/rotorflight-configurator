@@ -155,12 +155,12 @@
 {#snippet header()}
   <h1>{$i18n.t("tabGyro")}</h1>
   <div class="grow"></div>
-  <button class="help-btn" onclick={onClickHelp}>Help</button>
+  <button class="btn help-btn" onclick={onClickHelp}>Help</button>
 {/snippet}
 
 {#snippet toolbar()}
-  <button onclick={onRevert}>{$i18n.t("buttonRevert")}</button>
-  <button disabled={disableSave} onclick={onSave}>
+  <button class="btn" onclick={onRevert}>{$i18n.t("buttonRevert")}</button>
+  <button class="btn" disabled={disableSave} onclick={onSave}>
     {$i18n.t("buttonSaveReboot")}
   </button>
 {/snippet}
@@ -194,7 +194,7 @@
     column-gap: var(--section-gap);
   }
 
-  button {
+  .btn {
     @extend %button;
   }
 

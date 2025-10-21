@@ -86,12 +86,12 @@
 {#snippet header()}
   <h1>{$i18n.t("tabFailsafe")}</h1>
   <div class="grow"></div>
-  <button class="help-btn" onclick={onClickHelp}>Help</button>
+  <button class="btn help-btn" onclick={onClickHelp}>Help</button>
 {/snippet}
 
 {#snippet toolbar()}
-  <button onclick={onRevert}>{$i18n.t("buttonRevert")}</button>
-  <button onclick={onSave}>
+  <button class="btn" onclick={onRevert}>{$i18n.t("buttonRevert")}</button>
+  <button class="btn" onclick={onSave}>
     {$i18n.t("buttonSaveReboot")}
   </button>
 {/snippet}
@@ -212,7 +212,7 @@
     flex-grow: 1;
   }
 
-  button {
+  .btn {
     @extend %button;
   }
 </style>

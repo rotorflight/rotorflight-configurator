@@ -33,15 +33,8 @@
     grid-template-rows: 1fr auto;
     height: 100%;
 
-    :global(html[data-theme="light"]) & {
-      color: var(--color-neutral-900);
-      background: var(--color-neutral-200);
-    }
-
-    :global(html[data-theme="dark"]) & {
-      color: var(--color-neutral-50);
-      background: var(--color-neutral-950);
-    }
+    color: var(--color-text);
+    background-color: var(--color-bg);
   }
 
   .wrapper {
@@ -61,15 +54,13 @@
     display: flex;
     gap: 8px;
     align-items: center;
-    border-bottom: 1px solid var(--color-accent-500);
+    border-bottom: 1px solid var(--color-border-accent);
+
+    color: var(--color-text-soft);
+    background-color: var(--color-surface);
 
     :global(html[data-theme="light"]) & {
-      background: var(--color-neutral-100);
-      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-    }
-
-    :global(html[data-theme="dark"]) & {
-      background: var(--color-neutral-900);
+      box-shadow: 0 2px 8px -4px var(--color-shadow);
     }
   }
 
@@ -102,9 +93,9 @@
     z-index: 1000;
 
     :global(html[data-theme="light"]) & {
-      background: var(--color-neutral-100);
-      border-top: 1px solid var(--color-neutral-400);
-      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      box-shadow: 0 -2px 8px -2px var(--color-shadow);
     }
 
     :global(html[data-theme="dark"]) & {

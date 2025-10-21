@@ -2,6 +2,8 @@
   --animation-speed: 0.2s ease;
   --section-gap: 16px;
   --section-padding: 8px;
+
+  --color-shadow: rgba(0, 0, 0, 0.2);
 }
 
 ::-webkit-scrollbar {
@@ -47,6 +49,32 @@ html[data-theme="light"] {
   --color-neutral-900: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 3%);
   --color-neutral-950: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 2%);
 
+  --color-bg: var(--color-neutral-200);
+  --color-surface: var(--color-neutral-100);
+  --color-surface-alt: var(--color-neutral-600);
+  --color-surface-float: var(--color-neutral-50);
+  --color-hover: var(--color-neutral-200);
+  --color-border: var(--color-neutral-400);
+  --color-border-soft: var(--color-neutral-300);
+  --color-border-accent: var(--color-accent-500);
+
+  --color-text: var(--color-neutral-900);
+  --color-text-alt: var(--color-neutral-100);
+  --color-text-soft: var(--color-neutral-700);
+  --color-text-disabled: var(--color-neutral-500);
+
+  --color-input-bg: var(--color-neutral-50);
+  --color-input-bg-disabled: var(--color-neutral-200);
+  --color-input-bg-hover: var(--color-neutral-200);
+  --color-input-bg-active: var(--color-neutral-300);
+
+  --color-btn-fg: var(--color-neutral-800);
+  --color-btn-fg-disabled: var(--color-neutral-500);
+  --color-btn-bg: var(--color-neutral-300);
+  --color-btn-bg-hover: var(--color-neutral-400);
+  --color-btn-bg-active: var(--color-neutral-500);
+  --color-btn-bg-disabled: var(--color-neutral-200);
+
   --color-switch: var(--color-accent-500);
   --color-switch-secondary: var(--color-neutral-300);
   --color-switch-disabled: var(--color-neutral-300);
@@ -61,6 +89,9 @@ html[data-theme="light"] {
   --color-slider-handle-border: var(--color-neutral-500);
   --color-slider-connect: var(--color-accent-500);
   --color-slider-text: var(--color-neutral-900);
+
+  --color-meter-bg: var(--color-neutral-200);
+  --color-meter-border: var(--color-neutral-400);
 
   --color-roll: hsl(2, 62%, 60%);
   --color-pitch: hsl(122, 62%, 60%);
@@ -111,6 +142,32 @@ html[data-theme="dark"] {
   --color-neutral-100: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 90%);
   --color-neutral-50: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 95%);
 
+  --color-bg: var(--color-neutral-950);
+  --color-surface: var(--color-neutral-900);
+  --color-surface-alt: var(--color-neutral-800);
+  --color-surface-float: var(--color-neutral-800);
+  --color-hover: var(--color-neutral-800);
+  --color-border: var(--color-neutral-700);
+  --color-border-soft: var(--color-neutral-700);
+  --color-border-accent: var(--color-accent-400);
+
+  --color-text: var(--color-neutral-50);
+  --color-text-alt: var(--color-neutral-100);
+  --color-text-soft: var(--color-neutral-100);
+  --color-text-disabled: var(--color-neutral-300);
+
+  --color-input-bg: var(--color-neutral-800);
+  --color-input-bg-disabled: var(--color-neutral-700);
+  --color-input-bg-hover: var(--color-neutral-700);
+  --color-input-bg-active: var(--color-neutral-600);
+
+  --color-btn-fg: var(--color-neutral-900);
+  --color-btn-fg-disabled: var(--color-neutral-700);
+  --color-btn-bg: var(--color-neutral-200);
+  --color-btn-bg-hover: var(--color-neutral-400);
+  --color-btn-bg-active: var(--color-neutral-500);
+  --color-btn-bg-disabled: var(--color-neutral-400);
+
   --color-switch: var(--color-accent-400);
   --color-switch-secondary: var(--color-neutral-500);
   --color-switch-disabled: var(--color-neutral-700);
@@ -124,6 +181,10 @@ html[data-theme="dark"] {
   --color-slider-handle-background: var(--color-neutral-600);
   --color-slider-handle-border: var(--color-neutral-800);
   --color-slider-connect: hsl(var(--val-accent-hue), 40%, 40%);
+  --color-slider-text: var(--color-neutral-100);
+
+  --color-meter-bg: var(--color-neutral-700);
+  --color-meter-border: var(--color-neutral-500);
 
   --color-roll: hsl(2, 48%, 45%);
   --color-pitch: hsl(122, 48%, 40%);

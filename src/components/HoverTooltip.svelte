@@ -111,23 +111,12 @@
     font-size: 12px;
     font-weight: 400;
     line-height: 18px;
-    border-width: 1px;
-    border-style: solid;
     border-radius: 2px;
 
-    :global(html[data-theme="light"]) & {
-      background: var(--color-neutral-50);
-      border-color: var(--color-accent-500);
-      color: var(--color-neutral-900);
-      box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 10px;
-    }
-
-    :global(html[data-theme="dark"]) & {
-      background: var(--color-neutral-800);
-      border-color: var(--color-accent-400);
-      color: var(--color-neutral-50);
-      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
-    }
+    color: var(--color-text);
+    background-color: var(--color-surface-float);
+    border: 1px solid var(--color-border-accent);
+    box-shadow: 0px 4px 12px -4px var(--color-shadow);
   }
 
   .tooltip-arrow {
@@ -136,7 +125,7 @@
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
     position: absolute;
-    border-right: 8px solid var(--color-accent-500);
+    border-right: 8px solid var(--color-border-accent);
 
     &::after {
       content: "";
@@ -147,14 +136,7 @@
       position: absolute;
       top: -7px;
       left: 1px;
-
-      :global(html[data-theme="light"]) & {
-        border-right: 7px solid var(--color-neutral-50);
-      }
-
-      :global(html[data-theme="dark"]) & {
-        border-right: 7px solid var(--color-neutral-800);
-      }
+      border-right: 7px solid var(--color-surface-float);
     }
   }
 </style>

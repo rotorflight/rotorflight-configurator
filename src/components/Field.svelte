@@ -103,13 +103,7 @@
 
   @media (hover: hover) {
     .container:hover {
-      :global(html[data-theme="light"]) & {
-        background-color: var(--color-neutral-200);
-      }
-
-      :global(html[data-theme="dark"]) & {
-        background-color: var(--color-neutral-800);
-      }
+      background-color: var(--color-hover);
     }
   }
 </style>

@@ -20,26 +20,13 @@
 
     font-weight: 900;
 
-    :global(html[data-theme="light"]) & {
-      color: var(--color-neutral-700);
-      border-bottom: 1px solid var(--color-neutral-400);
-    }
-
-    :global(html[data-theme="dark"]) & {
-      color: var(--color-neutral-200);
-      border-bottom: 1px solid var(--color-neutral-700);
-    }
+    color: var(--color-text-soft);
+    border-bottom: 1px solid var(--color-border);
   }
 
   @media only screen and (max-width: 480px) {
     .content > :global(*) + :global(*) {
-      :global(html[data-theme="light"]) & {
-        border-top: 1px solid var(--color-neutral-400);
-      }
-
-      :global(html[data-theme="dark"]) & {
-        border-top: 1px solid var(--color-neutral-700);
-      }
+      border-top: 1px solid var(--color-border);
     }
   }
 </style>

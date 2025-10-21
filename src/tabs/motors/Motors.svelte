@@ -126,14 +126,14 @@
 {#snippet header()}
   <h1>{$i18n.t("tabMotors")}</h1>
   <div class="grow"></div>
-  <button class="help-btn" onclick={onClickHelp}>Help</button>
+  <button class="btn help-btn" onclick={onClickHelp}>Help</button>
 {/snippet}
 
 {#snippet toolbar()}
-  <button onclick={onRevert} disabled={motorState.overrideEnabled}>
+  <button class="btn" onclick={onRevert} disabled={motorState.overrideEnabled}>
     {$i18n.t("buttonRevert")}
   </button>
-  <button onclick={onSave} disabled={motorState.overrideEnabled}>
+  <button class="btn" onclick={onSave} disabled={motorState.overrideEnabled}>
     {$i18n.t("buttonSaveReboot")}
   </button>
 {/snippet}
@@ -198,7 +198,7 @@
     flex-grow: 1;
   }
 
-  button {
+  .btn {
     @extend %button;
   }
 </style>

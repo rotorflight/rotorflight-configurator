@@ -42,12 +42,14 @@
 </script>
 
 <div class="wrapper">
-  <div class="header">{$i18n.t("receiverModelPreview")}</div>
   <div class="container">
-    <Model bind:this={model} />
-    <button class="reset-btn" onclick={handleReset}
-      >{$i18n.t("resetModelPreviewOrientation")}</button
-    >
+    <div class="header">{$i18n.t("receiverModelPreview")}</div>
+    <div class="content">
+      <Model bind:this={model} />
+      <button class="reset-btn" onclick={handleReset}
+        >{$i18n.t("resetModelPreviewOrientation")}</button
+      >
+    </div>
   </div>
 </div>
 
@@ -62,21 +64,15 @@
   }
 
   .container {
+    @extend %section-shadow;
+  }
+
+  .content {
     position: relative;
     height: 400px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     overflow: hidden;
-
-    :global(html[data-theme="light"]) & {
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    :global(html[data-theme="dark"]) & {
-      border-width: 0 1px 1px;
-      border-style: solid;
-      border-color: var(--color-neutral-800);
-    }
   }
 
   .reset-btn {

@@ -173,12 +173,10 @@
   }
 
   .container {
+    @extend %section-shadow;
+
     display: flex;
     flex-direction: column;
-
-    :global(html[data-theme="light"]) & {
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
   }
 
   .notch-group-heading {

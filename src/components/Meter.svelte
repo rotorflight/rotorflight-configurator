@@ -26,18 +26,9 @@
     height: 20px;
     border-radius: 2px;
     container-type: size;
-
-    :global(html[data-theme="light"]) & {
-      color: var(--color-neutral-700);
-      background-color: var(--color-neutral-200);
-      border: 1px solid var(--color-neutral-400);
-    }
-
-    :global(html[data-theme="dark"]) & {
-      color: var(--color-neutral-100);
-      background-color: var(--color-neutral-700);
-      border: 1px solid var(--color-neutral-400);
-    }
+    color: var(--color-text);
+    background-color: var(--color-meter-bg);
+    border: 1px solid var(--color-meter-border);
   }
 
   .left-label {
