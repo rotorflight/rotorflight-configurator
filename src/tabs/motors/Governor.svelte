@@ -2,13 +2,13 @@
   import semver from "semver";
   import { slide } from "svelte/transition";
 
+  import { CONFIGURATOR } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import {
     API_VERSION_12_8,
     API_VERSION_12_9,
   } from "@/js/configurator.svelte.js";
 
-  import Expert from "@/components/Expert.svelte";
   import Field from "@/components/Field.svelte";
   import InfoNote from "@/components/notes/InfoNote.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
@@ -480,7 +480,9 @@
         {/if}
       </SubSection>
     </div>
-    {#if semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+  {/if}
+  {#if semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+    {#if enabled}
       <div transition:slide>
         <SubSection label="govSectionAutorotation">
           <Field id="gov-auto-timeout" label="govAutoTimeout" unit="s">
@@ -527,105 +529,99 @@
         </SubSection>
       </div>
     {/if}
+  {/if}
+  {#if enabled && CONFIGURATOR.expertMode}
     <div transition:slide>
-      <Expert>
-        <div transition:slide>
-          <SubSection label="govSectionFilters">
-            <Field
-              id="gov-headspeed-filter"
-              label="govHeadspeedFilterHz"
-              unit="Hz"
-            >
-              {#snippet tooltip()}
-                <Tooltip
-                  help="govHeadspeedFilterHzHelp"
-                  attrs={[
-                    { name: "genericDefault", value: "10Hz" },
-                    { name: "genericRange", value: "0Hz - 250Hz" },
-                  ]}
-                />
-              {/snippet}
-              <NumberInput
-                id="gov-headspeed-filter"
-                min="0"
-                max="250"
-                bind:value={FC.GOVERNOR.gov_rpm_filter}
+      <SubSection label="govSectionFilters">
+        <Field id="gov-headspeed-filter" label="govHeadspeedFilterHz" unit="Hz">
+          {#snippet tooltip()}
+            <Tooltip
+              help="govHeadspeedFilterHzHelp"
+              attrs={[
+                { name: "genericDefault", value: "10Hz" },
+                { name: "genericRange", value: "0Hz - 250Hz" },
+              ]}
+            />
+          {/snippet}
+          <NumberInput
+            id="gov-headspeed-filter"
+            min="0"
+            max="250"
+            bind:value={FC.GOVERNOR.gov_rpm_filter}
+          />
+        </Field>
+        <Field id="gov-voltage-filter" label="govVoltageFilterHz" unit="Hz">
+          {#snippet tooltip()}
+            <Tooltip
+              help="govVoltageFilterHzHelp"
+              attrs={[
+                { name: "genericDefault", value: "5Hz" },
+                { name: "genericRange", value: "0Hz - 250Hz" },
+              ]}
+            />
+          {/snippet}
+          <NumberInput
+            id="gov-voltage-filter"
+            min="0"
+            max="250"
+            bind:value={FC.GOVERNOR.gov_pwr_filter}
+          />
+        </Field>
+        <Field id="gov-tta-filter" label="govTTAFilterHz" unit="Hz">
+          {#snippet tooltip()}
+            <Tooltip
+              help="govTTAFilterHzHelp"
+              attrs={[
+                { name: "genericDefault", value: "0Hz" },
+                { name: "genericRange", value: "0Hz - 250Hz" },
+              ]}
+            />
+          {/snippet}
+          <NumberInput
+            id="gov-tta-filter"
+            min="0"
+            max="250"
+            bind:value={FC.GOVERNOR.gov_tta_filter}
+          />
+        </Field>
+        <Field id="gov-ff-filter" label="govFFFilterHz" unit="Hz">
+          {#snippet tooltip()}
+            <Tooltip
+              help="govFFFilterHzHelp"
+              attrs={[
+                { name: "genericDefault", value: "10Hz" },
+                { name: "genericRange", value: "0Hz - 250Hz" },
+              ]}
+            />
+          {/snippet}
+          <NumberInput
+            id="gov-ff-filter"
+            min="0"
+            max="250"
+            bind:value={FC.GOVERNOR.gov_ff_filter}
+          />
+        </Field>
+        {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+          <Field id="gov-d-cutoff" label="govDCutoff" unit="Hz">
+            {#snippet tooltip()}
+              <Tooltip
+                help="govDCutoffHelp"
+                attrs={[
+                  { name: "genericDefault", value: "5Hz" },
+                  { name: "genericRange", value: "0Hz - 25Hz" },
+                ]}
               />
-            </Field>
-            <Field id="gov-voltage-filter" label="govVoltageFilterHz" unit="Hz">
-              {#snippet tooltip()}
-                <Tooltip
-                  help="govVoltageFilterHzHelp"
-                  attrs={[
-                    { name: "genericDefault", value: "5Hz" },
-                    { name: "genericRange", value: "0Hz - 250Hz" },
-                  ]}
-                />
-              {/snippet}
-              <NumberInput
-                id="gov-voltage-filter"
-                min="0"
-                max="250"
-                bind:value={FC.GOVERNOR.gov_pwr_filter}
-              />
-            </Field>
-            <Field id="gov-tta-filter" label="govTTAFilterHz" unit="Hz">
-              {#snippet tooltip()}
-                <Tooltip
-                  help="govTTAFilterHzHelp"
-                  attrs={[
-                    { name: "genericDefault", value: "0Hz" },
-                    { name: "genericRange", value: "0Hz - 250Hz" },
-                  ]}
-                />
-              {/snippet}
-              <NumberInput
-                id="gov-tta-filter"
-                min="0"
-                max="250"
-                bind:value={FC.GOVERNOR.gov_tta_filter}
-              />
-            </Field>
-            <Field id="gov-ff-filter" label="govFFFilterHz" unit="Hz">
-              {#snippet tooltip()}
-                <Tooltip
-                  help="govFFFilterHzHelp"
-                  attrs={[
-                    { name: "genericDefault", value: "10Hz" },
-                    { name: "genericRange", value: "0Hz - 250Hz" },
-                  ]}
-                />
-              {/snippet}
-              <NumberInput
-                id="gov-ff-filter"
-                min="0"
-                max="250"
-                bind:value={FC.GOVERNOR.gov_ff_filter}
-              />
-            </Field>
-            {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
-              <Field id="gov-d-cutoff" label="govDCutoff" unit="Hz">
-                {#snippet tooltip()}
-                  <Tooltip
-                    help="govDCutoffHelp"
-                    attrs={[
-                      { name: "genericDefault", value: "5Hz" },
-                      { name: "genericRange", value: "0Hz - 25Hz" },
-                    ]}
-                  />
-                {/snippet}
-                <NumberInput
-                  id="gov-d-cutoff"
-                  min="0"
-                  max="25"
-                  step="0.1"
-                  bind:value={fields.gov_d_filter}
-                />
-              </Field>
-            {/if}
-          </SubSection>
-        </div>
-      </Expert>
+            {/snippet}
+            <NumberInput
+              id="gov-d-cutoff"
+              min="0"
+              max="25"
+              step="0.1"
+              bind:value={fields.gov_d_filter}
+            />
+          </Field>
+        {/if}
+      </SubSection>
     </div>
   {/if}
 </Section>
