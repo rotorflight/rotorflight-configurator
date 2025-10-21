@@ -7,10 +7,15 @@ import { handleConnectClick } from "@/js/serial_backend.js";
 globalThis.TABS = {};
 
 if (__BACKEND__ === "nwjs") {
-  jQuery(function () {
-      useGlobalNodeFunctions();
-      appReady();
-  });
+    if (import.meta.env.DEV) {
+        // allow smaller window for testing mobile layout
+        globalThis.nw.Window.get().setMinimumSize(320, 550);
+    }
+
+    jQuery(function () {
+        useGlobalNodeFunctions();
+        appReady();
+    });
 }
 
 function useGlobalNodeFunctions() {
