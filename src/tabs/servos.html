@@ -10,63 +10,59 @@
         </div-->
 
         <!-- CONFIGURATION -->
-        <div class="configuration">
-            <div class="grid-row">
-                <div class="grid-col full-width">
-                    <div class="gui_box">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="servoConfiguration"></div>
-                        </div>
-                        <div>
-                            <table class="servoConfig">
-                                <thead>
-                                    <tr class="trhead">
-                                        <th i18n="servoNumber"></th>
-                                        <th>
-                                            <span class="thtext" i18n="servoMid"></span>
-                                            <span class="helpicon cf_tip" i18n_title="servoMidHelp"></span>
-                                        </th>
-                                        <th>
-                                            <span class="thtext" i18n="servoMin"></span>
-                                            <span class="helpicon cf_tip" i18n_title="servoMinHelp"></span>
-                                        </th>
-                                        <th>
-                                            <span class="thtext" i18n="servoMax"></span>
-                                            <span class="helpicon cf_tip" i18n_title="servoMaxHelp"></span>
-                                        </th>
-                                        <th>
-                                            <span class="thtext" i18n="servoScaleNeg"></span>
-                                            <span class="helpicon cf_tip" i18n_title="servoScaleNegHelp"></span>
-                                        </th>
-                                        <th>
-                                            <span class="thtext" i18n="servoScalePos"></span>
-                                            <span class="helpicon cf_tip" i18n_title="servoScalePosHelp"></span>
-                                        </th>
-                                        <th>
-                                            <span class="thtext" i18n="servoRate"></span>
-                                            <span class="helpicon cf_tip" i18n_title="servoRateHelp"></span>
-                                        </th>
-                                        <th>
-                                            <span class="thtext" i18n="servoSpeed"></span>
-                                            <span class="helpicon cf_tip" i18n_title="servoSpeedHelp"></span>
-                                        </th>
-                                        <th>
-                                            <span class="thtext" i18n="servoReverse"></span>
-                                            <span class="helpicon cf_tip" i18n_title="servoReverseHelp"></span>
-                                        </th>
-                                        <th>
-                                            <span class="thtext" i18n="servoGeometryCorrection"></span>
-                                            <span class="helpicon cf_tip" i18n_title="servoGeometryCorrectionHelp"></span>
-                                        </th>
-                                        <th i18n="servoSignal"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- ROWS GENERATED HERE -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+        <div class="configuration gui_box ">
+            <div class="content">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="servoConfiguration"></div>
+                </div>
+                <div>
+                    <table class="servoConfig">
+                        <thead>
+                            <tr class="trhead">
+                                <th i18n="servoNumber"></th>
+                                <th>
+                                    <span class="thtext" i18n="servoMid"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoMidHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoMin"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoMinHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoMax"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoMaxHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoScaleNeg"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoScaleNegHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoScalePos"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoScalePosHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoRate"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoRateHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoSpeed"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoSpeedHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoReverse"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoReverseHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoGeometryCorrection"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoGeometryCorrectionHelp"></span>
+                                </th>
+                                <th i18n="servoSignal"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ROWS GENERATED HERE -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -99,40 +95,36 @@
         <!-- END WARNINGS -->
 
         <!-- OVERRIDES -->
-        <div class="overrides">
-            <div class="grid-row margin-top5">
-                <div class="grid-col full-width">
-                    <div class="gui_box grey">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="servoOverride"></div>
-                            <div class="helpicon cf_tip" i18n_title="servoOverrideHelp"></div>
-                        </div>
-                        <div class="spacer_box">
-                            <table class="servoEnableOverride">
-                                <tr>
-                                    <td><input type="checkbox" id="servoEnableOverrideSwitch" class="toggle" /></td>
-                                    <td><span i18n="servoEnableOverrideLabel"></span></td>
-                                    <td><span class="description" i18n="servoEnableOverrideText"></span></td>
-                                </tr>
-                            </table>
-                        </div>
+        <div class="overrides gui_box grey">
+            <div class="content">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="servoOverride"></div>
+                    <div class="helpicon cf_tip" i18n_title="servoOverrideHelp"></div>
+                </div>
+                <div class="spacer_box">
+                    <table class="servoEnableOverride">
+                        <tr>
+                            <td><input type="checkbox" id="servoEnableOverrideSwitch" class="toggle" /></td>
+                            <td><span i18n="servoEnableOverrideLabel"></span></td>
+                            <td><span class="description" i18n="servoEnableOverrideText"></span></td>
+                        </tr>
+                    </table>
+                </div>
 
-                        <div class="override">
-                            <table class="servoOverride">
-                                <thead>
-                                    <tr class="trhead">
-                                        <th i18n="servoNumber"></th>
-                                        <th i18n="servoOverrideEnable"></th>
-                                        <th i18n="servoOverrideAngle"></th>
-                                        <th i18n="servoOverrideSlider"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- ROWS GENERATED HERE -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="override">
+                    <table class="servoOverride">
+                        <thead>
+                            <tr class="trhead">
+                                <th i18n="servoNumber"></th>
+                                <th i18n="servoOverrideEnable"></th>
+                                <th i18n="servoOverrideAngle"></th>
+                                <th i18n="servoOverrideSlider"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ROWS GENERATED HERE -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

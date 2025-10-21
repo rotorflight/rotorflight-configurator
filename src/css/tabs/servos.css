@@ -7,6 +7,25 @@
     position: relative;
 }
 
+.tab-servos .configuration {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.tab-servos .configuration .content {
+    min-width: 900px;
+}
+
+.tab-servos .overrides {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+}
+
+.tab-servos .overrides .content {
+    min-width: 500px;
+}
+
 .tab-servos .spacer_box {
     padding-bottom: 10px;
     float: left;
