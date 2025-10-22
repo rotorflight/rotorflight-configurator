@@ -110,8 +110,8 @@
 
 <Section label="receiverBars">
   <SubSection>
-    <Field label="receiverChannelOrder">
-      <select onchange={applyPreset}>
+    <Field id="receiver-channel-order-preset" label="receiverChannelOrder">
+      <select id="receiver-channel-order-preset" onchange={applyPreset}>
         <option value="" disabled selected>
           {$i18n.t("receiverChannelOrderPresetPlaceholder")}
         </option>
