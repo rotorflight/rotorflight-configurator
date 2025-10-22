@@ -83,9 +83,17 @@
     border-top: 1px dotted var(--superSubtleAccent);
 }
 
+.tab-mixer .override {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+}
+
 .tab-mixer .override .gui_box {
     padding-top: 0px;
     padding-bottom: 0px;
+    margin-bottom: 0;
+    min-width: 740px;
 }
 
 .tab-mixer .mixerOverrideNote {
