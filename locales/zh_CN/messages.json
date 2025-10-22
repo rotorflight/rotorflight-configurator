@@ -4639,6 +4639,10 @@
         "message": "从文件加载",
         "english": "Load from file"
     },
+    "cliSaveConfigBtn": {
+        "message": "保存配置",
+        "english": "Save Configuration"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "已加载文件<strong>{{fileName}}</strong>。查看已加载的命令",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"

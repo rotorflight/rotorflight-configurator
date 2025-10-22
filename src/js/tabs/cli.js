@@ -80,6 +80,32 @@ tab.initialize = function (callback) {
             copyToClipboard(self.cliEngine.outputHistory);
         });
 
+        $('.tab-cli .save-config').on('click', async function () {
+            // Clear the output history
+            self.cliEngine.clearOutputHistory();
+            
+            // Execute 'diff all' command
+            await new Promise((resolve) => {
+                self.cliEngine.sendLine('diff all', resolve);
+            });
+            
+            // Wait a bit for the command to complete and output to be populated
+            await new Promise(resolve => setTimeout(resolve, 700));
+            
+            // Save the output to a file
+            const prefix = 'rotorflight-config';
+            const suffix = 'txt';
+            
+            try {
+                await filesystem.writeTextFile(self.cliEngine.outputHistory, {
+                    suggestedName: generateFilename(prefix, suffix),
+                    description: `${suffix.toUpperCase()} files`,
+                });
+            } catch (err) {
+                console.log('Failed to save config', err);
+            }
+        });
+
         $('.tab-cli .load').on('click', async function () {
             const previewArea = $("#snippetpreviewcontent textarea#preview");
 

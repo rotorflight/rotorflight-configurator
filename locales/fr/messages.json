@@ -4635,6 +4635,10 @@
         "message": "Charger à partir du fichier",
         "english": "Load from file"
     },
+    "cliSaveConfigBtn": {
+        "message": "Enregistrer la Configuration",
+        "english": "Save Configuration"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "Fichier chargé <strong>{{fileName}}</strong>. Vérifier les commandes chargées",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"

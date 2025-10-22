@@ -5832,6 +5832,10 @@
         "message": "ファイルからロード",
         "english": "Load from file"
     },
+    "cliSaveConfigBtn": {
+        "message": "設定を保存",
+        "english": "Save Configuration"
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "ファイル <strong>{{fileName}}</strong> をロードしました。ロードされたコマンドをレビューします。",
         "english": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"
