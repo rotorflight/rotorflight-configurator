@@ -1,6 +1,7 @@
 <script>
   import diff from "microdiff";
   import { onMount, onDestroy } from "svelte";
+  import { SvelteURL } from "svelte/reactivity";
   import { slide } from "svelte/transition";
 
   import { i18n } from "@/js/i18n.js";
@@ -233,7 +234,7 @@
 
     // use a fully qualified url so nw doesn't look on the filesystem
     // when using the vite dev server
-    const location = new URL(window.location.href);
+    const location = new SvelteURL(window.location.href);
     location.pathname = "/src/tabs/receiver_msp.html";
     nw.Window.open(
       location.toString(),

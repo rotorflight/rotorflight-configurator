@@ -1,4 +1,6 @@
 <script>
+  import { SvelteSet } from "svelte/reactivity";
+
   import { i18n } from "@/js/i18n.js";
   import { TELEMETRY_SENSORS } from "../../telemetry/sensors.js";
   import Field from "@/components/Field.svelte";
@@ -8,7 +10,7 @@
   let { value = $bindable([]), sensors } = $props();
 
   let lookup = $derived.by(() => {
-    const s = new Set();
+    const s = new SvelteSet();
     for (const item of value) {
       if (item.value !== 0) {
         s.add(item.value);
