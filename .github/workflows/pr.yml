@@ -18,7 +18,7 @@ jobs:
     - name: Install pnpm
       uses: pnpm/action-setup@v4
       with:
-        version: 9
+        version: 10
         run_install: false
 
     - name: Install Node.js
@@ -64,7 +64,7 @@ jobs:
     - name: Install pnpm
       uses: pnpm/action-setup@v4
       with:
-        version: 9
+        version: 10
         run_install: false
 
     - name: Install Node.js
@@ -126,7 +126,7 @@ jobs:
     - name: Install pnpm
       uses: pnpm/action-setup@v4
       with:
-        version: 9
+        version: 10
         run_install: false
 
     - name: Install Node.js
@@ -188,7 +188,7 @@ jobs:
     - name: Install pnpm
       uses: pnpm/action-setup@v4
       with:
-        version: 9
+        version: 10
         run_install: false
 
     - name: Install Node.js
@@ -250,7 +250,7 @@ jobs:
     - name: Install pnpm
       uses: pnpm/action-setup@v4
       with:
-        version: 9
+        version: 10
         run_install: false
 
     - name: Install Node.js
@@ -312,7 +312,7 @@ jobs:
     - name: Install pnpm
       uses: pnpm/action-setup@v4
       with:
-        version: 9
+        version: 10
         run_install: false
 
     - name: Install Node.js
@@ -374,7 +374,7 @@ jobs:
     - name: Install pnpm
       uses: pnpm/action-setup@v4
       with:
-        version: 9
+        version: 10
         run_install: false
 
     - name: Install Node.js

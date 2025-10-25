@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  fs-xattr: 0.4.0
+  macos-alias: 0.2.12
+  nan: 2.23.0
+
 importers:
 
   .:
@@ -167,7 +172,7 @@ importers:
         version: 1.2.0
     optionalDependencies:
       appdmg:
-        specifier: ^0.6.4
+        specifier: ^0.6.6
         version: 0.6.6
 
 packages:
@@ -2207,9 +2212,9 @@ packages:
   fs-temp@1.2.1:
     resolution: {integrity: sha512-okTwLB7/Qsq82G6iN5zZJFsOfZtx2/pqrA7Hk/9fvy+c+eJS9CvgGXT2uNxwnI14BDY9L/jQPkaBgSvlKfSW9w==}
 
-  fs-xattr@0.3.1:
-    resolution: {integrity: sha512-UVqkrEW0GfDabw4C3HOrFlxKfx0eeigfRne69FxSBdHIP8Qt5Sq6Pu3RM9KmMlkygtC4pPKkj5CiPO5USnj2GA==}
-    engines: {node: '>=8.6.0'}
+  fs-xattr@0.4.0:
+    resolution: {integrity: sha512-Lw90zx483YTGiHfR67IPtrbrZ+yBr1/W98v/iyTeSkUbixg/wrHfX5x9oMUOnirC5P7SZ5HlrpnIRMMqt8Ej0A==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     os: ['!win32']
 
   fs.realpath@1.0.0:
@@ -3022,8 +3027,8 @@ packages:
   lru_map@0.3.3:
     resolution: {integrity: sha512-Pn9cox5CsMYngeDbmChANltQl+5pi6XmTrraMSzhPmMBbmgcxmqWry0U3PGapCU1yB4/LqCcom7qhHZiF/jGfQ==}
 
-  macos-alias@0.2.11:
-    resolution: {integrity: sha512-zIUs3+qpml+w3wiRuADutd7XIO8UABqksot10Utl/tji4UxZzLG4fWDC+yJZoO8/Ehg5RqsvSRE/6TS5AEOeWw==}
+  macos-alias@0.2.12:
+    resolution: {integrity: sha512-yiLHa7cfJcGRFq4FrR4tMlpNHb4Vy4mWnpajlSSIFM5k4Lv8/7BbbDLzCAVogWNl0LlLhizRp1drXv0hK9h0Yw==}
     os: [darwin]
 
   magic-string@0.30.21:
@@ -3241,8 +3246,8 @@ packages:
     resolution: {integrity: sha512-avsJQhyd+680gKXyG/sQc0nXaC6rBkPOfyHYcFb9+hdkqQkR9bdnkJ0AMZhke0oesPqIO+mFFJ+IdBc7mst4IA==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
-  nan@2.20.0:
-    resolution: {integrity: sha512-bk3gXBZDGILuuo/6sKtr0DQmSThYHLtNCdSdXk9YkxD/jK6X2vmCyyXBBxyqZ4XcnzTyYEAThfX3DCEnLf6igw==}
+  nan@2.23.0:
+    resolution: {integrity: sha512-1UxuyYGdoQHcGg87Lkqm3FzefucTa0NAiOcuRsDmysep3c1LVCRK2krrUDafMWtjSG04htvAmvg96+SDknOmgQ==}
 
   nano-spawn@2.0.0:
     resolution: {integrity: sha512-tacvGzUY5o2D8CBh2rrwxyNojUsZNU2zjNTzKQrkgGJQTbGAfArVWXSKMBokBeeg6C7OLRGUEyoFlYbfeWQIqw==}
@@ -5655,7 +5660,7 @@ snapshots:
       ds-store: 0.1.6
       execa: 1.0.0
       fs-temp: 1.2.1
-      fs-xattr: 0.3.1
+      fs-xattr: 0.4.0
       image-size: 0.7.5
       is-my-json-valid: 2.20.6
       minimist: 1.2.8
@@ -6569,7 +6574,7 @@ snapshots:
   ds-store@0.1.6:
     dependencies:
       bplist-creator: 0.0.8
-      macos-alias: 0.2.11
+      macos-alias: 0.2.12
       tn1150: 0.1.0
     optional: true
 
@@ -7134,7 +7139,7 @@ snapshots:
       random-path: 0.1.2
     optional: true
 
-  fs-xattr@0.3.1:
+  fs-xattr@0.4.0:
     optional: true
 
   fs.realpath@1.0.0: {}
@@ -7142,7 +7147,7 @@ snapshots:
   fsevents@1.2.13:
     dependencies:
       bindings: 1.5.0
-      nan: 2.20.0
+      nan: 2.23.0
     optional: true
 
   fsevents@2.3.3:
@@ -8047,9 +8052,9 @@ snapshots:
 
   lru_map@0.3.3: {}
 
-  macos-alias@0.2.11:
+  macos-alias@0.2.12:
     dependencies:
-      nan: 2.20.0
+      nan: 2.23.0
     optional: true
 
   magic-string@0.30.21:
@@ -8308,7 +8313,7 @@ snapshots:
 
   mute-stream@1.0.0: {}
 
-  nan@2.20.0:
+  nan@2.23.0:
     optional: true
 
   nano-spawn@2.0.0: {}
