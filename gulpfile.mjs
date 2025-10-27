@@ -91,7 +91,7 @@ function bundle_src() {
   return packageJson
     .pipe(source("package.json"))
     .pipe(gulp.src(distSources, { base: "." }))
-    .pipe(gulp.src("pnpm-lock.yaml"))
+    .pipe(gulp.src(["pnpm-lock.yaml", "pnpm-workspace.yaml"]))
     .pipe(gulp.dest(BUNDLE_DIR));
 }
 
