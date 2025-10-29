@@ -39,11 +39,11 @@ class State {
   throttleEnabled = $derived(
     this.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol] !== "DISABLED",
   );
-  isDshot = $derived(
-    this.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol].startsWith(
-      "DSHOT",
-    ),
-  );
+  isDshot = $derived.by(() => {
+    const protoName =
+      this.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol];
+    return protoName.startsWith("DSHOT") || protoName === "PROSHOT";
+  });
   isCastleLink = $derived(
     this.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol] === "CASTLE",
   );
