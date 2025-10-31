@@ -3423,17 +3423,23 @@
     "govStartupTimeHelp": {
         "message": "Time constant for slow startup, in seconds, measuring the time from zero to full headspeed."
     },
+    "govStartupTimeHelp2": {
+        "message": "Rate of throttle change during startup, defined as the duration from 0% to 100% throttle."
+    },
     "govSpoolupTime": {
         "message": "Spoolup Time"
     },
     "govSpoolupTimeHelp": {
         "message": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
     },
+    "govSpoolupTimeHelp2": {
+        "message": "Rate of throttle change during spoolup, defined as the duration from 0% to 100% throttle."
+    },
     "govSpooldownTime": {
         "message": "Spooldown Time"
     },
     "govSpooldownTimeHelp": {
-        "message": "Time constant for spooldown, in seconds, measuring the time from full headspeed to zero."
+        "message": "Rate of throttle change during spooldown, defined as the duration from 0% to 100% throttle."
     },
     "govSpoolupMinThrottle": {
         "message": "Spoolup Minimum Throttle"
@@ -3447,11 +3453,17 @@
     "govTrackingTimeHelp": {
         "message": "Time constant for headspeed changes, in seconds, measuring the time from zero to full headspeed."
     },
+    "govTrackingTimeHelp2": {
+        "message": "Rate of throttle change when tracking headspeed target changes, defined as the duration from 0% to 100% throttle."
+    },
     "govRecoveryTime": {
         "message": "Recovery Time"
     },
     "govRecoveryTimeHelp": {
         "message": "Time constant for recovery spoolup, in seconds, measuring the time from zero to full headspeed."
+    },
+    "govRecoveryTimeHelp2": {
+        "message": "Rate of throttle change during recovery, defined as the duration from 0% to 100% throttle."
     },
     "govAutoBailoutTime": {
         "message": "Bailout Time"

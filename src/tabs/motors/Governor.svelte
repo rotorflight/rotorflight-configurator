@@ -16,8 +16,10 @@
   import SubSection from "@/components/SubSection.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
 
+  let is_12_9 = $derived(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9));
+
   let govModes = $derived.by(() => {
-    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+    if (is_12_9) {
       return ["OFF", "EXTERNAL", "ELECTRIC", "NITRO"];
     }
 
@@ -66,11 +68,7 @@
   <SubSection>
     <Field id="gov-mode" label="govMode">
       {#snippet tooltip()}
-        <Tooltip
-          help={semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)
-            ? "govModeHelp2"
-            : "govModeHelp"}
-        />
+        <Tooltip help={is_12_9 ? "govModeHelp2" : "govModeHelp"} />
       {/snippet}
       <select
         id="gov-mode"
@@ -91,7 +89,7 @@
     {#if enabled}
       <div transition:slide>
         <SubSection>
-          {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+          {#if is_12_9}
             <Field id="gov-throttle-type" label="govThrottleType">
               {#snippet tooltip()}
                 <Tooltip help="govThrottleTypeHelp" />
@@ -148,7 +146,7 @@
             unit="%"
           >
             {#snippet tooltip()}
-              {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+              {#if is_12_9}
                 <Tooltip
                   help="govHandoverThrottleHelp"
                   attrs={[
@@ -166,7 +164,7 @@
                 />
               {/if}
             {/snippet}
-            {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+            {#if is_12_9}
               <NumberInput
                 id="gov-handover-throttle"
                 min="0"
@@ -205,7 +203,7 @@
               />
             </Field>
           {/if}
-          {#if semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+          {#if !is_12_9}
             <Field
               id="gov-zero-throttle-timeout"
               label="govZeroThrottleTimeout"
@@ -279,7 +277,7 @@
     {/if}
   </SubSection>
 
-  {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+  {#if is_12_9}
     {#if enabled}
       <div transition:slide>
         <SubSection label="govSectionThrottleCurve">
@@ -325,41 +323,59 @@
   {#if enabled}
     <div transition:slide>
       <SubSection label="govSectionRampTime">
-        <Field id="gov-startup-time" label="govStartupTime" unit="s">
-          {#snippet tooltip()}
-            <Tooltip
-              help="govStartupTimeHelp"
-              attrs={[
-                { name: "genericDefault", value: "20s" },
-                { name: "genericRange", value: "0s - 60s" },
-              ]}
-            />
-          {/snippet}
-          <NumberInput
-            id="gov-startup-time"
-            min="0"
-            max="60"
-            step="0.1"
-            bind:value={fields.gov_startup_time}
-          />
-        </Field>
+        {#if CONFIGURATOR.expertMode}
+          <div transition:slide>
+            <Field id="gov-startup-time" label="govStartupTime" unit="s">
+              {#snippet tooltip()}
+                <Tooltip
+                  help={is_12_9 ? "govStartupTimeHelp2" : "govStartupTimeHelp"}
+                  attrs={[
+                    { name: "genericDefault", value: "20s" },
+                    { name: "genericRange", value: "0s - 60s" },
+                  ]}
+                />
+              {/snippet}
+              <div class="ramp-container">
+                {#if is_12_9}
+                  <div>
+                    {(100 / fields.gov_startup_time).toFixed(1)} %/s
+                  </div>
+                {/if}
+                <NumberInput
+                  id="gov-startup-time"
+                  min="0"
+                  max="60"
+                  step="0.1"
+                  bind:value={fields.gov_startup_time}
+                />
+              </div>
+            </Field>
+          </div>
+        {/if}
         <Field id="gov-spoolup-time" label="govSpoolupTime" unit="s">
           {#snippet tooltip()}
             <Tooltip
-              help="govSpoolupTimeHelp"
+              help={is_12_9 ? "govSpoolupTimeHelp2" : "govSpoolupTimeHelp"}
               attrs={[
                 { name: "genericDefault", value: "10s" },
                 { name: "genericRange", value: "0s - 60s" },
               ]}
             />
           {/snippet}
-          <NumberInput
-            id="gov-spoolup-time"
-            min="0"
-            max="60"
-            step="0.1"
-            bind:value={fields.gov_spoolup_time}
-          />
+          <div class="ramp-container">
+            {#if is_12_9}
+              <div>
+                {(100 / fields.gov_spoolup_time).toFixed(1)} %/s
+              </div>
+            {/if}
+            <NumberInput
+              id="gov-spoolup-time"
+              min="0"
+              max="60"
+              step="0.1"
+              bind:value={fields.gov_spoolup_time}
+            />
+          </div>
         </Field>
         <Field id="gov-spooldown-time" label="govSpooldownTime" unit="s">
           {#snippet tooltip()}
@@ -371,93 +387,80 @@
               ]}
             />
           {/snippet}
-          <NumberInput
-            id="gov-spooldown-time"
-            min="0"
-            max="60"
-            step="0.1"
-            bind:value={fields.gov_spooldown_time}
-          />
-        </Field>
-        <Field id="gov-tracking-time" label="govTrackingTime" unit="s">
-          {#snippet tooltip()}
-            {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
-              <Tooltip
-                help="govTrackingTimeHelp"
-                attrs={[
-                  { name: "genericDefault", value: "5s" },
-                  { name: "genericRange", value: "0s - 60s" },
-                ]}
-              />
-            {:else}
-              <Tooltip
-                help="govTrackingTimeHelp"
-                attrs={[
-                  { name: "genericDefault", value: "2s" },
-                  { name: "genericRange", value: "0s - 10s" },
-                ]}
-              />
+          <div class="ramp-container">
+            {#if is_12_9}
+              <div>
+                {(100 / fields.gov_spooldown_time).toFixed(1)} %/s
+              </div>
             {/if}
-          {/snippet}
-
-          {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
             <NumberInput
-              id="gov-tracking-time"
+              id="gov-spooldown-time"
               min="0"
               max="60"
               step="0.1"
-              bind:value={fields.gov_tracking_time}
+              bind:value={fields.gov_spooldown_time}
             />
-          {:else}
+          </div>
+        </Field>
+        <Field id="gov-tracking-time" label="govTrackingTime" unit="s">
+          {#snippet tooltip()}
+            <Tooltip
+              help={is_12_9 ? "govTrackingTimeHelp2" : "govTrackingTimeHelp"}
+              attrs={[
+                { name: "genericDefault", value: "5s" },
+                {
+                  name: "genericRange",
+                  value: `0s - ${is_12_9 ? "60" : "10"}s`,
+                },
+              ]}
+            />
+          {/snippet}
+
+          <div class="ramp-container">
+            {#if is_12_9}
+              <div>
+                {(100 / fields.gov_tracking_time).toFixed(1)} %/s
+              </div>
+            {/if}
             <NumberInput
               id="gov-tracking-time"
               min="0"
-              max="10"
+              max={is_12_9 ? "60" : "10"}
               step="0.1"
               bind:value={fields.gov_tracking_time}
             />
-          {/if}
+          </div>
         </Field>
 
         <Field id="gov-recovery-time" label="govRecoveryTime" unit="s">
           {#snippet tooltip()}
-            {#if semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)}
-              <Tooltip
-                help="govRecoveryTimeHelp"
-                attrs={[
-                  { name: "genericDefault", value: "2s" },
-                  { name: "genericRange", value: "0s - 60s" },
-                ]}
-              />
-            {:else}
-              <Tooltip
-                help="govRecoveryTimeHelp"
-                attrs={[
-                  { name: "genericDefault", value: "2s" },
-                  { name: "genericRange", value: "0s - 10s" },
-                ]}
-              />
-            {/if}
+            <Tooltip
+              help={is_12_9 ? "govRecoveryTimeHelp2" : "govRecoveryTimeHelp"}
+              attrs={[
+                { name: "genericDefault", value: "2s" },
+                {
+                  name: "genericRange",
+                  value: `0s - ${is_12_9 ? "60" : "10"}s`,
+                },
+              ]}
+            />
           {/snippet}
-          {#if semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+          <div class="ramp-container">
+            {#if is_12_9}
+              <div>
+                {(100 / fields.gov_recovery_time).toFixed(1)} %/s
+              </div>
+            {/if}
             <NumberInput
               id="gov-recovery-time"
               min="0"
-              max="60"
+              max={is_12_9 ? "60" : "10"}
               step="0.1"
               bind:value={fields.gov_recovery_time}
             />
-          {:else}
-            <NumberInput
-              id="gov-recovery-time"
-              min="0"
-              max="10"
-              step="0.1"
-              bind:value={fields.gov_recovery_time}
-            />
-          {/if}
+          </div>
         </Field>
-        {#if semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+        {#if !is_12_9}
           <Field id="gov-auto-bailout-time" label="govAutoBailoutTime" unit="s">
             {#snippet tooltip()}
               <Tooltip
@@ -481,7 +484,7 @@
       </SubSection>
     </div>
   {/if}
-  {#if semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+  {#if !is_12_9}
     {#if enabled}
       <div transition:slide>
         <SubSection label="govSectionAutorotation">
@@ -601,7 +604,7 @@
             bind:value={FC.GOVERNOR.gov_ff_filter}
           />
         </Field>
-        {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+        {#if is_12_9}
           <Field id="gov-d-cutoff" label="govDCutoff" unit="Hz">
             {#snippet tooltip()}
               <Tooltip
@@ -627,4 +630,10 @@
 </Section>
 
 <style lang="scss">
+  .ramp-container {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+  }
 </style>
