@@ -39,7 +39,7 @@
                 help="motorsUnsyncedPWMFreqHelp"
                 attrs={[
                   { name: "genericDefault", value: "250Hz" },
-                  { name: "genericRange", value: "0Hz - 8000Hz" },
+                  { name: "genericRange", value: "50Hz - 8000Hz" },
                 ]}
               />
             {/snippet}
