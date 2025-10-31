@@ -39,15 +39,14 @@
                 help="motorsUnsyncedPWMFreqHelp"
                 attrs={[
                   { name: "genericDefault", value: "250Hz" },
-                  { name: "genericRange", value: "0Hz - 250Hz" },
+                  { name: "genericRange", value: "0Hz - 8000Hz" },
                 ]}
               />
             {/snippet}
             <NumberInput
               id="pwm-freq"
-              min="0"
-              max="250"
-              step="10"
+              min="50"
+              max="8000"
               bind:value={FC.MOTOR_CONFIG.motor_pwm_rate}
             />
           </Field>
