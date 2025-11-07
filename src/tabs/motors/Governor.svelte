@@ -42,6 +42,8 @@
     "gov_throttle_hold_timeout",
     "gov_d_filter",
     "gov_spooldown_time",
+    "gov_idle_throttle",
+    "gov_auto_throttle",
   ]) {
     Object.defineProperty(fields, field, {
       get() {
@@ -118,7 +120,7 @@
                 min="0"
                 max="25"
                 step="0.1"
-                bind:value={FC.GOVERNOR.gov_idle_throttle}
+                bind:value={fields.gov_idle_throttle}
               />
             </Field>
             <Field id="gov-auto-throttle" label="govAutoThrottle" unit="%">
@@ -136,7 +138,7 @@
                 min="0"
                 max="25"
                 step="0.1"
-                bind:value={FC.GOVERNOR.gov_auto_throttle}
+                bind:value={fields.gov_auto_throttle}
               />
             </Field>
           {/if}
