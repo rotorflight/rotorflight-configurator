@@ -2,6 +2,7 @@ import semver from "semver";
 import { Clock } from "three";
 
 import { Model } from "@/js/model.js";
+import { RateCurve } from "@/js/RateCurve.js";
 
 const tab = {
     tabName: 'rates',
@@ -226,7 +227,7 @@ tab.initialize = function (callback) {
         curveContext.stroke();
     }
 
-    self.rateCurve = new RateCurve2();
+    self.rateCurve = new RateCurve();
 
     function printMaxAngularVel(rate, rcRate, rcExpo, useSuperExpo, deadband, limit, maxAngularVelElement, isCollective) {
         const maxAngularVel = self.rateCurve.getMaxAngularVel(self.currentRatesType, rate, rcRate, rcExpo, useSuperExpo, deadband, limit);

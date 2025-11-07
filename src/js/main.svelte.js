@@ -8,7 +8,6 @@ import { DarkTheme } from "@/js/DarkTheme.js";
 import { Features } from "@/js/features.svelte.js";
 import { FirmwareCache } from "@/js/FirmwareCache.js";
 import { Mixer } from "@/js/Mixer.js";
-import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
 import * as backupRestore from "@/js/backup_restore.js";
 import * as configurator from "@/js/configurator.svelte.js";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
@@ -66,8 +65,6 @@ Object.assign(globalThis, {
   Mixer,
   MspHelper,
   PortHandler,
-  RateCurve,
-  RateCurve2,
   ReleaseChecker,
   STM32,
   STM32DFU,
