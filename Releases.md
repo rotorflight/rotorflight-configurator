@@ -1,3 +1,23 @@
+# 2.2.1
+
+This is a maintenance release containing minor bug fixes.
+
+## Changes from 2.2.0
+
+- Performance improvements
+- Fix crash with older hardware lacking WebGL 2 support
+- Fix Windows 32-bit installer
+- Fix visual bugs on presets tab
+- Fix maximum allowed value for cyclic deadband
+
+**Important:** The Apple silicon build is not notarized by Apple. It is neccessary to run the following command before installing. **NOTE:** Replace `/path/to` with the actual path to the file.
+
+```sh
+xattr -cr "/path/to/rotorflight-configurator_2.2.1_macos_arm64.dmg"
+```
+
+***
+
 # 2.2.0
 
 This is the _Official Release_ of the Rotorflight 2.2.0 Configurator.
