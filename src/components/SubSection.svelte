@@ -1,4 +1,6 @@
 <script>
+  import { slide } from "svelte/transition";
+
   import { i18n } from "@/js/i18n.js";
 
   let { children, label } = $props();
@@ -6,7 +8,7 @@
 
 <div class="container">
   {#if label}
-    <div class="header">
+    <div transition:slide class="header">
       {$i18n.t(label)}
     </div>
   {/if}

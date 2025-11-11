@@ -2,6 +2,7 @@
   import semver from "semver";
   import { slide } from "svelte/transition";
 
+  import { CONFIGURATOR } from "@/js/configurator.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import motorState from "../motors/state.svelte.js";
 
@@ -70,24 +71,28 @@
               {/each}
             </select>
           </Field>
-          <Field
-            id="rpm-filter-min-freq"
-            label="gyroRpmFilterMinFreq"
-            unit="Hz"
-          >
-            {#snippet tooltip()}
-              <Tooltip
-                help="gyroRpmFilterMinFreqHelp"
-                attrs={[{ name: "genericDefault", value: "20Hz" }]}
-              />
-            {/snippet}
-            <NumberInput
-              id="rpm-filter-min-freq"
-              min="1"
-              max="100"
-              bind:value={FC.FILTER_CONFIG.rpm_min_hz}
-            />
-          </Field>
+          {#if CONFIGURATOR.expertMode}
+            <div transition:slide>
+              <Field
+                id="rpm-filter-min-freq"
+                label="gyroRpmFilterMinFreq"
+                unit="Hz"
+              >
+                {#snippet tooltip()}
+                  <Tooltip
+                    help="gyroRpmFilterMinFreqHelp"
+                    attrs={[{ name: "genericDefault", value: "20Hz" }]}
+                  />
+                {/snippet}
+                <NumberInput
+                  id="rpm-filter-min-freq"
+                  min="1"
+                  max="100"
+                  bind:value={FC.FILTER_CONFIG.rpm_min_hz}
+                />
+              </Field>
+            </div>
+          {/if}
         </SubSection>
       </div>
     {/if}
