@@ -1,3 +1,38 @@
+# 2.3.0-20251111
+
+This is a *development snapshot* of the Rotorflight 2.3 Configurator.
+
+## Notes
+
+This version is intended to be used for beta-testing only. It may contain
+incomplete features or stability issues and is not recommended for end-user
+use.
+
+For more information, please join the Rotorflight Discord chat.
+
+## Downloads
+
+- [Rotorflight Configurator](https://github.com/rotorflight/rotorflight-configurator/releases/tag/snapshot/2.3.0-20251111)
+- [Rotorflight Blackbox](https://github.com/rotorflight/rotorflight-blackbox/releases/tag/snapshot/2.3.0-20251111)
+- [LUA Scripts for EdgeTx and OpenTx](https://github.com/rotorflight/rotorflight-lua-scripts/releases/tag/snapshot/2.3.0-20251111)
+- [LUA Scripts for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos/releases/tag/snapshot/2.3.0-20251111)
+- [Lua Suite for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos-suite/releases/tag/snapshot/2.3.0-20251111)
+
+## Changes from 2.2.1
+
+- Add **Expert Mode** toggle (only implemented on some tabs)
+- New layouts for Motors, Receiver and Failsafe tab
+- Various mobile layout improvements
+- Removed confusing arm mode active indicator on Modes tab
+
+**Important:** The Apple silicon build is not notarized by Apple. It is neccessary to run the following command before installing. **NOTE:** Replace `/path/to` with the actual path to the file.
+
+```sh
+xattr -cr "/path/to/rotorflight-configurator_2.3.0-20251111_macos_arm64.dmg"
+```
+
+***
+
 # 2.2.1
 
 This is a maintenance release containing minor bug fixes.
