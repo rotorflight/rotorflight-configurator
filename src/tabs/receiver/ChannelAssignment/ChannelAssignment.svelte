@@ -87,10 +87,14 @@
     FC.RC_MAP = [...preset.map];
   }
 
-  function swapAssignment(a, b) {
-    const current = FC.RC_MAP[a];
-    FC.RC_MAP[FC.RC_MAP.indexOf(b)] = current;
-    FC.RC_MAP[a] = b;
+  function swapAssignment(channel, channelFunction) {
+    // RC_MAP is transposed
+
+    const oldChannelFunction = FC.RC_MAP.indexOf(channel);
+    const swapChannel = FC.RC_MAP[channelFunction];
+
+    FC.RC_MAP[channelFunction] = channel;
+    FC.RC_MAP[oldChannelFunction] = swapChannel;
   }
 
   let selectedRssiSource = $derived.by(() => {
