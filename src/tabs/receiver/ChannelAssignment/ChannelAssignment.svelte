@@ -82,6 +82,22 @@
     { label: "Spektrum / Graupner / JR", map: [1, 2, 3, 5, 0, 4, 6, 7] },
   ];
 
+  let selectedPreset = $derived.by(() => {
+    // check if FC.RC_MAP matches a preset map
+    outer: for (let i = 0; i < presets.length; i++) {
+      const preset = presets[i];
+      for (let j = 0; j < preset.map.length; j++) {
+        if (preset.map[j] !== FC.RC_MAP[j]) {
+          continue outer;
+        }
+      }
+
+      return i;
+    }
+
+    return "";
+  });
+
   function applyPreset(e) {
     const preset = presets[Number(e.target.value)];
     FC.RC_MAP = [...preset.map];
@@ -115,7 +131,11 @@
 <Section label="receiverBars">
   <SubSection>
     <Field id="receiver-channel-order-preset" label="receiverChannelOrder">
-      <select id="receiver-channel-order-preset" onchange={applyPreset}>
+      <select
+        id="receiver-channel-order-preset"
+        onchange={applyPreset}
+        value={selectedPreset}
+      >
         <option value="" disabled selected>
           {$i18n.t("receiverChannelOrderPresetPlaceholder")}
         </option>
