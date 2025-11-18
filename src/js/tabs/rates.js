@@ -20,6 +20,7 @@ const tab = {
         KISS:        3,
         ACTUAL:      4,
         QUICKRATES:  5,
+        ROTORFLIGHT: 6,
     },
     RATES_TYPE_NAMES: [
         'None',
@@ -28,6 +29,7 @@ const tab = {
         'KISS',
         'Actual',
         'QuickRates',
+        'Rotorflight',
     ],
     RATES_TYPE_IMAGES: [
         'none.svg',
@@ -36,6 +38,7 @@ const tab = {
         'kiss.svg',
         'actual.svg',
         'quickrates.svg',
+        'rotorflight.svg',
     ],
     TAB_NAMES: [
         'rateProfile1',
@@ -201,6 +204,21 @@ tab.initialize = function (callback) {
                 FC.RC_TUNING.roll_srate         /= 1000;
                 FC.RC_TUNING.yaw_srate          /= 1000;
                 FC.RC_TUNING.collective_srate   /= 480;
+                break;
+
+            case self.RATES_TYPE.ROTORFLIGHT:
+                FC.RC_TUNING.pitch_rc_rate      /= 500;
+                FC.RC_TUNING.roll_rc_rate       /= 500;
+                FC.RC_TUNING.yaw_rc_rate        /= 500;
+                FC.RC_TUNING.collective_rc_rate /= 50 / 4;
+                FC.RC_TUNING.pitch_srate        /= 100;
+                FC.RC_TUNING.roll_srate         /= 100;
+                FC.RC_TUNING.yaw_srate          /= 100;
+                FC.RC_TUNING.collective_srate   /= 100;
+                FC.RC_TUNING.roll_rc_expo       /= 100;
+                FC.RC_TUNING.yaw_rc_expo        /= 100;
+                FC.RC_TUNING.pitch_rc_expo      /= 100;
+                FC.RC_TUNING.collective_rc_expo /= 100;
                 break;
 
             default: // BetaFlight
@@ -483,6 +501,7 @@ tab.convertToCollective = function (rate) {
             break;
         case self.RATES_TYPE.RACEFLIGHT:
         case self.RATES_TYPE.ACTUAL:
+        case self.RATES_TYPE.ROTORFLIGHT:
         default:
             break;
     }
@@ -968,6 +987,36 @@ tab.initRatesSystem = function() {
             expoStep    = 0.01;
             break;
 
+        case self.RATES_TYPE.ROTORFLIGHT:
+            rcRateLabel = "rateSetupRotorflightRate";
+            rateLabel   = "rateSetupRotorflightShape";
+            rcExpoLabel = "rateSetupRotorflightExpo";
+            rcRateDec   = 0;
+            rcRateDef   = 240;
+            rcRateYawDef= 500;
+            rcRateMax   = 1000;
+            rcRateMin   = 10;
+            rcRateStep  = 5;
+            rateDec     = 0;
+            rateDef     = 24;
+            rateYawDef  = 24;
+            rateMax     = 127;
+            rateStep    = 1;
+            rcColDec    = 2;
+            rcColDef    = 12.5;
+            rcColMax    = 25;
+            rcColMin    = 0;
+            rcColStep   = 0.25;
+            colDec      = 0;
+            colDef      = 0;
+            colMax      = 127;
+            colStep     = 1;
+            expoDec     = 0;
+            expoDef     = 0;
+            expoMax     = 100;
+            expoStep    = 1;
+            break;
+
         default:
             rcRateLabel = "rateSetupRcRate";
             rateLabel   = "rateSetupRate";
@@ -1073,6 +1122,21 @@ tab.initRatesSystem = function() {
             self.currentRates.pitch_srate        *= 1000;
             self.currentRates.yaw_srate          *= 1000;
             self.currentRates.collective_srate   *= 480;
+            break;
+
+        case self.RATES_TYPE.ROTORFLIGHT:
+            self.currentRates.roll_rc_rate       *= 500;
+            self.currentRates.pitch_rc_rate      *= 500;
+            self.currentRates.yaw_rc_rate        *= 500;
+            self.currentRates.collective_rc_rate *= 50 / 4;
+            self.currentRates.roll_srate         *= 100;
+            self.currentRates.pitch_srate        *= 100;
+            self.currentRates.yaw_srate          *= 100;
+            self.currentRates.collective_srate   *= 100;
+            self.currentRates.roll_rc_expo       *= 100;
+            self.currentRates.yaw_rc_expo        *= 100;
+            self.currentRates.pitch_rc_expo      *= 100;
+            self.currentRates.collective_rc_expo *= 100;
             break;
 
         default:
