@@ -5094,6 +5094,15 @@
     "rateSetupRcExpo": {
         "message": "RC Expo"
     },
+    "rateSetupRotorflightRate": {
+        "message": "Rate"
+    },
+    "rateSetupRotorflightShape": {
+        "message": "Shape"
+    },
+    "rateSetupRotorflightExpo": {
+        "message": "Expo"
+    },
     "rateSetupRcRateRaceflight": {
         "message": "Rate"
     },
