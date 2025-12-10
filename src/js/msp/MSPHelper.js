@@ -1223,10 +1223,16 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.GOVERNOR.gov_d_filter                 = data.readU8();
                     FC.GOVERNOR.gov_spooldown_time           = data.readU16();
                     FC.GOVERNOR.gov_throttle_type            = data.readU8();
-                    FC.GOVERNOR.gov_idle_collective          = data.read8();
-                    FC.GOVERNOR.gov_wot_collective           = data.read8();
+                                                               data.read8();
+                                                               data.read8();
                     FC.GOVERNOR.gov_idle_throttle            = data.readU8();
                     FC.GOVERNOR.gov_auto_throttle            = data.readU8();
+
+                    const throttleCurve = [];
+                    for (let i = 0; i < 9; i++) {
+                        throttleCurve.push(data.readU8());
+                    }
+                    FC.GOVERNOR.gov_throttle_curve = throttleCurve;
                 }
                 break;
             }
@@ -2191,6 +2197,10 @@ MspHelper.prototype.crunch = function(code) {
                     .push8(FC.GOVERNOR.gov_wot_collective)
                     .push8(FC.GOVERNOR.gov_idle_throttle)
                     .push8(FC.GOVERNOR.gov_auto_throttle);
+
+                for (const point of FC.GOVERNOR.gov_throttle_curve) {
+                    buffer.push8(point);
+                }
             }
             break;
         }

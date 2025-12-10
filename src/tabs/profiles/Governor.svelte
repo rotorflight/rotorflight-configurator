@@ -15,21 +15,15 @@
 
   let govActive = $derived(FC.GOVERNOR.gov_mode > 1);
 
-  const flagNames = [
-    "FC_THROTTLE_CURVE",
-    "TX_PRECOMP_CURVE",
-    "FALLBACK_PRECOMP",
-    "VOLTAGE_COMP",
-    "PID_SPOOLUP",
-    "HS_ADJUSTMENT",
-    "DYN_MIN_THROTTLE",
-    "AUTOROTATION",
-    "SUSPEND",
-    "BYPASS",
-  ];
+  const flagMap = {
+    FALLBACK_PRECOMP: 2,
+    VOLTAGE_COMP: 3,
+    PID_SPOOLUP: 4,
+    DYN_MIN_THROTTLE: 6,
+  };
 
   const flags = {};
-  for (const [index, name] of flagNames.entries()) {
+  for (const [name, index] of flagMap.entries()) {
     Object.defineProperty(flags, name, {
       get() {
         return bit_check(FC.GOVERNOR.gov_flags, index);
@@ -292,30 +286,8 @@
   {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
     <SubSection label="profileGovFlagsSection">
       {#if FC.GOVERNOR.gov_throttle_type !== 0}
-        <Field
-          id="gov-flag-FC_THROTTLE_CURVE"
-          label="govFlag_FC_THROTTLE_CURVE"
-        >
-          {#snippet tooltip()}
-            <Tooltip help="govFlagHelp_FC_THROTTLE_CURVE" />
-          {/snippet}
-          <Switch
-            id="gov-flag-FC_THROTTLE_CURVE"
-            bind:checked={flags.FC_THROTTLE_CURVE}
-          />
-        </Field>
+        <div></div>
       {:else if govActive}
-        <Field id="gov-flag-TX_PRECOMP_CURVE" label="govFlag_TX_PRECOMP_CURVE">
-          {#snippet tooltip()}
-            <Tooltip help="govFlagHelp_TX_PRECOMP_CURVE" />
-          {/snippet}
-          <Switch
-            id="gov-flag-TX_PRECOMP_CURVE"
-            bind:checked={flags.TX_PRECOMP_CURVE}
-            }
-            disabled={flags.BYPASS || flags.HS_ADJUSTMENT || flags.PID_SPOOLUP}
-          />
-        </Field>
         <Field id="gov-flag-HS_ADJUSTMENT" label="govFlag_HS_ADJUSTMENT">
           {#snippet tooltip()}
             <Tooltip help="govFlagHelp_HS_ADJUSTMENT" />
@@ -404,7 +376,6 @@
               if (v) {
                 preBypassFlags = FC.GOVERNOR.gov_flags;
 
-                flags.TX_PRECOMP_CURVE = false;
                 flags.FALLBACK_PRECOMP = false;
                 flags.VOLTAGE_COMP = false;
                 flags.PID_SPOOLUP = false;
