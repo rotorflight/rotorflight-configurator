@@ -823,3 +823,16 @@ class FlightController {
 }
 
 export const FC = new FlightController();
+
+export const GOVERNOR_FLAGS = {
+  FALLBACK_PRECOMP: 2,
+  VOLTAGE_COMP: 3,
+  PID_SPOOLUP: 4,
+  DYN_MIN_THROTTLE: 6,
+};
+
+export const GOVERNOR_THROTTLE = {
+  NORMAL: 0,
+  RANGE: 1,
+  SWITCH: 2,
+};

@@ -4,7 +4,7 @@
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
 
-  import { FC } from "@/js/fc.svelte.js";
+  import { FC, GOVERNOR_FLAGS } from "@/js/fc.svelte.js";
 
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
@@ -15,15 +15,8 @@
 
   let govActive = $derived(FC.GOVERNOR.gov_mode > 1);
 
-  const flagMap = {
-    FALLBACK_PRECOMP: 2,
-    VOLTAGE_COMP: 3,
-    PID_SPOOLUP: 4,
-    DYN_MIN_THROTTLE: 6,
-  };
-
   const flags = {};
-  for (const [name, index] of flagMap.entries()) {
+  for (const [name, index] of Object.entries(GOVERNOR_FLAGS)) {
     Object.defineProperty(flags, name, {
       get() {
         return bit_check(FC.GOVERNOR.gov_flags, index);
@@ -285,20 +278,6 @@
   {/if}
   {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
     <SubSection label="profileGovFlagsSection">
-      {#if FC.GOVERNOR.gov_throttle_type !== 0}
-        <div></div>
-      {:else if govActive}
-        <Field id="gov-flag-HS_ADJUSTMENT" label="govFlag_HS_ADJUSTMENT">
-          {#snippet tooltip()}
-            <Tooltip help="govFlagHelp_HS_ADJUSTMENT" />
-          {/snippet}
-          <Switch
-            id="gov-flag-HS_ADJUSTMENT"
-            bind:checked={flags.HS_ADJUSTMENT}
-            disabled={flags.BYPASS || flags.TX_PRECOMP_CURVE}
-          />
-        </Field>
-      {/if}
       {#if govActive}
         <Field id="gov-flag-FALLBACK_PRECOMP" label="govFlag_FALLBACK_PRECOMP">
           {#snippet tooltip()}
@@ -307,7 +286,7 @@
           <Switch
             id="gov-flag-FALLBACK_PRECOMP"
             bind:checked={flags.FALLBACK_PRECOMP}
-            disabled={flags.BYPASS || flags.TX_PRECOMP_CURVE}
+            disabled={flags.TX_PRECOMP_CURVE}
           />
         </Field>
         <Field id="gov-flag-PID_SPOOLUP" label="govFlag_PID_SPOOLUP">
@@ -317,7 +296,7 @@
           <Switch
             id="gov-flag-PID_SPOOLUP"
             bind:checked={flags.PID_SPOOLUP}
-            disabled={flags.BYPASS || flags.TX_PRECOMP_CURVE}
+            disabled={flags.TX_PRECOMP_CURVE}
           />
         </Field>
       {/if}
@@ -329,8 +308,7 @@
           <Switch
             id="gov-flag-VOLTAGE_COMP"
             bind:checked={flags.VOLTAGE_COMP}
-            disabled={flags.BYPASS ||
-              FC.BATTERY_CONFIG.voltageMeterSource !== 1}
+            disabled={FC.BATTERY_CONFIG.voltageMeterSource !== 1}
           />
         </Field>
         <Field id="gov-flag-DYN_MIN_THROTTLE" label="govFlag_DYN_MIN_THROTTLE">
@@ -340,57 +318,9 @@
           <Switch
             id="gov-flag-DYN_MIN_THROTTLE"
             bind:checked={flags.DYN_MIN_THROTTLE}
-            disabled={flags.BYPASS}
           />
         </Field>
       {/if}
-      <Field id="gov-flag-AUTOROTATION" label="govFlag_AUTOROTATION">
-        {#snippet tooltip()}
-          <Tooltip help="govFlagHelp_AUTOROTATION" />
-        {/snippet}
-        <Switch
-          id="gov-flag-AUTOROTATION"
-          bind:checked={flags.AUTOROTATION}
-          disabled={flags.BYPASS}
-        />
-      </Field>
-      {#if govActive}
-        <div transition:slide>
-          <Field id="gov-flag-SUSPEND" label="govFlag_SUSPEND">
-            {#snippet tooltip()}
-              <Tooltip help="govFlagHelp_SUSPEND" />
-            {/snippet}
-            <Switch id="gov-flag-SUSPEND" bind:checked={flags.SUSPEND} />
-          </Field>
-        </div>
-      {/if}
-      <Field id="gov-flag-BYPASS" label="govFlag_BYPASS">
-        {#snippet tooltip()}
-          <Tooltip help="govFlagHelp_BYPASS" />
-        {/snippet}
-        <Switch
-          id="gov-flag-BYPASS"
-          bind:checked={
-            () => flags.BYPASS,
-            (v) => {
-              if (v) {
-                preBypassFlags = FC.GOVERNOR.gov_flags;
-
-                flags.FALLBACK_PRECOMP = false;
-                flags.VOLTAGE_COMP = false;
-                flags.PID_SPOOLUP = false;
-                flags.HS_ADJUSTMENT = false;
-                flags.DYN_MIN_THROTTLE = false;
-                flags.AUTOROTATION = false;
-              } else {
-                FC.GOVERNOR.gov_flags = preBypassFlags;
-              }
-
-              flags.BYPASS = v;
-            }
-          }
-        />
-      </Field>
     </SubSection>
   {/if}
 </Section>

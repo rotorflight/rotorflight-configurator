@@ -3,7 +3,7 @@
   import { slide } from "svelte/transition";
 
   import { CONFIGURATOR } from "@/js/configurator.svelte.js";
-  import { FC } from "@/js/fc.svelte.js";
+  import { FC, GOVERNOR_THROTTLE } from "@/js/fc.svelte.js";
   import {
     API_VERSION_12_8,
     API_VERSION_12_9,
@@ -25,8 +25,6 @@
 
     return ["OFF", "PASSTHROUGH", "STANDARD", "MODE1", "MODE2"];
   });
-
-  const throttleTypes = ["NORMAL", "OFF_ON", "OFF_IDLE_ON", "OFF_IDLE_AUTO_ON"];
 
   const fields = {};
   for (const field of [
@@ -100,7 +98,7 @@
                 id="gov-throttle-type"
                 bind:value={FC.GOVERNOR.gov_throttle_type}
               >
-                {#each throttleTypes as mode, index (mode)}
+                {#each Object.entries(GOVERNOR_THROTTLE) as [mode, index] (mode)}
                   <option value={index}>{mode}</option>
                 {/each}
               </select>
@@ -252,6 +250,28 @@
             </Field>
           {:else}
             <Field
+              id="gov-autorotation-timeout"
+              label="govAutorotationTimeout"
+              unit="s"
+            >
+              {#snippet tooltip()}
+                <Tooltip
+                  help="govThrottleHoldTimeoutHelp"
+                  attrs={[
+                    { name: "genericDefault", value: "5s" },
+                    { name: "genericRange", value: "0s - 25s" },
+                  ]}
+                />
+              {/snippet}
+              <NumberInput
+                id="gov-autorotation-timeout"
+                min="0"
+                max="25"
+                step="0.1"
+                bind:value={fields.gov_autorotation_timeout}
+              />
+            </Field>
+            <Field
               id="gov-throttle-hold-timeout"
               label="govThrottleHoldTimeout"
               unit="s"
@@ -282,42 +302,7 @@
   {#if is_12_9}
     {#if enabled}
       <div transition:slide>
-        <SubSection label="govSectionThrottleCurve">
-          <Field id="gov-idle-collective" label="govIdleCollective" unit="%">
-            {#snippet tooltip()}
-              <Tooltip
-                help="govIdleCollectiveHelp"
-                attrs={[
-                  { name: "genericDefault", value: "-95%" },
-                  { name: "genericRange", value: "-100% - 100%" },
-                ]}
-              />
-            {/snippet}
-            <NumberInput
-              id="gov-idle-collective"
-              min="-100"
-              max="100"
-              bind:value={FC.GOVERNOR.gov_idle_collective}
-            />
-          </Field>
-          <Field id="gov-wot-collective" label="govWotCollective" unit="%">
-            {#snippet tooltip()}
-              <Tooltip
-                help="govWotCollectiveHelp"
-                attrs={[
-                  { name: "genericDefault", value: "-10%" },
-                  { name: "genericRange", value: "-100% - 100%" },
-                ]}
-              />
-            {/snippet}
-            <NumberInput
-              id="gov-wot-collective"
-              min="-100"
-              max="100"
-              bind:value={FC.GOVERNOR.gov_wot_collective}
-            />
-          </Field>
-        </SubSection>
+        <SubSection label="govSectionThrottleCurve"></SubSection>
       </div>
     {/if}
   {/if}
