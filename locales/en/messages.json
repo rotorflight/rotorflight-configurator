@@ -200,6 +200,10 @@
     "language_default_pretty": {
         "message": "System Default ($t(detectedLanguage))"
     },
+    "language_bg": {
+        "message": "Български",
+        "description": "Don't translate!!!"
+    },
     "language_ca": {
         "message": "Català",
         "description": "Don't translate!!!"
