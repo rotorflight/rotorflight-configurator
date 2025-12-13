@@ -1,3 +1,6 @@
+import semver from "semver";
+
+import { API_VERSION_12_8, API_VERSION_12_9 } from "./configurator.svelte.js";
 import { Features } from "./features.svelte.js";
 
 class FlightController {
@@ -78,6 +81,7 @@ class FlightController {
     this.resetState();
   }
 
+  // prettier-ignore
   resetState() {
     this.CONFIG = {
       apiVersion:                 "0.0.0",
@@ -794,7 +798,10 @@ class FlightController {
   };
 
   boardHasVcp() {
-    return bit_check(this.CONFIG.targetCapabilities, this.TARGET_CAPABILITIES_FLAGS.HAS_VCP);
+    return bit_check(
+      this.CONFIG.targetCapabilities,
+      this.TARGET_CAPABILITIES_FLAGS.HAS_VCP,
+    );
   }
 
   FILTER_TYPE_FLAGS = {
@@ -823,16 +830,3 @@ class FlightController {
 }
 
 export const FC = new FlightController();
-
-export const GOVERNOR_FLAGS = {
-  FALLBACK_PRECOMP: 2,
-  VOLTAGE_COMP: 3,
-  PID_SPOOLUP: 4,
-  DYN_MIN_THROTTLE: 6,
-};
-
-export const GOVERNOR_THROTTLE = {
-  NORMAL: 0,
-  RANGE: 1,
-  SWITCH: 2,
-};

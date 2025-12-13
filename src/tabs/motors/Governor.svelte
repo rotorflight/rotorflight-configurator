@@ -3,7 +3,7 @@
   import { slide } from "svelte/transition";
 
   import { CONFIGURATOR } from "@/js/configurator.svelte.js";
-  import { FC, GOVERNOR_THROTTLE } from "@/js/fc.svelte.js";
+  import { FC } from "@/js/fc.svelte.js";
   import {
     API_VERSION_12_8,
     API_VERSION_12_9,
@@ -15,6 +15,12 @@
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
+
+  const GOVERNOR_THROTTLE = {
+    NORMAL: 0,
+    SWITCH: 1,
+    FUNCTION: 2,
+  };
 
   let is_12_9 = $derived(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9));
 

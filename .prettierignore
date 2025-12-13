@@ -13,6 +13,7 @@
 !/src/js/clipboard.js
 !/src/js/config.js
 !/src/js/configurator.svelte.js
+!/src/js/fc.svelte.js
 !/src/js/features.svelte.js
 !/src/js/filesystem.js
 !/src/js/main.svelte.js

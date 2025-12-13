@@ -4,7 +4,7 @@
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
 
-  import { FC, GOVERNOR_FLAGS } from "@/js/fc.svelte.js";
+  import { FC } from "@/js/fc.svelte.js";
 
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
@@ -12,6 +12,13 @@
   import SubSection from "@/components/SubSection.svelte";
   import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
+
+  const GOVERNOR_FLAGS = {
+    FALLBACK_PRECOMP: 2,
+    VOLTAGE_COMP: 3,
+    PID_SPOOLUP: 4,
+    DYN_MIN_THROTTLE: 6,
+  };
 
   let govActive = $derived(FC.GOVERNOR.gov_mode > 1);
 
@@ -29,10 +36,6 @@
       },
     });
   }
-
-  /* Holds current flag state when enabling bypass, so it can be restored when
-   * bypass is disabled */
-  let preBypassFlags = 0;
 
   let { onchange } = $props();
   let initialState;
@@ -215,7 +218,6 @@
           min="0"
           max="250"
           bind:value={FC.GOVERNOR.gov_f_gain}
-          disabled={flags.TX_PRECOMP_CURVE}
         />
       </Field>
     </SubSection>
@@ -235,7 +237,6 @@
           min="0"
           max="250"
           bind:value={FC.GOVERNOR.gov_collective_ff_weight}
-          disabled={flags.TX_PRECOMP_CURVE}
         />
       </Field>
       <Field id="gov-cyclic-precomp" label="govCyclicPrecomp">
@@ -253,7 +254,6 @@
           min="0"
           max="250"
           bind:value={FC.GOVERNOR.gov_cyclic_ff_weight}
-          disabled={flags.TX_PRECOMP_CURVE}
         />
       </Field>
       <Field id="gov-yaw-precomp" label="govYawPrecomp">
@@ -271,7 +271,6 @@
           min="0"
           max="250"
           bind:value={FC.GOVERNOR.gov_yaw_ff_weight}
-          disabled={flags.TX_PRECOMP_CURVE}
         />
       </Field>
     </SubSection>
@@ -286,18 +285,13 @@
           <Switch
             id="gov-flag-FALLBACK_PRECOMP"
             bind:checked={flags.FALLBACK_PRECOMP}
-            disabled={flags.TX_PRECOMP_CURVE}
           />
         </Field>
         <Field id="gov-flag-PID_SPOOLUP" label="govFlag_PID_SPOOLUP">
           {#snippet tooltip()}
             <Tooltip help="govFlagHelp_PID_SPOOLUP" />
           {/snippet}
-          <Switch
-            id="gov-flag-PID_SPOOLUP"
-            bind:checked={flags.PID_SPOOLUP}
-            disabled={flags.TX_PRECOMP_CURVE}
-          />
+          <Switch id="gov-flag-PID_SPOOLUP" bind:checked={flags.PID_SPOOLUP} />
         </Field>
       {/if}
       {#if FC.GOVERNOR.gov_mode === 2}
