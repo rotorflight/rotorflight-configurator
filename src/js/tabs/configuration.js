@@ -264,6 +264,7 @@ tab.initialize = function (callback) {
         { id: 1024,  excl: 1024,    name: 'ESC_SENSOR',           type: portTypes.AUTO },
         { id: 128,   excl: 128,     name: 'BLACKBOX',             type: portTypes.BLACKBOX },
         { id: 262144,excl: 262144,  name: 'SBUS_OUT',             type: portTypes.AUTO },
+        { id: 524288,excl: 524288,  name: 'FBUS_OUT',             type: portTypes.AUTO },
         { id: 4,     excl: 4668,    name: 'TELEMETRY_FRSKY',      type: portTypes.TELEM },
         { id: 32,    excl: 4668,    name: 'TELEMETRY_SMARTPORT',  type: portTypes.TELEM },
         { id: 4096,  excl: 4668,    name: 'TELEMETRY_IBUS',       type: portTypes.TELEM },

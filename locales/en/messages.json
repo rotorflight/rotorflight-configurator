@@ -1531,6 +1531,9 @@
     "portsFunction_SBUS_OUT": {
         "message": "S.BUS Output"
     },
+    "portsFunction_FBUS_OUT": {
+        "message": "F.BUS"
+    },    
     "portsFunction_CUSTOM": {
         "message": "Custom"
     },
