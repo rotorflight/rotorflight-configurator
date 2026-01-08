@@ -34,7 +34,7 @@ function getProportional(channel, deadband, center, range) {
   }
 
   const deflection = raw - center;
-  range = range - deadband;
+  // range = range - deadband;
 
   const percent = applyDeadband(deflection, deadband) / (range - deadband);
 

@@ -1,6 +1,3 @@
-import semver from "semver";
-
-import { API_VERSION_12_8, API_VERSION_12_9 } from "./configurator.svelte.js";
 import { Features } from "./features.svelte.js";
 
 class FlightController {
@@ -629,7 +626,7 @@ class FlightController {
       gov_fallback_drop:              0,
       gov_spooldown_time:             0,
       gov_throttle_type:              0,
-      gov_throttle_curve:             [],
+      gov_bypass_throttle:            [],
     };
 
     this.SENSOR_CONFIG = {

@@ -294,7 +294,7 @@
           <Switch id="gov-flag-PID_SPOOLUP" bind:checked={flags.PID_SPOOLUP} />
         </Field>
       {/if}
-      {#if FC.GOVERNOR.gov_mode === 2}
+      {#if FC.GOVERNOR.gov_mode === 3}
         <Field id="gov-flag-VOLTAGE_COMP" label="govFlag_VOLTAGE_COMP">
           {#snippet tooltip()}
             <Tooltip help="govFlagHelp_VOLTAGE_COMP" />

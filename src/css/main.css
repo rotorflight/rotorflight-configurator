@@ -1376,6 +1376,18 @@ li.active .ic_motor {
     background-image: url(/images/icons/cf_icon_motor_white.svg);
 }
 
+.ic_governor {
+    background-image: url(/images/icons/cf_icon_governor_grey.svg);
+}
+
+.ic_governor:hover {
+    background-image: url(/images/icons/cf_icon_governor_white.svg);
+}
+
+li.active .ic_governor {
+    background-image: url(/images/icons/cf_icon_governor_white.svg);
+}
+
 .ic_welcome {
     background-image: url(/images/icons/cf_icon_welcome_grey.svg);
 }

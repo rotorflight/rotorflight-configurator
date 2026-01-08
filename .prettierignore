@@ -22,6 +22,7 @@
 !/src/js/remote_command.svelte.js
 !/src/js/setpoint.svelte.js
 !/src/js/tabs/failsafe.js
+!/src/js/tabs/governor.js
 !/src/js/tabs/gyro.js
 !/src/js/tabs/motors.js
 !/src/js/tabs/presets.js

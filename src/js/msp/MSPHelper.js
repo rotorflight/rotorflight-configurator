@@ -1232,7 +1232,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     for (let i = 0; i < 9; i++) {
                         throttleCurve.push(data.readU8());
                     }
-                    FC.GOVERNOR.gov_throttle_curve = throttleCurve;
+                    FC.GOVERNOR.gov_bypass_throttle = throttleCurve;
                 }
                 break;
             }
@@ -2198,7 +2198,7 @@ MspHelper.prototype.crunch = function(code) {
                     .push8(FC.GOVERNOR.gov_idle_throttle)
                     .push8(FC.GOVERNOR.gov_auto_throttle);
 
-                for (const point of FC.GOVERNOR.gov_throttle_curve) {
+                for (const point of FC.GOVERNOR.gov_bypass_throttle) {
                     buffer.push8(point);
                 }
             }
