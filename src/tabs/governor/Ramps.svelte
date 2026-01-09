@@ -48,7 +48,7 @@
             />
           {/snippet}
           <div class="ramp-container">
-            {#if is_12_9}
+            {#if is_12_9 && fields.gov_startup_time > 0}
               <div>
                 {(100 / fields.gov_startup_time).toFixed(1)} %/s
               </div>
@@ -75,7 +75,7 @@
         />
       {/snippet}
       <div class="ramp-container">
-        {#if is_12_9}
+        {#if is_12_9 && fields.gov_spoolup_time > 0}
           <div>
             {(100 / fields.gov_spoolup_time).toFixed(1)} %/s
           </div>
@@ -100,7 +100,7 @@
         />
       {/snippet}
       <div class="ramp-container">
-        {#if is_12_9}
+        {#if is_12_9 && fields.gov_spooldown_time > 0}
           <div>
             {(100 / fields.gov_spooldown_time).toFixed(1)} %/s
           </div>
@@ -129,7 +129,7 @@
       {/snippet}
 
       <div class="ramp-container">
-        {#if is_12_9}
+        {#if is_12_9 && fields.gov_tracking_time > 0}
           <div>
             {(100 / fields.gov_tracking_time).toFixed(1)} %/s
           </div>
@@ -158,7 +158,7 @@
         />
       {/snippet}
       <div class="ramp-container">
-        {#if is_12_9}
+        {#if is_12_9 && fields.gov_recovery_time > 0}
           <div>
             {(100 / fields.gov_recovery_time).toFixed(1)} %/s
           </div>
