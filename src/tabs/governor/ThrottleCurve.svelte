@@ -2,6 +2,7 @@
   import { onMount, onDestroy } from "svelte";
 
   import { FC } from "@/js/fc.svelte.js";
+  import { i18n } from "@/js/i18n.js";
 
   import InfoNote from "@/components/notes/InfoNote.svelte";
   import Section from "@/components/Section.svelte";
@@ -214,6 +215,27 @@
           stroke-dasharray="2 2"
         />
 
+        {#if FC.GOVERNOR.gov_idle_throttle > 0}
+          {@const h = (FC.GOVERNOR.gov_idle_throttle / 1000) * height}
+          <rect
+            class="idle-indicator"
+            x="0"
+            y={height + padding - h}
+            width={width + padding * 2}
+            height={padding + h}
+          />
+          <text
+            class="idle-indicator-text"
+            x={width + padding * 2 - 2}
+            y={height + padding - h - 2}
+            text-anchor="end"
+            font-size="10"
+          >
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+            {@html $i18n.t("govIdleThrottle")}
+          </text>
+        {/if}
+
         <line
           class="crosshair"
           x1={padding + width * inputValue}
@@ -343,6 +365,14 @@
     display: flex;
     flex-wrap: nowrap;
     text-wrap: nowrap;
+  }
+
+  .idle-indicator {
+    fill: oklch(95% 90% 80deg / 0.5);
+  }
+
+  .idle-indicator-text {
+    fill: var(--color-text-soft);
   }
 
   svg {
