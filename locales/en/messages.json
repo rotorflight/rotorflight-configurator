@@ -3232,7 +3232,7 @@
         "message": "Pin Swap"
     },
     "motorsEscTelemetryPinswapHelp": {
-        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
+        "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
     "motorsUnsyncedPwm": {
         "message": "Unsyncronised ESC update"
@@ -3288,11 +3288,14 @@
     "motorsThrottleEndpoints": {
         "message": "Throttle Range"
     },
+    "motorsThrottleEndpointsWarning": {
+        "message": "Incorrectly configuring these parameters can cause the motor to run even when the throttle is off and the flight controller is disarmed."
+    },
     "motorsThrottleEndpointRealtime": {
-        "message": "Realtime Adjustment"
+        "message": "Live Update"
     },
     "motorsThrottleEndpointRealtimeHelp": {
-        "message": "<p>Apply changes to throttle endpoints in realtime. Use with throttle override to adjust throttle servo endpoints.</p><p><strong>Note:</strong> Only use with servo driven throttles.</p>"
+        "message": "<p>Apply changes to the throttle range immediately.</p><p>Throttle Override can be set to 0%, 1%, and 100% to view changes to Motor Off, Low Throttle and High Throttle respectively.</p>"
     },
     "motorsThrottleMinimum": {
         "message": "Low Throttle"
