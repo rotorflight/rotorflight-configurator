@@ -3396,6 +3396,9 @@
     "govSectionGeneral": {
         "message": "General"
     },
+    "govSectionThrottle": {
+        "message": "Throttle"
+    },
     "govSectionThrottleCurve": {
         "message": "Throttle Curve"
     },
@@ -3469,7 +3472,7 @@
         "message": "Spooldown Time"
     },
     "govSpooldownTimeHelp": {
-        "message": "Rate of throttle change during spooldown, defined as the duration from 0% to 100% throttle."
+        "message": "Rate of throttle change during spooldown, defined as the duration from 100% to 0% throttle."
     },
     "govSpoolupMinThrottle": {
         "message": "Spoolup Minimum Throttle"
@@ -3505,7 +3508,7 @@
         "message": "Autorotation Timeout"
     },
     "govAutoTimeoutHelp": {
-        "message": "Timeout for exiting autorotation and moving to normal IDLE."
+        "message": "<p>The maximum duration autorotation mode may remain engaged.</p><p>When this timeout expires, the governor switches to idle mode. Bailout is no longer available, and starting the motor will result in a normal spoolup.</p>"
     },
     "govAutoMinEntryTime": {
         "message": "Autorotation Minimum Flight Time"
@@ -3523,7 +3526,7 @@
         "message": "Throttle Hold Timeout"
     },
     "govThrottleHoldTimeoutHelp": {
-        "message": "The timeout for <code>THROTTLE_HOLD</code> state."
+        "message": "<p>The grace period after activating throttle hold while the governor is active.</p><p>If throttle input is restored within this period, a recovery spoolup will be performed.</p><p>This safeguards against accidental throttle cut activation.</p>"
     },
     "govLostHeadspeedTimeout": {
         "message": "Headspeed Signal Timeout"
@@ -3586,13 +3589,13 @@
         "message": "Idle Throttle"
     },
     "govIdleThrottleHelp": {
-        "message": "The minimum output throttle in the IDLE state."
+        "message": "<p>The minimum throttle output while the governor <strong><em>is not</em></strong> actively controlling the headspeed.</p><p></p>"
     },
     "govAutoThrottle": {
         "message": "Auto Throttle"
     },
     "govAutoThrottleHelp": {
-        "message": "Autoration is enabled when the input throttle is above this value and below Handover Throttle. Moving the input throttle below this value will"
+        "message": "<p>Auto Throttle has two affects.</p><p>1. The minimum throttle output while autorotation mode is active.</p><p>2. Autoration mode is activated when the input throttle is reduced below Handover Throttle, but above this value, while the governor is active.</p>"
     },
     "govFallbackDrop": {
         "message": "Throttle Fallback Drop"

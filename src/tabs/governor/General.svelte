@@ -226,7 +226,7 @@
 
   {#if enabled}
     <div transition:slide>
-      <SubSection label="Throttle">
+      <SubSection label="govSectionThrottle">
         {#if is_12_9}
           <Field id="gov-throttle-type" label="govThrottleType">
             {#snippet tooltip()}
