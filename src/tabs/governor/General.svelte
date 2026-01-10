@@ -41,7 +41,6 @@
 
   const fields = {};
   for (const field of [
-    "gov_autorotation_timeout",
     "gov_autorotation_min_entry_time",
     "gov_zero_throttle_timeout",
     "gov_lost_headspeed_timeout",
@@ -169,7 +168,7 @@
           id="gov-autorotation-timeout"
           min="0"
           max="250"
-          bind:value={fields.gov_autorotation_timeout}
+          bind:value={FC.GOVERNOR.gov_autorotation_timeout}
         />
       </Field>
       <Field
