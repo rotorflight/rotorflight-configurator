@@ -289,14 +289,18 @@
         {/each}
       </svg>
       <div class="controls">
-        <select
-          value={numPoints}
-          onchange={(e) => setNumPoints(Number(e.target.value))}
-        >
-          {#each POINT_OPTS as numPoints}
-            <option value={numPoints}>{numPoints}</option>
-          {/each}
-        </select>
+        <div class="points-control">
+          <label for="points-control">Points</label>
+          <select
+            id="points-control"
+            value={numPoints}
+            onchange={(e) => setNumPoints(Number(e.target.value))}
+          >
+            {#each POINT_OPTS as numPoints}
+              <option value={numPoints}>{numPoints}</option>
+            {/each}
+          </select>
+        </div>
 
         <div class="current-value">
           <span>Throttle: </span>

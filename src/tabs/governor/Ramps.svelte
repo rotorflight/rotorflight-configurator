@@ -89,31 +89,33 @@
         />
       </div>
     </Field>
-    <Field id="gov-spooldown-time" label="govSpooldownTime" unit="s">
-      {#snippet tooltip()}
-        <Tooltip
-          help="govSpooldownTimeHelp"
-          attrs={[
-            { name: "genericDefault", value: "3s" },
-            { name: "genericRange", value: "0s - 60s" },
-          ]}
-        />
-      {/snippet}
-      <div class="ramp-container">
-        {#if is_12_9 && fields.gov_spooldown_time > 0}
-          <div>
-            {(100 / fields.gov_spooldown_time).toFixed(1)} %/s
-          </div>
-        {/if}
-        <NumberInput
-          id="gov-spooldown-time"
-          min="0"
-          max="60"
-          step="0.1"
-          bind:value={fields.gov_spooldown_time}
-        />
-      </div>
-    </Field>
+    {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+      <Field id="gov-spooldown-time" label="govSpooldownTime" unit="s">
+        {#snippet tooltip()}
+          <Tooltip
+            help="govSpooldownTimeHelp"
+            attrs={[
+              { name: "genericDefault", value: "3s" },
+              { name: "genericRange", value: "0s - 60s" },
+            ]}
+          />
+        {/snippet}
+        <div class="ramp-container">
+          {#if is_12_9 && fields.gov_spooldown_time > 0}
+            <div>
+              {(100 / fields.gov_spooldown_time).toFixed(1)} %/s
+            </div>
+          {/if}
+          <NumberInput
+            id="gov-spooldown-time"
+            min="0"
+            max="60"
+            step="0.1"
+            bind:value={fields.gov_spooldown_time}
+          />
+        </div>
+      </Field>
+    {/if}
     <Field id="gov-tracking-time" label="govTrackingTime" unit="s">
       {#snippet tooltip()}
         <Tooltip

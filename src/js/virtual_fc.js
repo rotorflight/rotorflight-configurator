@@ -145,7 +145,7 @@ export function applyVirtualConfig() {
     gov_spoolup_time: 100,
     gov_tracking_time: 20,
     gov_recovery_time: 20,
-    gov_autorotation_timeout: 0,
+    gov_autorotation_timeout: 15,
     gov_autorotation_bailout_time: 0,
     gov_autorotation_min_entry_time: 50,
     gov_rpm_filter: 10,

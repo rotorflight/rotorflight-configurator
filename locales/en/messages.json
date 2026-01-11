@@ -3289,7 +3289,7 @@
         "message": "Throttle Range"
     },
     "motorsThrottleEndpointsWarning": {
-        "message": "Incorrectly configuring these parameters can cause the motor to run even when the throttle is off and the flight controller is disarmed."
+        "message": "Incorrectly configuring the throttle range parameters can cause the motor to run even when the throttle is off and the flight controller is disarmed."
     },
     "motorsThrottleEndpointRealtime": {
         "message": "Live Update"
@@ -3400,7 +3400,7 @@
         "message": "Throttle"
     },
     "govSectionThrottleCurve": {
-        "message": "Throttle Curve"
+        "message": "Bypass Throttle Curve"
     },
     "govSectionRampTime": {
         "message": "Motor Ramp"
@@ -3424,7 +3424,7 @@
         "message": "<p><strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.</p><p><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.</p><p><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.</p><p><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).</p><p><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.</p>"
     },
     "govModeHelp2": {
-        "message": "<p><strong>OFF:</strong> The governor is disabled. The throttle input is used as the throttle output.</p><p><strong>LIMIT:</strong></p><p><strong>DIRECT:</strong> Rotorflight handles slow spoolup and bailout recovery. Headspeed stabilisation is left to an external governor or throttle curve.</p><p><strong>ELECTRIC:</strong> Governor suitable for electric motors.</p><p><strong>NITRO:</strong> Governor suitable for internal combustion engines.</p>"
+        "message": "<p><strong>OFF:</strong> The governor is disabled. The throttle input is sent directly to the motor.</p><p><strong>LIMIT:</strong> The governor is disabled. Global <em>Idle Throttle</em> and profile <em>Minimum Throttle</em> and <em>Maximum Throttle</em> limits are applied before sending the throttle input to the motor.</p><p><strong>DIRECT:</strong> The governor handles slow spoolup and bailout recovery. Headspeed stabilisation is left to an external governor or throttle curve.</p><p><strong>ELECTRIC:</strong> Complete governor suitable for electric motors.</p><p><strong>NITRO:</strong> Complete governor suitable for internal combustion engines.</p>"
     },
     "govThrottleType": {
         "message": "Throttle Type"
@@ -3448,7 +3448,10 @@
         "message": "Handover Throttle"
     },
     "govHandoverThrottleHelp": {
-        "message": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level."
+        "message": "<p>The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>"
+    },
+    "govHandoverThrottleHelp2": {
+        "message": "<p>While throttle input is above this value, motor control is handed over to the governor.</p><p>While throttle input is below this value, it is sent directly to the motor.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>"
     },
     "govStartupTime": {
         "message": "Startup Time"
@@ -3478,7 +3481,7 @@
         "message": "Spoolup Minimum Throttle"
     },
     "govSpoolupMinThrottleHelp": {
-        "message": "Minimum throttle to be used during spoolup. For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%."
+        "message": "<p>Minimum throttle output during spoolup.</p><p>For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%.</p>"
     },
     "govTrackingTime": {
         "message": "Tracking Time"
@@ -3508,7 +3511,7 @@
         "message": "Autorotation Timeout"
     },
     "govAutoTimeoutHelp": {
-        "message": "<p>The maximum duration autorotation mode may remain engaged.</p><p>When this timeout expires, the governor switches to idle mode. Bailout is no longer available, and starting the motor will result in a normal spoolup.</p>"
+        "message": "<p>The maximum duration autorotation mode may remain engaged.</p><p>When this timeout expires, bailout is no longer available, and starting the motor will result in a normal spoolup.</p><p><strong>Note:</strong> This field must be above zero to enable bailout.</p>"
     },
     "govAutoMinEntryTime": {
         "message": "Autorotation Minimum Flight Time"
@@ -3577,13 +3580,13 @@
         "message": "Maximum Throttle"
     },
     "govMaxThrottleHelp": {
-        "message": "Maximum output throttle the governor is allowed to use."
+        "message": "The maximum throttle output the governor may use."
     },
     "govMinThrottle": {
         "message": "Minimum Throttle"
     },
     "govMinThrottleHelp": {
-        "message": "Minimum output throttle the governor is allowed to use."
+        "message": "The minimum throttle output the governor may use."
     },
     "govIdleThrottle": {
         "message": "Idle Throttle"

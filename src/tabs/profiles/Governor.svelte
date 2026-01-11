@@ -2,7 +2,6 @@
   import diff from "microdiff";
   import semver from "semver";
   import { onMount } from "svelte";
-  import { slide } from "svelte/transition";
 
   import { FC } from "@/js/fc.svelte.js";
 
@@ -13,14 +12,14 @@
   import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
 
+  import govState from "@/tabs/governor/state.svelte.js";
+
   const GOVERNOR_FLAGS = {
     FALLBACK_PRECOMP: 2,
     VOLTAGE_COMP: 3,
     PID_SPOOLUP: 4,
     DYN_MIN_THROTTLE: 6,
   };
-
-  let govActive = $derived(FC.GOVERNOR.gov_mode > 1);
 
   const flags = {};
   for (const [name, index] of Object.entries(GOVERNOR_FLAGS)) {
@@ -60,7 +59,7 @@
 
 <Section label="govProfile">
   <SubSection>
-    {#if govActive}
+    {#if govState.govHeadspeed}
       <Field id="gov-headspeed" label="govHeadspeed" unit="rpm">
         {#snippet tooltip()}
           <Tooltip
@@ -77,43 +76,47 @@
         />
       </Field>
     {/if}
-    <Field id="gov-max-throttle" label="govMaxThrottle" unit="%">
-      {#snippet tooltip()}
-        <Tooltip
-          help="govMaxThrottleHelp"
-          attrs={[
-            { name: "genericDefault", value: "100%" },
-            { name: "genericRange", value: "0% - 100%" },
-          ]}
-        />
-      {/snippet}
-      <NumberInput
-        id="gov-max-throttle"
-        min="0"
-        max="100"
-        bind:value={FC.GOVERNOR.gov_max_throttle}
-      />
-    </Field>
-    {#if govActive && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)}
-      <Field id="gov-min-throttle" label="govMinThrottle" unit="%">
+
+    {#if govState.govLimits}
+      {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)}
+        <Field id="gov-min-throttle" label="govMinThrottle" unit="%">
+          {#snippet tooltip()}
+            <Tooltip
+              help="govMinThrottleHelp"
+              attrs={[
+                { name: "genericDefault", value: "10%" },
+                { name: "genericRange", value: "0% - 100%" },
+              ]}
+            />
+          {/snippet}
+          <NumberInput
+            id="gov-min-throttle"
+            min="0"
+            max="100"
+            bind:value={FC.GOVERNOR.gov_min_throttle}
+          />
+        </Field>
+      {/if}
+      <Field id="gov-max-throttle" label="govMaxThrottle" unit="%">
         {#snippet tooltip()}
           <Tooltip
-            help="govMinThrottleHelp"
+            help="govMaxThrottleHelp"
             attrs={[
-              { name: "genericDefault", value: "10%" },
+              { name: "genericDefault", value: "100%" },
               { name: "genericRange", value: "0% - 100%" },
             ]}
           />
         {/snippet}
         <NumberInput
-          id="gov-min-throttle"
+          id="gov-max-throttle"
           min="0"
           max="100"
-          bind:value={FC.GOVERNOR.gov_min_throttle}
+          bind:value={FC.GOVERNOR.gov_max_throttle}
         />
       </Field>
     {/if}
-    {#if govActive && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+
+    {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) && govState.govHeadspeed}
       <Field id="gov-fallback-drop" label="govFallbackDrop" unit="%">
         {#snippet tooltip()}
           <Tooltip
@@ -133,7 +136,7 @@
       </Field>
     {/if}
   </SubSection>
-  {#if govActive}
+  {#if govState.govHeadspeed}
     <SubSection label="profileGovPIDSection">
       <Field id="gov-master-gain" label="govMasterGain">
         {#snippet tooltip()}
@@ -275,26 +278,24 @@
       </Field>
     </SubSection>
   {/if}
-  {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+  {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) && govState.govHeadspeed}
     <SubSection label="profileGovFlagsSection">
-      {#if govActive}
-        <Field id="gov-flag-FALLBACK_PRECOMP" label="govFlag_FALLBACK_PRECOMP">
-          {#snippet tooltip()}
-            <Tooltip help="govFlagHelp_FALLBACK_PRECOMP" />
-          {/snippet}
-          <Switch
-            id="gov-flag-FALLBACK_PRECOMP"
-            bind:checked={flags.FALLBACK_PRECOMP}
-          />
-        </Field>
-        <Field id="gov-flag-PID_SPOOLUP" label="govFlag_PID_SPOOLUP">
-          {#snippet tooltip()}
-            <Tooltip help="govFlagHelp_PID_SPOOLUP" />
-          {/snippet}
-          <Switch id="gov-flag-PID_SPOOLUP" bind:checked={flags.PID_SPOOLUP} />
-        </Field>
-      {/if}
-      {#if FC.GOVERNOR.gov_mode === 3}
+      <Field id="gov-flag-FALLBACK_PRECOMP" label="govFlag_FALLBACK_PRECOMP">
+        {#snippet tooltip()}
+          <Tooltip help="govFlagHelp_FALLBACK_PRECOMP" />
+        {/snippet}
+        <Switch
+          id="gov-flag-FALLBACK_PRECOMP"
+          bind:checked={flags.FALLBACK_PRECOMP}
+        />
+      </Field>
+      <Field id="gov-flag-PID_SPOOLUP" label="govFlag_PID_SPOOLUP">
+        {#snippet tooltip()}
+          <Tooltip help="govFlagHelp_PID_SPOOLUP" />
+        {/snippet}
+        <Switch id="gov-flag-PID_SPOOLUP" bind:checked={flags.PID_SPOOLUP} />
+      </Field>
+      {#if govState.govMode === "ELECTRIC"}
         <Field id="gov-flag-VOLTAGE_COMP" label="govFlag_VOLTAGE_COMP">
           {#snippet tooltip()}
             <Tooltip help="govFlagHelp_VOLTAGE_COMP" />

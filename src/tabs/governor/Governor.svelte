@@ -17,6 +17,8 @@
   import Ramps from "./Ramps.svelte";
   import ThrottleCurve from "./ThrottleCurve.svelte";
 
+  import govState from "./state.svelte.js";
+
   let loading = $state(true);
   let initialState;
 
@@ -100,17 +102,21 @@
   <div class="content">
     <div>
       <General />
-      <Ramps />
-      {#if CONFIGURATOR.expertMode}
+      {#if govState.govRamps}
         <div transition:slide>
-          <Filters />
+          <Ramps />
         </div>
       {/if}
     </div>
     <div>
-      {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)}
+      {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) && govState.enabled}
         <div transition:slide>
           <ThrottleCurve />
+        </div>
+      {/if}
+      {#if CONFIGURATOR.expertMode}
+        <div transition:slide>
+          <Filters />
         </div>
       {/if}
     </div>

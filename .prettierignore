@@ -28,6 +28,7 @@
 !/src/js/tabs/presets.js
 !/src/js/tabs/receiver.js
 !/src/js/virtual_fc.js
+!/src/tabs/governor/**/*.js
 !/src/tabs/gyro/filter_config.js
 !/src/tabs/motors/**/*.js
 !/src/tabs/presets/**/*
