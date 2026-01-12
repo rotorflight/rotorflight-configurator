@@ -453,7 +453,10 @@ tab.initialize = function (callback) {
 
             for (const func of portFunctions) {
                 const funcName = i18n.getMessage('portsFunction_' + func.name);
-                if (func.name !== 'SBUS_OUT' || semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+                    if (
+                        (func.name !== 'SBUS_OUT' || semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) &&
+                        (func.name !== 'FBUS_OUT' || semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9))
+                    ) {
                     funcElement.append(`<option value="${func.id}">${funcName}</option>`);
                 }
             }
