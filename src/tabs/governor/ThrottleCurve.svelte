@@ -198,6 +198,17 @@
           width={width + padding * 2}
           height={height + padding * 2}
         />
+        <rect
+          class="gridline"
+          x={padding}
+          y={padding}
+          {width}
+          {height}
+          fill="transparent"
+          rx="4"
+          ry="4"
+          stroke-dasharray="2 2"
+        />
         <line
           class="gridline"
           x1={padding}
@@ -219,10 +230,10 @@
           {@const h = (FC.GOVERNOR.gov_idle_throttle / 1000) * height}
           <rect
             class="idle-indicator"
-            x="0"
+            x={padding}
             y={height + padding - h}
-            width={width + padding * 2}
-            height={padding + h}
+            {width}
+            height={h}
           />
           <text
             class="idle-indicator-text"
@@ -296,7 +307,7 @@
             value={numPoints}
             onchange={(e) => setNumPoints(Number(e.target.value))}
           >
-            {#each POINT_OPTS as numPoints}
+            {#each POINT_OPTS as numPoints (numPoints)}
               <option value={numPoints}>{numPoints}</option>
             {/each}
           </select>
@@ -340,7 +351,7 @@
   }
 
   .crosshair {
-    stroke: #ddd;
+    stroke: #d66;
   }
 
   .controls {

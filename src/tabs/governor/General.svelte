@@ -15,18 +15,9 @@
   import SubSection from "@/components/SubSection.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
 
-  import NormalThrottlePreview from "./NormalThrottlePreview.svelte";
-  import SwitchThrottlePreview from "./SwitchThrottlePreview.svelte";
-  import FunctionThrottlePreview from "./FunctionThrottlePreview.svelte";
-  import DirectThrottlePreview from "./DirectThrottlePreview.svelte";
+  import ThrottlePreview from "./ThrottlePreview.svelte";
 
-  import govState from "./state.svelte.js";
-
-  const GOVERNOR_THROTTLE = {
-    NORMAL: 0,
-    SWITCH: 1,
-    FUNCTION: 2,
-  };
+  import govState, { GOV_THROTTLE_TYPE } from "./state.svelte.js";
 
   let is_12_9 = $derived(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9));
 
@@ -245,71 +236,69 @@
     {/if}
   </SubSection>
 
-  {#if is_12_9 && govState.enabled}
-    <div transition:slide>
-      <SubSection label="govSectionThrottle">
-        {#if FC.GOVERNOR.gov_mode > 2}
-          <div transition:slide>
-            <Field id="gov-throttle-type" label="govThrottleType">
-              {#snippet tooltip()}
-                <Tooltip help="govThrottleTypeHelp" />
-              {/snippet}
-              <select
-                id="gov-throttle-type"
-                bind:value={FC.GOVERNOR.gov_throttle_type}
-              >
-                {#each Object.entries(GOVERNOR_THROTTLE) as [mode, index] (mode)}
-                  <option value={index}>{mode}</option>
-                {/each}
-              </select>
-            </Field>
-          </div>
-        {/if}
+  {#if is_12_9}
+    <SubSection label="govSectionThrottle">
+      {#if govState.enabled}
+        <div transition:slide>
+          <Field id="gov-throttle-type" label="govThrottleType">
+            {#snippet tooltip()}
+              <Tooltip help="govThrottleTypeHelp" />
+            {/snippet}
+            <select
+              id="gov-throttle-type"
+              bind:value={FC.GOVERNOR.gov_throttle_type}
+            >
+              {#each Object.entries(GOV_THROTTLE_TYPE) as [mode, index] (mode)}
+                <option value={index}>{mode}</option>
+              {/each}
+            </select>
+          </Field>
+        </div>
 
-        <Field id="gov-idle-throttle" label="govIdleThrottle" unit="%">
-          {#snippet tooltip()}
-            <Tooltip
-              help="govIdleThrottleHelp"
-              attrs={[
-                { name: "genericDefault", value: "0%" },
-                { name: "genericRange", value: "0% - 25%" },
-              ]}
-            />
-          {/snippet}
-          <NumberInput
-            id="gov-idle-throttle"
-            min="0"
-            max="25"
-            step="0.1"
-            bind:value={fields.gov_idle_throttle}
-          />
-        </Field>
-
-        {#if FC.GOVERNOR.gov_mode > 2}
-          <div transition:slide>
-            <Field id="gov-auto-throttle" label="govAutoThrottle" unit="%">
-              {#snippet tooltip()}
-                <Tooltip
-                  help="govAutoThrottleHelp"
-                  attrs={[
-                    { name: "genericDefault", value: "0%" },
-                    { name: "genericRange", value: "0% - 25%" },
-                  ]}
-                />
-              {/snippet}
-              <NumberInput
-                id="gov-auto-throttle"
-                min="0"
-                max="25"
-                step="0.1"
-                bind:value={fields.gov_auto_throttle}
+        <div transition:slide>
+          <Field id="gov-idle-throttle" label="govIdleThrottle" unit="%">
+            {#snippet tooltip()}
+              <Tooltip
+                help="govIdleThrottleHelp"
+                attrs={[
+                  { name: "genericDefault", value: "0%" },
+                  { name: "genericRange", value: "0% - 25%" },
+                ]}
               />
-            </Field>
-          </div>
-        {/if}
+            {/snippet}
+            <NumberInput
+              id="gov-idle-throttle"
+              min="0"
+              max="25"
+              step="0.1"
+              bind:value={fields.gov_idle_throttle}
+            />
+          </Field>
+        </div>
 
-        {#if govState.govRamps}
-          <div transition:slide>
+        <div transition:slide>
+          <Field id="gov-auto-throttle" label="govAutoThrottle" unit="%">
+            {#snippet tooltip()}
+              <Tooltip
+                help="govAutoThrottleHelp"
+                attrs={[
+                  { name: "genericDefault", value: "0%" },
+                  { name: "genericRange", value: "0% - 25%" },
+                ]}
+              />
+            {/snippet}
+            <NumberInput
+              id="gov-auto-throttle"
+              min="0"
+              max="25"
+              step="0.1"
+              bind:value={fields.gov_auto_throttle}
+            />
+          </Field>
+        </div>
+
+        {#if FC.GOVERNOR.gov_mode > 1}
+          <div transition:slide|global>
             <Field
               id="gov-handover-throttle"
               label="govHandoverThrottle"
@@ -333,17 +322,12 @@
             </Field>
           </div>
         {/if}
-        {#if !govState.govRamps}
-          <DirectThrottlePreview />
-        {:else if FC.GOVERNOR.gov_throttle_type === 0 || FC.GOVERNOR.gov_mode === 2}
-          <NormalThrottlePreview />
-        {:else if FC.GOVERNOR.gov_throttle_type === 1}
-          <SwitchThrottlePreview />
-        {:else if FC.GOVERNOR.gov_throttle_type === 2}
-          <FunctionThrottlePreview />
-        {/if}
-      </SubSection>
-    </div>
+      {/if}
+
+      <div>
+        <ThrottlePreview />
+      </div>
+    </SubSection>
   {/if}
 </Section>
 

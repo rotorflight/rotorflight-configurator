@@ -114,7 +114,7 @@
           <ThrottleCurve />
         </div>
       {/if}
-      {#if CONFIGURATOR.expertMode}
+      {#if govState.enabled && CONFIGURATOR.expertMode}
         <div transition:slide>
           <Filters />
         </div>

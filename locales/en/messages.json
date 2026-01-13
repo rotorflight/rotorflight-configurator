@@ -3430,7 +3430,7 @@
         "message": "Throttle Type"
     },
     "govThrottleTypeHelp": {
-        "message": "<p><strong>NORMAL:</strong> Normal throttle channel </p><p><strong>SWITCH:</strong> Throttle channel has two positions (two-way switch) </p><p><strong>FUNCTION:</strong> Governor</p>"
+        "message": "<p><strong>NORMAL:</strong> The throttle input is directly controlling the motor. Once the target headspeed is reached, the governor takes over until the throttle input is reduced below the handover level.</p><p><strong>SWITCH:</strong> While the throttle input is below handover, it directly controls motor output. While above handover, the governor engages and the throttle input is used to adjust the headspeed target.</p><p>SWITCH can only be used with ELECTRIC and NITRO governor mode.</p><p><strong>FUNCTION:</strong> The throttle input is used to select each governor mode.</p>"
     },
     "govIdleCollective": {
         "message": "Collective ➜ Idle Throttle"
@@ -3511,7 +3511,7 @@
         "message": "Autorotation Timeout"
     },
     "govAutoTimeoutHelp": {
-        "message": "<p>The maximum duration autorotation mode may remain engaged.</p><p>When this timeout expires, bailout is no longer available, and starting the motor will result in a normal spoolup.</p><p><strong>Note:</strong> This field must be above zero to enable bailout.</p>"
+        "message": "<p>The maximum duration autorotation mode may remain engaged.</p><p>When this timeout expires, bailout is no longer available, and starting the motor will result in a normal spoolup.</p><p><strong>Note:</strong> This field must be above zero to enable autorotation mode.</p>"
     },
     "govAutoMinEntryTime": {
         "message": "Autorotation Minimum Flight Time"
@@ -3598,7 +3598,7 @@
         "message": "Auto Throttle"
     },
     "govAutoThrottleHelp": {
-        "message": "<p>Auto Throttle has two affects.</p><p>1. The minimum throttle output while autorotation mode is active.</p><p>2. Autoration mode is activated when the input throttle is reduced below Handover Throttle, but above this value, while the governor is active.</p>"
+        "message": "<p>When using NORMAL or SWITCH throttle type, moving the throttle input below this value will cancel autorotation mode, preventing bailout.</p><p>For FUNCTION throttle type, this is the throttle output in autorotation mode.</p>"
     },
     "govFallbackDrop": {
         "message": "Throttle Fallback Drop"

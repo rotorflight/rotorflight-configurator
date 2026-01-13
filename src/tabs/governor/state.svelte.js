@@ -35,6 +35,16 @@ class State {
   });
 
   govLimits = $derived(this.enabled);
+
+  govAutorotation = $derived(
+    this.is_12_9 && this.enabled && FC.GOVERNOR.gov_mode > 1,
+  );
 }
 
 export default new State();
+
+export const GOV_THROTTLE_TYPE = {
+  NORMAL: 0,
+  SWITCH: 1,
+  FUNCTION: 2,
+};
