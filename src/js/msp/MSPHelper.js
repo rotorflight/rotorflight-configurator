@@ -862,6 +862,14 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             }
 
+            case MSPCodes.MSP_FLIGHT_STATS: {
+                FC.FLIGHT_STATS.stats_total_flights = data.readU32();
+                FC.FLIGHT_STATS.stats_total_time_s = data.readU32();
+                FC.FLIGHT_STATS.stats_total_dist_m = data.readU32();
+                FC.FLIGHT_STATS.stats_min_armed_time_s = data.readU8();
+                break;
+            }
+
             case MSPCodes.MSP_SET_CHANNEL_FORWARDING: {
                 console.log('Channel forwarding saved');
                 break;
@@ -2230,6 +2238,14 @@ MspHelper.prototype.crunch = function(code) {
             for (let i = 0; i<FC.CONFIG.name.length && i<MSP_BUFFER_SIZE; i++) {
                 buffer.push8(FC.CONFIG.name.charCodeAt(i));
             }
+            break;
+        }
+
+        case MSPCodes.MSP_SET_FLIGHT_STATS: {
+            buffer.push32(FC.FLIGHT_STATS.stats_total_flights)
+                  .push32(FC.FLIGHT_STATS.stats_total_time_s)
+                  .push32(FC.FLIGHT_STATS.stats_total_dist_m)
+                  .push8(FC.FLIGHT_STATS.stats_min_armed_time_s);
             break;
         }
 
