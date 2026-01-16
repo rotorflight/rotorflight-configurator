@@ -3726,6 +3726,12 @@
     "govThrottleCurveNote": {
         "message": "This throttle curve is only used while governor bypass is active."
     },
+    "govThrottleCurveNumPoints": {
+        "message": "Points"
+    },
+    "govThrottleCurveCurrentValue": {
+        "message": "Throttle:"
+    },
     "sensorsInfo": {
         "message": "Keep in mind that using fast update periods and rendering multiple graphs at the same time is resource heavy and will burn your battery quicker if you use a laptop.<br />We recommend to only render graphs for sensors you are interested in while using reasonable update periods."
     },

@@ -237,7 +237,7 @@
           />
           <text
             class="idle-indicator-text"
-            x={width + padding * 2 - 2}
+            x={width + padding - 2}
             y={height + padding - h - 2}
             text-anchor="end"
             font-size="10"
@@ -265,11 +265,11 @@
 
         {#each { length: numPoints - 1 } as _, i (i)}
           <line
+            class="curve-line"
             x1={getX(i)}
             y1={getY(i)}
             x2={getX(i + 1)}
             y2={getY(i + 1)}
-            stroke="red"
           />
         {/each}
 
@@ -285,7 +285,7 @@
             />
           {/if}
 
-          <circle cx={getX(i)} cy={getY(i)} r="4" fill="red" />
+          <circle class="curve-line" cx={getX(i)} cy={getY(i)} r="4" />
 
           <rect
             x={getX(i) - width / (numPoints - 1) / 2}
@@ -301,7 +301,10 @@
       </svg>
       <div class="controls">
         <div class="points-control">
-          <label for="points-control">Points</label>
+          <label for="points-control">
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+            {@html $i18n.t("govThrottleCurveNumPoints")}
+          </label>
           <select
             id="points-control"
             value={numPoints}
@@ -314,7 +317,10 @@
         </div>
 
         <div class="current-value">
-          <span>Throttle: </span>
+          <span>
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+            {@html $i18n.t("govThrottleCurveCurrentValue")}
+          </span>
           <pre>{(100 * currentY).toFixed(1).padStart(6, " ")}%</pre>
         </div>
 
@@ -338,20 +344,38 @@
     padding: 4px;
   }
 
+  .curve-line {
+    stroke-width: 2;
+
+    :global(html[data-theme="light"]) & {
+      stroke: red;
+      fill: red;
+      filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
+    }
+
+    :global(html[data-theme="dark"]) & {
+      stroke: hsl(0, 70%, 50%);
+      fill: hsl(0, 70%, 50%);
+      filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));
+    }
+  }
+
   .bg {
     fill: var(--color-bg);
   }
 
   .gridline {
     stroke: #888;
-
-    &.active {
-      stroke: red;
-    }
   }
 
   .crosshair {
-    stroke: #d66;
+    :global(html[data-theme="light"]) & {
+      stroke: red;
+    }
+
+    :global(html[data-theme="dark"]) & {
+      stroke: hsl(0, 70%, 50%);
+    }
   }
 
   .controls {
@@ -383,7 +407,13 @@
   }
 
   .idle-indicator {
-    fill: oklch(95% 90% 80deg / 0.5);
+    :global(html[data-theme="light"]) & {
+      fill: hsl(40, 90%, 70%);
+    }
+
+    :global(html[data-theme="dark"]) & {
+      fill: hsl(30, 70%, 35%);
+    }
   }
 
   .idle-indicator-text {

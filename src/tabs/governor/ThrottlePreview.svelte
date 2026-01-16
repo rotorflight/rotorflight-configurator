@@ -146,7 +146,7 @@
     gap: 8px;
     position: relative;
     padding-top: 32px;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
     margin-left: 24px;
     margin-right: 24px;
   }
@@ -171,20 +171,30 @@
   }
 
   .marker {
-    --hue: 300deg;
     position: absolute;
-    bottom: -8px;
-    height: 14px;
+    bottom: -12px;
+    height: 12px;
     width: 2px;
-    background-color: oklch(48% 80% var(--hue));
     border-radius: 1px;
-    box-shadow: 0px 0px 6px oklch(80% 80% var(--hue));
+
+    :global(html[data-theme="light"]) & {
+      --hue: 300deg;
+      background-color: hsl(272.5, 100%, 47.05%);
+      background-color: oklch(48% 80% 300deg);
+      box-shadow: 0px 0px 6px hsl(272.5, 100%, 47.05%);
+      box-shadow: 0px 0px 6px oklch(80% 80% 300deg);
+    }
+
+    :global(html[data-theme="dark"]) & {
+      background-color: hsl(280, 80%, 40%);
+      box-shadow: 0px 0px 6px black;
+    }
   }
 
   .current-text {
     position: absolute;
     color: var(--color-text);
-    bottom: -24px;
+    bottom: -28px;
     transform: translateX(-50%);
   }
 
@@ -195,7 +205,13 @@
     padding-right: 4px;
     padding-bottom: 4px;
 
-    border-right: 2px solid black;
+    :global(html[data-theme="light"]) & {
+      border-right: 2px solid black;
+    }
+
+    :global(html[data-theme="dark"]) & {
+      border-right: 2px solid hsl(0, 0%, 70%);
+    }
   }
 
   .max-throttle {
@@ -205,7 +221,13 @@
     padding-left: 4px;
     padding-bottom: 4px;
 
-    border-left: 2px solid black;
+    :global(html[data-theme="light"]) & {
+      border-left: 2px solid black;
+    }
+
+    :global(html[data-theme="dark"]) & {
+      border-left: 2px solid hsl(0, 0%, 70%);
+    }
   }
 
   .range {
@@ -225,23 +247,61 @@
       white-space: nowrap;
       display: inline-block;
       z-index: 1;
+      color: var(--color-text-soft);
     }
 
     &.active {
-      border-bottom: 2px solid black;
+      :global(html[data-theme="light"]) & {
+        border-bottom: 2px solid black;
+      }
+
+      :global(html[data-theme="dark"]) & {
+        border-bottom: 2px solid hsl(0, 0%, 80%);
+      }
     }
 
     &.red {
-      background-color: oklch(80% 70% 30deg);
+      :global(html[data-theme="light"]) & {
+        background-color: hsl(7.4, 100%, 61.75%);
+        background-color: oklch(80% 70% 30deg);
+      }
+
+      :global(html[data-theme="dark"]) & {
+        background-color: hsl(2, 65%, 35%);
+      }
     }
+
     &.orange {
-      background-color: oklch(80% 70% 80deg);
+      :global(html[data-theme="light"]) & {
+        background-color: hsl(37, 100%, 48.65%);
+        background-color: oklch(80% 70% 80deg);
+      }
+
+      :global(html[data-theme="dark"]) & {
+        background-color: hsl(30, 70%, 40%);
+      }
     }
+
     &.purple {
-      background-color: oklch(80% 70% 280deg);
+      :global(html[data-theme="light"]) & {
+        background-color: hsl(245.3, 100%, 80.2%);
+        background-color: oklch(0.8 0.28 280deg);
+      }
+
+      :global(html[data-theme="dark"]) & {
+        background-color: hsl(258, 38%, 45%);
+      }
     }
+
     &.green {
-      background-color: oklch(80% 70% 125deg);
+      :global(html[data-theme="light"]) & {
+        background-color: hsl(78.6, 100%, 42.35%);
+        background-color: oklch(80% 70% 125deg);
+      }
+
+      :global(html[data-theme="dark"]) & {
+        background-color: hsl(92, 58%, 30%);
+      }
     }
   }
 
