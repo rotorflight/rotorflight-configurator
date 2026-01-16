@@ -297,31 +297,33 @@
           </Field>
         </div>
 
-        {#if FC.GOVERNOR.gov_mode > 1}
-          <div transition:slide|global>
-            <Field
-              id="gov-handover-throttle"
-              label="govHandoverThrottle"
-              unit="%"
-            >
-              {#snippet tooltip()}
-                <Tooltip
-                  help="govHandoverThrottleHelp2"
-                  attrs={[
-                    { name: "genericDefault", value: "20%" },
-                    { name: "genericRange", value: "0% - 100%" },
-                  ]}
-                />
-              {/snippet}
-              <NumberInput
+        <div transition:slide>
+          {#if FC.GOVERNOR.gov_mode > 1}
+            <div transition:slide>
+              <Field
                 id="gov-handover-throttle"
-                min="0"
-                max="100"
-                bind:value={FC.GOVERNOR.gov_handover_throttle}
-              />
-            </Field>
-          </div>
-        {/if}
+                label="govHandoverThrottle"
+                unit="%"
+              >
+                {#snippet tooltip()}
+                  <Tooltip
+                    help="govHandoverThrottleHelp2"
+                    attrs={[
+                      { name: "genericDefault", value: "20%" },
+                      { name: "genericRange", value: "0% - 100%" },
+                    ]}
+                  />
+                {/snippet}
+                <NumberInput
+                  id="gov-handover-throttle"
+                  min="0"
+                  max="100"
+                  bind:value={FC.GOVERNOR.gov_handover_throttle}
+                />
+              </Field>
+            </div>
+          {/if}
+        </div>
       {/if}
 
       <div>
