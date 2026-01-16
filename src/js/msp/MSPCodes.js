@@ -132,10 +132,17 @@ export const MSPCodes = {
     MSP_SET_GOVERNOR_PROFILE:       149,
     MSP_LED_STRIP_SETTINGS:         150,
     MSP_SET_LED_STRIP_SETTINGS:     151,
+    MSP_SBUS_OUTPUT_CONFIG:         152,
+    MSP_SET_SBUS_OUTPUT_CONFIG:     153,
     MSP_RPM_FILTER_V2:              154,
     MSP_SET_RPM_FILTER_V2:          155,
 
     MSP_UID:                        160,
+
+    MSP_GET_FBUS_MASTER_CONFIG:     161,
+    MSP_SET_FBUS_MASTER_CHANNEL:    162,
+    MSP_GET_FBUS_MASTER_CHANNEL:    163,
+
     MSP_GPS_SV_INFO:                164,
 
     MSP_MIXER_INPUTS:               170,

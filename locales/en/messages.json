@@ -28,6 +28,9 @@
     "genericRange": {
         "message": "Range"
     },
+    "genericEdit": {
+        "message": "Edit"
+    },
     "axisROLL": {
         "message": "ROLL",
         "description": "Roll axis in capital letters"
@@ -1313,6 +1316,30 @@
     },
     "configurationBeeperHelp": {
         "message": "Enable or disable when to sound the Buzzer"
+    },
+    "configuration_SBUS_OUT_Heading": {
+        "message": "S.BUS Output"
+    },
+    "configuration_FBUS_OUT_Heading": {
+        "message": "F.BUS Output"
+    },
+    "configuration_SBUS_OUT_EditHeading": {
+        "message": "S.BUS Output #{{index}}"
+    },
+    "configuration_FBUS_OUT_EditHeading": {
+        "message": "F.BUS Output #{{index}}"
+    },
+    "configurationBusOutSourceType": {
+        "message": "Source Type"
+    },
+    "configurationBusOutSourceIndex": {
+        "message": "Source Index"
+    },
+    "configurationBusOutSourceRangeLow": {
+        "message": "Source Range Low"
+    },
+    "configurationBusOutSourceRangeHigh": {
+        "message": "Source Range High"
     },
     "beeper_GYRO_CALIBRATED": {
         "message": "Beeps when gyro has been calibrated"

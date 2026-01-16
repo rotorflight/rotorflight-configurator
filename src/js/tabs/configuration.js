@@ -1,9 +1,12 @@
 import semver from "semver";
+import { mount, unmount } from "svelte";
 
 import { Model } from "@/js/model.js";
+import BusOutputs from "@/tabs/configuration/BusOutputs.svelte";
 
 const tab = {
     tabName: 'configuration',
+    svelteComponent: null,
     isDirty: false,
     yaw_fix: 0.0,
 };
@@ -299,6 +302,8 @@ tab.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_BOARD_ALIGNMENT_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_ACC_TRIM))
             .then(() => MSP.promise(MSPCodes.MSP_SERIAL_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_SBUS_OUTPUT_CONFIG))
+            .then(() => MSP.promise(MSPCodes.MSP_GET_FBUS_MASTER_CONFIG))
             .then(callback);
     }
 
@@ -490,6 +495,14 @@ tab.initialize = function (callback) {
     }
 
     function process_html() {
+        self.svelteComponent = mount(BusOutputs, {
+            target: document.querySelector("#svelte-bus-outputs"),
+            props: {
+                onchange: () => {
+                    setDirty();
+                }
+            }
+        });
 
         // Hide the buttons toolbar
         $('.tab-configuration').addClass('toolbar_hidden');
@@ -726,6 +739,11 @@ tab.renderModel = function () {
 };
 
 tab.cleanup = function (callback) {
+    if (this.svelteComponent) {
+        unmount(this.svelteComponent);
+        this.svelteComponent = null;
+    }
+
     if (this.model) {
         $(window).off('resize', $.proxy(this.model.resize, this.model));
         this.model.dispose();

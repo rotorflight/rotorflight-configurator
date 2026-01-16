@@ -7,8 +7,8 @@
     position: relative;
 }
 
-.tab-configuration input,
-.tab-configuration select {
+.tab-configuration .old-ui input,
+.tab-configuration .old-ui select {
     border: 1px solid var(--subtleAccent);
     height: 20px;
     float: left;
@@ -16,34 +16,34 @@
     border-radius: 3px;
 }
 
-.tab-configuration table {
+.tab-configuration .old-ui table {
     margin-bottom: 0;
     width: 100%;
     float: left;
 }
 
-.tab-configuration table,
-.tab-configuration table th,
-.tab-configuration table td {
+.tab-configuration .old-ui table,
+.tab-configuration .old-ui table th,
+.tab-configuration .old-ui table td {
     padding: 0;
     text-align: left;
 }
 
-.tab-configuration table th {
+.tab-configuration .old-ui table th {
     padding: 3px;
     border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
-.tab-configuration table td {
+.tab-configuration .old-ui table td {
     padding: 5px 3px;
     border-bottom: 1px dotted var(--superSubtleAccent);
 }
 
-.tab-configuration table tr td:first-child {
+.tab-configuration .old-ui table tr td:first-child {
     text-align: left;
 }
 
-.tab-configuration table thead tr:first-child {
+.tab-configuration .old-ui table thead tr:first-child {
     background-color: #ececec;
 }
 
@@ -125,11 +125,11 @@
     position: relative;
 }
 
-.tab-configuration input {
+.tab-configuration .old-ui input {
     float: left;
 }
 
-.tab-configuration span {
+.tab-configuration .old-ui span {
     margin: 0;
 }
 
@@ -180,7 +180,7 @@
     margin-bottom: 0;
 }
 
-.tab-configuration thead {
+.tab-configuration .old-ui thead {
     display: none;
 }
 

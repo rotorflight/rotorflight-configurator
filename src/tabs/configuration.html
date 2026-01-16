@@ -10,7 +10,7 @@
 
         <div class="grid-row">
 
-            <div class="grid-col col6">
+            <div class="grid-col col6 old-ui">
 
                 <!-- PERSONALIZATION-->
                 <div class="gui_box grey miscSettings">
@@ -96,7 +96,7 @@
             <div class="grid-col col6">
 
                 <!-- SERIAL PORTS -->
-                <div class="serialConfig">
+                <div class="serialConfig old-ui">
                     <div class="gui_box grey">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="configurationSerialPorts"></div>
@@ -113,8 +113,10 @@
                 </div>
                 <!-- END SERIAL PORTS -->
 
+                <div id="svelte-bus-outputs"></div>
+
                 <!-- BOARD ORIENTATION -->
-                <div class="board acc">
+                <div class="board acc old-ui">
                     <div class="gui_box grey">
                         <div class="gui_box_titlebar">
                             <div class="spacer_box_title" i18n="configurationBoardAlignment"></div>
@@ -162,7 +164,7 @@
                 </div>
 
                 <!-- ACCELEROMETER TRIM -->
-                <div class="gui_box grey accelNeeded">
+                <div class="gui_box grey accelNeeded old-ui">
                     <div class="gui_box_titlebar">
                         <div class="spacer_box_title" i18n="configurationAccelTrims"></div>
                         <div class="helpicon cf_tip" i18n_title="configurationAccelTrimsHelp"></div>
@@ -185,7 +187,7 @@
                 <!-- END ACCELEROMETER TRIM -->
 
                 <!-- ORIENTATION PREVIEW -->
-                <div class="gui_box grey topspacer">
+                <div class="gui_box grey topspacer old-ui">
                     <div class="model-and-info">
                         <div id="interactive_block">
                             <div id="canvas_wrapper" class="background_paper">
