@@ -77,13 +77,18 @@
   let curve = $state([]);
   let numPoints = $state(0);
 
+  // track external changes to curve
+  let lastFcCurve = null;
+
   function exportCurve() {
     FC.GOVERNOR.gov_bypass_throttle = asNinePointCurve(curve).map((x) => x * 2);
+    lastFcCurve = [...FC.GOVERNOR.gov_bypass_throttle];
   }
 
   function importCurve() {
     curve = tryReduceCurve(FC.GOVERNOR.gov_bypass_throttle).map((x) => x / 2);
     numPoints = curve.length;
+    lastFcCurve = [...FC.GOVERNOR.gov_bypass_throttle];
   }
 
   function setNumPoints(value) {
@@ -111,6 +116,27 @@
     }, 50);
 
     updateValue();
+  });
+
+  $effect(() => {
+    // check if curve has been modified externally
+    FC.GOVERNOR.gov_bypass_throttle;
+
+    if (lastFcCurve === null) {
+      return;
+    }
+
+    let changed = false;
+    for (let i = 0; i < FC.GOVERNOR.gov_bypass_throttle.length; i++) {
+      if (lastFcCurve[i] !== FC.GOVERNOR.gov_bypass_throttle[i]) {
+        changed = true;
+        break;
+      }
+    }
+
+    if (changed) {
+      importCurve();
+    }
   });
 
   onDestroy(() => {
