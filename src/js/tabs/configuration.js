@@ -264,6 +264,7 @@ tab.initialize = function (callback) {
         { id: 1024,  excl: 1024,    name: 'ESC_SENSOR',           type: portTypes.AUTO },
         { id: 128,   excl: 128,     name: 'BLACKBOX',             type: portTypes.BLACKBOX },
         { id: 262144,excl: 262144,  name: 'SBUS_OUT',             type: portTypes.AUTO },
+        { id: 524288,excl: 524288,  name: 'FBUS_OUT',             type: portTypes.AUTO },
         { id: 4,     excl: 4668,    name: 'TELEMETRY_FRSKY',      type: portTypes.TELEM },
         { id: 32,    excl: 4668,    name: 'TELEMETRY_SMARTPORT',  type: portTypes.TELEM },
         { id: 4096,  excl: 4668,    name: 'TELEMETRY_IBUS',       type: portTypes.TELEM },
@@ -452,7 +453,10 @@ tab.initialize = function (callback) {
 
             for (const func of portFunctions) {
                 const funcName = i18n.getMessage('portsFunction_' + func.name);
-                if (func.name !== 'SBUS_OUT' || semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+                    if (
+                        (func.name !== 'SBUS_OUT' || semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) &&
+                        (func.name !== 'FBUS_OUT' || semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9))
+                    ) {
                     funcElement.append(`<option value="${func.id}">${funcName}</option>`);
                 }
             }

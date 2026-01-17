@@ -48,6 +48,7 @@ export function MspHelper() {
         'LIDAR_TF': 15,
         'FRSKY_OSD': 16,
         'SBUS_OUT': 18,
+        'FBUS_OUT': 19,
     };
 
     self.REBOOT_TYPES = {
