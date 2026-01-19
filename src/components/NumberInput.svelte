@@ -189,6 +189,8 @@
 
 <div class="container">
   <button
+    type="button"
+    tabindex="-1"
     onpointerdown={() => startIncrement(false)}
     onpointerup={stopIncrement}
     onpointerleave={stopIncrement}
@@ -210,6 +212,8 @@
     {disabled}
   />
   <button
+    type="button"
+    tabindex="-1"
     onpointerdown={() => startIncrement(true)}
     onpointerup={stopIncrement}
     onpointerleave={stopIncrement}
