@@ -822,7 +822,7 @@ tab.initRatesSystem = function() {
 
     let rcRateDef, rcRateYawDef, rcRateMax, rcRateMin, rcRateStep, rcRateDec;
     let rateDef, rateYawDef, rateMax, rateStep, rateDec;
-    let expoDef, expoMax, expoStep, expoDec;
+    let colExpoDef, yawExpoDef, expoDef, expoMax, expoStep, expoDec;
     let rcColDef, rcColMax, rcColMin, rcColStep, rcColDec;
     let colDef, colMax, colStep, colDec;
 
@@ -860,6 +860,8 @@ tab.initRatesSystem = function() {
             colStep     = 1;
             expoDec     = 0;
             expoDef     = 0;
+            yawExpoDef  = 0;
+            colExpoDef  = 0;
             expoMax     = 100;
             expoStep    = 1;
 
@@ -891,6 +893,8 @@ tab.initRatesSystem = function() {
             colStep     = 0.01;
             expoDec     = 2;
             expoDef     = 0.00;
+            yawExpoDef  = 0.00;
+            colExpoDef  = 0.00;
             expoMax     = 1.00;
             expoStep    = 0.01;
 
@@ -922,6 +926,8 @@ tab.initRatesSystem = function() {
             colStep     = 0.5;
             expoDec     = 2;
             expoDef     = 0.00;
+            yawExpoDef  = 0.00;
+            colExpoDef  = 0.00;
             expoMax     = 1.00;
             expoStep    = 0.01;
 
@@ -953,6 +959,8 @@ tab.initRatesSystem = function() {
             colStep     = 10;
             expoDec     = 2;
             expoDef     = 0.00;
+            yawExpoDef  = 0.00;
+            colExpoDef  = 0.00;
             expoMax     = 1.00;
             expoStep    = 0.01;
             break;
@@ -983,6 +991,8 @@ tab.initRatesSystem = function() {
             colStep     = 0.01;
             expoDec     = 2;
             expoDef     = 0.00;
+            yawExpoDef  = 0.00;
+            colExpoDef  = 0.00;
             expoMax     = 1.00;
             expoStep    = 0.01;
             break;
@@ -992,8 +1002,8 @@ tab.initRatesSystem = function() {
             rateLabel   = "rateSetupRotorflightShape";
             rcExpoLabel = "rateSetupRotorflightExpo";
             rcRateDec   = 0;
-            rcRateDef   = 240;
-            rcRateYawDef= 500;
+            rcRateDef   = 250;
+            rcRateYawDef= 400;
             rcRateMax   = 1000;
             rcRateMin   = 10;
             rcRateStep  = 5;
@@ -1008,11 +1018,13 @@ tab.initRatesSystem = function() {
             rcColMin    = 0;
             rcColStep   = 0.25;
             colDec      = 0;
-            colDef      = 0;
+            colDef      = 24;
             colMax      = 127;
             colStep     = 1;
             expoDec     = 0;
-            expoDef     = 0;
+            expoDef     = 40;
+            yawExpoDef  = 50;
+            colExpoDef  = 0;
             expoMax     = 100;
             expoStep    = 1;
             break;
@@ -1043,6 +1055,8 @@ tab.initRatesSystem = function() {
             colStep     = 0;
             expoDec     = 0;
             expoDef     = 0;
+            yawExpoDef  = 0;
+            colExpoDef  = 0;
             expoMax     = 0;
             expoStep    = 0;
             break;
@@ -1154,9 +1168,9 @@ tab.initRatesSystem = function() {
         self.currentRates.pitch_rc_rate             = rcRateDef;
         self.currentRates.collective_rc_rate        = rcColDef;
         self.currentRates.roll_rc_expo              = expoDef;
-        self.currentRates.yaw_rc_expo               = expoDef;
+        self.currentRates.yaw_rc_expo               = yawExpoDef;
         self.currentRates.pitch_rc_expo             = expoDef;
-        self.currentRates.collective_rc_expo        = expoDef;
+        self.currentRates.collective_rc_expo        = colExpoDef;
         self.currentRates.roll_response_time        = 0;
         self.currentRates.pitch_response_time       = 0;
         self.currentRates.yaw_response_time         = 0;
