@@ -335,7 +335,11 @@ export function applyVirtualConfig() {
   ];
 
   FC.PID_PROFILE.pid_mode = 3;
-  FC.RC_TUNING.rates_type = 4;
+
+  Object.assign(FC.RC_TUNING, {
+    rates_type: 6,
+    cyclic_ring: 150,
+  });
 }
 
 if (import.meta.hot) {

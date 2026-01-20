@@ -1,5 +1,11 @@
 import semver from "semver";
 
+import {
+    API_VERSION_12_7,
+    API_VERSION_12_8,
+    API_VERSION_12_9,
+} from "@/js/configurator.svelte.js";
+
 // Used for LED_STRIP
 const ledDirectionLetters    = ['n', 'e', 's', 'w', 'u', 'd'];      // in LSB bit order
 const ledBaseFunctionLetters = ['c', 'f', 'a', 'l', 's', 'g', 'r']; // in LSB bit
@@ -341,25 +347,26 @@ MspHelper.prototype.process_data = function(dataHandler) {
             }
 
             case MSPCodes.MSP_RC_TUNING: {
+                // TODO: stop scaling these values
                 FC.RC_TUNING.rates_type = data.readU8();
-                FC.RC_TUNING.RC_RATE = parseFloat((data.readU8() / 100).toFixed(2));
-                FC.RC_TUNING.RC_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
-                FC.RC_TUNING.roll_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.roll_rc_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.roll_rc_expo = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.roll_srate = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.roll_response_time = data.readU8();
                 FC.RC_TUNING.roll_accel_limit = data.readU16();
-                FC.RC_TUNING.rcPitchRate = parseFloat((data.readU8() / 100).toFixed(2));
-                FC.RC_TUNING.RC_PITCH_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
-                FC.RC_TUNING.pitch_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.pitch_rc_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.pitch_rc_expo = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.pitch_srate = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.pitch_response_time = data.readU8();
                 FC.RC_TUNING.pitch_accel_limit = data.readU16();
-                FC.RC_TUNING.rcYawRate = parseFloat((data.readU8() / 100).toFixed(2));
-                FC.RC_TUNING.RC_YAW_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
-                FC.RC_TUNING.yaw_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.yaw_rc_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.yaw_rc_expo = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.yaw_srate = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.yaw_response_time = data.readU8();
                 FC.RC_TUNING.yaw_accel_limit = data.readU16();
-                FC.RC_TUNING.rcCollectiveRate = parseFloat((data.readU8() / 100).toFixed(2));
-                FC.RC_TUNING.RC_COLLECTIVE_EXPO = parseFloat((data.readU8() / 100).toFixed(2));
-                FC.RC_TUNING.collective_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.collective_rc_rate = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.collective_rc_expo = parseFloat((data.readU8() / 100).toFixed(2));
+                FC.RC_TUNING.collective_srate = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.collective_response_time = data.readU8();
                 FC.RC_TUNING.collective_accel_limit = data.readU16();
 
@@ -376,6 +383,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.RC_TUNING.yaw_dynamic_ceiling_gain = data.readU8();
                     FC.RC_TUNING.yaw_dynamic_deadband_gain = data.readU8();
                     FC.RC_TUNING.yaw_dynamic_deadband_filter = data.readU8();
+                }
+
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                    FC.RC_TUNING.cyclic_ring = data.readU8();
                 }
 
                 break;
@@ -1792,24 +1803,24 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_RC_TUNING: {
             buffer.push8(FC.RC_TUNING.rates_type);
-            buffer.push8(Math.round(FC.RC_TUNING.RC_RATE * 100))
-                  .push8(Math.round(FC.RC_TUNING.RC_EXPO * 100))
-                  .push8(Math.round(FC.RC_TUNING.roll_rate * 100))
+            buffer.push8(Math.round(FC.RC_TUNING.roll_rc_rate * 100))
+                  .push8(Math.round(FC.RC_TUNING.roll_rc_expo * 100))
+                  .push8(Math.round(FC.RC_TUNING.roll_srate * 100))
                   .push8(FC.RC_TUNING.roll_response_time)
                   .push16(FC.RC_TUNING.roll_accel_limit);
-            buffer.push8(Math.round(FC.RC_TUNING.rcPitchRate * 100))
-                  .push8(Math.round(FC.RC_TUNING.RC_PITCH_EXPO * 100))
-                  .push8(Math.round(FC.RC_TUNING.pitch_rate * 100))
+            buffer.push8(Math.round(FC.RC_TUNING.pitch_rc_rate * 100))
+                  .push8(Math.round(FC.RC_TUNING.pitch_rc_expo * 100))
+                  .push8(Math.round(FC.RC_TUNING.pitch_srate * 100))
                   .push8(FC.RC_TUNING.pitch_response_time)
                   .push16(FC.RC_TUNING.pitch_accel_limit);
-            buffer.push8(Math.round(FC.RC_TUNING.rcYawRate * 100))
-                  .push8(Math.round(FC.RC_TUNING.RC_YAW_EXPO * 100))
-                  .push8(Math.round(FC.RC_TUNING.yaw_rate * 100))
+            buffer.push8(Math.round(FC.RC_TUNING.yaw_rc_rate * 100))
+                  .push8(Math.round(FC.RC_TUNING.yaw_rc_expo * 100))
+                  .push8(Math.round(FC.RC_TUNING.yaw_srate * 100))
                   .push8(FC.RC_TUNING.yaw_response_time)
                   .push16(FC.RC_TUNING.yaw_accel_limit);
-            buffer.push8(Math.round(FC.RC_TUNING.rcCollectiveRate * 100))
-                  .push8(Math.round(FC.RC_TUNING.RC_COLLECTIVE_EXPO * 100))
-                  .push8(Math.round(FC.RC_TUNING.collective_rate * 100))
+            buffer.push8(Math.round(FC.RC_TUNING.collective_rc_rate * 100))
+                  .push8(Math.round(FC.RC_TUNING.collective_rc_expo * 100))
+                  .push8(Math.round(FC.RC_TUNING.collective_srate * 100))
                   .push8(FC.RC_TUNING.collective_response_time)
                   .push16(FC.RC_TUNING.collective_accel_limit);
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
@@ -1824,6 +1835,10 @@ MspHelper.prototype.crunch = function(code) {
                      .push8(FC.RC_TUNING.yaw_dynamic_ceiling_gain)
                      .push8(FC.RC_TUNING.yaw_dynamic_deadband_gain)
                      .push8(FC.RC_TUNING.yaw_dynamic_deadband_filter);
+            }
+
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                buffer.push8(FC.RC_TUNING.cyclic_ring);
             }
 
             break;
