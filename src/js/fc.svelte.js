@@ -23,6 +23,7 @@ class FlightController {
   FAILSAFE_CONFIG = $state();
   FEATURE_CONFIG = $state();
   FILTER_CONFIG = $state();
+  FLIGHT_STATS = $state();
   GOVERNOR = $state();
   GPS_CONFIG = $state();
   GPS_DATA = $state();
@@ -748,6 +749,13 @@ class FlightController {
       slider_dterm_filter_multiplier:     0,
       slider_gyro_filter:                 0,
       slider_gyro_filter_multiplier:      0,
+    };
+
+    this.FLIGHT_STATS = {
+      stats_total_flights: 0,
+      stats_total_time_s: 0,
+      stats_total_dist_m: 0,
+      stats_min_armed_time_s: 0,
     };
   }
 

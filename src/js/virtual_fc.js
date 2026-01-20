@@ -20,6 +20,13 @@ export function applyVirtualConfig() {
     pid_process_denom: 2,
   });
 
+  // Status
+  Object.assign(FC.FLIGHT_STATS, {
+    stats_total_flights: 7,
+    stats_total_time_s: 2000,
+    stats_min_armed_time_s: 30,
+  });
+
   // Configuration
   FC.SERIAL_CONFIG.ports = new Array(6);
   FC.SERIAL_CONFIG.ports[0] = {

@@ -1,6 +1,7 @@
 import semver from "semver";
 
 import { Model } from "@/js/model.js";
+import { API_VERSION_12_8, API_VERSION_12_9 } from "@/js/configurator.svelte.js";
 
 const tab = {
     tabName: 'status',
@@ -88,6 +89,7 @@ tab.initialize = function (callback) {
             .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
             .then(() => MSP.promise(MSPCodes.MSP_ACC_TRIM))
             .then(() => MSP.promise(MSPCodes.MSP_NAME))
+            .then(() => MSP.promise(MSPCodes.MSP_FLIGHT_STATS))
             .then(() => MSP.promise(MSPCodes.MSP_RC))
             .then(callback);
     }
@@ -106,6 +108,18 @@ tab.initialize = function (callback) {
         // Target and board names
         $('.target-name').text(FC.CONFIG.targetName);
         $('.board-name').text(FC.CONFIG.boardName);
+
+        // Flight stats
+        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+            $('.flight-count').closest('tr').hide();
+            $('.flight-time').closest('tr').hide();
+        } else {
+            $('.flight-count').text(FC.FLIGHT_STATS.stats_total_flights.toLocaleString());
+            $('.flight-time').text(i18n.getMessage('statusFlightTimeValue', [
+                Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60).toLocaleString(),
+                Math.floor(FC.FLIGHT_STATS.stats_total_time_s % 60),
+            ]));
+        }
 
         // set roll in interactive block
         $('span.roll').text(i18n.getMessage('statusAttitude', [0]));
