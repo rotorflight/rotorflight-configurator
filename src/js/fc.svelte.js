@@ -23,6 +23,7 @@ class FlightController {
   FAILSAFE_CONFIG = $state();
   FEATURE_CONFIG = $state();
   FILTER_CONFIG = $state();
+  FLIGHT_STATS = $state();
   GOVERNOR = $state();
   GPS_CONFIG = $state();
   GPS_DATA = $state();
@@ -242,23 +243,18 @@ class FlightController {
     this.RC_COMMAND = Array.from({length: 32});
 
     this.RC_TUNING = {
-      RC_RATE:                    0,
-      RC_EXPO:                    0,
-      roll_pitch_rate:            0,
-      roll_rate:                  0,
-      pitch_rate:                 0,
-      yaw_rate:                   0,
-      collective_rate:            0,
-      dynamic_THR_PID:            0,
-      throttle_MID:               0,
-      throttle_EXPO:              0,
-      dynamic_THR_breakpoint:     0,
-      RC_YAW_EXPO:                0,
-      rcYawRate:                  0,
-      rcPitchRate:                0,
-      RC_PITCH_EXPO:              0,
-      rcCollectiveRate:           0,
-      RC_COLLECTIVE_EXPO:         0,
+      roll_rc_rate:               0,
+      roll_rc_expo:               0,
+      roll_srate:                 0,
+      pitch_srate:                0,
+      yaw_srate:                  0,
+      collective_srate:           0,
+      yaw_rc_expo:                0,
+      yaw_rc_rate:                0,
+      pitch_rc_rate:              0,
+      pitch_rc_expo:              0,
+      collective_rc_rate:         0,
+      collective_rc_expo:         0,
       roll_rate_limit:            2000,
       pitch_rate_limit:           2000,
       yaw_rate_limit:             2000,
@@ -284,6 +280,8 @@ class FlightController {
       yaw_dynamic_ceiling_gain:   0,
       yaw_dynamic_deadband_gain:  0,
       yaw_dynamic_deadband_filter:0,
+
+      cyclic_ring:                0,
     };
 
     this.AUX_CONFIG =               [];
@@ -751,6 +749,13 @@ class FlightController {
       slider_dterm_filter_multiplier:     0,
       slider_gyro_filter:                 0,
       slider_gyro_filter_multiplier:      0,
+    };
+
+    this.FLIGHT_STATS = {
+      stats_total_flights: 0,
+      stats_total_time_s: 0,
+      stats_total_dist_m: 0,
+      stats_min_armed_time_s: 0,
     };
   }
 

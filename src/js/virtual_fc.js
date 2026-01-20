@@ -20,6 +20,13 @@ export function applyVirtualConfig() {
     pid_process_denom: 2,
   });
 
+  // Status
+  Object.assign(FC.FLIGHT_STATS, {
+    stats_total_flights: 7,
+    stats_total_time_s: 2000,
+    stats_min_armed_time_s: 30,
+  });
+
   // Configuration
   FC.SERIAL_CONFIG.ports = new Array(6);
   FC.SERIAL_CONFIG.ports[0] = {
@@ -334,7 +341,11 @@ export function applyVirtualConfig() {
   ];
 
   FC.PID_PROFILE.pid_mode = 3;
-  FC.RC_TUNING.rates_type = 4;
+
+  Object.assign(FC.RC_TUNING, {
+    rates_type: 6,
+    cyclic_ring: 150,
+  });
 }
 
 if (import.meta.hot) {

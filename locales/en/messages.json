@@ -864,6 +864,15 @@
     "statusTargetName": {
         "message": "Firmware:"
     },
+    "statusFlightCount": {
+        "message": "Flight Count:"
+    },
+    "statusFlightTime": {
+        "message": "Flight Time:"
+    },
+    "statusFlightTimeValue": {
+        "message": "$1 min $2 sec"
+    },
     "statusArmingDisableFlags": {
         "message": "Arming Disable Flags:"
     },
@@ -1533,6 +1542,9 @@
     },
     "portsFunction_SBUS_OUT": {
         "message": "S.BUS Output"
+    },
+    "portsFunction_FBUS_OUT": {
+        "message": "F.BUS"
     },
     "portsFunction_CUSTOM": {
         "message": "Custom"
@@ -5114,6 +5126,15 @@
     },
     "rateSetupRcExpo": {
         "message": "RC Expo"
+    },
+    "rateSetupRotorflightRate": {
+        "message": "Rate"
+    },
+    "rateSetupRotorflightShape": {
+        "message": "Shape"
+    },
+    "rateSetupRotorflightExpo": {
+        "message": "Expo"
     },
     "rateSetupRcRateRaceflight": {
         "message": "Rate"

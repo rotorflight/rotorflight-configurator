@@ -20,6 +20,7 @@ const tab = {
         KISS:        3,
         ACTUAL:      4,
         QUICKRATES:  5,
+        ROTORFLIGHT: 6,
     },
     RATES_TYPE_NAMES: [
         'None',
@@ -28,6 +29,7 @@ const tab = {
         'KISS',
         'Actual',
         'QuickRates',
+        'Rotorflight',
     ],
     RATES_TYPE_IMAGES: [
         'none.svg',
@@ -36,6 +38,7 @@ const tab = {
         'kiss.svg',
         'actual.svg',
         'quickrates.svg',
+        'rotorflight.svg',
     ],
     TAB_NAMES: [
         'rateProfile1',
@@ -143,66 +146,79 @@ tab.initialize = function (callback) {
         FC.RC_TUNING.yaw_dynamic_deadband_filter = getIntegerValue('#yaw-dynamic-deadband-filter', 10);
 
         // catch RC_tuning changes
-        const roll_pitch_rate_e = $('.rates_setup input[name="roll_pitch_rate"]');
-        const pitch_rate_e = $('.rates_setup input[name="pitch_rate"]');
-        const roll_rate_e = $('.rates_setup input[name="roll_rate"]');
-        const yaw_rate_e = $('.rates_setup input[name="yaw_rate"]');
-        const collective_rate_e = $('.rates_setup input[name="collective_rate"]');
-        const rc_rate_pitch_e = $('.rates_setup input[name="rc_rate_pitch"]');
-        const rc_rate_e = $('.rates_setup input[name="rc_rate"]');
-        const rc_rate_yaw_e = $('.rates_setup input[name="rc_rate_yaw"]');
-        const rc_rate_collective_e = $('.rates_setup input[name="rc_rate_collective"]');
-        const rc_pitch_expo_e = $('.rates_setup input[name="rc_pitch_expo"]');
-        const rc_expo_e = $('.rates_setup input[name="rc_expo"]');
-        const rc_yaw_expo_e = $('.rates_setup input[name="rc_yaw_expo"]');
-        const rc_collective_expo_e = $('.rates_setup input[name="rc_collective_expo"]');
+        const collective_rc_expo_e = $('.rates_setup input[name="collective_rc_expo"]');
+        const collective_rc_rate_e = $('.rates_setup input[name="collective_rc_rate"]');
+        const collective_srate_e = $('.rates_setup input[name="collective_srate"]');
+        const pitch_rc_expo_e = $('.rates_setup input[name="pitch_rc_expo"]');
+        const pitch_rc_rate_e = $('.rates_setup input[name="pitch_rc_rate"]');
+        const pitch_srate_e = $('.rates_setup input[name="pitch_srate"]');
+        const roll_rc_expo_e = $('.rates_setup input[name="roll_rc_expo"]');
+        const roll_rc_rate_e = $('.rates_setup input[name="roll_rc_rate"]');
+        const roll_srate_e = $('.rates_setup input[name="roll_srate"]');
+        const yaw_rc_expo_e = $('.rates_setup input[name="yaw_rc_expo"]');
+        const yaw_rc_rate_e = $('.rates_setup input[name="yaw_rc_rate"]');
+        const yaw_srate_e = $('.rates_setup input[name="yaw_srate"]');
 
-        FC.RC_TUNING.roll_pitch_rate = getFloatValue(roll_pitch_rate_e);
-        FC.RC_TUNING.RC_RATE = getFloatValue(rc_rate_e);
-        FC.RC_TUNING.roll_rate = getFloatValue(roll_rate_e);
-        FC.RC_TUNING.pitch_rate = getFloatValue(pitch_rate_e);
-        FC.RC_TUNING.yaw_rate = getFloatValue(yaw_rate_e);
-        FC.RC_TUNING.collective_rate = getFloatValue(collective_rate_e);
-        FC.RC_TUNING.RC_EXPO = getFloatValue(rc_expo_e);
-        FC.RC_TUNING.RC_YAW_EXPO = getFloatValue(rc_yaw_expo_e);
-        FC.RC_TUNING.rcYawRate = getFloatValue(rc_rate_yaw_e);
-        FC.RC_TUNING.rcPitchRate = getFloatValue(rc_rate_pitch_e);
-        FC.RC_TUNING.RC_PITCH_EXPO = getFloatValue(rc_pitch_expo_e);
-        FC.RC_TUNING.rcCollectiveRate = getFloatValue(rc_rate_collective_e);
-        FC.RC_TUNING.RC_COLLECTIVE_EXPO = getFloatValue(rc_collective_expo_e);
+        FC.RC_TUNING.collective_rc_expo = getFloatValue(collective_rc_expo_e);
+        FC.RC_TUNING.collective_rc_rate = getFloatValue(collective_rc_rate_e);
+        FC.RC_TUNING.collective_srate = getFloatValue(collective_srate_e);
+        FC.RC_TUNING.pitch_rc_expo = getFloatValue(pitch_rc_expo_e);
+        FC.RC_TUNING.pitch_rc_rate = getFloatValue(pitch_rc_rate_e);
+        FC.RC_TUNING.pitch_srate = getFloatValue(pitch_srate_e);
+        FC.RC_TUNING.roll_rc_expo = getFloatValue(roll_rc_expo_e);
+        FC.RC_TUNING.roll_rc_rate = getFloatValue(roll_rc_rate_e);
+        FC.RC_TUNING.roll_srate = getFloatValue(roll_srate_e);
+        FC.RC_TUNING.yaw_rc_expo = getFloatValue(yaw_rc_expo_e);
+        FC.RC_TUNING.yaw_rc_rate = getFloatValue(yaw_rc_rate_e);
+        FC.RC_TUNING.yaw_srate = getFloatValue(yaw_srate_e);
 
         switch (self.currentRatesType) {
             case self.RATES_TYPE.RACEFLIGHT:
-                FC.RC_TUNING.pitch_rate         /= 100;
-                FC.RC_TUNING.roll_rate          /= 100;
-                FC.RC_TUNING.yaw_rate           /= 100;
-                FC.RC_TUNING.collective_rate    /= 100;
-                FC.RC_TUNING.rcPitchRate        /= 1000;
-                FC.RC_TUNING.RC_RATE            /= 1000;
-                FC.RC_TUNING.rcYawRate          /= 1000;
-                FC.RC_TUNING.rcCollectiveRate   /= 25;
-                FC.RC_TUNING.RC_PITCH_EXPO      /= 100;
-                FC.RC_TUNING.RC_EXPO            /= 100;
-                FC.RC_TUNING.RC_YAW_EXPO        /= 100;
-                FC.RC_TUNING.RC_COLLECTIVE_EXPO /= 100;
+                FC.RC_TUNING.pitch_srate        /= 100;
+                FC.RC_TUNING.roll_srate         /= 100;
+                FC.RC_TUNING.yaw_srate          /= 100;
+                FC.RC_TUNING.collective_srate   /= 100;
+                FC.RC_TUNING.pitch_rc_rate      /= 1000;
+                FC.RC_TUNING.roll_rc_rate       /= 1000;
+                FC.RC_TUNING.yaw_rc_rate        /= 1000;
+                FC.RC_TUNING.collective_rc_rate /= 25;
+                FC.RC_TUNING.pitch_rc_expo      /= 100;
+                FC.RC_TUNING.roll_rc_expo       /= 100;
+                FC.RC_TUNING.yaw_rc_expo        /= 100;
+                FC.RC_TUNING.collective_rc_expo /= 100;
                 break;
 
             case self.RATES_TYPE.ACTUAL:
-                FC.RC_TUNING.pitch_rate         /= 1000;
-                FC.RC_TUNING.roll_rate          /= 1000;
-                FC.RC_TUNING.yaw_rate           /= 1000;
-                FC.RC_TUNING.collective_rate    /= 25;
-                FC.RC_TUNING.rcPitchRate        /= 1000;
-                FC.RC_TUNING.RC_RATE            /= 1000;
-                FC.RC_TUNING.rcYawRate          /= 1000;
-                FC.RC_TUNING.rcCollectiveRate   /= 25;
+                FC.RC_TUNING.pitch_srate        /= 1000;
+                FC.RC_TUNING.roll_srate         /= 1000;
+                FC.RC_TUNING.yaw_srate          /= 1000;
+                FC.RC_TUNING.collective_srate   /= 25;
+                FC.RC_TUNING.pitch_rc_rate      /= 1000;
+                FC.RC_TUNING.roll_rc_rate       /= 1000;
+                FC.RC_TUNING.yaw_rc_rate        /= 1000;
+                FC.RC_TUNING.collective_rc_rate /= 25;
                 break;
 
             case self.RATES_TYPE.QUICKRATES:
-                FC.RC_TUNING.pitch_rate         /= 1000;
-                FC.RC_TUNING.roll_rate          /= 1000;
-                FC.RC_TUNING.yaw_rate           /= 1000;
-                FC.RC_TUNING.collective_rate    /= 480;
+                FC.RC_TUNING.pitch_srate        /= 1000;
+                FC.RC_TUNING.roll_srate         /= 1000;
+                FC.RC_TUNING.yaw_srate          /= 1000;
+                FC.RC_TUNING.collective_srate   /= 480;
+                break;
+
+            case self.RATES_TYPE.ROTORFLIGHT:
+                FC.RC_TUNING.pitch_rc_rate      /= 500;
+                FC.RC_TUNING.roll_rc_rate       /= 500;
+                FC.RC_TUNING.yaw_rc_rate        /= 500;
+                FC.RC_TUNING.collective_rc_rate /= 50 / 4;
+                FC.RC_TUNING.pitch_srate        /= 100;
+                FC.RC_TUNING.roll_srate         /= 100;
+                FC.RC_TUNING.yaw_srate          /= 100;
+                FC.RC_TUNING.collective_srate   /= 100;
+                FC.RC_TUNING.roll_rc_expo       /= 100;
+                FC.RC_TUNING.yaw_rc_expo        /= 100;
+                FC.RC_TUNING.pitch_rc_expo      /= 100;
+                FC.RC_TUNING.collective_rc_expo /= 100;
                 break;
 
             default: // BetaFlight
@@ -333,9 +349,9 @@ tab.initialize = function (callback) {
                 curveContext.clearRect(0, 0, curveWidth, curveHeight);
 
                 maxAngularVel = Math.max(
-                    printMaxAngularVel(self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, self.maxAngularVelRollElement),
-                    printMaxAngularVel(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, self.maxAngularVelPitchElement),
-                    printMaxAngularVel(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, self.maxAngularVelYawElement));
+                    printMaxAngularVel(self.currentRates.roll_srate, self.currentRates.roll_rc_rate, self.currentRates.roll_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, self.maxAngularVelRollElement),
+                    printMaxAngularVel(self.currentRates.pitch_srate, self.currentRates.pitch_rc_rate, self.currentRates.pitch_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, self.maxAngularVelPitchElement),
+                    printMaxAngularVel(self.currentRates.yaw_srate, self.currentRates.yaw_rc_rate, self.currentRates.yaw_rc_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, self.maxAngularVelYawElement));
 
                 // make maxAngularVel multiple of 200°/s so that the auto-scale doesn't keep changing for small changes of the maximum curve
                 maxAngularVel = self.rateCurve.setMaxAngularVel(maxAngularVel);
@@ -343,12 +359,12 @@ tab.initialize = function (callback) {
                 drawAxes(curveContext, curveWidth, curveHeight);
 
                 curveContext.lineWidth = 2 * lineScale;
-                drawCurve(self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, '#ff0000', -6, curveContext);
-                drawCurve(self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -2, curveContext);
-                drawCurve(self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 2, curveContext);
+                drawCurve(self.currentRates.roll_srate, self.currentRates.roll_rc_rate, self.currentRates.roll_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, '#ff0000', -6, curveContext);
+                drawCurve(self.currentRates.pitch_srate, self.currentRates.pitch_rc_rate, self.currentRates.pitch_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -2, curveContext);
+                drawCurve(self.currentRates.yaw_srate, self.currentRates.yaw_rc_rate, self.currentRates.yaw_rc_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 2, curveContext);
 
-                self.maxCollectiveAngle = printMaxAngularVel(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngleElement, true);
-                drawCurve(self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, '#ffbb00', 6, curveContext);
+                self.maxCollectiveAngle = printMaxAngularVel(self.currentRates.collective_srate, self.currentRates.collective_rc_rate, self.currentRates.collective_rc_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngleElement, true);
+                drawCurve(self.currentRates.collective_srate, self.currentRates.collective_rc_rate, self.currentRates.collective_rc_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, '#ffbb00', 6, curveContext);
 
                 self.updateRatesLabels();
 
@@ -485,6 +501,7 @@ tab.convertToCollective = function (rate) {
             break;
         case self.RATES_TYPE.RACEFLIGHT:
         case self.RATES_TYPE.ACTUAL:
+        case self.RATES_TYPE.ROTORFLIGHT:
         default:
             break;
     }
@@ -525,9 +542,9 @@ tab.renderModel = function () {
         const roll = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
             self.rcChannels[0],
             self.currentRatesType,
-            self.currentRates.roll_rate,
-            self.currentRates.rc_rate,
-            self.currentRates.rc_expo,
+            self.currentRates.roll_srate,
+            self.currentRates.roll_rc_rate,
+            self.currentRates.roll_rc_expo,
             self.currentRates.superexpo,
             self.currentRates.deadband,
             self.currentRates.roll_rate_limit
@@ -535,9 +552,9 @@ tab.renderModel = function () {
         const pitch = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
             self.rcChannels[1],
             self.currentRatesType,
-            self.currentRates.pitch_rate,
-            self.currentRates.rc_rate_pitch,
-            self.currentRates.rc_pitch_expo,
+            self.currentRates.pitch_srate,
+            self.currentRates.pitch_rc_rate,
+            self.currentRates.pitch_rc_expo,
             self.currentRates.superexpo,
             self.currentRates.deadband,
             self.currentRates.pitch_rate_limit
@@ -545,9 +562,9 @@ tab.renderModel = function () {
         const yaw = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
             self.rcChannels[2],
             self.currentRatesType,
-            self.currentRates.yaw_rate,
-            self.currentRates.rc_rate_yaw,
-            self.currentRates.rc_yaw_expo,
+            self.currentRates.yaw_srate,
+            self.currentRates.yaw_rc_rate,
+            self.currentRates.yaw_rc_expo,
             self.currentRates.superexpo,
             self.currentRates.yawDeadband,
             self.currentRates.yaw_rate_limit
@@ -728,10 +745,10 @@ tab.updateRatesLabels = function() {
             const drawStickPositions = self.rcChannels[0] && self.rcChannels[1] && self.rcChannels[2] && self.rcChannels[3];
 
             if (drawStickPositions) {
-                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[0], self.currentRatesType, self.currentRates.roll_rate, self.currentRates.rc_rate, self.currentRates.rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, stickContext, '#FF8080'));
-                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[1], self.currentRatesType, self.currentRates.pitch_rate, self.currentRates.rc_rate_pitch, self.currentRates.rc_pitch_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, stickContext, '#80FF80'));
-                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[2], self.currentRatesType, self.currentRates.yaw_rate, self.currentRates.rc_rate_yaw, self.currentRates.rc_yaw_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, stickContext, '#8080FF'));
-                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[3], self.currentRatesType, self.currentRates.collective_rate, self.currentRates.rc_rate_collective, self.currentRates.rc_collective_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, stickContext, '#FFBB00'));
+                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[0], self.currentRatesType, self.currentRates.roll_srate, self.currentRates.roll_rc_rate, self.currentRates.roll_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, stickContext, '#FF8080'));
+                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[1], self.currentRatesType, self.currentRates.pitch_srate, self.currentRates.pitch_rc_rate, self.currentRates.pitch_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, stickContext, '#80FF80'));
+                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[2], self.currentRatesType, self.currentRates.yaw_srate, self.currentRates.yaw_rc_rate, self.currentRates.yaw_rc_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, stickContext, '#8080FF'));
+                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[3], self.currentRatesType, self.currentRates.collective_srate, self.currentRates.collective_rc_rate, self.currentRates.collective_rc_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, stickContext, '#FFBB00'));
             } else {
                 currentValues = [];
             }
@@ -805,7 +822,7 @@ tab.initRatesSystem = function() {
 
     let rcRateDef, rcRateYawDef, rcRateMax, rcRateMin, rcRateStep, rcRateDec;
     let rateDef, rateYawDef, rateMax, rateStep, rateDec;
-    let expoDef, expoMax, expoStep, expoDec;
+    let colExpoDef, yawExpoDef, expoDef, expoMax, expoStep, expoDec;
     let rcColDef, rcColMax, rcColMin, rcColStep, rcColDec;
     let colDef, colMax, colStep, colDec;
 
@@ -843,6 +860,8 @@ tab.initRatesSystem = function() {
             colStep     = 1;
             expoDec     = 0;
             expoDef     = 0;
+            yawExpoDef  = 0;
+            colExpoDef  = 0;
             expoMax     = 100;
             expoStep    = 1;
 
@@ -874,6 +893,8 @@ tab.initRatesSystem = function() {
             colStep     = 0.01;
             expoDec     = 2;
             expoDef     = 0.00;
+            yawExpoDef  = 0.00;
+            colExpoDef  = 0.00;
             expoMax     = 1.00;
             expoStep    = 0.01;
 
@@ -905,6 +926,8 @@ tab.initRatesSystem = function() {
             colStep     = 0.5;
             expoDec     = 2;
             expoDef     = 0.00;
+            yawExpoDef  = 0.00;
+            colExpoDef  = 0.00;
             expoMax     = 1.00;
             expoStep    = 0.01;
 
@@ -936,6 +959,8 @@ tab.initRatesSystem = function() {
             colStep     = 10;
             expoDec     = 2;
             expoDef     = 0.00;
+            yawExpoDef  = 0.00;
+            colExpoDef  = 0.00;
             expoMax     = 1.00;
             expoStep    = 0.01;
             break;
@@ -966,8 +991,42 @@ tab.initRatesSystem = function() {
             colStep     = 0.01;
             expoDec     = 2;
             expoDef     = 0.00;
+            yawExpoDef  = 0.00;
+            colExpoDef  = 0.00;
             expoMax     = 1.00;
             expoStep    = 0.01;
+            break;
+
+        case self.RATES_TYPE.ROTORFLIGHT:
+            rcRateLabel = "rateSetupRotorflightRate";
+            rateLabel   = "rateSetupRotorflightShape";
+            rcExpoLabel = "rateSetupRotorflightExpo";
+            rcRateDec   = 0;
+            rcRateDef   = 250;
+            rcRateYawDef= 400;
+            rcRateMax   = 1000;
+            rcRateMin   = 10;
+            rcRateStep  = 5;
+            rateDec     = 0;
+            rateDef     = 24;
+            rateYawDef  = 24;
+            rateMax     = 127;
+            rateStep    = 1;
+            rcColDec    = 2;
+            rcColDef    = 12.5;
+            rcColMax    = 25;
+            rcColMin    = 0;
+            rcColStep   = 0.25;
+            colDec      = 0;
+            colDef      = 24;
+            colMax      = 127;
+            colStep     = 1;
+            expoDec     = 0;
+            expoDef     = 40;
+            yawExpoDef  = 50;
+            colExpoDef  = 0;
+            expoMax     = 100;
+            expoStep    = 1;
             break;
 
         default:
@@ -996,27 +1055,29 @@ tab.initRatesSystem = function() {
             colStep     = 0;
             expoDec     = 0;
             expoDef     = 0;
+            yawExpoDef  = 0;
+            colExpoDef  = 0;
             expoMax     = 0;
             expoStep    = 0;
             break;
         }
 
     self.currentRates = {
-        roll_rate:                  FC.RC_TUNING.roll_rate,
-        pitch_rate:                 FC.RC_TUNING.pitch_rate,
-        yaw_rate:                   FC.RC_TUNING.yaw_rate,
-        collective_rate:            FC.RC_TUNING.collective_rate,
-        rc_rate:                    FC.RC_TUNING.RC_RATE,
-        rc_rate_yaw:                FC.RC_TUNING.rcYawRate,
-        rc_expo:                    FC.RC_TUNING.RC_EXPO,
-        rc_yaw_expo:                FC.RC_TUNING.RC_YAW_EXPO,
-        rc_rate_pitch:              FC.RC_TUNING.rcPitchRate,
-        rc_pitch_expo:              FC.RC_TUNING.RC_PITCH_EXPO,
-        rc_rate_collective:         FC.RC_TUNING.rcCollectiveRate,
-        rc_collective_expo:         FC.RC_TUNING.RC_COLLECTIVE_EXPO,
+        roll_rc_rate:               FC.RC_TUNING.roll_rc_rate,
+        roll_rc_expo:               FC.RC_TUNING.roll_rc_expo,
+        roll_srate:                 FC.RC_TUNING.roll_srate,
         roll_rate_limit:            FC.RC_TUNING.roll_rate_limit,
+        pitch_rc_rate:              FC.RC_TUNING.pitch_rc_rate,
+        pitch_rc_expo:              FC.RC_TUNING.pitch_rc_expo,
+        pitch_srate:                FC.RC_TUNING.pitch_srate,
         pitch_rate_limit:           FC.RC_TUNING.pitch_rate_limit,
+        yaw_rc_rate:                FC.RC_TUNING.yaw_rc_rate,
+        yaw_rc_expo:                FC.RC_TUNING.yaw_rc_expo,
+        yaw_srate:                  FC.RC_TUNING.yaw_srate,
         yaw_rate_limit:             FC.RC_TUNING.yaw_rate_limit,
+        collective_rc_rate:         FC.RC_TUNING.collective_rc_rate,
+        collective_rc_expo:         FC.RC_TUNING.collective_rc_expo,
+        collective_srate:           FC.RC_TUNING.collective_srate,
         collective_rate_limit:      FC.RC_TUNING.collective_rate_limit,
         deadband:                   0,
         yawDeadband:                0,
@@ -1045,36 +1106,51 @@ tab.initRatesSystem = function() {
     switch (self.currentRatesType) {
 
         case self.RATES_TYPE.RACEFLIGHT:
-            self.currentRates.roll_rate          *= 100;
-            self.currentRates.pitch_rate         *= 100;
-            self.currentRates.yaw_rate           *= 100;
-            self.currentRates.collective_rate    *= 100;
-            self.currentRates.rc_rate            *= 1000;
-            self.currentRates.rc_rate_yaw        *= 1000;
-            self.currentRates.rc_rate_collective *= 25;
-            self.currentRates.rc_rate_pitch      *= 1000;
-            self.currentRates.rc_expo            *= 100;
-            self.currentRates.rc_yaw_expo        *= 100;
-            self.currentRates.rc_collective_expo *= 100;
-            self.currentRates.rc_pitch_expo      *= 100;
+            self.currentRates.roll_srate         *= 100;
+            self.currentRates.pitch_srate        *= 100;
+            self.currentRates.yaw_srate          *= 100;
+            self.currentRates.collective_srate   *= 100;
+            self.currentRates.roll_rc_rate       *= 1000;
+            self.currentRates.yaw_rc_rate        *= 1000;
+            self.currentRates.collective_rc_rate *= 25;
+            self.currentRates.pitch_rc_rate      *= 1000;
+            self.currentRates.roll_rc_expo       *= 100;
+            self.currentRates.yaw_rc_expo        *= 100;
+            self.currentRates.collective_rc_expo *= 100;
+            self.currentRates.pitch_rc_expo      *= 100;
             break;
 
         case self.RATES_TYPE.ACTUAL:
-            self.currentRates.roll_rate          *= 1000;
-            self.currentRates.pitch_rate         *= 1000;
-            self.currentRates.yaw_rate           *= 1000;
-            self.currentRates.collective_rate    *= 25;
-            self.currentRates.rc_rate            *= 1000;
-            self.currentRates.rc_rate_yaw        *= 1000;
-            self.currentRates.rc_rate_collective *= 25;
-            self.currentRates.rc_rate_pitch      *= 1000;
+            self.currentRates.roll_srate         *= 1000;
+            self.currentRates.pitch_srate        *= 1000;
+            self.currentRates.yaw_srate          *= 1000;
+            self.currentRates.collective_srate   *= 25;
+            self.currentRates.roll_rc_rate       *= 1000;
+            self.currentRates.yaw_rc_rate        *= 1000;
+            self.currentRates.collective_rc_rate *= 25;
+            self.currentRates.pitch_rc_rate      *= 1000;
             break;
 
         case self.RATES_TYPE.QUICKRATES:
-            self.currentRates.roll_rate          *= 1000;
-            self.currentRates.pitch_rate         *= 1000;
-            self.currentRates.yaw_rate           *= 1000;
-            self.currentRates.collective_rate    *= 480;
+            self.currentRates.roll_srate         *= 1000;
+            self.currentRates.pitch_srate        *= 1000;
+            self.currentRates.yaw_srate          *= 1000;
+            self.currentRates.collective_srate   *= 480;
+            break;
+
+        case self.RATES_TYPE.ROTORFLIGHT:
+            self.currentRates.roll_rc_rate       *= 500;
+            self.currentRates.pitch_rc_rate      *= 500;
+            self.currentRates.yaw_rc_rate        *= 500;
+            self.currentRates.collective_rc_rate *= 50 / 4;
+            self.currentRates.roll_srate         *= 100;
+            self.currentRates.pitch_srate        *= 100;
+            self.currentRates.yaw_srate          *= 100;
+            self.currentRates.collective_srate   *= 100;
+            self.currentRates.roll_rc_expo       *= 100;
+            self.currentRates.yaw_rc_expo        *= 100;
+            self.currentRates.pitch_rc_expo      *= 100;
+            self.currentRates.collective_rc_expo *= 100;
             break;
 
         default:
@@ -1083,18 +1159,18 @@ tab.initRatesSystem = function() {
 
     // Set defaults if type changed
     if (self.currentRatesType !== self.previousRatesType) {
-        self.currentRates.roll_rate                 = rateDef;
-        self.currentRates.pitch_rate                = rateDef;
-        self.currentRates.yaw_rate                  = rateYawDef;
-        self.currentRates.collective_rate           = colDef;
-        self.currentRates.rc_rate                   = rcRateDef;
-        self.currentRates.rc_rate_yaw               = rcRateYawDef;
-        self.currentRates.rc_rate_pitch             = rcRateDef;
-        self.currentRates.rc_rate_collective        = rcColDef;
-        self.currentRates.rc_expo                   = expoDef;
-        self.currentRates.rc_yaw_expo               = expoDef;
-        self.currentRates.rc_pitch_expo             = expoDef;
-        self.currentRates.rc_collective_expo        = expoDef;
+        self.currentRates.roll_srate                = rateDef;
+        self.currentRates.pitch_srate               = rateDef;
+        self.currentRates.yaw_srate                 = rateYawDef;
+        self.currentRates.collective_srate          = colDef;
+        self.currentRates.roll_rc_rate              = rcRateDef;
+        self.currentRates.yaw_rc_rate               = rcRateYawDef;
+        self.currentRates.pitch_rc_rate             = rcRateDef;
+        self.currentRates.collective_rc_rate        = rcColDef;
+        self.currentRates.roll_rc_expo              = expoDef;
+        self.currentRates.yaw_rc_expo               = yawExpoDef;
+        self.currentRates.pitch_rc_expo             = expoDef;
+        self.currentRates.collective_rc_expo        = colExpoDef;
         self.currentRates.roll_response_time        = 0;
         self.currentRates.pitch_response_time       = 0;
         self.currentRates.yaw_response_time         = 0;
@@ -1124,31 +1200,31 @@ tab.initRatesSystem = function() {
     rateLabel_e.text(i18n.getMessage(rateLabel));
     rcExpoLabel_e.text(i18n.getMessage(rcExpoLabel));
 
-    const pitch_rate_e = $('.rates_setup input[name="pitch_rate"]');
-    const roll_rate_e = $('.rates_setup input[name="roll_rate"]');
-    const yaw_rate_e = $('.rates_setup input[name="yaw_rate"]');
-    const collective_rate_e = $('.rates_setup input[name="collective_rate"]');
-    const rc_rate_pitch_e = $('.rates_setup input[name="rc_rate_pitch"]');
-    const rc_rate_e = $('.rates_setup input[name="rc_rate"]');
-    const rc_rate_yaw_e = $('.rates_setup input[name="rc_rate_yaw"]');
-    const rc_rate_collective_e = $('.rates_setup input[name="rc_rate_collective"]');
-    const rc_expo_e = $('.rates_setup input[name="rc_expo"]');
-    const rc_pitch_expo_e = $('.rates_setup input[name="rc_pitch_expo"]');
-    const rc_yaw_expo_e = $('.rates_setup input[name="rc_yaw_expo"]');
-    const rc_collective_expo_e = $('.rates_setup input[name="rc_collective_expo"]');
+    const collective_rc_expo_e = $('.rates_setup input[name="collective_rc_expo"]');
+    const collective_rc_rate_e = $('.rates_setup input[name="collective_rc_rate"]');
+    const collective_srate_e = $('.rates_setup input[name="collective_srate"]');
+    const pitch_rc_expo_e = $('.rates_setup input[name="pitch_rc_expo"]');
+    const pitch_rc_rate_e = $('.rates_setup input[name="pitch_rc_rate"]');
+    const pitch_srate_e = $('.rates_setup input[name="pitch_srate"]');
+    const roll_rc_expo_e = $('.rates_setup input[name="roll_rc_expo"]');
+    const roll_rc_rate_e = $('.rates_setup input[name="roll_rc_rate"]');
+    const roll_srate_e = $('.rates_setup input[name="roll_srate"]');
+    const yaw_rc_expo_e = $('.rates_setup input[name="yaw_rc_expo"]');
+    const yaw_rc_rate_e = $('.rates_setup input[name="yaw_rc_rate"]');
+    const yaw_srate_e = $('.rates_setup input[name="yaw_srate"]');
 
-    pitch_rate_e.val(self.currentRates.pitch_rate.toFixed(rateDec));
-    roll_rate_e.val(self.currentRates.roll_rate.toFixed(rateDec));
-    yaw_rate_e.val(self.currentRates.yaw_rate.toFixed(rateDec));
-    collective_rate_e.val(self.currentRates.collective_rate.toFixed(colDec));
-    rc_rate_pitch_e.val(self.currentRates.rc_rate_pitch.toFixed(rcRateDec));
-    rc_rate_e.val(self.currentRates.rc_rate.toFixed(rcRateDec));
-    rc_rate_yaw_e.val(self.currentRates.rc_rate_yaw.toFixed(rcRateDec));
-    rc_rate_collective_e.val(self.currentRates.rc_rate_collective.toFixed(rcColDec));
-    rc_pitch_expo_e.val(self.currentRates.rc_pitch_expo.toFixed(expoDec));
-    rc_expo_e.val(self.currentRates.rc_expo.toFixed(expoDec));
-    rc_yaw_expo_e.val(self.currentRates.rc_yaw_expo.toFixed(expoDec));
-    rc_collective_expo_e.val(self.currentRates.rc_collective_expo.toFixed(expoDec));
+    collective_rc_expo_e.val(self.currentRates.collective_rc_expo.toFixed(expoDec));
+    collective_rc_rate_e.val(self.currentRates.collective_rc_rate.toFixed(rcColDec));
+    collective_srate_e.val(self.currentRates.collective_srate.toFixed(colDec));
+    pitch_rc_expo_e.val(self.currentRates.pitch_rc_expo.toFixed(expoDec));
+    pitch_rc_rate_e.val(self.currentRates.pitch_rc_rate.toFixed(rcRateDec));
+    pitch_srate_e.val(self.currentRates.pitch_srate.toFixed(rateDec));
+    roll_rc_expo_e.val(self.currentRates.roll_rc_expo.toFixed(expoDec));
+    roll_rc_rate_e.val(self.currentRates.roll_rc_rate.toFixed(rcRateDec));
+    roll_srate_e.val(self.currentRates.roll_srate.toFixed(rateDec));
+    yaw_rc_expo_e.val(self.currentRates.yaw_rc_expo.toFixed(expoDec));
+    yaw_rc_rate_e.val(self.currentRates.yaw_rc_rate.toFixed(rcRateDec));
+    yaw_srate_e.val(self.currentRates.yaw_srate.toFixed(rateDec));
 
     const rc_rate_input_c = $('.rates_setup input[class="rc_rate_input"]');
     const rate_input_c = $('.rates_setup input[class="rate_input"]');
