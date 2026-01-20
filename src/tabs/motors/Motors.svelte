@@ -13,7 +13,6 @@
   import Throttle from "./Throttle.svelte";
   import RPM from "./RPM.svelte";
   import Telemetry from "./Telemetry.svelte";
-  import Governor from "./Governor.svelte";
   import Motor from "./Motor.svelte";
   import RotorSpeed from "./RotorSpeed.svelte";
   import Override from "./Override.svelte";
@@ -36,7 +35,6 @@
   function snapshotState() {
     return $state.snapshot({
       MOTOR_CONFIG: FC.MOTOR_CONFIG,
-      GOVERNOR: FC.GOVERNOR,
       ESC_SENSOR_CONFIG: FC.ESC_SENSOR_CONFIG,
       features: FC.FEATURE_CONFIG.features.bitfield,
     });
@@ -58,7 +56,6 @@
     await MSP.promise(MSPCodes.MSP_MIXER_CONFIG);
     await MSP.promise(MSPCodes.MSP_MOTOR_CONFIG);
     await MSP.promise(MSPCodes.MSP_MOTOR_OVERRIDE);
-    await MSP.promise(MSPCodes.MSP_GOVERNOR_CONFIG);
     await MSP.promise(MSPCodes.MSP_ESC_SENSOR_CONFIG);
     await MSP.promise(MSPCodes.MSP_MOTOR);
     await MSP.promise(MSPCodes.MSP_MOTOR_TELEMETRY);
@@ -90,10 +87,8 @@
       return MSP.promise(code, mspHelper.crunch(code));
     }
 
-    await mspHelper.sendRxFailConfig();
     await save(MSPCodes.MSP_SET_FEATURE_CONFIG);
     await save(MSPCodes.MSP_SET_MOTOR_CONFIG);
-    await save(MSPCodes.MSP_SET_GOVERNOR_CONFIG);
     await save(MSPCodes.MSP_SET_ESC_SENSOR_CONFIG);
 
     await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
@@ -108,7 +103,6 @@
     await mspHelper.resetMotorOverrides();
 
     Object.assign(FC.MOTOR_CONFIG, initialState.MOTOR_CONFIG);
-    Object.assign(FC.GOVERNOR, initialState.GOVERNOR);
     Object.assign(FC.ESC_SENSOR_CONFIG, initialState.ESC_SENSOR_CONFIG);
     FC.FEATURE_CONFIG.features.bitfield = initialState.features;
   }
@@ -148,9 +142,6 @@
         </div>
         <div transition:slide>
           <RPM />
-        </div>
-        <div transition:slide>
-          <Governor />
         </div>
       {/if}
     </div>

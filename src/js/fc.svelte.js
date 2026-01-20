@@ -79,6 +79,7 @@ class FlightController {
     this.resetState();
   }
 
+  // prettier-ignore
   resetState() {
     this.CONFIG = {
       apiVersion:                 "0.0.0",
@@ -623,8 +624,7 @@ class FlightController {
       gov_fallback_drop:              0,
       gov_spooldown_time:             0,
       gov_throttle_type:              0,
-      gov_idle_collective:            0,
-      gov_wot_collective:             0,
+      gov_bypass_throttle:            [],
     };
 
     this.SENSOR_CONFIG = {
@@ -800,7 +800,10 @@ class FlightController {
   };
 
   boardHasVcp() {
-    return bit_check(this.CONFIG.targetCapabilities, this.TARGET_CAPABILITIES_FLAGS.HAS_VCP);
+    return bit_check(
+      this.CONFIG.targetCapabilities,
+      this.TARGET_CAPABILITIES_FLAGS.HAS_VCP,
+    );
   }
 
   FILTER_TYPE_FLAGS = {

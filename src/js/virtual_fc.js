@@ -152,7 +152,7 @@ export function applyVirtualConfig() {
     gov_spoolup_time: 100,
     gov_tracking_time: 20,
     gov_recovery_time: 20,
-    gov_autorotation_timeout: 0,
+    gov_autorotation_timeout: 15,
     gov_autorotation_bailout_time: 0,
     gov_autorotation_min_entry_time: 50,
     gov_rpm_filter: 10,
@@ -162,8 +162,7 @@ export function applyVirtualConfig() {
     gov_throttle_hold_timeout: 50,
     gov_d_filter: 50,
     gov_spooldown_time: 30,
-    gov_idle_collective: -95,
-    gov_wot_collective: -10,
+    gov_bypass_throttle: [0, 25, 50, 75, 100, 125, 150, 175, 200],
   });
 
   Object.assign(FC.MOTOR_TELEMETRY_DATA, {
