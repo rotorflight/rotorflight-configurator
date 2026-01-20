@@ -1,5 +1,11 @@
 import semver from "semver";
 
+import {
+    API_VERSION_12_7,
+    API_VERSION_12_8,
+    API_VERSION_12_9,
+} from "@/js/configurator.svelte.js";
+
 // Used for LED_STRIP
 const ledDirectionLetters    = ['n', 'e', 's', 'w', 'u', 'd'];      // in LSB bit order
 const ledBaseFunctionLetters = ['c', 'f', 'a', 'l', 's', 'g', 'r']; // in LSB bit
@@ -341,6 +347,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
             }
 
             case MSPCodes.MSP_RC_TUNING: {
+                // TODO: stop scaling these values
                 FC.RC_TUNING.rates_type = data.readU8();
                 FC.RC_TUNING.roll_rc_rate = parseFloat((data.readU8() / 100).toFixed(2));
                 FC.RC_TUNING.roll_rc_expo = parseFloat((data.readU8() / 100).toFixed(2));
@@ -376,6 +383,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.RC_TUNING.yaw_dynamic_ceiling_gain = data.readU8();
                     FC.RC_TUNING.yaw_dynamic_deadband_gain = data.readU8();
                     FC.RC_TUNING.yaw_dynamic_deadband_filter = data.readU8();
+                }
+
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                    FC.RC_TUNING.cyclic_ring = data.readU8();
                 }
 
                 break;
@@ -1824,6 +1835,10 @@ MspHelper.prototype.crunch = function(code) {
                      .push8(FC.RC_TUNING.yaw_dynamic_ceiling_gain)
                      .push8(FC.RC_TUNING.yaw_dynamic_deadband_gain)
                      .push8(FC.RC_TUNING.yaw_dynamic_deadband_filter);
+            }
+
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                buffer.push8(FC.RC_TUNING.cyclic_ring);
             }
 
             break;
