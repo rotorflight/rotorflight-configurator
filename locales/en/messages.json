@@ -1329,6 +1329,9 @@
     "configuration_FBUS_OUT_EditHeading": {
         "message": "F.BUS Output #{{index}}"
     },
+    "configurationBusOutHeadingSource": {
+        "message": "Source"
+    },
     "configurationBusOutSourceType": {
         "message": "Source Type"
     },
