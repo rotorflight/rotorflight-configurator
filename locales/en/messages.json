@@ -2749,10 +2749,10 @@
         "message": "FPM 90&deg; V"
     },
     "mixerSwashType7": {
-        "message": ""
+        "message": "CCPM 90&deg; H"
     },
     "mixerSwashType8": {
-        "message": ""
+        "message": "CCPM 90&deg; X"
     },
     "mixerSwashType9": {
         "message": ""
