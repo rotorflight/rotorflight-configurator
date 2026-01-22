@@ -82,16 +82,16 @@
       <Field id="bus-low" label="configurationBusOutSourceRangeLow">
         <NumberInput
           id="bus-low"
-          min={RANGE_CONFIG[editOutput.source_type].min}
-          max={RANGE_CONFIG[editOutput.source_type].max}
+          min="-32768"
+          max="32767"
           bind:value={editOutput.source_range_low}
         />
       </Field>
       <Field id="bus-high" label="configurationBusOutSourceRangeHigh">
         <NumberInput
           id="bus-high"
-          min={RANGE_CONFIG[editOutput.source_type].min}
-          max={RANGE_CONFIG[editOutput.source_type].max}
+          min="-32768"
+          max="32767"
           bind:value={editOutput.source_range_high}
         />
       </Field>
