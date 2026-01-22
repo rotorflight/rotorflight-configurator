@@ -1371,6 +1371,38 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             }
 
+            case MSPCodes.MSP_SBUS_OUTPUT_CONFIG: {
+                const outputs = [];
+
+                while (data.remaining() >= 6) {
+                    outputs.push({
+                        source_type: data.readU8(),
+                        source_index: data.readU8(),
+                        source_range_low: data.read16(),
+                        source_range_high: data.read16(),
+                    });
+                }
+
+                FC.SBUS_OUT = outputs;
+                break;
+            }
+
+            case MSPCodes.MSP_GET_FBUS_MASTER_CONFIG: {
+                const outputs = [];
+
+                while (data.remaining() >= 6) {
+                    outputs.push({
+                        source_type: data.readU8(),
+                        source_index: data.readU8(),
+                        source_range_low: data.read16(),
+                        source_range_high: data.read16(),
+                    });
+                }
+
+                FC.FBUS_OUT = outputs;
+                break;
+            }
+
             case MSPCodes.MSP_LED_COLORS: {
                 FC.LED_COLORS = [];
                 const ledcolorCount = data.byteLength / 4;
@@ -2246,6 +2278,17 @@ MspHelper.prototype.crunch = function(code) {
             break;
         }
 
+        case MSPCodes.MSP_SET_SBUS_OUTPUT_CONFIG: {
+            for (const output of FC.SBUS_OUT) {
+                buffer.push8(output.source_type)
+                      .push8(output.source_index)
+                      .push16(output.source_range_low)
+                      .push16(output.source_range_high);
+            }
+
+            break;
+        }
+
         case MSPCodes.MSP_SET_SENSOR_CONFIG: {
             buffer.push8(FC.SENSOR_CONFIG.acc_hardware)
                 .push8(FC.SENSOR_CONFIG.baro_hardware)
@@ -2960,4 +3003,20 @@ MspHelper.prototype.requestRpmFilterBanks = async function()
     }
 
     FC.RPM_FILTER_CONFIG_V2 = banks;
+};
+
+MspHelper.prototype.sendFbusMasterConfig = async function()
+{
+    for (let i = 0; i < FC.FBUS_OUT.length; i++) {
+        const fbusOut = FC.FBUS_OUT[i];
+        const buffer = [];
+
+        buffer.push8(i)
+              .push8(fbusOut.source_type)
+              .push8(fbusOut.source_index)
+              .push16(fbusOut.source_range_low)
+              .push16(fbusOut.source_range_high);
+
+        await MSP.promise(MSPCodes.MSP_SET_FBUS_MASTER_CHANNEL, buffer);
+    }
 };

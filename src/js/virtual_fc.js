@@ -44,6 +44,7 @@ export function applyVirtualConfig() {
       identifier: i - 1,
       auxChannelIndex: 0,
       functions: [],
+      functionMask: 0,
       msp_baudrate: 115200,
       gps_baudrate: 57600,
       telemetry_baudrate: "AUTO",
@@ -51,9 +52,42 @@ export function applyVirtualConfig() {
     };
   }
 
-  FC.SERIAL_CONFIG.ports[1].functionMask = 64; // RX_SERIAL
-  FC.SERIAL_CONFIG.ports[2].functionMask = 1024; // ESC_SENSOR
-  FC.SERIAL_CONFIG.ports[3].functionMask = 2; // GPS
+  Object.assign(FC.SERIAL_CONFIG.ports[1], {
+    functionMask: 64,
+    functions: ["RX_SERIAL"],
+  });
+  Object.assign(FC.SERIAL_CONFIG.ports[2], {
+    functionMask: 1024,
+    functions: ["ESC_SENSOR"],
+  });
+  Object.assign(FC.SERIAL_CONFIG.ports[3], {
+    functionMask: 2,
+    functions: ["GPS"],
+  });
+  Object.assign(FC.SERIAL_CONFIG.ports[4], {
+    functionMask: 262144,
+    functions: ["SBUS_OUT"],
+  });
+  Object.assign(FC.SERIAL_CONFIG.ports[5], {
+    functionMask: 524288,
+    functions: ["FBUS_OUT"],
+  });
+
+  for (let i = 0; i < 18; i++) {
+    FC.SBUS_OUT[i] = {
+      source_type: 1,
+      source_index: i,
+      source_range_low: 1000,
+      source_range_high: 2000,
+    };
+
+    FC.FBUS_OUT[i] = {
+      source_type: 1,
+      source_index: i,
+      source_range_low: 1000,
+      source_range_high: 2000,
+    };
+  }
 
   // Receiver
   FC.FEATURE_CONFIG.features.RX_SERIAL = true;

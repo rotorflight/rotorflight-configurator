@@ -74,6 +74,10 @@ html[data-theme="light"] {
   --color-btn-bg-hover: var(--color-neutral-400);
   --color-btn-bg-active: var(--color-neutral-500);
   --color-btn-bg-disabled: var(--color-neutral-200);
+  --color-flat-btn-fg: var(--color-neutral-700);
+  --color-flat-btn-bg: var(--color-neutral-100);
+  --color-flat-btn-bg-hover: var(--color-neutral-200);
+  --color-flat-btn-bg-active: var(--color-neutral-300);
 
   --color-switch: var(--color-accent-500);
   --color-switch-secondary: var(--color-neutral-300);
@@ -167,6 +171,10 @@ html[data-theme="dark"] {
   --color-btn-bg-hover: var(--color-neutral-400);
   --color-btn-bg-active: var(--color-neutral-500);
   --color-btn-bg-disabled: var(--color-neutral-400);
+  --color-flat-btn-fg: var(--color-neutral-100);
+  --color-flat-btn-bg: var(--color-neutral-900);
+  --color-flat-btn-bg-hover: var(--color-neutral-800);
+  --color-flat-btn-bg-active: var(--color-neutral-700);
 
   --color-switch: var(--color-accent-400);
   --color-switch-secondary: var(--color-neutral-500);

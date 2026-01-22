@@ -21,6 +21,7 @@ class FlightController {
   DEFAULT = $state();
   ESC_SENSOR_CONFIG = $state();
   FAILSAFE_CONFIG = $state();
+  FBUS_OUT = $state();
   FEATURE_CONFIG = $state();
   FILTER_CONFIG = $state();
   FLIGHT_STATS = $state();
@@ -60,6 +61,7 @@ class FlightController {
   RXFAIL_CONFIG = $state();
   RX_CHANNELS = $state();
   RX_CONFIG = $state();
+  SBUS_OUT = $state();
   SDCARD = $state();
   SENSOR_ALIGNMENT = $state();
   SENSOR_CONFIG = $state();
@@ -757,6 +759,9 @@ class FlightController {
       stats_total_dist_m: 0,
       stats_min_armed_time_s: 0,
     };
+
+    this.SBUS_OUT = [];
+    this.FBUS_OUT = [];
   }
 
   getHardwareName() {
