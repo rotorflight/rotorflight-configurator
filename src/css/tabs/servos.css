@@ -338,3 +338,67 @@
         float: left;
     }
 }
+
+/* Spacer row between PWM and bus servos */
+.tab-servos .servoConfig .servo-spacer td {
+    height: 40px;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 15px;
+    border: none;
+    background-color: rgba(var(--accent-rgb), 0.1);
+}
+
+.tab-servos .servoConfig .servo-spacer td > div:first-child {
+    font-size: 14px;
+}
+
+.tab-servos .servoConfig .servo-spacer td > div:last-child {
+    font-size: 11px;
+    font-weight: normal;
+    margin-top: 3px;
+}
+
+/* Spacer row in override table */
+.tab-servos .servoOverride .servo-override-spacer td {
+    height: 40px;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 15px;
+    border: none;
+    background-color: rgba(var(--accent-rgb), 0.1);
+}
+
+.tab-servos .servoOverride .servo-override-spacer td > div:first-child {
+    font-size: 14px;
+}
+
+/* Bus servo header rows */
+.tab-servos .servoConfig .bus-servo-header {
+    color: var(--quietText);
+    background-color: var(--button-background);
+    text-align: center;
+    font-size: 11px;
+    line-height: 16px;
+    height: 22px;
+    border-top: 1px solid var(--boxBackground);
+}
+
+.tab-servos .servoOverride .bus-servo-override-header {
+    color: var(--quietText);
+    background-color: var(--button-background);
+    text-align: center;
+    font-size: 11px;
+    line-height: 16px;
+    height: 22px;
+    border-top: 1px solid var(--boxBackground);
+}
+
+/* Ensure spacer rows don't get zebra striping */
+.tab-servos .servoConfig .servo-spacer {
+    background-color: transparent !important;
+}
+
+.tab-servos .servoOverride .servo-override-spacer {
+    background-color: transparent !important;
+}

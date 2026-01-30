@@ -78,21 +78,11 @@ tab.initialize = function (callback) {
 
         // Check if FBUS or SBUS is enabled
         const hasFbusOrSbus = FC.SERIAL_CONFIG.ports.some(port => 
-            port.functions.includes('FBUS_MASTER') || port.functions.includes('SBUS_OUT')
+            port.functions.includes('FBUS_OUT') || port.functions.includes('SBUS_OUT')
         );
 
         // Hide the separate bus servo hint (will be shown in spacer row instead)
         $('.busServoHint').hide();
-
-        // Toggle rate/source column visibility for bus servos
-        if (supportsBusServos) {
-            $('.servoRateColumn').hide();
-            $('.servoSourceColumn').show();
-            $('.servoRateRebootNote').hide();
-        } else {
-            $('.servoRateColumn').show();
-            $('.servoSourceColumn').hide();
-        }
 
         function setDirty() {
             if (!self.isDirty) {
@@ -443,7 +433,7 @@ tab.initialize = function (callback) {
         
         // Add spacer between PWM servos and bus servos
         if (supportsBusServos && hasFbusOrSbus && pwmServoCount > 0 && busServoCount > 0) {
-                const spacerRow = $('<tr class="servo-spacer"><td colspan="12" style="height: 40px; text-align: center; font-weight: bold; padding-top: 15px; border: none; background-color: rgba(var(--accent-rgb), 0.1);"><div style="font-size: 14px;">Bus Servos (FBUS/SBUS)</div><div style="font-size: 11px; font-weight: normal; margin-top: 3px;">Servos controlled via digital bus protocol</div></td></tr>');
+                const spacerRow = $('<tr class="servo-spacer"><td colspan="11"><div>Bus Servos (FBUS/SBUS)</div><div>Servos controlled via digital bus protocol</div></td></tr>');
                 $('.servoConfig tbody').append(spacerRow);
                 
                 // Add repeated header row for bus servos
@@ -454,7 +444,7 @@ tab.initialize = function (callback) {
                 headerRow.find('.servoSourceColumn').show();
                 $('.servoConfig tbody').append(headerRow);
                 
-                const overrideSpacerRow = $('<tr class="servo-override-spacer"><td colspan="4" style="height: 40px; text-align: center; font-weight: bold; padding-top: 15px; border: none; background-color: rgba(var(--accent-rgb), 0.1);"><div style="font-size: 14px;">Bus Servos</div></td></tr>');
+                const overrideSpacerRow = $('<tr class="servo-override-spacer"><td colspan="4"><div>Bus Servos</div></td></tr>');
                 $('.servoOverride tbody').append(overrideSpacerRow);
                 
                 // Add repeated header row for bus servo overrides
