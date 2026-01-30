@@ -132,6 +132,8 @@ export const MSPCodes = {
     MSP_SET_GOVERNOR_PROFILE:       149,
     MSP_LED_STRIP_SETTINGS:         150,
     MSP_SET_LED_STRIP_SETTINGS:     151,
+    MSP_BUS_SERVO_CONFIG:           152,
+    MSP_SET_BUS_SERVO_CONFIG:       153,
     MSP_RPM_FILTER_V2:              154,
     MSP_SET_RPM_FILTER_V2:          155,
 

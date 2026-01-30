@@ -213,7 +213,7 @@ export function applyVirtualConfig() {
 
   FC.MIXER_CONFIG.mixer = 3;
 
-  FC.SERVO_CONFIG = new Array(8);
+  FC.SERVO_CONFIG = new Array(26);
   for (let i = 0; i < FC.SERVO_CONFIG.length; i++) {
     FC.SERVO_CONFIG[i] = {
       mid: 1500,
@@ -225,6 +225,11 @@ export function applyVirtualConfig() {
       speed: 0,
       flags: 0,
     };
+  }
+
+  FC.BUS_SERVO_CONFIG = new Array(18);
+  for (let i = 0; i < FC.BUS_SERVO_CONFIG.length; i++) {
+    FC.BUS_SERVO_CONFIG[i] = 0; // BUS_SERVO_SOURCE_MIXER
   }
 
   FC.ADJUSTMENT_RANGES = new Array(42);

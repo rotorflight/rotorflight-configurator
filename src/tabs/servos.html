@@ -5,6 +5,15 @@
             <a id="button-documentation"></a>
         </div>
 
+        <!-- BUS SERVO HINT -->
+        <div class="note busServoHint" style="display: none;">
+            <div class="info">
+                <p><strong i18n="busServoHintTitle">FBUS/SBUS Bus Servos</strong></p>
+                <p i18n="busServoHintMessage">FBUS/SBUS enabled, this pages configures BUS servos.</p>
+            </div>
+        </div>
+        <!-- END BUS SERVO HINT -->
+
         <!--div class="note">
             <p i18n="servoHelp"></p>
         </div-->
@@ -40,9 +49,13 @@
                                     <span class="thtext" i18n="servoScalePos"></span>
                                     <span class="helpicon cf_tip" i18n_title="servoScalePosHelp"></span>
                                 </th>
-                                <th>
+                                <th class="servoRateColumn">
                                     <span class="thtext" i18n="servoRate"></span>
                                     <span class="helpicon cf_tip" i18n_title="servoRateHelp"></span>
+                                </th>
+                                <th class="servoSourceColumn" style="display: none;">
+                                    <span class="thtext" i18n="servoSource"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoSourceHelp"></span>
                                 </th>
                                 <th>
                                     <span class="thtext" i18n="servoSpeed"></span>
@@ -151,17 +164,18 @@
     <table class="servoConfigTemplate">
         <tbody>
             <tr>
-                <td><span id="index"></span></td>
-                <td><input id="mid" type="number" min="50" max="2250" /></td>
-                <td><input id="min" type="number" min="-1000" max="1000" /></td>
-                <td><input id="max" type="number" min="-1000" max="1000" /></td>
-                <td><input id="rneg" type="number" min="100" max="1000" /></td>
-                <td><input id="rpos" type="number" min="100" max="1000" /></td>
-                <td><input id="rate" type="number" min="50" max="5000" /></td>
-                <td><input id="speed" type="number" min="0" max="60000" /></td>
-                <td><input id="reversed" type="checkbox" class="toggle" /></td>
-                <td><input id="geocor" type="checkbox" class="toggle" /></td>
-                <td><div class="meter">
+                <td class="servo-index"><span id="index"></span></td>
+                <td class="servo-mid"><input id="mid" type="number" min="50" max="2250" /></td>
+                <td class="servo-min"><input id="min" type="number" min="-1000" max="1000" /></td>
+                <td class="servo-max"><input id="max" type="number" min="-1000" max="1000" /></td>
+                <td class="servo-rneg"><input id="rneg" type="number" min="100" max="1000" /></td>
+                <td class="servo-rpos"><input id="rpos" type="number" min="100" max="1000" /></td>
+                <td class="servoRateColumn servo-rate"><input id="rate" type="number" min="50" max="5000" /></td>
+                <td class="servoSourceColumn servo-source" style="display: none;"><span id="source" class="source-text"></span></td>
+                <td class="servo-speed"><input id="speed" type="number" min="0" max="60000" /></td>
+                <td class="servo-reversed"><input id="reversed" type="checkbox" class="toggle" /></td>
+                <td class="servo-geocor"><input id="geocor" type="checkbox" class="toggle" /></td>
+                <td class="servo-signal"><div class="meter">
                         <div class="meter-bar">
                             <div class="meter-label"></div>
                             <div class="meter-fill">
