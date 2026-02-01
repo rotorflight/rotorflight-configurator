@@ -416,7 +416,7 @@ tab.initialize = function (callback) {
         
         if (supportsBusServos && hasFbusOrSbus) {
             // Firmware always sends 18 bus servos when enabled
-            const BUS_SERVO_CHANNELS = 18;
+            const BUS_SERVO_CHANNELS = 16;
             // PWM servos are first in the array, bus servos come after
             // FC.SERVO_CONFIG.length = total servos received = PWM count + 18
             busServoCount = BUS_SERVO_CHANNELS;
