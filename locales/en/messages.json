@@ -3412,7 +3412,10 @@
         "message": "Throttle"
     },
     "govSectionThrottleCurve": {
-        "message": "Bypass Throttle Curve"
+        "message": "Governor Bypass Throttle Curve"
+    },
+    "govSectionThrottleCurveHelp": {
+        "message": "<p><strong>Governor Bypass Mode</strong> disables all governor functions. When this mode is active, the collective-to-throttle curve is used to determine throttle output.</p><p>See the Governor Bypass section in the Modes tab to configure how the mode is activated.</p>"
     },
     "govSectionRampTime": {
         "message": "Motor Ramp"
@@ -3734,9 +3737,6 @@
     },
     "govFlagHelp_BYPASS": {
         "message": "Bypass all governor functionality."
-    },
-    "govThrottleCurveNote": {
-        "message": "This throttle curve is only used while governor bypass is active."
     },
     "govThrottleCurveNumPoints": {
         "message": "Points"
