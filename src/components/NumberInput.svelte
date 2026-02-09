@@ -7,6 +7,7 @@
     max: maxRaw = 100,
     step: stepRaw = 1,
     disabled,
+    onchange,
     id,
   } = $props();
 
@@ -138,7 +139,11 @@
     lastGoodTextValue = textValue;
     numValue = parseFloat(textValue);
 
+    const changed = value !== numValue;
     value = numValue;
+    if (changed && onchange) {
+      onchange();
+    }
   }
 
   function updateLocal() {

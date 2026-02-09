@@ -157,6 +157,7 @@
             () => FC.MOTOR_OVERRIDE[index] * 0.1,
             (v) => (FC.MOTOR_OVERRIDE[index] = v * 10)
           }
+          changeOnSlide={false}
           onchange={updateThrottle}
           opts={sliderOpts}
         />

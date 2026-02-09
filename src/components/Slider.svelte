@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from "svelte";
   import * as noUiSlider from "nouislider";
 
-  let { value = $bindable(), opts, onchange } = $props();
+  let { value = $bindable(), opts, onchange, changeOnSlide = true } = $props();
 
   let node;
   let slider;
@@ -13,7 +13,9 @@
 
   onMount(() => {
     slider = noUiSlider.create(node, { ...opts, cssPrefix: "svelte-slide-" });
-    slider.on("slide", (values) => {
+
+    const changeEvent = changeOnSlide ? "slide" : "change";
+    slider.on(changeEvent, (values) => {
       value = Number(values[0]);
       onchange?.(value);
     });

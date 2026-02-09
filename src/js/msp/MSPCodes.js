@@ -8,6 +8,10 @@ export const MSPCodes = {
 
     MSP_NAME:                       10,
     MSP_SET_NAME:                   11,
+    MSP_PILOT_CONFIG:               12,
+    MSP_SET_PILOT_CONFIG:           13,
+    MSP_FLIGHT_STATS:               14,
+    MSP_SET_FLIGHT_STATS:           15,
 
     MSP_BATTERY_CONFIG:             32,
     MSP_SET_BATTERY_CONFIG:         33,

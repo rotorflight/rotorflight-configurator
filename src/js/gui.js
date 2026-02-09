@@ -43,6 +43,7 @@ export const GuiControl = function () {
         'blackbox',
         'modes',
         'motors',
+        'governor',
         'mixer',
         'profiles',
         'rates',

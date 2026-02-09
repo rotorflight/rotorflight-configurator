@@ -13,6 +13,7 @@
 !/src/js/clipboard.js
 !/src/js/config.js
 !/src/js/configurator.svelte.js
+!/src/js/fc.svelte.js
 !/src/js/features.svelte.js
 !/src/js/filesystem.js
 !/src/js/main.svelte.js
@@ -21,11 +22,13 @@
 !/src/js/remote_command.svelte.js
 !/src/js/setpoint.svelte.js
 !/src/js/tabs/failsafe.js
+!/src/js/tabs/governor.js
 !/src/js/tabs/gyro.js
 !/src/js/tabs/motors.js
 !/src/js/tabs/presets.js
 !/src/js/tabs/receiver.js
 !/src/js/virtual_fc.js
+!/src/tabs/governor/**/*.js
 !/src/tabs/gyro/filter_config.js
 !/src/tabs/motors/**/*.js
 !/src/tabs/presets/**/*
