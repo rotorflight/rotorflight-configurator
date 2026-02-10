@@ -1143,8 +1143,8 @@
     },
     "statusArmingDisableFlagsTooltipRPMFILTER": {
         "message": "RPM базираното филтриране е активирано, но RPM сигналът не е конфигуриран или е недостъпен по други причини",
-        "english": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailable"
-        "description": "Message that pops up to describe the RPMFILTER arming disable flag",
+        "english": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailable",
+        "description": "Message that pops up to describe the RPMFILTER arming disable flag"
     },
     "statusArmingDisableFlagsTooltipREBOOT_REQ": {
         "message": "Промяна в конфигурацията изисква рестартиране",
