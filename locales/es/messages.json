@@ -3436,12 +3436,12 @@
         "english": "FPM 90&deg; V"
     },
     "mixerSwashType7": {
-        "message": "",
-        "english": ""
+        "message": "CCPM 90&deg; H",
+        "english": "CCPM 90&deg; H"
     },
     "mixerSwashType8": {
-        "message": "",
-        "english": ""
+        "message": "CCPM 90&deg; X",
+        "english": "CCPM 90&deg; X"
     },
     "mixerSwashType9": {
         "message": "",
