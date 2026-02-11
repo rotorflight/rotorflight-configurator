@@ -13,6 +13,7 @@ export class Features {
     DISPLAY: 17,
     OSD: 18,
     CMS: 19,
+    SRXL2_ESC: 24,
     RX_SPI: 25,
     GOVERNOR: 26,
     ESC_SENSOR: 27,

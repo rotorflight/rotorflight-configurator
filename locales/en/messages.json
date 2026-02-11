@@ -1550,6 +1550,9 @@
     "portsFunction_FBUS_OUT": {
         "message": "F.BUS"
     },
+    "portsFunction_SRXL2_ESC": {
+        "message": "SRXL2 ESC"
+    },
     "portsFunction_CUSTOM": {
         "message": "Custom"
     },
