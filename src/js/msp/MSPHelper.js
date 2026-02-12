@@ -526,6 +526,15 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             }
 
+            case MSPCodes.MSP_BUS_SERVO_CONFIG: {
+                FC.BUS_SERVO_CONFIG = [];
+                const BUS_SERVO_CHANNELS = 18;
+                for (let i = 0; i < BUS_SERVO_CHANNELS; i++) {
+                    FC.BUS_SERVO_CONFIG.push(data.readU8());
+                }
+                break;
+            }
+
             case MSPCodes.MSP_ESC_SENSOR_CONFIG: {
                 FC.ESC_SENSOR_CONFIG.protocol = data.readU8();
                 FC.ESC_SENSOR_CONFIG.half_duplex = Boolean(data.readU8());

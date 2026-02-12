@@ -129,7 +129,7 @@
     border-bottom: 0;
 }
 
-.tab-servos .servoConfig td:nth-child(1) {
+.tab-servos .servoConfig .servo-index {
     width: 36px;
     height: 28px;
     text-align: center;
@@ -137,42 +137,51 @@
     border-left: 0;
 }
 
-.tab-servos .servoConfig td:nth-child(2) {
+.tab-servos .servoConfig .servo-mid {
     width: 65px;
 }
 
-.tab-servos .servoConfig td:nth-child(3) {
+.tab-servos .servoConfig .servo-min {
     width: 65px;
 }
 
-.tab-servos .servoConfig td:nth-child(4) {
+.tab-servos .servoConfig .servo-max {
     width: 65px;
 }
 
-.tab-servos .servoConfig td:nth-child(5) {
+.tab-servos .servoConfig .servo-rneg {
     width: 65px;
 }
 
-.tab-servos .servoConfig td:nth-child(6) {
+.tab-servos .servoConfig .servo-rpos {
     width: 65px;
 }
 
-.tab-servos .servoConfig td:nth-child(7) {
+.tab-servos .servoConfig .servo-rate {
     width: 65px;
 }
 
-.tab-servos .servoConfig td:nth-child(8) {
+.tab-servos .servoConfig .servo-source {
+    width: 65px;
+    text-align: center;
+}
+
+.tab-servos .servoConfig .servo-speed {
     width: 70px;
 }
 
-.tab-servos .servoConfig td:nth-child(9) {
+.tab-servos .servoConfig .servo-reversed {
     width: 60px;
     text-align: center;
 }
 
-.tab-servos .servoConfig td:nth-child(10) {
+.tab-servos .servoConfig .servo-geocor {
     width: 60px;
     text-align: center;
+}
+
+.tab-servos .servoConfig .servo-signal {
+    /* Auto width for signal column */
 }
 
 .tab-servos .servoConfig td:last-child {
@@ -328,4 +337,68 @@
     .tab-servos .gui_box {
         float: left;
     }
+}
+
+/* Spacer row between PWM and bus servos */
+.tab-servos .servoConfig .servo-spacer td {
+    height: 40px;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 15px;
+    border: none;
+    background-color: rgba(var(--accent-rgb), 0.1);
+}
+
+.tab-servos .servoConfig .servo-spacer td > div:first-child {
+    font-size: 14px;
+}
+
+.tab-servos .servoConfig .servo-spacer td > div:last-child {
+    font-size: 11px;
+    font-weight: normal;
+    margin-top: 3px;
+}
+
+/* Spacer row in override table */
+.tab-servos .servoOverride .servo-override-spacer td {
+    height: 40px;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 15px;
+    border: none;
+    background-color: rgba(var(--accent-rgb), 0.1);
+}
+
+.tab-servos .servoOverride .servo-override-spacer td > div:first-child {
+    font-size: 14px;
+}
+
+/* Bus servo header rows */
+.tab-servos .servoConfig .bus-servo-header {
+    color: var(--quietText);
+    background-color: var(--button-background);
+    text-align: center;
+    font-size: 11px;
+    line-height: 16px;
+    height: 22px;
+    border-top: 1px solid var(--boxBackground);
+}
+
+.tab-servos .servoOverride .bus-servo-override-header {
+    color: var(--quietText);
+    background-color: var(--button-background);
+    text-align: center;
+    font-size: 11px;
+    line-height: 16px;
+    height: 22px;
+    border-top: 1px solid var(--boxBackground);
+}
+
+/* Ensure spacer rows don't get zebra striping */
+.tab-servos .servoConfig .servo-spacer {
+    background-color: transparent !important;
+}
+
+.tab-servos .servoOverride .servo-override-spacer {
+    background-color: transparent !important;
 }

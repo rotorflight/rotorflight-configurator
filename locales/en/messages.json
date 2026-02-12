@@ -2638,6 +2638,12 @@
     "servoRateHelp": {
         "message": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time."
     },
+    "servoSource": {
+        "message": "Source"
+    },
+    "servoSourceHelp": {
+        "message": "Source of the servo signal. <b>Mixer</b>: servo is controlled by the flight controller mixer. <b>RX</b>: servo receives direct pass-through from the receiver channel."
+    },
     "servoSpeed": {
         "message": "Speed [ms]"
     },
@@ -2673,6 +2679,12 @@
     },
     "servoUnusualGeometryCorrection": {
         "message": "<span class=\"message-negative\">Warning:</span> The <i>Geometry correction</i> is not equal for all servos. Please check!"
+    },
+    "busServoHintTitle": {
+        "message": "FBUS/SBUS Bus Servos"
+    },
+    "busServoHintMessage": {
+        "message": "FBUS/SBUS enabled, this section configures BUS servos."
     },
     "servoOverride": {
         "message": "Servo Override"
