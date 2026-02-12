@@ -214,7 +214,12 @@ tab.initialize = function (callback) {
                 const isBus = servoOverride.data('isBusServo');
                 // Calculate MSP index: bus servos use indices 8-25, PWM servos use 0-N
                 const mspIndex = isBus ? (self.BUS_SERVO_OFFSET + (arrayIdx - pwmServoCount)) : arrayIdx;
-                FC.SERVO_OVERRIDE[mspIndex] = Math.round(value * 1000 / 50);
+                
+                if (isBus) {
+                    FC.SERVO_OVERRIDE[mspIndex] = Math.round(value * 500 / 90);
+                } else {
+                    FC.SERVO_OVERRIDE[mspIndex] = Math.round(value * 1000 / 50);
+                }
                 mspHelper.sendServoOverride(mspIndex);
             });
 
@@ -239,10 +244,21 @@ tab.initialize = function (callback) {
             const mspIndex = isBusServo ? (self.BUS_SERVO_OFFSET + (servoIndex - pwmServoCount)) : servoIndex;
             const value = FC.SERVO_OVERRIDE[mspIndex];
             const check = (value >= -2000 && value <= 2000);
-            const angle = check ? Math.round(value * 50 / 1000) : 0;
+            
+            // Convert MSP value to display value
+            let displayValue;
+            if (isBusServo) {
+                // Bus servos: map 1000 to 2000 → -90° to +90°
+                // Formula: (value - 1500) * 90 / 500
+                displayValue = check ? Math.round(value * 90 / 500) : 0;
+            } else {
+                // PWM servos: map -1800 to +1800 → -90° to +90°
+                // Formula: value / 20
+                displayValue = check ? Math.round(value * 50 / 1000) : 0;
+            }
 
-            servoInput.val(angle);
-            servoSlider.set(angle);
+            servoInput.val(displayValue);
+            servoSlider.set(displayValue);
 
             servoInput.prop('disabled', !check);
             servoEnable.prop('checked', check);
@@ -283,8 +299,7 @@ tab.initialize = function (callback) {
             servoConfig.find('#rate').val(SERVO.rate);
             servoConfig.find('#speed').val(SERVO.speed);
             servoConfig.find('#reversed').prop('checked', revs);
-            servoConfig.find('#geocor').prop('checked', geocor);
-
+            
             // For bus servos, set input constraints and show source
             if (isBusServo) {
                 servoConfig.find('#mid').attr('min', 1000).attr('max', 2000);
@@ -300,7 +315,18 @@ tab.initialize = function (callback) {
                 const sourceType = FC.BUS_SERVO_CONFIG[busServoIndex] || 0;
                 const sourceText = sourceType === 1 ? 'RX' : 'Mixer';
                 servoConfig.find('#source').text(sourceText);
+                
+                // Hide geometry correction checkbox for RX source bus servos
+                if (sourceType === 1) {
+                    // Don't set geocor checkbox, leave cell empty
+                    servoConfig.find('#geocor').remove();
+                } else {
+                    // Only set geocor for Mixer source bus servos
+                    servoConfig.find('#geocor').prop('checked', geocor);
+                }
             } else {
+                // PWM servos: set geocor normally
+                servoConfig.find('#geocor').prop('checked', geocor);
                 // Show rate, hide source
                 servoConfig.find('.servoRateColumn').show();
                 servoConfig.find('.servoSourceColumn').hide();
@@ -416,7 +442,7 @@ tab.initialize = function (callback) {
         
         if (supportsBusServos && hasFbusOrSbus) {
             // Firmware always sends 18 bus servos when enabled
-            const BUS_SERVO_CHANNELS = 16;
+            const BUS_SERVO_CHANNELS = 18;
             // PWM servos are first in the array, bus servos come after
             // FC.SERVO_CONFIG.length = total servos received = PWM count + 18
             busServoCount = BUS_SERVO_CHANNELS;
@@ -453,7 +479,9 @@ tab.initialize = function (callback) {
                 $('.servoOverride tbody').append(overrideHeaderRow);
             
             // Process bus servos (they come after PWM servos in FC.SERVO_CONFIG)
-            for (let i = 0; i < busServoCount; i++) {
+            // Only display first 16 bus servos (indices 0-15), skip the last 2
+            const displayBusServoCount = Math.min(busServoCount, 16);
+            for (let i = 0; i < displayBusServoCount; i++) {
                 const arrayIndex = pwmServoCount + i;  // Index in FC.SERVO_CONFIG array
                 process_config(arrayIndex, true);
                 process_override(arrayIndex, true);
