@@ -253,7 +253,6 @@ tab.initialize = function (callback) {
                 displayValue = check ? Math.round(value * 90 / 500) : 0;
             } else {
                 // PWM servos: map -1800 to +1800 → -90° to +90°
-                // Formula: value / 20
                 displayValue = check ? Math.round(value * 50 / 1000) : 0;
             }
 
@@ -303,8 +302,8 @@ tab.initialize = function (callback) {
             // For bus servos, set input constraints and show source
             if (isBusServo) {
                 servoConfig.find('#mid').attr('min', 1000).attr('max', 2000);
-                servoConfig.find('#min').attr('min', 1000).attr('max', 2000);
-                servoConfig.find('#max').attr('min', 1000).attr('max', 2000);
+                servoConfig.find('#min').attr('min', -500).attr('max', -1);
+                servoConfig.find('#max').attr('min', 1).attr('max', 500);
                 
                 // Hide rate, show source
                 servoConfig.find('.servoRateColumn').hide();
@@ -360,20 +359,18 @@ tab.initialize = function (callback) {
             // Check if this is a bus servo from the stored data attribute
             const isBusServo = servo.data('isBusServo') === true;
             if (isBusServo) {
-                // Clamp min and max to 1000-2000 range
-                min = Math.max(1000, Math.min(2000, min));
-                max = Math.max(1000, Math.min(2000, max));
+                // For bus servos:
+                // - mid is the center pulse width (1000-2000 µs)
+                // - min is the negative offset from mid (should be < 0)
+                // - max is the positive offset from mid (should be > 0)
                 
-                // Ensure min <= max
-                if (min > max) {
-                    const temp = min;
-                    min = max;
-                    max = temp;
-                }
+                // Clamp mid to 1000-2000 range (but keep it > 1000 and < 2000)
+                mid = Math.max(1001, Math.min(1999, mid));
                 
-                // Clamp mid to be between min and max
-                mid = Math.max(min, Math.min(max, mid));
-                
+                min = Math.min(-1, min); 
+                min = Math.max(-500, min);               
+                max = Math.max(1, max);
+                max = Math.min(500, max);                
                 // Update the input fields with corrected values
                 $('#mid', servo).val(mid);
                 $('#min', servo).val(min);
@@ -388,7 +385,14 @@ tab.initialize = function (callback) {
             FC.SERVO_CONFIG[servoIndex].rate = getIntegerValue($('#rate',servo));
             FC.SERVO_CONFIG[servoIndex].speed = getIntegerValue($('#speed',servo));
             FC.SERVO_CONFIG[servoIndex].flags = $('#reversed',servo).prop('checked') ? self.FLAG_REVERSE : 0;
-            FC.SERVO_CONFIG[servoIndex].flags |= $('#geocor',servo).prop('checked') ? self.FLAG_GEOCOR : 0;
+            // Only update geocor flag if the checkbox exists (not removed for RX source bus servos)
+            const geocorCheckbox = $('#geocor',servo);
+            if (geocorCheckbox.length > 0) {
+                FC.SERVO_CONFIG[servoIndex].flags |= geocorCheckbox.prop('checked') ? self.FLAG_GEOCOR : 0;
+            } else {
+                // Preserve existing geocor flag if checkbox doesn't exist
+                FC.SERVO_CONFIG[servoIndex].flags |= (FC.SERVO_CONFIG[servoIndex].flags & self.FLAG_GEOCOR);
+            }
         }
 
         function update_servo_bars() {
@@ -401,7 +405,14 @@ tab.initialize = function (callback) {
 
                 if (!FC.SERVO_CONFIG[i]) continue;
 
-                if (FC.SERVO_CONFIG[i].mid <= 860) {
+                // Check if this is a bus servo (comes after PWM servos in the array)
+                const isBusServo = supportsBusServos && hasFbusOrSbus && i >= pwmServoCount;
+
+                if (isBusServo) {
+                    // Bus servos use 1000-2000 µs range
+                    rangeMin = 1000;
+                    rangeMax = 2000;
+                } else if (FC.SERVO_CONFIG[i].mid <= 860) {
                     // 760us pulse servos
                     rangeMin = 375;
                     rangeMax = 1145;
@@ -468,6 +479,8 @@ tab.initialize = function (callback) {
                 // Show source column, hide rate column in the header
                 headerRow.find('.servoRateColumn').hide();
                 headerRow.find('.servoSourceColumn').show();
+                // Change "PWM Signal" to "BUS-Signal" for bus servos
+                headerRow.find('th[i18n="servoSignal"]').text('BUS-Signal');
                 $('.servoConfig tbody').append(headerRow);
                 
                 const overrideSpacerRow = $('<tr class="servo-override-spacer"><td colspan="4"><div>Bus Servos</div></td></tr>');
@@ -516,12 +529,15 @@ tab.initialize = function (callback) {
 
         self.save = function(callback) {
             // Update all servo configs that are displayed
-            for (let index = 0; index < FC.SERVO_CONFIG.length; index++) {
-                const servoElement = $(`.tab-servos .servoConfig${index}`);
-                if (servoElement.length > 0) {
-                    update_servo_config(index);
+            // Iterate through actual DOM elements and read their stored index
+            // This handles cases where display indices don't match array indices
+            $('.tab-servos .servoConfig tbody tr[class^="servoConfig"]').each(function() {
+                const servoElement = $(this);
+                const actualIndex = servoElement.data('index');
+                if (actualIndex !== undefined) {
+                    update_servo_config(actualIndex);
                 }
-            }
+            });
             save_data(callback);
         };
 
