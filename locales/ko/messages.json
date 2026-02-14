@@ -3678,10 +3678,9 @@
         "english": "LED Profile Selection",
         "status": "Reused translation. Please check!"
     },
-    "adjustmentsFunctionOSDProfile": {
-        "message": "OSD 프로필 선택",
-        "english": "OSD Profile Selection",
-        "status": "Reused translation. Please check!"
+    "adjustmentsFunctionBatteryType": {
+        "message": "배터리 타입 선택",
+        "english": "Battery Type Selection"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "피치 레이트",

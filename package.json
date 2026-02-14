@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint src \"./*.mjs\"",
     "lint:fix": "eslint --fix src \"./*.mjs\"",
-    "start": "concurrently --kill-others 'pnpm vite' 'pnpm gulp dev_client'",
+    "start": "concurrently --kill-others \"pnpm vite\" \"pnpm gulp dev_client\"",
     "prepare": "husky || true"
   },
   "window": {

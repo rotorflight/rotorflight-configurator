@@ -2935,9 +2935,9 @@
         "message": "Sélection du profil LED",
         "english": "LED Profile Selection"
     },
-    "adjustmentsFunctionOSDProfile": {
-        "message": "Sélection du profil OSD",
-        "english": "OSD Profile Selection"
+    "adjustmentsFunctionBatteryType": {
+        "message": "Sélection du type de batterie",
+        "english": "Battery Type Selection"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "Taux du tangage",

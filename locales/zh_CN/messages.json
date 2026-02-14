@@ -2938,9 +2938,9 @@
         "message": "LED 配置文件选择",
         "english": "LED Profile Selection"
     },
-    "adjustmentsFunctionOSDProfile": {
-        "message": "OSD 配置文件选择",
-        "english": "OSD Profile Selection"
+    "adjustmentsFunctionBatteryType": {
+        "message": "电池类型选择",
+        "english": "Battery Type Selection"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "俯仰 Rate",

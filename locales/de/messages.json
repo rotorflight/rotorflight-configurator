@@ -2935,9 +2935,9 @@
         "message": "LED Profilauswahl",
         "english": "LED Profile Selection"
     },
-    "adjustmentsFunctionOSDProfile": {
-        "message": "OSD Profilauswahl",
-        "english": "OSD Profile Selection"
+    "adjustmentsFunctionBatteryType": {
+        "message": "Batterietyp-Auswahl",
+        "english": "Battery Type Selection"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "Nick Rate",
