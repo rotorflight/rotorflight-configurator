@@ -1,6 +1,7 @@
 import * as noUiSlider from 'nouislider';
 import semver from 'semver';
 import wNumb from 'wnumb';
+import { API_VERSION_12_10 } from '../configurator.svelte';
 
 const tab = {
     tabName: 'adjustments',
@@ -21,13 +22,14 @@ const tab = {
 function getFunctions() {
     const gte12_8 = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8);
     const gte12_9 = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9);
+    const gte12_10 = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10);
 
     return [
         { id: 0,    name: 'None',                       min: 0,     max: 100,    ticks: 10,   pips: [ 0, 20, 40, 60, 80, 100 ] },
         { id: 1,    name: 'RateProfile',                min: 1,     max: 6,      ticks: 0.25, pips: [ 1, 2, 3, 4, 5, 6 ] },
         { id: 2,    name: 'PIDProfile',                 min: 1,     max: 6,      ticks: 0.25, pips: [ 1, 2, 3, 4, 5, 6 ] },
         { id: 3,    name: 'LEDProfile',                 min: 1,     max: 4,      ticks: 0.25, pips: [ 1, 2, 3, 4 ] },
-        { id: 4,    name: 'OSDProfile',                 min: 1,     max: 3,      ticks: 0.25, pips: [ 1, 2, 3 ] },
+        { id: 4,    name: 'BatteryType',                min: 0,     max: 5,      ticks: 0.25, pips: [ 0, 1, 2, 3, 4, 5 ], hide: !gte12_10 },
         { id: 5,    name: 'PitchRate',                  min: 0,     max: 255,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
         { id: 6,    name: 'RollRate',                   min: 0,     max: 255,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
         { id: 7,    name: 'YawRate',                    min: 0,     max: 255,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },

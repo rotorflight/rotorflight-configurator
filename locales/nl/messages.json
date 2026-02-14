@@ -2935,9 +2935,9 @@
         "message": "LED profiel selectie",
         "english": "LED Profile Selection"
     },
-    "adjustmentsFunctionOSDProfile": {
-        "message": "OSD profiel selectie",
-        "english": "OSD Profile Selection"
+    "adjustmentsFunctionBatteryType": {
+        "message": "Batterijtype selectie",
+        "english": "Battery Type Selection"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "Pitch snelheid",

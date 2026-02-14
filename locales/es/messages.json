@@ -2935,9 +2935,9 @@
         "message": "Selección de Perfil LED",
         "english": "LED Profile Selection"
     },
-    "adjustmentsFunctionOSDProfile": {
-        "message": "Selección de Perfil OSD",
-        "english": "OSD Profile Selection"
+    "adjustmentsFunctionBatteryType": {
+        "message": "Selección de Tipo de Batería",
+        "english": "Battery Type Selection"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "Tasa de cabeceo",

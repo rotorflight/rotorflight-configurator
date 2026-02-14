@@ -1,6 +1,7 @@
 import semver from "semver";
 
 import {
+    API_VERSION_12_10,
     API_VERSION_12_7,
     API_VERSION_12_8,
     API_VERSION_12_9,
@@ -272,11 +273,21 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_BATTERY_STATE: {
                 FC.BATTERY_STATE.batteryState = data.readU8();
                 FC.BATTERY_STATE.cellCount = data.readU8();
-                FC.BATTERY_STATE.capacity = data.readU16();         // mAh
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+                    FC.BATTERY_STATE.capacity = [];
+                    for (let i = 0; i < 6; i++) {
+                        FC.BATTERY_STATE.capacity.push(data.readU16());
+                    }
+                } else {
+                    FC.BATTERY_STATE.capacity = data.readU16();         // mAh
+                }
                 FC.BATTERY_STATE.mAhDrawn = data.readU16();         // mAh
                 FC.BATTERY_STATE.voltage = data.readU16() / 100;    // V
                 FC.BATTERY_STATE.amperage = data.readU16() / 100;   // A
                 FC.BATTERY_STATE.chargeLevel = data.readU8();
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+                    FC.BATTERY_STATE.batteryType = data.readU8();
+                }
                 break;
             }
 
@@ -328,7 +339,14 @@ MspHelper.prototype.process_data = function(dataHandler) {
             }
 
             case MSPCodes.MSP_BATTERY_CONFIG: {
-                FC.BATTERY_CONFIG.capacity = data.readU16();
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+                    FC.BATTERY_CONFIG.capacity = [];
+                    for (let i = 0; i < 6; i++) {
+                        FC.BATTERY_CONFIG.capacity.push(data.readU16());
+                    }
+                } else {
+                    FC.BATTERY_CONFIG.capacity = data.readU16();
+                }
                 FC.BATTERY_CONFIG.cellCount = data.readU8();
                 FC.BATTERY_CONFIG.voltageMeterSource = data.readU8();
                 FC.BATTERY_CONFIG.currentMeterSource = data.readU8();
@@ -1938,8 +1956,14 @@ MspHelper.prototype.crunch = function(code) {
         }
 
         case MSPCodes.MSP_SET_BATTERY_CONFIG: {
-            buffer.push16(FC.BATTERY_CONFIG.capacity)
-                  .push8(FC.BATTERY_CONFIG.cellCount)
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+                for (let i = 0; i < 6; i++) {
+                    buffer.push16(FC.BATTERY_CONFIG.capacity[i]);
+                }
+            } else {
+                buffer.push16(FC.BATTERY_CONFIG.capacity);
+            }
+            buffer.push8(FC.BATTERY_CONFIG.cellCount)
                   .push8(FC.BATTERY_CONFIG.voltageMeterSource)
                   .push8(FC.BATTERY_CONFIG.currentMeterSource)
                   .push16(Math.round(FC.BATTERY_CONFIG.vbatmincellvoltage * 100))
