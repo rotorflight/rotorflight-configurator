@@ -228,9 +228,9 @@ tab.initialize = function (callback) {
             for (let i = 0; i < 6; i++) {
                 const wrapper = $('<div class="number"></div>');
                 const label = $('<label></label>');
-                const prefix = $('<span class="prefix"></span>').text((i + 1) + ':');
+                const prefix = $('<span class="prefix"></span>').text(i18n.getMessage('powerBatteryHead') + ' ' + i + ':');
                 const suffix = $('<span class="suffix"></span>').text('mAh');
-                const input = $('<input type="number" name="capacity_' + i + '" step="50" min="0" max="20000" />');
+                const input = $('<input type="number" name="capacity_' + i + '" step="10" min="0" max="40000" />');
                 
                 input.val(FC.BATTERY_CONFIG.capacity[i]);
                 input.change(function () {
