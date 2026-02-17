@@ -2726,9 +2726,9 @@
         "message": "PID профил",
         "english": "PID Profile"
     },
-    "receiverTelemetrySensor_BATTERY_PROFILE": {
-        "message": "Профил на батерията",
-        "english": "Battery Profile"
+    "receiverTelemetrySensor_BATTERY_TYPE": {
+        "message": "Тип на батерията",
+        "english": "Battery Type"
     },
     "receiverTelemetrySensor_LED_PROFILE": {
         "message": "LED профил",

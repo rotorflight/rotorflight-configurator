@@ -2166,8 +2166,8 @@
     "receiverTelemetrySensor_PID_PROFILE": {
         "message": "PID Profile"
     },
-    "receiverTelemetrySensor_BATTERY_PROFILE": {
-        "message": "Battery Profile"
+    "receiverTelemetrySensor_BATTERY_TYPE": {
+        "message": "Battery Type"
     },
     "receiverTelemetrySensor_LED_PROFILE": {
         "message": "LED Profile"

@@ -3336,9 +3336,9 @@
         "english": "PID Profile",
         "status": "New entry. Please translate!"
     },
-    "receiverTelemetrySensor_BATTERY_PROFILE": {
-        "message": "Battery Profile",
-        "english": "Battery Profile",
+    "receiverTelemetrySensor_BATTERY_TYPE": {
+        "message": "Battery Type",
+        "english": "Battery Type",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_LED_PROFILE": {
