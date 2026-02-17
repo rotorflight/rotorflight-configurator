@@ -98,7 +98,11 @@ export const SMARTPORT_SENSORS = [
   },
   {
     title: "PROFILE",
-    sensors: [{ name: "PID_PROFILE" }, { name: "RATES_PROFILE" }],
+    sensors: [
+      { name: "PID_PROFILE" },
+      { name: "RATES_PROFILE" },
+      { name: "BATTERY_TYPE" },
+    ],
   },
   {
     title: "CONTROL",
