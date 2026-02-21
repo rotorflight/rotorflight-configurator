@@ -1,7 +1,6 @@
 import semver from "semver";
 
 import {
-    API_VERSION_12_10,
     API_VERSION_12_7,
     API_VERSION_12_8,
     API_VERSION_12_9,
@@ -278,7 +277,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.BATTERY_STATE.voltage = data.readU16() / 100;    // V
                 FC.BATTERY_STATE.amperage = data.readU16() / 100;   // A
                 FC.BATTERY_STATE.chargeLevel = data.readU8();
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
                     FC.BATTERY_STATE.capacity = [];
                     for (let i = 0; i < 6; i++) {
                         FC.BATTERY_STATE.capacity.push(data.readU16());
@@ -346,7 +345,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.BATTERY_CONFIG.vbatwarningcellvoltage = data.readU16() / 100;
                 FC.BATTERY_CONFIG.lvcPercentage = data.readU8();
                 FC.BATTERY_CONFIG.mahWarningPercentage = data.readU8();
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
                     FC.BATTERY_CONFIG.capacity = [];
                     for (let i = 0; i < 6; i++) {
                         FC.BATTERY_CONFIG.capacity.push(data.readU16());
@@ -1953,7 +1952,7 @@ MspHelper.prototype.crunch = function(code) {
         }
 
         case MSPCodes.MSP_SET_BATTERY_CONFIG: {
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
                 buffer.push16(FC.BATTERY_CONFIG.capacity[0]);
             } else {
                 buffer.push16(FC.BATTERY_CONFIG.capacity);
@@ -1967,7 +1966,7 @@ MspHelper.prototype.crunch = function(code) {
                   .push16(Math.round(FC.BATTERY_CONFIG.vbatwarningcellvoltage * 100))
                   .push8(FC.BATTERY_CONFIG.lvcPercentage)
                   .push8(FC.BATTERY_CONFIG.mahWarningPercentage);
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
                 for (let i = 0; i < 6; i++) {
                     buffer.push16(FC.BATTERY_CONFIG.capacity[i]);
                 }

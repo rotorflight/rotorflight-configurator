@@ -1,4 +1,4 @@
-import { API_VERSION_12_10 } from "@/js/configurator.svelte.js";
+import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
 import semver from "semver";
 
 const tab = {
@@ -217,7 +217,7 @@ tab.initialize = function (callback) {
                 FC.BATTERY_CONFIG.vbatwarningcellvoltage = getFloatValue(this);
             });
 
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
             elementBatteryConfiguration.find('input[name="capacity"]').closest('.number').hide();
 
             const fieldset = $('<fieldset class="battery-capacities-fieldset"></fieldset>');
@@ -228,9 +228,9 @@ tab.initialize = function (callback) {
             for (let i = 0; i < 6; i++) {
                 const wrapper = $('<div class="number"></div>');
                 const label = $('<label></label>');
-                const prefix = $('<span class="prefix"></span>').text(i18n.getMessage('powerBatteryHead') + ' ' + i + ':');
+                const prefix = $('<span class="prefix"></span>').text(i18n.getMessage('powerBatteryHead') + ' ' + (i + 1) + ':');
                 const suffix = $('<span class="suffix"></span>').text('mAh');
-                const input = $('<input type="number" name="capacity_' + i + '" step="10" min="0" max="40000" />');
+                const input = $('<input type="number" name="capacity_' + i + '" step="10" min="0" max="40000" style="width: 100px;" />');
                 
                 input.val(FC.BATTERY_CONFIG.capacity[i]);
                 input.change(function () {
@@ -329,7 +329,7 @@ tab.initialize = function (callback) {
                 $('#battery-mah-drawn .value').text(i18n.getMessage('powerMahValue', [FC.BATTERY_STATE.mAhDrawn]));
                 $('#battery-charge-level .value').text(i18n.getMessage('powerChargeLevel', [FC.BATTERY_STATE.chargeLevel]));
 
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
                     const activeType = FC.BATTERY_STATE.batteryType;
                     $('.battery-capacities .number').removeClass('active-capacity');
                     if (activeType >= 0 && activeType < 6) {
