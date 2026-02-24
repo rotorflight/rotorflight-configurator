@@ -3678,9 +3678,10 @@
         "english": "LED Profile Selection",
         "status": "Reused translation. Please check!"
     },
-    "adjustmentsFunctionBatteryType": {
-        "message": "バッテリータイプの選択",
-        "english": "Battery Type Selection"
+    "adjustmentsFunctionOSDProfile": {
+        "message": "OSD Profileの選択",
+        "english": "OSD Profile Selection",
+        "status": "Reused translation. Please check!"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "ピッチレート",

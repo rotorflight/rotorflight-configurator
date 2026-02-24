@@ -3654,9 +3654,10 @@
         "english": "LED Profile Selection",
         "status": "Reused translation. Please check!"
     },
-    "adjustmentsFunctionBatteryType": {
-        "message": "Wybór typu baterii",
-        "english": "Battery Type Selection"
+    "adjustmentsFunctionOSDProfile": {
+        "message": "Wybór profilu OSD",
+        "english": "OSD Profile Selection",
+        "status": "Reused translation. Please check!"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "Pitch Rate",
