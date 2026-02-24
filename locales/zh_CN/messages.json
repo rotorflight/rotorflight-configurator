@@ -2685,9 +2685,9 @@
         "message": "PID Profile（PID参数）",
         "english": "PID Profile"
     },
-    "receiverTelemetrySensor_BATTERY_TYPE": {
-        "message": "Battery Type（电池类型）",
-        "english": "Battery Type"
+    "receiverTelemetrySensor_BATTERY_PROFILE": {
+        "message": "Battery ProfileBattery Profile（电池参数）",
+        "english": "Battery Profile"
     },
     "receiverTelemetrySensor_LED_PROFILE": {
         "message": "LED Profile（LED参数）",

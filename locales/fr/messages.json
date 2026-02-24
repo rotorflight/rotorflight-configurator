@@ -2682,9 +2682,9 @@
         "message": "Profil de PID",
         "english": "PID Profile"
     },
-    "receiverTelemetrySensor_BATTERY_TYPE": {
-        "message": "Type de Batterie",
-        "english": "Battery Type"
+    "receiverTelemetrySensor_BATTERY_PROFILE": {
+        "message": "Profil de Batterie",
+        "english": "Battery Profile"
     },
     "receiverTelemetrySensor_LED_PROFILE": {
         "message": "Profil de LED",

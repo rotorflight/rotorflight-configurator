@@ -2682,9 +2682,9 @@
         "message": "PID Profile（PID 設定檔）",
         "english": "PID Profile"
     },
-    "receiverTelemetrySensor_BATTERY_TYPE": {
-        "message": "Battery Type（電池類型）",
-        "english": "Battery Type"
+    "receiverTelemetrySensor_BATTERY_PROFILE": {
+        "message": "Battery Profile（電池設定檔）",
+        "english": "Battery Profile"
     },
     "receiverTelemetrySensor_LED_PROFILE": {
         "message": "LED Profile（LED 設定檔）",
