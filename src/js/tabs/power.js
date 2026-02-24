@@ -220,30 +220,24 @@ tab.initialize = function (callback) {
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
             elementBatteryConfiguration.find('input[name="capacity"]').closest('.number').hide();
 
-            const fieldset = $('<fieldset class="battery-capacities-fieldset"></fieldset>');
-            const legend = $('<legend></legend>').text(i18n.getMessage('powerBatteryCapacity'));
-            fieldset.append(legend);
+            const fieldset = $('#tab-power-templates .battery-capacities-template fieldset').clone();
+            const capacityContainer = fieldset.find('.battery-capacities');
+            const itemTemplate = $('#tab-power-templates .battery-capacity-item-template .number');
 
-            const capacityContainer = $('<div class="battery-capacities"></div>');
             for (let i = 0; i < 6; i++) {
-                const wrapper = $('<div class="number"></div>');
-                const label = $('<label></label>');
-                const prefix = $('<span class="prefix"></span>').text(i18n.getMessage('powerBatteryHead') + ' ' + (i + 1) + ':');
-                const suffix = $('<span class="suffix"></span>').text('mAh');
-                const input = $('<input type="number" name="capacity_' + i + '" step="10" min="0" max="40000" style="width: 100px;" />');
+                const wrapper = itemTemplate.clone();
+                const input = wrapper.find('input');
+
+                wrapper.find('.prefix').text(i18n.getMessage('powerBatteryHead') + ' ' + (i + 1) + ':');
                 
+                input.attr('name', 'capacity_' + i);
                 input.val(FC.BATTERY_CONFIG.capacity[i]);
                 input.change(function () {
                     FC.BATTERY_CONFIG.capacity[i] = getIntegerValue(this);
                 });
 
-                label.append(prefix);
-                label.append(input);
-                label.append(suffix);
-                wrapper.append(label);
                 capacityContainer.append(wrapper);
             }
-            fieldset.append(capacityContainer);
             elementBatteryConfiguration.find('input[name="capacity"]').closest('.number').after(fieldset);
         } else {
             elementBatteryConfiguration.find('input[name="capacity"]')
