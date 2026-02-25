@@ -2676,12 +2676,6 @@
     "servoUnusualGeometryCorrection": {
         "message": "<span class=\"message-negative\">Warning:</span> The <i>Geometry correction</i> is not equal for all servos. Please check!"
     },
-    "busServoHintTitle": {
-        "message": "FBUS/SBUS Bus Servos"
-    },
-    "busServoHintMessage": {
-        "message": "FBUS/SBUS enabled, this section configures BUS servos."
-    },
     "servoOverride": {
         "message": "Servo Override"
     },

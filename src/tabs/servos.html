@@ -4,16 +4,6 @@
         <div class="cf_doc_version_bt">
             <a id="button-documentation"></a>
         </div>
-
-        <!-- BUS SERVO HINT -->
-        <div class="note busServoHint" style="display: none;">
-            <div class="info">
-                <p><strong i18n="busServoHintTitle">FBUS/SBUS Bus Servos</strong></p>
-                <p i18n="busServoHintMessage">FBUS/SBUS enabled, this pages configures BUS servos.</p>
-            </div>
-        </div>
-        <!-- END BUS SERVO HINT -->
-
         <!--div class="note">
             <p i18n="servoHelp"></p>
         </div-->
@@ -24,8 +14,10 @@
                 <div class="gui_box_titlebar">
                     <div class="spacer_box_title" i18n="servoConfiguration"></div>
                 </div>
-                <div>
-                    <table class="servoConfig">
+                
+                <!-- PWM Servos Table -->
+                <div class="pwm-servos-section">
+                    <table class="servoConfig pwm-servo-config">
                         <thead>
                             <tr class="trhead">
                                 <th i18n="servoNumber"></th>
@@ -53,10 +45,6 @@
                                     <span class="thtext" i18n="servoRate"></span>
                                     <span class="helpicon cf_tip" i18n_title="servoRateHelp"></span>
                                 </th>
-                                <th class="servoSourceColumn" style="display: none;">
-                                    <span class="thtext" i18n="servoSource"></span>
-                                    <span class="helpicon cf_tip" i18n_title="servoSourceHelp"></span>
-                                </th>
                                 <th>
                                     <span class="thtext" i18n="servoSpeed"></span>
                                     <span class="helpicon cf_tip" i18n_title="servoSpeedHelp"></span>
@@ -73,7 +61,62 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- ROWS GENERATED HERE -->
+                            <!-- PWM SERVO ROWS GENERATED HERE -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Bus Servos Section -->
+                <div class="bus-servos-section" style="display: none;">
+                    <div class="servo-spacer">
+                        <div class="spacer-title">Bus Servos (FBUS/SBUS)</div>
+                        <div class="spacer-description">Servos controlled via digital bus protocol</div>
+                    </div>
+                    <table class="servoConfig bus-servo-config">
+                        <thead>
+                            <tr class="trhead">
+                                <th i18n="servoNumber"></th>
+                                <th>
+                                    <span class="thtext" i18n="servoMid"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoMidHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoMin"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoMinHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoMax"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoMaxHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoScaleNeg"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoScaleNegHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoScalePos"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoScalePosHelp"></span>
+                                </th>
+                                <th class="servoSourceColumn">
+                                    <span class="thtext" i18n="servoSource"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoSourceHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoSpeed"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoSpeedHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoReverse"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoReverseHelp"></span>
+                                </th>
+                                <th>
+                                    <span class="thtext" i18n="servoGeometryCorrection"></span>
+                                    <span class="helpicon cf_tip" i18n_title="servoGeometryCorrectionHelp"></span>
+                                </th>
+                                <th>BUS-Signal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- BUS SERVO ROWS GENERATED HERE -->
                         </tbody>
                     </table>
                 </div>
@@ -125,19 +168,42 @@
                 </div>
 
                 <div class="override">
-                    <table class="servoOverride">
-                        <thead>
-                            <tr class="trhead">
-                                <th i18n="servoNumber"></th>
-                                <th i18n="servoOverrideEnable"></th>
-                                <th i18n="servoOverrideAngle"></th>
-                                <th i18n="servoOverrideSlider"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- ROWS GENERATED HERE -->
-                        </tbody>
-                    </table>
+                    <!-- PWM Servo Overrides -->
+                    <div class="pwm-servo-overrides-section">
+                        <table class="servoOverride pwm-servo-override">
+                            <thead>
+                                <tr class="trhead">
+                                    <th i18n="servoNumber"></th>
+                                    <th i18n="servoOverrideEnable"></th>
+                                    <th i18n="servoOverrideAngle"></th>
+                                    <th i18n="servoOverrideSlider"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- PWM SERVO OVERRIDE ROWS GENERATED HERE -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Bus Servo Overrides -->
+                    <div class="bus-servo-overrides-section" style="display: none;">
+                        <div class="servo-override-spacer">
+                            <div class="spacer-title">Bus Servos</div>
+                        </div>
+                        <table class="servoOverride bus-servo-override">
+                            <thead>
+                                <tr class="trhead">
+                                    <th i18n="servoNumber"></th>
+                                    <th i18n="servoOverrideEnable"></th>
+                                    <th i18n="servoOverrideAngle"></th>
+                                    <th i18n="servoOverrideSlider"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- BUS SERVO OVERRIDE ROWS GENERATED HERE -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

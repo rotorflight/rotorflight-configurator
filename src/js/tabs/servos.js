@@ -81,9 +81,6 @@ tab.initialize = function (callback) {
             port.functions.includes('FBUS_OUT') || port.functions.includes('SBUS_OUT')
         );
 
-        // Hide the separate bus servo hint (will be shown in spacer row instead)
-        $('.busServoHint').hide();
-
         function setDirty() {
             if (!self.isDirty) {
                 self.isDirty = true;
@@ -263,7 +260,12 @@ tab.initialize = function (callback) {
             servoEnable.prop('checked', check);
             toggleServoSlider(check);
 
-            $('.servoOverride tbody').append(servoOverride);
+            // Append to the correct table based on servo type
+            if (isBusServo) {
+                $('.bus-servo-override tbody').append(servoOverride);
+            } else {
+                $('.pwm-servo-override tbody').append(servoOverride);
+            }
         }
 
         function process_config(servoIndex, isBusServo) {
@@ -317,8 +319,8 @@ tab.initialize = function (callback) {
                 
                 // Hide geometry correction checkbox for RX source bus servos
                 if (sourceType === 1) {
-                    // Don't set geocor checkbox, leave cell empty
-                    servoConfig.find('#geocor').remove();
+                    // Hide geocor checkbox for RX source bus servos, but keep it in DOM to preserve state
+                    servoConfig.find('#geocor').prop('checked', geocor).hide();
                 } else {
                     // Only set geocor for Mixer source bus servos
                     servoConfig.find('#geocor').prop('checked', geocor);
@@ -345,7 +347,12 @@ tab.initialize = function (callback) {
                 setReboot(true);
             });
 
-            $('.servoConfig tbody').append(servoConfig);
+            // Append to the correct table based on servo type
+            if (isBusServo) {
+                $('.bus-servo-config tbody').append(servoConfig);
+            } else {
+                $('.pwm-servo-config tbody').append(servoConfig);
+            }
         }
 
         function update_servo_config(servoIndex) {
@@ -384,15 +391,10 @@ tab.initialize = function (callback) {
             FC.SERVO_CONFIG[servoIndex].rpos = getIntegerValue($('#rpos',servo));
             FC.SERVO_CONFIG[servoIndex].rate = getIntegerValue($('#rate',servo));
             FC.SERVO_CONFIG[servoIndex].speed = getIntegerValue($('#speed',servo));
-            FC.SERVO_CONFIG[servoIndex].flags = $('#reversed',servo).prop('checked') ? self.FLAG_REVERSE : 0;
-            // Only update geocor flag if the checkbox exists (not removed for RX source bus servos)
-            const geocorCheckbox = $('#geocor',servo);
-            if (geocorCheckbox.length > 0) {
-                FC.SERVO_CONFIG[servoIndex].flags |= geocorCheckbox.prop('checked') ? self.FLAG_GEOCOR : 0;
-            } else {
-                // Preserve existing geocor flag if checkbox doesn't exist
-                FC.SERVO_CONFIG[servoIndex].flags |= (FC.SERVO_CONFIG[servoIndex].flags & self.FLAG_GEOCOR);
-            }
+            // Build flags by combining both bits in a single operation
+            FC.SERVO_CONFIG[servoIndex].flags = 
+                ($('#reversed',servo).prop('checked') ? self.FLAG_REVERSE : 0) |
+                ($('#geocor',servo).prop('checked') ? self.FLAG_GEOCOR : 0);
         }
 
         function update_servo_bars() {
@@ -431,7 +433,8 @@ tab.initialize = function (callback) {
                 const length = percnt.clamp(0, 100);
                 const margin = 100 - length;
 
-                const servoMeter = $(`.tab-servos .servoConfig${i} .meter`);
+                // Query meter from both PWM and Bus servo tables
+                const servoMeter = $(`.tab-servos .pwm-servo-config .servoConfig${i} .meter, .tab-servos .bus-servo-config .servoConfig${i} .meter`);
 
                 $('.meter-fill', servoMeter).css({
                     'width'        : `${length}%`,
@@ -468,28 +471,11 @@ tab.initialize = function (callback) {
             FC.CONFIG.servoOverrideEnabled |= (FC.SERVO_OVERRIDE[index] >= -2000 && FC.SERVO_OVERRIDE[index] <= 2000);
         }
         
-        // Add spacer between PWM servos and bus servos
-        if (supportsBusServos && hasFbusOrSbus && pwmServoCount > 0 && busServoCount > 0) {
-                const spacerRow = $('<tr class="servo-spacer"><td colspan="11"><div>Bus Servos (FBUS/SBUS)</div><div>Servos controlled via digital bus protocol</div></td></tr>');
-                $('.servoConfig tbody').append(spacerRow);
-                
-                // Add repeated header row for bus servos
-                const headerRow = $('.servoConfig thead tr.trhead').clone();
-                headerRow.removeClass('trhead').addClass('bus-servo-header');
-                // Show source column, hide rate column in the header
-                headerRow.find('.servoRateColumn').hide();
-                headerRow.find('.servoSourceColumn').show();
-                // Change "PWM Signal" to "BUS-Signal" for bus servos
-                headerRow.find('th[i18n="servoSignal"]').text('BUS-Signal');
-                $('.servoConfig tbody').append(headerRow);
-                
-                const overrideSpacerRow = $('<tr class="servo-override-spacer"><td colspan="4"><div>Bus Servos</div></td></tr>');
-                $('.servoOverride tbody').append(overrideSpacerRow);
-                
-                // Add repeated header row for bus servo overrides
-                const overrideHeaderRow = $('.servoOverride thead tr.trhead').clone();
-                overrideHeaderRow.removeClass('trhead').addClass('bus-servo-override-header');
-                $('.servoOverride tbody').append(overrideHeaderRow);
+        // Process bus servos if enabled
+        if (supportsBusServos && hasFbusOrSbus && busServoCount > 0) {
+            // Show bus servo sections
+            $('.bus-servos-section').show();
+            $('.bus-servo-overrides-section').show();
             
             // Process bus servos (they come after PWM servos in FC.SERVO_CONFIG)
             // Only display first 16 bus servos (indices 0-15), skip the last 2
@@ -503,7 +489,11 @@ tab.initialize = function (callback) {
                 FC.CONFIG.servoOverrideEnabled |= (FC.SERVO_OVERRIDE[mspIndex] >= -2000 && FC.SERVO_OVERRIDE[mspIndex] <= 2000);
             }
         } else if (!supportsBusServos || !hasFbusOrSbus) {
-            // Legacy mode: process remaining servos normally
+            // Hide bus servo sections
+            $('.bus-servos-section').hide();
+            $('.bus-servo-overrides-section').hide();
+            
+            // Non-bus mode: process remaining servos as PWM servos
             const servoEndIndex = Math.min(FC.CONFIG.servoCount, maxServos);
             for (let index = pwmServoCount; index < servoEndIndex; index++) {
                 process_config(index, false);
@@ -531,7 +521,7 @@ tab.initialize = function (callback) {
             // Update all servo configs that are displayed
             // Iterate through actual DOM elements and read their stored index
             // This handles cases where display indices don't match array indices
-            $('.tab-servos .servoConfig tbody tr[class^="servoConfig"]').each(function() {
+            $('.tab-servos .pwm-servo-config tbody tr[class^="servoConfig"], .tab-servos .bus-servo-config tbody tr[class^="servoConfig"]').each(function() {
                 const servoElement = $(this);
                 const actualIndex = servoElement.data('index');
                 if (actualIndex !== undefined) {

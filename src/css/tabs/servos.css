@@ -180,10 +180,6 @@
     text-align: center;
 }
 
-.tab-servos .servoConfig .servo-signal {
-    /* Auto width for signal column */
-}
-
 .tab-servos .servoConfig td:last-child {
     border-right: 0;
 }
@@ -339,66 +335,47 @@
     }
 }
 
-/* Spacer row between PWM and bus servos */
-.tab-servos .servoConfig .servo-spacer td {
-    height: 40px;
+/* Spacer div between PWM and bus servos */
+.tab-servos .servo-spacer {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    padding: 10px;
     text-align: center;
-    font-weight: bold;
-    padding-top: 15px;
-    border: none;
     background-color: rgba(var(--accent-rgb), 0.1);
+    border-radius: 3px;
 }
 
-.tab-servos .servoConfig .servo-spacer td > div:first-child {
+.tab-servos .servo-spacer .spacer-title {
     font-size: 14px;
+    font-weight: bold;
 }
 
-.tab-servos .servoConfig .servo-spacer td > div:last-child {
+.tab-servos .servo-spacer .spacer-description {
     font-size: 11px;
     font-weight: normal;
     margin-top: 3px;
 }
 
-/* Spacer row in override table */
-.tab-servos .servoOverride .servo-override-spacer td {
-    height: 40px;
+/* Spacer div in override section */
+.tab-servos .servo-override-spacer {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    padding: 10px;
     text-align: center;
-    font-weight: bold;
-    padding-top: 15px;
-    border: none;
     background-color: rgba(var(--accent-rgb), 0.1);
+    border-radius: 3px;
 }
 
-.tab-servos .servoOverride .servo-override-spacer td > div:first-child {
+.tab-servos .servo-override-spacer .spacer-title {
     font-size: 14px;
+    font-weight: bold;
 }
 
-/* Bus servo header rows */
-.tab-servos .servoConfig .bus-servo-header {
-    color: var(--quietText);
-    background-color: var(--button-background);
-    text-align: center;
-    font-size: 11px;
-    line-height: 16px;
-    height: 22px;
-    border-top: 1px solid var(--boxBackground);
+/* Bus servo sections spacing */
+.tab-servos .bus-servos-section {
+    margin-top: 15px;
 }
 
-.tab-servos .servoOverride .bus-servo-override-header {
-    color: var(--quietText);
-    background-color: var(--button-background);
-    text-align: center;
-    font-size: 11px;
-    line-height: 16px;
-    height: 22px;
-    border-top: 1px solid var(--boxBackground);
-}
-
-/* Ensure spacer rows don't get zebra striping */
-.tab-servos .servoConfig .servo-spacer {
-    background-color: transparent !important;
-}
-
-.tab-servos .servoOverride .servo-override-spacer {
-    background-color: transparent !important;
+.tab-servos .bus-servo-overrides-section {
+    margin-top: 15px;
 }
