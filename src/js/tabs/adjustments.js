@@ -27,7 +27,7 @@ function getFunctions() {
         { id: 1,    name: 'RateProfile',                min: 1,     max: 6,      ticks: 0.25, pips: [ 1, 2, 3, 4, 5, 6 ] },
         { id: 2,    name: 'PIDProfile',                 min: 1,     max: 6,      ticks: 0.25, pips: [ 1, 2, 3, 4, 5, 6 ] },
         { id: 3,    name: 'LEDProfile',                 min: 1,     max: 4,      ticks: 0.25, pips: [ 1, 2, 3, 4 ] },
-        { id: 4,    name: 'BatteryType',                min: 0,     max: 5,      ticks: 0.25, pips: [ 0, 1, 2, 3, 4, 5 ], hide: !gte12_9 },
+        { id: 4,    name: 'OSDProfile',                 min: 1,     max: 3,      ticks: 0.25, pips: [ 1, 2, 3 ] },
         { id: 5,    name: 'PitchRate',                  min: 0,     max: 255,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
         { id: 6,    name: 'RollRate',                   min: 0,     max: 255,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
         { id: 7,    name: 'YawRate',                    min: 0,     max: 255,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ] },
@@ -105,6 +105,7 @@ function getFunctions() {
         { id: 79,   name: 'GovMinThrottle',             min: 0,     max: 100,    ticks: 5,    pips: [ 0, 20, 40, 60, 80, 100 ], hide: !gte12_9 },
         { id: 80,   name: 'GovHeadspeed',               min: 0,     max: 10000,  ticks: 200,   pips: [ 0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000 ], hide: !gte12_9 },
         { id: 81,   name: 'GovYawFF',                   min: 0,     max: 250,    ticks: 10,   pips: [ 0, 50, 100, 150, 200, 250 ], hide: !gte12_9 },
+        { id: 82,   name: 'BatteryType',                min: 1,     max: 6,      ticks: 0.25, pips: [ 1, 2, 3, 4, 5, 6 ], hide: !gte12_9 },
     ];
 }
 

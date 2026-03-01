@@ -2359,6 +2359,9 @@
     "adjustmentsFunctionLEDProfile": {
         "message": "LED Profile Selection"
     },
+    "adjustmentsFunctionOSDProfile": {
+        "message": "OSD Profile Selection"
+    },
     "adjustmentsFunctionBatteryType": {
         "message": "Battery Type Selection"
     },
