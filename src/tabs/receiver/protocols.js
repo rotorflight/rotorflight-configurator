@@ -191,6 +191,12 @@ export const RX_PROTOCOLS = [
     telemetry: { type: TelemetryType.TOGGLE },
   },
   {
+    name: "Flysky IBUS2",
+    id: 19,
+    feature: "RX_SERIAL",
+    telemetry: { type: TelemetryType.TOGGLE },
+  },
+  {
     name: "JR XBUS Mode A",
     id: 18,
     feature: "RX_SERIAL",
