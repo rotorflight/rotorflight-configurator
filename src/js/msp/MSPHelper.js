@@ -278,11 +278,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.BATTERY_STATE.amperage = data.readU16() / 100;   // A
                 FC.BATTERY_STATE.chargeLevel = data.readU8();
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
-                    FC.BATTERY_STATE.capacity = [];
-                    for (let i = 0; i < 6; i++) {
-                        FC.BATTERY_STATE.capacity.push(data.readU16());
-                    }
-                    FC.BATTERY_STATE.batteryType = data.readU8();
+                    FC.BATTERY_STATE.batteryProfile = data.readU8();
                 }
                 break;
             }
@@ -346,11 +342,11 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.BATTERY_CONFIG.lvcPercentage = data.readU8();
                 FC.BATTERY_CONFIG.mahWarningPercentage = data.readU8();
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
-                    FC.BATTERY_CONFIG.capacity = [];
+                    FC.BATTERY_CONFIG.capacities = [];
                     for (let i = 0; i < 6; i++) {
-                        FC.BATTERY_CONFIG.capacity.push(data.readU16());
+                        FC.BATTERY_CONFIG.capacities.push(data.readU16());
                     }
-                    data.readU8(); // compat: battery type, not needed
+                    data.readU8(); // compat: battery profile, not needed
                 }
                 break;
             }

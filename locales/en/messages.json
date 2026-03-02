@@ -2166,7 +2166,7 @@
     "receiverTelemetrySensor_PID_PROFILE": {
         "message": "PID Profile"
     },
-    "receiverTelemetrySensor_BATTERY_TYPE": {
+    "receiverTelemetrySensor_BATTERY_PROFILE": {
         "message": "Battery Type"
     },
     "receiverTelemetrySensor_LED_PROFILE": {
@@ -2362,8 +2362,8 @@
     "adjustmentsFunctionOSDProfile": {
         "message": "OSD Profile Selection"
     },
-    "adjustmentsFunctionBatteryType": {
-        "message": "Battery Type Selection"
+    "adjustmentsFunctionBatteryProfile": {
+        "message": "Battery Profile Selection"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "Pitch Rate"

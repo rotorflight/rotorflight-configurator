@@ -231,7 +231,7 @@ tab.initialize = function (callback) {
                 wrapper.find('.prefix').text(i18n.getMessage('powerBatteryHead') + ' ' + (i + 1) + ':');
                 
                 input.attr('name', 'capacity_' + i);
-                input.val(FC.BATTERY_CONFIG.capacity[i]);
+                input.val(FC.BATTERY_CONFIG.capacities[i]);
                 input.change(function () {
                     FC.BATTERY_CONFIG.capacity[i] = getIntegerValue(this);
                 });
@@ -324,7 +324,7 @@ tab.initialize = function (callback) {
                 $('#battery-charge-level .value').text(i18n.getMessage('powerChargeLevel', [FC.BATTERY_STATE.chargeLevel]));
 
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
-                    const activeType = FC.BATTERY_STATE.batteryType;
+                    const activeType = FC.BATTERY_STATE.batteryProfile;
                     $('.battery-capacities .number').removeClass('active-capacity');
                     if (activeType >= 0 && activeType < 6) {
                         $('.battery-capacities .number').eq(activeType).addClass('active-capacity');

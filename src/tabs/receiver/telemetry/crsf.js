@@ -136,7 +136,7 @@ export const CUSTOM_CRSF_SENSORS = [
     sensors: [
       { name: "PID_PROFILE" },
       { name: "RATES_PROFILE" },
-      { name: "BATTERY_TYPE" },
+      { name: "BATTERY_PROFILE" },
       { name: "LED_PROFILE" },
     ],
   },

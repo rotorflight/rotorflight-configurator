@@ -149,6 +149,8 @@ class FlightController {
       voltage:                    0,
       amperage:                   0,
       chargeLevel:                0,
+      batteryProfile:             0,
+      capacities:                [0, 0, 0, 0, 0, 0],
     };
 
     this.ANALOG = {
