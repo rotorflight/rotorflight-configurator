@@ -177,6 +177,9 @@
     "rememberLastSelectedBoard": {
         "message": "Remember last selected board in firmware flasher"
     },
+    "option.showLegacyTargets": {
+        "message": "Show legacy targets in firmware flasher"
+    },
     "analyticsOptOut": {
         "message": "Opt out of the anonymised collection of statistics data"
     },
