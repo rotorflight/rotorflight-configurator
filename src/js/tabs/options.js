@@ -15,6 +15,7 @@ tab.initialize = function (callback) {
         tab.initCordovaForceComputerUI();
         tab.initDarkTheme();
         tab.rememberLastSelectedBoard();
+        tab.showLegacyTargets();
 
         GUI.content_ready(callback);
     });
@@ -54,6 +55,13 @@ tab.rememberLastSelectedBoard = function () {
         .prop('checked', !!config.get('rememberLastSelectedBoard'))
         .change(function() { config.set({rememberLastSelectedBoard: $(this).is(':checked')}); })
         .change();
+};
+
+tab.showLegacyTargets = function () {
+    $('div.showLegacyTargets input')
+        .prop('checked', config.get('showLegacyTargets') ?? false)
+        .on('change', function() { config.set({ showLegacyTargets: $(this).is(':checked') }); })
+        .trigger('change');
 };
 
 tab.initCheckForConfiguratorUnstableVersions = function () {
