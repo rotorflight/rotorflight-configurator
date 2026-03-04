@@ -229,11 +229,11 @@ tab.initialize = function (callback) {
                 const input = wrapper.find('input');
 
                 wrapper.find('.prefix').text(i18n.getMessage('powerBatteryHead') + ' ' + (i + 1) + ':');
-                
+
                 input.attr('name', 'capacity_' + i);
                 input.val(FC.BATTERY_CONFIG.capacities[i]);
-                input.change(function () {
-                    FC.BATTERY_CONFIG.capacity[i] = getIntegerValue(this);
+                input.on('change', function () {
+                    FC.BATTERY_CONFIG.capacities[i] = getIntegerValue(this);
                 });
 
                 capacityContainer.append(wrapper);
@@ -241,8 +241,8 @@ tab.initialize = function (callback) {
             elementBatteryConfiguration.find('input[name="capacity"]').closest('.number').after(fieldset);
         } else {
             elementBatteryConfiguration.find('input[name="capacity"]')
-                .val(FC.BATTERY_CONFIG.capacity).change()
-                .change(function () {
+                .val(FC.BATTERY_CONFIG.capacity)
+                .on('change', function () {
                     FC.BATTERY_CONFIG.capacity = getIntegerValue(this);
                 });
         }

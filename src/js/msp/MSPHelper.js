@@ -342,11 +342,11 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.BATTERY_CONFIG.lvcPercentage = data.readU8();
                 FC.BATTERY_CONFIG.mahWarningPercentage = data.readU8();
                 if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
-                    FC.BATTERY_CONFIG.capacities = [];
+                    const capacities = [];
                     for (let i = 0; i < 6; i++) {
-                        FC.BATTERY_CONFIG.capacities.push(data.readU16());
+                        capacities.push(data.readU16());
                     }
-                    data.readU8(); // compat: battery profile, not needed
+                    FC.BATTERY_CONFIG.capacities = capacities;
                 }
                 break;
             }
@@ -1949,7 +1949,7 @@ MspHelper.prototype.crunch = function(code) {
 
         case MSPCodes.MSP_SET_BATTERY_CONFIG: {
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
-                buffer.push16(FC.BATTERY_CONFIG.capacity[0]);
+                buffer.push16(FC.BATTERY_CONFIG.capacities[0]);
             } else {
                 buffer.push16(FC.BATTERY_CONFIG.capacity);
             }
@@ -1964,7 +1964,7 @@ MspHelper.prototype.crunch = function(code) {
                   .push8(FC.BATTERY_CONFIG.mahWarningPercentage);
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
                 for (let i = 0; i < 6; i++) {
-                    buffer.push16(FC.BATTERY_CONFIG.capacity[i]);
+                    buffer.push16(FC.BATTERY_CONFIG.capacities[i]);
                 }
             }
             break;
