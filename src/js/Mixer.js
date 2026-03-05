@@ -1,3 +1,6 @@
+import semver from 'semver';
+import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
+
 export const Mixer = {
 
     inputNames: [
@@ -63,7 +66,20 @@ export const Mixer = {
         'mixerSwashType4',
         'mixerSwashType5',
         'mixerSwashType6',
+        'mixerSwashType7',
+        'mixerSwashType8',
     ],
+
+    // Get available swash types based on API version
+    getAvailableSwashTypes: function(apiVersion) {
+        // CP90H and CP90X (types 7 and 8) are only available in API 12.9+
+        if (semver.gte(apiVersion, API_VERSION_12_9)) {
+            return this.swashTypes;
+        } else {
+            // Return only types 0-6 for older firmware
+            return this.swashTypes.slice(0, 7);
+        }
+    },
 
     UNINIT: -1,
 
@@ -78,6 +94,8 @@ export const Mixer = {
     SWASH_TYPE_140:     4,
     SWASH_TYPE_90L:     5,
     SWASH_TYPE_90V:     6,
+    SWASH_TYPE_C90H:    7,
+    SWASH_TYPE_C90X:    8,
 
     RULE_COUNT: 32,
 
