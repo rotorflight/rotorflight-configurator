@@ -5,8 +5,11 @@ import {
 } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte";
 import { createEnum } from "@/js/utils/common.js";
-import { CUSTOM_CRSF_SENSORS, getNativeCrsfSensors } from "./telemetry/crsf.js";
-import { SMARTPORT_SENSORS } from "./telemetry/smartport.js";
+import {
+  getCustomCrsfSensors,
+  getNativeCrsfSensors,
+} from "./telemetry/crsf.js";
+import { getSmartPortSensors } from "./telemetry/smartport.js";
 import { GHOST_SENSORS } from "./telemetry/ghost.js";
 import { HUB_SENSORS } from "./telemetry/frsky_hub.js";
 
@@ -22,7 +25,7 @@ function getCrsfTelemetry() {
     return {
       proto: "crsf",
       type: TelemetryType.ORDERED_LIST,
-      sensors: CUSTOM_CRSF_SENSORS,
+      sensors: getCustomCrsfSensors(),
     };
   }
 
@@ -46,7 +49,7 @@ function getSmartportTelemetry() {
     return {
       proto: "smartport",
       type: TelemetryType.ORDERED_LIST,
-      sensors: SMARTPORT_SENSORS,
+      sensors: getSmartPortSensors(),
     };
   }
 
