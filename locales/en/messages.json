@@ -2362,6 +2362,9 @@
     "adjustmentsFunctionOSDProfile": {
         "message": "OSD Profile Selection"
     },
+    "adjustmentsFunctionBatteryProfile": {
+        "message": "Battery Profile Selection"
+    },
     "adjustmentsFunctionPitchRate": {
         "message": "Pitch Rate"
     },

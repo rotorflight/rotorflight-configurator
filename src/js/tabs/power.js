@@ -1,3 +1,6 @@
+import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
+import semver from "semver";
+
 const tab = {
     tabName: 'power',
     isDirty: false,
@@ -214,11 +217,35 @@ tab.initialize = function (callback) {
                 FC.BATTERY_CONFIG.vbatwarningcellvoltage = getFloatValue(this);
             });
 
-        elementBatteryConfiguration.find('input[name="capacity"]')
-            .val(FC.BATTERY_CONFIG.capacity).change()
-            .change(function () {
-                FC.BATTERY_CONFIG.capacity = getIntegerValue(this);
-            });
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+            elementBatteryConfiguration.find('input[name="capacity"]').closest('.number').hide();
+
+            const fieldset = $('#tab-power-templates .battery-capacities-template fieldset').clone();
+            const capacityContainer = fieldset.find('.battery-capacities');
+            const itemTemplate = $('#tab-power-templates .battery-capacity-item-template .number');
+
+            for (let i = 0; i < 6; i++) {
+                const wrapper = itemTemplate.clone();
+                const input = wrapper.find('input');
+
+                wrapper.find('.prefix').text(i18n.getMessage('powerBatteryHead') + ' ' + (i + 1) + ':');
+
+                input.attr('name', 'capacity_' + i);
+                input.val(FC.BATTERY_CONFIG.capacities[i]);
+                input.on('change', function () {
+                    FC.BATTERY_CONFIG.capacities[i] = getIntegerValue(this);
+                });
+
+                capacityContainer.append(wrapper);
+            }
+            elementBatteryConfiguration.find('input[name="capacity"]').closest('.number').after(fieldset);
+        } else {
+            elementBatteryConfiguration.find('input[name="capacity"]')
+                .val(FC.BATTERY_CONFIG.capacity)
+                .on('change', function () {
+                    FC.BATTERY_CONFIG.capacity = getIntegerValue(this);
+                });
+        }
 
         elementBatteryConfiguration.find('input[name="cellcount"]')
             .val(FC.BATTERY_CONFIG.cellCount).change()
@@ -295,6 +322,14 @@ tab.initialize = function (callback) {
                 $('#battery-amperage .value').text(i18n.getMessage('powerAmperageValue', [FC.BATTERY_STATE.amperage]));
                 $('#battery-mah-drawn .value').text(i18n.getMessage('powerMahValue', [FC.BATTERY_STATE.mAhDrawn]));
                 $('#battery-charge-level .value').text(i18n.getMessage('powerChargeLevel', [FC.BATTERY_STATE.chargeLevel]));
+
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                    const activeType = FC.BATTERY_STATE.batteryProfile;
+                    $('.battery-capacities .number').removeClass('active-capacity');
+                    if (activeType >= 0 && activeType < 6) {
+                        $('.battery-capacities .number').eq(activeType).addClass('active-capacity');
+                    }
+                }
             });
         }
 
