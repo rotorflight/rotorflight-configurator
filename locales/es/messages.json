@@ -1005,8 +1005,8 @@
         "english": "Arming Allowed"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "Lista de avisos que indican por qué el armado no se puede permitir. Ponga el mouse sobre el aviso o acuda al tutorial de nuestro sitio web <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> para más info.",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
+        "message": "Lista de avisos que indican por qué el armado no se puede permitir. Ponga el mouse sobre el aviso o acuda al tutorial de nuestro sitio web <a href=\"https://www.rotorflight.org/docs/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arming Disable flags)</a> para más info.",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arming Disable flags)</a> for more info."
     },
     "statusArmingDisableFlagsTooltipNO_GYRO": {
         "message": "Giro no detectado",

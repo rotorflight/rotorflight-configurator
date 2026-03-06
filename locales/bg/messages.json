@@ -1029,8 +1029,8 @@
         "english": "Arming Allowed"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "Списък с причини, които в момента предотвратяват активирането. Преминете с мишката над флага или вижте ръководството на уебсайта <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Флагове за активиране)</a> за повече информация.",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
+        "message": "Списък с причини, които в момента предотвратяват активирането. Преминете с мишката над флага или вижте ръководството на уебсайта <a href=\"https://www.rotorflight.org/docs/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Флагове за активиране)</a> за повече информация.",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arming Disable flags)</a> for more info."
     },
     "statusArmingDisableFlagsTooltipNO_GYRO": {
         "message": "Не е открит жироскоп",
