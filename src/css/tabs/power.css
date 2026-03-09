@@ -1,3 +1,15 @@
+:root[data-theme="light"] .tab-power {
+    --color-active-battery-capacity: hsl(var(--val-accent-hue), 100%, 70%);
+    --color-hover-battery-capacity: hsl(160 2.3% 90%);
+    --color-click-battery-capacity: hsl(160 2.3% 85%);
+}
+
+:root[data-theme="dark"] .tab-power {
+    --color-active-battery-capacity: hsl(var(--val-accent-hue), 100%, 35%);
+    --color-hover-battery-capacity: hsl(160 2.3% 36%);
+    --color-click-battery-capacity: hsl(160 2.3% 40%);
+}
+
 #tab-power-templates {
     display: none;
 }
@@ -77,7 +89,7 @@
 .tab-power .battery-capacities {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0 10px;
+    gap: 2px 4px;
     margin-bottom: 0;
 }
 
@@ -86,21 +98,17 @@
     width: auto;
     margin: 0;
     clear: none;
+    transition: background-color 0.2s ease;
 }
 
 .tab-power .battery-capacities .number label {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .tab-power .battery-capacities .number .prefix {
     margin-right: 5px;
-    font-weight: bold;
-}
-
-.tab-power .active-capacity input {
-    border: 2px solid var(--accent);
-    color: var(--accent);
     font-weight: bold;
 }
 
@@ -113,9 +121,38 @@
     min-width: 0;
 }
 
+.tab-power fieldset.battery-capacities-fieldset .number {
+    border-radius: 2px;
+    padding: 2px 4px;
+}
+
+.tab-power fieldset.battery-capacities-fieldset .number.active-capacity {
+    background-color: var(--color-active-battery-capacity);
+}
+
 .tab-power fieldset.battery-capacities-fieldset legend {
     font-size: 12px;
     font-weight: 600;
     padding: 0 5px;
     width: auto;
+}
+
+@media (hover: hover) {
+    .tab-power .battery-capacities .number:hover {
+        background-color: var(--color-hover-battery-capacity);
+    }
+
+    .tab-power .battery-capacities .number:active {
+        background-color: var(--color-click-battery-capacity);
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .tab-power .battery-capacities {
+        grid-template-columns: 1fr;
+    }
+
+    .tab-power fieldset.battery-capacities-fieldset .number {
+        padding: 8px;
+    }
 }
