@@ -245,6 +245,9 @@ tab.initialize = function (callback) {
                     .val(FC.BATTERY_CONFIG.capacities[i])
                     .on('change', function () {
                         FC.BATTERY_CONFIG.capacities[i] = getIntegerValue(this);
+                    })
+                    .on('click', function (e) {
+                        e.stopPropagation();
                     });
 
                 capacityContainer.append(wrapper);
