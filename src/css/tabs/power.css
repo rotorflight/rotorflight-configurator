@@ -88,7 +88,8 @@
 
 .tab-power .battery-capacities {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(3, auto);
     gap: 2px 4px;
     margin-bottom: 0;
 }
@@ -147,11 +148,13 @@
     }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 1000px) {
     .tab-power .battery-capacities {
-        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, auto);
     }
+}
 
+@media only screen and (max-width: 480px) {
     .tab-power fieldset.battery-capacities-fieldset .number {
         padding: 8px;
     }
