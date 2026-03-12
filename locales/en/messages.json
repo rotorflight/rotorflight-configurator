@@ -5878,6 +5878,9 @@
     "powerBatteryCellCount": {
         "message": "Cell count"
     },
+    "powerBatteryProfile": {
+        "message": "Battery $1"
+    },
     "osdSetupTitle": {
         "message": "OSD"
     },

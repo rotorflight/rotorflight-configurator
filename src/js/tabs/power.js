@@ -232,7 +232,7 @@ tab.initialize = function (callback) {
                 const input = wrapper.find('input');
 
                 wrapper.find('.prefix')
-                    .text(i18n.getMessage('powerBatteryHead') + ' ' + (i + 1) + ':');
+                    .text(i18n.getMessage('powerBatteryProfile', i + 1));
                 wrapper.on('click', function (e) {
                         e.preventDefault();
                         if (self.currentBatteryProfile !== i) {
