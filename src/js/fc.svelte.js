@@ -130,6 +130,7 @@ class FlightController {
 
     this.BATTERY_CONFIG = {
       capacity:                   0,
+      capacities:                 [ 0, 0, 0, 0, 0, 0 ],
       cellCount:                  0,
       voltageMeterSource:         0,
       currentMeterSource:         0,
@@ -149,6 +150,7 @@ class FlightController {
       voltage:                    0,
       amperage:                   0,
       chargeLevel:                0,
+      batteryProfile:             0,
     };
 
     this.ANALOG = {

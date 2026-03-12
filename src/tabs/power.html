@@ -165,14 +165,14 @@
         </div>
         <div class="number">
             <label>
-                <input type="number" name="capacity" step="50" min="0" max="20000" />
-                <span i18n="powerBatteryCapacity"></span>
+                <input type="number" name="cellcount" step="1" min="0" max="24" />
+                <span i18n="powerBatteryCellCount"></span>
             </label>
         </div>
         <div class="number">
             <label>
-                <input type="number" name="cellcount" step="1" min="0" max="24" />
-                <span i18n="powerBatteryCellCount"></span>
+                <input type="number" name="capacity" step="50" min="0" max="20000" />
+                <span i18n="powerBatteryCapacity"></span>
             </label>
         </div>
     </div>
@@ -203,6 +203,23 @@
             <label>
                 <input type="number" name="amperageoffset" step="1" min="-32000" max="32000" />
                 <span i18n="powerAmperageOffset"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="battery-capacities-template">
+        <fieldset class="battery-capacities-fieldset">
+            <legend i18n="powerBatteryCapacity"></legend>
+            <div class="battery-capacities"></div>
+        </fieldset>
+    </div>
+
+    <div class="battery-capacity-item-template">
+        <div class="number">
+            <label>
+                <span class="prefix"></span>
+                <input type="number" step="10" min="0" max="40000" style="width: 100px;" />
+                <span class="suffix">mAh</span>
             </label>
         </div>
     </div>
