@@ -320,7 +320,7 @@ tab.initialize = function (callback) {
                 // Hide geometry correction checkbox for RX source bus servos
                 if (sourceType === 1) {
                     // Hide geocor checkbox for RX source bus servos, but keep it in DOM to preserve state
-                    servoConfig.find('#geocor').prop('checked', geocor).hide();
+                    servoConfig.find('#geocor').prop('checked', geocor).removeClass('toggle').hide();
                 } else {
                     // Only set geocor for Mixer source bus servos
                     servoConfig.find('#geocor').prop('checked', geocor);
