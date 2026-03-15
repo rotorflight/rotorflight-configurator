@@ -12,6 +12,7 @@ class FlightController {
   BEEPER_CONFIG = $state();
   BLACKBOX = $state();
   BOARD_ALIGNMENT_CONFIG = $state();
+  BUS_SERVO_CONFIG = $state();
   CONFIG = $state();
   COPY_PROFILE = $state();
   CURRENT_METERS = $state();
@@ -68,7 +69,6 @@ class FlightController {
   SERVO_CONFIG = $state();
   SERVO_DATA = $state();
   SERVO_OVERRIDE = $state();
-  SERVO_RULES = $state();
   TELEMETRY_CONFIG = $state();
   TRANSPONDER = $state();
   TUNING_SLIDERS = $state();
@@ -294,7 +294,7 @@ class FlightController {
     this.ADJUSTMENT_RANGES =        [];
 
     this.SERVO_CONFIG =             [];
-    this.SERVO_RULES =              [];
+    this.BUS_SERVO_CONFIG =         [];
 
     this.SERIAL_CONFIG = {
       ports:                      [],
