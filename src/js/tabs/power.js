@@ -497,7 +497,7 @@ tab.initialize = function (callback) {
             save_data(callback);
         };
 
-        self.revert = async function () {
+        self.revert = async function (callback) {
             revertData();
 
             if (self.currentBatteryProfile !== self.savedBatteryProfile) {
@@ -505,6 +505,8 @@ tab.initialize = function (callback) {
             }
 
             await send_data();
+
+            callback?.();
         };
 
         $('a.save').click(function () {
