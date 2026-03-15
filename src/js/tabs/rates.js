@@ -1,8 +1,57 @@
 import semver from "semver";
 import { Clock } from "three";
 
+import {
+    API_VERSION_12_8,
+    API_VERSION_12_9,
+} from "@/js/configurator.svelte.js";
 import { Model } from "@/js/model.js";
 import { RateCurve } from "@/js/RateCurve.js";
+
+const DEFAULTS = {
+  DYNAMICS_4_5: {
+      roll_setpoint_boost_gain:          0,
+      pitch_setpoint_boost_gain:         0,
+      yaw_setpoint_boost_gain:           0,
+      collective_setpoint_boost_gain:    0,
+      roll_setpoint_boost_cutoff:        15,
+      pitch_setpoint_boost_cutoff:       15,
+      yaw_setpoint_boost_cutoff:         90,
+      collective_setpoint_boost_cutoff:  15,
+      yaw_dynamic_ceiling_gain:          30,
+      yaw_dynamic_deadband_gain:         30,
+      yaw_dynamic_deadband_filter:       60,
+      roll_response_time:                0,
+      pitch_response_time:               0,
+      yaw_response_time:                 0,
+      collective_response_time:          0,
+      roll_accel_limit:                  0,
+      pitch_accel_limit:                 0,
+      yaw_accel_limit:                   0,
+      collective_accel_limit:            0,
+  },
+  DYNAMICS_4_6: {
+      roll_setpoint_boost_gain:          0,
+      pitch_setpoint_boost_gain:         0,
+      yaw_setpoint_boost_gain:           0,
+      collective_setpoint_boost_gain:    0,
+      roll_setpoint_boost_cutoff:        15,
+      pitch_setpoint_boost_cutoff:       15,
+      yaw_setpoint_boost_cutoff:         90,
+      collective_setpoint_boost_cutoff:  15,
+      yaw_dynamic_ceiling_gain:          0,
+      yaw_dynamic_deadband_gain:         10,
+      yaw_dynamic_deadband_filter:       60,
+      roll_response_time:                0,
+      pitch_response_time:               0,
+      yaw_response_time:                 0,
+      collective_response_time:          0,
+      roll_accel_limit:                  0,
+      pitch_accel_limit:                 0,
+      yaw_accel_limit:                   0,
+      collective_accel_limit:            0,
+  },
+};
 
 const tab = {
     tabName: 'rates',
@@ -1008,8 +1057,8 @@ tab.initRatesSystem = function() {
             rcRateMin   = 10;
             rcRateStep  = 5;
             rateDec     = 0;
-            rateDef     = 24;
-            rateYawDef  = 24;
+            rateDef     = 12;
+            rateYawDef  = 12;
             rateMax     = 127;
             rateStep    = 1;
             rcColDec    = 2;
@@ -1018,7 +1067,7 @@ tab.initRatesSystem = function() {
             rcColMin    = 0;
             rcColStep   = 0.25;
             colDec      = 0;
-            colDef      = 24;
+            colDef      = 12;
             colMax      = 127;
             colStep     = 1;
             expoDec     = 0;
@@ -1171,25 +1220,12 @@ tab.initRatesSystem = function() {
         self.currentRates.yaw_rc_expo               = yawExpoDef;
         self.currentRates.pitch_rc_expo             = expoDef;
         self.currentRates.collective_rc_expo        = colExpoDef;
-        self.currentRates.roll_response_time        = 0;
-        self.currentRates.pitch_response_time       = 0;
-        self.currentRates.yaw_response_time         = 0;
-        self.currentRates.collective_response_time  = 0;
-        self.currentRates.roll_accel_limit          = 0;
-        self.currentRates.pitch_accel_limit         = 0;
-        self.currentRates.yaw_accel_limit           = 0;
-        self.currentRates.collective_accel_limit    = 0;
-        self.currentRates.roll_setpoint_boost_gain         = 0;
-        self.currentRates.roll_setpoint_boost_cutoff       = 15;
-        self.currentRates.pitch_setpoint_boost_gain        = 0;
-        self.currentRates.pitch_setpoint_boost_cutoff      = 15;
-        self.currentRates.yaw_setpoint_boost_gain          = 0;
-        self.currentRates.yaw_setpoint_boost_cutoff        = 90;
-        self.currentRates.collective_setpoint_boost_gain   = 0;
-        self.currentRates.collective_setpoint_boost_cutoff = 15;
-        self.currentRates.yaw_dynamic_ceiling_gain         = 30;
-        self.currentRates.yaw_dynamic_deadband_gain        = 30;
-        self.currentRates.yaw_dynamic_deadband_filter      = 60;
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+            Object.assign(self.currentRates, DEFAULTS.DYNAMICS_4_6);
+        } else {
+            Object.assign(self.currentRates, DEFAULTS.DYNAMICS_4_5);
+        }
     }
 
     const rcRateLabel_e = $('.rates_setup .rates_titlebar .rc_rate');
