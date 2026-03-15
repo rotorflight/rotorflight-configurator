@@ -172,6 +172,7 @@ export const Mixer = {
         const copy = Object.assign({}, orig);
 
         copy.swash_trim = Array.from(orig.swash_trim);
+        copy.trim_flight_trim = Array.from(orig.trim_flight_trim);
 
         return copy;
     },

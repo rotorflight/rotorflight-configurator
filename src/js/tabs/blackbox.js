@@ -102,11 +102,7 @@ const tab = {
             "ERROR_DECAY",
             "HS_OFFSET",
             "HS_BLEED",
-            ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) ? ["GOV_MOTOR"] : []),
-            "USER1",
-            "USER2",
-            "USER3",
-            "USER4",
+            ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) ? ["GOV_MOTOR", "POLAR_RATE", "GYRO_CALIBRATION", "TRIM_FLIGHT"] : []),
         ];
     },
 

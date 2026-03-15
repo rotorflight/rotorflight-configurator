@@ -191,6 +191,10 @@ class FlightController {
       coll_geo_correction:        0,
       coll_tilt_correction_pos:   0,
       coll_tilt_correction_neg:   0,
+      trim_flight_gain:            0,
+      trim_flight_stick_threshold: 0,
+      trim_flight_max_trim:        0,
+      trim_flight_trim:            [ 0, 0 ],
     };
 
     this.MIXER_INPUTS =             [];

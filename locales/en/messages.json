@@ -2392,6 +2392,9 @@
     "adjustmentsFunctionBatteryProfile": {
         "message": "Battery Profile Selection"
     },
+    "adjustmentsFunctionTrimFlightReset": {
+        "message": "Trim Flight Reset"
+    },
     "adjustmentsFunctionPitchRate": {
         "message": "Pitch Rate"
     },
@@ -2892,6 +2895,39 @@
     },
     "mixerSwashTrimHelp": {
         "message": "Trim for swashplate linkages. Use only if the linkages are not adjustable."
+    },
+    "mixerTrimFlight": {
+        "message": "Trim Flight"
+    },
+    "mixerTrimFlightGain": {
+        "message": "Trim Flight Gain"
+    },
+    "mixerTrimFlightGainHelp": {
+        "message": "Accumulation speed for automatic trim capture. 0 means nothing is accumulated, but existing trim offsets are still applied."
+    },
+    "mixerTrimFlightStickThreshold": {
+        "message": "Stick Threshold"
+    },
+    "mixerTrimFlightStickThresholdHelp": {
+        "message": "Stick center dead-band in 0.1% units. Trim is only captured when sticks are within this threshold."
+    },
+    "mixerTrimFlightMaxTrim": {
+        "message": "Max Trim"
+    },
+    "mixerTrimFlightMaxTrimHelp": {
+        "message": "Maximum trim correction per axis in 0.001 swash units."
+    },
+    "mixerTrimFlightRollTrim": {
+        "message": "Roll Trim"
+    },
+    "mixerTrimFlightPitchTrim": {
+        "message": "Pitch Trim"
+    },
+    "mixerTrimFlightTrimHelp": {
+        "message": "Trim value captured by Trim Flight mode. This is automatically updated during trim flight and saved to EEPROM."
+    },
+    "mixerTrimFlightReset": {
+        "message": "Reset Trim"
     },
     "mixerTailRotorSettings": {
         "message": "Tail Rotor Settings"
@@ -7474,6 +7510,9 @@
     },
     "mode RESCUE": {
         "message": "RESCUE"
+    },
+    "mode TRIM FLIGHT": {
+        "message": "TRIM FLIGHT"
     },
     "flashTab": {
         "message": "Update Firmware"

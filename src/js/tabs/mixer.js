@@ -392,6 +392,21 @@ tab.initialize = function (callback) {
             $('.mixerCollectiveTiltCorrection').hide();
         }
 
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+            $('#mixerTrimFlightGain').val(FC.MIXER_CONFIG.trim_flight_gain).change();
+            $('#mixerTrimFlightStickThreshold').val(FC.MIXER_CONFIG.trim_flight_stick_threshold).change();
+            $('#mixerTrimFlightMaxTrim').val(FC.MIXER_CONFIG.trim_flight_max_trim).change();
+            $('#mixerTrimFlightRollTrim').val(FC.MIXER_CONFIG.trim_flight_trim[0] * 0.1).change();
+            $('#mixerTrimFlightPitchTrim').val(FC.MIXER_CONFIG.trim_flight_trim[1] * 0.1).change();
+
+            $('.mixerTrimFlightReset').on('click', function () {
+                $('#mixerTrimFlightRollTrim').val(0).change();
+                $('#mixerTrimFlightPitchTrim').val(0).change();
+            });
+        } else {
+            $('.mixerTrimFlight').hide();
+        }
+
         function setTailRotorMode(mode, change) {
 
             FC.MIXER_CONFIG.tail_rotor_mode = mode;
@@ -477,6 +492,11 @@ tab.initialize = function (callback) {
             FC.MIXER_CONFIG.coll_geo_correction = getIntegerValue('#mixerCollectiveGeoCorrection', 5);
             FC.MIXER_CONFIG.coll_tilt_correction_pos = getIntegerValue('#mixerCollectiveTiltCorrectionPos');
             FC.MIXER_CONFIG.coll_tilt_correction_neg = getIntegerValue('#mixerCollectiveTiltCorrectionNeg');
+            FC.MIXER_CONFIG.trim_flight_gain = getIntegerValue('#mixerTrimFlightGain');
+            FC.MIXER_CONFIG.trim_flight_stick_threshold = getIntegerValue('#mixerTrimFlightStickThreshold');
+            FC.MIXER_CONFIG.trim_flight_max_trim = getIntegerValue('#mixerTrimFlightMaxTrim');
+            FC.MIXER_CONFIG.trim_flight_trim[0] = getIntegerValue('#mixerTrimFlightRollTrim', 10);
+            FC.MIXER_CONFIG.trim_flight_trim[1] = getIntegerValue('#mixerTrimFlightPitchTrim', 10);
 
             if (FC.MIXER_CONFIG.tail_rotor_mode > 0)
                 FC.MIXER_CONFIG.tail_center_trim = getIntegerValue('#mixerTailMotorCenterTrim', 10);

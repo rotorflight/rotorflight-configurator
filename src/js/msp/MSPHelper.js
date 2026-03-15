@@ -755,6 +755,13 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.MIXER_CONFIG.coll_tilt_correction_pos = data.read8();
                     FC.MIXER_CONFIG.coll_tilt_correction_neg = data.read8();
                 }
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                    FC.MIXER_CONFIG.trim_flight_gain = data.readU8();
+                    FC.MIXER_CONFIG.trim_flight_stick_threshold = data.readU8();
+                    FC.MIXER_CONFIG.trim_flight_max_trim = data.read16();
+                    FC.MIXER_CONFIG.trim_flight_trim[0] = data.read16();
+                    FC.MIXER_CONFIG.trim_flight_trim[1] = data.read16();
+                }
                 break;
             }
 
@@ -1827,6 +1834,13 @@ MspHelper.prototype.crunch = function(code) {
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)) {
                 buffer.push8(FC.MIXER_CONFIG.coll_tilt_correction_pos)
                     .push8(FC.MIXER_CONFIG.coll_tilt_correction_neg);
+            }
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                buffer.push8(FC.MIXER_CONFIG.trim_flight_gain)
+                    .push8(FC.MIXER_CONFIG.trim_flight_stick_threshold)
+                    .push16(FC.MIXER_CONFIG.trim_flight_max_trim)
+                    .push16(FC.MIXER_CONFIG.trim_flight_trim[0])
+                    .push16(FC.MIXER_CONFIG.trim_flight_trim[1]);
             }
             break;
         }
