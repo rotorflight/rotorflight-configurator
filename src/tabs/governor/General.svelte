@@ -23,6 +23,7 @@
 
   const fields = {};
   for (const field of [
+    "gov_autorotation_timeout",
     "gov_autorotation_min_entry_time",
     "gov_zero_throttle_timeout",
     "gov_lost_headspeed_timeout",
@@ -209,6 +210,26 @@
     {/if}
 
     {#if govState.enabled && !is_12_9}
+      <div transition:slide>
+        <Field id="gov-autorotation-timeout" label="govAutoTimeout" unit="s">
+          {#snippet tooltip()}
+            <Tooltip
+              help="govAutoTimeoutHelp"
+              attrs={[
+                { name: "genericDefault", value: "0s" },
+                { name: "genericRange", value: "0s - 60s" },
+              ]}
+            />
+          {/snippet}
+          <NumberInput
+            id="gov-autorotation-timeout"
+            min="0"
+            max="60"
+            step="0.1"
+            bind:value={fields.gov_autorotation_timeout}
+          />
+        </Field>
+      </div>
       <div transition:slide>
         <Field
           id="gov-auto-min-entry-time"

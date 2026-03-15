@@ -77,7 +77,7 @@
           {/snippet}
           <Switch
             id="throttle-unsynced-pwm"
-            bind:checked={FC.ESC_SENSOR_CONFIG.use_unsynced_pwm}
+            bind:checked={FC.MOTOR_CONFIG.use_unsynced_pwm}
           />
         </Field>
       </div>

@@ -1,3 +1,51 @@
+# 2.3.0-20260208
+
+This is a *development snapshot* of the Rotorflight 2.3 Configurator.
+
+## Notes
+
+**Not compatible with 2.3.0-20251111**
+
+Flight controllers running the 2.3.0-20251111 snapshot **must not** be configured using this Configurator release.
+
+This version is intended to be used for beta-testing only. It may contain
+incomplete features or stability issues and is not recommended for end-user
+use.
+
+For more information, please join the Rotorflight Discord chat.
+
+## Downloads
+
+- [Rotorflight Configurator](https://github.com/rotorflight/rotorflight-configurator/releases/tag/snapshot/2.3.0-20260208)
+- [Rotorflight Blackbox](https://github.com/rotorflight/rotorflight-blackbox/releases/tag/snapshot/2.3.0-20260208)
+- [LUA Scripts for EdgeTx and OpenTx](https://github.com/rotorflight/rotorflight-lua-scripts/releases/tag/snapshot/2.3.0-20260208)
+- [LUA Scripts for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos/releases/tag/snapshot/2.3.0-20260208)
+- [Lua Suite for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos-suite/releases/tag/snapshot/2.3.0-20260208)
+
+## Changes from 2.3.0-20251111
+
+- Governor configuration moved to its own tab
+- Live updates to throttle range parameters
+- Support Rotorflight rates system
+- Show flight count and time stats on status tab
+- Add FBUS serial port option
+- Fix channel assignment changes saving in the wrong order
+
+## Changes from 2.2.1
+
+- Add **Expert Mode** toggle (only implemented on some tabs)
+- New layouts for Motors, Receiver and Failsafe tab
+- Various mobile layout improvements
+- Removed confusing arm mode active indicator on Modes tab
+
+**Important:** The Apple silicon build is not notarized by Apple. It is neccessary to run the following command before installing. **NOTE:** Replace `/path/to` with the actual path to the file.
+
+```sh
+xattr -cr "/path/to/rotorflight-configurator_2.3.0-20260208_macos_arm64.dmg"
+```
+
+***
+
 # 2.3.0-20251111
 
 This is a *development snapshot* of the Rotorflight 2.3 Configurator.

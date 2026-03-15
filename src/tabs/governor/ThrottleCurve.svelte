@@ -4,7 +4,6 @@
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
-  import InfoNote from "@/components/notes/InfoNote.svelte";
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
 
@@ -205,10 +204,7 @@
   let currentY = $derived(interpolate(inputValue));
 </script>
 
-<Section label="govSectionThrottleCurve">
-  <SubSection>
-    <InfoNote message="govThrottleCurveNote" />
-  </SubSection>
+<Section label="govSectionThrottleCurve" summary="govSectionThrottleCurveHelp">
   <SubSection>
     <div class="container">
       <svg

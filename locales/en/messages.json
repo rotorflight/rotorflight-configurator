@@ -200,6 +200,10 @@
     "language_default_pretty": {
         "message": "System Default ($t(detectedLanguage))"
     },
+    "language_bg": {
+        "message": "Български",
+        "description": "Don't translate!!!"
+    },
     "language_ca": {
         "message": "Català",
         "description": "Don't translate!!!"
@@ -970,7 +974,7 @@
         "description": "Message that pops up to describe the RESC arming disable flag"
     },
     "statusArmingDisableFlagsTooltipRPMFILTER": {
-        "message": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailble",
+        "message": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailable",
         "description": "Message that pops up to describe the RPMFILTER arming disable flag"
     },
     "statusArmingDisableFlagsTooltipREBOOT_REQ": {
@@ -1671,7 +1675,7 @@
         "message": "Boost"
     },
     "profilesBoostHelp": {
-        "message": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without he drawbacks of high Proportional or Feedforward gains."
+        "message": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without the drawbacks of high Proportional or Feedforward gains."
     },
     "profilesCopyProfile": {
         "message": "Copy profile"
@@ -1743,7 +1747,7 @@
         "message": "The throttle channel value where throttle is considered 0%."
     },
     "receiverHelpZeroThrottle2": {
-        "message": "<p>The throttle channel value where throttle is considered 0%. Set to 0 to set automatically.</p><p><strong>Note:</strong> The throttle channel must be able to move atleast 10µs below this value to signal throttle off and allow arming.</p>"
+        "message": "<p>The throttle channel value where throttle is considered 0%. Set to 0 to set automatically.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
     },
     "receiverFullThrottle": {
         "message": "Max Throttle - 100%"
@@ -2357,6 +2361,9 @@
     },
     "adjustmentsFunctionOSDProfile": {
         "message": "OSD Profile Selection"
+    },
+    "adjustmentsFunctionBatteryProfile": {
+        "message": "Battery Profile Selection"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "Pitch Rate"
@@ -3418,7 +3425,10 @@
         "message": "Throttle"
     },
     "govSectionThrottleCurve": {
-        "message": "Bypass Throttle Curve"
+        "message": "Governor Bypass Throttle Curve"
+    },
+    "govSectionThrottleCurveHelp": {
+        "message": "<p><strong>Governor Bypass Mode</strong> disables all governor functions. When this mode is active, the collective-to-throttle curve is used to determine throttle output.</p><p>See the Governor Bypass section in the Modes tab to configure how the mode is activated.</p>"
     },
     "govSectionRampTime": {
         "message": "Motor Ramp"
@@ -3740,9 +3750,6 @@
     },
     "govFlagHelp_BYPASS": {
         "message": "Bypass all governor functionality."
-    },
-    "govThrottleCurveNote": {
-        "message": "This throttle curve is only used while governor bypass is active."
     },
     "govThrottleCurveNumPoints": {
         "message": "Points"
@@ -7798,11 +7805,11 @@
     },
     "presetsNoPresetsFound": {
         "message": "No presets found for the given search parameters",
-        "description": "Message that apprears on presets tab if no presets were found"
+        "description": "Message that appears on presets tab if no presets were found"
     },
     "presetsTooManyPresetsFound": {
         "message": "Reached the maximum limit of the shown presets number",
-        "description": "Message that apprears on presets tab if too many presets found"
+        "description": "Message that appears on presets tab if too many presets found"
     },
     "presetOptionsPlaceholder": {
         "message": "ATTENTION! Review the list of options",

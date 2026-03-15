@@ -73,3 +73,49 @@
     font-size: 12px;
     font-weight: 600;
 }
+
+.tab-power .battery-capacities {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 10px;
+    margin-bottom: 0;
+}
+
+.tab-power .battery-capacities .number {
+    float: none;
+    width: auto;
+    margin: 0;
+    clear: none;
+}
+
+.tab-power .battery-capacities .number label {
+    display: flex;
+    align-items: center;
+}
+
+.tab-power .battery-capacities .number .prefix {
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.tab-power .active-capacity input {
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.tab-power fieldset.battery-capacities-fieldset {
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+    padding: 0 5px 5px 5px;
+    margin-bottom: 5px;
+    clear: both;
+    min-width: 0;
+}
+
+.tab-power fieldset.battery-capacities-fieldset legend {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 0 5px;
+    width: auto;
+}

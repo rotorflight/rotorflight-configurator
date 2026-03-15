@@ -105,6 +105,23 @@ export function applyVirtualConfig() {
     };
   }
 
+  // Power
+  Object.assign(FC.BATTERY_CONFIG, {
+    vbatmincellvoltage: 1,
+    vbatmaxcellvoltage: 4,
+    vbatwarningcellvoltage: 3,
+    capacity: 10000,
+    voltageMeterSource: 1,
+    currentMeterSource: 1,
+  });
+
+  Object.assign(FC.BATTERY_STATE, {
+    cellCount: 10,
+    voltage: 20,
+    mAhDrawn: 1000,
+    amperage: 3,
+  });
+
   // Gyro
   FC.FEATURE_CONFIG.features.DYN_NOTCH = true;
   FC.FEATURE_CONFIG.features.RPM_FILTER = true;
@@ -273,22 +290,6 @@ export function applyVirtualConfig() {
     mAhdrawn: 1200,
     amperage: 3,
   });
-
-  FC.BATTERY_CONFIG = {
-    vbatmincellvoltage: 1,
-    vbatmaxcellvoltage: 4,
-    vbatwarningcellvoltage: 3,
-    capacity: 10000,
-    voltageMeterSource: 1,
-    currentMeterSource: 1,
-  };
-
-  FC.BATTERY_STATE = {
-    cellCount: 10,
-    voltage: 20,
-    mAhDrawn: 1000,
-    amperage: 3,
-  };
 
   FC.SENSOR_CONFIG = {
     acc_hardware: 1,
