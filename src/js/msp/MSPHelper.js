@@ -356,6 +356,11 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             }
 
+            case MSPCodes.MSP_SET_BATTERY_PROFILE: {
+                console.log('Battery profile set');
+                break;
+            }
+
             case MSPCodes.MSP_RC_TUNING: {
                 // TODO: stop scaling these values
                 FC.RC_TUNING.rates_type = data.readU8();
@@ -532,6 +537,15 @@ MspHelper.prototype.process_data = function(dataHandler) {
                         };
                         FC.SERVO_CONFIG.push(arr);
                     }
+                }
+                break;
+            }
+
+            case MSPCodes.MSP_BUS_SERVO_CONFIG: {
+                FC.BUS_SERVO_CONFIG = [];
+                const BUS_SERVO_CHANNELS = 18;
+                for (let i = 0; i < BUS_SERVO_CHANNELS; i++) {
+                    FC.BUS_SERVO_CONFIG.push(data.readU8());
                 }
                 break;
             }
@@ -2979,4 +2993,14 @@ MspHelper.prototype.requestRpmFilterBanks = async function()
     }
 
     FC.RPM_FILTER_CONFIG_V2 = banks;
+};
+
+MspHelper.prototype.setBatteryProfile = async function(index)
+{
+    if (CONFIGURATOR.virtualMode) {
+        FC.BATTERY_STATE.batteryProfile = index;
+    } else {
+        const buffer = [index];
+        await MSP.promise(MSPCodes.MSP_SET_BATTERY_PROFILE, buffer);
+    }
 };
