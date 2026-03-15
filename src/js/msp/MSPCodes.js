@@ -144,6 +144,9 @@ export const MSPCodes = {
     MSP_SET_MIXER_INPUT:            171,
     MSP_MIXER_RULES:                172,
     MSP_SET_MIXER_RULE:             173,
+    MSP_GET_MIXER_INPUT:            174,
+    MSP_BATTERY_PROFILE:            175,
+    MSP_SET_BATTERY_PROFILE:        176,
 
     MSP_DISPLAYPORT:                182,
 
