@@ -5656,6 +5656,9 @@
     "powerBatteryVoltageMeterTypeEsc": {
         "message": "ESC Telemetry"
     },
+    "powerBatteryVoltageMeterTypeFbus": {
+        "message": "FrSky F.BUS"
+    },
     "powerBatteryCurrentMeterSource": {
         "message": "Battery Current Source"
     },
@@ -5667,6 +5670,9 @@
     },
     "powerBatteryCurrentMeterTypeEsc": {
         "message": "ESC Telemetry"
+    },
+    "powerBatteryCurrentMeterTypeFbus": {
+        "message": "FrSky F.BUS"
     },
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP Sensor"
