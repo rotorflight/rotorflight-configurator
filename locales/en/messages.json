@@ -1318,7 +1318,7 @@
     "configurationBeeperHelp": {
         "message": "Enable or disable when to sound the Buzzer"
     },
-    "configurationModelId": {
+    "configuration.personalisation.model_id.label": {
         "message": "Model Id"
     },
     "beeper_GYRO_CALIBRATED": {
