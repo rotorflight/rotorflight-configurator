@@ -50,6 +50,7 @@ class FlightController {
   PIDS_ACTIVE = $state();
   PID_NAMES = $state();
   PID_PROFILE = $state();
+  PILOT_CONFIG = $state();
   RC = $state();
   RC_COMMAND = $state();
   RC_CONFIG = $state();
@@ -758,6 +759,17 @@ class FlightController {
       stats_total_time_s: 0,
       stats_total_dist_m: 0,
       stats_min_armed_time_s: 0,
+    };
+
+    this.PILOT_CONFIG = {
+      model_id: 0,
+      model_param1_type: 0,
+      model_param1_value: 0,
+      model_param2_type: 0,
+      model_param2_value: 0,
+      model_param3_type: 0,
+      model_param3_value: 0,
+      model_flags: 0,
     };
   }
 

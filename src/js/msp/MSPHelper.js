@@ -898,6 +898,20 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             }
 
+            case MSPCodes.MSP_PILOT_CONFIG: {
+                FC.PILOT_CONFIG.model_id = data.readU8();
+                FC.PILOT_CONFIG.model_param1_type = data.readU8();
+                FC.PILOT_CONFIG.model_param1_value = data.readU16();
+                FC.PILOT_CONFIG.model_param2_type = data.readU8();
+                FC.PILOT_CONFIG.model_param2_value = data.readU16();
+                FC.PILOT_CONFIG.model_param3_type = data.readU8();
+                FC.PILOT_CONFIG.model_param3_value = data.readU16();
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                    FC.PILOT_CONFIG.model_flags = data.readU32();
+                }
+                break;
+            }
+
             case MSPCodes.MSP_FLIGHT_STATS: {
                 FC.FLIGHT_STATS.stats_total_flights = data.readU32();
                 FC.FLIGHT_STATS.stats_total_time_s = data.readU32();
@@ -2296,6 +2310,20 @@ MspHelper.prototype.crunch = function(code) {
             const MSP_BUFFER_SIZE = 64;
             for (let i = 0; i<FC.CONFIG.name.length && i<MSP_BUFFER_SIZE; i++) {
                 buffer.push8(FC.CONFIG.name.charCodeAt(i));
+            }
+            break;
+        }
+
+        case MSPCodes.MSP_SET_PILOT_CONFIG: {
+            buffer.push8(FC.PILOT_CONFIG.model_id)
+                  .push8(FC.PILOT_CONFIG.model_param1_type)
+                  .push16(FC.PILOT_CONFIG.model_param1_value)
+                  .push8(FC.PILOT_CONFIG.model_param2_type)
+                  .push16(FC.PILOT_CONFIG.model_param2_value)
+                  .push8(FC.PILOT_CONFIG.model_param3_type)
+                  .push16(FC.PILOT_CONFIG.model_param3_value);
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                buffer.push32(FC.PILOT_CONFIG.model_flags);
             }
             break;
         }
