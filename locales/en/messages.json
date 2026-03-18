@@ -1321,6 +1321,30 @@
     "configuration.personalisation.model_id.label": {
         "message": "Model Id"
     },
+    "configurationFlightStats": {
+        "message": "Flight Statistics"
+    },
+    "configurationFlightStatsEnable": {
+        "message": "Record Flight Statistics"
+    },
+    "configurationFlightStatsReset": {
+        "message": "Reset"
+    },
+    "configurationFlightStatsMinArmedTime": {
+        "message": "Minimum flight time"
+    },
+    "configurationFlightStatsMinArmedTimeHelp": {
+        "message": "Minimum duration the flight controller must be armed for the flights stats to be added to the total."
+    },
+    "configurationFlightCount": {
+        "message": "Flight Count"
+    },
+    "configurationFlightTime": {
+        "message": "Flight Time"
+    },
+    "configurationFlightDistance": {
+        "message": "Distance"
+    },
     "beeper_GYRO_CALIBRATED": {
         "message": "Beeps when gyro has been calibrated"
     },
