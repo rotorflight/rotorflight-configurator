@@ -337,7 +337,7 @@ tab.initialize = function (callback) {
             const manufacturerIds = Object.keys(targetsByManufacturer).sort();
             for (const manufacturer of manufacturerIds) {
                 const boards = targetsByManufacturer[manufacturer]
-                    .filter((x) => (x.target === selected) || (showLegacy !== x.supported))
+                    .filter((x) => x.supported || showLegacy || (x.target === selected))
                     .sort((a, b) => {
                         if (a.board < b.board) return -1;
                         if (a.board > b.board) return 1;
@@ -776,6 +776,13 @@ tab.initialize = function (callback) {
             buildType_e.val(result.selected_build_type || 0).trigger('change');
         });
 
+        $('#show-legacy-targets')
+            .prop('checked', config.get('showLegacyTargets') ?? false)
+            .on('change', function () {
+                  const enabled = $(this).is(':checked');
+                  config.set({ showLegacyTargets: enabled });
+                  updateBoardSelect($('select[name="board"]').val());
+            });
 
         if (config.get('no_reboot_sequence')) {
             $('input.updating').prop('checked', true);

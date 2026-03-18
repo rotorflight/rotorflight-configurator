@@ -177,9 +177,6 @@
     "rememberLastSelectedBoard": {
         "message": "Remember last selected board in firmware flasher"
     },
-    "option.showLegacyTargets": {
-        "message": "Show legacy targets in firmware flasher"
-    },
     "analyticsOptOut": {
         "message": "Opt out of the anonymised collection of statistics data"
     },
@@ -4158,6 +4155,12 @@
     },
     "firmwareFlasherBaudRate": {
         "message": "Baud Rate"
+    },
+    "firmware_flasher.show_legacy_targets.label": {
+        "message": "Show Legacy Targets"
+    },
+    "firmware_flasher.show_legacy_targets.description": {
+        "message": "Show targets for many Betaflight boards. These targets are not actively maintained."
     },
     "firmwareFlasherOptionLoading": {
         "message": "Loading ..."
