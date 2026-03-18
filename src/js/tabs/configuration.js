@@ -1,6 +1,8 @@
 import semver from "semver";
 
+import { getIntegerValue } from "@/js/main.js";
 import { Model } from "@/js/model.js";
+import { reinitialiseConnection } from "@/js/serial_backend.js";
 
 const tab = {
     tabName: 'configuration',
@@ -280,45 +282,53 @@ tab.initialize = function (callback) {
 
     GUI.configuration_loaded = true;
 
-    load_data(load_html);
+    load_data().then(() => load_html());
 
     function load_html() {
         $('#content').load("/src/tabs/configuration.html", process_html);
     }
 
-    function load_data(callback) {
-        Promise.resolve(true)
-            .then(() => MSP.promise(MSPCodes.MSP_STATUS))
-            .then(() => MSP.promise(MSPCodes.MSP_NAME))
-            .then(() => MSP.promise(MSPCodes.MSP_BOARD_INFO))
-            .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
-            .then(() => MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG))
-            .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
-            .then(() => MSP.promise(MSPCodes.MSP_SENSOR_CONFIG))
-            .then(() => MSP.promise(MSPCodes.MSP_SENSOR_ALIGNMENT))
-            .then(() => MSP.promise(MSPCodes.MSP_BOARD_ALIGNMENT_CONFIG))
-            .then(() => MSP.promise(MSPCodes.MSP_ACC_TRIM))
-            .then(() => MSP.promise(MSPCodes.MSP_SERIAL_CONFIG))
-            .then(callback);
+    async function load_data() {
+        await MSP.promise(MSPCodes.MSP_STATUS);
+        await MSP.promise(MSPCodes.MSP_NAME);
+        await MSP.promise(MSPCodes.MSP_BOARD_INFO);
+        await MSP.promise(MSPCodes.MSP_FEATURE_CONFIG);
+        await MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG);
+        await MSP.promise(MSPCodes.MSP_MIXER_CONFIG);
+        await MSP.promise(MSPCodes.MSP_SENSOR_CONFIG);
+        await MSP.promise(MSPCodes.MSP_SENSOR_ALIGNMENT);
+        await MSP.promise(MSPCodes.MSP_BOARD_ALIGNMENT_CONFIG);
+        await MSP.promise(MSPCodes.MSP_ACC_TRIM);
+        await MSP.promise(MSPCodes.MSP_SERIAL_CONFIG);
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+            await MSP.promise(MSPCodes.MSP_PILOT_CONFIG);
+        }
     }
 
-    function save_data(callback) {
-        Promise.resolve(true)
-            .then(() => MSP.promise(MSPCodes.MSP_SET_NAME, mspHelper.crunch(MSPCodes.MSP_SET_NAME)))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG)))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_SENSOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_SENSOR_CONFIG)))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_SENSOR_ALIGNMENT, mspHelper.crunch(MSPCodes.MSP_SET_SENSOR_ALIGNMENT)))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG)))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_ACC_TRIM, mspHelper.crunch(MSPCodes.MSP_SET_ACC_TRIM)))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_SERIAL_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_SERIAL_CONFIG)))
-            .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
-            .then(() => {
-                GUI.log(i18n.getMessage('eepromSaved'));
-                MSP.send_message(MSPCodes.MSP_SET_REBOOT);
-                GUI.log(i18n.getMessage('deviceRebooting'));
-                reinitialiseConnection(callback);
-            });
+    async function save_data(callback) {
+        function save(code) {
+          return MSP.promise(code, mspHelper.crunch(code));
+        }
+        await save(MSPCodes.MSP_SET_NAME);
+        await save(MSPCodes.MSP_SET_FEATURE_CONFIG);
+        await save(MSPCodes.MSP_SET_ADVANCED_CONFIG);
+        await save(MSPCodes.MSP_SET_SENSOR_CONFIG);
+        await save(MSPCodes.MSP_SET_SENSOR_ALIGNMENT);
+        await save(MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG);
+        await save(MSPCodes.MSP_SET_ACC_TRIM);
+        await save(MSPCodes.MSP_SET_SERIAL_CONFIG);
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+            await save(MSPCodes.MSP_SET_PILOT_CONFIG);
+        }
+
+        await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
+
+        GUI.log(i18n.getMessage('eepromSaved'));
+        MSP.send_message(MSPCodes.MSP_SET_REBOOT);
+        GUI.log(i18n.getMessage('deviceRebooting'));
+        reinitialiseConnection(callback);
     }
 
     function get_port_baudrate(portIndex, portType) {
@@ -599,6 +609,10 @@ tab.initialize = function (callback) {
         pidSelectElement.val(FC.ADVANCED_CONFIG.pid_process_denom);
 
         $('input[name="craftName"]').val(FC.CONFIG.name);
+        $('input[name="model-id"]').val(FC.PILOT_CONFIG.model_id);
+        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
+            $('input[name="model-id"]').closest('.number').remove();
+        }
 
         $('input[id="accHardwareSwitch"]').prop('checked', FC.SENSOR_CONFIG.acc_hardware !== 1);
         $('input[id="baroHardwareSwitch"]').prop('checked', FC.SENSOR_CONFIG.baro_hardware !== 1);
@@ -631,6 +645,7 @@ tab.initialize = function (callback) {
 
             // gather data that doesn't have automatic change event bound
             FC.CONFIG.name = $.trim($('input[name="craftName"]').val());
+            FC.PILOT_CONFIG.model_id = getIntegerValue('input[name="model-id"]');
 
             FC.SENSOR_CONFIG.acc_hardware = $('input[id="accHardwareSwitch"]').is(':checked') ? 0 : 1;
             FC.SENSOR_CONFIG.baro_hardware = $('input[id="baroHardwareSwitch"]').is(':checked') ? 0 : 1;
