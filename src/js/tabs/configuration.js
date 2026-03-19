@@ -697,7 +697,7 @@ tab.initialize = function (callback) {
             FC.CONFIG.name = $.trim($('input[id="craft-name"]').val());
             FC.PILOT_CONFIG.model_id = getIntegerValue('input[id="model-id"]');
 
-            FC.FLIGHT_STATS.stats_min_armed_time_s = getIntegerValue('input[name="min-armed-time"]');
+            FC.FLIGHT_STATS.stats_min_armed_time_s = Number($('input[id="min-armed-time"]').val());
 
             FC.SENSOR_CONFIG.acc_hardware = $('input[id="accHardwareSwitch"]').is(':checked') ? 0 : 1;
             FC.SENSOR_CONFIG.baro_hardware = $('input[id="baroHardwareSwitch"]').is(':checked') ? 0 : 1;
