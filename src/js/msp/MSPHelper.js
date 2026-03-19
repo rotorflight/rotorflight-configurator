@@ -916,7 +916,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.FLIGHT_STATS.stats_total_flights = data.readU32();
                 FC.FLIGHT_STATS.stats_total_time_s = data.readU32();
                 FC.FLIGHT_STATS.stats_total_dist_m = data.readU32();
-                FC.FLIGHT_STATS.stats_min_armed_time_s = data.readU8();
+                FC.FLIGHT_STATS.stats_min_armed_time_s = data.read8();
                 break;
             }
 

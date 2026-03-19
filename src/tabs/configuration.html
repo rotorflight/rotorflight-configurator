@@ -13,25 +13,71 @@
             <div class="grid-col col6">
 
                 <!-- PERSONALIZATION-->
-                <div class="gui_box grey miscSettings">
+                <div class="gui_box grey personalization">
                     <div class="gui_box_titlebar">
                         <div class="spacer_box_title" i18n="configurationPersonalization"></div>
                     </div>
                     <div class="spacer_box">
                         <div class="number">
-                            <label>
-                                <input type="text" name="craftName" maxlength="32" style="width:100px;"/>
+                            <div>
+                                <input type="text" id="craft-name" maxlength="32" style="width:100px;"/>
+                            </div>
+                            <label for="craft-name">
                                 <span i18n="craftName"></span>
                             </label>
                         </div>
                         <div class="number">
-                            <label>
-                                <input type="number" name="model-id" step="1" min="0" max="99" />
+                            <div>
+                                <input type="number" id="model-id" step="1" min="0" max="99" />
+                            </div>
+                            <label for="model-id">
                                 <span i18n="configuration.personalisation.model_id.label"></span>
                             </label>
                         </div>
                     </div>
                 </div> <!-- END PERSONALIZATION-->
+
+                <div class="gui_box grey flight-stats">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="configuration.flight_stats.heading"></div>
+                    </div>
+                    <div class="spacer_box">
+                        <div class="number">
+                            <div>
+                                <input type="checkbox" id="enable-flight-stats" class="toggle" />
+                            </div>
+                            <label for="enable-flight-stats">
+                                <span i18n="configuration.flight_stats.enable.label"></span>
+                            </label>
+                        </div>
+                        <div class="number">
+                            <div>
+                                <input type="number" id="min-armed-time" step="1" min="0" max="99" />
+                            </div>
+                            <label for="min-armed-time">
+                                <span i18n="configuration.flight_stats.min_armed_time.label"></span><span class="units">[s]</span>
+                            </label>
+                            <div class="helpicon cf_tip" i18n_title="configuration.flight_stats.min_armed_time.help"></div>
+                        </div>
+                        <div class="flight-stats-display">
+                            <table>
+                              <tr>
+                                <th i18n="configuration.flight_stats.flight_count.label"></th>
+                                <td><span id="flight-stats-count"></span></td>
+                              </tr>
+                              <tr>
+                                <th i18n="configuration.flight_stats.flight_time.label"></th>
+                                <td><span id="flight-stats-time"></span></td>
+                              </tr>
+                              <tr>
+                                <th i18n="configuration.flight_stats.distance.label"></th>
+                                <td><span id="flight-stats-distance"></span></td>
+                              </tr>
+                            </table>
+                            <button id="flight-stats-reset" i18n="configuration.flight_stats.reset.label"></button>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- SYSTEM CONFIGURATION -->
                 <div class="systemconfig">
@@ -41,38 +87,38 @@
                         </div>
                         <div class="spacer_box">
                             <div class="select">
-                                <input type="text" class="gyroFrequency" readonly />
+                                <div id="gyro-frequency"></div>
                                 <span i18n="configurationGyroSyncDenom"></span>
                             </div>
                             <div class="select">
-                                <select class="pidProcessDenom">
+                                <select id="pid-denom">
                                     <!-- list generated here -->
                                 </select>
-                                <span i18n="configurationPidProcessDenom"></span>
+                                <label for="pid-denom">
+                                    <span i18n="configurationPidProcessDenom"></span>
+                                </label>
                                 <div class="helpicon cf_tip" i18n_title="configurationPidProcessDenomHelp"></div>
                             </div>
-                            <div class="hardwareSelection">
-                                <div class="select">
-                                    <div style="float: left; height: 20px; margin-right: 15px; margin-left: 3px;">
-                                        <input type="checkbox" id="accHardwareSwitch" class="toggle" />
-                                    </div>
-                                    <span class="freelabel" i18n="configurationAccHardware"></span>
-                                    <div class="helpicon cf_tip" i18n_title="configurationAccHardwareHelp"></div>
+                            <div class="select">
+                                <div>
+                                    <input type="checkbox" id="accHardwareSwitch" class="toggle" />
                                 </div>
-                                <div class="select">
-                                    <div style="float: left; height: 20px; margin-right: 15px; margin-left: 3px;">
-                                        <input type="checkbox" id="baroHardwareSwitch" class="toggle" />
-                                    </div>
-                                    <span class="freelabel" i18n="configurationBaroHardware"></span>
-                                    <div class="helpicon cf_tip" i18n_title="configurationBaroHardwareHelp"></div>
+                                <span i18n="configurationAccHardware"></span>
+                                <div class="helpicon cf_tip" i18n_title="configurationAccHardwareHelp"></div>
+                            </div>
+                            <div class="select">
+                                <div>
+                                    <input type="checkbox" id="baroHardwareSwitch" class="toggle" />
                                 </div>
-                                <div class="select">
-                                    <div style="float: left; height: 20px; margin-right: 15px; margin-left: 3px;">
-                                        <input type="checkbox" id="magHardwareSwitch" class="toggle" />
-                                    </div>
-                                    <span class="freelabel" i18n="configurationMagHardware"></span>
-                                    <div class="helpicon cf_tip" i18n_title="configurationMagHardwareHelp"></div>
+                                <span i18n="configurationBaroHardware"></span>
+                                <div class="helpicon cf_tip" i18n_title="configurationBaroHardwareHelp"></div>
+                            </div>
+                            <div class="select">
+                                <div>
+                                    <input type="checkbox" id="magHardwareSwitch" class="toggle" />
                                 </div>
+                                <span i18n="configurationMagHardware"></span>
+                                <div class="helpicon cf_tip" i18n_title="configurationMagHardwareHelp"></div>
                             </div>
                         </div>
                     </div>
@@ -154,12 +200,14 @@
                             </div>
                             <div class="sensor_align_content">
                                 <div class="select">
-                                    <label>
-                                        <span i18n="configurationSensorAlignmentMag"></span>
-                                        <select class="magalign">
+                                    <div>
+                                        <select id="magalign">
                                             <option value="0" i18n="configurationSensorAlignmentDefaultOption"></option>
                                             <!-- list generated here -->
                                         </select>
+                                    </div>
+                                    <label for="magalign">
+                                        <span i18n="configurationSensorAlignmentMag"></span>
                                     </label>
                                 </div>
                             </div>
@@ -175,15 +223,17 @@
                     </div>
                     <div class="spacer_box">
                         <div class="number">
-                            <label> <input type="number" name="roll" min="-300" max="300" /> <span
-                                i18n="configurationAccelTrimRoll"></span>
-                            </label>
+                            <div>
+                                <input type="number" id="acc-trim-roll" min="-300" max="300" />
+                            </div>
+                            <label for="acc-trim-roll"><span i18n="configurationAccelTrimRoll"></span></label>
                             <div class="helpicon cf_tip" i18n_title="configurationAccelRollTrimHelp"></div>
                         </div>
                         <div class="number">
-                            <label> <input type="number" name="pitch" min="-300" max="300" /> <span
-                                i18n="configurationAccelTrimPitch"></span>
-                            </label>
+                            <div>
+                                <input type="number" id="acc-trim-pitch" min="-300" max="300" />
+                            </div>
+                            <label for="acc-trim-pitch"><span i18n="configurationAccelTrimPitch"></span></label>
                             <div class="helpicon cf_tip" i18n_title="configurationAccelPitchTrimHelp"></div>
                         </div>
                     </div>

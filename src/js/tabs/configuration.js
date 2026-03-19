@@ -1,5 +1,6 @@
 import semver from "semver";
 
+import { API_VERSION_12_7, API_VERSION_12_9 } from "@/js/configurator.svelte";
 import { getIntegerValue } from "@/js/main.js";
 import { Model } from "@/js/model.js";
 import { reinitialiseConnection } from "@/js/serial_backend.js";
@@ -304,6 +305,10 @@ tab.initialize = function (callback) {
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
             await MSP.promise(MSPCodes.MSP_PILOT_CONFIG);
         }
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+            await MSP.promise(MSPCodes.MSP_FLIGHT_STATS);
+        }
     }
 
     async function save_data(callback) {
@@ -321,6 +326,10 @@ tab.initialize = function (callback) {
 
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
             await save(MSPCodes.MSP_SET_PILOT_CONFIG);
+        }
+
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+            await save(MSPCodes.MSP_SET_FLIGHT_STATS);
         }
 
         await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
@@ -560,7 +569,7 @@ tab.initialize = function (callback) {
             'Custom',
         ];
 
-        const orientation_mag_e = $('select.magalign');
+        const orientation_mag_e = $('#magalign');
 
         for (let i = 0; i < alignments.length; i++) {
             orientation_mag_e.append(`<option value="${(i+1)}">${alignments[i]}</option>`);
@@ -574,8 +583,8 @@ tab.initialize = function (callback) {
         });
 
         // Gyro and PID update
-        const gyroTextElement = $('input.gyroFrequency');
-        const pidSelectElement = $('select.pidProcessDenom');
+        const gyroTextElement = $('#gyro-frequency');
+        const pidSelectElement = $('#pid-denom');
 
         function addDenomOption(element, denom, baseFreq) {
             let denomDescription;
@@ -594,7 +603,7 @@ tab.initialize = function (callback) {
              } else {
                 gyroContent = i18n.getMessage('configurationKHzUnitLabel', { 'value' : (gyroFrequency / 1000).toFixed(2)});
              }
-             gyroTextElement.val(gyroContent);
+             gyroTextElement.text(gyroContent);
          };
 
          const pidBaseFreq = FC.CONFIG.sampleRateHz;
@@ -608,10 +617,51 @@ tab.initialize = function (callback) {
         }
         pidSelectElement.val(FC.ADVANCED_CONFIG.pid_process_denom);
 
-        $('input[name="craftName"]').val(FC.CONFIG.name);
-        $('input[name="model-id"]').val(FC.PILOT_CONFIG.model_id);
+        $('input[id="craft-name"]').val(FC.CONFIG.name);
+        $('input[id="model-id"]').val(FC.PILOT_CONFIG.model_id);
         if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_7)) {
-            $('input[name="model-id"]').closest('.number').remove();
+            $('input[id="model-id"]').closest('.number').remove();
+        }
+
+        $('input[id="enable-flight-stats"]')
+            .prop('checked', FC.FLIGHT_STATS.stats_min_armed_time_s >= 0)
+            .on('change', function () {
+                const enable = $(this).is(':checked');
+                if (enable) {
+                    if (FC.FLIGHT_STATS.stats_min_armed_time_s >= 0) {
+                        $('input[id="min-armed-time"]').val(FC.FLIGHT_STATS.stats_min_armed_time_s);
+                    } else {
+                        $('input[id="min-armed-time"]').val(15);
+                    }
+                } else {
+                    $('input[id="min-armed-time"]').val(-1);
+                }
+
+                $('.flight-stats-display').toggle(enable);
+                $('input[id="min-armed-time"]').closest('.number').toggle(enable);
+            })
+            .trigger('change');
+
+        function updateFlightStats() {
+            $('#flight-stats-count').text(FC.FLIGHT_STATS.stats_total_flights);
+            $('#flight-stats-time').text(i18n.getMessage('statusFlightTimeValue', [
+                Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60).toLocaleString(),
+                Math.floor(FC.FLIGHT_STATS.stats_total_time_s % 60),
+            ]));
+            $('#flight-stats-distance').text(`${FC.FLIGHT_STATS.stats_total_dist_m} m`);
+        }
+        updateFlightStats();
+
+        $('#flight-stats-reset').on('click', function () {
+            FC.FLIGHT_STATS.stats_total_flights = 0;
+            FC.FLIGHT_STATS.stats_total_time_s = 0;
+            FC.FLIGHT_STATS.stats_total_dist_m = 0;
+            updateFlightStats();
+            setDirty();
+        });
+
+        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+            $('.flight-stats').hide();
         }
 
         $('input[id="accHardwareSwitch"]').prop('checked', FC.SENSOR_CONFIG.acc_hardware !== 1);
@@ -624,8 +674,8 @@ tab.initialize = function (callback) {
         $('input[name="board_align_yaw"]').val(FC.BOARD_ALIGNMENT_CONFIG.yaw);
 
         // fill accel trims
-        $('input[name="roll"]').val(FC.CONFIG.accelerometerTrims[1]);
-        $('input[name="pitch"]').val(FC.CONFIG.accelerometerTrims[0]);
+        $('input[id="acc-trim-roll"]').val(FC.CONFIG.accelerometerTrims[1]);
+        $('input[id="acc-trim-pitch"]').val(FC.CONFIG.accelerometerTrims[0]);
 
         // display current yaw fix value (important during tab re-initialization)
         $('div#interactive_block > a.reset').text(i18n.getMessage('statusButtonResetZaxisValue', [self.yaw_fix]));
@@ -644,8 +694,10 @@ tab.initialize = function (callback) {
         function updateConfig() {
 
             // gather data that doesn't have automatic change event bound
-            FC.CONFIG.name = $.trim($('input[name="craftName"]').val());
-            FC.PILOT_CONFIG.model_id = getIntegerValue('input[name="model-id"]');
+            FC.CONFIG.name = $.trim($('input[id="craft-name"]').val());
+            FC.PILOT_CONFIG.model_id = getIntegerValue('input[id="model-id"]');
+
+            FC.FLIGHT_STATS.stats_min_armed_time_s = Number($('input[id="min-armed-time"]').val());
 
             FC.SENSOR_CONFIG.acc_hardware = $('input[id="accHardwareSwitch"]').is(':checked') ? 0 : 1;
             FC.SENSOR_CONFIG.baro_hardware = $('input[id="baroHardwareSwitch"]').is(':checked') ? 0 : 1;
@@ -655,8 +707,8 @@ tab.initialize = function (callback) {
             FC.BOARD_ALIGNMENT_CONFIG.pitch = parseInt($('input[name="board_align_pitch"]').val());
             FC.BOARD_ALIGNMENT_CONFIG.yaw = parseInt($('input[name="board_align_yaw"]').val());
 
-            FC.CONFIG.accelerometerTrims[1] = parseInt($('input[name="roll"]').val());
-            FC.CONFIG.accelerometerTrims[0] = parseInt($('input[name="pitch"]').val());
+            FC.CONFIG.accelerometerTrims[1] = parseInt($('input[id="acc-trim-roll"]').val());
+            FC.CONFIG.accelerometerTrims[0] = parseInt($('input[id="acc-trim-pitch"]').val());
 
             FC.ADVANCED_CONFIG.pid_process_denom = parseInt(pidSelectElement.val());
         }
