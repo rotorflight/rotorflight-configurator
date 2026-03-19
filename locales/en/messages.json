@@ -1318,6 +1318,33 @@
     "configurationBeeperHelp": {
         "message": "Enable or disable when to sound the Buzzer"
     },
+    "configuration.personalisation.model_id.label": {
+        "message": "Model Id"
+    },
+    "configuration.flight_stats.heading": {
+        "message": "Flight Statistics"
+    },
+    "configuration.flight_stats.enable.label": {
+        "message": "Record Flight Statistics"
+    },
+    "configuration.flight_stats.reset.label": {
+        "message": "Reset"
+    },
+    "configuration.flight_stats.min_armed_time.label": {
+        "message": "Minimum flight time"
+    },
+    "configuration.flight_stats.min_armed_time.help": {
+        "message": "Minimum duration the flight controller must be armed for the flights statistics to be counted towards the total."
+    },
+    "configuration.flight_stats.flight_count.label": {
+        "message": "Flight Count"
+    },
+    "configuration.flight_stats.flight_time.label": {
+        "message": "Flight Time"
+    },
+    "configuration.flight_stats.distance.label": {
+        "message": "Distance"
+    },
     "beeper_GYRO_CALIBRATED": {
         "message": "Beeps when gyro has been calibrated"
     },
@@ -2640,6 +2667,12 @@
     },
     "servoRateHelp": {
         "message": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time."
+    },
+    "servoSource": {
+        "message": "Source"
+    },
+    "servoSourceHelp": {
+        "message": "Source of the servo signal. <b>Mixer</b>: servo is controlled by the flight controller mixer. <b>RX</b>: servo receives direct pass-through from the receiver channel."
     },
     "servoSpeed": {
         "message": "Speed [ms]"
@@ -4149,6 +4182,12 @@
     },
     "firmwareFlasherBaudRate": {
         "message": "Baud Rate"
+    },
+    "firmware_flasher.show_legacy_targets.label": {
+        "message": "Show Legacy Targets"
+    },
+    "firmware_flasher.show_legacy_targets.description": {
+        "message": "Show targets for many Betaflight boards. These targets are not actively maintained."
     },
     "firmwareFlasherOptionLoading": {
         "message": "Loading ..."
@@ -5877,6 +5916,9 @@
     },
     "powerBatteryCellCount": {
         "message": "Cell count"
+    },
+    "powerBatteryProfile": {
+        "message": "Battery $1"
     },
     "osdSetupTitle": {
         "message": "OSD"

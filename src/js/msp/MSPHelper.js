@@ -356,6 +356,11 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             }
 
+            case MSPCodes.MSP_SET_BATTERY_PROFILE: {
+                console.log('Battery profile set');
+                break;
+            }
+
             case MSPCodes.MSP_RC_TUNING: {
                 // TODO: stop scaling these values
                 FC.RC_TUNING.rates_type = data.readU8();
@@ -532,6 +537,15 @@ MspHelper.prototype.process_data = function(dataHandler) {
                         };
                         FC.SERVO_CONFIG.push(arr);
                     }
+                }
+                break;
+            }
+
+            case MSPCodes.MSP_BUS_SERVO_CONFIG: {
+                FC.BUS_SERVO_CONFIG = [];
+                const BUS_SERVO_CHANNELS = 18;
+                for (let i = 0; i < BUS_SERVO_CHANNELS; i++) {
+                    FC.BUS_SERVO_CONFIG.push(data.readU8());
                 }
                 break;
             }
@@ -884,11 +898,25 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             }
 
+            case MSPCodes.MSP_PILOT_CONFIG: {
+                FC.PILOT_CONFIG.model_id = data.readU8();
+                FC.PILOT_CONFIG.model_param1_type = data.readU8();
+                FC.PILOT_CONFIG.model_param1_value = data.readU16();
+                FC.PILOT_CONFIG.model_param2_type = data.readU8();
+                FC.PILOT_CONFIG.model_param2_value = data.readU16();
+                FC.PILOT_CONFIG.model_param3_type = data.readU8();
+                FC.PILOT_CONFIG.model_param3_value = data.readU16();
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                    FC.PILOT_CONFIG.model_flags = data.readU32();
+                }
+                break;
+            }
+
             case MSPCodes.MSP_FLIGHT_STATS: {
                 FC.FLIGHT_STATS.stats_total_flights = data.readU32();
                 FC.FLIGHT_STATS.stats_total_time_s = data.readU32();
                 FC.FLIGHT_STATS.stats_total_dist_m = data.readU32();
-                FC.FLIGHT_STATS.stats_min_armed_time_s = data.readU8();
+                FC.FLIGHT_STATS.stats_min_armed_time_s = data.read8();
                 break;
             }
 
@@ -2286,6 +2314,20 @@ MspHelper.prototype.crunch = function(code) {
             break;
         }
 
+        case MSPCodes.MSP_SET_PILOT_CONFIG: {
+            buffer.push8(FC.PILOT_CONFIG.model_id)
+                  .push8(FC.PILOT_CONFIG.model_param1_type)
+                  .push16(FC.PILOT_CONFIG.model_param1_value)
+                  .push8(FC.PILOT_CONFIG.model_param2_type)
+                  .push16(FC.PILOT_CONFIG.model_param2_value)
+                  .push8(FC.PILOT_CONFIG.model_param3_type)
+                  .push16(FC.PILOT_CONFIG.model_param3_value);
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                buffer.push32(FC.PILOT_CONFIG.model_flags);
+            }
+            break;
+        }
+
         case MSPCodes.MSP_SET_FLIGHT_STATS: {
             buffer.push32(FC.FLIGHT_STATS.stats_total_flights)
                   .push32(FC.FLIGHT_STATS.stats_total_time_s)
@@ -2979,4 +3021,14 @@ MspHelper.prototype.requestRpmFilterBanks = async function()
     }
 
     FC.RPM_FILTER_CONFIG_V2 = banks;
+};
+
+MspHelper.prototype.setBatteryProfile = async function(index)
+{
+    if (CONFIGURATOR.virtualMode) {
+        FC.BATTERY_STATE.batteryProfile = index;
+    } else {
+        const buffer = [index];
+        await MSP.promise(MSPCodes.MSP_SET_BATTERY_PROFILE, buffer);
+    }
 };

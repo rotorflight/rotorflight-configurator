@@ -132,6 +132,8 @@ export const MSPCodes = {
     MSP_SET_GOVERNOR_PROFILE:       149,
     MSP_LED_STRIP_SETTINGS:         150,
     MSP_SET_LED_STRIP_SETTINGS:     151,
+    MSP_BUS_SERVO_CONFIG:           152,
+    MSP_SET_BUS_SERVO_CONFIG:       153,
     MSP_RPM_FILTER_V2:              154,
     MSP_SET_RPM_FILTER_V2:          155,
 
@@ -142,6 +144,9 @@ export const MSPCodes = {
     MSP_SET_MIXER_INPUT:            171,
     MSP_MIXER_RULES:                172,
     MSP_SET_MIXER_RULE:             173,
+    MSP_GET_MIXER_INPUT:            174,
+    MSP_BATTERY_PROFILE:            175,
+    MSP_SET_BATTERY_PROFILE:        176,
 
     MSP_DISPLAYPORT:                182,
 
