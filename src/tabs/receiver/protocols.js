@@ -2,6 +2,7 @@ import semver from "semver";
 import {
   API_VERSION_12_7,
   API_VERSION_12_8,
+  API_VERSION_12_9,
 } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte";
 import { createEnum } from "@/js/utils/common.js";
@@ -192,6 +193,15 @@ export const RX_PROTOCOLS = [
     id: 7,
     feature: "RX_SERIAL",
     telemetry: { type: TelemetryType.TOGGLE },
+  },
+  {
+    name: "Flysky IBUS2",
+    id: 19,
+    feature: "RX_SERIAL",
+    telemetry: { type: TelemetryType.TOGGLE },
+    get hide() {
+      return semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9);
+    },
   },
   {
     name: "JR XBUS Mode A",
