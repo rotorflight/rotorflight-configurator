@@ -1,4 +1,3 @@
-
 #tab-configuration-templates {
     display: none;
 }
@@ -48,8 +47,8 @@
     padding: 0 8px 0 8px;
     line-height: 24px;
     border: 1px solid var(--subtleAccent);
-    color: var(--defaultText);
-    background-color: #ececec;
+    color: #000;
+    background-color: var(--button-background);
 }
 
 .tab-configuration .flight-stats-display button:hover {
