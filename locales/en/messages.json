@@ -2929,6 +2929,36 @@
     "mixerTrimFlightReset": {
         "message": "Reset Trim"
     },
+    "mixerFfEstimate": {
+        "message": "FF Estimate"
+    },
+    "mixerFfEstimateGain": {
+        "message": "FF Estimate Gain"
+    },
+    "mixerFfEstimateGainHelp": {
+        "message": "Accumulation speed for feedforward estimation. 0 disables the feature."
+    },
+    "mixerFfEstimateMinSetpoint": {
+        "message": "Min Setpoint"
+    },
+    "mixerFfEstimateMinSetpointHelp": {
+        "message": "Minimum absolute setpoint (deg/s) required before the estimator measures. Filters out low-rate noise."
+    },
+    "mixerFfEstimateConvergence": {
+        "message": "Convergence"
+    },
+    "mixerFfEstimateConvergenceHelp": {
+        "message": "Maximum error/setpoint ratio (%) to consider the response converged. Lower values require tighter tracking before adjusting."
+    },
+    "mixerFfEstimateMinF": {
+        "message": "Min F"
+    },
+    "mixerFfEstimateMaxF": {
+        "message": "Max F"
+    },
+    "mixerFfEstimateFBoundsHelp": {
+        "message": "Lower and upper bounds for the estimated feedforward gain, in the same units as the CLI ff_*_f parameters."
+    },
     "mixerTailRotorSettings": {
         "message": "Tail Rotor Settings"
     },
@@ -7513,6 +7543,9 @@
     },
     "mode TRIM FLIGHT": {
         "message": "TRIM FLIGHT"
+    },
+    "mode FF ESTIMATE": {
+        "message": "FF ESTIMATE"
     },
     "flashTab": {
         "message": "Update Firmware"

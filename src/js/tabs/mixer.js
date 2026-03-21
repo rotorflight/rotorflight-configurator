@@ -407,6 +407,16 @@ tab.initialize = function (callback) {
             $('.mixerTrimFlight').hide();
         }
 
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+            $('#mixerFfEstimateGain').val(FC.MIXER_CONFIG.ff_estimate_gain).change();
+            $('#mixerFfEstimateMinSetpoint').val(FC.MIXER_CONFIG.ff_estimate_min_setpoint).change();
+            $('#mixerFfEstimateConvergence').val(FC.MIXER_CONFIG.ff_estimate_convergence).change();
+            $('#mixerFfEstimateMinF').val(FC.MIXER_CONFIG.ff_estimate_min_f).change();
+            $('#mixerFfEstimateMaxF').val(FC.MIXER_CONFIG.ff_estimate_max_f).change();
+        } else {
+            $('.mixerFfEstimate').hide();
+        }
+
         function setTailRotorMode(mode, change) {
 
             FC.MIXER_CONFIG.tail_rotor_mode = mode;
@@ -497,6 +507,11 @@ tab.initialize = function (callback) {
             FC.MIXER_CONFIG.trim_flight_max_trim = getIntegerValue('#mixerTrimFlightMaxTrim');
             FC.MIXER_CONFIG.trim_flight_trim[0] = getIntegerValue('#mixerTrimFlightRollTrim', 10);
             FC.MIXER_CONFIG.trim_flight_trim[1] = getIntegerValue('#mixerTrimFlightPitchTrim', 10);
+            FC.MIXER_CONFIG.ff_estimate_gain = getIntegerValue('#mixerFfEstimateGain');
+            FC.MIXER_CONFIG.ff_estimate_min_setpoint = getIntegerValue('#mixerFfEstimateMinSetpoint');
+            FC.MIXER_CONFIG.ff_estimate_convergence = getIntegerValue('#mixerFfEstimateConvergence');
+            FC.MIXER_CONFIG.ff_estimate_min_f = getIntegerValue('#mixerFfEstimateMinF');
+            FC.MIXER_CONFIG.ff_estimate_max_f = getIntegerValue('#mixerFfEstimateMaxF');
 
             if (FC.MIXER_CONFIG.tail_rotor_mode > 0)
                 FC.MIXER_CONFIG.tail_center_trim = getIntegerValue('#mixerTailMotorCenterTrim', 10);
