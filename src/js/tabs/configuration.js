@@ -305,13 +305,13 @@ tab.initialize = function (callback) {
     function save_data(callback) {
         Promise.resolve(true)
             .then(() => MSP.promise(MSPCodes.MSP_SET_NAME, mspHelper.crunch(MSPCodes.MSP_SET_NAME)))
+            .then(() => MSP.promise(MSPCodes.MSP_SET_SERIAL_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_SERIAL_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_SET_SENSOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_SENSOR_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_SET_SENSOR_ALIGNMENT, mspHelper.crunch(MSPCodes.MSP_SET_SENSOR_ALIGNMENT)))
             .then(() => MSP.promise(MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_BOARD_ALIGNMENT_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_SET_ACC_TRIM, mspHelper.crunch(MSPCodes.MSP_SET_ACC_TRIM)))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_SERIAL_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_SERIAL_CONFIG)))
             .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
             .then(() => {
                 GUI.log(i18n.getMessage('eepromSaved'));
@@ -477,8 +477,10 @@ tab.initialize = function (callback) {
             funcElement.change(function () {
                 const funcValue = funcElement.val();
                 serialPort.functionMask = funcValue;
+                serialPort.functions = mspHelper.serialPortFunctionMaskToFunctions(Number(funcValue));
                 update_baudrate_list(baudElement, portIndex, get_port_type(funcValue));
                 update_function_lists();
+                updateTabList();
             });
 
             funcElement.val(serialPort.functionMask);
@@ -654,7 +656,7 @@ tab.initialize = function (callback) {
               element.data("featureName"),
               element.is(":checked")
             );
-            updateTabList(FC.FEATURE_CONFIG.features);
+            updateTabList();
         });
 
         $('input[id="accHardwareSwitch"]').change(function() {
@@ -668,7 +670,7 @@ tab.initialize = function (callback) {
               element.data("featureName"),
               element.is(":checked")
             );
-            updateTabList(FC.FEATURE_CONFIG.features);
+            updateTabList();
         });
 
         self.save = function (callback) {

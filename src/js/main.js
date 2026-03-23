@@ -420,8 +420,13 @@ function notifyOutdatedVersion(releaseData) {
     }
 }
 
-export function updateTabList(features) {
-    $('#tabs ul.mode-connected li.tab_gps').toggle(features.isEnabled('GPS'));
+export function updateTabList() {
+    const features = FC.FEATURE_CONFIG.features;
+    const hasGpsSourcePort = FC.SERIAL_CONFIG.ports.some((port) =>
+        port.functions.includes('GPS') || port.functions.includes('FBUS_OUT')
+    );
+
+    $('#tabs ul.mode-connected li.tab_gps').toggle(hasGpsSourcePort);
     $('#tabs ul.mode-connected li.tab_led_strip').toggle(features.isEnabled('LED_STRIP'));
 }
 
