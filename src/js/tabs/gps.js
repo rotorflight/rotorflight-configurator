@@ -43,6 +43,7 @@ tab.initialize = function (callback) {
             'NMEA',
             'UBLOX',
             'MSP',
+            'FBUS',
         ];
 
         const gpsBaudRates = [
