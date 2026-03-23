@@ -348,7 +348,7 @@ function onOpenVirtual() {
 
     update_dataflash_global();
     sensor_status(FC.CONFIG.activeSensors);
-    updateTabList();
+    updateTabList(FC.FEATURE_CONFIG.features);
 }
 
 function abortConnect() {
