@@ -80,9 +80,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
     const data = dataHandler.dataView; // DataView (allowing us to view arrayBuffer as struct/union)
     const code = dataHandler.code;
     const crcError = dataHandler.crcError;
-    let buff = [];
-    let char = '';
-    let flags = 0;
 
     if (!crcError) {
         if (!dataHandler.unsupported) switch (code) {
@@ -489,9 +486,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_BOXNAMES: {
                 FC.AUX_CONFIG = []; // empty the array as new data is coming in
 
-                buff = [];
+                let buff = [];
                 for (let i = 0; i < data.byteLength; i++) {
-                    char = data.readU8();
+                    const char = data.readU8();
                     if (char == 0x3B) { // ; (delimeter char)
                         FC.AUX_CONFIG.push(String.fromCharCode.apply(null, buff)); // convert bytes into ASCII and save as strings
 
@@ -500,13 +497,6 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     } else {
                         buff.push(char);
                     }
-                }
-                break;
-            }
-
-            case MSPCodes.MSP_PIDNAMES: {
-                for (let i = 0; i < data.byteLength; i++) {
-                    char = data.readU8();
                 }
                 break;
             }
@@ -892,6 +882,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_NAME: {
                 FC.CONFIG.name = '';
+                let char;
                 while ((char = data.readU8()) !== null) {
                     FC.CONFIG.name += String.fromCharCode(char);
                 }
@@ -1471,7 +1462,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_DATAFLASH_SUMMARY: {
                 if (data.byteLength >= 13) {
-                    flags = data.readU8();
+                    const flags = data.readU8();
                     FC.DATAFLASH.ready = (flags & 1) != 0;
                     FC.DATAFLASH.supported = (flags & 2) != 0;
                     FC.DATAFLASH.sectors = data.readU32();
@@ -1500,7 +1491,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
             }
 
             case MSPCodes.MSP_SDCARD_SUMMARY: {
-                flags = data.readU8();
+                const flags = data.readU8();
                 FC.SDCARD.supported = (flags & 0x01) != 0;
                 FC.SDCARD.state = data.readU8();
                 FC.SDCARD.filesystemLastError = data.readU8();
@@ -2435,11 +2426,9 @@ MspHelper.prototype.dataflashRead = function(address, blockSize, onDataCallback)
         if (!response.crcError) {
             const chunkAddress = response.data.readU32();
             let headerSize = 4;
-            let dataSize = response.data.buffer.byteLength - headerSize;
-            let dataCompressionType = 0;
             headerSize = headerSize + 3;
-            dataSize = response.data.readU16();
-            dataCompressionType = response.data.readU8();
+            const dataSize = response.data.readU16();
+            const dataCompressionType = response.data.readU8();
 
             // Verify that the address of the memory returned matches what the caller asked for and there was not a CRC error
             if (chunkAddress == address) {

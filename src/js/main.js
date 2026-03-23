@@ -64,7 +64,7 @@ function closeSerial() {
         setTimeout(function() {
             bufferOut = new ArrayBuffer(22);
             bufView = new Uint8Array(bufferOut);
-            let checksum = 0;
+            let checksum;
 
             bufView[0] = 36; // $
             bufView[1] = 77; // M
