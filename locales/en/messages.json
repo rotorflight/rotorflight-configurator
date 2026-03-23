@@ -1318,6 +1318,33 @@
     "configurationBeeperHelp": {
         "message": "Enable or disable when to sound the Buzzer"
     },
+    "configuration.personalisation.model_id.label": {
+        "message": "Model Id"
+    },
+    "configuration.flight_stats.heading": {
+        "message": "Flight Statistics"
+    },
+    "configuration.flight_stats.enable.label": {
+        "message": "Record Flight Statistics"
+    },
+    "configuration.flight_stats.reset.label": {
+        "message": "Reset"
+    },
+    "configuration.flight_stats.min_armed_time.label": {
+        "message": "Minimum flight time"
+    },
+    "configuration.flight_stats.min_armed_time.help": {
+        "message": "Minimum duration the flight controller must be armed for the flights statistics to be counted towards the total."
+    },
+    "configuration.flight_stats.flight_count.label": {
+        "message": "Flight Count"
+    },
+    "configuration.flight_stats.flight_time.label": {
+        "message": "Flight Time"
+    },
+    "configuration.flight_stats.distance.label": {
+        "message": "Distance"
+    },
     "beeper_GYRO_CALIBRATED": {
         "message": "Beeps when gyro has been calibrated"
     },
@@ -4155,6 +4182,12 @@
     },
     "firmwareFlasherBaudRate": {
         "message": "Baud Rate"
+    },
+    "firmware_flasher.show_legacy_targets.label": {
+        "message": "Show Legacy Targets"
+    },
+    "firmware_flasher.show_legacy_targets.description": {
+        "message": "Show targets for many Betaflight boards. These targets are not actively maintained."
     },
     "firmwareFlasherOptionLoading": {
         "message": "Loading ..."
