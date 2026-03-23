@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Install pnpm
       uses: pnpm/action-setup@v4
@@ -22,16 +22,17 @@ jobs:
         run_install: false
 
     - name: Install Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version-file: '.nvmrc'
+        package-manager-cache: false
 
     - name: Get pnpm store directory
       shell: bash
       run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
     - name: Setup pnpm cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ${{ env.PNPM_STORE_PATH }}
         key: ${{ github.job }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
@@ -54,10 +55,10 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Install Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: 3.11
 
@@ -68,16 +69,17 @@ jobs:
         run_install: false
 
     - name: Install Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version-file: '.nvmrc'
+        package-manager-cache: false
 
     - name: Get pnpm store directory
       shell: bash
       run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
     - name: Setup pnpm cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ${{ env.PNPM_STORE_PATH }}
         key: ${{ github.job }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
@@ -99,7 +101,7 @@ jobs:
       run: pnpm gulp redist --platform linux --arch x86_64
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: rotorflight-configurator-linux-${{ env.GIT_VER }}
         path: redist/*
@@ -112,10 +114,10 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Install Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: 3.11
 
@@ -126,16 +128,17 @@ jobs:
         run_install: false
 
     - name: Install Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version-file: '.nvmrc'
+        package-manager-cache: false
 
     - name: Get pnpm store directory
       shell: bash
       run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
     - name: Setup pnpm cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ${{ env.PNPM_STORE_PATH }}
         key: ${{ github.job }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
@@ -157,7 +160,7 @@ jobs:
       run: pnpm gulp redist --platform osx --arch x86_64
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: rotorflight-configurator-macos-x86_64-${{ env.GIT_VER }}
         path: redist/*
@@ -170,10 +173,10 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Install Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: 3.11
 
@@ -184,16 +187,17 @@ jobs:
         run_install: false
 
     - name: Install Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version-file: '.nvmrc'
+        package-manager-cache: false
 
     - name: Get pnpm store directory
       shell: bash
       run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
     - name: Setup pnpm cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ${{ env.PNPM_STORE_PATH }}
         key: ${{ github.job }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
@@ -215,7 +219,7 @@ jobs:
       run: pnpm gulp redist --platform osx --arch arm64
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: rotorflight-configurator-macos-arm64-${{ env.GIT_VER }}
         path: redist/*
@@ -228,10 +232,10 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Install Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: 3.11
 
@@ -242,16 +246,17 @@ jobs:
         run_install: false
 
     - name: Install Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version-file: '.nvmrc'
+        package-manager-cache: false
 
     - name: Get pnpm store directory
       shell: bash
       run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
     - name: Setup pnpm cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ${{ env.PNPM_STORE_PATH }}
         key: ${{ github.job }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
@@ -273,7 +278,7 @@ jobs:
       run: pnpm gulp redist --platform win --arch x86_64
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: rotorflight-configurator-win64-${{ env.GIT_VER }}
         path: redist/*
@@ -286,10 +291,10 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Install Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: 3.11
 
@@ -300,16 +305,17 @@ jobs:
         run_install: false
 
     - name: Install Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version-file: '.nvmrc'
+        package-manager-cache: false
 
     - name: Get pnpm store directory
       shell: bash
       run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
     - name: Setup pnpm cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ${{ env.PNPM_STORE_PATH }}
         key: ${{ github.job }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
@@ -331,7 +337,7 @@ jobs:
       run: pnpm gulp redist --platform win --arch x86
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: rotorflight-configurator-win32-${{ env.GIT_VER }}
         path: redist/*
@@ -344,10 +350,10 @@ jobs:
 
     steps:
     - name: Check out repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Install Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: 3.11
 
@@ -358,16 +364,17 @@ jobs:
         run_install: false
 
     - name: Install Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version-file: '.nvmrc'
+        package-manager-cache: false
 
     - name: Get pnpm store directory
       shell: bash
       run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
     - name: Setup pnpm cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ${{ env.PNPM_STORE_PATH }}
         key: ${{ github.job }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml', 'cordova/pnpm-lock.yaml') }}
@@ -375,7 +382,7 @@ jobs:
           ${{ github.job }}-pnpm-store-
 
     - name: Install Java JDK
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v5
       with:
         distribution: temurin
         java-version: '17'
@@ -401,7 +408,7 @@ jobs:
       run: pnpm gulp redist --platform android
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: rotorflight-configurator-android-${{ env.GIT_VER }}
         path: redist/*
