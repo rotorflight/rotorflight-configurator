@@ -874,9 +874,6 @@
     "statusFlightTime": {
         "message": "Flight Time:"
     },
-    "statusFlightTimeValue": {
-        "message": "$1 min $2 sec"
-    },
     "statusArmingDisableFlags": {
         "message": "Arming Disable Flags:"
     },

@@ -642,13 +642,15 @@ tab.initialize = function (callback) {
             })
             .trigger('change');
 
+
+        const flightTimeFormatter = new Intl.DurationFormat(i18n.getCurrentLocale(), { style: "short" });
         function updateFlightStats() {
             $('#flight-stats-count').text(FC.FLIGHT_STATS.stats_total_flights);
-            $('#flight-stats-time').text(i18n.getMessage('statusFlightTimeValue', [
-                Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60).toLocaleString(),
-                Math.floor(FC.FLIGHT_STATS.stats_total_time_s % 60),
-            ]));
-            $('#flight-stats-distance').text(`${FC.FLIGHT_STATS.stats_total_dist_m} m`);
+            $('#flight-stats-time').text(flightTimeFormatter.format({
+                hours: Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60 / 60),
+                minutes: Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60 % 60),
+            }));
+            $('#flight-stats-distance').text(`${FC.FLIGHT_STATS.stats_total_dist_m.toLocaleString()} m`);
         }
         updateFlightStats();
 
