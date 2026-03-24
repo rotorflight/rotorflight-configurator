@@ -990,6 +990,9 @@
         "message": "There is no motor throttle protocol selected",
         "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
     },
+    "statusArmingDisableFlagsTooltipOVERRIDE": {
+        "message": "Servo Override or Mixer Override is active"
+    },
     "statusArmingDisableFlagsTooltipARM_SWITCH": {
         "message": "Arm switch is activated while other arming disable conditions are active",
         "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"

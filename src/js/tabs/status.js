@@ -70,6 +70,7 @@ tab.getDisarmFlags = function () {
         'DSHOT_BITBANG',
         'ACC_CALIB',
         'MOTOR_PROTO',
+        semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) ? ['OVERRIDE'] : [],
         'ARM_SWITCH'
     ];
 };
