@@ -4171,18 +4171,6 @@
     "firmwareFlasherFullChipEraseDescription": {
         "message": "Wipes all configuration data currently stored on the board."
     },
-    "firmwareFlasherManualPort": {
-        "message": "Port"
-    },
-    "firmwareFlasherManualBaud": {
-        "message": "Manual baud rate"
-    },
-    "firmwareFlasherManualBaudDescription": {
-        "message": "Manual selection of baud rate for boards that don't support the default speed or for flashing via bluetooth.<br /><span class=\"message-negative\">Note:</span> Not used when flashing via USB DFU"
-    },
-    "firmwareFlasherBaudRate": {
-        "message": "Baud Rate"
-    },
     "firmware_flasher.show_legacy_targets.label": {
         "message": "Show Legacy Targets"
     },
@@ -5943,6 +5931,9 @@
     },
     "powerBatteryProfile": {
         "message": "Battery $1"
+    },
+    "options.show_advanced_firmware_opts.label": {
+        "message": "Show advanced firmware flashing options"
     },
     "osdSetupTitle": {
         "message": "OSD"

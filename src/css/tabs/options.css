@@ -7,6 +7,7 @@
 }
 .tab-options .margin-bottom {
     margin-bottom: 10px;
+    display: block;
 }
 .tab-options select {
     background: var(--boxBackground);

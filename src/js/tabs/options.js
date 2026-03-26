@@ -15,6 +15,7 @@ tab.initialize = function (callback) {
         tab.initCordovaForceComputerUI();
         tab.initDarkTheme();
         tab.rememberLastSelectedBoard();
+        tab.showAdvancedFirmwareOpts();
 
         GUI.content_ready(callback);
     });
@@ -43,31 +44,36 @@ tab.initPermanentExpertMode = function () {
 **/
 
 tab.initRememberLastTab = function () {
-    $('div.rememberLastTab input')
+    $('label.rememberLastTab input')
         .prop('checked', !!config.get('rememberLastTab'))
         .change(function() { config.set({rememberLastTab: $(this).is(':checked')}); })
         .change();
 };
 
 tab.rememberLastSelectedBoard = function () {
-    $('div.rememberLastSelectedBoard input')
+    $('label.rememberLastSelectedBoard input')
         .prop('checked', !!config.get('rememberLastSelectedBoard'))
         .change(function() { config.set({rememberLastSelectedBoard: $(this).is(':checked')}); })
         .change();
 };
 
+tab.showAdvancedFirmwareOpts = function () {
+    $('label.show-advanced-firmware-opts  input')
+        .prop('checked', config.get('showAdvancedFirmwareOpts') ?? false)
+        .on('change', function() { config.set({ showAdvancedFirmwareOpts: $(this).is(':checked')}); })
+        .trigger('change');
+};
+
 tab.initCheckForConfiguratorUnstableVersions = function () {
-    if (config.get('checkForConfiguratorUnstableVersions')) {
-        $('div.checkForConfiguratorUnstableVersions input').prop('checked', true);
-    }
+    $('label.checkForConfiguratorUnstableVersions input')
+        .prop('checked', config.get('checkForConfiguratorUnstableVersions') ?? true)
+        .on('change', function () {
+            const checked = $(this).is(':checked');
 
-    $('div.checkForConfiguratorUnstableVersions input').change(function () {
-        const checked = $(this).is(':checked');
+            config.set({'checkForConfiguratorUnstableVersions': checked});
 
-        config.set({'checkForConfiguratorUnstableVersions': checked});
-
-        checkForConfiguratorUpdates();
-    });
+            checkForConfiguratorUpdates();
+        });
 };
 
 tab.initCliAutoComplete = function () {

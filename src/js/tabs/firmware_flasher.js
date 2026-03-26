@@ -733,28 +733,16 @@ tab.initialize = function (callback) {
 
         const portPickerElement = $('div#port-picker #port');
         function flashFirmware(firmware) {
-            var options = {};
-
-            if ($('input.erase_chip').is(':checked')) {
-                options.erase_chip = true;
-            }
+            const options = {
+                no_reboot: false,
+                erase_chip: $('input.erase_chip').is(':checked'),
+                baud: getIntegerValue('select#baud') ?? 115200,
+            };
 
             if (!$('option:selected', portPickerElement).data().isDFU) {
                 if (String(portPickerElement.val()) !== '0') {
                     const port = String(portPickerElement.val());
-
-                    if ($('input.updating').is(':checked')) {
-                        options.no_reboot = true;
-                    } else {
-                        options.reboot_baud = parseInt($('div#port-picker #baud').val());
-                    }
-
-                    let baud = 115200;
-                    if ($('input.flash_manual_baud').is(':checked')) {
-                        baud = parseInt($('#flash_manual_baud_rate').val());
-                    }
-
-                    STM32.connect(port, baud, firmware, options);
+                    STM32.connect(port, options.baud, firmware, options);
                 } else {
                     console.log('Please select valid serial port');
                     GUI.log(i18n.getMessage('firmwareFlasherNoValidPort'));
@@ -764,64 +752,29 @@ tab.initialize = function (callback) {
             }
         }
 
-        $('input.erase_chip')
-            .prop('checked', !!config.get('erase_chip'))
-            .change(function () {
-                config.set({'erase_chip': $(this).is(':checked')});
-            }).change();
+        const showAdvancedOpts = config.get('showAdvancedFirmwareOpts') ?? false;
 
+        $('input.erase_chip')
+            .prop('checked', showAdvancedOpts ? config.get('erase_chip') ?? true : true)
+            .on('change', function () {
+                config.set({ 'erase_chip': $(this).is(':checked') });
+            })
+            .closest('.field')
+            .toggle(showAdvancedOpts);
+
+        $('#show-legacy-targets')
+            .prop('checked', showAdvancedOpts ? config.get('showLegacyTargets') ?? false : false)
+            .on('change', function () {
+                  config.set({ showLegacyTargets: $(this).is(':checked') });
+                  updateBoardSelect($('select[name="board"]').val());
+            })
+            .closest('.field')
+            .toggle(showAdvancedOpts);
 
         chrome.storage.local.get('selected_build_type', function (result) {
             // ensure default build type is selected
             buildType_e.val(result.selected_build_type || 0).trigger('change');
         });
-
-        $('#show-legacy-targets')
-            .prop('checked', config.get('showLegacyTargets') ?? false)
-            .on('change', function () {
-                  const enabled = $(this).is(':checked');
-                  config.set({ showLegacyTargets: enabled });
-                  updateBoardSelect($('select[name="board"]').val());
-            });
-
-        if (config.get('no_reboot_sequence')) {
-            $('input.updating').prop('checked', true);
-            $('.flash_on_connect_wrapper').show();
-        } else {
-            $('input.updating').prop('checked', false);
-        }
-
-        // bind UI hook so the status is saved on change
-        $('input.updating').change(function() {
-            var status = $(this).is(':checked');
-
-            if (status) {
-                $('.flash_on_connect_wrapper').show();
-            } else {
-                $('input.flash_on_connect').prop('checked', false).change();
-                $('.flash_on_connect_wrapper').hide();
-            }
-
-            config.set({'no_reboot_sequence': status});
-        });
-
-        $('input.updating').trigger('change');
-
-        $('input.flash_manual_baud')
-            .prop('checked', !!config.get('flash_manual_baud'))
-            .on('change', function() {
-                var status = $(this).is(':checked');
-                config.set({'flash_manual_baud': status});
-            })
-            .trigger('change');
-
-        $('#flash_manual_baud_rate')
-            .val(config.get('flash_manual_baud_rate'))
-            .on('change', function() {
-                var baud = parseInt($(this).val());
-                config.set({'flash_manual_baud_rate': baud});
-            })
-            .trigger('change');
 
         // UI Hooks
         $('a.load_file').on('click', async function () {
@@ -1090,10 +1043,7 @@ tab.initialize = function (callback) {
                 if (!$('option:selected', portPickerElement).data().isDFU) {
                     if (String(portPickerElement.val()) !== '0') {
                         const port = String(portPickerElement.val());
-                        let baud = 115200;
-                        if ($('input.flash_manual_baud').is(':checked')) {
-                            baud = parseInt($('#flash_manual_baud_rate').val());
-                        }
+                        const baud = getIntegerValue('select#baud') ?? 115200;
                         board_auto_detect.detect(port, baud);
                     } else {
                         GUI.log(i18n.getMessage('firmwareFlasher'));
@@ -1141,37 +1091,6 @@ tab.initialize = function (callback) {
                 }
             }
         }
-
-        $('input.flash_on_connect').change(function () {
-            var status = $(this).is(':checked');
-
-            if (status) {
-                var catch_new_port = function () {
-                    PortHandler.port_detected('flash_detected_device', function (result) {
-                        var port = result[0];
-
-                        if (!GUI.connect_lock) {
-                            GUI.log(i18n.getMessage('firmwareFlasherFlashTrigger', [port]));
-                            console.log('Detected: ' + port + ' - triggering flash on connect');
-
-                            // Trigger regular Flashing sequence
-                            GUI.timeout_add('initialization_timeout', function () {
-                                $('a.flash_firmware').click();
-                            }, 100); // timeout so bus have time to initialize after being detected by the system
-                        } else {
-                            GUI.log(i18n.getMessage('firmwareFlasherPreviousDevice', [port]));
-                        }
-
-                        // Since current port_detected request was consumed, create new one
-                        catch_new_port();
-                    }, false, true);
-                };
-
-                catch_new_port();
-            } else {
-                PortHandler.flush_callbacks();
-            }
-        }).change();
 
         $(document).keypress(function (e) {
             if (e.which == 13) { // enter
