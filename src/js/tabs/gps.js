@@ -74,6 +74,28 @@ tab.initialize = function (callback) {
         const gpsUbloxSbasGroup = $('.gps_ubx_sbas');
         const gpsHomeOnceElement = $('input[name="gps_home_once"]');
         const gpsBaudrateElement = $('select.gps_baudrate');
+        const gpsSatsRow = $('.gps_info_sats');
+        const gpsSignalPanel = $('.gps_signal_panel').closest('.grid-col');
+
+        function refreshGpsProviderUi() {
+            const fbusSelected = (FC.GPS_CONFIG.provider === gpsProtocols.indexOf('FBUS'));
+            const ubloxSelected = (FC.GPS_CONFIG.provider === gpsProtocols.indexOf('UBLOX'));
+            const autoConfigEnabled = !fbusSelected && gpsAutoConfigElement.is(':checked');
+
+            if (fbusSelected) {
+                FC.GPS_CONFIG.auto_baud = 0;
+                FC.GPS_CONFIG.auto_config = 0;
+                gpsAutoBaudElement.prop('checked', false);
+                gpsAutoConfigElement.prop('checked', false);
+            }
+
+            gpsAutoBaudElement.prop('disabled', fbusSelected);
+            gpsAutoConfigElement.prop('disabled', fbusSelected);
+            gpsSignalPanel.toggle(!fbusSelected);
+            gpsSatsRow.toggle(!fbusSelected);
+            gpsUbloxGalileoGroup.toggle(autoConfigEnabled && ubloxSelected);
+            gpsUbloxSbasGroup.toggle(autoConfigEnabled && ubloxSelected);
+        }
 
         for (let protocolIndex = 0; protocolIndex < gpsProtocols.length; protocolIndex++) {
             gpsProtocolElement.append(`<option value="${protocolIndex}">${gpsProtocols[protocolIndex]}</option>`);
@@ -81,8 +103,7 @@ tab.initialize = function (callback) {
 
         gpsProtocolElement.change(function () {
             FC.GPS_CONFIG.provider = parseInt($(this).val());
-            // Call this to enable or disable auto config elements depending on the protocol
-            gpsAutoConfigElement.change();
+            refreshGpsProviderUi();
         }).val(FC.GPS_CONFIG.provider).change();
 
         gpsAutoBaudElement.change(function () {
@@ -92,12 +113,8 @@ tab.initialize = function (callback) {
 
         gpsAutoConfigElement.change(function () {
             const checked = $(this).is(":checked");
-            const ubloxSelected = (FC.GPS_CONFIG.provider === gpsProtocols.indexOf('UBLOX'));
-            const enableGalileoVisible = checked && ubloxSelected;
-            gpsUbloxGalileoGroup.toggle(enableGalileoVisible);
-            const enableSbasVisible = checked && ubloxSelected;
-            gpsUbloxSbasGroup.toggle(enableSbasVisible);
             FC.GPS_CONFIG.auto_config = checked ? 1 : 0;
+            refreshGpsProviderUi();
         }).prop('checked', FC.GPS_CONFIG.auto_config > 0).change();
 
         gpsAutoBaudGroup.show();
