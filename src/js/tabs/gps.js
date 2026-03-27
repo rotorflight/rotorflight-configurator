@@ -89,8 +89,9 @@ tab.initialize = function (callback) {
                 gpsAutoConfigElement.prop('checked', false);
             }
 
-            gpsAutoBaudElement.prop('disabled', fbusSelected);
-            gpsAutoConfigElement.prop('disabled', fbusSelected);
+            $('.tab-gps').toggleClass('fbus-selected', fbusSelected);
+            gpsAutoBaudGroup.toggle(!fbusSelected);
+            gpsAutoConfigGroup.toggle(!fbusSelected);
             gpsSignalPanel.toggle(!fbusSelected);
             gpsSatsRow.toggle(!fbusSelected);
             gpsUbloxGalileoGroup.toggle(autoConfigEnabled && ubloxSelected);
