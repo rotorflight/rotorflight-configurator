@@ -120,6 +120,7 @@ tab.initialize = function (callback) {
 
         gpsAutoBaudGroup.show();
         gpsAutoConfigGroup.show();
+        refreshGpsProviderUi();
 
         gpsUbloxGalileoElement.change(function() {
             const checked = $(this).is(":checked");
