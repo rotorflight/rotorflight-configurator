@@ -360,7 +360,9 @@ tab.initialize = function (callback) {
 
         const mixerSwashType = $('#mixerSwashType');
 
-        Mixer.swashTypes.forEach(function(name,index) {
+        // Get available swash types based on API version
+        const availableSwashTypes = Mixer.getAvailableSwashTypes(FC.CONFIG.apiVersion);
+        availableSwashTypes.forEach(function(name,index) {
             mixerSwashType.append($(`<option value="${index}">` + i18n.getMessage(name) + '</option>'));
         });
 
