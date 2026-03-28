@@ -2,81 +2,50 @@
     <div class="content_wrapper">
         <div class="options gui_box">
             <div class="spacer">
-                <table class="cf_table" style="margin-top: 10px;">
-                    <tr class="build_type">
-                        <td>
-                            <select name="build_type">
-                                <!-- options generated at runtime -->
-                            </select>
-                        </td>
-                        <td><span class="description" i18n="firmwareFlasherOnlineSelectBuildType"></span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                <input id="show-legacy-targets" class="toggle" type="checkbox" />
-                                <span i18n="firmware_flasher.show_legacy_targets.label"></span>
-                            </label>
-                        </td>
-                        <td><span class="description" i18n="firmware_flasher.show_legacy_targets.description"></span></td>
-                    </tr>
-                    <tr>
-                        <td class="board-select">
-                            <span class="board-select-flex">
-                                <select name="board">
-                                    <option value="0" i18n="firmwareFlasherOptionLoading">Loading ...</option>
-                                </select>
-                                <span class="default_btn detect_btn">
-                                    <a href="#" class="detect-board disabled">
-                                        <span i18n="firmwareFlasherBoardDetectionButton"></span><em class="fas fa-search"></em>
-                                    </a>
-                                </span>
-                            </span>
-                        </td>
-                        <td><span class="description" i18n="firmwareFlasherOnlineSelectBoardDescription"></span>
-                            <div class="helpicon cf_tip_wide" i18n_title="firmwareFlasherOnlineSelectBoardHint"></div></td>
-                    </tr>
-                    <tr>
-                        <td><select name="firmware_version">
+                <div class="options-container">
+                    <div class="field">
+                        <select name="build_type">
+                            <!-- options generated at runtime -->
+                        </select>
+                        <span class="description" i18n="firmwareFlasherOnlineSelectBuildType"></span>
+                    </div>
+                    <div class="field">
+                        <div class="board-select-flex">
+                            <select name="board" style="flex-grow: 1;">
                                 <option value="0" i18n="firmwareFlasherOptionLoading">Loading ...</option>
-                        </select></td>
-                        <td><span class="description" i18n="firmwareFlasherOnlineSelectFirmwareVersionDescription"></span></td>
-                    </tr>
-                    <tr>
-                        <td><label> <input class="updating toggle" type="checkbox" /> <span
-                                i18n="firmwareFlasherNoReboot"></span>
-                        </label></td>
-                        <td><span class="description" i18n="firmwareFlasherNoRebootDescription"></span></td>
-                    </tr>
-                    <tr class="option flash_on_connect_wrapper">
-                        <td><label> <input class="flash_on_connect toggle" type="checkbox" /> <span
-                                i18n="firmwareFlasherFlashOnConnect"></span></label></td>
-                        <td><span class="description" i18n="firmwareFlasherFlashOnConnectDescription"></span></td>
-                    </tr>
-                    <tr class="option">
-                        <td><label> <input class="erase_chip toggle" type="checkbox" /> <span
-                                i18n="firmwareFlasherFullChipErase"></span>
-                        </label></td>
-                        <td><span class="description" i18n="firmwareFlasherFullChipEraseDescription"></span></td>
-                    </tr>
-                    <tr class="option manual_baud_rate noboarder">
-                        <td><label> <input class="flash_manual_baud toggle" type="checkbox" /> <span
-                                i18n="firmwareFlasherManualBaud"></span> <select id="flash_manual_baud_rate"
-                                i18n_title="firmwareFlasherBaudRate">
-                                    <option value="921600">921600</option>
-                                    <option value="460800">460800</option>
-                                    <option value="256000" selected="selected">256000</option>
-                                    <option value="230400">230400</option>
-                                    <option value="115200">115200</option>
-                                    <option value="57600">57600</option>
-                                    <option value="38400">38400</option>
-                                    <option value="28800">28800</option>
-                                    <option value="19200">19200</option>
                             </select>
-                        </label></td>
-                        <td><span class="description" i18n="firmwareFlasherManualBaudDescription"></span></td>
-                    </tr>
-                </table>
+                            <span class="default_btn detect_btn">
+                                <a href="#" class="detect-board disabled">
+                                    <span i18n="firmwareFlasherBoardDetectionButton"></span><em class="fas fa-search"></em>
+                                </a>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="description" i18n="firmwareFlasherOnlineSelectBoardDescription"></span>
+                            <div class="helpicon cf_tip_wide" i18n_title="firmwareFlasherOnlineSelectBoardHint"></div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <select name="firmware_version">
+                            <option value="0" i18n="firmwareFlasherOptionLoading">Loading ...</option>
+                        </select>
+                        <span class="description" i18n="firmwareFlasherOnlineSelectFirmwareVersionDescription"></span>
+                    </div>
+                    <div class="field">
+                        <label>
+                            <input id="show-legacy-targets" class="toggle" type="checkbox" />
+                            <span i18n="firmware_flasher.show_legacy_targets.label"></span>
+                        </label>
+                        <span class="description" i18n="firmware_flasher.show_legacy_targets.description"></span>
+                    </div>
+                    <div class="field">
+                        <label>
+                            <input class="erase_chip toggle" type="checkbox" />
+                            <span i18n="firmwareFlasherFullChipErase"></span>
+                        </label>
+                        <span class="description" i18n="firmwareFlasherFullChipEraseDescription"></span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="clear-both"></div>

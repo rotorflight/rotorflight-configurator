@@ -8,6 +8,7 @@
 
 !/src/**/
 !/src/css/app.css
+!/src/css/tabs/options.css
 !/src/css/tabs/presets.css
 !/src/js/GitHubApi.js
 !/src/js/cli_engine.js
@@ -21,18 +22,19 @@
 !/src/js/manufacturers.js
 !/src/js/port_usage.js
 !/src/js/presets/**/*
-!/src/js/remote_command.svelte.js
 !/src/js/setpoint.svelte.js
 !/src/js/tabs/failsafe.js
 !/src/js/tabs/governor.js
 !/src/js/tabs/gyro.js
 !/src/js/tabs/motors.js
+!/src/js/tabs/options.js
 !/src/js/tabs/presets.js
 !/src/js/tabs/receiver.js
 !/src/js/virtual_fc.js
 !/src/tabs/governor/**/*.js
 !/src/tabs/gyro/filter_config.js
 !/src/tabs/motors/**/*.js
+!/src/tabs/options.html
 !/src/tabs/presets/**/*
 !/src/tabs/receiver/**/*.js
 
