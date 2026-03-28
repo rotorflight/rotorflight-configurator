@@ -270,12 +270,21 @@ tab.initialize = function (callback) {
         const batteryMeterType_e = elementBatteryConfiguration.find('select.batterymetersource');
         const currentMeterType_e = elementBatteryConfiguration.find('select.currentmetersource');
 
-        self.batteryMeterTypes.forEach((item, index) => {
+        const batteryMeterTypes = [
+            ...self.batteryMeterTypes,
+            ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) ? ['Fbus'] : []),
+        ];
+        const currentMeterTypes = [
+            ...self.currentMeterTypes,
+            ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) ? ['Fbus'] : []),
+        ];
+
+        batteryMeterTypes.forEach((item, index) => {
             const text = i18n.getMessage('powerBatteryVoltageMeterType' + item);
             batteryMeterType_e.append(`<option value="${index}">${text}</option>`);
         });
 
-        self.currentMeterTypes.forEach((item, index) => {
+        currentMeterTypes.forEach((item, index) => {
             const text = i18n.getMessage('powerBatteryCurrentMeterType' + item);
             currentMeterType_e.append(`<option value="${index}">${text}</option>`);
         });

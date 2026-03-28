@@ -1,7 +1,10 @@
 import semver from "semver";
 
 import { FC } from "@/js/fc.svelte.js";
-import { API_VERSION_12_8 } from "@/js/configurator.svelte.js";
+import {
+  API_VERSION_12_8,
+  API_VERSION_12_9,
+} from "@/js/configurator.svelte.js";
 
 class State {
   overrideEnabled = $state(false);
@@ -34,6 +37,9 @@ class State {
     "FLYROTOR",
     "Graupner",
     ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8) ? ["XDFLY"] : []),
+    ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)
+      ? ["FrSky F.BUS"]
+      : []),
   ]);
 
   throttleEnabled = $derived(
