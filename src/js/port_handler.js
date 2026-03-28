@@ -22,9 +22,6 @@ PortHandler.initialize = function (showAllPorts) {
     this.initialWidth = this.selectList.offsetWidth + 12;
     this.showingAllPorts = showAllPorts;
 
-    // fill dropdown with version numbers
-    generateVirtualApiVersions();
-
     // start listening, check after TIMEOUT_CHECK ms
     this.check();
 };
@@ -105,14 +102,6 @@ PortHandler.check_usb_devices = function (callback) {
                     text: usbText,
                     data: {isDFU: true},
                 }));
-
-                if (import.meta.env.DEV) {
-                    self.portPickerElement.append($('<option/>', {
-                       value: 'virtual',
-                       text: i18n.getMessage('portsSelectVirtual'),
-                       data: {isVirtual: true},
-                    }));
-                }
 
                 self.portPickerElement.append($('<option/>', {
                     value: 'manual',

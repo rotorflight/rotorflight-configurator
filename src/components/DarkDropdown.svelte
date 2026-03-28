@@ -1,4 +1,27 @@
+<script>
+  let {
+    options = [{ value: 'none', text: 'No Options!' }],
+    value = $bindable(),
+    children = undefined,
+    onchange = undefined,
+    i18n_title,
+    disabled = false,
+  } = $props();
+</script>
 
+<div class="dropdown dropdown-dark">
+    <select class="dropdown-select" bind:value {disabled} {onchange} {i18n_title} >
+    {#if children}
+        {@render children()}
+    {:else}
+        {#each options as {value, i18n, text = " "}(value)}
+            <option {value} {i18n}>{text}</option>
+        {/each}
+    {/if}
+    </select>
+</div>
+
+<style>
 /*
  * Copyright (c) 2012-2013 Thibaut Courouble
  * http://www.cssflow.com
@@ -7,22 +30,13 @@
  * http://www.opensource.org/licenses/mit-license.php
  */
 
-
-
-
 .dropdown {
-  display: inline-block;
   position: relative;
   overflow: hidden;
   height: 20px;
   background: #fff;
-  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
-  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
-  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
   background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
-  width:99%;
   margin-bottom:7px;
   border: 1px solid;
   border-color: #ccc #ccc #ccc;
@@ -58,9 +72,10 @@
 .dropdown-select {
   position: relative;
   overflow:visible;
-  width: 100%;
+  width: 100% !important;
   margin-top:0px;
-  padding: 1px 8px 6px 5px;
+  padding: 1px 0px 6px 5px;
+  margin-right: 18px;
   height: 23px;
   line-height: 20px;
   font-size: 12px;
@@ -72,6 +87,7 @@
   background: rgba(0, 0, 0, 0) !important;
   border: 0;
   border-radius: 0;
+  appearance: none;
   -webkit-appearance: none;
 }
 
@@ -85,38 +101,19 @@
   height:25px;
 }
 
-.dropdown-select > option {
+.dropdown-select > :global(option) {
   margin: 3px;
-  padding: 6px 8px;
   text-shadow: none;
   background: #f2f2f2;
   border-radius: 3px;
   cursor: pointer;
-
-}
-
-/* Fix for IE 8 putting the arrows behind the select element. */
-.lt-ie9 .dropdown {
-  z-index: 1;
-}
-
-.lt-ie9 .dropdown-select {
-  z-index: -1;
-}
-
-.lt-ie9 .dropdown-select:focus {
-  z-index: 3;
 }
 
 .dropdown-dark {
   background: #636363; /* NEW2 */
   background: #3e403f; /* NEW */
   border-color: #111 #0a0a0a black;
-  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
-  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
-  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
   background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.4));
-  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
   color:#a6a6a6;
   text-shadow:0px 1px rgba(0, 0, 0, 0.25);
@@ -133,7 +130,6 @@
 .dropdown-dark .dropdown-select {
   color: #a6a6a6;
   text-shadow: 0 1px black;
-  width: calc(100% - 10px);
   /* Fallback for IE 8 */
   background: #444;
 }
@@ -142,7 +138,8 @@
   color: #fff;
 }
 
-.dropdown-dark .dropdown-select > option {
+.dropdown-dark .dropdown-select > :global(option) {
   background: #56ab1a;
   text-shadow: 0 1px rgba(0, 0, 0, 0.4);
 }
+</style>

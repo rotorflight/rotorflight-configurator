@@ -3,6 +3,7 @@ import semver from "semver";
 import * as config from "@/js/config.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
 import { applyVirtualConfig } from "@/js/virtual_fc.js";
+import { DeviceType } from "@/js/comms";
 
 export async function handleConnectClick() {
     if (GUI.connect_lock != true) { // GUI control overrides the user control
@@ -16,35 +17,37 @@ export async function handleConnectClick() {
 
         GUI.configuration_loaded = false;
 
-        const selected_baud = parseInt($('div#port-picker #baud').val());
-        const selectedPort = $('div#port-picker #port option:selected');
+        const device = CONFIGURATOR.serial;
+        const selected_baud = CONFIGURATOR.baudRate || 115200;
 
-        let portName;
-        if (selectedPort.data().isManual) {
-            portName = $('#port-override').val();
-        } else {
-            portName = String($('div#port-picker #port').val());
+        console.log(`serial_backend: handleConnectClick — device=${device?.description}, type=${device?.type}, baud=${selected_baud}, clicks=${clicks}`);
+
+        if (!device) {
+            console.warn("serial_backend: no device selected, aborting connect");
+            return;
         }
 
-        if (selectedPort.data().isDFU) {
-            $('select#baud').hide();
-        } else if (portName !== '0') {
+        if (device.type === DeviceType.DFU) {
+            console.log("serial_backend: DFU device, handled elsewhere");
+            // DFU handled elsewhere
+        } else {
             if (!clicks) {
-                console.log(`${serial.connectionType}: connecting to: ${portName}`);
-                GUI.connecting_to = portName;
+                console.log(`serial_backend: connecting to: ${device.description} (type=${device.type})`);
+                GUI.connecting_to = device.description;
 
-                // lock port select & baud while we are connecting / connected
-                $('div#port-picker #port, div#port-picker #baud, div#port-picker #delay').prop('disabled', true);
                 $('div.connect_controls div.connect_state').text(i18n.getMessage('connecting'));
 
-                if (selectedPort.data().isVirtual) {
+                if (device.type === DeviceType.Virtual) {
                     CONFIGURATOR.virtualMode = true;
-                    CONFIGURATOR.virtualApiVersion = $('#firmware-version-dropdown :selected').val();
-                    CONFIGURATOR.virtualFwVersion = $('#firmware-version-dropdown :selected').data('fw');
+                    CONFIGURATOR.virtualApiVersion = CONFIGURATOR.virtualFirmware?.msp;
+                    CONFIGURATOR.virtualFwVersion = CONFIGURATOR.virtualFirmware?.fw;
 
                     serial.connect('virtual', {}, onOpenVirtual);
+                } else if (device.type === DeviceType.Manual) {
+                    const portOverride = CONFIGURATOR.portOverride || '/dev/rfcomm0';
+                    serial.connect(portOverride, {bitrate: selected_baud}, onOpen);
                 } else {
-                    serial.connect(portName, {bitrate: selected_baud}, onOpen);
+                    serial.connect(device, {bitrate: selected_baud}, onOpen);
                 }
             } else {
                 if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
@@ -67,39 +70,11 @@ export async function handleConnectClick() {
 }
 
 export function initializeSerialBackend() {
-    GUI.updateManualPortVisibility = function(){
-        const selected_port = $('div#port-picker #port option:selected');
-        if (selected_port.data().isManual) {
-            $('#port-override-option').show();
-        }
-        else {
-            $('#port-override-option').hide();
-        }
-        if (selected_port.data().isVirtual) {
-            $('#firmware-virtual-option').show();
-        }
-        else {
-            $('#firmware-virtual-option').hide();
-        }
-        if (selected_port.data().isDFU) {
-            $('select#baud').hide();
-        }
-        else {
-            $('select#baud').show();
-        }
-    };
-
-    GUI.updateManualPortVisibility();
-
     $('#port-override').on("change", function() {
         config.set({'portOverride': $('#port-override').val()});
     });
 
     $('#port-override').val(config.get('portOverride'));
-
-    $('div#port-picker #port').on("change", function() {
-        GUI.updateManualPortVisibility();
-    });
 
     $('div.connect_controls a.connect').on("click", function () {
       handleConnectClick.call(this);
@@ -118,6 +93,7 @@ export function initializeSerialBackend() {
     });
 
     // auto-connect
+  /*
     if (config.get('auto_connect') ?? true) {
         // default or enabled by user
         GUI.auto_connect = true;
@@ -133,6 +109,7 @@ export function initializeSerialBackend() {
         $('input.auto_connect').prop('checked', false);
         $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectDisabled'));
     }
+  */
 
     // bind UI hook to auto-connect checkbos
     $('input.auto_connect').change(function () {
@@ -142,7 +119,7 @@ export function initializeSerialBackend() {
         if (GUI.auto_connect) {
             $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectEnabled'));
 
-            $('select#baud').val(115200).prop('disabled', true);
+            //$('select#baud').val(115200).prop('disabled', true);
         } else {
             $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectDisabled'));
 
@@ -212,8 +189,10 @@ function finishClose() {
     $('#dialogReportProblems-closebtn').trigger("click");
 
     // unlock port select & baud
+  /*
     $('div#port-picker #port').prop('disabled', false);
     if (!GUI.auto_connect) $('div#port-picker #baud').prop('disabled', false);
+*/
 
     // reset connect / disconnect button
     $('div.connect_controls a.connect').removeClass('active');
