@@ -144,9 +144,16 @@ export function startProcess() {
     // our view is reactive to model changes
     // updateTopBarVersion();
 
-    // TODO: Implement PWA update UI
     if (GUI.isInstalled()) {
         checkForConfiguratorUpdates();
+    } else if (GUI.isBrowser()) {
+        import('virtual:pwa-register').then(({ registerSW }) => {
+            const updateSW = registerSW({
+                onNeedRefresh() {
+                    showPwaUpdateDialog(updateSW);
+                },
+            });
+        }).catch((e) => console.warn('PWA registration failed:', e));
     }
 
     // log webgl capability
@@ -360,6 +367,27 @@ export function startProcess() {
 
 export function setDarkTheme(enabled) {
     DarkTheme.setConfig(enabled);
+}
+
+function showPwaUpdateDialog(updateSW) {
+    const dialog = document.querySelector('.dialogPwaUpdate');
+    const content = dialog.querySelector('.dialogPwaUpdate-content');
+    const reloadBtn = dialog.querySelector('.dialogPwaUpdate-reloadbtn');
+    const closeBtn = dialog.querySelector('.dialogPwaUpdate-closebtn');
+
+    content.textContent = i18n.getMessage('pwaUpdateAvailable');
+
+    reloadBtn.onclick = (e) => {
+        e.preventDefault();
+        updateSW(true);
+    };
+
+    closeBtn.onclick = (e) => {
+        e.preventDefault();
+        dialog.close();
+    };
+
+    dialog.showModal();
 }
 
 export function checkForConfiguratorUpdates() {

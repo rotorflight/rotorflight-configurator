@@ -140,7 +140,7 @@ function vite_options() {
             workbox: {
               globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
             },
-            registerType: "autoUpdate",
+            registerType: "prompt",
             manifest: {
               name: pkg.productName,
               short_name: "RotFliConfig",

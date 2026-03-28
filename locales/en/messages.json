@@ -365,6 +365,12 @@
     "configuratorUpdateWebsite": {
         "message": "Go to Release Website"
     },
+    "pwaUpdateAvailable": {
+        "message": "A new version of the Rotorflight Configurator is available. Reload to update?"
+    },
+    "pwaUpdateReload": {
+        "message": "Reload Now"
+    },
     "deviceRebooting": {
         "message": "Device - <span class=\"message-negative\">Rebooting</span>"
     },
