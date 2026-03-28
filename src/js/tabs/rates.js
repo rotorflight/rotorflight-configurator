@@ -51,6 +51,7 @@ const DEFAULTS = {
       yaw_accel_limit:                   0,
       collective_accel_limit:            0,
   },
+  CYCLIC_RING: 150,
 };
 
 const tab = {
@@ -62,6 +63,7 @@ const tab = {
     currentRateProfile: null,
     currentRatesType: null,
     previousRatesType: null,
+    polarRates: null,
     RATES_TYPE: {
         NONE:        0,
         BETAFLIGHT:  1,
@@ -193,6 +195,10 @@ tab.initialize = function (callback) {
         FC.RC_TUNING.yaw_dynamic_ceiling_gain = getIntegerValue('#yaw-dynamic-ceiling-gain');
         FC.RC_TUNING.yaw_dynamic_deadband_gain = getIntegerValue('#yaw-dynamic-deadband-gain');
         FC.RC_TUNING.yaw_dynamic_deadband_filter = getIntegerValue('#yaw-dynamic-deadband-filter', 10);
+
+        const cyclicRingEnabled = $('#enable-cyclic-ring').is(':checked');
+        FC.RC_TUNING.cyclic_ring = cyclicRingEnabled ? getIntegerValue('#cyclic-ring-level') : 0;
+        FC.RC_TUNING.cyclic_polar = $('#enable-polar-coordinates').is(':checked');
 
         // catch RC_tuning changes
         const collective_rc_expo_e = $('.rates_setup input[name="collective_rc_expo"]');
@@ -362,8 +368,6 @@ tab.initialize = function (callback) {
         // Getting the DOM elements for curve display
         const rcCurveElement = $('.rate_curve canvas#rate_curve_layer0').get(0);
         const curveContext = rcCurveElement.getContext("2d");
-        let updateNeeded = true;
-        let maxAngularVel;
 
         // make these variables global scope so that they can be accessed by the updateRates function.
         self.maxAngularVelRollElement    = $('.rates_setup .maxAngularVelRoll');
@@ -376,8 +380,10 @@ tab.initialize = function (callback) {
 
         function updateRates (event) {
             if (event) {
+                let updateNeeded = false;
+
                 const targetElement = $(event.target);
-                let targetValue = getFloatValue(targetElement);
+                const targetValue = getFloatValue(targetElement);
                 if (self.currentRates.hasOwnProperty(targetElement.attr('name'))) {
                     self.currentRates[targetElement.attr('name')] = targetValue;
                     updateNeeded = true;
@@ -386,40 +392,71 @@ tab.initialize = function (callback) {
                     self.changeRatesType(targetValue);
                     updateNeeded = true;
                 }
-            } else {
-                updateNeeded = true;
+
+                if (!updateNeeded) {
+                    return;
+                }
             }
 
-            if (updateNeeded) {
-                const curveHeight = rcCurveElement.height;
-                const curveWidth = rcCurveElement.width;
-                const lineScale = curveContext.canvas.width / curveContext.canvas.clientWidth;
+            let maxAngularVel;
+            const curveHeight = rcCurveElement.height;
+            const curveWidth = rcCurveElement.width;
+            const lineScale = curveContext.canvas.width / curveContext.canvas.clientWidth;
 
-                curveContext.clearRect(0, 0, curveWidth, curveHeight);
+            curveContext.clearRect(0, 0, curveWidth, curveHeight);
 
+            maxAngularVel = Math.max(
+                printMaxAngularVel(self.currentRates.pitch_srate, self.currentRates.pitch_rc_rate, self.currentRates.pitch_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, self.maxAngularVelPitchElement),
+                printMaxAngularVel(self.currentRates.yaw_srate, self.currentRates.yaw_rc_rate, self.currentRates.yaw_rc_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, self.maxAngularVelYawElement));
+
+            if (!self.polarRates) {
                 maxAngularVel = Math.max(
+                    maxAngularVel,
                     printMaxAngularVel(self.currentRates.roll_srate, self.currentRates.roll_rc_rate, self.currentRates.roll_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, self.maxAngularVelRollElement),
-                    printMaxAngularVel(self.currentRates.pitch_srate, self.currentRates.pitch_rc_rate, self.currentRates.pitch_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, self.maxAngularVelPitchElement),
-                    printMaxAngularVel(self.currentRates.yaw_srate, self.currentRates.yaw_rc_rate, self.currentRates.yaw_rc_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, self.maxAngularVelYawElement));
-
-                // make maxAngularVel multiple of 200°/s so that the auto-scale doesn't keep changing for small changes of the maximum curve
-                maxAngularVel = self.rateCurve.setMaxAngularVel(maxAngularVel);
-
-                drawAxes(curveContext, curveWidth, curveHeight);
-
-                curveContext.lineWidth = 2 * lineScale;
-                drawCurve(self.currentRates.roll_srate, self.currentRates.roll_rc_rate, self.currentRates.roll_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, '#ff0000', -6, curveContext);
-                drawCurve(self.currentRates.pitch_srate, self.currentRates.pitch_rc_rate, self.currentRates.pitch_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -2, curveContext);
-                drawCurve(self.currentRates.yaw_srate, self.currentRates.yaw_rc_rate, self.currentRates.yaw_rc_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 2, curveContext);
-
-                self.maxCollectiveAngle = printMaxAngularVel(self.currentRates.collective_srate, self.currentRates.collective_rc_rate, self.currentRates.collective_rc_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngleElement, true);
-                drawCurve(self.currentRates.collective_srate, self.currentRates.collective_rc_rate, self.currentRates.collective_rc_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, '#ffbb00', 6, curveContext);
-
-                self.updateRatesLabels();
-
-                updateNeeded = false;
+                );
             }
+
+            // make maxAngularVel multiple of 200°/s so that the auto-scale doesn't keep changing for small changes of the maximum curve
+            maxAngularVel = self.rateCurve.setMaxAngularVel(maxAngularVel);
+
+            drawAxes(curveContext, curveWidth, curveHeight);
+
+            curveContext.lineWidth = 2 * lineScale;
+            if (!self.polarRates) {
+                drawCurve(self.currentRates.roll_srate, self.currentRates.roll_rc_rate, self.currentRates.roll_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, '#ff0000', -6, curveContext);
+            }
+            drawCurve(self.currentRates.pitch_srate, self.currentRates.pitch_rc_rate, self.currentRates.pitch_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -2, curveContext);
+            drawCurve(self.currentRates.yaw_srate, self.currentRates.yaw_rc_rate, self.currentRates.yaw_rc_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 2, curveContext);
+
+            self.maxCollectiveAngle = printMaxAngularVel(self.currentRates.collective_srate, self.currentRates.collective_rc_rate, self.currentRates.collective_rc_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngleElement, true);
+            drawCurve(self.currentRates.collective_srate, self.currentRates.collective_rc_rate, self.currentRates.collective_rc_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, '#ffbb00', 6, curveContext);
+
+            self.updateRatesLabels();
         }
+
+        $('.tab-rates .cyclic-ring-container').toggle(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9));
+        $('.tab-rates .cyclic-ring-container #enable-cyclic-ring').on('change', function () {
+            const enabled = $(this).is(':checked');
+            const level_e = $('.tab-rates .cyclic-ring-container #cyclic-ring-level');
+            if (enabled && self.currentRates.cyclic_ring === 0) {
+                level_e.val(DEFAULTS.CYCLIC_RING);
+            }
+            level_e.closest('.field').toggle(enabled);
+        });
+        $('.tab-rates .cyclic-ring-container #enable-polar-coordinates').on('change', function () {
+            const enabled = $(this).is(':checked');
+            self.polarRates = enabled;
+            $('.tab-rates .rates_setup .ROLL').toggle(!enabled);
+
+            const pitchTitle = $('.tab-rates .rates_setup .PITCH .axis_title');
+            if (enabled) {
+                pitchTitle.text(i18n.getMessage('rates.config.cyclic.label'));
+            } else {
+                pitchTitle.text(i18n.getMessage('axisPITCH'));
+            }
+
+            updateRates();
+        }).trigger('change');
 
         $('.rates_change').on('input change', updateRates).trigger('input');
 
@@ -814,7 +851,7 @@ tab.updateRatesLabels = function() {
             balloonsDirty = []; // reset the dirty balloon draw area (for overlap detection)
             // create an array of balloons to draw
             const balloons = [
-                {value: maxAngularVelRoll, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelRoll + '°/s',  curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelRoll)),  'right', BALLOON_COLORS.roll, balloonsDirty);}},
+                {value: maxAngularVelRoll, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelRoll + '°/s',  curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelRoll)),  'right', BALLOON_COLORS.roll, balloonsDirty);}, axis: "roll"},
                 {value: maxAngularVelPitch, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelPitch + '°/s', curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelPitch)), 'right', BALLOON_COLORS.pitch, balloonsDirty);}},
                 {value: maxAngularVelYaw, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelYaw + '°/s',   curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelYaw)),   'right', BALLOON_COLORS.yaw, balloonsDirty);}},
                 {value: 10000, balloon: function() {drawBalloonLabel(stickContext, maxCollectiveAngleText + '°', curveWidth, 0,   'right', BALLOON_COLORS.collective, balloonsDirty);}}
@@ -827,13 +864,17 @@ tab.updateRatesLabels = function() {
             if (drawStickPositions) {
                 balloons.push(
                     {value: currentValues[3], balloon: function() {drawBalloonLabel(stickContext, self.convertToCollective(currentValues[3]) + '°', 10, 50,  'none', BALLOON_COLORS.collective, balloonsDirty);}},
-                    {value: currentValues[0], balloon: function() {drawBalloonLabel(stickContext, currentValues[0].toFixed(0) + '°/s', 10, 150, 'none', BALLOON_COLORS.roll, balloonsDirty);}},
+                    {value: currentValues[0], balloon: function() {drawBalloonLabel(stickContext, currentValues[0].toFixed(0) + '°/s', 10, 150, 'none', BALLOON_COLORS.roll, balloonsDirty);}, axis: "roll"},
                     {value: currentValues[1], balloon: function() {drawBalloonLabel(stickContext, currentValues[1].toFixed(0) + '°/s', 10, 250, 'none', BALLOON_COLORS.pitch, balloonsDirty);}},
                     {value: currentValues[2], balloon: function() {drawBalloonLabel(stickContext, currentValues[2].toFixed(0) + '°/s', 10, 350,  'none', BALLOON_COLORS.yaw, balloonsDirty);}}
                 );
             }
             // then display them on the chart
             for (const balloon of balloons) {
+                if (self.polarRates && balloon.axis === "roll") {
+                    continue;
+                }
+
                 balloon.balloon();
             }
 
@@ -1150,6 +1191,8 @@ tab.initRatesSystem = function() {
         yaw_dynamic_ceiling_gain:         FC.RC_TUNING.yaw_dynamic_ceiling_gain,
         yaw_dynamic_deadband_gain:        FC.RC_TUNING.yaw_dynamic_deadband_gain,
         yaw_dynamic_deadband_filter:      FC.RC_TUNING.yaw_dynamic_deadband_filter,
+        cyclic_ring:                      FC.RC_TUNING.cyclic_ring,
+        cyclic_polar:                     FC.RC_TUNING.cyclic_polar,
     };
 
     switch (self.currentRatesType) {
@@ -1220,6 +1263,9 @@ tab.initRatesSystem = function() {
         self.currentRates.yaw_rc_expo               = yawExpoDef;
         self.currentRates.pitch_rc_expo             = expoDef;
         self.currentRates.collective_rc_expo        = colExpoDef;
+
+        self.currentRates.cyclic_ring = 150;
+        self.currentRates.cyclic_polar = false;
 
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
             Object.assign(self.currentRates, DEFAULTS.DYNAMICS_4_6);
@@ -1299,6 +1345,13 @@ tab.initRatesSystem = function() {
     $('#yaw-dynamic-ceiling-gain').val(self.currentRates.yaw_dynamic_ceiling_gain);
     $('#yaw-dynamic-deadband-gain').val(self.currentRates.yaw_dynamic_deadband_gain);
     $('#yaw-dynamic-deadband-filter').val((self.currentRates.yaw_dynamic_deadband_filter / 10).toFixed(1));
+
+    $('#enable-cyclic-ring').prop('checked', self.currentRates.cyclic_ring > 0);
+    $('#cyclic-ring-level')
+        .val(self.currentRates.cyclic_ring)
+        .closest('.field')
+        .toggle(self.currentRates.cyclic_ring > 0);
+    $('#enable-polar-coordinates').prop('checked', self.currentRates.cyclic_polar);
 };
 
 tab.changeRatesLogo = function() {
