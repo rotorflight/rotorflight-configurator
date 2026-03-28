@@ -1532,6 +1532,9 @@
     "portsFunction_TELEMETRY_SMARTPORT": {
         "message": "Telemetry: FrSky SmartPort"
     },
+    "portsFunction_SMARTPORT_INPUT": {
+        "message": "S.PORT Input"
+    },
     "portsFunction_TELEMETRY_IBUS": {
         "message": "Telemetry: FlySky iBUS"
     },
