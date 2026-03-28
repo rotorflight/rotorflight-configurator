@@ -524,7 +524,7 @@ tab.initialize = function (callback) {
             const yawDir = getIntegerValue('#mixerTailRotorDirection');
             const yawRate = getIntegerValue('#mixerTailRotorCalibration', 10);
 
-            let yawMin = 0.0, yawMax = 0.0;
+            let yawMin, yawMax;
 
             if (FC.MIXER_CONFIG.tail_rotor_mode > 0) {
                 yawMin = getIntegerValue('#mixerTailMotorMinYaw', -10);

@@ -70,6 +70,7 @@ tab.getDisarmFlags = function () {
         'DSHOT_BITBANG',
         'ACC_CALIB',
         'MOTOR_PROTO',
+        semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) ? ['OVERRIDE'] : [],
         'ARM_SWITCH'
     ];
 };
@@ -115,10 +116,11 @@ tab.initialize = function (callback) {
             $('.flight-time').closest('tr').hide();
         } else {
             $('.flight-count').text(FC.FLIGHT_STATS.stats_total_flights.toLocaleString());
-            $('.flight-time').text(i18n.getMessage('statusFlightTimeValue', [
-                Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60).toLocaleString(),
-                Math.floor(FC.FLIGHT_STATS.stats_total_time_s % 60),
-            ]));
+            const flightTimeFormatter = new Intl.DurationFormat(i18n.getCurrentLocale(), { style: "short" });
+            $('.flight-time').text(flightTimeFormatter.format({
+                hours: Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60 / 60),
+                minutes: Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60 % 60),
+            }));
         }
 
         // set roll in interactive block

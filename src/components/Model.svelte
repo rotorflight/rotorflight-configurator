@@ -143,7 +143,7 @@
   bind:clientWidth={width}
   bind:clientHeight={height}
 >
-  <canvas bind:this={canvas} {width} {height} />
+  <canvas bind:this={canvas} {width} {height}></canvas>
   {#if error}
     <div class="webgl-error">WebGL Context Error</div>
   {/if}

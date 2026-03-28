@@ -7,7 +7,6 @@
 </script>
 
 <div class="container" class:open>
-  <!-- eslint-disable-next-line svelte/valid-compile -->
   <div class="summary" onclick={() => (open = !open)}>
     {@render summary()}
   </div>

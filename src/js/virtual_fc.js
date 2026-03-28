@@ -23,7 +23,7 @@ export function applyVirtualConfig() {
   // Status
   Object.assign(FC.FLIGHT_STATS, {
     stats_total_flights: 7,
-    stats_total_time_s: 2000,
+    stats_total_time_s: 6000,
     stats_min_armed_time_s: 30,
   });
 
@@ -104,6 +104,23 @@ export function applyVirtualConfig() {
       value: 1500,
     };
   }
+
+  // Power
+  Object.assign(FC.BATTERY_CONFIG, {
+    vbatmincellvoltage: 1,
+    vbatmaxcellvoltage: 4,
+    vbatwarningcellvoltage: 3,
+    capacity: 10000,
+    voltageMeterSource: 1,
+    currentMeterSource: 1,
+  });
+
+  Object.assign(FC.BATTERY_STATE, {
+    cellCount: 10,
+    voltage: 20,
+    mAhDrawn: 1000,
+    amperage: 3,
+  });
 
   // Gyro
   FC.FEATURE_CONFIG.features.DYN_NOTCH = true;
@@ -213,7 +230,7 @@ export function applyVirtualConfig() {
 
   FC.MIXER_CONFIG.mixer = 3;
 
-  FC.SERVO_CONFIG = new Array(8);
+  FC.SERVO_CONFIG = new Array(26);
   for (let i = 0; i < FC.SERVO_CONFIG.length; i++) {
     FC.SERVO_CONFIG[i] = {
       mid: 1500,
@@ -225,6 +242,11 @@ export function applyVirtualConfig() {
       speed: 0,
       flags: 0,
     };
+  }
+
+  FC.BUS_SERVO_CONFIG = new Array(18);
+  for (let i = 0; i < FC.BUS_SERVO_CONFIG.length; i++) {
+    FC.BUS_SERVO_CONFIG[i] = 0; // BUS_SERVO_SOURCE_MIXER
   }
 
   FC.ADJUSTMENT_RANGES = new Array(42);
@@ -268,22 +290,6 @@ export function applyVirtualConfig() {
     mAhdrawn: 1200,
     amperage: 3,
   });
-
-  FC.BATTERY_CONFIG = {
-    vbatmincellvoltage: 1,
-    vbatmaxcellvoltage: 4,
-    vbatwarningcellvoltage: 3,
-    capacity: 10000,
-    voltageMeterSource: 1,
-    currentMeterSource: 1,
-  };
-
-  FC.BATTERY_STATE = {
-    cellCount: 10,
-    voltage: 20,
-    mAhDrawn: 1000,
-    amperage: 3,
-  };
 
   FC.SENSOR_CONFIG = {
     acc_hardware: 1,

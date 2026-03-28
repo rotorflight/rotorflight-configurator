@@ -413,12 +413,6 @@ html[data-theme="dark"] .noUi-target[disabled] .noUi-handle:after {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 5px;
 }
 
-.svelte-slide-connect,
-.svelte-slide-origin {
-  // -webkit-transition: transform 200ms;
-  // transition: transform 200ms;
-}
-
 .svelte-slide-handle:before,
 .svelte-slide-handle:after {
   background: var(--color-slider-foreground);

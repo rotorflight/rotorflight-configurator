@@ -12,6 +12,7 @@ class FlightController {
   BEEPER_CONFIG = $state();
   BLACKBOX = $state();
   BOARD_ALIGNMENT_CONFIG = $state();
+  BUS_SERVO_CONFIG = $state();
   CONFIG = $state();
   COPY_PROFILE = $state();
   CURRENT_METERS = $state();
@@ -49,6 +50,7 @@ class FlightController {
   PIDS_ACTIVE = $state();
   PID_NAMES = $state();
   PID_PROFILE = $state();
+  PILOT_CONFIG = $state();
   RC = $state();
   RC_COMMAND = $state();
   RC_CONFIG = $state();
@@ -68,7 +70,6 @@ class FlightController {
   SERVO_CONFIG = $state();
   SERVO_DATA = $state();
   SERVO_OVERRIDE = $state();
-  SERVO_RULES = $state();
   TELEMETRY_CONFIG = $state();
   TRANSPONDER = $state();
   TUNING_SLIDERS = $state();
@@ -130,6 +131,7 @@ class FlightController {
 
     this.BATTERY_CONFIG = {
       capacity:                   0,
+      capacities:                 [ 0, 0, 0, 0, 0, 0 ],
       cellCount:                  0,
       voltageMeterSource:         0,
       currentMeterSource:         0,
@@ -149,6 +151,7 @@ class FlightController {
       voltage:                    0,
       amperage:                   0,
       chargeLevel:                0,
+      batteryProfile:             0,
     };
 
     this.ANALOG = {
@@ -282,6 +285,7 @@ class FlightController {
       yaw_dynamic_deadband_filter:0,
 
       cyclic_ring:                0,
+      cyclic_polar:               false,
     };
 
     this.AUX_CONFIG =               [];
@@ -292,7 +296,7 @@ class FlightController {
     this.ADJUSTMENT_RANGES =        [];
 
     this.SERVO_CONFIG =             [];
-    this.SERVO_RULES =              [];
+    this.BUS_SERVO_CONFIG =         [];
 
     this.SERIAL_CONFIG = {
       ports:                      [],
@@ -756,6 +760,17 @@ class FlightController {
       stats_total_time_s: 0,
       stats_total_dist_m: 0,
       stats_min_armed_time_s: 0,
+    };
+
+    this.PILOT_CONFIG = {
+      model_id: 0,
+      model_param1_type: 0,
+      model_param1_value: 0,
+      model_param2_type: 0,
+      model_param2_value: 0,
+      model_param3_type: 0,
+      model_param3_value: 0,
+      model_flags: 0,
     };
   }
 

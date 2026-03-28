@@ -331,13 +331,13 @@
                     help="govHandoverThrottleHelp2"
                     attrs={[
                       { name: "genericDefault", value: "20%" },
-                      { name: "genericRange", value: "0% - 100%" },
+                      { name: "genericRange", value: "10% - 100%" },
                     ]}
                   />
                 {/snippet}
                 <NumberInput
                   id="gov-handover-throttle"
-                  min="0"
+                  min="10"
                   max="100"
                   bind:value={FC.GOVERNOR.gov_handover_throttle}
                 />

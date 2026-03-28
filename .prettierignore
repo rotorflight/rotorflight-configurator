@@ -9,6 +9,7 @@
 !/src/**/
 !/src/css/app.css
 !/src/css/tabs/presets.css
+!/src/js/GitHubApi.js
 !/src/js/cli_engine.js
 !/src/js/clipboard.js
 !/src/js/config.js
@@ -17,6 +18,7 @@
 !/src/js/features.svelte.js
 !/src/js/filesystem.js
 !/src/js/main.svelte.js
+!/src/js/manufacturers.js
 !/src/js/port_usage.js
 !/src/js/presets/**/*
 !/src/js/remote_command.svelte.js

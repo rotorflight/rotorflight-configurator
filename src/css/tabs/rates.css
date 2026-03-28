@@ -662,6 +662,31 @@ html[data-theme="dark"] .tab-rates .rateDynamic .group {
     align-items: center;
 }
 
+.tab-rates .cyclic-ring-container .titlebar {
+    display: flex;
+    align-items: center;
+    height: 26px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: var(--quietHeader);
+    padding: 0 4px;
+}
+
+.tab-rates .cyclic-ring-container .content {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    align-items: center;
+    padding: 4px;
+    gap: 8px 16px;
+}
+
+.tab-rates .cyclic-ring-container .field {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+    align-items: center;
+}
+
 @media all and (max-width: 575px) {
     .tab-rates .content_wrapper {
         padding: 8px 0;

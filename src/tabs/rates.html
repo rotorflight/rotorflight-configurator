@@ -74,6 +74,57 @@
                         </table>
                     </div>
 
+                    <div class="gui_box grey cyclic-ring-container">
+                        <div class="titlebar" i18n="rates.cyclic_ring.heading"></div>
+                        <div class="content">
+                            <div class="field">
+                                <div>
+                                    <input type="checkbox" id="enable-cyclic-ring" class="toggle" />
+                                </div>
+                                <label
+                                  for="enable-cyclic-ring"
+                                  i18n="rates.cyclic_ring.enable_cyclic_ring.label">
+                                </label>
+                                <div
+                                  class="helpicon cf_tip"
+                                  i18n_title="rates.cyclic_ring.enable_cyclic_ring.help">
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <input
+                                  type="number"
+                                  id="cyclic-ring-level"
+                                  step="1"
+                                  min="100"
+                                  max="250"
+                                />
+                                <label for="cyclic-ring-level">
+                                    <span i18n="rates.cyclic_ring.cyclic_ring_level.label"></span>
+                                    <span>[%]</span>
+                                </label>
+                                <div
+                                  class="helpicon cf_tip"
+                                  i18n_title="rates.cyclic_ring.cyclic_ring_level.help">
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div>
+                                    <input type="checkbox" id="enable-polar-coordinates" class="toggle" />
+                                </div>
+                                <label
+                                  for="enable-polar-coordinates"
+                                  i18n="rates.cyclic_ring.polar_coordinates.label">
+                                </label>
+                                <div
+                                  class="helpicon cf_tip"
+                                  i18n_title="rates.cyclic_ring.polar_coordinates.help">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="gui_box grey rates_setup rates_change">
                         <table>
                             <tr class="rates_titlebar">
