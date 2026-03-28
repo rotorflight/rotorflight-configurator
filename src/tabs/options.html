@@ -1,72 +1,88 @@
 <div class="tab-options">
-    <div class="content_wrapper">
-        <div class="gui_box">
-            <div class="gui_box_titlebar">
-                <div class="spacer_box_title" i18n="tabOptions"></div>
-            </div>
-            <div class="spacer">
-                <!--div class="permanentExpertMode margin-bottom">
-                    <div>
-                        <input type="checkbox" class="toggle" />
-                    </div>
-                    <span class="freelabel" i18n="permanentExpertMode"></span>
-                </div-->
-                <label class="checkForConfiguratorUnstableVersions margin-bottom">
-                    <div>
-                        <input type="checkbox" class="toggle" />
-                    </div>
-                    <span class="freelabel" i18n="checkForConfiguratorUnstableVersions"></span>
-                </label>
-                <label class="rememberLastTab margin-bottom">
-                    <div>
-                        <input type="checkbox" class="toggle" />
-                    </div>
-                    <span class="freelabel" i18n="rememberLastTab"></span>
-                </label>
-                <label class="rememberLastSelectedBoard margin-bottom">
-                    <div>
-                        <input type="checkbox" class="toggle" />
-                    </div>
-                    <span class="freelabel" i18n="rememberLastSelectedBoard"></span>
-                </label>
-                <label class="show-advanced-firmware-opts margin-bottom">
-                    <div>
-                        <input type="checkbox" class="toggle" />
-                    </div>
-                    <span class="freelabel" i18n="options.show_advanced_firmware_opts.label"></span>
-                </label>
-                <!--div class="cliAutoComplete margin-bottom">
-                    <div>
-                        <input type="checkbox" class="toggle" />
-                    </div>
-                    <span class="freelabel" i18n="cliAutoComplete"></span>
-                </div-->
-                <div class="connectionTimeout margin-bottom">
-                    <select id="connectionTimeoutSelect">
-                        <option value="100">100</option>
-                        <option value="500">500</option>
-                        <option value="1000">1000</option>
-                        <option value="1500">1500</option>
-                        <option value="2500">2500</option>
-                        <option value="5000">5000</option>
-                    </select>
-                    <span i18n="connectionTimeout"></span>
-                </div>
-                <div class="cordovaForceComputerUI margin-bottom">
-                    <div>
-                        <input type="checkbox" class="toggle" />
-                    </div>
-                    <span class="freelabel" i18n="cordovaForceComputerUI"></span>
-                </div>
-                <div class="darkTheme margin-bottom">
-                    <select id="darkThemeSelect">
-                        <option value="0" i18n="on"></option>
-                        <option value="1" i18n="off"></option>
-                        <option value="2" i18n="auto"></option>
-                    </select>
-                    <span i18n="darkTheme"></span>
-                </div>
-            </div>
+  <div class="content_wrapper">
+    <div class="gui_box">
+      <div class="gui_box_titlebar">
+        <div class="spacer_box_title" i18n="tabOptions"></div>
+      </div>
+      <div class="spacer field-container">
+        <div class="field">
+          <div>
+            <input
+              id="opt-check-unstable-versions"
+              type="checkbox"
+              class="toggle"
+            />
+          </div>
+          <label
+            for="opt-check-unstable-versions"
+            i18n="checkForConfiguratorUnstableVersions"
+          ></label>
         </div>
+        <div class="field">
+          <div>
+            <input id="opt-remember-last-tab" type="checkbox" class="toggle" />
+          </div>
+          <label for="opt-remember-last-tab" i18n="rememberLastTab"></label>
+        </div>
+        <div class="field">
+          <div>
+            <input
+              id="opt-remember-last-board"
+              type="checkbox"
+              class="toggle"
+            />
+          </div>
+          <label
+            for="opt-remember-last-board"
+            i18n="rememberLastSelectedBoard"
+          ></label>
+        </div>
+        <div class="field">
+          <div>
+            <input
+              id="opt-show-advanced-firmware-opts"
+              type="checkbox"
+              class="toggle"
+            />
+          </div>
+          <label
+            for="opt-show-advanced-firmware-opts"
+            i18n="options.show_advanced_firmware_opts.label"
+          ></label>
+        </div>
+        <div class="field">
+          <select id="opt-connection-timeout">
+            <option value="100">100</option>
+            <option value="500">500</option>
+            <option value="1000">1000</option>
+            <option value="1500">1500</option>
+            <option value="2500">2500</option>
+            <option value="5000">5000</option>
+          </select>
+          <label for="opt-connection-timeout" i18n="connectionTimeout"></label>
+        </div>
+        <div class="field">
+          <div>
+            <input
+              id="opt-cordova-force-computer-ui"
+              type="checkbox"
+              class="toggle"
+            />
+          </div>
+          <label
+            for="opt-cordova-force-computer-ui"
+            i18n="cordovaForceComputerUI"
+          ></label>
+        </div>
+        <div class="field">
+          <select id="opt-dark-theme">
+            <option value="0" i18n="on"></option>
+            <option value="1" i18n="off"></option>
+            <option value="2" i18n="auto"></option>
+          </select>
+          <label for="opt-dark-theme" i18n="darkTheme"></label>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

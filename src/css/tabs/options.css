@@ -1,18 +1,21 @@
-.tab-options .freelabel {
-    margin-left: 10px;
-    position: relative;
+.tab-options .field-container {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 0 12px;
 }
-.tab-options .switchery {
-    float: left;
+
+.tab-options .field {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  align-items: center;
+  min-height: 28px;
 }
-.tab-options .margin-bottom {
-    margin-bottom: 10px;
-    display: block;
-}
+
 .tab-options select {
-    background: var(--boxBackground);
-    color: var(--defaultText);
-    border: 1px solid var(--subtleAccent);
-    border-radius: 3px;
-    width: fit-content;
+  background: var(--boxBackground);
+  color: var(--defaultText);
+  border: 1px solid var(--subtleAccent);
+  border-radius: 2px;
+  width: 100%;
 }
