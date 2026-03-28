@@ -464,14 +464,17 @@ export const serial = (function() {
 
     navigator.serial.addEventListener('disconnect', event => {
         slog(`webserial port disconnected: ${event.target}`);
-        ports.splice(ports.indexOf(event.target), 1);
+        const idx = ports.findIndex(p => p.port === event.target);
+        if (idx >= 0) ports.splice(idx, 1);
 
-        // If the port is open, notify listeners and clear the connection state
-        onReceiveError.raiseEvent({ error: "device_lost" });
-        reading = false;
-        reader = null;
-        writer = null;
-        openedPort = null;
+        // If the disconnected port is the one we have open, notify listeners and clear state
+        if (openedPort === event.target) {
+            onReceiveError.raiseEvent({ error: "device_lost" });
+            reading = false;
+            reader = null;
+            writer = null;
+            openedPort = null;
+        }
     });
 
     (async function loadDevices() {
