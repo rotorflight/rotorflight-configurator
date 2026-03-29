@@ -63,6 +63,9 @@
       in {
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
+          overlays = [
+            (_final: prev: { nodejs = prev.nodejs_24; })
+          ];
           config = {
             android_sdk.accept_license = true;
             allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
@@ -95,9 +98,9 @@
 
         devShells.default = pkgs.mkShell rec {
           packages = with pkgs; [
-            nodejs_24
-            nodejs_24.pkgs.pnpm
-            nodejs_24.pkgs.gulp-cli
+            nodejs
+            nodejs.pkgs.pnpm
+            nodejs.pkgs.gulp-cli
             nixpatchbins
           ];
 
@@ -113,6 +116,13 @@
           ANDROID_NDK_ROOT = "${ANDROID_HOME}/ndk-bundle";
           # override the aapt2 that gradle uses with the nix-shipped version
           GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${ANDROID_HOME}/build-tools/${androidToolsVersion}/aapt2";
+
+          shellHook = ''
+            # Patch sass-embedded dart binary for NixOS if node_modules exists
+            if [ -d node_modules/sass-embedded ]; then
+              nixpatchbins 2>/dev/null || true
+            fi
+          '';
         };
 
       };
