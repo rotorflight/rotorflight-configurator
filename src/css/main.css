@@ -287,64 +287,6 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-right: 15px;
 }
 
-#portsinput .dropdown {
-    margin-bottom: 5px;
-}
-
-#auto-connect-and-baud {
-    float: right;
-}
-
-#auto-connect-switch, #show-all-ports-switch{
-    width: 110px;
-    float: left;
-    margin-top: 4px;
-    margin-left: 5px;
-    margin-right: 20px;
-}
-
-#baudselect {
-    width: 80px;
-    float: right;
-    margin-right: 2px;
-}
-
-#port-picker .auto_connect, #port-picker .show_all_ports, .gray {
-    color: var(--subtleAccent);
-}
-
-#firmware-virtual-option {
-    height: 76px;
-    width: 180px;
-    margin-right: 15px;
-    margin-top: 16px;
-    display: none;
-}
-
-#port-override-option {
-    height: 76px;
-    margin-top: 24px;
-    margin-right: 15px;
-}
-
-#port-override-option label {
-    background-color: #2b2b2b;
-    border-radius: 3px;
-    padding: 3px;
-    color: var(--subtleAccent);
-}
-
-#port-override {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: #888888;
-    width: 140px;
-    margin-left: 2px;
-    padding: 1px;
-    border-radius: 3px;
-    height: 15px;
-    font-size: 12px;
-}
-
 #header_btns {
     display: flex;
     align-items: center;

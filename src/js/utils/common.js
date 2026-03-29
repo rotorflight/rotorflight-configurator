@@ -41,25 +41,6 @@ export function checkChromeRuntimeError() {
     return false;
 }
 
-const virtualFirmwareVersions = [
-  { fw: '4.3.0', msp: '12.6.0', label: 'Rotorflight 2.0.x'},
-  { fw: '4.4.0', msp: '12.7.0', label: 'Rotorflight 2.1.x'},
-  { fw: '4.5.0', msp: '12.8.0', label: 'Rotorflight 2.2.x'},
-  { fw: '4.6.0', msp: '12.9.0', label: 'Rotorflight 2.3.x'},
-];
-
-export function generateVirtualApiVersions() {
-    const firmwareVersionDropdown = document.getElementById('firmware-version-dropdown');
-
-    for (const entry of virtualFirmwareVersions.reverse()) {
-        const option = document.createElement("option");
-        option.value = entry.msp;
-        option.text = entry.label;
-        option.setAttribute('data-fw', entry.fw);
-        firmwareVersionDropdown.appendChild(option);
-    }
-}
-
 export function getTextWidth(text) {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');

@@ -9,6 +9,7 @@
     "lint": "eslint src \"./*.mjs\"",
     "lint:fix": "eslint --fix src \"./*.mjs\"",
     "start": "concurrently --kill-others 'pnpm vite' 'pnpm gulp dev_client'",
+    "test": "vitest run",
     "prepare": "husky || true"
   },
   "window": {
@@ -97,6 +98,7 @@
     "three": "<0.163.0",
     "vinyl-source-stream": "^2.0.0",
     "vite": "^8.0.2",
+    "vitest": "^4.1.2",
     "wnumb": "^1.2.0"
   },
   "optionalDependencies": {

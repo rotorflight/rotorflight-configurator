@@ -1,5 +1,6 @@
 import "multiple-select";
 import { mount } from "svelte";
+import * as config from "@/js/config.js";
 
 import { Beepers } from "@/js/Beepers.js";
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
@@ -10,6 +11,8 @@ import { FirmwareCache } from "@/js/FirmwareCache.js";
 import { Mixer } from "@/js/Mixer.js";
 import * as backupRestore from "@/js/backup_restore.js";
 import * as configurator from "@/js/configurator.svelte.js";
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { DeviceType } from "@/js/comms";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GuiControl } from "@/js/gui.js";
@@ -41,6 +44,7 @@ import "@/css/app.css";
 import BatteryLegend from "@/components/BatteryLegend.svelte";
 import Logo from "@/components/Logo.svelte";
 import StatusBar from "@/components/StatusBar.svelte";
+import PortPicker from "@/components/PortPicker.svelte";
 
 globalThis.GUI = new GuiControl();
 
@@ -77,10 +81,40 @@ Object.assign(globalThis, {
   usbDevices,
 });
 
+mount(PortPicker, { target: document.querySelector("#port-picker") });
 mount(BatteryLegend, { target: document.querySelector("#battery-legend") });
 mount(StatusBar, { target: document.querySelector("#status-bar") });
 mount(Logo, { target: document.querySelector("#logo-desktop") });
 mount(Logo, { target: document.querySelector("#logo-mobile") });
+
+// Auto-connect: when a new real device is selected and auto_connect is enabled,
+// trigger the connect button click. Only fires on device *changes*, not re-runs.
+$effect.root(() => {
+  let prevDevice = undefined;
+  $effect(() => {
+    const device = CONFIGURATOR.serial;
+    if (device === prevDevice) return;
+    prevDevice = device;
+
+    if (
+      device?.type === DeviceType.Standard ||
+      device?.type === DeviceType.DFU
+    ) {
+      const autoConnect = config.get("auto_connect") ?? true;
+      if (
+        autoConnect &&
+        !GUI.connecting_to &&
+        !GUI.connected_to &&
+        GUI.active_tab !== "firmware_flasher"
+      ) {
+        console.log(
+          `auto-connect: triggering connection to ${device.description}`,
+        );
+        document.querySelector("div.connect_controls a.connect")?.click();
+      }
+    }
+  });
+});
 
 if (__BACKEND__ === "cordova") {
   (async () => {

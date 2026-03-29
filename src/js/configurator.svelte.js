@@ -9,6 +9,16 @@ export const API_VERSION_RTFL_MAX = API_VERSION_12_9;
 export const FW_VERSION_RTFL_MIN = "4.3.0-0";
 export const FW_VERSION_RTFL_MAX = "4.6.99";
 
+function createSemaphore() {
+  let set;
+  const promise = new Promise((resolve) => (set = resolve));
+
+  return Object.freeze({
+    set,
+    then: promise.then.bind(promise),
+  });
+}
+
 export const CONFIGURATOR = $state({
   // all versions are specified and compared using semantic versioning http://semver.org/
   API_VERSION_MIN_SUPPORTED: API_VERSION_RTFL_MIN,
@@ -31,4 +41,16 @@ export const CONFIGURATOR = $state({
   allReleasesUrl:
     "https://github.com/rotorflight/rotorflight-configurator/releases",
   expertMode: false,
+
+  // Modules can await this to delay initialization until appready
+  appReadySemaphore: createSemaphore(),
+
+  // Selected device for the app to interact with
+  serial: undefined,
+  dfu: undefined,
+
+  // Connection settings (set by PortPicker)
+  baudRate: 115200,
+  portOverride: undefined,
+  virtualFirmware: undefined,
 });

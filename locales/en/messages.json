@@ -98,6 +98,9 @@
     "portsSelectManual": {
         "message": "Manual Selection"
     },
+    "portsSelectPermission": {
+        "message": "Add Serial Port..."
+    },
     "portsSelectVirtual": {
         "message": "Virtual Mode (Experimental)",
         "description": "Configure a Virtual Flight Controller without the need of a physical FC."
