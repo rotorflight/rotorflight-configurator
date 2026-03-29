@@ -29,12 +29,30 @@ function useGlobalNodeFunctions() {
 }
 
 export function appReady() {
-    $('.connect_b a.connect').removeClass('disabled');
-    $('.firmware_b a.flash').removeClass('disabled');
-
     i18n.init().then(function() {
         startProcess();
-        initializeSerialBackend();
+        CONFIGURATOR.appReadySemaphore.set();
+
+        // Bind the connect button click handler
+        $('div.connect_controls a.connect').on("click", function () {
+            handleConnectClick.call(this);
+        });
+
+        // Bind the "Update Firmware" button (top bar)
+        $('div.open_firmware_flasher a.flash').on("click", function() {
+            if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
+                $('div#flashbutton a.flash_state').removeClass('active');
+                $('div#flashbutton a.flash').removeClass('active');
+                $('#tabs ul.mode-disconnected .tab_landing a').trigger("click");
+            } else {
+                $('#tabs ul.mode-disconnected .tab_firmware_flasher a').trigger("click");
+                $('div#flashbutton a.flash_state').addClass('active');
+                $('div#flashbutton a.flash').addClass('active');
+            }
+        });
+
+        $('.connect_b a.connect').removeClass('disabled');
+        $('.firmware_b a.flash').removeClass('disabled');
     });
 }
 
@@ -43,7 +61,6 @@ function closeSerial() {
     const connectionId = serial.connectionId;
 
     if (connectionId && CONFIGURATOR.connectionValid && !CONFIGURATOR.virtualMode) {
-        // code below is handmade MSP message (without pretty JS wrapper), it behaves exactly like MSP.send_message
         // sending exit command just in case the cli tab was open.
         // reset motors to default (mincommand)
 
@@ -56,8 +73,7 @@ function closeSerial() {
         bufView[3] = 0x74; // t
         bufView[4] = 0x0D; // enter
 
-        const sendFn = (serial.connectionType === 'serial' ? chrome.serial.send : chrome.sockets.tcp.send);
-        sendFn(connectionId, bufferOut, function () {
+        serial.send(bufferOut, function () {
             console.log('Send exit');
         });
 
@@ -84,7 +100,7 @@ function closeSerial() {
 
             bufView[5 + 16] = checksum;
 
-            sendFn(connectionId, bufferOut, function () {
+            serial.send(bufferOut, function () {
                 serial.disconnect();
             });
         }, 100);

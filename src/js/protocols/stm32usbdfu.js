@@ -65,7 +65,7 @@ var STM32DFU_protocol = function () {
     this.transferSize = 2048; // Default USB DFU transfer size for F3,F4 and F7
 };
 
-STM32DFU_protocol.prototype.connect = function (device, hex, options, callback) {
+STM32DFU_protocol.prototype.connect = function (dfuDevice, hex, options, callback) {
     var self = this;
     self.hex = hex;
     self.callback = callback;
@@ -88,23 +88,21 @@ STM32DFU_protocol.prototype.connect = function (device, hex, options, callback) 
     // reset progress bar to initial state
     TABS.firmware_flasher.flashingMessage(null, TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL).flashProgress(0);
 
-    chrome.usb.getDevices(device, function (result) {
-        if (result.length) {
-            console.log('USB DFU detected with ID: ' + result[0].device);
-
-            self.openDevice(result[0]);
-        } else {
-            console.log('USB DFU not found');
-            GUI.log(i18n.getMessage('stm32UsbDfuNotFound'));
-        }
-    });
+    if (dfuDevice) {
+        console.log('USB DFU device: ' + dfuDevice.description);
+        self.device = dfuDevice;
+        self.openDevice();
+    } else {
+        console.log('USB DFU not found');
+        GUI.log(i18n.getMessage('stm32UsbDfuNotFound'));
+    }
 };
 
-STM32DFU_protocol.prototype.openDevice = function (device) {
+STM32DFU_protocol.prototype.openDevice = function () {
     var self = this;
 
-    chrome.usb.openDevice(device, function (handle) {
-        if (checkChromeRuntimeError()) {
+    self.device.openDevice(function (handle) {
+        if (checkChromeRuntimeError() || !handle) {
             console.log('Failed to open USB device!');
             GUI.log(i18n.getMessage('usbDeviceOpenFail'));
             if(GUI.operating_system === 'Linux') {
@@ -124,7 +122,7 @@ STM32DFU_protocol.prototype.openDevice = function (device) {
 STM32DFU_protocol.prototype.closeDevice = function () {
     var self = this;
 
-    chrome.usb.closeDevice(this.handle, function closed() {
+    self.device.closeDevice(function closed() {
         if (checkChromeRuntimeError()) {
             console.log('Failed to close USB device!');
             GUI.log(i18n.getMessage('usbDeviceCloseFail'));
@@ -140,7 +138,7 @@ STM32DFU_protocol.prototype.closeDevice = function () {
 STM32DFU_protocol.prototype.claimInterface = function (interfaceNumber) {
     var self = this;
 
-    chrome.usb.claimInterface(this.handle, interfaceNumber, function claimed() {
+    self.device.claimInterface(interfaceNumber, function claimed() {
         // Don't perform the error check on MacOS at this time as there seems to be a bug
         // where it always reports the Chrome error "Error claiming interface." even though
         // the interface is in fact successfully claimed.
@@ -162,7 +160,7 @@ STM32DFU_protocol.prototype.claimInterface = function (interfaceNumber) {
 STM32DFU_protocol.prototype.releaseInterface = function (interfaceNumber) {
     var self = this;
 
-    chrome.usb.releaseInterface(this.handle, interfaceNumber, function released() {
+    self.device.releaseInterface(interfaceNumber, function released() {
         console.log('Released interface: ' + interfaceNumber);
 
         self.closeDevice();
@@ -170,7 +168,7 @@ STM32DFU_protocol.prototype.releaseInterface = function (interfaceNumber) {
 };
 
 STM32DFU_protocol.prototype.resetDevice = function (callback) {
-    chrome.usb.resetDevice(this.handle, function (result) {
+    this.device.resetDevice(function (result) {
         console.log('Reset Device: ' + result);
         callback?.();
     });
@@ -179,7 +177,7 @@ STM32DFU_protocol.prototype.resetDevice = function (callback) {
 STM32DFU_protocol.prototype.getString = function (index, callback) {
     var self = this;
 
-    chrome.usb.controlTransfer(self.handle, {
+    self.device.controlTransfer({
         'direction':    'in',
         'recipient':    'device',
         'requestType':  'standard',
@@ -207,17 +205,23 @@ STM32DFU_protocol.prototype.getString = function (index, callback) {
 STM32DFU_protocol.prototype.getInterfaceDescriptors = function (interfaceNum, callback) {
     var self = this;
 
-    chrome.usb.getConfiguration( this.handle, function (config) {
+    self.device.getConfiguration(function (config) {
         if (checkChromeRuntimeError()) {
             console.log('USB getConfiguration failed!');
             callback([], -200);
             return;
         }
 
+    // Both WebUSB and chrome.usb (via comms normalization) report DFU alternate
+    // settings under config.interfaces[0].alternates[]. Use the alternates count
+    // as the iteration bound — each alternate describes a DFU memory region.
+    var alternateCount = config.interfaces.length > 0
+        ? (config.interfaces[0].alternates?.length || config.interfaces.length)
+        : 0;
     var interfaceID = 0;
     var descriptorStringArray = [];
     var getDescriptorString = function () {
-        if(interfaceID < config.interfaces.length) {
+        if(interfaceID < alternateCount) {
             self.getInterfaceDescriptor(interfaceID, function (descriptor, resultCode) {
                 if (resultCode) {
                     callback([], resultCode);
@@ -247,7 +251,7 @@ STM32DFU_protocol.prototype.getInterfaceDescriptors = function (interfaceNum, ca
 
 
 STM32DFU_protocol.prototype.getInterfaceDescriptor = function (_interface, callback) {
-    chrome.usb.controlTransfer(this.handle, {
+    this.device.controlTransfer({
         'direction':    'in',
         'recipient':    'device',
         'requestType':  'standard',
@@ -280,7 +284,7 @@ STM32DFU_protocol.prototype.getInterfaceDescriptor = function (_interface, callb
 };
 
 STM32DFU_protocol.prototype.getFunctionalDescriptor = function (_interface, callback) {
-    chrome.usb.controlTransfer(this.handle, {
+    this.device.controlTransfer({
         'direction':    'in',
         'recipient':    'interface',
         'requestType':  'standard',
@@ -425,7 +429,7 @@ STM32DFU_protocol.prototype.controlTransfer = function (direction, request, valu
 
     if (direction == 'in') {
         // data is ignored
-        chrome.usb.controlTransfer(this.handle, {
+        this.device.controlTransfer({
             'direction':    'in',
             'recipient':    'interface',
             'requestType':  'class',
@@ -454,7 +458,7 @@ STM32DFU_protocol.prototype.controlTransfer = function (direction, request, valu
             arrayBuf = new ArrayBuffer(0);
         }
 
-        chrome.usb.controlTransfer(this.handle, {
+        this.device.controlTransfer({
             'direction':    'out',
             'recipient':    'interface',
             'requestType':  'class',
@@ -616,6 +620,7 @@ STM32DFU_protocol.prototype.upload_procedure = function (step) {
             if (typeof self.chipInfo.option_bytes === "undefined") {
                 console.log('Failed to detect option bytes');
                 self.cleanup();
+                return;
             }
 
             var unprotect = function() {

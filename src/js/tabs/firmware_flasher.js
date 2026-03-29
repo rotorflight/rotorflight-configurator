@@ -731,24 +731,20 @@ tab.initialize = function (callback) {
             return output;
         }
 
-        const portPickerElement = $('div#port-picker #port');
         function flashFirmware(firmware) {
             const options = {
                 no_reboot: false,
                 erase_chip: $('input.erase_chip').is(':checked'),
-                baud: getIntegerValue('select#baud') ?? 115200,
+                baud: CONFIGURATOR.baudRate ?? 115200,
             };
 
-            if (!$('option:selected', portPickerElement).data().isDFU) {
-                if (String(portPickerElement.val()) !== '0') {
-                    const port = String(portPickerElement.val());
-                    STM32.connect(port, options.baud, firmware, options);
-                } else {
-                    console.log('Please select valid serial port');
-                    GUI.log(i18n.getMessage('firmwareFlasherNoValidPort'));
-                }
+            if (CONFIGURATOR.dfu) {
+                STM32DFU.connect(CONFIGURATOR.dfu, firmware, options);
+            } else if (CONFIGURATOR.serial?.path) {
+                STM32.connect(CONFIGURATOR.serial.path, options.baud, firmware, options);
             } else {
-                STM32DFU.connect(usbDevices, firmware, options);
+                console.log('Please select valid serial port');
+                GUI.log(i18n.getMessage('firmwareFlasherNoValidPort'));
             }
         }
 
@@ -898,7 +894,7 @@ tab.initialize = function (callback) {
             if (!$(this).hasClass('disabled')) {
                 if (!GUI.connect_lock) { // button disabled while flashing is in progress
                     try {
-                        STM32DFU.connect(usbDevices, self.parsed_hex, { exitDfu: true });
+                        STM32DFU.connect(CONFIGURATOR.dfu, self.parsed_hex, { exitDfu: true });
                     } catch (e) {
                         console.log(`Exiting DFU failed: ${e.message}`);
                     }
@@ -908,20 +904,7 @@ tab.initialize = function (callback) {
 
         const detectBoardElement = $('a.detect-board');
 
-        // Notably, the portPickerElement "change" will be triggered repeatedly as it is setup on a timer in the port_handler
-        portPickerElement.on("change", function () {
-            if (!GUI.connect_lock) {
-                if ($('option:selected', this).data().isDFU) {
-                    exitDfuElement.removeClass('disabled');
-                    detectBoardElement.toggleClass('disabled', true); // can't detect board in DFU mode.
-                } else {
-                    $("a.load_remote_file").removeClass('disabled');
-                    $("a.load_file").removeClass('disabled');
-                    detectBoardElement.toggleClass('disabled', false);
-                    exitDfuElement.addClass('disabled');
-                }
-            }
-        });
+        // DFU/serial UI state toggling is handled by $effect in main.svelte.js
 
         let board_auto_detect = (function() {
             let targetAvailable = false;
@@ -1040,10 +1023,10 @@ tab.initialize = function (callback) {
         detectBoardElement.on('click', () => {
             detectBoardElement.toggleClass('disabled', true);
             if (!GUI.connect_lock) {
-                if (!$('option:selected', portPickerElement).data().isDFU) {
-                    if (String(portPickerElement.val()) !== '0') {
-                        const port = String(portPickerElement.val());
-                        const baud = getIntegerValue('select#baud') ?? 115200;
+                if (!CONFIGURATOR.dfu) {
+                    if (CONFIGURATOR.serial?.path) {
+                        const port = CONFIGURATOR.serial.path;
+                        const baud = CONFIGURATOR.baudRate ?? 115200;
                         board_auto_detect.detect(port, baud);
                     } else {
                         GUI.log(i18n.getMessage('firmwareFlasher'));
@@ -1111,7 +1094,6 @@ tab.initialize = function (callback) {
 };
 
 tab.cleanup = function (callback) {
-    PortHandler.flush_callbacks();
     FirmwareCache.unload();
 
     // unbind "global" events
