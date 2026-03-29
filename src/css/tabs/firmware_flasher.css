@@ -93,7 +93,6 @@
 }
 
 .tab-firmware_flasher .options select {
-    width: 300px;
     height: 20px;
     border: 1px solid var(--subtleAccent);
     border-radius: 3px;
@@ -121,15 +120,6 @@
 
 .tab-firmware_flasher .cf_table td:last-child {
     text-align: left;
-}
-
-.tab-firmware_flasher .options .flash_on_connect_wrapper {
-    display: none;
-}
-
-.tab-firmware_flasher .options .manual_baud_rate select {
-    width: 75px;
-    margin-left: 19px;
 }
 
 .tab-firmware_flasher .release_info {
@@ -217,7 +207,7 @@
 
 .board-select-flex {
     display: flex;
-    width: 300px;
+    width: 100%;
 }
 
 .detect_btn {
@@ -235,4 +225,23 @@
     padding: 3px;
     margin-left: 5px;
     width: 60px;
+}
+
+.tab-firmware_flasher .options-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    align-items: center;
+    gap: 0 24px;
+    padding: 4px 0;
+}
+
+.tab-firmware_flasher .options-container .field {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+    align-items: center;
+    min-height: 32px;
+}
+.tab-firmware_flasher .options-container .field + .field {
+    border-top: 1px solid var(--color-border);
 }

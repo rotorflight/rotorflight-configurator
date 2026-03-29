@@ -23,7 +23,7 @@ export function applyVirtualConfig() {
   // Status
   Object.assign(FC.FLIGHT_STATS, {
     stats_total_flights: 7,
-    stats_total_time_s: 2000,
+    stats_total_time_s: 6000,
     stats_min_armed_time_s: 30,
   });
 

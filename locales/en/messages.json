@@ -874,9 +874,6 @@
     "statusFlightTime": {
         "message": "Flight Time:"
     },
-    "statusFlightTimeValue": {
-        "message": "$1 min $2 sec"
-    },
     "statusArmingDisableFlags": {
         "message": "Arming Disable Flags:"
     },
@@ -992,6 +989,9 @@
     "statusArmingDisableFlagsTooltipMOTOR_PROTO": {
         "message": "There is no motor throttle protocol selected",
         "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipOVERRIDE": {
+        "message": "Servo Override or Mixer Override is active"
     },
     "statusArmingDisableFlagsTooltipARM_SWITCH": {
         "message": "Arm switch is activated while other arming disable conditions are active",
@@ -4171,18 +4171,6 @@
     "firmwareFlasherFullChipEraseDescription": {
         "message": "Wipes all configuration data currently stored on the board."
     },
-    "firmwareFlasherManualPort": {
-        "message": "Port"
-    },
-    "firmwareFlasherManualBaud": {
-        "message": "Manual baud rate"
-    },
-    "firmwareFlasherManualBaudDescription": {
-        "message": "Manual selection of baud rate for boards that don't support the default speed or for flashing via bluetooth.<br /><span class=\"message-negative\">Note:</span> Not used when flashing via USB DFU"
-    },
-    "firmwareFlasherBaudRate": {
-        "message": "Baud Rate"
-    },
     "firmware_flasher.show_legacy_targets.label": {
         "message": "Show Legacy Targets"
     },
@@ -5248,6 +5236,30 @@
     "rateYawDynamicDeadbandGainHelp": {
         "message": "Increases stick deadband while rapidly approaching center."
     },
+    "rates.cyclic_ring.heading": {
+        "message": "Cyclic Ring"
+    },
+    "rates.cyclic_ring.enable_cyclic_ring.label": {
+        "message": "Enable Cyclic Ring"
+    },
+    "rates.cyclic_ring.enable_cyclic_ring.help": {
+        "message": "Limits combined cyclic input to a circular range, preventing excessive rates with diagonal inputs."
+    },
+    "rates.cyclic_ring.cyclic_ring_level.label": {
+        "message": "Cyclic Ring Level"
+    },
+    "rates.cyclic_ring.cyclic_ring_level.help": {
+        "message": "<p>Adjusts to what degree the cyclic ring limits diagonal input.</p><br /><p>At 100%, the combined cyclic range forms a true circle. Increasing this value relaxes the limit, allowing more diagonal deflection.</p>"
+    },
+    "rates.cyclic_ring.polar_coordinates.label": {
+        "message": "Enable Polar Coordinates"
+    },
+    "rates.cyclic_ring.polar_coordinates.help": {
+        "message": "<p>Apply cyclic rates to the combined cyclic direction and magnitude.</p><br /><p>When disabled, rates are applied to each cyclic axis separately.</p>"
+    },
+    "rates.config.cyclic.label": {
+        "message": "CYCLIC"
+    },
     "gyroFilterSettings": {
         "message": "Gyro Filter Settings"
     },
@@ -5925,6 +5937,9 @@
     },
     "powerBatteryProfile": {
         "message": "Battery $1"
+    },
+    "options.show_advanced_firmware_opts.label": {
+        "message": "Show advanced firmware flashing options"
     },
     "osdSetupTitle": {
         "message": "OSD"
