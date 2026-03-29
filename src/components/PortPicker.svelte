@@ -3,7 +3,7 @@
   import SmallToggle from "@/components/SmallToggle.svelte";
   import DarkDropdown from "@/components/DarkDropdown.svelte";
   import PersitentTextInput from "@/components/PersistentTextInput.svelte";
-  import { getSerialInterfaces, DeviceType } from "@/js/comms";
+  import { getInterfaces, DeviceType } from "@/js/comms";
 
   /** Local constants **/
   const DEFAULT_BAUD = "115200";
@@ -29,9 +29,9 @@
       return [{ value: {}, i18n: "serialPortLoading" }];
     } else {
       const options = ifacedevs
-        .map(({ iface, devices }) => {
+        .map(({ iface, devices, kind }) => {
           const devOptions = devices.map((dev) => ({
-            value: { serial: dev },
+            value: kind === "dfu" ? { dfu: dev } : { serial: dev },
             text: dev.description,
           }));
 
@@ -39,7 +39,10 @@
           if (iface.requiresPermission) {
             devOptions.push({
               value: { command: () => iface.requestPermission(showAllPorts) },
-              i18n: "portsSelectPermission",
+              i18n:
+                kind === "dfu"
+                  ? "portsSelectDfuPermission"
+                  : "portsSelectPermission",
             });
           }
 
@@ -94,9 +97,10 @@
     // Check if current selection is still present in options (compare by device, not wrapper)
     if (selectedOption?.serial || selectedOption?.dfu) {
       const sel = selectedOption.serial || selectedOption.dfu;
-      const stillPresent = omniOptions.some((o) =>
-        (o.value?.serial && o.value.serial === sel) ||
-        (o.value?.dfu && o.value.dfu === sel)
+      const stillPresent = omniOptions.some(
+        (o) =>
+          (o.value?.serial && o.value.serial === sel) ||
+          (o.value?.dfu && o.value.dfu === sel),
       );
       if (!stillPresent) {
         console.log("PortPicker: selected device removed, clearing selection");
@@ -142,22 +146,22 @@
     CONFIGURATOR.virtualFirmware = virtualFirmware;
   });
 
-  // Shared interface list, populated on init
-  let ifaces = [];
+  // Shared interface list, populated on init. Each entry: { iface, kind: "serial"|"dfu" }
+  let allIfaces = [];
 
   async function refreshDevices() {
-    if (ifaces.length === 0) return;
+    if (allIfaces.length === 0) return;
     console.log(
       `PortPicker: refreshing devices (showAllPorts=${showAllPorts})`,
     );
     ifacedevs = await Promise.all(
-      ifaces.map((iface) =>
+      allIfaces.map(({ iface, kind }) =>
         iface.getDevices(showAllPorts).then((devices) => {
           console.log(
             `PortPicker: ${iface.constructor.name} returned ${devices.length} device(s):`,
             devices.map((d) => d.description),
           );
-          return { iface, devices };
+          return { iface, devices, kind };
         }),
       ),
     );
@@ -175,20 +179,20 @@
     await CONFIGURATOR.appReadySemaphore;
     console.log("PortPicker: appReady, loading interfaces...");
 
-    ifaces = await getSerialInterfaces();
-    console.log(`PortPicker: got ${ifaces.length} interface(s)`);
+    allIfaces = await getInterfaces();
+    console.log(`PortPicker: got ${allIfaces.length} interface(s)`);
 
     await refreshDevices();
 
     // Subscribe to device changes (connect/disconnect/permission granted)
-    for (const iface of ifaces) {
+    for (const { iface, kind } of allIfaces) {
       iface.devicesChanged((devices) => {
         console.log(
           `PortPicker: devicesChanged from ${iface.constructor.name}, ${devices.length} device(s):`,
           devices.map((d) => d.description),
         );
         ifacedevs = ifacedevs.map((id) =>
-          id.iface === iface ? { iface, devices } : id,
+          id.iface === iface ? { iface, devices, kind } : id,
         );
       });
     }

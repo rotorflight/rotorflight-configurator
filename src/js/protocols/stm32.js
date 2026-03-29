@@ -1,5 +1,6 @@
 import { MSPConnectorImpl } from '@/js/msp/MSPConnector.js';
 import { portUsage } from "@/js/port_usage.svelte.js";
+import { getInterfaces } from "@/js/comms";
 
 /*
     STM32 F103 serial bus seems to properly initialize with quite a huge auto-baud range
@@ -90,22 +91,31 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
         });
     } else {
 
-        var startFlashing = function() {
-            // refresh device list
-            PortHandler.check_usb_devices(function(dfu_available) {
-                if(dfu_available) {
-                    STM32DFU.connect(usbDevices, hex, options);
-                } else {
-                    serial.connect(self.port, {bitrate: self.baud, parityBit: 'even', stopBits: 'one'}, function (openInfo) {
-                        if (openInfo) {
-                            self.initialize();
-                        } else {
-                            GUI.connect_lock = false;
-                            GUI.log(i18n.getMessage('serialPortOpenFail'));
-                        }
-                    });
+        var startFlashing = async function() {
+            // Check for DFU device via comms layer
+            const allIfaces = await getInterfaces();
+            let dfuDevice = null;
+            for (const { iface, kind } of allIfaces) {
+                if (kind !== "dfu") continue;
+                const devices = await iface.getDevices();
+                if (devices.length > 0) {
+                    dfuDevice = devices[0];
+                    break;
                 }
-            });
+            }
+
+            if (dfuDevice) {
+                STM32DFU.connect(dfuDevice, hex, options);
+            } else {
+                serial.connect(self.port, {bitrate: self.baud, parityBit: 'even', stopBits: 'one'}, function (openInfo) {
+                    if (openInfo) {
+                        self.initialize();
+                    } else {
+                        GUI.connect_lock = false;
+                        GUI.log(i18n.getMessage('serialPortOpenFail'));
+                    }
+                });
+            }
         };
 
         var onConnectHandler = function () {

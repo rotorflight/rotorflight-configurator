@@ -38,6 +38,19 @@ export function appReady() {
             handleConnectClick.call(this);
         });
 
+        // Bind the "Update Firmware" button (top bar)
+        $('div.open_firmware_flasher a.flash').on("click", function() {
+            if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
+                $('div#flashbutton a.flash_state').removeClass('active');
+                $('div#flashbutton a.flash').removeClass('active');
+                $('#tabs ul.mode-disconnected .tab_landing a').trigger("click");
+            } else {
+                $('#tabs ul.mode-disconnected .tab_firmware_flasher a').trigger("click");
+                $('div#flashbutton a.flash_state').addClass('active');
+                $('div#flashbutton a.flash').addClass('active');
+            }
+        });
+
         $('.connect_b a.connect').removeClass('disabled');
         $('.firmware_b a.flash').removeClass('disabled');
     });

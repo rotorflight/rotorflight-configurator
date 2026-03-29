@@ -69,24 +69,6 @@ export async function handleConnectClick() {
    }
 }
 
-export function initializeSerialBackend() {
-    $('div.connect_controls a.connect').on("click", function () {
-      handleConnectClick.call(this);
-    });
-
-    $('div.open_firmware_flasher a.flash').on("click", function() {
-        if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
-            $('div#flashbutton a.flash_state').removeClass('active');
-            $('div#flashbutton a.flash').removeClass('active');
-            $('#tabs ul.mode-disconnected .tab_landing a').trigger("click");
-        } else {
-            $('#tabs ul.mode-disconnected .tab_firmware_flasher a').trigger("click");
-            $('div#flashbutton a.flash_state').addClass('active');
-            $('div#flashbutton a.flash').addClass('active');
-        }
-    });
-}
-
 function finishClose() {
     if (GUI.isCordova()) {
         UI_PHONES.reset();
