@@ -70,12 +70,6 @@ export async function handleConnectClick() {
 }
 
 export function initializeSerialBackend() {
-    $('#port-override').on("change", function() {
-        config.set({'portOverride': $('#port-override').val()});
-    });
-
-    $('#port-override').val(config.get('portOverride'));
-
     $('div.connect_controls a.connect').on("click", function () {
       handleConnectClick.call(this);
     });
@@ -91,77 +85,6 @@ export function initializeSerialBackend() {
             $('div#flashbutton a.flash').addClass('active');
         }
     });
-
-    // auto-connect
-  /*
-    if (config.get('auto_connect') ?? true) {
-        // default or enabled by user
-        GUI.auto_connect = true;
-
-        $('input.auto_connect').prop('checked', true);
-        $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectEnabled'));
-
-        $('select#baud').val(115200).prop('disabled', true);
-    } else {
-        // disabled by user
-        GUI.auto_connect = false;
-
-        $('input.auto_connect').prop('checked', false);
-        $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectDisabled'));
-    }
-  */
-
-    // bind UI hook to auto-connect checkbos
-    $('input.auto_connect').change(function () {
-        GUI.auto_connect = $(this).is(':checked');
-
-        // update title/tooltip
-        if (GUI.auto_connect) {
-            $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectEnabled'));
-
-            //$('select#baud').val(115200).prop('disabled', true);
-        } else {
-            $('input.auto_connect, span.auto_connect').prop('title', i18n.getMessage('autoConnectDisabled'));
-
-            if (!GUI.connected_to && !GUI.connecting_to) $('select#baud').prop('disabled', false);
-        }
-
-        config.set({'auto_connect': GUI.auto_connect});
-    });
-
-    // Show all ports
-    if (GUI.operating_system === 'Android') {
-        // port filtering does not work on Android as port names do not get populated on Android
-        GUI.show_all_ports = true;
-        $('div #show-all-ports-switch').hide();
-    } else {
-        if (!config.get('show_all_ports')) {
-            GUI.show_all_ports = false;
-            $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsDisabled'));
-            $('input.show_all_ports').prop('checked', false);
-        } else {
-            GUI.show_all_ports = true;
-            $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsEnabled'));
-            $('input.show_all_ports').prop('checked', true);
-        }
-
-        // bind UI hook to show all ports checkbox
-        $('input.show_all_ports').on("change", function () {
-            GUI.show_all_ports = $(this).is(':checked');
-
-            // update title/tooltip
-            if (GUI.show_all_ports) {
-                $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsEnabled'));
-            } else {
-                $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsDisabled'));
-            }
-
-            config.set({ 'show_all_ports': GUI.show_all_ports });
-            PortHandler.showAllPorts(GUI.show_all_ports);
-        });
-    }
-
-    PortHandler.initialize(GUI.show_all_ports);
 }
 
 function finishClose() {
@@ -333,9 +256,6 @@ function onOpenVirtual() {
 function abortConnect() {
     $('div#connectbutton div.connect_state').text(i18n.getMessage('connect'));
     $('div#connectbutton a.connect').removeClass('active');
-
-    // unlock port select & baud
-    $('div#port-picker #port, div#port-picker #baud, div#port-picker #delay').prop('disabled', false);
 
     // reset data
     $('div#connectbutton a.connect').data("clicks", false);
