@@ -1,3 +1,28 @@
+import { checkChromeRuntimeError } from "@/js/utils/common.js";
+
+function Eventer() {
+    const listeners = [];
+
+    return {
+        addListener(fn) {
+            listeners.push(fn);
+        },
+        removeListener(fn) {
+            const i = listeners.indexOf(fn);
+            if (i >= 0) listeners.splice(i, 1);
+        },
+        raiseEvent(data) {
+            for (const fn of listeners) {
+                fn(data);
+            }
+        },
+        removeAll() {
+            listeners.length = 0;
+        },
+        get listeners() { return listeners; },
+    };
+}
+
 export const serial = {
     connected:      false,
     connectionId:   false,
@@ -6,27 +31,88 @@ export const serial = {
     bytesReceived:  0,
     bytesSent:      0,
     failed:         0,
-    connectionType: 'serial', // 'serial' or 'tcp' or 'virtual'
+    connectionType: 'serial',
     connectionIP:   '127.0.0.1',
     connectionPort: 5761,
 
     transmitting:   false,
     outputBuffer:   [],
 
-    connect: function (path, options, callback) {
+    // Current device from comms layer (null when using legacy TCP path)
+    _device: null,
+
+    onReceive: Eventer('receive'),
+    onReceiveError: Eventer('receiveError'),
+
+    connect: function (pathOrDevice, options, callback) {
         const self = this;
+
+        // Device object from comms layer
+        if (pathOrDevice && typeof pathOrDevice === 'object' && typeof pathOrDevice.open === 'function') {
+            console.log(`serial.connect: device object (${pathOrDevice.description}), delegating to connectDevice`);
+            self.connectDevice(pathOrDevice, options, callback);
+            return;
+        }
+
+        // Legacy string paths
+        const path = pathOrDevice;
+        console.log(`serial.connect: legacy path "${path}"`);
         const testUrl = path.match(/^tcp:\/\/([A-Za-z0-9.-]+)(?::(\d+))?$/);
         if (testUrl) {
             self.connectTcp(testUrl[1], testUrl[2], options, callback);
         } else if (path === 'virtual') {
             self.connectVirtual(callback);
         } else {
+            // Legacy chrome.serial connect by path string
             self.connectSerial(path, options, callback);
         }
     },
+
+    connectDevice: async function (device, options, callback) {
+        const self = this;
+        self._device = device;
+        self.connectionType = 'serial';
+
+        try {
+            const info = await device.open(options);
+            if (self.openCanceled) {
+                self.openCanceled = false;
+                await device.close();
+                self._device = null;
+                callback?.(false);
+                return;
+            }
+
+            self.connected = true;
+            self.connectionId = info?.connectionId || 'device';
+            self.bitrate = options.bitrate || 115200;
+            self.bytesReceived = 0;
+            self.bytesSent = 0;
+            self.failed = 0;
+
+            // Bridge device events to serial events
+            device.onReceive.addListener(function (data) {
+                self.bytesReceived += data.byteLength;
+                self.onReceive.raiseEvent({ data });
+            });
+
+            device.onReceiveError.addListener(function (info) {
+                self.errorHandler(info.error, 'receive');
+            });
+
+            console.log(`serial: device connection opened, Baud: ${self.bitrate}`);
+            callback?.({ connectionId: self.connectionId, bitrate: self.bitrate });
+        } catch (error) {
+            console.log(`serial: failed to open device: ${error.message}`);
+            self._device = null;
+            callback?.(false);
+        }
+    },
+
     connectSerial: function (path, options, callback) {
         const self = this;
         self.connectionType = 'serial';
+        self._device = null;
 
         chrome.serial.connect(path, options, function (connectionInfo) {
             if (connectionInfo && !self.openCanceled && !checkChromeRuntimeError()) {
@@ -43,7 +129,7 @@ export const serial = {
 
                 self.onReceiveError.addListener(function watch_for_on_receive_errors(info) {
                     switch (info.error) {
-                        case 'system_error': // we might be able to recover from this one
+                        case 'system_error':
                             if (!self.failed++) {
                                 chrome.serial.setPaused(self.connectionId, false, function () {
                                     self.getInfo(function (getInfo) {
@@ -65,14 +151,12 @@ export const serial = {
                             break;
 
                         case 'overrun':
-                            // wait 50 ms and attempt recovery
                             self.error = info.error;
                             setTimeout(function() {
                                 chrome.serial.setPaused(info.connectionId, false, function() {
                                     self.getInfo(function (_info) {
                                         if (_info) {
                                             if (_info.paused) {
-                                                // assume unrecoverable, disconnect
                                                 console.log(`${self.connectionType}: connection did not recover from ${self.error} condition, disconnecting`);
                                                 GUI.log(i18n.getMessage('serialUnrecoverable'));
                                                 self.errorHandler(_info.error, 'receive');
@@ -87,8 +171,6 @@ export const serial = {
                             break;
 
                         case 'timeout':
-                            // No data has been received for receiveTimeout milliseconds.
-                            // We will do nothing.
                             break;
 
                         case 'frame_error':
@@ -99,7 +181,7 @@ export const serial = {
                             GUI.log(i18n.getMessage('serialErrorParityError'));
                             self.errorHandler(info.error, 'receive');
                             break;
-                        case 'break': // This seems to be the error that is thrown under NW.js in Windows when the device reboots after typing 'exit' in CLI
+                        case 'break':
                         case 'disconnected':
                         case 'device_lost':
                         default:
@@ -108,21 +190,25 @@ export const serial = {
                     }
                 });
 
+                // Register with chrome's global event system
+                chrome.serial.onReceive.addListener(function (info) {
+                    if (info.connectionId === self.connectionId) {
+                        self.onReceive.raiseEvent(info);
+                    }
+                });
+                chrome.serial.onReceiveError.addListener(function (info) {
+                    if (info.connectionId === self.connectionId) {
+                        self.onReceiveError.raiseEvent(info);
+                    }
+                });
+
                 console.log(`${self.connectionType}: connection opened with ID: ${connectionInfo.connectionId} , Baud: ${connectionInfo.bitrate}`);
 
-                if (callback) {
-                    callback(connectionInfo);
-                }
-
+                callback?.(connectionInfo);
             } else {
-
                 if (connectionInfo && self.openCanceled) {
-                    // connection opened, but this connect sequence was canceled
-                    // we will disconnect without triggering any callbacks
                     self.connectionId = connectionInfo.connectionId;
                     console.log(`${self.connectionType}: connection opened with ID: ${connectionInfo.connectionId} , but request was canceled, disconnecting`);
-
-                    // some bluetooth dongles/dongle drivers really doesn't like to be closed instantly, adding a small delay
                     setTimeout(function initialization() {
                         self.openCanceled = false;
                         self.disconnect(function resetUI() {
@@ -130,15 +216,12 @@ export const serial = {
                         });
                     }, 150);
                 } else if (self.openCanceled) {
-                    // connection didn't open and sequence was canceled, so we will do nothing
                     console.log(`${self.connectionType}: connection didn't open and request was canceled`);
                     self.openCanceled = false;
                 } else {
                     console.log(`${self.connectionType}: failed to open serial port`);
                 }
-                if (callback) {
-                    callback(false);
-                }
+                callback?.(false);
             }
         });
     },
@@ -148,6 +231,7 @@ export const serial = {
         self.connectionPort = port || 5761;
         self.connectionPort = parseInt(self.connectionPort);
         self.connectionType = 'tcp';
+        self._device = null;
 
         chrome.sockets.tcp.create({
             persistent: false,
@@ -156,7 +240,7 @@ export const serial = {
         }, function(createInfo) {
             if (createInfo && !self.openCanceled || !checkChromeRuntimeError()) {
                 self.connectionId = createInfo.socketId;
-                self.bitrate = 115200; // fake
+                self.bitrate = 115200;
                 self.bytesReceived = 0;
                 self.bytesSent = 0;
                 self.failed = 0;
@@ -170,23 +254,30 @@ export const serial = {
                                 });
                                 self.onReceiveError.addListener(function watch_for_on_receive_errors(info) {
                                     if (info.socketId !== self.connectionId) return;
-
                                     if (self.connectionType === 'tcp' && info.resultCode < 0) {
                                         self.errorHandler(info.resultCode, 'receive');
                                     }
                                 });
+
+                                chrome.sockets.tcp.onReceive.addListener(function (info) {
+                                    if (info.socketId === self.connectionId) {
+                                        self.onReceive.raiseEvent(info);
+                                    }
+                                });
+                                chrome.sockets.tcp.onReceiveError.addListener(function (info) {
+                                    if (info.socketId === self.connectionId) {
+                                        self.onReceiveError.raiseEvent(info);
+                                    }
+                                });
+
                                 self.connected = true;
                                 console.log(`${self.connectionType}: connection opened with ID ${createInfo.socketId} , url: ${self.connectionIP}:${self.connectionPort}`);
-                                if (callback) {
-                                    callback(createInfo);
-                                }
+                                callback?.(createInfo);
                             }
                         });
                     } else {
                         console.log(`${self.connectionType}: failed to connect with result ${result}`);
-                        if (callback) {
-                            callback(false);
-                        }
+                        callback?.(false);
                     }
                 });
             }
@@ -195,6 +286,7 @@ export const serial = {
     connectVirtual: function (callback) {
         const self = this;
         self.connectionType = 'virtual';
+        self._device = null;
 
         if (!self.openCanceled) {
             self.connected = true;
@@ -212,15 +304,27 @@ export const serial = {
         self.connected = false;
         self.emptyOutputBuffer();
 
-        if (self.connectionId) {
-            // remove listeners
-            for (let i = (self.onReceive.listeners.length - 1); i >= 0; i--) {
-                self.onReceive.removeListener(self.onReceive.listeners[i]);
-            }
+        // Clean up our own listeners
+        self.onReceive.removeAll();
+        self.onReceiveError.removeAll();
 
-            for (let i = (self.onReceiveError.listeners.length - 1); i >= 0; i--) {
-                self.onReceiveError.removeListener(self.onReceiveError.listeners[i]);
-            }
+        if (self._device) {
+            const device = self._device;
+            self._device = null;
+            self.connectionId = false;
+            self.bitrate = 0;
+
+            device.close().then(() => {
+                console.log(`serial: device connection closed, Sent: ${self.bytesSent} bytes, Received: ${self.bytesReceived} bytes`);
+                callback?.(true);
+            }).catch((error) => {
+                console.log(`serial: error closing device: ${error.message}`);
+                callback?.(false);
+            });
+            return;
+        }
+
+        if (self.connectionId) {
             if (self.connectionType !== 'virtual') {
                 if (self.connectionType === 'tcp') {
                     chrome.sockets.tcp.disconnect(self.connectionId, function () {
@@ -239,19 +343,15 @@ export const serial = {
                     self.connectionId = false;
                     self.bitrate = 0;
 
-                    if (callback) callback(result);
+                    callback?.(result);
                 });
             } else {
                 self.connectionId = false;
                 CONFIGURATOR.virtualMode = false;
                 self.connectionType = false;
-                if (callback) {
-                    callback(true);
-                }
+                callback?.(true);
             }
         } else {
-            // connection wasn't opened, so we won't try to close anything
-            // instead we will rise canceled flag which will prevent connect from continueing further after being canceled
             self.openCanceled = true;
         }
     },
@@ -269,40 +369,69 @@ export const serial = {
         });
     },
     getInfo: function (callback) {
+        if (self._device) {
+            // Device-based connections don't support getInfo
+            callback?.(null);
+            return;
+        }
         const chromeType = (this.connectionType === 'serial') ? chrome.serial : chrome.sockets.tcp;
         chromeType.getInfo(this.connectionId, callback);
     },
     send: function (data, callback) {
         const self = this;
         self.outputBuffer.push({'data': data, 'callback': callback});
+
         function _send() {
-            // store inside separate variables in case array gets destroyed
             const _data = self.outputBuffer[0].data;
             const _callback = self.outputBuffer[0].callback;
 
             if (!self.connected) {
                 console.log(`${self.connectionType}: attempting to send when disconnected`);
-                if (_callback) {
-                    _callback({
-                        bytesSent: 0,
-                        error: 'undefined',
-                    });
-                }
+                _callback?.({
+                    bytesSent: 0,
+                    error: 'undefined',
+                });
                 return;
             }
 
+            if (self._device) {
+                // Device-based send
+                self._device.send(_data).then(function (sendInfo) {
+                    self.bytesSent += sendInfo.bytesSent;
+                    _callback?.(sendInfo);
+
+                    self.outputBuffer.shift();
+                    if (self.outputBuffer.length) {
+                        if (self.outputBuffer.length > 100) {
+                            let counter = 0;
+                            while (self.outputBuffer.length > 100) {
+                                self.outputBuffer.pop();
+                                counter++;
+                            }
+                            console.log(`${self.connectionType}: send buffer overflowing, dropped: ${counter} entries`);
+                        }
+                        _send();
+                    } else {
+                        self.transmitting = false;
+                    }
+                }).catch(function (error) {
+                    console.log(`serial: send error: ${error.message}`);
+                    _callback?.({ bytesSent: 0, error: error.message });
+                });
+                return;
+            }
+
+            // Legacy chrome API send
             const sendFn = (self.connectionType === 'serial') ? chrome.serial.send : chrome.sockets.tcp.send;
             sendFn(self.connectionId, _data, function (sendInfo) {
                 checkChromeRuntimeError();
 
                 if (sendInfo === undefined) {
                     console.log('undefined send error');
-                    if (_callback) {
-                        _callback({
-                            bytesSent: 0,
-                            error: 'undefined',
-                        });
-                    }
+                    _callback?.({
+                        bytesSent: 0,
+                        error: 'undefined',
+                    });
                     return;
                 }
 
@@ -311,31 +440,19 @@ export const serial = {
                     return;
                 }
 
-                // track sent bytes for statistics
                 self.bytesSent += sendInfo.bytesSent;
+                _callback?.(sendInfo);
 
-                // fire callback
-                if (_callback) {
-                    _callback(sendInfo);
-                }
-
-                // remove data for current transmission from the buffer
                 self.outputBuffer.shift();
-
-                // if there is any data in the queue fire send immediately, otherwise stop trasmitting
                 if (self.outputBuffer.length) {
-                    // keep the buffer withing reasonable limits
                     if (self.outputBuffer.length > 100) {
                         let counter = 0;
-
                         while (self.outputBuffer.length > 100) {
                             self.outputBuffer.pop();
                             counter++;
                         }
-
-                        console.log(`${self.connectionType}: send buffer overflowing, dropped: ${counter} ${entries}`);
+                        console.log(`${self.connectionType}: send buffer overflowing, dropped: ${counter} entries`);
                     }
-
                     _send();
                 } else {
                     self.transmitting = false;
@@ -346,46 +463,6 @@ export const serial = {
         if (!self.transmitting) {
             self.transmitting = true;
             _send();
-        }
-    },
-    onReceive: {
-        listeners: [],
-
-        addListener: function (function_reference) {
-            const chromeType = (serial.connectionType === 'serial') ? chrome.serial : chrome.sockets.tcp;
-            chromeType.onReceive.addListener(function_reference);
-            this.listeners.push(function_reference);
-        },
-        removeListener: function (function_reference) {
-            const chromeType = (serial.connectionType === 'serial') ? chrome.serial : chrome.sockets.tcp;
-            for (let i = (this.listeners.length - 1); i >= 0; i--) {
-                if (this.listeners[i] == function_reference) {
-                    chromeType.onReceive.removeListener(function_reference);
-
-                    this.listeners.splice(i, 1);
-                    break;
-                }
-            }
-        }
-    },
-    onReceiveError: {
-        listeners: [],
-
-        addListener: function (function_reference) {
-            const chromeType = (serial.connectionType === 'serial') ? chrome.serial : chrome.sockets.tcp;
-            chromeType.onReceiveError.addListener(function_reference);
-            this.listeners.push(function_reference);
-        },
-        removeListener: function (function_reference) {
-            const chromeType = (serial.connectionType === 'serial') ? chrome.serial : chrome.sockets.tcp;
-            for (let i = (this.listeners.length - 1); i >= 0; i--) {
-                if (this.listeners[i] == function_reference) {
-                    chromeType.onReceiveError.removeListener(function_reference);
-
-                    this.listeners.splice(i, 1);
-                    break;
-                }
-            }
         }
     },
     emptyOutputBuffer: function () {
@@ -402,7 +479,6 @@ export const serial = {
         if (self.connectionType === 'tcp') {
             switch (result){
                 case -15:
-                    // connection is lost, cannot write to it anymore, preventing further disconnect attempts
                     message = 'error: ERR_SOCKET_NOT_CONNECTED';
                     console.log(`${self.connectionType}: ${direction} ${message}: ${result}`);
                     self.connectionId = false;
