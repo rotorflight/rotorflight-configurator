@@ -126,6 +126,8 @@ export const TELEMETRY_SENSORS = {
   DEBUG_6: 106,
   DEBUG_7: 107,
 
+  BATTERY_SMART_FUEL: 118,
+
   RPM: 108,
   TEMP: 109,
 };

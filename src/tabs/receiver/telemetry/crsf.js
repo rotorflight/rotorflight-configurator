@@ -28,6 +28,7 @@ export function getCustomCrsfSensors() {
         { name: "BATTERY_CURRENT" },
         { name: "BATTERY_CONSUMPTION" },
         { name: "BATTERY_CHARGE_LEVEL" },
+        { name: "BATTERY_SMART_FUEL" },
         { name: "BATTERY_CELL_COUNT" },
         { name: "BATTERY_CELL_VOLTAGE" },
       ],

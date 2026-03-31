@@ -1995,6 +1995,9 @@
     "receiverTelemetrySensor_BATTERY_CHARGE_LEVEL": {
         "message": "Battery Charge Level"
     },
+    "receiverTelemetrySensor_BATTERY_SMART_FUEL": {
+        "message": "Smart Fuel"
+    },
     "receiverTelemetrySensor_BATTERY_CELL_COUNT": {
         "message": "Battery Cell Count"
     },
