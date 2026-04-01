@@ -1016,10 +1016,6 @@
         "message": "Полетно време:",
         "english": "Flight Time:"
     },
-    "statusFlightTimeValue": {
-        "message": "$1 мин $2 сек",
-        "english": "$1 min $2 sec"
-    },
     "statusArmingDisableFlags": {
         "message": "Активирането е изключено поради:",
         "english": "Arming Disable Flags:"
@@ -1165,6 +1161,10 @@
         "message": "Не е избран протокол за газта на мотора",
         "english": "There is no motor throttle protocol selected",
         "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipOVERRIDE": {
+        "message": "Принудително управление на сервата или миксера е активен",
+        "english": "Servo Override or Mixer Override is active"
     },
     "statusArmingDisableFlagsTooltipARM_SWITCH": {
         "message": "Превключвателят за активиране е включен, докато други условия за деактивиране на активирането са активни",
@@ -1598,6 +1598,42 @@
     "configurationBeeperHelp": {
         "message": "Активирай или деактивирай кога да звучи зумерът",
         "english": "Enable or disable when to sound the Buzzer"
+    },
+    "configuration.personalisation.model_id.label": {
+        "message": "Id на модела",
+        "english": "Model Id"
+    },
+    "configuration.flight_stats.heading": {
+        "message": "Статистики на полетите",
+        "english": "Flight Statistics"
+    },
+    "configuration.flight_stats.enable.label": {
+        "message": "Записвай статистики на полетите",
+        "english": "Record Flight Statistics"
+    },
+    "configuration.flight_stats.reset.label": {
+        "message": "Нулирай",
+        "english": "Reset"
+    },
+    "configuration.flight_stats.min_armed_time.label": {
+        "message": "Минимално време на полет",
+        "english": "Minimum flight time"
+    },
+    "configuration.flight_stats.min_armed_time.help": {
+        "message": "Минимално време, през което полетният контролер трябва да бъде активиран, за да се броят статистиките на полетите към общия брой.",
+        "english": "Minimum duration the flight controller must be armed for the flights statistics to be counted towards the total."
+    },
+    "configuration.flight_stats.flight_count.label": {
+        "message": "Брой полети",
+        "english": "Flight Count"
+    },
+    "configuration.flight_stats.flight_time.label": {
+        "message": "Полетно време",
+        "english": "Flight Time"
+    },
+    "configuration.flight_stats.distance.label": {
+        "message": "Дистанция",
+        "english": "Distance"
     },
     "beeper_GYRO_CALIBRATED": {
         "message": "Издава звук, когато жироскопът е калибриран",
@@ -2987,6 +3023,10 @@
         "message": "Избор на OSD профил",
         "english": "OSD Profile Selection"
     },
+    "adjustmentsFunctionBatteryProfile": {
+        "message": "Избор на профил на батерията",
+        "english": "Battery Profile Selection"
+    },
     "adjustmentsFunctionPitchRate": {
         "message": "Скорост на елеватор",
         "english": "Pitch Rate"
@@ -3354,6 +3394,14 @@
     "servoRateHelp": {
         "message": "Честота на обновяване на PWM в Hz. За аналогови серво, задайте 50Hz, тъй като по-високи стойности могат да ги повредят. За цифрови серво, типични стойности са от 100Hz до 560Hz. Моля, проверете техническата документация на сервото.<br><b>Забележка</b>: Изберете <i>Запази и рестартирай</i>, за да промените честотата, тъй като тя се инициализира при стартиране.",
         "english": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time."
+    },
+    "servoSource": {
+        "message": "Източник",
+        "english": "Source"
+    },
+    "servoSourceHelp": {
+        "message": "Източник на сигнала за сервото. <b>Миксер</b>: сервото се управлява от миксера на полетния контролер. <b>RX</b>: сервото получава директен сигнал от канала на приемника.",
+        "english": "Source of the servo signal. <b>Mixer</b>: servo is controlled by the flight controller mixer. <b>RX</b>: servo receives direct pass-through from the receiver channel."
     },
     "servoSpeed": {
         "message": "Скорост [ms]",
@@ -5351,21 +5399,13 @@
         "message": "Изтрива всички конфигурационни данни, съхранени на платката.",
         "english": "Wipes all configuration data currently stored on the board."
     },
-    "firmwareFlasherManualPort": {
-        "message": "Порт",
-        "english": "Port"
+    "firmware_flasher.show_legacy_targets.label": {
+        "message": "Покажи по-стари таргети",
+        "english": "Show Legacy Targets"
     },
-    "firmwareFlasherManualBaud": {
-        "message": "Ръчна скорост на предаване",
-        "english": "Manual baud rate"
-    },
-    "firmwareFlasherManualBaudDescription": {
-        "message": "Ръчен избор на скорост за платки, които не поддържат стандартната скорост или за флашване чрез bluetooth.<br /><span class=\"message-negative\">Забележка:</span> Не се използва при флашване чрез USB DFU",
-        "english": "Manual selection of baud rate for boards that don't support the default speed or for flashing via bluetooth.<br /><span class=\"message-negative\">Note:</span> Not used when flashing via USB DFU"
-    },
-    "firmwareFlasherBaudRate": {
-        "message": "Скорост на предаване",
-        "english": "Baud Rate"
+    "firmware_flasher.show_legacy_targets.description": {
+        "message": "Покажи таргети за много Betaflight платки. Тези таргети не се поддържат активно.",
+        "english": "Show targets for many Betaflight boards. These targets are not actively maintained."
     },
     "firmwareFlasherOptionLoading": {
         "message": "Зареждане ...",
@@ -6764,6 +6804,38 @@
         "message": "Увеличава мъртвата зона на стика при бързо приближаване към центъра.",
         "english": "Increases stick deadband while rapidly approaching center."
     },
+    "rates.cyclic_ring.heading": {
+        "message": "Цикличен ринг",
+        "english": "Cyclic Ring"
+    },
+    "rates.cyclic_ring.enable_cyclic_ring.label": {
+        "message": "Активирай цикличен ринг",
+        "english": "Enable Cyclic Ring"
+    },
+    "rates.cyclic_ring.enable_cyclic_ring.help": {
+        "message": "Ограничава комбинираният цикличен вход до кръгова зона, предотвратявайки прекомерни скорости при диагонални входове.",
+        "english": "Limits combined cyclic input to a circular range, preventing excessive rates with diagonal inputs."
+    },
+    "rates.cyclic_ring.cyclic_ring_level.label": {
+        "message": "Ниво на цикличния ринг",
+        "english": "Cyclic Ring Level"
+    },
+    "rates.cyclic_ring.cyclic_ring_level.help": {
+        "message": "<p>Настройва до каква степен цикличният ринг ограничава диагоналния вход.</p><br /><p>При 100% комбинираният цикличен диапазон образува кръг. Увеличаването на тази стойност разхлабва ограничението, позволявайки повече диагонално отклонение.</p>",
+        "english": "<p>Adjusts to what degree the cyclic ring limits diagonal input.</p><br /><p>At 100%, the combined cyclic range forms a true circle. Increasing this value relaxes the limit, allowing more diagonal deflection.</p>"
+    },
+    "rates.cyclic_ring.polar_coordinates.label": {
+        "message": "Активирай полярни координати",
+        "english": "Enable Polar Coordinates"
+    },
+    "rates.cyclic_ring.polar_coordinates.help": {
+        "message": "<p>При активирани полярни координати, скоростите се прилагат спрямо комбинираното циклично направление и величина, вместо по отделните оси.</p><br /><p>Например, при 45° вход с 50% отклонение, скоростите ще се прилагат като 70.7% от максимума по съответното направление, вместо 50% по всяка ос.</p>",
+        "english": "<p>Apply cyclic rates to the combined cyclic direction and magnitude.</p><br /><p>When disabled, rates are applied to each cyclic axis separately.</p>"
+    },
+    "rates.config.cyclic.label": {
+        "message": "Циклична",
+        "english": "CYCLIC"
+    },
     "gyroFilterSettings": {
         "message": "Настройки на филтъра на жироскопа",
         "english": "Gyro Filter Settings"
@@ -7352,6 +7424,10 @@
         "message": "ESC телеметрия",
         "english": "ESC Telemetry"
     },
+    "powerBatteryVoltageMeterTypeFbus": {
+        "message": "FrSky сензор",
+        "english": "FrSky Sensor"
+    },
     "powerBatteryCurrentMeterSource": {
         "message": "Източник на ток на батерията",
         "english": "Battery Current Source"
@@ -7367,6 +7443,10 @@
     "powerBatteryCurrentMeterTypeEsc": {
         "message": "ESC телеметрия",
         "english": "ESC Telemetry"
+    },
+    "powerBatteryCurrentMeterTypeFbus": {
+        "message": "FrSky сензор",
+        "english": "FrSky Sensor"
     },
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP сензор",
@@ -7655,6 +7735,14 @@
     "powerBatteryCellCount": {
         "message": "Брой клетки",
         "english": "Cell count"
+    },
+    "powerBatteryProfile": {
+        "message": "Батерия $1",
+        "english": "Battery $1"
+    },
+    "options.show_advanced_firmware_opts.label": {
+        "message": "Покажи разширени опции за флашване на фърмуера",
+        "english": "Show advanced firmware flashing options"
     },
     "osdSetupTitle": {
         "message": "OSD",

@@ -12,16 +12,24 @@ const tab = {
     CURRENT_METER_CONFIGS_COPY: null,
     currentBatteryProfile: null,
     savedBatteryProfile: null,
-    batteryMeterTypes: [
-        'None',
-        'Adc',
-        'Esc',
-    ],
-    currentMeterTypes: [
-        'None',
-        'Adc',
-        'Esc',
-    ],
+
+    getBatteryMeterTypes() {
+        return [
+            'None',
+            'Adc',
+            'Esc',
+            ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) ? ['Fbus'] : []),
+        ];
+    },
+
+    getCurrentMeterTypes() {
+        return [
+            'None',
+            'Adc',
+            'Esc',
+            ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) ? ['Fbus'] : []),
+        ];
+    },
 };
 
 tab.initialize = function (callback) {
@@ -270,12 +278,12 @@ tab.initialize = function (callback) {
         const batteryMeterType_e = elementBatteryConfiguration.find('select.batterymetersource');
         const currentMeterType_e = elementBatteryConfiguration.find('select.currentmetersource');
 
-        self.batteryMeterTypes.forEach((item, index) => {
+        self.getBatteryMeterTypes().forEach((item, index) => {
             const text = i18n.getMessage('powerBatteryVoltageMeterType' + item);
             batteryMeterType_e.append(`<option value="${index}">${text}</option>`);
         });
 
-        self.currentMeterTypes.forEach((item, index) => {
+        self.getBatteryMeterTypes().forEach((item, index) => {
             const text = i18n.getMessage('powerBatteryCurrentMeterType' + item);
             currentMeterType_e.append(`<option value="${index}">${text}</option>`);
         });
