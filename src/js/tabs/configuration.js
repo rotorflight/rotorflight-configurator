@@ -643,7 +643,7 @@ tab.initialize = function (callback) {
             .trigger('change');
 
 
-        const flightTimeFormatter = new Intl.DurationFormat(i18n.getCurrentLocale(), { style: "short" });
+        const flightTimeFormatter = new Intl.DurationFormat(i18n.getCurrentLocale().replace("_", "-"), { style: "short" });
         function updateFlightStats() {
             $('#flight-stats-count').text(FC.FLIGHT_STATS.stats_total_flights);
             $('#flight-stats-time').text(flightTimeFormatter.format({
