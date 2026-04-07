@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 
+// Increment when making incompatible config schema changes
+// e.g. changing the type of a field
+const CONFIG_VERSION = 1;
+
 function isKeyOf<T extends Record<string, unknown>>(
   obj: T,
   key: any,
@@ -24,6 +28,7 @@ function set(prop: string, value: any) {
 }
 
 export type Config = {
+  config_version: number | null;
   auto_connect: boolean;
   check_for_configurator_unstable_versions: boolean;
   cli_auto_complete: boolean;
@@ -54,6 +59,8 @@ export type Config = {
 };
 
 const _config: Config = $state({
+  config_version: null,
+
   // Default Values
   auto_connect: true,
   check_for_configurator_unstable_versions: true,
@@ -105,3 +112,11 @@ const handler: ProxyHandler<Config> = {
 };
 
 export const config = new Proxy(_config, handler);
+
+/*
+ * Reset configuration to defaults when on an unknown version
+ */
+if (config.config_version !== CONFIG_VERSION) {
+  globalThis.localStorage.clear();
+  config.config_version = CONFIG_VERSION;
+}
