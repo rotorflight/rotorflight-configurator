@@ -2,6 +2,7 @@ import semver from "semver";
 
 import { Model } from "@/js/model.js";
 import { API_VERSION_12_8, API_VERSION_12_9 } from "@/js/configurator.svelte.js";
+import * as flightStats from "@/js/flight-stats.js";
 
 const tab = {
     tabName: 'status',
@@ -111,16 +112,12 @@ tab.initialize = function (callback) {
         $('.board-name').text(FC.CONFIG.boardName);
 
         // Flight stats
-        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+            $('.flight-count').text(FC.FLIGHT_STATS.stats_total_flights.toLocaleString());
+            $('.flight-time').text(flightStats.getDuration());
+        } else {
             $('.flight-count').closest('tr').hide();
             $('.flight-time').closest('tr').hide();
-        } else {
-            $('.flight-count').text(FC.FLIGHT_STATS.stats_total_flights.toLocaleString());
-            const flightTimeFormatter = new Intl.DurationFormat(i18n.getCurrentLocale().replace("_", "-"), { style: "short" });
-            $('.flight-time').text(flightTimeFormatter.format({
-                hours: Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60 / 60),
-                minutes: Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60 % 60),
-            }));
         }
 
         // set roll in interactive block

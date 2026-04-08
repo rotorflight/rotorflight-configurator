@@ -28,6 +28,18 @@
     "genericRange": {
         "message": "Range"
     },
+    "hours": {
+        "message": "{{count}} hour"
+    },
+    "hours_other": {
+        "message": "{{count}} hours"
+    },
+    "minutes": {
+        "message": "{{count}} minute"
+    },
+    "minutes_other": {
+        "message": "{{count}} minutes"
+    },
     "axisROLL": {
         "message": "ROLL",
         "description": "Roll axis in capital letters"
@@ -1344,6 +1356,9 @@
     },
     "configuration.flight_stats.distance.label": {
         "message": "Distance"
+    },
+    "flight_stats.duration.value": {
+        "message": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })"
     },
     "beeper_GYRO_CALIBRATED": {
         "message": "Beeps when gyro has been calibrated"
