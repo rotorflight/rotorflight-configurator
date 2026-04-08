@@ -1,6 +1,7 @@
 import semver from "semver";
 
 import { API_VERSION_12_7, API_VERSION_12_9 } from "@/js/configurator.svelte";
+import * as flightStats from "@/js/flight-stats.js";
 import { getIntegerValue } from "@/js/main.js";
 import { Model } from "@/js/model.js";
 import { reinitialiseConnection } from "@/js/serial_backend.js";
@@ -643,13 +644,9 @@ tab.initialize = function (callback) {
             .trigger('change');
 
 
-        const flightTimeFormatter = new Intl.DurationFormat(i18n.getCurrentLocale().replace("_", "-"), { style: "short" });
         function updateFlightStats() {
             $('#flight-stats-count').text(FC.FLIGHT_STATS.stats_total_flights);
-            $('#flight-stats-time').text(flightTimeFormatter.format({
-                hours: Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60 / 60),
-                minutes: Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60 % 60),
-            }));
+            $('#flight-stats-time').text(flightStats.getDuration());
             $('#flight-stats-distance').text(`${FC.FLIGHT_STATS.stats_total_dist_m.toLocaleString()} m`);
         }
         updateFlightStats();
