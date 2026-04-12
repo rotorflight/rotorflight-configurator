@@ -606,7 +606,7 @@ tab.initialize = function (callback) {
                         let { unifiedConfigLast } = await new Promise((resolve) => chrome.storage.local.get("unifiedConfigLast", resolve));
                         const cacheAge = now - (unifiedConfigLast?.lastUpdate ?? 0);
 
-                        if (unifiedConfigLast.targetId !== targetSpec.target || cacheAge > expirationPeriod) {
+                        if (unifiedConfigLast?.targetId !== targetSpec.target || cacheAge > expirationPeriod) {
                             try {
                                 console.log(`Fetching ${targetSpec.download_url}`);
                                 const res = await fetch(targetSpec.download_url);
