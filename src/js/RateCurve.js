@@ -1,4 +1,3 @@
-const minRc = 1000;
 const midRc = 1500;
 const maxRc = 2000;
 
@@ -10,7 +9,7 @@ export const RateCurve = function () {
     };
 
     this.rcCommand = function (rcData, rcRate, deadband) {
-        const tmp = Math.min(Math.max(Math.abs(rcData - midRc) - deadband, 0), 500);
+        const tmp = Math.max(Math.abs(rcData - midRc) - deadband, 0);
 
         let result = tmp * rcRate;
         if (rcData < midRc) {
@@ -20,8 +19,10 @@ export const RateCurve = function () {
         return result;
     };
 
-    this.drawRateCurve = function (ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit, maxAngularVel, context, width, height) {
+    this.drawRateCurve = function (ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit, maxAngularVel, context, width, height, opts = {}) {
+        const rcRange = opts.rcRange ?? 500;
         const canvasHeightScale = height / (2 * maxAngularVel);
+        const canvasWidthScale = rcRange / 500;
 
         const stepWidth = context.lineWidth;
 
@@ -29,38 +30,33 @@ export const RateCurve = function () {
         context.translate(width / 2, height / 2);
 
         context.beginPath();
-        let rcData = minRc;
-        context.moveTo(-500, -canvasHeightScale * this.rcCommandRawToDegreesPerSecond(rcData, ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit));
+        let rcData = midRc - rcRange;
+
+        const getYPos = (barry) => {
+            let value = this.rcCommandRawToDegreesPerSecond(barry, ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit);
+            if (opts.maxAngularVel) {
+                value = Math.max(Math.min(value, opts.maxAngularVel), -opts.maxAngularVel);
+            }
+            return value;
+        };
+
+        let xPos = -500;
+        let yPos = -canvasHeightScale * getYPos(rcData);
+        context.moveTo(xPos, yPos);
         rcData = rcData + stepWidth;
-        while (rcData <= maxRc) {
-            context.lineTo(rcData - midRc, -canvasHeightScale * this.rcCommandRawToDegreesPerSecond(rcData, ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit));
+        while (rcData <= midRc + rcRange) {
+            xPos = (rcData - midRc) / canvasWidthScale;
+            yPos = -canvasHeightScale * getYPos(rcData);
+            context.lineTo(xPos, yPos);
 
             rcData = rcData + stepWidth;
         }
+        xPos = 500;
+        yPos = -canvasHeightScale * getYPos(midRc + rcRange);
+        context.lineTo(xPos, yPos);
         context.stroke();
 
         context.restore();
-    };
-
-    this.drawStickPosition = function (rcData, ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit, maxAngularVel, context, stickColor) {
-
-        const DEFAULT_SIZE = 60; // canvas units, relative size of the stick indicator (larger value is smaller indicator)
-        const rateScaling  = (context.canvas.height / 2) / maxAngularVel;
-
-        const currentValue = this.rcCommandRawToDegreesPerSecond(rcData, ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit);
-
-        if(rcData!=undefined) {
-            context.save();
-            context.fillStyle = stickColor || '#000000';
-
-            context.translate(context.canvas.width/2, context.canvas.height/2);
-            context.beginPath();
-            context.arc(rcData-1500, -rateScaling * currentValue, context.canvas.height / DEFAULT_SIZE, 0, 2 * Math.PI);
-            context.fill();
-            context.restore();
-        }
-
-        return currentValue;
     };
 
     this.getBetaflightRates = function (rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo, superExpoActive, limit) {
@@ -214,11 +210,11 @@ RateCurve.prototype.setMaxAngularVel = function (value) {
 
 };
 
-RateCurve.prototype.draw = function (ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit, maxAngularVel, context) {
+RateCurve.prototype.draw = function (ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit, maxAngularVel, context, opts) {
     if (rate !== undefined && rcRate !== undefined && rcExpo !== undefined) {
         const height = context.canvas.height;
         const width = context.canvas.width;
 
-        this.drawRateCurve(ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit, maxAngularVel, context, width, height);
+        this.drawRateCurve(ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit, maxAngularVel, context, width, height, opts);
     }
 };

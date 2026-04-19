@@ -8,6 +8,20 @@ import {
 import { Model } from "@/js/model.js";
 import { RateCurve } from "@/js/RateCurve.js";
 
+function drawStickPosition(context, color, rcPos, value, maxValue) {
+  const DEFAULT_SIZE = 60; // canvas units, relative size of the stick indicator (larger value is smaller indicator)
+  const rateScaling  = (context.canvas.height / 2) / maxValue;
+
+  context.save();
+  context.fillStyle = color;
+
+  context.translate(context.canvas.width/2, context.canvas.height/2);
+  context.beginPath();
+  context.arc(rcPos, -rateScaling * value, context.canvas.height / DEFAULT_SIZE, 0, 2 * Math.PI);
+  context.fill();
+  context.restore();
+}
+
 const DEFAULTS = {
   DYNAMICS_4_5: {
       roll_setpoint_boost_gain:          0,
@@ -63,7 +77,9 @@ const tab = {
     currentRateProfile: null,
     currentRatesType: null,
     previousRatesType: null,
-    polarRates: null,
+    currentRates: null,
+    cyclicRingEnabled: null,
+    polarRatesEnabled: null,
     RATES_TYPE: {
         NONE:        0,
         BETAFLIGHT:  1,
@@ -100,8 +116,126 @@ const tab = {
         'rateProfile6',
     ],
     RATE_PROFILE_MASK: 128,
-    rcChannels: [ 0, 0, 0, 0, ],
-    oldChannels: [ 0, 0, 0, 0, ],
+
+    lastRcCommand: [ 0, 0, 0, 0],
+
+    liveData: {
+        raw_setpoint_roll: 0,
+        raw_setpoint_pitch: 0,
+        raw_setpoint_yaw: 0,
+        raw_setpoint_collective: 0,
+        raw_setpoint_polar_cyclic: 0,
+
+        actual_setpoint_roll: 0,
+        actual_setpoint_pitch: 0,
+        actual_setpoint_yaw: 0,
+        actual_setpoint_collective: 0,
+
+        polar_rc_command: 0,
+    },
+
+    hasRcCommandChanged() {
+        for (let i = 0; i < 4; i++) {
+            if (this.lastRcCommand[i] !== FC.RC_COMMAND[i]) {
+                this.lastRcCommand = [...FC.RC_COMMAND];
+                return true;
+            }
+        }
+
+        return false;
+    },
+
+    /*
+     * Calculate current setpoints based on rc command data
+     */
+    updateRcPositions() {
+        if (!this.rateCurve) {
+            return;
+        }
+
+        this.liveData.raw_setpoint_roll = this.rateCurve.rcCommandRawToDegreesPerSecond(
+            1500 + FC.RC_COMMAND[0],
+            this.currentRatesType,
+            this.currentRates.roll_srate,
+            this.currentRates.roll_rc_rate,
+            this.currentRates.roll_rc_expo,
+            this.currentRates.superexpo,
+            this.currentRates.deadband,
+            this.currentRates.roll_rate_limit
+        );
+
+        this.liveData.raw_setpoint_pitch = this.rateCurve.rcCommandRawToDegreesPerSecond(
+            1500 + FC.RC_COMMAND[1],
+            this.currentRatesType,
+            this.currentRates.pitch_srate,
+            this.currentRates.pitch_rc_rate,
+            this.currentRates.pitch_rc_expo,
+            this.currentRates.superexpo,
+            this.currentRates.deadband,
+            this.currentRates.pitch_rate_limit
+        );
+
+        this.liveData.raw_setpoint_yaw = this.rateCurve.rcCommandRawToDegreesPerSecond(
+            1500 + FC.RC_COMMAND[2],
+            this.currentRatesType,
+            this.currentRates.yaw_srate,
+            this.currentRates.yaw_rc_rate,
+            this.currentRates.yaw_rc_expo,
+            this.currentRates.superexpo,
+            this.currentRates.yawDeadband,
+            this.currentRates.yaw_rate_limit
+        );
+
+        this.liveData.raw_setpoint_collective = this.rateCurve.rcCommandRawToDegreesPerSecond(
+            1500 + FC.RC_COMMAND[3],
+            this.currentRatesType,
+            this.currentRates.collective_srate,
+            this.currentRates.collective_rc_rate,
+            this.currentRates.collective_rc_expo,
+            this.currentRates.superexpo,
+            0,
+            this.currentRates.collective_rate_limit
+        );
+
+        this.liveData.actual_setpoint_yaw = this.liveData.raw_setpoint_yaw;
+        this.liveData.actual_setpoint_collective = this.liveData.raw_setpoint_collective;
+
+        if (this.polarRatesEnabled) {
+            const roll = FC.RC_COMMAND[0] / 500;
+            const pitch = FC.RC_COMMAND[1] / 500;
+
+            this.liveData.polar_rc_command = Math.sqrt(roll ** 2 + pitch ** 2);
+            this.liveData.raw_setpoint_polar_cyclic = Math.min(this.rateCurve.rcCommandRawToDegreesPerSecond(
+                1500 + this.liveData.polar_rc_command * 500,
+                this.currentRatesType,
+                this.currentRates.pitch_srate,
+                this.currentRates.pitch_rc_rate,
+                this.currentRates.pitch_rc_expo,
+                this.currentRates.superexpo,
+                this.currentRates.deadband,
+                this.currentRates.pitch_rate_limit
+            ), this.currentRates.max_setpoint_pitch);
+
+            const mult = (this.liveData.polar_rc_command > 1e-6) ?
+                this.liveData.raw_setpoint_polar_cyclic / this.liveData.polar_rc_command : 0;
+            this.liveData.actual_setpoint_roll = roll * mult;
+            this.liveData.actual_setpoint_pitch = pitch * mult;
+        } else {
+            this.liveData.actual_setpoint_roll = this.liveData.raw_setpoint_roll;
+            this.liveData.actual_setpoint_pitch = this.liveData.raw_setpoint_pitch;
+
+            // Apply Cyclic Ring
+            const R = this.liveData.raw_setpoint_roll / this.currentRates.max_setpoint_roll;
+            const P = this.liveData.raw_setpoint_pitch / this.currentRates.max_setpoint_pitch;
+            const C = Math.sqrt(R ** 2 + P ** 2);
+
+            if (C > 1.0) {
+                this.liveData.actual_setpoint_roll /= C;
+                this.liveData.actual_setpoint_pitch /= C;
+            }
+        }
+
+    }
 };
 
 tab.initialize = function (callback) {
@@ -283,7 +417,7 @@ tab.initialize = function (callback) {
 
     function drawAxes(curveContext, width, height) {
         curveContext.strokeStyle = '#000000';
-        curveContext.lineWidth = 4;
+        curveContext.lineWidth = 2;
 
         // Horizontal
         curveContext.beginPath();
@@ -300,17 +434,11 @@ tab.initialize = function (callback) {
 
     self.rateCurve = new RateCurve();
 
-    function printMaxAngularVel(rate, rcRate, rcExpo, useSuperExpo, deadband, limit, maxAngularVelElement, isCollective) {
-        const maxAngularVel = self.rateCurve.getMaxAngularVel(self.currentRatesType, rate, rcRate, rcExpo, useSuperExpo, deadband, limit);
-        maxAngularVelElement.text(isCollective ? self.convertToCollective(maxAngularVel) : maxAngularVel.toFixed(0));
-        return maxAngularVel;
-    }
-
-    function drawCurve(rate, rcRate, rcExpo, useSuperExpo, deadband, limit, maxAngularVel, colour, yOffset, context) {
+    function drawCurve(rate, rcRate, rcExpo, useSuperExpo, deadband, limit, maxAngularVel, colour, yOffset, context, opts) {
         context.save();
         context.strokeStyle = colour;
         context.translate(0, yOffset);
-        self.rateCurve.draw(self.currentRatesType, rate, rcRate, rcExpo, useSuperExpo, deadband, limit, maxAngularVel, context);
+        self.rateCurve.draw(self.currentRatesType, rate, rcRate, rcExpo, useSuperExpo, deadband, limit, maxAngularVel, context, opts);
         context.restore();
     }
 
@@ -398,6 +526,9 @@ tab.initialize = function (callback) {
                 }
             }
 
+            // update max rates
+
+
             let maxAngularVel;
             const curveHeight = rcCurveElement.height;
             const curveWidth = rcCurveElement.width;
@@ -405,15 +536,76 @@ tab.initialize = function (callback) {
 
             curveContext.clearRect(0, 0, curveWidth, curveHeight);
 
-            maxAngularVel = Math.max(
-                printMaxAngularVel(self.currentRates.pitch_srate, self.currentRates.pitch_rc_rate, self.currentRates.pitch_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, self.maxAngularVelPitchElement),
-                printMaxAngularVel(self.currentRates.yaw_srate, self.currentRates.yaw_rc_rate, self.currentRates.yaw_rc_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, self.maxAngularVelYawElement));
+            self.maxCollectiveAngle = self.convertToCollective(self.rateCurve.getMaxAngularVel(
+                self.currentRatesType,
+                self.currentRates.collective_srate,
+                self.currentRates.collective_rc_rate,
+                self.currentRates.collective_rc_expo,
+                self.currentRates.superexpo,
+                0,
+                self.currentRates.collective_rate_limit,
+            ));
+            self.currentRates.max_angular_roll = self.rateCurve.getMaxAngularVel(
+                self.currentRatesType,
+                self.currentRates.roll_srate,
+                self.currentRates.roll_rc_rate,
+                self.currentRates.roll_rc_expo,
+                self.currentRates.superexpo,
+                self.currentRates.deadband,
+                self.currentRates.roll_rate_limit,
+            );
+            self.currentRates.max_angular_pitch = self.rateCurve.getMaxAngularVel(
+                self.currentRatesType,
+                self.currentRates.pitch_srate,
+                self.currentRates.pitch_rc_rate,
+                self.currentRates.pitch_rc_expo,
+                self.currentRates.superexpo,
+                self.currentRates.deadband,
+                self.currentRates.pitch_rate_limit,
+            );
+            self.currentRates.max_angular_yaw = self.rateCurve.getMaxAngularVel(
+                self.currentRatesType,
+                self.currentRates.yaw_srate,
+                self.currentRates.yaw_rc_rate,
+                self.currentRates.yaw_rc_expo,
+                self.currentRates.superexpo,
+                self.currentRates.yawDeadband,
+                self.currentRates.yaw_rate_limit,
+            );
 
-            if (!self.polarRates) {
-                maxAngularVel = Math.max(
-                    maxAngularVel,
-                    printMaxAngularVel(self.currentRates.roll_srate, self.currentRates.roll_rc_rate, self.currentRates.roll_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, self.maxAngularVelRollElement),
-                );
+            self.currentRates.max_setpoint_roll = self.currentRates.cyclic_ring > 0 ?
+                    (self.currentRates.max_angular_roll * (self.currentRates.cyclic_ring / 100)) : 2000;
+            self.currentRates.max_setpoint_pitch = self.currentRates.cyclic_ring > 0 ?
+                    (self.currentRates.max_angular_pitch * (self.currentRates.cyclic_ring / 100)) : 2000;
+
+            self.currentRates.max_setpoint_polar_cyclic = self.rateCurve.rcCommandRawToDegreesPerSecond(
+                1500 + (500 * Math.sqrt(2)),
+                self.currentRatesType,
+                self.currentRates.pitch_srate,
+                self.currentRates.pitch_rc_rate,
+                self.currentRates.pitch_rc_expo,
+                self.currentRates.superexpo,
+                self.currentRates.deadband,
+                self.currentRates.pitch_rate_limit,
+            );
+            if (self.cyclicRingEnabled) {
+                self.currentRates.max_setpoint_polar_cyclic = Math.min(self.currentRates.max_angular_pitch * (self.currentRates.cyclic_ring / 100), self.currentRates.max_setpoint_polar_cyclic);
+            }
+
+            self.maxAngularVelRollElement.text(self.currentRates.max_angular_roll.toFixed(0));
+            if (self.polarRatesEnabled) {
+                self.maxAngularVelPitchElement.text(self.currentRates.max_setpoint_polar_cyclic.toFixed(0));
+            } else {
+                self.maxAngularVelPitchElement.text(self.currentRates.max_angular_pitch.toFixed(0));
+            }
+            self.maxAngularVelYawElement.text(self.currentRates.max_angular_yaw.toFixed(0));
+            self.maxCollectiveAngleElement.text(self.maxCollectiveAngle);
+
+            maxAngularVel = self.currentRates.max_angular_yaw;
+            if (self.polarRatesEnabled) {
+                maxAngularVel = Math.max(maxAngularVel, self.currentRates.max_setpoint_polar_cyclic);
+            } else {
+                maxAngularVel = Math.max(maxAngularVel, self.currentRates.max_angular_roll, self.currentRates.max_angular_pitch);
             }
 
             // make maxAngularVel multiple of 200°/s so that the auto-scale doesn't keep changing for small changes of the maximum curve
@@ -422,30 +614,101 @@ tab.initialize = function (callback) {
             drawAxes(curveContext, curveWidth, curveHeight);
 
             curveContext.lineWidth = 2 * lineScale;
-            if (!self.polarRates) {
-                drawCurve(self.currentRates.roll_srate, self.currentRates.roll_rc_rate, self.currentRates.roll_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, '#ff0000', -6, curveContext);
+
+            drawCurve(
+                self.currentRates.collective_srate,
+                self.currentRates.collective_rc_rate,
+                self.currentRates.collective_rc_expo,
+                self.currentRates.superexpo,
+                0,
+                self.currentRates.collective_rate_limit,
+                self.maxCollectiveAngle,
+                '#ffbb00',
+                0,
+                curveContext
+            );
+
+            drawCurve(
+                self.currentRates.yaw_srate,
+                self.currentRates.yaw_rc_rate,
+                self.currentRates.yaw_rc_expo,
+                self.currentRates.superexpo,
+                self.currentRates.yawDeadband,
+                self.currentRates.yaw_rate_limit,
+                maxAngularVel,
+                '#0000ff',
+                0,
+                curveContext,
+            );
+
+            if (self.polarRatesEnabled) {
+                drawCurve(
+                    self.currentRates.pitch_srate,
+                    self.currentRates.pitch_rc_rate,
+                    self.currentRates.pitch_rc_expo,
+                    self.currentRates.superexpo,
+                    self.currentRates.deadband,
+                    self.currentRates.pitch_rate_limit,
+                    maxAngularVel,
+                    '#00ff00',
+                    0,
+                    curveContext,
+                    {
+                        rcRange: 500 * Math.sqrt(2),
+                        maxAngularVel: self.currentRates.max_setpoint_polar_cyclic,
+                    },
+                );
+            } else {
+                drawCurve(
+                    self.currentRates.roll_srate,
+                    self.currentRates.roll_rc_rate,
+                    self.currentRates.roll_rc_expo,
+                    self.currentRates.superexpo,
+                    self.currentRates.deadband,
+                    self.currentRates.roll_rate_limit,
+                    maxAngularVel,
+                    '#ff0000',
+                    -2,
+                    curveContext,
+                );
+                drawCurve(
+                    self.currentRates.pitch_srate,
+                    self.currentRates.pitch_rc_rate,
+                    self.currentRates.pitch_rc_expo,
+                    self.currentRates.superexpo,
+                    self.currentRates.deadband,
+                    self.currentRates.pitch_rate_limit,
+                    maxAngularVel,
+                    '#00ff00',
+                    2,
+                    curveContext,
+                );
             }
-            drawCurve(self.currentRates.pitch_srate, self.currentRates.pitch_rc_rate, self.currentRates.pitch_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, '#00ff00', -2, curveContext);
-            drawCurve(self.currentRates.yaw_srate, self.currentRates.yaw_rc_rate, self.currentRates.yaw_rc_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, '#0000ff', 2, curveContext);
 
-            self.maxCollectiveAngle = printMaxAngularVel(self.currentRates.collective_srate, self.currentRates.collective_rc_rate, self.currentRates.collective_rc_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngleElement, true);
-            drawCurve(self.currentRates.collective_srate, self.currentRates.collective_rc_rate, self.currentRates.collective_rc_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, '#ffbb00', 6, curveContext);
-
+            self.updateRcPositions();
             self.updateRatesLabels();
         }
 
         $('.tab-rates .cyclic-ring-container').toggle(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9));
         $('.tab-rates .cyclic-ring-container #enable-cyclic-ring').on('change', function () {
             const enabled = $(this).is(':checked');
+            self.cyclicRingEnabled = enabled;
             const level_e = $('.tab-rates .cyclic-ring-container #cyclic-ring-level');
             if (enabled && self.currentRates.cyclic_ring === 0) {
                 level_e.val(DEFAULTS.CYCLIC_RING);
             }
             level_e.closest('.field').toggle(enabled);
+
+            updateRates();
+        }).trigger('change');
+        $('#cyclic-ring-level').on('change', function () {
+            self.currentRates.cyclic_ring = getIntegerValue($(this));
+            updateRates();
         });
+
         $('.tab-rates .cyclic-ring-container #enable-polar-coordinates').on('change', function () {
             const enabled = $(this).is(':checked');
-            self.polarRates = enabled;
+            self.polarRatesEnabled = enabled;
             $('.tab-rates .rates_setup .ROLL').toggle(!enabled);
 
             const pitchTitle = $('.tab-rates .rates_setup .PITCH .axis_title');
@@ -561,10 +824,10 @@ tab.initialize = function (callback) {
 
         function get_receiver_data() {
             MSP.send_message(MSPCodes.MSP_RC_COMMAND, false, false, function() {
-                self.rcChannels[0] = 1500 + FC.RC_COMMAND[0];
-                self.rcChannels[1] = 1500 + FC.RC_COMMAND[1];
-                self.rcChannels[2] = 1500 + FC.RC_COMMAND[2];
-                self.rcChannels[3] = 1500 + FC.RC_COMMAND[3];
+                if (self.hasRcCommandChanged()) {
+                    self.updateRcPositions();
+                    self.updateRatesLabels();
+                }
             });
         }
 
@@ -622,46 +885,13 @@ tab.renderModel = function () {
         self.clock = new Clock();
     }
 
-    if (self.rcChannels[0] && self.rcChannels[1] && self.rcChannels[2]) {
-        const delta = self.clock.getDelta();
+    const delta = self.clock.getDelta();
 
-        const roll = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
-            self.rcChannels[0],
-            self.currentRatesType,
-            self.currentRates.roll_srate,
-            self.currentRates.roll_rc_rate,
-            self.currentRates.roll_rc_expo,
-            self.currentRates.superexpo,
-            self.currentRates.deadband,
-            self.currentRates.roll_rate_limit
-        );
-        const pitch = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
-            self.rcChannels[1],
-            self.currentRatesType,
-            self.currentRates.pitch_srate,
-            self.currentRates.pitch_rc_rate,
-            self.currentRates.pitch_rc_expo,
-            self.currentRates.superexpo,
-            self.currentRates.deadband,
-            self.currentRates.pitch_rate_limit
-        );
-        const yaw = delta * self.rateCurve.rcCommandRawToDegreesPerSecond(
-            self.rcChannels[2],
-            self.currentRatesType,
-            self.currentRates.yaw_srate,
-            self.currentRates.yaw_rc_rate,
-            self.currentRates.yaw_rc_expo,
-            self.currentRates.superexpo,
-            self.currentRates.yawDeadband,
-            self.currentRates.yaw_rate_limit
-        );
-
-        self.model?.rotateBy(-degToRad(pitch), -degToRad(yaw), -degToRad(roll));
-
-        if (self.checkChannels()) {
-            self.updateRatesLabels();
-        }
-    }
+    self.model?.rotateBy(
+        delta * -degToRad(this.liveData.actual_setpoint_pitch),
+        delta * -degToRad(this.liveData.actual_setpoint_yaw),
+        delta * -degToRad(this.liveData.actual_setpoint_roll),
+    );
 };
 
 tab.cleanup = function (callback) {
@@ -678,19 +908,6 @@ tab.cleanup = function (callback) {
     self.isDirty = false;
 
     callback?.();
-};
-
-tab.checkChannels = function() {
-    const self = this;
-
-    let changeDetected = false;
-    for (let i = 0; i < self.oldChannels.length; i++) {
-        if (self.oldChannels[i] !== self.rcChannels[i]) {
-            self.oldChannels[i] = self.rcChannels[i];
-            changeDetected = true;
-        }
-    }
-    return changeDetected;
 };
 
 tab.updateRatesLabels = function() {
@@ -804,10 +1021,6 @@ tab.updateRatesLabels = function() {
 
             stickContext.save();
 
-            const maxAngularVelRoll   = self.maxAngularVelRollElement.text();
-            const maxAngularVelPitch  = self.maxAngularVelPitchElement.text();
-            const maxAngularVelYaw    = self.maxAngularVelYawElement.text();
-            const maxCollectiveAngleText = self.maxCollectiveAngleElement.text();
             const curveHeight         = rcStickElement.height;
             const curveWidth          = rcStickElement.width;
             const maxAngularVel       = self.rateCurve.maxAngularVel;
@@ -816,7 +1029,6 @@ tab.updateRatesLabels = function() {
             const lineScale           = stickContext.canvas.width / stickContext.canvas.clientWidth;
             const textScale           = stickContext.canvas.clientHeight / stickContext.canvas.clientWidth;
 
-            let currentValues         = [];
             let balloonsDirty         = [];
 
             stickContext.clearRect(0, 0, curveWidth, curveHeight);
@@ -828,16 +1040,42 @@ tab.updateRatesLabels = function() {
                 stickContext.font = (24 * windowScale) + "pt Verdana, Arial, sans-serif";
             }
 
-            const drawStickPositions = self.rcChannels[0] && self.rcChannels[1] && self.rcChannels[2] && self.rcChannels[3];
-
-            if (drawStickPositions) {
-                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[0], self.currentRatesType, self.currentRates.roll_srate, self.currentRates.roll_rc_rate, self.currentRates.roll_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.roll_rate_limit, maxAngularVel, stickContext, '#FF8080'));
-                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[1], self.currentRatesType, self.currentRates.pitch_srate, self.currentRates.pitch_rc_rate, self.currentRates.pitch_rc_expo, self.currentRates.superexpo, self.currentRates.deadband, self.currentRates.pitch_rate_limit, maxAngularVel, stickContext, '#80FF80'));
-                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[2], self.currentRatesType, self.currentRates.yaw_srate, self.currentRates.yaw_rc_rate, self.currentRates.yaw_rc_expo, self.currentRates.superexpo, self.currentRates.yawDeadband, self.currentRates.yaw_rate_limit, maxAngularVel, stickContext, '#8080FF'));
-                currentValues.push(self.rateCurve.drawStickPosition(self.rcChannels[3], self.currentRatesType, self.currentRates.collective_srate, self.currentRates.collective_rc_rate, self.currentRates.collective_rc_expo, self.currentRates.superexpo, 0, self.currentRates.collective_rate_limit, self.maxCollectiveAngle, stickContext, '#FFBB00'));
+            if (self.polarRatesEnabled) {
+                drawStickPosition(
+                    stickContext,
+                    '#80FF80',
+                    self.liveData.polar_rc_command * 500 / Math.sqrt(2),
+                    self.liveData.raw_setpoint_polar_cyclic,
+                    maxAngularVel,
+                );
             } else {
-                currentValues = [];
+                drawStickPosition(
+                    stickContext,
+                    '#FF8080',
+                    FC.RC_COMMAND[0],
+                    self.liveData.actual_setpoint_roll,
+                    maxAngularVel,
+                );
+                drawStickPosition(
+                    stickContext,
+                    '#80FF80',
+                    FC.RC_COMMAND[1],
+                    self.liveData.actual_setpoint_pitch,
+                    maxAngularVel,
+                );
             }
+            drawStickPosition(stickContext,
+                '#8080FF',
+                FC.RC_COMMAND[2],
+                self.liveData.actual_setpoint_yaw,
+                maxAngularVel
+            );
+            drawStickPosition(stickContext,
+                '#FFBB00',
+                FC.RC_COMMAND[3],
+                self.liveData.actual_setpoint_collective,
+                self.maxCollectiveAngle,
+            );
 
             stickContext.lineWidth = lineScale;
 
@@ -849,34 +1087,134 @@ tab.updateRatesLabels = function() {
 
             // and then the balloon labels.
             balloonsDirty = []; // reset the dirty balloon draw area (for overlap detection)
-            // create an array of balloons to draw
-            const balloons = [
-                {value: maxAngularVelRoll, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelRoll + '°/s',  curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelRoll)),  'right', BALLOON_COLORS.roll, balloonsDirty);}, axis: "roll"},
-                {value: maxAngularVelPitch, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelPitch + '°/s', curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelPitch)), 'right', BALLOON_COLORS.pitch, balloonsDirty);}},
-                {value: maxAngularVelYaw, balloon: function() {drawBalloonLabel(stickContext, maxAngularVelYaw + '°/s',   curveWidth, rateScale * (maxAngularVel - parseInt(maxAngularVelYaw)),   'right', BALLOON_COLORS.yaw, balloonsDirty);}},
-                {value: 10000, balloon: function() {drawBalloonLabel(stickContext, maxCollectiveAngleText + '°', curveWidth, 0,   'right', BALLOON_COLORS.collective, balloonsDirty);}}
+
+            // max value balloons
+            drawBalloonLabel(
+                stickContext,
+                self.maxCollectiveAngle + '°',
+                curveWidth,
+                0,
+                  'right',
+                BALLOON_COLORS.collective,
+                balloonsDirty,
+            );
+
+            const maxValBalloons = [
+                {
+                    value: self.currentRates.max_angular_yaw,
+                    draw() {
+                        drawBalloonLabel(
+                            stickContext,
+                            self.currentRates.max_angular_yaw.toFixed(0) + '°/s',
+                              curveWidth,
+                            rateScale * (maxAngularVel - self.currentRates.max_angular_yaw),
+                              'right',
+                            BALLOON_COLORS.yaw,
+                            balloonsDirty,
+                        );
+                    },
+                },
             ];
 
-            // and sort them in descending order so the largest value is at the top always
-            balloons.sort(function(a,b) {return (b.value - a.value);});
-
-            // add the current rc values
-            if (drawStickPositions) {
-                balloons.push(
-                    {value: currentValues[3], balloon: function() {drawBalloonLabel(stickContext, self.convertToCollective(currentValues[3]) + '°', 10, 50,  'none', BALLOON_COLORS.collective, balloonsDirty);}},
-                    {value: currentValues[0], balloon: function() {drawBalloonLabel(stickContext, currentValues[0].toFixed(0) + '°/s', 10, 150, 'none', BALLOON_COLORS.roll, balloonsDirty);}, axis: "roll"},
-                    {value: currentValues[1], balloon: function() {drawBalloonLabel(stickContext, currentValues[1].toFixed(0) + '°/s', 10, 250, 'none', BALLOON_COLORS.pitch, balloonsDirty);}},
-                    {value: currentValues[2], balloon: function() {drawBalloonLabel(stickContext, currentValues[2].toFixed(0) + '°/s', 10, 350,  'none', BALLOON_COLORS.yaw, balloonsDirty);}}
+            if (self.polarRatesEnabled) {
+                maxValBalloons.push(
+                    {
+                        value: self.currentRates.max_setpoint_polar_cyclic,
+                        draw() {
+                            drawBalloonLabel(
+                                stickContext,
+                                self.currentRates.max_setpoint_polar_cyclic.toFixed(0) + '°/s',
+                                curveWidth,
+                                rateScale * (maxAngularVel - self.currentRates.max_setpoint_polar_cyclic),
+                                'right',
+                                BALLOON_COLORS.pitch,
+                                balloonsDirty,
+                            );
+                        },
+                    },
+                );
+            } else {
+                maxValBalloons.push(
+                    {
+                        value: self.currentRates.max_angular_roll,
+                        draw() {
+                            drawBalloonLabel(
+                                stickContext,
+                                self.currentRates.max_angular_roll.toFixed(0) + '°/s',
+                                 curveWidth,
+                                rateScale * (maxAngularVel - self.currentRates.max_angular_roll),
+                                 'right',
+                                BALLOON_COLORS.roll,
+                                balloonsDirty,
+                            );
+                        },
+                    },
+                    {
+                        value: self.currentRates.max_angular_pitch,
+                        draw() {
+                            drawBalloonLabel(
+                                stickContext,
+                                self.currentRates.max_angular_pitch.toFixed(0) + '°/s',
+                                curveWidth,
+                                rateScale * (maxAngularVel - self.currentRates.max_angular_pitch),
+                                'right',
+                                BALLOON_COLORS.pitch,
+                                balloonsDirty,
+                            );
+                        },
+                    },
                 );
             }
-            // then display them on the chart
-            for (const balloon of balloons) {
-                if (self.polarRates && balloon.axis === "roll") {
-                    continue;
-                }
+            maxValBalloons.sort((a, b) => b.value - a.value).forEach(x => x.draw());
 
-                balloon.balloon();
+            // current value balloons
+            drawBalloonLabel(
+                stickContext,
+                self.convertToCollective(this.liveData.actual_setpoint_collective) + '°',
+                10,
+                50,
+                'none',
+                BALLOON_COLORS.collective, balloonsDirty,
+            );
+            if (self.polarRatesEnabled) {
+                drawBalloonLabel(
+                    stickContext,
+                    this.liveData.raw_setpoint_polar_cyclic.toFixed(0) + '°/s',
+                    10,
+                    250,
+                    'none',
+                    BALLOON_COLORS.pitch,
+                    balloonsDirty,
+                );
+            } else {
+                drawBalloonLabel(
+                    stickContext,
+                    this.liveData.actual_setpoint_roll.toFixed(0) + '°/s',
+                    10,
+                    150,
+                    'none',
+                    BALLOON_COLORS.roll,
+                    balloonsDirty,
+                );
+                drawBalloonLabel(
+                    stickContext,
+                    this.liveData.actual_setpoint_pitch.toFixed(0) + '°/s',
+                    10,
+                    250,
+                    'none',
+                    BALLOON_COLORS.pitch,
+                    balloonsDirty,
+                );
             }
+            drawBalloonLabel(
+                stickContext,
+                this.liveData.actual_setpoint_yaw.toFixed(0) + '°/s',
+                10,
+                350,
+                 'none',
+                BALLOON_COLORS.yaw,
+                balloonsDirty,
+            );
 
             stickContext.restore();
         }
