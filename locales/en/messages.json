@@ -1547,7 +1547,7 @@
     "portsFunction_TELEMETRY_SMARTPORT": {
         "message": "Telemetry: FrSky SmartPort"
     },
-    "portsFunction_SMARTPORT_MASTER": {
+    "portsFunction_SPORT_MASTER": {
         "message": "S.PORT Master"
     },
     "portsFunction_TELEMETRY_IBUS": {
