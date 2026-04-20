@@ -573,9 +573,9 @@ tab.initialize = function (callback) {
                 self.currentRates.yaw_rate_limit,
             );
 
-            self.currentRates.max_setpoint_roll = self.currentRates.cyclic_ring > 0 ?
+            self.currentRates.max_setpoint_roll = self.cyclicRingEnabled ?
                     (self.currentRates.max_angular_roll * (self.currentRates.cyclic_ring / 100)) : 2000;
-            self.currentRates.max_setpoint_pitch = self.currentRates.cyclic_ring > 0 ?
+            self.currentRates.max_setpoint_pitch = self.cyclicRingEnabled ?
                     (self.currentRates.max_angular_pitch * (self.currentRates.cyclic_ring / 100)) : 2000;
 
             self.currentRates.max_setpoint_polar_cyclic = self.rateCurve.rcCommandRawToDegreesPerSecond(
