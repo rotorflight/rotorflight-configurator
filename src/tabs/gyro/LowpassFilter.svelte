@@ -35,6 +35,8 @@
         FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz,
   );
 
+  const lowpass1DynEnabledInitial = lowpass1DynEnabled;
+
   let lowpass2Enabled = $derived(FC.FILTER_CONFIG.gyro_lowpass2_type > 0);
 
   function loadValue(name) {
@@ -138,12 +140,16 @@
               bind:value={FC.FILTER_CONFIG.gyro_lowpass_hz}
             />
           </Field>
-          <Field id="gyro-lowpass-1-dyn" label="gyroLowpassDynamicCutoff">
-            <Switch
-              id="gyro-lowpass-1-dyn"
-              bind:checked={() => lowpass1DynEnabled, toggleLowpass1Dyn}
-            />
-          </Field>
+          {#if CONFIGURATOR.expertMode || lowpass1DynEnabledInitial || lowpass1DynEnabled}
+            <div transition:slide>
+              <Field id="gyro-lowpass-1-dyn" label="gyroLowpassDynamicCutoff">
+                <Switch
+                  id="gyro-lowpass-1-dyn"
+                  bind:checked={() => lowpass1DynEnabled, toggleLowpass1Dyn}
+                />
+              </Field>
+            </div>
+          {/if}
           {#if lowpass1DynEnabled}
             <div transition:slide>
               <SubSection>
