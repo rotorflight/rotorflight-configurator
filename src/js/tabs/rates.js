@@ -536,7 +536,7 @@ tab.initialize = function (callback) {
 
             curveContext.clearRect(0, 0, curveWidth, curveHeight);
 
-            self.maxCollectiveAngle = self.convertToCollective(self.rateCurve.getMaxAngularVel(
+            self.maxCollectiveAngle = self.rateCurve.getMaxAngularVel(
                 self.currentRatesType,
                 self.currentRates.collective_srate,
                 self.currentRates.collective_rc_rate,
@@ -544,7 +544,7 @@ tab.initialize = function (callback) {
                 self.currentRates.superexpo,
                 0,
                 self.currentRates.collective_rate_limit,
-            ));
+            );
             self.currentRates.max_angular_roll = self.rateCurve.getMaxAngularVel(
                 self.currentRatesType,
                 self.currentRates.roll_srate,
@@ -599,7 +599,7 @@ tab.initialize = function (callback) {
                 self.maxAngularVelPitchElement.text(self.currentRates.max_angular_pitch.toFixed(0));
             }
             self.maxAngularVelYawElement.text(self.currentRates.max_angular_yaw.toFixed(0));
-            self.maxCollectiveAngleElement.text(self.maxCollectiveAngle);
+            self.maxCollectiveAngleElement.text(self.convertToCollective(self.maxCollectiveAngle));
 
             maxAngularVel = self.currentRates.max_angular_yaw;
             if (self.polarRatesEnabled) {
@@ -624,7 +624,7 @@ tab.initialize = function (callback) {
                 self.currentRates.collective_rate_limit,
                 self.maxCollectiveAngle,
                 '#ffbb00',
-                0,
+                -4,
                 curveContext
             );
 
@@ -637,7 +637,7 @@ tab.initialize = function (callback) {
                 self.currentRates.yaw_rate_limit,
                 maxAngularVel,
                 '#0000ff',
-                0,
+                4,
                 curveContext,
             );
 
@@ -1091,7 +1091,7 @@ tab.updateRatesLabels = function() {
             // max value balloons
             drawBalloonLabel(
                 stickContext,
-                self.maxCollectiveAngle + '°',
+                self.convertToCollective(self.maxCollectiveAngle) + '°',
                 curveWidth,
                 0,
                   'right',

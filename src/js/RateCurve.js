@@ -32,8 +32,8 @@ export const RateCurve = function () {
         context.beginPath();
         let rcData = midRc - rcRange;
 
-        const getYPos = (barry) => {
-            let value = this.rcCommandRawToDegreesPerSecond(barry, ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit);
+        const getYPos = (rcPos) => {
+            let value = this.rcCommandRawToDegreesPerSecond(rcPos, ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit);
             if (opts.maxAngularVel) {
                 value = Math.max(Math.min(value, opts.maxAngularVel), -opts.maxAngularVel);
             }
