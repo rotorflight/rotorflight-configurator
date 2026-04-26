@@ -291,6 +291,165 @@
                         </div>
                     </div>
 
+                    <!-- TRIM FLIGHT -->
+                    <div class="gui_box grey mixerTrimFlight">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="mixerTrimFlight"></div>
+                        </div>
+                        <div class="spacer_box">
+                            <table class="mixerConfigTable">
+                                <tr>
+                                    <td>
+                                        <div class="configCol1 mixerConfig">
+                                            <input type="number" id="mixerTrimFlightGain" min="0" max="200" step="1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerTrimFlightGain"></span>
+                                            <div class="helpicon cf_tip" i18n_title="mixerTrimFlightGainHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="configCol1 mixerConfig">
+                                            <input type="number" id="mixerTrimFlightStickThreshold" min="5" max="150" step="1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerTrimFlightStickThreshold"></span>
+                                            <div class="helpicon cf_tip" i18n_title="mixerTrimFlightStickThresholdHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="configCol1 mixerConfig">
+                                            <input type="number" id="mixerTrimFlightMaxTrim" min="0" max="100" step="1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerTrimFlightMaxTrim"></span>
+                                            <div class="helpicon cf_tip" i18n_title="mixerTrimFlightMaxTrimHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="configCol1 mixerConfig">
+                                            <input type="number" id="mixerTrimFlightRollTrim" min="-100" max="100" step="0.1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerTrimFlightRollTrim"></span>
+                                            <div class="helpicon cf_tip" i18n_title="mixerTrimFlightTrimHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="configCol1 mixerConfig">
+                                            <input type="number" id="mixerTrimFlightPitchTrim" min="-100" max="100" step="0.1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerTrimFlightPitchTrim"></span>
+                                            <div class="helpicon cf_tip" i18n_title="mixerTrimFlightTrimHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="configCol1">
+                                            <a href="#" class="mixerTrimFlightReset regular-button" i18n="mixerTrimFlightReset"></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- FF ESTIMATE -->
+                    <div class="gui_box grey mixerFfEstimate">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="mixerFfEstimate"></div>
+                        </div>
+                        <div class="spacer_box">
+                            <table class="mixerConfigTable">
+                                <tr>
+                                    <td>
+                                        <div class="configCol1 mixerConfig">
+                                            <input type="number" id="mixerFfEstimateGain" min="0" max="200" step="1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerFfEstimateGain"></span>
+                                            <div class="helpicon cf_tip" i18n_title="mixerFfEstimateGainHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="configCol1 mixerConfig">
+                                            <input type="number" id="mixerFfEstimateMinSetpoint" min="10" max="500" step="1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerFfEstimateMinSetpoint"></span>
+                                            <div class="helpicon cf_tip" i18n_title="mixerFfEstimateMinSetpointHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="configCol1 mixerConfig">
+                                            <input type="number" id="mixerFfEstimateConvergence" min="1" max="50" step="1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerFfEstimateConvergence"></span>
+                                            <div class="helpicon cf_tip" i18n_title="mixerFfEstimateConvergenceHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="configCol1 mixerConfig">
+                                            <input type="number" id="mixerFfEstimateMinF" min="0" max="1000" step="1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerFfEstimateMinF"></span>
+                                            <div class="helpicon cf_tip" i18n_title="mixerFfEstimateFBoundsHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="configCol1 mixerConfig">
+                                            <input type="number" id="mixerFfEstimateMaxF" min="0" max="1000" step="1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="configCol2">
+                                            <span i18n="mixerFfEstimateMaxF"></span>
+                                            <div class="helpicon cf_tip" i18n_title="mixerFfEstimateFBoundsHelp"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
                     <!-- TAIL ROTOR SETTINGS -->
                     <div class="gui_box grey">
                         <div class="gui_box_titlebar">
