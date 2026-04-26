@@ -89,15 +89,19 @@ const tab = {
         QUICKRATES:  5,
         ROTORFLIGHT: 6,
     },
-    RATES_TYPE_NAMES: [
-        'None',
-        'Betaflight',
-        'Raceflight',
-        'KISS',
-        'Actual',
-        'QuickRates',
-        'Rotorflight',
-    ],
+
+    getRatesTypes() {
+        return [
+            'None',
+            'Betaflight',
+            'Raceflight',
+            'KISS',
+            'Actual',
+            'QuickRates',
+            ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) ? ['Rotorflight'] : []),
+        ];
+    },
+
     RATES_TYPE_IMAGES: [
         'none.svg',
         'betaflight.svg',
@@ -291,7 +295,7 @@ tab.initialize = function (callback) {
         $('.tab-rates .tab-container .' + self.activeSubtab).addClass('active');
 
         const ratesTypeListElement = $('.rates_type select[id="ratesType"]');
-        self.RATES_TYPE_NAMES.forEach(function(element, index) {
+        self.getRatesTypes().forEach(function(element, index) {
             ratesTypeListElement.append(`<option value="${index}">${element}</option>`);
         });
         ratesTypeListElement.val(self.currentRatesType);
