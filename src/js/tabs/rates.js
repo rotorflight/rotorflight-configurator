@@ -1684,12 +1684,18 @@ tab.initRatesSystem = function() {
     $('#yaw-dynamic-deadband-gain').val(self.currentRates.yaw_dynamic_deadband_gain);
     $('#yaw-dynamic-deadband-filter').val((self.currentRates.yaw_dynamic_deadband_filter / 10).toFixed(1));
 
-    $('#enable-cyclic-ring').prop('checked', self.currentRates.cyclic_ring > 0);
+    if ($('#enable-cyclic-ring').is(':checked') !== self.currentRates.cyclic_ring > 0) {
+        $('#enable-cyclic-ring').trigger('click');
+    }
+
     $('#cyclic-ring-level')
         .val(self.currentRates.cyclic_ring)
         .closest('.field')
         .toggle(self.currentRates.cyclic_ring > 0);
-    $('#enable-polar-coordinates').prop('checked', self.currentRates.cyclic_polar);
+
+    if ($('#enable-polar-coordinates').is(':checked') !== self.currentRates.cyclic_polar) {
+        $('#enable-polar-coordinates').trigger('click');
+    }
 };
 
 tab.changeRatesLogo = function() {
