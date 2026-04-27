@@ -25,6 +25,7 @@ LaunchProgram=Start {#ApplicationName}
 
 [Files]
 Source: "{#SourcePath}\*"; DestDir: "{app}"; Flags: recursesubdirs
+Source: "..\..\assets\windows\drivers\stm32\*"; DestDir: "{tmp}\stm32"; Flags: recursesubdirs deleteafterinstall
 
 [Icons]
 ; Programs group
@@ -64,6 +65,7 @@ Name: "zh_TW"; MessagesFile: "unofficial_inno_languages\ChineseTraditional.isl"
 
 [Run]
 ; Add a checkbox to start the app after installed
+Filename: "pnputil.exe"; Parameters: "/add-driver ""{tmp}\stm32\STtube.inf"" /install"; StatusMsg: "Installing STM32 DFU driver..."; Check: WizardIsTaskSelected('install_stm_dfu'); Flags: runhidden waituntilterminated
 Filename: {app}\{cm:AppName}.exe; Description: {cm:LaunchProgram,{cm:AppName}}; Flags: nowait postinstall skipifsilent
 
 [Setup]
@@ -91,6 +93,7 @@ UninstallDisplayName={#ApplicationName}
 WizardImageFile=rf_installer.bmp
 WizardSmallImageFile=rf_installer_small.bmp
 WizardStyle=modern
+PrivilegesRequired=admin
 
 [Code]
 function GetQuietUninstallerPath(): String;
@@ -125,3 +128,6 @@ begin
         end;
     end;
 end;
+
+[Tasks]
+Name: "install_stm_dfu"; Description: "Install STM32 DFU driver for Windows flashing"
