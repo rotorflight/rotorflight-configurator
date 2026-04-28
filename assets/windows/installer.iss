@@ -130,4 +130,4 @@ begin
 end;
 
 [Tasks]
-Name: "install_stm_dfu"; Description: "Install STM32 DFU driver for Windows flashing"
+Name: "install_stm_dfu"; Description: "I accept the STMicroelectronics driver license and want to install the STM32 DFU driver for Windows flashing"; Flags: unchecked
