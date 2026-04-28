@@ -26,6 +26,7 @@ LaunchProgram=Start {#ApplicationName}
 [Files]
 Source: "{#SourcePath}\*"; DestDir: "{app}"; Flags: recursesubdirs
 Source: "..\..\assets\windows\drivers\stm32\*"; DestDir: "{tmp}\stm32"; Flags: recursesubdirs deleteafterinstall
+Source: "..\..\assets\windows\drivers\stm32\LICENSE.txt"; DestDir: "{tmp}"; Flags: dontcopy
 
 [Icons]
 ; Programs group
@@ -111,7 +112,6 @@ end;
 function InitializeSetup(): Boolean;
 var
     ResultCode: Integer;
-    ParameterStr : String;
     UninstPath : String;
 begin
 
@@ -127,6 +127,30 @@ begin
             MsgBox('Error uninstalling Configurator ' + SysErrorMessage(ResultCode) + '.', mbError, MB_OK);
         end;
     end;
+end;
+var
+  LicenseLink: TNewStaticText;
+
+procedure LicenseLinkClick(Sender: TObject);
+var
+  ResultCode: Integer;
+  TempFile: String;
+begin
+  ExtractTemporaryFile('LICENSE.txt');
+  TempFile := ExpandConstant('{tmp}\LICENSE.txt');
+  ShellExec('open', TempFile, '', '', SW_SHOW, ewNoWait, ResultCode);
+end;
+
+procedure InitializeWizard();
+begin
+  LicenseLink := TNewStaticText.Create(WizardForm.SelectTasksPage);
+  LicenseLink.Parent := WizardForm.SelectTasksPage;
+  LicenseLink.Caption := 'View STM32 DFU Driver License';
+  LicenseLink.Cursor := crHand;
+  LicenseLink.Font.Color := clBlue;
+  LicenseLink.Top := 260;
+  LicenseLink.Left := 0;
+  LicenseLink.OnClick := @LicenseLinkClick;
 end;
 
 [Tasks]
