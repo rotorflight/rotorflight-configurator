@@ -122,7 +122,7 @@ tab.initialize = function (callback) {
                     // Unusual: value > 300 ± 25%
                     if (servo.min < -375 || servo.min > -150 || servo.max > 375 || servo.max <  150)
                         unusualLimit = true;
-                    if (servo.rneg < 25 || servo.rneg > 375 || servo.rpos < 25 || servo.rpos > 375)
+                    if (servo.rneg < 50 || servo.rneg > 375 || servo.rpos < 50 || servo.rpos > 375)
                         unusualScale = true;
                 }
             }
