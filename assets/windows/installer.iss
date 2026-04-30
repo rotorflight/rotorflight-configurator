@@ -25,6 +25,8 @@ LaunchProgram=Start {#ApplicationName}
 
 [Files]
 Source: "{#SourcePath}\*"; DestDir: "{app}"; Flags: recursesubdirs
+Source: "..\..\assets\windows\drivers\stm32\*"; DestDir: "{tmp}\stm32"; Flags: recursesubdirs deleteafterinstall
+Source: "..\..\assets\windows\drivers\stm32\license.txt"; DestName: "stm32_driver_license.txt"; Flags: dontcopy
 
 [Icons]
 ; Programs group
@@ -63,7 +65,7 @@ Name: "zh_TW"; MessagesFile: "unofficial_inno_languages\ChineseTraditional.isl"
 ; pt_BR (Portuguese Brasileiro)
 
 [Run]
-; Add a checkbox to start the app after installed
+Filename: "pnputil.exe"; Parameters: "/add-driver ""{tmp}\stm32\STtube.inf"" /install"; StatusMsg: "Installing STM32 DFU driver..."; Check: WizardIsTaskSelected('install_stm_dfu') and STMDFULicenseAccepted; Flags: runhidden waituntilterminated
 Filename: {app}\{cm:AppName}.exe; Description: {cm:LaunchProgram,{cm:AppName}}; Flags: nowait postinstall skipifsilent
 
 [Setup]
@@ -91,6 +93,7 @@ UninstallDisplayName={#ApplicationName}
 WizardImageFile=rf_installer.bmp
 WizardSmallImageFile=rf_installer_small.bmp
 WizardStyle=modern
+PrivilegesRequired=admin
 
 [Code]
 function GetQuietUninstallerPath(): String;
@@ -108,7 +111,6 @@ end;
 function InitializeSetup(): Boolean;
 var
     ResultCode: Integer;
-    ParameterStr : String;
     UninstPath : String;
 begin
 
@@ -125,3 +127,149 @@ begin
         end;
     end;
 end;
+
+var
+  STMDFULicensePage: TOutputMsgMemoWizardPage;
+  STMDFULicenseAcceptedRadio: TRadioButton;
+  STMDFULicenseNotAcceptedRadio: TRadioButton;
+  STMDFULicenseAcceptedState: Boolean;
+
+function STMDFULicenseAccepted(): Boolean;
+begin
+  Result := STMDFULicenseAcceptedState;
+end;
+
+procedure CheckSTMDFULicenseAccepted(Sender: TObject);
+begin
+  WizardForm.NextButton.Enabled := STMDFULicenseAcceptedRadio.Checked;
+end;
+
+procedure PositionSTMDFULicenseControls;
+var
+  MemoHeight: Integer;
+begin
+  if STMDFULicensePage = nil then
+    Exit;
+
+  STMDFULicensePage.RichEditViewer.Left := 0;
+  STMDFULicensePage.RichEditViewer.Top := ScaleY(60);
+  STMDFULicensePage.RichEditViewer.Width := STMDFULicensePage.SurfaceWidth;
+
+  STMDFULicenseAcceptedRadio.Left := 0;
+  STMDFULicenseAcceptedRadio.Width := STMDFULicensePage.SurfaceWidth;
+  STMDFULicenseNotAcceptedRadio.Left := 0;
+  STMDFULicenseNotAcceptedRadio.Width := STMDFULicensePage.SurfaceWidth;
+
+  MemoHeight :=
+    STMDFULicensePage.SurfaceHeight -
+    STMDFULicensePage.RichEditViewer.Top -
+    STMDFULicenseAcceptedRadio.Height -
+    STMDFULicenseNotAcceptedRadio.Height -
+    ScaleY(28);
+  if MemoHeight < ScaleY(60) then
+    MemoHeight := ScaleY(60);
+  STMDFULicensePage.RichEditViewer.Height := MemoHeight;
+
+  STMDFULicenseAcceptedRadio.Top :=
+    STMDFULicensePage.RichEditViewer.Top +
+    STMDFULicensePage.RichEditViewer.Height + ScaleY(8);
+  STMDFULicenseNotAcceptedRadio.Top :=
+    STMDFULicenseAcceptedRadio.Top +
+    STMDFULicenseAcceptedRadio.Height + ScaleY(4);
+
+  STMDFULicensePage.RichEditViewer.SendToBack;
+  STMDFULicenseAcceptedRadio.BringToFront;
+  STMDFULicenseNotAcceptedRadio.BringToFront;
+end;
+
+function CloneLicenseRadioButton(Source: TRadioButton): TRadioButton;
+begin
+  Result := TRadioButton.Create(WizardForm);
+  Result.Parent := STMDFULicensePage.Surface;
+  Result.Caption := Source.Caption;
+  Result.Left := Source.Left;
+  Result.Top := Source.Top;
+  Result.Width := Source.Width;
+  Result.Height := Source.Height;
+  Result.OnClick := @CheckSTMDFULicenseAccepted;
+end;
+
+procedure InitializeWizard();
+var
+  LicenseFilePath: String;
+begin
+  STMDFULicenseAcceptedState := False;
+
+  STMDFULicensePage :=
+    CreateOutputMsgMemoPage(
+      wpSelectTasks,
+      'STM32 DFU Driver License',
+      'Review and accept the STMicroelectronics driver license.',
+      'The STM32 DFU driver is optional. To install it, you must accept the STMicroelectronics driver license.',
+      ''
+    );
+
+  ExtractTemporaryFile('stm32_driver_license.txt');
+  LicenseFilePath := ExpandConstant('{tmp}\stm32_driver_license.txt');
+  STMDFULicensePage.RichEditViewer.Lines.LoadFromFile(LicenseFilePath);
+  DeleteFile(LicenseFilePath);
+
+  // create radios before final layout so we can reserve space correctly
+  STMDFULicenseAcceptedRadio :=
+    CloneLicenseRadioButton(WizardForm.LicenseAcceptedRadio);
+  STMDFULicenseNotAcceptedRadio :=
+    CloneLicenseRadioButton(WizardForm.LicenseNotAcceptedRadio);
+
+  // captions
+  STMDFULicenseAcceptedRadio.Caption :=
+    'I accept the STMicroelectronics driver license';
+  STMDFULicenseNotAcceptedRadio.Caption :=
+    'I do not accept the STMicroelectronics driver license';
+
+  // default state
+  STMDFULicenseNotAcceptedRadio.Checked := True;
+
+  PositionSTMDFULicenseControls;
+end;
+
+function ShouldSkipPage(PageID: Integer): Boolean;
+begin
+  Result := False;
+
+  if PageID = STMDFULicensePage.ID then
+  begin
+    Result := not WizardIsTaskSelected('install_stm_dfu');
+  end;
+end;
+
+procedure CurPageChanged(CurPageID: Integer);
+begin
+  if CurPageID = STMDFULicensePage.ID then
+  begin
+    PositionSTMDFULicenseControls;
+    CheckSTMDFULicenseAccepted(nil);
+  end;
+end;
+
+function NextButtonClick(CurPageID: Integer): Boolean;
+begin
+  Result := True;
+
+  if CurPageID = STMDFULicensePage.ID then
+  begin
+    STMDFULicenseAcceptedState := STMDFULicenseAcceptedRadio.Checked;
+
+    if not STMDFULicenseAcceptedState then
+    begin
+      MsgBox(
+        'You must accept the STMicroelectronics driver license to install the STM32 DFU driver.',
+        mbError,
+        MB_OK
+      );
+      Result := False;
+    end;
+  end;
+end;
+
+[Tasks]
+Name: "install_stm_dfu"; Description: "Install STM32 DFU driver for Windows flashing (optional)"; Flags: unchecked
