@@ -1,5 +1,8 @@
 STM32 DFU Driver License (STMicroelectronics)
 
+Source: STtube.inf
+SLA0044 Rev5 / February 2018
+
 BY INSTALLING, COPYING, DOWNLOADING, ACCESSING OR OTHERWISE USING THIS SOFTWARE OR ANY PART THEREOF (AND THE RELATED DOCUMENTATION) FROM STMICROELECTRONICS INTERNATIONAL N.V., SWISS BRANCH AND/OR ITS AFFILIATED COMPANIES ("STMICROELECTRONICS"), YOU AGREE TO BE BOUND BY THIS SOFTWARE LICENSE AGREEMENT.
 
 Under STMicroelectronics intellectual property rights, redistribution, reproduction and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:

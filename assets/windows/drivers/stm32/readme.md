@@ -27,6 +27,6 @@ Only the required driver files are included. The ST installer and utilities are 
 
 ## License
 
-The license terms are included in STtube.inf.
+This driver is distributed under the STMicroelectronics proprietary software license included in `STtube.inf`.
 
-The Rotorflight Configurator installer requires the user to explicitly opt in and accept the STMicroelectronics driver license before installing the driver.
+The Rotorflight Configurator installer requires the user to explicitly opt in and accept the STMicroelectronics driver license before the driver is installed.
