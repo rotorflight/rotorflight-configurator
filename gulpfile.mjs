@@ -23,7 +23,7 @@ import * as vite from "vite";
 
 import pkg from "./package.json" with { type: "json" };
 // Replace dev mode paths
-pkg.main = "src/main.html";
+pkg.main = "index.html";
 pkg.window.icon = "images/rf_icon.png";
 delete pkg["node-remote"];
 
@@ -547,14 +547,14 @@ function cordova_resources() {
 
 function cordova_include_www() {
   return gulp
-    .src(`${context.appdir}/www/src/main.html`)
+    .src(`${context.appdir}/www/index.html`)
     .pipe(
       replace(
         "<!-- CORDOVA_INCLUDE cordova.js -->",
         '<script type="text/javascript" src="/cordova.js"></script>',
       ),
     )
-    .pipe(gulp.dest(`${context.appdir}/www/src/`));
+    .pipe(gulp.dest(`${context.appdir}/www/`));
 }
 
 function cordova_copy_src() {

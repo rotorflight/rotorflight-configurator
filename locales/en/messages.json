@@ -28,6 +28,18 @@
     "genericRange": {
         "message": "Range"
     },
+    "hours": {
+        "message": "{{count}} hour"
+    },
+    "hours_other": {
+        "message": "{{count}} hours"
+    },
+    "minutes": {
+        "message": "{{count}} minute"
+    },
+    "minutes_other": {
+        "message": "{{count}} minutes"
+    },
     "axisROLL": {
         "message": "ROLL",
         "description": "Roll axis in capital letters"
@@ -1345,6 +1357,9 @@
     "configuration.flight_stats.distance.label": {
         "message": "Distance"
     },
+    "flight_stats.duration.value": {
+        "message": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })"
+    },
     "beeper_GYRO_CALIBRATED": {
         "message": "Beeps when gyro has been calibrated"
     },
@@ -1531,6 +1546,9 @@
     },
     "portsFunction_TELEMETRY_SMARTPORT": {
         "message": "Telemetry: FrSky SmartPort"
+    },
+    "portsFunction_SPORT_MASTER": {
+        "message": "S.PORT Master"
     },
     "portsFunction_TELEMETRY_IBUS": {
         "message": "Telemetry: FlySky iBUS"
@@ -1725,6 +1743,12 @@
     "receiverSettingsThrottleChannel": {
         "message": "Throttle Channel"
     },
+    "receiver.channel_range.automatic_throttle_range.label": {
+        "message": "Automatic Throttle Range"
+    },
+    "receiver.channel_range.automatic_throttle_range.help": {
+        "message": "Calculates a suitable throttle range from the Stick Center and Stick Travel values."
+    },
     "receiverProtocol": {
         "message": "Receiver Protocol"
     },
@@ -1774,7 +1798,7 @@
         "message": "The throttle channel value where throttle is considered 0%."
     },
     "receiverHelpZeroThrottle2": {
-        "message": "<p>The throttle channel value where throttle is considered 0%. Set to 0 to set automatically.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
+        "message": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
     },
     "receiverFullThrottle": {
         "message": "Max Throttle - 100%"
@@ -1783,7 +1807,7 @@
         "message": "The throttle channel value where throttle is considered 100%."
     },
     "receiverHelpFullThrottle2": {
-        "message": "The throttle channel value where throttle is considered 100%. Set to 0 to set automatically."
+        "message": "The throttle channel value where throttle is considered 100%."
     },
     "receiverCyclicDeadband": {
         "message": "Cyclic Deadband"
@@ -4176,6 +4200,12 @@
     },
     "firmwareFlasherFullChipEraseDescription": {
         "message": "Wipes all configuration data currently stored on the board."
+    },
+    "firmwareFlasherManualPort": {
+        "message": "Port"
+    },
+    "firmwareFlasherBaudRate": {
+        "message": "Baud Rate"
     },
     "firmware_flasher.show_legacy_targets.label": {
         "message": "Show Legacy Targets"

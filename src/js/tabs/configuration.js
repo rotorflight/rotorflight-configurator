@@ -1,6 +1,7 @@
 import semver from "semver";
 
 import { API_VERSION_12_7, API_VERSION_12_9 } from "@/js/configurator.svelte";
+import * as flightStats from "@/js/flight-stats.js";
 import { getIntegerValue } from "@/js/main.js";
 import { Model } from "@/js/model.js";
 import { reinitialiseConnection } from "@/js/serial_backend.js";
@@ -268,6 +269,7 @@ tab.initialize = function (callback) {
         { id: 128,   excl: 128,     name: 'BLACKBOX',             type: portTypes.BLACKBOX },
         { id: 262144,excl: 262144,  name: 'SBUS_OUT',             type: portTypes.AUTO },
         { id: 524288,excl: 524288,  name: 'FBUS_OUT',             type: portTypes.AUTO },
+        { id: 1048576, excl: 1048576, name: 'SPORT_MASTER',       type: portTypes.AUTO },
         { id: 4,     excl: 4668,    name: 'TELEMETRY_FRSKY',      type: portTypes.TELEM },
         { id: 32,    excl: 4668,    name: 'TELEMETRY_SMARTPORT',  type: portTypes.TELEM },
         { id: 4096,  excl: 4668,    name: 'TELEMETRY_IBUS',       type: portTypes.TELEM },
@@ -474,7 +476,8 @@ tab.initialize = function (callback) {
                 const funcName = i18n.getMessage('portsFunction_' + func.name);
                     if (
                         (func.name !== 'SBUS_OUT' || semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_7)) &&
-                        (func.name !== 'FBUS_OUT' || semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9))
+                        (func.name !== 'FBUS_OUT' || semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) &&
+                        (func.name !== 'SPORT_MASTER' || semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9))
                     ) {
                     funcElement.append(`<option value="${func.id}">${funcName}</option>`);
                 }
@@ -643,13 +646,9 @@ tab.initialize = function (callback) {
             .trigger('change');
 
 
-        const flightTimeFormatter = new Intl.DurationFormat(i18n.getCurrentLocale(), { style: "short" });
         function updateFlightStats() {
             $('#flight-stats-count').text(FC.FLIGHT_STATS.stats_total_flights);
-            $('#flight-stats-time').text(flightTimeFormatter.format({
-                hours: Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60 / 60),
-                minutes: Math.floor(FC.FLIGHT_STATS.stats_total_time_s / 60 % 60),
-            }));
+            $('#flight-stats-time').text(flightStats.getDuration());
             $('#flight-stats-distance').text(`${FC.FLIGHT_STATS.stats_total_dist_m.toLocaleString()} m`);
         }
         updateFlightStats();
