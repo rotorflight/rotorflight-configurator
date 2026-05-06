@@ -4,6 +4,7 @@ import {
     API_VERSION_12_7,
     API_VERSION_12_8,
     API_VERSION_12_9,
+    API_VERSION_12_10,
 } from "@/js/configurator.svelte.js";
 
 // Used for LED_STRIP
@@ -346,6 +347,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     }
                     FC.BATTERY_CONFIG.capacities = capacities;
                 }
+                FC.BATTERY_CONFIG.smartFuelSource = data.remaining() >= 1 ? data.readU8() : 0;
                 break;
             }
 
@@ -1988,6 +1990,9 @@ MspHelper.prototype.crunch = function(code) {
                 for (let i = 0; i < 6; i++) {
                     buffer.push16(FC.BATTERY_CONFIG.capacities[i]);
                 }
+            }
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+                buffer.push8(FC.BATTERY_CONFIG.smartFuelSource || 0);
             }
             break;
         }

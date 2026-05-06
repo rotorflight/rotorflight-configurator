@@ -113,6 +113,7 @@ export function applyVirtualConfig() {
     capacity: 10000,
     voltageMeterSource: 1,
     currentMeterSource: 1,
+    smartFuelSource: 0,
   });
 
   Object.assign(FC.BATTERY_STATE, {

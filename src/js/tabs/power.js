@@ -1,4 +1,4 @@
-import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
+import { API_VERSION_12_9, API_VERSION_12_10 } from "@/js/configurator.svelte.js";
 import semver from "semver";
 
 const tab = {
@@ -28,6 +28,14 @@ const tab = {
             'Adc',
             'Esc',
             ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) ? ['Fbus'] : []),
+        ];
+    },
+
+    getSmartFuelSourceTypes() {
+        return [
+            'None',
+            'Current',
+            'Voltage',
         ];
     },
 };
@@ -277,16 +285,28 @@ tab.initialize = function (callback) {
 
         const batteryMeterType_e = elementBatteryConfiguration.find('select.batterymetersource');
         const currentMeterType_e = elementBatteryConfiguration.find('select.currentmetersource');
+        const smartFuelSource_e = elementBatteryConfiguration.find('select.smartfuelsource');
 
         self.getBatteryMeterTypes().forEach((item, index) => {
             const text = i18n.getMessage('powerBatteryVoltageMeterType' + item);
             batteryMeterType_e.append(`<option value="${index}">${text}</option>`);
         });
 
-        self.getBatteryMeterTypes().forEach((item, index) => {
+        self.getCurrentMeterTypes().forEach((item, index) => {
             const text = i18n.getMessage('powerBatteryCurrentMeterType' + item);
             currentMeterType_e.append(`<option value="${index}">${text}</option>`);
         });
+
+        const smartFuelSupported = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10);
+
+        if (smartFuelSupported) {
+            self.getSmartFuelSourceTypes().forEach((item, index) => {
+                const text = i18n.getMessage('powerSmartFuelSourceType' + item);
+                smartFuelSource_e.append(`<option value="${index}">${text}</option>`);
+            });
+        } else {
+            elementBatteryConfiguration.find('.smartFuelSource').hide();
+        }
 
         updateDisplay();
 
@@ -307,6 +327,15 @@ tab.initialize = function (callback) {
                 sourceschanged = true;
                 setDirty(true);
             });
+
+        if (smartFuelSupported) {
+            smartFuelSource_e
+                .val(FC.BATTERY_CONFIG.smartFuelSource).change()
+                .change(function () {
+                    FC.BATTERY_CONFIG.smartFuelSource = parseInt($(this).val());
+                    setDirty(true);
+                });
+        }
 
         function get_slow_data() {
             MSP.send_message(MSPCodes.MSP_VOLTAGE_METERS, false, false, function () {
