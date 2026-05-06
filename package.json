@@ -8,10 +8,6 @@
   "scripts": {
     "lint": "eslint src \"./*.mjs\"",
     "lint:fix": "eslint --fix src \"./*.mjs\"",
-    "setup:win": ".\\tools\\windows\\dev.cmd setup",
-    "start:win": ".\\tools\\windows\\dev.cmd start",
-    "start:win:reset-cache": ".\\tools\\windows\\dev.cmd start-reset",
-    "up:win": ".\\tools\\windows\\dev.cmd up",
     "start": "concurrently --kill-others \"pnpm vite\" \"pnpm gulp dev_client\"",
     "prepare": "husky || true"
   },
