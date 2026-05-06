@@ -224,8 +224,12 @@ tab.initialize = function (callback) {
         const templateBatteryConfiguration = $('#tab-power-templates .battery-configuration');
         const destinationBatteryConfiguration = $('.tab-power .battery .configuration');
         const elementBatteryConfiguration = templateBatteryConfiguration.clone();
+        const templateSmartFuelConfiguration = $('#tab-power-templates .smartfuel-configuration');
+        const destinationSmartFuelConfiguration = $('.tab-power .smartfuel .configuration');
+        const elementSmartFuelConfiguration = templateSmartFuelConfiguration.clone();
 
         destinationBatteryConfiguration.append(elementBatteryConfiguration);
+        destinationSmartFuelConfiguration.append(elementSmartFuelConfiguration);
 
         elementBatteryConfiguration.find('input[name="mincellvoltage"]')
             .val(FC.BATTERY_CONFIG.vbatmincellvoltage).change()
@@ -300,7 +304,7 @@ tab.initialize = function (callback) {
 
         const batteryMeterType_e = elementBatteryConfiguration.find('select.batterymetersource');
         const currentMeterType_e = elementBatteryConfiguration.find('select.currentmetersource');
-        const smartFuelSource_e = elementBatteryConfiguration.find('select.smartfuelsource');
+        const smartFuelSource_e = elementSmartFuelConfiguration.find('select.smartfuelsource');
 
         self.getBatteryMeterTypes().forEach((item, index) => {
             const text = i18n.getMessage('powerBatteryVoltageMeterType' + item);
@@ -320,14 +324,14 @@ tab.initialize = function (callback) {
                 smartFuelSource_e.append(`<option value="${index}">${text}</option>`);
             });
         } else {
-            elementBatteryConfiguration.find('.smartfuel-fieldset').hide();
+            $('.tab-power .boxSmartFuelConfiguration').hide();
         }
 
         function updateSmartFuelTuningVisibility() {
             const smartFuelSource = parseInt(smartFuelSource_e.val() || 0);
 
-            elementBatteryConfiguration.find('.smartFuelTuning').toggle(smartFuelSupported && smartFuelSource !== 0);
-            elementBatteryConfiguration.find('.smartFuelVoltageTuning').toggle(smartFuelSupported && smartFuelSource === 2);
+            elementSmartFuelConfiguration.find('.smartFuelTuning').toggle(smartFuelSupported && smartFuelSource !== 0);
+            elementSmartFuelConfiguration.find('.smartFuelVoltageTuning').toggle(smartFuelSupported && smartFuelSource === 2);
         }
 
         updateDisplay();
@@ -362,31 +366,31 @@ tab.initialize = function (callback) {
                     setDirty(true);
                 });
 
-            elementBatteryConfiguration.find('input[name="smartfuelstabilizedelay"]')
+            elementSmartFuelConfiguration.find('input[name="smartfuelstabilizedelay"]')
                 .val(FC.SMARTFUEL_CONFIG.stabilizeDelay / 1000)
                 .change(function () {
                     FC.SMARTFUEL_CONFIG.stabilizeDelay = Math.round(getFloatValue(this) * 1000);
                 });
 
-            elementBatteryConfiguration.find('input[name="smartfuelstablewindow"]')
+            elementSmartFuelConfiguration.find('input[name="smartfuelstablewindow"]')
                 .val(FC.SMARTFUEL_CONFIG.stableWindow / 100)
                 .change(function () {
                     FC.SMARTFUEL_CONFIG.stableWindow = Math.round(getFloatValue(this) * 100);
                 });
 
-            elementBatteryConfiguration.find('input[name="smartfuelvoltagefalllimit"]')
+            elementSmartFuelConfiguration.find('input[name="smartfuelvoltagefalllimit"]')
                 .val(FC.SMARTFUEL_CONFIG.voltageFallLimit / 100)
                 .change(function () {
                     FC.SMARTFUEL_CONFIG.voltageFallLimit = Math.round(getFloatValue(this) * 100);
                 });
 
-            elementBatteryConfiguration.find('input[name="smartfuelfueldroprate"]')
+            elementSmartFuelConfiguration.find('input[name="smartfuelfueldroprate"]')
                 .val(FC.SMARTFUEL_CONFIG.fuelDropRate / 10)
                 .change(function () {
                     FC.SMARTFUEL_CONFIG.fuelDropRate = Math.round(getFloatValue(this) * 10);
                 });
 
-            elementBatteryConfiguration.find('input[name="smartfuelsagmultiplier"]')
+            elementSmartFuelConfiguration.find('input[name="smartfuelsagmultiplier"]')
                 .val(FC.SMARTFUEL_CONFIG.sagMultiplier / 100)
                 .change(function () {
                     FC.SMARTFUEL_CONFIG.sagMultiplier = Math.round(getFloatValue(this) * 100);
