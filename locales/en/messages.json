@@ -5752,36 +5752,6 @@
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP Sensor"
     },
-    "powerSmartFuelHead": {
-        "message": "Smart Fuel"
-    },
-    "powerSmartFuelSource": {
-        "message": "Smart Fuel Source"
-    },
-    "powerSmartFuelSourceTypeNone": {
-        "message": "Off"
-    },
-    "powerSmartFuelSourceTypeCurrent": {
-        "message": "Current"
-    },
-    "powerSmartFuelSourceTypeVoltage": {
-        "message": "Voltage"
-    },
-    "powerSmartFuelStabilizeDelay": {
-        "message": "Smart Fuel Stabilize Delay (s)"
-    },
-    "powerSmartFuelStableWindow": {
-        "message": "Smart Fuel Stable Window (V)"
-    },
-    "powerSmartFuelVoltageFallLimit": {
-        "message": "Smart Fuel Voltage Fall Limit (V/s)"
-    },
-    "powerSmartFuelFuelDropRate": {
-        "message": "Smart Fuel Drop Rate (%/s)"
-    },
-    "powerSmartFuelSagMultiplier": {
-        "message": "Smart Fuel Sag Multiplier"
-    },
     "powerBatteryMinimumCellVoltage": {
         "message": "Minimum Cell Voltage"
     },
