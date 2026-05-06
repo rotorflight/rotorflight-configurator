@@ -67,6 +67,7 @@ class FlightController {
   SENSOR_CONFIG = $state();
   SENSOR_DATA = $state();
   SERIAL_CONFIG = $state();
+  SMARTFUEL_CONFIG = $state();
   SERVO_CONFIG = $state();
   SERVO_DATA = $state();
   SERVO_OVERRIDE = $state();
@@ -153,6 +154,15 @@ class FlightController {
       amperage:                   0,
       chargeLevel:                0,
       batteryProfile:             0,
+    };
+
+    this.SMARTFUEL_CONFIG = {
+      source:                     0,
+      stabilizeDelay:             1500,
+      stableWindow:               15,
+      voltageFallLimit:           5,
+      fuelDropRate:               10,
+      sagMultiplier:              70,
     };
 
     this.ANALOG = {

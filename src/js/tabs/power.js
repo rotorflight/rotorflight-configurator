@@ -8,6 +8,7 @@ const tab = {
     voltageMeterCount: 0,
     currentMeterCount: 0,
     BATTER_CONFIG_COPY: null,
+    SMARTFUEL_CONFIG_COPY: null,
     VOLTAGE_METER_CONFIGS_COPY: null,
     CURRENT_METER_CONFIGS_COPY: null,
     currentBatteryProfile: null,
@@ -38,6 +39,10 @@ const tab = {
             'Voltage',
         ];
     },
+
+    getSmartFuelConfigSource(smartFuelSource) {
+        return smartFuelSource === 2 ? 1 : 0;
+    },
 };
 
 tab.initialize = function (callback) {
@@ -65,6 +70,9 @@ tab.initialize = function (callback) {
         await MSP.promise(MSPCodes.MSP_VOLTAGE_METERS);
         await MSP.promise(MSPCodes.MSP_CURRENT_METERS);
         await MSP.promise(MSPCodes.MSP_BATTERY_CONFIG);
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+            await MSP.promise(MSPCodes.MSP2_SMARTFUEL_CONFIG);
+        }
         await MSP.promise(MSPCodes.MSP_VOLTAGE_METER_CONFIG);
         await MSP.promise(MSPCodes.MSP_CURRENT_METER_CONFIG);
 
@@ -72,7 +80,13 @@ tab.initialize = function (callback) {
     }
 
     async function send_data() {
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10) && FC.BATTERY_CONFIG.smartFuelSource !== 0) {
+            FC.SMARTFUEL_CONFIG.source = self.getSmartFuelConfigSource(FC.BATTERY_CONFIG.smartFuelSource);
+        }
         await MSP.promise(MSPCodes.MSP_SET_BATTERY_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_BATTERY_CONFIG));
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+            await MSP.promise(MSPCodes.MSP2_SET_SMARTFUEL_CONFIG, mspHelper.crunch(MSPCodes.MSP2_SET_SMARTFUEL_CONFIG));
+        }
         await mspHelper.sendVoltageConfig();
         await mspHelper.sendCurrentConfig();
     }
@@ -94,6 +108,7 @@ tab.initialize = function (callback) {
 
     function revertData() {
         FC.BATTERY_CONFIG = self.BATTER_CONFIG_COPY;
+        FC.SMARTFUEL_CONFIG = self.SMARTFUEL_CONFIG_COPY;
         FC.VOLTAGE_METER_CONFIGS = self.VOLTAGE_METER_CONFIGS_COPY;
         FC.CURRENT_METER_CONFIGS = self.CURRENT_METER_CONFIGS_COPY;
     }
@@ -306,6 +321,14 @@ tab.initialize = function (callback) {
             });
         } else {
             elementBatteryConfiguration.find('.smartFuelSource').hide();
+            elementBatteryConfiguration.find('.smartFuelTuning').hide();
+        }
+
+        function updateSmartFuelTuningVisibility() {
+            const smartFuelSource = parseInt(smartFuelSource_e.val() || 0);
+
+            elementBatteryConfiguration.find('.smartFuelTuning').toggle(smartFuelSupported && smartFuelSource !== 0);
+            elementBatteryConfiguration.find('.smartFuelVoltageTuning').toggle(smartFuelSupported && smartFuelSource === 2);
         }
 
         updateDisplay();
@@ -333,8 +356,44 @@ tab.initialize = function (callback) {
                 .val(FC.BATTERY_CONFIG.smartFuelSource).change()
                 .change(function () {
                     FC.BATTERY_CONFIG.smartFuelSource = parseInt($(this).val());
+                    if (FC.BATTERY_CONFIG.smartFuelSource !== 0) {
+                        FC.SMARTFUEL_CONFIG.source = self.getSmartFuelConfigSource(FC.BATTERY_CONFIG.smartFuelSource);
+                    }
+                    updateSmartFuelTuningVisibility();
                     setDirty(true);
                 });
+
+            elementBatteryConfiguration.find('input[name="smartfuelstabilizedelay"]')
+                .val(FC.SMARTFUEL_CONFIG.stabilizeDelay)
+                .change(function () {
+                    FC.SMARTFUEL_CONFIG.stabilizeDelay = getIntegerValue(this);
+                });
+
+            elementBatteryConfiguration.find('input[name="smartfuelstablewindow"]')
+                .val(FC.SMARTFUEL_CONFIG.stableWindow / 100)
+                .change(function () {
+                    FC.SMARTFUEL_CONFIG.stableWindow = Math.round(getFloatValue(this) * 100);
+                });
+
+            elementBatteryConfiguration.find('input[name="smartfuelvoltagefalllimit"]')
+                .val(FC.SMARTFUEL_CONFIG.voltageFallLimit / 100)
+                .change(function () {
+                    FC.SMARTFUEL_CONFIG.voltageFallLimit = Math.round(getFloatValue(this) * 100);
+                });
+
+            elementBatteryConfiguration.find('input[name="smartfuelfueldroprate"]')
+                .val(FC.SMARTFUEL_CONFIG.fuelDropRate / 10)
+                .change(function () {
+                    FC.SMARTFUEL_CONFIG.fuelDropRate = Math.round(getFloatValue(this) * 10);
+                });
+
+            elementBatteryConfiguration.find('input[name="smartfuelsagmultiplier"]')
+                .val(FC.SMARTFUEL_CONFIG.sagMultiplier / 100)
+                .change(function () {
+                    FC.SMARTFUEL_CONFIG.sagMultiplier = Math.round(getFloatValue(this) * 100);
+                });
+
+            updateSmartFuelTuningVisibility();
         }
 
         function get_slow_data() {
@@ -568,6 +627,7 @@ tab.initialize = function (callback) {
     function process_html() {
 
         self.BATTER_CONFIG_COPY = deep_copy(FC.BATTERY_CONFIG);
+        self.SMARTFUEL_CONFIG_COPY = deep_copy(FC.SMARTFUEL_CONFIG);
         self.VOLTAGE_METER_CONFIGS_COPY = deep_copy(FC.VOLTAGE_METER_CONFIGS);
         self.CURRENT_METER_CONFIGS_COPY = deep_copy(FC.CURRENT_METER_CONFIGS);
 
