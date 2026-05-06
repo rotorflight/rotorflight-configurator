@@ -2019,12 +2019,6 @@
     "receiverTelemetrySensor_BATTERY_CHARGE_LEVEL": {
         "message": "Battery Charge Level"
     },
-    "receiverTelemetrySensor_BATTERY_SMART_FUEL": {
-        "message": "Smart Fuel"
-    },
-    "receiverTelemetrySensor_BATTERY_SMART_CONSUMPTION": {
-        "message": "Smart Consumption"
-    },
     "receiverTelemetrySensor_BATTERY_CELL_COUNT": {
         "message": "Battery Cell Count"
     },
@@ -5757,6 +5751,18 @@
     },
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP Sensor"
+    },
+    "powerSmartFuelSource": {
+        "message": "Smart Fuel Source"
+    },
+    "powerSmartFuelSourceTypeNone": {
+        "message": "Off"
+    },
+    "powerSmartFuelSourceTypeCurrent": {
+        "message": "Current"
+    },
+    "powerSmartFuelSourceTypeVoltage": {
+        "message": "Voltage"
     },
     "powerBatteryMinimumCellVoltage": {
         "message": "Minimum Cell Voltage"
