@@ -25,6 +25,37 @@ Tutorials, documentation, and flight videos can be found on the [Rotorflight web
 Please download the latest version from [github](https://github.com/rotorflight/rotorflight-configurator/releases/).
 
 
+## Windows development helpers
+
+Use the single wrapper script from a terminal:
+
+```
+tools\\windows\\dev.cmd up
+```
+
+Or run subcommands:
+
+```
+tools\\windows\\dev.cmd setup
+tools\\windows\\dev.cmd start
+tools\\windows\\dev.cmd start-reset
+```
+
+Equivalent pnpm scripts:
+
+```
+pnpm run setup:win
+pnpm run start:win
+pnpm run up:win
+```
+
+If `dev_client` fails with a corrupted NW.js cache archive, run:
+
+```
+pnpm run start:win:reset-cache
+```
+
+
 ## Features
 
 Rotorflight has many features:
