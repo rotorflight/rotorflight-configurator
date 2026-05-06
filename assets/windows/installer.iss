@@ -22,6 +22,7 @@
 [CustomMessages]
 AppName=rotorflight-configurator
 LaunchProgram=Start {#ApplicationName}
+UninstallError=Error uninstalling Configurator %1.
 
 [Files]
 Source: "{#SourcePath}\*"; DestDir: "{app}"; Flags: recursesubdirs
@@ -38,29 +39,28 @@ Name: "{group}\Uninstall {#ApplicationName}"; Filename: "{uninstallexe}"; Check:
 
 [Languages]
 ; English default, it must be first
-Name: "en"; MessagesFile: "compiler:Default.isl"
-; Official languages
-Name: "ca"; MessagesFile: "compiler:Languages\Catalan.isl"
-Name: "de"; MessagesFile: "compiler:Languages\German.isl"
-Name: "es"; MessagesFile: "compiler:Languages\Spanish.isl"
-Name: "fr"; MessagesFile: "compiler:Languages\French.isl"
-Name: "it"; MessagesFile: "compiler:Languages\Italian.isl"
-Name: "ja"; MessagesFile: "compiler:Languages\Japanese.isl"
-Name: "nl"; MessagesFile: "compiler:Languages\Dutch.isl"
-Name: "pt"; MessagesFile: "compiler:Languages\Portuguese.isl"
-Name: "pl"; MessagesFile: "compiler:Languages\Polish.isl"
-Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
-; Not official. Sometimes not updated to latest version (strings missing)
-Name: "ga"; MessagesFile: "unofficial_inno_languages\Galician.isl"
-Name: "eu"; MessagesFile: "unofficial_inno_languages\Basque.isl"
-Name: "hr"; MessagesFile: "unofficial_inno_languages\Croatian.isl"
-Name: "hu"; MessagesFile: "unofficial_inno_languages\Hungarian.isl"
-Name: "id"; MessagesFile: "unofficial_inno_languages\Indonesian.isl"
-Name: "ko"; MessagesFile: "unofficial_inno_languages\Korean.isl"
-Name: "lv"; MessagesFile: "unofficial_inno_languages\Latvian.isl"
-Name: "sv"; MessagesFile: "unofficial_inno_languages\Swedish.isl"
-Name: "zh_CN"; MessagesFile: "unofficial_inno_languages\ChineseSimplified.isl"
-Name: "zh_TW"; MessagesFile: "unofficial_inno_languages\ChineseTraditional.isl"
+Name: "en"; MessagesFile: "..\..\assets\windows\languages\Default.isl"
+; Official languages and local custom message copies
+Name: "ca"; MessagesFile: "..\..\assets\windows\languages\Catalan.isl"
+Name: "de"; MessagesFile: "..\..\assets\windows\languages\German.isl"
+Name: "es"; MessagesFile: "..\..\assets\windows\languages\Spanish.isl"
+Name: "fr"; MessagesFile: "..\..\assets\windows\languages\French.isl"
+Name: "it"; MessagesFile: "..\..\assets\windows\languages\Italian.isl"
+Name: "ja"; MessagesFile: "..\..\assets\windows\languages\Japanese.isl"
+Name: "nl"; MessagesFile: "..\..\assets\windows\languages\Dutch.isl"
+Name: "pt"; MessagesFile: "..\..\assets\windows\languages\Portuguese.isl"
+Name: "pl"; MessagesFile: "..\..\assets\windows\languages\Polish.isl"
+Name: "ru"; MessagesFile: "..\..\assets\windows\languages\Russian.isl"
+Name: "ga"; MessagesFile: "..\..\assets\windows\languages\Galician.isl"
+Name: "eu"; MessagesFile: "..\..\assets\windows\languages\Basque.isl"
+Name: "hr"; MessagesFile: "..\..\assets\windows\languages\Croatian.isl"
+Name: "hu"; MessagesFile: "..\..\assets\windows\languages\Hungarian.isl"
+Name: "id"; MessagesFile: "..\..\assets\windows\languages\Indonesian.isl"
+Name: "ko"; MessagesFile: "..\..\assets\windows\languages\Korean.isl"
+Name: "lv"; MessagesFile: "..\..\assets\windows\languages\Latvian.isl"
+Name: "sv"; MessagesFile: "..\..\assets\windows\languages\Swedish.isl"
+Name: "zh_CN"; MessagesFile: "..\..\assets\windows\languages\ChineseSimplified.isl"
+Name: "zh_TW"; MessagesFile: "..\..\assets\windows\languages\ChineseTraditional.isl"
 ; Not available
 ; pt_BR (Portuguese Brasileiro)
 
@@ -123,7 +123,7 @@ begin
         if not Exec('>', UninstPath, '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
         begin
             // Result := False; // Set to False to abort the installation
-            MsgBox('Error uninstalling Configurator ' + SysErrorMessage(ResultCode) + '.', mbError, MB_OK);
+            MsgBox(ExpandConstant('{cm:UninstallError, ' + SysErrorMessage(ResultCode) + '}'), mbError, MB_OK);
         end;
     end;
 end;
@@ -203,9 +203,9 @@ begin
   STMDFULicensePage :=
     CreateOutputMsgMemoPage(
       wpSelectTasks,
-      'STM32 DFU Driver License',
-      'Review and accept the STMicroelectronics driver license.',
-      'The STM32 DFU driver is optional. To install it, you must accept the STMicroelectronics driver license.',
+      SetupMessage(msgWizardLicense),
+      SetupMessage(msgLicenseLabel),
+      SetupMessage(msgLicenseLabel3),
       ''
     );
 
@@ -222,9 +222,9 @@ begin
 
   // captions
   STMDFULicenseAcceptedRadio.Caption :=
-    'I accept the STMicroelectronics driver license';
+    SetupMessage(msgLicenseAccepted);
   STMDFULicenseNotAcceptedRadio.Caption :=
-    'I do not accept the STMicroelectronics driver license';
+    SetupMessage(msgLicenseNotAccepted);
 
   // default state
   STMDFULicenseNotAcceptedRadio.Checked := True;
@@ -262,7 +262,7 @@ begin
     if not STMDFULicenseAcceptedState then
     begin
       MsgBox(
-        'You must accept the STMicroelectronics driver license to install the STM32 DFU driver.',
+        SetupMessage(msgCannotContinue),
         mbError,
         MB_OK
       );
@@ -272,4 +272,4 @@ begin
 end;
 
 [Tasks]
-Name: "install_stm_dfu"; Description: "Install STM32 DFU driver for Windows flashing (optional)"; Flags: unchecked
+Name: "install_stm_dfu"; Description: "{cm:STDFUDriverTaskDesc}"; Flags: unchecked
