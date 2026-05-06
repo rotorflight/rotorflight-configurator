@@ -320,8 +320,7 @@ tab.initialize = function (callback) {
                 smartFuelSource_e.append(`<option value="${index}">${text}</option>`);
             });
         } else {
-            elementBatteryConfiguration.find('.smartFuelSource').hide();
-            elementBatteryConfiguration.find('.smartFuelTuning').hide();
+            elementBatteryConfiguration.find('.smartfuel-fieldset').hide();
         }
 
         function updateSmartFuelTuningVisibility() {
@@ -364,9 +363,9 @@ tab.initialize = function (callback) {
                 });
 
             elementBatteryConfiguration.find('input[name="smartfuelstabilizedelay"]')
-                .val(FC.SMARTFUEL_CONFIG.stabilizeDelay)
+                .val(FC.SMARTFUEL_CONFIG.stabilizeDelay / 1000)
                 .change(function () {
-                    FC.SMARTFUEL_CONFIG.stabilizeDelay = getIntegerValue(this);
+                    FC.SMARTFUEL_CONFIG.stabilizeDelay = Math.round(getFloatValue(this) * 1000);
                 });
 
             elementBatteryConfiguration.find('input[name="smartfuelstablewindow"]')

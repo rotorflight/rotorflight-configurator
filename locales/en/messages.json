@@ -5752,6 +5752,9 @@
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP Sensor"
     },
+    "powerSmartFuelHead": {
+        "message": "Smart Fuel"
+    },
     "powerSmartFuelSource": {
         "message": "Smart Fuel Source"
     },
@@ -5765,7 +5768,7 @@
         "message": "Voltage"
     },
     "powerSmartFuelStabilizeDelay": {
-        "message": "Smart Fuel Stabilize Delay (ms)"
+        "message": "Smart Fuel Stabilize Delay (s)"
     },
     "powerSmartFuelStableWindow": {
         "message": "Smart Fuel Stable Window (V)"
