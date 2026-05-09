@@ -209,89 +209,105 @@ export function parseRpmFilterConfig2(config) {
     const bank = config[axis];
 
     for (let i = 0; i < bank.length; i++) {
-      const notch = bank[i];
+      const { rpm_source, notch_q } = bank[i];
 
       // ignore empty notch
-      if (notch.rpm_source === 0) {
+      if (rpm_source === 0) {
         continue;
       }
 
       // duplicate rpm source
-      if (banks[axis][notch.rpm_source]) {
+      if (banks[axis][rpm_source]) {
         return null;
       }
 
       // unrecognised rpm source
-      if (!RPM_SOURCE.includes(notch.rpm_source)) {
+      if (!RPM_SOURCE.includes(rpm_source)) {
         return null;
       }
 
       // Q outside configurable range
-      if (notch.notch_q < MIN_Q || notch.notch_q > MAX_Q) {
+      if (notch_q < MIN_Q || notch_q > MAX_Q) {
         return null;
       }
 
-      // single or triple notch
-      if (notch.notch_center === 0) {
-        let notch_type = NOTCH_TYPE.SINGLE;
-
-        // look ahead for triple notch
-        const left = bank[i + 1];
-        const right = bank[i + 2];
-        const center = getTripleCenter(notch.notch_q / 10);
-        if (
-          left &&
-          right &&
-          left.rpm_source === notch.rpm_source &&
-          left.notch_q === notch.notch_q &&
-          left.notch_center === -center &&
-          right.rpm_source === notch.rpm_source &&
-          right.notch_q === notch.notch_q &&
-          right.notch_center === center
-        ) {
-          notch_type = NOTCH_TYPE.TRIPLE;
-          i += 2;
+      const notches = [];
+      for (let j = i; j < bank.length; j++) {
+        if (rpm_source === bank[j].rpm_source && notch_q === bank[j].notch_q) {
+          notches.push(bank[j]);
+        } else {
+          break;
         }
-
-        banks[axis][notch.rpm_source] = {
-          enabled: true,
-          type: notch_type,
-          value: notch.notch_q / 10,
-        };
-
-        continue;
       }
 
-      // double notch
-      if (
-        MULTI_NOTCH_SOURCE.includes(notch.rpm_source) &&
-        notch.notch_center === getDoubleCenter(notch.notch_q / 10)
-      ) {
-        // look ahead for pair
-        const next = bank[i + 1];
+      switch (notches.length) {
+        case 1: {
+          banks[axis][rpm_source] = {
+            enabled: true,
+            type: NOTCH_TYPE.SINGLE,
+            value: notch_q / 10,
+          };
 
-        // check pair is valid
-        if (
-          !next ||
-          next.rpm_source !== notch.rpm_source ||
-          next.notch_q !== notch.notch_q ||
-          next.notch_center !== -notch.notch_center
-        ) {
+          break;
+        }
+
+        case 2: {
+          if (
+            !MULTI_NOTCH_SOURCE.includes(rpm_source) ||
+            Math.abs(notches[0].notch_center) !==
+              getDoubleCenter(notch_q / 10) ||
+            notches[0].notch_center !== -notches[1].notch_center
+          ) {
+            return null;
+          }
+
+          banks[axis][rpm_source] = {
+            enabled: true,
+            type: NOTCH_TYPE.DOUBLE,
+            value: notch_q / 10,
+          };
+
+          break;
+        }
+
+        case 3: {
+          if (!MULTI_NOTCH_SOURCE.includes(rpm_source)) {
+            return null;
+          }
+
+          let center = false;
+          let left = false;
+          let right = false;
+
+          for (const n of notches) {
+            if (n.notch_center === 0) {
+              center = true;
+            } else if (n.notch_center === getTripleCenter(n.notch_q / 10)) {
+              right = true;
+            } else if (n.notch_center === -getTripleCenter(n.notch_q / 10)) {
+              left = true;
+            }
+          }
+
+          if (!center || !left || !right) {
+            return null;
+          }
+
+          banks[axis][rpm_source] = {
+            enabled: true,
+            type: NOTCH_TYPE.TRIPLE,
+            value: notch_q / 10,
+          };
+
+          break;
+        }
+
+        default: {
           return null;
         }
-
-        // add notch
-        banks[axis][notch.rpm_source] = {
-          enabled: true,
-          type: NOTCH_TYPE.DOUBLE,
-          value: notch.notch_q / 10,
-        };
-
-        i++;
-        continue;
       }
 
-      return null;
+      i += notches.length - 1;
     }
 
     // add disabled notches

@@ -218,7 +218,7 @@ export class Source {
     console.log("loading the source panel " + this.#domId);
     await new Promise((resolve) => {
       console.log("Loading source panel HTML " + this.#domId);
-      this.#dom.divWrapper.load("./tabs/presets/source_panel.html", resolve);
+      this.#dom.divWrapper.load("/src/tabs/presets/source_panel.html", resolve);
     });
     this.#prepareDom();
 
