@@ -136,7 +136,6 @@ class FlightController {
       cellCount:                  0,
       voltageMeterSource:         0,
       currentMeterSource:         0,
-      smartFuelSource:            0,
       vbatmincellvoltage:         0,
       vbatmaxcellvoltage:         0,
       vbatfullcellvoltage:        0,

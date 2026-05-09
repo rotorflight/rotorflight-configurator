@@ -1,4 +1,4 @@
-import { API_VERSION_12_9, API_VERSION_12_10 } from "@/js/configurator.svelte.js";
+import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
 import semver from "semver";
 
 const tab = {
@@ -39,10 +39,6 @@ const tab = {
             'Voltage',
         ];
     },
-
-    getSmartFuelConfigSource(smartFuelSource) {
-        return smartFuelSource === 2 ? 1 : 0;
-    },
 };
 
 tab.initialize = function (callback) {
@@ -70,7 +66,7 @@ tab.initialize = function (callback) {
         await MSP.promise(MSPCodes.MSP_VOLTAGE_METERS);
         await MSP.promise(MSPCodes.MSP_CURRENT_METERS);
         await MSP.promise(MSPCodes.MSP_BATTERY_CONFIG);
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
             await MSP.promise(MSPCodes.MSP2_SMARTFUEL_CONFIG);
         }
         await MSP.promise(MSPCodes.MSP_VOLTAGE_METER_CONFIG);
@@ -80,11 +76,8 @@ tab.initialize = function (callback) {
     }
 
     async function send_data() {
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10) && FC.BATTERY_CONFIG.smartFuelSource !== 0) {
-            FC.SMARTFUEL_CONFIG.source = self.getSmartFuelConfigSource(FC.BATTERY_CONFIG.smartFuelSource);
-        }
         await MSP.promise(MSPCodes.MSP_SET_BATTERY_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_BATTERY_CONFIG));
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
             await MSP.promise(MSPCodes.MSP2_SET_SMARTFUEL_CONFIG, mspHelper.crunch(MSPCodes.MSP2_SET_SMARTFUEL_CONFIG));
         }
         await mspHelper.sendVoltageConfig();
@@ -316,7 +309,7 @@ tab.initialize = function (callback) {
             currentMeterType_e.append(`<option value="${index}">${text}</option>`);
         });
 
-        const smartFuelSupported = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10);
+        const smartFuelSupported = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9);
 
         if (smartFuelSupported) {
             self.getSmartFuelSourceTypes().forEach((item, index) => {
@@ -356,12 +349,9 @@ tab.initialize = function (callback) {
 
         if (smartFuelSupported) {
             smartFuelSource_e
-                .val(FC.BATTERY_CONFIG.smartFuelSource).change()
+                .val(FC.SMARTFUEL_CONFIG.source).change()
                 .change(function () {
-                    FC.BATTERY_CONFIG.smartFuelSource = parseInt($(this).val());
-                    if (FC.BATTERY_CONFIG.smartFuelSource !== 0) {
-                        FC.SMARTFUEL_CONFIG.source = self.getSmartFuelConfigSource(FC.BATTERY_CONFIG.smartFuelSource);
-                    }
+                    FC.SMARTFUEL_CONFIG.source = parseInt($(this).val());
                     updateSmartFuelTuningVisibility();
                     setDirty(true);
                 });
