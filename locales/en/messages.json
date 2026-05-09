@@ -1547,6 +1547,9 @@
     "portsFunction_TELEMETRY_SMARTPORT": {
         "message": "Telemetry: FrSky SmartPort"
     },
+    "portsFunction_SPORT_MASTER": {
+        "message": "S.PORT Master"
+    },
     "portsFunction_TELEMETRY_IBUS": {
         "message": "Telemetry: FlySky iBUS"
     },
@@ -1740,6 +1743,12 @@
     "receiverSettingsThrottleChannel": {
         "message": "Throttle Channel"
     },
+    "receiver.channel_range.automatic_throttle_range.label": {
+        "message": "Automatic Throttle Range"
+    },
+    "receiver.channel_range.automatic_throttle_range.help": {
+        "message": "Calculates a suitable throttle range from the Stick Center and Stick Travel values."
+    },
     "receiverProtocol": {
         "message": "Receiver Protocol"
     },
@@ -1789,7 +1798,7 @@
         "message": "The throttle channel value where throttle is considered 0%."
     },
     "receiverHelpZeroThrottle2": {
-        "message": "<p>The throttle channel value where throttle is considered 0%. Set to 0 to set automatically.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
+        "message": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
     },
     "receiverFullThrottle": {
         "message": "Max Throttle - 100%"
@@ -1798,7 +1807,7 @@
         "message": "The throttle channel value where throttle is considered 100%."
     },
     "receiverHelpFullThrottle2": {
-        "message": "The throttle channel value where throttle is considered 100%. Set to 0 to set automatically."
+        "message": "The throttle channel value where throttle is considered 100%."
     },
     "receiverCyclicDeadband": {
         "message": "Cyclic Deadband"
@@ -2009,12 +2018,6 @@
     },
     "receiverTelemetrySensor_BATTERY_CHARGE_LEVEL": {
         "message": "Battery Charge Level"
-    },
-    "receiverTelemetrySensor_BATTERY_SMART_FUEL": {
-        "message": "Smart Fuel"
-    },
-    "receiverTelemetrySensor_BATTERY_SMART_CONSUMPTION": {
-        "message": "Smart Consumption"
     },
     "receiverTelemetrySensor_BATTERY_CELL_COUNT": {
         "message": "Battery Cell Count"
@@ -5748,6 +5751,36 @@
     },
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP Sensor"
+    },
+    "powerSmartFuelHead": {
+        "message": "Smart Fuel"
+    },
+    "powerSmartFuelSource": {
+        "message": "Smart Fuel Source"
+    },
+    "powerSmartFuelSourceTypeNone": {
+        "message": "Off"
+    },
+    "powerSmartFuelSourceTypeCurrent": {
+        "message": "Current"
+    },
+    "powerSmartFuelSourceTypeVoltage": {
+        "message": "Voltage"
+    },
+    "powerSmartFuelStabilizeDelay": {
+        "message": "Smart Fuel Stabilize Delay (s)"
+    },
+    "powerSmartFuelStableWindow": {
+        "message": "Smart Fuel Stable Window (V)"
+    },
+    "powerSmartFuelVoltageFallLimit": {
+        "message": "Smart Fuel Voltage Fall Limit (V/s)"
+    },
+    "powerSmartFuelFuelDropRate": {
+        "message": "Smart Fuel Drop Rate (%/s)"
+    },
+    "powerSmartFuelSagMultiplier": {
+        "message": "Smart Fuel Sag Multiplier"
     },
     "powerBatteryMinimumCellVoltage": {
         "message": "Minimum Cell Voltage"

@@ -1,9 +1,6 @@
 import semver from "semver";
 
-import {
-  API_VERSION_12_9,
-  API_VERSION_12_10,
-} from "@/js/configurator.svelte.js";
+import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
 
 export function getNativeCrsfSensors() {
   return [
@@ -31,10 +28,6 @@ export function getCustomCrsfSensors() {
         { name: "BATTERY_CURRENT" },
         { name: "BATTERY_CONSUMPTION" },
         { name: "BATTERY_CHARGE_LEVEL" },
-        { name: "BATTERY_SMART_FUEL" },
-        ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
-          ? [{ name: "BATTERY_SMART_CONSUMPTION" }]
-          : []),
         { name: "BATTERY_CELL_COUNT" },
         { name: "BATTERY_CELL_VOLTAGE" },
       ],

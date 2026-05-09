@@ -33,6 +33,18 @@
                         </table>
                     </div>
                 </div>
+                <div class="gui_box grey boxSmartFuelConfiguration">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="powerSmartFuelHead"></div>
+                    </div>
+                    <div class="spacer_box smartfuel">
+                        <table border="0" cellpadding="0" cellspacing="0" class="cf_table">
+                            <tbody class="smartfuel-config">
+                                <td class="configuration" rowspan="4"></td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <div class="grid-col col6">
@@ -132,7 +144,7 @@
                 <span i18n="powerBatteryVoltageMeterSource"></span>
             </label>
         </div>
-        <div class="select currentMonitoring bottom_border">
+        <div class="select currentMonitoring">
             <label>
                 <select class="currentmetersource"><!-- list generated here --></select>
                 <span i18n="powerBatteryCurrentMeterSource"></span>
@@ -179,6 +191,45 @@
             <legend i18n="powerBatteryCapacity"></legend>
             <div class="battery-capacities"></div>
         </fieldset>
+    </div>
+
+    <div class="smartfuel-configuration">
+        <div class="select smartFuelSource">
+            <label>
+                <select class="smartfuelsource"><!-- list generated here --></select>
+                <span i18n="powerSmartFuelSource"></span>
+            </label>
+        </div>
+        <div class="number smartFuelTuning">
+            <label>
+                <input type="number" name="smartfuelstabilizedelay" step="0.1" min="0" max="10" />
+                <span i18n="powerSmartFuelStabilizeDelay"></span>
+            </label>
+        </div>
+        <div class="number smartFuelTuning">
+            <label>
+                <input type="number" name="smartfuelstablewindow" step="0.01" min="0" max="1" />
+                <span i18n="powerSmartFuelStableWindow"></span>
+            </label>
+        </div>
+        <div class="number smartFuelTuning smartFuelVoltageTuning">
+            <label>
+                <input type="number" name="smartfuelvoltagefalllimit" step="0.01" min="0" max="1" />
+                <span i18n="powerSmartFuelVoltageFallLimit"></span>
+            </label>
+        </div>
+        <div class="number smartFuelTuning smartFuelVoltageTuning">
+            <label>
+                <input type="number" name="smartfuelfueldroprate" step="0.1" min="0" max="50" />
+                <span i18n="powerSmartFuelFuelDropRate"></span>
+            </label>
+        </div>
+        <div class="number smartFuelTuning smartFuelVoltageTuning">
+            <label>
+                <input type="number" name="smartfuelsagmultiplier" step="0.01" min="0" max="2" />
+                <span i18n="powerSmartFuelSagMultiplier"></span>
+            </label>
+        </div>
     </div>
 
     <div class="voltage-configuration">
