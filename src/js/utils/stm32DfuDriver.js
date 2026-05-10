@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const { execFile } = globalThis.nw
     ? globalThis.nw.require('child_process')
     : require('child_process');
@@ -190,6 +191,9 @@ function removeInstallScripts(tempDirectory) {
         fs.rmSync(tempDirectory, { recursive: true, force: true });
     }
 }
+=======
+const { execFile } = require('child_process');
+>>>>>>> 3c288706 (Add STM32 DFU driver and device detection helper)
 
 function isWindows() {
     return process.platform === 'win32';
@@ -207,7 +211,11 @@ function checkSTM32DFUDriverInstalled() {
         }
 
         execFile(
+<<<<<<< HEAD
             getPnputilPath(),
+=======
+            'pnputil.exe',
+>>>>>>> 3c288706 (Add STM32 DFU driver and device detection helper)
             ['/enum-drivers'],
             { windowsHide: true },
             (error, stdout, stderr) => {
@@ -222,17 +230,28 @@ function checkSTM32DFUDriverInstalled() {
 
                 const output = stdout.toLowerCase();
 
+<<<<<<< HEAD
                 // Detect the bundled STM32 WinUSB package. Firmware flashing requires
                 // WinUSB for the STM32 ROM bootloader rather than the legacy STTube
                 // DFUSe driver, which can enumerate but cannot be used by WebUSB.
                 const installed = output.includes(STM32_DFU_DRIVER_PACKAGE_INF_NAME);
+=======
+                // Detect official STM32 DFU driver package
+                // Use INF package name only for best Win10/Win11 compatibility
+                const installed = output.includes('sttube.inf');
+>>>>>>> 3c288706 (Add STM32 DFU driver and device detection helper)
 
                 resolve({
                     supported: true,
                     installed,
                     message: installed
+<<<<<<< HEAD
                         ? 'STM32 WinUSB driver installed'
                         : 'STM32 WinUSB driver not installed',
+=======
+                        ? 'STM32 DFU driver installed'
+                        : 'STM32 DFU driver not installed',
+>>>>>>> 3c288706 (Add STM32 DFU driver and device detection helper)
                 });
             }
         );
@@ -251,7 +270,11 @@ function checkSTM32DFUDevicePresent() {
         }
 
         execFile(
+<<<<<<< HEAD
             getPnputilPath(),
+=======
+            'pnputil.exe',
+>>>>>>> 3c288706 (Add STM32 DFU driver and device detection helper)
             ['/enum-devices', '/connected'],
             { windowsHide: true },
             (error, stdout, stderr) => {
@@ -282,6 +305,7 @@ function checkSTM32DFUDevicePresent() {
     });
 }
 
+<<<<<<< HEAD
 
 function installSTM32DFUDriver() {
     return new Promise((resolve) => {
@@ -349,6 +373,8 @@ function installSTM32DFUDriver() {
     });
 }
 
+=======
+>>>>>>> 3c288706 (Add STM32 DFU driver and device detection helper)
 async function getSTM32DFUStatus() {
     const driver = await checkSTM32DFUDriverInstalled();
     const device = await checkSTM32DFUDevicePresent();
@@ -360,6 +386,7 @@ async function getSTM32DFUStatus() {
     };
 }
 
+<<<<<<< HEAD
 export {
     checkSTM32DFUDriverInstalled,
     checkSTM32DFUDevicePresent,
@@ -367,3 +394,10 @@ export {
     getSTM32DFUDriverLicenseText,
     installSTM32DFUDriver,
 };
+=======
+module.exports = {
+    checkSTM32DFUDriverInstalled,
+    checkSTM32DFUDevicePresent,
+    getSTM32DFUStatus,
+};
+>>>>>>> 3c288706 (Add STM32 DFU driver and device detection helper)
