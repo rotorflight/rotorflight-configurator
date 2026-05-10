@@ -5758,20 +5758,11 @@
     "powerSmartFuelSource": {
         "message": "Smart Fuel Source"
     },
-    "powerSmartFuelSourceTypeNone": {
+    "powerSmartFuelSourceTypeOff": {
         "message": "Off"
     },
-    "powerSmartFuelSourceTypeCurrent": {
-        "message": "Current"
-    },
-    "powerSmartFuelSourceTypeVoltage": {
-        "message": "Voltage"
-    },
-    "powerSmartFuelStabilizeDelay": {
-        "message": "Smart Fuel Stabilize Delay (s)"
-    },
-    "powerSmartFuelStableWindow": {
-        "message": "Smart Fuel Stable Window (V)"
+    "powerSmartFuelSourceTypeOn": {
+        "message": "On (FBL)"
     },
     "powerSmartFuelVoltageFallLimit": {
         "message": "Smart Fuel Voltage Fall Limit (V/s)"

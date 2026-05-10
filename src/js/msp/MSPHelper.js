@@ -355,11 +355,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
             }
 
             case MSPCodes.MSP2_SMARTFUEL_CONFIG: {
-                FC.SMARTFUEL_CONFIG.source = data.readU8();
-                FC.SMARTFUEL_CONFIG.stabilizeDelay = data.readU16();
-                FC.SMARTFUEL_CONFIG.stableWindow = data.readU16();
-                FC.SMARTFUEL_CONFIG.voltageFallLimit = data.readU16();
-                FC.SMARTFUEL_CONFIG.fuelDropRate = data.readU16();
+                FC.SMARTFUEL_CONFIG.enabled = data.readU8();
+                FC.SMARTFUEL_CONFIG.voltageFallRate = data.readU16();
+                FC.SMARTFUEL_CONFIG.chargeDropRate = data.readU16();
                 FC.SMARTFUEL_CONFIG.sagMultiplier = data.readU16();
                 break;
             }
@@ -2008,11 +2006,9 @@ MspHelper.prototype.crunch = function(code) {
         }
 
         case MSPCodes.MSP2_SET_SMARTFUEL_CONFIG: {
-            buffer.push8(FC.SMARTFUEL_CONFIG.source)
-                  .push16(FC.SMARTFUEL_CONFIG.stabilizeDelay)
-                  .push16(FC.SMARTFUEL_CONFIG.stableWindow)
-                  .push16(FC.SMARTFUEL_CONFIG.voltageFallLimit)
-                  .push16(FC.SMARTFUEL_CONFIG.fuelDropRate)
+            buffer.push8(FC.SMARTFUEL_CONFIG.enabled)
+                  .push16(FC.SMARTFUEL_CONFIG.voltageFallRate)
+                  .push16(FC.SMARTFUEL_CONFIG.chargeDropRate)
                   .push16(FC.SMARTFUEL_CONFIG.sagMultiplier);
             break;
         }

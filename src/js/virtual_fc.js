@@ -116,11 +116,9 @@ export function applyVirtualConfig() {
   });
 
   Object.assign(FC.SMARTFUEL_CONFIG, {
-    source: 0,
-    stabilizeDelay: 1500,
-    stableWindow: 15,
-    voltageFallLimit: 5,
-    fuelDropRate: 10,
+    enabled: 0,
+    voltageFallRate: 5,
+    chargeDropRate: 10,
     sagMultiplier: 70,
   });
 
