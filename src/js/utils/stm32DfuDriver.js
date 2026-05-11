@@ -1,4 +1,14 @@
-const { execFile } = require('child_process');
+const { execFile } = globalThis.nw
+    ? globalThis.nw.require('child_process')
+    : require('child_process');
+
+function getPnputilPath() {
+    if (!isWindows()) {
+        return 'pnputil.exe';
+    }
+
+    return `${process.env.SystemRoot || 'C:\\Windows'}\\System32\\pnputil.exe`;
+}
 
 function isWindows() {
     return process.platform === 'win32';
@@ -16,7 +26,7 @@ function checkSTM32DFUDriverInstalled() {
         }
 
         execFile(
-            'pnputil.exe',
+            getPnputilPath(),
             ['/enum-drivers'],
             { windowsHide: true },
             (error, stdout, stderr) => {
@@ -59,7 +69,7 @@ function checkSTM32DFUDevicePresent() {
         }
 
         execFile(
-            'pnputil.exe',
+            getPnputilPath(),
             ['/enum-devices', '/connected'],
             { windowsHide: true },
             (error, stdout, stderr) => {
@@ -101,7 +111,7 @@ async function getSTM32DFUStatus() {
     };
 }
 
-module.exports = {
+export {
     checkSTM32DFUDriverInstalled,
     checkSTM32DFUDevicePresent,
     getSTM32DFUStatus,

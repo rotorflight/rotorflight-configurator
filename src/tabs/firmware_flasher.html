@@ -45,8 +45,16 @@
                         </label>
                         <span class="description" i18n="firmwareFlasherFullChipEraseDescription"></span>
                     </div>
+
                 </div>
+                      <div class="field firmware-helper-status">
+                        <span class="dfu-driver-status unknown">STM32 DFU Driver: Checking...</span>
+                        <span class="footer-separator">|</span>
+                        <span class="dfu-device-status unknown">DFU Device: Not Detected</span>
+                        <a href="#" class="refresh-dfu-status">Refresh</a>
+                    </div>
             </div>
+            
         </div>
         <div class="clear-both"></div>
         <div class="git_info">
@@ -119,10 +127,13 @@
         </div>
             
     </div>
+
+    
     <div class="content_toolbar">
         <div class="info"><a name="progressbar"></a>
             <progress class="progress" value="0" min="0" max="100"></progress>
             <span class="progressLabel"></span>
+            
         </div>
         <div class="btn">
             <a class="exit_dfu disabled" href="#" i18n="firmwareFlasherExitDfu"></a>
