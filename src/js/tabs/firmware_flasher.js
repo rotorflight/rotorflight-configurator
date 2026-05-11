@@ -10,6 +10,10 @@ import {
     checkSTM32DFUDriverInstalled,
     checkSTM32DFUDevicePresent,
 } from '@/js/utils/stm32DfuDriver.js';
+function supportsDfuHelperStatus() {
+    return GUI.operating_system === 'Windows';
+}
+
 async function getCachedUnifiedTargets() {
   const { unifiedSourceCache } = await new Promise((resolve) => chrome.storage.local.get("unifiedSourceCache", resolve));
 
@@ -780,6 +784,10 @@ tab.initialize = function (callback) {
         });
         
         async function refreshDfuHelperStatus() {
+            if (!supportsDfuHelperStatus()) {
+                return;
+            }
+
             const driverElement = $('.dfu-driver-status');
             const deviceElement = $('.dfu-device-status');
 
@@ -868,10 +876,15 @@ tab.initialize = function (callback) {
                 }
             }
         });
-        $('a.refresh-dfu-status').on('click', async function (e) {
-            e.preventDefault();
-            await refreshDfuHelperStatus();
-        });
+        const dfuHelperStatusSupported = supportsDfuHelperStatus();
+        $('.firmware-helper-status').toggleClass('supported', dfuHelperStatusSupported);
+
+        if (dfuHelperStatusSupported) {
+            $('a.refresh-dfu-status').on('click', async function (e) {
+                e.preventDefault();
+                await refreshDfuHelperStatus();
+            });
+        }
         /**
          * Lock / Unlock the firmware download button according to the firmware selection dropdown.
          */
@@ -1147,7 +1160,9 @@ tab.initialize = function (callback) {
         });
 
         self.flashingMessage(i18n.getMessage('firmwareFlasherLoadFirmwareFile'), self.FLASH_MESSAGE_TYPES.NEUTRAL);
-        refreshDfuHelperStatus();
+        if (dfuHelperStatusSupported) {
+            refreshDfuHelperStatus();
+        }
         // Update Firmware button at top
         $('div#flashbutton a.flash_state').addClass('active');
         $('div#flashbutton a.flash').addClass('active');
