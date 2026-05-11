@@ -30,8 +30,8 @@ function getPnputilPath() {
     return getWindowsSystemExecutable('pnputil.exe', 'pnputil.exe');
 }
 
-function getPowerShellPath() {
-    return getWindowsSystemExecutable('WindowsPowerShell\\v1.0\\powershell.exe', 'powershell.exe');
+function getCmdPath() {
+    return getWindowsSystemExecutable('cmd.exe', 'cmd.exe');
 }
 
 function getWindowsScriptHostPath() {
@@ -77,10 +77,6 @@ function getSTM32DFUDriverLicenseText() {
     return fs.readFileSync(licensePath, 'utf8');
 }
 
-function quotePowerShellString(value) {
-    return `'${value.replaceAll("'", "''")}'`;
-}
-
 function quoteWindowsCommandArgument(value) {
     return `"${value.replaceAll('"', '\\"')}"`;
 }
@@ -91,67 +87,85 @@ function quoteVbsString(value) {
 
 function createHiddenElevatedInstallScripts(driverInfPath) {
     const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'rotorflight-stm32-dfu-'));
-    const installScriptPath = path.join(tempDirectory, 'install-stm32-dfu-driver.ps1');
-    const elevateScriptPath = path.join(tempDirectory, 'elevate-stm32-dfu-driver.ps1');
+    const elevatedScriptPath = path.join(tempDirectory, 'elevated-stm32-dfu-driver-install.vbs');
     const runnerScriptPath = path.join(tempDirectory, 'run-stm32-dfu-driver-install.vbs');
     const stdoutPath = path.join(tempDirectory, 'pnputil.stdout.log');
     const stderrPath = path.join(tempDirectory, 'pnputil.stderr.log');
-    const powerShellPath = getPowerShellPath();
-
-    const installScript = `
-$ErrorActionPreference = 'Stop'
-try {
-    $process = Start-Process ` +
-        `-FilePath ${quotePowerShellString(getPnputilPath())} ` +
-        `-ArgumentList @('/add-driver', ${quotePowerShellString(driverInfPath)}, '/install') ` +
-        `-WindowStyle Hidden ` +
-        `-RedirectStandardOutput ${quotePowerShellString(stdoutPath)} ` +
-        `-RedirectStandardError ${quotePowerShellString(stderrPath)} ` +
-        `-Wait ` +
-        `-PassThru
-    exit $process.ExitCode
-} catch {
-    $_ | Out-File -FilePath ${quotePowerShellString(stderrPath)} -Append
-    exit 1
-}
-`;
-
-    const elevateScript = `
-$ErrorActionPreference = 'Stop'
-try {
-    $process = Start-Process ` +
-        `-FilePath ${quotePowerShellString(powerShellPath)} ` +
-        `-ArgumentList @('-NoProfile', '-WindowStyle', 'Hidden', '-ExecutionPolicy', 'Bypass', '-File', ${quotePowerShellString(installScriptPath)}) ` +
-        `-Verb RunAs ` +
-        `-WindowStyle Hidden ` +
-        `-Wait ` +
-        `-PassThru
-    exit $process.ExitCode
-} catch {
-    $_ | Out-File -FilePath ${quotePowerShellString(stderrPath)} -Append
-    exit 1
-}
-`;
-
-    const hiddenPowerShellCommand = [
-        quoteWindowsCommandArgument(powerShellPath),
-        '-NoProfile',
-        '-WindowStyle Hidden',
-        '-ExecutionPolicy Bypass',
-        '-File',
-        quoteWindowsCommandArgument(elevateScriptPath),
+    const exitCodePath = path.join(tempDirectory, 'pnputil.exitcode');
+    const pnputilCommand = [
+        quoteWindowsCommandArgument(getPnputilPath()),
+        '/add-driver',
+        quoteWindowsCommandArgument(driverInfPath),
+        '/install',
+        '>',
+        quoteWindowsCommandArgument(stdoutPath),
+        '2>',
+        quoteWindowsCommandArgument(stderrPath),
+    ].join(' ');
+    const cmdCommand = [
+        quoteWindowsCommandArgument(getCmdPath()),
+        '/d',
+        '/s',
+        '/c',
+        quoteWindowsCommandArgument(pnputilCommand),
     ].join(' ');
 
-    const runnerScript = `
+    const elevatedScript = `
+On Error Resume Next
 Dim shell
+Dim fileSystem
 Dim exitCode
 Set shell = CreateObject("WScript.Shell")
-exitCode = shell.Run(${quoteVbsString(hiddenPowerShellCommand)}, 0, True)
+Set fileSystem = CreateObject("Scripting.FileSystemObject")
+exitCode = shell.Run(${quoteVbsString(cmdCommand)}, 0, True)
+If Err.Number <> 0 Then
+    Dim errorLog
+    Set errorLog = fileSystem.OpenTextFile(${quoteVbsString(stderrPath)}, 8, True)
+    errorLog.WriteLine Err.Description
+    errorLog.Close
+    exitCode = 1
+End If
+Dim exitCodeFile
+Set exitCodeFile = fileSystem.CreateTextFile(${quoteVbsString(exitCodePath)}, True)
+exitCodeFile.Write CStr(exitCode)
+exitCodeFile.Close
 WScript.Quit exitCode
 `;
 
-    fs.writeFileSync(installScriptPath, installScript, 'utf8');
-    fs.writeFileSync(elevateScriptPath, elevateScript, 'utf8');
+    const runnerScript = `
+On Error Resume Next
+Dim fileSystem
+Dim shellApplication
+Dim exitCodeFile
+Dim exitCode
+Dim attempt
+Set fileSystem = CreateObject("Scripting.FileSystemObject")
+Set shellApplication = CreateObject("Shell.Application")
+shellApplication.ShellExecute ${quoteVbsString(getWindowsScriptHostPath())}, ${quoteVbsString(`//B //NoLogo ${quoteWindowsCommandArgument(elevatedScriptPath)}`)}, "", "runas", 0
+If Err.Number <> 0 Then
+    Dim shellExecuteErrorLog
+    Set shellExecuteErrorLog = fileSystem.OpenTextFile(${quoteVbsString(stderrPath)}, 8, True)
+    shellExecuteErrorLog.WriteLine Err.Description
+    shellExecuteErrorLog.Close
+    WScript.Quit 1
+End If
+For attempt = 1 To 2400
+    If fileSystem.FileExists(${quoteVbsString(exitCodePath)}) Then
+        Set exitCodeFile = fileSystem.OpenTextFile(${quoteVbsString(exitCodePath)}, 1, False)
+        exitCode = CInt(exitCodeFile.ReadAll)
+        exitCodeFile.Close
+        WScript.Quit exitCode
+    End If
+    WScript.Sleep 250
+Next
+Dim timeoutLog
+Set timeoutLog = fileSystem.OpenTextFile(${quoteVbsString(stderrPath)}, 8, True)
+timeoutLog.WriteLine "Timed out waiting for elevated STM32 DFU driver install to finish."
+timeoutLog.Close
+WScript.Quit 1
+`;
+
+    fs.writeFileSync(elevatedScriptPath, elevatedScript, 'utf8');
     fs.writeFileSync(runnerScriptPath, runnerScript, 'utf8');
 
     return {
@@ -161,7 +175,6 @@ WScript.Quit exitCode
         stderrPath,
     };
 }
-
 function readInstallLog(stdoutPath, stderrPath) {
     return [stderrPath, stdoutPath]
         .filter((logPath) => fs.existsSync(logPath))
