@@ -9,6 +9,7 @@ import { manufacturers } from "@/js/manufacturers.js";
 import {
     checkSTM32DFUDriverInstalled,
     checkSTM32DFUDevicePresent,
+    getSTM32DFUDriverLicenseText,
     installSTM32DFUDriver,
 } from '@/js/utils/stm32DfuDriver.js';
 function supportsDfuHelperStatus() {
@@ -842,9 +843,11 @@ tab.initialize = function (callback) {
 
             const installButton = $('.install-dfu-driver');
             const driverElement = $('.dfu-driver-status');
+            const licenseText = getSTM32DFUDriverLicenseText();
             const confirmed = window.confirm(
                 'Install the STMicroelectronics STM32 DFU driver?\n\n' +
-                'This will request Windows administrator permission and indicates that you accept the included STMicroelectronics driver license.'
+                    'This will request Windows administrator permission. Select OK only if you accept the license below.\n\n' +
+                    licenseText
             );
 
             if (!confirmed) {
