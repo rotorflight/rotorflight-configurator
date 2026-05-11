@@ -146,6 +146,10 @@ function helper_build_app_nwjs() {
     case "osx":
       tasks.push(build_nwjs_unix_permissions);
       break;
+
+    case "win":
+      tasks.push(build_nwjs_windows_assets);
+      break;
   }
 
   return gulp.series(tasks);
@@ -183,6 +187,12 @@ function build_app_nwjs() {
 
 function build_nwjs_linux_assets() {
   return gulp.src("assets/linux/**").pipe(gulp.dest(context.appdir));
+}
+
+function build_nwjs_windows_assets() {
+  return gulp
+    .src("assets/windows/drivers/stm32/**", { base: "." })
+    .pipe(gulp.dest(`${context.appdir}/package.nw`));
 }
 
 /**
