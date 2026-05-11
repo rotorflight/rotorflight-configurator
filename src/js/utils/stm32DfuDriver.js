@@ -40,12 +40,26 @@ function getApplicationRootCandidates() {
     return [...new Set(candidates)];
 }
 
-function getSTM32DFUDriverInfPath() {
-    const relativeDriverPath = path.join('assets', 'windows', 'drivers', 'stm32', 'STtube.inf');
+function getSTM32DFUDriverAssetPath(fileName) {
+    const relativeDriverPath = path.join('assets', 'windows', 'drivers', 'stm32', fileName);
 
     return getApplicationRootCandidates()
         .map((candidate) => path.join(candidate, relativeDriverPath))
         .find((candidate) => fs.existsSync(candidate));
+}
+
+function getSTM32DFUDriverInfPath() {
+    return getSTM32DFUDriverAssetPath('STtube.inf');
+}
+
+function getSTM32DFUDriverLicenseText() {
+    const licensePath = getSTM32DFUDriverAssetPath('license.txt');
+
+    if (!licensePath) {
+        return 'The bundled STMicroelectronics STM32 DFU driver license could not be found.';
+    }
+
+    return fs.readFileSync(licensePath, 'utf8');
 }
 
 function isWindows() {
@@ -166,6 +180,7 @@ function installSTM32DFUDriver() {
             `-FilePath '${getPnputilPath().replaceAll("'", "''")}'`,
             `-ArgumentList @('/add-driver', '${driverInfPath.replaceAll("'", "''")}', '/install')`,
             '-Verb RunAs',
+            '-WindowStyle Hidden',
             '-Wait',
             '-PassThru;',
             'exit $process.ExitCode',
@@ -173,7 +188,7 @@ function installSTM32DFUDriver() {
 
         execFile(
             'powershell.exe',
-            ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', command],
+            ['-NoProfile', '-WindowStyle', 'Hidden', '-ExecutionPolicy', 'Bypass', '-Command', command],
             { windowsHide: true },
             (error, stdout, stderr) => {
                 if (error) {
@@ -210,5 +225,6 @@ export {
     checkSTM32DFUDriverInstalled,
     checkSTM32DFUDevicePresent,
     getSTM32DFUStatus,
+    getSTM32DFUDriverLicenseText,
     installSTM32DFUDriver,
 };
