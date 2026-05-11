@@ -199,6 +199,12 @@ const { execFile } = require('child_process');
 const { execFile } = globalThis.nw
     ? globalThis.nw.require('child_process')
     : require('child_process');
+const fs = globalThis.nw
+    ? globalThis.nw.require('fs')
+    : require('fs');
+const path = globalThis.nw
+    ? globalThis.nw.require('path')
+    : require('path');
 
 function getPnputilPath() {
     if (!isWindows()) {
