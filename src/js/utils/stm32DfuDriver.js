@@ -1,13 +1,51 @@
 const { execFile } = globalThis.nw
     ? globalThis.nw.require('child_process')
     : require('child_process');
+const fs = globalThis.nw
+    ? globalThis.nw.require('fs')
+    : require('fs');
+const path = globalThis.nw
+    ? globalThis.nw.require('path')
+    : require('path');
 
 function getPnputilPath() {
     if (!isWindows()) {
         return 'pnputil.exe';
     }
 
-    return `${process.env.SystemRoot || 'C:\\Windows'}\\System32\\pnputil.exe`;
+    const systemRoot = process.env.SystemRoot || 'C:\\Windows';
+    const pnputilCandidates = [
+        `${systemRoot}\\Sysnative\\pnputil.exe`,
+        `${systemRoot}\\System32\\pnputil.exe`,
+        'pnputil.exe',
+    ];
+
+    return pnputilCandidates.find((candidate) => candidate === 'pnputil.exe' || fs.existsSync(candidate));
+}
+
+function getApplicationRootCandidates() {
+    const candidates = [];
+
+    if (globalThis.nw?.App?.startPath) {
+        candidates.push(globalThis.nw.App.startPath);
+    }
+
+    candidates.push(process.cwd());
+
+    if (process.execPath) {
+        candidates.push(path.dirname(process.execPath));
+        candidates.push(path.join(path.dirname(process.execPath), 'package.nw'));
+    }
+
+    return [...new Set(candidates)];
+}
+
+function getSTM32DFUDriverInfPath() {
+    const relativeDriverPath = path.join('assets', 'windows', 'drivers', 'stm32', 'STtube.inf');
+
+    return getApplicationRootCandidates()
+        .map((candidate) => path.join(candidate, relativeDriverPath))
+        .find((candidate) => fs.existsSync(candidate));
 }
 
 function isWindows() {
@@ -100,6 +138,63 @@ function checkSTM32DFUDevicePresent() {
     });
 }
 
+
+function installSTM32DFUDriver() {
+    return new Promise((resolve) => {
+        if (!isWindows()) {
+            resolve({
+                supported: false,
+                installed: false,
+                message: 'Unsupported platform',
+            });
+            return;
+        }
+
+        const driverInfPath = getSTM32DFUDriverInfPath();
+
+        if (!driverInfPath) {
+            resolve({
+                supported: true,
+                installed: false,
+                message: 'STM32 DFU driver package not found',
+            });
+            return;
+        }
+
+        const command = [
+            '$process = Start-Process',
+            `-FilePath '${getPnputilPath().replaceAll("'", "''")}'`,
+            `-ArgumentList @('/add-driver', '${driverInfPath.replaceAll("'", "''")}', '/install')`,
+            '-Verb RunAs',
+            '-Wait',
+            '-PassThru;',
+            'exit $process.ExitCode',
+        ].join(' ');
+
+        execFile(
+            'powershell.exe',
+            ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', command],
+            { windowsHide: true },
+            (error, stdout, stderr) => {
+                if (error) {
+                    resolve({
+                        supported: true,
+                        installed: false,
+                        message: stderr || stdout || error.message,
+                    });
+                    return;
+                }
+
+                resolve({
+                    supported: true,
+                    installed: true,
+                    message: 'STM32 DFU driver installation completed',
+                });
+            }
+        );
+    });
+}
+
 async function getSTM32DFUStatus() {
     const driver = await checkSTM32DFUDriverInstalled();
     const device = await checkSTM32DFUDevicePresent();
@@ -115,4 +210,5 @@ export {
     checkSTM32DFUDriverInstalled,
     checkSTM32DFUDevicePresent,
     getSTM32DFUStatus,
+    installSTM32DFUDriver,
 };
