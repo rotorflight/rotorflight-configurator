@@ -156,12 +156,10 @@ class FlightController {
     };
 
     this.SMARTFUEL_CONFIG = {
-      source:                     0,
-      stabilizeDelay:             1500,
-      stableWindow:               15,
-      voltageFallLimit:           5,
-      fuelDropRate:               10,
-      sagMultiplier:              70,
+      mode:                       0,
+      voltageDropRate:            10,
+      chargeDropRate:             50,
+      sagGain:                    40,
     };
 
     this.ANALOG = {

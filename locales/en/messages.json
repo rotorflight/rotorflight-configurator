@@ -5756,7 +5756,7 @@
         "message": "Smart Fuel"
     },
     "powerSmartFuelSource": {
-        "message": "Smart Fuel Source"
+        "message": "Smart Fuel Mode"
     },
     "powerSmartFuelSourceTypeNone": {
         "message": "Off"
@@ -5766,6 +5766,15 @@
     },
     "powerSmartFuelSourceTypeVoltage": {
         "message": "Voltage"
+    },
+    "powerSmartFuelVoltageDropRate": {
+        "message": "Smart Fuel Voltage Drop Rate (mV/s)"
+    },
+    "powerSmartFuelChargeDropRate": {
+        "message": "Smart Fuel Charge Drop Rate (%/s)"
+    },
+    "powerSmartFuelSagGain": {
+        "message": "Smart Fuel Sag Gain (%)"
     },
     "powerSmartFuelStabilizeDelay": {
         "message": "Smart Fuel Stabilize Delay (s)"
