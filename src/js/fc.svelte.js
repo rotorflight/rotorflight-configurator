@@ -156,9 +156,11 @@ class FlightController {
     };
 
     this.SMARTFUEL_CONFIG = {
-      enabled:                    0,
-      voltageFallRate:            5,
-      chargeDropRate:             10,
+      source:                     0,
+      stabilizeDelay:             1500,
+      stableWindow:               15,
+      voltageFallLimit:           5,
+      fuelDropRate:               10,
       sagMultiplier:              70,
     };
 
