@@ -7,20 +7,35 @@ const fs = globalThis.nw
 const path = globalThis.nw
     ? globalThis.nw.require('path')
     : require('path');
+const os = globalThis.nw
+    ? globalThis.nw.require('os')
+    : require('os');
 
-function getPnputilPath() {
+function getWindowsSystemExecutable(fileName, fallback) {
     if (!isWindows()) {
-        return 'pnputil.exe';
+        return fallback;
     }
 
     const systemRoot = process.env.SystemRoot || 'C:\\Windows';
-    const pnputilCandidates = [
-        `${systemRoot}\\Sysnative\\pnputil.exe`,
-        `${systemRoot}\\System32\\pnputil.exe`,
-        'pnputil.exe',
+    const candidates = [
+        `${systemRoot}\\Sysnative\\${fileName}`,
+        `${systemRoot}\\System32\\${fileName}`,
+        fallback,
     ];
 
-    return pnputilCandidates.find((candidate) => candidate === 'pnputil.exe' || fs.existsSync(candidate));
+    return candidates.find((candidate) => candidate === fallback || fs.existsSync(candidate));
+}
+
+function getPnputilPath() {
+    return getWindowsSystemExecutable('pnputil.exe', 'pnputil.exe');
+}
+
+function getPowerShellPath() {
+    return getWindowsSystemExecutable('WindowsPowerShell\\v1.0\\powershell.exe', 'powershell.exe');
+}
+
+function getWindowsScriptHostPath() {
+    return getWindowsSystemExecutable('wscript.exe', 'wscript.exe');
 }
 
 function getApplicationRootCandidates() {
@@ -60,6 +75,105 @@ function getSTM32DFUDriverLicenseText() {
     }
 
     return fs.readFileSync(licensePath, 'utf8');
+}
+
+function quotePowerShellString(value) {
+    return `'${value.replaceAll("'", "''")}'`;
+}
+
+function quoteWindowsCommandArgument(value) {
+    return `"${value.replaceAll('"', '\\"')}"`;
+}
+
+function quoteVbsString(value) {
+    return `"${value.replaceAll('"', '""')}"`;
+}
+
+function createHiddenElevatedInstallScripts(driverInfPath) {
+    const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'rotorflight-stm32-dfu-'));
+    const installScriptPath = path.join(tempDirectory, 'install-stm32-dfu-driver.ps1');
+    const elevateScriptPath = path.join(tempDirectory, 'elevate-stm32-dfu-driver.ps1');
+    const runnerScriptPath = path.join(tempDirectory, 'run-stm32-dfu-driver-install.vbs');
+    const stdoutPath = path.join(tempDirectory, 'pnputil.stdout.log');
+    const stderrPath = path.join(tempDirectory, 'pnputil.stderr.log');
+    const powerShellPath = getPowerShellPath();
+
+    const installScript = `
+$ErrorActionPreference = 'Stop'
+try {
+    $process = Start-Process ` +
+        `-FilePath ${quotePowerShellString(getPnputilPath())} ` +
+        `-ArgumentList @('/add-driver', ${quotePowerShellString(driverInfPath)}, '/install') ` +
+        `-WindowStyle Hidden ` +
+        `-RedirectStandardOutput ${quotePowerShellString(stdoutPath)} ` +
+        `-RedirectStandardError ${quotePowerShellString(stderrPath)} ` +
+        `-Wait ` +
+        `-PassThru
+    exit $process.ExitCode
+} catch {
+    $_ | Out-File -FilePath ${quotePowerShellString(stderrPath)} -Append
+    exit 1
+}
+`;
+
+    const elevateScript = `
+$ErrorActionPreference = 'Stop'
+try {
+    $process = Start-Process ` +
+        `-FilePath ${quotePowerShellString(powerShellPath)} ` +
+        `-ArgumentList @('-NoProfile', '-WindowStyle', 'Hidden', '-ExecutionPolicy', 'Bypass', '-File', ${quotePowerShellString(installScriptPath)}) ` +
+        `-Verb RunAs ` +
+        `-WindowStyle Hidden ` +
+        `-Wait ` +
+        `-PassThru
+    exit $process.ExitCode
+} catch {
+    $_ | Out-File -FilePath ${quotePowerShellString(stderrPath)} -Append
+    exit 1
+}
+`;
+
+    const hiddenPowerShellCommand = [
+        quoteWindowsCommandArgument(powerShellPath),
+        '-NoProfile',
+        '-WindowStyle Hidden',
+        '-ExecutionPolicy Bypass',
+        '-File',
+        quoteWindowsCommandArgument(elevateScriptPath),
+    ].join(' ');
+
+    const runnerScript = `
+Dim shell
+Dim exitCode
+Set shell = CreateObject("WScript.Shell")
+exitCode = shell.Run(${quoteVbsString(hiddenPowerShellCommand)}, 0, True)
+WScript.Quit exitCode
+`;
+
+    fs.writeFileSync(installScriptPath, installScript, 'utf8');
+    fs.writeFileSync(elevateScriptPath, elevateScript, 'utf8');
+    fs.writeFileSync(runnerScriptPath, runnerScript, 'utf8');
+
+    return {
+        tempDirectory,
+        runnerScriptPath,
+        stdoutPath,
+        stderrPath,
+    };
+}
+
+function readInstallLog(stdoutPath, stderrPath) {
+    return [stderrPath, stdoutPath]
+        .filter((logPath) => fs.existsSync(logPath))
+        .map((logPath) => fs.readFileSync(logPath, 'utf8').trim())
+        .filter(Boolean)
+        .join('\n');
+}
+
+function removeInstallScripts(tempDirectory) {
+    if (tempDirectory) {
+        fs.rmSync(tempDirectory, { recursive: true, force: true });
+    }
 }
 
 function isWindows() {
@@ -175,27 +289,32 @@ function installSTM32DFUDriver() {
             return;
         }
 
-        const command = [
-            '$process = Start-Process',
-            `-FilePath '${getPnputilPath().replaceAll("'", "''")}'`,
-            `-ArgumentList @('/add-driver', '${driverInfPath.replaceAll("'", "''")}', '/install')`,
-            '-Verb RunAs',
-            '-WindowStyle Hidden',
-            '-Wait',
-            '-PassThru;',
-            'exit $process.ExitCode',
-        ].join(' ');
+        let installScripts;
+
+        try {
+            installScripts = createHiddenElevatedInstallScripts(driverInfPath);
+        } catch (error) {
+            resolve({
+                supported: true,
+                installed: false,
+                message: error.message,
+            });
+            return;
+        }
 
         execFile(
-            'powershell.exe',
-            ['-NoProfile', '-WindowStyle', 'Hidden', '-ExecutionPolicy', 'Bypass', '-Command', command],
+            getWindowsScriptHostPath(),
+            ['//B', '//NoLogo', installScripts.runnerScriptPath],
             { windowsHide: true },
-            (error, stdout, stderr) => {
+            (error) => {
+                const installLog = readInstallLog(installScripts.stdoutPath, installScripts.stderrPath);
+                removeInstallScripts(installScripts.tempDirectory);
+
                 if (error) {
                     resolve({
                         supported: true,
                         installed: false,
-                        message: stderr || stdout || error.message,
+                        message: installLog || error.message,
                     });
                     return;
                 }
@@ -203,7 +322,7 @@ function installSTM32DFUDriver() {
                 resolve({
                     supported: true,
                     installed: true,
-                    message: 'STM32 DFU driver installation completed',
+                    message: installLog || 'STM32 DFU driver installation completed',
                 });
             }
         );
