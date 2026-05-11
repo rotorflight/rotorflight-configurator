@@ -6,7 +6,10 @@ import { readTextFile, writeTextFile } from '@/js/filesystem.js';
 import * as github from '@/js/GitHubApi.js';
 import { ReleaseChecker } from '@/js/release_checker.js';
 import { manufacturers } from "@/js/manufacturers.js";
-
+import {
+    checkSTM32DFUDriverInstalled,
+    checkSTM32DFUDevicePresent,
+} from '@/js/utils/stm32DfuDriver.js';
 async function getCachedUnifiedTargets() {
   const { unifiedSourceCache } = await new Promise((resolve) => chrome.storage.local.get("unifiedSourceCache", resolve));
 
@@ -775,7 +778,48 @@ tab.initialize = function (callback) {
             // ensure default build type is selected
             buildType_e.val(result.selected_build_type || 0).trigger('change');
         });
+        
+        async function refreshDfuHelperStatus() {
+            const driverElement = $('.dfu-driver-status');
+            const deviceElement = $('.dfu-device-status');
 
+            driverElement
+                .removeClass('unknown ok warning error')
+                .addClass('unknown')
+                .text('DFU Driver: Checking...');
+
+            deviceElement
+                .removeClass('unknown ok warning error')
+                .addClass('unknown')
+                .text('DFU Device: Checking...');
+
+           try {
+                const driverStatus = await checkSTM32DFUDriverInstalled();
+                const deviceStatus = await checkSTM32DFUDevicePresent();
+
+                driverElement
+                    .removeClass('unknown ok warning error')
+                    .addClass(driverStatus.installed ? 'ok' : 'error')
+                    .text(`DFU Driver: ${driverStatus.installed ? 'Installed' : 'Not Installed'}`);
+
+                deviceElement
+                    .removeClass('unknown ok warning error')
+                    .addClass(deviceStatus.present ? 'ok' : 'warning')
+                    .text(`DFU Device: ${deviceStatus.present ? 'Detected' : 'Not Detected'}`);
+            } catch (err) {
+                console.log('Failed to refresh DFU helper status', err);
+
+                driverElement
+                    .removeClass('unknown ok warning error')
+                    .addClass('error')
+                    .text('DFU Driver: Status check failed');
+
+                deviceElement
+                    .removeClass('unknown ok warning error')
+                    .addClass('error')
+                    .text('DFU Device: Status check failed');
+            }
+        }
         // UI Hooks
         $('a.load_file').on('click', async function () {
             self.enableFlashing(false);
@@ -824,7 +868,10 @@ tab.initialize = function (callback) {
                 }
             }
         });
-
+        $('a.refresh-dfu-status').on('click', async function (e) {
+            e.preventDefault();
+            await refreshDfuHelperStatus();
+        });
         /**
          * Lock / Unlock the firmware download button according to the firmware selection dropdown.
          */
@@ -1100,7 +1147,7 @@ tab.initialize = function (callback) {
         });
 
         self.flashingMessage(i18n.getMessage('firmwareFlasherLoadFirmwareFile'), self.FLASH_MESSAGE_TYPES.NEUTRAL);
-
+        refreshDfuHelperStatus();
         // Update Firmware button at top
         $('div#flashbutton a.flash_state').addClass('active');
         $('div#flashbutton a.flash').addClass('active');
