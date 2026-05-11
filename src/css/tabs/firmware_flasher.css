@@ -245,3 +245,33 @@
 .tab-firmware_flasher .options-container .field + .field {
     border-top: 1px solid var(--color-border);
 }
+.tab-firmware_flasher .firmware-helper-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #ddd;
+}
+
+.tab-firmware_flasher .firmware-helper-status .footer-separator {
+    opacity: 0.5;
+}
+
+.tab-firmware_flasher .firmware-helper-status .refresh-dfu-status {
+    margin-left: auto;
+    text-decoration: underline;
+}
+.dfu-driver-status.ok,
+.dfu-device-status.ok {
+    color: #6ad16a;
+}
+
+.dfu-driver-status.warning,
+.dfu-device-status.warning {
+    color: #ffcc66;
+}
+
+.dfu-driver-status.error,
+.dfu-device-status.error {
+    color: #ff6666;
+}
