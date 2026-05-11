@@ -9,6 +9,8 @@ import { manufacturers } from "@/js/manufacturers.js";
 import {
     checkSTM32DFUDriverInstalled,
     checkSTM32DFUDevicePresent,
+    getSTM32DFUDriverLicenseText,
+    installSTM32DFUDriver,
 } from '@/js/utils/stm32DfuDriver.js';
 function supportsDfuHelperStatus() {
     return GUI.operating_system === 'Windows';
@@ -790,6 +792,7 @@ tab.initialize = function (callback) {
 
             const driverElement = $('.dfu-driver-status');
             const deviceElement = $('.dfu-device-status');
+            const installButton = $('.install-dfu-driver');
 
             driverElement
                 .removeClass('unknown ok warning error')
@@ -810,6 +813,8 @@ tab.initialize = function (callback) {
                     .addClass(driverStatus.installed ? 'ok' : 'error')
                     .text(`DFU Driver: ${driverStatus.installed ? 'Installed' : 'Not Installed'}`);
 
+                installButton.toggleClass('disabled', driverStatus.installed);
+
                 deviceElement
                     .removeClass('unknown ok warning error')
                     .addClass(deviceStatus.present ? 'ok' : 'warning')
@@ -827,6 +832,49 @@ tab.initialize = function (callback) {
                     .addClass('error')
                     .text('DFU Device: Status check failed');
             }
+        }
+
+        async function installDfuDriver() {
+            if (!supportsDfuHelperStatus()) {
+                return;
+            }
+
+            const installButton = $('.install-dfu-driver');
+            const driverElement = $('.dfu-driver-status');
+            const licenseText = getSTM32DFUDriverLicenseText();
+            const confirmed = window.confirm(
+                'Install the STMicroelectronics STM32 DFU driver?\n\n' +
+                    'This will request Windows administrator permission. Select OK only if you accept the license below.\n\n' +
+                    licenseText
+            );
+
+            if (!confirmed) {
+                return;
+            }
+
+            installButton.addClass('disabled').text('Installing...');
+            driverElement
+                .removeClass('unknown ok warning error')
+                .addClass('unknown')
+                .text('DFU Driver: Installing...');
+
+            const result = await installSTM32DFUDriver();
+
+            if (result.installed) {
+                driverElement
+                    .removeClass('unknown ok warning error')
+                    .addClass('ok')
+                    .text('DFU Driver: Installed');
+            } else {
+                driverElement
+                    .removeClass('unknown ok warning error')
+                    .addClass('error')
+                    .text('DFU Driver: Install failed');
+                GUI.log(`STM32 DFU driver install failed: ${result.message}`);
+            }
+
+            installButton.text('Install');
+            await refreshDfuHelperStatus();
         }
         // UI Hooks
         $('a.load_file').on('click', async function () {
@@ -883,6 +931,16 @@ tab.initialize = function (callback) {
             $('a.refresh-dfu-status').on('click', async function (e) {
                 e.preventDefault();
                 await refreshDfuHelperStatus();
+            });
+
+            $('a.install-dfu-driver').on('click', async function (e) {
+                e.preventDefault();
+
+                if ($(this).hasClass('disabled')) {
+                    return;
+                }
+
+                await installDfuDriver();
             });
         }
         /**

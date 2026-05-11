@@ -261,9 +261,19 @@
     opacity: 0.5;
 }
 
-.tab-firmware_flasher .firmware-helper-status .refresh-dfu-status {
+.tab-firmware_flasher .firmware-helper-status .install-dfu-driver {
     margin-left: auto;
+}
+
+.tab-firmware_flasher .firmware-helper-status .install-dfu-driver,
+.tab-firmware_flasher .firmware-helper-status .refresh-dfu-status {
     text-decoration: underline;
+}
+
+.tab-firmware_flasher .firmware-helper-status .install-dfu-driver.disabled {
+    cursor: default;
+    opacity: 0.45;
+    text-decoration: none;
 }
 .dfu-driver-status.ok,
 .dfu-device-status.ok {
