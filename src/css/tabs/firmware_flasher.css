@@ -246,11 +246,15 @@
     border-top: 1px solid var(--color-border);
 }
 .tab-firmware_flasher .firmware-helper-status {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 6px;
     font-size: 11px;
     color: #ddd;
+}
+
+.tab-firmware_flasher .firmware-helper-status.supported {
+    display: flex;
 }
 
 .tab-firmware_flasher .firmware-helper-status .footer-separator {
