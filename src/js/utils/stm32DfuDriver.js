@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 const { execFile } = globalThis.nw
     ? globalThis.nw.require('child_process')
     : require('child_process');
@@ -194,6 +195,19 @@ function removeInstallScripts(tempDirectory) {
 =======
 const { execFile } = require('child_process');
 >>>>>>> 3c288706 (Add STM32 DFU driver and device detection helper)
+=======
+const { execFile } = globalThis.nw
+    ? globalThis.nw.require('child_process')
+    : require('child_process');
+
+function getPnputilPath() {
+    if (!isWindows()) {
+        return 'pnputil.exe';
+    }
+
+    return `${process.env.SystemRoot || 'C:\\Windows'}\\System32\\pnputil.exe`;
+}
+>>>>>>> da1ac7dc (Add Windows STM32 DFU driver/device status display to Firmware Flasher tab)
 
 function isWindows() {
     return process.platform === 'win32';
@@ -212,10 +226,14 @@ function checkSTM32DFUDriverInstalled() {
 
         execFile(
 <<<<<<< HEAD
+<<<<<<< HEAD
             getPnputilPath(),
 =======
             'pnputil.exe',
 >>>>>>> 3c288706 (Add STM32 DFU driver and device detection helper)
+=======
+            getPnputilPath(),
+>>>>>>> da1ac7dc (Add Windows STM32 DFU driver/device status display to Firmware Flasher tab)
             ['/enum-drivers'],
             { windowsHide: true },
             (error, stdout, stderr) => {
@@ -271,10 +289,14 @@ function checkSTM32DFUDevicePresent() {
 
         execFile(
 <<<<<<< HEAD
+<<<<<<< HEAD
             getPnputilPath(),
 =======
             'pnputil.exe',
 >>>>>>> 3c288706 (Add STM32 DFU driver and device detection helper)
+=======
+            getPnputilPath(),
+>>>>>>> da1ac7dc (Add Windows STM32 DFU driver/device status display to Firmware Flasher tab)
             ['/enum-devices', '/connected'],
             { windowsHide: true },
             (error, stdout, stderr) => {
@@ -387,6 +409,7 @@ async function getSTM32DFUStatus() {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export {
     checkSTM32DFUDriverInstalled,
     checkSTM32DFUDevicePresent,
@@ -396,6 +419,9 @@ export {
 };
 =======
 module.exports = {
+=======
+export {
+>>>>>>> da1ac7dc (Add Windows STM32 DFU driver/device status display to Firmware Flasher tab)
     checkSTM32DFUDriverInstalled,
     checkSTM32DFUDevicePresent,
     getSTM32DFUStatus,
