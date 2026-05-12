@@ -790,6 +790,9 @@ tab.initialize = function (callback) {
                 return;
             }
 
+            clearTimeout(self.dfuHelperStatusRefreshTimer);
+            self.dfuHelperStatusRefreshTimer = undefined;
+
             const driverElement = $('.dfu-driver-status');
             const deviceElement = $('.dfu-device-status');
             const installButton = $('.install-dfu-driver');
@@ -832,6 +835,37 @@ tab.initialize = function (callback) {
                     .addClass('error')
                     .text('DFU Device: Status check failed');
             }
+        }
+
+        function scheduleDfuHelperStatusRefresh() {
+            if (!supportsDfuHelperStatus()) {
+                return;
+            }
+
+            clearTimeout(self.dfuHelperStatusRefreshTimer);
+            self.dfuHelperStatusRefreshTimer = setTimeout(() => {
+                refreshDfuHelperStatus();
+            }, 500);
+        }
+
+        function bindDfuHelperStatusRefreshOnUsbChanges() {
+            if (!supportsDfuHelperStatus()) {
+                return;
+            }
+
+            const usbChangeHandler = () => {
+                scheduleDfuHelperStatusRefresh();
+            };
+
+            if (chrome.usb?.onDeviceAdded?.addListener) {
+                chrome.usb.onDeviceAdded.addListener(usbChangeHandler);
+            }
+
+            if (chrome.usb?.onDeviceRemoved?.addListener) {
+                chrome.usb.onDeviceRemoved.addListener(usbChangeHandler);
+            }
+
+            self.dfuHelperUsbChangeHandler = usbChangeHandler;
         }
 
         async function installDfuDriver() {
@@ -928,6 +962,8 @@ tab.initialize = function (callback) {
         $('.firmware-helper-status, .firmware-helper-divider').toggleClass('supported', dfuHelperStatusSupported);
 
         if (dfuHelperStatusSupported) {
+            bindDfuHelperStatusRefreshOnUsbChanges();
+
             $('a.refresh-dfu-status').on('click', async function (e) {
                 e.preventDefault();
                 await refreshDfuHelperStatus();
@@ -1233,6 +1269,21 @@ tab.initialize = function (callback) {
 tab.cleanup = function (callback) {
     PortHandler.flush_callbacks();
     FirmwareCache.unload();
+
+    clearTimeout(this.dfuHelperStatusRefreshTimer);
+    this.dfuHelperStatusRefreshTimer = undefined;
+
+    if (this.dfuHelperUsbChangeHandler) {
+        if (chrome.usb?.onDeviceAdded?.removeListener) {
+            chrome.usb.onDeviceAdded.removeListener(this.dfuHelperUsbChangeHandler);
+        }
+
+        if (chrome.usb?.onDeviceRemoved?.removeListener) {
+            chrome.usb.onDeviceRemoved.removeListener(this.dfuHelperUsbChangeHandler);
+        }
+
+        this.dfuHelperUsbChangeHandler = undefined;
+    }
 
     // unbind "global" events
     $(document).unbind('keypress');
