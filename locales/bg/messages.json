@@ -5455,6 +5455,9 @@
         "message": "Изход от DFU режим",
         "english": "Exit DFU Mode"
     },
+    "firmwareFlasherEnterDfu": {
+        "message": "Enter DFU Mode"
+    },
     "firmwareFlasherFlashFirmware": {
         "message": "Флашване на фърмуер",
         "english": "Flash Firmware"

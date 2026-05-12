@@ -4243,6 +4243,9 @@
     "firmwareFlasherExitDfu": {
         "message": "Exit DFU Mode"
     },
+    "firmwareFlasherEnterDfu": {
+        "message": "Enter DFU Mode"
+    },
     "firmwareFlasherFlashFirmware": {
         "message": "Flash Firmware"
     },

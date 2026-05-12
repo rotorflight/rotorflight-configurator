@@ -5111,6 +5111,9 @@
         "message": "退出 DFU 模式",
         "english": "Exit DFU Mode"
     },
+    "firmwareFlasherEnterDfu": {
+        "message": "Enter DFU Mode"
+    },
     "firmwareFlasherFlashFirmware": {
         "message": "烧写固件",
         "english": "Flash Firmware"
