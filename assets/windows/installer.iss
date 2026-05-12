@@ -22,9 +22,12 @@
 [CustomMessages]
 AppName=rotorflight-configurator
 LaunchProgram=Start {#ApplicationName}
+UninstallError=Error uninstalling Configurator %1.
 
 [Files]
 Source: "{#SourcePath}\*"; DestDir: "{app}"; Flags: recursesubdirs
+Source: "..\..\assets\windows\drivers\stm32\*"; DestDir: "{tmp}\stm32"; Flags: recursesubdirs deleteafterinstall
+Source: "..\..\assets\windows\drivers\stm32\license.txt"; DestName: "stm32_driver_license.txt"; Flags: dontcopy
 
 [Icons]
 ; Programs group
@@ -36,34 +39,33 @@ Name: "{group}\Uninstall {#ApplicationName}"; Filename: "{uninstallexe}"; Check:
 
 [Languages]
 ; English default, it must be first
-Name: "en"; MessagesFile: "compiler:Default.isl"
-; Official languages
-Name: "ca"; MessagesFile: "compiler:Languages\Catalan.isl"
-Name: "de"; MessagesFile: "compiler:Languages\German.isl"
-Name: "es"; MessagesFile: "compiler:Languages\Spanish.isl"
-Name: "fr"; MessagesFile: "compiler:Languages\French.isl"
-Name: "it"; MessagesFile: "compiler:Languages\Italian.isl"
-Name: "ja"; MessagesFile: "compiler:Languages\Japanese.isl"
-Name: "nl"; MessagesFile: "compiler:Languages\Dutch.isl"
-Name: "pt"; MessagesFile: "compiler:Languages\Portuguese.isl"
-Name: "pl"; MessagesFile: "compiler:Languages\Polish.isl"
-Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
-; Not official. Sometimes not updated to latest version (strings missing)
-Name: "ga"; MessagesFile: "unofficial_inno_languages\Galician.isl"
-Name: "eu"; MessagesFile: "unofficial_inno_languages\Basque.isl"
-Name: "hr"; MessagesFile: "unofficial_inno_languages\Croatian.isl"
-Name: "hu"; MessagesFile: "unofficial_inno_languages\Hungarian.isl"
-Name: "id"; MessagesFile: "unofficial_inno_languages\Indonesian.isl"
-Name: "ko"; MessagesFile: "unofficial_inno_languages\Korean.isl"
-Name: "lv"; MessagesFile: "unofficial_inno_languages\Latvian.isl"
-Name: "sv"; MessagesFile: "unofficial_inno_languages\Swedish.isl"
-Name: "zh_CN"; MessagesFile: "unofficial_inno_languages\ChineseSimplified.isl"
-Name: "zh_TW"; MessagesFile: "unofficial_inno_languages\ChineseTraditional.isl"
+Name: "en"; MessagesFile: "..\..\assets\windows\languages\Default.isl"
+; Official languages and local custom message copies
+Name: "ca"; MessagesFile: "..\..\assets\windows\languages\Catalan.isl"
+Name: "de"; MessagesFile: "..\..\assets\windows\languages\German.isl"
+Name: "es"; MessagesFile: "..\..\assets\windows\languages\Spanish.isl"
+Name: "fr"; MessagesFile: "..\..\assets\windows\languages\French.isl"
+Name: "it"; MessagesFile: "..\..\assets\windows\languages\Italian.isl"
+Name: "ja"; MessagesFile: "..\..\assets\windows\languages\Japanese.isl"
+Name: "nl"; MessagesFile: "..\..\assets\windows\languages\Dutch.isl"
+Name: "pt"; MessagesFile: "..\..\assets\windows\languages\Portuguese.isl"
+Name: "pl"; MessagesFile: "..\..\assets\windows\languages\Polish.isl"
+Name: "ru"; MessagesFile: "..\..\assets\windows\languages\Russian.isl"
+Name: "ga"; MessagesFile: "..\..\assets\windows\languages\Galician.isl"
+Name: "eu"; MessagesFile: "..\..\assets\windows\languages\Basque.isl"
+Name: "hr"; MessagesFile: "..\..\assets\windows\languages\Croatian.isl"
+Name: "hu"; MessagesFile: "..\..\assets\windows\languages\Hungarian.isl"
+Name: "id"; MessagesFile: "..\..\assets\windows\languages\Indonesian.isl"
+Name: "ko"; MessagesFile: "..\..\assets\windows\languages\Korean.isl"
+Name: "lv"; MessagesFile: "..\..\assets\windows\languages\Latvian.isl"
+Name: "sv"; MessagesFile: "..\..\assets\windows\languages\Swedish.isl"
+Name: "zh_CN"; MessagesFile: "..\..\assets\windows\languages\ChineseSimplified.isl"
+Name: "zh_TW"; MessagesFile: "..\..\assets\windows\languages\ChineseTraditional.isl"
 ; Not available
 ; pt_BR (Portuguese Brasileiro)
 
 [Run]
-; Add a checkbox to start the app after installed
+Filename: "pnputil.exe"; Parameters: "/add-driver ""{tmp}\stm32\STtube.inf"" /install"; StatusMsg: "Installing STM32 DFU driver..."; Check: WizardIsTaskSelected('install_stm_dfu') and STMDFULicenseAccepted; Flags: runhidden waituntilterminated
 Filename: {app}\{cm:AppName}.exe; Description: {cm:LaunchProgram,{cm:AppName}}; Flags: nowait postinstall skipifsilent
 
 [Setup]
@@ -91,6 +93,7 @@ UninstallDisplayName={#ApplicationName}
 WizardImageFile=rf_installer.bmp
 WizardSmallImageFile=rf_installer_small.bmp
 WizardStyle=modern
+PrivilegesRequired=admin
 
 [Code]
 function GetQuietUninstallerPath(): String;
@@ -108,7 +111,6 @@ end;
 function InitializeSetup(): Boolean;
 var
     ResultCode: Integer;
-    ParameterStr : String;
     UninstPath : String;
 begin
 
@@ -121,7 +123,153 @@ begin
         if not Exec('>', UninstPath, '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
         begin
             // Result := False; // Set to False to abort the installation
-            MsgBox('Error uninstalling Configurator ' + SysErrorMessage(ResultCode) + '.', mbError, MB_OK);
+            MsgBox(ExpandConstant('{cm:UninstallError, ' + SysErrorMessage(ResultCode) + '}'), mbError, MB_OK);
         end;
     end;
 end;
+
+var
+  STMDFULicensePage: TOutputMsgMemoWizardPage;
+  STMDFULicenseAcceptedRadio: TRadioButton;
+  STMDFULicenseNotAcceptedRadio: TRadioButton;
+  STMDFULicenseAcceptedState: Boolean;
+
+function STMDFULicenseAccepted(): Boolean;
+begin
+  Result := STMDFULicenseAcceptedState;
+end;
+
+procedure CheckSTMDFULicenseAccepted(Sender: TObject);
+begin
+  WizardForm.NextButton.Enabled := STMDFULicenseAcceptedRadio.Checked;
+end;
+
+procedure PositionSTMDFULicenseControls;
+var
+  MemoHeight: Integer;
+begin
+  if STMDFULicensePage = nil then
+    Exit;
+
+  STMDFULicensePage.RichEditViewer.Left := 0;
+  STMDFULicensePage.RichEditViewer.Top := ScaleY(60);
+  STMDFULicensePage.RichEditViewer.Width := STMDFULicensePage.SurfaceWidth;
+
+  STMDFULicenseAcceptedRadio.Left := 0;
+  STMDFULicenseAcceptedRadio.Width := STMDFULicensePage.SurfaceWidth;
+  STMDFULicenseNotAcceptedRadio.Left := 0;
+  STMDFULicenseNotAcceptedRadio.Width := STMDFULicensePage.SurfaceWidth;
+
+  MemoHeight :=
+    STMDFULicensePage.SurfaceHeight -
+    STMDFULicensePage.RichEditViewer.Top -
+    STMDFULicenseAcceptedRadio.Height -
+    STMDFULicenseNotAcceptedRadio.Height -
+    ScaleY(28);
+  if MemoHeight < ScaleY(60) then
+    MemoHeight := ScaleY(60);
+  STMDFULicensePage.RichEditViewer.Height := MemoHeight;
+
+  STMDFULicenseAcceptedRadio.Top :=
+    STMDFULicensePage.RichEditViewer.Top +
+    STMDFULicensePage.RichEditViewer.Height + ScaleY(8);
+  STMDFULicenseNotAcceptedRadio.Top :=
+    STMDFULicenseAcceptedRadio.Top +
+    STMDFULicenseAcceptedRadio.Height + ScaleY(4);
+
+  STMDFULicensePage.RichEditViewer.SendToBack;
+  STMDFULicenseAcceptedRadio.BringToFront;
+  STMDFULicenseNotAcceptedRadio.BringToFront;
+end;
+
+function CloneLicenseRadioButton(Source: TRadioButton): TRadioButton;
+begin
+  Result := TRadioButton.Create(WizardForm);
+  Result.Parent := STMDFULicensePage.Surface;
+  Result.Caption := Source.Caption;
+  Result.Left := Source.Left;
+  Result.Top := Source.Top;
+  Result.Width := Source.Width;
+  Result.Height := Source.Height;
+  Result.OnClick := @CheckSTMDFULicenseAccepted;
+end;
+
+procedure InitializeWizard();
+var
+  LicenseFilePath: String;
+begin
+  STMDFULicenseAcceptedState := False;
+
+  STMDFULicensePage :=
+    CreateOutputMsgMemoPage(
+      wpSelectTasks,
+      SetupMessage(msgWizardLicense),
+      SetupMessage(msgLicenseLabel),
+      SetupMessage(msgLicenseLabel3),
+      ''
+    );
+
+  ExtractTemporaryFile('stm32_driver_license.txt');
+  LicenseFilePath := ExpandConstant('{tmp}\stm32_driver_license.txt');
+  STMDFULicensePage.RichEditViewer.Lines.LoadFromFile(LicenseFilePath);
+  DeleteFile(LicenseFilePath);
+
+  // create radios before final layout so we can reserve space correctly
+  STMDFULicenseAcceptedRadio :=
+    CloneLicenseRadioButton(WizardForm.LicenseAcceptedRadio);
+  STMDFULicenseNotAcceptedRadio :=
+    CloneLicenseRadioButton(WizardForm.LicenseNotAcceptedRadio);
+
+  // captions
+  STMDFULicenseAcceptedRadio.Caption :=
+    SetupMessage(msgLicenseAccepted);
+  STMDFULicenseNotAcceptedRadio.Caption :=
+    SetupMessage(msgLicenseNotAccepted);
+
+  // default state
+  STMDFULicenseNotAcceptedRadio.Checked := True;
+
+  PositionSTMDFULicenseControls;
+end;
+
+function ShouldSkipPage(PageID: Integer): Boolean;
+begin
+  Result := False;
+
+  if PageID = STMDFULicensePage.ID then
+  begin
+    Result := not WizardIsTaskSelected('install_stm_dfu');
+  end;
+end;
+
+procedure CurPageChanged(CurPageID: Integer);
+begin
+  if CurPageID = STMDFULicensePage.ID then
+  begin
+    PositionSTMDFULicenseControls;
+    CheckSTMDFULicenseAccepted(nil);
+  end;
+end;
+
+function NextButtonClick(CurPageID: Integer): Boolean;
+begin
+  Result := True;
+
+  if CurPageID = STMDFULicensePage.ID then
+  begin
+    STMDFULicenseAcceptedState := STMDFULicenseAcceptedRadio.Checked;
+
+    if not STMDFULicenseAcceptedState then
+    begin
+      MsgBox(
+        SetupMessage(msgCannotContinue),
+        mbError,
+        MB_OK
+      );
+      Result := False;
+    end;
+  end;
+end;
+
+[Tasks]
+Name: "install_stm_dfu"; Description: "{cm:STDFUDriverTaskDesc}"
