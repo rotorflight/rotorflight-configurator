@@ -6366,6 +6366,9 @@
         "message": "DFU 모드 나가기",
         "english": "Exit DFU Mode"
     },
+    "firmwareFlasherEnterDfu": {
+        "message": "Enter DFU Mode"
+    },
     "firmwareFlasherFlashFirmware": {
         "message": "펌웨어 플래시",
         "english": "Flash Firmware"

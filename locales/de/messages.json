@@ -5107,6 +5107,9 @@
         "message": "Bootloader-Modus Verlassen",
         "english": "Exit DFU Mode"
     },
+    "firmwareFlasherEnterDfu": {
+        "message": "Enter DFU Mode"
+    },
     "firmwareFlasherFlashFirmware": {
         "message": "Firmware Flashen",
         "english": "Flash Firmware"
