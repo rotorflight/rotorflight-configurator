@@ -877,7 +877,7 @@ tab.initialize = function (callback) {
             const driverElement = $('.dfu-driver-status');
             const licenseText = getSTM32DFUDriverLicenseText();
             const confirmed = window.confirm(
-                'Install the STMicroelectronics STM32 DFU driver?\n\n' +
+                'Install the STM32 WinUSB driver?\n\n' +
                     'This will request Windows administrator permission. Select OK only if you accept the license below.\n\n' +
                     licenseText
             );
@@ -904,7 +904,7 @@ tab.initialize = function (callback) {
                     .removeClass('unknown ok warning error')
                     .addClass('error')
                     .text('DFU Driver: Install failed');
-                GUI.log(`STM32 DFU driver install failed: ${result.message}`);
+                GUI.log(`STM32 WinUSB driver install failed: ${result.message}`);
             }
 
             installButton.text('Install');
