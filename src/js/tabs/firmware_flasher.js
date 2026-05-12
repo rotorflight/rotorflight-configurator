@@ -925,7 +925,7 @@ tab.initialize = function (callback) {
             }
         });
         const dfuHelperStatusSupported = supportsDfuHelperStatus();
-        $('.firmware-helper-status').toggleClass('supported', dfuHelperStatusSupported);
+        $('.firmware-helper-status, .firmware-helper-divider').toggleClass('supported', dfuHelperStatusSupported);
 
         if (dfuHelperStatusSupported) {
             $('a.refresh-dfu-status').on('click', async function (e) {
