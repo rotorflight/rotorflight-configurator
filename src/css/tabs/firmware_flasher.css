@@ -245,6 +245,17 @@
 .tab-firmware_flasher .options-container .field + .field {
     border-top: 1px solid var(--color-border);
 }
+.tab-firmware_flasher .firmware-helper-divider {
+    display: none;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    margin: 4px 0 6px;
+}
+
+.tab-firmware_flasher .firmware-helper-divider.supported {
+    display: block;
+}
+
 .tab-firmware_flasher .firmware-helper-status {
     display: none;
     align-items: center;
@@ -262,7 +273,7 @@
 }
 
 .tab-firmware_flasher .firmware-helper-status .install-dfu-driver {
-    margin-left: auto;
+    margin-left: clamp(48px, 28vw, 380px);
 }
 
 .tab-firmware_flasher .firmware-helper-status .install-dfu-driver,
