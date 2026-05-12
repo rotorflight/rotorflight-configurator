@@ -701,8 +701,10 @@ tab.initialize = function (callback) {
             /^feature [-]?TELEMETRY/i,
             /^resource PWM/i,
             /^resource MOTOR [5-8]/i,
+            /^resource OSD/i,
             /^serial [0-9]/i,
             /^set serialrx/i,
+            /^set max7456/i,
         ];
 
         function cleanUnifiedConfigFile(input) {
