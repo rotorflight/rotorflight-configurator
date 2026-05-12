@@ -191,7 +191,7 @@ function build_nwjs_linux_assets() {
 
 function build_nwjs_windows_assets() {
   return gulp
-    .src("assets/windows/drivers/stm32/**", { base: "." })
+    .src("assets/windows/drivers/stm32-winusb/**", { base: "." })
     .pipe(gulp.dest(`${context.appdir}/package.nw`));
 }
 
