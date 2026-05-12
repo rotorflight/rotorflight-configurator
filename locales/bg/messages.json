@@ -36,6 +36,26 @@
         "message": "Обхват",
         "english": "Range"
     },
+    "hours": {
+        "message": "{{count}} hour",
+        "english": "{{count}} hour",
+        "status": "New entry. Please translate!"
+    },
+    "hours_other": {
+        "message": "{{count}} hours",
+        "english": "{{count}} hours",
+        "status": "New entry. Please translate!"
+    },
+    "minutes": {
+        "message": "{{count}} minute",
+        "english": "{{count}} minute",
+        "status": "New entry. Please translate!"
+    },
+    "minutes_other": {
+        "message": "{{count}} minutes",
+        "english": "{{count}} minutes",
+        "status": "New entry. Please translate!"
+    },
     "axisROLL": {
         "message": "ЕЛЕРОН",
         "english": "ROLL",
@@ -1635,6 +1655,11 @@
         "message": "Дистанция",
         "english": "Distance"
     },
+    "flight_stats.duration.value": {
+        "message": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })",
+        "english": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })",
+        "status": "New entry. Please translate!"
+    },
     "beeper_GYRO_CALIBRATED": {
         "message": "Издава звук, когато жироскопът е калибриран",
         "english": "Beeps when gyro has been calibrated"
@@ -1881,6 +1906,11 @@
     "portsFunction_TELEMETRY_SMARTPORT": {
         "message": "Телеметрия: FrSky SmartPort",
         "english": "Telemetry: FrSky SmartPort"
+    },
+    "portsFunction_SPORT_MASTER": {
+        "message": "S.PORT Master",
+        "english": "S.PORT Master",
+        "status": "New entry. Please translate!"
     },
     "portsFunction_TELEMETRY_IBUS": {
         "message": "Телеметрия: FlySky iBUS",
@@ -2138,6 +2168,16 @@
         "message": "Канал за газта",
         "english": "Throttle Channel"
     },
+    "receiver.channel_range.automatic_throttle_range.label": {
+        "message": "Automatic Throttle Range",
+        "english": "Automatic Throttle Range",
+        "status": "New entry. Please translate!"
+    },
+    "receiver.channel_range.automatic_throttle_range.help": {
+        "message": "Calculates a suitable throttle range from the Stick Center and Stick Travel values.",
+        "english": "Calculates a suitable throttle range from the Stick Center and Stick Travel values.",
+        "status": "New entry. Please translate!"
+    },
     "receiverProtocol": {
         "message": "Протокол на приемника",
         "english": "Receiver Protocol"
@@ -2203,8 +2243,13 @@
         "english": "The throttle channel value where throttle is considered 0%."
     },
     "receiverHelpZeroThrottle2": {
-        "message": "<p>Стойността на канала за газта, която се счита за 0%. Задайте на 0 за автоматично задаване.</p><p><strong>Забележка:</strong> каналът за газта трябва да може да се движи поне с 10µs под тази стойност, за да сигнализира изключване на газта и да позволи активиране.</p>",
-        "english": "<p>The throttle channel value where throttle is considered 0%. Set to 0 to set automatically.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
+        "message": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>",
+        "english": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "<p>Стойността на канала за газта, която се счита за 0%. Задайте на 0 за автоматично задаване.</p><p><strong>Забележка:</strong> каналът за газта трябва да може да се движи поне с 10µs под тази стойност, за да сигнализира изключване на газта и да позволи активиране.</p>",
+            "english": "<p>The throttle channel value where throttle is considered 0%. Set to 0 to set automatically.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
+        }
     },
     "receiverFullThrottle": {
         "message": "Макс. Газ - 100%",
@@ -2215,8 +2260,13 @@
         "english": "The throttle channel value where throttle is considered 100%."
     },
     "receiverHelpFullThrottle2": {
-        "message": "Стойността на канала за газта, която се счита за 100%. Задайте на 0 за автоматично задаване.",
-        "english": "The throttle channel value where throttle is considered 100%. Set to 0 to set automatically."
+        "message": "The throttle channel value where throttle is considered 100%.",
+        "english": "The throttle channel value where throttle is considered 100%.",
+        "status": "Modified entry. Please translate!",
+        "previous": {
+            "message": "Стойността на канала за газта, която се счита за 100%. Задайте на 0 за автоматично задаване.",
+            "english": "The throttle channel value where throttle is considered 100%. Set to 0 to set automatically."
+        }
     },
     "receiverCyclicDeadband": {
         "message": "Цикличен мъртъв диапазон",
@@ -5398,6 +5448,16 @@
     "firmwareFlasherFullChipEraseDescription": {
         "message": "Изтрива всички конфигурационни данни, съхранени на платката.",
         "english": "Wipes all configuration data currently stored on the board."
+    },
+    "firmwareFlasherManualPort": {
+        "message": "Port",
+        "english": "Port",
+        "status": "New entry. Please translate!"
+    },
+    "firmwareFlasherBaudRate": {
+        "message": "Baud Rate",
+        "english": "Baud Rate",
+        "status": "New entry. Please translate!"
     },
     "firmware_flasher.show_legacy_targets.label": {
         "message": "Покажи по-стари таргети",
