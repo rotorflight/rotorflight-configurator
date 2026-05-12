@@ -344,4 +344,4 @@ AssocingFileExtension=Apvieno�ana %1 ar %2 faila papla�in�jumu...
 AutoStartProgramGroupDescription=starta:
 AutoStartProgram=Autom�tiski s�kt %1
 AddonHostProgramNotFound=%1 nevar atrasties map� j�s izv�l�j�ties.%n%nVai v�laties turpin�t?
-STWinUSBDriverTaskDesc=Instalēt STM32 BOOTLOADER WinUSB draiveri (nepieciešams programmaparatūras zibatmiņai)
+STDFUDriverTaskDesc=Instalēt STM32 DFU draiveri (nepieciešams programmaparatūras zibatmiņai)

@@ -381,4 +381,4 @@ AutoStartProgramGroupDescription=Beginn des Setups:
 AutoStartProgram=Starte automatisch%1
 AddonHostProgramNotFound=%1 konnte im ausgewählten Ordner nicht gefunden werden.%n%nMöchten Sie dennoch fortfahren?
 
-STWinUSBDriverTaskDesc=STM32 BOOTLOADER WinUSB-Treiber installieren (erforderlich für das Firmware-Flashen)
+STDFUDriverTaskDesc=STM32 DFU-Treiber installieren (erforderlich für das Firmware-Flashen)

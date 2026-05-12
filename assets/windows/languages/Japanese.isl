@@ -345,4 +345,4 @@ AssocingFileExtension=�t�@�C���g���q %2 �� %1 ���֘A
 AutoStartProgramGroupDescription=�X�^�[�g�A�b�v:
 AutoStartProgram=%1 �������I�ɊJ�n����
 AddonHostProgramNotFound=�I�����ꂽ�t�H���_�[�� %1 ��������܂���ł����B%n%n���̂܂ܑ��s���܂����H
-STWinUSBDriverTaskDesc=STM32 BOOTLOADER WinUSB ドライバーをインストールする（ファームウェア書き込みに必要）
+STDFUDriverTaskDesc=STM32 DFU ドライバーをインストールする（ファームウェア書き込みに必要）

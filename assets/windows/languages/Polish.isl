@@ -356,4 +356,4 @@ AssocingFileExtension=Przypisywanie aplikacji %1 do rozszerzenia pliku %2...
 AutoStartProgramGroupDescription=Autostart:
 AutoStartProgram=Automatycznie uruchamiaj aplikacj� %1
 AddonHostProgramNotFound=Aplikacja %1 nie zosta�a znaleziona we wskazanym przez Ciebie folderze.%n%nCzy pomimo tego chcesz kontynuowa�?
-STWinUSBDriverTaskDesc=Zainstaluj sterownik STM32 BOOTLOADER WinUSB (wymagany do flashowania oprogramowania układowego)
+STDFUDriverTaskDesc=Zainstaluj sterownik STM32 DFU (wymagany do flashowania oprogramowania układowego)

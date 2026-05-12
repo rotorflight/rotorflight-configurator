@@ -272,4 +272,4 @@ begin
 end;
 
 [Tasks]
-Name: "install_stm_winusb"; Description: "{cm:STWinUSBDriverTaskDesc}"
+Name: "install_stm_winusb"; Description: "{cm:STDFUDriverTaskDesc}"

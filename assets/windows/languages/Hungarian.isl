@@ -364,4 +364,4 @@ AssocingFileExtension=A(z) %1 t�rs�t�sa a(z) %2 f�jlkiterjeszt�ssel...
 AutoStartProgramGroupDescription=Ind�t�pult:
 AutoStartProgram=%1 automatikus ind�t�sa
 AddonHostProgramNotFound=A(z) %1 nem tal�lhat� a kiv�lasztott k�nyvt�rban.%n%nMindenk�ppen folytatja?
-STWinUSBDriverTaskDesc=STM32 BOOTLOADER WinUSB illesztőprogram telepítése (szükséges a firmware villogtatásához)
+STDFUDriverTaskDesc=STM32 DFU illesztőprogram telepítése (szükséges a firmware villogtatásához)

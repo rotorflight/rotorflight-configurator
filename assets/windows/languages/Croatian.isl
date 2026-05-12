@@ -365,4 +365,4 @@ AssocingFileExtension=Povezivanje programa %1 s datotečnim nastavkom %2 …
 AutoStartProgramGroupDescription=Pokretanje:
 AutoStartProgram=Automatski pokreni %1
 AddonHostProgramNotFound=%1 nije nađen u odabranoj mapi.%n%nŽeliš li svejedno nastaviti?
-STWinUSBDriverTaskDesc=Instaliraj STM32 BOOTLOADER WinUSB upravljački program (potreban za flashiranje firmvera)
+STDFUDriverTaskDesc=Instaliraj STM32 DFU upravljački program (potreban za flashiranje firmvera)

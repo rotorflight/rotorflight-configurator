@@ -362,4 +362,4 @@ AssocingFileExtension=Associating %1 with the %2 file extension...
 AutoStartProgramGroupDescription=Startup:
 AutoStartProgram=Automatically start %1
 AddonHostProgramNotFound=%1 could not be located in the folder you selected.%n%nDo you want to continue anyway?
-STWinUSBDriverTaskDesc=Install STM32 BOOTLOADER WinUSB driver (required for firmware flashing)
+STDFUDriverTaskDesc=Install STM32 DFU driver (required for firmware flashing)

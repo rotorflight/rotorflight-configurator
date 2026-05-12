@@ -337,4 +337,4 @@ AssocingFileExtension=%1 programa %2 agiri luzapenarekin elkartzen...
 AutoStartProgramGroupDescription=Abirazpena:
 AutoStartProgram=Berezgaitasunez abiarazi %1
 AddonHostProgramNotFound=%1 ezin da aurkitu hautatu duzun agiritegian.%n%nHorrela ere jarraitzea nahi duzu?
-STWinUSBDriverTaskDesc=Instalatu STM32 BOOTLOADER WinUSB kontrolagailua (firmware-flashingerako beharrezkoa)
+STDFUDriverTaskDesc=Instalatu STM32 DFU kontrolagailua (firmware-flashingerako beharrezkoa)
