@@ -6367,6 +6367,9 @@
         "english": "Exit DFU Mode",
         "status": "New entry. Please translate!"
     },
+    "firmwareFlasherEnterDfu": {
+        "message": "Enter DFU Mode"
+    },
     "firmwareFlasherFlashFirmware": {
         "message": "Flash Firmware",
         "english": "Flash Firmware",

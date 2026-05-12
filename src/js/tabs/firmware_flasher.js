@@ -5,6 +5,7 @@ import * as config from '@/js/config.js';
 import { readTextFile, writeTextFile } from '@/js/filesystem.js';
 import * as github from '@/js/GitHubApi.js';
 import { ReleaseChecker } from '@/js/release_checker.js';
+import { MSPConnectorImpl } from '@/js/msp/MSPConnector.js';
 import { manufacturers } from "@/js/manufacturers.js";
 import {
     checkSTM32DFUDriverInstalled,
@@ -1050,34 +1051,130 @@ tab.initialize = function (callback) {
         });
 
         const exitDfuElement = $('a.exit_dfu');
-        exitDfuElement.click(function () {
-            if (!$(this).hasClass('disabled')) {
-                if (!GUI.connect_lock) { // button disabled while flashing is in progress
-                    try {
-                        STM32DFU.connect(usbDevices, self.parsed_hex, { exitDfu: true });
-                    } catch (e) {
-                        console.log(`Exiting DFU failed: ${e.message}`);
-                    }
+        const detectBoardElement = $('a.detect-board');
+        const dfuButtonModes = {
+            ENTER: 'enter',
+            EXIT: 'exit',
+            UNAVAILABLE: 'unavailable',
+        };
+        let dfuButtonMode = dfuButtonModes.UNAVAILABLE;
+        const mspConnector = new MSPConnectorImpl();
+
+        function getSelectedPortData() {
+            return $('option:selected', portPickerElement).data() || {};
+        }
+
+        function getSelectedSerialPortName() {
+            const selectedPortData = getSelectedPortData();
+            return selectedPortData.isManual ? $('#port-override').val() : String(portPickerElement.val());
+        }
+
+        function selectedSerialPortCanEnterDfu() {
+            const selectedPortData = getSelectedPortData();
+            const selectedPort = getSelectedSerialPortName();
+            return selectedPort !== '0'
+                && selectedPort !== ''
+                && !selectedPortData.isDFU
+                && !selectedPortData.isVirtual;
+        }
+
+        function updateDfuButtonState() {
+            const selectedPortData = getSelectedPortData();
+            const dfuDetected = PortHandler.dfu_available || selectedPortData.isDFU;
+            let messageKey;
+
+            if (GUI.connect_lock) {
+                exitDfuElement.addClass('disabled');
+                return;
+            }
+
+            if (dfuDetected) {
+                dfuButtonMode = dfuButtonModes.EXIT;
+                messageKey = 'firmwareFlasherExitDfu';
+                exitDfuElement.removeClass('disabled');
+            } else if (selectedSerialPortCanEnterDfu()) {
+                dfuButtonMode = dfuButtonModes.ENTER;
+                messageKey = 'firmwareFlasherEnterDfu';
+                exitDfuElement.removeClass('disabled');
+            } else {
+                dfuButtonMode = dfuButtonModes.UNAVAILABLE;
+                messageKey = 'firmwareFlasherEnterDfu';
+                exitDfuElement.addClass('disabled');
+            }
+
+            exitDfuElement.text(i18n.getMessage(messageKey));
+        }
+
+        function disconnectAfterEnterDfu() {
+            setTimeout(function () {
+                serial.disconnect(function () {
+                    MSP.clearListeners();
+                    MSP.disconnect_cleanup();
+                    GUI.connect_lock = false;
+                    updateDfuButtonState();
+                });
+            }, 100);
+        }
+
+        function enterDfuMode() {
+            const port = getSelectedSerialPortName();
+            const baud = getIntegerValue('select#baud') ?? 115200;
+            const rebootType = globalThis.mspHelper?.REBOOT_TYPES?.BOOTLOADER ?? 1;
+
+            GUI.connect_lock = true;
+            updateDfuButtonState();
+            mspConnector.connect(
+                port,
+                baud,
+                function () {
+                    MSP.send_message(
+                        MSPCodes.MSP_SET_REBOOT,
+                        [rebootType],
+                        disconnectAfterEnterDfu,
+                        false
+                    );
+                },
+                function () {
+                    GUI.connect_lock = false;
+                    updateDfuButtonState();
+                },
+                function () {
+                    GUI.connect_lock = false;
+                    updateDfuButtonState();
                 }
+            );
+        }
+
+        exitDfuElement.click(function () {
+            if ($(this).hasClass('disabled') || GUI.connect_lock) {
+                return;
+            }
+
+            if (dfuButtonMode === dfuButtonModes.EXIT) {
+                try {
+                    STM32DFU.connect(usbDevices, self.parsed_hex, { exitDfu: true });
+                } catch (e) {
+                    console.log(`Exiting DFU failed: ${e.message}`);
+                }
+            } else if (dfuButtonMode === dfuButtonModes.ENTER) {
+                enterDfuMode();
             }
         });
-
-        const detectBoardElement = $('a.detect-board');
 
         // Notably, the portPickerElement "change" will be triggered repeatedly as it is setup on a timer in the port_handler
         portPickerElement.on("change", function () {
             if (!GUI.connect_lock) {
                 if ($('option:selected', this).data().isDFU) {
-                    exitDfuElement.removeClass('disabled');
                     detectBoardElement.toggleClass('disabled', true); // can't detect board in DFU mode.
                 } else {
                     $("a.load_remote_file").removeClass('disabled');
                     $("a.load_file").removeClass('disabled');
                     detectBoardElement.toggleClass('disabled', false);
-                    exitDfuElement.addClass('disabled');
                 }
+                updateDfuButtonState();
             }
         });
+        updateDfuButtonState();
 
         let board_auto_detect = (function() {
             let targetAvailable = false;

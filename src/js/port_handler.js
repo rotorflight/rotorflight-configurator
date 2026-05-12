@@ -137,8 +137,8 @@ PortHandler.check_usb_devices = function (callback) {
             if (!(GUI.connected_to || GUI.connect_lock)) {
                 FC.resetState();
             }
-            self.portPickerElement.trigger('change');
         }
+        self.portPickerElement.trigger('change');
     });
 };
 
