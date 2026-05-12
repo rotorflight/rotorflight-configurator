@@ -344,4 +344,4 @@ AssocingFileExtension=A associar o %1 aos ficheiros com a extens�o %2...
 AutoStartProgramGroupDescription=Inicializa��o Autom�tica:
 AutoStartProgram=Iniciar %1 automaticamente
 AddonHostProgramNotFound=N�o foi poss�vel localizar %1 na pasta seleccionada.%n%nDeseja continuar de qualquer forma?
-STDFUDriverTaskDesc=Instalar o driver STM32 DFU (requerido para o flash de firmware)
+STWinUSBDriverTaskDesc=Instalar o driver STM32 BOOTLOADER WinUSB (requerido para o flash de firmware)

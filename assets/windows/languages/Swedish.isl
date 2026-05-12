@@ -428,4 +428,4 @@ AssocingFileExtension=Associerar %1 med %2 filnamnstill�gg...
 AutoStartProgramGroupDescription=Autostart:
 AutoStartProgram=Starta automatiskt %1
 AddonHostProgramNotFound=%1 kunde inte hittas i katalogen du valde.%n%nVill du forts�tta �nd�?
-STDFUDriverTaskDesc=Installera STM32 DFU-drivrutinen (krävs för firmwareflashning)
+STWinUSBDriverTaskDesc=Installera STM32 BOOTLOADER WinUSB-drivrutinen (krävs för firmwareflashning)

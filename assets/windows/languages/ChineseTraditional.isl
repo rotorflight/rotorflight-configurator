@@ -357,4 +357,4 @@ AssocingFileExtension=正在將 %1 與檔案副檔名 %2 產生關聯...
 AutoStartProgramGroupDescription=開啟:
 AutoStartProgram=自動開啟 %1
 AddonHostProgramNotFound=%1 無法在您所選的資料夾中找到。%n%n您是否還要繼續？
-STDFUDriverTaskDesc=安裝 STM32 DFU 驅動程式（固件刷寫所必需）
+STWinUSBDriverTaskDesc=安裝 STM32 BOOTLOADER WinUSB 驅動程式（固件刷寫所必需）

@@ -340,4 +340,4 @@ AssocingFileExtension=Associant %1 amb l'extensi� de fitxer %2...
 AutoStartProgramGroupDescription=Inici:
 AutoStartProgram=Inicia autom�ticament %1
 AddonHostProgramNotFound=%1 no ha pogut ser trobat a la carpeta seleccionada.%n%nVoleu continuar igualment?
-STDFUDriverTaskDesc=Instal·lar el controlador STM32 DFU (requerit per a la flash de firmware)
+STWinUSBDriverTaskDesc=Instal·lar el controlador STM32 BOOTLOADER WinUSB (requerit per a la flash de firmware)

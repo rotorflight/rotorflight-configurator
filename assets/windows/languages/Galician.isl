@@ -335,4 +335,4 @@ AssocingFileExtension=A asociar %1 coa %2 extensión de arquivo...
 AutoStartProgramGroupDescription=Inicio:
 AutoStartProgram=Iniciar %1 automaticamente
 AddonHostProgramNotFound=Non se puido localizar %1 no cartafol que seleccionou.%n%nDesexa continuar de todas formas?
-STDFUDriverTaskDesc=Instalar o controlador STM32 DFU (requirido para o flash de firmware)
+STWinUSBDriverTaskDesc=Instalar o controlador STM32 BOOTLOADER WinUSB (requirido para o flash de firmware)

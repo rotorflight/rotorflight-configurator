@@ -26,8 +26,8 @@ UninstallError=Error uninstalling Configurator %1.
 
 [Files]
 Source: "{#SourcePath}\*"; DestDir: "{app}"; Flags: recursesubdirs
-Source: "..\..\assets\windows\drivers\stm32\*"; DestDir: "{tmp}\stm32"; Flags: recursesubdirs deleteafterinstall
-Source: "..\..\assets\windows\drivers\stm32\license.txt"; DestName: "stm32_driver_license.txt"; Flags: dontcopy
+Source: "..\..\assets\windows\drivers\stm32-winusb\*"; DestDir: "{tmp}\stm32-winusb"; Flags: recursesubdirs deleteafterinstall
+Source: "..\..\assets\windows\drivers\stm32-winusb\license\libusb0\installer_license.txt"; DestName: "stm32_winusb_driver_license.txt"; Flags: dontcopy
 
 [Icons]
 ; Programs group
@@ -65,7 +65,7 @@ Name: "zh_TW"; MessagesFile: "..\..\assets\windows\languages\ChineseTraditional.
 ; pt_BR (Portuguese Brasileiro)
 
 [Run]
-Filename: "pnputil.exe"; Parameters: "/add-driver ""{tmp}\stm32\STtube.inf"" /install"; StatusMsg: "Installing STM32 DFU driver..."; Check: WizardIsTaskSelected('install_stm_dfu') and STMDFULicenseAccepted; Flags: runhidden waituntilterminated
+Filename: "pnputil.exe"; Parameters: "/add-driver ""{tmp}\stm32-winusb\STM32_BOOTLOADER.inf"" /install"; StatusMsg: "Installing STM32 BOOTLOADER WinUSB driver..."; Check: WizardIsTaskSelected('install_stm_winusb') and STMWinUSBLicenseAccepted; Flags: runhidden waituntilterminated
 Filename: {app}\{cm:AppName}.exe; Description: {cm:LaunchProgram,{cm:AppName}}; Flags: nowait postinstall skipifsilent
 
 [Setup]
@@ -129,78 +129,78 @@ begin
 end;
 
 var
-  STMDFULicensePage: TOutputMsgMemoWizardPage;
-  STMDFULicenseAcceptedRadio: TRadioButton;
-  STMDFULicenseNotAcceptedRadio: TRadioButton;
-  STMDFULicenseAcceptedState: Boolean;
+  STMWinUSBLicensePage: TOutputMsgMemoWizardPage;
+  STMWinUSBLicenseAcceptedRadio: TRadioButton;
+  STMWinUSBLicenseNotAcceptedRadio: TRadioButton;
+  STMWinUSBLicenseAcceptedState: Boolean;
 
-function STMDFULicenseAccepted(): Boolean;
+function STMWinUSBLicenseAccepted(): Boolean;
 begin
-  Result := STMDFULicenseAcceptedState;
+  Result := STMWinUSBLicenseAcceptedState;
 end;
 
-procedure CheckSTMDFULicenseAccepted(Sender: TObject);
+procedure CheckSTMWinUSBLicenseAccepted(Sender: TObject);
 begin
-  WizardForm.NextButton.Enabled := STMDFULicenseAcceptedRadio.Checked;
+  WizardForm.NextButton.Enabled := STMWinUSBLicenseAcceptedRadio.Checked;
 end;
 
-procedure PositionSTMDFULicenseControls;
+procedure PositionSTMWinUSBLicenseControls;
 var
   MemoHeight: Integer;
 begin
-  if STMDFULicensePage = nil then
+  if STMWinUSBLicensePage = nil then
     Exit;
 
-  STMDFULicensePage.RichEditViewer.Left := 0;
-  STMDFULicensePage.RichEditViewer.Top := ScaleY(60);
-  STMDFULicensePage.RichEditViewer.Width := STMDFULicensePage.SurfaceWidth;
+  STMWinUSBLicensePage.RichEditViewer.Left := 0;
+  STMWinUSBLicensePage.RichEditViewer.Top := ScaleY(60);
+  STMWinUSBLicensePage.RichEditViewer.Width := STMWinUSBLicensePage.SurfaceWidth;
 
-  STMDFULicenseAcceptedRadio.Left := 0;
-  STMDFULicenseAcceptedRadio.Width := STMDFULicensePage.SurfaceWidth;
-  STMDFULicenseNotAcceptedRadio.Left := 0;
-  STMDFULicenseNotAcceptedRadio.Width := STMDFULicensePage.SurfaceWidth;
+  STMWinUSBLicenseAcceptedRadio.Left := 0;
+  STMWinUSBLicenseAcceptedRadio.Width := STMWinUSBLicensePage.SurfaceWidth;
+  STMWinUSBLicenseNotAcceptedRadio.Left := 0;
+  STMWinUSBLicenseNotAcceptedRadio.Width := STMWinUSBLicensePage.SurfaceWidth;
 
   MemoHeight :=
-    STMDFULicensePage.SurfaceHeight -
-    STMDFULicensePage.RichEditViewer.Top -
-    STMDFULicenseAcceptedRadio.Height -
-    STMDFULicenseNotAcceptedRadio.Height -
+    STMWinUSBLicensePage.SurfaceHeight -
+    STMWinUSBLicensePage.RichEditViewer.Top -
+    STMWinUSBLicenseAcceptedRadio.Height -
+    STMWinUSBLicenseNotAcceptedRadio.Height -
     ScaleY(28);
   if MemoHeight < ScaleY(60) then
     MemoHeight := ScaleY(60);
-  STMDFULicensePage.RichEditViewer.Height := MemoHeight;
+  STMWinUSBLicensePage.RichEditViewer.Height := MemoHeight;
 
-  STMDFULicenseAcceptedRadio.Top :=
-    STMDFULicensePage.RichEditViewer.Top +
-    STMDFULicensePage.RichEditViewer.Height + ScaleY(8);
-  STMDFULicenseNotAcceptedRadio.Top :=
-    STMDFULicenseAcceptedRadio.Top +
-    STMDFULicenseAcceptedRadio.Height + ScaleY(4);
+  STMWinUSBLicenseAcceptedRadio.Top :=
+    STMWinUSBLicensePage.RichEditViewer.Top +
+    STMWinUSBLicensePage.RichEditViewer.Height + ScaleY(8);
+  STMWinUSBLicenseNotAcceptedRadio.Top :=
+    STMWinUSBLicenseAcceptedRadio.Top +
+    STMWinUSBLicenseAcceptedRadio.Height + ScaleY(4);
 
-  STMDFULicensePage.RichEditViewer.SendToBack;
-  STMDFULicenseAcceptedRadio.BringToFront;
-  STMDFULicenseNotAcceptedRadio.BringToFront;
+  STMWinUSBLicensePage.RichEditViewer.SendToBack;
+  STMWinUSBLicenseAcceptedRadio.BringToFront;
+  STMWinUSBLicenseNotAcceptedRadio.BringToFront;
 end;
 
 function CloneLicenseRadioButton(Source: TRadioButton): TRadioButton;
 begin
   Result := TRadioButton.Create(WizardForm);
-  Result.Parent := STMDFULicensePage.Surface;
+  Result.Parent := STMWinUSBLicensePage.Surface;
   Result.Caption := Source.Caption;
   Result.Left := Source.Left;
   Result.Top := Source.Top;
   Result.Width := Source.Width;
   Result.Height := Source.Height;
-  Result.OnClick := @CheckSTMDFULicenseAccepted;
+  Result.OnClick := @CheckSTMWinUSBLicenseAccepted;
 end;
 
 procedure InitializeWizard();
 var
   LicenseFilePath: String;
 begin
-  STMDFULicenseAcceptedState := False;
+  STMWinUSBLicenseAcceptedState := False;
 
-  STMDFULicensePage :=
+  STMWinUSBLicensePage :=
     CreateOutputMsgMemoPage(
       wpSelectTasks,
       SetupMessage(msgWizardLicense),
@@ -209,45 +209,45 @@ begin
       ''
     );
 
-  ExtractTemporaryFile('stm32_driver_license.txt');
-  LicenseFilePath := ExpandConstant('{tmp}\stm32_driver_license.txt');
-  STMDFULicensePage.RichEditViewer.Lines.LoadFromFile(LicenseFilePath);
+  ExtractTemporaryFile('stm32_winusb_driver_license.txt');
+  LicenseFilePath := ExpandConstant('{tmp}\stm32_winusb_driver_license.txt');
+  STMWinUSBLicensePage.RichEditViewer.Lines.LoadFromFile(LicenseFilePath);
   DeleteFile(LicenseFilePath);
 
   // create radios before final layout so we can reserve space correctly
-  STMDFULicenseAcceptedRadio :=
+  STMWinUSBLicenseAcceptedRadio :=
     CloneLicenseRadioButton(WizardForm.LicenseAcceptedRadio);
-  STMDFULicenseNotAcceptedRadio :=
+  STMWinUSBLicenseNotAcceptedRadio :=
     CloneLicenseRadioButton(WizardForm.LicenseNotAcceptedRadio);
 
   // captions
-  STMDFULicenseAcceptedRadio.Caption :=
+  STMWinUSBLicenseAcceptedRadio.Caption :=
     SetupMessage(msgLicenseAccepted);
-  STMDFULicenseNotAcceptedRadio.Caption :=
+  STMWinUSBLicenseNotAcceptedRadio.Caption :=
     SetupMessage(msgLicenseNotAccepted);
 
   // default state
-  STMDFULicenseNotAcceptedRadio.Checked := True;
+  STMWinUSBLicenseNotAcceptedRadio.Checked := True;
 
-  PositionSTMDFULicenseControls;
+  PositionSTMWinUSBLicenseControls;
 end;
 
 function ShouldSkipPage(PageID: Integer): Boolean;
 begin
   Result := False;
 
-  if PageID = STMDFULicensePage.ID then
+  if PageID = STMWinUSBLicensePage.ID then
   begin
-    Result := not WizardIsTaskSelected('install_stm_dfu');
+    Result := not WizardIsTaskSelected('install_stm_winusb');
   end;
 end;
 
 procedure CurPageChanged(CurPageID: Integer);
 begin
-  if CurPageID = STMDFULicensePage.ID then
+  if CurPageID = STMWinUSBLicensePage.ID then
   begin
-    PositionSTMDFULicenseControls;
-    CheckSTMDFULicenseAccepted(nil);
+    PositionSTMWinUSBLicenseControls;
+    CheckSTMWinUSBLicenseAccepted(nil);
   end;
 end;
 
@@ -255,11 +255,11 @@ function NextButtonClick(CurPageID: Integer): Boolean;
 begin
   Result := True;
 
-  if CurPageID = STMDFULicensePage.ID then
+  if CurPageID = STMWinUSBLicensePage.ID then
   begin
-    STMDFULicenseAcceptedState := STMDFULicenseAcceptedRadio.Checked;
+    STMWinUSBLicenseAcceptedState := STMWinUSBLicenseAcceptedRadio.Checked;
 
-    if not STMDFULicenseAcceptedState then
+    if not STMWinUSBLicenseAcceptedState then
     begin
       MsgBox(
         SetupMessage(msgCannotContinue),
@@ -272,4 +272,4 @@ begin
 end;
 
 [Tasks]
-Name: "install_stm_dfu"; Description: "{cm:STDFUDriverTaskDesc}"
+Name: "install_stm_winusb"; Description: "{cm:STWinUSBDriverTaskDesc}"

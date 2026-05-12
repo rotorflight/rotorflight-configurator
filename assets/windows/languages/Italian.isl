@@ -368,4 +368,4 @@ AssocingFileExtension=Associazione dei file con estensione %2 a %1...
 AutoStartProgramGroupDescription=Esecuzione automatica:
 AutoStartProgram=Esegui automaticamente %1
 AddonHostProgramNotFound=Impossibile individuare %1 nella cartella selezionata.%n%nVuoi continuare ugualmente?
-STDFUDriverTaskDesc=Installa il driver STM32 DFU (richiesto per il flashing del firmware)
+STWinUSBDriverTaskDesc=Installa il driver STM32 BOOTLOADER WinUSB (richiesto per il flashing del firmware)

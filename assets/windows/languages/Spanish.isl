@@ -356,4 +356,4 @@ AssocingFileExtension=Asociando %1 con la extensi�n de archivo %2...
 AutoStartProgramGroupDescription=Inicio:
 AutoStartProgram=Iniciar autom�ticamente %1
 AddonHostProgramNotFound=%1 no pudo ser localizado en la carpeta seleccionada.%n%n�Desea continuar de todas formas?
-STDFUDriverTaskDesc=Instalar el controlador STM32 DFU (requerido para el flasheo de firmware)
+STWinUSBDriverTaskDesc=Instalar el controlador STM32 BOOTLOADER WinUSB (requerido para el flasheo de firmware)

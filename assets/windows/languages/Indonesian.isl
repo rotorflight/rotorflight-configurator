@@ -362,4 +362,4 @@ AssocingFileExtension=Mengasosiasikan %1 dengan ekstensi berkas %2 ....
 AutoStartProgramGroupDescription=Startup:
 AutoStartProgram=Jalankan %1 secara otomatis
 AddonHostProgramNotFound=%1 tidak dapat ditemukan di dalam map yang Anda pilih.%n%nTetap lanjutkan?
-STDFUDriverTaskDesc=Pasang driver STM32 DFU (diperlukan untuk flashing firmware)
+STWinUSBDriverTaskDesc=Pasang driver STM32 BOOTLOADER WinUSB (diperlukan untuk flashing firmware)
