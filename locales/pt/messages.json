@@ -6366,6 +6366,9 @@
         "message": "Sair do modo DFU",
         "english": "Exit DFU Mode"
     },
+    "firmwareFlasherEnterDfu": {
+        "message": "Enter DFU Mode"
+    },
     "firmwareFlasherFlashFirmware": {
         "message": "Flashar Firmware",
         "english": "Flash Firmware"
