@@ -272,4 +272,4 @@ begin
 end;
 
 [Tasks]
-Name: "install_stm_dfu"; Description: "{cm:STDFUDriverTaskDesc}"; Flags: unchecked
+Name: "install_stm_dfu"; Description: "{cm:STDFUDriverTaskDesc}"
