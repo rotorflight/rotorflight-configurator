@@ -266,14 +266,18 @@
 
 .tab-firmware_flasher .firmware-helper-status.supported {
     display: flex;
+    justify-content: space-between;
+}
+
+.tab-firmware_flasher .firmware-helper-status .dfu-statuses,
+.tab-firmware_flasher .firmware-helper-status .dfu-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .tab-firmware_flasher .firmware-helper-status .footer-separator {
     opacity: 0.5;
-}
-
-.tab-firmware_flasher .firmware-helper-status .install-dfu-driver {
-    margin-left: clamp(48px, 28vw, 380px);
 }
 
 .tab-firmware_flasher .firmware-helper-status .install-dfu-driver,
