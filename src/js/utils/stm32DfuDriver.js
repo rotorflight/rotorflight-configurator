@@ -61,7 +61,7 @@ const STM32_DFU_DRIVER_INF_NAME = 'STM32Bootloader.inf';
 const STM32_DFU_DRIVER_PACKAGE_INF_NAME = 'stm32bootloader.inf';
 
 function getSTM32DFUDriverAssetPath(fileName) {
-    const relativeDriverPath = path.join('assets', 'windows', 'drivers', 'stm32-winusb', fileName);
+    const relativeDriverPath = path.join('assets', 'windows', 'drivers', 'stm32', fileName);
 
     return getApplicationRootCandidates()
         .map((candidate) => path.join(candidate, relativeDriverPath))
@@ -73,7 +73,7 @@ function getSTM32DFUDriverInfPath() {
 }
 
 function getSTM32DFUDriverLicenseText() {
-    const licensePath = getSTM32DFUDriverAssetPath(path.join('license', 'libusb0', 'installer_license.txt'));
+    const licensePath = getSTM32DFUDriverAssetPath('license.txt');
 
     if (!licensePath) {
         return 'The bundled STM32 WinUSB driver notice could not be found.';
@@ -91,9 +91,9 @@ function quoteVbsString(value) {
 }
 
 function createHiddenElevatedInstallScripts(driverInfPath) {
-    const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'rotorflight-stm32-winusb-'));
-    const elevatedScriptPath = path.join(tempDirectory, 'elevated-stm32-winusb-driver-install.vbs');
-    const runnerScriptPath = path.join(tempDirectory, 'run-stm32-winusb-driver-install.vbs');
+    const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'rotorflight-stm32-dfu-'));
+    const elevatedScriptPath = path.join(tempDirectory, 'elevated-stm32-dfu-driver-install.vbs');
+    const runnerScriptPath = path.join(tempDirectory, 'run-stm32-dfu-driver-install.vbs');
     const stdoutPath = path.join(tempDirectory, 'pnputil.stdout.log');
     const stderrPath = path.join(tempDirectory, 'pnputil.stderr.log');
     const exitCodePath = path.join(tempDirectory, 'pnputil.exitcode');
