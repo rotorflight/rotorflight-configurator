@@ -26,8 +26,8 @@ UninstallError=Error uninstalling Configurator %1.
 
 [Files]
 Source: "{#SourcePath}\*"; DestDir: "{app}"; Flags: recursesubdirs
-Source: "..\..\assets\windows\drivers\stm32-winusb\*"; DestDir: "{tmp}\stm32-winusb"; Flags: recursesubdirs deleteafterinstall
-Source: "..\..\assets\windows\drivers\stm32-winusb\license\libusb0\installer_license.txt"; DestName: "stm32_driver_license.txt"; Flags: dontcopy
+Source: "..\..\assets\windows\drivers\stm32\*"; DestDir: "{tmp}\stm32"; Flags: recursesubdirs deleteafterinstall
+Source: "..\..\assets\windows\drivers\stm32\license.txt"; DestName: "stm32_driver_license.txt"; Flags: dontcopy
 
 [Icons]
 ; Programs group
@@ -65,7 +65,7 @@ Name: "zh_TW"; MessagesFile: "..\..\assets\windows\languages\ChineseTraditional.
 ; pt_BR (Portuguese Brasileiro)
 
 [Run]
-Filename: "pnputil.exe"; Parameters: "/add-driver ""{tmp}\stm32-winusb\STM32_BOOTLOADER.inf"" /install"; StatusMsg: "Installing STM32 DFU driver..."; Check: WizardIsTaskSelected('install_stm_dfu') and STMDFULicenseAccepted; Flags: runhidden waituntilterminated
+Filename: "pnputil.exe"; Parameters: "/add-driver ""{tmp}\stm32\STM32Bootloader.inf"" /install"; StatusMsg: "Installing STM32 DFU driver..."; Check: WizardIsTaskSelected('install_stm_dfu') and STMDFULicenseAccepted; Flags: runhidden waituntilterminated
 Filename: {app}\{cm:AppName}.exe; Description: {cm:LaunchProgram,{cm:AppName}}; Flags: nowait postinstall skipifsilent
 
 [Setup]
