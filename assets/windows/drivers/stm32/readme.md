@@ -24,7 +24,7 @@ The full STM32CubeProgrammer application, command line tools, examples, and unre
 - STM32Bootloader.inf
 - STM32Bootloader.cat
 
-This driver package uses the Microsoft WinUSB driver stack through `winusb.inf`.
+The included `STM32Bootloader.inf` package installs the STM32 Bootloader device using Microsoft's built-in WinUSB driver stack.
 
 ## Installation
 
