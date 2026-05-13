@@ -26,8 +26,8 @@ UninstallError=Error uninstalling Configurator %1.
 
 [Files]
 Source: "{#SourcePath}\*"; DestDir: "{app}"; Flags: recursesubdirs
-Source: "..\..\assets\windows\drivers\stm32-winusb\*"; DestDir: "{tmp}\stm32-winusb"; Flags: recursesubdirs deleteafterinstall
-Source: "..\..\assets\windows\drivers\stm32-winusb\license\libusb0\installer_license.txt"; DestName: "stm32_driver_license.txt"; Flags: dontcopy
+Source: "..\..\assets\windows\drivers\stm32\*"; DestDir: "{tmp}\stm32"; Flags: recursesubdirs deleteafterinstall
+Source: "..\..\assets\windows\drivers\stm32\license.txt"; DestName: "stm32_driver_license.txt"; Flags: dontcopy
 
 [Icons]
 ; Programs group

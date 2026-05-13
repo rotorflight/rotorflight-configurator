@@ -55,11 +55,11 @@ function getApplicationRootCandidates() {
     return [...new Set(candidates)];
 }
 
-const STM32_DFU_DRIVER_INF_NAME = 'STM32_BOOTLOADER.inf';
-const STM32_DFU_DRIVER_PACKAGE_INF_NAME = 'stm32_bootloader.inf';
+const STM32_DFU_DRIVER_INF_NAME = 'STM32Bootloader.inf';
+const STM32_DFU_DRIVER_PACKAGE_INF_NAME = 'STM32Bootloader.inf';
 
 function getSTM32DFUDriverAssetPath(fileName) {
-    const relativeDriverPath = path.join('assets', 'windows', 'drivers', 'stm32-winusb', fileName);
+    const relativeDriverPath = path.join('assets', 'windows', 'drivers', 'stm32', fileName);
 
     return getApplicationRootCandidates()
         .map((candidate) => path.join(candidate, relativeDriverPath))
@@ -68,16 +68,6 @@ function getSTM32DFUDriverAssetPath(fileName) {
 
 function getSTM32DFUDriverInfPath() {
     return getSTM32DFUDriverAssetPath(STM32_DFU_DRIVER_INF_NAME);
-}
-
-function getSTM32DFUDriverLicenseText() {
-    const licensePath = getSTM32DFUDriverAssetPath(path.join('license', 'libusb0', 'installer_license.txt'));
-
-    if (!licensePath) {
-        return 'The bundled STM32 WinUSB driver notice could not be found.';
-    }
-
-    return fs.readFileSync(licensePath, 'utf8');
 }
 
 function quoteWindowsCommandArgument(value) {
@@ -89,9 +79,9 @@ function quoteVbsString(value) {
 }
 
 function createHiddenElevatedInstallScripts(driverInfPath) {
-    const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'rotorflight-stm32-winusb-'));
-    const elevatedScriptPath = path.join(tempDirectory, 'elevated-stm32-winusb-driver-install.vbs');
-    const runnerScriptPath = path.join(tempDirectory, 'run-stm32-winusb-driver-install.vbs');
+    const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'rotorflight-stm32-dfu-'));
+    const elevatedScriptPath = path.join(tempDirectory, 'elevated-stm32-dfu-driver-install.vbs');
+    const runnerScriptPath = path.join(tempDirectory, 'run-stm32-dfu-driver-install.vbs');
     const stdoutPath = path.join(tempDirectory, 'pnputil.stdout.log');
     const stderrPath = path.join(tempDirectory, 'pnputil.stderr.log');
     const exitCodePath = path.join(tempDirectory, 'pnputil.exitcode');
@@ -162,7 +152,7 @@ For attempt = 1 To 2400
 Next
 Dim timeoutLog
 Set timeoutLog = fileSystem.OpenTextFile(${quoteVbsString(stderrPath)}, 8, True)
-timeoutLog.WriteLine "Timed out waiting for elevated STM32 WinUSB driver install to finish."
+timeoutLog.WriteLine "Timed out waiting for elevated STM32 DFU driver install to finish."
 timeoutLog.Close
 WScript.Quit 1
 `;
@@ -222,18 +212,18 @@ function checkSTM32DFUDriverInstalled() {
 
                 const output = stdout.toLowerCase();
 
-                // Detect the bundled STM32 WinUSB package. Firmware flashing requires
-                // WinUSB for the STM32 ROM bootloader rather than the legacy STTube
-                // DFUSe driver, which can enumerate but cannot be used by WebUSB.
-                const installed = output.includes(STM32_DFU_DRIVER_PACKAGE_INF_NAME);
+            // Detect the official STMicroelectronics STM32 Bootloader driver package.
+            // This package installs the STM32 DFU bootloader device using the included
+            // STM32Bootloader.inf package, which references Microsoft's built-in WinUSB stack.
+            const installed = output.includes(STM32_DFU_DRIVER_PACKAGE_INF_NAME.toLowerCase());
 
-                resolve({
-                    supported: true,
-                    installed,
-                    message: installed
-                        ? 'STM32 WinUSB driver installed'
-                        : 'STM32 WinUSB driver not installed',
-                });
+            resolve({
+                supported: true,
+                installed,
+                message: installed
+                    ? 'STM32 DFU driver installed'
+                    : 'STM32 DFU driver not installed',
+            });
             }
         );
     });
@@ -300,7 +290,7 @@ function installSTM32DFUDriver() {
             resolve({
                 supported: true,
                 installed: false,
-                message: 'STM32 WinUSB driver package not found',
+                message: 'STM32 DFU driver package not found',
             });
             return;
         }
@@ -333,8 +323,8 @@ function installSTM32DFUDriver() {
                         supported: true,
                         installed: driverStatus.installed,
                         message: driverStatus.installed
-                            ? installLog || 'STM32 WinUSB driver installation completed'
-                            : installLog || error.message,
+                        ? installLog || 'STM32 DFU driver installation completed'
+                        : installLog || error.message,
                     });
                     return;
                 }
@@ -342,7 +332,7 @@ function installSTM32DFUDriver() {
                 resolve({
                     supported: true,
                     installed: true,
-                    message: installLog || 'STM32 WinUSB driver installation completed',
+                    message: installLog || 'STM32 DFU driver installation completed',
                 });
             }
         );
@@ -364,6 +354,5 @@ export {
     checkSTM32DFUDriverInstalled,
     checkSTM32DFUDevicePresent,
     getSTM32DFUStatus,
-    getSTM32DFUDriverLicenseText,
     installSTM32DFUDriver,
 };
