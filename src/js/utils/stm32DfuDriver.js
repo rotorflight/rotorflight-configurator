@@ -70,12 +70,12 @@ function getSTM32DFUDriverInfPath() {
     return getSTM32DFUDriverAssetPath(STM32_DFU_DRIVER_INF_NAME);
 }
 
-function quoteWindowsCommandArgument(value) {
-    return `"${value.replaceAll('"', '""')}"`;
+function quoteCmdArg(value) {
+    return `"${String(value).replaceAll('"', '\\"')}"`;
 }
 
 function quoteVbsString(value) {
-    return `"${value.replaceAll('"', '""')}"`;
+    return `"${String(value).replaceAll('"', '""')}"`;
 }
 
 function createHiddenElevatedInstallScripts(driverInfPath) {
@@ -85,24 +85,27 @@ function createHiddenElevatedInstallScripts(driverInfPath) {
     const stdoutPath = path.join(tempDirectory, 'pnputil.stdout.log');
     const stderrPath = path.join(tempDirectory, 'pnputil.stderr.log');
     const exitCodePath = path.join(tempDirectory, 'pnputil.exitcode');
+
     const pnputilCommand = [
-        quoteWindowsCommandArgument(getPnputilPath()),
+        quoteCmdArg(getPnputilPath()),
         '/add-driver',
-        quoteWindowsCommandArgument(driverInfPath),
+        quoteCmdArg(driverInfPath),
         '/install',
         '>',
-        quoteWindowsCommandArgument(stdoutPath),
+        quoteCmdArg(stdoutPath),
         '2>',
-        quoteWindowsCommandArgument(stderrPath),
-    ].join(' ');
-    const cmdCommand = [
-        quoteWindowsCommandArgument(getCmdPath()),
-        '/d',
-        '/c',
-        quoteWindowsCommandArgument(pnputilCommand),
+        quoteCmdArg(stderrPath),
     ].join(' ');
 
-    const elevatedScript = `
+    const cmdCommand = [
+        quoteCmdArg(getCmdPath()),
+        '/d',
+        '/s',
+        '/c',
+        `"${pnputilCommand}"`,
+    ].join(' ');
+
+const elevatedScript = `
 On Error Resume Next
 Dim shell
 Dim fileSystem
@@ -133,7 +136,7 @@ Dim exitCode
 Dim attempt
 Set fileSystem = CreateObject("Scripting.FileSystemObject")
 Set shellApplication = CreateObject("Shell.Application")
-shellApplication.ShellExecute ${quoteVbsString(getWindowsScriptHostPath())}, ${quoteVbsString(quoteWindowsCommandArgument(elevatedScriptPath))}, "", "runas", 0
+shellApplication.ShellExecute ${quoteVbsString(getWindowsScriptHostPath())}, ${quoteVbsString(quoteCmdArg(elevatedScriptPath))}, "", "runas", 0
 If Err.Number <> 0 Then
     Dim shellExecuteErrorLog
     Set shellExecuteErrorLog = fileSystem.OpenTextFile(${quoteVbsString(stderrPath)}, 8, True)
@@ -210,7 +213,7 @@ function checkSTM32DFUDriverInstalled() {
                     return;
                 }
 
-                const output = stdout.toLowerCase();
+            const output = stdout.toLowerCase();
 
             // Detect the official STMicroelectronics STM32 Bootloader driver package.
             // This package installs the STM32 DFU bootloader device using the included
@@ -308,7 +311,7 @@ function installSTM32DFUDriver() {
             return;
         }
 
-        execFile(
+       execFile(
             getWindowsScriptHostPath(),
             [installScripts.runnerScriptPath],
             { windowsHide: true },
@@ -316,23 +319,25 @@ function installSTM32DFUDriver() {
                 const installLog = readInstallLog(installScripts.stdoutPath, installScripts.stderrPath);
                 removeInstallScripts(installScripts.tempDirectory);
 
-                if (error) {
-                    const driverStatus = await checkSTM32DFUDriverInstalled();
+                const driverStatus = await checkSTM32DFUDriverInstalled();
 
+                if (error) {
                     resolve({
                         supported: true,
                         installed: driverStatus.installed,
                         message: driverStatus.installed
-                        ? installLog || 'STM32 DFU driver installation completed'
-                        : installLog || error.message,
+                            ? installLog || 'STM32 DFU driver installation completed'
+                            : installLog || error.message,
                     });
                     return;
                 }
 
                 resolve({
                     supported: true,
-                    installed: true,
-                    message: installLog || 'STM32 DFU driver installation completed',
+                    installed: driverStatus.installed,
+                    message: driverStatus.installed
+                        ? installLog || 'STM32 DFU driver installation completed'
+                        : installLog || 'STM32 DFU driver installer completed, but the driver was not detected afterward',
                 });
             }
         );
