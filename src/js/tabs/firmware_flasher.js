@@ -773,6 +773,18 @@ tab.initialize = function (callback) {
             }
         }
 
+        function refreshDfuDeviceDiscoveryAfterDriverInstall() {
+            PortHandler.check_usb_devices();
+            PortHandler.check_serial_devices();
+
+            [1000, 2500, 5000].forEach((timeout, index) => {
+                GUI.timeout_add(`dfu_driver_refresh_${index}`, function () {
+                    PortHandler.check_usb_devices();
+                    PortHandler.check_serial_devices();
+                }, timeout);
+            });
+        }
+
         async function installDfuDriver() {
             const installButton = $('a.install_dfu_driver');
             if (installButton.hasClass('disabled')) {
@@ -784,6 +796,7 @@ tab.initialize = function (callback) {
 
             try {
                 const installed = await installStm32DfuDriver();
+                refreshDfuDeviceDiscoveryAfterDriverInstall();
                 await checkDfuDriverRequirement();
                 if (installed && !self.dfuDriverFlashBlocked) {
                     setDfuDriverInstallStatus();

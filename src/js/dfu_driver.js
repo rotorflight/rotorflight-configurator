@@ -111,6 +111,7 @@ async function runElevatedPnputilInstall(infPath) {
         `$exitCodePath = ${quotePowerShellString(exitCodePath)};`,
         "& $pnputil /add-driver $inf /install *> $outputPath;",
         "$code = if ($null -ne $LASTEXITCODE) { $LASTEXITCODE } else { 1 };",
+        "& $pnputil /scan-devices *>> $outputPath;",
         "Set-Content -LiteralPath $exitCodePath -Value $code -Encoding ASCII;",
         "exit $code;",
     ].join(" ");
