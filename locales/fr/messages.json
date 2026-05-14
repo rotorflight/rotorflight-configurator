@@ -5139,6 +5139,42 @@
         "message": "Veuillez faire <span class=\"message-negative\">UNIQUEMENT</span> flasher le matériel <strong>Rotorflight</strong> ou <strong>Betaflight</strong> avec ce flasheur de firmware.<br /><br /><strong>Remarque : </strong>Le chargeur de démarrage STM32 est stocké dans la ROM, il ne peut pas être intégré.<br /><strong>Remarque : </strong><span class=\"message-negative\">Connexion automatique </span> est toujours désactivé lorsque vous êtes dans le microprogramme flasher.<br /><strong>Remarque : </strong>Assurez-vous d'avoir une sauvegarde ; certaines mises à niveau/rétrogradations effaceront votre configuration.<br /><strong>Remarque :</strong> Si vous rencontrez des problèmes de flash, <strong>essayez d'abord de déconnecter tous les câbles de votre FC</strong>, essayez de redémarrer et mettez à niveau les pilotes.< br /><strong>Remarque :</strong> Lorsque vous flashez des cartes qui ont des prises USB directement connectées (la plupart des cartes les plus récentes), assurez-vous d'avoir lu la section Flashage USB du manuel et d'avoir installé le logiciel et les pilotes appropriés.",
         "english": "Please do <span class=\"message-negative\">ONLY</span> flash <strong>Rotorflight</strong> or <strong>Betaflight</strong> hardware with this firmware flasher.<br /><br /><strong>Note: </strong>STM32 bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note: </strong><span class=\"message-negative\">Auto-Connect</span> is always disabled while you are inside firmware flasher.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your FC</strong> first, try rebooting, upgrade drivers.<br /><strong>Note:</strong> When flashing boards that have directly connected USB sockets (most newer boards) ensure you have read the USB Flashing section of the manual and have the correct software and drivers installed"
     },
+    "firmwareFlasherDfuDriverRequiredTitle": {
+        "message": "❌ STM32 DFU Driver Required",
+        "english": "❌ STM32 DFU Driver Required"
+    },
+    "firmwareFlasherDfuDriverRequiredText": {
+        "message": "The STM32 DFU driver is not installed.",
+        "english": "The STM32 DFU driver is not installed."
+    },
+    "firmwareFlasherDfuDriverRequiredWindowsText": {
+        "message": "Windows requires this driver before flashing boards in DFU mode.",
+        "english": "Windows requires this driver before flashing boards in DFU mode."
+    },
+    "firmwareFlasherInstallDfuDriver": {
+        "message": "Install STM32 DFU Driver",
+        "english": "Install STM32 DFU Driver"
+    },
+    "firmwareFlasherDfuDriverInstalling": {
+        "message": "Installing STM32 DFU driver...",
+        "english": "Installing STM32 DFU driver..."
+    },
+    "firmwareFlasherDfuDriverMissingLog": {
+        "message": "STM32 DFU driver is required before flashing firmware on Windows.",
+        "english": "STM32 DFU driver is required before flashing firmware on Windows."
+    },
+    "firmwareFlasherDfuDriverCheckFailed": {
+        "message": "STM32 DFU driver check failed: $1",
+        "english": "STM32 DFU driver check failed: $1"
+    },
+    "firmwareFlasherDfuDriverInstallFailed": {
+        "message": "STM32 DFU driver installation did not complete successfully.",
+        "english": "STM32 DFU driver installation did not complete successfully."
+    },
+    "firmwareFlasherDfuDriverInstallFailedWithError": {
+        "message": "STM32 DFU driver installation failed: $1",
+        "english": "STM32 DFU driver installation failed: $1"
+    },
     "firmwareFlasherRecoveryHead": {
         "message": "<strong>Récupération / Communication coupée</strong>",
         "english": "<strong>Recovery / Lost communication</strong>"

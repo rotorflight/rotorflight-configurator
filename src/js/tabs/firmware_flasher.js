@@ -6,6 +6,7 @@ import { readTextFile, writeTextFile } from '@/js/filesystem.js';
 import * as github from '@/js/GitHubApi.js';
 import { ReleaseChecker } from '@/js/release_checker.js';
 import { manufacturers } from "@/js/manufacturers.js";
+import { installStm32DfuDriver, isStm32DfuDriverInstalled } from "@/js/dfu_driver.js";
 
 async function getCachedUnifiedTargets() {
   const { unifiedSourceCache } = await new Promise((resolve) => chrome.storage.local.get("unifiedSourceCache", resolve));
@@ -29,6 +30,7 @@ const tab = {
     unifiedTarget: {}, // the Unified Target configuration to be spliced into the configuration
     isConfigLocal: false, // Set to true if the user loads one locally
     boardDetectionInProgress: false,
+    dfuDriverFlashBlocked: false,
 };
 
 tab.initialize = function (callback) {
@@ -39,6 +41,7 @@ tab.initialize = function (callback) {
     self.isConfigLocal = false;
     self.intel_hex = undefined;
     self.parsed_hex = undefined;
+    self.dfuDriverFlashBlocked = false;
 
 
     function onFirmwareCacheUpdate(release) {
@@ -733,6 +736,87 @@ tab.initialize = function (callback) {
             return output;
         }
 
+
+        function setDfuDriverInstallStatus(message, isError = false) {
+            const statusElement = $('.dfu-driver-install-status');
+            statusElement.text(message ?? '');
+            statusElement.toggleClass('invalid', isError);
+        }
+
+        function showDfuDriverWarning(show) {
+            $('.dfu-driver-warning').prop('hidden', !show).toggle(show);
+            self.dfuDriverFlashBlocked = show;
+            if (show) {
+                self.enableFlashing(false);
+            } else if (self.parsed_hex) {
+                self.enableFlashing(true);
+            }
+        }
+
+        async function checkDfuDriverRequirement() {
+            if (GUI.operating_system !== 'Windows') {
+                showDfuDriverWarning(false);
+                return;
+            }
+
+            try {
+                const installed = await isStm32DfuDriverInstalled();
+                showDfuDriverWarning(!installed);
+                if (!installed) {
+                    GUI.log(i18n.getMessage('firmwareFlasherDfuDriverMissingLog'));
+                }
+            } catch (error) {
+                console.log(`STM32 DFU driver check failed: ${error.message}`);
+                GUI.log(i18n.getMessage('firmwareFlasherDfuDriverCheckFailed', [error.message]));
+                showDfuDriverWarning(true);
+                setDfuDriverInstallStatus(i18n.getMessage('firmwareFlasherDfuDriverCheckFailed', [error.message]), true);
+            }
+        }
+
+        function refreshDfuDeviceDiscoveryAfterDriverInstall() {
+            PortHandler.check_usb_devices();
+            PortHandler.check_serial_devices();
+
+            [1000, 2500, 5000].forEach((timeout, index) => {
+                GUI.timeout_add(`dfu_driver_refresh_${index}`, function () {
+                    PortHandler.check_usb_devices();
+                    PortHandler.check_serial_devices();
+                }, timeout);
+            });
+        }
+
+        async function installDfuDriver() {
+            const installButton = $('a.install_dfu_driver');
+            if (installButton.hasClass('disabled')) {
+                return;
+            }
+
+            installButton.addClass('disabled');
+            setDfuDriverInstallStatus(i18n.getMessage('firmwareFlasherDfuDriverInstalling'));
+
+            try {
+                const installed = await installStm32DfuDriver();
+                refreshDfuDeviceDiscoveryAfterDriverInstall();
+                await checkDfuDriverRequirement();
+                if (installed && !self.dfuDriverFlashBlocked) {
+                    setDfuDriverInstallStatus();
+                } else {
+                    const message = i18n.getMessage('firmwareFlasherDfuDriverInstallFailed');
+                    console.log(message);
+                    GUI.log(message);
+                    setDfuDriverInstallStatus(message, true);
+                }
+            } catch (error) {
+                const message = i18n.getMessage('firmwareFlasherDfuDriverInstallFailedWithError', [error.message]);
+                console.log(message);
+                GUI.log(message);
+                setDfuDriverInstallStatus(message, true);
+                showDfuDriverWarning(true);
+            } finally {
+                installButton.removeClass('disabled');
+            }
+        }
+
         const portPickerElement = $('div#port-picker #port');
         function flashFirmware(firmware) {
             const options = {
@@ -778,7 +862,14 @@ tab.initialize = function (callback) {
             buildType_e.val(result.selected_build_type || 0).trigger('change');
         });
 
+        checkDfuDriverRequirement();
+
         // UI Hooks
+        $('a.install_dfu_driver').on('click', function (event) {
+            event.preventDefault();
+            installDfuDriver();
+        });
+
         $('a.load_file').on('click', async function () {
             self.enableFlashing(false);
 
@@ -1061,6 +1152,11 @@ tab.initialize = function (callback) {
         });
 
         function startFlashing() {
+            if (self.dfuDriverFlashBlocked) {
+                GUI.log(i18n.getMessage('firmwareFlasherDfuDriverMissingLog'));
+                return;
+            }
+
             exitDfuElement.addClass('disabled');
             $("a.load_remote_file").addClass('disabled');
             $("a.load_file").addClass('disabled');
@@ -1128,7 +1224,7 @@ tab.cleanup = function (callback) {
 };
 
 tab.enableFlashing = function (enabled) {
-    if (enabled) {
+    if (enabled && !this.dfuDriverFlashBlocked) {
         $('a.flash_firmware').removeClass('disabled');
     } else {
         $('a.flash_firmware').addClass('disabled');
