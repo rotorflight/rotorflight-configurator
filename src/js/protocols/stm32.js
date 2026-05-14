@@ -63,18 +63,23 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
     // we will crunch the options here since doing it inside initialization routine would be too late
     self.options = {
         no_reboot:      false,
-        reboot_baud:    false,
-        erase_chip:     false
+        reboot_baud:    baud,
+        erase_chip:     false,
+        enter_dfu:      false,
     };
 
     if (options.no_reboot) {
         self.options.no_reboot = true;
     } else {
-        self.options.reboot_baud = options.reboot_baud;
+        self.options.reboot_baud = options.reboot_baud ?? baud;
     }
 
     if (options.erase_chip) {
         self.options.erase_chip = true;
+    }
+
+    if (options.enterDfu) {
+        self.options.enter_dfu = true;
     }
 
     if (self.options.no_reboot) {
@@ -93,6 +98,15 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
         var startFlashing = function() {
             // refresh device list
             PortHandler.check_usb_devices(function(dfu_available) {
+                if (self.options.enter_dfu) {
+                    GUI.connect_lock = false;
+                    if (!dfu_available) {
+                        GUI.log(i18n.getMessage('stm32UsbDfuNotFound'));
+                    }
+                    self.callback?.();
+                    return;
+                }
+
                 if(dfu_available) {
                     STM32DFU.connect(usbDevices, hex, options);
                 } else {

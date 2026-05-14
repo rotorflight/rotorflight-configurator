@@ -896,34 +896,70 @@ tab.initialize = function (callback) {
         });
 
         const exitDfuElement = $('a.exit_dfu');
-        exitDfuElement.click(function () {
-            if (!$(this).hasClass('disabled')) {
-                if (!GUI.connect_lock) { // button disabled while flashing is in progress
-                    try {
-                        STM32DFU.connect(usbDevices, self.parsed_hex, { exitDfu: true });
-                    } catch (e) {
-                        console.log(`Exiting DFU failed: ${e.message}`);
-                    }
-                }
-            }
-        });
-
         const detectBoardElement = $('a.detect-board');
 
-        // Notably, the portPickerElement "change" will be triggered repeatedly as it is setup on a timer in the port_handler
-        portPickerElement.on("change", function () {
-            if (!GUI.connect_lock) {
-                if ($('option:selected', this).data().isDFU) {
-                    exitDfuElement.removeClass('disabled');
-                    detectBoardElement.toggleClass('disabled', true); // can't detect board in DFU mode.
+        function updateDfuButton(messageKey, disabled) {
+            exitDfuElement
+                .attr('i18n', messageKey)
+                .toggleClass('disabled', disabled)
+                .removeClass('i18n-replaced')
+                .text(i18n.getMessage(messageKey));
+        }
+
+        function selectedPortIsSerial() {
+            const optionData = $('option:selected', portPickerElement).data();
+            const port = String(portPickerElement.val());
+
+            return port !== '0' && !optionData.isDFU && !optionData.isManual && !optionData.isVirtual;
+        }
+
+        function enterDfuMode() {
+            if (!selectedPortIsSerial()) {
+                GUI.log(i18n.getMessage('firmwareFlasherNoValidPort'));
+                return;
+            }
+
+            const port = String(portPickerElement.val());
+            const baud = getIntegerValue('select#baud') ?? 115200;
+            STM32.connect(port, baud, self.parsed_hex, { enterDfu: true });
+        }
+
+        exitDfuElement.click(function () {
+            if ($(this).hasClass('disabled') || GUI.connect_lock) {
+                return;
+            }
+
+            try {
+                if ($('option:selected', portPickerElement).data().isDFU) {
+                    STM32DFU.connect(usbDevices, self.parsed_hex, { exitDfu: true });
                 } else {
-                    $("a.load_remote_file").removeClass('disabled');
-                    $("a.load_file").removeClass('disabled');
-                    detectBoardElement.toggleClass('disabled', false);
-                    exitDfuElement.addClass('disabled');
+                    enterDfuMode();
                 }
+            } catch (e) {
+                console.log(`DFU mode change failed: ${e.message}`);
             }
         });
+
+        // Notably, the portPickerElement "change" will be triggered repeatedly as it is setup on a timer in the port_handler
+        function updateDfuButtonState() {
+            if (GUI.connect_lock) {
+                updateDfuButton('firmwareFlasherExitDfu', true);
+                return;
+            }
+
+            if ($('option:selected', portPickerElement).data().isDFU) {
+                updateDfuButton('firmwareFlasherExitDfu', false);
+                detectBoardElement.toggleClass('disabled', true); // can't detect board in DFU mode.
+            } else {
+                $("a.load_remote_file").removeClass('disabled');
+                $("a.load_file").removeClass('disabled');
+                detectBoardElement.toggleClass('disabled', false);
+                updateDfuButton('firmwareFlasherEnterDfu', !selectedPortIsSerial());
+            }
+        }
+
+        portPickerElement.on("change", updateDfuButtonState);
+        updateDfuButtonState();
 
         let board_auto_detect = (function() {
             let targetAvailable = false;
