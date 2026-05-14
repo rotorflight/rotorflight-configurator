@@ -245,3 +245,23 @@
 .tab-firmware_flasher .options-container .field + .field {
     border-top: 1px solid var(--color-border);
 }
+
+.tab-firmware_flasher .dfu-driver-warning {
+    border-color: #a62e32;
+}
+
+.tab-firmware_flasher .dfu-driver-warning .spacer p {
+    font-weight: bold;
+}
+
+.tab-firmware_flasher .dfu-driver-install-row {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.tab-firmware_flasher .dfu-driver-install-status.invalid {
+    color: #a62e32;
+    font-weight: bold;
+}

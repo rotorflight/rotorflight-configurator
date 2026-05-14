@@ -5143,6 +5143,42 @@
         "message": "请<span class=\"message-negative\">仅使用</span>此固件刷写器刷写 <strong>Rotorflight</strong> 或 <strong>Betaflight</strong> 硬件。<br /><br /><strong>注意：</strong>STM32 引导加载程序存储在 ROM 中，不会出现变砖的情况。<br /><strong>注意：</strong> 在使用固件刷新程序时，自动连接（Auto-Connect）功能始终处于禁用状态。<br /><strong>注意：</strong>确保有备份；某些升级/降级会清除你的配置。<br /><strong>注意：</strong> 如果在刷写过程中遇到问题，请先断开 FC 上的所有电缆连接，尝试重启并升级驱动程序。<br /><strong>注意：</strong> 在刷写直接连接 USB 插座的电路板（大多数较新的电路板）时，确保已阅读手册中的 USB 刷写部分，并安装了正确的软件和驱动程序。",
         "english": "Please do <span class=\"message-negative\">ONLY</span> flash <strong>Rotorflight</strong> or <strong>Betaflight</strong> hardware with this firmware flasher.<br /><br /><strong>Note: </strong>STM32 bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note: </strong><span class=\"message-negative\">Auto-Connect</span> is always disabled while you are inside firmware flasher.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your FC</strong> first, try rebooting, upgrade drivers.<br /><strong>Note:</strong> When flashing boards that have directly connected USB sockets (most newer boards) ensure you have read the USB Flashing section of the manual and have the correct software and drivers installed"
     },
+    "firmwareFlasherDfuDriverRequiredTitle": {
+        "message": "❌ STM32 DFU Driver Required",
+        "english": "❌ STM32 DFU Driver Required"
+    },
+    "firmwareFlasherDfuDriverRequiredText": {
+        "message": "The STM32 DFU driver is not installed.",
+        "english": "The STM32 DFU driver is not installed."
+    },
+    "firmwareFlasherDfuDriverRequiredWindowsText": {
+        "message": "Windows requires this driver before flashing boards in DFU mode.",
+        "english": "Windows requires this driver before flashing boards in DFU mode."
+    },
+    "firmwareFlasherInstallDfuDriver": {
+        "message": "Install STM32 DFU Driver",
+        "english": "Install STM32 DFU Driver"
+    },
+    "firmwareFlasherDfuDriverInstalling": {
+        "message": "Installing STM32 DFU driver...",
+        "english": "Installing STM32 DFU driver..."
+    },
+    "firmwareFlasherDfuDriverMissingLog": {
+        "message": "STM32 DFU driver is required before flashing firmware on Windows.",
+        "english": "STM32 DFU driver is required before flashing firmware on Windows."
+    },
+    "firmwareFlasherDfuDriverCheckFailed": {
+        "message": "STM32 DFU driver check failed: $1",
+        "english": "STM32 DFU driver check failed: $1"
+    },
+    "firmwareFlasherDfuDriverInstallFailed": {
+        "message": "STM32 DFU driver installation did not complete successfully.",
+        "english": "STM32 DFU driver installation did not complete successfully."
+    },
+    "firmwareFlasherDfuDriverInstallFailedWithError": {
+        "message": "STM32 DFU driver installation failed: $1",
+        "english": "STM32 DFU driver installation failed: $1"
+    },
     "firmwareFlasherRecoveryHead": {
         "message": "<strong> 恢复/丢失通信 </strong>",
         "english": "<strong>Recovery / Lost communication</strong>"
