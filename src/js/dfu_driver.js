@@ -32,41 +32,41 @@ function execFile(file, args, options = {}) {
     });
 }
 
-function execCommand(command, options = {}) {
-    const childProcess = getNodeModule("child_process");
-    const execOptions = { windowsHide: true, ...options };
 
-    return new Promise((resolve, reject) => {
-        childProcess.exec(command, execOptions, (error, stdout, stderr) => {
-            if (error) {
-                error.stdout = stdout;
-                error.stderr = stderr;
-                reject(error);
-                return;
-            }
-
-            resolve({ stdout, stderr });
-        });
-    });
-}
-
-function quoteWindowsCommandArg(value) {
-    return `"${String(value).replace(/"/g, '\\"')}"`;
-}
-
-function getSystemExecutable(fileName) {
+function getSystemDirectory() {
     if (typeof process === "undefined") {
-        return fileName;
+        return undefined;
     }
 
     const systemRoot = process.env.SystemRoot ?? process.env.windir;
     if (!systemRoot) {
-        return fileName;
+        return undefined;
     }
 
     const path = getNodeModule("path");
     const systemDirectory = process.arch === "ia32" && process.env.PROCESSOR_ARCHITEW6432 ? "Sysnative" : "System32";
-    return path.join(systemRoot, systemDirectory, fileName);
+    return path.join(systemRoot, systemDirectory);
+}
+
+function getSystemExecutable(fileName) {
+    const path = getNodeModule("path");
+    const systemDirectory = getSystemDirectory();
+    return systemDirectory ? path.join(systemDirectory, fileName) : fileName;
+}
+
+function getPowerShellExecutable() {
+    const path = getNodeModule("path");
+    const systemDirectory = getSystemDirectory();
+    return systemDirectory ? path.join(systemDirectory, "WindowsPowerShell", "v1.0", "powershell.exe") : "powershell.exe";
+}
+
+function encodePowerShellCommand(command) {
+    const buffer = getNodeModule("buffer").Buffer;
+    return buffer.from(command, "utf16le").toString("base64");
+}
+
+function quotePowerShellString(value) {
+    return `'${String(value).replace(/'/g, "''")}'`;
 }
 
 function formatProcessError(error) {
@@ -76,6 +76,84 @@ function formatProcessError(error) {
         .trim();
 
     return output || error.message;
+}
+
+function readFileIfExists(path) {
+    const fs = getNodeModule("fs");
+    try {
+        return fs.readFileSync(path, "utf8");
+    } catch {
+        return "";
+    }
+}
+
+function removeFileIfExists(path) {
+    const fs = getNodeModule("fs");
+    try {
+        fs.unlinkSync(path);
+    } catch {
+        // Ignore cleanup failures for temporary install logs.
+    }
+}
+
+async function runElevatedPnputilInstall(infPath) {
+    const os = getNodeModule("os");
+    const path = getNodeModule("path");
+    const basePath = path.join(os.tmpdir(), `rotorflight-stm32-dfu-driver-${Date.now()}`);
+    const outputPath = `${basePath}.log`;
+    const exitCodePath = `${basePath}.exit`;
+
+    const innerCommand = [
+        "$ErrorActionPreference = 'Continue';",
+        `$pnputil = ${quotePowerShellString(getSystemExecutable("pnputil.exe"))};`,
+        `$inf = ${quotePowerShellString(infPath)};`,
+        `$outputPath = ${quotePowerShellString(outputPath)};`,
+        `$exitCodePath = ${quotePowerShellString(exitCodePath)};`,
+        "& $pnputil /add-driver $inf /install *> $outputPath;",
+        "$code = if ($null -ne $LASTEXITCODE) { $LASTEXITCODE } else { 1 };",
+        "Set-Content -LiteralPath $exitCodePath -Value $code -Encoding ASCII;",
+        "exit $code;",
+    ].join(" ");
+
+    const outerCommand = [
+        "$ErrorActionPreference = 'Stop';",
+        `$powerShell = ${quotePowerShellString(getPowerShellExecutable())};`,
+        `$encodedCommand = ${quotePowerShellString(encodePowerShellCommand(innerCommand))};`,
+        "$process = Start-Process -FilePath $powerShell -ArgumentList @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-EncodedCommand', $encodedCommand) -Verb RunAs -WindowStyle Hidden -Wait -PassThru;",
+        "if ($null -eq $process) { exit 1 };",
+        "exit $process.ExitCode;",
+    ].join(" ");
+
+    let launchError;
+    try {
+        await execFile(getPowerShellExecutable(), [
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-WindowStyle",
+            "Hidden",
+            "-EncodedCommand",
+            encodePowerShellCommand(outerCommand),
+        ]);
+    } catch (error) {
+        launchError = error;
+    }
+
+    const output = readFileIfExists(outputPath).trim();
+    const exitCodeText = readFileIfExists(exitCodePath).trim();
+    const exitCode = exitCodeText ? Number.parseInt(exitCodeText, 10) : launchError?.code;
+
+    removeFileIfExists(outputPath);
+    removeFileIfExists(exitCodePath);
+
+    if (launchError && !Number.isFinite(exitCode)) {
+        throw new Error(formatProcessError(launchError), { cause: launchError });
+    }
+
+    return {
+        exitCode: Number.isFinite(exitCode) ? exitCode : 1,
+        output: output || (launchError ? formatProcessError(launchError) : ""),
+    };
 }
 
 function hasStm32DfuDriver(output) {
@@ -154,23 +232,14 @@ export async function installStm32DfuDriver() {
         throw new Error("STM32 DFU driver package was not found");
     }
 
-    const pnputilPath = getSystemExecutable("pnputil.exe");
-    const command = [
-        quoteWindowsCommandArg(pnputilPath),
-        "/add-driver",
-        quoteWindowsCommandArg(infPath),
-        "/install",
-    ].join(" ");
-
-    try {
-        await execCommand(command);
-    } catch (error) {
-        if (await isStm32DfuDriverInstalled()) {
-            return true;
-        }
-
-        throw new Error(formatProcessError(error), { cause: error });
+    const result = await runElevatedPnputilInstall(infPath);
+    if (result.exitCode === 0) {
+        return isStm32DfuDriverInstalled();
     }
 
-    return isStm32DfuDriverInstalled();
+    if (await isStm32DfuDriverInstalled()) {
+        return true;
+    }
+
+    throw new Error(result.output || `pnputil exited with code ${result.exitCode}`);
 }
