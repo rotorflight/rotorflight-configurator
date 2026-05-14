@@ -321,9 +321,7 @@ tab.initialize = function (callback) {
         }
 
         function updateSmartFuelTuningVisibility() {
-            const smartFuelSource = parseInt(smartFuelSource_e.val() || 0);
-
-            elementSmartFuelConfiguration.find('.smartFuelTuning').toggle(smartFuelSupported && smartFuelSource === 1);
+            elementSmartFuelConfiguration.find('.smartFuelTuning').toggle(smartFuelSupported);
         }
 
         updateDisplay();
