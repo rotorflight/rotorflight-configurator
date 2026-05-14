@@ -32,6 +32,52 @@ function execFile(file, args, options = {}) {
     });
 }
 
+function execCommand(command, options = {}) {
+    const childProcess = getNodeModule("child_process");
+    const execOptions = { windowsHide: true, ...options };
+
+    return new Promise((resolve, reject) => {
+        childProcess.exec(command, execOptions, (error, stdout, stderr) => {
+            if (error) {
+                error.stdout = stdout;
+                error.stderr = stderr;
+                reject(error);
+                return;
+            }
+
+            resolve({ stdout, stderr });
+        });
+    });
+}
+
+function quoteWindowsCommandArg(value) {
+    return `"${String(value).replace(/"/g, '\\"')}"`;
+}
+
+function getSystemExecutable(fileName) {
+    if (typeof process === "undefined") {
+        return fileName;
+    }
+
+    const systemRoot = process.env.SystemRoot ?? process.env.windir;
+    if (!systemRoot) {
+        return fileName;
+    }
+
+    const path = getNodeModule("path");
+    const systemDirectory = process.arch === "ia32" && process.env.PROCESSOR_ARCHITEW6432 ? "Sysnative" : "System32";
+    return path.join(systemRoot, systemDirectory, fileName);
+}
+
+function formatProcessError(error) {
+    const output = [error.stdout, error.stderr]
+        .filter((value) => value && value.trim())
+        .join("\n")
+        .trim();
+
+    return output || error.message;
+}
+
 function hasStm32DfuDriver(output) {
     return /stm32bootloader\.inf/i.test(output)
         || /stm32 bootloader/i.test(output)
@@ -39,13 +85,13 @@ function hasStm32DfuDriver(output) {
 }
 
 async function hasDriverPackage() {
-    const { stdout, stderr } = await execFile("pnputil.exe", ["/enum-drivers"]);
+    const { stdout, stderr } = await execFile(getSystemExecutable("pnputil.exe"), ["/enum-drivers"]);
     return hasStm32DfuDriver(`${stdout}\n${stderr}`);
 }
 
 async function hasInstalledDeviceDriver() {
     try {
-        const { stdout, stderr } = await execFile("pnputil.exe", ["/enum-devices", "/instanceid", STM32_DFU_DEVICE_ID]);
+        const { stdout, stderr } = await execFile(getSystemExecutable("pnputil.exe"), ["/enum-devices", "/instanceid", STM32_DFU_DEVICE_ID]);
         const output = `${stdout}\n${stderr}`;
         return /vid_0483&pid_df11/i.test(output) && (/winusb/i.test(output) || /stm32 bootloader/i.test(output));
     } catch (error) {
@@ -108,7 +154,23 @@ export async function installStm32DfuDriver() {
         throw new Error("STM32 DFU driver package was not found");
     }
 
-    await execFile("pnputil.exe", ["/add-driver", infPath, "/install"]);
+    const pnputilPath = getSystemExecutable("pnputil.exe");
+    const command = [
+        quoteWindowsCommandArg(pnputilPath),
+        "/add-driver",
+        quoteWindowsCommandArg(infPath),
+        "/install",
+    ].join(" ");
+
+    try {
+        await execCommand(command);
+    } catch (error) {
+        if (await isStm32DfuDriverInstalled()) {
+            return true;
+        }
+
+        throw new Error(formatProcessError(error), { cause: error });
+    }
 
     return isStm32DfuDriverInstalled();
 }
