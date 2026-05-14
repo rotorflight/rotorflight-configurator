@@ -906,6 +906,14 @@ tab.initialize = function (callback) {
                 .text(i18n.getMessage(messageKey));
         }
 
+        function rediscoverDfuButtonState() {
+            [0, 1000, 2500].forEach((delay) => {
+                setTimeout(() => {
+                    PortHandler.check_usb_devices(updateDfuButtonState);
+                }, delay);
+            });
+        }
+
         function selectedPortIsSerial() {
             const optionData = $('option:selected', portPickerElement).data();
             const port = String(portPickerElement.val());
@@ -921,7 +929,8 @@ tab.initialize = function (callback) {
 
             const port = String(portPickerElement.val());
             const baud = getIntegerValue('select#baud') ?? 115200;
-            STM32.connect(port, baud, self.parsed_hex, { enterDfu: true });
+            updateDfuButton('firmwareFlasherEnterDfu', true);
+            STM32.connect(port, baud, self.parsed_hex, { enterDfu: true }, rediscoverDfuButtonState);
         }
 
         exitDfuElement.click(function () {
@@ -931,7 +940,8 @@ tab.initialize = function (callback) {
 
             try {
                 if ($('option:selected', portPickerElement).data().isDFU) {
-                    STM32DFU.connect(usbDevices, self.parsed_hex, { exitDfu: true });
+                    updateDfuButton('firmwareFlasherExitDfu', true);
+                    STM32DFU.connect(usbDevices, self.parsed_hex, { exitDfu: true }, rediscoverDfuButtonState);
                 } else {
                     enterDfuMode();
                 }
