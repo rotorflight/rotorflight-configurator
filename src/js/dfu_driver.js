@@ -54,16 +54,6 @@ function getSystemExecutable(fileName) {
     return systemDirectory ? path.join(systemDirectory, fileName) : fileName;
 }
 
-function getPowerShellExecutable() {
-    const path = getNodeModule("path");
-    const systemDirectory = getSystemDirectory();
-    return systemDirectory ? path.join(systemDirectory, "WindowsPowerShell", "v1.0", "powershell.exe") : "powershell.exe";
-}
-
-function quotePowerShellString(value) {
-    return `'${String(value).replace(/'/g, "''")}'`;
-}
-
 function quoteWindowsCommandArg(value) {
     return `"${String(value).replace(/"/g, '\\"')}"`;
 }
@@ -126,49 +116,54 @@ async function runElevatedPnputilInstall(infPath) {
     const basePath = path.join(os.tmpdir(), `rotorflight-stm32-dfu-driver-${Date.now()}`);
     const outputPath = `${basePath}.log`;
     const exitCodePath = `${basePath}.exit`;
-    const scriptPath = `${basePath}.ps1`;
-    const launcherPath = `${basePath}.vbs`;
+    const batchPath = `${basePath}.cmd`;
+    const workerPath = `${basePath}.worker.vbs`;
+    const launcherPath = `${basePath}.launcher.vbs`;
+    const pnputilPath = getSystemExecutable("pnputil.exe");
+    const cmdPath = getSystemExecutable("cmd.exe");
+    const wscriptPath = getSystemExecutable("wscript.exe");
 
-    const installScript = [
-        "$ErrorActionPreference = 'Continue'",
-        `$pnputil = ${quotePowerShellString(getSystemExecutable("pnputil.exe"))}`,
-        `$inf = ${quotePowerShellString(infPath)}`,
-        `$outputPath = ${quotePowerShellString(outputPath)}`,
-        `$exitCodePath = ${quotePowerShellString(exitCodePath)}`,
-        "$code = 1",
-        "try {",
-        "    & $pnputil /add-driver $inf /install *> $outputPath",
-        "    $code = if ($null -ne $LASTEXITCODE) { $LASTEXITCODE } else { 1 }",
-        "    & $pnputil /scan-devices *>> $outputPath",
-        "} catch {",
-        "    $_ | Out-String | Add-Content -LiteralPath $outputPath",
-        "} finally {",
-        "    Set-Content -LiteralPath $exitCodePath -Value $code -Encoding ASCII",
-        "}",
-        "exit $code",
+    const installBatch = [
+        "@echo off",
+        [
+            quoteWindowsCommandArg(pnputilPath),
+            "/add-driver",
+            quoteWindowsCommandArg(infPath),
+            "/install",
+            ">",
+            quoteWindowsCommandArg(outputPath),
+            "2>&1",
+        ].join(" "),
+        "set code=%ERRORLEVEL%",
+        [
+            quoteWindowsCommandArg(pnputilPath),
+            "/scan-devices",
+            ">>",
+            quoteWindowsCommandArg(outputPath),
+            "2>&1",
+        ].join(" "),
+        `> ${quoteWindowsCommandArg(exitCodePath)} echo %code%`,
+        "exit /b %code%",
     ].join("\r\n");
 
-    const powerShellArgs = [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-WindowStyle",
-        "Hidden",
-        "-File",
-        quoteWindowsCommandArg(scriptPath),
-    ].join(" ");
+    const workerScript = [
+        "Set shell = CreateObject(\"WScript.Shell\")",
+        `code = shell.Run(${quoteVbsString(`${quoteWindowsCommandArg(cmdPath)} /d /c ${quoteWindowsCommandArg(batchPath)}`)}, 0, True)`,
+        "WScript.Quit code",
+    ].join("\r\n");
 
     const launcherScript = [
         "Set shell = CreateObject(\"Shell.Application\")",
-        `shell.ShellExecute ${quoteVbsString(getPowerShellExecutable())}, ${quoteVbsString(powerShellArgs)}, "", "runas", 0`,
+        `shell.ShellExecute ${quoteVbsString(wscriptPath)}, ${quoteVbsString(`//B ${quoteWindowsCommandArg(workerPath)}`)}, "", "runas", 0`,
     ].join("\r\n");
 
-    writeTextFile(scriptPath, installScript);
+    writeTextFile(batchPath, installBatch);
+    writeTextFile(workerPath, workerScript);
     writeTextFile(launcherPath, launcherScript);
 
     let launchError;
     try {
-        await execFile(getSystemExecutable("wscript.exe"), ["//B", launcherPath]);
+        await execFile(wscriptPath, ["//B", launcherPath]);
     } catch (error) {
         launchError = error;
     }
@@ -180,7 +175,8 @@ async function runElevatedPnputilInstall(infPath) {
 
     removeFileIfExists(outputPath);
     removeFileIfExists(exitCodePath);
-    removeFileIfExists(scriptPath);
+    removeFileIfExists(batchPath);
+    removeFileIfExists(workerPath);
     removeFileIfExists(launcherPath);
 
     if (!completed && !launchError) {
