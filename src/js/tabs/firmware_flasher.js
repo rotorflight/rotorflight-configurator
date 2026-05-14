@@ -940,6 +940,7 @@ tab.initialize = function (callback) {
 
             try {
                 if ($('option:selected', portPickerElement).data().isDFU) {
+                    GUI.log(i18n.getMessage('deviceExitingDfuMode'));
                     updateDfuButton('firmwareFlasherExitDfu', true);
                     STM32DFU.connect(usbDevices, self.parsed_hex, { exitDfu: true }, rediscoverDfuButtonState);
                 } else {

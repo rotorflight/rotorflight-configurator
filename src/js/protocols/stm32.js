@@ -132,11 +132,19 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
                 let rebootMode;
                 if (bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.HAS_FLASH_BOOTLOADER)) {
                     // Board has flash bootloader
-                    GUI.log(i18n.getMessage('deviceRebooting_flashBootloader'));
+                    if (self.options.enter_dfu) {
+                        GUI.log(i18n.getMessage('deviceEnteringDfuMode'));
+                    } else {
+                        GUI.log(i18n.getMessage('deviceRebooting_flashBootloader'));
+                    }
                     console.log('flash bootloader detected');
                     rebootMode = 4; // MSP_REBOOT_BOOTLOADER_FLASH
                 } else {
-                    GUI.log(i18n.getMessage('deviceRebooting_romBootloader'));
+                    if (self.options.enter_dfu) {
+                        GUI.log(i18n.getMessage('deviceEnteringDfuMode'));
+                    } else {
+                        GUI.log(i18n.getMessage('deviceRebooting_romBootloader'));
+                    }
                     console.log('no flash bootloader detected');
                     rebootMode = 1; // MSP_REBOOT_BOOTLOADER_ROM;
                 }
@@ -176,7 +184,9 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
         };
 
         GUI.connect_lock = true;
-        TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32RebootingToBootloader'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
+        if (!self.options.enter_dfu) {
+            TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32RebootingToBootloader'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
+        }
 
         self.msp_connector.connect(self.port, self.options.reboot_baud, onConnectHandler, onTimeoutHandler, onFailureHandler);
     }
