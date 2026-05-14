@@ -378,6 +378,12 @@
     "deviceRebooting_romBootloader": {
         "message": "Device - <span class=\"message-negative\">Rebooting to ROM BOOTLOADER</span>"
     },
+    "deviceEnteringDfuMode": {
+        "message": "Device - <span class=\"message-negative\">Entering DFU Mode</span>"
+    },
+    "deviceExitingDfuMode": {
+        "message": "Device - <span class=\"message-negative\">Exiting DFU Mode</span>"
+    },
     "backupFileIncompatible": {
         "message": "Backup file provided was generated for previous version of the configurator and is incompatible with this version of configurator. Sorry"
     },
@@ -4242,6 +4248,9 @@
     },
     "firmwareFlasherExitDfu": {
         "message": "Exit DFU Mode"
+    },
+    "firmwareFlasherEnterDfu": {
+        "message": "Enter DFU Mode"
     },
     "firmwareFlasherFlashFirmware": {
         "message": "Flash Firmware"

@@ -63,18 +63,23 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
     // we will crunch the options here since doing it inside initialization routine would be too late
     self.options = {
         no_reboot:      false,
-        reboot_baud:    false,
-        erase_chip:     false
+        reboot_baud:    baud,
+        erase_chip:     false,
+        enter_dfu:      false,
     };
 
     if (options.no_reboot) {
         self.options.no_reboot = true;
     } else {
-        self.options.reboot_baud = options.reboot_baud;
+        self.options.reboot_baud = options.reboot_baud ?? baud;
     }
 
     if (options.erase_chip) {
         self.options.erase_chip = true;
+    }
+
+    if (options.enterDfu) {
+        self.options.enter_dfu = true;
     }
 
     if (self.options.no_reboot) {
@@ -93,6 +98,15 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
         var startFlashing = function() {
             // refresh device list
             PortHandler.check_usb_devices(function(dfu_available) {
+                if (self.options.enter_dfu) {
+                    GUI.connect_lock = false;
+                    if (!dfu_available) {
+                        GUI.log(i18n.getMessage('stm32UsbDfuNotFound'));
+                    }
+                    self.callback?.();
+                    return;
+                }
+
                 if(dfu_available) {
                     STM32DFU.connect(usbDevices, hex, options);
                 } else {
@@ -118,11 +132,19 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
                 let rebootMode;
                 if (bit_check(FC.CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.HAS_FLASH_BOOTLOADER)) {
                     // Board has flash bootloader
-                    GUI.log(i18n.getMessage('deviceRebooting_flashBootloader'));
+                    if (self.options.enter_dfu) {
+                        GUI.log(i18n.getMessage('deviceEnteringDfuMode'));
+                    } else {
+                        GUI.log(i18n.getMessage('deviceRebooting_flashBootloader'));
+                    }
                     console.log('flash bootloader detected');
                     rebootMode = 4; // MSP_REBOOT_BOOTLOADER_FLASH
                 } else {
-                    GUI.log(i18n.getMessage('deviceRebooting_romBootloader'));
+                    if (self.options.enter_dfu) {
+                        GUI.log(i18n.getMessage('deviceEnteringDfuMode'));
+                    } else {
+                        GUI.log(i18n.getMessage('deviceRebooting_romBootloader'));
+                    }
                     console.log('no flash bootloader detected');
                     rebootMode = 1; // MSP_REBOOT_BOOTLOADER_ROM;
                 }
@@ -138,6 +160,7 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
                             setTimeout(startFlashing, 1000);
                         } else {
                             GUI.connect_lock = false;
+                            self.callback?.();
                         }
                     });
 
@@ -152,14 +175,18 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
             console.log('Looking for capabilities via MSP failed');
 
             TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32RebootingToBootloaderFailed'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
+            self.callback?.();
         };
 
         var onFailureHandler = function() {
             GUI.connect_lock = false;
+            self.callback?.();
         };
 
         GUI.connect_lock = true;
-        TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32RebootingToBootloader'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
+        if (!self.options.enter_dfu) {
+            TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32RebootingToBootloader'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL);
+        }
 
         self.msp_connector.connect(self.port, self.options.reboot_baud, onConnectHandler, onTimeoutHandler, onFailureHandler);
     }
