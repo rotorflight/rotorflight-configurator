@@ -16,9 +16,10 @@ function getNodeModule(name) {
 
 function execFile(file, args, options = {}) {
     const childProcess = getNodeModule("child_process");
+    const execOptions = { windowsHide: true, ...options };
 
     return new Promise((resolve, reject) => {
-        childProcess.execFile(file, args, options, (error, stdout, stderr) => {
+        childProcess.execFile(file, args, execOptions, (error, stdout, stderr) => {
             if (error) {
                 error.stdout = stdout;
                 error.stderr = stderr;
@@ -97,15 +98,6 @@ export function findStm32DfuDriverInf() {
     return candidates.find(pathExists);
 }
 
-function encodePowerShellCommand(command) {
-    const buffer = getNodeModule("buffer").Buffer;
-    return buffer.from(command, "utf16le").toString("base64");
-}
-
-function escapePowerShellString(value) {
-    return value.replace(/`/g, "``").replace(/"/g, "`\"");
-}
-
 export async function installStm32DfuDriver() {
     if (GUI.operating_system !== "Windows") {
         return true;
@@ -116,21 +108,7 @@ export async function installStm32DfuDriver() {
         throw new Error("STM32 DFU driver package was not found");
     }
 
-    const command = [
-        "$process = Start-Process -FilePath \"pnputil.exe\"",
-        `-ArgumentList @("/add-driver", "${escapePowerShellString(infPath)}", "/install")`,
-        "-Verb RunAs -Wait -PassThru;",
-        "if ($null -eq $process) { exit 1 };",
-        "exit $process.ExitCode;",
-    ].join(" ");
-
-    await execFile("powershell.exe", [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-EncodedCommand",
-        encodePowerShellCommand(command),
-    ], { windowsHide: false });
+    await execFile("pnputil.exe", ["/add-driver", infPath, "/install"]);
 
     return isStm32DfuDriverInstalled();
 }

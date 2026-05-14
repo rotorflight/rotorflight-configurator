@@ -255,10 +255,16 @@
 }
 
 .tab-firmware_flasher .dfu-driver-install-row {
-    align-items: center;
+    align-items: flex-start;
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    gap: 6px;
     margin-top: 10px;
+}
+
+.tab-firmware_flasher .dfu-driver-install-status {
+    line-height: 18px;
+    overflow-wrap: anywhere;
 }
 
 .tab-firmware_flasher .dfu-driver-install-status.invalid {
