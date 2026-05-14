@@ -60,13 +60,16 @@ function getPowerShellExecutable() {
     return systemDirectory ? path.join(systemDirectory, "WindowsPowerShell", "v1.0", "powershell.exe") : "powershell.exe";
 }
 
-function encodePowerShellCommand(command) {
-    const buffer = getNodeModule("buffer").Buffer;
-    return buffer.from(command, "utf16le").toString("base64");
-}
-
 function quotePowerShellString(value) {
     return `'${String(value).replace(/'/g, "''")}'`;
+}
+
+function quoteWindowsCommandArg(value) {
+    return `"${String(value).replace(/"/g, '\\"')}"`;
+}
+
+function quoteVbsString(value) {
+    return `"${String(value).replace(/"/g, '""')}"`;
 }
 
 function formatProcessError(error) {
@@ -87,6 +90,27 @@ function readFileIfExists(path) {
     }
 }
 
+function writeTextFile(path, contents) {
+    const fs = getNodeModule("fs");
+    fs.writeFileSync(path, contents, "utf8");
+}
+
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function waitForFile(path, timeoutMs) {
+    const fs = getNodeModule("fs");
+    const startedAt = Date.now();
+    while (Date.now() - startedAt < timeoutMs) {
+        if (fs.existsSync(path)) {
+            return true;
+        }
+        await sleep(500);
+    }
+    return false;
+}
+
 function removeFileIfExists(path) {
     const fs = getNodeModule("fs");
     try {
@@ -102,50 +126,69 @@ async function runElevatedPnputilInstall(infPath) {
     const basePath = path.join(os.tmpdir(), `rotorflight-stm32-dfu-driver-${Date.now()}`);
     const outputPath = `${basePath}.log`;
     const exitCodePath = `${basePath}.exit`;
+    const scriptPath = `${basePath}.ps1`;
+    const launcherPath = `${basePath}.vbs`;
 
-    const innerCommand = [
-        "$ErrorActionPreference = 'Continue';",
-        `$pnputil = ${quotePowerShellString(getSystemExecutable("pnputil.exe"))};`,
-        `$inf = ${quotePowerShellString(infPath)};`,
-        `$outputPath = ${quotePowerShellString(outputPath)};`,
-        `$exitCodePath = ${quotePowerShellString(exitCodePath)};`,
-        "& $pnputil /add-driver $inf /install *> $outputPath;",
-        "$code = if ($null -ne $LASTEXITCODE) { $LASTEXITCODE } else { 1 };",
-        "& $pnputil /scan-devices *>> $outputPath;",
-        "Set-Content -LiteralPath $exitCodePath -Value $code -Encoding ASCII;",
-        "exit $code;",
+    const installScript = [
+        "$ErrorActionPreference = 'Continue'",
+        `$pnputil = ${quotePowerShellString(getSystemExecutable("pnputil.exe"))}`,
+        `$inf = ${quotePowerShellString(infPath)}`,
+        `$outputPath = ${quotePowerShellString(outputPath)}`,
+        `$exitCodePath = ${quotePowerShellString(exitCodePath)}`,
+        "$code = 1",
+        "try {",
+        "    & $pnputil /add-driver $inf /install *> $outputPath",
+        "    $code = if ($null -ne $LASTEXITCODE) { $LASTEXITCODE } else { 1 }",
+        "    & $pnputil /scan-devices *>> $outputPath",
+        "} catch {",
+        "    $_ | Out-String | Add-Content -LiteralPath $outputPath",
+        "} finally {",
+        "    Set-Content -LiteralPath $exitCodePath -Value $code -Encoding ASCII",
+        "}",
+        "exit $code",
+    ].join("\r\n");
+
+    const powerShellArgs = [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-WindowStyle",
+        "Hidden",
+        "-File",
+        quoteWindowsCommandArg(scriptPath),
     ].join(" ");
 
-    const outerCommand = [
-        "$ErrorActionPreference = 'Stop';",
-        `$powerShell = ${quotePowerShellString(getPowerShellExecutable())};`,
-        `$encodedCommand = ${quotePowerShellString(encodePowerShellCommand(innerCommand))};`,
-        "$process = Start-Process -FilePath $powerShell -ArgumentList @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-EncodedCommand', $encodedCommand) -Verb RunAs -WindowStyle Hidden -Wait -PassThru;",
-        "if ($null -eq $process) { exit 1 };",
-        "exit $process.ExitCode;",
-    ].join(" ");
+    const launcherScript = [
+        "Set shell = CreateObject(\"Shell.Application\")",
+        `shell.ShellExecute ${quoteVbsString(getPowerShellExecutable())}, ${quoteVbsString(powerShellArgs)}, "", "runas", 0`,
+    ].join("\r\n");
+
+    writeTextFile(scriptPath, installScript);
+    writeTextFile(launcherPath, launcherScript);
 
     let launchError;
     try {
-        await execFile(getPowerShellExecutable(), [
-            "-NoProfile",
-            "-ExecutionPolicy",
-            "Bypass",
-            "-WindowStyle",
-            "Hidden",
-            "-EncodedCommand",
-            encodePowerShellCommand(outerCommand),
-        ]);
+        await execFile(getSystemExecutable("wscript.exe"), ["//B", launcherPath]);
     } catch (error) {
         launchError = error;
     }
 
+    const completed = await waitForFile(exitCodePath, 300000);
     const output = readFileIfExists(outputPath).trim();
     const exitCodeText = readFileIfExists(exitCodePath).trim();
     const exitCode = exitCodeText ? Number.parseInt(exitCodeText, 10) : launchError?.code;
 
     removeFileIfExists(outputPath);
     removeFileIfExists(exitCodePath);
+    removeFileIfExists(scriptPath);
+    removeFileIfExists(launcherPath);
+
+    if (!completed && !launchError) {
+        return {
+            exitCode: 1,
+            output: "STM32 DFU driver installation timed out or administrator permission was cancelled.",
+        };
+    }
 
     if (launchError && !Number.isFinite(exitCode)) {
         throw new Error(formatProcessError(launchError), { cause: launchError });
