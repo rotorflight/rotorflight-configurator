@@ -37,6 +37,7 @@ const tab = {
             'None',
             'Voltage',
             'Current',
+            'Combined',
         ];
     },
 };
@@ -322,7 +323,11 @@ tab.initialize = function (callback) {
 
         function updateSmartFuelTuningVisibility() {
             const smartFuelSource = parseInt(smartFuelSource_e.val() || 0);
-            elementSmartFuelConfiguration.find('.smartFuelTuning').toggle(smartFuelSupported && smartFuelSource > 0);
+            const smartFuelTuningEnabled = smartFuelSupported && [1, 3].includes(smartFuelSource);
+            elementSmartFuelConfiguration.find('.smartFuelTuning')
+                .toggle(smartFuelTuningEnabled)
+                .find('input')
+                .prop('disabled', !smartFuelTuningEnabled);
         }
 
         updateDisplay();
