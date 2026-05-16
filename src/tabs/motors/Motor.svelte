@@ -141,7 +141,7 @@
 <Section>
   {#snippet header()}
     <div class="header">
-      <span>Motor #{index + 1}</span>
+      <span>{$i18n.t("motors.motor.heading", { index: index + 1 })}</span>
       {#if motorState.overrideEnabled}
         <span>-</span>
         <span>{FC.MOTOR_OVERRIDE[index] * 0.1}%</span>
