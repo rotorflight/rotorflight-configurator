@@ -4195,6 +4195,11 @@
         "message": "Anzahl",
         "english": "Qty"
     },
+    "motors.motor.heading": {
+        "message": "Motor #{{index}}",
+        "english": "Motor #{{index}}",
+        "status": "New entry. Please translate!"
+    },
     "motorsSectionLabelThrottle": {
         "message": "Gas",
         "english": "Throttle"
