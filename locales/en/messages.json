@@ -3271,6 +3271,9 @@
     "gpsSignalQty": {
         "message": "Qty"
     },
+    "motors.motor.heading": {
+        "message": "Motor #{{index}}"
+    },
     "motorsSectionLabelThrottle": {
         "message": "Throttle"
     },
