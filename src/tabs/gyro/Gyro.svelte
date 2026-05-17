@@ -156,7 +156,9 @@
 {#snippet header()}
   <h1>{$i18n.t("tabGyro")}</h1>
   <div class="grow"></div>
-  <button class="btn help-btn" onclick={onClickHelp}>Help</button>
+  <button class="btn help-btn" onclick={onClickHelp}>
+    {$i18n.t("buttonHelp")}
+  </button>
 {/snippet}
 
 {#snippet toolbar()}
