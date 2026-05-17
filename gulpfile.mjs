@@ -138,6 +138,10 @@ function helper_build_app_nwjs() {
   const tasks = [build_bundle(), build_app_nwjs];
 
   switch (context.target.platform) {
+    case "win":
+      tasks.push(build_nwjs_windows_driver_assets);
+      break;
+
     case "linux":
       tasks.push(build_nwjs_unix_permissions);
       tasks.push(build_nwjs_linux_assets);
@@ -183,6 +187,12 @@ function build_app_nwjs() {
 
 function build_nwjs_linux_assets() {
   return gulp.src("assets/linux/**").pipe(gulp.dest(context.appdir));
+}
+
+function build_nwjs_windows_driver_assets() {
+  return gulp
+    .src("assets/windows/drivers/**")
+    .pipe(gulp.dest(`${context.appdir}/drivers`));
 }
 
 /**
