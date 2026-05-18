@@ -115,6 +115,13 @@ export function applyVirtualConfig() {
     currentMeterSource: 1,
   });
 
+  Object.assign(FC.SMARTFUEL_CONFIG, {
+    mode: 0,
+    voltageDropRate: 10,
+    chargeDropRate: 50,
+    sagGain: 40,
+  });
+
   Object.assign(FC.BATTERY_STATE, {
     cellCount: 10,
     voltage: 20,
