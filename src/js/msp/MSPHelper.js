@@ -354,6 +354,19 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             }
 
+            case MSPCodes.MSP2_SMARTFUEL_CONFIG: {
+                FC.SMARTFUEL_CONFIG.mode = data.readU8();
+                FC.SMARTFUEL_CONFIG.voltageDropRate = data.readU8();
+                FC.SMARTFUEL_CONFIG.chargeDropRate = data.readU8();
+                FC.SMARTFUEL_CONFIG.sagGain = data.readU8();
+                break;
+            }
+
+            case MSPCodes.MSP2_SET_SMARTFUEL_CONFIG: {
+                console.log('Smart Fuel configuration saved');
+                break;
+            }
+
             case MSPCodes.MSP_SET_BATTERY_PROFILE: {
                 console.log('Battery profile set');
                 break;
@@ -1989,6 +2002,14 @@ MspHelper.prototype.crunch = function(code) {
                     buffer.push16(FC.BATTERY_CONFIG.capacities[i]);
                 }
             }
+            break;
+        }
+
+        case MSPCodes.MSP2_SET_SMARTFUEL_CONFIG: {
+            buffer.push8(FC.SMARTFUEL_CONFIG.mode)
+                  .push8(FC.SMARTFUEL_CONFIG.voltageDropRate)
+                  .push8(FC.SMARTFUEL_CONFIG.chargeDropRate)
+                  .push8(FC.SMARTFUEL_CONFIG.sagGain);
             break;
         }
 
