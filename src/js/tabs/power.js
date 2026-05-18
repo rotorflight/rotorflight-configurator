@@ -352,28 +352,27 @@ tab.initialize = function (callback) {
 
         if (smartFuelSupported) {
             smartFuelSource_e
-                .val(FC.SMARTFUEL_CONFIG.mode).change()
-                .change(function () {
+                .val(FC.SMARTFUEL_CONFIG.mode)
+                .on("change", function () {
                     FC.SMARTFUEL_CONFIG.mode = parseInt($(this).val());
                     updateSmartFuelTuningVisibility();
-                    setDirty(true);
                 });
 
             elementSmartFuelConfiguration.find('input[name="smartfuelvoltagedroprate"]')
                 .val(FC.SMARTFUEL_CONFIG.voltageDropRate)
-                .change(function () {
+                .on("change", function () {
                     FC.SMARTFUEL_CONFIG.voltageDropRate = getIntegerValue(this);
                 });
 
             elementSmartFuelConfiguration.find('input[name="smartfuelchargedroprate"]')
                 .val(FC.SMARTFUEL_CONFIG.chargeDropRate / 100)
-                .change(function () {
+                .on("change", function () {
                     FC.SMARTFUEL_CONFIG.chargeDropRate = Math.round(getFloatValue(this) * 100);
                 });
 
             elementSmartFuelConfiguration.find('input[name="smartfuelsaggain"]')
                 .val(FC.SMARTFUEL_CONFIG.sagGain)
-                .change(function () {
+                .on("change", function () {
                     FC.SMARTFUEL_CONFIG.sagGain = getIntegerValue(this);
                 });
 

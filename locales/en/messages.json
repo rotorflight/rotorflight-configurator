@@ -5777,37 +5777,22 @@
         "message": "Combined"
     },
     "powerSmartFuelVoltageDropRate": {
-        "message": "Smart Fuel Voltage Drop Rate (mV/s)"
+        "message": "Smart Fuel Voltage Drop Rate"
     },
     "powerSmartFuelVoltageDropRateHelp": {
         "message": "Limits how quickly the voltage track may fall. This setting is only used in Voltage and Combined modes."
     },
     "powerSmartFuelChargeDropRate": {
-        "message": "Smart Fuel Charge Drop Rate (%/s)"
+        "message": "Smart Fuel Charge Drop Rate"
     },
     "powerSmartFuelChargeDropRateHelp": {
         "message": "Limits how quickly the reported charge percentage may drop on the voltage track once the model is armed or has been armed. This setting is only used in Voltage and Combined modes."
     },
     "powerSmartFuelSagGain": {
-        "message": "Smart Fuel Sag Gain (%)"
+        "message": "Smart Fuel Sag Gain"
     },
     "powerSmartFuelSagGainHelp": {
         "message": "Compensates for voltage sag under load. Increase if Smart Fuel is too pessimistic under load; decrease if it is too optimistic. This setting is only used in Voltage and Combined modes."
-    },
-    "powerSmartFuelStabilizeDelay": {
-        "message": "Smart Fuel Stabilize Delay (s)"
-    },
-    "powerSmartFuelStableWindow": {
-        "message": "Smart Fuel Stable Window (V)"
-    },
-    "powerSmartFuelVoltageFallLimit": {
-        "message": "Smart Fuel Voltage Fall Limit (V/s)"
-    },
-    "powerSmartFuelFuelDropRate": {
-        "message": "Smart Fuel Drop Rate (%/s)"
-    },
-    "powerSmartFuelSagMultiplier": {
-        "message": "Smart Fuel Sag Multiplier"
     },
     "powerBatteryMinimumCellVoltage": {
         "message": "Minimum Cell Voltage"
