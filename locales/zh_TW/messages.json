@@ -33,29 +33,24 @@
         "english": "Default"
     },
     "genericRange": {
-        "message": "Range",
-        "english": "Range",
-        "status": "New entry. Please translate!"
+        "message": "範圍",
+        "english": "Range"
     },
     "hours": {
-        "message": "{{count}} hour",
-        "english": "{{count}} hour",
-        "status": "New entry. Please translate!"
+        "message": "{{count}} 小時",
+        "english": "{{count}} hour"
     },
     "hours_other": {
-        "message": "{{count}} hours",
-        "english": "{{count}} hours",
-        "status": "New entry. Please translate!"
+        "message": "{{count}} 小時",
+        "english": "{{count}} hours"
     },
     "minutes": {
-        "message": "{{count}} minute",
-        "english": "{{count}} minute",
-        "status": "New entry. Please translate!"
+        "message": "{{count}} 分鐘",
+        "english": "{{count}} minute"
     },
     "minutes_other": {
-        "message": "{{count}} minutes",
-        "english": "{{count}} minutes",
-        "status": "New entry. Please translate!"
+        "message": "{{count}} 分鐘",
+        "english": "{{count}} minutes"
     },
     "axisROLL": {
         "message": "橫滾",
@@ -118,9 +113,8 @@
         "english": "Warning"
     },
     "noteTitle": {
-        "message": "Note",
-        "english": "Note",
-        "status": "New entry. Please translate!"
+        "message": "註釋",
+        "english": "Note"
     },
     "noticeTitle": {
         "message": "注意",
@@ -240,13 +234,8 @@
         "english": "Zoom:"
     },
     "expertMode": {
-        "message": "Expert Mode",
-        "english": "Expert Mode",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "啟用專家模式",
-            "english": "Enable Expert Mode"
-        }
+        "message": "專家模式",
+        "english": "Expert Mode"
     },
     "permanentExpertMode": {
         "message": "預設啟用專家模式",
@@ -482,9 +471,8 @@
         "english": "Motors"
     },
     "tabGovernor": {
-        "message": "Governor",
-        "english": "Governor",
-        "status": "New entry. Please translate!"
+        "message": "定速器",
+        "english": "Governor"
     },
     "tabMixer": {
         "message": "混控",
@@ -1037,14 +1025,12 @@
         "english": "Firmware:"
     },
     "statusFlightCount": {
-        "message": "Flight Count:",
-        "english": "Flight Count:",
-        "status": "New entry. Please translate!"
+        "message": "飛行次數：",
+        "english": "Flight Count:"
     },
     "statusFlightTime": {
-        "message": "Flight Time:",
-        "english": "Flight Time:",
-        "status": "New entry. Please translate!"
+        "message": "飛行時間：",
+        "english": "Flight Time:"
     },
     "statusArmingDisableFlags": {
         "message": "禁止解鎖旗標：",
@@ -1168,15 +1154,9 @@
         "description": "Message that pops up to describe the RESC arming disable flag"
     },
     "statusArmingDisableFlagsTooltipRPMFILTER": {
-        "message": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailable",
+        "message": "已開啟基於轉速的濾波器，但轉速訊號未設定或無法取得。",
         "english": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailable",
-        "status": "Modified entry. Please translate!",
-        "description": "Message that pops up to describe the RPMFILTER arming disable flag",
-        "previous": {
-            "message": "基於轉速的濾波器已開啟，但轉速訊號未設定或無法取得。",
-            "english": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailble",
-            "description": "Message that pops up to describe the RPMFILTER arming disable flag"
-        }
+        "description": "Message that pops up to describe the RPMFILTER arming disable flag"
     },
     "statusArmingDisableFlagsTooltipREBOOT_REQ": {
         "message": "設定修改需要重新啟動",
@@ -1199,9 +1179,8 @@
         "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
     },
     "statusArmingDisableFlagsTooltipOVERRIDE": {
-        "message": "Servo Override or Mixer Override is active",
-        "english": "Servo Override or Mixer Override is active",
-        "status": "New entry. Please translate!"
+        "message": "已啟用舵機覆寫或混控複寫",
+        "english": "Servo Override or Mixer Override is active"
     },
     "statusArmingDisableFlagsTooltipARM_SWITCH": {
         "message": "在其他禁止解鎖條件被觸發的狀況下開啟了解鎖開關",
@@ -1637,54 +1616,44 @@
         "english": "Enable or disable when to sound the Buzzer"
     },
     "configuration.personalisation.model_id.label": {
-        "message": "Model Id",
-        "english": "Model Id",
-        "status": "New entry. Please translate!"
+        "message": "模型 Id",
+        "english": "Model Id"
     },
     "configuration.flight_stats.heading": {
-        "message": "Flight Statistics",
-        "english": "Flight Statistics",
-        "status": "New entry. Please translate!"
+        "message": "飛行統計數據",
+        "english": "Flight Statistics"
     },
     "configuration.flight_stats.enable.label": {
-        "message": "Record Flight Statistics",
-        "english": "Record Flight Statistics",
-        "status": "New entry. Please translate!"
+        "message": "紀錄飛行統計數據",
+        "english": "Record Flight Statistics"
     },
     "configuration.flight_stats.reset.label": {
-        "message": "Reset",
-        "english": "Reset",
-        "status": "New entry. Please translate!"
+        "message": "重置",
+        "english": "Reset"
     },
     "configuration.flight_stats.min_armed_time.label": {
-        "message": "Minimum flight time",
-        "english": "Minimum flight time",
-        "status": "New entry. Please translate!"
+        "message": "最小飛行時間",
+        "english": "Minimum flight time"
     },
     "configuration.flight_stats.min_armed_time.help": {
-        "message": "Minimum duration the flight controller must be armed for the flights statistics to be counted towards the total.",
-        "english": "Minimum duration the flight controller must be armed for the flights statistics to be counted towards the total.",
-        "status": "New entry. Please translate!"
+        "message": "飛控處於解鎖狀態的最短時間，大於此時間才能將該次飛行統計數據計入總數。",
+        "english": "Minimum duration the flight controller must be armed for the flights statistics to be counted towards the total."
     },
     "configuration.flight_stats.flight_count.label": {
-        "message": "Flight Count",
-        "english": "Flight Count",
-        "status": "New entry. Please translate!"
+        "message": "飛行次數",
+        "english": "Flight Count"
     },
     "configuration.flight_stats.flight_time.label": {
-        "message": "Flight Time",
-        "english": "Flight Time",
-        "status": "New entry. Please translate!"
+        "message": "飛行時間",
+        "english": "Flight Time"
     },
     "configuration.flight_stats.distance.label": {
-        "message": "Distance",
-        "english": "Distance",
-        "status": "New entry. Please translate!"
+        "message": "距離",
+        "english": "Distance"
     },
     "flight_stats.duration.value": {
         "message": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })",
-        "english": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })",
-        "status": "New entry. Please translate!"
+        "english": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })"
     },
     "beeper_GYRO_CALIBRATED": {
         "message": "陀螺儀校準完成後鳴叫",
@@ -1935,8 +1904,7 @@
     },
     "portsFunction_SPORT_MASTER": {
         "message": "S.PORT Master",
-        "english": "S.PORT Master",
-        "status": "New entry. Please translate!"
+        "english": "S.PORT Master"
     },
     "portsFunction_TELEMETRY_IBUS": {
         "message": "遙測: FlySky iBUS",
@@ -1996,8 +1964,7 @@
     },
     "portsFunction_FBUS_OUT": {
         "message": "F.BUS",
-        "english": "F.BUS",
-        "status": "New entry. Please translate!"
+        "english": "F.BUS"
     },
     "portsFunction_CUSTOM": {
         "message": "自訂",
@@ -2104,22 +2071,16 @@
         "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 1</b>.<br>Please use the <b>CLI</b> to change the PID settings."
     },
     "profilesPIDModeTwoWarning": {
-        "message": "<span class=\"message-negative\">警告：</span> PID控制器目前處於 <b>PID模式2</b>.",
+        "message": "<span class=\"message-negative\">警告：</span> PID控制器目前處於 <b>PID模式2</b>。",
         "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>."
     },
     "profilesPIDModeThreeWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>PID Mode 3</b>.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>PID Mode 3</b>.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<span class=\"message-negative\">警告：</span> PID控制器目前處於帶HSI的 <b>PID模式3</b>。",
-            "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b> with HSI."
-        }
+        "message": "<span class=\"message-negative\">警告：</span> PID控制器目前處於 <b>PID模式3</b>。",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>PID Mode 3</b>."
     },
     "profilesPIDModeFourWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the experimental <b>PID Mode 4</b>.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the experimental <b>PID Mode 4</b>.",
-        "status": "New entry. Please translate!"
+        "message": "<span class=\"message-negative\">警告：</span> PID控制器目前處於實驗性的 <b>PID模式4</b>。",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the experimental <b>PID Mode 4</b>."
     },
     "profilesPIDModeCustomWarning": {
         "message": "<span class=\"message-negative\">警告：</span> PID 控制器的參數是手動設定的因此無法顯示。<br>請使用<b>CLI命令列</b>修改 PID 設定。",
@@ -2170,13 +2131,8 @@
         "english": "Boost"
     },
     "profilesBoostHelp": {
-        "message": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without the drawbacks of high Proportional or Feedforward gains.",
-        "english": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without the drawbacks of high Proportional or Feedforward gains.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "這是基於設定點的導數對前饋的額外增益。增加 Boost 可以使機體的反應更為迅速，而且不會帶來高比例或前饋的缺點。",
-            "english": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without he drawbacks of high Proportional or Feedforward gains."
-        }
+        "message": "這是基於設定點的導數對前饋的額外增益。增加 Boost 可以使機體的反應更為迅速，而且不會帶來高比例或前饋的缺點。",
+        "english": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without the drawbacks of high Proportional or Feedforward gains."
     },
     "profilesCopyProfile": {
         "message": "複製設定檔",
@@ -2191,41 +2147,28 @@
         "english": "Loaded Profile: <strong class=\"message-positive\">$1</strong>"
     },
     "receiverSelection": {
-        "message": "Protocol",
-        "english": "Protocol",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "接收機類型",
-            "english": "Receiver Type"
-        }
+        "message": "協定",
+        "english": "Protocol"
     },
     "receiverSelectionSectionSignaling": {
         "message": "訊號傳輸",
         "english": "Signaling"
     },
     "receiverSettings": {
-        "message": "Channel Range",
-        "english": "Channel Range",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "接收機設定",
-            "english": "Receiver Settings"
-        }
+        "message": "通道範圍",
+        "english": "Channel Range"
     },
     "receiverSettingsThrottleChannel": {
-        "message": "Throttle Channel",
-        "english": "Throttle Channel",
-        "status": "New entry. Please translate!"
+        "message": "油門通道",
+        "english": "Throttle Channel"
     },
     "receiver.channel_range.automatic_throttle_range.label": {
-        "message": "Automatic Throttle Range",
-        "english": "Automatic Throttle Range",
-        "status": "New entry. Please translate!"
+        "message": "自動油門範圍",
+        "english": "Automatic Throttle Range"
     },
     "receiver.channel_range.automatic_throttle_range.help": {
-        "message": "Calculates a suitable throttle range from the Stick Center and Stick Travel values.",
-        "english": "Calculates a suitable throttle range from the Stick Center and Stick Travel values.",
-        "status": "New entry. Please translate!"
+        "message": "根據搖桿中心點和與搖桿行程的數值計算出適當的油門範圍。",
+        "english": "Calculates a suitable throttle range from the Stick Center and Stick Travel values."
     },
     "receiverProtocol": {
         "message": "接收機協定",
@@ -2236,183 +2179,96 @@
         "english": "Select the protocol that the receiver is using"
     },
     "receiverSerialHalfDuplex": {
-        "message": "Half-Duplex",
-        "english": "Half-Duplex",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "單線通信（半雙工）",
-            "english": "One-wire Communication (Half-Duplex)"
-        }
+        "message": "半雙工",
+        "english": "Half-Duplex"
     },
     "receiverSerialHalfDuplexHelp": {
         "message": "使用 TX 接腳進行發送和接收。SBUS2、F.PORT、SRXL 和 SRXL2 需使用此功能。",
         "english": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2."
     },
     "receiverSerialInverted": {
-        "message": "Inverted",
-        "english": "Inverted",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "反相串列信令",
-            "english": "Inverted Serial Signaling"
-        }
+        "message": "反相",
+        "english": "Inverted"
     },
     "receiverSerialInvertedHelp": {
-        "message": "<p>Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>",
-        "english": "<p>Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "反轉來自於接收機的反向信號。S.BUS、F.PORT 和其他協議等需使用此功能。注意：此選項在 F4 MCUs 上不支援，請參閱說明。",
-            "english": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help."
-        }
+        "message": "<p>反轉來自於接收機的反向信號。S.BUS、F.PORT 和其他協定等需使用此功能。</p><p><strong>注意：</strong> 此選項在 F4 MCUs 上不支援，請參閱說明。</p>",
+        "english": "<p>Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
     "receiverSerialPinSwap": {
-        "message": "Pin Swap",
-        "english": "Pin Swap",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Rx/Tx 接腳交換",
-            "english": "Rx/Tx Pin Swap"
-        }
+        "message": "接腳交換",
+        "english": "Pin Swap"
     },
     "receiverSerialPinSwapHelp": {
-        "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>",
-        "english": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "將 Rx 和 Tx 接腳交換。注意：此選項在 F4 MCUs 上不支援，請參閱說明。",
-            "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
-        }
+        "message": "<p>將 Rx 和 Tx 接腳交換。</p><p><strong>注意：</strong> 此選項在 F4 MCUs 上不支援，請參閱說明。</p>",
+        "english": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
     "receiverStickCenter": {
         "message": "搖桿中心點",
         "english": "Stick Center"
     },
     "receiverHelpStickCenter": {
-        "message": "The channel value when the stick is centered. Usually 1500µs or 1520µs.",
-        "english": "The channel value when the stick is centered. Usually 1500µs or 1520µs.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "搖桿（通道）中心值，單位為μs。通常為1500μs或1520μs。",
-            "english": "The value of stick (channel) center in µs. Usually 1500µs or 1520µs."
-        }
+        "message": "搖桿中心位置的通道值。通常為 1500μs 或 1520μs 。",
+        "english": "The channel value when the stick is centered. Usually 1500µs or 1520µs."
     },
     "receiverStickDeflection": {
-        "message": "Stick Travel",
-        "english": "Stick Travel",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "搖桿最大行程",
-            "english": "Stick Maximum Travel"
-        }
+        "message": "搖桿行程",
+        "english": "Stick Travel"
     },
     "receiverHelpStickDeflection": {
-        "message": "The maximum value for stick deflection from the center.",
-        "english": "The maximum value for stick deflection from the center.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "橫滾俯仰航向軸偏離中心的最大值，單位為μs。",
-            "english": "The maximum value (in µs) for stick deflection from the center, for RPY."
-        }
+        "message": "搖桿偏離中心位置的最大值。",
+        "english": "The maximum value for stick deflection from the center."
     },
     "receiverArmingThrottle": {
-        "message": "Arm Limit",
-        "english": "Arm Limit",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "解鎖油門通道上限",
-            "english": "Throttle Channel limit for arming"
-        }
+        "message": "解鎖上限",
+        "english": "Arm Limit"
     },
     "receiverHelpArmingThrottle": {
-        "message": "The flight controller can only be armed while the the throttle channel is below this value.",
-        "english": "The flight controller can only be armed while the the throttle channel is below this value.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "允許解鎖的通道值（以µs為單位）",
-            "english": "The channel value (in µs) under which arming is allowed"
-        }
+        "message": "只有當油門通道的數值低於此值時才能解鎖飛控。",
+        "english": "The flight controller can only be armed while the the throttle channel is below this value."
     },
     "receiverZeroThrottle": {
-        "message": "Min Throttle - 0%",
-        "english": "Min Throttle - 0%",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "0% 油門通道值",
-            "english": "Throttle Channel value for 0% throttle"
-        }
+        "message": "最小油門 - 0%",
+        "english": "Min Throttle - 0%"
     },
     "receiverHelpZeroThrottle": {
-        "message": "The throttle channel value where throttle is considered 0%.",
-        "english": "The throttle channel value where throttle is considered 0%.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "判斷油門為 0% 時的油門通道值，單位為 μs。",
-            "english": "The channel value (in µs) for the throttle channel to be considered 0%"
-        }
+        "message": "判斷油門為 0% 時的油門通道值。",
+        "english": "The throttle channel value where throttle is considered 0%."
     },
     "receiverHelpZeroThrottle2": {
-        "message": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>",
-        "english": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p>判斷油門為 0% 時的油門通道值。</p><p><strong>注意：</strong> 油門通道必須能夠移動至低於此數值至少 10µs 以發出油門關閉訊號並允許解鎖。</p>",
+        "english": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
     },
     "receiverFullThrottle": {
-        "message": "Max Throttle - 100%",
-        "english": "Max Throttle - 100%",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "100% 油門通道值",
-            "english": "Throttle Channel value for 100% throttle"
-        }
+        "message": "最大油門 - 100%",
+        "english": "Max Throttle - 100%"
     },
     "receiverHelpFullThrottle": {
-        "message": "The throttle channel value where throttle is considered 100%.",
-        "english": "The throttle channel value where throttle is considered 100%.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "判斷油門為 100% 時的油門通道值，單位為 μs。",
-            "english": "The channel value (in µs) for the throttle channel to be considered 100%"
-        }
+        "message": "判斷油門為 100% 時的油門通道值。",
+        "english": "The throttle channel value where throttle is considered 100%."
     },
     "receiverHelpFullThrottle2": {
-        "message": "The throttle channel value where throttle is considered 100%.",
-        "english": "The throttle channel value where throttle is considered 100%.",
-        "status": "New entry. Please translate!"
+        "message": "判斷油門為 100% 時的油門通道值。",
+        "english": "The throttle channel value where throttle is considered 100%."
     },
     "receiverCyclicDeadband": {
         "message": "循環死區",
         "english": "Cyclic Deadband"
     },
     "receiverHelpCyclicDeadband": {
-        "message": "How far the roll and pitch channel values must move from center before it's considered an input.",
-        "english": "How far the roll and pitch channel values must move from center before it's considered an input.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "這些值（單位為 µs）是 RC 輸入在被視為非零之前的變化幅度。對於輸出有抖動的遙控器，如果 RC 輸入在閒置時跳動可以增加這個設定值。",
-            "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle."
-        }
+        "message": "滾轉和俯仰通道的數值必須偏離中心多少才會被視為輸入。",
+        "english": "How far the roll and pitch channel values must move from center before it's considered an input."
     },
     "receiverYawDeadband": {
         "message": "航向死區",
         "english": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "How far the yaw channel value must move from center before it's considered an input.",
-        "english": "How far the yaw channel value must move from center before it's considered an input.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "這些值（單位為 µs）是 RC 輸入在被視為非零之前的變化幅度。對於輸出有抖動的遙控器，如果 RC 輸入在閒置時跳動可以增加這個設定值。<strong>這個設定只對航向生效</strong>",
-            "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
-        }
+        "message": "航向通道的數值必須偏離中心多少才會被視為輸入。",
+        "english": "How far the yaw channel value must move from center before it's considered an input."
     },
     "receiverTelemetrySettings": {
-        "message": "Telemetry",
-        "english": "Telemetry",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "遙測設定",
-            "english": "Telemetry Settings"
-        }
+        "message": "遙測",
+        "english": "Telemetry"
     },
     "receiverTelemetrySettingsSectionSignaling": {
         "message": "訊號傳輸",
@@ -2427,31 +2283,16 @@
         "english": "Enable Telemetry"
     },
     "receiverTelemetryHalfDuplex": {
-        "message": "Half-Duplex",
-        "english": "Half-Duplex",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "單線遙測通信",
-            "english": "One-wire Telemetry Communication"
-        }
+        "message": "半雙工",
+        "english": "Half-Duplex"
     },
     "receiverTelemetryInverted": {
-        "message": "Inverted",
-        "english": "Inverted",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "反向遙測信號",
-            "english": "Inverted Telemetry Signaling"
-        }
+        "message": "反相",
+        "english": "Inverted"
     },
     "receiverTelemetryPinSwap": {
-        "message": "Pin Swap",
-        "english": "Pin Swap",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "遙測接腳交換 （交換 Rx 和 Tx 接腳）",
-            "english": "Telemetry Pin Swap (Swap Rx and Tx pins)"
-        }
+        "message": "接腳交換",
+        "english": "Pin Swap"
     },
     "receiverCrsfTelemetryMode": {
         "message": "自訂遙測",
@@ -2998,37 +2839,24 @@
         "english": "Debug 7"
     },
     "receiverTelemetrySensor_RPM": {
-        "message": "RPM",
-        "english": "RPM",
-        "status": "New entry. Please translate!"
+        "message": "RPM（轉速）",
+        "english": "RPM"
     },
     "receiverTelemetrySensor_TEMP": {
-        "message": "Temperature",
-        "english": "Temperature",
-        "status": "New entry. Please translate!"
+        "message": "Temperature（溫度）",
+        "english": "Temperature"
     },
     "receiverBars": {
-        "message": "Channel Assignment",
-        "english": "Channel Assignment",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "接收機通道",
-            "english": "Receiver Channels"
-        }
+        "message": "通道分配",
+        "english": "Channel Assignment"
     },
     "receiverChannelOrder": {
-        "message": "Apply Preset",
-        "english": "Apply Preset",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "通道順序預設",
-            "english": "Channel Order Preset"
-        }
+        "message": "套用預設值",
+        "english": "Apply Preset"
     },
     "receiverChannelOrderPresetPlaceholder": {
-        "message": "Select a preset...",
-        "english": "Select a preset...",
-        "status": "New entry. Please translate!"
+        "message": "選擇一組預設值...",
+        "english": "Select a preset..."
     },
     "receiverButtonBind": {
         "message": "接收機對頻",
@@ -3055,9 +2883,8 @@
         "english": "Enable controls"
     },
     "resetModelPreviewOrientation": {
-        "message": "Reset",
-        "english": "Reset",
-        "status": "New entry. Please translate!"
+        "message": "重置",
+        "english": "Reset"
     },
     "auxiliaryHelp": {
         "message": "在此處透過使用範圍和/或連結到其他模式的組合設定飛行模式(BF4.0及更高版本支援連結) 。使用 <strong>範圍</strong> 來定義遙控器上的開關和分配相應的模式。當接收機給出的通道值在最小/最大範圍內將啟用該模式。當一個模式被啟用時，使用<strong>連結</strong>來啟用另一個模式。<strong>例外:</strong> 解鎖不能連結或者被連結到其他的模式，當一個模式已被連結則無法被再次連結(多重連結) 。多個範圍/連結可以用於啟用任何模式。如果為一個模式定義了多個範圍/連結，則可以將每個範圍/連結設定為<strong>和</strong> 或是 <strong>或</strong>。模式將在以下情況下被啟用：<br />- 全部的<strong>和</strong> 範圍/連結都啟用; 或者是<br />- 至少有一個 <strong>或</strong> 範圍/連結啟用。<br /><br />記得使用儲存按鈕來儲存你的設定。",
@@ -3229,9 +3056,8 @@
         "english": "OSD Profile Selection"
     },
     "adjustmentsFunctionBatteryProfile": {
-        "message": "Battery Profile Selection",
-        "english": "Battery Profile Selection",
-        "status": "New entry. Please translate!"
+        "message": "電池設定檔選擇",
+        "english": "Battery Profile Selection"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "俯仰 Rate",
@@ -3518,34 +3344,28 @@
         "english": "Yaw Precomp Cutoff"
     },
     "adjustmentsFunctionGovIdleThrottle": {
-        "message": "Governor Idle Throttle",
-        "english": "Governor Idle Throttle",
-        "status": "New entry. Please translate!"
+        "message": "定速器怠速油門",
+        "english": "Governor Idle Throttle"
     },
     "adjustmentsFunctionGovAutoThrottle": {
-        "message": "Governor Auto Throttle",
-        "english": "Governor Auto Throttle",
-        "status": "New entry. Please translate!"
+        "message": "定速器自旋油門",
+        "english": "Governor Auto Throttle"
     },
     "adjustmentsFunctionGovMinThrottle": {
-        "message": "Governor Min Throttle",
-        "english": "Governor Min Throttle",
-        "status": "New entry. Please translate!"
+        "message": "定速器最小油門",
+        "english": "Governor Min Throttle"
     },
     "adjustmentsFunctionGovMaxThrottle": {
-        "message": "Governor Max Throttle",
-        "english": "Governor Max Throttle",
-        "status": "New entry. Please translate!"
+        "message": "定速器最大油門",
+        "english": "Governor Max Throttle"
     },
     "adjustmentsFunctionGovHeadspeed": {
-        "message": "Governor Headspeed",
-        "english": "Governor Headspeed",
-        "status": "New entry. Please translate!"
+        "message": "定速器主旋翼轉速",
+        "english": "Governor Headspeed"
     },
     "adjustmentsFunctionGovYawFF": {
-        "message": "Governor Yaw F-gain",
-        "english": "Governor Yaw F-gain",
-        "status": "New entry. Please translate!"
+        "message": "定速器航向 F-增益",
+        "english": "Governor Yaw F-gain"
     },
     "servoHelp": {
         "message": "舵機101<ul><li>首先檢查舵機方向。例如，透過給予一些集體螺距來檢查循環舵機系統。反向舵機，如果需要。</li><li>透過啟動<i>舵機覆寫</i>和調節<i>中心點</i>來調平舵機臂。舵機臂在此位置應垂直於主軸。</li><li>調整<i>縮放</i>使舵機角度正確。指定角度為30°;在<i>舵機覆寫</i>下的舵機。舵機現在應該移動到30度。如果小於，則增加該舵機的<i>縮放</i>。如果更多，就減少。</li><li>您可以透過調整<i>最小值</i>或<i>最大值</i>來限制或擴展舵機運動範圍。只有在出現機械問題時才這樣做，比如舵機干涉。使用混控限制橫滾/俯仰/集體螺距</li></ul>",
@@ -3608,14 +3428,12 @@
         "english": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time."
     },
     "servoSource": {
-        "message": "Source",
-        "english": "Source",
-        "status": "New entry. Please translate!"
+        "message": "來源",
+        "english": "Source"
     },
     "servoSourceHelp": {
-        "message": "Source of the servo signal. <b>Mixer</b>: servo is controlled by the flight controller mixer. <b>RX</b>: servo receives direct pass-through from the receiver channel.",
-        "english": "Source of the servo signal. <b>Mixer</b>: servo is controlled by the flight controller mixer. <b>RX</b>: servo receives direct pass-through from the receiver channel.",
-        "status": "New entry. Please translate!"
+        "message": "舵機訊號來源。<b>混控</b>： 舵機由飛控混控控制。 <b>接收機</b>： 舵機由接收機通道直接控制。",
+        "english": "Source of the servo signal. <b>Mixer</b>: servo is controlled by the flight controller mixer. <b>RX</b>: servo receives direct pass-through from the receiver channel."
     },
     "servoSpeed": {
         "message": "速度 [ms]",
@@ -3918,7 +3736,7 @@
         "english": "Tail rotor type"
     },
     "mixerTailRotorModeHelp": {
-        "message": "<strong>變距尾翼：</strong> 由一個舵機驅動的可變螺距尾旋翼(4號舵機).  <br><strong>馬達直驅：</strong> 由馬達（2號馬達）直接驅動尾旋翼控制航向<br><strong>雙向馬達直驅：</strong> 與馬達直驅一樣，但允許馬達改變旋轉方向（實驗功能）",
+        "message": "<strong>變距尾翼：</strong> 由一個舵機驅動的可變螺距尾旋翼(4號舵機).    <br><strong>馬達直驅：</strong> 由馬達（2號馬達）直接驅動尾旋翼控制航向<br><strong>雙向馬達直驅：</strong> 與馬達直驅一樣，但允許馬達改變旋轉方向（實驗功能）",
         "english": "<strong>Variable pitch:</strong> Variable pitch tail controlled by a tail servo (Servo#4). <br><strong>Motorised:</strong> The tail has a separate motor (Motor#2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode (experimental)."
     },
     "mixerTailVariablePitch": {
@@ -4014,7 +3832,7 @@
         "english": "Mixer Control Inputs"
     },
     "mixerInputChannelsHelp": {
-        "message": "<strong>注意！這裡是限制控制的正確位置</strong><br><br>混合器輸入率用於設定縮放比例，以匹配機械設定。由於每個旋翼頭都不同，因此每個設定需要不同的縮放值。 <br><strong>控制</strong> 這一欄包含每個穩定控制功能。  <br><strong>最小值：</strong>設定指令下達時希望槳葉達到的最小角度。<br><strong>最大值：</strong>設定指令下達時希望槳葉達到的最大角度。  <br><strong>縮放比例：</strong>增大或減小縮放值，直到直升機槳葉與指令角度一致。  <br><br><strong>混控輸入校準流程</strong><br><strong>步驟1： </strong>打開該頁面上的混控覆寫功能開關。<br><strong>步驟2： </strong>在要校準的通道左側打開開關。  <br><strong>步驟3：</strong> 將混控覆寫設定為一個角度（例如 10 度）。  <br><strong>步驟4： </strong>測量槳葉的實際角度。 <br><strong>步驟5： </strong>設定縮放比例，使實際槳葉角度與指令角度一致。",
+        "message": "<strong>注意！這裡是限制控制的正確位置</strong><br><br>混合器輸入率用於設定縮放比例，以匹配機械設定。由於每個旋翼頭都不同，因此每個設定需要不同的縮放值。 <br><strong>控制</strong> 這一欄包含每個穩定控制功能。    <br><strong>最小值：</strong>設定指令下達時希望槳葉達到的最小角度。<br><strong>最大值：</strong>設定指令下達時希望槳葉達到的最大角度。    <br><strong>縮放比例：</strong>增大或減小縮放值，直到直升機槳葉與指令角度一致。    <br><br><strong>混控輸入校準流程</strong><br><strong>步驟1： </strong>打開該頁面上的混控覆寫功能開關。<br><strong>步驟2： </strong>在要校準的通道左側打開開關。    <br><strong>步驟3：</strong> 將混控覆寫設定為一個角度（例如 10 度）。    <br><strong>步驟4： </strong>測量槳葉的實際角度。 <br><strong>步驟5： </strong>設定縮放比例，使實際槳葉角度與指令角度一致。",
         "english": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle."
     },
     "mixerOverrideNote": {
@@ -4378,38 +4196,28 @@
         "english": "Qty"
     },
     "motors.motor.heading": {
-        "message": "Motor #{{index}}",
-        "english": "Motor #{{index}}",
-        "status": "New entry. Please translate!"
+        "message": "馬達 #{{index}}",
+        "english": "Motor #{{index}}"
     },
     "motorsSectionLabelThrottle": {
-        "message": "Throttle",
-        "english": "Throttle",
-        "status": "New entry. Please translate!"
+        "message": "油門",
+        "english": "Throttle"
     },
     "motorsSectionLabelRPM": {
-        "message": "RPM",
-        "english": "RPM",
-        "status": "New entry. Please translate!"
+        "message": "轉速",
+        "english": "RPM"
     },
     "motorsSectionSignaling": {
-        "message": "Signaling",
-        "english": "Signaling",
-        "status": "New entry. Please translate!"
+        "message": "訊號",
+        "english": "Signaling"
     },
     "motorsSectionSensorCorrection": {
-        "message": "Sensor Correction",
-        "english": "Sensor Correction",
-        "status": "New entry. Please translate!"
+        "message": "感測器校正",
+        "english": "Sensor Correction"
     },
     "motorsEscProtocol": {
-        "message": "Throttle Protocol",
-        "english": "Throttle Protocol",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "電變油門協定",
-            "english": "ESC Throttle protocol"
-        }
+        "message": "油門協定",
+        "english": "Throttle Protocol"
     },
     "motorsEscProtocolHelp": {
         "message": "選擇您的電變協定<br>傳統的直升機電變使用PWM，無人機電變可能使用其他協定，如Dshot<br>確保你的電變支援該協定",
@@ -4424,48 +4232,28 @@
         "english": "ESC Telemetry"
     },
     "motorsEscTelemetryProtocol": {
-        "message": "Telemetry Protocol",
-        "english": "Telemetry Protocol",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "電變遙測協定",
-            "english": "ESC Telemetry protocol"
-        }
+        "message": "遙測協定",
+        "english": "Telemetry Protocol"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "選擇你的電變遙測協議。將電變遙測線由電變連接到飛控上。在<i>配置</i>頁面中將對應的串列埠設定為電變遙測",
+        "message": "選擇你的電變遙測協定。將電變遙測線由電變連接到飛控上。在<i>配置</i>頁面中將對應的串列埠設定為電變遙測",
         "english": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab."
     },
     "motorsEscTelemetryHalfDuplex": {
-        "message": "Half-Duplex",
-        "english": "Half-Duplex",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "單線通信（半雙工）",
-            "english": "One-wire Communication (Half-Duplex)"
-        }
+        "message": "半雙工",
+        "english": "Half-Duplex"
     },
     "motorsEscTelemetryHalfDuplexHelp": {
         "message": "使用 TX 接腳進行發送和接收。特定支援由遙控器上調整參數的電變（如：Hobbywing Platinum V5 或 Scorpion Tribunus）需使用此功能。",
         "english": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scorpion Tribunus)."
     },
     "motorsEscTelemetryPinswap": {
-        "message": "Pin Swap",
-        "english": "Pin Swap",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Rx/Tx 接腳交換",
-            "english": "Rx/Tx Pin Swap"
-        }
+        "message": "接腳交換",
+        "english": "Pin Swap"
     },
     "motorsEscTelemetryPinswapHelp": {
-        "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>",
-        "english": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "將 Rx 和 Tx 接腳交換。注意：此選項在 F4 MCUs 上不支援，請參閱說明。",
-            "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
-        }
+        "message": "<p>將 Rx 和 Tx 接腳交換。</p><p><strong>注意：</strong> 此選項在 F4 MCUs 上不支援，請參閱說明。</p>",
+        "english": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
     "motorsUnsyncedPwm": {
         "message": "非同步電變刷新率",
@@ -4476,13 +4264,8 @@
         "english": "ESC PWM is running unsyncronised, separate from the PID loop, at the specified frequency."
     },
     "motorsUnsyncedPWMFreq": {
-        "message": "Update Frequency",
-        "english": "Update Frequency",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "電變刷新率",
-            "english": "ESC update frequency"
-        }
+        "message": "更新頻率",
+        "english": "Update Frequency"
     },
     "motorsUnsyncedPWMFreqHelp": {
         "message": "ESC PWM更新頻率，單位為Hz。這就是油門值發送到電變的頻率。通常在50Hz到250Hz之間。大多數現代電變在250Hz時工作良好。",
@@ -4521,99 +4304,60 @@
         "english": "Gear ratio between the tail rotor and the main rotor. Use <span class=\"value\">tail gear</span> : <span class=\"value\">autorotation gear</span> tooth count for Torque Tube, or <span class=\"value\">tail pulley</span> : <span class=\"value\">front pulley</span> for a belt tail. For a direct drive tail, use <span class=\"value\">1</span> : <span class=\"value\">1</span>"
     },
     "motorsMotorPoles1Long": {
-        "message": "Main Motor Pole Count",
-        "english": "Main Motor Pole Count",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "主馬達極數",
-            "english": "Main Motor pole count"
-        }
+        "message": "主馬達極數",
+        "english": "Main Motor Pole Count"
     },
     "motorsMotorPoles2Long": {
-        "message": "Tail Motor Pole Count",
-        "english": "Tail Motor Pole Count",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "尾馬達極數",
-            "english": "Tail Motor pole count"
-        }
+        "message": "尾馬達極數",
+        "english": "Tail Motor Pole Count"
     },
     "motorsMotorPoles3Long": {
-        "message": "Motor M3 Pole Count",
-        "english": "Motor M3 Pole Count",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "馬達 M3 極數",
-            "english": "Motor M3 pole count"
-        }
+        "message": "馬達 M3 極數",
+        "english": "Motor M3 Pole Count"
     },
     "motorsMotorPoles4Long": {
-        "message": "Motor M4 Pole Count",
-        "english": "Motor M4 Pole Count",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "馬達 M4 極數",
-            "english": "Motor M4 pole count"
-        }
+        "message": "馬達 M4 極數",
+        "english": "Motor M4 Pole Count"
     },
     "motorsMotorPolesHelp": {
         "message": "<i>磁鐵極數</i> 馬達轉子上面的磁鐵數量，一般可以在說明書上找到，或者你可以手動數一下磁鐵數量，注意不是銅線繞組的定子。",
         "english": "The <i>pole count</i> is the number of magnets on the motor bell. The manual should give this number. Or you can count the magnets. Do NOT count the stators with the copper wire windings."
     },
     "motorsThrottleEndpoints": {
-        "message": "Throttle Range",
-        "english": "Throttle Range",
-        "status": "New entry. Please translate!"
+        "message": "油門範圍",
+        "english": "Throttle Range"
     },
     "motorsThrottleEndpointsWarning": {
-        "message": "Incorrectly configuring the throttle range parameters can cause the motor to run even when the throttle is off and the flight controller is disarmed.",
-        "english": "Incorrectly configuring the throttle range parameters can cause the motor to run even when the throttle is off and the flight controller is disarmed.",
-        "status": "New entry. Please translate!"
+        "message": "若油門範圍參數設定不當可能會導致即使在油門關閉且飛控已上鎖的情況下馬達仍會持續運轉。",
+        "english": "Incorrectly configuring the throttle range parameters can cause the motor to run even when the throttle is off and the flight controller is disarmed."
     },
     "motorsThrottleEndpointRealtime": {
-        "message": "Live Update",
-        "english": "Live Update",
-        "status": "New entry. Please translate!"
+        "message": "即時更新",
+        "english": "Live Update"
     },
     "motorsThrottleEndpointRealtimeHelp": {
-        "message": "<p>Apply changes to the throttle range immediately.</p><p>Throttle Override can be set to 0%, 1%, and 100% to view changes to Motor Off, Low Throttle and High Throttle respectively.</p>",
-        "english": "<p>Apply changes to the throttle range immediately.</p><p>Throttle Override can be set to 0%, 1%, and 100% to view changes to Motor Off, Low Throttle and High Throttle respectively.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p>立即將變更套用至油門範圍。</p><p>可將「油門覆寫」設定為 0%、1% 和 100% 以分別檢視「馬達關閉」、「低油門」和「高油門」的變化。</p>",
+        "english": "<p>Apply changes to the throttle range immediately.</p><p>Throttle Override can be set to 0%, 1%, and 100% to view changes to Motor Off, Low Throttle and High Throttle respectively.</p>"
     },
     "motorsThrottleMinimum": {
-        "message": "Low Throttle",
-        "english": "Low Throttle",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "0% 油門 PWM 值",
-            "english": "0% Throttle PWM value"
-        }
+        "message": "低油門",
+        "english": "Low Throttle"
     },
     "motorsThrottleMinimumHelp": {
         "message": "這是在低油門(內燃機怠速)時發送到電變/舵機的 PWM 值。",
         "english": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE)."
     },
     "motorsThrottleMaximum": {
-        "message": "High Throttle",
-        "english": "High Throttle",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "100% 油門 PWM 值",
-            "english": "100% Throttle PWM value"
-        }
+        "message": "高油門",
+        "english": "High Throttle"
     },
     "motorsThrottleMaximumHelp": {
         "message": "這是在全油門時發送到電變/舵機的 PWM 值。",
         "english": "This PWM value is sent to the ESC/servo at full throttle."
     },
     "motorsThrottleMinimumCommand": {
-        "message": "Motor Off",
-        "english": "Motor Off",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "馬達停止油門 PWM 值",
-            "english": "Motor Stop Throttle PWM value"
-        }
+        "message": "馬達關閉",
+        "english": "Motor Off"
     },
     "motorsThrottleMinimumCommandHelp": {
         "message": "這是在馬達停止運轉時發送到電變/舵機的 PWM 值。這也同時是允許電變進入解鎖狀態的值。",
@@ -4628,39 +4372,24 @@
         "english": "<span class=\"message-negative\">Warning:</span> <i>Tail Rotor Gear Ratio</i> is set to an incorrect value. Please check!"
     },
     "motorsVoltageCorrection": {
-        "message": "Voltage",
-        "english": "Voltage",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "電壓校正",
-            "english": "Voltage Correction"
-        }
+        "message": "電壓",
+        "english": "Voltage"
     },
     "motorsVoltageCorrectionHelp": {
         "message": "調整電變遙測回報的電壓值。",
         "english": "Adjusts the Voltage reported by the ESC's telemetry."
     },
     "motorsCurrentCorrection": {
-        "message": "Current",
-        "english": "Current",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "電流校正",
-            "english": "Current Correction"
-        }
+        "message": "電流",
+        "english": "Current"
     },
     "motorsCurrentCorrectionHelp": {
         "message": "調整電變遙測回報的電流值。",
         "english": "Adjusts the Current reported by the ESC's telemetry."
     },
     "motorsConsumptionCorrection": {
-        "message": "Consumption",
-        "english": "Consumption",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "耗電量校正",
-            "english": "Consumption Correction"
-        }
+        "message": "耗電量",
+        "english": "Consumption"
     },
     "motorsConsumptionCorrectionHelp": {
         "message": "調整電變遙測回報的耗電量。",
@@ -4695,22 +4424,12 @@
         "english": "Motor #4"
     },
     "motorThrottle": {
-        "message": "Throttle",
-        "english": "Throttle",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "油門：",
-            "english": "Throttle:"
-        }
+        "message": "油門",
+        "english": "Throttle"
     },
     "motorRPM": {
-        "message": "RPM",
-        "english": "RPM",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "馬達轉速：",
-            "english": "RPM:"
-        }
+        "message": "轉速",
+        "english": "RPM"
     },
     "motorHeadspeed": {
         "message": "主旋翼轉速：",
@@ -4721,437 +4440,272 @@
         "english": "Tailspeed:"
     },
     "motorVoltage": {
-        "message": "Voltage",
-        "english": "Voltage",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "電壓：",
-            "english": "Voltage:"
-        }
+        "message": "電壓",
+        "english": "Voltage"
     },
     "motorCurrent": {
-        "message": "Current",
-        "english": "Current",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "電流：",
-            "english": "Current:"
-        }
+        "message": "電流",
+        "english": "Current"
     },
     "motorTemperature": {
-        "message": "Temp {{number}}",
-        "english": "Temp {{number}}",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "電變溫度：",
-            "english": "Temp:"
-        }
+        "message": "溫度 {{number}}",
+        "english": "Temp {{number}}"
     },
     "motorDshotError": {
-        "message": "DShot RPM Error Rate",
-        "english": "DShot RPM Error Rate",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "誤差：",
-            "english": "Errors:"
-        }
+        "message": "DShot 轉速錯誤率",
+        "english": "DShot RPM Error Rate"
     },
     "motorOverrideNote": {
-        "message": "Throttle Override sets the throttle output to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset after reboot.<br/><br/><strong>THROTTLE OVERRIDE WILL MAKE THE MOTORS SPOOL UP!</strong>",
-        "english": "Throttle Override sets the throttle output to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset after reboot.<br/><br/><strong>THROTTLE OVERRIDE WILL MAKE THE MOTORS SPOOL UP!</strong>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<strong>注釋</strong> 油門覆寫：出於設定和測試目的，將輸出油門強制設定為任意值。覆寫值不會儲存，會在重新啟動時重設。<br/><br/><strong class=\"message-negative\">馬達油門覆寫將使馬達啟動！</strong>",
-            "english": "<strong>Note.</strong> Throttle Override forces the output throttle to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset in reboot.<br/><br/><strong class=\"message-negative\">MOTOR THROTTLE OVERRIDE WILL MAKE THE MOTORS TO SPOOL UP!</strong>"
-        }
+        "message": "油門覆寫是基於設定和測試目的將輸出油門強制設定為任意值。覆寫值不會儲存且會在重新啟動時重設。<br/><br/><strong>馬達油門覆寫將使馬達啟動！</strong>",
+        "english": "Throttle Override sets the throttle output to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset after reboot.<br/><br/><strong>THROTTLE OVERRIDE WILL MAKE THE MOTORS SPOOL UP!</strong>"
     },
     "motorOverrideTitle": {
         "message": "油門覆寫",
         "english": "Throttle Override"
     },
     "govFeatures": {
-        "message": "Governor",
-        "english": "Governor",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "定速器功能",
-            "english": "Governor Features"
-        }
+        "message": "定速器",
+        "english": "Governor"
     },
     "govSectionGeneral": {
-        "message": "General",
-        "english": "General",
-        "status": "New entry. Please translate!"
+        "message": "一般",
+        "english": "General"
     },
     "govSectionThrottle": {
-        "message": "Throttle",
-        "english": "Throttle",
-        "status": "New entry. Please translate!"
+        "message": "油門",
+        "english": "Throttle"
     },
     "govSectionThrottleCurve": {
-        "message": "Governor Bypass Throttle Curve",
-        "english": "Governor Bypass Throttle Curve",
-        "status": "New entry. Please translate!"
+        "message": "定速器繞行油門曲線",
+        "english": "Governor Bypass Throttle Curve"
     },
     "govSectionThrottleCurveHelp": {
-        "message": "<p><strong>Governor Bypass Mode</strong> disables all governor functions. When this mode is active, the collective-to-throttle curve is used to determine throttle output.</p><p>See the Governor Bypass section in the Modes tab to configure how the mode is activated.</p>",
-        "english": "<p><strong>Governor Bypass Mode</strong> disables all governor functions. When this mode is active, the collective-to-throttle curve is used to determine throttle output.</p><p>See the Governor Bypass section in the Modes tab to configure how the mode is activated.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p><strong>定速器繞行模式</strong> 停用所有定速器功能。當此模式啟用時，將以 集體螺距-油門 曲線來決定油門輸出。</p><p>請參閱「模式」分頁中的「定速器繞行」以設定如何啟用此模式。</p>",
+        "english": "<p><strong>Governor Bypass Mode</strong> disables all governor functions. When this mode is active, the collective-to-throttle curve is used to determine throttle output.</p><p>See the Governor Bypass section in the Modes tab to configure how the mode is activated.</p>"
     },
     "govSectionRampTime": {
-        "message": "Motor Ramp",
-        "english": "Motor Ramp",
-        "status": "New entry. Please translate!"
+        "message": "馬達起轉",
+        "english": "Motor Ramp"
     },
     "govSectionAutorotation": {
-        "message": "Autorotation",
-        "english": "Autorotation",
-        "status": "New entry. Please translate!"
+        "message": "熄火降落",
+        "english": "Autorotation"
     },
     "govSectionFilters": {
-        "message": "Filters",
-        "english": "Filters",
-        "status": "New entry. Please translate!"
+        "message": "濾波器",
+        "english": "Filters"
     },
     "govProfile": {
         "message": "定速器設定",
         "english": "Governor Settings"
     },
     "govConfigurationNote": {
-        "message": "The Governor has both global and profile parameters. See the Profiles tab for profile specific parameters.",
-        "english": "The Governor has both global and profile parameters. See the Profiles tab for profile specific parameters.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<strong>注意：</strong>定速器具有全域參數與飛行設定參數。請參閱飛行參數頁面的飛行參數具體參數。",
-            "english": "<strong>Note:</strong> Governor has both global and profile parameters. Please see the Profiles tab for profile specific parameters."
-        }
+        "message": "定速器具有全域參數與飛行設定參數。請參閱飛行參數頁面的飛行參數具體參數。",
+        "english": "The Governor has both global and profile parameters. See the Profiles tab for profile specific parameters."
     },
     "govMode": {
-        "message": "Governor Mode",
-        "english": "Governor Mode",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "定速器模式",
-            "english": "Governor mode"
-        }
+        "message": "定速器模式",
+        "english": "Governor Mode"
     },
     "govModeHelp": {
-        "message": "<p><strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.</p><p><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.</p><p><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.</p><p><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).</p><p><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.</p>",
-        "english": "<p><strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.</p><p><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.</p><p><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.</p><p><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).</p><p><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.</p>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<strong>關閉：</strong> 定速器關閉，油門信號將直接從遙控器傳送到電變。<br><br><strong>直通：</strong>定速器不控制轉速，但提供緩啟動和熄火降落的功能。<br><br><strong>標準：</strong> 轉速由飛控定速器控制，類似於一個普通的電變定速功能。<br><br><strong>模式1：</strong> 與標準類似，但提供集體螺距與循環螺距的補償（類似於遙控器中的油門曲線）<br><br><strong>模式2：</strong> 類似於模式1，但具有對電壓驟降的補償，該模式需要有足夠快的電壓回傳才能使用。",
-            "english": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
-        }
+        "message": "<p><strong>OFF（關閉）：</strong> 定速器關閉，油門訊號將直接從遙控器傳送到電變。</p><p><strong>PASSTHROUGH（直通）：</strong> 油門直接由發射器控制，但提供緩啟動和熄火降落的功能。</p><p><strong>STANDARD（標準）：</strong> 轉速由飛控定速器控制，相當於典型電變的定速功能。</p><p><strong>MODE1（模式1）：</strong> 與標準模式類似，但提供集體螺距與循環螺距的補償（類似於遙控器中的油門曲線）</p><p><strong>MODE2（模式2）：</strong> 與模式1類似，但具有對電壓驟降的補償功能。需要有高速的電壓量測資訊。</p>",
+        "english": "<p><strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.</p><p><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.</p><p><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.</p><p><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).</p><p><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.</p>"
     },
     "govModeHelp2": {
-        "message": "<p><strong>OFF:</strong> The governor is disabled. The throttle input is sent directly to the motor.</p><p><strong>LIMIT:</strong> The governor is disabled. Global <em>Idle Throttle</em> and profile <em>Minimum Throttle</em> and <em>Maximum Throttle</em> limits are applied before sending the throttle input to the motor.</p><p><strong>DIRECT:</strong> The governor handles slow spoolup and bailout recovery. Headspeed stabilisation is left to an external governor or throttle curve.</p><p><strong>ELECTRIC:</strong> Complete governor suitable for electric motors.</p><p><strong>NITRO:</strong> Complete governor suitable for internal combustion engines.</p>",
-        "english": "<p><strong>OFF:</strong> The governor is disabled. The throttle input is sent directly to the motor.</p><p><strong>LIMIT:</strong> The governor is disabled. Global <em>Idle Throttle</em> and profile <em>Minimum Throttle</em> and <em>Maximum Throttle</em> limits are applied before sending the throttle input to the motor.</p><p><strong>DIRECT:</strong> The governor handles slow spoolup and bailout recovery. Headspeed stabilisation is left to an external governor or throttle curve.</p><p><strong>ELECTRIC:</strong> Complete governor suitable for electric motors.</p><p><strong>NITRO:</strong> Complete governor suitable for internal combustion engines.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p><strong>OFF（關閉）：</strong>定速器已停用。油門輸入直接傳送至馬達。</p><p><strong>LIMIT（限制）：</strong>定速器已停用。全域<em>怠速油門</em>以及設定檔中的<em>最小油門</em>和<em>最大油門</em>限制會在油門輸入傳送至馬達前套用。</p><p><strong>DIRECT（直接）：</strong>定速器負責緩啟動和救援恢復。主旋翼轉速穩定由外部定速器或油門曲線處理。</p><p><strong>ELECTRIC（電動）：</strong>適用於電動馬達的完整定速器。</p><p><strong>NITRO（燃油）：</strong>適用於內燃機的完整定速器。</p>",
+        "english": "<p><strong>OFF:</strong> The governor is disabled. The throttle input is sent directly to the motor.</p><p><strong>LIMIT:</strong> The governor is disabled. Global <em>Idle Throttle</em> and profile <em>Minimum Throttle</em> and <em>Maximum Throttle</em> limits are applied before sending the throttle input to the motor.</p><p><strong>DIRECT:</strong> The governor handles slow spoolup and bailout recovery. Headspeed stabilisation is left to an external governor or throttle curve.</p><p><strong>ELECTRIC:</strong> Complete governor suitable for electric motors.</p><p><strong>NITRO:</strong> Complete governor suitable for internal combustion engines.</p>"
     },
     "govThrottleType": {
-        "message": "Throttle Type",
-        "english": "Throttle Type",
-        "status": "New entry. Please translate!"
+        "message": "油門類型",
+        "english": "Throttle Type"
     },
     "govThrottleTypeHelp": {
-        "message": "<p><strong>NORMAL:</strong> The throttle input is directly controlling the motor. Once the target headspeed is reached, the governor takes over until the throttle input is reduced below the handover level.</p><p><strong>SWITCH:</strong> While the throttle input is below handover, it directly controls motor output. While above handover, the governor engages and the throttle input is used to adjust the headspeed target.</p><p>SWITCH can only be used with ELECTRIC and NITRO governor mode.</p><p><strong>FUNCTION:</strong> The throttle input is used to select each governor mode.</p>",
-        "english": "<p><strong>NORMAL:</strong> The throttle input is directly controlling the motor. Once the target headspeed is reached, the governor takes over until the throttle input is reduced below the handover level.</p><p><strong>SWITCH:</strong> While the throttle input is below handover, it directly controls motor output. While above handover, the governor engages and the throttle input is used to adjust the headspeed target.</p><p>SWITCH can only be used with ELECTRIC and NITRO governor mode.</p><p><strong>FUNCTION:</strong> The throttle input is used to select each governor mode.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p><strong>NORMAL（一般）：</strong>油門輸入直接控制馬達。一旦達到目標主旋翼轉速，定速器即接管控制，直到油門輸入降至交接點以下。</p><p><strong>SWITCH（切換）：</strong>當油門輸入低於交接點時，直接控制馬達輸出；當超過交接點時，定速器介入，油門輸入用於調整目標主旋翼轉速。</p><p>SWITCH 模式僅能搭配 ELECTRIC 和 NITRO 定速器模式使用。</p><p><strong>FUNCTION（功能）：</strong>油門輸入用於選擇各定速器模式。</p>",
+        "english": "<p><strong>NORMAL:</strong> The throttle input is directly controlling the motor. Once the target headspeed is reached, the governor takes over until the throttle input is reduced below the handover level.</p><p><strong>SWITCH:</strong> While the throttle input is below handover, it directly controls motor output. While above handover, the governor engages and the throttle input is used to adjust the headspeed target.</p><p>SWITCH can only be used with ELECTRIC and NITRO governor mode.</p><p><strong>FUNCTION:</strong> The throttle input is used to select each governor mode.</p>"
     },
     "govIdleCollective": {
-        "message": "Collective ➜ Idle Throttle",
-        "english": "Collective ➜ Idle Throttle",
-        "status": "New entry. Please translate!"
+        "message": "集體螺距 ➜ 怠速油門",
+        "english": "Collective ➜ Idle Throttle"
     },
     "govIdleCollectiveHelp": {
-        "message": "<p>Idle throttle is applied while collective is below this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active.",
-        "english": "<p>Idle throttle is applied while collective is below this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active.",
-        "status": "New entry. Please translate!"
+        "message": "<p>當集體螺距低於此值時，套用怠速油門。</p><p><strong>注意：</strong>此設定僅在定速器設定檔中的<i>油門曲線</i>參數啟用時有效。",
+        "english": "<p>Idle throttle is applied while collective is below this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active."
     },
     "govWotCollective": {
-        "message": "Collective ➜ Full Throttle",
-        "english": "Collective ➜ Full Throttle",
-        "status": "New entry. Please translate!"
+        "message": "集體螺距 ➜ 全油門",
+        "english": "Collective ➜ Full Throttle"
     },
     "govWotCollectiveHelp": {
-        "message": "<p>Full throttle is applied while collective is above this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active.",
-        "english": "<p>Full throttle is applied while collective is above this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active.",
-        "status": "New entry. Please translate!"
+        "message": "<p>當集體螺距高於此值時，套用全油門。</p><p><strong>注意：</strong>此設定僅在定速器設定檔中的<i>油門曲線</i>參數啟用時有效。",
+        "english": "<p>Full throttle is applied while collective is above this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active."
     },
     "govHandoverThrottle": {
-        "message": "Handover Throttle",
-        "english": "Handover Throttle",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "接管油門 [%]",
-            "english": "Handover throttle [%]"
-        }
+        "message": "接管油門",
+        "english": "Handover Throttle"
     },
     "govHandoverThrottleHelp": {
-        "message": "<p>The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>",
-        "english": "<p>The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "定速器接管油門的油門值，低於這個油門的會直接傳送到電變，超過此油門定速器才會介入，並通過油門值計算需要達到的目標轉速。請確保馬達在此值以下能夠順利啟動。",
-            "english": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level."
-        }
+        "message": "<p>定速器接管油門的油門值，低於這個油門的會直接傳送到電變，超過此油門定速器才會介入，並通過油門值計算需要達到的目標轉速。</p><p><strong>注意：</strong> 請確保馬達在此值以下能夠順利啟動。</p>",
+        "english": "<p>The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>"
     },
     "govHandoverThrottleHelp2": {
-        "message": "<p>While throttle input is above this value, motor control is handed over to the governor.</p><p>While throttle input is below this value, it is sent directly to the motor.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>",
-        "english": "<p>While throttle input is above this value, motor control is handed over to the governor.</p><p>While throttle input is below this value, it is sent directly to the motor.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p>當油門輸入高於此值時，馬達控制權移交給定速器。</p><p>當油門輸入低於此值時，直接傳送至馬達。</p><p><strong>注意：</strong>馬達必須能在此油門數值以下正常啟動。</p>",
+        "english": "<p>While throttle input is above this value, motor control is handed over to the governor.</p><p>While throttle input is below this value, it is sent directly to the motor.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>"
     },
     "govStartupTime": {
-        "message": "Startup Time",
-        "english": "Startup Time",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "緩啟動時間 [秒]",
-            "english": "Startup time"
-        }
+        "message": "緩啟動時間",
+        "english": "Startup Time"
     },
     "govStartupTimeHelp": {
         "message": "無轉速訊號階段的緩啟動時間常數，以秒為單位，測量主旋翼從零到全速的時間。",
         "english": "Time constant for slow startup, in seconds, measuring the time from zero to full headspeed."
     },
     "govStartupTimeHelp2": {
-        "message": "Rate of throttle change during startup, defined as the duration from 0% to 100% throttle.",
-        "english": "Rate of throttle change during startup, defined as the duration from 0% to 100% throttle.",
-        "status": "New entry. Please translate!"
+        "message": "啟動期間的油門變化速率，定義為從 0% 到 100% 油門所需的時間。",
+        "english": "Rate of throttle change during startup, defined as the duration from 0% to 100% throttle."
     },
     "govSpoolupTime": {
-        "message": "Spoolup Time",
-        "english": "Spoolup Time",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "緩提速時間 [秒]",
-            "english": "Spoolup time"
-        }
+        "message": "提速時間",
+        "english": "Spoolup Time"
     },
     "govSpoolupTimeHelp": {
-        "message": "有轉速訊號階段的緩提速時間常數，以秒為單位，測量主旋翼從零到全速的時間。",
+        "message": "有轉速訊號階段的提速時間常數，以秒為單位，測量主旋翼從零到全速的時間。",
         "english": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govSpoolupTimeHelp2": {
-        "message": "Rate of throttle change during spoolup, defined as the duration from 0% to 100% throttle.",
-        "english": "Rate of throttle change during spoolup, defined as the duration from 0% to 100% throttle.",
-        "status": "New entry. Please translate!"
+        "message": "提速期間的油門變化速率，定義為從 0% 到 100% 油門所需的時間。",
+        "english": "Rate of throttle change during spoolup, defined as the duration from 0% to 100% throttle."
     },
     "govSpooldownTime": {
-        "message": "Spooldown Time",
-        "english": "Spooldown Time",
-        "status": "New entry. Please translate!"
+        "message": "減速時間",
+        "english": "Spooldown Time"
     },
     "govSpooldownTimeHelp": {
-        "message": "Rate of throttle change during spooldown, defined as the duration from 100% to 0% throttle.",
-        "english": "Rate of throttle change during spooldown, defined as the duration from 100% to 0% throttle.",
-        "status": "New entry. Please translate!"
+        "message": "減速期間的油門變化速率，定義為從 100% 到 0% 油門所需的時間。",
+        "english": "Rate of throttle change during spooldown, defined as the duration from 100% to 0% throttle."
     },
     "govSpoolupMinThrottle": {
-        "message": "Spoolup Minimum Throttle",
-        "english": "Spoolup Minimum Throttle",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "緩提速最小油門",
-            "english": "Spoolup minimum throttle"
-        }
+        "message": "提速最小油門",
+        "english": "Spoolup Minimum Throttle"
     },
     "govSpoolupMinThrottleHelp": {
-        "message": "<p>Minimum throttle output during spoolup.</p><p>For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%.</p>",
-        "english": "<p>Minimum throttle output during spoolup.</p><p>For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%.</p>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "緩提速過程中所使用的最小油門。對於電動馬達預設值是 5%；對於內燃機則應該設定為 10-15%，讓離合器開始接合以獲得平順的啟動。",
-            "english": "Minimum throttle to be used during spoolup. For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%."
-        }
+        "message": "<p>提速期間的最小油門輸出。</p><p>電動馬達預設值為 5%；燃油引擎應設定為使離合器開始接合以平順加速的值（約 10-15%）。</p>",
+        "english": "<p>Minimum throttle output during spoolup.</p><p>For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%.</p>"
     },
     "govTrackingTime": {
-        "message": "Tracking Time",
-        "english": "Tracking Time",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "跟蹤時間 [秒]",
-            "english": "Tracking time"
-        }
+        "message": "跟蹤時間",
+        "english": "Tracking Time"
     },
     "govTrackingTimeHelp": {
         "message": "主旋翼速度變化的時間常數，以秒為單位，測量從零到全速前進的時間。",
         "english": "Time constant for headspeed changes, in seconds, measuring the time from zero to full headspeed."
     },
     "govTrackingTimeHelp2": {
-        "message": "Rate of throttle change when tracking headspeed target changes, defined as the duration from 0% to 100% throttle.",
-        "english": "Rate of throttle change when tracking headspeed target changes, defined as the duration from 0% to 100% throttle.",
-        "status": "New entry. Please translate!"
+        "message": "追蹤主旋翼轉速目標變化時的油門變化速率，定義為從 0% 到 100% 油門所需的時間。",
+        "english": "Rate of throttle change when tracking headspeed target changes, defined as the duration from 0% to 100% throttle."
     },
     "govRecoveryTime": {
-        "message": "Recovery Time",
-        "english": "Recovery Time",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "重新啟動時間 [秒]",
-            "english": "Recovery time"
-        }
+        "message": "恢復時間",
+        "english": "Recovery Time"
     },
     "govRecoveryTimeHelp": {
-        "message": "恢復緩提速的時間常數，以秒為單位，測量從零到全速的時間。",
+        "message": "恢復提速的時間常數，以秒為單位，測量從零到全速的時間。",
         "english": "Time constant for recovery spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govRecoveryTimeHelp2": {
-        "message": "Rate of throttle change during recovery, defined as the duration from 0% to 100% throttle.",
-        "english": "Rate of throttle change during recovery, defined as the duration from 0% to 100% throttle.",
-        "status": "New entry. Please translate!"
+        "message": "恢復期間的油門變化速率，定義為從 0% 到 100% 油門所需的時間。",
+        "english": "Rate of throttle change during recovery, defined as the duration from 0% to 100% throttle."
     },
     "govAutoBailoutTime": {
-        "message": "Bailout Time",
-        "english": "Bailout Time",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "熄火降落保護時間 [秒]",
-            "english": "Autorotation bailout time"
-        }
+        "message": "救援時間",
+        "english": "Bailout Time"
     },
     "govAutoBailoutTimeHelp": {
-        "message": "熄火降落保護的時間常數（秒），測量主旋翼從零到全速的時間。",
+        "message": "熄火降落救援的時間常數（秒），測量主旋翼從零到全速的時間。",
         "english": "Time constant for autorotation bailout spoolup, in seconds, measuring the time from zero to full headspeed."
     },
     "govAutoTimeout": {
-        "message": "Autorotation Timeout",
-        "english": "Autorotation Timeout",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "熄火降落逾時 [秒]",
-            "english": "Autorotation timeout"
-        }
+        "message": "熄火降落逾時",
+        "english": "Autorotation Timeout"
     },
     "govAutoTimeoutHelp": {
-        "message": "<p>The maximum duration autorotation mode may remain engaged.</p><p>When this timeout expires, bailout is no longer available, and starting the motor will result in a normal spoolup.</p><p><strong>Note:</strong> This field must be above zero to enable autorotation mode.</p>",
-        "english": "<p>The maximum duration autorotation mode may remain engaged.</p><p>When this timeout expires, bailout is no longer available, and starting the motor will result in a normal spoolup.</p><p><strong>Note:</strong> This field must be above zero to enable autorotation mode.</p>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "結束熄火降落並進入正常IDLE狀態的逾時時間。",
-            "english": "Timeout for ending autorotation and moving to normal IDLE."
-        }
+        "message": "<p>熄火降落模式可保持啟用的最長時間。</p><p>當超過此逾時時間後，救援功能將不再可用，並啟動馬達且進行正常提速。</p><p><strong>注意：</strong>此欄位必須大於零才能啟用熄火降落模式。</p>",
+        "english": "<p>The maximum duration autorotation mode may remain engaged.</p><p>When this timeout expires, bailout is no longer available, and starting the motor will result in a normal spoolup.</p><p><strong>Note:</strong> This field must be above zero to enable autorotation mode.</p>"
     },
     "govAutoMinEntryTime": {
-        "message": "Autorotation Minimum Flight Time",
-        "english": "Autorotation Minimum Flight Time",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "熄火降落最小進入時間 [秒]",
-            "english": "Autorotation minimum entry time"
-        }
+        "message": "熄火降落最短飛行時間",
+        "english": "Autorotation Minimum Flight Time"
     },
     "govAutoMinEntryTimeHelp": {
         "message": "啟動熄火降落前的最短飛行時間。",
         "english": "Minimum flight time before autorotation can be engaged."
     },
     "govZeroThrottleTimeout": {
-        "message": "Throttle Signal Timeout",
-        "english": "Throttle Signal Timeout",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "零油門逾時 [秒]",
-            "english": "Zero Throttle timeout"
-        }
+        "message": "油門訊號逾時",
+        "english": "Throttle Signal Timeout"
     },
     "govZeroThrottleTimeoutHelp": {
-        "message": "在關閉定速器之前，遺失(零)油門信號的逾時時間。如果在此時間內恢復油門信號，定速器將執行恢復 Spoolup 啟動。",
+        "message": "遺失(零)油門信號多久後關閉定速器。如果在此時間內恢復油門信號，定速器將執行恢復提速。",
         "english": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup."
     },
     "govThrottleHoldTimeout": {
-        "message": "Throttle Hold Timeout",
-        "english": "Throttle Hold Timeout",
-        "status": "New entry. Please translate!"
+        "message": "油門關閉逾時",
+        "english": "Throttle Hold Timeout"
     },
     "govThrottleHoldTimeoutHelp": {
-        "message": "<p>The grace period after activating throttle hold while the governor is active.</p><p>If throttle input is restored within this period, a recovery spoolup will be performed.</p><p>This safeguards against accidental throttle cut activation.</p>",
-        "english": "<p>The grace period after activating throttle hold while the governor is active.</p><p>If throttle input is restored within this period, a recovery spoolup will be performed.</p><p>This safeguards against accidental throttle cut activation.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p>在定速器啟用狀態下關閉油門的緩衝時間。</p><p>若在此緩衝時間內恢復油門輸入則執行救援提速。</p><p>此設定可防止意外關閉油門。</p>",
+        "english": "<p>The grace period after activating throttle hold while the governor is active.</p><p>If throttle input is restored within this period, a recovery spoolup will be performed.</p><p>This safeguards against accidental throttle cut activation.</p>"
     },
     "govLostHeadspeedTimeout": {
-        "message": "Headspeed Signal Timeout",
-        "english": "Headspeed Signal Timeout",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "主旋翼轉速信號逾時 [秒]",
-            "english": "Headspeed signal timeout"
-        }
+        "message": "主旋翼轉速訊號逾時",
+        "english": "Headspeed Signal Timeout"
     },
     "govLostHeadspeedTimeoutHelp": {
         "message": "遺失主旋翼轉速信號超過此時間，才會降速。如果在此時間內恢復轉速信號，定速器將執行恢復 Spoolup 啟動。",
         "english": "Timeout for missing headspeed signal, before spooling down. If the RPM signal returns within this timeout, the governor will perform a recovery spoolup."
     },
     "govHeadspeedFilterHz": {
-        "message": "Headspeed Filter Cutoff",
-        "english": "Headspeed Filter Cutoff",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "主旋翼轉速濾波器截止點 [Hz]",
-            "english": "Headspeed filter cutoff [Hz]"
-        }
+        "message": "主旋翼轉速濾波器截止頻率",
+        "english": "Headspeed Filter Cutoff"
     },
     "govHeadspeedFilterHzHelp": {
         "message": "主旋翼轉速低通濾波器的截止點",
         "english": "Cutoff for the headspeed lowpass filter."
     },
     "govVoltageFilterHz": {
-        "message": "Battery Voltage Filter Cutoff",
-        "english": "Battery Voltage Filter Cutoff",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "電池電壓濾波器截止點 [Hz]",
-            "english": "Battery voltage filter cutoff [Hz]"
-        }
+        "message": "電池電壓濾波器截止頻率",
+        "english": "Battery Voltage Filter Cutoff"
     },
     "govVoltageFilterHzHelp": {
         "message": "電池電壓低通濾波器的截止點。",
         "english": "Cutoff for the battery voltage lowpass filter."
     },
     "govTTAFilterHz": {
-        "message": "TTA Bandwidth",
-        "english": "TTA Bandwidth",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "TTA 控制頻寬 [Hz]",
-            "english": "TTA Bandwidth [Hz]"
-        }
+        "message": "TTA 頻寬",
+        "english": "TTA Bandwidth"
     },
     "govTTAFilterHzHelp": {
         "message": "TTA 低通濾波器的截止點。",
         "english": "Cutoff for the TTA lowpass filter."
     },
     "govFFFilterHz": {
-        "message": "Precomp Bandwidth",
-        "english": "Precomp Bandwidth",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "預補償頻寬 [Hz]",
-            "english": "Precomp Bandwidth [Hz]"
-        }
+        "message": "預補償頻寬",
+        "english": "Precomp Bandwidth"
     },
     "govFFFilterHzHelp": {
         "message": "循環/集體預補償低通濾波器的截止頻率。",
         "english": "Cutoff for the cyclic/collective precompensation lowpass filter."
     },
     "govDCutoff": {
-        "message": "D-Term Cutoff",
-        "english": "D-Term Cutoff",
-        "status": "New entry. Please translate!"
+        "message": "D-Term 截止頻率",
+        "english": "D-Term Cutoff"
     },
     "govDCutoffHelp": {
-        "message": "Cutoff frequency for the governor D-term filter.",
-        "english": "Cutoff frequency for the governor D-term filter.",
-        "status": "New entry. Please translate!"
+        "message": "定速器 D-Term 濾波器的截止頻率。",
+        "english": "Cutoff frequency for the governor D-term filter."
     },
     "govHeadspeed": {
-        "message": "Full Headspeed",
-        "english": "Full Headspeed",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "主旋翼最高轉速",
-            "english": "Full headspeed"
-        }
+        "message": "主旋翼最高轉速",
+        "english": "Full Headspeed"
     },
     "govHeadspeedHelp": {
         "message": "定速器的目標轉速是通過最高轉速與油門輸入量相乘計算得出的",
@@ -5166,65 +4720,44 @@
         "english": "Maximum Throttle"
     },
     "govMaxThrottleHelp": {
-        "message": "The maximum throttle output the governor may use.",
-        "english": "The maximum throttle output the governor may use.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "定速器允許輸出的最大油門量。",
-            "english": "Maximum output throttle the governor is allowed to use."
-        }
+        "message": "定速器可使用的最大油門輸出。",
+        "english": "The maximum throttle output the governor may use."
     },
     "govMinThrottle": {
         "message": "最小油門",
         "english": "Minimum Throttle"
     },
     "govMinThrottleHelp": {
-        "message": "The minimum throttle output the governor may use.",
-        "english": "The minimum throttle output the governor may use.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "定速器允許輸出的最小油門量。",
-            "english": "Minimum output throttle the governor is allowed to use."
-        }
+        "message": "定速器可使用的最小油門輸出。",
+        "english": "The minimum throttle output the governor may use."
     },
     "govIdleThrottle": {
-        "message": "Idle Throttle",
-        "english": "Idle Throttle",
-        "status": "New entry. Please translate!"
+        "message": "怠速油門",
+        "english": "Idle Throttle"
     },
     "govIdleThrottleHelp": {
-        "message": "<p>The minimum throttle output while the governor <strong><em>is not</em></strong> actively controlling the headspeed.</p><p></p>",
-        "english": "<p>The minimum throttle output while the governor <strong><em>is not</em></strong> actively controlling the headspeed.</p><p></p>",
-        "status": "New entry. Please translate!"
+        "message": "<p>定速器<strong><em>未</em></strong>主動控制主旋翼轉速時的最小油門輸出。</p><p></p>",
+        "english": "<p>The minimum throttle output while the governor <strong><em>is not</em></strong> actively controlling the headspeed.</p><p></p>"
     },
     "govAutoThrottle": {
-        "message": "Auto Throttle",
-        "english": "Auto Throttle",
-        "status": "New entry. Please translate!"
+        "message": "熄火降落油門",
+        "english": "Auto Throttle"
     },
     "govAutoThrottleHelp": {
-        "message": "<p>When using NORMAL or SWITCH throttle type, moving the throttle input below this value will cancel autorotation mode, preventing bailout.</p><p>For FUNCTION throttle type, this is the throttle output in autorotation mode.</p>",
-        "english": "<p>When using NORMAL or SWITCH throttle type, moving the throttle input below this value will cancel autorotation mode, preventing bailout.</p><p>For FUNCTION throttle type, this is the throttle output in autorotation mode.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p>使用 NORMAL 或 SWITCH 油門類型時，將油門輸入移至此值以下將取消熄火降落模式並阻止定速器恢復。</p><p>對於 FUNCTION 油門類型，此值為熄火降落模式下的油門輸出。</p>",
+        "english": "<p>When using NORMAL or SWITCH throttle type, moving the throttle input below this value will cancel autorotation mode, preventing bailout.</p><p>For FUNCTION throttle type, this is the throttle output in autorotation mode.</p>"
     },
     "govFallbackDrop": {
-        "message": "Throttle Fallback Drop",
-        "english": "Throttle Fallback Drop",
-        "status": "New entry. Please translate!"
+        "message": "油門備援降幅",
+        "english": "Throttle Fallback Drop"
     },
     "govFallbackDropHelp": {
-        "message": "Reduce the current motor output by this value in the event the RPM signal is lost.",
-        "english": "Reduce the current motor output by this value in the event the RPM signal is lost.",
-        "status": "New entry. Please translate!"
+        "message": "在轉速訊號遺失時，將當前馬達輸出降低此值。",
+        "english": "Reduce the current motor output by this value in the event the RPM signal is lost."
     },
     "govMasterGain": {
-        "message": "Master Gain",
-        "english": "Master Gain",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "主 PID 增益",
-            "english": "PID master gain"
-        }
+        "message": "主增益",
+        "english": "Master Gain"
     },
     "govMasterGainHelp": {
         "message": "主 PID 循環的增益，通常是10..100",
@@ -5255,13 +4788,8 @@
         "english": "PID loop D-term gain. Usually 0..100"
     },
     "govFGain": {
-        "message": "Feedforward Gain",
-        "english": "Feedforward Gain",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "前饋增益",
-            "english": "Feedforward gain"
-        }
+        "message": "前饋增益",
+        "english": "Feedforward Gain"
     },
     "govFGainHelp": {
         "message": "集體螺距/循環螺距的前饋增益，通常是10..100",
@@ -5284,39 +4812,24 @@
         "english": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%."
     },
     "govYawPrecomp": {
-        "message": "Yaw",
-        "english": "Yaw",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "航向預補償",
-            "english": "Yaw precompensation"
-        }
+        "message": "航向",
+        "english": "Yaw"
     },
     "govYawPrecompHelp": {
         "message": "偏航預補償權重。確定前饋中混合的尾舵量。這有助於調速器主動保持頭速。通常 20..100",
         "english": "Yaw precompensation weight. Determines how much Yaw is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
     "govCyclicPrecomp": {
-        "message": "Cyclic",
-        "english": "Cyclic",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "循環螺距預補償",
-            "english": "Cyclic precompensation"
-        }
+        "message": "循環螺距",
+        "english": "Cyclic"
     },
     "govCyclicPrecompHelp": {
         "message": "循環螺距預補償權重。決定前饋中混控多少循環螺距。這有助於定速器主動保持主旋翼速度。通常為 20...100",
         "english": "Cyclic precompensation weight. Determines how much cyclic is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
     "govCollectivePrecomp": {
-        "message": "Collective",
-        "english": "Collective",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "集體螺距預補償",
-            "english": "Collective precompensation"
-        }
+        "message": "集體螺距",
+        "english": "Collective"
     },
     "govCollectivePrecompHelp": {
         "message": "集體螺距預補償權重。決定前饋中混控多少集體螺距。這有助於定速器主動保持主旋翼速度。通常為 20...100",
@@ -5324,108 +4837,87 @@
     },
     "profileGovPIDSection": {
         "message": "PID",
-        "english": "PID",
-        "status": "New entry. Please translate!"
+        "english": "PID"
     },
     "profileGovPrecompSection": {
-        "message": "Precompensation",
-        "english": "Precompensation",
-        "status": "New entry. Please translate!"
+        "message": "預補償",
+        "english": "Precompensation"
     },
     "profileGovFlagsSection": {
-        "message": "Behaviour",
-        "english": "Behaviour",
-        "status": "New entry. Please translate!"
+        "message": "行為",
+        "english": "Behaviour"
     },
     "govFlag_FALLBACK_PRECOMP": {
-        "message": "Fallback Precompensation",
-        "english": "Fallback Precompensation",
-        "status": "New entry. Please translate!"
+        "message": "備援預補償",
+        "english": "Fallback Precompensation"
     },
     "govFlag_VOLTAGE_COMP": {
-        "message": "Voltage Compensation",
-        "english": "Voltage Compensation",
-        "status": "New entry. Please translate!"
+        "message": "電壓補償",
+        "english": "Voltage Compensation"
     },
     "govFlag_PID_SPOOLUP": {
-        "message": "Governed Spoolup",
-        "english": "Governed Spoolup",
-        "status": "New entry. Please translate!"
+        "message": "受控提速",
+        "english": "Governed Spoolup"
     },
     "govFlag_HS_ADJUSTMENT": {
-        "message": "Headspeed Adjustment",
-        "english": "Headspeed Adjustment",
-        "status": "New entry. Please translate!"
+        "message": "主旋翼轉速調整",
+        "english": "Headspeed Adjustment"
     },
     "govFlag_DYN_MIN_THROTTLE": {
-        "message": "Dynamic Minimum Throttle",
-        "english": "Dynamic Minimum Throttle",
-        "status": "New entry. Please translate!"
+        "message": "動態最小油門",
+        "english": "Dynamic Minimum Throttle"
     },
     "govFlag_AUTOROTATION": {
-        "message": "Autorotation",
-        "english": "Autorotation",
-        "status": "New entry. Please translate!"
+        "message": "熄火降落",
+        "english": "Autorotation"
     },
     "govFlag_SUSPEND": {
-        "message": "Suspend",
-        "english": "Suspend",
-        "status": "New entry. Please translate!"
+        "message": "暫停",
+        "english": "Suspend"
     },
     "govFlag_BYPASS": {
-        "message": "Bypass",
-        "english": "Bypass",
-        "status": "New entry. Please translate!"
+        "message": "繞行",
+        "english": "Bypass"
     },
     "govFlagHelp_FALLBACK_PRECOMP": {
-        "message": "Enable precompensation while in the <code>FALLBACK</code> state.",
-        "english": "Enable precompensation while in the <code>FALLBACK</code> state.",
-        "status": "New entry. Please translate!"
+        "message": "在 <code>FALLBACK</code> 狀態下啟用預補償。",
+        "english": "Enable precompensation while in the <code>FALLBACK</code> state."
     },
     "govFlagHelp_VOLTAGE_COMP": {
-        "message": "<p>Enable battery voltage sag compensation.</p><p><strong>Note:</strong> This setting requires <i>Battery ADC</i> to be used as the <i>Battery Voltage Source</i>. This setting can be found on the <i>Power</i> tab.</p>",
-        "english": "<p>Enable battery voltage sag compensation.</p><p><strong>Note:</strong> This setting requires <i>Battery ADC</i> to be used as the <i>Battery Voltage Source</i>. This setting can be found on the <i>Power</i> tab.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p>啟用電池電壓驟降補償。</p><p><strong>注意：</strong>此設定需要使用<i>電池感測器</i> 作為<i>電池電壓來源</i>，可在<i>電源</i>頁面中找到此設定。</p>",
+        "english": "<p>Enable battery voltage sag compensation.</p><p><strong>Note:</strong> This setting requires <i>Battery ADC</i> to be used as the <i>Battery Voltage Source</i>. This setting can be found on the <i>Power</i> tab.</p>"
     },
     "govFlagHelp_PID_SPOOLUP": {
-        "message": "Enable the governors PID controller during spoolup.",
-        "english": "Enable the governors PID controller during spoolup.",
-        "status": "New entry. Please translate!"
+        "message": "在提速期間啟用定速器 PID 控制器。",
+        "english": "Enable the governors PID controller during spoolup."
     },
     "govFlagHelp_HS_ADJUSTMENT": {
-        "message": "<p>Adjust the target headspeed using the throttle channel.</p><p>When enabled, the target headspeed is calculated by multiplying the <i>Full Headspeed</i> by the input throttle.</p>",
-        "english": "<p>Adjust the target headspeed using the throttle channel.</p><p>When enabled, the target headspeed is calculated by multiplying the <i>Full Headspeed</i> by the input throttle.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p>使用油門通道調整目標主旋翼轉速。</p><p>啟用後，目標主旋翼轉速由<i>最大主旋翼轉速</i>乘以輸入油門計算得出。</p>",
+        "english": "<p>Adjust the target headspeed using the throttle channel.</p><p>When enabled, the target headspeed is calculated by multiplying the <i>Full Headspeed</i> by the input throttle.</p>"
     },
     "govFlagHelp_DYN_MIN_THROTTLE": {
-        "message": "Prevent the motor output from dropping drastically during an over-speed.",
-        "english": "Prevent the motor output from dropping drastically during an over-speed.",
-        "status": "New entry. Please translate!"
+        "message": "防止馬達輸出在超轉時大幅下降。",
+        "english": "Prevent the motor output from dropping drastically during an over-speed."
     },
     "govFlagHelp_AUTOROTATION": {
-        "message": "Allow the <code>AUTOROTATION</code> state in this profile.",
-        "english": "Allow the <code>AUTOROTATION</code> state in this profile.",
-        "status": "New entry. Please translate!"
+        "message": "允許在此設定檔中使用 <code>AUTOROTATION</code>（熄火降落）狀態。",
+        "english": "Allow the <code>AUTOROTATION</code> state in this profile."
     },
     "govFlagHelp_SUSPEND": {
-        "message": "Disable the PID controller, allowing precompensation to be tuned in isolation.",
-        "english": "Disable the PID controller, allowing precompensation to be tuned in isolation.",
-        "status": "New entry. Please translate!"
+        "message": "停用 PID 控制器，允許單獨調整預補償。",
+        "english": "Disable the PID controller, allowing precompensation to be tuned in isolation."
     },
     "govFlagHelp_BYPASS": {
-        "message": "Bypass all governor functionality.",
-        "english": "Bypass all governor functionality.",
-        "status": "New entry. Please translate!"
+        "message": "繞行所有定速器功能。",
+        "english": "Bypass all governor functionality."
     },
     "govThrottleCurveNumPoints": {
-        "message": "Points",
-        "english": "Points",
-        "status": "New entry. Please translate!"
+        "message": "點數",
+        "english": "Points"
     },
     "govThrottleCurveCurrentValue": {
-        "message": "Throttle:",
-        "english": "Throttle:",
-        "status": "New entry. Please translate!"
+        "message": "油門：",
+        "english": "Throttle:"
     },
     "sensorsInfo": {
         "message": "請注意，設定過高的圖形刷新率會縮短尤其是筆記型電腦的電池使用時間。<br />建議只打開你感興趣的感測器的圖形顯示並使用合理的刷新率",
@@ -5724,9 +5216,8 @@
         "english": "ESC 2"
     },
     "blackboxLog_governor": {
-        "message": "Governor",
-        "english": "Governor",
-        "status": "New entry. Please translate!"
+        "message": "定速器",
+        "english": "Governor"
     },
     "serialLoggingSupportedNote": {
         "message": "你可以使用串列埠外接記錄設備來記錄日誌（例如 OpenLager）。需要在串列埠設定頁設定相應的串列埠。",
@@ -5953,14 +5444,12 @@
         "english": "Baud Rate"
     },
     "firmware_flasher.show_legacy_targets.label": {
-        "message": "Show Legacy Targets",
-        "english": "Show Legacy Targets",
-        "status": "New entry. Please translate!"
+        "message": "顯示舊式目標",
+        "english": "Show Legacy Targets"
     },
     "firmware_flasher.show_legacy_targets.description": {
-        "message": "Show targets for many Betaflight boards. These targets are not actively maintained.",
-        "english": "Show targets for many Betaflight boards. These targets are not actively maintained.",
-        "status": "New entry. Please translate!"
+        "message": "顯示眾多 Betaflight 飛控板的目標。這些目標並未積極地維護。",
+        "english": "Show targets for many Betaflight boards. These targets are not actively maintained."
     },
     "firmwareFlasherOptionLoading": {
         "message": "載入中 ...",
@@ -6075,7 +5564,7 @@
         "english": "Failed to load remote config for {{remote_file}}"
     },
     "firmwareFlasherLegacyLabel": {
-        "message": "{{target}} (舊格式)",
+        "message": "{{target}} (舊式)",
         "english": "{{target}} (Legacy)",
         "description": "If we have a Unified target and a old style target available, we are labeling the older one"
     },
@@ -6524,49 +6013,24 @@
         "english": "deep pink"
     },
     "controlAxisRoll": {
-        "message": "Roll",
-        "english": "Roll",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "橫滾 [A]",
-            "english": "Roll [A]"
-        }
+        "message": "橫滾",
+        "english": "Roll"
     },
     "controlAxisPitch": {
-        "message": "Pitch",
-        "english": "Pitch",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "俯仰 [E]",
-            "english": "Pitch [E]"
-        }
+        "message": "俯仰",
+        "english": "Pitch"
     },
     "controlAxisYaw": {
-        "message": "Yaw",
-        "english": "Yaw",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "航向 [R]",
-            "english": "Yaw [R]"
-        }
+        "message": "航向",
+        "english": "Yaw"
     },
     "controlAxisCollective": {
-        "message": "Collective",
-        "english": "Collective",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "螺距 [C]",
-            "english": "Coll [C]"
-        }
+        "message": "集體螺距",
+        "english": "Collective"
     },
     "controlAxisThrottle": {
-        "message": "Throttle",
-        "english": "Throttle",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "油門 [T]",
-            "english": "Throttle [T]"
-        }
+        "message": "油門",
+        "english": "Throttle"
     },
     "controlAxisThr": {
         "message": "油門曲線",
@@ -7285,19 +6749,16 @@
         "english": "RC Expo"
     },
     "rateSetupRotorflightRate": {
-        "message": "Rate",
-        "english": "Rate",
-        "status": "New entry. Please translate!"
+        "message": "速率",
+        "english": "Rate"
     },
     "rateSetupRotorflightShape": {
-        "message": "Shape",
-        "english": "Shape",
-        "status": "New entry. Please translate!"
+        "message": "形狀",
+        "english": "Shape"
     },
     "rateSetupRotorflightExpo": {
-        "message": "Expo",
-        "english": "Expo",
-        "status": "New entry. Please translate!"
+        "message": "指數",
+        "english": "Expo"
     },
     "rateSetupRcRateRaceflight": {
         "message": "Rate",
@@ -7388,44 +6849,36 @@
         "english": "Increases stick deadband while rapidly approaching center."
     },
     "rates.cyclic_ring.heading": {
-        "message": "Cyclic Ring",
-        "english": "Cyclic Ring",
-        "status": "New entry. Please translate!"
+        "message": "循環螺距限制環",
+        "english": "Cyclic Ring"
     },
     "rates.cyclic_ring.enable_cyclic_ring.label": {
-        "message": "Enable Cyclic Ring",
-        "english": "Enable Cyclic Ring",
-        "status": "New entry. Please translate!"
+        "message": "啟用循環螺距限制環",
+        "english": "Enable Cyclic Ring"
     },
     "rates.cyclic_ring.enable_cyclic_ring.help": {
-        "message": "Limits combined cyclic input to a circular range, preventing excessive rates with diagonal inputs.",
-        "english": "Limits combined cyclic input to a circular range, preventing excessive rates with diagonal inputs.",
-        "status": "New entry. Please translate!"
+        "message": "將組合循環螺距輸入限制在圓形範圍內，防止對角輸入產生過大的速率。",
+        "english": "Limits combined cyclic input to a circular range, preventing excessive rates with diagonal inputs."
     },
     "rates.cyclic_ring.cyclic_ring_level.label": {
-        "message": "Cyclic Ring Level",
-        "english": "Cyclic Ring Level",
-        "status": "New entry. Please translate!"
+        "message": "循環螺距限制環等級",
+        "english": "Cyclic Ring Level"
     },
     "rates.cyclic_ring.cyclic_ring_level.help": {
-        "message": "<p>Adjusts to what degree the cyclic ring limits diagonal input.</p><br /><p>At 100%, the combined cyclic range forms a true circle. Increasing this value relaxes the limit, allowing more diagonal deflection.</p>",
-        "english": "<p>Adjusts to what degree the cyclic ring limits diagonal input.</p><br /><p>At 100%, the combined cyclic range forms a true circle. Increasing this value relaxes the limit, allowing more diagonal deflection.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p>調整循環螺距限制環對對角輸入的限制程度。</p><br /><p>在 100% 時，組合循環螺距範圍形成真正的圓形。增加此值可放寬限制，允許更大的對角偏轉。</p>",
+        "english": "<p>Adjusts to what degree the cyclic ring limits diagonal input.</p><br /><p>At 100%, the combined cyclic range forms a true circle. Increasing this value relaxes the limit, allowing more diagonal deflection.</p>"
     },
     "rates.cyclic_ring.polar_coordinates.label": {
-        "message": "Enable Polar Coordinates",
-        "english": "Enable Polar Coordinates",
-        "status": "New entry. Please translate!"
+        "message": "啟用極座標",
+        "english": "Enable Polar Coordinates"
     },
     "rates.cyclic_ring.polar_coordinates.help": {
-        "message": "<p>Apply cyclic rates to the combined cyclic direction and magnitude.</p><br /><p>When disabled, rates are applied to each cyclic axis separately.</p>",
-        "english": "<p>Apply cyclic rates to the combined cyclic direction and magnitude.</p><br /><p>When disabled, rates are applied to each cyclic axis separately.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p>將循環螺距速率套用於組合循環螺距的方向和幅度。</p><br /><p>停用時，速率分別套用於每個循環螺距軸。</p>",
+        "english": "<p>Apply cyclic rates to the combined cyclic direction and magnitude.</p><br /><p>When disabled, rates are applied to each cyclic axis separately.</p>"
     },
     "rates.config.cyclic.label": {
-        "message": "CYCLIC",
-        "english": "CYCLIC",
-        "status": "New entry. Please translate!"
+        "message": "循環螺距",
+        "english": "CYCLIC"
     },
     "gyroFilterSettings": {
         "message": "陀螺儀濾波設定",
@@ -7440,7 +6893,7 @@
         "english": "Lowpass Filter"
     },
     "gyroLowpassFilterHelp": {
-        "message": "陀螺儀低通濾波器用於消除陀螺儀信號中多餘的噪聲。  可使用兩個濾波器，一階或二階均可。  第一個濾波器可以是動態的，隨主旋翼轉速改變其截止頻率。  最小和最大值限制了動態範圍。  使用轉速濾波器或動態陷波濾波器時，需要在 100Hz 左右增加一個濾波器。  如果沒有這些濾波器，則需要兩個二階濾波器。",
+        "message": "陀螺儀低通濾波器用於消除陀螺儀信號中多餘的噪聲。    可使用兩個濾波器，一階或二階均可。    第一個濾波器可以是動態的，隨主旋翼轉速改變其截止頻率。    最小和最大值限制了動態範圍。    使用轉速濾波器或動態陷波濾波器時，需要在 100Hz 左右增加一個濾波器。    如果沒有這些濾波器，則需要兩個二階濾波器。",
         "english": "The Gyro Lowpass Filters are used for cutting off excess noise in the gyro signal. Two filters can be used, either 1<sup>st</sup> or 2<sup>nd</sup> order. The first filter can be dynamic, changing its cutoff frequency with the main rotor RPM. The minimum and maximum are limiting the dynamic range. With RPM Filters or Dynamic Notch Filters, one extra filter is needed around 100Hz. Without them, two second order filters are required."
     },
     "gyroLowpassFilter1": {
@@ -7800,58 +7253,28 @@
         "english": "Failsafe has two stages. <strong>Stage 1</strong> is entered when a flightchannel has an invalid pulse length, the receiver reports failsafe mode or there is no signal from the receiver at all, the channel fallback settings are applied to <span class=\"message-negative\">all channels</span> and a short amount of time is provided to allow for recovery. <strong>Stage 2</strong> is entered when the error condition takes longer than the configured guard time while the craft is <span class=\"message-negative\">armed</span>, all channels will remain at the applied channel fallback setting unless overruled by the chosen procedure. <br /><strong>Note:</strong> Prior to entering stage 1, channel fallback settings are also applied to individual AUX channels that have invalid pulses."
     },
     "failsafePulsrangeTitle": {
-        "message": "Pulse Width Limit",
-        "english": "Pulse Width Limit",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "有效脈衝範圍設定",
-            "english": "Valid Pulse Range Settings"
-        }
+        "message": "脈衝寬度限制",
+        "english": "Pulse Width Limit"
     },
     "failsafePulsrangeHelp": {
-        "message": "Configure the minimum and maximum valid pulse width. Channels outside this range will enter failsafe.",
-        "english": "Configure the minimum and maximum valid pulse width. Channels outside this range will enter failsafe.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "脈衝長度小於最小，或者超過最大，都會被認為是無效脈衝。將會觸發單個通道的預設設定覆蓋，或引起一階失控保護。",
-            "english": "Pulses shorter than minimum or longer than maximum are invalid and will trigger application of individual channel fallback settings for AUX channels or entering stage 1 for flightchannels"
-        }
+        "message": "設定有效脈衝寬度的最小值和最大值。超出此範圍的通道將進入失控保護狀態。",
+        "english": "Configure the minimum and maximum valid pulse width. Channels outside this range will enter failsafe."
     },
     "failsafeRxMinUsecItem": {
-        "message": "Minimum Pulse Width",
-        "english": "Minimum Pulse Width",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "最小長度",
-            "english": "Minimum length"
-        }
+        "message": "最小脈衝寬度",
+        "english": "Minimum Pulse Width"
     },
     "failsafeRxMaxUsecItem": {
-        "message": "Maximum Pulse Width",
-        "english": "Maximum Pulse Width",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "最大長度",
-            "english": "Maximum length"
-        }
+        "message": "最大脈衝寬度",
+        "english": "Maximum Pulse Width"
     },
     "failsafeChannelFallbackSettingsTitle": {
-        "message": "Channel Fallback",
-        "english": "Channel Fallback",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "預設通道設定",
-            "english": "Channel Fallback Settings"
-        }
+        "message": "通道備援",
+        "english": "Channel Fallback"
     },
     "failsafeChannelFallbackSettingsHelp": {
-        "message": "Configure the failsafe behavior of each channel.<br><strong>Auto:</strong> Sets channel to a safe value. Center for Roll, Pitch, Yaw, Collective. Low for Throttle.<br><strong>Hold:</strong> Holds channel at the last known position.<br><strong>Set:</strong> Sets channel to the specified value [μs].",
-        "english": "Configure the failsafe behavior of each channel.<br><strong>Auto:</strong> Sets channel to a safe value. Center for Roll, Pitch, Yaw, Collective. Low for Throttle.<br><strong>Hold:</strong> Holds channel at the last known position.<br><strong>Set:</strong> Sets channel to the specified value [μs].",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "當進入一階失控保護時，這些設定將會套用於單獨無效的AUX 通道，或者是所有通道。<strong>注意：</strong>數值應是5us的整數倍，小於5us的設定會被上下取整。",
-            "english": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 5µs, so smaller changes may be ignored."
-        }
+        "message": "設定每個通道的失控保護行為。<br><strong>Auto（自動）：</strong>將通道設為安全值。橫滾、俯仰、航向、集體螺距設為中立，油門設為低位。<br><strong>Hold（保持）：</strong>將通道保持在最後已知位置。<br><strong>Set（設定）：</strong>將通道設為指定值 [μs]。",
+        "english": "Configure the failsafe behavior of each channel.<br><strong>Auto:</strong> Sets channel to a safe value. Center for Roll, Pitch, Yaw, Collective. Low for Throttle.<br><strong>Hold:</strong> Holds channel at the last known position.<br><strong>Set:</strong> Sets channel to the specified value [μs]."
     },
     "failsafeChannelFallbackSettingsAuto": {
         "message": "<strong>自動</strong> 指的是 橫滾、俯仰、方向都回中，油門最低。 <strong>保持</strong> 指的是 所有通道保持最後從接收機接收到的有效的數值。",
@@ -8046,9 +7469,8 @@
         "english": "ESC Telemetry"
     },
     "powerBatteryVoltageMeterTypeFbus": {
-        "message": "FrSky Sensor",
-        "english": "FrSky Sensor",
-        "status": "New entry. Please translate!"
+        "message": "FrSky 感測器",
+        "english": "FrSky Sensor"
     },
     "powerBatteryCurrentMeterSource": {
         "message": "電池電流數據源",
@@ -8067,9 +7489,8 @@
         "english": "ESC Telemetry"
     },
     "powerBatteryCurrentMeterTypeFbus": {
-        "message": "FrSky Sensor",
-        "english": "FrSky Sensor",
-        "status": "New entry. Please translate!"
+        "message": "FrSky 感測器",
+        "english": "FrSky Sensor"
     },
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP 感測器",
@@ -8425,14 +7846,12 @@
         "english": "Cell count"
     },
     "powerBatteryProfile": {
-        "message": "Battery $1",
-        "english": "Battery $1",
-        "status": "New entry. Please translate!"
+        "message": "電池 $1",
+        "english": "Battery $1"
     },
     "options.show_advanced_firmware_opts.label": {
-        "message": "Show advanced firmware flashing options",
-        "english": "Show advanced firmware flashing options",
-        "status": "New entry. Please translate!"
+        "message": "顯示進階韌體燒錄選項",
+        "english": "Show advanced firmware flashing options"
     },
     "osdSetupTitle": {
         "message": "OSD 螢幕疊加顯示",
@@ -10440,19 +9859,16 @@
         "english": "RESCUE"
     },
     "mode GOVERNOR FALLBACK": {
-        "message": "GOVERNOR FALLBACK",
-        "english": "GOVERNOR FALLBACK",
-        "status": "New entry. Please translate!"
+        "message": "定速器備援",
+        "english": "GOVERNOR FALLBACK"
     },
     "mode GOVERNOR SUSPEND": {
-        "message": "GOVERNOR SUSPEND",
-        "english": "GOVERNOR SUSPEND",
-        "status": "New entry. Please translate!"
+        "message": "定速器暫停",
+        "english": "GOVERNOR SUSPEND"
     },
     "mode GOVERNOR BYPASS": {
-        "message": "GOVERNOR BYPASS",
-        "english": "GOVERNOR BYPASS",
-        "status": "New entry. Please translate!"
+        "message": "定速器繞行",
+        "english": "GOVERNOR BYPASS"
     },
     "flashTab": {
         "message": "更新韌體",
