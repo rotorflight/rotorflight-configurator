@@ -37,24 +37,20 @@
         "english": "Range"
     },
     "hours": {
-        "message": "{{count}} hour",
-        "english": "{{count}} hour",
-        "status": "New entry. Please translate!"
+        "message": "{{count}} час",
+        "english": "{{count}} hour"
     },
     "hours_other": {
-        "message": "{{count}} hours",
-        "english": "{{count}} hours",
-        "status": "New entry. Please translate!"
+        "message": "{{count}} часа",
+        "english": "{{count}} hours"
     },
     "minutes": {
-        "message": "{{count}} minute",
-        "english": "{{count}} minute",
-        "status": "New entry. Please translate!"
+        "message": "{{count}} минута",
+        "english": "{{count}} minute"
     },
     "minutes_other": {
-        "message": "{{count}} minutes",
-        "english": "{{count}} minutes",
-        "status": "New entry. Please translate!"
+        "message": "{{count}} минути",
+        "english": "{{count}} minutes"
     },
     "axisROLL": {
         "message": "ЕЛЕРОН",
@@ -1657,8 +1653,7 @@
     },
     "flight_stats.duration.value": {
         "message": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })",
-        "english": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })",
-        "status": "New entry. Please translate!"
+        "english": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })"
     },
     "beeper_GYRO_CALIBRATED": {
         "message": "Издава звук, когато жироскопът е калибриран",
@@ -1908,9 +1903,8 @@
         "english": "Telemetry: FrSky SmartPort"
     },
     "portsFunction_SPORT_MASTER": {
-        "message": "S.PORT Master",
-        "english": "S.PORT Master",
-        "status": "New entry. Please translate!"
+        "message": "S.PORT Мастър",
+        "english": "S.PORT Master"
     },
     "portsFunction_TELEMETRY_IBUS": {
         "message": "Телеметрия: FlySky iBUS",
@@ -2169,14 +2163,12 @@
         "english": "Throttle Channel"
     },
     "receiver.channel_range.automatic_throttle_range.label": {
-        "message": "Automatic Throttle Range",
-        "english": "Automatic Throttle Range",
-        "status": "New entry. Please translate!"
+        "message": "Автоматичен обхват на газта",
+        "english": "Automatic Throttle Range"
     },
     "receiver.channel_range.automatic_throttle_range.help": {
-        "message": "Calculates a suitable throttle range from the Stick Center and Stick Travel values.",
-        "english": "Calculates a suitable throttle range from the Stick Center and Stick Travel values.",
-        "status": "New entry. Please translate!"
+        "message": "Изчислява подходящ обхват на газта от стойностите за Център на стиковете и Ход на стиковете.",
+        "english": "Calculates a suitable throttle range from the Stick Center and Stick Travel values."
     },
     "receiverProtocol": {
         "message": "Протокол на приемника",
@@ -2243,13 +2235,8 @@
         "english": "The throttle channel value where throttle is considered 0%."
     },
     "receiverHelpZeroThrottle2": {
-        "message": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>",
-        "english": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<p>Стойността на канала за газта, която се счита за 0%. Задайте на 0 за автоматично задаване.</p><p><strong>Забележка:</strong> каналът за газта трябва да може да се движи поне с 10µs под тази стойност, за да сигнализира изключване на газта и да позволи активиране.</p>",
-            "english": "<p>The throttle channel value where throttle is considered 0%. Set to 0 to set automatically.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
-        }
+        "message": "<p>Стойността на канала за газта, която се счита за 0%.</p><p><strong>Забележка:</strong> каналът за газта трябва да може да се движи поне с 10µs под тази стойност, за да сигнализира изключване на газта и да позволи активиране.</p>",
+        "english": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
     },
     "receiverFullThrottle": {
         "message": "Макс. Газ - 100%",
@@ -2260,13 +2247,8 @@
         "english": "The throttle channel value where throttle is considered 100%."
     },
     "receiverHelpFullThrottle2": {
-        "message": "The throttle channel value where throttle is considered 100%.",
-        "english": "The throttle channel value where throttle is considered 100%.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Стойността на канала за газта, която се счита за 100%. Задайте на 0 за автоматично задаване.",
-            "english": "The throttle channel value where throttle is considered 100%. Set to 0 to set automatically."
-        }
+        "message": "Стойността на канала за газта, която се счита за 100%.",
+        "english": "The throttle channel value where throttle is considered 100%."
     },
     "receiverCyclicDeadband": {
         "message": "Цикличен мъртъв диапазон",
@@ -4214,9 +4196,8 @@
         "english": "Qty"
     },
     "motors.motor.heading": {
-        "message": "Motor #{{index}}",
-        "english": "Motor #{{index}}",
-        "status": "New entry. Please translate!"
+        "message": "Мотор #{{index}}",
+        "english": "Motor #{{index}}"
     },
     "motorsSectionLabelThrottle": {
         "message": "Газ",
@@ -5455,14 +5436,12 @@
         "english": "Wipes all configuration data currently stored on the board."
     },
     "firmwareFlasherManualPort": {
-        "message": "Port",
-        "english": "Port",
-        "status": "New entry. Please translate!"
+        "message": "Порт",
+        "english": "Port"
     },
     "firmwareFlasherBaudRate": {
-        "message": "Baud Rate",
-        "english": "Baud Rate",
-        "status": "New entry. Please translate!"
+        "message": "Бауд Рейт",
+        "english": "Baud Rate"
     },
     "firmware_flasher.show_legacy_targets.label": {
         "message": "Покажи по-стари таргети",
@@ -7516,6 +7495,58 @@
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP сензор",
         "english": "MSP Sensor"
+    },
+    "powerSmartFuelHead": {
+        "message": "Смарт гориво",
+        "english": "Smart Fuel"
+    },
+    "powerSmartFuelSource": {
+        "message": "Режим на смарт гориво",
+        "english": "Smart Fuel Mode"
+    },
+    "powerSmartFuelSourceHelp": {
+        "message": "<p><strong>Изключено:</strong> Смарт горивото е деактивирано.</p><p><strong>Напрежение:</strong> изчислява заряда на база напрежението на батерията.</p><p><strong>Ток:</strong> използва измерената консумация в mAh спрямо конфигурираният капацитет на батерията.</p><p><strong>Комбинирано:</strong> използва по-песимистичната оценката от напрежението и консумацията на ток.</p><p>За да се активират режимите на смарт гориво, е необходим конфигуриран сензор за напрежение на батерията.</p>",
+        "english": "<p><strong>Off:</strong> Smart Fuel is disabled.</p><p><strong>Voltage:</strong> estimates charge from pack voltage.</p><p><strong>Current:</strong> uses measured mAh consumed against the configured battery capacity.</p><p><strong>Combined:</strong> uses the more pessimistic of the voltage estimate and current consumption.</p><p>A configured battery voltage sensor is required for enabled Smart Fuel modes.</p>"
+    },
+    "powerSmartFuelSourceTypeNone": {
+        "message": "Изключено",
+        "english": "Off"
+    },
+    "powerSmartFuelSourceTypeCurrent": {
+        "message": "Ток",
+        "english": "Current"
+    },
+    "powerSmartFuelSourceTypeVoltage": {
+        "message": "Напрежение",
+        "english": "Voltage"
+    },
+    "powerSmartFuelSourceTypeCombined": {
+        "message": "Комбинирано",
+        "english": "Combined"
+    },
+    "powerSmartFuelVoltageDropRate": {
+        "message": "Смарт гориво - скорост на спад на напрежението",
+        "english": "Smart Fuel Voltage Drop Rate"
+    },
+    "powerSmartFuelVoltageDropRateHelp": {
+        "message": "Ограничава колко бързо може да пада напрежението. Тази настройка се използва само в режимите Напрежение и Комбинирано.",
+        "english": "Limits how quickly the voltage track may fall. This setting is only used in Voltage and Combined modes."
+    },
+    "powerSmartFuelChargeDropRate": {
+        "message": "Смарт гориво - скорост на спад на заряда",
+        "english": "Smart Fuel Charge Drop Rate"
+    },
+    "powerSmartFuelChargeDropRateHelp": {
+        "message": "Ограничава колко бързо може да спада изчисленият процент на заряд на база напрежението, след като моделът е активиран или е бил активиран. Тази настройка се използва само в режимите Напрежение и Комбинирано.",
+        "english": "Limits how quickly the reported charge percentage may drop on the voltage track once the model is armed or has been armed. This setting is only used in Voltage and Combined modes."
+    },
+    "powerSmartFuelSagGain": {
+        "message": "Смарт гориво - компенсация за спад на напрежението",
+        "english": "Smart Fuel Sag Gain"
+    },
+    "powerSmartFuelSagGainHelp": {
+        "message": "Компенсира за спад на напрежението под товар. Увеличете, ако Смарт горивото е твърде песимистично под товар; намалете, ако е твърде оптимистично. Тази настройка се използва само в режимите Напрежение и Комбинирано.",
+        "english": "Compensates for voltage sag under load. Increase if Smart Fuel is too pessimistic under load; decrease if it is too optimistic. This setting is only used in Voltage and Combined modes."
     },
     "powerBatteryMinimumCellVoltage": {
         "message": "Минимално напрежение на клетка",

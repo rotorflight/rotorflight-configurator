@@ -58,7 +58,8 @@
     clear: left;
 }
 
-.tab-power .battery-configuration select {
+.tab-power .battery-configuration select,
+.tab-power .smartfuel-configuration select {
     border: 1px solid var(--subtleAccent);
     border-radius: 3px;
     margin-right: 5px;
