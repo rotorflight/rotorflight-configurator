@@ -10439,6 +10439,21 @@
         "message": "救機",
         "english": "RESCUE"
     },
+    "mode GOVERNOR FALLBACK": {
+        "message": "GOVERNOR FALLBACK",
+        "english": "GOVERNOR FALLBACK",
+        "status": "New entry. Please translate!"
+    },
+    "mode GOVERNOR SUSPEND": {
+        "message": "GOVERNOR SUSPEND",
+        "english": "GOVERNOR SUSPEND",
+        "status": "New entry. Please translate!"
+    },
+    "mode GOVERNOR BYPASS": {
+        "message": "GOVERNOR BYPASS",
+        "english": "GOVERNOR BYPASS",
+        "status": "New entry. Please translate!"
+    },
     "flashTab": {
         "message": "更新韌體",
         "english": "Update Firmware"

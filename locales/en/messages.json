@@ -7568,6 +7568,15 @@
     "mode RESCUE": {
         "message": "RESCUE"
     },
+    "mode GOVERNOR FALLBACK": {
+        "message": "GOVERNOR FALLBACK"
+    },
+    "mode GOVERNOR SUSPEND": {
+        "message": "GOVERNOR SUSPEND"
+    },
+    "mode GOVERNOR BYPASS": {
+        "message": "GOVERNOR BYPASS"
+    },
     "flashTab": {
         "message": "Update Firmware"
     },
