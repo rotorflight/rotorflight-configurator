@@ -4292,16 +4292,16 @@
         "english": "Main Rotor Gear Ratio"
     },
     "motorsMainRotorGearRatioHelp": {
-        "message": "La relación de la transmisión entre el motor y el rotor principal.<br>Use <span class=\"value\">el número de dientes </span> : <span class=\"value\">main gear</span> del piñón.",
-        "english": "Gear ratio between the motor and the main rotor.<br>Utilice el número de dientes <span class=\"value\">piñon del motor</span> : <span class=\"value\">engranaje principal</span>."
+        "message": "Gear ratio between the motor and the main rotor.<br>Utilice el número de dientes <span class=\"value\">piñon del motor</span> : <span class=\"value\">engranaje principal</span>.",
+        "english": "Gear ratio between the motor and the main rotor.<br>Use <span class=\"value\">motor pinion</span> : <span class=\"value\">main gear</span> tooth count."
     },
     "motorsTailRotorGearRatio": {
         "message": "Relación de la transmisión del Rotor de cola",
         "english": "Tail Rotor Gear Ratio"
     },
     "motorsTailRotorGearRatioHelp": {
-        "message": "Relación de la transmisión entre el rotor de cola y el rotor principal. Use<span class=\"value\">el número de dientes</span> : <span class=\"value\">de la transmisión de la cola</span> y la de autorotación para tubo de torque, o <span class=\"value\">polea de cola</span> : <span class=\"value\">o polea frontal</span> para una cola con transmisión. Para una cola con drive directo, use <span class=\"value\">1</span> : <span class=\"value\">1</span>",
-        "english": "Gear ratio between the tail rotor and the main rotor. Utilice el número de dientes <span class=\"value\">engranaje de cola</span> : <span class=\"value\">engranaje de autorotación</span> para colas con tubo de torque , o <span class=\"value\">polea de cola</span> : <span class=\"value\">polea frontal</span> para colas con correa. Para colas con acople directo , use <span class=\"value\">1</span> : <span class=\"value\">1</span>"
+        "message": "Relación de la transmisión entre el rotor de cola y el rotor principal. Utilice el número de dientes <span class=\"value\">engranaje de cola</span> : <span class=\"value\">engranaje de autorotación</span> para colas con tubo de torque , o <span class=\"value\">polea de cola</span> : <span class=\"value\">polea frontal</span> para colas con correa. Para colas con acople directo , use <span class=\"value\">1</span> : <span class=\"value\">1</span>",
+        "english": "Gear ratio between the tail rotor and the main rotor. Use <span class=\"value\">tail gear</span> : <span class=\"value\">autorotation gear</span> tooth count for Torque Tube, or <span class=\"value\">tail pulley</span> : <span class=\"value\">front pulley</span> for a belt tail. For a direct drive tail, use <span class=\"value\">1</span> : <span class=\"value\">1</span>"
     },
     "motorsMotorPoles1Long": {
         "message": "Número de polos del Motor principal",
@@ -7489,7 +7489,8 @@
         "english": "ESC Telemetry"
     },
     "powerBatteryCurrentMeterTypeFbus": {
-        "message": "Sensor FrSky"
+        "message": "Sensor FrSky",
+        "english": "FrSky Sensor"
     },
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "Sensor MSP",
