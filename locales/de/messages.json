@@ -2855,7 +2855,7 @@
         "english": "Apply Preset"
     },
     "receiverChannelOrderPresetPlaceholder": {
-        "message": "Wähle eine Voreinstellung ...",
+        "message": "Voreinstellung auswählen ...",
         "english": "Select a preset..."
     },
     "receiverButtonBind": {
@@ -3372,7 +3372,7 @@
         "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
     },
     "servoConfiguration": {
-        "message": "Servo-Einstellungen",
+        "message": "Einstellungen",
         "english": "Servo Configuration"
     },
     "servoNumber": {
@@ -3440,7 +3440,7 @@
         "english": "Speed [ms]"
     },
     "servoSpeedHelp": {
-        "message": "Begrenzt die Geschwindigkeit der Servobewegung. Ein Wert von 0 ms bedeutet keine Begrenzung. Werte zwischen 1-60000 Millisekunden geben die Zeit an, die für eine 60&deg;-Drehung benötigt wird.",
+        "message": "Begrenzt die Geschwindigkeit der Servobewegung. Ein Wert von 0 ms bedeutet keine Begrenzung. Werte zwischen 1-60000 ms geben die Zeit an, die für eine 60&deg;-Drehung benötigt wird.",
         "english": "Limits the servo motion speed. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed for 60&deg; rotation."
     },
     "servoReverse": {
@@ -3484,7 +3484,7 @@
         "english": "<span class=\"message-negative\">Warning:</span> The <i>Geometry correction</i> is not equal for all servos. Please check!"
     },
     "servoOverride": {
-        "message": "Servo-Direktansteuerung",
+        "message": "Direktansteuerung",
         "english": "Servo Override"
     },
     "servoOverrideHelp": {
@@ -3496,7 +3496,7 @@
         "english": "<strong>Enable servo override</strong>"
     },
     "servoEnableOverrideText": {
-        "message": "Um Einstellungen vorzunehmen, können mit der <i>Servo-Direktansteuerung</i> die Servosignale direkt vorgegeben werden. Die Servo-Ansteuerwerte werden nicht gespeichert und bei einem Neustart zurückgesetzt.",
+        "message": "Um Einstellungen vorzunehmen, können mit der <i>Servo-Direktansteuerung</i> die Servosignale direkt vorgegeben werden. Die Ansteuerwerte werden nicht gespeichert und bei einem Neustart zurückgesetzt.",
         "english": " <i>Servo override</i> forces the servos to a arbitrary positions for setup purposes. The override values are not saved, and will be reset after a reboot."
     },
     "servoOverrideEnable": {
@@ -3724,7 +3724,7 @@
         "english": "Collective trim [%]"
     },
     "mixerSwashTrimHelp": {
-        "message": "Trimmung für Taumelscheiben-Anlenkungen. Nur verwenden, wenn die Anlenkungen nicht einstellbar sind.",
+        "message": "Trimmung für Taumelscheiben-Anlenkungen. Nur verwenden, wenn die Anlenkgestänge nicht einstellbar sind.",
         "english": "Trim for swashplate linkages. Use only if the linkages are not adjustable."
     },
     "mixerTailRotorSettings": {
@@ -3756,7 +3756,7 @@
         "english": "Yaw Control Direction"
     },
     "mixerTailRotorDirectionHelp": {
-        "message": "Abhängig von der Richtung des Heckrotors und der ESC- bzw. Servokonfiguration kann die Heck-Drehrichtung angepasst werden.",
+        "message": "Abhängig von der Richtung des Heckrotors und der ESC- bzw. Servokonfiguration, kann die Drehrichtung um die Hochachse angepasst werden.",
         "english": "Depending on the tail rotor direction and ESC/servo configuration, the yaw direction may be reversed."
     },
     "mixerTailRotorCalibration": {
@@ -4197,8 +4197,7 @@
     },
     "motors.motor.heading": {
         "message": "Motor #{{index}}",
-        "english": "Motor #{{index}}",
-        "status": "New entry. Please translate!"
+        "english": "Motor #{{index}}"
     },
     "motorsSectionLabelThrottle": {
         "message": "Gas",
@@ -4481,7 +4480,7 @@
         "english": "Governor Bypass Throttle Curve"
     },
     "govSectionThrottleCurveHelp": {
-        "message": "<p><strong>Der Bypass-Modus</strong> deaktiviert alle Drehzahlregler-Funktionen. Wenn dieser Modus aktiv ist, wird die Bypass-Gaskurve zur Bestimmung des Gaswertes herangezogen.</p><p>Benutze den GOVERNOR BYPASS Eintrag im der Registerkarte 'Modi' um festzulegen, wann der Modus aktiv ist.</p>",
+        "message": "<p><strong>Der Bypass-Modus</strong> deaktiviert alle Drehzahlregler-Funktionen. Wenn dieser Modus aktiv ist, wird die Bypass-Gaskurve zur Bestimmung des Gaswertes herangezogen.</p><p>Benutze den GOVERNOR BYPASS Eintrag in der Registerkarte 'Modi' um festzulegen, wann der Modus aktiv ist.</p>",
         "english": "<p><strong>Governor Bypass Mode</strong> disables all governor functions. When this mode is active, the collective-to-throttle curve is used to determine throttle output.</p><p>See the Governor Bypass section in the Modes tab to configure how the mode is activated.</p>"
     },
     "govSectionRampTime": {
@@ -4729,7 +4728,7 @@
         "english": "Minimum Throttle"
     },
     "govMinThrottleHelp": {
-        "message": "Minimaler Gaswert, den der Drehzahlregler nutzen darf.",
+        "message": "Kleinster Gaswert, den der Drehzahlregler nutzen darf.",
         "english": "The minimum throttle output the governor may use."
     },
     "govIdleThrottle": {
@@ -5445,11 +5444,11 @@
         "english": "Baud Rate"
     },
     "firmware_flasher.show_legacy_targets.label": {
-        "message": "Zeige veraltete Targets",
+        "message": "Veraltete Targets anzeigen",
         "english": "Show Legacy Targets"
     },
     "firmware_flasher.show_legacy_targets.description": {
-        "message": "Zeigt die Targets für viele Betaflight-Boards an. Diese Targets werden nicht aktiv gepflegt.",
+        "message": "Zeigt die Targets für weitere Betaflight-Boards an. Diese Targets werden nicht aktiv gepflegt.",
         "english": "Show targets for many Betaflight boards. These targets are not actively maintained."
     },
     "firmwareFlasherOptionLoading": {
@@ -5473,11 +5472,11 @@
         "english": "Choose a Firmware / Board"
     },
     "firmwareFlasherOptionLabelSelectBoard": {
-        "message": "Flight-Controller (Board)",
+        "message": "Flight-Controller / Board",
         "english": "Choose a Board"
     },
     "firmwareFlasherOptionLabelSelectFirmwareVersion": {
-        "message": "Wähle eine Firmware-Version",
+        "message": "Firmware-Version",
         "english": "Choose a Firmware version"
     },
     "firmwareFlasherOptionLabelSelectFirmwareVersionFor": {
@@ -6214,7 +6213,7 @@
         "english": "Bleeds off the current controller error when the craft is not airborne. This helps preventing the craft from tipping over on the ground."
     },
     "profilesErrorDecayTime": {
-        "message": "Abklingzeit [s]",
+        "message": "Fehler-Abklingzeit [s]",
         "english": "Decay Time [s]"
     },
     "profilesErrorDecayTimeCyclic": {
@@ -6258,15 +6257,15 @@
         "english": "Rotates the current Roll and Pitch Error Terms around Yaw when the craft rotates. This improves piro control and helps the model to travel in a straight line while pirouetting."
     },
     "profilesItermRelax": {
-        "message": "I-Anteil-Relax",
+        "message": "I-Anteil Relax",
         "english": "I-Term Relax"
     },
     "profilesItermRelaxHelp": {
-        "message": "Begrenzt die Aufladung des I-Anteils bei schnellen Steuereingaben. Dies hilft dabei, Zurückschlagen am Ende von Rollen und anderen schnellen Bewegungen zu reduzieren.",
+        "message": "Begrenzt die Aufladung des I-Anteils bei schnellen Bewegungen. Dies hilft dabei, Zurückschlagen am Ende von Rollen und anderen schnellen Bewegungen zu reduzieren.",
         "english": "Limits the accumulation of I-term when fast movements happen. This helps in the reduction of bounceback at the end of rolls and other fast movements."
     },
     "profilesItermRelaxType": {
-        "message": "I-Anteil-Relax: Achszuweisung",
+        "message": "Achsen",
         "english": "I-term Relax Type"
     },
     "profilesItermRelaxTypeHelp": {
@@ -6294,7 +6293,7 @@
         "english": "Cutoff Point for Yaw"
     },
     "profilesItermRelaxCutoffHelp": {
-        "message": "Kleinere Werte unterdrücken das Zurückschlagen nach Steuereingaben, höhere Werte verbessern die Präzision bei hohen Drehraten.<br>15-30 für kleine Helis, 10-15 für mittelgroße Helis, weniger als 10 für große Helis (>600er).",
+        "message": "Kleinere Werte unterdrücken das Zurückschlagen nach Drehungen, höhere Werte verbessern die Präzision bei hohen Drehraten.<br>15-30 für kleine Helis, 10-15 für mittelgroße Helis, weniger als 10 für große Helis (>600er).",
         "english": "Lower values suppress bounce-back after movements, high values increase high-rate turn precision.<br>Set to 15-30 for small helis, 10-15 for mid-size, and less than 10 for large."
     },
     "profilesPidBandwidth": {
@@ -6354,7 +6353,7 @@
         "english": "Auto-leveling Settings"
     },
     "profilesAcroTrainerGain": {
-        "message": "Acro-Trainer Gain",
+        "message": "Acro-Trainer: Gain",
         "english": "Acro Trainer gain"
     },
     "profilesAcroTrainerGainHelp": {
@@ -6362,7 +6361,7 @@
         "english": "Acro Trainer gain. Acro trainer Mode is not self leveling but does limit the maximum pitch/roll angle. This determines how aggressively the helicopter tilts back to the maximum angle (if exceeded) while in Acro Trainer Mode"
     },
     "profilesAcroTrainerLimit": {
-        "message": "Acro-Trainer Winkelbegrenzung",
+        "message": "Acro-Trainer: Winkelbegrenzung",
         "english": "Acro Trainer angle limit"
     },
     "profilesAcroTrainerLimitHelp": {
@@ -6370,7 +6369,7 @@
         "english": "Acro Trainer angle limit. Acro Trainer mode does not self level (like Angle or Horizon Modes); however, it does limit the maximum angle the helicopter will pitch/roll to"
     },
     "profilesAngleModeGain": {
-        "message": "Leveling-Gain im Winkel-Modus",
+        "message": "Winkel-Modus: Leveling-Gain",
         "english": "Angle Mode leveling gain"
     },
     "profilesAngleModeGainHelp": {
@@ -6378,7 +6377,7 @@
         "english": "Angle Mode leveling gain. This determines how aggressively the helicopter tilts back to level while in Angle Mode"
     },
     "profilesAngleModeLimit": {
-        "message": "Maximaler Winkel im Winkel-Modus ",
+        "message": "Winkel-Modus: Maximaler Winkel",
         "english": "Angle Mode maximum angle"
     },
     "profilesAngleModeLimitHelp": {
@@ -6386,7 +6385,7 @@
         "english": "Angle Mode maximum angle. Helicopter is limited to this angle when in Angle mode"
     },
     "profilesHorizonModeGain": {
-        "message": "Leveling-Gain im Horizontal-Modus",
+        "message": "Horizontal-Modus: Leveling-Gain",
         "english": "Horizon Mode leveling gain"
     },
     "profilesHorizonModeGainHelp": {
@@ -6506,7 +6505,7 @@
         "english": "Cyclic Cross-Coupling compensation removes the aileron (roll) wobble when only elevator is applied."
     },
     "profilesCyclicCrossCouplingGain": {
-        "message": "Gain Kreuzkopplung",
+        "message": "Gain",
         "english": "Cross-Coupling Gain"
     },
     "profilesCyclicCrossCouplingGainHelp": {
@@ -6514,7 +6513,7 @@
         "english": "Amount of compensation applied for Pitch-to-Roll decoupling."
     },
     "profilesCyclicCrossCouplingRatio": {
-        "message": "Verhältnis Kreuzkopplung [%]",
+        "message": "Verhältnis [%]",
         "english": "Cross-Coupling Ratio [%]"
     },
     "profilesCyclicCrossCouplingRatioHelp": {
@@ -6522,7 +6521,7 @@
         "english": "Amount of Roll-to-Pitch compensation needed, vs. Pitch-to-Roll."
     },
     "profilesCyclicCrossCouplingCutoff": {
-        "message": "Grenzfrequenz Kreuzkopplung [Hz]",
+        "message": "Grenzfrequenz [Hz]",
         "english": "Cross-Coupling Cutoff Frequency [Hz]"
     },
     "profilesCyclicCrossCouplingCutoffHelp": {
@@ -6594,7 +6593,7 @@
         "english": "Collective value for pull-up climb."
     },
     "profilesRescuePullupTime": {
-        "message": "Pull-Up Wirkdauer [s]",
+        "message": "Pull-Up Dauer [s]",
         "english": "Pull-up Time [s]"
     },
     "profilesRescuePullupTimeHelp": {
@@ -7498,69 +7497,56 @@
         "english": "MSP Sensor"
     },
     "powerSmartFuelHead": {
-        "message": "Smart Fuel",
-        "english": "Smart Fuel",
-        "status": "New entry. Please translate!"
+        "message": "Ladezustand-Schätzung (Smart-Fuel)",
+        "english": "Smart Fuel"
     },
     "powerSmartFuelSource": {
-        "message": "Smart Fuel Mode",
-        "english": "Smart Fuel Mode",
-        "status": "New entry. Please translate!"
+        "message": "Smart-Fuel Modus",
+        "english": "Smart Fuel Mode"
     },
     "powerSmartFuelSourceHelp": {
-        "message": "<p><strong>Off:</strong> Smart Fuel is disabled.</p><p><strong>Voltage:</strong> estimates charge from pack voltage.</p><p><strong>Current:</strong> uses measured mAh consumed against the configured battery capacity.</p><p><strong>Combined:</strong> uses the more pessimistic of the voltage estimate and current consumption.</p><p>A configured battery voltage sensor is required for enabled Smart Fuel modes.</p>",
-        "english": "<p><strong>Off:</strong> Smart Fuel is disabled.</p><p><strong>Voltage:</strong> estimates charge from pack voltage.</p><p><strong>Current:</strong> uses measured mAh consumed against the configured battery capacity.</p><p><strong>Combined:</strong> uses the more pessimistic of the voltage estimate and current consumption.</p><p>A configured battery voltage sensor is required for enabled Smart Fuel modes.</p>",
-        "status": "New entry. Please translate!"
+        "message": "<p><strong>Aus:</strong> Smart-Fuel ist deaktiviert.</p><p><strong>Spannung:</strong> Schätzt den Ladezustand anhand der Akku-Spannung.</p><p><strong>Strom:</strong> Vergleicht den gemessenen mAh-Verbrauch mit der konfigurierten Akkukapazität.</p><p><strong>Kombiniert:</strong> Verwendet den pessimistischeren Wert aus der Schätzung mittels Akku-Spannung und dem mAh-Verbrauch.</p><p>Bei aktiven Smart-Fuel-Modi muss die Akku-Spannung konfiguriert sein.</p>",
+        "english": "<p><strong>Off:</strong> Smart Fuel is disabled.</p><p><strong>Voltage:</strong> estimates charge from pack voltage.</p><p><strong>Current:</strong> uses measured mAh consumed against the configured battery capacity.</p><p><strong>Combined:</strong> uses the more pessimistic of the voltage estimate and current consumption.</p><p>A configured battery voltage sensor is required for enabled Smart Fuel modes.</p>"
     },
     "powerSmartFuelSourceTypeNone": {
-        "message": "Off",
-        "english": "Off",
-        "status": "New entry. Please translate!"
+        "message": "Aus",
+        "english": "Off"
     },
     "powerSmartFuelSourceTypeCurrent": {
-        "message": "Current",
-        "english": "Current",
-        "status": "New entry. Please translate!"
+        "message": "Strom",
+        "english": "Current"
     },
     "powerSmartFuelSourceTypeVoltage": {
-        "message": "Voltage",
-        "english": "Voltage",
-        "status": "New entry. Please translate!"
+        "message": "Spannung",
+        "english": "Voltage"
     },
     "powerSmartFuelSourceTypeCombined": {
-        "message": "Combined",
-        "english": "Combined",
-        "status": "New entry. Please translate!"
+        "message": "Kombiniert",
+        "english": "Combined"
     },
     "powerSmartFuelVoltageDropRate": {
-        "message": "Smart Fuel Voltage Drop Rate",
-        "english": "Smart Fuel Voltage Drop Rate",
-        "status": "New entry. Please translate!"
+        "message": "Abfallrate Spannung",
+        "english": "Smart Fuel Voltage Drop Rate"
     },
     "powerSmartFuelVoltageDropRateHelp": {
-        "message": "Limits how quickly the voltage track may fall. This setting is only used in Voltage and Combined modes.",
-        "english": "Limits how quickly the voltage track may fall. This setting is only used in Voltage and Combined modes.",
-        "status": "New entry. Please translate!"
+        "message": "Begrenzt, wie schnell der Spannungsverlauf bei einem Akku-Spannungsabfall folgen darf. Diese Einstellung wird nur im Spannungs- und Kombiniert-Modus verwendet.",
+        "english": "Limits how quickly the voltage track may fall. This setting is only used in Voltage and Combined modes."
     },
     "powerSmartFuelChargeDropRate": {
-        "message": "Smart Fuel Charge Drop Rate",
-        "english": "Smart Fuel Charge Drop Rate",
-        "status": "New entry. Please translate!"
+        "message": "Abfallrate Ladezustand",
+        "english": "Smart Fuel Charge Drop Rate"
     },
     "powerSmartFuelChargeDropRateHelp": {
-        "message": "Limits how quickly the reported charge percentage may drop on the voltage track once the model is armed or has been armed. This setting is only used in Voltage and Combined modes.",
-        "english": "Limits how quickly the reported charge percentage may drop on the voltage track once the model is armed or has been armed. This setting is only used in Voltage and Combined modes.",
-        "status": "New entry. Please translate!"
+        "message": "Begrenzt, wie schnell der angezeigte, prozentuale Ladezustand aufgrund des Spannungsverlaufs abfallen darf, nachdem das Modell scharfgeschaltet ist (Arming). Diese Einstellung wird nur im Spannungs- und Kombiniert-Modus verwendet.",
+        "english": "Limits how quickly the reported charge percentage may drop on the voltage track once the model is armed or has been armed. This setting is only used in Voltage and Combined modes."
     },
     "powerSmartFuelSagGain": {
-        "message": "Smart Fuel Sag Gain",
-        "english": "Smart Fuel Sag Gain",
-        "status": "New entry. Please translate!"
+        "message": "Verstärkung bei Spannungsabfall",
+        "english": "Smart Fuel Sag Gain"
     },
     "powerSmartFuelSagGainHelp": {
-        "message": "Compensates for voltage sag under load. Increase if Smart Fuel is too pessimistic under load; decrease if it is too optimistic. This setting is only used in Voltage and Combined modes.",
-        "english": "Compensates for voltage sag under load. Increase if Smart Fuel is too pessimistic under load; decrease if it is too optimistic. This setting is only used in Voltage and Combined modes.",
-        "status": "New entry. Please translate!"
+        "message": "Gleicht Spannungsabfälle unter Last aus. Wert erhöhen, wenn Smart-Fuel unter Last zu pessimistisch ist (Schätzung zu klein). Wert verkleinern, falls zu optimistisch. Diese Einstellung wird nur im Spannungs- und Kombiniert-Modus verwendet.",
+        "english": "Compensates for voltage sag under load. Increase if Smart Fuel is too pessimistic under load; decrease if it is too optimistic. This setting is only used in Voltage and Combined modes."
     },
     "powerBatteryMinimumCellVoltage": {
         "message": "Zellen-Spannung Minimal [V]",
@@ -7583,7 +7569,7 @@
         "english": "Calibration"
     },
     "powerCalibrationManagerTitle": {
-        "message": "Kalibrierungsmanager",
+        "message": "Kalibrierungs-Manager",
         "english": "Calibration Manager"
     },
     "powerCalibrationManagerHelp": {
@@ -7603,7 +7589,7 @@
         "english": "<span class=\"message-negative\">Warning:</span> Voltage and/or current meter sources <strong>have been changed but not saved.</strong> Please set the correct meter sources and save them before trying to calibrate."
     },
     "powerCalibrationManagerConfirmationTitle": {
-        "message": "Kalibrierungsmanager Bestätigung",
+        "message": "Kalibrierungs-Manager Bestätigung",
         "english": "Calibration Manager Confirmation"
     },
     "powerCalibrationSave": {
@@ -7659,7 +7645,7 @@
         "english": "MCU"
     },
     "powerVoltageId100": {
-        "message": "ESC-Spannungen kombiniert",
+        "message": "ESC-Spannungen gesamt",
         "english": "ESC Combined"
     },
     "powerVoltageId101": {
@@ -7759,7 +7745,7 @@
         "english": "Battery"
     },
     "powerAmperageId100": {
-        "message": "ESC-Ströme kombiniert",
+        "message": "ESC-Ströme gesamt",
         "english": "ESC Combined"
     },
     "powerAmperageId101": {
@@ -7807,7 +7793,7 @@
         "english": "Battery"
     },
     "powerStateHead": {
-        "message": "Status der Stromversorgung",
+        "message": "Status",
         "english": "Power State"
     },
     "powerBatteryConnected": {
@@ -8376,7 +8362,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementMainBattUsage": {
-        "message": "Graphische Darstellung des Akkufüllstandes",
+        "message": "Graphische Darstellung des Akku-Kapazitätsverbrauchs",
         "english": "Graphical representation of battery capacity usage"
     },
     "osdTextElementArmedTime": {
@@ -9860,19 +9846,16 @@
         "english": "RESCUE"
     },
     "mode GOVERNOR FALLBACK": {
-        "message": "GOVERNOR FALLBACK",
-        "english": "GOVERNOR FALLBACK",
-        "status": "New entry. Please translate!"
+        "message": "DREHZAHLREGLER FALLBACK",
+        "english": "GOVERNOR FALLBACK"
     },
     "mode GOVERNOR SUSPEND": {
-        "message": "GOVERNOR SUSPEND",
-        "english": "GOVERNOR SUSPEND",
-        "status": "New entry. Please translate!"
+        "message": "DREHZAHLREGLER SUSPEND",
+        "english": "GOVERNOR SUSPEND"
     },
     "mode GOVERNOR BYPASS": {
-        "message": "GOVERNOR BYPASS",
-        "english": "GOVERNOR BYPASS",
-        "status": "New entry. Please translate!"
+        "message": "DREHZAHLREGLER BYPASS",
+        "english": "GOVERNOR BYPASS"
     },
     "flashTab": {
         "message": "Firmware Aktualisieren",
