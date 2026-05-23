@@ -34,7 +34,7 @@
     padding: 5px;
     overflow-y: scroll;
     overflow-x: hidden;
-    font-family: monospace;
+    font-family: var(--font-mono);
     color: white;
     box-sizing: border-box;
     float: left;
@@ -45,6 +45,7 @@
 }
 
 .tab-cli textarea[name='commands'] {
+    font-family: var(--font-mono);
     -webkit-box-sizing: border-box;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
@@ -66,7 +67,7 @@
     resize: none;
     overflow-y: scroll;
     overflow-x: hidden;
-    font-family: monospace;
+    font-family: var(--font-mono);
     color: white;
     padding: 5px;
     margin-bottom: 5px;
@@ -153,11 +154,11 @@
 }
 
 .cli-textcomplete-dropdown a {
-    font-family: monospace;
+    font-family: var(--font-mono);
 }
 
 .cli-textcomplete-dropdown a b {
-    font-family: monospace;
+    font-family: var(--font-mono);
     font-weight: bold;
 }
 /* End AutoComplete */
