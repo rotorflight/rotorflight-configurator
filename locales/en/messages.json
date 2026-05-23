@@ -3274,6 +3274,9 @@
     "gpsSignalQty": {
         "message": "Qty"
     },
+    "motors.motor.heading": {
+        "message": "Motor #{{index}}"
+    },
     "motorsSectionLabelThrottle": {
         "message": "Throttle"
     },
@@ -5760,6 +5763,45 @@
     },
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP Sensor"
+    },
+    "powerSmartFuelHead": {
+        "message": "Smart Fuel"
+    },
+    "powerSmartFuelSource": {
+        "message": "Smart Fuel Mode"
+    },
+    "powerSmartFuelSourceHelp": {
+        "message": "<p><strong>Off:</strong> Smart Fuel is disabled.</p><p><strong>Voltage:</strong> estimates charge from pack voltage.</p><p><strong>Current:</strong> uses measured mAh consumed against the configured battery capacity.</p><p><strong>Combined:</strong> uses the more pessimistic of the voltage estimate and current consumption.</p><p>A configured battery voltage sensor is required for enabled Smart Fuel modes.</p>"
+    },
+    "powerSmartFuelSourceTypeNone": {
+        "message": "Off"
+    },
+    "powerSmartFuelSourceTypeCurrent": {
+        "message": "Current"
+    },
+    "powerSmartFuelSourceTypeVoltage": {
+        "message": "Voltage"
+    },
+    "powerSmartFuelSourceTypeCombined": {
+        "message": "Combined"
+    },
+    "powerSmartFuelVoltageDropRate": {
+        "message": "Smart Fuel Voltage Drop Rate"
+    },
+    "powerSmartFuelVoltageDropRateHelp": {
+        "message": "Limits how quickly the voltage track may fall. This setting is only used in Voltage and Combined modes."
+    },
+    "powerSmartFuelChargeDropRate": {
+        "message": "Smart Fuel Charge Drop Rate"
+    },
+    "powerSmartFuelChargeDropRateHelp": {
+        "message": "Limits how quickly the reported charge percentage may drop on the voltage track once the model is armed or has been armed. This setting is only used in Voltage and Combined modes."
+    },
+    "powerSmartFuelSagGain": {
+        "message": "Smart Fuel Sag Gain"
+    },
+    "powerSmartFuelSagGainHelp": {
+        "message": "Compensates for voltage sag under load. Increase if Smart Fuel is too pessimistic under load; decrease if it is too optimistic. This setting is only used in Voltage and Combined modes."
     },
     "powerBatteryMinimumCellVoltage": {
         "message": "Minimum Cell Voltage"

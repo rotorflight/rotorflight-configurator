@@ -1,3 +1,35 @@
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('/fonts/JetBrainsMono/JetBrainsMono-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('/fonts/JetBrainsMono/JetBrainsMono-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('/fonts/JetBrainsMono/JetBrainsMono-Italic.woff2') format('woff2');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('/fonts/JetBrainsMono/JetBrainsMono-BoldItalic.woff2') format('woff2');
+	font-weight: 700;
+	font-style: italic;
+	font-display: swap;
+}
+
 :root {
     --accent: #4da8da;
     --darkAccent: #007cc7;
@@ -26,6 +58,9 @@
     --pushedButton-fontColor: #000000;
     --pushedButton-border: #7c7c7c;
     --pushedButton-background: #7c7c7c;
+
+    --font-ui: 'Open Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
 }
 
 * {
@@ -48,13 +83,26 @@ html, body {
 }
 
 body {
-    font-family: 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
+    font-family: var(--font-ui);
     font-size: 12px;
     color: #303030;
     background-color: #3d3f3e;
     margin: 0;
     padding: 0;
     overflow: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+input,
+select,
+textarea {
+    font-weight: 400;
 }
 
 ::backdrop {
@@ -1665,7 +1713,7 @@ dialog .dialog_toolbar .btn a.disabled {
 }
 
 code {
-    font-family: monospace;
+    font-family: var(--font-mono);
     color: #fff;
     background-color: #000;
     padding: 2px 4px;
