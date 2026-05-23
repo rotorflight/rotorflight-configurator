@@ -1,12 +1,6 @@
 /* Select 2 replacement styles */
-.select2 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 400;
-    font-size: 13.3333px;    
-}
-
 .select2-selection__rendered {
-    line-height: 18.5px !important;
+    line-height: 20px !important;
     padding-left: 4px !important;
     color: var(--defaultText) !important;
     border-radius: 2px !important;

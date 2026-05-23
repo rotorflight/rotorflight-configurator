@@ -26,6 +26,8 @@
     --pushedButton-fontColor: #000000;
     --pushedButton-border: #7c7c7c;
     --pushedButton-background: #7c7c7c;
+
+    --font-ui: 'Open Sans', sans-serif;
 }
 
 * {
@@ -48,13 +50,26 @@ html, body {
 }
 
 body {
-    font-family: 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
+    font-family: var(--font-ui);
     font-size: 12px;
     color: #303030;
     background-color: #3d3f3e;
     margin: 0;
     padding: 0;
     overflow: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+input,
+select,
+textarea {
+    font-weight: 400;
 }
 
 ::backdrop {
