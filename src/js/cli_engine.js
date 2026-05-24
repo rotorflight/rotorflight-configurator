@@ -49,10 +49,12 @@ export default class CliEngine {
       return this.history[this.index];
     },
     next: function () {
-      if (this.index < this.history.length) {
+      if (this.index < this.history.length - 1) {
         this.index += 1;
+        return this.history[this.index];
       }
-      return this.history[this.index - 1];
+      this.index = this.history.length;
+      return "";
     },
   };
 
@@ -141,6 +143,18 @@ export default class CliEngine {
           }
         }
       }
+
+      if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+        if (this.#cliAutoComplete && this.#cliAutoComplete.isOpen()) {
+          return; // disable history keys if autocomplete is open
+        }
+
+        const historyEntry =
+          event.key === "ArrowUp" ? this.#history.prev() : this.#history.next();
+
+        event.preventDefault();
+        this.#GUI.textarea.val(historyEntry ?? "");
+      }
     });
 
     this.#GUI.textarea.keypress((event) => {
@@ -155,20 +169,6 @@ export default class CliEngine {
         this.#history.add(outString);
         this.executeCommands(outString);
         this.#GUI.textarea.val("");
-      }
-    });
-
-    this.#GUI.textarea.keyup((event) => {
-      if (this.#cliAutoComplete && this.#cliAutoComplete.isOpen()) {
-        return; // disable history keys if autocomplete is open
-      }
-
-      if (event.key === "ArrowUp") {
-        this.#GUI.textarea.val(this.#history.prev());
-      }
-
-      if (event.key === "ArrowDown") {
-        this.#GUI.textarea.val(this.#history.next());
       }
     });
 
