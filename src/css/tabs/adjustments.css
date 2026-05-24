@@ -151,7 +151,7 @@
     padding: 2px 4px;
     text-align: right;
     font-size: 13px;
-    font-family: monospace;
+    font-family: var(--font-mono);
     color: #f0f0f0;
     background: #505050;
     border: 1px;

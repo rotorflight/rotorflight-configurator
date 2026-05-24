@@ -34,12 +34,13 @@ const tab = {
 tab.initialize = function (callback) {
     var self = this;
 
-    self.selectedBoard = undefined;
     self.localFirmwareLoaded = false;
-    self.isConfigLocal = false;
+    self.selectedBoard = undefined;
     self.intel_hex = undefined;
     self.parsed_hex = undefined;
-
+    self.unifiedTarget = {};
+    self.isConfigLocal = false;
+    self.boardDetectionInProgress = false;
 
     function onFirmwareCacheUpdate(release) {
         $('select[name="firmware_version"] option').each(function () {
@@ -173,7 +174,6 @@ tab.initialize = function (callback) {
 
             if (config.get('rememberLastSelectedBoard')) {
                 const selected_board = config.get('selected_board');
-                console.log("selected_board foo", selected_board);
                 const boardBuilds = builds[selected_board];
                 $('select[name="board"]').val(boardBuilds ? selected_board : 0).trigger('change');
             }
@@ -923,7 +923,7 @@ tab.initialize = function (callback) {
                     exitDfuElement.addClass('disabled');
                 }
             }
-        });
+        }).trigger("change");
 
         let board_auto_detect = (function() {
             let targetAvailable = false;
