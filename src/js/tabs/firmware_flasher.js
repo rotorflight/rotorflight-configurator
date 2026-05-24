@@ -923,7 +923,7 @@ tab.initialize = function (callback) {
                     exitDfuElement.addClass('disabled');
                 }
             }
-        });
+        }).trigger("change");
 
         let board_auto_detect = (function() {
             let targetAvailable = false;
