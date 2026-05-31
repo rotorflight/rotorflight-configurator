@@ -458,7 +458,7 @@ function run_dev_client() {
   switch (context.target.platform) {
     case "android":
       return () =>
-        runAsync(Promie.reject(Error("android dev client not supported")));
+        runAsync(Promise.reject(Error("android dev client not supported")));
 
     case "linux":
     case "osx":
