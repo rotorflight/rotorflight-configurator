@@ -4,9 +4,10 @@ import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
-import { MspHelper } from "@/js/msp/MSPHelper.js";
 import { serial } from "@/js/serial.js";
 import { read_serial } from "@/js/serial_backend.js";
+
+import { MspHelper } from "./MSPHelper.js";
 
 export const MSPConnectorImpl = function () {
     this.baud = undefined;
