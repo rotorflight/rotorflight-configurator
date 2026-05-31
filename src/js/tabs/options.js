@@ -80,10 +80,10 @@ const tab = {
       .on("change", function () {
         const checked = $(this).is(":checked");
         config.set({ cordovaForceComputerUI: checked });
-        cordovaUI?.set?.();
+        globalThis.cordovaUI?.set?.();
       })
       .closest(".field")
-      .toggle(GUI.isCordova() && cordovaUI.canChangeUI);
+      .toggle(GUI.isCordova() && globalThis.cordovaUI.canChangeUI);
   },
 
   initDarkTheme() {
