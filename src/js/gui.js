@@ -1,4 +1,5 @@
 import * as config from '@/js/config.js';
+import { getTabHelpURL } from "@/js/help.js";
 
 const GUI_MODES = {
     NWJS: "NW.js",

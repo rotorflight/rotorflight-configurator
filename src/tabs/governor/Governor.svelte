@@ -5,6 +5,7 @@
   import { slide } from "svelte/transition";
 
   import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+  import { getTabHelpURL } from "@/js/help.js";
   import { i18n } from "@/js/i18n.js";
   import { FC } from "@/js/fc.svelte.js";
   import { reinitialiseConnection } from "@/js/serial_backend";
