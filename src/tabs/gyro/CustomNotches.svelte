@@ -1,5 +1,7 @@
 <script>
   import semver from "semver";
+
+  import { API_VERSION_12_8 } from "@/js/configurator.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import ErrorNote from "@/components/notes/ErrorNote.svelte";
   import WarningNote from "@/components/notes/WarningNote.svelte";

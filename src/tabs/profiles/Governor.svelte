@@ -3,6 +3,10 @@
   import semver from "semver";
   import { onMount } from "svelte";
 
+  import {
+    API_VERSION_12_7,
+    API_VERSION_12_9,
+  } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { bit_check, bit_clear, bit_set } from "@/js/serial_backend.js";
 

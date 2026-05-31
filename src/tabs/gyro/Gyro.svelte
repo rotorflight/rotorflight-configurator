@@ -4,7 +4,7 @@
   import { onMount } from "svelte";
   import diff from "microdiff";
 
-  import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+  import { API_VERSION_12_8, CONFIGURATOR } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
   import { i18n } from "@/js/i18n.js";

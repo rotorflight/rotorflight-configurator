@@ -2,7 +2,7 @@
   import semver from "semver";
   import { slide } from "svelte/transition";
 
-  import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+  import { API_VERSION_12_8, CONFIGURATOR } from "@/js/configurator.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import motorState from "../motors/state.svelte.js";
 

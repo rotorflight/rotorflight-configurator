@@ -2,6 +2,7 @@ import * as noUiSlider from 'nouislider';
 import semver from 'semver';
 import wNumb from 'wnumb';
 
+import { API_VERSION_12_8 } from "@/js/configurator.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { Mixer } from "@/js/Mixer.js";
 

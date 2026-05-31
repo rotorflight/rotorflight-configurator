@@ -1,7 +1,6 @@
 import "multiple-select";
 import { mount } from "svelte";
 
-import * as configurator from "@/js/configurator.svelte.js";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
 import { FC } from "@/js/fc.svelte.js";
 import { i18n } from "@/js/localization.js";
@@ -27,7 +26,6 @@ import StatusBar from "@/components/StatusBar.svelte";
 // TODO: Remove these items from the global namespace.
 // Import them directly where they are needed.
 Object.assign(globalThis, {
-  ...configurator,
   ...defaultHuffmanTree,
   ...main,
   ...serialBackend,
