@@ -2,6 +2,7 @@ import i18next from 'i18next';
 import i18nextHttpBackend from 'i18next-http-backend';
 
 import * as config from "@/js/config.js";
+import { GUI } from "@/js/gui.js";
 
 export const i18n = {};
 

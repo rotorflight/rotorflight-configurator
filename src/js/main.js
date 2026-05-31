@@ -4,6 +4,7 @@ import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import * as config from "@/js/config.js";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
+import { GUI } from "@/js/gui.js";
 import { handleConnectClick } from "@/js/serial_backend.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
 import { ReleaseChecker } from "@/js/release_checker.js";

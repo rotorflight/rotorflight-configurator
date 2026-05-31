@@ -1,5 +1,6 @@
 import { mount, unmount } from "svelte";
 
+import { GUI } from "@/js/gui.js";
 import Motors from "@/tabs/motors/Motors.svelte";
 import motorState from "@/tabs/motors/state.svelte.js";
 

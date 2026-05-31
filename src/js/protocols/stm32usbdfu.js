@@ -1,3 +1,5 @@
+import { GUI } from "@/js/gui.js";
+
 /*
     USB DFU uses:
     control transfers for communicating

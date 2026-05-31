@@ -4,7 +4,6 @@ import { mount } from "svelte";
 import * as configurator from "@/js/configurator.svelte.js";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
 import { FC } from "@/js/fc.svelte.js";
-import { GUI, GuiControl } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
 import * as main from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
@@ -34,7 +33,6 @@ Object.assign(globalThis, {
   ...serialBackend,
   ...utilsCommon,
   FC,
-  GUI,
   MSP,
   MSPCodes,
   i18n,

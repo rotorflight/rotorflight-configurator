@@ -8,6 +8,7 @@ import {
 } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import * as filesystem from "@/js/filesystem.js";
+import { GUI } from "@/js/gui.js";
 
 let sdcardTimer;
 

@@ -2,6 +2,8 @@ import PresetPanel from "@/js/presets/preset_panel.js";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
+import { GUI } from "@/js/gui.js";
+
 const optionGroupVsNameDelimiter = ":";
 
 /**

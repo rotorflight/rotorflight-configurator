@@ -1,3 +1,5 @@
+import { GUI } from "@/js/gui.js";
+
 const tab = {
     tabName: 'beepers',
     isDirty: false,

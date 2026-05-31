@@ -1,5 +1,6 @@
 import * as config from "@/js/config.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
+import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
 import { setDarkTheme } from "@/js/main.js";
 

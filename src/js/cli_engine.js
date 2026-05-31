@@ -1,3 +1,4 @@
+import { GUI } from "@/js/gui.js";
 import { reinitialiseConnection } from "@/js/serial_backend.js";
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";

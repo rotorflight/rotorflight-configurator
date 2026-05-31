@@ -1,4 +1,5 @@
 import * as config from '@/js/config.js';
+import { GUI } from "@/js/gui.js";
 import { serial } from "@/js/serial.js";
 
 const TIMEOUT_CHECK = 500 ; // With 250 it seems that it produces a memory leak and slowdown in some versions, reason unknown

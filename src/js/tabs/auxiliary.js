@@ -2,6 +2,7 @@ import * as noUiSlider from 'nouislider';
 import wNumb from 'wnumb';
 
 import * as config from '@/js/config.js';
+import { GUI } from "@/js/gui.js";
 import { bit_check } from "@/js/serial_backend.js";
 
 const tab = {

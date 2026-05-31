@@ -2,6 +2,7 @@ import * as noUiSlider from 'nouislider';
 import wNumb from 'wnumb';
 import semver from 'semver';
 import { API_VERSION_12_9 } from '../configurator.svelte.js';
+import { GUI } from "@/js/gui.js";
 
 const tab = {
     tabName: 'servos',

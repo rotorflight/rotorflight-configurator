@@ -1,6 +1,7 @@
 import semver from "semver";
 
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { GUI } from "@/js/gui.js";
 
 /**
  * Encapsulates the AutoComplete logic

@@ -1,3 +1,4 @@
+import { GUI } from "@/js/gui.js";
 import { windowWatcherUtil } from '@/js/utils/window_watchers.js';
 
 export const DarkTheme = {

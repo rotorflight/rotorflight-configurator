@@ -8,6 +8,7 @@
   import { i18n } from "@/js/i18n.js";
   import { FC } from "@/js/fc.svelte.js";
   import { Features } from "@/js/features.svelte.js";
+  import { GUI } from "@/js/gui.js";
   import { getTabHelpURL } from "@/js/help.js";
   import { DarkTheme } from "@/js/DarkTheme.js";
   import { bit_check } from "@/js/serial_backend.js";

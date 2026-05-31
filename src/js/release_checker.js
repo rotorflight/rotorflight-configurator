@@ -1,3 +1,5 @@
+import { GUI } from "@/js/gui.js";
+
 export const ReleaseChecker = function (releaseName, releaseUrl) {
     var self = this;
 

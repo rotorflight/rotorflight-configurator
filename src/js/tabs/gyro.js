@@ -1,5 +1,6 @@
 import { mount, unmount } from "svelte";
 
+import { GUI } from "@/js/gui.js";
 import Gyro from "@/tabs/gyro/Gyro.svelte";
 
 const tab = {
