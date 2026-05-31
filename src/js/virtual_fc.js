@@ -1,3 +1,4 @@
+import { Beepers } from "@/js/Beepers.js";
 import { FC } from "@/js/fc.svelte.js";
 
 export function applyVirtualConfig() {

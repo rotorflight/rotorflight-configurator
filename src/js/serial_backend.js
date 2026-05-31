@@ -1,5 +1,6 @@
 import semver from "semver";
 
+import { Beepers } from "@/js/Beepers.js";
 import * as config from "@/js/config.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
 import { applyVirtualConfig } from "@/js/virtual_fc.js";

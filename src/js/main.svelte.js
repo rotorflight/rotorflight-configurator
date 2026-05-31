@@ -1,7 +1,6 @@
 import "multiple-select";
 import { mount } from "svelte";
 
-import { Beepers } from "@/js/Beepers.js";
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
@@ -53,7 +52,6 @@ Object.assign(globalThis, {
   ...main,
   ...serialBackend,
   ...utilsCommon,
-  Beepers,
   CliAutoComplete,
   ConfigInserter,
   DarkTheme,
