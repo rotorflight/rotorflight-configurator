@@ -119,24 +119,11 @@ tab.initialize = function (callback) {
         });
 
         $('a.backupSettings').click(function () {
-            if ($(this).hasClass('disabled')) {
-                return;
-            }
-
-            configuration_backup(function () {
-                GUI.log(i18n.getMessage('initialSetupBackupSuccess'));
-            });
+            return;
         });
 
         $('a.restoreSettings').click(function () {
-            if ($(this).hasClass('disabled')) {
-                return;
-            }
-
-            configuration_restore(function () {
-                GUI.log(i18n.getMessage('initialSetupRestoreSuccess'));
-                GUI.tab_switch_reload();
-            });
+            return;
         });
 
         $('a.rebootMsc').click(function () {

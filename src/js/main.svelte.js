@@ -1,7 +1,6 @@
 import "multiple-select";
 import { mount } from "svelte";
 
-import * as backupRestore from "@/js/backup_restore.js";
 import * as configurator from "@/js/configurator.svelte.js";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
 import { FC } from "@/js/fc.svelte.js";
@@ -31,7 +30,6 @@ globalThis.GUI = new GuiControl();
 // TODO: Remove these items from the global namespace.
 // Import them directly where they are needed.
 Object.assign(globalThis, {
-  ...backupRestore,
   ...configurator,
   ...defaultHuffmanTree,
   ...main,
