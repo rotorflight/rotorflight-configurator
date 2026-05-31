@@ -4,6 +4,7 @@ import wNumb from 'wnumb';
 import * as config from '@/js/config.js';
 import { GUI } from "@/js/gui.js";
 import { bit_check } from "@/js/serial_backend.js";
+import { getTextWidth } from "@/js/utils/common.js";
 
 const tab = {
     tabName: 'auxiliary',
