@@ -10,6 +10,7 @@ import { ReleaseChecker } from '@/js/release_checker.js';
 import { manufacturers } from "@/js/manufacturers.js";
 import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { STM32 } from "@/js/protocols/stm32.js";
+import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
 
 async function getCachedUnifiedTargets() {
   const { unifiedSourceCache } = await new Promise((resolve) => chrome.storage.local.get("unifiedSourceCache", resolve));
