@@ -1,7 +1,6 @@
 import "multiple-select";
 import { mount } from "svelte";
 
-import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import * as backupRestore from "@/js/backup_restore.js";
 import * as configurator from "@/js/configurator.svelte.js";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
@@ -40,7 +39,6 @@ Object.assign(globalThis, {
   ...main,
   ...serialBackend,
   ...utilsCommon,
-  CliAutoComplete,
   FC,
   MSP,
   MSPCodes,

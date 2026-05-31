@@ -1,3 +1,4 @@
+import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import * as clipboard from "@/js/clipboard.js";
 import * as filesystem from '@/js/filesystem.js';
 import CliEngine from '@/js/cli_engine.js';
