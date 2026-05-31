@@ -2,6 +2,8 @@ import * as noUiSlider from 'nouislider';
 import semver from 'semver';
 import wNumb from 'wnumb';
 
+import { Mixer } from "@/js/Mixer.js";
+
 const tab = {
     tabName: 'mixer',
     isDirty: false,

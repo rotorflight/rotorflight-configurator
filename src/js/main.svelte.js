@@ -2,7 +2,6 @@ import "multiple-select";
 import { mount } from "svelte";
 
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
-import { Mixer } from "@/js/Mixer.js";
 import * as backupRestore from "@/js/backup_restore.js";
 import * as configurator from "@/js/configurator.svelte.js";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
@@ -47,7 +46,6 @@ Object.assign(globalThis, {
   FC,
   MSP,
   MSPCodes,
-  Mixer,
   MspHelper,
   STM32,
   STM32DFU,
