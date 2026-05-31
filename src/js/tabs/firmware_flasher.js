@@ -625,7 +625,7 @@ tab.initialize = function (callback) {
                                 console.log(`Fetching ${targetSpec.download_url}`);
                                 const res = await fetch(targetSpec.download_url);
                                 if (!res.ok) {
-                                  throw new Error(`HTTP ${r.status}`);
+                                  throw new Error(`HTTP ${res.status}`);
                                 }
                                 let config = await res.text();
 
