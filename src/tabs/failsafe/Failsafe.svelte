@@ -7,6 +7,7 @@
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
   import { getTabHelpURL } from "@/js/help.js";
+  import { MSP } from "@/js/msp.svelte.js";
   import { reinitialiseConnection } from "@/js/serial_backend";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
 

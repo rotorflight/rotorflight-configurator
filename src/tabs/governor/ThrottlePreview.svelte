@@ -5,6 +5,7 @@
   import { onMount, onDestroy } from "svelte";
 
   import { FC } from "@/js/fc.svelte.js";
+  import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { RC_COMMAND } from "@/tabs/receiver/rc_command.svelte.js";
 

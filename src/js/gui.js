@@ -3,6 +3,7 @@ import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { getTabHelpURL } from "@/js/help.js";
 import { i18n } from "@/js/localization.js";
 import { showTabExitDialog } from "@/js/main.js";
+import { MSP } from "@/js/msp.svelte.js";
 
 const GUI_MODES = {
     NWJS: "NW.js",

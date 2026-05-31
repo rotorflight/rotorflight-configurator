@@ -6,6 +6,7 @@ import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
+import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
 import { PortHandler } from "@/js/port_handler.js";

@@ -10,6 +10,7 @@ import { FC } from "@/js/fc.svelte.js";
 import * as filesystem from "@/js/filesystem.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
+import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
 
 let sdcardTimer;
