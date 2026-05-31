@@ -2,6 +2,7 @@ import semver from "semver";
 
 import * as config from "@/js/config.js";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { DarkTheme } from "@/js/DarkTheme.js";
 import { handleConnectClick } from "@/js/serial_backend.js";
 
 globalThis.TABS = {};
