@@ -1,4 +1,5 @@
 import * as config from "@/js/config.js";
+import { cordovaChromeapi } from "@/js/cordova_chromeapi.js";
 import { appReady } from "@/js/main.js";
 
 export const cordovaUI = {
