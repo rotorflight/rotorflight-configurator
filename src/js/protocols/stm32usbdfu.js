@@ -680,7 +680,7 @@ STM32DFU_protocol.prototype.upload_procedure = function (step) {
                 // the following should fail if read protection is active
                 self.controlTransfer('in', self.request.UPLOAD, 2, 0, self.chipInfo.option_bytes.total_size, 0, function (ob_data, errcode) {
                 if(errcode) {
-                    console.log('USB transfer error while reading option bytes: ' + errcode1);
+                    console.log('USB transfer error while reading option bytes: ' + errcode);
                     self.cleanup();
                     return;
                 }
