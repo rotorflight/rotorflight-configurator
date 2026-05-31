@@ -13,7 +13,6 @@ import * as main from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes";
 import { MspHelper } from "@/js/msp/MSPHelper.js";
-import { STM32 } from "@/js/protocols/stm32.js";
 import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
 import { serial } from "@/js/serial.js";
 import * as serialBackend from "@/js/serial_backend.js";
@@ -47,7 +46,6 @@ Object.assign(globalThis, {
   MSP,
   MSPCodes,
   MspHelper,
-  STM32,
   STM32DFU,
   getTabHelpURL,
   i18n,
