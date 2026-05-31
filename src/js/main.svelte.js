@@ -10,7 +10,6 @@ import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GuiControl } from "@/js/gui.js";
 import { getTabHelpURL } from "@/js/help.js";
-import { huffmanDecodeBuf } from "@/js/huffman.js";
 import { i18n } from "@/js/localization.js";
 import * as main from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
@@ -62,7 +61,6 @@ Object.assign(globalThis, {
   STM32DFU,
   UI_PHONES,
   getTabHelpURL,
-  huffmanDecodeBuf,
   i18n,
   portUsage,
   serial,
