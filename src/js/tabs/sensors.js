@@ -4,6 +4,7 @@ import * as config from "@/js/config.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { serial } from "@/js/serial.js";
 
 const tab = {

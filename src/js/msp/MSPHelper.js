@@ -12,6 +12,8 @@ import { i18n } from "@/js/localization.js";
 import { serial } from "@/js/serial.js";
 import { bit_check, bit_set } from "@/js/serial_backend.js";
 
+import { MSPCodes } from "./MSPCodes.js";
+
 // Used for LED_STRIP
 const ledDirectionLetters    = ['n', 'e', 's', 'w', 'u', 'd'];      // in LSB bit order
 const ledBaseFunctionLetters = ['c', 'f', 'a', 'l', 's', 'g', 'r']; // in LSB bit

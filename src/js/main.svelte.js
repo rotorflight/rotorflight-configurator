@@ -4,7 +4,6 @@ import { mount } from "svelte";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
 import * as main from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
-import { MSPCodes } from "@/js/msp/MSPCodes";
 import { serial } from "@/js/serial.js";
 import * as serialBackend from "@/js/serial_backend.js";
 import * as utilsCommon from "@/js/utils/common.js";
@@ -29,7 +28,6 @@ Object.assign(globalThis, {
   ...serialBackend,
   ...utilsCommon,
   MSP,
-  MSPCodes,
 });
 
 mount(BatteryLegend, { target: document.querySelector("#battery-legend") });

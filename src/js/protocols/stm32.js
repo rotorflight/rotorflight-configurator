@@ -1,6 +1,7 @@
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { MSPConnectorImpl } from '@/js/msp/MSPConnector.js';
 import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { portUsage } from "@/js/port_usage.svelte.js";

@@ -2,6 +2,7 @@ import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { MspHelper } from "@/js/msp/MSPHelper.js";
 import { serial } from "@/js/serial.js";
 

@@ -10,6 +10,7 @@ import { FirmwareCache } from "@/js/FirmwareCache.js";
 import * as github from '@/js/GitHubApi.js';
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { ReleaseChecker } from '@/js/release_checker.js';
 import { manufacturers } from "@/js/manufacturers.js";
 import { MspHelper } from "@/js/msp/MSPHelper.js";
