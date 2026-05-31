@@ -7,6 +7,7 @@ import { i18n } from "@/js/localization.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { serial } from "@/js/serial.js";
+import { have_sensor } from "@/js/serial_backend";
 
 const tab = {
     tabName: 'sensors',
