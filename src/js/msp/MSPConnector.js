@@ -1,3 +1,5 @@
+import { serial } from "@/js/serial.js";
+
 export const MSPConnectorImpl = function () {
     this.baud = undefined;
     this.port = undefined;

@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 
 import * as config from "@/js/config.js";
+import { serial } from "@/js/serial.js";
 
 const tab = {
     tabName: 'sensors',

@@ -1,3 +1,5 @@
+import { serial } from "@/js/serial.js";
+
 let packet_error = $state(0);
 
 export const MSP = {

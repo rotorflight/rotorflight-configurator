@@ -7,6 +7,7 @@ import { DarkTheme } from "@/js/DarkTheme.js";
 import { handleConnectClick } from "@/js/serial_backend.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
 import { ReleaseChecker } from "@/js/release_checker.js";
+import { serial } from "@/js/serial.js";
 
 globalThis.TABS = {};
 

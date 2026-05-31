@@ -45,7 +45,6 @@ Object.assign(globalThis, {
   MspHelper,
   getTabHelpURL,
   i18n,
-  serial,
 });
 
 mount(BatteryLegend, { target: document.querySelector("#battery-legend") });
