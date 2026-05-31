@@ -12,6 +12,7 @@ export default [
         ...globals.jquery,
 
         chrome: "readonly",
+        cordova: "readonly",
 
         // TODO: remove these globals after they're removed from vite defines
         __APP_VERSION__: "readonly",
