@@ -4,6 +4,7 @@ import semver from "semver";
 import * as config from '@/js/config.js';
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
+import { FC } from "@/js/fc.svelte.js";
 import { readTextFile, writeTextFile } from '@/js/filesystem.js';
 import { FirmwareCache } from "@/js/FirmwareCache.js";
 import * as github from '@/js/GitHubApi.js';

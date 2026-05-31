@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
+import { FC } from "@/js/fc.svelte.js";
+
 // 3D model
 export const Model = function (wrapper, canvas) {
     const clockwise = FC.MIXER_CONFIG.main_rotor_dir === 0;

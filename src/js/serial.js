@@ -1,4 +1,5 @@
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
 

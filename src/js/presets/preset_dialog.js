@@ -2,6 +2,7 @@ import PresetPanel from "@/js/presets/preset_panel.js";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
+import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
 

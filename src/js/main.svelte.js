@@ -2,7 +2,6 @@ import "multiple-select";
 import { mount } from "svelte";
 
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
-import { FC } from "@/js/fc.svelte.js";
 import * as main from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes";
@@ -29,7 +28,6 @@ Object.assign(globalThis, {
   ...main,
   ...serialBackend,
   ...utilsCommon,
-  FC,
   MSP,
   MSPCodes,
 });

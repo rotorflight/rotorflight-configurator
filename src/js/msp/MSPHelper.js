@@ -6,6 +6,7 @@ import {
     API_VERSION_12_9,
     CONFIGURATOR,
 } from "@/js/configurator.svelte.js";
+import { FC } from "@/js/fc.svelte.js";
 import { huffmanDecodeBuf } from "@/js/huffman.js";
 import { i18n } from "@/js/localization.js";
 import { serial } from "@/js/serial.js";
