@@ -4,7 +4,6 @@ import { mount } from "svelte";
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
-import { Features } from "@/js/features.svelte.js";
 import { FirmwareCache } from "@/js/FirmwareCache.js";
 import { Mixer } from "@/js/Mixer.js";
 import * as backupRestore from "@/js/backup_restore.js";
@@ -56,7 +55,6 @@ Object.assign(globalThis, {
   ConfigInserter,
   DarkTheme,
   FC,
-  Features,
   FirmwareCache,
   MSP,
   MSPCodes,

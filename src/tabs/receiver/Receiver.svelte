@@ -6,7 +6,7 @@
 
   import { i18n } from "@/js/i18n.js";
   import { FC } from "@/js/fc.svelte.js";
-  import { Features } from "@/js/features.svelte";
+  import { Features } from "@/js/features.svelte.js";
   import { DarkTheme } from "@/js/DarkTheme.js";
   import { windowWatcherUtil } from "@/js/utils/window_watchers.js";
 
