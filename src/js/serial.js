@@ -339,7 +339,7 @@ export const serial = {
                             counter++;
                         }
 
-                        console.log(`${self.connectionType}: send buffer overflowing, dropped: ${counter} ${entries}`);
+                        console.log(`${self.connectionType}: send buffer overflowing, dropped: ${counter}`);
                     }
 
                     _send();
