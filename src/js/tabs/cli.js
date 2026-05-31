@@ -1,6 +1,7 @@
 import * as clipboard from "@/js/clipboard.js";
 import * as filesystem from '@/js/filesystem.js';
 import CliEngine from '@/js/cli_engine.js';
+import { UI_PHONES } from "@/js/phones_ui.js";
 
 const tab = {
     tabName: 'cli',

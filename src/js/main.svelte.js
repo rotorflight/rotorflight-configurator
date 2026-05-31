@@ -15,7 +15,6 @@ import * as main from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes";
 import { MspHelper } from "@/js/msp/MSPHelper.js";
-import { UI_PHONES } from "@/js/phones_ui.js";
 import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
 import { STM32 } from "@/js/protocols/stm32.js";
@@ -59,7 +58,6 @@ Object.assign(globalThis, {
   ReleaseChecker,
   STM32,
   STM32DFU,
-  UI_PHONES,
   getTabHelpURL,
   i18n,
   portUsage,

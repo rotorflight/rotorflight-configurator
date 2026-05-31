@@ -6,6 +6,7 @@
 import CliEngine from "@/js/cli_engine.js";
 import * as config from "@/js/config.js";
 import * as filesystem from "@/js/filesystem.js";
+import { UI_PHONES } from "@/js/phones_ui.js";
 import PresetInstance from "@/js/presets/source/preset_instance.js";
 import PresetDialog from "@/js/presets/preset_dialog.js";
 import PresetPanel from "@/js/presets/preset_panel.js";
