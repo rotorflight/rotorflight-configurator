@@ -70,6 +70,7 @@ export default defineConfig({
     },
   },
   define: {
+    // TODO: Move these defines to import.meta.env
     __APP_VERSION__: JSON.stringify(pkg.version),
     __BACKEND__: JSON.stringify("nwjs"),
     __COMMIT_HASH__: JSON.stringify(commitHash),

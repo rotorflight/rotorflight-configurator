@@ -6,7 +6,16 @@ import pluginSvelte from "eslint-plugin-svelte";
 export default [
   {
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node, ...globals.jquery },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        ...globals.jquery,
+
+        // TODO: remove these globals after they're removed from vite defines
+        __APP_VERSION__: "readonly",
+        __BACKEND__: "readonly",
+        __COMMIT_HASH__: "readonly",
+      },
     },
   },
   pluginJs.configs.recommended,
