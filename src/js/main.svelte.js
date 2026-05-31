@@ -1,9 +1,8 @@
 import "multiple-select";
 import { mount } from "svelte";
 
-import { serial } from "@/js/serial.js";
-
 import "@/js/injected_methods.js";
+import { serial } from "@/js/serial.js";
 import "@/js/tabs/index.js";
 
 import "multiple-select/dist/multiple-select.css";
