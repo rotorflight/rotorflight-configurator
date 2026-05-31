@@ -21,6 +21,8 @@ import { STM32 } from "@/js/protocols/stm32.js";
 import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
 import { serial } from "@/js/serial.js";
 
+import { TABS } from "./tabs.js";
+
 async function getCachedUnifiedTargets() {
   const { unifiedSourceCache } = await new Promise((resolve) => chrome.storage.local.get("unifiedSourceCache", resolve));
 

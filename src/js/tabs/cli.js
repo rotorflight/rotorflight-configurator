@@ -8,6 +8,8 @@ import { i18n } from "@/js/localization.js";
 import { generateFilename } from "@/js/main.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
 
+import { TABS } from "./tabs.js";
+
 const tab = {
     tabName: 'cli',
     cliEngine: null,

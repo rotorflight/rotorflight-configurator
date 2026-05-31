@@ -1,5 +1,6 @@
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
+import { TABS } from "@/js/tabs/tabs.js";
 import { checkChromeRuntimeError } from "@/js/utils/common.js";
 
 /*

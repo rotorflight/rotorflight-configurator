@@ -10,6 +10,8 @@ import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { bit_check } from "@/js/serial_backend.js";
 import { getTextWidth } from "@/js/utils/common.js";
 
+import { TABS } from "./tabs.js";
+
 const tab = {
     tabName: 'auxiliary',
     isDirty: false,

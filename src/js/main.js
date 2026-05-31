@@ -12,8 +12,7 @@ import { UI_PHONES } from "@/js/phones_ui.js";
 import { ReleaseChecker } from "@/js/release_checker.js";
 import { serial } from "@/js/serial.js";
 import { initializeSerialBackend } from "@/js/serial_backend.js";
-
-globalThis.TABS = {};
+import { TABS } from "@/js/tabs/tabs.js";
 
 if (__BACKEND__ === "nwjs") {
     if (import.meta.env.DEV) {

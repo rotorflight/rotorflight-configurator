@@ -31,6 +31,7 @@
 !/src/js/tabs/options.js
 !/src/js/tabs/presets.js
 !/src/js/tabs/receiver.js
+!/src/js/tabs/tabs.js
 !/src/js/virtual_fc.js
 !/src/tabs/governor/**/*.js
 !/src/tabs/gyro/filter_config.js

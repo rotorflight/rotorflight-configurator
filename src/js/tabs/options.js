@@ -4,6 +4,8 @@ import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
 import { checkForConfiguratorUpdates, setDarkTheme } from "@/js/main.js";
 
+import { TABS } from "./tabs.js";
+
 const tab = {
   tabName: "options",
 

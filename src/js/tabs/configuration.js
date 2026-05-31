@@ -12,6 +12,8 @@ import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { reinitialiseConnection } from "@/js/serial_backend.js";
 
+import { TABS } from "./tabs.js";
+
 const tab = {
     tabName: 'configuration',
     isDirty: false,

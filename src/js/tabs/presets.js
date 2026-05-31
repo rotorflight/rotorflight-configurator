@@ -20,6 +20,8 @@ import { FC } from "@/js/fc.svelte.js";
 import { mount, unmount } from "svelte";
 import SelectedPresetReviewDialog from "@/tabs/presets/selected_preset_review_dialog.svelte";
 
+import { TABS } from "./tabs.js";
+
 const COMMAND_DIFF_ALL = "diff all";
 const COMMAND_DUMP_ALL = "dump all";
 

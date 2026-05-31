@@ -15,6 +15,8 @@ import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { RateCurve } from "@/js/RateCurve.js";
 import { degToRad } from "@/js/utils/common.js";
 
+import { TABS } from "./tabs.js";
+
 function drawStickPosition(context, color, rcPos, value, maxValue) {
   const DEFAULT_SIZE = 60; // canvas units, relative size of the stick indicator (larger value is smaller indicator)
   const rateScaling  = (context.canvas.height / 2) / maxValue;

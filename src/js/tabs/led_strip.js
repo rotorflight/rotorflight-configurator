@@ -4,6 +4,8 @@ import { i18n } from "@/js/localization.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
 
+import { TABS } from "./tabs.js";
+
 const tab = {
     tabName: 'led_strip',
     isDirty: false,

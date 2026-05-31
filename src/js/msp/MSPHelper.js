@@ -14,6 +14,7 @@ import { showErrorDialog, updateTabList } from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { serial } from "@/js/serial.js";
 import { bit_check, bit_set, sensor_status, update_dataflash_global } from "@/js/serial_backend.js";
+import { TABS } from "@/js/tabs/tabs.js";
 
 import { MSPCodes } from "./MSPCodes.js";
 

@@ -4,6 +4,8 @@ import { GUI } from "@/js/gui.js";
 import Motors from "@/tabs/motors/Motors.svelte";
 import motorState from "@/tabs/motors/state.svelte.js";
 
+import { TABS } from "./tabs.js";
+
 const tab = {
   tabName: "motors",
   svelteComponent: null,

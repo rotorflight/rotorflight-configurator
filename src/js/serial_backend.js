@@ -14,6 +14,7 @@ import { UI_PHONES } from "@/js/phones_ui.js";
 import { PortHandler } from "@/js/port_handler.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
 import { serial } from "@/js/serial.js";
+import { TABS } from "@/js/tabs/tabs.js";
 import { applyVirtualConfig } from "@/js/virtual_fc.js";
 
 export async function handleConnectClick() {

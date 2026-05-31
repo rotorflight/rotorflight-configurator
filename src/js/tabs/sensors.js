@@ -9,6 +9,8 @@ import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { serial } from "@/js/serial.js";
 import { have_sensor } from "@/js/serial_backend";
 
+import { TABS } from "./tabs.js";
+
 const tab = {
     tabName: 'sensors',
     armingEnabled: true,
