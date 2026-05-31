@@ -1,10 +1,7 @@
 import "multiple-select";
 import { mount } from "svelte";
 
-import * as main from "@/js/main.js";
 import { serial } from "@/js/serial.js";
-import * as serialBackend from "@/js/serial_backend.js";
-import * as utilsCommon from "@/js/utils/common.js";
 
 import "@/js/injected_methods.js";
 import "@/js/tabs/index.js";
@@ -17,14 +14,6 @@ import "@/css/app.css";
 import BatteryLegend from "@/components/BatteryLegend.svelte";
 import Logo from "@/components/Logo.svelte";
 import StatusBar from "@/components/StatusBar.svelte";
-
-// TODO: Remove these items from the global namespace.
-// Import them directly where they are needed.
-Object.assign(globalThis, {
-  ...main,
-  ...serialBackend,
-  ...utilsCommon,
-});
 
 mount(BatteryLegend, { target: document.querySelector("#battery-legend") });
 mount(StatusBar, { target: document.querySelector("#status-bar") });
