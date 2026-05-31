@@ -1,4 +1,5 @@
 import * as config from '@/js/config.js';
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { getTabHelpURL } from "@/js/help.js";
 
 const GUI_MODES = {

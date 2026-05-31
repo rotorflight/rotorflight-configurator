@@ -1,3 +1,4 @@
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { serial } from "@/js/serial.js";
 
 let packet_error = $state(0);

@@ -1,5 +1,6 @@
 import semver from "semver";
 
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { Beepers } from "@/js/Beepers.js";
 import { Features } from "@/js/features.svelte.js";
 

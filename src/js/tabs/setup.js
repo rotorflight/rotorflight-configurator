@@ -1,3 +1,5 @@
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+
 const tab = {
     tabName: 'setup',
 };

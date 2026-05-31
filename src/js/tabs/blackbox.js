@@ -4,6 +4,7 @@ import {
     API_VERSION_12_7,
     API_VERSION_12_8,
     API_VERSION_12_9,
+    CONFIGURATOR,
 } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import * as filesystem from "@/js/filesystem.js";

@@ -1,3 +1,4 @@
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { MspHelper } from "@/js/msp/MSPHelper.js";
 import { serial } from "@/js/serial.js";
 

@@ -2,6 +2,7 @@ import * as marked from 'marked';
 import semver from "semver";
 
 import * as config from '@/js/config.js';
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
 import { readTextFile, writeTextFile } from '@/js/filesystem.js';
 import { FirmwareCache } from "@/js/FirmwareCache.js";

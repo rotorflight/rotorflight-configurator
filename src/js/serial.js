@@ -1,3 +1,5 @@
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+
 export const serial = {
     connected:      false,
     connectionId:   false,
