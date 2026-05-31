@@ -4,7 +4,7 @@ import { mount } from "svelte";
 import * as configurator from "@/js/configurator.svelte.js";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
 import { FC } from "@/js/fc.svelte.js";
-import { GuiControl } from "@/js/gui.js";
+import { GUI, GuiControl } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
 import * as main from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
@@ -25,8 +25,6 @@ import BatteryLegend from "@/components/BatteryLegend.svelte";
 import Logo from "@/components/Logo.svelte";
 import StatusBar from "@/components/StatusBar.svelte";
 
-globalThis.GUI = new GuiControl();
-
 // TODO: Remove these items from the global namespace.
 // Import them directly where they are needed.
 Object.assign(globalThis, {
@@ -36,6 +34,7 @@ Object.assign(globalThis, {
   ...serialBackend,
   ...utilsCommon,
   FC,
+  GUI,
   MSP,
   MSPCodes,
   i18n,

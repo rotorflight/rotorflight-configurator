@@ -476,3 +476,5 @@ GuiControl.prototype.addLinksTargetBlank = function (element) {
         $(this).attr('target', '_blank');
     });
 };
+
+export const GUI = new GuiControl();
