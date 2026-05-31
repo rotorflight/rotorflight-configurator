@@ -1,4 +1,6 @@
 <script>
+  import { bit_check, bit_clear, bit_set } from "@/js/serial_backend.js";
+
   import Switch from "@/components/Switch.svelte";
   import Field from "@/components/Field.svelte";
 

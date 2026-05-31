@@ -1,3 +1,5 @@
+import { bit_check, bit_clear, bit_set } from "@/js/serial_backend.js";
+
 export class Beepers {
     constructor(config, supportedConditions) {
         const self = this;
