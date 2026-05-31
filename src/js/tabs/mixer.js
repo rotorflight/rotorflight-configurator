@@ -4,6 +4,7 @@ import wNumb from 'wnumb';
 
 import { API_VERSION_12_8 } from "@/js/configurator.svelte.js";
 import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
 import { Mixer } from "@/js/Mixer.js";
 
 const tab = {

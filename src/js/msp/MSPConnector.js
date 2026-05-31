@@ -1,5 +1,6 @@
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
 import { MspHelper } from "@/js/msp/MSPHelper.js";
 import { serial } from "@/js/serial.js";
 

@@ -3,6 +3,7 @@ import wNumb from 'wnumb';
 
 import * as config from '@/js/config.js';
 import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
 import { bit_check } from "@/js/serial_backend.js";
 import { getTextWidth } from "@/js/utils/common.js";
 

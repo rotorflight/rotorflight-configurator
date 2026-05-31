@@ -1,4 +1,5 @@
 import * as config from "@/js/config.js";
+import { i18n } from "@/js/localization.js";
 import { Source, Metadata } from "@/js/presets/source/source.js";
 
 // PresetsSources contains the sources for presets and the corresponding dialog

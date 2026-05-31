@@ -4,6 +4,7 @@ import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import * as filesystem from '@/js/filesystem.js';
 import CliEngine from '@/js/cli_engine.js';
 import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
 
 const tab = {

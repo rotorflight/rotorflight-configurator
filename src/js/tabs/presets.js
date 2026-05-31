@@ -8,6 +8,7 @@ import * as config from "@/js/config.js";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import * as filesystem from "@/js/filesystem.js";
 import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
 import PresetInstance from "@/js/presets/source/preset_instance.js";
 import PresetDialog from "@/js/presets/preset_dialog.js";

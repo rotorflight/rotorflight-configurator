@@ -3,6 +3,7 @@ import wNumb from 'wnumb';
 import semver from 'semver';
 import { API_VERSION_12_9 } from '../configurator.svelte.js';
 import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
 
 const tab = {
     tabName: 'servos',

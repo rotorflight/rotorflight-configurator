@@ -3,7 +3,6 @@ import { mount } from "svelte";
 
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
 import { FC } from "@/js/fc.svelte.js";
-import { i18n } from "@/js/localization.js";
 import * as main from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes";
@@ -33,7 +32,6 @@ Object.assign(globalThis, {
   FC,
   MSP,
   MSPCodes,
-  i18n,
 });
 
 mount(BatteryLegend, { target: document.querySelector("#battery-legend") });
