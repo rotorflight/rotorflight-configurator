@@ -1,6 +1,6 @@
 import semver from "semver";
 
-import { API_VERSION_12_7, API_VERSION_12_9 } from "@/js/configurator.svelte";
+import { API_VERSION_12_7, API_VERSION_12_9 } from "@/js/configurator.svelte.js";
 import { Features } from "@/js/features.svelte.js";
 import * as flightStats from "@/js/flight-stats.js";
 import { getIntegerValue } from "@/js/main.js";

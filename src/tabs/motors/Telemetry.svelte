@@ -3,7 +3,10 @@
   import { slide } from "svelte/transition";
 
   import { FC } from "@/js/fc.svelte.js";
-  import { API_VERSION_12_7, API_VERSION_12_8 } from "@/js/configurator.svelte";
+  import {
+    API_VERSION_12_7,
+    API_VERSION_12_8,
+  } from "@/js/configurator.svelte.js";
 
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
