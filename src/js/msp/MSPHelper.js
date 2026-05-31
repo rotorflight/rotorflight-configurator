@@ -10,6 +10,7 @@ import { defaultHuffmanTree, defaultHuffmanLenIndex } from "@/js/default_huffman
 import { FC } from "@/js/fc.svelte.js";
 import { huffmanDecodeBuf } from "@/js/huffman.js";
 import { i18n } from "@/js/localization.js";
+import { updateTabList } from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { serial } from "@/js/serial.js";
 import { bit_check, bit_set, sensor_status } from "@/js/serial_backend.js";

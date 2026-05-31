@@ -6,7 +6,7 @@ import { Features } from "@/js/features.svelte.js";
 import * as flightStats from "@/js/flight-stats.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
-import { getIntegerValue } from "@/js/main.js";
+import { getIntegerValue, updateTabList } from "@/js/main.js";
 import { Model } from "@/js/model.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
