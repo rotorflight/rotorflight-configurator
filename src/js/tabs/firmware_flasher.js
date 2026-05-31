@@ -7,6 +7,7 @@ import { FirmwareCache } from "@/js/FirmwareCache.js";
 import * as github from '@/js/GitHubApi.js';
 import { ReleaseChecker } from '@/js/release_checker.js';
 import { manufacturers } from "@/js/manufacturers.js";
+import { PortHandler, usbDevices } from "@/js/port_handler.js";
 
 async function getCachedUnifiedTargets() {
   const { unifiedSourceCache } = await new Promise((resolve) => chrome.storage.local.get("unifiedSourceCache", resolve));

@@ -15,7 +15,6 @@ import * as main from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes";
 import { MspHelper } from "@/js/msp/MSPHelper.js";
-import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
 import { STM32 } from "@/js/protocols/stm32.js";
 import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
@@ -54,7 +53,6 @@ Object.assign(globalThis, {
   MSPCodes,
   Mixer,
   MspHelper,
-  PortHandler,
   ReleaseChecker,
   STM32,
   STM32DFU,
@@ -62,7 +60,6 @@ Object.assign(globalThis, {
   i18n,
   portUsage,
   serial,
-  usbDevices,
 });
 
 mount(BatteryLegend, { target: document.querySelector("#battery-legend") });

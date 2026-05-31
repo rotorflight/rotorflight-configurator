@@ -1,4 +1,5 @@
 import { MSPConnectorImpl } from '@/js/msp/MSPConnector.js';
+import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
 
 /*

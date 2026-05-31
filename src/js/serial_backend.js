@@ -3,6 +3,7 @@ import semver from "semver";
 import { Beepers } from "@/js/Beepers.js";
 import * as config from "@/js/config.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
+import { PortHandler } from "@/js/port_handler.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
 import { applyVirtualConfig } from "@/js/virtual_fc.js";
 
