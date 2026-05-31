@@ -1,4 +1,5 @@
 import * as config from "@/js/config.js";
+import { appReady } from "@/js/main.js";
 
 export const cordovaUI = {
     uiZoom: 1,
