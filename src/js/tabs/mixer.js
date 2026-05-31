@@ -9,6 +9,7 @@ import { i18n } from "@/js/localization.js";
 import { Mixer } from "@/js/Mixer.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { reinitialiseConnection } from "@/js/serial_backend";
 
 const tab = {
     tabName: 'mixer',

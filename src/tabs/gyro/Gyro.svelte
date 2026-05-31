@@ -11,6 +11,7 @@
   import { getTabHelpURL } from "@/js/help";
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
+  import { reinitialiseConnection } from "@/js/serial_backend";
 
   import CustomNotches from "./CustomNotches.svelte";
   import DynamicFilter from "./DynamicFilter.svelte";
