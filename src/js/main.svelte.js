@@ -17,7 +17,6 @@ import { MspHelper } from "@/js/msp/MSPHelper.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
 import { STM32 } from "@/js/protocols/stm32.js";
 import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
-import { ReleaseChecker } from "@/js/release_checker.js";
 import { serial } from "@/js/serial.js";
 import * as serialBackend from "@/js/serial_backend.js";
 import * as utilsCommon from "@/js/utils/common.js";
@@ -51,7 +50,6 @@ Object.assign(globalThis, {
   MSPCodes,
   Mixer,
   MspHelper,
-  ReleaseChecker,
   STM32,
   STM32DFU,
   getTabHelpURL,
