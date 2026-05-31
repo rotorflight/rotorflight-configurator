@@ -14,7 +14,6 @@ import * as main from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes";
 import { MspHelper } from "@/js/msp/MSPHelper.js";
-import { portUsage } from "@/js/port_usage.svelte.js";
 import { STM32 } from "@/js/protocols/stm32.js";
 import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
 import { serial } from "@/js/serial.js";
@@ -54,7 +53,6 @@ Object.assign(globalThis, {
   STM32DFU,
   getTabHelpURL,
   i18n,
-  portUsage,
   serial,
 });
 
