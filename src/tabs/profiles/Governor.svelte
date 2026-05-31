@@ -4,6 +4,7 @@
   import { onMount } from "svelte";
 
   import { FC } from "@/js/fc.svelte.js";
+  import { bit_check, bit_clear, bit_set } from "@/js/serial_backend.js";
 
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";

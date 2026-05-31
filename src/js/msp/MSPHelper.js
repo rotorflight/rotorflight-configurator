@@ -8,6 +8,7 @@ import {
 } from "@/js/configurator.svelte.js";
 import { huffmanDecodeBuf } from "@/js/huffman.js";
 import { serial } from "@/js/serial.js";
+import { bit_check, bit_set } from "@/js/serial_backend.js";
 
 // Used for LED_STRIP
 const ledDirectionLetters    = ['n', 'e', 's', 'w', 'u', 'd'];      // in LSB bit order

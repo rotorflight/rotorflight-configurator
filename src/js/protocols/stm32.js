@@ -3,6 +3,7 @@ import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
 import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
 import { serial } from "@/js/serial.js";
+import { bit_check } from "@/js/serial_backend.js";
 
 /*
     STM32 F103 serial bus seems to properly initialize with quite a huge auto-baud range

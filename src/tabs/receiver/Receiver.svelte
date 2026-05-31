@@ -10,6 +10,7 @@
   import { Features } from "@/js/features.svelte.js";
   import { getTabHelpURL } from "@/js/help.js";
   import { DarkTheme } from "@/js/DarkTheme.js";
+  import { bit_check } from "@/js/serial_backend.js";
   import { windowWatcherUtil } from "@/js/utils/window_watchers.js";
 
   import ModelPreview from "./ModelPreview.svelte";

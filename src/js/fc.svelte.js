@@ -1,4 +1,5 @@
 import { Features } from "./features.svelte.js";
+import { bit_check } from "@/js/serial_backend.js";
 
 class FlightController {
   ADJUSTMENT_RANGES = $state();
