@@ -3,7 +3,6 @@ import { mount } from "svelte";
 
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
-import { FirmwareCache } from "@/js/FirmwareCache.js";
 import { Mixer } from "@/js/Mixer.js";
 import * as backupRestore from "@/js/backup_restore.js";
 import * as configurator from "@/js/configurator.svelte.js";
@@ -53,7 +52,6 @@ Object.assign(globalThis, {
   CliAutoComplete,
   ConfigInserter,
   FC,
-  FirmwareCache,
   MSP,
   MSPCodes,
   Mixer,

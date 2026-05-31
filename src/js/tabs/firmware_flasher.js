@@ -3,6 +3,7 @@ import semver from "semver";
 
 import * as config from '@/js/config.js';
 import { readTextFile, writeTextFile } from '@/js/filesystem.js';
+import { FirmwareCache } from "@/js/FirmwareCache.js";
 import * as github from '@/js/GitHubApi.js';
 import { ReleaseChecker } from '@/js/release_checker.js';
 import { manufacturers } from "@/js/manufacturers.js";
