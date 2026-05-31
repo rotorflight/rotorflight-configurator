@@ -23,9 +23,7 @@ export default [
         },
       ],
 
-      // TODO: The codebase makes extensive use of globals. This rule should be
-      // enabled and remaining globals explicitly defined.
-      "no-undef": "off",
+      "no-undef": "error",
     },
   },
 ];
