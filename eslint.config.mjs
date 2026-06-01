@@ -12,6 +12,7 @@ export default [
         ...globals.jquery,
 
         chrome: "readonly",
+        nw: "readonly",
         cordova: "readonly",
         cordova_serial: "readonly",
 

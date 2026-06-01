@@ -68,7 +68,7 @@ export const GuiControl = function () {
 
     // Check the method of execution
     if (__BACKEND__ === "nwjs") {
-        this.nwGui = globalThis.nw;
+        this.nwGui = nw;
         this.Mode = GUI_MODES.NWJS;
     }
 

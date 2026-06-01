@@ -18,7 +18,7 @@ import { TABS } from "@/js/tabs/tabs.js";
 if (__BACKEND__ === "nwjs") {
     if (import.meta.env.DEV) {
         // allow smaller window for testing mobile layout
-        globalThis.nw.Window.get().setMinimumSize(320, 550);
+        nw.Window.get().setMinimumSize(320, 550);
     }
 
     jQuery(function () {
