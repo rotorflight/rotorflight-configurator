@@ -9,6 +9,7 @@
   import { getTabHelpURL } from "@/js/help.js";
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { reinitialiseConnection } from "@/js/serial_backend";
 
   import Page from "@/components/Page.svelte";

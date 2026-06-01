@@ -8,6 +8,7 @@
   import { GUI } from "@/js/gui.js";
   import { getTabHelpURL } from "@/js/help.js";
   import { MSP } from "@/js/msp.svelte.js";
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { reinitialiseConnection } from "@/js/serial_backend";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
 

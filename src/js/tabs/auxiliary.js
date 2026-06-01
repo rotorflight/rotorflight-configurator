@@ -7,6 +7,7 @@ import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { mspHelper } from "@/js/msp/MSPHelper.js";
 import { bit_check } from "@/js/serial_backend.js";
 import { getTextWidth } from "@/js/utils/common.js";
 

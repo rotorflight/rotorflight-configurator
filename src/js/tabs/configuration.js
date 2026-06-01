@@ -10,6 +10,7 @@ import { getIntegerValue, updateTabList } from "@/js/main.js";
 import { Model } from "@/js/model.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { mspHelper } from "@/js/msp/MSPHelper.js";
 import { reinitialiseConnection } from "@/js/serial_backend.js";
 
 import { TABS } from "./tabs.js";

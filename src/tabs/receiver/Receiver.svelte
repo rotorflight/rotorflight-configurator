@@ -13,6 +13,7 @@
   import { DarkTheme } from "@/js/DarkTheme.js";
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { bit_check, reinitialiseConnection } from "@/js/serial_backend.js";
   import { windowWatcherUtil } from "@/js/utils/window_watchers.js";
 

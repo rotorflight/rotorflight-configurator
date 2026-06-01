@@ -3057,3 +3057,9 @@ MspHelper.prototype.setBatteryProfile = async function(index)
         await MSP.promise(MSPCodes.MSP_SET_BATTERY_PROFILE, buffer);
     }
 };
+
+export let mspHelper = new MspHelper();
+
+export function resetMspHelper() {
+  mspHelper = new MspHelper();
+}

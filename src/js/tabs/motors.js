@@ -1,6 +1,7 @@
 import { mount, unmount } from "svelte";
 
 import { GUI } from "@/js/gui.js";
+import { mspHelper } from "@/js/msp/MSPHelper.js";
 import Motors from "@/tabs/motors/Motors.svelte";
 import motorState from "@/tabs/motors/state.svelte.js";
 

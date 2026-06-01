@@ -10,6 +10,7 @@ import { getFloatValue, getIntegerValue, getNumberInput } from "@/js/main.js";
 import { Mixer } from "@/js/Mixer.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { mspHelper } from "@/js/msp/MSPHelper.js";
 import { reinitialiseConnection } from "@/js/serial_backend";
 
 import { TABS } from "./tabs.js";

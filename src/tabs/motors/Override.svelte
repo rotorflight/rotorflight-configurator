@@ -1,4 +1,6 @@
 <script>
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
+
   import Field from "@/components/Field.svelte";
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";

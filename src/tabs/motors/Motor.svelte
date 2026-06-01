@@ -5,6 +5,7 @@
 
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
 
   import Section from "@/components/Section.svelte";

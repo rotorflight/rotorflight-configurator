@@ -9,7 +9,7 @@ import { i18n } from "@/js/localization.js";
 import { updateTabList } from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
-import { MspHelper } from "@/js/msp/MSPHelper.js";
+import { mspHelper, resetMspHelper } from "@/js/msp/MSPHelper.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
 import { PortHandler } from "@/js/port_handler.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
@@ -275,8 +275,8 @@ async function onOpen(openInfo) {
         setConnectionTimeout();
         FC.resetState();
 
-        globalThis.mspHelper = new MspHelper();
-        MSP.listen(globalThis.mspHelper.process_data.bind(globalThis.mspHelper));
+        resetMspHelper();
+        MSP.listen(mspHelper.process_data.bind(mspHelper));
         console.log(`Requesting configuration data`);
 
         // Gather version data and validate to ensure compatibility
@@ -353,7 +353,7 @@ function onOpenVirtual() {
 
     CONFIGURATOR.connectionValid = true;
 
-    globalThis.mspHelper = new MspHelper();
+    resetMspHelper();
 
     applyVirtualConfig();
 
