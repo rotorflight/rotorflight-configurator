@@ -69,7 +69,7 @@ export async function handleConnectClick() {
                 await new Promise((resolve) => GUI.tab_switch_cleanup(resolve));
                 GUI.tab_switch_in_progress = false;
 
-                await new Promise((resolve) => globalThis.mspHelper.setArmingEnabled(true, resolve));
+                await new Promise((resolve) => mspHelper.setArmingEnabled(true, resolve));
 
                 finishClose();
             }
@@ -475,7 +475,7 @@ async function processName() {
 }
 
 async function setRtc() {
-    await MSP.promise(MSPCodes.MSP_SET_RTC, globalThis.mspHelper.crunch(MSPCodes.MSP_SET_RTC));
+    await MSP.promise(MSPCodes.MSP_SET_RTC, mspHelper.crunch(MSPCodes.MSP_SET_RTC));
     GUI.log(i18n.getMessage('realTimeClockSet'));
 }
 
