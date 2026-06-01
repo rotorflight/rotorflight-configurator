@@ -21,10 +21,8 @@ mount(Logo, { target: document.querySelector("#logo-mobile") });
 
 if (__BACKEND__ === "cordova") {
   (async () => {
-    const chromeapi = await import("@/js/cordova_chromeapi.js");
     const cordovaStartup = await import("@/js/cordova_startup.js");
     Object.assign(globalThis, {
-      ...chromeapi,
       ...cordovaStartup,
     });
 
