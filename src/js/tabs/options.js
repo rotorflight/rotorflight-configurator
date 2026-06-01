@@ -1,7 +1,10 @@
-import * as config from "@/js/config.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
+import * as config from "@/js/config.js";
+import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
-import { setDarkTheme } from "@/js/main.js";
+import { checkForConfiguratorUpdates, setDarkTheme } from "@/js/main.js";
+
+import { TABS } from "./tabs.js";
 
 const tab = {
   tabName: "options",
@@ -79,10 +82,10 @@ const tab = {
       .on("change", function () {
         const checked = $(this).is(":checked");
         config.set({ cordovaForceComputerUI: checked });
-        cordovaUI?.set?.();
+        globalThis.cordovaUI?.set?.();
       })
       .closest(".field")
-      .toggle(GUI.isCordova() && cordovaUI.canChangeUI);
+      .toggle(GUI.isCordova() && globalThis.cordovaUI.canChangeUI);
   },
 
   initDarkTheme() {

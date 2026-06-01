@@ -1,7 +1,6 @@
 /**
  * @typedef {import('@/js/presets/source/preset_instance.js').default} PresetInstance
  */
-
 import * as config from "@/js/config.js";
 
 const MAX_TRACKED_PRESETS_COUNT = 50;

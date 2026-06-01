@@ -1,3 +1,5 @@
+import { TABS } from "@/js/tabs/tabs.js";
+
 const midRc = 1500;
 const maxRc = 2000;
 

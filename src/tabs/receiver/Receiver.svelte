@@ -1,26 +1,34 @@
 <script>
   import diff from "microdiff";
-  import { onMount, onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { SvelteURL } from "svelte/reactivity";
   import { slide } from "svelte/transition";
 
-  import { i18n } from "@/js/i18n.js";
-  import { FC } from "@/js/fc.svelte.js";
-  import { Features } from "@/js/features.svelte";
+  import Page from "@/components/Page.svelte";
+
   import { DarkTheme } from "@/js/DarkTheme.js";
+  import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+  import { FC } from "@/js/fc.svelte.js";
+  import { Features } from "@/js/features.svelte.js";
+  import { GUI } from "@/js/gui.js";
+  import { getTabHelpURL } from "@/js/help.js";
+  import { i18n } from "@/js/i18n.js";
+  import { MSP } from "@/js/msp.svelte.js";
+  import { MSPCodes } from "@/js/msp/MSPCodes.js";
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import { bit_check, reinitialiseConnection } from "@/js/serial_backend.js";
   import { windowWatcherUtil } from "@/js/utils/window_watchers.js";
 
-  import ModelPreview from "./ModelPreview.svelte";
-  import Page from "@/components/Page.svelte";
-  import ChannelRange from "./ChannelRange.svelte";
-  import ReceiverType from "./ReceiverType.svelte";
-  import TelemetrySettings from "./TelemetrySettings.svelte";
-  import TelemetrySensors from "./TelemetrySensors/TelemetrySensors.svelte";
   import ChannelAssignment from "./ChannelAssignment/ChannelAssignment.svelte";
+  import ChannelRange from "./ChannelRange.svelte";
+  import ModelPreview from "./ModelPreview.svelte";
+  import ReceiverType from "./ReceiverType.svelte";
+  import TelemetrySensors from "./TelemetrySensors/TelemetrySensors.svelte";
+  import TelemetrySettings from "./TelemetrySettings.svelte";
   import {
-    TelemetryType,
-    RX_PROTOCOLS,
     EXTERNAL_TELEMETRY_PROTOCOLS,
+    RX_PROTOCOLS,
+    TelemetryType,
   } from "./protocols.js";
 
   let loading = $state(true);

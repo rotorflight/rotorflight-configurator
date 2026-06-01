@@ -1,6 +1,14 @@
+import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import * as clipboard from "@/js/clipboard.js";
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import * as filesystem from '@/js/filesystem.js';
 import CliEngine from '@/js/cli_engine.js';
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { generateFilename } from "@/js/main.js";
+import { UI_PHONES } from "@/js/phones_ui.js";
+
+import { TABS } from "./tabs.js";
 
 const tab = {
     tabName: 'cli',

@@ -7,7 +7,7 @@ export let readText;
 if (__BACKEND__ === "nwjs") {
   writeText = function (text) {
     try {
-      globalThis.nw.Clipboard.get().set(text, "text");
+      nw.Clipboard.get().set(text, "text");
       return Promise.resolve();
     } catch (err) {
       return Promise.reject(err);
@@ -16,7 +16,7 @@ if (__BACKEND__ === "nwjs") {
 
   readText = function () {
     try {
-      return Promise.resolve(globalThis.nw.Clipboard.get().get("text"));
+      return Promise.resolve(nw.Clipboard.get().get("text"));
     } catch (err) {
       return Promise.reject(err);
     }

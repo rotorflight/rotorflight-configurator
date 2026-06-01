@@ -1,4 +1,9 @@
 import * as config from '@/js/config.js';
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { getTabHelpURL } from "@/js/help.js";
+import { i18n } from "@/js/localization.js";
+import { showTabExitDialog } from "@/js/main.js";
+import { MSP } from "@/js/msp.svelte.js";
 
 const GUI_MODES = {
     NWJS: "NW.js",
@@ -63,7 +68,7 @@ export const GuiControl = function () {
 
     // Check the method of execution
     if (__BACKEND__ === "nwjs") {
-        this.nwGui = globalThis.nw;
+        this.nwGui = nw;
         this.Mode = GUI_MODES.NWJS;
     }
 
@@ -474,3 +479,5 @@ GuiControl.prototype.addLinksTargetBlank = function (element) {
         $(this).attr('target', '_blank');
     });
 };
+
+export const GUI = new GuiControl();

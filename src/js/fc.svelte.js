@@ -1,3 +1,5 @@
+import { bit_check } from "@/js/serial_backend.js";
+
 import { Features } from "./features.svelte.js";
 
 class FlightController {

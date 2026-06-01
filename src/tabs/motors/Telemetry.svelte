@@ -2,15 +2,18 @@
   import semver from "semver";
   import { slide } from "svelte/transition";
 
-  import { FC } from "@/js/fc.svelte.js";
-  import { API_VERSION_12_7, API_VERSION_12_8 } from "@/js/configurator.svelte";
-
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
   import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
+
+  import {
+    API_VERSION_12_7,
+    API_VERSION_12_8,
+  } from "@/js/configurator.svelte.js";
+  import { FC } from "@/js/fc.svelte.js";
 
   import motorState from "./state.svelte.js";
 </script>

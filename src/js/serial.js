@@ -1,3 +1,9 @@
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { FC } from "@/js/fc.svelte.js";
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { checkChromeRuntimeError } from "@/js/utils/common.js";
+
 export const serial = {
     connected:      false,
     connectionId:   false,
@@ -333,7 +339,7 @@ export const serial = {
                             counter++;
                         }
 
-                        console.log(`${self.connectionType}: send buffer overflowing, dropped: ${counter} ${entries}`);
+                        console.log(`${self.connectionType}: send buffer overflowing, dropped: ${counter}`);
                     }
 
                     _send();

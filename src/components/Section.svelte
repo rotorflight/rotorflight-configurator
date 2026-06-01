@@ -1,5 +1,6 @@
 <script>
   import { slide } from "svelte/transition";
+
   import { i18n } from "@/js/i18n.js";
 
   let { children, label, summary, header } = $props();

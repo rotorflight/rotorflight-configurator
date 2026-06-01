@@ -4,19 +4,22 @@
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
 
-  import { CONFIGURATOR } from "@/js/configurator.svelte.js";
-  import { i18n } from "@/js/i18n.js";
-  import { FC } from "@/js/fc.svelte.js";
-  import { reinitialiseConnection } from "@/js/serial_backend";
-  import { MSPCodes } from "@/js/msp/MSPCodes.js";
-
   import Page from "@/components/Page.svelte";
 
-  import General from "./General.svelte";
+  import { API_VERSION_12_9, CONFIGURATOR } from "@/js/configurator.svelte.js";
+  import { FC } from "@/js/fc.svelte.js";
+  import { GUI } from "@/js/gui.js";
+  import { getTabHelpURL } from "@/js/help.js";
+  import { i18n } from "@/js/i18n.js";
+  import { MSP } from "@/js/msp.svelte.js";
+  import { MSPCodes } from "@/js/msp/MSPCodes.js";
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import { reinitialiseConnection } from "@/js/serial_backend";
+
   import Filters from "./Filters.svelte";
+  import General from "./General.svelte";
   import Ramps from "./Ramps.svelte";
   import ThrottleCurve from "./ThrottleCurve.svelte";
-
   import govState from "./state.svelte.js";
 
   let loading = $state(true);
