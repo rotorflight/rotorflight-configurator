@@ -21,7 +21,6 @@ export default [
         jBox: "readonly",
         ol: "readonly",
 
-        // TODO: remove these globals after they're removed from vite defines
         __APP_VERSION__: "readonly",
         __BACKEND__: "readonly",
         __COMMIT_HASH__: "readonly",
