@@ -1,6 +1,6 @@
-import globals from "globals";
 import pluginJs from "@eslint/js";
 import pluginSvelte from "eslint-plugin-svelte";
+import globals from "globals";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [

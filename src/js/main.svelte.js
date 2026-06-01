@@ -1,18 +1,16 @@
 import "multiple-select";
-import { mount } from "svelte";
-
-import "@/js/injected_methods.js";
-import { serial } from "@/js/serial.js";
-import "@/js/tabs/index.js";
-
 import "multiple-select/dist/multiple-select.css";
 import "nouislider/dist/nouislider.css";
-import "@/css/slider.css";
-import "@/css/app.css";
+import { mount } from "svelte";
 
 import BatteryLegend from "@/components/BatteryLegend.svelte";
 import Logo from "@/components/Logo.svelte";
 import StatusBar from "@/components/StatusBar.svelte";
+import "@/css/app.css";
+import "@/css/slider.css";
+import "@/js/injected_methods.js";
+import { serial } from "@/js/serial.js";
+import "@/js/tabs/index.js";
 
 mount(BatteryLegend, { target: document.querySelector("#battery-legend") });
 mount(StatusBar, { target: document.querySelector("#status-bar") });

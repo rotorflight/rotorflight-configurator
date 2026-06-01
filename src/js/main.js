@@ -8,11 +8,10 @@ import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
 import { mspHelper } from "@/js/msp/MSPHelper.js";
-import { handleConnectClick } from "@/js/serial_backend.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
 import { ReleaseChecker } from "@/js/release_checker.js";
 import { serial } from "@/js/serial.js";
-import { initializeSerialBackend } from "@/js/serial_backend.js";
+import { handleConnectClick, initializeSerialBackend } from "@/js/serial_backend.js";
 import { TABS } from "@/js/tabs/tabs.js";
 
 if (__BACKEND__ === "nwjs") {

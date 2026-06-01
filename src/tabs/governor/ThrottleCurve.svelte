@@ -1,13 +1,12 @@
 <script>
   import { onMount, onDestroy } from "svelte";
 
+  import Section from "@/components/Section.svelte";
+  import SubSection from "@/components/SubSection.svelte";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
-
-  import Section from "@/components/Section.svelte";
-  import SubSection from "@/components/SubSection.svelte";
 
   let pollerInterval;
   let shouldUpdate = true;

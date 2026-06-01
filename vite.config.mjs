@@ -1,10 +1,10 @@
-import pkg from "./package.json" with { type: "json" };
-
 import child_process from "node:child_process";
 import path from "node:path";
 
-import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { defineConfig } from "vite";
+
+import pkg from "./package.json" with { type: "json" };
 
 const commitHash = child_process
   .execSync("git rev-parse --short HEAD")

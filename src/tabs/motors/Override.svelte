@@ -1,11 +1,10 @@
 <script>
-  import { mspHelper } from "@/js/msp/MSPHelper.js";
-
   import Field from "@/components/Field.svelte";
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
   import Switch from "@/components/Switch.svelte";
   import WarningNote from "@/components/notes/WarningNote.svelte";
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
 
   import motorState from "./state.svelte.js";
 

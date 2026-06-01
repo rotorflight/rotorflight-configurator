@@ -1,13 +1,12 @@
 <script>
   import { slide } from "svelte/transition";
 
-  import { CONFIGURATOR } from "@/js/configurator.svelte.js";
-
-  import Switch from "@/components/Switch.svelte";
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
+  import Switch from "@/components/Switch.svelte";
+  import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 
   let { FC = $bindable() } = $props();
 

@@ -1,10 +1,11 @@
 <script>
   import { SvelteSet } from "svelte/reactivity";
 
-  import { i18n } from "@/js/i18n.js";
-  import { TELEMETRY_SENSORS } from "../../telemetry/sensors.js";
   import Field from "@/components/Field.svelte";
   import Switch from "@/components/Switch.svelte";
+  import { i18n } from "@/js/i18n.js";
+
+  import { TELEMETRY_SENSORS } from "../../telemetry/sensors.js";
   import Details from "./Details.svelte";
 
   let { value = $bindable([]), sensors } = $props();

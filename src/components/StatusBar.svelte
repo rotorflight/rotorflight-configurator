@@ -1,9 +1,9 @@
 <script>
-  import { i18n } from "@/js/i18n.js";
-  import { portUsage } from "@/js/port_usage.svelte.js";
-  import { FC } from "@/js/fc.svelte.js";
-  import { MSP } from "@/js/msp.svelte.js";
   import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+  import { FC } from "@/js/fc.svelte.js";
+  import { i18n } from "@/js/i18n.js";
+  import { MSP } from "@/js/msp.svelte.js";
+  import { portUsage } from "@/js/port_usage.svelte.js";
 
   let showFwVersion = $derived(
     FC.CONFIG.buildVersion && FC.CONFIG.flightControllerIdentifier,

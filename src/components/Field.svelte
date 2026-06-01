@@ -1,8 +1,8 @@
 <script>
   import { slide } from "svelte/transition";
 
-  import { i18n } from "@/js/i18n.js";
   import HoverTooltip from "@/components/HoverTooltip.svelte";
+  import { i18n } from "@/js/i18n.js";
 
   let { id, children, label, tooltip, unit } = $props();
 

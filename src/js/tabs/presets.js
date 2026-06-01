@@ -2,22 +2,22 @@
  * @typedef {import("@/js/presets/source/retriever.js").PresetData} PresetData
  * @typedef {import("@/js/presets/source/source.js").Source} Source
  */
+import { mount, unmount } from "svelte";
 
 import CliEngine from "@/js/cli_engine.js";
 import * as config from "@/js/config.js";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { FC } from "@/js/fc.svelte.js";
 import * as filesystem from "@/js/filesystem.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
 import { generateFilename } from "@/js/main.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
-import PresetInstance from "@/js/presets/source/preset_instance.js";
 import PresetDialog from "@/js/presets/preset_dialog.js";
 import PresetPanel from "@/js/presets/preset_panel.js";
-import Sources from "@/js/presets/sources.js";
 import PresetTracker from "@/js/presets/preset_tracker.js";
-import { FC } from "@/js/fc.svelte.js";
-import { mount, unmount } from "svelte";
+import PresetInstance from "@/js/presets/source/preset_instance.js";
+import Sources from "@/js/presets/sources.js";
 import SelectedPresetReviewDialog from "@/tabs/presets/selected_preset_review_dialog.svelte";
 
 import { TABS } from "./tabs.js";

@@ -2,14 +2,14 @@
   import semver from "semver";
   import { slide } from "svelte/transition";
 
-  import { API_VERSION_12_7 } from "@/js/configurator.svelte.js";
-  import { FC } from "@/js/fc.svelte.js";
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
   import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
+  import { API_VERSION_12_7 } from "@/js/configurator.svelte.js";
+  import { FC } from "@/js/fc.svelte.js";
 
   let { telemetry, resetTelemetry } = $props();
   let enabled = $derived(FC.FEATURE_CONFIG.features.TELEMETRY);

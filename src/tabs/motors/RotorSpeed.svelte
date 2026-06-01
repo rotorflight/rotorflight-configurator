@@ -1,8 +1,8 @@
 <script>
+  import Meter from "@/components/Meter.svelte";
+  import Section from "@/components/Section.svelte";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
-  import Section from "@/components/Section.svelte";
-  import Meter from "@/components/Meter.svelte";
 
   let headRatio = $derived(
     FC.MOTOR_CONFIG.main_rotor_gear_ratio[0] /

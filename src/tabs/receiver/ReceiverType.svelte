@@ -2,13 +2,14 @@
   import semver from "semver";
   import { slide } from "svelte/transition";
 
+  import Field from "@/components/Field.svelte";
+  import Section from "@/components/Section.svelte";
+  import SubSection from "@/components/SubSection.svelte";
+  import Switch from "@/components/Switch.svelte";
+  import Tooltip from "@/components/Tooltip.svelte";
   import { API_VERSION_12_7 } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
-  import Switch from "@/components/Switch.svelte";
-  import Field from "@/components/Field.svelte";
-  import Tooltip from "@/components/Tooltip.svelte";
-  import SubSection from "@/components/SubSection.svelte";
-  import Section from "@/components/Section.svelte";
+
   import { RX_PROTOCOLS } from "./protocols.js";
 
   let { rxProtoIndex, hasSerialRxPort, setRxProto } = $props();

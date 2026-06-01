@@ -3,23 +3,22 @@
   import { onMount, onDestroy } from "svelte";
   import { slide } from "svelte/transition";
 
-  import { i18n } from "@/js/i18n.js";
+  import Page from "@/components/Page.svelte";
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
   import { getTabHelpURL } from "@/js/help.js";
+  import { i18n } from "@/js/i18n.js";
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { reinitialiseConnection } from "@/js/serial_backend";
 
-  import Page from "@/components/Page.svelte";
-
-  import Throttle from "./Throttle.svelte";
-  import RPM from "./RPM.svelte";
-  import Telemetry from "./Telemetry.svelte";
   import Motor from "./Motor.svelte";
-  import RotorSpeed from "./RotorSpeed.svelte";
   import Override from "./Override.svelte";
+  import RPM from "./RPM.svelte";
+  import RotorSpeed from "./RotorSpeed.svelte";
+  import Telemetry from "./Telemetry.svelte";
+  import Throttle from "./Throttle.svelte";
   import motorState from "./state.svelte.js";
 
   let loading = $state(true);

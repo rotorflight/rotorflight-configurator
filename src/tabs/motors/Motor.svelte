@@ -3,14 +3,13 @@
   import { onDestroy } from "svelte";
   import { slide } from "svelte/transition";
 
+  import Meter from "@/components/Meter.svelte";
+  import Section from "@/components/Section.svelte";
+  import Slider from "@/components/Slider.svelte";
+  import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
-  import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
-
-  import Section from "@/components/Section.svelte";
-  import Meter from "@/components/Meter.svelte";
-  import Slider from "@/components/Slider.svelte";
 
   import motorState from "./state.svelte.js";
 

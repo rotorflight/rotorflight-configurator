@@ -1,18 +1,17 @@
 <script>
   import { slide } from "svelte/transition";
 
-  import { FC } from "@/js/fc.svelte.js";
-  import { MSPCodes } from "@/js/msp/MSPCodes.js";
-  import { MSP } from "@/js/msp.svelte.js";
-  import { mspHelper } from "@/js/msp/MSPHelper.js";
-
   import Field from "@/components/Field.svelte";
+  import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
   import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
-  import NumberInput from "@/components/NumberInput.svelte";
   import WarningNote from "@/components/notes/WarningNote.svelte";
+  import { FC } from "@/js/fc.svelte.js";
+  import { MSP } from "@/js/msp.svelte.js";
+  import { MSPCodes } from "@/js/msp/MSPCodes.js";
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
 
   import motorState from "./state.svelte.js";
 

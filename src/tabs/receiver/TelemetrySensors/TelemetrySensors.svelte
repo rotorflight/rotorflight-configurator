@@ -1,12 +1,13 @@
 <script>
-  import { FC } from "@/js/fc.svelte.js";
-  import { i18n } from "@/js/i18n.js";
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
-  import SensorsUnorderedList from "./SensorsUnorderedList.svelte";
+  import { FC } from "@/js/fc.svelte.js";
+  import { i18n } from "@/js/i18n.js";
+
+  import { TelemetryType } from "../protocols.js";
   import SensorsBitfield from "./SensorsBitfield.svelte";
   import SensorsOrderedList from "./SensorsOrderedList/SensorsOrderedList.svelte";
-  import { TelemetryType } from "../protocols.js";
+  import SensorsUnorderedList from "./SensorsUnorderedList.svelte";
 
   let { telemetry } = $props();
 

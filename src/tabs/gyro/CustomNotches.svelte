@@ -1,14 +1,14 @@
 <script>
   import semver from "semver";
 
-  import { API_VERSION_12_8 } from "@/js/configurator.svelte.js";
-  import { i18n } from "@/js/i18n.js";
+  import Field from "@/components/Field.svelte";
+  import NumberInput from "@/components/NumberInput.svelte";
+  import SubSection from "@/components/SubSection.svelte";
+  import ToggleFieldGroup from "@/components/ToggleFieldGroup.svelte";
   import ErrorNote from "@/components/notes/ErrorNote.svelte";
   import WarningNote from "@/components/notes/WarningNote.svelte";
-  import NumberInput from "@/components/NumberInput.svelte";
-  import ToggleFieldGroup from "@/components/ToggleFieldGroup.svelte";
-  import Field from "@/components/Field.svelte";
-  import SubSection from "@/components/SubSection.svelte";
+  import { API_VERSION_12_8 } from "@/js/configurator.svelte.js";
+  import { i18n } from "@/js/i18n.js";
 
   let { FC, notches = $bindable(), onResetNotches } = $props();
 
