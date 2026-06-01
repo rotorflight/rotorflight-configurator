@@ -4292,7 +4292,7 @@
         "english": "Main Rotor Gear Ratio"
     },
     "motorsMainRotorGearRatioHelp": {
-        "message": "Gear ratio between the motor and the main rotor.<br>Utilice el número de dientes <span class=\"value\">piñon del motor</span> : <span class=\"value\">engranaje principal</span>.",
+        "message": "La relación de la transmisión entre el motor y el rotor principal.<br>Utilice el número de dientes <span class=\"value\">piñon del motor</span> : <span class=\"value\">engranaje principal</span>.",
         "english": "Gear ratio between the motor and the main rotor.<br>Use <span class=\"value\">motor pinion</span> : <span class=\"value\">main gear</span> tooth count."
     },
     "motorsTailRotorGearRatio": {
