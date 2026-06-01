@@ -6,6 +6,7 @@ import { mount } from "svelte";
 import BatteryLegend from "@/components/BatteryLegend.svelte";
 import Logo from "@/components/Logo.svelte";
 import StatusBar from "@/components/StatusBar.svelte";
+
 import "@/css/app.css";
 import "@/css/slider.css";
 import "@/js/injected_methods.js";

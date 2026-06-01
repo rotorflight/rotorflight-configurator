@@ -1,9 +1,10 @@
 <script>
   import diff from "microdiff";
-  import { onMount, onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { slide } from "svelte/transition";
 
   import Page from "@/components/Page.svelte";
+
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
   import { getTabHelpURL } from "@/js/help.js";

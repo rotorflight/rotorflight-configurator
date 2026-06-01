@@ -8,6 +8,7 @@
   import SubSection from "@/components/SubSection.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
   import InfoNote from "@/components/notes/InfoNote.svelte";
+
   import {
     API_VERSION_12_8,
     API_VERSION_12_9,

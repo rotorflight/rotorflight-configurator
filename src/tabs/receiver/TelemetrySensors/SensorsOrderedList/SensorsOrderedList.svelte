@@ -1,5 +1,6 @@
 <script>
   import ErrorNote from "@/components/notes/ErrorNote.svelte";
+
   import { i18n } from "@/js/i18n.js";
 
   import Select from "./Select.svelte";

@@ -5,6 +5,7 @@
   import { slide } from "svelte/transition";
 
   import Page from "@/components/Page.svelte";
+
   import { API_VERSION_12_9, CONFIGURATOR } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";

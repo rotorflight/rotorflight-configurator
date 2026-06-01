@@ -6,6 +6,7 @@
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
   import Switch from "@/components/Switch.svelte";
+
   import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 
   let { FC = $bindable() } = $props();

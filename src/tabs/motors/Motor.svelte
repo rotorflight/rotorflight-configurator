@@ -6,6 +6,7 @@
   import Meter from "@/components/Meter.svelte";
   import Section from "@/components/Section.svelte";
   import Slider from "@/components/Slider.svelte";
+
   import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";

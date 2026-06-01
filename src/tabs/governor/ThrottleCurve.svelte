@@ -1,8 +1,9 @@
 <script>
-  import { onMount, onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
 
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
+
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import { MSP } from "@/js/msp.svelte.js";

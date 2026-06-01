@@ -5,6 +5,7 @@
   import { slide } from "svelte/transition";
 
   import Page from "@/components/Page.svelte";
+
   import { API_VERSION_12_8, CONFIGURATOR } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
@@ -21,11 +22,11 @@
   import NotchFilter from "./NotchFilter.svelte";
   import RpmFilter from "./RpmFilter.svelte";
   import {
-    parseRpmFilterConfig1,
-    parseRpmFilterConfig2,
+    NOTCH_COUNT,
     generateRpmFilterConfig1,
     generateRpmFilterConfig2,
-    NOTCH_COUNT,
+    parseRpmFilterConfig1,
+    parseRpmFilterConfig2,
   } from "./filter_config.js";
 
   let loading = $state(true);

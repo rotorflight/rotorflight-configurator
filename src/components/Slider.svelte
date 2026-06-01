@@ -1,6 +1,6 @@
 <script>
   import * as noUiSlider from "nouislider";
-  import { onMount, onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
 
   let { value = $bindable(), opts, onchange, changeOnSlide = true } = $props();
 

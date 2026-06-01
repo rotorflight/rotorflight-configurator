@@ -1,10 +1,11 @@
 <script>
   import diff from "microdiff";
-  import { onMount, onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { SvelteURL } from "svelte/reactivity";
   import { slide } from "svelte/transition";
 
   import Page from "@/components/Page.svelte";
+
   import { DarkTheme } from "@/js/DarkTheme.js";
   import { CONFIGURATOR } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
@@ -25,9 +26,9 @@
   import TelemetrySensors from "./TelemetrySensors/TelemetrySensors.svelte";
   import TelemetrySettings from "./TelemetrySettings.svelte";
   import {
-    TelemetryType,
-    RX_PROTOCOLS,
     EXTERNAL_TELEMETRY_PROTOCOLS,
+    RX_PROTOCOLS,
+    TelemetryType,
   } from "./protocols.js";
 
   let loading = $state(true);
