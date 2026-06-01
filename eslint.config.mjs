@@ -41,8 +41,6 @@ export default [
           varsIgnorePattern: "^_",
         },
       ],
-
-      "no-undef": "error",
     },
   },
 ];
