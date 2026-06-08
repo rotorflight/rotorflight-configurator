@@ -528,6 +528,7 @@ async function onConnect() {
         $('#tabs ul.mode-connected').show();
 
         await new Promise((resolve) => setTimeout(resolve, 100));
+        await MSP.promise(MSPCodes.MSP_BOXNAMES, false);
         await MSP.promise(MSPCodes.MSP_FEATURE_CONFIG, false);
         await MSP.promise(MSPCodes.MSP_BATTERY_CONFIG, false);
         await MSP.promise(MSPCodes.MSP_STATUS, false);
@@ -684,11 +685,7 @@ function update_live_status() {
     });
 
     if (GUI.active_tab != 'cli' && GUI.active_tab != 'presets') {
-        MSP.promise(MSPCodes.MSP_BOXNAMES, false).then(() => {
-            return MSP.promise(MSPCodes.MSP_STATUS, false);
-        }).then(() => {
-            return MSP.promise(MSPCodes.MSP_BATTERY_STATE, false);
-        });
+        MSP.promise(MSPCodes.MSP_BATTERY_STATE, false);
     }
 
     for (let i = 0; i < FC.AUX_CONFIG.length; i++) {
