@@ -19,6 +19,16 @@
   height: auto;
 }
 
+.noUi-target,
+.noUi-target * {
+  touch-action: auto;
+}
+
+.noUi-base,
+.noUi-base * {
+  touch-action: none;
+}
+
 .noUi-connect,
 .noUi-origin {
   -webkit-transition: transform 300ms;
