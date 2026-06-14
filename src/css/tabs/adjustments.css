@@ -248,4 +248,8 @@
     .tab-adjustments .adjSliders {
         min-width: 300px;
     }
+
+    .tab-adjustments .adjustments tbody tr:nth-child(1) {
+        height: 24px;
+    }
 }

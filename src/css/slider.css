@@ -15,6 +15,20 @@
   box-shadow: none;
 }
 
+.noUi-pips-horizontal {
+  height: auto;
+}
+
+.noUi-target,
+.noUi-target * {
+  touch-action: auto;
+}
+
+.noUi-base,
+.noUi-base * {
+  touch-action: none;
+}
+
 .noUi-connect,
 .noUi-origin {
   -webkit-transition: transform 300ms;
@@ -304,7 +318,6 @@ html[data-theme="dark"] .noUi-target[disabled] .noUi-handle:after {
  */
 .svelte-slide-pips-horizontal {
   padding: 10px 0;
-  height: 80px;
   top: 100%;
   left: 0;
   width: 100%;
