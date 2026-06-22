@@ -2235,13 +2235,8 @@
         "english": "The throttle channel value where throttle is considered 0%."
     },
     "receiverHelpZeroThrottle2": {
-        "message": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>",
-        "english": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "<p>Стойността на канала за газта, която се счита за 0%. Задайте на 0 за автоматично задаване.</p><p><strong>Забележка:</strong> каналът за газта трябва да може да се движи поне с 10µs под тази стойност, за да сигнализира изключване на газта и да позволи активиране.</p>",
-            "english": "<p>The throttle channel value where throttle is considered 0%. Set to 0 to set automatically.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
-        }
+        "message": "<p>Стойността на канала за газта, която се счита за 0%.</p><p><strong>Забележка:</strong> каналът за газта трябва да може да се движи поне с 10µs под тази стойност, за да сигнализира изключване на газта и да позволи активиране.</p>",
+        "english": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
     },
     "receiverFullThrottle": {
         "message": "Макс. Газ - 100%",
@@ -2252,13 +2247,8 @@
         "english": "The throttle channel value where throttle is considered 100%."
     },
     "receiverHelpFullThrottle2": {
-        "message": "The throttle channel value where throttle is considered 100%.",
-        "english": "The throttle channel value where throttle is considered 100%.",
-        "status": "Modified entry. Please translate!",
-        "previous": {
-            "message": "Стойността на канала за газта, която се счита за 100%. Задайте на 0 за автоматично задаване.",
-            "english": "The throttle channel value where throttle is considered 100%. Set to 0 to set automatically."
-        }
+        "message": "Стойността на канала за газта, която се счита за 100%.",
+        "english": "The throttle channel value where throttle is considered 100%."
     },
     "receiverCyclicDeadband": {
         "message": "Цикличен мъртъв диапазон",
