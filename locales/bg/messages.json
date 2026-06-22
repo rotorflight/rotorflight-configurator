@@ -1653,8 +1653,7 @@
     },
     "flight_stats.duration.value": {
         "message": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })",
-        "english": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })",
-        "status": "New entry. Please translate!"
+        "english": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })"
     },
     "beeper_GYRO_CALIBRATED": {
         "message": "Издава звук, когато жироскопът е калибриран",
