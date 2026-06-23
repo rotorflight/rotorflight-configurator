@@ -2251,7 +2251,7 @@
         "english": "The throttle channel value where throttle is considered 100%."
     },
     "receiverCyclicDeadband": {
-        "message": "Цикличен мъртъв диапазон",
+        "message": "Циклична мъртва зона",
         "english": "Cyclic Deadband"
     },
     "receiverHelpCyclicDeadband": {
@@ -2259,7 +2259,7 @@
         "english": "How far the roll and pitch channel values must move from center before it's considered an input."
     },
     "receiverYawDeadband": {
-        "message": "Мъртъв диапазон на опашката",
+        "message": "Мъртва зона на опашката",
         "english": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
@@ -3840,7 +3840,7 @@
         "english": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "mixerOverride": {
-        "message": "Принудително задаване на миксера",
+        "message": "Принудително управление на миксера",
         "english": "Mixer Override"
     },
     "mixerOverrideHelp": {
