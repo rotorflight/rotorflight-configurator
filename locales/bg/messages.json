@@ -2299,11 +2299,11 @@
         "english": "Custom Telemetry"
     },
     "receiverCrsfTelemetryRate": {
-        "message": "Телеметрийна честота на пакетите",
+        "message": "Честота на пакетите за телеметрия",
         "english": "Telemetry Packet Rate"
     },
     "receiverCrsfTelemetryRatio": {
-        "message": "Телеметрийно съотношение на пакетите",
+        "message": "Съотношение на пакетите за телеметрия",
         "english": "Telemetry Packet Ratio"
     },
     "receiverHelpCrsfTelemetryMode": {
