@@ -1,27 +1,32 @@
 <script>
-  import semver from "semver";
-  import { slide } from "svelte/transition";
-  import { onMount } from "svelte";
   import diff from "microdiff";
+  import semver from "semver";
+  import { onMount } from "svelte";
+  import { slide } from "svelte/transition";
 
-  import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+  import Page from "@/components/Page.svelte";
+
+  import { API_VERSION_12_8, CONFIGURATOR } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
-  import { i18n } from "@/js/i18n.js";
+  import { GUI } from "@/js/gui.js";
   import { getTabHelpURL } from "@/js/help";
+  import { i18n } from "@/js/i18n.js";
+  import { MSP } from "@/js/msp.svelte.js";
+  import { MSPCodes } from "@/js/msp/MSPCodes.js";
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import { reinitialiseConnection } from "@/js/serial_backend";
 
   import CustomNotches from "./CustomNotches.svelte";
   import DynamicFilter from "./DynamicFilter.svelte";
   import LowpassFilter from "./LowpassFilter.svelte";
-  import Page from "@/components/Page.svelte";
-  import RpmFilter from "./RpmFilter.svelte";
   import NotchFilter from "./NotchFilter.svelte";
-
+  import RpmFilter from "./RpmFilter.svelte";
   import {
-    parseRpmFilterConfig1,
-    parseRpmFilterConfig2,
+    NOTCH_COUNT,
     generateRpmFilterConfig1,
     generateRpmFilterConfig2,
-    NOTCH_COUNT,
+    parseRpmFilterConfig1,
+    parseRpmFilterConfig2,
   } from "./filter_config.js";
 
   let loading = $state(true);
@@ -156,7 +161,9 @@
 {#snippet header()}
   <h1>{$i18n.t("tabGyro")}</h1>
   <div class="grow"></div>
-  <button class="btn help-btn" onclick={onClickHelp}>Help</button>
+  <button class="btn help-btn" onclick={onClickHelp}>
+    {$i18n.t("buttonHelp")}
+  </button>
 {/snippet}
 
 {#snippet toolbar()}

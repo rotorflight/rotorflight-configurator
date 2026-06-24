@@ -2,6 +2,16 @@ import * as noUiSlider from 'nouislider';
 import semver from 'semver';
 import wNumb from 'wnumb';
 
+import { API_VERSION_12_8, API_VERSION_12_9 } from "@/js/configurator.svelte.js";
+import { FC } from "@/js/fc.svelte.js";
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { MSP } from "@/js/msp.svelte.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { mspHelper } from "@/js/msp/MSPHelper.js";
+
+import { TABS } from "./tabs.js";
+
 const tab = {
     tabName: 'adjustments',
     isDirty: false,

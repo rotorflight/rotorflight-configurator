@@ -1,3 +1,6 @@
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+
 export const ReleaseChecker = function (releaseName, releaseUrl) {
     var self = this;
 

@@ -2,15 +2,18 @@
   import semver from "semver";
   import { slide } from "svelte/transition";
 
-  import { FC } from "@/js/fc.svelte.js";
-  import { API_VERSION_12_7, API_VERSION_12_8 } from "@/js/configurator.svelte";
-
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
   import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
+
+  import {
+    API_VERSION_12_7,
+    API_VERSION_12_8,
+  } from "@/js/configurator.svelte.js";
+  import { FC } from "@/js/fc.svelte.js";
 
   import motorState from "./state.svelte.js";
 </script>
@@ -74,13 +77,13 @@
               help="motorsVoltageCorrectionHelp"
               attrs={[
                 { name: "genericDefault", value: "0%" },
-                { name: "genericRange", value: "-50% - 125%" },
+                { name: "genericRange", value: "-100% - 125%" },
               ]}
             />
           {/snippet}
           <NumberInput
             id="voltage-correction"
-            min="-50"
+            min="-100"
             max="125"
             bind:value={FC.ESC_SENSOR_CONFIG.voltage_correction}
           />
@@ -91,13 +94,13 @@
               help="motorsCurrentCorrectionHelp"
               attrs={[
                 { name: "genericDefault", value: "0%" },
-                { name: "genericRange", value: "-50% - 125%" },
+                { name: "genericRange", value: "-100% - 125%" },
               ]}
             />
           {/snippet}
           <NumberInput
             id="current-correction"
-            min="-50"
+            min="-100"
             max="125"
             bind:value={FC.ESC_SENSOR_CONFIG.current_correction}
           />
@@ -112,13 +115,13 @@
               help="motorsConsumptionCorrectionHelp"
               attrs={[
                 { name: "genericDefault", value: "0%" },
-                { name: "genericRange", value: "-50% - 125%" },
+                { name: "genericRange", value: "-100% - 125%" },
               ]}
             />
           {/snippet}
           <NumberInput
             id="consumption-correction"
-            min="-50"
+            min="-100"
             max="125"
             bind:value={FC.ESC_SENSOR_CONFIG.consumption_correction}
           />

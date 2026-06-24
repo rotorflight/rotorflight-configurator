@@ -1,14 +1,14 @@
 <script>
   import { slide } from "svelte/transition";
 
-  import { FC } from "@/js/fc.svelte.js";
-
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
   import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
+
+  import { FC } from "@/js/fc.svelte.js";
 
   import motorState from "./state.svelte.js";
 </script>

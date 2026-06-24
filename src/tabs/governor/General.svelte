@@ -2,21 +2,20 @@
   import semver from "semver";
   import { slide } from "svelte/transition";
 
+  import Field from "@/components/Field.svelte";
+  import NumberInput from "@/components/NumberInput.svelte";
+  import Section from "@/components/Section.svelte";
+  import SubSection from "@/components/SubSection.svelte";
+  import Tooltip from "@/components/Tooltip.svelte";
+  import InfoNote from "@/components/notes/InfoNote.svelte";
+
   import {
     API_VERSION_12_8,
     API_VERSION_12_9,
   } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
 
-  import Field from "@/components/Field.svelte";
-  import InfoNote from "@/components/notes/InfoNote.svelte";
-  import NumberInput from "@/components/NumberInput.svelte";
-  import Section from "@/components/Section.svelte";
-  import SubSection from "@/components/SubSection.svelte";
-  import Tooltip from "@/components/Tooltip.svelte";
-
   import ThrottlePreview from "./ThrottlePreview.svelte";
-
   import govState, { GOV_THROTTLE_TYPE } from "./state.svelte.js";
 
   let is_12_9 = $derived(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9));

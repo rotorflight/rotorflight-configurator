@@ -65,7 +65,7 @@ Name: "zh_TW"; MessagesFile: "..\..\assets\windows\languages\ChineseTraditional.
 ; pt_BR (Portuguese Brasileiro)
 
 [Run]
-Filename: "pnputil.exe"; Parameters: "/add-driver ""{tmp}\stm32\STtube.inf"" /install"; StatusMsg: "Installing STM32 DFU driver..."; Check: WizardIsTaskSelected('install_stm_dfu') and STMDFULicenseAccepted; Flags: runhidden waituntilterminated
+Filename: "pnputil.exe"; Parameters: "/add-driver ""{tmp}\stm32\STM32Bootloader.inf"" /install"; StatusMsg: "Installing STM32 DFU driver..."; Check: WizardIsTaskSelected('install_stm_dfu') and STMDFULicenseAccepted; Flags: runhidden waituntilterminated
 Filename: {app}\{cm:AppName}.exe; Description: {cm:LaunchProgram,{cm:AppName}}; Flags: nowait postinstall skipifsilent
 
 [Setup]
@@ -272,4 +272,4 @@ begin
 end;
 
 [Tasks]
-Name: "install_stm_dfu"; Description: "{cm:STDFUDriverTaskDesc}"; Flags: unchecked
+Name: "install_stm_dfu"; Description: "{cm:STDFUDriverTaskDesc}"

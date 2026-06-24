@@ -5,8 +5,18 @@ import {
     API_VERSION_12_8,
     API_VERSION_12_9,
 } from "@/js/configurator.svelte.js";
+import { FC } from "@/js/fc.svelte.js";
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { getFloatValue, getIntegerValue } from "@/js/main.js";
 import { Model } from "@/js/model.js";
+import { MSP } from "@/js/msp.svelte.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { mspHelper } from "@/js/msp/MSPHelper.js";
 import { RateCurve } from "@/js/RateCurve.js";
+import { degToRad } from "@/js/utils/common.js";
+
+import { TABS } from "./tabs.js";
 
 function drawStickPosition(context, color, rcPos, value, maxValue) {
   const DEFAULT_SIZE = 60; // canvas units, relative size of the stick indicator (larger value is smaller indicator)

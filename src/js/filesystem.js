@@ -1,3 +1,5 @@
+import { i18n } from "@/js/localization.js";
+
 export let readTextFile;
 export let getWriteStream;
 export let writeTextFile;

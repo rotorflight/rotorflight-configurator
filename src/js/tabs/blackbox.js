@@ -4,9 +4,19 @@ import {
     API_VERSION_12_7,
     API_VERSION_12_8,
     API_VERSION_12_9,
+    CONFIGURATOR,
 } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import * as filesystem from "@/js/filesystem.js";
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { generateFilename, showErrorDialog } from "@/js/main.js";
+import { MSP } from "@/js/msp.svelte.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { mspHelper } from "@/js/msp/MSPHelper.js";
+import { reinitialiseConnection } from "@/js/serial_backend";
+
+import { TABS } from "./tabs.js";
 
 let sdcardTimer;
 

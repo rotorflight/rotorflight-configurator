@@ -1,11 +1,11 @@
 <script>
-  import { onMount, onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { Clock } from "three";
+
+  import Model from "@/components/Model.svelte";
 
   import { i18n } from "@/js/i18n.js";
   import { degToRad } from "@/js/utils/common";
-
-  import Model from "@/components/Model.svelte";
 
   import { Setpoint } from "./setpoint.svelte.js";
 

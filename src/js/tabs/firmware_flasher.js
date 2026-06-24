@@ -2,10 +2,26 @@ import * as marked from 'marked';
 import semver from "semver";
 
 import * as config from '@/js/config.js';
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { ConfigInserter } from "@/js/ConfigInserter.js";
+import { FC } from "@/js/fc.svelte.js";
 import { readTextFile, writeTextFile } from '@/js/filesystem.js';
+import { FirmwareCache } from "@/js/FirmwareCache.js";
 import * as github from '@/js/GitHubApi.js';
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { getIntegerValue } from "@/js/main.js";
+import { MSP } from "@/js/msp.svelte.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { ReleaseChecker } from '@/js/release_checker.js';
 import { manufacturers } from "@/js/manufacturers.js";
+import { MspHelper } from "@/js/msp/MSPHelper.js";
+import { PortHandler, usbDevices } from "@/js/port_handler.js";
+import { STM32 } from "@/js/protocols/stm32.js";
+import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
+import { serial } from "@/js/serial.js";
+
+import { TABS } from "./tabs.js";
 
 async function getCachedUnifiedTargets() {
   const { unifiedSourceCache } = await new Promise((resolve) => chrome.storage.local.get("unifiedSourceCache", resolve));
@@ -34,12 +50,13 @@ const tab = {
 tab.initialize = function (callback) {
     var self = this;
 
-    self.selectedBoard = undefined;
     self.localFirmwareLoaded = false;
-    self.isConfigLocal = false;
+    self.selectedBoard = undefined;
     self.intel_hex = undefined;
     self.parsed_hex = undefined;
-
+    self.unifiedTarget = {};
+    self.isConfigLocal = false;
+    self.boardDetectionInProgress = false;
 
     function onFirmwareCacheUpdate(release) {
         $('select[name="firmware_version"] option').each(function () {
@@ -173,7 +190,6 @@ tab.initialize = function (callback) {
 
             if (config.get('rememberLastSelectedBoard')) {
                 const selected_board = config.get('selected_board');
-                console.log("selected_board foo", selected_board);
                 const boardBuilds = builds[selected_board];
                 $('select[name="board"]').val(boardBuilds ? selected_board : 0).trigger('change');
             }
@@ -611,7 +627,7 @@ tab.initialize = function (callback) {
                                 console.log(`Fetching ${targetSpec.download_url}`);
                                 const res = await fetch(targetSpec.download_url);
                                 if (!res.ok) {
-                                  throw new Error(`HTTP ${r.status}`);
+                                  throw new Error(`HTTP ${res.status}`);
                                 }
                                 let config = await res.text();
 
@@ -701,8 +717,10 @@ tab.initialize = function (callback) {
             /^feature [-]?TELEMETRY/i,
             /^resource PWM/i,
             /^resource MOTOR [5-8]/i,
+            /^resource OSD/i,
             /^serial [0-9]/i,
             /^set serialrx/i,
+            /^set max7456/i,
         ];
 
         function cleanUnifiedConfigFile(input) {
@@ -921,7 +939,7 @@ tab.initialize = function (callback) {
                     exitDfuElement.addClass('disabled');
                 }
             }
-        });
+        }).trigger("change");
 
         let board_auto_detect = (function() {
             let targetAvailable = false;

@@ -1,10 +1,11 @@
 <script>
   // This component shows a meter of the throttle channel that indicates the
   // current effect the throttle input is having on the governor
-
-  import { onMount, onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
 
   import { FC } from "@/js/fc.svelte.js";
+  import { MSP } from "@/js/msp.svelte.js";
+  import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { RC_COMMAND } from "@/tabs/receiver/rc_command.svelte.js";
 
   import { GOV_THROTTLE_TYPE } from "./state.svelte.js";

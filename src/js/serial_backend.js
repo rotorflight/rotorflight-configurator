@@ -1,7 +1,20 @@
 import semver from "semver";
 
+import { Beepers } from "@/js/Beepers.js";
 import * as config from "@/js/config.js";
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { FC } from "@/js/fc.svelte.js";
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { updateTabList } from "@/js/main.js";
+import { MSP } from "@/js/msp.svelte.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { mspHelper, resetMspHelper } from "@/js/msp/MSPHelper.js";
+import { UI_PHONES } from "@/js/phones_ui.js";
+import { PortHandler } from "@/js/port_handler.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
+import { serial } from "@/js/serial.js";
+import { TABS } from "@/js/tabs/tabs.js";
 import { applyVirtualConfig } from "@/js/virtual_fc.js";
 
 export async function handleConnectClick() {
@@ -56,7 +69,7 @@ export async function handleConnectClick() {
                 await new Promise((resolve) => GUI.tab_switch_cleanup(resolve));
                 GUI.tab_switch_in_progress = false;
 
-                await new Promise((resolve) => globalThis.mspHelper.setArmingEnabled(true, resolve));
+                await new Promise((resolve) => mspHelper.setArmingEnabled(true, resolve));
 
                 finishClose();
             }
@@ -262,8 +275,8 @@ async function onOpen(openInfo) {
         setConnectionTimeout();
         FC.resetState();
 
-        globalThis.mspHelper = new MspHelper();
-        MSP.listen(globalThis.mspHelper.process_data.bind(globalThis.mspHelper));
+        resetMspHelper();
+        MSP.listen(mspHelper.process_data.bind(mspHelper));
         console.log(`Requesting configuration data`);
 
         // Gather version data and validate to ensure compatibility
@@ -340,7 +353,7 @@ function onOpenVirtual() {
 
     CONFIGURATOR.connectionValid = true;
 
-    globalThis.mspHelper = new MspHelper();
+    resetMspHelper();
 
     applyVirtualConfig();
 
@@ -462,7 +475,7 @@ async function processName() {
 }
 
 async function setRtc() {
-    await MSP.promise(MSPCodes.MSP_SET_RTC, globalThis.mspHelper.crunch(MSPCodes.MSP_SET_RTC));
+    await MSP.promise(MSPCodes.MSP_SET_RTC, mspHelper.crunch(MSPCodes.MSP_SET_RTC));
     GUI.log(i18n.getMessage('realTimeClockSet'));
 }
 
@@ -528,6 +541,7 @@ async function onConnect() {
         $('#tabs ul.mode-connected').show();
 
         await new Promise((resolve) => setTimeout(resolve, 100));
+        await MSP.promise(MSPCodes.MSP_BOXNAMES, false);
         await MSP.promise(MSPCodes.MSP_FEATURE_CONFIG, false);
         await MSP.promise(MSPCodes.MSP_BATTERY_CONFIG, false);
         await MSP.promise(MSPCodes.MSP_STATUS, false);
@@ -684,11 +698,7 @@ function update_live_status() {
     });
 
     if (GUI.active_tab != 'cli' && GUI.active_tab != 'presets') {
-        MSP.promise(MSPCodes.MSP_BOXNAMES, false).then(() => {
-            return MSP.promise(MSPCodes.MSP_STATUS, false);
-        }).then(() => {
-            return MSP.promise(MSPCodes.MSP_BATTERY_STATE, false);
-        });
+        MSP.promise(MSPCodes.MSP_BATTERY_STATE, false);
     }
 
     for (let i = 0; i < FC.AUX_CONFIG.length; i++) {

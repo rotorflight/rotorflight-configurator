@@ -1,21 +1,25 @@
 <script>
   import diff from "microdiff";
-  import { onMount, onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { slide } from "svelte/transition";
-
-  import { i18n } from "@/js/i18n.js";
-  import { FC } from "@/js/fc.svelte.js";
-  import { reinitialiseConnection } from "@/js/serial_backend";
-  import { MSPCodes } from "@/js/msp/MSPCodes.js";
 
   import Page from "@/components/Page.svelte";
 
-  import Throttle from "./Throttle.svelte";
-  import RPM from "./RPM.svelte";
-  import Telemetry from "./Telemetry.svelte";
+  import { FC } from "@/js/fc.svelte.js";
+  import { GUI } from "@/js/gui.js";
+  import { getTabHelpURL } from "@/js/help.js";
+  import { i18n } from "@/js/i18n.js";
+  import { MSP } from "@/js/msp.svelte.js";
+  import { MSPCodes } from "@/js/msp/MSPCodes.js";
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import { reinitialiseConnection } from "@/js/serial_backend";
+
   import Motor from "./Motor.svelte";
-  import RotorSpeed from "./RotorSpeed.svelte";
   import Override from "./Override.svelte";
+  import RPM from "./RPM.svelte";
+  import RotorSpeed from "./RotorSpeed.svelte";
+  import Telemetry from "./Telemetry.svelte";
+  import Throttle from "./Throttle.svelte";
   import motorState from "./state.svelte.js";
 
   let loading = $state(true);
@@ -120,7 +124,9 @@
 {#snippet header()}
   <h1>{$i18n.t("tabMotors")}</h1>
   <div class="grow"></div>
-  <button class="btn help-btn" onclick={onClickHelp}>Help</button>
+  <button class="btn help-btn" onclick={onClickHelp}>
+    {$i18n.t("buttonHelp")}
+  </button>
 {/snippet}
 
 {#snippet toolbar()}

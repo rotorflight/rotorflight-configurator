@@ -136,67 +136,67 @@ const WEBVIEW = {
             }
         }
     },
-    checkInstalledApps: function(callback) {
-        const self = this;
-        const appsId = Object.keys(self.apps);
-        let installedApps = 0;
-
-        function checkAvailability(id, i) {
-            appAvailability.check(id, function(info) {
-                appInstalled(info, id, i);
-            }, function() {
-                appNotInstalled(id, i);
-            });
-        }
-        function end(i) {
-            if (i === appsId.length-1) {
-                if (installedApps === 0) {
-                    $('#webview_apps').append('<li i18n="cordovaNoWebview" style="color: red"></li>');
-                }
-                i18n.localizePage();
-                console.log('callback');
-                callback();
-            }
-        }
-        function appInstalled(info, id, i) {
-            installedApps++;
-            self.apps[id].installed = true;
-            self.apps[id].enabled = info.enabled;
-            self.apps[id].version = info.version;
-            self.apps[id].majorVersion = parseInt(info.version.split('.')[0]);
-            if (self.chromeVersion === self.apps[id].version) {
-                self.apps[id].used = 'could';
-                self.matchingVersion++;
-            } else {
-                self.apps[id].used = 'no';
-            }
-            let color;
-            if (self.apps[id].majorVersion >= REQUIRED_WEBVIEW_VERSION) {
-                color = 'green';
-                self.apps[id].uptodate = true;
-                self.uptodateApps.push(id);
-            } else {
-                color = 'red';
-                self.apps[id].uptodate = false;
-            }
-            let app = `<li app_id="${id}">${id} (<span style="color: ${color}">${self.apps[id].version}</span>)`;
-            if (!self.apps[id].enabled) {
-                app += ' (<span i18n="portsTelemetryDisabled"></span>)';
-            }
-            app += '</li>';
-            $('#webview_apps').append(app);
-            end(i);
-        }
-        function appNotInstalled(id, i) {
-            self.apps[id].installed = false;
-            end(i);
-        }
-
-        for (let i=0; i<appsId.length; i++) {
-            const id = appsId[i];
-            checkAvailability(id, i);
-        }
-    },
+    // checkInstalledApps: function(callback) {
+    //     const self = this;
+    //     const appsId = Object.keys(self.apps);
+    //     let installedApps = 0;
+    //
+    //     function checkAvailability(id, i) {
+    //         appAvailability.check(id, function(info) {
+    //             appInstalled(info, id, i);
+    //         }, function() {
+    //             appNotInstalled(id, i);
+    //         });
+    //     }
+    //     function end(i) {
+    //         if (i === appsId.length-1) {
+    //             if (installedApps === 0) {
+    //                 $('#webview_apps').append('<li i18n="cordovaNoWebview" style="color: red"></li>');
+    //             }
+    //             i18n.localizePage();
+    //             console.log('callback');
+    //             callback();
+    //         }
+    //     }
+    //     function appInstalled(info, id, i) {
+    //         installedApps++;
+    //         self.apps[id].installed = true;
+    //         self.apps[id].enabled = info.enabled;
+    //         self.apps[id].version = info.version;
+    //         self.apps[id].majorVersion = parseInt(info.version.split('.')[0]);
+    //         if (self.chromeVersion === self.apps[id].version) {
+    //             self.apps[id].used = 'could';
+    //             self.matchingVersion++;
+    //         } else {
+    //             self.apps[id].used = 'no';
+    //         }
+    //         let color;
+    //         if (self.apps[id].majorVersion >= REQUIRED_WEBVIEW_VERSION) {
+    //             color = 'green';
+    //             self.apps[id].uptodate = true;
+    //             self.uptodateApps.push(id);
+    //         } else {
+    //             color = 'red';
+    //             self.apps[id].uptodate = false;
+    //         }
+    //         let app = `<li app_id="${id}">${id} (<span style="color: ${color}">${self.apps[id].version}</span>)`;
+    //         if (!self.apps[id].enabled) {
+    //             app += ' (<span i18n="portsTelemetryDisabled"></span>)';
+    //         }
+    //         app += '</li>';
+    //         $('#webview_apps').append(app);
+    //         end(i);
+    //     }
+    //     function appNotInstalled(id, i) {
+    //         self.apps[id].installed = false;
+    //         end(i);
+    //     }
+    //
+    //     for (let i=0; i<appsId.length; i++) {
+    //         const id = appsId[i];
+    //         checkAvailability(id, i);
+    //     }
+    // },
     exec: function() {
         const self = this;
         $('#webview_troubleshooting').hide();
@@ -208,14 +208,15 @@ const WEBVIEW = {
             document.location.href = '/index.html';
         } else {
             navigator.splashscreen.hide();
-            self.checkInstalledApps(function() {
-                self.tryToFindUsedApp(function() {
-                    self.getAdvice(function() {
-                        $('#loading').hide();
-                        $('#webview_troubleshooting').show();
-                    });
-                });
-            });
+            $('#loading').hide();
+            $('#webview_troubleshooting').show();
+            // TODO: appAvailability global does not exist
+            // self.checkInstalledApps(function() {
+            //     self.tryToFindUsedApp(function() {
+            //         self.getAdvice(function() {
+            //         });
+            //     });
+            // });
         }
     },
 };

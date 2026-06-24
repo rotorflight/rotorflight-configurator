@@ -1,5 +1,15 @@
+import { FC } from "@/js/fc.svelte.js";
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { MSP } from "@/js/msp.svelte.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { MSPConnectorImpl } from '@/js/msp/MSPConnector.js';
+import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
+import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
+import { serial } from "@/js/serial.js";
+import { bit_check } from "@/js/serial_backend.js";
+import { TABS } from "@/js/tabs/tabs.js";
 
 /*
     STM32 F103 serial bus seems to properly initialize with quite a huge auto-baud range

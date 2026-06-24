@@ -93,7 +93,6 @@
 }
 
 .tab-firmware_flasher .options select {
-    height: 20px;
     border: 1px solid var(--subtleAccent);
     border-radius: 3px;
 }

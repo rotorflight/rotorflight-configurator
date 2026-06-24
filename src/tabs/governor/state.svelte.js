@@ -1,7 +1,7 @@
 import semver from "semver";
 
-import { FC } from "@/js/fc.svelte.js";
 import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
+import { FC } from "@/js/fc.svelte.js";
 
 class State {
   is_12_9 = $derived(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9));

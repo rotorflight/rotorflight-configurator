@@ -1,32 +1,45 @@
 # STM32 DFU Driver
 
-This directory contains the STM32 DFU driver used by the Rotorflight Configurator Windows installer.
+This directory contains the official STMicroelectronics STM32 Bootloader / DFU driver package used by the Rotorflight Configurator Windows installer.
 
 ## Source
 
-Extracted from the official STMicroelectronics DfuSe package:
+Extracted from the official STMicroelectronics STM32CubeProgrammer driver package.
 
-- Package: DfuSe USB Device Firmware Upgrade
-- Version: v3.0.6
-- Driver version: 3.0.6.1
-- Driver date: 04/26/2018
 - Provider: STMicroelectronics
+- Device name: STM32 Bootloader
+- Device ID: USB\VID_0483&PID_DF11
+- Driver type: WinUSB-based STM32 Bootloader / DFU driver
+- Driver version: 1.3.0.0
+- Driver date: 11/28/2025
+- Catalog file: STM32Bootloader.cat
+- Device interface GUID: {01105872-BF45-43BE-8B67-3C0F2B8CF0D9}
 
-Original install location:
+Only the required Windows driver package files are included in this repository.
 
-C:\Program Files (x86)\STMicroelectronics\Software\DfuSe v3.0.6\
+The full STM32CubeProgrammer application, command line tools, examples, and unrelated utilities are not bundled.
 
 ## Included Files
 
-- STtube.inf
-- sttube.cat
-- x64/STTub30.sys
-- x86/STTub30.sys
+- STM32Bootloader.inf
+- STM32Bootloader.cat
 
-Only the required driver files are included. The ST installer and utilities are not bundled.
+The included `STM32Bootloader.inf` package installs the STM32 Bootloader device using Microsoft's built-in WinUSB driver stack.
+
+## Installation
+
+Rotorflight Configurator can optionally install this driver during the Windows installer flow.
+
+Driver installation is not automatic unless the user selects the STM32 DFU driver installation option during setup.
+
+The driver is installed using the Windows driver installation mechanism from the included STMicroelectronics driver package.
 
 ## License
 
-This driver is distributed under the STMicroelectronics proprietary software license included in `STtube.inf`.
+These driver files remain subject to the STMicroelectronics software package license included in the driver INF file.
 
-The Rotorflight Configurator installer requires the user to explicitly opt in and accept the STMicroelectronics driver license before the driver is installed.
+The included license header identifies the license as:
+
+- SLA0048 Rev3 / October 2017
+
+The Rotorflight Configurator installer requires the user to explicitly opt in and accept the STMicroelectronics driver license before installing the driver.

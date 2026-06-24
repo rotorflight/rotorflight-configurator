@@ -1,3 +1,5 @@
+import { Beepers } from "@/js/Beepers.js";
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 
 export function applyVirtualConfig() {
@@ -113,6 +115,13 @@ export function applyVirtualConfig() {
     capacity: 10000,
     voltageMeterSource: 1,
     currentMeterSource: 1,
+  });
+
+  Object.assign(FC.SMARTFUEL_CONFIG, {
+    mode: 0,
+    voltageDropRate: 10,
+    chargeDropRate: 50,
+    sagGain: 40,
   });
 
   Object.assign(FC.BATTERY_STATE, {
