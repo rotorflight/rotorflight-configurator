@@ -2,6 +2,16 @@ import * as noUiSlider from 'nouislider';
 import wNumb from 'wnumb';
 import semver from 'semver';
 import { API_VERSION_12_9 } from '../configurator.svelte.js';
+import { FC } from "@/js/fc.svelte.js";
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { getIntegerValue } from "@/js/main.js";
+import { MSP } from "@/js/msp.svelte.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { mspHelper } from "@/js/msp/MSPHelper.js";
+import { reinitialiseConnection } from "@/js/serial_backend";
+
+import { TABS } from "./tabs.js";
 
 const tab = {
     tabName: 'servos',

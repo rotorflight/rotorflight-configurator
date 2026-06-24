@@ -3,7 +3,6 @@
  * RC_CONFIG and RC_MAP configuration. This allows previewing the affect of the
  * configuration without rebooting the FC.
  */
-
 import { FC } from "@/js/fc.svelte.js";
 
 export const CHANNELS = {

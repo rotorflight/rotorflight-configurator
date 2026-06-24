@@ -1,6 +1,9 @@
 import { mount, unmount } from "svelte";
 
+import { GUI } from "@/js/gui.js";
 import Failsafe from "@/tabs/failsafe/Failsafe.svelte";
+
+import { TABS } from "./tabs.js";
 
 const tab = {
   tabName: "failsafe",

@@ -4,8 +4,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import stream from "node:stream";
 
-import archiver from "archiver";
 import innoSetup from "@quanle94/innosetup";
+import archiver from "archiver";
 import { sync as commandExistsSync } from "command-exists";
 import cordovaPkg from "cordova-lib";
 import { glob } from "glob";
@@ -22,6 +22,7 @@ import source from "vinyl-source-stream";
 import * as vite from "vite";
 
 import pkg from "./package.json" with { type: "json" };
+
 // Replace dev mode paths
 pkg.main = "index.html";
 pkg.window.icon = "images/rf_icon.png";
@@ -458,7 +459,7 @@ function run_dev_client() {
   switch (context.target.platform) {
     case "android":
       return () =>
-        runAsync(Promie.reject(Error("android dev client not supported")));
+        runAsync(Promise.reject(Error("android dev client not supported")));
 
     case "linux":
     case "osx":

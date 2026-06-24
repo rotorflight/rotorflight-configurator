@@ -3,8 +3,6 @@
   import semver from "semver";
   import { onMount } from "svelte";
 
-  import { FC } from "@/js/fc.svelte.js";
-
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
@@ -12,6 +10,12 @@
   import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
 
+  import {
+    API_VERSION_12_7,
+    API_VERSION_12_9,
+  } from "@/js/configurator.svelte.js";
+  import { FC } from "@/js/fc.svelte.js";
+  import { bit_check, bit_clear, bit_set } from "@/js/serial_backend.js";
   import govState from "@/tabs/governor/state.svelte.js";
 
   const GOVERNOR_FLAGS = {

@@ -1,6 +1,9 @@
 import { mount, unmount } from "svelte";
 
+import { GUI } from "@/js/gui.js";
 import Governor from "@/tabs/governor/Governor.svelte";
+
+import { TABS } from "./tabs.js";
 
 const tab = {
   tabName: "governor",

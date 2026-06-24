@@ -1,6 +1,7 @@
 <script>
   import { i18n } from "@/js/i18n.js";
   import SelectedPresetPanel from "@/tabs/presets/selected_preset_panel.svelte";
+
   let {
     presetInstances,
     onCancelButtonClicked,

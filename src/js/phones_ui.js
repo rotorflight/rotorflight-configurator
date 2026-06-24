@@ -1,3 +1,5 @@
+import { GUI } from "@/js/gui.js";
+
 export const UI_PHONES = {
     background: '#background',
     tabContainer: '.tab_container',

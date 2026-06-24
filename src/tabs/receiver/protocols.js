@@ -1,4 +1,5 @@
 import semver from "semver";
+
 import {
   API_VERSION_12_7,
   API_VERSION_12_8,
@@ -6,13 +7,14 @@ import {
 } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte";
 import { createEnum } from "@/js/utils/common.js";
+
 import {
   getCustomCrsfSensors,
   getNativeCrsfSensors,
 } from "./telemetry/crsf.js";
-import { getSmartPortSensors } from "./telemetry/smartport.js";
-import { GHOST_SENSORS } from "./telemetry/ghost.js";
 import { HUB_SENSORS } from "./telemetry/frsky_hub.js";
+import { GHOST_SENSORS } from "./telemetry/ghost.js";
+import { getSmartPortSensors } from "./telemetry/smartport.js";
 
 export const TelemetryType = createEnum(
   "TOGGLE",

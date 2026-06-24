@@ -1,12 +1,30 @@
-import globals from "globals";
 import pluginJs from "@eslint/js";
 import pluginSvelte from "eslint-plugin-svelte";
+import globals from "globals";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node, ...globals.jquery },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        ...globals.jquery,
+
+        chrome: "readonly",
+        nw: "readonly",
+        cordova: "readonly",
+        cordova_serial: "readonly",
+
+        LRUMap: "readonly",
+        Switchery: "readonly",
+        jBox: "readonly",
+        ol: "readonly",
+
+        __APP_VERSION__: "readonly",
+        __BACKEND__: "readonly",
+        __COMMIT_HASH__: "readonly",
+      },
     },
   },
   pluginJs.configs.recommended,
@@ -22,10 +40,6 @@ export default [
           varsIgnorePattern: "^_",
         },
       ],
-
-      // TODO: The codebase makes extensive use of globals. This rule should be
-      // enabled and remaining globals explicitly defined.
-      "no-undef": "off",
     },
   },
 ];

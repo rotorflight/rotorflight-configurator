@@ -4,7 +4,7 @@ export async function getFileLastCommitInfo(project, branch, filename) {
   const url = `${GITHUB_API_URL}/repos/${encodeURI(project)}/commits?sha=${encodeURIComponent(branch)}&path=${encodeURIComponent(filename)}`;
   const res = await fetch(url);
   if (!res.ok) {
-    throw new Error(`HTTP ${r.status}`);
+    throw new Error(`HTTP ${res.status}`);
   }
   const commits = await res.json();
 
@@ -22,7 +22,7 @@ export async function getContents(project, branch, path) {
   const url = `${GITHUB_API_URL}/repos/${encodeURI(project)}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
   const res = await fetch(url);
   if (!res.ok) {
-    throw new Error(`HTTP ${r.status}`);
+    throw new Error(`HTTP ${res.status}`);
   }
   return await res.json();
 }

@@ -1,3 +1,4 @@
+import { i18n } from "@/js/localization.js";
 import PresetInstance from "@/js/presets/source/preset_instance.js";
 
 /**

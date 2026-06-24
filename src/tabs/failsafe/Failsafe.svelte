@@ -3,11 +3,6 @@
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
 
-  import { i18n } from "@/js/i18n.js";
-  import { FC } from "@/js/fc.svelte.js";
-  import { reinitialiseConnection } from "@/js/serial_backend";
-  import { MSPCodes } from "@/js/msp/MSPCodes.js";
-
   import Expert from "@/components/Expert.svelte";
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
@@ -15,6 +10,15 @@
   import Section from "@/components/Section.svelte";
   import SubSection from "@/components/SubSection.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
+
+  import { FC } from "@/js/fc.svelte.js";
+  import { GUI } from "@/js/gui.js";
+  import { getTabHelpURL } from "@/js/help.js";
+  import { i18n } from "@/js/i18n.js";
+  import { MSP } from "@/js/msp.svelte.js";
+  import { MSPCodes } from "@/js/msp/MSPCodes.js";
+  import { mspHelper } from "@/js/msp/MSPHelper.js";
+  import { reinitialiseConnection } from "@/js/serial_backend";
 
   let loading = $state(true);
   let initialState;
