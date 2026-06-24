@@ -1,12 +1,8 @@
-onlyBuiltDependencies:
-  - '@fortawesome/fontawesome-free'
-  - '@parcel/watcher'
-  - es5-ext
-  - esbuild
-  - fs-xattr
-  - fsevents
-  - macos-alias
-  - nw-builder
+allowBuilds:
+  '@fortawesome/fontawesome-free': false
+  '@parcel/watcher': true
+  es5-ext: false
+  nw-builder: false
 
 overrides:
   fs-xattr: 0.4.0
