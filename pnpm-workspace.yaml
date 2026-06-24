@@ -2,6 +2,9 @@ allowBuilds:
   '@fortawesome/fontawesome-free': false
   '@parcel/watcher': true
   es5-ext: false
+  fs-xattr: true
+  fsevents: true
+  macos-alias: true
   nw-builder: false
 
 overrides:
