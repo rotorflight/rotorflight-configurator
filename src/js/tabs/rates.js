@@ -526,7 +526,7 @@ tab.initialize = function (callback) {
 
                 const targetElement = $(event.target);
                 const targetValue = getFloatValue(targetElement);
-                if (self.currentRates.hasOwnProperty(targetElement.attr('name'))) {
+                if (Object.hasOwn(self.currentRates, targetElement.attr('name'))) {
                     self.currentRates[targetElement.attr('name')] = targetValue;
                     updateNeeded = true;
                 }

@@ -50,7 +50,7 @@ export const FirmwareCache = (function () {
          */
         function load(callback) {
             chrome.storage.local.get(CACHEKEY, obj => {
-                let entries = typeof obj === "object" && obj.hasOwnProperty(CACHEKEY)
+                let entries = typeof obj === "object" && Object.hasOwn(obj, CACHEKEY)
                     ? obj[CACHEKEY]
                     : [];
                 callback(entries);
@@ -76,7 +76,7 @@ export const FirmwareCache = (function () {
         let cacheKey = withCachePrefix(key);
         chrome.storage.local.get(cacheKey, obj => {
             /** @type {CacheItem} */
-            let cached = typeof obj === "object" && obj.hasOwnProperty(cacheKey)
+            let cached = typeof obj === "object" && Object.hasOwn(obj, cacheKey)
                 ? obj[cacheKey]
                 : null;
             if (cached === null) {
@@ -163,7 +163,7 @@ export const FirmwareCache = (function () {
         let cacheKey = withCachePrefix(key);
         chrome.storage.local.get(cacheKey, obj => {
             /** @type {CacheItem} */
-            let cached = typeof obj === "object" && obj.hasOwnProperty(cacheKey)
+            let cached = typeof obj === "object" && Object.hasOwn(obj, cacheKey)
                 ? obj[cacheKey]
                 : null;
             callback(cached);
@@ -187,7 +187,7 @@ export const FirmwareCache = (function () {
                 return;
             }
             for (let cacheKey of cacheKeys) {
-                if (obj.hasOwnProperty(cacheKey)) {
+                if (Object.hasOwn(obj, cacheKey)) {
                     /** @type {CacheItem} */
                     let item = obj[cacheKey];
                     onRemoveFromCache(item.release);
