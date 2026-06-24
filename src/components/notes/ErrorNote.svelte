@@ -1,5 +1,6 @@
 <script>
   import { i18n } from "@/js/i18n.js";
+
   let { children, message } = $props();
 </script>
 

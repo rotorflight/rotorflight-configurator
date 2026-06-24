@@ -1,3 +1,4 @@
+import { i18n } from "@/js/localization.js";
 import GithubUtil from "@/js/presets/source/github.js";
 import Retriever from "@/js/presets/source/retriever.js";
 

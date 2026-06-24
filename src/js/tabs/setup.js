@@ -1,3 +1,14 @@
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { FC } from "@/js/fc.svelte.js";
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { MSP } from "@/js/msp.svelte.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { mspHelper } from "@/js/msp/MSPHelper.js";
+import { have_sensor, reinitialiseConnection } from "@/js/serial_backend";
+
+import { TABS } from "./tabs.js";
+
 const tab = {
     tabName: 'setup',
 };
@@ -117,24 +128,11 @@ tab.initialize = function (callback) {
         });
 
         $('a.backupSettings').click(function () {
-            if ($(this).hasClass('disabled')) {
-                return;
-            }
-
-            configuration_backup(function () {
-                GUI.log(i18n.getMessage('initialSetupBackupSuccess'));
-            });
+            return;
         });
 
         $('a.restoreSettings').click(function () {
-            if ($(this).hasClass('disabled')) {
-                return;
-            }
-
-            configuration_restore(function () {
-                GUI.log(i18n.getMessage('initialSetupRestoreSuccess'));
-                GUI.tab_switch_reload();
-            });
+            return;
         });
 
         $('a.rebootMsc').click(function () {

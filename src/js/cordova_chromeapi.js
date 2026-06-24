@@ -39,7 +39,7 @@ function removeItemOfAnArray(array, item) {
     }
 };
 
-export const chromeapiSerial = {
+const chromeapiSerial = {
     logHeader: 'SERIAL (adapted from Cordova): ',
     connection: {
         connectionId: 1, // Only one connection possible

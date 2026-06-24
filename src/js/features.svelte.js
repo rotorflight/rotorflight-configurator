@@ -1,3 +1,5 @@
+import { bit_check, bit_clear, bit_set } from "@/js/serial_backend.js";
+
 export class Features {
   static FLAGS = {
     RX_PPM: 0,

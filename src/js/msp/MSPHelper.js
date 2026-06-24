@@ -4,7 +4,19 @@ import {
     API_VERSION_12_7,
     API_VERSION_12_8,
     API_VERSION_12_9,
+    CONFIGURATOR,
 } from "@/js/configurator.svelte.js";
+import { defaultHuffmanTree, defaultHuffmanLenIndex } from "@/js/default_huffman_tree.js";
+import { FC } from "@/js/fc.svelte.js";
+import { huffmanDecodeBuf } from "@/js/huffman.js";
+import { i18n } from "@/js/localization.js";
+import { showErrorDialog, updateTabList } from "@/js/main.js";
+import { MSP } from "@/js/msp.svelte.js";
+import { serial } from "@/js/serial.js";
+import { bit_check, bit_set, sensor_status, update_dataflash_global } from "@/js/serial_backend.js";
+import { TABS } from "@/js/tabs/tabs.js";
+
+import { MSPCodes } from "./MSPCodes.js";
 
 // Used for LED_STRIP
 const ledDirectionLetters    = ['n', 'e', 's', 'w', 'u', 'd'];      // in LSB bit order
@@ -3045,3 +3057,9 @@ MspHelper.prototype.setBatteryProfile = async function(index)
         await MSP.promise(MSPCodes.MSP_SET_BATTERY_PROFILE, buffer);
     }
 };
+
+export let mspHelper = new MspHelper();
+
+export function resetMspHelper() {
+  mspHelper = new MspHelper();
+}

@@ -28,7 +28,7 @@ fontawesome:
 
 .PHONY: version
 version: ## Set application version to $SEMVER
-	sed -i -e 's/\("version":[ \t]*\)".*"/\1"$(SEMVER)"/' package.json
+	sed -i -e 's|^\(  "version": *\)".*"|\1"$(SEMVER)"|' package.json
 
 .PHONY: dev-server
 dev-server: ## Run development server

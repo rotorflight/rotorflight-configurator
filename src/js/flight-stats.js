@@ -1,5 +1,6 @@
 import { get } from "svelte/store";
 
+import { FC } from "@/js/fc.svelte.js";
 import { i18n } from "@/js/i18n.js";
 
 export function getDuration() {

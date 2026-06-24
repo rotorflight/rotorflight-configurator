@@ -1,10 +1,19 @@
 import semver from "semver";
 
-import { API_VERSION_12_7, API_VERSION_12_9 } from "@/js/configurator.svelte";
+import { API_VERSION_12_7, API_VERSION_12_9 } from "@/js/configurator.svelte.js";
+import { FC } from "@/js/fc.svelte.js";
+import { Features } from "@/js/features.svelte.js";
 import * as flightStats from "@/js/flight-stats.js";
-import { getIntegerValue } from "@/js/main.js";
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { getIntegerValue, updateTabList } from "@/js/main.js";
 import { Model } from "@/js/model.js";
+import { MSP } from "@/js/msp.svelte.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { mspHelper } from "@/js/msp/MSPHelper.js";
 import { reinitialiseConnection } from "@/js/serial_backend.js";
+
+import { TABS } from "./tabs.js";
 
 const tab = {
     tabName: 'configuration',

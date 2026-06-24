@@ -1,6 +1,9 @@
-import { reinitialiseConnection } from "@/js/serial_backend.js";
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { serial } from "@/js/serial.js";
+import { reinitialiseConnection } from "@/js/serial_backend.js";
 
 const CHAR_CODE_BACKSPACE = 8;
 const CHAR_CODE_LINE_FEED = 10;

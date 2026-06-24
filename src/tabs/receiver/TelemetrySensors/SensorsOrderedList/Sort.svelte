@@ -1,6 +1,8 @@
 <script>
   import Sortable from "sortablejs";
+
   import { i18n } from "@/js/i18n.js";
+
   import { TELEMETRY_SENSORS } from "../../telemetry/sensors.js";
 
   let { value = $bindable([]) } = $props();

@@ -2,10 +2,26 @@ import * as marked from 'marked';
 import semver from "semver";
 
 import * as config from '@/js/config.js';
+import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { ConfigInserter } from "@/js/ConfigInserter.js";
+import { FC } from "@/js/fc.svelte.js";
 import { readTextFile, writeTextFile } from '@/js/filesystem.js';
+import { FirmwareCache } from "@/js/FirmwareCache.js";
 import * as github from '@/js/GitHubApi.js';
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { getIntegerValue } from "@/js/main.js";
+import { MSP } from "@/js/msp.svelte.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { ReleaseChecker } from '@/js/release_checker.js';
 import { manufacturers } from "@/js/manufacturers.js";
+import { MspHelper } from "@/js/msp/MSPHelper.js";
+import { PortHandler, usbDevices } from "@/js/port_handler.js";
+import { STM32 } from "@/js/protocols/stm32.js";
+import { STM32DFU } from "@/js/protocols/stm32usbdfu.js";
+import { serial } from "@/js/serial.js";
+
+import { TABS } from "./tabs.js";
 
 async function getCachedUnifiedTargets() {
   const { unifiedSourceCache } = await new Promise((resolve) => chrome.storage.local.get("unifiedSourceCache", resolve));
@@ -611,7 +627,7 @@ tab.initialize = function (callback) {
                                 console.log(`Fetching ${targetSpec.download_url}`);
                                 const res = await fetch(targetSpec.download_url);
                                 if (!res.ok) {
-                                  throw new Error(`HTTP ${r.status}`);
+                                  throw new Error(`HTTP ${res.status}`);
                                 }
                                 let config = await res.text();
 

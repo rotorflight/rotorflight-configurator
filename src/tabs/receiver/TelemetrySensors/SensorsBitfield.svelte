@@ -1,6 +1,8 @@
 <script>
-  import Switch from "@/components/Switch.svelte";
   import Field from "@/components/Field.svelte";
+  import Switch from "@/components/Switch.svelte";
+
+  import { bit_check, bit_clear, bit_set } from "@/js/serial_backend.js";
 
   let { value = $bindable(), mask } = $props();
 

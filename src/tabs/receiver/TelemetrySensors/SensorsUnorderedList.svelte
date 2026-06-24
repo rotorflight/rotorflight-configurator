@@ -1,6 +1,7 @@
 <script>
-  import Switch from "@/components/Switch.svelte";
   import Field from "@/components/Field.svelte";
+  import Switch from "@/components/Switch.svelte";
+
   import { TELEMETRY_SENSORS } from "../telemetry/sensors.js";
 
   let { value = $bindable([]), sensors } = $props();

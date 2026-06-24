@@ -2,10 +2,6 @@
   import semver from "semver";
   import { slide } from "svelte/transition";
 
-  import { CONFIGURATOR } from "@/js/configurator.svelte.js";
-  import { i18n } from "@/js/i18n.js";
-  import motorState from "../motors/state.svelte.js";
-
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
@@ -13,6 +9,11 @@
   import Switch from "@/components/Switch.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
   import WarningNote from "@/components/notes/WarningNote.svelte";
+
+  import { API_VERSION_12_8, CONFIGURATOR } from "@/js/configurator.svelte.js";
+  import { i18n } from "@/js/i18n.js";
+
+  import motorState from "../motors/state.svelte.js";
 
   const filterStrengths = [
     "gyroRpmFilterPresetCustom",

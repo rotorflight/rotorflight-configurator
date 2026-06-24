@@ -1,15 +1,23 @@
 import semver from "semver";
 
+import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import * as config from "@/js/config.js";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
-import { handleConnectClick } from "@/js/serial_backend.js";
-
-globalThis.TABS = {};
+import { DarkTheme } from "@/js/DarkTheme.js";
+import { FC } from "@/js/fc.svelte.js";
+import { GUI } from "@/js/gui.js";
+import { i18n } from "@/js/localization.js";
+import { mspHelper } from "@/js/msp/MSPHelper.js";
+import { UI_PHONES } from "@/js/phones_ui.js";
+import { ReleaseChecker } from "@/js/release_checker.js";
+import { serial } from "@/js/serial.js";
+import { handleConnectClick, initializeSerialBackend } from "@/js/serial_backend.js";
+import { TABS } from "@/js/tabs/tabs.js";
 
 if (__BACKEND__ === "nwjs") {
     if (import.meta.env.DEV) {
         // allow smaller window for testing mobile layout
-        globalThis.nw.Window.get().setMinimumSize(320, 550);
+        nw.Window.get().setMinimumSize(320, 550);
     }
 
     jQuery(function () {
