@@ -5,7 +5,7 @@ import path from "node:path";
 import stream from "node:stream";
 
 import innoSetup from "@quanle94/innosetup";
-import archiver from "archiver";
+import { ZipArchive } from "archiver";
 import { sync as commandExistsSync } from "command-exists";
 import cordovaPkg from "cordova-lib";
 import { glob } from "glob";
@@ -422,7 +422,7 @@ function build_redist_zip() {
   return runAsync(async () => {
     const targetPath = `${REDIST_DIR}/${pkg.name}_${pkg.version}_win_${context.target.arch}.zip`;
     const fd = await fs.open(targetPath, "w");
-    const archive = archiver("zip");
+    const archive = new ZipArchive();
     archive.pipe(fd.createWriteStream());
     archive.directory(context.appdir, `${pkg.name}-${pkg.version}`);
     await archive.finalize();

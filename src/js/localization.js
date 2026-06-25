@@ -216,7 +216,7 @@ function getValidLocale(userLocale) {
 }
 
 i18n.addResources = function(bundle) {
-    const takeFirst = obj => obj.hasOwnProperty("length") && 0 < obj.length ? obj[0] : obj;
+    const takeFirst = obj => Object.hasOwn(obj, "length") && 0 < obj.length ? obj[0] : obj;
     const lang = takeFirst(i18next.options.fallbackLng['default']);
     const ns = takeFirst(i18next.options.defaultNS);
     i18next.addResourceBundle(lang, ns, bundle, true, true);

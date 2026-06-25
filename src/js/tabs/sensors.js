@@ -32,7 +32,7 @@ tab.initialize = function (callback) {
     function initDataArray(length) {
         const data = new Array(length);
         for (let i = 0; i < length; i++) {
-            data[i] = new Array();
+            data[i] = [];
             data[i].min = -1;
             data[i].max = 1;
         }
