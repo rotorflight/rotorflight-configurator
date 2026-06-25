@@ -1,4 +1,4 @@
 export default {
-  "*.{js,mjs,svelte}": ["prettier --write", "eslint"],
+  "*.{ts,js,mjs,svelte}": ["prettier --write", "eslint --cache"],
   "*.scss": "prettier --write",
 };

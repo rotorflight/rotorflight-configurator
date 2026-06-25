@@ -1,7 +1,7 @@
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 export default {
-  preprocess: vitePreprocess(),
+  preprocess: vitePreprocess({ script: true }),
   onwarn: (warning, handler) => {
     /* Caused by injecting _global.scss into all svelte components */
     if (warning.code === "css_unused_selector") {

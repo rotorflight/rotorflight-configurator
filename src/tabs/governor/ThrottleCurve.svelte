@@ -121,6 +121,7 @@
 
   $effect(() => {
     // check if curve has been modified externally
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     FC.GOVERNOR.gov_bypass_throttle;
 
     if (lastFcCurve === null) {

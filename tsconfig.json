@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "rewriteRelativeImportExtensions": true,
+    "allowJs": true,
+    "checkJs": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "moduleResolution": "bundler",
+
+    "verbatimModuleSyntax": true,
+    "module": "esnext",
+    "target": "esnext",
+
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
+
+    "allowImportingTsExtensions": true,
+
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    "types": ["jquery", "node", "semver", "svelte", "vite/client"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte", "types", "*.mjs"]
+}
