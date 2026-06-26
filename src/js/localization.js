@@ -177,11 +177,10 @@ i18n.localizePage = function(forceReTranslate) {
 };
 
 /*
- * Reads the chrome config, if DEFAULT or there is no config stored,
- * returns the current locale to the callback
+ * Returns the users locale preference if set, otherwise the current locale.
  */
 function getStoredUserLocale() {
-    i18n.selectedLanguage = config.user_language_select ?? 'DEFAULT';
+    i18n.selectedLanguage = config.user_language_select;
     return getValidLocale(i18n.selectedLanguage);
 }
 
