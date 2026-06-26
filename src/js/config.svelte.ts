@@ -41,6 +41,7 @@ export type Config = {
   hide_unused_modes: boolean;
   last_tab: string | null;
   last_used_port: string | null;
+  locale: string;
   log_open: boolean;
   port_override: string | null;
   presets_sources_metadata: unknown[];
@@ -54,7 +55,6 @@ export type Config = {
   show_legacy_targets: boolean;
   show_presets_warning_backup: boolean;
   tracked_presets: unknown[];
-  user_language_select: string;
   zoom_level: number;
 };
 
@@ -74,6 +74,7 @@ const _config: Config = $state({
   hide_unused_modes: false,
   last_tab: null,
   last_used_port: null,
+  locale: "DEFAULT",
   log_open: false,
   port_override: null,
   presets_sources_metadata: [],
@@ -86,7 +87,6 @@ const _config: Config = $state({
   show_legacy_targets: false,
   show_presets_warning_backup: true,
   tracked_presets: [],
-  user_language_select: "DEFAULT",
   zoom_level: 100,
 });
 
