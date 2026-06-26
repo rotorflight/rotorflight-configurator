@@ -1,7 +1,7 @@
 import * as marked from 'marked';
 import semver from "semver";
 
-import * as config from '@/js/config.js';
+import { config } from "@/js/config.svelte.ts";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
 import { FC } from "@/js/fc.svelte.js";
@@ -188,8 +188,8 @@ tab.initialize = function (callback) {
 
             tab.releases = builds;
 
-            if (config.get('rememberLastSelectedBoard')) {
-                const selected_board = config.get('selected_board');
+            if (config.remember_last_selected_board) {
+                const selected_board = config.selected_board;
                 const boardBuilds = builds[selected_board];
                 $('select[name="board"]').val(boardBuilds ? selected_board : 0).trigger('change');
             }
@@ -327,15 +327,15 @@ tab.initialize = function (callback) {
                 .append($(`<option value='0'>${i18n.getMessage("firmwareFlasherOptionLabelSelectFirmwareVersion")}</option>`));
 
             let selectedBoard = undefined;
-            if (config.get('rememberLastSelectedBoard')) {
-                selectedBoard = config.get('selected_board');
+            if (config.remember_last_selected_board) {
+                selectedBoard = config.selected_board;
             }
 
             updateBoardSelect(selectedBoard);
         }
 
         function updateBoardSelect(selected) {
-            const showLegacy = config.get("showLegacyTargets") ?? false;
+            const showLegacy = config.show_legacy_targets;
 
             const boards_e = $('select[name="board"]');
             boards_e.empty()
@@ -560,8 +560,8 @@ tab.initialize = function (callback) {
                         self.unifiedTarget = {};
                     }
                 }
-                if (config.get('rememberLastSelectedBoard')) {
-                    config.set({'selected_board': target});
+                if (config.remember_last_selected_board) {
+                    config.selected_board = target;
                 }
                 tab.selectedBoard = target;
                 tab.bareBoard = undefined;
@@ -770,20 +770,20 @@ tab.initialize = function (callback) {
             }
         }
 
-        const showAdvancedOpts = config.get('showAdvancedFirmwareOpts') ?? false;
+        const showAdvancedOpts = config.show_advanced_firmware_opts;
 
         $('input.erase_chip')
-            .prop('checked', showAdvancedOpts ? config.get('erase_chip') ?? true : true)
+            .prop('checked', showAdvancedOpts ? config.erase_chip : true)
             .on('change', function () {
-                config.set({ 'erase_chip': $(this).is(':checked') });
+                config.erase_chip = $(this).is(':checked');
             })
             .closest('.field')
             .toggle(showAdvancedOpts);
 
         $('#show-legacy-targets')
-            .prop('checked', showAdvancedOpts ? config.get('showLegacyTargets') ?? false : false)
+            .prop('checked', showAdvancedOpts ? config.show_legacy_targets : false)
             .on('change', function () {
-                  config.set({ showLegacyTargets: $(this).is(':checked') });
+                  config.show_legacy_targets = $(this).is(':checked');
                   updateBoardSelect($('select[name="board"]').val());
             })
             .closest('.field')

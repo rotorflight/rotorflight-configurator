@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 import i18nextHttpBackend from 'i18next-http-backend';
 
-import * as config from "@/js/config.js";
+import { config } from "@/js/config.svelte.ts";
 import { GUI } from "@/js/gui.js";
 
 export const i18n = {};
@@ -72,7 +72,7 @@ i18n.parseInputFile = function(data) {
 };
 
 i18n.changeLanguage = function(languageSelected) {
-    config.set({'userLanguageSelect': languageSelected});
+    config.user_language_select = languageSelected;
     i18next.changeLanguage(getValidLocale(languageSelected));
     i18n.selectedLanguage = languageSelected;
     GUI.log(i18n.getMessage('language_changed'));
@@ -181,7 +181,7 @@ i18n.localizePage = function(forceReTranslate) {
  * returns the current locale to the callback
  */
 function getStoredUserLocale() {
-    i18n.selectedLanguage = config.get('userLanguageSelect') ?? 'DEFAULT';
+    i18n.selectedLanguage = config.user_language_select ?? 'DEFAULT';
     return getValidLocale(i18n.selectedLanguage);
 }
 
