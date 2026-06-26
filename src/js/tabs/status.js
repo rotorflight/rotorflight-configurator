@@ -309,8 +309,11 @@ tab.initialize = function (callback) {
 
         function updateArming(active) {
             FC.CONFIG.enableArmingFlag = active;
-            enableArmingSwitch.prop('checked', active);
             mspHelper.setArmingEnabled(active);
+
+            if (enableArmingSwitch.is(':checked') !== active) {
+                enableArmingSwitch.trigger('click');
+            }
         }
 
         enableArmingSwitch.on('change', function () {
