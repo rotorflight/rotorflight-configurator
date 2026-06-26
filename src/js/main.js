@@ -1,7 +1,7 @@
 import semver from "semver";
 
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
-import * as config from "@/js/config.js";
+import { config } from "@/js/config.svelte.ts";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
 import { FC } from "@/js/fc.svelte.js";
@@ -254,7 +254,7 @@ export function startProcess() {
 
     $('#tabs ul.mode-disconnected li a:first').click();
 
-    const zoomLevel = config.get('zoomLevel');
+    const zoomLevel = config.zoom_level;
     if (zoomLevel) {
         GUI.set_zoom(zoomLevel, false);
     }
@@ -317,14 +317,14 @@ export function startProcess() {
             $("#log").removeClass('active');
             $("#tab-content-container").removeClass('logopen');
             $("#scrollicon").removeClass('active');
-            config.set({'logopen': false});
+            config.log_open = false;
 
             state = false;
         } else {
             $("#log").addClass('active');
             $("#tab-content-container").addClass('logopen');
             $("#scrollicon").addClass('active');
-            config.set({'logopen': true});
+            config.log_open = true;
 
             state = true;
         }
@@ -332,21 +332,21 @@ export function startProcess() {
         $(this).data('state', state);
     });
 
-    if (config.get('logopen')) {
+    if (config.log_open) {
         $("#showlog").trigger('click');
     }
 
-    CONFIGURATOR.expertMode = config.get('expertMode') ?? false;
+    CONFIGURATOR.expertMode = config.expert_mode;
     $('#expert-mode input')
         .on('change', function () {
             CONFIGURATOR.expertMode = this.checked;
-            config.set({'expertMode': this.checked});
+            config.expert_mode = this.checked;
         })
         .prop('checked', CONFIGURATOR.expertMode);
 
-    CliAutoComplete.setEnabled(config.get('cliAutoComplete') ?? true);
+    CliAutoComplete.setEnabled(config.cli_auto_complete);
 
-    setDarkTheme(config.get('darkTheme') ?? 2);
+    setDarkTheme(config.dark_theme);
 
     if (GUI.isCordova()) {
         let darkMode = false;
@@ -377,13 +377,14 @@ export function checkForConfiguratorUpdates() {
 }
 
 function notifyOutdatedVersion(releaseData) {
+    const allowUnstable = config.check_for_configurator_unstable_versions;
     const versions = releaseData.filter(function (version) {
         var versionFromTagExpression = /release\/(.*)/;
         var match = versionFromTagExpression.exec(version.tag_name);
         if (match) {
             version.release = semver.valid(match[1]);
             if (version.release && (!semver.prerelease(version.release)
-                || config.get('checkForConfiguratorUnstableVersions'))) {
+                || allowUnstable)) {
                 return version;
             }
         }

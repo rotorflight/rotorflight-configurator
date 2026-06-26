@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-import * as config from "@/js/config.js";
+import { config } from "@/js/config.svelte.ts";
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
@@ -245,7 +245,7 @@ tab.initialize = function (callback) {
 
             $('.tab-sensors .rate select:first').change();
 
-            config.set({'graphs_enabled': _checkboxes});
+            config.graphs_enabled = _checkboxes;
         });
 
         // Always start with default/empty sensor data array, clean slate all
@@ -323,7 +323,7 @@ tab.initialize = function (callback) {
             const fastest = d3.min([rates.gyro, rates.accel, rates.mag]);
 
             // store current/latest refresh rates in the storage
-            config.set({'sensor_settings': {'rates': rates, 'scales': scales}});
+            config.sensor_settings = {'rates': rates, 'scales': scales};
 
             // re-initialize domains with new scales
             gyroHelpers = initGraphHelpers('#gyro', samples_gyro_i, [-scales.gyro, scales.gyro]);
@@ -430,7 +430,7 @@ tab.initialize = function (callback) {
             }
         });
 
-        const sensor_settings = config.get('sensor_settings');
+        const sensor_settings = config.sensor_settings;
         // set refresh speeds according to configuration saved in storage
         if (sensor_settings) {
             $('.tab-sensors select[name="gyro_refresh_rate"]').val(sensor_settings.rates.gyro);
@@ -454,7 +454,7 @@ tab.initialize = function (callback) {
             $('.tab-sensors .rate select:first').change();
         }
 
-        const graphs_enabled = config.get('graphs_enabled');
+        const graphs_enabled = config.graphs_enabled;
         if (graphs_enabled) {
             const _checkboxes = $('.tab-sensors .info .checkboxes input');
             for (let i = 0; i < graphs_enabled.length; i++) {

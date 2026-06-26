@@ -1,7 +1,7 @@
 /**
  * @typedef {import('@/js/presets/source/preset_instance.js').default} PresetInstance
  */
-import * as config from "@/js/config.js";
+import { config } from "@/js/config.svelte.ts";
 
 const MAX_TRACKED_PRESETS_COUNT = 50;
 
@@ -38,11 +38,11 @@ export default class PresetTracker {
   }
 
   #loadFromStorage() {
-    this.#trackedPresets = config.get("TrackedPresets") ?? [];
+    this.#trackedPresets = config.tracked_presets;
   }
 
   #saveToStorage() {
-    config.set({ TrackedPresets: this.#trackedPresets });
+    config.tracked_presets = this.#trackedPresets;
   }
 
   /**
