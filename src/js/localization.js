@@ -180,7 +180,7 @@ i18n.localizePage = function(forceReTranslate) {
  * Returns the users locale preference if set, otherwise the current locale.
  */
 function getStoredUserLocale() {
-    i18n.selectedLanguage = config.user_language_select;
+    i18n.selectedLanguage = config.locale;
     return getValidLocale(i18n.selectedLanguage);
 }
 
