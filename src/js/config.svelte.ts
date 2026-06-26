@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+
 function isKeyOf<T extends Record<string, unknown>>(
   obj: T,
   key: any,
@@ -39,6 +42,7 @@ export type Config = {
   remember_last_selected_board: boolean;
   remember_last_tab: boolean;
   selected_board: string | null;
+  /* eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents */
   sensor_settings: unknown | null;
   show_advanced_firmware_opts: boolean;
   show_all_ports: boolean;
@@ -91,6 +95,7 @@ const handler: ProxyHandler<Config> = {
   set(obj, prop, value) {
     if (isKeyOf(obj, prop)) {
       set(prop, value);
+      /* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
       (obj as any)[prop] = value;
       return true;
     }

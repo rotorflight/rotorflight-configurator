@@ -1,4 +1,3 @@
-import { DarkTheme } from "@/js/DarkTheme.js";
 import { config } from "@/js/config.svelte.ts";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
