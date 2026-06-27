@@ -42,3 +42,4 @@
 
 !*.scss
 !*.svelte
+!*.ts
