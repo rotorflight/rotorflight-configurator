@@ -203,6 +203,7 @@
     text-align: center;
     border-radius: 3px;
     background-color: var(--accent);
+    transition: width 0.1s linear;
 }
 
 .tab-servos .meter-label {
