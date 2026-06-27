@@ -431,8 +431,8 @@ tab.initialize = function (callback) {
                     rangeMax = 1460;
                 } else {
                     // 1520us
-                    rangeMin = 750;
-                    rangeMax = 2250;
+                    rangeMin = 500;
+                    rangeMax = 2500;
                 }
 
                 const range  = rangeMax - rangeMin;
