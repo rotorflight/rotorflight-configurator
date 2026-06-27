@@ -5,7 +5,7 @@
 import { mount, unmount } from "svelte";
 
 import CliEngine from "@/js/cli_engine.js";
-import * as config from "@/js/config.js";
+import { config } from "@/js/config.svelte.ts";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import * as filesystem from "@/js/filesystem.js";
@@ -451,13 +451,11 @@ class PresetsTab {
 
   onButtonHideBackupWarningClick() {
     this.#dom.warningBackup.toggle(false);
-    config.set({ showPresetsWarningBackup: false });
+    config.show_presets_warning_backup = false;
   }
 
   setupBackupWarning() {
-    this.#dom.warningBackup.toggle(
-      config.get("showPresetsWarningBackup") ?? true,
-    );
+    this.#dom.warningBackup.toggle(config.show_presets_warning_backup);
   }
 
   onPresetSourcesShowClick() {

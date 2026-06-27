@@ -1,4 +1,4 @@
-import * as config from '@/js/config.js';
+import { config } from "@/js/config.svelte.ts";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { getTabHelpURL } from "@/js/help.js";
 import { i18n } from "@/js/localization.js";
@@ -368,7 +368,6 @@ GuiControl.prototype.switchery = function() {
 };
 
 GuiControl.prototype.set_zoom = function(zoom_level, show_box) {
-
     if (zoom_level)
         GUI.zoom_level = zoom_level;
     else
@@ -376,7 +375,7 @@ GuiControl.prototype.set_zoom = function(zoom_level, show_box) {
 
     const percent = zoom_level + '%';
 
-    config.set({'zoomLevel': zoom_level});
+    config.zoom_level = zoom_level;
 
     nw.Window.get().zoomLevel = Math.log(zoom_level / 100) / Math.log(1.2);
     $('#zoom-percent').text(percent);
@@ -442,12 +441,12 @@ GuiControl.prototype.content_ready = function (callback) {
 };
 
 GuiControl.prototype.saveDefaultTab = function(tabName) {
-    config.set({ lastTab: tabName });
+    config.last_tab = tabName;
 };
 
 GuiControl.prototype.selectDefaultTabWhenConnected = function() {
-    const lastTab = config.get('lastTab');
-    if (config.get('rememberLastTab') && lastTab) {
+    const lastTab = config.last_tab;
+    if (config.remember_last_tab && lastTab) {
         $(`#tabs ul.mode-connected .tab_${lastTab} a`).click();
     } else {
         $('#tabs ul.mode-connected .tab_status a').click();
