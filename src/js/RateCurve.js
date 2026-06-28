@@ -125,36 +125,12 @@ export const RateCurve = function () {
         return angularVel;
     };
 
-    function rfPow(x, expo) {
-        const bits = Math.min(expo, 127);
-
-        let y = x * x;
-        let z = x;
-
-        if (bits & (1 << 4)) y *= z;
-        z *= z;
-        if (bits & (1 << 5)) y *= z;
-        z *= z;
-        if (bits & (1 << 6)) y *= z;
-
-        z = Math.sqrt(x);
-        if (bits & (1 << 3)) y *= z;
-        z = Math.sqrt(z);
-        if (bits & (1 << 2)) y *= z;
-        z = Math.sqrt(z);
-        if (bits & (1 << 1)) y *= z;
-        z = Math.sqrt(z);
-        if (bits & (1 << 0)) y *= z;
-
-        return y;
-    }
-
     this.getRotorflightRates = function (rcCommandf, rcCommandfAbs, srate, rcRate, rcExpo) {
-        const expof = rcCommandf * (1 - rcExpo) + Math.sign(rcCommandf) * rfPow(rcCommandfAbs, srate) * rcExpo;
+        const shape = srate / 16 + 2;
+        const expof = rcCommandf * (1 - rcExpo) + Math.sign(rcCommandf) * Math.pow(rcCommandfAbs, shape) * rcExpo;
 
         return rcRate * expof;
     };
-
 };
 
 RateCurve.prototype.rcCommandRawToDegreesPerSecond = function (rcData, ratesType, rate, rcRate, rcExpo, superExpoActive, deadband, limit) {
