@@ -14,7 +14,6 @@ import { TABS } from "./tabs.js";
 
 const tab = {
     tabName: 'status',
-    armingEnabled: true,
     yaw_fix: 0.0,
     axisNames: [
         { value: 0, text: 'controlAxisRoll' },
@@ -316,10 +315,9 @@ tab.initialize = function (callback) {
         const dialogConfirmArming = $('.dialogConfirmArming')[0];
 
         function updateArming(active) {
-            FC.CONFIG.enableArmingFlag = active;
             mspHelper.setArmingEnabled(active);
 
-            if (enableArmingSwitch.is(':checked') !== active) {
+            if (enableArmingSwitch.prop('checked') !== active) {
                 enableArmingSwitch.trigger('click');
             }
         }
@@ -341,9 +339,6 @@ tab.initialize = function (callback) {
             dialogConfirmArming.close();
             updateArming(true);
         });
-
-        updateArming(FC.CONFIG.enableArmingFlag);
-
 
         GUI.content_ready(callback);
     }

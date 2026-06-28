@@ -115,7 +115,6 @@ class FlightController {
       armingDisableCount:         0,
       armingDisableFlags:         0,
       armingDisabled:             false,
-      enableArmingFlag:           false,
       motorOverrideEnabled:       false,
       servoOverrideEnabled:       false,
       mixerOverrideEnabled:       false,
