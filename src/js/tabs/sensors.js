@@ -13,7 +13,6 @@ import { TABS } from "./tabs.js";
 
 const tab = {
     tabName: 'sensors',
-    armingEnabled: true,
 };
 
 tab.initialize = function (callback) {
