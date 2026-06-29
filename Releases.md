@@ -1,3 +1,44 @@
+# 2.3.0
+
+This is the _Official Release_ of the Rotorflight 2.3.0 Configurator.
+
+## Downloads
+
+- [Rotorflight Configurator](https://github.com/rotorflight/rotorflight-configurator/releases/tag/release/2.3.0)
+- [Rotorflight Blackbox](https://github.com/rotorflight/rotorflight-blackbox/releases/tag/release/2.3.0)
+- [Lua Scripts for EdgeTx and OpenTx](https://github.com/rotorflight/rotorflight-lua-scripts/releases/tag/release/2.3.0)
+- [Lua Scripts for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos/releases/tag/release/2.3.0)
+- [Lua Suite for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos-suite/releases/tag/release/2.3.0)
+
+## Changes from 2.3.0-RC3
+
+- Fix 'Exit DFU' button on the firmware flashing tab
+- Fix 'Enable Arming' toggle on the status tab sometimes showing the incorrect state
+- Fix esc sensor correction fields having the wrong range
+- Improve adjustments tab usability on mobile
+- Minor visual improvements
+
+## Changes from 2.2.x
+
+- Support for [Rotorflight Firmware 4.6.0](https://github.com/rotorflight/rotorflight-firmware/releases/tag/release/4.6.0)
+- Add **Expert Mode** toggle (only implemented on some tabs)
+- New layouts for Motors, Receiver and Failsafe tab
+- Governor configuration moved to a new tab
+- Live updates to throttle range parameters
+- Simplified firmware flasher tab
+- Various mobile layout improvements
+- Removed confusing arm mode active indicator on Modes tab
+- Bulgarian translation
+- Windows installer now includes the STM32 DFU driver
+
+**Important:** The Apple silicon build is not notarized by Apple. It is neccessary to run the following command before installing. **NOTE:** Replace `/path/to` with the actual path to the file.
+
+```sh
+xattr -cr "/path/to/rotorflight-configurator_2.3.0_macos_arm64.dmg"
+```
+
+***
+
 # 2.3.0-RC3
 
 This is the third _Release Candidate_ of the Rotorflight 2.3 Configurator.
