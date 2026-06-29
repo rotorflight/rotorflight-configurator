@@ -275,6 +275,10 @@
     box-sizing: border-box;
 }
 
+.tab-blackbox .blackboxDebugMode .select2 {
+  border: none;
+}
+
 .tab-blackbox .blackboxRollingErase > span:nth-of-type(1) {
     border: 0px;
 }
