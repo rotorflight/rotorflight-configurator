@@ -389,6 +389,7 @@ class FlightController {
       mincommand:                 0,
       minthrottle:                0,
       maxthrottle:                0,
+      motor_count_blheli:         0,
       motor_pwm_protocol:         0,
       motor_pwm_rate:             0,
       motor_poles:                [ 0, 0, 0, 0 ],
