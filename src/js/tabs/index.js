@@ -4,6 +4,7 @@ import "./beepers.js";
 import "./blackbox.js";
 import "./cli.js";
 import "./configuration.js";
+import "./esc_programming.js";
 import "./failsafe.js";
 import "./firmware_flasher.js";
 import "./governor.js";
