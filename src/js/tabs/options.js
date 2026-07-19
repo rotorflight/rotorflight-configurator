@@ -1,5 +1,4 @@
-import { DarkTheme } from "@/js/DarkTheme.js";
-import * as config from "@/js/config.js";
+import { config } from "@/js/config.svelte.ts";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
 import { checkForConfiguratorUpdates, setDarkTheme } from "@/js/main.js";
@@ -31,57 +30,51 @@ const tab = {
 
   initRememberLastTab() {
     $("#opt-remember-last-tab")
-      .prop("checked", config.get("rememberLastTab") ?? true)
+      .prop("checked", config.rememberLastTab)
       .on("change", function () {
-        config.set({ rememberLastTab: $(this).is(":checked") });
-      })
-      .trigger("change");
+        config.rememberLastTab = $(this).is(":checked");
+      });
   },
 
   rememberLastSelectedBoard() {
     $("#opt-remember-last-board")
-      .prop("checked", config.get("rememberLastSelectedBoard") ?? false)
+      .prop("checked", config.rememberLastSelectedBoard)
       .on("change", function () {
-        config.set({ rememberLastSelectedBoard: $(this).is(":checked") });
+        config.rememberLastSelectedBoard = $(this).is(":checked");
       });
   },
 
   showAdvancedFirmwareOpts() {
     $("#opt-show-advanced-firmware-opts")
-      .prop("checked", config.get("showAdvancedFirmwareOpts") ?? false)
+      .prop("checked", config.showAdvancedFirmwareOpts)
       .on("change", function () {
-        config.set({ showAdvancedFirmwareOpts: $(this).is(":checked") });
+        config.showAdvancedFirmwareOpts = $(this).is(":checked");
       });
   },
 
   initCheckForConfiguratorUnstableVersions() {
     $("#opt-check-unstable-versions")
-      .prop(
-        "checked",
-        config.get("checkForConfiguratorUnstableVersions") ?? true,
-      )
+      .prop("checked", config.checkForConfiguratorUnstableVersions)
       .on("change", function () {
-        config.set({
-          checkForConfiguratorUnstableVersions: $(this).is(":checked"),
-        });
+        config.checkForConfiguratorUnstableVersions = $(this).is(":checked");
         checkForConfiguratorUpdates();
       });
   },
 
   initAutoConnectConnectionTimeout() {
     $("#opt-connection-timeout")
-      .val(config.get("connectionTimeout") ?? 100)
+      .val(config.connectionTimeout)
       .on("change", function () {
-        config.set({ connectionTimeout: parseInt($(this).val()) });
+        config.connectionTimeout = parseInt($(this).val());
       });
   },
 
   initCordovaForceComputerUI() {
     $("#opt-cordova-force-computer-ui")
-      .prop("checked", config.get("cordovaForceComputerUI") ?? false)
+      .prop("checked", config.cordovaForceComputerUi)
       .on("change", function () {
         const checked = $(this).is(":checked");
-        config.set({ cordovaForceComputerUI: checked });
+        config.cordovaForceComputerUi = checked;
         globalThis.cordovaUI?.set?.();
       })
       .closest(".field")
@@ -90,11 +83,10 @@ const tab = {
 
   initDarkTheme() {
     $("#opt-dark-theme")
-      .val(DarkTheme.configEnabled)
+      .val(config.darkTheme)
       .on("change", function () {
         const value = parseInt($(this).val());
-
-        config.set({ darkTheme: value });
+        config.darkTheme = value;
         setDarkTheme(value);
       });
   },

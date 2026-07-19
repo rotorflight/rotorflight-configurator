@@ -1,4 +1,4 @@
-import * as config from "@/js/config.js";
+import { config } from "@/js/config.svelte.ts";
 import { i18n } from "@/js/localization.js";
 import { Metadata, Source } from "@/js/presets/source/source.js";
 
@@ -117,7 +117,7 @@ export default class Sources {
   async #initializeSources() {
     await this.#newSource(this.#officialSourceMetadata());
 
-    for (const sourceConfig of config.get("PresetsSourcesMetadata") ?? []) {
+    for (const sourceConfig of config.presetsSourcesMetadata) {
       const source = new Metadata(
         sourceConfig.name,
         sourceConfig.url,
@@ -133,7 +133,7 @@ export default class Sources {
    * Saves the metadata of the sources to storage
    */
   #saveSourcesMetadataToStorage() {
-    config.set({ PresetsSourcesMetadata: this.#collectSourcesMetadata() });
+    config.presetsSourcesMetadata = this.#collectSourcesMetadata();
   }
 
   /**

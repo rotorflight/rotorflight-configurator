@@ -1,4 +1,4 @@
-import * as config from "@/js/config.js";
+import { config } from "@/js/config.svelte.ts";
 import { cordovaChromeapi } from "@/js/cordova_chromeapi.js";
 import { appReady } from "@/js/main.js";
 
@@ -25,18 +25,18 @@ export const cordovaUI = {
             self.canChangeUI = false;
         }
 
-        if (config.get('cordovaForceComputerUI') === undefined) {
+        if (config.cordovaForceComputerUi === undefined) {
             if ((orientation === 'landscape' && screenHeight <= 575)
                 || (orientation === 'portrait' && screenWidth <= 575)) {
-                config.set({'cordovaForceComputerUI': false});
+                config.cordovaForceComputerUi = false;
             } else {
-                config.set({'cordovaForceComputerUI': true});
+                config.cordovaForceComputerUi = true;
             }
         }
         self.set();
     },
     set: function() {
-        if (config.get('cordovaForceComputerUI')) {
+        if (config.cordovaForceComputerUi) {
             window.screen.orientation.lock('landscape');
             $('body').css('zoom', this.uiZoom);
         } else {

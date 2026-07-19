@@ -39,6 +39,31 @@
         "english": "Default",
         "status": "New entry. Please translate!"
     },
+    "genericRange": {
+        "message": "Range",
+        "english": "Range",
+        "status": "New entry. Please translate!"
+    },
+    "hours": {
+        "message": "{{count}} hour",
+        "english": "{{count}} hour",
+        "status": "New entry. Please translate!"
+    },
+    "hours_other": {
+        "message": "{{count}} hours",
+        "english": "{{count}} hours",
+        "status": "New entry. Please translate!"
+    },
+    "minutes": {
+        "message": "{{count}} minute",
+        "english": "{{count}} minute",
+        "status": "New entry. Please translate!"
+    },
+    "minutes_other": {
+        "message": "{{count}} minutes",
+        "english": "{{count}} minutes",
+        "status": "New entry. Please translate!"
+    },
     "axisROLL": {
         "message": "ROLL",
         "english": "ROLL",
@@ -111,6 +136,11 @@
     "warningTitle": {
         "message": "Warning",
         "english": "Warning",
+        "status": "New entry. Please translate!"
+    },
+    "noteTitle": {
+        "message": "Note",
+        "english": "Note",
         "status": "New entry. Please translate!"
     },
     "noticeTitle": {
@@ -260,8 +290,8 @@
         "status": "New entry. Please translate!"
     },
     "expertMode": {
-        "message": "Enable Expert Mode",
-        "english": "Enable Expert Mode",
+        "message": "Expert Mode",
+        "english": "Expert Mode",
         "status": "New entry. Please translate!"
     },
     "permanentExpertMode": {
@@ -551,6 +581,11 @@
     "tabMotors": {
         "message": "Motors",
         "english": "Motors",
+        "status": "New entry. Please translate!"
+    },
+    "tabGovernor": {
+        "message": "Governor",
+        "english": "Governor",
         "status": "New entry. Please translate!"
     },
     "tabMixer": {
@@ -1119,8 +1154,8 @@
         "status": "New entry. Please translate!"
     },
     "defaultDocumentation1": {
-        "message": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
-        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
+        "message": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.3.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
+        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.3.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.",
         "status": "New entry. Please translate!"
     },
     "defaultDocumentation2": {
@@ -1238,6 +1273,16 @@
         "english": "Firmware:",
         "status": "New entry. Please translate!"
     },
+    "statusFlightCount": {
+        "message": "Flight Count:",
+        "english": "Flight Count:",
+        "status": "New entry. Please translate!"
+    },
+    "statusFlightTime": {
+        "message": "Flight Time:",
+        "english": "Flight Time:",
+        "status": "New entry. Please translate!"
+    },
     "statusArmingDisableFlags": {
         "message": "Arming Disable Flags:",
         "english": "Arming Disable Flags:",
@@ -1249,8 +1294,8 @@
         "status": "New entry. Please translate!"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
+        "message": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info.",
         "status": "New entry. Please translate!"
     },
     "statusArmingDisableFlagsTooltipNO_GYRO": {
@@ -1385,8 +1430,8 @@
         "description": "Message that pops up to describe the RESC arming disable flag"
     },
     "statusArmingDisableFlagsTooltipRPMFILTER": {
-        "message": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailble",
-        "english": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailble",
+        "message": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailable",
+        "english": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailable",
         "status": "New entry. Please translate!",
         "description": "Message that pops up to describe the RPMFILTER arming disable flag"
     },
@@ -1413,6 +1458,11 @@
         "english": "There is no motor throttle protocol selected",
         "status": "New entry. Please translate!",
         "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipOVERRIDE": {
+        "message": "Servo Override or Mixer Override is active",
+        "english": "Servo Override or Mixer Override is active",
+        "status": "New entry. Please translate!"
     },
     "statusArmingDisableFlagsTooltipARM_SWITCH": {
         "message": "Arm switch is activated while other arming disable conditions are active",
@@ -1955,6 +2005,56 @@
         "english": "Enable or disable when to sound the Buzzer",
         "status": "New entry. Please translate!"
     },
+    "configuration.personalisation.model_id.label": {
+        "message": "Model Id",
+        "english": "Model Id",
+        "status": "New entry. Please translate!"
+    },
+    "configuration.flight_stats.heading": {
+        "message": "Flight Statistics",
+        "english": "Flight Statistics",
+        "status": "New entry. Please translate!"
+    },
+    "configuration.flight_stats.enable.label": {
+        "message": "Record Flight Statistics",
+        "english": "Record Flight Statistics",
+        "status": "New entry. Please translate!"
+    },
+    "configuration.flight_stats.reset.label": {
+        "message": "Reset",
+        "english": "Reset",
+        "status": "New entry. Please translate!"
+    },
+    "configuration.flight_stats.min_armed_time.label": {
+        "message": "Minimum flight time",
+        "english": "Minimum flight time",
+        "status": "New entry. Please translate!"
+    },
+    "configuration.flight_stats.min_armed_time.help": {
+        "message": "Minimum duration the flight controller must be armed for the flights statistics to be counted towards the total.",
+        "english": "Minimum duration the flight controller must be armed for the flights statistics to be counted towards the total.",
+        "status": "New entry. Please translate!"
+    },
+    "configuration.flight_stats.flight_count.label": {
+        "message": "Flight Count",
+        "english": "Flight Count",
+        "status": "New entry. Please translate!"
+    },
+    "configuration.flight_stats.flight_time.label": {
+        "message": "Flight Time",
+        "english": "Flight Time",
+        "status": "New entry. Please translate!"
+    },
+    "configuration.flight_stats.distance.label": {
+        "message": "Distance",
+        "english": "Distance",
+        "status": "New entry. Please translate!"
+    },
+    "flight_stats.duration.value": {
+        "message": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })",
+        "english": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })",
+        "status": "New entry. Please translate!"
+    },
     "beeper_GYRO_CALIBRATED": {
         "message": "Beeps when gyro has been calibrated",
         "english": "Beeps when gyro has been calibrated",
@@ -2262,6 +2362,11 @@
         "english": "Telemetry: FrSky SmartPort",
         "status": "New entry. Please translate!"
     },
+    "portsFunction_SPORT_MASTER": {
+        "message": "S.PORT Master",
+        "english": "S.PORT Master",
+        "status": "New entry. Please translate!"
+    },
     "portsFunction_TELEMETRY_IBUS": {
         "message": "Telemetry: FlySky iBUS",
         "english": "Telemetry: FlySky iBUS",
@@ -2330,6 +2435,11 @@
     "portsFunction_SBUS_OUT": {
         "message": "S.BUS Output",
         "english": "S.BUS Output",
+        "status": "New entry. Please translate!"
+    },
+    "portsFunction_FBUS_OUT": {
+        "message": "F.BUS",
+        "english": "F.BUS",
         "status": "New entry. Please translate!"
     },
     "portsFunction_CUSTOM": {
@@ -2468,8 +2578,13 @@
         "status": "New entry. Please translate!"
     },
     "profilesPIDModeThreeWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b> with HSI.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b> with HSI.",
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>PID Mode 3</b>.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>PID Mode 3</b>.",
+        "status": "New entry. Please translate!"
+    },
+    "profilesPIDModeFourWarning": {
+        "message": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the experimental <b>PID Mode 4</b>.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the experimental <b>PID Mode 4</b>.",
         "status": "New entry. Please translate!"
     },
     "profilesPIDModeCustomWarning": {
@@ -2532,8 +2647,8 @@
         "status": "New entry. Please translate!"
     },
     "profilesBoostHelp": {
-        "message": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without he drawbacks of high Proportional or Feedforward gains.",
-        "english": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without he drawbacks of high Proportional or Feedforward gains.",
+        "message": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without the drawbacks of high Proportional or Feedforward gains.",
+        "english": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without the drawbacks of high Proportional or Feedforward gains.",
         "status": "New entry. Please translate!"
     },
     "profilesCopyProfile": {
@@ -2552,8 +2667,8 @@
         "status": "New entry. Please translate!"
     },
     "receiverSelection": {
-        "message": "Receiver Type",
-        "english": "Receiver Type",
+        "message": "Protocol",
+        "english": "Protocol",
         "status": "New entry. Please translate!"
     },
     "receiverSelectionSectionSignaling": {
@@ -2562,8 +2677,23 @@
         "status": "New entry. Please translate!"
     },
     "receiverSettings": {
-        "message": "Receiver Settings",
-        "english": "Receiver Settings",
+        "message": "Channel Range",
+        "english": "Channel Range",
+        "status": "New entry. Please translate!"
+    },
+    "receiverSettingsThrottleChannel": {
+        "message": "Throttle Channel",
+        "english": "Throttle Channel",
+        "status": "New entry. Please translate!"
+    },
+    "receiver.channel_range.automatic_throttle_range.label": {
+        "message": "Automatic Throttle Range",
+        "english": "Automatic Throttle Range",
+        "status": "New entry. Please translate!"
+    },
+    "receiver.channel_range.automatic_throttle_range.help": {
+        "message": "Calculates a suitable throttle range from the Stick Center and Stick Travel values.",
+        "english": "Calculates a suitable throttle range from the Stick Center and Stick Travel values.",
         "status": "New entry. Please translate!"
     },
     "receiverProtocol": {
@@ -2577,8 +2707,8 @@
         "status": "New entry. Please translate!"
     },
     "receiverSerialHalfDuplex": {
-        "message": "One-wire Communication (Half-Duplex)",
-        "english": "One-wire Communication (Half-Duplex)",
+        "message": "Half-Duplex",
+        "english": "Half-Duplex",
         "status": "New entry. Please translate!"
     },
     "receiverSerialHalfDuplexHelp": {
@@ -2587,23 +2717,23 @@
         "status": "New entry. Please translate!"
     },
     "receiverSerialInverted": {
-        "message": "Inverted Serial Signaling",
-        "english": "Inverted Serial Signaling",
+        "message": "Inverted",
+        "english": "Inverted",
         "status": "New entry. Please translate!"
     },
     "receiverSerialInvertedHelp": {
-        "message": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help.",
-        "english": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help.",
+        "message": "<p>Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>",
+        "english": "<p>Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>",
         "status": "New entry. Please translate!"
     },
     "receiverSerialPinSwap": {
-        "message": "Rx/Tx Pin Swap",
-        "english": "Rx/Tx Pin Swap",
+        "message": "Pin Swap",
+        "english": "Pin Swap",
         "status": "New entry. Please translate!"
     },
     "receiverSerialPinSwapHelp": {
-        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
-        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
+        "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>",
+        "english": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>",
         "status": "New entry. Please translate!"
     },
     "receiverStickCenter": {
@@ -2612,48 +2742,58 @@
         "status": "New entry. Please translate!"
     },
     "receiverHelpStickCenter": {
-        "message": "The value of stick (channel) center in µs. Usually 1500µs or 1520µs.",
-        "english": "The value of stick (channel) center in µs. Usually 1500µs or 1520µs.",
+        "message": "The channel value when the stick is centered. Usually 1500µs or 1520µs.",
+        "english": "The channel value when the stick is centered. Usually 1500µs or 1520µs.",
         "status": "New entry. Please translate!"
     },
     "receiverStickDeflection": {
-        "message": "Stick Maximum Travel",
-        "english": "Stick Maximum Travel",
+        "message": "Stick Travel",
+        "english": "Stick Travel",
         "status": "New entry. Please translate!"
     },
     "receiverHelpStickDeflection": {
-        "message": "The maximum value (in µs) for stick deflection from the center, for RPY.",
-        "english": "The maximum value (in µs) for stick deflection from the center, for RPY.",
+        "message": "The maximum value for stick deflection from the center.",
+        "english": "The maximum value for stick deflection from the center.",
         "status": "New entry. Please translate!"
     },
     "receiverArmingThrottle": {
-        "message": "Throttle Channel limit for arming",
-        "english": "Throttle Channel limit for arming",
+        "message": "Arm Limit",
+        "english": "Arm Limit",
         "status": "New entry. Please translate!"
     },
     "receiverHelpArmingThrottle": {
-        "message": "The channel value (in µs) under which arming is allowed",
-        "english": "The channel value (in µs) under which arming is allowed",
+        "message": "The flight controller can only be armed while the the throttle channel is below this value.",
+        "english": "The flight controller can only be armed while the the throttle channel is below this value.",
         "status": "New entry. Please translate!"
     },
     "receiverZeroThrottle": {
-        "message": "Throttle Channel value for 0% throttle",
-        "english": "Throttle Channel value for 0% throttle",
+        "message": "Min Throttle - 0%",
+        "english": "Min Throttle - 0%",
         "status": "New entry. Please translate!"
     },
     "receiverHelpZeroThrottle": {
-        "message": "The channel value (in µs) for the throttle channel to be considered 0%",
-        "english": "The channel value (in µs) for the throttle channel to be considered 0%",
+        "message": "The throttle channel value where throttle is considered 0%.",
+        "english": "The throttle channel value where throttle is considered 0%.",
+        "status": "New entry. Please translate!"
+    },
+    "receiverHelpZeroThrottle2": {
+        "message": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>",
+        "english": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>",
         "status": "New entry. Please translate!"
     },
     "receiverFullThrottle": {
-        "message": "Throttle Channel value for 100% throttle",
-        "english": "Throttle Channel value for 100% throttle",
+        "message": "Max Throttle - 100%",
+        "english": "Max Throttle - 100%",
         "status": "New entry. Please translate!"
     },
     "receiverHelpFullThrottle": {
-        "message": "The channel value (in µs) for the throttle channel to be considered 100%",
-        "english": "The channel value (in µs) for the throttle channel to be considered 100%",
+        "message": "The throttle channel value where throttle is considered 100%.",
+        "english": "The throttle channel value where throttle is considered 100%.",
+        "status": "New entry. Please translate!"
+    },
+    "receiverHelpFullThrottle2": {
+        "message": "The throttle channel value where throttle is considered 100%.",
+        "english": "The throttle channel value where throttle is considered 100%.",
         "status": "New entry. Please translate!"
     },
     "receiverCyclicDeadband": {
@@ -2662,8 +2802,8 @@
         "status": "New entry. Please translate!"
     },
     "receiverHelpCyclicDeadband": {
-        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle.",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle.",
+        "message": "How far the roll and pitch channel values must move from center before it's considered an input.",
+        "english": "How far the roll and pitch channel values must move from center before it's considered an input.",
         "status": "New entry. Please translate!"
     },
     "receiverYawDeadband": {
@@ -2672,13 +2812,13 @@
         "status": "New entry. Please translate!"
     },
     "receiverHelpYawDeadband": {
-        "message": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>",
+        "message": "How far the yaw channel value must move from center before it's considered an input.",
+        "english": "How far the yaw channel value must move from center before it's considered an input.",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySettings": {
-        "message": "Telemetry Settings",
-        "english": "Telemetry Settings",
+        "message": "Telemetry",
+        "english": "Telemetry",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySettingsSectionSignaling": {
@@ -2697,18 +2837,18 @@
         "status": "New entry. Please translate!"
     },
     "receiverTelemetryHalfDuplex": {
-        "message": "One-wire Telemetry Communication",
-        "english": "One-wire Telemetry Communication",
+        "message": "Half-Duplex",
+        "english": "Half-Duplex",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetryInverted": {
-        "message": "Inverted Telemetry Signaling",
-        "english": "Inverted Telemetry Signaling",
+        "message": "Inverted",
+        "english": "Inverted",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetryPinSwap": {
-        "message": "Telemetry Pin Swap (Swap Rx and Tx pins)",
-        "english": "Telemetry Pin Swap (Swap Rx and Tx pins)",
+        "message": "Pin Swap",
+        "english": "Pin Swap",
         "status": "New entry. Please translate!"
     },
     "receiverCrsfTelemetryMode": {
@@ -3391,29 +3531,29 @@
         "english": "Debug 7",
         "status": "New entry. Please translate!"
     },
-    "receiverBars": {
-        "message": "Receiver Channels",
-        "english": "Receiver Channels",
+    "receiverTelemetrySensor_RPM": {
+        "message": "RPM",
+        "english": "RPM",
         "status": "New entry. Please translate!"
     },
-    "receiverBarsHelp": {
-        "message": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel.",
-        "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel.",
+    "receiverTelemetrySensor_TEMP": {
+        "message": "Temperature",
+        "english": "Temperature",
+        "status": "New entry. Please translate!"
+    },
+    "receiverBars": {
+        "message": "Channel Assignment",
+        "english": "Channel Assignment",
         "status": "New entry. Please translate!"
     },
     "receiverChannelOrder": {
-        "message": "Channel Order Preset",
-        "english": "Channel Order Preset",
+        "message": "Apply Preset",
+        "english": "Apply Preset",
         "status": "New entry. Please translate!"
     },
-    "receiverChannelDefaultOption": {
-        "message": "Default",
-        "english": "Default",
-        "status": "New entry. Please translate!"
-    },
-    "receiverHelpChannelOrder": {
-        "message": "Select one of the presets from the dropdown menu, or enter your own channel order.",
-        "english": "Select one of the presets from the dropdown menu, or enter your own channel order.",
+    "receiverChannelOrderPresetPlaceholder": {
+        "message": "Select a preset...",
+        "english": "Select a preset...",
         "status": "New entry. Please translate!"
     },
     "receiverButtonBind": {
@@ -3444,6 +3584,11 @@
     "receiverMspEnableButton": {
         "message": "Enable controls",
         "english": "Enable controls",
+        "status": "New entry. Please translate!"
+    },
+    "resetModelPreviewOrientation": {
+        "message": "Reset",
+        "english": "Reset",
         "status": "New entry. Please translate!"
     },
     "auxiliaryHelp": {
@@ -3655,6 +3800,11 @@
     "adjustmentsFunctionOSDProfile": {
         "message": "OSD Profile Selection",
         "english": "OSD Profile Selection",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionBatteryProfile": {
+        "message": "Battery Profile Selection",
+        "english": "Battery Profile Selection",
         "status": "New entry. Please translate!"
     },
     "adjustmentsFunctionPitchRate": {
@@ -4012,6 +4162,36 @@
         "english": "Yaw Precomp Cutoff",
         "status": "New entry. Please translate!"
     },
+    "adjustmentsFunctionGovIdleThrottle": {
+        "message": "Governor Idle Throttle",
+        "english": "Governor Idle Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionGovAutoThrottle": {
+        "message": "Governor Auto Throttle",
+        "english": "Governor Auto Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionGovMinThrottle": {
+        "message": "Governor Min Throttle",
+        "english": "Governor Min Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionGovMaxThrottle": {
+        "message": "Governor Max Throttle",
+        "english": "Governor Max Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionGovHeadspeed": {
+        "message": "Governor Headspeed",
+        "english": "Governor Headspeed",
+        "status": "New entry. Please translate!"
+    },
+    "adjustmentsFunctionGovYawFF": {
+        "message": "Governor Yaw F-gain",
+        "english": "Governor Yaw F-gain",
+        "status": "New entry. Please translate!"
+    },
     "servoHelp": {
         "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
         "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>",
@@ -4085,6 +4265,16 @@
     "servoRateHelp": {
         "message": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time.",
         "english": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time.",
+        "status": "New entry. Please translate!"
+    },
+    "servoSource": {
+        "message": "Source",
+        "english": "Source",
+        "status": "New entry. Please translate!"
+    },
+    "servoSourceHelp": {
+        "message": "Source of the servo signal. <b>Mixer</b>: servo is controlled by the flight controller mixer. <b>RX</b>: servo receives direct pass-through from the receiver channel.",
+        "english": "Source of the servo signal. <b>Mixer</b>: servo is controlled by the flight controller mixer. <b>RX</b>: servo receives direct pass-through from the receiver channel.",
         "status": "New entry. Please translate!"
     },
     "servoSpeed": {
@@ -5037,9 +5227,34 @@
         "english": "Qty",
         "status": "New entry. Please translate!"
     },
+    "motors.motor.heading": {
+        "message": "Motor #{{index}}",
+        "english": "Motor #{{index}}",
+        "status": "New entry. Please translate!"
+    },
+    "motorsSectionLabelThrottle": {
+        "message": "Throttle",
+        "english": "Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "motorsSectionLabelRPM": {
+        "message": "RPM",
+        "english": "RPM",
+        "status": "New entry. Please translate!"
+    },
+    "motorsSectionSignaling": {
+        "message": "Signaling",
+        "english": "Signaling",
+        "status": "New entry. Please translate!"
+    },
+    "motorsSectionSensorCorrection": {
+        "message": "Sensor Correction",
+        "english": "Sensor Correction",
+        "status": "New entry. Please translate!"
+    },
     "motorsEscProtocol": {
-        "message": "ESC Throttle protocol",
-        "english": "ESC Throttle protocol",
+        "message": "Throttle Protocol",
+        "english": "Throttle Protocol",
         "status": "New entry. Please translate!"
     },
     "motorsEscProtocolHelp": {
@@ -5058,8 +5273,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryProtocol": {
-        "message": "ESC Telemetry protocol",
-        "english": "ESC Telemetry protocol",
+        "message": "Telemetry Protocol",
+        "english": "Telemetry Protocol",
         "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryProtocolHelp": {
@@ -5068,8 +5283,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryHalfDuplex": {
-        "message": "One-wire Communication (Half-Duplex)",
-        "english": "One-wire Communication (Half-Duplex)",
+        "message": "Half-Duplex",
+        "english": "Half-Duplex",
         "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryHalfDuplexHelp": {
@@ -5078,13 +5293,13 @@
         "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryPinswap": {
-        "message": "Rx/Tx Pin Swap",
-        "english": "Rx/Tx Pin Swap",
+        "message": "Pin Swap",
+        "english": "Pin Swap",
         "status": "New entry. Please translate!"
     },
     "motorsEscTelemetryPinswapHelp": {
-        "message": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
-        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help.",
+        "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>",
+        "english": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>",
         "status": "New entry. Please translate!"
     },
     "motorsUnsyncedPwm": {
@@ -5098,8 +5313,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsUnsyncedPWMFreq": {
-        "message": "ESC update frequency",
-        "english": "ESC update frequency",
+        "message": "Update Frequency",
+        "english": "Update Frequency",
         "status": "New entry. Please translate!"
     },
     "motorsUnsyncedPWMFreqHelp": {
@@ -5148,23 +5363,23 @@
         "status": "New entry. Please translate!"
     },
     "motorsMotorPoles1Long": {
-        "message": "Main Motor pole count",
-        "english": "Main Motor pole count",
+        "message": "Main Motor Pole Count",
+        "english": "Main Motor Pole Count",
         "status": "New entry. Please translate!"
     },
     "motorsMotorPoles2Long": {
-        "message": "Tail Motor pole count",
-        "english": "Tail Motor pole count",
+        "message": "Tail Motor Pole Count",
+        "english": "Tail Motor Pole Count",
         "status": "New entry. Please translate!"
     },
     "motorsMotorPoles3Long": {
-        "message": "Motor M3 pole count",
-        "english": "Motor M3 pole count",
+        "message": "Motor M3 Pole Count",
+        "english": "Motor M3 Pole Count",
         "status": "New entry. Please translate!"
     },
     "motorsMotorPoles4Long": {
-        "message": "Motor M4 pole count",
-        "english": "Motor M4 pole count",
+        "message": "Motor M4 Pole Count",
+        "english": "Motor M4 Pole Count",
         "status": "New entry. Please translate!"
     },
     "motorsMotorPolesHelp": {
@@ -5172,9 +5387,29 @@
         "english": "The <i>pole count</i> is the number of magnets on the motor bell. The manual should give this number. Or you can count the magnets. Do NOT count the stators with the copper wire windings.",
         "status": "New entry. Please translate!"
     },
+    "motorsThrottleEndpoints": {
+        "message": "Throttle Range",
+        "english": "Throttle Range",
+        "status": "New entry. Please translate!"
+    },
+    "motorsThrottleEndpointsWarning": {
+        "message": "Incorrectly configuring the throttle range parameters can cause the motor to run even when the throttle is off and the flight controller is disarmed.",
+        "english": "Incorrectly configuring the throttle range parameters can cause the motor to run even when the throttle is off and the flight controller is disarmed.",
+        "status": "New entry. Please translate!"
+    },
+    "motorsThrottleEndpointRealtime": {
+        "message": "Live Update",
+        "english": "Live Update",
+        "status": "New entry. Please translate!"
+    },
+    "motorsThrottleEndpointRealtimeHelp": {
+        "message": "<p>Apply changes to the throttle range immediately.</p><p>Throttle Override can be set to 0%, 1%, and 100% to view changes to Motor Off, Low Throttle and High Throttle respectively.</p>",
+        "english": "<p>Apply changes to the throttle range immediately.</p><p>Throttle Override can be set to 0%, 1%, and 100% to view changes to Motor Off, Low Throttle and High Throttle respectively.</p>",
+        "status": "New entry. Please translate!"
+    },
     "motorsThrottleMinimum": {
-        "message": "0% Throttle PWM value",
-        "english": "0% Throttle PWM value",
+        "message": "Low Throttle",
+        "english": "Low Throttle",
         "status": "New entry. Please translate!"
     },
     "motorsThrottleMinimumHelp": {
@@ -5183,8 +5418,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsThrottleMaximum": {
-        "message": "100% Throttle PWM value",
-        "english": "100% Throttle PWM value",
+        "message": "High Throttle",
+        "english": "High Throttle",
         "status": "New entry. Please translate!"
     },
     "motorsThrottleMaximumHelp": {
@@ -5193,8 +5428,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsThrottleMinimumCommand": {
-        "message": "Motor Stop Throttle PWM value",
-        "english": "Motor Stop Throttle PWM value",
+        "message": "Motor Off",
+        "english": "Motor Off",
         "status": "New entry. Please translate!"
     },
     "motorsThrottleMinimumCommandHelp": {
@@ -5213,8 +5448,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsVoltageCorrection": {
-        "message": "Voltage Correction",
-        "english": "Voltage Correction",
+        "message": "Voltage",
+        "english": "Voltage",
         "status": "New entry. Please translate!"
     },
     "motorsVoltageCorrectionHelp": {
@@ -5223,8 +5458,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsCurrentCorrection": {
-        "message": "Current Correction",
-        "english": "Current Correction",
+        "message": "Current",
+        "english": "Current",
         "status": "New entry. Please translate!"
     },
     "motorsCurrentCorrectionHelp": {
@@ -5233,8 +5468,8 @@
         "status": "New entry. Please translate!"
     },
     "motorsConsumptionCorrection": {
-        "message": "Consumption Correction",
-        "english": "Consumption Correction",
+        "message": "Consumption",
+        "english": "Consumption",
         "status": "New entry. Please translate!"
     },
     "motorsConsumptionCorrectionHelp": {
@@ -5277,19 +5512,14 @@
         "english": "Motor #4",
         "status": "New entry. Please translate!"
     },
-    "motorOverride": {
-        "message": "Override",
-        "english": "Override",
-        "status": "New entry. Please translate!"
-    },
     "motorThrottle": {
-        "message": "Throttle:",
-        "english": "Throttle:",
+        "message": "Throttle",
+        "english": "Throttle",
         "status": "New entry. Please translate!"
     },
     "motorRPM": {
-        "message": "RPM:",
-        "english": "RPM:",
+        "message": "RPM",
+        "english": "RPM",
         "status": "New entry. Please translate!"
     },
     "motorHeadspeed": {
@@ -5303,28 +5533,28 @@
         "status": "New entry. Please translate!"
     },
     "motorVoltage": {
-        "message": "Voltage:",
-        "english": "Voltage:",
+        "message": "Voltage",
+        "english": "Voltage",
         "status": "New entry. Please translate!"
     },
     "motorCurrent": {
-        "message": "Current:",
-        "english": "Current:",
+        "message": "Current",
+        "english": "Current",
         "status": "New entry. Please translate!"
     },
     "motorTemperature": {
-        "message": "Temp:",
-        "english": "Temp:",
+        "message": "Temp {{number}}",
+        "english": "Temp {{number}}",
         "status": "New entry. Please translate!"
     },
     "motorDshotError": {
-        "message": "Errors:",
-        "english": "Errors:",
+        "message": "DShot RPM Error Rate",
+        "english": "DShot RPM Error Rate",
         "status": "New entry. Please translate!"
     },
     "motorOverrideNote": {
-        "message": "<strong>Note.</strong> Throttle Override forces the output throttle to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset in reboot.<br/><br/><strong class=\"message-negative\">MOTOR THROTTLE OVERRIDE WILL MAKE THE MOTORS TO SPOOL UP!</strong>",
-        "english": "<strong>Note.</strong> Throttle Override forces the output throttle to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset in reboot.<br/><br/><strong class=\"message-negative\">MOTOR THROTTLE OVERRIDE WILL MAKE THE MOTORS TO SPOOL UP!</strong>",
+        "message": "Throttle Override sets the throttle output to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset after reboot.<br/><br/><strong>THROTTLE OVERRIDE WILL MAKE THE MOTORS SPOOL UP!</strong>",
+        "english": "Throttle Override sets the throttle output to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset after reboot.<br/><br/><strong>THROTTLE OVERRIDE WILL MAKE THE MOTORS SPOOL UP!</strong>",
         "status": "New entry. Please translate!"
     },
     "motorOverrideTitle": {
@@ -5332,14 +5562,44 @@
         "english": "Throttle Override",
         "status": "New entry. Please translate!"
     },
-    "motorOverrideEnable": {
-        "message": "Enable",
-        "english": "Enable",
+    "govFeatures": {
+        "message": "Governor",
+        "english": "Governor",
         "status": "New entry. Please translate!"
     },
-    "govFeatures": {
-        "message": "Governor Features",
-        "english": "Governor Features",
+    "govSectionGeneral": {
+        "message": "General",
+        "english": "General",
+        "status": "New entry. Please translate!"
+    },
+    "govSectionThrottle": {
+        "message": "Throttle",
+        "english": "Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "govSectionThrottleCurve": {
+        "message": "Governor Bypass Throttle Curve",
+        "english": "Governor Bypass Throttle Curve",
+        "status": "New entry. Please translate!"
+    },
+    "govSectionThrottleCurveHelp": {
+        "message": "<p><strong>Governor Bypass Mode</strong> disables all governor functions. When this mode is active, the collective-to-throttle curve is used to determine throttle output.</p><p>See the Governor Bypass section in the Modes tab to configure how the mode is activated.</p>",
+        "english": "<p><strong>Governor Bypass Mode</strong> disables all governor functions. When this mode is active, the collective-to-throttle curve is used to determine throttle output.</p><p>See the Governor Bypass section in the Modes tab to configure how the mode is activated.</p>",
+        "status": "New entry. Please translate!"
+    },
+    "govSectionRampTime": {
+        "message": "Motor Ramp",
+        "english": "Motor Ramp",
+        "status": "New entry. Please translate!"
+    },
+    "govSectionAutorotation": {
+        "message": "Autorotation",
+        "english": "Autorotation",
+        "status": "New entry. Please translate!"
+    },
+    "govSectionFilters": {
+        "message": "Filters",
+        "english": "Filters",
         "status": "New entry. Please translate!"
     },
     "govProfile": {
@@ -5348,33 +5608,73 @@
         "status": "New entry. Please translate!"
     },
     "govConfigurationNote": {
-        "message": "<strong>Note:</strong> Governor has both global and profile parameters. Please see the Profiles tab for profile specific parameters.",
-        "english": "<strong>Note:</strong> Governor has both global and profile parameters. Please see the Profiles tab for profile specific parameters.",
+        "message": "The Governor has both global and profile parameters. See the Profiles tab for profile specific parameters.",
+        "english": "The Governor has both global and profile parameters. See the Profiles tab for profile specific parameters.",
         "status": "New entry. Please translate!"
     },
     "govMode": {
-        "message": "Governor mode",
-        "english": "Governor mode",
+        "message": "Governor Mode",
+        "english": "Governor Mode",
         "status": "New entry. Please translate!"
     },
     "govModeHelp": {
-        "message": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
-        "english": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.",
+        "message": "<p><strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.</p><p><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.</p><p><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.</p><p><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).</p><p><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.</p>",
+        "english": "<p><strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.</p><p><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.</p><p><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.</p><p><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).</p><p><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.</p>",
+        "status": "New entry. Please translate!"
+    },
+    "govModeHelp2": {
+        "message": "<p><strong>OFF:</strong> The governor is disabled. The throttle input is sent directly to the motor.</p><p><strong>LIMIT:</strong> The governor is disabled. Global <em>Idle Throttle</em> and profile <em>Minimum Throttle</em> and <em>Maximum Throttle</em> limits are applied before sending the throttle input to the motor.</p><p><strong>DIRECT:</strong> The governor handles slow spoolup and bailout recovery. Headspeed stabilisation is left to an external governor or throttle curve.</p><p><strong>ELECTRIC:</strong> Complete governor suitable for electric motors.</p><p><strong>NITRO:</strong> Complete governor suitable for internal combustion engines.</p>",
+        "english": "<p><strong>OFF:</strong> The governor is disabled. The throttle input is sent directly to the motor.</p><p><strong>LIMIT:</strong> The governor is disabled. Global <em>Idle Throttle</em> and profile <em>Minimum Throttle</em> and <em>Maximum Throttle</em> limits are applied before sending the throttle input to the motor.</p><p><strong>DIRECT:</strong> The governor handles slow spoolup and bailout recovery. Headspeed stabilisation is left to an external governor or throttle curve.</p><p><strong>ELECTRIC:</strong> Complete governor suitable for electric motors.</p><p><strong>NITRO:</strong> Complete governor suitable for internal combustion engines.</p>",
+        "status": "New entry. Please translate!"
+    },
+    "govThrottleType": {
+        "message": "Throttle Type",
+        "english": "Throttle Type",
+        "status": "New entry. Please translate!"
+    },
+    "govThrottleTypeHelp": {
+        "message": "<p><strong>NORMAL:</strong> The throttle input is directly controlling the motor. Once the target headspeed is reached, the governor takes over until the throttle input is reduced below the handover level.</p><p><strong>SWITCH:</strong> While the throttle input is below handover, it directly controls motor output. While above handover, the governor engages and the throttle input is used to adjust the headspeed target.</p><p>SWITCH can only be used with ELECTRIC and NITRO governor mode.</p><p><strong>FUNCTION:</strong> The throttle input is used to select each governor mode.</p>",
+        "english": "<p><strong>NORMAL:</strong> The throttle input is directly controlling the motor. Once the target headspeed is reached, the governor takes over until the throttle input is reduced below the handover level.</p><p><strong>SWITCH:</strong> While the throttle input is below handover, it directly controls motor output. While above handover, the governor engages and the throttle input is used to adjust the headspeed target.</p><p>SWITCH can only be used with ELECTRIC and NITRO governor mode.</p><p><strong>FUNCTION:</strong> The throttle input is used to select each governor mode.</p>",
+        "status": "New entry. Please translate!"
+    },
+    "govIdleCollective": {
+        "message": "Collective ➜ Idle Throttle",
+        "english": "Collective ➜ Idle Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "govIdleCollectiveHelp": {
+        "message": "<p>Idle throttle is applied while collective is below this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active.",
+        "english": "<p>Idle throttle is applied while collective is below this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active.",
+        "status": "New entry. Please translate!"
+    },
+    "govWotCollective": {
+        "message": "Collective ➜ Full Throttle",
+        "english": "Collective ➜ Full Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "govWotCollectiveHelp": {
+        "message": "<p>Full throttle is applied while collective is above this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active.",
+        "english": "<p>Full throttle is applied while collective is above this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active.",
         "status": "New entry. Please translate!"
     },
     "govHandoverThrottle": {
-        "message": "Handover throttle [%]",
-        "english": "Handover throttle [%]",
+        "message": "Handover Throttle",
+        "english": "Handover Throttle",
         "status": "New entry. Please translate!"
     },
     "govHandoverThrottleHelp": {
-        "message": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level.",
-        "english": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level.",
+        "message": "<p>The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>",
+        "english": "<p>The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>",
+        "status": "New entry. Please translate!"
+    },
+    "govHandoverThrottleHelp2": {
+        "message": "<p>While throttle input is above this value, motor control is handed over to the governor.</p><p>While throttle input is below this value, it is sent directly to the motor.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>",
+        "english": "<p>While throttle input is above this value, motor control is handed over to the governor.</p><p>While throttle input is below this value, it is sent directly to the motor.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>",
         "status": "New entry. Please translate!"
     },
     "govStartupTime": {
-        "message": "Startup time",
-        "english": "Startup time",
+        "message": "Startup Time",
+        "english": "Startup Time",
         "status": "New entry. Please translate!"
     },
     "govStartupTimeHelp": {
@@ -5382,9 +5682,14 @@
         "english": "Time constant for slow startup, in seconds, measuring the time from zero to full headspeed.",
         "status": "New entry. Please translate!"
     },
+    "govStartupTimeHelp2": {
+        "message": "Rate of throttle change during startup, defined as the duration from 0% to 100% throttle.",
+        "english": "Rate of throttle change during startup, defined as the duration from 0% to 100% throttle.",
+        "status": "New entry. Please translate!"
+    },
     "govSpoolupTime": {
-        "message": "Spoolup time",
-        "english": "Spoolup time",
+        "message": "Spoolup Time",
+        "english": "Spoolup Time",
         "status": "New entry. Please translate!"
     },
     "govSpoolupTimeHelp": {
@@ -5392,19 +5697,34 @@
         "english": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed.",
         "status": "New entry. Please translate!"
     },
+    "govSpoolupTimeHelp2": {
+        "message": "Rate of throttle change during spoolup, defined as the duration from 0% to 100% throttle.",
+        "english": "Rate of throttle change during spoolup, defined as the duration from 0% to 100% throttle.",
+        "status": "New entry. Please translate!"
+    },
+    "govSpooldownTime": {
+        "message": "Spooldown Time",
+        "english": "Spooldown Time",
+        "status": "New entry. Please translate!"
+    },
+    "govSpooldownTimeHelp": {
+        "message": "Rate of throttle change during spooldown, defined as the duration from 100% to 0% throttle.",
+        "english": "Rate of throttle change during spooldown, defined as the duration from 100% to 0% throttle.",
+        "status": "New entry. Please translate!"
+    },
     "govSpoolupMinThrottle": {
-        "message": "Spoolup minimum throttle",
-        "english": "Spoolup minimum throttle",
+        "message": "Spoolup Minimum Throttle",
+        "english": "Spoolup Minimum Throttle",
         "status": "New entry. Please translate!"
     },
     "govSpoolupMinThrottleHelp": {
-        "message": "Minimum throttle to be used during spoolup. For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%.",
-        "english": "Minimum throttle to be used during spoolup. For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%.",
+        "message": "<p>Minimum throttle output during spoolup.</p><p>For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%.</p>",
+        "english": "<p>Minimum throttle output during spoolup.</p><p>For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%.</p>",
         "status": "New entry. Please translate!"
     },
     "govTrackingTime": {
-        "message": "Tracking time",
-        "english": "Tracking time",
+        "message": "Tracking Time",
+        "english": "Tracking Time",
         "status": "New entry. Please translate!"
     },
     "govTrackingTimeHelp": {
@@ -5412,9 +5732,14 @@
         "english": "Time constant for headspeed changes, in seconds, measuring the time from zero to full headspeed.",
         "status": "New entry. Please translate!"
     },
+    "govTrackingTimeHelp2": {
+        "message": "Rate of throttle change when tracking headspeed target changes, defined as the duration from 0% to 100% throttle.",
+        "english": "Rate of throttle change when tracking headspeed target changes, defined as the duration from 0% to 100% throttle.",
+        "status": "New entry. Please translate!"
+    },
     "govRecoveryTime": {
-        "message": "Recovery time",
-        "english": "Recovery time",
+        "message": "Recovery Time",
+        "english": "Recovery Time",
         "status": "New entry. Please translate!"
     },
     "govRecoveryTimeHelp": {
@@ -5422,9 +5747,14 @@
         "english": "Time constant for recovery spoolup, in seconds, measuring the time from zero to full headspeed.",
         "status": "New entry. Please translate!"
     },
+    "govRecoveryTimeHelp2": {
+        "message": "Rate of throttle change during recovery, defined as the duration from 0% to 100% throttle.",
+        "english": "Rate of throttle change during recovery, defined as the duration from 0% to 100% throttle.",
+        "status": "New entry. Please translate!"
+    },
     "govAutoBailoutTime": {
-        "message": "Autorotation bailout time",
-        "english": "Autorotation bailout time",
+        "message": "Bailout Time",
+        "english": "Bailout Time",
         "status": "New entry. Please translate!"
     },
     "govAutoBailoutTimeHelp": {
@@ -5433,18 +5763,18 @@
         "status": "New entry. Please translate!"
     },
     "govAutoTimeout": {
-        "message": "Autorotation timeout",
-        "english": "Autorotation timeout",
+        "message": "Autorotation Timeout",
+        "english": "Autorotation Timeout",
         "status": "New entry. Please translate!"
     },
     "govAutoTimeoutHelp": {
-        "message": "Timeout for ending autorotation and moving to normal IDLE.",
-        "english": "Timeout for ending autorotation and moving to normal IDLE.",
+        "message": "<p>The maximum duration autorotation mode may remain engaged.</p><p>When this timeout expires, bailout is no longer available, and starting the motor will result in a normal spoolup.</p><p><strong>Note:</strong> This field must be above zero to enable autorotation mode.</p>",
+        "english": "<p>The maximum duration autorotation mode may remain engaged.</p><p>When this timeout expires, bailout is no longer available, and starting the motor will result in a normal spoolup.</p><p><strong>Note:</strong> This field must be above zero to enable autorotation mode.</p>",
         "status": "New entry. Please translate!"
     },
     "govAutoMinEntryTime": {
-        "message": "Autorotation minimum entry time",
-        "english": "Autorotation minimum entry time",
+        "message": "Autorotation Minimum Flight Time",
+        "english": "Autorotation Minimum Flight Time",
         "status": "New entry. Please translate!"
     },
     "govAutoMinEntryTimeHelp": {
@@ -5453,8 +5783,8 @@
         "status": "New entry. Please translate!"
     },
     "govZeroThrottleTimeout": {
-        "message": "Zero Throttle timeout",
-        "english": "Zero Throttle timeout",
+        "message": "Throttle Signal Timeout",
+        "english": "Throttle Signal Timeout",
         "status": "New entry. Please translate!"
     },
     "govZeroThrottleTimeoutHelp": {
@@ -5462,9 +5792,19 @@
         "english": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup.",
         "status": "New entry. Please translate!"
     },
+    "govThrottleHoldTimeout": {
+        "message": "Throttle Hold Timeout",
+        "english": "Throttle Hold Timeout",
+        "status": "New entry. Please translate!"
+    },
+    "govThrottleHoldTimeoutHelp": {
+        "message": "<p>The grace period after activating throttle hold while the governor is active.</p><p>If throttle input is restored within this period, a recovery spoolup will be performed.</p><p>This safeguards against accidental throttle cut activation.</p>",
+        "english": "<p>The grace period after activating throttle hold while the governor is active.</p><p>If throttle input is restored within this period, a recovery spoolup will be performed.</p><p>This safeguards against accidental throttle cut activation.</p>",
+        "status": "New entry. Please translate!"
+    },
     "govLostHeadspeedTimeout": {
-        "message": "Headspeed signal timeout",
-        "english": "Headspeed signal timeout",
+        "message": "Headspeed Signal Timeout",
+        "english": "Headspeed Signal Timeout",
         "status": "New entry. Please translate!"
     },
     "govLostHeadspeedTimeoutHelp": {
@@ -5473,8 +5813,8 @@
         "status": "New entry. Please translate!"
     },
     "govHeadspeedFilterHz": {
-        "message": "Headspeed filter cutoff [Hz]",
-        "english": "Headspeed filter cutoff [Hz]",
+        "message": "Headspeed Filter Cutoff",
+        "english": "Headspeed Filter Cutoff",
         "status": "New entry. Please translate!"
     },
     "govHeadspeedFilterHzHelp": {
@@ -5483,8 +5823,8 @@
         "status": "New entry. Please translate!"
     },
     "govVoltageFilterHz": {
-        "message": "Battery voltage filter cutoff [Hz]",
-        "english": "Battery voltage filter cutoff [Hz]",
+        "message": "Battery Voltage Filter Cutoff",
+        "english": "Battery Voltage Filter Cutoff",
         "status": "New entry. Please translate!"
     },
     "govVoltageFilterHzHelp": {
@@ -5493,8 +5833,8 @@
         "status": "New entry. Please translate!"
     },
     "govTTAFilterHz": {
-        "message": "TTA Bandwidth [Hz]",
-        "english": "TTA Bandwidth [Hz]",
+        "message": "TTA Bandwidth",
+        "english": "TTA Bandwidth",
         "status": "New entry. Please translate!"
     },
     "govTTAFilterHzHelp": {
@@ -5503,8 +5843,8 @@
         "status": "New entry. Please translate!"
     },
     "govFFFilterHz": {
-        "message": "Precomp Bandwidth [Hz]",
-        "english": "Precomp Bandwidth [Hz]",
+        "message": "Precomp Bandwidth",
+        "english": "Precomp Bandwidth",
         "status": "New entry. Please translate!"
     },
     "govFFFilterHzHelp": {
@@ -5512,9 +5852,19 @@
         "english": "Cutoff for the cyclic/collective precompensation lowpass filter.",
         "status": "New entry. Please translate!"
     },
+    "govDCutoff": {
+        "message": "D-Term Cutoff",
+        "english": "D-Term Cutoff",
+        "status": "New entry. Please translate!"
+    },
+    "govDCutoffHelp": {
+        "message": "Cutoff frequency for the governor D-term filter.",
+        "english": "Cutoff frequency for the governor D-term filter.",
+        "status": "New entry. Please translate!"
+    },
     "govHeadspeed": {
-        "message": "Full headspeed",
-        "english": "Full headspeed",
+        "message": "Full Headspeed",
+        "english": "Full Headspeed",
         "status": "New entry. Please translate!"
     },
     "govHeadspeedHelp": {
@@ -5533,8 +5883,8 @@
         "status": "New entry. Please translate!"
     },
     "govMaxThrottleHelp": {
-        "message": "Maximum output throttle the governor is allowed to use.",
-        "english": "Maximum output throttle the governor is allowed to use.",
+        "message": "The maximum throttle output the governor may use.",
+        "english": "The maximum throttle output the governor may use.",
         "status": "New entry. Please translate!"
     },
     "govMinThrottle": {
@@ -5543,13 +5893,43 @@
         "status": "New entry. Please translate!"
     },
     "govMinThrottleHelp": {
-        "message": "Minimum output throttle the governor is allowed to use.",
-        "english": "Minimum output throttle the governor is allowed to use.",
+        "message": "The minimum throttle output the governor may use.",
+        "english": "The minimum throttle output the governor may use.",
+        "status": "New entry. Please translate!"
+    },
+    "govIdleThrottle": {
+        "message": "Idle Throttle",
+        "english": "Idle Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "govIdleThrottleHelp": {
+        "message": "<p>The minimum throttle output while the governor <strong><em>is not</em></strong> actively controlling the headspeed.</p><p></p>",
+        "english": "<p>The minimum throttle output while the governor <strong><em>is not</em></strong> actively controlling the headspeed.</p><p></p>",
+        "status": "New entry. Please translate!"
+    },
+    "govAutoThrottle": {
+        "message": "Auto Throttle",
+        "english": "Auto Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "govAutoThrottleHelp": {
+        "message": "<p>When using NORMAL or SWITCH throttle type, moving the throttle input below this value will cancel autorotation mode, preventing bailout.</p><p>For FUNCTION throttle type, this is the throttle output in autorotation mode.</p>",
+        "english": "<p>When using NORMAL or SWITCH throttle type, moving the throttle input below this value will cancel autorotation mode, preventing bailout.</p><p>For FUNCTION throttle type, this is the throttle output in autorotation mode.</p>",
+        "status": "New entry. Please translate!"
+    },
+    "govFallbackDrop": {
+        "message": "Throttle Fallback Drop",
+        "english": "Throttle Fallback Drop",
+        "status": "New entry. Please translate!"
+    },
+    "govFallbackDropHelp": {
+        "message": "Reduce the current motor output by this value in the event the RPM signal is lost.",
+        "english": "Reduce the current motor output by this value in the event the RPM signal is lost.",
         "status": "New entry. Please translate!"
     },
     "govMasterGain": {
-        "message": "PID master gain",
-        "english": "PID master gain",
+        "message": "Master Gain",
+        "english": "Master Gain",
         "status": "New entry. Please translate!"
     },
     "govMasterGainHelp": {
@@ -5588,8 +5968,8 @@
         "status": "New entry. Please translate!"
     },
     "govFGain": {
-        "message": "Feedforward gain",
-        "english": "Feedforward gain",
+        "message": "Feedforward Gain",
+        "english": "Feedforward Gain",
         "status": "New entry. Please translate!"
     },
     "govFGainHelp": {
@@ -5618,8 +5998,8 @@
         "status": "New entry. Please translate!"
     },
     "govYawPrecomp": {
-        "message": "Yaw precompensation",
-        "english": "Yaw precompensation",
+        "message": "Yaw",
+        "english": "Yaw",
         "status": "New entry. Please translate!"
     },
     "govYawPrecompHelp": {
@@ -5628,8 +6008,8 @@
         "status": "New entry. Please translate!"
     },
     "govCyclicPrecomp": {
-        "message": "Cyclic precompensation",
-        "english": "Cyclic precompensation",
+        "message": "Cyclic",
+        "english": "Cyclic",
         "status": "New entry. Please translate!"
     },
     "govCyclicPrecompHelp": {
@@ -5638,13 +6018,118 @@
         "status": "New entry. Please translate!"
     },
     "govCollectivePrecomp": {
-        "message": "Collective precompensation",
-        "english": "Collective precompensation",
+        "message": "Collective",
+        "english": "Collective",
         "status": "New entry. Please translate!"
     },
     "govCollectivePrecompHelp": {
         "message": "Collective precompensation weight. Determines how much collective is mixed into the feedfoward. This helps the governor to maintain the headspeed proactively. Usually 20..100",
         "english": "Collective precompensation weight. Determines how much collective is mixed into the feedfoward. This helps the governor to maintain the headspeed proactively. Usually 20..100",
+        "status": "New entry. Please translate!"
+    },
+    "profileGovPIDSection": {
+        "message": "PID",
+        "english": "PID",
+        "status": "New entry. Please translate!"
+    },
+    "profileGovPrecompSection": {
+        "message": "Precompensation",
+        "english": "Precompensation",
+        "status": "New entry. Please translate!"
+    },
+    "profileGovFlagsSection": {
+        "message": "Behaviour",
+        "english": "Behaviour",
+        "status": "New entry. Please translate!"
+    },
+    "govFlag_FALLBACK_PRECOMP": {
+        "message": "Fallback Precompensation",
+        "english": "Fallback Precompensation",
+        "status": "New entry. Please translate!"
+    },
+    "govFlag_VOLTAGE_COMP": {
+        "message": "Voltage Compensation",
+        "english": "Voltage Compensation",
+        "status": "New entry. Please translate!"
+    },
+    "govFlag_PID_SPOOLUP": {
+        "message": "Governed Spoolup",
+        "english": "Governed Spoolup",
+        "status": "New entry. Please translate!"
+    },
+    "govFlag_HS_ADJUSTMENT": {
+        "message": "Headspeed Adjustment",
+        "english": "Headspeed Adjustment",
+        "status": "New entry. Please translate!"
+    },
+    "govFlag_DYN_MIN_THROTTLE": {
+        "message": "Dynamic Minimum Throttle",
+        "english": "Dynamic Minimum Throttle",
+        "status": "New entry. Please translate!"
+    },
+    "govFlag_AUTOROTATION": {
+        "message": "Autorotation",
+        "english": "Autorotation",
+        "status": "New entry. Please translate!"
+    },
+    "govFlag_SUSPEND": {
+        "message": "Suspend",
+        "english": "Suspend",
+        "status": "New entry. Please translate!"
+    },
+    "govFlag_BYPASS": {
+        "message": "Bypass",
+        "english": "Bypass",
+        "status": "New entry. Please translate!"
+    },
+    "govFlagHelp_FALLBACK_PRECOMP": {
+        "message": "Enable precompensation while in the <code>FALLBACK</code> state.",
+        "english": "Enable precompensation while in the <code>FALLBACK</code> state.",
+        "status": "New entry. Please translate!"
+    },
+    "govFlagHelp_VOLTAGE_COMP": {
+        "message": "<p>Enable battery voltage sag compensation.</p><p><strong>Note:</strong> This setting requires <i>Battery ADC</i> to be used as the <i>Battery Voltage Source</i>. This setting can be found on the <i>Power</i> tab.</p>",
+        "english": "<p>Enable battery voltage sag compensation.</p><p><strong>Note:</strong> This setting requires <i>Battery ADC</i> to be used as the <i>Battery Voltage Source</i>. This setting can be found on the <i>Power</i> tab.</p>",
+        "status": "New entry. Please translate!"
+    },
+    "govFlagHelp_PID_SPOOLUP": {
+        "message": "Enable the governors PID controller during spoolup.",
+        "english": "Enable the governors PID controller during spoolup.",
+        "status": "New entry. Please translate!"
+    },
+    "govFlagHelp_HS_ADJUSTMENT": {
+        "message": "<p>Adjust the target headspeed using the throttle channel.</p><p>When enabled, the target headspeed is calculated by multiplying the <i>Full Headspeed</i> by the input throttle.</p>",
+        "english": "<p>Adjust the target headspeed using the throttle channel.</p><p>When enabled, the target headspeed is calculated by multiplying the <i>Full Headspeed</i> by the input throttle.</p>",
+        "status": "New entry. Please translate!"
+    },
+    "govFlagHelp_DYN_MIN_THROTTLE": {
+        "message": "Prevent the motor output from dropping drastically during an over-speed.",
+        "english": "Prevent the motor output from dropping drastically during an over-speed.",
+        "status": "New entry. Please translate!"
+    },
+    "govFlagHelp_AUTOROTATION": {
+        "message": "Allow the <code>AUTOROTATION</code> state in this profile.",
+        "english": "Allow the <code>AUTOROTATION</code> state in this profile.",
+        "status": "New entry. Please translate!"
+    },
+    "govFlagHelp_SUSPEND": {
+        "message": "Disable the PID controller, allowing precompensation to be tuned in isolation.",
+        "english": "Disable the PID controller, allowing precompensation to be tuned in isolation.",
+        "status": "New entry. Please translate!"
+    },
+    "govFlagHelp_BYPASS": {
+        "message": "Bypass all governor functionality.",
+        "english": "Bypass all governor functionality.",
+        "status": "New entry. Please translate!"
+    },
+    "govThrottleCurveNumPoints": {
+        "message": "Points",
+        "english": "Points",
+        "status": "New entry. Please translate!"
+    },
+    "govThrottleCurveCurrentValue": {
+        "message": "Throttle:",
+        "english": "Throttle:",
         "status": "New entry. Please translate!"
     },
     "sensorsInfo": {
@@ -6017,6 +6502,11 @@
         "english": "ESC 2",
         "status": "New entry. Please translate!"
     },
+    "blackboxLog_governor": {
+        "message": "Governor",
+        "english": "Governor",
+        "status": "New entry. Please translate!"
+    },
     "serialLoggingSupportedNote": {
         "message": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab.",
         "english": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab.",
@@ -6292,19 +6782,19 @@
         "english": "Port",
         "status": "New entry. Please translate!"
     },
-    "firmwareFlasherManualBaud": {
-        "message": "Manual baud rate",
-        "english": "Manual baud rate",
-        "status": "New entry. Please translate!"
-    },
-    "firmwareFlasherManualBaudDescription": {
-        "message": "Manual selection of baud rate for boards that don't support the default speed or for flashing via bluetooth.<br /><span class=\"message-negative\">Note:</span> Not used when flashing via USB DFU",
-        "english": "Manual selection of baud rate for boards that don't support the default speed or for flashing via bluetooth.<br /><span class=\"message-negative\">Note:</span> Not used when flashing via USB DFU",
-        "status": "New entry. Please translate!"
-    },
     "firmwareFlasherBaudRate": {
         "message": "Baud Rate",
         "english": "Baud Rate",
+        "status": "New entry. Please translate!"
+    },
+    "firmware_flasher.show_legacy_targets.label": {
+        "message": "Show Legacy Targets",
+        "english": "Show Legacy Targets",
+        "status": "New entry. Please translate!"
+    },
+    "firmware_flasher.show_legacy_targets.description": {
+        "message": "Show targets for many Betaflight boards. These targets are not actively maintained.",
+        "english": "Show targets for many Betaflight boards. These targets are not actively maintained.",
         "status": "New entry. Please translate!"
     },
     "firmwareFlasherOptionLoading": {
@@ -6413,8 +6903,8 @@
         "status": "New entry. Please translate!"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>",
-        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>",
+        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>",
+        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>",
         "status": "New entry. Please translate!"
     },
     "firmwareFlasherFirmwareNotLoaded": {
@@ -6998,28 +7488,28 @@
         "status": "New entry. Please translate!"
     },
     "controlAxisRoll": {
-        "message": "Roll [A]",
-        "english": "Roll [A]",
+        "message": "Roll",
+        "english": "Roll",
         "status": "New entry. Please translate!"
     },
     "controlAxisPitch": {
-        "message": "Pitch [E]",
-        "english": "Pitch [E]",
+        "message": "Pitch",
+        "english": "Pitch",
         "status": "New entry. Please translate!"
     },
     "controlAxisYaw": {
-        "message": "Yaw [R]",
-        "english": "Yaw [R]",
+        "message": "Yaw",
+        "english": "Yaw",
         "status": "New entry. Please translate!"
     },
     "controlAxisCollective": {
-        "message": "Coll [C]",
-        "english": "Coll [C]",
+        "message": "Collective",
+        "english": "Collective",
         "status": "New entry. Please translate!"
     },
     "controlAxisThrottle": {
-        "message": "Throttle [T]",
-        "english": "Throttle [T]",
+        "message": "Throttle",
+        "english": "Throttle",
         "status": "New entry. Please translate!"
     },
     "controlAxisThr": {
@@ -7917,6 +8407,21 @@
         "english": "RC Expo",
         "status": "New entry. Please translate!"
     },
+    "rateSetupRotorflightRate": {
+        "message": "Rate",
+        "english": "Rate",
+        "status": "New entry. Please translate!"
+    },
+    "rateSetupRotorflightShape": {
+        "message": "Shape",
+        "english": "Shape",
+        "status": "New entry. Please translate!"
+    },
+    "rateSetupRotorflightExpo": {
+        "message": "Expo",
+        "english": "Expo",
+        "status": "New entry. Please translate!"
+    },
     "rateSetupRcRateRaceflight": {
         "message": "Rate",
         "english": "Rate",
@@ -8025,6 +8530,46 @@
     "rateYawDynamicDeadbandGainHelp": {
         "message": "Increases stick deadband while rapidly approaching center.",
         "english": "Increases stick deadband while rapidly approaching center.",
+        "status": "New entry. Please translate!"
+    },
+    "rates.cyclic_ring.heading": {
+        "message": "Cyclic Ring",
+        "english": "Cyclic Ring",
+        "status": "New entry. Please translate!"
+    },
+    "rates.cyclic_ring.enable_cyclic_ring.label": {
+        "message": "Enable Cyclic Ring",
+        "english": "Enable Cyclic Ring",
+        "status": "New entry. Please translate!"
+    },
+    "rates.cyclic_ring.enable_cyclic_ring.help": {
+        "message": "Limits combined cyclic input to a circular range, preventing excessive rates with diagonal inputs.",
+        "english": "Limits combined cyclic input to a circular range, preventing excessive rates with diagonal inputs.",
+        "status": "New entry. Please translate!"
+    },
+    "rates.cyclic_ring.cyclic_ring_level.label": {
+        "message": "Cyclic Ring Level",
+        "english": "Cyclic Ring Level",
+        "status": "New entry. Please translate!"
+    },
+    "rates.cyclic_ring.cyclic_ring_level.help": {
+        "message": "<p>Adjusts to what degree the cyclic ring limits diagonal input.</p><br /><p>At 100%, the combined cyclic range forms a true circle. Increasing this value relaxes the limit, allowing more diagonal deflection.</p>",
+        "english": "<p>Adjusts to what degree the cyclic ring limits diagonal input.</p><br /><p>At 100%, the combined cyclic range forms a true circle. Increasing this value relaxes the limit, allowing more diagonal deflection.</p>",
+        "status": "New entry. Please translate!"
+    },
+    "rates.cyclic_ring.polar_coordinates.label": {
+        "message": "Enable Polar Coordinates",
+        "english": "Enable Polar Coordinates",
+        "status": "New entry. Please translate!"
+    },
+    "rates.cyclic_ring.polar_coordinates.help": {
+        "message": "<p>Apply cyclic rates to the combined cyclic direction and magnitude.</p><br /><p>When disabled, rates are applied to each cyclic axis separately.</p>",
+        "english": "<p>Apply cyclic rates to the combined cyclic direction and magnitude.</p><br /><p>When disabled, rates are applied to each cyclic axis separately.</p>",
+        "status": "New entry. Please translate!"
+    },
+    "rates.config.cyclic.label": {
+        "message": "CYCLIC",
+        "english": "CYCLIC",
         "status": "New entry. Please translate!"
     },
     "gyroFilterSettings": {
@@ -8493,33 +9038,33 @@
         "status": "New entry. Please translate!"
     },
     "failsafePulsrangeTitle": {
-        "message": "Valid Pulse Range Settings",
-        "english": "Valid Pulse Range Settings",
+        "message": "Pulse Width Limit",
+        "english": "Pulse Width Limit",
         "status": "New entry. Please translate!"
     },
     "failsafePulsrangeHelp": {
-        "message": "Pulses shorter than minimum or longer than maximum are invalid and will trigger application of individual channel fallback settings for AUX channels or entering stage 1 for flightchannels",
-        "english": "Pulses shorter than minimum or longer than maximum are invalid and will trigger application of individual channel fallback settings for AUX channels or entering stage 1 for flightchannels",
+        "message": "Configure the minimum and maximum valid pulse width. Channels outside this range will enter failsafe.",
+        "english": "Configure the minimum and maximum valid pulse width. Channels outside this range will enter failsafe.",
         "status": "New entry. Please translate!"
     },
     "failsafeRxMinUsecItem": {
-        "message": "Minimum length",
-        "english": "Minimum length",
+        "message": "Minimum Pulse Width",
+        "english": "Minimum Pulse Width",
         "status": "New entry. Please translate!"
     },
     "failsafeRxMaxUsecItem": {
-        "message": "Maximum length",
-        "english": "Maximum length",
+        "message": "Maximum Pulse Width",
+        "english": "Maximum Pulse Width",
         "status": "New entry. Please translate!"
     },
     "failsafeChannelFallbackSettingsTitle": {
-        "message": "Channel Fallback Settings",
-        "english": "Channel Fallback Settings",
+        "message": "Channel Fallback",
+        "english": "Channel Fallback",
         "status": "New entry. Please translate!"
     },
     "failsafeChannelFallbackSettingsHelp": {
-        "message": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 5µs, so smaller changes may be ignored.",
-        "english": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 5µs, so smaller changes may be ignored.",
+        "message": "Configure the failsafe behavior of each channel.<br><strong>Auto:</strong> Sets channel to a safe value. Center for Roll, Pitch, Yaw, Collective. Low for Throttle.<br><strong>Hold:</strong> Holds channel at the last known position.<br><strong>Set:</strong> Sets channel to the specified value [μs].",
+        "english": "Configure the failsafe behavior of each channel.<br><strong>Auto:</strong> Sets channel to a safe value. Center for Roll, Pitch, Yaw, Collective. Low for Throttle.<br><strong>Hold:</strong> Holds channel at the last known position.<br><strong>Set:</strong> Sets channel to the specified value [μs].",
         "status": "New entry. Please translate!"
     },
     "failsafeChannelFallbackSettingsAuto": {
@@ -8762,6 +9307,11 @@
         "english": "ESC Telemetry",
         "status": "New entry. Please translate!"
     },
+    "powerBatteryVoltageMeterTypeFbus": {
+        "message": "FrSky Sensor",
+        "english": "FrSky Sensor",
+        "status": "New entry. Please translate!"
+    },
     "powerBatteryCurrentMeterSource": {
         "message": "Battery Current Source",
         "english": "Battery Current Source",
@@ -8782,9 +9332,79 @@
         "english": "ESC Telemetry",
         "status": "New entry. Please translate!"
     },
+    "powerBatteryCurrentMeterTypeFbus": {
+        "message": "FrSky Sensor",
+        "english": "FrSky Sensor",
+        "status": "New entry. Please translate!"
+    },
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP Sensor",
         "english": "MSP Sensor",
+        "status": "New entry. Please translate!"
+    },
+    "powerSmartFuelHead": {
+        "message": "Smart Fuel",
+        "english": "Smart Fuel",
+        "status": "New entry. Please translate!"
+    },
+    "powerSmartFuelSource": {
+        "message": "Smart Fuel Mode",
+        "english": "Smart Fuel Mode",
+        "status": "New entry. Please translate!"
+    },
+    "powerSmartFuelSourceHelp": {
+        "message": "<p><strong>Off:</strong> Smart Fuel is disabled.</p><p><strong>Voltage:</strong> estimates charge from pack voltage.</p><p><strong>Current:</strong> uses measured mAh consumed against the configured battery capacity.</p><p><strong>Combined:</strong> uses the more pessimistic of the voltage estimate and current consumption.</p><p>A configured battery voltage sensor is required for enabled Smart Fuel modes.</p>",
+        "english": "<p><strong>Off:</strong> Smart Fuel is disabled.</p><p><strong>Voltage:</strong> estimates charge from pack voltage.</p><p><strong>Current:</strong> uses measured mAh consumed against the configured battery capacity.</p><p><strong>Combined:</strong> uses the more pessimistic of the voltage estimate and current consumption.</p><p>A configured battery voltage sensor is required for enabled Smart Fuel modes.</p>",
+        "status": "New entry. Please translate!"
+    },
+    "powerSmartFuelSourceTypeNone": {
+        "message": "Off",
+        "english": "Off",
+        "status": "New entry. Please translate!"
+    },
+    "powerSmartFuelSourceTypeCurrent": {
+        "message": "Current",
+        "english": "Current",
+        "status": "New entry. Please translate!"
+    },
+    "powerSmartFuelSourceTypeVoltage": {
+        "message": "Voltage",
+        "english": "Voltage",
+        "status": "New entry. Please translate!"
+    },
+    "powerSmartFuelSourceTypeCombined": {
+        "message": "Combined",
+        "english": "Combined",
+        "status": "New entry. Please translate!"
+    },
+    "powerSmartFuelVoltageDropRate": {
+        "message": "Smart Fuel Voltage Drop Rate",
+        "english": "Smart Fuel Voltage Drop Rate",
+        "status": "New entry. Please translate!"
+    },
+    "powerSmartFuelVoltageDropRateHelp": {
+        "message": "Limits how quickly the voltage track may fall. This setting is only used in Voltage and Combined modes.",
+        "english": "Limits how quickly the voltage track may fall. This setting is only used in Voltage and Combined modes.",
+        "status": "New entry. Please translate!"
+    },
+    "powerSmartFuelChargeDropRate": {
+        "message": "Smart Fuel Charge Drop Rate",
+        "english": "Smart Fuel Charge Drop Rate",
+        "status": "New entry. Please translate!"
+    },
+    "powerSmartFuelChargeDropRateHelp": {
+        "message": "Limits how quickly the reported charge percentage may drop on the voltage track once the model is armed or has been armed. This setting is only used in Voltage and Combined modes.",
+        "english": "Limits how quickly the reported charge percentage may drop on the voltage track once the model is armed or has been armed. This setting is only used in Voltage and Combined modes.",
+        "status": "New entry. Please translate!"
+    },
+    "powerSmartFuelSagGain": {
+        "message": "Smart Fuel Sag Gain",
+        "english": "Smart Fuel Sag Gain",
+        "status": "New entry. Please translate!"
+    },
+    "powerSmartFuelSagGainHelp": {
+        "message": "Compensates for voltage sag under load. Increase if Smart Fuel is too pessimistic under load; decrease if it is too optimistic. This setting is only used in Voltage and Combined modes.",
+        "english": "Compensates for voltage sag under load. Increase if Smart Fuel is too pessimistic under load; decrease if it is too optimistic. This setting is only used in Voltage and Combined modes.",
         "status": "New entry. Please translate!"
     },
     "powerBatteryMinimumCellVoltage": {
@@ -9140,6 +9760,16 @@
     "powerBatteryCellCount": {
         "message": "Cell count",
         "english": "Cell count",
+        "status": "New entry. Please translate!"
+    },
+    "powerBatteryProfile": {
+        "message": "Battery $1",
+        "english": "Battery $1",
+        "status": "New entry. Please translate!"
+    },
+    "options.show_advanced_firmware_opts.label": {
+        "message": "Show advanced firmware flashing options",
+        "english": "Show advanced firmware flashing options",
         "status": "New entry. Please translate!"
     },
     "osdSetupTitle": {
@@ -11597,6 +12227,21 @@
         "english": "RESCUE",
         "status": "New entry. Please translate!"
     },
+    "mode GOVERNOR FALLBACK": {
+        "message": "GOVERNOR FALLBACK",
+        "english": "GOVERNOR FALLBACK",
+        "status": "New entry. Please translate!"
+    },
+    "mode GOVERNOR SUSPEND": {
+        "message": "GOVERNOR SUSPEND",
+        "english": "GOVERNOR SUSPEND",
+        "status": "New entry. Please translate!"
+    },
+    "mode GOVERNOR BYPASS": {
+        "message": "GOVERNOR BYPASS",
+        "english": "GOVERNOR BYPASS",
+        "status": "New entry. Please translate!"
+    },
     "flashTab": {
         "message": "Update Firmware",
         "english": "Update Firmware",
@@ -12167,13 +12812,13 @@
         "message": "No presets found for the given search parameters",
         "english": "No presets found for the given search parameters",
         "status": "New entry. Please translate!",
-        "description": "Message that apprears on presets tab if no presets were found"
+        "description": "Message that appears on presets tab if no presets were found"
     },
     "presetsTooManyPresetsFound": {
         "message": "Reached the maximum limit of the shown presets number",
         "english": "Reached the maximum limit of the shown presets number",
         "status": "New entry. Please translate!",
-        "description": "Message that apprears on presets tab if too many presets found"
+        "description": "Message that appears on presets tab if too many presets found"
     },
     "presetOptionsPlaceholder": {
         "message": "ATTENTION! Review the list of options",

@@ -1,7 +1,7 @@
 import semver from "semver";
 
 import { Beepers } from "@/js/Beepers.js";
-import * as config from "@/js/config.js";
+import { config } from "@/js/config.svelte.ts";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
@@ -105,10 +105,10 @@ export function initializeSerialBackend() {
     GUI.updateManualPortVisibility();
 
     $('#port-override').on("change", function() {
-        config.set({'portOverride': $('#port-override').val()});
+        config.portOverride = $('#port-override').val();
     });
 
-    $('#port-override').val(config.get('portOverride'));
+    $('#port-override').val(config.portOverride ?? '');
 
     $('div#port-picker #port').on("change", function() {
         GUI.updateManualPortVisibility();
@@ -131,7 +131,7 @@ export function initializeSerialBackend() {
     });
 
     // auto-connect
-    if (config.get('auto_connect') ?? true) {
+    if (config.autoConnect) {
         // default or enabled by user
         GUI.auto_connect = true;
 
@@ -162,7 +162,7 @@ export function initializeSerialBackend() {
             if (!GUI.connected_to && !GUI.connecting_to) $('select#baud').prop('disabled', false);
         }
 
-        config.set({'auto_connect': GUI.auto_connect});
+        config.autoConnect = GUI.auto_connect;
     });
 
     // Show all ports
@@ -171,7 +171,7 @@ export function initializeSerialBackend() {
         GUI.show_all_ports = true;
         $('div #show-all-ports-switch').hide();
     } else {
-        if (!config.get('show_all_ports')) {
+        if (!config.showAllPorts) {
             GUI.show_all_ports = false;
             $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsDisabled'));
             $('input.show_all_ports').prop('checked', false);
@@ -192,7 +192,7 @@ export function initializeSerialBackend() {
                 $('input.show_all_ports, span.show_all_ports').prop('title', i18n.getMessage('showAllPortsDisabled'));
             }
 
-            config.set({ 'show_all_ports': GUI.show_all_ports });
+            config.showAllPorts = GUI.show_all_ports;
             PortHandler.showAllPorts(GUI.show_all_ports);
         });
     }
@@ -269,7 +269,7 @@ async function onOpen(openInfo) {
         GUI.log(i18n.getMessage('serialPortOpened', serial.connectionType === 'serial' ? [serial.connectionId] : [openInfo.socketId]));
 
         // save selected port if the port differs
-        config.set({'last_used_port': GUI.connected_to});
+        config.lastUsedPort = GUI.connected_to;
 
         serial.onReceive.addListener(read_serial);
         setConnectionTimeout();
