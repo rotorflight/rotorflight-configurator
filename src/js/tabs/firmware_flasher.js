@@ -1,7 +1,7 @@
 import * as marked from 'marked';
 import semver from "semver";
 
-import * as config from '@/js/config.js';
+import { config } from "@/js/config.svelte.ts";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { ConfigInserter } from "@/js/ConfigInserter.js";
 import { FC } from "@/js/fc.svelte.js";
@@ -188,10 +188,10 @@ tab.initialize = function (callback) {
 
             tab.releases = builds;
 
-            if (config.get('rememberLastSelectedBoard')) {
-                const selected_board = config.get('selected_board');
-                const boardBuilds = builds[selected_board];
-                $('select[name="board"]').val(boardBuilds ? selected_board : 0).trigger('change');
+            if (config.rememberLastSelectedBoard) {
+                const selectedBoard = config.selectedBoard;
+                const boardBuilds = builds[selectedBoard];
+                $('select[name="board"]').val(boardBuilds ? selectedBoard : 0).trigger('change');
             }
         }
 
@@ -327,15 +327,15 @@ tab.initialize = function (callback) {
                 .append($(`<option value='0'>${i18n.getMessage("firmwareFlasherOptionLabelSelectFirmwareVersion")}</option>`));
 
             let selectedBoard = undefined;
-            if (config.get('rememberLastSelectedBoard')) {
-                selectedBoard = config.get('selected_board');
+            if (config.rememberLastSelectedBoard) {
+                selectedBoard = config.selectedBoard;
             }
 
             updateBoardSelect(selectedBoard);
         }
 
         function updateBoardSelect(selected) {
-            const showLegacy = config.get("showLegacyTargets") ?? false;
+            const showLegacy = config.showLegacyTargets;
 
             const boards_e = $('select[name="board"]');
             boards_e.empty()
@@ -560,8 +560,8 @@ tab.initialize = function (callback) {
                         self.unifiedTarget = {};
                     }
                 }
-                if (config.get('rememberLastSelectedBoard')) {
-                    config.set({'selected_board': target});
+                if (config.rememberLastSelectedBoard) {
+                    config.selectedBoard = target;
                 }
                 tab.selectedBoard = target;
                 tab.bareBoard = undefined;
@@ -770,20 +770,20 @@ tab.initialize = function (callback) {
             }
         }
 
-        const showAdvancedOpts = config.get('showAdvancedFirmwareOpts') ?? false;
+        const showAdvancedOpts = config.showAdvancedFirmwareOpts;
 
         $('input.erase_chip')
-            .prop('checked', showAdvancedOpts ? config.get('erase_chip') ?? true : true)
+            .prop('checked', showAdvancedOpts ? config.eraseChip : true)
             .on('change', function () {
-                config.set({ 'erase_chip': $(this).is(':checked') });
+                config.eraseChip = $(this).is(':checked');
             })
             .closest('.field')
             .toggle(showAdvancedOpts);
 
         $('#show-legacy-targets')
-            .prop('checked', showAdvancedOpts ? config.get('showLegacyTargets') ?? false : false)
+            .prop('checked', showAdvancedOpts ? config.showLegacyTargets : false)
             .on('change', function () {
-                  config.set({ showLegacyTargets: $(this).is(':checked') });
+                  config.showLegacyTargets = $(this).is(':checked');
                   updateBoardSelect($('select[name="board"]').val());
             })
             .closest('.field')

@@ -1,7 +1,7 @@
 import * as noUiSlider from 'nouislider';
 import wNumb from 'wnumb';
 
-import * as config from '@/js/config.js';
+import { config } from '@/js/config.svelte.ts';
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
@@ -534,10 +534,10 @@ tab.initialize = function (callback) {
         $("input#switch-toggle-unused")
             .on('change', function() {
                 hideUnusedModes = $(this).prop("checked");
-                config.set({ hideUnusedModes });
+                config.hideUnusedModes = hideUnusedModes;
                 update_ui();
             })
-            .prop("checked", !!config.get('hideUnusedModes'))
+            .prop("checked", config.hideUnusedModes)
             .trigger('change');
 
         self.save = function (callback) {

@@ -1,4 +1,4 @@
-import * as config from '@/js/config.js';
+import { config } from "@/js/config.svelte.ts";
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
@@ -194,13 +194,13 @@ PortHandler.detectPort = function(currentPorts) {
     const newPorts = self.array_difference(currentPorts, self.initialPorts);
 
     if (newPorts.length) {
-        // pick last_used_port for manual tcp auto-connect or detect and select new port for serial
+        // pick lastUsedPort for manual tcp auto-connect or detect and select new port for serial
         currentPorts = self.updatePortSelect(currentPorts);
         console.log(`PortHandler - Found: ${JSON.stringify(newPorts)}`);
 
-        const last_used_port = config.get('last_used_port');
-        if (last_used_port) {
-            if (last_used_port.includes('tcp')) {
+        const lastUsedPort = config.lastUsedPort;
+        if (lastUsedPort) {
+            if (lastUsedPort.includes('tcp')) {
                 self.portPickerElement.val('manual');
             } else if (newPorts.length === 1) {
                 self.portPickerElement.val(newPorts[0].path);
@@ -215,7 +215,7 @@ PortHandler.detectPort = function(currentPorts) {
             if (GUI.active_tab !== 'firmware_flasher') {
                 GUI.timeout_add('auto-connect_timeout', function () {
                     $('div#header_btns a.connect').click();
-                }, config.get('connectionTimeout') ?? 100); // timeout so bus have time to initialize after being detected by the system
+                }, config.connectionTimeout); // timeout so bus have time to initialize after being detected by the system
             }
         }
         // trigger callbacks
