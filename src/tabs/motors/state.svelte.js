@@ -20,6 +20,7 @@ class State {
     "DSHOT600",
     "PROSHOT",
     ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8) ? ["CASTLE"] : []),
+    ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) ? ["SRXL2"] : []),
     "DISABLED",
   ]);
 
@@ -40,6 +41,7 @@ class State {
     ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)
       ? ["FrSky F.BUS"]
       : []),
+    ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) ? ["SRXL2"] : []),
   ]);
 
   throttleEnabled = $derived(
