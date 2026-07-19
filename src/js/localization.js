@@ -72,7 +72,7 @@ i18n.parseInputFile = function(data) {
 };
 
 i18n.changeLanguage = function(languageSelected) {
-    config.user_language_select = languageSelected;
+    config.locale = languageSelected;
     i18next.changeLanguage(getValidLocale(languageSelected));
     i18n.selectedLanguage = languageSelected;
     GUI.log(i18n.getMessage('language_changed'));

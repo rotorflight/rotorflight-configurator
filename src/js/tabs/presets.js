@@ -451,11 +451,11 @@ class PresetsTab {
 
   onButtonHideBackupWarningClick() {
     this.#dom.warningBackup.toggle(false);
-    config.show_presets_warning_backup = false;
+    config.showPresetsWarningBackup = false;
   }
 
   setupBackupWarning() {
-    this.#dom.warningBackup.toggle(config.show_presets_warning_backup);
+    this.#dom.warningBackup.toggle(config.showPresetsWarningBackup);
   }
 
   onPresetSourcesShowClick() {

@@ -25,18 +25,18 @@ export const cordovaUI = {
             self.canChangeUI = false;
         }
 
-        if (config.cordova_force_computer_ui === undefined) {
+        if (config.cordovaForceComputerUi === undefined) {
             if ((orientation === 'landscape' && screenHeight <= 575)
                 || (orientation === 'portrait' && screenWidth <= 575)) {
-                config.cordova_force_computer_ui = false;
+                config.cordovaForceComputerUi = false;
             } else {
-                config.cordova_force_computer_ui = true;
+                config.cordovaForceComputerUi = true;
             }
         }
         self.set();
     },
     set: function() {
-        if (config.cordova_force_computer_ui) {
+        if (config.cordovaForceComputerUi) {
             window.screen.orientation.lock('landscape');
             $('body').css('zoom', this.uiZoom);
         } else {

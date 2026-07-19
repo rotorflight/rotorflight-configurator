@@ -117,7 +117,7 @@ export default class Sources {
   async #initializeSources() {
     await this.#newSource(this.#officialSourceMetadata());
 
-    for (const sourceConfig of config.presets_sources_metadata) {
+    for (const sourceConfig of config.presetsSourcesMetadata) {
       const source = new Metadata(
         sourceConfig.name,
         sourceConfig.url,
@@ -133,7 +133,7 @@ export default class Sources {
    * Saves the metadata of the sources to storage
    */
   #saveSourcesMetadataToStorage() {
-    config.presets_sources_metadata = this.#collectSourcesMetadata();
+    config.presetsSourcesMetadata = this.#collectSourcesMetadata();
   }
 
   /**

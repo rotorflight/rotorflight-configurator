@@ -253,7 +253,7 @@ export function startProcess() {
 
     $('#tabs ul.mode-disconnected li a:first').click();
 
-    const zoomLevel = config.zoom_level;
+    const zoomLevel = config.zoomLevel;
     if (zoomLevel) {
         GUI.set_zoom(zoomLevel, false);
     }
@@ -316,14 +316,14 @@ export function startProcess() {
             $("#log").removeClass('active');
             $("#tab-content-container").removeClass('logopen');
             $("#scrollicon").removeClass('active');
-            config.log_open = false;
+            config.logOpen = false;
 
             state = false;
         } else {
             $("#log").addClass('active');
             $("#tab-content-container").addClass('logopen');
             $("#scrollicon").addClass('active');
-            config.log_open = true;
+            config.logOpen = true;
 
             state = true;
         }
@@ -331,21 +331,21 @@ export function startProcess() {
         $(this).data('state', state);
     });
 
-    if (config.log_open) {
+    if (config.logOpen) {
         $("#showlog").trigger('click');
     }
 
-    CONFIGURATOR.expertMode = config.expert_mode;
+    CONFIGURATOR.expertMode = config.expertMode;
     $('#expert-mode input')
         .on('change', function () {
             CONFIGURATOR.expertMode = this.checked;
-            config.expert_mode = this.checked;
+            config.expertMode = this.checked;
         })
         .prop('checked', CONFIGURATOR.expertMode);
 
-    CliAutoComplete.setEnabled(config.cli_auto_complete);
+    CliAutoComplete.setEnabled(config.cliAutoComplete);
 
-    setDarkTheme(config.dark_theme);
+    setDarkTheme(config.darkTheme);
 
     if (GUI.isCordova()) {
         let darkMode = false;
@@ -376,7 +376,7 @@ export function checkForConfiguratorUpdates() {
 }
 
 function notifyOutdatedVersion(releaseData) {
-    const allowUnstable = config.check_for_configurator_unstable_versions;
+    const allowUnstable = config.checkForConfiguratorUnstableVersions;
     const versions = releaseData.filter(function (version) {
         var versionFromTagExpression = /release\/(.*)/;
         var match = versionFromTagExpression.exec(version.tag_name);

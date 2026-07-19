@@ -30,52 +30,51 @@ const tab = {
 
   initRememberLastTab() {
     $("#opt-remember-last-tab")
-      .prop("checked", config.remember_last_tab)
+      .prop("checked", config.rememberLastTab)
       .on("change", function () {
-        config.remember_last_tab = $(this).is(":checked");
+        config.rememberLastTab = $(this).is(":checked");
       });
   },
 
   rememberLastSelectedBoard() {
     $("#opt-remember-last-board")
-      .prop("checked", config.remember_last_selected_board)
+      .prop("checked", config.rememberLastSelectedBoard)
       .on("change", function () {
-        config.remember_last_selected_board = $(this).is(":checked");
+        config.rememberLastSelectedBoard = $(this).is(":checked");
       });
   },
 
   showAdvancedFirmwareOpts() {
     $("#opt-show-advanced-firmware-opts")
-      .prop("checked", config.show_advanced_firmware_opts)
+      .prop("checked", config.showAdvancedFirmwareOpts)
       .on("change", function () {
-        config.show_advanced_firmware_opts = $(this).is(":checked");
+        config.showAdvancedFirmwareOpts = $(this).is(":checked");
       });
   },
 
   initCheckForConfiguratorUnstableVersions() {
     $("#opt-check-unstable-versions")
-      .prop("checked", config.check_for_configurator_unstable_versions)
+      .prop("checked", config.checkForConfiguratorUnstableVersions)
       .on("change", function () {
-        config.check_for_configurator_unstable_versions =
-          $(this).is(":checked");
+        config.checkForConfiguratorUnstableVersions = $(this).is(":checked");
         checkForConfiguratorUpdates();
       });
   },
 
   initAutoConnectConnectionTimeout() {
     $("#opt-connection-timeout")
-      .val(config.connection_timeout)
+      .val(config.connectionTimeout)
       .on("change", function () {
-        config.connection_timeout = parseInt($(this).val());
+        config.connectionTimeout = parseInt($(this).val());
       });
   },
 
   initCordovaForceComputerUI() {
     $("#opt-cordova-force-computer-ui")
-      .prop("checked", config.cordova_force_computer_ui)
+      .prop("checked", config.cordovaForceComputerUi)
       .on("change", function () {
         const checked = $(this).is(":checked");
-        config.cordova_force_computer_ui = checked;
+        config.cordovaForceComputerUi = checked;
         globalThis.cordovaUI?.set?.();
       })
       .closest(".field")
@@ -84,10 +83,10 @@ const tab = {
 
   initDarkTheme() {
     $("#opt-dark-theme")
-      .val(config.dark_theme)
+      .val(config.darkTheme)
       .on("change", function () {
         const value = parseInt($(this).val());
-        config.dark_theme = value;
+        config.darkTheme = value;
         setDarkTheme(value);
       });
   },

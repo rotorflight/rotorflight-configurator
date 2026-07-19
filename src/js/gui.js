@@ -375,7 +375,7 @@ GuiControl.prototype.set_zoom = function(zoom_level, show_box) {
 
     const percent = zoom_level + '%';
 
-    config.zoom_level = zoom_level;
+    config.zoomLevel = zoom_level;
 
     nw.Window.get().zoomLevel = Math.log(zoom_level / 100) / Math.log(1.2);
     $('#zoom-percent').text(percent);
@@ -441,12 +441,12 @@ GuiControl.prototype.content_ready = function (callback) {
 };
 
 GuiControl.prototype.saveDefaultTab = function(tabName) {
-    config.last_tab = tabName;
+    config.lastTab = tabName;
 };
 
 GuiControl.prototype.selectDefaultTabWhenConnected = function() {
-    const lastTab = config.last_tab;
-    if (config.remember_last_tab && lastTab) {
+    const lastTab = config.lastTab;
+    if (config.rememberLastTab && lastTab) {
         $(`#tabs ul.mode-connected .tab_${lastTab} a`).click();
     } else {
         $('#tabs ul.mode-connected .tab_status a').click();

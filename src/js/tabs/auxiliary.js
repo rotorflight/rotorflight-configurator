@@ -534,10 +534,10 @@ tab.initialize = function (callback) {
         $("input#switch-toggle-unused")
             .on('change', function() {
                 hideUnusedModes = $(this).prop("checked");
-                config.hide_unused_modes = hideUnusedModes;
+                config.hideUnusedModes = hideUnusedModes;
                 update_ui();
             })
-            .prop("checked", config.hide_unused_modes)
+            .prop("checked", config.hideUnusedModes)
             .trigger('change');
 
         self.save = function (callback) {

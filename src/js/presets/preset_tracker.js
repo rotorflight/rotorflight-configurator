@@ -38,11 +38,11 @@ export default class PresetTracker {
   }
 
   #loadFromStorage() {
-    this.#trackedPresets = config.tracked_presets;
+    this.#trackedPresets = config.trackedPresets;
   }
 
   #saveToStorage() {
-    config.tracked_presets = this.#trackedPresets;
+    config.trackedPresets = this.#trackedPresets;
   }
 
   /**
