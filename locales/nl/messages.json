@@ -32,6 +32,26 @@
         "message": "Standaard",
         "english": "Default"
     },
+    "genericRange": {
+        "message": "Bereik",
+        "english": "Range"
+    },
+    "hours": {
+        "message": "{{count}} uur",
+        "english": "{{count}} hour"
+    },
+    "hours_other": {
+        "message": "{{count}} uren",
+        "english": "{{count}} hours"
+    },
+    "minutes": {
+        "message": "{{count}} minuut",
+        "english": "{{count}} minute"
+    },
+    "minutes_other": {
+        "message": "{{count}} minuten",
+        "english": "{{count}} minutes"
+    },
     "axisROLL": {
         "message": "ROLL",
         "english": "ROLL",
@@ -91,6 +111,10 @@
     "warningTitle": {
         "message": "Waarschuwing",
         "english": "Warning"
+    },
+    "noteTitle": {
+        "message": "Opmerking",
+        "english": "Note"
     },
     "noticeTitle": {
         "message": "Opmerking",
@@ -210,8 +234,8 @@
         "english": "Zoom:"
     },
     "expertMode": {
-        "message": "Schakel expert modus in",
-        "english": "Enable Expert Mode"
+        "message": "Expert modus",
+        "english": "Expert Mode"
     },
     "permanentExpertMode": {
         "message": "Expert modus permanent inschakelen",
@@ -445,6 +469,10 @@
     "tabMotors": {
         "message": "Motoren",
         "english": "Motors"
+    },
+    "tabGovernor": {
+        "message": "Governor",
+        "english": "Governor"
     },
     "tabMixer": {
         "message": "Mixer",
@@ -901,8 +929,8 @@
         "english": "Rotorflight documentation is available in release notes and website.<br /><br />"
     },
     "defaultDocumentation1": {
-        "message": "De Rotorflight Tutorial is een geweldige bron van informatie, je kunt deze <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> vinden.",
-        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        "message": "De Rotorflight Tutorial is een geweldige bron van informatie, je kunt deze <a href=\"https://www.rotorflight.org/docs/2.3.0\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> vinden.",
+        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.3.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultDocumentation2": {
         "message": "Het laatste nieuws is te lezen op de website Announcements pagina, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a>.",
@@ -996,6 +1024,14 @@
         "message": "Firmware:",
         "english": "Firmware:"
     },
+    "statusFlightCount": {
+        "message": "Aantal vluchten:",
+        "english": "Flight Count:"
+    },
+    "statusFlightTime": {
+        "message": "Vluchttijd:",
+        "english": "Flight Time:"
+    },
     "statusArmingDisableFlags": {
         "message": "Arming uitgezet wegens:",
         "english": "Arming Disable Flags:"
@@ -1005,8 +1041,8 @@
         "english": "Arming Allowed"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "Lijst van vlaggen die aangeven waarom arming op dit moment niet is toegestaan. Beweeg de muis over de vlag of raadpleeg de website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> voor meer informatie.",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
+        "message": "Lijst van vlaggen die aangeven waarom arming op dit moment niet is toegestaan. Beweeg de muis over de vlag of raadpleeg de website tutorial <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> voor meer informatie.",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
     },
     "statusArmingDisableFlagsTooltipNO_GYRO": {
         "message": "Geen gyroscoop sensor gevonden",
@@ -1118,8 +1154,8 @@
         "description": "Message that pops up to describe the RESC arming disable flag"
     },
     "statusArmingDisableFlagsTooltipRPMFILTER": {
-        "message": "RPM-gebaseerd filteren is ingeschakeld, maar het RPM-signaal is niet geconfigureerd of anderszins niet beschikbaar.",
-        "english": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailble",
+        "message": "RPM-gebaseerde filtering is ingeschakeld, maar het RPM-signaal is niet geconfigureerd of anderszins niet beschikbaar",
+        "english": "RPM based filtering is enabled, but the RPM signal is unconfigured or otherwise unavailable",
         "description": "Message that pops up to describe the RPMFILTER arming disable flag"
     },
     "statusArmingDisableFlagsTooltipREBOOT_REQ": {
@@ -1141,6 +1177,10 @@
         "message": "Er is geen motor-throttle-protocol geselecteerd.",
         "english": "There is no motor throttle protocol selected",
         "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipOVERRIDE": {
+        "message": "Servo override of Mixer override is actief",
+        "english": "Servo Override or Mixer Override is active"
     },
     "statusArmingDisableFlagsTooltipARM_SWITCH": {
         "message": "De arm-schakelaar is geactiveerd terwijl andere uitschakelingsvoorwaarden voor arming actief zijn.",
@@ -1575,6 +1615,46 @@
         "message": "In- of uitschakelen wanneer de buzzer moet klinken",
         "english": "Enable or disable when to sound the Buzzer"
     },
+    "configuration.personalisation.model_id.label": {
+        "message": "Model ID",
+        "english": "Model Id"
+    },
+    "configuration.flight_stats.heading": {
+        "message": "Vluchtstatistieken",
+        "english": "Flight Statistics"
+    },
+    "configuration.flight_stats.enable.label": {
+        "message": "Vluchtstatistieken opslaan",
+        "english": "Record Flight Statistics"
+    },
+    "configuration.flight_stats.reset.label": {
+        "message": "Resetten",
+        "english": "Reset"
+    },
+    "configuration.flight_stats.min_armed_time.label": {
+        "message": "Minimale vluchttijd",
+        "english": "Minimum flight time"
+    },
+    "configuration.flight_stats.min_armed_time.help": {
+        "message": "Minimale tijd dat de flight controller armed moet zijn voordat de vluchtstatistieken worden meegeteld in het totaal.",
+        "english": "Minimum duration the flight controller must be armed for the flights statistics to be counted towards the total."
+    },
+    "configuration.flight_stats.flight_count.label": {
+        "message": "Aantal vluchten",
+        "english": "Flight Count"
+    },
+    "configuration.flight_stats.flight_time.label": {
+        "message": "Vluchttijd",
+        "english": "Flight Time"
+    },
+    "configuration.flight_stats.distance.label": {
+        "message": "Afstand",
+        "english": "Distance"
+    },
+    "flight_stats.duration.value": {
+        "message": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })",
+        "english": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })"
+    },
     "beeper_GYRO_CALIBRATED": {
         "message": "Geeft een pieptoon als de gyro is gekalibreerd",
         "english": "Beeps when gyro has been calibrated"
@@ -1822,6 +1902,10 @@
         "message": "Telemetrie: FrSky SmartPort",
         "english": "Telemetry: FrSky SmartPort"
     },
+    "portsFunction_SPORT_MASTER": {
+        "message": "S.PORT Master",
+        "english": "S.PORT Master"
+    },
     "portsFunction_TELEMETRY_IBUS": {
         "message": "Telemetrie: FlySky iBUS",
         "english": "Telemetry: FlySky iBUS"
@@ -1877,6 +1961,10 @@
     "portsFunction_SBUS_OUT": {
         "message": "S.BUS Output",
         "english": "S.BUS Output"
+    },
+    "portsFunction_FBUS_OUT": {
+        "message": "F.BUS",
+        "english": "F.BUS"
     },
     "portsFunction_CUSTOM": {
         "message": "Aangepast",
@@ -1987,8 +2075,12 @@
         "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the legacy <b>PID Mode 2</b>."
     },
     "profilesPIDModeThreeWarning": {
-        "message": "<span class=\"message-negative\">Let op:</span> De PID Controlled is in de nieuwe <b>PID Mode 3</b> met HSI.",
-        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the new <b>PID Mode 3</b> with HSI."
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> De PID-regelaar staat in <b>PID-modus 3</b>.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the <b>PID Mode 3</b>."
+    },
+    "profilesPIDModeFourWarning": {
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> De PID-regelaar staat in de experimentele <b>PID-modus 4</b>.",
+        "english": "<span class=\"message-negative\">Warning:</span> The PID Controlled is in the experimental <b>PID Mode 4</b>."
     },
     "profilesPIDModeCustomWarning": {
         "message": "<span class=\"message-negative\">Let op:</span> De PID Controller is handmatig geconfigureerd met parameters die niet hier kunnen worden weergegeven. <br> Gebruik de <b>CLI</b> om de PID instellingen te wijzigen.",
@@ -2039,8 +2131,8 @@
         "english": "Boost"
     },
     "profilesBoostHelp": {
-        "message": "Dit is een extra boost op de feedforward, gebaseerd op de afgeleide van de setpoint. Een verhoging van de boost kan de reactie van het model scherper maken, zonder de nadelen van hoge proportionele of feedforward-gains.",
-        "english": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without he drawbacks of high Proportional or Feedforward gains."
+        "message": "Dit is een extra boost op de feedforward, gebaseerd op de afgeleide van het setpunt. Een verhoging van de boost kan de reactie van het model scherper maken, zonder de nadelen van hoge Proportionele of Feedforward gains.",
+        "english": "This is an additional boost on the feedforward, based on the derivative of the setpoint. An increase of Boost can make the model's reaction sharper, without the drawbacks of high Proportional or Feedforward gains."
     },
     "profilesCopyProfile": {
         "message": "Profiel kopiëren",
@@ -2055,16 +2147,28 @@
         "english": "Loaded Profile: <strong class=\"message-positive\">$1</strong>"
     },
     "receiverSelection": {
-        "message": "Type ontvanger",
-        "english": "Receiver Type"
+        "message": "Protocol",
+        "english": "Protocol"
     },
     "receiverSelectionSectionSignaling": {
         "message": "Signalering",
         "english": "Signaling"
     },
     "receiverSettings": {
-        "message": "Ontvanger instellingen",
-        "english": "Receiver Settings"
+        "message": "Kanaalbereik",
+        "english": "Channel Range"
+    },
+    "receiverSettingsThrottleChannel": {
+        "message": "Throttlekanaal",
+        "english": "Throttle Channel"
+    },
+    "receiver.channel_range.automatic_throttle_range.label": {
+        "message": "Automatisch throttlebereik",
+        "english": "Automatic Throttle Range"
+    },
+    "receiver.channel_range.automatic_throttle_range.help": {
+        "message": "Berekent een geschikt throttlebereik op basis van de Stick-middenwaarde en Stick-uitslag.",
+        "english": "Calculates a suitable throttle range from the Stick Center and Stick Travel values."
     },
     "receiverProtocol": {
         "message": "Ontvanger protocol",
@@ -2075,88 +2179,96 @@
         "english": "Select the protocol that the receiver is using"
     },
     "receiverSerialHalfDuplex": {
-        "message": "Eén-draads communicatie (half-duplex)",
-        "english": "One-wire Communication (Half-Duplex)"
+        "message": "Half-duplex",
+        "english": "Half-Duplex"
     },
     "receiverSerialHalfDuplexHelp": {
         "message": "Gebruik de TX-pin voor zowel verzenden als ontvangen. Vereist voor SBUS2, F.Port, SRXL en SRXL2.",
         "english": "Use the Tx pin for both sending and receiving. Required for SBUS2, F.PORT, SRXL and SRXL2."
     },
     "receiverSerialInverted": {
-        "message": "Geïnverteerd serieel signaal",
-        "english": "Inverted Serial Signaling"
+        "message": "Geïnverteerd",
+        "english": "Inverted"
     },
     "receiverSerialInvertedHelp": {
-        "message": "Verwijdert het omgekeerde signaal van de ontvanger. Vereist voor onder andere S.Bus en F.Port. Opmerking: deze optie wordt niet ondersteund door F4 MCU's, zie help.",
-        "english": "Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others. Note: this option is NOT supported on F4 MCUs, see help."
+        "message": "<p>Heft het geïnverteerde signaal van de ontvanger op. Vereist voor S.BUS en F.PORT, onder andere.</p><p><strong>Opmerking:</strong> Deze optie wordt NIET ondersteund op F4-MCU's, zie help.</p>",
+        "english": "<p>Uninverts the inverted signal from the receiver. Required for S.BUS and F.PORT, among others.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
     "receiverSerialPinSwap": {
-        "message": "RX/TX pin swap",
-        "english": "Rx/Tx Pin Swap"
+        "message": "Pin wisselen",
+        "english": "Pin Swap"
     },
     "receiverSerialPinSwapHelp": {
-        "message": "Verwisselt de RX- en TX-pinnen. Opmerking: deze optie wordt niet ondersteund op F4 MCU's, zie help.",
-        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
+        "message": "<p>Wisselt de Rx- en Tx-pinnen.</p><p><strong>Opmerking:</strong> Deze optie wordt NIET ondersteund op F4-MCU's, zie help.</p>",
+        "english": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
     "receiverStickCenter": {
         "message": "Stick midden",
         "english": "Stick Center"
     },
     "receiverHelpStickCenter": {
-        "message": "De waarde van stick (channel) midden in µs. Meestal 1500µs of 1520µs.",
-        "english": "The value of stick (channel) center in µs. Usually 1500µs or 1520µs."
+        "message": "De kanaalwaarde wanneer de stick gecentreerd is. Meestal 1500µs of 1520µs.",
+        "english": "The channel value when the stick is centered. Usually 1500µs or 1520µs."
     },
     "receiverStickDeflection": {
-        "message": "Maximale stickbeweging",
-        "english": "Stick Maximum Travel"
+        "message": "Stick-uitslag",
+        "english": "Stick Travel"
     },
     "receiverHelpStickDeflection": {
-        "message": "De maximale waarde (in µs) voor de beweging van de stick vanuit het midden, voor RPY.",
-        "english": "The maximum value (in µs) for stick deflection from the center, for RPY."
+        "message": "De maximale uitslag van de stick vanuit het midden.",
+        "english": "The maximum value for stick deflection from the center."
     },
     "receiverArmingThrottle": {
-        "message": "Throttle kanaalbegrenzing voor arming",
-        "english": "Throttle Channel limit for arming"
+        "message": "Arm-limiet",
+        "english": "Arm Limit"
     },
     "receiverHelpArmingThrottle": {
-        "message": "De kanaalwaarde (in µs) waaronder arming is toegestaan",
-        "english": "The channel value (in µs) under which arming is allowed"
+        "message": "De flight controller kan alleen worden gewapend zolang het throttlekanaal onder deze waarde ligt.",
+        "english": "The flight controller can only be armed while the the throttle channel is below this value."
     },
     "receiverZeroThrottle": {
-        "message": "Throttle kanaalwaarde voor 0% throttle",
-        "english": "Throttle Channel value for 0% throttle"
+        "message": "Min. throttle - 0%",
+        "english": "Min Throttle - 0%"
     },
     "receiverHelpZeroThrottle": {
-        "message": "De kanaalwaarde (in µs) voor het throttle-kanaal om als 0% te worden beschouwd.",
-        "english": "The channel value (in µs) for the throttle channel to be considered 0%"
+        "message": "De throttlekanaalwaarde waarbij de throttle als 0% wordt beschouwd.",
+        "english": "The throttle channel value where throttle is considered 0%."
+    },
+    "receiverHelpZeroThrottle2": {
+        "message": "<p>De throttlekanaalwaarde waarbij de throttle als 0% wordt beschouwd.</p><p><strong>Opmerking:</strong> Het throttlekanaal moet ten minste 10µs onder deze waarde kunnen bewegen om throttle-uit te signaleren en armen mogelijk te maken.</p>",
+        "english": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
     },
     "receiverFullThrottle": {
-        "message": "Throttle kanaalwaarde voor 100% throttle",
-        "english": "Throttle Channel value for 100% throttle"
+        "message": "Max. throttle - 100%",
+        "english": "Max Throttle - 100%"
     },
     "receiverHelpFullThrottle": {
-        "message": "De kanaalwaarde (in µs) voor het throttle-kanaal om als 100% te worden beschouwd.",
-        "english": "The channel value (in µs) for the throttle channel to be considered 100%"
+        "message": "De throttlekanaalwaarde waarbij de throttle als 100% wordt beschouwd.",
+        "english": "The throttle channel value where throttle is considered 100%."
+    },
+    "receiverHelpFullThrottle2": {
+        "message": "De throttlekanaalwaarde waarbij de throttle als 100% wordt beschouwd.",
+        "english": "The throttle channel value where throttle is considered 100%."
     },
     "receiverCyclicDeadband": {
         "message": "Cyclische deadband",
         "english": "Cyclic Deadband"
     },
     "receiverHelpCyclicDeadband": {
-        "message": "Dit zijn waarden (in µs) waarmee het RC-ingangssignaal kan verschillen voordat het als niet-nul wordt beschouwd. Voor zenders met jitter op de uitgangen kan deze waarde worden verhoogd als de RC-ingangen tijdens stilstand lichte bewegingen vertonen.",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle."
+        "message": "Hoe ver de kanaalwaarden van roll en pitch van het midden moeten bewegen voordat dit als invoer wordt beschouwd.",
+        "english": "How far the roll and pitch channel values must move from center before it's considered an input."
     },
     "receiverYawDeadband": {
         "message": "Yaw deadband",
         "english": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
-        "message": "Dit zijn waarden (in µs) waarmee het RC-ingangssignaal kan verschillen voordat het als niet-nul wordt beschouwd. Voor zenders met jitter op de uitgangen kan deze waarde worden verhoogd als de RC-ingangen tijdens stilstand lichte bewegingen vertonen. <strong>Deze instelling is alleen voor Yaw.</strong>",
-        "english": "These are values (in µs) by how much RC input can be different before it's considered non-zero. For transmitters with jitter on outputs, this value can be increased if RC inputs twitch while idle. <strong>This setting is for Yaw only.</strong>"
+        "message": "Hoe ver de kanaalwaarde van yaw van het midden moet bewegen voordat dit als invoer wordt beschouwd.",
+        "english": "How far the yaw channel value must move from center before it's considered an input."
     },
     "receiverTelemetrySettings": {
-        "message": "Telemetrie instellingen",
-        "english": "Telemetry Settings"
+        "message": "Telemetrie",
+        "english": "Telemetry"
     },
     "receiverTelemetrySettingsSectionSignaling": {
         "message": "Signalering",
@@ -2171,16 +2283,16 @@
         "english": "Enable Telemetry"
     },
     "receiverTelemetryHalfDuplex": {
-        "message": "Eén-draads telemetrie communicatie",
-        "english": "One-wire Telemetry Communication"
+        "message": "Half-duplex",
+        "english": "Half-Duplex"
     },
     "receiverTelemetryInverted": {
-        "message": "Geïnverteerd telemetriesignaal",
-        "english": "Inverted Telemetry Signaling"
+        "message": "Geïnverteerd",
+        "english": "Inverted"
     },
     "receiverTelemetryPinSwap": {
-        "message": "Telemetrie pin swap (swap rx en tx pins)",
-        "english": "Telemetry Pin Swap (Swap Rx and Tx pins)"
+        "message": "Pin wisselen",
+        "english": "Pin Swap"
     },
     "receiverCrsfTelemetryMode": {
         "message": "Aangepaste telemetrie",
@@ -2726,25 +2838,25 @@
         "message": "Debug 7",
         "english": "Debug 7"
     },
-    "receiverBars": {
-        "message": "Ontvangerkanalen",
-        "english": "Receiver Channels"
+    "receiverTelemetrySensor_RPM": {
+        "message": "RPM",
+        "english": "RPM"
     },
-    "receiverBarsHelp": {
-        "message": "Toont de ruwe RC-kanalen van de ontvanger precies zoals ze worden ontvangen. Selecteer alsjeblieft de kanaal-mapping, oftewel de juiste functie voor elk RC-kanaal.",
-        "english": "Shows the raw RC channels from the receiver exactly the way they are received. Please select the channel map, i.e. the current function for each RC channel."
+    "receiverTelemetrySensor_TEMP": {
+        "message": "Temperatuur",
+        "english": "Temperature"
+    },
+    "receiverBars": {
+        "message": "Kanaaltoewijzing",
+        "english": "Channel Assignment"
     },
     "receiverChannelOrder": {
-        "message": "Voorkeursinstelling kanaalvolgorde",
-        "english": "Channel Order Preset"
+        "message": "Preset toepassen",
+        "english": "Apply Preset"
     },
-    "receiverChannelDefaultOption": {
-        "message": "Standaard",
-        "english": "Default"
-    },
-    "receiverHelpChannelOrder": {
-        "message": "Selecteer een van de vooraf ingestelde opties uit het keuzemenu, of voer je eigen kanaalvolgorde in.",
-        "english": "Select one of the presets from the dropdown menu, or enter your own channel order."
+    "receiverChannelOrderPresetPlaceholder": {
+        "message": "Selecteer een preset...",
+        "english": "Select a preset..."
     },
     "receiverButtonBind": {
         "message": "Ontvanger koppelen",
@@ -2769,6 +2881,10 @@
     "receiverMspEnableButton": {
         "message": "Schakel bedieningselementen in",
         "english": "Enable controls"
+    },
+    "resetModelPreviewOrientation": {
+        "message": "Resetten",
+        "english": "Reset"
     },
     "auxiliaryHelp": {
         "message": "Configureer hier modi met een combinatie van bereiken en / of links naar andere modi (links worden ondersteund op BF 4.0 en hoger). Gebruik <strong>bereiken</strong> om de schakelaars op je zender en bijbehorende modustoewijzingen te definiëren. Een ontvangerkanaal dat een waarde geeft tussen een min / max bereik, activeert de modus. Gebruik een <strong>link</strong> om een modus te activeren wanneer een andere modus is geactiveerd. <strong>Uitzonderingen:</strong> ARM kan niet worden gekoppeld aan of vanuit een andere modus, modi kunnen niet worden gekoppeld aan andere modi die zijn geconfigureerd met een link (geketende links). Meerdere bereiken / links kunnen worden gebruikt om elke modus te activeren. Als er meer dan één bereik / link is gedefinieerd voor een modus, kan elk van hen worden ingesteld op <strong> EN </strong> of <strong>OF</strong>. Een modus wordt geactiveerd wanneer:<br />- ALLE <strong>EN</strong> bereiken / links actief zijn; OF <br />- ten minste één <strong>OF</strong> bereik / link is actief.",
@@ -2938,6 +3054,10 @@
     "adjustmentsFunctionOSDProfile": {
         "message": "OSD profiel selectie",
         "english": "OSD Profile Selection"
+    },
+    "adjustmentsFunctionBatteryProfile": {
+        "message": "Batterijprofiel selectie",
+        "english": "Battery Profile Selection"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "Pitch snelheid",
@@ -3223,6 +3343,30 @@
         "message": "Yaw precomp afsnijfrequentie",
         "english": "Yaw Precomp Cutoff"
     },
+    "adjustmentsFunctionGovIdleThrottle": {
+        "message": "Governor stationair throttle",
+        "english": "Governor Idle Throttle"
+    },
+    "adjustmentsFunctionGovAutoThrottle": {
+        "message": "Governor auto throttle",
+        "english": "Governor Auto Throttle"
+    },
+    "adjustmentsFunctionGovMinThrottle": {
+        "message": "Governor minimale throttle",
+        "english": "Governor Min Throttle"
+    },
+    "adjustmentsFunctionGovMaxThrottle": {
+        "message": "Governor maximale throttle",
+        "english": "Governor Max Throttle"
+    },
+    "adjustmentsFunctionGovHeadspeed": {
+        "message": "Governor toerental",
+        "english": "Governor Headspeed"
+    },
+    "adjustmentsFunctionGovYawFF": {
+        "message": "Governor yaw F-gain",
+        "english": "Governor Yaw F-gain"
+    },
     "servoHelp": {
         "message": "Servo 101<ul><li>Controleer eerst de servo richtingen. Controleer cyclische servo's door bijvoorbeeld wat collective te geven. Keer de servo's om indien nodig.</li><li>Nivelleer de servoarmen door <i> Servo Override</i> in te schakelen en <i>Center</i> aan te passen. De servoarm moet loodrecht op de hoofdas staan in deze positie.</li><li>Stel <i>Scale</i> af zodat de servohoeken correct zijn. Specificeer een hoek van 30&deg; voor een servo onder <i>Servo Override</i>. De servo moet nu naar 30&deg; bewegen. Als het minder is, verhoog dan de <i>Scale</i> voor die servo. Als het meer is, verlaag het dan.</li><li>Je kunt het bewegingsbereik van de servo beperken of uitbreiden door <i>Min</i> of <i>Max</i> aan te passen. Doe dit alleen als er een mechanisch probleem is, zoals een servo die vastloopt. Gebruik de mixer om roll/pitch/collective te beperken.</li></ul>",
         "english": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
@@ -3282,6 +3426,14 @@
     "servoRateHelp": {
         "message": "PWM-updatefrequentie in Hz. Gebruik voor analoge servo's 50Hz, aangezien hogere waarden schade kunnen veroorzaken. Voor digitale servo's zijn waarden van 100Hz tot 560Hz typisch. Controleer alsjeblieft de datasheet van de servo.<br><b>Opmerking</b>: Selecteer <i>Opslaan en herstarten</i> om daadwerkelijk de updatefrequentie te wijzigen, omdat de frequentie wordt geïnitialiseerd bij het opstarten.",
         "english": "PWM update rate in Hz. For analog servos, set it to 50Hz, as higher values can cause damage. For digital servos, values from 100Hz to 560Hz are typical. Please check the servo data sheet.<br><b>Note</b>: Select <i>Save and reboot</i> to actually change the update rate, as the rate is initialised at boot time."
+    },
+    "servoSource": {
+        "message": "Bron",
+        "english": "Source"
+    },
+    "servoSourceHelp": {
+        "message": "Bron van het servosignaal. <b>Mixer</b>: servo wordt aangestuurd door de mixer van de flight controller. <b>RX</b>: servo ontvangt een directe doorsturing van het ontvangerkanaal.",
+        "english": "Source of the servo signal. <b>Mixer</b>: servo is controlled by the flight controller mixer. <b>RX</b>: servo receives direct pass-through from the receiver channel."
     },
     "servoSpeed": {
         "message": "Snelheid [ms]",
@@ -4043,9 +4195,29 @@
         "message": "Aantal",
         "english": "Qty"
     },
+    "motors.motor.heading": {
+        "message": "Motor #{{index}}",
+        "english": "Motor #{{index}}"
+    },
+    "motorsSectionLabelThrottle": {
+        "message": "Throttle",
+        "english": "Throttle"
+    },
+    "motorsSectionLabelRPM": {
+        "message": "RPM",
+        "english": "RPM"
+    },
+    "motorsSectionSignaling": {
+        "message": "Signalering",
+        "english": "Signaling"
+    },
+    "motorsSectionSensorCorrection": {
+        "message": "Sensorcorrectie",
+        "english": "Sensor Correction"
+    },
     "motorsEscProtocol": {
-        "message": "ESC throttle protocol",
-        "english": "ESC Throttle protocol"
+        "message": "Throttle protocol",
+        "english": "Throttle Protocol"
     },
     "motorsEscProtocolHelp": {
         "message": "Selecteer je ESC-protocol.<br>Traditionele helikopter-ESCs gebruiken PWM. Drone-ESCs kunnen andere protocollen gebruiken, zoals Dshot. <br>Zorg ervoor dat het protocol wordt ondersteund door je ESC.",
@@ -4060,28 +4232,28 @@
         "english": "ESC Telemetry"
     },
     "motorsEscTelemetryProtocol": {
-        "message": "ESC telemetry protocol",
-        "english": "ESC Telemetry protocol"
+        "message": "Telemetrieprotocol",
+        "english": "Telemetry Protocol"
     },
     "motorsEscTelemetryProtocolHelp": {
         "message": "Je ESC Telemetrieprotocol. Sluit de telemetriedraad van de ESC aan op je FC. Geef aan welke UART je moet gebruiken voor ESC Telemetrie in het tabblad <i>Configuratie</i>",
         "english": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab."
     },
     "motorsEscTelemetryHalfDuplex": {
-        "message": "Eéndraadscommunicatie (half-duplex)",
-        "english": "One-wire Communication (Half-Duplex)"
+        "message": "Half-duplex",
+        "english": "Half-Duplex"
     },
     "motorsEscTelemetryHalfDuplexHelp": {
         "message": "Gebruik de TX-pin voor zowel verzenden als ontvangen. Vereist voor forward programming van ondersteunde ESC's (bijv. Hobbywing Platinum V5 of Scorpion Tribunus).",
         "english": "Use the Tx pin for both sending and receiving. Required for forward programming of supported ESCs (e.g. Hobbywing Platinum V5 or Scorpion Tribunus)."
     },
     "motorsEscTelemetryPinswap": {
-        "message": "RX/TX pin swap",
-        "english": "Rx/Tx Pin Swap"
+        "message": "Pin wisselen",
+        "english": "Pin Swap"
     },
     "motorsEscTelemetryPinswapHelp": {
-        "message": "Verwisselt de RX- en TX-pinnen. Opmerking: deze optie wordt niet ondersteund op F4 MCU's, zie help.",
-        "english": "Swaps the Rx and Tx pins. Note: this option is NOT supported on F4 MCUs, see help."
+        "message": "<p>Wisselt de Rx- en Tx-pinnen.</p><p><strong>Opmerking:</strong> Deze optie wordt NIET ondersteund op F4-MCU's, zie help.</p>",
+        "english": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
     "motorsUnsyncedPwm": {
         "message": "Ongesynchroniseerde ESC update",
@@ -4092,8 +4264,8 @@
         "english": "ESC PWM is running unsyncronised, separate from the PID loop, at the specified frequency."
     },
     "motorsUnsyncedPWMFreq": {
-        "message": "ESC update frequentie",
-        "english": "ESC update frequency"
+        "message": "Updatefrequentie",
+        "english": "Update Frequency"
     },
     "motorsUnsyncedPWMFreqHelp": {
         "message": "ESC PWM update frequentie in Hz. Dit is hoe vaak het throttle-signaal naar de ESC wordt verzonden. Meestal tussen 50Hz en 250Hz. De meeste moderne ESC's werken goed met 250Hz.",
@@ -4132,44 +4304,60 @@
         "english": "Gear ratio between the tail rotor and the main rotor. Use <span class=\"value\">tail gear</span> : <span class=\"value\">autorotation gear</span> tooth count for Torque Tube, or <span class=\"value\">tail pulley</span> : <span class=\"value\">front pulley</span> for a belt tail. For a direct drive tail, use <span class=\"value\">1</span> : <span class=\"value\">1</span>"
     },
     "motorsMotorPoles1Long": {
-        "message": "Hoofdmotor polenaantal",
-        "english": "Main Motor pole count"
+        "message": "Aantal polen hoofdmotor",
+        "english": "Main Motor Pole Count"
     },
     "motorsMotorPoles2Long": {
-        "message": "Staartmotor polenaantal",
-        "english": "Tail Motor pole count"
+        "message": "Aantal polen staartmotor",
+        "english": "Tail Motor Pole Count"
     },
     "motorsMotorPoles3Long": {
-        "message": "Motor M3 polenaantal",
-        "english": "Motor M3 pole count"
+        "message": "Aantal polen motor M3",
+        "english": "Motor M3 Pole Count"
     },
     "motorsMotorPoles4Long": {
-        "message": "Motor M4 polenaantal",
-        "english": "Motor M4 pole count"
+        "message": "Aantal polen motor M4",
+        "english": "Motor M4 Pole Count"
     },
     "motorsMotorPolesHelp": {
         "message": "Het <i>aantal polen</i> is het aantal magneten op de motorbel. De handleiding zou dit nummer moeten geven. Of je kunt het aantal magneten tellen. Tel NIET de stators met de koperen draadwikkelingen.",
         "english": "The <i>pole count</i> is the number of magnets on the motor bell. The manual should give this number. Or you can count the magnets. Do NOT count the stators with the copper wire windings."
     },
+    "motorsThrottleEndpoints": {
+        "message": "Throttlebereik",
+        "english": "Throttle Range"
+    },
+    "motorsThrottleEndpointsWarning": {
+        "message": "Een onjuiste configuratie van de throttlebereikparameters kan ertoe leiden dat de motor blijft draaien terwijl de throttle uit staat en de flight controller ontwapend is.",
+        "english": "Incorrectly configuring the throttle range parameters can cause the motor to run even when the throttle is off and the flight controller is disarmed."
+    },
+    "motorsThrottleEndpointRealtime": {
+        "message": "Live update",
+        "english": "Live Update"
+    },
+    "motorsThrottleEndpointRealtimeHelp": {
+        "message": "<p>Wijzigingen in het throttlebereik direct toepassen.</p><p>Throttle override kan worden ingesteld op 0%, 1% en 100% om wijzigingen in Motor uit, Lage throttle en Hoge throttle te bekijken.</p>",
+        "english": "<p>Apply changes to the throttle range immediately.</p><p>Throttle Override can be set to 0%, 1%, and 100% to view changes to Motor Off, Low Throttle and High Throttle respectively.</p>"
+    },
     "motorsThrottleMinimum": {
-        "message": "0% throttle PWM-waarde",
-        "english": "0% Throttle PWM value"
+        "message": "Lage throttle",
+        "english": "Low Throttle"
     },
     "motorsThrottleMinimumHelp": {
         "message": "Deze PWM-waarde wordt verzonden naar de ESC/servo bij lage throttle (stationair toerental met ICE).",
         "english": "This PWM value is sent to the ESC/servo at low throttle (idle throttle with ICE)."
     },
     "motorsThrottleMaximum": {
-        "message": "100% throttle PWM-waarde",
-        "english": "100% Throttle PWM value"
+        "message": "Hoge throttle",
+        "english": "High Throttle"
     },
     "motorsThrottleMaximumHelp": {
         "message": "Deze PWM-waarde wordt naar de ESC/servo gestuurd bij full throttle.",
         "english": "This PWM value is sent to the ESC/servo at full throttle."
     },
     "motorsThrottleMinimumCommand": {
-        "message": "Motor stop throttle PWM-waarde",
-        "english": "Motor Stop Throttle PWM value"
+        "message": "Motor uit",
+        "english": "Motor Off"
     },
     "motorsThrottleMinimumCommandHelp": {
         "message": "Deze PWM-waarde wordt naar de ESC/servo gestuurd wanneer de motor is gestopt. Dit is ook een waarde die de ESC toestaat om te armen.",
@@ -4184,24 +4372,24 @@
         "english": "<span class=\"message-negative\">Warning:</span> <i>Tail Rotor Gear Ratio</i> is set to an incorrect value. Please check!"
     },
     "motorsVoltageCorrection": {
-        "message": "Spanningscorrectie",
-        "english": "Voltage Correction"
+        "message": "Spanning",
+        "english": "Voltage"
     },
     "motorsVoltageCorrectionHelp": {
         "message": "Past de spanning aan die door de ESC-telemetrie wordt gerapporteerd.",
         "english": "Adjusts the Voltage reported by the ESC's telemetry."
     },
     "motorsCurrentCorrection": {
-        "message": "Stroomcorrectie",
-        "english": "Current Correction"
+        "message": "Stroom",
+        "english": "Current"
     },
     "motorsCurrentCorrectionHelp": {
         "message": "Past de stroomsterkte aan die door de ESC-telemetrie wordt gerapporteerd.",
         "english": "Adjusts the Current reported by the ESC's telemetry."
     },
     "motorsConsumptionCorrection": {
-        "message": "Verbruikscorrectie",
-        "english": "Consumption Correction"
+        "message": "Verbruik",
+        "english": "Consumption"
     },
     "motorsConsumptionCorrectionHelp": {
         "message": "Past het verbruik aan dat door de ESC-telemetrie wordt gerapporteerd.",
@@ -4235,17 +4423,13 @@
         "message": "Motor #4",
         "english": "Motor #4"
     },
-    "motorOverride": {
-        "message": "Override",
-        "english": "Override"
-    },
     "motorThrottle": {
-        "message": "Throttle:",
-        "english": "Throttle:"
+        "message": "Throttle",
+        "english": "Throttle"
     },
     "motorRPM": {
-        "message": "RPM:",
-        "english": "RPM:"
+        "message": "RPM",
+        "english": "RPM"
     },
     "motorHeadspeed": {
         "message": "Toerental:",
@@ -4256,104 +4440,184 @@
         "english": "Tailspeed:"
     },
     "motorVoltage": {
-        "message": "Spanning:",
-        "english": "Voltage:"
+        "message": "Spanning",
+        "english": "Voltage"
     },
     "motorCurrent": {
-        "message": "Stroom:",
-        "english": "Current:"
+        "message": "Stroom",
+        "english": "Current"
     },
     "motorTemperature": {
-        "message": "Temp:",
-        "english": "Temp:"
+        "message": "Temp {{number}}",
+        "english": "Temp {{number}}"
     },
     "motorDshotError": {
-        "message": "Fouten:",
-        "english": "Errors:"
+        "message": "DShot RPM-foutpercentage",
+        "english": "DShot RPM Error Rate"
     },
     "motorOverrideNote": {
-        "message": "<strong>Let op:</strong> Met throttle override kan de throttle op willekeurige waarden worden gezet voor setup- en testdoeleinden. Deze waarden worden niet opgeslagen en worden bij een herstart gereset.<br/><br/><strong class=\"message-negative\">THROTTLE OVERRIDE ZAL DE MOTOREN DOEN OPSTARTEN!</strong>",
-        "english": "<strong>Note.</strong> Throttle Override forces the output throttle to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset in reboot.<br/><br/><strong class=\"message-negative\">MOTOR THROTTLE OVERRIDE WILL MAKE THE MOTORS TO SPOOL UP!</strong>"
+        "message": "Throttle override stelt de throttle-uitvoer in op een willekeurige waarde voor installatie- en testdoeleinden. De override-waarden worden niet opgeslagen en worden gereset na een herstart.<br/><br/><strong>THROTTLE OVERRIDE ZAL DE MOTOREN LATEN OPSTARTEN!</strong>",
+        "english": "Throttle Override sets the throttle output to an arbitrary value for setup and testing purposes. The override values are not saved, and will be reset after reboot.<br/><br/><strong>THROTTLE OVERRIDE WILL MAKE THE MOTORS SPOOL UP!</strong>"
     },
     "motorOverrideTitle": {
         "message": "Throttle override",
         "english": "Throttle Override"
     },
-    "motorOverrideEnable": {
-        "message": "Inschakelen",
-        "english": "Enable"
-    },
     "govFeatures": {
-        "message": "Governor functies",
-        "english": "Governor Features"
+        "message": "Governor",
+        "english": "Governor"
+    },
+    "govSectionGeneral": {
+        "message": "Algemeen",
+        "english": "General"
+    },
+    "govSectionThrottle": {
+        "message": "Throttle",
+        "english": "Throttle"
+    },
+    "govSectionThrottleCurve": {
+        "message": "Governor bypass throttlecurve",
+        "english": "Governor Bypass Throttle Curve"
+    },
+    "govSectionThrottleCurveHelp": {
+        "message": "<p><strong>Governor bypass-modus</strong> schakelt alle governor-functies uit. Wanneer deze modus actief is, wordt de collective-naar-throttle curve gebruikt om de throttle-uitvoer te bepalen.</p><p>Zie het gedeelte Governor bypass op het tabblad Modi om te configureren hoe de modus wordt geactiveerd.</p>",
+        "english": "<p><strong>Governor Bypass Mode</strong> disables all governor functions. When this mode is active, the collective-to-throttle curve is used to determine throttle output.</p><p>See the Governor Bypass section in the Modes tab to configure how the mode is activated.</p>"
+    },
+    "govSectionRampTime": {
+        "message": "Motor opstarttijd",
+        "english": "Motor Ramp"
+    },
+    "govSectionAutorotation": {
+        "message": "Autorotatie",
+        "english": "Autorotation"
+    },
+    "govSectionFilters": {
+        "message": "Filters",
+        "english": "Filters"
     },
     "govProfile": {
         "message": "Governor instellingen",
         "english": "Governor Settings"
     },
     "govConfigurationNote": {
-        "message": "<strong>Opmerking:</strong> De governor heeft algemene- en profielparameters. Zie het tabblad Profielen voor specifieke parameters.",
-        "english": "<strong>Note:</strong> Governor has both global and profile parameters. Please see the Profiles tab for profile specific parameters."
+        "message": "De governor heeft zowel globale als profielparameters. Zie het tabblad Profielen voor profielspecifieke parameters.",
+        "english": "The Governor has both global and profile parameters. See the Profiles tab for profile specific parameters."
     },
     "govMode": {
-        "message": "Governor modus",
-        "english": "Governor mode"
+        "message": "Governor-modus",
+        "english": "Governor Mode"
     },
     "govModeHelp": {
-        "message": "<strong>OFF:</strong> Governor is uitgeschakeld en het throttle-signaal van de TX wordt doorgegeven aan de ESC. <br><br><strong>PASSTHROUGH:</strong> Throttle-signaal van de TX, met langzame spoolup en autorotatiecontrole. <br><br><strong>STANDARD:</strong> Motornelheid wordt geregeld door de FC. Gelijk aan een typische ESC-governor. <br><br><strong>MODE1:</strong> Zoals standaard maar met collectieve en cyclische voorcompensatie (d.w.z. collectieve wijzigingen veranderen proactief de throttle, net als een throttle-curve op een TX).<br><br><strong>MODE2:</strong> Als MODE1, maar met proactieve compensatie voor spanningsdaling van de batterij. Vereist een snelle spanningsmeting.",
-        "english": "<strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.<br><br><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.<br><br><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.<br><br><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).<br><br><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement."
+        "message": "<p><strong>UIT:</strong> Governor is uitgeschakeld en de throttle van de Tx wordt direct naar de ESC doorgegeven.</p><p><strong>PASSTHROUGH:</strong> Throttle doorsturing van de Tx, met langzame opstart en autorotatiebesturing.</p><p><strong>STANDAARD:</strong> De motorsnelheid wordt bestuurd door de FC. Equivalent aan een typische ESC-governor.</p><p><strong>MODUS1:</strong> Als STANDAARD maar met Collective en Cyclische precompensatie (d.w.z. collectiveveranderingen passen de throttle proactief aan, net als een throttlecurve in de Tx).</p><p><strong>MODUS2:</strong> Als MODUS1, maar met proactieve compensatie voor spanningsdaling van de batterij. Vereist snelle spanningmeting.</p>",
+        "english": "<p><strong>OFF:</strong> Governor is disabled and the throttle from the Tx is passed through to the ESC.</p><p><strong>PASSTHROUGH:</strong> Throttle passthrough from the Tx, with slow spoolup and autorotation control.</p><p><strong>STANDARD:</strong> Motor speed is controlled by the FC. Equivalent to a typical ESC Governor.</p><p><strong>MODE1:</strong> Like STANDARD but with Collective and Cyclic Precompensation (i.e. collective changes are proactively changing the throttle, just like a throttle curve in the Tx).</p><p><strong>MODE2:</strong> Like MODE1, but with proactive battery voltage sag compensation. Requires fast voltage measurement.</p>"
+    },
+    "govModeHelp2": {
+        "message": "<p><strong>UIT:</strong> De governor is uitgeschakeld. De throttle-invoer wordt direct naar de motor gestuurd.</p><p><strong>LIMIET:</strong> De governor is uitgeschakeld. Globale <em>Stationair throttle</em> en profiel <em>Minimale throttle</em> en <em>Maximale throttle</em> limieten worden toegepast voordat de throttle-invoer naar de motor wordt gestuurd.</p><p><strong>DIRECT:</strong> De governor verzorgt een langzame opstart en noodherstel. Toerentalstabilisatie wordt overgelaten aan een externe governor of throttlecurve.</p><p><strong>ELEKTRISCH:</strong> Volledige governor geschikt voor elektrische motoren.</p><p><strong>NITRO:</strong> Volledige governor geschikt voor verbrandingsmotoren.</p>",
+        "english": "<p><strong>OFF:</strong> The governor is disabled. The throttle input is sent directly to the motor.</p><p><strong>LIMIT:</strong> The governor is disabled. Global <em>Idle Throttle</em> and profile <em>Minimum Throttle</em> and <em>Maximum Throttle</em> limits are applied before sending the throttle input to the motor.</p><p><strong>DIRECT:</strong> The governor handles slow spoolup and bailout recovery. Headspeed stabilisation is left to an external governor or throttle curve.</p><p><strong>ELECTRIC:</strong> Complete governor suitable for electric motors.</p><p><strong>NITRO:</strong> Complete governor suitable for internal combustion engines.</p>"
+    },
+    "govThrottleType": {
+        "message": "Throttle type",
+        "english": "Throttle Type"
+    },
+    "govThrottleTypeHelp": {
+        "message": "<p><strong>NORMAAL:</strong> De throttle-invoer stuurt de motor direct aan. Zodra het doeltoerental is bereikt, neemt de governor het over totdat de throttle-invoer onder het overdrachtniveau daalt.</p><p><strong>SCHAKELAAR:</strong> Terwijl de throttle-invoer onder de overdracht ligt, stuurt het de motoruitvoer direct aan. Daarboven schakelt de governor in en wordt de throttle-invoer gebruikt om het toerentaldoel bij te stellen.</p><p>SCHAKELAAR kan alleen worden gebruikt met de ELEKTRISCH- en NITRO-governor-modus.</p><p><strong>FUNCTIE:</strong> De throttle-invoer wordt gebruikt om elke governor-modus te selecteren.</p>",
+        "english": "<p><strong>NORMAL:</strong> The throttle input is directly controlling the motor. Once the target headspeed is reached, the governor takes over until the throttle input is reduced below the handover level.</p><p><strong>SWITCH:</strong> While the throttle input is below handover, it directly controls motor output. While above handover, the governor engages and the throttle input is used to adjust the headspeed target.</p><p>SWITCH can only be used with ELECTRIC and NITRO governor mode.</p><p><strong>FUNCTION:</strong> The throttle input is used to select each governor mode.</p>"
+    },
+    "govIdleCollective": {
+        "message": "Collective ➜ stationair throttle",
+        "english": "Collective ➜ Idle Throttle"
+    },
+    "govIdleCollectiveHelp": {
+        "message": "<p>Stationair throttle wordt toegepast terwijl de collective onder deze waarde ligt.</p><p><strong>Opmerking:</strong> Deze instelling wordt alleen gebruikt wanneer de parameter <i>Throttlecurve</i> in het governorprofiel actief is.",
+        "english": "<p>Idle throttle is applied while collective is below this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active."
+    },
+    "govWotCollective": {
+        "message": "Collective ➜ vol throttle",
+        "english": "Collective ➜ Full Throttle"
+    },
+    "govWotCollectiveHelp": {
+        "message": "<p>Vol throttle wordt toegepast terwijl de collective boven deze waarde ligt.</p><p><strong>Opmerking:</strong> Deze instelling wordt alleen gebruikt wanneer de parameter <i>Throttlecurve</i> in het governorprofiel actief is.",
+        "english": "<p>Full throttle is applied while collective is above this value.</p><p><strong>Note:</strong> This setting is only used when the <i>Throttle Curve</i> parameter in the Governor Profile is active."
     },
     "govHandoverThrottle": {
-        "message": "Overdracht-throttle [%]",
-        "english": "Handover throttle [%]"
+        "message": "Overdrachtsthrottle",
+        "english": "Handover Throttle"
     },
     "govHandoverThrottleHelp": {
-        "message": "Het throttle-niveau waarboven de governor wordt geactiveerd. Onder dit niveau wordt de input-throttle naar de ESC doorgegeven - boven dit niveau is de governor ingeschakeld en wordt de input-throttle gebruikt voor het berekenen van het gewenste toerental. De motor moet in staat zijn om onder dit throttle-niveau te starten.",
-        "english": "The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed. The motor must be able to start below this throttle level."
+        "message": "<p>Het throttleniveau waarboven de governor wordt geactiveerd. Onder dit niveau wordt de invoer-throttle naar de ESC doorgegeven - daarboven is de governor ingeschakeld en wordt de invoer-throttle gebruikt om het doeltoerental te berekenen.</p><p><strong>Opmerking:</strong> De motor moet kunnen starten onder dit throttleniveau.</p>",
+        "english": "<p>The throttle level above which the governor is activated. Below this level the input throttle is passed to the ESC - above this level the governor is enabled and the input throttle is used for calculating the target headspeed.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>"
+    },
+    "govHandoverThrottleHelp2": {
+        "message": "<p>Terwijl de throttle-invoer boven deze waarde ligt, wordt de motoraansturing overgedragen aan de governor.</p><p>Terwijl de throttle-invoer onder deze waarde ligt, wordt deze direct naar de motor gestuurd.</p><p><strong>Opmerking:</strong> De motor moet kunnen starten onder dit throttleniveau.</p>",
+        "english": "<p>While throttle input is above this value, motor control is handed over to the governor.</p><p>While throttle input is below this value, it is sent directly to the motor.</p><p><strong>Note:</strong> The motor must be able to start below this throttle level.</p>"
     },
     "govStartupTime": {
         "message": "Opstarttijd",
-        "english": "Startup time"
+        "english": "Startup Time"
     },
     "govStartupTimeHelp": {
         "message": "Tijdconstante voor langzame opstart, in seconden, waarbij de tijd wordt gemeten van nul tot volledig toerental.",
         "english": "Time constant for slow startup, in seconds, measuring the time from zero to full headspeed."
     },
+    "govStartupTimeHelp2": {
+        "message": "Snelheid van throttlewijziging tijdens opstarten, gedefinieerd als de duur van 0% naar 100% throttle.",
+        "english": "Rate of throttle change during startup, defined as the duration from 0% to 100% throttle."
+    },
     "govSpoolupTime": {
-        "message": "Spoolup tijd",
-        "english": "Spoolup time"
+        "message": "Spoolup-tijd",
+        "english": "Spoolup Time"
     },
     "govSpoolupTimeHelp": {
         "message": "Tijdsconstante voor langzame spoolup, in seconden, de tijd meten van nul naar het volledige rotortoerental.",
         "english": "Time constant for slow spoolup, in seconds, measuring the time from zero to full headspeed."
     },
+    "govSpoolupTimeHelp2": {
+        "message": "Snelheid van throttlewijziging tijdens spoolup, gedefinieerd als de duur van 0% naar 100% throttle.",
+        "english": "Rate of throttle change during spoolup, defined as the duration from 0% to 100% throttle."
+    },
+    "govSpooldownTime": {
+        "message": "Spooldown-tijd",
+        "english": "Spooldown Time"
+    },
+    "govSpooldownTimeHelp": {
+        "message": "Snelheid van throttlewijziging tijdens spooldown, gedefinieerd als de duur van 100% naar 0% throttle.",
+        "english": "Rate of throttle change during spooldown, defined as the duration from 100% to 0% throttle."
+    },
     "govSpoolupMinThrottle": {
-        "message": "Spoolup minimale throttle",
-        "english": "Spoolup minimum throttle"
+        "message": "Minimale throttle tijdens spoolup",
+        "english": "Spoolup Minimum Throttle"
     },
     "govSpoolupMinThrottleHelp": {
-        "message": "Minimale throttle te gebruiken tijdens spoolup. Voor elektrische motoren is de standaard 5%, voor nitro moet dit worden ingesteld zodat de koppeling begint te grijpen voor een soepele spoolup 10-15%.",
-        "english": "Minimum throttle to be used during spoolup. For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%."
+        "message": "<p>Minimale throttle-uitvoer tijdens spoolup.</p><p>Voor elektrische motoren is de standaard 5%; voor nitro moet dit worden ingesteld zodat de koppeling begint in te grijpen voor een soepele spoolup van 10-15%.</p>",
+        "english": "<p>Minimum throttle output during spoolup.</p><p>For electric motors the default is 5%, for nitro this should be set so the clutch starts to engage for a smooth spoolup 10-15%.</p>"
     },
     "govTrackingTime": {
-        "message": "Tracking tijd",
-        "english": "Tracking time"
+        "message": "Trackingtijd",
+        "english": "Tracking Time"
     },
     "govTrackingTimeHelp": {
         "message": "Tijdconstante voor rotortoerental veranderingen in seconden, voor de tijd van nul naar volledig rotortoerental.",
         "english": "Time constant for headspeed changes, in seconds, measuring the time from zero to full headspeed."
     },
+    "govTrackingTimeHelp2": {
+        "message": "Snelheid van throttlewijziging bij het volgen van toerentaldoelwijzigingen, gedefinieerd als de duur van 0% naar 100% throttle.",
+        "english": "Rate of throttle change when tracking headspeed target changes, defined as the duration from 0% to 100% throttle."
+    },
     "govRecoveryTime": {
-        "message": "Herstel tijd",
-        "english": "Recovery time"
+        "message": "Hersteltijd",
+        "english": "Recovery Time"
     },
     "govRecoveryTimeHelp": {
         "message": "Tijdconstante voor herstel-spoolup in seconden voor het bereiken van het volledige rotortoerental.",
         "english": "Time constant for recovery spoolup, in seconds, measuring the time from zero to full headspeed."
     },
+    "govRecoveryTimeHelp2": {
+        "message": "Snelheid van throttlewijziging tijdens herstel, gedefinieerd als de duur van 0% naar 100% throttle.",
+        "english": "Rate of throttle change during recovery, defined as the duration from 0% to 100% throttle."
+    },
     "govAutoBailoutTime": {
-        "message": "Autorotatie bailout tijd",
-        "english": "Autorotation bailout time"
+        "message": "Bailout-tijd",
+        "english": "Bailout Time"
     },
     "govAutoBailoutTimeHelp": {
         "message": "Tijdconstante voor autorotatie noodlanding opstart, in seconden, waarbij de tijd wordt gemeten van nul tot volledige rotatiesnelheid.",
@@ -4361,71 +4625,87 @@
     },
     "govAutoTimeout": {
         "message": "Autorotatie time-out",
-        "english": "Autorotation timeout"
+        "english": "Autorotation Timeout"
     },
     "govAutoTimeoutHelp": {
-        "message": "Time-out voor het beëindigen van autorotatie en het activeren van normale IDLE.",
-        "english": "Timeout for ending autorotation and moving to normal IDLE."
+        "message": "<p>De maximale duur dat de autorotatiemodus actief mag blijven.</p><p>Wanneer deze time-out verloopt, is bailout niet meer mogelijk en resulteert het starten van de motor in een normale spoolup.</p><p><strong>Opmerking:</strong> Dit veld moet boven nul staan om autorotatiemodus in te schakelen.</p>",
+        "english": "<p>The maximum duration autorotation mode may remain engaged.</p><p>When this timeout expires, bailout is no longer available, and starting the motor will result in a normal spoolup.</p><p><strong>Note:</strong> This field must be above zero to enable autorotation mode.</p>"
     },
     "govAutoMinEntryTime": {
-        "message": "Autorotatie minimale vliegtijd",
-        "english": "Autorotation minimum entry time"
+        "message": "Minimale vluchttijd voor autorotatie",
+        "english": "Autorotation Minimum Flight Time"
     },
     "govAutoMinEntryTimeHelp": {
         "message": "Minimale vliegtijd voordat autorotatie kan worden ingeschakeld.",
         "english": "Minimum flight time before autorotation can be engaged."
     },
     "govZeroThrottleTimeout": {
-        "message": "Time-out geen throttle",
-        "english": "Zero Throttle timeout"
+        "message": "Time-out throttlesignaal",
+        "english": "Throttle Signal Timeout"
     },
     "govZeroThrottleTimeoutHelp": {
         "message": "Time-out voor ontbrekend throttle-signaal, voordat de governor wordt uitgeschakeld. Als het throttle-signaal binnen deze time-out terugkeert, voert de governor een herstel-spoolup uit.",
         "english": "Timeout for missing (zero) throttle signal, before shutting down the governor. If the throttle signal returns within this timeout, the governor will perform a recovery spoolup."
     },
+    "govThrottleHoldTimeout": {
+        "message": "Time-out throttle hold",
+        "english": "Throttle Hold Timeout"
+    },
+    "govThrottleHoldTimeoutHelp": {
+        "message": "<p>De respijtperiode na het activeren van throttle hold terwijl de governor actief is.</p><p>Als de throttle-invoer binnen deze periode wordt hersteld, wordt een herstarte spoolup uitgevoerd.</p><p>Dit beschermt tegen onbedoeld activeren van throttle cut.</p>",
+        "english": "<p>The grace period after activating throttle hold while the governor is active.</p><p>If throttle input is restored within this period, a recovery spoolup will be performed.</p><p>This safeguards against accidental throttle cut activation.</p>"
+    },
     "govLostHeadspeedTimeout": {
-        "message": "Time-out RPM-signaal",
-        "english": "Headspeed signal timeout"
+        "message": "Time-out toerentalsignaal",
+        "english": "Headspeed Signal Timeout"
     },
     "govLostHeadspeedTimeoutHelp": {
         "message": "Time-out voor ontbrekend RPM-signaal, voor spool down. Als het RPM-signaal binnen deze time-out terugkeert, voert de governor een herstel-spoolup uit.",
         "english": "Timeout for missing headspeed signal, before spooling down. If the RPM signal returns within this timeout, the governor will perform a recovery spoolup."
     },
     "govHeadspeedFilterHz": {
-        "message": "Afsnijfrequentie rotortoerentalfilter [Hz]",
-        "english": "Headspeed filter cutoff [Hz]"
+        "message": "Afsnijfrequentie toerentalfilter",
+        "english": "Headspeed Filter Cutoff"
     },
     "govHeadspeedFilterHzHelp": {
         "message": "Afsnijfrequentie voor het rotortoerental laagdoorlaatfilter.",
         "english": "Cutoff for the headspeed lowpass filter."
     },
     "govVoltageFilterHz": {
-        "message": "Afsnijfrequentie batterijspanningsfilter [Hz]",
-        "english": "Battery voltage filter cutoff [Hz]"
+        "message": "Afsnijfrequentie batterijspanningsfilter",
+        "english": "Battery Voltage Filter Cutoff"
     },
     "govVoltageFilterHzHelp": {
         "message": "Afsnijfrequentie voor het laagdoorlaatfilter van de batterijspanning.",
         "english": "Cutoff for the battery voltage lowpass filter."
     },
     "govTTAFilterHz": {
-        "message": "TTA bandbreedte [Hz]",
-        "english": "TTA Bandwidth [Hz]"
+        "message": "TTA-bandbreedte",
+        "english": "TTA Bandwidth"
     },
     "govTTAFilterHzHelp": {
         "message": "Afsnijfrequentie voor het TTA laagdoorlaatfilter.",
         "english": "Cutoff for the TTA lowpass filter."
     },
     "govFFFilterHz": {
-        "message": "Precomp bandbreedte [Hz]",
-        "english": "Precomp Bandwidth [Hz]"
+        "message": "Precomp-bandbreedte",
+        "english": "Precomp Bandwidth"
     },
     "govFFFilterHzHelp": {
         "message": "Afsnijfrequentie voor het laagdoorlaatfilter voor cyclische/collectieve precompensatie.",
         "english": "Cutoff for the cyclic/collective precompensation lowpass filter."
     },
+    "govDCutoff": {
+        "message": "D-term afsnijfrequentie",
+        "english": "D-Term Cutoff"
+    },
+    "govDCutoffHelp": {
+        "message": "Afsnijfrequentie voor het governor D-term filter.",
+        "english": "Cutoff frequency for the governor D-term filter."
+    },
     "govHeadspeed": {
-        "message": "Volledige rotortoerental",
-        "english": "Full headspeed"
+        "message": "Vol toerental",
+        "english": "Full Headspeed"
     },
     "govHeadspeedHelp": {
         "message": "Het governor doeltoerental wordt berekend door het volledige rotortoerental te vermenigvuldigen met de throttle input.",
@@ -4440,20 +4720,44 @@
         "english": "Maximum Throttle"
     },
     "govMaxThrottleHelp": {
-        "message": "Maximale output throttle die de governor mag gebruiken.",
-        "english": "Maximum output throttle the governor is allowed to use."
+        "message": "De maximale throttle-uitvoer die de governor mag gebruiken.",
+        "english": "The maximum throttle output the governor may use."
     },
     "govMinThrottle": {
         "message": "Minimale throttle",
         "english": "Minimum Throttle"
     },
     "govMinThrottleHelp": {
-        "message": "Minimale throttle-output die de governor mag gebruiken.",
-        "english": "Minimum output throttle the governor is allowed to use."
+        "message": "De minimale throttle-uitvoer die de governor mag gebruiken.",
+        "english": "The minimum throttle output the governor may use."
+    },
+    "govIdleThrottle": {
+        "message": "Stationair throttle",
+        "english": "Idle Throttle"
+    },
+    "govIdleThrottleHelp": {
+        "message": "<p>De minimale throttle-uitvoer terwijl de governor het toerental <strong><em>niet actief</em></strong> regelt.</p><p></p>",
+        "english": "<p>The minimum throttle output while the governor <strong><em>is not</em></strong> actively controlling the headspeed.</p><p></p>"
+    },
+    "govAutoThrottle": {
+        "message": "Auto throttle",
+        "english": "Auto Throttle"
+    },
+    "govAutoThrottleHelp": {
+        "message": "<p>Bij gebruik van het NORMAAL- of SCHAKELAAR-throttle type zal het bewegen van de throttle-invoer onder deze waarde de autorotatiemodus annuleren, waardoor bailout wordt voorkomen.</p><p>Voor het FUNCTIE-throttle type is dit de throttle-uitvoer in autorotatiemodus.</p>",
+        "english": "<p>When using NORMAL or SWITCH throttle type, moving the throttle input below this value will cancel autorotation mode, preventing bailout.</p><p>For FUNCTION throttle type, this is the throttle output in autorotation mode.</p>"
+    },
+    "govFallbackDrop": {
+        "message": "Throttle terugvalverlaging",
+        "english": "Throttle Fallback Drop"
+    },
+    "govFallbackDropHelp": {
+        "message": "Verlaag de huidige motoruitvoer met deze waarde als het RPM-signaal verloren gaat.",
+        "english": "Reduce the current motor output by this value in the event the RPM signal is lost."
     },
     "govMasterGain": {
-        "message": "PID master gain",
-        "english": "PID master gain"
+        "message": "Hoofdgain",
+        "english": "Master Gain"
     },
     "govMasterGainHelp": {
         "message": "Master PID loop gain. Meestal 10..100",
@@ -4485,7 +4789,7 @@
     },
     "govFGain": {
         "message": "Feedforward gain",
-        "english": "Feedforward gain"
+        "english": "Feedforward Gain"
     },
     "govFGainHelp": {
         "message": "Collective/cyclische feedforward gain. Meestal 0..100",
@@ -4508,28 +4812,112 @@
         "english": "Tail Torque Assist maximum Headspeed increase. This sets an upper limit how much the headspeed can go over the Full Headspeed. Usually 20..50%."
     },
     "govYawPrecomp": {
-        "message": "Yaw precompensatie",
-        "english": "Yaw precompensation"
+        "message": "Yaw",
+        "english": "Yaw"
     },
     "govYawPrecompHelp": {
         "message": "Gewicht voor Yaw-precompensatie. Bepaalt hoeveel Yaw wordt gemengd in de feedforward. Dit helpt de governor om proactief het toerental te handhaven. Gewoonlijk 20..100",
         "english": "Yaw precompensation weight. Determines how much Yaw is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
     "govCyclicPrecomp": {
-        "message": "Cyclische voorcompensatie",
-        "english": "Cyclic precompensation"
+        "message": "Cyclisch",
+        "english": "Cyclic"
     },
     "govCyclicPrecompHelp": {
         "message": "Cyclische precompensatiegewicht. Bepaalt hoeveel cyclic wordt gemengd in de feedforward. Dit helpt de governor om het rotortoerental proactief te behouden. Meestal 20..100",
         "english": "Cyclic precompensation weight. Determines how much cyclic is mixed into the feedforward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
     },
     "govCollectivePrecomp": {
-        "message": "Collectieve voorcompensatie",
-        "english": "Collective precompensation"
+        "message": "Collective",
+        "english": "Collective"
     },
     "govCollectivePrecompHelp": {
         "message": "Collective precompensatiegewicht. Bepaalt hoeveel collective wordt gemengd in de feedforward. Dit helpt de governor om het rotortoerental proactief te behouden. Meestal 20..100",
         "english": "Collective precompensation weight. Determines how much collective is mixed into the feedfoward. This helps the governor to maintain the headspeed proactively. Usually 20..100"
+    },
+    "profileGovPIDSection": {
+        "message": "PID",
+        "english": "PID"
+    },
+    "profileGovPrecompSection": {
+        "message": "Precompensatie",
+        "english": "Precompensation"
+    },
+    "profileGovFlagsSection": {
+        "message": "Gedrag",
+        "english": "Behaviour"
+    },
+    "govFlag_FALLBACK_PRECOMP": {
+        "message": "Terugval precompensatie",
+        "english": "Fallback Precompensation"
+    },
+    "govFlag_VOLTAGE_COMP": {
+        "message": "Spanningscompensatie",
+        "english": "Voltage Compensation"
+    },
+    "govFlag_PID_SPOOLUP": {
+        "message": "Governor spoolup",
+        "english": "Governed Spoolup"
+    },
+    "govFlag_HS_ADJUSTMENT": {
+        "message": "Toerentalaanpassing",
+        "english": "Headspeed Adjustment"
+    },
+    "govFlag_DYN_MIN_THROTTLE": {
+        "message": "Dynamische minimale throttle",
+        "english": "Dynamic Minimum Throttle"
+    },
+    "govFlag_AUTOROTATION": {
+        "message": "Autorotatie",
+        "english": "Autorotation"
+    },
+    "govFlag_SUSPEND": {
+        "message": "Onderbreken",
+        "english": "Suspend"
+    },
+    "govFlag_BYPASS": {
+        "message": "Bypass",
+        "english": "Bypass"
+    },
+    "govFlagHelp_FALLBACK_PRECOMP": {
+        "message": "Precompensatie inschakelen in de <code>TERUGVAL</code>-toestand.",
+        "english": "Enable precompensation while in the <code>FALLBACK</code> state."
+    },
+    "govFlagHelp_VOLTAGE_COMP": {
+        "message": "<p>Spanningsdaling van de batterij compenseren.</p><p><strong>Opmerking:</strong> Deze instelling vereist dat <i>Batterij ADC</i> wordt gebruikt als <i>Batterijspanningsbron</i>. Deze instelling is te vinden op het tabblad <i>Voeding</i>.</p>",
+        "english": "<p>Enable battery voltage sag compensation.</p><p><strong>Note:</strong> This setting requires <i>Battery ADC</i> to be used as the <i>Battery Voltage Source</i>. This setting can be found on the <i>Power</i> tab.</p>"
+    },
+    "govFlagHelp_PID_SPOOLUP": {
+        "message": "De PID-regelaar van de governor inschakelen tijdens spoolup.",
+        "english": "Enable the governors PID controller during spoolup."
+    },
+    "govFlagHelp_HS_ADJUSTMENT": {
+        "message": "<p>Het doeltoerental aanpassen via het throttlekanaal.</p><p>Wanneer ingeschakeld, wordt het doeltoerental berekend door het <i>Vol toerental</i> te vermenigvuldigen met de throttle-invoer.</p>",
+        "english": "<p>Adjust the target headspeed using the throttle channel.</p><p>When enabled, the target headspeed is calculated by multiplying the <i>Full Headspeed</i> by the input throttle.</p>"
+    },
+    "govFlagHelp_DYN_MIN_THROTTLE": {
+        "message": "Voorkom dat de motoruitvoer drastisch daalt bij een te hoog toerental.",
+        "english": "Prevent the motor output from dropping drastically during an over-speed."
+    },
+    "govFlagHelp_AUTOROTATION": {
+        "message": "De <code>AUTOROTATIE</code>-toestand toestaan in dit profiel.",
+        "english": "Allow the <code>AUTOROTATION</code> state in this profile."
+    },
+    "govFlagHelp_SUSPEND": {
+        "message": "De PID-regelaar uitschakelen, zodat precompensatie afzonderlijk kan worden afgesteld.",
+        "english": "Disable the PID controller, allowing precompensation to be tuned in isolation."
+    },
+    "govFlagHelp_BYPASS": {
+        "message": "Alle governor-functionaliteit overbruggen.",
+        "english": "Bypass all governor functionality."
+    },
+    "govThrottleCurveNumPoints": {
+        "message": "Punten",
+        "english": "Points"
+    },
+    "govThrottleCurveCurrentValue": {
+        "message": "Throttle:",
+        "english": "Throttle:"
     },
     "sensorsInfo": {
         "message": "Houd er rekening mee dat het gebruik van snelle updateperioden en het tegelijkertijd weergeven van meerdere grafieken veel resources vergt.<br />We raden aan om alleen de grafieken weer te geven voor sensoren waarin je geïnteresseerd bent. En daarbij redelijke update periodes te gebruiken.",
@@ -4827,6 +5215,10 @@
         "message": "ESC 2",
         "english": "ESC 2"
     },
+    "blackboxLog_governor": {
+        "message": "Governor",
+        "english": "Governor"
+    },
     "serialLoggingSupportedNote": {
         "message": "Je kan loggen naar een extern logapparaat (zoals een OpenLager) door een seriële poort te gebruiken. Configureer de poort op het tabblad Seriële poorten.",
         "english": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
@@ -5047,17 +5439,17 @@
         "message": "Poort",
         "english": "Port"
     },
-    "firmwareFlasherManualBaud": {
-        "message": "Handmatige baud rate",
-        "english": "Manual baud rate"
-    },
-    "firmwareFlasherManualBaudDescription": {
-        "message": "Handmatige selectie van baud rate voor borden die de standaard snelheid niet ondersteunen of flashen via bluetooth.<br /><span class=\"message-negative\">Opmerking:</span> Wordt niet gebruikt bij het flashen via USB DFU",
-        "english": "Manual selection of baud rate for boards that don't support the default speed or for flashing via bluetooth.<br /><span class=\"message-negative\">Note:</span> Not used when flashing via USB DFU"
-    },
     "firmwareFlasherBaudRate": {
         "message": "Baud Rate",
         "english": "Baud Rate"
+    },
+    "firmware_flasher.show_legacy_targets.label": {
+        "message": "Verouderde targets tonen",
+        "english": "Show Legacy Targets"
+    },
+    "firmware_flasher.show_legacy_targets.description": {
+        "message": "Toont targets voor veel Betaflight-boards. Deze targets worden niet actief onderhouden.",
+        "english": "Show targets for many Betaflight boards. These targets are not actively maintained."
     },
     "firmwareFlasherOptionLoading": {
         "message": "Aan het laden...",
@@ -5144,8 +5536,8 @@
         "english": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "Als je de communicatie met je board bent verloren, volg dan deze stappen om de communicatie te herstellen: <ul><li>Uitschakelen</li><li> Schakel 'Geen herstart nodig' in, schakel 'Volledige chip wissen' in.</li><li>Sluit de BOOT-pinnen kort of houd de BOOT-knop ingedrukt.</li><li>Inschakelen (activiteits-LED knippert NIET indien correct gedaan).</li><li>Installeer alle STM32-stuurprogramma's en Zadig indien nodig (zie <a href = \"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\" target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> sectie van de Betaflight-handleiding).</li><li>Sluit de Configurator, herstart de Configurator.</li><li>Laat de BOOT-knop los.</li><li>Flash met de juiste firmware (gebruik handmatige baudrate indien dit gespecificeerd in de handleiding van je FC).</li><li>Uitschakelen.</li><li>BOOT-jumper verwijderen.</li><li> Inschakelen (activiteits-LED moet knipperen).</li><li>Maak normaal verbinding.</li></ul>",
-        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
+        "message": "Als je de communicatie met je board bent verloren, volg dan deze stappen om de communicatie te herstellen: <ul><li>Uitschakelen</li><li> Schakel 'Geen herstart nodig' in, schakel 'Volledige chip wissen' in.</li><li>Sluit de BOOT-pinnen kort of houd de BOOT-knop ingedrukt.</li><li>Inschakelen (activiteits-LED knippert NIET indien correct gedaan).</li><li>Installeer alle STM32-stuurprogramma's en Zadig indien nodig (zie <a href = \"https://www.rotorflight.org/docs/2.3.0/setup/flashing-the-firmware\" target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> sectie van de Betaflight-handleiding).</li><li>Sluit de Configurator, herstart de Configurator.</li><li>Laat de BOOT-knop los.</li><li>Flash met de juiste firmware (gebruik handmatige baudrate indien dit gespecificeerd in de handleiding van je FC).</li><li>Uitschakelen.</li><li>BOOT-jumper verwijderen.</li><li> Inschakelen (activiteits-LED moet knipperen).</li><li>Maak normaal verbinding.</li></ul>",
+        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
     },
     "firmwareFlasherFirmwareNotLoaded": {
         "message": "Firmware niet geladen",
@@ -5621,24 +6013,24 @@
         "english": "deep pink"
     },
     "controlAxisRoll": {
-        "message": "Roll [A]",
-        "english": "Roll [A]"
+        "message": "Roll",
+        "english": "Roll"
     },
     "controlAxisPitch": {
-        "message": "Pitch [E]",
-        "english": "Pitch [E]"
+        "message": "Pitch",
+        "english": "Pitch"
     },
     "controlAxisYaw": {
-        "message": "Yaw [R]",
-        "english": "Yaw [R]"
+        "message": "Yaw",
+        "english": "Yaw"
     },
     "controlAxisCollective": {
-        "message": "Collective [C]",
-        "english": "Coll [C]"
+        "message": "Collective",
+        "english": "Collective"
     },
     "controlAxisThrottle": {
-        "message": "Throttle [T]",
-        "english": "Throttle [T]"
+        "message": "Throttle",
+        "english": "Throttle"
     },
     "controlAxisThr": {
         "message": "Throttle",
@@ -6356,6 +6748,18 @@
         "message": "RC Expo",
         "english": "RC Expo"
     },
+    "rateSetupRotorflightRate": {
+        "message": "Snelheid",
+        "english": "Rate"
+    },
+    "rateSetupRotorflightShape": {
+        "message": "Vorm",
+        "english": "Shape"
+    },
+    "rateSetupRotorflightExpo": {
+        "message": "Expo",
+        "english": "Expo"
+    },
     "rateSetupRcRateRaceflight": {
         "message": "Rate",
         "english": "Rate"
@@ -6443,6 +6847,38 @@
     "rateYawDynamicDeadbandGainHelp": {
         "message": "Verhoogt stick-deadband bij het snel naderen van het middenpunt.",
         "english": "Increases stick deadband while rapidly approaching center."
+    },
+    "rates.cyclic_ring.heading": {
+        "message": "Cyclische ring",
+        "english": "Cyclic Ring"
+    },
+    "rates.cyclic_ring.enable_cyclic_ring.label": {
+        "message": "Cyclische ring inschakelen",
+        "english": "Enable Cyclic Ring"
+    },
+    "rates.cyclic_ring.enable_cyclic_ring.help": {
+        "message": "Beperkt de gecombineerde cyclische invoer tot een cirkelvormig bereik, waardoor buitensporige snelheden bij diagonale invoer worden voorkomen.",
+        "english": "Limits combined cyclic input to a circular range, preventing excessive rates with diagonal inputs."
+    },
+    "rates.cyclic_ring.cyclic_ring_level.label": {
+        "message": "Niveau cyclische ring",
+        "english": "Cyclic Ring Level"
+    },
+    "rates.cyclic_ring.cyclic_ring_level.help": {
+        "message": "<p>Past aan in welke mate de cyclische ring de diagonale invoer beperkt.</p><br /><p>Bij 100% vormt het gecombineerde cyclische bereik een echte cirkel. Het verhogen van deze waarde versoepelt de begrenzing, waardoor meer diagonale uitslag mogelijk is.</p>",
+        "english": "<p>Adjusts to what degree the cyclic ring limits diagonal input.</p><br /><p>At 100%, the combined cyclic range forms a true circle. Increasing this value relaxes the limit, allowing more diagonal deflection.</p>"
+    },
+    "rates.cyclic_ring.polar_coordinates.label": {
+        "message": "Polaire coördinaten inschakelen",
+        "english": "Enable Polar Coordinates"
+    },
+    "rates.cyclic_ring.polar_coordinates.help": {
+        "message": "<p>Snelheden toepassen op de gecombineerde cyclische richting en amplitude.</p><br /><p>Wanneer uitgeschakeld, worden snelheden afzonderlijk op elke cyclische as toegepast.</p>",
+        "english": "<p>Apply cyclic rates to the combined cyclic direction and magnitude.</p><br /><p>When disabled, rates are applied to each cyclic axis separately.</p>"
+    },
+    "rates.config.cyclic.label": {
+        "message": "CYCLISCH",
+        "english": "CYCLIC"
     },
     "gyroFilterSettings": {
         "message": "Gyro filterinstellingen",
@@ -6817,28 +7253,28 @@
         "english": "Failsafe has two stages. <strong>Stage 1</strong> is entered when a flightchannel has an invalid pulse length, the receiver reports failsafe mode or there is no signal from the receiver at all, the channel fallback settings are applied to <span class=\"message-negative\">all channels</span> and a short amount of time is provided to allow for recovery. <strong>Stage 2</strong> is entered when the error condition takes longer than the configured guard time while the craft is <span class=\"message-negative\">armed</span>, all channels will remain at the applied channel fallback setting unless overruled by the chosen procedure. <br /><strong>Note:</strong> Prior to entering stage 1, channel fallback settings are also applied to individual AUX channels that have invalid pulses."
     },
     "failsafePulsrangeTitle": {
-        "message": "Geldig pulse-bereik",
-        "english": "Valid Pulse Range Settings"
+        "message": "Pulsbreedtelimiet",
+        "english": "Pulse Width Limit"
     },
     "failsafePulsrangeHelp": {
-        "message": "Pulsen die korter zijn dan het minimum of langer dan het maximum zijn ongeldig en zullen de toepassing van individuele kanaal-noodinstellingen voor AUX-kanalen activeren of fase 1 voor vluchtkanalen activeren.",
-        "english": "Pulses shorter than minimum or longer than maximum are invalid and will trigger application of individual channel fallback settings for AUX channels or entering stage 1 for flightchannels"
+        "message": "Configureer de minimale en maximale geldige pulsbreedte. Kanalen buiten dit bereik activeren de failsafe.",
+        "english": "Configure the minimum and maximum valid pulse width. Channels outside this range will enter failsafe."
     },
     "failsafeRxMinUsecItem": {
-        "message": "Minimale lengte",
-        "english": "Minimum length"
+        "message": "Minimale pulsbreedte",
+        "english": "Minimum Pulse Width"
     },
     "failsafeRxMaxUsecItem": {
-        "message": "Maximale lengte",
-        "english": "Maximum length"
+        "message": "Maximale pulsbreedte",
+        "english": "Maximum Pulse Width"
     },
     "failsafeChannelFallbackSettingsTitle": {
-        "message": "Kanaalterugval instellingen",
-        "english": "Channel Fallback Settings"
+        "message": "Kanaal terugvalgedrag",
+        "english": "Channel Fallback"
     },
     "failsafeChannelFallbackSettingsHelp": {
-        "message": "Deze instellingen worden toegepast op ongeldige individuele AUX-kanalen of op alle kanalen bij het invoeren van fase 1. <strong>Let op:</strong> waarden worden opgeslagen in stappen van 5µs, dus kleinere wijzigingen kunnen worden genegeerd.",
-        "english": "These settings are applied to invalid individual AUX channels or to all channels when entering stage 1. <strong>Note:</strong> values are saved in steps of 5µs, so smaller changes may be ignored."
+        "message": "Configureer het failsafe-gedrag van elk kanaal.<br><strong>Auto:</strong> Stelt het kanaal in op een veilige waarde. Midden voor Roll, Pitch, Yaw, Collective. Laag voor Throttle.<br><strong>Hold:</strong> Houdt het kanaal op de laatste bekende positie.<br><strong>Instellen:</strong> Stelt het kanaal in op de opgegeven waarde [µs].",
+        "english": "Configure the failsafe behavior of each channel.<br><strong>Auto:</strong> Sets channel to a safe value. Center for Roll, Pitch, Yaw, Collective. Low for Throttle.<br><strong>Hold:</strong> Holds channel at the last known position.<br><strong>Set:</strong> Sets channel to the specified value [μs]."
     },
     "failsafeChannelFallbackSettingsAuto": {
         "message": "<strong>Auto</strong> betekent dat Roll, Pitch en Yaw gecentreerde waardes krijgen. Throttle wordt op laag gezet.<strong>Behouden</strong> betekent dat de laatste correct ontvangen waardes worden aangehouden",
@@ -7032,6 +7468,10 @@
         "message": "ESC telemetrie",
         "english": "ESC Telemetry"
     },
+    "powerBatteryVoltageMeterTypeFbus": {
+        "message": "FrSky sensor",
+        "english": "FrSky Sensor"
+    },
     "powerBatteryCurrentMeterSource": {
         "message": "Bron batterijstroom",
         "english": "Battery Current Source"
@@ -7048,9 +7488,65 @@
         "message": "ESC telemetrie",
         "english": "ESC Telemetry"
     },
+    "powerBatteryCurrentMeterTypeFbus": {
+        "message": "FrSky sensor",
+        "english": "FrSky Sensor"
+    },
     "powerBatteryCurrentMeterTypeMsp": {
         "message": "MSP sensor",
         "english": "MSP Sensor"
+    },
+    "powerSmartFuelHead": {
+        "message": "Smart Fuel",
+        "english": "Smart Fuel"
+    },
+    "powerSmartFuelSource": {
+        "message": "Smart Fuel-modus",
+        "english": "Smart Fuel Mode"
+    },
+    "powerSmartFuelSourceHelp": {
+        "message": "<p><strong>Uit:</strong> Smart Fuel is uitgeschakeld.</p><p><strong>Spanning:</strong> schat het laadniveau op basis van de accuspanning.</p><p><strong>Stroom:</strong> gebruikt gemeten verbruikte mAh ten opzichte van de geconfigureerde accucapaciteit.</p><p><strong>Gecombineerd:</strong> gebruikt de meest pessimistische waarde van de spanningsschatting en het stroomverbruik.</p><p>Een geconfigureerde accuspanningssensor is vereist voor ingeschakelde Smart Fuel-modi.</p>",
+        "english": "<p><strong>Off:</strong> Smart Fuel is disabled.</p><p><strong>Voltage:</strong> estimates charge from pack voltage.</p><p><strong>Current:</strong> uses measured mAh consumed against the configured battery capacity.</p><p><strong>Combined:</strong> uses the more pessimistic of the voltage estimate and current consumption.</p><p>A configured battery voltage sensor is required for enabled Smart Fuel modes.</p>"
+    },
+    "powerSmartFuelSourceTypeNone": {
+        "message": "Uit",
+        "english": "Off"
+    },
+    "powerSmartFuelSourceTypeCurrent": {
+        "message": "Stroom",
+        "english": "Current"
+    },
+    "powerSmartFuelSourceTypeVoltage": {
+        "message": "Spanning",
+        "english": "Voltage"
+    },
+    "powerSmartFuelSourceTypeCombined": {
+        "message": "Gecombineerd",
+        "english": "Combined"
+    },
+    "powerSmartFuelVoltageDropRate": {
+        "message": "Smart Fuel spanningsdalingssnelheid",
+        "english": "Smart Fuel Voltage Drop Rate"
+    },
+    "powerSmartFuelVoltageDropRateHelp": {
+        "message": "Beperkt hoe snel het spanningsspoor kan dalen. Deze instelling wordt alleen gebruikt in de modi Spanning en Gecombineerd.",
+        "english": "Limits how quickly the voltage track may fall. This setting is only used in Voltage and Combined modes."
+    },
+    "powerSmartFuelChargeDropRate": {
+        "message": "Smart Fuel laaddalingssnelheid",
+        "english": "Smart Fuel Charge Drop Rate"
+    },
+    "powerSmartFuelChargeDropRateHelp": {
+        "message": "Beperkt hoe snel het gerapporteerde laadpercentage kan dalen op het spanningsspoor zodra het model is gearmd of is geweest. Deze instelling wordt alleen gebruikt in de modi Spanning en Gecombineerd.",
+        "english": "Limits how quickly the reported charge percentage may drop on the voltage track once the model is armed or has been armed. This setting is only used in Voltage and Combined modes."
+    },
+    "powerSmartFuelSagGain": {
+        "message": "Smart Fuel spanningsdoorhanggain",
+        "english": "Smart Fuel Sag Gain"
+    },
+    "powerSmartFuelSagGainHelp": {
+        "message": "Compenseert voor spanningsdoorhang onder belasting. Verhoog als Smart Fuel te pessimistisch is onder belasting; verlaag als het te optimistisch is. Deze instelling wordt alleen gebruikt in de modi Spanning en Gecombineerd.",
+        "english": "Compensates for voltage sag under load. Increase if Smart Fuel is too pessimistic under load; decrease if it is too optimistic. This setting is only used in Voltage and Combined modes."
     },
     "powerBatteryMinimumCellVoltage": {
         "message": "Minimale celspanning",
@@ -7335,6 +7831,14 @@
     "powerBatteryCellCount": {
         "message": "Aantal cellen",
         "english": "Cell count"
+    },
+    "powerBatteryProfile": {
+        "message": "Batterij $1",
+        "english": "Battery $1"
+    },
+    "options.show_advanced_firmware_opts.label": {
+        "message": "Geavanceerde firmware-flashopties tonen",
+        "english": "Show advanced firmware flashing options"
     },
     "osdSetupTitle": {
         "message": "OSD",
@@ -9341,6 +9845,18 @@
         "message": "RESCUE",
         "english": "RESCUE"
     },
+    "mode GOVERNOR FALLBACK": {
+        "message": "GOVERNOR FALLBACK",
+        "english": "GOVERNOR FALLBACK"
+    },
+    "mode GOVERNOR SUSPEND": {
+        "message": "GOVERNOR SUSPEND",
+        "english": "GOVERNOR SUSPEND"
+    },
+    "mode GOVERNOR BYPASS": {
+        "message": "GOVERNOR BYPASS",
+        "english": "GOVERNOR BYPASS"
+    },
     "flashTab": {
         "message": "Firmware updaten",
         "english": "Update Firmware"
@@ -9809,12 +10325,12 @@
     "presetsNoPresetsFound": {
         "message": "Geen presets gevonden voor de opgegeven zoekcriteria",
         "english": "No presets found for the given search parameters",
-        "description": "Message that apprears on presets tab if no presets were found"
+        "description": "Message that appears on presets tab if no presets were found"
     },
     "presetsTooManyPresetsFound": {
         "message": "Maximum limiet van het aantal weergegeven presets bereikt",
         "english": "Reached the maximum limit of the shown presets number",
-        "description": "Message that apprears on presets tab if too many presets found"
+        "description": "Message that appears on presets tab if too many presets found"
     },
     "presetOptionsPlaceholder": {
         "message": "LET OP! Bekijk de lijst met opties",

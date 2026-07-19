@@ -36,6 +36,22 @@
         "message": "Обхват",
         "english": "Range"
     },
+    "hours": {
+        "message": "{{count}} час",
+        "english": "{{count}} hour"
+    },
+    "hours_other": {
+        "message": "{{count}} часа",
+        "english": "{{count}} hours"
+    },
+    "minutes": {
+        "message": "{{count}} минута",
+        "english": "{{count}} minute"
+    },
+    "minutes_other": {
+        "message": "{{count}} минути",
+        "english": "{{count}} minutes"
+    },
     "axisROLL": {
         "message": "ЕЛЕРОН",
         "english": "ROLL",
@@ -756,11 +772,11 @@
         "english": "Real-Time Clock set"
     },
     "armingDisabled": {
-        "message": "<strong>Активирането е изключено</strong>",
+        "message": "<strong>Активирането е забранено</strong>",
         "english": "<strong>Arming Disabled</strong>"
     },
     "armingEnabled": {
-        "message": "<strong>Активирането е включено</strong>",
+        "message": "<strong>Активирането е разрешено</strong>",
         "english": "<strong>Arming Enabled</strong>"
     },
     "boardInfoReceived": {
@@ -913,8 +929,8 @@
         "english": "Rotorflight documentation is available in release notes and website.<br /><br />"
     },
     "defaultDocumentation1": {
-        "message": "Ръководствата на уебсайта на Роторфлайт са отличен източник на информация, вижте <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">тук</a>.",
-        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.2.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        "message": "Ръководствата на уебсайта на Роторфлайт са отличен източник на информация, вижте <a href=\"https://www.rotorflight.org/docs/2.3.0\" target=\"_blank\" rel=\"noopener noreferrer\">тук</a>.",
+        "english": "The Rotorflight website tutorial is a great resource for information, it can be found <a href=\"https://www.rotorflight.org/docs/2.3.0\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultDocumentation2": {
         "message": "Последните новини могат да бъдат прочетени на страницата с анонси на уебсайта, <a href=\"https://www.rotorflight.org/announcement\" target=\"_blank\" rel=\"noopener noreferrer\">тук</a>.",
@@ -1025,8 +1041,8 @@
         "english": "Arming Allowed"
     },
     "statusArmingDisableFlagsTooltip": {
-        "message": "Списък с причини, които в момента предотвратяват активирането. Преминете с мишката над флага или вижте ръководството на уебсайта <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Флагове за активиране)</a> за повече информация.",
-        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
+        "message": "Списък с причини, които в момента предотвратяват активирането. Преминете с мишката над флага или вижте ръководството на уебсайта <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Флагове за активиране)</a> за повече информация.",
+        "english": "List of flags indicating why arming is currently not allowed. Pass the mouse over the flag or refer to the Website tutorial <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/arming#arming-disable-flags\" target=\"_blank\" rel=\"noopener noreferrer\">(Arm Mode flags)</a> for more info."
     },
     "statusArmingDisableFlagsTooltipNO_GYRO": {
         "message": "Не е открит жироскоп",
@@ -1496,15 +1512,15 @@
         "english": "Arbitrary board rotation allows mounting the FC sideways / upside down / rotated etc. When using external sensors, use the sensor alignments to define sensor position independent from the board orientation."
     },
     "configurationBoardAlignmentRoll": {
-        "message": "Крен [°]",
+        "message": "Надлъжно [°]",
         "english": "Roll Degrees"
     },
     "configurationBoardAlignmentPitch": {
-        "message": "Тангаж [°]",
+        "message": "Напречно [°]",
         "english": "Pitch Degrees"
     },
     "configurationBoardAlignmentYaw": {
-        "message": "Вертикална ос [°]",
+        "message": "Вертикално [°]",
         "english": "Yaw Degrees"
     },
     "configurationSensorAlignmentGyro": {
@@ -1560,7 +1576,7 @@
         "english": "Accelerometer Trims adjust the horizon to correct drift in stabilized modes like Angle, Horizon, and Rescue."
     },
     "configurationAccelTrimRoll": {
-        "message": "Трим Крен",
+        "message": "Трим елерон",
         "english": "Accelerometer Roll Trim"
     },
     "configurationAccelRollTrimHelp": {
@@ -1568,7 +1584,7 @@
         "english": "Increase the value to correct drift to the left. Decrease the value (or use negative values) to correct drift to the right."
     },
     "configurationAccelTrimPitch": {
-        "message": "Трим Тангаж",
+        "message": "Трим елеватор",
         "english": "Accelerometer Pitch Trim"
     },
     "configurationAccelPitchTrimHelp": {
@@ -1634,6 +1650,10 @@
     "configuration.flight_stats.distance.label": {
         "message": "Дистанция",
         "english": "Distance"
+    },
+    "flight_stats.duration.value": {
+        "message": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })",
+        "english": "$t(hours, {\"count\": {{hours}} }) $t(minutes, {\"count\": {{minutes}} })"
     },
     "beeper_GYRO_CALIBRATED": {
         "message": "Издава звук, когато жироскопът е калибриран",
@@ -1881,6 +1901,10 @@
     "portsFunction_TELEMETRY_SMARTPORT": {
         "message": "Телеметрия: FrSky SmartPort",
         "english": "Telemetry: FrSky SmartPort"
+    },
+    "portsFunction_SPORT_MASTER": {
+        "message": "S.PORT Мастър",
+        "english": "S.PORT Master"
     },
     "portsFunction_TELEMETRY_IBUS": {
         "message": "Телеметрия: FlySky iBUS",
@@ -2138,6 +2162,14 @@
         "message": "Канал за газта",
         "english": "Throttle Channel"
     },
+    "receiver.channel_range.automatic_throttle_range.label": {
+        "message": "Автоматичен ход на газта",
+        "english": "Automatic Throttle Range"
+    },
+    "receiver.channel_range.automatic_throttle_range.help": {
+        "message": "Изчислява подходящ обхват на газта от Център на стиковете и Ход на стиковете.",
+        "english": "Calculates a suitable throttle range from the Stick Center and Stick Travel values."
+    },
     "receiverProtocol": {
         "message": "Протокол на приемника",
         "english": "Receiver Protocol"
@@ -2203,8 +2235,8 @@
         "english": "The throttle channel value where throttle is considered 0%."
     },
     "receiverHelpZeroThrottle2": {
-        "message": "<p>Стойността на канала за газта, която се счита за 0%. Задайте на 0 за автоматично задаване.</p><p><strong>Забележка:</strong> каналът за газта трябва да може да се движи поне с 10µs под тази стойност, за да сигнализира изключване на газта и да позволи активиране.</p>",
-        "english": "<p>The throttle channel value where throttle is considered 0%. Set to 0 to set automatically.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
+        "message": "<p>Стойността на канала за газта, която се счита за 0%.</p><p><strong>Забележка:</strong> каналът за газта трябва да може да се движи поне с 10µs под тази стойност, за да сигнализира изключване на газта и да позволи активиране.</p>",
+        "english": "<p>The throttle channel value where throttle is considered 0%.</p><p><strong>Note:</strong> The throttle channel must be able to move at least 10µs below this value to signal throttle off and allow arming.</p>"
     },
     "receiverFullThrottle": {
         "message": "Макс. Газ - 100%",
@@ -2215,11 +2247,11 @@
         "english": "The throttle channel value where throttle is considered 100%."
     },
     "receiverHelpFullThrottle2": {
-        "message": "Стойността на канала за газта, която се счита за 100%. Задайте на 0 за автоматично задаване.",
-        "english": "The throttle channel value where throttle is considered 100%. Set to 0 to set automatically."
+        "message": "Стойността на канала за газта, която се счита за 100%.",
+        "english": "The throttle channel value where throttle is considered 100%."
     },
     "receiverCyclicDeadband": {
-        "message": "Цикличен мъртъв диапазон",
+        "message": "Циклична мъртва зона",
         "english": "Cyclic Deadband"
     },
     "receiverHelpCyclicDeadband": {
@@ -2227,7 +2259,7 @@
         "english": "How far the roll and pitch channel values must move from center before it's considered an input."
     },
     "receiverYawDeadband": {
-        "message": "Мъртъв диапазон на опашката",
+        "message": "Мъртва зона на опашката",
         "english": "Yaw Deadband"
     },
     "receiverHelpYawDeadband": {
@@ -2267,11 +2299,11 @@
         "english": "Custom Telemetry"
     },
     "receiverCrsfTelemetryRate": {
-        "message": "Телеметрийна честота на пакетите",
+        "message": "Честота на пакетите за телеметрия",
         "english": "Telemetry Packet Rate"
     },
     "receiverCrsfTelemetryRatio": {
-        "message": "Телеметрийно съотношение на пакетите",
+        "message": "Съотношение на пакетите за телеметрия",
         "english": "Telemetry Packet Ratio"
     },
     "receiverHelpCrsfTelemetryMode": {
@@ -3232,11 +3264,11 @@
         "english": "Governor Collective Precomp"
     },
     "adjustmentsFunctionPitchB": {
-        "message": "Тангаж B-коеф.",
+        "message": "Елеватор B-коеф.",
         "english": "Pitch B-gain"
     },
     "adjustmentsFunctionRollB": {
-        "message": "Крен B-коеф.",
+        "message": "Елерон B-коеф.",
         "english": "Roll B-gain"
     },
     "adjustmentsFunctionYawB": {
@@ -3244,11 +3276,11 @@
         "english": "Yaw B-gain"
     },
     "adjustmentsFunctionPitchO": {
-        "message": "Тангаж O-коеф.",
+        "message": "Елеватор O-коеф.",
         "english": "Pitch O-gain"
     },
     "adjustmentsFunctionRollO": {
-        "message": "Крен O-коеф.",
+        "message": "Елерон O-коеф.",
         "english": "Roll O-gain"
     },
     "adjustmentsFunctionCrossCouplingGain": {
@@ -3704,11 +3736,11 @@
         "english": "Tail rotor type"
     },
     "mixerTailRotorModeHelp": {
-        "message": "<strong>Променлив ъгъл:</strong> Опашен ротор с променлив ъгъл, управляван от опашно серво (Серво#4). <br><strong>Моторизиран:</strong> Опашката има отделен мотор (Мотор#2) за управление на завъртането.<br><strong>Двупосочен:</strong> Моторизиран опашен ротор, работещ в двупосочен режим (експериментално).",
+        "message": "<strong>Променлива стъпка:</strong> Опашен ротор с променлива стъпка, управляван от опашно серво (Серво#4). <br><strong>Моторизиран:</strong> Опашката има отделен мотор (Мотор#2) за управление на завъртането.<br><strong>Двупосочен:</strong> Моторизиран опашен ротор, работещ в двупосочен режим (експериментално).",
         "english": "<strong>Variable pitch:</strong> Variable pitch tail controlled by a tail servo (Servo#4). <br><strong>Motorised:</strong> The tail has a separate motor (Motor#2) for controlling the yaw.<br><strong>Bi-directional:</strong> Motorised tail operating in bi-directional mode (experimental)."
     },
     "mixerTailVariablePitch": {
-        "message": "Променлив ъгъл",
+        "message": "Променлива стъпка",
         "english": "Variable pitch"
     },
     "mixerTailMotorized": {
@@ -3736,7 +3768,7 @@
         "english": "Adjust the yaw gain to match the mechanical gain. Usually around 50-150% for servo driven tails, but can be wildly different for motorised tail rotors."
     },
     "mixerTailRotorMinYaw": {
-        "message": "Ограничение на стъпката на лопатите по часовник",
+        "message": "Ограничение на стъпката на лопатите по часовника",
         "english": "CW Yaw Blade Angle Limit"
     },
     "mixerTailRotorMinYawHelp": {
@@ -3744,7 +3776,7 @@
         "english": "An angle limit for clockwise yaw."
     },
     "mixerTailRotorMaxYaw": {
-        "message": "Ограничение на стъпката на лопатите обратно на часовник",
+        "message": "Ограничение на стъпката на лопатите обратно на часовника",
         "english": "CCW Yaw Blade Angle Limit"
     },
     "mixerTailRotorMaxYawHelp": {
@@ -3800,7 +3832,7 @@
         "english": "Mixer Control Inputs"
     },
     "mixerInputChannelsHelp": {
-        "message": "<strong>Забележка! Това е правилното място за ограничаване на вашите управления</strong><br><br>Скоростта на входа на миксера служи за настройка на скалите, за да съответстват на механичната глава. Тъй като всяка роторна глава е различна, са необходими различни стойности за всяка настройка.<br><strong>Управление:</strong> Тази колона съдържа всяка от стабилизираните функции за управление.<br><strong>Минимум:</strong> Задайте минималния ъгъл, който желаете лопатката да достигне при команда.<br><strong>Максимум:</strong> Задайте максималния ъгъл, който желаете лопатката да достигне при команда.<br><strong>Скала:</strong> Увеличете или намалете стойността на скалата, докато лопатките на хеликоптера съвпаднат с командния ъгъл.<br><br><strong>Процес на калибриране на входа на миксера</strong><br><strong>Стъпка 1: </strong>Активирайте овъррайда на миксера чрез селектора в таба 'SYSTEM'. Записът за Mixer Override вече ще бъде видим на тази страница.<br><strong>Стъпка 2: </strong>Активирайте байпаса на управлението, което ще се калибрира.<br><strong>Стъпка 3: </strong>Задайте овъррайда на миксера на определен ъгъл (например 10 градуса).<br><strong>Стъпка 4: </strong>Измерете реалния ъгъл на лопатката.<br><strong>Стъпка 5: </strong>Настройте скалата така, че физическият ъгъл на лопатката да съвпада с командния ъгъл.",
+        "message": "<strong>Забележка! Това е правилното място за ограничаване на вашите управления</strong><br><br>Скоростта на входа на миксера служи за настройка на скалите, за да съответстват на механичния ход на главата. Тъй като всяка роторна глава е различна, са необходими различни стойности за всяка настройка.<br><strong>Управление:</strong> Тази колона съдържа всяка от стабилизираните функции за управление.<br><strong>Минимум:</strong> Задайте минималния ъгъл на лопатата, който желаете да достигне при команда.<br><strong>Максимум:</strong> Задайте максималния ъгъл на лопатата, който желаете да достигне при команда.<br><strong>Скала:</strong> Увеличете или намалете стойността на скалата, докато лопатите на хеликоптера съвпаднат с зададения ъгъл.<br><br><strong>Процес на калибриране на входа на миксера</strong><br><strong>Стъпка 1: </strong>Активирайте принудителното управление на миксера чрез селектора в раздел 'SYSTEM'. Зададената стойност там вече ще бъде видим на тази страница.<br><strong>Стъпка 2: </strong>Активирайте байпаса на управлението, което ще се калибрира.<br><strong>Стъпка 3: </strong>Задайте команда на миксера на определен ъгъл (например 10 градуса).<br><strong>Стъпка 4: </strong>Измерете реалния ъгъл на лопатата.<br><strong>Стъпка 5: </strong>Настройте скалата така, че измереният ъгъл на лопатката да съвпада със зададения ъгъл.",
         "english": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle."
     },
     "mixerOverrideNote": {
@@ -3808,7 +3840,7 @@
         "english": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "mixerOverride": {
-        "message": "Принудително задаване на миксера",
+        "message": "Принудително управление на миксера",
         "english": "Mixer Override"
     },
     "mixerOverrideHelp": {
@@ -4163,6 +4195,10 @@
         "message": "Брой",
         "english": "Qty"
     },
+    "motors.motor.heading": {
+        "message": "Двигател #{{index}}",
+        "english": "Motor #{{index}}"
+    },
     "motorsSectionLabelThrottle": {
         "message": "Газ",
         "english": "Throttle"
@@ -4200,7 +4236,7 @@
         "english": "Telemetry Protocol"
     },
     "motorsEscTelemetryProtocolHelp": {
-        "message": "Вашият ESC телеметричен протокол. Свържете телеметричния кабел от ESC към полетния контролер. Посочете кой UART да използвате за ESC телеметрия в таба <i>Конфигурация</i>.",
+        "message": "Вашият ESC телеметричен протокол. Свържете телеметричния кабел от ESC към полетния контролер. Посочете кой UART да използвате за ESC телеметрия в раздел <i>Конфигурация</i>.",
         "english": "Your ESC Telemetry protocol. Connect the telemetry wire from the ESC to your FC. Specify which UART to use for ESC Telemetry in the <i>Configuration</i> tab."
     },
     "motorsEscTelemetryHalfDuplex": {
@@ -4444,7 +4480,7 @@
         "english": "Governor Bypass Throttle Curve"
     },
     "govSectionThrottleCurveHelp": {
-        "message": "<p><strong>Режим на байпас на говерньора</strong> деактивира всички функции на говерньора. Когато този режим е активен, кривата колективна към газ се използва за определяне на изхода на газта.</p><p>Вижте секцията за байпас на говерньора в таба Режими, за да конфигурирате как се активира режимът.</p>",
+        "message": "<p><strong>Режим на байпас на говерньора</strong> деактивира всички функции на говерньора. Когато този режим е активен, кривата колективна към газ се използва за определяне на изхода на газта.</p><p>Вижте секцията за байпас на говерньора в раздел Режими, за да конфигурирате как се активира режимът.</p>",
         "english": "<p><strong>Governor Bypass Mode</strong> disables all governor functions. When this mode is active, the collective-to-throttle curve is used to determine throttle output.</p><p>See the Governor Bypass section in the Modes tab to configure how the mode is activated.</p>"
     },
     "govSectionRampTime": {
@@ -4464,7 +4500,7 @@
         "english": "Governor Settings"
     },
     "govConfigurationNote": {
-        "message": "Говерньорът има както глобални, така и профилни настройки. Вижте таба Профили за настройки специфични за профила.",
+        "message": "Говерньорът има както глобални, така и профилни настройки. Вижте раздел Профили за настройки специфични за профила.",
         "english": "The Governor has both global and profile parameters. See the Profiles tab for profile specific parameters."
     },
     "govMode": {
@@ -4848,7 +4884,7 @@
         "english": "Enable precompensation while in the <code>FALLBACK</code> state."
     },
     "govFlagHelp_VOLTAGE_COMP": {
-        "message": "<p>Активирай компенсация на спад на напрежението на батерията.</p><p><strong>Забележка:</strong> Тази настройка изисква използването на <i>Battery ADC</i> като <i>Battery Voltage Source</i>. Тази настройка може да бъде намерена в таба <i>Захранване</i>.</p>",
+        "message": "<p>Активирай компенсация на спад на напрежението на батерията.</p><p><strong>Забележка:</strong> Тази настройка изисква използването на <i>Battery ADC</i> като <i>Battery Voltage Source</i>. Тази настройка може да бъде намерена в раздел <i>Захранване</i>.</p>",
         "english": "<p>Enable battery voltage sag compensation.</p><p><strong>Note:</strong> This setting requires <i>Battery ADC</i> to be used as the <i>Battery Voltage Source</i>. This setting can be found on the <i>Power</i> tab.</p>"
     },
     "govFlagHelp_PID_SPOOLUP": {
@@ -4948,7 +4984,7 @@
         "english": "Debug"
     },
     "cliInfo": {
-        "message": "<strong>Забележка:</strong> Напускането на CLI таба или натискането на Disconnect <strong>автоматично</strong> ще изпрати \"<strong>exit</strong>\" към платката. С последния фърмуер това ще накара контролера да <strong>рестартира</strong> и незапазените промени ще бъдат <strong>загубени</strong>.<p><strong><span class=\"message-negative\">Предупреждение:</span></strong> Някои команди в CLI могат да доведат до произволни сигнали по моторните изходни пинове. Това може да причини завъртане на моторите ако е включена батерия. Затова силно се препоръчва да се уверите, че <strong>няма свързана батерия преди да въвеждате команди в CLI</strong>.",
+        "message": "<strong>Забележка:</strong> Напускането на CLI раздела или натискането на Disconnect <strong>автоматично</strong> ще изпрати \"<strong>exit</strong>\" към платката. С последния фърмуер това ще накара контролера да <strong>рестартира</strong> и незапазените промени ще бъдат <strong>загубени</strong>.<p><strong><span class=\"message-negative\">Предупреждение:</span></strong> Някои команди в CLI могат да доведат до произволни сигнали по моторните изходни пинове. Това може да причини завъртане на моторите ако е включена батерия. Затова силно се препоръчва да се уверите, че <strong>няма свързана батерия преди да въвеждате команди в CLI</strong>.",
         "english": "<strong>Note:</strong> Leaving CLI tab or pressing Disconnect will <strong>automatically</strong> send \"<strong>exit</strong>\" to the board.  With the latest firmware this will make the controller <strong>restart</strong> and unsaved changes will be <strong>lost</strong>.<p><strong><span class=\"message-negative\">Warning:</span></strong> Some commands in CLI can result in arbitrary signals being sent on the motor output pins. This can cause motors to spin up if a battery is connected. Therefore it is highly recommended to make sure that <strong>no battery is connected before entering commands in CLI</strong>."
     },
     "cliInputPlaceholder": {
@@ -5012,7 +5048,7 @@
         "english": "Go Back"
     },
     "loggingNote": {
-        "message": "Данните ще се записват в този таб <span class=\"message-negative\">само</span>, напускането на таба ще <span class=\"message-negative\">отмени</span> логването и приложението ще се върне към нормалното си състояние <strong>\"configurator\"</strong>.<br /> Свободни сте да изберете глобалния период на обновяване, данните ще се записват в лог файла на всеки <strong>1</strong> секунда по причини за производителност.",
+        "message": "Данните ще се записват в този таб <span class=\"message-negative\">само</span>, напускането на раздела ще <span class=\"message-negative\">отмени</span> логването и приложението ще се върне към нормалното си състояние <strong>\"configurator\"</strong>.<br /> Свободни сте да изберете глобалния период на обновяване, данните ще се записват в лог файла на всеки <strong>1</strong> секунда по причини за производителност.",
         "english": "Data will be logged in this tab <span class=\"message-negative\">only</span>, leaving the tab will <span class=\"message-negative\">cancel</span> logging and application will return to its normal <strong>\"configurator\"</strong> state.<br /> You are free to select the global update period, data will be written into the log file every <strong>1</strong> second for performance reasons."
     },
     "loggingSamplesSaved": {
@@ -5060,7 +5096,7 @@
         "english": "Your flight controller's firmware does not support Blackbox logging."
     },
     "blackboxMaybeSupported": {
-        "message": "Фърмуерът на вашия контролер е твърде стар за този таб или функцията Blackbox е изключена в таба Конфигурация.",
+        "message": "Фърмуерът на вашия контролер е твърде стар за този таб или функцията Blackbox е изключена в раздел Конфигурация.",
         "english": "Your flight controller's firmware is too old to support this tab, or the Blackbox feature is disabled on the Configuration tab."
     },
     "blackboxConfiguration": {
@@ -5184,7 +5220,7 @@
         "english": "Governor"
     },
     "serialLoggingSupportedNote": {
-        "message": "Можете да записвате на външно устройство за логване (като OpenLager) чрез сериен порт. Конфигурирайте порта в таба Портове.",
+        "message": "Можете да записвате на външно устройство за логване (като OpenLager) чрез сериен порт. Конфигурирайте порта в раздел Портове.",
         "english": "You can log to an external logging device (such as an OpenLager) by using a serial port. Configure the port on the Ports tab."
     },
     "sdcardNote": {
@@ -5399,6 +5435,14 @@
         "message": "Изтрива всички конфигурационни данни, съхранени на платката.",
         "english": "Wipes all configuration data currently stored on the board."
     },
+    "firmwareFlasherManualPort": {
+        "message": "Порт",
+        "english": "Port"
+    },
+    "firmwareFlasherBaudRate": {
+        "message": "Бауд Рейт",
+        "english": "Baud Rate"
+    },
     "firmware_flasher.show_legacy_targets.label": {
         "message": "Покажи по-стари таргети",
         "english": "Show Legacy Targets"
@@ -5492,8 +5536,8 @@
         "english": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "Ако сте загубили връзка с контролера, следвайте тези стъпки, за да я възстановите: <ul><li>Изключете захранването</li><li>Активирайте 'Без последователност за рестарт' и 'Пълно изтриване на чипа'.</li><li>Сложете джъмпер на BOOT пиновете или задръжте BOOT бутона.</li><li>Включете захранването (индикаторът за активност НЯМА да мига, ако всичко е направено правилно).</li><li>Инсталирайте всички STM32 драйвери и Zadig при нужда (вижте раздел <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB флашване</a> в ръководството).</li><li>Затворете конфигуратора и го стартирайте отново.</li><li>Освободете BOOT бутона, ако вашият полетен контролер има такъв.</li><li>Флашнете с правилния фърмуер (използвайки зададена ръчно скорост на порта, ако е описано в ръководството за вашия контролер).</li><li>Изключете захранването.</li><li>Премахнете BOOT джъмпера.</li><li>Включете захранването (индикаторът за активност трябва да мига).</li><li>Свържете се нормално.</li></ul>",
-        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.2.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
+        "message": "Ако сте загубили връзка с контролера, следвайте тези стъпки, за да я възстановите: <ul><li>Изключете захранването</li><li>Активирайте 'Без последователност за рестарт' и 'Пълно изтриване на чипа'.</li><li>Сложете джъмпер на BOOT пиновете или задръжте BOOT бутона.</li><li>Включете захранването (индикаторът за активност НЯМА да мига, ако всичко е направено правилно).</li><li>Инсталирайте всички STM32 драйвери и Zadig при нужда (вижте раздел <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB флашване</a> в ръководството).</li><li>Затворете конфигуратора и го стартирайте отново.</li><li>Освободете BOOT бутона, ако вашият полетен контролер има такъв.</li><li>Флашнете с правилния фърмуер (използвайки зададена ръчно скорост на порта, ако е описано в ръководството за вашия контролер).</li><li>Изключете захранването.</li><li>Премахнете BOOT джъмпера.</li><li>Включете захранването (индикаторът за активност трябва да мига).</li><li>Свържете се нормално.</li></ul>",
+        "english": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/flashing-the-firmware\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of the manual).</li><li>Close configurator, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
     },
     "firmwareFlasherFirmwareNotLoaded": {
         "message": "Фърмуерът не е зареден",
@@ -7452,6 +7496,58 @@
         "message": "MSP сензор",
         "english": "MSP Sensor"
     },
+    "powerSmartFuelHead": {
+        "message": "Смарт гориво",
+        "english": "Smart Fuel"
+    },
+    "powerSmartFuelSource": {
+        "message": "Режим на смарт гориво",
+        "english": "Smart Fuel Mode"
+    },
+    "powerSmartFuelSourceHelp": {
+        "message": "<p><strong>Изключено:</strong> Смарт горивото е деактивирано.</p><p><strong>Напрежение:</strong> изчислява заряда на база напрежението на батерията.</p><p><strong>Ток:</strong> използва измерената консумация в mAh спрямо конфигурираният капацитет на батерията.</p><p><strong>Комбинирано:</strong> използва по-песимистичната оценката от напрежението и консумацията на ток.</p><p>За да се активират режимите на смарт гориво, е необходим конфигуриран сензор за напрежение на батерията.</p>",
+        "english": "<p><strong>Off:</strong> Smart Fuel is disabled.</p><p><strong>Voltage:</strong> estimates charge from pack voltage.</p><p><strong>Current:</strong> uses measured mAh consumed against the configured battery capacity.</p><p><strong>Combined:</strong> uses the more pessimistic of the voltage estimate and current consumption.</p><p>A configured battery voltage sensor is required for enabled Smart Fuel modes.</p>"
+    },
+    "powerSmartFuelSourceTypeNone": {
+        "message": "Изключено",
+        "english": "Off"
+    },
+    "powerSmartFuelSourceTypeCurrent": {
+        "message": "Ток",
+        "english": "Current"
+    },
+    "powerSmartFuelSourceTypeVoltage": {
+        "message": "Напрежение",
+        "english": "Voltage"
+    },
+    "powerSmartFuelSourceTypeCombined": {
+        "message": "Комбинирано",
+        "english": "Combined"
+    },
+    "powerSmartFuelVoltageDropRate": {
+        "message": "Смарт гориво - скорост на спад на напрежението",
+        "english": "Smart Fuel Voltage Drop Rate"
+    },
+    "powerSmartFuelVoltageDropRateHelp": {
+        "message": "Ограничава колко бързо може да пада напрежението. Тази настройка се използва само в режимите Напрежение и Комбинирано.",
+        "english": "Limits how quickly the voltage track may fall. This setting is only used in Voltage and Combined modes."
+    },
+    "powerSmartFuelChargeDropRate": {
+        "message": "Смарт гориво - скорост на спад на заряда",
+        "english": "Smart Fuel Charge Drop Rate"
+    },
+    "powerSmartFuelChargeDropRateHelp": {
+        "message": "Ограничава колко бързо може да спада изчисленият процент на заряд на база напрежението, след като моделът е активиран или е бил активиран. Тази настройка се използва само в режимите Напрежение и Комбинирано.",
+        "english": "Limits how quickly the reported charge percentage may drop on the voltage track once the model is armed or has been armed. This setting is only used in Voltage and Combined modes."
+    },
+    "powerSmartFuelSagGain": {
+        "message": "Смарт гориво - чувствителност при пад на напрежението под товар",
+        "english": "Smart Fuel Sag Gain"
+    },
+    "powerSmartFuelSagGainHelp": {
+        "message": "Компенсира пада на напрежението под товар. Увеличете, ако Смарт горивото е твърде песимистично под товар; намалете, ако е твърде оптимистично. Тази настройка се използва само в режимите Напрежение и Комбинирано.",
+        "english": "Compensates for voltage sag under load. Increase if Smart Fuel is too pessimistic under load; decrease if it is too optimistic. This setting is only used in Voltage and Combined modes."
+    },
     "powerBatteryMinimumCellVoltage": {
         "message": "Минимално напрежение на клетка",
         "english": "Minimum Cell Voltage"
@@ -8095,7 +8191,7 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCraftName": {
-        "message": "Име на летателния апарат, зададено в таба Конфигурация",
+        "message": "Име на летателния апарат, зададено в раздел Конфигурация",
         "english": "Craft name as set in Configuration tab"
     },
     "osdTextElementAltitude": {
@@ -9129,7 +9225,7 @@
         "description": "Introduction message in the VTX tab"
     },
     "vtxMessageNotSupported": {
-        "message": "<span class=\"message-negative\">Внимание:</span> Вашият VTX не е конфигуриран или не се поддържа. Затова не можете да променяте VTX стойностите оттук. Това ще бъде възможно само ако полетният контролер е свързан към VTX чрез протокол като Tramp или SmartAudio и е правилно конфигуриран в таба $t(tabPorts.message), ако е необходимо.",
+        "message": "<span class=\"message-negative\">Внимание:</span> Вашият VTX не е конфигуриран или не се поддържа. Затова не можете да променяте VTX стойностите оттук. Това ще бъде възможно само ако полетният контролер е свързан към VTX чрез протокол като Tramp или SmartAudio и е правилно конфигуриран в раздел $t(tabPorts.message), ако е необходимо.",
         "english": "<span class=\"message-negative\">Attention:</span> Your VTX is not configured or not supported. So you can't modify the VTX values from here. This will only be possible if the flight controller is attached to the VTX using some protocol like Tramp or SmartAudio and is correctly configured in the $t(tabPorts.message) tab if needed.",
         "description": "Message to show when the VTX is not supported in the VTX tab"
     },
@@ -9546,7 +9642,7 @@
         "english": "Logging device"
     },
     "blackboxDeviceHelp": {
-        "message": "<strong>Без записване:</strong> Изключва записването.<br><br><strong>Вграден флаш:</strong> Записва във вградения флаш чип (ако е наличен).<br><br><strong>SD карта:</strong> Записва на вградената SD карта (ако е налична).<br><br><strong>Сериен порт:</strong> Записва на външно устройство за записване (например OpenLager), свързано към сериен порт. Серийният порт трябва да бъде конфигуриран за 'Blackbox Logging' в таба <strong>Конфигурация</strong>.",
+        "message": "<strong>Без записване:</strong> Изключва записването.<br><br><strong>Вграден флаш:</strong> Записва във вградения флаш чип (ако е наличен).<br><br><strong>SD карта:</strong> Записва на вградената SD карта (ако е налична).<br><br><strong>Сериен порт:</strong> Записва на външно устройство за записване (например OpenLager), свързано към сериен порт. Серийният порт трябва да бъде конфигуриран за 'Blackbox Logging' в раздел <strong>Конфигурация</strong>.",
         "english": "<strong>No Logging:</strong> Disable logging.<br><br><strong>Onboard Flash:</strong> Log to the onboard flash chip (if available).<br><br><strong>SD Card:</strong> Log to the onboard SD card (if available).<br><br><strong>Serial Port:</strong> Log to an external logger device (e.g OpenLager) connected to a serial port. The serial port must to be configured to 'Blackbox Logging' on the <strong>Configuration</strong> tab."
     },
     "blackboxRateOfLogging": {
@@ -9748,6 +9844,19 @@
     "mode RESCUE": {
         "message": "СПАСЯВАНЕ",
         "english": "RESCUE"
+    },
+    "mode GOVERNOR FALLBACK": {
+        "message": "Авариия на Говерньора",
+        "english": "GOVERNOR FALLBACK",
+        "status": "New entry. Please translate!"
+    },
+    "mode GOVERNOR SUSPEND": {
+        "message": "Спиране на Говерньора",
+        "english": "GOVERNOR SUSPEND"
+    },
+    "mode GOVERNOR BYPASS": {
+        "message": "Байпас на Говерньора",
+        "english": "GOVERNOR BYPASS"
     },
     "flashTab": {
         "message": "Актуализиране на фърмуера",
