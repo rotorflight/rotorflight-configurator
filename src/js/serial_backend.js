@@ -546,6 +546,10 @@ async function onConnect() {
         await MSP.promise(MSPCodes.MSP_BATTERY_CONFIG, false);
         await MSP.promise(MSPCodes.MSP_STATUS, false);
         await MSP.promise(MSPCodes.MSP_DATAFLASH_SUMMARY, false);
+        // Needed early (not just lazily per-tab) so the FBUS Sensors tab's
+        // visibility -- gated on an FBUS_OUT/SPORT_MASTER port -- is correct
+        // as soon as the tab list is shown.
+        await MSP.promise(MSPCodes.MSP_SERIAL_CONFIG, false);
 
         if (FC.CONFIG.boardType == 0 || FC.CONFIG.boardType == 2) {
             startLiveDataRefreshTimer();
