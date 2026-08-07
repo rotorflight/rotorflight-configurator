@@ -483,48 +483,6 @@
     "tabBlackbox": {
         "message": "Blackbox"
     },
-    "tabFbusSensors": {
-        "message": "FBUS/S.Port Sensors"
-    },
-    "fbusSensorsDescription": {
-        "message": "Sensors observed on the FBUS/S.Port bus while this board is acting as an FBUS or S.Port master."
-    },
-    "fbusSensorsEmpty": {
-        "message": "No FBUS/S.Port sensors observed yet"
-    },
-    "fbusSensorsNotSupported": {
-        "message": "This firmware does not support the FBUS/S.Port Sensors diagnostic."
-    },
-    "fbusSensorsLearnMore": {
-        "message": "Learn more"
-    },
-    "fbusSensorsForwardingUnavailable": {
-        "message": "Forwarding needs an FrSky-family RX protocol -- set F.Port, F.Port2, or FBUS on the Receiver tab."
-    },
-    "fbusSensorsClear": {
-        "message": "Clear"
-    },
-    "fbusSensorsSlotsFull": {
-        "message": "All 8 forwarding slots are in use -- turn one off first."
-    },
-    "fbusSensorsColPhysicalId": {
-        "message": "Physical ID"
-    },
-    "fbusSensorsColSource": {
-        "message": "Source"
-    },
-    "fbusSensorsColName": {
-        "message": "Sensor Name"
-    },
-    "fbusSensorsColForwarded": {
-        "message": "Forwarded"
-    },
-    "fbusSensorsColAppIds": {
-        "message": "App IDs"
-    },
-    "fbusSensorsColPackets": {
-        "message": "Packets"
-    },
     "tabAdjustments": {
         "message": "Adjustments"
     },
