@@ -431,14 +431,6 @@ function notifyOutdatedVersion(releaseData) {
 export function updateTabList(features) {
     $('#tabs ul.mode-connected li.tab_gps').toggle(features.isEnabled('GPS'));
     $('#tabs ul.mode-connected li.tab_led_strip').toggle(features.isEnabled('LED_STRIP'));
-
-    // FBUS/S.Port master mode observes sensors on a UART configured with the
-    // FBUS_OUT or SPORT_MASTER serial port function -- there's no dedicated
-    // feature bit for it.
-    const fbusMasterActive = (FC.SERIAL_CONFIG?.ports ?? []).some(
-        (port) => port.functions.includes('FBUS_OUT') || port.functions.includes('SPORT_MASTER'),
-    );
-    $('#tabs ul.mode-connected li.tab_fbus_sensors').toggle(fbusMasterActive);
 }
 
 function zeroPad(value, width) {
