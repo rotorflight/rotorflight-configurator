@@ -214,4 +214,9 @@ export const MSPCodes = {
 //  MSP2_GET_VTX_DEVICE_STATUS:         0x3004,
     MSP2_SMARTFUEL_CONFIG:              0x4000,
     MSP2_SET_SMARTFUEL_CONFIG:          0x4001,
+
+    MSP2_GET_FBUS_SENSORS:               0x5F07,
+    MSP2_CLEAR_FBUS_SENSORS:             0x5F08,
+    MSP2_GET_FBUS_MASTER_CONFIG:         0x5F09,
+    MSP2_SET_FBUS_MASTER_CONFIG:         0x5F0A,
 };
