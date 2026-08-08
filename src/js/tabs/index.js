@@ -5,6 +5,7 @@ import "./blackbox.js";
 import "./cli.js";
 import "./configuration.js";
 import "./failsafe.js";
+import "./fbus_sensors.js";
 import "./firmware_flasher.js";
 import "./governor.js";
 import "./gps.js";
