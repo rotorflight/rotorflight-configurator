@@ -72,8 +72,12 @@ export default defineConfig(
         parser: ts.parser,
         svelteConfig: {
           ...svelteConfig,
+
           // remove function so the config can be serialised by eslint --cache
-          onwarn: undefined,
+          compilerOptions: {
+            ...svelteConfig.compilerOptions,
+            warningFilter: undefined,
+          },
         },
       },
     },
