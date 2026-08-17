@@ -62,12 +62,12 @@ distclean: realclean
 # HELP
 # ========================================
 
-blue      := $(shell tput setaf 4)
-grey500   := $(shell tput setaf 244)
-grey300   := $(shell tput setaf 240)
-bold      := $(shell tput bold)
-underline := $(shell tput smul)
-reset     := $(shell tput sgr0)
+blue      := $(shell tput setaf 4 2>/dev/null)
+grey500   := $(shell tput setaf 244 2>/dev/null)
+grey300   := $(shell tput setaf 240 2>/dev/null)
+bold      := $(shell tput bold 2>/dev/null)
+underline := $(shell tput smul 2>/dev/null)
+reset     := $(shell tput sgr0 2>/dev/null)
 
 .PHONY: help
 help: ## Display this help
