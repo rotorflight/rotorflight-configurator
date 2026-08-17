@@ -40,6 +40,14 @@
         background-color: var(--color-switch-handle);
       }
     }
+
+    &:checked + .slider.disabled {
+      background-color: var(--color-switch-disabled-checked);
+
+      &::before {
+        background-color: var(--color-switch-handle-disabled);
+      }
+    }
   }
 
   .slider {
