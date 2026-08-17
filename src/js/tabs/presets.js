@@ -1171,13 +1171,11 @@ class PresetsTab {
   cleanup(callback) {
     this.resetInitialValues();
 
-    if (
-      !(
-        CONFIGURATOR.connectionValid &&
-        CONFIGURATOR.cliEngineActive &&
-        CONFIGURATOR.cliEngineValid
-      )
-    ) {
+    if (!(
+      CONFIGURATOR.connectionValid &&
+      CONFIGURATOR.cliEngineActive &&
+      CONFIGURATOR.cliEngineValid
+    )) {
       if (callback) {
         callback();
       }
