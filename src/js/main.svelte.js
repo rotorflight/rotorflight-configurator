@@ -9,6 +9,7 @@ import StatusBar from "@/components/StatusBar.svelte";
 
 import "@/css/app.css";
 import "@/css/slider.css";
+import "@/css/svelte.scss";
 import "@/js/injected_methods.js";
 import { serial } from "@/js/serial.js";
 import "@/js/tabs/index.js";

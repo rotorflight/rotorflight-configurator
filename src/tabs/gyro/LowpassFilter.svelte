@@ -35,6 +35,7 @@
         FC.FILTER_CONFIG.gyro_lowpass_dyn_max_hz,
   );
 
+  // svelte-ignore state_referenced_locally
   const lowpass1DynEnabledInitial = lowpass1DynEnabled;
 
   let lowpass2Enabled = $derived(FC.FILTER_CONFIG.gyro_lowpass2_type > 0);

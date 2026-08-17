@@ -133,12 +133,6 @@
     column-gap: var(--section-gap);
   }
 
-  .fallback-group {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-  }
-
   .help-btn {
     padding: 4px 8px;
     min-width: 60px;
