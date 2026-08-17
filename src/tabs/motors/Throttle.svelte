@@ -70,7 +70,7 @@
       </div>
     {/if}
 
-    {#if isEnabled && !motorState.isDshot && protocol !== 0 && !motorState.isCastleLink}
+    {#if isEnabled && !motorState.isDshot && protocol !== 0 && !motorState.isCastleLink && !motorState.isSrxl2}
       <div transition:slide>
         <Field id="throttle-unsynced-pwm" label="motorsUnsyncedPwm">
           {#snippet tooltip()}

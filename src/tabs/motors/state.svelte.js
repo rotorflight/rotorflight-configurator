@@ -56,6 +56,9 @@ class State {
   isCastleLink = $derived(
     this.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol] === "CASTLE",
   );
+  isSrxl2 = $derived(
+    this.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol] === "SRXL2",
+  );
   hasTelemPort = $derived(FC.ESC_SENSOR_CONFIG.protocol > 0);
   telemEnabled = $derived(this.hasTelemPort || this.isCastleLink);
 
