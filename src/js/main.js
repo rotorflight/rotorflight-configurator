@@ -2,7 +2,7 @@ import semver from "semver";
 
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import { config } from "@/js/config.svelte.ts";
-import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { API_VERSION_12_10, CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
@@ -434,10 +434,12 @@ export function updateTabList(features) {
 
     // FBUS/S.Port master mode observes sensors on a UART configured with the
     // FBUS_OUT or SPORT_MASTER serial port function -- there's no dedicated
-    // feature bit for it.
-    const fbusMasterActive = (FC.SERIAL_CONFIG?.ports ?? []).some(
-        (port) => port.functions.includes('FBUS_OUT') || port.functions.includes('SPORT_MASTER'),
-    );
+    // feature bit for it. The MSP2_*_FBUS_* commands the tab relies on only
+    // exist from API 12.10 onwards.
+    const fbusMasterActive = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
+        && (FC.SERIAL_CONFIG?.ports ?? []).some(
+            (port) => port.functions.includes('FBUS_OUT') || port.functions.includes('SPORT_MASTER'),
+        );
     $('#tabs ul.mode-connected li.tab_fbus_sensors').toggle(fbusMasterActive);
 }
 
