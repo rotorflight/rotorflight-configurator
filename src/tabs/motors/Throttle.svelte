@@ -16,7 +16,6 @@
 
   import motorState from "./state.svelte.js";
 
-  let protocol = $derived(FC.MOTOR_CONFIG.motor_pwm_protocol);
   let isEnabled = $derived(
     motorState.throttleEnabled && FC.CONFIG.motorCount > 0,
   );
@@ -50,7 +49,22 @@
         {/each}
       </select>
     </Field>
-    {#if isEnabled && !motorState.isDshot}
+
+    {#if isEnabled && motorState.hasSyncedPwmToggle}
+      <div transition:slide>
+        <Field id="throttle-unsynced-pwm" label="motorsUnsyncedPwm">
+          {#snippet tooltip()}
+            <Tooltip help="motorsUnsyncedPwmHelp" />
+          {/snippet}
+          <Switch
+            id="throttle-unsynced-pwm"
+            bind:checked={FC.MOTOR_CONFIG.use_unsynced_pwm}
+          />
+        </Field>
+      </div>
+    {/if}
+
+    {#if isEnabled && !motorState.isDshot && !(motorState.hasSyncedPwmToggle && !FC.MOTOR_CONFIG.use_unsynced_pwm)}
       <div transition:slide>
         <Field id="pwm-freq" label="motorsUnsyncedPWMFreq" unit="Hz">
           {#snippet tooltip()}
@@ -67,20 +81,6 @@
             min="50"
             max="8000"
             bind:value={FC.MOTOR_CONFIG.motor_pwm_rate}
-          />
-        </Field>
-      </div>
-    {/if}
-
-    {#if isEnabled && !motorState.isDshot && protocol !== 0 && !motorState.isCastleLink && !motorState.isSrxl2}
-      <div transition:slide>
-        <Field id="throttle-unsynced-pwm" label="motorsUnsyncedPwm">
-          {#snippet tooltip()}
-            <Tooltip help="motorsUnsyncedPwmHelp" />
-          {/snippet}
-          <Switch
-            id="throttle-unsynced-pwm"
-            bind:checked={FC.MOTOR_CONFIG.use_unsynced_pwm}
           />
         </Field>
       </div>

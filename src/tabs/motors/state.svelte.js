@@ -62,6 +62,12 @@ class State {
   hasTelemPort = $derived(FC.ESC_SENSOR_CONFIG.protocol > 0);
   telemEnabled = $derived(this.hasTelemPort || this.isCastleLink);
 
+  hasSyncedPwmToggle = $derived.by(() => {
+    const protoName =
+      this.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol];
+    return protoName.startsWith("ONESHOT") || protoName === "MULTISHOT";
+  });
+
   /**
    * Sets the correct features and config based on the state of CastleLink
    */

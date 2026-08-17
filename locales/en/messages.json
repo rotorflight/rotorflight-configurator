@@ -3317,10 +3317,10 @@
         "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
     "motorsUnsyncedPwm": {
-        "message": "Unsyncronised ESC update"
+        "message": "Unsynchronised ESC Update"
     },
     "motorsUnsyncedPwmHelp": {
-        "message": "ESC PWM is running unsyncronised, separate from the PID loop, at the specified frequency."
+        "message": "ESC PWM is running unsynchronised, separate from the PID loop, at the specified frequency."
     },
     "motorsUnsyncedPWMFreq": {
         "message": "Update Frequency"
