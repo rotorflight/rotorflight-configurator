@@ -830,7 +830,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_FEATURE_CONFIG: {
                 FC.FEATURE_CONFIG.features.bitfield = data.readU32();
-                updateTabList(FC.FEATURE_CONFIG.features);
+                updateTabList();
                 break;
             }
 
@@ -1020,7 +1020,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     };
                     FC.SERIAL_CONFIG.ports.push(serialPort);
                 }
-                updateTabList(FC.FEATURE_CONFIG.features);
+                updateTabList();
                 break;
             }
 

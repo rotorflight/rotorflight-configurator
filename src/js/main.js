@@ -428,7 +428,8 @@ function notifyOutdatedVersion(releaseData) {
     }
 }
 
-export function updateTabList(features) {
+export function updateTabList() {
+    const { features } = FC.FEATURE_CONFIG;
     $('#tabs ul.mode-connected li.tab_gps').toggle(features.isEnabled('GPS'));
     $('#tabs ul.mode-connected li.tab_led_strip').toggle(features.isEnabled('LED_STRIP'));
 

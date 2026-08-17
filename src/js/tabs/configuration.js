@@ -731,7 +731,7 @@ tab.initialize = function (callback) {
               element.data("featureName"),
               element.is(":checked")
             );
-            updateTabList(FC.FEATURE_CONFIG.features);
+            updateTabList();
         });
 
         $('input[id="accHardwareSwitch"]').change(function() {
@@ -745,7 +745,7 @@ tab.initialize = function (callback) {
               element.data("featureName"),
               element.is(":checked")
             );
-            updateTabList(FC.FEATURE_CONFIG.features);
+            updateTabList();
         });
 
         self.save = function (callback) {
