@@ -46,6 +46,7 @@ const virtualFirmwareVersions = [
   { fw: '4.4.0', msp: '12.7.0', label: 'Rotorflight 2.1.x'},
   { fw: '4.5.0', msp: '12.8.0', label: 'Rotorflight 2.2.x'},
   { fw: '4.6.0', msp: '12.9.0', label: 'Rotorflight 2.3.x'},
+  { fw: '4.7.0', msp: '12.10.0', label: 'Rotorflight 2.4.x'},
 ];
 
 export function generateVirtualApiVersions() {

@@ -1,0 +1,62 @@
+.svelte {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  select,
+  input {
+    margin: 0;
+    border-radius: 2px;
+
+    color: var(--color-text);
+    background-color: var(--color-input-bg);
+    border: 1px solid var(--color-border-soft);
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-border-accent);
+    }
+
+    &:disabled {
+      color: var(--color-text-disabled);
+      background-color: var(--color-input-bg-disabled);
+    }
+  }
+
+  input {
+    height: 1.5rem;
+    line-height: 1.5rem;
+    font-size: 0.8rem;
+    padding: 0 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    outline: none;
+
+    &[type="number"] {
+      text-align: right;
+      padding-right: 0;
+      width: 80px;
+    }
+  }
+
+  select {
+    height: 1.5rem;
+    min-width: 120px;
+    padding: 0 4px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    select,
+    input {
+      height: 2rem;
+      line-height: 2rem;
+    }
+
+    input {
+      font-size: 1rem !important;
+    }
+  }
+}

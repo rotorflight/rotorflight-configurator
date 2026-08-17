@@ -182,35 +182,6 @@
     flex-direction: column;
   }
 
-  .notch-group-heading {
-    font-weight: 600;
-    grid-column: 1 / -1;
-    margin-top: 8px;
-
-    * + & {
-      margin-top: 16px;
-    }
-  }
-
-  .notch {
-    display: flex;
-    width: 100%;
-
-    label {
-      flex-grow: 1;
-    }
-  }
-
-  label {
-    display: flex;
-    align-items: center;
-    margin-left: 8px;
-
-    > :first-child {
-      flex-grow: 1;
-    }
-  }
-
   .title {
     flex-grow: 1;
     font-size: 1rem;
@@ -276,14 +247,6 @@
     }
   }
 
-  .input {
-    max-width: 120px;
-
-    > * {
-      width: 120px;
-    }
-  }
-
   .reset-btn {
     border-radius: 2px;
     border: none;
@@ -342,23 +305,6 @@
       button {
         width: calc(100% / 3);
         line-height: 2rem;
-      }
-    }
-
-    .notch-wrapper {
-      height: 3rem;
-    }
-
-    .notch-wrapper + .notch-wrapper:not(.group) {
-      border-top-width: 1px;
-      border-top-style: solid;
-
-      :global(html[data-theme="light"]) & {
-        border-top-color: var(--color-neutral-400);
-      }
-
-      :global(html[data-theme="dark"]) & {
-        border-top-color: var(--color-neutral-700);
       }
     }
 
