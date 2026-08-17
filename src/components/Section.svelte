@@ -12,7 +12,7 @@
   }
 </script>
 
-<div class="wrapper">
+<div class="wrapper svelte">
   <div class="container">
     {#if header}
       {@render header()}

@@ -142,68 +142,7 @@
 </Section>
 
 <style lang="scss">
-  .header {
-    font-size: 1rem;
-    font-weight: 600;
-    font-weight: 600;
-    border-bottom-width: 2px;
-    border-style: solid;
-
-    :global(html[data-theme="light"]) & {
-      color: var(--color-neutral-900);
-      border-bottom-color: var(--color-neutral-300);
-    }
-
-    :global(html[data-theme="dark"]) & {
-      color: var(--color-neutral-100);
-      border-bottom-color: var(--color-neutral-600);
-    }
-  }
-
-  .row {
-    display: flex;
-    align-items: center;
-    min-height: 2rem;
-
-    label {
-      display: flex;
-      flex-grow: 1;
-      align-items: center;
-      padding: 4px 0;
-    }
-  }
-
-  .input {
-    max-width: 120px;
-  }
-
-  .group-heading {
-    display: flex;
-    font-weight: 600;
-    grid-column: 1 / -1;
-    margin-top: 8px;
-  }
-
   .warning-container {
     margin-top: 4px;
-  }
-
-  @media only screen and (max-width: 480px) {
-    .row {
-      height: 3rem;
-    }
-
-    .row + .row {
-      border-top-width: 1px;
-      border-top-style: solid;
-
-      :global(html[data-theme="light"]) & {
-        border-top-color: var(--color-neutral-400);
-      }
-
-      :global(html[data-theme="dark"]) & {
-        border-top-color: var(--color-neutral-700);
-      }
-    }
   }
 </style>

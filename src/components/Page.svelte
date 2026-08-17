@@ -2,7 +2,7 @@
   let { children, loading = false, header, toolbar } = $props();
 </script>
 
-<div class="container">
+<div class="container svelte">
   <div class="wrapper">
     <header class="header">
       {@render header?.()}

@@ -114,10 +114,6 @@
     margin-top: 8px;
   }
 
-  .hide {
-    display: none;
-  }
-
   .handle {
     display: flex;
     align-items: center;

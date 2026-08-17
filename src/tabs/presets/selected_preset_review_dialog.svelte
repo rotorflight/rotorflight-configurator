@@ -8,6 +8,9 @@
     onApplyButtonClicked,
     onEditPresetInstance,
   } = $props();
+
+  // TODO: This usage of presetInstances.length is a hack and should be rewritten
+  // svelte-ignore state_referenced_locally
   let selectedPresetInstancesLength = $state(presetInstances.length);
   function onDeletePresetInstance(index) {
     presetInstances.splice(index, 1);
