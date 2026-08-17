@@ -3,6 +3,7 @@ import semver from "semver";
 import {
   API_VERSION_12_8,
   API_VERSION_12_9,
+  API_VERSION_12_10,
 } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 
@@ -20,6 +21,7 @@ class State {
     "DSHOT600",
     "PROSHOT",
     ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8) ? ["CASTLE"] : []),
+    ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10) ? ["SRXL2"] : []),
     "DISABLED",
   ]);
 
@@ -40,6 +42,7 @@ class State {
     ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)
       ? ["FrSky F.BUS"]
       : []),
+    ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10) ? ["SRXL2"] : []),
   ]);
 
   throttleEnabled = $derived(
@@ -52,6 +55,9 @@ class State {
   });
   isCastleLink = $derived(
     this.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol] === "CASTLE",
+  );
+  isSrxl2 = $derived(
+    this.throttleProtocols[FC.MOTOR_CONFIG.motor_pwm_protocol] === "SRXL2",
   );
   hasTelemPort = $derived(FC.ESC_SENSOR_CONFIG.protocol > 0);
   telemEnabled = $derived(this.hasTelemPort || this.isCastleLink);
