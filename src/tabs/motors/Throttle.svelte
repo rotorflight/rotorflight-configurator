@@ -44,7 +44,9 @@
       {/snippet}
       <select id="esc-protocol" bind:value={FC.MOTOR_CONFIG.motor_pwm_protocol}>
         {#each motorState.throttleProtocols as proto, index (proto)}
-          <option value={index}>{proto}</option>
+          {#if proto}
+            <option value={index}>{proto}</option>
+          {/if}
         {/each}
       </select>
     </Field>

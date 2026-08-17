@@ -15,7 +15,7 @@ class State {
     "ONESHOT125",
     "ONESHOT42",
     "MULTISHOT",
-    "BRUSHED",
+    undefined,
     "DSHOT150",
     "DSHOT300",
     "DSHOT600",
