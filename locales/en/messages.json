@@ -462,6 +462,66 @@
     "tabMotors": {
         "message": "Motors"
     },
+    "tabEscProgramming": {
+        "message": "ESC Programming"
+    },
+    "escProgrammingWarningTitle": {
+        "message": "Remove propellers / rotor blades"
+    },
+    "escProgrammingWarningBody": {
+        "message": "Programming an ESC can cause the motor to spin unexpectedly. Remove all propellers or rotor blades before continuing."
+    },
+    "escProgrammingWarningAcknowledge": {
+        "message": "I have removed the propellers/blades"
+    },
+    "escProgrammingArmedWarning": {
+        "message": "Disarm the aircraft to program ESCs."
+    },
+    "escProgrammingSelectManufacturer": {
+        "message": "Select ESC manufacturer"
+    },
+    "escProgrammingSelectEsc": {
+        "message": "Select ESC"
+    },
+    "escProgrammingEsc1": {
+        "message": "ESC 1 (Main / Motor)"
+    },
+    "escProgrammingEsc2": {
+        "message": "ESC 2 (Tail)"
+    },
+    "escProgrammingBack": {
+        "message": "Back"
+    },
+    "escProgrammingChangeEsc": {
+        "message": "Change ESC"
+    },
+    "escProgrammingStatusSwitching": {
+        "message": "Selecting ESC..."
+    },
+    "escProgrammingStatusWaiting": {
+        "message": "Waiting for ESC bridge..."
+    },
+    "escProgrammingStatusPolling": {
+        "message": "Reading ESC parameters..."
+    },
+    "escProgrammingStatusGuarding": {
+        "message": "Checking ESC link..."
+    },
+    "escProgrammingStatusFailed": {
+        "message": "Could not detect the ESC. Check wiring/power and try again."
+    },
+    "escProgrammingStatusPowerCycle": {
+        "message": "Power-cycle the ESC now (disconnect and reconnect its battery/power) to enter programming mode."
+    },
+    "escProgrammingRetry": {
+        "message": "Retry"
+    },
+    "escProgrammingCancel": {
+        "message": "Cancel"
+    },
+    "escProgrammingPowerCycleNote": {
+        "message": "This ESC has no remote link -- power-cycle it after saving for changes to take effect."
+    },
     "tabGovernor": {
         "message": "Governor"
     },

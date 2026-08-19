@@ -1,6 +1,56 @@
 import { Beepers } from "@/js/Beepers.js";
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import { getManufacturer } from "@/tabs/esc_programming/manufacturers/index.js";
+
+let virtualEscManufacturerId = null;
+
+// Per-manufacturer "EEPROM" for the simulated ESC: seeded from simResponse, then updated by
+// MSP_SET_ESC_PARAMETERS writes so a save is actually reflected on the next read. Without this,
+// every read always echoed the pristine simResponse, making saves look like they silently
+// reverted to the values the form first loaded.
+const virtualEscBuffers = new Map();
+
+export function setVirtualEscManufacturer(id) {
+  virtualEscManufacturerId = id;
+}
+
+function currentVirtualEscBuffer() {
+  if (!virtualEscManufacturerId) return undefined;
+  if (!virtualEscBuffers.has(virtualEscManufacturerId)) {
+    const manufacturer = getManufacturer(virtualEscManufacturerId);
+    if (!manufacturer?.simResponse) return undefined;
+    virtualEscBuffers.set(
+      virtualEscManufacturerId,
+      Uint8Array.from(manufacturer.simResponse),
+    );
+  }
+  return virtualEscBuffers.get(virtualEscManufacturerId);
+}
+
+// Lets the ESC Programming tab be developed/tested without hardware: MSP.send_message's
+// virtualMode branch calls this before falling back to its normal no-op ack. `requestData` is
+// the outgoing write payload (a plain array of byte values) for write codes.
+export function getVirtualEscResponse(code, requestData) {
+  if (code === MSPCodes.MSP_ESC_PARAMETERS) {
+    const buffer = currentVirtualEscBuffer();
+    return buffer ? Uint8Array.from(buffer) : undefined;
+  }
+  if (code === MSPCodes.MSP_SET_ESC_PARAMETERS) {
+    if (virtualEscManufacturerId && requestData) {
+      virtualEscBuffers.set(
+        virtualEscManufacturerId,
+        Uint8Array.from(requestData),
+      );
+    }
+    return new Uint8Array(0);
+  }
+  if (code === MSPCodes.MSP_SET_4WIF_ESC_FWD_PROG) {
+    return new Uint8Array(0);
+  }
+  return undefined;
+}
 
 export function applyVirtualConfig() {
   FC.resetState();
@@ -151,6 +201,7 @@ export function applyVirtualConfig() {
     mincommand: 1000,
     minthrottle: 1070,
     maxthrottle: 2000,
+    motor_count_blheli: 2, // lets ESC2 (tail) be exercised in virtual mode
     motor_pwm_protocol: 0,
     motor_pwm_rate: 250,
     motor_poles: [8, 8, 8, 8],

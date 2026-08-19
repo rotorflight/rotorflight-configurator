@@ -177,7 +177,8 @@ export const MSPCodes = {
     MSP_SET_SERVO_CONFIGURATION:    212,
     MSP_SET_MOTOR:                  214,
     MSP_SET_ESC_SENSOR_CONFIG:      216,
-    MSP_SET_MOTOR_3D_CONFIG:        217,
+    MSP_ESC_PARAMETERS:             217,
+    MSP_SET_ESC_PARAMETERS:         218,
     MSP_SET_RESET_CURR_PID:         219,
     MSP_SET_SENSOR_ALIGNMENT:       220,
     MSP_SET_LED_STRIP_MODECOLOR:    221,
@@ -196,6 +197,7 @@ export const MSPCodes = {
     MSP_ACC_TRIM:                   240,
     MSP_SERVO_MIX_RULES:            241,
     MSP_SET_SERVO_MIX_RULE:         242, // Not used
+    MSP_SET_4WIF_ESC_FWD_PROG:      244,
     MSP_SET_4WAY_IF:                245, // Not used
     MSP_SET_RTC:                    246,
     MSP_RTC:                        247, // Not used
