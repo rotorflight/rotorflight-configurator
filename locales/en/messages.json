@@ -531,6 +531,9 @@
     "remapFcCardPlaceholder": {
         "message": "Click on a pin to see the remapping options"
     },
+    "remapFcNoAlternativeFeatures": {
+        "message": "No alternative resource features can be allocated to this port"
+    },
     "remapFcDefaultOption": {
         "message": "Default"
     },
@@ -608,6 +611,15 @@
     },
     "remapFcAllocationInvalidWarning": {
         "message": "The current pin assignment can't work: {{reasons}}. Reallocating timers/DMA on the current pins alone can't resolve it either -- pick a suggestion below to fix the pin assignment itself."
+    },
+    "remapFcServoRateHeading": {
+        "message": "Servo frequency groups"
+    },
+    "remapFcServoRateDescription": {
+        "message": "Servos sharing a timer must always be changed together, to the same rate."
+    },
+    "remapFcServoRateDefaultEntry": {
+        "message": "{{rate}}Hz (default)"
     },
     "remapFcAcceptSuggestion": {
         "message": "Accept Suggestion"

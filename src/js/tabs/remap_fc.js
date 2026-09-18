@@ -16,6 +16,7 @@ import { i18n } from "@/js/localization.js";
 import { parseHardwareDump, parseMcuType } from "@/js/remap_fc/hardware_parser.js";
 import { isGenericBoardDesign } from "@/js/remap_fc/remap_table.js";
 import { fetchRotorflightTargetDefaults } from "@/js/remap_fc/rotorflight_target_source.js";
+import { parseServoRates } from "@/js/remap_fc/servo_config_parser.js";
 import {
   parseReservedDmaStreams,
   parseReservedTimers,
@@ -103,6 +104,16 @@ class RemapFcTab {
   // parseReservedTimers. Same treatment as #reservedDmaStreams.
   /** @type {Set<string>} */
   #reservedTimers = new Set();
+
+  // Each configured servo's own update rate (Hz), parsed from `servo`
+  // -- see servo_config_parser.js's parseServoRates. Handed to the
+  // Svelte component's servo-frequency review card, which warns when
+  // two servos sharing a timer are configured for different rates.
+  // Read alongside dma show/timer show since, like those, it reflects
+  // the FC's live config rather than anything `defaults nosave` below
+  // would change.
+  /** @type {Object.<string, number>} */
+  #servoRates = {};
 
   // Set to true once cleanup() starts, so an in-flight runSequence()
   // knows to stop sending further commands rather than racing with
@@ -329,6 +340,7 @@ class RemapFcTab {
     this.#mcuType = null;
     this.#reservedDmaStreams = new Set();
     this.#reservedTimers = new Set();
+    this.#servoRates = {};
     this.#restoreHadCliErrors = false;
 
     try {
@@ -377,6 +389,15 @@ class RemapFcTab {
       const timerShowOutput = await this.#runCommandAndCapture("timer show");
       console.log("remap_fc: timer show output", timerShowOutput);
       this.#reservedTimers = parseReservedTimers(timerShowOutput);
+      if (this.#tornDown) return;
+
+      // `servo` reports each configured servo's own update rate, among
+      // other settings -- captured here alongside dma show/timer show,
+      // before `defaults nosave` wipes it, since it's this tool's own
+      // live config, not something the reset-then-restore sequence
+      // below needs to round-trip itself.
+      const servoOutput = await this.#runCommandAndCapture("servo");
+      this.#servoRates = parseServoRates(servoOutput);
       if (this.#tornDown) return;
 
       await this.#runCommandAndCapture("defaults nosave");
@@ -472,6 +493,7 @@ class RemapFcTab {
         this.#mcuType,
         this.#reservedDmaStreams,
         this.#reservedTimers,
+        this.#servoRates,
       );
     } catch (err) {
       console.error("remap_fc: CLI sequence failed", err);

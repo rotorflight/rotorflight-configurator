@@ -16,6 +16,7 @@
   import { FC } from "@/js/fc.svelte.js";
   import { getTabHelpURL } from "@/js/help";
   import { i18n } from "@/js/i18n.js";
+  import { classifyFeature } from "@/js/remap_fc/feature_classifier.js";
   import {
     MANUFACTURER_BOARD_COLORS,
     MANUFACTURER_BOARD_NAMES,
@@ -44,7 +45,10 @@
     isGenericBoardDesign,
     isUartOrI2cResource,
   } from "@/js/remap_fc/remap_table.js";
-  import { isMcuSupported } from "@/js/remap_fc/timer_dma_lookup.js";
+  import {
+    getPinTimerOptions,
+    isMcuSupported,
+  } from "@/js/remap_fc/timer_dma_lookup.js";
   import { reconcileTimersAndDma } from "@/js/remap_fc/timer_dma_reconciler.js";
   import mcuAllData from "@/tabs/remap_fc/MCU-all.json";
   import manufacturerDesignsLocal from "@/tabs/remap_fc/manufacturer_designs.json";
@@ -120,6 +124,11 @@
   // Same idea for timer+channel claims (the gyro's clock/sync, ...).
   /** @type {Set<string>} */
   let reservedTimers = $state(new Set());
+  // Each configured servo's own update rate (Hz), from `servo` -- see
+  // servo_config_parser.js's parseServoRates. Drives the servo-
+  // frequency review card below the table.
+  /** @type {Object.<string, number>} */
+  let servoRates = $state({});
   // Option keys with a row in the table, seeded on read and grown via
   // "+ Add". Picking "None" removes the row again.
   /** @type {string[]} */
@@ -707,6 +716,18 @@
   /**
    * @param {import("@/js/remap_fc/remap_table.js").RemapRow} row
    */
+  // Whether row's own pin has any timer capability at all -- see
+  // getRowSelectableOptions' own pinHasTimer param for why a row on a
+  // pin with none (e.g. a receive-only UART pin like D02) must never
+  // offer a PWM-needing candidate (motor/servo/freq/LED): the
+  // `resource` command would send fine, but the feature would have
+  // nothing driving it, silently and with no warning anywhere else in
+  // this tool -- this is the one place that gets caught before it's
+  // ever picked.
+  function pinHasTimerCapability(pin) {
+    return getPinTimerOptions(mcuAllData, mcuType, pin).length > 0;
+  }
+
   function optionsForRow(row) {
     const claimedIfPicked = row.currentOption
       ? claimedOptions.filter((option) => option !== row.currentOption)
@@ -714,7 +735,11 @@
 
     return [
       NONE_VALUE,
-      ...getRowSelectableOptions(row.option, claimedIfPicked),
+      ...getRowSelectableOptions(
+        row.option,
+        claimedIfPicked,
+        pinHasTimerCapability(row.defaultPin),
+      ),
     ].filter((option) => option !== row.currentOption);
   }
 
@@ -800,6 +825,78 @@
     hasPendingChanges || timerDmaCommands.length > 0,
   );
 
+  // The rate a freshly assigned/moved servo will actually come up at
+  // once it's saved and the FC reboots -- servoRates is only ever
+  // populated once, from the initial `servo` read, so a servo with no
+  // resource assigned yet at that point has no entry of its own there
+  // at all (the CLI's own `servo` dump only reports indices that
+  // currently have one). Every other servo this board's `servo` dump
+  // did report shares the identical rate (see the screenshots this was
+  // confirmed against), so that's a real, board-specific value to fall
+  // back on -- not a guessed universal constant that could be wrong
+  // for some other firmware target -- for anything servoTimerGroups
+  // below still can't otherwise account for.
+  let assumedDefaultServoRate = $derived(
+    Object.values(servoRates).find((rate) => rate !== undefined) ?? null,
+  );
+
+  // Every servo currently resolved to a real timer (see
+  // reconciled.allocation), grouped by that timer's own base (e.g.
+  // "TIM3") -- a timer's whole period/frequency is one property of the
+  // timer itself, shared across every channel on it, so every servo in
+  // a group is expected to share one single rate (see the servo-rate
+  // card's own description) rather than being tracked/compared
+  // per-servo here; that expectation is enforced elsewhere, not
+  // something this card needs to verify. Purely informational: never
+  // treated as a clash reconcileTimersAndDma itself reports, and never
+  // blocks Load Changes.
+  let servoTimerGroups = $derived.by(() => {
+    // A plain object/array throughout, deliberately -- this is a
+    // throwaway grouping built fresh on every recompute, never mutated
+    // afterward, so there's no reactive state here for SvelteMap to
+    // actually help track.
+    const byBase = {};
+    for (const result of reconciled.allocation) {
+      if (classifyFeature(result.feature) !== "servo" || !result.chosen)
+        continue;
+      (byBase[result.chosen.base] ??= []).push(result.feature);
+    }
+
+    return Object.entries(byBase)
+      .map(([base, features]) => {
+        const sorted = [...features].sort();
+        // A freshly reassigned/moved servo has no rate of its own yet
+        // -- but if it now shares a timer with a servo that *does*
+        // have a known rate, that's the rate it'll actually end up at
+        // too (every servo on a timer shares one rate), so that's used
+        // first rather than assumedDefaultServoRate purely because
+        // this particular group member happens to sort first. Only
+        // once nothing in the group has its own known rate does this
+        // fall back to the board's own apparent default -- flagged via
+        // isDefault so the template can label it, rather than
+        // presenting it as an equally-confirmed reported value.
+        const knownRate = sorted
+          .map((feature) => servoRates[feature])
+          .find((r) => r !== undefined);
+        const rate = knownRate ?? assumedDefaultServoRate;
+        return {
+          base,
+          features: sorted,
+          rate,
+          isDefault: knownRate === undefined,
+        };
+      })
+      .sort(
+        // By each group's own lowest servo number (e.g. a group
+        // containing S4 sorts after one containing S1) rather than by
+        // timer base name, which is allocator-driven and meaningless
+        // to read by -- this way the groups list in the same S1->S8
+        // order the rest of the table already uses.
+        (a, b) =>
+          Number(a.features[0].slice(1)) - Number(b.features[0].slice(1)),
+      );
+  });
+
   // Every managed motor output is assumed to run plain DMA-driven
   // DSHOT (see feature_classifier.js's featureNeedsDma), so these are
   // forced alongside every staged change.
@@ -846,6 +943,7 @@
    * @param {?string} mcu
    * @param {Set<string>} [reservedDma] - See remap_fc.js's #reservedDmaStreams.
    * @param {Set<string>} [reservedTmr] - See remap_fc.js's #reservedTimers.
+   * @param {Object.<string, number>} [servoRts] - See remap_fc.js's #servoRates.
    */
   export function setHardware(
     current,
@@ -853,6 +951,7 @@
     mcu,
     reservedDma = new Set(),
     reservedTmr = new Set(),
+    servoRts = {},
   ) {
     // A manufacturer design's own named connector can be physically
     // wired to a pin this board's compiled defaults leave completely
@@ -900,6 +999,7 @@
     originalCurrent = { ...current };
     defaultHardware = augmentedDefaultHw;
     mcuType = mcu;
+    servoRates = servoRts;
     reservedDmaStreams = reservedDma;
     reservedTimers = reservedTmr;
     hasRead = true;
@@ -969,6 +1069,7 @@
     defaultHardware = {};
     reservedDmaStreams = new Set();
     reservedTimers = new Set();
+    servoRates = {};
     visibleOptions = [];
     unsetOptions = [];
     selectedAddOption = "";
@@ -1482,7 +1583,18 @@
                   <p class="option-card-description">
                     {cardDescription(cardRow)}
                   </p>
-                  {#if isPinCard}
+                  {#if isPinCard && !pinHasTimerCapability(cardRow.defaultPin)}
+                    <!-- A pin with zero timer options can never drive
+                         any PWM-needing feature (see
+                         pinHasTimerCapability/getRowSelectableOptions'
+                         own pinHasTimer param) -- its only ever
+                         possible Current Option is its own original
+                         resource, so there's nothing an interactive
+                         dropdown would actually let the user change. -->
+                    <p class="option-card-description">
+                      {$i18n.t("remapFcNoAlternativeFeatures")}
+                    </p>
+                  {:else if isPinCard}
                     <!-- Force a remount whenever the displayed value
                          changes (e.g. because a different row's edit
                          cleared this row's occupant, or this row just
@@ -1528,6 +1640,50 @@
                 <div class="option-card option-card-placeholder">
                   <p class="option-card-description">
                     {$i18n.t("remapFcCardPlaceholder")}
+                  </p>
+                </div>
+              {/if}
+
+              <!-- Config review: every resolved servo's own update
+                   rate, grouped by shared timer (see
+                   servoTimerGroups), one group per line -- led with
+                   the rate itself (what the user actually set) rather
+                   than the underlying timer base (meaningless outside
+                   this tool), followed by which servos it covers. Each
+                   group line is the one thing here actually worth a
+                   glance, so it's set apart (brighter, see
+                   .servo-rate-group-line) from the label above and the
+                   hint below, which stay quiet. Every servo in a group
+                   is expected to share one rate (see the hint), so
+                   this is purely an indication of what's currently
+                   configured, not another interactive card, and still
+                   styled well below the pad detail card above it
+                   overall. Never blocks Load Changes. -->
+              {#if servoTimerGroups.length}
+                <div class="servo-rate-footnote">
+                  <p class="servo-rate-footnote-label">
+                    {$i18n.t("remapFcServoRateHeading")}:
+                  </p>
+                  <div class="servo-rate-groups">
+                    {#each servoTimerGroups as group (group.base)}
+                      <p class="servo-rate-group-line">
+                        {#if group.rate == null}
+                          {$i18n.t("remapFcNoneOption")}
+                        {:else if group.isDefault}
+                          {$i18n.t("remapFcServoRateDefaultEntry", {
+                            rate: group.rate,
+                          })}
+                        {:else}
+                          {`${group.rate}Hz`}
+                        {/if}
+                        → {group.features
+                          .map((feature) => optionLabel(feature))
+                          .join(", ")}
+                      </p>
+                    {/each}
+                  </div>
+                  <p class="servo-rate-footnote-hint">
+                    {$i18n.t("remapFcServoRateDescription")}
                   </p>
                 </div>
               {/if}
@@ -1814,6 +1970,51 @@
     @extend %button;
   }
 
+  /* Deliberately quiet overall -- an indication, not another
+     interactive card: no box, border, or shadow, at the same 260px
+     width/left margin as .option-card so it still lines up under the
+     pad detail card above it. The gap separates the label, the
+     groups block as a whole, and the hint -- see .servo-rate-groups
+     for the tighter spacing between individual group lines within
+     that block. */
+  .servo-rate-footnote {
+    width: 260px;
+    margin: 0 0 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    line-height: 1.4;
+  }
+
+  /* Tighter than .servo-rate-footnote's own gap -- these lines read
+     as one related group of results, so they sit closer to each
+     other than to the label above/hint below the whole block. */
+  .servo-rate-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .servo-rate-footnote-label,
+  .servo-rate-footnote-hint {
+    margin: 0;
+    font-size: 0.72rem;
+    color: var(--color-text);
+    opacity: 0.6;
+  }
+
+  /* The one thing here actually worth a glance -- brighter (bold,
+     fuller opacity) than the label/hint around it, at the same size
+     as them, so the timer groupings stand out as the important
+     information without overpowering the quiet caption feel. */
+  .servo-rate-group-line {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-text);
+    opacity: 0.95;
+  }
+
   .allocation-table {
     width: 100%;
     border-collapse: collapse;
@@ -2007,15 +2208,22 @@
     flex-direction: column;
   }
 
-  /* ~60% of .features-col's own width -- FC Label content (a pin icon
-     plus a short name/abbreviation, see fcLabel) needs much less room
-     than the Feature column's longer feature names do. */
-  .pins-col {
-    width: 84px;
-  }
-
+  /* Same width as .features-col -- the wire gutter between them (see
+     WIRE_GUTTER_WIDTH in the script block) stays fixed regardless, so
+     widening this doesn't touch that. */
+  .pins-col,
   .features-col {
     min-width: 140px;
+  }
+
+  /* Stacks the pad detail card and the quiet servo-rate footnote (see
+     servoTimerGroups) below it -- a tighter gap than between two full
+     cards, so the footnote reads as attached to/about the card above
+     it rather than a peer of its own. */
+  .card-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   /* Both are buttons, on the same underlying pad, but open the card in
@@ -2078,11 +2286,12 @@
     flex-shrink: 0;
   }
 
-  /* Ellipsis rather than overflowing/wrapping -- .pins-col is only
-     84px wide (see above), so a longer name than this board's own
-     ("TAIL", "SBUS") could otherwise spill past the row. min-width: 0
-     lets a flex child actually shrink below its content's natural
-     width, which a plain overflow/text-overflow pair alone won't do. */
+  /* Ellipsis rather than overflowing/wrapping -- still a safety net
+     even at .pins-col's now-wider, .features-col-matching width (see
+     above), for a longer name than this board's own ("TAIL", "SBUS")
+     that would otherwise spill past the row. min-width: 0 lets a flex
+     child actually shrink below its content's natural width, which a
+     plain overflow/text-overflow pair alone won't do. */
   .pin-row-text {
     min-width: 0;
     overflow: hidden;

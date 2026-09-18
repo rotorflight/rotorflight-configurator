@@ -1,28 +1,40 @@
 /**
  * File: src/js/remap_fc/reference_design_labels.js
- * Builds a pin -> friendly label lookup from reference_designs.json,
- * for whichever entry matches the connected board, so the remap table
- * and "+ Add" can show the board's own silkscreen naming (e.g. "ESC",
- * "TAIL", "Port A Rx") alongside the CLI's own MOTOR/SERVO/SERIAL_RX
- * numbering. Also exports expandOptionName, a reference-design-
- * independent fallback that spells out an option key's own CLI
- * shorthand (e.g. "S1" -> "Servo 1") for boards with no matching
- * reference design at all.
+ * Builds a pin -> friendly label lookup from reference_designs.json
+ * and manufacturer_designs.json, for whichever entry (or entries)
+ * match the connected board, so the remap table and "+ Add" can show
+ * the board's own silkscreen naming (e.g. "ESC", "TAIL", "Port A Rx")
+ * alongside the CLI's own MOTOR/SERVO/SERIAL_RX numbering. Also exports
+ * expandOptionName, a reference-design-independent fallback that
+ * spells out an option key's own CLI shorthand (e.g. "S1" -> "Servo 1")
+ * for anything neither file covers at all -- the final, generic level
+ * of this three-level chain, used by RemapFc.svelte's displayName once
+ * this file's own lookup below has nothing for a given pin.
  *
- * A reference_designs.json entry is looked up one of two ways (see
- * findUsages): primarily by design *family* -- the first three
- * characters of FC.CONFIG.boardDesign (e.g. "F7A1" -> "F7A") -- for an
- * official Rotorflight reference design, which several individual
- * board models can share. Failing that, by the board's own reported
- * name (FC.CONFIG.boardName) instead, case-insensitively and as a
- * *prefix* match rather than requiring an exact one, for a board with
- * no reference design at all -- a manufacturer that laid out its own
- * pin assignments from scratch and is only documented here under its
- * own board name, not a shared family. The prefix match matters
- * because a manufacturer's own boardName routinely carries extra
- * trailing detail no product-line key should have to enumerate --
- * e.g. "FLYDRAGON_PRO42688" (the trailing digits are a specific
+ * The two files are looked up differently (see findUsages) and then
+ * merged, manufacturer data taking priority: manufacturer_designs.json
+ * is matched by the board's own reported name (FC.CONFIG.boardName),
+ * case-insensitively and as a *prefix* rather than requiring an exact
+ * match -- a manufacturer's own boardName routinely carries extra
+ * trailing detail no product-line key should have to enumerate, e.g.
+ * "FLYDRAGON_PRO42688" (the trailing digits are a specific
  * MCU/revision code) still matches a "FLYDRAGON_PRO" entry.
+ * reference_designs.json is matched by design *family* instead -- the
+ * first three characters of FC.CONFIG.boardDesign (e.g. "F7A1" ->
+ * "F7A") -- since an official Rotorflight reference design is shared
+ * by several board models, not one specific boardName.
+ *
+ * Merging rather than picking one exclusively matters for a board like
+ * VANTAC_RF007 or the NEXUS_X/XR/F7 family: these are real official
+ * F7A/F7B/F7C reference-design boards, so reference_designs.json
+ * already has their *complete* pin picture (including reserved
+ * gyro/baro/flash pins manufacturer_designs.json was never meant to
+ * repeat) -- their own manufacturer_designs.json entry exists purely
+ * to give buildDesignOrder their real physical silkscreen order, and
+ * deliberately only lists their named connectors. If manufacturer data
+ * won outright instead of merging, those boards would silently lose
+ * reserved-pin protection on every pin their (intentionally partial)
+ * manufacturer entry doesn't mention.
  */
 
 // Design family: a board design's first three characters, e.g. "F7A1"
@@ -60,21 +72,38 @@ function findUsagesByFamily(referenceDesigns, boardDesign) {
 export function findUsagesByName(referenceDesigns, boardName) {
   if (!referenceDesigns || !boardName) return null;
   const lowerName = boardName.toLowerCase();
-  const nameKey = Object.keys(referenceDesigns).find((key) =>
-    lowerName.startsWith(key.toLowerCase()),
-  );
+
+  // More than one key can legitimately prefix-match the same
+  // boardName -- "NEXUS_X" and "NEXUS_XR" are both real, separately
+  // documented entries, and "nexus_xr" starts with both. Taking
+  // whichever matched first in object iteration order (as this used
+  // to) would resolve NEXUS_XR to NEXUS_X's entry purely by luck of
+  // key insertion order, silently losing everything NEXUS_XR's own
+  // entry documents that NEXUS_X's doesn't. The longest matching key
+  // is always the more specific one, so it wins.
+  const nameKey = Object.keys(referenceDesigns)
+    .filter((key) => lowerName.startsWith(key.toLowerCase()))
+    .sort((a, b) => b.length - a.length)[0];
   return nameKey ? referenceDesigns[nameKey] : null;
 }
 
-// Resolves which reference_designs.json top-level key actually applies
-// to the connected board -- see this file's own header comment for
-// the two ways that can happen -- and returns its usages object, or
-// null if neither matched.
+// Resolves the connected board's full usages picture -- see this
+// file's own header comment for how the two sources are matched and
+// why they're merged rather than one exclusively replacing the other.
+// Manufacturer data is spread last, so a usage name it also documents
+// overrides the reference design's own entry for that name outright
+// (a genuine pin/wiring difference, not just a display-order
+// preference -- that's buildDesignOrder's own, separate concern); a
+// usage name only the manufacturer documents (e.g. VANTAC_RF007's own
+// board-specific naming) is simply added; and a usage name only the
+// reference design documents (every reserved gyro/baro/flash pin a
+// manufacturer entry never repeats) is left untouched. null only when
+// neither source matched at all.
 function findUsages(referenceDesigns, boardDesign, boardName) {
-  return (
-    findUsagesByFamily(referenceDesigns, boardDesign) ??
-    findUsagesByName(referenceDesigns, boardName)
-  );
+  const familyUsages = findUsagesByFamily(referenceDesigns, boardDesign);
+  const nameUsages = findUsagesByName(referenceDesigns, boardName);
+  if (!familyUsages && !nameUsages) return null;
+  return { ...familyUsages, ...nameUsages };
 }
 
 // Converts a reference design's own pin spelling ("PA9", "PC12") to
@@ -102,8 +131,8 @@ function directionSuffix(usageEntry) {
  * @param {Object} referenceDesigns - The parsed contents of reference_designs.json.
  * @param {?string} boardDesign - e.g. "F7C5", from FC.CONFIG.boardDesign.
  * @param {?string} boardName - e.g. "FLYDRAGON_PRO42688", from FC.CONFIG.boardName
- *   -- the fallback lookup used when boardDesign matches no family (see
- *   findUsages).
+ *   -- merged with, and taking priority over, whatever boardDesign's
+ *   own family match finds (see findUsages).
  * @returns {Object.<string, string>} pin (e.g. "A09") -> friendly label (e.g. "ESC", "Port A Rx").
  */
 export function buildReferenceLabels(referenceDesigns, boardDesign, boardName) {
@@ -161,8 +190,8 @@ const RESERVED_USAGE_NAMES = new Set([
  * @param {Object} referenceDesigns - The parsed contents of reference_designs.json.
  * @param {?string} boardDesign - e.g. "F7C5", from FC.CONFIG.boardDesign.
  * @param {?string} boardName - e.g. "FLYDRAGON_PRO42688", from FC.CONFIG.boardName
- *   -- the fallback lookup used when boardDesign matches no family (see
- *   findUsages).
+ *   -- merged with, and taking priority over, whatever boardDesign's
+ *   own family match finds (see findUsages).
  * @returns {Set<string>} pins (e.g. "C09") reserved for fixed onboard
  *   sensor/support wiring per the board's reference design -- these
  *   should never be offered for reassignment.
@@ -193,12 +222,26 @@ function isGenericPortUsage(usageName) {
   return usageName.startsWith("Port ");
 }
 
+// A usage entry can opt itself out of automatic-row status with
+// `"default": false` (see manufacturer_designs.json's own _file
+// comment) -- a pin worth labelling correctly once the user goes
+// looking for it via "+ Add" (see buildReferenceLabels, unaffected by
+// this), but not one that should clutter the table unasked, the way
+// FlyDragon Pro's onboard/internal receiver UART (Int Rec.Tx/Rx) does.
+// Checked against every entry, not just the first, so a genuinely
+// multi-pin usage only opts out if *none* of its pins want the
+// automatic row.
+function isOptedOutOfDefault(entries) {
+  return entries.every((entry) => entry.default === false);
+}
+
 function namedConnectorPinsFromUsages(usages) {
   if (!usages) return new Set();
 
   const pins = new Set();
   for (const [usageName, entries] of Object.entries(usages)) {
     if (isGenericPortUsage(usageName) || RESERVED_USAGE_NAMES.has(usageName)) continue;
+    if (isOptedOutOfDefault(entries)) continue;
     for (const entry of entries) {
       pins.add(normalizePin(entry.pin));
     }
@@ -210,14 +253,18 @@ function namedConnectorPinsFromUsages(usages) {
  * @param {Object} referenceDesigns - The parsed contents of reference_designs.json.
  * @param {?string} boardDesign - e.g. "F7C5", from FC.CONFIG.boardDesign.
  * @param {?string} boardName - e.g. "FLYDRAGON_PRO42688", from FC.CONFIG.boardName
- *   -- the fallback lookup used when boardDesign matches no family (see
- *   findUsages).
+ *   -- merged with, and taking priority over, whatever boardDesign's
+ *   own family match finds (see findUsages).
  * @returns {Set<string>} pins (e.g. "A03") for named, purpose-built
  *   connectors this reference design documents (AUX, SBUS, TLM, RPM,
  *   ...) -- these should always get their own row once the board's
  *   design is known, whether or not anything is currently wired to
- *   them, unlike a generic "Port X" connector or reserved sensor/
- *   support wiring (see buildReservedPins).
+ *   them, unlike a generic "Port X" connector, reserved sensor/support
+ *   wiring (see buildReservedPins), or a usage explicitly opted out of
+ *   this via `"default": false` (see isOptedOutOfDefault) -- one of
+ *   those is still labelled correctly via buildReferenceLabels, just
+ *   not auto-shown, reachable only through "+ Add" like a plain
+ *   UART/I2C pin.
  */
 export function buildNamedConnectorPins(referenceDesigns, boardDesign, boardName) {
   return namedConnectorPinsFromUsages(

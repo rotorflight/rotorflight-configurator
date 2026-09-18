@@ -122,14 +122,17 @@ export function buildFeatureRows(workingCurrent, mcuType, mcuAllData) {
 
 /**
  * Checks the working set's current timer/DMA state for anything that
- * needs a reallocation pass: a feature with no timer chosen yet (every
- * newly assigned/moved one), two features sharing a full timer+channel
- * or a base across feature types, a feature already sitting on a
- * timer+channel or base something outside this tool's control (the
- * gyro's clock/sync signal, ...) has permanently claimed, two features
- * sharing a DMA stream, or a feature already sitting on a stream
- * something outside this tool's control (SPI, ADC, ...) has
- * permanently claimed.
+ * needs a reallocation pass: a feature with no timer chosen yet --
+ * every newly assigned/moved one, but also one whose pin genuinely has
+ * zero timer options at all (e.g. a receive-only UART pin), which is
+ * just as broken and needs the same reallocation-then-still-unresolved
+ * treatment (see buildTimerDmaCommands) rather than being silently
+ * accepted -- two features sharing a full timer+channel or a base
+ * across feature types, a feature already sitting on a timer+channel or
+ * base something outside this tool's control (the gyro's clock/sync
+ * signal, ...) has permanently claimed, two features sharing a DMA
+ * stream, or a feature already sitting on a stream something outside
+ * this tool's control (SPI, ADC, ...) has permanently claimed.
  * @param {FeatureTimerRow[]} featureRows
  * @param {Set<string>} [reservedStreams] - See
  *   timer_dma_lookup.js's parseReservedDmaStreams.
@@ -145,7 +148,7 @@ export function detectClashes(
   const reasons = [];
 
   for (const row of featureRows) {
-    if (row.options.length > 0 && !row.currentOption) {
+    if (!row.currentOption) {
       reasons.push(`${row.feature} (${row.pin}) has no timer chosen yet`);
     }
   }
@@ -392,16 +395,21 @@ export function buildTimerDmaCommands(
     const current = currentByFeature.get(result.feature);
 
     // Either this feature is one of the ones stillConflictingFeatures
-    // found still colliding despite the allocator's best effort, or
-    // (rare, effectively a defensive fallback now that
-    // pickBestOption/allocateDma always force a choice through when
-    // any option exists at all) it genuinely has no timer options to
-    // choose from in the first place -- not a real failure, just a
-    // pin with no timer capability, so nothing to warn about there.
-    if (
-      conflicting.has(result.feature) ||
-      (!result.chosen && (current?.options?.length ?? 0) > 0)
-    ) {
+    // found still colliding despite the allocator's best effort, or it
+    // has no timer chosen at all -- whether because every option
+    // collided with something (rare, since pickBestOption/allocateDma
+    // force a choice through whenever any option exists) or, more
+    // commonly, because its pin genuinely has zero timer options at all
+    // (e.g. a receive-only UART pin). Both leave this feature exactly
+    // as broken: a motor/servo/freq/LED with nothing actually driving
+    // it doesn't work regardless of *why* it has no timer, so both are
+    // reported the same way -- previously the zero-options case was
+    // silently treated as "nothing to warn about", which let a bad
+    // dropdown pick or a pin-conflict suggestion (see
+    // pin_conflict_suggestions.js's resolves, which reads this same
+    // unresolved list) accept a resource command that could never
+    // actually work.
+    if (conflicting.has(result.feature) || !result.chosen) {
       unresolved.push(result.feature);
       continue;
     }

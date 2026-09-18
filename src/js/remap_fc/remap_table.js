@@ -347,9 +347,20 @@ export function getAddableOptions(defaultHardware, visibleOptions) {
  * @param {string} rowOption - the row's own resource key (its labelled
  *   pad's default), e.g. "S4" or "RX2".
  * @param {string[]} claimedOptions - option keys currently claimed as some row's Current Option.
+ * @param {boolean} [pinHasTimer] - Whether the row's own pin has *any*
+ *   timer option at all (see timer_dma_lookup.js's getPinTimerOptions)
+ *   -- every TABLE_OPTION_KEYS candidate (motor/servo/freq/LED) needs
+ *   some timer to function at all, so offering one for a pin with none
+ *   would let the user pick a value that can never actually work: the
+ *   `resource` command sends fine, but the feature has nothing driving
+ *   it, a problem no timer/DMA reallocation could ever fix (the pin
+ *   itself is the problem). Doesn't affect a UART/I2C row's own
+ *   restore-original-resource bypass below, which never needs a timer
+ *   regardless. Defaults to true so an existing caller that doesn't
+ *   pass it keeps today's behaviour.
  * @returns {string[]}
  */
-export function getRowSelectableOptions(rowOption, claimedOptions) {
+export function getRowSelectableOptions(rowOption, claimedOptions, pinHasTimer = true) {
   const pool = isUartOrI2cResource(rowOption)
     ? [...TABLE_OPTION_KEYS, rowOption]
     : TABLE_OPTION_KEYS;
@@ -362,6 +373,8 @@ export function getRowSelectableOptions(rowOption, claimedOptions) {
     // M/S/Freq, so this bypass only matters for the restore-your-own-
     // UART case.
     if (option === rowOption && isUartOrI2cResource(rowOption)) return true;
+
+    if (!pinHasTimer) return false;
 
     return (
       !isOverCapacity(option) &&
