@@ -25,6 +25,7 @@
   import { findPinConflictSuggestions } from "@/js/remap_fc/pin_conflict_suggestions.js";
   import {
     buildDesignOrder,
+    buildHiddenPins,
     buildManufacturerNamedConnectorPins,
     buildNamedConnectorPins,
     buildReferenceLabels,
@@ -44,6 +45,7 @@
     getRowSelectableOptions,
     isGenericBoardDesign,
     isUartOrI2cResource,
+    orderFeatureKeys,
   } from "@/js/remap_fc/remap_table.js";
   import {
     getPinTimerOptions,
@@ -235,19 +237,21 @@
   );
 
   // The Feature column: every TABLE_OPTION_KEYS feature currently
-  // allocated to some pin, in a fixed canonical order (motors, servos,
-  // frequency inputs, LED -- TABLE_OPTION_KEYS is already in that
-  // order), regardless of which physical pad it landed on. A feature
-  // with nowhere to point (not in workingCurrent at all) is left out
-  // entirely, not just dimmed -- there's no pin for a wire to reach.
+  // allocated to some pin, in this board's own physical row order (see
+  // orderFeatureKeys) rather than TABLE_OPTION_KEYS' fixed
+  // motors-then-servos-then-freq-then-LED order, so a board whose real
+  // silkscreen interleaves them (e.g. the NEXUS_X's
+  // S1/S2/S3/TAIL/ESC/RPM) shows its Feature rows the same way instead
+  // of pulling every motor to the top. A feature with nowhere to point
+  // (not in workingCurrent at all) is left out entirely, not just
+  // dimmed -- there's no pin for a wire to reach.
   //
   // A pad still holding its own original UART/I2C identity (see the
   // UART/I2C rule -- it can never hold anything else's) gets no Feature
   // entry or wire at all: it isn't "pointing" anywhere interesting. Its
-  // FC Label row looks the same as any other configured row -- being at
-  // default isn't a problem worth flagging, unlike genuinely empty
-  // (.subdued) -- and its own card explains what "default" means for it
-  // (see cardDescription).
+  // FC Label row looks the same as any other configured row -- and its
+  // own card explains what "default" means for it (see
+  // cardDescription).
   //
   // Filters out a feature with no matching pinRow: that happens when
   // the live config already has this feature CLI-remapped (outside
@@ -258,7 +262,10 @@
   // consumer below (the {#each} key, the wire link lookup, the
   // onclick) dereferences pinRow.option unconditionally.
   let featureRows = $derived(
-    TABLE_OPTION_KEYS.filter((key) => key in workingCurrent)
+    orderFeatureKeys(
+      designOrder,
+      TABLE_OPTION_KEYS.filter((key) => key in workingCurrent),
+    )
       .map((key) => ({
         key,
         pinRow: tableRows.find((row) => row.currentOption === key) ?? null,
@@ -465,6 +472,21 @@
     ),
   );
 
+  // Pins a manufacturer design explicitly marks `"hide": true` -- a
+  // genuine, otherwise-ordinary CLI resource electrically, but
+  // hard-wired straight to something onboard with no physical port to
+  // connect anything else to (e.g. Flydragon Pro's Int Rec.Tx/Rx).
+  // Excluded from "+ Add"/"Other Pins" the same as reservedPins, and
+  // (on the rare board where the pin is still shown as a permanent
+  // row) its own dropdown is locked too.
+  let hiddenPins = $derived(
+    buildHiddenPins(
+      referenceDesigns,
+      FC.CONFIG.boardDesign,
+      FC.CONFIG.boardName,
+    ),
+  );
+
   // Pins the reference design names as a specific connector (AUX,
   // SBUS, TLM, RPM, ...) rather than a generic port.
   let namedConnectorPins = $derived(
@@ -486,10 +508,9 @@
   // Whether option's row is a permanent fixture of the table: a fixed
   // FW feature (motor/servo/Freq/LED) or the reference design's own
   // named connector (TLM/SBUS/AUX, ...). Both always get a row and stay
-  // in the table when set to "None" (shown subdued -- see the
-  // template), unlike a dynamically-added row (a beyond-capacity
-  // M5+/S9+, or a generic UART/I2C port), which disappears back to
-  // "+ Add" once cleared.
+  // in the table when set to "None", unlike a dynamically-added row (a
+  // beyond-capacity M5+/S9+, or a generic UART/I2C port), which
+  // disappears back to "+ Add" once cleared.
   function isPermanentOption(option, defaultPin) {
     return (
       TABLE_OPTION_KEYS.includes(option) ||
@@ -550,9 +571,9 @@
   // the plain CLI-style name (expandOptionName: "Motor 1", "Servo 3",
   // "Frequency 1", "LED Strip"), never a board's own silkscreen name
   // for it -- that's what displayName/fcLabel are for, on the FC Label
-  // side. Keeping the Feature side board-independent is what lets it
-  // work as a fixed canonical list (see featureRows) instead of one
-  // whose order/labels shift per board. A UART/I2C resource can only
+  // side. Keeping the Feature side's own *labels* board-independent
+  // this way is unrelated to featureRows' own row *order*, which does
+  // vary per board (see orderFeatureKeys). A UART/I2C resource can only
   // ever be its own row's value (see the UART/I2C rule), so it's
   // always "this pad, unremapped" -- reads as plain "Default" rather
   // than the bus name (see busResourceName for that; it still appears,
@@ -606,6 +627,18 @@
       : fcLabel(row.option);
   }
 
+  // Whether a pad's own pin can never actually be reassigned to
+  // anything else at all, for whichever reason -- explicitly hidden as
+  // an internal/hard-wired connection with no physical port (see
+  // hiddenPins), or simply having zero timer capability (see
+  // pinHasTimerCapability, defined below). Used by cardDescription to
+  // skip the "can be freely repurposed" hint, which would otherwise
+  // flatly contradict either pin's own "nothing to pick from" message
+  // shown just below it in the template.
+  function hasNoAlternativeResource(pin) {
+    return hiddenPins.has(pin) || !pinHasTimerCapability(pin);
+  }
+
   // Description shown in a pad's Current Option card. A UART/I2C pad's
   // own row names its underlying bus resource ("UART RX 2") and a
   // connector-purpose hint, since "Default" alone (see optionLabel)
@@ -624,6 +657,19 @@
   // punctuation on screen. Same fix already used in filesystem.js.
   function cardDescription(row) {
     if (isUartOrI2cResource(row.option)) {
+      // No alternative resource for this pad at all (see
+      // hasNoAlternativeResource) skips the repurposing hint entirely
+      // -- "can be freely repurposed" would flatly contradict the
+      // separate "cannot be remapped"/"no alternative resource
+      // features" message the template shows right below for one of
+      // these, rather than complementing it the way the hint does for
+      // an ordinary pad.
+      if (hasNoAlternativeResource(row.defaultPin)) {
+        return $i18n.t("remapFcCardDescriptionUartNoAlternative", {
+          resource: busResourceName(row.option),
+        });
+      }
+
       const hintKey = CONNECTOR_HINT_KEYS[displayName(row.option)];
       return $i18n.t("remapFcCardDescriptionUart", {
         resource: busResourceName(row.option),
@@ -685,10 +731,12 @@
   ]);
 
   // Everything still addable via "+ Add" -- every default option not
-  // already shown a row, minus reservedPins.
+  // already shown a row, minus reservedPins and hiddenPins.
   let addablePool = $derived(
     getAddableOptions(defaultHardware, visibleOptions).filter(
-      (addable) => !reservedPins.has(addable.defaultPin),
+      (addable) =>
+        !reservedPins.has(addable.defaultPin) &&
+        !hiddenPins.has(addable.defaultPin),
     ),
   );
 
@@ -739,6 +787,7 @@
         row.option,
         claimedIfPicked,
         pinHasTimerCapability(row.defaultPin),
+        hiddenPins.has(row.defaultPin),
       ),
     ].filter((option) => option !== row.currentOption);
   }
@@ -936,8 +985,7 @@
    * occupied for anything TABLE_OPTION_KEYS or the reference design
    * doesn't cover; a TABLE_OPTION_KEYS identity or a reference design's
    * own named connector (TLM/SBUS/AUX, ...) always gets a row, empty or
-   * not (see isPermanentOption) -- an unoccupied one just shows "None",
-   * subdued (see the template).
+   * not (see isPermanentOption) -- an unoccupied one just shows "None".
    * @param {import("@/js/remap_fc/hardware_parser.js").HardwareMap} current
    * @param {import("@/js/remap_fc/hardware_parser.js").HardwareMap} defaultHw
    * @param {?string} mcu
@@ -1010,6 +1058,13 @@
     visibleOptions = OPTION_KEYS.filter((option) => {
       const defaultPin = defaultHardware[option]?.pin;
       if (defaultPin === undefined) return false;
+
+      // A pin a manufacturer design marks `"hide": true` never gets an
+      // automatic row, even a fixed FW feature slot like LED that would
+      // otherwise always show one below (see hiddenPins' own comment --
+      // e.g. a board whose LED header is documented but not actually
+      // wired to anything usable).
+      if (hiddenPins.has(defaultPin)) return false;
 
       // A fixed FW feature or a reference design's own named connector
       // always gets a row -- whether or not anything currently occupies
@@ -1155,7 +1210,7 @@
   // that pin, then assigns the pick. On "None", a dynamically-added row
   // (a beyond-capacity M5+/S9+, or a generic UART/I2C port) disappears
   // back to "+ Add"; a permanent row (see isPermanentOption) stays in
-  // the table showing "None", subdued.
+  // the table showing "None".
   /**
    * @param {import("@/js/remap_fc/remap_table.js").RemapRow} row
    * @param {Event} e
@@ -1455,12 +1510,9 @@
                 {$i18n.t("remapFcTableOption")}
               </div>
               {#each tableRows as row (row.option)}
-                {@const unset = unsetOptions.includes(row.option)}
-                {@const isNone = !unset && row.currentOption === null}
                 <button
                   type="button"
                   class="pin-row"
-                  class:subdued={isNone || unset}
                   class:active={openCardOption === row.option}
                   onclick={() => toggleCard(row.option, "pin")}
                   bind:clientHeight={measuredRowHeight}
@@ -1521,9 +1573,10 @@
               {/each}
             </svg>
 
-            <!-- Feature column: a button per feature, in fixed
-                 canonical order (see featureRows) -- a pin with
-                 nothing allocated has no entry here at all. Clicking
+            <!-- Feature column: a button per feature, in this board's
+                 own physical row order (see featureRows/
+                 orderFeatureKeys) -- a pin with nothing allocated has
+                 no entry here at all. Clicking
                  one opens a read-only card (see toggleCard's "feature"
                  mode) titled with the feature's own name and showing
                  its purpose hint, if it has one (see cardDescription). -->
@@ -1583,7 +1636,26 @@
                   <p class="option-card-description">
                     {cardDescription(cardRow)}
                   </p>
-                  {#if isPinCard && !pinHasTimerCapability(cardRow.defaultPin)}
+                  {#if isPinCard && hiddenPins.has(cardRow.defaultPin)}
+                    <!-- A manufacturer design can mark a pin
+                         "hide": true (see reference_design_labels.js's
+                         buildHiddenPins) -- a genuine,
+                         otherwise-ordinary CLI resource electrically,
+                         but hard-wired straight to something onboard
+                         (e.g. Flydragon Pro's Int Rec.Tx/Rx, wired
+                         directly to the onboard receiver) with no
+                         physical port to connect anything else to.
+                         Excluded from "+ Add" the same as reservedPins;
+                         this branch only matters on the rare board
+                         where the pin is still shown as a permanent
+                         row. Checked before the no-timer case below
+                         since it's a stronger, unconditional reason: it
+                         can still apply to a pin that *does* have a
+                         timer. -->
+                    <p class="option-card-description">
+                      {$i18n.t("remapFcPinNotRemappable")}
+                    </p>
+                  {:else if isPinCard && !pinHasTimerCapability(cardRow.defaultPin)}
                     <!-- A pin with zero timer options can never drive
                          any PWM-needing feature (see
                          pinHasTimerCapability/getRowSelectableOptions'
@@ -2181,8 +2253,9 @@
   }
 
   /* FC Label / wires / Feature / card layout. Two independently
-     ordered row lists (pins physical order, features canonical order)
-     connected by SVG wires -- see featureRows/wireLinks/wireY in the
+     ordered row lists (pins physical order, features in that same
+     board's physical order too -- see orderFeatureKeys) connected by
+     SVG wires -- see featureRows/wireLinks/wireY in the
      script block. wireHeaderHeight/wireRowHeight there are measured
      live off .column-header/the first .pin-row (bind:clientHeight in
      the template), so a wire's endpoint always matches the actual
@@ -2267,16 +2340,6 @@
        distance from the row's own left edge (icon + gap) is unchanged. */
     padding-left: 4px;
     gap: 16px;
-
-    /* A permanent row (a fixed FW feature or a reference design's own
-       named connector) that's currently "None", or a freshly-added row
-       waiting for its first pick, stays visible rather than
-       disappearing -- dimmed so it reads as unused, not as a problem.
-       Feature rows never need this: one only ever renders when its pad
-       is actually allocated (see featureRows). */
-    &.subdued {
-      opacity: 0.5;
-    }
   }
 
   .pin-icon {

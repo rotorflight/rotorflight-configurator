@@ -20,7 +20,9 @@
  *      critical owner of that base is within the group itself.
  *   4. S1-S3 and M1-M4 prefer to share one common base with a unique
  *      channel each, tried before falling back to allocating each
- *      member individually.
+ *      member individually -- on whichever subset of the group actually
+ *      has a row (at least two), not only when the full canonical group
+ *      is present.
  *   5. Frequency inputs (Freq1, Freq2, ...) prefer TIM2 or TIM5 when
  *      available.
  *   6. A feature that needs DMA (motors, the LED strip -- see
@@ -253,12 +255,25 @@ export function allocateTimers(features, reservedTimers = new Set()) {
     return backtrack(0) ? assignment : null;
   }
 
-  // Tries to put every member of a preference group (S1-S3, M1-M4) on
-  // one shared base with a unique channel each. Only bases every
+  // Tries to put every *present* member of a preference group (S1-S3,
+  // M1-M4) on one shared base with a unique channel each -- a board
+  // rarely has all four canonical motor slots occupied at once, so this
+  // works on whichever subset of the group actually has a row (at
+  // least two, since sharing a base is meaningless for just one), the
+  // same way it would for the full group. Only bases every present
   // member has an option on, and whose critical owners (if any) are
-  // entirely within the group, are considered -- if none work out,
-  // this is a no-op and every member is left for individual
-  // allocation afterwards.
+  // entirely within the group -- present or not, see canUseOption's own
+  // avoidCritical -- are considered -- if none work out, this is a
+  // no-op and every present member is left for individual allocation
+  // afterwards.
+  //
+  // Requiring only a subset matters in practice: without it, M1 and M2
+  // sharing TIM2 (M1's only possible base, so critical) would never
+  // even be attempted whenever M3/M4 don't exist on a board -- M2 would
+  // fall straight to individual allocation, where rule 3 excludes TIM2
+  // for it (M2 isn't TIM2's critical owner), even though grouping with
+  // M1 on distinct channels is exactly the valid arrangement this
+  // function exists to find.
   //
   // preferDma (rule 6, M1-M4 only -- servos never need DMA) makes this
   // try every candidate base twice: first restricted to each member's
@@ -271,7 +286,8 @@ export function allocateTimers(features, reservedTimers = new Set()) {
   // behaviour intact when no fully-DMA-capable base exists.
   function tryGroup(groupNames, label, preferDma = false) {
     const groupRows = rows.filter((r) => groupNames.includes(r.feature));
-    if (groupRows.length !== groupNames.length) return;
+    if (groupRows.length < 2) return;
+    const presentNames = groupRows.map((r) => r.feature);
 
     const optionsByBase = {};
     for (const row of groupRows) {
@@ -284,7 +300,7 @@ export function allocateTimers(features, reservedTimers = new Set()) {
     }
 
     const candidateBases = Object.keys(optionsByBase).filter((base) => {
-      if (!groupNames.every((name) => optionsByBase[base][name]?.length > 0)) {
+      if (!presentNames.every((name) => optionsByBase[base][name]?.length > 0)) {
         return false;
       }
       const owners = criticalOwnersByBase.get(base);
@@ -295,7 +311,7 @@ export function allocateTimers(features, reservedTimers = new Set()) {
       for (const base of candidateBases) {
         const perFeature = {};
         let baseUsable = true;
-        for (const name of groupNames) {
+        for (const name of presentNames) {
           const opts = optionsByBase[base][name];
           const nonNegative = opts.filter((o) => !o.negative);
           let pool = nonNegative.length > 0 ? nonNegative : opts;

@@ -534,6 +534,9 @@
     "remapFcNoAlternativeFeatures": {
         "message": "No alternative resource features can be allocated to this port"
     },
+    "remapFcPinNotRemappable": {
+        "message": "This pin is hard-wired and cannot be remapped."
+    },
     "remapFcDefaultOption": {
         "message": "Default"
     },
@@ -542,6 +545,9 @@
     },
     "remapFcCardDescriptionUart": {
         "message": "This pin defaults to {{resource}}.\n\n{{hint}}"
+    },
+    "remapFcCardDescriptionUartNoAlternative": {
+        "message": "This pin defaults to {{resource}}."
     },
     "remapFcHintTlm": {
         "message": "TLM is commonly used for ESC telemetry -- enable it by setting this port's Telemetry Output to \"ESC Telemetry\" in the Configuration tab."

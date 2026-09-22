@@ -303,6 +303,15 @@ function isEligibleToAdd(option, configuredOptions) {
  * of what that row currently holds, it's fully spoken for and excluded
  * via visibleOptions too, the same as TABLE_OPTION_KEYS options are
  * here.
+ * Sorted so a UART/I2C port's two halves sit next to each other --
+ * RX5 immediately followed by TX5, SDA2 immediately followed by SCL2
+ * -- rather than OPTION_KEYS' own raw order, which lists every RX (or
+ * SDA) pin on the whole board in one block and every TX (or SCL) pin
+ * in another, regardless of which port each actually belongs to.
+ * Motor/servo/freq/LED options are unaffected, keeping OPTION_KEYS'
+ * own relative order (and sorting before every UART/I2C option, same
+ * as today) -- they're not part of a two-pin port, so there's nothing
+ * to group them by.
  * @param {import("./hardware_parser.js").HardwareMap} defaultHardware
  * @param {string[]} visibleOptions - option keys that currently have a row.
  * @returns {AddableOption[]}
@@ -310,7 +319,135 @@ function isEligibleToAdd(option, configuredOptions) {
 export function getAddableOptions(defaultHardware, visibleOptions) {
   return OPTION_KEYS.filter(
     (option) => option in defaultHardware && !visibleOptions.includes(option),
-  ).map((option) => ({ option, defaultPin: defaultHardware[option].pin }));
+  )
+    .map((option) => ({ option, defaultPin: defaultHardware[option].pin }))
+    .sort((a, b) => compareBySortKey(portGroupedSortKey(a.option), portGroupedSortKey(b.option)));
+}
+
+// A UART/I2C option's own port number and direction rank (RX/SDA
+// before TX/SCL) -- see getAddableOptions' own comment for why. Every
+// other option key sorts by its own OPTION_KEYS position instead,
+// under a bus rank of -1 so it always sorts before any UART/I2C
+// option, matching OPTION_KEYS' own existing relative order.
+const UART_I2C_BUS_RANK = { RX: 0, TX: 0, SDA: 1, SCL: 1 };
+const UART_I2C_DIRECTION_RANK = { RX: 0, TX: 1, SDA: 0, SCL: 1 };
+const UART_I2C_OPTION_RE = /^(RX|TX|SDA|SCL)(\d+)$/;
+
+function portGroupedSortKey(option) {
+  const match = option.match(UART_I2C_OPTION_RE);
+  if (!match) return [-1, OPTION_KEYS.indexOf(option), 0];
+
+  const [, prefix, indexStr] = match;
+  return [UART_I2C_BUS_RANK[prefix], Number(indexStr), UART_I2C_DIRECTION_RANK[prefix]];
+}
+
+function compareBySortKey(keyA, keyB) {
+  for (let i = 0; i < keyA.length; i++) {
+    if (keyA[i] !== keyB[i]) return keyA[i] - keyB[i];
+  }
+  return 0;
+}
+
+// A motor/servo/frequency option's own group prefix and numeric index
+// -- used by orderFeatureKeys below to work out, per group, whether
+// this board's own physical layout numbers that group upward or
+// downward as you read down the column. LED has no numeric suffix and
+// never groups with anything, so it deliberately doesn't match.
+const FEATURE_GROUP_RE = /^(M|S|Freq)(\d+)$/;
+
+function featureGroupPrefix(key) {
+  return key.match(FEATURE_GROUP_RE)?.[1] ?? null;
+}
+
+function featureGroupIndex(key) {
+  const match = key.match(FEATURE_GROUP_RE);
+  return match ? Number(match[2]) : null;
+}
+
+/**
+ * Orders the Feature column's rows to match this board's own physical
+ * top-to-bottom layout (see reference_design_labels.js's
+ * buildDesignOrder), instead of TABLE_OPTION_KEYS' fixed
+ * motors-then-servos-then-freq-then-LED order -- a board like the
+ * NEXUS_X, whose real silkscreen reads S1/S2/S3/TAIL(S4)/ESC(M1)/
+ * RPM(Freq1) top to bottom, should show its Feature rows in that same
+ * interleaved order, not with every motor artificially pulled to the
+ * top.
+ *
+ * designOrder only ever documents a board's *default* named
+ * connectors, so a beyond-default member of a numbered group -- an S5
+ * added via "+ Add" onto a UART pin, say, on a board whose reference
+ * design only ever names S1-S4 -- has no position of its own to fall
+ * back on. For those, this infers the group's own counting direction
+ * from whichever members designOrder *does* place (does the number
+ * increase or decrease as you read down the column?) and inserts the
+ * newcomer immediately beyond the group's furthest known member in
+ * that same direction, so it reads as a natural continuation rather
+ * than always being appended dead last regardless of which way the
+ * board actually counts. A group with fewer than two known members --
+ * most boards' single default motor is the common case -- has nothing
+ * to infer a direction from, so it defaults to increasing (a lone M1
+ * assumed to sit at the edge of the column, with any M2/M3 that might
+ * later join it continuing downward from there); a group with no known
+ * members at all is simply appended in numeric order at the very end.
+ * @param {?string[]} designOrder - This board's own physical row order
+ *   (see RemapFc.svelte's designOrder), or null for a board matching no
+ *   manufacturer or reference design at all.
+ * @param {string[]} presentKeys - TABLE_OPTION_KEYS entries that
+ *   currently need a Feature row (see RemapFc.svelte's featureRows).
+ * @returns {string[]} presentKeys, reordered.
+ */
+export function orderFeatureKeys(designOrder, presentKeys) {
+  const presentSet = new Set(presentKeys);
+  if (!designOrder) {
+    return TABLE_OPTION_KEYS.filter((key) => presentSet.has(key));
+  }
+
+  const result = designOrder.filter((key) => presentSet.has(key));
+  const extras = TABLE_OPTION_KEYS.filter(
+    (key) => presentSet.has(key) && !result.includes(key),
+  );
+
+  const extrasByPrefix = new Map();
+  for (const key of extras) {
+    const prefix = featureGroupPrefix(key);
+    if (!prefix) continue;
+    if (!extrasByPrefix.has(prefix)) extrasByPrefix.set(prefix, []);
+    extrasByPrefix.get(prefix).push(key);
+  }
+
+  for (const [prefix, group] of extrasByPrefix) {
+    const known = result
+      .map((key, pos) => ({ key, pos, index: featureGroupIndex(key) }))
+      .filter((entry) => featureGroupPrefix(entry.key) === prefix);
+
+    if (known.length === 0) {
+      result.push(...group.sort((a, b) => featureGroupIndex(a) - featureGroupIndex(b)));
+      continue;
+    }
+
+    const increasing = known.length < 2 || known[known.length - 1].index >= known[0].index;
+    group.sort((a, b) =>
+      increasing
+        ? featureGroupIndex(a) - featureGroupIndex(b)
+        : featureGroupIndex(b) - featureGroupIndex(a),
+    );
+
+    const anchor = increasing ? known[known.length - 1] : known[0];
+    const insertAt = increasing ? anchor.pos + 1 : anchor.pos;
+    result.splice(insertAt, 0, ...group);
+  }
+
+  // Anything present but neither placed by designOrder nor grouped
+  // above (LED has no numeric suffix to group by, so a LED pin
+  // designOrder doesn't document falls through to here) -- appended in
+  // TABLE_OPTION_KEYS' own relative order, same as the no-designOrder
+  // fallback.
+  const placed = new Set(result);
+  const leftover = TABLE_OPTION_KEYS.filter((key) => presentSet.has(key) && !placed.has(key));
+  result.push(...leftover);
+
+  return result;
 }
 
 /**
@@ -358,9 +495,28 @@ export function getAddableOptions(defaultHardware, visibleOptions) {
  *   restore-original-resource bypass below, which never needs a timer
  *   regardless. Defaults to true so an existing caller that doesn't
  *   pass it keeps today's behaviour.
+ * @param {boolean} [locked] - Whether this row's own pin is
+ *   explicitly marked `"hide": true` in a manufacturer design (see
+ *   reference_design_labels.js's buildHiddenPins) -- a pin that's a
+ *   genuine, otherwise-ordinary CLI resource electrically,
+ *   but is hard-wired straight to something onboard with no physical
+ *   port to connect anything else to (e.g. Flydragon Pro's Int
+ *   Rec.Tx/Rx, wired directly to the onboard receiver). Locked takes
+ *   priority over everything else here: nothing is ever offered, not
+ *   even the row's own restore-original-resource bypass, since
+ *   there's nothing to "restore" a pin like this away from in the
+ *   first place. Defaults to false so an existing caller that doesn't
+ *   pass it keeps today's behaviour.
  * @returns {string[]}
  */
-export function getRowSelectableOptions(rowOption, claimedOptions, pinHasTimer = true) {
+export function getRowSelectableOptions(
+  rowOption,
+  claimedOptions,
+  pinHasTimer = true,
+  locked = false,
+) {
+  if (locked) return [];
+
   const pool = isUartOrI2cResource(rowOption)
     ? [...TABLE_OPTION_KEYS, rowOption]
     : TABLE_OPTION_KEYS;

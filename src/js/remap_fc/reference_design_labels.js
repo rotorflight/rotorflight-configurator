@@ -194,7 +194,10 @@ const RESERVED_USAGE_NAMES = new Set([
  *   own family match finds (see findUsages).
  * @returns {Set<string>} pins (e.g. "C09") reserved for fixed onboard
  *   sensor/support wiring per the board's reference design -- these
- *   should never be offered for reassignment.
+ *   should never be offered for reassignment, and never even show up
+ *   in "+ Add" -- there's nothing to discover by clicking one, since
+ *   it was never a real, addressable CLI resource in the first place.
+ *   See buildHiddenPins below for the manufacturer-flagged equivalent.
  */
 export function buildReservedPins(referenceDesigns, boardDesign, boardName) {
   const usages = findUsages(referenceDesigns, boardDesign, boardName);
@@ -205,6 +208,39 @@ export function buildReservedPins(referenceDesigns, boardDesign, boardName) {
     if (!RESERVED_USAGE_NAMES.has(usageName)) continue;
     for (const entry of entries) {
       pins.add(normalizePin(entry.pin));
+    }
+  }
+  return pins;
+}
+
+/**
+ * @param {Object} referenceDesigns - The parsed contents of reference_designs.json.
+ * @param {?string} boardDesign - e.g. "F7C5", from FC.CONFIG.boardDesign.
+ * @param {?string} boardName - e.g. "FLYDRAGON_PRO42688", from FC.CONFIG.boardName
+ *   -- merged with, and taking priority over, whatever boardDesign's
+ *   own family match finds (see findUsages).
+ * @returns {Set<string>} pins a manufacturer design explicitly marks
+ *   `"hide": true` (e.g. Flydragon Pro's Int Rec.Tx/Rx, hard-wired
+ *   straight to an onboard receiver with no physical port to connect
+ *   anything else to, even though the underlying UART resource is
+ *   otherwise a perfectly ordinary, CLI-remappable one). RemapFc.svelte
+ *   consults this set for the same two purposes buildReservedPins'
+ *   pins are: excluded from "+ Add"/"Other Pins" entirely, and its own
+ *   dropdown locked (showing an explanatory message in place of a
+ *   choice) on the rare board where the pin is still shown as a
+ *   permanent row. Kept as a separate function from buildReservedPins
+ *   because the two sets come from different data (fixed reserved
+ *   sensor/support usage names vs. a manufacturer's own per-pin flag)
+ *   even though callers now treat them identically.
+ */
+export function buildHiddenPins(referenceDesigns, boardDesign, boardName) {
+  const usages = findUsages(referenceDesigns, boardDesign, boardName);
+  if (!usages) return new Set();
+
+  const pins = new Set();
+  for (const entries of Object.values(usages)) {
+    for (const entry of entries) {
+      if (entry.hide === true) pins.add(normalizePin(entry.pin));
     }
   }
   return pins;
