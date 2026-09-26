@@ -138,7 +138,11 @@ export const MSPCodes = {
     MSP_SET_RPM_FILTER_V2:          155,
 
     MSP_UID:                        160,
+    MSP_SET_XACT_SCAN:              161,
+    MSP_XACT_PARAMS:                162,
+    MSP_SET_XACT_PARAMS:            163,
     MSP_GPS_SV_INFO:                164,
+    MSP_XACT_SERVO_LIST:            165,
 
     MSP_MIXER_INPUTS:               170,
     MSP_SET_MIXER_INPUT:            171,
