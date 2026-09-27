@@ -116,9 +116,18 @@
   /** @type {import("@/js/remap_fc/hardware_parser.js").HardwareMap} */
   let originalCurrent = $state({});
   // Read-only reference for each option's default pin; never changes
-  // after a read.
+  // after a read. This is the *augmented* map setHardware builds (see
+  // its own fallbackAnchors comment) -- rawDefaultHardware below is the
+  // one to hand back to setHardware itself (e.g. from
+  // handleClearChanges), since feeding this augmented one back in as
+  // its own input would make every fallback anchor look
+  // already-claimed and silently stop getting recreated.
   /** @type {import("@/js/remap_fc/hardware_parser.js").HardwareMap} */
   let defaultHardware = $state({});
+  // The defaultHw setHardware was actually called with, before its own
+  // fallback-anchor augmentation -- see defaultHardware's own comment.
+  /** @type {import("@/js/remap_fc/hardware_parser.js").HardwareMap} */
+  let rawDefaultHardware = $state({});
   // DMA streams claimed outside this tool's control (SPI, ADC, ...),
   // so reallocation never proposes stealing them.
   /** @type {Set<string>} */
@@ -291,9 +300,11 @@
 
   // Geometry for the wires SVG between the FC Label and Feature
   // columns. wireHeaderHeight/wireRowHeight are measured live from the
-  // actual rendered DOM (bind:clientHeight on .column-header and the
-  // first .pin-row, in the template) rather than trusted as fixed
-  // constants -- a hardcoded pixel guess here previously drifted out
+  // actual rendered DOM (bind:clientHeight on .column-header and every
+  // .pin-row, in the template -- they all share the same fixed CSS
+  // height, so whichever one renders last just re-confirms the same
+  // value) rather than trusted as fixed constants -- a hardcoded pixel
+  // guess here previously drifted out
   // of sync with the real render (most visibly at a non-100% zoom
   // level, where the browser's own subpixel rounding of .pin-row's
   // CSS height isn't guaranteed to match a constant computed assuming
@@ -862,8 +873,20 @@
   // one the user most recently placed, falling back to whichever
   // unresolved feature comes first if nothing's been touched yet this
   // session (e.g. the clash was already there on read).
+  //
+  // Only trusts lastChangedOption while it still names something
+  // actually present in workingCurrent -- handleCurrentOptionChange
+  // sets it whenever a row is *placed*, but never clears it once set,
+  // so picking "None" on that same row afterwards (or a different row's
+  // edit evicting it from its pin) would otherwise leave this pointing
+  // at a feature that no longer exists anywhere on the board:
+  // handleResetToSetOption's own tableRows lookup would then silently
+  // find nothing and no-op, while the panel still displayed that stale
+  // feature's name as the thing needing a manual fix.
   let manualFixTarget = $derived(
-    lastChangedOption ?? pinConflictResult.unresolvedFeatures[0] ?? null,
+    (lastChangedOption in workingCurrent ? lastChangedOption : null) ??
+      pinConflictResult.unresolvedFeatures[0] ??
+      null,
   );
 
   // Whether there's anything staged to actually send -- resource
@@ -1001,6 +1024,8 @@
     reservedTmr = new Set(),
     servoRts = {},
   ) {
+    rawDefaultHardware = defaultHw;
+
     // A manufacturer design's own named connector can be physically
     // wired to a pin this board's compiled defaults leave completely
     // unclaimed -- Flydragon Pro's AUX (B09) is a real example: the
@@ -1122,6 +1147,7 @@
     workingCurrent = {};
     originalCurrent = {};
     defaultHardware = {};
+    rawDefaultHardware = {};
     reservedDmaStreams = new Set();
     reservedTimers = new Set();
     servoRates = {};
@@ -1199,13 +1225,19 @@
   // the already-known servoRates back through explicitly -- omitting it
   // would fall back to setHardware's own default ({}), silently wiping
   // servo rate data a revert never actually invalidates (it doesn't
-  // re-read the FC), which is exactly what left every servoTimerGroups
-  // entry showing "None" after Revert instead of the board's real
-  // rates.
+  // re-read the FC), which previously left every servoTimerGroups entry
+  // showing "None" after Revert instead of the board's real rates.
+  // Passes rawDefaultHardware, not defaultHardware, for the same
+  // reason: defaultHardware is setHardware's own *augmented* output
+  // (see its comment), and feeding that back in as input makes every
+  // fallback-anchored connector look already-claimed, so it silently
+  // stops being recreated -- which previously lost the "Default"
+  // placeholder for a connector like Flydragon Pro's AUX after Revert,
+  // showing it as a plain "None" instead.
   function handleClearChanges() {
     setHardware(
       originalCurrent,
-      defaultHardware,
+      rawDefaultHardware,
       mcuType,
       reservedDmaStreams,
       reservedTimers,
@@ -1564,7 +1596,7 @@
             <!-- The literal connections: one path per Feature row,
                  from its FC Label row's index to its own. Both columns
                  render every row at the same height (wireRowHeight,
-                 measured off the first .pin-row below), so a plain
+                 measured off the .pin-row rows below), so a plain
                  index->pixel formula (wireY) places every endpoint. -->
             <svg
               class="wires"
@@ -2264,7 +2296,7 @@
      board's physical order too -- see orderFeatureKeys) connected by
      SVG wires -- see featureRows/wireLinks/wireY in the
      script block. wireHeaderHeight/wireRowHeight there are measured
-     live off .column-header/the first .pin-row (bind:clientHeight in
+     live off .column-header/every .pin-row (bind:clientHeight in
      the template), so a wire's endpoint always matches the actual
      rendered row position, including under browser zoom. */
   .wiring-row {

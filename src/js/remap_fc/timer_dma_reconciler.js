@@ -446,8 +446,8 @@ export function buildTimerDmaCommands(
 }
 
 // Turns a FeatureTimerRow's own as-read state into the same shape
-// reallocateTimersAndDma() returns, so logAllocation can show a
-// consistent table whether or not anything actually needed
+// reallocateTimersAndDma() returns, so buildAllocationTable below can
+// show a consistent table whether or not anything actually needed
 // reallocating.
 function allocationFromCurrentState(featureRows) {
   return featureRows.map((row) => ({
