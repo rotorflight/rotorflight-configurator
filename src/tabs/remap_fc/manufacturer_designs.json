@@ -261,8 +261,8 @@
   "FLYWING_HELI405": {
     "SBUS": [
       {
-        "pin": "PA3",
-        "function": "RX2"
+        "pin": "PC07",
+        "function": "RX6 (shared with DSM)"
       }
     ],
     "S1": [
@@ -299,6 +299,34 @@
       {
         "pin": "PB8",
         "function": "T10CH1"
+      }
+    ],
+    "GPS TX 1": [
+      {
+        "pin": "PA09",
+        "function": "TX1",
+        "default": false
+      }
+    ],
+    "GPS RX 1": [
+      {
+        "pin": "PA10",
+        "function": "RX1",
+        "default": false
+      }
+    ],
+    "GPS SCL 3": [
+      {
+        "pin": "PA08",
+        "function": "SCL3",
+        "default": false
+      }
+    ],
+    "GPS SDA 3": [
+      {
+        "pin": "PC09",
+        "function": "SDA3",
+        "default": false
       }
     ]
   },
@@ -625,10 +653,11 @@
         "hide": true
       }
     ],
-        "DSM Rx 4": [
+    "DSM Rx 4": [
       {
         "pin": "PA01",
-        "function": "RX4"
+        "function": "RX4",
+        "default": false
       }
     ]
   }

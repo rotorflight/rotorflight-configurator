@@ -1195,7 +1195,13 @@
   // every edit made since the last successful read/apply by simply
   // re-running setHardware with originalCurrent -- the same as what
   // happens right after an initial read, since originalCurrent already
-  // holds exactly that baseline (see setHardware/markApplied).
+  // holds exactly that baseline (see setHardware/markApplied). Passes
+  // the already-known servoRates back through explicitly -- omitting it
+  // would fall back to setHardware's own default ({}), silently wiping
+  // servo rate data a revert never actually invalidates (it doesn't
+  // re-read the FC), which is exactly what left every servoTimerGroups
+  // entry showing "None" after Revert instead of the board's real
+  // rates.
   function handleClearChanges() {
     setHardware(
       originalCurrent,
@@ -1203,6 +1209,7 @@
       mcuType,
       reservedDmaStreams,
       reservedTimers,
+      servoRates,
     );
   }
 
