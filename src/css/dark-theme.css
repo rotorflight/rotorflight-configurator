@@ -114,25 +114,6 @@ html[data-theme="dark"] .tab-servos .gui_box span {
   color: var(--color-text);
 }
 
-/* ADJUSTMENTS TAB */
-
-html[data-theme="dark"] .tab-adjustments .adjustments,
-html[data-theme="dark"] .tab-adjustments .adjustments tbody:nth-child(odd) {
-  background-color: var(--color-surface);
-}
-
-html[data-theme="dark"] .tab-adjustments .adjustments tbody {
-  background-color: var(--color-surface-alt);
-}
-
-html[data-theme="dark"] .tab-adjustments .adjustments tbody tr td {
-  border-color: var(--color-border);
-}
-
-html[data-theme="dark"] .tab-adjustments .adjustmentBody .value-box {
-  background: var(--color-surface-sunken);
-}
-
 /* CLI TAB - autocomplete */
 
 html[data-theme="dark"] .cli-textcomplete-dropdown {
@@ -269,38 +250,6 @@ html[data-theme="dark"] .select2-search--dropdown .select2-search__field {
 
 html[data-theme="dark"] .select2-results > .select2-results__options {
   background-color: var(--color-input-bg) !important;
-}
-
-/* Rotorflight legacy tabs - dark overrides for tabs that are still HTML/jQuery. */
-
-html[data-theme=dark] .tab-adjustments .adjustments {
-    background-color: #454545;
-}
-
-html[data-theme=dark] .tab-adjustments .adjustments tbody:nth-child(odd) {
-    background-color: #454545;
-}
-
-html[data-theme=dark] .tab-adjustments .adjustments tbody {
-    background-color: #4f5150;
-}
-
-html[data-theme=dark] .tab-adjustments .adjustments tbody tr td {
-    border-color: var(--alternativeBackground);
-}
-
-html[data-theme=dark] .tab-adjustments .adjustments select {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-adjustments .adjustments input {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-adjustments .adjustmentBody .value-box {
-    background: #252525;
 }
 
 html[data-theme=dark] .tab-auxiliary .toolbox {
