@@ -71,7 +71,9 @@ export async function handleConnectClick() {
 
                 await new Promise((resolve) => mspHelper.setArmingEnabled(true, resolve));
 
-                finishClose();
+                // Wait for the port to actually finish closing before letting the
+                // caller (e.g. the firmware flasher tab switch) proceed.
+                await finishClose();
             }
 
             toggleStatus();
@@ -210,7 +212,14 @@ function finishClose() {
     // close reset to custom defaults dialog
     $('#dialogResetToCustomDefaults')[0].close();
 
-    serial.disconnect(onClosed);
+    // Resolves once the port has actually finished closing, so callers that
+    // need the port free again can await it instead of racing the teardown.
+    const disconnected = new Promise((resolve) => {
+        serial.disconnect((result) => {
+            onClosed(result);
+            resolve();
+        });
+    });
 
     MSP.disconnect_cleanup();
     portUsage.reset();
@@ -241,6 +250,8 @@ function finishClose() {
     }
 
     $('#tabs .tab_landing a').trigger("click");
+
+    return disconnected;
 }
 
 function setConnectionTimeout() {

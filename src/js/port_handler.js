@@ -109,6 +109,9 @@ PortHandler.check_usb_devices = function (callback) {
                     value: "DFU",
                     text: usbText,
                     data: {isDFU: true},
+                    // also expose as a real HTML attribute so non-jQuery consumers
+                    // (e.g. the Svelte firmware flasher) can read it via .dataset
+                    'data-is-dfu': 'true',
                 }));
 
                 if (import.meta.env.DEV) {
