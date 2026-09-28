@@ -615,6 +615,9 @@
     "tabAdjustments": {
         "message": "Adjustments"
     },
+    "auxiliaryModeEmpty": {
+        "message": "No range or link assigned yet."
+    },
     "tabAuxiliary": {
         "message": "Modes"
     },

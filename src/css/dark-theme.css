@@ -252,47 +252,11 @@ html[data-theme="dark"] .select2-results > .select2-results__options {
   background-color: var(--color-input-bg) !important;
 }
 
-html[data-theme=dark] .tab-auxiliary .toolbox {
-    color: white;
-}
-
-html[data-theme=dark] .tab-auxiliary .mode {
-    background-color: #393b3a;
-}
-
-html[data-theme=dark] .tab-auxiliary .mode .info {
-    border-bottom: 5px solid #393b3a;
-    background-color: #9e9e9e;
-    color: white;
-}
-
-html[data-theme=dark] .tab-auxiliary .ranges {
-    border-bottom: 5px solid #393b3a;
-    background-color: #676767;
-}
-
-html[data-theme=dark] .tab-auxiliary .range {
-    background-color: #484848;
-}
-
-html[data-theme=dark] .tab-auxiliary .link {
-    background-color: #484848;
-}
-
 html[data-theme=dark] .tab-auxiliary .range .channel,
 .logic,
 .linkedTo {
     background-color: #3a3a3a;
     color: white;
-}
-
-html[data-theme=dark] .tab-auxiliary .buttons a {
-    background-color: #333333;
-    color: white;
-}
-
-html[data-theme=dark] .tab-auxiliary .buttons a:hover {
-    background-color: var(--hoverButton-background);
 }
 
 html[data-theme=dark] .tab-firmware_flasher .options select {
