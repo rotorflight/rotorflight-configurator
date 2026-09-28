@@ -483,6 +483,24 @@
     "tabBlackbox": {
         "message": "Blackbox"
     },
+    "tabGroupSetup": {
+        "message": "Setup"
+    },
+    "tabGroupOutputs": {
+        "message": "Outputs"
+    },
+    "tabGroupFlightTuning": {
+        "message": "Flight Tuning"
+    },
+    "tabGroupModes": {
+        "message": "Modes & Adjustments"
+    },
+    "tabGroupPeripherals": {
+        "message": "Peripherals"
+    },
+    "tabGroupDiagnostics": {
+        "message": "Diagnostics"
+    },
     "tabAdjustments": {
         "message": "Adjustments"
     },

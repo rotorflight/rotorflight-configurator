@@ -3,14 +3,14 @@
   import * as THREE from "three";
   import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-  import { FC } from "@/js/fc.svelte.js";
-
   let container;
   let canvas;
   let renderer;
   let width = $state();
   let height = $state();
   let error = $state(false);
+  let lastWidth = 0;
+  let lastHeight = 0;
 
   let o = $state({});
 
@@ -19,8 +19,6 @@
   });
 
   onMount(async () => {
-    const clockwise = FC.MIXER_CONFIG.main_rotor_dir === 0;
-
     try {
       renderer = new THREE.WebGLRenderer({
         canvas,
@@ -34,12 +32,11 @@
     }
 
     renderer.setPixelRatio(globalThis.devicePixelRatio * 4);
-    renderer.setSize(width, height);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     o.scene = new THREE.Scene();
     o.modelWrapper = new THREE.Object3D();
-    o.camera = new THREE.PerspectiveCamera(20, width / height, 1, 1000);
-    o.camera.position.z = 600;
+    o.camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
+    o.camera.position.z = 125;
     o.light = new THREE.AmbientLight(0xffffff, 4);
     o.light2 = new THREE.DirectionalLight(new THREE.Color(1, 1, 1), 3.0);
     o.light2.position.set(0, 600, 800);
@@ -49,7 +46,8 @@
     o.scene.add(o.camera);
     o.scene.add(o.modelWrapper);
 
-    o.model = await loadGLTF(`bell_${clockwise ? "cw" : "ccw"}`);
+    o.model = await loadGLTF("model");
+    o.model.scale.set(15, 15, 15);
     o.modelWrapper.add(o.model);
     o.scene.add(o.modelWrapper);
     resize(width, height);
@@ -85,6 +83,17 @@
     if (!renderer) {
       return;
     }
+
+    if (!Number.isFinite(w) || !Number.isFinite(h) || w <= 0 || h <= 0) {
+      return;
+    }
+
+    if (w === lastWidth && h === lastHeight) {
+      return;
+    }
+
+    lastWidth = w;
+    lastHeight = h;
 
     renderer.setSize(w, h);
     o.camera.aspect = w / h;
@@ -155,7 +164,7 @@
     height: 100%;
 
     :global(html[data-theme="light"]) & {
-      background-color: var(--color-neutral-100);
+      background-color: var(--color-neutral-200);
       background-image:
         linear-gradient(
           to right,
@@ -223,7 +232,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: var(--mutedText);
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
   }
 </style>

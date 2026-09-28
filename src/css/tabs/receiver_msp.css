@@ -126,12 +126,12 @@ a:hover {
     margin-bottom: 0px;
     margin-left: 0px;
     background-color: var(--accent);
-    border-radius: 3px;
-    border: 1px solid #4c8829;
-    color: #fff;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    color: var(--color-accent-fg);
     float: left;
     font-size: 12px;
-    text-shadow: 0px 1px #00000040;
+    font-weight: 600;
     display: block;
     cursor: pointer;
     transition: all ease 0.2s;

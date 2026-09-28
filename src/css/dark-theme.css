@@ -1,176 +1,297 @@
-:root[data-theme=dark] {
-    --accent: #0375b4;
-    --darkAccent: #203647;
-    --subtleAccent: #c0c0c0;
-    --superSubtleAccent: #595959;
-    --quietHeader: #939682;
-    --defaultText: #ffffff;
-    --subtleText: #c0c0c0;
-    --mutedText: #d6d6d6;
-    --linkText: #4da8da;
-    --attention: #c04020;
-    --boxBackground: #3a3a3a;
-    --alternativeBackground: #414443;
-    --sideBackground: #404040;
-    --ledAccent: #6e6e6e;
-    --ledBackground: #424242;
-    --gimbalBackground: var(--subtleAccent);
-    --gimbalCrosshair: var(--mutedText);
-    --switcherysecond: #858585;
-    --button-border: #c4c4c4;
-    --button-background: #c4c4c4;
-    --hoverButton-border: #ffbb00;
-    --hoverButton-background: #d6d6d6;
-    --pushedButton-fontColor: #000000;
-    --pushedButton-border: #ffbb00;
-    --pushedButton-background: #595959;
-    --backgroundColor: #393b3a;
+/*
+ * Dark-theme overrides for the legacy (non-Svelte) stylesheets.
+ *
+ * This file used to carry two jobs: a parallel set of dark values for the
+ * legacy --accent/--boxBackground/... variables, and a long tail of
+ * per-rule hex overrides for the app shell (dialogs, notes, gui boxes,
+ * buttons, tooltips).
+ *
+ * The first job is gone: those variables are now aliases onto the
+ * theme-aware design tokens in app.css (see the :root block in main.css),
+ * so they follow the theme on their own. The second job shrank with it -
+ * every shell rule that already reads a token needs no override at all,
+ * which is why the shell section below is nearly empty now.
+ *
+ * What remains is the per-tab CSS that still hard-codes light colours.
+ * Those overrides are kept, but expressed in tokens rather than hexes so
+ * a palette change lands here too.
+ */
+
+html[data-theme="dark"] .background_paper {
+  background-image: url(/images/paper-dark.png);
 }
 
-html[data-theme=dark] .background_paper {
-    background-image: url(/images/paper-dark.png);
+html[data-theme="dark"] #options-window {
+  background-color: var(--color-surface);
 }
 
-html[data-theme=dark] body {
-    color: white;
+html[data-theme="dark"] .cf_table td {
+  border-style: solid;
 }
 
-html[data-theme=dark] ::backdrop {
-    background-image: none;
-    background-color: rgba(0, 0, 0, 0.5);
+html[data-theme="dark"] .noboarder td {
+  border-style: unset;
 }
 
-html[data-theme=dark] #options-window {
-    background-color: #393b3a;
+/* Tooltip title bars are the one jBox surface main.css does not style. */
+html[data-theme="dark"] .jBox-Modal .jBox-title,
+html[data-theme="dark"] .jBox-Confirm .jBox-title {
+  background: var(--color-surface-float);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
 }
 
-html[data-theme=dark] #content {
-    background-color: #393b3a;
+html[data-theme="dark"] .jBox-pointer:after {
+  background: var(--color-surface-float);
 }
 
-html[data-theme=dark] #content.logopen {
-    background-color: #393b3a;
+/* Help icons: the legacy markup swaps between a grey and a white asset
+   depending on which surface the icon sits on. */
+html[data-theme="dark"] .helpicon {
+  background-image: url(/images/icons/cf_icon_info_white.svg);
+  opacity: 0.4;
 }
 
-html[data-theme=dark] dialog {
-    background-color: #3a3d3c;
-    color:white;
-    border: 1px solid #ffbb2a;
+html[data-theme="dark"] .cf .helpicon {
+  background-image: url(/images/icons/cf_icon_info_grey.svg);
+  opacity: 0.5;
 }
 
-html[data-theme=dark] .note {
-    background-color: #4e4e4e;
-    border: 1px solid #df8c27;
-    color: white;
+html[data-theme="dark"] .cf .helpicon:hover {
+  background-image: url(/images/icons/cf_icon_info_grey.svg);
+  opacity: 1;
 }
 
-html[data-theme=dark] .content_toolbar {
-    background-color: #555857;
+html[data-theme="dark"] .gui_box_titlebar .helpicon,
+html[data-theme="dark"] .subtitle .helpicon {
+  background-image: url(/images/icons/cf_icon_info_grey.svg);
 }
 
-html[data-theme=dark] .gui_box {
-    border: 1px solid #4d4d4d;
-    background-color: #393b3a;
+progress[value]::-webkit-progress-bar {
+  background-color: var(--color-meter-bg);
 }
 
-html[data-theme=dark] .gui_warning {
-    background: #414443;
+/* Tab bodies still carry light-mode colours of their own; the rules below
+   are scoped per tab exactly as before, only tokenised. */
+
+/* Shared: form controls inside legacy tab markup. */
+html[data-theme="dark"] .tab-adjustments input,
+html[data-theme="dark"] .tab-adjustments select,
+html[data-theme="dark"] .tab-beepers input,
+html[data-theme="dark"] .tab-beepers select,
+html[data-theme="dark"] .tab-gps input,
+html[data-theme="dark"] .tab-gps select,
+html[data-theme="dark"] .tab-power .number input,
+html[data-theme="dark"] .tab-power .battery-configuration select,
+html[data-theme="dark"] .tab-power .smartfuel-configuration select,
+html[data-theme="dark"] .tab-presets input,
+html[data-theme="dark"] .tab-presets select,
+html[data-theme="dark"] .tab-profiles table input,
+html[data-theme="dark"] .tab-profiles .settings_table .suboption input,
+html[data-theme="dark"] .tab-profiles .settings_table .suboption select,
+html[data-theme="dark"] .tab-profiles .number input,
+html[data-theme="dark"] .tab-rates input,
+html[data-theme="dark"] .tab-rates select,
+html[data-theme="dark"] .tab-rates .cf input,
+html[data-theme="dark"] .tab-rates .cf select,
+html[data-theme="dark"] .tab-servos input[type="number"] {
+  background-color: var(--color-input-bg);
+  color: var(--color-text);
 }
 
-html[data-theme=dark] .gui_note {
-    background: #393b3a;
+html[data-theme="dark"] .tab-profiles table select,
+html[data-theme="dark"] .tab-rates table select {
+  text-align-last: right;
+  background-color: var(--color-input-bg);
+  color: var(--color-text);
 }
 
-html[data-theme=dark] .grey {
-    background-color: #414443
+/* Shared: box labels that the light theme leaves black. */
+html[data-theme="dark"] .tab-beepers .gui_box span,
+html[data-theme="dark"] .tab-profiles .gui_box span,
+html[data-theme="dark"] .tab-rates .gui_box span,
+html[data-theme="dark"] .tab-servos .gui_box span {
+  color: var(--color-text);
 }
-
-html[data-theme=dark] .gui_box_bottombar {
-    background-color: #393b3a;
-}
-
-html[data-theme=dark] .fixed_band {
-    background-color: #393b3a;
-}
-
-html[data-theme=dark] .small a {
-    border: 1px solid #ffbb2a;
-}
-
-html[data-theme=dark] #quad-status_wrapper {
-    color: #393b3a;
-}
-
-html[data-theme=dark] button {
-    border: 1px solid #ffbb2a;
-    background-color: #ffbb2a;
-    color: black;
-}
-
-html[data-theme=dark] .default_btn a.disabled {
-    background-color: #595959;
-    border-color: #595959;
-    color: black;
-}
-
-html[data-theme=dark] .helpicon {
-    background-image: url(/images/icons/cf_icon_info_white.svg);
-    opacity: 0.3;
-}
-html[data-theme=dark] .cf .helpicon {
-    background-image: url(/images/icons/cf_icon_info_grey.svg);
-    opacity: 0.4;
-}
-html[data-theme=dark] .cf .helpicon:hover {
-    background-image: url(/images/icons/cf_icon_info_grey.svg);
-    opacity: 1;
-}
-
-html[data-theme=dark] .gui_box_titlebar .helpicon {
-    background-image: url(/images/icons/cf_icon_info_grey.svg);
-}
-
-html[data-theme=dark] .subtitle .helpicon {
-    background-image: url(/images/icons/cf_icon_info_grey.svg);
-}
-
-html[data-theme=dark] .cf_table td {
-    border-style: solid;
-}
-
-html[data-theme=dark] .noboarder td {
-    border-style: unset;
-}
-
-html[data-theme=dark] .jBox-container {
-    background: #393b3a;
-    color:white;
-}
-
-html[data-theme=dark] .jBox-Modal .jBox-title,
-html[data-theme=dark] .jBox-Confirm .jBox-title {
-    background: #393b3a;
-    border-bottom: 1px solid #9c9c9c;
-    color: white;
-}
-
-html[data-theme=dark] .jBox-pointer:after {
-    background: #393b3a;
-}
-
-html[data-theme=dark] span.value {
-    background-color: #202020;
-}
-
-
-/* TABS */
-
-html[data-theme=dark] #tabs li.active a {
-    color: #fff;
-}
-
 
 /* ADJUSTMENTS TAB */
+
+html[data-theme="dark"] .tab-adjustments .adjustments,
+html[data-theme="dark"] .tab-adjustments .adjustments tbody:nth-child(odd) {
+  background-color: var(--color-surface);
+}
+
+html[data-theme="dark"] .tab-adjustments .adjustments tbody {
+  background-color: var(--color-surface-alt);
+}
+
+html[data-theme="dark"] .tab-adjustments .adjustments tbody tr td {
+  border-color: var(--color-border);
+}
+
+html[data-theme="dark"] .tab-adjustments .adjustmentBody .value-box {
+  background: var(--color-surface-sunken);
+}
+
+/* CLI TAB - autocomplete */
+
+html[data-theme="dark"] .cli-textcomplete-dropdown {
+  background-color: var(--color-surface-float);
+}
+
+html[data-theme="dark"] .cli-textcomplete-dropdown a {
+  color: var(--color-text);
+}
+
+html[data-theme="dark"] .cli-textcomplete-dropdown .active {
+  background-color: var(--color-hover);
+}
+
+/* FIRMWARE FLASHER TAB */
+
+html[data-theme="dark"] .btn .disabled {
+  background-color: var(--color-btn-bg-disabled);
+}
+
+/* GPS TAB */
+
+html[data-theme="dark"] .tab-gps .GPS_info .head,
+html[data-theme="dark"] .tab-gps .GPS_signal_strength .head {
+  background-color: var(--color-header-bg);
+}
+
+html[data-theme="dark"] .tab-gps #loadmap .controls,
+html[data-theme="dark"] .tab-gps #loadmap .controls a {
+  background-color: var(--color-surface);
+}
+
+html[data-theme="dark"] .tab-gps #loadmap .controls a:hover {
+  background-color: var(--color-btn-bg-hover);
+}
+
+html[data-theme="dark"] .tab-gps #loadmap .controls a:active {
+  background-color: var(--color-btn-bg-active);
+}
+
+/* PROFILES + RATES TABS */
+
+html[data-theme="dark"] .tab-profiles .tab-area,
+html[data-theme="dark"] .tab-rates .tab-area {
+  background: var(--color-surface);
+}
+
+html[data-theme="dark"] .tab-profiles .tab-container > div,
+html[data-theme="dark"] .tab-rates .tab-container > div {
+  background-color: var(--color-surface-alt);
+  border-right: 1px solid var(--color-surface);
+}
+
+html[data-theme="dark"] .tab-profiles .tab-container > div.active,
+html[data-theme="dark"] .tab-rates .tab-container > div.active {
+  background-color: var(--color-accent-500);
+  color: var(--color-accent-fg);
+}
+
+html[data-theme="dark"] .tab-profiles input:disabled,
+html[data-theme="dark"] .tab-profiles select:disabled {
+  color: var(--color-text-disabled);
+}
+
+html[data-theme="dark"] .tab-profiles .ROLL .axis_title,
+html[data-theme="dark"] .tab-rates .ROLL .axis_title {
+  background-color: var(--color-roll);
+}
+
+html[data-theme="dark"] .tab-profiles .PITCH .axis_title,
+html[data-theme="dark"] .tab-rates .PITCH .axis_title {
+  background-color: var(--color-pitch);
+}
+
+html[data-theme="dark"] .tab-profiles .YAW .axis_title,
+html[data-theme="dark"] .tab-rates .YAW .axis_title {
+  background-color: var(--color-yaw);
+}
+
+html[data-theme="dark"] .tab-profiles .bottomarea {
+  background-color: var(--color-surface);
+}
+
+html[data-theme="dark"] .tab-profiles .regular-button.disabled {
+  background-color: var(--color-btn-bg-disabled);
+}
+
+html[data-theme="dark"] .tab-rates .cf tr {
+  background-color: var(--color-surface-alt);
+}
+
+html[data-theme="dark"] .tab-rates .cf th {
+  background-color: var(--color-header-bg);
+  color: var(--color-header-fg);
+}
+
+html[data-theme="dark"] .tab-rates .cf .rates_logo_bg {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* SERVOS TAB */
+
+html[data-theme="dark"] .tab-servos .servoConfig {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+html[data-theme="dark"] .tab-servos .servoConfig td {
+  border-color: var(--color-border);
+}
+
+html[data-theme="dark"] .tab-servos .servoConfig tbody tr,
+html[data-theme="dark"] .tab-servos .servoOverride tbody tr:nth-child(odd) {
+  background-color: var(--color-surface-alt);
+}
+
+html[data-theme="dark"] .tab-servos .servoConfig tbody tr:nth-child(even),
+html[data-theme="dark"] .tab-servos .servoOverride tbody tr:nth-child(even) {
+  background-color: var(--color-surface);
+}
+
+html[data-theme="dark"] .tab-servos .meter-bar {
+  background-color: var(--color-meter-bg);
+}
+
+html[data-theme="dark"] .tab-servos .meter-label {
+  color: var(--color-text);
+}
+
+/* SELECT2 */
+
+html[data-theme="dark"]
+  .select2-container
+  .select2-selection--single
+  .select2-selection__rendered {
+  background-color: var(--color-input-bg) !important;
+  color: var(--color-text) !important;
+}
+
+html[data-theme="dark"] .select2-selection__arrow b {
+  border-bottom: 1.5px solid var(--color-text) !important;
+  border-right: 1.5px solid var(--color-text) !important;
+}
+
+html[data-theme="dark"] .select2-search--dropdown {
+  background-color: var(--color-input-bg) !important;
+}
+
+html[data-theme="dark"] .select2-search--dropdown .select2-search__field {
+  border: 1px solid var(--color-border) !important;
+  background-color: var(--color-input-bg) !important;
+  color: var(--color-text) !important;
+}
+
+html[data-theme="dark"] .select2-results > .select2-results__options {
+  background-color: var(--color-input-bg) !important;
+}
+
+/* Rotorflight legacy tabs - dark overrides for tabs that are still HTML/jQuery. */
 
 html[data-theme=dark] .tab-adjustments .adjustments {
     background-color: #454545;
@@ -202,9 +323,6 @@ html[data-theme=dark] .tab-adjustments .adjustmentBody .value-box {
     background: #252525;
 }
 
-
-/* AUXILIARY TAB */
-
 html[data-theme=dark] .tab-auxiliary .toolbox {
     color: white;
 }
@@ -232,7 +350,9 @@ html[data-theme=dark] .tab-auxiliary .link {
     background-color: #484848;
 }
 
-html[data-theme=dark] .tab-auxiliary .range .channel,.logic,.linkedTo {
+html[data-theme=dark] .tab-auxiliary .range .channel,
+.logic,
+.linkedTo {
     background-color: #3a3a3a;
     color: white;
 }
@@ -246,9 +366,6 @@ html[data-theme=dark] .tab-auxiliary .buttons a:hover {
     background-color: var(--hoverButton-background);
 }
 
-
-/* BEEPERS TAB */
-
 html[data-theme=dark] .tab-beepers .gui_box span {
     color: white;
 }
@@ -258,24 +375,6 @@ html[data-theme=dark] .tab-beepers select {
     background-color: #3a3a3a;
     color: white;
 }
-
-
-/* CLI TAB */
-
-
-/* AutoComplete */
-html[data-theme=dark] .cli-textcomplete-dropdown {
-    background-color: #393b3a;
-}
-html[data-theme=dark] .cli-textcomplete-dropdown a {
-    color: white;
-}
-html[data-theme=dark] .cli-textcomplete-dropdown .active {
-    background-color: var(--quietHeader);
-}
-
-
-/* CONFIGURATION TAB */
 
 html[data-theme=dark] .tab-configuration .gui_box span {
     color: white;
@@ -300,17 +399,6 @@ html[data-theme=dark] .tab-configuration #interactive_block a.reset:hover {
     background-color: #393b3a;
 }
 
-
-/* FIRMWARE FLASHER TAB */
-
-html[data-theme=dark] .btn .disabled {
-    background-color: #393b3a;
-}
-
-html[data-theme=dark] .gui_note .gui_box_titlebar {
-    color: black;
-}
-
 html[data-theme=dark] .tab-firmware_flasher .options select {
     background-color: #3a3a3a;
     color: white;
@@ -332,9 +420,6 @@ html[data-theme=dark] .tab-firmware_flasher .release_info .target {
 html[data-theme=dark] .tab-firmware_flasher .cf_table td {
     border-bottom: solid 1px #4f4f4f;
 }
-
-
-/* GPS TAB */
 
 html[data-theme=dark] .tab-gps .GPS_info .head,
 html[data-theme=dark] .tab-gps .GPS_signal_strength .head {
@@ -363,12 +448,6 @@ html[data-theme=dark] .tab-gps #loadmap .controls a:active {
     background-color: #393b3a;
 }
 
-progress[value]::-webkit-progress-bar {
-    background-color: #393b3a;
-}
-
-/* LANDING */
-
 html[data-theme=dark] .tab-landing .content_top {
     background-color: #00000000;
 }
@@ -384,9 +463,6 @@ html[data-theme=dark] .tab-landing .logowrapper img {
 html[data-theme=dark] .tab-landing .content_mid .text3 .wrap2 {
     background: #5f5f5f;
 }
-
-
-/* LED STRIP TAB */
 
 html[data-theme=dark] .tab-led-strip .section {
     color: #c4c4c4;
@@ -410,8 +486,6 @@ html[data-theme=dark] .tab-led-strip .gridSections,
 html[data-theme=dark] .tab-led-strip .gridSections .block {
     border: none;
 }
-
-/* MIXER TAB */
 
 html[data-theme=dark] .tab-mixer .gui_box span {
     color: white;
@@ -449,9 +523,6 @@ html[data-theme=dark] .tab-mixer .mixerOverrideTable tbody tr:nth-child(odd) {
     background-color: #393939;
 }
 
-
-/* BLACKBOX TAB */
-
 html[data-theme=dark] .tab-blackbox .regular-button.disabled {
     background-color: #393b3a;
 }
@@ -484,8 +555,6 @@ html[data-theme=dark] .tab-blackbox .blackboxDevice select {
 html[data-theme=dark] .tab-blackbox .sdcard-icon {
     background-color: #393b3a;
 }
-
-/* PROFILES TAB */
 
 html[data-theme=dark] .tab-profiles .tab-area {
     background: #393b3a;
@@ -526,10 +595,6 @@ html[data-theme=dark] .tab-profiles .settings_table .suboption input {
     color: white;
 }
 
-html[data-theme=dark] .xxx-tab-profiles .settings_table tr {
-    border-bottom: 1px solid #6b6b6b;
-}
-
 html[data-theme=dark] .tab-profiles .ROLL .axis_title {
     background-color: #A00000;
 }
@@ -558,9 +623,6 @@ html[data-theme=dark] .tab-profiles .bottomarea {
 html[data-theme=dark] .tab-profiles .regular-button.disabled {
     background-color: #393b3a;
 }
-
-
-/* RATES TAB */
 
 html[data-theme=dark] .tab-rates .tab-area {
     background: #393b3a;
@@ -634,8 +696,6 @@ html[data-theme=dark] .tab-rates .gui_box span {
     color: white;
 }
 
-/* POWER TAB */
-
 html[data-theme=dark] .tab-power .number input {
     background-color: #3a3a3a;
     color: white;
@@ -646,9 +706,6 @@ html[data-theme=dark] .tab-power .smartfuel-configuration select {
     background-color: #3a3a3a;
     color: white;
 }
-
-
-/* SENSORS TAB */
 
 html[data-theme=dark] .tab-sensors .plot_control {
     background-color: #2f2f2f;
@@ -662,9 +719,6 @@ html[data-theme=dark] .tab-sensors .plot_control select {
 html[data-theme=dark] .tab-sensors text {
     fill: white;
 }
-
-
-/* SERVOS TAB */
 
 html[data-theme=dark] .tab-servos .gui_box span {
     color: white;
@@ -708,9 +762,6 @@ html[data-theme=dark] .tab-servos .servoOverride tbody tr:nth-child(even) {
     background-color: #393939;
 }
 
-
-/* STATUS TAB */
-
 html[data-theme=dark] .tab-status #interactive_block {
     background-color: #393b3a;
 }
@@ -737,34 +788,6 @@ html[data-theme=dark] .tab-status .bars .label1,
 html[data-theme=dark] .tab-status .bars .label2 {
     color: white;
 }
-
-
-/* SELECT2 */
-
-html[data-theme=dark] .select2-container .select2-selection--single .select2-selection__rendered {
-    background-color: #3a3a3a !important;
-}
-
-html[data-theme=dark] .select2-selection__arrow b {
-    border-bottom: 1.5px solid white !important;
-    border-right: 1.5px solid white !important;
-}
-
-html[data-theme=dark] .select2-search--dropdown {
-    background-color: #3a3a3a !important;
-}
-
-html[data-theme=dark] .select2-search--dropdown .select2-search__field {
-    border: 1px solid var(--subtleAccent) !important;
-    background-color: #3a3a3a !important;
-    color: white !important;
-}
-
-html[data-theme=dark] .select2-results>.select2-results__options {
-    background-color: #3a3a3a !important;
-}
-
-/* PRESETS TAB */
 
 html[data-theme=dark] .tab-presets input,
 html[data-theme=dark] .tab-presets select {

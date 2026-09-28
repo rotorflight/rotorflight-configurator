@@ -15,27 +15,32 @@
 }
 
 .tab-cli .backdrop {
-    border: 1px solid var(--subtleAccent);
-    background-color: rgba(0, 0, 0, 0.8);
+    /* A terminal, so it stays dark in both themes - but flat, with a
+       hairline border instead of the heavy inset vignette that used to
+       darken the console towards its edges and make long output harder
+       to read at the margins. */
+    border: 1px solid var(--chrome-border);
+    background-color: hsl(208, 12%, 8%);
     margin-top: 0;
     flex-grow: 1;
     background-image: url("/images/light-wide-1.svg");
     background-repeat: no-repeat;
     background-position: 50% 80%;
     background-size: 600px;
-    border-radius: 5px;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.80);
+    border-radius: var(--radius-md);
     width: auto;
 }
 
 .tab-cli .window {
     height: 100%;
     width: 100%;
-    padding: 5px;
+    padding: 10px 12px;
     overflow-y: scroll;
     overflow-x: hidden;
     font-family: var(--font-mono);
-    color: white;
+    font-size: 12px;
+    line-height: 1.55;
+    color: hsl(208, 14%, 86%);
     box-sizing: border-box;
     float: left;
 }
@@ -46,29 +51,33 @@
 
 .tab-cli textarea[name='commands'] {
     font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.55;
     -webkit-box-sizing: border-box;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
+    background-color: hsl(208, 12%, 8%);
+    color: hsl(208, 14%, 90%);
     width: 100%;
-    margin-top: 5px;
+    margin-top: 8px;
     height: 100px;
-    padding: 5px;
-    border: 1px solid var(--subtleAccent);
-    border-radius: 5px;
+    padding: 8px 12px;
+    border: 1px solid var(--chrome-border);
+    border-radius: var(--radius-md);
     overflow-y: scroll;
     overflow-x: hidden;
     resize: none;
 }
 
 .jBox-container textarea#preview {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: hsl(208, 12%, 8%);
+    border: 1px solid var(--chrome-border);
+    border-radius: var(--radius-sm);
     width: 100%;
     resize: none;
     overflow-y: scroll;
     overflow-x: hidden;
     font-family: var(--font-mono);
-    color: white;
-    padding: 5px;
+    color: hsl(208, 14%, 90%);
+    padding: 8px;
     margin-bottom: 5px;
 }
 
@@ -82,8 +91,8 @@
 }
 
 .tab-cli .window .error_message {
-    color: red;
-    font-weight: bold;
+    color: hsl(2, 85%, 68%);
+    font-weight: 700;
 }
 
 .tab-cli .save {
@@ -101,7 +110,6 @@
 
 .tab-cli dialog {
     width: 40em;
-    border-radius: 5px;
 }
 
 .tab-cli dialog .buttons {
@@ -116,13 +124,14 @@
 
 /* AutoComplete */
 .cli-textcomplete-dropdown {
-    border: 1px solid var(--subtleAccent);
-    background-color: white;
-    border-radius: 5px;
+    border: 1px solid var(--color-border-soft);
+    background-color: var(--color-surface-float);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
     max-height: 50%;
     overflow: auto;
     list-style: none;
-    padding: 0;
+    padding: 4px;
     margin: 0;
 }
 
@@ -131,21 +140,25 @@
 }
 
 .cli-textcomplete-dropdown::-webkit-scrollbar-track {
-    background: lightgrey;
-    border-radius: 3px;
+    background: transparent;
 }
 
 .cli-textcomplete-dropdown::-webkit-scrollbar-thumb {
-    background: grey;
-    border-radius: 3px;
+    background: var(--color-border);
+    border-radius: var(--radius-pill);
 }
 
 .cli-textcomplete-dropdown li {
-    padding: 2px 5px;
+    padding: 3px 8px;
+    border-radius: var(--radius-xs);
 }
 
 .cli-textcomplete-dropdown .active {
-    background-color: rgb(255, 187, 0);
+    background-color: var(--color-accent-500);
+}
+
+.cli-textcomplete-dropdown .active a {
+    color: var(--color-accent-fg);
 }
 
 .cli-textcomplete-dropdown a:hover {
