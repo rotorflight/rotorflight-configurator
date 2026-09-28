@@ -8152,5 +8152,17 @@
     },
     "servoOverridePwm": {
         "message": "PWM Servo Override"
+    },
+    "firmwareFlasherButtonLoadLocalShort": {
+        "message": "Load Local"
+    },
+    "firmwareFlasherButtonLoadOnlineShort": {
+        "message": "Load Online"
+    },
+    "firmwareFlasherExitDfuShort": {
+        "message": "Exit DFU"
+    },
+    "firmwareFlasherFlashFirmwareShort": {
+        "message": "Flash"
     }
 }

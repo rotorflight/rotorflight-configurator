@@ -101,6 +101,9 @@ STM32DFU_protocol.prototype.connect = function (device, hex, options, callback) 
         } else {
             console.log('USB DFU not found');
             GUI.log(i18n.getMessage('stm32UsbDfuNotFound'));
+            TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32UsbDfuNotFound'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
+            GUI.connect_lock = false;
+            self.callback?.();
         }
     });
 };
@@ -115,6 +118,9 @@ STM32DFU_protocol.prototype.openDevice = function (device) {
             if(GUI.operating_system === 'Linux') {
                 GUI.log(i18n.getMessage('usbDeviceUdevNotice'));
             }
+            TABS.firmware_flasher.flashingMessage(i18n.getMessage('usbDeviceOpenFail'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
+            GUI.connect_lock = false;
+            self.callback?.();
             return;
         }
 
@@ -151,7 +157,10 @@ STM32DFU_protocol.prototype.claimInterface = function (interfaceNumber) {
         // the interface is in fact successfully claimed.
         if (checkChromeRuntimeError() && (GUI.operating_system !== "MacOS")) {
             console.log('Failed to claim USB device!');
+            GUI.log(i18n.getMessage('usbDeviceClaimFail'));
+            TABS.firmware_flasher.flashingMessage(i18n.getMessage('usbDeviceClaimFail'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
             self.cleanup();
+            return;
         }
 
         console.log('Claimed interface: ' + interfaceNumber);

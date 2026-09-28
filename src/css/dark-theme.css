@@ -204,28 +204,6 @@ html[data-theme=dark] .tab-auxiliary .range .channel,
     color: white;
 }
 
-html[data-theme=dark] .tab-firmware_flasher .options select {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-firmware_flasher .options .description {
-    color: #b9b9b9;
-}
-
-html[data-theme=dark] .tab-firmware_flasher .options .manual_baud_rate select {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-firmware_flasher .release_info .target {
-    color: #98ddff;
-}
-
-html[data-theme=dark] .tab-firmware_flasher .cf_table td {
-    border-bottom: solid 1px #4f4f4f;
-}
-
 html[data-theme=dark] .tab-presets input,
 html[data-theme=dark] .tab-presets select {
     background-color: #3a3a3a;
