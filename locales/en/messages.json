@@ -429,6 +429,18 @@
     "tabBeepers": {
         "message": "Beepers"
     },
+    "profilesGyroCutoff": {
+        "message": "Gyro Cutoff"
+    },
+    "profilesDtermCutoff": {
+        "message": "D-term Cutoff"
+    },
+    "profilesBtermCutoff": {
+        "message": "B-term Cutoff"
+    },
+    "profilesOffset": {
+        "message": "Offset"
+    },
     "tabProfiles": {
         "message": "Profiles"
     },
