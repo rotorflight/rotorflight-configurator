@@ -84,8 +84,6 @@ html[data-theme="dark"] .tab-gps select,
 html[data-theme="dark"] .tab-power .number input,
 html[data-theme="dark"] .tab-power .battery-configuration select,
 html[data-theme="dark"] .tab-power .smartfuel-configuration select,
-html[data-theme="dark"] .tab-presets input,
-html[data-theme="dark"] .tab-presets select,
 html[data-theme="dark"] .tab-profiles table input,
 html[data-theme="dark"] .tab-profiles .settings_table .suboption input,
 html[data-theme="dark"] .tab-profiles .settings_table .suboption select,
@@ -204,8 +202,3 @@ html[data-theme=dark] .tab-auxiliary .range .channel,
     color: white;
 }
 
-html[data-theme=dark] .tab-presets input,
-html[data-theme=dark] .tab-presets select {
-    background-color: #3a3a3a;
-    color: white;
-}

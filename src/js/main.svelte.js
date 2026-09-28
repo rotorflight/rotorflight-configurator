@@ -1,5 +1,3 @@
-import "multiple-select";
-import "multiple-select/dist/multiple-select.css";
 import "nouislider/dist/nouislider.css";
 import { mount } from "svelte";
 
