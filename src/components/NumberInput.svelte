@@ -231,11 +231,20 @@
 <style lang="scss">
   .container {
     display: flex;
-    max-width: 120px;
+    max-width: var(--number-input-max-width, 120px);
+    /* Never let a flex sibling (e.g. an adjustment-badge span in a
+       .runtime-control row) squeeze this below its own intended size --
+       that silently shrinks the inner <input> (the only child here with
+       no min-width of its own) into an unreadable sliver instead of
+       making the *row* overflow, which every table using this component
+       already wraps in a horizontally-scrollable container for. Sizing
+       stays exactly what --number-input-max-width/-height/-btn-size say
+       it should be for the current breakpoint, never ambient flex-shrink. */
+    flex-shrink: 0;
   }
 
   input {
-    padding: 0 8px;
+    padding: 0 var(--number-input-padding-x, 8px);
     width: 100%;
     transition:
       background-color var(--animation-speed),
@@ -295,34 +304,42 @@
   }
 
   .dec {
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
+    border-top-left-radius: var(--radius-sm);
+    border-bottom-left-radius: var(--radius-sm);
     border-right: none;
   }
 
   .inc {
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
+    border-top-right-radius: var(--radius-sm);
+    border-bottom-right-radius: var(--radius-sm);
     border-left: none;
+  }
+
+  /* The spinner buttons sit flush against the input, so a ring around the
+     input alone would be clipped by them - lift the whole group instead. */
+  .container:focus-within {
+    border-radius: var(--radius-sm);
+    box-shadow: 0 0 0 3px var(--color-focus-ring);
   }
 
   .container input:focus {
     border-color: var(--color-border-accent);
+    box-shadow: none;
   }
 
   @media only screen and (max-width: 480px) {
     input {
-      height: 2rem;
-      line-height: 2rem;
+      height: var(--number-input-height, 2rem);
+      line-height: var(--number-input-height, 2rem);
       text-align: center;
       font-size: 0.8rem !important;
     }
 
     .dec,
     .inc {
-      height: 2rem;
-      width: 2rem;
-      min-width: 2rem;
+      height: var(--number-input-height, 2rem);
+      width: var(--number-input-btn-size, 2rem);
+      min-width: var(--number-input-btn-size, 2rem);
     }
   }
 </style>

@@ -514,8 +514,8 @@ async function onConnect() {
     $('#tabs ul.mode-connected-cli').show();
 
     // show only appropriate tabs
-    $('#tabs ul.mode-connected li').hide();
-    $('#tabs ul.mode-connected li').filter(function () {
+    $('#tabs ul.mode-connected li:not(.tab-group-header)').hide();
+    $('#tabs ul.mode-connected li:not(.tab-group-header)').filter(function () {
         const classes = $(this).attr("class").split(/\s+/);
         let found = false;
         $.each(GUI.allowedTabs, (_index, value) => {

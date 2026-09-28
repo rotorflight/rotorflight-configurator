@@ -165,9 +165,7 @@ export function startProcess() {
     // log library versions in console to make version tracking easier
     console.log(`Libraries: jQuery - ${$.fn.jquery}`);
 
-    if (GUI.isCordova()) {
-        UI_PHONES.init();
-    }
+    UI_PHONES.init();
 
     const ui_tabs = $('#tabs > ul');
     $('a', ui_tabs).click(function () {

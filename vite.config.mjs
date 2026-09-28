@@ -11,6 +11,14 @@ const commitHash = child_process
   .toString()
   .trim();
 
+const buildLabel =
+  process.env.VITE_APP_BUILD_LABEL ||
+  child_process
+    .execSync("git branch --show-current || git describe --tags --exact-match")
+    .toString()
+    .trim() ||
+  commitHash;
+
 export default defineConfig({
   base: "./",
   build: {
@@ -73,6 +81,7 @@ export default defineConfig({
     __APP_VERSION__: JSON.stringify(pkg.version),
     __BACKEND__: JSON.stringify("nwjs"),
     __COMMIT_HASH__: JSON.stringify(commitHash),
+    __BUILD_LABEL__: JSON.stringify(buildLabel),
   },
   server: {
     port: 5077,

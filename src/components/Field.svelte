@@ -56,7 +56,8 @@
 
 <style lang="scss">
   .container {
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--animation-speed);
   }
 
   .tooltip-container {
@@ -67,9 +68,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 4px;
-    padding: 0 4px;
-    min-height: 32px;
+    gap: 8px;
+    padding: 0 8px;
+    min-height: 34px;
   }
 
   label {
@@ -82,14 +83,8 @@
   .units {
     margin-left: 8px;
     min-width: fit-content;
-
-    :global(html[data-theme="light"]) & {
-      color: hsl(20, 80%, 30%);
-    }
-
-    :global(html[data-theme="dark"]) & {
-      color: hsl(20, 50%, 70%);
-    }
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
   }
 
   @media only screen and (max-width: 480px) {

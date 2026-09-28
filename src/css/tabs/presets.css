@@ -325,7 +325,7 @@ html[data-theme="dark"] .tab-presets .ms-drop {
   width: 100%;
 }
 .presets_filter_select_nonempty {
-  border-color: #ffbb00 !important;
+  border-color: var(--color-accent-500) !important;
   border-width: 2px !important;
 }
 .presets_search_settings {
@@ -360,8 +360,8 @@ html[data-theme="dark"] .tab-presets .ms-drop {
 }
 .presets_filter_table_header {
   background: var(--quietHeader);
-  color: white;
-  border-radius: 4px 4px 0 0;
+  color: var(--color-header-fg);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   font-weight: normal;
   text-align: left;
   padding: 4px 4px 4px 6px;
@@ -503,7 +503,7 @@ html[data-theme="dark"] .tab-presets .ms-drop {
 
 #preset_dialog_content_wrapper .preset_panel_title {
   padding-bottom: 0.5ex;
-  border-bottom: 1px solid #ffbb00;
+  border-bottom: 1px solid var(--color-accent-500);
   margin-bottom: 2ex;
 }
 
@@ -598,7 +598,7 @@ html[data-theme="dark"] .tab-presets .ms-drop {
 }
 
 #preset_options_panel .ms-choice {
-  border-color: #ffbb00;
+  border-color: var(--color-accent-500);
   border-width: 2px;
 }
 #preset_options_panel > span {
