@@ -194,35 +194,6 @@ html[data-theme="dark"] .tab-rates .cf .rates_logo_bg {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* SERVOS TAB */
-
-html[data-theme="dark"] .tab-servos .servoConfig {
-  background-color: var(--color-surface);
-  color: var(--color-text);
-}
-
-html[data-theme="dark"] .tab-servos .servoConfig td {
-  border-color: var(--color-border);
-}
-
-html[data-theme="dark"] .tab-servos .servoConfig tbody tr,
-html[data-theme="dark"] .tab-servos .servoOverride tbody tr:nth-child(odd) {
-  background-color: var(--color-surface-alt);
-}
-
-html[data-theme="dark"] .tab-servos .servoConfig tbody tr:nth-child(even),
-html[data-theme="dark"] .tab-servos .servoOverride tbody tr:nth-child(even) {
-  background-color: var(--color-surface);
-}
-
-html[data-theme="dark"] .tab-servos .meter-bar {
-  background-color: var(--color-meter-bg);
-}
-
-html[data-theme="dark"] .tab-servos .meter-label {
-  color: var(--color-text);
-}
-
 /* SELECT2 */
 
 html[data-theme="dark"]
@@ -455,48 +426,6 @@ html[data-theme=dark] .tab-rates .COLLECTIVE .axis_title {
 
 html[data-theme=dark] .tab-rates .gui_box span {
     color: white;
-}
-
-html[data-theme=dark] .tab-servos .gui_box span {
-    color: white;
-}
-
-html[data-theme=dark] .tab-servos .servoConfig {
-    background-color: #393b3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-servos .servoConfig td {
-    border-color: #575757;
-}
-
-html[data-theme=dark] .tab-servos .servoConfig tbody tr {
-    background-color: #414443;
-}
-
-html[data-theme=dark] .tab-servos .servoConfig tbody tr:nth-child(even) {
-    background-color: #3f3f3f;
-}
-
-html[data-theme=dark] .tab-servos input[type="number"] {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-servos .meter-bar {
-    background-color: #3a3a3a;
-}
-
-html[data-theme=dark] .tab-servos .meter-label {
-    color: white;
-}
-
-html[data-theme=dark] .tab-servos .servoOverride tbody tr:nth-child(odd) {
-    background-color: #3f3f3f;
-}
-
-html[data-theme=dark] .tab-servos .servoOverride tbody tr:nth-child(even) {
-    background-color: #393939;
 }
 
 html[data-theme=dark] .tab-presets input,
