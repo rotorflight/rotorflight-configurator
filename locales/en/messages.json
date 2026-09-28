@@ -8128,5 +8128,17 @@
     },
     "adjustmentsSlotLabel": {
         "message": "Adjustment {{index}}"
+    },
+    "servoConfigurationBus": {
+        "message": "Bus Servo Configuration"
+    },
+    "servoConfigurationPwm": {
+        "message": "PWM Servo Configuration"
+    },
+    "servoOverrideBus": {
+        "message": "Bus Servo Override"
+    },
+    "servoOverridePwm": {
+        "message": "PWM Servo Override"
     }
 }
