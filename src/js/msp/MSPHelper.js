@@ -3050,12 +3050,8 @@ MspHelper.prototype.requestRpmFilterBanks = async function()
 
 MspHelper.prototype.setBatteryProfile = async function(index)
 {
-    if (CONFIGURATOR.virtualMode) {
-        FC.BATTERY_STATE.batteryProfile = index;
-    } else {
-        const buffer = [index];
-        await MSP.promise(MSPCodes.MSP_SET_BATTERY_PROFILE, buffer);
-    }
+    const buffer = [index];
+    await MSP.promise(MSPCodes.MSP_SET_BATTERY_PROFILE, buffer);
 };
 
 export let mspHelper = new MspHelper();
