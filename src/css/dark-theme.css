@@ -281,29 +281,6 @@ html[data-theme=dark] .tab-firmware_flasher .cf_table td {
     border-bottom: solid 1px #4f4f4f;
 }
 
-html[data-theme=dark] .tab-led-strip .section {
-    color: #c4c4c4;
-}
-
-html[data-theme=dark] .tab-led-strip .mainGrid {
-    background-color: #4e4e4e;
-}
-
-html[data-theme=dark] .tab-led-strip button {
-    background-color: #6b6b6b;
-    color: white;
-}
-
-html[data-theme=dark] .tab-led-strip button:hover {
-    border: 1px solid #ffffff;
-    background-color: #393b3a;
-}
-
-html[data-theme=dark] .tab-led-strip .gridSections,
-html[data-theme=dark] .tab-led-strip .gridSections .block {
-    border: none;
-}
-
 html[data-theme=dark] .tab-mixer .gui_box span {
     color: white;
 }
