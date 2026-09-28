@@ -272,6 +272,11 @@
           }
         };
 
+        // the window has no localisation of its own
+        windowWatcherUtil.passValue(createdWindow.window, "translate", (key) =>
+          $i18n.t(key),
+        );
+
         DarkTheme.isDarkThemeEnabled(function (isEnabled) {
           windowWatcherUtil.passValue(
             createdWindow.window,
@@ -285,7 +290,7 @@
 
   function onBind() {
     MSP.send_message(MSPCodes.MSP2_BETAFLIGHT_BIND);
-    GUI.log(i18n.getMessage("receiverButtonBindMessage"));
+    GUI.log($i18n.t("receiverButtonBindMessage"));
   }
 </script>
 
