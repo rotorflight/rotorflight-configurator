@@ -1,7 +1,7 @@
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { serial } from "@/js/serial.js";
-import { getVirtualEscResponse } from "@/js/virtual_fc.js";
+import { handleVirtualMessage } from "@/js/virtual_fc.js";
 
 let packet_error = $state(0);
 
@@ -331,15 +331,9 @@ export const MSP = {
     },
     send_message: function (code, data, callback_sent, callback_msp, doCallbackOnError) {
         if (CONFIGURATOR.virtualMode) {
+            const response = handleVirtualMessage(code, data);
             if (callback_msp) {
-                const virtualPayload = getVirtualEscResponse(code, data);
-                if (virtualPayload) {
-                    const buffer = new ArrayBuffer(virtualPayload.length);
-                    new Uint8Array(buffer).set(virtualPayload);
-                    callback_msp({ command: code, data: new DataView(buffer), length: virtualPayload.length, crcError: false });
-                } else {
-                    callback_msp();
-                }
+                callback_msp(response);
             }
             return;
         }

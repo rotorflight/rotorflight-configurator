@@ -111,8 +111,8 @@
         "message": "Manual Selection"
     },
     "portsSelectVirtual": {
-        "message": "Virtual Mode (Experimental)",
-        "description": "Configure a Virtual Flight Controller without the need of a physical FC."
+        "message": "Virtual Mode (Demo)",
+        "description": "Demo the configurator against a simulated flight controller - no hardware needed, and nothing is written to a real FC."
     },
     "virtualMSPVersion": {
         "message": "Virtual Firmware Version"
