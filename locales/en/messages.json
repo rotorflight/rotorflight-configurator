@@ -570,6 +570,48 @@
     "tabGroupDiagnostics": {
         "message": "Diagnostics"
     },
+    "adjustmentsGroupProfiles": {
+        "message": "Profile Selection"
+    },
+    "adjustmentsGroupRates": {
+        "message": "Rates"
+    },
+    "adjustmentsGroupRcRates": {
+        "message": "RC Rates"
+    },
+    "adjustmentsGroupRcExpo": {
+        "message": "RC Expo"
+    },
+    "adjustmentsGroupPidGains": {
+        "message": "PID Gains"
+    },
+    "adjustmentsGroupFilters": {
+        "message": "Filters"
+    },
+    "adjustmentsGroupYawDynamics": {
+        "message": "Yaw Dynamics"
+    },
+    "adjustmentsGroupStability": {
+        "message": "Stability"
+    },
+    "adjustmentsGroupAccTrim": {
+        "message": "Accelerometer Trim"
+    },
+    "adjustmentsGroupSetpointBoost": {
+        "message": "Setpoint Boost"
+    },
+    "adjustmentsGroupCrossCoupling": {
+        "message": "Cross Coupling"
+    },
+    "adjustmentsGroupYawPrecomp": {
+        "message": "Yaw Precomp"
+    },
+    "adjustmentsGroupRescue": {
+        "message": "Rescue"
+    },
+    "adjustmentsGroupGovernor": {
+        "message": "Governor"
+    },
     "tabAdjustments": {
         "message": "Adjustments"
     },
@@ -8068,5 +8110,20 @@
     },
     "presetsDontShowAgain": {
         "message": "Don't show again"
+    },
+    "adjustmentsAddButton": {
+        "message": "Add Adjustment"
+    },
+    "adjustmentsEmptyState": {
+        "message": "No adjustments configured yet. Click \"Add Adjustment\" to set up a switch that changes a value in flight."
+    },
+    "adjustmentsRemoveButton": {
+        "message": "Remove adjustment"
+    },
+    "adjustmentsSlotCount": {
+        "message": "{{used}} / {{total}} configured"
+    },
+    "adjustmentsSlotLabel": {
+        "message": "Adjustment {{index}}"
     }
 }
