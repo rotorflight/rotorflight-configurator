@@ -273,7 +273,10 @@
     height: 1.5rem;
     width: 1.5rem;
     min-width: 1.5rem;
-    font-size: 0.5rem;
+    font-size: 0.6rem;
+    /* %button sets 600, but Font Awesome Free only ships its solid glyphs
+       (plus/minus) at weight 900 - any other weight renders them blank. */
+    font-weight: 900;
 
     transition:
       background-color var(--animation-speed),
