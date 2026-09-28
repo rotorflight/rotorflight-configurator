@@ -153,11 +153,6 @@ html[data-theme="dark"] .tab-rates .tab-container > div.active {
   color: var(--color-accent-fg);
 }
 
-html[data-theme="dark"] .tab-profiles input:disabled,
-html[data-theme="dark"] .tab-profiles select:disabled {
-  color: var(--color-text-disabled);
-}
-
 html[data-theme="dark"] .tab-profiles .ROLL .axis_title,
 html[data-theme="dark"] .tab-rates .ROLL .axis_title {
   background-color: var(--color-roll);
@@ -171,14 +166,6 @@ html[data-theme="dark"] .tab-rates .PITCH .axis_title {
 html[data-theme="dark"] .tab-profiles .YAW .axis_title,
 html[data-theme="dark"] .tab-rates .YAW .axis_title {
   background-color: var(--color-yaw);
-}
-
-html[data-theme="dark"] .tab-profiles .bottomarea {
-  background-color: var(--color-surface);
-}
-
-html[data-theme="dark"] .tab-profiles .regular-button.disabled {
-  background-color: var(--color-btn-bg-disabled);
 }
 
 /* SELECT2 */
@@ -237,74 +224,6 @@ html[data-theme=dark] .tab-firmware_flasher .release_info .target {
 
 html[data-theme=dark] .tab-firmware_flasher .cf_table td {
     border-bottom: solid 1px #4f4f4f;
-}
-
-html[data-theme=dark] .tab-profiles .tab-area {
-    background: #393b3a;
-}
-
-html[data-theme=dark] .tab-profiles .tab-container > div {
-    background-color: #535655;
-    border-right: 1px solid #393b3a;
-}
-
-html[data-theme=dark] .tab-profiles .tab-container > div.active {
-    background-color: var(--accent);
-}
-
-html[data-theme=dark] .tab-profiles input:disabled,
-html[data-theme=dark] .tab-profiles select:disabled {
-    color: #595959;
-}
-
-html[data-theme=dark] .tab-profiles table input {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-profiles table select {
-    text-align-last: right;
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-profiles .settings_table .suboption select {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-profiles .settings_table .suboption input {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-profiles .ROLL .axis_title {
-    background-color: #A00000;
-}
-
-html[data-theme=dark] .tab-profiles .PITCH .axis_title {
-    background-color: #00A000;
-}
-
-html[data-theme=dark] .tab-profiles .YAW .axis_title {
-    background-color: #0000A0;
-}
-
-html[data-theme=dark] .tab-profiles .gui_box span {
-    color: white;
-}
-
-html[data-theme=dark] .tab-profiles .number input {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-profiles .bottomarea {
-    background-color: #393b3a;
-}
-
-html[data-theme=dark] .tab-profiles .regular-button.disabled {
-    background-color: #393b3a;
 }
 
 html[data-theme=dark] .tab-presets input,
