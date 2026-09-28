@@ -181,19 +181,6 @@ html[data-theme="dark"] .tab-profiles .regular-button.disabled {
   background-color: var(--color-btn-bg-disabled);
 }
 
-html[data-theme="dark"] .tab-rates .cf tr {
-  background-color: var(--color-surface-alt);
-}
-
-html[data-theme="dark"] .tab-rates .cf th {
-  background-color: var(--color-header-bg);
-  color: var(--color-header-fg);
-}
-
-html[data-theme="dark"] .tab-rates .cf .rates_logo_bg {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
 /* SELECT2 */
 
 html[data-theme="dark"]
@@ -318,78 +305,6 @@ html[data-theme=dark] .tab-profiles .bottomarea {
 
 html[data-theme=dark] .tab-profiles .regular-button.disabled {
     background-color: #393b3a;
-}
-
-html[data-theme=dark] .tab-rates .tab-area {
-    background: #393b3a;
-}
-
-html[data-theme=dark] .tab-rates .tab-container > div {
-    background-color: #535655;
-    border-right: 1px solid #393b3a;
-}
-
-html[data-theme=dark] .tab-rates .tab-container > div.active {
-    background-color: var(--accent);
-}
-
-html[data-theme=dark] .tab-rates select {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-rates input {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-rates table select {
-    text-align-last: right;
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-rates .cf tr {
-    background-color: #414443;
-}
-
-html[data-theme=dark] .tab-rates .cf th {
-    background-color: var(--quietHeader);
-    color: white;
-}
-
-html[data-theme=dark] .tab-rates .cf input {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-rates .cf select {
-    background-color: #3a3a3a;
-    color: white;
-}
-
-html[data-theme=dark] .tab-rates .cf .rates_logo_bg {
-    background-color: #ffffff33;
-}
-
-html[data-theme=dark] .tab-rates .ROLL .axis_title {
-    background-color: #A00000;
-}
-
-html[data-theme=dark] .tab-rates .PITCH .axis_title {
-    background-color: #00A000;
-}
-
-html[data-theme=dark] .tab-rates .YAW .axis_title {
-    background-color: #0000A0;
-}
-
-html[data-theme=dark] .tab-rates .COLLECTIVE .axis_title {
-    background-color: #C08000;
-}
-
-html[data-theme=dark] .tab-rates .gui_box span {
-    color: white;
 }
 
 html[data-theme=dark] .tab-presets input,
