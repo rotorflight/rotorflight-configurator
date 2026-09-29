@@ -1,3 +1,9 @@
 {
-  "entries": []
+  "entries": [
+    {
+      "type": "branch",
+      "name": "feature-web-pages",
+      "path": "./feature-web-pages/"
+    }
+  ]
 }
