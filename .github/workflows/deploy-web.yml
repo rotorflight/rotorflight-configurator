@@ -1,0 +1,321 @@
+name: Deploy Web App
+
+# Builds the configurator as a web app and publishes it to the gh-pages
+# branch, one directory per ref, with a landing page (.github/pages/) that
+# lists every deployed build from versions.json.
+#
+#   master              -> /master/
+#   feature/foo etc.    -> /feature-foo/
+#   release/<ver> tag   -> /release/<ver>/  (and /latest/ for plain x.y.z)
+#   snapshot/<ver> tag  -> /snapshot/<ver>/
+#
+# Deleting a branch removes its directory again.
+#
+# GitHub Releases themselves are created by release.yml / snapshot.yml; this
+# workflow deliberately leaves them alone so the two never race over the
+# same release.
+
+on:
+  push:
+    branches:
+      - master
+      - feature/**
+      - bugfix/**
+      - experiment/**
+      - release/**
+    tags:
+      - "release/**"
+      - "snapshot/**"
+  delete:
+  workflow_dispatch:
+    inputs:
+      deployment_path:
+        description: "Optional deployment path override"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+# One group per deployed ref. A delete event's github.ref is the default
+# branch, so key it on the deleted branch's full ref instead -- the same group
+# as that branch's push deploys, so the cleanup waits for an in-flight deploy
+# (or replaces a pending one) rather than racing it and being undone by it.
+# A single shared group would let an unrelated run evict a pending one: GitHub
+# keeps only one pending run per group, so deleting a branch right after
+# merging it would cancel the queued master deploy. Within a group a newer run
+# still replaces an older pending one, which is what we want for repeat
+# pushes. Runs in different groups can publish concurrently, so the gh-pages
+# push steps below retry on top of whatever landed first.
+concurrency:
+  group: pages-${{ github.event_name == 'delete' && format('refs/heads/{0}', github.event.ref) || github.ref }}
+  cancel-in-progress: false
+
+env:
+  # Public URL of the site. Set the PAGES_URL repository variable when a
+  # custom domain (CNAME on gh-pages) is in use; otherwise the default
+  # github.io address is assumed.
+  PAGES_URL: ${{ vars.PAGES_URL || format('https://{0}.github.io/{1}', github.repository_owner, github.event.repository.name) }}
+
+jobs:
+  deploy:
+    name: Build and Deploy Web App
+    if: github.event_name != 'delete'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Determine deployment path
+        id: path
+        shell: bash
+        run: |
+          if [ -n "${{ github.event.inputs.deployment_path }}" ]; then
+            DEPLOY_PATH="${{ github.event.inputs.deployment_path }}"
+            UPDATE_LATEST="false"
+          elif [ "${{ github.ref_type }}" = "tag" ]; then
+            TAG="${{ github.ref_name }}"
+            if [[ "$TAG" == release/* ]]; then
+              VERSION="${TAG#release/}"
+              DEPLOY_PATH="release/$VERSION"
+              # Only plain x.y.z releases become "latest" -- release
+              # candidates (x.y.z-RCn) stay under release/ only.
+              if [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+                UPDATE_LATEST="true"
+              else
+                UPDATE_LATEST="false"
+              fi
+            else
+              VERSION="${TAG#snapshot/}"
+              DEPLOY_PATH="snapshot/$VERSION"
+              UPDATE_LATEST="false"
+            fi
+          elif [ "${{ github.ref_name }}" = "master" ]; then
+            DEPLOY_PATH="master"
+            UPDATE_LATEST="false"
+          else
+            DEPLOY_PATH="${{ github.ref_name }}"
+            DEPLOY_PATH="$(echo "$DEPLOY_PATH" | sed -E 's#[^A-Za-z0-9._-]+#-#g')"
+            UPDATE_LATEST="false"
+          fi
+
+          # The web build needs its absolute base path: the site's own path
+          # (e.g. /rotorflight-configurator on github.io, empty on a custom
+          # domain) plus the deploy directory.
+          SITE_PATH="$(python3 -c 'import sys, urllib.parse; print(urllib.parse.urlparse(sys.argv[1]).path.rstrip("/"))' "$PAGES_URL")"
+
+          echo "deploy_path=$DEPLOY_PATH" >> "$GITHUB_OUTPUT"
+          echo "update_latest=$UPDATE_LATEST" >> "$GITHUB_OUTPUT"
+          echo "site_path=$SITE_PATH" >> "$GITHUB_OUTPUT"
+          echo "Deploying to: $DEPLOY_PATH"
+          echo "Update latest: $UPDATE_LATEST"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 11
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".nvmrc"
+          package-manager-cache: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.PNPM_STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build web app
+        env:
+          VITE_APP_BACKEND: web
+          VITE_APP_BASE: ${{ steps.path.outputs.site_path }}/${{ steps.path.outputs.deploy_path }}/
+          VITE_APP_BUILD_LABEL: ${{ github.ref_name }}
+        run: pnpm exec vite build
+
+      # "latest" is a second copy of a release build, and the web build's
+      # URLs are absolute, so it needs its own build with its own base path.
+      - name: Build web app for latest
+        if: steps.path.outputs.update_latest == 'true'
+        env:
+          VITE_APP_BACKEND: web
+          VITE_APP_BASE: ${{ steps.path.outputs.site_path }}/latest/
+          VITE_APP_BUILD_LABEL: ${{ github.ref_name }}
+        run: |
+          mv bundle bundle-release
+          pnpm exec vite build
+          mv bundle bundle-latest
+          mv bundle-release bundle
+
+      - name: Ensure gh-pages branch exists
+        shell: bash
+        run: |
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null; then
+            exit 0
+          fi
+          # First deploy: start gh-pages as an empty orphan branch.
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git worktree add --orphan -b gh-pages ../gh-pages-init
+          cd ../gh-pages-init
+          touch .nojekyll
+          git add .nojekyll
+          git commit -m "Initialise gh-pages"
+          git push origin gh-pages || git ls-remote --exit-code --heads origin gh-pages
+
+      - name: Checkout GitHub Pages branch
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          path: pages
+
+      - name: Publish to GitHub Pages branch
+        shell: bash
+        run: |
+          DEPLOY_PATH="${{ steps.path.outputs.deploy_path }}"
+          UPDATE_LATEST="${{ steps.path.outputs.update_latest }}"
+
+          cd pages
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Another ref's run may push gh-pages first; each attempt rebuilds
+          # this run's changes on top of the latest gh-pages and tries again.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin gh-pages
+            git reset --hard origin/gh-pages
+
+            rm -rf "$DEPLOY_PATH"
+            mkdir -p "$DEPLOY_PATH"
+            cp -R ../bundle/. "$DEPLOY_PATH/"
+
+            if [ "$UPDATE_LATEST" = "true" ]; then
+              rm -rf latest
+              mkdir -p latest
+              cp -R ../bundle-latest/. latest/
+            fi
+
+            # Landing page + its logos, then the build index it reads.
+            cp -R ../.github/pages/. .
+            touch .nojekyll
+            python3 ../.github/scripts/generate_versions.py
+
+            git add .
+            if git diff --cached --quiet; then
+              echo "No GitHub Pages changes to publish"
+              exit 0
+            fi
+            git commit -m "deploy: $DEPLOY_PATH from ${{ github.sha }}"
+
+            if git push origin gh-pages; then
+              exit 0
+            fi
+            echo "gh-pages push rejected (attempt $attempt); retrying"
+            sleep $((attempt * 5))
+          done
+
+          echo "Failed to publish to gh-pages after 5 attempts"
+          exit 1
+
+      - name: Print deployment URLs
+        shell: bash
+        run: |
+          DEPLOY_PATH="${{ steps.path.outputs.deploy_path }}"
+
+          echo "Deployment index: $PAGES_URL/"
+          echo "Deployment: $PAGES_URL/$DEPLOY_PATH/"
+          if [ "${{ steps.path.outputs.update_latest }}" = "true" ]; then
+            echo "Latest stable: $PAGES_URL/latest/"
+          fi
+          echo "### Deployed to [$PAGES_URL/$DEPLOY_PATH/]($PAGES_URL/$DEPLOY_PATH/)" >> "$GITHUB_STEP_SUMMARY"
+
+  cleanup-deleted-branch:
+    name: Cleanup Deleted Branch Deployment
+    if: github.event_name == 'delete' && github.event.ref_type == 'branch'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v6
+
+      - name: Checkout GitHub Pages branch
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          path: pages
+
+      - name: Determine deployment path
+        id: path
+        shell: bash
+        run: |
+          DEPLOY_PATH="${{ github.event.ref }}"
+          DEPLOY_PATH="$(echo "$DEPLOY_PATH" | sed -E 's#[^A-Za-z0-9._-]+#-#g')"
+
+          echo "deploy_path=$DEPLOY_PATH" >> "$GITHUB_OUTPUT"
+          echo "Deleting deployment path: $DEPLOY_PATH"
+
+      - name: Remove deployment from GitHub Pages branch
+        shell: bash
+        run: |
+          DEPLOY_PATH="${{ steps.path.outputs.deploy_path }}"
+
+          # Never let a branch delete wipe the pinned/reserved directories.
+          case "$DEPLOY_PATH" in
+            master|latest|release|snapshot|pr|logos|""|.|..)
+              echo "Refusing to remove reserved path '$DEPLOY_PATH'"
+              exit 0
+              ;;
+          esac
+
+          cd pages
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Same retry-on-rejected-push loop as the deploy job's publish step.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin gh-pages
+            git reset --hard origin/gh-pages
+
+            if [ -d "$DEPLOY_PATH" ]; then
+              rm -rf "$DEPLOY_PATH"
+              echo "Deleted pages/$DEPLOY_PATH"
+            else
+              echo "No deployment found for pages/$DEPLOY_PATH"
+            fi
+
+            cp -R ../.github/pages/. .
+            touch .nojekyll
+            python3 ../.github/scripts/generate_versions.py
+
+            git add .
+            if git diff --cached --quiet; then
+              echo "No GitHub Pages changes to publish"
+              exit 0
+            fi
+            git commit -m "cleanup: remove deployment for deleted branch ${{ github.event.ref }}"
+
+            if git push origin gh-pages; then
+              exit 0
+            fi
+            echo "gh-pages push rejected (attempt $attempt); retrying"
+            sleep $((attempt * 5))
+          done
+
+          echo "Failed to publish to gh-pages after 5 attempts"
+          exit 1
