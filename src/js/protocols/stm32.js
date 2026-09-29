@@ -18,6 +18,17 @@ import { TABS } from "@/js/tabs/tabs.js";
 
     popular choices - 921600, 460800, 256000, 230400, 153600, 128000, 115200, 57600, 38400, 28800, 19200
 */
+// After the reboot request, how long to look for the ROM bootloader's DFU
+// device while the board's serial port is gone. Windows can take several
+// seconds to enumerate it. On web an unauthorized DFU device never shows up,
+// so permission is asked for sooner there.
+const DFU_WAIT_INTERVAL_MS = 500;
+const DFU_WAIT_ATTEMPTS = 20;
+const DFU_WAIT_ATTEMPTS_WEB = 4;
+// A port still listed this many checks after the first is a USB-UART
+// board's, whose ROM bootloader answers on it.
+const SERIAL_SETTLE_ATTEMPTS = 2;
+
 var STM32_protocol = function () {
     this.baud = null;
     this.options = {};
@@ -95,47 +106,89 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
 
                 self.initialize();
             } else {
-                GUI.log(i18n.getMessage('serialPortOpenFail'));
+                GUI.log(serial.openFailureMessage());
             }
         });
     } else {
 
-        var startFlashing = function() {
+        // Ends the attempt without flashing, so the flasher leaves its
+        // in-progress state instead of locking up.
+        var giveUp = function(message) {
+            GUI.connect_lock = false;
+            GUI.log(message);
+            TABS.firmware_flasher.flashingMessage(message, TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
+            self.callback?.();
+        };
+
+        // Whether the port the board was on is still listed. A USB-VCP board
+        // drops it as it reboots into DFU; a board on a USB-UART adapter keeps
+        // it, and its ROM bootloader then answers on that same port.
+        var serialPortPresent = function(callback) {
+            if (self.port.startsWith('tcp://')) {
+                callback(true);
+                return;
+            }
+            serial.getDevices((ports) => callback(ports.some((p) => p.path === self.port)));
+        };
+
+        var startFlashing = function(attempt = 0) {
             // refresh device list
             PortHandler.check_usb_devices(function(dfu_available) {
-                if(dfu_available) {
-                    STM32DFU.connect(usbDevices, hex, options);
-                } else {
-                    serial.connect(self.port, {bitrate: self.baud, parityBit: 'even', stopBits: 'one'}, function (openInfo) {
-                        if (openInfo) {
-                            self.initialize();
-                        } else if (__BACKEND__ === "web" && 'usb' in navigator) {
-                            // The serial port is gone because the board
-                            // rebooted into DFU, but this browser hasn't been
-                            // granted access to its DFU device yet, so
-                            // check_usb_devices couldn't see it. Granting
-                            // needs a click: see requestDfuPermission() in
-                            // firmware_flasher/state.svelte.js.
-                            TABS.firmware_flasher.flashingMessage(i18n.getMessage('firmwareFlasherDfuPermissionNeeded'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.ACTION);
-                            TABS.firmware_flasher.requestDfuPermission(function () {
-                                STM32DFU.connect(usbDevices, hex, options);
-                            }, function () {
-                                GUI.connect_lock = false;
-                                TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32UsbDfuNotFound'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
-                                self.callback?.();
-                            });
-                        } else if (__BACKEND__ === "web") {
-                            // Same, but without WebUSB there is no way to
-                            // reach a board in DFU from this browser.
-                            GUI.connect_lock = false;
-                            GUI.log(i18n.getMessage('dfuWebUsbUnsupported'));
-                            TABS.firmware_flasher.flashingMessage(i18n.getMessage('dfuWebUsbUnsupported'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
-                            self.callback?.();
-                        } else {
-                            GUI.connect_lock = false;
-                            GUI.log(i18n.getMessage('serialPortOpenFail'));
-                        }
+                if (dfu_available) {
+                    STM32DFU.connect(usbDevices, hex, options, self.callback);
+                    return;
+                }
+                serialPortPresent(function(portPresent) {
+                    // The board is on its way into DFU. Windows can take several
+                    // seconds to enumerate the ROM bootloader, so keep looking.
+                    // Never open the old port here: opening one Windows is still
+                    // removing can fail the device or hang the app. On web, an
+                    // unauthorized DFU device never shows up, so ask for
+                    // permission sooner.
+                    const maxAttempts = (__BACKEND__ === "web") ? DFU_WAIT_ATTEMPTS_WEB : DFU_WAIT_ATTEMPTS;
+                    if (!portPresent && attempt < maxAttempts) {
+                        setTimeout(() => startFlashing(attempt + 1), DFU_WAIT_INTERVAL_MS);
+                    } else if (!portPresent && __BACKEND__ !== "web") {
+                        giveUp(i18n.getMessage('stm32UsbDfuNotFoundAfterReboot'));
+                    } else if (portPresent && attempt < SERIAL_SETTLE_ATTEMPTS) {
+                        // A USB-VCP board's port can still be listed just
+                        // after the reset, on its way out. Only open it once
+                        // it has stayed.
+                        setTimeout(() => startFlashing(attempt + 1), DFU_WAIT_INTERVAL_MS);
+                    } else {
+                        startSerialFlashing();
+                    }
+                });
+            });
+        };
+
+        var startSerialFlashing = function() {
+            serial.connect(self.port, {bitrate: self.baud, parityBit: 'even', stopBits: 'one'}, function (openInfo) {
+                if (openInfo) {
+                    self.initialize();
+                } else if (__BACKEND__ === "web" && 'usb' in navigator) {
+                    // The serial port is gone because the board rebooted into
+                    // DFU, but this browser hasn't been granted access to its
+                    // DFU device yet, so check_usb_devices couldn't see it.
+                    // Granting needs a click: see requestDfuPermission() in
+                    // firmware_flasher/state.svelte.js.
+                    TABS.firmware_flasher.flashingMessage(i18n.getMessage('firmwareFlasherDfuPermissionNeeded'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.ACTION);
+                    TABS.firmware_flasher.requestDfuPermission(function () {
+                        STM32DFU.connect(usbDevices, hex, options, self.callback);
+                    }, function () {
+                        GUI.connect_lock = false;
+                        TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32UsbDfuNotFound'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
+                        self.callback?.();
                     });
+                } else if (__BACKEND__ === "web") {
+                    // Same, but without WebUSB there is no way to reach a
+                    // board in DFU from this browser.
+                    GUI.connect_lock = false;
+                    GUI.log(i18n.getMessage('dfuWebUsbUnsupported'));
+                    TABS.firmware_flasher.flashingMessage(i18n.getMessage('dfuWebUsbUnsupported'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
+                    self.callback?.();
+                } else {
+                    giveUp(serial.openFailureMessage());
                 }
             });
         };
@@ -184,10 +237,17 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
             console.log('Looking for capabilities via MSP failed');
 
             TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32RebootingToBootloaderFailed'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
+            // Finish the attempt, or the flasher waits for it forever.
+            self.callback?.();
         };
 
+        // The port couldn't even be opened (e.g. another program has it):
+        // say so on the flash status, and finish the attempt so the UI
+        // doesn't sit on "Rebooting to bootloader" forever.
         var onFailureHandler = function() {
             GUI.connect_lock = false;
+            TABS.firmware_flasher.flashingMessage(serial.openFailureMessage(), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
+            self.callback?.();
         };
 
         GUI.connect_lock = true;

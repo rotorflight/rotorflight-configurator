@@ -132,7 +132,51 @@ export async function requestWebUsbDeviceFromPicker() {
     }
 }
 
-export async function handleConnectClick() {
+/**
+ * Select the picker's DFU entry and make sure the site has WebUSB access to
+ * the board, as picking DFU in the picker itself does. Used by the Firmware
+ * Flasher's "Select DFU device" button. (A programmatic change event doesn't
+ * trigger the picker's own request, which needs event.originalEvent.)
+ */
+export async function selectDfuFromPicker() {
+    $('div#port-picker #port').val('DFU').trigger('change');
+    if (__BACKEND__ === "web") {
+        await requestWebUsbDeviceFromPicker();
+    }
+}
+
+// Resolves once fn calls its callback, or after timeoutMs, whichever is first.
+function callbackOrTimeout(fn, timeoutMs) {
+    return new Promise((resolve) => {
+        const timer = setTimeout(resolve, timeoutMs);
+        fn(() => {
+            clearTimeout(timer);
+            resolve();
+        });
+    });
+}
+
+// Resolves true once the given tab is active and fully initialized, false on
+// timeout.
+function waitForActiveTab(tabName, timeoutMs = 5000) {
+    return new Promise((resolve) => {
+        const started = Date.now();
+        const check = () => {
+            if (GUI.active_tab === tabName && !GUI.tab_switch_in_progress) {
+                resolve(true);
+            } else if (Date.now() - started > timeoutMs) {
+                resolve(false);
+            } else {
+                setTimeout(check, 50);
+            }
+        };
+        check();
+    });
+}
+
+// openLanding: false skips finishClose()'s jump to the landing tab, for a
+// caller that switches to another tab itself right after disconnecting.
+export async function handleConnectClick({ openLanding = true } = {}) {
     if (GUI.connect_lock != true) { // GUI control overrides the user control
 
         const thisElement = $(this);
@@ -184,20 +228,38 @@ export async function handleConnectClick() {
                     serial.connect(portName, {bitrate: selected_baud}, onOpen);
                 }
             } else {
+                // Leaving the CLI sends `exit`, which reboots the FC, and the
+                // resulting device_lost (serial.js errorHandler) or port removal
+                // (PortHandler.removePort) clicks Connect again while this
+                // disconnect is still running. A second disconnect would jump to
+                // the landing tab regardless of openLanding, and its MSP cleanup
+                // drops the callback the first one is awaiting below, leaving it
+                // hung, so let the one already in flight finish instead.
+                if (GUI.disconnect_in_progress) {
+                    return;
+                }
                 if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
                     $('div#flashbutton a.flash_state').removeClass('active');
                     $('div#flashbutton a.flash').removeClass('active');
                 }
-                GUI.timeout_kill_all();
-                GUI.interval_kill_all();
-                await new Promise((resolve) => GUI.tab_switch_cleanup(resolve));
-                GUI.tab_switch_in_progress = false;
+                GUI.disconnect_in_progress = true;
+                try {
+                    GUI.timeout_kill_all();
+                    GUI.interval_kill_all();
+                    // Both steps talk to an FC that may have just rebooted out
+                    // from under us (CLI `exit`), so neither is guaranteed to
+                    // call back; don't let that stall the disconnect.
+                    await callbackOrTimeout((done) => GUI.tab_switch_cleanup(done), 2000);
+                    GUI.tab_switch_in_progress = false;
 
-                await new Promise((resolve) => mspHelper.setArmingEnabled(true, resolve));
+                    await callbackOrTimeout((done) => mspHelper.setArmingEnabled(true, done), 1000);
 
-                // Wait for the port to actually finish closing before letting the
-                // caller (e.g. the firmware flasher tab switch) proceed.
-                await finishClose();
+                    // Wait for the port to actually finish closing before letting the
+                    // caller (e.g. the firmware flasher tab switch) proceed.
+                    await finishClose({ openLanding });
+                } finally {
+                    GUI.disconnect_in_progress = false;
+                }
             }
 
             toggleStatus();
@@ -265,15 +327,47 @@ export function initializeSerialBackend() {
       handleConnectClick.call(this);
     });
 
-    $('div.open_firmware_flasher a.flash').on("click", function() {
+    $('div.open_firmware_flasher a.flash').on("click", async function() {
         if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
-            $('div#flashbutton a.flash_state').removeClass('active');
-            $('div#flashbutton a.flash').removeClass('active');
+            // The tab switch clears these indicators after its exit guard allows it.
             $('#tabs ul.mode-disconnected .tab_landing a').trigger("click");
-        } else {
-            $('#tabs ul.mode-disconnected .tab_firmware_flasher a').trigger("click");
-            $('div#flashbutton a.flash_state').addClass('active');
-            $('div#flashbutton a.flash').addClass('active');
+            return;
+        }
+
+        if (GUI.opening_firmware_flasher) {
+            return;
+        }
+
+        // Still connected (e.g. CLI fallback mode for unsupported firmware):
+        // disconnect as the Disconnect button does, minus its jump to the
+        // landing tab, then go straight to the flasher. The flag keeps
+        // auto-connect from grabbing the FC back as it reboots from the CLI's
+        // `exit` in the meantime.
+        GUI.opening_firmware_flasher = true;
+        try {
+            if (GUI.connected_to || GUI.connecting_to) {
+                await handleConnectClick.call($('div#connectbutton a.connect')[0], { openLanding: false });
+                if (GUI.connected_to || GUI.connecting_to) {
+                    return;
+                }
+            }
+
+            // The Virtual FC is not listed while the flasher owns the port
+            PortHandler.syncVirtualOption();
+
+            // A click can still be dropped if it lands mid-switch, so retry
+            // until the flasher is actually the active tab.
+            for (let attempt = 0; attempt < 3 && GUI.active_tab !== 'firmware_flasher'; attempt++) {
+                $('#tabs ul.mode-disconnected .tab_firmware_flasher a').trigger("click");
+                await waitForActiveTab('firmware_flasher', 2000);
+            }
+
+            if (GUI.active_tab === 'firmware_flasher') {
+                $('div#flashbutton a.flash_state').addClass('active');
+                $('div#flashbutton a.flash').addClass('active');
+            }
+        } finally {
+            GUI.opening_firmware_flasher = false;
         }
     });
 
@@ -348,7 +442,7 @@ export function initializeSerialBackend() {
     PortHandler.initialize(GUI.show_all_ports);
 }
 
-function finishClose() {
+function finishClose({ openLanding = true } = {}) {
     if (GUI.isCordova()) {
         UI_PHONES.reset();
     }
@@ -395,7 +489,9 @@ function finishClose() {
         $('#content').empty();
     }
 
-    $('#tabs .tab_landing a').trigger("click");
+    if (openLanding) {
+        $('#tabs .tab_landing a').trigger("click");
+    }
 
     return disconnected;
 }

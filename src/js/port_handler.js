@@ -11,6 +11,12 @@ const TIMEOUT_CHECK = 500 ; // With 250 it seems that it produces a memory leak 
 // no-hardware demo of every tab.
 const SHOW_VIRTUAL_PORT = import.meta.env.DEV || __BACKEND__ === "web";
 
+// The flasher owns the port while it's open, or being opened (it reboots the FC
+// into the bootloader itself).
+function flasherOwnsPort() {
+    return GUI.active_tab === 'firmware_flasher' || GUI.opening_firmware_flasher;
+}
+
 export const usbDevices = { filters: [
     {'vendorId': 1155, 'productId': 57105},
     {'vendorId': 10473, 'productId': 393},
@@ -43,6 +49,9 @@ PortHandler.check = function () {
 
     self.check_usb_devices();
     self.check_serial_devices();
+
+    // Opening or leaving the flasher changes whether the Virtual FC is listed
+    self.syncVirtualOption();
 
     GUI.updateManualPortVisibility();
 
@@ -126,19 +135,12 @@ PortHandler.check_usb_devices = function (callback) {
                     'data-is-dfu': 'true',
                 }));
 
-                if (SHOW_VIRTUAL_PORT) {
-                    self.portPickerElement.append($('<option/>', {
-                       value: 'virtual',
-                       text: i18n.getMessage('portsSelectVirtual'),
-                       data: {isVirtual: true},
-                    }));
-                }
-
                 self.portPickerElement.append($('<option/>', {
                     value: 'manual',
                     text: i18n.getMessage('portsSelectManual'),
                     data: {isManual: true},
                 }));
+                self.syncVirtualOption();
                 self.portPickerElement.val('DFU').change();
                 self.setPortsInputWidth();
             }
@@ -258,14 +260,15 @@ PortHandler.detectPort = function(currentPorts) {
             }
         }
 
-        // auto-connect if enabled
-        if (GUI.auto_connect && !GUI.connecting_to && !GUI.connected_to) {
-            // start connect procedure. We need firmware flasher protection over here
-            if (GUI.active_tab !== 'firmware_flasher') {
-                GUI.timeout_add('auto-connect_timeout', function () {
-                    $('div#header_btns a.connect').click();
-                }, config.connectionTimeout); // timeout so bus have time to initialize after being detected by the system
-            }
+        // auto-connect if enabled, but never while the flasher owns the port
+        if (GUI.auto_connect && !GUI.connecting_to && !GUI.connected_to && !flasherOwnsPort()) {
+            GUI.timeout_add('auto-connect_timeout', function () {
+                // A device appearing is never a reason to connect to the Virtual FC
+                if (flasherOwnsPort() || self.virtualSelected()) {
+                    return;
+                }
+                $('div#header_btns a.connect').click();
+            }, config.connectionTimeout); // timeout so bus have time to initialize after being detected by the system
         }
         // trigger callbacks
         for (let i = (self.port_detected_callbacks.length - 1); i >= 0; i--) {
@@ -321,21 +324,9 @@ PortHandler.updatePortSelect = function (ports) {
         }));
     }
 
-    const virtualOption = () => $("<option/>", {
-        value: 'virtual',
-        text: i18n.getMessage('portsSelectVirtual'),
-        data: {isVirtual: true},
-    });
-
     if (__BACKEND__ === "web") {
         this.appendWebRequestOptions();
-        // Last, so that with no device granted yet "Please select" is the
-        // default rather than the demo.
-        this.portPickerElement.append(virtualOption());
     } else {
-        if (SHOW_VIRTUAL_PORT) {
-            this.portPickerElement.append(virtualOption());
-        }
         // Manual entry is a raw OS device path or tcp:// address, which only
         // chrome.serial/chrome.sockets.tcp can open.
         this.portPickerElement.append($("<option/>", {
@@ -345,8 +336,51 @@ PortHandler.updatePortSelect = function (ports) {
         }));
     }
 
+    this.syncVirtualOption();
     this.setPortsInputWidth();
     return ports;
+};
+
+/**
+ * The Virtual FC is not a device. It is only ever a target the user picks by
+ * hand to connect to, so it is not listed while the flasher owns the port, and
+ * port detection, auto-select and auto-connect never choose it. It always goes
+ * last, so a rebuilt picker never defaults to it.
+ */
+PortHandler.virtualPortListed = function () {
+    return SHOW_VIRTUAL_PORT && !flasherOwnsPort();
+};
+
+PortHandler.virtualSelected = function () {
+    return !!$('option:selected', this.portPickerElement).data()?.isVirtual;
+};
+
+PortHandler.syncVirtualOption = function () {
+    const existing = this.portPickerElement.children("[value='virtual']");
+
+    if (!this.virtualPortListed()) {
+        if (existing.length) {
+            const wasSelected = existing.is(':selected');
+            existing.remove();
+            if (wasSelected) {
+                this.portPickerElement.val(this.portPickerElement.children().first().val()).trigger('change');
+            }
+            this.setPortsInputWidth();
+        }
+        return;
+    }
+
+    if (!existing.length) {
+        this.portPickerElement.append($("<option/>", {
+            value: 'virtual',
+            text: i18n.getMessage('portsSelectVirtual'),
+            data: {isVirtual: true},
+        }));
+        this.setPortsInputWidth();
+    } else if (!existing.is(':last-child')) {
+        // Keep it last; moving the node keeps its selection
+        this.portPickerElement.append(existing);
+    }
 };
 
 /**

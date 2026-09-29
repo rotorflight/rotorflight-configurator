@@ -30,6 +30,8 @@ function set(prop: string, value: any) {
 export type Config = {
   configVersion: number | null;
   autoConnect: boolean;
+  // Firmware Flasher: "none", "diff" or "dump" (BACKUP_TYPES in cli_backup.js)
+  backupBeforeFlashingMode: string;
   checkForConfiguratorUnstableVersions: boolean;
   cliAutoComplete: boolean;
   connectionTimeout: number;
@@ -62,6 +64,9 @@ const _config: Config = $state({
 
   // Default Values
   autoConnect: true,
+  // `dump all` rather than `diff all`: a diff opens with `defaults nosave`,
+  // which can leave a spurious CLI error that blocks the restore's `save`.
+  backupBeforeFlashingMode: "dump",
   checkForConfiguratorUnstableVersions: true,
   cliAutoComplete: true,
   connectionTimeout: 100,

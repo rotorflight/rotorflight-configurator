@@ -1,4 +1,7 @@
 <script>
+  // The single-page Firmware Flasher from before the step wizard
+  // (FirmwareFlasher.svelte), reachable from the wizard's Connect step for
+  // anyone who prefers it. Kept as it was, apart from the link back.
   import * as marked from "marked";
   import { onDestroy, onMount } from "svelte";
 
@@ -49,6 +52,8 @@
     processBoardOptions,
     versionOptions,
   } from "./util.js";
+
+  let { onBackToWizard } = $props();
 
   const releaseChecker = new ReleaseChecker(
     "firmware",
@@ -851,6 +856,9 @@
 
 {#snippet header()}
   <h1>{$i18n.t("tabFirmwareFlasher")}</h1>
+  <button class="legacy-back-link" onclick={onBackToWizard}>
+    {$i18n.t("firmwareFlasherLegacyBackToWizard")}
+  </button>
 {/snippet}
 
 {#snippet toolbar()}
@@ -1341,5 +1349,19 @@
 
   dialog h3 {
     margin-bottom: 0.5em;
+  }
+
+  .legacy-back-link {
+    background: none;
+    border: none;
+    padding: 0;
+    text-decoration: underline;
+    color: var(--color-text-soft);
+    font-weight: normal;
+    font-size: 0.8rem;
+    cursor: pointer;
+    /* The header is a flex row (see Page.svelte); this pushes the link right
+       without it taking on the h1's styling. */
+    margin-left: auto;
   }
 </style>

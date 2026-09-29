@@ -18,6 +18,10 @@
     position: relative;
     margin-left: 8px;
 
+    &:hover .tooltip {
+      display: block;
+    }
+
     :global(html[data-theme="light"]) &:hover .icon {
       color: hsl(40, 100%, 50%);
     }

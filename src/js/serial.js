@@ -14,6 +14,7 @@ export const serial = {
     connected:      false,
     connectionId:   false,
     openCanceled:   false,
+    openPending:    false,
     bitrate:        0,
     bytesReceived:  0,
     bytesSent:      0,
@@ -35,13 +36,28 @@ export const serial = {
     bleDeviceProfile: false,
     bleWriteCharacteristic: false,
     bleReadCharacteristic: false,
+    // Why the most recent connect() failed to open its port: 'notFound' (the
+    // device isn't there any more) or 'openFailed' (it's there but the OS
+    // refused to open it, in practice almost always because another program
+    // or browser tab holds it). Null after a successful open.
     lastOpenError:  null,
+
+    // The message to show for the last failed open, so callers can say what
+    // to do about it (usually: close whatever else has the port).
+    openFailureMessage: function () {
+        switch (this.lastOpenError) {
+            case 'openFailed': return i18n.getMessage('serialPortOpenFailBusy');
+            case 'notFound': return i18n.getMessage('serialPortOpenFailNotFound');
+            default: return i18n.getMessage('serialPortOpenFail');
+        }
+    },
 
     transmitting:   false,
     outputBuffer:   [],
 
     connect: function (path, options, callback) {
         const self = this;
+        self.lastOpenError = null;
 
         // The picker's "add device" entries only mean something when a user
         // picks them (serial_backend.js handles that). Reaching here with one
@@ -53,17 +69,27 @@ export const serial = {
             return;
         }
 
+        // Tracks that an open is in flight, so disconnect() only raises
+        // openCanceled when there is something to cancel.
+        self.openPending = true;
+        const done = (openInfo) => {
+            self.openPending = false;
+            // A cancel only applies to the attempt it was raised against.
+            self.openCanceled = false;
+            callback?.(openInfo);
+        };
+
         const testUrl = path.match(/^tcp:\/\/([A-Za-z0-9.-]+)(?::(\d+))?$/);
         if (testUrl) {
-            self.connectTcp(testUrl[1], testUrl[2], options, callback);
+            self.connectTcp(testUrl[1], testUrl[2], options, done);
         } else if (path === 'virtual') {
-            self.connectVirtual(callback);
+            self.connectVirtual(done);
         } else if (__BACKEND__ === "web" && path.startsWith('bluetooth_')) {
-            connectWebBluetooth(self, path, callback);
+            connectWebBluetooth(self, path, done);
         } else if (__BACKEND__ === "web") {
-            connectWebSerial(self, path, options, callback);
+            connectWebSerial(self, path, options, done);
         } else {
-            self.connectSerial(path, options, callback);
+            self.connectSerial(path, options, done);
         }
     },
     loadWebSerialPorts: function () {
@@ -202,6 +228,7 @@ export const serial = {
                     self.openCanceled = false;
                 } else {
                     console.log(`${self.connectionType}: failed to open serial port`);
+                    self.lastOpenError = 'openFailed';
                 }
                 if (callback) {
                     callback(false);
@@ -320,11 +347,15 @@ export const serial = {
                     callback(true);
                 }
             }
-        } else {
-            // connection wasn't opened, so we won't try to close anything
+        } else if (self.openPending) {
+            // connection wasn't opened yet, so we won't try to close anything
             // instead we will rise canceled flag which will prevent connect from continueing further after being canceled
             self.openCanceled = true;
         }
+        // Otherwise nothing is open or opening (e.g. cleanup after an open
+        // that already failed). Raising openCanceled here used to leave it
+        // stuck on, so the next open was treated as cancelled and closed
+        // straight away.
     },
     getDevices: function (callback) {
         if (__BACKEND__ === "web") {
