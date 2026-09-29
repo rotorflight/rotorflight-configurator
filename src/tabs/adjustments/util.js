@@ -20,6 +20,29 @@ export function density(min, max, width) {
 // reads for adjFunction==0 (mirrors legacy's Off-branch in updateVisibility)
 // - channel/range assignments are left untouched so flipping Mapped/Stepped
 // back on later doesn't lose them.
+// Unused slots come from the firmware with every range collapsed to a single
+// point (1500-1500), which stacks both slider handles on top of each other -
+// users grab the top (right) handle, try to drag it left and can't. When a
+// slot is added, open any collapsed range out around its centre so both
+// handles can be picked up. Ranges a user already set are left alone.
+export const ADDED_RANGE_HALF_WIDTH = 50;
+
+export function spreadCollapsedRanges(adjRange) {
+    // An ALWAYS enable channel pins its (disabled) range to 1500-1500 on
+    // purpose, so that one stays as it is.
+    const ranges = [adjRange.adjRange1, adjRange.adjRange2];
+    if (adjRange.enaChannel !== ALWAYS_ON_CH) {
+        ranges.push(adjRange.enaRange);
+    }
+    for (const range of ranges) {
+        if (range.start === range.end) {
+            const center = range.start;
+            range.start = Math.max(AUX_MIN, center - ADDED_RANGE_HALF_WIDTH);
+            range.end = Math.min(AUX_MAX, center + ADDED_RANGE_HALF_WIDTH);
+        }
+    }
+}
+
 export function resetToOff(adjRange) {
     adjRange.adjFunction = 0;
     adjRange.adjMin = 0;

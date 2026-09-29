@@ -3,6 +3,7 @@
 
   import NumberInput from "@/components/NumberInput.svelte";
   import RangeSlider from "@/components/RangeSlider.svelte";
+  import SearchSelect from "@/components/SearchSelect.svelte";
   import Select from "@/components/Select.svelte";
 
   import { FC } from "@/js/fc.svelte.js";
@@ -16,6 +17,7 @@
     PRIMARY_CHANNEL_COUNT,
     calcAdjValue,
     density,
+    isWithin,
     resetToOff,
   } from "./util.js";
 
@@ -36,6 +38,29 @@
   );
 
   let adjConfig = $derived(FUNCTIONS[adjRange.adjFunction] ?? FUNCTIONS[0]);
+
+  // The function picker's options, grouped like the old <optgroup>s. Hidden
+  // functions are left out, unless one is already selected (e.g. from a
+  // loaded config) so the picker can still show what's set.
+  let isListed = (id) => !FUNCTIONS[id].hide || id === adjRange.adjFunction;
+
+  let functionItems = $derived([
+    ...(isListed(0)
+      ? [
+          {
+            value: 0,
+            label: $i18n.t("adjustmentsFunction" + FUNCTIONS[0].name),
+          },
+        ]
+      : []),
+    ...FUNCTION_GROUPS.flatMap((group) =>
+      group.ids.filter(isListed).map((id) => ({
+        value: id,
+        label: $i18n.t("adjustmentsFunction" + FUNCTIONS[id].name),
+        group: $i18n.t(group.label),
+      })),
+    ),
+  ]);
 
   let valSliderRef;
 
@@ -71,8 +96,7 @@
     }
   }
 
-  function onFunctionChange(e) {
-    const id = Number(e.target.value);
+  function onFunctionChange(id) {
     const cfg = FUNCTIONS[id] ?? FUNCTIONS[0];
     adjRange.adjFunction = id;
     adjRange.adjMin = cfg.min;
@@ -166,6 +190,17 @@
     calcAdjValue(adjRange, adjType, enaChannelPos, adjChannelPos, ALWAYS_ON_CH),
   );
 
+  // Whether the enable channel currently lets this adjustment run - drives
+  // the header band's red "live" state, like the Modes tab's cards. Stepped
+  // mode's adjResult.active only goes true while actually stepping, so it
+  // can't be reused here.
+  let isEnabled = $derived(
+    adjType > 0 &&
+      adjRange.adjFunction > 0 &&
+      (adjRange.enaChannel === ALWAYS_ON_CH ||
+        isWithin(enaChannelPos, adjRange.enaRange)),
+  );
+
   let valMarkerPercent = $derived(
     adjType === 1 && adjResult.active
       ? (
@@ -178,10 +213,15 @@
 </script>
 
 <div class="adjustment-card">
-  <div class="card-header">
+  <div class="card-header" class:on={isEnabled}>
     <span class="slot-label"
       >{$i18n.t("adjustmentsSlotLabel", { index: index + 1 })}</span
     >
+    {#if adjRange.adjFunction > 0}
+      <span class="func-label"
+        >{$i18n.t("adjustmentsFunction" + adjConfig.name)}</span
+      >
+    {/if}
     <div class="grow"></div>
     <button
       type="button"
@@ -347,28 +387,15 @@
 
     <!-- row 3: function -->
     <div class="cell func" class:disabled={adjType === 0}>
-      <select
+      <SearchSelect
         id="function-{index}"
-        class="function-select"
         value={adjRange.adjFunction}
+        items={functionItems}
         disabled={adjType === 0}
+        placeholder={$i18n.t("adjustmentsFunctionSearch")}
+        noMatchesText={$i18n.t("adjustmentsFunctionNoMatches")}
         onchange={onFunctionChange}
-      >
-        <option value={0} hidden={FUNCTIONS[0].hide}
-          >{$i18n.t("adjustmentsFunction" + FUNCTIONS[0].name)}</option
-        >
-        {#each FUNCTION_GROUPS as group (group.label)}
-          {#if group.ids.some((id) => !FUNCTIONS[id].hide)}
-            <optgroup label={$i18n.t(group.label)}>
-              {#each group.ids as id (id)}
-                <option value={id} hidden={FUNCTIONS[id].hide}>
-                  {$i18n.t("adjustmentsFunction" + FUNCTIONS[id].name)}
-                </option>
-              {/each}
-            </optgroup>
-          {/if}
-        {/each}
-      </select>
+      />
 
       <div class="value-line">
         <span class="value-label">{$i18n.t("adjustmentFunctionValue")}</span>
@@ -419,15 +446,34 @@
     overflow: hidden;
   }
 
+  /* Same dark/red band as the Modes tab's ModeCard header: dark by default,
+     accent red while the enable channel has this adjustment live, so each
+     card is easy to pick out in a long list. */
   .card-header {
-    display: flex;
-    align-items: center;
-    padding: 6px 10px;
-    font-weight: 600;
+    @extend %section-header;
+    /* The header sits flush inside the card's border, so drop the
+       placeholder's phone-width top margin. */
+    margin-top: 0;
+    padding: 0 8px 0 12px;
 
-    color: var(--color-text-soft);
-    background-color: var(--color-surface-float, var(--color-surface));
-    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-alt);
+    background-color: var(--color-surface-alt);
+
+    &.on {
+      background-color: var(--color-accent-500);
+    }
+  }
+
+  .func-label {
+    margin-left: 0.5em;
+    font-weight: 700;
+
+    &::before {
+      content: "\2014";
+      margin-right: 0.5em;
+      font-weight: 600;
+      opacity: 0.7;
+    }
   }
 
   .grow {
@@ -439,10 +485,11 @@
     border: none;
     padding: 4px 6px;
     cursor: pointer;
-    color: var(--color-text-soft);
+    color: inherit;
+    opacity: 0.8;
 
     &:hover {
-      color: var(--color-danger, var(--accent));
+      opacity: 1;
     }
   }
 
@@ -453,7 +500,9 @@
      instead of grouping by column like a form. */
   .card-body {
     display: grid;
-    grid-template-columns: 130px 190px minmax(260px, 1fr) 190px;
+    /* The range column sizes to its two NumberInputs (which never shrink) so
+       they can't overflow leftwards underneath the slider's end handle. */
+    grid-template-columns: 130px 190px minmax(200px, 1fr) max-content;
     grid-template-areas:
       "mode ena-select   ena-slider  ena-range"
       "mode ch-select    ch-slider   ch-range"
@@ -578,14 +627,17 @@
     justify-content: flex-end;
     gap: 4px;
     margin-bottom: 10px;
+
+    /* Trim the inputs a little on the multi-column layout so the range
+       column doesn't squeeze the slider; below 768px it's single-column and
+       the inputs get their larger touch-size buttons, so leave the default. */
+    @media only screen and (min-width: 769px) {
+      --number-input-max-width: 100px;
+    }
   }
 
   .dash {
     padding: 0 2px;
-  }
-
-  .function-select {
-    width: 100%;
   }
 
   .value-line {

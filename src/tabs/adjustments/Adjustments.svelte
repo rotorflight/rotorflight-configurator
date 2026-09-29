@@ -13,7 +13,12 @@
   import { mspHelper } from "@/js/msp/MSPHelper.js";
 
   import AdjustmentRow from "./AdjustmentRow.svelte";
-  import { ALWAYS_ON_CH, PRIMARY_CHANNEL_COUNT, resetToOff } from "./util.js";
+  import {
+    ALWAYS_ON_CH,
+    PRIMARY_CHANNEL_COUNT,
+    resetToOff,
+    spreadCollapsedRanges,
+  } from "./util.js";
 
   let loading = $state(true);
   let initialState = $state(null);
@@ -106,6 +111,7 @@
       return;
     }
     const next = Math.min(...hiddenSlots);
+    spreadCollapsedRanges(FC.ADJUSTMENT_RANGES[next]);
     visibleSlots = [...visibleSlots, next].sort((a, b) => a - b);
   }
 
