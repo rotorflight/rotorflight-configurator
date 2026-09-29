@@ -405,8 +405,9 @@ export function handleVirtualMessage(code, data) {
       break;
     }
 
-    // Like the FC (4.6.0 on), cut center + min/max back into the signal
-    // range. The tab sees the result on its next MSP_SERVO_CONFIGURATIONS poll.
+    // Like the FC's validateAndFixServoConfig() (4.6.0 on): keep the center in
+    // the signal range and min/max in their travel range. min/max aren't cut
+    // against the center; the FC only limits them when working out the output.
     case MSPCodes.MSP_SET_SERVO_CONFIGURATION: {
       const index = bytes[0];
       const config = FC.SERVO_CONFIG[index];

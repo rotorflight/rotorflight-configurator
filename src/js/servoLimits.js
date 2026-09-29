@@ -2,11 +2,13 @@ import semver from "semver";
 
 import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
 
-// Servo output limits, matching the firmware's validateAndFixServoConfig()
-// (rotorflight-firmware src/main/flight/servos.c). From 4.6.0 (API 12.9) the
-// firmware keeps center + min/max inside the servo's signal range and
-// rewrites the stored min/max whenever they'd go past it. Earlier firmware
-// stores min/max as sent.
+// Servo output limits, matching the firmware (rotorflight-firmware
+// src/main/flight/servos.c). From 4.6.0 (API 12.9) the firmware keeps
+// center + min/max inside the servo's signal range. It first did that by
+// rewriting the stored min/max; it now keeps them as set and limits them
+// against the center when working out the output, so moving the center back
+// gives the full travel again. Either way servoTravelLimited() flags the
+// servos it affects. Earlier firmware doesn't limit travel by the center.
 
 // PWM_SERVO_PULSE_MIN/MAX (rx/rx.h)
 const PWM_SIGNAL = { min: 50, max: 2500 };
@@ -25,7 +27,7 @@ const BUS_TRAVEL = 500;
 // in pg/bus_servo.h).
 export const BUS_SERVO_OFFSET = 8;
 
-// Whether this firmware cuts min/max back to fit the signal range.
+// Whether this firmware limits min/max by the center to fit the signal range.
 export function firmwareLimitsTravel(apiVersion) {
   return !!apiVersion && semver.gte(apiVersion, API_VERSION_12_9);
 }
@@ -40,18 +42,17 @@ export function servoTravelRange(isBusServo) {
   return { min: -travel, max: travel };
 }
 
-// Most travel either side of center that keeps the output in range.
-export function servoTravelLimits(mid, isBusServo) {
+// Travel the output actually uses at this center (servoTravelMin/Max()).
+export function servoUsableTravel(config, isBusServo) {
   const signal = servoSignalRange(isBusServo);
-  const travel = servoTravelRange(isBusServo);
   return {
-    min: Math.max(travel.min, signal.min - mid),
-    max: Math.min(travel.max, signal.max - mid),
+    min: Math.max(config.min, signal.min - config.mid),
+    max: Math.min(config.max, signal.max - config.mid),
   };
 }
 
-// Whether min/max sit at a limit set by the center rather than by the
-// travel range, i.e. the firmware has cut (or would cut) them to fit.
+// Whether min/max reach a limit set by the center rather than by the travel
+// range, so the output stops short of (or exactly at) the signal limit.
 export function servoTravelLimited(config, isBusServo) {
   const signal = servoSignalRange(isBusServo);
   const travel = servoTravelRange(isBusServo);
@@ -63,12 +64,11 @@ export function servoTravelLimited(config, isBusServo) {
   };
 }
 
-// Same fix the firmware applies on every servo config write.
+// Same fix the firmware's validateAndFixServoConfig() applies on every servo
+// config write. It doesn't touch min/max against the center.
 export function clampServoConfig(config, isBusServo) {
   const signal = servoSignalRange(isBusServo);
   config.mid = Math.min(Math.max(config.mid, signal.min), signal.max);
   config.min = Math.min(Math.max(config.min, -TRAVEL_LIMIT), 0);
   config.max = Math.min(Math.max(config.max, 0), TRAVEL_LIMIT);
-  config.min = Math.max(config.min, signal.min - config.mid);
-  config.max = Math.min(config.max, signal.max - config.mid);
 }

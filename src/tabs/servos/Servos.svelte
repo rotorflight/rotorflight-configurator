@@ -19,6 +19,7 @@
     firmwareLimitsTravel,
     servoSignalRange,
     servoTravelLimited,
+    servoUsableTravel,
   } from "@/js/servoLimits.js";
 
   import ServoConfigTable from "./ServoConfigTable.svelte";
@@ -98,23 +99,23 @@
 
   let allServos = $derived([...pwmServos, ...busServos]);
 
-  // Servos whose Min/Max the firmware has cut because center + travel would
-  // leave the signal range. The value snaps back to the limit when read back,
-  // so this says why.
+  // Servos whose Min/Max the output can't fully use at their center, because
+  // center + travel would leave the signal range.
   function travelLimitNotes(servos) {
     if (!firmwareLimitsTravel(FC.CONFIG.apiVersion)) return [];
     return servos.flatMap((servo) => {
       const config = FC.SERVO_CONFIG[servo.index];
       if (!config) return [];
       const limited = servoTravelLimited(config, servo.isBusServo);
+      const usable = servoUsableTravel(config, servo.isBusServo);
       const signal = servoSignalRange(servo.isBusServo);
       const notes = [];
       if (limited.max) {
         notes.push(
           $i18n.t("servoTravelLimitedMaxWarning", {
             1: servo.label,
-            2: config.max,
-            3: config.mid,
+            2: config.mid,
+            3: usable.max,
             4: signal.max,
           }),
         );
@@ -123,8 +124,8 @@
         notes.push(
           $i18n.t("servoTravelLimitedMinWarning", {
             1: servo.label,
-            2: config.min,
-            3: config.mid,
+            2: config.mid,
+            3: usable.min,
             4: signal.min,
           }),
         );

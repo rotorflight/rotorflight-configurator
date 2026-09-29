@@ -2907,13 +2907,13 @@
         "message": "<span class=\"message-negative\">Warning:</span> Changes to the <i>Servo Rate</i> parameter require System Reboot before taking affect!"
     },
     "servoTravelLimitedMaxWarning": {
-        "message": "<span class=\"message-negative\">Servo $1:</span> <i>Max</i> is limited to $2 by its <i>Center</i> ($3). The output can't go above $4 µs, so a larger <i>Max</i> is cut back to $2. Move the center closer to the middle to get more travel."
+        "message": "<span class=\"message-negative\">Servo $1:</span> at <i>Center</i> $2, <i>Max</i> can only reach $3, because the output can't go above $4 µs. Move the center closer to the middle to use more."
     },
     "servoTravelLimitedMinWarning": {
-        "message": "<span class=\"message-negative\">Servo $1:</span> <i>Min</i> is limited to $2 by its <i>Center</i> ($3). The output can't go below $4 µs, so a larger <i>Min</i> is cut back to $2. Move the center closer to the middle to get more travel."
+        "message": "<span class=\"message-negative\">Servo $1:</span> at <i>Center</i> $2, <i>Min</i> can only reach $3, because the output can't go below $4 µs. Move the center closer to the middle to use more."
     },
     "servoTravelLimitedHelp": {
-        "message": "Limited by the center ($1): the output can't go past $2 µs."
+        "message": "At center $1 this can only reach $2: the output can't go past $3 µs."
     },
     "servoUnusualLimitsWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!"

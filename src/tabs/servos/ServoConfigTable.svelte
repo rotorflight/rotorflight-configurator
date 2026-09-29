@@ -9,7 +9,8 @@
     firmwareLimitsTravel,
     servoSignalRange,
     servoTravelLimited,
-    servoTravelLimits,
+    servoTravelRange,
+    servoUsableTravel,
   } from "@/js/servoLimits.js";
 
   let { servos, hasExtendedServoScale, onFieldChange, onRateChange } = $props();
@@ -37,22 +38,20 @@
   const gridColumns =
     "40px repeat(7, minmax(96px, 112px)) 72px 96px minmax(110px, 1fr)";
 
-  // From 4.6.0 the firmware cuts Min/Max back so center + travel stays in
-  // the signal range (see servoLimits.js), so the fields stop there too.
+  // From 4.6.0 the firmware limits Min/Max by the center so center + travel
+  // stays in the signal range (see servoLimits.js). The fields keep what's
+  // typed, and limitTitle() says how much is used.
   let limitsTravel = $derived(firmwareLimitsTravel(FC.CONFIG.apiVersion));
 
   function bounds(servo, field) {
-    const limits = limitsTravel
-      ? servoTravelLimits(FC.SERVO_CONFIG[servo.index].mid, servo.isBusServo)
-      : null;
+    const travel = servoTravelRange(servo.isBusServo);
     if (servo.isBusServo) {
       if (field === "mid") return { min: 1000, max: 2000 };
-      if (field === "min") return { min: limits?.min ?? -500, max: -1 };
-      if (field === "max") return { min: 1, max: limits?.max ?? 500 };
+      if (field === "min") return { min: travel.min, max: -1 };
+      if (field === "max") return { min: 1, max: travel.max };
     } else {
       if (field === "mid") return { min: 50, max: 2250 };
-      if (field === "min") return { min: limits?.min ?? -1000, max: 1000 };
-      if (field === "max") return { min: -1000, max: limits?.max ?? 1000 };
+      if (field === "min" || field === "max") return travel;
     }
     return {};
   }
@@ -66,10 +65,12 @@
     if (!limited(servo)[field]) {
       return undefined;
     }
+    const config = FC.SERVO_CONFIG[servo.index];
     const signal = servoSignalRange(servo.isBusServo);
     return $i18n.t("servoTravelLimitedHelp", {
-      1: FC.SERVO_CONFIG[servo.index].mid,
-      2: field === "max" ? signal.max : signal.min,
+      1: config.mid,
+      2: servoUsableTravel(config, servo.isBusServo)[field],
+      3: field === "max" ? signal.max : signal.min,
     });
   }
 
