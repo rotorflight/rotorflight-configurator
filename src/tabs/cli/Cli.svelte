@@ -5,6 +5,12 @@
   import InfoNote from "@/components/notes/InfoNote.svelte";
 
   import { CliAutoComplete } from "@/js/CliAutoComplete.js";
+  import {
+    BACKUP_TYPES,
+    replayBackup,
+    runBackupCommand,
+    saveBackupToFile,
+  } from "@/js/cli_backup.js";
   import CliEngine from "@/js/cli_engine.js";
   import * as clipboard from "@/js/clipboard.js";
   import { CONFIGURATOR } from "@/js/configurator.svelte.js";
@@ -22,6 +28,7 @@
   let textareaEl;
   let previewDialogEl;
   let exitDialogEl;
+  let backupDialogEl;
 
   let copied = $state(false);
   let previewText = $state("");
@@ -108,8 +115,29 @@
   }
 
   function onExecuteSnippet() {
-    engine.executeCommands(previewText);
+    // A full backup ends with `save`, which the CLI can refuse the first
+    // time (see replayBackup()), so it is resent until the FC reboots. Other
+    // snippets are sent as they are.
+    replayBackup(engine, previewText);
     previewDialogEl.close();
+  }
+
+  // Runs `diff all` or `dump all` and saves the output to a file.
+  async function runBackupAndSave(backupType) {
+    backupDialogEl.close();
+    GUI.log($i18n.t("cliBackupInProgress"));
+
+    // Start from a clean slate so the file holds just the backup, not
+    // whatever was already in the terminal.
+    engine.clearOutputHistory();
+
+    const text = await runBackupCommand(engine, backupType);
+
+    try {
+      await saveBackupToFile(text, `cli_backup_${backupType}`);
+    } catch (err) {
+      console.log("Failed to save backup", err);
+    }
   }
 
   async function onCopy() {
@@ -130,6 +158,9 @@
 {#snippet toolbar()}
   <button class="btn" onclick={onSave}>{$i18n.t("cliSaveToFileBtn")}</button>
   <button class="btn" onclick={onLoad}>{$i18n.t("cliLoadFromFileBtn")}</button>
+  <button class="btn" onclick={() => backupDialogEl.showModal()}>
+    {$i18n.t("cliBackupToFileBtn")}
+  </button>
   <button class="btn" onclick={() => engine.clearOutputHistory()}>
     {$i18n.t("cliClearOutputHistoryBtn")}
   </button>
@@ -167,6 +198,24 @@
     </button>
     <button class="btn" onclick={onExecuteSnippet}>
       {$i18n.t("cliConfirmSnippetBtn")}
+    </button>
+  </div>
+</dialog>
+
+<dialog bind:this={backupDialogEl}>
+  <h3>{$i18n.t("dialogCliBackupChoiceTitle")}</h3>
+  <div class="content">
+    <p>{$i18n.t("dialogCliBackupChoiceNote")}</p>
+  </div>
+  <div class="buttons">
+    <button class="btn" onclick={() => backupDialogEl.close()}>
+      {$i18n.t("cancel")}
+    </button>
+    <button class="btn" onclick={() => runBackupAndSave(BACKUP_TYPES.DIFF)}>
+      {$i18n.t("dialogCliBackupChoiceDiffButton")}
+    </button>
+    <button class="btn" onclick={() => runBackupAndSave(BACKUP_TYPES.DUMP)}>
+      {$i18n.t("dialogCliBackupChoiceDumpButton")}
     </button>
   </div>
 </dialog>

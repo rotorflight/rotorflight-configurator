@@ -4067,6 +4067,12 @@
     "cliLoadFromFileBtn": {
         "message": "Load from file"
     },
+    "cliBackupToFileBtn": {
+        "message": "Backup"
+    },
+    "cliBackupInProgress": {
+        "message": "Running backup..."
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"
     },
@@ -4084,6 +4090,18 @@
     },
     "dialogCLIExitButton": {
         "message": "Go Back"
+    },
+    "dialogCliBackupChoiceTitle": {
+        "message": "Backup Configuration"
+    },
+    "dialogCliBackupChoiceNote": {
+        "message": "Choose which backup to run. The result is captured from the CLI and saved to a file."
+    },
+    "dialogCliBackupChoiceDiffButton": {
+        "message": "Backup (diff all)"
+    },
+    "dialogCliBackupChoiceDumpButton": {
+        "message": "Backup (dump all)"
     },
     "loggingNote": {
         "message": "Data will be logged in this tab <span class=\"message-negative\">only</span>, leaving the tab will <span class=\"message-negative\">cancel</span> logging and application will return to its normal <strong>\"configurator\"</strong> state.<br /> You are free to select the global update period, data will be written into the log file every <strong>1</strong> second for performance reasons."
