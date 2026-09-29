@@ -18,7 +18,7 @@
  */
 
 html[data-theme="dark"] .background_paper {
-  background-image: url(/rotorflight-configurator/feature-web-pages/images/paper-dark.png);
+  background-image: url(/feature-web-pages/images/paper-dark.png);
 }
 
 html[data-theme="dark"] #options-window {
@@ -48,23 +48,23 @@ html[data-theme="dark"] .jBox-pointer:after {
 /* Help icons: the legacy markup swaps between a grey and a white asset
    depending on which surface the icon sits on. */
 html[data-theme="dark"] .helpicon {
-  background-image: url(/rotorflight-configurator/feature-web-pages/images/icons/cf_icon_info_white.svg);
+  background-image: url(/feature-web-pages/images/icons/cf_icon_info_white.svg);
   opacity: 0.4;
 }
 
 html[data-theme="dark"] .cf .helpicon {
-  background-image: url(/rotorflight-configurator/feature-web-pages/images/icons/cf_icon_info_grey.svg);
+  background-image: url(/feature-web-pages/images/icons/cf_icon_info_grey.svg);
   opacity: 0.5;
 }
 
 html[data-theme="dark"] .cf .helpicon:hover {
-  background-image: url(/rotorflight-configurator/feature-web-pages/images/icons/cf_icon_info_grey.svg);
+  background-image: url(/feature-web-pages/images/icons/cf_icon_info_grey.svg);
   opacity: 1;
 }
 
 html[data-theme="dark"] .gui_box_titlebar .helpicon,
 html[data-theme="dark"] .subtitle .helpicon {
-  background-image: url(/rotorflight-configurator/feature-web-pages/images/icons/cf_icon_info_grey.svg);
+  background-image: url(/feature-web-pages/images/icons/cf_icon_info_grey.svg);
 }
 
 progress[value]::-webkit-progress-bar {
