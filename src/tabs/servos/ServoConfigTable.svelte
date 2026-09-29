@@ -5,6 +5,12 @@
 
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
+  import {
+    firmwareLimitsTravel,
+    servoSignalRange,
+    servoTravelLimited,
+    servoTravelLimits,
+  } from "@/js/servoLimits.js";
 
   let { servos, hasExtendedServoScale, onFieldChange, onRateChange } = $props();
 
@@ -31,16 +37,40 @@
   const gridColumns =
     "40px repeat(7, minmax(96px, 112px)) 72px 96px minmax(110px, 1fr)";
 
+  // From 4.6.0 the firmware cuts Min/Max back so center + travel stays in
+  // the signal range (see servoLimits.js), so the fields stop there too.
+  let limitsTravel = $derived(firmwareLimitsTravel(FC.CONFIG.apiVersion));
+
   function bounds(servo, field) {
+    const limits = limitsTravel
+      ? servoTravelLimits(FC.SERVO_CONFIG[servo.index].mid, servo.isBusServo)
+      : null;
     if (servo.isBusServo) {
       if (field === "mid") return { min: 1000, max: 2000 };
-      if (field === "min") return { min: -500, max: -1 };
-      if (field === "max") return { min: 1, max: 500 };
+      if (field === "min") return { min: limits?.min ?? -500, max: -1 };
+      if (field === "max") return { min: 1, max: limits?.max ?? 500 };
     } else {
       if (field === "mid") return { min: 50, max: 2250 };
-      if (field === "min" || field === "max") return { min: -1000, max: 1000 };
+      if (field === "min") return { min: limits?.min ?? -1000, max: 1000 };
+      if (field === "max") return { min: -1000, max: limits?.max ?? 1000 };
     }
     return {};
+  }
+
+  function limited(servo) {
+    if (!limitsTravel) return { min: false, max: false };
+    return servoTravelLimited(FC.SERVO_CONFIG[servo.index], servo.isBusServo);
+  }
+
+  function limitTitle(servo, field) {
+    if (!limited(servo)[field]) {
+      return undefined;
+    }
+    const signal = servoSignalRange(servo.isBusServo);
+    return $i18n.t("servoTravelLimitedHelp", {
+      1: FC.SERVO_CONFIG[servo.index].mid,
+      2: field === "max" ? signal.max : signal.min,
+    });
   }
 
   function meterRange(servo) {
@@ -138,14 +168,22 @@
           onchange={() => onFieldChange(servo.index)}
         />
       </span>
-      <span>
+      <span
+        class="travel-cell"
+        class:limited={limited(servo).min}
+        title={limitTitle(servo, "min")}
+      >
         <NumberInput
           {...bounds(servo, "min")}
           bind:value={config.min}
           onchange={() => onFieldChange(servo.index)}
         />
       </span>
-      <span>
+      <span
+        class="travel-cell"
+        class:limited={limited(servo).max}
+        title={limitTitle(servo, "max")}
+      >
         <NumberInput
           {...bounds(servo, "max")}
           bind:value={config.max}
@@ -267,6 +305,12 @@
 
   .servo-index {
     font-weight: 600;
+  }
+
+  /* Min/Max at the limit set by the center: see limitTitle(). */
+  .travel-cell.limited :global(input) {
+    color: var(--color-danger);
+    font-weight: 700;
   }
 
   .servo-checkbox {

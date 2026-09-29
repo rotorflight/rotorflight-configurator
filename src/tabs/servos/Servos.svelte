@@ -15,6 +15,11 @@
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { reinitialiseConnection } from "@/js/serial_backend";
+  import {
+    firmwareLimitsTravel,
+    servoSignalRange,
+    servoTravelLimited,
+  } from "@/js/servoLimits.js";
 
   import ServoConfigTable from "./ServoConfigTable.svelte";
   import ServoOverrideTable from "./ServoOverrideTable.svelte";
@@ -92,6 +97,44 @@
   });
 
   let allServos = $derived([...pwmServos, ...busServos]);
+
+  // Servos whose Min/Max the firmware has cut because center + travel would
+  // leave the signal range. The value snaps back to the limit when read back,
+  // so this says why.
+  function travelLimitNotes(servos) {
+    if (!firmwareLimitsTravel(FC.CONFIG.apiVersion)) return [];
+    return servos.flatMap((servo) => {
+      const config = FC.SERVO_CONFIG[servo.index];
+      if (!config) return [];
+      const limited = servoTravelLimited(config, servo.isBusServo);
+      const signal = servoSignalRange(servo.isBusServo);
+      const notes = [];
+      if (limited.max) {
+        notes.push(
+          $i18n.t("servoTravelLimitedMaxWarning", {
+            1: servo.label,
+            2: config.max,
+            3: config.mid,
+            4: signal.max,
+          }),
+        );
+      }
+      if (limited.min) {
+        notes.push(
+          $i18n.t("servoTravelLimitedMinWarning", {
+            1: servo.label,
+            2: config.min,
+            3: config.mid,
+            4: signal.min,
+          }),
+        );
+      }
+      return notes;
+    });
+  }
+
+  let pwmLimitNotes = $derived(travelLimitNotes(pwmServos));
+  let busLimitNotes = $derived(travelLimitNotes(busServos));
 
   // Unusual-value warnings, computed across PWM servos only -- these
   // thresholds are calibrated for analog PWM pulse-width ranges (mirrors
@@ -288,6 +331,15 @@
       </div>
     {/if}
 
+    {#if pwmLimitNotes.length > 0}
+      <div class="note">
+        {#each pwmLimitNotes as note (note)}
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+          <p>{@html note}</p>
+        {/each}
+      </div>
+    {/if}
+
     {#if needReboot}
       <div class="note">
         <!-- eslint-disable-next-line svelte/no-at-html-tags -->
@@ -307,6 +359,15 @@
 
   {#if busActive}
     <Section label="servoConfigurationBus">
+      {#if busLimitNotes.length > 0}
+        <div class="note">
+          {#each busLimitNotes as note (note)}
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+            <p>{@html note}</p>
+          {/each}
+        </div>
+      {/if}
+
       <div class="table-scroll">
         <ServoConfigTable
           servos={busServos}
