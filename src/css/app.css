@@ -138,7 +138,6 @@ html[data-theme="light"] {
   --color-meter-bg: var(--color-neutral-200);
   --color-meter-border: var(--color-neutral-400);
 
-
   /* Rotorflight semantic colours (see the design system). Text colours
      hold 4.5:1 on the surface and on their -soft fill. */
   --color-accent-text: var(--color-accent-400);
@@ -281,7 +280,6 @@ html[data-theme="dark"] {
 
   --color-meter-bg: var(--color-neutral-700);
   --color-meter-border: var(--color-neutral-500);
-
 
   --color-accent-text: var(--color-accent-600);
   --color-border-control: var(--color-neutral-500);

@@ -700,10 +700,9 @@
 
   .rates-table {
     display: grid;
-    grid-template-columns: minmax(80px, 1fr) repeat(
-        3,
-        minmax(92px, 118px)
-      ) minmax(64px, 96px);
+    grid-template-columns:
+      minmax(80px, 1fr) repeat(3, minmax(92px, 118px))
+      minmax(64px, 96px);
     align-items: center;
     gap: 6px 8px;
     padding: 8px;
