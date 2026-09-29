@@ -109,6 +109,28 @@ STM32_protocol.prototype.connect = function (port, baud, hex, options, callback)
                     serial.connect(self.port, {bitrate: self.baud, parityBit: 'even', stopBits: 'one'}, function (openInfo) {
                         if (openInfo) {
                             self.initialize();
+                        } else if (__BACKEND__ === "web" && 'usb' in navigator) {
+                            // The serial port is gone because the board
+                            // rebooted into DFU, but this browser hasn't been
+                            // granted access to its DFU device yet, so
+                            // check_usb_devices couldn't see it. Granting
+                            // needs a click: see requestDfuPermission() in
+                            // firmware_flasher/state.svelte.js.
+                            TABS.firmware_flasher.flashingMessage(i18n.getMessage('firmwareFlasherDfuPermissionNeeded'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.ACTION);
+                            TABS.firmware_flasher.requestDfuPermission(function () {
+                                STM32DFU.connect(usbDevices, hex, options);
+                            }, function () {
+                                GUI.connect_lock = false;
+                                TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32UsbDfuNotFound'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
+                                self.callback?.();
+                            });
+                        } else if (__BACKEND__ === "web") {
+                            // Same, but without WebUSB there is no way to
+                            // reach a board in DFU from this browser.
+                            GUI.connect_lock = false;
+                            GUI.log(i18n.getMessage('dfuWebUsbUnsupported'));
+                            TABS.firmware_flasher.flashingMessage(i18n.getMessage('dfuWebUsbUnsupported'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
+                            self.callback?.();
                         } else {
                             GUI.connect_lock = false;
                             GUI.log(i18n.getMessage('serialPortOpenFail'));

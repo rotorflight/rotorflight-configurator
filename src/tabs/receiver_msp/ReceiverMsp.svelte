@@ -72,14 +72,22 @@
   function enable() {
     const height = warningEl.offsetHeight;
     enabled = true;
-    nw.Window.get().resizeBy(0, -height);
+    if (__BACKEND__ === "web") {
+      window.resizeBy(0, -height);
+    } else {
+      nw.Window.get().resizeBy(0, -height);
+    }
   }
 
   function transmit() {
     // setRawRx is given to this window by the Receiver tab
     if (enabled && !window.setRawRx([...channels])) {
       // MSP connection has gone away
-      nw.Window.get().close();
+      if (__BACKEND__ === "web") {
+        window.close();
+      } else {
+        nw.Window.get().close();
+      }
     }
   }
 

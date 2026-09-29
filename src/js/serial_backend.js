@@ -11,11 +11,126 @@ import { MSP } from "@/js/msp.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import { mspHelper, resetMspHelper } from "@/js/msp/MSPHelper.js";
 import { UI_PHONES } from "@/js/phones_ui.js";
-import { PortHandler } from "@/js/port_handler.js";
+import { PortHandler, usbDevices } from "@/js/port_handler.js";
 import { portUsage } from "@/js/port_usage.svelte.js";
 import { serial } from "@/js/serial.js";
 import { TABS } from "@/js/tabs/tabs.js";
 import { applyVirtualConfig } from "@/js/virtual_fc.js";
+
+// Web only: the picker's "add device" entries (see
+// PortHandler.appendWebRequestOptions). Choosing one asks the browser for
+// access to a new device; it is never a device itself.
+const WEB_PICKER_REQUEST_VALUES = ['requestserial', 'requestbluetooth', 'DFU'];
+
+function isWebPickerRequestValue(value) {
+    return WEB_PICKER_REQUEST_VALUES.includes(String(value));
+}
+
+// After a request (granted or not) the picker should not be left on the
+// request entry: go back to the last real port, else the first one, else "0".
+function lastRealPortValue(el) {
+    const previous = el.data('lastRealPortValue');
+    if (previous && el.find('option').filter((_, option) => option.value === previous).length) {
+        return previous;
+    }
+
+    const firstRealPort = el.find('option').filter((_, option) =>
+        option.value !== '0' && !isWebPickerRequestValue(option.value),
+    ).first().val();
+
+    return firstRealPort || '0';
+}
+
+function selectPort(el, value) {
+    el.val(value || '0').trigger('change');
+}
+
+// List a newly granted device and select it.
+function adoptRequestedPort(el, ports, entry, fallbackValue) {
+    const updatedPorts = ports.some((port) => port.path === entry.path)
+        ? ports
+        : [...ports, { path: entry.path, displayName: entry.displayName }];
+
+    PortHandler.updatePortSelect(updatedPorts);
+    PortHandler.initialPorts = updatedPorts;
+    el.val(entry.path);
+
+    if (el.val() !== entry.path) {
+        selectPort(el, fallbackValue);
+        return;
+    }
+
+    el.trigger('change');
+}
+
+async function requestWebDevice(request) {
+    const el = $('div#port-picker #port');
+    const fallbackValue = lastRealPortValue(el);
+
+    try {
+        const entry = await request();
+        if (!entry) {
+            selectPort(el, fallbackValue);
+            return;
+        }
+        const ports = await new Promise((resolve) => serial.getDevices(resolve));
+        adoptRequestedPort(el, ports, entry, fallbackValue);
+    } catch (error) {
+        // Includes the user closing the chooser without picking anything.
+        console.warn('Device access request failed or was cancelled', error);
+        selectPort(el, fallbackValue);
+    }
+}
+
+/**
+ * Web only: show the browser's serial device chooser and select the granted
+ * port. Must run from a user gesture (a click or a picker selection).
+ */
+export function requestWebSerialDeviceFromPicker() {
+    return requestWebDevice(() => serial.requestWebSerialPort());
+}
+
+/**
+ * Web only: show the browser's Bluetooth device chooser and select the
+ * granted device. Must run from a user gesture.
+ */
+export function requestWebBluetoothDeviceFromPicker() {
+    return requestWebDevice(() => serial.requestBluetoothPort());
+}
+
+/**
+ * Web only: make sure the site has WebUSB access to a board in DFU mode,
+ * showing the browser's chooser if it doesn't yet. Silent when a matching
+ * device is already granted. Resolves to the device, or null. Must run from
+ * a user gesture if it may need to show the chooser.
+ */
+export async function requestWebUsbDeviceFromPicker() {
+    if (!('usb' in navigator)) {
+        GUI.log(i18n.getMessage('dfuWebUsbUnsupported'));
+        return null;
+    }
+
+    try {
+        const isMatch = (d) => usbDevices.filters.some((f) => d.vendorId === f.vendorId && d.productId === f.productId);
+        let device = (await navigator.usb.getDevices()).find(isMatch);
+        if (!device) {
+            device = await navigator.usb.requestDevice({ filters: usbDevices.filters });
+        }
+        console.log(`USB DFU device authorized: ${device.productName}`);
+
+        // An already-granted device resolves without any browser prompt, so
+        // relabel the entry to show the board was found.
+        GUI.log(i18n.getMessage('usbDeviceOpened', [device.productName || device.serialNumber || 'DFU']));
+        $('div#port-picker #port option[value="DFU"]')
+            .text(device.productName ? `DFU - ${device.productName}` : 'DFU')
+            .removeAttr('data-dfu-pending');
+        PortHandler.dfu_available = true;
+        return device;
+    } catch (error) {
+        console.warn('WebUSB DFU access request failed or was cancelled', error);
+        return null;
+    }
+}
 
 export async function handleConnectClick() {
     if (GUI.connect_lock != true) { // GUI control overrides the user control
@@ -37,6 +152,15 @@ export async function handleConnectClick() {
             portName = $('#port-override').val();
         } else {
             portName = String($('div#port-picker #port').val());
+        }
+
+        if (__BACKEND__ === "web" && !clicks && (selectedPort.data().isRequestSerial || selectedPort.data().isRequestBluetooth)) {
+            if (selectedPort.data().isRequestSerial) {
+                await requestWebSerialDeviceFromPicker();
+            } else {
+                await requestWebBluetoothDeviceFromPicker();
+            }
+            return;
         }
 
         if (selectedPort.data().isDFU) {
@@ -112,8 +236,29 @@ export function initializeSerialBackend() {
 
     $('#port-override').val(config.portOverride ?? '');
 
-    $('div#port-picker #port').on("change", function() {
+    $('div#port-picker #port').on("change", function(event) {
         GUI.updateManualPortVisibility();
+
+        if (__BACKEND__ === "web") {
+            // Only a real selection by the user (event.originalEvent) may open
+            // a browser device chooser: PortHandler re-triggers 'change' on
+            // every poll, and the picker can land on an "add device" entry by
+            // itself when the device list empties (e.g. while the FC reboots).
+            if (event.originalEvent) {
+                const selectedData = $(this).find(':selected').data();
+                if (selectedData.isRequestSerial) {
+                    requestWebSerialDeviceFromPicker();
+                } else if (selectedData.isRequestBluetooth) {
+                    requestWebBluetoothDeviceFromPicker();
+                } else if (selectedData.isDFU) {
+                    requestWebUsbDeviceFromPicker();
+                }
+            }
+
+            if (!isWebPickerRequestValue(this.value) && this.value !== '0') {
+                $(this).data('lastRealPortValue', this.value);
+            }
+        }
     });
 
     $('div.connect_controls a.connect').on("click", function () {
@@ -168,8 +313,9 @@ export function initializeSerialBackend() {
     });
 
     // Show all ports
-    if (GUI.operating_system === 'Android') {
-        // port filtering does not work on Android as port names do not get populated on Android
+    if (GUI.operating_system === 'Android' || __BACKEND__ === "web") {
+        // port filtering does not work on Android as port names do not get populated on Android;
+        // on the web every listed port is one the user granted, so there is nothing to filter
         GUI.show_all_ports = true;
         $('div #show-all-ports-switch').hide();
     } else {

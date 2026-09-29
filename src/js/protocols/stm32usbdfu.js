@@ -21,6 +21,7 @@ var STM32DFU_protocol = function () {
     this.verify_hex = [];
 
     this.handle = null; // connection handle
+    this.useWebUsb = __BACKEND__ === "web"; // WebUSB USBDevice handle rather than chrome.usb
 
     this.request = {
         DETACH:     0x00, // OUT, Requests the device to leave DFU mode and enter the application.
@@ -90,8 +91,18 @@ STM32DFU_protocol.prototype.connect = function (device, hex, options, callback) 
     self.upload_time_start = new Date().getTime();
     self.verify_hex = [];
 
+    // The descriptor caches belong to one device; a new connect may well be
+    // a different board.
+    self._webUsbConfigDescriptor = null;
+    self._webUsbLangId = undefined;
+
     // reset progress bar to initial state
     TABS.firmware_flasher.flashingMessage(null, TABS.firmware_flasher.FLASH_MESSAGE_TYPES.NEUTRAL).flashProgress(0);
+
+    if (__BACKEND__ === "web") {
+        self.connectWebUsb(device);
+        return;
+    }
 
     chrome.usb.getDevices(device, function (result) {
         if (result.length) {
@@ -108,8 +119,45 @@ STM32DFU_protocol.prototype.connect = function (device, hex, options, callback) 
     });
 };
 
+// requestDevice() always shows a picker, even for a device the user already
+// authorized -- Chrome persists WebUSB grants per-origin, so getDevices()
+// (silent, no prompt) already returns any previously-authorized matching
+// device on every later call, including across page reloads. Only fall back
+// to requestDevice() when nothing already-authorized matches, so the picker
+// only ever appears once per device instead of on every single Flash click.
+// requestDevice() requires a user gesture -- this is reached synchronously
+// from the Flash button's click handler (onClickFlash -> flashFirmware ->
+// STM32DFU.connect, no await in between), so its picker is allowed to show
+// when it does need to run.
+STM32DFU_protocol.prototype.connectWebUsb = async function (device) {
+    var self = this;
+
+    try {
+        const isMatch = (d) => device.filters.some((f) => d.vendorId === f.vendorId && d.productId === f.productId);
+        let usbDevice = (await navigator.usb.getDevices()).find(isMatch);
+
+        if (!usbDevice) {
+            usbDevice = await navigator.usb.requestDevice({ filters: device.filters });
+        }
+
+        console.log('USB DFU detected: ' + usbDevice.productName);
+        self.openDevice(usbDevice);
+    } catch (err) {
+        console.log('USB DFU not found: ' + err.message);
+        GUI.log(i18n.getMessage('stm32UsbDfuNotFound'));
+        TABS.firmware_flasher.flashingMessage(i18n.getMessage('stm32UsbDfuNotFound'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
+        GUI.connect_lock = false;
+        self.callback?.();
+    }
+};
+
 STM32DFU_protocol.prototype.openDevice = function (device) {
     var self = this;
+
+    if (this.useWebUsb) {
+        self.openWebUsbDevice(device);
+        return;
+    }
 
     chrome.usb.openDevice(device, function (handle) {
         if (checkChromeRuntimeError()) {
@@ -132,8 +180,48 @@ STM32DFU_protocol.prototype.openDevice = function (device) {
     });
 };
 
+STM32DFU_protocol.prototype.openWebUsbDevice = async function (device) {
+    var self = this;
+
+    try {
+        await device.open();
+        // WebUSB requires an explicit configuration select that
+        // chrome.usb.openDevice doesn't need; STM32 DFU bootloaders only
+        // expose one configuration.
+        if (device.configuration === null) {
+            await device.selectConfiguration(1);
+        }
+
+        self.handle = device;
+
+        GUI.log(i18n.getMessage('usbDeviceOpened', device.serialNumber ?? device.productName ?? ''));
+        console.log('Device opened: ' + device.productName);
+        self.claimInterface(0);
+    } catch (err) {
+        console.log('Failed to open USB device! ' + err.message);
+        GUI.log(i18n.getMessage('usbDeviceOpenFail'));
+        TABS.firmware_flasher.flashingMessage(i18n.getMessage('usbDeviceOpenFail'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
+        GUI.connect_lock = false;
+        self.callback?.();
+    }
+};
+
 STM32DFU_protocol.prototype.closeDevice = function () {
     var self = this;
+
+    if (this.useWebUsb) {
+        self.handle.close()
+            .catch((err) => {
+                console.log('Failed to close USB device! ' + err.message);
+                GUI.log(i18n.getMessage('usbDeviceCloseFail'));
+            })
+            .then(() => {
+                GUI.log(i18n.getMessage('usbDeviceClosed'));
+                console.log('Device closed');
+                self.handle = null;
+            });
+        return;
+    }
 
     chrome.usb.closeDevice(this.handle, function closed() {
         if (checkChromeRuntimeError()) {
@@ -150,6 +238,11 @@ STM32DFU_protocol.prototype.closeDevice = function () {
 
 STM32DFU_protocol.prototype.claimInterface = function (interfaceNumber) {
     var self = this;
+
+    if (this.useWebUsb) {
+        self.claimInterfaceWebUsb(interfaceNumber);
+        return;
+    }
 
     chrome.usb.claimInterface(this.handle, interfaceNumber, function claimed() {
         // Don't perform the error check on MacOS at this time as there seems to be a bug
@@ -173,8 +266,52 @@ STM32DFU_protocol.prototype.claimInterface = function (interfaceNumber) {
     });
 };
 
+// WebUSB can transiently fail to claim an interface right after opening a
+// device (the OS driver hasn't finished binding yet), so retry a few times
+// before giving up -- chrome.usb doesn't need this since it goes through a
+// privileged native path instead of the OS's generic USB driver stack.
+STM32DFU_protocol.prototype.claimInterfaceWebUsb = async function (interfaceNumber, retries = 6, delay = 1000) {
+    var self = this;
+
+    for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+            await self.handle.claimInterface(interfaceNumber);
+            console.log('Claimed interface: ' + interfaceNumber);
+            if (self.options.exitDfu) {
+                self.leave();
+            } else {
+                self.upload_procedure(0);
+            }
+            return;
+        } catch (err) {
+            const isBusy = /busy|unable to claim/i.test(err.message ?? "");
+            if (isBusy && attempt < retries) {
+                console.log(`Interface ${interfaceNumber} busy, retrying (${attempt}/${retries})...`);
+                await new Promise((resolve) => setTimeout(resolve, delay));
+                continue;
+            }
+
+            console.log('Failed to claim USB device! ' + err.message);
+            GUI.log(i18n.getMessage('usbDeviceClaimFail'));
+            TABS.firmware_flasher.flashingMessage(i18n.getMessage('usbDeviceClaimFail'), TABS.firmware_flasher.FLASH_MESSAGE_TYPES.INVALID);
+            self.cleanup();
+            return;
+        }
+    }
+};
+
 STM32DFU_protocol.prototype.releaseInterface = function (interfaceNumber) {
     var self = this;
+
+    if (this.useWebUsb) {
+        self.handle.releaseInterface(interfaceNumber)
+            .catch((err) => console.log('Failed to release USB interface! ' + err.message))
+            .then(() => {
+                console.log('Released interface: ' + interfaceNumber);
+                self.closeDevice();
+            });
+        return;
+    }
 
     chrome.usb.releaseInterface(this.handle, interfaceNumber, function released() {
         console.log('Released interface: ' + interfaceNumber);
@@ -184,6 +321,13 @@ STM32DFU_protocol.prototype.releaseInterface = function (interfaceNumber) {
 };
 
 STM32DFU_protocol.prototype.resetDevice = function (callback) {
+    if (this.useWebUsb) {
+        this.handle.reset()
+            .catch((err) => console.log('Reset Device failed: ' + err.message))
+            .then(() => callback?.());
+        return;
+    }
+
     chrome.usb.resetDevice(this.handle, function (result) {
         console.log('Reset Device: ' + result);
         callback?.();
@@ -294,6 +438,11 @@ STM32DFU_protocol.prototype.getInterfaceDescriptor = function (_interface, callb
 };
 
 STM32DFU_protocol.prototype.getFunctionalDescriptor = function (_interface, callback) {
+    if (this.useWebUsb) {
+        this.getFunctionalDescriptorWebUsb(callback);
+        return;
+    }
+
     chrome.usb.controlTransfer(this.handle, {
         'direction':    'in',
         'recipient':    'interface',
@@ -324,10 +473,159 @@ STM32DFU_protocol.prototype.getFunctionalDescriptor = function (_interface, call
     });
 };
 
+// The DFU functional descriptor is class-specific, so unlike the interface
+// name strings in getInterfaceDescriptorsWebUsb, WebUSB doesn't parse this
+// one for you -- issue the same standard GET_DESCRIPTOR request directly via
+// controlTransferIn and parse the same byte layout the chrome.usb path does.
+// Failure here just falls back to the default 2048-byte transferSize
+// (already how the chrome.usb path's caller handles a nonzero resultCode),
+// so this only affects transfer chunk size, never correctness.
+STM32DFU_protocol.prototype.getFunctionalDescriptorWebUsb = async function (callback) {
+    try {
+        const result = await this.handle.controlTransferIn({
+            requestType: 'standard',
+            recipient: 'interface',
+            request: 6,
+            value: 0x2100,
+            index: 0,
+        }, 255);
+
+        if (result.status !== 'ok') {
+            console.log('USB getFunctionalDescriptor failed! ' + result.status);
+            callback({}, -1);
+            return;
+        }
+
+        const buf = new Uint8Array(result.data.buffer, result.data.byteOffset, result.data.byteLength);
+
+        const descriptor = {
+            'bLength':            buf[0],
+            'bDescriptorType':    buf[1],
+            'bmAttributes':       buf[2],
+            'wDetachTimeOut':     (buf[4] << 8)|buf[3],
+            'wTransferSize':      (buf[6] << 8)|buf[5],
+            'bcdDFUVersion':      buf[7]
+        };
+
+        callback(descriptor, 0);
+    } catch (err) {
+        console.log('USB getFunctionalDescriptor failed! ' + err.message);
+        callback({}, -1);
+    }
+};
+
+// WebUSB does NOT reliably auto-resolve interface name strings for DFU's
+// multiple alternate settings via USBAlternateInterface.interfaceName --
+// fetch and parse the raw configuration descriptor ourselves instead,
+// mirroring exactly what the chrome.usb path above does (and how Betaflight
+// Configurator's own WebUSB DFU implementation does it, confirmed working
+// in production).
+STM32DFU_protocol.prototype.getLangIdWebUsb = async function () {
+    if (this._webUsbLangId !== undefined) {
+        return this._webUsbLangId;
+    }
+
+    try {
+        const result = await this.handle.controlTransferIn({
+            requestType: 'standard', recipient: 'device', request: 6, value: 0x300, index: 0,
+        }, 255);
+        if (result.status === 'ok' && result.data.byteLength >= 4) {
+            this._webUsbLangId = result.data.getUint16(2, true);
+            return this._webUsbLangId;
+        }
+    } catch (err) {
+        console.log('USB getLangId failed, falling back to 0x0409: ' + err.message);
+    }
+
+    this._webUsbLangId = 0x0409;
+    return this._webUsbLangId;
+};
+
+STM32DFU_protocol.prototype.getStringWebUsb = async function (index) {
+    if (index === 0) {
+        return "";
+    }
+
+    const langId = await this.getLangIdWebUsb();
+    const result = await this.handle.controlTransferIn({
+        requestType: 'standard', recipient: 'device', request: 6, value: 0x300 | index, index: langId,
+    }, 255);
+
+    if (result.status !== 'ok') {
+        throw new Error('getString failed: ' + result.status);
+    }
+
+    const length = Math.min(result.data.getUint8(0), result.data.byteLength);
+    let descriptor = "";
+    for (let i = 2; i + 1 < length; i += 2) {
+        descriptor += String.fromCodePoint(result.data.getUint16(i, true));
+    }
+    return descriptor;
+};
+
+// Fetches the full configuration descriptor blob: a 9-byte header (to learn
+// the total length) followed by the full descriptor chain, cached for the
+// lifetime of the current device connection.
+STM32DFU_protocol.prototype.getConfigDescriptorWebUsb = async function () {
+    if (this._webUsbConfigDescriptor) {
+        return this._webUsbConfigDescriptor;
+    }
+
+    const setup = { requestType: 'standard', recipient: 'device', request: 6, value: 0x200, index: 0 };
+
+    const header = await this.handle.controlTransferIn(setup, 9);
+    if (header.status !== 'ok') {
+        throw new Error('getConfigDescriptor failed: ' + header.status);
+    }
+    const totalLength = header.data.getUint16(2, true);
+
+    const result = await this.handle.controlTransferIn(setup, totalLength);
+    if (result.status !== 'ok') {
+        throw new Error('getConfigDescriptor failed: ' + result.status);
+    }
+
+    this._webUsbConfigDescriptor = new Uint8Array(result.data.buffer, result.data.byteOffset, result.data.byteLength);
+    return this._webUsbConfigDescriptor;
+};
+
+// Walks the raw descriptor chain for interface descriptors (type 4) matching
+// interfaceNum, fetching each one's string descriptor -- DFU bootloaders
+// expose one interface with multiple alternate settings, one per memory
+// region, so this collects one descriptor string per alternate setting,
+// matching the chrome.usb path's semantics exactly.
+STM32DFU_protocol.prototype.getInterfaceDescriptorsWebUsb = async function (interfaceNum, callback) {
+    try {
+        const buf = await this.getConfigDescriptorWebUsb();
+        const descriptorStringArray = [];
+
+        let offset = 9; // skip the 9-byte configuration descriptor header
+        while (offset + 1 < buf.length) {
+            const bLength = buf[offset];
+            const bDescriptorType = buf[offset + 1];
+
+            if (bDescriptorType === 4 && buf[offset + 2] === interfaceNum) {
+                const iInterface = buf[offset + 8];
+                descriptorStringArray.push(await this.getStringWebUsb(iInterface));
+            }
+
+            offset += bLength || 1; // guard against zero-length descriptors
+        }
+
+        callback(descriptorStringArray, 0);
+    } catch (err) {
+        console.log('USB getInterfaceDescriptors failed! ' + err.message);
+        callback([], -200);
+    }
+};
+
 STM32DFU_protocol.prototype.getChipInfo = function (_interface, callback) {
     var self = this;
 
-    self.getInterfaceDescriptors(0, function (descriptors, resultCode) {
+    var getDescriptors = (this.useWebUsb)
+        ? self.getInterfaceDescriptorsWebUsb.bind(self)
+        : self.getInterfaceDescriptors.bind(self);
+
+    getDescriptors(0, function (descriptors, resultCode) {
         if (resultCode) {
             callback({}, resultCode);
             return;
@@ -429,6 +727,11 @@ STM32DFU_protocol.prototype.getChipInfo = function (_interface, callback) {
 };
 
 STM32DFU_protocol.prototype.controlTransfer = function (direction, request, value, _interface, length, data, callback, _timeout) {
+    if (this.useWebUsb) {
+        this.controlTransferWebUsb(direction, request, value, _interface, length, data, callback);
+        return;
+    }
+
     // timeout support was added in chrome v43
     var timeout;
     if (typeof _timeout === "undefined") {
@@ -485,6 +788,57 @@ STM32DFU_protocol.prototype.controlTransfer = function (direction, request, valu
 
             callback(result);
         });
+    }
+};
+
+// Maps to WebUSB's controlTransferIn/controlTransferOut, which are
+// Promise-based and split by direction (chrome.usb uses one method with a
+// 'direction' field). requestType/recipient use the same USB-spec
+// terminology in both APIs, so no translation needed there. Callback shapes
+// mirror the chrome.usb branch above: IN gets (Uint8Array, resultCode); OUT's
+// callback takes no meaningful args (no caller in this file reads them for
+// OUT transfers). Timeout isn't supported by WebUSB's control transfers, so
+// it's silently ignored here -- callers already have their own setTimeout-
+// based polling/retry logic for slow operations like erase.
+STM32DFU_protocol.prototype.controlTransferWebUsb = async function (direction, request, value, _interface, length, data, callback) {
+    const setup = {
+        requestType: 'class',
+        recipient: 'interface',
+        request: request,
+        value: value,
+        index: _interface,
+    };
+
+    try {
+        if (direction == 'in') {
+            const result = await this.handle.controlTransferIn(setup, length);
+            if (result.status !== 'ok') {
+                console.log('USB controlTransfer IN failed for request ' + request + '!');
+            }
+            const buf = new Uint8Array(result.data.buffer, result.data.byteOffset, result.data.byteLength);
+            callback(buf, result.status === 'ok' ? 0 : -1);
+        } else {
+            let arrayBuf;
+            if (data) {
+                arrayBuf = new ArrayBuffer(data.length);
+                new Uint8Array(arrayBuf).set(data);
+            } else {
+                arrayBuf = new ArrayBuffer(0);
+            }
+
+            const result = await this.handle.controlTransferOut(setup, arrayBuf);
+            if (result.status !== 'ok') {
+                console.log('USB controlTransfer OUT failed for request ' + request + '!');
+            }
+            callback();
+        }
+    } catch (err) {
+        console.log('USB controlTransfer ' + direction.toUpperCase() + ' threw for request ' + request + ': ' + err.message);
+        if (direction == 'in') {
+            callback(new Uint8Array(0), -1);
+        } else {
+            callback();
+        }
     }
 };
 

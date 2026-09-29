@@ -24,6 +24,11 @@ if (__BACKEND__ === "nwjs") {
         useGlobalNodeFunctions();
         appReady();
     });
+} else if (__BACKEND__ === "web") {
+    // A plain browser tab: nothing to wait for but the DOM.
+    jQuery(function () {
+        appReady();
+    });
 }
 
 function useGlobalNodeFunctions() {
@@ -153,7 +158,9 @@ export function startProcess() {
     // our view is reactive to model changes
     // updateTopBarVersion();
 
-    if (!GUI.isOther()) {
+    // The web build is always whatever was last deployed, so there is no
+    // newer release to point it at.
+    if (!GUI.isOther() && __BACKEND__ !== "web") {
         checkForConfiguratorUpdates();
     }
 

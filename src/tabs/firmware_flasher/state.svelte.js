@@ -16,7 +16,31 @@ export const flashState = $state({
   progress: 0,
   flashingEnabled: false,
   showSaveLink: false,
+  dfuPermissionPending: false,
 });
+
+// Web build only: a board rebooted from serial into its DFU bootloader shows
+// up as a new USB device, which navigator.usb.getDevices() doesn't report
+// until the user grants access with requestDevice(). That needs a user
+// gesture, which STM32.js's post-reboot code (running off timers) no longer
+// has, and it can't be granted up front because the device doesn't exist
+// until the reboot. So STM32.js parks the rest of the flash here and the UI
+// shows a button whose click supplies the gesture (DfuPermissionPrompt).
+let pendingDfuPermission = null;
+
+export function requestDfuPermission(onGranted, onDeclined) {
+  pendingDfuPermission = { onGranted, onDeclined };
+  flashState.dfuPermissionPending = true;
+}
+
+export function resolveDfuPermission(granted) {
+  const pending = pendingDfuPermission;
+  pendingDfuPermission = null;
+  flashState.dfuPermissionPending = false;
+  if (!pending) return;
+  if (granted) pending.onGranted();
+  else pending.onDeclined();
+}
 
 export function setFlashingMessage(message, type) {
   flashState.messageType = type ?? FLASH_MESSAGE_TYPES.NEUTRAL;

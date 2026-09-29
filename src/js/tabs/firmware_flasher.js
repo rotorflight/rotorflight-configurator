@@ -7,6 +7,7 @@ import { PortHandler } from "@/js/port_handler.js";
 import FirmwareFlasher from "@/tabs/firmware_flasher/FirmwareFlasher.svelte";
 import {
   FLASH_MESSAGE_TYPES,
+  requestDfuPermission,
   setFlashingEnabled,
   setFlashingMessage,
   setFlashProgress,
@@ -34,6 +35,11 @@ const tab = {
 
   enableFlashing(enabled) {
     setFlashingEnabled(enabled);
+  },
+
+  // Web build only, see state.svelte.js.
+  requestDfuPermission(onGranted, onDeclined) {
+    requestDfuPermission(onGranted, onDeclined);
   },
 
   initialize(callback) {

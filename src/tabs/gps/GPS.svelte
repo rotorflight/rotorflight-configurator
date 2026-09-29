@@ -18,7 +18,11 @@
   import { reinitialiseConnection } from "@/js/serial_backend.js";
 
   const GPS_PROTOCOLS = ["NMEA", "UBLOX", "MSP", "FBUS"];
-  const MAP_URL = "/src/tabs/map.html";
+  // The web build is served from a sub-directory, so resolve against the page.
+  const MAP_URL =
+    __BACKEND__ === "web"
+      ? new URL("src/tabs/map.html", document.baseURI).toString()
+      : "/src/tabs/map.html";
   const useMapWebview = __BACKEND__ === "nwjs";
 
   // GPS_DATA.chn is a fixed-size channel-tracking array padded with unused

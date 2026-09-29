@@ -27,6 +27,7 @@
   import { ReleaseChecker } from "@/js/release_checker.js";
   import { serial } from "@/js/serial.js";
 
+  import DfuPermissionPrompt from "./DfuPermissionPrompt.svelte";
   import {
     FLASH_MESSAGE_TYPES,
     flashState,
@@ -865,6 +866,7 @@
         </button>
       {/if}
     </span>
+    <DfuPermissionPrompt />
   </div>
   <button
     class="btn"

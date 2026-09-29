@@ -17,4 +17,15 @@ windowWatcherUtil.bindWatchers(window, {
   translate: (fn) => (popup.translate = fn),
 });
 
+// Web build: this is a plain popup, so pick up what the Receiver tab left for
+// it on its own window (see showVirtualTx() in Receiver.svelte).
+const bridge = __BACKEND__ === "web" ? window.opener?.receiverMspBridge : null;
+if (bridge) {
+  window.setRawRx = bridge.setRawRx;
+  windowWatcherUtil.passValue(window, "translate", bridge.translate);
+  if (bridge.darkTheme !== undefined) {
+    windowWatcherUtil.passValue(window, "darkTheme", bridge.darkTheme);
+  }
+}
+
 mount(ReceiverMsp, { target: document.getElementById("app") });
