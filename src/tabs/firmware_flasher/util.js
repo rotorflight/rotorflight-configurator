@@ -9,6 +9,17 @@ export function supportsUnifiedTargets(version) {
   return semver.gte(version, "4.2.0");
 }
 
+// GitHub release downloads send no CORS headers, so a browser page can't fetch
+// them. The web build downloads the copies that rotorflight/rotorflight-artifacts
+// keeps of every release (see its sync-firmware.yml) through jsDelivr, which
+// does send them. The desktop app still downloads from the release itself.
+export function firmwareDownloadUrl(release, asset) {
+  if (__BACKEND__ === "web") {
+    return `https://cdn.jsdelivr.net/gh/rotorflight/rotorflight-artifacts@master/firmware/${release.tag_name}/${asset.name}`;
+  }
+  return asset.browser_download_url;
+}
+
 export function hasUnifiedTargetBuild(builds) {
   return Object.keys(builds).some((key) =>
     builds[key].some((target) => supportsUnifiedTargets(target.version)),
@@ -36,7 +47,7 @@ export function processBoardOptions(releaseData, buildLevel, minVersion, maxVers
         releaseUrl: release.html_url,
         name: version,
         version,
-        url: asset.browser_download_url,
+        url: firmwareDownloadUrl(release, asset),
         file: asset.name,
         target,
         date: formatDate(new Date(release.published_at)),
