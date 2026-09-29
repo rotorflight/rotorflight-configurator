@@ -36,6 +36,7 @@ on:
 
 permissions:
   contents: write
+  pages: read
 
 # One group per deployed ref. A delete event's github.ref is the default
 # branch, so key it on the deleted branch's full ref instead -- the same group
@@ -51,12 +52,6 @@ concurrency:
   group: pages-${{ github.event_name == 'delete' && format('refs/heads/{0}', github.event.ref) || github.ref }}
   cancel-in-progress: false
 
-env:
-  # Public URL of the site. Set the PAGES_URL repository variable when a
-  # custom domain (CNAME on gh-pages) is in use; otherwise the default
-  # github.io address is assumed.
-  PAGES_URL: ${{ vars.PAGES_URL || format('https://{0}.github.io/{1}', github.repository_owner, github.event.repository.name) }}
-
 jobs:
   deploy:
     name: Build and Deploy Web App
@@ -68,6 +63,17 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+
+      # Use the configured Pages URL, including its custom domain. Deriving
+      # it from the repository name adds a nonexistent subfolder on CNAME sites.
+      - name: Read GitHub Pages configuration
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Set public site URL
+        env:
+          CONFIGURED_PAGES_URL: ${{ steps.pages.outputs.base_url }}
+        run: echo "PAGES_URL=${CONFIGURED_PAGES_URL%/}" >> "$GITHUB_ENV"
 
       - name: Determine deployment path
         id: path
