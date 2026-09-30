@@ -1,94 +1,48 @@
-import { config } from "@/js/config.svelte.ts";
+import { mount, unmount } from "svelte";
+
 import { GUI } from "@/js/gui.js";
-import { i18n } from "@/js/localization.js";
-import { checkForConfiguratorUpdates, setDarkTheme } from "@/js/main.js";
+import Options from "@/tabs/options/Options.svelte";
 
 import { TABS } from "./tabs.js";
 
 const tab = {
   tabName: "options",
+  svelteComponent: null,
+
+  get isDirty() {
+    return this.svelteComponent?.isDirty?.();
+  },
 
   initialize(callback) {
-    $("#content").load("/src/tabs/options.html", () => {
-      i18n.localizePage();
+    const target = document.querySelector("#content");
+    target.innerHTML = "";
+    this.svelteComponent = mount(Options, { target });
 
-      this.initRememberLastTab();
-      this.initCheckForConfiguratorUnstableVersions();
-      this.initAutoConnectConnectionTimeout();
-      this.initCordovaForceComputerUI();
-      this.initDarkTheme();
-      this.rememberLastSelectedBoard();
-      this.showAdvancedFirmwareOpts();
-
-      GUI.content_ready(callback);
-    });
+    GUI.content_ready(callback);
   },
 
   cleanup(callback) {
+    if (this.svelteComponent) {
+      unmount(this.svelteComponent);
+      this.svelteComponent = null;
+    }
     callback?.();
   },
 
-  initRememberLastTab() {
-    $("#opt-remember-last-tab")
-      .prop("checked", config.rememberLastTab)
-      .on("change", function () {
-        config.rememberLastTab = $(this).is(":checked");
-      });
+  save(callback) {
+    if (this.svelteComponent?.onSave) {
+      this.svelteComponent.onSave().finally(callback);
+    } else {
+      callback?.();
+    }
   },
 
-  rememberLastSelectedBoard() {
-    $("#opt-remember-last-board")
-      .prop("checked", config.rememberLastSelectedBoard)
-      .on("change", function () {
-        config.rememberLastSelectedBoard = $(this).is(":checked");
-      });
-  },
-
-  showAdvancedFirmwareOpts() {
-    $("#opt-show-advanced-firmware-opts")
-      .prop("checked", config.showAdvancedFirmwareOpts)
-      .on("change", function () {
-        config.showAdvancedFirmwareOpts = $(this).is(":checked");
-      });
-  },
-
-  initCheckForConfiguratorUnstableVersions() {
-    $("#opt-check-unstable-versions")
-      .prop("checked", config.checkForConfiguratorUnstableVersions)
-      .on("change", function () {
-        config.checkForConfiguratorUnstableVersions = $(this).is(":checked");
-        checkForConfiguratorUpdates();
-      });
-  },
-
-  initAutoConnectConnectionTimeout() {
-    $("#opt-connection-timeout")
-      .val(config.connectionTimeout)
-      .on("change", function () {
-        config.connectionTimeout = parseInt($(this).val());
-      });
-  },
-
-  initCordovaForceComputerUI() {
-    $("#opt-cordova-force-computer-ui")
-      .prop("checked", config.cordovaForceComputerUi)
-      .on("change", function () {
-        const checked = $(this).is(":checked");
-        config.cordovaForceComputerUi = checked;
-        globalThis.cordovaUI?.set?.();
-      })
-      .closest(".field")
-      .toggle(GUI.isCordova() && globalThis.cordovaUI.canChangeUI);
-  },
-
-  initDarkTheme() {
-    $("#opt-dark-theme")
-      .val(config.darkTheme)
-      .on("change", function () {
-        const value = parseInt($(this).val());
-        config.darkTheme = value;
-        setDarkTheme(value);
-      });
+  revert(callback) {
+    if (this.svelteComponent?.onRevert) {
+      this.svelteComponent.onRevert().finally(callback);
+    } else {
+      callback?.();
+    }
   },
 };
 
