@@ -1,0 +1,207 @@
+name: PR Preview Publish
+
+# Deploys the bundle PR Preview Build made to /pr/<number>/ on the gh-pages
+# branch and links it from the PR. Publish GitHub Pages then puts it live.
+#
+# This runs the default branch's copy of this file with a write token, and
+# never executes anything from the PR. The artifact is untrusted: only the
+# PR number is read from it, and only after checking that it is a plain
+# integer. The PR is then looked up through the API and must still be open,
+# still carry the "preview" label and still be at the commit that was built.
+
+on:
+  workflow_run:
+    workflows:
+      - PR Preview Build
+    types:
+      - completed
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: read
+  pages: read
+
+jobs:
+  resolve:
+    name: Resolve Pull Request
+    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    outputs:
+      number: ${{ steps.pr.outputs.number }}
+
+    steps:
+      # A build skipped for want of the label leaves no artifact.
+      - name: Check for a preview build
+        id: artifact
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          COUNT="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/artifacts" \
+            --jq '[.artifacts[] | select(.name == "pr-preview")] | length')"
+          echo "found=$([ "$COUNT" -gt 0 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
+      - name: Download preview build
+        if: steps.artifact.outputs.found == 'true'
+        uses: actions/download-artifact@v8
+        with:
+          name: pr-preview
+          path: preview
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+
+      - name: Read PR number
+        if: steps.artifact.outputs.found == 'true'
+        id: pr
+        shell: bash
+        run: |
+          PR_NUMBER="$(head -c 16 preview/pr-number | tr -d '[:space:]')"
+          if ! [[ "$PR_NUMBER" =~ ^[1-9][0-9]{0,6}$ ]]; then
+            echo "::error::Artifact does not hold a valid PR number"
+            exit 1
+          fi
+          echo "number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+
+  publish:
+    name: Publish PR Preview
+    needs: resolve
+    if: needs.resolve.outputs.number != ''
+    runs-on: ubuntu-latest
+
+    # Shared with PR Preview Cleanup, so closing a PR mid-deploy waits for the
+    # deploy and then removes it, instead of racing it.
+    concurrency:
+      group: pages-pr-${{ needs.resolve.outputs.number }}
+      cancel-in-progress: false
+
+    env:
+      PR_NUMBER: ${{ needs.resolve.outputs.number }}
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Verify pull request
+        id: verify
+        shell: bash
+        env:
+          BUILT_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          PR_JSON="$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER")"
+          STATE="$(jq -r .state <<< "$PR_JSON")"
+          HEAD_SHA="$(jq -r .head.sha <<< "$PR_JSON")"
+          LABELLED="$(jq -r 'any(.labels[]; .name == "preview")' <<< "$PR_JSON")"
+
+          DEPLOY="true"
+          if [ "$STATE" != "open" ]; then
+            echo "PR #$PR_NUMBER is $STATE; not deploying"
+            DEPLOY="false"
+          elif [ "$LABELLED" != "true" ]; then
+            echo "PR #$PR_NUMBER is not labelled 'preview'; not deploying"
+            DEPLOY="false"
+          elif [ "$HEAD_SHA" != "$BUILT_SHA" ]; then
+            echo "PR #$PR_NUMBER moved on to $HEAD_SHA since $BUILT_SHA was built; its own build will deploy it"
+            DEPLOY="false"
+          fi
+          echo "deploy=$DEPLOY" >> "$GITHUB_OUTPUT"
+
+          # What the landing page shows for this preview, taken from the API
+          # rather than the artifact.
+          jq '{number, branch: .head.ref, title, url: .html_url, date: (now | todate)}'             <<< "$PR_JSON" > "$RUNNER_TEMP/pr-info.json"
+
+      - name: Checkout source
+        if: steps.verify.outputs.deploy == 'true'
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Read GitHub Pages configuration
+        if: steps.verify.outputs.deploy == 'true'
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Download preview build
+        if: steps.verify.outputs.deploy == 'true'
+        uses: actions/download-artifact@v8
+        with:
+          name: pr-preview
+          path: preview
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+
+      - name: Checkout GitHub Pages branch
+        if: steps.verify.outputs.deploy == 'true'
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          path: pages
+
+      - name: Publish to GitHub Pages branch
+        if: steps.verify.outputs.deploy == 'true'
+        shell: bash
+        env:
+          BUILT_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          DEPLOY_PATH="pr/$PR_NUMBER"
+
+          cd pages
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Same retry-on-rejected-push loop as deploy-web.yml.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin gh-pages
+            git reset --hard origin/gh-pages
+
+            rm -rf "$DEPLOY_PATH"
+            mkdir -p "$DEPLOY_PATH"
+            cp -R ../preview/site/. "$DEPLOY_PATH/"
+            # Beside the build, not in it, so nothing the PR built can
+            # overwrite it.
+            cp "$RUNNER_TEMP/pr-info.json" "$DEPLOY_PATH.json"
+
+            # Landing page + its logos, then the build index it reads.
+            cp -R ../.github/pages/. .
+            touch .nojekyll
+            python3 ../.github/scripts/generate_versions.py
+
+            git add .
+            if git diff --cached --quiet; then
+              echo "No GitHub Pages changes to publish"
+              exit 0
+            fi
+            git commit -m "deploy: pr/$PR_NUMBER from $BUILT_SHA"
+
+            if git push origin gh-pages; then
+              exit 0
+            fi
+            echo "gh-pages push rejected (attempt $attempt); retrying"
+            sleep $((attempt * 5))
+          done
+
+          echo "Failed to publish to gh-pages after 5 attempts"
+          exit 1
+
+      - name: Link preview from the PR
+        if: steps.verify.outputs.deploy == 'true'
+        shell: bash
+        env:
+          CONFIGURED_PAGES_URL: ${{ steps.pages.outputs.base_url }}
+          BUILT_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          PREVIEW_URL="${CONFIGURED_PAGES_URL%/}/pr/$PR_NUMBER/"
+          MARKER="<!-- pr-preview -->"
+          BODY="$MARKER
+          **Web preview:** $PREVIEW_URL
+
+          Built from ${BUILT_SHA:0:7}. It goes live once the Publish GitHub Pages run finishes, and is updated on every push while the \`preview\` label is on this PR. Removing the label or closing the PR takes it down."
+
+          COMMENT_ID="$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" \
+            --jq ".[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"$MARKER\"))) | .id" | head -n 1)"
+          if [ -n "$COMMENT_ID" ]; then
+            gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$COMMENT_ID" -f body="$BODY" >/dev/null
+          else
+            gh api "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" -f body="$BODY" >/dev/null
+          fi
+          echo "### Deployed to [$PREVIEW_URL]($PREVIEW_URL)" >> "$GITHUB_STEP_SUMMARY"

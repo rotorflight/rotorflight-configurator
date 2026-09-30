@@ -6362,6 +6362,12 @@
     "powerSmartFuelSagGainHelp": {
         "message": "Compensates for voltage sag under load. The value is the sag, in volts per cell, expected at full load; while airborne the compensation scales with collective and cyclic stick load. Increase if Smart Fuel is too pessimistic under load; decrease if it is too optimistic. This setting is only used in Voltage and Combined modes."
     },
+    "powerSmartFuelAlertPercent": {
+        "message": "Smart Fuel Alert Level"
+    },
+    "powerSmartFuelAlertPercentHelp": {
+        "message": "Remaining charge, in percent, at which the low fuel warning is raised. Radio scripts such as the Rotorflight Lua suite treat this as the landing reserve and show 0% fuel at this level. The flight controller's own warning also needs <code>use_cbat_alerts</code> to be enabled in the CLI. This setting is used in all modes."
+    },
     "powerBatteryMinimumCellVoltage": {
         "message": "Minimum Cell Voltage"
     },
