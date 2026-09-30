@@ -2735,8 +2735,8 @@
         "english": "GPS Altitude"
     },
     "receiverTelemetrySensor_GPS_HEADING": {
-        "message": "GPS-Richtung",
-        "english": "GPS Heading"
+        "message": "GPS-Kurs",
+        "english": "GPS Course"
     },
     "receiverTelemetrySensor_GPS_GROUNDSPEED": {
         "message": "GPS-Geschw. über Grund",

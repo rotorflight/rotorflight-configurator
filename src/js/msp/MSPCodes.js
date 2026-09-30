@@ -138,7 +138,11 @@ export const MSPCodes = {
     MSP_SET_RPM_FILTER_V2:          155,
 
     MSP_UID:                        160,
+    MSP_SET_XACT_SCAN:              161,
+    MSP_XACT_PARAMS:                162,
+    MSP_SET_XACT_PARAMS:            163,
     MSP_GPS_SV_INFO:                164,
+    MSP_XACT_SERVO_LIST:            165,
 
     MSP_MIXER_INPUTS:               170,
     MSP_SET_MIXER_INPUT:            171,
@@ -177,7 +181,8 @@ export const MSPCodes = {
     MSP_SET_SERVO_CONFIGURATION:    212,
     MSP_SET_MOTOR:                  214,
     MSP_SET_ESC_SENSOR_CONFIG:      216,
-    MSP_SET_MOTOR_3D_CONFIG:        217,
+    MSP_ESC_PARAMETERS:             217,
+    MSP_SET_ESC_PARAMETERS:         218,
     MSP_SET_RESET_CURR_PID:         219,
     MSP_SET_SENSOR_ALIGNMENT:       220,
     MSP_SET_LED_STRIP_MODECOLOR:    221,
@@ -196,6 +201,7 @@ export const MSPCodes = {
     MSP_ACC_TRIM:                   240,
     MSP_SERVO_MIX_RULES:            241,
     MSP_SET_SERVO_MIX_RULE:         242, // Not used
+    MSP_SET_4WIF_ESC_FWD_PROG:      244,
     MSP_SET_4WAY_IF:                245, // Not used
     MSP_SET_RTC:                    246,
     MSP_RTC:                        247, // Not used
@@ -215,7 +221,7 @@ export const MSPCodes = {
     MSP2_SMARTFUEL_CONFIG:              0x4000,
     MSP2_SET_SMARTFUEL_CONFIG:          0x4001,
 
-    MSP2_GET_RX_INPUT_BACKUP_STATUS:    0x5F0B,
-    MSP2_GET_RX_INPUT_BACKUP_CONFIG:    0x5F0C,
-    MSP2_SET_RX_INPUT_BACKUP_CONFIG:    0x5F0D,
+    MSP2_GET_RX_INPUT_BACKUP_STATUS:    0x5F0D,
+    MSP2_GET_RX_INPUT_BACKUP_CONFIG:    0x5F0E,
+    MSP2_SET_RX_INPUT_BACKUP_CONFIG:    0x5F0F,
 };

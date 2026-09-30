@@ -7,6 +7,16 @@ import { generateVirtualApiVersions, getTextWidth } from "@/js/utils/common.js";
 
 const TIMEOUT_CHECK = 500 ; // With 250 it seems that it produces a memory leak and slowdown in some versions, reason unknown
 
+// The Virtual FC is a developer tool on desktop; on the web it doubles as a
+// no-hardware demo of every tab.
+const SHOW_VIRTUAL_PORT = import.meta.env.DEV || __BACKEND__ === "web";
+
+// The flasher owns the port while it's open, or being opened (it reboots the FC
+// into the bootloader itself).
+function flasherOwnsPort() {
+    return GUI.active_tab === 'firmware_flasher' || GUI.opening_firmware_flasher;
+}
+
 export const usbDevices = { filters: [
     {'vendorId': 1155, 'productId': 57105},
     {'vendorId': 10473, 'productId': 393},
@@ -39,6 +49,9 @@ PortHandler.check = function () {
 
     self.check_usb_devices();
     self.check_serial_devices();
+
+    // Opening or leaving the flasher changes whether the Virtual FC is listed
+    self.syncVirtualOption();
 
     GUI.updateManualPortVisibility();
 
@@ -75,7 +88,9 @@ PortHandler.check_serial_devices = function () {
     const self = this;
 
     serial.getDevices(function(currentPorts) {
-        if (!self.showingAllPorts) {
+        // Web: every listed port is one the user explicitly granted, so
+        // there is nothing to filter out.
+        if (__BACKEND__ !== "web" && !self.showingAllPorts) {
             currentPorts = currentPorts.filter((p) => portRecognized(p.displayName, p.path));
         }
         // on initialization of the port selector (i.e. app startup or toggling whether to show all ports), only select a detected port, don't auto-connect
@@ -92,6 +107,12 @@ PortHandler.check_serial_devices = function () {
 
 PortHandler.check_usb_devices = function (callback) {
     const self = this;
+
+    if (__BACKEND__ === "web") {
+        self.check_web_usb_devices(callback);
+        return;
+    }
+
     chrome.usb.getDevices(usbDevices, function (result) {
 
         const dfuElement = self.portPickerElement.children("[value='DFU']");
@@ -109,21 +130,17 @@ PortHandler.check_usb_devices = function (callback) {
                     value: "DFU",
                     text: usbText,
                     data: {isDFU: true},
+                    // also expose as a real HTML attribute so non-jQuery consumers
+                    // (e.g. the Svelte firmware flasher) can read it via .dataset
+                    'data-is-dfu': 'true',
                 }));
-
-                if (import.meta.env.DEV) {
-                    self.portPickerElement.append($('<option/>', {
-                       value: 'virtual',
-                       text: i18n.getMessage('portsSelectVirtual'),
-                       data: {isVirtual: true},
-                    }));
-                }
 
                 self.portPickerElement.append($('<option/>', {
                     value: 'manual',
                     text: i18n.getMessage('portsSelectManual'),
                     data: {isManual: true},
                 }));
+                self.syncVirtualOption();
                 self.portPickerElement.val('DFU').change();
                 self.setPortsInputWidth();
             }
@@ -135,16 +152,50 @@ PortHandler.check_usb_devices = function (callback) {
             }
             self.dfu_available = false;
         }
-        if(callback) {
-            callback(self.dfu_available);
-        }
-        if (!$('option:selected', self.portPickerElement).data().isDFU) {
-            if (!(GUI.connected_to || GUI.connect_lock)) {
-                FC.resetState();
-            }
-            self.portPickerElement.trigger('change');
-        }
+        self.finishUsbDeviceCheck(callback);
     });
+};
+
+/**
+ * WebUSB can only see devices the user has already granted access to (with
+ * navigator.usb.requestDevice(), from the picker's "DFU" entry or the
+ * flasher). Unlike the chrome.usb path above this leaves the picker alone:
+ * on the web "DFU" is a permanent entry added by updatePortSelect, so a
+ * rebuild here can't race check_serial_devices rebuilding the same <select>.
+ * dfu_available still reflects real detection, which STM32.connect() relies
+ * on after rebooting a board into DFU.
+ */
+PortHandler.check_web_usb_devices = async function (callback) {
+    const self = this;
+
+    let matched = [];
+    if ('usb' in navigator) {
+        try {
+            const devices = await navigator.usb.getDevices();
+            matched = devices.filter((d) =>
+                usbDevices.filters.some((f) => f.vendorId === d.vendorId && f.productId === d.productId),
+            );
+        } catch {
+            matched = [];
+        }
+    }
+
+    self.dfu_available = matched.length > 0;
+    self.finishUsbDeviceCheck(callback);
+};
+
+PortHandler.finishUsbDeviceCheck = function (callback) {
+    const self = this;
+
+    if (callback) {
+        callback(self.dfu_available);
+    }
+    if (!$('option:selected', self.portPickerElement).data()?.isDFU) {
+        if (!(GUI.connected_to || GUI.connect_lock)) {
+            FC.resetState();
+        }
+        self.portPickerElement.trigger('change');
+    }
 };
 
 /**
@@ -209,14 +260,15 @@ PortHandler.detectPort = function(currentPorts) {
             }
         }
 
-        // auto-connect if enabled
-        if (GUI.auto_connect && !GUI.connecting_to && !GUI.connected_to) {
-            // start connect procedure. We need firmware flasher protection over here
-            if (GUI.active_tab !== 'firmware_flasher') {
-                GUI.timeout_add('auto-connect_timeout', function () {
-                    $('div#header_btns a.connect').click();
-                }, config.connectionTimeout); // timeout so bus have time to initialize after being detected by the system
-            }
+        // auto-connect if enabled, but never while the flasher owns the port
+        if (GUI.auto_connect && !GUI.connecting_to && !GUI.connected_to && !flasherOwnsPort()) {
+            GUI.timeout_add('auto-connect_timeout', function () {
+                // A device appearing is never a reason to connect to the Virtual FC
+                if (flasherOwnsPort() || self.virtualSelected()) {
+                    return;
+                }
+                $('div#header_btns a.connect').click();
+            }, config.connectionTimeout); // timeout so bus have time to initialize after being detected by the system
         }
         // trigger callbacks
         for (let i = (self.port_detected_callbacks.length - 1); i >= 0; i--) {
@@ -256,7 +308,10 @@ PortHandler.updatePortSelect = function (ports) {
 
     for (let i = 0; i < ports.length; i++) {
         let portText;
-        if (ports[i].displayName) {
+        if (__BACKEND__ === "web") {
+            // Web port paths are internal ids (webserial_<vid>_<pid>_<n>).
+            portText = ports[i].displayName || ports[i].path;
+        } else if (ports[i].displayName) {
             portText = (`${ports[i].path} - ${ports[i].displayName}`);
         } else {
             portText = ports[i].path;
@@ -269,22 +324,107 @@ PortHandler.updatePortSelect = function (ports) {
         }));
     }
 
-    if (import.meta.env.DEV) {
+    if (__BACKEND__ === "web") {
+        this.appendWebRequestOptions();
+    } else {
+        // Manual entry is a raw OS device path or tcp:// address, which only
+        // chrome.serial/chrome.sockets.tcp can open.
         this.portPickerElement.append($("<option/>", {
-           value: 'virtual',
-           text: i18n.getMessage('portsSelectVirtual'),
-           data: {isVirtual: true},
+            value: 'manual',
+            text: i18n.getMessage('portsSelectManual'),
+            data: {isManual: true},
         }));
     }
 
-    this.portPickerElement.append($("<option/>", {
-        value: 'manual',
-        text: i18n.getMessage('portsSelectManual'),
-        data: {isManual: true},
-    }));
-
+    this.syncVirtualOption();
     this.setPortsInputWidth();
     return ports;
+};
+
+/**
+ * The Virtual FC is not a device. It is only ever a target the user picks by
+ * hand to connect to, so it is not listed while the flasher owns the port, and
+ * port detection, auto-select and auto-connect never choose it. It always goes
+ * last, so a rebuilt picker never defaults to it.
+ */
+PortHandler.virtualPortListed = function () {
+    return SHOW_VIRTUAL_PORT && !flasherOwnsPort();
+};
+
+PortHandler.virtualSelected = function () {
+    return !!$('option:selected', this.portPickerElement).data()?.isVirtual;
+};
+
+PortHandler.syncVirtualOption = function () {
+    const existing = this.portPickerElement.children("[value='virtual']");
+
+    if (!this.virtualPortListed()) {
+        if (existing.length) {
+            const wasSelected = existing.is(':selected');
+            existing.remove();
+            if (wasSelected) {
+                this.portPickerElement.val(this.portPickerElement.children().first().val()).trigger('change');
+            }
+            this.setPortsInputWidth();
+        }
+        return;
+    }
+
+    if (!existing.length) {
+        this.portPickerElement.append($("<option/>", {
+            value: 'virtual',
+            text: i18n.getMessage('portsSelectVirtual'),
+            data: {isVirtual: true},
+        }));
+        this.setPortsInputWidth();
+    } else if (!existing.is(':last-child')) {
+        // Keep it last; moving the node keeps its selection
+        this.portPickerElement.append(existing);
+    }
+};
+
+/**
+ * Web only. Devices the user has already granted access to are listed above
+ * as ordinary ports. These fixed entries ask for access to a new one:
+ * picking one opens the browser's device chooser (serial_backend.js handles
+ * the selection), the same way Betaflight's web configurator works.
+ */
+PortHandler.appendWebRequestOptions = function () {
+    this.portPickerElement.append($("<option/>", {
+        value: "0",
+        text: i18n.getMessage('portsSelectPleaseSelect'),
+    }));
+
+    if ('serial' in navigator || 'usb' in navigator) {
+        this.portPickerElement.append($("<option/>", {
+            value: "requestserial",
+            text: i18n.getMessage('portsSelectAddSerialDevice'),
+            data: {isRequestSerial: true},
+        }));
+    }
+
+    if ('bluetooth' in navigator) {
+        this.portPickerElement.append($("<option/>", {
+            value: "requestbluetooth",
+            text: i18n.getMessage('portsSelectAddBluetoothDevice'),
+            data: {isRequestBluetooth: true},
+        }));
+    }
+
+    // DFU flashing needs WebUSB; without it this entry could do nothing.
+    if ('usb' in navigator) {
+        this.portPickerElement.append($("<option/>", {
+            value: "DFU",
+            text: i18n.getMessage('portsSelectAddDfuDevice'),
+            data: {isDFU: true},
+            // Real attributes too, for non-jQuery readers (the Svelte
+            // firmware flasher). data-dfu-pending marks it as still only the
+            // "request access" entry; serial_backend.js clears it once a
+            // device has been granted.
+            'data-is-dfu': 'true',
+            'data-dfu-pending': 'true',
+        }));
+    }
 };
 
 /**

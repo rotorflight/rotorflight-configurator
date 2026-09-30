@@ -4,22 +4,32 @@
   import { i18n } from "@/js/i18n.js";
 
   let hardwareName = $derived(FC.getHardwareName());
+  let showFirmware = $derived(
+    FC.CONFIG.buildVersion && FC.CONFIG.flightControllerIdentifier,
+  );
+  let configuratorLabel = $derived(
+    `${CONFIGURATOR.version} · ${CONFIGURATOR.buildLabel}`,
+  );
+  let firmwareLabel = $derived(
+    `${FC.CONFIG.buildVersion} ${FC.CONFIG.flightControllerIdentifier}`,
+  );
 </script>
 
 <div class="logo">
   <div class="logo-text">
-    <span>
-      {$i18n.t("versionLabelConfigurator")}: {CONFIGURATOR.version}
+    <span
+      title={`${$i18n.t("versionLabelConfigurator")}: ${CONFIGURATOR.version} · Branch/tag: ${CONFIGURATOR.buildLabel}`}
+    >
+      Cfg {configuratorLabel}
     </span>
-    {#if FC.CONFIG.buildVersion && FC.CONFIG.flightControllerIdentifier}
-      <span>
-        {$i18n.t("versionLabelFirmware")}: {FC.CONFIG.buildVersion}
-        {FC.CONFIG.flightControllerIdentifier}
+    {#if showFirmware}
+      <span title={`${$i18n.t("versionLabelFirmware")}: ${firmwareLabel}`}>
+        FW {firmwareLabel}
       </span>
     {/if}
     {#if hardwareName}
-      <span>
-        {$i18n.t("versionLabelTarget")}: {hardwareName}
+      <span title={`${$i18n.t("versionLabelTarget")}: ${hardwareName}`}>
+        Target {hardwareName}
       </span>
     {/if}
   </div>
@@ -41,12 +51,20 @@
     position: absolute;
     left: 80px;
     top: 49px;
-    color: #949494;
-    opacity: 0.5;
-    font-size: 10px;
-    min-width: 210px;
+    color: var(--chrome-fg-muted);
+    font-size: 0.7rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+    width: 230px;
     display: flex;
     flex-direction: column;
+    line-height: 1.25;
+  }
+
+  .logo-text span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   @media only screen and (max-width: 480px) {
@@ -81,17 +99,18 @@
       display: flex !important;
       left: 82px;
       top: 62px;
+      width: calc(100% - 92px);
     }
   }
 
   @media all and (min-width: 1125px) {
     .logo {
-      width: 340px;
+      width: 360px;
     }
 
     .logo-text {
       font-size: inherit;
-      position: relative;
+      width: 270px;
     }
   }
 </style>

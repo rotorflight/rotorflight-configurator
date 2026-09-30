@@ -177,7 +177,7 @@
   // Serial Rx (Backup) - see FUNCTION_RX_INPUT_BACKUP in rotorflight-firmware.
   // No dedicated feature bit, same as SERIALRX_FUNCTION above: the port assignment
   // itself is the enablement.
-  const RX_INPUT_BACKUP_FUNCTION = 4194304;
+  const RX_INPUT_BACKUP_FUNCTION = 8388608;
   let hasBackupRxPort = $derived(
     FC.SERIAL_CONFIG.ports.some(
       (port) => port.functionMask & RX_INPUT_BACKUP_FUNCTION,
@@ -309,9 +309,46 @@
     }
   }
 
+  // Given to the virtual receiver window so it can send channels (it can't
+  // see this window's objects otherwise).
+  function setRawRx(channels) {
+    if (
+      CONFIGURATOR.connectionValid &&
+      !["cli", "presets"].includes(GUI.active_tab)
+    ) {
+      const data = [];
+      FC.RC_MAP.forEach((axis, channel) => {
+        data[axis] = channels[channel];
+      });
+      mspHelper.setRawRx(data);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   function showVirtualTx() {
     const windowWidth = 370;
     const windowHeight = 510;
+
+    if (__BACKEND__ === "web") {
+      // A plain popup. Whatever is set on it now is lost when its page
+      // loads, so it collects what it needs from window.opener instead (see
+      // src/js/tabs/receiver_msp.js).
+      window.receiverMspBridge = {
+        setRawRx,
+        translate: (key) => $i18n.t(key),
+      };
+      DarkTheme.isDarkThemeEnabled((isEnabled) => {
+        window.receiverMspBridge.darkTheme = isEnabled;
+      });
+      window.open(
+        new URL("src/tabs/receiver_msp.html", document.baseURI).toString(),
+        "receiver_msp",
+        `popup,width=${windowWidth},height=${windowHeight}`,
+      );
+      return;
+    }
 
     // use a fully qualified url so nw doesn't look on the filesystem
     // when using the vite dev server
@@ -329,21 +366,12 @@
         createdWindow.resizeTo(windowWidth, windowHeight);
 
         // Give the window a callback it can use to send the channels (otherwise it can't see those objects)
-        createdWindow.window.setRawRx = function (channels) {
-          if (
-            CONFIGURATOR.connectionValid &&
-            !["cli", "presets"].includes(GUI.active_tab)
-          ) {
-            const data = [];
-            FC.RC_MAP.forEach((axis, channel) => {
-              data[axis] = channels[channel];
-            });
-            mspHelper.setRawRx(data);
-            return true;
-          } else {
-            return false;
-          }
-        };
+        createdWindow.window.setRawRx = setRawRx;
+
+        // the window has no localisation of its own
+        windowWatcherUtil.passValue(createdWindow.window, "translate", (key) =>
+          $i18n.t(key),
+        );
 
         DarkTheme.isDarkThemeEnabled(function (isEnabled) {
           windowWatcherUtil.passValue(
@@ -358,7 +386,7 @@
 
   function onBind() {
     MSP.send_message(MSPCodes.MSP2_BETAFLIGHT_BIND);
-    GUI.log(i18n.getMessage("receiverButtonBindMessage"));
+    GUI.log($i18n.t("receiverButtonBindMessage"));
   }
 </script>
 

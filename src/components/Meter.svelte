@@ -24,7 +24,7 @@
   .meter {
     position: relative;
     height: 16px;
-    border-radius: 2px;
+    border-radius: var(--radius-xs);
     container-type: size;
     color: var(--color-text);
     background-color: var(--color-meter-bg);
@@ -71,7 +71,7 @@
   .fill {
     position: absolute;
     height: 16px;
-    border-radius: 2px;
+    border-radius: var(--radius-xs);
     margin-left: -1px;
     margin-top: -1px;
     border-width: 1px;

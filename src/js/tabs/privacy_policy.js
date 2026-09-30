@@ -1,38 +1,61 @@
+import { mount, unmount } from "svelte";
+
 import { GUI } from "@/js/gui.js";
-import { i18n } from "@/js/localization.js";
+import PrivacyPolicy from "@/tabs/privacy_policy/PrivacyPolicy.svelte";
 
 import { TABS } from "./tabs.js";
 
 const tab = {
-    tabName: 'privacy_policy',
-};
+  tabName: "privacy_policy",
+  svelteComponent: null,
 
-tab.initialize = function (callback) {
-    const tabFile = `/src/tabs/privacy_policy.html`;
+  get isDirty() {
+    return this.svelteComponent?.isDirty?.();
+  },
 
-    $('#content').html('<div id="tab-static"><div id="tab-static-contents"></div>');
+  initialize(callback) {
+    const target = document.querySelector("#content");
+    target.innerHTML = "";
+    this.svelteComponent = mount(PrivacyPolicy, { target });
 
-    $('#tab-static-contents').load(tabFile, function () {
-        i18n.localizePage();
-        GUI.content_ready(callback);
-    });
+    GUI.content_ready(callback);
+  },
 
-};
-
-tab.cleanup = function (callback) {
+  cleanup(callback) {
+    if (this.svelteComponent) {
+      unmount(this.svelteComponent);
+      this.svelteComponent = null;
+    }
     callback?.();
+  },
+
+  save(callback) {
+    if (this.svelteComponent?.onSave) {
+      this.svelteComponent.onSave().finally(callback);
+    } else {
+      callback?.();
+    }
+  },
+
+  revert(callback) {
+    if (this.svelteComponent?.onRevert) {
+      this.svelteComponent.onRevert().finally(callback);
+    } else {
+      callback?.();
+    }
+  },
 };
 
 TABS[tab.tabName] = tab;
 
 if (import.meta.hot) {
-    import.meta.hot.accept((newModule) => {
-        if (newModule && GUI.active_tab === tab.tabName) {
-          TABS[tab.tabName].initialize();
-        }
-    });
+  import.meta.hot.accept((newModule) => {
+    if (newModule && GUI.active_tab === tab.tabName) {
+      TABS[tab.tabName].initialize();
+    }
+  });
 
-    import.meta.hot.dispose(() => {
-        tab.cleanup();
-    });
+  import.meta.hot.dispose(() => {
+    tab.cleanup();
+  });
 }
