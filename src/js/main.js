@@ -360,6 +360,7 @@ export function startProcess() {
         .on('change', function () {
             CONFIGURATOR.expertMode = this.checked;
             config.expertMode = this.checked;
+            updateExpertTabs();
         })
         .prop('checked', CONFIGURATOR.expertMode);
 
@@ -449,6 +450,7 @@ function notifyOutdatedVersion(releaseData) {
 }
 
 export function updateTabList(features) {
+    updateExpertTabs();
     $('#tabs ul.mode-connected li.tab_gps').toggle(features.isEnabled('GPS'));
     $('#tabs ul.mode-connected li.tab_led_strip').toggle(features.isEnabled('LED_STRIP'));
 
@@ -461,6 +463,16 @@ export function updateTabList(features) {
     const hasFbusRx = features.RX_SERIAL && FC.RX_CONFIG?.serialrx_provider === SERIALRX_PROVIDER_FBUS && hasSerialRxPort;
     const hasFbusPort = serialPorts.some((port) => !!(port.functionMask & SERIAL_FUNCTION_FBUS_OUT));
     $('#tabs ul.mode-connected li.tab_xact_servo').toggle(hasXactSupport && (hasFbusRx || hasFbusPort));
+}
+
+// Tabs only experts need stay out of the nav in basic mode. An open one stays
+// open until the user leaves it.
+const EXPERT_TABS = ['beepers'];
+
+function updateExpertTabs() {
+    for (const tab of EXPERT_TABS) {
+        $(`#tabs ul.mode-connected li.tab_${tab}`).toggle(CONFIGURATOR.expertMode);
+    }
 }
 
 function zeroPad(value, width) {

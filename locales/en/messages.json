@@ -196,6 +196,12 @@
     "expertMode": {
         "message": "Expert Mode"
     },
+    "expertModeShowAdvanced": {
+        "message": "Show advanced settings ({{count}} hidden)"
+    },
+    "expertModeHideAdvanced": {
+        "message": "Hide advanced settings"
+    },
     "permanentExpertMode": {
         "message": "Permanently enable Expert Mode"
     },
