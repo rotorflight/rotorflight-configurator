@@ -414,6 +414,8 @@
           />
         </Field>
         <Field
+          expert
+          changed={FC.BATTERY_CONFIG.vbatmaxcellvoltage !== 4.3}
           id="power-max-cell-voltage"
           label="powerBatteryMaximumCellVoltage"
         >
@@ -504,6 +506,8 @@
           </Field>
           {#if smartFuelTuningEnabled}
             <Field
+              expert
+              changed={FC.SMARTFUEL_CONFIG.voltageDropRate !== 10}
               id="power-smartfuel-vdrop"
               label="powerSmartFuelVoltageDropRate"
               unit="mV/s"
@@ -520,6 +524,8 @@
               />
             </Field>
             <Field
+              expert
+              changed={FC.SMARTFUEL_CONFIG.chargeDropRate !== 50}
               id="power-smartfuel-cdrop"
               label="powerSmartFuelChargeDropRate"
               unit="%/s"
@@ -536,6 +542,8 @@
               />
             </Field>
             <Field
+              expert
+              changed={FC.SMARTFUEL_CONFIG.sagGain !== 40}
               id="power-smartfuel-sag"
               label="powerSmartFuelSagGain"
               unit="V"
@@ -602,6 +610,8 @@
                   />
                 </Field>
                 <Field
+                  expert
+                  changed={config.vbatresdivval !== 10}
                   id={`power-vdiv-${meter.id}`}
                   label="powerVoltageDivider"
                 >
@@ -648,6 +658,8 @@
                   />
                 </Field>
                 <Field
+                  expert
+                  changed={config.offset !== 0}
                   id={`power-aoffset-${meter.id}`}
                   label="powerAmperageOffset"
                 >
