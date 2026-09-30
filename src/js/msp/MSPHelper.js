@@ -1799,7 +1799,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
             dataHandler.callbacks.splice(i, 1);
             if (!crcError || callbackOnError) {
                 // fire callback
-                if (callback) callback({'command': code, 'data': data, 'length': data.byteLength, 'crcError': crcError});
+                if (callback) callback({'command': code, 'data': data, 'length': data.byteLength, 'crcError': crcError, 'unsupported': !!dataHandler.unsupported});
             } else {
                 console.warn(`code: ${code} - crc failed. No callback`);
             }
