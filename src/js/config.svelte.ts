@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 
 // Increment when making incompatible config schema changes
 // e.g. changing the type of a field
@@ -12,11 +11,36 @@ function isKeyOf<T extends Record<string, unknown>>(
   return key in obj;
 }
 
+// The web builds of every version share one origin, and so one
+// localStorage. 2.x saves each setting as { [prop]: value }; read those as the
+// bare value so a setting changed there doesn't come back here as an object.
+function unwrapLegacy(prop: string, value: unknown) {
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    const wrapped = value as Record<string, unknown>;
+    const keys = Object.keys(wrapped);
+    if (keys.length === 1 && keys[0] === prop) {
+      return wrapped[prop];
+    }
+  }
+  return value;
+}
+
+function isLegacyWrapped(prop: string) {
+  try {
+    const value = JSON.parse(
+      globalThis.localStorage.getItem(prop) ?? "null",
+    ) as unknown;
+    return unwrapLegacy(prop, value) !== value;
+  } catch {
+    return false;
+  }
+}
+
 function get(prop: string) {
   try {
     const value = globalThis.localStorage.getItem(prop);
     if (value) {
-      return JSON.parse(value);
+      return unwrapLegacy(prop, JSON.parse(value) as unknown);
     }
   } catch {
     //
@@ -121,6 +145,17 @@ export const config = new Proxy(_config, handler);
  * Reset configuration to defaults when on an unknown version
  */
 if (config.configVersion !== CONFIG_VERSION) {
-  globalThis.localStorage.clear();
+  if (__BACKEND__ === "web") {
+    // Only this version's settings: the other versions deployed to the same
+    // origin keep their own settings and caches in this localStorage too.
+    // A setting in the 2.x format belongs to 2.x, so leave it (and read it).
+    for (const prop of Object.keys(_config)) {
+      if (!isLegacyWrapped(prop)) {
+        globalThis.localStorage.removeItem(prop);
+      }
+    }
+  } else {
+    globalThis.localStorage.clear();
+  }
   config.configVersion = CONFIG_VERSION;
 }
