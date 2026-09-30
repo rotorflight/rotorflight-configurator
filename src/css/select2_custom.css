@@ -1,33 +1,55 @@
-/* Select 2 replacement styles */
+/* Select2 replacement styles */
 .select2-selection__rendered {
-    line-height: 18px !important;
-    padding-left: 4px !important;
-    color: var(--defaultText) !important;
-    border-radius: 2px !important;
+  line-height: 22px !important;
+  padding-left: 8px !important;
+  color: var(--color-text) !important;
+  border-radius: var(--radius-sm) !important;
 }
 
 .select2-container .select2-selection--single {
-    height: 20px !important;
-    border-radius: 3px !important;
-    border: 1px solid var(--subtleAccent) !important;
-    cursor: default !important;
+  height: 24px !important;
+  border-radius: var(--radius-sm) !important;
+  border: 1px solid var(--color-border-soft) !important;
+  background-color: var(--color-input-bg) !important;
+  cursor: pointer !important;
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+.select2-container--open .select2-selection--single {
+  border-color: var(--color-border-accent) !important;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
 }
 
 .select2-selection__arrow {
-    height: 18px !important;
+  height: 22px !important;
 }
+
 .select2-selection__arrow b {
-    height: 5px !important;
-    width: 5px !important;
-    margin-left: -2px !important;
-    margin-top: -5px !important;
-    border: none !important;
-    border-bottom: 1px solid black !important;
-    border-right: 1px solid black !important;
-    transform: rotateZ(45deg);
+  height: 5px !important;
+  width: 5px !important;
+  margin-left: -3px !important;
+  margin-top: -4px !important;
+  border: none !important;
+  border-bottom: 1.5px solid var(--color-text-muted) !important;
+  border-right: 1.5px solid var(--color-text-muted) !important;
+  transform: rotateZ(45deg);
 }
+
 .select2-dropdown {
-    border: 1px solid var(--subtleAccent) !important;
-    border-top: none !important;
-    border-radius: 2px !important;
+  border: 1px solid var(--color-border-soft) !important;
+  border-radius: var(--radius-md) !important;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.select2-results__option {
+  padding: 6px 8px !important;
+}
+
+.select2-container--default
+  .select2-results__option--highlighted[aria-selected] {
+  background-color: var(--color-accent-500) !important;
+  color: var(--color-accent-fg) !important;
 }

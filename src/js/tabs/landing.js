@@ -1,68 +1,61 @@
+import { mount, unmount } from "svelte";
+
 import { GUI } from "@/js/gui.js";
-import { i18n } from "@/js/localization.js";
+import Welcome from "@/tabs/landing/Welcome.svelte";
 
 import { TABS } from "./tabs.js";
 
 const tab = {
-    tabName: 'landing',
-};
-tab.initialize = function (callback) {
-  $('#content').load("/src/tabs/landing.html", function () {
-    function showLang(newLang) {
-      bottomSection = $('.languageSwitcher');
-      bottomSection.find('a').each(function() {
-        const element = $(this);
-        const languageSelected = element.attr('lang');
-        if (newLang == languageSelected) {
-          element.removeClass('selected_language');
-          element.addClass('selected_language');
-        } else {
-          element.removeClass('selected_language');
-        }
-      });
-    }
-    let bottomSection = $('.languageSwitcher');
-    bottomSection.html(' <span i18n="language_choice_message"></span>');
-    bottomSection.append(' <a href="#" i18n="language_default_pretty" lang="DEFAULT"></a>');
-    const languagesAvailables = i18n.getLanguagesAvailables();
-    languagesAvailables.forEach(function(element) {
-      bottomSection.append(' <a href="#" lang="' + element + '" i18n="language_' + element + '"></a>');
-    });
-    bottomSection.find('a').each(function() {
-      let element = $(this);
-      element.click(function(){
-        element = $(this);
-        const languageSelected = element.attr('lang');
-        if (!languageSelected) { return; }
-        if (i18n.selectedLanguage != languageSelected) {
-          i18n.changeLanguage(languageSelected);
-          showLang(languageSelected);
-        }
-      });
-    });
-    showLang(i18n.selectedLanguage);
-    // translate to user-selected language
-    i18n.localizePage();
+  tabName: "landing",
+  svelteComponent: null,
+
+  get isDirty() {
+    return this.svelteComponent?.isDirty?.();
+  },
+
+  initialize(callback) {
+    const target = document.querySelector("#content");
+    target.innerHTML = "";
+    this.svelteComponent = mount(Welcome, { target });
 
     GUI.content_ready(callback);
-  });
+  },
 
-};
-
-tab.cleanup = function (callback) {
+  cleanup(callback) {
+    if (this.svelteComponent) {
+      unmount(this.svelteComponent);
+      this.svelteComponent = null;
+    }
     callback?.();
+  },
+
+  save(callback) {
+    if (this.svelteComponent?.onSave) {
+      this.svelteComponent.onSave().finally(callback);
+    } else {
+      callback?.();
+    }
+  },
+
+  revert(callback) {
+    if (this.svelteComponent?.onRevert) {
+      this.svelteComponent.onRevert().finally(callback);
+    } else {
+      callback?.();
+    }
+  },
 };
 
 TABS[tab.tabName] = tab;
 
 if (import.meta.hot) {
-    import.meta.hot.accept((newModule) => {
-        if (newModule && GUI.active_tab === tab.tabName) {
-          TABS[tab.tabName].initialize();
-        }
-    });
+  import.meta.hot.accept((newModule) => {
+    if (newModule && GUI.active_tab === tab.tabName) {
+      TABS[tab.tabName].initialize();
+    }
+  });
 
-    import.meta.hot.dispose(() => {
-        tab.cleanup();
-    });
+  import.meta.hot.dispose(() => {
+    tab.cleanup();
+  });
 }

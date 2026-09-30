@@ -8,20 +8,32 @@
   select,
   input {
     margin: 0;
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
 
     color: var(--color-text);
     background-color: var(--color-input-bg);
     border: 1px solid var(--color-border-soft);
+    transition:
+      border-color var(--animation-speed),
+      box-shadow var(--animation-speed),
+      background-color var(--animation-speed);
+
+    &:hover:not(:disabled) {
+      border-color: var(--color-border);
+    }
 
     &:focus {
       outline: none;
       border-color: var(--color-border-accent);
+      // A soft ring rather than a hard 2px outline: it reads as focus
+      // without shifting layout or fighting the 1px border already there.
+      box-shadow: 0 0 0 3px var(--color-focus-ring);
     }
 
     &:disabled {
       color: var(--color-text-disabled);
       background-color: var(--color-input-bg-disabled);
+      border-color: var(--color-border-soft);
     }
   }
 
@@ -32,8 +44,11 @@
     padding: 0 8px;
     border-width: 1px;
     border-style: solid;
-    border-radius: 2px;
     outline: none;
+
+    &::placeholder {
+      color: var(--color-text-disabled);
+    }
 
     &[type="number"] {
       text-align: right;
@@ -45,7 +60,24 @@
   select {
     height: 1.5rem;
     min-width: 120px;
-    padding: 0 4px;
+    padding: 0 26px 0 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+
+    // Native select chrome is the single most dated-looking control in the
+    // app, so it is replaced with a drawn chevron. The arrow colour is a
+    // fixed mid-grey rather than currentColor because a data: URI cannot
+    // inherit it - that grey is legible against both themes' input fills.
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5L6 8l3.5-3.5' fill='none' stroke='%238a8f98' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 12px 12px;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
   @media only screen and (max-width: 480px) {

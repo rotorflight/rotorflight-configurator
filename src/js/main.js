@@ -24,6 +24,11 @@ if (__BACKEND__ === "nwjs") {
         useGlobalNodeFunctions();
         appReady();
     });
+} else if (__BACKEND__ === "web") {
+    // A plain browser tab: nothing to wait for but the DOM.
+    jQuery(function () {
+        appReady();
+    });
 }
 
 function useGlobalNodeFunctions() {
@@ -102,6 +107,16 @@ function closeSerial() {
 }
 
 function closeHandler() {
+    // Let the open tab refuse or delay closing the desktop window (the
+    // Firmware Flasher mid-flash, or with a backup still to restore).
+    if (GUI.isNWJS() && GUI.current_tab?.requestClose) {
+        GUI.current_tab.requestClose(() => closeWindow.call(this));
+        return;
+    }
+    closeWindow.call(this);
+}
+
+function closeWindow() {
     if (!GUI.isCordova()) {
         this.hide();
     }
@@ -153,7 +168,9 @@ export function startProcess() {
     // our view is reactive to model changes
     // updateTopBarVersion();
 
-    if (!GUI.isOther()) {
+    // The web build is always whatever was last deployed, so there is no
+    // newer release to point it at.
+    if (!GUI.isOther() && __BACKEND__ !== "web") {
         checkForConfiguratorUpdates();
     }
 
@@ -165,9 +182,7 @@ export function startProcess() {
     // log library versions in console to make version tracking easier
     console.log(`Libraries: jQuery - ${$.fn.jquery}`);
 
-    if (GUI.isCordova()) {
-        UI_PHONES.init();
-    }
+    UI_PHONES.init();
 
     const ui_tabs = $('#tabs > ul');
     $('a', ui_tabs).click(function () {
@@ -194,10 +209,11 @@ export function startProcess() {
                 if (GUI.allowedTabs.indexOf(tabName) < 0 && tabName === "firmware_flasher") {
                     if (GUI.connected_to || GUI.connecting_to) {
                         await handleConnectClick.call($('a.connect'));
-                    } else {
-                        self.disconnect();
                     }
-                    $('div.open_firmware_flasher a.flash').click();
+
+                    if (GUI.allowedTabs.indexOf(tabName) < 0) {
+                        return;
+                    }
                 }
 
                 if (GUI.defaultAllowedFCTabsWhenConnected.indexOf(tabName) != -1) {
@@ -206,7 +222,7 @@ export function startProcess() {
 
                 GUI.tab_switch_cleanup(function () {
                     // disable active firmware flasher if it was active
-                    if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
+                    if (tabName !== "firmware_flasher" && $('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
                         $('div#flashbutton a.flash_state').removeClass('active');
                         $('div#flashbutton a.flash').removeClass('active');
                     }
