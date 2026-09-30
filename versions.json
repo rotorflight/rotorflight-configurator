@@ -10,11 +10,6 @@
       "type": "release",
       "name": "2.3.0",
       "path": "./release/2.3.0/"
-    },
-    {
-      "type": "branch",
-      "name": "RF-2.3.x",
-      "path": "./RF-2.3.x/"
     }
   ]
 }
