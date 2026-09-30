@@ -66,7 +66,7 @@ jobs:
               echo "No preview found for pages/$DEPLOY_PATH"
               exit 0
             fi
-            rm -rf "$DEPLOY_PATH"
+            rm -rf "$DEPLOY_PATH" "$DEPLOY_PATH.json"
 
             cp -R ../.github/pages/. .
             touch .nojekyll
