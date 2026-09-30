@@ -3452,8 +3452,8 @@
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS_HEADING": {
-        "message": "GPS Heading",
-        "english": "GPS Heading",
+        "message": "GPS Course",
+        "english": "GPS Course",
         "status": "New entry. Please translate!"
     },
     "receiverTelemetrySensor_GPS_GROUNDSPEED": {

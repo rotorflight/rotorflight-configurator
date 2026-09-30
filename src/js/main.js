@@ -14,6 +14,10 @@ import { serial } from "@/js/serial.js";
 import { handleConnectClick, initializeSerialBackend } from "@/js/serial_backend.js";
 import { TABS } from "@/js/tabs/tabs.js";
 
+const SERIAL_FUNCTION_RX_SERIAL = 64;
+const SERIAL_FUNCTION_FBUS_OUT = 524288;
+const SERIALRX_PROVIDER_FBUS = 17;
+
 if (__BACKEND__ === "nwjs") {
     if (import.meta.env.DEV) {
         // allow smaller window for testing mobile layout
@@ -22,6 +26,11 @@ if (__BACKEND__ === "nwjs") {
 
     jQuery(function () {
         useGlobalNodeFunctions();
+        appReady();
+    });
+} else if (__BACKEND__ === "web") {
+    // A plain browser tab: nothing to wait for but the DOM.
+    jQuery(function () {
         appReady();
     });
 }
@@ -102,6 +111,16 @@ function closeSerial() {
 }
 
 function closeHandler() {
+    // Let the open tab refuse or delay closing the desktop window (the
+    // Firmware Flasher mid-flash, or with a backup still to restore).
+    if (GUI.isNWJS() && GUI.current_tab?.requestClose) {
+        GUI.current_tab.requestClose(() => closeWindow.call(this));
+        return;
+    }
+    closeWindow.call(this);
+}
+
+function closeWindow() {
     if (!GUI.isCordova()) {
         this.hide();
     }
@@ -153,7 +172,9 @@ export function startProcess() {
     // our view is reactive to model changes
     // updateTopBarVersion();
 
-    if (!GUI.isOther()) {
+    // The web build is always whatever was last deployed, so there is no
+    // newer release to point it at.
+    if (!GUI.isOther() && __BACKEND__ !== "web") {
         checkForConfiguratorUpdates();
     }
 
@@ -165,9 +186,7 @@ export function startProcess() {
     // log library versions in console to make version tracking easier
     console.log(`Libraries: jQuery - ${$.fn.jquery}`);
 
-    if (GUI.isCordova()) {
-        UI_PHONES.init();
-    }
+    UI_PHONES.init();
 
     const ui_tabs = $('#tabs > ul');
     $('a', ui_tabs).click(function () {
@@ -194,10 +213,11 @@ export function startProcess() {
                 if (GUI.allowedTabs.indexOf(tabName) < 0 && tabName === "firmware_flasher") {
                     if (GUI.connected_to || GUI.connecting_to) {
                         await handleConnectClick.call($('a.connect'));
-                    } else {
-                        self.disconnect();
                     }
-                    $('div.open_firmware_flasher a.flash').click();
+
+                    if (GUI.allowedTabs.indexOf(tabName) < 0) {
+                        return;
+                    }
                 }
 
                 if (GUI.defaultAllowedFCTabsWhenConnected.indexOf(tabName) != -1) {
@@ -206,7 +226,7 @@ export function startProcess() {
 
                 GUI.tab_switch_cleanup(function () {
                     // disable active firmware flasher if it was active
-                    if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
+                    if (tabName !== "firmware_flasher" && $('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
                         $('div#flashbutton a.flash_state').removeClass('active');
                         $('div#flashbutton a.flash').removeClass('active');
                     }
@@ -433,14 +453,23 @@ export function updateTabList() {
     $('#tabs ul.mode-connected li.tab_gps').toggle(features.isEnabled('GPS'));
     $('#tabs ul.mode-connected li.tab_led_strip').toggle(features.isEnabled('LED_STRIP'));
 
+    // XACT servo programming needs MSP API 12.10+ and an FBUS bus, either as
+    // the active receiver protocol or as an FBUS_OUT serial port function.
+    const apiVersion = FC.CONFIG?.apiVersion;
+    const hasXactSupport = !!semver.valid(apiVersion) && semver.gte(apiVersion, API_VERSION_12_10);
+    const serialPorts = FC.SERIAL_CONFIG?.ports ?? [];
+    const hasSerialRxPort = serialPorts.some((port) => !!(port.functionMask & SERIAL_FUNCTION_RX_SERIAL));
+    const hasFbusRx = features.RX_SERIAL && FC.RX_CONFIG?.serialrx_provider === SERIALRX_PROVIDER_FBUS && hasSerialRxPort;
+    const hasFbusPort = serialPorts.some((port) => !!(port.functionMask & SERIAL_FUNCTION_FBUS_OUT));
+    $('#tabs ul.mode-connected li.tab_xact_servo').toggle(hasXactSupport && (hasFbusRx || hasFbusPort));
+
     // FBUS/S.Port master mode observes sensors on a UART configured with the
     // FBUS_OUT or SPORT_MASTER serial port function -- there's no dedicated
     // feature bit for it. The MSP2_*_FBUS_* commands the tab relies on only
     // exist from API 12.10 onwards.
-    const fbusMasterActive = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
-        && (FC.SERIAL_CONFIG?.ports ?? []).some(
-            (port) => port.functions.includes('FBUS_OUT') || port.functions.includes('SPORT_MASTER'),
-        );
+    const fbusMasterActive = hasXactSupport && serialPorts.some(
+        (port) => port.functions.includes('FBUS_OUT') || port.functions.includes('SPORT_MASTER'),
+    );
     $('#tabs ul.mode-connected li.tab_fbus_sensors').toggle(fbusMasterActive);
 }
 

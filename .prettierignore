@@ -32,6 +32,7 @@
 !/src/js/tabs/presets.js
 !/src/js/tabs/receiver.js
 !/src/js/tabs/tabs.js
+!/src/js/tabs/xact_servo.js
 !/src/js/virtual_fc.js
 !/src/tabs/governor/**/*.js
 !/src/tabs/gyro/filter_config.js
@@ -39,6 +40,7 @@
 !/src/tabs/options.html
 !/src/tabs/presets/**/*
 !/src/tabs/receiver/**/*.js
+!/src/tabs/xact_servo/**/*.js
 
 !*.scss
 !*.svelte
