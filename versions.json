@@ -10,11 +10,6 @@
       "type": "release",
       "name": "2.3.0",
       "path": "./release/2.3.0/"
-    },
-    {
-      "type": "branch",
-      "name": "feature-rf22-web",
-      "path": "./feature-rf22-web/"
     }
   ]
 }
