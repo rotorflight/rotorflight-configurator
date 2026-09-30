@@ -10,13 +10,16 @@ export const ReleaseChecker = function (releaseName, releaseUrl) {
     self._releaseUrl = releaseUrl;
 };
 
-ReleaseChecker.prototype.loadReleaseData = function (processFunction) {
+// `force` skips the hourly cache (the flasher's refresh button).
+ReleaseChecker.prototype.loadReleaseData = function (processFunction, force) {
     const self = this;
     chrome.storage.local.get([self._releaseLastUpdateTag, self._releaseDataTag], function (result) {
         const releaseDataTimestamp = $.now();
         const cacheReleaseData = result[self._releaseDataTag];
         const cachedReleaseLastUpdate = result[self._releaseLastUpdateTag];
-        if (!cacheReleaseData || !cachedReleaseLastUpdate || releaseDataTimestamp - cachedReleaseLastUpdate > 3600 * 1000) {
+        // An empty array is truthy, so treat a cached-but-empty release list the same as no cache at all.
+        const hasCachedData = Array.isArray(cacheReleaseData) ? cacheReleaseData.length > 0 : !!cacheReleaseData;
+        if (force || !hasCachedData || !cachedReleaseLastUpdate || releaseDataTimestamp - cachedReleaseLastUpdate > 3600 * 1000) {
             $.get(self._releaseUrl, function (releaseData) {
                 GUI.log(i18n.getMessage('releaseCheckLoaded',[self._releaseName]));
 
