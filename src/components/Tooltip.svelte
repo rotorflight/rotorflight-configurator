@@ -52,12 +52,25 @@
   }
 
   .message {
+    :global(p) {
+      margin: 0;
+    }
+
+    :global(ul) {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    :global(li) + :global(li) {
+      margin-top: 8px;
+    }
+
     :global(p) + :global(p) {
-      margin-top: 6px;
+      margin-top: 10px;
     }
 
     :global(code) {
-      border-radius: 2px;
+      border-radius: var(--radius-xs);
       padding: 1px 4px;
       margin: 0;
     }

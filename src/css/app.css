@@ -1,23 +1,50 @@
 :root {
-  --animation-speed: 0.2s ease;
+  --animation-speed: 0.16s cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-speed-slow: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
   --section-gap: 16px;
   --section-padding: 8px;
 
+  /* Corner radii - one scale, used instead of the assorted 1px/2px/3px/
+     4px/5px values the legacy stylesheets each picked on their own. This
+     is the single biggest lever on how modern the UI reads, so the whole
+     app pulls from here rather than inlining values. */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
   --color-shadow: rgba(0, 0, 0, 0.2);
+
+  /* Status-badge colors (e.g. GPS fix indicator) - theme-independent by
+     design, matching the value already duplicated as raw hex across
+     main.css/blackbox.css. */
+  --color-status-good: #56ac1d;
+  --color-status-bad: #e60000;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 10px;
+  height: 10px;
 }
 
+/* Transparent border + background-clip is what gives the thumb its inset
+   "floating pill" look; without it the thumb butts against the track. */
 ::-webkit-scrollbar-thumb {
-  border-radius: 2px;
+  border-radius: var(--radius-pill);
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 html[data-theme="light"] {
-  --val-neutral-hue: 220;
-  --val-neutral-sat: 5%;
-  --val-accent-hue: 202;
+  --val-neutral-hue: 208;
+  --val-neutral-sat: 9%;
+  --val-accent-hue: 203;
+  --val-accent-sat: 100%;
 
   --color-yellow-100: hsl(50, 100%, 92%);
   --color-yellow-500: hsl(45, 90%, 50%);
@@ -27,40 +54,48 @@ html[data-theme="light"] {
   --color-red-200: hsl(4, 100%, 80%);
   --color-red-900: hsl(4, 100%, 30%);
 
-  --color-accent-100: hsl(var(--val-accent-hue), 100%, 10%);
-  --color-accent-200: hsl(var(--val-accent-hue), 100%, 20%);
-  --color-accent-300: hsl(var(--val-accent-hue), 100%, 30%);
-  --color-accent-400: hsl(var(--val-accent-hue), 100%, 40%);
-  --color-accent-500: hsl(var(--val-accent-hue), 100%, 50%);
-  --color-accent-600: hsl(var(--val-accent-hue), 100%, 60%);
-  --color-accent-700: hsl(var(--val-accent-hue), 100%, 70%);
-  --color-accent-800: hsl(var(--val-accent-hue), 100%, 80%);
-  --color-accent-900: hsl(var(--val-accent-hue), 100%, 90%);
+  --color-accent-100: hsl(var(--val-accent-hue), var(--val-accent-sat), 12%);
+  --color-accent-200: hsl(var(--val-accent-hue), var(--val-accent-sat), 20%);
+  --color-accent-300: hsl(var(--val-accent-hue), var(--val-accent-sat), 26%);
+  --color-accent-400: hsl(var(--val-accent-hue), var(--val-accent-sat), 32%);
+  --color-accent-500: hsl(var(--val-accent-hue), var(--val-accent-sat), 39%);
+  --color-accent-600: hsl(var(--val-accent-hue), var(--val-accent-sat), 50%);
+  --color-accent-700: hsl(var(--val-accent-hue), var(--val-accent-sat), 64%);
+  --color-accent-800: hsl(var(--val-accent-hue), var(--val-accent-sat), 80%);
+  --color-accent-900: hsl(var(--val-accent-hue), var(--val-accent-sat), 94%);
 
-  --color-neutral-50: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 98%);
-  --color-neutral-100: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 97%);
-  --color-neutral-200: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 92%);
-  --color-neutral-300: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 85%);
-  --color-neutral-400: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 70%);
-  --color-neutral-500: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 50%);
-  --color-neutral-600: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 30%);
-  --color-neutral-700: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 15%);
-  --color-neutral-800: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 8%);
-  --color-neutral-900: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 3%);
-  --color-neutral-950: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 2%);
+  --color-neutral-50: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 100%);
+  --color-neutral-100: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 98%);
+  --color-neutral-200: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 95%);
+  --color-neutral-300: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 90%);
+  --color-neutral-400: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 76%);
+  --color-neutral-500: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 55%);
+  --color-neutral-600: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 36%);
+  --color-neutral-700: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 22%);
+  --color-neutral-800: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 13%);
+  --color-neutral-900: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 8%);
+  --color-neutral-950: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 4%);
 
   --color-bg: var(--color-neutral-200);
-  --color-surface: var(--color-neutral-100);
+  --color-surface: var(--color-neutral-50);
   --color-surface-alt: var(--color-neutral-600);
   --color-surface-float: var(--color-neutral-50);
+  --color-surface-sunken: var(--color-neutral-100);
   --color-hover: var(--color-neutral-200);
   --color-border: var(--color-neutral-400);
   --color-border-soft: var(--color-neutral-300);
   --color-border-accent: var(--color-accent-500);
 
+  /* Card/section headers. Split out from --color-surface-alt so a header
+     can be a quiet band on the card itself rather than the inverted dark
+     bar that value forced it to be. */
+  --color-header-bg: var(--color-neutral-100);
+  --color-header-fg: var(--color-neutral-700);
+
   --color-text: var(--color-neutral-900);
   --color-text-alt: var(--color-neutral-100);
   --color-text-soft: var(--color-neutral-700);
+  --color-text-muted: var(--color-neutral-600);
   --color-text-disabled: var(--color-neutral-500);
 
   --color-input-bg: var(--color-neutral-50);
@@ -75,9 +110,19 @@ html[data-theme="light"] {
   --color-btn-bg-active: var(--color-neutral-500);
   --color-btn-bg-disabled: var(--color-neutral-200);
 
+  --color-accent-fg: hsl(0, 0%, 100%);
+  --color-accent-hover: var(--color-accent-400);
+  --color-accent-soft: hsl(
+    var(--val-accent-hue) var(--val-accent-sat) 39% / 0.1
+  );
+  --color-focus-ring: hsl(
+    var(--val-accent-hue) var(--val-accent-sat) 39% / 0.28
+  );
+
   --color-switch: var(--color-accent-500);
-  --color-switch-secondary: var(--color-neutral-300);
+  --color-switch-secondary: var(--color-neutral-400);
   --color-switch-disabled: var(--color-neutral-300);
+  --color-switch-disabled-checked: hsl(var(--val-accent-hue), 20%, 50%);
   --color-switch-handle: var(--color-neutral-50);
   --color-switch-handle-secondary: var(--color-neutral-50);
   --color-switch-handle-disabled: var(--color-neutral-400);
@@ -85,7 +130,7 @@ html[data-theme="light"] {
   --color-slider-foreground: var(--color-neutral-500);
   --color-slider-background: var(--color-neutral-200);
   --color-slider-border: var(--color-neutral-400);
-  --color-slider-handle-background: var(--color-neutral-100);
+  --color-slider-handle-background: var(--color-neutral-50);
   --color-slider-handle-border: var(--color-neutral-500);
   --color-slider-connect: var(--color-accent-500);
   --color-slider-text: var(--color-neutral-900);
@@ -93,24 +138,59 @@ html[data-theme="light"] {
   --color-meter-bg: var(--color-neutral-200);
   --color-meter-border: var(--color-neutral-400);
 
+  /* Rotorflight semantic colours (see the design system). Text colours
+     hold 4.5:1 on the surface and on their -soft fill. */
+  --color-accent-text: var(--color-accent-400);
+  --color-border-control: var(--color-neutral-500);
+  --color-signal: hsl(44, 100%, 50%);
+  --color-signal-text: hsl(36, 100%, 27%);
+  --color-info: var(--color-accent-300);
+  --color-info-soft: hsl(203, 80%, 95%);
+  --color-success: hsl(145, 63%, 26%);
+  --color-success-soft: hsl(145, 60%, 93%);
+  --color-warning: hsl(36, 100%, 26%);
+  --color-warning-soft: hsl(48, 100%, 91%);
+  --color-danger: hsl(4, 76%, 44%);
+  --color-danger-soft: hsl(4, 100%, 95%);
+  --color-on-danger: hsl(0, 0%, 100%);
+  --color-collective: hsl(38, 100%, 37%);
+
   --color-roll: hsl(2, 62%, 60%);
   --color-pitch: hsl(122, 62%, 60%);
   --color-yaw: hsl(242, 62%, 60%);
 
+  /* Elevation. Two stacked shadows (a tight contact shadow plus a wider
+     ambient one) rather than a single blur - that is what makes a card
+     read as lifted instead of as a grey halo around it. */
+  --shadow-xs: 0 1px 2px rgba(15, 18, 24, 0.06);
+  --shadow-sm:
+    0 1px 2px rgba(15, 18, 24, 0.06), 0 2px 6px -2px rgba(15, 18, 24, 0.08);
+  --shadow-md:
+    0 2px 4px -1px rgba(15, 18, 24, 0.07),
+    0 8px 20px -6px rgba(15, 18, 24, 0.12);
+  --shadow-lg:
+    0 4px 8px -2px rgba(15, 18, 24, 0.08),
+    0 18px 40px -12px rgba(15, 18, 24, 0.2);
+
   ::-webkit-scrollbar-corner,
   ::-webkit-scrollbar {
-    /*background: var(--color-neutral-600);*/
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--color-neutral-400);
+    background-color: var(--color-neutral-400);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-neutral-500);
   }
 }
 
 html[data-theme="dark"] {
-  --val-neutral-hue: 248;
-  --val-neutral-sat: 5%;
-  --val-accent-hue: 202;
+  --val-neutral-hue: 208;
+  --val-neutral-sat: 9%;
+  --val-accent-hue: 203;
+  --val-accent-sat: 82%;
 
   --color-yellow-100: hsl(45, 100%, 90%);
   --color-yellow-500: hsl(45, 60%, 55%);
@@ -120,40 +200,45 @@ html[data-theme="dark"] {
   --color-red-500: hsl(4, 60%, 55%);
   --color-red-900: hsl(4, 100%, 30%);
 
-  --color-accent-100: hsl(var(--val-accent-hue), 100%, 10%);
-  --color-accent-200: hsl(var(--val-accent-hue), 100%, 20%);
-  --color-accent-300: hsl(var(--val-accent-hue), 100%, 30%);
-  --color-accent-400: hsl(var(--val-accent-hue), 100%, 40%);
-  --color-accent-500: hsl(var(--val-accent-hue), 100%, 50%);
-  --color-accent-600: hsl(var(--val-accent-hue), 100%, 60%);
-  --color-accent-700: hsl(var(--val-accent-hue), 100%, 70%);
-  --color-accent-800: hsl(var(--val-accent-hue), 100%, 80%);
-  --color-accent-900: hsl(var(--val-accent-hue), 100%, 90%);
+  --color-accent-100: hsl(var(--val-accent-hue), var(--val-accent-sat), 12%);
+  --color-accent-200: hsl(var(--val-accent-hue), var(--val-accent-sat), 20%);
+  --color-accent-300: hsl(var(--val-accent-hue), var(--val-accent-sat), 30%);
+  --color-accent-400: hsl(var(--val-accent-hue), var(--val-accent-sat), 50%);
+  --color-accent-500: hsl(var(--val-accent-hue), var(--val-accent-sat), 58%);
+  --color-accent-600: hsl(var(--val-accent-hue), var(--val-accent-sat), 66%);
+  --color-accent-700: hsl(var(--val-accent-hue), var(--val-accent-sat), 74%);
+  --color-accent-800: hsl(var(--val-accent-hue), var(--val-accent-sat), 84%);
+  --color-accent-900: hsl(var(--val-accent-hue), var(--val-accent-sat), 93%);
 
-  --color-neutral-950: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 5%);
-  --color-neutral-900: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 10%);
-  --color-neutral-800: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 20%);
-  --color-neutral-700: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 30%);
-  --color-neutral-600: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 40%);
-  --color-neutral-500: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 50%);
-  --color-neutral-400: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 60%);
+  --color-neutral-950: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 7%);
+  --color-neutral-900: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 11%);
+  --color-neutral-800: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 16%);
+  --color-neutral-700: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 22%);
+  --color-neutral-600: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 32%);
+  --color-neutral-500: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 45%);
+  --color-neutral-400: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 58%);
   --color-neutral-300: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 70%);
-  --color-neutral-200: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 80%);
+  --color-neutral-200: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 82%);
   --color-neutral-100: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 90%);
-  --color-neutral-50: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 95%);
+  --color-neutral-50: hsl(var(--val-neutral-hue), var(--val-neutral-sat), 96%);
 
   --color-bg: var(--color-neutral-950);
   --color-surface: var(--color-neutral-900);
   --color-surface-alt: var(--color-neutral-800);
   --color-surface-float: var(--color-neutral-800);
+  --color-surface-sunken: var(--color-neutral-950);
   --color-hover: var(--color-neutral-800);
   --color-border: var(--color-neutral-700);
   --color-border-soft: var(--color-neutral-700);
   --color-border-accent: var(--color-accent-400);
 
+  --color-header-bg: var(--color-neutral-800);
+  --color-header-fg: var(--color-neutral-100);
+
   --color-text: var(--color-neutral-50);
   --color-text-alt: var(--color-neutral-100);
   --color-text-soft: var(--color-neutral-100);
+  --color-text-muted: var(--color-neutral-300);
   --color-text-disabled: var(--color-neutral-300);
 
   --color-input-bg: var(--color-neutral-800);
@@ -168,49 +253,97 @@ html[data-theme="dark"] {
   --color-btn-bg-active: var(--color-neutral-500);
   --color-btn-bg-disabled: var(--color-neutral-400);
 
+  --color-accent-fg: hsl(208, 20%, 8%);
+  --color-accent-hover: var(--color-accent-500);
+  --color-accent-soft: hsl(
+    var(--val-accent-hue) var(--val-accent-sat) 58% / 0.16
+  );
+  --color-focus-ring: hsl(
+    var(--val-accent-hue) var(--val-accent-sat) 58% / 0.35
+  );
+
   --color-switch: var(--color-accent-400);
-  --color-switch-secondary: var(--color-neutral-500);
+  --color-switch-secondary: var(--color-neutral-600);
   --color-switch-disabled: var(--color-neutral-700);
-  --color-switch-handle: var(--color-neutral-100);
+  --color-switch-disabled-checked: hsl(var(--val-accent-hue), 20%, 30%);
+  --color-switch-handle: var(--color-neutral-50);
   --color-switch-handle-secondary: var(--color-neutral-100);
   --color-switch-handle-disabled: var(--color-neutral-500);
 
   --color-slider-foreground: var(--color-neutral-300);
   --color-slider-background: var(--color-neutral-700);
-  --color-slider-border: var(--color-neutral-400);
-  --color-slider-handle-background: var(--color-neutral-600);
+  --color-slider-border: var(--color-neutral-600);
+  --color-slider-handle-background: var(--color-neutral-500);
   --color-slider-handle-border: var(--color-neutral-800);
-  --color-slider-connect: hsl(var(--val-accent-hue), 40%, 40%);
+  --color-slider-connect: var(--color-accent-400);
   --color-slider-text: var(--color-neutral-100);
 
   --color-meter-bg: var(--color-neutral-700);
   --color-meter-border: var(--color-neutral-500);
 
+  --color-accent-text: var(--color-accent-600);
+  --color-border-control: var(--color-neutral-500);
+  --color-signal: hsl(44, 100%, 50%);
+  --color-signal-text: hsl(44, 100%, 60%);
+  --color-info: var(--color-accent-700);
+  --color-info-soft: hsl(203, 40%, 18%);
+  --color-success: hsl(145, 50%, 60%);
+  --color-success-soft: hsl(145, 35%, 16%);
+  --color-warning: hsl(45, 90%, 62%);
+  --color-warning-soft: hsl(42, 45%, 16%);
+  --color-danger: hsl(4, 85%, 68%);
+  --color-danger-soft: hsl(4, 45%, 18%);
+  --color-on-danger: hsl(208, 20%, 8%);
+  --color-collective: hsl(44, 100%, 55%);
+
   --color-roll: hsl(2, 48%, 45%);
   --color-pitch: hsl(122, 48%, 40%);
   --color-yaw: hsl(242, 48%, 55%);
 
+  /* Dark surfaces barely register a drop shadow, so elevation here is
+     carried mostly by the deeper ambient layer. */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 6px -2px rgba(0, 0, 0, 0.5);
+  --shadow-md:
+    0 2px 4px -1px rgba(0, 0, 0, 0.45), 0 8px 20px -6px rgba(0, 0, 0, 0.6);
+  --shadow-lg:
+    0 4px 8px -2px rgba(0, 0, 0, 0.5), 0 18px 40px -12px rgba(0, 0, 0, 0.7);
+
   ::-webkit-scrollbar-corner,
   ::-webkit-scrollbar {
-    background: var(--color-neutral-950);
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--color-neutral-700);
+    background-color: var(--color-neutral-700);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-neutral-600);
   }
 }
 
 @media only screen and (max-width: 480px) {
   :root {
-    --animation-speed: 0.2s ease;
     --section-gap: 8px;
   }
 
   ::-webkit-scrollbar {
     width: 0px;
+    height: 0px;
   }
 
   input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

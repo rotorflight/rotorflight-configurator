@@ -2735,8 +2735,8 @@
         "english": "GPS Altitude"
     },
     "receiverTelemetrySensor_GPS_HEADING": {
-        "message": "Cap du GPS",
-        "english": "GPS Heading"
+        "message": "Route GPS",
+        "english": "GPS Course"
     },
     "receiverTelemetrySensor_GPS_GROUNDSPEED": {
         "message": "Vitesse sol GPS",

@@ -20,9 +20,9 @@
     width: 44px;
     min-width: 44px;
     max-width: 44px;
-    height: 16px;
-    max-height: 16px;
-    min-height: 16px;
+    height: 20px;
+    max-height: 20px;
+    min-height: 20px;
 
     -webkit-tap-highlight-color: transparent;
   }
@@ -36,8 +36,16 @@
       background-color: var(--color-switch);
 
       &::before {
-        transform: translateX(28px);
+        transform: translateX(24px);
         background-color: var(--color-switch-handle);
+      }
+    }
+
+    &:checked + .slider.disabled {
+      background-color: var(--color-switch-disabled-checked);
+
+      &::before {
+        background-color: var(--color-switch-handle-disabled);
       }
     }
   }
@@ -50,8 +58,10 @@
     right: 0;
     bottom: 0;
     background-color: var(--color-switch-secondary);
-    border-radius: 8px;
-    transition: var(--animation-speed);
+    border-radius: var(--radius-pill);
+    transition:
+      background-color var(--animation-speed),
+      box-shadow var(--animation-speed);
 
     &.disabled {
       cursor: not-allowed;
@@ -66,21 +76,23 @@
     &::before {
       position: absolute;
       content: "";
-      height: 14px;
-      width: 14px;
-      left: 1px;
-      bottom: 1px;
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
       background-color: var(--color-switch-handle-secondary);
       border-radius: 50%;
-      transition: var(--animation-speed);
-
-      :global(html[data-theme="light"]) & {
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-      }
+      /* Springy overshoot on the knob - the one place in the app where a
+         control is worth animating with character rather than linearly. */
+      transition:
+        transform 0.22s cubic-bezier(0.34, 1.4, 0.64, 1),
+        background-color var(--animation-speed);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
 
     input:focus-visible + & {
-      outline: 1px solid var(--color-border-accent);
+      outline: none;
+      box-shadow: 0 0 0 3px var(--color-focus-ring);
     }
   }
 </style>

@@ -32,6 +32,7 @@ export default defineConfig(
         __APP_VERSION__: "readonly",
         __BACKEND__: "readonly",
         __COMMIT_HASH__: "readonly",
+        __BUILD_LABEL__: "readonly",
       },
     },
   },
