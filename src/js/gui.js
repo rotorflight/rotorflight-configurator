@@ -373,7 +373,11 @@ GuiControl.prototype.set_zoom = function(zoom_level, show_box) {
 
     config.set({'zoomLevel': zoom_level});
 
-    nw.Window.get().zoomLevel = Math.log(zoom_level / 100) / Math.log(1.2);
+    if (this.isNWJS()) {
+        nw.Window.get().zoomLevel = Math.log(zoom_level / 100) / Math.log(1.2);
+    } else {
+        document.body.style.zoom = percent;
+    }
     $('#zoom-percent').text(percent);
 
     if (show_box) {

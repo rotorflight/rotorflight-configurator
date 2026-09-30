@@ -34,7 +34,9 @@ export function bytesToSize(bytes) {
  */
 
 export function checkChromeRuntimeError() {
-    if (chrome.runtime.lastError) {
+    // chrome.runtime only exists under NW.js/Cordova; the web build has no
+    // chrome.* API calls to report on.
+    if (globalThis.chrome?.runtime?.lastError) {
         console.error(`Chrome API Error: ${chrome.runtime.lastError.message}.\n Traced ${(new Error).stack}`);
         return true;
     }
