@@ -517,6 +517,9 @@
     "xactServoPhysicalIdCollisionWarning": {
         "message": "Another discovered servo already uses this Physical ID. Choose a different one -- two servos sharing a Physical ID collide on the bus and get tracked as a single, unreliable entry."
     },
+    "xactServoSectionDetected": {
+        "message": "Detected servos"
+    },
     "xactServoSectionProtocol": {
         "message": "Protocol"
     },
