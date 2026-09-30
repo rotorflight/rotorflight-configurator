@@ -5,6 +5,11 @@
       "name": "master",
       "path": "./master/",
       "notes": "Latest development build"
+    },
+    {
+      "type": "branch",
+      "name": "feature-rf23-web",
+      "path": "./feature-rf23-web/"
     }
   ]
 }
