@@ -18,11 +18,6 @@
     },
     {
       "type": "branch",
-      "name": "feature-rf22-web-cache",
-      "path": "./feature-rf22-web-cache/"
-    },
-    {
-      "type": "branch",
       "name": "feature-rf23-web-cache",
       "path": "./feature-rf23-web-cache/"
     },
