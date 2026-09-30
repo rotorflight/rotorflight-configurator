@@ -1,14 +1,27 @@
 <script>
+  import { onDestroy, onMount } from "svelte";
+
+  import HoverTooltip from "@/components/HoverTooltip.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
   import Slider from "@/components/Slider.svelte";
   import Switch from "@/components/Switch.svelte";
+  import Tooltip from "@/components/Tooltip.svelte";
   import InfoNote from "@/components/notes/InfoNote.svelte";
 
   import { Mixer } from "@/js/Mixer.js";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
+  import { MSP } from "@/js/msp.svelte.js";
+  import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
+
+  import OutputIcon from "./OutputIcon.svelte";
+  import {
+    FIRST_MOTOR,
+    dynamicOverrideGroups,
+    simulateOutputValue,
+  } from "./rules.js";
 
   let { motorised, hasPassthrough } = $props();
 
@@ -149,6 +162,140 @@
       pips: { mode: "values", values: def.pips, density: 100 },
     };
   }
+
+  // ---------------------------------------------------------------
+  // Per-output rows for the custom mixer rules
+  // ---------------------------------------------------------------
+
+  const DYN_PIPS = [1000, 1250, 1500, 1750, 2000];
+
+  // Raw override value per input, kept for every dynamic row whether or
+  // not it's sent. simulateOutputValue() needs each input's current
+  // value, and an input feeding a motor may well feed a servo too.
+  let dynValues = $state({});
+
+  // Live physical output, polled from the FC. Motors are excluded -
+  // see isSimulated below.
+  let liveValues = $state({});
+
+  let groups = $derived(dynamicOverrideGroups(FC.MIXER_RULES));
+
+  /**
+   * A motor can't actually be driven from here: firmware's motorUpdate()
+   * only feeds the mixer's motor outputs to the ESCs while ARMED, while
+   * mixerSetInput() only honours an input override while DISARMED. So
+   * the override can never reach a motor - those rows are simulated
+   * instead, computed from the rules rather than sent and read back.
+   */
+  function isSimulated(dst) {
+    return dst >= FIRST_MOTOR;
+  }
+
+  /**
+   * A motor's travel is one-sided: 1000us is off and 2000us is full, so
+   * the whole slider maps to 0-100% throttle with zero at the bottom. A
+   * servo is bipolar, so zero sits at mid-stick with +-500us either
+   * side. That changes both where zero is and how much output a
+   * microsecond buys - without the wider scale, the top half of a
+   * motor's slider would run past its input's own limit.
+   */
+  function dynDef(src, dst) {
+    const input = FC.MIXER_INPUTS[src];
+    const limit = Math.max(Math.abs(input.min), Math.abs(input.max)) || 1000;
+    const motor = isSimulated(dst);
+
+    return {
+      src,
+      dst,
+      motor,
+      center: motor ? 1000 : 1500,
+      scale: (motor ? 1000 : 500) / limit,
+    };
+  }
+
+  function dynValue(def) {
+    const raw = dynValues[def.src] ?? 0;
+    return Math.round(raw * def.scale + def.center);
+  }
+
+  function setDynValue(def, us) {
+    dynValues[def.src] = Math.round((us - def.center) / def.scale);
+
+    // Simulated rows are never sent: there's nothing on the FC side that
+    // would act on them.
+    if (!def.motor) {
+      FC.MIXER_OVERRIDE[def.src] = dynValues[def.src];
+      mspHelper.sendMixerOverride(def.src);
+    }
+  }
+
+  function dynEnabled(src) {
+    return Mixer.overrideEnabled(FC.MIXER_OVERRIDE[src]);
+  }
+
+  function setDynEnabled(def, enabled) {
+    if (enabled) {
+      dynValues[def.src] = 0;
+      FC.MIXER_OVERRIDE[def.src] = 0;
+    } else {
+      FC.MIXER_OVERRIDE[def.src] = Mixer.OVERRIDE_OFF;
+    }
+    mspHelper.sendMixerOverride(def.src);
+  }
+
+  /**
+   * The output's actual position, in microseconds. Servos are read back
+   * from the FC; motors are computed, since their readback is stuck at
+   * idle while disarmed no matter what the mixer says.
+   */
+  function outputValue(dst) {
+    if (isSimulated(dst)) {
+      return simulateOutputValue(
+        FC.MIXER_RULES,
+        FC.MIXER_INPUTS,
+        dynValues,
+        dst,
+      );
+    }
+    return liveValues[dst] ?? 1500;
+  }
+
+  function outputLabel(dst) {
+    const name = Mixer.outputNames[dst];
+    return name ? $i18n.t(name) : `#${dst}`;
+  }
+
+  // 1010 rather than 1000 as the spin threshold: the value sits a few us
+  // off exactly 1000 often enough that "> 1000" would leave a stopped
+  // motor visibly creeping.
+  function isSpinning(value) {
+    return value > 1010;
+  }
+
+  function spinSpeed(value) {
+    const throttle = Math.min(1, Math.max(0, (value - 1000) / 1000));
+    return (1.1 - throttle).toFixed(2);
+  }
+
+  function armAngle(value) {
+    return Math.min(60, Math.max(-60, ((value - 1500) / 500) * 60));
+  }
+
+  let poller;
+
+  onMount(() => {
+    poller = setInterval(async () => {
+      if (groups.size === 0) return;
+      await MSP.promise(MSPCodes.MSP_SERVO);
+      const next = {};
+      for (const dst of groups.keys()) {
+        if (!isSimulated(dst)) next[dst] = FC.SERVO_DATA[dst - 1];
+      }
+      liveValues = next;
+    }, 250);
+  });
+
+  onDestroy(() => clearInterval(poller));
 </script>
 
 <Section label="mixerOverride" summary="mixerOverrideHelp">
@@ -234,6 +381,79 @@
         </div>
       {/each}
     </div>
+
+    <!-- One block per output driven by custom rules, so it's clear which
+         rules combine to drive a given servo/motor and each can be
+         tested on its own against the live position. -->
+    {#each [...groups] as [dst, srcs] (dst)}
+      {@const value = outputValue(dst)}
+      {@const motor = isSimulated(dst)}
+      <div class="group">
+        <div class="inputs">
+          {#each [...srcs] as src (src)}
+            {@const def = dynDef(src, dst)}
+            {@const enabled = motor || dynEnabled(src)}
+            <div class="row dyn">
+              <div class="name">{$i18n.t(Mixer.inputNames[src])}</div>
+              <div class="toggles">
+                {#if motor}
+                  <HoverTooltip {simulatedTip}>
+                    <span class="simulated">&#9888;</span>
+                  </HoverTooltip>
+                  {#snippet simulatedTip()}
+                    <Tooltip help="mixerOverrideSimulatedHelp" />
+                  {/snippet}
+                {:else}
+                  <label title={$i18n.t("mixerOverrideEnable")}>
+                    <Switch
+                      checked={enabled}
+                      onchange={(e) => setDynEnabled(def, e.target.checked)}
+                    />
+                  </label>
+                {/if}
+              </div>
+              <div class="value">
+                <NumberInput
+                  min={1000}
+                  max={2000}
+                  step={1}
+                  disabled={!enabled}
+                  value={dynValue(def)}
+                  onchange={(e) => setDynValue(def, Number(e.target.value))}
+                />
+              </div>
+              <div class="slider" class:disabled={!enabled}>
+                <div class="track">
+                  <Slider
+                    value={dynValue(def)}
+                    opts={{
+                      range: { min: 1000, max: 2000 },
+                      start: def.center,
+                      step: 1,
+                      behaviour: "snap-drag",
+                      pips: { mode: "values", values: DYN_PIPS, density: 5 },
+                    }}
+                    changeOnSlide={false}
+                    onchange={(v) => setDynValue(def, Number(v))}
+                  />
+                </div>
+              </div>
+            </div>
+          {/each}
+        </div>
+
+        <div class="position">
+          <OutputIcon
+            {motor}
+            angle={armAngle(value)}
+            spinning={motor && isSpinning(value)}
+            speed={spinSpeed(value)}
+          />
+          <span class="position-label">{outputLabel(dst)}</span>
+          <span class="position-value">{Math.round(value)}</span>
+        </div>
+      </div>
+    {/each}
   {/if}
 </Section>
 
@@ -317,6 +537,58 @@
     }
   }
 
+  /* An output and the rules feeding it read as one block: the rules
+     stacked on the left, the live position for the output they all
+     drive on the right. */
+  .group {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding-right: 8px;
+    border-top: 1px solid var(--color-border-soft);
+  }
+
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  /* No separator between rules inside a group - the group's own top
+     border is what sets it apart from its neighbours. */
+  .row.dyn {
+    border-top: none;
+  }
+
+  .position {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    width: 110px;
+    padding: 8px 0;
+  }
+
+  .position-label {
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  .position-value {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Stands in for the enable toggle on a simulated (motor) row. */
+  .simulated {
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: help;
+    color: var(--color-yellow-500, orange);
+  }
+
   @media only screen and (max-width: 480px) {
     .row {
       grid-template-columns: 1fr auto;
@@ -325,6 +597,16 @@
     .value,
     .slider {
       grid-column: 1 / -1;
+    }
+
+    .group {
+      grid-template-columns: 1fr;
+    }
+
+    .position {
+      width: auto;
+      flex-direction: row;
+      gap: 8px;
     }
   }
 </style>

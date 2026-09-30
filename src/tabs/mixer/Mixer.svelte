@@ -23,6 +23,7 @@
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { reinitialiseConnection } from "@/js/serial_backend";
 
+  import CustomMixerRules from "./CustomMixerRules.svelte";
   import MixerOverride from "./MixerOverride.svelte";
 
   const TAIL_VARIABLE_PITCH = 0;
@@ -40,11 +41,14 @@
   let origInputs;
 
   let customConfig = $state(false);
-  let customRules = $state(false);
   let hasTiltCorrection = $state(false);
   let hasPassthrough = $state(false);
 
   let form = $state({});
+
+  // Bound to the rules table so its staged edits can join this tab's own
+  // save/revert cycle rather than running a second one of their own.
+  let customRules;
 
   let motorised = $derived(form.tailMode > TAIL_VARIABLE_PITCH);
 
@@ -145,7 +149,6 @@
       inputs[1].max !== -inputs[1].min ||
       inputs[2].max !== -inputs[2].min ||
       inputs[4].max !== -inputs[4].min;
-    customRules = !Mixer.isNullMixer(FC.MIXER_RULES);
   }
 
   function markDirty(group) {
@@ -273,6 +276,7 @@
         );
       }
     }
+    await customRules?.sendDirty();
     dirtyGroups = {};
   }
 
@@ -299,6 +303,7 @@
     FC.MIXER_CONFIG = Mixer.cloneConfig(origConfig);
     FC.MIXER_INPUTS = Mixer.cloneInputs(origInputs);
     await sendDirty();
+    await customRules?.revert();
     needSave = false;
     needReboot = false;
     dataToForm();
@@ -364,9 +369,6 @@
   <div class="notes">
     {#if customConfig}
       <WarningNote message="mixerCustomNote" />
-    {/if}
-    {#if customRules}
-      <InfoNote message="mixerRulesNote" />
     {/if}
     {#if form.tailMode === TAIL_BIDIRECTIONAL}
       <WarningNote message="mixerBidirNote" />
@@ -626,6 +628,11 @@
       </Section>
     </div>
   </div>
+
+  <CustomMixerRules
+    bind:this={customRules}
+    onchange={() => (needSave = true)}
+  />
 
   <MixerOverride {motorised} {hasPassthrough} />
 </Page>
