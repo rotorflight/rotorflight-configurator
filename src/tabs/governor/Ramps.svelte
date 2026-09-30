@@ -1,6 +1,5 @@
 <script>
   import semver from "semver";
-  import { slide } from "svelte/transition";
 
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
@@ -8,7 +7,7 @@
   import SubSection from "@/components/SubSection.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
 
-  import { API_VERSION_12_9, CONFIGURATOR } from "@/js/configurator.svelte.js";
+  import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
 
   let is_12_9 = $derived(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9));
@@ -35,35 +34,37 @@
 
 <Section label="govSectionRampTime">
   <SubSection>
-    {#if CONFIGURATOR.expertMode}
-      <div transition:slide>
-        <Field id="gov-startup-time" label="govStartupTime" unit="s">
-          {#snippet tooltip()}
-            <Tooltip
-              help={is_12_9 ? "govStartupTimeHelp2" : "govStartupTimeHelp"}
-              attrs={[
-                { name: "genericDefault", value: "20s" },
-                { name: "genericRange", value: "0s - 60s" },
-              ]}
-            />
-          {/snippet}
-          <div class="ramp-container">
-            {#if is_12_9 && fields.gov_startup_time > 0}
-              <div>
-                {(100 / fields.gov_startup_time).toFixed(1)} %/s
-              </div>
-            {/if}
-            <NumberInput
-              id="gov-startup-time"
-              min="0"
-              max="60"
-              step="0.1"
-              bind:value={fields.gov_startup_time}
-            />
+    <Field
+      expert
+      changed={FC.GOVERNOR.gov_startup_time !== 200}
+      id="gov-startup-time"
+      label="govStartupTime"
+      unit="s"
+    >
+      {#snippet tooltip()}
+        <Tooltip
+          help={is_12_9 ? "govStartupTimeHelp2" : "govStartupTimeHelp"}
+          attrs={[
+            { name: "genericDefault", value: "20s" },
+            { name: "genericRange", value: "0s - 60s" },
+          ]}
+        />
+      {/snippet}
+      <div class="ramp-container">
+        {#if is_12_9 && fields.gov_startup_time > 0}
+          <div>
+            {(100 / fields.gov_startup_time).toFixed(1)} %/s
           </div>
-        </Field>
+        {/if}
+        <NumberInput
+          id="gov-startup-time"
+          min="0"
+          max="60"
+          step="0.1"
+          bind:value={fields.gov_startup_time}
+        />
       </div>
-    {/if}
+    </Field>
     <Field id="gov-spoolup-time" label="govSpoolupTime" unit="s">
       {#snippet tooltip()}
         <Tooltip
@@ -116,7 +117,13 @@
         </div>
       </Field>
     {/if}
-    <Field id="gov-tracking-time" label="govTrackingTime" unit="s">
+    <Field
+      expert
+      changed={FC.GOVERNOR.gov_tracking_time !== (is_12_9 ? 50 : 20)}
+      id="gov-tracking-time"
+      label="govTrackingTime"
+      unit="s"
+    >
       {#snippet tooltip()}
         <Tooltip
           help={is_12_9 ? "govTrackingTimeHelp2" : "govTrackingTimeHelp"}
@@ -146,7 +153,13 @@
       </div>
     </Field>
 
-    <Field id="gov-recovery-time" label="govRecoveryTime" unit="s">
+    <Field
+      expert
+      changed={FC.GOVERNOR.gov_recovery_time !== (is_12_9 ? 30 : 20)}
+      id="gov-recovery-time"
+      label="govRecoveryTime"
+      unit="s"
+    >
       {#snippet tooltip()}
         <Tooltip
           help={is_12_9 ? "govRecoveryTimeHelp2" : "govRecoveryTimeHelp"}
@@ -175,7 +188,13 @@
       </div>
     </Field>
     {#if !is_12_9}
-      <Field id="gov-auto-bailout-time" label="govAutoBailoutTime" unit="s">
+      <Field
+        expert
+        changed={FC.GOVERNOR.gov_autorotation_bailout_time !== 0}
+        id="gov-auto-bailout-time"
+        label="govAutoBailoutTime"
+        unit="s"
+      >
         {#snippet tooltip()}
           <Tooltip
             help="govAutoBailoutTimeHelp"
