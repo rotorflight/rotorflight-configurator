@@ -448,7 +448,8 @@ function notifyOutdatedVersion(releaseData) {
     }
 }
 
-export function updateTabList(features) {
+export function updateTabList() {
+    const { features } = FC.FEATURE_CONFIG;
     $('#tabs ul.mode-connected li.tab_gps').toggle(features.isEnabled('GPS'));
     $('#tabs ul.mode-connected li.tab_led_strip').toggle(features.isEnabled('LED_STRIP'));
 
@@ -461,6 +462,15 @@ export function updateTabList(features) {
     const hasFbusRx = features.RX_SERIAL && FC.RX_CONFIG?.serialrx_provider === SERIALRX_PROVIDER_FBUS && hasSerialRxPort;
     const hasFbusPort = serialPorts.some((port) => !!(port.functionMask & SERIAL_FUNCTION_FBUS_OUT));
     $('#tabs ul.mode-connected li.tab_xact_servo').toggle(hasXactSupport && (hasFbusRx || hasFbusPort));
+
+    // FBUS/S.Port master mode observes sensors on a UART configured with the
+    // FBUS_OUT or SPORT_MASTER serial port function -- there's no dedicated
+    // feature bit for it. The MSP2_*_FBUS_* commands the tab relies on only
+    // exist from API 12.10 onwards.
+    const fbusMasterActive = hasXactSupport && serialPorts.some(
+        (port) => port.functions.includes('FBUS_OUT') || port.functions.includes('SPORT_MASTER'),
+    );
+    $('#tabs ul.mode-connected li.tab_fbus_sensors').toggle(fbusMasterActive);
 }
 
 function zeroPad(value, width) {

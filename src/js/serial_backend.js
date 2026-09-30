@@ -614,7 +614,7 @@ function onOpenVirtual() {
 
     update_dataflash_global();
     sensor_status(FC.CONFIG.activeSensors);
-    updateTabList(FC.FEATURE_CONFIG.features);
+    updateTabList();
 }
 
 function abortConnect() {
@@ -800,8 +800,8 @@ async function onConnect() {
         await MSP.promise(MSPCodes.MSP_STATUS, false);
         await MSP.promise(MSPCodes.MSP_DATAFLASH_SUMMARY, false);
         // Needed here (rather than left to each tab's own fetch) so updateTabList can
-        // decide whether to show the XACT servo tab, which is gated on FBUS receiver
-        // mode or the FBUS_OUT serial port function.
+        // decide whether to show the XACT servo and FBUS Sensors tabs, which are gated on
+        // FBUS receiver mode or the FBUS_OUT/SPORT_MASTER serial port functions.
         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
             await MSP.promise(MSPCodes.MSP_SERIAL_CONFIG, false);
             await MSP.promise(MSPCodes.MSP_RX_CONFIG, false);

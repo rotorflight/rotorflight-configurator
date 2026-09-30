@@ -379,6 +379,59 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             }
 
+            case MSPCodes.MSP2_GET_FBUS_SENSORS: {
+                const count = data.readU8();
+                const sensors = [];
+
+                for (let i = 0; i < count; i++) {
+                    const sensor = {
+                        physicalId: data.readU8(),
+                        source: data.readU8(), // 0 = FBUS, 1 = S.Port
+                        forwarded: data.readU8() !== 0,
+                        packetCount: data.readU32(),
+                    };
+
+                    const nameLen = data.readU8();
+                    let name = '';
+                    for (let j = 0; j < nameLen; j++) {
+                        name += String.fromCharCode(data.readU8());
+                    }
+                    sensor.name = name;
+
+                    const appIdCount = data.readU8();
+                    sensor.appIds = [];
+                    for (let j = 0; j < appIdCount; j++) {
+                        sensor.appIds.push(data.readU16());
+                    }
+
+                    sensors.push(sensor);
+                }
+
+                FC.FBUS_SENSORS = sensors;
+                break;
+            }
+
+            case MSPCodes.MSP2_CLEAR_FBUS_SENSORS: {
+                console.log('Observed FBUS/S.Port sensors cleared');
+                break;
+            }
+
+            case MSPCodes.MSP2_GET_FBUS_MASTER_CONFIG: {
+                data.readU8(); // payload version, unused for now
+                const forwardedSensors = [];
+                // matches FBUS_MASTER_MAX_FORWARDED_SENSORS in pg/fbus_master.h
+                for (let i = 0; i < 8; i++) {
+                    forwardedSensors.push(data.readU8());
+                }
+                FC.FBUS_MASTER_CONFIG.forwardedSensors = forwardedSensors;
+                break;
+            }
+
+            case MSPCodes.MSP2_SET_FBUS_MASTER_CONFIG: {
+                console.log('FBUS master forwarding config saved');
+                break;
+            }
+
             case MSPCodes.MSP_SET_BATTERY_PROFILE: {
                 console.log('Battery profile set');
                 break;
@@ -777,7 +830,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP_FEATURE_CONFIG: {
                 FC.FEATURE_CONFIG.features.bitfield = data.readU32();
-                updateTabList(FC.FEATURE_CONFIG.features);
+                updateTabList();
                 break;
             }
 
@@ -967,6 +1020,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     };
                     FC.SERIAL_CONFIG.ports.push(serialPort);
                 }
+                updateTabList();
                 break;
             }
 
@@ -2022,6 +2076,14 @@ MspHelper.prototype.crunch = function(code) {
                   .push8(FC.SMARTFUEL_CONFIG.voltageDropRate)
                   .push8(FC.SMARTFUEL_CONFIG.chargeDropRate)
                   .push8(FC.SMARTFUEL_CONFIG.sagGain);
+            break;
+        }
+
+        case MSPCodes.MSP2_SET_FBUS_MASTER_CONFIG: {
+            // matches FBUS_MASTER_MAX_FORWARDED_SENSORS in pg/fbus_master.h
+            for (let i = 0; i < 8; i++) {
+                buffer.push8(FC.FBUS_MASTER_CONFIG.forwardedSensors[i] ?? 0xFF);
+            }
             break;
         }
 
