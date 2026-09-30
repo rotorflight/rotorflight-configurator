@@ -68,6 +68,7 @@ export function MspHelper() {
         'SBUS_OUT': 18,
         'FBUS_OUT': 19,
         'SPORT_MASTER': 20,
+        'CRSF_SENSORS': 22,
     };
 
     self.REBOOT_TYPES = {
@@ -376,6 +377,101 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP2_SET_SMARTFUEL_CONFIG: {
                 console.log('Smart Fuel configuration saved');
+                break;
+            }
+
+            case MSPCodes.MSP2_GET_CRSF_SENSORS_STATUS: {
+                data.readU8(); // payload version, unused for now
+                const enabled = data.readU8() !== 0;
+                const rxByteCount = data.readU32();
+                const rxSyncCount = data.readU32();
+                const rxCrcOkCount = data.readU32();
+                const rxCrcFailCount = data.readU32();
+                const lastFrameType = data.readU8();
+                const lastFrameLength = data.readU8();
+
+                let gps = null;
+                if (data.readU8() !== 0) {
+                    gps = {
+                        latitude: data.read32(),
+                        longitude: data.read32(),
+                        groundspeedCmS: data.readU16(),
+                        headingDeg10: data.readU16(),
+                        altitudeCm: data.read32(),
+                        satellites: data.readU8(),
+                    };
+                } else {
+                    data.read32();
+                    data.read32();
+                    data.readU16();
+                    data.readU16();
+                    data.read32();
+                    data.readU8();
+                }
+
+                let battery = null;
+                if (data.readU8() !== 0) {
+                    battery = {
+                        voltageMv: data.readU32(),
+                        currentMa: data.readU32(),
+                        capacityMah: data.readU32(),
+                        remainingPct: data.readU8(),
+                    };
+                } else {
+                    data.readU32();
+                    data.readU32();
+                    data.readU32();
+                    data.readU8();
+                }
+
+                let baro = null;
+                if (data.readU8() !== 0) {
+                    baro = {
+                        altitudeCm: data.read32(),
+                        verticalSpeedCmS: data.read16(),
+                    };
+                } else {
+                    data.read32();
+                    data.read16();
+                }
+
+                let cells = null;
+                const hasCells = data.readU8() !== 0;
+                const cellCount = data.readU8();
+                const cellVoltageMv = [];
+                for (let i = 0; i < cellCount; i++) {
+                    cellVoltageMv.push(data.readU16());
+                }
+                const totalVoltageMv = data.readU32();
+                if (hasCells) {
+                    cells = { cellCount, cellVoltageMv, totalVoltageMv };
+                }
+
+                let rpm = null;
+                const hasRpm = data.readU8() !== 0;
+                const rpmCount = data.readU8();
+                const rpmValues = [];
+                for (let i = 0; i < rpmCount; i++) {
+                    rpmValues.push(data.read32());
+                }
+                if (hasRpm) {
+                    rpm = { rpmCount, rpmValues };
+                }
+
+                FC.CRSF_SENSORS_STATUS = {
+                    enabled,
+                    rxByteCount,
+                    rxSyncCount,
+                    rxCrcOkCount,
+                    rxCrcFailCount,
+                    lastFrameType,
+                    lastFrameLength,
+                    gps,
+                    battery,
+                    baro,
+                    cells,
+                    rpm,
+                };
                 break;
             }
 

@@ -739,6 +739,120 @@
     "tabRawSensorData": {
         "message": "Sensors"
     },
+    "tabCrsfSensors": {
+        "message": "CRSF Sensors"
+    },
+    "crsfSensorsDescription": {
+        "message": "Live link diagnostics and decoded readings from a CRSF-protocol sensor accessory (GPS, battery, barometer, or per-cell voltage) wired to the CRSF Sensors serial port."
+    },
+    "crsfSensorsLearnMore": {
+        "message": "Learn more"
+    },
+    "crsfSensorsNotSupported": {
+        "message": "This firmware does not support the CRSF Sensors diagnostic."
+    },
+    "crsfSensorsPortNotConfigured": {
+        "message": "No serial port is assigned the CRSF Sensors function yet -- set one on the Configuration tab."
+    },
+    "crsfSensorsBadgeReceiving": {
+        "message": "Receiving"
+    },
+    "crsfSensorsBadgeNoData": {
+        "message": "No data"
+    },
+    "crsfSensorsBadgePortEnabled": {
+        "message": "Port enabled"
+    },
+    "crsfSensorsBadgePortDisabled": {
+        "message": "Port disabled"
+    },
+    "crsfSensorsLinkTitle": {
+        "message": "Link"
+    },
+    "crsfSensorsRxBytes": {
+        "message": "RX bytes"
+    },
+    "crsfSensorsRxSyncBytes": {
+        "message": "RX sync bytes"
+    },
+    "crsfSensorsCrcOk": {
+        "message": "CRC OK frames"
+    },
+    "crsfSensorsCrcFail": {
+        "message": "CRC fail"
+    },
+    "crsfSensorsLastFrame": {
+        "message": "Last frame type/len"
+    },
+    "crsfSensorsNoData": {
+        "message": "No data received yet"
+    },
+    "crsfSensorsGpsTitle": {
+        "message": "GPS"
+    },
+    "crsfSensorsGpsLat": {
+        "message": "Latitude"
+    },
+    "crsfSensorsGpsLon": {
+        "message": "Longitude"
+    },
+    "crsfSensorsGpsSpeed": {
+        "message": "Ground speed"
+    },
+    "crsfSensorsGpsHeading": {
+        "message": "Heading"
+    },
+    "crsfSensorsGpsAlt": {
+        "message": "Altitude"
+    },
+    "crsfSensorsGpsSats": {
+        "message": "Satellites"
+    },
+    "crsfSensorsBatteryTitle": {
+        "message": "Battery"
+    },
+    "crsfSensorsBatteryVoltage": {
+        "message": "Voltage"
+    },
+    "crsfSensorsBatteryCurrent": {
+        "message": "Current"
+    },
+    "crsfSensorsBatteryCapacity": {
+        "message": "Capacity used"
+    },
+    "crsfSensorsBatteryRemaining": {
+        "message": "Remaining"
+    },
+    "crsfSensorsBaroTitle": {
+        "message": "Barometer"
+    },
+    "crsfSensorsBaroAlt": {
+        "message": "Altitude"
+    },
+    "crsfSensorsBaroVspeed": {
+        "message": "Vertical speed"
+    },
+    "crsfSensorsCellsTitle": {
+        "message": "Cell Voltages"
+    },
+    "crsfSensorsCellsCount": {
+        "message": "Cell count"
+    },
+    "crsfSensorsCellsTotal": {
+        "message": "Total voltage"
+    },
+    "crsfSensorsCellsChip": {
+        "message": "Cell $1"
+    },
+    "crsfSensorsRpmTitle": {
+        "message": "RPM"
+    },
+    "crsfSensorsRpmChip": {
+        "message": "Source $1"
+    },
+    "crsfSensorsRpmCaveat": {
+        "message": "Set crsf_sensors_use_rpm = ON (CLI-only) to feed this into blackbox, telemetry, RPM Filter, and the Governor. Telemetry-rate, not motor-rate -- use at your own risk for RPM Filter or the Governor's RPM modes, both of which need bidirectional DShot or a dedicated RPM/frequency sensor to actually track real motor speed."
+    },
     "tabCLI": {
         "message": "CLI"
     },
@@ -1934,6 +2048,9 @@
     },
     "portsFunction_SRXL2_ESC": {
         "message": "SRXL2 ESC"
+    },
+    "portsFunction_CRSF_SENSORS": {
+        "message": "CRSF Sensors"
     },
     "portsFunction_CUSTOM": {
         "message": "Custom"
