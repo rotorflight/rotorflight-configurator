@@ -5,6 +5,7 @@
   import NumberInput from "@/components/NumberInput.svelte";
   import Page from "@/components/Page.svelte";
   import Section from "@/components/Section.svelte";
+  import Select from "@/components/Select.svelte";
   import SubSection from "@/components/SubSection.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
   import ErrorNote from "@/components/notes/ErrorNote.svelte";
@@ -85,6 +86,13 @@
     { value: 2, label: "xactServoWorkingModeRotate" },
   ];
 
+  function translated(options) {
+    return options.map((o) => ({ ...o, label: $i18n.t(o.label) }));
+  }
+
+  let directionOptionsT = $derived(translated(directionOptions));
+  let workingModeOptionsT = $derived(translated(workingModeOptions));
+
   onMount(() => {
     MSP.promise(MSPCodes.MSP_STATUS);
     statusPoller = setInterval(() => {
@@ -154,14 +162,8 @@
   </button>
 {/snippet}
 
-{#snippet select(id, options, translate)}
-  <select {id} bind:value={xactState.values[id]}>
-    {#each options as option (option.value)}
-      <option value={option.value}>
-        {translate ? $i18n.t(option.label) : option.label}
-      </option>
-    {/each}
-  </select>
+{#snippet select(id, options)}
+  <Select {id} bind:value={xactState.values[id]} {options} />
 {/snippet}
 
 <Page {header} toolbar={showToolbar && toolbar}>
@@ -177,57 +179,66 @@
   {/if}
 
   {#if xactState.view === View.IDLE}
-    <p class="status">{$i18n.t("xactServoIdle")}</p>
-  {:else if xactState.view === View.SCANNING}
-    <p class="status">{$i18n.t("xactServoScanning")}</p>
-  {:else if xactState.view === View.NOT_FOUND}
-    <p class="status error">{$i18n.t("xactServoNotFound")}</p>
-  {:else if xactState.view === View.LIST}
-    <p class="status">
-      {$i18n.t("xactServoMultipleFound", { count: xactState.servos.length })}
-    </p>
-    <div class="servo-list">
-      {#each xactState.servos as servo (servo.physicalId)}
-        <button
-          type="button"
-          class="servo-list-row"
-          disabled={xactState.armed}
-          onclick={() => onSelectServo(servo.physicalId)}
-        >
-          <span class="servo-row-channel">
-            {#if servo.ready}
-              {$i18n.t("xactServoChannel")}: CH{servo.channel + 1}
-            {:else}
-              {$i18n.t("xactServoListReading")}
-            {/if}
-          </span>
-          <span class="servo-row-field">
-            {$i18n.t("xactServoPhysicalId")}: {hex(servo.physicalId, 2)}
-          </span>
-          <span class="servo-row-field">
-            {$i18n.t("xactServoAppIdOffset")}: {hex(
-              FBUS_SERVO_DATA_BASE + servo.appIdOffset,
-              4,
-            )}
-          </span>
-          <span class="row-grow"></span>
-          {#if servo.duplicateAppId}
-            <span class="servo-row-conflict">
-              {$i18n.t("xactServoDuplicateAppIdBadge")}
-            </span>
-          {:else if servo.conflict}
-            <span class="servo-row-conflict">
-              {$i18n.t("xactServoConflictBadge")}
-            </span>
-          {/if}
-          <em class="fas fa-chevron-right servo-row-chevron"></em>
-        </button>
-      {/each}
+    <div class="status">
+      <p>{$i18n.t("xactServoIdle")}</p>
     </div>
+  {:else if xactState.view === View.SCANNING}
+    <div class="status">
+      <div class="spinner"></div>
+      <p>{$i18n.t("xactServoScanning")}</p>
+    </div>
+  {:else if xactState.view === View.NOT_FOUND}
+    <div class="status">
+      <p class="error">{$i18n.t("xactServoNotFound")}</p>
+    </div>
+  {:else if xactState.view === View.LIST}
+    <Section label="xactServoSectionDetected">
+      <p class="list-summary">
+        {$i18n.t("xactServoMultipleFound", { count: xactState.servos.length })}
+      </p>
+      <div class="servo-list">
+        {#each xactState.servos as servo (servo.physicalId)}
+          <button
+            type="button"
+            class="servo-list-row"
+            disabled={xactState.armed}
+            onclick={() => onSelectServo(servo.physicalId)}
+          >
+            <span class="servo-row-channel">
+              {#if servo.ready}
+                {$i18n.t("xactServoChannel")}: CH{servo.channel + 1}
+              {:else}
+                {$i18n.t("xactServoListReading")}
+              {/if}
+            </span>
+            <span class="servo-row-field">
+              {$i18n.t("xactServoPhysicalId")}: {hex(servo.physicalId, 2)}
+            </span>
+            <span class="servo-row-field">
+              {$i18n.t("xactServoAppIdOffset")}: {hex(
+                FBUS_SERVO_DATA_BASE + servo.appIdOffset,
+                4,
+              )}
+            </span>
+            <span class="row-grow"></span>
+            {#if servo.duplicateAppId}
+              <span class="servo-row-conflict">
+                {$i18n.t("xactServoDuplicateAppIdBadge")}
+              </span>
+            {:else if servo.conflict}
+              <span class="servo-row-conflict">
+                {$i18n.t("xactServoConflictBadge")}
+              </span>
+            {/if}
+            <em class="fas fa-chevron-right servo-row-chevron"></em>
+          </button>
+        {/each}
+      </div>
+    </Section>
   {:else if xactState.view === View.FORM}
     {#if showBackToList}
       <button type="button" class="back-btn" onclick={onClickBackToList}>
-        <em class="fas fa-chevron-left"></em>
+        <i class="fas fa-arrow-left"></i>
         {$i18n.t("xactServoBackToList")}
       </button>
     {/if}
@@ -247,13 +258,13 @@
             {#snippet tooltip()}
               <Tooltip help="xactServoPhysicalIdHelp" />
             {/snippet}
-            {@render select("physicalId", physicalIdOptions, false)}
+            {@render select("physicalId", physicalIdOptions)}
           </Field>
           <Field id="appIdOffset" label="xactServoAppIdOffset">
             {#snippet tooltip()}
               <Tooltip help="xactServoAppIdOffsetHelp" />
             {/snippet}
-            {@render select("appIdOffset", appIdOptions, false)}
+            {@render select("appIdOffset", appIdOptions)}
           </Field>
           <Field id="firmwareVersion" label="xactServoFirmwareVersion">
             {#snippet tooltip()}
@@ -277,19 +288,19 @@
             {#snippet tooltip()}
               <Tooltip help="xactServoRangeHelp" />
             {/snippet}
-            {@render select("range", rangeOptions, false)}
+            {@render select("range", rangeOptions)}
           </Field>
           <Field id="direction" label="xactServoDirection">
             {#snippet tooltip()}
               <Tooltip help="xactServoDirectionHelp" />
             {/snippet}
-            {@render select("direction", directionOptions, true)}
+            {@render select("direction", directionOptionsT)}
           </Field>
           <Field id="pulseType" label="xactServoPulseType">
             {#snippet tooltip()}
               <Tooltip help="xactServoPulseTypeHelp" />
             {/snippet}
-            {@render select("pulseType", pulseTypeOptions, false)}
+            {@render select("pulseType", pulseTypeOptions)}
           </Field>
           <Field id="dataRate" label="xactServoDataRate" unit="ms">
             {#snippet tooltip()}
@@ -381,7 +392,7 @@
               {#snippet tooltip()}
                 <Tooltip help="xactServoWorkingModeHelp" />
               {/snippet}
-              {@render select("workingMode", workingModeOptions, true)}
+              {@render select("workingMode", workingModeOptionsT)}
             </Field>
             <Field id="maxAngle" label="xactServoMaxAngle" unit="°">
               {#snippet tooltip()}
@@ -426,21 +437,39 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin: 4px 0 8px 4px;
+    margin-top: var(--section-gap);
+    padding: 8px 14px;
   }
 
   .intro {
-    padding: 8px;
+    padding: 8px 4px 0;
     color: var(--color-text-soft);
   }
 
   .status {
-    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 32px 8px;
     font-weight: 600;
+
+    p {
+      margin: 0;
+    }
+
+    .error {
+      color: var(--color-red-900);
+    }
   }
 
-  .status.error {
-    color: var(--color-red-900);
+  .spinner {
+    margin: 12px;
+    height: 64px;
+    width: 64px;
+    background-image: url("/images/loading-spin.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
   .pages {
@@ -449,11 +478,17 @@
     column-gap: var(--section-gap);
   }
 
+  .list-summary {
+    margin: 0;
+    padding: 4px 8px 8px;
+    color: var(--color-text-soft);
+  }
+
   .servo-list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    padding: 6px 2px;
+    gap: 8px;
+    padding: 0 4px 4px;
   }
 
   .servo-list-row {
@@ -462,37 +497,44 @@
     gap: 16px;
     width: 100%;
     padding: 10px 12px;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
+
     font: inherit;
     text-align: left;
-    cursor: pointer;
-
     color: var(--color-text);
-    background-color: var(--color-surface);
+    background-color: var(--color-surface-float);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition:
+      border-color var(--animation-speed),
+      box-shadow var(--animation-speed);
+
+    &:hover:not(:disabled) {
+      border-color: var(--color-border-accent);
+      box-shadow: 0 4px 12px -4px var(--color-shadow);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-border-accent);
+      outline-offset: 2px;
+    }
 
     &:disabled {
       cursor: not-allowed;
-      opacity: 0.6;
-    }
-
-    @media (hover: hover) {
-      &:hover:not(:disabled) {
-        background-color: var(--color-surface-float, var(--color-surface));
-      }
+      color: var(--color-text-disabled);
     }
   }
 
   .servo-row-channel {
     flex-shrink: 0;
     min-width: 90px;
-    font-size: 0.95rem;
     font-weight: 700;
   }
 
   .servo-row-field {
     flex-shrink: 0;
-    font-size: 0.85rem;
+    font-size: 0.85em;
+    font-variant-numeric: tabular-nums;
     color: var(--color-text-soft);
   }
 
@@ -502,16 +544,18 @@
 
   .servo-row-conflict {
     flex-shrink: 0;
-    font-size: 0.75rem;
+    padding: 2px 8px;
+    font-size: 0.75em;
     font-weight: 700;
 
     color: var(--color-red-900);
+    background-color: color-mix(in srgb, var(--color-red-500) 14%, transparent);
+    border-radius: var(--radius-pill);
   }
 
   .servo-row-chevron {
     flex-shrink: 0;
-    font-size: 0.8rem;
-
+    font-size: 0.8em;
     color: var(--color-text-soft);
   }
 </style>
