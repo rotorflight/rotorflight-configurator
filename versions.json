@@ -15,6 +15,11 @@
       "type": "release",
       "name": "2.2.1",
       "path": "./release/2.2.1/"
+    },
+    {
+      "type": "branch",
+      "name": "feature-web-shared-storage",
+      "path": "./feature-web-shared-storage/"
     }
   ]
 }
