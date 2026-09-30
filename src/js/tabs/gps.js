@@ -147,6 +147,17 @@ tab.initialize = function (callback) {
         gpsBaudrateElement.prop("disabled", true);
         gpsBaudrateElement.parent().hide();
 
+        // <webview> only exists in NW.js. In a browser the map page goes in
+        // an iframe instead; it takes the same postMessage calls.
+        if (__BACKEND__ === "web") {
+            const webview = $('#map');
+            webview.replaceWith($('<iframe/>', {
+                id: 'map',
+                class: webview.attr('class'),
+                src: webview.attr('src'),
+            }));
+        }
+
         const mapFrame = document.getElementById('map');
 
         // translate to user-selected language
