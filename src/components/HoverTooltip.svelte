@@ -19,15 +19,23 @@
   async function onmouseover() {
     tooltipElement.showPopover();
 
+    // Keep the tooltip within whichever panel the field lives in, so it
+    // never spills sideways onto a neighbouring panel/column - the
+    // viewport is wide enough that flip()/shift() would otherwise see
+    // plenty of "room" over there and never budge.
+    const boundary = element.closest("[data-tooltip-boundary]") ?? undefined;
+
     const { x, y, placement, middlewareData } = await computePosition(
       element,
       tooltipElement,
       {
+        // Left/right only - never above or below - so the tooltip always
+        // stays vertically inline with the field it's describing.
         placement: "right",
         middleware: [
-          offset(16),
-          flip(),
-          shift({ padding: 4 }),
+          offset(12),
+          flip({ fallbackPlacements: ["left"], boundary }),
+          shift({ padding: 8, crossAxis: false, boundary }),
           arrow({ element: arrowElement }),
         ],
       },
@@ -108,15 +116,36 @@
     max-width: 240px;
     padding: 8px;
     text-wrap: wrap;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 400;
     line-height: 18px;
-    border-radius: 2px;
+    border-radius: var(--radius-md);
+    /* The tooltip must never intercept the pointer: it can end up positioned
+       over neighbouring fields (or briefly over its own anchor before
+       computePosition settles), and a click there should always reach the
+       control underneath rather than being swallowed by the popover. */
+    pointer-events: none;
 
     color: var(--color-text);
     background-color: var(--color-surface-float);
-    border: 1px solid var(--color-border-accent);
-    box-shadow: 0px 4px 12px -4px var(--color-shadow);
+    /* A neutral hairline plus real elevation, rather than the accent
+       outline this used to carry - a red frame on every hover tip read as
+       an error state and put brand colour on the noisiest surface in the
+       app. The shadow is what separates it from the panel underneath. */
+    border: 1px solid var(--color-border-soft);
+    box-shadow: var(--shadow-md);
+
+    /* Multi-paragraph {@html} content (e.g. HelpIcon's) - same convention
+       as Tooltip.svelte's .message: zero the UA default margin and space
+       paragraphs deliberately instead, rather than however the browser's
+       default <p> margin happens to render. */
+    :global(p) {
+      margin: 0;
+    }
+
+    :global(p) + :global(p) {
+      margin-top: 10px;
+    }
   }
 
   .tooltip-arrow {
@@ -125,7 +154,7 @@
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
     position: absolute;
-    border-right: 8px solid var(--color-border-accent);
+    border-right: 8px solid var(--color-border-soft);
 
     &::after {
       content: "";
