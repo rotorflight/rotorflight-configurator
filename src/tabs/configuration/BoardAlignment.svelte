@@ -1,4 +1,5 @@
 <script>
+  import Expert from "@/components/Expert.svelte";
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Select from "@/components/Select.svelte";
@@ -54,15 +55,17 @@
 </div>
 
 {#if magHardwareEnabled}
-  <div class="mag-align">
-    <Field id="mag-align" label="configurationSensorAlignmentMag">
-      <Select
-        id="mag-align"
-        bind:value={FC.SENSOR_ALIGNMENT.align_mag}
-        options={magAlignOptions}
-      />
-    </Field>
-  </div>
+  <Expert changed={FC.SENSOR_ALIGNMENT.align_mag !== 0}>
+    <div class="mag-align">
+      <Field id="mag-align" label="configurationSensorAlignmentMag">
+        <Select
+          id="mag-align"
+          bind:value={FC.SENSOR_ALIGNMENT.align_mag}
+          options={magAlignOptions}
+        />
+      </Field>
+    </div>
+  </Expert>
 {/if}
 
 <style lang="scss">

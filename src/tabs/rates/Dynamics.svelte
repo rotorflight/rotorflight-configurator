@@ -1,9 +1,16 @@
 <script>
+  import semver from "semver";
+
+  import Expert from "@/components/Expert.svelte";
   import HelpIcon from "@/components/HelpIcon.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
 
+  import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
+  import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
+
+  import { DYNAMICS_DEFAULTS } from "./rateTypes.js";
 
   let { dyn = $bindable(), hasBoost } = $props();
 
@@ -13,6 +20,27 @@
     { key: "yaw", label: "axisYAW" },
     { key: "collective", label: "axisCOLLECTIVE" },
   ];
+
+  // Firmware defaults, to keep changed expert values visible in basic mode.
+  let defaults = $derived(
+    semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)
+      ? DYNAMICS_DEFAULTS.DYNAMICS_4_6
+      : DYNAMICS_DEFAULTS.DYNAMICS_4_5,
+  );
+  let boostChanged = $derived(
+    AXES.some(({ key }) =>
+      ["setpoint_boost_gain", "setpoint_boost_cutoff"].some(
+        (k) => dyn[`${key}_${k}`] !== defaults[`${key}_${k}`],
+      ),
+    ),
+  );
+  // dyn holds the deadband filter in display units (FC value / 10).
+  let yawChanged = $derived(
+    dyn.yaw_dynamic_ceiling_gain !== defaults.yaw_dynamic_ceiling_gain ||
+      dyn.yaw_dynamic_deadband_gain !== defaults.yaw_dynamic_deadband_gain ||
+      Math.round(dyn.yaw_dynamic_deadband_filter * 10) !==
+        defaults.yaw_dynamic_deadband_filter,
+  );
 </script>
 
 <Section label="rateSetupDynamic">
@@ -36,61 +64,65 @@
     {/each}
 
     {#if hasBoost}
-      <span class="row-label">
-        {$i18n.t("rateSetpointBoostGain")}
-        <HelpIcon>{$i18n.t("rateSetpointBoostGainHelp")}</HelpIcon>
-      </span>
-      {#each AXES as axis (axis.key)}
-        <NumberInput
-          min={0}
-          max={250}
-          step={1}
-          bind:value={dyn[`${axis.key}_setpoint_boost_gain`]}
-        />
-      {/each}
+      <Expert changed={boostChanged}>
+        <span class="row-label">
+          {$i18n.t("rateSetpointBoostGain")}
+          <HelpIcon>{$i18n.t("rateSetpointBoostGainHelp")}</HelpIcon>
+        </span>
+        {#each AXES as axis (axis.key)}
+          <NumberInput
+            min={0}
+            max={250}
+            step={1}
+            bind:value={dyn[`${axis.key}_setpoint_boost_gain`]}
+          />
+        {/each}
 
-      <span class="row-label">{$i18n.t("rateSetpointBoostCutoff")}</span>
-      {#each AXES as axis (axis.key)}
-        <NumberInput
-          min={0}
-          max={250}
-          step={1}
-          bind:value={dyn[`${axis.key}_setpoint_boost_cutoff`]}
-        />
-      {/each}
+        <span class="row-label">{$i18n.t("rateSetpointBoostCutoff")}</span>
+        {#each AXES as axis (axis.key)}
+          <NumberInput
+            min={0}
+            max={250}
+            step={1}
+            bind:value={dyn[`${axis.key}_setpoint_boost_cutoff`]}
+          />
+        {/each}
+      </Expert>
     {/if}
   </div>
 
   {#if hasBoost}
-    <div class="yaw">
-      <span class="row-label">
-        {$i18n.t("rateYawDynamicCeilingGain")}
-        <HelpIcon>{$i18n.t("rateYawDynamicCeilingGainHelp")}</HelpIcon>
-      </span>
-      <NumberInput
-        min={0}
-        max={250}
-        step={1}
-        bind:value={dyn.yaw_dynamic_ceiling_gain}
-      />
-      <span class="row-label">
-        {$i18n.t("rateYawDynamicDeadbandGain")}
-        <HelpIcon>{$i18n.t("rateYawDynamicDeadbandGainHelp")}</HelpIcon>
-      </span>
-      <NumberInput
-        min={0}
-        max={250}
-        step={1}
-        bind:value={dyn.yaw_dynamic_deadband_gain}
-      />
-      <span class="row-label">{$i18n.t("rateYawDynamicDeadbandFilter")}</span>
-      <NumberInput
-        min={0}
-        max={25}
-        step={0.1}
-        bind:value={dyn.yaw_dynamic_deadband_filter}
-      />
-    </div>
+    <Expert changed={yawChanged}>
+      <div class="yaw">
+        <span class="row-label">
+          {$i18n.t("rateYawDynamicCeilingGain")}
+          <HelpIcon>{$i18n.t("rateYawDynamicCeilingGainHelp")}</HelpIcon>
+        </span>
+        <NumberInput
+          min={0}
+          max={250}
+          step={1}
+          bind:value={dyn.yaw_dynamic_ceiling_gain}
+        />
+        <span class="row-label">
+          {$i18n.t("rateYawDynamicDeadbandGain")}
+          <HelpIcon>{$i18n.t("rateYawDynamicDeadbandGainHelp")}</HelpIcon>
+        </span>
+        <NumberInput
+          min={0}
+          max={250}
+          step={1}
+          bind:value={dyn.yaw_dynamic_deadband_gain}
+        />
+        <span class="row-label">{$i18n.t("rateYawDynamicDeadbandFilter")}</span>
+        <NumberInput
+          min={0}
+          max={25}
+          step={0.1}
+          bind:value={dyn.yaw_dynamic_deadband_filter}
+        />
+      </div>
+    </Expert>
   {/if}
 </Section>
 

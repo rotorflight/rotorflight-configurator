@@ -1,9 +1,12 @@
 <script>
   import { slide } from "svelte/transition";
 
+  import { createExpertSection } from "@/js/expert.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
   let { children, label, summary, header } = $props();
+
+  const expert = createExpertSection();
 
   let showSummary = $state(false);
 
@@ -47,6 +50,22 @@
       <div class="content-wrapper">
         {@render children?.()}
       </div>
+      {#if expert.hidden > 0}
+        <button
+          class="expert-toggle"
+          onclick={() => (expert.revealed = !expert.revealed)}
+        >
+          <span
+            class={[
+              "fas",
+              expert.revealed ? "fa-chevron-up" : "fa-chevron-down",
+            ]}
+          ></span>
+          {expert.revealed
+            ? $i18n.t("expertModeHideAdvanced")
+            : $i18n.t("expertModeShowAdvanced", { count: expert.hidden })}
+        </button>
+      {/if}
     </div>
   </div>
 </div>
@@ -80,6 +99,33 @@
 
     > :global(*) {
       margin-bottom: 12px;
+    }
+  }
+
+  .expert-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 10px 4px 0;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    background: none;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition:
+      color var(--animation-speed),
+      background-color var(--animation-speed);
+
+    &:hover {
+      color: var(--color-text);
+      background-color: var(--color-hover);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px var(--color-focus-ring);
     }
   }
 

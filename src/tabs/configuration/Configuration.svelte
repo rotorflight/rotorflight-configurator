@@ -270,6 +270,8 @@
           </Field>
           {#if flightStatsEnabled}
             <Field
+              expert
+              changed={FC.FLIGHT_STATS.stats_min_armed_time_s !== 15}
               id="min-armed-time"
               label="configuration.flight_stats.min_armed_time.label"
               unit="s"
@@ -328,10 +330,20 @@
       {/if}
 
       <Section label="configurationSystem">
-        <Field id="gyro-frequency" label="configurationGyroSyncDenom">
+        <Field
+          expert
+          changed={FC.ADVANCED_CONFIG.pid_process_denom !== 8}
+          id="gyro-frequency"
+          label="configurationGyroSyncDenom"
+        >
           <input id="gyro-frequency" type="text" readonly value={gyroLabel} />
         </Field>
-        <Field id="pid-denom" label="configurationPidProcessDenom">
+        <Field
+          expert
+          changed={FC.ADVANCED_CONFIG.pid_process_denom !== 8}
+          id="pid-denom"
+          label="configurationPidProcessDenom"
+        >
           {#snippet tooltip()}
             <Tooltip help="configurationPidProcessDenomHelp" />
           {/snippet}
@@ -341,7 +353,12 @@
             options={pidOptions}
           />
         </Field>
-        <Field id="acc-hardware" label="configurationAccHardware">
+        <Field
+          expert
+          changed={FC.SENSOR_CONFIG.acc_hardware === 1}
+          id="acc-hardware"
+          label="configurationAccHardware"
+        >
           {#snippet tooltip()}
             <Tooltip help="configurationAccHardwareHelp" />
           {/snippet}
@@ -353,7 +370,12 @@
             }
           />
         </Field>
-        <Field id="baro-hardware" label="configurationBaroHardware">
+        <Field
+          expert
+          changed={FC.SENSOR_CONFIG.baro_hardware === 1}
+          id="baro-hardware"
+          label="configurationBaroHardware"
+        >
           {#snippet tooltip()}
             <Tooltip help="configurationBaroHardwareHelp" />
           {/snippet}
@@ -365,7 +387,12 @@
             }
           />
         </Field>
-        <Field id="mag-hardware" label="configurationMagHardware">
+        <Field
+          expert
+          changed={FC.SENSOR_CONFIG.mag_hardware === 1}
+          id="mag-hardware"
+          label="configurationMagHardware"
+        >
           {#snippet tooltip()}
             <Tooltip help="configurationMagHardwareHelp" />
           {/snippet}

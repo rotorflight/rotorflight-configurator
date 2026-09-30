@@ -40,7 +40,7 @@
   });
 
   let entries = $state({});
-  let initialEntries;
+  let initialEntries = $state.raw();
   let previousRcChannels = null;
 
   let rcPollerInterval;
@@ -48,20 +48,30 @@
 
   // ARM is always the first mode reported by the FC; keep it pinned at the
   // top of the list and alphabetize the rest by their display name. Modes
-  // that are heli-specific/unused, or expert-only while not in expert mode,
-  // are dropped from the list entirely -- and (matching legacy) from what
-  // gets saved, since only modes represented here are written back.
+  // that are heli-specific/unused are dropped from the list entirely -- and
+  // (matching legacy) from what gets saved, since only modes represented
+  // here are written back.
   let modeIndices = $derived.by(() => {
     const indices = [];
     for (let i = 0; i < FC.AUX_CONFIG.length; i++) {
-      const modeName = FC.AUX_CONFIG[i];
-      if (UNUSED_MODES.includes(modeName)) continue;
-      if (EXPERT_MODES.includes(modeName) && !CONFIGURATOR.expertMode) continue;
+      if (UNUSED_MODES.includes(FC.AUX_CONFIG[i])) continue;
       indices.push(i);
     }
     /* firmware order, as before */
     return indices;
   });
+
+  // Expert-only modes are just not shown in basic mode; they are still
+  // saved. One that has a range or link (now or when loaded) stays shown.
+  let shownModeIndices = $derived(
+    modeIndices.filter(
+      (i) =>
+        CONFIGURATOR.expertMode ||
+        !EXPERT_MODES.includes(FC.AUX_CONFIG[i]) ||
+        entries[i]?.length > 0 ||
+        initialEntries?.[i]?.length > 0,
+    ),
+  );
 
   let auxChannelCount = $derived(
     Math.max(0, FC.RC.active_channels - PRIMARY_CHANNEL_COUNT),
@@ -326,7 +336,7 @@
 {/snippet}
 
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
-  {#each modeIndices as modeIndex (modeIndex)}
+  {#each shownModeIndices as modeIndex (modeIndex)}
     <ModeCard
       modeId={FC.AUX_CONFIG_IDS[modeIndex]}
       modeName={FC.AUX_CONFIG[modeIndex]}

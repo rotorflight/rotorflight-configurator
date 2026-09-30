@@ -3,6 +3,7 @@
   import semver from "semver";
   import { onDestroy, onMount } from "svelte";
 
+  import Expert from "@/components/Expert.svelte";
   import Field from "@/components/Field.svelte";
   import HelpIcon from "@/components/HelpIcon.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
@@ -30,6 +31,7 @@
   import Governor from "./Governor.svelte";
   import {
     AXES,
+    EXPERT_DEFAULTS,
     GAINS,
     PID_PROFILE_FIELDS,
     PROFILE_COUNT,
@@ -127,6 +129,35 @@
   }
 
   let showAltHold = $state(false);
+
+  // The FC value behind a form key, for comparing with EXPERT_DEFAULTS.
+  function fcValue(key) {
+    switch (key) {
+      case "offsetGainRoll":
+        return FC.PIDS[0][5];
+      case "offsetGainPitch":
+        return FC.PIDS[1][5];
+      case "govTTAGain":
+        return FC.GOVERNOR.gov_tta_gain;
+      case "govTTALimit":
+        return FC.GOVERNOR.gov_tta_limit;
+      default:
+        return FC.PID_PROFILE[key];
+    }
+  }
+
+  // True if any of the settings differs from the firmware default.
+  // Boost (B) defaults to 0 on every axis.
+  let boostChanged = $derived(
+    AXES.some(
+      (_, axis) =>
+        Number(FC.PIDS[axis][GAINS.findIndex((g) => g.key === "B")]) !== 0,
+    ),
+  );
+
+  function changed(...keys) {
+    return keys.some((key) => Number(fcValue(key)) !== EXPERT_DEFAULTS[key]);
+  }
 
   function formToFc() {
     const p = FC.PID_PROFILE;
@@ -325,8 +356,9 @@
   <button class="btn" onclick={onSave}>{$i18n.t("buttonSave")}</button>
 {/snippet}
 
-{#snippet num(key, label, help, opts)}
-  <Field id={`prof-${key}`} {label}>
+<!-- expert: hide in basic mode unless the FC value differs from its default -->
+{#snippet num(key, label, help, opts, expert = false)}
+  <Field id={`prof-${key}`} {label} {expert} changed={expert && changed(key)}>
     {#snippet tooltip()}
       {#if help}
         <Tooltip {help} />
@@ -378,22 +410,38 @@
               <div class="pid-table">
                 <span></span>
                 {#each GAINS as gain (gain.key)}
-                  <span class="col">
-                    {$i18n.t(gain.label)}
-                    <HelpIcon>{$i18n.t(gain.help)}</HelpIcon>
-                  </span>
+                  {#snippet header()}
+                    <span class={["col", gain.key === "B" && "col-boost"]}>
+                      {$i18n.t(gain.label)}
+                      <HelpIcon>{$i18n.t(gain.help)}</HelpIcon>
+                    </span>
+                  {/snippet}
+                  {#if gain.key === "B"}
+                    <Expert changed={boostChanged}>{@render header()}</Expert>
+                  {:else}
+                    {@render header()}
+                  {/if}
                 {/each}
                 {#each AXES as axis, a (axis)}
                   <span class={["axis", axis.toLowerCase()]}>
                     {$i18n.t(`axis${axis}`)}
                   </span>
                   {#each GAINS as gain, g (gain.key)}
-                    <NumberInput
-                      min={0}
-                      max={1000}
-                      step={1}
-                      bind:value={form.pids[a][g]}
-                    />
+                    {#snippet input()}
+                      <NumberInput
+                        min={0}
+                        max={1000}
+                        step={1}
+                        bind:value={form.pids[a][g]}
+                      />
+                    {/snippet}
+                    {#if gain.key === "B"}
+                      <Expert changed={boostChanged} counted={false}>
+                        {@render input()}
+                      </Expert>
+                    {:else}
+                      {@render input()}
+                    {/if}
                   {/each}
                 {/each}
               </div>
@@ -407,146 +455,191 @@
                   "profilesErrorRotationHelp",
                 )}
               {/if}
-              {@render toggle(
-                "errorDecayGround",
-                "profilesErrorDecayGround",
-                "profilesErrorDecayTimeGroundHelp",
-              )}
-              {#if form.errorDecayGround}
-                {@render num(
-                  "errorDecayTimeGround",
-                  "profilesErrorDecayTime",
-                  null,
-                  { min: 0.1, max: 25, step: 0.1 },
+              <Expert changed={changed("error_decay_time_ground")}>
+                {@render toggle(
+                  "errorDecayGround",
+                  "profilesErrorDecayGround",
+                  "profilesErrorDecayTimeGroundHelp",
                 )}
-              {/if}
-
-              {@render toggle(
-                "itermRelax",
-                "profilesItermRelax",
-                "profilesItermRelaxHelp",
-              )}
-              {#if form.itermRelax}
-                <Field id="prof-itermRelaxType" label="profilesItermRelaxType">
-                  {#snippet tooltip()}
-                    <Tooltip help="profilesItermRelaxTypeHelp" />
-                  {/snippet}
-                  <Select
-                    id="prof-itermRelaxType"
-                    options={relaxTypeOptions}
-                    bind:value={form.itermRelaxType}
-                  />
-                </Field>
-                {@render num(
-                  "itermRelaxCutoffRoll",
-                  "profilesItermRelaxCutoffRoll",
-                  "profilesItermRelaxCutoffHelp",
-                )}
-                {@render num(
-                  "itermRelaxCutoffPitch",
-                  "profilesItermRelaxCutoffPitch",
-                  null,
-                )}
-                {#if form.itermRelaxType > 1}
+                {#if form.errorDecayGround}
                   {@render num(
-                    "itermRelaxCutoffYaw",
-                    "profilesItermRelaxCutoffYaw",
+                    "errorDecayTimeGround",
+                    "profilesErrorDecayTime",
                     null,
+                    { min: 0.1, max: 25, step: 0.1 },
                   )}
                 {/if}
-              {/if}
+              </Expert>
 
-              <SubSection label="profilesErrorLimit">
-                {@render num(
+              <Expert
+                changed={changed(
+                  "itermRelaxType",
+                  "itermRelaxCutoffRoll",
+                  "itermRelaxCutoffPitch",
+                  "itermRelaxCutoffYaw",
+                )}
+              >
+                {@render toggle(
+                  "itermRelax",
+                  "profilesItermRelax",
+                  "profilesItermRelaxHelp",
+                )}
+                {#if form.itermRelax}
+                  <Field
+                    id="prof-itermRelaxType"
+                    label="profilesItermRelaxType"
+                  >
+                    {#snippet tooltip()}
+                      <Tooltip help="profilesItermRelaxTypeHelp" />
+                    {/snippet}
+                    <Select
+                      id="prof-itermRelaxType"
+                      options={relaxTypeOptions}
+                      bind:value={form.itermRelaxType}
+                    />
+                  </Field>
+                  {@render num(
+                    "itermRelaxCutoffRoll",
+                    "profilesItermRelaxCutoffRoll",
+                    "profilesItermRelaxCutoffHelp",
+                  )}
+                  {@render num(
+                    "itermRelaxCutoffPitch",
+                    "profilesItermRelaxCutoffPitch",
+                    null,
+                  )}
+                  {#if form.itermRelaxType > 1}
+                    {@render num(
+                      "itermRelaxCutoffYaw",
+                      "profilesItermRelaxCutoffYaw",
+                      null,
+                    )}
+                  {/if}
+                {/if}
+              </Expert>
+
+              <Expert
+                changed={changed(
                   "errorLimitRoll",
-                  "profilesErrorLimitRoll",
-                  "profilesErrorLimitHelp",
-                )}
-                {@render num(
                   "errorLimitPitch",
-                  "profilesErrorLimitPitch",
-                  null,
+                  "errorLimitYaw",
                 )}
-                {@render num("errorLimitYaw", "profilesErrorLimitYaw", null)}
-              </SubSection>
+              >
+                <SubSection label="profilesErrorLimit">
+                  {@render num(
+                    "errorLimitRoll",
+                    "profilesErrorLimitRoll",
+                    "profilesErrorLimitHelp",
+                  )}
+                  {@render num(
+                    "errorLimitPitch",
+                    "profilesErrorLimitPitch",
+                    null,
+                  )}
+                  {@render num("errorLimitYaw", "profilesErrorLimitYaw", null)}
+                </SubSection>
+              </Expert>
 
               {#if showHsi}
-                <SubSection label="profilesOffset">
-                  {@render num(
+                <Expert
+                  changed={changed(
                     "offsetLimitRoll",
-                    "profilesOffsetLimitRoll",
-                    "profilesOffsetLimitHelp",
-                  )}
-                  {@render num(
                     "offsetLimitPitch",
-                    "profilesOffsetLimitPitch",
-                    null,
-                  )}
-                  {@render num(
                     "offsetGainRoll",
-                    "profilesOffsetGainRoll",
-                    "profilesOffsetGainHelp",
-                    { min: 0, max: 250, step: 1 },
-                  )}
-                  {@render num(
                     "offsetGainPitch",
-                    "profilesOffsetGainPitch",
-                    null,
-                    { min: 0, max: 250, step: 1 },
                   )}
-                </SubSection>
+                >
+                  <SubSection label="profilesOffset">
+                    {@render num(
+                      "offsetLimitRoll",
+                      "profilesOffsetLimitRoll",
+                      "profilesOffsetLimitHelp",
+                    )}
+                    {@render num(
+                      "offsetLimitPitch",
+                      "profilesOffsetLimitPitch",
+                      null,
+                    )}
+                    {@render num(
+                      "offsetGainRoll",
+                      "profilesOffsetGainRoll",
+                      "profilesOffsetGainHelp",
+                      { min: 0, max: 250, step: 1 },
+                    )}
+                    {@render num(
+                      "offsetGainPitch",
+                      "profilesOffsetGainPitch",
+                      null,
+                      { min: 0, max: 250, step: 1 },
+                    )}
+                  </SubSection>
+                </Expert>
               {/if}
             </Section>
 
             <Section label="profilesMainRotorSettings">
-              {@render toggle(
-                "pitchFFCollective",
-                "profilesPitchFFCollective",
-                "profilesPitchFFCollectiveHelp",
-              )}
-              {#if form.pitchFFCollective}
-                {@render num(
-                  "pitchFFCollectiveGain",
-                  "profilesPitchFFCollectiveGain",
-                  "profilesPitchFFCollectiveGainHelp",
-                  { min: 0, max: 250, step: 1 },
+              <Expert changed={changed("pitchFFCollectiveGain")}>
+                {@render toggle(
+                  "pitchFFCollective",
+                  "profilesPitchFFCollective",
+                  "profilesPitchFFCollectiveHelp",
                 )}
-              {/if}
-              {@render toggle(
-                "crossCoupling",
-                "profilesCyclicCrossCoupling",
-                "profilesCyclicCrossCouplingHelp",
-              )}
-              {#if form.crossCoupling}
-                {@render num(
+                {#if form.pitchFFCollective}
+                  {@render num(
+                    "pitchFFCollectiveGain",
+                    "profilesPitchFFCollectiveGain",
+                    "profilesPitchFFCollectiveGainHelp",
+                    { min: 0, max: 250, step: 1 },
+                  )}
+                {/if}
+              </Expert>
+              <Expert
+                changed={changed(
                   "cyclicCrossCouplingGain",
-                  "profilesCyclicCrossCouplingGain",
-                  "profilesCyclicCrossCouplingGainHelp",
-                  { min: 0, max: 250, step: 1 },
-                )}
-                {@render num(
                   "cyclicCrossCouplingRatio",
-                  "profilesCyclicCrossCouplingRatio",
-                  "profilesCyclicCrossCouplingRatioHelp",
-                )}
-                {@render num(
                   "cyclicCrossCouplingCutoff",
-                  "profilesCyclicCrossCouplingCutoff",
-                  "profilesCyclicCrossCouplingCutoffHelp",
-                  api.v127
-                    ? { min: 0.1, max: 25, step: 0.1 }
-                    : { min: 1, max: 250, step: 1 },
                 )}
-              {/if}
+              >
+                {@render toggle(
+                  "crossCoupling",
+                  "profilesCyclicCrossCoupling",
+                  "profilesCyclicCrossCouplingHelp",
+                )}
+                {#if form.crossCoupling}
+                  {@render num(
+                    "cyclicCrossCouplingGain",
+                    "profilesCyclicCrossCouplingGain",
+                    "profilesCyclicCrossCouplingGainHelp",
+                    { min: 0, max: 250, step: 1 },
+                  )}
+                  {@render num(
+                    "cyclicCrossCouplingRatio",
+                    "profilesCyclicCrossCouplingRatio",
+                    "profilesCyclicCrossCouplingRatioHelp",
+                  )}
+                  {@render num(
+                    "cyclicCrossCouplingCutoff",
+                    "profilesCyclicCrossCouplingCutoff",
+                    "profilesCyclicCrossCouplingCutoffHelp",
+                    api.v127
+                      ? { min: 0.1, max: 25, step: 0.1 }
+                      : { min: 1, max: 250, step: 1 },
+                  )}
+                {/if}
+              </Expert>
               {@render num(
                 "error_decay_time_cyclic",
                 "profilesErrorDecayTimeCyclic",
                 "profilesErrorDecayTimeCyclicHelp",
+                undefined,
+                true,
               )}
               {@render num(
                 "error_decay_limit_cyclic",
                 "profilesErrorDecayLimitCyclic",
                 "profilesErrorDecayLimitCyclicHelp",
+                undefined,
+                true,
               )}
             </Section>
 
@@ -581,35 +674,55 @@
                   "yaw_inertia_precomp_gain",
                   "profilesYawInertiaPrecompGain",
                   "profilesYawInertiaPrecompGainHelp",
+                  undefined,
+                  true,
                 )}
                 {@render num(
                   "yaw_inertia_precomp_cutoff",
                   "profilesYawInertiaPrecompCutoff",
                   "profilesYawInertiaPrecompCutoffHelp",
+                  undefined,
+                  true,
                 )}
               {:else}
                 {@render num(
                   "yawFFImpulseGain",
                   "profilesYawFFImpulseGain",
                   "profilesYawFFImpulseGainHelp",
+                  undefined,
+                  true,
                 )}
                 {@render num(
                   "yawFFImpulseDecay",
                   "profilesyawFFImpulseDecay",
                   "profilesyawFFImpulseDecayHelp",
+                  undefined,
+                  true,
                 )}
               {/if}
               {#if govEnabled}
-                {@render num("govTTAGain", "govTTAGain", "govTTAGainHelp", {
-                  min: 0,
-                  max: 250,
-                  step: 1,
-                })}
-                {@render num("govTTALimit", "govTTALimit", "govTTALimitHelp", {
-                  min: 0,
-                  max: 250,
-                  step: 1,
-                })}
+                {@render num(
+                  "govTTAGain",
+                  "govTTAGain",
+                  "govTTAGainHelp",
+                  {
+                    min: 0,
+                    max: 250,
+                    step: 1,
+                  },
+                  true,
+                )}
+                {@render num(
+                  "govTTALimit",
+                  "govTTALimit",
+                  "govTTALimitHelp",
+                  {
+                    min: 0,
+                    max: 250,
+                    step: 1,
+                  },
+                  true,
+                )}
               {/if}
             </Section>
           {/if}
@@ -618,45 +731,77 @@
         <div class="column">
           {#if showPidConfig}
             <Section label="profilesPidBandwidth">
-              <SubSection label="profilesGyroCutoff">
-                {@render num(
+              <Expert
+                changed={changed(
                   "gyroCutoffRoll",
-                  "profilesGyroCutoffRoll",
-                  "profilesGyroCutoffHelp",
-                )}
-                {@render num(
                   "gyroCutoffPitch",
-                  "profilesGyroCutoffPitch",
-                  null,
+                  "gyroCutoffYaw",
                 )}
-                {@render num("gyroCutoffYaw", "profilesGyroCutoffYaw", null)}
-              </SubSection>
-              <SubSection label="profilesDtermCutoff">
-                {@render num(
+              >
+                <SubSection label="profilesGyroCutoff">
+                  {@render num(
+                    "gyroCutoffRoll",
+                    "profilesGyroCutoffRoll",
+                    "profilesGyroCutoffHelp",
+                  )}
+                  {@render num(
+                    "gyroCutoffPitch",
+                    "profilesGyroCutoffPitch",
+                    null,
+                  )}
+                  {@render num("gyroCutoffYaw", "profilesGyroCutoffYaw", null)}
+                </SubSection>
+              </Expert>
+              <Expert
+                changed={changed(
                   "dtermCutoffRoll",
-                  "profilesDtermCutoffRoll",
-                  "profilesDtermCutoffHelp",
-                )}
-                {@render num(
                   "dtermCutoffPitch",
-                  "profilesDtermCutoffPitch",
-                  null,
+                  "dtermCutoffYaw",
                 )}
-                {@render num("dtermCutoffYaw", "profilesDtermCutoffYaw", null)}
-              </SubSection>
-              <SubSection label="profilesBtermCutoff">
-                {@render num(
+              >
+                <SubSection label="profilesDtermCutoff">
+                  {@render num(
+                    "dtermCutoffRoll",
+                    "profilesDtermCutoffRoll",
+                    "profilesDtermCutoffHelp",
+                  )}
+                  {@render num(
+                    "dtermCutoffPitch",
+                    "profilesDtermCutoffPitch",
+                    null,
+                  )}
+                  {@render num(
+                    "dtermCutoffYaw",
+                    "profilesDtermCutoffYaw",
+                    null,
+                  )}
+                </SubSection>
+              </Expert>
+              <Expert
+                changed={changed(
                   "btermCutoffRoll",
-                  "profilesBtermCutoffRoll",
-                  "profilesBtermCutoffHelp",
-                )}
-                {@render num(
                   "btermCutoffPitch",
-                  "profilesBtermCutoffPitch",
-                  null,
+                  "btermCutoffYaw",
                 )}
-                {@render num("btermCutoffYaw", "profilesBtermCutoffYaw", null)}
-              </SubSection>
+              >
+                <SubSection label="profilesBtermCutoff">
+                  {@render num(
+                    "btermCutoffRoll",
+                    "profilesBtermCutoffRoll",
+                    "profilesBtermCutoffHelp",
+                  )}
+                  {@render num(
+                    "btermCutoffPitch",
+                    "profilesBtermCutoffPitch",
+                    null,
+                  )}
+                  {@render num(
+                    "btermCutoffYaw",
+                    "profilesBtermCutoffYaw",
+                    null,
+                  )}
+                </SubSection>
+              </Expert>
             </Section>
           {/if}
 
@@ -735,16 +880,22 @@
                 "rescueExitTime",
                 "profilesRescueExitTime",
                 "profilesRescueExitTimeHelp",
+                undefined,
+                true,
               )}
               {@render num(
                 "rescueLevelGain",
                 "profilesRescueLevelGain",
                 "profilesRescueLevelGainHelp",
+                undefined,
+                true,
               )}
               {@render num(
                 "rescueFlipGain",
                 "profilesRescueFlipGain",
                 "profilesRescueFlipGainHelp",
+                undefined,
+                true,
               )}
               {@render num(
                 "rescueMaxRate",
@@ -755,6 +906,8 @@
                 "rescueMaxAccel",
                 "profilesRescueMaxAccel",
                 "profilesRescueMaxAccelHelp",
+                undefined,
+                true,
               )}
 
               {#if showAltHold}
@@ -769,16 +922,22 @@
                     "rescueAltitudePGain",
                     "profilesRescueAltitudePGain",
                     "profilesRescueAltitudePGainHelp",
+                    undefined,
+                    true,
                   )}
                   {@render num(
                     "rescueAltitudeIGain",
                     "profilesRescueAltitudeIGain",
                     "profilesRescueAltitudeIGainHelp",
+                    undefined,
+                    true,
                   )}
                   {@render num(
                     "rescueAltitudeDGain",
                     "profilesRescueAltitudeDGain",
                     "profilesRescueAltitudeDGainHelp",
+                    undefined,
+                    true,
                   )}
                   {@render num(
                     "rescueMaxCollective",
@@ -899,10 +1058,15 @@
 
   .pid-table {
     display: grid;
-    grid-template-columns: minmax(70px, 1fr) repeat(5, minmax(84px, 104px));
+    grid-template-columns: minmax(70px, 1fr) repeat(4, minmax(84px, 104px));
     align-items: center;
     gap: 6px 6px;
     padding: 4px 8px 8px;
+  }
+
+  /* The boost column is hidden in basic mode. */
+  .pid-table:has(.col-boost) {
+    grid-template-columns: minmax(70px, 1fr) repeat(5, minmax(84px, 104px));
   }
 
   .col {

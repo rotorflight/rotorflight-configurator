@@ -2,6 +2,7 @@
   import semver from "semver";
   import { slide } from "svelte/transition";
 
+  import Expert from "@/components/Expert.svelte";
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
@@ -70,63 +71,77 @@
   {/if}
   {#if motorState.telemEnabled && semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_8)}
     <div transition:slide>
-      <SubSection label="motorsSectionSensorCorrection">
-        <Field id="voltage-correction" label="motorsVoltageCorrection" unit="%">
-          {#snippet tooltip()}
-            <Tooltip
-              help="motorsVoltageCorrectionHelp"
-              attrs={[
-                { name: "genericDefault", value: "0%" },
-                { name: "genericRange", value: "-100% - 125%" },
-              ]}
-            />
-          {/snippet}
-          <NumberInput
+      <Expert
+        changed={FC.ESC_SENSOR_CONFIG.voltage_correction !== 0 ||
+          FC.ESC_SENSOR_CONFIG.current_correction !== 0 ||
+          FC.ESC_SENSOR_CONFIG.consumption_correction !== 0}
+      >
+        <SubSection label="motorsSectionSensorCorrection">
+          <Field
             id="voltage-correction"
-            min="-100"
-            max="125"
-            bind:value={FC.ESC_SENSOR_CONFIG.voltage_correction}
-          />
-        </Field>
-        <Field id="current-correction" label="motorsCurrentCorrection" unit="%">
-          {#snippet tooltip()}
-            <Tooltip
-              help="motorsCurrentCorrectionHelp"
-              attrs={[
-                { name: "genericDefault", value: "0%" },
-                { name: "genericRange", value: "-100% - 125%" },
-              ]}
+            label="motorsVoltageCorrection"
+            unit="%"
+          >
+            {#snippet tooltip()}
+              <Tooltip
+                help="motorsVoltageCorrectionHelp"
+                attrs={[
+                  { name: "genericDefault", value: "0%" },
+                  { name: "genericRange", value: "-100% - 125%" },
+                ]}
+              />
+            {/snippet}
+            <NumberInput
+              id="voltage-correction"
+              min="-100"
+              max="125"
+              bind:value={FC.ESC_SENSOR_CONFIG.voltage_correction}
             />
-          {/snippet}
-          <NumberInput
+          </Field>
+          <Field
             id="current-correction"
-            min="-100"
-            max="125"
-            bind:value={FC.ESC_SENSOR_CONFIG.current_correction}
-          />
-        </Field>
-        <Field
-          id="consumption-correction"
-          label="motorsConsumptionCorrection"
-          unit="%"
-        >
-          {#snippet tooltip()}
-            <Tooltip
-              help="motorsConsumptionCorrectionHelp"
-              attrs={[
-                { name: "genericDefault", value: "0%" },
-                { name: "genericRange", value: "-100% - 125%" },
-              ]}
+            label="motorsCurrentCorrection"
+            unit="%"
+          >
+            {#snippet tooltip()}
+              <Tooltip
+                help="motorsCurrentCorrectionHelp"
+                attrs={[
+                  { name: "genericDefault", value: "0%" },
+                  { name: "genericRange", value: "-100% - 125%" },
+                ]}
+              />
+            {/snippet}
+            <NumberInput
+              id="current-correction"
+              min="-100"
+              max="125"
+              bind:value={FC.ESC_SENSOR_CONFIG.current_correction}
             />
-          {/snippet}
-          <NumberInput
+          </Field>
+          <Field
             id="consumption-correction"
-            min="-100"
-            max="125"
-            bind:value={FC.ESC_SENSOR_CONFIG.consumption_correction}
-          />
-        </Field>
-      </SubSection>
+            label="motorsConsumptionCorrection"
+            unit="%"
+          >
+            {#snippet tooltip()}
+              <Tooltip
+                help="motorsConsumptionCorrectionHelp"
+                attrs={[
+                  { name: "genericDefault", value: "0%" },
+                  { name: "genericRange", value: "-100% - 125%" },
+                ]}
+              />
+            {/snippet}
+            <NumberInput
+              id="consumption-correction"
+              min="-100"
+              max="125"
+              bind:value={FC.ESC_SENSOR_CONFIG.consumption_correction}
+            />
+          </Field>
+        </SubSection>
+      </Expert>
     </div>
   {/if}
 </Section>

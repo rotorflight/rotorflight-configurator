@@ -3,6 +3,7 @@
   import semver from "semver";
   import { onMount } from "svelte";
 
+  import Expert from "@/components/Expert.svelte";
   import Field from "@/components/Field.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Section from "@/components/Section.svelte";
@@ -39,6 +40,22 @@
       },
     });
   }
+
+  // Firmware defaults (src/main/pg/pid.c, governor.*) of the expert settings.
+  const DEFAULTS = {
+    gov_p_gain: 40,
+    gov_i_gain: 50,
+    gov_d_gain: 0,
+    gov_f_gain: 10,
+    gov_fallback_drop: 10,
+  };
+  const changed = (key) => FC.GOVERNOR[key] !== DEFAULTS[key];
+  // All flags default to off.
+  let flagsChanged = $derived(
+    Object.values(GOVERNOR_FLAGS).some((index) =>
+      bit_check(FC.GOVERNOR.gov_flags, index),
+    ),
+  );
 
   let { onchange } = $props();
   let initialState;
@@ -159,7 +176,13 @@
     {/if}
 
     {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) && govState.govHeadspeed}
-      <Field id="gov-fallback-drop" label="govFallbackDrop" unit="%">
+      <Field
+        expert
+        changed={changed("gov_fallback_drop")}
+        id="gov-fallback-drop"
+        label="govFallbackDrop"
+        unit="%"
+      >
         {#snippet tooltip()}
           <Tooltip
             help="govFallbackDropHelp"
@@ -197,7 +220,12 @@
           bind:value={FC.GOVERNOR.gov_gain}
         />
       </Field>
-      <Field id="gov-p-gain" label="govPGain">
+      <Field
+        expert
+        changed={changed("gov_p_gain")}
+        id="gov-p-gain"
+        label="govPGain"
+      >
         {#snippet tooltip()}
           <Tooltip
             help="govPGainHelp"
@@ -214,7 +242,12 @@
           bind:value={FC.GOVERNOR.gov_p_gain}
         />
       </Field>
-      <Field id="gov-i-gain" label="govIGain">
+      <Field
+        expert
+        changed={changed("gov_i_gain")}
+        id="gov-i-gain"
+        label="govIGain"
+      >
         {#snippet tooltip()}
           <Tooltip
             help="govIGainHelp"
@@ -231,7 +264,12 @@
           bind:value={FC.GOVERNOR.gov_i_gain}
         />
       </Field>
-      <Field id="gov-d-gain" label="govDGain">
+      <Field
+        expert
+        changed={changed("gov_d_gain")}
+        id="gov-d-gain"
+        label="govDGain"
+      >
         {#snippet tooltip()}
           <Tooltip
             help="govDGainHelp"
@@ -248,7 +286,12 @@
           bind:value={FC.GOVERNOR.gov_d_gain}
         />
       </Field>
-      <Field id="gov-f-gain" label="govFGain">
+      <Field
+        expert
+        changed={changed("gov_f_gain")}
+        id="gov-f-gain"
+        label="govFGain"
+      >
         {#snippet tooltip()}
           <Tooltip
             help="govFGainHelp"
@@ -321,44 +364,49 @@
     </SubSection>
   {/if}
   {#if semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) && govState.govHeadspeed}
-    <SubSection label="profileGovFlagsSection">
-      <Field id="gov-flag-FALLBACK_PRECOMP" label="govFlag_FALLBACK_PRECOMP">
-        {#snippet tooltip()}
-          <Tooltip help="govFlagHelp_FALLBACK_PRECOMP" />
-        {/snippet}
-        <Switch
-          id="gov-flag-FALLBACK_PRECOMP"
-          bind:checked={flags.FALLBACK_PRECOMP}
-        />
-      </Field>
-      <Field id="gov-flag-PID_SPOOLUP" label="govFlag_PID_SPOOLUP">
-        {#snippet tooltip()}
-          <Tooltip help="govFlagHelp_PID_SPOOLUP" />
-        {/snippet}
-        <Switch id="gov-flag-PID_SPOOLUP" bind:checked={flags.PID_SPOOLUP} />
-      </Field>
-      {#if govState.govMode === "ELECTRIC"}
-        <Field id="gov-flag-VOLTAGE_COMP" label="govFlag_VOLTAGE_COMP">
+    <Expert changed={flagsChanged}>
+      <SubSection label="profileGovFlagsSection">
+        <Field id="gov-flag-FALLBACK_PRECOMP" label="govFlag_FALLBACK_PRECOMP">
           {#snippet tooltip()}
-            <Tooltip help="govFlagHelp_VOLTAGE_COMP" />
+            <Tooltip help="govFlagHelp_FALLBACK_PRECOMP" />
           {/snippet}
           <Switch
-            id="gov-flag-VOLTAGE_COMP"
-            bind:checked={flags.VOLTAGE_COMP}
-            disabled={FC.BATTERY_CONFIG.voltageMeterSource !== 1}
+            id="gov-flag-FALLBACK_PRECOMP"
+            bind:checked={flags.FALLBACK_PRECOMP}
           />
         </Field>
-        <Field id="gov-flag-DYN_MIN_THROTTLE" label="govFlag_DYN_MIN_THROTTLE">
+        <Field id="gov-flag-PID_SPOOLUP" label="govFlag_PID_SPOOLUP">
           {#snippet tooltip()}
-            <Tooltip help="govFlagHelp_DYN_MIN_THROTTLE" />
+            <Tooltip help="govFlagHelp_PID_SPOOLUP" />
           {/snippet}
-          <Switch
+          <Switch id="gov-flag-PID_SPOOLUP" bind:checked={flags.PID_SPOOLUP} />
+        </Field>
+        {#if govState.govMode === "ELECTRIC"}
+          <Field id="gov-flag-VOLTAGE_COMP" label="govFlag_VOLTAGE_COMP">
+            {#snippet tooltip()}
+              <Tooltip help="govFlagHelp_VOLTAGE_COMP" />
+            {/snippet}
+            <Switch
+              id="gov-flag-VOLTAGE_COMP"
+              bind:checked={flags.VOLTAGE_COMP}
+              disabled={FC.BATTERY_CONFIG.voltageMeterSource !== 1}
+            />
+          </Field>
+          <Field
             id="gov-flag-DYN_MIN_THROTTLE"
-            bind:checked={flags.DYN_MIN_THROTTLE}
-          />
-        </Field>
-      {/if}
-    </SubSection>
+            label="govFlag_DYN_MIN_THROTTLE"
+          >
+            {#snippet tooltip()}
+              <Tooltip help="govFlagHelp_DYN_MIN_THROTTLE" />
+            {/snippet}
+            <Switch
+              id="gov-flag-DYN_MIN_THROTTLE"
+              bind:checked={flags.DYN_MIN_THROTTLE}
+            />
+          </Field>
+        {/if}
+      </SubSection>
+    </Expert>
   {/if}
 </Section>
 

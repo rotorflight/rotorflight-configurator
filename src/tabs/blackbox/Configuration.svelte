@@ -162,7 +162,13 @@
     {/if}
 
     {#if showGracePeriod}
-      <Field id="bb-grace" label="blackboxGracePeriod" unit="s">
+      <Field
+        expert
+        changed={FC.BLACKBOX.blackboxGracePeriod !== 5}
+        id="bb-grace"
+        label="blackboxGracePeriod"
+        unit="s"
+      >
         {#snippet tooltip()}
           <Tooltip help="blackboxGracePeriodHelp" />
         {/snippet}
@@ -176,7 +182,12 @@
       </Field>
     {/if}
 
-    <Field id="bb-debug-mode" label="blackboxDebugMode">
+    <Field
+      expert
+      changed={FC.DEBUG_CONFIG.debugMode !== 0}
+      id="bb-debug-mode"
+      label="blackboxDebugMode"
+    >
       {#snippet tooltip()}
         <Tooltip help="blackboxDebugModeHelp" />
       {/snippet}
@@ -187,7 +198,12 @@
       />
     </Field>
 
-    <Field id="bb-debug-axis" label="blackboxDebugAxis">
+    <Field
+      expert
+      changed={FC.DEBUG_CONFIG.debugAxis !== 0}
+      id="bb-debug-axis"
+      label="blackboxDebugAxis"
+    >
       {#snippet tooltip()}
         <Tooltip help="blackboxDebugAxisHelp" />
       {/snippet}
@@ -199,7 +215,13 @@
     </Field>
 
     {#if showEraseOptions}
-      <Field id="bb-initial-erase" label="blackboxInitialErase" unit="MiB">
+      <Field
+        expert
+        changed={FC.BLACKBOX.blackboxInitialEraseKiB !== 0}
+        id="bb-initial-erase"
+        label="blackboxInitialErase"
+        unit="MiB"
+      >
         {#snippet tooltip()}
           <Tooltip help="blackboxInitialEraseHelp" />
         {/snippet}
@@ -211,7 +233,12 @@
           step={1}
         />
       </Field>
-      <Field id="bb-rolling-erase" label="blackboxRollingErase">
+      <Field
+        expert
+        changed={!FC.BLACKBOX.blackboxRollingErase}
+        id="bb-rolling-erase"
+        label="blackboxRollingErase"
+      >
         {#snippet tooltip()}
           <Tooltip help="blackboxRollingEraseHelp" />
         {/snippet}
