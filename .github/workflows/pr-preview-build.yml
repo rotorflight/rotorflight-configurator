@@ -1,0 +1,95 @@
+name: PR Preview Build
+
+# Builds a web app preview of a pull request, which PR Preview Publish then
+# deploys to /pr/<number>/ on the Pages site.
+#
+# Only PRs a maintainer has labelled "preview" are built: a preview runs the
+# PR's code on the same origin as the real builds. This workflow runs that
+# code (fork PRs included), so it gets a read-only token and publishes
+# nothing itself -- the bundle leaves only as an artifact. A PR can edit this
+# file, so PR Preview Publish checks the label again before deploying.
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+    branches:
+      - master
+
+permissions:
+  contents: read
+  pages: read
+
+jobs:
+  build:
+    name: Build PR Preview
+    if: >-
+      contains(github.event.pull_request.labels.*.name, 'preview') &&
+      (github.event.action != 'labeled' || github.event.label.name == 'preview')
+    runs-on: ubuntu-latest
+
+    # Job-level, so a skipped run (another label added) doesn't cancel a
+    # build that is already going.
+    concurrency:
+      group: pr-preview-build-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      # Same site URL lookup as deploy-web.yml: the build's base path is the
+      # site's own path plus the deploy directory.
+      - name: Read GitHub Pages configuration
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Determine base path
+        id: path
+        shell: bash
+        env:
+          CONFIGURED_PAGES_URL: ${{ steps.pages.outputs.base_url }}
+        run: |
+          SITE_PATH="$(python3 -c 'import sys, urllib.parse; print(urllib.parse.urlparse(sys.argv[1]).path.rstrip("/"))' "${CONFIGURED_PAGES_URL%/}")"
+          echo "base=$SITE_PATH/pr/${{ github.event.pull_request.number }}/" >> "$GITHUB_OUTPUT"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 11
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".nvmrc"
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build web app
+        env:
+          VITE_APP_BACKEND: web
+          VITE_APP_BASE: ${{ steps.path.outputs.base }}
+          VITE_APP_BUILD_LABEL: PR #${{ github.event.pull_request.number }}
+        run: pnpm exec vite build
+
+      - name: Package preview
+        shell: bash
+        run: |
+          mkdir preview
+          mv bundle preview/site
+          echo "${{ github.event.pull_request.number }}" > preview/pr-number
+
+      - name: Upload preview
+        uses: actions/upload-artifact@v7
+        with:
+          name: pr-preview
+          path: preview
+          retention-days: 7
