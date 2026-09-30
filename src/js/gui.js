@@ -59,7 +59,6 @@ export const GuiControl = function () {
         'receiver',
         'sensors',
         'servos',
-        'xact_servo',
         'presets',
     ];
 
