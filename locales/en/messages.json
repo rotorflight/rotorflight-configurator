@@ -1348,6 +1348,14 @@
     "statusArmingDisableFlagsTooltipOVERRIDE": {
         "message": "Servo Override or Mixer Override is active"
     },
+    "statusArmingDisableFlagsTooltipNO_NOTCH_FILTER": {
+        "message": "Neither the RPM Filter nor the Dynamic Notch Filter is actively filtering the gyro. Configure a real-time RPM source (RPM Filter) or enable the Dynamic Notch Filter before arming.",
+        "description": "Message that pops up to describe the NO_NOTCH_FILTER arming disable flag"
+    },
+    "statusArmingDisableFlagsTooltipBACKUP_RX": {
+        "message": "A backup RX is configured but has not yet linked. Power-cycle range test the backup receiver, or check its wiring, before arming.",
+        "description": "Message that pops up to describe the BACKUP_RX arming disable flag"
+    },
     "statusArmingDisableFlagsTooltipARM_SWITCH": {
         "message": "Arm switch is activated while other arming disable conditions are active",
         "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
@@ -1935,6 +1943,9 @@
     "portsFunction_SRXL2_ESC": {
         "message": "SRXL2 ESC"
     },
+    "portsFunction_RX_INPUT_BACKUP": {
+        "message": "Serial Rx (Backup)"
+    },
     "portsFunction_CUSTOM": {
         "message": "Custom"
     },
@@ -2072,7 +2083,7 @@
         "message": "Loaded Profile: <strong class=\"message-positive\">$1</strong>"
     },
     "receiverSelection": {
-        "message": "Protocol"
+        "message": "Serial RX #1"
     },
     "receiverSelectionSectionSignaling": {
         "message": "Signaling"
@@ -2613,6 +2624,45 @@
     },
     "receiverButtonSticks": {
         "message": "Control sticks"
+    },
+    "tabRxInputBackupConfig": {
+        "message": "Serial RX #2"
+    },
+    "rxInputBackupStatusLinkUp": {
+        "message": "Link: Up"
+    },
+    "rxInputBackupStatusLinkDown": {
+        "message": "Link: Down"
+    },
+    "rxInputBackupStatusActiveMain": {
+        "message": "Active Source: Main RX"
+    },
+    "rxInputBackupStatusActiveBackup": {
+        "message": "Active Source: Backup RX"
+    },
+    "receiverBackupRxProvider": {
+        "message": "Protocol"
+    },
+    "receiverBackupRxSignaling": {
+        "message": "Signaling"
+    },
+    "receiverBackupRxInverted": {
+        "message": "Inverted"
+    },
+    "receiverBackupRxInvertedHelp": {
+        "message": "Off applies whichever electrical inversion the selected protocol normally needs (SBUS is naturally inverted; FBUS, FPort, and FPort2 are not). Turn on only if this wire is inverted relative to that protocol's normal wiring, e.g. via an external inverter."
+    },
+    "receiverBackupRxHalfDuplex": {
+        "message": "Half-Duplex"
+    },
+    "receiverBackupRxHalfDuplexHelp": {
+        "message": "Enable if only one signal wire is connected for this receiver (single-wire wiring). Safe even though this port never transmits."
+    },
+    "receiverBackupRxPinSwap": {
+        "message": "Pin Swap"
+    },
+    "receiverBackupRxPinSwapHelp": {
+        "message": "Swaps the Rx and Tx pins on this port."
     },
     "receiverModelPreview": {
         "message": "Preview"

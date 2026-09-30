@@ -4,7 +4,12 @@
   import { SvelteURL } from "svelte/reactivity";
   import { slide } from "svelte/transition";
 
+  import Field from "@/components/Field.svelte";
   import Page from "@/components/Page.svelte";
+  import Section from "@/components/Section.svelte";
+  import SubSection from "@/components/SubSection.svelte";
+  import Switch from "@/components/Switch.svelte";
+  import Tooltip from "@/components/Tooltip.svelte";
 
   import { DarkTheme } from "@/js/DarkTheme.js";
   import { CONFIGURATOR } from "@/js/configurator.svelte.js";
@@ -34,6 +39,7 @@
   let loading = $state(true);
   let initialState;
   let sensorUpdateIntervalId;
+  let backupRxPollerIntervalId;
 
   function snapshotState() {
     return $state.snapshot({
@@ -42,6 +48,7 @@
       RC_CONFIG: FC.RC_CONFIG,
       RX_CONFIG: FC.RX_CONFIG,
       TELEMETRY_CONFIG: FC.TELEMETRY_CONFIG,
+      RX_INPUT_BACKUP_CONFIG: FC.RX_INPUT_BACKUP_CONFIG,
       features: FC.FEATURE_CONFIG.features.bitfield,
     });
   }
@@ -74,10 +81,33 @@
       await MSP.promise(MSPCodes.MSP_RC_COMMAND);
       await MSP.promise(MSPCodes.MSP_ANALOG);
     }, 25);
+
+    if (hasBackupRxPort) {
+      await MSP.promise(MSPCodes.MSP2_GET_RX_INPUT_BACKUP_CONFIG);
+    }
+
+    // Polled unconditionally, not just when hasBackupRxPort - mainLinkUp
+    // (the primary RX's own live signal state) is shown in the Serial RX #1
+    // box regardless of whether a backup port is configured at all; the
+    // backup-specific fields just stay at their disabled/empty defaults when
+    // it isn't.
+    await MSP.promise(MSPCodes.MSP2_GET_RX_INPUT_BACKUP_STATUS);
+    // 200ms rather than the 25ms main-channel poll above - this only needs to
+    // look live for a status badge, not drive a hot loop always.
+    backupRxPollerIntervalId = setInterval(() => {
+      MSP.promise(MSPCodes.MSP2_GET_RX_INPUT_BACKUP_STATUS);
+    }, 200);
+
+    // initialState is snapshotted above before this block runs, so re-snapshot
+    // now that RX_INPUT_BACKUP_CONFIG has actually been fetched - otherwise
+    // isDirty()/onRevert() would compare against the pre-fetch default values
+    // for a tab that hadn't even loaded its own config yet.
+    initialState = snapshotState();
   });
 
   onDestroy(() => {
     clearInterval(sensorUpdateIntervalId);
+    clearInterval(backupRxPollerIntervalId);
   });
 
   export async function onSave() {
@@ -91,6 +121,9 @@
     await save(MSPCodes.MSP_SET_RSSI_CONFIG);
     await save(MSPCodes.MSP_SET_TELEMETRY_CONFIG);
     await save(MSPCodes.MSP_SET_FEATURE_CONFIG);
+    if (hasBackupRxPort) {
+      await save(MSPCodes.MSP2_SET_RX_INPUT_BACKUP_CONFIG);
+    }
 
     await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
     GUI.log($i18n.t("eepromSaved"));
@@ -105,6 +138,10 @@
     Object.assign(FC.RC_CONFIG, initialState.RC_CONFIG);
     Object.assign(FC.RX_CONFIG, initialState.RX_CONFIG);
     Object.assign(FC.TELEMETRY_CONFIG, initialState.TELEMETRY_CONFIG);
+    Object.assign(
+      FC.RX_INPUT_BACKUP_CONFIG,
+      initialState.RX_INPUT_BACKUP_CONFIG,
+    );
     FC.FEATURE_CONFIG.features.bitfield = initialState.features;
   }
 
@@ -136,6 +173,42 @@
       (port) => port.functionMask & SERIALRX_FUNCTION,
     ),
   );
+
+  // Serial Rx (Backup) - see FUNCTION_RX_INPUT_BACKUP in rotorflight-firmware.
+  // No dedicated feature bit, same as SERIALRX_FUNCTION above: the port assignment
+  // itself is the enablement.
+  const RX_INPUT_BACKUP_FUNCTION = 8388608;
+  let hasBackupRxPort = $derived(
+    FC.SERIAL_CONFIG.ports.some(
+      (port) => port.functionMask & RX_INPUT_BACKUP_FUNCTION,
+    ),
+  );
+  let backupRxStatus = $derived(
+    FC.RX_INPUT_BACKUP_STATUS ?? {
+      enabled: false,
+      mainLinkUp: null,
+      provider: 0,
+      linkUp: false,
+      activeSource: "main",
+      channels: [],
+    },
+  );
+
+  // Keep in sync with rotorflight-firmware's cli/settings.c
+  // lookupTableRxInputBackupProvider[] (same order, NONE=0 first) - this
+  // array's index must match the firmware enum. Display text matches
+  // RX_PROTOCOLS' own naming (./protocols.js) for the same protocols, so the
+  // two dropdowns read consistently rather than one using full names and the
+  // other short codes.
+  const RX_INPUT_BACKUP_PROVIDER_NAMES = [
+    "None",
+    "Futaba S.BUS",
+    "FrSky FBUS",
+    "FrSky F.PORT",
+    "FrSky F.PORT2",
+    "Jeti EXBUS",
+    "TBS CRSF",
+  ];
 
   let extTelemProto = $derived.by(() => {
     for (const proto of EXTERNAL_TELEMETRY_PROTOCOLS) {
@@ -346,7 +419,82 @@
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
   <div class="content">
     <div>
-      <ReceiverType {rxProtoIndex} {hasSerialRxPort} {setRxProto} />
+      <ReceiverType
+        {rxProtoIndex}
+        {hasSerialRxPort}
+        {setRxProto}
+        mainLinkUp={backupRxStatus.mainLinkUp}
+        {hasBackupRxPort}
+        backupActive={backupRxStatus.activeSource === "backup"}
+      />
+      {#if hasBackupRxPort}
+        {#snippet backupConfigHeader()}
+          <div class="section-header">
+            <span class="title">{$i18n.t("tabRxInputBackupConfig")}</span>
+            <div class="grow"></div>
+            <span
+              class="badge"
+              class:up={backupRxStatus.linkUp}
+              class:down={!backupRxStatus.linkUp}
+            >
+              {backupRxStatus.linkUp
+                ? $i18n.t("rxInputBackupStatusLinkUp")
+                : $i18n.t("rxInputBackupStatusLinkDown")}
+            </span>
+            <span
+              class="badge"
+              class:active={backupRxStatus.activeSource === "backup"}
+            >
+              {backupRxStatus.activeSource === "backup"
+                ? $i18n.t("rxInputBackupStatusActiveBackup")
+                : $i18n.t("rxInputBackupStatusActiveMain")}
+            </span>
+          </div>
+        {/snippet}
+        <Section header={backupConfigHeader}>
+          <SubSection>
+            <Field id="backup-rx-provider" label="receiverBackupRxProvider">
+              <select
+                id="backup-rx-provider"
+                bind:value={FC.RX_INPUT_BACKUP_CONFIG.provider}
+              >
+                {#each RX_INPUT_BACKUP_PROVIDER_NAMES as name, i (name)}
+                  <option value={i}>{name}</option>
+                {/each}
+              </select>
+            </Field>
+          </SubSection>
+          <SubSection label="receiverBackupRxSignaling">
+            <Field id="backup-rx-inverted" label="receiverBackupRxInverted">
+              {#snippet tooltip()}
+                <Tooltip help="receiverBackupRxInvertedHelp" />
+              {/snippet}
+              <Switch
+                id="backup-rx-inverted"
+                bind:checked={FC.RX_INPUT_BACKUP_CONFIG.inverted}
+              />
+            </Field>
+            <Field id="backup-rx-halfduplex" label="receiverBackupRxHalfDuplex">
+              {#snippet tooltip()}
+                <Tooltip help="receiverBackupRxHalfDuplexHelp" />
+              {/snippet}
+              <Switch
+                id="backup-rx-halfduplex"
+                bind:checked={FC.RX_INPUT_BACKUP_CONFIG.halfDuplex}
+              />
+            </Field>
+            <Field id="backup-rx-pinswap" label="receiverBackupRxPinSwap">
+              {#snippet tooltip()}
+                <Tooltip help="receiverBackupRxPinSwapHelp" />
+              {/snippet}
+              <Switch
+                id="backup-rx-pinswap"
+                bind:checked={FC.RX_INPUT_BACKUP_CONFIG.pinSwap}
+              />
+            </Field>
+          </SubSection>
+        </Section>
+      {/if}
       <ChannelRange />
       {#if telemetry}
         <div transition:slide>
@@ -371,6 +519,44 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     column-gap: var(--section-gap);
+  }
+
+  /* Custom Section header (badges live here, not in the body) - replicates
+     %section-header (_global.scss) plus a right-aligned badge row, kept
+     compact rather than adding a separate summary line below the title.
+     Mirrors ReceiverType.svelte's own identical block for its RX #1 header. */
+  .section-header {
+    @extend %section-header;
+
+    padding-right: 8px;
+    gap: 8px;
+  }
+
+  .title {
+    padding-left: 8px;
+  }
+
+  .badge {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+  }
+
+  .badge.up {
+    color: var(--color-border-accent);
+    border-color: var(--color-border-accent);
+  }
+
+  /* "active" here means the backup link is the one currently driving the
+     aircraft (main link down) -- worth calling out the same way "down" is. */
+  .badge.down,
+  .badge.active {
+    color: var(--color-danger, var(--color-border-accent));
+    border-color: var(--color-danger, var(--color-border-accent));
   }
 
   .help-btn {

@@ -60,6 +60,11 @@
         !semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
       )
         continue;
+      if (
+        func.name === "RX_INPUT_BACKUP" &&
+        !semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
+      )
+        continue;
 
       options.push({
         value: func.id,

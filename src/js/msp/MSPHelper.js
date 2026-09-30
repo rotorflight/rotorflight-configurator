@@ -68,6 +68,7 @@ export function MspHelper() {
         'SBUS_OUT': 18,
         'FBUS_OUT': 19,
         'SPORT_MASTER': 20,
+        'RX_INPUT_BACKUP': 23,
     };
 
     self.REBOOT_TYPES = {
@@ -376,6 +377,47 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP2_SET_SMARTFUEL_CONFIG: {
                 console.log('Smart Fuel configuration saved');
+                break;
+            }
+
+            case MSPCodes.MSP2_GET_RX_INPUT_BACKUP_STATUS: {
+                // Version 2 added the `provider` byte (firmware msp.c) - branch on it
+                // rather than reading-and-discarding like the v1 decoder here used to,
+                // so a v1 firmware (no provider byte, always SBUS) still decodes the
+                // rest of the fixed fields correctly instead of misreading them.
+                // Version 3 added `mainLinkUp` (right after `enabled`) - null on older
+                // firmware (genuinely unknown) rather than guessing true/false, so the
+                // UI can simply not render a main-link badge instead of showing a
+                // possibly-wrong one.
+                const payloadVersion = data.readU8();
+                const enabled = data.readU8() !== 0;
+                const mainLinkUp = payloadVersion >= 3 ? data.readU8() !== 0 : null;
+                const provider = payloadVersion >= 2 ? data.readU8() : 0; // 0 = SBUS
+                const linkUp = data.readU8() !== 0;
+                const activeSource = data.readU8() !== 0 ? 'backup' : 'main';
+                const channelCount = data.readU8();
+                const channels = [];
+                for (let i = 0; i < channelCount; i++) {
+                    channels.push(data.readU16());
+                }
+
+                FC.RX_INPUT_BACKUP_STATUS = { enabled, mainLinkUp, provider, linkUp, activeSource, channels };
+                break;
+            }
+
+            case MSPCodes.MSP2_GET_RX_INPUT_BACKUP_CONFIG: {
+                data.readU8(); // payload version, unused for now
+                const provider = data.readU8();
+                const inverted = data.readU8() !== 0;
+                const halfDuplex = data.readU8() !== 0;
+                const pinSwap = data.readU8() !== 0;
+
+                FC.RX_INPUT_BACKUP_CONFIG = { provider, inverted, halfDuplex, pinSwap };
+                break;
+            }
+
+            case MSPCodes.MSP2_SET_RX_INPUT_BACKUP_CONFIG: {
+                console.log('Backup RX config saved');
                 break;
             }
 
@@ -2022,6 +2064,15 @@ MspHelper.prototype.crunch = function(code) {
                   .push8(FC.SMARTFUEL_CONFIG.voltageDropRate)
                   .push8(FC.SMARTFUEL_CONFIG.chargeDropRate)
                   .push8(FC.SMARTFUEL_CONFIG.sagGain);
+            break;
+        }
+
+        case MSPCodes.MSP2_SET_RX_INPUT_BACKUP_CONFIG: {
+            buffer.push8(1); // payload version
+            buffer.push8(FC.RX_INPUT_BACKUP_CONFIG.provider)
+                  .push8(Number(FC.RX_INPUT_BACKUP_CONFIG.inverted))
+                  .push8(Number(FC.RX_INPUT_BACKUP_CONFIG.halfDuplex))
+                  .push8(Number(FC.RX_INPUT_BACKUP_CONFIG.pinSwap));
             break;
         }
 
