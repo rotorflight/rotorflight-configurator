@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Asynchronous Loading</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+     html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+
+    <link type="text/css" rel="stylesheet" href="/feature-rf22-web-cache/libraries/openlayers/ol.css">
+    <script type="text/javascript" src="/feature-rf22-web-cache/libraries/openlayers/ol.js"></script>
+
+    <script type="module" crossorigin src="/feature-rf22-web-cache/assets/src/tabs/map.html.js"></script>
+    <link rel="modulepreload" crossorigin href="/feature-rf22-web-cache/assets/modulepreload-polyfill.js">
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
