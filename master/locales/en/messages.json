@@ -472,6 +472,174 @@
     "tabServos": {
         "message": "Servos"
     },
+    "tabXactServoProgramming": {
+        "message": "XACT Servo Programming"
+    },
+    "xactServoIntro": {
+        "message": "Program XACT FBUS servo parameters over telemetry. XACT servos report and are configured over the same S.Port/FBUS wire used for telemetry — no separate programming connection is needed. Scan for connected servos, then select one to edit and write its parameters."
+    },
+    "xactServoSingleServoNote": {
+        "message": "Every XACT servo on the bus needs a unique Physical ID. Two servos sharing one collide and are tracked as a single entry -- if they also share the same App ID this tool has no way to tell them apart, so double-check factory-default units before connecting them together."
+    },
+    "xactServoScanButton": {
+        "message": "Scan for Servos"
+    },
+    "xactServoIdle": {
+        "message": "Click \"Scan for Servos\" to discover connected XACT servos."
+    },
+    "xactServoScanning": {
+        "message": "Scanning for XACT servos..."
+    },
+    "xactServoNotFound": {
+        "message": "No XACT servos detected. Check wiring and try scanning again."
+    },
+    "xactServoMultipleFound": {
+        "message": "Found {{count}} XACT servos on the bus. Select one to program:"
+    },
+    "xactServoListReading": {
+        "message": "Reading…"
+    },
+    "xactServoBackToList": {
+        "message": "Back to list"
+    },
+    "xactServoConflictBadge": {
+        "message": "⚠ ID conflict"
+    },
+    "xactServoConflictWarning": {
+        "message": "Two servos appear to share this Physical ID and can't be told apart -- the parameters below may be a mix of both. To resolve: unplug one of the two affected servos, change the Physical ID of the one still connected to something unused, then reconnect the other one and rescan."
+    },
+    "xactServoDuplicateAppIdBadge": {
+        "message": "⚠ Duplicate App ID"
+    },
+    "xactServoDuplicateAppIdWarning": {
+        "message": "Another discovered servo shares this one's App ID. XACT commands are addressed by App ID, not just Physical ID -- confirmed on real hardware, a save here can also silently reach that other servo. Saving is blocked until you give this servo a different, unused App ID; other changes will be saved together with that fix once it's unique."
+    },
+    "xactServoPhysicalIdCollisionWarning": {
+        "message": "Another discovered servo already uses this Physical ID. Choose a different one -- two servos sharing a Physical ID collide on the bus and get tracked as a single, unreliable entry."
+    },
+    "xactServoSectionDetected": {
+        "message": "Detected servos"
+    },
+    "xactServoSectionProtocol": {
+        "message": "Protocol"
+    },
+    "xactServoSectionServo": {
+        "message": "Servo Settings"
+    },
+    "xactServoSectionAdvanced": {
+        "message": "Advanced Parameters"
+    },
+    "xactServoSectionSeries65": {
+        "message": "Series 65 Options"
+    },
+    "xactServoPhysicalId": {
+        "message": "Physical ID"
+    },
+    "xactServoPhysicalIdHelp": {
+        "message": "The servo's address on the FBUS/S.Port bus (00-1A), used the same way an S.Port sensor's Physical ID is &mdash; it lets the receiving side poll each device on the shared wire in turn without collisions. Every servo daisy-chained on the same bus must use a different Physical ID, or their responses can collide (the tab warns you if it detects that happening)."
+    },
+    "xactServoAppIdOffset": {
+        "message": "App ID"
+    },
+    "xactServoAppIdOffsetHelp": {
+        "message": "Distinguishes this servo from other servos of the same model on the same bus, so its telemetry and status can be matched to the correct physical servo. Give each one a different value if you have more than one on the same bus."
+    },
+    "xactServoFirmwareVersion": {
+        "message": "Firmware"
+    },
+    "xactServoFirmwareVersionHelp": {
+        "message": "The servo's own firmware version, reported read-only. Used to detect \"series 65\" servos (version 40 and above), which expose the extra <strong>Series 65 Options</strong> section below."
+    },
+    "xactServoRange": {
+        "message": "Range"
+    },
+    "xactServoRangeHelp": {
+        "message": "Total mechanical travel of the servo output arm/disc, centered on <strong>Center</strong>: 120&deg;, 90&deg;, or 180&deg;. Set this to match how far the linkage is actually meant to swing &mdash; the servo scales the full input signal range across whichever travel is selected here."
+    },
+    "xactServoDirection": {
+        "message": "Direction"
+    },
+    "xactServoDirectionHelp": {
+        "message": "Which way the output arm/disc turns for an increasing input signal. Use this to correct a servo that moves the wrong way for its linkage instead of reversing the channel elsewhere."
+    },
+    "xactServoDirectionClockwise": {
+        "message": "Clockwise"
+    },
+    "xactServoDirectionAnticlockwise": {
+        "message": "Anticlockwise"
+    },
+    "xactServoPulseType": {
+        "message": "Pulse Type"
+    },
+    "xactServoPulseTypeHelp": {
+        "message": "The pulse width the servo centers on when driven by a plain PWM signal (outside FBUS control). <strong>1500us</strong> is the standard RC convention and is correct for almost every use &mdash; leave it here unless you specifically have a narrow-band, high-speed tail/FBL setup built around a <strong>760us</strong> center. The two are not interchangeable: driving a 760us-centered servo with a normal 1500us-centered signal will barely move it, and driving a 1500us servo with a 760us-centered signal can over-travel it hard enough to damage it. Only change this if the receiving side (gyro/FC output) is already configured for the matching convention."
+    },
+    "xactServoDataRate": {
+        "message": "Data Rate"
+    },
+    "xactServoDataRateHelp": {
+        "message": "How often the servo refreshes its position/telemetry over FBUS, in milliseconds (10-60000)."
+    },
+    "xactServoChannel": {
+        "message": "Channel"
+    },
+    "xactServoChannelHelp": {
+        "message": "Which control channel (CH1-CH24) the servo listens to for its position command. Matches the channel numbering used elsewhere in the flight controller's mixer/output setup."
+    },
+    "xactServoCenter": {
+        "message": "Center"
+    },
+    "xactServoCenterHelp": {
+        "message": "Fine trim of the servo's electrical center point (-125 to 125), independent of any sub-trim done in the mixer. Nudge this only to correct a small mechanical offset in how the horn/disc sits at true center &mdash; large corrections belong in the mixer/endpoint setup instead."
+    },
+    "xactServoHoldingStrength": {
+        "message": "Holding Strength"
+    },
+    "xactServoHoldingStrengthHelp": {
+        "message": "How hard the servo drives to hold its commanded position (4-15). Higher settles more firmly against an external load but is more prone to overshoot/jitter arriving at position; lower is smoother and quieter at the cost of holding force. If raising this introduces jitter when the servo stops, increase <strong>Operation Smoothing</strong> to settle it back down. FrSky's own tool pairs this with an internal companion value it always resets to a fixed default whenever Holding Strength changes -- this tab does the same, so that companion isn't shown as its own field."
+    },
+    "xactServoOperationSmoothing": {
+        "message": "Operation Smoothing"
+    },
+    "xactServoOperationSmoothingHelp": {
+        "message": "Damping that smooths out overshoot/vibration ('jitter') that a high <strong>Holding Strength</strong> can cause when the servo arrives at or stops at a position (0-50). Increase a little if raising Holding Strength introduces jitter."
+    },
+    "xactServoDeadband": {
+        "message": "Deadband"
+    },
+    "xactServoDeadbandHelp": {
+        "message": "Electronic deadband around center that compensates for mechanical slop (backlash) in the servo's own feedback linkage (0-90). Keep this as small as possible for the most precise centering; only increase it a little if the servo is visibly hunting/shaking at rest &mdash; too large a deadband adds slack and reduces precision everywhere in the servo's travel, not just at center."
+    },
+    "xactServoWorkingMode": {
+        "message": "Working Mode"
+    },
+    "xactServoWorkingModeHelp": {
+        "message": "How the servo interprets its position command. <strong>Angle mode</strong> is standard positional control within <strong>Range</strong>. <strong>Range mode</strong> and <strong>Rotate mode</strong> change that behavior for continuous-rotation or specialized linkages -- only available on \"series 65\" servos."
+    },
+    "xactServoWorkingModeAngle": {
+        "message": "Angle mode"
+    },
+    "xactServoWorkingModeRange": {
+        "message": "Range mode"
+    },
+    "xactServoWorkingModeRotate": {
+        "message": "Rotate mode"
+    },
+    "xactServoMaxAngle": {
+        "message": "Max Angle"
+    },
+    "xactServoMaxAngleHelp": {
+        "message": "Maximum rotation angle in degrees (0-359). Only available on \"series 65\" servos."
+    },
+    "xactServoArmedWarning": {
+        "message": "The flight controller is armed. Disarm it to scan for or save XACT servo settings."
+    },
+    "xactServoSaveFailed": {
+        "message": "Saving the XACT servo settings <span class=\"message-negative\">failed</span>. The flight controller rejected the request (it must be disarmed) or did not respond."
+    },
+    "xactServoSaved": {
+        "message": "XACT servo settings <span class=\"message-positive\">saved</span>"
+    },
     "tabFailsafe": {
         "message": "Failsafe"
     },
