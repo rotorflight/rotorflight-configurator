@@ -2113,6 +2113,48 @@
     "receiverSerialPinSwapHelp": {
         "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
+    "receiverWiringDetectButton": {
+        "message": "Detect Wiring"
+    },
+    "receiverWiringDetectHelp": {
+        "message": "<p>Tries every combination of Inverted / Half-Duplex / Pin Swap for the selected protocol and stops as soon as one produces signal. Nothing is saved until you press Save on this tab.</p><p><strong>Note:</strong> requires no unsaved changes first - it tests whatever protocol/provider is currently saved on the flight controller, not a pending selection.</p><p>Your transmitter must be powered on and bound to the receiver - detection can't find a wiring combination if the receiver has no signal to give it in the first place.</p><p>Only available while disarmed - it cycles the receiver wiring live and could interrupt control input.</p>"
+    },
+    "receiverWiringDetectSaveFirst": {
+        "message": "Save your changes first - this tests whatever is currently saved on the flight controller, not a pending selection."
+    },
+    "receiverWiringDetectArmedFirst": {
+        "message": "Disarm first - wiring detection cycles the receiver connection live and can't run while armed."
+    },
+    "receiverWiringDetectWizardTitle": {
+        "message": "Detect RX Wiring"
+    },
+    "receiverWiringDetectWizardStep1": {
+        "message": "Step 1 of 2: Scanning"
+    },
+    "receiverWiringDetectWizardStep2": {
+        "message": "Step 2 of 2: Result"
+    },
+    "receiverWiringDetectScanning": {
+        "message": "Trying combination $1 of $2…"
+    },
+    "receiverWiringDetectSuccess": {
+        "message": "Signal found — Inverted: $1, Half-Duplex: $2, Pin Swap: $3. Save and reboot to keep it, or Close to discard and restore the previous setting."
+    },
+    "receiverWiringDetectFailed": {
+        "message": "No signal found on any wiring combination for this protocol. Make sure the transmitter is powered on and bound to the receiver, check the protocol selection and connections, then try again."
+    },
+    "receiverWiringDetectRejected": {
+        "message": "Wiring detection was rejected - it needs a serial receiver protocol with an assigned UART, and the aircraft must be disarmed."
+    },
+    "receiverWiringDetectUnsupported": {
+        "message": "Wiring detection is not supported by this firmware build."
+    },
+    "receiverWiringDetectWizardRetry": {
+        "message": "Retry"
+    },
+    "receiverWiringDetectWizardClose": {
+        "message": "Close"
+    },
     "receiverStickCenter": {
         "message": "Stick Center"
     },

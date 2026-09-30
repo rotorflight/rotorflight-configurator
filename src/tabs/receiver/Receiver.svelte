@@ -32,8 +32,22 @@
   } from "./protocols.js";
 
   let loading = $state(true);
-  let initialState;
-  let sensorUpdateIntervalId;
+  // $state, not a plain let: `changes` below reads this inside an early
+  // return (`if (!initialState) return [];`) that touches nothing else
+  // reactive. A plain variable's reassignment isn't a tracked dependency in
+  // runes mode, so if `changes` is ever first evaluated before onMount sets
+  // this, its $derived.by would memoize at [] permanently - reassigning
+  // initialState later wouldn't be a change any tracked dependency saw, so
+  // it would never recompute again regardless of later edits. $state makes
+  // the assignment itself a tracked dependency. This mattered less before
+  // `changes` fed a prop (hasUnsavedChanges below) into ReceiverType's own
+  // Detect Wiring guard - now a stale-empty `changes` would silently let the
+  // wizard run against unsaved state.
+  let initialState = $state();
+  let sensorUpdateTimer;
+  let armedPollerTimer;
+  let pollersStopped = false;
+  let receiverTypeRef;
 
   function snapshotState() {
     return $state.snapshot({
@@ -69,15 +83,47 @@
     initialState = snapshotState();
     loading = false;
 
-    sensorUpdateIntervalId = setInterval(async () => {
+    // Self-rescheduling (setTimeout that re-arms only after the previous
+    // round finishes), not setInterval with an async body. setInterval fires
+    // on a fixed wall-clock schedule regardless of whether the previous
+    // callback's awaits have resolved - on a real (non-instant) serial link,
+    // 3 sequential MSP round-trips can exceed even a 25ms period, so ticks
+    // start overlapping: each overlap opens a fresh in-flight request for a
+    // different MSP code (MSP.send_message only dedupes a second request for
+    // a code already queued, not different codes), so the backlog of
+    // outstanding requests only grows over time and can flood the link badly
+    // enough to starve the wiring-detect wizard's own poll of ever getting a
+    // timely response.
+    async function pollSensors() {
+      if (pollersStopped) return;
       await MSP.promise(MSPCodes.MSP_RX_CHANNELS);
       await MSP.promise(MSPCodes.MSP_RC_COMMAND);
       await MSP.promise(MSPCodes.MSP_ANALOG);
-    }, 25);
+      if (!pollersStopped) {
+        sensorUpdateTimer = setTimeout(pollSensors, 25);
+      }
+    }
+    pollSensors();
+
+    // Separate, much slower poll for `armed` rather than folding it into the
+    // loop above - it doesn't need anywhere near 25ms freshness for a UI
+    // gate, so it gets its own light cadence instead of riding along on the
+    // hot one.
+    async function pollArmed() {
+      if (pollersStopped) return;
+      await MSP.promise(MSPCodes.MSP_STATUS);
+      if (!pollersStopped) {
+        armedPollerTimer = setTimeout(pollArmed, 1000);
+      }
+    }
+    pollArmed();
   });
 
   onDestroy(() => {
-    clearInterval(sensorUpdateIntervalId);
+    pollersStopped = true;
+    clearTimeout(sensorUpdateTimer);
+    clearTimeout(armedPollerTimer);
+    receiverTypeRef?.cleanup();
   });
 
   export async function onSave() {
@@ -122,6 +168,12 @@
       FC.TARGET_CAPABILITIES_FLAGS.SUPPORTS_RX_BIND,
     ),
   );
+
+  // The RX wiring trial cycles the live receiver connection, so
+  // ReceiverType.svelte needs this to refuse to even open its Detect Wiring
+  // wizard while armed, on top of the firmware's own ARMING_FLAG(ARMED)
+  // rejection.
+  let armed = $derived(bit_check(FC.CONFIG.mode, FC.AUX_CONFIG.indexOf("ARM")));
 
   // TODO: Check gui is nwjs
   let showSticksButton = $derived(FC.FEATURE_CONFIG.features.RX_MSP);
@@ -346,7 +398,15 @@
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
   <div class="content">
     <div>
-      <ReceiverType {rxProtoIndex} {hasSerialRxPort} {setRxProto} />
+      <ReceiverType
+        bind:this={receiverTypeRef}
+        {rxProtoIndex}
+        {hasSerialRxPort}
+        {setRxProto}
+        onSaveRequested={onSave}
+        hasUnsavedChanges={changes.length > 0}
+        {armed}
+      />
       <ChannelRange />
       {#if telemetry}
         <div transition:slide>
