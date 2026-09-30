@@ -1,0 +1,167 @@
+<div class="tab-firmware_flasher toolbar_fixed_bottom">
+    <div class="content_wrapper">
+        <div class="options gui_box">
+            <div class="spacer">
+                <div class="options-container">
+                    <div class="field">
+                        <select name="build_type">
+                            <!-- options generated at runtime -->
+                        </select>
+                        <span class="description" i18n="firmwareFlasherOnlineSelectBuildType"></span>
+                    </div>
+                    <div class="field">
+                        <div class="board-select-flex">
+                            <select name="board" style="flex-grow: 1;">
+                                <option value="0" i18n="firmwareFlasherOptionLoading">Loading ...</option>
+                            </select>
+                            <span class="default_btn detect_btn">
+                                <a href="#" class="detect-board disabled">
+                                    <span i18n="firmwareFlasherBoardDetectionButton"></span><em class="fas fa-search"></em>
+                                </a>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="description" i18n="firmwareFlasherOnlineSelectBoardDescription"></span>
+                            <div class="helpicon cf_tip_wide" i18n_title="firmwareFlasherOnlineSelectBoardHint"></div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <select name="firmware_version">
+                            <option value="0" i18n="firmwareFlasherOptionLoading">Loading ...</option>
+                        </select>
+                        <span class="description" i18n="firmwareFlasherOnlineSelectFirmwareVersionDescription"></span>
+                    </div>
+                    <div class="field">
+                        <label>
+                            <input id="show-legacy-targets" class="toggle" type="checkbox" />
+                            <span i18n="firmware_flasher.show_legacy_targets.label"></span>
+                        </label>
+                        <span class="description" i18n="firmware_flasher.show_legacy_targets.description"></span>
+                    </div>
+                    <div class="field">
+                        <label>
+                            <input class="erase_chip toggle" type="checkbox" />
+                            <span i18n="firmwareFlasherFullChipErase"></span>
+                        </label>
+                        <span class="description" i18n="firmwareFlasherFullChipEraseDescription"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear-both"></div>
+        <div class="git_info">
+            <div class="title" i18n="firmwareFlasherGithubInfoHead"></div>
+            <p>
+                <strong i18n="firmwareFlasherHash"></strong> <a i18n_title="firmwareFlasherUrl" class="hash" href="#"
+                    target="_blank"></a><br /> <strong i18n="firmwareFlasherCommiter"></strong> <span class="committer"></span><br />
+                <strong i18n="firmwareFlasherDate"></strong> <span class="date"></span><br /> <strong
+                    i18n="firmwareFlasherMessage"></strong> <span class="message"></span>
+            </p>
+        </div>
+        <div class="release_info gui_box">
+            <div class="darkgrey_box gui_box_titlebar">
+                <div class="spacer_box_title" style="text-align: center;"
+                    i18n="firmwareFlasherReleaseSummaryHead"></div>
+            </div>
+            <div class="spacer" style="margin-bottom: 10px;">
+                <div class="margin-bottom">
+                    <strong i18n="firmwareFlasherReleaseTarget"></strong>
+                    <span class="target"></span>
+                    <br />
+                    <div id="manufacturerInfo">
+                        <strong i18n="firmwareFlasherReleaseManufacturer"></strong>
+                        <span id="manufacturer"></span>
+                        <br />
+                    </div>
+                    <strong i18n="firmwareFlasherReleaseVersion"></strong>
+                    <a i18n_title="firmwareFlasherReleaseVersionUrl" class="name" href="#" target="_blank"></a>
+                    <br />
+                    <strong i18n="firmwareFlasherReleaseFile"></strong>
+                    <a i18n_title="firmwareFlasherReleaseFileUrl" class="file" href="#" target="_blank"></a>
+                    <br />
+                    <strong i18n="firmwareFlasherReleaseDate"></strong>
+                    <span class="date"></span>
+                    <br />
+                </div>
+                <div class="margin-bottom" id="unifiedTargetInfo">
+                    <strong i18n="firmwareFlasherUnifiedTargetName"></strong>
+                    <a i18n_title="firmwareFlasherUnifiedTargetFileUrl" id="unifiedTargetFile" href="#" target="_blank"></a>
+                    <br />
+                    <strong i18n="firmwareFlasherUnifiedTargetDate"></strong>
+                    <span id="unifiedTargetDate"></span>
+                    <br />
+                </div>
+                <strong i18n="firmwareFlasherReleaseNotes"></strong>
+                <div class=notes></div>
+            </div>
+        </div>
+        <div class="gui_box gui_warning">
+            <div class="gui_box_titlebar">
+                <div class="spacer_box_title" style="text-align: center;"
+                    i18n="warningTitle">
+                </div>
+            </div>
+            <div class="spacer" style="margin-bottom: 10px;">
+                <p i18n="firmwareFlasherWarningText"></p>
+                <br />
+                <p i18n="firmwareFlasherTargetWarning"></p>
+            </div>
+        </div>
+        <div class="gui_box gui_note">
+            <div class="gui_box_titlebar">
+                <div class="spacer_box_title" style="text-align: center;"
+                    i18n="firmwareFlasherRecoveryHead">
+                </div>
+            </div>
+            <div class="spacer" style="margin-bottom: 10px;">
+                <p i18n="firmwareFlasherRecoveryText"></p>
+            </div>
+        </div>
+            
+    </div>
+    <div class="content_toolbar">
+        <div class="info"><a name="progressbar"></a>
+            <progress class="progress" value="0" min="0" max="100"></progress>
+            <span class="progressLabel"></span>
+        </div>
+        <div class="btn">
+            <a class="exit_dfu disabled" href="#" i18n="firmwareFlasherExitDfu"></a>
+        </div>
+        <div class="btn">
+            <a class="flash_firmware disabled" href="#progressbar" i18n="firmwareFlasherFlashFirmware"></a>
+        </div>
+        <div class="btn">
+            <a class="load_remote_file disabled" href="#" i18n="firmwareFlasherButtonLoadOnline"></a>
+        </div>
+        <div class="btn">
+            <a class="load_file" href="#" i18n="firmwareFlasherButtonLoadLocal"></a>
+        </div>
+    </div>
+
+    <dialog id="dialogUnstableFirmwareAcknoledgement">
+        <h3 i18n="warningTitle"></h3>
+        <div class="content">
+            <div i18n="unstableFirmwareAcknoledgementDialog"></div>
+            <div>
+                <input name="dialogUnstableFirmwareAcknoledgement-acknowledge" class="togglesmall" type="checkbox"/>
+                <span i18n="unstableFirmwareAcknoledgementAcknowledge"></span>
+            </div>
+        </div>
+        <div class="dialog_toolbar">
+            <div class="btn">
+                <a class="disabled" href="#" id="dialogUnstableFirmwareAcknoledgement-flashbtn" class="regular-button" i18n="unstableFirmwareAcknoledgementFlash"></a>
+            </div>
+            <div class="btn">
+                <a href="#" id="dialogUnstableFirmwareAcknoledgement-cancelbtn" class="regular-button" i18n="cancel"></a>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="dialogBoardDetectionMessage">
+        <h3 id="dialogBoardDetectionMessageTitle"></h3>
+        <div class="content" id="dialogBoardDetectionMessageContent"></div>
+        <div class="buttons">
+            <a href="#" id="dialogBoardDetectionMessageAcknowledge" class="regular-button" i18n="dialogBoardDetectionMessageAcknowledge"></a>
+        </div>
+    </dialog>
+</div>
