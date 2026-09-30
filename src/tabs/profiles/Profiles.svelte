@@ -147,6 +147,14 @@
   }
 
   // True if any of the settings differs from the firmware default.
+  // Boost (B) defaults to 0 on every axis.
+  let boostChanged = $derived(
+    AXES.some(
+      (_, axis) =>
+        Number(FC.PIDS[axis][GAINS.findIndex((g) => g.key === "B")]) !== 0,
+    ),
+  );
+
   function changed(...keys) {
     return keys.some((key) => Number(fcValue(key)) !== EXPERT_DEFAULTS[key]);
   }
@@ -402,22 +410,38 @@
               <div class="pid-table">
                 <span></span>
                 {#each GAINS as gain (gain.key)}
-                  <span class="col">
-                    {$i18n.t(gain.label)}
-                    <HelpIcon>{$i18n.t(gain.help)}</HelpIcon>
-                  </span>
+                  {#snippet header()}
+                    <span class={["col", gain.key === "B" && "col-boost"]}>
+                      {$i18n.t(gain.label)}
+                      <HelpIcon>{$i18n.t(gain.help)}</HelpIcon>
+                    </span>
+                  {/snippet}
+                  {#if gain.key === "B"}
+                    <Expert changed={boostChanged}>{@render header()}</Expert>
+                  {:else}
+                    {@render header()}
+                  {/if}
                 {/each}
                 {#each AXES as axis, a (axis)}
                   <span class={["axis", axis.toLowerCase()]}>
                     {$i18n.t(`axis${axis}`)}
                   </span>
                   {#each GAINS as gain, g (gain.key)}
-                    <NumberInput
-                      min={0}
-                      max={1000}
-                      step={1}
-                      bind:value={form.pids[a][g]}
-                    />
+                    {#snippet input()}
+                      <NumberInput
+                        min={0}
+                        max={1000}
+                        step={1}
+                        bind:value={form.pids[a][g]}
+                      />
+                    {/snippet}
+                    {#if gain.key === "B"}
+                      <Expert changed={boostChanged} counted={false}>
+                        {@render input()}
+                      </Expert>
+                    {:else}
+                      {@render input()}
+                    {/if}
                   {/each}
                 {/each}
               </div>
@@ -1034,10 +1058,15 @@
 
   .pid-table {
     display: grid;
-    grid-template-columns: minmax(70px, 1fr) repeat(5, minmax(84px, 104px));
+    grid-template-columns: minmax(70px, 1fr) repeat(4, minmax(84px, 104px));
     align-items: center;
     gap: 6px 6px;
     padding: 4px 8px 8px;
+  }
+
+  /* The boost column is hidden in basic mode. */
+  .pid-table:has(.col-boost) {
+    grid-template-columns: minmax(70px, 1fr) repeat(5, minmax(84px, 104px));
   }
 
   .col {
