@@ -13,6 +13,11 @@ export default class CliEngine {
   #lineDelayMs = 15;
   #profileSwitchDelayMs = 100;
   #rateProfileSwitchDelayMs = 100;
+  // `defaults`/`defaults nosave` makes the FC reset every PG back to its
+  // default value in place, which can block its UART processing long enough
+  // that the next replayed line arrives, and gets parsed, mid-reset. Give the
+  // reset time to finish before sending anything else.
+  #defaultsDelayMs = 2000;
 
   #outputHistory = ""; // output history holds the human-readable history from the flight controller
   #cliBuffer = ""; // cliBuffer holds the current data received from the flight controller
@@ -221,7 +226,9 @@ export default class CliEngine {
 
       this.#reportSendCommandsProgress((100.0 * i) / commandsArray.length);
 
-      if (line.toLowerCase().startsWith("profile")) {
+      if (line.toLowerCase().startsWith("defaults")) {
+        delay = this.#defaultsDelayMs;
+      } else if (line.toLowerCase().startsWith("profile")) {
         delay = this.#profileSwitchDelayMs;
       } else if (line.toLowerCase().startsWith("rateprofile")) {
         delay = this.#rateProfileSwitchDelayMs;

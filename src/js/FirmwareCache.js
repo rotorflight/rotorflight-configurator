@@ -134,14 +134,22 @@ export const FirmwareCache = (function () {
             console.debug("Firmware is already cached: " + key);
             return;
         }
-        journal.set(key, true);
-        JournalStorage.persist(journal.toJSON());
         let obj = {};
         obj[withCachePrefix(key)] = {
             release: release,
             hexdata: hexdata,
         };
+        // A multi-MB hex often doesn't fit the web build's localStorage. Store
+        // the data first and only journal it once that succeeded --
+        // journalling first left an entry claiming a cached file that was
+        // never written.
         chrome.storage.local.set(obj, () => {
+            if (chrome.runtime?.lastError) {
+                console.warn("Unable to cache firmware " + key + ": " + chrome.runtime.lastError.message);
+                return;
+            }
+            journal.set(key, true);
+            JournalStorage.persist(journal.toJSON());
             onPutToCache(release);
         });
     }

@@ -17,6 +17,8 @@ export const GuiControl = function () {
     this.connecting_to = false;
     this.connected_to = false;
     this.connect_lock = false;
+    this.disconnect_in_progress = false;   // a disconnect is being awaited (see handleConnectClick)
+    this.opening_firmware_flasher = false; // Update Firmware is switching to the flasher
     this.zoom_level = 100;
     this.active_tab = null;
     this.current_tab = null;
@@ -378,7 +380,11 @@ GuiControl.prototype.set_zoom = function(zoom_level, show_box) {
 
     config.zoomLevel = zoom_level;
 
-    nw.Window.get().zoomLevel = Math.log(zoom_level / 100) / Math.log(1.2);
+    if (this.isNWJS()) {
+        nw.Window.get().zoomLevel = Math.log(zoom_level / 100) / Math.log(1.2);
+    } else {
+        document.body.style.zoom = percent;
+    }
     $('#zoom-percent').text(percent);
 
     if (show_box) {

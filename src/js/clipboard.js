@@ -36,3 +36,15 @@ if (__BACKEND__ === "cordova") {
     });
   };
 }
+
+if (__BACKEND__ === "web") {
+  // The async Clipboard API. Chromium only allows it on a secure origin
+  // (https or localhost), and reading asks the user for permission.
+  writeText = function (text) {
+    return navigator.clipboard.writeText(text);
+  };
+
+  readText = function () {
+    return navigator.clipboard.readText();
+  };
+}

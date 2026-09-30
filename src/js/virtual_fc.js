@@ -4,6 +4,11 @@ import { Beepers } from "@/js/Beepers.js";
 import { API_VERSION_12_9, CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import {
+  BUS_SERVO_OFFSET,
+  clampServoConfig,
+  firmwareLimitsTravel,
+} from "@/js/servoLimits.js";
 import { getManufacturer } from "@/tabs/esc_programming/manufacturers/index.js";
 
 // Sizes and defaults below mirror rotorflight-firmware (src/main/pg/*.c and
@@ -396,6 +401,17 @@ export function handleVirtualMessage(code, data) {
         if (dst === currentRateProfile) {
           loadRateProfile(dst);
         }
+      }
+      break;
+    }
+
+    // Like the FC (4.6.0 on), cut center + min/max back into the signal
+    // range. The tab sees the result on its next MSP_SERVO_CONFIGURATIONS poll.
+    case MSPCodes.MSP_SET_SERVO_CONFIGURATION: {
+      const index = bytes[0];
+      const config = FC.SERVO_CONFIG[index];
+      if (config && firmwareLimitsTravel(FC.CONFIG.apiVersion)) {
+        clampServoConfig(config, index >= BUS_SERVO_OFFSET);
       }
       break;
     }

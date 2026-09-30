@@ -1,211 +1,31 @@
-import * as noUiSlider from 'nouislider';
-import "nouislider/dist/nouislider.css";
+// Entry point of the virtual (MSP) receiver window opened from the
+// Receiver tab.
+import { mount } from "svelte";
 
-import { DarkTheme } from '@/js/DarkTheme.js';
-import { windowWatcherUtil } from '@/js/utils/window_watchers.js';
+import "@/css/app.css";
+import "@/css/svelte.scss";
+import ReceiverMsp from "@/tabs/receiver_msp/ReceiverMsp.svelte";
+import { popup } from "@/tabs/receiver_msp/popup.svelte.js";
+import { windowWatcherUtil } from "@/js/utils/window_watchers.js";
 
-import "@/css/slider.css";
-
-const CHANNEL_MIN_VALUE = 1000;
-const CHANNEL_MID_VALUE = 1500;
-const CHANNEL_MAX_VALUE = 2000;
-
-const channelNames = [
-    'Roll',
-    'Pitch',
-    'Yaw',
-    'Collective',
-    'Throttle',
-    'Aux1',
-    'Aux2',
-    'Aux3',
-];
-
-const channelValues = [
-    CHANNEL_MID_VALUE,
-    CHANNEL_MID_VALUE,
-    CHANNEL_MID_VALUE,
-    CHANNEL_MID_VALUE,
-    CHANNEL_MIN_VALUE,
-    CHANNEL_MIN_VALUE,
-    CHANNEL_MIN_VALUE,
-    CHANNEL_MIN_VALUE,
-];
-
-const gimbalChannels = [
-    [ 2, 3 ],
-    [ 0, 1 ],
-];
-
-var gimbalElems;
-var sliderElems;
-
-var enableTX = false;
-
-// This is a hack to get the i18n var of the parent, but the localizePage not works
-const i18n = window.opener.i18n;
-
-const watchers = {
-    darkTheme: (val) => {
-        if (val) {
-            DarkTheme.applyDark();
-        } else {
-            DarkTheme.applyNormal();
-        }
-    }
-};
-
-$(document).ready(function () {
-    $('[i18n]:not(.i18n-replaced)').each(function() {
-        const element = $(this);
-        element.html(i18n.getMessage(element.attr('i18n')));
-        element.addClass('i18n-replaced');
-    });
-
-    windowWatcherUtil.bindWatchers(window, watchers);
+windowWatcherUtil.bindWatchers(window, {
+  darkTheme: (dark) =>
+    document.documentElement.setAttribute(
+      "data-theme",
+      dark ? "dark" : "light",
+    ),
+  translate: (fn) => (popup.translate = fn),
 });
 
-function localizeAxisNames()
-{
-    for (const gimbalIndex in gimbalChannels) {
-        const gimbal = gimbalElems.get(gimbalIndex);
-        const hChannel = gimbalChannels[gimbalIndex][0];
-        const vChannel = gimbalChannels[gimbalIndex][1];
-        $(".gimbal-label-horz", gimbal).text(i18n.getMessage("controlAxis" + channelNames[hChannel]));
-        $(".gimbal-label-vert", gimbal).text(i18n.getMessage("controlAxis" + channelNames[vChannel]));
-    }
-
-    $(".slider-label", sliderElems.get(0)).text(i18n.getMessage("controlAxisThr"));
-
-    for (let sliderIndex = 1; sliderIndex < 4; sliderIndex++) {
-        $(".slider-label", sliderElems.get(sliderIndex)).text(i18n.getMessage("controlAxisAux" + sliderIndex));
-    }
+// Web build: this is a plain popup, so pick up what the Receiver tab left for
+// it on its own window (see showVirtualTx() in Receiver.svelte).
+const bridge = __BACKEND__ === "web" ? window.opener?.receiverMspBridge : null;
+if (bridge) {
+  window.setRawRx = bridge.setRawRx;
+  windowWatcherUtil.passValue(window, "translate", bridge.translate);
+  if (bridge.darkTheme !== undefined) {
+    windowWatcherUtil.passValue(window, "darkTheme", bridge.darkTheme);
+  }
 }
 
-function transmitChannels()
-{
-    if (enableTX) {
-        // Callback given to us by the window creator so we can have it send data over MSP for us:
-        if (!window.setRawRx(channelValues)) {
-            // MSP connection has gone away
-            nw.Window.get().close();
-        }
-    }
-}
-
-function stickPositionToChannelValue(value)
-{
-    value = Math.min(Math.max(value, 0.0), 1.0);
-    return Math.round(value * (CHANNEL_MAX_VALUE - CHANNEL_MIN_VALUE) + CHANNEL_MIN_VALUE);
-}
-
-function channelValueToStickPosition(value)
-{
-    value = Math.min(Math.max(value, CHANNEL_MIN_VALUE), CHANNEL_MAX_VALUE);
-    return (value - CHANNEL_MIN_VALUE) / (CHANNEL_MAX_VALUE - CHANNEL_MIN_VALUE);
-}
-
-function updateGimbal(gimbalElem, x, y)
-{
-    const gimbalSize = $(gimbalElem).width();
-    const stickElem = $(".control-stick", gimbalElem);
-
-    stickElem.css('top', (1.0 - channelValueToStickPosition(y)) * gimbalSize + "px");
-    stickElem.css('left', channelValueToStickPosition(x) * gimbalSize + "px");
-}
-
-function handleGimbalMouseDrag(gimbalElem, gimbalIndex, event)
-{
-    const gimbalOffset = gimbalElem.offset();
-    const gimbalSize = gimbalElem.width();
-
-    const xChannel = gimbalChannels[gimbalIndex][0];
-    const yChannel = gimbalChannels[gimbalIndex][1];
-
-    const yValue = stickPositionToChannelValue(1.0 - (event.pageY - gimbalOffset.top) / gimbalSize);
-    const xValue = stickPositionToChannelValue((event.pageX - gimbalOffset.left) / gimbalSize);
-
-    channelValues[xChannel] = xValue;
-    channelValues[yChannel] = yValue;
-
-    updateGimbal(gimbalElem, xValue, yValue);
-}
-
-function resetGimbal(gimbalElem, gimbalIndex)
-{
-    const xChannel = gimbalChannels[gimbalIndex][0];
-    const yChannel = gimbalChannels[gimbalIndex][1];
-
-    const yValue = CHANNEL_MID_VALUE;
-    const xValue = CHANNEL_MID_VALUE;
-
-    channelValues[xChannel] = xValue;
-    channelValues[yChannel] = yValue;
-
-    updateGimbal(gimbalElem, xValue, yValue);
-}
-
-function resetControls()
-{
-    for (const gimbalIndex in gimbalChannels) {
-        const gimbalElem = gimbalElems.get(gimbalIndex);
-        resetGimbal(gimbalElem, gimbalIndex);
-    }
-}
-
-$(document).ready(function() {
-    $(".button-enable .btn").click(function() {
-        const shrinkHeight = $(".warning").height() + 25;
-
-        $(".warning").slideUp("short", function() {
-            const win = nw.Window.get();
-            win.resizeBy(0, -shrinkHeight);
-        });
-
-        enableTX = true;
-    });
-
-    gimbalElems = $(".control-gimbal");
-    sliderElems = $(".control-slider");
-
-    gimbalElems.each(function(gimbalIndex) {
-        const gimbalElem = $(this);
-        gimbalElem.on('mousemove', function(event) {
-            if (event.buttons == 1) {
-                handleGimbalMouseDrag(gimbalElem, gimbalIndex, event);
-            }
-        });
-        gimbalElem.on('click', function(event) {
-            handleGimbalMouseDrag(gimbalElem, gimbalIndex, event);
-        });
-        gimbalElem.on('dblclick', function() {
-            resetGimbal(gimbalElem, gimbalIndex);
-        });
-    });
-
-    $(".slider", sliderElems).each(function(sliderIndex) {
-        const slider = noUiSlider.create($(this).get(0), {
-            start: CHANNEL_MIN_VALUE,
-            range: {
-                min: CHANNEL_MIN_VALUE,
-                max: CHANNEL_MAX_VALUE
-            }
-        });
-
-        slider.on('slide', (values) => {
-            const value = Math.round(parseFloat(values[0]));
-            channelValues[sliderIndex + 4] = value;
-            $(".tooltip", this).text(value);
-        });
-
-        $(this).append('<div class="tooltip"></div>');
-
-        $(".tooltip", this).text(CHANNEL_MIN_VALUE);
-    });
-
-    localizeAxisNames();
-
-    resetControls();
-
-    setInterval(transmitChannels, 50);
-});
+mount(ReceiverMsp, { target: document.getElementById("app") });
