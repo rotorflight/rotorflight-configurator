@@ -18,6 +18,11 @@
     },
     {
       "type": "branch",
+      "name": "RF-2.2.x",
+      "path": "./RF-2.2.x/"
+    },
+    {
+      "type": "branch",
       "name": "feature-rf23-web-cache",
       "path": "./feature-rf23-web-cache/"
     },
