@@ -324,8 +324,9 @@
   </button>
 {/snippet}
 
-{#snippet numberField(id, label, help, key, opts, onchange, unit)}
-  <Field {id} {label} {unit}>
+<!-- expert: { changed } hides the field in basic mode, see Field.svelte -->
+{#snippet numberField(id, label, help, key, opts, onchange, unit, expert)}
+  <Field {id} {label} {unit} expert={!!expert} changed={expert?.changed}>
     {#snippet tooltip()}
       {#if help}
         <Tooltip {help} />
@@ -469,6 +470,8 @@
             "tailMotorCenterTrim",
             { min: -50, max: 50, step: 0.1 },
             applyConfig,
+            undefined,
+            { changed: FC.MIXER_CONFIG.tail_center_trim !== 0 },
           )}
         {:else}
           {@render numberField(
@@ -499,6 +502,8 @@
             "tailMotorMinYaw",
             { min: 0, max: 200, step: 1 },
             applyInput3,
+            undefined,
+            { changed: FC.MIXER_INPUTS[3].min !== -1250 },
           )}
           {@render numberField(
             "mixer-tail-motor-max",
@@ -507,6 +512,8 @@
             "tailMotorMaxYaw",
             { min: 0, max: 200, step: 1 },
             applyInput3,
+            undefined,
+            { changed: FC.MIXER_INPUTS[3].max !== 1250 },
           )}
           {@render numberField(
             "mixer-tail-motor-idle",
@@ -515,6 +522,8 @@
             "tailMotorIdle",
             { min: 0, max: 25, step: 0.1 },
             applyConfig,
+            undefined,
+            { changed: FC.MIXER_CONFIG.tail_motor_idle !== 0 },
           )}
         {:else}
           {@render numberField(
@@ -562,6 +571,8 @@
           "collGeoCorrection",
           { min: -25, max: 25, step: 0.2 },
           applyConfig,
+          undefined,
+          { changed: FC.MIXER_CONFIG.coll_geo_correction !== 0 },
         )}
         {@render numberField(
           "mixer-cyclic-limit",
@@ -594,6 +605,8 @@
           "swashPhase",
           { min: -180, max: 180, step: 0.1 },
           applyConfig,
+          undefined,
+          { changed: FC.MIXER_CONFIG.swash_phase !== 0 },
         )}
         {#if hasTiltCorrection}
           {@render numberField(
@@ -604,6 +617,7 @@
             { min: -100, max: 100, step: 1 },
             applyConfig,
             "%",
+            { changed: FC.MIXER_CONFIG.coll_tilt_correction_pos !== 0 },
           )}
           {@render numberField(
             "mixer-tilt-neg",
@@ -613,6 +627,7 @@
             { min: -100, max: 100, step: 1 },
             applyConfig,
             "%",
+            { changed: FC.MIXER_CONFIG.coll_tilt_correction_neg !== 10 },
           )}
         {/if}
       </Section>
