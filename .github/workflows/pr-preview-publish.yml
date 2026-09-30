@@ -105,6 +105,10 @@ jobs:
           fi
           echo "deploy=$DEPLOY" >> "$GITHUB_OUTPUT"
 
+          # What the landing page shows for this preview, taken from the API
+          # rather than the artifact.
+          jq '{number, branch: .head.ref, title, url: .html_url, date: (now | todate)}'             <<< "$PR_JSON" > "$RUNNER_TEMP/pr-info.json"
+
       - name: Checkout source
         if: steps.verify.outputs.deploy == 'true'
         uses: actions/checkout@v6
@@ -153,6 +157,9 @@ jobs:
             rm -rf "$DEPLOY_PATH"
             mkdir -p "$DEPLOY_PATH"
             cp -R ../preview/site/. "$DEPLOY_PATH/"
+            # Beside the build, not in it, so nothing the PR built can
+            # overwrite it.
+            cp "$RUNNER_TEMP/pr-info.json" "$DEPLOY_PATH.json"
 
             # Landing page + its logos, then the build index it reads.
             cp -R ../.github/pages/. .
