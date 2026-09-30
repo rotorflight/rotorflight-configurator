@@ -2,32 +2,119 @@ import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
+import { connectWebBluetooth, disconnectWebBluetooth, loadBluetoothPorts, requestBluetoothPort, writeWebBluetooth } from "@/js/protocols/WebBluetooth.js";
+import { connectWebSerial, disconnectWebSerial, loadWebSerialPorts, requestWebSerialPort, writeWebSerial } from "@/js/protocols/WebSerial.js";
 import { checkChromeRuntimeError } from "@/js/utils/common.js";
+
+// Port picker entries that ask the browser for access to a device, rather
+// than being a device (see PortHandler.updatePortSelect).
+const WEB_PICKER_REQUEST_VALUES = ['requestserial', 'requestbluetooth', 'DFU'];
 
 export const serial = {
     connected:      false,
     connectionId:   false,
     openCanceled:   false,
+    openPending:    false,
     bitrate:        0,
     bytesReceived:  0,
     bytesSent:      0,
     failed:         0,
-    connectionType: 'serial', // 'serial' or 'tcp' or 'virtual'
+    connectionType: 'serial', // 'serial', 'tcp', 'virtual' or (web only) 'bluetooth'
     connectionIP:   '127.0.0.1',
     connectionPort: 5761,
+
+    // Web backend state (see protocols/WebSerial.js and WebBluetooth.js)
+    webSerialPort:  false,
+    webSerialReader: false,
+    webSerialWriter: false,
+    webSerialReadableClosed: false,
+    webSerialPorts: [],
+    bluetoothPorts: [],
+    bleDevice: false,
+    bleServer: false,
+    bleService: false,
+    bleDeviceProfile: false,
+    bleWriteCharacteristic: false,
+    bleReadCharacteristic: false,
+    // Why the most recent connect() failed to open its port: 'notFound' (the
+    // device isn't there any more) or 'openFailed' (it's there but the OS
+    // refused to open it, in practice almost always because another program
+    // or browser tab holds it). Null after a successful open.
+    lastOpenError:  null,
+
+    // The message to show for the last failed open, so callers can say what
+    // to do about it (usually: close whatever else has the port).
+    openFailureMessage: function () {
+        switch (this.lastOpenError) {
+            case 'openFailed': return i18n.getMessage('serialPortOpenFailBusy');
+            case 'notFound': return i18n.getMessage('serialPortOpenFailNotFound');
+            default: return i18n.getMessage('serialPortOpenFail');
+        }
+    },
 
     transmitting:   false,
     outputBuffer:   [],
 
     connect: function (path, options, callback) {
         const self = this;
+        self.lastOpenError = null;
+
+        // The picker's "add device" entries only mean something when a user
+        // picks them (serial_backend.js handles that). Reaching here with one
+        // selected -- e.g. from auto-connect -- must not fall through to a
+        // path that could pop a browser device chooser unprompted.
+        if (__BACKEND__ === "web" && WEB_PICKER_REQUEST_VALUES.includes(path)) {
+            console.warn(`serial.connect: refusing to connect to picker entry "${path}"`);
+            callback?.(false);
+            return;
+        }
+
+        // Tracks that an open is in flight, so disconnect() only raises
+        // openCanceled when there is something to cancel.
+        self.openPending = true;
+        const done = (openInfo) => {
+            self.openPending = false;
+            // A cancel only applies to the attempt it was raised against.
+            self.openCanceled = false;
+            callback?.(openInfo);
+        };
+
         const testUrl = path.match(/^tcp:\/\/([A-Za-z0-9.-]+)(?::(\d+))?$/);
         if (testUrl) {
-            self.connectTcp(testUrl[1], testUrl[2], options, callback);
+            self.connectTcp(testUrl[1], testUrl[2], options, done);
         } else if (path === 'virtual') {
-            self.connectVirtual(callback);
+            self.connectVirtual(done);
+        } else if (__BACKEND__ === "web" && path.startsWith('bluetooth_')) {
+            connectWebBluetooth(self, path, done);
+        } else if (__BACKEND__ === "web") {
+            connectWebSerial(self, path, options, done);
         } else {
-            self.connectSerial(path, options, callback);
+            self.connectSerial(path, options, done);
+        }
+    },
+    loadWebSerialPorts: function () {
+        return loadWebSerialPorts(this);
+    },
+    requestWebSerialPort: function () {
+        return requestWebSerialPort(this);
+    },
+    loadBluetoothPorts: function () {
+        return loadBluetoothPorts(this);
+    },
+    requestBluetoothPort: function () {
+        return requestBluetoothPort(this);
+    },
+    // Web Bluetooth event handlers. They use `serial` rather than `this`,
+    // since the browser calls them with the Bluetooth object as `this`.
+    handleBluetoothNotification: function (event) {
+        const dataView = event.target.value;
+        const buffer = dataView.buffer.slice(dataView.byteOffset, dataView.byteOffset + dataView.byteLength);
+        serial.onReceive.dispatch({ connectionId: serial.connectionId, data: buffer });
+    },
+    handleBluetoothDisconnect: function () {
+        if (serial.connected) {
+            console.log(`${serial.connectionType}: Bluetooth device disconnected externally`);
+            serial.errorHandler('device_lost', 'receive');
         }
     },
     connectSerial: function (path, options, callback) {
@@ -141,6 +228,7 @@ export const serial = {
                     self.openCanceled = false;
                 } else {
                     console.log(`${self.connectionType}: failed to open serial port`);
+                    self.lastOpenError = 'openFailed';
                 }
                 if (callback) {
                     callback(false);
@@ -227,7 +315,11 @@ export const serial = {
             for (let i = (self.onReceiveError.listeners.length - 1); i >= 0; i--) {
                 self.onReceiveError.removeListener(self.onReceiveError.listeners[i]);
             }
-            if (self.connectionType !== 'virtual') {
+            if (__BACKEND__ === "web" && self.webSerialPort) {
+                disconnectWebSerial(self, callback);
+            } else if (__BACKEND__ === "web" && self.bleDevice) {
+                disconnectWebBluetooth(self, callback);
+            } else if (self.connectionType !== 'virtual') {
                 if (self.connectionType === 'tcp') {
                     chrome.sockets.tcp.disconnect(self.connectionId, function () {
                         checkChromeRuntimeError();
@@ -255,13 +347,32 @@ export const serial = {
                     callback(true);
                 }
             }
-        } else {
-            // connection wasn't opened, so we won't try to close anything
+        } else if (self.openPending) {
+            // connection wasn't opened yet, so we won't try to close anything
             // instead we will rise canceled flag which will prevent connect from continueing further after being canceled
             self.openCanceled = true;
         }
+        // Otherwise nothing is open or opening (e.g. cleanup after an open
+        // that already failed). Raising openCanceled here used to leave it
+        // stuck on, so the next open was treated as cancelled and closed
+        // straight away.
     },
     getDevices: function (callback) {
+        if (__BACKEND__ === "web") {
+            // Only devices the user has already granted this site access to.
+            // 'usb' covers Chrome on Android, which has no Web Serial but
+            // reaches CDC-ACM flight controllers through the WebUSB polyfill.
+            const serialPorts = ('serial' in navigator || 'usb' in navigator) ? this.loadWebSerialPorts() : Promise.resolve([]);
+            const bluetoothPorts = 'bluetooth' in navigator ? this.loadBluetoothPorts() : Promise.resolve([]);
+
+            Promise.all([serialPorts, bluetoothPorts])
+                .then(([sPorts, btPorts]) =>
+                    callback([...sPorts, ...btPorts].map((p) => ({ path: p.path, displayName: p.displayName }))),
+                )
+                .catch(() => callback([]));
+            return;
+        }
+
         chrome.serial.getDevices(function (devices_array) {
             const devices = [];
             devices_array.forEach(function (device) {
@@ -275,6 +386,11 @@ export const serial = {
         });
     },
     getInfo: function (callback) {
+        if (__BACKEND__ === "web") {
+            callback({ connectionId: this.connectionId, bitrate: this.bitrate, paused: false });
+            return;
+        }
+
         const chromeType = (this.connectionType === 'serial') ? chrome.serial : chrome.sockets.tcp;
         chromeType.getInfo(this.connectionId, callback);
     },
@@ -294,6 +410,38 @@ export const serial = {
                         error: 'undefined',
                     });
                 }
+                return;
+            }
+
+            if (__BACKEND__ === "web" && self.connectionType === 'virtual') {
+                // Nothing to write to: the Virtual FC answers MSP itself.
+                _callback?.({ bytesSent: 0 });
+                self.outputBuffer.shift();
+
+                if (self.outputBuffer.length) {
+                    _send();
+                } else {
+                    self.transmitting = false;
+                }
+                return;
+            }
+
+            if (__BACKEND__ === "web" && (self.webSerialWriter || self.bleWriteCharacteristic)) {
+                const writeFn = self.webSerialWriter ? writeWebSerial : writeWebBluetooth;
+                writeFn(self, _data).then((bytesSent) => {
+                    self.bytesSent += bytesSent;
+                    _callback?.({ bytesSent });
+                    self.outputBuffer.shift();
+
+                    if (self.outputBuffer.length) {
+                        _send();
+                    } else {
+                        self.transmitting = false;
+                    }
+                }).catch((error) => {
+                    self.errorHandler(error.name || 'undefined', 'send');
+                    _callback?.({ bytesSent: 0, error: error.name || 'undefined' });
+                });
                 return;
             }
 
@@ -358,11 +506,19 @@ export const serial = {
         listeners: [],
 
         addListener: function (function_reference) {
+            if (__BACKEND__ === "web") {
+                this.listeners.push(function_reference);
+                return;
+            }
             const chromeType = (serial.connectionType === 'serial') ? chrome.serial : chrome.sockets.tcp;
             chromeType.onReceive.addListener(function_reference);
             this.listeners.push(function_reference);
         },
         removeListener: function (function_reference) {
+            if (__BACKEND__ === "web") {
+                this.listeners = this.listeners.filter((listener) => listener !== function_reference);
+                return;
+            }
             const chromeType = (serial.connectionType === 'serial') ? chrome.serial : chrome.sockets.tcp;
             for (let i = (this.listeners.length - 1); i >= 0; i--) {
                 if (this.listeners[i] == function_reference) {
@@ -372,17 +528,30 @@ export const serial = {
                     break;
                 }
             }
-        }
+        },
+        // Web backend only: protocols/Web*.js deliver events through this.
+        dispatch: function (info) {
+            serial.bytesReceived += info.data.byteLength;
+            this.listeners.forEach((listener) => listener(info));
+        },
     },
     onReceiveError: {
         listeners: [],
 
         addListener: function (function_reference) {
+            if (__BACKEND__ === "web") {
+                this.listeners.push(function_reference);
+                return;
+            }
             const chromeType = (serial.connectionType === 'serial') ? chrome.serial : chrome.sockets.tcp;
             chromeType.onReceiveError.addListener(function_reference);
             this.listeners.push(function_reference);
         },
         removeListener: function (function_reference) {
+            if (__BACKEND__ === "web") {
+                this.listeners = this.listeners.filter((listener) => listener !== function_reference);
+                return;
+            }
             const chromeType = (serial.connectionType === 'serial') ? chrome.serial : chrome.sockets.tcp;
             for (let i = (this.listeners.length - 1); i >= 0; i--) {
                 if (this.listeners[i] == function_reference) {
@@ -392,7 +561,11 @@ export const serial = {
                     break;
                 }
             }
-        }
+        },
+        // Web backend only: protocols/Web*.js deliver events through this.
+        dispatch: function (info) {
+            this.listeners.forEach((listener) => listener(info));
+        },
     },
     emptyOutputBuffer: function () {
         this.outputBuffer = [];

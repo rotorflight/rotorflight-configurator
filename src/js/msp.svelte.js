@@ -1,6 +1,7 @@
 import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { serial } from "@/js/serial.js";
+import { handleVirtualMessage } from "@/js/virtual_fc.js";
 
 let packet_error = $state(0);
 
@@ -330,8 +331,9 @@ export const MSP = {
     },
     send_message: function (code, data, callback_sent, callback_msp, doCallbackOnError) {
         if (CONFIGURATOR.virtualMode) {
+            const response = handleVirtualMessage(code, data);
             if (callback_msp) {
-                callback_msp();
+                callback_msp(response);
             }
             return;
         }

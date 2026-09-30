@@ -11,6 +11,8 @@
   let width = $state();
   let height = $state();
   let error = $state(false);
+  let lastWidth = 0;
+  let lastHeight = 0;
 
   let o = $state({});
 
@@ -34,7 +36,6 @@
     }
 
     renderer.setPixelRatio(globalThis.devicePixelRatio * 4);
-    renderer.setSize(width, height);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     o.scene = new THREE.Scene();
     o.modelWrapper = new THREE.Object3D();
@@ -85,6 +86,17 @@
     if (!renderer) {
       return;
     }
+
+    if (!Number.isFinite(w) || !Number.isFinite(h) || w <= 0 || h <= 0) {
+      return;
+    }
+
+    if (w === lastWidth && h === lastHeight) {
+      return;
+    }
+
+    lastWidth = w;
+    lastHeight = h;
 
     renderer.setSize(w, h);
     o.camera.aspect = w / h;
@@ -155,7 +167,7 @@
     height: 100%;
 
     :global(html[data-theme="light"]) & {
-      background-color: var(--color-neutral-100);
+      background-color: var(--color-neutral-200);
       background-image:
         linear-gradient(
           to right,
@@ -223,7 +235,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: var(--mutedText);
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
   }
 </style>

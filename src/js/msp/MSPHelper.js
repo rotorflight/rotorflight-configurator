@@ -554,7 +554,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 FC.MOTOR_CONFIG.minthrottle = data.readU16();
                 FC.MOTOR_CONFIG.maxthrottle = data.readU16();
                 FC.MOTOR_CONFIG.mincommand = data.readU16();
-                data.readU8(); // compat: motor count
+                FC.MOTOR_CONFIG.motor_count_blheli = data.readU8(); // compat: BLHeliSuite motor count
                 data.readU8(); // compat: motor poles
                 FC.MOTOR_CONFIG.use_dshot_telemetry = (data.readU8() != 0);
                 FC.MOTOR_CONFIG.motor_pwm_protocol = data.readU8();
@@ -1895,7 +1895,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
             dataHandler.callbacks.splice(i, 1);
             if (!crcError || callbackOnError) {
                 // fire callback
-                if (callback) callback({'command': code, 'data': data, 'length': data.byteLength, 'crcError': crcError});
+                if (callback) callback({'command': code, 'data': data, 'length': data.byteLength, 'crcError': crcError, 'unsupported': !!dataHandler.unsupported});
             } else {
                 console.warn(`code: ${code} - crc failed. No callback`);
             }
@@ -3146,12 +3146,8 @@ MspHelper.prototype.requestRpmFilterBanks = async function()
 
 MspHelper.prototype.setBatteryProfile = async function(index)
 {
-    if (CONFIGURATOR.virtualMode) {
-        FC.BATTERY_STATE.batteryProfile = index;
-    } else {
-        const buffer = [index];
-        await MSP.promise(MSPCodes.MSP_SET_BATTERY_PROFILE, buffer);
-    }
+    const buffer = [index];
+    await MSP.promise(MSPCodes.MSP_SET_BATTERY_PROFILE, buffer);
 };
 
 export let mspHelper = new MspHelper();
