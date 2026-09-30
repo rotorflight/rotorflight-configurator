@@ -265,6 +265,66 @@ function isEligibleToAdd(option, configuredOptions) {
 }
 
 /**
+ * Finds motors/servos stranded above a gap in their own numbering.
+ *
+ * isEligibleToAdd above stops a gap being created from below -- S5
+ * can't be *assigned* until S1-S4 all are. Nothing stops one being
+ * created from above, though: vacating S5 (reassigning its pin to a
+ * motor, say) while S6 stays put is an ordinary edit, and leaves a
+ * hole the add-side rule would never have allowed.
+ *
+ * That matters because the firmware doesn't skip the hole, it stops
+ * at it. servoInit() walks ioTags from index 0 and breaks on the
+ * first unassigned one, then takes servoCount from however far it
+ * got -- so a gap at S5 doesn't cost you S5, it costs you S5 and
+ * everything above it. Worse, the loss is silent: servoOutput[] is
+ * pre-filled with each servo's mid value and the slots past
+ * servoCount simply never get written again, so a stranded output
+ * reports a steady centre reading exactly like a live one that
+ * happens to be centred. Mixer rules pointed at it look fine and do
+ * nothing. Motors work the same way (motorInit()/getMotorCount()).
+ *
+ * @param {string[]} configuredOptions - Option keys currently claimed (e.g. ["M1","S1","S2","S6"]).
+ * @returns {{prefix: string, missing: string[], stranded: string[]}[]} One entry per affected prefix, empty when the numbering is contiguous.
+ */
+export function findSequenceGaps(configuredOptions) {
+  const gaps = [];
+
+  for (const prefix of ["M", "S"]) {
+    const indices = configuredOptions
+      .map((option) => option.match(/^([A-Za-z]+)(\d+)$/))
+      .filter((match) => match && match[1] === prefix)
+      .map((match) => Number(match[2]));
+
+    if (indices.length === 0) continue;
+
+    const highest = Math.max(...indices);
+    const missing = [];
+
+    for (let i = 1; i < highest; i++) {
+      if (!indices.includes(i)) missing.push(i);
+    }
+
+    if (missing.length === 0) continue;
+
+    // Everything above the *first* hole is what the firmware drops,
+    // not just the entries adjacent to it.
+    const firstHole = missing[0];
+
+    gaps.push({
+      prefix,
+      missing: missing.map((i) => `${prefix}${i}`),
+      stranded: indices
+        .filter((i) => i > firstHole)
+        .sort((a, b) => a - b)
+        .map((i) => `${prefix}${i}`),
+    });
+  }
+
+  return gaps;
+}
+
+/**
  * Returns the options that could be offered by "+ Add": every option
  * this board's default structure actually reports a pin for — every
  * physical connector this board actually has — except ones already

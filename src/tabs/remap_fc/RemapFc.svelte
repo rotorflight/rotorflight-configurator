@@ -41,6 +41,7 @@
     TABLE_OPTION_KEYS,
     buildChangeCommands,
     buildRowsForOptions,
+    findSequenceGaps,
     getAddableOptions,
     getRowSelectableOptions,
     isGenericBoardDesign,
@@ -741,6 +742,13 @@
     ]),
   ]);
 
+  // Motors/servos left stranded above a hole in their own numbering.
+  // The add-side rule (isEligibleToAdd) can't catch this: the hole
+  // gets made by vacating something in the middle, not by assigning
+  // out of order. Blocks Save, because the firmware silently drops
+  // every output above the hole -- see findSequenceGaps.
+  let sequenceGaps = $derived(hasRead ? findSequenceGaps(claimedOptions) : []);
+
   // Everything still addable via "+ Add" -- every default option not
   // already shown a row, minus reservedPins and hiddenPins.
   let addablePool = $derived(
@@ -1340,10 +1348,14 @@
   <button
     class="btn"
     onclick={handleLoadChanges}
-    disabled={running || pinConflictResult.unresolvedFeatures.length > 0}
+    disabled={running ||
+      pinConflictResult.unresolvedFeatures.length > 0 ||
+      sequenceGaps.length > 0}
     title={pinConflictResult.unresolvedFeatures.length > 0
       ? $i18n.t("remapFcLoadChangesBlocked")
-      : ""}
+      : sequenceGaps.length > 0
+        ? $i18n.t("remapFcSequenceGapBlocked")
+        : ""}
   >
     {running ? $i18n.t("remapFcApplying") : $i18n.t("buttonSaveReboot")}
   </button>
@@ -1825,6 +1837,32 @@
   <!-- Shown once the current pin assignment has a timer/DMA clash
        reallocation alone can't resolve -- above Pending Changes,
        since "Load Changes" is blocked while this is up. -->
+  <!-- A motor/servo left stranded above a hole in its own numbering.
+       Blocks "Load Changes" like the pin-conflict card does, because
+       the firmware stops at the first unassigned output instead of
+       skipping it -- so applying this would quietly drop everything
+       above the hole (see findSequenceGaps). -->
+  {#if mcuSupported && sequenceGaps.length}
+    <div class="pin-conflict-card">
+      <Section>
+        {#snippet header()}
+          <div class="header">
+            <span class="title warning-title"
+              >{$i18n.t("remapFcSequenceGapHeading")}</span
+            >
+          </div>
+        {/snippet}
+
+        <p class="allocation-warning">
+          {$i18n.t("remapFcSequenceGapWarning", {
+            missing: sequenceGaps.flatMap((gap) => gap.missing).join(", "),
+            stranded: sequenceGaps.flatMap((gap) => gap.stranded).join(", "),
+          })}
+        </p>
+      </Section>
+    </div>
+  {/if}
+
   {#if mcuSupported && pinConflictResult.unresolvedFeatures.length}
     <div class="pin-conflict-card">
       <Section>
