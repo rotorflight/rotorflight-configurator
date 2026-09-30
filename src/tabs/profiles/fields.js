@@ -73,6 +73,55 @@ export const PID_PROFILE_FIELDS = {
   rescueMaxCollective: { ...n(0, 100), scale: 10 },
 };
 
+/**
+ * Firmware defaults (src/main/pg/pid.c, in FC units) of the expert settings,
+ * so a changed value stays visible in basic mode. Keyed like the form, except
+ * error_decay_time_ground. yawFFImpulseDecay is from firmware before the yaw
+ * inertia precomp (API < 12.8).
+ */
+export const EXPERT_DEFAULTS = {
+  gyroCutoffRoll: 50,
+  gyroCutoffPitch: 50,
+  gyroCutoffYaw: 100,
+  dtermCutoffRoll: 15,
+  dtermCutoffPitch: 15,
+  dtermCutoffYaw: 20,
+  btermCutoffRoll: 15,
+  btermCutoffPitch: 15,
+  btermCutoffYaw: 20,
+  errorLimitRoll: 45,
+  errorLimitPitch: 45,
+  errorLimitYaw: 60,
+  offsetLimitRoll: 90,
+  offsetLimitPitch: 90,
+  offsetGainRoll: 50,
+  offsetGainPitch: 50,
+  error_decay_time_ground: 25,
+  error_decay_time_cyclic: 250,
+  error_decay_limit_cyclic: 12,
+  itermRelaxType: 2,
+  itermRelaxCutoffRoll: 10,
+  itermRelaxCutoffPitch: 10,
+  itermRelaxCutoffYaw: 10,
+  pitchFFCollectiveGain: 0,
+  cyclicCrossCouplingGain: 50,
+  cyclicCrossCouplingRatio: 0,
+  cyclicCrossCouplingCutoff: 25,
+  yaw_inertia_precomp_gain: 0,
+  yaw_inertia_precomp_cutoff: 25,
+  yawFFImpulseGain: 0,
+  yawFFImpulseDecay: 25,
+  govTTAGain: 0,
+  govTTALimit: 20,
+  rescueExitTime: 5,
+  rescueLevelGain: 100,
+  rescueFlipGain: 200,
+  rescueMaxAccel: 3000,
+  rescueAltitudePGain: 20,
+  rescueAltitudeIGain: 20,
+  rescueAltitudeDGain: 10,
+};
+
 export function toDisplay(key, value) {
   const scale = PID_PROFILE_FIELDS[key]?.scale ?? 1;
   return value / scale;
