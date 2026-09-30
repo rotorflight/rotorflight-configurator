@@ -1,5 +1,25 @@
 # Agent notes
 
+## Version numbers change only at release
+
+The MSP API version and the firmware/configurator version numbers are bumped
+only when a release is made, never in feature or fix PRs. This keeps version
+churn to a minimum.
+
+- Gate new MSP fields on the API version of the upcoming firmware release. If
+  a constant for it already exists in `src/js/configurator.svelte.js` (e.g.
+  `API_VERSION_12_10`) and that version is not released yet, reuse it instead
+  of adding a new one.
+- Add a new `API_VERSION_*` constant and move `API_VERSION_RTFL_MAX` (and the
+  Virtual firmware dropdown in `virtualFirmwareVersions`) only together with
+  a firmware release that bumps `API_VERSION_MAJOR` / `API_VERSION_MINOR` in
+  `src/main/msp/msp_protocol.h`.
+- Do not change `version` in `package.json` outside a release.
+
+Firmware parameter group (PG) versions are separate: the firmware bumps a PG's
+version whenever the memory layout of its struct changes. That does not by
+itself change the MSP API version or require configurator changes.
+
 ## Keep the virtual FC in sync with the firmware
 
 The "Virtual" port connects to a simulated flight controller implemented in
