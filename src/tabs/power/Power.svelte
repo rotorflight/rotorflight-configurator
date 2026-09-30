@@ -414,8 +414,6 @@
           />
         </Field>
         <Field
-          expert
-          changed={FC.BATTERY_CONFIG.vbatmaxcellvoltage !== 4.3}
           id="power-max-cell-voltage"
           label="powerBatteryMaximumCellVoltage"
         >
@@ -597,6 +595,7 @@
               </div>
               {#if config?.sensorType === 1}
                 <Field
+                  expert
                   id={`power-vscale-${meter.id}`}
                   label="powerVoltageScale"
                 >
@@ -645,6 +644,7 @@
               </div>
               {#if config?.sensorType === 1}
                 <Field
+                  expert
                   id={`power-ascale-${meter.id}`}
                   label="powerAmperageScale"
                 >
