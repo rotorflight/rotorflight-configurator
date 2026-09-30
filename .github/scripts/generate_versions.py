@@ -9,9 +9,8 @@
 #   master/            -> type "master" (pinned alongside stable)
 #   release/<version>/ -> type "release", one entry per subdirectory
 #   snapshot/<version>/-> type "snapshot", one entry per subdirectory
-#   pr/<number>/       -> type "pr", one entry per subdirectory (no workflow
-#                          populates this yet, but the picker already
-#                          understands the type so it's ready when one does)
+#   pr/<number>/       -> type "pr", one entry per subdirectory (PR
+#                          previews, see pr-preview-publish.yml)
 #   logos/             -> the landing page's own assets, never a build
 #   anything else with its own index.html -> type "branch" (feature/**,
 #                          bugfix/**, experiment/** deploys, etc.)
