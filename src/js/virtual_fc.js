@@ -4,6 +4,12 @@ import { Beepers } from "@/js/Beepers.js";
 import { API_VERSION_12_9, CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
+import {
+  BUS_SERVO_OFFSET,
+  clampServoConfig,
+  firmwareLimitsTravel,
+} from "@/js/servoLimits.js";
+import { getManufacturer } from "@/tabs/esc_programming/manufacturers/index.js";
 
 // Sizes and defaults below mirror rotorflight-firmware (src/main/pg/*.c and
 // src/main/msp/msp.c) so the virtual FC holds the same shape of data a real
@@ -108,6 +114,31 @@ let currentPidProfile = 0;
 let currentRateProfile = 0;
 let pidProfiles = [];
 let rateProfiles = [];
+
+let virtualEscManufacturerId = null;
+
+// Per-manufacturer "EEPROM" for the simulated ESC: seeded from simResponse, then updated by
+// MSP_SET_ESC_PARAMETERS writes so a save is actually reflected on the next read. Without this,
+// every read always echoed the pristine simResponse, making saves look like they silently
+// reverted to the values the form first loaded.
+const virtualEscBuffers = new Map();
+
+export function setVirtualEscManufacturer(id) {
+  virtualEscManufacturerId = id;
+}
+
+function currentVirtualEscBuffer() {
+  if (!virtualEscManufacturerId) return undefined;
+  if (!virtualEscBuffers.has(virtualEscManufacturerId)) {
+    const manufacturer = getManufacturer(virtualEscManufacturerId);
+    if (!manufacturer?.simResponse) return undefined;
+    virtualEscBuffers.set(
+      virtualEscManufacturerId,
+      Uint8Array.from(manufacturer.simResponse),
+    );
+  }
+  return virtualEscBuffers.get(virtualEscManufacturerId);
+}
 
 function hasAcc() {
   return (FC.CONFIG.activeSensors & 1) !== 0;
@@ -374,6 +405,17 @@ export function handleVirtualMessage(code, data) {
       break;
     }
 
+    // Like the FC (4.6.0 on), cut center + min/max back into the signal
+    // range. The tab sees the result on its next MSP_SERVO_CONFIGURATIONS poll.
+    case MSPCodes.MSP_SET_SERVO_CONFIGURATION: {
+      const index = bytes[0];
+      const config = FC.SERVO_CONFIG[index];
+      if (config && firmwareLimitsTravel(FC.CONFIG.apiVersion)) {
+        clampServoConfig(config, index >= BUS_SERVO_OFFSET);
+      }
+      break;
+    }
+
     case MSPCodes.MSP_SET_RESET_CURR_PID:
       pidProfiles[currentPidProfile] = defaultPidProfileBank();
       loadPidProfile(currentPidProfile);
@@ -431,6 +473,21 @@ export function handleVirtualMessage(code, data) {
 
     case MSPCodes.MSP_RESET_CONF:
       applyVirtualConfig();
+      break;
+
+    // Lets the ESC Programming tab be developed/tested without hardware
+    case MSPCodes.MSP_ESC_PARAMETERS: {
+      const buffer = currentVirtualEscBuffer();
+      if (buffer) {
+        return reply(code, Uint8Array.from(buffer).buffer);
+      }
+      break;
+    }
+
+    case MSPCodes.MSP_SET_ESC_PARAMETERS:
+      if (virtualEscManufacturerId && data) {
+        virtualEscBuffers.set(virtualEscManufacturerId, Uint8Array.from(bytes));
+      }
       break;
   }
 

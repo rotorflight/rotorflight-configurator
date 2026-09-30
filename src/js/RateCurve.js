@@ -1,4 +1,12 @@
-import { TABS } from "@/js/tabs/tabs.js";
+export const RATES_TYPE = {
+    NONE:        0,
+    BETAFLIGHT:  1,
+    RACEFLIGHT:  2,
+    KISS:        3,
+    ACTUAL:      4,
+    QUICKRATES:  5,
+    ROTORFLIGHT: 6,
+};
 
 const midRc = 1500;
 const maxRc = 2000;
@@ -145,27 +153,27 @@ RateCurve.prototype.rcCommandRawToDegreesPerSecond = function (rcData, ratesType
         const rcCommandfAbs = Math.abs(rcCommandf);
 
         switch(ratesType) {
-            case TABS.rates.RATES_TYPE.BETAFLIGHT:
+            case RATES_TYPE.BETAFLIGHT:
                 angleRate = this.getBetaflightRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo, superExpoActive, limit);
                 break;
 
-            case TABS.rates.RATES_TYPE.RACEFLIGHT:
+            case RATES_TYPE.RACEFLIGHT:
                 angleRate = this.getRaceflightRates(rcCommandf, rate, rcRate, rcExpo);
                 break;
 
-            case TABS.rates.RATES_TYPE.KISS:
+            case RATES_TYPE.KISS:
                 angleRate = this.getKISSRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo);
                 break;
 
-            case TABS.rates.RATES_TYPE.ACTUAL:
+            case RATES_TYPE.ACTUAL:
                 angleRate = this.getActualRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo);
                 break;
 
-            case TABS.rates.RATES_TYPE.QUICKRATES:
+            case RATES_TYPE.QUICKRATES:
                 angleRate = this.getQuickRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo);
                 break;
 
-            case TABS.rates.RATES_TYPE.ROTORFLIGHT:
+            case RATES_TYPE.ROTORFLIGHT:
                 angleRate = this.getRotorflightRates(rcCommandf, rcCommandfAbs, rate, rcRate, rcExpo / 100);
                 break;
 

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotorflight Configurator</title>
+  <meta name="description" content="Rotorflight Configurator — Open source flight control configuration for RC helicopters, in your browser.">
+  <meta name="theme-color" content="#0e1012">
+  <link rel="icon" type="image/png" href="logos/rf_icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap">
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Same hues as the configurator's own palette (src/css/app.css):
+       accent hue 203 (Rotorflight blue, #007cc7), neutrals hue 208. */
+    :root {
+      --blue:        #007cc7;
+      --blue-dark:   #005f99;
+      --blue-light:  #3fb0ff;
+      --blue-rgb:    0, 124, 199;
+      --bg:          hsl(208, 12%, 6%);
+      --bg-deep:     hsl(208, 12%, 4.5%);
+      --bg-footer:   hsl(208, 12%, 3.5%);
+      --bg-card:     hsl(208, 10%, 10%);
+      --text:        #ffffff;
+      --text-muted:  hsl(208, 9%, 66%);
+      --font: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Navigation ───────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      height: 71px;
+      background: hsla(208, 12%, 6%, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-logo { display: flex; align-items: center; }
+
+    .nav-logo img {
+      height: 22px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: rgb(236, 240, 244);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--blue-light); }
+
+    .nav-cta {
+      background: var(--blue);
+      color: #fff !important;
+      padding: 8px 20px;
+      border-radius: 4px;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--blue-dark) !important; }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 150px 24px 72px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(var(--blue-rgb), 0.16) 0%, transparent 70%),
+        linear-gradient(180deg, var(--bg) 0%, hsl(208, 12%, 7.5%) 100%);
+      z-index: 0;
+    }
+
+    .hero-heli-bg {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Sit behind the headline rather than the middle of the whole hero
+         (the nav-clearing top padding pushes the text below centre). */
+      padding-top: 70px;
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* The heli only fills part of its SVG canvas, so it needs a large box. */
+    .hero-heli-bg img {
+      width: 80%;
+      max-width: 900px;
+      filter: brightness(0) invert(1);
+    }
+
+    /* Background layers are excluded here: a bare `.hero > *` has the same
+       specificity as `.hero-bg`, so it would win and pull them into the flow. */
+    .hero > :not(.hero-bg):not(.hero-heli-bg) { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 20px;
+      padding: 6px 16px;
+      border: 1px solid rgba(var(--blue-rgb), 0.45);
+      border-radius: 100px;
+      display: inline-block;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--blue-light);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 44px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hero-note {
+      margin-top: 28px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      max-width: 560px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 30px;
+      border-radius: 5px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.2s, opacity 0.2s, background 0.2s;
+      border: none;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: var(--blue-dark); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.04); }
+
+    /* ── Section Layout ───────────────────────────────────────── */
+    section { padding: 80px 24px; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      color: var(--text-muted);
+      max-width: 560px;
+      margin-bottom: 52px;
+    }
+
+    /* ── Version Cards ────────────────────────────────────────── */
+    #versions {
+      background: var(--bg-deep);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Pinned top row: Stable only */
+    .pinned-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+
+    .versions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .versions-empty {
+      grid-column: 1 / -1;
+      padding: 32px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 10px;
+    }
+
+    /* Card base */
+    .version-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 26px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .version-card:hover {
+      border-color: rgba(var(--blue-rgb), 0.55);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.45);
+    }
+
+    /* Pinned card variant — larger */
+    .pinned-row .version-card {
+      padding: 32px 34px;
+      gap: 16px;
+    }
+
+    .version-card.featured {
+      border-color: rgba(var(--blue-rgb), 0.4);
+      background: linear-gradient(140deg, hsl(203, 60%, 11%) 0%, var(--bg-card) 55%);
+    }
+
+    .version-card.featured::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-light), var(--blue));
+    }
+
+    /* Badges */
+    .version-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      align-self: flex-start;
+    }
+
+    .badge-stable {
+      background: rgba(var(--blue-rgb), 0.2);
+      color: #7cc8ff;
+      border: 1px solid rgba(var(--blue-rgb), 0.5);
+    }
+    .badge-stable::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--blue-light);
+      box-shadow: 0 0 6px var(--blue-light);
+      animation: pulse 2s infinite;
+    }
+
+    /* Master is the dev tip: green so it can't be mistaken for Stable. */
+    .badge-master {
+      background: rgba(72, 199, 142, 0.12);
+      color: #7ee2b0;
+      border: 1px solid rgba(72, 199, 142, 0.3);
+    }
+    .badge-master::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #7ee2b0;
+      box-shadow: 0 0 6px rgba(72, 199, 142, 0.6);
+      animation: pulse 2.5s infinite;
+    }
+
+    .badge-release {
+      background: rgba(255,255,255,0.06);
+      color: #ccd3da;
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .badge-snapshot {
+      background: rgba(255, 170, 0, 0.12);
+      color: #ffb84d;
+      border: 1px solid rgba(255, 170, 0, 0.3);
+    }
+
+    .badge-branch, .badge-pr {
+      background: rgba(160, 119, 255, 0.1);
+      color: #c4aaff;
+      border: 1px solid rgba(160, 119, 255, 0.28);
+    }
+
+    /* ── Version tabs ─────────────────────────────────────────── */
+    .version-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      flex-wrap: wrap;
+    }
+
+    .version-tab {
+      appearance: none;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font: inherit;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      padding: 10px 18px 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 2px solid transparent;
+      transform: translateY(1px);
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .version-tab:hover { color: var(--text); }
+
+    .version-tab.active {
+      color: var(--text);
+      border-bottom-color: var(--blue);
+    }
+
+    .category-count {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .version-tab:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    .version-tab:disabled:hover { color: var(--text-muted); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    .version-name {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      word-break: break-all;
+    }
+    .versions-grid .version-name { font-size: 1.1rem; }
+
+    .version-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .version-meta span {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    /* ── Card launch bar ──────────────────────────────────────── */
+    .card-launch {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      /* bleed to card edges */
+      margin: auto -28px -26px;
+      padding: 13px 22px 13px 28px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.55);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 0 0 10px 10px;
+      transition: background 0.22s, color 0.22s, border-color 0.22s;
+      flex-shrink: 0;
+    }
+    .pinned-row .card-launch { margin: auto -34px -32px; padding-left: 34px; }
+    .card-launch:hover {
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.92);
+    }
+    .card-launch-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.22s, background 0.22s, transform 0.22s;
+    }
+    .card-launch:hover .card-launch-icon {
+      border-color: rgba(255,255,255,0.35);
+      transform: translateX(3px);
+    }
+    /* Featured variant */
+    .version-card.featured .card-launch {
+      border-top-color: rgba(var(--blue-rgb), 0.3);
+      color: #8fcfff;
+    }
+    .version-card.featured .card-launch:hover {
+      background: rgba(var(--blue-rgb), 0.14);
+      color: #fff;
+    }
+    .version-card.featured .card-launch .card-launch-icon {
+      border-color: rgba(var(--blue-rgb), 0.45);
+    }
+    .version-card.featured .card-launch:hover .card-launch-icon {
+      background: rgba(var(--blue-rgb), 0.25);
+      border-color: rgba(var(--blue-rgb), 0.7);
+    }
+
+    /* Card icon decoration */
+    .version-card-icon {
+      position: absolute;
+      bottom: -10px;
+      right: -14px;
+      width: 96px;
+      height: 96px;
+      opacity: 0.06;
+      pointer-events: none;
+      filter: brightness(0) invert(1);
+      transform: rotate(-10deg);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .version-card:hover .version-card-icon {
+      opacity: 0.1;
+      transform: rotate(-8deg) scale(1.05);
+    }
+    .version-card.featured .version-card-icon { opacity: 0.09; }
+    .version-card.featured:hover .version-card-icon { opacity: 0.14; }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    footer {
+      background: var(--bg-footer);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 48px 24px 32px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-logo img {
+      height: 18px;
+      width: auto;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .footer-logo:hover img { opacity: 0.95; }
+
+    .footer-tagline {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-bottom {
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 15px 16px; }
+      .nav-links { gap: 16px; }
+      .nav-links li:not(:last-child) { display: none; }
+      .hero { padding: 110px 16px 60px; }
+      .hero-heli-bg { padding-top: 60px; }
+      .hero-heli-bg img { width: 130%; max-width: none; }
+      section { padding: 60px 16px; }
+      .pinned-row, .versions-grid { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────────── -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="logos/rf_logo.svg" alt="Rotorflight">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#versions">Versions</a></li>
+      <li><a href="https://www.rotorflight.org/docs" target="_blank" rel="noopener">Docs</a></li>
+      <li><a href="https://github.com/rotorflight/rotorflight-configurator" target="_blank" rel="noopener" class="nav-cta">GitHub</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-bg"></div>
+
+    <div class="hero-heli-bg">
+      <img src="logos/rf_heli.svg" alt="">
+    </div>
+
+    <span class="hero-eyebrow">Open Source Flight Control</span>
+    <h1>Rotorflight <em>Configurator</em></h1>
+    <p class="hero-sub">Set up and tune your Rotorflight flight controller straight from the browser. Nothing to install: connect over USB and fly.</p>
+    <div class="hero-actions">
+      <a href="#versions" class="btn btn-primary">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5-5 3a.5.5 0 0 1-.5-.866V6.366a.5.5 0 0 1 .5-.866l5 3a.5.5 0 0 1 0 .866z"/></svg>
+        Launch Configurator
+      </a>
+      <a href="https://github.com/rotorflight/rotorflight-configurator/releases" target="_blank" rel="noopener" class="btn btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+        Desktop Downloads
+      </a>
+    </div>
+    <p class="hero-note">The web version needs a browser with Web Serial and WebUSB support, such as Chrome or Edge on desktop or Chrome on Android.</p>
+  </header>
+
+  <!-- ── Versions ─────────────────────────────────────────────── -->
+  <section id="versions">
+    <div class="container">
+      <div class="section-label">Available Builds</div>
+      <h2 class="section-title">Select a Version</h2>
+      <p class="section-sub">Stable is the one to fly. Releases, snapshots, and development builds (including master) are listed below as they are deployed.</p>
+
+      <!-- Pinned: Stable -->
+      <div class="pinned-row" id="pinned-row"></div>
+
+      <div class="version-tabs" id="version-tabs" role="tablist">
+        <button class="version-tab" id="tab-release" data-panel="panel-release" role="tab">
+          Release <span class="category-count" id="release-count"></span>
+        </button>
+        <button class="version-tab" id="tab-snapshot" data-panel="panel-snapshot" role="tab">
+          Snapshot <span class="category-count" id="snapshot-count"></span>
+        </button>
+        <button class="version-tab" id="tab-development" data-panel="panel-development" role="tab">
+          Development <span class="category-count" id="development-count"></span>
+        </button>
+      </div>
+
+      <div class="tab-panel" id="panel-release" role="tabpanel">
+        <div class="versions-grid" id="release-grid"></div>
+      </div>
+      <div class="tab-panel" id="panel-snapshot" role="tabpanel">
+        <div class="versions-grid" id="snapshot-grid"></div>
+      </div>
+      <div class="tab-panel" id="panel-development" role="tabpanel">
+        <div class="versions-grid" id="development-grid"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ───────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <a href="https://www.rotorflight.org/" target="_blank" rel="noopener" class="footer-logo">
+            <img src="logos/rf_logo.svg" alt="Rotorflight">
+          </a>
+          <p class="footer-tagline">Open source flight control software for RC helicopters</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="https://www.rotorflight.org/" target="_blank" rel="noopener">Project Website</a></li>
+          <li><a href="https://www.rotorflight.org/docs" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="https://github.com/rotorflight" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://discord.gg/FyfMF4RwSA" target="_blank" rel="noopener">Discord</a></li>
+          <li><a href="https://www.rotorflight.org/donate" target="_blank" rel="noopener">Donate</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>Rotorflight is free software, released under the GNU GPL v3.</span>
+        <a href="#versions">Back to versions</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── versions.json schema (written by .github/scripts/generate_versions.py) ──
+    // {
+    //   "entries": [
+    //     { "type": "stable",   "name": "Latest Stable", "path": "./latest/",         "notes": "Recommended for all users" },
+    //     { "type": "master",   "name": "master",        "path": "./master/",         "notes": "Latest development build" },
+    //     { "type": "release",  "name": "2.3.0",         "path": "./release/2.3.0/" },
+    //     { "type": "snapshot", "name": "2.3.0-20260901", "path": "./snapshot/2.3.0-20260901/" },
+    //     { "type": "branch",   "name": "feature-xyz",   "path": "./feature-xyz/" },
+    //     { "type": "pr",       "name": "42",            "path": "./pr/42/" }
+    //   ]
+    // }
+    // Optional per-entry fields: "tag", "date", "notes".
+    // Only "stable" is pinned above the tabs. Master is only "current" for
+    // developers, so it sits in the Development tab with branch/pr builds.
+    // ─────────────────────────────────────────────────────────────
+
+    const ICON_CLOCK = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>`;
+    const ICON_CAL   = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg>`;
+    const ICON_TAG   = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg>`;
+
+    const BADGE_CLASS = { stable: 'badge-stable', master: 'badge-master', release: 'badge-release', snapshot: 'badge-snapshot', branch: 'badge-branch', pr: 'badge-pr' };
+    const BADGE_LABEL = { stable: 'Stable', master: 'Master', release: 'Release', snapshot: 'Snapshot', branch: 'Branch', pr: 'Pull Request' };
+
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    function fmtDate(d) {
+      if (!d) return '';
+      return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    function makeCard(entry) {
+      const { type, name, path, tag, date, notes } = entry;
+      const card = document.createElement('div');
+      const featured = type === 'stable';
+      card.className = 'version-card' + (featured ? ' featured' : '');
+
+      let meta = '';
+      if (tag)   meta += `<span>${ICON_TAG} ${esc(tag)}</span>`;
+      if (date)  meta += `<span>${ICON_CAL} ${esc(fmtDate(date))}</span>`;
+      if (notes) meta += `<span>${ICON_CLOCK} ${esc(notes)}</span>`;
+
+      card.innerHTML = `
+        <img class="version-card-icon" src="logos/rf_heli.svg" alt="" aria-hidden="true">
+        <span class="version-badge ${BADGE_CLASS[type] || 'badge-release'}">${esc(BADGE_LABEL[type] || type)}</span>
+        <div class="version-name">${esc(name)}</div>
+        ${meta ? `<div class="version-meta">${meta}</div>` : ''}
+        <a href="${esc(path)}" class="card-launch">
+          Open Configurator
+          <span class="card-launch-icon">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2.5 6h7M6.5 3l3 3-3 3"/>
+            </svg>
+          </span>
+        </a>
+      `;
+      return card;
+    }
+
+    (async () => {
+      const pinnedRow = document.getElementById('pinned-row');
+      const tabsRow   = document.getElementById('version-tabs');
+
+      const byId = (id) => document.getElementById(id);
+      const TABS = {
+        release:     { types: ['release'],                tab: byId('tab-release'),     panel: byId('panel-release'),     grid: byId('release-grid'),     count: byId('release-count') },
+        snapshot:    { types: ['snapshot'],               tab: byId('tab-snapshot'),    panel: byId('panel-snapshot'),    grid: byId('snapshot-grid'),    count: byId('snapshot-count') },
+        development: { types: ['master', 'branch', 'pr'], tab: byId('tab-development'), panel: byId('panel-development'), grid: byId('development-grid'), count: byId('development-count') },
+      };
+
+      // Fallback when versions.json is missing or unreadable.
+      let entries = [
+        { type: 'stable', name: 'Latest Stable', path: './latest/', notes: 'Recommended for all users' },
+        { type: 'master', name: 'master',        path: './master/', notes: 'Latest development build' },
+      ];
+
+      try {
+        const res = await fetch('./versions.json', { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data.entries) && data.entries.length > 0) {
+            entries = data.entries;
+          }
+        }
+      } catch { /* use fallback */ }
+
+      const pinned = entries.filter((e) => e.type === 'stable');
+      pinned.forEach((e) => pinnedRow.appendChild(makeCard(e)));
+      if (!pinned.length) {
+        pinnedRow.innerHTML = '<div class="versions-empty">No stable web release yet. Check the Snapshot or Development tabs below.</div>';
+      }
+
+      let firstAvailable = null;
+      for (const [key, group] of Object.entries(TABS)) {
+        const items = entries.filter((e) => group.types.includes(e.type));
+        items.forEach((e) => group.grid.appendChild(makeCard(e)));
+        group.count.textContent = items.length || '';
+        group.tab.disabled = !items.length;
+        if (items.length && !firstAvailable) firstAvailable = key;
+      }
+
+      if (!firstAvailable) {
+        tabsRow.style.display = 'none';
+        return;
+      }
+
+      const activate = (key) => {
+        for (const [k, group] of Object.entries(TABS)) {
+          const isActive = k === key;
+          group.tab.classList.toggle('active', isActive);
+          group.tab.setAttribute('aria-selected', String(isActive));
+          group.panel.classList.toggle('active', isActive);
+        }
+      };
+      for (const [key, group] of Object.entries(TABS)) {
+        group.tab.addEventListener('click', () => { if (!group.tab.disabled) activate(key); });
+      }
+      activate(firstAvailable);
+    })();
+  </script>
+
+</body>
+</html>

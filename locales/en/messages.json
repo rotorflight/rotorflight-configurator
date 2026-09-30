@@ -110,6 +110,22 @@
     "portsSelectManual": {
         "message": "Manual Selection"
     },
+    "portsSelectPleaseSelect": {
+        "message": "Please select",
+        "description": "Web version only: port picker entry separating devices this site can already use from the entries that ask for access to a new one"
+    },
+    "portsSelectAddSerialDevice": {
+        "message": "--- I can't find my USB device ---",
+        "description": "Web version only: port picker entry that opens the browser's serial device chooser"
+    },
+    "portsSelectAddBluetoothDevice": {
+        "message": "--- I can't find my Bluetooth device ---",
+        "description": "Web version only: port picker entry that opens the browser's Bluetooth device chooser"
+    },
+    "portsSelectAddDfuDevice": {
+        "message": "--- I can't find my DFU device ---",
+        "description": "Web version only: port picker entry that opens the browser's USB (DFU) device chooser"
+    },
     "portsSelectVirtual": {
         "message": "Virtual Mode (Demo)",
         "description": "Demo the configurator against a simulated flight controller - no hardware needed, and nothing is written to a real FC."
@@ -429,6 +445,18 @@
     "tabBeepers": {
         "message": "Beepers"
     },
+    "profilesGyroCutoff": {
+        "message": "Gyro Cutoff"
+    },
+    "profilesDtermCutoff": {
+        "message": "D-term Cutoff"
+    },
+    "profilesBtermCutoff": {
+        "message": "B-term Cutoff"
+    },
+    "profilesOffset": {
+        "message": "Offset"
+    },
     "tabProfiles": {
         "message": "Profiles"
     },
@@ -627,6 +655,75 @@
     "tabMotors": {
         "message": "Motors"
     },
+    "tabEscProgramming": {
+        "message": "ESC Programming"
+    },
+    "escProgrammingWarningTitle": {
+        "message": "Remove propellers / rotor blades"
+    },
+    "escProgrammingWarningBody": {
+        "message": "Programming an ESC can cause the motor to spin unexpectedly. Remove all propellers or rotor blades before continuing."
+    },
+    "escProgrammingWarningAcknowledge": {
+        "message": "I have removed the propellers/blades"
+    },
+    "escProgrammingArmedWarning": {
+        "message": "Disarm the aircraft to program ESCs."
+    },
+    "escProgrammingSelectManufacturer": {
+        "message": "Select ESC manufacturer"
+    },
+    "escProgrammingRequiresFirmware": {
+        "message": "Requires firmware {{version}}"
+    },
+    "escProgrammingRequiresTelemetry": {
+        "message": "Requires {{protocol}} ESC telemetry"
+    },
+    "escProgrammingTelemetryDisabled": {
+        "message": "ESC telemetry is disabled. Select your ESC's telemetry protocol on the Motors tab to enable ESC programming."
+    },
+    "escProgrammingSelectEsc": {
+        "message": "Select ESC"
+    },
+    "escProgrammingEsc1": {
+        "message": "ESC 1 (Main / Motor)"
+    },
+    "escProgrammingEsc2": {
+        "message": "ESC 2 (Tail)"
+    },
+    "escProgrammingBack": {
+        "message": "Back"
+    },
+    "escProgrammingChangeEsc": {
+        "message": "Change ESC"
+    },
+    "escProgrammingStatusSwitching": {
+        "message": "Selecting ESC..."
+    },
+    "escProgrammingStatusWaiting": {
+        "message": "Waiting for ESC bridge..."
+    },
+    "escProgrammingStatusPolling": {
+        "message": "Reading ESC parameters..."
+    },
+    "escProgrammingStatusGuarding": {
+        "message": "Checking ESC link..."
+    },
+    "escProgrammingStatusFailed": {
+        "message": "Could not detect the ESC. Check wiring/power and try again."
+    },
+    "escProgrammingStatusPowerCycle": {
+        "message": "Power-cycle the ESC now (disconnect and reconnect its battery/power) to enter programming mode."
+    },
+    "escProgrammingRetry": {
+        "message": "Retry"
+    },
+    "escProgrammingCancel": {
+        "message": "Cancel"
+    },
+    "escProgrammingPowerCycleNote": {
+        "message": "This ESC has no remote link -- power-cycle it after saving for changes to take effect."
+    },
     "tabGovernor": {
         "message": "Governor"
     },
@@ -648,8 +745,71 @@
     "tabBlackbox": {
         "message": "Blackbox"
     },
+    "tabGroupSetup": {
+        "message": "Setup"
+    },
+    "tabGroupOutputs": {
+        "message": "Outputs"
+    },
+    "tabGroupFlightTuning": {
+        "message": "Flight Tuning"
+    },
+    "tabGroupModes": {
+        "message": "Modes & Adjustments"
+    },
+    "tabGroupPeripherals": {
+        "message": "Peripherals"
+    },
+    "tabGroupDiagnostics": {
+        "message": "Diagnostics"
+    },
+    "adjustmentsGroupProfiles": {
+        "message": "Profile Selection"
+    },
+    "adjustmentsGroupRates": {
+        "message": "Rates"
+    },
+    "adjustmentsGroupRcRates": {
+        "message": "RC Rates"
+    },
+    "adjustmentsGroupRcExpo": {
+        "message": "RC Expo"
+    },
+    "adjustmentsGroupPidGains": {
+        "message": "PID Gains"
+    },
+    "adjustmentsGroupFilters": {
+        "message": "Filters"
+    },
+    "adjustmentsGroupYawDynamics": {
+        "message": "Yaw Dynamics"
+    },
+    "adjustmentsGroupStability": {
+        "message": "Stability"
+    },
+    "adjustmentsGroupAccTrim": {
+        "message": "Accelerometer Trim"
+    },
+    "adjustmentsGroupSetpointBoost": {
+        "message": "Setpoint Boost"
+    },
+    "adjustmentsGroupCrossCoupling": {
+        "message": "Cross Coupling"
+    },
+    "adjustmentsGroupYawPrecomp": {
+        "message": "Yaw Precomp"
+    },
+    "adjustmentsGroupRescue": {
+        "message": "Rescue"
+    },
+    "adjustmentsGroupGovernor": {
+        "message": "Governor"
+    },
     "tabAdjustments": {
         "message": "Adjustments"
+    },
+    "auxiliaryModeEmpty": {
+        "message": "No range or link assigned yet."
     },
     "tabAuxiliary": {
         "message": "Modes"
@@ -672,6 +832,12 @@
     "serialPortOpenFail": {
         "message": "<span class=\"message-negative\">Failed</span> to open serial port"
     },
+    "serialPortOpenFailBusy": {
+        "message": "<span class=\"message-negative\">Could not open the serial port</span> - it is most likely in use by another program or browser tab (another configurator, a serial monitor, etc.). Close it, then try again."
+    },
+    "serialPortOpenFailNotFound": {
+        "message": "<span class=\"message-negative\">Serial port not found</span> - check the flight controller is still plugged in, then try again."
+    },
     "serialPortClosedOk": {
         "message": "Serial port <span class=\"message-positive\">successfully</span> closed"
     },
@@ -687,6 +853,9 @@
     "usbDeviceOpened": {
         "message": "USB device <span class=\"message-positive\">successfully</span> opened with ID: $1"
     },
+    "usbDeviceClaimFail": {
+        "message": "<span class=\"message-negative\">Failed</span> to claim USB device!"
+    },
     "usbDeviceOpenFail": {
         "message": "<span class=\"message-negative\">Failed</span> to open USB device!"
     },
@@ -699,8 +868,14 @@
     "usbDeviceUdevNotice": {
         "message": "Are <strong>udev rules</strong> installed correctly? See docs for instructions"
     },
+    "dfuWebUsbUnsupported": {
+        "message": "DFU flashing needs WebUSB, which this browser doesn't support (e.g. Firefox). Please use Chrome, Edge or Opera, or the desktop app."
+    },
     "stm32UsbDfuNotFound": {
         "message": "USB DFU not found"
+    },
+    "stm32UsbDfuNotFoundAfterReboot": {
+        "message": "The board rebooted into the bootloader, but its USB DFU device did not appear. On Windows this usually means the DFU driver is missing: install the WinUSB driver with Zadig (see the <a href=\"https://www.rotorflight.org/docs/2.3.0/setup/flashing-the-firmware\" target=\"_blank\" rel=\"noopener noreferrer\">flashing guide</a>), then unplug and replug the board and flash again. The board stays in the bootloader until it is power-cycled."
     },
     "stm32RebootingToBootloader": {
         "message": "Initiating reboot to bootloader ..."
@@ -1348,9 +1523,6 @@
     "feature_OSD": {
         "message": "On Screen Display"
     },
-    "feature_CMS": {
-        "message": "Configuration Menu System"
-    },
     "feature_RX_SPI": {
         "message": "SPI RX support"
     },
@@ -1389,9 +1561,6 @@
     },
     "featureTip_LED_STRIP": {
         "message": "Enables support for WS2811/2812 LED strips. Adds the <i>LED Strip</i> tab for configuration."
-    },
-    "featureTip_CMS": {
-        "message": "Enables firmware support for CMS."
     },
     "configurationSerialPorts": {
         "message": "Serial Ports"
@@ -2341,7 +2510,7 @@
         "message": "GPS Altitude"
     },
     "receiverTelemetrySensor_GPS_HEADING": {
-        "message": "GPS Heading"
+        "message": "GPS Course"
     },
     "receiverTelemetrySensor_GPS_GROUNDSPEED": {
         "message": "GPS Groundspeed"
@@ -2532,6 +2701,12 @@
     },
     "adjustmentFunctionValue": {
         "message": "Value"
+    },
+    "adjustmentsFunctionSearch": {
+        "message": "Type to filter functions…"
+    },
+    "adjustmentsFunctionNoMatches": {
+        "message": "No matching functions"
     },
     "adjustmentRangeEnable": {
         "message": "Ena:"
@@ -2889,6 +3064,15 @@
     },
     "servoRateRebootNote": {
         "message": "<span class=\"message-negative\">Warning:</span> Changes to the <i>Servo Rate</i> parameter require System Reboot before taking affect!"
+    },
+    "servoTravelLimitedMaxWarning": {
+        "message": "<span class=\"message-negative\">Servo $1:</span> <i>Max</i> is limited to $2 by its <i>Center</i> ($3). The output can't go above $4 µs, so a larger <i>Max</i> is cut back to $2. Move the center closer to the middle to get more travel."
+    },
+    "servoTravelLimitedMinWarning": {
+        "message": "<span class=\"message-negative\">Servo $1:</span> <i>Min</i> is limited to $2 by its <i>Center</i> ($3). The output can't go below $4 µs, so a larger <i>Min</i> is cut back to $2. Move the center closer to the middle to get more travel."
+    },
+    "servoTravelLimitedHelp": {
+        "message": "Limited by the center ($1): the output can't go past $2 µs."
     },
     "servoUnusualLimitsWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!"
@@ -4057,6 +4241,12 @@
     "cliLoadFromFileBtn": {
         "message": "Load from file"
     },
+    "cliBackupToFileBtn": {
+        "message": "Backup"
+    },
+    "cliBackupInProgress": {
+        "message": "Running backup..."
+    },
     "cliConfirmSnippetDialogTitle": {
         "message": "Loaded file <strong>{{fileName}}</strong>. Review the loaded commands"
     },
@@ -4074,6 +4264,18 @@
     },
     "dialogCLIExitButton": {
         "message": "Go Back"
+    },
+    "dialogCliBackupChoiceTitle": {
+        "message": "Backup Configuration"
+    },
+    "dialogCliBackupChoiceNote": {
+        "message": "Choose which backup to run. The result is captured from the CLI and saved to a file."
+    },
+    "dialogCliBackupChoiceDiffButton": {
+        "message": "Backup (diff all)"
+    },
+    "dialogCliBackupChoiceDumpButton": {
+        "message": "Backup (dump all)"
     },
     "loggingNote": {
         "message": "Data will be logged in this tab <span class=\"message-negative\">only</span>, leaving the tab will <span class=\"message-negative\">cancel</span> logging and application will return to its normal <strong>\"configurator\"</strong> state.<br /> You are free to select the global update period, data will be written into the log file every <strong>1</strong> second for performance reasons."
@@ -4405,6 +4607,15 @@
     "firmwareFlasherButtonLoadLocal": {
         "message": "Load Firmware [Local]"
     },
+    "firmwareFlasherDfuPermissionNeeded": {
+        "message": "Your board has restarted in DFU (bootloader) mode. Your browser needs permission to access it before flashing can continue. Click <strong>Allow DFU Access</strong> and select the DFU device."
+    },
+    "firmwareFlasherDfuPermissionGrant": {
+        "message": "Allow DFU Access"
+    },
+    "firmwareFlasherDfuPermissionCancel": {
+        "message": "Cancel"
+    },
     "firmwareFlasherButtonLoadOnline": {
         "message": "Load Firmware [Online]"
     },
@@ -4461,6 +4672,9 @@
     },
     "firmwareFlasherFailedToLoadUnifiedConfig": {
         "message": "Failed to load remote config for {{remote_file}}"
+    },
+    "firmwareFlasherLegacyBackToWizard": {
+        "message": "Back to wizard"
     },
     "firmwareFlasherLegacyLabel": {
         "message": "{{target}} (Legacy)",
@@ -5960,7 +6174,7 @@
         "message": "Smart Fuel Sag Gain"
     },
     "powerSmartFuelSagGainHelp": {
-        "message": "Compensates for voltage sag under load. Increase if Smart Fuel is too pessimistic under load; decrease if it is too optimistic. This setting is only used in Voltage and Combined modes."
+        "message": "Compensates for voltage sag under load. The value is the sag, in volts per cell, expected at full load; while airborne the compensation scales with collective and cyclic stick load. Increase if Smart Fuel is too pessimistic under load; decrease if it is too optimistic. This setting is only used in Voltage and Combined modes."
     },
     "powerBatteryMinimumCellVoltage": {
         "message": "Minimum Cell Voltage"
@@ -6144,6 +6358,9 @@
     },
     "powerBatteryHead": {
         "message": "Battery"
+    },
+    "powerMetersHead": {
+        "message": "Meters"
     },
     "powerStateHead": {
         "message": "Power State"
@@ -8143,5 +8360,263 @@
     },
     "presetsDontShowAgain": {
         "message": "Don't show again"
+    },
+    "adjustmentsAddButton": {
+        "message": "Add Adjustment"
+    },
+    "adjustmentsEmptyState": {
+        "message": "No adjustments configured yet. Click \"Add Adjustment\" to set up a switch that changes a value in flight."
+    },
+    "adjustmentsRemoveButton": {
+        "message": "Remove adjustment"
+    },
+    "adjustmentsSlotCount": {
+        "message": "{{used}} / {{total}} configured"
+    },
+    "adjustmentsSlotLabel": {
+        "message": "Adjustment {{index}}"
+    },
+    "servoConfigurationBus": {
+        "message": "Bus Servo Configuration"
+    },
+    "servoConfigurationPwm": {
+        "message": "PWM Servo Configuration"
+    },
+    "servoOverrideBus": {
+        "message": "Bus Servo Override"
+    },
+    "servoOverridePwm": {
+        "message": "PWM Servo Override"
+    },
+    "firmwareFlasherButtonLoadLocalShort": {
+        "message": "Load Local"
+    },
+    "firmwareFlasherButtonLoadOnlineShort": {
+        "message": "Load Online"
+    },
+    "firmwareFlasherExitDfuShort": {
+        "message": "Exit DFU"
+    },
+    "firmwareFlasherRefreshReleasesButton": {
+        "message": "Refresh the release list (bypasses the local cache)"
+    },
+    "firmwareFlasherBackupModeNone": {
+        "message": "Don't back up"
+    },
+    "firmwareFlasherBackupBeforeFlashingDescription": {
+        "message": "Walks through backing up your current settings before flashing, then restoring them once the new firmware boots. Only available when flashing over a serial port (not DFU)."
+    },
+    "firmwareFlasherBackupTypeDiff": {
+        "message": "Diff (changed settings only)"
+    },
+    "firmwareFlasherBackupTypeDump": {
+        "message": "Dump (full configuration)"
+    },
+    "firmwareFlasherBackupTypeDescription": {
+        "message": "Diff is smaller and faster to capture/restore; Dump records every setting explicitly."
+    },
+    "firmwareFlasherBackupSkippedDfu": {
+        "message": "Board is in DFU mode, skipping pre-flash backup and restore."
+    },
+    "firmwareFlasherRestoreSkippedFlashFailed": {
+        "message": "Flashing did not complete successfully, skipping restore."
+    },
+    "firmwareFlasherWizardConnecting": {
+        "message": "Connecting to flight controller..."
+    },
+    "firmwareFlasherWizardBackupRunning": {
+        "message": "Running {{command}}..."
+    },
+    "firmwareFlasherWizardBackupReady": {
+        "message": "Backup captured -- it's held in memory and will be offered for restore automatically once the new firmware boots. Saving a copy to a file below is optional, but recommended in case anything goes wrong."
+    },
+    "firmwareFlasherWizardBackupForeignFirmware": {
+        "message": "This board isn't currently running Rotorflight, so this backup won't be offered for restore automatically after flashing -- its settings aren't guaranteed to carry over. Save a copy below if you want it for reference."
+    },
+    "firmwareFlasherWizardBackupSaved": {
+        "message": "Saved"
+    },
+    "firmwareFlasherWizardBackupFailed": {
+        "message": "Could not connect to the flight controller to run the backup."
+    },
+    "firmwareFlasherWizardSaveBackupFile": {
+        "message": "Save Backup File..."
+    },
+    "firmwareFlasherWizardCancel": {
+        "message": "Cancel"
+    },
+    "firmwareFlasherWizardRetry": {
+        "message": "Retry"
+    },
+    "firmwareFlasherWizardSelectPort": {
+        "message": "Select Port..."
+    },
+    "firmwareFlasherWizardSkip": {
+        "message": "Skip"
+    },
+    "firmwareFlasherRestoreExitTitle": {
+        "message": "Configuration has not been restored"
+    },
+    "firmwareFlasherRestoreExitUnsaved": {
+        "message": "Your previous settings have not been restored to the flight controller. Leaving will discard the backup held in this page. Restore them now or save a backup file before leaving."
+    },
+    "firmwareFlasherRestoreExitSaved": {
+        "message": "Your previous settings have not been restored to the flight controller. You have saved a backup file, so you can restore them later. Leave without restoring?"
+    },
+    "firmwareFlasherRestoreExitSaveFailed": {
+        "message": "The backup was not saved. Stay here to retry or restore it to the flight controller."
+    },
+    "firmwareFlasherRestoreExitStay": {
+        "message": "Stay on this page"
+    },
+    "firmwareFlasherRestoreExitLeave": {
+        "message": "Leave Without Restoring"
+    },
+    "firmwareFlasherWizardRestorePrompt": {
+        "message": "Flashing complete. Restore your saved configuration onto the new firmware now?"
+    },
+    "firmwareFlasherWizardRestoreNow": {
+        "message": "Restore Now"
+    },
+    "firmwareFlasherWizardRestoreWaiting": {
+        "message": "Waiting for the new firmware to finish booting..."
+    },
+    "firmwareFlasherWizardRestoreRunning": {
+        "message": "Restoring your configuration..."
+    },
+    "firmwareFlasherWizardRestoreDone": {
+        "message": "Configuration restored successfully."
+    },
+    "firmwareFlasherWizardRestoreFailed": {
+        "message": "Could not reconnect to restore the configuration automatically. You can retry, or use the CLI tab's Load button to replay the saved backup_pre_flash file manually."
+    },
+    "firmwareFlasherStepConnectTitle": {
+        "message": "Connect"
+    },
+    "firmwareFlasherConnectChoose": {
+        "message": "Choose a port"
+    },
+    "firmwareFlasherConnectDescription": {
+        "message": "Select the port your board is connected on -- or add a new serial, DFU, or Bluetooth device below if you don't see it listed."
+    },
+    "firmwareFlasherAddSerialDevice": {
+        "message": "Add Serial Device"
+    },
+    "firmwareFlasherAddBluetoothDevice": {
+        "message": "Add Bluetooth Device"
+    },
+    "firmwareFlasherAddDfuDevice": {
+        "message": "Add DFU Device"
+    },
+    "firmwareFlasherConnectNativeHint": {
+        "message": "New devices appear automatically when connected -- plug in your board and select it above."
+    },
+    "firmwareFlasherUseLegacyFlasher": {
+        "message": "Prefer the previous flasher? Use the legacy version instead."
+    },
+    "firmwareFlasherStepBoardTitle": {
+        "message": "Board"
+    },
+    "firmwareFlasherLocalNoBoardSelected": {
+        "message": "No board selected — this will flash exactly as loaded, with no default config combined in."
+    },
+    "firmwareFlasherGoSelectBoard": {
+        "message": "Select a board"
+    },
+    "firmwareFlasherLocalWillCombineConfig": {
+        "message": "Will combine with {{target}}'s default config at flash time."
+    },
+    "firmwareFlasherBoardWillCombineConfig": {
+        "message": "{{target}} selected -- its default config will be combined at flash time."
+    },
+    "firmwareFlasherBoardSelectedPlain": {
+        "message": "{{target}} selected."
+    },
+    "firmwareFlasherStepFirmwareTitle": {
+        "message": "Firmware"
+    },
+    "firmwareFlasherStepBackupTitle": {
+        "message": "Backup"
+    },
+    "firmwareFlasherStepReviewTitle": {
+        "message": "Flash"
+    },
+    "firmwareFlasherStepRestoreTitle": {
+        "message": "Restore"
+    },
+    "firmwareFlasherStepFinishedTitle": {
+        "message": "Finished"
+    },
+    "firmwareFlasherFinishedTitle": {
+        "message": "All done -- the update is complete"
+    },
+    "firmwareFlasherFinishedRestoreSkipped": {
+        "message": "Configuration restore was skipped."
+    },
+    "firmwareFlasherFinishedInstructions": {
+        "message": "Nothing is running any more. You can now close this window or disconnect your board, or click Flash Another Board to update a different one."
+    },
+    "firmwareFlasherDetectUnavailableDfu": {
+        "message": "<strong>{{device}}</strong> connected. Automatic board detection needs a normal serial connection though, so it (along with backup and restore) won't be available this session. A DFU connection is enough to flash new firmware: continue to Firmware below, or select your board manually if you'd like its default config combined at flash time."
+    },
+    "firmwareFlasherDetectBoardCta": {
+        "message": "Detect My Board"
+    },
+    "firmwareFlasherSelectBoardManually": {
+        "message": "Select board manually instead"
+    },
+    "firmwareFlasherTryDetectInstead": {
+        "message": "Try auto-detect instead"
+    },
+    "firmwareFlasherRunBackupCta": {
+        "message": "Back Up Now"
+    },
+    "firmwareFlasherFlashCompleteMessage": {
+        "message": "Firmware flashed successfully."
+    },
+    "firmwareFlasherStartOver": {
+        "message": "Flash Another Board"
+    },
+    "firmwareFlasherNoPortWeb": {
+        "message": "No serial port selected yet."
+    },
+    "firmwareFlasherNoPortNative": {
+        "message": "No serial port selected — choose one from the toolbar above."
+    },
+    "firmwareFlasherSelectPort": {
+        "message": "Select Serial Port"
+    },
+    "firmwareFlasherSelectDfu": {
+        "message": "Select DFU Device"
+    },
+    "firmwareFlasherReadyToFlash": {
+        "message": "Ready to flash: {{target}} — {{version}}"
+    },
+    "firmwareFlasherShowDetails": {
+        "message": "Show details"
+    },
+    "firmwareFlasherHideDetails": {
+        "message": "Hide details"
+    },
+    "firmwareFlasherSaveFirmware": {
+        "message": "Save Firmware (.hex)"
+    },
+    "firmwareFlasherSaveConfig": {
+        "message": "Save Config (.config)"
+    },
+    "firmwareFlasherWizardBack": {
+        "message": "Back"
+    },
+    "firmwareFlasherWizardNext": {
+        "message": "Next"
+    },
+    "firmwareFlasherOptionLabelBuildTypeFeatureBranch": {
+        "message": "All Releases, Snapshots and Feature Branches"
+    },
+    "firmwareFlasherVersionCachedLabel": {
+        "message": "{{label}} (cached)"
+    },
+    "firmwareFlasherFlashFirmwareShort": {
+        "message": "Flash"
     }
 }
