@@ -1,0 +1,773 @@
+:root[data-theme=dark] {
+    --accent: #0375b4;
+    --darkAccent: #203647;
+    --subtleAccent: #c0c0c0;
+    --superSubtleAccent: #595959;
+    --quietHeader: #939682;
+    --defaultText: #ffffff;
+    --subtleText: #c0c0c0;
+    --mutedText: #d6d6d6;
+    --linkText: #4da8da;
+    --attention: #c04020;
+    --boxBackground: #3a3a3a;
+    --alternativeBackground: #414443;
+    --sideBackground: #404040;
+    --ledAccent: #6e6e6e;
+    --ledBackground: #424242;
+    --gimbalBackground: var(--subtleAccent);
+    --gimbalCrosshair: var(--mutedText);
+    --switcherysecond: #858585;
+    --button-border: #c4c4c4;
+    --button-background: #c4c4c4;
+    --hoverButton-border: #ffbb00;
+    --hoverButton-background: #d6d6d6;
+    --pushedButton-fontColor: #000000;
+    --pushedButton-border: #ffbb00;
+    --pushedButton-background: #595959;
+    --backgroundColor: #393b3a;
+}
+
+html[data-theme=dark] .background_paper {
+    background-image: url(/RF-2.3.x/images/paper-dark.png);
+}
+
+html[data-theme=dark] body {
+    color: white;
+}
+
+html[data-theme=dark] ::backdrop {
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme=dark] #options-window {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] #content {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] #content.logopen {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] dialog {
+    background-color: #3a3d3c;
+    color:white;
+    border: 1px solid #ffbb2a;
+}
+
+html[data-theme=dark] .note {
+    background-color: #4e4e4e;
+    border: 1px solid #df8c27;
+    color: white;
+}
+
+html[data-theme=dark] .content_toolbar {
+    background-color: #555857;
+}
+
+html[data-theme=dark] .gui_box {
+    border: 1px solid #4d4d4d;
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .gui_warning {
+    background: #414443;
+}
+
+html[data-theme=dark] .gui_note {
+    background: #393b3a;
+}
+
+html[data-theme=dark] .grey {
+    background-color: #414443
+}
+
+html[data-theme=dark] .gui_box_bottombar {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .fixed_band {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .small a {
+    border: 1px solid #ffbb2a;
+}
+
+html[data-theme=dark] #quad-status_wrapper {
+    color: #393b3a;
+}
+
+html[data-theme=dark] button {
+    border: 1px solid #ffbb2a;
+    background-color: #ffbb2a;
+    color: black;
+}
+
+html[data-theme=dark] .default_btn a.disabled {
+    background-color: #595959;
+    border-color: #595959;
+    color: black;
+}
+
+html[data-theme=dark] .helpicon {
+    background-image: url(/RF-2.3.x/images/icons/cf_icon_info_white.svg);
+    opacity: 0.3;
+}
+html[data-theme=dark] .cf .helpicon {
+    background-image: url(/RF-2.3.x/images/icons/cf_icon_info_grey.svg);
+    opacity: 0.4;
+}
+html[data-theme=dark] .cf .helpicon:hover {
+    background-image: url(/RF-2.3.x/images/icons/cf_icon_info_grey.svg);
+    opacity: 1;
+}
+
+html[data-theme=dark] .gui_box_titlebar .helpicon {
+    background-image: url(/RF-2.3.x/images/icons/cf_icon_info_grey.svg);
+}
+
+html[data-theme=dark] .subtitle .helpicon {
+    background-image: url(/RF-2.3.x/images/icons/cf_icon_info_grey.svg);
+}
+
+html[data-theme=dark] .cf_table td {
+    border-style: solid;
+}
+
+html[data-theme=dark] .noboarder td {
+    border-style: unset;
+}
+
+html[data-theme=dark] .jBox-container {
+    background: #393b3a;
+    color:white;
+}
+
+html[data-theme=dark] .jBox-Modal .jBox-title,
+html[data-theme=dark] .jBox-Confirm .jBox-title {
+    background: #393b3a;
+    border-bottom: 1px solid #9c9c9c;
+    color: white;
+}
+
+html[data-theme=dark] .jBox-pointer:after {
+    background: #393b3a;
+}
+
+html[data-theme=dark] span.value {
+    background-color: #202020;
+}
+
+
+/* TABS */
+
+html[data-theme=dark] #tabs li.active a {
+    color: #fff;
+}
+
+
+/* ADJUSTMENTS TAB */
+
+html[data-theme=dark] .tab-adjustments .adjustments {
+    background-color: #454545;
+}
+
+html[data-theme=dark] .tab-adjustments .adjustments tbody:nth-child(odd) {
+    background-color: #454545;
+}
+
+html[data-theme=dark] .tab-adjustments .adjustments tbody {
+    background-color: #4f5150;
+}
+
+html[data-theme=dark] .tab-adjustments .adjustments tbody tr td {
+    border-color: var(--alternativeBackground);
+}
+
+html[data-theme=dark] .tab-adjustments .adjustments select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-adjustments .adjustments input {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-adjustments .adjustmentBody .value-box {
+    background: #252525;
+}
+
+
+/* AUXILIARY TAB */
+
+html[data-theme=dark] .tab-auxiliary .toolbox {
+    color: white;
+}
+
+html[data-theme=dark] .tab-auxiliary .mode {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .tab-auxiliary .mode .info {
+    border-bottom: 5px solid #393b3a;
+    background-color: #9e9e9e;
+    color: white;
+}
+
+html[data-theme=dark] .tab-auxiliary .ranges {
+    border-bottom: 5px solid #393b3a;
+    background-color: #676767;
+}
+
+html[data-theme=dark] .tab-auxiliary .range {
+    background-color: #484848;
+}
+
+html[data-theme=dark] .tab-auxiliary .link {
+    background-color: #484848;
+}
+
+html[data-theme=dark] .tab-auxiliary .range .channel,.logic,.linkedTo {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-auxiliary .buttons a {
+    background-color: #333333;
+    color: white;
+}
+
+html[data-theme=dark] .tab-auxiliary .buttons a:hover {
+    background-color: var(--hoverButton-background);
+}
+
+
+/* BEEPERS TAB */
+
+html[data-theme=dark] .tab-beepers .gui_box span {
+    color: white;
+}
+
+html[data-theme=dark] .tab-beepers input,
+html[data-theme=dark] .tab-beepers select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+
+/* CLI TAB */
+
+
+/* AutoComplete */
+html[data-theme=dark] .cli-textcomplete-dropdown {
+    background-color: #393b3a;
+}
+html[data-theme=dark] .cli-textcomplete-dropdown a {
+    color: white;
+}
+html[data-theme=dark] .cli-textcomplete-dropdown .active {
+    background-color: var(--quietHeader);
+}
+
+
+/* CONFIGURATION TAB */
+
+html[data-theme=dark] .tab-configuration .gui_box span {
+    color: white;
+}
+
+html[data-theme=dark] .tab-configuration input,
+html[data-theme=dark] .tab-configuration select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-configuration #interactive_block {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .tab-configuration #interactive_block a.reset {
+    color: white;
+    background-color: #575757;
+}
+
+html[data-theme=dark] .tab-configuration #interactive_block a.reset:hover {
+    background-color: #393b3a;
+}
+
+
+/* FIRMWARE FLASHER TAB */
+
+html[data-theme=dark] .btn .disabled {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .gui_note .gui_box_titlebar {
+    color: black;
+}
+
+html[data-theme=dark] .tab-firmware_flasher .options select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-firmware_flasher .options .description {
+    color: #b9b9b9;
+}
+
+html[data-theme=dark] .tab-firmware_flasher .options .manual_baud_rate select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-firmware_flasher .release_info .target {
+    color: #98ddff;
+}
+
+html[data-theme=dark] .tab-firmware_flasher .cf_table td {
+    border-bottom: solid 1px #4f4f4f;
+}
+
+
+/* GPS TAB */
+
+html[data-theme=dark] .tab-gps .GPS_info .head,
+html[data-theme=dark] .tab-gps .GPS_signal_strength .head {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .tab-gps input,
+html[data-theme=dark] .tab-gps select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-gps #loadmap .controls {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .tab-gps #loadmap .controls a {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .tab-gps #loadmap .controls a:hover {
+    background-color: var(--hoverButton-background);
+}
+
+html[data-theme=dark] .tab-gps #loadmap .controls a:active {
+    background-color: #393b3a;
+}
+
+progress[value]::-webkit-progress-bar {
+    background-color: #393b3a;
+}
+
+/* LANDING */
+
+html[data-theme=dark] .tab-landing .content_top {
+    background-color: #00000000;
+}
+
+html[data-theme=dark] .tab-landing .content_mid {
+    background-color: #3e3e3e;
+}
+
+html[data-theme=dark] .tab-landing .logowrapper img {
+    content:url(/RF-2.3.x/images/cf_logo_white.svg);
+}
+
+html[data-theme=dark] .tab-landing .content_mid .text3 .wrap2 {
+    background: #5f5f5f;
+}
+
+
+/* LED STRIP TAB */
+
+html[data-theme=dark] .tab-led-strip .section {
+    color: #c4c4c4;
+}
+
+html[data-theme=dark] .tab-led-strip .mainGrid {
+    background-color: #4e4e4e;
+}
+
+html[data-theme=dark] .tab-led-strip button {
+    background-color: #6b6b6b;
+    color: white;
+}
+
+html[data-theme=dark] .tab-led-strip button:hover {
+    border: 1px solid #ffffff;
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .tab-led-strip .gridSections,
+html[data-theme=dark] .tab-led-strip .gridSections .block {
+    border: none;
+}
+
+/* MIXER TAB */
+
+html[data-theme=dark] .tab-mixer .gui_box span {
+    color: white;
+}
+
+html[data-theme=dark] .tab-mixer .subtitle {
+    color: #3a3a3a;
+    background-color: #a0a0a0;
+}
+
+html[data-theme=dark] .tab-mixer input:disabled,
+html[data-theme=dark] .tab-mixer select:disabled {
+    color: #595959;
+}
+
+html[data-theme=dark] .tab-mixer table input {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-mixer table select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-mixer .bottomarea {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .tab-mixer .mixerOverrideTable tbody tr:nth-child(even) {
+    background-color: #3f3f3f;
+}
+
+html[data-theme=dark] .tab-mixer .mixerOverrideTable tbody tr:nth-child(odd) {
+    background-color: #393939;
+}
+
+
+/* BLACKBOX TAB */
+
+html[data-theme=dark] .tab-blackbox .regular-button.disabled {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .tab-blackbox .dataflash-contents,
+html[data-theme=dark] .tab-blackbox .sdcard-contents {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .tab-blackbox .dataflash-used,
+html[data-theme=dark] .tab-blackbox .sdcard-other {
+    background-color: #848484;
+}
+
+html[data-theme=dark] .tab-blackbox progress::-webkit-progress-bar {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .tab-blackbox .blackboxRate select,
+html[data-theme=dark] .tab-blackbox .blackboxMode select,
+html[data-theme=dark] .tab-blackbox .blackboxGracePeriod input,
+html[data-theme=dark] .tab-blackbox .blackboxDebugMode select,
+html[data-theme=dark] .tab-blackbox .blackboxDebugAxis select,
+html[data-theme=dark] .tab-blackbox .blackboxInitialErase input,
+html[data-theme=dark] .tab-blackbox .blackboxDevice select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-blackbox .sdcard-icon {
+    background-color: #393b3a;
+}
+
+/* PROFILES TAB */
+
+html[data-theme=dark] .tab-profiles .tab-area {
+    background: #393b3a;
+}
+
+html[data-theme=dark] .tab-profiles .tab-container > div {
+    background-color: #535655;
+    border-right: 1px solid #393b3a;
+}
+
+html[data-theme=dark] .tab-profiles .tab-container > div.active {
+    background-color: var(--accent);
+}
+
+html[data-theme=dark] .tab-profiles input:disabled,
+html[data-theme=dark] .tab-profiles select:disabled {
+    color: #595959;
+}
+
+html[data-theme=dark] .tab-profiles table input {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-profiles table select {
+    text-align-last: right;
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-profiles .settings_table .suboption select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-profiles .settings_table .suboption input {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .xxx-tab-profiles .settings_table tr {
+    border-bottom: 1px solid #6b6b6b;
+}
+
+html[data-theme=dark] .tab-profiles .ROLL .axis_title {
+    background-color: #A00000;
+}
+
+html[data-theme=dark] .tab-profiles .PITCH .axis_title {
+    background-color: #00A000;
+}
+
+html[data-theme=dark] .tab-profiles .YAW .axis_title {
+    background-color: #0000A0;
+}
+
+html[data-theme=dark] .tab-profiles .gui_box span {
+    color: white;
+}
+
+html[data-theme=dark] .tab-profiles .number input {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-profiles .bottomarea {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .tab-profiles .regular-button.disabled {
+    background-color: #393b3a;
+}
+
+
+/* RATES TAB */
+
+html[data-theme=dark] .tab-rates .tab-area {
+    background: #393b3a;
+}
+
+html[data-theme=dark] .tab-rates .tab-container > div {
+    background-color: #535655;
+    border-right: 1px solid #393b3a;
+}
+
+html[data-theme=dark] .tab-rates .tab-container > div.active {
+    background-color: var(--accent);
+}
+
+html[data-theme=dark] .tab-rates select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-rates input {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-rates table select {
+    text-align-last: right;
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-rates .cf tr {
+    background-color: #414443;
+}
+
+html[data-theme=dark] .tab-rates .cf th {
+    background-color: var(--quietHeader);
+    color: white;
+}
+
+html[data-theme=dark] .tab-rates .cf input {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-rates .cf select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-rates .cf .rates_logo_bg {
+    background-color: #ffffff33;
+}
+
+html[data-theme=dark] .tab-rates .ROLL .axis_title {
+    background-color: #A00000;
+}
+
+html[data-theme=dark] .tab-rates .PITCH .axis_title {
+    background-color: #00A000;
+}
+
+html[data-theme=dark] .tab-rates .YAW .axis_title {
+    background-color: #0000A0;
+}
+
+html[data-theme=dark] .tab-rates .COLLECTIVE .axis_title {
+    background-color: #C08000;
+}
+
+html[data-theme=dark] .tab-rates .gui_box span {
+    color: white;
+}
+
+/* POWER TAB */
+
+html[data-theme=dark] .tab-power .number input {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-power .battery-configuration select,
+html[data-theme=dark] .tab-power .smartfuel-configuration select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+
+/* SENSORS TAB */
+
+html[data-theme=dark] .tab-sensors .plot_control {
+    background-color: #2f2f2f;
+}
+
+html[data-theme=dark] .tab-sensors .plot_control select {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-sensors text {
+    fill: white;
+}
+
+
+/* SERVOS TAB */
+
+html[data-theme=dark] .tab-servos .gui_box span {
+    color: white;
+}
+
+html[data-theme=dark] .tab-servos .servoConfig {
+    background-color: #393b3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-servos .servoConfig td {
+    border-color: #575757;
+}
+
+html[data-theme=dark] .tab-servos .servoConfig tbody tr {
+    background-color: #414443;
+}
+
+html[data-theme=dark] .tab-servos .servoConfig tbody tr:nth-child(even) {
+    background-color: #3f3f3f;
+}
+
+html[data-theme=dark] .tab-servos input[type="number"] {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+html[data-theme=dark] .tab-servos .meter-bar {
+    background-color: #3a3a3a;
+}
+
+html[data-theme=dark] .tab-servos .meter-label {
+    color: white;
+}
+
+html[data-theme=dark] .tab-servos .servoOverride tbody tr:nth-child(odd) {
+    background-color: #3f3f3f;
+}
+
+html[data-theme=dark] .tab-servos .servoOverride tbody tr:nth-child(even) {
+    background-color: #393939;
+}
+
+
+/* STATUS TAB */
+
+html[data-theme=dark] .tab-status #interactive_block {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .tab-status .attitude_info {
+    color: white;
+}
+
+html[data-theme=dark] .tab-status #interactive_block a.reset {
+    color: white;
+    background-color: #575757;
+}
+
+html[data-theme=dark] .tab-status #interactive_block a.reset:hover {
+    background-color: #393b3a;
+}
+
+html[data-theme=dark] .tab-status .bars .bar {
+    background-color: #393b3a;
+    border: 1px solid #c0c0c0;
+}
+
+html[data-theme=dark] .tab-status .bars .label1,
+html[data-theme=dark] .tab-status .bars .label2 {
+    color: white;
+}
+
+
+/* SELECT2 */
+
+html[data-theme=dark] .select2-container .select2-selection--single .select2-selection__rendered {
+    background-color: #3a3a3a !important;
+}
+
+html[data-theme=dark] .select2-selection__arrow b {
+    border-bottom: 1.5px solid white !important;
+    border-right: 1.5px solid white !important;
+}
+
+html[data-theme=dark] .select2-search--dropdown {
+    background-color: #3a3a3a !important;
+}
+
+html[data-theme=dark] .select2-search--dropdown .select2-search__field {
+    border: 1px solid var(--subtleAccent) !important;
+    background-color: #3a3a3a !important;
+    color: white !important;
+}
+
+html[data-theme=dark] .select2-results>.select2-results__options {
+    background-color: #3a3a3a !important;
+}
+
+/* PRESETS TAB */
+
+html[data-theme=dark] .tab-presets input,
+html[data-theme=dark] .tab-presets select {
+    background-color: #3a3a3a;
+    color: white;
+}

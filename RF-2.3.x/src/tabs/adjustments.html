@@ -1,0 +1,127 @@
+<div class="tab-adjustments toolbar_fixed_bottom">
+    <div class="content_wrapper">
+        <div class="tab_title" i18n="tabAdjustments"></div>
+        <div class="cf_doc_version_bt">
+            <a id="button-documentation"></a>
+        </div>
+        <div class="overflow">
+            <table class="adjustments">
+                <thead>
+                    <tr>
+                        <td i18n="adjustmentsColumnMode"></td>
+                        <td i18n="adjustmentsColumnChannels"></td>
+                        <td i18n="adjustmentsColumnSliders"></td>
+                        <td i18n="adjustmentsColumnRanges"></td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="content_toolbar">
+        <div class="btn revert_btn">
+            <a class="revert" href="#" i18n="buttonRevert"></a>
+        </div>
+        <div class="btn save_btn">
+            <a class="save" href="#" i18n="buttonSave"></a>
+        </div>
+    </div>
+</div>
+
+<div id="tab-adjustments-templates">
+    <table>
+        <tbody class="adjustmentBody">
+            <tr>
+                <td colspan="4"></td>
+            </tr>
+            <tr>
+                <td rowspan="2" class="adjType">
+                    <label class="adjTypeOption">
+                        <input type="radio" class="adjTypeOptionInput" value="0"/><span class="adjTypeOptionLabel" i18n="adjustmentsTypeOff"></span>
+                    </label>
+                    <label class="adjTypeOption">
+                        <input type="radio" class="adjTypeOptionInput" value="1"/><span class="adjTypeOptionLabel" i18n="adjustmentsTypeMapped"></span>
+                    </label>
+                    <label class="adjTypeOption">
+                        <input type="radio" class="adjTypeOptionInput" value="2"/><span class="adjTypeOptionLabel" i18n="adjustmentsTypeStepped"></span>
+                    </label>
+                </td>
+                <td class="adjChannels">
+                    <div class="channel-label" i18n="adjustmentEnableChannel"></div>
+                    <div>
+                        <select class="enaChannel channel input-element">
+                        </select>
+                    </div>
+                    <div class="value-box channel-value ena-channel-value">-</div>
+                </td>
+                <td class="adjSliders">
+                    <div class="adj-slider ena-slider pips-channel-range">
+                        <div class="marker enaMarker"></div>
+                    </div>
+                </td>
+                <td class="adjRanges enaChannelRanges">
+                    <div class="adjRangeLine">
+                        <input type="number" class="lowerEnaValue range-input input-element" min="875" max="2125" step="5"/>
+                        <div class="range-dash">-</div>
+                        <input type="number" class="upperEnaValue range-input input-element" min="875" max="2125" step="5"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="adjChannels">
+                    <div class="channel-label" i18n="adjustmentValueChannel"></div>
+                    <div>
+                        <select class="channel adjChannel input-element">
+                        </select>
+                    </div>
+                    <div class="value-box channel-value adj-channel-value">-</div>
+                </td>
+                <td class="adjSliders">
+                    <div class="adj-slider inc-slider stepped-only">
+                    </div>
+                    <div class="adj-slider dec-slider pips-channel-range">
+                        <div class="marker adjMarker"></div>
+                    </div>
+                </td>
+                <td class="adjRanges adjChannelRanges">
+                    <div class="adjRangeLine stepped-only">
+                        <input type="number" class="lowerIncValue range-input input-element" min="875" max="2125" step="5"/>
+                        <div class="range-dash">-</div>
+                        <input type="number" class="upperIncValue range-input input-element" min="875" max="2125" step="5"/>
+                    </div>
+                    <div class="adjRangeLine">
+                        <input type="number" class="lowerDecValue range-input input-element" min="875" max="2125" step="5"/>
+                        <div class="range-dash">-</div>
+                        <input type="number" class="upperDecValue range-input input-element" min="875" max="2125" step="5"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="adjFunction">
+                    <select class="function input-element">
+                        <!--  Generated values go here -->
+                    </select>
+                    <div class="value-line">
+                        <div class="value-label" i18n="adjustmentFunctionValue"></div>
+                        <div class="value-box function-value">-</div>
+                    </div>
+                </td>
+                <td class="adjSliders">
+                    <div class="adj-slider val-slider pips-value-range">
+                        <div class="marker valMarker"></div>
+                    </div>
+                </td>
+                <td class="adjRanges">
+                    <div class="adjRangeLine">
+                        <input type="number" class="functionMinValue range-input input-element"/>
+                        <div class="range-dash">-</div>
+                        <input type="number" class="functionMaxValue range-input input-element"/>
+                    </div>
+                    <div class="adjRangeLine adjRangeStep stepped-only">
+                        <div class="step-label" i18n="adjustmentRangeStep"></div>
+                        <input type="number" class="functionStepSize range-input input-element" min="0" max="255"/>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
