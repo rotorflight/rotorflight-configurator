@@ -13,6 +13,7 @@ import { RateCurve, RateCurve2 } from "@/js/RateCurve.js";
 import { VirtualFC } from "@/js/VirtualFC.js";
 import * as backupRestore from "@/js/backup_restore.js";
 import * as dataStorage from "@/js/data_storage.js";
+import { installChromeStorageShimIfMissing } from "@/js/chromeStorageShim.js";
 import * as defaultHuffmanTree from "@/js/default_huffman_tree.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GuiControl } from "@/js/gui.js";
@@ -87,10 +88,30 @@ Object.assign(globalThis, {
 CONFIGURATOR.version = __APP_VERSION__;
 CONFIGURATOR.gitChangesetId = __COMMIT_HASH__;
 
+// FirmwareCache, release_checker and the Firmware Flasher persist through
+// chrome.storage.local, which a plain browser tab doesn't have. Install a
+// localStorage-backed stand-in before anything can use it.
+installChromeStorageShimIfMissing();
+
 mount(BatteryLegend, { target: document.querySelector("#battery-legend") });
 mount(StatusBar, { target: document.querySelector("#status-bar") });
 mount(Logo, { target: document.querySelector("#logo-desktop") });
 mount(Logo, { target: document.querySelector("#logo-mobile") });
+
+if (__BACKEND__ === "web") {
+  const { initBrowserCompat } = await import("@/js/browser-compat.js");
+  initBrowserCompat({ showBanner: true });
+
+  if (import.meta.env.PROD && "serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      // The app page is src/main.html, one level below the deployed root.
+      const base = import.meta.env.BASE_URL;
+      navigator.serviceWorker.register(`${base}service-worker.js`, {
+        scope: base,
+      });
+    });
+  }
+}
 
 if (__BACKEND__ === "cordova") {
   (async () => {

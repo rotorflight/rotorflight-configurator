@@ -92,6 +92,22 @@
     "portsSelectManual": {
         "message": "Manual Selection"
     },
+    "portsSelectPleaseSelect": {
+        "message": "Please select",
+        "description": "Web version only: port picker entry separating devices this site can already use from the entries that ask for access to a new one"
+    },
+    "portsSelectAddSerialDevice": {
+        "message": "--- I can't find my USB device ---",
+        "description": "Web version only: port picker entry that opens the browser's serial device chooser"
+    },
+    "portsSelectAddBluetoothDevice": {
+        "message": "--- I can't find my Bluetooth device ---",
+        "description": "Web version only: port picker entry that opens the browser's Bluetooth device chooser"
+    },
+    "portsSelectAddDfuDevice": {
+        "message": "--- I can't find my DFU device ---",
+        "description": "Web version only: port picker entry that opens the browser's USB (DFU) device chooser"
+    },
     "portsSelectVirtual": {
         "message": "Virtual Mode (Experimental)",
         "description": "Configure a Virtual Flight Controller without the need of a physical FC."
@@ -497,6 +513,9 @@
     "usbDeviceOpened": {
         "message": "USB device <span class=\"message-positive\">successfully</span> opened with ID: $1"
     },
+    "usbDeviceClaimFail": {
+        "message": "<span class=\"message-negative\">Failed</span> to claim USB device!"
+    },
     "usbDeviceOpenFail": {
         "message": "<span class=\"message-negative\">Failed</span> to open USB device!"
     },
@@ -508,6 +527,9 @@
     },
     "usbDeviceUdevNotice": {
         "message": "Are <strong>udev rules</strong> installed correctly? See docs for instructions"
+    },
+    "dfuWebUsbUnsupported": {
+        "message": "DFU flashing needs WebUSB, which this browser doesn't support (e.g. Firefox). Please use Chrome, Edge or Opera, or the desktop app."
     },
     "stm32UsbDfuNotFound": {
         "message": "USB DFU not found"
@@ -3938,6 +3960,15 @@
     },
     "firmwareFlasherButtonLoadLocal": {
         "message": "Load Firmware [Local]"
+    },
+    "firmwareFlasherDfuPermissionNeeded": {
+        "message": "Your board has restarted in DFU (bootloader) mode. Your browser needs permission to access it before flashing can continue. Click <strong>Allow DFU Access</strong> and select the DFU device."
+    },
+    "firmwareFlasherDfuPermissionGrant": {
+        "message": "Allow DFU Access"
+    },
+    "firmwareFlasherDfuPermissionCancel": {
+        "message": "Cancel"
     },
     "firmwareFlasherButtonLoadOnline": {
         "message": "Load Firmware [Online]"

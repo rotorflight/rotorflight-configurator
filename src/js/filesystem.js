@@ -7,9 +7,12 @@ function getFileExtension(fileName) {
   return re.exec(fileName)[1];
 }
 
-if (__BACKEND__ === "nwjs") {
+if (__BACKEND__ === "nwjs" || __BACKEND__ === "web") {
   // https://fs.spec.whatwg.org/
   // https://wicg.github.io/file-system-access/
+  // showOpenFilePicker/showSaveFilePicker are standard Chromium File System
+  // Access API globals, not NW.js-specific, so this same implementation
+  // works unchanged in a plain Chromium-based browser tab.
 
   readTextFile = async (opts) => {
     try {
