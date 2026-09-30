@@ -19,7 +19,11 @@
     {
       "type": "pr",
       "name": "456",
-      "path": "./pr/456/"
+      "path": "./pr/456/",
+      "branch": "feature/expert-mode-basic",
+      "title": "Hide advanced settings when expert mode is off",
+      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/456",
+      "date": "2026-09-30T19:35:52Z"
     }
   ]
 }
