@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Asynchronous Loading</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+     html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+
+    <link type="text/css" rel="stylesheet" href="/release/2.2.1/libraries/openlayers/ol.css">
+    <script type="text/javascript" src="/release/2.2.1/libraries/openlayers/ol.js"></script>
+
+    <script type="module" crossorigin src="/release/2.2.1/assets/src/tabs/map.html.js"></script>
+    <link rel="modulepreload" crossorigin href="/release/2.2.1/assets/modulepreload-polyfill.js">
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
