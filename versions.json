@@ -15,11 +15,6 @@
       "type": "branch",
       "name": "RF-2.3.x",
       "path": "./RF-2.3.x/"
-    },
-    {
-      "type": "branch",
-      "name": "feature-rf23-web",
-      "path": "./feature-rf23-web/"
     }
   ]
 }
