@@ -3,9 +3,10 @@ export const API_VERSION_12_7 = "12.7.0";
 export const API_VERSION_12_8 = "12.8.0";
 export const API_VERSION_12_9 = "12.9.0";
 export const API_VERSION_12_10 = "12.10.0";
+export const API_VERSION_12_11 = "12.11.0";
 
 export const API_VERSION_RTFL_MIN = API_VERSION_12_6;
-export const API_VERSION_RTFL_MAX = API_VERSION_12_10;
+export const API_VERSION_RTFL_MAX = API_VERSION_12_11;
 
 export const FW_VERSION_RTFL_MIN = "4.3.0-0";
 export const FW_VERSION_RTFL_MAX = "4.7.99";

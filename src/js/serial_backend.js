@@ -2,7 +2,7 @@ import semver from "semver";
 
 import { Beepers } from "@/js/Beepers.js";
 import { config } from "@/js/config.svelte.ts";
-import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { API_VERSION_12_10, CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
@@ -799,6 +799,14 @@ async function onConnect() {
         await MSP.promise(MSPCodes.MSP_BATTERY_CONFIG, false);
         await MSP.promise(MSPCodes.MSP_STATUS, false);
         await MSP.promise(MSPCodes.MSP_DATAFLASH_SUMMARY, false);
+        // Needed here (rather than left to each tab's own fetch) so updateTabList can
+        // decide whether to show the XACT servo tab, which is gated on FBUS receiver
+        // mode or the FBUS_OUT serial port function.
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) {
+            await MSP.promise(MSPCodes.MSP_SERIAL_CONFIG, false);
+            await MSP.promise(MSPCodes.MSP_RX_CONFIG, false);
+            updateTabList(FC.FEATURE_CONFIG.features);
+        }
 
         if (FC.CONFIG.boardType == 0 || FC.CONFIG.boardType == 2) {
             startLiveDataRefreshTimer();
