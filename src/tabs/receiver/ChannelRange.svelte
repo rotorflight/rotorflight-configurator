@@ -194,6 +194,8 @@
       />
     </Field>
     <Field
+      expert
+      changed={FC.RC_CONFIG.rc_deadband !== (gte_12_9 ? 5 : 2)}
       id="receiver-cyclic-deadband"
       label="receiverCyclicDeadband"
       unit="μs"
@@ -233,7 +235,13 @@
         />
       {/if}
     </Field>
-    <Field id="receiver-yaw-deadband" label="receiverYawDeadband" unit="μs">
+    <Field
+      expert
+      changed={FC.RC_CONFIG.rc_yaw_deadband !== (gte_12_9 ? 5 : 2)}
+      id="receiver-yaw-deadband"
+      label="receiverYawDeadband"
+      unit="μs"
+    >
       {#snippet tooltip()}
         {#if gte_12_9}
           <Tooltip
