@@ -8,8 +8,12 @@ name: Deploy Web App
 #   feature/foo etc.    -> /feature-foo/
 #   release/<ver> tag   -> /release/<ver>/  (and /latest/ for plain x.y.z)
 #   snapshot/<ver> tag  -> /snapshot/<ver>/
+#   pull request        -> /pr/<number>/  (pr-preview-*.yml, "preview" label)
 #
 # Deleting a branch removes its directory again.
+#
+# This only updates the gh-pages branch; publish-pages.yml deploys it to
+# GitHub Pages once this run completes.
 #
 # GitHub Releases themselves are created by release.yml / snapshot.yml; this
 # workflow deliberately leaves them alone so the two never race over the
