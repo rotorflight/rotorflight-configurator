@@ -31,36 +31,69 @@
 }
 
 :root {
-    --accent: #4da8da;
-    --darkAccent: #007cc7;
-    --subtleAccent: #c0c0c0;
-    --superSubtleAccent: #cccccc;
-    --quietText: #ffffff;
-    --quietHeader: #828885;
-    --defaultText: #000000;
-    --subtleText: #c0c0c0;
-    --mutedText: #616161;
-    --linkText: #203647;
-    --error: red;
-    --attention: #f07050;
-    --boxBackground: #ffffff;
-    --alternativeBackground: #f9f9f9;
-    --sideBackground: #ffffff;
-    --ledAccent: #adadad;
-    --ledBackground: #e9e9e9;
-    --gimbalBackground: #eee;
-    --gimbalCrosshair: var(--subtleAccent);
-    --switcherysecond: #c4c4c4;
-    --button-border: #c4c4c4;
-    --button-background: #c4c4c4;
-    --hoverButton-border: #7c7c7c;
-    --hoverButton-background: #c4c4c4;
-    --pushedButton-fontColor: #000000;
-    --pushedButton-border: #7c7c7c;
-    --pushedButton-background: #7c7c7c;
+    /* Legacy variable names. A large amount of per-tab CSS still reads
+       these, so rather than renaming every call site they are now aliases
+       onto the theme-aware design tokens in app.css. That keeps the old
+       and new stylesheets in step and, more importantly, makes the legacy
+       CSS follow a theme switch on its own instead of needing a parallel
+       set of hard-coded overrides in dark-theme.css. */
+    --accent: var(--color-accent-500);
+    --darkAccent: var(--color-accent-400);
+    --subtleAccent: var(--color-neutral-400);
+    --superSubtleAccent: var(--color-neutral-300);
+    --quietText: var(--color-header-fg);
+    --quietHeader: var(--color-header-bg);
+    --defaultText: var(--color-text);
+    --subtleText: var(--color-text-muted);
+    --mutedText: var(--color-text-muted);
+    --linkText: var(--color-accent-500);
+    --error: var(--color-danger);
+    --attention: var(--color-signal-text);
+    --boxBackground: var(--color-surface);
+    --alternativeBackground: var(--color-surface-sunken);
+    --sideBackground: var(--color-surface);
+    --ledAccent: var(--color-neutral-400);
+    --ledBackground: var(--color-neutral-200);
+    --gimbalBackground: var(--color-neutral-200);
+    --gimbalCrosshair: var(--color-neutral-400);
+    --switcherysecond: var(--color-neutral-400);
+    --button-border: var(--color-border);
+    --button-background: var(--color-btn-bg);
+    --hoverButton-border: var(--color-border);
+    --hoverButton-background: var(--color-btn-bg-hover);
+    --pushedButton-fontColor: var(--color-btn-fg);
+    --pushedButton-border: var(--color-border);
+    --pushedButton-background: var(--color-btn-bg-active);
+    /* Only dark-theme.css used to define this, which left it undefined
+       (and so silently transparent) in the light theme. */
+    --backgroundColor: var(--color-surface);
 
-    --font-ui: 'Open Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    /* App chrome: the header bar and the side nav rail. Deliberately dark
+       in BOTH themes - the nav icons and the logo are white artwork, and
+       a dark rail framing a light workspace is what gives the window its
+       shape. Only the depth shifts between themes. */
+    --chrome-bg: hsl(208, 11%, 14%);
+    --chrome-bg-raised: hsl(208, 11%, 19%);
+    --chrome-bg-sunken: hsl(208, 11%, 10%);
+    --chrome-fg: hsl(208, 14%, 88%);
+    --chrome-fg-muted: hsl(208, 8%, 62%);
+    --chrome-border: hsl(208, 10%, 24%);
+    --chrome-hover: rgba(255, 255, 255, 0.07);
+    /* The brand blue #007cc7 with white on the graphite chrome, in both
+       themes - the Rotorflight app icon. */
+    --chrome-accent: hsl(203, 100%, 39%);
+    --chrome-accent-hover: hsl(203, 100%, 33%);
+    --chrome-accent-fg: #fff;
+
+    --font-ui: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root[data-theme="dark"] {
+    --chrome-bg: hsl(208, 11%, 9%);
+    --chrome-bg-raised: hsl(208, 11%, 14%);
+    --chrome-bg-sunken: hsl(208, 11%, 6%);
+    --chrome-border: hsl(208, 10%, 19%);
 }
 
 * {
@@ -85,8 +118,12 @@ html, body {
 body {
     font-family: var(--font-ui);
     font-size: 12px;
-    color: #303030;
-    background-color: #3d3f3e;
+    color: var(--color-text);
+    /* The shell backdrop, not a page background: the header bar and any
+       part of the window not covered by #content show through here. */
+    background-color: var(--chrome-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -105,25 +142,91 @@ textarea {
     font-weight: 400;
 }
 
+/* Global form-control baseline.
+ *
+ * _global.scss styles inputs and selects too, but Svelte only emits those
+ * rules into components that have a <style> block of their own - and it
+ * scopes them to that component. <Select> has no styles at all, so every
+ * dropdown rendered through it (plus every <select> in the legacy tab
+ * markup) fell through to the browser default. These rules are the
+ * unscoped counterpart, so a control looks the same wherever it is
+ * declared. Per-tab rules still win on specificity, so the sizing that
+ * individual tabs set for themselves is untouched.
+ */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select,
+textarea {
+    color: var(--color-text);
+    background-color: var(--color-input-bg);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-sm);
+    transition: border-color var(--animation-speed),
+                box-shadow var(--animation-speed);
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--color-border-accent);
+    box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+    color: var(--color-text-disabled);
+    background-color: var(--color-input-bg-disabled);
+}
+
+select {
+    padding: 2px 26px 2px 8px;
+    cursor: pointer;
+    /* Native select chrome is the most dated-looking control in the app,
+       so the arrow is drawn instead. A data: URI cannot inherit
+       currentColor, hence the fixed mid-grey - it stays legible on both
+       themes' input fills. */
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5L6 8l3.5-3.5' fill='none' stroke='%238a8f98' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 12px 12px;
+}
+
+select:disabled {
+    cursor: not-allowed;
+}
+
+/* The header dropdowns paint their own chrome-coloured surface and draw
+   their own chevron on the wrapper (style_lists.css); keep this baseline
+   out of their way. */
+.dropdown-select {
+    background-image: none;
+}
+
 ::backdrop {
     background-image: none;
-    background-color: rgba(1, 1, 1, 0.5);
+    background-color: rgba(8, 10, 14, 0.55);
+    backdrop-filter: blur(3px);
 }
 
 a {
     text-decoration: none;
     color: var(--linkText);
-    font-weight: bold;
+    font-weight: 600;
+    transition: color var(--animation-speed);
 }
 
 a:hover {
     text-decoration: none;
+    color: var(--color-accent-400);
 }
 
 a.disabled {
     pointer-events: none;
     cursor: default;
-    color: #999;
+    color: var(--color-text-disabled);
 }
 
 .background_paper {
@@ -140,17 +243,16 @@ a.disabled {
     margin-top: 3px;
     margin-right: 5px;
     display: block;
-    opacity: 0.2;
+    opacity: 0.35;
     background-image: url(/images/icons/cf_icon_info_grey.svg);
     background-size: contain;
     background-position: center;
-    transition: none;
+    transition: opacity var(--animation-speed);
 }
 
 .helpicon:hover {
-    opacity: 0.9;
+    opacity: 1;
     background-image: url(/images/icons/cf_icon_info_orange.svg);
-    transition: none;
 }
 
 .gui_box_titlebar .helpicon {
@@ -159,20 +261,19 @@ a.disabled {
 }
 
 .cf_doc_version_bt a {
-    padding: 1px 9px 1px 9px;
+    padding: 1px 10px;
     margin-top: -45px;
-    background-color: var(--button-background);
-    border-radius: 1px;
-    border: 1px solid var(--button-border);
-    color: #000;
+    background-color: var(--color-btn-bg);
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    color: var(--color-btn-fg);
     float: right;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 10px;
-    line-height: 17px;
-    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+    line-height: 18px;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
-    transition: all ease 0.1s;
+    letter-spacing: 0.04em;
+    transition: background-color var(--animation-speed), color var(--animation-speed);
     display: block;
 }
 
@@ -300,20 +401,31 @@ input[type="number"]::-webkit-inner-spin-button {
 /** Header **/
 .headerbar {
     height: 115px;
-    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.15));
+    background-color: var(--chrome-bg);
+    border-bottom: 1px solid var(--chrome-border);
     display: flex;
     align-items: center;
-    padding: 0 15px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
 }
 
 #menu_btn, #reveal_btn {
     display: none;
-    width: 24px;
-    height: 24px;
-    font-size: 20px;
-    color: #ffffff;
-    line-height: 24px;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    color: var(--chrome-fg);
+    line-height: 32px;
     text-align: center;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color var(--animation-speed), color var(--animation-speed);
+}
+
+#menu_btn:hover, #reveal_btn:hover {
+    background-color: var(--chrome-hover);
+    color: #fff;
 }
 
 #menu_btn {
@@ -358,7 +470,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #port-picker .auto_connect, #port-picker .show_all_ports, .gray {
-    color: var(--subtleAccent);
+    color: var(--chrome-fg-muted);
+    font-size: 11px;
 }
 
 #firmware-virtual-option {
@@ -376,20 +489,23 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #port-override-option label {
-    background-color: #2b2b2b;
-    border-radius: 3px;
-    padding: 3px;
-    color: var(--subtleAccent);
+    background-color: var(--chrome-bg-sunken);
+    border: 1px solid var(--chrome-border);
+    border-radius: var(--radius-sm);
+    padding: 4px 6px;
+    color: var(--chrome-fg-muted);
+    font-size: 11px;
 }
 
 #port-override {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: #888888;
+    background-color: var(--chrome-bg-raised);
+    border: 1px solid var(--chrome-border);
+    color: var(--chrome-fg);
     width: 140px;
-    margin-left: 2px;
-    padding: 1px;
-    border-radius: 3px;
-    height: 15px;
+    margin-left: 4px;
+    padding: 1px 6px;
+    border-radius: var(--radius-xs);
+    height: 18px;
     font-size: 12px;
 }
 
@@ -426,14 +542,17 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .firmware_b a.flash, .connect_b a.connect {
-    background-color: rgba(0,0,0,0);
-    border: 2px solid #808080;
+    background-color: var(--chrome-bg-raised);
+    border: 1px solid var(--chrome-border);
     background-repeat: no-repeat;
     height: 50px;
     width: 50px;
     border-radius: 100px;
     float: left;
-    transition: all ease 0.1s;
+    transition: background-color var(--animation-speed),
+                border-color var(--animation-speed),
+                box-shadow var(--animation-speed),
+                transform var(--animation-speed);
 }
 
 .firmware_b a.flash {
@@ -449,19 +568,23 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .firmware_b a.flash.disabled, .connect_b a.connect.disabled {
-    border: none;
+    border-color: transparent;
+    background-color: transparent;
+    opacity: 0.4;
     cursor: default;
     pointer-events: none;
 }
 
 .firmware_b a.flash:hover, .connect_b a.connect:hover {
-    background-color: #007cc7;
-    border-color: #e0e0e0;
+    background-color: var(--chrome-accent);
+    border-color: var(--chrome-accent);
+    box-shadow: 0 0 0 4px rgba(0, 124, 199, 0.28);
 }
 
 .firmware_b a.flash:active, .connect_b a.connect:active {
-    background-color: #4da8da;
-    border-color: #ffffff;
+    background-color: var(--chrome-accent-hover);
+    border-color: var(--chrome-accent-hover);
+    transform: scale(0.96);
 }
 
 .firmware_b a.flash.active {
@@ -473,26 +596,45 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .flash_state, .connect_state {
-    color: #fff;
-    font-size: 12px;
-    font-weight: normal;
-    text-shadow: 0 1px rgba(0, 0, 0, 0.25);
-    padding: 5px 12px;
+    color: var(--chrome-fg);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 8px 12px 0;
 }
 
 .header-wrapper {
     display: flex;
+    /* Wrap instead of squeezing the three status boxes below their real
+       content width. Without this, on a window narrower than desktop but
+       still well above the 575px "phone" breakpoint below (where
+       .header-wrapper is hidden behind the reveal toggle entirely), plain
+       flex shrinking could compress #sensor-status narrower than the
+       165px its five floated sensor icons need - and since #sensor-status
+       has a fixed height (not min-height), the icons that no longer fit
+       on one row spill out below the box instead of growing it, visibly
+       overlapping the page content underneath the header. flex-wrap here
+       plus flex-shrink:0 below (so a squeezed box wraps to its own line
+       instead of compressing) fixes that without touching the 575px
+       phone layout at all - on any window wide enough for these to fit
+       on one line (the common case), this changes nothing. */
+    flex-wrap: wrap;
+}
+
+#quad-status_wrapper,
+#sensor-status,
+#dataflash_wrapper_global {
+    flex-shrink: 0;
 }
 
 #sensor-status {
     margin-right: 10px;
     line-height: 2px;
     height: 67px;
-    border-radius: 5px;
-    border: 1px solid #272727;
-    box-shadow: 0 2px 0 rgba(92, 92, 92, 0.5);
-    background-color: #434343;
-    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.55));
+    border-radius: var(--radius-md);
+    border: 1px solid var(--chrome-border);
+    background-color: var(--chrome-bg-raised);
+    overflow: hidden;
 }
 
 @media all and (min-width: 1125px) {
@@ -507,29 +649,31 @@ input[type="number"]::-webkit-inner-spin-button {
     width: 33px;
     line-height: 18px;
     text-align: center;
-    border-top: 1px solid #373737;
-    border-bottom: 1px solid #1a1a1a;
-    border-left: 1px solid #373737;
-    border-right: 1px solid #222222;
-    background-color: #434343;
-    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.45));
+    border: 0;
+    /* A single hairline between cells instead of the old four-sided
+       bevel - the group already has its own outer border and radius. */
+    border-left: 1px solid var(--chrome-border);
+    background-color: transparent;
     padding-left: 5px;
     padding-right: 5px;
-    text-shadow: 0 1px rgba(0, 0, 0, 1.0);
 }
 
-.gyroicon, .accicon, .magicon, .gpsicon, .baroicon, .sonaricon {
+.gyroicon, .accicon, .magicon, .gpsicon, .baroicon {
     background-repeat: no-repeat;
     height: 30px;
     margin-top: 3px;
     width: 100%;
     padding-top: 40px;
-    color: #4f4f4f;
+    color: hsl(208, 8%, 42%);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     text-align: center;
+    transition: color var(--animation-speed);
 }
 
-.gyroicon.active, .accicon.active, .magicon.active, .gpsicon.active, .baroicon.active, .sonaricon.active {
-    color: #818181;
+.gyroicon.active, .accicon.active, .magicon.active, .gpsicon.active, .baroicon.active {
+    color: var(--chrome-fg);
 }
 
 #sensor-status div {
@@ -587,51 +731,30 @@ input[type="number"]::-webkit-inner-spin-button {
     background-image: url(/images/icons/sensor_baro_on.png);
 }
 
-.sonaricon {
-    background-image: url(/images/icons/sensor_sonar_off.png);
-    background-size: 41px;
-    background-position: -4px 1px;
-}
 
-.sonaricon.active {
-    background-image: url(/images/icons/sensor_sonar_on.png);
-}
-
-#sensor-status li:last-child {
-    border-right: 0 solid #c0c0c0;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
 
 #sensor-status li:first-child {
-    border-left: 0 solid #c0c0c0;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-left: 0;
 }
 
 #sensor-status .on {
-    background-color: #434343;
-    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.45));
+    background-color: transparent;
 }
 
 /* Dataflash element styling*/
 
 #dataflash_wrapper_global {
-    color:white;
+    color: var(--chrome-fg);
     font-size:10px;
     width:125px;
     margin-right: 5px;
     line-height: 12px;
     height: 33px;
-    border-radius: 5px;
-    border: 1px solid #272727;
-    box-shadow: 0 1px 0 rgba(92, 92, 92, 0.5);
-    background-color: #434343;
-    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.55));
+    border-radius: var(--radius-md);
+    border: 1px solid var(--chrome-border);
+    background-color: var(--chrome-bg-raised);
     padding-top:5px;
     display:none;
-    text-shadow: 0 1px rgba(0, 0, 0, 1.0);
-
 }
 
 @media all and (min-width: 1125px) {
@@ -642,21 +765,26 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .dataflash-contents_global {
     margin-top: 18px;
-    border: 1px solid #4A4A4A;
-    background-color: #4A4A4A;
+    border: 1px solid var(--chrome-border);
+    background-color: var(--chrome-bg-sunken);
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    border-radius: 3px;
+    border-radius: var(--radius-pill);
+    /* No overflow:hidden here. The "Free space" legend is an absolutely
+       positioned child of the <li> inside this bar, sitting at top:-18px
+       (i.e. above the bar), so clipping to the bar hides the label
+       entirely. The fill rounds its own corners instead. */
     margin-left: 5px;
     margin-right: 5px;
 }
 
 
 .dataflash-free_global {
-    background-color: var(--accent);
-    border-radius: 4px;
+    background-color: var(--chrome-accent);
+    border-radius: var(--radius-pill);
+    transition: width var(--animation-speed-slow);
 }
 
 
@@ -680,7 +808,7 @@ input[type="number"]::-webkit-inner-spin-button {
     right: 0;
     width:120px;
     text-align: left;
-    color:silver;
+    color: var(--chrome-fg-muted);
 }
 
 .dataflash-contents_global progress::-webkit-progress-bar {
@@ -694,9 +822,8 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .noflash_global {
     display:none;
-    color: #868686;
+    color: var(--chrome-fg-muted);
     text-align: center;
-    text-shadow: 0 1px rgba(0, 0, 0, 1.0);
     margin-top:2px;
 }
 
@@ -709,18 +836,16 @@ input[type="number"]::-webkit-inner-spin-button {
 
 #quad-status_wrapper {
     display:none;
-    color: white;
+    color: var(--chrome-fg);
     font-size: 10px;
     min-width: 90px;
     margin-right: 10px;
     line-height: 12px;
     height: 67px;
-    border-radius: 5px;
-    border: 1px solid #272727;
-    box-shadow: 0 1px 0 rgba(92, 92, 92, 0.5);
-    background-color: #434343;
-    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.55));
-    text-shadow: 0 1px rgba(0, 0, 0, 1.0);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--chrome-border);
+    background-color: var(--chrome-bg-raised);
+    overflow: hidden;
 }
 
 @media all and (min-width: 1125px) {
@@ -835,7 +960,13 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 /** Header (phones) **/
-@media all and (max-width: 575px) {
+/* 1100px, not 575px - matches the breakpoint the sidebar (.tab_container,
+   see "Tabs (phones)" below) already drops to icon-only at, and is now
+   raised to fully hand off to along with this compact header, rather than
+   leaving an in-between zone where the header has no room to spare but
+   still tries to render its full desktop layout (see the .header-wrapper
+   comment above for the specific overflow that caused). */
+@media all and (max-width: 1100px) , only screen and (max-device-width: 1100px) {
     .headerbar {
         height: 56px;
         background: rgba(0, 0, 0, 0.15);
@@ -932,17 +1063,19 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /** Log **/
 #log {
-    background-color: #242424;
-    color: rgba(255, 255, 255, 0.60);
+    background-color: var(--chrome-bg-sunken);
+    color: var(--chrome-fg-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
     line-height: 21px;
     height: 27px;
     overflow-y: hidden;
-    transition: all 0.2s;
+    border-bottom: 1px solid var(--chrome-border);
+    transition: height var(--animation-speed-slow);
 }
 
 #log.active {
     overflow-y: auto;
-    box-shadow: inset 0 0 15px #000000;
     height: 111px;
 }
 
@@ -977,8 +1110,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #log a {
-    font-weight: normal;
-    color: #ffbb00;
+    font-weight: 600;
+    color: var(--color-accent-500);
 }
 
 #log a:hover {
@@ -993,12 +1126,13 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .logswitch a {
-    color: #656565 !important;
-    transition: all 0.2s;
+    color: var(--chrome-fg-muted) !important;
+    font-family: var(--font-ui);
+    transition: color var(--animation-speed);
 }
 
 .logswitch a:hover {
-    color: #959595 !important;
+    color: #ffffff !important;
     text-decoration: none !important;
 }
 
@@ -1008,7 +1142,7 @@ input[type="number"]::-webkit-inner-spin-button {
         box-shadow: none;
     }
     .logswitch {
-        background-color: #242424;
+        background-color: var(--chrome-bg-sunken);
     }
     #scrollicon {
         display: none;
@@ -1038,7 +1172,10 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 /** Tabs & content container (phones) **/
-@media all and (max-width: 575px) {
+/* Matches the headerbar's own 1100px breakpoint above - this is the
+   compact header's height math (56px collapsed vs. 115px desktop), so it
+   has to switch at the same point the header actually does. */
+@media all and (max-width: 1100px) , only screen and (max-device-width: 1100px) {
     #tab-content-container {
         height: calc(100% - 83px);
     }
@@ -1063,8 +1200,13 @@ input[type="number"]::-webkit-inner-spin-button {
 /** Tabs **/
 .tab_container {
     width: 200px;
-    border-right: 4px solid var(--accent);
-    background-color: #2e2e2e;
+    /* Was a 4px accent slab. The nav no longer needs a coloured edge to
+       separate itself now that the rail and the workspace are different
+       surfaces, and the accent reads far better spent on the active tab
+       than on a permanent stripe. #content's width calc below tracks
+       this border, so the two have to change together. */
+    border-right: 1px solid var(--chrome-border);
+    background-color: var(--chrome-bg);
     overflow: auto;
 }
 
@@ -1079,6 +1221,7 @@ input[type="number"]::-webkit-inner-spin-button {
 #tabs {
     font-size: 13px;
     overflow-x: hidden;
+    padding: 8px;
 }
 
 .header-wrapper .mode-connected {
@@ -1094,27 +1237,43 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #tabs li {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.30);
-}
-
-#tabs li:first-child {
-    border-top: 0;
-}
-
-#tabs li:last-child {
     border-bottom: 0;
 }
 
+/* Group labels are typographic dividers now, not shaded bands - the
+   uppercase micro-label plus the space above it is enough separation and
+   keeps the rail from looking striped. */
+#tabs li.tab-group-header {
+    margin-top: 14px;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--chrome-fg-muted);
+    background: none;
+    border-bottom: 0;
+    cursor: default;
+    user-select: none;
+}
+
+#tabs li.tab-group-header:first-child {
+    margin-top: 0;
+}
+
 #tabs li a {
-    font-weight: normal;
-    padding-left: 33px;
+    position: relative;
+    font-weight: 500;
+    padding-left: 38px;
+    margin: 1px 0;
+    border-radius: var(--radius-sm);
     background-color: transparent;
-    color: #999999;
-    height: 30px;
-    line-height: 30px;
+    color: var(--chrome-fg);
+    height: 32px;
+    line-height: 32px;
     display: block;
-    transition: none;
-    border-top: solid 1px rgba(255, 255, 255, 0.05);
+    border-top: 0;
+    transition: background-color var(--animation-speed), color var(--animation-speed);
     /* following is just for a graceful degradation */
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1123,31 +1282,30 @@ input[type="number"]::-webkit-inner-spin-button {
 
 #tabs li a:hover {
     text-decoration: none;
-    background-color: rgba(128, 128, 128, 0.50);
+    background-color: var(--chrome-hover);
     color: #fff;
-
 }
 
 #tabs li.active {
     color: #fff;
-    transition: none;
 }
 
 #tabs li.active a {
-    background-color: var(--accent);
-    color: #000;
-    transition: none;
+    background-color: var(--chrome-accent);
+    color: var(--chrome-accent-fg);
+    font-weight: 600;
+    box-shadow: 0 2px 10px -3px var(--chrome-accent);
 }
 
 #tabs li.active a:hover {
     cursor: default;
-    background-color: var(--accent);
+    background-color: var(--chrome-accent);
 }
 
 .tabicon {
     background-repeat: no-repeat;
-    background-size: 15px;
-    background-position: 13px center;
+    background-size: 16px;
+    background-position: 12px center;
 }
 
 @media only screen and (max-height: 750px) , only screen and (max-device-height: 750px) {
@@ -1172,7 +1330,12 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 /** Tabs (phones) **/
-@media all and (max-width: 575px) {
+/* 1100px - matches the headerbar/tab-content-container breakpoints above:
+   the side nav now goes fully off-canvas (behind the hamburger drawer)
+   at the same point the header drops to compact mode, instead of sitting
+   in an in-between icon-only state that no longer has a compact-enough
+   header alongside it. */
+@media all and (max-width: 1100px) , only screen and (max-device-width: 1100px) {
     #logo-desktop {
         display: none;
     }
@@ -1268,6 +1431,18 @@ li.active .ic_gyro {
     background-image: url(/images/icons/cf_icon_sensors_white.svg);
 }
 
+.ic_governor {
+    background-image: url(/images/icons/cf_icon_governor_grey.svg);
+}
+
+.ic_governor:hover {
+    background-image: url(/images/icons/cf_icon_governor_white.svg);
+}
+
+li.active .ic_governor {
+    background-image: url(/images/icons/cf_icon_governor_white.svg);
+}
+
 .ic_rx {
     background-image: url(/images/icons/cf_icon_rx_grey.svg);
 }
@@ -1303,6 +1478,9 @@ li.active .ic_modes {
 li.active .ic_adjust {
     background-image: url(/images/icons/cf_icon_adjust_white.svg);
 }
+
+
+
 
 .ic_servo {
     background-image: url(/images/icons/cf_icon_servo_grey.svg);
@@ -1436,18 +1614,6 @@ li.active .ic_motor {
     background-image: url(/images/icons/cf_icon_motor_white.svg);
 }
 
-.ic_governor {
-    background-image: url(/images/icons/cf_icon_governor_grey.svg);
-}
-
-.ic_governor:hover {
-    background-image: url(/images/icons/cf_icon_governor_white.svg);
-}
-
-li.active .ic_governor {
-    background-image: url(/images/icons/cf_icon_governor_white.svg);
-}
-
 .ic_welcome {
     background-image: url(/images/icons/cf_icon_welcome_grey.svg);
 }
@@ -1569,9 +1735,10 @@ li.active .ic_mission {
 
 /** Content **/
 #content {
-    background-color: white;
+    background-color: var(--color-bg);
     -webkit-transform: rotateX(0deg); /* DO NOT REMOVE! this fixes the UI freezing bug on MAC OS X */
-    width: calc(100% - 202px);
+    /* 200px rail + its 1px right border. */
+    width: calc(100% - 201px);
 }
 
 @media only screen and (max-width: 1100px) , only screen and (max-device-width: 1100px) {
@@ -1581,7 +1748,11 @@ li.active .ic_mission {
 }
 
 /** Content (phones) **/
-@media all and (max-width: 575px) {
+/* 1100px - matches the sidebar going fully off-canvas at that width now
+   (see "Tabs (phones)" above): once it's not reserving any width, content
+   should reclaim all of it at the same point, not still leave room for
+   the now-gone icon-only column between 1100px and the old 575px. */
+@media all and (max-width: 1100px) , only screen and (max-device-width: 1100px) {
     #content {
         width: 100%;
     }
@@ -1625,14 +1796,22 @@ li.active .ic_mission {
 }
 
 dialog {
-    background-color: white;
-    padding: 1em;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    padding: 20px 22px;
     height: fit-content;
     margin: auto auto;
     position: absolute;
     width: 50%;
-    border-radius: 3px;
-    border: 1px solid silver;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-soft);
+    box-shadow: var(--shadow-lg);
+}
+
+dialog h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
 }
 
 .dialogTabExit {
@@ -1701,8 +1880,7 @@ dialog .dialog_toolbar .btn a.disabled {
     dialog {
         position: fixed;
         width: calc(100% - 2em) !important;
-        height: auto !important;
-        bottom: 0;
+        max-height: calc(100% - 56px - 2em);
         top: 56px;
         border-radius: unset;
         border: none;
@@ -1713,46 +1891,57 @@ dialog .dialog_toolbar .btn a.disabled {
 
 /* Note */
 .note {
-    background-color: #fff7cd;
-    border: 1px solid #ffe55f;
-    margin-bottom: 10px;
+    /* A tinted callout with a coloured leading edge reads as an aside at
+       a glance; the old solid-yellow panel read as a warning even for
+       purely informational copy. */
+    background-color: var(--color-surface-sunken);
+    border: 1px solid var(--color-border-soft);
+    border-left: 3px solid var(--color-yellow-500);
+    color: var(--color-text-soft);
+    margin-bottom: 12px;
     margin-top: 0;
-    border-radius: 3px;
+    border-radius: var(--radius-sm);
     font-size: 11px;
     font-weight: normal;
-    line-height: 16px;
-    padding: 5px 7px 5px 7px;
+    line-height: 17px;
+    padding: 8px 10px;
 }
 
 code {
     font-family: var(--font-mono);
-    color: #fff;
-    background-color: #000;
-    padding: 2px 4px;
-    margin: 4px;
-    border: none;
-    border-radius: 5px;
+    font-size: 0.92em;
+    color: var(--color-text);
+    background-color: var(--color-surface-sunken);
+    border: 1px solid var(--color-border-soft);
+    padding: 1px 5px;
+    margin: 0 2px;
+    border-radius: var(--radius-xs);
 }
 
 span.value {
     display: inline-block;
-    line-height: 12px;
+    line-height: 14px;
     font-size: 11px;
+    font-variant-numeric: tabular-nums;
     text-align: right;
     box-sizing: border-box;
-    border: 1px solid var(--subtleAccent);
-    border-radius: 2px;
-    padding: 0 4px;
+    color: var(--color-text-soft);
+    background-color: var(--color-surface-sunken);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xs);
+    padding: 1px 5px;
     margin: 2px 1px;
 }
 
 /* Tab Title */
 .tab_title {
-    border-bottom: 1px solid var(--accent);
+    border-bottom: 1px solid var(--color-border-soft);
+    color: var(--color-text);
     font-size: 20px;
     line-height: 24px;
     height: 30px;
-    font-weight: 300;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     margin-bottom: 15px;
 }
 
@@ -1769,11 +1958,11 @@ span.value {
     /*  content toolbar panel */
     width: 100%;
     height: 30px;
-    background-color: #EFEFEF;
-    box-shadow: rgba(0, 0, 0, 0.10) 0 -1px 8px;
+    background-color: var(--color-surface);
+    box-shadow: 0 -2px 10px -4px var(--color-shadow);
     padding: 10px 0;
     overflow: hidden;
-    border-top: 1px solid var(--subtleAccent);
+    border-top: 1px solid var(--color-border-soft);
 }
 
 html[data-theme="dark"] .content_toolbar button,
@@ -1998,53 +2187,42 @@ html[data-theme="dark"] .content_toolbar button:active,
 
 /* Standard GUI BOX */
 .gui_box {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #FFFFFF;
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
     float: left;
     width: calc(100% - 2px);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .gui_warning {
-    background: #f1f1f1;
+    background: var(--color-surface);
 }
 
 .gui_note {
-    background: #fff6de;
+    background: var(--color-surface);
 }
 
-.gui_warning .gui_box_titlebar {
-    background-color: #dc0000;
-    background-image: linear-gradient(-45deg, rgba(255, 255, 255, .3) 10%, transparent 10%, transparent 20%,
-        rgba(255, 255, 255, .3) 20%, rgba(255, 255, 255, .3) 30%, transparent 30%, transparent 40%,
-        rgba(255, 255, 255, .3) 40%, rgba(255, 255, 255, .3) 50%, transparent 50%, transparent 60%,
-        rgba(255, 255, 255, .3) 60%, rgba(255, 255, 255, .3) 70%, transparent 70%, transparent 80%,
-        rgba(255, 255, 255, .3) 80%, rgba(255, 255, 255, .3) 90%, transparent 90%, transparent 100%,
-        rgba(255, 255, 255, .4) 100%, transparent);
-    color: white;
-}
-
+.gui_warning .gui_box_titlebar,
 .gui_note .gui_box_titlebar {
-    background-color: var(--accent);
-    background-image: linear-gradient(-45deg, rgba(255, 255, 255, .3) 10%, transparent 10%, transparent 20%,
-        rgba(255, 255, 255, .3) 20%, rgba(255, 255, 255, .3) 30%, transparent 30%, transparent 40%,
-        rgba(255, 255, 255, .3) 40%, rgba(255, 255, 255, .3) 50%, transparent 50%, transparent 60%,
-        rgba(255, 255, 255, .3) 60%, rgba(255, 255, 255, .3) 70%, transparent 70%, transparent 80%,
-        rgba(255, 255, 255, .3) 80%, rgba(255, 255, 255, .3) 90%, transparent 90%, transparent 100%,
-        rgba(255, 255, 255, .4) 100%, transparent);
-    color: white;
+    background-color: var(--color-accent-500);
+    background-image: none;
+    border-bottom-color: transparent;
+    color: #fff;
 }
 
 
 .grey {
-    background-color: #f9f9f9
+    background-color: var(--color-surface-sunken);
 }
 
 .gui_box_titlebar {
-    background-color: var(--quietHeader);
-    color: var(--quietText);
-    border-radius: 3px 3px 0 0;
+    background-color: var(--color-header-bg);
+    color: var(--color-header-fg);
+    border-bottom: 1px solid var(--color-border-soft);
+    border-radius: 0;
     font-size: 13px;
     width: 100%;
     height: 27px;
@@ -2055,8 +2233,9 @@ html[data-theme="dark"] .content_toolbar button:active,
 }
 
 .gui_box_bottombar {
-    background-color: #e4e4e4;
-    border-radius: 0 0 3px 3px;
+    background-color: var(--color-surface-sunken);
+    border-top: 1px solid var(--color-border-soft);
+    border-radius: 0;
     font-size: 13px;
     width: 100%;
     height: 27px;
@@ -2082,10 +2261,10 @@ html[data-theme="dark"] .content_toolbar button:active,
 .fixed_band {
     position: relative;
     height: 50px;
-    background-color: #e4e4e4;
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border-soft);
     width: calc(100% + 40px);
     margin-left: -20px;
-    box-shadow: rgba(0, 0, 0, 0.00) 0 -3px 8px;
     bottom: 0;
     margin-bottom: 0;
 }
@@ -2129,45 +2308,51 @@ html[data-theme="dark"] .content_toolbar button:active,
 }
 
 .default_btn a {
-    padding: 5px 0 5px 0;
+    padding: 7px 0;
     text-align: center;
-    background-color: var(--button-background);
-    border: 1px solid var(--button-border);
-    border-radius: 1px;
-    color: #000;
+    background-color: var(--color-btn-bg);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    color: var(--color-btn-fg);
     font-weight: 600;
     font-size: 12px;
-    line-height: 13px;
-    transition: all ease 0.2s;
+    line-height: 14px;
+    transition: background-color var(--animation-speed),
+                color var(--animation-speed),
+                box-shadow var(--animation-speed);
     text-decoration:none;
     cursor: pointer;
     display: block;
 }
 
 .default_btn a.disabled {
-    background-color: #f1f1f1;
-    border: 1px solid var(--subtleAccent);
-    color: #ccc;
+    background-color: var(--color-btn-bg-disabled);
+    border-color: transparent;
+    color: var(--color-btn-fg-disabled);
+    cursor: not-allowed;
 }
 
 .default_btn a:hover {
-    background-color: var(--hoverButton-background);
-    border-color: var(--hoverButton-border);
-    color: #000;
-    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+    background-color: var(--color-btn-bg-hover);
+    color: var(--color-btn-fg);
     text-decoration:none;
 }
 
 .default_btn a:active {
-    background-color: var(--pushedButton-background);
-    border-color: var(--pushedButton-border);
+    background-color: var(--color-btn-bg-active);
+}
+
+.default_btn a:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--color-focus-ring);
 }
 
 .default_btn_pushed a,
 .default_btn_pushed a:hover,
 .default_btn_pushed a:active {
-    background-color: var(--pushedButton-background);
-    border: 1px solid var(--pushedButton-border);
+    background-color: var(--color-accent-500);
+    border-color: transparent;
+    color: var(--color-accent-fg);
 }
 
 .regular-button {
@@ -2175,40 +2360,55 @@ html[data-theme="dark"] .content_toolbar button:active,
     margin-top: 8px;
     margin-bottom: 8px;
     margin-right: 10px;
-    background-color: var(--button-background);
-    border-radius: 1px;
-    border: 1px solid var(--button-border);
-    color: #000;
-    font-weight: bold;
+    background-color: var(--color-btn-bg);
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    color: var(--color-btn-fg);
+    font-weight: 600;
     font-size: 12px;
-    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     display: inline-block;
     cursor: pointer;
-    transition: all ease 0.1s;
-    padding: 0 9px;
+    transition: background-color var(--animation-speed),
+                color var(--animation-speed),
+                box-shadow var(--animation-speed);
+    padding: 0 14px;
     line-height: 28px;
     user-select: none;
 }
 
 .regular-button:hover {
-    background-color: var(--hoverButton-background);
-    border-color: var(--hoverButton-border);
+    background-color: var(--color-btn-bg-hover);
+    color: var(--color-btn-fg);
 }
 
 .regular-button:active {
-    background-color: var(--pushedButton-background);
-    border-color: var(--pushedButton-border);
-    color: var(--pushedButton-fontColor);
+    background-color: var(--color-btn-bg-active);
+    color: var(--color-btn-fg);
+}
+
+.regular-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* Opt-in accent variant so a dialog or toolbar can mark its one real
+   call to action; everything else stays neutral. */
+.regular-button.primary {
+    background-color: var(--color-accent-500);
+    color: var(--color-accent-fg);
+}
+
+.regular-button.primary:hover {
+    background-color: var(--color-accent-hover);
+    color: var(--color-accent-fg);
 }
 
 .regular-button.disabled {
     cursor: default;
-    color: #fff;
-    background-color: #AFAFAF;
-    border-color: #AFAFAF;
+    color: var(--color-btn-fg-disabled);
+    background-color: var(--color-btn-bg-disabled);
+    border-color: transparent;
     pointer-events: none;
-    text-shadow: none;
-    opacity: 0.5;
 }
 
 .small {
@@ -2221,44 +2421,41 @@ html[data-theme="dark"] .content_toolbar button:active,
 }
 
 .small a {
-    padding: 3px 4px 4px 4px;
+    padding: 4px 8px 5px;
     text-align: center;
-    text-shadow: 0 1px rgba(0, 0, 0, 0.25);
-    background-color: #acacac;
-    border-radius: 3px;
-    border: 1px solid #949494;
-    color: #fff;
+    background-color: var(--color-btn-bg);
+    border-radius: var(--radius-xs);
+    border: 1px solid transparent;
+    color: var(--color-btn-fg);
     font-weight: 600;
     font-size: 11px;
-    line-height: 11px;
+    line-height: 12px;
     display: block;
-    transition: all ease 0.1s;
+    transition: background-color var(--animation-speed), color var(--animation-speed);
 }
 
 .small a:hover {
-    background-color: var(--accent);
-    color: #000;
-    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
-    border: 1px solid var(--accent);
+    background-color: var(--color-accent-500);
+    color: var(--color-accent-fg);
+    border-color: transparent;
 }
 
 .small a:active {
-    background-color: #878787;
+    background-color: var(--color-accent-400);
+    color: var(--color-accent-fg);
 }
 
 .green a {
-    background-color: var(--accent);
-    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
-    color: #000;
-    border: 1px solid var(--button-border);
-    transition: all ease 0.1s;
+    background-color: var(--color-accent-500);
+    color: var(--color-accent-fg);
+    border: 1px solid transparent;
+    transition: background-color var(--animation-speed);
 }
 
 .green a:hover {
-    background-color: #ffcc3f;
-    border: 1px solid var(--button-border);
-    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
-    color: #000;
+    background-color: var(--color-accent-hover);
+    border-color: transparent;
+    color: var(--color-accent-fg);
 }
 
 /* Table styling */
@@ -2380,28 +2577,36 @@ html[data-theme="dark"] .content_toolbar button:active,
 .bottomStatusIcons {
     display: flex;
     justify-content: space-between;
-    background-color: #272727;
+    background-color: var(--chrome-bg-sunken);
+    border-top: 1px solid var(--chrome-border);
     height: 31px;
     margin-top: 2px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
 }
 
 button {
-    padding: .5em .75em;
-    border-radius: 4px;
-    background-color: #ccc;
-    color: #666;
-    border: 1px solid var(--subtleAccent);
+    padding: 0 14px;
+    line-height: 28px;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-btn-bg);
+    color: var(--color-btn-fg);
+    border: 1px solid transparent;
     font-weight: 600;
-    font-size: 10pt;
+    font-size: 12px;
     cursor: pointer;
+    transition: background-color var(--animation-speed),
+                color var(--animation-speed),
+                box-shadow var(--animation-speed);
+}
+
+button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--color-focus-ring);
 }
 
 button.active {
-    background-color: var(--button-background);
-    border: 1px solid var(--button-border);
-    color: #000;
+    background-color: var(--color-accent-500);
+    border-color: transparent;
+    color: var(--color-accent-fg);
 }
 
 .jBox-Tooltip {
@@ -2437,7 +2642,7 @@ button.active {
     margin-bottom: 10px;
 }
 
-.gui_box_titlebar {
+    .gui_box_titlebar {
     font-size: 12px;
     height: 24px;
     padding-bottom: 0;
@@ -2487,24 +2692,26 @@ input {
 }
 
 .darkgrey_box {
-    background-color: #575757;
-    color: white;
+    background-color: var(--color-surface-alt);
+    color: var(--color-text-alt);
 }
 
 .topBorderLine {
-    border-top: 1px solid var(--subtleAccent);
+    border-top: 1px solid var(--color-border-soft);
     padding-top: 5px;
 }
 
 .jBox-container {
-    background: #fff;
-    border:1px solid var(--accent);
+    background: var(--color-surface-float);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
     font-size: 11px;
-    line-height: 13px;
-    color: #525352;
+    line-height: 15px;
+    color: var(--color-text);
 }
 .jBox-content {
-    padding: 4px 5px;
+    padding: 7px 9px;
 }
 .jBox-Modal .jBox-content {
     padding: 10px 15px;

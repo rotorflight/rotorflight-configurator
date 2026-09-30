@@ -41,27 +41,72 @@
     display: grid;
     grid-template-rows: auto 1fr;
     overflow-y: auto;
-    display: content;
+    /* Setting only overflow-y forces overflow-x to compute as "auto" too
+       (that's the CSS spec's rule for mismatched axes) - without this,
+       .wrapper silently becomes a horizontal scroll container for the
+       *whole* tab body (header included) whenever anything inside main
+       is wide, instead of staying vertical-only as intended. */
+    overflow-x: hidden;
   }
 
   .content {
     margin: 0 var(--section-gap) var(--section-gap);
-    border-top-left-radius: 32px;
+  }
+
+  main {
+    /* A grid item with the default overflow:visible sizes itself to fit
+       its widest descendant (e.g. a tab's wide table), which inflates
+       main - and drags .wrapper/.container along with it - instead of
+       letting that descendant's own overflow-x:auto box scroll locally.
+       min-width: 0 lets main shrink to the space it's actually given. */
+    min-width: 0;
   }
 
   .header {
-    padding: 8px var(--section-gap);
+    /* Sticky so the tab title/controls stay put while the (often long)
+       body scrolls underneath - the header lives inside .wrapper, which
+       is the scroll container, so this costs nothing structurally. */
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 10px var(--section-gap);
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     align-items: center;
-    border-bottom: 1px solid var(--color-border-accent);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border-bottom: 1px solid var(--color-border-soft);
 
-    color: var(--color-text-soft);
+    color: var(--color-text);
     background-color: var(--color-surface);
 
     :global(html[data-theme="light"]) & {
-      box-shadow: 0 2px 8px -4px var(--color-shadow);
+      box-shadow: var(--shadow-xs);
     }
+
+    :global(html[data-theme="dark"]) & {
+      border-bottom-color: var(--color-neutral-800);
+    }
+  }
+
+  /* The one bit of brand colour in the tab chrome: a hairline accent rule
+     under the header instead of the old full-weight red border, which
+     read as a warning stripe rather than as structure. */
+  .header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--color-accent-500),
+      transparent 55%
+    );
+    pointer-events: none;
   }
 
   .loading {
@@ -70,6 +115,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  .loading p {
+    color: var(--color-text-muted);
   }
 
   .spinner {
@@ -83,6 +132,12 @@
 
   .toolbar {
     display: flex;
+    /* Wrap instead of forcing every toolbar button into one row: on wide
+       screens there's always enough room so nothing wraps, but tabs with
+       several buttons (e.g. firmware flasher) would otherwise get squeezed
+       below their readable width - or push the whole page into horizontal
+       scroll - on narrow/mobile viewports. */
+    flex-wrap: wrap;
     gap: 8px;
     padding: 8px;
     justify-content: end;
@@ -94,13 +149,13 @@
 
     :global(html[data-theme="light"]) & {
       background: var(--color-surface);
-      border-top: 1px solid var(--color-border);
-      box-shadow: 0 -2px 8px -2px var(--color-shadow);
+      border-top: 1px solid var(--color-border-soft);
+      box-shadow: 0 -2px 10px -4px var(--color-shadow);
     }
 
     :global(html[data-theme="dark"]) & {
-      background: var(--color-neutral-700);
-      border-top: 1px solid var(--color-neutral-500);
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-neutral-800);
     }
   }
 
@@ -111,6 +166,10 @@
 
     .header {
       margin-bottom: 8px;
+    }
+
+    .toolbar {
+      justify-content: center;
     }
   }
 </style>

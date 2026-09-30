@@ -15,6 +15,7 @@ const tabHelpURLs = {
     tabPower:           `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/power`,
     tabMotors:          `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/motors`,
     tabServos:          `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/servos`,
+    tabXactServoProgramming: `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/xact-servo-programming`,
     tabMixer:           `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/mixer`,
     tabGyro:            `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/gyro`,
     tabRates:           `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/rates`,
