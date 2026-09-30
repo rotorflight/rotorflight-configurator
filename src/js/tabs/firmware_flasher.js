@@ -5,7 +5,19 @@ import * as config from '@/js/config.js';
 import { readTextFile, writeTextFile } from '@/js/filesystem.js';
 import * as github from '@/js/GitHubApi.js';
 import { ReleaseChecker } from '@/js/release_checker.js';
+import { requestWebUsbDeviceFromPicker } from '@/js/serial_backend.js';
 import { manufacturers } from "@/js/manufacturers.js";
+
+// GitHub release downloads send no CORS headers, so a browser page can't fetch
+// them. The web build downloads the copies that rotorflight/rotorflight-artifacts
+// keeps of every release (see its sync-firmware.yml) through jsDelivr, which
+// does send them. The desktop app still downloads from the release itself.
+function firmwareDownloadUrl(release, asset) {
+    if (__BACKEND__ === "web") {
+        return `https://cdn.jsdelivr.net/gh/rotorflight/rotorflight-artifacts@master/firmware/${release.tag_name}/${asset.name}`;
+    }
+    return asset.browser_download_url;
+}
 
 async function getCachedUnifiedTargets() {
   const { unifiedSourceCache } = await new Promise((resolve) => chrome.storage.local.get("unifiedSourceCache", resolve));
@@ -202,7 +214,7 @@ tab.initialize = function (callback) {
                         "releaseUrl": release.html_url,
                         "name"      : version,
                         "version"   : version,
-                        "url"       : asset.browser_download_url,
+                        "url"       : firmwareDownloadUrl(release, asset),
                         "file"      : asset.name,
                         "target"    : target,
                         "date"      : formattedDate,
@@ -1113,6 +1125,10 @@ tab.initialize = function (callback) {
 };
 
 tab.cleanup = function (callback) {
+    // Leaving the tab mid-prompt must still release GUI.connect_lock and
+    // finish the flash attempt, or the next visit starts out locked.
+    tab.resolveDfuPermission(false);
+
     PortHandler.flush_callbacks();
     FirmwareCache.unload();
 
@@ -1132,6 +1148,54 @@ tab.enableFlashing = function (enabled) {
         $('a.flash_firmware').removeClass('disabled');
     } else {
         $('a.flash_firmware').addClass('disabled');
+    }
+};
+
+// Web build only: a board rebooted from serial into its DFU bootloader shows
+// up as a new USB device, which navigator.usb.getDevices() doesn't report
+// until the user grants access with requestDevice(). That needs a user
+// gesture, which STM32.js's post-reboot code (running off timers) no longer
+// has, and it can't be granted up front because the device doesn't exist
+// until the reboot. So STM32.js parks the rest of the flash here and the
+// toolbar shows a button whose click supplies the gesture.
+let pendingDfuPermission = null;
+
+tab.requestDfuPermission = function (onGranted, onDeclined) {
+    pendingDfuPermission = { onGranted, onDeclined };
+
+    const allow = $('<div class="btn dfu_permission"><a href="#" class="dfu_permission_allow"></a></div>');
+    const cancel = $('<div class="btn dfu_permission"><a href="#" class="dfu_permission_cancel"></a></div>');
+    $('a', allow).text(i18n.getMessage('firmwareFlasherDfuPermissionGrant'));
+    $('a', cancel).text(i18n.getMessage('firmwareFlasherDfuPermissionCancel'));
+
+    $('a', allow).on('click', async function (e) {
+        e.preventDefault();
+        const device = await requestWebUsbDeviceFromPicker();
+        // A cancelled chooser leaves the prompt up so the user can try again.
+        if (device) {
+            tab.resolveDfuPermission(true);
+        }
+    });
+    $('a', cancel).on('click', function (e) {
+        e.preventDefault();
+        tab.resolveDfuPermission(false);
+    });
+
+    $('.content_toolbar .dfu_permission').remove();
+    $('.content_toolbar .info').after(allow, cancel);
+};
+
+tab.resolveDfuPermission = function (granted) {
+    const pending = pendingDfuPermission;
+    pendingDfuPermission = null;
+    $('.content_toolbar .dfu_permission').remove();
+    if (!pending) {
+        return;
+    }
+    if (granted) {
+        pending.onGranted();
+    } else {
+        pending.onDeclined();
     }
 };
 
