@@ -25,11 +25,6 @@
       "type": "branch",
       "name": "RF-2.3.x",
       "path": "./RF-2.3.x/"
-    },
-    {
-      "type": "branch",
-      "name": "feature-web-cache",
-      "path": "./feature-web-cache/"
     }
   ]
 }
