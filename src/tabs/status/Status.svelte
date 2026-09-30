@@ -93,6 +93,7 @@
         ? ["OVERRIDE"]
         : []),
       "NO_NOTCH_FILTER",
+      "BACKUP_RX",
     ];
   }
 
