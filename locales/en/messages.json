@@ -3668,6 +3668,48 @@
     "motorsEscTelemetryPinswapHelp": {
         "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
     },
+    "motorsEscWiringDetectButton": {
+        "message": "Detect Wiring"
+    },
+    "motorsEscWiringDetectHelp": {
+        "message": "<p>Tries every combination of Half-Duplex / Pin Swap for the selected telemetry protocol and stops as soon as one produces a valid frame. Nothing is saved until you press Save on this tab.</p><p><strong>Note:</strong> requires no unsaved changes first - it tests whatever protocol is currently saved on the flight controller, not a pending selection.</p><p>The ESC(s) must be powered and outputting telemetry - detection can't find a wiring combination if nothing is being sent in the first place.</p><p>Only available while disarmed - it cycles the ESC telemetry wiring live while motors could be spinning.</p>"
+    },
+    "motorsEscWiringDetectSaveFirst": {
+        "message": "Save your changes first - this tests whatever is currently saved on the flight controller, not a pending selection."
+    },
+    "motorsEscWiringDetectArmedFirst": {
+        "message": "Disarm first - wiring detection cycles the ESC telemetry connection live and can't run while armed."
+    },
+    "motorsEscWiringDetectWizardTitle": {
+        "message": "Detect ESC Telemetry Wiring"
+    },
+    "motorsEscWiringDetectWizardStep1": {
+        "message": "Step 1 of 2: Scanning"
+    },
+    "motorsEscWiringDetectWizardStep2": {
+        "message": "Step 2 of 2: Result"
+    },
+    "motorsEscWiringDetectScanning": {
+        "message": "Trying combination $1 of $2…"
+    },
+    "motorsEscWiringDetectSuccess": {
+        "message": "Signal found — Half-Duplex: $1, Pin Swap: $2. Save and reboot to keep it, or Close to discard and restore the previous setting."
+    },
+    "motorsEscWiringDetectFailed": {
+        "message": "No valid frame found on any wiring combination for this protocol. Make sure the ESC(s) are powered and outputting telemetry, check the protocol selection and connections, then try again."
+    },
+    "motorsEscWiringDetectRejected": {
+        "message": "Wiring detection was rejected - either it isn't available for this telemetry protocol (Castle Link, F.BUS and SRXL2 ESC telemetry each use their own dedicated connection, not a generic UART), no port is assigned, or the aircraft became armed."
+    },
+    "motorsEscWiringDetectUnsupported": {
+        "message": "Wiring detection is not supported by this firmware build."
+    },
+    "motorsEscWiringDetectWizardRetry": {
+        "message": "Retry"
+    },
+    "motorsEscWiringDetectWizardClose": {
+        "message": "Close"
+    },
     "motorsUnsyncedPwm": {
         "message": "Unsynchronised ESC Update"
     },

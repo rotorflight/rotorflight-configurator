@@ -220,4 +220,11 @@ export const MSPCodes = {
 //  MSP2_GET_VTX_DEVICE_STATUS:         0x3004,
     MSP2_SMARTFUEL_CONFIG:              0x4000,
     MSP2_SET_SMARTFUEL_CONFIG:          0x4001,
+
+    // action: 0 = poll only, 1 = (re)start a scan, 2 = stop/cancel - cycles
+    // the live wiring options for the already-configured protocol and reports
+    // which combo (if any) works. RX: serialrx_inverted/halfDuplex/pinSwap.
+    // ESC telemetry: halfDuplex/pinSwap (no `inverted` - it never inverts).
+    MSP2_ESC_SENSOR_TRIAL:              0x5F0C,
+    MSP2_RX_SERIAL_TRIAL:               0x5F12,
 };
