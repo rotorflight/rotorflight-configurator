@@ -7,6 +7,7 @@
   import Page from "@/components/Page.svelte";
   import Section from "@/components/Section.svelte";
   import Select from "@/components/Select.svelte";
+  import SwashServoDiagram from "@/components/SwashServoDiagram.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
   import InfoNote from "@/components/notes/InfoNote.svelte";
   import WarningNote from "@/components/notes/WarningNote.svelte";
@@ -383,6 +384,10 @@
           swashTypeOptions,
           onRebootChange,
         )}
+        <SwashServoDiagram
+          swashType={form.swashType}
+          tailServo={form.tailMode === TAIL_VARIABLE_PITCH}
+        />
         {@render selectField(
           "mixer-rotor-dir",
           "mixerMainRotorDirection",
