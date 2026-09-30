@@ -1,8 +1,11 @@
 <script>
+  import Expert from "@/components/Expert.svelte";
   import HelpIcon from "@/components/HelpIcon.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Switch from "@/components/Switch.svelte";
 
+  import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+  import { getExpertSection } from "@/js/expert.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import {
@@ -30,12 +33,37 @@
     return FC.BUS_SERVO_CONFIG?.[servo.mspIndex - BUS_SERVO_OFFSET] ?? 0;
   }
 
+  // Speed and geometry correction are expert columns. The header cell is an
+  // <Expert> (so the Section counts each column once); the row cells follow
+  // the same rule, including staying shown once a changed value was seen.
+  // A column counts as changed when any servo in this table differs from the
+  // firmware default (speed 0, geometry correction off).
+  const section = getExpertSection();
+  let speedChanged = $derived(
+    servos.some((s) => FC.SERVO_CONFIG[s.index].speed !== 0),
+  );
+  let geoCorChanged = $derived(servos.some((s) => flag(s.index, FLAG_GEOCOR)));
+  let speedKeep = $state(false);
+  let geoCorKeep = $state(false);
+  $effect.pre(() => {
+    if (speedChanged) speedKeep = true;
+    if (geoCorChanged) geoCorKeep = true;
+  });
+  let showSpeed = $derived(
+    CONFIGURATOR.expertMode || speedKeep || speedChanged || section?.revealed,
+  );
+  let showGeoCor = $derived(
+    CONFIGURATOR.expertMode || geoCorKeep || geoCorChanged || section?.revealed,
+  );
+
   // CSS Grid instead of a <table>: HTML tables with border-collapse are
   // prone to sub-pixel row-height rounding that visibly accumulates over
   // many rows (fine at row 1, drifted by row 10+) -- a grid sizes every row
   // independently and doesn't have that failure mode.
-  const gridColumns =
-    "40px repeat(7, minmax(96px, 112px)) 72px 96px minmax(110px, 1fr)";
+  let gridColumns = $derived(
+    `40px repeat(${showSpeed ? 7 : 6}, minmax(96px, 112px)) 72px` +
+      `${showGeoCor ? " 96px" : ""} minmax(110px, 1fr)`,
+  );
 
   // From 4.6.0 the firmware cuts Min/Max back so center + travel stays in
   // the signal range (see servoLimits.js), so the fields stop there too.
@@ -139,21 +167,25 @@
         </HelpIcon>
       </span>
     {/if}
-    <span class="header-label-flex">
-      <span>{$i18n.t("servoSpeed")}</span>
-      <HelpIcon>{$i18n.t("servoSpeedHelp")}</HelpIcon>
-    </span>
+    <Expert changed={speedChanged}>
+      <span class="header-label-flex">
+        <span>{$i18n.t("servoSpeed")}</span>
+        <HelpIcon>{$i18n.t("servoSpeedHelp")}</HelpIcon>
+      </span>
+    </Expert>
     <span class="header-label-flex">
       <span>{$i18n.t("servoReverse")}</span>
       <HelpIcon>{$i18n.t("servoReverseHelp")}</HelpIcon>
     </span>
-    <span class="header-label-flex">
-      <span>{$i18n.t("servoGeometryCorrection")}</span>
-      <HelpIcon>
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        {@html $i18n.t("servoGeometryCorrectionHelp")}
-      </HelpIcon>
-    </span>
+    <Expert changed={geoCorChanged}>
+      <span class="header-label-flex">
+        <span>{$i18n.t("servoGeometryCorrection")}</span>
+        <HelpIcon>
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+          {@html $i18n.t("servoGeometryCorrectionHelp")}
+        </HelpIcon>
+      </span>
+    </Expert>
     <span>{$i18n.t("servoSignal")}</span>
   </div>
 
@@ -220,14 +252,16 @@
           />
         </span>
       {/if}
-      <span>
-        <NumberInput
-          min="0"
-          max="60000"
-          bind:value={config.speed}
-          onchange={() => onFieldChange(servo.index)}
-        />
-      </span>
+      {#if showSpeed}
+        <span>
+          <NumberInput
+            min="0"
+            max="60000"
+            bind:value={config.speed}
+            onchange={() => onFieldChange(servo.index)}
+          />
+        </span>
+      {/if}
       <span class="servo-checkbox">
         <Switch
           bind:checked={
@@ -237,18 +271,20 @@
           onchange={() => onFieldChange(servo.index)}
         />
       </span>
-      <span class="servo-checkbox">
-        <!-- no geometry correction for bus servos driven directly by the RX -->
-        {#if !(servo.isBusServo && busSource(servo) === SOURCE_RX)}
-          <Switch
-            bind:checked={
-              () => flag(servo.index, FLAG_GEOCOR),
-              (v) => setFlag(servo.index, FLAG_GEOCOR, v)
-            }
-            onchange={() => onFieldChange(servo.index)}
-          />
-        {/if}
-      </span>
+      {#if showGeoCor}
+        <span class="servo-checkbox">
+          <!-- no geometry correction for bus servos driven directly by the RX -->
+          {#if !(servo.isBusServo && busSource(servo) === SOURCE_RX)}
+            <Switch
+              bind:checked={
+                () => flag(servo.index, FLAG_GEOCOR),
+                (v) => setFlag(servo.index, FLAG_GEOCOR, v)
+              }
+              onchange={() => onFieldChange(servo.index)}
+            />
+          {/if}
+        </span>
+      {/if}
       <span class="servo-signal">
         <span class="meter">
           <span class="meter-fill" style="width: {meterPercent(servo)}%"></span>
