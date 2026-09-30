@@ -467,7 +467,7 @@ export function updateTabList(features) {
 
 // Tabs only experts need stay out of the nav in basic mode. An open one stays
 // open until the user leaves it.
-const EXPERT_TABS = ['beepers'];
+const EXPERT_TABS = ['beepers', 'sensors'];
 
 function updateExpertTabs() {
     for (const tab of EXPERT_TABS) {
