@@ -20,6 +20,11 @@
       "type": "branch",
       "name": "feature-rf23-web-cache",
       "path": "./feature-rf23-web-cache/"
+    },
+    {
+      "type": "branch",
+      "name": "feature-web-cache",
+      "path": "./feature-web-cache/"
     }
   ]
 }
