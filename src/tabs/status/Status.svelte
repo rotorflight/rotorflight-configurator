@@ -92,6 +92,7 @@
       ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)
         ? ["OVERRIDE"]
         : []),
+      "NO_NOTCH_FILTER",
       "ARM_SWITCH",
     ];
   }
