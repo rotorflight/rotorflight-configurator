@@ -3,13 +3,19 @@
 
   import { i18n } from "@/js/i18n.js";
 
-  // groups: [{ label, modes: [{ value, label, description }] }], only the
-  // modes not already on the page.
-  let { groups, onSelect } = $props();
+  // A modal overlay for choosing one item out of a grouped list: tiles under
+  // group headings, with a search box that filters by label, description
+  // and group. Call open() to show it; onSelect gets the picked value.
+  //
+  // groups: [{ label, items: [{ value, label, description?, badge? }] }]
+  let { title, groups, searchPlaceholder, noMatchesText, onSelect } = $props();
 
   let dialogEl;
   let searchEl = $state();
   let query = $state("");
+  // The value already chosen, if any (e.g. when changing a selection), so
+  // its tile can be marked.
+  let current = $state(null);
 
   let filtered = $derived.by(() => {
     const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
@@ -17,13 +23,13 @@
     return groups
       .map((group) => ({
         ...group,
-        modes: group.modes.filter((mode) => {
+        items: group.items.filter((item) => {
           const haystack =
-            `${mode.label} ${mode.description} ${group.label}`.toLowerCase();
+            `${item.label} ${item.description ?? ""} ${group.label}`.toLowerCase();
           return terms.every((term) => haystack.includes(term));
         }),
       }))
-      .filter((group) => group.modes.length > 0);
+      .filter((group) => group.items.length > 0);
   });
 
   // A native <dialog> centers against the nearest transformed ancestor, and
@@ -37,16 +43,17 @@
     };
   }
 
-  export async function open() {
+  export async function open(selected = null) {
+    current = selected;
     query = "";
     dialogEl.showModal();
     await tick();
     searchEl?.focus();
   }
 
-  function pick(mode) {
+  function pick(item) {
     dialogEl.close();
-    onSelect?.(mode.value);
+    onSelect?.(item.value);
   }
 
   function onDialogClick(e) {
@@ -57,14 +64,14 @@
   function onSearchKeydown(e) {
     if (e.key === "Enter" && filtered.length > 0) {
       e.preventDefault();
-      pick(filtered[0].modes[0]);
+      pick(filtered[0].items[0]);
     }
   }
 </script>
 
 <dialog bind:this={dialogEl} use:portal onclick={onDialogClick}>
   <div class="head">
-    <h3>{$i18n.t("auxiliaryAddModeTitle")}</h3>
+    <h3>{title}</h3>
     <input
       bind:this={searchEl}
       bind:value={query}
@@ -72,7 +79,7 @@
       class="search"
       autocomplete="off"
       spellcheck="false"
-      placeholder={$i18n.t("auxiliaryAddModeSearch")}
+      placeholder={searchPlaceholder}
       onkeydown={onSearchKeydown}
     />
     <button
@@ -89,18 +96,27 @@
       <section>
         <h4>{group.label}</h4>
         <div class="tiles">
-          {#each group.modes as mode (mode.value)}
-            <button class="tile" onclick={() => pick(mode)}>
-              <span class="name">{mode.label}</span>
-              {#if mode.description}
-                <span class="desc">{mode.description}</span>
+          {#each group.items as item (item.value)}
+            <button
+              class="tile"
+              class:current={item.value === current}
+              onclick={() => pick(item)}
+            >
+              <span class="name">
+                {item.label}
+                {#if item.badge}
+                  <span class="badge">{item.badge}</span>
+                {/if}
+              </span>
+              {#if item.description}
+                <span class="desc">{item.description}</span>
               {/if}
             </button>
           {/each}
         </div>
       </section>
     {:else}
-      <p class="empty">{$i18n.t("auxiliaryAddModeNoMatches")}</p>
+      <p class="empty">{noMatchesText}</p>
     {/each}
   </div>
 </dialog>
@@ -189,9 +205,21 @@
     white-space: normal;
   }
 
+  .tile.current {
+    border-color: var(--color-border-accent);
+    box-shadow: 0 0 0 2px var(--color-focus-ring);
+  }
+
   .name {
     font-size: 0.8rem;
     font-weight: 600;
+  }
+
+  .badge {
+    margin-left: 4px;
+    font-size: 0.65rem;
+    font-weight: 400;
+    opacity: 0.7;
   }
 
   .desc {

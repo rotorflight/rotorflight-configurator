@@ -1,15 +1,15 @@
 <script>
   import wNumb from "wnumb";
 
+  import HelpIcon from "@/components/HelpIcon.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import RangeSlider from "@/components/RangeSlider.svelte";
-  import SearchSelect from "@/components/SearchSelect.svelte";
   import Select from "@/components/Select.svelte";
 
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
-  import { FUNCTION_GROUPS, getFunctions } from "./functions.js";
+  import { getFunctionDescription, getFunctions } from "./functions.js";
   import {
     ALWAYS_ON_CH,
     AUX_MAX,
@@ -18,10 +18,15 @@
     calcAdjValue,
     density,
     isWithin,
-    resetToOff,
   } from "./util.js";
 
-  let { index, enaChannelOptions, adjChannelOptions, onRemove } = $props();
+  let {
+    index,
+    enaChannelOptions,
+    adjChannelOptions,
+    onChangeFunction,
+    onRemove,
+  } = $props();
 
   const FUNCTIONS = getFunctions();
 
@@ -38,70 +43,16 @@
   );
 
   let adjConfig = $derived(FUNCTIONS[adjRange.adjFunction] ?? FUNCTIONS[0]);
-
-  // The function picker's options, grouped like the old <optgroup>s. Hidden
-  // functions are left out, unless one is already selected (e.g. from a
-  // loaded config) so the picker can still show what's set.
-  let isListed = (id) => !FUNCTIONS[id].hide || id === adjRange.adjFunction;
-
-  let functionItems = $derived([
-    ...(isListed(0)
-      ? [
-          {
-            value: 0,
-            label: $i18n.t("adjustmentsFunction" + FUNCTIONS[0].name),
-          },
-        ]
-      : []),
-    ...FUNCTION_GROUPS.flatMap((group) =>
-      group.ids.filter(isListed).map((id) => ({
-        value: id,
-        label: $i18n.t("adjustmentsFunction" + FUNCTIONS[id].name),
-        group: $i18n.t(group.label),
-      })),
-    ),
-  ]);
-
-  let valSliderRef;
-
-  function refreshValSlider(cfg) {
-    valSliderRef?.update(
-      {
-        range: { min: cfg.min, max: cfg.max },
-        pips: {
-          mode: "values",
-          values: cfg.pips,
-          density: density(cfg.min, cfg.max, cfg.ticks),
-          stepped: true,
-        },
-      },
-      true,
-    );
-  }
-
-  function goOff() {
-    resetToOff(adjRange);
-    refreshValSlider(FUNCTIONS[0]);
-  }
+  let description = $derived(getFunctionDescription(adjConfig.name));
 
   function setAdjType(newType) {
     adjType = newType;
 
-    if (newType === 0) {
-      goOff();
-    } else if (newType === 1 && adjRange.adjStep > 0) {
+    if (newType === 1 && adjRange.adjStep > 0) {
       adjRange.adjStep = 0;
     } else if (newType === 2 && adjRange.adjStep === 0) {
       adjRange.adjStep = 1;
     }
-  }
-
-  function onFunctionChange(id) {
-    const cfg = FUNCTIONS[id] ?? FUNCTIONS[0];
-    adjRange.adjFunction = id;
-    adjRange.adjMin = cfg.min;
-    adjRange.adjMax = cfg.max;
-    refreshValSlider(cfg);
   }
 
   function onEnaChannelChange(e) {
@@ -214,14 +165,21 @@
 
 <div class="adjustment-card">
   <div class="card-header" class:on={isEnabled}>
+    <button
+      type="button"
+      class="func-title"
+      title={$i18n.t("adjustmentsChangeFunction")}
+      onclick={onChangeFunction}
+    >
+      {$i18n.t("adjustmentsFunction" + adjConfig.name)}
+      <em class="fas fa-pen"></em>
+    </button>
+    {#if description}
+      <HelpIcon>{description}</HelpIcon>
+    {/if}
     <span class="slot-label"
       >{$i18n.t("adjustmentsSlotLabel", { index: index + 1 })}</span
     >
-    {#if adjRange.adjFunction > 0}
-      <span class="func-label"
-        >{$i18n.t("adjustmentsFunction" + adjConfig.name)}</span
-      >
-    {/if}
     <div class="grow"></div>
     <button
       type="button"
@@ -235,15 +193,6 @@
 
   <div class="card-body">
     <div class="cell mode">
-      <label class="radio-option">
-        <input
-          type="radio"
-          name="adjType-{index}"
-          checked={adjType === 0}
-          onchange={() => setAdjType(0)}
-        />
-        <span>{$i18n.t("adjustmentsTypeOff")}</span>
-      </label>
       <label class="radio-option">
         <input
           type="radio"
@@ -387,16 +336,6 @@
 
     <!-- row 3: function -->
     <div class="cell func" class:disabled={adjType === 0}>
-      <SearchSelect
-        id="function-{index}"
-        value={adjRange.adjFunction}
-        items={functionItems}
-        disabled={adjType === 0}
-        placeholder={$i18n.t("adjustmentsFunctionSearch")}
-        noMatchesText={$i18n.t("adjustmentsFunctionNoMatches")}
-        onchange={onFunctionChange}
-      />
-
       <div class="value-line">
         <span class="value-label">{$i18n.t("adjustmentFunctionValue")}</span>
         <span class="value-box">{adjResult.string}</span>
@@ -412,7 +351,6 @@
     <div class="cell func-slider">
       <div class="slider-wrap" class:disabled={adjType === 0}>
         <RangeSlider
-          bind:this={valSliderRef}
           opts={initialValSliderOpts}
           bind:start={adjRange.adjMin}
           bind:end={adjRange.adjMax}
@@ -464,16 +402,40 @@
     }
   }
 
-  .func-label {
-    margin-left: 0.5em;
+  .func-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 2px 6px;
+    margin-left: -6px;
+    font: inherit;
     font-weight: 700;
+    color: inherit;
+    background: none;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
 
-    &::before {
-      content: "\2014";
-      margin-right: 0.5em;
-      font-weight: 600;
-      opacity: 0.7;
+    em {
+      font-size: 0.7em;
+      opacity: 0.6;
     }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: rgb(255 255 255 / 12%);
+
+        em {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .slot-label {
+    margin-left: 10px;
+    font-size: 0.75rem;
+    opacity: 0.7;
   }
 
   .grow {
