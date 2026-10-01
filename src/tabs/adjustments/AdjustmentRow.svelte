@@ -380,11 +380,10 @@
 </div>
 
 <style lang="scss">
+  /* A flat section inside its group's frame (the group draws the line
+     between cards). */
   .adjustment-card {
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border);
     background-color: var(--color-surface);
-    overflow: hidden;
   }
 
   /* The group panel carries the structure now, so the header stays
@@ -399,7 +398,7 @@
 
     color: var(--color-text);
     background-color: var(--color-surface);
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border-soft);
     box-shadow: inset 4px 0 0 transparent;
     transition:
       background-color var(--animation-speed),

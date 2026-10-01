@@ -440,15 +440,14 @@
     border-radius: var(--radius-sm);
   }
 
-  /* Each group is a panel: a solid header bar with an accent edge, and its
-     cards inset on a sunken background, so the cards read as belonging to
-     it rather than floating under a thin heading. */
+  /* Each group is the one frame: a dark header bar (the band the cards
+     used to carry), with its cards as flat sections inside, split by
+     plain lines. */
   .group {
     overflow: hidden;
     border: 1px solid var(--color-border);
-    border-left: 4px solid var(--color-accent-500);
     border-radius: var(--radius-md);
-    background-color: var(--color-surface-sunken);
+    background-color: var(--color-surface);
     box-shadow: var(--shadow-xs);
   }
 
@@ -462,18 +461,16 @@
     font-size: 1rem;
     font-weight: 700;
     text-align: left;
-    color: var(--color-text);
-    background-color: var(--color-surface);
+    /* surface-alt is a dark band in both themes; text-alt is the text
+       token for it. */
+    color: var(--color-text-alt);
+    background-color: var(--color-surface-alt);
     border: none;
     cursor: pointer;
 
-    &[aria-expanded="true"] {
-      border-bottom: 1px solid var(--color-border);
-    }
-
     @media (hover: hover) {
       &:hover {
-        background-color: var(--color-hover);
+        filter: brightness(1.15);
       }
     }
 
@@ -486,7 +483,8 @@
   .chevron {
     width: 1em;
     font-size: 0.8rem;
-    color: var(--color-text-soft);
+    color: inherit;
+    opacity: 0.8;
     transition: transform var(--animation-speed);
 
     &.open {
@@ -517,7 +515,9 @@
   .rows {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 12px;
+
+    > :global(* + *) {
+      border-top: 1px solid var(--color-border);
+    }
   }
 </style>
