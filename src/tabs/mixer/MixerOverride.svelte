@@ -567,9 +567,12 @@
     min-width: 0;
   }
 
+  /* Sized to the longest direction label ("Backward") and no more:
+     this cell is empty on the rule rows, so every pixel of it is dead
+     space between the track and the position readout. */
   .end {
     flex: none;
-    width: 96px;
+    width: 64px;
     padding-top: 18px;
     font-size: 0.7rem;
     color: var(--color-text-muted);
@@ -610,6 +613,12 @@
     align-items: center;
     gap: 2px;
     padding: 8px 0;
+
+    /* Nudges the icon (and the label/value under it) left so the arm
+       sits just clear of the slider scales. A transform rather than a
+       margin on purpose: it shifts only what's drawn, so the column
+       keeps its width and nothing else on the row moves. */
+    transform: translateX(-36px);
   }
 
   .position-spacer {
