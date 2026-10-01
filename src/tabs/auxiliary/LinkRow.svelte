@@ -33,8 +33,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    padding: 12px 32px 12px 8px;
-    border-bottom: 1px solid var(--color-border);
+    padding: 8px 32px 8px 12px;
+    border-bottom: 1px solid var(--color-border-soft);
 
     &:last-child {
       border-bottom: none;

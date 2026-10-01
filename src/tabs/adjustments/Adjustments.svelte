@@ -2,8 +2,11 @@
   import diff from "microdiff";
   import { onDestroy, onMount } from "svelte";
 
+  import CollapsibleGroup from "@/components/CollapsibleGroup.svelte";
   import Page from "@/components/Page.svelte";
+  import PickerDialog from "@/components/PickerDialog.svelte";
 
+  import { config } from "@/js/config.svelte.ts";
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
   import { getTabHelpURL } from "@/js/help.js";
@@ -14,11 +17,20 @@
 
   import AdjustmentRow from "./AdjustmentRow.svelte";
   import {
+    FUNCTION_GROUPS,
+    getFunctionDescription,
+    getFunctions,
+  } from "./functions.js";
+  import {
     ALWAYS_ON_CH,
     PRIMARY_CHANNEL_COUNT,
+    isWithin,
     resetToOff,
     spreadCollapsedRanges,
   } from "./util.js";
+
+  const FUNCTIONS = getFunctions();
+  const OTHER_GROUP = "adjustmentsGroupOther";
 
   let loading = $state(true);
   let initialState = $state(null);
@@ -106,13 +118,115 @@
     }
   }
 
+  // The function comes first: "Add Adjustment" and a card's title both open
+  // this picker, and pickerSlot says which slot the choice goes to (null
+  // for a new one). A function can be picked again for another slot.
+  let functionPicker;
+  let pickerSlot = null;
+
+  let functionGroups = $derived(
+    FUNCTION_GROUPS.map((group) => ({
+      label: $i18n.t(group.label),
+      items: group.ids
+        .filter((id) => !FUNCTIONS[id].hide)
+        .map((id) => ({
+          value: id,
+          label: $i18n.t("adjustmentsFunction" + FUNCTIONS[id].name),
+          description: getFunctionDescription(FUNCTIONS[id].name),
+          badge: visibleSlots.some(
+            (i) => FC.ADJUSTMENT_RANGES[i].adjFunction === id,
+          )
+            ? $i18n.t("adjustmentsFunctionInUse")
+            : "",
+        })),
+    })).filter((group) => group.items.length > 0),
+  );
+
+  // The cards sit under the picker's FUNCTION_GROUPS headings, in the same
+  // order. Each group can be collapsed, and that's remembered.
+  function groupKeyOf(id) {
+    return (
+      FUNCTION_GROUPS.find((group) => group.ids.includes(id))?.label ??
+      OTHER_GROUP
+    );
+  }
+
+  let cardGroups = $derived(
+    [...FUNCTION_GROUPS.map((group) => group.label), OTHER_GROUP]
+      .map((key) => ({
+        key,
+        slots: visibleSlots.filter(
+          (i) => groupKeyOf(FC.ADJUSTMENT_RANGES[i].adjFunction) === key,
+        ),
+      }))
+      .filter((group) => group.slots.length > 0),
+  );
+
+  let collapsedGroups = $state(config.adjustmentsCollapsedGroups);
+
+  function setCollapsedGroups(keys) {
+    collapsedGroups = keys;
+    config.adjustmentsCollapsedGroups = keys;
+  }
+
+  function toggleGroup(key) {
+    setCollapsedGroups(
+      collapsedGroups.includes(key)
+        ? collapsedGroups.filter((k) => k !== key)
+        : [...collapsedGroups, key],
+    );
+  }
+
+  function expandGroupOf(id) {
+    const key = groupKeyOf(id);
+    if (collapsedGroups.includes(key)) {
+      toggleGroup(key);
+    }
+  }
+
+  // Same test as a card's live header band: its enable channel lets it run.
+  function isLive(index) {
+    const adjRange = FC.ADJUSTMENT_RANGES[index];
+    if (adjRange.enaChannel === ALWAYS_ON_CH) {
+      return true;
+    }
+    const pos = FC.RC.channels[adjRange.enaChannel + PRIMARY_CHANNEL_COUNT];
+    return pos != null && isWithin(pos, adjRange.enaRange);
+  }
+
   function addAdjustment() {
     if (hiddenSlots.length === 0) {
       return;
     }
+    pickerSlot = null;
+    functionPicker.open();
+  }
+
+  function changeFunction(index) {
+    pickerSlot = index;
+    functionPicker.open(FC.ADJUSTMENT_RANGES[index].adjFunction);
+  }
+
+  function setFunction(adjRange, id) {
+    const cfg = FUNCTIONS[id];
+    adjRange.adjFunction = id;
+    adjRange.adjMin = cfg.min;
+    adjRange.adjMax = cfg.max;
+  }
+
+  function onPickFunction(id) {
+    if (pickerSlot !== null) {
+      setFunction(FC.ADJUSTMENT_RANGES[pickerSlot], id);
+      expandGroupOf(id);
+      return;
+    }
     const next = Math.min(...hiddenSlots);
-    spreadCollapsedRanges(FC.ADJUSTMENT_RANGES[next]);
+    const adjRange = FC.ADJUSTMENT_RANGES[next];
+    spreadCollapsedRanges(adjRange);
+    setFunction(adjRange, id);
+    adjRange.adjStep = 0; // start as Mapped
     visibleSlots = [...visibleSlots, next].sort((a, b) => a - b);
+    expandGroupOf(id);
   }
 
   function removeAdjustment(index) {
@@ -192,6 +306,14 @@
 {#snippet header()}
   <h1>{$i18n.t("tabAdjustments")}</h1>
   <div class="grow"></div>
+  <button
+    class="btn add-btn"
+    disabled={hiddenSlots.length === 0}
+    onclick={addAdjustment}
+  >
+    <em class="fas fa-plus"></em>
+    {$i18n.t("adjustmentsAddButton")}
+  </button>
   <button class="btn help-btn" onclick={onClickHelp}
     >{$i18n.t("buttonHelp")}</button
   >
@@ -207,41 +329,49 @@
     <p>{$i18n.t("adjustmentsHelp")}</p>
   </div>
 
-  <div class="toolbox">
-    <span class="slot-count"
-      >{$i18n.t("adjustmentsSlotCount", {
-        used: visibleSlots.length,
-        total: slotCount,
-      })}</span
-    >
-    <div class="grow"></div>
-    <button
-      class="btn add-btn"
-      disabled={hiddenSlots.length === 0}
-      onclick={addAdjustment}
-    >
-      <em class="fas fa-plus"></em>
-      {$i18n.t("adjustmentsAddButton")}
-    </button>
-  </div>
+  <p class="slot-count">
+    {$i18n.t("adjustmentsSlotCount", {
+      used: visibleSlots.length,
+      total: slotCount,
+    })}
+  </p>
 
   {#if visibleSlots.length === 0}
     <div class="empty-state">
       <p>{$i18n.t("adjustmentsEmptyState")}</p>
     </div>
   {:else}
-    <div class="rows">
-      {#each visibleSlots as index (index + ":" + revertGeneration)}
-        <AdjustmentRow
-          {index}
-          {enaChannelOptions}
-          {adjChannelOptions}
-          onRemove={() => removeAdjustment(index)}
-        />
-      {/each}
-    </div>
+    {#each cardGroups as group (group.key)}
+      <CollapsibleGroup
+        title={$i18n.t(group.key)}
+        count={group.slots.length}
+        live={group.slots.some(isLive)}
+        liveTitle={$i18n.t("adjustmentsGroupLive")}
+        open={!collapsedGroups.includes(group.key)}
+        onToggle={() => toggleGroup(group.key)}
+      >
+        {#each group.slots as index (index + ":" + revertGeneration + ":" + FC.ADJUSTMENT_RANGES[index].adjFunction)}
+          <AdjustmentRow
+            {index}
+            {enaChannelOptions}
+            {adjChannelOptions}
+            onChangeFunction={() => changeFunction(index)}
+            onRemove={() => removeAdjustment(index)}
+          />
+        {/each}
+      </CollapsibleGroup>
+    {/each}
   {/if}
 </Page>
+
+<PickerDialog
+  bind:this={functionPicker}
+  title={$i18n.t("adjustmentsPickFunctionTitle")}
+  groups={functionGroups}
+  searchPlaceholder={$i18n.t("adjustmentsFunctionSearch")}
+  noMatchesText={$i18n.t("adjustmentsFunctionNoMatches")}
+  onSelect={onPickFunction}
+/>
 
 <style lang="scss">
   h1 {
@@ -270,15 +400,8 @@
     border: 1px solid var(--color-border-accent);
   }
 
-  .toolbox {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: var(--section-gap);
-    margin-bottom: var(--section-gap);
-  }
-
   .slot-count {
+    margin: var(--section-gap) 0 0;
     font-weight: 600;
     color: var(--color-text-soft);
   }
@@ -287,20 +410,16 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    padding: 4px 10px;
   }
 
   .empty-state {
+    margin-top: var(--section-gap);
     padding: 32px 16px;
     text-align: center;
     color: var(--color-text-soft);
 
     border: 1px dashed var(--color-border);
     border-radius: var(--radius-sm);
-  }
-
-  .rows {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
   }
 </style>
