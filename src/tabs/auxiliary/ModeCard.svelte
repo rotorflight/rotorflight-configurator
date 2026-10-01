@@ -48,7 +48,7 @@
       aria-label={$i18n.t("auxiliaryRemoveMode")}
       title={$i18n.t("auxiliaryRemoveMode")}
     >
-      <span class="fas fa-times"></span>
+      <span class="fas fa-trash"></span>
     </button>
   {/if}
 {/snippet}
