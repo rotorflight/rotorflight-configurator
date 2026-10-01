@@ -2,7 +2,7 @@ import semver from "semver";
 
 import { CliAutoComplete } from "@/js/CliAutoComplete.js";
 import { config } from "@/js/config.svelte.ts";
-import { CONFIGURATOR } from "@/js/configurator.svelte.js";
+import { API_VERSION_12_10, CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { DarkTheme } from "@/js/DarkTheme.js";
 import { FC } from "@/js/fc.svelte.js";
 import { GUI } from "@/js/gui.js";
@@ -13,6 +13,10 @@ import { ReleaseChecker } from "@/js/release_checker.js";
 import { serial } from "@/js/serial.js";
 import { handleConnectClick, initializeSerialBackend } from "@/js/serial_backend.js";
 import { TABS } from "@/js/tabs/tabs.js";
+
+const SERIAL_FUNCTION_RX_SERIAL = 64;
+const SERIAL_FUNCTION_FBUS_OUT = 524288;
+const SERIALRX_PROVIDER_FBUS = 17;
 
 if (__BACKEND__ === "nwjs") {
     if (import.meta.env.DEV) {
@@ -447,6 +451,16 @@ function notifyOutdatedVersion(releaseData) {
 export function updateTabList(features) {
     $('#tabs ul.mode-connected li.tab_gps').toggle(features.isEnabled('GPS'));
     $('#tabs ul.mode-connected li.tab_led_strip').toggle(features.isEnabled('LED_STRIP'));
+
+    // XACT servo programming needs MSP API 12.10+ and an FBUS bus, either as
+    // the active receiver protocol or as an FBUS_OUT serial port function.
+    const apiVersion = FC.CONFIG?.apiVersion;
+    const hasXactSupport = !!semver.valid(apiVersion) && semver.gte(apiVersion, API_VERSION_12_10);
+    const serialPorts = FC.SERIAL_CONFIG?.ports ?? [];
+    const hasSerialRxPort = serialPorts.some((port) => !!(port.functionMask & SERIAL_FUNCTION_RX_SERIAL));
+    const hasFbusRx = features.RX_SERIAL && FC.RX_CONFIG?.serialrx_provider === SERIALRX_PROVIDER_FBUS && hasSerialRxPort;
+    const hasFbusPort = serialPorts.some((port) => !!(port.functionMask & SERIAL_FUNCTION_FBUS_OUT));
+    $('#tabs ul.mode-connected li.tab_xact_servo').toggle(hasXactSupport && (hasFbusRx || hasFbusPort));
 }
 
 function zeroPad(value, width) {

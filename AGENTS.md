@@ -1,5 +1,22 @@
 # Agent notes
 
+## Never bump version numbers
+
+Agents must not change version numbers. The maintainers bump them manually
+when a new version is released. This keeps version changes to a minimum.
+
+Do not touch:
+
+- the `API_VERSION_*` constants, `API_VERSION_RTFL_MIN` or
+  `API_VERSION_RTFL_MAX` in `src/js/configurator.svelte.js`,
+- the Virtual firmware versions in `virtualFirmwareVersions`
+  (`src/js/utils/common.js`),
+- `version` in `package.json`.
+
+Gate new MSP fields on the constant for the upcoming, not yet released API
+version. If no such constant exists yet, say so in the PR instead of adding
+one.
+
 ## Keep the virtual FC in sync with the firmware
 
 The "Virtual" port connects to a simulated flight controller implemented in

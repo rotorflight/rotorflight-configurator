@@ -9,9 +9,9 @@
 #   master/            -> type "master" (pinned alongside stable)
 #   release/<version>/ -> type "release", one entry per subdirectory
 #   snapshot/<version>/-> type "snapshot", one entry per subdirectory
-#   pr/<number>/       -> type "pr", one entry per subdirectory (no workflow
-#                          populates this yet, but the picker already
-#                          understands the type so it's ready when one does)
+#   pr/<number>/       -> type "pr", one entry per subdirectory (PR
+#                          previews, see pr-preview-publish.yml), plus the
+#                          branch, title, url and date from pr/<number>.json
 #   logos/             -> the landing page's own assets, never a build
 #   anything else with its own index.html -> type "branch" (feature/**,
 #                          bugfix/**, experiment/** deploys, etc.)
@@ -42,8 +42,24 @@ def nested_entries(kind_dir, entry_type):
     for name in os.listdir(kind_dir):
         sub = os.path.join(kind_dir, name)
         if has_index(sub):
-            entries.append({"type": entry_type, "name": name, "path": f"./{kind_dir}/{name}/"})
+            entry = {"type": entry_type, "name": name, "path": f"./{kind_dir}/{name}/"}
+            entry.update(read_info(f"{sub}.json"))
+            entries.append(entry)
     return entries
+
+
+def read_info(path):
+    # Optional details written next to a build directory (PR previews).
+    try:
+        with open(path, encoding="utf-8") as handle:
+            info = json.load(handle)
+    except (OSError, ValueError):
+        return {}
+    return {
+        key: info[key]
+        for key in ("branch", "title", "url", "date")
+        if isinstance(info.get(key), str)
+    }
 
 
 def natural_key(text):
