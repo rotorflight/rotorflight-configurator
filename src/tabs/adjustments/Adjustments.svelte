@@ -440,20 +440,36 @@
     border-radius: var(--radius-sm);
   }
 
+  /* Each group is a panel: a solid header bar with an accent edge, and its
+     cards inset on a sunken background, so the cards read as belonging to
+     it rather than floating under a thin heading. */
+  .group {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-accent-500);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-sunken);
+    box-shadow: var(--shadow-xs);
+  }
+
   .group-header {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     width: 100%;
-    padding: 6px 4px;
+    padding: 10px 14px;
     font: inherit;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 700;
     text-align: left;
     color: var(--color-text);
-    background: none;
+    background-color: var(--color-surface);
     border: none;
-    border-bottom: 1px solid var(--color-border);
     cursor: pointer;
+
+    &[aria-expanded="true"] {
+      border-bottom: 1px solid var(--color-border);
+    }
 
     @media (hover: hover) {
       &:hover {
@@ -463,13 +479,13 @@
 
     &:focus-visible {
       outline: none;
-      box-shadow: 0 0 0 3px var(--color-focus-ring);
+      box-shadow: inset 0 0 0 3px var(--color-focus-ring);
     }
   }
 
   .chevron {
     width: 1em;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--color-text-soft);
     transition: transform var(--animation-speed);
 
@@ -479,27 +495,29 @@
   }
 
   .group-count {
-    min-width: 1.5em;
-    padding: 0 6px;
-    font-size: 0.7rem;
-    line-height: 1.5;
+    min-width: 1.75em;
+    padding: 0 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.6;
     text-align: center;
-    border-radius: 999px;
-    color: var(--color-text-soft);
-    background-color: var(--color-surface-sunken);
+    border-radius: var(--radius-pill);
+    color: var(--color-text-alt);
+    background-color: var(--color-accent-500);
   }
 
   .live-dot {
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background-color: var(--color-accent-500);
+    box-shadow: 0 0 0 3px var(--color-accent-200);
   }
 
   .rows {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding-top: 12px;
+    padding: 12px;
   }
 </style>
