@@ -54,7 +54,10 @@
   ];
 
   let swashTypeOptions = $derived(
-    Mixer.swashTypes.map((name, value) => ({ value, label: $i18n.t(name) })),
+    Mixer.swashTypes.map((name, value) => ({
+      value,
+      label: $i18n.t(name).replaceAll("&deg;", "°"),
+    })),
   );
   let rotorDirectionOptions = $derived([
     { value: 0, label: $i18n.t("mixerClockwise") },
