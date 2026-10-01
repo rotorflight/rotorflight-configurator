@@ -248,12 +248,6 @@
 {#snippet header()}
   <h1>{$i18n.t("tabAdjustments")}</h1>
   <div class="grow"></div>
-  <span class="slot-count"
-    >{$i18n.t("adjustmentsSlotCount", {
-      used: visibleSlots.length,
-      total: slotCount,
-    })}</span
-  >
   <button
     class="btn add-btn"
     disabled={hiddenSlots.length === 0}
@@ -276,6 +270,13 @@
   <div class="note">
     <p>{$i18n.t("adjustmentsHelp")}</p>
   </div>
+
+  <p class="slot-count">
+    {$i18n.t("adjustmentsSlotCount", {
+      used: visibleSlots.length,
+      total: slotCount,
+    })}
+  </p>
 
   {#if visibleSlots.length === 0}
     <div class="empty-state">
@@ -333,7 +334,7 @@
   }
 
   .slot-count {
-    font-size: 0.8rem;
+    margin: var(--section-gap) 0 0;
     font-weight: 600;
     color: var(--color-text-soft);
   }
