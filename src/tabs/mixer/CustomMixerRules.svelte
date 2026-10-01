@@ -30,6 +30,20 @@
 
   let { onchange } = $props();
 
+  // The table works in fixed slots: a row's position is its real
+  // firmware slot index. Mixer.RULE_COUNT is the authority on how many
+  // there are (it matches firmware's MIXER_RULE_COUNT) rather than
+  // whatever length the last MSP read happened to produce - padding
+  // here means the blank row always has a slot to write into, and
+  // sendDirty() always has an original to compare against.
+  function padToCapacity() {
+    while (FC.MIXER_RULES.length < Mixer.RULE_COUNT) {
+      FC.MIXER_RULES.push(Mixer.nullRule());
+    }
+  }
+
+  padToCapacity();
+
   let origRules = Mixer.cloneRules(FC.MIXER_RULES);
 
   // Normalise what the FC gave us before anything is drawn: rules can
@@ -67,11 +81,24 @@
 
   // A trailing blank row is offered whenever there's both a free slot and
   // somewhere for a new rule to point. Editing any field in it commits it.
-  let showBlankRow = $derived(count < rules.length && hasSpareOutput);
+  let showBlankRow = $derived(count < Mixer.RULE_COUNT && hasSpareOutput);
 
   let inputOptions = $derived(
     Mixer.inputNames.map((name, value) => ({ value, label: $i18n.t(name) })),
   );
+
+  // Which input dropdown is currently open, so only that one shows full
+  // labels. A native select renders the selected option's own text when
+  // closed - there's no separate display label - so the only way to show
+  // "Channel AUX2" collapsed but "RC Channel AUX2" in the list is to
+  // swap the option text while it has focus.
+  let expandedInput = $state(null);
+
+  // "RC " is redundant in a column already headed "Controlled by", and
+  // it's the part that pushes these labels past the column width.
+  function shortInput(label) {
+    return label.replace(/^RC /, "");
+  }
 
   let operOptions = $derived(
     Mixer.operNames.map((name, value) => ({ value, label: $i18n.t(name) })),
@@ -145,6 +172,17 @@
     };
   }
 
+  /**
+   * For fields bound straight to the rule (offset/weight): the value is
+   * already written by the binding, so this only has to re-check the
+   * invariant and mark the tab dirty. NumberInput calls onchange with
+   * no arguments, so there's nothing to read off an event here.
+   */
+  function fieldEdited() {
+    enforceOperInvariant(FC.MIXER_RULES);
+    touched();
+  }
+
   function commit(index, rule, outputChanged) {
     const wasBlank = Mixer.isNullRule(FC.MIXER_RULES[index]);
 
@@ -200,6 +238,7 @@
   // by definition the state being reverted to.
   export async function revert() {
     await MSP.promise(MSPCodes.MSP_MIXER_RULES);
+    padToCapacity();
     normalizeRuleGroups(FC.MIXER_RULES);
     enforceOperInvariant(FC.MIXER_RULES);
     origRules = Mixer.cloneRules(FC.MIXER_RULES);
@@ -210,6 +249,21 @@
      shows and positions it (see Field.svelte, which pairs them the same
      way). Used directly here because these label a table's columns
      rather than a Field's single input. -->
+{#snippet inputSelect(key, selected, onchange)}
+  <select
+    value={selected}
+    {onchange}
+    onfocus={() => (expandedInput = key)}
+    onblur={() => (expandedInput = null)}
+  >
+    {#each inputOptions as option (option.value)}
+      <option value={option.value}>
+        {expandedInput === key ? option.label : shortInput(option.label)}
+      </option>
+    {/each}
+  </select>
+{/snippet}
+
 {#snippet helpHeader(label, help)}
   <span class="with-help">
     <HoverTooltip {tooltip}>
@@ -221,21 +275,38 @@
   </span>
 {/snippet}
 
-<Section label="mixerCustomRules" summary="mixerCustomRulesHelp">
+<!-- Custom header so the slot count can sit in the bar. Section's own
+     header has no room for it, and supplying one disables its built-in
+     summary toggle, so the section help becomes a hover tooltip here -
+     the same pairing the column headers above use. -->
+{#snippet sectionHeader()}
+  <div class="section-header">
+    <span class="section-title">{$i18n.t("mixerCustomRules")}</span>
+    <HoverTooltip tooltip={sectionTip}>
+      <span class="section-help fas fa-question-circle"></span>
+    </HoverTooltip>
+    {#snippet sectionTip()}
+      <Tooltip help="mixerCustomRulesHelp" />
+    {/snippet}
+    <div class="grow"></div>
+    <span class="count">{count} / {Mixer.RULE_COUNT}</span>
+  </div>
+{/snippet}
+
+<Section header={sectionHeader}>
   {#if anyCollision}
-    <div class="note">
+    <div class="note-wrap">
       <WarningNote message="mixerCustomRuleCollisionNote" />
     </div>
   {/if}
   {#if anyMissing}
-    <div class="note">
+    <div class="note-wrap">
       <WarningNote message="mixerCustomRuleMissingOutputNote" />
     </div>
   {/if}
 
   <div class="table">
     <div class="head row">
-      <span>#</span>
       <span>{$i18n.t("mixerRuleOutput")}</span>
       <span>{$i18n.t("mixerRuleInput")}</span>
       {@render helpHeader("mixerRuleOper", "mixerRuleOperHelp")}
@@ -251,35 +322,41 @@
         class:group-start={groups.groupStart[index]}
         class:invalid={collides(rule) || missing}
       >
-        <span class="index">{index + 1}</span>
-        <Select
-          value={rule.dst}
-          options={outputOptions(rule.dst)}
-          onchange={(e) => commit(index, { dst: Number(e.target.value) }, true)}
-        />
-        <Select
-          value={rule.src}
-          options={inputOptions}
-          onchange={(e) => commit(index, { src: Number(e.target.value) })}
-        />
+        <!-- Only the rule that opens a group names the output; the rest
+             are by definition driving the same one, so repeating it adds
+             nothing. Later rules keep an empty cell rather than being
+             left out, so the grid columns still line up. -->
+        {#if groups.groupStart[index]}
+          <Select
+            value={rule.dst}
+            options={outputOptions(rule.dst)}
+            onchange={(e) =>
+              commit(index, { dst: Number(e.target.value) }, true)}
+          />
+        {:else}
+          <span class="output-continued"></span>
+        {/if}
+        {@render inputSelect(index, rule.src, (e) =>
+          commit(index, { src: Number(e.target.value) }),
+        )}
         <Select
           value={rule.oper}
           options={operOptionsFor(index, rule)}
           onchange={(e) => commit(index, { oper: Number(e.target.value) })}
         />
         <NumberInput
-          value={rule.offset}
+          bind:value={rules[index].offset}
           min={-2500}
           max={2500}
           step={10}
-          onchange={(e) => commit(index, { offset: Number(e.target.value) })}
+          onchange={fieldEdited}
         />
         <NumberInput
-          value={rule.weight}
+          bind:value={rules[index].weight}
           min={-10000}
           max={10000}
           step={10}
-          onchange={(e) => commit(index, { weight: Number(e.target.value) })}
+          onchange={fieldEdited}
         />
         <span class="actions">
           <button
@@ -307,19 +384,15 @@
       {@const blank = FC.MIXER_RULES[count]}
       {@const defaults = blankDefaults(blank)}
       <div class="row blank">
-        <span class="index"></span>
         <Select
           value={blank.dst}
           options={outputOptions(blank.dst)}
           onchange={(e) =>
             commit(count, { ...defaults, dst: Number(e.target.value) }, true)}
         />
-        <Select
-          value={blank.src}
-          options={inputOptions}
-          onchange={(e) =>
-            commit(count, { ...defaults, src: Number(e.target.value) })}
-        />
+        {@render inputSelect("blank", blank.src, (e) =>
+          commit(count, { ...defaults, src: Number(e.target.value) }),
+        )}
         <Select value={defaults.oper} options={operOptions} disabled />
         <NumberInput
           value={blank.offset}
@@ -337,35 +410,105 @@
         />
         <span class="actions"></span>
       </div>
-    {:else if count < rules.length}
+    {:else if count < Mixer.RULE_COUNT}
       <div class="empty">
         <InfoNote message="mixerNoSpareOutput" />
       </div>
     {/if}
   </div>
-
-  <p class="count">{count} / {rules.length}</p>
 </Section>
 
 <style lang="scss">
-  .note {
+  /* Mirrors %section-header so the custom header is indistinguishable
+     from the ones Section draws for every other panel. */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: var(--color-text-alt);
+    background-color: var(--color-surface-alt);
+  }
+
+  .section-title {
+    font-weight: 600;
+  }
+
+  .section-help {
+    font-size: 0.9rem;
+    cursor: help;
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .grow {
+    flex-grow: 1;
+  }
+
+  .count {
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.8;
+  }
+
+  /* Not called "note": main.css styles that class globally as a legacy
+     callout, which would draw a second box around WarningNote's own. */
+  .note-wrap {
     padding: 0 4px 8px;
   }
 
+  /* Seven controls don't compress below about 640px, which is wider
+     than this column's 420px floor. At full pane width the columns
+     collapse to one and there's room; in the band between, scroll the
+     table rather than let it burst out of its panel. */
   .table {
     display: flex;
     flex-direction: column;
+    overflow-x: auto;
   }
 
+  /* Rule/Offset/Weight are fixed widths: a NumberInput needs room for
+     its -/+ buttons either side of four digits, and at 90px the value
+     was being clipped. Output and Controlled by share what's left,
+     with Controlled by only slightly the wider of the two since its
+     labels ("RC Channel Collective") are the longest. */
+  /* Output and Rule are fixed at just enough for their own labels plus
+     a dropdown chevron ("Servo 5", "Motor 2"; "Set", "Add", "Mul") -
+     below about 70px the chevron gets clipped off entirely. Everything
+     left over goes to Controlled by via 1fr, since "RC Channel
+     Collective" is far and away the longest label here.
+
+     It has to be 1fr rather than a capped minmax: the fixed columns and
+     minima already account for ~620px of this panel, so a capped column
+     never has slack to grow into and sits pinned at its minimum however
+     high the cap is set. */
   .row {
     display: grid;
-    grid-template-columns: 28px minmax(110px, 1fr) minmax(
-        130px,
-        1.4fr
-      ) 90px 90px 90px 72px;
+    grid-template-columns: 104px minmax(120px, 1fr) 70px 96px 96px 60px;
     align-items: center;
-    gap: 8px;
-    padding: 4px 8px;
+    gap: 12px;
+    padding: 1px 8px;
+  }
+
+  /* Grid items default to min-width: auto, i.e. they refuse to shrink
+     below their own intrinsic width - and a <select> measures itself
+     against its *widest option*, not the selected one ("RC Channel
+     Collective" here). Without this the selects simply overrode every
+     track width above and pushed the table wider than its panel. */
+  .row > :global(*) {
+    min-width: 0;
+  }
+
+  .row :global(select) {
+    width: 100%;
   }
 
   .head {
@@ -382,12 +525,20 @@
   /* Each output's rules read as one group: a separator only between
      groups, matching how the config sections above separate their own
      groups of related settings. */
+  /* Rules driving the same output sit tight together (the .row padding
+     above) so they read as one block; the gap goes between outputs
+     instead, split either side of the separator so the line sits in the
+     middle of the space rather than hard against the next rule.
+     :nth-child(2) is the first rule row - the header is child 1 - which
+     needs no separator above it. */
   .row.group-start:not(:nth-child(2)) {
+    margin-top: 9px;
+    padding-top: 9px;
     border-top: 1px solid var(--color-border-soft);
   }
 
-  .index {
-    font-weight: 600;
+  .output-continued {
+    display: block;
   }
 
   /* A rule that can't work -- it Sets an output the built-in mixing
@@ -396,7 +547,12 @@
     box-shadow: inset 3px 0 0 var(--color-red-500, crimson);
   }
 
+  /* Separated from the last group the same way the groups are from each
+     other - it isn't part of whichever output happens to be above it. */
   .row.blank {
+    margin-top: 9px;
+    padding-top: 9px;
+    border-top: 1px solid var(--color-border-soft);
     opacity: 0.6;
 
     &:focus-within,

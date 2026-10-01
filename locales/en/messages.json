@@ -3612,7 +3612,7 @@
         "message": "Custom Mixer Rules"
     },
     "mixerCustomRulesHelp": {
-        "message": "Rules beyond the standard swash and tail mixing. Each rule maps an input (a stabilized axis, RC command or RC channel) to a servo or motor output, with an optional weight and offset. These are always applied in addition to the standard mixing above."
+        "message": "Rules beyond the standard swash and tail mixing. Each rule maps an input (a stabilized axis, RC command or RC channel) to a servo or motor output, with an optional weight and offset. Used to control additional servo or motor behavior such as landing gear, remote glow etc."
     },
     "mixerCustomRuleCollisionNote": {
         "message": "<span class=\"message-negative\">Warning:</span> One or more rules below use <strong>Set</strong> on an output that the current swash type already drives. That rule will override the built-in mixing on that output instead of adding to it."
@@ -3945,7 +3945,7 @@
         "message": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle."
     },
     "mixerOverrideNote": {
-        "message": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
+        "message": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "mixerOverride": {
         "message": "Mixer Override"

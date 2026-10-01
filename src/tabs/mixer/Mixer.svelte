@@ -626,13 +626,16 @@
           )}
         {/if}
       </Section>
+
+      <!-- Sits in the right-hand column beside the config sections
+           rather than full width below them: the geometry section
+           alone leaves most of this column empty. -->
+      <CustomMixerRules
+        bind:this={customRules}
+        onchange={() => (needSave = true)}
+      />
     </div>
   </div>
-
-  <CustomMixerRules
-    bind:this={customRules}
-    onchange={() => (needSave = true)}
-  />
 
   <MixerOverride {motorised} {hasPassthrough} />
 </Page>
