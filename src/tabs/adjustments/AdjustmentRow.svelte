@@ -1,6 +1,7 @@
 <script>
   import wNumb from "wnumb";
 
+  import GroupCard from "@/components/GroupCard.svelte";
   import HelpIcon from "@/components/HelpIcon.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import RangeSlider from "@/components/RangeSlider.svelte";
@@ -163,8 +164,8 @@
   );
 </script>
 
-<div class="adjustment-card">
-  <div class="card-header" class:on={isEnabled}>
+<GroupCard live={isEnabled}>
+  {#snippet header()}
     <button
       type="button"
       class="func-title"
@@ -189,7 +190,7 @@
     >
       <em class="fas fa-trash"></em>
     </button>
-  </div>
+  {/snippet}
 
   <div class="card-body">
     <div class="cell mode">
@@ -216,7 +217,12 @@
     <!-- row 1: enable channel -->
     <div class="cell ena-select" class:disabled={adjType === 0}>
       <div class="select-row">
-        <span class="channel-label">{$i18n.t("adjustmentEnableChannel")}</span>
+        <div class="channel-label">
+          <span>{$i18n.t("adjustmentEnableChannel")}</span>
+          <span class="channel-pos"
+            >{enaChannelPos != null ? enaChannelPos + "µs" : "-"}</span
+          >
+        </div>
         <Select
           id="ena-channel-{index}"
           value={adjRange.enaChannel}
@@ -225,17 +231,13 @@
           onchange={onEnaChannelChange}
         />
       </div>
-      <div class="channel-value-line">
-        <span class="value-box"
-          >{enaChannelPos != null ? enaChannelPos + "µs" : "-"}</span
-        >
-      </div>
     </div>
     <div
       class="cell ena-slider slider-wrap"
       class:disabled={adjType === 0 || adjRange.enaChannel === ALWAYS_ON_CH}
     >
       <RangeSlider
+        compact
         opts={rangeSliderOpts}
         bind:start={adjRange.enaRange.start}
         bind:end={adjRange.enaRange.end}
@@ -263,7 +265,12 @@
     <!-- row 2: value channel -->
     <div class="cell ch-select" class:disabled={adjType === 0}>
       <div class="select-row">
-        <span class="channel-label">{$i18n.t("adjustmentValueChannel")}</span>
+        <div class="channel-label">
+          <span>{$i18n.t("adjustmentValueChannel")}</span>
+          <span class="channel-pos"
+            >{adjChannelPos != null ? adjChannelPos + "µs" : "-"}</span
+          >
+        </div>
         <Select
           id="adj-channel-{index}"
           value={adjRange.adjChannel}
@@ -272,15 +279,11 @@
           onchange={onAdjChannelChange}
         />
       </div>
-      <div class="channel-value-line">
-        <span class="value-box"
-          >{adjChannelPos != null ? adjChannelPos + "µs" : "-"}</span
-        >
-      </div>
     </div>
     <div class="cell ch-slider">
       <div class="slider-wrap" class:disabled={adjType === 0}>
         <RangeSlider
+          compact
           opts={rangeSliderOpts}
           bind:start={adjRange.adjRange1.start}
           bind:end={adjRange.adjRange1.end}
@@ -290,6 +293,7 @@
       {#if adjType === 2}
         <div class="slider-wrap">
           <RangeSlider
+            compact
             opts={incSliderOpts}
             bind:start={adjRange.adjRange2.start}
             bind:end={adjRange.adjRange2.end}
@@ -351,6 +355,7 @@
     <div class="cell func-slider">
       <div class="slider-wrap" class:disabled={adjType === 0}>
         <RangeSlider
+          compact
           opts={initialValSliderOpts}
           bind:start={adjRange.adjMin}
           bind:end={adjRange.adjMax}
@@ -374,34 +379,9 @@
       />
     </div>
   </div>
-</div>
+</GroupCard>
 
 <style lang="scss">
-  .adjustment-card {
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border);
-    background-color: var(--color-surface);
-    overflow: hidden;
-  }
-
-  /* Same dark/red band as the Modes tab's ModeCard header: dark by default,
-     accent red while the enable channel has this adjustment live, so each
-     card is easy to pick out in a long list. */
-  .card-header {
-    @extend %section-header;
-    /* The header sits flush inside the card's border, so drop the
-       placeholder's phone-width top margin. */
-    margin-top: 0;
-    padding: 0 8px 0 12px;
-
-    color: var(--color-text-alt);
-    background-color: var(--color-surface-alt);
-
-    &.on {
-      background-color: var(--color-accent-500);
-    }
-  }
-
   .func-title {
     display: flex;
     align-items: center;
@@ -423,7 +403,7 @@
 
     @media (hover: hover) {
       &:hover {
-        background-color: rgb(255 255 255 / 12%);
+        background-color: var(--color-hover);
 
         em {
           opacity: 1;
@@ -464,14 +444,14 @@
     display: grid;
     /* The range column sizes to its two NumberInputs (which never shrink) so
        they can't overflow leftwards underneath the slider's end handle. */
-    grid-template-columns: 130px 190px minmax(200px, 1fr) max-content;
+    grid-template-columns: 120px 200px minmax(200px, 1fr) max-content;
     grid-template-areas:
       "mode ena-select   ena-slider  ena-range"
       "mode ch-select    ch-slider   ch-range"
       "func func         func-slider func-range";
     column-gap: 16px;
     align-items: start;
-    padding: 12px 14px;
+    padding: 8px 12px;
   }
 
   .cell.disabled {
@@ -482,7 +462,7 @@
     grid-area: mode;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     padding: 4px 12px 0 0;
     border-right: 1px solid var(--color-border);
   }
@@ -535,7 +515,7 @@
   .func,
   .func-slider,
   .func-range {
-    padding-top: 20px;
+    padding-top: 8px;
     border-top: 1px solid var(--color-border);
   }
 
@@ -560,22 +540,23 @@
   }
 
   .channel-label {
-    min-width: 90px;
+    display: flex;
+    flex-direction: column;
+    min-width: 92px;
     font-size: 0.8rem;
+    line-height: 1.3;
+    white-space: nowrap;
     color: var(--color-text-soft);
   }
 
-  .channel-value-line {
-    display: flex;
-    justify-content: flex-end;
-
-    .value-box {
-      width: 100px;
-    }
+  .channel-pos {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text);
   }
 
   .slider-wrap {
-    margin: 6px 4px 42px;
+    margin: 12px 8px 24px;
 
     &.disabled {
       opacity: 0.5;
@@ -588,7 +569,7 @@
     align-items: center;
     justify-content: flex-end;
     gap: 4px;
-    margin-bottom: 10px;
+    margin: 4px 0;
 
     /* Trim the inputs a little on the multi-column layout so the range
        column doesn't squeeze the slider; below 768px it's single-column and
@@ -607,7 +588,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    margin: 8px 0;
+    margin: 4px 0;
   }
 
   .value-box {

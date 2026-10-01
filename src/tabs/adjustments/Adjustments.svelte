@@ -2,9 +2,11 @@
   import diff from "microdiff";
   import { onDestroy, onMount } from "svelte";
 
+  import CollapsibleGroup from "@/components/CollapsibleGroup.svelte";
   import Page from "@/components/Page.svelte";
   import PickerDialog from "@/components/PickerDialog.svelte";
 
+  import { config } from "@/js/config.svelte.ts";
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
   import { getTabHelpURL } from "@/js/help.js";
@@ -22,11 +24,13 @@
   import {
     ALWAYS_ON_CH,
     PRIMARY_CHANNEL_COUNT,
+    isWithin,
     resetToOff,
     spreadCollapsedRanges,
   } from "./util.js";
 
   const FUNCTIONS = getFunctions();
+  const OTHER_GROUP = "adjustmentsGroupOther";
 
   let loading = $state(true);
   let initialState = $state(null);
@@ -138,6 +142,58 @@
     })).filter((group) => group.items.length > 0),
   );
 
+  // The cards sit under the picker's FUNCTION_GROUPS headings, in the same
+  // order. Each group can be collapsed, and that's remembered.
+  function groupKeyOf(id) {
+    return (
+      FUNCTION_GROUPS.find((group) => group.ids.includes(id))?.label ??
+      OTHER_GROUP
+    );
+  }
+
+  let cardGroups = $derived(
+    [...FUNCTION_GROUPS.map((group) => group.label), OTHER_GROUP]
+      .map((key) => ({
+        key,
+        slots: visibleSlots.filter(
+          (i) => groupKeyOf(FC.ADJUSTMENT_RANGES[i].adjFunction) === key,
+        ),
+      }))
+      .filter((group) => group.slots.length > 0),
+  );
+
+  let collapsedGroups = $state(config.adjustmentsCollapsedGroups);
+
+  function setCollapsedGroups(keys) {
+    collapsedGroups = keys;
+    config.adjustmentsCollapsedGroups = keys;
+  }
+
+  function toggleGroup(key) {
+    setCollapsedGroups(
+      collapsedGroups.includes(key)
+        ? collapsedGroups.filter((k) => k !== key)
+        : [...collapsedGroups, key],
+    );
+  }
+
+  function expandGroupOf(id) {
+    const key = groupKeyOf(id);
+    if (collapsedGroups.includes(key)) {
+      toggleGroup(key);
+    }
+  }
+
+  // Same test as a card's live header band: its enable channel lets it run.
+  function isLive(index) {
+    const adjRange = FC.ADJUSTMENT_RANGES[index];
+    if (adjRange.enaChannel === ALWAYS_ON_CH) {
+      return true;
+    }
+    const pos = FC.RC.channels[adjRange.enaChannel + PRIMARY_CHANNEL_COUNT];
+    return pos != null && isWithin(pos, adjRange.enaRange);
+  }
+
   function addAdjustment() {
     if (hiddenSlots.length === 0) {
       return;
@@ -161,6 +217,7 @@
   function onPickFunction(id) {
     if (pickerSlot !== null) {
       setFunction(FC.ADJUSTMENT_RANGES[pickerSlot], id);
+      expandGroupOf(id);
       return;
     }
     const next = Math.min(...hiddenSlots);
@@ -169,6 +226,7 @@
     setFunction(adjRange, id);
     adjRange.adjStep = 0; // start as Mapped
     visibleSlots = [...visibleSlots, next].sort((a, b) => a - b);
+    expandGroupOf(id);
   }
 
   function removeAdjustment(index) {
@@ -283,17 +341,26 @@
       <p>{$i18n.t("adjustmentsEmptyState")}</p>
     </div>
   {:else}
-    <div class="rows">
-      {#each visibleSlots as index (index + ":" + revertGeneration + ":" + FC.ADJUSTMENT_RANGES[index].adjFunction)}
-        <AdjustmentRow
-          {index}
-          {enaChannelOptions}
-          {adjChannelOptions}
-          onChangeFunction={() => changeFunction(index)}
-          onRemove={() => removeAdjustment(index)}
-        />
-      {/each}
-    </div>
+    {#each cardGroups as group (group.key)}
+      <CollapsibleGroup
+        title={$i18n.t(group.key)}
+        count={group.slots.length}
+        live={group.slots.some(isLive)}
+        liveTitle={$i18n.t("adjustmentsGroupLive")}
+        open={!collapsedGroups.includes(group.key)}
+        onToggle={() => toggleGroup(group.key)}
+      >
+        {#each group.slots as index (index + ":" + revertGeneration + ":" + FC.ADJUSTMENT_RANGES[index].adjFunction)}
+          <AdjustmentRow
+            {index}
+            {enaChannelOptions}
+            {adjChannelOptions}
+            onChangeFunction={() => changeFunction(index)}
+            onRemove={() => removeAdjustment(index)}
+          />
+        {/each}
+      </CollapsibleGroup>
+    {/each}
   {/if}
 </Page>
 
@@ -346,23 +413,13 @@
     padding: 4px 10px;
   }
 
-  .empty-state,
-  .rows {
-    margin-top: var(--section-gap);
-  }
-
   .empty-state {
+    margin-top: var(--section-gap);
     padding: 32px 16px;
     text-align: center;
     color: var(--color-text-soft);
 
     border: 1px dashed var(--color-border);
     border-radius: var(--radius-sm);
-  }
-
-  .rows {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
   }
 </style>
