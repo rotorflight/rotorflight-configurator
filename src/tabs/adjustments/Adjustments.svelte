@@ -248,6 +248,20 @@
 {#snippet header()}
   <h1>{$i18n.t("tabAdjustments")}</h1>
   <div class="grow"></div>
+  <span class="slot-count"
+    >{$i18n.t("adjustmentsSlotCount", {
+      used: visibleSlots.length,
+      total: slotCount,
+    })}</span
+  >
+  <button
+    class="btn add-btn"
+    disabled={hiddenSlots.length === 0}
+    onclick={addAdjustment}
+  >
+    <em class="fas fa-plus"></em>
+    {$i18n.t("adjustmentsAddButton")}
+  </button>
   <button class="btn help-btn" onclick={onClickHelp}
     >{$i18n.t("buttonHelp")}</button
   >
@@ -261,24 +275,6 @@
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
   <div class="note">
     <p>{$i18n.t("adjustmentsHelp")}</p>
-  </div>
-
-  <div class="toolbox">
-    <span class="slot-count"
-      >{$i18n.t("adjustmentsSlotCount", {
-        used: visibleSlots.length,
-        total: slotCount,
-      })}</span
-    >
-    <div class="grow"></div>
-    <button
-      class="btn add-btn"
-      disabled={hiddenSlots.length === 0}
-      onclick={addAdjustment}
-    >
-      <em class="fas fa-plus"></em>
-      {$i18n.t("adjustmentsAddButton")}
-    </button>
   </div>
 
   {#if visibleSlots.length === 0}
@@ -336,15 +332,8 @@
     border: 1px solid var(--color-border-accent);
   }
 
-  .toolbox {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: var(--section-gap);
-    margin-bottom: var(--section-gap);
-  }
-
   .slot-count {
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--color-text-soft);
   }
@@ -353,6 +342,12 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    padding: 4px 10px;
+  }
+
+  .empty-state,
+  .rows {
+    margin-top: var(--section-gap);
   }
 
   .empty-state {
