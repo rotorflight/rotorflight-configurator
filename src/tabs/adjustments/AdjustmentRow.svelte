@@ -219,7 +219,12 @@
     <!-- row 1: enable channel -->
     <div class="cell ena-select" class:disabled={adjType === 0}>
       <div class="select-row">
-        <span class="channel-label">{$i18n.t("adjustmentEnableChannel")}</span>
+        <div class="channel-label">
+          <span>{$i18n.t("adjustmentEnableChannel")}</span>
+          <span class="channel-pos"
+            >{enaChannelPos != null ? enaChannelPos + "µs" : "-"}</span
+          >
+        </div>
         <Select
           id="ena-channel-{index}"
           value={adjRange.enaChannel}
@@ -227,11 +232,6 @@
           disabled={adjType === 0}
           onchange={onEnaChannelChange}
         />
-      </div>
-      <div class="channel-value-line">
-        <span class="value-box"
-          >{enaChannelPos != null ? enaChannelPos + "µs" : "-"}</span
-        >
       </div>
     </div>
     <div
@@ -266,7 +266,12 @@
     <!-- row 2: value channel -->
     <div class="cell ch-select" class:disabled={adjType === 0}>
       <div class="select-row">
-        <span class="channel-label">{$i18n.t("adjustmentValueChannel")}</span>
+        <div class="channel-label">
+          <span>{$i18n.t("adjustmentValueChannel")}</span>
+          <span class="channel-pos"
+            >{adjChannelPos != null ? adjChannelPos + "µs" : "-"}</span
+          >
+        </div>
         <Select
           id="adj-channel-{index}"
           value={adjRange.adjChannel}
@@ -274,11 +279,6 @@
           disabled={adjType === 0}
           onchange={onAdjChannelChange}
         />
-      </div>
-      <div class="channel-value-line">
-        <span class="value-box"
-          >{adjChannelPos != null ? adjChannelPos + "µs" : "-"}</span
-        >
       </div>
     </div>
     <div class="cell ch-slider">
@@ -418,7 +418,7 @@
   .live-dot {
     width: 8px;
     height: 8px;
-    margin-right: 2px;
+    margin-right: 8px;
     border-radius: 50%;
     background-color: var(--color-accent-500);
   }
@@ -485,14 +485,14 @@
     display: grid;
     /* The range column sizes to its two NumberInputs (which never shrink) so
        they can't overflow leftwards underneath the slider's end handle. */
-    grid-template-columns: 130px 190px minmax(200px, 1fr) max-content;
+    grid-template-columns: 120px 200px minmax(200px, 1fr) max-content;
     grid-template-areas:
       "mode ena-select   ena-slider  ena-range"
       "mode ch-select    ch-slider   ch-range"
       "func func         func-slider func-range";
     column-gap: 16px;
     align-items: start;
-    padding: 12px 14px;
+    padding: 8px 12px;
   }
 
   .cell.disabled {
@@ -503,7 +503,7 @@
     grid-area: mode;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     padding: 4px 12px 0 0;
     border-right: 1px solid var(--color-border);
   }
@@ -556,7 +556,7 @@
   .func,
   .func-slider,
   .func-range {
-    padding-top: 20px;
+    padding-top: 8px;
     border-top: 1px solid var(--color-border);
   }
 
@@ -581,22 +581,23 @@
   }
 
   .channel-label {
-    min-width: 90px;
+    display: flex;
+    flex-direction: column;
+    min-width: 92px;
     font-size: 0.8rem;
+    line-height: 1.3;
+    white-space: nowrap;
     color: var(--color-text-soft);
   }
 
-  .channel-value-line {
-    display: flex;
-    justify-content: flex-end;
-
-    .value-box {
-      width: 100px;
-    }
+  .channel-pos {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text);
   }
 
   .slider-wrap {
-    margin: 6px 4px 42px;
+    margin: 12px 8px 24px;
 
     &.disabled {
       opacity: 0.5;
@@ -609,7 +610,7 @@
     align-items: center;
     justify-content: flex-end;
     gap: 4px;
-    margin-bottom: 10px;
+    margin: 4px 0;
 
     /* Trim the inputs a little on the multi-column layout so the range
        column doesn't squeeze the slider; below 768px it's single-column and
@@ -628,7 +629,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    margin: 8px 0;
+    margin: 4px 0;
   }
 
   .value-box {
@@ -652,6 +653,55 @@
   .step-label {
     color: var(--color-text-soft);
     font-size: 0.8rem;
+  }
+
+  /* Slimmer sliders than the shared theme, so each card takes less height:
+     a thin track, small round handles, short ticks and small labels. Scoped
+     to the adjustment cards only. */
+  .adjustment-card :global(.svelte-slide-horizontal) {
+    height: 6px;
+    border-radius: 3px;
+  }
+
+  .adjustment-card :global(.svelte-slide-horizontal .svelte-slide-handle) {
+    width: 16px;
+    height: 16px;
+    top: -6px;
+    right: -8px;
+    border-radius: 50%;
+  }
+
+  .adjustment-card :global(.svelte-slide-handle::before),
+  .adjustment-card :global(.svelte-slide-handle::after) {
+    display: none;
+  }
+
+  .adjustment-card :global(.svelte-slide-pips-horizontal) {
+    padding-top: 2px;
+  }
+
+  .adjustment-card
+    :global(.svelte-slide-marker-horizontal.svelte-slide-marker) {
+    height: 3px;
+  }
+
+  .adjustment-card
+    :global(.svelte-slide-marker-horizontal.svelte-slide-marker-large) {
+    height: 6px;
+  }
+
+  .adjustment-card :global(.svelte-slide-value-horizontal) {
+    margin-top: 0;
+    padding-top: 0;
+    font-size: 0.7rem;
+  }
+
+  /* The live RC position marker, resized to sit under the thin track. */
+  .adjustment-card :global(.range-slider-container .marker) {
+    top: 8px;
+    height: 7px;
+    width: 4px;
+    margin-left: -2px;
   }
 
   @media only screen and (max-width: 768px) {
