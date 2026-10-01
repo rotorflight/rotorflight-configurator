@@ -3,6 +3,7 @@
 
   import HelpIcon from "@/components/HelpIcon.svelte";
   import Page from "@/components/Page.svelte";
+  import PickerDialog from "@/components/PickerDialog.svelte";
 
   import {
     EXPERT_MODES,
@@ -23,7 +24,6 @@
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { bit_check } from "@/js/serial_backend.js";
 
-  import AddModeDialog from "./AddModeDialog.svelte";
   import ModeCard from "./ModeCard.svelte";
 
   // Roll, pitch, yaw, collective and throttle come before AUX1.
@@ -87,8 +87,8 @@
       const modeName = FC.AUX_CONFIG[i];
       const key = MODE_GROUPS[getModeOrder(modeName).group]?.key;
       const label = $i18n.t(`auxiliaryGroup${key ?? MODE_GROUP_OTHER}`);
-      if (groups.at(-1)?.label !== label) groups.push({ label, modes: [] });
-      groups.at(-1).modes.push({
+      if (groups.at(-1)?.label !== label) groups.push({ label, items: [] });
+      groups.at(-1).items.push({
         value: i,
         label: getModeDisplayName(modeName),
         description: getModeDescription(modeName),
@@ -401,9 +401,12 @@
   {/each}
 </Page>
 
-<AddModeDialog
+<PickerDialog
   bind:this={addModeDialog}
+  title={$i18n.t("auxiliaryAddModeTitle")}
   groups={addModeGroups}
+  searchPlaceholder={$i18n.t("auxiliaryAddModeSearch")}
+  noMatchesText={$i18n.t("auxiliaryAddModeNoMatches")}
   onSelect={addMode}
 />
 
