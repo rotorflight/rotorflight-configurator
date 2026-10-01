@@ -9,6 +9,7 @@
     markerPercent = null,
     onchange,
     changeOnSlide = true,
+    compact = false,
   } = $props();
 
   let node;
@@ -42,7 +43,7 @@
   }
 </script>
 
-<div class="range-slider-container">
+<div class="range-slider-container" class:compact>
   <div bind:this={node}></div>
   {#if markerPercent != null}
     <div class="marker" style:left="{markerPercent}%"></div>
@@ -75,5 +76,50 @@
      single-value Slider used elsewhere. */
   .range-slider-container :global(.svelte-slide-value-horizontal) {
     padding-top: 4px;
+  }
+
+  /* compact: a thin track, small round handles, short ticks and small
+     labels, for sliders stacked in cards where height matters. */
+  .compact :global(.svelte-slide-horizontal) {
+    height: 6px;
+    border-radius: 3px;
+  }
+
+  .compact :global(.svelte-slide-horizontal .svelte-slide-handle) {
+    width: 16px;
+    height: 16px;
+    top: -6px;
+    right: -8px;
+    border-radius: 50%;
+  }
+
+  .compact :global(.svelte-slide-handle::before),
+  .compact :global(.svelte-slide-handle::after) {
+    display: none;
+  }
+
+  .compact :global(.svelte-slide-pips-horizontal) {
+    padding-top: 2px;
+  }
+
+  .compact :global(.svelte-slide-marker-horizontal.svelte-slide-marker) {
+    height: 3px;
+  }
+
+  .compact :global(.svelte-slide-marker-horizontal.svelte-slide-marker-large) {
+    height: 6px;
+  }
+
+  .compact :global(.svelte-slide-value-horizontal) {
+    margin-top: 0;
+    padding-top: 0;
+    font-size: 0.7rem;
+  }
+
+  .compact .marker {
+    top: 8px;
+    height: 7px;
+    width: 4px;
+    margin-left: -2px;
   }
 </style>

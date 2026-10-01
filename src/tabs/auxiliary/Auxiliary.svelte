@@ -1,6 +1,7 @@
 <script>
   import { onDestroy, onMount } from "svelte";
 
+  import CollapsibleGroup from "@/components/CollapsibleGroup.svelte";
   import HelpIcon from "@/components/HelpIcon.svelte";
   import Page from "@/components/Page.svelte";
   import PickerDialog from "@/components/PickerDialog.svelte";
@@ -14,6 +15,7 @@
     getModeDisplayName,
     getModeOrder,
   } from "@/js/FlightMode.js";
+  import { config } from "@/js/config.svelte.ts";
   import { CONFIGURATOR } from "@/js/configurator.svelte.js";
   import { FC } from "@/js/fc.svelte.js";
   import { GUI } from "@/js/gui.js";
@@ -77,6 +79,42 @@
   let visibleIndices = $derived(
     modeIndices.filter((i) => i === modeIndices[0] || shownModes.includes(i)),
   );
+
+  // The cards sit under the same MODE_GROUPS headings as the add-mode
+  // picker, in the same order. Each group can be collapsed, and that's
+  // remembered.
+  function groupKeyOf(modeIndex) {
+    return (
+      MODE_GROUPS[getModeOrder(FC.AUX_CONFIG[modeIndex]).group]?.key ??
+      MODE_GROUP_OTHER
+    );
+  }
+
+  // visibleIndices is already in group order, so each group is one run.
+  let modeGroups = $derived.by(() => {
+    const groups = [];
+    for (const i of visibleIndices) {
+      const key = groupKeyOf(i);
+      if (groups.at(-1)?.key !== key) groups.push({ key, modes: [] });
+      groups.at(-1).modes.push(i);
+    }
+    return groups;
+  });
+
+  let collapsedGroups = $state(config.modesCollapsedGroups);
+
+  function setCollapsedGroups(keys) {
+    collapsedGroups = keys;
+    config.modesCollapsedGroups = keys;
+  }
+
+  function toggleGroup(key) {
+    setCollapsedGroups(
+      collapsedGroups.includes(key)
+        ? collapsedGroups.filter((k) => k !== key)
+        : [...collapsedGroups, key],
+    );
+  }
 
   // Modes not on the page yet, bucketed by MODE_GROUPS for the add dialog.
   // modeIndices is already in group order, so buckets fill in order.
@@ -273,6 +311,8 @@
 
   function addMode(modeIndex) {
     if (!shownModes.includes(modeIndex)) shownModes.push(modeIndex);
+    const key = groupKeyOf(modeIndex);
+    if (collapsedGroups.includes(key)) toggleGroup(key);
     addRange(modeIndex);
   }
 
@@ -381,23 +421,34 @@
 {/snippet}
 
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
-  {#each visibleIndices as modeIndex (modeIndex)}
-    <ModeCard
-      modeId={FC.AUX_CONFIG_IDS[modeIndex]}
-      modeName={FC.AUX_CONFIG[modeIndex]}
-      items={entries[modeIndex] ?? []}
-      isOn={isModeOn(modeIndex)}
-      {channelOptions}
-      {logicOptions}
-      {linkOptions}
-      onAddRange={() => addRange(modeIndex)}
-      onAddLink={() => addLink(modeIndex)}
-      onDeleteItem={(item) => deleteItem(modeIndex, item)}
-      onRemove={modeIndex === modeIndices[0]
-        ? null
-        : () => removeMode(modeIndex)}
-      onEdit={markDirty}
-    />
+  {#each modeGroups as group (group.key)}
+    <CollapsibleGroup
+      title={$i18n.t(`auxiliaryGroup${group.key}`)}
+      count={group.modes.length}
+      live={group.modes.some(isModeOn)}
+      liveTitle={$i18n.t("auxiliaryGroupLive")}
+      open={!collapsedGroups.includes(group.key)}
+      onToggle={() => toggleGroup(group.key)}
+    >
+      {#each group.modes as modeIndex (modeIndex)}
+        <ModeCard
+          modeId={FC.AUX_CONFIG_IDS[modeIndex]}
+          modeName={FC.AUX_CONFIG[modeIndex]}
+          items={entries[modeIndex] ?? []}
+          isOn={isModeOn(modeIndex)}
+          {channelOptions}
+          {logicOptions}
+          {linkOptions}
+          onAddRange={() => addRange(modeIndex)}
+          onAddLink={() => addLink(modeIndex)}
+          onDeleteItem={(item) => deleteItem(modeIndex, item)}
+          onRemove={modeIndex === modeIndices[0]
+            ? null
+            : () => removeMode(modeIndex)}
+          onEdit={markDirty}
+        />
+      {/each}
+    </CollapsibleGroup>
   {/each}
 </Page>
 

@@ -1,8 +1,8 @@
 <script>
   import diff from "microdiff";
   import { onDestroy, onMount } from "svelte";
-  import { slide } from "svelte/transition";
 
+  import CollapsibleGroup from "@/components/CollapsibleGroup.svelte";
   import Page from "@/components/Page.svelte";
   import PickerDialog from "@/components/PickerDialog.svelte";
 
@@ -342,37 +342,24 @@
     </div>
   {:else}
     {#each cardGroups as group (group.key)}
-      {@const open = !collapsedGroups.includes(group.key)}
-      <section class="group">
-        <button
-          type="button"
-          class="group-header"
-          aria-expanded={open}
-          onclick={() => toggleGroup(group.key)}
-        >
-          <em class={["fas", "fa-chevron-right", "chevron", open && "open"]}
-          ></em>
-          <span class="group-title">{$i18n.t(group.key)}</span>
-          <span class="group-count">{group.slots.length}</span>
-          {#if group.slots.some(isLive)}
-            <span class="live-dot" title={$i18n.t("adjustmentsGroupLive")}
-            ></span>
-          {/if}
-        </button>
-        {#if open}
-          <div class="rows" transition:slide={{ duration: 150 }}>
-            {#each group.slots as index (index + ":" + revertGeneration + ":" + FC.ADJUSTMENT_RANGES[index].adjFunction)}
-              <AdjustmentRow
-                {index}
-                {enaChannelOptions}
-                {adjChannelOptions}
-                onChangeFunction={() => changeFunction(index)}
-                onRemove={() => removeAdjustment(index)}
-              />
-            {/each}
-          </div>
-        {/if}
-      </section>
+      <CollapsibleGroup
+        title={$i18n.t(group.key)}
+        count={group.slots.length}
+        live={group.slots.some(isLive)}
+        liveTitle={$i18n.t("adjustmentsGroupLive")}
+        open={!collapsedGroups.includes(group.key)}
+        onToggle={() => toggleGroup(group.key)}
+      >
+        {#each group.slots as index (index + ":" + revertGeneration + ":" + FC.ADJUSTMENT_RANGES[index].adjFunction)}
+          <AdjustmentRow
+            {index}
+            {enaChannelOptions}
+            {adjChannelOptions}
+            onChangeFunction={() => changeFunction(index)}
+            onRemove={() => removeAdjustment(index)}
+          />
+        {/each}
+      </CollapsibleGroup>
     {/each}
   {/if}
 </Page>
@@ -426,98 +413,13 @@
     padding: 4px 10px;
   }
 
-  .empty-state,
-  .group {
-    margin-top: var(--section-gap);
-  }
-
   .empty-state {
+    margin-top: var(--section-gap);
     padding: 32px 16px;
     text-align: center;
     color: var(--color-text-soft);
 
     border: 1px dashed var(--color-border);
     border-radius: var(--radius-sm);
-  }
-
-  /* Each group is the one frame: a dark header bar (the band the cards
-     used to carry), with its cards as flat sections inside, split by
-     plain lines. */
-  .group {
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background-color: var(--color-surface);
-    box-shadow: var(--shadow-xs);
-  }
-
-  .group-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 10px 14px;
-    font: inherit;
-    font-size: 1rem;
-    font-weight: 700;
-    text-align: left;
-    /* surface-alt is a dark band in both themes; text-alt is the text
-       token for it. */
-    color: var(--color-text-alt);
-    background-color: var(--color-surface-alt);
-    border: none;
-    cursor: pointer;
-
-    @media (hover: hover) {
-      &:hover {
-        filter: brightness(1.15);
-      }
-    }
-
-    &:focus-visible {
-      outline: none;
-      box-shadow: inset 0 0 0 3px var(--color-focus-ring);
-    }
-  }
-
-  .chevron {
-    width: 1em;
-    font-size: 0.8rem;
-    color: inherit;
-    opacity: 0.8;
-    transition: transform var(--animation-speed);
-
-    &.open {
-      transform: rotate(90deg);
-    }
-  }
-
-  .group-count {
-    min-width: 1.75em;
-    padding: 0 8px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 1.6;
-    text-align: center;
-    border-radius: var(--radius-pill);
-    color: var(--color-text-alt);
-    background-color: var(--color-accent-500);
-  }
-
-  .live-dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background-color: var(--color-accent-500);
-    box-shadow: 0 0 0 3px var(--color-accent-soft);
-  }
-
-  .rows {
-    display: flex;
-    flex-direction: column;
-
-    > :global(* + *) {
-      border-top: 1px solid var(--color-border);
-    }
   }
 </style>

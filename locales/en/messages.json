@@ -2644,6 +2644,9 @@
     "auxiliaryAddModeNoMatches": {
         "message": "No matching modes"
     },
+    "auxiliaryGroupLive": {
+        "message": "A mode in this group is active"
+    },
     "auxiliaryRemoveMode": {
         "message": "Remove mode"
     },

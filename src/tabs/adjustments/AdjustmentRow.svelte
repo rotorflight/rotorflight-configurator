@@ -1,6 +1,7 @@
 <script>
   import wNumb from "wnumb";
 
+  import GroupCard from "@/components/GroupCard.svelte";
   import HelpIcon from "@/components/HelpIcon.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import RangeSlider from "@/components/RangeSlider.svelte";
@@ -163,11 +164,8 @@
   );
 </script>
 
-<div class="adjustment-card">
-  <div class="card-header" class:on={isEnabled}>
-    {#if isEnabled}
-      <span class="live-dot"></span>
-    {/if}
+<GroupCard live={isEnabled}>
+  {#snippet header()}
     <button
       type="button"
       class="func-title"
@@ -192,7 +190,7 @@
     >
       <em class="fas fa-trash"></em>
     </button>
-  </div>
+  {/snippet}
 
   <div class="card-body">
     <div class="cell mode">
@@ -239,6 +237,7 @@
       class:disabled={adjType === 0 || adjRange.enaChannel === ALWAYS_ON_CH}
     >
       <RangeSlider
+        compact
         opts={rangeSliderOpts}
         bind:start={adjRange.enaRange.start}
         bind:end={adjRange.enaRange.end}
@@ -284,6 +283,7 @@
     <div class="cell ch-slider">
       <div class="slider-wrap" class:disabled={adjType === 0}>
         <RangeSlider
+          compact
           opts={rangeSliderOpts}
           bind:start={adjRange.adjRange1.start}
           bind:end={adjRange.adjRange1.end}
@@ -293,6 +293,7 @@
       {#if adjType === 2}
         <div class="slider-wrap">
           <RangeSlider
+            compact
             opts={incSliderOpts}
             bind:start={adjRange.adjRange2.start}
             bind:end={adjRange.adjRange2.end}
@@ -354,6 +355,7 @@
     <div class="cell func-slider">
       <div class="slider-wrap" class:disabled={adjType === 0}>
         <RangeSlider
+          compact
           opts={initialValSliderOpts}
           bind:start={adjRange.adjMin}
           bind:end={adjRange.adjMax}
@@ -377,51 +379,9 @@
       />
     </div>
   </div>
-</div>
+</GroupCard>
 
 <style lang="scss">
-  /* A flat section inside its group's frame (the group draws the line
-     between cards). */
-  .adjustment-card {
-    background-color: var(--color-surface);
-  }
-
-  /* The group panel carries the structure now, so the header stays
-     neutral and only a live card stands out: a soft accent background, an
-     accent edge and an accent title while its enable channel lets it run. */
-  .card-header {
-    @extend %section-header;
-    /* The header sits flush inside the card's border, so drop the
-       placeholder's phone-width top margin. */
-    margin-top: 0;
-    padding: 0 8px 0 12px;
-
-    color: var(--color-text);
-    background-color: var(--color-surface);
-    border-bottom: 1px solid var(--color-border-soft);
-    box-shadow: inset 4px 0 0 transparent;
-    transition:
-      background-color var(--animation-speed),
-      box-shadow var(--animation-speed);
-
-    &.on {
-      background-color: var(--color-accent-soft);
-      box-shadow: inset 4px 0 0 var(--color-accent-500);
-
-      .func-title {
-        color: var(--color-accent-500);
-      }
-    }
-  }
-
-  .live-dot {
-    width: 8px;
-    height: 8px;
-    margin-right: 8px;
-    border-radius: 50%;
-    background-color: var(--color-accent-500);
-  }
-
   .func-title {
     display: flex;
     align-items: center;
@@ -652,55 +612,6 @@
   .step-label {
     color: var(--color-text-soft);
     font-size: 0.8rem;
-  }
-
-  /* Slimmer sliders than the shared theme, so each card takes less height:
-     a thin track, small round handles, short ticks and small labels. Scoped
-     to the adjustment cards only. */
-  .adjustment-card :global(.svelte-slide-horizontal) {
-    height: 6px;
-    border-radius: 3px;
-  }
-
-  .adjustment-card :global(.svelte-slide-horizontal .svelte-slide-handle) {
-    width: 16px;
-    height: 16px;
-    top: -6px;
-    right: -8px;
-    border-radius: 50%;
-  }
-
-  .adjustment-card :global(.svelte-slide-handle::before),
-  .adjustment-card :global(.svelte-slide-handle::after) {
-    display: none;
-  }
-
-  .adjustment-card :global(.svelte-slide-pips-horizontal) {
-    padding-top: 2px;
-  }
-
-  .adjustment-card
-    :global(.svelte-slide-marker-horizontal.svelte-slide-marker) {
-    height: 3px;
-  }
-
-  .adjustment-card
-    :global(.svelte-slide-marker-horizontal.svelte-slide-marker-large) {
-    height: 6px;
-  }
-
-  .adjustment-card :global(.svelte-slide-value-horizontal) {
-    margin-top: 0;
-    padding-top: 0;
-    font-size: 0.7rem;
-  }
-
-  /* The live RC position marker, resized to sit under the thin track. */
-  .adjustment-card :global(.range-slider-container .marker) {
-    top: 8px;
-    height: 7px;
-    width: 4px;
-    margin-left: -2px;
   }
 
   @media only screen and (max-width: 768px) {
