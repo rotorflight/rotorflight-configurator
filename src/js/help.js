@@ -27,6 +27,7 @@ const tabHelpURLs = {
     tabGPS:             `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/gps`,
     tabSensors:         `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/sensors`,
     tabBlackbox:        `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/blackbox`,
+    tabRemapFC:         `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/remap-fc`,
     tabCli:             `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/cli`,
 };
 

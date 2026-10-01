@@ -1,0 +1,616 @@
+{
+  "_file": {
+    "path": "src/tabs/remap_fc/reference_designs.json",
+    "description": "Usage -> pin/function entries for each Rotorflight reference FC design (F7A/F7B/F7C), extracted from the MCU Pin Allocation table published at github.com/rotorflight/rotorflight-ref-design. Each entry keeps the Function column (e.g. \"TX3 / SCL2 / T2CH3\") alongside its pin, so a multi-pin usage like \"Port C\" still shows which physical pin is TX vs RX (or SCL vs SDA). Looked up by the design family in FC.CONFIG.boardDesign (e.g. \"F7A1\" -> \"F7A\") to show a board-design-aware pin reference alongside the read hardware. F7A's PA3 is named \"SBUS\" here rather than \"TLM\" (as the upstream MCU Pin Allocation table calls it) -- F7A only has this one pin doing double duty as either an ESC-telemetry return or a one-wire receiver input, and the same upstream doc's own Servo and Motor Port table calls it \"SBUS\", matching what a real RadioMaster NEXUS actually silkscreens there. F7B/F7C have separate, unambiguous TLM and SBUS pins and are untouched. This file is overwritten wholesale by reference_design_source.js's live GitHub fetch of this same file from rotorflight/rotorflight-configurator's own devel branch, so it only ever holds Rotorflight's own official reference designs -- a manufacturer's own custom pin layout with no reference design behind it at all belongs in manufacturer_designs.json instead, a separate, purely local file this live fetch never touches."
+  },
+  "F7A": {
+    "Port A": [
+      {
+        "pin": "PA0",
+        "function": "TX4 / T5CH1"
+      },
+      {
+        "pin": "PA1",
+        "function": "RX4 / T5CH2"
+      }
+    ],
+    "RPM": [
+      {
+        "pin": "PA2",
+        "function": "TX2 / T5CH3"
+      }
+    ],
+    "SBUS": [
+      {
+        "pin": "PA3",
+        "function": "RX2 / T5CH4"
+      }
+    ],
+    "Gyro CS": [
+      {
+        "pin": "PA4",
+        "function": "SPI1 NSS"
+      }
+    ],
+    "Gyro SCK": [
+      {
+        "pin": "PA5",
+        "function": "SPI1 SCK"
+      }
+    ],
+    "Gyro SDO": [
+      {
+        "pin": "PA6",
+        "function": "SPI1 MISO"
+      }
+    ],
+    "Gyro SDI": [
+      {
+        "pin": "PA7",
+        "function": "SPI1 MOSI"
+      }
+    ],
+    "LED Strip": [
+      {
+        "pin": "PA8",
+        "function": "T1CH1"
+      }
+    ],
+    "Port D": [
+      {
+        "pin": "PA9",
+        "function": "TX1"
+      },
+      {
+        "pin": "PA10",
+        "function": "RX1"
+      }
+    ],
+    "Gyro INT": [
+      {
+        "pin": "PA15",
+        "function": "EXTI"
+      }
+    ],
+    "Servo 3": [
+      {
+        "pin": "PB0",
+        "function": "T3CH3"
+      }
+    ],
+    "Servo 4": [
+      {
+        "pin": "PB1",
+        "function": "T3CH4"
+      }
+    ],
+    "TAIL": [
+      {
+        "pin": "PB3",
+        "function": "T2CH2"
+      }
+    ],
+    "Servo 1": [
+      {
+        "pin": "PB4",
+        "function": "T3CH1"
+      }
+    ],
+    "Servo 2": [
+      {
+        "pin": "PB5",
+        "function": "T3CH2"
+      }
+    ],
+    "ESC": [
+      {
+        "pin": "PB6",
+        "function": "T4CH1"
+      }
+    ],
+    "Baro": [
+      {
+        "pin": "PB8",
+        "function": "SCL1"
+      },
+      {
+        "pin": "PB9",
+        "function": "SDA1"
+      }
+    ],
+    "Port C": [
+      {
+        "pin": "PB10",
+        "function": "TX3 / SCL2 / T2CH3"
+      },
+      {
+        "pin": "PB11",
+        "function": "RX3 / SDA2 / T2CH4"
+      }
+    ],
+    "Flash": [
+      {
+        "pin": "PB12",
+        "function": "SPI2 NSS"
+      },
+      {
+        "pin": "PB13",
+        "function": "SPI2 SCK"
+      },
+      {
+        "pin": "PB14",
+        "function": "SPI2 MISO"
+      },
+      {
+        "pin": "PB15",
+        "function": "SPI2 MOSI"
+      }
+    ],
+    "Vbat": [
+      {
+        "pin": "PC0",
+        "function": "ADC10"
+      }
+    ],
+    "Vbec (VX)": [
+      {
+        "pin": "PC1",
+        "function": "ADC11"
+      }
+    ],
+    "Vbus (5V)": [
+      {
+        "pin": "PC2",
+        "function": "ADC12"
+      }
+    ],
+    "Port B": [
+      {
+        "pin": "PC6",
+        "function": "TX6 / T8CH1"
+      },
+      {
+        "pin": "PC7",
+        "function": "RX6 / T8CH2"
+      }
+    ],
+    "Port E": [
+      {
+        "pin": "PC12",
+        "function": "TX5"
+      },
+      {
+        "pin": "PD2",
+        "function": "RX5"
+      }
+    ],
+    "Buzzer": [
+      {
+        "pin": "PC13",
+        "function": "GPIO"
+      }
+    ],
+    "LED Green": [
+      {
+        "pin": "PC14",
+        "function": "GPIO"
+      }
+    ],
+    "LED Red": [
+      {
+        "pin": "PC15",
+        "function": "GPIO"
+      }
+    ]
+  },
+  "F7B": {
+    "Port A": [
+      {
+        "pin": "PA0",
+        "function": "TX4 / T5CH1"
+      },
+      {
+        "pin": "PA1",
+        "function": "RX4 / T5CH2"
+      }
+    ],
+    "RPM": [
+      {
+        "pin": "PA2",
+        "function": "TX2 / T5CH3"
+      }
+    ],
+    "TLM": [
+      {
+        "pin": "PA3",
+        "function": "RX2 / T5CH4"
+      }
+    ],
+    "Gyro CS": [
+      {
+        "pin": "PA4",
+        "function": "SPI1 NSS"
+      }
+    ],
+    "Gyro SCK": [
+      {
+        "pin": "PA5",
+        "function": "SPI1 SCK"
+      }
+    ],
+    "Gyro SDO": [
+      {
+        "pin": "PA6",
+        "function": "SPI1 MISO"
+      }
+    ],
+    "Gyro SDI": [
+      {
+        "pin": "PA7",
+        "function": "SPI1 MOSI"
+      }
+    ],
+    "Gyro INT": [
+      {
+        "pin": "PA8",
+        "function": "EXTI"
+      }
+    ],
+    "ESC": [
+      {
+        "pin": "PA9",
+        "function": "T1CH2"
+      }
+    ],
+    "TAIL": [
+      {
+        "pin": "PA15",
+        "function": "T2CH1"
+      }
+    ],
+    "Servo 3": [
+      {
+        "pin": "PB0",
+        "function": "T3CH3"
+      }
+    ],
+    "Servo 4": [
+      {
+        "pin": "PB1",
+        "function": "T3CH4"
+      }
+    ],
+    "Servo 1": [
+      {
+        "pin": "PB4",
+        "function": "T3CH1"
+      }
+    ],
+    "Servo 2": [
+      {
+        "pin": "PB5",
+        "function": "T3CH2"
+      }
+    ],
+    "AUX": [
+      {
+        "pin": "PB6",
+        "function": "T4CH1 / TX1"
+      }
+    ],
+    "SBUS": [
+      {
+        "pin": "PB7",
+        "function": "T4CH2 / RX1"
+      }
+    ],
+    "Baro": [
+      {
+        "pin": "PB8",
+        "function": "SCL1"
+      },
+      {
+        "pin": "PB9",
+        "function": "SDA1"
+      }
+    ],
+    "Port C": [
+      {
+        "pin": "PB10",
+        "function": "TX3 / SCL2 / T2CH3"
+      },
+      {
+        "pin": "PB11",
+        "function": "RX3 / SDA2 / T2CH4"
+      }
+    ],
+    "Flash": [
+      {
+        "pin": "PB12",
+        "function": "SPI2 NSS"
+      },
+      {
+        "pin": "PB13",
+        "function": "SPI2 SCK"
+      },
+      {
+        "pin": "PB14",
+        "function": "SPI2 MISO"
+      },
+      {
+        "pin": "PB15",
+        "function": "SPI2 MOSI"
+      }
+    ],
+    "Vbat": [
+      {
+        "pin": "PC0",
+        "function": "ADC10"
+      }
+    ],
+    "Vbec (VX)": [
+      {
+        "pin": "PC1",
+        "function": "ADC11"
+      }
+    ],
+    "Vbus (5V)": [
+      {
+        "pin": "PC2",
+        "function": "ADC12"
+      }
+    ],
+    "Port B": [
+      {
+        "pin": "PC6",
+        "function": "TX6 / T8CH1"
+      },
+      {
+        "pin": "PC7",
+        "function": "RX6 / T8CH2"
+      }
+    ],
+    "Port E": [
+      {
+        "pin": "PC12",
+        "function": "TX5"
+      },
+      {
+        "pin": "PD2",
+        "function": "RX5"
+      }
+    ],
+    "Buzzer": [
+      {
+        "pin": "PC13",
+        "function": "GPIO"
+      }
+    ],
+    "LED Green": [
+      {
+        "pin": "PC14",
+        "function": "GPIO"
+      }
+    ],
+    "LED Red": [
+      {
+        "pin": "PC15",
+        "function": "GPIO"
+      }
+    ]
+  },
+  "F7C": {
+    "Port A": [
+      {
+        "pin": "PA0",
+        "function": "TX4 / T5CH1"
+      },
+      {
+        "pin": "PA1",
+        "function": "RX4 / T5CH2"
+      }
+    ],
+    "RPM": [
+      {
+        "pin": "PA2",
+        "function": "TX2 / T5CH3"
+      }
+    ],
+    "TLM": [
+      {
+        "pin": "PA3",
+        "function": "RX2 / T5CH4"
+      }
+    ],
+    "Gyro CS": [
+      {
+        "pin": "PA4",
+        "function": "SPI1 NSS"
+      }
+    ],
+    "Gyro SCK": [
+      {
+        "pin": "PA5",
+        "function": "SPI1 SCK"
+      }
+    ],
+    "Gyro SDO": [
+      {
+        "pin": "PA6",
+        "function": "SPI1 MISO"
+      }
+    ],
+    "Gyro SDI": [
+      {
+        "pin": "PA7",
+        "function": "SPI1 MOSI"
+      }
+    ],
+    "Baro": [
+      {
+        "pin": "PA8",
+        "function": "SCL3"
+      },
+      {
+        "pin": "PC9",
+        "function": "SDA3"
+      }
+    ],
+    "ESC": [
+      {
+        "pin": "PA9",
+        "function": "T1CH2"
+      }
+    ],
+    "TAIL": [
+      {
+        "pin": "PA15",
+        "function": "T2CH1"
+      }
+    ],
+    "Servo 3": [
+      {
+        "pin": "PB0",
+        "function": "T3CH3"
+      }
+    ],
+    "Servo 4": [
+      {
+        "pin": "PB1",
+        "function": "T3CH4"
+      }
+    ],
+    "ACC CS": [
+      {
+        "pin": "PB2",
+        "function": "SPI1 NSS2"
+      }
+    ],
+    "Servo 1": [
+      {
+        "pin": "PB4",
+        "function": "T3CH1"
+      }
+    ],
+    "Servo 2": [
+      {
+        "pin": "PB5",
+        "function": "T3CH2"
+      }
+    ],
+    "AUX": [
+      {
+        "pin": "PB6",
+        "function": "T4CH1 / TX1 / SCL1"
+      }
+    ],
+    "SBUS": [
+      {
+        "pin": "PB7",
+        "function": "T4CH2 / RX1 / SDA1"
+      }
+    ],
+    "Gyro INT": [
+      {
+        "pin": "PB8",
+        "function": "T10CH1"
+      }
+    ],
+    "Acc INT": [
+      {
+        "pin": "PB9",
+        "function": "T11CH1"
+      }
+    ],
+    "Port C": [
+      {
+        "pin": "PB10",
+        "function": "TX3 / SCL2 / T2CH3"
+      },
+      {
+        "pin": "PB11",
+        "function": "RX3 / SDA2 / T2CH4"
+      }
+    ],
+    "Flash": [
+      {
+        "pin": "PB12",
+        "function": "SPI2 NSS"
+      },
+      {
+        "pin": "PB13",
+        "function": "SPI2 SCK"
+      },
+      {
+        "pin": "PB14",
+        "function": "SPI2 MISO"
+      },
+      {
+        "pin": "PB15",
+        "function": "SPI2 MOSI"
+      }
+    ],
+    "Vbat": [
+      {
+        "pin": "PC0",
+        "function": "ADC10"
+      }
+    ],
+    "Vbec (VX)": [
+      {
+        "pin": "PC1",
+        "function": "ADC11"
+      }
+    ],
+    "Vbus (5V)": [
+      {
+        "pin": "PC2",
+        "function": "ADC12"
+      }
+    ],
+    "Ibus": [
+      {
+        "pin": "PC3",
+        "function": "ADC13"
+      }
+    ],
+    "Port B": [
+      {
+        "pin": "PC6",
+        "function": "TX6 / T8CH1"
+      },
+      {
+        "pin": "PC7",
+        "function": "RX6 / T8CH2"
+      }
+    ],
+    "Beeper": [
+      {
+        "pin": "PC8",
+        "function": "GPIO"
+      }
+    ],
+    "LED Green": [
+      {
+        "pin": "PC10",
+        "function": "GPIO"
+      }
+    ],
+    "LED Red": [
+      {
+        "pin": "PC11",
+        "function": "GPIO"
+      }
+    ],
+    "Port E": [
+      {
+        "pin": "PC12",
+        "function": "TX5"
+      },
+      {
+        "pin": "PD2",
+        "function": "RX5"
+      }
+    ]
+  }
+}

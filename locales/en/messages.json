@@ -748,6 +748,189 @@
     "tabBlackbox": {
         "message": "Blackbox"
     },
+    "tabRemapFC": {
+        "message": "Remap FC"
+    },
+    "remapFcRunButton": {
+        "message": "Read FC"
+    },
+    "remapFcIntroHeading": {
+        "message": "What this does"
+    },
+    "remapFcIntroDescription": {
+        "message": "Remap FC lets you change servos, motors, and other functions that can connect to your flight controller. Swap a tail servo to motorised tail, add a buffer pack or onboard glow, or move a function to a different pin -- all without touching a soldering iron."
+    },
+    "remapFcRunning": {
+        "message": "Reading FC"
+    },
+    "remapFcRunningProgress": {
+        "message": "Reading FC ({{percent}}%)"
+    },
+    "remapFcLoadingHardware": {
+        "message": "Loading hardware..."
+    },
+    "remapFcCliEntryTimeout": {
+        "message": "Flight controller did not respond to enter CLI mode. Check the connection and try again."
+    },
+    "remapFcError": {
+        "message": "Error reading FC"
+    },
+    "remapFcSaveNoReboot": {
+        "message": "Flight controller did not reboot after Save -- the change may not have been applied. Check the connection and try again."
+    },
+    "remapFcTableOption": {
+        "message": "FC Label"
+    },
+    "remapFcTableCurrentOption": {
+        "message": "Feature"
+    },
+    "remapFcAddOption": {
+        "message": "Other Pins"
+    },
+    "remapFcNoneOption": {
+        "message": "None"
+    },
+    "remapFcCloseCard": {
+        "message": "Close"
+    },
+    "remapFcCardPlaceholder": {
+        "message": "Click on a pin to see the remapping options"
+    },
+    "remapFcNoAlternativeFeatures": {
+        "message": "No alternative resource features can be allocated to this port"
+    },
+    "remapFcPinNotRemappable": {
+        "message": "This pin is hard-wired and cannot be remapped."
+    },
+    "remapFcDefaultOption": {
+        "message": "Default"
+    },
+    "remapFcCardDescription": {
+        "message": "Choose what this pin does. Picking a feature moves it here from wherever it's currently assigned; picking the pin's own default puts it back."
+    },
+    "remapFcCardDescriptionUart": {
+        "message": "This pin defaults to {{resource}}.\n\n{{hint}}"
+    },
+    "remapFcCardDescriptionUartNoAlternative": {
+        "message": "This pin defaults to {{resource}}."
+    },
+    "remapFcHintTlm": {
+        "message": "TLM is commonly used for ESC telemetry -- enable it by setting this port's Telemetry Output to \"ESC Telemetry\" in the Configuration tab."
+    },
+    "remapFcHintSbus": {
+        "message": "The SBUS port is the default port used for an SBUS receiver -- enable it by setting this port to serial RX in the Configuration tab and selecting the appropriate serial protocol in the Receiver tab."
+    },
+    "remapFcHintGeneric": {
+        "message": "It can be freely repurposed for a motor, servo, or other feature."
+    },
+    "remapFcPurposeM1": {
+        "message": "Use this port to connect your main ESC, or a throttle servo for a nitro or turbine setup."
+    },
+    "remapFcPurposeM2": {
+        "message": "Connect your tail motor's ESC to this port -- for a motorised (direct-drive) tail."
+    },
+    "remapFcPurposeS1": {
+        "message": "Servo 1. Commonly this is the left side cyclic servo."
+    },
+    "remapFcPurposeS2": {
+        "message": "Servo 2. Commonly this is the right side cyclic servo."
+    },
+    "remapFcPurposeS3": {
+        "message": "Servo 3. Commonly this is the elevator cyclic servo."
+    },
+    "remapFcPurposeS4": {
+        "message": "Commonly the tail servo, for a mechanical (non-motorised) tail rotor."
+    },
+    "remapFcPurposeFreq1": {
+        "message": "Commonly the main rotor RPM sensor input, used by the governor."
+    },
+    "remapFcPurposeLed": {
+        "message": "Drives an addressable LED strip (WS2811/WS2812)."
+    },
+    "remapFcMcuLabel": {
+        "message": "MCU"
+    },
+    "remapFcMcuUnsupportedHeading": {
+        "message": "Board not supported"
+    },
+    "remapFcMcuUnsupportedMessage": {
+        "message": "This board's MCU ({{mcu}}) isn't currently supported by the remapper, so pin/timer/DMA changes can't be safely calculated."
+    },
+    "remapFcMcuUnknownMessage": {
+        "message": "This board's MCU couldn't be determined, so pin/timer/DMA changes can't be safely calculated."
+    },
+    "remapFcDesignLabel": {
+        "message": "Design"
+    },
+    "remapFcLoadChangesBlocked": {
+        "message": "Resolve the pin conflict below before sending changes"
+    },
+    "remapFcApplying": {
+        "message": "Applying..."
+    },
+    "remapFcChangesHeading": {
+        "message": "Pending Changes"
+    },
+    "remapFcShowDetails": {
+        "message": "Show details"
+    },
+    "remapFcAllocationCalculatedHeading": {
+        "message": "Calculated config"
+    },
+    "remapFcSequenceGapBlocked": {
+        "message": "Close the gap in the motor/servo numbering before sending changes"
+    },
+    "remapFcSequenceGapHeading": {
+        "message": "Gap in motor/servo numbering"
+    },
+    "remapFcSequenceGapWarning": {
+        "message": "Nothing is assigned to {{missing}}, which strands {{stranded}}. The flight controller stops at the first unassigned output rather than skipping it, so {{stranded}} would be silently dropped - and a dropped output still reports its centre value, so mixer rules using it look correct while doing nothing. Assign {{missing}}, or move the higher outputs down to close the gap."
+    },
+    "remapFcAllocationInvalidHeading": {
+        "message": "Pin selection not valid"
+    },
+    "remapFcAllocationInvalidWarning": {
+        "message": "The current pin assignment can't work: {{reasons}}. Reallocating timers/DMA on the current pins alone can't resolve it either -- pick a suggestion below to fix the pin assignment itself."
+    },
+    "remapFcServoRateHeading": {
+        "message": "Servo frequency groups"
+    },
+    "remapFcServoRateDescription": {
+        "message": "Servos sharing a timer must always be changed together, to the same rate."
+    },
+    "remapFcServoRateDefaultEntry": {
+        "message": "{{rate}}Hz (default)"
+    },
+    "remapFcAcceptSuggestion": {
+        "message": "Accept Suggestion"
+    },
+    "remapFcSuggestionSwap": {
+        "message": "Swap pins for {{feature}} and {{otherFeature}}"
+    },
+    "remapFcSuggestionMove": {
+        "message": "Move {{feature}} to {{targetPin}} (currently unassigned)"
+    },
+    "remapFcSuggestionManualFix": {
+        "message": "No automatic fix found for {{feature}}. Reset it to unassigned and choose a different pin."
+    },
+    "remapFcResetToSetOption": {
+        "message": "Reset to Set Option"
+    },
+    "remapFcAllocationUnresolved": {
+        "message": "Could not find a working timer for: {{features}}. Left unchanged rather than broken -- you may need to free up a pin manually."
+    },
+    "remapFcAllocationFeature": {
+        "message": "Feature"
+    },
+    "remapFcAllocationPin": {
+        "message": "Pin"
+    },
+    "remapFcAllocationTimer": {
+        "message": "Timer"
+    },
+    "remapFcAllocationDma": {
+        "message": "DMA"
+    },
     "tabGroupSetup": {
         "message": "Setup"
     },
