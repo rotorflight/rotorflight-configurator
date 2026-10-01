@@ -165,6 +165,9 @@
 
 <div class="adjustment-card">
   <div class="card-header" class:on={isEnabled}>
+    {#if isEnabled}
+      <span class="live-dot"></span>
+    {/if}
     <button
       type="button"
       class="func-title"
@@ -384,9 +387,9 @@
     overflow: hidden;
   }
 
-  /* Same dark/red band as the Modes tab's ModeCard header: dark by default,
-     accent red while the enable channel has this adjustment live, so each
-     card is easy to pick out in a long list. */
+  /* The group panel carries the structure now, so the header stays
+     neutral and only a live card stands out: a soft accent background, an
+     accent edge and an accent title while its enable channel lets it run. */
   .card-header {
     @extend %section-header;
     /* The header sits flush inside the card's border, so drop the
@@ -394,12 +397,30 @@
     margin-top: 0;
     padding: 0 8px 0 12px;
 
-    color: var(--color-text-alt);
-    background-color: var(--color-surface-alt);
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: inset 4px 0 0 transparent;
+    transition:
+      background-color var(--animation-speed),
+      box-shadow var(--animation-speed);
 
     &.on {
-      background-color: var(--color-accent-500);
+      background-color: var(--color-accent-soft);
+      box-shadow: inset 4px 0 0 var(--color-accent-500);
+
+      .func-title {
+        color: var(--color-accent-500);
+      }
     }
+  }
+
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    margin-right: 2px;
+    border-radius: 50%;
+    background-color: var(--color-accent-500);
   }
 
   .func-title {
@@ -423,7 +444,7 @@
 
     @media (hover: hover) {
       &:hover {
-        background-color: rgb(255 255 255 / 12%);
+        background-color: var(--color-hover);
 
         em {
           opacity: 1;

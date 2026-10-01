@@ -511,7 +511,7 @@
     height: 9px;
     border-radius: 50%;
     background-color: var(--color-accent-500);
-    box-shadow: 0 0 0 3px var(--color-accent-200);
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
   }
 
   .rows {
