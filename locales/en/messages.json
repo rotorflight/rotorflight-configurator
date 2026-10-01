@@ -3065,6 +3065,9 @@
     "servoSignal": {
         "message": "PWM Signal"
     },
+    "servoListBack": {
+        "message": "Back to Servo List"
+    },
     "servoRateRebootNote": {
         "message": "<span class=\"message-negative\">Warning:</span> Changes to the <i>Servo Rate</i> parameter require System Reboot before taking affect!"
     },

@@ -271,8 +271,8 @@
     border-width: 1px;
     border-style: solid;
     height: 1.5rem;
-    width: 1.5rem;
-    min-width: 1.5rem;
+    width: var(--number-input-btn-size, 1.5rem);
+    min-width: var(--number-input-btn-size, 1.5rem);
     font-size: 0.6rem;
     /* %button sets 600, but Font Awesome Free only ships its solid glyphs
        (plus/minus) at weight 900 - any other weight renders them blank. */
