@@ -3638,6 +3638,45 @@
     "mixerSwashTypeHelp": {
         "message": "<strong>None:</strong> The mixer is disabled. Custom mixing rules must be set in the CLI. <br><br><strong>Direct:</strong> No mixing, controls are passed through the mixer unchanged for external mixing.<br><br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For cyclic-pitch helicopters with three swashplate servos, at 120&deg;, 135&deg;, or 140&deg; angle.<br><br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos at 90&deg; angle, either in L or V configuration."
     },
+    "swashServoLayout": {
+        "message": "Servo layout"
+    },
+    "swashServoFront": {
+        "message": "Servo 1 front"
+    },
+    "swashServoRear": {
+        "message": "Servo 1 rear"
+    },
+    "swashServoRoleCenter": {
+        "message": "Front or rear, on the centerline"
+    },
+    "swashServoRoleFront": {
+        "message": "Front, on the centerline"
+    },
+    "swashServoRoleLeft": {
+        "message": "Left side"
+    },
+    "swashServoRoleRight": {
+        "message": "Right side"
+    },
+    "swashServoRoleFrontLeft": {
+        "message": "Front left"
+    },
+    "swashServoRoleFrontRight": {
+        "message": "Front right"
+    },
+    "swashServoRolePitch": {
+        "message": "Pitch"
+    },
+    "swashServoRoleRoll": {
+        "message": "Roll"
+    },
+    "swashServoRoleCollective": {
+        "message": "Collective"
+    },
+    "swashServoRoleTail": {
+        "message": "Tail rotor"
+    },
     "mixerSwashType0": {
         "message": "None"
     },
