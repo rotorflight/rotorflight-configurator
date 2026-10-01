@@ -53,6 +53,8 @@ function set(prop: string, value: any) {
 
 export type Config = {
   configVersion: number | null;
+  // Adjustments tab: FUNCTION_GROUPS labels of the collapsed card groups
+  adjustmentsCollapsedGroups: string[];
   autoConnect: boolean;
   // Firmware Flasher: "none", "diff" or "dump" (BACKUP_TYPES in cli_backup.js)
   backupBeforeFlashingMode: string;
@@ -87,6 +89,7 @@ const _config: Config = $state({
   configVersion: null,
 
   // Default Values
+  adjustmentsCollapsedGroups: [],
   autoConnect: true,
   // `dump all` rather than `diff all`: a diff opens with `defaults nosave`,
   // which can leave a spurious CLI error that blocks the restore's `save`.

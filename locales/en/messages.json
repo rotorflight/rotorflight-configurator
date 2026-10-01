@@ -2786,6 +2786,12 @@
     "adjustmentsRangeScale": {
         "message": "Scale"
     },
+    "adjustmentsGroupOther": {
+        "message": "Other"
+    },
+    "adjustmentsGroupLive": {
+        "message": "An adjustment in this group is enabled"
+    },
     "adjustmentsPickFunctionTitle": {
         "message": "Choose a function"
     },
