@@ -1,0 +1,106 @@
+<!--
+  File: src/images/remap_fc/GENERIC.svg
+  Generic fallback diagram for any board with no dedicated diagram of
+  its own — a bare, uncased square flight controller PCB (the common
+  "Betaflight stack" form factor), rather than a specific real board.
+  Same dimensional/filled style as NEXUS_XR.svg and
+  FLYDRAGON_PRO42688.svg, but with no case/bezel (this board has none)
+  — just a matte black PCB with generously rounded corners (matching
+  the real board), copper pads, an
+  LQFP-style MCU with pin leads (deliberately unbranded — this is the
+  generic, no-specific-vendor fallback), a scattering of passives and
+  a small SOIC IC, and a USB-C receptacle. No pin header drawn on the
+  right edge (there used to be one, a plain row of square copper
+  pads) — RemapFc.svelte's own FC Label column and its wires already
+  draw real, live pin connections right where this artwork's edge
+  sits, so a second, purely decorative row of pads there just
+  duplicated and visually clashed with them. Shown by remap_fc.svelte
+  for a board with no cased diagram of its own (see
+  boardDiagramSrc) — CASED_GENERIC.svg's own file comment explains
+  why its viewBox is a 280x188 landscape crop rather than this file's
+  280x280 square one: this board's own shape genuinely is square (a
+  PCB stack), unlike a cased board's landscape case, so remap_fc.svelte's
+  wrapper (sized to CASED_GENERIC's own landscape ratio) ends up
+  letterboxing this file left/right via object-fit: contain rather
+  than filling it edge to edge — an accepted tradeoff, not a bug, for
+  the less common of the two (a board reporting no real reference
+  design at all). The label zone at x=85-235, y=84-116 (between this
+  file's own top mounting holes and its central chip) is unaffected
+  by that crop — both files were only ever cropped from a shared
+  320x320 canvas, not redrawn, so their own absolute coordinates never
+  moved. Explicit width/height (matching the viewBox) alongside it,
+  not just the viewBox alone — an <img> can't reliably infer intrinsic
+  size from viewBox-only SVGs on every rendering engine, and without
+  it this can render at zero height.
+-->
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="280"
+  height="280"
+  viewBox="20 20 280 280"
+>
+  <!-- PCB, matte black edge + surface, generously rounded corners
+       matching the real board -->
+  <rect x="20" y="20" width="280" height="280" rx="40" fill="#1a1a1d" />
+  <rect x="30" y="30" width="260" height="260" rx="34" fill="#232326" />
+
+  <!-- Corner mounting holes, copper pad ring + drill hole -->
+  <g>
+    <circle cx="58" cy="58" r="18" fill="#c9a227" />
+    <circle cx="262" cy="58" r="18" fill="#c9a227" />
+    <circle cx="58" cy="262" r="18" fill="#c9a227" />
+    <circle cx="262" cy="262" r="18" fill="#c9a227" />
+    <circle cx="58" cy="58" r="10" fill="#0d0f12" />
+    <circle cx="262" cy="58" r="10" fill="#0d0f12" />
+    <circle cx="58" cy="262" r="10" fill="#0d0f12" />
+    <circle cx="262" cy="262" r="10" fill="#0d0f12" />
+  </g>
+
+  <!-- MCU, LQFP-style: chip body with pin leads on all four edges -->
+  <g fill="#c9a227">
+    <rect x="136" y="110" width="6" height="10" /><rect x="155" y="110" width="6" height="10" />
+    <rect x="173" y="110" width="6" height="10" /><rect x="191" y="110" width="6" height="10" />
+    <rect x="209" y="110" width="6" height="10" /><rect x="228" y="110" width="6" height="10" />
+    <rect x="136" y="230" width="6" height="10" /><rect x="155" y="230" width="6" height="10" />
+    <rect x="173" y="230" width="6" height="10" /><rect x="191" y="230" width="6" height="10" />
+    <rect x="209" y="230" width="6" height="10" /><rect x="228" y="230" width="6" height="10" />
+    <rect x="120" y="136" width="10" height="6" /><rect x="120" y="155" width="10" height="6" />
+    <rect x="120" y="173" width="10" height="6" /><rect x="120" y="191" width="10" height="6" />
+    <rect x="120" y="209" width="10" height="6" /><rect x="120" y="228" width="10" height="6" />
+    <rect x="240" y="136" width="10" height="6" /><rect x="240" y="155" width="10" height="6" />
+    <rect x="240" y="173" width="10" height="6" /><rect x="240" y="191" width="10" height="6" />
+    <rect x="240" y="209" width="10" height="6" /><rect x="240" y="228" width="10" height="6" />
+  </g>
+  <rect x="130" y="120" width="110" height="110" fill="#15181c" />
+  <rect x="136" y="126" width="98" height="98" fill="#2a2f36" />
+  <circle cx="142" cy="132" r="3" fill="#c9d0d6" />
+
+  <!-- Small SOIC IC -->
+  <g fill="#c9a227">
+    <rect x="259" y="201" width="3" height="4" /><rect x="267" y="201" width="3" height="4" /><rect x="275" y="201" width="3" height="4" />
+    <rect x="259" y="219" width="3" height="4" /><rect x="267" y="219" width="3" height="4" /><rect x="275" y="219" width="3" height="4" />
+  </g>
+  <rect x="255" y="205" width="26" height="14" rx="1" fill="#15181c" />
+
+  <!-- Passive components (resistors/caps) -->
+  <g fill="#d9c08a">
+    <rect x="80" y="45" width="18" height="9" rx="2" />
+    <rect x="80" y="60" width="18" height="9" rx="2" />
+    <rect x="258" y="80" width="18" height="9" rx="2" />
+    <rect x="258" y="95" width="18" height="9" rx="2" />
+    <rect x="45" y="205" width="18" height="9" rx="2" />
+    <rect x="70" y="205" width="18" height="9" rx="2" />
+  </g>
+
+  <!-- USB-C receptacle, top edge: metal shell with side mounting tabs
+       and a dark port opening -->
+  <rect x="120" y="12" width="6" height="10" fill="#c9d0d6" />
+  <rect x="194" y="12" width="6" height="10" fill="#c9d0d6" />
+  <rect x="126" y="8" width="68" height="18" rx="4" fill="#c9d0d6" />
+  <rect x="136" y="12" width="48" height="10" rx="5" fill="#1a1d21" />
+
+  <!-- Battery/ESC solder pads, left edge -->
+  <rect x="10" y="132" width="20" height="56" rx="4" fill="#c9a227" />
+  <circle cx="20" cy="145" r="4" fill="#0d0f12" />
+  <circle cx="20" cy="175" r="4" fill="#0d0f12" />
+</svg>

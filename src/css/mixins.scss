@@ -131,3 +131,11 @@
     background-color: var(--color-accent-400);
   }
 }
+
+// Smaller NumberInput for tables squeezed by a narrow container. Columns
+// using it should stay at least 72px wide so the value stays readable.
+@mixin compact-number-input {
+  --number-input-height: 1.75rem;
+  --number-input-btn-size: 1.25rem;
+  --number-input-padding-x: 3px;
+}

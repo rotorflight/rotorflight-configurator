@@ -244,8 +244,12 @@ export async function handleConnectClick({ openLanding = true } = {}) {
                 }
                 GUI.disconnect_in_progress = true;
                 try {
-                    GUI.timeout_kill_all();
-                    GUI.interval_kill_all();
+                    // tab_switch_cleanup() kills timeouts/intervals itself, only
+                    // once the current tab's own cleanup() has finished — doing
+                    // it here first would kill any GUI timer that cleanup()
+                    // is still relying on (e.g. a CLI session polling for idle
+                    // before exiting).
+
                     // Both steps talk to an FC that may have just rebooted out
                     // from under us (CLI `exit`), so neither is guaranteed to
                     // call back; don't let that stall the disconnect.
@@ -865,6 +869,9 @@ export function read_serial(info) {
             case 'presets':
                 TABS.presets.read(info);
                 break;
+            case 'remap_fc':
+                TABS.remap_fc.read(info);
+                break;
         }
     }
 }
@@ -958,7 +965,7 @@ function update_live_status() {
        display: 'inline-block'
     });
 
-    if (GUI.active_tab != 'cli' && GUI.active_tab != 'presets') {
+    if (GUI.active_tab != 'cli' && GUI.active_tab != 'presets' && GUI.active_tab != 'remap_fc') {
         MSP.promise(MSPCodes.MSP_BATTERY_STATE, false);
     }
 
