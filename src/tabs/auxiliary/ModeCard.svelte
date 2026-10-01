@@ -12,7 +12,6 @@
     modeId,
     modeName,
     items,
-    hidden,
     isOn,
     channelOptions,
     logicOptions,
@@ -20,6 +19,7 @@
     onAddRange,
     onAddLink,
     onDeleteItem,
+    onRemove,
     onEdit,
   } = $props();
 
@@ -42,41 +42,49 @@
         {$i18n.t("auxiliaryAddLink")}
       </button>
     {/if}
+    {#if onRemove}
+      <button
+        class="remove"
+        onclick={onRemove}
+        aria-label={$i18n.t("auxiliaryRemoveMode")}
+        title={$i18n.t("auxiliaryRemoveMode")}
+      >
+        <span class="fas fa-times"></span>
+      </button>
+    {/if}
   </div>
 {/snippet}
 
-{#if !hidden}
-  <div class="mode-card">
-    <Section {header}>
-      {#if items.length > 0}
-        {#each items as item, index (item)}
-          {#if item.type === "range"}
-            <RangeRow
-              {item}
-              showLogic={index > 0}
-              {channelOptions}
-              {logicOptions}
-              {onEdit}
-              onDelete={() => onDeleteItem(item)}
-            />
-          {:else}
-            <LinkRow
-              {item}
-              {modeId}
-              {linkOptions}
-              showLogic={index > 0}
-              {logicOptions}
-              {onEdit}
-              onDelete={() => onDeleteItem(item)}
-            />
-          {/if}
-        {/each}
-      {:else}
-        <p class="empty">{$i18n.t("auxiliaryModeEmpty")}</p>
-      {/if}
-    </Section>
-  </div>
-{/if}
+<div class="mode-card">
+  <Section {header}>
+    {#if items.length > 0}
+      {#each items as item, index (item)}
+        {#if item.type === "range"}
+          <RangeRow
+            {item}
+            showLogic={index > 0}
+            {channelOptions}
+            {logicOptions}
+            {onEdit}
+            onDelete={() => onDeleteItem(item)}
+          />
+        {:else}
+          <LinkRow
+            {item}
+            {modeId}
+            {linkOptions}
+            showLogic={index > 0}
+            {logicOptions}
+            {onEdit}
+            onDelete={() => onDeleteItem(item)}
+          />
+        {/if}
+      {/each}
+    {:else}
+      <p class="empty">{$i18n.t("auxiliaryModeEmpty")}</p>
+    {/if}
+  </Section>
+</div>
 
 <style lang="scss">
   .mode-card {
@@ -117,6 +125,22 @@
     line-height: 22px;
     font-size: 0.7rem;
     margin-left: 6px;
+  }
+
+  .remove {
+    background: none;
+    border: none;
+    padding: 4px 4px 4px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+
+    @media (hover: hover) {
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 
   .empty {

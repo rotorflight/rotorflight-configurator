@@ -2632,6 +2632,48 @@
     "auxiliaryToggleUnused": {
         "message": "Hide unused modes"
     },
+    "auxiliaryAddMode": {
+        "message": "Add mode"
+    },
+    "auxiliaryAddModeTitle": {
+        "message": "Add a mode"
+    },
+    "auxiliaryAddModeSearch": {
+        "message": "Search modes"
+    },
+    "auxiliaryAddModeNoMatches": {
+        "message": "No matching modes"
+    },
+    "auxiliaryRemoveMode": {
+        "message": "Remove mode"
+    },
+    "auxiliaryGroupArming": {
+        "message": "Arming & Safety"
+    },
+    "auxiliaryGroupFlight": {
+        "message": "Flight Modes"
+    },
+    "auxiliaryGroupRescue": {
+        "message": "Rescue & GPS"
+    },
+    "auxiliaryGroupGovernor": {
+        "message": "Governor"
+    },
+    "auxiliaryGroupAlerts": {
+        "message": "Beeper & Lights"
+    },
+    "auxiliaryGroupLogging": {
+        "message": "Logging & Telemetry"
+    },
+    "auxiliaryGroupVideo": {
+        "message": "Camera & Video"
+    },
+    "auxiliaryGroupUser": {
+        "message": "User Outputs"
+    },
+    "auxiliaryGroupOther": {
+        "message": "Other"
+    },
     "auxiliaryMin": {
         "message": "Min"
     },
@@ -2743,6 +2785,261 @@
     },
     "adjustmentsRangeScale": {
         "message": "Scale"
+    },
+    "adjustmentsPickFunctionTitle": {
+        "message": "Choose a function"
+    },
+    "adjustmentsChangeFunction": {
+        "message": "Change function"
+    },
+    "adjustmentsFunctionInUse": {
+        "message": "in use"
+    },
+    "adjustmentsFunctionHelpRateProfile": {
+        "message": "Switches the active rate profile, for example to change stick feel between flights or manoeuvres."
+    },
+    "adjustmentsFunctionHelpPIDProfile": {
+        "message": "Switches the active PID profile, so you can swap between complete tunes in flight."
+    },
+    "adjustmentsFunctionHelpLEDProfile": {
+        "message": "Switches the LED strip profile."
+    },
+    "adjustmentsFunctionHelpOSDProfile": {
+        "message": "Switches the OSD profile."
+    },
+    "adjustmentsFunctionHelpBatteryProfile": {
+        "message": "Switches the active battery profile (cell count, capacity and warnings)."
+    },
+    "adjustmentsFunctionHelpAngleLevelGain": {
+        "message": "How aggressively Angle mode tilts the helicopter back to level."
+    },
+    "adjustmentsFunctionHelpHorizonLevelGain": {
+        "message": "How aggressively Horizon mode tilts the helicopter back to level."
+    },
+    "adjustmentsFunctionHelpAcroTrainerGain": {
+        "message": "How aggressively Acro Trainer tilts back to its maximum angle when it's exceeded. Acro Trainer doesn't self-level."
+    },
+    "adjustmentsFunctionHelpAccTrimPitch": {
+        "message": "Accelerometer pitch trim. Corrects pitch drift in stabilised modes like Angle, Horizon and Rescue."
+    },
+    "adjustmentsFunctionHelpAccTrimRoll": {
+        "message": "Accelerometer roll trim. Corrects roll drift in stabilised modes like Angle, Horizon and Rescue."
+    },
+    "adjustmentsFunctionHelpPitchO": {
+        "message": "Pitch O-gain: the high speed integral offset, only active at large collective angles. Keeps pitch stable at speed and during sustained collective."
+    },
+    "adjustmentsFunctionHelpRollO": {
+        "message": "Roll O-gain: the high speed integral offset, only active at large collective angles. Keeps roll stable at speed and during sustained collective."
+    },
+    "adjustmentsFunctionHelpYawCWStopGain": {
+        "message": "Tail stop gain for clockwise rotation. Balances how crisply the tail stops in that direction. Typical 50-200."
+    },
+    "adjustmentsFunctionHelpYawCCWStopGain": {
+        "message": "Tail stop gain for counter-clockwise rotation. Balances how crisply the tail stops in that direction. Typical 50-200."
+    },
+    "adjustmentsFunctionHelpYawCyclicFF": {
+        "message": "Yaw precompensation from cyclic: tail feedforward that counters the main rotor torque change from cyclic inputs."
+    },
+    "adjustmentsFunctionHelpYawCollectiveFF": {
+        "message": "Yaw precompensation from collective: tail feedforward that counters the main rotor torque change from collective inputs."
+    },
+    "adjustmentsFunctionHelpYawCollectiveDyn": {
+        "message": "Gain for collective impulse feedforward mixed into yaw."
+    },
+    "adjustmentsFunctionHelpYawCollectiveDecay": {
+        "message": "Decay time for collective impulse feedforward mixed into yaw."
+    },
+    "adjustmentsFunctionHelpPitchCollectiveFF": {
+        "message": "Pitch precompensation from collective: counters the nose pitching up or down when collective changes."
+    },
+    "adjustmentsFunctionHelpYawInertiaPrecompGain": {
+        "message": "Strength of the main rotor's inertia. Larger values apply more precomp to the yaw control."
+    },
+    "adjustmentsFunctionHelpYawInertiaPrecompCutoff": {
+        "message": "Derivative cutoff for inertia precomp. Larger values apply precomp more sharply."
+    },
+    "adjustmentsFunctionHelpYawPrecompCutoff": {
+        "message": "Frequency limit for all yaw precompensation."
+    },
+    "adjustmentsFunctionHelpCrossCouplingGain": {
+        "message": "Cyclic cross-coupling: how much pitch-to-roll decoupling is applied, to remove roll wobble on elevator input."
+    },
+    "adjustmentsFunctionHelpCrossCouplingRatio": {
+        "message": "Cyclic cross-coupling: how much roll-to-pitch compensation is needed compared with pitch-to-roll."
+    },
+    "adjustmentsFunctionHelpCrossCouplingCutoff": {
+        "message": "Cyclic cross-coupling frequency limit. Higher makes the compensation act faster."
+    },
+    "adjustmentsFunctionHelpYawDynCeilingGain": {
+        "message": "Reduces the yaw stick travel needed for maximum rate while the stick is moving quickly toward its end."
+    },
+    "adjustmentsFunctionHelpYawDynDeadbandGain": {
+        "message": "Widens the yaw stick deadband while the stick is moving quickly back toward centre."
+    },
+    "adjustmentsFunctionHelpYawDynDeadbandFilter": {
+        "message": "Smoothing for the yaw stick speed that drives the dynamic ceiling and deadband. Lower reacts more slowly."
+    },
+    "adjustmentsFunctionHelpCollectiveSetpointBoostGain": {
+        "message": "Boosts collective stick inputs for a snappier feel."
+    },
+    "adjustmentsFunctionHelpRescueClimbCollective": {
+        "message": "Collective used for the rescue climb."
+    },
+    "adjustmentsFunctionHelpRescueHoverCollective": {
+        "message": "Collective used to hover after a rescue."
+    },
+    "adjustmentsFunctionHelpRescueHoverAltitude": {
+        "message": "Altitude to hover at after a rescue."
+    },
+    "adjustmentsFunctionHelpRescueAltP": {
+        "message": "Rescue altitude control P-gain."
+    },
+    "adjustmentsFunctionHelpRescueAltI": {
+        "message": "Rescue altitude control I-gain."
+    },
+    "adjustmentsFunctionHelpRescueAltD": {
+        "message": "Rescue altitude control D-gain (vario)."
+    },
+    "adjustmentsFunctionHelpGovernorGain": {
+        "message": "Governor master PID loop gain. Usually 10-100."
+    },
+    "adjustmentsFunctionHelpGovernorP": {
+        "message": "Governor P-gain. Usually 10-100."
+    },
+    "adjustmentsFunctionHelpGovernorI": {
+        "message": "Governor I-gain. Usually 10-100."
+    },
+    "adjustmentsFunctionHelpGovernorD": {
+        "message": "Governor D-gain. Usually 0-100."
+    },
+    "adjustmentsFunctionHelpGovernorF": {
+        "message": "Governor collective/cyclic feedforward gain. Usually 0-100."
+    },
+    "adjustmentsFunctionHelpGovernorTTA": {
+        "message": "Tail Torque Assist gain: raises headspeed to help the tail in the negative direction. Usually 50-150."
+    },
+    "adjustmentsFunctionHelpGovernorCyclicFF": {
+        "message": "Governor cyclic precompensation: mixes cyclic into the feedforward so headspeed holds proactively. Usually 20-100."
+    },
+    "adjustmentsFunctionHelpGovernorCollectiveFF": {
+        "message": "Governor collective precompensation: mixes collective into the feedforward so headspeed holds proactively. Usually 20-100."
+    },
+    "adjustmentsFunctionHelpGovYawFF": {
+        "message": "Governor yaw precompensation: mixes yaw into the feedforward so headspeed holds proactively. Usually 20-100."
+    },
+    "adjustmentsFunctionHelpGovIdleThrottle": {
+        "message": "Minimum throttle while the governor isn't actively controlling headspeed."
+    },
+    "adjustmentsFunctionHelpGovAutoThrottle": {
+        "message": "Autorotation throttle threshold (NORMAL/SWITCH) or the throttle output in autorotation (FUNCTION)."
+    },
+    "adjustmentsFunctionHelpGovMaxThrottle": {
+        "message": "The maximum throttle output the governor may use."
+    },
+    "adjustmentsFunctionHelpGovMinThrottle": {
+        "message": "The minimum throttle output the governor may use."
+    },
+    "adjustmentsFunctionHelpGovHeadspeed": {
+        "message": "Full headspeed. The governor's target is this multiplied by the throttle input."
+    },
+    "adjustmentsFunctionHelpRollRate": {
+        "message": "The roll Rate value in the active rate profile. Its exact effect depends on the rates type."
+    },
+    "adjustmentsFunctionHelpRollRCRate": {
+        "message": "The roll RC Rate value in the active rate profile. Its exact effect depends on the rates type."
+    },
+    "adjustmentsFunctionHelpRollRCExpo": {
+        "message": "The roll expo in the active rate profile. Higher softens the stick around centre."
+    },
+    "adjustmentsFunctionHelpRollP": {
+        "message": "Roll P-gain: how hard the roll axis corrects errors right now. Too high oscillates quickly."
+    },
+    "adjustmentsFunctionHelpRollI": {
+        "message": "Roll I-gain: how firmly the roll axis holds against steady errors such as trim, wind or CG."
+    },
+    "adjustmentsFunctionHelpRollD": {
+        "message": "Roll D-gain: damps roll movement to stop overshoot. Too high runs hot and amplifies noise."
+    },
+    "adjustmentsFunctionHelpRollF": {
+        "message": "Roll feedforward: pushes the roll axis from stick input alone, for a sharper response to commands."
+    },
+    "adjustmentsFunctionHelpRollB": {
+        "message": "Roll boost: extra feedforward from how fast the roll stick is moving, for a sharper start and stop."
+    },
+    "adjustmentsFunctionHelpRollGyroCutoff": {
+        "message": "Roll PID loop overall bandwidth in Hz."
+    },
+    "adjustmentsFunctionHelpRollDtermCutoff": {
+        "message": "Roll D-term cutoff frequency in Hz. Lower is smoother but adds delay."
+    },
+    "adjustmentsFunctionHelpRollSetpointBoostGain": {
+        "message": "Boosts roll stick inputs for a snappier feel."
+    },
+    "adjustmentsFunctionHelpPitchRate": {
+        "message": "The pitch Rate value in the active rate profile. Its exact effect depends on the rates type."
+    },
+    "adjustmentsFunctionHelpPitchRCRate": {
+        "message": "The pitch RC Rate value in the active rate profile. Its exact effect depends on the rates type."
+    },
+    "adjustmentsFunctionHelpPitchRCExpo": {
+        "message": "The pitch expo in the active rate profile. Higher softens the stick around centre."
+    },
+    "adjustmentsFunctionHelpPitchP": {
+        "message": "Pitch P-gain: how hard the pitch axis corrects errors right now. Too high oscillates quickly."
+    },
+    "adjustmentsFunctionHelpPitchI": {
+        "message": "Pitch I-gain: how firmly the pitch axis holds against steady errors such as trim, wind or CG."
+    },
+    "adjustmentsFunctionHelpPitchD": {
+        "message": "Pitch D-gain: damps pitch movement to stop overshoot. Too high runs hot and amplifies noise."
+    },
+    "adjustmentsFunctionHelpPitchF": {
+        "message": "Pitch feedforward: pushes the pitch axis from stick input alone, for a sharper response to commands."
+    },
+    "adjustmentsFunctionHelpPitchB": {
+        "message": "Pitch boost: extra feedforward from how fast the pitch stick is moving, for a sharper start and stop."
+    },
+    "adjustmentsFunctionHelpPitchGyroCutoff": {
+        "message": "Pitch PID loop overall bandwidth in Hz."
+    },
+    "adjustmentsFunctionHelpPitchDtermCutoff": {
+        "message": "Pitch D-term cutoff frequency in Hz. Lower is smoother but adds delay."
+    },
+    "adjustmentsFunctionHelpPitchSetpointBoostGain": {
+        "message": "Boosts pitch stick inputs for a snappier feel."
+    },
+    "adjustmentsFunctionHelpYawRate": {
+        "message": "The yaw Rate value in the active rate profile. Its exact effect depends on the rates type."
+    },
+    "adjustmentsFunctionHelpYawRCRate": {
+        "message": "The yaw RC Rate value in the active rate profile. Its exact effect depends on the rates type."
+    },
+    "adjustmentsFunctionHelpYawRCExpo": {
+        "message": "The yaw expo in the active rate profile. Higher softens the stick around centre."
+    },
+    "adjustmentsFunctionHelpYawP": {
+        "message": "Yaw P-gain: how hard the yaw axis corrects errors right now. Too high oscillates quickly."
+    },
+    "adjustmentsFunctionHelpYawI": {
+        "message": "Yaw I-gain: how firmly the yaw axis holds against steady errors such as trim, wind or CG."
+    },
+    "adjustmentsFunctionHelpYawD": {
+        "message": "Yaw D-gain: damps yaw movement to stop overshoot. Too high runs hot and amplifies noise."
+    },
+    "adjustmentsFunctionHelpYawF": {
+        "message": "Yaw feedforward: pushes the yaw axis from stick input alone, for a sharper response to commands."
+    },
+    "adjustmentsFunctionHelpYawB": {
+        "message": "Yaw boost: extra feedforward from how fast the yaw stick is moving, for a sharper start and stop."
+    },
+    "adjustmentsFunctionHelpYawGyroCutoff": {
+        "message": "Yaw PID loop overall bandwidth in Hz."
+    },
+    "adjustmentsFunctionHelpYawDtermCutoff": {
+        "message": "Yaw D-term cutoff frequency in Hz. Lower is smoother but adds delay."
+    },
+    "adjustmentsFunctionHelpYawSetpointBoostGain": {
+        "message": "Boosts yaw stick inputs for a snappier feel."
     },
     "adjustmentsFunctionNone": {
         "message": "No changes"
@@ -3064,6 +3361,9 @@
     },
     "servoSignal": {
         "message": "PWM Signal"
+    },
+    "servoListBack": {
+        "message": "Back to Servo List"
     },
     "servoRateRebootNote": {
         "message": "<span class=\"message-negative\">Warning:</span> Changes to the <i>Servo Rate</i> parameter require System Reboot before taking affect!"
