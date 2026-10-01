@@ -33,15 +33,6 @@
       "title": "Hide advanced settings when expert mode is off",
       "url": "https://github.com/rotorflight/rotorflight-configurator/pull/456",
       "date": "2026-09-30T19:50:13Z"
-    },
-    {
-      "type": "pr",
-      "name": "433",
-      "path": "./pr/433/",
-      "branch": "feature/remap_fc",
-      "title": "Feature/remap fc",
-      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/433",
-      "date": "2026-10-01T20:53:10Z"
     }
   ]
 }
