@@ -3,20 +3,27 @@
 ; ------------------------------------------
 ; It receives from the command line with /D the parameters:
 ; version
+; channel (the release line, e.g. 2.3, or dev; see release-channel.mjs)
 ; archName
 ; archAllowed
 ; archInstallIn64bit
 ; sourceFolder
 ; targetFolder
 
-#define ApplicationName "Rotorflight Configurator"
+; Every release line installs side by side with the others: it has its own
+; AppId, folder and shortcuts, and only replaces an install of the same line.
+#if channel == "dev"
+  #define ApplicationName "Rotorflight Configurator (dev)"
+#else
+  #define ApplicationName "Rotorflight Configurator " + channel
+#endif
 #define CompanyName "The Rotorflight open source project"
 #define CompanyUrl "https://github.com/rotorflight/"
 #define ExecutableFileName "rotorflight-configurator.exe"
 #define GroupName "Rotorflight"
 #define InstallerFileName "rotorflight-configurator-installer_" + version + "_" + archName
 #define SourcePath "..\..\" + sourceFolder
-#define TargetFolderName "Rotorflight-Configurator"
+#define TargetFolderName "Rotorflight-Configurator-" + channel
 #define UpdatesUrl "https://github.com/rotorflight/rotorflight-configurator/releases"
 
 [CustomMessages]
@@ -69,7 +76,7 @@ Filename: "pnputil.exe"; Parameters: "/add-driver ""{tmp}\stm32\STM32Bootloader.
 Filename: {app}\{cm:AppName}.exe; Description: {cm:LaunchProgram,{cm:AppName}}; Flags: nowait postinstall skipifsilent
 
 [Setup]
-AppId=0f5aab69-da40-4828-8efc-34d4bbb075fe
+AppId=rotorflight-configurator-{#channel}
 AppName={#ApplicationName}
 AppPublisher={#CompanyName}
 AppPublisherURL={#CompanyUrl}

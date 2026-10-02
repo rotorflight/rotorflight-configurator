@@ -22,11 +22,16 @@ import source from "vinyl-source-stream";
 import * as vite from "vite";
 
 import pkg from "./package.json" with { type: "json" };
+import { getAppIdentity } from "./release-channel.mjs";
 
 // Replace dev mode paths
 pkg.main = "index.html";
 pkg.window.icon = "images/rf_icon.png";
 delete pkg["node-remote"];
+
+// Each release line installs side by side with the others; see
+// release-channel.mjs.
+const identity = getAppIdentity(pkg);
 
 const { cordova } = cordovaPkg;
 
@@ -37,6 +42,7 @@ const APP_DIR = "./app";
 const REDIST_DIR = "./redist";
 
 const LINUX_INSTALL_DIR = "/opt/rotorflight";
+const LINUX_APP_DIR = `${LINUX_INSTALL_DIR}/${identity.name}`;
 
 const NWJS_CACHE_DIR = "nwjs_cache";
 const NWJS_VERSION = "0.109.1";
@@ -85,8 +91,16 @@ function bundle_src() {
     "!./src/tabs/map.html",
     "!./src/tabs/receiver_msp.html",
   ];
+  // NW.js names the profile directory (settings, caches) and the
+  // single-instance lock after the manifest's name, so give each release
+  // line its own.
+  const manifest = {
+    ...pkg,
+    name: identity.name,
+    window: { ...pkg.window, title: identity.productName },
+  };
   const packageJson = new stream.Readable();
-  packageJson.push(JSON.stringify(pkg, undefined, 2));
+  packageJson.push(JSON.stringify(manifest, undefined, 2));
   packageJson.push(null);
 
   return packageJson
@@ -141,6 +155,7 @@ function helper_build_app_nwjs() {
   switch (context.target.platform) {
     case "linux":
       tasks.push(build_nwjs_unix_permissions);
+      tasks.push(build_nwjs_linux_desktop_entry);
       tasks.push(build_nwjs_linux_assets);
       break;
 
@@ -159,10 +174,13 @@ function build_app_nwjs() {
   const platformOpts = {
     osx: {
       icon: "./src/images/rf_icon.icns",
-      CFBundleDisplayName: "Rotorflight Configurator",
+      CFBundleIdentifier: identity.bundleId,
+      CFBundleName: identity.productName,
+      CFBundleDisplayName: identity.productName,
     },
     win: {
       icon: "./src/images/rf_icon.ico",
+      productName: identity.productName,
     },
   };
 
@@ -172,7 +190,8 @@ function build_app_nwjs() {
       arch: NWJS_ARCH[arch],
       outDir: context.appdir,
       flavor: flavor === "debug" ? "sdk" : "normal",
-      app: platformOpts[platform],
+      // The executable keeps its name; the manifest's name is per line now.
+      app: { name: pkg.name, ...platformOpts[platform] },
       version: NWJS_VERSION,
       cacheDir: NWJS_CACHE_DIR,
       glob: false,
@@ -182,8 +201,24 @@ function build_app_nwjs() {
   );
 }
 
+// Our desktop entry, named per line, replaces the one nw-builder writes.
+function build_nwjs_linux_desktop_entry() {
+  return runAsync(
+    fs.rm(`${context.appdir}/${pkg.name}.desktop`, { force: true }),
+  );
+}
+
 function build_nwjs_linux_assets() {
-  return gulp.src("assets/linux/**").pipe(gulp.dest(context.appdir));
+  return gulp
+    .src("assets/linux/**")
+    .pipe(replace("{{name}}", identity.productName))
+    .pipe(replace("{{installdir}}", LINUX_APP_DIR))
+    .pipe(
+      rename((file) => {
+        if (file.extname === ".desktop") file.basename = identity.name;
+      }),
+    )
+    .pipe(gulp.dest(context.appdir));
 }
 
 /**
@@ -290,22 +325,22 @@ function build_redist_deb(done) {
 
   return gulp.src([`${context.appdir}/*`]).pipe(
     deb({
-      package: pkg.name,
+      package: identity.name,
       version: pkg.version,
       section: "base",
       priority: "optional",
       architecture: archmap[arch],
       maintainer: pkg.author,
       description: pkg.description,
-      preinst: [`rm -rf ${LINUX_INSTALL_DIR}/${pkg.name}`],
+      preinst: [`rm -rf ${LINUX_APP_DIR}`],
       postinst: [
         `chown root:root ${LINUX_INSTALL_DIR}`,
-        `chown -R root:root ${LINUX_INSTALL_DIR}/${pkg.name}`,
-        `xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${pkg.name}/${pkg.name}.desktop`,
+        `chown -R root:root ${LINUX_APP_DIR}`,
+        `xdg-desktop-menu install ${LINUX_APP_DIR}/${identity.name}.desktop`,
       ],
-      prerm: [`xdg-desktop-menu uninstall ${pkg.name}.desktop`],
+      prerm: [`xdg-desktop-menu uninstall ${identity.name}.desktop`],
       changelog: [],
-      _target: `${LINUX_INSTALL_DIR}/${pkg.name}`,
+      _target: LINUX_APP_DIR,
       _out: REDIST_DIR,
       _copyright: "assets/linux/copyright",
       _clean: true,
@@ -332,7 +367,7 @@ function build_redist_rpm() {
   };
 
   const options = {
-    name: pkg.name,
+    name: identity.name,
     version: pkg.version.replace(regex, "_"), // RPM does not like release candidate versions
     buildArch: archmap[arch],
     vendor: pkg.author,
@@ -343,13 +378,13 @@ function build_redist_rpm() {
       {
         cwd: context.appdir,
         src: "*",
-        dest: `${LINUX_INSTALL_DIR}/${pkg.name}`,
+        dest: LINUX_APP_DIR,
       },
     ],
     postInstallScript: [
-      `xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${pkg.name}/${pkg.name}.desktop`,
+      `xdg-desktop-menu install ${LINUX_APP_DIR}/${identity.name}.desktop`,
     ],
-    preUninstallScript: [`xdg-desktop-menu uninstall ${pkg.name}.desktop`],
+    preUninstallScript: [`xdg-desktop-menu uninstall ${identity.name}.desktop`],
     tempDir: `${REDIST_DIR}/tmp-rpm-build-${arch}`,
     keepTemp: false,
     verbose: false,
@@ -375,7 +410,7 @@ function build_redist_osx() {
         target: targetPath,
         basepath: context.appdir,
         specification: {
-          title: "Rotorflight Configurator",
+          title: identity.productName,
           contents: [
             { x: 448, y: 342, type: "link", path: "/Applications" },
             {
@@ -383,7 +418,7 @@ function build_redist_osx() {
               y: 344,
               type: "file",
               path: `${pkg.name}.app`,
-              name: "Rotorflight Configurator.app",
+              name: `${identity.productName}.app`,
             },
           ],
           background: `${import.meta.dirname}/assets/osx/dmg-background.png`,
@@ -435,6 +470,7 @@ function build_redist_exe() {
   const parameters = [
     // Extra parameters to replace inside the iss file
     `/Dversion=${pkg.version}`,
+    `/Dchannel=${identity.channel}`,
     `/DarchName=${arch}`,
     `/DarchAllowed=${arch === "x86" ? "x86 x64" : "x64"}`,
     `/DarchInstallIn64bit=${arch === "x86" ? "" : "x64"}`,
@@ -600,7 +636,8 @@ function cordova_packagejson() {
 function cordova_configxml() {
   return gulp
     .src([`${context.appdir}/config.xml`])
-    .pipe(replace("{{name}}", pkg.productName))
+    .pipe(replace("{{id}}", identity.androidId))
+    .pipe(replace("{{name}}", identity.productName))
     .pipe(replace("{{description}}", pkg.description))
     .pipe(replace("{{author}}", pkg.author))
     .pipe(replace("{{version}}", pkg.version))

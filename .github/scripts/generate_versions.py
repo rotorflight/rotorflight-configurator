@@ -6,6 +6,8 @@
 #
 # Layout recognised on disk:
 #   latest/            -> type "stable" (the site's "recommended" pointer)
+#   v<x.y>/            -> type "line", one entry per release line: the newest
+#                          x.y.z release, the one to install as an app
 #   master/            -> type "master" (pinned alongside stable)
 #   release/<version>/ -> type "release", one entry per subdirectory
 #   snapshot/<version>/-> type "snapshot", one entry per subdirectory
@@ -22,13 +24,15 @@
 # rather than in it so nothing a build ships can overwrite it.
 #
 # Entries are emitted in the order the front end (index.html) groups them:
-# stable/master pinned first, then release, then snapshot, then branch/pr.
+# stable, release lines (newest first) and master pinned first, then
+# release, then snapshot, then branch/pr.
 
 import json
 import os
 import re
 
 SKIP_DIRS = {"bundle", "logos", "public", "node_modules", ".git"}
+LINE_DIR = re.compile(r"^v\d+\.\d+$")
 NESTED_KINDS = {
     "release": "release",
     "snapshot": "snapshot",
@@ -111,11 +115,24 @@ def main():
             "notes": "Latest development build",
         })
 
+    line_dirs = sorted(
+        (d for d in os.listdir(".") if LINE_DIR.match(d) and has_index(d)),
+        key=lambda d: natural_key(d[1:]),
+        reverse=True,
+    )
+    for d in line_dirs:
+        entries.append({
+            "type": "line",
+            "name": d[1:],
+            "path": f"./{d}/",
+            "notes": f"Follows every {d[1:]}.x release. Install it as an app to keep it next to other versions.",
+        })
+
     releases = sorted(nested_entries("release", "release"), key=version_sort_key, reverse=True)
     snapshots = sorted(nested_entries("snapshot", "snapshot"), key=version_sort_key, reverse=True)
     prs = sorted(nested_entries("pr", "pr"), key=version_sort_key, reverse=True)
 
-    reserved = SKIP_DIRS | set(NESTED_KINDS) | {"latest", "master"}
+    reserved = SKIP_DIRS | set(NESTED_KINDS) | {"latest", "master"} | set(line_dirs)
     branch_dirs = sorted(
         d for d in os.listdir(".")
         if d not in reserved and has_index(d)

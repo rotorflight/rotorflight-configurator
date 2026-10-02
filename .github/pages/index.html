@@ -362,6 +362,12 @@
       animation: pulse 2.5s infinite;
     }
 
+    .badge-line {
+      background: rgba(var(--blue-rgb), 0.1);
+      color: #7cc8ff;
+      border: 1px solid rgba(var(--blue-rgb), 0.3);
+    }
+
     .badge-release {
       background: rgba(255,255,255,0.06);
       color: #ccd3da;
@@ -709,9 +715,9 @@
     <div class="container">
       <div class="section-label">Available Builds</div>
       <h2 class="section-title">Select a Version</h2>
-      <p class="section-sub">Stable is the one to fly. Releases, snapshots, and development builds (master, pull requests and branches) are listed below as they are deployed.</p>
+      <p class="section-sub">Stable is the one to fly. Each release line (2.2, 2.3, …) goes with its own firmware; install a line as an app to keep it next to the others. Releases, snapshots, and development builds (master, pull requests and branches) are listed below as they are deployed.</p>
 
-      <!-- Pinned: Stable -->
+      <!-- Pinned: Stable and the release lines -->
       <div class="pinned-row" id="pinned-row"></div>
 
       <div class="version-tabs" id="version-tabs" role="tablist">
@@ -784,6 +790,7 @@
     //   "entries": [
     //     { "type": "stable",   "name": "Latest Stable", "path": "./latest/",          "notes": "Recommended for all users" },
     //     { "type": "master",   "name": "master",        "path": "./master/",          "notes": "Latest development build" },
+    //     { "type": "line",     "name": "2.3",           "path": "./v2.3/",            "notes": "Follows every 2.3.x release. ..." },
     //     { "type": "release",  "name": "0.0.9",         "path": "./release/0.0.9/" },
     //     { "type": "snapshot", "name": "0.0.9",         "path": "./snapshot/0.0.9/" },
     //     { "type": "branch",   "name": "feature-xyz",   "path": "./feature-xyz/",
@@ -795,7 +802,7 @@
     // Optional per-entry fields: "tag", "date", "notes", and for branch and
     // PR builds "branch", "number", "title", "url" and "draft". A branch
     // only has "number" etc. while it has an open PR.
-    // Only "stable" is pinned above the tabs. Master is only "current" for
+    // Only "stable" and the release lines are pinned above the tabs. Master is only "current" for
     // developers, so it sits in the Development tab, which splits into
     // Master, Pull Requests (PR previews, and branches with an open PR) and
     // Branches (no PR yet).
@@ -807,8 +814,8 @@
     const ICON_PR     = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354z"/></svg>`;
     const ICON_BRANCH = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M11.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zm-2.25.75a2.25 2.25 0 1 1 3 2.122V6A2.5 2.5 0 0 1 10 8.5H6a1 1 0 0 0-1 1v1.128a2.251 2.251 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.5 0v1.836A2.493 2.493 0 0 1 6 7h4a1 1 0 0 0 1-1v-.628A2.25 2.25 0 0 1 9.5 3.25zM4.25 12a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zM3.5 3.25a.75.75 0 1 1 1.5 0 .75.75 0 0 1-1.5 0z"/></svg>`;
 
-    const BADGE_CLASS = { stable: 'badge-stable', master: 'badge-master', release: 'badge-release', snapshot: 'badge-snapshot', branch: 'badge-branch', pr: 'badge-pr' };
-    const BADGE_LABEL = { stable: 'Stable', master: 'Master', release: 'Release', snapshot: 'Snapshot', branch: 'Branch', pr: 'Pull Request' };
+    const BADGE_CLASS = { stable: 'badge-stable', line: 'badge-line', master: 'badge-master', release: 'badge-release', snapshot: 'badge-snapshot', branch: 'badge-branch', pr: 'badge-pr' };
+    const BADGE_LABEL = { stable: 'Stable', line: 'Release line', master: 'Master', release: 'Release', snapshot: 'Snapshot', branch: 'Branch', pr: 'Pull Request' };
 
     // PR titles and branch names come from contributors; never trust them as HTML.
     const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -907,7 +914,7 @@
         }
       } catch { /* use fallback */ }
 
-      const pinned = entries.filter((e) => e.type === 'stable');
+      const pinned = entries.filter((e) => e.type === 'stable' || e.type === 'line');
       pinned.forEach((e) => pinnedRow.appendChild(makeCard(e)));
       if (!pinned.length) {
         pinnedRow.innerHTML = '<div class="versions-empty">No stable web release yet. Check the Snapshot or Development tabs below.</div>';

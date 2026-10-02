@@ -1,9 +1,15 @@
 // Web build only (registered from main.svelte.js). Scope is the directory it is
-// served from, so each deployed build (/master/, /latest/, a release) keeps its
-// own cache. vite.config.mjs stamps the version and commit into CACHE_VERSION,
-// so a new deploy drops the previous build's cache on activation.
+// served from, so each deployed build (/master/, /latest/, /v2.3/, a release)
+// keeps its own cache. vite.config.mjs stamps the version and commit into
+// CACHE_VERSION, so a new deploy drops the previous build's cache on
+// activation.
+//
+// All of them share one origin, and so one CacheStorage. Several of them can
+// be installed as apps side by side, so a build only ever drops the caches of
+// its own scope -- never another installed version's offline copy.
 
-const CACHE_VERSION = "rotorflight-configurator-__APP_VERSION__-__COMMIT_HASH__";
+const CACHE_PREFIX = `rotorflight-configurator@${self.registration.scope}@`;
+const CACHE_VERSION = `${CACHE_PREFIX}__APP_VERSION__-__COMMIT_HASH__`;
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -26,7 +32,11 @@ self.addEventListener("activate", (event) => {
       .then((cacheNames) =>
         Promise.all(
           cacheNames
-            .filter((cacheName) => cacheName !== CACHE_VERSION)
+            .filter(
+              (cacheName) =>
+                cacheName.startsWith(CACHE_PREFIX) &&
+                cacheName !== CACHE_VERSION,
+            )
             .map((cacheName) => caches.delete(cacheName)),
         ),
       )
