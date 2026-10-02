@@ -380,6 +380,39 @@
       border: 1px solid rgba(160, 119, 255, 0.28);
     }
 
+    .badge-draft {
+      background: rgba(255,255,255,0.04);
+      color: var(--text-muted);
+      border: 1px dashed rgba(255,255,255,0.2);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* ── Development tab sub-groups ───────────────────────────── */
+    .dev-group + .dev-group { margin-top: 40px; }
+
+    .dev-group-title {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .dev-group-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
     /* ── Version tabs ─────────────────────────────────────────── */
     .version-tabs {
       display: flex;
@@ -443,10 +476,11 @@
       word-break: break-all;
     }
     .versions-grid .version-name { font-size: 1.1rem; }
-    /* Branch names: wrap at their hyphens rather than mid-word. */
-    .version-name.is-branch {
+    /* PR titles: wrap between words rather than mid-word. */
+    .versions-grid .version-name.is-title {
       word-break: normal;
       overflow-wrap: anywhere;
+      line-height: 1.3;
     }
 
     .version-meta {
@@ -468,6 +502,10 @@
     .version-meta a:hover {
       color: var(--text);
       text-decoration: underline;
+    }
+    .version-meta .is-branch {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      word-break: break-all;
     }
 
     /* ── Card launch bar ──────────────────────────────────────── */
@@ -671,7 +709,7 @@
     <div class="container">
       <div class="section-label">Available Builds</div>
       <h2 class="section-title">Select a Version</h2>
-      <p class="section-sub">Stable is the one to fly. Releases, snapshots, and development builds (including master) are listed below as they are deployed.</p>
+      <p class="section-sub">Stable is the one to fly. Releases, snapshots, and development builds (master, pull requests and branches) are listed below as they are deployed.</p>
 
       <!-- Pinned: Stable -->
       <div class="pinned-row" id="pinned-row"></div>
@@ -695,7 +733,21 @@
         <div class="versions-grid" id="snapshot-grid"></div>
       </div>
       <div class="tab-panel" id="panel-development" role="tabpanel">
-        <div class="versions-grid" id="development-grid"></div>
+        <div class="dev-group" id="dev-master" hidden>
+          <div class="dev-group-title">Master <span class="category-count"></span></div>
+          <p class="dev-group-sub">The latest merged development code.</p>
+          <div class="versions-grid"></div>
+        </div>
+        <div class="dev-group" id="dev-pr" hidden>
+          <div class="dev-group-title">Pull Requests <span class="category-count"></span></div>
+          <p class="dev-group-sub">Changes under review, not yet merged into master.</p>
+          <div class="versions-grid"></div>
+        </div>
+        <div class="dev-group" id="dev-branch" hidden>
+          <div class="dev-group-title">Branches <span class="category-count"></span></div>
+          <p class="dev-group-sub">Work in progress without an open pull request.</p>
+          <div class="versions-grid"></div>
+        </div>
       </div>
 
     </div>
@@ -730,60 +782,75 @@
     // ── versions.json schema (written by .github/scripts/generate_versions.py) ──
     // {
     //   "entries": [
-    //     { "type": "stable",   "name": "Latest Stable", "path": "./latest/",         "notes": "Recommended for all users" },
-    //     { "type": "master",   "name": "master",        "path": "./master/",         "notes": "Latest development build" },
-    //     { "type": "release",  "name": "2.3.0",         "path": "./release/2.3.0/" },
-    //     { "type": "snapshot", "name": "2.3.0-20260901", "path": "./snapshot/2.3.0-20260901/" },
-    //     { "type": "branch",   "name": "feature-xyz",   "path": "./feature-xyz/" },
+    //     { "type": "stable",   "name": "Latest Stable", "path": "./latest/",          "notes": "Recommended for all users" },
+    //     { "type": "master",   "name": "master",        "path": "./master/",          "notes": "Latest development build" },
+    //     { "type": "release",  "name": "0.0.9",         "path": "./release/0.0.9/" },
+    //     { "type": "snapshot", "name": "0.0.9",         "path": "./snapshot/0.0.9/" },
+    //     { "type": "branch",   "name": "feature-xyz",   "path": "./feature-xyz/",
+    //       "branch": "feature/xyz", "date": "...", "number": 42, "title": "...", "url": "...", "draft": false },
     //     { "type": "pr",       "name": "42",            "path": "./pr/42/",
-    //       "branch": "feature/xyz", "title": "...", "url": "https://github.com/.../pull/42" }
+    //       "branch": "feature/xyz", "date": "...", "number": 42, "title": "...", "url": "...", "draft": false }
     //   ]
     // }
-    // Optional per-entry fields: "tag", "date", "notes"; PR previews also
-    // carry "branch", "title" and "url". A PR card is headed by its branch.
+    // Optional per-entry fields: "tag", "date", "notes", and for branch and
+    // PR builds "branch", "number", "title", "url" and "draft". A branch
+    // only has "number" etc. while it has an open PR.
     // Only "stable" is pinned above the tabs. Master is only "current" for
-    // developers, so it sits in the Development tab with branch/pr builds.
+    // developers, so it sits in the Development tab, which splits into
+    // Master, Pull Requests (PR previews, and branches with an open PR) and
+    // Branches (no PR yet).
     // ─────────────────────────────────────────────────────────────
 
-    const ICON_CLOCK = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>`;
-    const ICON_CAL   = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg>`;
-    const ICON_PR    = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354z"/></svg>`;
-    const ICON_TAG   = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg>`;
+    const ICON_CLOCK  = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>`;
+    const ICON_CAL    = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg>`;
+    const ICON_TAG    = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg>`;
+    const ICON_PR     = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354z"/></svg>`;
+    const ICON_BRANCH = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" opacity=".45" aria-hidden="true"><path d="M11.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zm-2.25.75a2.25 2.25 0 1 1 3 2.122V6A2.5 2.5 0 0 1 10 8.5H6a1 1 0 0 0-1 1v1.128a2.251 2.251 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.5 0v1.836A2.493 2.493 0 0 1 6 7h4a1 1 0 0 0 1-1v-.628A2.25 2.25 0 0 1 9.5 3.25zM4.25 12a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zM3.5 3.25a.75.75 0 1 1 1.5 0 .75.75 0 0 1-1.5 0z"/></svg>`;
 
     const BADGE_CLASS = { stable: 'badge-stable', master: 'badge-master', release: 'badge-release', snapshot: 'badge-snapshot', branch: 'badge-branch', pr: 'badge-pr' };
     const BADGE_LABEL = { stable: 'Stable', master: 'Master', release: 'Release', snapshot: 'Snapshot', branch: 'Branch', pr: 'Pull Request' };
 
+    // PR titles and branch names come from contributors; never trust them as HTML.
     const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    const isPr = (e) => e.type === 'pr' || (e.type === 'branch' && Number.isInteger(e.number));
+    const prNumber = (e) => Number.isInteger(e.number) ? e.number : Number(e.name);
 
     function fmtDate(d) {
       if (!d) return '';
-      return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      const date = new Date(d);
+      return isNaN(date) ? '' : date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
     }
 
     function makeCard(entry) {
-      const { type, name, path, tag, date, notes, branch, title, url } = entry;
+      const { type, name, path, tag, date, notes, branch, title, url, draft } = entry;
       const card = document.createElement('div');
       const featured = type === 'stable';
       card.className = 'version-card' + (featured ? ' featured' : '');
 
-      let meta = '';
-      if (type === 'pr') {
-        const label = `PR #${esc(name)}`;
-        const link = typeof url === 'string' && url.startsWith('https://github.com/')
-          ? `<a href="${esc(url)}" target="_blank" rel="noopener"${title ? ` title="${esc(title)}"` : ''}>${label}</a>`
-          : label;
-        meta += `<span>${ICON_PR} ${link}</span>`;
+      let badges, heading, meta = '';
+      if (isPr(entry)) {
+        badges = `<span class="version-badge badge-pr">PR #${esc(prNumber(entry))}</span>`
+          + (draft ? '<span class="version-badge badge-draft">Draft</span>' : '');
+        heading = title
+          ? `<div class="version-name is-title">${esc(title)}</div>`
+          : `<div class="version-name">${esc(branch || name)}</div>`;
+        if (branch) meta += `<span>${ICON_BRANCH} <span class="is-branch">${esc(branch)}</span></span>`;
+        if (typeof url === 'string' && url.startsWith('https://github.com/')) {
+          meta += `<span>${ICON_PR} <a href="${esc(url)}" target="_blank" rel="noopener">View pull request on GitHub</a></span>`;
+        }
+      } else {
+        badges = `<span class="version-badge ${BADGE_CLASS[type] || 'badge-release'}">${esc(BADGE_LABEL[type] || type)}</span>`;
+        heading = `<div class="version-name">${esc(type === 'branch' && branch ? branch : name)}</div>`;
       }
       if (tag)   meta += `<span>${ICON_TAG} ${esc(tag)}</span>`;
-      if (date)  meta += `<span>${ICON_CAL} ${esc(fmtDate(date))}</span>`;
+      if (fmtDate(date)) meta += `<span>${ICON_CAL} Deployed ${esc(fmtDate(date))}</span>`;
       if (notes) meta += `<span>${ICON_CLOCK} ${esc(notes)}</span>`;
 
       card.innerHTML = `
         <img class="version-card-icon" src="logos/rf_heli.svg" alt="" aria-hidden="true">
-        <span class="version-badge ${BADGE_CLASS[type] || 'badge-release'}">${esc(BADGE_LABEL[type] || type)}</span>
-        ${type === 'pr' && branch
-          ? `<div class="version-name is-branch">${esc(branch)}</div>`
-          : `<div class="version-name">${esc(name)}</div>`}
+        <div class="badge-row">${badges}</div>
+        ${heading}
         ${meta ? `<div class="version-meta">${meta}</div>` : ''}
         <a href="${esc(path)}" class="card-launch">
           Open Configurator
@@ -797,6 +864,22 @@
       return card;
     }
 
+    // Splits the development builds into Master / Pull Requests / Branches.
+    // A labelled PR from one of this repo's branches has both a PR preview
+    // and a branch deploy; it gets one card, opening the preview.
+    function groupDevelopment(entries) {
+      const master = entries.filter((e) => e.type === 'master');
+      const prs = new Map();
+      for (const e of entries.filter(isPr)) {
+        const key = prNumber(e);
+        const seen = prs.get(key);
+        if (!seen || (seen.type !== 'pr' && e.type === 'pr')) prs.set(key, e);
+      }
+      const pullRequests = [...prs.values()].sort((a, b) => prNumber(b) - prNumber(a));
+      const branches = entries.filter((e) => e.type === 'branch' && !isPr(e));
+      return { master, pr: pullRequests, branch: branches };
+    }
+
     (async () => {
       const pinnedRow = document.getElementById('pinned-row');
       const tabsRow   = document.getElementById('version-tabs');
@@ -805,7 +888,7 @@
       const TABS = {
         release:     { types: ['release'],                tab: byId('tab-release'),     panel: byId('panel-release'),     grid: byId('release-grid'),     count: byId('release-count') },
         snapshot:    { types: ['snapshot'],               tab: byId('tab-snapshot'),    panel: byId('panel-snapshot'),    grid: byId('snapshot-grid'),    count: byId('snapshot-count') },
-        development: { types: ['master', 'branch', 'pr'], tab: byId('tab-development'), panel: byId('panel-development'), grid: byId('development-grid'), count: byId('development-count') },
+        development: { types: ['master', 'branch', 'pr'], tab: byId('tab-development'), panel: byId('panel-development'), count: byId('development-count') },
       };
 
       // Fallback when versions.json is missing or unreadable.
@@ -832,11 +915,25 @@
 
       let firstAvailable = null;
       for (const [key, group] of Object.entries(TABS)) {
-        const items = entries.filter((e) => group.types.includes(e.type));
-        items.forEach((e) => group.grid.appendChild(makeCard(e)));
-        group.count.textContent = items.length || '';
-        group.tab.disabled = !items.length;
-        if (items.length && !firstAvailable) firstAvailable = key;
+        let total;
+        if (key === 'development') {
+          const groups = groupDevelopment(entries);
+          total = 0;
+          for (const [sub, items] of Object.entries(groups)) {
+            const section = byId(`dev-${sub}`);
+            items.forEach((e) => section.querySelector('.versions-grid').appendChild(makeCard(e)));
+            section.querySelector('.category-count').textContent = items.length || '';
+            section.hidden = !items.length;
+            total += items.length;
+          }
+        } else {
+          const items = entries.filter((e) => group.types.includes(e.type));
+          items.forEach((e) => group.grid.appendChild(makeCard(e)));
+          total = items.length;
+        }
+        group.count.textContent = total || '';
+        group.tab.disabled = !total;
+        if (total && !firstAvailable) firstAvailable = key;
       }
 
       if (!firstAvailable) {

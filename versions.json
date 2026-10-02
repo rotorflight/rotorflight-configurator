@@ -21,18 +21,20 @@
       "name": "456",
       "path": "./pr/456/",
       "branch": "feature/expert-mode-basic",
+      "date": "2026-09-30T19:50:13Z",
+      "number": 456,
       "title": "Hide advanced settings when expert mode is off",
-      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/456",
-      "date": "2026-09-30T19:50:13Z"
+      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/456"
     },
     {
       "type": "pr",
       "name": "438",
       "path": "./pr/438/",
       "branch": "feature/battery-profile-cells",
+      "date": "2026-10-01T21:38:57Z",
+      "number": 438,
       "title": "Add cell count and cell voltages to battery profiles",
-      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/438",
-      "date": "2026-10-01T21:38:57Z"
+      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/438"
     }
   ]
 }
