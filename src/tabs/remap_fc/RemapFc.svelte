@@ -611,11 +611,17 @@
   // board-independent role on a typical helicopter build -- keyed by
   // the CLI option key itself, since (unlike a UART connector) the
   // feature's identity IS the canonical thing here, not whichever pad
-  // it currently sits on. Deliberately incomplete: M3/M4, S5-S8 and
-  // Freq2-4 vary too much by build (twin-motor rigs, flaps, retracts,
-  // extra sensors, ...) to state a specific purpose for confidently, so
-  // they fall back to the generic remapFcCardDescription blurb instead
-  // of a guessed-at one.
+  // it currently sits on. Deliberately incomplete: M3/M4 and Freq2-4
+  // vary too much by build (twin-motor rigs, extra sensors, ...) to
+  // state a specific purpose for confidently, so they fall back to the
+  // generic remapFcCardDescription blurb instead of a guessed-at one.
+  //
+  // S5-S8 share one entry rather than having four of their own. Beyond
+  // the swashplate and tail, a servo has no conventional role to name,
+  // so the shared text describes the kind of thing they're for
+  // (landing gear, glow plugs, ...) and points at the Custom Mixer
+  // rules on the Mixer tab -- which is what actually has to be set up
+  // to drive one, and isn't otherwise discoverable from this tab.
   const FEATURE_PURPOSE_KEYS = {
     M1: "remapFcPurposeM1",
     M2: "remapFcPurposeM2",
@@ -623,6 +629,10 @@
     S2: "remapFcPurposeS2",
     S3: "remapFcPurposeS3",
     S4: "remapFcPurposeS4",
+    S5: "remapFcPurposeServoExtra",
+    S6: "remapFcPurposeServoExtra",
+    S7: "remapFcPurposeServoExtra",
+    S8: "remapFcPurposeServoExtra",
     Freq1: "remapFcPurposeFreq1",
     LED: "remapFcPurposeLed",
   };
@@ -651,13 +661,27 @@
     return hiddenPins.has(pin) || !pinHasTimerCapability(pin);
   }
 
-  // Description shown in a pad's Current Option card. A UART/I2C pad's
-  // own row names its underlying bus resource ("UART RX 2") and a
-  // connector-purpose hint, since "Default" alone (see optionLabel)
-  // doesn't say what that default actually is. A PWM feature currently
-  // sitting on this pad gets its own purpose hint if it has one (see
-  // FEATURE_PURPOSE_KEYS); everything else (an empty pad, or a feature
-  // without a confident hint) gets the generic "choose a feature" blurb.
+  // Description shown in the open card, branching on which column
+  // opened it (openCardSource) exactly as cardTitle does.
+  //
+  // A "pin" card is about the pad. A UART/I2C pad's own row names its
+  // underlying bus resource ("UART RX 2") and a connector-purpose
+  // hint, since "Default" alone (see optionLabel) doesn't say what
+  // that default actually is.
+  //
+  // A "feature" card is about the feature sitting on the pad, so it
+  // skips that branch however the pad itself is identified -- without
+  // the source check, a servo remapped onto a plain UART/I2C pad would
+  // answer a click on the Feature column with that pad's own "this pin
+  // defaults to UART RX 2" blurb, under a title cardTitle had already
+  // (correctly) given the feature's own name. Safe to go straight to
+  // the purpose hint here: featureRows only ever holds
+  // TABLE_OPTION_KEYS members (see its own filter), so in feature mode
+  // currentOption is always a valid FEATURE_PURPOSE_KEYS lookup.
+  //
+  // Everything else -- a plain PWM pad in pin mode, or any feature
+  // card -- gets the feature's own purpose hint if it has one (see
+  // FEATURE_PURPOSE_KEYS), else the generic "choose a feature" blurb.
   //
   // escapeValue: false -- hint is itself an already-resolved
   // translation being interpolated into another one, and i18next
@@ -668,7 +692,7 @@
   // nothing to protect against and escaping just corrupts the
   // punctuation on screen. Same fix already used in filesystem.js.
   function cardDescription(row) {
-    if (isUartOrI2cResource(row.option)) {
+    if (openCardSource === "pin" && isUartOrI2cResource(row.option)) {
       // No alternative resource for this pad at all (see
       // hasNoAlternativeResource) skips the repurposing hint entirely
       // -- "can be freely repurposed" would flatly contradict the

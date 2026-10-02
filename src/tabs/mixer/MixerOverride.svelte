@@ -523,14 +523,17 @@
      tracks line up down the whole section. The toggle column is a fixed
      width rather than auto because the two row types hold a different
      number of switches (passthrough is stabilized-only) and auto would
-     size them differently. The last column is the live position
-     readout, which only the rule rows fill. */
+     size them differently. It's wider than the switches actually need
+     so that the trailing space keeps them clear of the value field:
+     the switches sit at the left of the track, and the slack falls
+     between them and the control box. The last column is the live
+     position readout, which only the rule rows fill. */
   .row,
   .group {
     display: grid;
     grid-template-columns:
-      minmax(140px, 1fr) 80px 120px
-      minmax(320px, 4fr) 110px;
+      minmax(140px, 1fr) 104px 120px
+      minmax(296px, 4fr) 110px;
     align-items: center;
     gap: 12px;
     padding: 0 8px;
