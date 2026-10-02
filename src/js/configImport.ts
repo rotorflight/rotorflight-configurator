@@ -107,7 +107,9 @@ function desktopDir() {
 function readDesktopLine(line: string, configVersion: number) {
   const { fs, path } = node();
   const file = path.join(desktopDir(), `${line}.json`);
-  const settings = JSON.parse(fs.readFileSync(file, "utf8")) as Settings;
+  // Tolerate a byte order mark from a hand-edited file.
+  const text = fs.readFileSync(file, "utf8").replace(/^\uFEFF/, "");
+  const settings = JSON.parse(text) as Settings;
   return settings.configVersion === configVersion ? settings : null;
 }
 

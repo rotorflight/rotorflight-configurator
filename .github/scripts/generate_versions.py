@@ -24,7 +24,7 @@
 # rather than in it so nothing a build ships can overwrite it.
 #
 # Entries are emitted in the order the front end (index.html) groups them:
-# stable, release lines (newest first) and master pinned first, then
+# stable/master pinned first, then the release lines (newest first), then
 # release, then snapshot, then branch/pr.
 
 import json
