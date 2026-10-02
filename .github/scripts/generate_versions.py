@@ -10,11 +10,16 @@
 #   release/<version>/ -> type "release", one entry per subdirectory
 #   snapshot/<version>/-> type "snapshot", one entry per subdirectory
 #   pr/<number>/       -> type "pr", one entry per subdirectory (PR
-#                          previews, see pr-preview-publish.yml), plus the
-#                          branch, title, url and date from pr/<number>.json
+#                          previews, see pr-preview-publish.yml)
 #   logos/             -> the landing page's own assets, never a build
 #   anything else with its own index.html -> type "branch" (feature/**,
 #                          bugfix/**, experiment/** deploys, etc.)
+#
+# A build directory may have a <dir>.json beside it (pr/42.json,
+# feature-xyz.json) with details for the landing page: the branch, the
+# date it was deployed and, for a PR preview or a branch with an open PR,
+# the PR's number, title, url and draft state. It sits beside the build
+# rather than in it so nothing a build ships can overwrite it.
 #
 # Entries are emitted in the order the front end (index.html) groups them:
 # stable/master pinned first, then release, then snapshot, then branch/pr.
@@ -48,17 +53,30 @@ def nested_entries(kind_dir, entry_type):
     return entries
 
 
+INFO_TYPES = {
+    "branch": str,
+    "date": str,
+    "number": int,
+    "title": str,
+    "url": str,
+    "draft": bool,
+}
+
+
 def read_info(path):
-    # Optional details written next to a build directory (PR previews).
+    # Optional details written next to a build directory; see the header.
     try:
         with open(path, encoding="utf-8") as handle:
             info = json.load(handle)
     except (OSError, ValueError):
         return {}
+    if not isinstance(info, dict):
+        return {}
     return {
         key: info[key]
-        for key in ("branch", "title", "url", "date")
-        if isinstance(info.get(key), str)
+        for key, kind in INFO_TYPES.items()
+        # bool is an int subclass; keep it out of "number".
+        if isinstance(info.get(key), kind) and (kind is bool or not isinstance(info[key], bool))
     }
 
 
@@ -102,7 +120,10 @@ def main():
         d for d in os.listdir(".")
         if d not in reserved and has_index(d)
     )
-    branches = [{"type": "branch", "name": d, "path": f"./{d}/"} for d in branch_dirs]
+    branches = [
+        {"type": "branch", "name": d, "path": f"./{d}/", **read_info(f"{d}.json")}
+        for d in branch_dirs
+    ]
 
     entries.extend(releases)
     entries.extend(snapshots)
