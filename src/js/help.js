@@ -28,6 +28,7 @@ const tabHelpURLs = {
     tabSensors:         `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/sensors`,
     tabCrsfSensors:     `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/crsf-sensors`,
     tabBlackbox:        `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/blackbox`,
+    tabRemapFC:         `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/remap-fc`,
     tabCli:             `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/cli`,
 };
 

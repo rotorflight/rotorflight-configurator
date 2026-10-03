@@ -1,0 +1,105 @@
+name: PR Branch Info
+
+# Keeps the PR details beside a branch deploy (<deploy_path>.json, see
+# generate_versions.py) current when its PR changes without a push: opened,
+# retitled, marked draft or ready, or closed. Deploy Web App writes the same
+# file on every push. Publish GitHub Pages then puts the change live.
+#
+# pull_request_target runs the base branch's copy of this file with a write
+# token; it only rewrites that JSON file and never checks out the PR's code.
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - edited
+      - ready_for_review
+      - converted_to_draft
+      - closed
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  update:
+    name: Update Branch Deploy Info
+    # Only this repository's branches have branch deploys.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+
+    # The same group as the branch's Deploy Web App runs, so the two never
+    # overwrite each other's info.
+    concurrency:
+      group: pages-refs/heads/${{ github.event.pull_request.head.ref }}
+      cancel-in-progress: false
+
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BRANCH: ${{ github.event.pull_request.head.ref }}
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Checkout GitHub Pages branch
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          path: pages
+
+      - name: Update branch deploy info
+        shell: bash
+        run: |
+          # Same mapping from branch name to directory as deploy-web.yml.
+          DEPLOY_PATH="$(echo "$BRANCH" | sed -E 's#[^A-Za-z0-9._-]+#-#g')"
+          case "$DEPLOY_PATH" in
+            master|latest|release|snapshot|pr|logos|""|.|..)
+              echo "'$BRANCH' does not have a branch deploy"
+              exit 0
+              ;;
+          esac
+
+          cd pages
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Same retry-on-rejected-push loop as deploy-web.yml.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin gh-pages
+            git reset --hard origin/gh-pages
+
+            if [ ! -d "$DEPLOY_PATH" ]; then
+              echo "No branch deploy found for pages/$DEPLOY_PATH"
+              exit 0
+            fi
+
+            # Keep the date of the last deploy; this run deploys nothing.
+            DATE="$(jq -r '.date // empty' "$DEPLOY_PATH.json" 2>/dev/null || true)"
+            bash ../.github/scripts/branch_info.sh "$BRANCH" "$DATE" > "$DEPLOY_PATH.json"
+            cat "$DEPLOY_PATH.json"
+
+            cp -R ../.github/pages/. .
+            touch .nojekyll
+            python3 ../.github/scripts/generate_versions.py
+
+            git add .
+            if git diff --cached --quiet; then
+              echo "No GitHub Pages changes to publish"
+              exit 0
+            fi
+            git commit -m "info: update PR details for $BRANCH"
+
+            if git push origin gh-pages; then
+              exit 0
+            fi
+            echo "gh-pages push rejected (attempt $attempt); retrying"
+            sleep $((attempt * 5))
+          done
+
+          echo "Failed to publish to gh-pages after 5 attempts"
+          exit 1

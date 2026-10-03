@@ -1,0 +1,21 @@
+<!--
+  File: src/images/remap_fc/MATEKSYS_BRAND.svg
+  The "MATEKSYS" wordmark, hand-built as styled text — a thin,
+  regular-weight sans with wide letter-spacing, matching the real
+  board's own printed logotype (a simple enough mark that a system
+  font is a close match without needing to trace real vector art).
+  Kept separate so it can be overlaid on the generic board diagram
+  only for manufacturer "MTKS", rather than baked into a fixed board
+  shape.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 70" width="300" height="70">
+  <text
+    x="13"
+    y="50"
+    font-family="Arial, sans-serif"
+    font-weight="400"
+    font-size="42"
+    letter-spacing="6"
+    fill="#ffffff"
+  >MATEKSYS</text>
+</svg>

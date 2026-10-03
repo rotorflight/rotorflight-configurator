@@ -4,6 +4,7 @@
 
   import Page from "@/components/Page.svelte";
   import Section from "@/components/Section.svelte";
+  import SwashServoDiagram from "@/components/SwashServoDiagram.svelte";
   import Switch from "@/components/Switch.svelte";
 
   import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
@@ -220,6 +221,7 @@
   onMount(async () => {
     await MSP.promise(MSPCodes.MSP_STATUS);
     await MSP.promise(MSPCodes.MSP_SERIAL_CONFIG);
+    await MSP.promise(MSPCodes.MSP_MIXER_CONFIG);
     await MSP.promise(MSPCodes.MSP_SERVO_CONFIGURATIONS);
     if (supportsBusServos) {
       await MSP.promise(MSPCodes.MSP_BUS_SERVO_CONFIG);
@@ -346,6 +348,11 @@
         <p>{@html $i18n.t("servoRateRebootNote")}</p>
       </div>
     {/if}
+
+    <SwashServoDiagram
+      swashType={FC.MIXER_CONFIG.swash_type}
+      tailServo={FC.MIXER_CONFIG.tail_rotor_mode === 0}
+    />
 
     <div class="table-scroll">
       <ServoConfigTable
