@@ -25,6 +25,17 @@
       "number": 456,
       "title": "Hide advanced settings when expert mode is off",
       "url": "https://github.com/rotorflight/rotorflight-configurator/pull/456"
+    },
+    {
+      "type": "pr",
+      "name": "432",
+      "path": "./pr/432/",
+      "branch": "feature/crsf-sensors",
+      "date": "2026-10-03T19:47:57Z",
+      "number": 432,
+      "title": "feat: add CRSF Sensors diagnostic tab",
+      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/432",
+      "draft": false
     }
   ]
 }
