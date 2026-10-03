@@ -34,9 +34,11 @@ i18n.init = async function() {
         });
 
         console.log('i18n system loaded');
+        setDocumentLanguage(i18next.language);
         const detectedLanguage = i18n.getMessage(`language_${getValidLocale("DEFAULT")}`);
         i18n.addResources({"detectedLanguage": detectedLanguage });
-        i18next.on('languageChanged', function () {
+        i18next.on('languageChanged', function (lng) {
+            setDocumentLanguage(lng);
             i18n.localizePage(true);
         });
     } catch(err) {
@@ -182,6 +184,17 @@ i18n.localizePage = function(forceReTranslate) {
 function getStoredUserLocale() {
     i18n.selectedLanguage = config.locale;
     return getValidLocale(i18n.selectedLanguage);
+}
+
+/*
+ * Declare the UI language on <html>. Without it the browser guesses the
+ * page language from its text, and its own translator (with "always
+ * translate English" set) turns the page back into the system language
+ * right after the user switches to English. index.html also opts out of
+ * browser translation with translate="no".
+ */
+function setDocumentLanguage(locale) {
+    document.documentElement.lang = locale.replace('_', '-');
 }
 
 function getValidLocale(userLocale) {
