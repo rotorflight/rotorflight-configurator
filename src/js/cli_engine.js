@@ -4,6 +4,7 @@ import { GUI } from "@/js/gui.js";
 import { i18n } from "@/js/localization.js";
 import { serial } from "@/js/serial.js";
 import { reinitialiseConnection } from "@/js/serial_backend.js";
+import VirtualCli from "@/js/virtual_cli.js";
 
 const CHAR_CODE_BACKSPACE = 8;
 const CHAR_CODE_LINE_FEED = 10;
@@ -32,6 +33,8 @@ export default class CliEngine {
   #startProcessingForValidation = false; // Start processing the serial read data for validation of the engine
 
   #inBatchMode = false; // track whether batch mode has been detected
+
+  #virtualCli = null; // stands in for the FC's CLI when on the Virtual FC
 
   // GUI elements for presenting an interactable CLI
   #GUI = {
@@ -125,6 +128,12 @@ export default class CliEngine {
 
     bufView[0] = 0x23;
 
+    if (CONFIGURATOR.virtualMode) {
+      this.#virtualCli = new VirtualCli();
+      this.#receiveVirtual(this.#virtualCli.banner());
+      return;
+    }
+
     serial.send(bufferOut);
   }
 
@@ -186,6 +195,17 @@ export default class CliEngine {
 
   // Close attempts to send an `exit` to the flight controller. Notably, it uses the `_lineWithBuffer` function as there could be pending CLI buffer data.
   close(callback) {
+    if (CONFIGURATOR.virtualMode) {
+      // Nothing to reboot, and replying with "Rebooting" would switch tabs
+      // in the middle of whatever is closing the CLI (e.g. a disconnect).
+      this.#virtualCli = null;
+      CONFIGURATOR.cliEngineActive = false;
+      CONFIGURATOR.cliEngineValid = false;
+      CONFIGURATOR.cliTab = "";
+      callback?.();
+      return;
+    }
+
     let line = "exit\r";
     if (this.#cliBufferContainsPartialCommand) {
       line = this.#lineWithBuffer(line);
@@ -346,6 +366,9 @@ export default class CliEngine {
         CONFIGURATOR.cliTab = "";
         GUI.log(i18n.getMessage("cliReboot"));
         reinitialiseConnection();
+        if (CONFIGURATOR.virtualMode) {
+          this.#rebootVirtual();
+        }
       }
       if (
         this.#cliBuffer === "Command batch started" &&
@@ -419,6 +442,12 @@ export default class CliEngine {
   }
 
   #send(line, callback) {
+    if (this.#virtualCli) {
+      callback?.({ bytesSent: line.length });
+      this.#receiveVirtual(this.#virtualCli.input(line));
+      return;
+    }
+
     const bufferOut = new ArrayBuffer(line.length);
     const bufView = new Uint8Array(bufferOut);
 
@@ -427,6 +456,22 @@ export default class CliEngine {
     }
 
     serial.send(bufferOut, callback);
+  }
+
+  // Delivers the Virtual FC's reply as if it had arrived over serial, after
+  // the current call returns, like a real FC's reply would.
+  #receiveVirtual(text) {
+    const data = Uint8Array.from(text, (char) => char.charCodeAt(0));
+    setTimeout(() => this.readSerial(data), 0);
+  }
+
+  // A real FC drops off the port and is reconnected, landing on the default
+  // tab (see serial_backend.js finishOpen). The Virtual FC stays connected,
+  // so just leave the CLI for the default tab.
+  #rebootVirtual() {
+    this.#virtualCli = null;
+    GUI.reboot_in_progress = false;
+    setTimeout(() => GUI.selectDefaultTabWhenConnected(), 0);
   }
 
   // adjustCliBuffer handles a character code and translates it as necessary onto the CLI buffer.
