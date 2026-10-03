@@ -1,0 +1,8 @@
+{
+  "number": 468,
+  "branch": "fix/virtual-fc-cli-exit",
+  "title": "Let the CLI be exited when connected to the Virtual FC",
+  "url": "https://github.com/rotorflight/rotorflight-configurator/pull/468",
+  "draft": false,
+  "date": "2026-10-03T09:54:51Z"
+}

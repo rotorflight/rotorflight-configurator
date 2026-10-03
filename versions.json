@@ -18,6 +18,17 @@
     },
     {
       "type": "pr",
+      "name": "468",
+      "path": "./pr/468/",
+      "branch": "fix/virtual-fc-cli-exit",
+      "date": "2026-10-03T09:54:51Z",
+      "number": 468,
+      "title": "Let the CLI be exited when connected to the Virtual FC",
+      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/468",
+      "draft": false
+    },
+    {
+      "type": "pr",
       "name": "456",
       "path": "./pr/456/",
       "branch": "feature/expert-mode-basic",
