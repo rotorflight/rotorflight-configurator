@@ -1,0 +1,8 @@
+{
+  "number": 469,
+  "branch": "fix/web-language-switch",
+  "title": "Keep the browser from translating the UI back after a language switch",
+  "url": "https://github.com/rotorflight/rotorflight-configurator/pull/469",
+  "draft": false,
+  "date": "2026-10-03T12:04:01Z"
+}
