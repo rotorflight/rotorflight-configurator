@@ -143,6 +143,12 @@ class FlightController {
       vbatwarningcellvoltage:     0,
       lvcPercentage:              0,
       mahWarningPercentage:       0,
+      hasProfileCells:            false,
+      cellCounts:                 [ 0, 0, 0, 0, 0, 0 ],
+      vbatmincellvoltages:        [ 0, 0, 0, 0, 0, 0 ],
+      vbatmaxcellvoltages:        [ 0, 0, 0, 0, 0, 0 ],
+      vbatfullcellvoltages:       [ 0, 0, 0, 0, 0, 0 ],
+      vbatwarningcellvoltages:    [ 0, 0, 0, 0, 0, 0 ],
     };
 
     this.BATTERY_STATE = {

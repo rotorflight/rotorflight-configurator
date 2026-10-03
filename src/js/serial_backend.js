@@ -986,10 +986,14 @@ function update_live_status() {
         }
     }
 
+    const config = FC.BATTERY_CONFIG;
+    const profile = FC.BATTERY_STATE.batteryProfile;
+    const cellVoltage = (legacy, profiles) => (config.hasProfileCells ? profiles[profile] : legacy);
+
     const cells = FC.BATTERY_STATE.cellCount;
-    const min = FC.BATTERY_CONFIG.vbatmincellvoltage * cells;
-    const max = FC.BATTERY_CONFIG.vbatmaxcellvoltage * cells;
-    const warn = FC.BATTERY_CONFIG.vbatwarningcellvoltage * cells;
+    const min = cellVoltage(config.vbatmincellvoltage, config.vbatmincellvoltages) * cells;
+    const max = cellVoltage(config.vbatmaxcellvoltage, config.vbatmaxcellvoltages) * cells;
+    const warn = cellVoltage(config.vbatwarningcellvoltage, config.vbatwarningcellvoltages) * cells;
 
     const NO_BATTERY_VOLTAGE_MAXIMUM = 1.8;
 

@@ -6935,6 +6935,30 @@
     "powerBatteryProfile": {
         "message": "Battery $1"
     },
+    "powerBatteryProfiles": {
+        "message": "Battery Profiles"
+    },
+    "powerBatteryProfileCapacity": {
+        "message": "mAh"
+    },
+    "powerBatteryProfileCellCount": {
+        "message": "Cells"
+    },
+    "powerBatteryProfileCellCountHelp": {
+        "message": "Number of cells in the battery. Set to 0 to detect the cell count automatically when the battery is connected."
+    },
+    "powerBatteryProfileMaximumCellVoltage": {
+        "message": "Max [V]"
+    },
+    "powerBatteryProfileFullCellVoltage": {
+        "message": "Full [V]"
+    },
+    "powerBatteryProfileWarningCellVoltage": {
+        "message": "Warn [V]"
+    },
+    "powerBatteryProfileMinimumCellVoltage": {
+        "message": "Min [V]"
+    },
     "options.show_advanced_firmware_opts.label": {
         "message": "Show advanced firmware flashing options"
     },
