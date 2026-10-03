@@ -6,13 +6,19 @@ name: Deploy Web App
 #
 #   master              -> /master/
 #   feature/foo etc.    -> /feature-foo/
-#   release/<ver> tag   -> /release/<ver>/  (and /latest/ for plain x.y.z)
+#   release/<ver> tag   -> /release/<ver>/  (and, for plain x.y.z, /v<x.y>/
+#                          and /latest/)
 #   snapshot/<ver> tag  -> /snapshot/<ver>/
 #   pull request        -> /pr/<number>/  (pr-preview-*.yml, "preview" label)
 #
 # A branch deploy also gets /<dir>.json beside it naming the branch and its
 # open PR, if any (.github/scripts/branch_info.sh; pr-branch-info.yml keeps
 # it current between pushes). Deleting a branch removes both again.
+#
+# /v<x.y>/ follows the newest x.y.z release. Each release line is installed
+# as an app of its own (see release-channel.mjs), so that is the directory to
+# install a line from: it takes that line's patch releases, but never moves on
+# to the next line, which goes with different firmware. /latest/ does move on.
 #
 # This only updates the gh-pages branch; publish-pages.yml deploys it to
 # GitHub Pages once this run completes.
@@ -86,6 +92,8 @@ jobs:
         id: path
         shell: bash
         run: |
+          VERSION=""
+          CHANNEL_PATH=""
           if [ -n "${{ github.event.inputs.deployment_path }}" ]; then
             DEPLOY_PATH="${{ github.event.inputs.deployment_path }}"
             UPDATE_LATEST="false"
@@ -94,10 +102,11 @@ jobs:
             if [[ "$TAG" == release/* ]]; then
               VERSION="${TAG#release/}"
               DEPLOY_PATH="release/$VERSION"
-              # Only plain x.y.z releases become "latest" -- release
-              # candidates (x.y.z-RCn) stay under release/ only.
-              if [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              # Only plain x.y.z releases become "latest" and v<x.y> --
+              # release candidates (x.y.z-RCn) stay under release/ only.
+              if [[ "$VERSION" =~ ^([0-9]+)\.([0-9]+)\.[0-9]+$ ]]; then
                 UPDATE_LATEST="true"
+                CHANNEL_PATH="v${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
               else
                 UPDATE_LATEST="false"
               fi
@@ -131,10 +140,13 @@ jobs:
           fi
 
           echo "deploy_path=$DEPLOY_PATH" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "channel_path=$CHANNEL_PATH" >> "$GITHUB_OUTPUT"
           echo "update_latest=$UPDATE_LATEST" >> "$GITHUB_OUTPUT"
           echo "branch_info=$BRANCH_INFO" >> "$GITHUB_OUTPUT"
           echo "site_path=$SITE_PATH" >> "$GITHUB_OUTPUT"
           echo "Deploying to: $DEPLOY_PATH"
+          echo "Release line: ${CHANNEL_PATH:-none}"
           echo "Update latest: $UPDATE_LATEST"
 
       - name: Look up the branch's pull request
@@ -175,6 +187,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # The release line (and so the app's name and its settings) comes from
+      # the version, as in the desktop builds.
+      - name: Update version number
+        if: steps.path.outputs.version != ''
+        run: make version SEMVER=${{ steps.path.outputs.version }}
+
       - name: Build web app
         env:
           VITE_APP_BACKEND: web
@@ -194,6 +212,18 @@ jobs:
           mv bundle bundle-release
           pnpm exec vite build
           mv bundle bundle-latest
+          mv bundle-release bundle
+
+      - name: Build web app for the release line
+        if: steps.path.outputs.channel_path != ''
+        env:
+          VITE_APP_BACKEND: web
+          VITE_APP_BASE: ${{ steps.path.outputs.site_path }}/${{ steps.path.outputs.channel_path }}/
+          VITE_APP_BUILD_LABEL: ${{ github.ref_name }}
+        run: |
+          mv bundle bundle-release
+          pnpm exec vite build
+          mv bundle bundle-channel
           mv bundle-release bundle
 
       - name: Ensure gh-pages branch exists
@@ -223,6 +253,8 @@ jobs:
         run: |
           DEPLOY_PATH="${{ steps.path.outputs.deploy_path }}"
           UPDATE_LATEST="${{ steps.path.outputs.update_latest }}"
+          VERSION="${{ steps.path.outputs.version }}"
+          CHANNEL_PATH="${{ steps.path.outputs.channel_path }}"
           BRANCH_INFO="${{ steps.path.outputs.branch_info }}"
 
           cd pages
@@ -243,10 +275,32 @@ jobs:
               cp "$RUNNER_TEMP/branch-info.json" "$DEPLOY_PATH.json"
             fi
 
-            if [ "$UPDATE_LATEST" = "true" ]; then
+            # A patch for an older line (2.2.5 after 2.3.0) must not take
+            # /latest/ back to that line, nor an older patch (a re-run of
+            # 2.3.0 after 2.3.1) /v2.3/ back to it: each only moves forward
+            # to the newest release deployed for it.
+            # The newest plain x.y.z under release/ that starts with $1.
+            newest_release() {
+              ls release 2>/dev/null \
+                | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' \
+                | while read -r name; do
+                    case "$name" in "$1"*) echo "$name" ;; esac
+                  done \
+                | sort -V | tail -n 1
+            }
+
+            if [ "$UPDATE_LATEST" = "true" ] \
+              && [ "$(newest_release "")" = "$VERSION" ]; then
               rm -rf latest
               mkdir -p latest
               cp -R ../bundle-latest/. latest/
+            fi
+
+            if [ -n "$CHANNEL_PATH" ] \
+              && [ "$(newest_release "${CHANNEL_PATH#v}.")" = "$VERSION" ]; then
+              rm -rf "$CHANNEL_PATH"
+              mkdir -p "$CHANNEL_PATH"
+              cp -R ../bundle-channel/. "$CHANNEL_PATH/"
             fi
 
             # Landing page + its logos, then the build index it reads.
@@ -280,6 +334,9 @@ jobs:
           echo "Deployment: $PAGES_URL/$DEPLOY_PATH/"
           if [ "${{ steps.path.outputs.update_latest }}" = "true" ]; then
             echo "Latest stable: $PAGES_URL/latest/"
+          fi
+          if [ -n "${{ steps.path.outputs.channel_path }}" ]; then
+            echo "Release line: $PAGES_URL/${{ steps.path.outputs.channel_path }}/"
           fi
           echo "### Deployed to [$PAGES_URL/$DEPLOY_PATH/]($PAGES_URL/$DEPLOY_PATH/)" >> "$GITHUB_STEP_SUMMARY"
 
@@ -315,7 +372,7 @@ jobs:
 
           # Never let a branch delete wipe the pinned/reserved directories.
           case "$DEPLOY_PATH" in
-            master|latest|release|snapshot|pr|logos|""|.|..)
+            master|latest|release|snapshot|pr|logos|v[0-9]*|""|.|..)
               echo "Refusing to remove reserved path '$DEPLOY_PATH'"
               exit 0
               ;;

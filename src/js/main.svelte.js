@@ -23,6 +23,9 @@ mount(StatusBar, { target: document.querySelector("#status-bar") });
 mount(Logo, { target: document.querySelector("#logo-desktop") });
 mount(Logo, { target: document.querySelector("#logo-mobile") });
 
+// Names the browser tab (and on desktop the window) after the release line.
+document.title ||= __APP_PRODUCT_NAME__;
+
 if (__BACKEND__ === "web") {
   const { initBrowserCompat } = await import("@/js/browser-compat.js");
   initBrowserCompat({ showBanner: true });
