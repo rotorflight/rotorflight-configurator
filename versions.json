@@ -25,16 +25,6 @@
       "number": 456,
       "title": "Hide advanced settings when expert mode is off",
       "url": "https://github.com/rotorflight/rotorflight-configurator/pull/456"
-    },
-    {
-      "type": "pr",
-      "name": "438",
-      "path": "./pr/438/",
-      "branch": "feature/battery-profile-cells",
-      "date": "2026-10-01T21:38:57Z",
-      "number": 438,
-      "title": "Add cell count and cell voltages to battery profiles",
-      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/438"
     }
   ]
 }
