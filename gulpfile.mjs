@@ -410,7 +410,8 @@ function build_redist_osx() {
         target: targetPath,
         basepath: context.appdir,
         specification: {
-          title: identity.productName,
+          // The volume name; macOS caps it at 27 characters.
+          title: pkg.productName,
           contents: [
             { x: 448, y: 342, type: "link", path: "/Applications" },
             {
