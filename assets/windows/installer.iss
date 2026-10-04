@@ -11,7 +11,8 @@
 ; targetFolder
 
 ; Every release line installs side by side with the others: it has its own
-; AppId, folder and shortcuts, and only replaces an install of the same line.
+; AppId, folder and shortcuts, and only replaces an install of the same line,
+; including one from before the lines (see InitializeSetup).
 #if channel == "dev"
   #define ApplicationName "Rotorflight Configurator (dev)"
 #else
@@ -103,35 +104,61 @@ WizardStyle=modern
 PrivilegesRequired=admin
 
 [Code]
-function GetQuietUninstallerPath(): String;
+const
+    // Before the release lines, every install had this AppId.
+    LegacyAppId = '0f5aab69-da40-4828-8efc-34d4bbb075fe';
+
+function GetQuietUninstallerPath(AppId: String; var Version: String): String;
 var
     RegKey: String;
 begin
     Result := '';
-    RegKey := Format('%s\%s_is1', ['Software\Microsoft\Windows\CurrentVersion\Uninstall', '{#emit SetupSetting("AppId")}']);
-    if not RegQueryStringValue(HKEY_LOCAL_MACHINE, RegKey, 'QuietUninstallString', Result) then
+    Version := '';
+    RegKey := Format('%s\%s_is1', ['Software\Microsoft\Windows\CurrentVersion\Uninstall', AppId]);
+    if RegQueryStringValue(HKEY_LOCAL_MACHINE, RegKey, 'QuietUninstallString', Result) then
     begin
-        RegQueryStringValue(HKEY_CURRENT_USER, RegKey, 'QuietUninstallString', Result);
+        RegQueryStringValue(HKEY_LOCAL_MACHINE, RegKey, 'DisplayVersion', Version);
+    end
+    else if RegQueryStringValue(HKEY_CURRENT_USER, RegKey, 'QuietUninstallString', Result) then
+    begin
+        RegQueryStringValue(HKEY_CURRENT_USER, RegKey, 'DisplayVersion', Version);
     end;
+end;
+
+procedure Uninstall(UninstPath: String);
+var
+    ResultCode: Integer;
+begin
+    if not Exec('>', UninstPath, '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
+    begin
+        MsgBox(ExpandConstant('{cm:UninstallError, ' + SysErrorMessage(ResultCode) + '}'), mbError, MB_OK);
+    end;
+end;
+
+// Whether a version is of this release line; see release-channel.mjs.
+function IsThisLine(Version: String): Boolean;
+begin
+    Result := Pos('{#channel}.', Version) = 1;
 end;
 
 function InitializeSetup(): Boolean;
 var
-    ResultCode: Integer;
-    UninstPath : String;
+    UninstPath, Version: String;
 begin
-
     Result := True;
 
-    // Search for new Inno Setup installations
-    UninstPath := GetQuietUninstallerPath();
+    // An earlier install of this line
+    UninstPath := GetQuietUninstallerPath('{#emit SetupSetting("AppId")}', Version);
     if UninstPath <> '' then
     begin
-        if not Exec('>', UninstPath, '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
-        begin
-            // Result := False; // Set to False to abort the installation
-            MsgBox(ExpandConstant('{cm:UninstallError, ' + SysErrorMessage(ResultCode) + '}'), mbError, MB_OK);
-        end;
+        Uninstall(UninstPath);
+    end;
+
+    // An install from before the release lines, if it is of this line
+    UninstPath := GetQuietUninstallerPath(LegacyAppId, Version);
+    if (UninstPath <> '') and IsThisLine(Version) then
+    begin
+        Uninstall(UninstPath);
     end;
 end;
 
