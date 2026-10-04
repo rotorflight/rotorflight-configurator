@@ -10,8 +10,8 @@
 // Every web build (master, each release, each feature branch) is served from
 // one origin, so they all share one localStorage. These are caches, and their
 // format can change between versions, so on the web each deployed build keeps
-// its own under "build:<base path>:". Settings (config.js) are not stored
-// here and stay shared.
+// its own under "build:<base path>:". Settings (config.svelte.ts) are not
+// stored here; they are kept per release line (configImport.ts).
 const NAMESPACE =
   __BACKEND__ === "web" ? `build:${import.meta.env?.BASE_URL ?? "/"}:` : "";
 
