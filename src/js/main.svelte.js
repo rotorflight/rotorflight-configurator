@@ -31,9 +31,15 @@ if (__BACKEND__ === "web") {
   initBrowserCompat({ showBanner: true });
 
   if (import.meta.env.PROD && "serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
+    const register = () =>
       navigator.serviceWorker.register("./service-worker.js", { scope: "./" });
-    });
+    // The await above usually lets the page finish loading first, and a load
+    // listener added after that never fires.
+    if (document.readyState === "complete") {
+      register();
+    } else {
+      window.addEventListener("load", register);
+    }
   }
 }
 
