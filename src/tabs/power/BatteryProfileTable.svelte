@@ -16,8 +16,12 @@
     ["vbatmincellvoltages", "powerBatteryProfileMinimumCellVoltage"],
   ];
 
+  const hasFlights = $derived(FC.BATTERY_CONFIG.hasProfileFlights);
+
   /* Same grid approach as ServoConfigTable: no sub-pixel row drift. */
-  const gridColumns = "96px repeat(6, minmax(124px, 1fr))";
+  const gridColumns = $derived(
+    `96px repeat(${hasFlights ? 7 : 6}, minmax(124px, 1fr))`,
+  );
 </script>
 
 <div class="scroll">
@@ -32,6 +36,12 @@
       {#each VOLTAGE_COLUMNS as [, label] (label)}
         <span>{$i18n.t(label)}</span>
       {/each}
+      {#if hasFlights}
+        <span class="header-label-flex">
+          <span>{$i18n.t("powerBatteryProfileFlights")}</span>
+          <HelpIcon>{$i18n.t("powerBatteryProfileFlightsHelp")}</HelpIcon>
+        </span>
+      {/if}
     </div>
 
     {#each Array.from({ length: PROFILE_COUNT }) as _, i (i)}
@@ -72,6 +82,15 @@
             step={0.01}
           />
         {/each}
+        {#if hasFlights}
+          <NumberInput
+            id={`power-profile-flights-${i}`}
+            bind:value={FC.BATTERY_CONFIG.flights[i]}
+            min={0}
+            max={65535}
+            step={1}
+          />
+        {/if}
       </div>
     {/each}
   </div>

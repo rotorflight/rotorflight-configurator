@@ -369,6 +369,11 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.BATTERY_CONFIG.vbatfullcellvoltages = readArray(() => data.readU16() / 100);
                     FC.BATTERY_CONFIG.vbatwarningcellvoltages = readArray(() => data.readU16() / 100);
                 }
+                // Per-profile flight counters
+                FC.BATTERY_CONFIG.hasProfileFlights = FC.BATTERY_CONFIG.hasProfileCells && data.remaining() >= 2 * 6;
+                if (FC.BATTERY_CONFIG.hasProfileFlights) {
+                    FC.BATTERY_CONFIG.flights = Array.from({ length: 6 }, () => data.readU16());
+                }
                 break;
             }
 
@@ -2143,6 +2148,11 @@ MspHelper.prototype.crunch = function(code) {
                     for (let i = 0; i < 6; i++) {
                         buffer.push16(Math.round(voltages[i] * 100));
                     }
+                }
+            }
+            if (config.hasProfileFlights) {
+                for (let i = 0; i < 6; i++) {
+                    buffer.push16(config.flights[i]);
                 }
             }
             break;

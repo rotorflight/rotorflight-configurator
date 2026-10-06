@@ -665,6 +665,9 @@ export function applyVirtualConfig() {
     vbatmaxcellvoltages: Array(BATTERY_PROFILE_COUNT).fill(4.3),
     vbatfullcellvoltages: Array(BATTERY_PROFILE_COUNT).fill(4.1),
     vbatwarningcellvoltages: Array(BATTERY_PROFILE_COUNT).fill(3.5),
+    // Per-profile flight counters
+    hasProfileFlights: api12_10,
+    flights: [0, 0, 0, 0, 0, 0],
   });
 
   Object.assign(FC.SMARTFUEL_CONFIG, {

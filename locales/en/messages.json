@@ -7064,6 +7064,12 @@
     "powerBatteryProfileCellCountHelp": {
         "message": "Number of cells in the battery. Set to 0 to detect the cell count automatically when the battery is connected."
     },
+    "powerBatteryProfileFlights": {
+        "message": "Flights"
+    },
+    "powerBatteryProfileFlightsHelp": {
+        "message": "Number of flights done with this battery. A flight is counted on disarm, using the same rules as the total flight counter. Edit the value to match the battery, e.g. when adding a used pack."
+    },
     "powerBatteryProfileMaximumCellVoltage": {
         "message": "Max [V]"
     },
