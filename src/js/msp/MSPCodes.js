@@ -144,6 +144,8 @@ export const MSPCodes = {
     MSP_GPS_SV_INFO:                164,
     MSP_XACT_SERVO_LIST:            165,
 
+    MSP_FREQ_SENSOR_STATUS:         168,
+
     MSP_MIXER_INPUTS:               170,
     MSP_SET_MIXER_INPUT:            171,
     MSP_MIXER_RULES:                172,
