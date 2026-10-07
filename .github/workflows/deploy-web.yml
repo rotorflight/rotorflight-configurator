@@ -10,7 +10,9 @@ name: Deploy Web App
 #   snapshot/<ver> tag  -> /snapshot/<ver>/
 #   pull request        -> /pr/<number>/  (pr-preview-*.yml, "preview" label)
 #
-# Deleting a branch removes its directory again.
+# A branch deploy also gets /<dir>.json beside it naming the branch and its
+# open PR, if any (.github/scripts/branch_info.sh; pr-branch-info.yml keeps
+# it current between pushes). Deleting a branch removes both again.
 #
 # This only updates the gh-pages branch; publish-pages.yml deploys it to
 # GitHub Pages once this run completes.
@@ -41,6 +43,7 @@ on:
 permissions:
   contents: write
   pages: read
+  pull-requests: read
 
 # One group per deployed ref. A delete event's github.ref is the default
 # branch, so key it on the deleted branch's full ref instead -- the same group
@@ -117,11 +120,33 @@ jobs:
           # domain) plus the deploy directory.
           SITE_PATH="$(python3 -c 'import sys, urllib.parse; print(urllib.parse.urlparse(sys.argv[1]).path.rstrip("/"))' "$PAGES_URL")"
 
+          # Branch deploys (not master, tags or an override) get a
+          # <deploy_path>.json beside them naming the branch and its PR.
+          if [ -z "${{ github.event.inputs.deployment_path }}" ] \
+            && [ "${{ github.ref_type }}" = "branch" ] \
+            && [ "${{ github.ref_name }}" != "master" ]; then
+            BRANCH_INFO="true"
+          else
+            BRANCH_INFO="false"
+          fi
+
           echo "deploy_path=$DEPLOY_PATH" >> "$GITHUB_OUTPUT"
           echo "update_latest=$UPDATE_LATEST" >> "$GITHUB_OUTPUT"
+          echo "branch_info=$BRANCH_INFO" >> "$GITHUB_OUTPUT"
           echo "site_path=$SITE_PATH" >> "$GITHUB_OUTPUT"
           echo "Deploying to: $DEPLOY_PATH"
           echo "Update latest: $UPDATE_LATEST"
+
+      - name: Look up the branch's pull request
+        if: steps.path.outputs.branch_info == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          bash .github/scripts/branch_info.sh "$BRANCH" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            > "$RUNNER_TEMP/branch-info.json"
+          cat "$RUNNER_TEMP/branch-info.json"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v5
@@ -198,6 +223,7 @@ jobs:
         run: |
           DEPLOY_PATH="${{ steps.path.outputs.deploy_path }}"
           UPDATE_LATEST="${{ steps.path.outputs.update_latest }}"
+          BRANCH_INFO="${{ steps.path.outputs.branch_info }}"
 
           cd pages
 
@@ -213,6 +239,9 @@ jobs:
             rm -rf "$DEPLOY_PATH"
             mkdir -p "$DEPLOY_PATH"
             cp -R ../bundle/. "$DEPLOY_PATH/"
+            if [ "$BRANCH_INFO" = "true" ]; then
+              cp "$RUNNER_TEMP/branch-info.json" "$DEPLOY_PATH.json"
+            fi
 
             if [ "$UPDATE_LATEST" = "true" ]; then
               rm -rf latest
@@ -303,7 +332,7 @@ jobs:
             git reset --hard origin/gh-pages
 
             if [ -d "$DEPLOY_PATH" ]; then
-              rm -rf "$DEPLOY_PATH"
+              rm -rf "$DEPLOY_PATH" "$DEPLOY_PATH.json"
               echo "Deleted pages/$DEPLOY_PATH"
             else
               echo "No deployment found for pages/$DEPLOY_PATH"

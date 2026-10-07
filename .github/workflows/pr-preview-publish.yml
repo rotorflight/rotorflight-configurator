@@ -107,7 +107,7 @@ jobs:
 
           # What the landing page shows for this preview, taken from the API
           # rather than the artifact.
-          jq '{number, branch: .head.ref, title, url: .html_url, date: (now | todate)}'             <<< "$PR_JSON" > "$RUNNER_TEMP/pr-info.json"
+          jq '{number, branch: .head.ref, title, url: .html_url, draft, date: (now | todate)}'             <<< "$PR_JSON" > "$RUNNER_TEMP/pr-info.json"
 
       - name: Checkout source
         if: steps.verify.outputs.deploy == 'true'
