@@ -475,12 +475,11 @@
     overflow-x: auto;
   }
 
-  /* Rule/Offset/Weight are fixed widths: a NumberInput needs room for
+  /* Offset and Weight are fixed widths: a NumberInput needs room for
      its -/+ buttons either side of four digits, and at 90px the value
-     was being clipped. Output and Controlled by share what's left,
-     with Controlled by only slightly the wider of the two since its
-     labels ("RC Channel Collective") are the longest. */
-  /* Output and Rule are fixed at just enough for their own labels plus
+     was being clipped.
+
+     Output and Rule are fixed at just enough for their own labels plus
      a dropdown chevron ("Servo 5", "Motor 2"; "Set", "Add", "Mul") -
      below about 70px the chevron gets clipped off entirely. Everything
      left over goes to Controlled by via 1fr, since "RC Channel
@@ -522,9 +521,6 @@
     gap: 4px;
   }
 
-  /* Each output's rules read as one group: a separator only between
-     groups, matching how the config sections above separate their own
-     groups of related settings. */
   /* Rules driving the same output sit tight together (the .row padding
      above) so they read as one block; the gap goes between outputs
      instead, split either side of the separator so the line sits in the
@@ -595,14 +591,6 @@
         color: var(--color-red-500, crimson);
       }
     }
-  }
-
-  .count {
-    margin: 0;
-    padding: 4px 8px 0;
-    text-align: right;
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
   }
 
   @media only screen and (max-width: 480px) {

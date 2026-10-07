@@ -262,7 +262,17 @@
     loading = false;
   });
 
-  async function sendDirty() {
+  // Config and inputs only -- deliberately not the rules table.
+  //
+  // The two halves of this tab have different save models. Config and
+  // inputs are sent to the FC as they're edited, so both saving and
+  // reverting work by (re-)sending whichever groups are dirty; revert
+  // gets its effect by restoring origConfig/origInputs first. The rules
+  // table stages its edits instead and sends nothing until save, so
+  // flushing it from here would make revert write out the very edits it
+  // was asked to discard -- and customRules.revert() would then read
+  // them back off the FC as the new original.
+  async function sendDirtyConfig() {
     if (dirtyGroups.config) {
       await MSP.promise(
         MSPCodes.MSP_SET_MIXER_CONFIG,
@@ -276,12 +286,12 @@
         );
       }
     }
-    await customRules?.sendDirty();
     dirtyGroups = {};
   }
 
   export async function onSave() {
-    await sendDirty();
+    await sendDirtyConfig();
+    await customRules?.sendDirty();
     if (needSave) {
       await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
       GUI.log($i18n.t("eepromSaved"));
@@ -302,7 +312,7 @@
   export async function onRevert() {
     FC.MIXER_CONFIG = Mixer.cloneConfig(origConfig);
     FC.MIXER_INPUTS = Mixer.cloneInputs(origInputs);
-    await sendDirty();
+    await sendDirtyConfig();
     await customRules?.revert();
     needSave = false;
     needReboot = false;
