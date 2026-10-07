@@ -2866,6 +2866,12 @@
     "receiverTelemetrySensor_ADJFUNC": {
         "message": "Adjustment Function"
     },
+    "receiverTelemetrySensor_SYSTEM_STATUS": {
+        "message": "System Status"
+    },
+    "receiverTelemetrySensor_SYSTEM_CONFIG": {
+        "message": "System Config"
+    },
     "receiverTelemetrySensor_DEBUG_0": {
         "message": "Debug 0"
     },
