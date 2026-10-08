@@ -3,7 +3,7 @@
 // own cache. vite.config.mjs stamps the version and commit into CACHE_VERSION,
 // so a new deploy drops the previous build's cache on activation.
 
-const CACHE_VERSION = "rotorflight-configurator-0.0.0-ed7f8cd1";
+const CACHE_VERSION = "rotorflight-configurator-0.0.0-1f6d0343";
 const APP_SHELL = [
   "./",
   "./index.html",
