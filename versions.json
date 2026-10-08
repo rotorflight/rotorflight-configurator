@@ -18,17 +18,6 @@
     },
     {
       "type": "pr",
-      "name": "476",
-      "path": "./pr/476/",
-      "branch": "feature/system-status-sensors",
-      "date": "2026-10-07T21:29:48Z",
-      "number": 476,
-      "title": "Add SYSTEM_STATUS and SYSTEM_CONFIG telemetry sensors",
-      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/476",
-      "draft": false
-    },
-    {
-      "type": "pr",
       "name": "475",
       "path": "./pr/475/",
       "branch": "feature/rpm-sensor-test",
