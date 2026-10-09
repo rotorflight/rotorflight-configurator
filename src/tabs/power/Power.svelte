@@ -20,6 +20,8 @@
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { reinitialiseConnection } from "@/js/serial_backend.js";
 
+  import BatteryProfileTable from "./BatteryProfileTable.svelte";
+
   const SMARTFUEL_SOURCE_KEYS = ["None", "Voltage", "Current", "Combined"];
 
   let loading = $state(true);
@@ -326,6 +328,12 @@
 {/snippet}
 
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
+  {#if FC.BATTERY_CONFIG.hasProfileCells}
+    <Section label="powerBatteryProfiles">
+      <BatteryProfileTable onActivate={activateBatteryProfile} />
+    </Section>
+  {/if}
+
   <div class="columns">
     <div class="column">
       <Section label="powerStateHead">
@@ -379,103 +387,108 @@
         </table>
       </Section>
 
-      <Section label="powerBatteryHead">
-        <Field
-          id="power-min-cell-voltage"
-          label="powerBatteryMinimumCellVoltage"
-        >
-          <NumberInput
+      {#if !FC.BATTERY_CONFIG.hasProfileCells}
+        <Section label="powerBatteryHead">
+          <Field
             id="power-min-cell-voltage"
-            bind:value={FC.BATTERY_CONFIG.vbatmincellvoltage}
-            min={1}
-            max={5}
-            step={0.01}
-          />
-        </Field>
-        <Field id="power-full-cell-voltage" label="powerBatteryFullCellVoltage">
-          <NumberInput
-            id="power-full-cell-voltage"
-            bind:value={FC.BATTERY_CONFIG.vbatfullcellvoltage}
-            min={1}
-            max={5}
-            step={0.01}
-          />
-        </Field>
-        <Field
-          id="power-warning-cell-voltage"
-          label="powerBatteryWarningCellVoltage"
-        >
-          <NumberInput
-            id="power-warning-cell-voltage"
-            bind:value={FC.BATTERY_CONFIG.vbatwarningcellvoltage}
-            min={1}
-            max={5}
-            step={0.01}
-          />
-        </Field>
-        <Field
-          id="power-max-cell-voltage"
-          label="powerBatteryMaximumCellVoltage"
-        >
-          <NumberInput
-            id="power-max-cell-voltage"
-            bind:value={FC.BATTERY_CONFIG.vbatmaxcellvoltage}
-            min={1}
-            max={5}
-            step={0.01}
-          />
-        </Field>
-        <Field id="power-cell-count" label="powerBatteryCellCount">
-          <NumberInput
-            id="power-cell-count"
-            bind:value={FC.BATTERY_CONFIG.cellCount}
-            min={0}
-            max={24}
-            step={1}
-          />
-        </Field>
-
-        {#if smartFuelSupported}
-          <div class="profile-capacities">
-            {#each Array.from({ length: 6 }) as _, i (i)}
-              <div
-                class={[
-                  "profile-capacity",
-                  i === FC.BATTERY_STATE.batteryProfile && "active",
-                ]}
-              >
-                <button
-                  type="button"
-                  class="profile-activate"
-                  onclick={() => activateBatteryProfile(i)}
-                >
-                  {$i18n.t("powerBatteryProfile", { 1: i + 1 })}
-                </button>
-                <div class="profile-capacity-input">
-                  <NumberInput
-                    id={`power-capacity-${i}`}
-                    bind:value={FC.BATTERY_CONFIG.capacities[i]}
-                    min={0}
-                    max={40000}
-                    step={10}
-                  />
-                  <span class="unit">mAh</span>
-                </div>
-              </div>
-            {/each}
-          </div>
-        {:else}
-          <Field id="power-capacity" label="powerBatteryCapacity">
+            label="powerBatteryMinimumCellVoltage"
+          >
             <NumberInput
-              id="power-capacity"
-              bind:value={FC.BATTERY_CONFIG.capacity}
-              min={0}
-              max={20000}
-              step={50}
+              id="power-min-cell-voltage"
+              bind:value={FC.BATTERY_CONFIG.vbatmincellvoltage}
+              min={1}
+              max={5}
+              step={0.01}
             />
           </Field>
-        {/if}
-      </Section>
+          <Field
+            id="power-full-cell-voltage"
+            label="powerBatteryFullCellVoltage"
+          >
+            <NumberInput
+              id="power-full-cell-voltage"
+              bind:value={FC.BATTERY_CONFIG.vbatfullcellvoltage}
+              min={1}
+              max={5}
+              step={0.01}
+            />
+          </Field>
+          <Field
+            id="power-warning-cell-voltage"
+            label="powerBatteryWarningCellVoltage"
+          >
+            <NumberInput
+              id="power-warning-cell-voltage"
+              bind:value={FC.BATTERY_CONFIG.vbatwarningcellvoltage}
+              min={1}
+              max={5}
+              step={0.01}
+            />
+          </Field>
+          <Field
+            id="power-max-cell-voltage"
+            label="powerBatteryMaximumCellVoltage"
+          >
+            <NumberInput
+              id="power-max-cell-voltage"
+              bind:value={FC.BATTERY_CONFIG.vbatmaxcellvoltage}
+              min={1}
+              max={5}
+              step={0.01}
+            />
+          </Field>
+          <Field id="power-cell-count" label="powerBatteryCellCount">
+            <NumberInput
+              id="power-cell-count"
+              bind:value={FC.BATTERY_CONFIG.cellCount}
+              min={0}
+              max={24}
+              step={1}
+            />
+          </Field>
+
+          {#if smartFuelSupported}
+            <div class="profile-capacities">
+              {#each Array.from({ length: 6 }) as _, i (i)}
+                <div
+                  class={[
+                    "profile-capacity",
+                    i === FC.BATTERY_STATE.batteryProfile && "active",
+                  ]}
+                >
+                  <button
+                    type="button"
+                    class="profile-activate"
+                    onclick={() => activateBatteryProfile(i)}
+                  >
+                    {$i18n.t("powerBatteryProfile", { 1: i + 1 })}
+                  </button>
+                  <div class="profile-capacity-input">
+                    <NumberInput
+                      id={`power-capacity-${i}`}
+                      bind:value={FC.BATTERY_CONFIG.capacities[i]}
+                      min={0}
+                      max={40000}
+                      step={10}
+                    />
+                    <span class="unit">mAh</span>
+                  </div>
+                </div>
+              {/each}
+            </div>
+          {:else}
+            <Field id="power-capacity" label="powerBatteryCapacity">
+              <NumberInput
+                id="power-capacity"
+                bind:value={FC.BATTERY_CONFIG.capacity}
+                min={0}
+                max={20000}
+                step={50}
+              />
+            </Field>
+          {/if}
+        </Section>
+      {/if}
 
       {#if smartFuelSupported}
         <Section label="powerSmartFuelHead" summary="powerSmartFuelSourceHelp">
@@ -801,7 +814,7 @@
     border: 1px solid var(--color-border);
 
     &.active {
-      border-color: var(--color-accent, var(--accent));
+      border-color: var(--color-accent-500);
     }
   }
 
@@ -813,8 +826,8 @@
   }
 
   .profile-capacity.active .profile-activate {
-    color: var(--color-text-inverse, #000);
-    background-color: var(--color-accent, var(--accent));
+    color: var(--color-accent-fg);
+    background-color: var(--color-accent-500);
   }
 
   .profile-capacity-input {

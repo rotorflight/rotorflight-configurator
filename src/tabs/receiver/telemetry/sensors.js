@@ -128,6 +128,13 @@ export const TELEMETRY_SENSORS = {
 
   RPM: 108,
   TEMP: 109,
+
+  // 110-117 (FBUS_SENSOR_1..8) not added here yet.
+  // 118, 119 unused: 120 and 121 match the same sensors in Wingflight.
+
+  // Packed status words, see the firmware's src/main/telemetry/status.h.
+  SYSTEM_STATUS: 120,
+  SYSTEM_CONFIG: 121,
 };
 
 // create reverse mapping
