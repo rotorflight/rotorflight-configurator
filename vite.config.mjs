@@ -7,6 +7,8 @@ import path from "node:path";
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 
+import { getAppIdentity } from "./release-channel.mjs";
+
 const commitHash = child_process
   .execSync("git rev-parse --short HEAD")
   .toString()
@@ -43,6 +45,9 @@ function getBasePath() {
 }
 
 const basePath = getBasePath();
+
+// Each release line installs as an app of its own; see release-channel.mjs.
+const identity = getAppIdentity(pkg);
 
 // Directories the app refers to by absolute URL (/images/..., /locales/...).
 // NW.js serves the app from its own root so those resolve as-is; under a web
@@ -234,6 +239,25 @@ function webBuildPlugins() {
       },
     },
     {
+      // Each deployed directory is an installable app of its own. Name it
+      // after its release line so installed versions can be told apart, and
+      // pin its id to its directory.
+      name: "web-stamp-manifest",
+      apply: "build",
+      async writeBundle() {
+        const file = path.resolve("bundle", "manifest.webmanifest");
+        const manifest = JSON.parse(await fs.readFile(file, "utf8"));
+        manifest.id = basePath;
+        manifest.name = identity.productName;
+        manifest.short_name = `${manifest.short_name} ${identity.channel}`;
+        await fs.writeFile(
+          file,
+          `${JSON.stringify(manifest, undefined, 2)}
+`,
+        );
+      },
+    },
+    {
       name: "web-stamp-service-worker",
       apply: "build",
       async writeBundle() {
@@ -339,6 +363,7 @@ export default defineConfig({
   },
   define: {
     __APP_VERSION__: JSON.stringify(pkg.version),
+    __APP_PRODUCT_NAME__: JSON.stringify(identity.productName),
     __BACKEND__: JSON.stringify(backend),
     __COMMIT_HASH__: JSON.stringify(commitHash),
   },
