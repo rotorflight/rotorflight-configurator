@@ -115,6 +115,11 @@ begin
     if not Exec('>', UninstPath, '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
     begin
         MsgBox(ExpandConstant('{cm:UninstallError, ' + SysErrorMessage(ResultCode) + '}'), mbError, MB_OK);
+    end
+    // The uninstaller ran, but failed or was cancelled.
+    else if ResultCode <> 0 then
+    begin
+        MsgBox(ExpandConstant('{cm:UninstallError, exit code ' + IntToStr(ResultCode) + '}'), mbError, MB_OK);
     end;
 end;
 

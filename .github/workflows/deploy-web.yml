@@ -131,6 +131,12 @@ jobs:
             DEPLOY_PATH="${{ github.ref_name }}"
             DEPLOY_PATH="$(echo "$DEPLOY_PATH" | sed -E 's#[^A-Za-z0-9._-]+#-#g')"
             UPDATE_LATEST="false"
+            # A branch can't take a directory the site reserves, such as a
+            # release line's /v2.3/ (a v2.3 branch can still be dispatched).
+            if [[ "$DEPLOY_PATH" =~ ^(latest|release|snapshot|pr|logos|v[0-9]+\.[0-9]+)$ ]]; then
+              echo "Refusing to deploy branch '${{ github.ref_name }}' over reserved path '$DEPLOY_PATH'"
+              exit 1
+            fi
           fi
 
           # The web build needs its absolute base path: the site's own path
@@ -383,11 +389,16 @@ jobs:
 
           # Never let a branch delete wipe the pinned/reserved directories.
           case "$DEPLOY_PATH" in
-            master|latest|release|snapshot|pr|logos|v[0-9]*|""|.|..)
+            master|latest|release|snapshot|pr|logos|""|.|..)
               echo "Refusing to remove reserved path '$DEPLOY_PATH'"
               exit 0
               ;;
           esac
+          # A release line's directory; a branch such as v2-fix is removed.
+          if [[ "$DEPLOY_PATH" =~ ^v[0-9]+\.[0-9]+$ ]]; then
+            echo "Refusing to remove release line '$DEPLOY_PATH'"
+            exit 0
+          fi
 
           cd pages
 
