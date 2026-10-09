@@ -98,6 +98,15 @@ jobs:
           if [ -n "${{ github.event.inputs.deployment_path }}" ]; then
             DEPLOY_PATH="${{ github.event.inputs.deployment_path }}"
             UPDATE_LATEST="false"
+            # A manual deploy to release/<ver> or snapshot/<ver> (e.g. from a
+            # maintenance branch) is that version, as a tag deploy would be:
+            # it gets the version number, its release line and /latest/.
+            if [[ "$DEPLOY_PATH" =~ ^(release|snapshot)/([0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?)$ ]]; then
+              VERSION="${BASH_REMATCH[2]}"
+              if [[ "$DEPLOY_PATH" =~ ^release/[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+                UPDATE_LATEST="true"
+              fi
+            fi
           elif [ "${{ github.ref_type }}" = "tag" ]; then
             TAG="${{ github.ref_name }}"
             if [[ "$TAG" == release/* ]]; then
