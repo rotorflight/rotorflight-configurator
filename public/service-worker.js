@@ -11,9 +11,6 @@
 
 const CACHE_PREFIX = `rotorflight-configurator@${self.registration.scope}@`;
 const CACHE_VERSION = `${CACHE_PREFIX}__APP_VERSION__-__COMMIT_HASH__`;
-// Caches from before they were named by scope. Nothing reads them any more,
-// so any build may drop them.
-const LEGACY_CACHE_PREFIX = "rotorflight-configurator-";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -38,9 +35,8 @@ self.addEventListener("activate", (event) => {
           cacheNames
             .filter(
               (cacheName) =>
-                cacheName.startsWith(LEGACY_CACHE_PREFIX) ||
-                (cacheName.startsWith(CACHE_PREFIX) &&
-                  cacheName !== CACHE_VERSION),
+                cacheName.startsWith(CACHE_PREFIX) &&
+                cacheName !== CACHE_VERSION,
             )
             .map((cacheName) => caches.delete(cacheName)),
         ),

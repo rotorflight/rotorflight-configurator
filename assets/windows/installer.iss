@@ -108,23 +108,6 @@ const
     // Before the release lines, every install had this AppId.
     LegacyAppId = '0f5aab69-da40-4828-8efc-34d4bbb075fe';
 
-function GetQuietUninstallerPath(AppId: String; var Version: String): String;
-var
-    RegKey: String;
-begin
-    Result := '';
-    Version := '';
-    RegKey := Format('%s\%s_is1', ['Software\Microsoft\Windows\CurrentVersion\Uninstall', AppId]);
-    if RegQueryStringValue(HKEY_LOCAL_MACHINE, RegKey, 'QuietUninstallString', Result) then
-    begin
-        RegQueryStringValue(HKEY_LOCAL_MACHINE, RegKey, 'DisplayVersion', Version);
-    end
-    else if RegQueryStringValue(HKEY_CURRENT_USER, RegKey, 'QuietUninstallString', Result) then
-    begin
-        RegQueryStringValue(HKEY_CURRENT_USER, RegKey, 'DisplayVersion', Version);
-    end;
-end;
-
 procedure Uninstall(UninstPath: String);
 var
     ResultCode: Integer;
@@ -141,25 +124,45 @@ begin
     Result := Pos('{#channel}.', Version) = 1;
 end;
 
-function InitializeSetup(): Boolean;
+// Uninstalls the install of AppId registered under RootKey, if there is one
+// and, when OnlyThisLine is set, it is of this release line.
+procedure UninstallFrom(RootKey: Integer; AppId: String; OnlyThisLine: Boolean);
 var
-    UninstPath, Version: String;
+    RegKey, UninstPath, Version: String;
+begin
+    RegKey := Format('%s\%s_is1', ['Software\Microsoft\Windows\CurrentVersion\Uninstall', AppId]);
+    if RegQueryStringValue(RootKey, RegKey, 'QuietUninstallString', UninstPath) then
+    begin
+        Version := '';
+        RegQueryStringValue(RootKey, RegKey, 'DisplayVersion', Version);
+        if (not OnlyThisLine) or IsThisLine(Version) then
+        begin
+            Uninstall(UninstPath);
+        end;
+    end;
+end;
+
+// x86 and x64 builds register in different registry views, so an install of
+// one may sit next to the other's: look in both, and for a per-user install.
+procedure UninstallEverywhere(AppId: String; OnlyThisLine: Boolean);
+begin
+    UninstallFrom(HKLM32, AppId, OnlyThisLine);
+    if IsWin64 then
+    begin
+        UninstallFrom(HKLM64, AppId, OnlyThisLine);
+    end;
+    UninstallFrom(HKCU, AppId, OnlyThisLine);
+end;
+
+function InitializeSetup(): Boolean;
 begin
     Result := True;
 
     // An earlier install of this line
-    UninstPath := GetQuietUninstallerPath('{#emit SetupSetting("AppId")}', Version);
-    if UninstPath <> '' then
-    begin
-        Uninstall(UninstPath);
-    end;
+    UninstallEverywhere('{#emit SetupSetting("AppId")}', False);
 
     // An install from before the release lines, if it is of this line
-    UninstPath := GetQuietUninstallerPath(LegacyAppId, Version);
-    if (UninstPath <> '') and IsThisLine(Version) then
-    begin
-        Uninstall(UninstPath);
-    end;
+    UninstallEverywhere(LegacyAppId, True);
 end;
 
 var

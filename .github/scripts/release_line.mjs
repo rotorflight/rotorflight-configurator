@@ -6,7 +6,7 @@
 //     The version's release line (2.3), or "dev".
 //
 //   release_line.mjs follows <channel>
-//     The version /v<channel>/ should hold, given the builds deployed under
+//     The build /v<channel>/ should hold (e.g. release/2.3.1), given the builds deployed under
 //     release/ and snapshot/ (run from inside the gh-pages checkout). Until
 //     the line has a release, that is its newest snapshot or release
 //     candidate; from then on, its newest release. So the snapshots replace
@@ -14,9 +14,11 @@
 //     candidate never takes the line back from a release.
 //
 //   release_line.mjs latest
-//     The version /latest/ should hold: the newest release of any line.
+//     The build /latest/ should hold: the newest release of any line.
 //
-// Prints nothing when there is no such version.
+// Prints the build's directory, not just its version, as release/2.3.0 and
+// snapshot/2.3.0 could both exist. Prints nothing when there is no such
+// build.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -39,6 +41,7 @@ function deployed(kind) {
       )
       .map((version) => ({
         version,
+        path: `${kind}/${version}`,
         release: kind === "release" && !isPrerelease(version),
       }));
   } catch {
@@ -46,11 +49,17 @@ function deployed(kind) {
   }
 }
 
+// Of two builds of one version, the release wins over the snapshot.
 function newest(builds) {
   return builds
-    .map((build) => build.version)
-    .sort(compareVersions)
-    .at(-1);
+    .slice()
+    .sort(
+      (a, b) =>
+        compareVersions(a.version, b.version) ||
+        Number(a.path.startsWith("release/")) -
+          Number(b.path.startsWith("release/")),
+    )
+    .at(-1)?.path;
 }
 
 const [command, arg] = process.argv.slice(2);

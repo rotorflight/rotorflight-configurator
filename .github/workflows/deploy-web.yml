@@ -298,14 +298,14 @@ jobs:
             # a re-run of 2.3.0 after 2.3.1, or a snapshot after the release,
             # take /v2.3/ back. See release_line.mjs.
             if [ "$UPDATE_LATEST" = "true" ] \
-              && [ "$(node ../.github/scripts/release_line.mjs latest)" = "$VERSION" ]; then
+              && [ "$(node ../.github/scripts/release_line.mjs latest)" = "$DEPLOY_PATH" ]; then
               rm -rf latest
               mkdir -p latest
               cp -R ../bundle-latest/. latest/
             fi
 
             if [ -n "$CHANNEL_PATH" ] \
-              && [ "$(node ../.github/scripts/release_line.mjs follows "${CHANNEL_PATH#v}")" = "$VERSION" ]; then
+              && [ "$(node ../.github/scripts/release_line.mjs follows "${CHANNEL_PATH#v}")" = "$DEPLOY_PATH" ]; then
               rm -rf "$CHANNEL_PATH"
               mkdir -p "$CHANNEL_PATH"
               cp -R ../bundle-channel/. "$CHANNEL_PATH/"
