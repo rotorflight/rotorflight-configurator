@@ -88,18 +88,27 @@ mount(StatusBar, { target: document.querySelector("#status-bar") });
 mount(Logo, { target: document.querySelector("#logo-desktop") });
 mount(Logo, { target: document.querySelector("#logo-mobile") });
 
+// Names the browser tab (and on desktop the window) after the release line.
+document.title ||= __APP_PRODUCT_NAME__;
+
 if (__BACKEND__ === "web") {
   const { initBrowserCompat } = await import("@/js/browser-compat.js");
   initBrowserCompat({ showBanner: true });
 
   if (import.meta.env.PROD && "serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      // The app page is src/main.html, one level below the deployed root.
-      const base = import.meta.env.BASE_URL;
+    // The app page is src/main.html, one level below the deployed root.
+    const base = import.meta.env.BASE_URL;
+    const register = () =>
       navigator.serviceWorker.register(`${base}service-worker.js`, {
         scope: base,
       });
-    });
+    // The await above usually lets the page finish loading first, and a load
+    // listener added after that never fires.
+    if (document.readyState === "complete") {
+      register();
+    } else {
+      window.addEventListener("load", register);
+    }
   }
 }
 
