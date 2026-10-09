@@ -23,14 +23,23 @@ mount(StatusBar, { target: document.querySelector("#status-bar") });
 mount(Logo, { target: document.querySelector("#logo-desktop") });
 mount(Logo, { target: document.querySelector("#logo-mobile") });
 
+// Names the browser tab (and on desktop the window) after the release line.
+document.title ||= __APP_PRODUCT_NAME__;
+
 if (__BACKEND__ === "web") {
   const { initBrowserCompat } = await import("@/js/browser-compat.js");
   initBrowserCompat({ showBanner: true });
 
   if (import.meta.env.PROD && "serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
+    const register = () =>
       navigator.serviceWorker.register("./service-worker.js", { scope: "./" });
-    });
+    // The await above usually lets the page finish loading first, and a load
+    // listener added after that never fires.
+    if (document.readyState === "complete") {
+      register();
+    } else {
+      window.addEventListener("load", register);
+    }
   }
 }
 

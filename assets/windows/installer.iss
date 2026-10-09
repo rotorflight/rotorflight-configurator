@@ -3,20 +3,28 @@
 ; ------------------------------------------
 ; It receives from the command line with /D the parameters:
 ; version
+; channel (the release line, e.g. 2.3, or dev; see release-channel.mjs)
 ; archName
 ; archAllowed
 ; archInstallIn64bit
 ; sourceFolder
 ; targetFolder
 
-#define ApplicationName "Rotorflight Configurator"
+; Every release line installs side by side with the others: it has its own
+; AppId, folder and shortcuts, and only replaces an install of the same line,
+; including one from before the lines (see InitializeSetup).
+#if channel == "dev"
+  #define ApplicationName "Rotorflight Configurator (dev)"
+#else
+  #define ApplicationName "Rotorflight Configurator " + channel
+#endif
 #define CompanyName "The Rotorflight open source project"
 #define CompanyUrl "https://github.com/rotorflight/"
 #define ExecutableFileName "rotorflight-configurator.exe"
 #define GroupName "Rotorflight"
 #define InstallerFileName "rotorflight-configurator-installer_" + version + "_" + archName
 #define SourcePath "..\..\" + sourceFolder
-#define TargetFolderName "Rotorflight-Configurator"
+#define TargetFolderName "Rotorflight-Configurator-" + channel
 #define UpdatesUrl "https://github.com/rotorflight/rotorflight-configurator/releases"
 
 [CustomMessages]
@@ -69,7 +77,7 @@ Filename: "pnputil.exe"; Parameters: "/add-driver ""{tmp}\stm32\STM32Bootloader.
 Filename: {app}\{cm:AppName}.exe; Description: {cm:LaunchProgram,{cm:AppName}}; Flags: nowait postinstall skipifsilent
 
 [Setup]
-AppId=0f5aab69-da40-4828-8efc-34d4bbb075fe
+AppId=rotorflight-configurator-{#channel}
 AppName={#ApplicationName}
 AppPublisher={#CompanyName}
 AppPublisherURL={#CompanyUrl}
@@ -96,36 +104,70 @@ WizardStyle=modern
 PrivilegesRequired=admin
 
 [Code]
-function GetQuietUninstallerPath(): String;
+const
+    // Before the release lines, every install had this AppId.
+    LegacyAppId = '0f5aab69-da40-4828-8efc-34d4bbb075fe';
+
+procedure Uninstall(UninstPath: String);
 var
-    RegKey: String;
+    ResultCode: Integer;
 begin
-    Result := '';
-    RegKey := Format('%s\%s_is1', ['Software\Microsoft\Windows\CurrentVersion\Uninstall', '{#emit SetupSetting("AppId")}']);
-    if not RegQueryStringValue(HKEY_LOCAL_MACHINE, RegKey, 'QuietUninstallString', Result) then
+    if not Exec('>', UninstPath, '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
     begin
-        RegQueryStringValue(HKEY_CURRENT_USER, RegKey, 'QuietUninstallString', Result);
+        MsgBox(ExpandConstant('{cm:UninstallError, ' + SysErrorMessage(ResultCode) + '}'), mbError, MB_OK);
+    end
+    // The uninstaller ran, but failed or was cancelled.
+    else if ResultCode <> 0 then
+    begin
+        MsgBox(ExpandConstant('{cm:UninstallError, exit code ' + IntToStr(ResultCode) + '}'), mbError, MB_OK);
     end;
 end;
 
-function InitializeSetup(): Boolean;
-var
-    ResultCode: Integer;
-    UninstPath : String;
+// Whether a version is of this release line; see release-channel.mjs.
+function IsThisLine(Version: String): Boolean;
 begin
+    Result := Pos('{#channel}.', Version) = 1;
+end;
 
-    Result := True;
-
-    // Search for new Inno Setup installations
-    UninstPath := GetQuietUninstallerPath();
-    if UninstPath <> '' then
+// Uninstalls the install of AppId registered under RootKey, if there is one
+// and, when OnlyThisLine is set, it is of this release line.
+procedure UninstallFrom(RootKey: Integer; AppId: String; OnlyThisLine: Boolean);
+var
+    RegKey, UninstPath, Version: String;
+begin
+    RegKey := Format('%s\%s_is1', ['Software\Microsoft\Windows\CurrentVersion\Uninstall', AppId]);
+    if RegQueryStringValue(RootKey, RegKey, 'QuietUninstallString', UninstPath) then
     begin
-        if not Exec('>', UninstPath, '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
+        Version := '';
+        RegQueryStringValue(RootKey, RegKey, 'DisplayVersion', Version);
+        if (not OnlyThisLine) or IsThisLine(Version) then
         begin
-            // Result := False; // Set to False to abort the installation
-            MsgBox(ExpandConstant('{cm:UninstallError, ' + SysErrorMessage(ResultCode) + '}'), mbError, MB_OK);
+            Uninstall(UninstPath);
         end;
     end;
+end;
+
+// x86 and x64 builds register in different registry views, so an install of
+// one may sit next to the other's: look in both, and for a per-user install.
+procedure UninstallEverywhere(AppId: String; OnlyThisLine: Boolean);
+begin
+    UninstallFrom(HKLM32, AppId, OnlyThisLine);
+    if IsWin64 then
+    begin
+        UninstallFrom(HKLM64, AppId, OnlyThisLine);
+    end;
+    UninstallFrom(HKCU, AppId, OnlyThisLine);
+end;
+
+function InitializeSetup(): Boolean;
+begin
+    Result := True;
+
+    // An earlier install of this line
+    UninstallEverywhere('{#emit SetupSetting("AppId")}', False);
+
+    // An install from before the release lines, if it is of this line
+    UninstallEverywhere(LegacyAppId, True);
 end;
 
 var

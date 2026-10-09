@@ -6,13 +6,21 @@ name: Deploy Web App
 #
 #   master              -> /master/
 #   feature/foo etc.    -> /feature-foo/
-#   release/<ver> tag   -> /release/<ver>/  (and /latest/ for plain x.y.z)
-#   snapshot/<ver> tag  -> /snapshot/<ver>/
+#   release/<ver> tag   -> /release/<ver>/  (and /v<x.y>/; for plain x.y.z
+#                          also /latest/)
+#   snapshot/<ver> tag  -> /snapshot/<ver>/  (and /v<x.y>/)
 #   pull request        -> /pr/<number>/  (pr-preview-*.yml, "preview" label)
 #
 # A branch deploy also gets /<dir>.json beside it naming the branch and its
 # open PR, if any (.github/scripts/branch_info.sh; pr-branch-info.yml keeps
 # it current between pushes). Deleting a branch removes both again.
+#
+# Each release line is installed as an app of its own (see
+# release-channel.mjs), and /v<x.y>/ is the directory to install it from.
+# Until the line is released it follows the line's snapshots and release
+# candidates; from then on its releases. It never moves on to the next line,
+# which goes with different firmware. /latest/ follows the newest release of
+# any line.
 #
 # This only updates the gh-pages branch; publish-pages.yml deploys it to
 # GitHub Pages once this run completes.
@@ -86,16 +94,26 @@ jobs:
         id: path
         shell: bash
         run: |
+          VERSION=""
           if [ -n "${{ github.event.inputs.deployment_path }}" ]; then
             DEPLOY_PATH="${{ github.event.inputs.deployment_path }}"
             UPDATE_LATEST="false"
+            # A manual deploy to release/<ver> or snapshot/<ver> (e.g. from a
+            # maintenance branch) is that version, as a tag deploy would be:
+            # it gets the version number, its release line and /latest/.
+            if [[ "$DEPLOY_PATH" =~ ^(release|snapshot)/([0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?)$ ]]; then
+              VERSION="${BASH_REMATCH[2]}"
+              if [[ "$DEPLOY_PATH" =~ ^release/[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+                UPDATE_LATEST="true"
+              fi
+            fi
           elif [ "${{ github.ref_type }}" = "tag" ]; then
             TAG="${{ github.ref_name }}"
             if [[ "$TAG" == release/* ]]; then
               VERSION="${TAG#release/}"
               DEPLOY_PATH="release/$VERSION"
               # Only plain x.y.z releases become "latest" -- release
-              # candidates (x.y.z-RCn) stay under release/ only.
+              # candidates (x.y.z-RCn) don't.
               if [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
                 UPDATE_LATEST="true"
               else
@@ -113,6 +131,12 @@ jobs:
             DEPLOY_PATH="${{ github.ref_name }}"
             DEPLOY_PATH="$(echo "$DEPLOY_PATH" | sed -E 's#[^A-Za-z0-9._-]+#-#g')"
             UPDATE_LATEST="false"
+            # A branch can't take a directory the site reserves, such as a
+            # release line's /v2.3/ (a v2.3 branch can still be dispatched).
+            if [[ "$DEPLOY_PATH" =~ ^(latest|release|snapshot|pr|logos|v[0-9]+\.[0-9]+)$ ]]; then
+              echo "Refusing to deploy branch '${{ github.ref_name }}' over reserved path '$DEPLOY_PATH'"
+              exit 1
+            fi
           fi
 
           # The web build needs its absolute base path: the site's own path
@@ -131,6 +155,7 @@ jobs:
           fi
 
           echo "deploy_path=$DEPLOY_PATH" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "update_latest=$UPDATE_LATEST" >> "$GITHUB_OUTPUT"
           echo "branch_info=$BRANCH_INFO" >> "$GITHUB_OUTPUT"
           echo "site_path=$SITE_PATH" >> "$GITHUB_OUTPUT"
@@ -175,6 +200,23 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # The release line (and so the app's name and its settings) comes from
+      # the version, as in the desktop builds.
+      - name: Update version number
+        if: steps.path.outputs.version != ''
+        run: make version SEMVER=${{ steps.path.outputs.version }}
+
+      - name: Find the release line
+        id: line
+        if: steps.path.outputs.version != ''
+        shell: bash
+        run: |
+          CHANNEL="$(node .github/scripts/release_line.mjs channel "${{ steps.path.outputs.version }}")"
+          if [ "$CHANNEL" != "dev" ]; then
+            echo "channel_path=v$CHANNEL" >> "$GITHUB_OUTPUT"
+          fi
+          echo "Release line: $CHANNEL"
+
       - name: Build web app
         env:
           VITE_APP_BACKEND: web
@@ -194,6 +236,18 @@ jobs:
           mv bundle bundle-release
           pnpm exec vite build
           mv bundle bundle-latest
+          mv bundle-release bundle
+
+      - name: Build web app for the release line
+        if: steps.line.outputs.channel_path != ''
+        env:
+          VITE_APP_BACKEND: web
+          VITE_APP_BASE: ${{ steps.path.outputs.site_path }}/${{ steps.line.outputs.channel_path }}/
+          VITE_APP_BUILD_LABEL: ${{ github.ref_name }}
+        run: |
+          mv bundle bundle-release
+          pnpm exec vite build
+          mv bundle bundle-channel
           mv bundle-release bundle
 
       - name: Ensure gh-pages branch exists
@@ -223,6 +277,8 @@ jobs:
         run: |
           DEPLOY_PATH="${{ steps.path.outputs.deploy_path }}"
           UPDATE_LATEST="${{ steps.path.outputs.update_latest }}"
+          VERSION="${{ steps.path.outputs.version }}"
+          CHANNEL_PATH="${{ steps.line.outputs.channel_path }}"
           BRANCH_INFO="${{ steps.path.outputs.branch_info }}"
 
           cd pages
@@ -243,10 +299,25 @@ jobs:
               cp "$RUNNER_TEMP/branch-info.json" "$DEPLOY_PATH.json"
             fi
 
-            if [ "$UPDATE_LATEST" = "true" ]; then
+            # /latest/ and /v<x.y>/ only move forward: a patch for an older
+            # line (2.2.5 after 2.3.0) must not take /latest/ back to it, nor
+            # a re-run of 2.3.0 after 2.3.1, or a snapshot after the release,
+            # take /v2.3/ back. See release_line.mjs.
+            if [ "$UPDATE_LATEST" = "true" ] \
+              && [ "$(node ../.github/scripts/release_line.mjs latest)" = "$DEPLOY_PATH" ]; then
               rm -rf latest
               mkdir -p latest
               cp -R ../bundle-latest/. latest/
+            fi
+
+            if [ -n "$CHANNEL_PATH" ] \
+              && [ "$(node ../.github/scripts/release_line.mjs follows "${CHANNEL_PATH#v}")" = "$DEPLOY_PATH" ]; then
+              rm -rf "$CHANNEL_PATH"
+              mkdir -p "$CHANNEL_PATH"
+              cp -R ../bundle-channel/. "$CHANNEL_PATH/"
+              # Which version the line holds, for the landing page.
+              printf '{"version": "%s", "date": "%s"}\n' \
+                "$VERSION" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$CHANNEL_PATH.json"
             fi
 
             # Landing page + its logos, then the build index it reads.
@@ -280,6 +351,9 @@ jobs:
           echo "Deployment: $PAGES_URL/$DEPLOY_PATH/"
           if [ "${{ steps.path.outputs.update_latest }}" = "true" ]; then
             echo "Latest stable: $PAGES_URL/latest/"
+          fi
+          if [ -n "${{ steps.line.outputs.channel_path }}" ]; then
+            echo "Release line: $PAGES_URL/${{ steps.line.outputs.channel_path }}/"
           fi
           echo "### Deployed to [$PAGES_URL/$DEPLOY_PATH/]($PAGES_URL/$DEPLOY_PATH/)" >> "$GITHUB_STEP_SUMMARY"
 
@@ -320,6 +394,11 @@ jobs:
               exit 0
               ;;
           esac
+          # A release line's directory; a branch such as v2-fix is removed.
+          if [[ "$DEPLOY_PATH" =~ ^v[0-9]+\.[0-9]+$ ]]; then
+            echo "Refusing to remove release line '$DEPLOY_PATH'"
+            exit 0
+          fi
 
           cd pages
 
