@@ -1,10 +1,24 @@
 {
   "entries": [
     {
+      "type": "stable",
+      "name": "Latest Stable",
+      "path": "./latest/",
+      "notes": "Recommended for all users"
+    },
+    {
       "type": "master",
       "name": "master",
       "path": "./master/",
       "notes": "Latest development build"
+    },
+    {
+      "type": "line",
+      "name": "2.3",
+      "path": "./v2.3/",
+      "tag": "2.3.0",
+      "date": "2026-10-09T10:36:46Z",
+      "notes": "Follows every 2.3.x release. Install it as an app to keep it next to other versions."
     },
     {
       "type": "release",
