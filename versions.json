@@ -18,6 +18,13 @@
     },
     {
       "type": "branch",
+      "name": "RF-2.2.x",
+      "path": "./RF-2.2.x/",
+      "branch": "RF-2.2.x",
+      "date": "2026-10-09T10:30:11Z"
+    },
+    {
+      "type": "branch",
       "name": "RF-2.3.x",
       "path": "./RF-2.3.x/",
       "branch": "RF-2.3.x",

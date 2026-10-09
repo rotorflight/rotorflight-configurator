@@ -1,0 +1,251 @@
+#tab-adjustments-templates {
+    display: none;
+}
+
+.tab-adjustments .adjustments {
+    width: 100%;
+    border-spacing: 0px;
+    background-color: #e4e4e4;
+}
+
+.tab-adjustments .adjustments thead td {
+    text-align: center;
+    white-space: nowrap;
+    padding: 10px 10px;
+    background-color: var(--quietHeader);
+    color:  var(--quietText);
+}
+
+.tab-adjustments .adjustments thead td:first-child {
+    border-top-left-radius: 5px;
+}
+
+.tab-adjustments .adjustments thead td:last-child {
+    border-top-right-radius: 5px;
+}
+
+.tab-adjustments .adjustments tbody:nth-child(odd) {
+    background-color: #f0f0f0;
+}
+
+.tab-adjustments .adjustments tbody tr:nth-child(1) {
+    background-color: var(--sideBackground);
+    height: 5px;
+}
+
+.tab-adjustments .adjustments tbody tr:nth-child(3) td {
+    border-top: 1px solid var(--boxBackground);
+}
+
+.tab-adjustments .adjustments tbody tr:nth-child(4) td {
+    border-top: 1px solid var(--boxBackground);
+}
+
+.tab-adjustments .adjustmentBody select {
+    border-radius: 3px;
+    border: 1px solid var(--subtleAccent);
+    padding: 1px 0;
+}
+
+.tab-adjustments .adjustmentBody select.channel {
+    width: 100%;
+}
+
+.tab-adjustments .adjustmentBody select.function {
+    width: 100%;
+}
+
+.tab-adjustments .adjustmentBody input {
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+    accent-color: var(--accent);
+    text-align: right;
+}
+
+
+.tab-adjustments .adjustmentBody td {
+    vertical-align: top;
+}
+
+.tab-adjustments .adjustmentBody td.adjType {
+    width: 90px;
+    height: 50px;
+    padding: 15px;
+    border-right: 1px solid var(--boxBackground);
+}
+
+.tab-adjustments .adjustmentBody .adjTypeOption {
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+}
+
+.tab-adjustments .adjustmentBody .adjTypeOptonInput {
+    vertical-align: middle;
+    padding: 0 10px;
+}
+
+.tab-adjustments .adjustmentBody .adjTypeOptionLabel {
+    padding: 0 5px;
+}
+
+.tab-adjustments .adjustmentBody td.adjFunction {
+    padding: 12px 15px;
+}
+
+.tab-adjustments .adjustmentBody td.adjChannels {
+    width: 80px;
+    padding: 5px 15px;
+}
+
+.tab-adjustments .adjustmentBody td.adjSliders {
+    padding: 12px 8px;
+}
+
+.tab-adjustments .adjustmentBody td.adjRanges {
+    width: 145px;
+    padding: 12px 8px;
+}
+
+.tab-adjustments .adjustmentBody .adjRangeLine {
+    float: right;
+    margin-top: 3px;
+    margin-bottom: 8px;
+}
+
+.tab-adjustments .adjustmentBody .range-input {
+    width: 60px;
+    height: 18px;
+    line-height:18px;
+    font-size: 12px;
+    text-align: right;
+}
+
+.tab-adjustments .adjustmentBody .step-label {
+    display: inline-block;
+    text-align: right;
+    margin-right: 15px;
+}
+
+.tab-adjustments .adjustmentBody .range-dash {
+    display: inline-block;
+    padding: 0 3px;
+}
+
+.tab-adjustments .adjustmentBody .channel-label {
+    margin: 3px 1px 6px 1px;
+}
+
+.tab-adjustments .adjustmentBody .value-line {
+    margin: 5px 0;
+    float: right;
+}
+
+.tab-adjustments .adjustmentBody .value-label {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.tab-adjustments .adjustmentBody .value-box {
+    width: 90px;
+    padding: 2px 4px;
+    text-align: right;
+    font-size: 13px;
+    font-family: monospace;
+    color: #f0f0f0;
+    background: #505050;
+    border: 1px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.tab-adjustments .adjustmentBody .function-value {
+    margin: 0;
+}
+
+.tab-adjustments .adjustmentBody .channel-value {
+    margin: 5px 0;
+}
+
+.tab-adjustments .pips-channel-range {
+    margin-bottom: 35px;
+}
+
+.tab-adjustments .adj-slider {
+    height: 16px;
+}
+
+.tab-adjustments .ena-slider {
+    margin-top: 5px;
+    margin-bottom: 35px;
+}
+
+.tab-adjustments .inc-slider {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.tab-adjustments .noUi-connect,
+.tab-adjustments .noUi-origin {
+    -webkit-transition: transform 0ms;
+    transition: transform 0ms;
+}
+
+.tab-adjustments .noUi-horizontal .noUi-handle {
+    top: -7px;
+}
+
+.tab-adjustments .dec-slider {
+    margin-top: 5px;
+    margin-bottom: 35px;
+}
+
+.tab-adjustments .val-slider {
+    margin-top: 5px;
+    margin-bottom: 35px;
+}
+
+.tab-adjustments .adjSliders .marker {
+    position: absolute;
+    left: 50%;
+    top: 24px;
+    height: 12px;
+    width: 6px;
+    margin-left: -3px;
+    border-radius: 2px;
+    z-index: 1000;
+}
+
+.tab-adjustments .handle-icon {
+    font-size: 9px;
+    line-height: 28px;
+    text-align: center;
+}
+
+.tab-adjustments .adjSliders .noUi-marker-large {
+    height: 10px;
+}
+
+.tab-adjustments .adjSliders .noUi-value-horizontal {
+    padding-top: 4px;
+}
+
+.tab-adjustments .adjSliders .handle-icon:before,
+.tab-adjustments .adjSliders .handle-icon:after {
+    height: 6px;
+    top: 20px;
+}
+
+.tab-adjustments .adjSliders .marker {
+    background: rgba(255, 0, 0, 0.6);
+}
+
+@media all and (max-width: 575px) {
+    .tab-adjustments .overflow {
+        overflow: auto;
+    }
+
+    .tab-adjustments .adjSliders {
+        min-width: 300px;
+    }
+}
