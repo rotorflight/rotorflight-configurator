@@ -1,6 +1,6 @@
 {
-  "name": "Rotorflight Configurator",
-  "short_name": "Rotorflight",
+  "name": "Rotorflight Configurator 2.2",
+  "short_name": "Rotorflight 2.2",
   "description": "Configure Rotorflight flight controllers from the browser.",
   "start_url": "./",
   "scope": "./",
@@ -20,5 +20,6 @@
       "type": "image/png",
       "purpose": "any"
     }
-  ]
+  ],
+  "id": "/release/2.2.1/"
 }

@@ -21,6 +21,14 @@
       "notes": "Follows every 2.3.x release. Install it as an app to keep it next to other versions."
     },
     {
+      "type": "line",
+      "name": "2.2",
+      "path": "./v2.2/",
+      "tag": "2.2.1",
+      "date": "2026-10-09T10:37:01Z",
+      "notes": "Follows every 2.2.x release. Install it as an app to keep it next to other versions."
+    },
+    {
       "type": "release",
       "name": "2.3.0",
       "path": "./release/2.3.0/"
