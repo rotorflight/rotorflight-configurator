@@ -17,6 +17,13 @@
       "path": "./release/2.2.1/"
     },
     {
+      "type": "branch",
+      "name": "RF-2.3.x",
+      "path": "./RF-2.3.x/",
+      "branch": "RF-2.3.x",
+      "date": "2026-10-09T10:30:00Z"
+    },
+    {
       "type": "pr",
       "name": "475",
       "path": "./pr/475/",

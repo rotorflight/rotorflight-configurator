@@ -1,0 +1,322 @@
+
+.tab-profiles input[type="number"]::-webkit-inner-spin-button {
+    border: 0;
+}
+
+.tab-profiles .tab-container {
+    border-bottom: 3px solid var(--accent);
+    border-right-width: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: start;
+    width: 100%;
+}
+
+.tab-profiles .tab-container > div {
+    background-color: #2e2e2e;
+    padding: 6px 12px;
+    border-right: 1px solid white;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.tab-profiles .tab-container > div:first-child {
+    border-top-left-radius: 4px;
+}
+
+.tab-profiles .tab-container > div:last-child {
+    border-top-right-radius: 4px;
+}
+
+.tab-profiles .tab-container > div a {
+    display: block;
+    color: #999999;
+}
+
+.tab-profiles .tab-container > div.active,
+.tab-profiles .tab-container > div.active a {
+    background-color: var(--accent);
+    color: #000;
+    transition: none;
+}
+
+.tab-profiles .tab-area {
+    width: calc(100% - 22px);
+    position: relative;
+    padding: 10px;
+    border: 1px solid var(--subtleAccent);
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top: 0 solid var(--subtleAccent);
+    background: #f9f9f9;
+}
+
+.tab-profiles .subtab {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.tab-profiles .subtab .cf_column {
+    min-width: 472px;
+    flex: 1;
+}
+
+.tab-profiles .gui_box {
+    margin-bottom: 5px;
+    padding-bottom: 4px;
+    display: table;
+}
+
+.tab-profiles .gui_box span {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 22px;
+    color: #7d7d7d;
+}
+
+.tab-profiles .gui_box_titlebar {
+    font-size: 12px;
+    font-weight: normal;
+    margin-bottom: 1px;
+}
+
+.tab-profiles .pid_gains .gui_box_titlebar {
+    margin-bottom: 0;
+}
+
+.tab-profiles table input,
+.tab-profiles table select {
+    display: block;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: right;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+}
+
+.tab-profiles table {
+    width: 100%;
+    min-width: 130px;
+    float: left;
+    margin: 0;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.tab-profiles table,
+.tab-profiles table td {
+    padding: 1px;
+    border-bottom: 0;
+}
+
+.tab-profiles table tr td:first-child {
+    text-align: left;
+    padding-left: 5px;
+}
+
+.tab-profiles table tr td:last-child {
+    border-right: 0;
+}
+
+
+.tab-profiles .pid_table tr.pid_titlebar th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 16px;
+    height: 22px;
+}
+
+html[data-theme="light"] .tab-profiles .pid_table tr.pid_titlebar th {
+    background-color: hsl(160, 2%, 76%);
+}
+
+html[data-theme="dark"] .tab-profiles .pid_table tr.pid_titlebar th {
+    color: white;
+    background-color: hsl(160, 2%, 40%);
+}
+
+.tab-profiles .pid_table td.pid_data {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.tab-profiles .settings_table tr {
+    height: 26px;
+}
+
+.tab-profiles .settings_table tr.border {
+    border-bottom: 1px dotted var(--superSubtleAccent);
+}
+
+.tab-profiles .settings_table tr:last-child {
+    border-bottom: none !important;
+}
+
+.tab-profiles .settings_table td {
+    padding-left: 5px;
+    padding-right: 8px;
+    padding-bottom: 2px;
+}
+
+.tab-profiles .settings_table td:first-child {
+    width: 80px;
+    text-align: center;
+    vertical-align: top;
+    padding-top: 2px;
+    border-right: 1px dotted var(--superSubtleAccent);
+}
+
+.tab-profiles .settings_table td:last-child {
+    width: 100%;
+}
+
+.tab-profiles .settings_table .suboption {
+    margin-left: 2%;
+    display: flex;
+    flex-flow: row wrap-reverse;
+    align-items: center;
+    padding-bottom: 2px;
+    font-size: 11px;
+}
+
+.tab-profiles .settings_table .suboption select {
+    width: 80px;
+    height: 20px;
+    text-align: right;
+    font-size: 1.1em;
+    box-sizing: border-box;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+    background-color: white;
+}
+
+.tab-profiles .settings_table .suboption input {
+    width: 80px;
+    height: 20px;
+    box-sizing: border-box;
+    border: 1px solid var(--subtleAccent);
+    border-radius: 3px;
+    background-color: white;
+}
+
+.tab-profiles .settings_table .suboption label {
+    margin-left: 5px;
+}
+
+.tab-profiles .gov_config .note {
+    margin-bottom: 2px;
+    text-align: left;
+}
+
+.tab-profiles .ROLL .axis_title {
+    background-color: #FF8080;
+}
+
+.tab-profiles .PITCH .axis_title {
+    background-color: #80FF80;
+}
+
+.tab-profiles .YAW .axis_title {
+    background-color: #8080FF;
+}
+
+
+.tab-profiles .spacer_left {
+    padding-left: 0;
+    float: right;
+    width: calc(100% - 20px)
+}
+
+.tab-profiles .resetbtn {
+    width: 150px;
+    margin-right: 10px;
+}
+
+.tab-profiles .copybtn {
+    width: 150px;
+    margin-right:10px;
+}
+
+
+.tab-profiles dialog {
+    width: 40em;
+    border-radius: 5px;
+}
+
+.tab-profiles dialog .buttons {
+    position: static;
+    margin-top: 2em;
+}
+
+.tab-profiles dialog h3 {
+    margin-bottom: 0.5em;
+}
+
+.tab-profiles dialog select {
+    border: 1px solid var(--subtleAccent);
+    margin-left: 5px;
+    width: 120px;
+}
+
+@media all and (max-width: 575px) {
+    .tab-profiles dialog {
+        width: calc(100% - 2em);
+        border-radius: unset;
+    }
+}
+
+
+@media only screen and (max-width: 1205px) {
+    .tab-profiles .subtab .spacer_left {
+        width: 100%;
+    }
+}
+
+.tab-profiles .pid_titlebar .name-helpicon-flex {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.tab-profiles .pid_titlebar .name-helpicon-flex .helpicon {
+    margin-top: 1px;
+    margin-right: 0;
+}
+
+.tab-profiles .content_wrapper_header {
+    display: flex;
+}
+
+.tab-profiles .content_wrapper_header_btns {
+    margin-left: auto;
+}
+
+@media all and (max-width: 575px) {
+    .tab-profiles .content_wrapper_header_btns {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .tab-profiles .content_wrapper_header_btns > * a {
+        padding: 16px;
+    }
+
+    .tab-profiles .tab-container > div {
+        width: calc(100% / 3);
+    }
+
+    .tab-profiles .subtab .cf_column {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    .tab-profiles .spacer_left {
+        width: 100%;
+    }
+}
