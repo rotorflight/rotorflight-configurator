@@ -1,6 +1,6 @@
 {
-  "name": "Rotorflight Configurator",
-  "short_name": "Rotorflight",
+  "name": "Rotorflight Configurator (dev)",
+  "short_name": "Rotorflight dev",
   "description": "Configure Rotorflight flight controllers from the browser.",
   "start_url": "./",
   "scope": "./",
@@ -20,5 +20,6 @@
       "type": "image/png",
       "purpose": "any"
     }
-  ]
+  ],
+  "id": "/master/"
 }

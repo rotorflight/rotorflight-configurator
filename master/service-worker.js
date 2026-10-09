@@ -1,9 +1,16 @@
 // Web build only (registered from main.svelte.js). Scope is the directory it is
-// served from, so each deployed build (/master/, /latest/, a release) keeps its
-// own cache. vite.config.mjs stamps the version and commit into CACHE_VERSION,
-// so a new deploy drops the previous build's cache on activation.
+// served from, so each deployed build (/master/, /latest/, /v2.3/, a release)
+// keeps its own cache. vite.config.mjs stamps the version and commit into
+// CACHE_VERSION, so a new deploy drops the previous build's cache on
+// activation.
+//
+// All of them share one origin, and so one CacheStorage. Several of them can
+// be installed as apps side by side, so a build only ever drops the caches of
+// its own scope -- never another installed version's offline copy -- and
+// only ever reads from its own cache.
 
-const CACHE_VERSION = "rotorflight-configurator-0.0.0-c3eb22e0";
+const CACHE_PREFIX = `rotorflight-configurator@${self.registration.scope}@`;
+const CACHE_VERSION = `${CACHE_PREFIX}0.0.0-0e6c26c4`;
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -26,13 +33,22 @@ self.addEventListener("activate", (event) => {
       .then((cacheNames) =>
         Promise.all(
           cacheNames
-            .filter((cacheName) => cacheName !== CACHE_VERSION)
+            .filter(
+              (cacheName) =>
+                cacheName.startsWith(CACHE_PREFIX) &&
+                cacheName !== CACHE_VERSION,
+            )
             .map((cacheName) => caches.delete(cacheName)),
         ),
       )
       .then(() => self.clients.claim()),
   );
 });
+
+// caches.match() would search every build's cache on the origin.
+function matchOwn(request) {
+  return caches.open(CACHE_VERSION).then((cache) => cache.match(request));
+}
 
 self.addEventListener("fetch", (event) => {
   const { request } = event;
@@ -54,13 +70,13 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_VERSION).then((cache) => cache.put(request, responseCopy));
           return response;
         })
-        .catch(() => caches.match(request).then((cached) => cached || caches.match("./index.html"))),
+        .catch(() => matchOwn(request).then((cached) => cached || matchOwn("./index.html"))),
     );
     return;
   }
 
   event.respondWith(
-    caches.match(request).then((cached) => {
+    matchOwn(request).then((cached) => {
       if (cached) {
         return cached;
       }
