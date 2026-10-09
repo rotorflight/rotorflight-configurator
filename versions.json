@@ -29,17 +29,6 @@
     },
     {
       "type": "pr",
-      "name": "474",
-      "path": "./pr/474/",
-      "branch": "feature/battery-flight-counter",
-      "date": "2026-10-06T09:12:40Z",
-      "number": 474,
-      "title": "Add a flight counter to the battery profiles",
-      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/474",
-      "draft": false
-    },
-    {
-      "type": "pr",
       "name": "465",
       "path": "./pr/465/",
       "branch": "custom-mixer-svelte",
