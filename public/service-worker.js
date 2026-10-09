@@ -6,10 +6,14 @@
 //
 // All of them share one origin, and so one CacheStorage. Several of them can
 // be installed as apps side by side, so a build only ever drops the caches of
-// its own scope -- never another installed version's offline copy.
+// its own scope -- never another installed version's offline copy -- and
+// only ever reads from its own cache.
 
 const CACHE_PREFIX = `rotorflight-configurator@${self.registration.scope}@`;
 const CACHE_VERSION = `${CACHE_PREFIX}__APP_VERSION__-__COMMIT_HASH__`;
+// Caches from before they were named by scope. Nothing reads them any more,
+// so any build may drop them.
+const LEGACY_CACHE_PREFIX = "rotorflight-configurator-";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -34,8 +38,9 @@ self.addEventListener("activate", (event) => {
           cacheNames
             .filter(
               (cacheName) =>
-                cacheName.startsWith(CACHE_PREFIX) &&
-                cacheName !== CACHE_VERSION,
+                cacheName.startsWith(LEGACY_CACHE_PREFIX) ||
+                (cacheName.startsWith(CACHE_PREFIX) &&
+                  cacheName !== CACHE_VERSION),
             )
             .map((cacheName) => caches.delete(cacheName)),
         ),
@@ -43,6 +48,11 @@ self.addEventListener("activate", (event) => {
       .then(() => self.clients.claim()),
   );
 });
+
+// caches.match() would search every build's cache on the origin.
+function matchOwn(request) {
+  return caches.open(CACHE_VERSION).then((cache) => cache.match(request));
+}
 
 self.addEventListener("fetch", (event) => {
   const { request } = event;
@@ -64,13 +74,13 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_VERSION).then((cache) => cache.put(request, responseCopy));
           return response;
         })
-        .catch(() => caches.match(request).then((cached) => cached || caches.match("./index.html"))),
+        .catch(() => matchOwn(request).then((cached) => cached || matchOwn("./index.html"))),
     );
     return;
   }
 
   event.respondWith(
-    caches.match(request).then((cached) => {
+    matchOwn(request).then((cached) => {
       if (cached) {
         return cached;
       }

@@ -115,8 +115,15 @@ function readDesktopLine(line: string, configVersion: number) {
 
 function listDesktopLines() {
   const { fs } = node();
-  return fs
-    .readdirSync(desktopDir())
+  let files: string[];
+  try {
+    files = fs.readdirSync(desktopDir());
+  } catch (error) {
+    // No line has run yet.
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
+    throw error;
+  }
+  return files
     .filter((file) => file.endsWith(".json"))
     .map((file) => file.slice(0, -".json".length));
 }
