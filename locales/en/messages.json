@@ -4502,6 +4502,48 @@
     "govSectionFilters": {
         "message": "Filters"
     },
+    "govSectionRpmSensor": {
+        "message": "RPM Sensor Check"
+    },
+    "govRpmSensorSummary": {
+        "message": "Checks the wiring of an RPM sensor (hall or optical) on the RPM signal inputs. Move a magnet past the sensor or turn the main shaft slowly by hand: every pulse lights the indicator and is counted. The input level shows if the sensor output changes at all, e.g. while a magnet is held in front of a hall sensor.<br /><br />Nothing happens? Check the sensor supply and signal wiring, the magnet orientation and distance, and the <code>freq_input_pull</code> and <code>freq_input_edge</code> CLI settings."
+    },
+    "govRpmSensorNone": {
+        "message": "No RPM signal input is active. Turn on RPM Sensor on the Motors tab, save and make sure a pin is assigned to the FREQ input."
+    },
+    "govRpmSensorMainMotor": {
+        "message": "Main motor RPM input"
+    },
+    "govRpmSensorTailMotor": {
+        "message": "Tail motor RPM input"
+    },
+    "govRpmSensorInput3": {
+        "message": "RPM input 3"
+    },
+    "govRpmSensorInput4": {
+        "message": "RPM input 4"
+    },
+    "govRpmSensorWaiting": {
+        "message": "Waiting for pulses – move a magnet past the sensor or turn the shaft by hand"
+    },
+    "govRpmSensorWorking": {
+        "message": "Sensor is working – {{pulses}} pulses received"
+    },
+    "govRpmSensorLevel": {
+        "message": "Input level:"
+    },
+    "govRpmSensorHigh": {
+        "message": "High"
+    },
+    "govRpmSensorLow": {
+        "message": "Low"
+    },
+    "govRpmSensorReset": {
+        "message": "Reset"
+    },
+    "govRpmSensorSimulate": {
+        "message": "Hold to simulate magnet"
+    },
     "govProfile": {
         "message": "Governor Settings"
     },

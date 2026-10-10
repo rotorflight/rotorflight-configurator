@@ -28,6 +28,7 @@ class FlightController {
   FEATURE_CONFIG = $state();
   FILTER_CONFIG = $state();
   FLIGHT_STATS = $state();
+  FREQ_SENSOR_STATUS = $state();
   GOVERNOR = $state();
   GPS_CONFIG = $state();
   GPS_DATA = $state();
@@ -792,6 +793,12 @@ class FlightController {
       stats_total_time_s: 0,
       stats_total_dist_m: 0,
       stats_min_armed_time_s: 0,
+    };
+
+    // RPM (frequency) sensor inputs: { active, pinHigh, edges } per port
+    this.FREQ_SENSOR_STATUS = {
+      supported: false,
+      ports: [],
     };
 
     this.PILOT_CONFIG = {
