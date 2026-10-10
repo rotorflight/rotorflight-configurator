@@ -955,6 +955,9 @@
     "remapFcPurposeS4": {
         "message": "Commonly the tail servo, for a mechanical (non-motorised) tail rotor."
     },
+    "remapFcPurposeServoExtra": {
+        "message": "Extra servos can be used for functions such as landing gear, or other PWM devices such as remote glow and battery backups. Set up the channel you wish to control it from using Custom Mixer Rules on the Mixer tab."
+    },
     "remapFcPurposeFreq1": {
         "message": "Commonly the main rotor RPM sensor input, used by the governor."
     },
@@ -3606,7 +3609,7 @@
         "message": "Governor Yaw F-gain"
     },
     "servoHelp": {
-        "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30&deg; for a servo under <i>Servo Override</i>. The servo should now move to 30&deg;. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
+        "message": "Servo 101<ul><li>First check the servo directions. Check cyclic servos by giving some collective, for example. Reverse servos if needed.</li><li>Level the servo arms by enabling <i> Servo Override</i> and adjusting <i>Center</i>. The servo arm should be perpendicular to the main shaft in this position.</li><li>Adjust <i>Scale</i> so that servo angles are correct. Specify an angle of 30° for a servo under <i>Servo Override</i>. The servo should now move to 30°. If it's less, increase the <i>Scale</i> for that servo. If it's more, decrease it.</li><li>You can limit or extend the servo movement range by adjusting <i>Min</i> or <i>Max</i>. Do this only if there's a mechanical issue, like servo binding. Use the mixer to limit roll/pitch/collective.</li></ul>"
     },
     "servoConfiguration": {
         "message": "Servo Configuration"
@@ -3660,7 +3663,7 @@
         "message": "Speed [ms]"
     },
     "servoSpeedHelp": {
-        "message": "Limits the servo motion speed. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed for 60&deg; rotation."
+        "message": "Limits the servo motion speed. Can be used for e.g. retracts. A value of 0 means no limitation. Values between 1-60000 milliseconds specify the time needed for 60° rotation."
     },
     "servoReverse": {
         "message": "Reverse"
@@ -3731,6 +3734,66 @@
     "mixerRulesNote": {
         "message": "<span class=\"message-negative\">Warning:</span> The Mixer is configured with <strong>custom</strong> rules. Any rule changes must be done in the CLI, with the <code>mixer rule</code> command."
     },
+    "mixerCustomRules": {
+        "message": "Custom Mixer Rules"
+    },
+    "mixerCustomRulesHelp": {
+        "message": "Rules beyond the standard swash and tail mixing. Each rule maps an input (a stabilized axis, RC command or RC channel) to a servo or motor output, with an optional weight and offset. Used to control additional servo or motor behavior such as landing gear, remote glow etc."
+    },
+    "mixerCustomRuleCollisionNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> One or more rules below use <strong>Set</strong> on an output that the current swash type already drives. That rule will override the built-in mixing on that output instead of adding to it."
+    },
+    "mixerCustomRuleMissingOutputNote": {
+        "message": "<span class=\"message-negative\">Warning:</span> One or more rules below drive an output this flight controller doesn't have. Those rules are kept, but they have no effect - the output reports a constant centre value rather than moving, which looks the same as a rule that simply isn't working."
+    },
+    "mixerRuleIndex": {
+        "message": "#"
+    },
+    "mixerRuleOutput": {
+        "message": "Output"
+    },
+    "mixerRuleInput": {
+        "message": "Controlled by"
+    },
+    "mixerRuleOper": {
+        "message": "Rule"
+    },
+    "mixerRuleOffset": {
+        "message": "Offset"
+    },
+    "mixerRuleWeight": {
+        "message": "Weight"
+    },
+    "mixerRuleOperHelp": {
+        "message": "Rules targeting the same output are applied in the order shown, each one building on the last: Set replaces the running value, Add adds to it, Mul multiplies it. Mul isn't a percentage - the multiplier is (Offset + Weight x input) / 1000, which is 0 wherever Offset + Weight x input = 0. With the default Offset of 0, that's when the input is centered, so a Mul rule left at Offset 0 only passes earlier rules' output through near full stick and squeezes it out near center. Give a Mul rule an Offset of 1000 instead if you want it to act as a neutral (1.0x, no change) multiplier when its input is centered, using Weight to control how far the input can trim it away from that."
+    },
+    "mixerRuleOffsetHelp": {
+        "message": "Added to Weight x input before the result is divided by 1000. For Set/Add this shifts the output by a fixed amount. For Mul it sets the multiplier's baseline: with the default 0, the multiplier is 0 when this rule's input is centered - use 1000 instead if you want the multiplier to be 1.0 (no change) when the input is centered, and let Weight control how far moving the input trims it away from that."
+    },
+    "mixerRuleWeightHelp": {
+        "message": "Scales the input before Offset is added and the result divided by 1000 to get the rule's actual contribution. For Set/Add, 1000 is a full 1:1 scale. For Mul, it controls how far the input pushes the multiplier away from its Offset baseline."
+    },
+    "mixerRuleMissingOutputHelp": {
+        "message": "This flight controller doesn't have this output. The rule is kept, but it can't do anything until the output exists."
+    },
+    "mixerRuleMoveUpHelp": {
+        "message": "Move this rule earlier"
+    },
+    "mixerRuleMoveDownHelp": {
+        "message": "Move this rule later"
+    },
+    "mixerRuleDeleteHelp": {
+        "message": "Remove this rule"
+    },
+    "mixerNoSpareOutput": {
+        "message": "The flight controller needs a free servo or motor output before a custom mixer rule can be added."
+    },
+    "mixerOverrideSimulatedHelp": {
+        "message": "Simulation only. A motor can't be driven from here: the flight controller only applies mixer input overrides while disarmed, but only feeds the mixer's result to the motors while armed. The value and rotation shown are calculated from this output's rules, not measured from the motor."
+    },
+    "mixerOverridePosition": {
+        "message": "Position"
+    },
     "mixerBidirNote": {
         "message": "<span class=\"message-negative\">Warning:</span> <i>Bidirectional tail motor</i> is an experimental feature that requires additional settings in the CLI."
     },
@@ -3759,7 +3822,7 @@
         "message": "Swashplate Type"
     },
     "mixerSwashTypeHelp": {
-        "message": "<strong>None:</strong> The mixer is disabled. Custom mixing rules must be set in the CLI. <br><br><strong>Direct:</strong> No mixing, controls are passed through the mixer unchanged for external mixing.<br><br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For cyclic-pitch helicopters with three swashplate servos, at 120&deg;, 135&deg;, or 140&deg; angle.<br><br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos at 90&deg; angle, either in L or V configuration."
+        "message": "<strong>None:</strong> The mixer is disabled. Custom mixing rules must be set in the CLI. <br><br><strong>Direct:</strong> No mixing, controls are passed through the mixer unchanged for external mixing.<br><br><strong>CCPM:</strong> Cyclic-Collective Pitch Mixing. For cyclic-pitch helicopters with three swashplate servos, at 120°, 135°, or 140° angle.<br><br><strong>FPM:</strong> Fixed Pitch Mixing. For fixed-pitch helicopters with two swashplate servos at 90° angle, either in L or V configuration."
     },
     "swashServoLayout": {
         "message": "Servo layout"
@@ -3807,19 +3870,19 @@
         "message": "Direct"
     },
     "mixerSwashType2": {
-        "message": "CCPM 120&deg;"
+        "message": "CCPM 120°"
     },
     "mixerSwashType3": {
-        "message": "CCPM 135&deg;"
+        "message": "CCPM 135°"
     },
     "mixerSwashType4": {
-        "message": "CCPM 140&deg;"
+        "message": "CCPM 140°"
     },
     "mixerSwashType5": {
-        "message": "FPM 90&deg; L"
+        "message": "FPM 90° L"
     },
     "mixerSwashType6": {
-        "message": "FPM 90&deg; V"
+        "message": "FPM 90° V"
     },
     "mixerSwashType7": {
         "message": ""
@@ -3876,19 +3939,19 @@
         "message": "Adjust until the collective positive and negative deflections are equal."
     },
     "mixerTotalPitchLimit": {
-        "message": "Total blade pitch limit [&deg;]"
+        "message": "Total blade pitch limit [°]"
     },
     "mixerTotalPitchLimitHelp": {
         "message": "Maximum amount of total cyclic + collective blade pitch."
     },
     "mixerCyclicLimit": {
-        "message": "Cyclic blade pitch limit [&deg;]"
+        "message": "Cyclic blade pitch limit [°]"
     },
     "mixerCyclicLimitHelp": {
         "message": "Maximum amount of cyclic blade pitch."
     },
     "mixerCollectiveLimit": {
-        "message": "Collective blade pitch limit [&deg;]"
+        "message": "Collective blade pitch limit [°]"
     },
     "mixerCollectiveLimitHelp": {
         "message": "Maximum amount of collective blade pitch."
@@ -3900,7 +3963,7 @@
         "message": "The swashring limits the maximum angle the swashplate can reach in order to prevent binding. Pitch and Roll axis should be configured individually (via the Mixer input and scaling) to the desired pitch angles (without binding). If however, both the maximum Pitch and Roll are commanded <strong>at the same time</strong>, the Swashplate will have to deflect to a larger angle than either axis individually. This may result in the swashplate binding on the main shaft.<br><br>Increasing the value of Swashring will limit the maximum Swashplate angle when both Pitch and Roll are maximum."
     },
     "mixerSwashPhase": {
-        "message": "Swashplate phase angle [&deg;]"
+        "message": "Swashplate phase angle [°]"
     },
     "mixerSwashPhaseHelp": {
         "message": "The phase offset for the swashplate controls."
@@ -4008,7 +4071,7 @@
         "message": "<strong>Note! This is the right place to limit your controls</strong><br><br>The mixer input rate is for setting the scaling factors to match the mechanical head setup. As every rotor head is different, different scaling values are needed for each setup. <br><strong>Control:</strong> This column contains each of the Stabilized control functions. <br><strong>Minimum:</strong> Set the minimum angle you wish the blade to reach when commanded. <br><strong>Maximum:</strong> Set the maximum angle you wish the blade to reach when commanded. <br><strong>Scaling:</strong> Increase or decrease the scaling value until the helicopter blades match the commanded angle. <br><br><strong>Mixer Input Calibration Process</strong><br><strong>Step 1: </strong>Enable the mixer override by the selector on the 'SYSTEM' tab. The Mixer Override entry will now be visible on this page. <br><strong>Step 2: </strong>Enable the bypass on the Control to be calibrated. <br><strong>Step 3: </strong>Set the Mixer override to an angle (say 10 degrees). <br><strong>Step 4: </strong>Measure the actual blade angle.<br><strong>Step 5: </strong>Set the scaling so the physical blade angle matches the commanded angle."
     },
     "mixerOverrideNote": {
-        "message": "<strong>Note.</strong> Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
+        "message": "Mixer Override forces the mixer inputs to arbitrary positions for setup purposes. The override values are not saved, and will be reset in reboot."
     },
     "mixerOverride": {
         "message": "Mixer Override"
@@ -4143,73 +4206,73 @@
         "message": "RC Channel AUX3"
     },
     "mixerInputRCChannel9": {
-        "message": "RC Channel #9"
+        "message": "RC Channel 9"
     },
     "mixerInputRCChannel10": {
-        "message": "RC Channel #10"
+        "message": "RC Channel 10"
     },
     "mixerInputRCChannel11": {
-        "message": "RC Channel #11"
+        "message": "RC Channel 11"
     },
     "mixerInputRCChannel12": {
-        "message": "RC Channel #12"
+        "message": "RC Channel 12"
     },
     "mixerInputRCChannel13": {
-        "message": "RC Channel #13"
+        "message": "RC Channel 13"
     },
     "mixerInputRCChannel14": {
-        "message": "RC Channel #14"
+        "message": "RC Channel 14"
     },
     "mixerInputRCChannel15": {
-        "message": "RC Channel #15"
+        "message": "RC Channel 15"
     },
     "mixerInputRCChannel16": {
-        "message": "RC Channel #16"
+        "message": "RC Channel 16"
     },
     "mixerInputRCChannel17": {
-        "message": "RC Channel #17"
+        "message": "RC Channel 17"
     },
     "mixerInputRCChannel18": {
-        "message": "RC Channel #18"
+        "message": "RC Channel 18"
     },
     "mixerOutputNone": {
         "message": "-"
     },
     "mixerOutputServo1": {
-        "message": "Servo #1"
+        "message": "Servo 1"
     },
     "mixerOutputServo2": {
-        "message": "Servo #2"
+        "message": "Servo 2"
     },
     "mixerOutputServo3": {
-        "message": "Servo #3"
+        "message": "Servo 3"
     },
     "mixerOutputServo4": {
-        "message": "Servo #4"
+        "message": "Servo 4"
     },
     "mixerOutputServo5": {
-        "message": "Servo #5"
+        "message": "Servo 5"
     },
     "mixerOutputServo6": {
-        "message": "Servo #6"
+        "message": "Servo 6"
     },
     "mixerOutputServo7": {
-        "message": "Servo #7"
+        "message": "Servo 7"
     },
     "mixerOutputServo8": {
-        "message": "Servo #8"
+        "message": "Servo 8"
     },
     "mixerOutputMotor1": {
-        "message": "Motor #1"
+        "message": "Motor 1"
     },
     "mixerOutputMotor2": {
-        "message": "Motor #2"
+        "message": "Motor 2"
     },
     "mixerOutputMotor3": {
-        "message": "Motor #3"
+        "message": "Motor 3"
     },
     "mixerOutputMotor4": {
-        "message": "Motor #4"
+        "message": "Motor 4"
     },
     "dialogMixerResetTitle": {
         "message": "<span class=\"message-negative\">WARNING: Mixer Reset</span>"
@@ -5799,22 +5862,22 @@
         "message": "Hard limit for the angle error in the PID loop. The absolute error and thus the I-term will never go above these limits."
     },
     "profilesErrorLimitRoll": {
-        "message": "Error Limit for Roll Axis [&deg;]"
+        "message": "Error Limit for Roll Axis [°]"
     },
     "profilesErrorLimitPitch": {
-        "message": "Error Limit for Pitch Axis [&deg;]"
+        "message": "Error Limit for Pitch Axis [°]"
     },
     "profilesErrorLimitYaw": {
-        "message": "Error Limit for Yaw Axis [&deg;]"
+        "message": "Error Limit for Yaw Axis [°]"
     },
     "profilesOffsetLimitHelp": {
         "message": "Hard limit for the High Speed Integral offset angle in the PID loop. The absolute offset and thus the O-term will never go above these limits."
     },
     "profilesOffsetLimitRoll": {
-        "message": "HSI Offset Limit for Roll Axis [&deg;]"
+        "message": "HSI Offset Limit for Roll Axis [°]"
     },
     "profilesOffsetLimitPitch": {
-        "message": "HSI Offset Limit for Pitch Axis [&deg;]"
+        "message": "HSI Offset Limit for Pitch Axis [°]"
     },
     "profilesOffsetGainHelp": {
         "message": "Gain for the High Speed Integral Offset term (Integral for high speed flight), which is only active at large collective angles. This term of the control loop provides angular stability and safe control following at high speeds, as well as attitude stability on large changes of the collective pitch angle of the rotor disk, which would lead to rapid diving and unwanted attitude changes without HSI. Too low values cause the model to become unstable at high speeds, as well as slow reaction and large attitude changes on collective pitch changes. Too large values can cause oscillation and restlessness at large collective pitch angles. For testing of the lower bounds of the parameter, fly in a straight line <strong> AT SAFE ALTITUDE</strong>, only briefly pull the collective into the negative range and observe the model's reaction. Should the model dive, increase the HSI Offset Gain. For testing the upper bounds of the parameter, give short jabs of elevator and aileron in a high collective vertical climb and observe the model's behavior. If the model swings, wobbles or exerts restlessness after releasing the stick, decrease the HSI Offset Gain."
@@ -5841,7 +5904,7 @@
         "message": "Time constant for bleeding off the accumulated cyclic error (I-term). Longer decay time makes hovering more stable, but may reduce 3D performance."
     },
     "profilesErrorDecayLimitCyclic": {
-        "message": "Error Decay maximum rate [&deg;/s]"
+        "message": "Error Decay maximum rate [°/s]"
     },
     "profilesErrorDecayLimitCyclicHelp": {
         "message": "Maximum bleed-off speed for the accumulated cyclic error (I-term)."
@@ -5853,7 +5916,7 @@
         "message": "Time constant for bleeding off the accumulated yaw error (I-term)."
     },
     "profilesErrorDecayLimitYaw": {
-        "message": "Error Decay maximum rate [&deg;/s]"
+        "message": "Error Decay maximum rate [°/s]"
     },
     "profilesErrorDecayLimitYawHelp": {
         "message": "Maximum bleed-off speed for the accumulated yaw error (I-term)."
@@ -6099,13 +6162,13 @@
         "message": "Gain to determine how aggressively the heli flips during inverted rescue."
     },
     "profilesRescueMaxRate": {
-        "message": "Max Levelling Rate [&deg;/s]"
+        "message": "Max Levelling Rate [°/s]"
     },
     "profilesRescueMaxRateHelp": {
         "message": "Limit rescue roll/pitch rate. Larger helicopters may need slower rotation rates."
     },
     "profilesRescueMaxAccel": {
-        "message": "Max Leveling Acceleration [&deg;/s²]"
+        "message": "Max Leveling Acceleration [°/s²]"
     },
     "profilesRescueMaxAccelHelp": {
         "message": "Limit how fast the helicopter accelerates into a roll/pitch. Larger helicopters may need slower acceleration."
@@ -8866,7 +8929,7 @@
     "presetsButtonReview": {
         "message": "Review Selected Presets"
     },
-    "presetsButtonReviewCLI":{
+    "presetsButtonReviewCLI": {
         "message": "Review CLI"
     },
     "presetsButtonApply": {
