@@ -176,10 +176,12 @@
           unusualScale = true;
       } else {
         if (servo.rate > 600) unusualRate = true;
+        // 760us servos usually cover about 510-1010us (760 +-250), so
+        // travel past +-250 drives them beyond their range.
         if (
-          servo.min < -375 ||
+          servo.min < -250 ||
           servo.min > -150 ||
-          servo.max > 375 ||
+          servo.max > 250 ||
           servo.max < 150
         )
           unusualLimit = true;
