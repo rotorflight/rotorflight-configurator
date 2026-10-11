@@ -1,0 +1,1 @@
+import{Ct as e}from"./client.js";e();
