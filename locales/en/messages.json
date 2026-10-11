@@ -3692,11 +3692,14 @@
     "servoTravelLimitedHelp": {
         "message": "Limited by the center ($1): the output can't go past $2 µs."
     },
-    "servoUnusualLimitsWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!"
+    "servoLimitsTooWideWarning": {
+        "message": "<span class=\"message-negative\">Servo $1:</span> a <i>Center</i> of $2 makes this a $3 µs servo, but <i>Min</i>/<i>Max</i> drive it from $4 to $5 µs. A $3 µs servo only covers about $6–$7 µs, so it can hit its end stops, stall and overheat. Set <i>Min</i>/<i>Max</i> to about -$8/$8."
     },
-    "servoUnusualScalesWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Scales</i> are set to unusual values. Please check!"
+    "servoLimitsTooNarrowWarning": {
+        "message": "<span class=\"message-negative\">Servo $1:</span> a <i>Center</i> of $2 makes this a $3 µs servo, but <i>Min</i>/<i>Max</i> of $4/$5 leave it little travel. Set them to about -$6/$6."
+    },
+    "servoScaleUnusualWarning": {
+        "message": "<span class=\"message-negative\">Servo $1:</span> a <i>Center</i> of $2 makes this a $3 µs servo, but <i>Scale</i> is $4/$5. <i>Scale</i> sets how far the servo moves at full stick, and a 760 µs servo needs about half the <i>Scale</i> of a 1520 µs one. Set <i>Scale neg</i>/<i>pos</i> to about $6."
     },
     "servoUnusualRatesWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!"

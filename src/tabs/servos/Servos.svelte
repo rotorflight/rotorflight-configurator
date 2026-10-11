@@ -145,11 +145,82 @@
   // 2-/3-servo consistency check is a heli swashplate assumption (fixed-
   // pitch/collective-pitch) that doesn't generalize to a bus servo bank
   // either, so it stays PWM-only too.
+  // Usual setup for each PWM servo type, told apart by the center. A 760us
+  // (narrow-band) servo covers about 510-1010us (760 +-250), so travel past
+  // +-250 drives it into its end stops.
+  function servoType(servo) {
+    if (servo.mid > 860) {
+      return {
+        pulse: 1520,
+        maxRate: 433,
+        travel: { min: 300, max: 750, usual: 700 },
+        scale: { min: 300, max: 750, usual: 500 },
+      };
+    }
+    return {
+      pulse: 760,
+      maxRate: 600,
+      travel: { min: 150, max: 250, usual: 250 },
+      scale: { min: hasExtendedServoScale ? 50 : 150, max: 375, usual: 250 },
+    };
+  }
+
+  // Notes for a servo whose Min/Max or Scale don't suit its type, saying
+  // what it was taken for and what to set instead.
+  function servoTypeNotes(servo, label) {
+    const type = servoType(servo);
+    const { travel, scale } = type;
+    const notes = [];
+    if (servo.min < -travel.max || servo.max > travel.max) {
+      notes.push(
+        $i18n.t("servoLimitsTooWideWarning", {
+          1: label,
+          2: servo.mid,
+          3: type.pulse,
+          4: servo.mid + servo.min,
+          5: servo.mid + servo.max,
+          6: servo.mid - travel.max,
+          7: servo.mid + travel.max,
+          8: travel.usual,
+        }),
+      );
+    }
+    if (servo.min > -travel.min || servo.max < travel.min) {
+      notes.push(
+        $i18n.t("servoLimitsTooNarrowWarning", {
+          1: label,
+          2: servo.mid,
+          3: type.pulse,
+          4: servo.min,
+          5: servo.max,
+          6: travel.usual,
+        }),
+      );
+    }
+    if (
+      servo.rneg < scale.min ||
+      servo.rneg > scale.max ||
+      servo.rpos < scale.min ||
+      servo.rpos > scale.max
+    ) {
+      notes.push(
+        $i18n.t("servoScaleUnusualWarning", {
+          1: label,
+          2: servo.mid,
+          3: type.pulse,
+          4: servo.rneg,
+          5: servo.rpos,
+          6: scale.usual,
+        }),
+      );
+    }
+    return notes;
+  }
+
   let warnings = $derived.by(() => {
-    let unusualScale = false;
     let unusualRate = false;
-    let unusualLimit = false;
     let unusualGeoCor = false;
+    const typeNotes = [];
 
     const SERVOS = FC.SERVO_CONFIG;
     const FLAG_GEOCOR = 2;
@@ -158,42 +229,8 @@
       const servo = SERVOS[index];
       if (!servo) continue;
 
-      if (servo.mid > 860) {
-        if (servo.rate > 433) unusualRate = true;
-        if (
-          servo.min < -750 ||
-          servo.min > -300 ||
-          servo.max > 750 ||
-          servo.max < 300
-        )
-          unusualLimit = true;
-        if (
-          servo.rneg < 300 ||
-          servo.rneg > 750 ||
-          servo.rpos < 300 ||
-          servo.rpos > 750
-        )
-          unusualScale = true;
-      } else {
-        if (servo.rate > 600) unusualRate = true;
-        // 760us servos usually cover about 510-1010us (760 +-250), so
-        // travel past +-250 drives them beyond their range.
-        if (
-          servo.min < -250 ||
-          servo.min > -150 ||
-          servo.max > 250 ||
-          servo.max < 150
-        )
-          unusualLimit = true;
-        const scaleMin = hasExtendedServoScale ? 50 : 150;
-        if (
-          servo.rneg < scaleMin ||
-          servo.rneg > 375 ||
-          servo.rpos < scaleMin ||
-          servo.rpos > 375
-        )
-          unusualScale = true;
-      }
+      if (servo.rate > servoType(servo).maxRate) unusualRate = true;
+      typeNotes.push(...servoTypeNotes(servo, `${index + 1}`));
     }
 
     if (pwmServoCount === 2 && SERVOS[0] && SERVOS[1]) {
@@ -215,7 +252,7 @@
         unusualRate = true;
     }
 
-    return { unusualScale, unusualRate, unusualLimit, unusualGeoCor };
+    return { typeNotes, unusualRate, unusualGeoCor };
   });
 
   let showToolbar = $derived(!loading && dirty);
@@ -314,16 +351,12 @@
 
 <Page {header} {loading} toolbar={showToolbar && toolbar}>
   <Section label="servoConfigurationPwm">
-    {#if warnings.unusualLimit || warnings.unusualScale || warnings.unusualRate || warnings.unusualGeoCor}
+    {#if warnings.typeNotes.length > 0 || warnings.unusualRate || warnings.unusualGeoCor}
       <div class="note">
-        {#if warnings.unusualLimit}
+        {#each warnings.typeNotes as note (note)}
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-          <p>{@html $i18n.t("servoUnusualLimitsWarning")}</p>
-        {/if}
-        {#if warnings.unusualScale}
-          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-          <p>{@html $i18n.t("servoUnusualScalesWarning")}</p>
-        {/if}
+          <p>{@html note}</p>
+        {/each}
         {#if warnings.unusualRate}
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           <p>{@html $i18n.t("servoUnusualRatesWarning")}</p>
