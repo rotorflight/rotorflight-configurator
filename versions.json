@@ -57,7 +57,7 @@
       "name": "482",
       "path": "./pr/482/",
       "branch": "fix/narrow-band-servo-limit-warning",
-      "date": "2026-10-11T06:13:47Z",
+      "date": "2026-10-11T06:33:18Z",
       "number": 482,
       "title": "Warn on narrow-band servo travel beyond +-250",
       "url": "https://github.com/rotorflight/rotorflight-configurator/pull/482",
