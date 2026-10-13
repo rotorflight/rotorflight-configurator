@@ -92,7 +92,8 @@
       ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)
         ? ["OVERRIDE"]
         : []),
-      "ARM_SWITCH",
+      "NO_NOTCH_FILTER",
+      "BACKUP_RX",
     ];
   }
 
@@ -141,11 +142,13 @@
     for (let i = 0; i < count; i++) {
       const active = (FC.CONFIG.armingDisableFlags & (1 << i)) !== 0;
       if (!active) continue;
-      if (i < flags.length) {
+      // ARM_SWITCH is always the firmware's last flag, wherever that falls
+      const flag = i === count - 1 ? "ARM_SWITCH" : flags[i];
+      if (flag) {
         list.push({
-          key: flags[i],
-          label: flags[i],
-          tooltipKey: `statusArmingDisableFlagsTooltip${flags[i]}`,
+          key: flag,
+          label: flag,
+          tooltipKey: `statusArmingDisableFlagsTooltip${flag}`,
         });
       } else {
         list.push({
