@@ -356,9 +356,11 @@
     {#each Array.from({ length: numProfiles }, (_, i) => i) as index (index)}
       <button
         class={["profile-tab", index === FC.CONFIG.profile && "active"]}
+        title={$i18n.t(`profilesSubTab${index + 1}`)}
         onclick={() => onClickProfileTab(index)}
       >
-        {$i18n.t(`profilesSubTab${index + 1}`)}
+        <span class="label-full">{$i18n.t(`profilesSubTab${index + 1}`)}</span>
+        <span class="label-short" aria-hidden="true">#{index + 1}</span>
       </button>
     {/each}
   </div>
@@ -375,27 +377,29 @@
         <div class="column">
           {#if showPidConfig}
             <Section label="profilesPidGains">
-              <div class="pid-table">
-                <span></span>
-                {#each GAINS as gain (gain.key)}
-                  <span class="col">
-                    {$i18n.t(gain.label)}
-                    <HelpIcon>{$i18n.t(gain.help)}</HelpIcon>
-                  </span>
-                {/each}
-                {#each AXES as axis, a (axis)}
-                  <span class={["axis", axis.toLowerCase()]}>
-                    {$i18n.t(`axis${axis}`)}
-                  </span>
-                  {#each GAINS as gain, g (gain.key)}
-                    <NumberInput
-                      min={0}
-                      max={1000}
-                      step={1}
-                      bind:value={form.pids[a][g]}
-                    />
+              <div class="pid-wrap">
+                <div class="pid-table" style:--pid-rows={GAINS.length + 1}>
+                  <span></span>
+                  {#each GAINS as gain (gain.key)}
+                    <span class="col">
+                      {$i18n.t(gain.label)}
+                      <HelpIcon>{$i18n.t(gain.help)}</HelpIcon>
+                    </span>
                   {/each}
-                {/each}
+                  {#each AXES as axis, a (axis)}
+                    <span class={["axis", axis.toLowerCase()]}>
+                      {$i18n.t(`axis${axis}`)}
+                    </span>
+                    {#each GAINS as gain, g (gain.key)}
+                      <NumberInput
+                        min={0}
+                        max={1000}
+                        step={1}
+                        bind:value={form.pids[a][g]}
+                      />
+                    {/each}
+                  {/each}
+                </div>
               </div>
             </Section>
 
@@ -874,6 +878,7 @@
     flex-wrap: wrap;
     gap: 2px;
     margin-top: var(--section-gap);
+    container-type: inline-size;
   }
 
   .profile-tab {
@@ -886,15 +891,43 @@
     }
   }
 
+  .label-short {
+    display: none;
+  }
+
+  /* Six "Profile #n" tabs stop fitting on one row around here; "#n" keeps
+     them on one row instead of wrapping onto a second. */
+  @container (max-width: 600px) {
+    .profile-tab {
+      flex: 1;
+      padding: 0 8px;
+    }
+
+    .label-full {
+      display: none;
+    }
+
+    .label-short {
+      display: inline;
+    }
+  }
+
   .warning {
     margin-top: var(--section-gap);
   }
 
   .columns {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    /* min() so a single column can still shrink below 420px on a narrow
+       window instead of overflowing it. */
+    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
     align-items: start;
     column-gap: var(--section-gap);
+  }
+
+  .pid-wrap {
+    container-type: inline-size;
+    overflow-x: auto;
   }
 
   .pid-table {
@@ -903,6 +936,26 @@
     align-items: center;
     gap: 6px 6px;
     padding: 4px 8px 8px;
+  }
+
+  /* Five gain columns need about 540px. Below that, flow the same cells
+     down columns instead of across rows: the gains become rows and the
+     three axes become columns, which fits a phone. */
+  @container (max-width: 540px) {
+    .pid-table {
+      grid-auto-flow: column;
+      grid-template-columns: auto repeat(3, minmax(72px, 1fr));
+      grid-template-rows: repeat(var(--pid-rows), auto);
+      @include mixins.compact-number-input;
+    }
+
+    .pid-table .col {
+      justify-content: flex-start;
+    }
+
+    .pid-table .axis {
+      text-align: center;
+    }
   }
 
   .col {
@@ -950,11 +1003,5 @@
     align-items: center;
     gap: 8px;
     margin-top: 12px;
-  }
-
-  @media only screen and (max-width: 480px) {
-    .columns {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

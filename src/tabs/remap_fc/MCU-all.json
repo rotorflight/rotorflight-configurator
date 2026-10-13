@@ -1,0 +1,6270 @@
+{
+  "_file": {
+    "path": "src/tabs/remap_fc/MCU-all.json",
+    "description": "Per-MCU, per-pin timer alternate-function and DMA option data, merged from STM32_timers.json and STM32_DMA.json (the authoritative sources, cross-checked against raw dump timers/dma CLI output from real hardware). The STM32H743 and STM32G474 DMA option lists were originally imported truncated to three entries, which is the STM32F4/F7 limit (MAX_TIMER_DMA_OPTIONS). Those parts route a timer channel to any of sixteen DMA streams/channels through DMAMUX and the firmware's option index runs 0..15, so their lists were regenerated from the firmware's own dmaTimerMapping[] and dmaChannelSpec[] (src/main/drivers/dma_reqmap.c) with the DMA_REQUEST_TIMx_CHy numbers from the vendor CMSIS headers. The list index is the firmware's dmaopt value, so order matters: DMA1 first, then DMA2, ascending. F411/F40X/F7X2/F745 are untouched."
+  },
+  "STM32F411": {
+    "pins": {
+      "A00": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 5 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH1",
+            "dma": [
+              "DMA1 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A01": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH2",
+            "dma": [
+              "DMA1 Stream 6 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH2",
+            "dma": [
+              "DMA1 Stream 4 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A02": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH3",
+            "dma": [
+              "DMA1 Stream 1 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH3",
+            "dma": [
+              "DMA1 Stream 0 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "A03": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH4",
+            "dma": [
+              "DMA1 Stream 7 Channel 3",
+              "DMA1 Stream 6 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH4",
+            "dma": [
+              "DMA1 Stream 1 Channel 6",
+              "DMA1 Stream 3 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "A05": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 5 Channel 3"
+            ]
+          }
+        ]
+      },
+      "A06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 4 Channel 5"
+            ]
+          }
+        ]
+      },
+      "A07": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 5 Channel 5"
+            ]
+          }
+        ]
+      },
+      "A08": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A09": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A15": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 5 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B00": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 5"
+            ]
+          }
+        ]
+      },
+      "B01": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH4",
+            "dma": [
+              "DMA1 Stream 2 Channel 5"
+            ]
+          }
+        ]
+      },
+      "B03": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH2",
+            "dma": [
+              "DMA1 Stream 6 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B04": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 4 Channel 5"
+            ]
+          }
+        ]
+      },
+      "B05": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 5 Channel 5"
+            ]
+          }
+        ]
+      },
+      "B06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH1",
+            "dma": [
+              "DMA1 Stream 0 Channel 2"
+            ]
+          }
+        ]
+      },
+      "B07": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH2",
+            "dma": [
+              "DMA1 Stream 3 Channel 2"
+            ]
+          }
+        ]
+      },
+      "B08": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 2"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM10 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "B09": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH4",
+            "dma": []
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM11 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "B10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH3",
+            "dma": [
+              "DMA1 Stream 1 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH4",
+            "dma": [
+              "DMA1 Stream 7 Channel 3",
+              "DMA1 Stream 6 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B13": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "B14": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "B15": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          }
+        ]
+      },
+      "C06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 4 Channel 5"
+            ]
+          }
+        ]
+      },
+      "C07": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 5 Channel 5"
+            ]
+          }
+        ]
+      },
+      "C08": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 5"
+            ]
+          }
+        ]
+      },
+      "C09": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH4",
+            "dma": [
+              "DMA1 Stream 2 Channel 5"
+            ]
+          }
+        ]
+      },
+      "D12": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH1",
+            "dma": [
+              "DMA1 Stream 0 Channel 2"
+            ]
+          }
+        ]
+      },
+      "D13": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH2",
+            "dma": [
+              "DMA1 Stream 3 Channel 2"
+            ]
+          }
+        ]
+      },
+      "D14": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 2"
+            ]
+          }
+        ]
+      },
+      "D15": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH4",
+            "dma": []
+          }
+        ]
+      },
+      "E05": {
+        "timers": [
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "E06": {
+        "timers": [
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "E08": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E09": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E12": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E13": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E14": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH4",
+            "dma": [
+              "DMA2 Stream 4 Channel 6"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "STM32F40X": {
+    "pins": {
+      "A00": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 5 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH1",
+            "dma": [
+              "DMA1 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A01": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH2",
+            "dma": [
+              "DMA1 Stream 6 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH2",
+            "dma": [
+              "DMA1 Stream 4 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A02": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH3",
+            "dma": [
+              "DMA1 Stream 1 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH3",
+            "dma": [
+              "DMA1 Stream 0 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "A03": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH4",
+            "dma": [
+              "DMA1 Stream 7 Channel 3",
+              "DMA1 Stream 6 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH4",
+            "dma": [
+              "DMA1 Stream 1 Channel 6",
+              "DMA1 Stream 3 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "A05": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 5 Channel 3"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH1N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 2 Channel 7"
+            ]
+          }
+        ]
+      },
+      "A06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 4 Channel 5"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM13 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "A07": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 5 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH1N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 2 Channel 7"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM14 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "A08": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A09": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A15": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 5 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B00": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH2N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 3 Channel 7"
+            ]
+          }
+        ]
+      },
+      "B01": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH4",
+            "dma": [
+              "DMA1 Stream 2 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH3N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 4 Channel 7"
+            ]
+          }
+        ]
+      },
+      "B03": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH2",
+            "dma": [
+              "DMA1 Stream 6 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B04": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 4 Channel 5"
+            ]
+          }
+        ]
+      },
+      "B05": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 5 Channel 5"
+            ]
+          }
+        ]
+      },
+      "B06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH1",
+            "dma": [
+              "DMA1 Stream 0 Channel 2"
+            ]
+          }
+        ]
+      },
+      "B07": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH2",
+            "dma": [
+              "DMA1 Stream 3 Channel 2"
+            ]
+          }
+        ]
+      },
+      "B08": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 2"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM10 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "B09": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH4",
+            "dma": []
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM11 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "B10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH3",
+            "dma": [
+              "DMA1 Stream 1 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH4",
+            "dma": [
+              "DMA1 Stream 7 Channel 3",
+              "DMA1 Stream 6 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B13": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "B14": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH2N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 3 Channel 7"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM12 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "B15": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH3N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 4 Channel 7"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM12 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "C06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 4 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH1",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 2 Channel 7"
+            ]
+          }
+        ]
+      },
+      "C07": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 5 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH2",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 3 Channel 7"
+            ]
+          }
+        ]
+      },
+      "C08": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH3",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 4 Channel 7"
+            ]
+          }
+        ]
+      },
+      "C09": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH4",
+            "dma": [
+              "DMA1 Stream 2 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH4",
+            "dma": [
+              "DMA2 Stream 7 Channel 7"
+            ]
+          }
+        ]
+      },
+      "D12": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH1",
+            "dma": [
+              "DMA1 Stream 0 Channel 2"
+            ]
+          }
+        ]
+      },
+      "D13": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH2",
+            "dma": [
+              "DMA1 Stream 3 Channel 2"
+            ]
+          }
+        ]
+      },
+      "D14": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 2"
+            ]
+          }
+        ]
+      },
+      "D15": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH4",
+            "dma": []
+          }
+        ]
+      },
+      "E05": {
+        "timers": [
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "E06": {
+        "timers": [
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "E08": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E09": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E12": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E13": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E14": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH4",
+            "dma": [
+              "DMA2 Stream 4 Channel 6"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "STM32F7X2": {
+    "pins": {
+      "A00": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 5 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH1",
+            "dma": [
+              "DMA1 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A01": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH2",
+            "dma": [
+              "DMA1 Stream 6 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH2",
+            "dma": [
+              "DMA1 Stream 4 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A02": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH3",
+            "dma": [
+              "DMA1 Stream 1 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH3",
+            "dma": [
+              "DMA1 Stream 0 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "A03": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH4",
+            "dma": [
+              "DMA1 Stream 7 Channel 3",
+              "DMA1 Stream 6 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH4",
+            "dma": [
+              "DMA1 Stream 1 Channel 6",
+              "DMA1 Stream 3 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "A05": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 5 Channel 3"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH1N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 2 Channel 7"
+            ]
+          }
+        ]
+      },
+      "A06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 4 Channel 5"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM13 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "A07": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 5 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH1N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 2 Channel 7"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM14 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "A08": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A09": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A15": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 5 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B00": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH2N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 3 Channel 7"
+            ]
+          }
+        ]
+      },
+      "B01": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH4",
+            "dma": [
+              "DMA1 Stream 2 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH3N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 4 Channel 7"
+            ]
+          }
+        ]
+      },
+      "B03": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH2",
+            "dma": [
+              "DMA1 Stream 6 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B04": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 4 Channel 5"
+            ]
+          }
+        ]
+      },
+      "B05": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 5 Channel 5"
+            ]
+          }
+        ]
+      },
+      "B06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH1",
+            "dma": [
+              "DMA1 Stream 0 Channel 2"
+            ]
+          }
+        ]
+      },
+      "B07": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH2",
+            "dma": [
+              "DMA1 Stream 3 Channel 2"
+            ]
+          }
+        ]
+      },
+      "B08": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 2"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM10 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "B09": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH4",
+            "dma": []
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM11 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "B10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH3",
+            "dma": [
+              "DMA1 Stream 1 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH4",
+            "dma": [
+              "DMA1 Stream 7 Channel 3",
+              "DMA1 Stream 6 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B13": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "B14": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH2N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 3 Channel 7"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM12 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "B15": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH3N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 4 Channel 7"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM12 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "C06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 4 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH1",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 2 Channel 7"
+            ]
+          }
+        ]
+      },
+      "C07": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 5 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH2",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 3 Channel 7"
+            ]
+          }
+        ]
+      },
+      "C08": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH3",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 4 Channel 7"
+            ]
+          }
+        ]
+      },
+      "C09": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH4",
+            "dma": [
+              "DMA1 Stream 2 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH4",
+            "dma": [
+              "DMA2 Stream 7 Channel 7"
+            ]
+          }
+        ]
+      },
+      "D12": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH1",
+            "dma": [
+              "DMA1 Stream 0 Channel 2"
+            ]
+          }
+        ]
+      },
+      "D13": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH2",
+            "dma": [
+              "DMA1 Stream 3 Channel 2"
+            ]
+          }
+        ]
+      },
+      "D14": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 2"
+            ]
+          }
+        ]
+      },
+      "D15": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH4",
+            "dma": []
+          }
+        ]
+      },
+      "E05": {
+        "timers": [
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "E06": {
+        "timers": [
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "E08": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E09": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E12": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E13": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E14": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH4",
+            "dma": [
+              "DMA2 Stream 4 Channel 6"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "STM32F745": {
+    "pins": {
+      "A00": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 5 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH1",
+            "dma": [
+              "DMA1 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A01": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH2",
+            "dma": [
+              "DMA1 Stream 6 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH2",
+            "dma": [
+              "DMA1 Stream 4 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A02": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH3",
+            "dma": [
+              "DMA1 Stream 1 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH3",
+            "dma": [
+              "DMA1 Stream 0 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "A03": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH4",
+            "dma": [
+              "DMA1 Stream 7 Channel 3",
+              "DMA1 Stream 6 Channel 3"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH4",
+            "dma": [
+              "DMA1 Stream 1 Channel 6",
+              "DMA1 Stream 3 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "A05": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 5 Channel 3"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH1N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 2 Channel 7"
+            ]
+          }
+        ]
+      },
+      "A06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 4 Channel 5"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM13 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "A07": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 5 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH1N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 2 Channel 7"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM14 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "A08": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A09": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "A15": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 5 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B00": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH2N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 3 Channel 7"
+            ]
+          }
+        ]
+      },
+      "B01": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH4",
+            "dma": [
+              "DMA1 Stream 2 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH3N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 4 Channel 7"
+            ]
+          }
+        ]
+      },
+      "B03": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH2",
+            "dma": [
+              "DMA1 Stream 6 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B04": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 4 Channel 5"
+            ]
+          }
+        ]
+      },
+      "B05": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 5 Channel 5"
+            ]
+          }
+        ]
+      },
+      "B06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH1",
+            "dma": [
+              "DMA1 Stream 0 Channel 2"
+            ]
+          }
+        ]
+      },
+      "B07": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH2",
+            "dma": [
+              "DMA1 Stream 3 Channel 2"
+            ]
+          }
+        ]
+      },
+      "B08": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 2"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM10 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "B09": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH4",
+            "dma": []
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM11 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "B10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH3",
+            "dma": [
+              "DMA1 Stream 1 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH4",
+            "dma": [
+              "DMA1 Stream 7 Channel 3",
+              "DMA1 Stream 6 Channel 3"
+            ]
+          }
+        ]
+      },
+      "B13": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "B14": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH2N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 3 Channel 7"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM12 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "B15": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH3N",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 4 Channel 7"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM12 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "C06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 4 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH1",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 2 Channel 7"
+            ]
+          }
+        ]
+      },
+      "C07": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 5 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH2",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 3 Channel 7"
+            ]
+          }
+        ]
+      },
+      "C08": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH3",
+            "dma": [
+              "DMA2 Stream 2 Channel 0",
+              "DMA2 Stream 4 Channel 7"
+            ]
+          }
+        ]
+      },
+      "C09": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH4",
+            "dma": [
+              "DMA1 Stream 2 Channel 5"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH4",
+            "dma": [
+              "DMA2 Stream 7 Channel 7"
+            ]
+          }
+        ]
+      },
+      "D12": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH1",
+            "dma": [
+              "DMA1 Stream 0 Channel 2"
+            ]
+          }
+        ]
+      },
+      "D13": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH2",
+            "dma": [
+              "DMA1 Stream 3 Channel 2"
+            ]
+          }
+        ]
+      },
+      "D14": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH3",
+            "dma": [
+              "DMA1 Stream 7 Channel 2"
+            ]
+          }
+        ]
+      },
+      "D15": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH4",
+            "dma": []
+          }
+        ]
+      },
+      "E05": {
+        "timers": [
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "E06": {
+        "timers": [
+          {
+            "af": "AF3",
+            "timer": "TIM9 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "E08": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E09": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 1 Channel 6",
+              "DMA2 Stream 3 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 2 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E12": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E13": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3",
+            "dma": [
+              "DMA2 Stream 6 Channel 0",
+              "DMA2 Stream 6 Channel 6"
+            ]
+          }
+        ]
+      },
+      "E14": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH4",
+            "dma": [
+              "DMA2 Stream 4 Channel 6"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "STM32H743": {
+    "pins": {
+      "A00": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 18",
+              "DMA1 Stream 1 Request 18",
+              "DMA1 Stream 2 Request 18",
+              "DMA1 Stream 3 Request 18",
+              "DMA1 Stream 4 Request 18",
+              "DMA1 Stream 5 Request 18",
+              "DMA1 Stream 6 Request 18",
+              "DMA1 Stream 7 Request 18",
+              "DMA2 Stream 0 Request 18",
+              "DMA2 Stream 1 Request 18",
+              "DMA2 Stream 2 Request 18",
+              "DMA2 Stream 3 Request 18",
+              "DMA2 Stream 4 Request 18",
+              "DMA2 Stream 5 Request 18",
+              "DMA2 Stream 6 Request 18",
+              "DMA2 Stream 7 Request 18"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 55",
+              "DMA1 Stream 1 Request 55",
+              "DMA1 Stream 2 Request 55",
+              "DMA1 Stream 3 Request 55",
+              "DMA1 Stream 4 Request 55",
+              "DMA1 Stream 5 Request 55",
+              "DMA1 Stream 6 Request 55",
+              "DMA1 Stream 7 Request 55",
+              "DMA2 Stream 0 Request 55",
+              "DMA2 Stream 1 Request 55",
+              "DMA2 Stream 2 Request 55",
+              "DMA2 Stream 3 Request 55",
+              "DMA2 Stream 4 Request 55",
+              "DMA2 Stream 5 Request 55",
+              "DMA2 Stream 6 Request 55",
+              "DMA2 Stream 7 Request 55"
+            ]
+          }
+        ]
+      },
+      "A01": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH2",
+            "dma": [
+              "DMA1 Stream 0 Request 19",
+              "DMA1 Stream 1 Request 19",
+              "DMA1 Stream 2 Request 19",
+              "DMA1 Stream 3 Request 19",
+              "DMA1 Stream 4 Request 19",
+              "DMA1 Stream 5 Request 19",
+              "DMA1 Stream 6 Request 19",
+              "DMA1 Stream 7 Request 19",
+              "DMA2 Stream 0 Request 19",
+              "DMA2 Stream 1 Request 19",
+              "DMA2 Stream 2 Request 19",
+              "DMA2 Stream 3 Request 19",
+              "DMA2 Stream 4 Request 19",
+              "DMA2 Stream 5 Request 19",
+              "DMA2 Stream 6 Request 19",
+              "DMA2 Stream 7 Request 19"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH2",
+            "dma": [
+              "DMA1 Stream 0 Request 56",
+              "DMA1 Stream 1 Request 56",
+              "DMA1 Stream 2 Request 56",
+              "DMA1 Stream 3 Request 56",
+              "DMA1 Stream 4 Request 56",
+              "DMA1 Stream 5 Request 56",
+              "DMA1 Stream 6 Request 56",
+              "DMA1 Stream 7 Request 56",
+              "DMA2 Stream 0 Request 56",
+              "DMA2 Stream 1 Request 56",
+              "DMA2 Stream 2 Request 56",
+              "DMA2 Stream 3 Request 56",
+              "DMA2 Stream 4 Request 56",
+              "DMA2 Stream 5 Request 56",
+              "DMA2 Stream 6 Request 56",
+              "DMA2 Stream 7 Request 56"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM15 CH1N",
+            "dma": [
+              "DMA1 Stream 0 Request 105",
+              "DMA1 Stream 1 Request 105",
+              "DMA1 Stream 2 Request 105",
+              "DMA1 Stream 3 Request 105",
+              "DMA1 Stream 4 Request 105",
+              "DMA1 Stream 5 Request 105",
+              "DMA1 Stream 6 Request 105",
+              "DMA1 Stream 7 Request 105",
+              "DMA2 Stream 0 Request 105",
+              "DMA2 Stream 1 Request 105",
+              "DMA2 Stream 2 Request 105",
+              "DMA2 Stream 3 Request 105",
+              "DMA2 Stream 4 Request 105",
+              "DMA2 Stream 5 Request 105",
+              "DMA2 Stream 6 Request 105",
+              "DMA2 Stream 7 Request 105"
+            ]
+          }
+        ]
+      },
+      "A02": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH3",
+            "dma": [
+              "DMA1 Stream 0 Request 20",
+              "DMA1 Stream 1 Request 20",
+              "DMA1 Stream 2 Request 20",
+              "DMA1 Stream 3 Request 20",
+              "DMA1 Stream 4 Request 20",
+              "DMA1 Stream 5 Request 20",
+              "DMA1 Stream 6 Request 20",
+              "DMA1 Stream 7 Request 20",
+              "DMA2 Stream 0 Request 20",
+              "DMA2 Stream 1 Request 20",
+              "DMA2 Stream 2 Request 20",
+              "DMA2 Stream 3 Request 20",
+              "DMA2 Stream 4 Request 20",
+              "DMA2 Stream 5 Request 20",
+              "DMA2 Stream 6 Request 20",
+              "DMA2 Stream 7 Request 20"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH3",
+            "dma": [
+              "DMA1 Stream 0 Request 57",
+              "DMA1 Stream 1 Request 57",
+              "DMA1 Stream 2 Request 57",
+              "DMA1 Stream 3 Request 57",
+              "DMA1 Stream 4 Request 57",
+              "DMA1 Stream 5 Request 57",
+              "DMA1 Stream 6 Request 57",
+              "DMA1 Stream 7 Request 57",
+              "DMA2 Stream 0 Request 57",
+              "DMA2 Stream 1 Request 57",
+              "DMA2 Stream 2 Request 57",
+              "DMA2 Stream 3 Request 57",
+              "DMA2 Stream 4 Request 57",
+              "DMA2 Stream 5 Request 57",
+              "DMA2 Stream 6 Request 57",
+              "DMA2 Stream 7 Request 57"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM15 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 105",
+              "DMA1 Stream 1 Request 105",
+              "DMA1 Stream 2 Request 105",
+              "DMA1 Stream 3 Request 105",
+              "DMA1 Stream 4 Request 105",
+              "DMA1 Stream 5 Request 105",
+              "DMA1 Stream 6 Request 105",
+              "DMA1 Stream 7 Request 105",
+              "DMA2 Stream 0 Request 105",
+              "DMA2 Stream 1 Request 105",
+              "DMA2 Stream 2 Request 105",
+              "DMA2 Stream 3 Request 105",
+              "DMA2 Stream 4 Request 105",
+              "DMA2 Stream 5 Request 105",
+              "DMA2 Stream 6 Request 105",
+              "DMA2 Stream 7 Request 105"
+            ]
+          }
+        ]
+      },
+      "A03": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH4",
+            "dma": [
+              "DMA1 Stream 0 Request 21",
+              "DMA1 Stream 1 Request 21",
+              "DMA1 Stream 2 Request 21",
+              "DMA1 Stream 3 Request 21",
+              "DMA1 Stream 4 Request 21",
+              "DMA1 Stream 5 Request 21",
+              "DMA1 Stream 6 Request 21",
+              "DMA1 Stream 7 Request 21",
+              "DMA2 Stream 0 Request 21",
+              "DMA2 Stream 1 Request 21",
+              "DMA2 Stream 2 Request 21",
+              "DMA2 Stream 3 Request 21",
+              "DMA2 Stream 4 Request 21",
+              "DMA2 Stream 5 Request 21",
+              "DMA2 Stream 6 Request 21",
+              "DMA2 Stream 7 Request 21"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH4",
+            "dma": [
+              "DMA1 Stream 0 Request 58",
+              "DMA1 Stream 1 Request 58",
+              "DMA1 Stream 2 Request 58",
+              "DMA1 Stream 3 Request 58",
+              "DMA1 Stream 4 Request 58",
+              "DMA1 Stream 5 Request 58",
+              "DMA1 Stream 6 Request 58",
+              "DMA1 Stream 7 Request 58",
+              "DMA2 Stream 0 Request 58",
+              "DMA2 Stream 1 Request 58",
+              "DMA2 Stream 2 Request 58",
+              "DMA2 Stream 3 Request 58",
+              "DMA2 Stream 4 Request 58",
+              "DMA2 Stream 5 Request 58",
+              "DMA2 Stream 6 Request 58",
+              "DMA2 Stream 7 Request 58"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM15 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "A05": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 18",
+              "DMA1 Stream 1 Request 18",
+              "DMA1 Stream 2 Request 18",
+              "DMA1 Stream 3 Request 18",
+              "DMA1 Stream 4 Request 18",
+              "DMA1 Stream 5 Request 18",
+              "DMA1 Stream 6 Request 18",
+              "DMA1 Stream 7 Request 18",
+              "DMA2 Stream 0 Request 18",
+              "DMA2 Stream 1 Request 18",
+              "DMA2 Stream 2 Request 18",
+              "DMA2 Stream 3 Request 18",
+              "DMA2 Stream 4 Request 18",
+              "DMA2 Stream 5 Request 18",
+              "DMA2 Stream 6 Request 18",
+              "DMA2 Stream 7 Request 18"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH1N",
+            "dma": [
+              "DMA1 Stream 0 Request 47",
+              "DMA1 Stream 1 Request 47",
+              "DMA1 Stream 2 Request 47",
+              "DMA1 Stream 3 Request 47",
+              "DMA1 Stream 4 Request 47",
+              "DMA1 Stream 5 Request 47",
+              "DMA1 Stream 6 Request 47",
+              "DMA1 Stream 7 Request 47",
+              "DMA2 Stream 0 Request 47",
+              "DMA2 Stream 1 Request 47",
+              "DMA2 Stream 2 Request 47",
+              "DMA2 Stream 3 Request 47",
+              "DMA2 Stream 4 Request 47",
+              "DMA2 Stream 5 Request 47",
+              "DMA2 Stream 6 Request 47",
+              "DMA2 Stream 7 Request 47"
+            ]
+          }
+        ]
+      },
+      "A06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 23",
+              "DMA1 Stream 1 Request 23",
+              "DMA1 Stream 2 Request 23",
+              "DMA1 Stream 3 Request 23",
+              "DMA1 Stream 4 Request 23",
+              "DMA1 Stream 5 Request 23",
+              "DMA1 Stream 6 Request 23",
+              "DMA1 Stream 7 Request 23",
+              "DMA2 Stream 0 Request 23",
+              "DMA2 Stream 1 Request 23",
+              "DMA2 Stream 2 Request 23",
+              "DMA2 Stream 3 Request 23",
+              "DMA2 Stream 4 Request 23",
+              "DMA2 Stream 5 Request 23",
+              "DMA2 Stream 6 Request 23",
+              "DMA2 Stream 7 Request 23"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM13 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "A07": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA1 Stream 0 Request 11",
+              "DMA1 Stream 1 Request 11",
+              "DMA1 Stream 2 Request 11",
+              "DMA1 Stream 3 Request 11",
+              "DMA1 Stream 4 Request 11",
+              "DMA1 Stream 5 Request 11",
+              "DMA1 Stream 6 Request 11",
+              "DMA1 Stream 7 Request 11",
+              "DMA2 Stream 0 Request 11",
+              "DMA2 Stream 1 Request 11",
+              "DMA2 Stream 2 Request 11",
+              "DMA2 Stream 3 Request 11",
+              "DMA2 Stream 4 Request 11",
+              "DMA2 Stream 5 Request 11",
+              "DMA2 Stream 6 Request 11",
+              "DMA2 Stream 7 Request 11"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 0 Request 24",
+              "DMA1 Stream 1 Request 24",
+              "DMA1 Stream 2 Request 24",
+              "DMA1 Stream 3 Request 24",
+              "DMA1 Stream 4 Request 24",
+              "DMA1 Stream 5 Request 24",
+              "DMA1 Stream 6 Request 24",
+              "DMA1 Stream 7 Request 24",
+              "DMA2 Stream 0 Request 24",
+              "DMA2 Stream 1 Request 24",
+              "DMA2 Stream 2 Request 24",
+              "DMA2 Stream 3 Request 24",
+              "DMA2 Stream 4 Request 24",
+              "DMA2 Stream 5 Request 24",
+              "DMA2 Stream 6 Request 24",
+              "DMA2 Stream 7 Request 24"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH1N",
+            "dma": [
+              "DMA1 Stream 0 Request 47",
+              "DMA1 Stream 1 Request 47",
+              "DMA1 Stream 2 Request 47",
+              "DMA1 Stream 3 Request 47",
+              "DMA1 Stream 4 Request 47",
+              "DMA1 Stream 5 Request 47",
+              "DMA1 Stream 6 Request 47",
+              "DMA1 Stream 7 Request 47",
+              "DMA2 Stream 0 Request 47",
+              "DMA2 Stream 1 Request 47",
+              "DMA2 Stream 2 Request 47",
+              "DMA2 Stream 3 Request 47",
+              "DMA2 Stream 4 Request 47",
+              "DMA2 Stream 5 Request 47",
+              "DMA2 Stream 6 Request 47",
+              "DMA2 Stream 7 Request 47"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM14 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "A08": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 11",
+              "DMA1 Stream 1 Request 11",
+              "DMA1 Stream 2 Request 11",
+              "DMA1 Stream 3 Request 11",
+              "DMA1 Stream 4 Request 11",
+              "DMA1 Stream 5 Request 11",
+              "DMA1 Stream 6 Request 11",
+              "DMA1 Stream 7 Request 11",
+              "DMA2 Stream 0 Request 11",
+              "DMA2 Stream 1 Request 11",
+              "DMA2 Stream 2 Request 11",
+              "DMA2 Stream 3 Request 11",
+              "DMA2 Stream 4 Request 11",
+              "DMA2 Stream 5 Request 11",
+              "DMA2 Stream 6 Request 11",
+              "DMA2 Stream 7 Request 11"
+            ]
+          }
+        ]
+      },
+      "A09": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2",
+            "dma": [
+              "DMA1 Stream 0 Request 12",
+              "DMA1 Stream 1 Request 12",
+              "DMA1 Stream 2 Request 12",
+              "DMA1 Stream 3 Request 12",
+              "DMA1 Stream 4 Request 12",
+              "DMA1 Stream 5 Request 12",
+              "DMA1 Stream 6 Request 12",
+              "DMA1 Stream 7 Request 12",
+              "DMA2 Stream 0 Request 12",
+              "DMA2 Stream 1 Request 12",
+              "DMA2 Stream 2 Request 12",
+              "DMA2 Stream 3 Request 12",
+              "DMA2 Stream 4 Request 12",
+              "DMA2 Stream 5 Request 12",
+              "DMA2 Stream 6 Request 12",
+              "DMA2 Stream 7 Request 12"
+            ]
+          }
+        ]
+      },
+      "A10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3",
+            "dma": [
+              "DMA1 Stream 0 Request 13",
+              "DMA1 Stream 1 Request 13",
+              "DMA1 Stream 2 Request 13",
+              "DMA1 Stream 3 Request 13",
+              "DMA1 Stream 4 Request 13",
+              "DMA1 Stream 5 Request 13",
+              "DMA1 Stream 6 Request 13",
+              "DMA1 Stream 7 Request 13",
+              "DMA2 Stream 0 Request 13",
+              "DMA2 Stream 1 Request 13",
+              "DMA2 Stream 2 Request 13",
+              "DMA2 Stream 3 Request 13",
+              "DMA2 Stream 4 Request 13",
+              "DMA2 Stream 5 Request 13",
+              "DMA2 Stream 6 Request 13",
+              "DMA2 Stream 7 Request 13"
+            ]
+          }
+        ]
+      },
+      "A11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH4",
+            "dma": [
+              "DMA1 Stream 0 Request 14",
+              "DMA1 Stream 1 Request 14",
+              "DMA1 Stream 2 Request 14",
+              "DMA1 Stream 3 Request 14",
+              "DMA1 Stream 4 Request 14",
+              "DMA1 Stream 5 Request 14",
+              "DMA1 Stream 6 Request 14",
+              "DMA1 Stream 7 Request 14",
+              "DMA2 Stream 0 Request 14",
+              "DMA2 Stream 1 Request 14",
+              "DMA2 Stream 2 Request 14",
+              "DMA2 Stream 3 Request 14",
+              "DMA2 Stream 4 Request 14",
+              "DMA2 Stream 5 Request 14",
+              "DMA2 Stream 6 Request 14",
+              "DMA2 Stream 7 Request 14"
+            ]
+          }
+        ]
+      },
+      "A15": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 18",
+              "DMA1 Stream 1 Request 18",
+              "DMA1 Stream 2 Request 18",
+              "DMA1 Stream 3 Request 18",
+              "DMA1 Stream 4 Request 18",
+              "DMA1 Stream 5 Request 18",
+              "DMA1 Stream 6 Request 18",
+              "DMA1 Stream 7 Request 18",
+              "DMA2 Stream 0 Request 18",
+              "DMA2 Stream 1 Request 18",
+              "DMA2 Stream 2 Request 18",
+              "DMA2 Stream 3 Request 18",
+              "DMA2 Stream 4 Request 18",
+              "DMA2 Stream 5 Request 18",
+              "DMA2 Stream 6 Request 18",
+              "DMA2 Stream 7 Request 18"
+            ]
+          }
+        ]
+      },
+      "B00": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA1 Stream 0 Request 12",
+              "DMA1 Stream 1 Request 12",
+              "DMA1 Stream 2 Request 12",
+              "DMA1 Stream 3 Request 12",
+              "DMA1 Stream 4 Request 12",
+              "DMA1 Stream 5 Request 12",
+              "DMA1 Stream 6 Request 12",
+              "DMA1 Stream 7 Request 12",
+              "DMA2 Stream 0 Request 12",
+              "DMA2 Stream 1 Request 12",
+              "DMA2 Stream 2 Request 12",
+              "DMA2 Stream 3 Request 12",
+              "DMA2 Stream 4 Request 12",
+              "DMA2 Stream 5 Request 12",
+              "DMA2 Stream 6 Request 12",
+              "DMA2 Stream 7 Request 12"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH3",
+            "dma": [
+              "DMA1 Stream 0 Request 25",
+              "DMA1 Stream 1 Request 25",
+              "DMA1 Stream 2 Request 25",
+              "DMA1 Stream 3 Request 25",
+              "DMA1 Stream 4 Request 25",
+              "DMA1 Stream 5 Request 25",
+              "DMA1 Stream 6 Request 25",
+              "DMA1 Stream 7 Request 25",
+              "DMA2 Stream 0 Request 25",
+              "DMA2 Stream 1 Request 25",
+              "DMA2 Stream 2 Request 25",
+              "DMA2 Stream 3 Request 25",
+              "DMA2 Stream 4 Request 25",
+              "DMA2 Stream 5 Request 25",
+              "DMA2 Stream 6 Request 25",
+              "DMA2 Stream 7 Request 25"
+            ]
+          }
+        ]
+      },
+      "B01": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA1 Stream 0 Request 13",
+              "DMA1 Stream 1 Request 13",
+              "DMA1 Stream 2 Request 13",
+              "DMA1 Stream 3 Request 13",
+              "DMA1 Stream 4 Request 13",
+              "DMA1 Stream 5 Request 13",
+              "DMA1 Stream 6 Request 13",
+              "DMA1 Stream 7 Request 13",
+              "DMA2 Stream 0 Request 13",
+              "DMA2 Stream 1 Request 13",
+              "DMA2 Stream 2 Request 13",
+              "DMA2 Stream 3 Request 13",
+              "DMA2 Stream 4 Request 13",
+              "DMA2 Stream 5 Request 13",
+              "DMA2 Stream 6 Request 13",
+              "DMA2 Stream 7 Request 13"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH4",
+            "dma": [
+              "DMA1 Stream 0 Request 26",
+              "DMA1 Stream 1 Request 26",
+              "DMA1 Stream 2 Request 26",
+              "DMA1 Stream 3 Request 26",
+              "DMA1 Stream 4 Request 26",
+              "DMA1 Stream 5 Request 26",
+              "DMA1 Stream 6 Request 26",
+              "DMA1 Stream 7 Request 26",
+              "DMA2 Stream 0 Request 26",
+              "DMA2 Stream 1 Request 26",
+              "DMA2 Stream 2 Request 26",
+              "DMA2 Stream 3 Request 26",
+              "DMA2 Stream 4 Request 26",
+              "DMA2 Stream 5 Request 26",
+              "DMA2 Stream 6 Request 26",
+              "DMA2 Stream 7 Request 26"
+            ]
+          }
+        ]
+      },
+      "B03": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH2",
+            "dma": [
+              "DMA1 Stream 0 Request 19",
+              "DMA1 Stream 1 Request 19",
+              "DMA1 Stream 2 Request 19",
+              "DMA1 Stream 3 Request 19",
+              "DMA1 Stream 4 Request 19",
+              "DMA1 Stream 5 Request 19",
+              "DMA1 Stream 6 Request 19",
+              "DMA1 Stream 7 Request 19",
+              "DMA2 Stream 0 Request 19",
+              "DMA2 Stream 1 Request 19",
+              "DMA2 Stream 2 Request 19",
+              "DMA2 Stream 3 Request 19",
+              "DMA2 Stream 4 Request 19",
+              "DMA2 Stream 5 Request 19",
+              "DMA2 Stream 6 Request 19",
+              "DMA2 Stream 7 Request 19"
+            ]
+          }
+        ]
+      },
+      "B04": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 23",
+              "DMA1 Stream 1 Request 23",
+              "DMA1 Stream 2 Request 23",
+              "DMA1 Stream 3 Request 23",
+              "DMA1 Stream 4 Request 23",
+              "DMA1 Stream 5 Request 23",
+              "DMA1 Stream 6 Request 23",
+              "DMA1 Stream 7 Request 23",
+              "DMA2 Stream 0 Request 23",
+              "DMA2 Stream 1 Request 23",
+              "DMA2 Stream 2 Request 23",
+              "DMA2 Stream 3 Request 23",
+              "DMA2 Stream 4 Request 23",
+              "DMA2 Stream 5 Request 23",
+              "DMA2 Stream 6 Request 23",
+              "DMA2 Stream 7 Request 23"
+            ]
+          }
+        ]
+      },
+      "B05": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 0 Request 24",
+              "DMA1 Stream 1 Request 24",
+              "DMA1 Stream 2 Request 24",
+              "DMA1 Stream 3 Request 24",
+              "DMA1 Stream 4 Request 24",
+              "DMA1 Stream 5 Request 24",
+              "DMA1 Stream 6 Request 24",
+              "DMA1 Stream 7 Request 24",
+              "DMA2 Stream 0 Request 24",
+              "DMA2 Stream 1 Request 24",
+              "DMA2 Stream 2 Request 24",
+              "DMA2 Stream 3 Request 24",
+              "DMA2 Stream 4 Request 24",
+              "DMA2 Stream 5 Request 24",
+              "DMA2 Stream 6 Request 24",
+              "DMA2 Stream 7 Request 24"
+            ]
+          }
+        ]
+      },
+      "B06": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM16 CH1N",
+            "dma": [
+              "DMA1 Stream 0 Request 109",
+              "DMA1 Stream 1 Request 109",
+              "DMA1 Stream 2 Request 109",
+              "DMA1 Stream 3 Request 109",
+              "DMA1 Stream 4 Request 109",
+              "DMA1 Stream 5 Request 109",
+              "DMA1 Stream 6 Request 109",
+              "DMA1 Stream 7 Request 109",
+              "DMA2 Stream 0 Request 109",
+              "DMA2 Stream 1 Request 109",
+              "DMA2 Stream 2 Request 109",
+              "DMA2 Stream 3 Request 109",
+              "DMA2 Stream 4 Request 109",
+              "DMA2 Stream 5 Request 109",
+              "DMA2 Stream 6 Request 109",
+              "DMA2 Stream 7 Request 109"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 29",
+              "DMA1 Stream 1 Request 29",
+              "DMA1 Stream 2 Request 29",
+              "DMA1 Stream 3 Request 29",
+              "DMA1 Stream 4 Request 29",
+              "DMA1 Stream 5 Request 29",
+              "DMA1 Stream 6 Request 29",
+              "DMA1 Stream 7 Request 29",
+              "DMA2 Stream 0 Request 29",
+              "DMA2 Stream 1 Request 29",
+              "DMA2 Stream 2 Request 29",
+              "DMA2 Stream 3 Request 29",
+              "DMA2 Stream 4 Request 29",
+              "DMA2 Stream 5 Request 29",
+              "DMA2 Stream 6 Request 29",
+              "DMA2 Stream 7 Request 29"
+            ]
+          }
+        ]
+      },
+      "B07": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM17 CH1N",
+            "dma": [
+              "DMA1 Stream 0 Request 111",
+              "DMA1 Stream 1 Request 111",
+              "DMA1 Stream 2 Request 111",
+              "DMA1 Stream 3 Request 111",
+              "DMA1 Stream 4 Request 111",
+              "DMA1 Stream 5 Request 111",
+              "DMA1 Stream 6 Request 111",
+              "DMA1 Stream 7 Request 111",
+              "DMA2 Stream 0 Request 111",
+              "DMA2 Stream 1 Request 111",
+              "DMA2 Stream 2 Request 111",
+              "DMA2 Stream 3 Request 111",
+              "DMA2 Stream 4 Request 111",
+              "DMA2 Stream 5 Request 111",
+              "DMA2 Stream 6 Request 111",
+              "DMA2 Stream 7 Request 111"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH2",
+            "dma": [
+              "DMA1 Stream 0 Request 30",
+              "DMA1 Stream 1 Request 30",
+              "DMA1 Stream 2 Request 30",
+              "DMA1 Stream 3 Request 30",
+              "DMA1 Stream 4 Request 30",
+              "DMA1 Stream 5 Request 30",
+              "DMA1 Stream 6 Request 30",
+              "DMA1 Stream 7 Request 30",
+              "DMA2 Stream 0 Request 30",
+              "DMA2 Stream 1 Request 30",
+              "DMA2 Stream 2 Request 30",
+              "DMA2 Stream 3 Request 30",
+              "DMA2 Stream 4 Request 30",
+              "DMA2 Stream 5 Request 30",
+              "DMA2 Stream 6 Request 30",
+              "DMA2 Stream 7 Request 30"
+            ]
+          }
+        ]
+      },
+      "B08": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM16 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 109",
+              "DMA1 Stream 1 Request 109",
+              "DMA1 Stream 2 Request 109",
+              "DMA1 Stream 3 Request 109",
+              "DMA1 Stream 4 Request 109",
+              "DMA1 Stream 5 Request 109",
+              "DMA1 Stream 6 Request 109",
+              "DMA1 Stream 7 Request 109",
+              "DMA2 Stream 0 Request 109",
+              "DMA2 Stream 1 Request 109",
+              "DMA2 Stream 2 Request 109",
+              "DMA2 Stream 3 Request 109",
+              "DMA2 Stream 4 Request 109",
+              "DMA2 Stream 5 Request 109",
+              "DMA2 Stream 6 Request 109",
+              "DMA2 Stream 7 Request 109"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH3",
+            "dma": [
+              "DMA1 Stream 0 Request 31",
+              "DMA1 Stream 1 Request 31",
+              "DMA1 Stream 2 Request 31",
+              "DMA1 Stream 3 Request 31",
+              "DMA1 Stream 4 Request 31",
+              "DMA1 Stream 5 Request 31",
+              "DMA1 Stream 6 Request 31",
+              "DMA1 Stream 7 Request 31",
+              "DMA2 Stream 0 Request 31",
+              "DMA2 Stream 1 Request 31",
+              "DMA2 Stream 2 Request 31",
+              "DMA2 Stream 3 Request 31",
+              "DMA2 Stream 4 Request 31",
+              "DMA2 Stream 5 Request 31",
+              "DMA2 Stream 6 Request 31",
+              "DMA2 Stream 7 Request 31"
+            ]
+          }
+        ]
+      },
+      "B09": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM17 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 111",
+              "DMA1 Stream 1 Request 111",
+              "DMA1 Stream 2 Request 111",
+              "DMA1 Stream 3 Request 111",
+              "DMA1 Stream 4 Request 111",
+              "DMA1 Stream 5 Request 111",
+              "DMA1 Stream 6 Request 111",
+              "DMA1 Stream 7 Request 111",
+              "DMA2 Stream 0 Request 111",
+              "DMA2 Stream 1 Request 111",
+              "DMA2 Stream 2 Request 111",
+              "DMA2 Stream 3 Request 111",
+              "DMA2 Stream 4 Request 111",
+              "DMA2 Stream 5 Request 111",
+              "DMA2 Stream 6 Request 111",
+              "DMA2 Stream 7 Request 111"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH4",
+            "dma": []
+          }
+        ]
+      },
+      "B10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH3",
+            "dma": [
+              "DMA1 Stream 0 Request 20",
+              "DMA1 Stream 1 Request 20",
+              "DMA1 Stream 2 Request 20",
+              "DMA1 Stream 3 Request 20",
+              "DMA1 Stream 4 Request 20",
+              "DMA1 Stream 5 Request 20",
+              "DMA1 Stream 6 Request 20",
+              "DMA1 Stream 7 Request 20",
+              "DMA2 Stream 0 Request 20",
+              "DMA2 Stream 1 Request 20",
+              "DMA2 Stream 2 Request 20",
+              "DMA2 Stream 3 Request 20",
+              "DMA2 Stream 4 Request 20",
+              "DMA2 Stream 5 Request 20",
+              "DMA2 Stream 6 Request 20",
+              "DMA2 Stream 7 Request 20"
+            ]
+          }
+        ]
+      },
+      "B11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH4",
+            "dma": [
+              "DMA1 Stream 0 Request 21",
+              "DMA1 Stream 1 Request 21",
+              "DMA1 Stream 2 Request 21",
+              "DMA1 Stream 3 Request 21",
+              "DMA1 Stream 4 Request 21",
+              "DMA1 Stream 5 Request 21",
+              "DMA1 Stream 6 Request 21",
+              "DMA1 Stream 7 Request 21",
+              "DMA2 Stream 0 Request 21",
+              "DMA2 Stream 1 Request 21",
+              "DMA2 Stream 2 Request 21",
+              "DMA2 Stream 3 Request 21",
+              "DMA2 Stream 4 Request 21",
+              "DMA2 Stream 5 Request 21",
+              "DMA2 Stream 6 Request 21",
+              "DMA2 Stream 7 Request 21"
+            ]
+          }
+        ]
+      },
+      "B13": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA1 Stream 0 Request 11",
+              "DMA1 Stream 1 Request 11",
+              "DMA1 Stream 2 Request 11",
+              "DMA1 Stream 3 Request 11",
+              "DMA1 Stream 4 Request 11",
+              "DMA1 Stream 5 Request 11",
+              "DMA1 Stream 6 Request 11",
+              "DMA1 Stream 7 Request 11",
+              "DMA2 Stream 0 Request 11",
+              "DMA2 Stream 1 Request 11",
+              "DMA2 Stream 2 Request 11",
+              "DMA2 Stream 3 Request 11",
+              "DMA2 Stream 4 Request 11",
+              "DMA2 Stream 5 Request 11",
+              "DMA2 Stream 6 Request 11",
+              "DMA2 Stream 7 Request 11"
+            ]
+          }
+        ]
+      },
+      "B14": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA1 Stream 0 Request 12",
+              "DMA1 Stream 1 Request 12",
+              "DMA1 Stream 2 Request 12",
+              "DMA1 Stream 3 Request 12",
+              "DMA1 Stream 4 Request 12",
+              "DMA1 Stream 5 Request 12",
+              "DMA1 Stream 6 Request 12",
+              "DMA1 Stream 7 Request 12",
+              "DMA2 Stream 0 Request 12",
+              "DMA2 Stream 1 Request 12",
+              "DMA2 Stream 2 Request 12",
+              "DMA2 Stream 3 Request 12",
+              "DMA2 Stream 4 Request 12",
+              "DMA2 Stream 5 Request 12",
+              "DMA2 Stream 6 Request 12",
+              "DMA2 Stream 7 Request 12"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM12 CH1",
+            "dma": []
+          }
+        ]
+      },
+      "B15": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA1 Stream 0 Request 13",
+              "DMA1 Stream 1 Request 13",
+              "DMA1 Stream 2 Request 13",
+              "DMA1 Stream 3 Request 13",
+              "DMA1 Stream 4 Request 13",
+              "DMA1 Stream 5 Request 13",
+              "DMA1 Stream 6 Request 13",
+              "DMA1 Stream 7 Request 13",
+              "DMA2 Stream 0 Request 13",
+              "DMA2 Stream 1 Request 13",
+              "DMA2 Stream 2 Request 13",
+              "DMA2 Stream 3 Request 13",
+              "DMA2 Stream 4 Request 13",
+              "DMA2 Stream 5 Request 13",
+              "DMA2 Stream 6 Request 13",
+              "DMA2 Stream 7 Request 13"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM12 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "C06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 23",
+              "DMA1 Stream 1 Request 23",
+              "DMA1 Stream 2 Request 23",
+              "DMA1 Stream 3 Request 23",
+              "DMA1 Stream 4 Request 23",
+              "DMA1 Stream 5 Request 23",
+              "DMA1 Stream 6 Request 23",
+              "DMA1 Stream 7 Request 23",
+              "DMA2 Stream 0 Request 23",
+              "DMA2 Stream 1 Request 23",
+              "DMA2 Stream 2 Request 23",
+              "DMA2 Stream 3 Request 23",
+              "DMA2 Stream 4 Request 23",
+              "DMA2 Stream 5 Request 23",
+              "DMA2 Stream 6 Request 23",
+              "DMA2 Stream 7 Request 23"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 47",
+              "DMA1 Stream 1 Request 47",
+              "DMA1 Stream 2 Request 47",
+              "DMA1 Stream 3 Request 47",
+              "DMA1 Stream 4 Request 47",
+              "DMA1 Stream 5 Request 47",
+              "DMA1 Stream 6 Request 47",
+              "DMA1 Stream 7 Request 47",
+              "DMA2 Stream 0 Request 47",
+              "DMA2 Stream 1 Request 47",
+              "DMA2 Stream 2 Request 47",
+              "DMA2 Stream 3 Request 47",
+              "DMA2 Stream 4 Request 47",
+              "DMA2 Stream 5 Request 47",
+              "DMA2 Stream 6 Request 47",
+              "DMA2 Stream 7 Request 47"
+            ]
+          }
+        ]
+      },
+      "C07": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Stream 0 Request 24",
+              "DMA1 Stream 1 Request 24",
+              "DMA1 Stream 2 Request 24",
+              "DMA1 Stream 3 Request 24",
+              "DMA1 Stream 4 Request 24",
+              "DMA1 Stream 5 Request 24",
+              "DMA1 Stream 6 Request 24",
+              "DMA1 Stream 7 Request 24",
+              "DMA2 Stream 0 Request 24",
+              "DMA2 Stream 1 Request 24",
+              "DMA2 Stream 2 Request 24",
+              "DMA2 Stream 3 Request 24",
+              "DMA2 Stream 4 Request 24",
+              "DMA2 Stream 5 Request 24",
+              "DMA2 Stream 6 Request 24",
+              "DMA2 Stream 7 Request 24"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH2",
+            "dma": [
+              "DMA1 Stream 0 Request 48",
+              "DMA1 Stream 1 Request 48",
+              "DMA1 Stream 2 Request 48",
+              "DMA1 Stream 3 Request 48",
+              "DMA1 Stream 4 Request 48",
+              "DMA1 Stream 5 Request 48",
+              "DMA1 Stream 6 Request 48",
+              "DMA1 Stream 7 Request 48",
+              "DMA2 Stream 0 Request 48",
+              "DMA2 Stream 1 Request 48",
+              "DMA2 Stream 2 Request 48",
+              "DMA2 Stream 3 Request 48",
+              "DMA2 Stream 4 Request 48",
+              "DMA2 Stream 5 Request 48",
+              "DMA2 Stream 6 Request 48",
+              "DMA2 Stream 7 Request 48"
+            ]
+          }
+        ]
+      },
+      "C08": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH3",
+            "dma": [
+              "DMA1 Stream 0 Request 25",
+              "DMA1 Stream 1 Request 25",
+              "DMA1 Stream 2 Request 25",
+              "DMA1 Stream 3 Request 25",
+              "DMA1 Stream 4 Request 25",
+              "DMA1 Stream 5 Request 25",
+              "DMA1 Stream 6 Request 25",
+              "DMA1 Stream 7 Request 25",
+              "DMA2 Stream 0 Request 25",
+              "DMA2 Stream 1 Request 25",
+              "DMA2 Stream 2 Request 25",
+              "DMA2 Stream 3 Request 25",
+              "DMA2 Stream 4 Request 25",
+              "DMA2 Stream 5 Request 25",
+              "DMA2 Stream 6 Request 25",
+              "DMA2 Stream 7 Request 25"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH3",
+            "dma": [
+              "DMA1 Stream 0 Request 49",
+              "DMA1 Stream 1 Request 49",
+              "DMA1 Stream 2 Request 49",
+              "DMA1 Stream 3 Request 49",
+              "DMA1 Stream 4 Request 49",
+              "DMA1 Stream 5 Request 49",
+              "DMA1 Stream 6 Request 49",
+              "DMA1 Stream 7 Request 49",
+              "DMA2 Stream 0 Request 49",
+              "DMA2 Stream 1 Request 49",
+              "DMA2 Stream 2 Request 49",
+              "DMA2 Stream 3 Request 49",
+              "DMA2 Stream 4 Request 49",
+              "DMA2 Stream 5 Request 49",
+              "DMA2 Stream 6 Request 49",
+              "DMA2 Stream 7 Request 49"
+            ]
+          }
+        ]
+      },
+      "C09": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH4",
+            "dma": [
+              "DMA1 Stream 0 Request 26",
+              "DMA1 Stream 1 Request 26",
+              "DMA1 Stream 2 Request 26",
+              "DMA1 Stream 3 Request 26",
+              "DMA1 Stream 4 Request 26",
+              "DMA1 Stream 5 Request 26",
+              "DMA1 Stream 6 Request 26",
+              "DMA1 Stream 7 Request 26",
+              "DMA2 Stream 0 Request 26",
+              "DMA2 Stream 1 Request 26",
+              "DMA2 Stream 2 Request 26",
+              "DMA2 Stream 3 Request 26",
+              "DMA2 Stream 4 Request 26",
+              "DMA2 Stream 5 Request 26",
+              "DMA2 Stream 6 Request 26",
+              "DMA2 Stream 7 Request 26"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH4",
+            "dma": [
+              "DMA1 Stream 0 Request 50",
+              "DMA1 Stream 1 Request 50",
+              "DMA1 Stream 2 Request 50",
+              "DMA1 Stream 3 Request 50",
+              "DMA1 Stream 4 Request 50",
+              "DMA1 Stream 5 Request 50",
+              "DMA1 Stream 6 Request 50",
+              "DMA1 Stream 7 Request 50",
+              "DMA2 Stream 0 Request 50",
+              "DMA2 Stream 1 Request 50",
+              "DMA2 Stream 2 Request 50",
+              "DMA2 Stream 3 Request 50",
+              "DMA2 Stream 4 Request 50",
+              "DMA2 Stream 5 Request 50",
+              "DMA2 Stream 6 Request 50",
+              "DMA2 Stream 7 Request 50"
+            ]
+          }
+        ]
+      },
+      "D12": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 29",
+              "DMA1 Stream 1 Request 29",
+              "DMA1 Stream 2 Request 29",
+              "DMA1 Stream 3 Request 29",
+              "DMA1 Stream 4 Request 29",
+              "DMA1 Stream 5 Request 29",
+              "DMA1 Stream 6 Request 29",
+              "DMA1 Stream 7 Request 29",
+              "DMA2 Stream 0 Request 29",
+              "DMA2 Stream 1 Request 29",
+              "DMA2 Stream 2 Request 29",
+              "DMA2 Stream 3 Request 29",
+              "DMA2 Stream 4 Request 29",
+              "DMA2 Stream 5 Request 29",
+              "DMA2 Stream 6 Request 29",
+              "DMA2 Stream 7 Request 29"
+            ]
+          }
+        ]
+      },
+      "D13": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH2",
+            "dma": [
+              "DMA1 Stream 0 Request 30",
+              "DMA1 Stream 1 Request 30",
+              "DMA1 Stream 2 Request 30",
+              "DMA1 Stream 3 Request 30",
+              "DMA1 Stream 4 Request 30",
+              "DMA1 Stream 5 Request 30",
+              "DMA1 Stream 6 Request 30",
+              "DMA1 Stream 7 Request 30",
+              "DMA2 Stream 0 Request 30",
+              "DMA2 Stream 1 Request 30",
+              "DMA2 Stream 2 Request 30",
+              "DMA2 Stream 3 Request 30",
+              "DMA2 Stream 4 Request 30",
+              "DMA2 Stream 5 Request 30",
+              "DMA2 Stream 6 Request 30",
+              "DMA2 Stream 7 Request 30"
+            ]
+          }
+        ]
+      },
+      "D14": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH3",
+            "dma": [
+              "DMA1 Stream 0 Request 31",
+              "DMA1 Stream 1 Request 31",
+              "DMA1 Stream 2 Request 31",
+              "DMA1 Stream 3 Request 31",
+              "DMA1 Stream 4 Request 31",
+              "DMA1 Stream 5 Request 31",
+              "DMA1 Stream 6 Request 31",
+              "DMA1 Stream 7 Request 31",
+              "DMA2 Stream 0 Request 31",
+              "DMA2 Stream 1 Request 31",
+              "DMA2 Stream 2 Request 31",
+              "DMA2 Stream 3 Request 31",
+              "DMA2 Stream 4 Request 31",
+              "DMA2 Stream 5 Request 31",
+              "DMA2 Stream 6 Request 31",
+              "DMA2 Stream 7 Request 31"
+            ]
+          }
+        ]
+      },
+      "D15": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH4",
+            "dma": []
+          }
+        ]
+      },
+      "E04": {
+        "timers": [
+          {
+            "af": "AF4",
+            "timer": "TIM15 CH1N",
+            "dma": [
+              "DMA1 Stream 0 Request 105",
+              "DMA1 Stream 1 Request 105",
+              "DMA1 Stream 2 Request 105",
+              "DMA1 Stream 3 Request 105",
+              "DMA1 Stream 4 Request 105",
+              "DMA1 Stream 5 Request 105",
+              "DMA1 Stream 6 Request 105",
+              "DMA1 Stream 7 Request 105",
+              "DMA2 Stream 0 Request 105",
+              "DMA2 Stream 1 Request 105",
+              "DMA2 Stream 2 Request 105",
+              "DMA2 Stream 3 Request 105",
+              "DMA2 Stream 4 Request 105",
+              "DMA2 Stream 5 Request 105",
+              "DMA2 Stream 6 Request 105",
+              "DMA2 Stream 7 Request 105"
+            ]
+          }
+        ]
+      },
+      "E05": {
+        "timers": [
+          {
+            "af": "AF4",
+            "timer": "TIM15 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 105",
+              "DMA1 Stream 1 Request 105",
+              "DMA1 Stream 2 Request 105",
+              "DMA1 Stream 3 Request 105",
+              "DMA1 Stream 4 Request 105",
+              "DMA1 Stream 5 Request 105",
+              "DMA1 Stream 6 Request 105",
+              "DMA1 Stream 7 Request 105",
+              "DMA2 Stream 0 Request 105",
+              "DMA2 Stream 1 Request 105",
+              "DMA2 Stream 2 Request 105",
+              "DMA2 Stream 3 Request 105",
+              "DMA2 Stream 4 Request 105",
+              "DMA2 Stream 5 Request 105",
+              "DMA2 Stream 6 Request 105",
+              "DMA2 Stream 7 Request 105"
+            ]
+          }
+        ]
+      },
+      "E06": {
+        "timers": [
+          {
+            "af": "AF4",
+            "timer": "TIM15 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "E08": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA1 Stream 0 Request 11",
+              "DMA1 Stream 1 Request 11",
+              "DMA1 Stream 2 Request 11",
+              "DMA1 Stream 3 Request 11",
+              "DMA1 Stream 4 Request 11",
+              "DMA1 Stream 5 Request 11",
+              "DMA1 Stream 6 Request 11",
+              "DMA1 Stream 7 Request 11",
+              "DMA2 Stream 0 Request 11",
+              "DMA2 Stream 1 Request 11",
+              "DMA2 Stream 2 Request 11",
+              "DMA2 Stream 3 Request 11",
+              "DMA2 Stream 4 Request 11",
+              "DMA2 Stream 5 Request 11",
+              "DMA2 Stream 6 Request 11",
+              "DMA2 Stream 7 Request 11"
+            ]
+          }
+        ]
+      },
+      "E09": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH1",
+            "dma": [
+              "DMA1 Stream 0 Request 11",
+              "DMA1 Stream 1 Request 11",
+              "DMA1 Stream 2 Request 11",
+              "DMA1 Stream 3 Request 11",
+              "DMA1 Stream 4 Request 11",
+              "DMA1 Stream 5 Request 11",
+              "DMA1 Stream 6 Request 11",
+              "DMA1 Stream 7 Request 11",
+              "DMA2 Stream 0 Request 11",
+              "DMA2 Stream 1 Request 11",
+              "DMA2 Stream 2 Request 11",
+              "DMA2 Stream 3 Request 11",
+              "DMA2 Stream 4 Request 11",
+              "DMA2 Stream 5 Request 11",
+              "DMA2 Stream 6 Request 11",
+              "DMA2 Stream 7 Request 11"
+            ]
+          }
+        ]
+      },
+      "E10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA1 Stream 0 Request 12",
+              "DMA1 Stream 1 Request 12",
+              "DMA1 Stream 2 Request 12",
+              "DMA1 Stream 3 Request 12",
+              "DMA1 Stream 4 Request 12",
+              "DMA1 Stream 5 Request 12",
+              "DMA1 Stream 6 Request 12",
+              "DMA1 Stream 7 Request 12",
+              "DMA2 Stream 0 Request 12",
+              "DMA2 Stream 1 Request 12",
+              "DMA2 Stream 2 Request 12",
+              "DMA2 Stream 3 Request 12",
+              "DMA2 Stream 4 Request 12",
+              "DMA2 Stream 5 Request 12",
+              "DMA2 Stream 6 Request 12",
+              "DMA2 Stream 7 Request 12"
+            ]
+          }
+        ]
+      },
+      "E11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH2",
+            "dma": [
+              "DMA1 Stream 0 Request 12",
+              "DMA1 Stream 1 Request 12",
+              "DMA1 Stream 2 Request 12",
+              "DMA1 Stream 3 Request 12",
+              "DMA1 Stream 4 Request 12",
+              "DMA1 Stream 5 Request 12",
+              "DMA1 Stream 6 Request 12",
+              "DMA1 Stream 7 Request 12",
+              "DMA2 Stream 0 Request 12",
+              "DMA2 Stream 1 Request 12",
+              "DMA2 Stream 2 Request 12",
+              "DMA2 Stream 3 Request 12",
+              "DMA2 Stream 4 Request 12",
+              "DMA2 Stream 5 Request 12",
+              "DMA2 Stream 6 Request 12",
+              "DMA2 Stream 7 Request 12"
+            ]
+          }
+        ]
+      },
+      "E12": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA1 Stream 0 Request 13",
+              "DMA1 Stream 1 Request 13",
+              "DMA1 Stream 2 Request 13",
+              "DMA1 Stream 3 Request 13",
+              "DMA1 Stream 4 Request 13",
+              "DMA1 Stream 5 Request 13",
+              "DMA1 Stream 6 Request 13",
+              "DMA1 Stream 7 Request 13",
+              "DMA2 Stream 0 Request 13",
+              "DMA2 Stream 1 Request 13",
+              "DMA2 Stream 2 Request 13",
+              "DMA2 Stream 3 Request 13",
+              "DMA2 Stream 4 Request 13",
+              "DMA2 Stream 5 Request 13",
+              "DMA2 Stream 6 Request 13",
+              "DMA2 Stream 7 Request 13"
+            ]
+          }
+        ]
+      },
+      "E13": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH3",
+            "dma": [
+              "DMA1 Stream 0 Request 13",
+              "DMA1 Stream 1 Request 13",
+              "DMA1 Stream 2 Request 13",
+              "DMA1 Stream 3 Request 13",
+              "DMA1 Stream 4 Request 13",
+              "DMA1 Stream 5 Request 13",
+              "DMA1 Stream 6 Request 13",
+              "DMA1 Stream 7 Request 13",
+              "DMA2 Stream 0 Request 13",
+              "DMA2 Stream 1 Request 13",
+              "DMA2 Stream 2 Request 13",
+              "DMA2 Stream 3 Request 13",
+              "DMA2 Stream 4 Request 13",
+              "DMA2 Stream 5 Request 13",
+              "DMA2 Stream 6 Request 13",
+              "DMA2 Stream 7 Request 13"
+            ]
+          }
+        ]
+      },
+      "E14": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM1 CH4",
+            "dma": [
+              "DMA1 Stream 0 Request 14",
+              "DMA1 Stream 1 Request 14",
+              "DMA1 Stream 2 Request 14",
+              "DMA1 Stream 3 Request 14",
+              "DMA1 Stream 4 Request 14",
+              "DMA1 Stream 5 Request 14",
+              "DMA1 Stream 6 Request 14",
+              "DMA1 Stream 7 Request 14",
+              "DMA2 Stream 0 Request 14",
+              "DMA2 Stream 1 Request 14",
+              "DMA2 Stream 2 Request 14",
+              "DMA2 Stream 3 Request 14",
+              "DMA2 Stream 4 Request 14",
+              "DMA2 Stream 5 Request 14",
+              "DMA2 Stream 6 Request 14",
+              "DMA2 Stream 7 Request 14"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "STM32G47X": {
+    "pins": {
+      "A00": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 56",
+              "DMA1 Channel 2 Request 56",
+              "DMA1 Channel 3 Request 56",
+              "DMA1 Channel 4 Request 56",
+              "DMA1 Channel 5 Request 56",
+              "DMA1 Channel 6 Request 56",
+              "DMA1 Channel 7 Request 56",
+              "DMA1 Channel 8 Request 56",
+              "DMA2 Channel 1 Request 56",
+              "DMA2 Channel 2 Request 56",
+              "DMA2 Channel 3 Request 56",
+              "DMA2 Channel 4 Request 56",
+              "DMA2 Channel 5 Request 56",
+              "DMA2 Channel 6 Request 56",
+              "DMA2 Channel 7 Request 56",
+              "DMA2 Channel 8 Request 56"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 72",
+              "DMA1 Channel 2 Request 72",
+              "DMA1 Channel 3 Request 72",
+              "DMA1 Channel 4 Request 72",
+              "DMA1 Channel 5 Request 72",
+              "DMA1 Channel 6 Request 72",
+              "DMA1 Channel 7 Request 72",
+              "DMA1 Channel 8 Request 72",
+              "DMA2 Channel 1 Request 72",
+              "DMA2 Channel 2 Request 72",
+              "DMA2 Channel 3 Request 72",
+              "DMA2 Channel 4 Request 72",
+              "DMA2 Channel 5 Request 72",
+              "DMA2 Channel 6 Request 72",
+              "DMA2 Channel 7 Request 72",
+              "DMA2 Channel 8 Request 72"
+            ]
+          }
+        ]
+      },
+      "A01": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 57",
+              "DMA1 Channel 2 Request 57",
+              "DMA1 Channel 3 Request 57",
+              "DMA1 Channel 4 Request 57",
+              "DMA1 Channel 5 Request 57",
+              "DMA1 Channel 6 Request 57",
+              "DMA1 Channel 7 Request 57",
+              "DMA1 Channel 8 Request 57",
+              "DMA2 Channel 1 Request 57",
+              "DMA2 Channel 2 Request 57",
+              "DMA2 Channel 3 Request 57",
+              "DMA2 Channel 4 Request 57",
+              "DMA2 Channel 5 Request 57",
+              "DMA2 Channel 6 Request 57",
+              "DMA2 Channel 7 Request 57",
+              "DMA2 Channel 8 Request 57"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 73",
+              "DMA1 Channel 2 Request 73",
+              "DMA1 Channel 3 Request 73",
+              "DMA1 Channel 4 Request 73",
+              "DMA1 Channel 5 Request 73",
+              "DMA1 Channel 6 Request 73",
+              "DMA1 Channel 7 Request 73",
+              "DMA1 Channel 8 Request 73",
+              "DMA2 Channel 1 Request 73",
+              "DMA2 Channel 2 Request 73",
+              "DMA2 Channel 3 Request 73",
+              "DMA2 Channel 4 Request 73",
+              "DMA2 Channel 5 Request 73",
+              "DMA2 Channel 6 Request 73",
+              "DMA2 Channel 7 Request 73",
+              "DMA2 Channel 8 Request 73"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM15 CH1N",
+            "dma": [
+              "DMA1 Channel 1 Request 78",
+              "DMA1 Channel 2 Request 78",
+              "DMA1 Channel 3 Request 78",
+              "DMA1 Channel 4 Request 78",
+              "DMA1 Channel 5 Request 78",
+              "DMA1 Channel 6 Request 78",
+              "DMA1 Channel 7 Request 78",
+              "DMA1 Channel 8 Request 78",
+              "DMA2 Channel 1 Request 78",
+              "DMA2 Channel 2 Request 78",
+              "DMA2 Channel 3 Request 78",
+              "DMA2 Channel 4 Request 78",
+              "DMA2 Channel 5 Request 78",
+              "DMA2 Channel 6 Request 78",
+              "DMA2 Channel 7 Request 78",
+              "DMA2 Channel 8 Request 78"
+            ]
+          }
+        ]
+      },
+      "A02": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH3",
+            "dma": [
+              "DMA1 Channel 1 Request 58",
+              "DMA1 Channel 2 Request 58",
+              "DMA1 Channel 3 Request 58",
+              "DMA1 Channel 4 Request 58",
+              "DMA1 Channel 5 Request 58",
+              "DMA1 Channel 6 Request 58",
+              "DMA1 Channel 7 Request 58",
+              "DMA1 Channel 8 Request 58",
+              "DMA2 Channel 1 Request 58",
+              "DMA2 Channel 2 Request 58",
+              "DMA2 Channel 3 Request 58",
+              "DMA2 Channel 4 Request 58",
+              "DMA2 Channel 5 Request 58",
+              "DMA2 Channel 6 Request 58",
+              "DMA2 Channel 7 Request 58",
+              "DMA2 Channel 8 Request 58"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH3",
+            "dma": [
+              "DMA1 Channel 1 Request 74",
+              "DMA1 Channel 2 Request 74",
+              "DMA1 Channel 3 Request 74",
+              "DMA1 Channel 4 Request 74",
+              "DMA1 Channel 5 Request 74",
+              "DMA1 Channel 6 Request 74",
+              "DMA1 Channel 7 Request 74",
+              "DMA1 Channel 8 Request 74",
+              "DMA2 Channel 1 Request 74",
+              "DMA2 Channel 2 Request 74",
+              "DMA2 Channel 3 Request 74",
+              "DMA2 Channel 4 Request 74",
+              "DMA2 Channel 5 Request 74",
+              "DMA2 Channel 6 Request 74",
+              "DMA2 Channel 7 Request 74",
+              "DMA2 Channel 8 Request 74"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM15 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 78",
+              "DMA1 Channel 2 Request 78",
+              "DMA1 Channel 3 Request 78",
+              "DMA1 Channel 4 Request 78",
+              "DMA1 Channel 5 Request 78",
+              "DMA1 Channel 6 Request 78",
+              "DMA1 Channel 7 Request 78",
+              "DMA1 Channel 8 Request 78",
+              "DMA2 Channel 1 Request 78",
+              "DMA2 Channel 2 Request 78",
+              "DMA2 Channel 3 Request 78",
+              "DMA2 Channel 4 Request 78",
+              "DMA2 Channel 5 Request 78",
+              "DMA2 Channel 6 Request 78",
+              "DMA2 Channel 7 Request 78",
+              "DMA2 Channel 8 Request 78"
+            ]
+          }
+        ]
+      },
+      "A03": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH4",
+            "dma": [
+              "DMA1 Channel 1 Request 59",
+              "DMA1 Channel 2 Request 59",
+              "DMA1 Channel 3 Request 59",
+              "DMA1 Channel 4 Request 59",
+              "DMA1 Channel 5 Request 59",
+              "DMA1 Channel 6 Request 59",
+              "DMA1 Channel 7 Request 59",
+              "DMA1 Channel 8 Request 59",
+              "DMA2 Channel 1 Request 59",
+              "DMA2 Channel 2 Request 59",
+              "DMA2 Channel 3 Request 59",
+              "DMA2 Channel 4 Request 59",
+              "DMA2 Channel 5 Request 59",
+              "DMA2 Channel 6 Request 59",
+              "DMA2 Channel 7 Request 59",
+              "DMA2 Channel 8 Request 59"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH4",
+            "dma": [
+              "DMA1 Channel 1 Request 75",
+              "DMA1 Channel 2 Request 75",
+              "DMA1 Channel 3 Request 75",
+              "DMA1 Channel 4 Request 75",
+              "DMA1 Channel 5 Request 75",
+              "DMA1 Channel 6 Request 75",
+              "DMA1 Channel 7 Request 75",
+              "DMA1 Channel 8 Request 75",
+              "DMA2 Channel 1 Request 75",
+              "DMA2 Channel 2 Request 75",
+              "DMA2 Channel 3 Request 75",
+              "DMA2 Channel 4 Request 75",
+              "DMA2 Channel 5 Request 75",
+              "DMA2 Channel 6 Request 75",
+              "DMA2 Channel 7 Request 75",
+              "DMA2 Channel 8 Request 75"
+            ]
+          },
+          {
+            "af": "AF9",
+            "timer": "TIM15 CH2",
+            "dma": []
+          }
+        ]
+      },
+      "A04": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 62",
+              "DMA1 Channel 2 Request 62",
+              "DMA1 Channel 3 Request 62",
+              "DMA1 Channel 4 Request 62",
+              "DMA1 Channel 5 Request 62",
+              "DMA1 Channel 6 Request 62",
+              "DMA1 Channel 7 Request 62",
+              "DMA1 Channel 8 Request 62",
+              "DMA2 Channel 1 Request 62",
+              "DMA2 Channel 2 Request 62",
+              "DMA2 Channel 3 Request 62",
+              "DMA2 Channel 4 Request 62",
+              "DMA2 Channel 5 Request 62",
+              "DMA2 Channel 6 Request 62",
+              "DMA2 Channel 7 Request 62",
+              "DMA2 Channel 8 Request 62"
+            ]
+          }
+        ]
+      },
+      "A05": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 56",
+              "DMA1 Channel 2 Request 56",
+              "DMA1 Channel 3 Request 56",
+              "DMA1 Channel 4 Request 56",
+              "DMA1 Channel 5 Request 56",
+              "DMA1 Channel 6 Request 56",
+              "DMA1 Channel 7 Request 56",
+              "DMA1 Channel 8 Request 56",
+              "DMA2 Channel 1 Request 56",
+              "DMA2 Channel 2 Request 56",
+              "DMA2 Channel 3 Request 56",
+              "DMA2 Channel 4 Request 56",
+              "DMA2 Channel 5 Request 56",
+              "DMA2 Channel 6 Request 56",
+              "DMA2 Channel 7 Request 56",
+              "DMA2 Channel 8 Request 56"
+            ]
+          }
+        ]
+      },
+      "A06": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM16 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 82",
+              "DMA1 Channel 2 Request 82",
+              "DMA1 Channel 3 Request 82",
+              "DMA1 Channel 4 Request 82",
+              "DMA1 Channel 5 Request 82",
+              "DMA1 Channel 6 Request 82",
+              "DMA1 Channel 7 Request 82",
+              "DMA1 Channel 8 Request 82",
+              "DMA2 Channel 1 Request 82",
+              "DMA2 Channel 2 Request 82",
+              "DMA2 Channel 3 Request 82",
+              "DMA2 Channel 4 Request 82",
+              "DMA2 Channel 5 Request 82",
+              "DMA2 Channel 6 Request 82",
+              "DMA2 Channel 7 Request 82",
+              "DMA2 Channel 8 Request 82"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 61",
+              "DMA1 Channel 2 Request 61",
+              "DMA1 Channel 3 Request 61",
+              "DMA1 Channel 4 Request 61",
+              "DMA1 Channel 5 Request 61",
+              "DMA1 Channel 6 Request 61",
+              "DMA1 Channel 7 Request 61",
+              "DMA1 Channel 8 Request 61",
+              "DMA2 Channel 1 Request 61",
+              "DMA2 Channel 2 Request 61",
+              "DMA2 Channel 3 Request 61",
+              "DMA2 Channel 4 Request 61",
+              "DMA2 Channel 5 Request 61",
+              "DMA2 Channel 6 Request 61",
+              "DMA2 Channel 7 Request 61",
+              "DMA2 Channel 8 Request 61"
+            ]
+          }
+        ]
+      },
+      "A07": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM17 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 84",
+              "DMA1 Channel 2 Request 84",
+              "DMA1 Channel 3 Request 84",
+              "DMA1 Channel 4 Request 84",
+              "DMA1 Channel 5 Request 84",
+              "DMA1 Channel 6 Request 84",
+              "DMA1 Channel 7 Request 84",
+              "DMA1 Channel 8 Request 84",
+              "DMA2 Channel 1 Request 84",
+              "DMA2 Channel 2 Request 84",
+              "DMA2 Channel 3 Request 84",
+              "DMA2 Channel 4 Request 84",
+              "DMA2 Channel 5 Request 84",
+              "DMA2 Channel 6 Request 84",
+              "DMA2 Channel 7 Request 84",
+              "DMA2 Channel 8 Request 84"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 62",
+              "DMA1 Channel 2 Request 62",
+              "DMA1 Channel 3 Request 62",
+              "DMA1 Channel 4 Request 62",
+              "DMA1 Channel 5 Request 62",
+              "DMA1 Channel 6 Request 62",
+              "DMA1 Channel 7 Request 62",
+              "DMA1 Channel 8 Request 62",
+              "DMA2 Channel 1 Request 62",
+              "DMA2 Channel 2 Request 62",
+              "DMA2 Channel 3 Request 62",
+              "DMA2 Channel 4 Request 62",
+              "DMA2 Channel 5 Request 62",
+              "DMA2 Channel 6 Request 62",
+              "DMA2 Channel 7 Request 62",
+              "DMA2 Channel 8 Request 62"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM8 CH1N",
+            "dma": [
+              "DMA1 Channel 1 Request 49",
+              "DMA1 Channel 2 Request 49",
+              "DMA1 Channel 3 Request 49",
+              "DMA1 Channel 4 Request 49",
+              "DMA1 Channel 5 Request 49",
+              "DMA1 Channel 6 Request 49",
+              "DMA1 Channel 7 Request 49",
+              "DMA1 Channel 8 Request 49",
+              "DMA2 Channel 1 Request 49",
+              "DMA2 Channel 2 Request 49",
+              "DMA2 Channel 3 Request 49",
+              "DMA2 Channel 4 Request 49",
+              "DMA2 Channel 5 Request 49",
+              "DMA2 Channel 6 Request 49",
+              "DMA2 Channel 7 Request 49",
+              "DMA2 Channel 8 Request 49"
+            ]
+          },
+          {
+            "af": "AF6",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA1 Channel 1 Request 42",
+              "DMA1 Channel 2 Request 42",
+              "DMA1 Channel 3 Request 42",
+              "DMA1 Channel 4 Request 42",
+              "DMA1 Channel 5 Request 42",
+              "DMA1 Channel 6 Request 42",
+              "DMA1 Channel 7 Request 42",
+              "DMA1 Channel 8 Request 42",
+              "DMA2 Channel 1 Request 42",
+              "DMA2 Channel 2 Request 42",
+              "DMA2 Channel 3 Request 42",
+              "DMA2 Channel 4 Request 42",
+              "DMA2 Channel 5 Request 42",
+              "DMA2 Channel 6 Request 42",
+              "DMA2 Channel 7 Request 42",
+              "DMA2 Channel 8 Request 42"
+            ]
+          }
+        ]
+      },
+      "A08": {
+        "timers": [
+          {
+            "af": "AF6",
+            "timer": "TIM1 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 42",
+              "DMA1 Channel 2 Request 42",
+              "DMA1 Channel 3 Request 42",
+              "DMA1 Channel 4 Request 42",
+              "DMA1 Channel 5 Request 42",
+              "DMA1 Channel 6 Request 42",
+              "DMA1 Channel 7 Request 42",
+              "DMA1 Channel 8 Request 42",
+              "DMA2 Channel 1 Request 42",
+              "DMA2 Channel 2 Request 42",
+              "DMA2 Channel 3 Request 42",
+              "DMA2 Channel 4 Request 42",
+              "DMA2 Channel 5 Request 42",
+              "DMA2 Channel 6 Request 42",
+              "DMA2 Channel 7 Request 42",
+              "DMA2 Channel 8 Request 42"
+            ]
+          }
+        ]
+      },
+      "A09": {
+        "timers": [
+          {
+            "af": "AF6",
+            "timer": "TIM1 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 43",
+              "DMA1 Channel 2 Request 43",
+              "DMA1 Channel 3 Request 43",
+              "DMA1 Channel 4 Request 43",
+              "DMA1 Channel 5 Request 43",
+              "DMA1 Channel 6 Request 43",
+              "DMA1 Channel 7 Request 43",
+              "DMA1 Channel 8 Request 43",
+              "DMA2 Channel 1 Request 43",
+              "DMA2 Channel 2 Request 43",
+              "DMA2 Channel 3 Request 43",
+              "DMA2 Channel 4 Request 43",
+              "DMA2 Channel 5 Request 43",
+              "DMA2 Channel 6 Request 43",
+              "DMA2 Channel 7 Request 43",
+              "DMA2 Channel 8 Request 43"
+            ]
+          },
+          {
+            "af": "AF10",
+            "timer": "TIM2 CH3",
+            "dma": [
+              "DMA1 Channel 1 Request 58",
+              "DMA1 Channel 2 Request 58",
+              "DMA1 Channel 3 Request 58",
+              "DMA1 Channel 4 Request 58",
+              "DMA1 Channel 5 Request 58",
+              "DMA1 Channel 6 Request 58",
+              "DMA1 Channel 7 Request 58",
+              "DMA1 Channel 8 Request 58",
+              "DMA2 Channel 1 Request 58",
+              "DMA2 Channel 2 Request 58",
+              "DMA2 Channel 3 Request 58",
+              "DMA2 Channel 4 Request 58",
+              "DMA2 Channel 5 Request 58",
+              "DMA2 Channel 6 Request 58",
+              "DMA2 Channel 7 Request 58",
+              "DMA2 Channel 8 Request 58"
+            ]
+          }
+        ]
+      },
+      "A10": {
+        "timers": [
+          {
+            "af": "AF6",
+            "timer": "TIM1 CH3",
+            "dma": [
+              "DMA1 Channel 1 Request 44",
+              "DMA1 Channel 2 Request 44",
+              "DMA1 Channel 3 Request 44",
+              "DMA1 Channel 4 Request 44",
+              "DMA1 Channel 5 Request 44",
+              "DMA1 Channel 6 Request 44",
+              "DMA1 Channel 7 Request 44",
+              "DMA1 Channel 8 Request 44",
+              "DMA2 Channel 1 Request 44",
+              "DMA2 Channel 2 Request 44",
+              "DMA2 Channel 3 Request 44",
+              "DMA2 Channel 4 Request 44",
+              "DMA2 Channel 5 Request 44",
+              "DMA2 Channel 6 Request 44",
+              "DMA2 Channel 7 Request 44",
+              "DMA2 Channel 8 Request 44"
+            ]
+          },
+          {
+            "af": "AF10",
+            "timer": "TIM2 CH4",
+            "dma": [
+              "DMA1 Channel 1 Request 59",
+              "DMA1 Channel 2 Request 59",
+              "DMA1 Channel 3 Request 59",
+              "DMA1 Channel 4 Request 59",
+              "DMA1 Channel 5 Request 59",
+              "DMA1 Channel 6 Request 59",
+              "DMA1 Channel 7 Request 59",
+              "DMA1 Channel 8 Request 59",
+              "DMA2 Channel 1 Request 59",
+              "DMA2 Channel 2 Request 59",
+              "DMA2 Channel 3 Request 59",
+              "DMA2 Channel 4 Request 59",
+              "DMA2 Channel 5 Request 59",
+              "DMA2 Channel 6 Request 59",
+              "DMA2 Channel 7 Request 59",
+              "DMA2 Channel 8 Request 59"
+            ]
+          }
+        ]
+      },
+      "A11": {
+        "timers": [
+          {
+            "af": "AF6",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA1 Channel 1 Request 42",
+              "DMA1 Channel 2 Request 42",
+              "DMA1 Channel 3 Request 42",
+              "DMA1 Channel 4 Request 42",
+              "DMA1 Channel 5 Request 42",
+              "DMA1 Channel 6 Request 42",
+              "DMA1 Channel 7 Request 42",
+              "DMA1 Channel 8 Request 42",
+              "DMA2 Channel 1 Request 42",
+              "DMA2 Channel 2 Request 42",
+              "DMA2 Channel 3 Request 42",
+              "DMA2 Channel 4 Request 42",
+              "DMA2 Channel 5 Request 42",
+              "DMA2 Channel 6 Request 42",
+              "DMA2 Channel 7 Request 42",
+              "DMA2 Channel 8 Request 42"
+            ]
+          },
+          {
+            "af": "AF10",
+            "timer": "TIM4 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 67",
+              "DMA1 Channel 2 Request 67",
+              "DMA1 Channel 3 Request 67",
+              "DMA1 Channel 4 Request 67",
+              "DMA1 Channel 5 Request 67",
+              "DMA1 Channel 6 Request 67",
+              "DMA1 Channel 7 Request 67",
+              "DMA1 Channel 8 Request 67",
+              "DMA2 Channel 1 Request 67",
+              "DMA2 Channel 2 Request 67",
+              "DMA2 Channel 3 Request 67",
+              "DMA2 Channel 4 Request 67",
+              "DMA2 Channel 5 Request 67",
+              "DMA2 Channel 6 Request 67",
+              "DMA2 Channel 7 Request 67",
+              "DMA2 Channel 8 Request 67"
+            ]
+          },
+          {
+            "af": "AF11",
+            "timer": "TIM1 CH4",
+            "dma": [
+              "DMA1 Channel 1 Request 45",
+              "DMA1 Channel 2 Request 45",
+              "DMA1 Channel 3 Request 45",
+              "DMA1 Channel 4 Request 45",
+              "DMA1 Channel 5 Request 45",
+              "DMA1 Channel 6 Request 45",
+              "DMA1 Channel 7 Request 45",
+              "DMA1 Channel 8 Request 45",
+              "DMA2 Channel 1 Request 45",
+              "DMA2 Channel 2 Request 45",
+              "DMA2 Channel 3 Request 45",
+              "DMA2 Channel 4 Request 45",
+              "DMA2 Channel 5 Request 45",
+              "DMA2 Channel 6 Request 45",
+              "DMA2 Channel 7 Request 45",
+              "DMA2 Channel 8 Request 45"
+            ]
+          }
+        ]
+      },
+      "A12": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM16 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 82",
+              "DMA1 Channel 2 Request 82",
+              "DMA1 Channel 3 Request 82",
+              "DMA1 Channel 4 Request 82",
+              "DMA1 Channel 5 Request 82",
+              "DMA1 Channel 6 Request 82",
+              "DMA1 Channel 7 Request 82",
+              "DMA1 Channel 8 Request 82",
+              "DMA2 Channel 1 Request 82",
+              "DMA2 Channel 2 Request 82",
+              "DMA2 Channel 3 Request 82",
+              "DMA2 Channel 4 Request 82",
+              "DMA2 Channel 5 Request 82",
+              "DMA2 Channel 6 Request 82",
+              "DMA2 Channel 7 Request 82",
+              "DMA2 Channel 8 Request 82"
+            ]
+          },
+          {
+            "af": "AF6",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA1 Channel 1 Request 43",
+              "DMA1 Channel 2 Request 43",
+              "DMA1 Channel 3 Request 43",
+              "DMA1 Channel 4 Request 43",
+              "DMA1 Channel 5 Request 43",
+              "DMA1 Channel 6 Request 43",
+              "DMA1 Channel 7 Request 43",
+              "DMA1 Channel 8 Request 43",
+              "DMA2 Channel 1 Request 43",
+              "DMA2 Channel 2 Request 43",
+              "DMA2 Channel 3 Request 43",
+              "DMA2 Channel 4 Request 43",
+              "DMA2 Channel 5 Request 43",
+              "DMA2 Channel 6 Request 43",
+              "DMA2 Channel 7 Request 43",
+              "DMA2 Channel 8 Request 43"
+            ]
+          },
+          {
+            "af": "AF10",
+            "timer": "TIM4 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 68",
+              "DMA1 Channel 2 Request 68",
+              "DMA1 Channel 3 Request 68",
+              "DMA1 Channel 4 Request 68",
+              "DMA1 Channel 5 Request 68",
+              "DMA1 Channel 6 Request 68",
+              "DMA1 Channel 7 Request 68",
+              "DMA1 Channel 8 Request 68",
+              "DMA2 Channel 1 Request 68",
+              "DMA2 Channel 2 Request 68",
+              "DMA2 Channel 3 Request 68",
+              "DMA2 Channel 4 Request 68",
+              "DMA2 Channel 5 Request 68",
+              "DMA2 Channel 6 Request 68",
+              "DMA2 Channel 7 Request 68",
+              "DMA2 Channel 8 Request 68"
+            ]
+          }
+        ]
+      },
+      "A13": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM16 CH1N",
+            "dma": [
+              "DMA1 Channel 1 Request 82",
+              "DMA1 Channel 2 Request 82",
+              "DMA1 Channel 3 Request 82",
+              "DMA1 Channel 4 Request 82",
+              "DMA1 Channel 5 Request 82",
+              "DMA1 Channel 6 Request 82",
+              "DMA1 Channel 7 Request 82",
+              "DMA1 Channel 8 Request 82",
+              "DMA2 Channel 1 Request 82",
+              "DMA2 Channel 2 Request 82",
+              "DMA2 Channel 3 Request 82",
+              "DMA2 Channel 4 Request 82",
+              "DMA2 Channel 5 Request 82",
+              "DMA2 Channel 6 Request 82",
+              "DMA2 Channel 7 Request 82",
+              "DMA2 Channel 8 Request 82"
+            ]
+          },
+          {
+            "af": "AF10",
+            "timer": "TIM4 CH3",
+            "dma": [
+              "DMA1 Channel 1 Request 69",
+              "DMA1 Channel 2 Request 69",
+              "DMA1 Channel 3 Request 69",
+              "DMA1 Channel 4 Request 69",
+              "DMA1 Channel 5 Request 69",
+              "DMA1 Channel 6 Request 69",
+              "DMA1 Channel 7 Request 69",
+              "DMA1 Channel 8 Request 69",
+              "DMA2 Channel 1 Request 69",
+              "DMA2 Channel 2 Request 69",
+              "DMA2 Channel 3 Request 69",
+              "DMA2 Channel 4 Request 69",
+              "DMA2 Channel 5 Request 69",
+              "DMA2 Channel 6 Request 69",
+              "DMA2 Channel 7 Request 69",
+              "DMA2 Channel 8 Request 69"
+            ]
+          }
+        ]
+      },
+      "A14": {
+        "timers": [
+          {
+            "af": "AF5",
+            "timer": "TIM8 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 50",
+              "DMA1 Channel 2 Request 50",
+              "DMA1 Channel 3 Request 50",
+              "DMA1 Channel 4 Request 50",
+              "DMA1 Channel 5 Request 50",
+              "DMA1 Channel 6 Request 50",
+              "DMA1 Channel 7 Request 50",
+              "DMA1 Channel 8 Request 50",
+              "DMA2 Channel 1 Request 50",
+              "DMA2 Channel 2 Request 50",
+              "DMA2 Channel 3 Request 50",
+              "DMA2 Channel 4 Request 50",
+              "DMA2 Channel 5 Request 50",
+              "DMA2 Channel 6 Request 50",
+              "DMA2 Channel 7 Request 50",
+              "DMA2 Channel 8 Request 50"
+            ]
+          }
+        ]
+      },
+      "A15": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 56",
+              "DMA1 Channel 2 Request 56",
+              "DMA1 Channel 3 Request 56",
+              "DMA1 Channel 4 Request 56",
+              "DMA1 Channel 5 Request 56",
+              "DMA1 Channel 6 Request 56",
+              "DMA1 Channel 7 Request 56",
+              "DMA1 Channel 8 Request 56",
+              "DMA2 Channel 1 Request 56",
+              "DMA2 Channel 2 Request 56",
+              "DMA2 Channel 3 Request 56",
+              "DMA2 Channel 4 Request 56",
+              "DMA2 Channel 5 Request 56",
+              "DMA2 Channel 6 Request 56",
+              "DMA2 Channel 7 Request 56",
+              "DMA2 Channel 8 Request 56"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM8 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 49",
+              "DMA1 Channel 2 Request 49",
+              "DMA1 Channel 3 Request 49",
+              "DMA1 Channel 4 Request 49",
+              "DMA1 Channel 5 Request 49",
+              "DMA1 Channel 6 Request 49",
+              "DMA1 Channel 7 Request 49",
+              "DMA1 Channel 8 Request 49",
+              "DMA2 Channel 1 Request 49",
+              "DMA2 Channel 2 Request 49",
+              "DMA2 Channel 3 Request 49",
+              "DMA2 Channel 4 Request 49",
+              "DMA2 Channel 5 Request 49",
+              "DMA2 Channel 6 Request 49",
+              "DMA2 Channel 7 Request 49",
+              "DMA2 Channel 8 Request 49"
+            ]
+          }
+        ]
+      },
+      "B00": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH3",
+            "dma": [
+              "DMA1 Channel 1 Request 63",
+              "DMA1 Channel 2 Request 63",
+              "DMA1 Channel 3 Request 63",
+              "DMA1 Channel 4 Request 63",
+              "DMA1 Channel 5 Request 63",
+              "DMA1 Channel 6 Request 63",
+              "DMA1 Channel 7 Request 63",
+              "DMA1 Channel 8 Request 63",
+              "DMA2 Channel 1 Request 63",
+              "DMA2 Channel 2 Request 63",
+              "DMA2 Channel 3 Request 63",
+              "DMA2 Channel 4 Request 63",
+              "DMA2 Channel 5 Request 63",
+              "DMA2 Channel 6 Request 63",
+              "DMA2 Channel 7 Request 63",
+              "DMA2 Channel 8 Request 63"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM8 CH2N",
+            "dma": [
+              "DMA1 Channel 1 Request 50",
+              "DMA1 Channel 2 Request 50",
+              "DMA1 Channel 3 Request 50",
+              "DMA1 Channel 4 Request 50",
+              "DMA1 Channel 5 Request 50",
+              "DMA1 Channel 6 Request 50",
+              "DMA1 Channel 7 Request 50",
+              "DMA1 Channel 8 Request 50",
+              "DMA2 Channel 1 Request 50",
+              "DMA2 Channel 2 Request 50",
+              "DMA2 Channel 3 Request 50",
+              "DMA2 Channel 4 Request 50",
+              "DMA2 Channel 5 Request 50",
+              "DMA2 Channel 6 Request 50",
+              "DMA2 Channel 7 Request 50",
+              "DMA2 Channel 8 Request 50"
+            ]
+          },
+          {
+            "af": "AF6",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA1 Channel 1 Request 43",
+              "DMA1 Channel 2 Request 43",
+              "DMA1 Channel 3 Request 43",
+              "DMA1 Channel 4 Request 43",
+              "DMA1 Channel 5 Request 43",
+              "DMA1 Channel 6 Request 43",
+              "DMA1 Channel 7 Request 43",
+              "DMA1 Channel 8 Request 43",
+              "DMA2 Channel 1 Request 43",
+              "DMA2 Channel 2 Request 43",
+              "DMA2 Channel 3 Request 43",
+              "DMA2 Channel 4 Request 43",
+              "DMA2 Channel 5 Request 43",
+              "DMA2 Channel 6 Request 43",
+              "DMA2 Channel 7 Request 43",
+              "DMA2 Channel 8 Request 43"
+            ]
+          }
+        ]
+      },
+      "B01": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH4",
+            "dma": [
+              "DMA1 Channel 1 Request 64",
+              "DMA1 Channel 2 Request 64",
+              "DMA1 Channel 3 Request 64",
+              "DMA1 Channel 4 Request 64",
+              "DMA1 Channel 5 Request 64",
+              "DMA1 Channel 6 Request 64",
+              "DMA1 Channel 7 Request 64",
+              "DMA1 Channel 8 Request 64",
+              "DMA2 Channel 1 Request 64",
+              "DMA2 Channel 2 Request 64",
+              "DMA2 Channel 3 Request 64",
+              "DMA2 Channel 4 Request 64",
+              "DMA2 Channel 5 Request 64",
+              "DMA2 Channel 6 Request 64",
+              "DMA2 Channel 7 Request 64",
+              "DMA2 Channel 8 Request 64"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM8 CH3N",
+            "dma": [
+              "DMA1 Channel 1 Request 51",
+              "DMA1 Channel 2 Request 51",
+              "DMA1 Channel 3 Request 51",
+              "DMA1 Channel 4 Request 51",
+              "DMA1 Channel 5 Request 51",
+              "DMA1 Channel 6 Request 51",
+              "DMA1 Channel 7 Request 51",
+              "DMA1 Channel 8 Request 51",
+              "DMA2 Channel 1 Request 51",
+              "DMA2 Channel 2 Request 51",
+              "DMA2 Channel 3 Request 51",
+              "DMA2 Channel 4 Request 51",
+              "DMA2 Channel 5 Request 51",
+              "DMA2 Channel 6 Request 51",
+              "DMA2 Channel 7 Request 51",
+              "DMA2 Channel 8 Request 51"
+            ]
+          },
+          {
+            "af": "AF6",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA1 Channel 1 Request 44",
+              "DMA1 Channel 2 Request 44",
+              "DMA1 Channel 3 Request 44",
+              "DMA1 Channel 4 Request 44",
+              "DMA1 Channel 5 Request 44",
+              "DMA1 Channel 6 Request 44",
+              "DMA1 Channel 7 Request 44",
+              "DMA1 Channel 8 Request 44",
+              "DMA2 Channel 1 Request 44",
+              "DMA2 Channel 2 Request 44",
+              "DMA2 Channel 3 Request 44",
+              "DMA2 Channel 4 Request 44",
+              "DMA2 Channel 5 Request 44",
+              "DMA2 Channel 6 Request 44",
+              "DMA2 Channel 7 Request 44",
+              "DMA2 Channel 8 Request 44"
+            ]
+          }
+        ]
+      },
+      "B02": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM5 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 72",
+              "DMA1 Channel 2 Request 72",
+              "DMA1 Channel 3 Request 72",
+              "DMA1 Channel 4 Request 72",
+              "DMA1 Channel 5 Request 72",
+              "DMA1 Channel 6 Request 72",
+              "DMA1 Channel 7 Request 72",
+              "DMA1 Channel 8 Request 72",
+              "DMA2 Channel 1 Request 72",
+              "DMA2 Channel 2 Request 72",
+              "DMA2 Channel 3 Request 72",
+              "DMA2 Channel 4 Request 72",
+              "DMA2 Channel 5 Request 72",
+              "DMA2 Channel 6 Request 72",
+              "DMA2 Channel 7 Request 72",
+              "DMA2 Channel 8 Request 72"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM20 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 86",
+              "DMA1 Channel 2 Request 86",
+              "DMA1 Channel 3 Request 86",
+              "DMA1 Channel 4 Request 86",
+              "DMA1 Channel 5 Request 86",
+              "DMA1 Channel 6 Request 86",
+              "DMA1 Channel 7 Request 86",
+              "DMA1 Channel 8 Request 86",
+              "DMA2 Channel 1 Request 86",
+              "DMA2 Channel 2 Request 86",
+              "DMA2 Channel 3 Request 86",
+              "DMA2 Channel 4 Request 86",
+              "DMA2 Channel 5 Request 86",
+              "DMA2 Channel 6 Request 86",
+              "DMA2 Channel 7 Request 86",
+              "DMA2 Channel 8 Request 86"
+            ]
+          }
+        ]
+      },
+      "B03": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 57",
+              "DMA1 Channel 2 Request 57",
+              "DMA1 Channel 3 Request 57",
+              "DMA1 Channel 4 Request 57",
+              "DMA1 Channel 5 Request 57",
+              "DMA1 Channel 6 Request 57",
+              "DMA1 Channel 7 Request 57",
+              "DMA1 Channel 8 Request 57",
+              "DMA2 Channel 1 Request 57",
+              "DMA2 Channel 2 Request 57",
+              "DMA2 Channel 3 Request 57",
+              "DMA2 Channel 4 Request 57",
+              "DMA2 Channel 5 Request 57",
+              "DMA2 Channel 6 Request 57",
+              "DMA2 Channel 7 Request 57",
+              "DMA2 Channel 8 Request 57"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM8 CH1N",
+            "dma": [
+              "DMA1 Channel 1 Request 49",
+              "DMA1 Channel 2 Request 49",
+              "DMA1 Channel 3 Request 49",
+              "DMA1 Channel 4 Request 49",
+              "DMA1 Channel 5 Request 49",
+              "DMA1 Channel 6 Request 49",
+              "DMA1 Channel 7 Request 49",
+              "DMA1 Channel 8 Request 49",
+              "DMA2 Channel 1 Request 49",
+              "DMA2 Channel 2 Request 49",
+              "DMA2 Channel 3 Request 49",
+              "DMA2 Channel 4 Request 49",
+              "DMA2 Channel 5 Request 49",
+              "DMA2 Channel 6 Request 49",
+              "DMA2 Channel 7 Request 49",
+              "DMA2 Channel 8 Request 49"
+            ]
+          }
+        ]
+      },
+      "B04": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM16 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 82",
+              "DMA1 Channel 2 Request 82",
+              "DMA1 Channel 3 Request 82",
+              "DMA1 Channel 4 Request 82",
+              "DMA1 Channel 5 Request 82",
+              "DMA1 Channel 6 Request 82",
+              "DMA1 Channel 7 Request 82",
+              "DMA1 Channel 8 Request 82",
+              "DMA2 Channel 1 Request 82",
+              "DMA2 Channel 2 Request 82",
+              "DMA2 Channel 3 Request 82",
+              "DMA2 Channel 4 Request 82",
+              "DMA2 Channel 5 Request 82",
+              "DMA2 Channel 6 Request 82",
+              "DMA2 Channel 7 Request 82",
+              "DMA2 Channel 8 Request 82"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 61",
+              "DMA1 Channel 2 Request 61",
+              "DMA1 Channel 3 Request 61",
+              "DMA1 Channel 4 Request 61",
+              "DMA1 Channel 5 Request 61",
+              "DMA1 Channel 6 Request 61",
+              "DMA1 Channel 7 Request 61",
+              "DMA1 Channel 8 Request 61",
+              "DMA2 Channel 1 Request 61",
+              "DMA2 Channel 2 Request 61",
+              "DMA2 Channel 3 Request 61",
+              "DMA2 Channel 4 Request 61",
+              "DMA2 Channel 5 Request 61",
+              "DMA2 Channel 6 Request 61",
+              "DMA2 Channel 7 Request 61",
+              "DMA2 Channel 8 Request 61"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM8 CH2N",
+            "dma": [
+              "DMA1 Channel 1 Request 50",
+              "DMA1 Channel 2 Request 50",
+              "DMA1 Channel 3 Request 50",
+              "DMA1 Channel 4 Request 50",
+              "DMA1 Channel 5 Request 50",
+              "DMA1 Channel 6 Request 50",
+              "DMA1 Channel 7 Request 50",
+              "DMA1 Channel 8 Request 50",
+              "DMA2 Channel 1 Request 50",
+              "DMA2 Channel 2 Request 50",
+              "DMA2 Channel 3 Request 50",
+              "DMA2 Channel 4 Request 50",
+              "DMA2 Channel 5 Request 50",
+              "DMA2 Channel 6 Request 50",
+              "DMA2 Channel 7 Request 50",
+              "DMA2 Channel 8 Request 50"
+            ]
+          }
+        ]
+      },
+      "B05": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 62",
+              "DMA1 Channel 2 Request 62",
+              "DMA1 Channel 3 Request 62",
+              "DMA1 Channel 4 Request 62",
+              "DMA1 Channel 5 Request 62",
+              "DMA1 Channel 6 Request 62",
+              "DMA1 Channel 7 Request 62",
+              "DMA1 Channel 8 Request 62",
+              "DMA2 Channel 1 Request 62",
+              "DMA2 Channel 2 Request 62",
+              "DMA2 Channel 3 Request 62",
+              "DMA2 Channel 4 Request 62",
+              "DMA2 Channel 5 Request 62",
+              "DMA2 Channel 6 Request 62",
+              "DMA2 Channel 7 Request 62",
+              "DMA2 Channel 8 Request 62"
+            ]
+          },
+          {
+            "af": "AF3",
+            "timer": "TIM8 CH3N",
+            "dma": [
+              "DMA1 Channel 1 Request 51",
+              "DMA1 Channel 2 Request 51",
+              "DMA1 Channel 3 Request 51",
+              "DMA1 Channel 4 Request 51",
+              "DMA1 Channel 5 Request 51",
+              "DMA1 Channel 6 Request 51",
+              "DMA1 Channel 7 Request 51",
+              "DMA1 Channel 8 Request 51",
+              "DMA2 Channel 1 Request 51",
+              "DMA2 Channel 2 Request 51",
+              "DMA2 Channel 3 Request 51",
+              "DMA2 Channel 4 Request 51",
+              "DMA2 Channel 5 Request 51",
+              "DMA2 Channel 6 Request 51",
+              "DMA2 Channel 7 Request 51",
+              "DMA2 Channel 8 Request 51"
+            ]
+          },
+          {
+            "af": "AF10",
+            "timer": "TIM17 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 84",
+              "DMA1 Channel 2 Request 84",
+              "DMA1 Channel 3 Request 84",
+              "DMA1 Channel 4 Request 84",
+              "DMA1 Channel 5 Request 84",
+              "DMA1 Channel 6 Request 84",
+              "DMA1 Channel 7 Request 84",
+              "DMA1 Channel 8 Request 84",
+              "DMA2 Channel 1 Request 84",
+              "DMA2 Channel 2 Request 84",
+              "DMA2 Channel 3 Request 84",
+              "DMA2 Channel 4 Request 84",
+              "DMA2 Channel 5 Request 84",
+              "DMA2 Channel 6 Request 84",
+              "DMA2 Channel 7 Request 84",
+              "DMA2 Channel 8 Request 84"
+            ]
+          }
+        ]
+      },
+      "B06": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM16 CH1N",
+            "dma": [
+              "DMA1 Channel 1 Request 82",
+              "DMA1 Channel 2 Request 82",
+              "DMA1 Channel 3 Request 82",
+              "DMA1 Channel 4 Request 82",
+              "DMA1 Channel 5 Request 82",
+              "DMA1 Channel 6 Request 82",
+              "DMA1 Channel 7 Request 82",
+              "DMA1 Channel 8 Request 82",
+              "DMA2 Channel 1 Request 82",
+              "DMA2 Channel 2 Request 82",
+              "DMA2 Channel 3 Request 82",
+              "DMA2 Channel 4 Request 82",
+              "DMA2 Channel 5 Request 82",
+              "DMA2 Channel 6 Request 82",
+              "DMA2 Channel 7 Request 82",
+              "DMA2 Channel 8 Request 82"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 67",
+              "DMA1 Channel 2 Request 67",
+              "DMA1 Channel 3 Request 67",
+              "DMA1 Channel 4 Request 67",
+              "DMA1 Channel 5 Request 67",
+              "DMA1 Channel 6 Request 67",
+              "DMA1 Channel 7 Request 67",
+              "DMA1 Channel 8 Request 67",
+              "DMA2 Channel 1 Request 67",
+              "DMA2 Channel 2 Request 67",
+              "DMA2 Channel 3 Request 67",
+              "DMA2 Channel 4 Request 67",
+              "DMA2 Channel 5 Request 67",
+              "DMA2 Channel 6 Request 67",
+              "DMA2 Channel 7 Request 67",
+              "DMA2 Channel 8 Request 67"
+            ]
+          },
+          {
+            "af": "AF5",
+            "timer": "TIM8 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 49",
+              "DMA1 Channel 2 Request 49",
+              "DMA1 Channel 3 Request 49",
+              "DMA1 Channel 4 Request 49",
+              "DMA1 Channel 5 Request 49",
+              "DMA1 Channel 6 Request 49",
+              "DMA1 Channel 7 Request 49",
+              "DMA1 Channel 8 Request 49",
+              "DMA2 Channel 1 Request 49",
+              "DMA2 Channel 2 Request 49",
+              "DMA2 Channel 3 Request 49",
+              "DMA2 Channel 4 Request 49",
+              "DMA2 Channel 5 Request 49",
+              "DMA2 Channel 6 Request 49",
+              "DMA2 Channel 7 Request 49",
+              "DMA2 Channel 8 Request 49"
+            ]
+          }
+        ]
+      },
+      "B07": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM17 CH1N",
+            "dma": [
+              "DMA1 Channel 1 Request 84",
+              "DMA1 Channel 2 Request 84",
+              "DMA1 Channel 3 Request 84",
+              "DMA1 Channel 4 Request 84",
+              "DMA1 Channel 5 Request 84",
+              "DMA1 Channel 6 Request 84",
+              "DMA1 Channel 7 Request 84",
+              "DMA1 Channel 8 Request 84",
+              "DMA2 Channel 1 Request 84",
+              "DMA2 Channel 2 Request 84",
+              "DMA2 Channel 3 Request 84",
+              "DMA2 Channel 4 Request 84",
+              "DMA2 Channel 5 Request 84",
+              "DMA2 Channel 6 Request 84",
+              "DMA2 Channel 7 Request 84",
+              "DMA2 Channel 8 Request 84"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 68",
+              "DMA1 Channel 2 Request 68",
+              "DMA1 Channel 3 Request 68",
+              "DMA1 Channel 4 Request 68",
+              "DMA1 Channel 5 Request 68",
+              "DMA1 Channel 6 Request 68",
+              "DMA1 Channel 7 Request 68",
+              "DMA1 Channel 8 Request 68",
+              "DMA2 Channel 1 Request 68",
+              "DMA2 Channel 2 Request 68",
+              "DMA2 Channel 3 Request 68",
+              "DMA2 Channel 4 Request 68",
+              "DMA2 Channel 5 Request 68",
+              "DMA2 Channel 6 Request 68",
+              "DMA2 Channel 7 Request 68",
+              "DMA2 Channel 8 Request 68"
+            ]
+          },
+          {
+            "af": "AF10",
+            "timer": "TIM3 CH4",
+            "dma": [
+              "DMA1 Channel 1 Request 64",
+              "DMA1 Channel 2 Request 64",
+              "DMA1 Channel 3 Request 64",
+              "DMA1 Channel 4 Request 64",
+              "DMA1 Channel 5 Request 64",
+              "DMA1 Channel 6 Request 64",
+              "DMA1 Channel 7 Request 64",
+              "DMA1 Channel 8 Request 64",
+              "DMA2 Channel 1 Request 64",
+              "DMA2 Channel 2 Request 64",
+              "DMA2 Channel 3 Request 64",
+              "DMA2 Channel 4 Request 64",
+              "DMA2 Channel 5 Request 64",
+              "DMA2 Channel 6 Request 64",
+              "DMA2 Channel 7 Request 64",
+              "DMA2 Channel 8 Request 64"
+            ]
+          }
+        ]
+      },
+      "B08": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM16 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 82",
+              "DMA1 Channel 2 Request 82",
+              "DMA1 Channel 3 Request 82",
+              "DMA1 Channel 4 Request 82",
+              "DMA1 Channel 5 Request 82",
+              "DMA1 Channel 6 Request 82",
+              "DMA1 Channel 7 Request 82",
+              "DMA1 Channel 8 Request 82",
+              "DMA2 Channel 1 Request 82",
+              "DMA2 Channel 2 Request 82",
+              "DMA2 Channel 3 Request 82",
+              "DMA2 Channel 4 Request 82",
+              "DMA2 Channel 5 Request 82",
+              "DMA2 Channel 6 Request 82",
+              "DMA2 Channel 7 Request 82",
+              "DMA2 Channel 8 Request 82"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH3",
+            "dma": [
+              "DMA1 Channel 1 Request 69",
+              "DMA1 Channel 2 Request 69",
+              "DMA1 Channel 3 Request 69",
+              "DMA1 Channel 4 Request 69",
+              "DMA1 Channel 5 Request 69",
+              "DMA1 Channel 6 Request 69",
+              "DMA1 Channel 7 Request 69",
+              "DMA1 Channel 8 Request 69",
+              "DMA2 Channel 1 Request 69",
+              "DMA2 Channel 2 Request 69",
+              "DMA2 Channel 3 Request 69",
+              "DMA2 Channel 4 Request 69",
+              "DMA2 Channel 5 Request 69",
+              "DMA2 Channel 6 Request 69",
+              "DMA2 Channel 7 Request 69",
+              "DMA2 Channel 8 Request 69"
+            ]
+          },
+          {
+            "af": "AF10",
+            "timer": "TIM8 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 50",
+              "DMA1 Channel 2 Request 50",
+              "DMA1 Channel 3 Request 50",
+              "DMA1 Channel 4 Request 50",
+              "DMA1 Channel 5 Request 50",
+              "DMA1 Channel 6 Request 50",
+              "DMA1 Channel 7 Request 50",
+              "DMA1 Channel 8 Request 50",
+              "DMA2 Channel 1 Request 50",
+              "DMA2 Channel 2 Request 50",
+              "DMA2 Channel 3 Request 50",
+              "DMA2 Channel 4 Request 50",
+              "DMA2 Channel 5 Request 50",
+              "DMA2 Channel 6 Request 50",
+              "DMA2 Channel 7 Request 50",
+              "DMA2 Channel 8 Request 50"
+            ]
+          }
+        ]
+      },
+      "B09": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM17 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 84",
+              "DMA1 Channel 2 Request 84",
+              "DMA1 Channel 3 Request 84",
+              "DMA1 Channel 4 Request 84",
+              "DMA1 Channel 5 Request 84",
+              "DMA1 Channel 6 Request 84",
+              "DMA1 Channel 7 Request 84",
+              "DMA1 Channel 8 Request 84",
+              "DMA2 Channel 1 Request 84",
+              "DMA2 Channel 2 Request 84",
+              "DMA2 Channel 3 Request 84",
+              "DMA2 Channel 4 Request 84",
+              "DMA2 Channel 5 Request 84",
+              "DMA2 Channel 6 Request 84",
+              "DMA2 Channel 7 Request 84",
+              "DMA2 Channel 8 Request 84"
+            ]
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM4 CH4",
+            "dma": []
+          },
+          {
+            "af": "AF10",
+            "timer": "TIM8 CH3",
+            "dma": [
+              "DMA1 Channel 1 Request 51",
+              "DMA1 Channel 2 Request 51",
+              "DMA1 Channel 3 Request 51",
+              "DMA1 Channel 4 Request 51",
+              "DMA1 Channel 5 Request 51",
+              "DMA1 Channel 6 Request 51",
+              "DMA1 Channel 7 Request 51",
+              "DMA1 Channel 8 Request 51",
+              "DMA2 Channel 1 Request 51",
+              "DMA2 Channel 2 Request 51",
+              "DMA2 Channel 3 Request 51",
+              "DMA2 Channel 4 Request 51",
+              "DMA2 Channel 5 Request 51",
+              "DMA2 Channel 6 Request 51",
+              "DMA2 Channel 7 Request 51",
+              "DMA2 Channel 8 Request 51"
+            ]
+          },
+          {
+            "af": "AF11",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA1 Channel 1 Request 44",
+              "DMA1 Channel 2 Request 44",
+              "DMA1 Channel 3 Request 44",
+              "DMA1 Channel 4 Request 44",
+              "DMA1 Channel 5 Request 44",
+              "DMA1 Channel 6 Request 44",
+              "DMA1 Channel 7 Request 44",
+              "DMA1 Channel 8 Request 44",
+              "DMA2 Channel 1 Request 44",
+              "DMA2 Channel 2 Request 44",
+              "DMA2 Channel 3 Request 44",
+              "DMA2 Channel 4 Request 44",
+              "DMA2 Channel 5 Request 44",
+              "DMA2 Channel 6 Request 44",
+              "DMA2 Channel 7 Request 44",
+              "DMA2 Channel 8 Request 44"
+            ]
+          }
+        ]
+      },
+      "B10": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH3",
+            "dma": [
+              "DMA1 Channel 1 Request 58",
+              "DMA1 Channel 2 Request 58",
+              "DMA1 Channel 3 Request 58",
+              "DMA1 Channel 4 Request 58",
+              "DMA1 Channel 5 Request 58",
+              "DMA1 Channel 6 Request 58",
+              "DMA1 Channel 7 Request 58",
+              "DMA1 Channel 8 Request 58",
+              "DMA2 Channel 1 Request 58",
+              "DMA2 Channel 2 Request 58",
+              "DMA2 Channel 3 Request 58",
+              "DMA2 Channel 4 Request 58",
+              "DMA2 Channel 5 Request 58",
+              "DMA2 Channel 6 Request 58",
+              "DMA2 Channel 7 Request 58",
+              "DMA2 Channel 8 Request 58"
+            ]
+          }
+        ]
+      },
+      "B11": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM2 CH4",
+            "dma": [
+              "DMA1 Channel 1 Request 59",
+              "DMA1 Channel 2 Request 59",
+              "DMA1 Channel 3 Request 59",
+              "DMA1 Channel 4 Request 59",
+              "DMA1 Channel 5 Request 59",
+              "DMA1 Channel 6 Request 59",
+              "DMA1 Channel 7 Request 59",
+              "DMA1 Channel 8 Request 59",
+              "DMA2 Channel 1 Request 59",
+              "DMA2 Channel 2 Request 59",
+              "DMA2 Channel 3 Request 59",
+              "DMA2 Channel 4 Request 59",
+              "DMA2 Channel 5 Request 59",
+              "DMA2 Channel 6 Request 59",
+              "DMA2 Channel 7 Request 59",
+              "DMA2 Channel 8 Request 59"
+            ]
+          }
+        ]
+      },
+      "B13": {
+        "timers": [
+          {
+            "af": "AF6",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA1 Channel 1 Request 42",
+              "DMA1 Channel 2 Request 42",
+              "DMA1 Channel 3 Request 42",
+              "DMA1 Channel 4 Request 42",
+              "DMA1 Channel 5 Request 42",
+              "DMA1 Channel 6 Request 42",
+              "DMA1 Channel 7 Request 42",
+              "DMA1 Channel 8 Request 42",
+              "DMA2 Channel 1 Request 42",
+              "DMA2 Channel 2 Request 42",
+              "DMA2 Channel 3 Request 42",
+              "DMA2 Channel 4 Request 42",
+              "DMA2 Channel 5 Request 42",
+              "DMA2 Channel 6 Request 42",
+              "DMA2 Channel 7 Request 42",
+              "DMA2 Channel 8 Request 42"
+            ]
+          }
+        ]
+      },
+      "B14": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM15 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 78",
+              "DMA1 Channel 2 Request 78",
+              "DMA1 Channel 3 Request 78",
+              "DMA1 Channel 4 Request 78",
+              "DMA1 Channel 5 Request 78",
+              "DMA1 Channel 6 Request 78",
+              "DMA1 Channel 7 Request 78",
+              "DMA1 Channel 8 Request 78",
+              "DMA2 Channel 1 Request 78",
+              "DMA2 Channel 2 Request 78",
+              "DMA2 Channel 3 Request 78",
+              "DMA2 Channel 4 Request 78",
+              "DMA2 Channel 5 Request 78",
+              "DMA2 Channel 6 Request 78",
+              "DMA2 Channel 7 Request 78",
+              "DMA2 Channel 8 Request 78"
+            ]
+          },
+          {
+            "af": "AF6",
+            "timer": "TIM1 CH2N",
+            "dma": [
+              "DMA1 Channel 1 Request 43",
+              "DMA1 Channel 2 Request 43",
+              "DMA1 Channel 3 Request 43",
+              "DMA1 Channel 4 Request 43",
+              "DMA1 Channel 5 Request 43",
+              "DMA1 Channel 6 Request 43",
+              "DMA1 Channel 7 Request 43",
+              "DMA1 Channel 8 Request 43",
+              "DMA2 Channel 1 Request 43",
+              "DMA2 Channel 2 Request 43",
+              "DMA2 Channel 3 Request 43",
+              "DMA2 Channel 4 Request 43",
+              "DMA2 Channel 5 Request 43",
+              "DMA2 Channel 6 Request 43",
+              "DMA2 Channel 7 Request 43",
+              "DMA2 Channel 8 Request 43"
+            ]
+          }
+        ]
+      },
+      "B15": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM15 CH2",
+            "dma": []
+          },
+          {
+            "af": "AF2",
+            "timer": "TIM15 CH1N",
+            "dma": [
+              "DMA1 Channel 1 Request 78",
+              "DMA1 Channel 2 Request 78",
+              "DMA1 Channel 3 Request 78",
+              "DMA1 Channel 4 Request 78",
+              "DMA1 Channel 5 Request 78",
+              "DMA1 Channel 6 Request 78",
+              "DMA1 Channel 7 Request 78",
+              "DMA1 Channel 8 Request 78",
+              "DMA2 Channel 1 Request 78",
+              "DMA2 Channel 2 Request 78",
+              "DMA2 Channel 3 Request 78",
+              "DMA2 Channel 4 Request 78",
+              "DMA2 Channel 5 Request 78",
+              "DMA2 Channel 6 Request 78",
+              "DMA2 Channel 7 Request 78",
+              "DMA2 Channel 8 Request 78"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM1 CH3N",
+            "dma": [
+              "DMA1 Channel 1 Request 44",
+              "DMA1 Channel 2 Request 44",
+              "DMA1 Channel 3 Request 44",
+              "DMA1 Channel 4 Request 44",
+              "DMA1 Channel 5 Request 44",
+              "DMA1 Channel 6 Request 44",
+              "DMA1 Channel 7 Request 44",
+              "DMA1 Channel 8 Request 44",
+              "DMA2 Channel 1 Request 44",
+              "DMA2 Channel 2 Request 44",
+              "DMA2 Channel 3 Request 44",
+              "DMA2 Channel 4 Request 44",
+              "DMA2 Channel 5 Request 44",
+              "DMA2 Channel 6 Request 44",
+              "DMA2 Channel 7 Request 44",
+              "DMA2 Channel 8 Request 44"
+            ]
+          }
+        ]
+      },
+      "C00": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM1 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 42",
+              "DMA1 Channel 2 Request 42",
+              "DMA1 Channel 3 Request 42",
+              "DMA1 Channel 4 Request 42",
+              "DMA1 Channel 5 Request 42",
+              "DMA1 Channel 6 Request 42",
+              "DMA1 Channel 7 Request 42",
+              "DMA1 Channel 8 Request 42",
+              "DMA2 Channel 1 Request 42",
+              "DMA2 Channel 2 Request 42",
+              "DMA2 Channel 3 Request 42",
+              "DMA2 Channel 4 Request 42",
+              "DMA2 Channel 5 Request 42",
+              "DMA2 Channel 6 Request 42",
+              "DMA2 Channel 7 Request 42",
+              "DMA2 Channel 8 Request 42"
+            ]
+          }
+        ]
+      },
+      "C01": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM1 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 43",
+              "DMA1 Channel 2 Request 43",
+              "DMA1 Channel 3 Request 43",
+              "DMA1 Channel 4 Request 43",
+              "DMA1 Channel 5 Request 43",
+              "DMA1 Channel 6 Request 43",
+              "DMA1 Channel 7 Request 43",
+              "DMA1 Channel 8 Request 43",
+              "DMA2 Channel 1 Request 43",
+              "DMA2 Channel 2 Request 43",
+              "DMA2 Channel 3 Request 43",
+              "DMA2 Channel 4 Request 43",
+              "DMA2 Channel 5 Request 43",
+              "DMA2 Channel 6 Request 43",
+              "DMA2 Channel 7 Request 43",
+              "DMA2 Channel 8 Request 43"
+            ]
+          }
+        ]
+      },
+      "C02": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM1 CH3",
+            "dma": [
+              "DMA1 Channel 1 Request 44",
+              "DMA1 Channel 2 Request 44",
+              "DMA1 Channel 3 Request 44",
+              "DMA1 Channel 4 Request 44",
+              "DMA1 Channel 5 Request 44",
+              "DMA1 Channel 6 Request 44",
+              "DMA1 Channel 7 Request 44",
+              "DMA1 Channel 8 Request 44",
+              "DMA2 Channel 1 Request 44",
+              "DMA2 Channel 2 Request 44",
+              "DMA2 Channel 3 Request 44",
+              "DMA2 Channel 4 Request 44",
+              "DMA2 Channel 5 Request 44",
+              "DMA2 Channel 6 Request 44",
+              "DMA2 Channel 7 Request 44",
+              "DMA2 Channel 8 Request 44"
+            ]
+          },
+          {
+            "af": "AF6",
+            "timer": "TIM20 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 87",
+              "DMA1 Channel 2 Request 87",
+              "DMA1 Channel 3 Request 87",
+              "DMA1 Channel 4 Request 87",
+              "DMA1 Channel 5 Request 87",
+              "DMA1 Channel 6 Request 87",
+              "DMA1 Channel 7 Request 87",
+              "DMA1 Channel 8 Request 87",
+              "DMA2 Channel 1 Request 87",
+              "DMA2 Channel 2 Request 87",
+              "DMA2 Channel 3 Request 87",
+              "DMA2 Channel 4 Request 87",
+              "DMA2 Channel 5 Request 87",
+              "DMA2 Channel 6 Request 87",
+              "DMA2 Channel 7 Request 87",
+              "DMA2 Channel 8 Request 87"
+            ]
+          }
+        ]
+      },
+      "C03": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM1 CH4",
+            "dma": [
+              "DMA1 Channel 1 Request 45",
+              "DMA1 Channel 2 Request 45",
+              "DMA1 Channel 3 Request 45",
+              "DMA1 Channel 4 Request 45",
+              "DMA1 Channel 5 Request 45",
+              "DMA1 Channel 6 Request 45",
+              "DMA1 Channel 7 Request 45",
+              "DMA1 Channel 8 Request 45",
+              "DMA2 Channel 1 Request 45",
+              "DMA2 Channel 2 Request 45",
+              "DMA2 Channel 3 Request 45",
+              "DMA2 Channel 4 Request 45",
+              "DMA2 Channel 5 Request 45",
+              "DMA2 Channel 6 Request 45",
+              "DMA2 Channel 7 Request 45",
+              "DMA2 Channel 8 Request 45"
+            ]
+          }
+        ]
+      },
+      "C05": {
+        "timers": [
+          {
+            "af": "AF6",
+            "timer": "TIM1 CH4N",
+            "dma": [
+              "DMA1 Channel 1 Request 45",
+              "DMA1 Channel 2 Request 45",
+              "DMA1 Channel 3 Request 45",
+              "DMA1 Channel 4 Request 45",
+              "DMA1 Channel 5 Request 45",
+              "DMA1 Channel 6 Request 45",
+              "DMA1 Channel 7 Request 45",
+              "DMA1 Channel 8 Request 45",
+              "DMA2 Channel 1 Request 45",
+              "DMA2 Channel 2 Request 45",
+              "DMA2 Channel 3 Request 45",
+              "DMA2 Channel 4 Request 45",
+              "DMA2 Channel 5 Request 45",
+              "DMA2 Channel 6 Request 45",
+              "DMA2 Channel 7 Request 45",
+              "DMA2 Channel 8 Request 45"
+            ]
+          }
+        ]
+      },
+      "C06": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 61",
+              "DMA1 Channel 2 Request 61",
+              "DMA1 Channel 3 Request 61",
+              "DMA1 Channel 4 Request 61",
+              "DMA1 Channel 5 Request 61",
+              "DMA1 Channel 6 Request 61",
+              "DMA1 Channel 7 Request 61",
+              "DMA1 Channel 8 Request 61",
+              "DMA2 Channel 1 Request 61",
+              "DMA2 Channel 2 Request 61",
+              "DMA2 Channel 3 Request 61",
+              "DMA2 Channel 4 Request 61",
+              "DMA2 Channel 5 Request 61",
+              "DMA2 Channel 6 Request 61",
+              "DMA2 Channel 7 Request 61",
+              "DMA2 Channel 8 Request 61"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM8 CH1",
+            "dma": [
+              "DMA1 Channel 1 Request 49",
+              "DMA1 Channel 2 Request 49",
+              "DMA1 Channel 3 Request 49",
+              "DMA1 Channel 4 Request 49",
+              "DMA1 Channel 5 Request 49",
+              "DMA1 Channel 6 Request 49",
+              "DMA1 Channel 7 Request 49",
+              "DMA1 Channel 8 Request 49",
+              "DMA2 Channel 1 Request 49",
+              "DMA2 Channel 2 Request 49",
+              "DMA2 Channel 3 Request 49",
+              "DMA2 Channel 4 Request 49",
+              "DMA2 Channel 5 Request 49",
+              "DMA2 Channel 6 Request 49",
+              "DMA2 Channel 7 Request 49",
+              "DMA2 Channel 8 Request 49"
+            ]
+          }
+        ]
+      },
+      "C07": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 62",
+              "DMA1 Channel 2 Request 62",
+              "DMA1 Channel 3 Request 62",
+              "DMA1 Channel 4 Request 62",
+              "DMA1 Channel 5 Request 62",
+              "DMA1 Channel 6 Request 62",
+              "DMA1 Channel 7 Request 62",
+              "DMA1 Channel 8 Request 62",
+              "DMA2 Channel 1 Request 62",
+              "DMA2 Channel 2 Request 62",
+              "DMA2 Channel 3 Request 62",
+              "DMA2 Channel 4 Request 62",
+              "DMA2 Channel 5 Request 62",
+              "DMA2 Channel 6 Request 62",
+              "DMA2 Channel 7 Request 62",
+              "DMA2 Channel 8 Request 62"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM8 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 50",
+              "DMA1 Channel 2 Request 50",
+              "DMA1 Channel 3 Request 50",
+              "DMA1 Channel 4 Request 50",
+              "DMA1 Channel 5 Request 50",
+              "DMA1 Channel 6 Request 50",
+              "DMA1 Channel 7 Request 50",
+              "DMA1 Channel 8 Request 50",
+              "DMA2 Channel 1 Request 50",
+              "DMA2 Channel 2 Request 50",
+              "DMA2 Channel 3 Request 50",
+              "DMA2 Channel 4 Request 50",
+              "DMA2 Channel 5 Request 50",
+              "DMA2 Channel 6 Request 50",
+              "DMA2 Channel 7 Request 50",
+              "DMA2 Channel 8 Request 50"
+            ]
+          }
+        ]
+      },
+      "C08": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH3",
+            "dma": [
+              "DMA1 Channel 1 Request 63",
+              "DMA1 Channel 2 Request 63",
+              "DMA1 Channel 3 Request 63",
+              "DMA1 Channel 4 Request 63",
+              "DMA1 Channel 5 Request 63",
+              "DMA1 Channel 6 Request 63",
+              "DMA1 Channel 7 Request 63",
+              "DMA1 Channel 8 Request 63",
+              "DMA2 Channel 1 Request 63",
+              "DMA2 Channel 2 Request 63",
+              "DMA2 Channel 3 Request 63",
+              "DMA2 Channel 4 Request 63",
+              "DMA2 Channel 5 Request 63",
+              "DMA2 Channel 6 Request 63",
+              "DMA2 Channel 7 Request 63",
+              "DMA2 Channel 8 Request 63"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM8 CH3",
+            "dma": [
+              "DMA1 Channel 1 Request 51",
+              "DMA1 Channel 2 Request 51",
+              "DMA1 Channel 3 Request 51",
+              "DMA1 Channel 4 Request 51",
+              "DMA1 Channel 5 Request 51",
+              "DMA1 Channel 6 Request 51",
+              "DMA1 Channel 7 Request 51",
+              "DMA1 Channel 8 Request 51",
+              "DMA2 Channel 1 Request 51",
+              "DMA2 Channel 2 Request 51",
+              "DMA2 Channel 3 Request 51",
+              "DMA2 Channel 4 Request 51",
+              "DMA2 Channel 5 Request 51",
+              "DMA2 Channel 6 Request 51",
+              "DMA2 Channel 7 Request 51",
+              "DMA2 Channel 8 Request 51"
+            ]
+          },
+          {
+            "af": "AF6",
+            "timer": "TIM20 CH3",
+            "dma": [
+              "DMA1 Channel 1 Request 88",
+              "DMA1 Channel 2 Request 88",
+              "DMA1 Channel 3 Request 88",
+              "DMA1 Channel 4 Request 88",
+              "DMA1 Channel 5 Request 88",
+              "DMA1 Channel 6 Request 88",
+              "DMA1 Channel 7 Request 88",
+              "DMA1 Channel 8 Request 88",
+              "DMA2 Channel 1 Request 88",
+              "DMA2 Channel 2 Request 88",
+              "DMA2 Channel 3 Request 88",
+              "DMA2 Channel 4 Request 88",
+              "DMA2 Channel 5 Request 88",
+              "DMA2 Channel 6 Request 88",
+              "DMA2 Channel 7 Request 88",
+              "DMA2 Channel 8 Request 88"
+            ]
+          }
+        ]
+      },
+      "C09": {
+        "timers": [
+          {
+            "af": "AF2",
+            "timer": "TIM3 CH4",
+            "dma": [
+              "DMA1 Channel 1 Request 64",
+              "DMA1 Channel 2 Request 64",
+              "DMA1 Channel 3 Request 64",
+              "DMA1 Channel 4 Request 64",
+              "DMA1 Channel 5 Request 64",
+              "DMA1 Channel 6 Request 64",
+              "DMA1 Channel 7 Request 64",
+              "DMA1 Channel 8 Request 64",
+              "DMA2 Channel 1 Request 64",
+              "DMA2 Channel 2 Request 64",
+              "DMA2 Channel 3 Request 64",
+              "DMA2 Channel 4 Request 64",
+              "DMA2 Channel 5 Request 64",
+              "DMA2 Channel 6 Request 64",
+              "DMA2 Channel 7 Request 64",
+              "DMA2 Channel 8 Request 64"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM8 CH4",
+            "dma": [
+              "DMA1 Channel 1 Request 52",
+              "DMA1 Channel 2 Request 52",
+              "DMA1 Channel 3 Request 52",
+              "DMA1 Channel 4 Request 52",
+              "DMA1 Channel 5 Request 52",
+              "DMA1 Channel 6 Request 52",
+              "DMA1 Channel 7 Request 52",
+              "DMA1 Channel 8 Request 52",
+              "DMA2 Channel 1 Request 52",
+              "DMA2 Channel 2 Request 52",
+              "DMA2 Channel 3 Request 52",
+              "DMA2 Channel 4 Request 52",
+              "DMA2 Channel 5 Request 52",
+              "DMA2 Channel 6 Request 52",
+              "DMA2 Channel 7 Request 52",
+              "DMA2 Channel 8 Request 52"
+            ]
+          }
+        ]
+      },
+      "C10": {
+        "timers": [
+          {
+            "af": "AF4",
+            "timer": "TIM8 CH1N",
+            "dma": [
+              "DMA1 Channel 1 Request 49",
+              "DMA1 Channel 2 Request 49",
+              "DMA1 Channel 3 Request 49",
+              "DMA1 Channel 4 Request 49",
+              "DMA1 Channel 5 Request 49",
+              "DMA1 Channel 6 Request 49",
+              "DMA1 Channel 7 Request 49",
+              "DMA1 Channel 8 Request 49",
+              "DMA2 Channel 1 Request 49",
+              "DMA2 Channel 2 Request 49",
+              "DMA2 Channel 3 Request 49",
+              "DMA2 Channel 4 Request 49",
+              "DMA2 Channel 5 Request 49",
+              "DMA2 Channel 6 Request 49",
+              "DMA2 Channel 7 Request 49",
+              "DMA2 Channel 8 Request 49"
+            ]
+          }
+        ]
+      },
+      "C11": {
+        "timers": [
+          {
+            "af": "AF4",
+            "timer": "TIM8 CH2N",
+            "dma": [
+              "DMA1 Channel 1 Request 50",
+              "DMA1 Channel 2 Request 50",
+              "DMA1 Channel 3 Request 50",
+              "DMA1 Channel 4 Request 50",
+              "DMA1 Channel 5 Request 50",
+              "DMA1 Channel 6 Request 50",
+              "DMA1 Channel 7 Request 50",
+              "DMA1 Channel 8 Request 50",
+              "DMA2 Channel 1 Request 50",
+              "DMA2 Channel 2 Request 50",
+              "DMA2 Channel 3 Request 50",
+              "DMA2 Channel 4 Request 50",
+              "DMA2 Channel 5 Request 50",
+              "DMA2 Channel 6 Request 50",
+              "DMA2 Channel 7 Request 50",
+              "DMA2 Channel 8 Request 50"
+            ]
+          }
+        ]
+      },
+      "C12": {
+        "timers": [
+          {
+            "af": "AF1",
+            "timer": "TIM5 CH2",
+            "dma": [
+              "DMA1 Channel 1 Request 73",
+              "DMA1 Channel 2 Request 73",
+              "DMA1 Channel 3 Request 73",
+              "DMA1 Channel 4 Request 73",
+              "DMA1 Channel 5 Request 73",
+              "DMA1 Channel 6 Request 73",
+              "DMA1 Channel 7 Request 73",
+              "DMA1 Channel 8 Request 73",
+              "DMA2 Channel 1 Request 73",
+              "DMA2 Channel 2 Request 73",
+              "DMA2 Channel 3 Request 73",
+              "DMA2 Channel 4 Request 73",
+              "DMA2 Channel 5 Request 73",
+              "DMA2 Channel 6 Request 73",
+              "DMA2 Channel 7 Request 73",
+              "DMA2 Channel 8 Request 73"
+            ]
+          },
+          {
+            "af": "AF4",
+            "timer": "TIM8 CH3N",
+            "dma": [
+              "DMA1 Channel 1 Request 51",
+              "DMA1 Channel 2 Request 51",
+              "DMA1 Channel 3 Request 51",
+              "DMA1 Channel 4 Request 51",
+              "DMA1 Channel 5 Request 51",
+              "DMA1 Channel 6 Request 51",
+              "DMA1 Channel 7 Request 51",
+              "DMA1 Channel 8 Request 51",
+              "DMA2 Channel 1 Request 51",
+              "DMA2 Channel 2 Request 51",
+              "DMA2 Channel 3 Request 51",
+              "DMA2 Channel 4 Request 51",
+              "DMA2 Channel 5 Request 51",
+              "DMA2 Channel 6 Request 51",
+              "DMA2 Channel 7 Request 51",
+              "DMA2 Channel 8 Request 51"
+            ]
+          }
+        ]
+      },
+      "C13": {
+        "timers": [
+          {
+            "af": "AF4",
+            "timer": "TIM1 CH1N",
+            "dma": [
+              "DMA1 Channel 1 Request 42",
+              "DMA1 Channel 2 Request 42",
+              "DMA1 Channel 3 Request 42",
+              "DMA1 Channel 4 Request 42",
+              "DMA1 Channel 5 Request 42",
+              "DMA1 Channel 6 Request 42",
+              "DMA1 Channel 7 Request 42",
+              "DMA1 Channel 8 Request 42",
+              "DMA2 Channel 1 Request 42",
+              "DMA2 Channel 2 Request 42",
+              "DMA2 Channel 3 Request 42",
+              "DMA2 Channel 4 Request 42",
+              "DMA2 Channel 5 Request 42",
+              "DMA2 Channel 6 Request 42",
+              "DMA2 Channel 7 Request 42",
+              "DMA2 Channel 8 Request 42"
+            ]
+          },
+          {
+            "af": "AF6",
+            "timer": "TIM8 CH4N",
+            "dma": [
+              "DMA1 Channel 1 Request 52",
+              "DMA1 Channel 2 Request 52",
+              "DMA1 Channel 3 Request 52",
+              "DMA1 Channel 4 Request 52",
+              "DMA1 Channel 5 Request 52",
+              "DMA1 Channel 6 Request 52",
+              "DMA1 Channel 7 Request 52",
+              "DMA1 Channel 8 Request 52",
+              "DMA2 Channel 1 Request 52",
+              "DMA2 Channel 2 Request 52",
+              "DMA2 Channel 3 Request 52",
+              "DMA2 Channel 4 Request 52",
+              "DMA2 Channel 5 Request 52",
+              "DMA2 Channel 6 Request 52",
+              "DMA2 Channel 7 Request 52",
+              "DMA2 Channel 8 Request 52"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

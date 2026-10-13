@@ -103,7 +103,11 @@
     }
   }
 
-  @media all and (min-width: 1125px) {
+  /* The wide logo plus the port picker, status boxes and header buttons
+     need about 1330px on one row. Narrower than that, keep the compact
+     logo so the status boxes wrap to at most two rows, which still fit
+     the header bar; a third row spills over the log bar below it. */
+  @media all and (min-width: 1340px) {
     .logo {
       width: 360px;
     }

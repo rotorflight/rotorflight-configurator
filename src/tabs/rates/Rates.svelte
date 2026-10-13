@@ -439,9 +439,11 @@
     {#each Array.from({ length: RATE_PROFILE_COUNT }, (_, i) => i) as index (index)}
       <button
         class={["profile-tab", index === FC.CONFIG.rateProfile && "active"]}
+        title={$i18n.t(`rateSetupSubTab${index + 1}`)}
         onclick={() => onClickProfileTab(index)}
       >
-        {$i18n.t(`rateSetupSubTab${index + 1}`)}
+        <span class="label-full">{$i18n.t(`rateSetupSubTab${index + 1}`)}</span>
+        <span class="label-short" aria-hidden="true">#{index + 1}</span>
       </button>
     {/each}
   </div>
@@ -472,46 +474,48 @@
             {/if}
           </div>
 
-          <div class="rates-table">
-            <span></span>
-            <span class="col">{$i18n.t(cfg.labels.rcRate)}</span>
-            <span class="col">{$i18n.t(cfg.labels.rate)}</span>
-            <span class="col">{$i18n.t(cfg.labels.expo)}</span>
-            <span class="col">{$i18n.t("rateSetupMaxVel")}</span>
+          <div class="rates-wrap">
+            <div class="rates-table">
+              <span></span>
+              <span class="col">{$i18n.t(cfg.labels.rcRate)}</span>
+              <span class="col">{$i18n.t(cfg.labels.rate)}</span>
+              <span class="col">{$i18n.t(cfg.labels.expo)}</span>
+              <span class="col">{$i18n.t("rateSetupMaxVel")}</span>
 
-            {#each ROWS as row (row.axis)}
-              {#if !(polar && row.axis === "roll")}
-                {@const col = row.axis === "collective"}
-                <span class={["axis", row.axis]}>
-                  {$i18n.t(
-                    polar && row.axis === "pitch"
-                      ? "rates.config.cyclic.label"
-                      : row.label,
-                  )}
-                </span>
-                <NumberInput
-                  {...col ? cfg.rcCol : cfg.rcRate}
-                  bind:value={form.rates[`${row.axis}_rc_rate`]}
-                />
-                <NumberInput
-                  {...col ? cfg.col : cfg.rate}
-                  bind:value={form.rates[`${row.axis}_srate`]}
-                />
-                <NumberInput
-                  {...cfg.expo}
-                  bind:value={form.rates[`${row.axis}_rc_expo`]}
-                />
-                <span class="max">
-                  {#if col}
-                    {convertToCollective(form.ratesType, max.collective)}°
-                  {:else if polar && row.axis === "pitch"}
-                    {max.polarCyclic.toFixed(0)}
-                  {:else}
-                    {max[row.axis].toFixed(0)}
-                  {/if}
-                </span>
-              {/if}
-            {/each}
+              {#each ROWS as row (row.axis)}
+                {#if !(polar && row.axis === "roll")}
+                  {@const col = row.axis === "collective"}
+                  <span class={["axis", row.axis]}>
+                    {$i18n.t(
+                      polar && row.axis === "pitch"
+                        ? "rates.config.cyclic.label"
+                        : row.label,
+                    )}
+                  </span>
+                  <NumberInput
+                    {...col ? cfg.rcCol : cfg.rcRate}
+                    bind:value={form.rates[`${row.axis}_rc_rate`]}
+                  />
+                  <NumberInput
+                    {...col ? cfg.col : cfg.rate}
+                    bind:value={form.rates[`${row.axis}_srate`]}
+                  />
+                  <NumberInput
+                    {...cfg.expo}
+                    bind:value={form.rates[`${row.axis}_rc_expo`]}
+                  />
+                  <span class="max">
+                    {#if col}
+                      {convertToCollective(form.ratesType, max.collective)}°
+                    {:else if polar && row.axis === "pitch"}
+                      {max.polarCyclic.toFixed(0)}
+                    {:else}
+                      {max[row.axis].toFixed(0)}
+                    {/if}
+                  </span>
+                {/if}
+              {/each}
+            </div>
           </div>
         </Section>
 
@@ -665,6 +669,7 @@
     flex-wrap: wrap;
     gap: 2px;
     margin-top: var(--section-gap);
+    container-type: inline-size;
   }
 
   .profile-tab {
@@ -677,10 +682,38 @@
     }
   }
 
+  .label-short {
+    display: none;
+  }
+
+  /* Six "Rate Profile #n" tabs stop fitting on one row around here; "#n"
+     keeps them on one row instead of wrapping onto a second. */
+  @container (max-width: 780px) {
+    .profile-tab {
+      flex: 1;
+      padding: 0 8px;
+    }
+
+    .label-full {
+      display: none;
+    }
+
+    .label-short {
+      display: inline;
+    }
+  }
+
   .content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    /* min() so a single column can still shrink below 420px on a narrow
+       window instead of overflowing it. */
+    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
     column-gap: var(--section-gap);
+  }
+
+  .rates-wrap {
+    container-type: inline-size;
+    overflow-x: auto;
   }
 
   .type-row {
@@ -707,6 +740,22 @@
     gap: 6px 8px;
     padding: 8px;
     border-top: 1px solid var(--color-border-soft);
+  }
+
+  /* The full-size table needs about 470px; below that, tighten the columns
+     and inputs rather than scroll sideways. */
+  @container (max-width: 470px) {
+    .rates-table {
+      grid-template-columns:
+        auto repeat(3, minmax(72px, 118px))
+        minmax(40px, 96px);
+      gap: 6px 4px;
+      @include mixins.compact-number-input;
+    }
+
+    .rates-table .axis {
+      font-size: 0.75rem;
+    }
   }
 
   .col {
@@ -762,11 +811,5 @@
     align-items: center;
     gap: 8px;
     margin-top: 12px;
-  }
-
-  @media only screen and (max-width: 480px) {
-    .content {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

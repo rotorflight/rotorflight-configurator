@@ -58,16 +58,15 @@
         onchange={onEdit}
       />
     {/if}
-    <p class="limit">
-      {$i18n.t("auxiliaryMin")}: <span>{item.start}</span>
-    </p>
-    <p class="limit">
-      {$i18n.t("auxiliaryMax")}: <span>{item.end}</span>
-    </p>
+    <div class="limits">
+      <p class="limit">{$i18n.t("auxiliaryMin")} <span>{item.start}</span></p>
+      <p class="limit">{$i18n.t("auxiliaryMax")} <span>{item.end}</span></p>
+    </div>
   </div>
 
   <div class="slider">
     <RangeSlider
+      compact
       bind:start={item.start}
       bind:end={item.end}
       opts={sliderOpts}
@@ -88,8 +87,8 @@
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    padding: 12px 32px 12px 8px;
-    border-bottom: 1px solid var(--color-border);
+    padding: 8px 32px 8px 12px;
+    border-bottom: 1px solid var(--color-border-soft);
 
     &:last-child {
       border-bottom: none;
@@ -103,6 +102,12 @@
     flex-direction: column;
     gap: 4px;
     text-align: center;
+  }
+
+  .limits {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
   }
 
   .limit {
@@ -119,7 +124,7 @@
   .slider {
     flex: 1;
     min-width: 0;
-    padding: 6px 16px 0;
+    padding: 10px 12px 22px;
   }
 
   .delete {

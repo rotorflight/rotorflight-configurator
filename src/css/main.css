@@ -1578,6 +1578,18 @@ li.active .ic_data {
     background-image: url(/images/icons/cf_icon_data_white.svg);
 }
 
+.ic_remap_fc {
+    background-image: url(/images/icons/cf_icon_remap_grey.svg);
+}
+
+.ic_remap_fc:hover {
+    background-image: url(/images/icons/cf_icon_remap_white.svg);
+}
+
+li.active .ic_remap_fc {
+    background-image: url(/images/icons/cf_icon_remap_white.svg);
+}
+
 .ic_cli {
     background-image: url(/images/icons/cf_icon_cli_grey.svg);
 }
