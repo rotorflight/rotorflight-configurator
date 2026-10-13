@@ -57,6 +57,14 @@
   /** Leaving the tab: blocked while the CLI session is active. */
   export function exit(callback) {
     if (CONFIGURATOR.cliEngineActive) {
+      // #content can be cleared (disconnect, reboot-driven reconnect,
+      // another tab mounting) without this component being unmounted.
+      // With no dialog left to confirm in, exit the CLI session directly
+      // rather than throwing and leaving the FC stuck in CLI mode.
+      if (!exitDialogEl?.isConnected) {
+        close(callback);
+        return;
+      }
       exitDialogEl.showModal();
     } else {
       callback?.();

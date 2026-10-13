@@ -7,6 +7,7 @@
   import Page from "@/components/Page.svelte";
   import Section from "@/components/Section.svelte";
   import Select from "@/components/Select.svelte";
+  import SwashServoDiagram from "@/components/SwashServoDiagram.svelte";
   import Tooltip from "@/components/Tooltip.svelte";
   import InfoNote from "@/components/notes/InfoNote.svelte";
   import WarningNote from "@/components/notes/WarningNote.svelte";
@@ -53,7 +54,10 @@
   ];
 
   let swashTypeOptions = $derived(
-    Mixer.swashTypes.map((name, value) => ({ value, label: $i18n.t(name) })),
+    Mixer.swashTypes.map((name, value) => ({
+      value,
+      label: $i18n.t(name).replaceAll("&deg;", "°"),
+    })),
   );
   let rotorDirectionOptions = $derived([
     { value: 0, label: $i18n.t("mixerClockwise") },
@@ -383,6 +387,10 @@
           swashTypeOptions,
           onRebootChange,
         )}
+        <SwashServoDiagram
+          swashType={form.swashType}
+          tailServo={form.tailMode === TAIL_VARIABLE_PITCH}
+        />
         {@render selectField(
           "mixer-rotor-dir",
           "mixerMainRotorDirection",

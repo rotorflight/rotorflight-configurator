@@ -1,0 +1,61 @@
+name: Publish GitHub Pages
+
+# Deploys the gh-pages branch to GitHub Pages (Settings -> Pages -> Source:
+# "GitHub Actions"). The workflows that change gh-pages -- Deploy Web App,
+# PR Preview Publish, PR Preview Cleanup and PR Branch Info -- only push to
+# the branch; this one runs after each of them and publishes whatever the
+# branch holds.
+#
+# The classic "deploy from a branch" source rebuilt the site on every push to
+# gh-pages, and when pushes arrived seconds apart the earlier builds failed.
+# If the last push of a burst was one of them the site stayed stale. Here
+# every run deploys the branch as it is when the run starts, so the last run
+# in always publishes the newest tree.
+
+on:
+  workflow_run:
+    workflows:
+      - Deploy Web App
+      - PR Preview Publish
+      - PR Preview Cleanup
+      - PR Branch Info
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One site, one queue. GitHub keeps a single pending run per group and a newer
+# one replaces it, which is what we want: the replacement deploys the same
+# (or a newer) gh-pages tree. An in-progress deploy is left to finish.
+concurrency:
+  group: pages-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Deploy gh-pages to GitHub Pages
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - name: Checkout GitHub Pages branch
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          path: pages
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: pages
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v5

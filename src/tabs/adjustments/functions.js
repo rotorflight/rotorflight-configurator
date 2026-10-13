@@ -2,6 +2,7 @@ import semver from "semver";
 
 import { API_VERSION_12_8, API_VERSION_12_9 } from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
+import { i18n } from "@/js/localization.js";
 
 // Rotorflight's adjustment functions. `id` is the firmware's adjustmentFunc_e
 // value (fc/rc_adjustments.h), so entries are never reordered or deleted;
@@ -97,7 +98,7 @@ export function getFunctions() {
     ];
 }
 
-// Groups for the function select, in display order.
+// Groups for the function picker, in display order.
 export const FUNCTION_GROUPS = [
     { label: 'adjustmentsGroupProfiles', ids: [82, 3, 4, 2, 1] },
     { label: 'adjustmentsGroupRates', ids: [5, 6, 7] },
@@ -114,3 +115,9 @@ export const FUNCTION_GROUPS = [
     { label: 'adjustmentsGroupRescue', ids: [44, 43, 42, 39, 41, 40] },
     { label: 'adjustmentsGroupGovernor', ids: [77, 55, 54, 51, 52, 80, 50, 76, 78, 79, 49, 48, 53, 81] },
 ];
+
+// Short help for a function, shown on its picker tile and card header.
+export function getFunctionDescription(name) {
+    return i18n.existsMessage('adjustmentsFunctionHelp' + name) ?
+        i18n.getMessage('adjustmentsFunctionHelp' + name) : '';
+}

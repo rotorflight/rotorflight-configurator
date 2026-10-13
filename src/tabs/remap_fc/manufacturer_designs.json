@@ -1,0 +1,664 @@
+{
+  "_file": {
+    "path": "src/tabs/remap_fc/manufacturer_designs.json",
+    "description": "Same shape as reference_designs.json (usage -> pin/function entries, one top-level entry per board), but for a manufacturer's own custom pin layout that has no Rotorflight reference design behind it at all -- kept in its own file, separate from reference_designs.json, because the two are conceptually different data (an official Rotorflight reference design vs. a manufacturer's own board) that happen to share a shape, not because of how they're loaded: both this file and reference_designs.json are independently fetched live from this project's own GitHub repository at runtime (see reference_design_source.js's loadReferenceDesigns/loadManufacturerDesigns), each falling back to its own bundled copy on failure, so a newly documented board -- official or manufacturer-supplied -- doesn't need a new configurator release before it shows up. Keeping them as two files, rather than one this fetch could just overwrite wholesale, means each can be fetched (and can fail to fetch) independently without one file's data ever silently wiping out the other's. Each entry is keyed by the board's own reported name (FC.CONFIG.boardName), matched case-insensitively and as a *prefix* (see reference_design_labels.js's findUsages), not a design family -- \"FLYDRAGON_PRO\" here matches a real board reporting \"FLYDRAGON_PRO42688\" (the trailing digits are a specific MCU/revision code, not part of the product-line name). FLYDRAGON_PRO was supplied directly by the manufacturer -- its Rear port pins only (ESC/RPM/TAIL/CH1-3/TX2/RX2/AUX); its Expansion and GPS port pins aren't documented here yet, since no default functionality was given for them. AUX (B9) is unlike the others: it has no default resource assignment at all (the manufacturer confirms it's unconnected by default, and physically shares its pin with a secondary gyro interrupt) rather than defaulting to some UART/timer function the way ESC/RPM/TAIL/CH1-3/TX2/RX2 do -- it's still meant to be usable for remapping (an extra servo, say), but whether this tool can actually offer it depends on whether the connected board's own default hardware dump reports *any* resource at all on B9 (see RemapFc.svelte's isPermanentOption/getAddableOptions, which both key off that). FLYDRAGON_PRO also documents Int Rec.Tx/Int Rec.Rx (Int Rec.Rx on PA10/RX1, Int Rec.Tx on PA9/TX1, UART1) -- its onboard/internal receiver connection, not a user-facing port -- labelled from the FC's own RX/TX resource naming (Int Rec.Rx is the FC's own RX1 pin, Int Rec.Tx its own TX1 pin). Each marked `\"default\": false` (see reference_design_labels.js's isOptedOutOfDefault) so they're still labelled correctly the moment the user actually looks for them via \"+ Add\", without cluttering the table with an always-shown row the way every other named connector here gets, and also `\"hide\": true` (see reference_design_labels.js's buildHiddenPins): the underlying UART1 resource is otherwise a perfectly ordinary, CLI-remappable one, but this particular pin is hard-wired straight to the onboard receiver with no physical port to connect anything else to, so unlike `\"default\": false` alone it's also excluded from \"+ Add\"/\"Other Pins\" entirely (nothing can be moved onto it, and it can't be found there either) and its own Current Option dropdown offers nothing to change it to (nothing can be moved off it either) -- the card shows an explanatory message in the dropdown's place instead. NEXUS_XR documents the same idea for its own internal receiver connection, but is wired the other way round -- a genuinely different board, not a copy of FLYDRAGON_PRO's convention -- under its own boardName (Int Rec.Tx on PD2/RX5, Int Rec.Rx on PC12/TX5, UART5) rather than F7C5's family match, since this is a NEXUS_XR-specific internal connection its shared F7C reference design knows nothing about. FLYDRAGON_V2_2 is a separate, later board (its own boardName, matched the same way -- its reported boardDesign, \"RTFL\", is a generic Rotorflight placeholder rather than a real shared family, so name matching is what actually resolves it) built from the manufacturer's own target dump (resource/timer/dma lines) plus its wiring diagram: CH1-4 are the swashplate (CH1-3) and tail (CH4) servo outputs, ESC the main motor, RPM-E the ESC's own built-in RPM/telemetry return, RPM-S a separate standalone RPM sensor input (either can be used alone as FREQ1, or together as FREQ1+FREQ2), and SBUS/F.Port share UART2 (RX2/TX2) the same way a receiver's SBUS signal and its telemetry return normally do. Its other UART/I2C/expansion pins aren't documented here either, for the same reason as FLYDRAGON_PRO's. FLYWING_HELI405 (boardDesign \"RTFL\", also matched by name) is built the same way, from the manufacturer's own target dump plus an annotated board photo: SBUS/S1/S2/S3/TAIL/ESC/RPM are the main connector's own silkscreen labels (SBUS = SERIAL_RX 2 -- the receiver signal; S1-S3 the swashplate servos; TAIL the tail servo; ESC the main motor; RPM the governor's RPM sensor input). Its two other connectors -- a 4-pin JST for a Spektrum DSM satellite receiver (SERIAL_RX 6, receive-only) and a separate JST breaking out SERIAL_TX 2 (the other half of the UART2 pair SBUS's SERIAL_RX 2 belongs to) -- are deliberately left undocumented here: a receive-only connector named \"DSM\" reads as if it carries both directions the same way a two-sided connector name normally would, which is exactly backwards for a pin that can't. They're still reachable via \"+ Add\", just without a named-connector row of their own. VANTAC_RF007, NEXUS_X, NEXUS_XR and NEXUS_F7 are a different case from the other three entries: none of them is a manufacturer-invented layout at all -- they're real official Rotorflight reference design boards (confirmed via the app's own boardDesign report: \"F7B5\" for VANTAC_RF007, \"F7C5\" for both NEXUS_X and NEXUS_XR, \"F7A1\" for NEXUS_F7), so findUsages's family match already resolves their labels/reserved-pins/named-connector-pins correctly from reference_designs.json's own F7A/F7B/F7C entries without needing this file at all. buildDesignOrder does fall back to that same family match for its own row-order purposes when a board has no entry here (see its own comment for why), but a reference design's own JSON key order is just upstream MCU-Pin-Allocation-table extraction order, not the board's real physical top-to-bottom layout -- so these four entries exist purely to give buildDesignOrder each board's actual silkscreen order instead: VANTAC_RF007 reads (top to bottom) S1, S2, S3, Tail, ESC, RPM, TLM, AUX, SBUS (Out); NEXUS_X and NEXUS_XR (confirmed identical to each other) read S1, S2, S3, TAIL, ESC, RPM, TLM, AUX, SBUS; NEXUS_F7 -- an earlier, F7A-based Nexus with no separate TLM/AUX pins at all, SBUS alone doing double duty as receiver input and telemetry return the same way reference_designs.json's own F7A entry documents -- reads S1, S2, S3, TAIL, ESC, RPM, SBUS. Each confirmed against a labelled board photo. All four entries' pin/function values are copied verbatim from reference_designs.json's own F7A (NEXUS_F7), F7B (VANTAC_RF007) or F7C (NEXUS_X/NEXUS_XR) entries (Servo 1/2/3, TAIL, ESC, RPM, TLM, AUX, SBUS) rather than independently sourced. GOOSKY_F701 (boardDesign \"RTFL\", a generic Rotorflight placeholder like FLYDRAGON_V2_2/FLYWING_HELI405, so again matched by name) is a real manufacturer-invented layout, built from the manufacturer's own target dump (resource/timer/dma lines) plus an annotated board photo and connector schematic: CH1-3 are the swashplate servos, TAIL the tail servo, ESC the main motor, RPM the governor's own dedicated frequency-counter input (FREQ 1, not a UART pin the way some other boards' \"RPM\" is), TLM a receive-only UART (SERIAL_RX 5) for ESC telemetry, AUX a transmit-only UART (SERIAL_TX 4), and SBUS a receive-only UART (SERIAL_RX 2) for the receiver signal. The schematic was needed because the target dump alone left TLM and AUX ambiguous -- SERIAL_RX 4 (A01) and both halves of UART6 (SERIAL_TX/RX 6, C06/C07) are also unused-but-defined in the dump, yet the schematic confirms none of them are actually on this connector (they're routed elsewhere), so they're deliberately left undocumented here, the same as FLYWING_HELI405's DSM/UART2 pins."
+  },
+  "FLYDRAGON_PRO": {
+    "TAIL": [
+      {
+        "pin": "PC9",
+        "function": "SDA3 / T3CH4 / T8CH4"
+      }
+    ],
+    "CH3": [
+      {
+        "pin": "PC8",
+        "function": "T3CH3 / T8CH3"
+      }
+    ],
+    "CH2": [
+      {
+        "pin": "PC7",
+        "function": "RX6 / T3CH2 / T8CH2"
+      }
+    ],
+    "CH1": [
+      {
+        "pin": "PC6",
+        "function": "TX6 / T3CH1 / T8CH1"
+      }
+    ],
+    "ESC": [
+      {
+        "pin": "PA0",
+        "function": "TX4 / T2CH1 / T5CH1"
+      }
+    ],
+    "RPM": [
+      {
+        "pin": "PA1",
+        "function": "RX4 / T2CH2 / T5CH2"
+      }
+    ],
+    "RX2": [
+      {
+        "pin": "PA3",
+        "function": "RX2 / T2CH4 / T5CH4 / T9CH2"
+      }
+    ],
+    "TX2": [
+      {
+        "pin": "PA2",
+        "function": "TX2 / T2CH3 / T5CH3 / T9CH1"
+      }
+    ],
+    "AUX": [
+      {
+        "pin": "PB9",
+        "function": "T11CH1"
+      }
+    ],
+    "DSM Rx3": [
+      {
+        "pin": "PC11",
+        "function": "RX3",
+        "default": false
+      }
+    ],
+    "Int Rec.Rx": [
+      {
+        "pin": "PA10",
+        "function": "RX1",
+        "default": false,
+        "hide": true
+      }
+    ],
+    "Int Rec.Tx": [
+      {
+        "pin": "PA9",
+        "function": "TX1",
+        "default": false,
+        "hide": true
+      }
+    ],
+    "GPS TX5": [
+      {
+        "pin": "PC12",
+        "function": "TX5",
+        "default": false
+      }
+    ],
+    "GPS RX5": [
+      {
+        "pin": "PD2",
+        "function": "RX5",
+        "default": false
+      }
+    ],
+    "GPS SCL": [
+      {
+        "pin": "PB6",
+        "function": "T4CH1 / TX1 / SCL1",
+        "default": false
+      }
+     ],
+    "GPS SDA": [
+      {
+        "pin": "PB7",
+        "function": "T4CH2 / RX1 / SDA1",
+        "default": false
+      }
+   ],
+   "Baro SCL2": [
+      {
+        "pin": "PB10",
+        "function": "SCL2",
+        "default": false,
+        "hide": true
+      }
+   ],
+   "Baro SDA2": [
+      {
+        "pin": "PB11",
+        "function": "SDA2",
+        "default": false,
+        "hide": true
+      }
+   ],
+   "LED": [
+      {
+        "pin": "PB8",
+        "function": "LED_STRIP",
+        "default": false,
+        "hide": true
+      }
+   ]
+  },
+  "FLYDRAGON_V2_2": {
+    "CH4": [
+      {
+        "pin": "PC9",
+        "function": "T8CH4"
+      }
+    ],
+    "CH3": [
+      {
+        "pin": "PC8",
+        "function": "T3CH3"
+      }
+    ],
+    "CH2": [
+      {
+        "pin": "PC7",
+        "function": "T3CH2"
+      }
+    ],
+    "CH1": [
+      {
+        "pin": "PC6",
+        "function": "T3CH1"
+      }
+    ],
+    "ESC": [
+      {
+        "pin": "PA0",
+        "function": "T5CH1"
+      }
+    ],
+    "RPM-E": [
+      {
+        "pin": "PA1",
+        "function": "T2CH2"
+      }
+    ],
+    "SBUS": [
+      {
+        "pin": "PA3",
+        "function": "RX2"
+      }
+    ],
+    "F.Port": [
+      {
+        "pin": "PA2",
+        "function": "TX2"
+      }
+    ],
+    "RPM-S": [
+      {
+        "pin": "PA15",
+        "function": "T2CH1"
+      }
+    ],
+    "Int Rec.Rx": [
+      {
+        "pin": "PA10",
+        "function": "RX1",
+        "default": false,
+        "hide": true
+      }
+    ],
+    "Int Rec.Tx": [
+      {
+        "pin": "PA9",
+        "function": "TX1",
+        "default": false,
+        "hide": true
+      }
+    ],
+    "GPS TX5": [
+      {
+        "pin": "PC12",
+        "function": "TX5",
+        "default": false
+      }
+    ],
+    "GPS RX5": [
+      {
+        "pin": "PD2",
+        "function": "RX5",
+        "default": false
+      }
+    ],
+    "GPS SCL": [
+      {
+        "pin": "PB6",
+        "function": "T4CH1 / TX1 / SCL1",
+        "default": false
+      }
+    ],
+    "GPS SDA": [
+      {
+        "pin": "PB7",
+        "function": "T4CH2 / RX1 / SDA1",
+        "default": false
+      }
+    ],
+    "Baro SCL2": [
+      {
+        "pin": "PB10",
+        "function": "SCL2",
+        "default": false,
+        "hide": true
+      }
+    ],
+    "Baro SDA2": [
+      {
+        "pin": "PB11",
+        "function": "SDA2",
+        "default": false,
+        "hide": true
+      }
+    ],
+    "LED": [
+      {
+        "pin": "PB8",
+        "function": "LED_STRIP",
+        "default": false,
+        "hide": true
+      }
+   ]
+  },
+  "FLYWING_HELI405": {
+    "SBUS": [
+      {
+        "pin": "PC07",
+        "function": "RX6 (shared with DSM)"
+      }
+    ],
+    "S1": [
+      {
+        "pin": "PB6",
+        "function": "T4CH1"
+      }
+    ],
+    "S2": [
+      {
+        "pin": "PB10",
+        "function": "T2CH3"
+      }
+    ],
+    "S3": [
+      {
+        "pin": "PB11",
+        "function": "T2CH4"
+      }
+    ],
+    "TAIL": [
+      {
+        "pin": "PC8",
+        "function": "T8CH3"
+      }
+    ],
+    "ESC": [
+      {
+        "pin": "PB1",
+        "function": "T3CH4"
+      }
+    ],
+    "RPM": [
+      {
+        "pin": "PB8",
+        "function": "T10CH1"
+      }
+    ],
+    "GPS TX 1": [
+      {
+        "pin": "PA09",
+        "function": "TX1",
+        "default": false
+      }
+    ],
+    "GPS RX 1": [
+      {
+        "pin": "PA10",
+        "function": "RX1",
+        "default": false
+      }
+    ],
+    "GPS SCL 3": [
+      {
+        "pin": "PA08",
+        "function": "SCL3",
+        "default": false
+      }
+    ],
+    "GPS SDA 3": [
+      {
+        "pin": "PC09",
+        "function": "SDA3",
+        "default": false
+      }
+    ]
+  },
+  "VANTAC_RF007": {
+    "S1": [
+      {
+        "pin": "PB4",
+        "function": "T3CH1"
+      }
+    ],
+    "S2": [
+      {
+        "pin": "PB5",
+        "function": "T3CH2"
+      }
+    ],
+    "S3": [
+      {
+        "pin": "PB0",
+        "function": "T3CH3"
+      }
+    ],
+    "TAIL": [
+      {
+        "pin": "PA15",
+        "function": "T2CH1"
+      }
+    ],
+    "ESC": [
+      {
+        "pin": "PA9",
+        "function": "T1CH2"
+      }
+    ],
+    "RPM": [
+      {
+        "pin": "PA2",
+        "function": "TX2 / T5CH3"
+      }
+    ],
+    "TLM": [
+      {
+        "pin": "PA3",
+        "function": "RX2 / T5CH4"
+      }
+    ],
+    "AUX": [
+      {
+        "pin": "PB6",
+        "function": "T4CH1 / TX1"
+      }
+    ],
+    "SBUS (Out)": [
+      {
+        "pin": "PB7",
+        "function": "T4CH2 / RX1"
+      }
+    ],
+        "TX 5": [
+      {
+        "pin": "PC12",
+        "function": "TX5",
+        "default": false,
+        "hide": true
+      }
+    ]
+  },
+  "NEXUS_X": {
+    "S1": [
+      {
+        "pin": "PB4",
+        "function": "T3CH1"
+      }
+    ],
+    "S2": [
+      {
+        "pin": "PB5",
+        "function": "T3CH2"
+      }
+    ],
+    "S3": [
+      {
+        "pin": "PB0",
+        "function": "T3CH3"
+      }
+    ],
+    "TAIL": [
+      {
+        "pin": "PA15",
+        "function": "T2CH1"
+      }
+    ],
+    "ESC": [
+      {
+        "pin": "PA9",
+        "function": "T1CH2"
+      }
+    ],
+    "RPM": [
+      {
+        "pin": "PA2",
+        "function": "TX2 / T5CH3"
+      }
+    ],
+    "TLM": [
+      {
+        "pin": "PA3",
+        "function": "RX2 / T5CH4"
+      }
+    ],
+    "AUX": [
+      {
+        "pin": "PB6",
+        "function": "T4CH1 / TX1 / SCL1"
+      }
+    ],
+    "SBUS": [
+      {
+        "pin": "PB7",
+        "function": "T4CH2 / RX1 / SDA1"
+      }
+    ]
+  },
+  "NEXUS_XR": {
+    "S1": [
+      {
+        "pin": "PB4",
+        "function": "T3CH1"
+      }
+    ],
+    "S2": [
+      {
+        "pin": "PB5",
+        "function": "T3CH2"
+      }
+    ],
+    "S3": [
+      {
+        "pin": "PB0",
+        "function": "T3CH3"
+      }
+    ],
+    "TAIL": [
+      {
+        "pin": "PA15",
+        "function": "T2CH1"
+      }
+    ],
+    "ESC": [
+      {
+        "pin": "PA9",
+        "function": "T1CH2"
+      }
+    ],
+    "RPM": [
+      {
+        "pin": "PA2",
+        "function": "TX2 / T5CH3"
+      }
+    ],
+    "TLM": [
+      {
+        "pin": "PA3",
+        "function": "RX2 / T5CH4"
+      }
+    ],
+    "AUX": [
+      {
+        "pin": "PB6",
+        "function": "T4CH1 / TX1 / SCL1"
+      }
+    ],
+    "SBUS": [
+      {
+        "pin": "PB7",
+        "function": "T4CH2 / RX1 / SDA1"
+      }
+    ],
+    "Int Rec.Tx": [
+      {
+        "pin": "PD2",
+        "function": "RX5",
+        "default": false,
+        "hide": true
+      }
+    ],
+    "Int Rec.Rx": [
+      {
+        "pin": "PC12",
+        "function": "TX5",
+        "default": false,
+        "hide": true
+      }
+    ]
+  },
+  "NEXUS_F7": {
+    "S1": [
+      {
+        "pin": "PB4",
+        "function": "T3CH1"
+      }
+    ],
+    "S2": [
+      {
+        "pin": "PB5",
+        "function": "T3CH2"
+      }
+    ],
+    "S3": [
+      {
+        "pin": "PB0",
+        "function": "T3CH3"
+      }
+    ],
+    "TAIL": [
+      {
+        "pin": "PB3",
+        "function": "T2CH2"
+      }
+    ],
+    "ESC": [
+      {
+        "pin": "PB6",
+        "function": "T4CH1"
+      }
+    ],
+    "RPM": [
+      {
+        "pin": "PA2",
+        "function": "TX2 / T5CH3"
+      }
+    ],
+    "SBUS": [
+      {
+        "pin": "PA3",
+        "function": "RX2 / T5CH4"
+      }
+    ]
+  },
+  "GOOSKY_F701": {
+    "CH1": [
+      {
+        "pin": "PB4",
+        "function": "T3CH1"
+      }
+    ],
+    "CH2": [
+      {
+        "pin": "PB5",
+        "function": "T3CH2"
+      }
+    ],
+    "CH3": [
+      {
+        "pin": "PB0",
+        "function": "T3CH3"
+      }
+    ],
+    "ESC": [
+      {
+        "pin": "PA15",
+        "function": "T2CH1"
+      }
+    ],
+    "TAIL": [
+      {
+        "pin": "PA9",
+        "function": "T1CH2"
+      }
+    ],
+    "RPM": [
+      {
+        "pin": "PA2",
+        "function": "T5CH3"
+      }
+    ],
+    "TLM": [
+      {
+        "pin": "PD2",
+        "function": "RX5"
+      }
+    ],
+    "AUX": [
+      {
+        "pin": "PA0",
+        "function": "TX4 / T5CH1"
+      }
+    ],
+    "SBUS": [
+      {
+        "pin": "PA3",
+        "function": "RX2 / T9CH2"
+      }
+    ],
+    "Baro SCL3": [
+      {
+        "pin": "PA08",
+        "function": "SCL3",
+        "default": false,
+        "hide": true
+      }
+    ],
+    "Baro SDA3": [
+      {
+        "pin": "PC09",
+        "function": "SDA3",
+        "default": false,
+        "hide": true
+      }
+    ],
+    "Int Rec.Tx": [
+      {
+        "pin": "PB06",
+        "function": "TX1",
+        "default": false,
+        "hide": true
+      }
+    ],
+    "Int Rec.Rx": [
+      {
+        "pin": "PB07",
+        "function": "RX1",
+        "default": false,
+        "hide": true
+      }
+    ],
+    "DSM Rx 4": [
+      {
+        "pin": "PA01",
+        "function": "RX4",
+        "default": false
+      }
+    ]
+  }
+}

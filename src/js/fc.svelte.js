@@ -17,6 +17,7 @@ class FlightController {
   BUS_SERVO_CONFIG = $state();
   CONFIG = $state();
   COPY_PROFILE = $state();
+  CRSF_SENSORS_STATUS = $state();
   CURRENT_METERS = $state();
   CURRENT_METER_CONFIGS = $state();
   DATAFLASH = $state();
@@ -143,6 +144,12 @@ class FlightController {
       vbatwarningcellvoltage:     0,
       lvcPercentage:              0,
       mahWarningPercentage:       0,
+      hasProfileCells:            false,
+      cellCounts:                 [ 0, 0, 0, 0, 0, 0 ],
+      vbatmincellvoltages:        [ 0, 0, 0, 0, 0, 0 ],
+      vbatmaxcellvoltages:        [ 0, 0, 0, 0, 0, 0 ],
+      vbatfullcellvoltages:       [ 0, 0, 0, 0, 0, 0 ],
+      vbatwarningcellvoltages:    [ 0, 0, 0, 0, 0, 0 ],
     };
 
     this.BATTERY_STATE = {
@@ -348,6 +355,21 @@ class FlightController {
       consumption:                [0, 0, 0, 0, 0, 0, 0, 0],
       temperature:                [0, 0, 0, 0, 0, 0, 0, 0],
       temperature2:               [0, 0, 0, 0, 0, 0, 0, 0],
+    };
+
+    this.CRSF_SENSORS_STATUS = {
+      enabled:                    false,
+      rxByteCount:                0,
+      rxSyncCount:                0,
+      rxCrcOkCount:               0,
+      rxCrcFailCount:             0,
+      lastFrameType:              0,
+      lastFrameLength:            0,
+      gps:                        null,
+      battery:                    null,
+      baro:                       null,
+      cells:                      null,
+      rpm:                        null,
     };
 
     this.GPS_DATA = {

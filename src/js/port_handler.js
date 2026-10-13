@@ -138,6 +138,7 @@ PortHandler.check_usb_devices = function (callback) {
                 self.portPickerElement.append($('<option/>', {
                     value: 'manual',
                     text: i18n.getMessage('portsSelectManual'),
+                    i18n: 'portsSelectManual',
                     data: {isManual: true},
                 }));
                 self.syncVirtualOption();
@@ -332,6 +333,7 @@ PortHandler.updatePortSelect = function (ports) {
         this.portPickerElement.append($("<option/>", {
             value: 'manual',
             text: i18n.getMessage('portsSelectManual'),
+            i18n: 'portsSelectManual',
             data: {isManual: true},
         }));
     }
@@ -374,6 +376,7 @@ PortHandler.syncVirtualOption = function () {
         this.portPickerElement.append($("<option/>", {
             value: 'virtual',
             text: i18n.getMessage('portsSelectVirtual'),
+            i18n: 'portsSelectVirtual',
             data: {isVirtual: true},
         }));
         this.setPortsInputWidth();
@@ -393,12 +396,14 @@ PortHandler.appendWebRequestOptions = function () {
     this.portPickerElement.append($("<option/>", {
         value: "0",
         text: i18n.getMessage('portsSelectPleaseSelect'),
+        i18n: 'portsSelectPleaseSelect',
     }));
 
     if ('serial' in navigator || 'usb' in navigator) {
         this.portPickerElement.append($("<option/>", {
             value: "requestserial",
             text: i18n.getMessage('portsSelectAddSerialDevice'),
+            i18n: 'portsSelectAddSerialDevice',
             data: {isRequestSerial: true},
         }));
     }
@@ -407,6 +412,7 @@ PortHandler.appendWebRequestOptions = function () {
         this.portPickerElement.append($("<option/>", {
             value: "requestbluetooth",
             text: i18n.getMessage('portsSelectAddBluetoothDevice'),
+            i18n: 'portsSelectAddBluetoothDevice',
             data: {isRequestBluetooth: true},
         }));
     }
@@ -416,6 +422,7 @@ PortHandler.appendWebRequestOptions = function () {
         this.portPickerElement.append($("<option/>", {
             value: "DFU",
             text: i18n.getMessage('portsSelectAddDfuDevice'),
+            i18n: 'portsSelectAddDfuDevice',
             data: {isDFU: true},
             // Real attributes too, for non-jQuery readers (the Svelte
             // firmware flasher). data-dfu-pending marks it as still only the

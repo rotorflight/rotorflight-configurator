@@ -26,7 +26,9 @@ const tabHelpURLs = {
     tabBeepers:         `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/beepers`,
     tabGPS:             `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/gps`,
     tabSensors:         `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/sensors`,
+    tabCrsfSensors:     `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/crsf-sensors`,
     tabBlackbox:        `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/blackbox`,
+    tabRemapFC:         `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/remap-fc`,
     tabCli:             `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/cli`,
 };
 

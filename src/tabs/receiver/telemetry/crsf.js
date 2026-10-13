@@ -1,6 +1,9 @@
 import semver from "semver";
 
-import { API_VERSION_12_9 } from "@/js/configurator.svelte.js";
+import {
+  API_VERSION_12_9,
+  API_VERSION_12_10,
+} from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 
 export function getNativeCrsfSensors() {
@@ -134,6 +137,9 @@ export function getCustomCrsfSensors() {
         { name: "ARMING_DISABLE_FLAGS" },
         { name: "RESCUE_STATE" },
         { name: "GOVERNOR_STATE" },
+        ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)
+          ? [{ name: "SYSTEM_STATUS" }, { name: "SYSTEM_CONFIG" }]
+          : []),
         { name: "ADJFUNC" },
       ],
     },

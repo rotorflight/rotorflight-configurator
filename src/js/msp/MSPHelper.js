@@ -68,6 +68,7 @@ export function MspHelper() {
         'SBUS_OUT': 18,
         'FBUS_OUT': 19,
         'SPORT_MASTER': 20,
+        'CRSF_SENSORS': 22,
     };
 
     self.REBOOT_TYPES = {
@@ -358,6 +359,16 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     }
                     FC.BATTERY_CONFIG.capacities = capacities;
                 }
+                // Per-profile cell count and cell voltages
+                FC.BATTERY_CONFIG.hasProfileCells = data.remaining() >= 9 * 6;
+                if (FC.BATTERY_CONFIG.hasProfileCells) {
+                    const readArray = (read) => Array.from({ length: 6 }, read);
+                    FC.BATTERY_CONFIG.cellCounts = readArray(() => data.readU8());
+                    FC.BATTERY_CONFIG.vbatmincellvoltages = readArray(() => data.readU16() / 100);
+                    FC.BATTERY_CONFIG.vbatmaxcellvoltages = readArray(() => data.readU16() / 100);
+                    FC.BATTERY_CONFIG.vbatfullcellvoltages = readArray(() => data.readU16() / 100);
+                    FC.BATTERY_CONFIG.vbatwarningcellvoltages = readArray(() => data.readU16() / 100);
+                }
                 break;
             }
 
@@ -376,6 +387,101 @@ MspHelper.prototype.process_data = function(dataHandler) {
 
             case MSPCodes.MSP2_SET_SMARTFUEL_CONFIG: {
                 console.log('Smart Fuel configuration saved');
+                break;
+            }
+
+            case MSPCodes.MSP2_GET_CRSF_SENSORS_STATUS: {
+                data.readU8(); // payload version, unused for now
+                const enabled = data.readU8() !== 0;
+                const rxByteCount = data.readU32();
+                const rxSyncCount = data.readU32();
+                const rxCrcOkCount = data.readU32();
+                const rxCrcFailCount = data.readU32();
+                const lastFrameType = data.readU8();
+                const lastFrameLength = data.readU8();
+
+                let gps = null;
+                if (data.readU8() !== 0) {
+                    gps = {
+                        latitude: data.read32(),
+                        longitude: data.read32(),
+                        groundspeedCmS: data.readU16(),
+                        headingDeg10: data.readU16(),
+                        altitudeCm: data.read32(),
+                        satellites: data.readU8(),
+                    };
+                } else {
+                    data.read32();
+                    data.read32();
+                    data.readU16();
+                    data.readU16();
+                    data.read32();
+                    data.readU8();
+                }
+
+                let battery = null;
+                if (data.readU8() !== 0) {
+                    battery = {
+                        voltageMv: data.readU32(),
+                        currentMa: data.readU32(),
+                        capacityMah: data.readU32(),
+                        remainingPct: data.readU8(),
+                    };
+                } else {
+                    data.readU32();
+                    data.readU32();
+                    data.readU32();
+                    data.readU8();
+                }
+
+                let baro = null;
+                if (data.readU8() !== 0) {
+                    baro = {
+                        altitudeCm: data.read32(),
+                        verticalSpeedCmS: data.read16(),
+                    };
+                } else {
+                    data.read32();
+                    data.read16();
+                }
+
+                let cells = null;
+                const hasCells = data.readU8() !== 0;
+                const cellCount = data.readU8();
+                const cellVoltageMv = [];
+                for (let i = 0; i < cellCount; i++) {
+                    cellVoltageMv.push(data.readU16());
+                }
+                const totalVoltageMv = data.readU32();
+                if (hasCells) {
+                    cells = { cellCount, cellVoltageMv, totalVoltageMv };
+                }
+
+                let rpm = null;
+                const hasRpm = data.readU8() !== 0;
+                const rpmCount = data.readU8();
+                const rpmValues = [];
+                for (let i = 0; i < rpmCount; i++) {
+                    rpmValues.push(data.read32());
+                }
+                if (hasRpm) {
+                    rpm = { rpmCount, rpmValues };
+                }
+
+                FC.CRSF_SENSORS_STATUS = {
+                    enabled,
+                    rxByteCount,
+                    rxSyncCount,
+                    rxCrcOkCount,
+                    rxCrcFailCount,
+                    lastFrameType,
+                    lastFrameLength,
+                    gps,
+                    battery,
+                    baro,
+                    cells,
+                    rpm,
+                };
                 break;
             }
 
@@ -1995,23 +2101,48 @@ MspHelper.prototype.crunch = function(code) {
         }
 
         case MSPCodes.MSP_SET_BATTERY_CONFIG: {
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
-                buffer.push16(FC.BATTERY_CONFIG.capacities[0]);
-            } else {
-                buffer.push16(FC.BATTERY_CONFIG.capacity);
+            const config = FC.BATTERY_CONFIG;
+            const legacy = { ...config };
+            if (config.hasProfileCells) {
+                // The legacy fields are stored into the active profile, so send its values
+                const profile = FC.BATTERY_STATE.batteryProfile;
+                legacy.capacity = config.capacities[profile];
+                legacy.cellCount = config.cellCounts[profile];
+                legacy.vbatmincellvoltage = config.vbatmincellvoltages[profile];
+                legacy.vbatmaxcellvoltage = config.vbatmaxcellvoltages[profile];
+                legacy.vbatfullcellvoltage = config.vbatfullcellvoltages[profile];
+                legacy.vbatwarningcellvoltage = config.vbatwarningcellvoltages[profile];
+            } else if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
+                legacy.capacity = config.capacities[0];
             }
-            buffer.push8(FC.BATTERY_CONFIG.cellCount)
-                  .push8(FC.BATTERY_CONFIG.voltageMeterSource)
-                  .push8(FC.BATTERY_CONFIG.currentMeterSource)
-                  .push16(Math.round(FC.BATTERY_CONFIG.vbatmincellvoltage * 100))
-                  .push16(Math.round(FC.BATTERY_CONFIG.vbatmaxcellvoltage * 100))
-                  .push16(Math.round(FC.BATTERY_CONFIG.vbatfullcellvoltage * 100))
-                  .push16(Math.round(FC.BATTERY_CONFIG.vbatwarningcellvoltage * 100))
-                  .push8(FC.BATTERY_CONFIG.lvcPercentage)
-                  .push8(FC.BATTERY_CONFIG.mahWarningPercentage);
+            buffer.push16(legacy.capacity)
+                  .push8(legacy.cellCount)
+                  .push8(config.voltageMeterSource)
+                  .push8(config.currentMeterSource)
+                  .push16(Math.round(legacy.vbatmincellvoltage * 100))
+                  .push16(Math.round(legacy.vbatmaxcellvoltage * 100))
+                  .push16(Math.round(legacy.vbatfullcellvoltage * 100))
+                  .push16(Math.round(legacy.vbatwarningcellvoltage * 100))
+                  .push8(config.lvcPercentage)
+                  .push8(config.mahWarningPercentage);
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
                 for (let i = 0; i < 6; i++) {
-                    buffer.push16(FC.BATTERY_CONFIG.capacities[i]);
+                    buffer.push16(config.capacities[i]);
+                }
+            }
+            if (config.hasProfileCells) {
+                for (let i = 0; i < 6; i++) {
+                    buffer.push8(config.cellCounts[i]);
+                }
+                for (const voltages of [
+                    config.vbatmincellvoltages,
+                    config.vbatmaxcellvoltages,
+                    config.vbatfullcellvoltages,
+                    config.vbatwarningcellvoltages,
+                ]) {
+                    for (let i = 0; i < 6; i++) {
+                        buffer.push16(Math.round(voltages[i] * 100));
+                    }
                 }
             }
             break;

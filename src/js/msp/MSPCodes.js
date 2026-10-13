@@ -221,6 +221,8 @@ export const MSPCodes = {
     MSP2_SMARTFUEL_CONFIG:              0x4000,
     MSP2_SET_SMARTFUEL_CONFIG:          0x4001,
 
+    MSP2_GET_CRSF_SENSORS_STATUS:       0x5F0B,
+
     // action: 0 = poll only, 1 = (re)start a scan, 2 = stop/cancel - cycles
     // the live wiring options for the already-configured protocol and reports
     // which combo (if any) works. RX: serialrx_inverted/halfDuplex/pinSwap.
