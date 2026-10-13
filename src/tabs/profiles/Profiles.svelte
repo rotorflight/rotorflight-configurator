@@ -31,6 +31,7 @@
   import {
     AXES,
     GAINS,
+    MASTER_GAIN_SCALED,
     PID_PROFILE_FIELDS,
     PROFILE_COUNT,
     fromDisplay,
@@ -55,6 +56,13 @@
   let form = $state({});
   let initialForm = $state(null);
 
+  // The FC's current gains, polled so the effective gains follow in-flight
+  // adjustments. Null until master gains are supported.
+  let live = $state(null);
+  let livePoller;
+  let livePoll = null;
+  let saving = false;
+
   let mountedProfile;
   let statusPoller;
   let profileChangeDialogOpen = false;
@@ -74,6 +82,48 @@
   // Passthrough (0) and custom (>4) PID modes have no PID settings to edit.
   let showPidConfig = $derived(pidMode > 0 && pidMode <= 4);
   let showHsi = $derived(pidMode >= 3);
+  let showMasterGain = $derived(!!live);
+
+  // A value edited on this page wins; an untouched one follows the FC.
+  function current(formValue, initialValue, liveValue) {
+    return live && formValue === initialValue ? liveValue : formValue;
+  }
+
+  function formGain(f, axis, index) {
+    if (index === 5) {
+      return axis === 0 ? f.offsetGainRoll : f.offsetGainPitch;
+    }
+    return f.pids[axis][index];
+  }
+
+  let effectiveGains = $derived.by(() => {
+    if (!live || !initialForm) {
+      return null;
+    }
+    const masterGain = [
+      "cyclicMasterGain",
+      "cyclicMasterGain",
+      "yawMasterGain",
+    ].map((key) => current(form[key], initialForm[key], live[key]));
+    const gains = MASTER_GAIN_SCALED.filter((g) => showHsi || g.key !== "O");
+    return {
+      gains,
+      masterGain,
+      rows: AXES.map((_, axis) =>
+        gains.map(({ index, axes }) => {
+          if (!axes.includes(axis)) {
+            return null;
+          }
+          const gain = current(
+            formGain(form, axis, index),
+            formGain(initialForm, axis, index),
+            live.pids[axis][index],
+          );
+          return Math.round((gain * masterGain[axis]) / 100);
+        }),
+      ),
+    };
+  });
 
   let numProfiles = $derived(
     Math.min(FC.CONFIG.numProfiles || PROFILE_COUNT, PROFILE_COUNT),
@@ -183,8 +233,36 @@
 
     formFromFc();
     initialForm = $state.snapshot(form);
+    liveFromFc();
     govChanged = false;
     reloadKey++;
+  }
+
+  function liveFromFc() {
+    if (!FC.PID_PROFILE.hasMasterGain) {
+      live = null;
+      return;
+    }
+    live = {
+      pids: AXES.map((_, axis) => FC.PIDS[axis].map(Number)),
+      cyclicMasterGain: Number(FC.PID_PROFILE.cyclicMasterGain),
+      yawMasterGain: Number(FC.PID_PROFILE.yawMasterGain),
+    };
+  }
+
+  // The poll rewrites FC.PIDS and FC.PID_PROFILE, so it never runs while a
+  // save is sending them.
+  function pollLive() {
+    if (!live || saving || livePoll) {
+      return;
+    }
+    livePoll = (async () => {
+      await MSP.promise(MSPCodes.MSP_PID_TUNING);
+      await MSP.promise(MSPCodes.MSP_PID_PROFILE);
+      if (!saving) {
+        liveFromFc();
+      }
+    })().finally(() => (livePoll = null));
   }
 
   onMount(async () => {
@@ -213,9 +291,14 @@
         }
       }
     }, 250);
+
+    livePoller = setInterval(pollLive, 1000);
   });
 
-  onDestroy(() => clearInterval(statusPoller));
+  onDestroy(() => {
+    clearInterval(statusPoller);
+    clearInterval(livePoller);
+  });
 
   function activateProfile(index) {
     FC.CONFIG.profile = index;
@@ -272,21 +355,28 @@
   }
 
   export async function onSave() {
-    formToFc();
-    for (const code of [
-      MSPCodes.MSP_SET_PID_TUNING,
-      MSPCodes.MSP_SET_PID_PROFILE,
-      MSPCodes.MSP_SET_RESCUE_PROFILE,
-      MSPCodes.MSP_SET_GOVERNOR_PROFILE,
-      MSPCodes.MSP_SET_GOVERNOR_CONFIG,
-    ]) {
-      await MSP.promise(code, mspHelper.crunch(code));
+    saving = true;
+    try {
+      await livePoll;
+      formToFc();
+      for (const code of [
+        MSPCodes.MSP_SET_PID_TUNING,
+        MSPCodes.MSP_SET_PID_PROFILE,
+        MSPCodes.MSP_SET_RESCUE_PROFILE,
+        MSPCodes.MSP_SET_GOVERNOR_PROFILE,
+        MSPCodes.MSP_SET_GOVERNOR_CONFIG,
+      ]) {
+        await MSP.promise(code, mspHelper.crunch(code));
+      }
+      await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
+      GUI.log($i18n.t("eepromSaved"));
+      profileState.savedProfile = FC.CONFIG.profile;
+      initialForm = $state.snapshot(form);
+      liveFromFc();
+      govChanged = false;
+    } finally {
+      saving = false;
     }
-    await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
-    GUI.log($i18n.t("eepromSaved"));
-    profileState.savedProfile = FC.CONFIG.profile;
-    initialForm = $state.snapshot(form);
-    govChanged = false;
   }
 
   export async function onRevert() {
@@ -402,6 +492,46 @@
                 </div>
               </div>
             </Section>
+
+            {#if showMasterGain}
+              <Section label="profilesMasterGains">
+                {@render num(
+                  "cyclicMasterGain",
+                  "profilesCyclicMasterGain",
+                  "profilesCyclicMasterGainHelp",
+                )}
+                {@render num(
+                  "yawMasterGain",
+                  "profilesYawMasterGain",
+                  "profilesYawMasterGainHelp",
+                )}
+                {#if effectiveGains}
+                  <SubSection label="profilesEffectiveGains">
+                    <p class="note">{$i18n.t("profilesEffectiveGainsHelp")}</p>
+                    <div
+                      class="effective-table"
+                      style:--effective-cols={effectiveGains.gains.length + 1}
+                    >
+                      <span></span>
+                      <span class="col">%</span>
+                      {#each effectiveGains.gains as gain (gain.key)}
+                        <span class="col">{$i18n.t(gain.label)}</span>
+                      {/each}
+                      {#each AXES as axis, a (axis)}
+                        <span class={["axis", axis.toLowerCase()]}>
+                          {$i18n.t(`axis${axis}`)}
+                        </span>
+                        <span class="value">{effectiveGains.masterGain[a]}</span
+                        >
+                        {#each effectiveGains.rows[a] as value, g (g)}
+                          <span class="value">{value ?? ""}</span>
+                        {/each}
+                      {/each}
+                    </div>
+                  </SubSection>
+                {/if}
+              </Section>
+            {/if}
 
             <Section label="profilesPidSettings">
               {#if !api.v129}
@@ -956,6 +1086,28 @@
     .pid-table .axis {
       text-align: center;
     }
+  }
+
+  .effective-table {
+    display: grid;
+    grid-template-columns: minmax(60px, 1fr) repeat(
+        var(--effective-cols),
+        minmax(40px, auto)
+      );
+    align-items: center;
+    gap: 4px 12px;
+    padding: 4px 8px 8px;
+  }
+
+  .effective-table .value {
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .note {
+    margin: 0 8px 6px;
+    font-size: 0.75rem;
+    color: var(--color-text-soft);
   }
 
   .col {

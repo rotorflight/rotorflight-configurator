@@ -3167,6 +3167,12 @@
     "adjustmentsFunctionHelpBatteryProfile": {
         "message": "Switches the active battery profile (cell count, capacity and warnings)."
     },
+    "adjustmentsFunctionHelpCyclicMasterGain": {
+        "message": "Scales the roll and pitch P, I, D and Offset gains together, in percent. Feedforward is not scaled. Raise it until the cyclic starts to wobble, then back off."
+    },
+    "adjustmentsFunctionHelpYawMasterGain": {
+        "message": "Scales the tail P, I and D gains together, in percent. Feedforward and precomp are not scaled. Raise it until the tail starts to wag, then back off."
+    },
     "adjustmentsFunctionHelpAngleLevelGain": {
         "message": "How aggressively Angle mode tilts the helicopter back to level."
     },
@@ -3415,6 +3421,12 @@
     },
     "adjustmentsFunctionBatteryProfile": {
         "message": "Battery Profile Selection"
+    },
+    "adjustmentsFunctionCyclicMasterGain": {
+        "message": "Cyclic Master Gain"
+    },
+    "adjustmentsFunctionYawMasterGain": {
+        "message": "Yaw Master Gain"
     },
     "adjustmentsFunctionPitchRate": {
         "message": "Pitch Rate"
@@ -5875,6 +5887,27 @@
     },
     "profilesPidGains": {
         "message": "PID Controller Gains"
+    },
+    "profilesMasterGains": {
+        "message": "Master Gains"
+    },
+    "profilesCyclicMasterGain": {
+        "message": "Cyclic master gain [%]"
+    },
+    "profilesCyclicMasterGainHelp": {
+        "message": "Scales the roll and pitch P, I, D and Offset gains together, keeping the ratios between them. Use it to make the cyclic tighter or softer as a whole, e.g. after a headspeed change: the rotor's control power rises with headspeed, so a higher headspeed usually needs less gain and a lower one more. Feedforward, Boost and the precompensations are not scaled, so the stick response stays as tuned. Changing it in flight does not upset the trim already held by I and Offset; only how fast they build up changes."
+    },
+    "profilesYawMasterGain": {
+        "message": "Yaw master gain [%]"
+    },
+    "profilesYawMasterGainHelp": {
+        "message": "Scales the tail P, I and D gains together, keeping the ratios between them and the CW/CCW stop gain balance. Feedforward, Boost and the collective, cyclic and inertia precompensations are not scaled. Changing it in flight does not upset the anti-torque trim already held by I. If the tail wags or bounces at piro stops, lower it; if it holds loosely or drifts, raise it."
+    },
+    "profilesEffectiveGains": {
+        "message": "Effective gains"
+    },
+    "profilesEffectiveGainsHelp": {
+        "message": "The gains the controller applies: each gain multiplied by its master gain. Follows in-flight adjustments; values edited on this page are shown before they are saved."
     },
     "profilesPidSettings": {
         "message": "PID Controller Settings"

@@ -13,6 +13,15 @@ export const GAINS = [
   { key: "B", label: "profilesBoost", help: "profilesBoostHelp" },
 ];
 
+// Gains the master gains scale; `index` is the gain's slot in FC.PIDS. F, B
+// and the precomps are feedforward and the firmware leaves them unscaled.
+export const MASTER_GAIN_SCALED = [
+  { key: "P", label: "profilesProportional", index: 0, axes: [0, 1, 2] },
+  { key: "I", label: "profilesIntegral", index: 1, axes: [0, 1, 2] },
+  { key: "D", label: "profilesDerivative", index: 2, axes: [0, 1, 2] },
+  { key: "O", label: "profilesOffset", index: 5, axes: [0, 1] },
+];
+
 const n = (min, max, step = 1) => ({ min, max, step });
 
 /**
@@ -49,6 +58,8 @@ export const PID_PROFILE_FIELDS = {
   yaw_inertia_precomp_gain: n(0, 250),
   yaw_inertia_precomp_cutoff: { ...n(0, 25, 0.1), scale: 10 },
   cyclicCrossCouplingRatio: n(0, 200),
+  cyclicMasterGain: n(25, 200),
+  yawMasterGain: n(25, 200),
   acroTrainerGain: n(25, 255),
   acroTrainerLimit: n(10, 80),
   levelAngleStrength: n(0, 200),
