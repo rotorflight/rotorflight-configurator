@@ -452,6 +452,11 @@ export function updateTabList(features) {
     $('#tabs ul.mode-connected li.tab_gps').toggle(features.isEnabled('GPS'));
     $('#tabs ul.mode-connected li.tab_led_strip').toggle(features.isEnabled('LED_STRIP'));
 
+    const hasCrsfSensorsPort = (FC.SERIAL_CONFIG?.ports ?? []).some(
+        (port) => port.functions.includes('CRSF_SENSORS'),
+    );
+    $('#tabs ul.mode-connected li.tab_crsf_sensors').toggle(hasCrsfSensorsPort);
+
     // XACT servo programming needs MSP API 12.10+ and an FBUS bus, either as
     // the active receiver protocol or as an FBUS_OUT serial port function.
     const apiVersion = FC.CONFIG?.apiVersion;

@@ -1,7 +1,11 @@
 import semver from "semver";
 
 import { Beepers } from "@/js/Beepers.js";
-import { API_VERSION_12_9, CONFIGURATOR } from "@/js/configurator.svelte.js";
+import {
+  API_VERSION_12_9,
+  API_VERSION_12_10,
+  CONFIGURATOR,
+} from "@/js/configurator.svelte.js";
 import { FC } from "@/js/fc.svelte.js";
 import { MSPCodes } from "@/js/msp/MSPCodes.js";
 import {
@@ -332,6 +336,20 @@ function loadRateProfile(index) {
   FC.CONFIG.rateProfile = index;
 }
 
+// Like the firmware, the legacy battery fields report the active profile
+function storeBatteryProfile() {
+  const config = FC.BATTERY_CONFIG;
+  const index = FC.BATTERY_STATE.batteryProfile;
+  config.capacity = config.capacities[index];
+  if (config.hasProfileCells) {
+    config.cellCount = config.cellCounts[index];
+    config.vbatmincellvoltage = config.vbatmincellvoltages[index];
+    config.vbatmaxcellvoltage = config.vbatmaxcellvoltages[index];
+    config.vbatfullcellvoltage = config.vbatfullcellvoltages[index];
+    config.vbatwarningcellvoltage = config.vbatwarningcellvoltages[index];
+  }
+}
+
 function updateBoxes() {
   const active = BOXES.filter(([, , isActive]) => isActive());
   FC.AUX_CONFIG = active.map(([name]) => name);
@@ -440,15 +458,14 @@ export function handleVirtualMessage(code, data) {
       const index = bytes[0];
       if (index < BATTERY_PROFILE_COUNT) {
         FC.BATTERY_STATE.batteryProfile = index;
-        FC.BATTERY_CONFIG.capacity = FC.BATTERY_CONFIG.capacities[index];
+        storeBatteryProfile();
       }
       break;
     }
 
     case MSPCodes.MSP_SET_BATTERY_CONFIG:
       if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) {
-        FC.BATTERY_CONFIG.capacity =
-          FC.BATTERY_CONFIG.capacities[FC.BATTERY_STATE.batteryProfile];
+        storeBatteryProfile();
       }
       break;
 
@@ -516,6 +533,7 @@ export function applyVirtualConfig() {
   });
 
   const api12_9 = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9);
+  const api12_10 = semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10);
 
   Object.assign(FC.ADVANCED_CONFIG, {
     gyro_sync_denom: 1,
@@ -640,6 +658,13 @@ export function applyVirtualConfig() {
     vbatwarningcellvoltage: 3.5,
     lvcPercentage: 100,
     mahWarningPercentage: 35,
+    // Per-profile cell count and cell voltages (firmware 2.4+)
+    hasProfileCells: api12_10,
+    cellCounts: [0, 0, 0, 0, 0, 0],
+    vbatmincellvoltages: Array(BATTERY_PROFILE_COUNT).fill(3.3),
+    vbatmaxcellvoltages: Array(BATTERY_PROFILE_COUNT).fill(4.3),
+    vbatfullcellvoltages: Array(BATTERY_PROFILE_COUNT).fill(4.1),
+    vbatwarningcellvoltages: Array(BATTERY_PROFILE_COUNT).fill(3.5),
   });
 
   Object.assign(FC.SMARTFUEL_CONFIG, {

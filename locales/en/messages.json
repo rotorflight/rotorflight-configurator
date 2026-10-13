@@ -739,6 +739,120 @@
     "tabRawSensorData": {
         "message": "Sensors"
     },
+    "tabCrsfSensors": {
+        "message": "CRSF Sensors"
+    },
+    "crsfSensorsDescription": {
+        "message": "Live link diagnostics and decoded readings from a CRSF-protocol sensor accessory (GPS, battery, barometer, or per-cell voltage) wired to the CRSF Sensors serial port."
+    },
+    "crsfSensorsLearnMore": {
+        "message": "Learn more"
+    },
+    "crsfSensorsNotSupported": {
+        "message": "This firmware does not support the CRSF Sensors diagnostic."
+    },
+    "crsfSensorsPortNotConfigured": {
+        "message": "No serial port is assigned the CRSF Sensors function yet -- set one on the Configuration tab."
+    },
+    "crsfSensorsBadgeReceiving": {
+        "message": "Receiving"
+    },
+    "crsfSensorsBadgeNoData": {
+        "message": "No data"
+    },
+    "crsfSensorsBadgePortEnabled": {
+        "message": "Port enabled"
+    },
+    "crsfSensorsBadgePortDisabled": {
+        "message": "Port disabled"
+    },
+    "crsfSensorsLinkTitle": {
+        "message": "Link"
+    },
+    "crsfSensorsRxBytes": {
+        "message": "RX bytes"
+    },
+    "crsfSensorsRxSyncBytes": {
+        "message": "RX sync bytes"
+    },
+    "crsfSensorsCrcOk": {
+        "message": "CRC OK frames"
+    },
+    "crsfSensorsCrcFail": {
+        "message": "CRC fail"
+    },
+    "crsfSensorsLastFrame": {
+        "message": "Last frame type/len"
+    },
+    "crsfSensorsNoData": {
+        "message": "No data received yet"
+    },
+    "crsfSensorsGpsTitle": {
+        "message": "GPS"
+    },
+    "crsfSensorsGpsLat": {
+        "message": "Latitude"
+    },
+    "crsfSensorsGpsLon": {
+        "message": "Longitude"
+    },
+    "crsfSensorsGpsSpeed": {
+        "message": "Ground speed"
+    },
+    "crsfSensorsGpsHeading": {
+        "message": "Heading"
+    },
+    "crsfSensorsGpsAlt": {
+        "message": "Altitude"
+    },
+    "crsfSensorsGpsSats": {
+        "message": "Satellites"
+    },
+    "crsfSensorsBatteryTitle": {
+        "message": "Battery"
+    },
+    "crsfSensorsBatteryVoltage": {
+        "message": "Voltage"
+    },
+    "crsfSensorsBatteryCurrent": {
+        "message": "Current"
+    },
+    "crsfSensorsBatteryCapacity": {
+        "message": "Capacity used"
+    },
+    "crsfSensorsBatteryRemaining": {
+        "message": "Remaining"
+    },
+    "crsfSensorsBaroTitle": {
+        "message": "Barometer"
+    },
+    "crsfSensorsBaroAlt": {
+        "message": "Altitude"
+    },
+    "crsfSensorsBaroVspeed": {
+        "message": "Vertical speed"
+    },
+    "crsfSensorsCellsTitle": {
+        "message": "Cell Voltages"
+    },
+    "crsfSensorsCellsCount": {
+        "message": "Cell count"
+    },
+    "crsfSensorsCellsTotal": {
+        "message": "Total voltage"
+    },
+    "crsfSensorsCellsChip": {
+        "message": "Cell $1"
+    },
+    "crsfSensorsRpmTitle": {
+        "message": "RPM"
+    },
+    "crsfSensorsRpmChip": {
+        "message": "Source $1"
+    },
+    "crsfSensorsRpmCaveat": {
+        "message": "Set crsf_sensors_use_rpm = ON (CLI-only) to feed this into blackbox, telemetry, RPM Filter, and the Governor. Telemetry-rate, not motor-rate -- use at your own risk for RPM Filter or the Governor's RPM modes, both of which need bidirectional DShot or a dedicated RPM/frequency sensor to actually track real motor speed."
+    },
     "tabCLI": {
         "message": "CLI"
     },
@@ -2118,6 +2232,9 @@
     "portsFunction_SRXL2_ESC": {
         "message": "SRXL2 ESC"
     },
+    "portsFunction_CRSF_SENSORS": {
+        "message": "CRSF Sensors"
+    },
     "portsFunction_CUSTOM": {
         "message": "Custom"
     },
@@ -2295,6 +2412,48 @@
     },
     "receiverSerialPinSwapHelp": {
         "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
+    },
+    "receiverWiringDetectButton": {
+        "message": "Detect Wiring"
+    },
+    "receiverWiringDetectHelp": {
+        "message": "<p>Tries every combination of Inverted / Half-Duplex / Pin Swap for the selected protocol and stops as soon as one produces signal. Nothing is saved until you press Save on this tab.</p><p><strong>Note:</strong> requires no unsaved changes first - it tests whatever protocol/provider is currently saved on the flight controller, not a pending selection.</p><p>Your transmitter must be powered on and bound to the receiver - detection can't find a wiring combination if the receiver has no signal to give it in the first place.</p><p>Only available while disarmed - it cycles the receiver wiring live and could interrupt control input.</p>"
+    },
+    "receiverWiringDetectSaveFirst": {
+        "message": "Save your changes first - this tests whatever is currently saved on the flight controller, not a pending selection."
+    },
+    "receiverWiringDetectArmedFirst": {
+        "message": "Disarm first - wiring detection cycles the receiver connection live and can't run while armed."
+    },
+    "receiverWiringDetectWizardTitle": {
+        "message": "Detect RX Wiring"
+    },
+    "receiverWiringDetectWizardStep1": {
+        "message": "Step 1 of 2: Scanning"
+    },
+    "receiverWiringDetectWizardStep2": {
+        "message": "Step 2 of 2: Result"
+    },
+    "receiverWiringDetectScanning": {
+        "message": "Trying combination $1 of $2…"
+    },
+    "receiverWiringDetectSuccess": {
+        "message": "Signal found — Inverted: $1, Half-Duplex: $2, Pin Swap: $3. Save and reboot to keep it, or Close to discard and restore the previous setting."
+    },
+    "receiverWiringDetectFailed": {
+        "message": "No signal found on any wiring combination for this protocol. Make sure the transmitter is powered on and bound to the receiver, check the protocol selection and connections, then try again."
+    },
+    "receiverWiringDetectRejected": {
+        "message": "Wiring detection was rejected - it needs a serial receiver protocol with an assigned UART, and the aircraft must be disarmed."
+    },
+    "receiverWiringDetectUnsupported": {
+        "message": "Wiring detection is not supported by this firmware build."
+    },
+    "receiverWiringDetectWizardRetry": {
+        "message": "Retry"
+    },
+    "receiverWiringDetectWizardClose": {
+        "message": "Close"
     },
     "receiverStickCenter": {
         "message": "Stick Center"
@@ -2749,6 +2908,12 @@
     "receiverTelemetrySensor_ADJFUNC": {
         "message": "Adjustment Function"
     },
+    "receiverTelemetrySensor_SYSTEM_STATUS": {
+        "message": "System Status"
+    },
+    "receiverTelemetrySensor_SYSTEM_CONFIG": {
+        "message": "System Config"
+    },
     "receiverTelemetrySensor_DEBUG_0": {
         "message": "Debug 0"
     },
@@ -2889,7 +3054,7 @@
         "message": "AND"
     },
     "adjustmentsHelp": {
-        "message": "Configure adjustment switches. See the 'in-flight adjustments' section of the manual for details. The changes that adjustment functions make are not saved automatically."
+        "message": "Configure adjustment switches. See the 'in-flight adjustments' section of the manual for details. Changes made by adjustment functions take effect immediately and are saved when the flight controller is disarmed."
     },
     "adjustmentSlotsHelp": {
         "message": "There are 4 slots. Each switch used to concurrently make adjustments requires exclusive use of a slot."
@@ -3569,11 +3734,14 @@
     "servoTravelLimitedHelp": {
         "message": "Limited by the center ($1): the output can't go past $2 µs."
     },
-    "servoUnusualLimitsWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Limits</i> are set to unusual values. Please check!"
+    "servoLimitsTooWideWarning": {
+        "message": "<span class=\"message-negative\">Servo $1:</span> a <i>Center</i> of $2 makes this a $3 µs servo, but <i>Min</i>/<i>Max</i> drive it from $4 to $5 µs. A $3 µs servo only covers about $6–$7 µs, so it can hit its end stops, stall and overheat. Set <i>Min</i>/<i>Max</i> to about -$8/$8."
     },
-    "servoUnusualScalesWarning": {
-        "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Scales</i> are set to unusual values. Please check!"
+    "servoLimitsTooNarrowWarning": {
+        "message": "<span class=\"message-negative\">Servo $1:</span> a <i>Center</i> of $2 makes this a $3 µs servo, but <i>Min</i>/<i>Max</i> of $4/$5 leave it little travel. Set them to about -$6/$6."
+    },
+    "servoScaleUnusualWarning": {
+        "message": "<span class=\"message-negative\">Servo $1:</span> a <i>Center</i> of $2 makes this a $3 µs servo, but <i>Scale</i> is $4/$5. <i>Scale</i> sets how far the servo moves at full stick, and a 760 µs servo needs about half the <i>Scale</i> of a 1520 µs one. Set <i>Scale neg</i>/<i>pos</i> to about $6."
     },
     "servoUnusualRatesWarning": {
         "message": "<span class=\"message-negative\">Warning:</span> The servo <i>Rates</i> are set to unusual values. Please check!"
@@ -4198,6 +4366,48 @@
     },
     "motorsEscTelemetryPinswapHelp": {
         "message": "<p>Swaps the Rx and Tx pins.</p><p><strong>Note:</strong> This option is NOT supported on F4 MCUs, see help.</p>"
+    },
+    "motorsEscWiringDetectButton": {
+        "message": "Detect Wiring"
+    },
+    "motorsEscWiringDetectHelp": {
+        "message": "<p>Tries every combination of Half-Duplex / Pin Swap for the selected telemetry protocol and stops as soon as one produces a valid frame. Nothing is saved until you press Save on this tab.</p><p><strong>Note:</strong> requires no unsaved changes first - it tests whatever protocol is currently saved on the flight controller, not a pending selection.</p><p>The ESC(s) must be powered and outputting telemetry - detection can't find a wiring combination if nothing is being sent in the first place.</p><p>Only available while disarmed - it cycles the ESC telemetry wiring live while motors could be spinning.</p>"
+    },
+    "motorsEscWiringDetectSaveFirst": {
+        "message": "Save your changes first - this tests whatever is currently saved on the flight controller, not a pending selection."
+    },
+    "motorsEscWiringDetectArmedFirst": {
+        "message": "Disarm first - wiring detection cycles the ESC telemetry connection live and can't run while armed."
+    },
+    "motorsEscWiringDetectWizardTitle": {
+        "message": "Detect ESC Telemetry Wiring"
+    },
+    "motorsEscWiringDetectWizardStep1": {
+        "message": "Step 1 of 2: Scanning"
+    },
+    "motorsEscWiringDetectWizardStep2": {
+        "message": "Step 2 of 2: Result"
+    },
+    "motorsEscWiringDetectScanning": {
+        "message": "Trying combination $1 of $2…"
+    },
+    "motorsEscWiringDetectSuccess": {
+        "message": "Signal found — Half-Duplex: $1, Pin Swap: $2. Save and reboot to keep it, or Close to discard and restore the previous setting."
+    },
+    "motorsEscWiringDetectFailed": {
+        "message": "No valid frame found on any wiring combination for this protocol. Make sure the ESC(s) are powered and outputting telemetry, check the protocol selection and connections, then try again."
+    },
+    "motorsEscWiringDetectRejected": {
+        "message": "Wiring detection was rejected - either it isn't available for this telemetry protocol (Castle Link, F.BUS and SRXL2 ESC telemetry each use their own dedicated connection, not a generic UART), no port is assigned, or the aircraft became armed."
+    },
+    "motorsEscWiringDetectUnsupported": {
+        "message": "Wiring detection is not supported by this firmware build."
+    },
+    "motorsEscWiringDetectWizardRetry": {
+        "message": "Retry"
+    },
+    "motorsEscWiringDetectWizardClose": {
+        "message": "Close"
     },
     "motorsUnsyncedPwm": {
         "message": "Unsynchronised ESC Update"
