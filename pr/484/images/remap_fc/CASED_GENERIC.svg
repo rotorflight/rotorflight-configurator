@@ -1,0 +1,23 @@
+<!--
+  File: src/images/remap_fc/CASED_GENERIC.svg
+  Reference copy of the generic "cased" flight controller diagram —
+  remap_fc.svelte inlines this shape directly (see its own
+  board-diagram <svg>) rather than loading this file at runtime, so
+  keep the two in sync by hand. Outer/inner body matches
+  flydragon.svg's own outline (a plain rounded rect, rx 20/14), grey
+  as the fallback colour a manufacturer with no dedicated diagram
+  gets. Trial: cropped to a square on the board's right side (right
+  edge aligned with the board's own right edge, so its natural
+  rounded corner still shows), deliberately excluding the whole
+  left-side territory where a USB-C connector would sit — the point
+  being that no manufacturer's connector position or orientation
+  needs accounting for at all any more (the connector rects, and the
+  standalone USBC.svg component they came from, have been removed).
+  Explicit width/height alongside the viewBox — an <img> can't
+  reliably infer intrinsic size from viewBox alone on every rendering
+  engine, and without it this can render at zero height.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="530 10 540 540" width="540" height="540">
+  <rect x="30" y="10" width="1040" height="540" rx="20" fill="#9ba3ac" />
+  <rect x="56" y="36" width="988" height="488" rx="14" fill="#4b5561" />
+</svg>
