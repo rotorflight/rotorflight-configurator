@@ -1,35 +1,34 @@
-const docsVersionSpecifier = '/2.3.0';
-
 // default URL
-const defaultHelpURL = 'https://www.rotorflight.org/';
+const defaultHelpURL = 'https://doc.rotorflight.org/';
 
 // tab specific URLs
 const tabHelpURLs = {
 
-    tabStatus:          `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/status`,
-    tabSetup:           `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/setup`,
-    tabConfiguration:   `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/configuration`,
-    tabPresets:         `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/presets`,
-    tabReceiver:        `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/receiver`,
-    tabFailsafe:        `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/failsafe`,
-    tabPower:           `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/power`,
-    tabMotors:          `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/motors`,
-    tabServos:          `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/servos`,
-    tabXactServoProgramming: `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/xact-servo-programming`,
-    tabMixer:           `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/mixer`,
-    tabGyro:            `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/gyro`,
-    tabRates:           `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/rates`,
-    tabProfiles:        `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/profiles`,
-    tabAuxiliary:       `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/modes`,
-    tabAdjustments:     `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/adjustments`,
-    tabLedStrip:        `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/led-strip`,
-    tabBeepers:         `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/beepers`,
-    tabGPS:             `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/gps`,
-    tabSensors:         `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/sensors`,
-    tabCrsfSensors:     `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/crsf-sensors`,
-    tabBlackbox:        `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/blackbox`,
-    tabRemapFC:         `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/remap-fc`,
-    tabCli:             `https://www.rotorflight.org/docs${docsVersionSpecifier}/configurator/tabs/cli`,
+    tabStatus:          'https://doc.rotorflight.org/configurator/tabs/status/',
+    tabSetup:           'https://doc.rotorflight.org/configurator/tabs/setup/',
+    tabConfiguration:   'https://doc.rotorflight.org/configurator/tabs/configuration/',
+    tabPresets:         'https://doc.rotorflight.org/configurator/tabs/presets/',
+    tabReceiver:        'https://doc.rotorflight.org/configurator/tabs/receiver/',
+    tabFailsafe:        'https://doc.rotorflight.org/configurator/tabs/failsafe/',
+    tabPower:           'https://doc.rotorflight.org/configurator/tabs/power/',
+    tabMotors:          'https://doc.rotorflight.org/configurator/tabs/motors/',
+    tabGovernor:        'https://doc.rotorflight.org/configurator/tabs/governor/',
+    tabServos:          'https://doc.rotorflight.org/configurator/tabs/servos/',
+    tabXactServoProgramming: 'https://doc.rotorflight.org/configurator/tabs/xact-servo/',
+    tabMixer:           'https://doc.rotorflight.org/configurator/tabs/mixer/',
+    tabGyro:            'https://doc.rotorflight.org/configurator/tabs/gyro/',
+    tabRates:           'https://doc.rotorflight.org/configurator/tabs/rates/',
+    tabProfiles:        'https://doc.rotorflight.org/configurator/tabs/profiles/',
+    tabAuxiliary:       'https://doc.rotorflight.org/configurator/tabs/modes/',
+    tabAdjustments:     'https://doc.rotorflight.org/configurator/tabs/adjustments/',
+    tabLedStrip:        'https://doc.rotorflight.org/configurator/tabs/led-strip/',
+    tabBeepers:         'https://doc.rotorflight.org/configurator/tabs/beepers/',
+    tabGPS:             'https://doc.rotorflight.org/configurator/tabs/gps/',
+    tabSensors:         'https://doc.rotorflight.org/configurator/tabs/sensors/',
+    tabCrsfSensors:     'https://doc.rotorflight.org/configurator/tabs/crsf-sensors/',
+    tabBlackbox:        'https://doc.rotorflight.org/configurator/tabs/blackbox/',
+    tabRemapFC:         'https://doc.rotorflight.org/configurator/tabs/remap-fc/',
+    tabCli:             'https://doc.rotorflight.org/configurator/tabs/cli/',
 };
 
 export function getTabHelpURL(tabName)
