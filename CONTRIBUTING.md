@@ -10,5 +10,5 @@ Please search for existing issues *before* creating new ones.
 
 # Contributing
 
-Please refer to the Contributing section on the [Website](https://www.rotorflight.org/docs/Contributing/intro).
+Please refer to the Contributing section on the [Website](https://doc.rotorflight.org/contributing/).
 
