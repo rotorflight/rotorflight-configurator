@@ -78,7 +78,7 @@
     <div
       class="table"
       style:--cols={columns.length}
-      style:--rows={columns.length + 2}
+      style:--rows={columns.length + 1}
     >
       <span></span>
       {#each columns as column (column.key)}
@@ -87,13 +87,20 @@
           <HelpIcon>{$i18n.t(column.help)}</HelpIcon>
         </span>
       {/each}
-      <span class="col">
-        {$i18n.t("profilesMasterGains")}
-        <HelpIcon>{$i18n.t("profilesMasterGainColumnHelp")}</HelpIcon>
-      </span>
       {#each AXES as axis, a (axis)}
+        {@const delta = masterGainDelta(a)}
         <span class={["axis", axis.toLowerCase()]}>
           {$i18n.t(`axis${axis}`)}
+          <!-- As on Wingflight: tagged only while the master gain is off
+               its saved value, e.g. moved by an adjustment in flight. -->
+          {#if Math.abs(delta) >= 0.5}
+            <span
+              class={["tag", delta > 0 ? "higher" : "lower"]}
+              title={$i18n.t("profilesMasterGainTagHelp")}
+            >
+              {Math.round(masterGain(a))}%
+            </span>
+          {/if}
         </span>
         {#each columns as column (column.key)}
           {@const value = effective(a, column)}
@@ -101,15 +108,6 @@
             {value === null ? "" : format(value)}
           </span>
         {/each}
-        <span
-          class={[
-            "master",
-            masterGainDelta(a) > 0 && "higher",
-            masterGainDelta(a) < 0 && "lower",
-          ]}
-        >
-          {Math.round(masterGain(a))}%
-        </span>
       {/each}
     </div>
   </div>
@@ -123,9 +121,10 @@
 
   .table {
     display: grid;
-    grid-template-columns:
-      minmax(70px, 1fr) repeat(var(--cols), minmax(56px, 104px))
-      minmax(56px, 90px);
+    grid-template-columns: minmax(70px, 1fr) repeat(
+        var(--cols),
+        minmax(56px, 104px)
+      );
     align-items: center;
     gap: 6px 6px;
     padding: 4px 8px 8px;
@@ -176,8 +175,7 @@
   }
 
   /* Read-only look of a disabled input, as on Wingflight. */
-  .value,
-  .master {
+  .value {
     height: 1.75rem;
     padding: 0 8px;
     border: 1px solid var(--color-border);
@@ -195,18 +193,23 @@
     visibility: hidden;
   }
 
-  .master {
-    text-align: center;
-    background-color: transparent;
+  .tag {
+    margin-left: 4px;
+    padding: 0 4px;
+    border-radius: var(--radius-xs);
+    font-size: 0.7rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
 
     &.higher {
       color: var(--color-success);
-      font-weight: 600;
+      background-color: var(--color-success-soft);
     }
 
     &.lower {
       color: var(--color-warning);
-      font-weight: 600;
+      background-color: var(--color-warning-soft);
     }
   }
 </style>
