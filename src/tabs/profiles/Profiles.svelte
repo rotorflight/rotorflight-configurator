@@ -27,11 +27,11 @@
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
 
+  import EffectivePidGains from "./EffectivePidGains.svelte";
   import Governor from "./Governor.svelte";
   import {
     AXES,
     GAINS,
-    MASTER_GAIN_SCALED,
     PID_PROFILE_FIELDS,
     PROFILE_COUNT,
     fromDisplay,
@@ -83,47 +83,6 @@
   let showPidConfig = $derived(pidMode > 0 && pidMode <= 4);
   let showHsi = $derived(pidMode >= 3);
   let showMasterGain = $derived(!!live);
-
-  // A value edited on this page wins; an untouched one follows the FC.
-  function current(formValue, initialValue, liveValue) {
-    return live && formValue === initialValue ? liveValue : formValue;
-  }
-
-  function formGain(f, axis, index) {
-    if (index === 5) {
-      return axis === 0 ? f.offsetGainRoll : f.offsetGainPitch;
-    }
-    return f.pids[axis][index];
-  }
-
-  let effectiveGains = $derived.by(() => {
-    if (!live || !initialForm) {
-      return null;
-    }
-    const masterGain = [
-      "cyclicMasterGain",
-      "cyclicMasterGain",
-      "yawMasterGain",
-    ].map((key) => current(form[key], initialForm[key], live[key]));
-    const gains = MASTER_GAIN_SCALED.filter((g) => showHsi || g.key !== "O");
-    return {
-      gains,
-      masterGain,
-      rows: AXES.map((_, axis) =>
-        gains.map(({ index, axes }) => {
-          if (!axes.includes(axis)) {
-            return null;
-          }
-          const gain = current(
-            formGain(form, axis, index),
-            formGain(initialForm, axis, index),
-            live.pids[axis][index],
-          );
-          return Math.round((gain * masterGain[axis]) / 100);
-        }),
-      ),
-    };
-  });
 
   let numProfiles = $derived(
     Math.min(FC.CONFIG.numProfiles || PROFILE_COUNT, PROFILE_COUNT),
@@ -466,6 +425,15 @@
       <div class="columns">
         <div class="column">
           {#if showPidConfig}
+            {#if showMasterGain && initialForm}
+              <EffectivePidGains
+                {form}
+                initial={initialForm}
+                {live}
+                showOffset={showHsi}
+              />
+            {/if}
+
             <Section label="profilesPidGains">
               <div class="pid-wrap">
                 <div class="pid-table" style:--pid-rows={GAINS.length + 1}>
@@ -505,31 +473,6 @@
                   "profilesYawMasterGain",
                   "profilesYawMasterGainHelp",
                 )}
-                {#if effectiveGains}
-                  <SubSection label="profilesEffectiveGains">
-                    <p class="note">{$i18n.t("profilesEffectiveGainsHelp")}</p>
-                    <div
-                      class="effective-table"
-                      style:--effective-cols={effectiveGains.gains.length + 1}
-                    >
-                      <span></span>
-                      <span class="col">%</span>
-                      {#each effectiveGains.gains as gain (gain.key)}
-                        <span class="col">{$i18n.t(gain.label)}</span>
-                      {/each}
-                      {#each AXES as axis, a (axis)}
-                        <span class={["axis", axis.toLowerCase()]}>
-                          {$i18n.t(`axis${axis}`)}
-                        </span>
-                        <span class="value">{effectiveGains.masterGain[a]}</span
-                        >
-                        {#each effectiveGains.rows[a] as value, g (g)}
-                          <span class="value">{value ?? ""}</span>
-                        {/each}
-                      {/each}
-                    </div>
-                  </SubSection>
-                {/if}
               </Section>
             {/if}
 
@@ -1086,28 +1029,6 @@
     .pid-table .axis {
       text-align: center;
     }
-  }
-
-  .effective-table {
-    display: grid;
-    grid-template-columns: minmax(60px, 1fr) repeat(
-        var(--effective-cols),
-        minmax(40px, auto)
-      );
-    align-items: center;
-    gap: 4px 12px;
-    padding: 4px 8px 8px;
-  }
-
-  .effective-table .value {
-    text-align: center;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .note {
-    margin: 0 8px 6px;
-    font-size: 0.75rem;
-    color: var(--color-text-soft);
   }
 
   .col {

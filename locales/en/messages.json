@@ -5903,11 +5903,14 @@
     "profilesYawMasterGainHelp": {
         "message": "Scales the tail P, I and D gains together, keeping the ratios between them and the CW/CCW stop gain balance. Feedforward, Boost and the collective, cyclic and inertia precompensations are not scaled. Changing it in flight does not upset the anti-torque trim already held by I. If the tail wags or bounces at piro stops, lower it; if it holds loosely or drifts, raise it."
     },
-    "profilesEffectiveGains": {
-        "message": "Effective gains"
+    "profilesEffectivePidGains": {
+        "message": "Effective PID Gains"
     },
     "profilesEffectiveGainsHelp": {
-        "message": "The gains the controller applies: each gain multiplied by its master gain. Follows in-flight adjustments; values edited on this page are shown before they are saved."
+        "message": "The gains the controller actually applies. P, I, D and Offset are multiplied by the axis's master gain (cyclic for roll and pitch, yaw for the tail); Feedforward and Boost are not scaled and are shown as set. The values follow in-flight adjustments from the flight controller, and edits on this page show here before they are saved."
+    },
+    "profilesMasterGainColumnHelp": {
+        "message": "The master gain applied to this axis. Green or orange when it is higher or lower than the saved value, e.g. after an in-flight adjustment."
     },
     "profilesPidSettings": {
         "message": "PID Controller Settings"

@@ -13,15 +13,6 @@ export const GAINS = [
   { key: "B", label: "profilesBoost", help: "profilesBoostHelp" },
 ];
 
-// Gains the master gains scale; `index` is the gain's slot in FC.PIDS. F, B
-// and the precomps are feedforward and the firmware leaves them unscaled.
-export const MASTER_GAIN_SCALED = [
-  { key: "P", label: "profilesProportional", index: 0, axes: [0, 1, 2] },
-  { key: "I", label: "profilesIntegral", index: 1, axes: [0, 1, 2] },
-  { key: "D", label: "profilesDerivative", index: 2, axes: [0, 1, 2] },
-  { key: "O", label: "profilesOffset", index: 5, axes: [0, 1] },
-];
-
 const n = (min, max, step = 1) => ({ min, max, step });
 
 /**
