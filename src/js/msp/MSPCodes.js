@@ -229,4 +229,7 @@ export const MSPCodes = {
     // ESC telemetry: halfDuplex/pinSwap (no `inverted` - it never inverts).
     MSP2_ESC_SENSOR_TRIAL:              0x5F0C,
     MSP2_RX_SERIAL_TRIAL:               0x5F12,
+    // action: 0 = poll only, 1 = (re)start - detects the board alignment
+    // from a level baseline followed by a tail lift.
+    MSP2_BOARD_AUTO_ALIGN:              0x5F13,
 };

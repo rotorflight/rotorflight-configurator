@@ -1895,6 +1895,63 @@
     "configurationBoardAlignmentYaw": {
         "message": "Yaw Degrees"
     },
+    "configurationBoardAutoAlignStart": {
+        "message": "Auto-Align FC"
+    },
+    "configurationBoardAutoAlignHelp": {
+        "message": "Automatically detects the flight controller mounting orientation (90° steps). Place the helicopter level, press Auto-Align, then lift the tail by at least 20° and hold it briefly."
+    },
+    "configurationBoardAutoAlignIdle": {
+        "message": "Place the helicopter level and disarmed, then press Start."
+    },
+    "configurationBoardAutoAlignStarting": {
+        "message": "Procedure started. Lift the tail by at least 20° and hold briefly."
+    },
+    "configurationBoardAutoAlignWaiting": {
+        "message": "Waiting for the tail to lift (at least 20°)."
+    },
+    "configurationBoardAutoAlignDisarmRequired": {
+        "message": "Auto-align is only allowed while disarmed."
+    },
+    "configurationBoardAutoAlignTimeout": {
+        "message": "Auto-align timed out. Start again and lift the tail within 15 seconds."
+    },
+    "configurationBoardAutoAlignNoMatch": {
+        "message": "No valid 90° alignment found yet. Hold the helicopter still before starting, then lift only the tail."
+    },
+    "configurationBoardAutoAlignUnsupported": {
+        "message": "Auto-align is not supported by this firmware."
+    },
+    "configurationBoardAutoAlignUncalibrated": {
+        "message": "The accelerometer has not been calibrated on this board yet. Auto-align needs a calibrated accelerometer for a reliable result. Calibrate now, then try again."
+    },
+    "configurationBoardAutoAlignCalibrating": {
+        "message": "Calibrating accelerometer. Keep the helicopter level and still…"
+    },
+    "configurationBoardAutoAlignWizardTitle": {
+        "message": "Board Auto-Align"
+    },
+    "configurationBoardAutoAlignWizardStep1": {
+        "message": "Step 1 of 3: Start"
+    },
+    "configurationBoardAutoAlignWizardStep2": {
+        "message": "Step 2 of 3: Lift Tail"
+    },
+    "configurationBoardAutoAlignWizardStep3": {
+        "message": "Step 3 of 3: Result"
+    },
+    "configurationBoardAutoAlignSuccessCountdown": {
+        "message": "Detected board alignment: roll $1°, pitch $2°, yaw $3°. Save to keep it, then recalibrate the accelerometer. Closing in $4s."
+    },
+    "configurationBoardAutoAlignWizardRetry": {
+        "message": "Retry"
+    },
+    "configurationBoardAutoAlignWizardCalibrate": {
+        "message": "Calibrate Accelerometer"
+    },
+    "configurationBoardAutoAlignWizardClose": {
+        "message": "Close"
+    },
     "configurationSensorAlignmentGyro": {
         "message": "GYRO Alignment"
     },
