@@ -1,21 +1,56 @@
 <script>
+  import { mount, unmount } from "svelte";
+
   import Field from "@/components/Field.svelte";
+  import HelpIcon from "@/components/HelpIcon.svelte";
   import NumberInput from "@/components/NumberInput.svelte";
   import Select from "@/components/Select.svelte";
 
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
+  import AutoAlignWizard from "./AutoAlignWizard.svelte";
   import { SENSOR_ALIGNMENTS } from "./util.js";
 
-  let { magHardwareEnabled } = $props();
+  let { magHardwareEnabled, onModelPollingPausedChange } = $props();
 
   let magAlignOptions = $derived([
     { value: 0, label: $i18n.t("configurationSensorAlignmentDefaultOption") },
     ...SENSOR_ALIGNMENTS.map((label, i) => ({ value: i + 1, label })),
   ]);
 
-  export function cleanup() {}
+  let autoAlignDisabled = $state(false);
+  let autoAlignWizardInstance = null;
+
+  // The wizard polls MSP2_BOARD_AUTO_ALIGN every 250ms while open; pause the
+  // 3D model's MSP_ATTITUDE poll meanwhile so the two don't contend on a
+  // slow serial link.
+  function closeAutoAlignWizard() {
+    if (!autoAlignWizardInstance) return;
+    const instance = autoAlignWizardInstance;
+    autoAlignWizardInstance = null;
+    unmount(instance);
+    onModelPollingPausedChange?.(false);
+  }
+
+  function onClickAutoAlign() {
+    closeAutoAlignWizard();
+    // Mounted to <body> so the native <dialog> centers on the viewport
+    // instead of the transformed #content ancestor.
+    autoAlignWizardInstance = mount(AutoAlignWizard, {
+      target: document.body,
+      props: {
+        onButtonDisabled: (v) => (autoAlignDisabled = v),
+        onClose: closeAutoAlignWizard,
+      },
+    });
+    onModelPollingPausedChange?.(true);
+  }
+
+  export function cleanup() {
+    autoAlignWizardInstance?.stop();
+    closeAutoAlignWizard();
+  }
 </script>
 
 <div class="row">
@@ -51,6 +86,13 @@
       <span>{$i18n.t("configurationBoardAlignmentYaw")}</span>
     </label>
   </div>
+
+  <div class="auto-align">
+    <button class="btn" disabled={autoAlignDisabled} onclick={onClickAutoAlign}>
+      {$i18n.t("configurationBoardAutoAlignStart")}
+    </button>
+    <HelpIcon>{$i18n.t("configurationBoardAutoAlignHelp")}</HelpIcon>
+  </div>
 </div>
 
 {#if magHardwareEnabled}
@@ -66,6 +108,10 @@
 {/if}
 
 <style lang="scss">
+  .btn {
+    @extend %button;
+  }
+
   .row {
     display: flex;
     flex-wrap: wrap;
@@ -101,6 +147,13 @@
     &.yaw {
       background-image: url(/images/icons/cf_icon_yaw.svg);
     }
+  }
+
+  .auto-align {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
   }
 
   .mag-align {
