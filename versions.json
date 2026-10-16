@@ -54,17 +54,6 @@
     },
     {
       "type": "pr",
-      "name": "484",
-      "path": "./pr/484/",
-      "branch": "feature/master-gain",
-      "date": "2026-10-14T00:10:14Z",
-      "number": 484,
-      "title": "Add master gains and effective gains to the Profiles tab",
-      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/484",
-      "draft": false
-    },
-    {
-      "type": "pr",
       "name": "475",
       "path": "./pr/475/",
       "branch": "feature/rpm-sensor-test",
