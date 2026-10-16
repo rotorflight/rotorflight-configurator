@@ -54,17 +54,6 @@
     },
     {
       "type": "pr",
-      "name": "490",
-      "path": "./pr/490/",
-      "branch": "board-auto-align",
-      "date": "2026-10-16T21:06:59Z",
-      "number": 490,
-      "title": "Add board auto-align wizard",
-      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/490",
-      "draft": false
-    },
-    {
-      "type": "pr",
       "name": "484",
       "path": "./pr/484/",
       "branch": "feature/master-gain",
