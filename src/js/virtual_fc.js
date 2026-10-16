@@ -46,6 +46,7 @@ const ARMING_DISABLED_MSP = 1 << 16;
 const DEBUG_COUNT = 82;
 const DEBUG_VALUE_COUNT = 8;
 const RATE_PROFILE_MASK = 1 << 7;
+const FREQ_SENSOR_PORT_COUNT = 4;
 
 const MIXER_OVERRIDE_OFF = 2501;
 const SERVO_OVERRIDE_OFF = 2001;
@@ -129,6 +130,17 @@ const virtualEscBuffers = new Map();
 
 export function setVirtualEscManufacturer(id) {
   virtualEscManufacturerId = id;
+}
+
+// Simulated hall sensor on RPM input 1: pulled up, a magnet pulls it low and
+// the falling edge (freq_input_edge default) is counted.
+export function setVirtualFreqSensorMagnet(port, present) {
+  const input = FC.FREQ_SENSOR_STATUS.ports[port];
+  if (!input?.active || input.pinHigh === !present) return;
+  input.pinHigh = !present;
+  if (present) {
+    input.edges = (input.edges + 1) & 0xffff;
+  }
 }
 
 function currentVirtualEscBuffer() {
@@ -825,6 +837,15 @@ export function applyVirtualConfig() {
     gov_d_filter: 50,
     gov_bypass_throttle: [0, 25, 50, 75, 100, 125, 150, 175, 200],
   });
+
+  FC.FREQ_SENSOR_STATUS = {
+    supported: true,
+    ports: Array.from({ length: FREQ_SENSOR_PORT_COUNT }, (_, i) => ({
+      active: i < FC.CONFIG.motorCount,
+      pinHigh: i < FC.CONFIG.motorCount,
+      edges: 0,
+    })),
+  };
 
   Object.assign(FC.MOTOR_TELEMETRY_DATA, {
     rpm: [10_000],
