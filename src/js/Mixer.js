@@ -32,21 +32,26 @@ export const Mixer = {
         'mixerInputRCChannel18',
     ],
 
-    outputNames: [
-        'mixerOutputNone',
-        'mixerOutputMotor1',
-        'mixerOutputMotor2',
-        'mixerOutputMotor3',
-        'mixerOutputMotor4',
-        'mixerOutputServo1',
-        'mixerOutputServo2',
-        'mixerOutputServo3',
-        'mixerOutputServo4',
-        'mixerOutputServo5',
-        'mixerOutputServo6',
-        'mixerOutputServo7',
-        'mixerOutputServo8',
-    ],
+    // Sparse, and deliberately indexed to match firmware's real mixer
+    // output numbering (rotorflight-firmware's mixerOutputNames[] in
+    // cli.c: "-", "S1".."S26", "M1".."M4" - i.e. None=0, Servo1-26=1-26,
+    // Motor1-4=27-30), NOT a dense 0..12 list. FC.MIXER_RULES[i].dst and
+    // FC.MIXER_OVERRIDE indices are sent to the FC exactly as given here,
+    // so this has to line up with the firmware's own indices, not just be
+    // internally consistent - a densely-packed array (None, Motor1-4,
+    // Servo1-8) sends every servo/motor selection at the wrong index,
+    // silently driving the wrong physical output. Indices 9-26
+    // (Servo9-26) are left undefined since this UI never exposes more
+    // than 8 servos.
+    outputNames: (function () {
+        const names = [];
+        names[0] = 'mixerOutputNone';
+        for (let i = 1; i <= 8; i++)
+            names[i] = 'mixerOutputServo' + i;
+        for (let i = 1; i <= 4; i++)
+            names[26 + i] = 'mixerOutputMotor' + i;
+        return names;
+    })(),
 
     operNames: [
         'mixerRuleNOP',

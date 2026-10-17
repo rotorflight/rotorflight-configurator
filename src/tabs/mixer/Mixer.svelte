@@ -23,6 +23,7 @@
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { reinitialiseConnection } from "@/js/serial_backend";
 
+  import CustomMixerRules from "./CustomMixerRules.svelte";
   import MixerOverride from "./MixerOverride.svelte";
 
   const TAIL_VARIABLE_PITCH = 0;
@@ -40,11 +41,14 @@
   let origInputs;
 
   let customConfig = $state(false);
-  let customRules = $state(false);
   let hasTiltCorrection = $state(false);
   let hasPassthrough = $state(false);
 
   let form = $state({});
+
+  // Bound to the rules table so its staged edits can join this tab's own
+  // save/revert cycle rather than running a second one of their own.
+  let customRules;
 
   let motorised = $derived(form.tailMode > TAIL_VARIABLE_PITCH);
 
@@ -145,7 +149,6 @@
       inputs[1].max !== -inputs[1].min ||
       inputs[2].max !== -inputs[2].min ||
       inputs[4].max !== -inputs[4].min;
-    customRules = !Mixer.isNullMixer(FC.MIXER_RULES);
   }
 
   function markDirty(group) {
@@ -259,7 +262,17 @@
     loading = false;
   });
 
-  async function sendDirty() {
+  // Config and inputs only -- deliberately not the rules table.
+  //
+  // The two halves of this tab have different save models. Config and
+  // inputs are sent to the FC as they're edited, so both saving and
+  // reverting work by (re-)sending whichever groups are dirty; revert
+  // gets its effect by restoring origConfig/origInputs first. The rules
+  // table stages its edits instead and sends nothing until save, so
+  // flushing it from here would make revert write out the very edits it
+  // was asked to discard -- and customRules.revert() would then read
+  // them back off the FC as the new original.
+  async function sendDirtyConfig() {
     if (dirtyGroups.config) {
       await MSP.promise(
         MSPCodes.MSP_SET_MIXER_CONFIG,
@@ -277,7 +290,8 @@
   }
 
   export async function onSave() {
-    await sendDirty();
+    await sendDirtyConfig();
+    await customRules?.sendDirty();
     if (needSave) {
       await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
       GUI.log($i18n.t("eepromSaved"));
@@ -298,7 +312,8 @@
   export async function onRevert() {
     FC.MIXER_CONFIG = Mixer.cloneConfig(origConfig);
     FC.MIXER_INPUTS = Mixer.cloneInputs(origInputs);
-    await sendDirty();
+    await sendDirtyConfig();
+    await customRules?.revert();
     needSave = false;
     needReboot = false;
     dataToForm();
@@ -364,9 +379,6 @@
   <div class="notes">
     {#if customConfig}
       <WarningNote message="mixerCustomNote" />
-    {/if}
-    {#if customRules}
-      <InfoNote message="mixerRulesNote" />
     {/if}
     {#if form.tailMode === TAIL_BIDIRECTIONAL}
       <WarningNote message="mixerBidirNote" />
@@ -624,6 +636,14 @@
           )}
         {/if}
       </Section>
+
+      <!-- Sits in the right-hand column beside the config sections
+           rather than full width below them: the geometry section
+           alone leaves most of this column empty. -->
+      <CustomMixerRules
+        bind:this={customRules}
+        onchange={() => (needSave = true)}
+      />
     </div>
   </div>
 
