@@ -1058,13 +1058,13 @@
         "message": "The ESC confirmed"
     },
     "setupWizardEscIntro": {
-        "message": "If your ESC sends telemetry, the flight controller can read RPM, voltage, current and temperature from it. Skip this step with Next if it doesn't."
+        "message": "If your ESC sends telemetry, the flight controller can read RPM, voltage, current and temperature from it. If it doesn't, or the flight controller measures the battery itself, choose Not used."
     },
     "setupWizardEscCastle": {
         "message": "Castle Link carries the telemetry on the throttle wire. Nothing more to set."
     },
     "setupWizardEscProtocolHelp": {
-        "message": "Choose the ESC brand, or Disabled."
+        "message": "The ESC's brand or telemetry protocol."
     },
     "setupWizardEscPortTitle": {
         "message": "Port"
@@ -1088,7 +1088,28 @@
         "message": "Nothing yet"
     },
     "setupWizardEscSkip": {
-        "message": "ESC telemetry is off."
+        "message": "ESC telemetry is not used. Where battery voltage and current come from (the flight controller's own sensors, or nothing) is set on the Power tab."
+    },
+    "setupWizardEscUseTitle": {
+        "message": "ESC telemetry"
+    },
+    "setupWizardEscUsed": {
+        "message": "Used"
+    },
+    "setupWizardEscUsedHelp": {
+        "message": "The ESC sends RPM, voltage, current and temperature to the flight controller."
+    },
+    "setupWizardEscNotUsed": {
+        "message": "Not used"
+    },
+    "setupWizardEscNotUsedHelp": {
+        "message": "The flight controller measures the battery itself (ADC), or nothing does."
+    },
+    "setupWizardEscProtocolPick": {
+        "message": "Choose the protocol"
+    },
+    "setupWizardOpenPower": {
+        "message": "Open the Power tab"
     },
     "setupWizardGyroIntro": {
         "message": "Check the gyro corrects the right way. The sticks drive the stabilizer again, and the swash reacts to movement."
