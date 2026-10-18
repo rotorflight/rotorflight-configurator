@@ -24,6 +24,9 @@ export const GuiControl = function () {
     this.current_tab = null;
     this.tab_switch_in_progress = false;
     this.reboot_in_progress = false;
+    // A tab that reboots the FC and wants to be reopened afterwards (the
+    // Setup Wizard), instead of the last or default tab.
+    this.tabAfterReboot = null;
     this.operating_system = null;
     this.interval_array = [];
     this.timeout_array = [];
@@ -44,6 +47,7 @@ export const GuiControl = function () {
         'auxiliary',
         'cli',
         'configuration',
+        'setup_wizard',
         'beepers',
         'gps',
         'led_strip',
@@ -506,7 +510,11 @@ GuiControl.prototype.saveDefaultTab = function(tabName) {
 
 GuiControl.prototype.selectDefaultTabWhenConnected = function() {
     const lastTab = config.lastTab;
-    if (config.rememberLastTab && lastTab) {
+    const tabAfterReboot = this.tabAfterReboot;
+    this.tabAfterReboot = null;
+    if (tabAfterReboot) {
+        $(`#tabs ul.mode-connected .tab_${tabAfterReboot} a`).click();
+    } else if (config.rememberLastTab && lastTab) {
         $(`#tabs ul.mode-connected .tab_${lastTab} a`).click();
     } else {
         $('#tabs ul.mode-connected .tab_status a').click();
