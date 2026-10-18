@@ -3,17 +3,24 @@
 
   import HeliSide from "./HeliSide.svelte";
 
-  // A red "Main blades off" warning with the crossed-out blades, for the
-  // cards that can start the main motor. Stronger than the usual .note.
-  let { text } = $props();
+  // A red "blades off" warning with the blades crossed out, for the cards
+  // that can start a motor: the main blades, or with tail the tail rotor.
+  // Stronger than the usual .note.
+  let { text, tail = false } = $props();
 </script>
 
 <div class="blades-off" role="note">
-  <div class="art"><HeliSide scene="bladesOff" /></div>
+  <div class="art">
+    <HeliSide scene={tail ? "tailBladesOff" : "bladesOff"} />
+  </div>
   <div>
     <strong>
       <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
-      {$i18n.t("setupWizardThrottleSwitchWarningTitle")}
+      {$i18n.t(
+        tail
+          ? "setupWizardTailBladesOffTitle"
+          : "setupWizardThrottleSwitchWarningTitle",
+      )}
     </strong>
     <p>{text}</p>
   </div>
