@@ -11,6 +11,7 @@
   import motorState from "@/tabs/motors/state.svelte.js";
 
   import EscArt from "./EscArt.svelte";
+  import MainMotorTest from "./MainMotorTest.svelte";
   import MotorCheck from "./MotorCheck.svelte";
   import TabButton from "./TabButton.svelte";
 
@@ -195,6 +196,8 @@
     </div>
   </section>
 {/if}
+
+<MainMotorTest disabled={isPwm && stage !== "done"} />
 
 <div>
   <TabButton tab="motors">

@@ -24,6 +24,7 @@
   import StepDirection from "./StepDirection.svelte";
   import StepEscTelemetry from "./StepEscTelemetry.svelte";
   import StepFinish from "./StepFinish.svelte";
+  import StepGovernor from "./StepGovernor.svelte";
   import StepGyro from "./StepGyro.svelte";
   import StepLevel from "./StepLevel.svelte";
   import StepModes from "./StepModes.svelte";
@@ -58,6 +59,8 @@
     { key: "swash", component: StepSwash },
     { key: "servoType", component: StepServoType },
     { key: "motor", component: StepMotor },
+    // Mode and throttle type only; applied by the gate's reboot.
+    { key: "governor", component: StepGovernor },
     { key: "connect", component: StepConnect, gate: true },
     // Battery off at the start, on at the end.
     { key: "throttle", component: StepThrottle },
@@ -183,6 +186,7 @@
     await MSP.promise(MSPCodes.MSP_RC_CONFIG);
     await MSP.promise(MSPCodes.MSP_MOTOR_CONFIG);
     await MSP.promise(MSPCodes.MSP_ESC_SENSOR_CONFIG);
+    await MSP.promise(MSPCodes.MSP_GOVERNOR_CONFIG);
     await MSP.promise(MSPCodes.MSP_MIXER_CONFIG);
     await MSP.promise(MSPCodes.MSP_MIXER_INPUTS);
     await MSP.promise(MSPCodes.MSP_MIXER_OVERRIDE);
