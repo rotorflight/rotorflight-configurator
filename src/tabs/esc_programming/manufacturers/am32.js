@@ -149,8 +149,10 @@ const TIMING_ENCODING_KEY = "__am32_timing_advance_encoding";
 
 const customFields = {
     timing_advance: {
-        toDisplay: (raw) => normalizeTimingAdvance(raw).display,
-        toRaw: (display, context) => encodeTimingAdvance(display, context.timingAdvanceEncoding),
+        // The Select holds enum labels, so convert between label and index at the boundary.
+        toDisplay: (raw) => timingAdvanceLabels[normalizeTimingAdvance(raw).display],
+        toRaw: (display, context) =>
+            encodeTimingAdvance(timingAdvanceLabels.indexOf(display), context.timingAdvanceEncoding),
     },
     motor_kv: {
         toDisplay: (raw) => raw * 40 + 20,
