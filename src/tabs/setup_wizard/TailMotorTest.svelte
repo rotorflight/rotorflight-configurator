@@ -8,6 +8,7 @@
   import { i18n } from "@/js/i18n.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
 
+  import BladesOffWarning from "./BladesOffWarning.svelte";
   import MotorCheck from "./MotorCheck.svelte";
 
   // A motorised tail spun with the motor override, as Wingflight's wizard
@@ -19,12 +20,15 @@
   const wiz = getContext("setupWizard");
 
   const TAIL_MOTOR = 1; // MOTOR 2
-  const TEST_PERCENT = 10;
+  // As the main motor test: some ESCs only start at 30-40 %.
+  const MIN_PERCENT = 5;
+  const MAX_PERCENT = 50;
   const KEEPALIVE_MS = 250;
   const IDLE_RUN_MS = 15000;
   const IDLE_MAX = 30;
 
   let safe = $state(false);
+  let percent = $state(10);
   // null, "forward", "reverse" or "idle"
   let spinning = $state(null);
   let keepalive;
@@ -41,8 +45,8 @@
   let canSpin = $derived(safe && hasMotor && !wiz.armed);
 
   function overrideValue(kind) {
-    if (kind === "forward") return TEST_PERCENT * 10;
-    if (kind === "reverse") return -TEST_PERCENT * 10;
+    if (kind === "forward") return percent * 10;
+    if (kind === "reverse") return -percent * 10;
     return Math.round(idle * 10);
   }
 
@@ -74,6 +78,10 @@
     if (wiz.armed) stop();
   });
 
+  function nudge(delta) {
+    percent = Math.max(MIN_PERCENT, Math.min(MAX_PERCENT, percent + delta));
+  }
+
   function useIdle() {
     FC.MIXER_CONFIG.tail_motor_idle = Math.round(idle * 10);
     savedIdle = idle;
@@ -82,6 +90,11 @@
 </script>
 
 <MotorCheck />
+
+<BladesOffWarning
+  tail
+  text={$i18n.t("setupWizardTailMotorWarning", { 1: MAX_PERCENT })}
+/>
 
 <label class="safe">
   <input type="checkbox" bind:checked={safe} disabled={spinning !== null} />
@@ -97,9 +110,29 @@
       bidirectional
         ? "setupWizardTailMotorDirTextBidir"
         : "setupWizardTailMotorDirText",
-      { 1: TEST_PERCENT },
+      { 1: percent },
     )}
   </p>
+  <div class="actions">
+    <span class="muted">{$i18n.t("setupWizardMainMotorSpeed")}</span>
+    <span class="nudges">
+      {#each [-5, -1] as delta (delta)}
+        <button
+          class="btn"
+          disabled={spinning !== null || percent <= MIN_PERCENT}
+          onclick={() => nudge(delta)}>{delta}</button
+        >
+      {/each}
+      <span class="value">{percent} %</span>
+      {#each [1, 5] as delta (delta)}
+        <button
+          class="btn"
+          disabled={spinning !== null || percent >= MAX_PERCENT}
+          onclick={() => nudge(delta)}>+{delta}</button
+        >
+      {/each}
+    </span>
+  </div>
   <div class="actions">
     {#each bidirectional ? ["forward", "reverse"] : ["forward"] as kind (kind)}
       <button

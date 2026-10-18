@@ -4,6 +4,7 @@
   //  - "level": on its skids, level, with a spirit level above it;
   //  - "tailLift": skids' front on the ground, tail lifted 20 degrees;
   //  - "bladesOff": main blades dashed and crossed out ("blades off");
+  //  - "tailBladesOff": the tail rotor dashed and crossed out;
   //  - "flying": in the air, level, with motion lines.
   let { scene = "level" } = $props();
 
@@ -13,11 +14,17 @@
   let viewBox = $derived(scene === "tailLift" ? "0 -30 168 106" : "0 0 168 76");
 </script>
 
-{#snippet heli(blades = true)}
+{#snippet heli(blades = true, tailBlades = true)}
   <!-- Tail boom, fin and tail rotor. -->
   <path class="body" d="M90 45 L24 42.5 L24 46.5 L90 50 Z" />
   <path class="body" d="M28 43 L17 27 L22 27 L33 43 Z" />
-  <ellipse class="rotor" cx="20" cy="36" rx="1.6" ry="9" />
+  {#if tailBlades}
+    <ellipse class="rotor" cx="20" cy="36" rx="1.6" ry="9" />
+  {:else}
+    <ellipse class="rotor off" cx="20" cy="36" rx="1.6" ry="9" />
+    <line class="cross" x1="13" y1="29" x2="27" y2="43" />
+    <line class="cross" x1="27" y1="29" x2="13" y2="43" />
+  {/if}
   <!-- Canopy. -->
   <path
     class="body"
@@ -61,6 +68,8 @@
     <text class="angle" x="72" y="65">20°</text>
   {:else if scene === "bladesOff"}
     <g transform="translate(0 4)">{@render heli(false)}</g>
+  {:else if scene === "tailBladesOff"}
+    <g transform="translate(0 4)">{@render heli(true, false)}</g>
   {:else if scene === "flying"}
     {@render heli()}
     <line class="speed" x1="4" y1="56" x2="18" y2="56" />
@@ -126,6 +135,11 @@
     fill: none;
     stroke: currentColor;
     stroke-width: 1.4;
+
+    &.off {
+      stroke-dasharray: 3 3;
+      opacity: 0.6;
+    }
   }
 
   .ground {

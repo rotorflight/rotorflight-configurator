@@ -1021,6 +1021,12 @@
     "setupWizardTailMotorIntro": {
         "message": "The tail is driven by a motor. The wizard spins it with the motor override to check its direction and find its idle. It runs only while you hold the button, or for up to 15 seconds at idle."
     },
+    "setupWizardTailBladesOffTitle": {
+        "message": "Tail blades off"
+    },
+    "setupWizardTailMotorWarning": {
+        "message": "The tail motor really runs, up to $1 %. Take the tail blades off, or hold the helicopter down with hands clear of the tail."
+    },
     "setupWizardTailMotorSafe": {
         "message": "Tail blades off, or the helicopter held down with hands clear of the tail."
     },
