@@ -23,6 +23,7 @@
   import { CHANNEL_PRESETS } from "@/tabs/receiver/channelPresets.js";
   import { RX_PROTOCOLS } from "@/tabs/receiver/protocols.js";
 
+  import HeliSide from "./HeliSide.svelte";
   import LiveBar from "./LiveBar.svelte";
   import ReceiverArt from "./ReceiverArt.svelte";
   import StickIcon from "./StickIcon.svelte";
@@ -350,6 +351,13 @@
     };
   });
 
+  // The tab blocks arming (MSP_SET_ARMING_DISABLED) while it is open, so
+  // flicking the switch here can't start the motor. Should the FC report
+  // armed anyway, stop: the off position may not be off.
+  $effect(() => {
+    if (wiz.armed) measuring = false;
+  });
+
   function startMeasure() {
     measured = null;
     measuring = true;
@@ -588,6 +596,16 @@
         </span>
       {/if}
     </h3>
+    <div class="note warning">
+      <div class="warning-art"><HeliSide scene="bladesOff" /></div>
+      <div>
+        <strong>
+          <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+          {$i18n.t("setupWizardThrottleSwitchWarningTitle")}
+        </strong>
+        <p>{$i18n.t("setupWizardThrottleSwitchWarning")}</p>
+      </div>
+    </div>
     <p>{$i18n.t("setupWizardThrottleRangeText")}</p>
     <div class="throttle-now">
       <span class="pill">
@@ -624,7 +642,7 @@
           {$i18n.t("cancel")}
         </button>
       {:else}
-        <button class="btn" onclick={startMeasure}>
+        <button class="btn" disabled={wiz.armed} onclick={startMeasure}>
           {$i18n.t("setupWizardThrottleRangeMeasure")}
         </button>
         {#if FC.RC_CONFIG.rc_min_throttle || FC.RC_CONFIG.rc_max_throttle}
@@ -743,6 +761,32 @@
 
   .bar-name {
     font-weight: 600;
+  }
+
+  /* Stronger than the usual .note: this one is about the motor. */
+  .card .note.warning {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-left-color: var(--color-status-bad);
+
+    strong {
+      font-size: 1.1em;
+      color: var(--color-status-bad);
+    }
+
+    i {
+      margin-right: 6px;
+    }
+
+    p {
+      margin: 4px 0 0;
+      font-weight: 600;
+    }
+  }
+
+  .warning-art {
+    flex: 0 0 140px;
   }
 
   .throttle-now {
