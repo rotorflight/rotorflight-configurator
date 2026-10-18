@@ -82,9 +82,6 @@
   <BladesOffWarning
     text={$i18n.t("setupWizardMainMotorWarning", { 1: MAX_PERCENT })}
   />
-  <p>
-    {$i18n.t("setupWizardMainMotorText", { 1: rotorDir })}
-  </p>
   <label class="safe">
     <input
       type="checkbox"
@@ -93,6 +90,9 @@
     />
     {$i18n.t("setupWizardMainMotorSafe")}
   </label>
+  <p>
+    {$i18n.t("setupWizardMainMotorText", { 1: rotorDir })}
+  </p>
   <div class="actions">
     <span class="muted">{$i18n.t("setupWizardMainMotorSpeed")}</span>
     <span class="nudges">
