@@ -54,6 +54,17 @@
     },
     {
       "type": "pr",
+      "name": "491",
+      "path": "./pr/491/",
+      "branch": "feature/setup-wizard",
+      "date": "2026-10-18T11:07:20Z",
+      "number": 491,
+      "title": "Add an illustrated helicopter setup wizard",
+      "url": "https://github.com/rotorflight/rotorflight-configurator/pull/491",
+      "draft": false
+    },
+    {
+      "type": "pr",
       "name": "475",
       "path": "./pr/475/",
       "branch": "feature/rpm-sensor-test",
