@@ -147,7 +147,7 @@
       SERVO_CONFIG: FC.SERVO_CONFIG,
       MIXER_INPUTS: FC.MIXER_INPUTS,
       MIXER_CONFIG: FC.MIXER_CONFIG,
-      // Sent live by the Mode switches and Profile switch steps.
+      // Sent live by the Mode switches and Profiles & gain steps.
       MODE_RANGES: FC.MODE_RANGES,
       MODE_RANGES_EXTRA: FC.MODE_RANGES_EXTRA,
       ADJUSTMENT_RANGES: FC.ADJUSTMENT_RANGES,
