@@ -51,6 +51,15 @@ const RATE_PROFILE_MASK = 1 << 7;
 const MIXER_OVERRIDE_OFF = 2501;
 const SERVO_OVERRIDE_OFF = 2001;
 
+// flight/servos.h tailOutput_e, tailOutputResult_e
+const TAIL_OUTPUT_SERVO = 0;
+const TAIL_OUTPUT_MOTOR = 1;
+const TAIL_RESULT_OK = 0;
+const TAIL_RESULT_INVALID = 5;
+
+// Where the tail pin is: the board default is SERVO 4.
+let tailOutput = TAIL_OUTPUT_SERVO;
+
 // src/main/msp/msp_box.c: name, permanent id, active when
 const BOXES = [
   ["ARM", 0, () => true],
@@ -567,6 +576,24 @@ export function handleVirtualMessage(code, data) {
       updateMotorOutputs();
       break;
 
+    // flight/servos.c setTailOutput() (API 12.10): moves the tail pin
+    // between SERVO 4 and MOTOR 2. The FC uses it after a reboot, which
+    // the virtual FC doesn't have, so the motor count follows at once.
+    case MSPCodes.MSP2_TAIL_MOTOR_OUTPUT: {
+      if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_10)) break;
+      const action = bytes[0] ?? 0;
+      let result = TAIL_RESULT_OK;
+      if (action === 1) {
+        tailOutput = TAIL_OUTPUT_SERVO;
+      } else if (action === 2) {
+        tailOutput = TAIL_OUTPUT_MOTOR;
+      } else if (action !== 0) {
+        result = TAIL_RESULT_INVALID;
+      }
+      FC.CONFIG.motorCount = tailOutput === TAIL_OUTPUT_MOTOR ? 2 : 1;
+      return reply(code, Uint8Array.from([tailOutput, result]).buffer);
+    }
+
     case MSPCodes.MSP_SET_RESET_CURR_PID:
       pidProfiles[currentPidProfile] = defaultPidProfileBank();
       loadPidProfile(currentPidProfile);
@@ -909,6 +936,7 @@ export function applyVirtualConfig() {
   FC.MOTOR_DATA = [1000, 0, 0, 0, 0, 0, 0, 0];
   FC.MOTOR_OVERRIDE = new Array(MAX_SUPPORTED_MOTORS).fill(0);
   resetMotors();
+  tailOutput = TAIL_OUTPUT_SERVO;
   Object.assign(FC.MOTOR_CONFIG, {
     mincommand: 1000,
     minthrottle: 1070,

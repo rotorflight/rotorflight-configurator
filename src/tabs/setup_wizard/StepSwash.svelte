@@ -1,11 +1,22 @@
 <script>
-  import { getContext } from "svelte";
+  import { getContext, onMount } from "svelte";
 
   import SwashServoDiagram from "@/components/SwashServoDiagram.svelte";
 
   import { Mixer } from "@/js/Mixer.js";
   import { FC } from "@/js/fc.svelte.js";
+  import { GUI } from "@/js/gui.js";
   import { i18n } from "@/js/i18n.js";
+  import {
+    TAIL_OUTPUT,
+    TAIL_RESULT,
+    TTA_GAIN_MOTOR,
+    TTA_GAIN_OFF,
+    readTailOutput,
+    setTtaGainAllProfiles,
+    switchTailOutput,
+    tailOutputMatches,
+  } from "@/js/tail_motor.js";
 
   import RebootLater from "./RebootLater.svelte";
   import RotorDirArt from "./RotorDirArt.svelte";
@@ -58,6 +69,62 @@
     rebootNeeded = true;
     wiz.requestReboot();
   }
+
+  //// The tail pin and TTA follow the tail mode, as on the Mixer tab: the
+  //// step's save moves the pin (SERVO 4 or MOTOR 2) and, when the kind of
+  //// tail changed, sets TTA on every profile.
+
+  const startMotorised = wiz.motorised;
+  // TAIL_OUTPUT, or null on firmware without MSP2_TAIL_MOTOR_OUTPUT.
+  let tailOutput = $state(null);
+  let tailError = $state(null);
+
+  let tailPinNote = $derived.by(() => {
+    if (tailOutput === null || tailOutputMatches(tailOutput, wiz.motorised)) {
+      return null;
+    }
+    if (tailOutput === TAIL_OUTPUT.NONE) return "tailOutputNoPin";
+    return wiz.motorised ? "tailOutputToMotor" : "tailOutputToServo";
+  });
+
+  function tailPinMovable() {
+    return (
+      tailOutput !== null &&
+      tailOutput !== TAIL_OUTPUT.NONE &&
+      !tailOutputMatches(tailOutput, wiz.motorised)
+    );
+  }
+
+  onMount(async () => {
+    tailOutput = (await readTailOutput())?.output ?? null;
+    // A pin that doesn't suit the tail already set: Next saves to fix it.
+    if (tailPinMovable()) {
+      wiz.markChanged();
+      needReboot();
+    }
+  });
+
+  wiz.setCommit(async () => {
+    if (tailPinMovable()) {
+      const reply = await switchTailOutput(wiz.motorised);
+      if (reply?.result === TAIL_RESULT.OK) {
+        tailOutput = reply.output;
+        tailError = null;
+      } else if (reply) {
+        tailError = $i18n.t("tailOutputFailed", {
+          1: $i18n.t(`tailOutputResult_${reply.result}`),
+        });
+        GUI.log(tailError);
+      }
+    }
+    if (wiz.motorised !== startMotorised) {
+      await setTtaGainAllProfiles(
+        wiz.motorised ? TTA_GAIN_MOTOR : TTA_GAIN_OFF,
+      );
+    }
+    // Stay on the step so the refusal is seen; Next again moves on.
+    return !tailError;
+  });
 
   function swashLabel(type) {
     return $i18n.t(Mixer.swashTypes[type]).replaceAll("&deg;", "°");
@@ -173,6 +240,18 @@
       </button>
     {/each}
   </div>
+  {#if tailError}
+    <div class="note">{tailError}</div>
+  {:else if tailPinNote === "tailOutputNoPin"}
+    <div class="note">{$i18n.t(tailPinNote)}</div>
+  {:else if tailPinNote}
+    <p class="muted">{$i18n.t(tailPinNote)}</p>
+  {/if}
+  {#if wiz.motorised !== startMotorised}
+    <p class="muted">
+      {$i18n.t(wiz.motorised ? "tailTtaOn" : "tailTtaOff")}
+    </p>
+  {/if}
 </section>
 
 {#if rebootNeeded}

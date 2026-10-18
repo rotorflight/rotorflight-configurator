@@ -4826,6 +4826,39 @@
     "mixerTailBidirectional": {
         "message": "Bidirectional"
     },
+    "tailOutputToMotor": {
+        "message": "Saving moves the tail pin from servo 4 to motor 2, so it drives the tail motor."
+    },
+    "tailOutputToServo": {
+        "message": "Saving moves the tail pin from motor 2 back to servo 4, so it drives the tail servo."
+    },
+    "tailOutputNoPin": {
+        "message": "Neither servo 4 nor motor 2 has a pin. Set one on the Remap FC tab."
+    },
+    "tailTtaOn": {
+        "message": "Saving turns on Tail Torque Assist (gain 100) in every profile. It works with the Electric or Direct governor."
+    },
+    "tailTtaOff": {
+        "message": "Saving turns Tail Torque Assist off in every profile."
+    },
+    "tailOutputFailed": {
+        "message": "The tail pin was not moved: $1"
+    },
+    "tailOutputResult_1": {
+        "message": "the motor and servo pins are set by hand. Check them on the Remap FC tab."
+    },
+    "tailOutputResult_2": {
+        "message": "motor 1 has no pin, so motor 2 would not be used."
+    },
+    "tailOutputResult_3": {
+        "message": "the pin can't drive an output."
+    },
+    "tailOutputResult_4": {
+        "message": "its timer also drives another servo or motor, which would then run at the wrong rate. Use a different pin on the Remap FC tab."
+    },
+    "tailOutputResult_5": {
+        "message": "the flight controller didn't understand the request."
+    },
     "mixerTailRotorDirection": {
         "message": "Yaw Control Direction"
     },
