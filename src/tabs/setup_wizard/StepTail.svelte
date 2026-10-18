@@ -12,6 +12,7 @@
   import LiveBar from "./LiveBar.svelte";
   import TabButton from "./TabButton.svelte";
   import TailArt from "./TailArt.svelte";
+  import TailMotorTest from "./TailMotorTest.svelte";
   import { YAW, limitDegrees, limitRaw, tailRaw } from "./heli.js";
 
   const wiz = getContext("setupWizard");
@@ -112,13 +113,7 @@
     </div>
     <div class="text"><p>{$i18n.t("setupWizardTailMotorIntro")}</p></div>
   </div>
-  <section class="card">
-    <h3>{$i18n.t("mixerTailMotorIdle")}</h3>
-    <p class="muted">{$i18n.t("mixerTailMotorIdleHelp")}</p>
-    <span class="pill">
-      {(FC.MIXER_CONFIG.tail_motor_idle / 10).toFixed(1)} %
-    </span>
-  </section>
+  <TailMotorTest />
   <div>
     <TabButton tab="mixer">
       {$i18n.t("setupWizardOpenMixer")}

@@ -905,7 +905,49 @@
         "message": "Set up the tail pitch the same way: center, direction, calibration and end stops."
     },
     "setupWizardTailMotorIntro": {
-        "message": "The tail is driven by a motor. The wizard can't spin it, so set the tail motor idle and direction on the Mixer and Motors tabs."
+        "message": "The tail is driven by a motor. The wizard spins it with the motor override to check its direction and find its idle. It runs only while you hold the button, or for up to 15 seconds at idle."
+    },
+    "setupWizardTailMotorSafe": {
+        "message": "Tail blades off, or the helicopter held down with hands clear of the tail."
+    },
+    "setupWizardTailMotorDirTitle": {
+        "message": "Direction"
+    },
+    "setupWizardTailMotorDirText": {
+        "message": "Hold the button: the tail rotor turns slowly ($1 %). It must turn the way its blades are made for, leading edge first. If not, swap two motor wires, or reverse it on the ESC."
+    },
+    "setupWizardTailMotorDirTextBidir": {
+        "message": "Hold each button in turn: the tail rotor turns slowly ($1 %) one way, then the other. Both ways must work."
+    },
+    "setupWizardTailMotorHold": {
+        "message": "Hold to spin"
+    },
+    "setupWizardTailMotorHold_forward": {
+        "message": "Hold: one way"
+    },
+    "setupWizardTailMotorHold_reverse": {
+        "message": "Hold: other way"
+    },
+    "setupWizardTailMotorSpinning": {
+        "message": "Spinning…"
+    },
+    "setupWizardTailMotorIdleTitle": {
+        "message": "Idle"
+    },
+    "setupWizardTailMotorIdleText": {
+        "message": "The lowest throttle the tail motor gets while armed. Run it at idle and raise the value until the motor turns smoothly and starts every time, then press Use as idle."
+    },
+    "setupWizardTailMotorRun": {
+        "message": "Run at idle"
+    },
+    "setupWizardTailMotorStop": {
+        "message": "Stop"
+    },
+    "setupWizardTailMotorUse": {
+        "message": "Use as idle"
+    },
+    "setupWizardTailMotorIdleNow": {
+        "message": "Idle: $1 %"
     },
     "setupWizardTailCentreTitle": {
         "message": "Center"
