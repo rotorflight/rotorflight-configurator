@@ -58,9 +58,11 @@
     { key: "profiles", component: StepProfiles },
     { key: "swash", component: StepSwash },
     { key: "servoType", component: StepServoType },
-    { key: "motor", component: StepMotor },
     // Mode and throttle type only; applied by the gate's reboot.
     { key: "governor", component: StepGovernor },
+    // Last before the gate, so the ESC step follows it with only the
+    // reboot between.
+    { key: "motor", component: StepMotor },
     { key: "connect", component: StepConnect, gate: true },
     // Battery off at the start, on at the end.
     { key: "throttle", component: StepThrottle },
