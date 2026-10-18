@@ -496,6 +496,9 @@
     "setupWizardStep_modes": {
         "message": "Mode switches"
     },
+    "setupWizardStep_profiles": {
+        "message": "Profile switch"
+    },
     "setupWizardStep_finish": {
         "message": "Finish"
     },
@@ -1152,6 +1155,150 @@
     },
     "setupWizardModesHow": {
         "message": "The wizard sees which switch moved and where it ended up."
+    },
+    "setupWizardModesFit8": {
+        "message": "On an 8-channel radio, channels 1–5 are the sticks and throttle, which leaves three switches: ARM on CH 6, the profile switch on CH 7 (next step), and Rescue and Trainer on two positions of one 3-position switch on CH 8."
+    },
+    "setupWizardProfilesIntro": {
+        "message": "One switch picks the flight profile: the PID profile, and with it the rates and the master gain. Press Assign, then move the switch through every position."
+    },
+    "setupWizardProfilesFit8": {
+        "message": "This fits an 8-channel radio: master gain follows the profile switch, so it needs no channel of its own."
+    },
+    "setupWizardProfilesFull": {
+        "message": "Every adjustment slot is in use. Free one on the Adjustments tab."
+    },
+    "setupWizardProfilesSwitchTitle": {
+        "message": "Profile switch"
+    },
+    "setupWizardProfiles_both": {
+        "message": "Profiles and rates"
+    },
+    "setupWizardProfilesHelp_both": {
+        "message": "The switch picks PID profile and rate profile 1, 2 or 3 together."
+    },
+    "setupWizardProfiles_pid": {
+        "message": "PID profiles only"
+    },
+    "setupWizardProfilesHelp_pid": {
+        "message": "The switch picks the PID profile; the rates stay as they are."
+    },
+    "setupWizardProfiles_none": {
+        "message": "Not used"
+    },
+    "setupWizardProfilesHelp_none": {
+        "message": "The helicopter flies on one profile."
+    },
+    "setupWizardProfilesSwitchText": {
+        "message": "A 2- or 3-position switch. The wizard records where each position really is, so every position lands on its own profile."
+    },
+    "setupWizardProfilesListening": {
+        "message": "Move the switch…"
+    },
+    "setupWizardProfilesPositions": {
+        "message": "CH $1: $2 positions found. Move it through every position, then press Use."
+    },
+    "setupWizardProfilesUse": {
+        "message": "Use"
+    },
+    "setupWizardProfilesCount": {
+        "message": "$1 profiles"
+    },
+    "setupWizardProfilesNow": {
+        "message": "Now: profile $1"
+    },
+    "setupWizardProfilesNowBoth": {
+        "message": "Now: profile $1, rates $1"
+    },
+    "setupWizardProfilesUseProfile": {
+        "message": "Profile switch"
+    },
+    "setupWizardProfilesUseGain": {
+        "message": "Master gain"
+    },
+    "setupWizardProfilesGainTitle": {
+        "message": "Master gain in flight"
+    },
+    "setupWizardGain_profile": {
+        "message": "With the profile switch"
+    },
+    "setupWizardGainHelp_profile": {
+        "message": "Each profile has its own master gain. Fits an 8-channel radio."
+    },
+    "setupWizardGain_buttons": {
+        "message": "Trim buttons"
+    },
+    "setupWizardGainHelp_buttons": {
+        "message": "Trim buttons step the gain up and down, all on one spare channel."
+    },
+    "setupWizardGain_knob": {
+        "message": "Knob"
+    },
+    "setupWizardGainHelp_knob": {
+        "message": "A knob or slider sets the gain, on a spare channel."
+    },
+    "setupWizardGainNoFirmware": {
+        "message": "This firmware has no master gain."
+    },
+    "setupWizardGainProfileText": {
+        "message": "The master gain for each profile, in %. 100 % flies the PID gains as they are."
+    },
+    "setupWizardGainCyclic": {
+        "message": "Cyclic"
+    },
+    "setupWizardGainYaw": {
+        "message": "Yaw"
+    },
+    "setupWizardGainProfile": {
+        "message": "Profile $1"
+    },
+    "setupWizardGainNeedsChannel": {
+        "message": "Your radio sends $1 channels. This needs a channel beyond the sticks, ARM, the profile switch and Rescue/Trainer, so it fits only if one of those is not used."
+    },
+    "setupWizardGainButtonsText": {
+        "message": "Turn the stick trims off, then on a spare channel add one mix per trim button: source MAX, the weight below, active only while that button is pressed. Each press steps the gain."
+    },
+    "setupWizardGainButton": {
+        "message": "Button"
+    },
+    "setupWizardGainWeight": {
+        "message": "Mix"
+    },
+    "setupWizardGainButton_cyclicDown": {
+        "message": "Cyclic gain −$1 %"
+    },
+    "setupWizardGainButton_cyclicUp": {
+        "message": "Cyclic gain +$1 %"
+    },
+    "setupWizardGainButton_yawDown": {
+        "message": "Yaw gain −$1 %"
+    },
+    "setupWizardGainButton_yawUp": {
+        "message": "Yaw gain +$1 %"
+    },
+    "setupWizardGainButtonsRadio": {
+        "message": "EdgeTX: in the mix, set the trim switch (for example T1-) as its switch. Ethos: give the trim an action that sets the mix weight while it is pressed. The button pressed now is shown in bold."
+    },
+    "setupWizardGainKnobText": {
+        "message": "The knob sets cyclic and yaw master gain together, 50 % at one end, 150 % at the other and 100 % in the middle."
+    },
+    "setupWizardGainKnobNow": {
+        "message": "Now: $1 %"
+    },
+    "setupWizardGainListeningButtons": {
+        "message": "Press a trim button…"
+    },
+    "setupWizardGainListeningKnob": {
+        "message": "Turn the knob…"
+    },
+    "setupWizardProfilesChannelsTitle": {
+        "message": "Channels in use"
+    },
+    "setupWizardProfilesBeyond8": {
+        "message": "Something is on CH 9 or higher, so this needs a radio and receiver link with more than 8 channels."
+    },
+    "setupWizardOpenAdjustments": {
+        "message": "Open the Adjustments tab"
     },
     "setupWizardMode_arm": {
         "message": "Arm"
