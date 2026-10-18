@@ -488,7 +488,7 @@
         "message": "Connect the servos"
     },
     "setupWizardStep_throttle": {
-        "message": "Throttle range"
+        "message": "ESC & spin test"
     },
     "setupWizardStep_escTelemetry": {
         "message": "ESC telemetry"
@@ -608,7 +608,7 @@
         "message": "RPM signal set up: RPM sensor or bidirectional DShot."
     },
     "setupWizardGovRpmMissing": {
-        "message": "This governor needs a fast RPM signal: an RPM sensor, or bidirectional DShot telemetry. Serial ESC telemetry is too slow. Without one the helicopter will not arm. Set it up in the Motors tab, or choose a mode without headspeed control."
+        "message": "This governor needs a fast RPM signal: an RPM sensor, or bidirectional DShot telemetry. Serial ESC telemetry is too slow. Without one the helicopter will not arm. Pick DShot in the Motor & ESC step and turn on its telemetry in the Motors tab, or fit an RPM sensor, or choose a mode without headspeed control."
     },
     "setupWizardGovNoRpmBadge": {
         "message": "No RPM signal"
