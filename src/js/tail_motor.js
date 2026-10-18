@@ -22,6 +22,7 @@ export const TAIL_RESULT = {
   NO_TIMER: 3,
   TIMER_SHARED: 4,
   INVALID: 5,
+  NO_DMA: 6,
 };
 
 const ACTION_READ = 0;
@@ -82,6 +83,17 @@ export async function setTtaGainAllProfiles(gain) {
   await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [active]);
   await MSP.promise(MSPCodes.MSP_STATUS);
   await MSP.promise(MSPCodes.MSP_GOVERNOR_PROFILE);
+}
+
+// After a reboot, from the MSP_MOTOR the caller polls: a motor whose
+// output didn't set up reads 0 (msp.c). One failing motor stops them all,
+// and the FC then refuses to arm (API 12.10). "main" when no motor runs,
+// "tail" when only a motorised tail's MOTOR 2 is missing, else null.
+export function motorOutputProblem(protocolEnabled, motorised) {
+  if (!protocolEnabled) return null;
+  if (!FC.MOTOR_DATA[0]) return "main";
+  if (motorised && !FC.MOTOR_DATA[1]) return "tail";
+  return null;
 }
 
 // Everything a change of tail mode needs besides the mode itself. Returns
