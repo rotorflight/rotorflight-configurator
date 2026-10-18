@@ -593,7 +593,7 @@
         "message": "Now: roll $1°, pitch $2°, yaw $3°"
     },
     "setupWizardReceiverIntro": {
-        "message": "Tell the flight controller where the receiver is plugged in and how it talks, then check every stick reaches it the right way round. Turn the radio on."
+        "message": "Tell the flight controller where the receiver is plugged in and how it talks, then check every stick and switch reaches it the right way round. Turn the radio on. On a helicopter the collective stick is not the throttle: the motor is switched on and off by a throttle switch (with throttle hold) on its own channel."
     },
     "setupWizardReceiverPortTitle": {
         "message": "Port"
@@ -659,7 +659,7 @@
         "message": "Yaw: move the yaw stick left and right"
     },
     "setupWizardReceiverDetect_throttle": {
-        "message": "Throttle: flick the throttle switch, or move the throttle control"
+        "message": "Throttle: flick the motor on/off (throttle) switch. Not the collective stick."
     },
     "setupWizardReceiverDetectWaiting": {
         "message": "Waiting…"
@@ -686,16 +686,16 @@
         "message": "Up → bar right"
     },
     "setupWizardReceiverHint_throttle": {
-        "message": "Up → bar right"
+        "message": "Switch on → bar right"
     },
     "setupWizardReceiverCheckWrong": {
         "message": "A bar that moves the wrong way: reverse that channel on the radio. The wrong bar moves: choose another channel order."
     },
     "setupWizardThrottleRangeTitle": {
-        "message": "Throttle range"
+        "message": "Throttle switch"
     },
     "setupWizardThrottleRangeText": {
-        "message": "The flight controller arms only with the throttle below 0 %. If the radio's throttle off (or throttle hold) position doesn't reach that low, the helicopter won't arm. Press Measure, move the throttle to off and to full (flick the hold switch too), then press Use: 0 % goes just above your off position and 100 % just below your full position."
+        "message": "On a helicopter the throttle channel is a switch, not the collective stick: motor off (throttle hold) and motor on. The flight controller arms only with that channel below 0 %. If the switch's off position doesn't reach that low, the helicopter won't arm. Press Measure, flick the throttle switch through all its positions (hold and on), then press Use: 0 % goes just above the off position and 100 % just below the on position."
     },
     "setupWizardThrottleRangeArms": {
         "message": "Arms here"
@@ -710,10 +710,10 @@
         "message": "0 % at $1 µs, 100 % at $2 µs, arms below $3 µs"
     },
     "setupWizardThrottleRangeMove": {
-        "message": "Move the throttle to off and to full…"
+        "message": "Flick the throttle switch to off (hold) and on…"
     },
     "setupWizardThrottleRangeSeen": {
-        "message": "Seen $1–$2 µs. Move it through its whole travel, then press Use."
+        "message": "Seen $1–$2 µs. Flick the throttle switch through every position, then press Use."
     },
     "setupWizardThrottleRangeMeasure": {
         "message": "Measure"
