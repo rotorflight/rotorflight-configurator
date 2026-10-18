@@ -48,8 +48,10 @@
     holdOnly(holding === cal.hold ? null : cal.hold);
   }
 
+  // From the held input: that is the axis the pilot measures, and the
+  // cyclic inputs can differ after edits on the Mixer tab.
   function percent(cal) {
-    return Math.abs(FC.MIXER_INPUTS[cal.inputs[0]].rate) / 10;
+    return Math.abs(FC.MIXER_INPUTS[cal.hold].rate) / 10;
   }
 
   function setRates(cal, magnitude) {
@@ -61,7 +63,7 @@
   }
 
   function applyMeasured(cal) {
-    const rate = FC.MIXER_INPUTS[cal.inputs[0]].rate;
+    const rate = FC.MIXER_INPUTS[cal.hold].rate;
     setRates(
       cal,
       Math.abs(calibratedRate(rate, TEST_DEGREES, measured[cal.key])),
