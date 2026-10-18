@@ -16,8 +16,13 @@
   let { disabled = false } = $props();
 
   const MAIN_MOTOR = 0;
-  const TEST_PERCENT = 10;
   const KEEPALIVE_MS = 250;
+  // Some ESCs only start at 30-40 %; above MAX_PERCENT the bench test
+  // isn't worth the risk.
+  const MIN_PERCENT = 5;
+  const MAX_PERCENT = 50;
+
+  let percent = $state(10);
 
   let safe = $state(false);
   let spinning = $state(false);
@@ -26,6 +31,14 @@
   // msp.c MSP_MOTOR: zero when the motor is disabled.
   let hasMotor = $derived((FC.MOTOR_DATA[MAIN_MOTOR] ?? 0) !== 0);
   let canSpin = $derived(safe && hasMotor && !disabled && !wiz.armed);
+  // msp.c MSP_MOTOR: output + 1000. Shows the override's 25 %/s ramp.
+  let output = $derived(
+    Math.max(0, Math.min(100, ((FC.MOTOR_DATA[MAIN_MOTOR] ?? 0) - 1000) / 10)),
+  );
+
+  function nudge(delta) {
+    percent = Math.max(MIN_PERCENT, Math.min(MAX_PERCENT, percent + delta));
+  }
 
   let rotorDir = $derived(
     $i18n
@@ -45,8 +58,8 @@
   function start() {
     if (!canSpin || spinning) return;
     spinning = true;
-    send(TEST_PERCENT * 10);
-    keepalive = setInterval(() => send(TEST_PERCENT * 10), KEEPALIVE_MS);
+    send(percent * 10);
+    keepalive = setInterval(() => send(percent * 10), KEEPALIVE_MS);
   }
 
   function stop() {
@@ -65,7 +78,7 @@
 <section class="card">
   <h3>{$i18n.t("setupWizardMainMotorTitle")}</h3>
   <p>
-    {$i18n.t("setupWizardMainMotorText", { 1: TEST_PERCENT, 2: rotorDir })}
+    {$i18n.t("setupWizardMainMotorText", { 1: rotorDir })}
   </p>
   <label class="safe">
     <input
@@ -75,6 +88,26 @@
     />
     {$i18n.t("setupWizardMainMotorSafe")}
   </label>
+  <div class="actions">
+    <span class="muted">{$i18n.t("setupWizardMainMotorSpeed")}</span>
+    <span class="nudges">
+      {#each [-5, -1] as delta (delta)}
+        <button
+          class="btn"
+          disabled={spinning || percent <= MIN_PERCENT}
+          onclick={() => nudge(delta)}>{delta}</button
+        >
+      {/each}
+      <span class="value">{percent} %</span>
+      {#each [1, 5] as delta (delta)}
+        <button
+          class="btn"
+          disabled={spinning || percent >= MAX_PERCENT}
+          onclick={() => nudge(delta)}>+{delta}</button
+        >
+      {/each}
+    </span>
+  </div>
   <div class="actions">
     <button
       class={["btn", spinning && "primary"]}
@@ -93,6 +126,10 @@
     </button>
     {#if disabled}
       <span class="muted">{$i18n.t("setupWizardMainMotorAfterCal")}</span>
+    {:else if spinning}
+      <span class="pill">
+        {$i18n.t("setupWizardMainMotorOutput", { 1: output.toFixed(0) })}
+      </span>
     {/if}
   </div>
 </section>
