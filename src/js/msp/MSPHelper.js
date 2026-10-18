@@ -757,6 +757,10 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 console.log('Profile selected');
                 break;
             }
+            case MSPCodes.MSP2_TAIL_MOTOR_OUTPUT: {
+                // The caller reads the reply (tail_motor.js).
+                break;
+            }
             case MSPCodes.MSP_SET_SERVO_CONFIGURATION: {
                 console.log('Servo Configuration saved');
                 break;

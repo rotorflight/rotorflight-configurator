@@ -329,16 +329,20 @@
     pending = true;
   }
 
+  // False when the step's commit reports something it couldn't do: the
+  // rest is still saved, but Next stays on the step so it's seen.
   async function save() {
     saving = true;
     try {
+      let ok = true;
       if (commitFn) {
-        await commitFn();
+        ok = (await commitFn()) !== false;
       }
       await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
       GUI.log($i18n.t("eepromSaved"));
       pending = false;
       takeSnapshot();
+      return ok;
     } finally {
       saving = false;
     }
@@ -472,8 +476,8 @@
       await saveAndReboot();
       return;
     }
-    if (pending) {
-      await save();
+    if (pending && !(await save())) {
+      return;
     }
     goTo(stepIndex + 1);
   }

@@ -22,6 +22,16 @@
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { reinitialiseConnection } from "@/js/serial_backend";
+  import {
+    TAIL_OUTPUT,
+    TAIL_RESULT,
+    TTA_GAIN_MOTOR,
+    TTA_GAIN_OFF,
+    readTailOutput,
+    setTtaGainAllProfiles,
+    switchTailOutput,
+    tailOutputMatches,
+  } from "@/js/tail_motor.js";
 
   import MixerOverride from "./MixerOverride.svelte";
 
@@ -47,6 +57,20 @@
   let form = $state({});
 
   let motorised = $derived(form.tailMode > TAIL_VARIABLE_PITCH);
+
+  // Where the tail pin is (TAIL_OUTPUT), or null on firmware without
+  // MSP2_TAIL_MOTOR_OUTPUT. Saving moves it to suit the tail mode, and a
+  // change between a servo and a motor tail sets TTA on every profile.
+  let tailOutput = $state(null);
+  let origMotorised = $state(false);
+
+  let tailPinNote = $derived.by(() => {
+    if (tailOutput === null || tailOutputMatches(tailOutput, motorised)) {
+      return null;
+    }
+    if (tailOutput === TAIL_OUTPUT.NONE) return "tailOutputNoPin";
+    return motorised ? "tailOutputToMotor" : "tailOutputToServo";
+  });
 
   const directionOptions = [
     { value: 1, key: "mixerDirectionNormal" },
@@ -256,8 +280,38 @@
     origInputs = Mixer.cloneInputs(FC.MIXER_INPUTS);
 
     dataToForm();
+    origMotorised = motorised;
+    tailOutput = (await readTailOutput())?.output ?? null;
     loading = false;
   });
+
+  // Before the EEPROM write: the pin switch and TTA are unsaved changes,
+  // and both need the reboot the tail mode change asks for anyway.
+  async function applyTailMotor() {
+    if (
+      tailOutput !== null &&
+      tailOutput !== TAIL_OUTPUT.NONE &&
+      !tailOutputMatches(tailOutput, motorised)
+    ) {
+      const reply = await switchTailOutput(motorised);
+      if (reply?.result === TAIL_RESULT.OK) {
+        tailOutput = reply.output;
+        needSave = true;
+        needReboot = true;
+      } else if (reply) {
+        GUI.log(
+          $i18n.t("tailOutputFailed", {
+            1: $i18n.t(`tailOutputResult_${reply.result}`),
+          }),
+        );
+      }
+    }
+    if (motorised !== origMotorised) {
+      await setTtaGainAllProfiles(motorised ? TTA_GAIN_MOTOR : TTA_GAIN_OFF);
+      origMotorised = motorised;
+      needSave = true;
+    }
+  }
 
   async function sendDirty() {
     if (dirtyGroups.config) {
@@ -278,6 +332,7 @@
 
   export async function onSave() {
     await sendDirty();
+    await applyTailMotor();
     if (needSave) {
       await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
       GUI.log($i18n.t("eepromSaved"));
@@ -461,6 +516,16 @@
           tailModeOptions,
           onTailModeChange,
         )}
+        {#if tailPinNote}
+          {#if tailPinNote === "tailOutputNoPin"}
+            <WarningNote message={tailPinNote} />
+          {:else}
+            <InfoNote message={tailPinNote} />
+          {/if}
+        {/if}
+        {#if motorised !== origMotorised}
+          <InfoNote message={motorised ? "tailTtaOn" : "tailTtaOff"} />
+        {/if}
         {@render selectField(
           "mixer-tail-dir",
           "mixerTailRotorDirection",
