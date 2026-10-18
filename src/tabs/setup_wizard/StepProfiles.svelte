@@ -482,17 +482,47 @@
     {/if}
 
     {#if gain === "buttons"}
-      <p>{$i18n.t("setupWizardGainButtonsText")}</p>
-      <div class="buttons-table">
-        <span class="muted">{$i18n.t("setupWizardGainButton")}</span>
-        <span class="muted">{$i18n.t("setupWizardGainWeight")}</span>
-        {#each GAIN_BUTTONS as b (b.key)}
-          <span class={[pressed?.key === b.key && "pressed"]}>
-            {$i18n.t(`setupWizardGainButton_${b.key}`, { 1: GAIN_STEP })}
-          </span>
-          <span class="pill">MAX · {b.weight}%</span>
-        {/each}
-      </div>
+      <p>{$i18n.t("setupWizardGainButtonsText", { 1: GAIN_STEP })}</p>
+      <ol class="guide">
+        <li>
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+          <p>{@html $i18n.t("setupWizardGainButtonsStep1")}</p>
+          <img
+            src="/images/setup_wizard/ethos_heli_trims_page.png"
+            alt={$i18n.t("setupWizardGainButtonsImage1")}
+          />
+        </li>
+        <li>
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+          <p>{@html $i18n.t("setupWizardGainButtonsStep2")}</p>
+          <div class="buttons-table">
+            <span class="muted">{$i18n.t("setupWizardGainButton")}</span>
+            <span class="muted">{$i18n.t("setupWizardGainWeight")}</span>
+            <span class="muted">{$i18n.t("setupWizardGainDoes")}</span>
+            {#each GAIN_BUTTONS as b (b.key)}
+              <span class={[pressed?.key === b.key && "pressed"]}>
+                {b.button}
+              </span>
+              <span class="pill">{b.weight}%</span>
+              <span class={[pressed?.key === b.key && "pressed"]}>
+                {$i18n.t(`setupWizardGainButton_${b.key}`, { 1: GAIN_STEP })}
+              </span>
+            {/each}
+          </div>
+          <img
+            class="tall"
+            src="/images/setup_wizard/ethos_heli_gain_mix.png"
+            alt={$i18n.t("setupWizardGainButtonsImage2")}
+          />
+        </li>
+        <li>
+          <p>{$i18n.t("setupWizardGainButtonsStep3")}</p>
+          <img
+            src="/images/setup_wizard/ethos_heli_gain_mixes.png"
+            alt={$i18n.t("setupWizardGainButtonsImage3")}
+          />
+        </li>
+      </ol>
       <p class="muted">{$i18n.t("setupWizardGainButtonsRadio")}</p>
     {:else}
       <p>{$i18n.t("setupWizardGainKnobText")}</p>
@@ -573,7 +603,29 @@
   }
 
   .buttons-table {
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
+    margin: 6px 0 10px;
+  }
+
+  .guide {
+    margin: 0;
+    padding-left: 1.4em;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin-top: 6px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border-soft);
+    }
+
+    img.tall {
+      max-width: 340px;
+    }
   }
 
   .pressed {

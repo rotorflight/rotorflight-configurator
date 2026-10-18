@@ -106,18 +106,48 @@ export function knobRange(adjFunction, aux) {
 
 //// Master gain on the trim buttons, all on one channel.
 //
-// Heli pilots rarely use stick trims, so the trim buttons are free. One mix
-// per button on a spare channel, source MAX, weight below, active only
-// while that button is pressed (EdgeTX: the trim switch as the mix switch;
-// Ethos: an action on the trim). Each button then puts its own value on
-// the channel, and stepped ranges tell them apart: a press steps the
-// flight controller's master gain by GAIN_STEP.
+// Heli pilots rarely use stick trims, so the trim buttons are free. One
+// free mix on a spare channel, source MAX, with an action per button that
+// sets its weight while the button is pressed (Ethos; on EdgeTX one mix
+// line per button with the trim as its switch). Each button then puts its
+// own value on the channel, and stepped ranges tell them apart: a press
+// steps the flight controller's master gain by GAIN_STEP. With no button
+// pressed the channel sits at the mix's own weight (100 %, 2012 us), which
+// is in no window.
 
+// The buttons are the ones in the Ethos guide screenshots (elevator trim
+// for cyclic, rudder trim for yaw), so what the guide shows is what is
+// detected. Checked in the Ethos simulator: the trims' Mode set to OFF
+// stops them trimming the sticks, and the buttons still trigger the mix.
 export const GAIN_BUTTONS = [
-  { key: "cyclicDown", adjFunction: ADJ.CYCLIC_MASTER_GAIN, dir: -1, weight: 30 },
-  { key: "cyclicUp", adjFunction: ADJ.CYCLIC_MASTER_GAIN, dir: 1, weight: 40 },
-  { key: "yawDown", adjFunction: ADJ.YAW_MASTER_GAIN, dir: -1, weight: 50 },
-  { key: "yawUp", adjFunction: ADJ.YAW_MASTER_GAIN, dir: 1, weight: 60 },
+  {
+    key: "cyclicDown",
+    button: "T2 Down",
+    adjFunction: ADJ.CYCLIC_MASTER_GAIN,
+    dir: -1,
+    weight: 30,
+  },
+  {
+    key: "cyclicUp",
+    button: "T2 Up",
+    adjFunction: ADJ.CYCLIC_MASTER_GAIN,
+    dir: 1,
+    weight: 40,
+  },
+  {
+    key: "yawDown",
+    button: "T4 Left",
+    adjFunction: ADJ.YAW_MASTER_GAIN,
+    dir: -1,
+    weight: 50,
+  },
+  {
+    key: "yawUp",
+    button: "T4 Right",
+    adjFunction: ADJ.YAW_MASTER_GAIN,
+    dir: 1,
+    weight: 60,
+  },
 ];
 
 // Channel value for a MAX source at `weight` %: 100 % is 1500 + 512 us on
@@ -128,8 +158,7 @@ export function buttonValue(weight) {
 
 // The channel window each button's value falls in: from half-way to the
 // button below to half-way to the one above (the same half-gap past the
-// first and last), so neighbouring windows meet without overlapping. The
-// idle channel (1500, no button) is below the first window.
+// first and last), so neighbouring windows meet without overlapping.
 export function buttonWindow(index) {
   const values = GAIN_BUTTONS.map((b) => buttonValue(b.weight));
   const value = values[index];
