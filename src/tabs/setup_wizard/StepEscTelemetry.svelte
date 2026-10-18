@@ -16,6 +16,7 @@
   import motorState from "@/tabs/motors/state.svelte.js";
 
   import EscArt from "./EscArt.svelte";
+  import TabButton from "./TabButton.svelte";
 
   const wiz = getContext("setupWizard");
 
@@ -59,7 +60,23 @@
     wiz.markChanged();
   }
 
-  //// 1. Protocol. Castle Link carries its telemetry on the throttle wire.
+  //// 1. Used or not, then the protocol. Castle Link carries its telemetry
+  //// on the throttle wire, so there is nothing to choose.
+
+  // "Not used": the flight controller measures the battery itself (ADC),
+  // or nothing does. Turns the protocol off and frees its port.
+  let inUse = $state(motorState.telemEnabled);
+
+  function setInUse(value) {
+    if (inUse === value) return;
+    inUse = value;
+    if (value) return;
+    if (FC.ESC_SENSOR_CONFIG.protocol !== 0) setProtocol(0);
+    if (escPort) {
+      setMask(escPort, maskOf(escPort) & ~ESC_SENSOR_FUNCTION);
+      markChanged();
+    }
+  }
 
   function setProtocol(index) {
     FC.ESC_SENSOR_CONFIG.protocol = index;
@@ -172,21 +189,54 @@
 </div>
 
 <section class="card">
-  <h3><span class="num">1</span>{$i18n.t("motorsEscTelemetryProtocol")}</h3>
+  <h3><span class="num">1</span>{$i18n.t("setupWizardEscUseTitle")}</h3>
   {#if motorState.isCastleLink}
     <p>{$i18n.t("setupWizardEscCastle")}</p>
   {:else}
-    <div class="actions">
-      <select
-        value={FC.ESC_SENSOR_CONFIG.protocol}
-        onchange={(e) => setProtocol(Number(e.target.value))}
-      >
-        {#each motorState.telemetryProtocols as proto, index (proto)}
-          <option value={index}>{proto}</option>
-        {/each}
-      </select>
-      <span class="muted">{$i18n.t("setupWizardEscProtocolHelp")}</span>
+    <div class="tiles" role="radiogroup">
+      {#each [true, false] as used (used)}
+        <button
+          type="button"
+          role="radio"
+          aria-checked={inUse === used}
+          class={["tile", inUse === used && "selected"]}
+          onclick={() => setInUse(used)}
+        >
+          <span class="tile-name">
+            {$i18n.t(used ? "setupWizardEscUsed" : "setupWizardEscNotUsed")}
+            {#if inUse === used}
+              <i class="fas fa-check-circle" aria-hidden="true"></i>
+            {/if}
+          </span>
+          <span class="muted">
+            {$i18n.t(
+              used ? "setupWizardEscUsedHelp" : "setupWizardEscNotUsedHelp",
+            )}
+          </span>
+        </button>
+      {/each}
     </div>
+    {#if inUse}
+      <div class="actions">
+        <select
+          value={FC.ESC_SENSOR_CONFIG.protocol}
+          onchange={(e) => setProtocol(Number(e.target.value))}
+        >
+          {#if FC.ESC_SENSOR_CONFIG.protocol === 0}
+            <option value={0} disabled>
+              {$i18n.t("setupWizardEscProtocolPick")}
+            </option>
+          {/if}
+          <!-- Disabled (0) is the Not used tile. -->
+          {#each motorState.telemetryProtocols as proto, index (proto)}
+            {#if index > 0}
+              <option value={index}>{proto}</option>
+            {/if}
+          {/each}
+        </select>
+        <span class="muted">{$i18n.t("setupWizardEscProtocolHelp")}</span>
+      </div>
+    {/if}
   {/if}
 </section>
 
@@ -273,8 +323,11 @@
       </div>
     {/if}
   </section>
-{:else}
+{:else if !inUse}
   <p class="muted">{$i18n.t("setupWizardEscSkip")}</p>
+  <div>
+    <TabButton tab="power">{$i18n.t("setupWizardOpenPower")}</TabButton>
+  </div>
 {/if}
 
 <style lang="scss">
