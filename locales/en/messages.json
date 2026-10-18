@@ -691,6 +691,39 @@
     "setupWizardReceiverCheckWrong": {
         "message": "A bar that moves the wrong way: reverse that channel on the radio. The wrong bar moves: choose another channel order."
     },
+    "setupWizardThrottleRangeTitle": {
+        "message": "Throttle range"
+    },
+    "setupWizardThrottleRangeText": {
+        "message": "The flight controller arms only with the throttle below 0 %. If the radio's throttle off (or throttle hold) position doesn't reach that low, the helicopter won't arm. Press Measure, move the throttle to off and to full (flick the hold switch too), then press Use: 0 % goes just above your off position and 100 % just below your full position."
+    },
+    "setupWizardThrottleRangeArms": {
+        "message": "Arms here"
+    },
+    "setupWizardThrottleRangeNoArm": {
+        "message": "Too high to arm"
+    },
+    "setupWizardThrottleRangeNow": {
+        "message": "Throttle now: $1 µs"
+    },
+    "setupWizardThrottleRangePoints": {
+        "message": "0 % at $1 µs, 100 % at $2 µs, arms below $3 µs"
+    },
+    "setupWizardThrottleRangeMove": {
+        "message": "Move the throttle to off and to full…"
+    },
+    "setupWizardThrottleRangeSeen": {
+        "message": "Seen $1–$2 µs. Move it through its whole travel, then press Use."
+    },
+    "setupWizardThrottleRangeMeasure": {
+        "message": "Measure"
+    },
+    "setupWizardThrottleRangeUse": {
+        "message": "Use"
+    },
+    "setupWizardThrottleRangeDefault": {
+        "message": "Use the default range"
+    },
     "setupWizardSwashIntro": {
         "message": "Tell the flight controller how the swashplate servos are arranged and how the tail is driven."
     },
