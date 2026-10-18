@@ -1256,13 +1256,34 @@
         "message": "Your radio sends $1 channels. This needs a channel beyond the sticks, ARM, the profile switch and Rescue/Trainer, so it fits only if one of those is not used."
     },
     "setupWizardGainButtonsText": {
-        "message": "Turn the stick trims off, then on a spare channel add one mix per trim button: source MAX, the weight below, active only while that button is pressed. Each press steps the gain."
+        "message": "The elevator trim steps the cyclic gain and the rudder trim the yaw gain, $1 % per press; hold a button to repeat. Each button puts its own value on one spare channel. The steps use Ethos as the example."
+    },
+    "setupWizardGainButtonsStep1": {
+        "message": "<b>Model → Trims</b>: set the <b>Mode</b> of the elevator and rudder trims to <b>OFF</b>, so they no longer trim the sticks. The buttons still work for the mix below."
+    },
+    "setupWizardGainButtonsStep2": {
+        "message": "<b>Model → Mixes</b>: add a <b>Free mix</b> named GAIN: <b>Active condition</b> Always on, <b>Source</b> Maximum (under Special), <b>Operation</b> Add, <b>Output</b> a spare channel (CH9 here). Then <b>Add a new action</b> for each trim button, with these weights:"
+    },
+    "setupWizardGainButtonsStep3": {
+        "message": "The GAIN mix is then on its own channel. Press Assign below, then press any of the four trim buttons."
+    },
+    "setupWizardGainButtonsImage1": {
+        "message": "Ethos Trims page: elevator trim with Mode OFF"
+    },
+    "setupWizardGainButtonsImage2": {
+        "message": "Ethos GAIN free mix: source Maximum, operation Add, an action per trim button, output CH9. T2 Up is pressed, so CH9 is at 40 %."
+    },
+    "setupWizardGainButtonsImage3": {
+        "message": "Ethos Mixes list with GAIN on CH9"
     },
     "setupWizardGainButton": {
         "message": "Button"
     },
     "setupWizardGainWeight": {
-        "message": "Mix"
+        "message": "Weight"
+    },
+    "setupWizardGainDoes": {
+        "message": "Does"
     },
     "setupWizardGainButton_cyclicDown": {
         "message": "Cyclic gain −$1 %"
@@ -1277,7 +1298,7 @@
         "message": "Yaw gain +$1 %"
     },
     "setupWizardGainButtonsRadio": {
-        "message": "EdgeTX: in the mix, set the trim switch (for example T1-) as its switch. Ethos: give the trim an action that sets the mix weight while it is pressed. The button pressed now is shown in bold."
+        "message": "On other radios, set up the same weights on a spare channel, with each trim button switching its own weight in. The button pressed now is shown in bold."
     },
     "setupWizardGainKnobText": {
         "message": "The knob sets cyclic and yaw master gain together, 50 % at one end, 150 % at the other and 100 % in the middle."
