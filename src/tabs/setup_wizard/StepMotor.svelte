@@ -10,6 +10,9 @@
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import motorState from "@/tabs/motors/state.svelte.js";
 
+  import HeliSide from "./HeliSide.svelte";
+  import MotorGearArt from "./MotorGearArt.svelte";
+
   const wiz = getContext("setupWizard");
 
   // The usual heli ESC protocols as tiles; anything else from the list.
@@ -61,8 +64,13 @@
   );
 </script>
 
-<p>{$i18n.t("setupWizardMotorIntro")}</p>
-<div class="note">{$i18n.t("setupWizardMotorPropsOff")}</div>
+<div class="with-art">
+  <div class="art"><HeliSide scene="bladesOff" /></div>
+  <div class="text">
+    <p>{$i18n.t("setupWizardMotorIntro")}</p>
+    <div class="note">{$i18n.t("setupWizardMotorPropsOff")}</div>
+  </div>
+</div>
 
 <section class="card">
   <h3><span class="num">1</span>{$i18n.t("motorsEscProtocol")}</h3>
@@ -104,7 +112,10 @@
 
 <section class="card">
   <h3><span class="num">2</span>{$i18n.t("setupWizardMotorRpmTitle")}</h3>
-  <p>{$i18n.t("setupWizardMotorRpmText")}</p>
+  <div class="with-art">
+    <div class="art"><MotorGearArt /></div>
+    <div class="text"><p>{$i18n.t("setupWizardMotorRpmText")}</p></div>
+  </div>
   <div class="fields">
     <span>{$i18n.t("motorsMotorPoles1Long")}</span>
     <NumberInput

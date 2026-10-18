@@ -10,6 +10,8 @@
   import { have_sensor } from "@/js/serial_backend.js";
   import AutoAlignWizard from "@/tabs/configuration/AutoAlignWizard.svelte";
 
+  import HeliSide from "./HeliSide.svelte";
+
   const wiz = getContext("setupWizard");
 
   let calibrating = $state(false);
@@ -83,7 +85,10 @@
   });
 </script>
 
-<p>{$i18n.t("setupWizardSensorsIntro")}</p>
+<div class="with-art">
+  <div class="art"><HeliSide scene="bladesOff" /></div>
+  <div class="text"><p>{$i18n.t("setupWizardSensorsIntro")}</p></div>
+</div>
 
 {#if !hasAcc}
   <div class="note">{$i18n.t("setupWizardSensorsNoAcc")}</div>
@@ -99,7 +104,10 @@
       </span>
     {/if}
   </h3>
-  <p>{$i18n.t("setupWizardSensorsAccText")}</p>
+  <div class="with-art">
+    <div class="art"><HeliSide scene="level" /></div>
+    <div class="text"><p>{$i18n.t("setupWizardSensorsAccText")}</p></div>
+  </div>
   <div class="actions">
     <button
       class="btn"
@@ -115,14 +123,19 @@
 
 <section class={["card", alignmentChanged && "complete"]}>
   <h3><span class="num">2</span>{$i18n.t("setupWizardSensorsAlignTitle")}</h3>
-  <p>{$i18n.t("setupWizardSensorsAlignText")}</p>
-  <span class="pill">
-    {$i18n.t("setupWizardSensorsAlignValues", {
-      1: FC.BOARD_ALIGNMENT_CONFIG.roll,
-      2: FC.BOARD_ALIGNMENT_CONFIG.pitch,
-      3: FC.BOARD_ALIGNMENT_CONFIG.yaw,
-    })}
-  </span>
+  <div class="with-art">
+    <div class="art"><HeliSide scene="tailLift" /></div>
+    <div class="text">
+      <p>{$i18n.t("setupWizardSensorsAlignText")}</p>
+      <span class="pill">
+        {$i18n.t("setupWizardSensorsAlignValues", {
+          1: FC.BOARD_ALIGNMENT_CONFIG.roll,
+          2: FC.BOARD_ALIGNMENT_CONFIG.pitch,
+          3: FC.BOARD_ALIGNMENT_CONFIG.yaw,
+        })}
+      </span>
+    </div>
+  </div>
   <div class="actions">
     <button
       class="btn"

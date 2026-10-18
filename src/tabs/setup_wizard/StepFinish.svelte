@@ -6,6 +6,7 @@
   import { i18n } from "@/js/i18n.js";
   import motorState from "@/tabs/motors/state.svelte.js";
 
+  import HeliSide from "./HeliSide.svelte";
   import { COLLECTIVE, PITCH, limitDegrees } from "./heli.js";
 
   const wiz = getContext("setupWizard");
@@ -69,7 +70,10 @@
   }
 </script>
 
-<p>{$i18n.t("setupWizardFinishIntro")}</p>
+<div class="with-art">
+  <div class="art"><HeliSide scene="flying" /></div>
+  <div class="text"><p>{$i18n.t("setupWizardFinishIntro")}</p></div>
+</div>
 
 <dl class="summary">
   {#each rows as row (row.label)}

@@ -6,6 +6,7 @@
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
+  import PitchArt from "./PitchArt.svelte";
   import {
     COLLECTIVE,
     PITCH,
@@ -120,9 +121,16 @@
       {$i18n.t(`setupWizardPitchTitle_${cal.key}`)}
       <span class="pill">{percent(cal).toFixed(1)} %</span>
     </h3>
-    <p>
-      {$i18n.t(`setupWizardPitchText_${cal.key}`, { 1: TEST_DEGREES })}
-    </p>
+    <div class="with-art">
+      <div class="art">
+        <PitchArt angle={TEST_DEGREES} label="{TEST_DEGREES}°" />
+      </div>
+      <div class="text">
+        <p>
+          {$i18n.t(`setupWizardPitchText_${cal.key}`, { 1: TEST_DEGREES })}
+        </p>
+      </div>
+    </div>
     <div class="actions">
       <button
         class={["btn", holding === cal.hold && "primary"]}

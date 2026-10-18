@@ -17,6 +17,8 @@
   import { RX_PROTOCOLS } from "@/tabs/receiver/protocols.js";
 
   import LiveBar from "./LiveBar.svelte";
+  import ReceiverArt from "./ReceiverArt.svelte";
+  import StickIcon from "./StickIcon.svelte";
   import { mapFromDetected, movedChannel } from "./heli.js";
 
   const wiz = getContext("setupWizard");
@@ -30,14 +32,18 @@
     (p) => p.feature === "RX_SERIAL" && !p.hide,
   );
 
-  // RC_MAP order. `hint` is the stick movement that should move the bar to
-  // the right.
+  // RC_MAP order. `move`: the stick movement that should move the bar to
+  // the right, drawn with StickIcon (x 1 right, y -1 forward or up).
   const FUNCTIONS = [
-    { key: "roll", label: "controlAxisRoll" },
-    { key: "pitch", label: "controlAxisPitch" },
-    { key: "yaw", label: "controlAxisYaw" },
-    { key: "collective", label: "controlAxisCollective" },
-    { key: "throttle", label: "controlAxisThrottle" },
+    { key: "roll", label: "controlAxisRoll", move: { x: 1, y: 0 } },
+    { key: "pitch", label: "controlAxisPitch", move: { x: 0, y: -1 } },
+    { key: "yaw", label: "controlAxisYaw", move: { x: 1, y: 0 } },
+    {
+      key: "collective",
+      label: "controlAxisCollective",
+      move: { x: 0, y: -1 },
+    },
+    { key: "throttle", label: "controlAxisThrottle", move: { x: 0, y: -1 } },
   ];
 
   // Detection asks for collective first: it is the stick most likely to be
@@ -286,7 +292,10 @@
   let readings = $derived(FUNCTIONS.map((fn, i) => ({ ...fn, ...reading(i) })));
 </script>
 
-<p>{$i18n.t("setupWizardReceiverIntro")}</p>
+<div class="with-art">
+  <div class="art"><ReceiverArt /></div>
+  <div class="text"><p>{$i18n.t("setupWizardReceiverIntro")}</p></div>
+</div>
 
 {#if !loading}
   <!-- 1 + 2: how the receiver is connected. -->
@@ -438,6 +447,7 @@
         <ol class="detect-steps">
           {#each DETECT_ORDER as fn, i (fn.key)}
             <li class={[i < active && "done", i === active && "active"]}>
+              <StickIcon x={fn.move.x} y={fn.move.y} />
               <span class="detect-text">
                 {$i18n.t(`setupWizardReceiverDetect_${fn.key}`)}
               </span>

@@ -8,6 +8,7 @@
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { bit_check } from "@/js/serial_backend";
 
+  import SwitchFlick from "./SwitchFlick.svelte";
   import { rangeForSwitch } from "./heli.js";
 
   // Click Assign, flick the switch: the wizard sees which AUX channel moved
@@ -169,9 +170,12 @@
   }
 </script>
 
-<div class="intro">
-  <p>{$i18n.t("setupWizardModesIntro")}</p>
-  <p class="muted">{$i18n.t("setupWizardModesHow")}</p>
+<div class="with-art">
+  <div class="art"><SwitchFlick /></div>
+  <div class="text">
+    <p>{$i18n.t("setupWizardModesIntro")}</p>
+    <p class="muted">{$i18n.t("setupWizardModesHow")}</p>
+  </div>
 </div>
 
 <div class="modes">

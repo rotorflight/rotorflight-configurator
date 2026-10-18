@@ -3,6 +3,8 @@
 
   import { i18n } from "@/js/i18n.js";
 
+  import GyroArt from "./GyroArt.svelte";
+
   // No overrides here: the stabilizer drives the swash (the PID runs while
   // disarmed too). On the ground the I-term decays, so the swash only
   // twitches against a brisk movement and then drifts back.
@@ -23,7 +25,10 @@
   {@const result = results[axis]}
   <section class={["card", result === true && "complete"]}>
     <h3>{$i18n.t(`setupWizardGyroTitle_${axis}`)}</h3>
-    <p>{$i18n.t(`setupWizardGyroText_${axis}`)}</p>
+    <div class="with-art">
+      <div class="art"><GyroArt {axis} /></div>
+      <div class="text"><p>{$i18n.t(`setupWizardGyroText_${axis}`)}</p></div>
+    </div>
     <div class="actions">
       <button
         class={["btn", result === true && "primary"]}

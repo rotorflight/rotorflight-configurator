@@ -4,6 +4,8 @@
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
+  import PitchArt from "./PitchArt.svelte";
+  import SwashArt from "./SwashArt.svelte";
   import { COLLECTIVE, PITCH, ROLL } from "./heli.js";
 
   const wiz = getContext("setupWizard");
@@ -36,12 +38,20 @@
   }
 </script>
 
-<div class="intro">
-  <p>{$i18n.t("setupWizardLevelIntro")}</p>
-  <ol class="muted">
-    <li>{$i18n.t("setupWizardLevelTipLinks")}</li>
-    <li>{$i18n.t("setupWizardLevelTipPitch")}</li>
-  </ol>
+<p>{$i18n.t("setupWizardLevelIntro")}</p>
+<div class="tips">
+  <div class="with-art">
+    <div class="art"><SwashArt scene="level" /></div>
+    <div class="text">
+      <p class="muted">{$i18n.t("setupWizardLevelTipLinks")}</p>
+    </div>
+  </div>
+  <div class="with-art">
+    <div class="art"><PitchArt angle={0} label="0°" /></div>
+    <div class="text">
+      <p class="muted">{$i18n.t("setupWizardLevelTipPitch")}</p>
+    </div>
+  </div>
 </div>
 
 <section class="card">
@@ -77,9 +87,9 @@
     min-width: 2.5rem;
   }
 
-  ol {
-    margin: 0;
-    padding-left: 1.4em;
+  .tips {
+    display: grid;
+    gap: 12px;
   }
 
   .trims {

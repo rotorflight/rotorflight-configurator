@@ -4,6 +4,7 @@
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
+  import ServoArmArt from "./ServoArmArt.svelte";
   import { servoRaw } from "./heli.js";
 
   const wiz = getContext("setupWizard");
@@ -64,13 +65,16 @@
   }
 </script>
 
-<div class="intro">
-  <p>{$i18n.t("setupWizardServosIntro")}</p>
-  <ol class="muted">
-    <li>{$i18n.t("setupWizardServosTipArms")}</li>
-    <li>{$i18n.t("setupWizardServosTipDirection")}</li>
-    <li>{$i18n.t("setupWizardServosTipCentre")}</li>
-  </ol>
+<div class="with-art">
+  <div class="art"><ServoArmArt /></div>
+  <div class="text">
+    <p>{$i18n.t("setupWizardServosIntro")}</p>
+    <ol class="muted">
+      <li>{$i18n.t("setupWizardServosTipArms")}</li>
+      <li>{$i18n.t("setupWizardServosTipDirection")}</li>
+      <li>{$i18n.t("setupWizardServosTipCentre")}</li>
+    </ol>
+  </div>
 </div>
 
 {#if wiz.servos.length === 0}
