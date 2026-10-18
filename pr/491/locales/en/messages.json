@@ -1006,6 +1006,9 @@
     "setupWizardMainMotorSafe": {
         "message": "Main blades off, and the helicopter held down with hands clear of the head and gears."
     },
+    "setupWizardMainMotorWarning": {
+        "message": "The motor really runs, up to $1 %. Take the main blades off and hold the helicopter down, hands clear of the head and gears."
+    },
     "setupWizardMainMotorSpeed": {
         "message": "Test speed"
     },
