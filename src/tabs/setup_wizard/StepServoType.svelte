@@ -5,7 +5,9 @@
   import { i18n } from "@/js/i18n.js";
 
   import PulseTrain from "./PulseTrain.svelte";
+  import RebootLater from "./RebootLater.svelte";
   import ServoArt from "./ServoArt.svelte";
+  import TabButton from "./TabButton.svelte";
 
   const wiz = getContext("setupWizard");
 
@@ -55,7 +57,10 @@
     const type = TYPES.find((t) => t.key === key);
     for (const s of groupServos(kind)) {
       const config = FC.SERVO_CONFIG[s.servo];
-      if (config.rate !== type.rate) rebootNeeded = true;
+      if (config.rate !== type.rate) {
+        rebootNeeded = true;
+        wiz.requestReboot();
+      }
       config.rate = type.rate;
       if (bandOf(config) !== type.band) {
         const band = BANDS[type.band];
@@ -129,27 +134,11 @@
 <p class="muted">{$i18n.t("setupWizardServoTypeCheckMaker")}</p>
 
 {#if rebootNeeded}
-  <div class="callout">
-    <i class="fas fa-sync-alt" aria-hidden="true"></i>
-    <span>{$i18n.t("setupWizardRebootNeeded")}</span>
-    <button class="btn primary" onclick={wiz.saveAndReboot}>
-      {$i18n.t("buttonSaveReboot")}
-    </button>
-  </div>
+  <RebootLater />
 {/if}
 
 <div>
-  <button class="btn" onclick={() => wiz.openTab("servos")}>
+  <TabButton tab="servos">
     {$i18n.t("setupWizardOpenServos")}
-  </button>
+  </TabButton>
 </div>
-
-<style lang="scss">
-  .btn {
-    @extend %button;
-  }
-
-  .btn.primary {
-    @extend %button-primary;
-  }
-</style>

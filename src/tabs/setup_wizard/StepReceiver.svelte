@@ -19,6 +19,7 @@
   import LiveBar from "./LiveBar.svelte";
   import ReceiverArt from "./ReceiverArt.svelte";
   import StickIcon from "./StickIcon.svelte";
+  import TabButton from "./TabButton.svelte";
   import { mapFromDetected, movedChannel } from "./heli.js";
 
   const wiz = getContext("setupWizard");
@@ -492,9 +493,9 @@
 {/if}
 
 <div>
-  <button class="btn" onclick={() => wiz.openTab("receiver")}>
+  <TabButton tab="receiver">
     {$i18n.t("setupWizardOpenReceiver")}
-  </button>
+  </TabButton>
 </div>
 
 <style lang="scss">

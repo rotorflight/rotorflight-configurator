@@ -7,6 +7,7 @@
   import motorState from "@/tabs/motors/state.svelte.js";
 
   import HeliSide from "./HeliSide.svelte";
+  import TabButton from "./TabButton.svelte";
   import { COLLECTIVE, PITCH, limitDegrees } from "./heli.js";
 
   const wiz = getContext("setupWizard");
@@ -101,19 +102,15 @@
   <h3>{$i18n.t("setupWizardFinishNextTitle")}</h3>
   <ul>
     <li>{$i18n.t("setupWizardFinishNextGovernor")}</li>
-    <li>{$i18n.t("setupWizardFinishNextFailsafe")}</li>
     <li>{$i18n.t("setupWizardFinishNextProfiles")}</li>
   </ul>
   <div class="actions">
-    <button class="btn" onclick={() => wiz.openTab("governor")}>
+    <TabButton tab="governor">
       {$i18n.t("tabGovernor")}
-    </button>
-    <button class="btn" onclick={() => wiz.openTab("failsafe")}>
-      {$i18n.t("tabFailsafe")}
-    </button>
-    <button class="btn" onclick={() => wiz.openTab("profiles")}>
+    </TabButton>
+    <TabButton tab="profiles">
       {$i18n.t("tabProfiles")}
-    </button>
+    </TabButton>
   </div>
 </section>
 

@@ -9,6 +9,7 @@
   import { bit_check } from "@/js/serial_backend";
 
   import SwitchFlick from "./SwitchFlick.svelte";
+  import TabButton from "./TabButton.svelte";
   import { rangeForSwitch } from "./heli.js";
 
   // Click Assign, flick the switch: the wizard sees which AUX channel moved
@@ -16,13 +17,12 @@
   const wiz = getContext("setupWizard");
 
   // Permanent box IDs (rotorflight-firmware msp/msp_box.c). ARM is the
-  // only one the heli can't fly without. RESCUE needs an accelerometer, so
-  // the FC only reports it on a board with one.
+  // only one the heli can't fly without. RESCUE and TRAINER need an
+  // accelerometer, so the FC only reports them on a board with one.
   const MODES = [
     { id: 0, key: "arm", name: "ARM", icon: "fa-power-off", required: true },
     { id: 53, key: "rescue", name: "RESCUE", icon: "fa-life-ring" },
-    { id: 13, key: "beeper", name: "BEEPER", icon: "fa-volume-up" },
-    { id: 26, key: "blackbox", name: "BLACKBOX", icon: "fa-video" },
+    { id: 47, key: "trainer", name: "TRAINER", icon: "fa-graduation-cap" },
   ];
 
   // Only the modes this FC offers.
@@ -225,9 +225,9 @@
 </div>
 
 <div>
-  <button class="btn" onclick={() => wiz.openTab("auxiliary")}>
+  <TabButton tab="auxiliary">
     {$i18n.t("setupWizardOpenModes")}
-  </button>
+  </TabButton>
 </div>
 
 <style lang="scss">

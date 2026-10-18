@@ -12,6 +12,8 @@
 
   import HeliSide from "./HeliSide.svelte";
   import MotorGearArt from "./MotorGearArt.svelte";
+  import RebootLater from "./RebootLater.svelte";
+  import TabButton from "./TabButton.svelte";
 
   const wiz = getContext("setupWizard");
 
@@ -36,6 +38,7 @@
   function markChanged() {
     changed = true;
     wiz.markChanged();
+    wiz.requestReboot();
   }
 
   let protocols = $derived(
@@ -168,30 +171,16 @@
 </section>
 
 {#if changed}
-  <div class="callout">
-    <i class="fas fa-sync-alt" aria-hidden="true"></i>
-    <span>{$i18n.t("setupWizardRebootNeeded")}</span>
-    <button class="btn primary" onclick={wiz.saveAndReboot}>
-      {$i18n.t("buttonSaveReboot")}
-    </button>
-  </div>
+  <RebootLater />
 {/if}
 
 <div>
-  <button class="btn" onclick={() => wiz.openTab("motors")}>
+  <TabButton tab="motors">
     {$i18n.t("setupWizardOpenMotors")}
-  </button>
+  </TabButton>
 </div>
 
 <style lang="scss">
-  .btn {
-    @extend %button;
-  }
-
-  .btn.primary {
-    @extend %button-primary;
-  }
-
   .fields {
     display: grid;
     grid-template-columns: auto 12rem auto;

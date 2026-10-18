@@ -7,6 +7,7 @@
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
+  import RebootLater from "./RebootLater.svelte";
   import RotorDirArt from "./RotorDirArt.svelte";
   import TailArt from "./TailArt.svelte";
   import { YAW } from "./heli.js";
@@ -53,6 +54,11 @@
   // Swash type and tail mode only take effect after a reboot.
   let rebootNeeded = $state(false);
 
+  function needReboot() {
+    rebootNeeded = true;
+    wiz.requestReboot();
+  }
+
   function swashLabel(type) {
     return $i18n.t(Mixer.swashTypes[type]).replaceAll("&deg;", "°");
   }
@@ -60,7 +66,7 @@
   function setSwashType(type) {
     if (FC.MIXER_CONFIG.swash_type === type) return;
     FC.MIXER_CONFIG.swash_type = type;
-    rebootNeeded = true;
+    needReboot();
     wiz.sendMixerConfig();
   }
 
@@ -78,7 +84,7 @@
     const input = FC.MIXER_INPUTS[YAW];
     const sign = input.rate < 0 ? -1 : 1;
     input.rate = sign * (value === Mixer.TAIL_MODE_VARIABLE ? 250 : 1000);
-    rebootNeeded = true;
+    needReboot();
     wiz.sendMixerConfig();
     wiz.sendMixerInput(YAW);
   }
@@ -170,24 +176,10 @@
 </section>
 
 {#if rebootNeeded}
-  <div class="callout">
-    <i class="fas fa-sync-alt" aria-hidden="true"></i>
-    <span>{$i18n.t("setupWizardRebootNeeded")}</span>
-    <button class="btn primary" onclick={wiz.saveAndReboot}>
-      {$i18n.t("buttonSaveReboot")}
-    </button>
-  </div>
+  <RebootLater />
 {/if}
 
 <style lang="scss">
-  .btn {
-    @extend %button;
-  }
-
-  .btn.primary {
-    @extend %button-primary;
-  }
-
   .type-row {
     display: flex;
     flex-wrap: wrap;

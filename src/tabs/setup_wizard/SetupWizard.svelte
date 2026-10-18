@@ -20,6 +20,7 @@
   import { mspHelper } from "@/js/msp/MSPHelper.js";
   import { bit_check, reinitialiseConnection } from "@/js/serial_backend";
 
+  import StepConnect from "./StepConnect.svelte";
   import StepDirection from "./StepDirection.svelte";
   import StepEscTelemetry from "./StepEscTelemetry.svelte";
   import StepFinish from "./StepFinish.svelte";
@@ -34,31 +35,41 @@
   import StepServos from "./StepServos.svelte";
   import StepSwash from "./StepSwash.svelte";
   import StepTail from "./StepTail.svelte";
+  import StepThrottle from "./StepThrottle.svelte";
   import { STABILIZED_AXES, missingServos, wizardServos } from "./heli.js";
 
-  // Order is the procedure of the "Servo Setup" and "Mixer Setup" docs
-  // pages: each step relies on the ones before it (the swash type says
-  // which servo is which, servos are centred before the swash is levelled,
-  // the swash is levelled before the pitch is measured).
+  // Order follows how the helicopter is put together. First everything that
+  // is only typed in, with the servos unplugged, so their type and frame
+  // rate are on the FC before anything powers them. Then the gate, which
+  // does the one reboot those settings need. Then the bench work, in the
+  // order of the "Servo Setup" and "Mixer Setup" docs pages: each step
+  // relies on the ones before it (servos are centred before the swash is
+  // levelled, the swash is levelled before the pitch is measured).
   const STEPS = [
     { key: "sensors", component: StepSensors },
-    // Before anything that uses the sticks.
+    // Before anything that uses the sticks. Reboots by itself, as the
+    // signal check needs the new port and protocol.
     { key: "receiver", component: StepReceiver },
+    // Assigned while the radio is in hand; armed only in the Finish step.
+    { key: "modes", component: StepModes },
     { key: "swash", component: StepSwash },
-    // Set before the servos are connected.
     { key: "servoType", component: StepServoType },
+    { key: "motor", component: StepMotor },
+    { key: "connect", component: StepConnect, gate: true },
+    // Battery off at the start, on at the end.
+    { key: "throttle", component: StepThrottle },
+    // Optional: skipped with Next when the ESC has no telemetry. Needs the
+    // ESC powered to check it.
+    { key: "escTelemetry", component: StepEscTelemetry },
     { key: "servos", component: StepServos },
     { key: "direction", component: StepDirection },
     { key: "level", component: StepLevel },
     { key: "pitch", component: StepPitch },
     { key: "tail", component: StepTail },
-    { key: "motor", component: StepMotor },
-    // Optional: skipped with Next when the ESC has no telemetry.
-    { key: "escTelemetry", component: StepEscTelemetry },
     { key: "gyro", component: StepGyro },
-    { key: "modes", component: StepModes },
     { key: "finish", component: StepFinish },
   ];
+  const GATE_INDEX = STEPS.findIndex((s) => s.gate);
 
   const STEP_STORAGE_KEY = "setupWizardStep";
   const PWM_SERVO_SLOTS = 8;
@@ -71,6 +82,10 @@
   let pending = $state(false);
   let saving = $state(false);
   let armed = $state(false);
+  // Set by the steps before the gate whose settings only apply after a
+  // reboot; the gate does it once for all of them. Any reboot reloads the
+  // tab, which clears it.
+  let rebootPending = $state(false);
   let commitFn = null;
   let leaveFn = null;
   let snapshot = null;
@@ -337,6 +352,7 @@
     releaseAll();
     await save();
     storeStep(stepIndex);
+    rebootPending = false;
     // A virtual FC doesn't reboot or reconnect, so nothing would use it.
     if (!CONFIGURATOR.virtualMode) GUI.tabAfterReboot = "setup_wizard";
     MSP.send_message(MSPCodes.MSP_SET_REBOOT);
@@ -396,8 +412,15 @@
     get saving() {
       return saving;
     },
+    get rebootPending() {
+      return rebootPending;
+    },
     save,
     saveAndReboot,
+    // A setting that only applies after a reboot, left for the gate.
+    requestReboot() {
+      rebootPending = true;
+    },
     holdMixer,
     passthroughMixer,
     releaseMixer,
@@ -440,7 +463,15 @@
     storeStep(index);
   }
 
+  let rebootOnNext = $derived(STEPS[stepIndex].gate && rebootPending);
+
+  // The gate reboots and reopens on itself: the servos are plugged in only
+  // once the FC runs their new frame rate.
   async function next() {
+    if (rebootOnNext) {
+      await saveAndReboot();
+      return;
+    }
     if (pending) {
       await save();
     }
@@ -516,6 +547,14 @@
           })}
         </div>
       {/if}
+      {#if rebootPending && stepIndex > GATE_INDEX}
+        <div class="banner warn">
+          {$i18n.t("setupWizardRebootSkipped")}
+          <button class="btn" onclick={() => goTo(GATE_INDEX)}>
+            {$i18n.t(`setupWizardStep_${STEPS[GATE_INDEX].key}`)}
+          </button>
+        </div>
+      {/if}
       {#if busActive}
         <div class="banner">{$i18n.t("setupWizardBusServos")}</div>
       {/if}
@@ -565,9 +604,11 @@
               <span class="unsaved">{$i18n.t("setupWizardUnsaved")}</span>
             {/if}
             <button class="btn primary" disabled={saving} onclick={next}>
-              {pending
-                ? $i18n.t("setupWizardSaveNext")
-                : $i18n.t("setupWizardNext")}
+              {rebootOnNext
+                ? $i18n.t("setupWizardRebootNext")
+                : pending
+                  ? $i18n.t("setupWizardSaveNext")
+                  : $i18n.t("setupWizardNext")}
               <i class="fas fa-arrow-right" aria-hidden="true"></i>
             </button>
           {/if}
@@ -749,6 +790,10 @@
   }
 
   .banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
     padding: 10px 14px;
     border-radius: var(--radius-sm);
     background-color: var(--color-surface);
