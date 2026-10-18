@@ -1,0 +1,8 @@
+{
+  "number": 492,
+  "branch": "fix/esc-4way-msp-retry",
+  "title": "Fix ESC 4-way target select timing out and dropping web serial",
+  "url": "https://github.com/rotorflight/rotorflight-configurator/pull/492",
+  "draft": false,
+  "date": "2026-10-18T11:37:05Z"
+}
