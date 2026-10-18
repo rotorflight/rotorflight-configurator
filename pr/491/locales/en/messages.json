@@ -1001,10 +1001,16 @@
         "message": "Spin test"
     },
     "setupWizardMainMotorText": {
-        "message": "Hold the button: the motor runs slowly ($1 %) and stops when you let go. Check that it starts smoothly and that the rotor head turns $2, seen from above. If it turns the wrong way, swap two motor wires or reverse it on the ESC."
+        "message": "Hold the button: the motor runs at the speed set below and stops when you let go. The output rises 25 % a second, so keep holding. Some ESCs only start at 30–40 %: if the motor doesn't start, raise the speed a few % at a time. Check that it starts smoothly and that the rotor head turns $1, seen from above. If it turns the wrong way, swap two motor wires or reverse it on the ESC."
     },
     "setupWizardMainMotorSafe": {
         "message": "Main blades off, and the helicopter held down with hands clear of the head and gears."
+    },
+    "setupWizardMainMotorSpeed": {
+        "message": "Test speed"
+    },
+    "setupWizardMainMotorOutput": {
+        "message": "Output: $1 %"
     },
     "setupWizardMainMotorAfterCal": {
         "message": "Calibrate the ESC first."
