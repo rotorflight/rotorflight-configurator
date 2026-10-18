@@ -780,6 +780,30 @@
       gap: 8px;
     }
 
+    /* A picture beside its text: <div class="with-art"><div class="art">
+       ...</div><div class="text">...</div></div>. */
+    .with-art {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 24px;
+
+      > .art {
+        flex: 0 0 auto;
+        width: 150px;
+        display: flex;
+        justify-content: center;
+      }
+
+      > .text {
+        flex: 1 1 280px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 0;
+      }
+    }
+
     .muted {
       color: var(--color-text-soft);
       font-size: 0.9em;

@@ -7,6 +7,8 @@
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
+  import RotorDirArt from "./RotorDirArt.svelte";
+  import TailArt from "./TailArt.svelte";
   import { YAW } from "./heli.js";
 
   const wiz = getContext("setupWizard");
@@ -23,24 +25,27 @@
   ];
 
   const ROTOR_DIRECTIONS = [
-    { value: 0, label: "mixerClockwise" },
-    { value: 1, label: "mixerCounterClockwise" },
+    { value: 0, label: "mixerClockwise", art: "cw" },
+    { value: 1, label: "mixerCounterClockwise", art: "ccw" },
   ];
 
   const TAIL_MODES = [
     {
       value: Mixer.TAIL_MODE_VARIABLE,
       label: "mixerTailVariablePitch",
+      art: "servo",
       help: "setupWizardSwashTailHelp_variable",
     },
     {
       value: Mixer.TAIL_MODE_MOTORIZED,
       label: "mixerTailMotorized",
+      art: "motor",
       help: "setupWizardSwashTailHelp_motorised",
     },
     {
       value: Mixer.TAIL_MODE_BIDIRECTIONAL,
       label: "mixerTailBidirectional",
+      art: "bidirectional",
       help: "setupWizardSwashTailHelp_bidirectional",
     },
   ];
@@ -127,12 +132,12 @@
         class={["tile", selected && "selected"]}
         onclick={() => setRotorDirection(dir.value)}
       >
+        <RotorDirArt dir={dir.art} />
         <span class="tile-name">
-          <i
-            class={["fas", dir.value === 0 ? "fa-redo" : "fa-undo"]}
-            aria-hidden="true"
-          ></i>
           {$i18n.t(dir.label)}
+          {#if selected}
+            <i class="fas fa-check-circle" aria-hidden="true"></i>
+          {/if}
         </span>
       </button>
     {/each}
@@ -151,6 +156,7 @@
         class={["tile", selected && "selected"]}
         onclick={() => setTailMode(mode.value)}
       >
+        <TailArt kind={mode.art} />
         <span class="tile-name">
           {$i18n.t(mode.label)}
           {#if selected}

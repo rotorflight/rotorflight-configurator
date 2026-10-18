@@ -4,6 +4,9 @@
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
 
+  import PulseTrain from "./PulseTrain.svelte";
+  import ServoArt from "./ServoArt.svelte";
+
   const wiz = getContext("setupWizard");
 
   // Centre pulse and frame rate. A narrow band servo (760 us centre) needs
@@ -67,8 +70,13 @@
   }
 </script>
 
-<p>{$i18n.t("setupWizardServoTypeIntro")}</p>
-<div class="note">{$i18n.t("setupWizardServoTypeDisconnect")}</div>
+<div class="with-art">
+  <div class="art"><ServoArt /></div>
+  <div class="text">
+    <p>{$i18n.t("setupWizardServoTypeIntro")}</p>
+    <div class="note">{$i18n.t("setupWizardServoTypeDisconnect")}</div>
+  </div>
+</div>
 
 {#each GROUPS as group (group.kind)}
   {@const servos = groupServos(group.kind)}
@@ -94,6 +102,7 @@
                 <i class="fas fa-check-circle" aria-hidden="true"></i>
               {/if}
             </span>
+            <PulseTrain rate={type.rate} width={BANDS[type.band].mid} />
             <span class="pill">{BANDS[type.band].mid} µs · {type.rate} Hz</span>
             <span class="muted">
               {$i18n.t(`setupWizardServoTypeHelp_${type.key}`)}

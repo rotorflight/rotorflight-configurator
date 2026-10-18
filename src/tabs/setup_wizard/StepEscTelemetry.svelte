@@ -15,6 +15,8 @@
   import EscWiringDetectWizard from "@/tabs/motors/EscWiringDetectWizard.svelte";
   import motorState from "@/tabs/motors/state.svelte.js";
 
+  import EscArt from "./EscArt.svelte";
+
   const wiz = getContext("setupWizard");
 
   const ESC_SENSOR_FUNCTION = 1024;
@@ -164,7 +166,10 @@
   );
 </script>
 
-<p>{$i18n.t("setupWizardEscIntro")}</p>
+<div class="with-art">
+  <div class="art"><EscArt /></div>
+  <div class="text"><p>{$i18n.t("setupWizardEscIntro")}</p></div>
+</div>
 
 <section class="card">
   <h3><span class="num">1</span>{$i18n.t("motorsEscTelemetryProtocol")}</h3>

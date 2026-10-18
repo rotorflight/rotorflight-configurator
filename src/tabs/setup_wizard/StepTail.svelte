@@ -3,12 +3,14 @@
 
   import NumberInput from "@/components/NumberInput.svelte";
 
+  import { Mixer } from "@/js/Mixer.js";
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import { MSP } from "@/js/msp.svelte.js";
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
 
   import LiveBar from "./LiveBar.svelte";
+  import TailArt from "./TailArt.svelte";
   import { YAW, limitDegrees, limitRaw, tailRaw } from "./heli.js";
 
   const wiz = getContext("setupWizard");
@@ -99,7 +101,16 @@
 </script>
 
 {#if wiz.motorised}
-  <p>{$i18n.t("setupWizardTailMotorIntro")}</p>
+  <div class="with-art">
+    <div class="art">
+      <TailArt
+        kind={FC.MIXER_CONFIG.tail_rotor_mode === Mixer.TAIL_MODE_BIDIRECTIONAL
+          ? "bidirectional"
+          : "motor"}
+      />
+    </div>
+    <div class="text"><p>{$i18n.t("setupWizardTailMotorIntro")}</p></div>
+  </div>
   <section class="card">
     <h3>{$i18n.t("mixerTailMotorIdle")}</h3>
     <p class="muted">{$i18n.t("mixerTailMotorIdleHelp")}</p>
@@ -113,7 +124,10 @@
     </button>
   </div>
 {:else}
-  <p>{$i18n.t("setupWizardTailIntro")}</p>
+  <div class="with-art">
+    <div class="art"><TailArt kind="servo" /></div>
+    <div class="text"><p>{$i18n.t("setupWizardTailIntro")}</p></div>
+  </div>
 
   <section class="card">
     <h3><span class="num">1</span>{$i18n.t("setupWizardTailCentreTitle")}</h3>
@@ -145,7 +159,10 @@
         <span class="badge warn">{$i18n.t("mixerDirectionReverse")}</span>
       {/if}
     </h3>
-    <p>{$i18n.t("setupWizardTailDirectionText")}</p>
+    <div class="with-art">
+      <div class="art"><TailArt kind="servo" move /></div>
+      <div class="text"><p>{$i18n.t("setupWizardTailDirectionText")}</p></div>
+    </div>
     <div class="actions">
       <button
         class={["btn", hold === "passthrough" && "primary"]}

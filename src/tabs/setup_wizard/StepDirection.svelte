@@ -7,6 +7,7 @@
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
 
   import LiveBar from "./LiveBar.svelte";
+  import SwashArt from "./SwashArt.svelte";
   import { COLLECTIVE, PITCH, ROLL } from "./heli.js";
 
   const wiz = getContext("setupWizard");
@@ -74,11 +75,16 @@
         <span class="badge warn">{$i18n.t("mixerDirectionReverse")}</span>
       {/if}
     </h3>
-    <div class="stick">
-      <span class="muted">{$i18n.t("setupWizardDirectionStick")}</span>
-      <LiveBar f={(FC.RC_COMMAND[check.command] ?? 0) / 500} />
+    <div class="with-art">
+      <div class="art"><SwashArt scene={check.key} /></div>
+      <div class="text">
+        <p>{$i18n.t(`setupWizardDirectionText_${check.key}`)}</p>
+        <div class="stick">
+          <span class="muted">{$i18n.t("setupWizardDirectionStick")}</span>
+          <LiveBar f={(FC.RC_COMMAND[check.command] ?? 0) / 500} />
+        </div>
+      </div>
     </div>
-    <p>{$i18n.t(`setupWizardDirectionText_${check.key}`)}</p>
     <div class="actions">
       <button
         class={["btn", result === true && "primary"]}
