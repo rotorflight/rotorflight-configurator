@@ -1,8 +1,6 @@
 <script>
   import { getContext, onDestroy, onMount } from "svelte";
 
-  import NumberInput from "@/components/NumberInput.svelte";
-
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
   import { MSP } from "@/js/msp.svelte.js";
@@ -17,8 +15,6 @@
     AUX_IN_8_CHANNELS,
     CONTROL_CHANNELS,
     GAIN_BUTTONS,
-    GAIN_MAX,
-    GAIN_MIN,
     GAIN_STEP,
     MAX_PROFILE_POSITIONS,
     buttonAt,
@@ -36,12 +32,12 @@
   } from "./adjust.js";
   import { movedChannel } from "./heli.js";
 
-  // One switch picks the PID profile (and, by default, the rate profile),
-  // and master gain follows it, since the firmware stores master gain per
-  // PID profile. That fits an 8-channel link (ARM, profile, rescue/trainer
-  // on CH6-8). Master gain on the trim buttons or a knob needs a channel of
-  // its own. Ranges are sent as soon as they are set, so the switch works
-  // on the bench straight away; Save writes them to EEPROM.
+  // One switch picks the PID profile (and, by default, the rate profile).
+  // That fits an 8-channel link (ARM, profile, rescue/trainer on CH6-8).
+  // Master gain in flight, for finding the right gain, takes the trim
+  // buttons or a knob on a channel of its own. Ranges are sent as soon as
+  // they are set, so the switch works on the bench straight away; Save
+  // writes them to EEPROM.
   const wiz = getContext("setupWizard");
 
   const LISTEN_MS = 20000;
@@ -82,7 +78,6 @@
       if (!stopped) pollTimer = setTimeout(poll, POLL_MS);
     }
     poll();
-    loadGains();
   });
 
   onDestroy(() => {
@@ -199,7 +194,6 @@
     if (profiles === "both") {
       await writeRange(profileRange(ADJ.RATE_PROFILE, aux, found));
     }
-    loadGains();
   }
 
   let pidRange = $derived(rangeOf(ranges, ADJ.PID_PROFILE));
@@ -236,60 +230,6 @@
     return gain === "knob" && range && gainPosition
       ? mappedValue(range, gainPosition)
       : null;
-  });
-
-  // Master gain per profile: read once, written by the step's save. Each
-  // profile is selected in turn, then the active one again.
-  let gains = $state([]);
-  let gainsChanged = false;
-  let gainsLoaded = $state(false);
-
-  async function eachProfile(count, fn) {
-    await MSP.promise(MSPCodes.MSP_STATUS);
-    const active = FC.CONFIG.profile;
-    for (let p = 0; p < count; p++) {
-      await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [p]);
-      await MSP.promise(MSPCodes.MSP_PID_PROFILE);
-      await fn(p);
-    }
-    await MSP.promise(MSPCodes.MSP_SELECT_SETTING, [active]);
-    await MSP.promise(MSPCodes.MSP_STATUS);
-    await MSP.promise(MSPCodes.MSP_PID_PROFILE);
-  }
-
-  async function loadGains() {
-    const count = Math.max(
-      1,
-      rangeOf(FC.ADJUSTMENT_RANGES ?? [], ADJ.PID_PROFILE)?.adjMax ?? 1,
-    );
-    const read = [];
-    await eachProfile(count, async () => {
-      read.push({
-        cyclic: FC.PID_PROFILE.cyclicMasterGain,
-        yaw: FC.PID_PROFILE.yawMasterGain,
-      });
-    });
-    gains = read;
-    gainsChanged = false;
-    gainsLoaded = FC.PID_PROFILE.hasMasterGain === true;
-  }
-
-  function changeGain() {
-    gainsChanged = true;
-    wiz.markChanged();
-  }
-
-  wiz.setCommit(async () => {
-    if (!gainsChanged) return;
-    await eachProfile(gains.length, async (p) => {
-      FC.PID_PROFILE.cyclicMasterGain = gains[p].cyclic;
-      FC.PID_PROFILE.yawMasterGain = gains[p].yaw;
-      await MSP.promise(
-        MSPCodes.MSP_SET_PID_PROFILE,
-        mspHelper.crunch(MSPCodes.MSP_SET_PID_PROFILE),
-      );
-    });
-    gainsChanged = false;
   });
 
   //// Channels: the link's count, and what each AUX channel does.
@@ -429,7 +369,7 @@
 <section class="card">
   <h3><span class="num">2</span>{$i18n.t("setupWizardProfilesGainTitle")}</h3>
   <div class="tiles" role="radiogroup">
-    {#each ["profile", "buttons", "knob"] as value (value)}
+    {#each ["buttons", "knob", "none"] as value (value)}
       <button
         type="button"
         role="radio"
@@ -448,33 +388,7 @@
     {/each}
   </div>
 
-  {#if gain === "profile"}
-    {#if !gainsLoaded}
-      <p class="muted">{$i18n.t("setupWizardGainNoFirmware")}</p>
-    {:else}
-      <p>{$i18n.t("setupWizardGainProfileText")}</p>
-      <div class="gains">
-        <span></span>
-        <span class="muted">{$i18n.t("setupWizardGainCyclic")}</span>
-        <span class="muted">{$i18n.t("setupWizardGainYaw")}</span>
-        {#each gains as g, p (p)}
-          <span>{$i18n.t("setupWizardGainProfile", { 1: p + 1 })}</span>
-          <NumberInput
-            min={GAIN_MIN}
-            max={GAIN_MAX}
-            bind:value={g.cyclic}
-            onchange={changeGain}
-          />
-          <NumberInput
-            min={GAIN_MIN}
-            max={GAIN_MAX}
-            bind:value={g.yaw}
-            onchange={changeGain}
-          />
-        {/each}
-      </div>
-    {/if}
-  {:else}
+  {#if gain !== "none"}
     {#if channelCount > 0 && channelCount <= CONTROL_CHANNELS + AUX_IN_8_CHANNELS}
       <div class="note">
         {$i18n.t("setupWizardGainNeedsChannel", { 1: channelCount })}
@@ -593,17 +507,12 @@
     @extend %button-primary;
   }
 
-  .gains,
   .buttons-table {
     display: grid;
-    grid-template-columns: auto 8rem 8rem;
+    grid-template-columns: auto auto auto;
     justify-content: start;
     align-items: center;
     gap: 6px 12px;
-  }
-
-  .buttons-table {
-    grid-template-columns: auto auto auto;
     margin: 6px 0 10px;
   }
 

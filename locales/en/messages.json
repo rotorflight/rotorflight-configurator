@@ -497,7 +497,7 @@
         "message": "Mode switches"
     },
     "setupWizardStep_profiles": {
-        "message": "Profile switch"
+        "message": "Profiles & gain"
     },
     "setupWizardStep_finish": {
         "message": "Finish"
@@ -1160,10 +1160,10 @@
         "message": "On an 8-channel radio, channels 1–5 are the sticks and throttle, which leaves three switches: ARM on CH 6, the profile switch on CH 7 (next step), and Rescue and Trainer on two positions of one 3-position switch on CH 8."
     },
     "setupWizardProfilesIntro": {
-        "message": "One switch picks the flight profile: the PID profile, and with it the rates and the master gain. Press Assign, then move the switch through every position."
+        "message": "One switch picks the flight profile: the PID profile, and with it the rates. Press Assign, then move the switch through every position."
     },
     "setupWizardProfilesFit8": {
-        "message": "This fits an 8-channel radio: master gain follows the profile switch, so it needs no channel of its own."
+        "message": "The profile switch fits an 8-channel radio. Adjusting master gain in flight needs a channel of its own."
     },
     "setupWizardProfilesFull": {
         "message": "Every adjustment slot is in use. Free one on the Adjustments tab."
@@ -1219,11 +1219,11 @@
     "setupWizardProfilesGainTitle": {
         "message": "Master gain in flight"
     },
-    "setupWizardGain_profile": {
-        "message": "With the profile switch"
+    "setupWizardGain_none": {
+        "message": "Not used"
     },
-    "setupWizardGainHelp_profile": {
-        "message": "Each profile has its own master gain. Fits an 8-channel radio."
+    "setupWizardGainHelp_none": {
+        "message": "Master gain stays as it is. Find it later in flight, or on the Profiles tab."
     },
     "setupWizardGain_buttons": {
         "message": "Trim buttons"
@@ -1236,21 +1236,6 @@
     },
     "setupWizardGainHelp_knob": {
         "message": "A knob or slider sets the gain, on a spare channel."
-    },
-    "setupWizardGainNoFirmware": {
-        "message": "This firmware has no master gain."
-    },
-    "setupWizardGainProfileText": {
-        "message": "The master gain for each profile, in %. 100 % flies the PID gains as they are."
-    },
-    "setupWizardGainCyclic": {
-        "message": "Cyclic"
-    },
-    "setupWizardGainYaw": {
-        "message": "Yaw"
-    },
-    "setupWizardGainProfile": {
-        "message": "Profile $1"
     },
     "setupWizardGainNeedsChannel": {
         "message": "Your radio sends $1 channels. This needs a channel beyond the sticks, ARM, the profile switch and Rescue/Trainer, so it fits only if one of those is not used."

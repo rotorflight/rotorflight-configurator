@@ -1,12 +1,12 @@
-// Pure helpers for the Setup Wizard's Profile switch step: the adjustment
+// Pure helpers for the Setup Wizard's Profiles & gain step: the adjustment
 // ranges it writes (rotorflight-firmware fc/rc_adjustments.c) and reading
 // them back. Adapted from Wingflight's setup wizard (trimGain.js).
 //
 // The step is built to fit an 8-channel link: CH1-5 are roll, pitch, yaw,
 // collective and throttle, which leaves AUX1-3 (CH6-8) for ARM, the profile
-// switch and a rescue/trainer switch. Master gain then follows the profile
-// switch (it is stored per PID profile), and the trim-button and knob
-// methods, which need a channel of their own, are for links with more.
+// switch and a rescue/trainer switch. Master gain in flight (for finding
+// the right gain) takes the trim buttons or a knob on a channel of its own,
+// so it fits only with more channels or one of those switches left out.
 
 // Enable channel meaning "always on" (ALWAYS_ON_CH in
 // tabs/adjustments/util.js; not imported so this file stays pure).
@@ -244,9 +244,9 @@ export function profileMode(ranges) {
 }
 
 // How master gain is adjusted in flight: "buttons" (stepped), "knob"
-// (mapped) or "profile" (no range: the profile switch picks it).
+// (mapped) or "none".
 export function gainMode(ranges) {
   const range = rangeOf(ranges, ADJ.CYCLIC_MASTER_GAIN);
-  if (!range) return "profile";
+  if (!range) return "none";
   return range.adjStep > 0 ? "buttons" : "knob";
 }
