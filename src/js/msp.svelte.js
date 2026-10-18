@@ -2,8 +2,16 @@ import { CONFIGURATOR } from "@/js/configurator.svelte.js";
 import { GUI } from "@/js/gui.js";
 import { serial } from "@/js/serial.js";
 import { handleVirtualMessage } from "@/js/virtual_fc.js";
+import { MSPCodes } from "@/js/msp/MSPCodes.js";
 
 let packet_error = $state(0);
+
+// Commands the firmware is slow to answer. A resend before the reply arrives
+// repeats the command's side effects, so wait well past the firmware delay.
+const MSP_RETRY_INTERVAL_MS = {
+    // escSelect4WIfById() busy-waits ESC_INIT_DELAY (2500 ms) before replying.
+    [MSPCodes.MSP_SET_4WIF_ESC_FWD_PROG]: 8000,
+};
 
 export const MSP = {
     symbols: {
@@ -379,7 +387,7 @@ export const MSP = {
                 }
 
                 serial.send(bufferOut, false);
-            }, 2500); // we should be able to define timeout in the future
+            }, MSP_RETRY_INTERVAL_MS[code] ?? 2500);
         }
 
         MSP.callbacks.push(obj);
