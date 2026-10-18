@@ -60,9 +60,6 @@
   const BAR_SCALE_MAX = 2250;
   const DEG2RAD = 0.017453292519943295;
 
-  // NO_GYRO … OVERRIDE, ARM_SWITCH: the count before TAIL_MOTOR came in.
-  const ARM_FLAGS_BEFORE_TAIL_MOTOR = 27;
-
   function getDisarmFlags() {
     return [
       "NO_GYRO",
@@ -94,11 +91,6 @@
       "MOTOR_PROTO",
       ...(semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)
         ? ["OVERRIDE"]
-        : []),
-      // Placed by the flag count MSP_STATUS sends, not the API version:
-      // 12.10 builds from before it have 27 flags.
-      ...((FC.CONFIG.armingDisableCount ?? 0) > ARM_FLAGS_BEFORE_TAIL_MOTOR
-        ? ["TAIL_MOTOR"]
         : []),
       "ARM_SWITCH",
     ];
