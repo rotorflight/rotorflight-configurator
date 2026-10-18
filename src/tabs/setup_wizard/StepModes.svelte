@@ -10,6 +10,7 @@
 
   import SwitchFlick from "./SwitchFlick.svelte";
   import TabButton from "./TabButton.svelte";
+  import { channelNumber } from "./adjust.js";
   import { rangeForSwitch } from "./heli.js";
 
   // Click Assign, flick the switch: the wizard sees which AUX channel moved
@@ -175,6 +176,7 @@
   <div class="text">
     <p>{$i18n.t("setupWizardModesIntro")}</p>
     <p class="muted">{$i18n.t("setupWizardModesHow")}</p>
+    <p class="muted">{$i18n.t("setupWizardModesFit8")}</p>
   </div>
 </div>
 
@@ -195,8 +197,8 @@
       <p class="muted">{$i18n.t(`setupWizardModeHelp_${mode.key}`)}</p>
       {#if range}
         <span class="pill">
-          AUX {range.auxChannelIndex + 1} · {range.range.start}–{range.range
-            .end} µs
+          CH {channelNumber(range.auxChannelIndex)} · {range.range.start}–{range
+            .range.end} µs
         </span>
       {/if}
       <div class="actions">

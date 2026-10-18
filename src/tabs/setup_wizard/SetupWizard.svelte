@@ -29,6 +29,7 @@
   import StepModes from "./StepModes.svelte";
   import StepMotor from "./StepMotor.svelte";
   import StepPitch from "./StepPitch.svelte";
+  import StepProfiles from "./StepProfiles.svelte";
   import StepReceiver from "./StepReceiver.svelte";
   import StepSensors from "./StepSensors.svelte";
   import StepServoType from "./StepServoType.svelte";
@@ -52,6 +53,8 @@
     { key: "receiver", component: StepReceiver },
     // Assigned while the radio is in hand; armed only in the Finish step.
     { key: "modes", component: StepModes },
+    // Profiles, rates and master gain on switches; fits 8 channels.
+    { key: "profiles", component: StepProfiles },
     { key: "swash", component: StepSwash },
     { key: "servoType", component: StepServoType },
     { key: "motor", component: StepMotor },
@@ -144,9 +147,10 @@
       SERVO_CONFIG: FC.SERVO_CONFIG,
       MIXER_INPUTS: FC.MIXER_INPUTS,
       MIXER_CONFIG: FC.MIXER_CONFIG,
-      // Sent live by the Mode switches step.
+      // Sent live by the Mode switches and Profile switch steps.
       MODE_RANGES: FC.MODE_RANGES,
       MODE_RANGES_EXTRA: FC.MODE_RANGES_EXTRA,
+      ADJUSTMENT_RANGES: FC.ADJUSTMENT_RANGES,
       // Staged by a step and only sent by its commit, so Revert has
       // nothing to send for these: putting them back is enough.
       BOARD_ALIGNMENT_CONFIG: FC.BOARD_ALIGNMENT_CONFIG,
@@ -170,6 +174,7 @@
     await MSP.promise(MSPCodes.MSP_BOXIDS);
     await MSP.promise(MSPCodes.MSP_MODE_RANGES);
     await MSP.promise(MSPCodes.MSP_MODE_RANGES_EXTRA);
+    await MSP.promise(MSPCodes.MSP_ADJUSTMENT_RANGES);
     await MSP.promise(MSPCodes.MSP_FEATURE_CONFIG);
     await MSP.promise(MSPCodes.MSP_BOARD_ALIGNMENT_CONFIG);
     await MSP.promise(MSPCodes.MSP_SERIAL_CONFIG);
@@ -369,6 +374,8 @@
     FC.MODE_RANGES = snapshot.MODE_RANGES;
     FC.MODE_RANGES_EXTRA = snapshot.MODE_RANGES_EXTRA;
     await new Promise((resolve) => mspHelper.sendModeRanges(resolve));
+    FC.ADJUSTMENT_RANGES = snapshot.ADJUSTMENT_RANGES;
+    await new Promise((resolve) => mspHelper.sendAdjustmentRanges(resolve));
     FC.SERVO_CONFIG = snapshot.SERVO_CONFIG;
     FC.MIXER_INPUTS = snapshot.MIXER_INPUTS;
     FC.MIXER_CONFIG = snapshot.MIXER_CONFIG;
