@@ -413,6 +413,45 @@ function lapseOverride(key, bytes, clear) {
   );
 }
 
+// flight/motors.c motorUpdate(), disarmed: the output follows the override,
+// rising at most MOTOR_OVERRIDE_RATE per second and dropping at once. From
+// API 12.9 an override that isn't re-sent within MOTOR_OVERRIDE_TIMEOUT
+// lapses. Motor overrides don't block arming.
+const MOTOR_OVERRIDE_RATE = 0.25;
+const MOTOR_OVERRIDE_TIMEOUT_MS = 1000;
+const motorOverride = new Array(MAX_SUPPORTED_MOTORS).fill(0);
+const motorOutput = new Array(MAX_SUPPORTED_MOTORS).fill(0);
+let motorOverrideTime = 0;
+let motorUpdateTime = 0;
+
+function resetMotors() {
+  motorOverride.fill(0);
+  motorOutput.fill(0);
+}
+
+function updateMotorOutputs() {
+  const now = performance.now();
+  const dt = (now - motorUpdateTime) / 1000;
+  motorUpdateTime = now;
+  if (
+    semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9) &&
+    now - motorOverrideTime > MOTOR_OVERRIDE_TIMEOUT_MS
+  ) {
+    motorOverride.fill(0);
+  }
+  for (let i = 0; i < MAX_SUPPORTED_MOTORS; i++) {
+    const target = Math.max(-1000, Math.min(1000, motorOverride[i])) / 1000;
+    const rise = MOTOR_OVERRIDE_RATE * dt;
+    motorOutput[i] =
+      target > motorOutput[i] + rise ? motorOutput[i] + rise : target;
+    // msp.c MSP_MOTOR: zero means disabled, otherwise output ± 1000.
+    if (i < FC.CONFIG.motorCount) {
+      const throttle = Math.round(motorOutput[i] * 1000);
+      FC.MOTOR_DATA[i] = throttle < 0 ? throttle - 1000 : throttle + 1000;
+    }
+  }
+}
+
 // fc/core.c updateArmingStatus(): any servo or mixer override blocks arming.
 function updateOverrideFlag() {
   if (!semver.gte(FC.CONFIG.apiVersion, API_VERSION_12_9)) return;
@@ -513,6 +552,20 @@ export function handleVirtualMessage(code, data) {
       updateOverrideFlag();
       break;
     }
+
+    case MSPCodes.MSP_SET_MOTOR_OVERRIDE: {
+      const index = bytes[0];
+      if (index < MAX_SUPPORTED_MOTORS) {
+        updateMotorOutputs();
+        motorOverride[index] = ((bytes[1] | (bytes[2] << 8)) << 16) >> 16;
+        motorOverrideTime = performance.now();
+      }
+      break;
+    }
+
+    case MSPCodes.MSP_MOTOR:
+      updateMotorOutputs();
+      break;
 
     case MSPCodes.MSP_SET_RESET_CURR_PID:
       pidProfiles[currentPidProfile] = defaultPidProfileBank();
@@ -855,6 +908,7 @@ export function applyVirtualConfig() {
   // Motors
   FC.MOTOR_DATA = [1000, 0, 0, 0, 0, 0, 0, 0];
   FC.MOTOR_OVERRIDE = new Array(MAX_SUPPORTED_MOTORS).fill(0);
+  resetMotors();
   Object.assign(FC.MOTOR_CONFIG, {
     mincommand: 1000,
     minthrottle: 1070,

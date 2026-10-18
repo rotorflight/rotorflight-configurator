@@ -193,11 +193,26 @@
     "zoomBoxText": {
         "message": "Zoom:"
     },
-    "expertMode": {
-        "message": "Expert Mode"
+    "userLevel": {
+        "message": "How much of the Configurator to show"
     },
-    "permanentExpertMode": {
-        "message": "Permanently enable Expert Mode"
+    "userLevelBeginner": {
+        "message": "Beginner"
+    },
+    "userLevelBeginnerHelp": {
+        "message": "Set up the helicopter with the Setup Wizard. Shows only the tabs the wizard doesn't cover."
+    },
+    "userLevelIntermediate": {
+        "message": "Intermediate"
+    },
+    "userLevelIntermediateHelp": {
+        "message": "Shows every tab, with the detailed settings hidden."
+    },
+    "userLevelAdvanced": {
+        "message": "Advanced"
+    },
+    "userLevelAdvancedHelp": {
+        "message": "Shows every tab and every setting."
     },
     "rememberLastTab": {
         "message": "Reopen last tab on connect"
@@ -466,6 +481,12 @@
     "setupWizardStep_motor": {
         "message": "Motor & ESC"
     },
+    "setupWizardStep_connect": {
+        "message": "Connect the servos"
+    },
+    "setupWizardStep_throttle": {
+        "message": "Throttle range"
+    },
     "setupWizardStep_escTelemetry": {
         "message": "ESC telemetry"
     },
@@ -489,6 +510,15 @@
     },
     "setupWizardSaveNext": {
         "message": "Save & next"
+    },
+    "setupWizardRebootNext": {
+        "message": "Save & reboot"
+    },
+    "setupWizardRebootLater": {
+        "message": "Takes effect after the reboot at the Connect the servos step."
+    },
+    "setupWizardRebootSkipped": {
+        "message": "Settings from the earlier steps haven't taken effect yet: they need the reboot at the Connect the servos step."
     },
     "setupWizardUnsaved": {
         "message": "Unsaved changes"
@@ -536,7 +566,7 @@
         "message": "Open the Modes tab"
     },
     "setupWizardSensorsIntro": {
-        "message": "First tell the flight controller how it is mounted, so the gyro knows which way is forward. Take the blades off: they stay off until the Finish step."
+        "message": "First tell the flight controller how it is mounted, so the gyro knows which way is forward. Take the blades off: they stay off until the Finish step. Leave the servos unplugged: the wizard tells you when to connect them."
     },
     "setupWizardSensorsNoAcc": {
         "message": "This flight controller has no accelerometer, so it can't find its orientation by itself. Set the board alignment on the Configuration tab instead."
@@ -704,7 +734,7 @@
         "message": "Set the center pulse and frame rate your servos are made for. Too fast a frame rate can burn a servo out."
     },
     "setupWizardServoTypeDisconnect": {
-        "message": "Unplug the servos before changing this, and plug them back in after the reboot."
+        "message": "Leave the servos unplugged: they get this frame rate with the reboot before you connect them."
     },
     "setupWizardServoTypeCyclic": {
         "message": "Cyclic servos"
@@ -911,13 +941,13 @@
         "message": "Tell the flight controller how to drive the ESC, and how to turn motor RPM into headspeed."
     },
     "setupWizardMotorPropsOff": {
-        "message": "Blades off. The wizard never spins the motor, but the ESC will run as soon as the helicopter is armed."
+        "message": "Blades off. The ESC will run as soon as the helicopter is armed."
     },
     "setupWizardMotor_PWM": {
         "message": "PWM"
     },
     "setupWizardMotorHelp_PWM": {
-        "message": "Any ESC. Calibrate the throttle range on the Motors tab."
+        "message": "Any ESC. The wizard calibrates its throttle range later."
     },
     "setupWizardMotor_DSHOT300": {
         "message": "DShot 300"
@@ -955,6 +985,75 @@
     "setupWizardMotorMainGear": {
         "message": "Main gear teeth"
     },
+    "setupWizardConnectIntro": {
+        "message": "Everything that is only typed in is set. From here on you work on the helicopter itself."
+    },
+    "setupWizardConnectBladesOff": {
+        "message": "Blades off. They stay off until the Finish step."
+    },
+    "setupWizardConnectReboot": {
+        "message": "Keep the servos unplugged for now. Press Save & reboot: the settings from the earlier steps, the servo frame rate among them, take effect, and the wizard opens on this step again."
+    },
+    "setupWizardConnectServosTitle": {
+        "message": "Plug the servos in"
+    },
+    "setupWizardConnectServosText": {
+        "message": "The flight controller now drives them with the right frame rate. Plug each servo into its output:"
+    },
+    "setupWizardConnectBatteryTitle": {
+        "message": "Battery"
+    },
+    "setupWizardConnectBatteryText": {
+        "message": "Leave the battery unplugged. The next step tells you when to connect it."
+    },
+    "setupWizardThrottleIntro": {
+        "message": "A PWM ESC has to learn its throttle range: the pulse for full throttle and the pulse for low throttle. It learns them when it powers up with full throttle."
+    },
+    "setupWizardThrottleNotNeeded": {
+        "message": "With $1 the ESC doesn't need its throttle range calibrated."
+    },
+    "setupWizardThrottleBatteryTitle": {
+        "message": "Connect the battery"
+    },
+    "setupWizardThrottleBatteryOn": {
+        "message": "Plug the battery in now, so the servos and the ESC have power for the next steps."
+    },
+    "setupWizardThrottleSafety": {
+        "message": "Blades off. Take the pinion out of mesh too, or hold the helicopter down: an ESC that doesn't go into calibration may run the motor at full throttle."
+    },
+    "setupWizardThrottleNoMotor": {
+        "message": "The main motor is off. Choose the ESC protocol in the Motor & ESC step, then reboot at the Connect the servos step."
+    },
+    "setupWizardThrottleFullTitle": {
+        "message": "Full throttle"
+    },
+    "setupWizardThrottleFullText": {
+        "message": "With the battery still unplugged and the flight controller on USB, press Full throttle. The output rises to 100 % in a few seconds."
+    },
+    "setupWizardThrottleFullButton": {
+        "message": "Full throttle"
+    },
+    "setupWizardThrottleCancel": {
+        "message": "Stop"
+    },
+    "setupWizardThrottleWait": {
+        "message": "Wait for 100 %…"
+    },
+    "setupWizardThrottleBatteryText": {
+        "message": "Plug the battery in. The ESC beeps to show it has taken full throttle; your ESC's manual lists the tones. Then press Low throttle."
+    },
+    "setupWizardThrottleLowButton": {
+        "message": "Low throttle"
+    },
+    "setupWizardThrottleLowTitle": {
+        "message": "Low throttle"
+    },
+    "setupWizardThrottleLowText": {
+        "message": "The ESC beeps again to confirm low throttle and stores the range. The motor must not run."
+    },
+    "setupWizardThrottleDoneButton": {
+        "message": "The ESC confirmed"
+    },
     "setupWizardEscIntro": {
         "message": "If your ESC sends telemetry, the flight controller can read RPM, voltage, current and temperature from it. Skip this step with Next if it doesn't."
     },
@@ -977,7 +1076,7 @@
         "message": "Check"
     },
     "setupWizardEscCheckText": {
-        "message": "Plug in the flight battery: the voltage and temperature should show. If nothing arrives, Detect wiring tries the half-duplex and pin-swap settings."
+        "message": "With the flight battery plugged in, the voltage and temperature should show. If nothing arrives, Detect wiring tries the half-duplex and pin-swap settings."
     },
     "setupWizardEscReceiving": {
         "message": "Receiving"
@@ -1042,17 +1141,11 @@
     "setupWizardModeHelp_rescue": {
         "message": "Turns the helicopter upright and holds it level."
     },
-    "setupWizardMode_beeper": {
-        "message": "Beeper"
+    "setupWizardMode_trainer": {
+        "message": "Trainer"
     },
-    "setupWizardModeHelp_beeper": {
-        "message": "Beeps to help you find the helicopter."
-    },
-    "setupWizardMode_blackbox": {
-        "message": "Blackbox"
-    },
-    "setupWizardModeHelp_blackbox": {
-        "message": "Records a flight log while on."
+    "setupWizardModeHelp_trainer": {
+        "message": "Limits how far the helicopter can tilt, to help while learning."
     },
     "setupWizardModesRequired": {
         "message": "Required"
@@ -1098,9 +1191,6 @@
     },
     "setupWizardFinishNextGovernor": {
         "message": "Set up the throttle and governor for your ESC."
-    },
-    "setupWizardFinishNextFailsafe": {
-        "message": "Check the failsafe: switch the radio off and make sure the motor stops."
     },
     "setupWizardFinishNextProfiles": {
         "message": "Check the PID profile and rates suit the helicopter."

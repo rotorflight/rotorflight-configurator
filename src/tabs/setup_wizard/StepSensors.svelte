@@ -11,6 +11,8 @@
   import AutoAlignWizard from "@/tabs/configuration/AutoAlignWizard.svelte";
 
   import HeliSide from "./HeliSide.svelte";
+  import RebootLater from "./RebootLater.svelte";
+  import TabButton from "./TabButton.svelte";
 
   const wiz = getContext("setupWizard");
 
@@ -34,7 +36,10 @@
   );
 
   $effect(() => {
-    if (alignmentChanged) wiz.markChanged();
+    if (alignmentChanged) {
+      wiz.markChanged();
+      wiz.requestReboot();
+    }
   });
 
   wiz.setCommit(async () => {
@@ -144,28 +149,18 @@
     >
       {$i18n.t("configurationBoardAutoAlignStart")}
     </button>
-    <button class="btn" onclick={() => wiz.openTab("configuration")}>
+    <TabButton tab="configuration">
       {$i18n.t("setupWizardOpenConfiguration")}
-    </button>
+    </TabButton>
   </div>
 </section>
 
 {#if alignmentChanged}
-  <div class="callout">
-    <i class="fas fa-sync-alt" aria-hidden="true"></i>
-    <span>{$i18n.t("setupWizardRebootNeeded")}</span>
-    <button class="btn primary" onclick={wiz.saveAndReboot}>
-      {$i18n.t("buttonSaveReboot")}
-    </button>
-  </div>
+  <RebootLater />
 {/if}
 
 <style lang="scss">
   .btn {
     @extend %button;
-  }
-
-  .btn.primary {
-    @extend %button-primary;
   }
 </style>

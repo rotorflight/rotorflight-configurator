@@ -10,6 +10,7 @@
   import { MSPCodes } from "@/js/msp/MSPCodes.js";
 
   import LiveBar from "./LiveBar.svelte";
+  import TabButton from "./TabButton.svelte";
   import TailArt from "./TailArt.svelte";
   import { YAW, limitDegrees, limitRaw, tailRaw } from "./heli.js";
 
@@ -119,9 +120,9 @@
     </span>
   </section>
   <div>
-    <button class="btn" onclick={() => wiz.openTab("mixer")}>
+    <TabButton tab="mixer">
       {$i18n.t("setupWizardOpenMixer")}
-    </button>
+    </TabButton>
   </div>
 {:else}
   <div class="with-art">

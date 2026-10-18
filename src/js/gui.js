@@ -4,6 +4,7 @@ import { getTabHelpURL } from "@/js/help.js";
 import { i18n } from "@/js/localization.js";
 import { showTabExitDialog } from "@/js/main.js";
 import { MSP } from "@/js/msp.svelte.js";
+import { homeTab, isTabInUserLevel } from "@/js/user_level.js";
 
 const GUI_MODES = {
     NWJS: "NW.js",
@@ -512,12 +513,12 @@ GuiControl.prototype.selectDefaultTabWhenConnected = function() {
     const lastTab = config.lastTab;
     const tabAfterReboot = this.tabAfterReboot;
     this.tabAfterReboot = null;
-    if (tabAfterReboot) {
+    if (tabAfterReboot && isTabInUserLevel(tabAfterReboot)) {
         $(`#tabs ul.mode-connected .tab_${tabAfterReboot} a`).click();
-    } else if (config.rememberLastTab && lastTab) {
+    } else if (config.rememberLastTab && lastTab && isTabInUserLevel(lastTab)) {
         $(`#tabs ul.mode-connected .tab_${lastTab} a`).click();
     } else {
-        $('#tabs ul.mode-connected .tab_status a').click();
+        $(`#tabs ul.mode-connected .tab_${homeTab()} a`).click();
     }
 };
 
