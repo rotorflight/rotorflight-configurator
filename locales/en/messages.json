@@ -2410,15 +2410,11 @@
         "description": "Message that pops up to describe the ACC_CALIB arming disable flag"
     },
     "statusArmingDisableFlagsTooltipMOTOR_PROTO": {
-        "message": "There is no motor throttle protocol selected, or the motor outputs couldn't start (a motor pin this protocol can't drive)",
+        "message": "There is no motor throttle protocol selected, the motor outputs couldn't start (a motor pin this protocol can't drive), or the tail is motorised but motor 2 has no pin (move the tail pin to motor 2 on the Mixer or Remap FC tab)",
         "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
     },
     "statusArmingDisableFlagsTooltipOVERRIDE": {
         "message": "Servo Override or Mixer Override is active"
-    },
-    "statusArmingDisableFlagsTooltipTAIL_MOTOR": {
-        "message": "The tail is motorised, but motor 2 has no pin. Move the tail pin to motor 2 on the Mixer or Remap FC tab",
-        "description": "Message that pops up to describe the TAIL_MOTOR arming disable flag"
     },
     "statusArmingDisableFlagsTooltipARM_SWITCH": {
         "message": "Arm switch is activated while other arming disable conditions are active",
