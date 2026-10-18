@@ -1,5 +1,12 @@
 <script>
-  import { getContext, mount, onDestroy, onMount, unmount } from "svelte";
+  import {
+    getContext,
+    mount,
+    onDestroy,
+    onMount,
+    unmount,
+    untrack,
+  } from "svelte";
 
   import { FC } from "@/js/fc.svelte.js";
   import { i18n } from "@/js/i18n.js";
@@ -91,6 +98,10 @@
     }
     if (mapChanged) {
       await send(MSPCodes.MSP_SET_RX_MAP);
+    }
+    if (rcChanged) {
+      await send(MSPCodes.MSP_SET_RC_CONFIG);
+      rcChanged = false;
     }
   });
 
@@ -291,6 +302,79 @@
   }
 
   let readings = $derived(FUNCTIONS.map((fn, i) => ({ ...fn, ...reading(i) })));
+
+  //// 4. Throttle range. The FC arms only with the throttle channel below
+  //// its 0 % point less RC_THROTTLE_DEADBAND (fc/rc.c isThrottleOff), and
+  //// 0 % defaults to rc_center - 0.9 * rc_deflection (1041 us): a radio
+  //// whose off / hold position sits higher never arms. The range is put on
+  //// the radio's real travel instead. Applied by the save's EEPROM write
+  //// (activateConfig re-runs initRcProcessing), no reboot.
+
+  const THROTTLE = 4;
+  const ARM_DEADBAND_US = 5;
+  // Measured off + this is 0 %, measured full - this is 100 %: off arms
+  // with margin to spare for noise, and full is reachable.
+  const RANGE_MARGIN_US = 20;
+  const MIN_RANGE_US = 300;
+
+  let measuring = $state(false);
+  let measured = $state(null); // {low, high}
+  let rcChanged = false;
+
+  let throttleNow = $derived(readings[THROTTLE]?.raw ?? 0);
+
+  // The 0 % and 100 % points the FC uses (fc/rc.c initRcProcessing).
+  let zeroThrottle = $derived(
+    FC.RC_CONFIG?.rc_min_throttle ||
+      Math.round(
+        (FC.RC_CONFIG?.rc_center || 1500) -
+          (FC.RC_CONFIG?.rc_deflection || 510) * 0.9,
+      ),
+  );
+  let fullThrottle = $derived(
+    FC.RC_CONFIG?.rc_max_throttle ||
+      Math.round(
+        (FC.RC_CONFIG?.rc_center || 1500) +
+          (FC.RC_CONFIG?.rc_deflection || 510) * 0.9,
+      ),
+  );
+  let armBelow = $derived(zeroThrottle - ARM_DEADBAND_US);
+  let armsNow = $derived(throttleNow > 0 && throttleNow < armBelow);
+
+  $effect(() => {
+    if (!measuring || !(throttleNow > 0)) return;
+    const prev = untrack(() => measured);
+    measured = {
+      low: Math.min(prev?.low ?? throttleNow, throttleNow),
+      high: Math.max(prev?.high ?? throttleNow, throttleNow),
+    };
+  });
+
+  function startMeasure() {
+    measured = null;
+    measuring = true;
+  }
+
+  let measuredOk = $derived(
+    measured !== null && measured.high - measured.low >= MIN_RANGE_US,
+  );
+
+  function useMeasured() {
+    measuring = false;
+    FC.RC_CONFIG.rc_min_throttle = measured.low + RANGE_MARGIN_US;
+    FC.RC_CONFIG.rc_max_throttle = measured.high - RANGE_MARGIN_US;
+    rcChanged = true;
+    wiz.markChanged();
+  }
+
+  function useDefault() {
+    measuring = false;
+    measured = null;
+    FC.RC_CONFIG.rc_min_throttle = 0;
+    FC.RC_CONFIG.rc_max_throttle = 0;
+    rcChanged = true;
+    wiz.markChanged();
+  }
 </script>
 
 <div class="with-art">
@@ -490,6 +574,67 @@
     </div>
     <p class="muted">{$i18n.t("setupWizardReceiverCheckWrong")}</p>
   </section>
+
+  <section class={["card", armsNow && "complete"]}>
+    <h3>
+      <span class="num">4</span>{$i18n.t("setupWizardThrottleRangeTitle")}
+      {#if throttleNow > 0}
+        <span class={["badge", armsNow ? "good" : "bad"]}>
+          {$i18n.t(
+            armsNow
+              ? "setupWizardThrottleRangeArms"
+              : "setupWizardThrottleRangeNoArm",
+          )}
+        </span>
+      {/if}
+    </h3>
+    <p>{$i18n.t("setupWizardThrottleRangeText")}</p>
+    <div class="throttle-now">
+      <span class="pill">
+        {$i18n.t("setupWizardThrottleRangeNow", {
+          1: throttleNow > 0 ? throttleNow : "–",
+        })}
+      </span>
+      <span class="pill">
+        {$i18n.t("setupWizardThrottleRangePoints", {
+          1: zeroThrottle,
+          2: fullThrottle,
+          3: armBelow,
+        })}
+      </span>
+    </div>
+    <div class="actions">
+      {#if measuring}
+        <span class="listening">
+          {measured
+            ? $i18n.t("setupWizardThrottleRangeSeen", {
+                1: measured.low,
+                2: measured.high,
+              })
+            : $i18n.t("setupWizardThrottleRangeMove")}
+        </span>
+        <button
+          class="btn primary"
+          disabled={!measuredOk}
+          onclick={useMeasured}
+        >
+          {$i18n.t("setupWizardThrottleRangeUse")}
+        </button>
+        <button class="btn" onclick={() => (measuring = false)}>
+          {$i18n.t("cancel")}
+        </button>
+      {:else}
+        <button class="btn" onclick={startMeasure}>
+          {$i18n.t("setupWizardThrottleRangeMeasure")}
+        </button>
+        {#if FC.RC_CONFIG.rc_min_throttle || FC.RC_CONFIG.rc_max_throttle}
+          <button class="btn" onclick={useDefault}>
+            {$i18n.t("setupWizardThrottleRangeDefault")}
+          </button>
+        {/if}
+      {/if}
+    </div>
+  </section>
 {/if}
 
 <div>
@@ -598,6 +743,17 @@
 
   .bar-name {
     font-weight: 600;
+  }
+
+  .throttle-now {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .listening {
+    font-weight: 600;
+    color: var(--color-accent-500);
   }
 
   .raw {
