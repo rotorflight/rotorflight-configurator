@@ -562,6 +562,9 @@
     "setupWizardOpenMotors": {
         "message": "Open the Motors tab"
     },
+    "setupWizardOpenRemap": {
+        "message": "Open the Remap FC tab"
+    },
     "setupWizardOpenModes": {
         "message": "Open the Modes tab"
     },
@@ -2407,7 +2410,7 @@
         "description": "Message that pops up to describe the ACC_CALIB arming disable flag"
     },
     "statusArmingDisableFlagsTooltipMOTOR_PROTO": {
-        "message": "There is no motor throttle protocol selected",
+        "message": "There is no motor throttle protocol selected, the motor outputs couldn't start (a motor pin this protocol can't drive), or the tail is motorised but motor 2 has no pin (move the tail pin to motor 2 on the Mixer or Remap FC tab)",
         "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
     },
     "statusArmingDisableFlagsTooltipOVERRIDE": {
@@ -4825,6 +4828,48 @@
     },
     "mixerTailBidirectional": {
         "message": "Bidirectional"
+    },
+    "tailOutputToMotor": {
+        "message": "Saving moves the tail pin from servo 4 to motor 2, so it drives the tail motor."
+    },
+    "tailOutputToServo": {
+        "message": "Saving moves the tail pin from motor 2 back to servo 4, so it drives the tail servo."
+    },
+    "tailOutputNoPin": {
+        "message": "Neither servo 4 nor motor 2 has a pin. Set one on the Remap FC tab."
+    },
+    "tailTtaOn": {
+        "message": "Saving turns on Tail Torque Assist (gain 100) in every profile. It works with the Electric or Direct governor."
+    },
+    "tailTtaOff": {
+        "message": "Saving turns Tail Torque Assist off in every profile."
+    },
+    "tailOutputFailed": {
+        "message": "The tail pin was not moved: $1"
+    },
+    "tailOutputResult_1": {
+        "message": "the motor and servo pins are set by hand. Check them on the Remap FC tab."
+    },
+    "tailOutputResult_2": {
+        "message": "motor 1 has no pin, so motor 2 would not be used."
+    },
+    "tailOutputResult_3": {
+        "message": "the pin can't drive an output."
+    },
+    "tailOutputResult_4": {
+        "message": "its timer also drives another servo or motor, which would then run at the wrong rate. Use a different pin on the Remap FC tab."
+    },
+    "tailOutputResult_5": {
+        "message": "the flight controller didn't understand the request."
+    },
+    "tailOutputResult_6": {
+        "message": "the ESC protocol is DShot, and the pin has no DMA to drive it. Turn on DShot bitbang, or use a different pin on the Remap FC tab."
+    },
+    "motorOutputProblem_main": {
+        "message": "No motor output started, so the helicopter can't arm. One of the motor pins can't be driven with this ESC protocol, which stops all motors. Check the motor pins on the Remap FC tab, or choose another ESC protocol."
+    },
+    "motorOutputProblem_tail": {
+        "message": "The tail motor (motor 2) has no working output, so the tail won't run. Check that the tail pin is on motor 2 on the Remap FC tab."
     },
     "mixerTailRotorDirection": {
         "message": "Yaw Control Direction"

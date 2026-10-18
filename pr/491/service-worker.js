@@ -10,7 +10,7 @@
 // only ever reads from its own cache.
 
 const CACHE_PREFIX = `rotorflight-configurator@${self.registration.scope}@`;
-const CACHE_VERSION = `${CACHE_PREFIX}0.0.0-5825eb5d`;
+const CACHE_VERSION = `${CACHE_PREFIX}0.0.0-b3c5d38b`;
 const APP_SHELL = [
   "./",
   "./index.html",
