@@ -481,6 +481,9 @@
     "setupWizardStep_motor": {
         "message": "Motor & ESC"
     },
+    "setupWizardStep_governor": {
+        "message": "Governor"
+    },
     "setupWizardStep_connect": {
         "message": "Connect the servos"
     },
@@ -561,6 +564,57 @@
     },
     "setupWizardOpenMixer": {
         "message": "Open the Mixer tab"
+    },
+    "setupWizardGovIntro": {
+        "message": "How the flight controller drives the motor. Pick the governor mode and how the throttle switch works with it. Ramps, headspeed and gains are set later in the Governor and Profiles tabs."
+    },
+    "setupWizardGovMode_OFF": {
+        "message": "No governor. The throttle goes straight to the ESC. Use this with the ESC's own governor."
+    },
+    "setupWizardGovMode_LIMIT": {
+        "message": "No governor. The throttle goes to the ESC, kept between the idle, minimum and maximum throttle."
+    },
+    "setupWizardGovMode_DIRECT": {
+        "message": "Slow spoolup and bailout from the flight controller. The ESC's governor or a throttle curve holds the headspeed."
+    },
+    "setupWizardGovMode_ELECTRIC": {
+        "message": "Full governor for an electric motor: the flight controller holds the headspeed. Needs a fast RPM signal."
+    },
+    "setupWizardGovMode_NITRO": {
+        "message": "Full governor for an engine: the flight controller holds the headspeed. Needs a fast RPM signal."
+    },
+    "setupWizardGovMode_PASSTHROUGH": {
+        "message": "The throttle goes to the ESC, with slow spoolup and autorotation from the flight controller."
+    },
+    "setupWizardGovMode_STANDARD": {
+        "message": "Full governor: the flight controller holds the headspeed, like an ESC governor. Needs a fast RPM signal."
+    },
+    "setupWizardGovMode_MODE1": {
+        "message": "Like STANDARD, and collective and cyclic raise the throttle ahead of the load. Needs a fast RPM signal."
+    },
+    "setupWizardGovMode_MODE2": {
+        "message": "Like MODE1, and also makes up for battery voltage sag. Needs a fast RPM signal and fast voltage measurement."
+    },
+    "setupWizardGovType_NORMAL": {
+        "message": "The throttle drives the motor until the headspeed is reached, then the governor takes over. Suits an on/off throttle switch."
+    },
+    "setupWizardGovType_SWITCH": {
+        "message": "Below the handover point the throttle drives the motor directly. Above it the governor runs and the throttle position sets the headspeed. ELECTRIC and NITRO only."
+    },
+    "setupWizardGovType_FUNCTION": {
+        "message": "A 3-position throttle switch: low is idle, middle is autorotation, high is full power."
+    },
+    "setupWizardGovRpmOk": {
+        "message": "RPM signal set up: RPM sensor or bidirectional DShot."
+    },
+    "setupWizardGovRpmMissing": {
+        "message": "This governor needs a fast RPM signal: an RPM sensor, or bidirectional DShot telemetry. Serial ESC telemetry is too slow. Without one the helicopter will not arm. Set it up in the Motors tab, or choose a mode without headspeed control."
+    },
+    "setupWizardGovNoRpmBadge": {
+        "message": "No RPM signal"
+    },
+    "setupWizardOpenGovernor": {
+        "message": "Open the Governor tab"
     },
     "setupWizardOpenMotors": {
         "message": "Open the Motors tab"
@@ -942,6 +996,18 @@
     },
     "setupWizardTailIntro": {
         "message": "Set up the tail pitch the same way: center, direction, calibration and end stops."
+    },
+    "setupWizardMainMotorTitle": {
+        "message": "Spin test"
+    },
+    "setupWizardMainMotorText": {
+        "message": "Hold the button: the motor runs slowly ($1 %) and stops when you let go. Check that it starts smoothly and that the rotor head turns $2, seen from above. If it turns the wrong way, swap two motor wires or reverse it on the ESC."
+    },
+    "setupWizardMainMotorSafe": {
+        "message": "Main blades off, and the helicopter held down with hands clear of the head and gears."
+    },
+    "setupWizardMainMotorAfterCal": {
+        "message": "Calibrate the ESC first."
     },
     "setupWizardTailMotorIntro": {
         "message": "The tail is driven by a motor. The wizard spins it with the motor override to check its direction and find its idle. It runs only while you hold the button, or for up to 15 seconds at idle."
@@ -1448,7 +1514,7 @@
         "message": "Before the first flight"
     },
     "setupWizardFinishNextGovernor": {
-        "message": "Set up the throttle and governor for your ESC."
+        "message": "Set the headspeed, spoolup and throttle limits in the Governor and Profiles tabs."
     },
     "setupWizardFinishNextProfiles": {
         "message": "Check the PID profile and rates suit the helicopter."
